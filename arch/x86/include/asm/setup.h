@@ -4,14 +4,20 @@
 #include <uapi/asm/setup.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define COMMAND_LINE_SIZE 2048
 
 =======
+=======
+>>>>>>> v3.18
 #define COMMAND_LINE_SIZE 2048
 
 #include <linux/linkage.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef __i386__
 
@@ -35,6 +41,11 @@
 #include <asm/x86_init.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern u64 relocated_ramdisk;
+
+>>>>>>> v3.18
 =======
 extern u64 relocated_ramdisk;
 
@@ -49,12 +60,15 @@ static inline void vsmp_init(void) { }
 void setup_bios_corruption_check(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_VISWS
 extern void visws_early_detect(void);
 #else
 static inline void visws_early_detect(void) { }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern unsigned long saved_video_mode;
@@ -65,9 +79,15 @@ extern void setup_default_timer_irq(void);
 
 #ifdef CONFIG_X86_INTEL_MID
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void x86_mrst_early_setup(void);
 #else
 static inline void x86_mrst_early_setup(void) { }
+=======
+extern void x86_intel_mid_early_setup(void);
+#else
+static inline void x86_intel_mid_early_setup(void) { }
+>>>>>>> v3.18
 =======
 extern void x86_intel_mid_early_setup(void);
 #else
@@ -132,17 +152,23 @@ extern void probe_roms(void);
 #ifdef __i386__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init i386_start_kernel(void);
 
 #else
 void __init x86_64_start_kernel(char *real_mode);
 void __init x86_64_start_reservations(char *real_mode_data);
 =======
+=======
+>>>>>>> v3.18
 asmlinkage void __init i386_start_kernel(void);
 
 #else
 asmlinkage void __init x86_64_start_kernel(char *real_mode);
 asmlinkage void __init x86_64_start_reservations(char *real_mode_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __i386__ */

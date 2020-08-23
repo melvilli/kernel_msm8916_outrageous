@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -34,6 +37,10 @@
 #include "../pci.h"
 #include "../base.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../core.h"
+>>>>>>> v3.18
 =======
 #include "../core.h"
 >>>>>>> v3.18
@@ -42,8 +49,11 @@
 #include "fw.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kmemleak.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void _rtl88e_enable_fw_download(struct ieee80211_hw *hw, bool enable)
@@ -73,6 +83,7 @@ static void _rtl88e_fw_block_write(struct ieee80211_hw *hw,
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 blk_sz = sizeof(u32);
 	u8 *buf_ptr = (u8 *)buffer;
 	u32 *pu4BytePtr = (u32 *)buffer;
@@ -84,6 +95,8 @@ static void _rtl88e_fw_block_write(struct ieee80211_hw *hw,
 	for (i = 0; i < blk_cnt; i++) {
 		offset = i * blk_sz;
 =======
+=======
+>>>>>>> v3.18
 	u32 blocksize = sizeof(u32);
 	u8 *bufferptr = (u8 *)buffer;
 	u32 *pu4BytePtr = (u32 *)buffer;
@@ -94,11 +107,15 @@ static void _rtl88e_fw_block_write(struct ieee80211_hw *hw,
 
 	for (i = 0; i < blockcount; i++) {
 		offset = i * blocksize;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rtl_write_dword(rtlpriv, (FW_8192C_START_ADDRESS + offset),
 				*(pu4BytePtr + i));
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (remain) {
 		offset = blk_cnt * blk_sz;
@@ -107,12 +124,17 @@ static void _rtl88e_fw_block_write(struct ieee80211_hw *hw,
 			rtl_write_byte(rtlpriv, (FW_8192C_START_ADDRESS +
 						 offset + i), *(buf_ptr + i));
 =======
+=======
+>>>>>>> v3.18
 	if (remainsize) {
 		offset = blockcount * blocksize;
 		bufferptr += offset;
 		for (i = 0; i < remainsize; i++) {
 			rtl_write_byte(rtlpriv, (FW_8192C_START_ADDRESS +
 						 offset + i), *(bufferptr + i));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -152,8 +174,13 @@ static void _rtl88e_write_fw(struct ieee80211_hw *hw,
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *buf_ptr = (u8 *)buffer;
 	u32 page_no, remain;
+=======
+	u8 *bufferptr = (u8 *)buffer;
+	u32 pagenums, remainsize;
+>>>>>>> v3.18
 =======
 	u8 *bufferptr = (u8 *)buffer;
 	u32 pagenums, remainsize;
@@ -163,6 +190,7 @@ static void _rtl88e_write_fw(struct ieee80211_hw *hw,
 	RT_TRACE(rtlpriv, COMP_FW, DBG_LOUD, "FW size is %d bytes,\n", size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_rtl88e_fill_dummy(buf_ptr, &size);
 
 	page_no = size / FW_8192C_PAGE_SIZE;
@@ -170,17 +198,23 @@ static void _rtl88e_write_fw(struct ieee80211_hw *hw,
 
 	if (page_no > 8) {
 =======
+=======
+>>>>>>> v3.18
 	_rtl88e_fill_dummy(bufferptr, &size);
 
 	pagenums = size / FW_8192C_PAGE_SIZE;
 	remainsize = size % FW_8192C_PAGE_SIZE;
 
 	if (pagenums > 8) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 			 "Page numbers should not greater then 8\n");
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (page = 0; page < page_no; page++) {
 		offset = page * FW_8192C_PAGE_SIZE;
@@ -193,6 +227,8 @@ static void _rtl88e_write_fw(struct ieee80211_hw *hw,
 		page = page_no;
 		_rtl88e_fw_page_write(hw, page, (buf_ptr + offset), remain);
 =======
+=======
+>>>>>>> v3.18
 	for (page = 0; page < pagenums; page++) {
 		offset = page * FW_8192C_PAGE_SIZE;
 		_rtl88e_fw_page_write(hw, page, (bufferptr + offset),
@@ -204,6 +240,9 @@ static void _rtl88e_write_fw(struct ieee80211_hw *hw,
 		page = pagenums;
 		_rtl88e_fw_page_write(hw, page, (bufferptr + offset),
 				      remainsize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -260,7 +299,12 @@ exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rtl88e_download_fw(struct ieee80211_hw *hw, bool buse_wake_on_wlan_fw)
+=======
+int rtl88e_download_fw(struct ieee80211_hw *hw,
+		       bool buse_wake_on_wlan_fw)
+>>>>>>> v3.18
 =======
 int rtl88e_download_fw(struct ieee80211_hw *hw,
 		       bool buse_wake_on_wlan_fw)
@@ -279,7 +323,11 @@ int rtl88e_download_fw(struct ieee80211_hw *hw,
 
 	pfwheader = (struct rtl92c_firmware_header *)rtlhal->pfirmware;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pfwdata = (u8 *)rtlhal->pfirmware;
+=======
+	pfwdata = rtlhal->pfirmware;
+>>>>>>> v3.18
 =======
 	pfwdata = rtlhal->pfirmware;
 >>>>>>> v3.18
@@ -291,8 +339,13 @@ int rtl88e_download_fw(struct ieee80211_hw *hw,
 		RT_TRACE(rtlpriv, COMP_FW, DBG_DMESG,
 			 "Firmware Version(%d), Signature(%#x), Size(%d)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 pfwheader->version, pfwheader->signature,
 			 (int)sizeof(struct rtl92c_firmware_header));
+=======
+			  pfwheader->version, pfwheader->signature,
+			  (int)sizeof(struct rtl92c_firmware_header));
+>>>>>>> v3.18
 =======
 			  pfwheader->version, pfwheader->signature,
 			  (int)sizeof(struct rtl92c_firmware_header));
@@ -312,10 +365,13 @@ int rtl88e_download_fw(struct ieee80211_hw *hw,
 
 	err = _rtl88e_fw_free_to_go(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	RT_TRACE(rtlpriv, COMP_FW, DBG_DMESG,
 		 "Firmware is%s ready to run!\n", err ? " not" : "");
 =======
+=======
+>>>>>>> v3.18
 	if (err) {
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 			 "Firmware is not ready to run!\n");
@@ -324,6 +380,9 @@ int rtl88e_download_fw(struct ieee80211_hw *hw,
 			 "Firmware is ready to run!\n");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -352,9 +411,15 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 	u8 buf_index = 0;
 	bool write_sucess = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 wait_h2c_limit = 100;
 	u8 wait_writeh2c_limit = 100;
 	u8 boxc[4], boxext[2];
+=======
+	u8 wait_h2c_limmit = 100;
+	u8 wait_writeh2c_limit = 100;
+	u8 boxcontent[4], boxextcontent[4];
+>>>>>>> v3.18
 =======
 	u8 wait_h2c_limmit = 100;
 	u8 wait_writeh2c_limit = 100;
@@ -423,6 +488,7 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 				 "switch case not processed\n");
 			break;
@@ -436,6 +502,8 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 					 "Wating too long for FW read "
 					 "clear HMEBox(%d)!\n", boxnum);
 =======
+=======
+>>>>>>> v3.18
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_LOUD,
 				 "switch case not process\n");
 			break;
@@ -447,6 +515,9 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 				RT_TRACE(rtlpriv, COMP_CMD, DBG_LOUD,
 					 "Waiting too long for FW read clear HMEBox(%d)!\n",
 					 boxnum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			}
@@ -457,8 +528,13 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 			u1b_tmp = rtl_read_byte(rtlpriv, 0x130);
 			RT_TRACE(rtlpriv, COMP_CMD, DBG_LOUD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 "Wating for FW read clear HMEBox(%d)!!! "
 				 "0x130 = %2x\n", boxnum, u1b_tmp);
+=======
+				 "Waiting for FW read clear HMEBox(%d)!!! 0x130 = %2x\n",
+				 boxnum, u1b_tmp);
+>>>>>>> v3.18
 =======
 				 "Waiting for FW read clear HMEBox(%d)!!! 0x130 = %2x\n",
 				 boxnum, u1b_tmp);
@@ -467,6 +543,7 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 
 		if (!isfw_read) {
 			RT_TRACE(rtlpriv, COMP_CMD, DBG_LOUD,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				 "Write H2C register BOX[%d] fail!!!!! "
 				 "Fw do not read.\n", boxnum);
@@ -477,6 +554,8 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 		memset(boxext, 0, sizeof(boxext));
 		boxc[0] = element_id;
 =======
+=======
+>>>>>>> v3.18
 				 "Write H2C register BOX[%d] fail!!!!! Fw do not read.\n",
 				 boxnum);
 			break;
@@ -485,6 +564,9 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 		memset(boxcontent, 0, sizeof(boxcontent));
 		memset(boxextcontent, 0, sizeof(boxextcontent));
 		boxcontent[0] = element_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		RT_TRACE(rtlpriv, COMP_CMD, DBG_LOUD,
 			 "Write element_id box_reg(%4x) = %2x\n",
@@ -495,12 +577,15 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 		case 2:
 		case 3:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*boxc[0] &= ~(BIT(7));*/
 			memcpy((u8 *)(boxc) + 1, cmd_b + buf_index, cmd_len);
 
 			for (idx = 0; idx < 4; idx++)
 				rtl_write_byte(rtlpriv, box_reg+idx, boxc[idx]);
 =======
+=======
+>>>>>>> v3.18
 			/*boxcontent[0] &= ~(BIT(7));*/
 			memcpy((u8 *)(boxcontent) + 1,
 			       cmd_b + buf_index, cmd_len);
@@ -509,12 +594,16 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 				rtl_write_byte(rtlpriv, box_reg + idx,
 					       boxcontent[idx]);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case 4:
 		case 5:
 		case 6:
 		case 7:
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/*boxc[0] |= (BIT(7));*/
 			memcpy((u8 *)(boxext), cmd_b + buf_index+3, cmd_len-3);
@@ -524,6 +613,8 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 				rtl_write_byte(rtlpriv, box_extreg + idx,
 					       boxext[idx]);
 =======
+=======
+>>>>>>> v3.18
 			/*boxcontent[0] |= (BIT(7));*/
 			memcpy((u8 *)(boxextcontent),
 			       cmd_b + buf_index+3, cmd_len-3);
@@ -533,11 +624,15 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 			for (idx = 0; idx < 2; idx++) {
 				rtl_write_byte(rtlpriv, box_extreg + idx,
 					       boxextcontent[idx]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 
 			for (idx = 0; idx < 4; idx++) {
 				rtl_write_byte(rtlpriv, box_reg + idx,
+<<<<<<< HEAD
 <<<<<<< HEAD
 					       boxc[idx]);
 			}
@@ -546,12 +641,17 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 				 "switch case not processed\n");
 =======
+=======
+>>>>>>> v3.18
 					       boxcontent[idx]);
 			}
 			break;
 		default:
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_LOUD,
 				 "switch case not process\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -565,7 +665,11 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 		RT_TRACE(rtlpriv, COMP_CMD, DBG_LOUD,
 			 "pHalData->last_hmeboxnum  = %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 rtlhal->last_hmeboxnum);
+=======
+			  rtlhal->last_hmeboxnum);
+>>>>>>> v3.18
 =======
 			  rtlhal->last_hmeboxnum);
 >>>>>>> v3.18
@@ -580,7 +684,11 @@ static void _rtl88e_fill_h2c_command(struct ieee80211_hw *hw,
 
 void rtl88e_fill_h2c_cmd(struct ieee80211_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 u8 element_id, u32 cmd_len, u8 *cmd_b)
+=======
+			 u8 element_id, u32 cmd_len, u8 *cmdbuffer)
+>>>>>>> v3.18
 =======
 			 u8 element_id, u32 cmd_len, u8 *cmdbuffer)
 >>>>>>> v3.18
@@ -589,8 +697,14 @@ void rtl88e_fill_h2c_cmd(struct ieee80211_hw *hw,
 	u32 tmp_cmdbuf[2];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rtlhal->fw_ready == false) {
 		RT_ASSERT(false, "fail H2C cmd - Fw download fail!!!\n");
+=======
+	if (!rtlhal->fw_ready) {
+		RT_ASSERT(false,
+			  "return H2C cmd because of Fw download fail!!!\n");
+>>>>>>> v3.18
 =======
 	if (!rtlhal->fw_ready) {
 		RT_ASSERT(false,
@@ -601,7 +715,11 @@ void rtl88e_fill_h2c_cmd(struct ieee80211_hw *hw,
 
 	memset(tmp_cmdbuf, 0, 8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(tmp_cmdbuf, cmd_b, cmd_len);
+=======
+	memcpy(tmp_cmdbuf, cmdbuffer, cmd_len);
+>>>>>>> v3.18
 =======
 	memcpy(tmp_cmdbuf, cmdbuffer, cmd_len);
 >>>>>>> v3.18
@@ -620,7 +738,12 @@ void rtl88e_firmware_selfreset(struct ieee80211_hw *hw)
 	rtl_write_byte(rtlpriv, REG_SYS_FUNC_EN+1, (u1b_tmp | BIT(2)));
 	RT_TRACE(rtlpriv, COMP_INIT, DBG_LOUD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 "8051Reset88E(): 8051 reset success.\n");
+=======
+		 "8051Reset88E(): 8051 reset success\n");
+
+>>>>>>> v3.18
 =======
 		 "8051Reset88E(): 8051 reset success\n");
 
@@ -633,6 +756,7 @@ void rtl88e_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode)
 	u8 u1_h2c_set_pwrmode[H2C_88E_PWEMODE_LENGTH] = { 0 };
 	struct rtl_ps_ctl *ppsc = rtl_psc(rtl_priv(hw));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 power_state = 0;
 
 	RT_TRACE(rtlpriv, COMP_POWER, DBG_LOUD, "FW LPS mode = %d\n", mode);
@@ -644,6 +768,8 @@ void rtl88e_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode)
 	SET_H2CCMD_PWRMODE_PARM_AWAKE_INTERVAL(u1_h2c_set_pwrmode,
 					       ppsc->reg_max_lps_awakeintvl);
 =======
+=======
+>>>>>>> v3.18
 	u8 rlbm, power_state = 0;
 	RT_TRACE(rtlpriv, COMP_POWER, DBG_LOUD, "FW LPS mode = %d\n", mode);
 
@@ -654,6 +780,9 @@ void rtl88e_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode)
 		(rtlpriv->mac80211.p2p) ? ppsc->smart_ps : 1);
 	SET_H2CCMD_PWRMODE_PARM_AWAKE_INTERVAL(u1_h2c_set_pwrmode,
 		ppsc->reg_max_lps_awakeintvl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SET_H2CCMD_PWRMODE_PARM_ALL_QUEUE_UAPSD(u1_h2c_set_pwrmode, 0);
 	if (mode == FW_PS_ACTIVE_MODE)
@@ -661,6 +790,10 @@ void rtl88e_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode)
 	else
 		power_state |= FW_PWR_STATE_RF_OFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -670,8 +803,13 @@ void rtl88e_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode)
 		      "rtl92c_set_fw_pwrmode(): u1_h2c_set_pwrmode\n",
 		      u1_h2c_set_pwrmode, H2C_88E_PWEMODE_LENGTH);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl88e_fill_h2c_cmd(hw, H2C_88E_SETPWRMODE, H2C_88E_PWEMODE_LENGTH,
 			    u1_h2c_set_pwrmode);
+=======
+	rtl88e_fill_h2c_cmd(hw, H2C_88E_SETPWRMODE,
+			    H2C_88E_PWEMODE_LENGTH, u1_h2c_set_pwrmode);
+>>>>>>> v3.18
 =======
 	rtl88e_fill_h2c_cmd(hw, H2C_88E_SETPWRMODE,
 			    H2C_88E_PWEMODE_LENGTH, u1_h2c_set_pwrmode);
@@ -697,6 +835,7 @@ void rtl88e_set_fw_ap_off_load_cmd(struct ieee80211_hw *hw,
 	SET_H2CCMD_AP_OFFLOAD_HIDDEN(u1_apoffload_parm, mac->hiddenssid);
 	SET_H2CCMD_AP_OFFLOAD_DENYANY(u1_apoffload_parm, 0);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rtl88e_fill_h2c_cmd(hw, H2C_88E_AP_OFFLOAD, H2C_88E_AP_OFFLOAD_LENGTH,
 			    u1_apoffload_parm);
@@ -731,6 +870,11 @@ static bool _rtl88e_cmd_send_packet(struct ieee80211_hw *hw,
 	rtlpriv->cfg->ops->tx_polling(hw, BEACON_QUEUE);
 
 	return true;
+=======
+	rtl88e_fill_h2c_cmd(hw, H2C_88E_AP_OFFLOAD,
+			    H2C_88E_AP_OFFLOAD_LENGTH, u1_apoffload_parm);
+
+>>>>>>> v3.18
 =======
 	rtl88e_fill_h2c_cmd(hw, H2C_88E_AP_OFFLOAD,
 			    H2C_88E_AP_OFFLOAD_LENGTH, u1_apoffload_parm);
@@ -861,6 +1005,7 @@ void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished)
 	struct rtl_mac *mac = rtl_mac(rtl_priv(hw));
 	struct sk_buff *skb = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	u32 totalpacketlen;
 	u8 u1RsvdPageLoc[5] = { 0 };
@@ -870,6 +1015,8 @@ void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished)
 	u8 *nullfunc;
 	u8 *probersp;
 =======
+=======
+>>>>>>> v3.18
 	u32 totalpacketlen;
 	bool rtstatus;
 	u8 u1rsvdpageloc[5] = { 0 };
@@ -879,6 +1026,9 @@ void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished)
 	u8 *nullfunc;
 	u8 *p_probersp;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*---------------------------------------------------------
 	 *			(1) beacon
@@ -893,6 +1043,7 @@ void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished)
 	 *--------------------------------------------------------
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pspoll = &reserved_page_packet[PSPOLL_PG * 128];
 	SET_80211_PS_POLL_AID(pspoll, (mac->assoc_id | 0xc000));
 	SET_80211_PS_POLL_BSSID(pspoll, mac->bssid);
@@ -900,12 +1051,17 @@ void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished)
 
 	SET_H2CCMD_RSVDPAGE_LOC_PSPOLL(u1RsvdPageLoc, PSPOLL_PG);
 =======
+=======
+>>>>>>> v3.18
 	p_pspoll = &reserved_page_packet[PSPOLL_PG * 128];
 	SET_80211_PS_POLL_AID(p_pspoll, (mac->assoc_id | 0xc000));
 	SET_80211_PS_POLL_BSSID(p_pspoll, mac->bssid);
 	SET_80211_PS_POLL_TA(p_pspoll, mac->mac_addr);
 
 	SET_H2CCMD_RSVDPAGE_LOC_PSPOLL(u1rsvdpageloc, PSPOLL_PG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*--------------------------------------------------------
@@ -918,7 +1074,11 @@ void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished)
 	SET_80211_HDR_ADDRESS3(nullfunc, mac->bssid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_H2CCMD_RSVDPAGE_LOC_NULL_DATA(u1RsvdPageLoc, NULL_PG);
+=======
+	SET_H2CCMD_RSVDPAGE_LOC_NULL_DATA(u1rsvdpageloc, NULL_PG);
+>>>>>>> v3.18
 =======
 	SET_H2CCMD_RSVDPAGE_LOC_NULL_DATA(u1rsvdpageloc, NULL_PG);
 >>>>>>> v3.18
@@ -928,6 +1088,7 @@ void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished)
 	 *----------------------------------------------------------
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	probersp = &reserved_page_packet[PROBERSP_PG * 128];
 	SET_80211_HDR_ADDRESS1(probersp, mac->bssid);
 	SET_80211_HDR_ADDRESS2(probersp, mac->mac_addr);
@@ -935,12 +1096,17 @@ void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished)
 
 	SET_H2CCMD_RSVDPAGE_LOC_PROBE_RSP(u1RsvdPageLoc, PROBERSP_PG);
 =======
+=======
+>>>>>>> v3.18
 	p_probersp = &reserved_page_packet[PROBERSP_PG * 128];
 	SET_80211_HDR_ADDRESS1(p_probersp, mac->bssid);
 	SET_80211_HDR_ADDRESS2(p_probersp, mac->mac_addr);
 	SET_80211_HDR_ADDRESS3(p_probersp, mac->bssid);
 
 	SET_H2CCMD_RSVDPAGE_LOC_PROBE_RSP(u1rsvdpageloc, PROBERSP_PG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	totalpacketlen = TOTAL_RESERVED_PKT_LEN;
@@ -950,6 +1116,7 @@ void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished)
 		      &reserved_page_packet[0], totalpacketlen);
 	RT_PRINT_DATA(rtlpriv, COMP_CMD, DBG_DMESG,
 		      "rtl88e_set_fw_rsvdpagepkt(): HW_VAR_SET_TX_CMD: ALL\n",
+<<<<<<< HEAD
 <<<<<<< HEAD
 		      u1RsvdPageLoc, 3);
 
@@ -968,6 +1135,8 @@ void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished)
 		rtl88e_fill_h2c_cmd(hw, H2C_88E_RSVDPAGE,
 				    sizeof(u1RsvdPageLoc), u1RsvdPageLoc);
 =======
+=======
+>>>>>>> v3.18
 		      u1rsvdpageloc, 3);
 
 	skb = dev_alloc_skb(totalpacketlen);
@@ -986,12 +1155,16 @@ void rtl88e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished)
 			      "H2C_RSVDPAGE:\n", u1rsvdpageloc, 3);
 		rtl88e_fill_h2c_cmd(hw, H2C_88E_RSVDPAGE,
 				    sizeof(u1rsvdpageloc), u1rsvdpageloc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_WARNING,
 			 "Set RSVD page location to Fw FAIL!!!!!!.\n");
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*Shoud check FW support p2p or not.*/
 static void rtl88e_set_p2p_ctw_period_cmd(struct ieee80211_hw *hw, u8 ctwindow)
@@ -1000,6 +1173,8 @@ static void rtl88e_set_p2p_ctw_period_cmd(struct ieee80211_hw *hw, u8 ctwindow)
 
 	rtl88e_fill_h2c_cmd(hw, H2C_88E_P2P_PS_CTW_CMD, 1, u1_ctwindow_period);
 =======
+=======
+>>>>>>> v3.18
 /*Should check FW support p2p or not.*/
 static void rtl88e_set_p2p_ctw_period_cmd(struct ieee80211_hw *hw, u8 ctwindow)
 {
@@ -1007,6 +1182,9 @@ static void rtl88e_set_p2p_ctw_period_cmd(struct ieee80211_hw *hw, u8 ctwindow)
 
 	rtl88e_fill_h2c_cmd(hw, H2C_88E_P2P_PS_CTW_CMD, 1, u1_ctwindow_period);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1025,7 +1203,11 @@ void rtl88e_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state)
 	case P2P_PS_DISABLE:
 		RT_TRACE(rtlpriv, COMP_FW, DBG_LOUD, "P2P_PS_DISABLE\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(p2p_ps_offload, 0, sizeof(struct p2p_ps_offload_t));
+=======
+		memset(p2p_ps_offload, 0, sizeof(*p2p_ps_offload));
+>>>>>>> v3.18
 =======
 		memset(p2p_ps_offload, 0, sizeof(*p2p_ps_offload));
 >>>>>>> v3.18
@@ -1039,8 +1221,14 @@ void rtl88e_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state)
 			rtl88e_set_p2p_ctw_period_cmd(hw, ctwindow);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* hw only support 2 set of NoA */
 		for (i = 0; i < p2pinfo->noa_num; i++) {
+=======
+
+		/* hw only support 2 set of NoA */
+		for (i = 0 ; i < p2pinfo->noa_num; i++) {
+>>>>>>> v3.18
 =======
 
 		/* hw only support 2 set of NoA */
@@ -1065,7 +1253,11 @@ void rtl88e_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state)
 			start_time = p2pinfo->noa_start_time[i];
 			if (p2pinfo->noa_count_type[i] != 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				while (start_time <= (tsf_low + (50 * 1024))) {
+=======
+				while (start_time <= (tsf_low+(50*1024))) {
+>>>>>>> v3.18
 =======
 				while (start_time <= (tsf_low+(50*1024))) {
 >>>>>>> v3.18
@@ -1088,7 +1280,11 @@ void rtl88e_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state)
 			if (P2P_ROLE_GO == rtlpriv->mac80211.p2p) {
 				p2p_ps_offload->role = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				p2p_ps_offload->allstasleep = 0;
+=======
+				p2p_ps_offload->allstasleep = -1;
+>>>>>>> v3.18
 =======
 				p2p_ps_offload->allstasleep = -1;
 >>>>>>> v3.18
@@ -1115,6 +1311,10 @@ void rtl88e_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state)
 	rtl88e_fill_h2c_cmd(hw, H2C_88E_P2P_PS_OFFLOAD, 1,
 			    (u8 *)p2p_ps_offload);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

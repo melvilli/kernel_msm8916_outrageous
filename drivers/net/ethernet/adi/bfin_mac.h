@@ -27,6 +27,10 @@
 
 #define TX_RECLAIM_JIFFIES (HZ / 5)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BFIN_MAC_RX_IRQ_DISABLED	1
+>>>>>>> v3.18
 =======
 #define BFIN_MAC_RX_IRQ_DISABLED	1
 >>>>>>> v3.18
@@ -85,6 +89,11 @@ struct bfin_mac_local {
 	struct timer_list tx_reclaim_timer;
 	struct net_device *ndev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct napi_struct napi;
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	struct napi_struct napi;
 	unsigned long flags;
@@ -114,7 +123,11 @@ struct bfin_mac_local {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int bfin_get_ether_addr(char *addr);
+=======
+int bfin_get_ether_addr(char *addr);
+>>>>>>> v3.18
 =======
 int bfin_get_ether_addr(char *addr);
 >>>>>>> v3.18

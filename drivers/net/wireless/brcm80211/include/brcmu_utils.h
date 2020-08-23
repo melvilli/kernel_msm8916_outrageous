@@ -115,6 +115,7 @@ static inline struct sk_buff *pktq_ppeek_tail(struct pktq *pq, int prec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct sk_buff *brcmu_pktq_penq(struct pktq *pq, int prec,
 				 struct sk_buff *p);
 extern struct sk_buff *brcmu_pktq_penq_head(struct pktq *pq, int prec,
@@ -141,6 +142,8 @@ extern int brcmu_pktq_mlen(struct pktq *pq, uint prec_bmp);
 extern struct sk_buff *brcmu_pktq_mdeq(struct pktq *pq, uint prec_bmp,
 	int *prec_out);
 =======
+=======
+>>>>>>> v3.18
 struct sk_buff *brcmu_pktq_penq(struct pktq *pq, int prec, struct sk_buff *p);
 struct sk_buff *brcmu_pktq_penq_head(struct pktq *pq, int prec,
 				     struct sk_buff *p);
@@ -164,6 +167,9 @@ void brcmu_pktq_pflush(struct pktq *pq, int prec, bool dir,
 
 int brcmu_pktq_mlen(struct pktq *pq, uint prec_bmp);
 struct sk_buff *brcmu_pktq_mdeq(struct pktq *pq, uint prec_bmp, int *prec_out);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* operations on packet queue as a whole */
@@ -194,17 +200,23 @@ static inline bool pktq_empty(struct pktq *pq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void brcmu_pktq_init(struct pktq *pq, int num_prec, int max_len);
 /* prec_out may be NULL if caller is not interested in return value */
 extern struct sk_buff *brcmu_pktq_peek_tail(struct pktq *pq, int *prec_out);
 extern void brcmu_pktq_flush(struct pktq *pq, bool dir,
 		bool (*fn)(struct sk_buff *, void *), void *arg);
 =======
+=======
+>>>>>>> v3.18
 void brcmu_pktq_init(struct pktq *pq, int num_prec, int max_len);
 /* prec_out may be NULL if caller is not interested in return value */
 struct sk_buff *brcmu_pktq_peek_tail(struct pktq *pq, int *prec_out);
 void brcmu_pktq_flush(struct pktq *pq, bool dir,
 		      bool (*fn)(struct sk_buff *, void *), void *arg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* externs */
@@ -239,7 +251,11 @@ static inline u16 brcmu_maskget16(u16 var, u16 mask, u8 shift)
 /* format/print */
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void brcmu_prpkt(const char *msg, struct sk_buff *p0);
+=======
+void brcmu_prpkt(const char *msg, struct sk_buff *p0);
+>>>>>>> v3.18
 =======
 void brcmu_prpkt(const char *msg, struct sk_buff *p0);
 >>>>>>> v3.18
@@ -249,7 +265,11 @@ void brcmu_prpkt(const char *msg, struct sk_buff *p0);
 
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern __printf(3, 4)
+=======
+__printf(3, 4)
+>>>>>>> v3.18
 =======
 __printf(3, 4)
 >>>>>>> v3.18

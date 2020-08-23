@@ -95,7 +95,10 @@ ipv6header_mt6(const struct sk_buff *skb, struct xt_action_param *par)
 		default:
 			return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}

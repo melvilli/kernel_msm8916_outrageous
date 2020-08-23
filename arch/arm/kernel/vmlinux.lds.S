@@ -9,10 +9,14 @@
 #include <asm/memory.h>
 #include <asm/page.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 #include <asm/pgtable.h>
 #endif
 
+=======
+	
+>>>>>>> v3.18
 =======
 	
 >>>>>>> v3.18
@@ -78,10 +82,13 @@ SECTIONS
 		ARM_EXIT_DISCARD(EXIT_DATA)
 		EXIT_CALL
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_HOTPLUG
 		*(.ARM.exidx.devexit.text)
 		*(.ARM.extab.devexit.text)
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef CONFIG_MMU
@@ -105,10 +112,13 @@ SECTIONS
 		HEAD_TEXT
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	. = ALIGN(1<<SECTION_SHIFT);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.text : {			/* Real text segment		*/
@@ -134,9 +144,12 @@ SECTIONS
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	. = ALIGN(1<<SECTION_SHIFT);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	RO_DATA(PAGE_SIZE)
@@ -173,11 +186,15 @@ SECTIONS
 
 #ifndef CONFIG_XIP_KERNEL
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	. = ALIGN(1<<SECTION_SHIFT);
 #else
 	. = ALIGN(PAGE_SIZE);
 #endif
+=======
+	. = ALIGN(PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	. = ALIGN(PAGE_SIZE);
 >>>>>>> v3.18
@@ -209,9 +226,12 @@ SECTIONS
 		ARM_CPU_DISCARD(PROC_INFO)
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	. = ALIGN(1<<SECTION_SHIFT);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init.arch.info : {
@@ -244,7 +264,10 @@ SECTIONS
 		INIT_CALLS
 		CON_INITCALL
 <<<<<<< HEAD
+<<<<<<< HEAD
 		COMPAT_EXPORTS
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		SECURITY_INITCALL
@@ -265,8 +288,13 @@ SECTIONS
 	. = PAGE_OFFSET + TEXT_OFFSET;
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__init_end = .;
 	. = ALIGN(THREAD_SIZE);
+=======
+	. = ALIGN(THREAD_SIZE);
+	__init_end = .;
+>>>>>>> v3.18
 =======
 	. = ALIGN(THREAD_SIZE);
 	__init_end = .;
@@ -369,7 +397,10 @@ SECTIONS
 
 	STABS_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.comment 0 : { *(.comment) }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

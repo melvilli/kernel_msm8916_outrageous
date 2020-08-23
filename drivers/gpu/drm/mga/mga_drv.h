@@ -32,6 +32,11 @@
 #define __MGA_DRV_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_legacy.h>
+
+>>>>>>> v3.18
 =======
 #include <drm/drm_legacy.h>
 
@@ -155,7 +160,11 @@ typedef struct drm_mga_private {
 } drm_mga_private_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct drm_ioctl_desc mga_ioctls[];
+=======
+extern const struct drm_ioctl_desc mga_ioctls[];
+>>>>>>> v3.18
 =======
 extern const struct drm_ioctl_desc mga_ioctls[];
 >>>>>>> v3.18
@@ -196,7 +205,11 @@ extern u32 mga_get_vblank_counter(struct drm_device *dev, int crtc);
 extern int mga_driver_fence_wait(struct drm_device *dev, unsigned int *sequence);
 extern int mga_driver_vblank_wait(struct drm_device *dev, unsigned int *sequence);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern irqreturn_t mga_driver_irq_handler(DRM_IRQ_ARGS);
+=======
+extern irqreturn_t mga_driver_irq_handler(int irq, void *arg);
+>>>>>>> v3.18
 =======
 extern irqreturn_t mga_driver_irq_handler(int irq, void *arg);
 >>>>>>> v3.18
@@ -207,7 +220,11 @@ extern long mga_compat_ioctl(struct file *filp, unsigned int cmd,
 			     unsigned long arg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define mga_flush_write_combine()	DRM_WRITEMEMORYBARRIER()
+=======
+#define mga_flush_write_combine()	wmb()
+>>>>>>> v3.18
 =======
 #define mga_flush_write_combine()	wmb()
 >>>>>>> v3.18

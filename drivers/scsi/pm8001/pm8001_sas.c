@@ -59,6 +59,7 @@ static int pm8001_find_tag(struct sas_task *task, u32 *tag)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
   * pm8001_tag_clear - clear the tags bitmap
   * @pm8001_ha: our hba struct
   * @tag: the found tag associated with the task
@@ -79,6 +80,8 @@ static void pm8001_tag_set(struct pm8001_hba_info *pm8001_ha, u32 tag)
 	void *bitmap = pm8001_ha->tags;
 	set_bit(tag, bitmap);
 =======
+=======
+>>>>>>> v3.18
   * pm8001_tag_free - free the no more needed tag
   * @pm8001_ha: our hba struct
   * @tag: the found tag associated with the task
@@ -87,6 +90,9 @@ void pm8001_tag_free(struct pm8001_hba_info *pm8001_ha, u32 tag)
 {
 	void *bitmap = pm8001_ha->tags;
 	clear_bit(tag, bitmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -98,6 +104,7 @@ void pm8001_tag_free(struct pm8001_hba_info *pm8001_ha, u32 tag)
 inline int pm8001_tag_alloc(struct pm8001_hba_info *pm8001_ha, u32 *tag_out)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int index, tag;
 	void *bitmap = pm8001_ha->tags;
 
@@ -107,6 +114,8 @@ inline int pm8001_tag_alloc(struct pm8001_hba_info *pm8001_ha, u32 *tag_out)
 		return -SAS_QUEUE_FULL;
 	pm8001_tag_set(pm8001_ha, tag);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int tag;
 	void *bitmap = pm8001_ha->tags;
 	unsigned long flags;
@@ -119,6 +128,9 @@ inline int pm8001_tag_alloc(struct pm8001_hba_info *pm8001_ha, u32 *tag_out)
 	}
 	set_bit(tag, bitmap);
 	spin_unlock_irqrestore(&pm8001_ha->bitmap_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*tag_out = tag;
 	return 0;
@@ -129,7 +141,11 @@ void pm8001_tag_init(struct pm8001_hba_info *pm8001_ha)
 	int i;
 	for (i = 0; i < pm8001_ha->tags_num; ++i)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pm8001_tag_clear(pm8001_ha, i);
+=======
+		pm8001_tag_free(pm8001_ha, i);
+>>>>>>> v3.18
 =======
 		pm8001_tag_free(pm8001_ha, i);
 >>>>>>> v3.18
@@ -154,8 +170,13 @@ int pm8001_mem_alloc(struct pci_dev *pdev, void **virt_addr,
 	if (align)
 		align_offset = (dma_addr_t)align - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mem_virt_alloc =
 		pci_alloc_consistent(pdev, mem_size + align, &mem_dma_handle);
+=======
+	mem_virt_alloc = pci_zalloc_consistent(pdev, mem_size + align,
+					       &mem_dma_handle);
+>>>>>>> v3.18
 =======
 	mem_virt_alloc = pci_zalloc_consistent(pdev, mem_size + align,
 					       &mem_dma_handle);
@@ -165,7 +186,10 @@ int pm8001_mem_alloc(struct pci_dev *pdev, void **virt_addr,
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset((void *)mem_virt_alloc, 0, mem_size+align);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*pphys_addr = mem_dma_handle;
@@ -473,6 +497,10 @@ static int pm8001_task_exec(struct sas_task *task, const int num,
 		ccb->ccb_tag = tag;
 		ccb->task = t;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ccb->device = pm8001_dev;
+>>>>>>> v3.18
 =======
 		ccb->device = pm8001_dev;
 >>>>>>> v3.18
@@ -490,7 +518,10 @@ static int pm8001_task_exec(struct sas_task *task, const int num,
 		case SAS_PROTOCOL_SATA:
 		case SAS_PROTOCOL_STP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case SAS_PROTOCOL_SATA | SAS_PROTOCOL_STP:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			rc = pm8001_task_prep_ata(pm8001_ha, ccb);
@@ -547,11 +578,14 @@ int pm8001_queue_command(struct sas_task *task, const int num,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pm8001_ccb_free(struct pm8001_hba_info *pm8001_ha, u32 ccb_idx)
 {
 	pm8001_tag_clear(pm8001_ha, ccb_idx);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -591,7 +625,11 @@ void pm8001_ccb_task_free(struct pm8001_hba_info *pm8001_ha,
 	ccb->ccb_tag = 0xFFFFFFFF;
 	ccb->open_retry = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm8001_ccb_free(pm8001_ha, ccb_idx);
+=======
+	pm8001_tag_free(pm8001_ha, ccb_idx);
+>>>>>>> v3.18
 =======
 	pm8001_tag_free(pm8001_ha, ccb_idx);
 >>>>>>> v3.18
@@ -757,6 +795,11 @@ static int pm8001_exec_internal_tmf_task(struct domain_device *dev,
 	struct sas_task *task = NULL;
 	struct pm8001_hba_info *pm8001_ha = pm8001_find_ha_by_dev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct pm8001_device *pm8001_dev = dev->lldd_dev;
+	DECLARE_COMPLETION_ONSTACK(completion_setstate);
+>>>>>>> v3.18
 =======
 	struct pm8001_device *pm8001_dev = dev->lldd_dev;
 	DECLARE_COMPLETION_ONSTACK(completion_setstate);
@@ -787,13 +830,19 @@ static int pm8001_exec_internal_tmf_task(struct domain_device *dev,
 		}
 		wait_for_completion(&task->slow_task->completion);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (pm8001_ha->chip_id != chip_8001) {
 			pm8001_dev->setds_completion = &completion_setstate;
 				PM8001_CHIP_DISP->set_dev_state_req(pm8001_ha,
 					pm8001_dev, 0x01);
 			wait_for_completion(&completion_setstate);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		res = -TMF_RESP_FUNC_FAILED;
 		/* Even TMF timed out, return direct. */
@@ -925,7 +974,10 @@ static void pm8001_dev_gone_notify(struct domain_device *dev)
 {
 	unsigned long flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 tag;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct pm8001_hba_info *pm8001_ha;
@@ -934,7 +986,10 @@ static void pm8001_dev_gone_notify(struct domain_device *dev)
 	pm8001_ha = pm8001_find_ha_by_dev(dev);
 	spin_lock_irqsave(&pm8001_ha->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm8001_tag_alloc(pm8001_ha, &tag);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (pm8001_dev) {
@@ -1164,6 +1219,10 @@ int pm8001_lu_reset(struct domain_device *dev, u8 *lun)
 	struct pm8001_device *pm8001_dev = dev->lldd_dev;
 	struct pm8001_hba_info *pm8001_ha = pm8001_find_ha_by_dev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DECLARE_COMPLETION_ONSTACK(completion_setstate);
+>>>>>>> v3.18
 =======
 	DECLARE_COMPLETION_ONSTACK(completion_setstate);
 >>>>>>> v3.18
@@ -1174,14 +1233,20 @@ int pm8001_lu_reset(struct domain_device *dev, u8 *lun)
 		rc = sas_phy_reset(phy, 1);
 		sas_put_local_phy(phy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = PM8001_CHIP_DISP->set_dev_state_req(pm8001_ha,
 			pm8001_dev, 0x01);
 		msleep(2000);
 =======
+=======
+>>>>>>> v3.18
 		pm8001_dev->setds_completion = &completion_setstate;
 		rc = PM8001_CHIP_DISP->set_dev_state_req(pm8001_ha,
 			pm8001_dev, 0x01);
 		wait_for_completion(&completion_setstate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		tmf_task.tmf = TMF_LU_RESET;

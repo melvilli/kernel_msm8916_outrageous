@@ -103,8 +103,12 @@ static int cfag12864bfb_probe(struct platform_device *device)
 	platform_set_drvdata(device, info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "fb%d: %s frame buffer device\n", info->node,
 		info->fix.id);
+=======
+	fb_info(info, "%s frame buffer device\n", info->fix.id);
+>>>>>>> v3.18
 =======
 	fb_info(info, "%s frame buffer device\n", info->fix.id);
 >>>>>>> v3.18

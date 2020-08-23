@@ -14,6 +14,10 @@
 #define __ASM_ARCH_CORGI_H  1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "irqs.h" /* PXA_NR_BUILTIN_GPIO */
+>>>>>>> v3.18
 =======
 #include "irqs.h" /* PXA_NR_BUILTIN_GPIO */
 >>>>>>> v3.18

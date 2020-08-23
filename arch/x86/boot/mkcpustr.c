@@ -17,6 +17,10 @@
 
 #include "../include/asm/required-features.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../include/asm/disabled-features.h"
+>>>>>>> v3.18
 =======
 #include "../include/asm/disabled-features.h"
 >>>>>>> v3.18

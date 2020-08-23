@@ -14,6 +14,7 @@
 
 #include <linux/fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mount.h>
 #include <linux/module.h>
 #include <linux/kobject.h>
@@ -745,6 +746,8 @@ int sysfs_create_dir(struct kobject * kobj)
 	const void *ns = NULL;
 	int error = 0;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kobject.h>
 #include <linux/slab.h>
 #include "sysfs.h"
@@ -773,11 +776,15 @@ void sysfs_warn_dup(struct kernfs_node *parent, const char *name)
 int sysfs_create_dir_ns(struct kobject *kobj, const void *ns)
 {
 	struct kernfs_node *parent, *kn;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	BUG_ON(!kobj);
 
 	if (kobj->parent)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		parent_sd = kobj->parent->sd;
 	else
@@ -879,6 +886,8 @@ static void __sysfs_remove_dir(struct sysfs_dirent *dir_sd)
 
 	remove_dir(dir_sd);
 =======
+=======
+>>>>>>> v3.18
 		parent = kobj->parent->sd;
 	else
 		parent = sysfs_root_kn;
@@ -896,6 +905,9 @@ static void __sysfs_remove_dir(struct sysfs_dirent *dir_sd)
 
 	kobj->sd = kn;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -907,6 +919,7 @@ static void __sysfs_remove_dir(struct sysfs_dirent *dir_sd)
  *	the directory before we remove the directory, and we've inlined
  *	what used to be sysfs_rmdir() below, instead of calling separately.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void sysfs_remove_dir(struct kobject * kobj)
@@ -1134,6 +1147,8 @@ const struct file_operations sysfs_dir_operations = {
 	.llseek		= sysfs_dir_llseek,
 };
 =======
+=======
+>>>>>>> v3.18
 void sysfs_remove_dir(struct kobject *kobj)
 {
 	struct kernfs_node *kn = kobj->sd;
@@ -1183,4 +1198,7 @@ int sysfs_move_dir_ns(struct kobject *kobj, struct kobject *new_parent_kobj,
 
 	return kernfs_rename_ns(kn, new_parent, kn->name, new_ns);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

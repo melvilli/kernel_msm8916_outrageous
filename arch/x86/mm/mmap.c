@@ -32,6 +32,7 @@
 #include <asm/elf.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct __read_mostly va_alignment va_align = {
 	.flags = -1,
 };
@@ -43,6 +44,8 @@ static unsigned long stack_maxrandom_size(void)
 		!(current->personality & ADDR_NO_RANDOMIZE)) {
 		max = ((-1UL) & STACK_RND_MASK) << PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 struct va_alignment __read_mostly va_align = {
 	.flags = -1,
 };
@@ -53,6 +56,9 @@ static unsigned int stack_maxrandom_size(void)
 	if ((current->flags & PF_RANDOMIZE) &&
 		!(current->personality & ADDR_NO_RANDOMIZE)) {
 		max = ((-1U) & STACK_RND_MASK) << PAGE_SHIFT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -81,6 +87,7 @@ static int mmap_is_legacy(void)
 static unsigned long mmap_rnd(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long rnd;
 
 	/*
@@ -97,6 +104,8 @@ static unsigned long mmap_rnd(void)
 
 static unsigned long mmap_base(unsigned long rnd)
 =======
+=======
+>>>>>>> v3.18
 	unsigned long rnd = 0;
 
 	/*
@@ -113,6 +122,9 @@ static unsigned long mmap_base(unsigned long rnd)
 }
 
 static unsigned long mmap_base(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long gap = rlimit(RLIMIT_STACK);
@@ -123,8 +135,11 @@ static unsigned long mmap_base(void)
 		gap = MAX_GAP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PAGE_ALIGN(TASK_SIZE - gap - rnd);
 =======
+=======
+>>>>>>> v3.18
 	return PAGE_ALIGN(TASK_SIZE - gap - mmap_rnd());
 }
 
@@ -138,6 +153,9 @@ static unsigned long mmap_legacy_base(void)
 		return TASK_UNMAPPED_BASE;
 	else
 		return TASK_UNMAPPED_BASE + mmap_rnd();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -147,6 +165,7 @@ static unsigned long mmap_legacy_base(void)
  */
 void arch_pick_mmap_layout(struct mm_struct *mm)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long random_factor = 0UL;
 
@@ -158,13 +177,20 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
 	mm->mmap_legacy_base = mmap_legacy_base();
 	mm->mmap_base = mmap_base();
 >>>>>>> v3.18
+=======
+	mm->mmap_legacy_base = mmap_legacy_base();
+	mm->mmap_base = mmap_base();
+>>>>>>> v3.18
 
 	if (mmap_is_legacy()) {
 		mm->mmap_base = mm->mmap_legacy_base;
 		mm->get_unmapped_area = arch_get_unmapped_area;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mm->mmap_base = mmap_base(random_factor);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		mm->get_unmapped_area = arch_get_unmapped_area_topdown;

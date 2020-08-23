@@ -19,6 +19,10 @@
 #include <asm/opal.h>
 #include <asm/firmware.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/machdep.h>
+>>>>>>> v3.18
 =======
 #include <asm/machdep.h>
 >>>>>>> v3.18
@@ -42,11 +46,14 @@ unsigned long __init opal_get_boot_time(void)
 	u32 y_m_d;
 	u64 h_m_s_ms;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long rc = OPAL_BUSY;
 
 	while (rc == OPAL_BUSY || rc == OPAL_BUSY_EVENT) {
 		rc = opal_rtc_read(&y_m_d, &h_m_s_ms);
 =======
+=======
+>>>>>>> v3.18
 	__be32 __y_m_d;
 	__be64 __h_m_s_ms;
 	long rc = OPAL_BUSY;
@@ -56,6 +63,9 @@ unsigned long __init opal_get_boot_time(void)
 
 	while (rc == OPAL_BUSY || rc == OPAL_BUSY_EVENT) {
 		rc = opal_rtc_read(&__y_m_d, &__h_m_s_ms);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rc == OPAL_BUSY_EVENT)
 			opal_poll_events(NULL);
@@ -64,11 +74,14 @@ unsigned long __init opal_get_boot_time(void)
 	}
 	if (rc != OPAL_SUCCESS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 	opal_to_tm(y_m_d, h_m_s_ms, &tm);
 	return mktime(tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
 		      tm.tm_hour, tm.tm_min, tm.tm_sec);
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 
 	y_m_d = be32_to_cpu(__y_m_d);
@@ -80,6 +93,9 @@ out:
 	ppc_md.get_rtc_time = NULL;
 	ppc_md.set_rtc_time = NULL;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -89,15 +105,21 @@ void opal_get_rtc_time(struct rtc_time *tm)
 	u32 y_m_d;
 	u64 h_m_s_ms;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	while (rc == OPAL_BUSY || rc == OPAL_BUSY_EVENT) {
 		rc = opal_rtc_read(&y_m_d, &h_m_s_ms);
 =======
+=======
+>>>>>>> v3.18
 	__be32 __y_m_d;
 	__be64 __h_m_s_ms;
 
 	while (rc == OPAL_BUSY || rc == OPAL_BUSY_EVENT) {
 		rc = opal_rtc_read(&__y_m_d, &__h_m_s_ms);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rc == OPAL_BUSY_EVENT)
 			opal_poll_events(NULL);
@@ -107,6 +129,11 @@ void opal_get_rtc_time(struct rtc_time *tm)
 	if (rc != OPAL_SUCCESS)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	y_m_d = be32_to_cpu(__y_m_d);
+	h_m_s_ms = be64_to_cpu(__h_m_s_ms);
+>>>>>>> v3.18
 =======
 	y_m_d = be32_to_cpu(__y_m_d);
 	h_m_s_ms = be64_to_cpu(__h_m_s_ms);

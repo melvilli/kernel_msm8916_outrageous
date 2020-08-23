@@ -50,12 +50,18 @@ void qxl_ring_free(struct qxl_ring *ring)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void qxl_ring_init_hdr(struct qxl_ring *ring)
 {
 	ring->ring->header.notify_on_prod = ring->n_elements;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qxl_ring *
 qxl_ring_create(struct qxl_ring_header *header,
@@ -78,7 +84,11 @@ qxl_ring_create(struct qxl_ring_header *header,
 	ring->push_event = push_event;
 	if (set_prod_notify)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		header->notify_on_prod = ring->n_elements;
+=======
+		qxl_ring_init_hdr(ring);
+>>>>>>> v3.18
 =======
 		qxl_ring_init_hdr(ring);
 >>>>>>> v3.18
@@ -100,7 +110,11 @@ static int qxl_check_header(struct qxl_ring *ring)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qxl_check_idle(struct qxl_ring *ring)
+=======
+int qxl_check_idle(struct qxl_ring *ring)
+>>>>>>> v3.18
 =======
 int qxl_check_idle(struct qxl_ring *ring)
 >>>>>>> v3.18
@@ -191,14 +205,20 @@ qxl_push_command_ring_release(struct qxl_device *qdev, struct qxl_release *relea
 {
 	struct qxl_command cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	cmd.type = type;
 	cmd.data = qxl_bo_physical_address(qdev, release->bos[0], release->release_offset);
 =======
+=======
+>>>>>>> v3.18
 	struct qxl_bo_list *entry = list_first_entry(&release->bos, struct qxl_bo_list, tv.head);
 
 	cmd.type = type;
 	cmd.data = qxl_bo_physical_address(qdev, to_qxl_bo(entry->tv.bo), release->release_offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return qxl_ring_push(qdev->command_ring, &cmd, interruptible);
@@ -210,14 +230,20 @@ qxl_push_cursor_ring_release(struct qxl_device *qdev, struct qxl_release *releas
 {
 	struct qxl_command cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	cmd.type = type;
 	cmd.data = qxl_bo_physical_address(qdev, release->bos[0], release->release_offset);
 =======
+=======
+>>>>>>> v3.18
 	struct qxl_bo_list *entry = list_first_entry(&release->bos, struct qxl_bo_list, tv.head);
 
 	cmd.type = type;
 	cmd.data = qxl_bo_physical_address(qdev, to_qxl_bo(entry->tv.bo), release->release_offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return qxl_ring_push(qdev->cursor_ring, &cmd, interruptible);
@@ -240,7 +266,10 @@ int qxl_garbage_collect(struct qxl_device *qdev)
 	uint64_t id, next_id;
 	int i = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	union qxl_release_info *info;
@@ -253,6 +282,7 @@ int qxl_garbage_collect(struct qxl_device *qdev)
 				break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = qxl_release_reserve(qdev, release, false);
 			if (ret) {
 				qxl_io_log(qdev, "failed to reserve release on garbage collect %lld\n", id);
@@ -261,12 +291,17 @@ int qxl_garbage_collect(struct qxl_device *qdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 			info = qxl_release_map(qdev, release);
 			next_id = info->next;
 			qxl_release_unmap(qdev, release, info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			qxl_release_unreserve(qdev, release);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			QXL_INFO(qdev, "popped %lld, next %lld\n", id,
@@ -294,7 +329,13 @@ int qxl_garbage_collect(struct qxl_device *qdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qxl_alloc_bo_reserved(struct qxl_device *qdev, unsigned long size,
+=======
+int qxl_alloc_bo_reserved(struct qxl_device *qdev,
+			  struct qxl_release *release,
+			  unsigned long size,
+>>>>>>> v3.18
 =======
 int qxl_alloc_bo_reserved(struct qxl_device *qdev,
 			  struct qxl_release *release,
@@ -307,7 +348,11 @@ int qxl_alloc_bo_reserved(struct qxl_device *qdev,
 
 	ret = qxl_bo_create(qdev, size, false /* not kernel - device */,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    QXL_GEM_DOMAIN_VRAM, NULL, &bo);
+=======
+			    false, QXL_GEM_DOMAIN_VRAM, NULL, &bo);
+>>>>>>> v3.18
 =======
 			    false, QXL_GEM_DOMAIN_VRAM, NULL, &bo);
 >>>>>>> v3.18
@@ -316,8 +361,13 @@ int qxl_alloc_bo_reserved(struct qxl_device *qdev,
 		return ret;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = qxl_bo_reserve(bo, false);
 	if (unlikely(ret != 0))
+=======
+	ret = qxl_release_list_add(release, bo);
+	if (ret)
+>>>>>>> v3.18
 =======
 	ret = qxl_release_list_add(release, bo);
 	if (ret)
@@ -329,7 +379,11 @@ int qxl_alloc_bo_reserved(struct qxl_device *qdev,
 out_unref:
 	qxl_bo_unref(&bo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return ret;
+>>>>>>> v3.18
 =======
 	return ret;
 >>>>>>> v3.18
@@ -434,8 +488,13 @@ void qxl_io_destroy_primary(struct qxl_device *qdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qxl_io_create_primary(struct qxl_device *qdev, unsigned width,
 			   unsigned height, unsigned offset, struct qxl_bo *bo)
+=======
+void qxl_io_create_primary(struct qxl_device *qdev,
+			   unsigned offset, struct qxl_bo *bo)
+>>>>>>> v3.18
 =======
 void qxl_io_create_primary(struct qxl_device *qdev,
 			   unsigned offset, struct qxl_bo *bo)
@@ -448,8 +507,13 @@ void qxl_io_create_primary(struct qxl_device *qdev,
 	create = &qdev->ram_header->create_surface;
 	create->format = bo->surf.format;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	create->width = width;
 	create->height = height;
+=======
+	create->width = bo->surf.width;
+	create->height = bo->surf.height;
+>>>>>>> v3.18
 =======
 	create->width = bo->surf.width;
 	create->height = bo->surf.height;
@@ -567,16 +631,22 @@ int qxl_hw_surface_alloc(struct qxl_device *qdev,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd = (struct qxl_surface_cmd *)qxl_release_map(qdev, release);
 	cmd->type = QXL_SURFACE_CMD_CREATE;
 	cmd->flags = QXL_SURF_FLAG_KEEP_DATA;
 =======
+=======
+>>>>>>> v3.18
 	ret = qxl_release_reserve_list(release, true);
 	if (ret)
 		return ret;
 
 	cmd = (struct qxl_surface_cmd *)qxl_release_map(qdev, release);
 	cmd->type = QXL_SURFACE_CMD_CREATE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmd->u.surface_create.format = surf->surf.format;
 	cmd->u.surface_create.width = surf->surf.width;
@@ -598,6 +668,7 @@ int qxl_hw_surface_alloc(struct qxl_device *qdev,
 	surf->surf_create = release;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* no need to add a release to the fence for this bo,
 	   since it is only released when we ask to destroy the surface
 	   and it would never signal otherwise */
@@ -607,11 +678,16 @@ int qxl_hw_surface_alloc(struct qxl_device *qdev,
 
 	qxl_release_unreserve(qdev, release);
 =======
+=======
+>>>>>>> v3.18
 	/* no need to add a release to the fence for this surface bo,
 	   since it is only released when we ask to destroy the surface
 	   and it would never signal otherwise */
 	qxl_push_command_ring_release(qdev, release, QXL_CMD_SURFACE, false);
 	qxl_release_fence_buffer_objects(release);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	surf->hw_surf_alloc = true;
@@ -655,12 +731,18 @@ int qxl_hw_surface_dealloc(struct qxl_device *qdev,
 	qxl_release_unmap(qdev, release, &cmd->release_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qxl_fence_releaseable(qdev, release);
 
 	qxl_push_command_ring_release(qdev, release, QXL_CMD_SURFACE, false);
 
 	qxl_release_unreserve(qdev, release);
 
+=======
+	qxl_push_command_ring_release(qdev, release, QXL_CMD_SURFACE, false);
+
+	qxl_release_fence_buffer_objects(release);
+>>>>>>> v3.18
 =======
 	qxl_push_command_ring_release(qdev, release, QXL_CMD_SURFACE, false);
 
@@ -714,6 +796,7 @@ static int qxl_reap_surf(struct qxl_device *qdev, struct qxl_bo *surf, bool stal
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (surf->fence.num_active_releases > 0 && stall == false) {
 		qxl_bo_unreserve(surf);
 		return -EBUSY;
@@ -726,10 +809,15 @@ static int qxl_reap_surf(struct qxl_device *qdev, struct qxl_bo *surf, bool stal
 	ret = ttm_bo_wait(&surf->tbo, true, true, !stall);
 	spin_unlock(&surf->tbo.bdev->fence_lock);
 =======
+=======
+>>>>>>> v3.18
 	if (stall)
 		mutex_unlock(&qdev->surf_evict_mutex);
 
 	ret = ttm_bo_wait(&surf->tbo, true, true, !stall);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (stall)

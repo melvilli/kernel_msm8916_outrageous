@@ -9,7 +9,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -17,6 +20,10 @@
 #include <asm/asmmacro.h>
 #include <asm/cacheops.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu.h>
 >>>>>>> v3.18
@@ -36,8 +43,11 @@
 	.endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /***********************************************************************
@@ -67,13 +77,19 @@ LEAF(bmips_smp_movevec)
 	li	k0, 0xff400000
 	mtc0	k0, $22, 6
 <<<<<<< HEAD
+<<<<<<< HEAD
 	li	k1, CKSEG1 | BMIPS_RELO_VECTOR_CONTROL_1
 =======
+=======
+>>>>>>> v3.18
 	/* set up relocation vector address based on thread ID */
 	mfc0	k1, $22, 3
 	srl	k1, 16
 	andi	k1, 0x8000
 	or	k1, CKSEG1 | BMIPS_RELO_VECTOR_CONTROL_0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	or	k0, k1
 	li	k1, 0xa0080000
@@ -108,12 +124,18 @@ NESTED(bmips_reset_nmi_vec, PT_SIZE, sp)
 
 #if defined(CONFIG_CPU_BMIPS5000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	mfc0	k0, CP0_PRID
 	li	k1, PRID_IMP_BMIPS5000
 	andi	k0, 0xff00
 	bne	k0, k1, 1f
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* if we're not on core 0, this must be the SMP boot signal */
 	li	k1, (3 << 25)
@@ -121,7 +143,12 @@ NESTED(bmips_reset_nmi_vec, PT_SIZE, sp)
 	and	k0, k1
 	bnez	k0, bmips_smp_entry
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+1:
+#endif /* CONFIG_CPU_BMIPS5000 */
+>>>>>>> v3.18
 =======
 1:
 #endif /* CONFIG_CPU_BMIPS5000 */
@@ -146,7 +173,11 @@ NESTED(bmips_reset_nmi_vec, PT_SIZE, sp)
 
 	RESTORE_ALL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.set	mips3
+=======
+	.set	arch=r4000
+>>>>>>> v3.18
 =======
 	.set	arch=r4000
 >>>>>>> v3.18
@@ -173,14 +204,20 @@ bmips_smp_entry:
 	mtc0	k0, CP0_CONFIG
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_CPU_BMIPS4350) || defined(CONFIG_CPU_BMIPS4380)
 =======
+=======
+>>>>>>> v3.18
 	mfc0	k0, CP0_PRID
 	andi	k0, 0xff00
 #if defined(CONFIG_CPU_BMIPS4350) || defined(CONFIG_CPU_BMIPS4380)
 	li	k1, PRID_IMP_BMIPS43XX
 	bne	k0, k1, 2f
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* initialize CPU1's local I-cache */
 	li	k0, 0x80000000
@@ -193,9 +230,12 @@ bmips_smp_entry:
 	addiu	k0, 16
 	bne	k0, k1, 1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(CONFIG_CPU_BMIPS5000)
 	/* set exception vector base */
 =======
+=======
+>>>>>>> v3.18
 
 	b	3f
 2:
@@ -205,14 +245,22 @@ bmips_smp_entry:
 	li	k1, PRID_IMP_BMIPS5000
 	bne	k0, k1, 3f
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	la	k0, ebase
 	lw	k0, 0(k0)
 	mtc0	k0, $15, 1
 	BARRIER
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
+=======
+#endif /* CONFIG_CPU_BMIPS5000 */
+3:
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_CPU_BMIPS5000 */
 3:
@@ -250,7 +298,10 @@ END(bmips_reset_nmi_vec)
 
 	.set	pop
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.previous
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -281,6 +332,7 @@ END(bmips_smp_int_vec)
  ***********************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
 
 LEAF(bmips_enable_xks01)
@@ -289,6 +341,8 @@ LEAF(bmips_enable_xks01)
 
 #if defined(CONFIG_CPU_BMIPS4380)
 =======
+=======
+>>>>>>> v3.18
 LEAF(bmips_enable_xks01)
 
 #if defined(CONFIG_XKS01)
@@ -304,6 +358,9 @@ LEAF(bmips_enable_xks01)
 	addiu	t0, -PRID_REV_BMIPS4380_LO
 	bltz	t0, 2f
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mfc0	t0, $22, 3
 	li	t1, 0x1ff0
@@ -314,8 +371,11 @@ LEAF(bmips_enable_xks01)
 	mtc0	t0, $22, 3
 	BARRIER
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(CONFIG_CPU_BMIPS5000)
 =======
+=======
+>>>>>>> v3.18
 	b	2f
 1:
 #endif /* CONFIG_CPU_BMIPS4380 */
@@ -323,6 +383,9 @@ LEAF(bmips_enable_xks01)
 	li	t1, PRID_IMP_BMIPS5000
 	bne	t2, t1, 2f
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mfc0	t0, $22, 5
 	li	t1, 0x01ff
@@ -332,6 +395,7 @@ LEAF(bmips_enable_xks01)
 	or	t0, t2
 	mtc0	t0, $22, 5
 	BARRIER
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else
 
@@ -343,13 +407,20 @@ LEAF(bmips_enable_xks01)
 #endif /* CONFIG_CPU_BMIPS5000 */
 2:
 >>>>>>> v3.18
+=======
+#endif /* CONFIG_CPU_BMIPS5000 */
+2:
+>>>>>>> v3.18
 #endif /* defined(CONFIG_XKS01) */
 
 	jr	ra
 
 END(bmips_enable_xks01)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	.previous
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

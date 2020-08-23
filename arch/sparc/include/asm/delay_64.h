@@ -9,8 +9,13 @@
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __delay(unsigned long loops);
 extern void udelay(unsigned long usecs);
+=======
+void __delay(unsigned long loops);
+void udelay(unsigned long usecs);
+>>>>>>> v3.18
 =======
 void __delay(unsigned long loops);
 void udelay(unsigned long usecs);

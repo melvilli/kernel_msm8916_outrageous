@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -48,11 +51,15 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _E1000_I210_H_
 #define _E1000_I210_H_
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern s32 igb_update_flash_i210(struct e1000_hw *hw);
 extern s32 igb_update_nvm_checksum_i210(struct e1000_hw *hw);
@@ -76,6 +83,8 @@ extern s32 igb_read_xmdio_reg(struct e1000_hw *hw, u16 addr, u8 dev_addr,
 extern s32 igb_write_xmdio_reg(struct e1000_hw *hw, u16 addr, u8 dev_addr,
 			       u16 data);
 =======
+=======
+>>>>>>> v3.18
 s32 igb_acquire_swfw_sync_i210(struct e1000_hw *hw, u16 mask);
 void igb_release_swfw_sync_i210(struct e1000_hw *hw, u16 mask);
 s32 igb_valid_led_default_i210(struct e1000_hw *hw, u16 *data);
@@ -86,6 +95,9 @@ s32 igb_write_xmdio_reg(struct e1000_hw *hw, u16 addr, u8 dev_addr, u16 data);
 s32 igb_init_nvm_params_i210(struct e1000_hw *hw);
 bool igb_get_flash_presence_i210(struct e1000_hw *hw);
 s32 igb_pll_workaround_i210(struct e1000_hw *hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define E1000_STM_OPCODE		0xDB00
@@ -121,17 +133,23 @@ enum E1000_INVM_STRUCTURE_TYPE {
 
 #define ID_LED_DEFAULT_I210		((ID_LED_OFF1_ON2  << 8) | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 (ID_LED_OFF1_OFF2 <<  4) | \
 					 (ID_LED_DEF1_DEF2))
 #define ID_LED_DEFAULT_I210_SERDES	((ID_LED_DEF1_DEF2 << 8) | \
 					 (ID_LED_DEF1_DEF2 <<  4) | \
 					 (ID_LED_DEF1_DEF2))
 =======
+=======
+>>>>>>> v3.18
 					 (ID_LED_DEF1_DEF2 <<  4) | \
 					 (ID_LED_OFF1_OFF2))
 #define ID_LED_DEFAULT_I210_SERDES	((ID_LED_DEF1_DEF2 << 8) | \
 					 (ID_LED_DEF1_DEF2 <<  4) | \
 					 (ID_LED_OFF1_ON2))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* NVM offset defaults for i211 device */
@@ -141,7 +159,10 @@ enum E1000_INVM_STRUCTURE_TYPE {
 #define NVM_LED_0_2_CFG_DEFAULT_I211	0x200C
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* PLL Defines */
 #define E1000_PCI_PMCSR			0x44
 #define E1000_PCI_PMCSR_D3		0x03
@@ -153,5 +174,8 @@ enum E1000_INVM_STRUCTURE_TYPE {
 #define E1000_INVM_AUTOLOAD		0x0A
 #define E1000_INVM_PLL_WO_VAL		0x0010
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

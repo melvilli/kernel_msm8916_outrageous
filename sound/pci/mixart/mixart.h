@@ -79,9 +79,12 @@ struct mixart_mgr {
 	char longname[80];          /* name of this soundcard */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* message tasklet */
 	struct tasklet_struct msg_taskq;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* one and only blocking message or notification may be pending  */
@@ -89,7 +92,11 @@ struct mixart_mgr {
 	wait_queue_head_t msg_sleep;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* messages stored for tasklet */
+=======
+	/* messages fifo */
+>>>>>>> v3.18
 =======
 	/* messages fifo */
 >>>>>>> v3.18
@@ -99,9 +106,14 @@ struct mixart_mgr {
 	atomic_t msg_processed;       /* number of messages to be processed in takslet */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t lock;              /* interrupt spinlock */
 	spinlock_t msg_lock;          /* mailbox spinlock */
 	struct mutex msg_mutex;   /* mutex for blocking_requests */
+=======
+	struct mutex lock;              /* interrupt lock */
+	struct mutex msg_lock;		/* mailbox lock */
+>>>>>>> v3.18
 =======
 	struct mutex lock;              /* interrupt lock */
 	struct mutex msg_lock;		/* mailbox lock */

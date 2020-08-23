@@ -23,15 +23,21 @@
 int btrfsic_submit_bh(int rw, struct buffer_head *bh);
 void btrfsic_submit_bio(int rw, struct bio *bio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define btrfsic_submit_bh submit_bh
 #define btrfsic_submit_bio submit_bio
 =======
+=======
+>>>>>>> v3.18
 int btrfsic_submit_bio_wait(int rw, struct bio *bio);
 #else
 #define btrfsic_submit_bh submit_bh
 #define btrfsic_submit_bio submit_bio
 #define btrfsic_submit_bio_wait submit_bio_wait
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

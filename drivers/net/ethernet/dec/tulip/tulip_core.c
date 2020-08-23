@@ -208,7 +208,11 @@ struct tulip_chip_table tulip_tbl[] = {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(tulip_pci_tbl) = {
+=======
+static const struct pci_device_id tulip_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id tulip_pci_tbl[] = {
 >>>>>>> v3.18
@@ -1299,7 +1303,11 @@ static const struct net_device_ops tulip_netdev_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_PCI_DEVICE_TABLE(early_486_chipsets) = {
+=======
+const struct pci_device_id early_486_chipsets[] = {
+>>>>>>> v3.18
 =======
 const struct pci_device_id early_486_chipsets[] = {
 >>>>>>> v3.18
@@ -1313,7 +1321,13 @@ static int tulip_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	struct tulip_private *tp;
 	/* See note below on the multiport cards. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static unsigned char last_phys_addr[6] = {0x00, 'L', 'i', 'n', 'u', 'x'};
+=======
+	static unsigned char last_phys_addr[ETH_ALEN] = {
+		0x00, 'L', 'i', 'n', 'u', 'x'
+	};
+>>>>>>> v3.18
 =======
 	static unsigned char last_phys_addr[ETH_ALEN] = {
 		0x00, 'L', 'i', 'n', 'u', 'x'
@@ -1425,12 +1439,15 @@ static int tulip_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The chip will fail to enter a low-power state later unless
 	 * first explicitly commanded into D0 */
 	if (pci_set_power_state(pdev, PCI_D0)) {
 		pr_notice("Failed to set power state to D0\n");
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	irq = pdev->irq;
@@ -1651,8 +1668,13 @@ static int tulip_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 #if defined(CONFIG_SPARC)
 		addr = of_get_property(dp, "local-mac-address", &len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (addr && len == 6)
 			memcpy(dev->dev_addr, addr, 6);
+=======
+		if (addr && len == ETH_ALEN)
+			memcpy(dev->dev_addr, addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		if (addr && len == ETH_ALEN)
 			memcpy(dev->dev_addr, addr, ETH_ALEN);
@@ -1730,7 +1752,11 @@ static int tulip_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	netif_napi_add(dev, &tp->napi, tulip_poll, 16);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ops);
+=======
+	dev->ethtool_ops = &ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &ops;
 >>>>>>> v3.18
@@ -1970,7 +1996,11 @@ static void tulip_remove_one(struct pci_dev *pdev)
 	free_netdev (dev);
 	pci_release_regions (pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata (pdev, NULL);
+=======
+	pci_disable_device(pdev);
+>>>>>>> v3.18
 =======
 	pci_disable_device(pdev);
 >>>>>>> v3.18

@@ -3,7 +3,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -17,12 +21,18 @@ int balance_internal(struct tree_balance *,
 		     int, int, struct item_head *, struct buffer_head **);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* modes of internal_shift_left, internal_shift_right and internal_insert_childs */
 =======
+=======
+>>>>>>> v3.18
 /*
  * modes of internal_shift_left, internal_shift_right and
  * internal_insert_childs
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define INTERNAL_SHIFT_FROM_S_TO_L 0
 #define INTERNAL_SHIFT_FROM_R_TO_S 1
@@ -44,7 +54,13 @@ static void internal_define_dest_src_infos(int shift_mode,
 	/* define dest, src, dest parent, dest position */
 	switch (shift_mode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case INTERNAL_SHIFT_FROM_S_TO_L:	/* used in internal_shift_left */
+=======
+
+	/* used in internal_shift_left */
+	case INTERNAL_SHIFT_FROM_S_TO_L:
+>>>>>>> v3.18
 =======
 
 	/* used in internal_shift_left */
@@ -70,7 +86,12 @@ static void internal_define_dest_src_infos(int shift_mode,
 		dest_bi->bi_bh = PATH_H_PBUFFER(tb->tb_path, h);
 		dest_bi->bi_parent = PATH_H_PPARENT(tb->tb_path, h);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dest_bi->bi_position = PATH_H_POSITION(tb->tb_path, h + 1);	/* dest position is analog of dest->b_item_order */
+=======
+		/* dest position is analog of dest->b_item_order */
+		dest_bi->bi_position = PATH_H_POSITION(tb->tb_path, h + 1);
+>>>>>>> v3.18
 =======
 		/* dest position is analog of dest->b_item_order */
 		dest_bi->bi_position = PATH_H_POSITION(tb->tb_path, h + 1);
@@ -80,7 +101,12 @@ static void internal_define_dest_src_infos(int shift_mode,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case INTERNAL_SHIFT_FROM_R_TO_S:	/* used in internal_shift_left */
+=======
+	/* used in internal_shift_left */
+	case INTERNAL_SHIFT_FROM_R_TO_S:
+>>>>>>> v3.18
 =======
 	/* used in internal_shift_left */
 	case INTERNAL_SHIFT_FROM_R_TO_S:
@@ -139,7 +165,12 @@ static void internal_define_dest_src_infos(int shift_mode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Insert count node pointers into buffer cur before position to + 1.
+=======
+/*
+ * Insert count node pointers into buffer cur before position to + 1.
+>>>>>>> v3.18
 =======
 /*
  * Insert count node pointers into buffer cur before position to + 1.
@@ -179,9 +210,15 @@ static void internal_insert_childs(struct buffer_info *cur_bi,
 	/* copy to_be_insert disk children */
 	for (i = 0; i < count; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_dc_size(&(new_dc[i]),
 			    MAX_CHILD_SIZE(bh[i]) - B_FREE_SPACE(bh[i]));
 		put_dc_block_number(&(new_dc[i]), bh[i]->b_blocknr);
+=======
+		put_dc_size(&new_dc[i],
+			    MAX_CHILD_SIZE(bh[i]) - B_FREE_SPACE(bh[i]));
+		put_dc_block_number(&new_dc[i], bh[i]->b_blocknr);
+>>>>>>> v3.18
 =======
 		put_dc_size(&new_dc[i],
 			    MAX_CHILD_SIZE(bh[i]) - B_FREE_SPACE(bh[i]));
@@ -192,7 +229,11 @@ static void internal_insert_childs(struct buffer_info *cur_bi,
 
 	/* prepare space for count items  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ih = B_N_PDELIM_KEY(cur, ((to == -1) ? 0 : to));
+=======
+	ih = internal_key(cur, ((to == -1) ? 0 : to));
+>>>>>>> v3.18
 =======
 	ih = internal_key(cur, ((to == -1) ? 0 : to));
 >>>>>>> v3.18
@@ -233,13 +274,19 @@ static void internal_insert_childs(struct buffer_info *cur_bi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Delete del_num items and node pointers from buffer cur starting from *
  * the first_i'th item and first_p'th pointers respectively.		*/
 =======
+=======
+>>>>>>> v3.18
 /*
  * Delete del_num items and node pointers from buffer cur starting from
  * the first_i'th item and first_p'th pointers respectively.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void internal_delete_pointers_items(struct buffer_info *cur_bi,
 					   int first_p,
@@ -283,7 +330,11 @@ static void internal_delete_pointers_items(struct buffer_info *cur_bi,
 
 	memmove(dc, dc + del_num, (nr + 1 - first_p - del_num) * DC_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key = B_N_PDELIM_KEY(cur, first_i);
+=======
+	key = internal_key(cur, first_i);
+>>>>>>> v3.18
 =======
 	key = internal_key(cur, first_i);
 >>>>>>> v3.18
@@ -324,8 +375,14 @@ static void internal_delete_childs(struct buffer_info *cur_bi, int from, int n)
 	i_from = (from == 0) ? from : from - 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* delete n pointers starting from `from' position in CUR;
 	   delete n keys starting from 'i_from' position in CUR;
+=======
+	/*
+	 * delete n pointers starting from `from' position in CUR;
+	 * delete n keys starting from 'i_from' position in CUR;
+>>>>>>> v3.18
 =======
 	/*
 	 * delete n pointers starting from `from' position in CUR;
@@ -336,10 +393,13 @@ static void internal_delete_childs(struct buffer_info *cur_bi, int from, int n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* copy cpy_num node pointers and cpy_num - 1 items from buffer src to buffer dest
 * last_first == FIRST_TO_LAST means, that we copy first items from src to tail of dest
  * last_first == LAST_TO_FIRST means, that we copy last items from src to head of dest
 =======
+=======
+>>>>>>> v3.18
 /*
  * copy cpy_num node pointers and cpy_num - 1 items from buffer src to buffer
  * dest
@@ -347,6 +407,9 @@ static void internal_delete_childs(struct buffer_info *cur_bi, int from, int n)
  *                             from src to tail of dest
  * last_first == LAST_TO_FIRST means that we copy last items
  *                             from src to head of dest
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static void internal_copy_pointers_items(struct buffer_info *dest_bi,
@@ -354,14 +417,20 @@ static void internal_copy_pointers_items(struct buffer_info *dest_bi,
 					 int last_first, int cpy_num)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ATTENTION! Number of node pointers in DEST is equal to number of items in DEST *
 	 * as delimiting key have already inserted to buffer dest.*/
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * ATTENTION! Number of node pointers in DEST is equal to number
 	 * of items in DEST  as delimiting key have already inserted to
 	 * buffer dest.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct buffer_head *dest = dest_bi->bi_bh;
 	int nr_dest, nr_src;
@@ -408,7 +477,11 @@ static void internal_copy_pointers_items(struct buffer_info *dest_bi,
 
 	/* prepare space for cpy_num - 1 item headers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key = B_N_PDELIM_KEY(dest, dest_order);
+=======
+	key = internal_key(dest, dest_order);
+>>>>>>> v3.18
 =======
 	key = internal_key(dest, dest_order);
 >>>>>>> v3.18
@@ -418,7 +491,11 @@ static void internal_copy_pointers_items(struct buffer_info *dest_bi,
 
 	/* insert headers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(key, B_N_PDELIM_KEY(src, src_order), KEY_SIZE * (cpy_num - 1));
+=======
+	memcpy(key, internal_key(src, src_order), KEY_SIZE * (cpy_num - 1));
+>>>>>>> v3.18
 =======
 	memcpy(key, internal_key(src, src_order), KEY_SIZE * (cpy_num - 1));
 >>>>>>> v3.18
@@ -452,7 +529,13 @@ static void internal_copy_pointers_items(struct buffer_info *dest_bi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copy cpy_num node pointers and cpy_num - 1 items from buffer src to buffer dest.
+=======
+/*
+ * Copy cpy_num node pointers and cpy_num - 1 items from buffer src to
+ * buffer dest.
+>>>>>>> v3.18
 =======
 /*
  * Copy cpy_num node pointers and cpy_num - 1 items from buffer src to
@@ -477,13 +560,19 @@ static void internal_move_pointers_items(struct buffer_info *dest_bi,
 		first_pointer = 0;
 		first_item = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* delete cpy_num - del_par pointers and keys starting for pointers with first_pointer,
 		   for key - with first_item */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * delete cpy_num - del_par pointers and keys starting for
 		 * pointers with first_pointer, for key - with first_item
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		internal_delete_pointers_items(src_bi, first_pointer,
 					       first_item, cpy_num - del_par);
@@ -503,7 +592,13 @@ static void internal_move_pointers_items(struct buffer_info *dest_bi,
 
 /* Insert n_src'th key of buffer src before n_dest'th key of buffer dest. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void internal_insert_key(struct buffer_info *dest_bi, int dest_position_before,	/* insert key before key with n_dest number */
+=======
+static void internal_insert_key(struct buffer_info *dest_bi,
+				/* insert key before key with n_dest number */
+				int dest_position_before,
+>>>>>>> v3.18
 =======
 static void internal_insert_key(struct buffer_info *dest_bi,
 				/* insert key before key with n_dest number */
@@ -534,7 +629,11 @@ static void internal_insert_key(struct buffer_info *dest_bi,
 
 	/* prepare space for inserting key */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key = B_N_PDELIM_KEY(dest, dest_position_before);
+=======
+	key = internal_key(dest, dest_position_before);
+>>>>>>> v3.18
 =======
 	key = internal_key(dest, dest_position_before);
 >>>>>>> v3.18
@@ -543,7 +642,11 @@ static void internal_insert_key(struct buffer_info *dest_bi,
 
 	/* insert key */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(key, B_N_PDELIM_KEY(src, src_position), KEY_SIZE);
+=======
+	memcpy(key, internal_key(src, src_position), KEY_SIZE);
+>>>>>>> v3.18
 =======
 	memcpy(key, internal_key(src, src_position), KEY_SIZE);
 >>>>>>> v3.18
@@ -566,26 +669,38 @@ static void internal_insert_key(struct buffer_info *dest_bi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Insert d_key'th (delimiting) key from buffer cfl to tail of dest.
  * Copy pointer_amount node pointers and pointer_amount - 1 items from buffer src to buffer dest.
 =======
+=======
+>>>>>>> v3.18
 /*
  * Insert d_key'th (delimiting) key from buffer cfl to tail of dest.
  * Copy pointer_amount node pointers and pointer_amount - 1 items from
  * buffer src to buffer dest.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Replace  d_key'th key in buffer cfl.
  * Delete pointer_amount items and node pointers from buffer src.
  */
 /* this can be invoked both to shift from S to L and from R to S */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void internal_shift_left(int mode,	/* INTERNAL_FROM_S_TO_L | INTERNAL_FROM_R_TO_S */
 =======
+=======
+>>>>>>> v3.18
 static void internal_shift_left(
 				/*
 				 * INTERNAL_FROM_S_TO_L | INTERNAL_FROM_R_TO_S
 				 */
 				int mode,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				struct tree_balance *tb,
 				int h, int pointer_amount)
@@ -601,12 +716,18 @@ static void internal_shift_left(
 
 	if (pointer_amount) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* insert delimiting key from common father of dest and src to node dest into position B_NR_ITEM(dest) */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * insert delimiting key from common father of dest and
 		 * src to node dest into position B_NR_ITEM(dest)
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		internal_insert_key(&dest_bi, B_NR_ITEMS(dest_bi.bi_bh), cf,
 				    d_key_position);
@@ -627,7 +748,12 @@ static void internal_shift_left(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Insert delimiting key to L[h].
+=======
+/*
+ * Insert delimiting key to L[h].
+>>>>>>> v3.18
 =======
 /*
  * Insert delimiting key to L[h].
@@ -647,43 +773,61 @@ static void internal_shift1_left(struct tree_balance *tb,
 				       &dest_bi, &src_bi, &d_key_position, &cf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pointer_amount > 0)	/* insert lkey[h]-th key  from CFL[h] to left neighbor L[h] */
 		internal_insert_key(&dest_bi, B_NR_ITEMS(dest_bi.bi_bh), cf,
 				    d_key_position);
 	/*            internal_insert_key (tb->L[h], B_NR_ITEM(tb->L[h]), tb->CFL[h], tb->lkey[h]); */
 =======
+=======
+>>>>>>> v3.18
 	/* insert lkey[h]-th key  from CFL[h] to left neighbor L[h] */
 	if (pointer_amount > 0)
 		internal_insert_key(&dest_bi, B_NR_ITEMS(dest_bi.bi_bh), cf,
 				    d_key_position);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* last parameter is del_parameter */
 	internal_move_pointers_items(&dest_bi, &src_bi, FIRST_TO_LAST,
 				     pointer_amount, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*    internal_move_pointers_items (tb->L[h], tb->S[h], FIRST_TO_LAST, pointer_amount, 1); */
 }
 
 /* Insert d_key'th (delimiting) key from buffer cfr to head of dest.
 =======
+=======
+>>>>>>> v3.18
 }
 
 /*
  * Insert d_key'th (delimiting) key from buffer cfr to head of dest.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Copy n node pointers and n - 1 items from buffer src to buffer dest.
  * Replace  d_key'th key in buffer cfr.
  * Delete n items and node pointers from buffer src.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void internal_shift_right(int mode,	/* INTERNAL_FROM_S_TO_R | INTERNAL_FROM_L_TO_S */
 =======
+=======
+>>>>>>> v3.18
 static void internal_shift_right(
 				 /*
 				  * INTERNAL_FROM_S_TO_R | INTERNAL_FROM_L_TO_S
 				  */
 				 int mode,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 struct tree_balance *tb,
 				 int h, int pointer_amount)
@@ -700,12 +844,18 @@ static void internal_shift_right(
 
 	if (pointer_amount > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* insert delimiting key from common father of dest and src to dest node into position 0 */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * insert delimiting key from common father of dest
 		 * and src to dest node into position 0
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		internal_insert_key(&dest_bi, 0, cf, d_key_position);
 		if (nr == pointer_amount - 1) {
@@ -728,7 +878,12 @@ static void internal_shift_right(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Insert delimiting key to R[h].
+=======
+/*
+ * Insert delimiting key to R[h].
+>>>>>>> v3.18
 =======
 /*
  * Insert delimiting key to R[h].
@@ -748,9 +903,15 @@ static void internal_shift1_right(struct tree_balance *tb,
 				       &dest_bi, &src_bi, &d_key_position, &cf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pointer_amount > 0)	/* insert rkey from CFR[h] to right neighbor R[h] */
 		internal_insert_key(&dest_bi, 0, cf, d_key_position);
 	/*            internal_insert_key (tb->R[h], 0, tb->CFR[h], tb->rkey[h]); */
+=======
+	/* insert rkey from CFR[h] to right neighbor R[h] */
+	if (pointer_amount > 0)
+		internal_insert_key(&dest_bi, 0, cf, d_key_position);
+>>>>>>> v3.18
 =======
 	/* insert rkey from CFR[h] to right neighbor R[h] */
 	if (pointer_amount > 0)
@@ -761,18 +922,24 @@ static void internal_shift1_right(struct tree_balance *tb,
 	internal_move_pointers_items(&dest_bi, &src_bi, LAST_TO_FIRST,
 				     pointer_amount, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*    internal_move_pointers_items (tb->R[h], tb->S[h], LAST_TO_FIRST, pointer_amount, 1); */
 }
 
 /* Delete insert_num node pointers together with their left items
  * and balance current node.*/
 =======
+=======
+>>>>>>> v3.18
 }
 
 /*
  * Delete insert_num node pointers together with their left items
  * and balance current node.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void balance_internal_when_delete(struct tree_balance *tb,
 					 int h, int child_pos)
@@ -815,15 +982,21 @@ static void balance_internal_when_delete(struct tree_balance *tb,
 			else
 				new_root = tb->L[h - 1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* switch super block's tree root block number to the new value */
 			PUT_SB_ROOT_BLOCK(tb->tb_sb, new_root->b_blocknr);
 			//REISERFS_SB(tb->tb_sb)->s_rs->s_tree_height --;
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * switch super block's tree root block
 			 * number to the new value */
 			PUT_SB_ROOT_BLOCK(tb->tb_sb, new_root->b_blocknr);
 			/*REISERFS_SB(tb->tb_sb)->s_rs->s_tree_height --; */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			PUT_SB_TREE_HEIGHT(tb->tb_sb,
 					   SB_TREE_HEIGHT(tb->tb_sb) - 1);
@@ -833,8 +1006,13 @@ static void balance_internal_when_delete(struct tree_balance *tb,
 						 1);
 			/*&&&&&&&&&&&&&&&&&&&&&& */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (h > 1)
 				/* use check_internal if new root is an internal node */
+=======
+			/* use check_internal if new root is an internal node */
+			if (h > 1)
+>>>>>>> v3.18
 =======
 			/* use check_internal if new root is an internal node */
 			if (h > 1)
@@ -850,7 +1028,12 @@ static void balance_internal_when_delete(struct tree_balance *tb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tb->L[h] && tb->lnum[h] == -B_NR_ITEMS(tb->L[h]) - 1) {	/* join S[h] with L[h] */
+=======
+	/* join S[h] with L[h] */
+	if (tb->L[h] && tb->lnum[h] == -B_NR_ITEMS(tb->L[h]) - 1) {
+>>>>>>> v3.18
 =======
 	/* join S[h] with L[h] */
 	if (tb->L[h] && tb->lnum[h] == -B_NR_ITEMS(tb->L[h]) - 1) {
@@ -867,7 +1050,12 @@ static void balance_internal_when_delete(struct tree_balance *tb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tb->R[h] && tb->rnum[h] == -B_NR_ITEMS(tb->R[h]) - 1) {	/* join S[h] with R[h] */
+=======
+	/* join S[h] with R[h] */
+	if (tb->R[h] && tb->rnum[h] == -B_NR_ITEMS(tb->R[h]) - 1) {
+>>>>>>> v3.18
 =======
 	/* join S[h] with R[h] */
 	if (tb->R[h] && tb->rnum[h] == -B_NR_ITEMS(tb->R[h]) - 1) {
@@ -883,17 +1071,23 @@ static void balance_internal_when_delete(struct tree_balance *tb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tb->lnum[h] < 0) {	/* borrow from left neighbor L[h] */
 		RFALSE(tb->rnum[h] != 0,
 		       "wrong tb->rnum[%d]==%d when borrow from L[h]", h,
 		       tb->rnum[h]);
 		/*internal_shift_right (tb, h, tb->L[h], tb->CFL[h], tb->lkey[h], tb->S[h], -tb->lnum[h]); */
 =======
+=======
+>>>>>>> v3.18
 	/* borrow from left neighbor L[h] */
 	if (tb->lnum[h] < 0) {
 		RFALSE(tb->rnum[h] != 0,
 		       "wrong tb->rnum[%d]==%d when borrow from L[h]", h,
 		       tb->rnum[h]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		internal_shift_right(INTERNAL_SHIFT_FROM_L_TO_S, tb, h,
 				     -tb->lnum[h]);
@@ -901,7 +1095,12 @@ static void balance_internal_when_delete(struct tree_balance *tb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tb->rnum[h] < 0) {	/* borrow from right neighbor R[h] */
+=======
+	/* borrow from right neighbor R[h] */
+	if (tb->rnum[h] < 0) {
+>>>>>>> v3.18
 =======
 	/* borrow from right neighbor R[h] */
 	if (tb->rnum[h] < 0) {
@@ -914,7 +1113,12 @@ static void balance_internal_when_delete(struct tree_balance *tb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tb->lnum[h] > 0) {	/* split S[h] into two parts and put them into neighbors */
+=======
+	/* split S[h] into two parts and put them into neighbors */
+	if (tb->lnum[h] > 0) {
+>>>>>>> v3.18
 =======
 	/* split S[h] into two parts and put them into neighbors */
 	if (tb->lnum[h] > 0) {
@@ -947,7 +1151,11 @@ static void replace_lkey(struct tree_balance *tb, int h, struct item_head *key)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(B_N_PDELIM_KEY(tb->CFL[h], tb->lkey[h]), key, KEY_SIZE);
+=======
+	memcpy(internal_key(tb->CFL[h], tb->lkey[h]), key, KEY_SIZE);
+>>>>>>> v3.18
 =======
 	memcpy(internal_key(tb->CFL[h], tb->lkey[h]), key, KEY_SIZE);
 >>>>>>> v3.18
@@ -966,7 +1174,11 @@ static void replace_rkey(struct tree_balance *tb, int h, struct item_head *key)
 	       B_NR_ITEMS(tb->R[h]));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(B_N_PDELIM_KEY(tb->CFR[h], tb->rkey[h]), key, KEY_SIZE);
+=======
+	memcpy(internal_key(tb->CFR[h], tb->rkey[h]), key, KEY_SIZE);
+>>>>>>> v3.18
 =======
 	memcpy(internal_key(tb->CFR[h], tb->rkey[h]), key, KEY_SIZE);
 >>>>>>> v3.18
@@ -974,6 +1186,7 @@ static void replace_rkey(struct tree_balance *tb, int h, struct item_head *key)
 	do_balance_mark_internal_dirty(tb, tb->CFR[h], 0);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int balance_internal(struct tree_balance *tb,	/* tree_balance structure               */
 		     int h,	/* level of the tree                    */
@@ -999,6 +1212,8 @@ int balance_internal(struct tree_balance *tb,	/* tree_balance structure         
 	struct buffer_info bi;
 	int order;		/* we return this: it is 0 if there is no S[h], else it is tb->S[h]->b_item_order */
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * if inserting/pasting {
@@ -1029,6 +1244,9 @@ int balance_internal(struct tree_balance *tb,
 	 * else it is tb->S[h]->b_item_order
 	 */
 	int order;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int insert_num, n, k;
 	struct buffer_head *S_new;
@@ -1045,13 +1263,19 @@ int balance_internal(struct tree_balance *tb,
 				     h + 1) /*tb->S[h]->b_item_order */ : 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Using insert_size[h] calculate the number insert_num of items
 	   that must be inserted to or deleted from S[h]. */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Using insert_size[h] calculate the number insert_num of items
 	 * that must be inserted to or deleted from S[h].
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	insert_num = tb->insert_size[h] / ((int)(KEY_SIZE + DC_SIZE));
 
@@ -1072,15 +1296,21 @@ int balance_internal(struct tree_balance *tb,
 	k = 0;
 	if (tb->lnum[h] > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* shift lnum[h] items from S[h] to the left neighbor L[h].
 		   check how many of new items fall into L[h] or CFL[h] after
 		   shifting */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * shift lnum[h] items from S[h] to the left neighbor L[h].
 		 * check how many of new items fall into L[h] or CFL[h] after
 		 * shifting
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		n = B_NR_ITEMS(tb->L[h]);	/* number of items in L[h] */
 		if (tb->lnum[h] <= child_pos) {
@@ -1088,7 +1318,10 @@ int balance_internal(struct tree_balance *tb,
 			internal_shift_left(INTERNAL_SHIFT_FROM_S_TO_L, tb, h,
 					    tb->lnum[h]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*internal_shift_left (tb->L[h],tb->CFL[h],tb->lkey[h],tbSh,tb->lnum[h]); */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			child_pos -= tb->lnum[h];
@@ -1097,9 +1330,12 @@ int balance_internal(struct tree_balance *tb,
 			internal_shift_left(INTERNAL_SHIFT_FROM_S_TO_L, tb, h,
 					    tb->lnum[h] - insert_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*                  internal_shift_left(tb->L[h],tb->CFL[h],tb->lkey[h],tbSh,
 			   tb->lnum[h]-insert_num);
 			 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/* insert insert_num keys and node-pointers into L[h] */
@@ -1118,12 +1354,18 @@ int balance_internal(struct tree_balance *tb,
 			struct disk_child *dc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* some items fall into L[h] or CFL[h], but some don't fall */
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * some items fall into L[h] or CFL[h],
 			 * but some don't fall
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			internal_shift1_left(tb, h, child_pos + 1);
 			/* calculate number of new items that fall into L[h] */
@@ -1140,12 +1382,18 @@ int balance_internal(struct tree_balance *tb,
 			replace_lkey(tb, h, insert_key + k);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* replace the first node-ptr in S[h] by node-ptr to insert_ptr[k] */
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * replace the first node-ptr in S[h] by
 			 * node-ptr to insert_ptr[k]
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dc = B_N_CHILD(tbSh, 0);
 			put_dc_size(dc,
@@ -1166,12 +1414,15 @@ int balance_internal(struct tree_balance *tb,
 	if (tb->rnum[h] > 0) {
 		/*shift rnum[h] items from S[h] to the right neighbor R[h] */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* check how many of new items fall into R or CFR after shifting */
 		n = B_NR_ITEMS(tbSh);	/* number of items in S[h] */
 		if (n - tb->rnum[h] >= child_pos)
 			/* new items fall into S[h] */
 			/*internal_shift_right(tb,h,tbSh,tb->CFR[h],tb->rkey[h],tb->R[h],tb->rnum[h]); */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * check how many of new items fall into R or CFR
 		 * after shifting
@@ -1179,14 +1430,20 @@ int balance_internal(struct tree_balance *tb,
 		n = B_NR_ITEMS(tbSh);	/* number of items in S[h] */
 		if (n - tb->rnum[h] >= child_pos)
 			/* new items fall into S[h] */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			internal_shift_right(INTERNAL_SHIFT_FROM_S_TO_R, tb, h,
 					     tb->rnum[h]);
 		else if (n + insert_num - tb->rnum[h] < child_pos) {
 			/* all new items fall into R[h] */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*internal_shift_right(tb,h,tbSh,tb->CFR[h],tb->rkey[h],tb->R[h],
 			   tb->rnum[h] - insert_num); */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			internal_shift_right(INTERNAL_SHIFT_FROM_S_TO_R, tb, h,
@@ -1223,12 +1480,18 @@ int balance_internal(struct tree_balance *tb,
 			replace_rkey(tb, h, insert_key + insert_num - k - 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* replace the first node-ptr in R[h] by node-ptr insert_ptr[insert_num-k-1] */
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * replace the first node-ptr in R[h] by
 			 * node-ptr insert_ptr[insert_num-k-1]
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dc = B_N_CHILD(tb->R[h], 0);
 			put_dc_size(dc,
@@ -1247,7 +1510,11 @@ int balance_internal(struct tree_balance *tb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     /** Fill new node that appears instead of S[h] **/
+=======
+	/** Fill new node that appears instead of S[h] **/
+>>>>>>> v3.18
 =======
 	/** Fill new node that appears instead of S[h] **/
 >>>>>>> v3.18
@@ -1327,7 +1594,11 @@ int balance_internal(struct tree_balance *tb,
 			/*  store the delimiting key for the next level */
 			/* new_insert_key = (n - snum)'th key in S[h] */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(&new_insert_key, B_N_PDELIM_KEY(tbSh, n - snum),
+=======
+			memcpy(&new_insert_key, internal_key(tbSh, n - snum),
+>>>>>>> v3.18
 =======
 			memcpy(&new_insert_key, internal_key(tbSh, n - snum),
 >>>>>>> v3.18
@@ -1335,6 +1606,7 @@ int balance_internal(struct tree_balance *tb,
 			/* last parameter is del_par */
 			internal_move_pointers_items(&dest_bi, &src_bi,
 						     LAST_TO_FIRST, snum, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/*            internal_move_pointers_items(S_new, tbSh, LAST_TO_FIRST, snum, 0); */
 		} else if (n + insert_num - snum < child_pos) {
@@ -1344,6 +1616,8 @@ int balance_internal(struct tree_balance *tb,
 			memcpy(&new_insert_key,
 			       B_N_PDELIM_KEY(tbSh, n + insert_num - snum),
 =======
+=======
+>>>>>>> v3.18
 		} else if (n + insert_num - snum < child_pos) {
 			/* all new items fall into S_new */
 			/*  store the delimiting key for the next level */
@@ -1353,6 +1627,9 @@ int balance_internal(struct tree_balance *tb,
 			 */
 			memcpy(&new_insert_key,
 			       internal_key(tbSh, n + insert_num - snum),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			       KEY_SIZE);
 			/* last parameter is del_par */
@@ -1360,15 +1637,21 @@ int balance_internal(struct tree_balance *tb,
 						     LAST_TO_FIRST,
 						     snum - insert_num, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*                  internal_move_pointers_items(S_new,tbSh,1,snum - insert_num,0); */
 
 			/* insert insert_num keys and node-pointers into S_new */
 =======
+=======
+>>>>>>> v3.18
 
 			/*
 			 * insert insert_num keys and node-pointers
 			 * into S_new
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			internal_insert_childs(&dest_bi,
 					       /*S_new,tb->S[h-1]->b_next, */
@@ -1387,7 +1670,10 @@ int balance_internal(struct tree_balance *tb,
 						     LAST_TO_FIRST,
 						     n - child_pos + 1, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*                  internal_move_pointers_items(S_new,tbSh,1,n - child_pos + 1,1); */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/* calculate number of new items that fall into S_new */
@@ -1400,12 +1686,18 @@ int balance_internal(struct tree_balance *tb,
 			memcpy(&new_insert_key, insert_key + insert_num - k - 1,
 			       KEY_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* replace first node-ptr in S_new by node-ptr to insert_ptr[insert_num-k-1] */
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * replace first node-ptr in S_new by node-ptr
 			 * to insert_ptr[insert_num-k-1]
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			dc = B_N_CHILD(S_new, 0);
@@ -1430,7 +1722,11 @@ int balance_internal(struct tree_balance *tb,
 		       S_new);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// S_new is released in unfix_nodes
+=======
+		/* S_new is released in unfix_nodes */
+>>>>>>> v3.18
 =======
 		/* S_new is released in unfix_nodes */
 >>>>>>> v3.18
@@ -1450,9 +1746,14 @@ int balance_internal(struct tree_balance *tb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	insert_ptr[0] = new_insert_ptr;
 	if (new_insert_ptr)
 		memcpy(new_insert_key_addr, &new_insert_key, KEY_SIZE);
+=======
+	memcpy(new_insert_key_addr, &new_insert_key, KEY_SIZE);
+	insert_ptr[0] = new_insert_ptr;
+>>>>>>> v3.18
 =======
 	memcpy(new_insert_key_addr, &new_insert_key, KEY_SIZE);
 	insert_ptr[0] = new_insert_ptr;

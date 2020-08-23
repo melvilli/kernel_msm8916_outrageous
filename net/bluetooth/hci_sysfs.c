@@ -1,9 +1,13 @@
 /* Bluetooth HCI driver model support. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/debugfs.h>
 #include <linux/module.h>
 #include <asm/unaligned.h>
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -14,9 +18,12 @@
 static struct class *bt_class;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dentry *bt_debugfs;
 EXPORT_SYMBOL_GPL(bt_debugfs);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline char *link_typetostr(int type)
@@ -50,6 +57,7 @@ static ssize_t show_link_address(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_link_features(struct device *dev,
 				  struct device_attribute *attr, char *buf)
 {
@@ -64,19 +72,25 @@ static ssize_t show_link_features(struct device *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define LINK_ATTR(_name, _mode, _show, _store) \
 struct device_attribute link_attr_##_name = __ATTR(_name, _mode, _show, _store)
 
 static LINK_ATTR(type, S_IRUGO, show_link_type, NULL);
 static LINK_ATTR(address, S_IRUGO, show_link_address, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static LINK_ATTR(features, S_IRUGO, show_link_features, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 static struct attribute *bt_link_attrs[] = {
 	&link_attr_type.attr,
 	&link_attr_address.attr,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	&link_attr_features.attr,
 	NULL
@@ -91,10 +105,15 @@ static const struct attribute_group *bt_link_groups[] = {
 	NULL
 };
 =======
+=======
+>>>>>>> v3.18
 	NULL
 };
 
 ATTRIBUTE_GROUPS(bt_link);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void bt_link_release(struct device *dev)
@@ -124,7 +143,11 @@ void hci_conn_init_sysfs(struct hci_conn *conn)
 	struct hci_dev *hdev = conn->hdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("conn %pK", conn);
+=======
+	BT_DBG("conn %p", conn);
+>>>>>>> v3.18
 =======
 	BT_DBG("conn %p", conn);
 >>>>>>> v3.18
@@ -141,7 +164,11 @@ void hci_conn_add_sysfs(struct hci_conn *conn)
 	struct hci_dev *hdev = conn->hdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("conn %pK", conn);
+=======
+	BT_DBG("conn %p", conn);
+>>>>>>> v3.18
 =======
 	BT_DBG("conn %p", conn);
 >>>>>>> v3.18
@@ -179,6 +206,7 @@ void hci_conn_del_sysfs(struct hci_conn *conn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline char *host_bustostr(int bus)
 {
 	switch (bus) {
@@ -203,6 +231,8 @@ static inline char *host_bustostr(int bus)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline char *host_typetostr(int type)
 {
 	switch (type) {
@@ -216,6 +246,7 @@ static inline char *host_typetostr(int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_bus(struct device *dev,
 			struct device_attribute *attr, char *buf)
 {
@@ -223,6 +254,8 @@ static ssize_t show_bus(struct device *dev,
 	return sprintf(buf, "%s\n", host_bustostr(hdev->bus));
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t show_type(struct device *dev,
@@ -247,6 +280,7 @@ static ssize_t show_name(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_class(struct device *dev,
 			  struct device_attribute *attr, char *buf)
 {
@@ -257,6 +291,8 @@ static ssize_t show_class(struct device *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static ssize_t show_address(struct device *dev,
 			    struct device_attribute *attr, char *buf)
 {
@@ -264,6 +300,7 @@ static ssize_t show_address(struct device *dev,
 	return sprintf(buf, "%pMR\n", &hdev->bdaddr);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t show_features(struct device *dev,
 			     struct device_attribute *attr, char *buf)
@@ -421,6 +458,8 @@ static const struct attribute_group *bt_host_groups[] = {
 	NULL
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(type, S_IRUGO, show_type, NULL);
 static DEVICE_ATTR(name, S_IRUGO, show_name, NULL);
 static DEVICE_ATTR(address, S_IRUGO, show_address, NULL);
@@ -433,6 +472,9 @@ static struct attribute *bt_host_attrs[] = {
 };
 
 ATTRIBUTE_GROUPS(bt_host);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void bt_host_release(struct device *dev)
@@ -448,6 +490,7 @@ static struct device_type bt_host = {
 	.release = bt_host_release,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int inquiry_cache_show(struct seq_file *f, void *p)
 {
@@ -586,6 +629,8 @@ DEFINE_SIMPLE_ATTRIBUTE(auto_accept_delay_fops, auto_accept_delay_get,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void hci_init_sysfs(struct hci_dev *hdev)
 {
 	struct device *dev = &hdev->dev;
@@ -597,6 +642,7 @@ void hci_init_sysfs(struct hci_dev *hdev)
 	device_initialize(dev);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int hci_add_sysfs(struct hci_dev *hdev)
 {
@@ -648,11 +694,16 @@ int __init bt_sysfs_init(void)
 
 	return PTR_RET(bt_class);
 =======
+=======
+>>>>>>> v3.18
 int __init bt_sysfs_init(void)
 {
 	bt_class = class_create(THIS_MODULE, "bluetooth");
 
 	return PTR_ERR_OR_ZERO(bt_class);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -660,8 +711,11 @@ void bt_sysfs_cleanup(void)
 {
 	class_destroy(bt_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	debugfs_remove_recursive(bt_debugfs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

@@ -24,7 +24,10 @@
 #define NFSDBG_FACILITY		NFSDBG_STATE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void nfs4_init_slot_table(struct nfs4_slot_table *tbl, const char *queue)
 {
 	tbl->highest_used_slotid = NFS4_NO_SLOT;
@@ -33,6 +36,9 @@ static void nfs4_init_slot_table(struct nfs4_slot_table *tbl, const char *queue)
 	init_completion(&tbl->complete);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * nfs4_shrink_slot_table - free retired slots from the slot table
@@ -56,7 +62,10 @@ static void nfs4_shrink_slot_table(struct nfs4_slot_table  *tbl, u32 newsize)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nfs4_slot_tbl_drain_complete - wake waiters when drain is complete
  * @tbl - controlling slot table
@@ -68,6 +77,9 @@ void nfs4_slot_tbl_drain_complete(struct nfs4_slot_table *tbl)
 		complete(&tbl->complete);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * nfs4_free_slot - free a slot and efficiently update slot table.
@@ -102,7 +114,11 @@ void nfs4_free_slot(struct nfs4_slot_table *tbl, struct nfs4_slot *slot)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("%s: slotid %u highest_used_slotid %d\n", __func__,
+=======
+	dprintk("%s: slotid %u highest_used_slotid %u\n", __func__,
+>>>>>>> v3.18
 =======
 	dprintk("%s: slotid %u highest_used_slotid %u\n", __func__,
 >>>>>>> v3.18
@@ -176,9 +192,15 @@ struct nfs4_slot *nfs4_alloc_slot(struct nfs4_slot_table *tbl)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("<-- %s used_slots=%04lx highest_used=%d slotid=%d \n",
 		__func__, tbl->used_slots[0], tbl->highest_used_slotid,
 		!IS_ERR(ret) ? ret->slot_nr : -1);
+=======
+	dprintk("<-- %s used_slots=%04lx highest_used=%u slotid=%u\n",
+		__func__, tbl->used_slots[0], tbl->highest_used_slotid,
+		!IS_ERR(ret) ? ret->slot_nr : NFS4_NO_SLOT);
+>>>>>>> v3.18
 =======
 	dprintk("<-- %s used_slots=%04lx highest_used=%u slotid=%u\n",
 		__func__, tbl->used_slots[0], tbl->highest_used_slotid,
@@ -227,7 +249,11 @@ static int nfs4_realloc_slot_table(struct nfs4_slot_table *tbl,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("--> %s: max_reqs=%u, tbl->max_slots %d\n", __func__,
+=======
+	dprintk("--> %s: max_reqs=%u, tbl->max_slots %u\n", __func__,
+>>>>>>> v3.18
 =======
 	dprintk("--> %s: max_reqs=%u, tbl->max_slots %u\n", __func__,
 >>>>>>> v3.18
@@ -245,7 +271,11 @@ static int nfs4_realloc_slot_table(struct nfs4_slot_table *tbl,
 	spin_unlock(&tbl->slot_tbl_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("%s: tbl=%p slots=%p max_slots=%d\n", __func__,
+=======
+	dprintk("%s: tbl=%p slots=%p max_slots=%u\n", __func__,
+>>>>>>> v3.18
 =======
 	dprintk("%s: tbl=%p slots=%p max_slots=%u\n", __func__,
 >>>>>>> v3.18
@@ -256,12 +286,15 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Destroy the slot table */
 static void nfs4_destroy_slot_tables(struct nfs4_session *session)
 {
 	nfs4_shrink_slot_table(&session->fc_slot_table, 0);
 	nfs4_shrink_slot_table(&session->bc_slot_table, 0);
 =======
+=======
+>>>>>>> v3.18
 /*
  * nfs4_release_slot_table - release all slot table entries
  */
@@ -294,6 +327,9 @@ int nfs4_setup_slot_table(struct nfs4_slot_table *tbl, unsigned int max_reqs,
 {
 	nfs4_init_slot_table(tbl, queue);
 	return nfs4_realloc_slot_table(tbl, max_reqs, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -352,6 +388,11 @@ void nfs41_wake_slot_table(struct nfs4_slot_table *tbl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_NFS_V4_1)
+
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_NFS_V4_1)
 
@@ -467,13 +508,19 @@ void nfs41_update_target_slotid(struct nfs4_slot_table *tbl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void nfs4_release_session_slot_tables(struct nfs4_session *session)
 {
 	nfs4_release_slot_table(&session->fc_slot_table);
 	nfs4_release_slot_table(&session->bc_slot_table);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Initialize or reset the forechannel and backchannel tables
@@ -498,7 +545,11 @@ int nfs4_setup_session_slot_tables(struct nfs4_session *ses)
 		/* Fore and back channel share a connection so get
 		 * both slot tables or neither */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nfs4_destroy_slot_tables(ses);
+=======
+		nfs4_release_session_slot_tables(ses);
+>>>>>>> v3.18
 =======
 		nfs4_release_session_slot_tables(ses);
 >>>>>>> v3.18
@@ -509,7 +560,10 @@ struct nfs4_session *nfs4_alloc_session(struct nfs_client *clp)
 {
 	struct nfs4_session *session;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfs4_slot_table *tbl;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -517,6 +571,7 @@ struct nfs4_session *nfs4_alloc_session(struct nfs_client *clp)
 	if (!session)
 		return NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tbl = &session->fc_slot_table;
 	tbl->highest_used_slotid = NFS4_NO_SLOT;
@@ -534,6 +589,10 @@ struct nfs4_session *nfs4_alloc_session(struct nfs_client *clp)
 	nfs4_init_slot_table(&session->fc_slot_table, "ForeChannel Slot table");
 	nfs4_init_slot_table(&session->bc_slot_table, "BackChannel Slot table");
 >>>>>>> v3.18
+=======
+	nfs4_init_slot_table(&session->fc_slot_table, "ForeChannel Slot table");
+	nfs4_init_slot_table(&session->bc_slot_table, "BackChannel Slot table");
+>>>>>>> v3.18
 	session->session_state = 1<<NFS4_SESSION_INITING;
 
 	session->clp = clp;
@@ -541,13 +600,19 @@ struct nfs4_session *nfs4_alloc_session(struct nfs_client *clp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void nfs4_destroy_session_slot_tables(struct nfs4_session *session)
 {
 	nfs4_shutdown_slot_table(&session->fc_slot_table);
 	nfs4_shutdown_slot_table(&session->bc_slot_table);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void nfs4_destroy_session(struct nfs4_session *session)
 {
@@ -555,7 +620,11 @@ void nfs4_destroy_session(struct nfs4_session *session)
 	struct rpc_cred *cred;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cred = nfs4_get_exchange_id_cred(session->clp);
+=======
+	cred = nfs4_get_clid_cred(session->clp);
+>>>>>>> v3.18
 =======
 	cred = nfs4_get_clid_cred(session->clp);
 >>>>>>> v3.18
@@ -570,7 +639,11 @@ void nfs4_destroy_session(struct nfs4_session *session)
 		__func__, xprt);
 	xprt_destroy_backchannel(xprt, NFS41_BC_MIN_CALLBACKS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nfs4_destroy_slot_tables(session);
+=======
+	nfs4_destroy_session_slot_tables(session);
+>>>>>>> v3.18
 =======
 	nfs4_destroy_session_slot_tables(session);
 >>>>>>> v3.18
@@ -599,6 +672,7 @@ static int nfs41_check_session_ready(struct nfs_client *clp)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int nfs4_init_session(struct nfs_server *server)
 {
@@ -643,12 +717,17 @@ int nfs4_init_session(struct nfs_server *server)
 		nfs4_schedule_lease_recovery(clp);
 
 =======
+=======
+>>>>>>> v3.18
 int nfs4_init_session(struct nfs_client *clp)
 {
 	if (!nfs4_has_session(clp))
 		return 0;
 
 	clear_bit(NFS4_SESSION_INITING, &clp->cl_session->session_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return nfs41_check_session_ready(clp);
 }
@@ -680,7 +759,11 @@ int nfs4_init_ds_session(struct nfs_client *clp, unsigned long lease_time)
 EXPORT_SYMBOL_GPL(nfs4_init_ds_session);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#endif	/* defined(CONFIG_NFS_V4_1) */
+>>>>>>> v3.18
 =======
 #endif	/* defined(CONFIG_NFS_V4_1) */
 >>>>>>> v3.18

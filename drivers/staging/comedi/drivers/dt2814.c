@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -43,23 +46,32 @@ addition, the clock does not seem to be very accurate.
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include "../comedidev.h"
 
 #include <linux/ioport.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/interrupt.h>
 #include "../comedidev.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/delay.h>
 
 #include "comedi_fc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DT2814_SIZE 2
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DT2814_CSR 0
@@ -85,7 +97,10 @@ struct dt2814_private {
 #define DT2814_MAX_SPEED 100000	/* Arbitrary 10 khz limit */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int dt2814_ai_eoc(struct comedi_device *dev,
 			 struct comedi_subdevice *s,
 			 struct comedi_insn *insn,
@@ -99,15 +114,24 @@ static int dt2814_ai_eoc(struct comedi_device *dev,
 	return -EBUSY;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int dt2814_ai_insn_read(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
 			       struct comedi_insn *insn, unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int n, i, hi, lo;
 	int chan;
 	int status = 0;
+=======
+	int n, hi, lo;
+	int chan;
+	int ret;
+>>>>>>> v3.18
 =======
 	int n, hi, lo;
 	int chan;
@@ -118,6 +142,7 @@ static int dt2814_ai_insn_read(struct comedi_device *dev,
 		chan = CR_CHAN(insn->chanspec);
 
 		outb(chan, dev->iobase + DT2814_CSR);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for (i = 0; i < DT2814_TIMEOUT; i++) {
 			status = inb(dev->iobase + DT2814_CSR);
@@ -131,10 +156,15 @@ static int dt2814_ai_insn_read(struct comedi_device *dev,
 			return -ETIMEDOUT;
 		}
 =======
+=======
+>>>>>>> v3.18
 
 		ret = comedi_timeout(dev, s, insn, dt2814_ai_eoc, 0);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		hi = inb(dev->iobase + DT2814_DATA);
@@ -170,7 +200,11 @@ static int dt2814_ai_cmdtest(struct comedi_device *dev,
 {
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int tmp;
+=======
+	unsigned int arg;
+>>>>>>> v3.18
 =======
 	unsigned int arg;
 >>>>>>> v3.18
@@ -216,10 +250,16 @@ static int dt2814_ai_cmdtest(struct comedi_device *dev,
 	/* step 4: fix up any arguments */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = cmd->scan_begin_arg;
 	dt2814_ns_to_timer(&cmd->scan_begin_arg, cmd->flags & TRIG_ROUND_MASK);
 	if (tmp != cmd->scan_begin_arg)
 		err++;
+=======
+	arg = cmd->scan_begin_arg;
+	dt2814_ns_to_timer(&arg, cmd->flags);
+	err |= cfc_check_trigger_arg_is(&cmd->scan_begin_arg, arg);
+>>>>>>> v3.18
 =======
 	arg = cmd->scan_begin_arg;
 	dt2814_ns_to_timer(&arg, cmd->flags);
@@ -240,9 +280,13 @@ static int dt2814_ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	int trigvar;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trigvar =
 	    dt2814_ns_to_timer(&cmd->scan_begin_arg,
 			       cmd->flags & TRIG_ROUND_MASK);
+=======
+	trigvar = dt2814_ns_to_timer(&cmd->scan_begin_arg, cmd->flags);
+>>>>>>> v3.18
 =======
 	trigvar = dt2814_ns_to_timer(&cmd->scan_begin_arg, cmd->flags);
 >>>>>>> v3.18
@@ -262,6 +306,7 @@ static irqreturn_t dt2814_interrupt(int irq, void *d)
 	struct comedi_device *dev = d;
 	struct dt2814_private *devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct comedi_subdevice *s;
 	int data;
 
@@ -273,6 +318,8 @@ static irqreturn_t dt2814_interrupt(int irq, void *d)
 	s = &dev->subdevices[0];
 
 =======
+=======
+>>>>>>> v3.18
 	struct comedi_subdevice *s = dev->read_subdev;
 	int data;
 
@@ -281,6 +328,9 @@ static irqreturn_t dt2814_interrupt(int irq, void *d)
 		return IRQ_HANDLED;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hi = inb(dev->iobase + DT2814_DATA);
 	lo = inb(dev->iobase + DT2814_DATA);
@@ -311,17 +361,23 @@ static int dt2814_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 {
 	struct dt2814_private *devpriv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, irq;
 	int ret;
 	struct comedi_subdevice *s;
 
 	ret = comedi_request_region(dev, it->options[0], DT2814_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	struct comedi_subdevice *s;
 	int ret;
 	int i;
 
 	ret = comedi_request_region(dev, it->options[0], 0x2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
@@ -330,7 +386,11 @@ static int dt2814_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	udelay(100);
 	if (inb(dev->iobase + DT2814_CSR) & DT2814_ERR) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "reset error (fatal)\n");
+=======
+		dev_err(dev->class_dev, "reset error (fatal)\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "reset error (fatal)\n");
 >>>>>>> v3.18
@@ -339,6 +399,7 @@ static int dt2814_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	i = inb(dev->iobase + DT2814_DATA);
 	i = inb(dev->iobase + DT2814_DATA);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	irq = it->options[1];
 #if 0
@@ -378,11 +439,16 @@ static int dt2814_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		printk(KERN_WARNING "(irq probe not implemented)\n");
 #endif
 =======
+=======
+>>>>>>> v3.18
 	if (it->options[1]) {
 		ret = request_irq(it->options[1], dt2814_interrupt, 0,
 				  dev->board_name, dev);
 		if (ret == 0)
 			dev->irq = it->options[1];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -390,6 +456,7 @@ static int dt2814_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
@@ -408,6 +475,8 @@ static int dt2814_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	s->maxdata = 0xfff;
 	s->range_table = &range_unknown;	/* XXX */
 =======
+=======
+>>>>>>> v3.18
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
 		return -ENOMEM;
@@ -426,6 +495,9 @@ static int dt2814_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		s->do_cmd = dt2814_ai_cmd;
 		s->do_cmdtest = dt2814_ai_cmdtest;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

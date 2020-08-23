@@ -169,9 +169,14 @@ static void configfs_set_inode_lock_class(struct configfs_dirent *sd,
 			 * already reached. Just inform about possible reasons.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "configfs: Too many levels of inodes"
 			       " for the locking correctness validator.\n");
 			printk(KERN_INFO "Spurious warnings may appear.\n");
+=======
+			pr_info("Too many levels of inodes for the locking correctness validator.\n");
+			pr_info("Spurious warnings may appear.\n");
+>>>>>>> v3.18
 =======
 			pr_info("Too many levels of inodes for the locking correctness validator.\n");
 			pr_info("Spurious warnings may appear.\n");

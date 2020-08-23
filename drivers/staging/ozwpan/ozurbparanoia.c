@@ -5,6 +5,7 @@
  */
 #include <linux/usb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ozconfig.h"
 #ifdef WANT_URB_PARANOIA
 #include "ozurbparanoia.h"
@@ -12,17 +13,23 @@
 /*-----------------------------------------------------------------------------
  */
 =======
+=======
+>>>>>>> v3.18
 #include "ozdbg.h"
 
 #ifdef WANT_URB_PARANOIA
 
 #include "ozurbparanoia.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define OZ_MAX_URBS	1000
 struct urb *g_urb_memory[OZ_MAX_URBS];
 int g_nb_urbs;
 DEFINE_SPINLOCK(g_urb_mem_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*-----------------------------------------------------------------------------
  */
@@ -40,6 +47,8 @@ void oz_remember_urb(struct urb *urb)
 }
 /*------------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 
 void oz_remember_urb(struct urb *urb)
 {
@@ -56,6 +65,9 @@ void oz_remember_urb(struct urb *urb)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int oz_forget_urb(struct urb *urb)
@@ -64,6 +76,10 @@ int oz_forget_urb(struct urb *urb)
 	int i;
 	int rc = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -75,8 +91,12 @@ int oz_forget_urb(struct urb *urb)
 				memcpy(&g_urb_memory[i], &g_urb_memory[i+1],
 					(g_nb_urbs - i) * sizeof(struct urb *));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			oz_trace("%lu: urb down = %d %p\n",
 				jiffies, g_nb_urbs, urb);
+=======
+			oz_dbg(ON, "urb down = %d %p\n", g_nb_urbs, urb);
+>>>>>>> v3.18
 =======
 			oz_dbg(ON, "urb down = %d %p\n", g_nb_urbs, urb);
 >>>>>>> v3.18

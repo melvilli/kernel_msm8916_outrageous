@@ -4,7 +4,10 @@
  * Definitions used for the Xen ELF notes.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
  * deal in the Software without restriction, including without limitation the
@@ -23,6 +26,9 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Copyright (c) 2006, Ian Campbell, XenSource Ltd.
  */
@@ -40,6 +46,12 @@
  * LEGACY indicated the fields in the legacy __xen_guest string which
  * this a note type replaces.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * String values (for non-legacy) are NULL terminated ASCII, also known
+ * as ASCIZ type.
+>>>>>>> v3.18
 =======
  *
  * String values (for non-legacy) are NULL terminated ASCII, also known
@@ -50,8 +62,11 @@
 /*
  * NAME=VALUE pair (string).
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * LEGACY: FEATURES and PAE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -168,10 +183,13 @@
 /*
  * Whether or not the guest supports cooperative suspend cancellation.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 #define XEN_ELFNOTE_SUSPEND_CANCEL 14
 
 =======
+=======
+>>>>>>> v3.18
  * This is a numeric value.
  *
  * Default is 0
@@ -213,6 +231,9 @@
  */
 #define XEN_ELFNOTE_MAX XEN_ELFNOTE_SUPPORTED_FEATURES
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __XEN_PUBLIC_ELFNOTE_H__ */
 

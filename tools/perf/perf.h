@@ -2,6 +2,7 @@
 #define _PERF_PERF_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/unistd.h>
 
 #if defined(__i386__)
@@ -123,6 +124,8 @@
 #define PR_TASK_PERF_EVENTS_DISABLE   31
 #define PR_TASK_PERF_EVENTS_ENABLE    32
 =======
+=======
+>>>>>>> v3.18
 #include <time.h>
 #include <stdbool.h>
 #include <linux/types.h>
@@ -135,12 +138,21 @@ void test_attr__open(struct perf_event_attr *attr, pid_t pid, int cpu,
 
 #define HAVE_ATTR_TEST
 #include "perf-sys.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef NSEC_PER_SEC
 # define NSEC_PER_SEC			1000000000ULL
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef NSEC_PER_USEC
+# define NSEC_PER_USEC			1000ULL
+#endif
+>>>>>>> v3.18
 =======
 #ifndef NSEC_PER_USEC
 # define NSEC_PER_USEC			1000ULL
@@ -155,6 +167,7 @@ static inline unsigned long long rdclock(void)
 	return ts.tv_sec * 1000000000ULL + ts.tv_nsec;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Pick up some kernel type conventions:
@@ -219,6 +232,10 @@ struct branch_stack {
 #define MAX_NR_CPUS			256
 
 >>>>>>> v3.18
+=======
+#define MAX_NR_CPUS			256
+
+>>>>>>> v3.18
 extern const char *input_name;
 extern bool perf_host, perf_guest;
 extern const char perf_version_string[];
@@ -227,6 +244,7 @@ void pthread__unblock_sigwinch(void);
 
 #include "util/target.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum perf_call_graph_mode {
 	CALLCHAIN_NONE,
@@ -244,6 +262,8 @@ struct perf_record_opts {
 	bool	     no_samples;
 	bool	     pipe_output;
 =======
+=======
+>>>>>>> v3.18
 struct record_opts {
 	struct target target;
 	bool	     group;
@@ -252,6 +272,9 @@ struct record_opts {
 	bool	     no_inherit;
 	bool	     no_inherit_set;
 	bool	     no_samples;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool	     raw_samples;
 	bool	     sample_address;
@@ -265,7 +288,12 @@ struct record_opts {
 	u64	     default_interval;
 	u64	     user_interval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16	     stack_dump_size;
+=======
+	bool	     sample_transaction;
+	unsigned     initial_delay;
+>>>>>>> v3.18
 =======
 	bool	     sample_transaction;
 	unsigned     initial_delay;

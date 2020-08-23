@@ -35,6 +35,10 @@ static void change_volume(struct urb *urb_out, int volume[],
 	if (bytes_per_frame == 4) {
 		short *p, *buf_end;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -48,6 +52,10 @@ static void change_volume(struct urb *urb_out, int volume[],
 	} else if (bytes_per_frame == 6) {
 		unsigned char *p, *buf_end;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -57,6 +65,10 @@ static void change_volume(struct urb *urb_out, int volume[],
 		for (; p < buf_end; p += 3) {
 			int val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -129,6 +141,10 @@ static void add_monitor_signal(struct urb *urb_out, unsigned char *signal,
 	if (bytes_per_frame == 4) {
 		short *pi, *po, *buf_end;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -188,6 +204,10 @@ static int submit_audio_out_urb(struct snd_line6_pcm *line6pcm)
 		if (fsize == 0) {
 			int n;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -228,6 +248,10 @@ static int submit_audio_out_urb(struct snd_line6_pcm *line6pcm)
 			 */
 			int len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -267,7 +291,12 @@ static int submit_audio_out_urb(struct snd_line6_pcm *line6pcm)
 			create_impulse_test_signal(line6pcm, urb_out,
 						   bytes_per_frame);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (line6pcm->flags & LINE6_BIT_PCM_ALSA_CAPTURE_STREAM) {
+=======
+			if (line6pcm->flags &
+			    LINE6_BIT_PCM_ALSA_CAPTURE_STREAM) {
+>>>>>>> v3.18
 =======
 			if (line6pcm->flags &
 			    LINE6_BIT_PCM_ALSA_CAPTURE_STREAM) {
@@ -278,7 +307,11 @@ static int submit_audio_out_urb(struct snd_line6_pcm *line6pcm)
 						   transfer_buffer_length);
 				line6_capture_check_period(line6pcm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							   urb_out->transfer_buffer_length);
+=======
+					urb_out->transfer_buffer_length);
+>>>>>>> v3.18
 =======
 					urb_out->transfer_buffer_length);
 >>>>>>> v3.18
@@ -338,6 +371,10 @@ void line6_unlink_audio_out_urbs(struct snd_line6_pcm *line6pcm)
 			if (!test_and_set_bit(i, &line6pcm->unlink_urb_out)) {
 				struct urb *u = line6pcm->urb_audio_out[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -395,7 +432,10 @@ static void audio_out_callback(struct urb *urb)
 	int i, index, length = 0, shutdown = 0;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct snd_line6_pcm *line6pcm = (struct snd_line6_pcm *)urb->context;
@@ -424,6 +464,10 @@ static void audio_out_callback(struct urb *urb)
 	if (test_bit(LINE6_INDEX_PCM_ALSA_PLAYBACK_STREAM, &line6pcm->flags)) {
 		struct snd_pcm_runtime *runtime = substream->runtime;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -524,6 +568,10 @@ static int snd_line6_playback_hw_free(struct snd_pcm_substream *substream)
 {
 	struct snd_line6_pcm *line6pcm = snd_pcm_substream_chip(substream);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -582,6 +630,10 @@ snd_line6_playback_pointer(struct snd_pcm_substream *substream)
 {
 	struct snd_line6_pcm *line6pcm = snd_pcm_substream_chip(substream);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

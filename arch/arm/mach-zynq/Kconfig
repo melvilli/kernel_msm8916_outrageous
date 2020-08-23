@@ -1,6 +1,7 @@
 config ARCH_ZYNQ
 	bool "Xilinx Zynq ARM Cortex A9 Platform" if ARCH_MULTI_V7
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARM_AMBA
 	select ARM_GIC
 	select COMMON_CLK
@@ -15,6 +16,8 @@ config ARCH_ZYNQ
 	select SPARSE_IRQ
 	select CADENCE_TTC_TIMER
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_SUPPORTS_BIG_ENDIAN
 	select ARM_AMBA
 	select ARM_GIC
@@ -25,6 +28,9 @@ config ARCH_ZYNQ
 	select ICST
 	select MFD_SYSCON
 	select SOC_BUS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Support for Xilinx Zynq ARM Cortex A9 Platform

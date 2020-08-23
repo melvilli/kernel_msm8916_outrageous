@@ -12,6 +12,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef _PDATA_MAX197_H
+#define _PDATA_MAX197_H
+
+>>>>>>> v3.18
 =======
 #ifndef _PDATA_MAX197_H
 #define _PDATA_MAX197_H
@@ -26,6 +32,11 @@ struct max197_platform_data {
 	int (*convert)(u8 ctrl);
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#endif /* _PDATA_MAX197_H */
+>>>>>>> v3.18
 =======
 
 #endif /* _PDATA_MAX197_H */

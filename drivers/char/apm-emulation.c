@@ -532,6 +532,10 @@ static int apm_suspend_notifier(struct notifier_block *nb,
 	struct apm_user *as;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long apm_event;
+>>>>>>> v3.18
 =======
 	unsigned long apm_event;
 >>>>>>> v3.18
@@ -543,6 +547,12 @@ static int apm_suspend_notifier(struct notifier_block *nb,
 	switch (event) {
 	case PM_SUSPEND_PREPARE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case PM_HIBERNATION_PREPARE:
+		apm_event = (event == PM_SUSPEND_PREPARE) ?
+			APM_USER_SUSPEND : APM_USER_HIBERNATION;
+>>>>>>> v3.18
 =======
 	case PM_HIBERNATION_PREPARE:
 		apm_event = (event == PM_SUSPEND_PREPARE) ?
@@ -561,7 +571,11 @@ static int apm_suspend_notifier(struct notifier_block *nb,
 				as->suspend_state = SUSPEND_PENDING;
 				atomic_inc(&suspend_acks_pending);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				queue_add_event(&as->queue, APM_USER_SUSPEND);
+=======
+				queue_add_event(&as->queue, apm_event);
+>>>>>>> v3.18
 =======
 				queue_add_event(&as->queue, apm_event);
 >>>>>>> v3.18
@@ -616,6 +630,12 @@ static int apm_suspend_notifier(struct notifier_block *nb,
 
 	case PM_POST_SUSPEND:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case PM_POST_HIBERNATION:
+		apm_event = (event == PM_POST_SUSPEND) ?
+			APM_NORMAL_RESUME : APM_HIBERNATION_RESUME;
+>>>>>>> v3.18
 =======
 	case PM_POST_HIBERNATION:
 		apm_event = (event == PM_POST_SUSPEND) ?
@@ -626,7 +646,11 @@ static int apm_suspend_notifier(struct notifier_block *nb,
 		 * Send a message so everyone knows we're now awake again.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		queue_event(APM_NORMAL_RESUME);
+=======
+		queue_event(apm_event);
+>>>>>>> v3.18
 =======
 		queue_event(apm_event);
 >>>>>>> v3.18

@@ -57,6 +57,10 @@
 #include <linux/nl80211.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/cfg80211.h>
+>>>>>>> v3.18
 =======
 #include <net/cfg80211.h>
 >>>>>>> v3.18
@@ -65,6 +69,10 @@
 #include <asm/unaligned.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/mac80211.h>
+>>>>>>> v3.18
 =======
 #include <net/mac80211.h>
 >>>>>>> v3.18
@@ -106,6 +114,7 @@ static int ath5k_reset(struct ath5k_hw *ah, struct ieee80211_channel *chan,
 /* Known SREVs */
 static const struct ath5k_srev_name srev_names[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ATHEROS_AR231X
 	{ "5312",	AR5K_VERSION_MAC,	AR5K_SREV_AR5312_R2 },
 	{ "5312",	AR5K_VERSION_MAC,	AR5K_SREV_AR5312_R7 },
@@ -115,6 +124,8 @@ static const struct ath5k_srev_name srev_names[] = {
 	{ "2317",	AR5K_VERSION_MAC,	AR5K_SREV_AR2317_R1 },
 	{ "2317",	AR5K_VERSION_MAC,	AR5K_SREV_AR2317_R2 },
 #else
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ "5210",	AR5K_VERSION_MAC,	AR5K_SREV_AR5210 },
@@ -136,7 +147,10 @@ static const struct ath5k_srev_name srev_names[] = {
 	{ "2425",	AR5K_VERSION_MAC,	AR5K_SREV_AR2425 },
 	{ "2417",	AR5K_VERSION_MAC,	AR5K_SREV_AR2417 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ "xxxxx",	AR5K_VERSION_MAC,	AR5K_SREV_UNKNOWN },
@@ -155,10 +169,13 @@ static const struct ath5k_srev_name srev_names[] = {
 	{ "5424",	AR5K_VERSION_RAD,	AR5K_SREV_RAD_5424 },
 	{ "5133",	AR5K_VERSION_RAD,	AR5K_SREV_RAD_5133 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ATHEROS_AR231X
 	{ "2316",	AR5K_VERSION_RAD,	AR5K_SREV_RAD_2316 },
 	{ "2317",	AR5K_VERSION_RAD,	AR5K_SREV_RAD_2317 },
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ "xxxxx",	AR5K_VERSION_RAD,	AR5K_SREV_UNKNOWN },
@@ -182,6 +199,7 @@ static const struct ieee80211_rate ath5k_rates[] = {
 	{ .bitrate = 60,
 	  .hw_value = ATH5K_RATE_CODE_6M,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  .flags = 0 },
 	{ .bitrate = 90,
 	  .hw_value = ATH5K_RATE_CODE_9M,
@@ -205,6 +223,8 @@ static const struct ieee80211_rate ath5k_rates[] = {
 	  .hw_value = ATH5K_RATE_CODE_54M,
 	  .flags = 0 },
 =======
+=======
+>>>>>>> v3.18
 	  .flags = IEEE80211_RATE_SUPPORTS_5MHZ |
 		   IEEE80211_RATE_SUPPORTS_10MHZ },
 	{ .bitrate = 90,
@@ -235,6 +255,9 @@ static const struct ieee80211_rate ath5k_rates[] = {
 	  .hw_value = ATH5K_RATE_CODE_54M,
 	  .flags = IEEE80211_RATE_SUPPORTS_5MHZ |
 		   IEEE80211_RATE_SUPPORTS_10MHZ },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -485,12 +508,15 @@ ath5k_setup_bands(struct ieee80211_hw *hw)
  */
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 ath5k_chan_set(struct ath5k_hw *ah, struct ieee80211_channel *chan)
 {
 	ATH5K_DBG(ah, ATH5K_DEBUG_RESET,
 		  "channel set, resetting (%u -> %u MHz)\n",
 		  ah->curchan->center_freq, chan->center_freq);
 =======
+=======
+>>>>>>> v3.18
 ath5k_chan_set(struct ath5k_hw *ah, struct cfg80211_chan_def *chandef)
 {
 	ATH5K_DBG(ah, ATH5K_DEBUG_RESET,
@@ -512,6 +538,9 @@ ath5k_chan_set(struct ath5k_hw *ah, struct cfg80211_chan_def *chandef)
 		WARN_ON(1);
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -521,7 +550,11 @@ ath5k_chan_set(struct ath5k_hw *ah, struct cfg80211_chan_def *chandef)
 	 * the relevant bits of the h/w.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ath5k_reset(ah, chan, true);
+=======
+	return ath5k_reset(ah, chandef->chan, true);
+>>>>>>> v3.18
 =======
 	return ath5k_reset(ah, chandef->chan, true);
 >>>>>>> v3.18
@@ -745,10 +778,13 @@ static enum ath5k_pkt_type get_hw_packet_type(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 ath5k_txbuf_setup(struct ath5k_hw *ah, struct ath5k_buf *bf,
 		  struct ath5k_txq *txq, int padsize)
 =======
+=======
+>>>>>>> v3.18
 static struct ieee80211_rate *
 ath5k_get_rate(const struct ieee80211_hw *hw,
 	       const struct ieee80211_tx_info *info,
@@ -789,6 +825,9 @@ static int
 ath5k_txbuf_setup(struct ath5k_hw *ah, struct ath5k_buf *bf,
 		  struct ath5k_txq *txq, int padsize,
 		  struct ieee80211_tx_control *control)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ath5k_desc *ds = bf->desc;
@@ -810,8 +849,11 @@ ath5k_txbuf_setup(struct ath5k_hw *ah, struct ath5k_buf *bf,
 			DMA_TO_DEVICE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rate = ieee80211_get_tx_rate(ah->hw, info);
 =======
+=======
+>>>>>>> v3.18
 	if (dma_mapping_error(ah->dev, bf->skbaddr))
 		return -ENOSPC;
 
@@ -820,6 +862,9 @@ ath5k_txbuf_setup(struct ath5k_hw *ah, struct ath5k_buf *bf,
 
 	rate = ath5k_get_rate(ah->hw, info, bf, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!rate) {
 		ret = -EINVAL;
@@ -831,8 +876,13 @@ ath5k_txbuf_setup(struct ath5k_hw *ah, struct ath5k_buf *bf,
 
 	rc_flags = info->control.rates[0].flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw_rate = (rc_flags & IEEE80211_TX_RC_USE_SHORT_PREAMBLE) ?
 		rate->hw_value_short : rate->hw_value;
+=======
+
+	hw_rate = ath5k_get_rate_hw_value(ah->hw, info, bf, 0);
+>>>>>>> v3.18
 =======
 
 	hw_rate = ath5k_get_rate_hw_value(ah->hw, info, bf, 0);
@@ -860,6 +910,10 @@ ath5k_txbuf_setup(struct ath5k_hw *ah, struct ath5k_buf *bf,
 			info->control.vif, pktlen, info));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -869,7 +923,11 @@ ath5k_txbuf_setup(struct ath5k_hw *ah, struct ath5k_buf *bf,
 		(ah->ah_txpower.txp_requested * 2),
 		hw_rate,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		info->control.rates[0].count, keyidx, ah->ah_tx_ant, flags,
+=======
+		bf->rates[0].count, keyidx, ah->ah_tx_ant, flags,
+>>>>>>> v3.18
 =======
 		bf->rates[0].count, keyidx, ah->ah_tx_ant, flags,
 >>>>>>> v3.18
@@ -882,6 +940,7 @@ ath5k_txbuf_setup(struct ath5k_hw *ah, struct ath5k_buf *bf,
 		memset(mrr_rate, 0, sizeof(mrr_rate));
 		memset(mrr_tries, 0, sizeof(mrr_tries));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < 3; i++) {
 			rate = ieee80211_get_alt_retry_rate(ah->hw, info, i);
 			if (!rate)
@@ -890,6 +949,8 @@ ath5k_txbuf_setup(struct ath5k_hw *ah, struct ath5k_buf *bf,
 			mrr_rate[i] = rate->hw_value;
 			mrr_tries[i] = info->control.rates[i + 1].count;
 =======
+=======
+>>>>>>> v3.18
 
 		for (i = 0; i < 3; i++) {
 
@@ -899,6 +960,9 @@ ath5k_txbuf_setup(struct ath5k_hw *ah, struct ath5k_buf *bf,
 
 			mrr_rate[i] = ath5k_get_rate_hw_value(ah->hw, info, bf, i);
 			mrr_tries[i] = bf->rates[i].count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1326,7 +1390,10 @@ ath5k_check_ibss_tsf(struct ath5k_hw *ah, struct sk_buff *skb,
 		     struct ieee80211_rx_status *rxs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_common *common = ath5k_hw_common(ah);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u64 tsf, bc_tstamp;
@@ -1334,9 +1401,13 @@ ath5k_check_ibss_tsf(struct ath5k_hw *ah, struct sk_buff *skb,
 	struct ieee80211_mgmt *mgmt = (struct ieee80211_mgmt *)skb->data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ieee80211_is_beacon(mgmt->frame_control) &&
 	    le16_to_cpu(mgmt->u.beacon.capab_info) & WLAN_CAPABILITY_IBSS &&
 	    ether_addr_equal(mgmt->bssid, common->curbssid)) {
+=======
+	if (le16_to_cpu(mgmt->u.beacon.capab_info) & WLAN_CAPABILITY_IBSS) {
+>>>>>>> v3.18
 =======
 	if (le16_to_cpu(mgmt->u.beacon.capab_info) & WLAN_CAPABILITY_IBSS) {
 >>>>>>> v3.18
@@ -1396,6 +1467,7 @@ ath5k_check_ibss_tsf(struct ath5k_hw *ah, struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 ath5k_update_beacon_rssi(struct ath5k_hw *ah, struct sk_buff *skb, int rssi)
 {
@@ -1413,6 +1485,8 @@ ath5k_update_beacon_rssi(struct ath5k_hw *ah, struct sk_buff *skb, int rssi)
 	/* le16_to_cpu(mgmt->u.beacon.capab_info) & WLAN_CAPABILITY_IBSS */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -1488,6 +1562,10 @@ ath5k_receive_frame(struct ath5k_hw *ah, struct sk_buff *skb,
 {
 	struct ieee80211_rx_status *rxs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ath_common *common = ath5k_hw_common(ah);
+>>>>>>> v3.18
 =======
 	struct ath_common *common = ath5k_hw_common(ah);
 >>>>>>> v3.18
@@ -1500,6 +1578,12 @@ ath5k_receive_frame(struct ath5k_hw *ah, struct sk_buff *skb,
 	if (unlikely(rs->rs_status & AR5K_RXERR_MIC))
 		rxs->flag |= RX_FLAG_MMIC_ERROR;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (unlikely(rs->rs_status & AR5K_RXERR_CRC))
+		rxs->flag |= RX_FLAG_FAILED_FCS_CRC;
+
+>>>>>>> v3.18
 =======
 	if (unlikely(rs->rs_status & AR5K_RXERR_CRC))
 		rxs->flag |= RX_FLAG_FAILED_FCS_CRC;
@@ -1533,9 +1617,12 @@ ath5k_receive_frame(struct ath5k_hw *ah, struct sk_buff *skb,
 	rxs->rate_idx = ath5k_hw_to_driver_rix(ah, rs->rs_rate);
 	rxs->flag |= ath5k_rx_decrypted(ah, skb, rs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (rxs->rate_idx >= 0 && rs->rs_rate ==
 =======
+=======
+>>>>>>> v3.18
 	switch (ah->ah_bwmode) {
 	case AR5K_BWMODE_5MHZ:
 		rxs->flag |= RX_FLAG_5MHZ;
@@ -1548,6 +1635,9 @@ ath5k_receive_frame(struct ath5k_hw *ah, struct sk_buff *skb,
 	}
 
 	if (rs->rs_rate ==
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    ah->sbands[ah->curchan->band].bitrates[rxs->rate_idx].hw_value_short)
 		rxs->flag |= RX_FLAG_SHORTPRE;
@@ -1555,12 +1645,15 @@ ath5k_receive_frame(struct ath5k_hw *ah, struct sk_buff *skb,
 	trace_ath5k_rx(ah, skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ath5k_update_beacon_rssi(ah, skb, rs->rs_rssi);
 
 	/* check beacons in IBSS mode */
 	if (ah->opmode == NL80211_IFTYPE_ADHOC)
 		ath5k_check_ibss_tsf(ah, skb, rxs);
 =======
+=======
+>>>>>>> v3.18
 	if (ath_is_mybeacon(common, (struct ieee80211_hdr *)skb->data)) {
 		ewma_add(&ah->ah_beacon_rssi_avg, rs->rs_rssi);
 
@@ -1568,6 +1661,9 @@ ath5k_receive_frame(struct ath5k_hw *ah, struct sk_buff *skb,
 		if (ah->opmode == NL80211_IFTYPE_ADHOC)
 			ath5k_check_ibss_tsf(ah, skb, rxs);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ieee80211_rx(ah->hw, skb);
@@ -1586,6 +1682,11 @@ ath5k_receive_frame_ok(struct ath5k_hw *ah, struct ath5k_rx_status *rs)
 
 	if (unlikely(rs->rs_status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		unsigned int filters;
+
+>>>>>>> v3.18
 =======
 		unsigned int filters;
 
@@ -1599,8 +1700,11 @@ ath5k_receive_frame_ok(struct ath5k_hw *ah, struct ath5k_rx_status *rs)
 			if (rs->rs_phyerr > 0 && rs->rs_phyerr < 32)
 				ah->stats.rxerr_phy_code[rs->rs_phyerr]++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return false;
 =======
+=======
+>>>>>>> v3.18
 
 			/*
 			 * Treat packets that underwent a CCK or OFDM reset as having a bad CRC.
@@ -1615,6 +1719,9 @@ ath5k_receive_frame_ok(struct ath5k_hw *ah, struct ath5k_rx_status *rs)
 			} else {
 				return false;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		if (rs->rs_status & AR5K_RXERR_DECRYPT) {
@@ -1639,9 +1746,12 @@ ath5k_receive_frame_ok(struct ath5k_hw *ah, struct ath5k_rx_status *rs)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* reject any frames with non-crypto errors */
 		if (rs->rs_status & ~(AR5K_RXERR_DECRYPT))
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Reject any frames with non-crypto errors, and take into account the
 		 * current FIF_* filters.
@@ -1651,6 +1761,9 @@ ath5k_receive_frame_ok(struct ath5k_hw *ah, struct ath5k_rx_status *rs)
 			filters |= AR5K_RXERR_CRC;
 
 		if (rs->rs_status & ~filters)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return false;
 	}
@@ -1752,7 +1865,11 @@ unlock:
 void
 ath5k_tx_queue(struct ieee80211_hw *hw, struct sk_buff *skb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       struct ath5k_txq *txq)
+=======
+	       struct ath5k_txq *txq, struct ieee80211_tx_control *control)
+>>>>>>> v3.18
 =======
 	       struct ath5k_txq *txq, struct ieee80211_tx_control *control)
 >>>>>>> v3.18
@@ -1796,7 +1913,11 @@ ath5k_tx_queue(struct ieee80211_hw *hw, struct sk_buff *skb,
 	bf->skb = skb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ath5k_txbuf_setup(ah, bf, txq, padsize)) {
+=======
+	if (ath5k_txbuf_setup(ah, bf, txq, padsize, control)) {
+>>>>>>> v3.18
 =======
 	if (ath5k_txbuf_setup(ah, bf, txq, padsize, control)) {
 >>>>>>> v3.18
@@ -1816,7 +1937,12 @@ drop_packet:
 static void
 ath5k_tx_frame_completed(struct ath5k_hw *ah, struct sk_buff *skb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct ath5k_txq *txq, struct ath5k_tx_status *ts)
+=======
+			 struct ath5k_txq *txq, struct ath5k_tx_status *ts,
+			 struct ath5k_buf *bf)
+>>>>>>> v3.18
 =======
 			 struct ath5k_txq *txq, struct ath5k_tx_status *ts,
 			 struct ath5k_buf *bf)
@@ -1826,6 +1952,10 @@ ath5k_tx_frame_completed(struct ath5k_hw *ah, struct sk_buff *skb,
 	u8 tries[3];
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int size = 0;
+>>>>>>> v3.18
 =======
 	int size = 0;
 >>>>>>> v3.18
@@ -1835,6 +1965,12 @@ ath5k_tx_frame_completed(struct ath5k_hw *ah, struct sk_buff *skb,
 	info = IEEE80211_SKB_CB(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	size = min_t(int, sizeof(info->status.rates), sizeof(bf->rates));
+	memcpy(info->status.rates, bf->rates, size);
+
+>>>>>>> v3.18
 =======
 	size = min_t(int, sizeof(info->status.rates), sizeof(bf->rates));
 	memcpy(info->status.rates, bf->rates, size);
@@ -1923,7 +2059,11 @@ ath5k_tx_processq(struct ath5k_hw *ah, struct ath5k_txq *txq)
 			dma_unmap_single(ah->dev, bf->skbaddr, skb->len,
 					DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ath5k_tx_frame_completed(ah, skb, txq, &ts);
+=======
+			ath5k_tx_frame_completed(ah, skb, txq, &ts, bf);
+>>>>>>> v3.18
 =======
 			ath5k_tx_frame_completed(ah, skb, txq, &ts, bf);
 >>>>>>> v3.18
@@ -2181,7 +2321,11 @@ ath5k_beacon_send(struct ath5k_hw *ah)
 	skb = ieee80211_get_buffered_bc(ah->hw, vif);
 	while (skb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath5k_tx_queue(ah->hw, skb, ah->cabq);
+=======
+		ath5k_tx_queue(ah->hw, skb, ah->cabq, NULL);
+>>>>>>> v3.18
 =======
 		ath5k_tx_queue(ah->hw, skb, ah->cabq, NULL);
 >>>>>>> v3.18
@@ -2710,7 +2854,12 @@ ath5k_init_ah(struct ath5k_hw *ah, const struct ath_bus_ops *bus_ops)
 			IEEE80211_HW_SIGNAL_DBM |
 			IEEE80211_HW_MFP_CAPABLE |
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IEEE80211_HW_REPORTS_TX_ACK_STATUS;
+=======
+			IEEE80211_HW_REPORTS_TX_ACK_STATUS |
+			IEEE80211_HW_SUPPORTS_RC_TABLE;
+>>>>>>> v3.18
 =======
 			IEEE80211_HW_REPORTS_TX_ACK_STATUS |
 			IEEE80211_HW_SUPPORTS_RC_TABLE;
@@ -2729,6 +2878,11 @@ ath5k_init_ah(struct ath5k_hw *ah, const struct ath_bus_ops *bus_ops)
 	hw->wiphy->flags |= WIPHY_FLAG_IBSS_RSN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	hw->wiphy->flags |= WIPHY_FLAG_SUPPORTS_5_10_MHZ;
+
+>>>>>>> v3.18
 =======
 	hw->wiphy->flags |= WIPHY_FLAG_SUPPORTS_5_10_MHZ;
 
@@ -2739,7 +2893,10 @@ ath5k_init_ah(struct ath5k_hw *ah, const struct ath_bus_ops *bus_ops)
 
 	hw->extra_tx_headroom = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->channel_change_time = 5000;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

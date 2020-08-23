@@ -27,7 +27,11 @@
  * detection.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit detect_extended_topology(struct cpuinfo_x86 *c)
+=======
+void detect_extended_topology(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 void detect_extended_topology(struct cpuinfo_x86 *c)
 >>>>>>> v3.18

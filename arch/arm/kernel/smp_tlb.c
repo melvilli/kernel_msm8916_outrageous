@@ -72,6 +72,7 @@ static inline void ipi_flush_bp_all(void *ignored)
 
 #ifdef CONFIG_ARM_ERRATA_798181
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int erratum_a15_798181(void)
 {
 	unsigned int midr = read_cpuid_id();
@@ -86,6 +87,8 @@ static int erratum_a15_798181(void)
 {
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 bool (*erratum_a15_798181_handler)(void);
 
 static bool erratum_a15_798181_partial(void)
@@ -120,6 +123,9 @@ void erratum_a15_798181_init(void)
 			erratum_a15_798181_handler =
 				erratum_a15_798181_broadcast;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
@@ -135,7 +141,10 @@ static void broadcast_tlb_a15_erratum(void)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dummy_flush_tlb_a15_erratum();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	smp_call_function(ipi_flush_tlb_a15_erratum, NULL, 1);
@@ -150,7 +159,10 @@ static void broadcast_tlb_mm_a15_erratum(struct mm_struct *mm)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dummy_flush_tlb_a15_erratum();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	this_cpu = get_cpu();
@@ -165,7 +177,11 @@ void flush_tlb_all(void)
 		on_each_cpu(ipi_flush_tlb_all, NULL, 1);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		local_flush_tlb_all();
+=======
+		__flush_tlb_all();
+>>>>>>> v3.18
 =======
 		__flush_tlb_all();
 >>>>>>> v3.18
@@ -178,7 +194,11 @@ void flush_tlb_mm(struct mm_struct *mm)
 		on_each_cpu_mask(mm_cpumask(mm), ipi_flush_tlb_mm, mm, 1);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		local_flush_tlb_mm(mm);
+=======
+		__flush_tlb_mm(mm);
+>>>>>>> v3.18
 =======
 		__flush_tlb_mm(mm);
 >>>>>>> v3.18
@@ -195,7 +215,11 @@ void flush_tlb_page(struct vm_area_struct *vma, unsigned long uaddr)
 					&ta, 1);
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		local_flush_tlb_page(vma, uaddr);
+=======
+		__flush_tlb_page(vma, uaddr);
+>>>>>>> v3.18
 =======
 		__flush_tlb_page(vma, uaddr);
 >>>>>>> v3.18
@@ -210,7 +234,11 @@ void flush_tlb_kernel_page(unsigned long kaddr)
 		on_each_cpu(ipi_flush_tlb_kernel_page, &ta, 1);
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		local_flush_tlb_kernel_page(kaddr);
+=======
+		__flush_tlb_kernel_page(kaddr);
+>>>>>>> v3.18
 =======
 		__flush_tlb_kernel_page(kaddr);
 >>>>>>> v3.18
@@ -250,7 +278,11 @@ void flush_bp_all(void)
 		on_each_cpu(ipi_flush_bp_all, NULL, 1);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		local_flush_bp_all();
+=======
+		__flush_bp_all();
+>>>>>>> v3.18
 =======
 		__flush_bp_all();
 >>>>>>> v3.18

@@ -29,6 +29,10 @@
 #include <linux/crypto.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <crypto/ablk_helper.h>
+>>>>>>> v3.18
 =======
 #include <crypto/ablk_helper.h>
 >>>>>>> v3.18
@@ -42,7 +46,10 @@
 #include <asm/xcr.h>
 #include <asm/xsave.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/crypto/ablk_helper.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/crypto/glue_helper.h>
@@ -619,7 +626,11 @@ module_exit(cast6_exit);
 MODULE_DESCRIPTION("Cast6 Cipher Algorithm, AVX optimized");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("cast6");
+=======
+MODULE_ALIAS("cast6");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("cast6");
 >>>>>>> v3.18

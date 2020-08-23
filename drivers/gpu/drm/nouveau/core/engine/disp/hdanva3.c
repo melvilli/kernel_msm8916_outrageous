@@ -23,19 +23,26 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/os.h>
 #include <core/class.h>
 =======
+=======
+>>>>>>> v3.18
 #include <core/client.h>
 #include <nvif/unpack.h>
 #include <nvif/class.h>
 
 #include <subdev/timer.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "nv50.h"
 
 int
+<<<<<<< HEAD
 <<<<<<< HEAD
 nva3_hda_eld(struct nv50_disp_priv *priv, int or, u8 *data, u32 size)
 {
@@ -54,6 +61,8 @@ nva3_hda_eld(struct nv50_disp_priv *priv, int or, u8 *data, u32 size)
 	} else {
 		nv_mask(priv, 0x61c448 + soff, 0x80000003, 0x80000000);
 =======
+=======
+>>>>>>> v3.18
 nva3_hda_eld(NV50_DISP_MTHD_V1)
 {
 	union {
@@ -86,6 +95,9 @@ nva3_hda_eld(NV50_DISP_MTHD_V1)
 			nv_wait(priv, 0x61c1e0 + soff, 0x80000000, 0x00000000);
 		}
 		nv_mask(priv, 0x61c448 + soff, 0x80000003, 0x80000000 | !!size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

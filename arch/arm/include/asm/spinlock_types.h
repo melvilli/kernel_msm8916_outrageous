@@ -26,7 +26,11 @@ typedef struct {
 
 typedef struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	volatile unsigned int lock;
+=======
+	u32 lock;
+>>>>>>> v3.18
 =======
 	u32 lock;
 >>>>>>> v3.18

@@ -27,6 +27,10 @@
 #define _I915_DRM_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/i915_pciids.h>
+>>>>>>> v3.18
 =======
 #include <drm/i915_pciids.h>
 >>>>>>> v3.18
@@ -39,7 +43,10 @@ extern bool i915_gpu_lower(void);
 extern bool i915_gpu_busy(void);
 extern bool i915_gpu_turbo_disable(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * The Bridge device's PCI config space has information about the
@@ -97,5 +104,8 @@ extern bool i915_gpu_turbo_disable(void);
 #define    I845_TSEG_SIZE_512K	(2 << 1)
 #define    I845_TSEG_SIZE_1M	(3 << 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* _I915_DRM_H_ */

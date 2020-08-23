@@ -56,16 +56,22 @@ static void ttm_tt_alloc_page_directory(struct ttm_tt *ttm)
 static void ttm_dma_tt_alloc_page_directory(struct ttm_dma_tt *ttm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm->ttm.pages = drm_calloc_large(ttm->ttm.num_pages, sizeof(void*));
 	ttm->dma_address = drm_calloc_large(ttm->ttm.num_pages,
 					    sizeof(*ttm->dma_address));
 =======
+=======
+>>>>>>> v3.18
 	ttm->ttm.pages = drm_calloc_large(ttm->ttm.num_pages,
 					  sizeof(*ttm->ttm.pages) +
 					  sizeof(*ttm->dma_address) +
 					  sizeof(*ttm->cpu_address));
 	ttm->cpu_address = (void *) (ttm->ttm.pages + ttm->ttm.num_pages);
 	ttm->dma_address = (void *) (ttm->cpu_address + ttm->ttm.num_pages);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -180,9 +186,14 @@ void ttm_tt_destroy(struct ttm_tt *ttm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ttm->state == tt_unbound) {
 		ttm->bdev->driver->ttm_tt_unpopulate(ttm);
 	}
+=======
+	if (ttm->state == tt_unbound)
+		ttm_tt_unpopulate(ttm);
+>>>>>>> v3.18
 =======
 	if (ttm->state == tt_unbound)
 		ttm_tt_unpopulate(ttm);
@@ -244,7 +255,11 @@ int ttm_dma_tt_init(struct ttm_dma_tt *ttm_dma, struct ttm_bo_device *bdev,
 	INIT_LIST_HEAD(&ttm_dma->pages_list);
 	ttm_dma_tt_alloc_page_directory(ttm_dma);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ttm->pages || !ttm_dma->dma_address) {
+=======
+	if (!ttm->pages) {
+>>>>>>> v3.18
 =======
 	if (!ttm->pages) {
 >>>>>>> v3.18
@@ -263,7 +278,11 @@ void ttm_dma_tt_fini(struct ttm_dma_tt *ttm_dma)
 	drm_free_large(ttm->pages);
 	ttm->pages = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_free_large(ttm_dma->dma_address);
+=======
+	ttm_dma->cpu_address = NULL;
+>>>>>>> v3.18
 =======
 	ttm_dma->cpu_address = NULL;
 >>>>>>> v3.18
@@ -385,7 +404,11 @@ int ttm_tt_swapout(struct ttm_tt *ttm, struct file *persistent_swap_storage)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm->bdev->driver->ttm_tt_unpopulate(ttm);
+=======
+	ttm_tt_unpopulate(ttm);
+>>>>>>> v3.18
 =======
 	ttm_tt_unpopulate(ttm);
 >>>>>>> v3.18
@@ -402,7 +425,10 @@ out_err:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void ttm_tt_clear_mapping(struct ttm_tt *ttm)
 {
@@ -426,4 +452,7 @@ void ttm_tt_unpopulate(struct ttm_tt *ttm)
 	ttm_tt_clear_mapping(ttm);
 	ttm->bdev->driver->ttm_tt_unpopulate(ttm);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

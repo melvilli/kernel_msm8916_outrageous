@@ -19,6 +19,10 @@
 #define OMFS_MAX_BLOCK_SIZE 8192
 #define OMFS_MAX_CLUSTER_SIZE 8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define OMFS_MAX_BLOCKS (1ul << 31)
+>>>>>>> v3.18
 =======
 #define OMFS_MAX_BLOCKS (1ul << 31)
 >>>>>>> v3.18

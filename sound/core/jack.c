@@ -26,7 +26,11 @@
 #include <sound/core.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int jack_switch_types[] = {
+=======
+static int jack_switch_types[SND_JACK_SWITCH_TYPES] = {
+>>>>>>> v3.18
 =======
 static int jack_switch_types[SND_JACK_SWITCH_TYPES] = {
 >>>>>>> v3.18
@@ -36,6 +40,7 @@ static int jack_switch_types[SND_JACK_SWITCH_TYPES] = {
 	SW_JACK_PHYSICAL_INSERT,
 	SW_VIDEOOUT_INSERT,
 	SW_LINEIN_INSERT,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	SW_HPHL_OVERCURRENT,
 	SW_HPHR_OVERCURRENT,
@@ -50,6 +55,8 @@ static int snd_jack_dev_free(struct snd_device *device)
 	if (jack->private_free)
 		jack->private_free(jack);
 =======
+=======
+>>>>>>> v3.18
 };
 
 static int snd_jack_dev_disconnect(struct snd_device *device)
@@ -58,6 +65,9 @@ static int snd_jack_dev_disconnect(struct snd_device *device)
 
 	if (!jack->input_dev)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* If the input device is registered with the input subsystem
@@ -67,7 +77,10 @@ static int snd_jack_dev_disconnect(struct snd_device *device)
 	else
 		input_free_device(jack->input_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	jack->input_dev = NULL;
 	return 0;
 }
@@ -80,6 +93,9 @@ static int snd_jack_dev_free(struct snd_device *device)
 		jack->private_free(jack);
 
 	snd_jack_dev_disconnect(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(jack->id);
@@ -145,6 +161,10 @@ int snd_jack_new(struct snd_card *card, const char *id, int type,
 		.dev_free = snd_jack_dev_free,
 		.dev_register = snd_jack_dev_register,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.dev_disconnect = snd_jack_dev_disconnect,
+>>>>>>> v3.18
 =======
 		.dev_disconnect = snd_jack_dev_disconnect,
 >>>>>>> v3.18
@@ -167,7 +187,11 @@ int snd_jack_new(struct snd_card *card, const char *id, int type,
 	jack->type = type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < ARRAY_SIZE(jack_switch_types); i++)
+=======
+	for (i = 0; i < SND_JACK_SWITCH_TYPES; i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < SND_JACK_SWITCH_TYPES; i++)
 >>>>>>> v3.18

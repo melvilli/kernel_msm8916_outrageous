@@ -11,8 +11,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 / {
 =======
+=======
+>>>>>>> v3.18
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
 
@@ -21,6 +24,9 @@
 		stdout-path = &uart1;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memory {
 		reg = <0x10000000 0x40000000>;
@@ -29,16 +35,22 @@
 	regulators {
 		compatible = "simple-bus";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		reg_usb_otg_vbus: usb_otg_vbus {
 			compatible = "regulator-fixed";
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 
 		reg_usb_otg_vbus: regulator@0 {
 			compatible = "regulator-fixed";
 			reg = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regulator-name = "usb_otg_vbus";
 			regulator-min-microvolt = <5000000>;
@@ -47,7 +59,10 @@
 			enable-active-high;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		reg_usb_h1_vbus: regulator@1 {
 			compatible = "regulator-fixed";
@@ -79,11 +94,15 @@
 			regulator-always-on;
 			enable-active-high;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
 	gpio-keys {
 		compatible = "gpio-keys";
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		volume-up {
@@ -91,6 +110,8 @@
 			gpios = <&gpio1 4 0>;
 			linux,code = <115>; /* KEY_VOLUMEUP */
 =======
+=======
+>>>>>>> v3.18
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_gpio_keys>;
 
@@ -106,17 +127,23 @@
 			gpios = <&gpio1 4 GPIO_ACTIVE_LOW>;
 			gpio-key,wakeup;
 			linux,code = <KEY_VOLUMEUP>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
 		volume-down {
 			label = "Volume Down";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio1 5 0>;
 			linux,code = <114>; /* KEY_VOLUMEDOWN */
 		};
 	};
 =======
+=======
+>>>>>>> v3.18
 			gpios = <&gpio1 5 GPIO_ACTIVE_LOW>;
 			gpio-key,wakeup;
 			linux,code = <KEY_VOLUMEDOWN>;
@@ -182,15 +209,21 @@
 		spi-max-frequency = <20000000>;
 		reg = <0>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 &fec {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_enet_1>;
 	phy-mode = "rgmii";
 =======
+=======
+>>>>>>> v3.18
 	pinctrl-0 = <&pinctrl_enet>;
 	phy-mode = "rgmii";
 	phy-reset-gpios = <&gpio1 25 0>;
@@ -564,6 +597,9 @@
 };
 
 &ssi2 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = "okay";
 };
@@ -571,7 +607,11 @@
 &uart1 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_uart1_1>;
+=======
+	pinctrl-0 = <&pinctrl_uart1>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_uart1>;
 >>>>>>> v3.18
@@ -580,6 +620,10 @@
 
 &usbh1 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vbus-supply = <&reg_usb_h1_vbus>;
+>>>>>>> v3.18
 =======
 	vbus-supply = <&reg_usb_h1_vbus>;
 >>>>>>> v3.18
@@ -590,7 +634,11 @@
 	vbus-supply = <&reg_usb_otg_vbus>;
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_usbotg_2>;
+=======
+	pinctrl-0 = <&pinctrl_usbotg>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_usbotg>;
 >>>>>>> v3.18
@@ -601,7 +649,12 @@
 &usdhc2 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_usdhc2_1>;
+=======
+	pinctrl-0 = <&pinctrl_usdhc2>;
+	bus-width = <8>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_usdhc2>;
 	bus-width = <8>;
@@ -614,7 +667,12 @@
 &usdhc3 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_usdhc3_1>;
+=======
+	pinctrl-0 = <&pinctrl_usdhc3>;
+	bus-width = <8>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_usdhc3>;
 	bus-width = <8>;
@@ -624,7 +682,10 @@
 	status = "okay";
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &usdhc4 {
 	pinctrl-names = "default";
@@ -634,4 +695,7 @@
 	no-1-8-v;
 	status = "okay";
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -2,6 +2,11 @@
 include include/uapi/asm-generic/Kbuild.asm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += types.h
+
+>>>>>>> v3.18
 =======
 generic-y += types.h
 
@@ -37,7 +42,10 @@ header-y += swab.h
 header-y += termbits.h
 header-y += termios.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += types.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += unistd.h

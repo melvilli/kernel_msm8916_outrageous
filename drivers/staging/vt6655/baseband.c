@@ -57,10 +57,13 @@
 #include "rf.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Static Definitions -------------------------*/
 //static int          msglevel                =MSG_LEVEL_DEBUG;
 static int msglevel = MSG_LEVEL_INFO;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*---------------------  Static Classes  ----------------------------*/
@@ -79,7 +82,11 @@ static int msglevel = MSG_LEVEL_INFO;
 
 #define CB_VT3253_INIT_FOR_RFMD 446
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned char byVT3253InitTab_RFMD[CB_VT3253_INIT_FOR_RFMD][2] = {
+=======
+static unsigned char byVT3253InitTab_RFMD[CB_VT3253_INIT_FOR_RFMD][2] = {
+>>>>>>> v3.18
 =======
 static unsigned char byVT3253InitTab_RFMD[CB_VT3253_INIT_FOR_RFMD][2] = {
 >>>>>>> v3.18
@@ -533,7 +540,11 @@ static unsigned char byVT3253InitTab_RFMD[CB_VT3253_INIT_FOR_RFMD][2] = {
 
 #define CB_VT3253B0_INIT_FOR_RFMD 256
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned char byVT3253B0_RFMD[CB_VT3253B0_INIT_FOR_RFMD][2] = {
+=======
+static unsigned char byVT3253B0_RFMD[CB_VT3253B0_INIT_FOR_RFMD][2] = {
+>>>>>>> v3.18
 =======
 static unsigned char byVT3253B0_RFMD[CB_VT3253B0_INIT_FOR_RFMD][2] = {
 >>>>>>> v3.18
@@ -797,8 +808,13 @@ static unsigned char byVT3253B0_RFMD[CB_VT3253B0_INIT_FOR_RFMD][2] = {
 
 #define CB_VT3253B0_AGC_FOR_RFMD2959 195
 <<<<<<< HEAD
+<<<<<<< HEAD
 // For RFMD2959
 unsigned char byVT3253B0_AGC4_RFMD2959[CB_VT3253B0_AGC_FOR_RFMD2959][2] = {
+=======
+/* For RFMD2959 */
+static unsigned char byVT3253B0_AGC4_RFMD2959[CB_VT3253B0_AGC_FOR_RFMD2959][2] = {
+>>>>>>> v3.18
 =======
 /* For RFMD2959 */
 static unsigned char byVT3253B0_AGC4_RFMD2959[CB_VT3253B0_AGC_FOR_RFMD2959][2] = {
@@ -1002,8 +1018,13 @@ static unsigned char byVT3253B0_AGC4_RFMD2959[CB_VT3253B0_AGC_FOR_RFMD2959][2] =
 
 #define CB_VT3253B0_INIT_FOR_AIROHA2230 256
 <<<<<<< HEAD
+<<<<<<< HEAD
 // For AIROHA
 unsigned char byVT3253B0_AIROHA2230[CB_VT3253B0_INIT_FOR_AIROHA2230][2] = {
+=======
+/* For AIROHA */
+static unsigned char byVT3253B0_AIROHA2230[CB_VT3253B0_INIT_FOR_AIROHA2230][2] = {
+>>>>>>> v3.18
 =======
 /* For AIROHA */
 static unsigned char byVT3253B0_AIROHA2230[CB_VT3253B0_INIT_FOR_AIROHA2230][2] = {
@@ -1117,8 +1138,12 @@ static unsigned char byVT3253B0_AIROHA2230[CB_VT3253B0_INIT_FOR_AIROHA2230][2] =
 	{0x6a, 0x00},
 	{0x6b, 0x00},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//{0x6c, 0x80},
 	{0x6c, 0x00}, //RobertYu:20050125, request by JJSue
+=======
+	{0x6c, 0x00}, /* RobertYu:20050125, request by JJSue */
+>>>>>>> v3.18
 =======
 	{0x6c, 0x00}, /* RobertYu:20050125, request by JJSue */
 >>>>>>> v3.18
@@ -1273,8 +1298,13 @@ static unsigned char byVT3253B0_AIROHA2230[CB_VT3253B0_INIT_FOR_AIROHA2230][2] =
 
 #define CB_VT3253B0_INIT_FOR_UW2451 256
 <<<<<<< HEAD
+<<<<<<< HEAD
 //For UW2451
 unsigned char byVT3253B0_UW2451[CB_VT3253B0_INIT_FOR_UW2451][2] = {
+=======
+/* For UW2451 */
+static unsigned char byVT3253B0_UW2451[CB_VT3253B0_INIT_FOR_UW2451][2] = {
+>>>>>>> v3.18
 =======
 /* For UW2451 */
 static unsigned char byVT3253B0_UW2451[CB_VT3253B0_INIT_FOR_UW2451][2] = {
@@ -1388,8 +1418,12 @@ static unsigned char byVT3253B0_UW2451[CB_VT3253B0_INIT_FOR_UW2451][2] = {
 	{0x6a, 0x00},
 	{0x6b, 0x00},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//{0x6c, 0x80},
 	{0x6c, 0x00}, //RobertYu:20050125, request by JJSue
+=======
+	{0x6c, 0x00}, /* RobertYu:20050125, request by JJSue */
+>>>>>>> v3.18
 =======
 	{0x6c, 0x00}, /* RobertYu:20050125, request by JJSue */
 >>>>>>> v3.18
@@ -1544,8 +1578,13 @@ static unsigned char byVT3253B0_UW2451[CB_VT3253B0_INIT_FOR_UW2451][2] = {
 
 #define CB_VT3253B0_AGC 193
 <<<<<<< HEAD
+<<<<<<< HEAD
 // For AIROHA
 unsigned char byVT3253B0_AGC[CB_VT3253B0_AGC][2] = {
+=======
+/* For AIROHA */
+static unsigned char byVT3253B0_AGC[CB_VT3253B0_AGC][2] = {
+>>>>>>> v3.18
 =======
 /* For AIROHA */
 static unsigned char byVT3253B0_AGC[CB_VT3253B0_AGC][2] = {
@@ -1746,8 +1785,14 @@ static unsigned char byVT3253B0_AGC[CB_VT3253B0_AGC][2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const unsigned short awcFrameTime[MAX_RATE] =
 {10, 20, 55, 110, 24, 36, 48, 72, 96, 144, 192, 216};
+=======
+static const unsigned short awcFrameTime[MAX_RATE] = {
+		10, 20, 55, 110, 24, 36, 48, 72, 96, 144, 192, 216
+};
+>>>>>>> v3.18
 =======
 static const unsigned short awcFrameTime[MAX_RATE] = {
 		10, 20, 55, 110, 24, 36, 48, 72, 96, 144, 192, 216
@@ -1759,7 +1804,11 @@ static const unsigned short awcFrameTime[MAX_RATE] = {
 static
 unsigned long
 <<<<<<< HEAD
+<<<<<<< HEAD
 s_ulGetRatio(PSDevice pDevice);
+=======
+s_ulGetRatio(struct vnt_private *pDevice);
+>>>>>>> v3.18
 =======
 s_ulGetRatio(struct vnt_private *pDevice);
 >>>>>>> v3.18
@@ -1768,7 +1817,11 @@ static
 void
 s_vChangeAntenna(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice pDevice
+=======
+	struct vnt_private *pDevice
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice
 >>>>>>> v3.18
@@ -1778,7 +1831,11 @@ static
 void
 s_vChangeAntenna(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice pDevice
+=======
+	struct vnt_private *pDevice
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice
 >>>>>>> v3.18
@@ -1843,6 +1900,7 @@ BBuGetFrameTime(
 	uRate = (unsigned int)awcFrameTime[uRateIdx];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (uRateIdx <= 3) {          //CCK mode
 
 		if (byPreambleType == 1) {//Short
@@ -1869,6 +1927,8 @@ BBuGetFrameTime(
 		}
 		return 20 + uFrameTime; //??????
 =======
+=======
+>>>>>>> v3.18
 	if (uRateIdx <= 3) {          /* CCK mode */
 		if (byPreambleType == 1) /* Short */
 			uPreamble = 96;
@@ -1892,6 +1952,9 @@ BBuGetFrameTime(
 			uFrameTime += 6;     /* ?????? */
 
 		return 20 + uFrameTime; /* ?????? */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1902,6 +1965,7 @@ BBuGetFrameTime(
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice         - Device Structure
  *      cbFrameLength   - Tx Frame Length
  *      wRate           - Tx Rate
@@ -1910,6 +1974,8 @@ BBuGetFrameTime(
  *      pbyPhySrv       - pointer to Phy Service field
  *      pbyPhySgn       - pointer to Phy Signal field
 =======
+=======
+>>>>>>> v3.18
  *      priv         - Device Structure
  *      frame_length   - Tx Frame Length
  *      tx_rate           - Tx Rate
@@ -1918,11 +1984,15 @@ BBuGetFrameTime(
  *		- pointer to Phy Length field
  *		- pointer to Phy Service field
  *		- pointer to Phy Signal field
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void
 BBvCalculateParameter(
@@ -2071,6 +2141,8 @@ BBvCalculateParameter(
 		*pbyPhySrv = 0x00;
 		*pwPhyLen = (unsigned short)cbFrameLength;
 =======
+=======
+>>>>>>> v3.18
 void vnt_get_phy_field(struct vnt_private *priv, u32 frame_length,
 		       u16 tx_rate, u8 pkt_type, struct vnt_phy_field *phy)
 {
@@ -2200,6 +2272,9 @@ void vnt_get_phy_field(struct vnt_private *priv, u32 frame_length,
 	} else {
 		phy->service = 0x00;
 		phy->len = cpu_to_le16((u16)frame_length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -2218,7 +2293,11 @@ void vnt_get_phy_field(struct vnt_private *priv, u32 frame_length,
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool BBbReadEmbedded(unsigned long dwIoBase, unsigned char byBBAddr, unsigned char *pbyData)
+=======
+bool BBbReadEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned char *pbyData)
+>>>>>>> v3.18
 =======
 bool BBbReadEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned char *pbyData)
 >>>>>>> v3.18
@@ -2227,6 +2306,7 @@ bool BBbReadEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned ch
 	unsigned char byValue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// BB reg offset
 	VNSvOutPortB(dwIoBase + MAC_REG_BBREGADR, byBBAddr);
 
@@ -2234,12 +2314,17 @@ bool BBbReadEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned ch
 	MACvRegBitsOn(dwIoBase, MAC_REG_BBREGCTL, BBREGCTL_REGR);
 	// W_MAX_TIMEOUT is the timeout period
 =======
+=======
+>>>>>>> v3.18
 	/* BB reg offset */
 	VNSvOutPortB(dwIoBase + MAC_REG_BBREGADR, byBBAddr);
 
 	/* turn on REGR */
 	MACvRegBitsOn(dwIoBase, MAC_REG_BBREGCTL, BBREGCTL_REGR);
 	/* W_MAX_TIMEOUT is the timeout period */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (ww = 0; ww < W_MAX_TIMEOUT; ww++) {
 		VNSvInPortB(dwIoBase + MAC_REG_BBREGCTL, &byValue);
@@ -2248,7 +2333,11 @@ bool BBbReadEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned ch
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// get BB data
+=======
+	/* get BB data */
+>>>>>>> v3.18
 =======
 	/* get BB data */
 >>>>>>> v3.18
@@ -2257,7 +2346,11 @@ bool BBbReadEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned ch
 	if (ww == W_MAX_TIMEOUT) {
 		DBG_PORT80(0x30);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " DBG_PORT80(0x30)\n");
+=======
+		pr_debug(" DBG_PORT80(0x30)\n");
+>>>>>>> v3.18
 =======
 		pr_debug(" DBG_PORT80(0x30)\n");
 >>>>>>> v3.18
@@ -2281,7 +2374,11 @@ bool BBbReadEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned ch
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool BBbWriteEmbedded(unsigned long dwIoBase, unsigned char byBBAddr, unsigned char byData)
+=======
+bool BBbWriteEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned char byData)
+>>>>>>> v3.18
 =======
 bool BBbWriteEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned char byData)
 >>>>>>> v3.18
@@ -2289,6 +2386,7 @@ bool BBbWriteEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned c
 	unsigned short ww;
 	unsigned char byValue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// BB reg offset
 	VNSvOutPortB(dwIoBase + MAC_REG_BBREGADR, byBBAddr);
@@ -2299,6 +2397,8 @@ bool BBbWriteEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned c
 	MACvRegBitsOn(dwIoBase, MAC_REG_BBREGCTL, BBREGCTL_REGW);
 	// W_MAX_TIMEOUT is the timeout period
 =======
+=======
+>>>>>>> v3.18
 	/* BB reg offset */
 	VNSvOutPortB(dwIoBase + MAC_REG_BBREGADR, byBBAddr);
 	/* set BB data */
@@ -2307,6 +2407,9 @@ bool BBbWriteEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned c
 	/* turn on BBREGCTL_REGW */
 	MACvRegBitsOn(dwIoBase, MAC_REG_BBREGCTL, BBREGCTL_REGW);
 	/* W_MAX_TIMEOUT is the timeout period */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (ww = 0; ww < W_MAX_TIMEOUT; ww++) {
 		VNSvInPortB(dwIoBase + MAC_REG_BBREGCTL, &byValue);
@@ -2317,7 +2420,11 @@ bool BBbWriteEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned c
 	if (ww == W_MAX_TIMEOUT) {
 		DBG_PORT80(0x31);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " DBG_PORT80(0x31)\n");
+=======
+		pr_debug(" DBG_PORT80(0x31)\n");
+>>>>>>> v3.18
 =======
 		pr_debug(" DBG_PORT80(0x31)\n");
 >>>>>>> v3.18
@@ -2341,7 +2448,11 @@ bool BBbWriteEmbedded(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned c
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool BBbIsRegBitsOn(unsigned long dwIoBase, unsigned char byBBAddr, unsigned char byTestBits)
+=======
+bool BBbIsRegBitsOn(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned char byTestBits)
+>>>>>>> v3.18
 =======
 bool BBbIsRegBitsOn(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned char byTestBits)
 >>>>>>> v3.18
@@ -2367,7 +2478,11 @@ bool BBbIsRegBitsOn(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned cha
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool BBbIsRegBitsOff(unsigned long dwIoBase, unsigned char byBBAddr, unsigned char byTestBits)
+=======
+bool BBbIsRegBitsOff(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned char byTestBits)
+>>>>>>> v3.18
 =======
 bool BBbIsRegBitsOff(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned char byTestBits)
 >>>>>>> v3.18
@@ -2394,23 +2509,30 @@ bool BBbIsRegBitsOff(void __iomem *dwIoBase, unsigned char byBBAddr, unsigned ch
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool BBbVT3253Init(PSDevice pDevice)
 {
 	bool bResult = true;
 	int        ii;
 	unsigned long dwIoBase = pDevice->PortOffset;
 =======
+=======
+>>>>>>> v3.18
 bool BBbVT3253Init(struct vnt_private *pDevice)
 {
 	bool bResult = true;
 	int        ii;
 	void __iomem *dwIoBase = pDevice->PortOffset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char byRFType = pDevice->byRFType;
 	unsigned char byLocalID = pDevice->byLocalID;
 
 	if (byRFType == RF_RFMD2959) {
 		if (byLocalID <= REV_ID_VT3253_A1) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			for (ii = 0; ii < CB_VT3253_INIT_FOR_RFMD; ii++) {
 				bResult &= BBbWriteEmbedded(dwIoBase, byVT3253InitTab_RFMD[ii][0], byVT3253InitTab_RFMD[ii][1]);
@@ -2423,6 +2545,8 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 				bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AGC4_RFMD2959[ii][0], byVT3253B0_AGC4_RFMD2959[ii][1]);
 			}
 =======
+=======
+>>>>>>> v3.18
 			for (ii = 0; ii < CB_VT3253_INIT_FOR_RFMD; ii++)
 				bResult &= BBbWriteEmbedded(dwIoBase, byVT3253InitTab_RFMD[ii][0], byVT3253InitTab_RFMD[ii][1]);
 
@@ -2433,6 +2557,9 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 			for (ii = 0; ii < CB_VT3253B0_AGC_FOR_RFMD2959; ii++)
 				bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AGC4_RFMD2959[ii][0], byVT3253B0_AGC4_RFMD2959[ii][1]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			VNSvOutPortD(dwIoBase + MAC_REG_ITRTMSET, 0x23);
 			MACvRegBitsOn(dwIoBase, MAC_REG_PAPEDELAY, BIT0);
@@ -2447,6 +2574,7 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 		pDevice->ldBmThreshold[3] = 0;
 	} else if ((byRFType == RF_AIROHA) || (byRFType == RF_AL2230S)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (ii = 0; ii < CB_VT3253B0_INIT_FOR_AIROHA2230; ii++) {
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AIROHA2230[ii][0], byVT3253B0_AIROHA2230[ii][1]);
 		}
@@ -2454,12 +2582,17 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AGC[ii][0], byVT3253B0_AGC[ii][1]);
 		}
 =======
+=======
+>>>>>>> v3.18
 		for (ii = 0; ii < CB_VT3253B0_INIT_FOR_AIROHA2230; ii++)
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AIROHA2230[ii][0], byVT3253B0_AIROHA2230[ii][1]);
 
 		for (ii = 0; ii < CB_VT3253B0_AGC; ii++)
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AGC[ii][0], byVT3253B0_AGC[ii][1]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pDevice->abyBBVGA[0] = 0x1C;
 		pDevice->abyBBVGA[1] = 0x10;
@@ -2471,6 +2604,7 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 		pDevice->ldBmThreshold[3] = 0;
 	} else if (byRFType == RF_UW2451) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (ii = 0; ii < CB_VT3253B0_INIT_FOR_UW2451; ii++) {
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_UW2451[ii][0], byVT3253B0_UW2451[ii][1]);
 		}
@@ -2478,12 +2612,17 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AGC[ii][0], byVT3253B0_AGC[ii][1]);
 		}
 =======
+=======
+>>>>>>> v3.18
 		for (ii = 0; ii < CB_VT3253B0_INIT_FOR_UW2451; ii++)
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_UW2451[ii][0], byVT3253B0_UW2451[ii][1]);
 
 		for (ii = 0; ii < CB_VT3253B0_AGC; ii++)
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AGC[ii][0], byVT3253B0_AGC[ii][1]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		VNSvOutPortB(dwIoBase + MAC_REG_ITRTMSET, 0x23);
 		MACvRegBitsOn(dwIoBase, MAC_REG_PAPEDELAY, BIT0);
@@ -2497,6 +2636,7 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 		pDevice->ldBmThreshold[2] = 0;
 		pDevice->ldBmThreshold[3] = 0;
 	} else if (byRFType == RF_UW2452) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for (ii = 0; ii < CB_VT3253B0_INIT_FOR_UW2451; ii++) {
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_UW2451[ii][0], byVT3253B0_UW2451[ii][1]);
@@ -2525,6 +2665,8 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 		//VNSvOutPortB(dwIoBase + MAC_REG_ITRTMSET, 0x23); // RobertYu: 20050104, 20050131 disable PA_Delay
 		//MACvRegBitsOn(dwIoBase, MAC_REG_PAPEDELAY, BIT0); // RobertYu: 20050104, 20050131 disable PA_Delay
 =======
+=======
+>>>>>>> v3.18
 		for (ii = 0; ii < CB_VT3253B0_INIT_FOR_UW2451; ii++)
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_UW2451[ii][0], byVT3253B0_UW2451[ii][1]);
 
@@ -2548,6 +2690,9 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 
 		for (ii = 0; ii < CB_VT3253B0_AGC; ii++)
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AGC[ii][0], byVT3253B0_AGC[ii][1]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		pDevice->abyBBVGA[0] = 0x14;
@@ -2559,6 +2704,7 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 		pDevice->ldBmThreshold[2] = 0;
 		pDevice->ldBmThreshold[3] = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//}} RobertYu
 
 	} else if (byRFType == RF_VT3226) {
@@ -2569,6 +2715,8 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AGC[ii][0], byVT3253B0_AGC[ii][1]);
 		}
 =======
+=======
+>>>>>>> v3.18
 		/* }} RobertYu */
 
 	} else if (byRFType == RF_VT3226) {
@@ -2578,6 +2726,9 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 		for (ii = 0; ii < CB_VT3253B0_AGC; ii++)
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AGC[ii][0], byVT3253B0_AGC[ii][1]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pDevice->abyBBVGA[0] = 0x1C;
 		pDevice->abyBBVGA[1] = 0x10;
@@ -2587,6 +2738,7 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 		pDevice->ldBmThreshold[1] = -48;
 		pDevice->ldBmThreshold[2] = 0;
 		pDevice->ldBmThreshold[3] = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Fix VT3226 DFC system timing issue
 		MACvSetRFLE_LatchBase(dwIoBase);
@@ -2609,6 +2761,8 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AGC[ii][0], byVT3253B0_AGC[ii][1]);
 		}
 =======
+=======
+>>>>>>> v3.18
 		/* Fix VT3226 DFC system timing issue */
 		MACvSetRFLE_LatchBase(dwIoBase);
 		/* {{ RobertYu: 20050104 */
@@ -2629,6 +2783,9 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 		for (ii = 0; ii < CB_VT3253B0_AGC; ii++)
 			bResult &= BBbWriteEmbedded(dwIoBase, byVT3253B0_AGC[ii][0], byVT3253B0_AGC[ii][1]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pDevice->abyBBVGA[0] = 0x1C;
 		pDevice->abyBBVGA[1] = 0x10;
@@ -2639,9 +2796,15 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
 		pDevice->ldBmThreshold[2] = 0;
 		pDevice->ldBmThreshold[3] = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//}} RobertYu
 	} else {
 		// No VGA Table now
+=======
+		/* }} RobertYu */
+	} else {
+		/* No VGA Table now */
+>>>>>>> v3.18
 =======
 		/* }} RobertYu */
 	} else {
@@ -2673,16 +2836,22 @@ bool BBbVT3253Init(struct vnt_private *pDevice)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void BBvReadAllRegs(unsigned long dwIoBase, unsigned char *pbyBBRegs)
 {
 	int  ii;
 	unsigned char byBase = 1;
 =======
+=======
+>>>>>>> v3.18
 void BBvReadAllRegs(void __iomem *dwIoBase, unsigned char *pbyBBRegs)
 {
 	int  ii;
 	unsigned char byBase = 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (ii = 0; ii < BB_MAX_CONTEXT_SIZE; ii++) {
 		BBbReadEmbedded(dwIoBase, (unsigned char)(ii*byBase), pbyBBRegs);
@@ -2704,6 +2873,7 @@ void BBvReadAllRegs(void __iomem *dwIoBase, unsigned char *pbyBBRegs)
  *
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void BBvLoopbackOn(PSDevice pDevice)
 {
@@ -2742,6 +2912,8 @@ void BBvLoopbackOn(PSDevice pDevice)
 
 	// Disable TX_IQUN
 =======
+=======
+>>>>>>> v3.18
 void BBvLoopbackOn(struct vnt_private *pDevice)
 {
 	unsigned char byData;
@@ -2778,6 +2950,9 @@ void BBvLoopbackOn(struct vnt_private *pDevice)
 	BBbWriteEmbedded(dwIoBase, 0x0E, 0); /* CR14 */
 
 	/* Disable TX_IQUN */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BBbReadEmbedded(pDevice->PortOffset, 0x09, &pDevice->byBBCR09);
 	BBbWriteEmbedded(pDevice->PortOffset, 0x09, (unsigned char)(pDevice->byBBCR09 & 0xDE));
@@ -2796,6 +2971,7 @@ void BBvLoopbackOn(struct vnt_private *pDevice)
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void BBvLoopbackOff(PSDevice pDevice)
 {
@@ -2818,6 +2994,8 @@ void BBvLoopbackOff(PSDevice pDevice)
 	BBbReadEmbedded(dwIoBase, 0x0E, &byData);//CR14
 	BBbWriteEmbedded(dwIoBase, 0x0E, (unsigned char)(byData | 0x80));//CR14
 =======
+=======
+>>>>>>> v3.18
 void BBvLoopbackOff(struct vnt_private *pDevice)
 {
 	unsigned char byData;
@@ -2838,6 +3016,9 @@ void BBvLoopbackOff(struct vnt_private *pDevice)
 	}
 	BBbReadEmbedded(dwIoBase, 0x0E, &byData); /* CR14 */
 	BBbWriteEmbedded(dwIoBase, 0x0E, (unsigned char)(byData | 0x80)); /* CR14 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2855,7 +3036,11 @@ void BBvLoopbackOff(struct vnt_private *pDevice)
  */
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 BBvSetShortSlotTime(PSDevice pDevice)
+=======
+BBvSetShortSlotTime(struct vnt_private *pDevice)
+>>>>>>> v3.18
 =======
 BBvSetShortSlotTime(struct vnt_private *pDevice)
 >>>>>>> v3.18
@@ -2863,6 +3048,7 @@ BBvSetShortSlotTime(struct vnt_private *pDevice)
 	unsigned char byBBRxConf = 0;
 	unsigned char byBBVGA = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BBbReadEmbedded(pDevice->PortOffset, 0x0A, &byBBRxConf);//CR10
 
@@ -2883,6 +3069,8 @@ BBvSetShortSlotTime(struct vnt_private *pDevice)
 
 void BBvSetVGAGainOffset(PSDevice pDevice, unsigned char byData)
 =======
+=======
+>>>>>>> v3.18
 	BBbReadEmbedded(pDevice->PortOffset, 0x0A, &byBBRxConf); /* CR10 */
 
 	if (pDevice->bShortSlotTime)
@@ -2899,12 +3087,16 @@ void BBvSetVGAGainOffset(PSDevice pDevice, unsigned char byData)
 }
 
 void BBvSetVGAGainOffset(struct vnt_private *pDevice, unsigned char byData)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned char byBBRxConf = 0;
 
 	BBbWriteEmbedded(pDevice->PortOffset, 0xE7, byData);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BBbReadEmbedded(pDevice->PortOffset, 0x0A, &byBBRxConf);//CR10
 	// patch for 3253B0 Baseband with Cardbus module
@@ -2918,6 +3110,8 @@ void BBvSetVGAGainOffset(struct vnt_private *pDevice, unsigned char byData)
 	pDevice->byBBVGACurrent = byData;
 	BBbWriteEmbedded(pDevice->PortOffset, 0x0A, byBBRxConf);//CR10
 =======
+=======
+>>>>>>> v3.18
 	BBbReadEmbedded(pDevice->PortOffset, 0x0A, &byBBRxConf); /* CR10 */
 	/* patch for 3253B0 Baseband with Cardbus module */
 	if (byData == pDevice->abyBBVGA[0])
@@ -2928,6 +3122,9 @@ void BBvSetVGAGainOffset(struct vnt_private *pDevice, unsigned char byData)
 		byBBRxConf |= 0x20; /* 0010 0000 */
 	pDevice->byBBVGACurrent = byData;
 	BBbWriteEmbedded(pDevice->PortOffset, 0x0A, byBBRxConf); /* CR10 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2945,7 +3142,11 @@ void BBvSetVGAGainOffset(struct vnt_private *pDevice, unsigned char byData)
  */
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 BBvSoftwareReset(unsigned long dwIoBase)
+=======
+BBvSoftwareReset(void __iomem *dwIoBase)
+>>>>>>> v3.18
 =======
 BBvSoftwareReset(void __iomem *dwIoBase)
 >>>>>>> v3.18
@@ -2970,7 +3171,11 @@ BBvSoftwareReset(void __iomem *dwIoBase)
  */
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 BBvPowerSaveModeON(unsigned long dwIoBase)
+=======
+BBvPowerSaveModeON(void __iomem *dwIoBase)
+>>>>>>> v3.18
 =======
 BBvPowerSaveModeON(void __iomem *dwIoBase)
 >>>>>>> v3.18
@@ -2996,7 +3201,11 @@ BBvPowerSaveModeON(void __iomem *dwIoBase)
  */
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 BBvPowerSaveModeOFF(unsigned long dwIoBase)
+=======
+BBvPowerSaveModeOFF(void __iomem *dwIoBase)
+>>>>>>> v3.18
 =======
 BBvPowerSaveModeOFF(void __iomem *dwIoBase)
 >>>>>>> v3.18
@@ -3024,6 +3233,7 @@ BBvPowerSaveModeOFF(void __iomem *dwIoBase)
 
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 BBvSetTxAntennaMode(unsigned long dwIoBase, unsigned char byAntennaMode)
 {
 	unsigned char byBBTxConf;
@@ -3041,6 +3251,8 @@ BBvSetTxAntennaMode(unsigned long dwIoBase, unsigned char byAntennaMode)
 	}
 	BBbWriteEmbedded(dwIoBase, 0x09, byBBTxConf);//CR09
 =======
+=======
+>>>>>>> v3.18
 BBvSetTxAntennaMode(void __iomem *dwIoBase, unsigned char byAntennaMode)
 {
 	unsigned char byBBTxConf;
@@ -3057,6 +3269,9 @@ BBvSetTxAntennaMode(void __iomem *dwIoBase, unsigned char byAntennaMode)
 		byBBTxConf |= 0x04;
 	}
 	BBbWriteEmbedded(dwIoBase, 0x09, byBBTxConf); /* CR09 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3076,22 +3291,29 @@ BBvSetTxAntennaMode(void __iomem *dwIoBase, unsigned char byAntennaMode)
 
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 BBvSetRxAntennaMode(unsigned long dwIoBase, unsigned char byAntennaMode)
 {
 	unsigned char byBBRxConf;
 
 	BBbReadEmbedded(dwIoBase, 0x0A, &byBBRxConf);//CR10
 =======
+=======
+>>>>>>> v3.18
 BBvSetRxAntennaMode(void __iomem *dwIoBase, unsigned char byAntennaMode)
 {
 	unsigned char byBBRxConf;
 
 	BBbReadEmbedded(dwIoBase, 0x0A, &byBBRxConf); /* CR10 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (byAntennaMode == ANT_DIVERSITY) {
 		byBBRxConf |= 0x01;
 
 	} else if (byAntennaMode == ANT_A) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		byBBRxConf &= 0xFC; // 1111 1100
 	} else if (byAntennaMode == ANT_B) {
@@ -3100,12 +3322,17 @@ BBvSetRxAntennaMode(void __iomem *dwIoBase, unsigned char byAntennaMode)
 	}
 	BBbWriteEmbedded(dwIoBase, 0x0A, byBBRxConf);//CR10
 =======
+=======
+>>>>>>> v3.18
 		byBBRxConf &= 0xFC; /* 1111 1100 */
 	} else if (byAntennaMode == ANT_B) {
 		byBBRxConf &= 0xFE; /* 1111 1110 */
 		byBBRxConf |= 0x02;
 	}
 	BBbWriteEmbedded(dwIoBase, 0x0A, byBBRxConf); /* CR10 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3123,6 +3350,7 @@ BBvSetRxAntennaMode(void __iomem *dwIoBase, unsigned char byAntennaMode)
  */
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 BBvSetDeepSleep(unsigned long dwIoBase, unsigned char byLocalID)
 {
 	BBbWriteEmbedded(dwIoBase, 0x0C, 0x17);//CR12
@@ -3135,6 +3363,8 @@ BBvExitDeepSleep(unsigned long dwIoBase, unsigned char byLocalID)
 	BBbWriteEmbedded(dwIoBase, 0x0C, 0x00);//CR12
 	BBbWriteEmbedded(dwIoBase, 0x0D, 0x01);//CR13
 =======
+=======
+>>>>>>> v3.18
 BBvSetDeepSleep(void __iomem *dwIoBase, unsigned char byLocalID)
 {
 	BBbWriteEmbedded(dwIoBase, 0x0C, 0x17); /* CR12 */
@@ -3146,13 +3376,20 @@ BBvExitDeepSleep(void __iomem *dwIoBase, unsigned char byLocalID)
 {
 	BBbWriteEmbedded(dwIoBase, 0x0C, 0x00); /* CR12 */
 	BBbWriteEmbedded(dwIoBase, 0x0D, 0x01); /* CR13 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static
 unsigned long
 <<<<<<< HEAD
+<<<<<<< HEAD
 s_ulGetRatio(PSDevice pDevice)
+=======
+s_ulGetRatio(struct vnt_private *pDevice)
+>>>>>>> v3.18
 =======
 s_ulGetRatio(struct vnt_private *pDevice)
 >>>>>>> v3.18
@@ -3162,7 +3399,11 @@ s_ulGetRatio(struct vnt_private *pDevice)
 	unsigned long ulPacketNum;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//This is a thousand-ratio
+=======
+	/* This is a thousand-ratio */
+>>>>>>> v3.18
 =======
 	/* This is a thousand-ratio */
 >>>>>>> v3.18
@@ -3171,7 +3412,10 @@ s_ulGetRatio(struct vnt_private *pDevice)
 		ulPacketNum = pDevice->uNumSQ3[RATE_54M];
 		ulRatio = (ulPacketNum * 1000 / pDevice->uDiversityCnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//ulRatio = (pDevice->uNumSQ3[RATE_54M] * 1000 / pDevice->uDiversityCnt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ulRatio += TOP_RATE_54M;
@@ -3180,7 +3424,10 @@ s_ulGetRatio(struct vnt_private *pDevice)
 		ulPacketNum = pDevice->uNumSQ3[RATE_54M] + pDevice->uNumSQ3[RATE_48M];
 		ulRatio = (ulPacketNum * 1000 / pDevice->uDiversityCnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//ulRatio = (pDevice->uNumSQ3[RATE_48M] * 1000 / pDevice->uDiversityCnt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ulRatio += TOP_RATE_48M;
@@ -3191,7 +3438,10 @@ s_ulGetRatio(struct vnt_private *pDevice)
 			pDevice->uNumSQ3[RATE_36M];
 		ulRatio = (ulPacketNum * 1000 / pDevice->uDiversityCnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//ulRatio = (pDevice->uNumSQ3[RATE_36M] * 1000 / pDevice->uDiversityCnt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ulRatio += TOP_RATE_36M;
@@ -3202,7 +3452,10 @@ s_ulGetRatio(struct vnt_private *pDevice)
 			pDevice->uNumSQ3[RATE_36M] + pDevice->uNumSQ3[RATE_24M];
 		ulRatio = (ulPacketNum * 1000 / pDevice->uDiversityCnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//ulRatio = (pDevice->uNumSQ3[RATE_24M] * 1000 / pDevice->uDiversityCnt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ulRatio += TOP_RATE_24M;
@@ -3214,7 +3467,10 @@ s_ulGetRatio(struct vnt_private *pDevice)
 			pDevice->uNumSQ3[RATE_18M];
 		ulRatio = (ulPacketNum * 1000 / pDevice->uDiversityCnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//ulRatio = (pDevice->uNumSQ3[RATE_18M] * 1000 / pDevice->uDiversityCnt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ulRatio += TOP_RATE_18M;
@@ -3226,7 +3482,10 @@ s_ulGetRatio(struct vnt_private *pDevice)
 			pDevice->uNumSQ3[RATE_18M] + pDevice->uNumSQ3[RATE_12M];
 		ulRatio = (ulPacketNum * 1000 / pDevice->uDiversityCnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//ulRatio = (pDevice->uNumSQ3[RATE_12M] * 1000 / pDevice->uDiversityCnt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ulRatio += TOP_RATE_12M;
@@ -3238,7 +3497,10 @@ s_ulGetRatio(struct vnt_private *pDevice)
 			pDevice->uNumSQ3[RATE_6M] - pDevice->uNumSQ3[RATE_9M];
 		ulRatio = (ulPacketNum * 1000 / pDevice->uDiversityCnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//ulRatio = (pDevice->uNumSQ3[RATE_11M] * 1000 / pDevice->uDiversityCnt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ulRatio += TOP_RATE_11M;
@@ -3250,7 +3512,10 @@ s_ulGetRatio(struct vnt_private *pDevice)
 			pDevice->uNumSQ3[RATE_6M];
 		ulRatio = (ulPacketNum * 1000 / pDevice->uDiversityCnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//ulRatio = (pDevice->uNumSQ3[RATE_9M] * 1000 / pDevice->uDiversityCnt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ulRatio += TOP_RATE_9M;
@@ -3261,7 +3526,10 @@ s_ulGetRatio(struct vnt_private *pDevice)
 			pDevice->uNumSQ3[RATE_2M] - pDevice->uNumSQ3[RATE_5M];
 		ulRatio = (ulPacketNum * 1000 / pDevice->uDiversityCnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//ulRatio = (pDevice->uNumSQ3[RATE_6M] * 1000 / pDevice->uDiversityCnt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ulRatio += TOP_RATE_6M;
@@ -3272,7 +3540,10 @@ s_ulGetRatio(struct vnt_private *pDevice)
 			pDevice->uNumSQ3[RATE_2M];
 		ulRatio = (ulPacketNum * 1000 / pDevice->uDiversityCnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//ulRatio = (pDevice->uNumSQ3[RATE_5M] * 1000 / pDevice->uDiversityCnt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ulRatio += TOP_RATE_55M;
@@ -3282,7 +3553,10 @@ s_ulGetRatio(struct vnt_private *pDevice)
 		ulPacketNum = pDevice->uDiversityCnt - pDevice->uNumSQ3[RATE_1M];
 		ulRatio = (ulPacketNum * 1000 / pDevice->uDiversityCnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//ulRatio = (pDevice->uNumSQ3[RATE_2M]  * 1000 / pDevice->uDiversityCnt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ulRatio += TOP_RATE_2M;
@@ -3292,7 +3566,10 @@ s_ulGetRatio(struct vnt_private *pDevice)
 		ulPacketNum = pDevice->uDiversityCnt;
 		ulRatio = (ulPacketNum * 1000 / pDevice->uDiversityCnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//ulRatio = (pDevice->uNumSQ3[RATE_1M]  * 1000 / pDevice->uDiversityCnt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ulRatio += TOP_RATE_1M;
@@ -3303,7 +3580,11 @@ s_ulGetRatio(struct vnt_private *pDevice)
 
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 BBvClearAntDivSQ3Value(PSDevice pDevice)
+=======
+BBvClearAntDivSQ3Value(struct vnt_private *pDevice)
+>>>>>>> v3.18
 =======
 BBvClearAntDivSQ3Value(struct vnt_private *pDevice)
 >>>>>>> v3.18
@@ -3312,9 +3593,14 @@ BBvClearAntDivSQ3Value(struct vnt_private *pDevice)
 
 	pDevice->uDiversityCnt = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (ii = 0; ii < MAX_RATE; ii++) {
 		pDevice->uNumSQ3[ii] = 0;
 	}
+=======
+	for (ii = 0; ii < MAX_RATE; ii++)
+		pDevice->uNumSQ3[ii] = 0;
+>>>>>>> v3.18
 =======
 	for (ii = 0; ii < MAX_RATE; ii++)
 		pDevice->uNumSQ3[ii] = 0;
@@ -3337,6 +3623,7 @@ BBvClearAntDivSQ3Value(struct vnt_private *pDevice)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 BBvAntennaDiversity(PSDevice pDevice, unsigned char byRxRate, unsigned char bySQ3)
 {
@@ -3346,6 +3633,8 @@ BBvAntennaDiversity(PSDevice pDevice, unsigned char byRxRate, unsigned char bySQ
 	pDevice->uDiversityCnt++;
 	// DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "pDevice->uDiversityCnt = %d\n", (int)pDevice->uDiversityCnt);
 =======
+=======
+>>>>>>> v3.18
 void BBvAntennaDiversity(struct vnt_private *pDevice,
 			 unsigned char byRxRate, unsigned char bySQ3)
 {
@@ -3353,12 +3642,16 @@ void BBvAntennaDiversity(struct vnt_private *pDevice,
 		return;
 
 	pDevice->uDiversityCnt++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pDevice->uNumSQ3[byRxRate]++;
 
 	if (pDevice->byAntennaState == 0) {
 		if (pDevice->uDiversityCnt > pDevice->ulDiversityNValue) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "ulDiversityNValue=[%d],54M-[%d]\n",
 				(int)pDevice->ulDiversityNValue, (int)pDevice->uNumSQ3[(int)pDevice->wAntDiversityMaxRate]);
@@ -3373,6 +3666,8 @@ void BBvAntennaDiversity(struct vnt_private *pDevice,
 					(int)pDevice->ulRatio_State0, (int)pDevice->wAntDiversityMaxRate,
 					(int)pDevice->uNumSQ3[(int)pDevice->wAntDiversityMaxRate], (int)pDevice->uDiversityCnt);
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("ulDiversityNValue=[%d],54M-[%d]\n",
 				 (int)pDevice->ulDiversityNValue,
 				 (int)pDevice->uNumSQ3[(int)pDevice->wAntDiversityMaxRate]);
@@ -3389,6 +3684,9 @@ void BBvAntennaDiversity(struct vnt_private *pDevice,
 					 (int)pDevice->wAntDiversityMaxRate,
 					 (int)pDevice->uNumSQ3[(int)pDevice->wAntDiversityMaxRate],
 					 (int)pDevice->uDiversityCnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				s_vChangeAntenna(pDevice);
@@ -3406,7 +3704,11 @@ void BBvAntennaDiversity(struct vnt_private *pDevice,
 
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else { //byAntennaState == 1
+=======
+	} else { /* byAntennaState == 1 */
+>>>>>>> v3.18
 =======
 	} else { /* byAntennaState == 1 */
 >>>>>>> v3.18
@@ -3415,6 +3717,7 @@ void BBvAntennaDiversity(struct vnt_private *pDevice,
 			del_timer(&pDevice->TimerSQ3Tmax1);
 
 			pDevice->ulRatio_State1 = s_ulGetRatio(pDevice);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "RX:SQ3_State1, rate0 = %08x,rate1 = %08x\n",
 				(int)pDevice->ulRatio_State0, (int)pDevice->ulRatio_State1);
@@ -3425,6 +3728,8 @@ void BBvAntennaDiversity(struct vnt_private *pDevice,
 					(int)pDevice->wAntDiversityMaxRate,
 					(int)pDevice->uNumSQ3[(int)pDevice->wAntDiversityMaxRate], (int)pDevice->uDiversityCnt);
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("RX:SQ3_State1, rate0 = %08x,rate1 = %08x\n",
 				 (int)pDevice->ulRatio_State0,
 				 (int)pDevice->ulRatio_State1);
@@ -3436,6 +3741,9 @@ void BBvAntennaDiversity(struct vnt_private *pDevice,
 					 (int)pDevice->wAntDiversityMaxRate,
 					 (int)pDevice->uNumSQ3[(int)pDevice->wAntDiversityMaxRate],
 					 (int)pDevice->uDiversityCnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				s_vChangeAntenna(pDevice);
@@ -3448,7 +3756,11 @@ void BBvAntennaDiversity(struct vnt_private *pDevice,
 			BBvClearAntDivSQ3Value(pDevice);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} //byAntennaState
+=======
+	} /* byAntennaState */
+>>>>>>> v3.18
 =======
 	} /* byAntennaState */
 >>>>>>> v3.18
@@ -3474,6 +3786,7 @@ TimerSQ3CallBack(
 )
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice        pDevice = (PSDevice)hDeviceContext;
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "TimerSQ3CallBack...");
@@ -3481,6 +3794,8 @@ TimerSQ3CallBack(
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "3.[%08x][%08x], %d\n", (int)pDevice->ulRatio_State0, (int)pDevice->ulRatio_State1, (int)pDevice->uDiversityCnt);
 =======
+=======
+>>>>>>> v3.18
 	struct vnt_private *pDevice = hDeviceContext;
 
 	pr_debug("TimerSQ3CallBack...\n");
@@ -3489,6 +3804,9 @@ TimerSQ3CallBack(
 	pr_debug("3.[%08x][%08x], %d\n",
 		 (int)pDevice->ulRatio_State0, (int)pDevice->ulRatio_State1,
 		 (int)pDevice->uDiversityCnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s_vChangeAntenna(pDevice);
@@ -3502,7 +3820,10 @@ TimerSQ3CallBack(
 
 	spin_unlock_irq(&pDevice->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -3531,9 +3852,15 @@ TimerState1CallBack(
 )
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice        pDevice = (PSDevice)hDeviceContext;
 
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "TimerState1CallBack...");
+=======
+	struct vnt_private *pDevice = hDeviceContext;
+
+	pr_debug("TimerState1CallBack...\n");
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = hDeviceContext;
 
@@ -3550,6 +3877,7 @@ TimerState1CallBack(
 	} else {
 		pDevice->ulRatio_State1 = s_ulGetRatio(pDevice);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "SQ3_State1, rate0 = %08x,rate1 = %08x\n",
 			(int)pDevice->ulRatio_State0, (int)pDevice->ulRatio_State1);
 
@@ -3559,6 +3887,8 @@ TimerState1CallBack(
 				(int)pDevice->wAntDiversityMaxRate,
 				(int)pDevice->uNumSQ3[(int)pDevice->wAntDiversityMaxRate], (int)pDevice->uDiversityCnt);
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("SQ3_State1, rate0 = %08x,rate1 = %08x\n",
 			 (int)pDevice->ulRatio_State0,
 			 (int)pDevice->ulRatio_State1);
@@ -3570,6 +3900,9 @@ TimerState1CallBack(
 				 (int)pDevice->wAntDiversityMaxRate,
 				 (int)pDevice->uNumSQ3[(int)pDevice->wAntDiversityMaxRate],
 				 (int)pDevice->uDiversityCnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			s_vChangeAntenna(pDevice);
@@ -3584,8 +3917,11 @@ TimerState1CallBack(
 	BBvClearAntDivSQ3Value(pDevice);
 	spin_unlock_irq(&pDevice->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

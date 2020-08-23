@@ -136,17 +136,23 @@ struct cpu_cache_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cpu_cache_info	all_cpu_cache_info[NR_CPUS] __cpuinitdata;
 #define LEAF_KOBJECT_PTR(x,y)    (&all_cpu_cache_info[x].cache_leaves[y])
 
 #ifdef CONFIG_SMP
 static void __cpuinit cache_shared_cpu_map_setup( unsigned int cpu,
 =======
+=======
+>>>>>>> v3.18
 static struct cpu_cache_info	all_cpu_cache_info[NR_CPUS];
 #define LEAF_KOBJECT_PTR(x,y)    (&all_cpu_cache_info[x].cache_leaves[y])
 
 #ifdef CONFIG_SMP
 static void cache_shared_cpu_map_setup(unsigned int cpu,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct cache_info * this_leaf)
 {
@@ -183,7 +189,11 @@ static void cache_shared_cpu_map_setup(unsigned int cpu,
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cache_shared_cpu_map_setup(unsigned int cpu,
+=======
+static void cache_shared_cpu_map_setup(unsigned int cpu,
+>>>>>>> v3.18
 =======
 static void cache_shared_cpu_map_setup(unsigned int cpu,
 >>>>>>> v3.18
@@ -311,7 +321,11 @@ static struct kobj_type cache_ktype_percpu_entry = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cpu_cache_sysfs_exit(unsigned int cpu)
+=======
+static void cpu_cache_sysfs_exit(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void cpu_cache_sysfs_exit(unsigned int cpu)
 >>>>>>> v3.18
@@ -324,7 +338,11 @@ static void cpu_cache_sysfs_exit(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cpu_cache_sysfs_init(unsigned int cpu)
+=======
+static int cpu_cache_sysfs_init(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static int cpu_cache_sysfs_init(unsigned int cpu)
 >>>>>>> v3.18
@@ -372,7 +390,11 @@ static int cpu_cache_sysfs_init(unsigned int cpu)
 
 /* Add cache interface for CPU device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cache_add_dev(struct device * sys_dev)
+=======
+static int cache_add_dev(struct device *sys_dev)
+>>>>>>> v3.18
 =======
 static int cache_add_dev(struct device *sys_dev)
 >>>>>>> v3.18
@@ -426,7 +448,11 @@ static int cache_add_dev(struct device *sys_dev)
 
 /* Remove cache interface for CPU device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cache_remove_dev(struct device * sys_dev)
+=======
+static int cache_remove_dev(struct device *sys_dev)
+>>>>>>> v3.18
 =======
 static int cache_remove_dev(struct device *sys_dev)
 >>>>>>> v3.18
@@ -454,7 +480,11 @@ static int cache_remove_dev(struct device *sys_dev)
  * cache kobject if necessary
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cache_cpu_callback(struct notifier_block *nfb,
+=======
+static int cache_cpu_callback(struct notifier_block *nfb,
+>>>>>>> v3.18
 =======
 static int cache_cpu_callback(struct notifier_block *nfb,
 >>>>>>> v3.18
@@ -478,7 +508,11 @@ static int cache_cpu_callback(struct notifier_block *nfb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata cache_cpu_notifier =
+=======
+static struct notifier_block cache_cpu_notifier =
+>>>>>>> v3.18
 =======
 static struct notifier_block cache_cpu_notifier =
 >>>>>>> v3.18
@@ -491,6 +525,11 @@ static int __init cache_sysfs_init(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpu_notifier_register_begin();
+
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 
@@ -501,7 +540,13 @@ static int __init cache_sysfs_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_hotcpu_notifier(&cache_cpu_notifier);
+=======
+	__register_hotcpu_notifier(&cache_cpu_notifier);
+
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__register_hotcpu_notifier(&cache_cpu_notifier);
 

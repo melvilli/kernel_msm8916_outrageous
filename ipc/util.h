@@ -16,9 +16,15 @@
 #define SEQ_MULTIPLIER	(IPCMNI)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sem_init (void);
 void msg_init (void);
 void shm_init (void);
+=======
+void sem_init(void);
+void msg_init(void);
+void shm_init(void);
+>>>>>>> v3.18
 =======
 void sem_init(void);
 void msg_init(void);
@@ -85,9 +91,15 @@ struct ipc_params {
  */
 struct ipc_ops {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*getnew) (struct ipc_namespace *, struct ipc_params *);
 	int (*associate) (struct kern_ipc_perm *, int);
 	int (*more_checks) (struct kern_ipc_perm *, struct ipc_params *);
+=======
+	int (*getnew)(struct ipc_namespace *, struct ipc_params *);
+	int (*associate)(struct kern_ipc_perm *, int);
+	int (*more_checks)(struct kern_ipc_perm *, struct ipc_params *);
+>>>>>>> v3.18
 =======
 	int (*getnew)(struct ipc_namespace *, struct ipc_params *);
 	int (*associate)(struct kern_ipc_perm *, int);
@@ -113,6 +125,10 @@ void __init ipc_init_proc_interface(const char *path, const char *header,
 #define ipcid_to_idx(id) ((id) % SEQ_MULTIPLIER)
 #define ipcid_to_seqx(id) ((id) / SEQ_MULTIPLIER)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IPCID_SEQ_MAX min_t(int, INT_MAX/SEQ_MULTIPLIER, USHRT_MAX)
+>>>>>>> v3.18
 =======
 #define IPCID_SEQ_MAX min_t(int, INT_MAX/SEQ_MULTIPLIER, USHRT_MAX)
 >>>>>>> v3.18
@@ -133,8 +149,13 @@ int ipcperms(struct ipc_namespace *ns, struct kern_ipc_perm *ipcp, short flg);
  * both function can sleep
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void* ipc_alloc(int size);
 void ipc_free(void* ptr, int size);
+=======
+void *ipc_alloc(int size);
+void ipc_free(void *ptr, int size);
+>>>>>>> v3.18
 =======
 void *ipc_alloc(int size);
 void ipc_free(void *ptr, int size);
@@ -147,7 +168,11 @@ void ipc_free(void *ptr, int size);
  * to 0 schedules the rcu destruction. Caller must guarantee locking.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void* ipc_rcu_alloc(int size);
+=======
+void *ipc_rcu_alloc(int size);
+>>>>>>> v3.18
 =======
 void *ipc_rcu_alloc(int size);
 >>>>>>> v3.18
@@ -167,15 +192,21 @@ struct kern_ipc_perm *ipcctl_pre_down_nolock(struct ipc_namespace *ns,
 
 #ifndef CONFIG_ARCH_WANT_IPC_PARSE_VERSION
 <<<<<<< HEAD
+<<<<<<< HEAD
   /* On IA-64, we always use the "64-bit version" of the IPC structures.  */ 
 # define ipc_parse_version(cmd)	IPC_64
 #else
 int ipc_parse_version (int *cmd);
 =======
+=======
+>>>>>>> v3.18
 /* On IA-64, we always use the "64-bit version" of the IPC structures.  */
 # define ipc_parse_version(cmd)	IPC_64
 #else
 int ipc_parse_version(int *cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -218,10 +249,13 @@ static inline void ipc_unlock(struct kern_ipc_perm *perm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kern_ipc_perm *ipc_obtain_object_check(struct ipc_ids *ids, int id);
 int ipcget(struct ipc_namespace *ns, struct ipc_ids *ids,
 			struct ipc_ops *ops, struct ipc_params *params);
 =======
+=======
+>>>>>>> v3.18
 /*
  * ipc_valid_object() - helper to sort out IPC_RMID races for codepaths
  * where the respective ipc_ids.rwsem is not being held down.
@@ -238,6 +272,9 @@ static inline bool ipc_valid_object(struct kern_ipc_perm *perm)
 struct kern_ipc_perm *ipc_obtain_object_check(struct ipc_ids *ids, int id);
 int ipcget(struct ipc_namespace *ns, struct ipc_ids *ids,
 			const struct ipc_ops *ops, struct ipc_params *params);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void free_ipcs(struct ipc_namespace *ns, struct ipc_ids *ids,
 		void (*free)(struct ipc_namespace *, struct kern_ipc_perm *));

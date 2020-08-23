@@ -259,8 +259,14 @@ struct rs690_watermark {
 
 static void rs690_crtc_bandwidth_compute(struct radeon_device *rdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct radeon_crtc *crtc,
 				  struct rs690_watermark *wm)
+=======
+					 struct radeon_crtc *crtc,
+					 struct rs690_watermark *wm,
+					 bool low)
+>>>>>>> v3.18
 =======
 					 struct radeon_crtc *crtc,
 					 struct rs690_watermark *wm,
@@ -272,6 +278,11 @@ static void rs690_crtc_bandwidth_compute(struct radeon_device *rdev,
 	fixed20_12 pclk, request_fifo_depth, tolerable_latency, estimated_width;
 	fixed20_12 consumption_time, line_time, chunk_time, read_delay_latency;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fixed20_12 sclk, core_bandwidth, max_bandwidth;
+	u32 selected_sclk;
+>>>>>>> v3.18
 =======
 	fixed20_12 sclk, core_bandwidth, max_bandwidth;
 	u32 selected_sclk;
@@ -284,7 +295,10 @@ static void rs690_crtc_bandwidth_compute(struct radeon_device *rdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (((rdev->family == CHIP_RS780) || (rdev->family == CHIP_RS880)) &&
 	    (rdev->pm.pm_method == PM_METHOD_DPM) && rdev->pm.dpm_enabled)
 		selected_sclk = radeon_dpm_get_sclk(rdev, low);
@@ -300,6 +314,9 @@ static void rs690_crtc_bandwidth_compute(struct radeon_device *rdev,
 	a.full = dfixed_const(16);
 	core_bandwidth.full = dfixed_div(rdev->pm.sclk, a);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (crtc->vsc.full > dfixed_const(2))
 		wm->num_line_pair.full = dfixed_const(2);
@@ -362,6 +379,7 @@ static void rs690_crtc_bandwidth_compute(struct radeon_device *rdev,
 
 	/* Maximun bandwidth is the minimun bandwidth of all component */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev->pm.max_bandwidth = rdev->pm.core_bandwidth;
 	if (rdev->mc.igp_sideport_enabled) {
 		if (rdev->pm.max_bandwidth.full > rdev->pm.sideport_bandwidth.full &&
@@ -378,6 +396,8 @@ static void rs690_crtc_bandwidth_compute(struct radeon_device *rdev,
 			rdev->pm.ht_bandwidth.full)
 			rdev->pm.max_bandwidth = rdev->pm.ht_bandwidth;
 =======
+=======
+>>>>>>> v3.18
 	max_bandwidth = core_bandwidth;
 	if (rdev->mc.igp_sideport_enabled) {
 		if (max_bandwidth.full > rdev->pm.sideport_bandwidth.full &&
@@ -395,6 +415,9 @@ static void rs690_crtc_bandwidth_compute(struct radeon_device *rdev,
 		if (max_bandwidth.full > rdev->pm.ht_bandwidth.full &&
 			rdev->pm.ht_bandwidth.full)
 			max_bandwidth = rdev->pm.ht_bandwidth;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		read_delay_latency.full = dfixed_const(5000);
 	}
@@ -402,9 +425,15 @@ static void rs690_crtc_bandwidth_compute(struct radeon_device *rdev,
 	/* sclk = system clocks(ns) = 1000 / max_bandwidth / 16 */
 	a.full = dfixed_const(16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev->pm.sclk.full = dfixed_mul(rdev->pm.max_bandwidth, a);
 	a.full = dfixed_const(1000);
 	rdev->pm.sclk.full = dfixed_div(a, rdev->pm.sclk);
+=======
+	sclk.full = dfixed_mul(max_bandwidth, a);
+	a.full = dfixed_const(1000);
+	sclk.full = dfixed_div(a, sclk);
+>>>>>>> v3.18
 =======
 	sclk.full = dfixed_mul(max_bandwidth, a);
 	a.full = dfixed_const(1000);
@@ -417,7 +446,11 @@ static void rs690_crtc_bandwidth_compute(struct radeon_device *rdev,
 	 */
 	a.full = dfixed_const(256 * 13);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chunk_time.full = dfixed_mul(rdev->pm.sclk, a);
+=======
+	chunk_time.full = dfixed_mul(sclk, a);
+>>>>>>> v3.18
 =======
 	chunk_time.full = dfixed_mul(sclk, a);
 >>>>>>> v3.18
@@ -485,6 +518,7 @@ static void rs690_crtc_bandwidth_compute(struct radeon_device *rdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rs690_bandwidth_update(struct radeon_device *rdev)
 {
 	struct drm_display_mode *mode0 = NULL;
@@ -550,6 +584,8 @@ void rs690_bandwidth_update(struct radeon_device *rdev)
 			a.full = dfixed_mul(wm0.worst_case_latency,
 						wm0.consumption_rate);
 =======
+=======
+>>>>>>> v3.18
 static void rs690_compute_mode_priority(struct radeon_device *rdev,
 					struct rs690_watermark *wm0,
 					struct rs690_watermark *wm1,
@@ -580,11 +616,15 @@ static void rs690_compute_mode_priority(struct radeon_device *rdev,
 			b.full = dfixed_mul(b, wm0->active_time);
 			a.full = dfixed_mul(wm0->worst_case_latency,
 						wm0->consumption_rate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			a.full = a.full + b.full;
 			b.full = dfixed_const(16 * 1000);
 			priority_mark02.full = dfixed_div(a, b);
 		} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			a.full = dfixed_mul(wm0.worst_case_latency,
 						wm0.consumption_rate);
@@ -597,6 +637,8 @@ static void rs690_compute_mode_priority(struct radeon_device *rdev,
 			a.full = dfixed_mul(wm1.worst_case_latency,
 						wm1.consumption_rate);
 =======
+=======
+>>>>>>> v3.18
 			a.full = dfixed_mul(wm0->worst_case_latency,
 						wm0->consumption_rate);
 			b.full = dfixed_const(16 * 1000);
@@ -607,11 +649,15 @@ static void rs690_compute_mode_priority(struct radeon_device *rdev,
 			b.full = dfixed_mul(b, wm1->active_time);
 			a.full = dfixed_mul(wm1->worst_case_latency,
 						wm1->consumption_rate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			a.full = a.full + b.full;
 			b.full = dfixed_const(16 * 1000);
 			priority_mark12.full = dfixed_div(a, b);
 		} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			a.full = dfixed_mul(wm1.worst_case_latency,
 						wm1.consumption_rate);
@@ -648,6 +694,8 @@ static void rs690_compute_mode_priority(struct radeon_device *rdev,
 			a.full = dfixed_mul(wm0.worst_case_latency,
 						wm0.consumption_rate);
 =======
+=======
+>>>>>>> v3.18
 			a.full = dfixed_mul(wm1->worst_case_latency,
 						wm1->consumption_rate);
 			b.full = dfixed_const(16 * 1000);
@@ -678,11 +726,15 @@ static void rs690_compute_mode_priority(struct radeon_device *rdev,
 			b.full = dfixed_mul(b, wm0->active_time);
 			a.full = dfixed_mul(wm0->worst_case_latency,
 						wm0->consumption_rate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			a.full = a.full + b.full;
 			b.full = dfixed_const(16 * 1000);
 			priority_mark02.full = dfixed_div(a, b);
 		} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			a.full = dfixed_mul(wm0.worst_case_latency,
 						wm0.consumption_rate);
@@ -710,6 +762,8 @@ static void rs690_compute_mode_priority(struct radeon_device *rdev,
 			a.full = dfixed_mul(wm1.worst_case_latency,
 						wm1.consumption_rate);
 =======
+=======
+>>>>>>> v3.18
 			a.full = dfixed_mul(wm0->worst_case_latency,
 						wm0->consumption_rate);
 			b.full = dfixed_const(16 * 1000);
@@ -733,11 +787,15 @@ static void rs690_compute_mode_priority(struct radeon_device *rdev,
 			b.full = dfixed_mul(b, wm1->active_time);
 			a.full = dfixed_mul(wm1->worst_case_latency,
 						wm1->consumption_rate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			a.full = a.full + b.full;
 			b.full = dfixed_const(16 * 1000);
 			priority_mark12.full = dfixed_div(a, b);
 		} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			a.full = dfixed_mul(wm1.worst_case_latency,
 						wm1.consumption_rate);
@@ -760,6 +818,8 @@ static void rs690_compute_mode_priority(struct radeon_device *rdev,
 	WREG32(R_006D48_D2MODE_PRIORITY_A_CNT, d2mode_priority_a_cnt);
 	WREG32(R_006D4C_D2MODE_PRIORITY_B_CNT, d2mode_priority_a_cnt);
 =======
+=======
+>>>>>>> v3.18
 			a.full = dfixed_mul(wm1->worst_case_latency,
 						wm1->consumption_rate);
 			b.full = dfixed_const(16 * 1000);
@@ -840,11 +900,15 @@ void rs690_bandwidth_update(struct radeon_device *rdev)
 	WREG32(R_00654C_D1MODE_PRIORITY_B_CNT, d1mode_priority_b_cnt);
 	WREG32(R_006D48_D2MODE_PRIORITY_A_CNT, d2mode_priority_a_cnt);
 	WREG32(R_006D4C_D2MODE_PRIORITY_B_CNT, d2mode_priority_b_cnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 uint32_t rs690_mc_rreg(struct radeon_device *rdev, uint32_t reg)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	uint32_t r;
 
@@ -852,6 +916,8 @@ uint32_t rs690_mc_rreg(struct radeon_device *rdev, uint32_t reg)
 	r = RREG32(R_00007C_MC_DATA);
 	WREG32(R_000078_MC_INDEX, ~C_000078_MC_IND_ADDR);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 	uint32_t r;
 
@@ -860,6 +926,9 @@ uint32_t rs690_mc_rreg(struct radeon_device *rdev, uint32_t reg)
 	r = RREG32(R_00007C_MC_DATA);
 	WREG32(R_000078_MC_INDEX, ~C_000078_MC_IND_ADDR);
 	spin_unlock_irqrestore(&rdev->mc_idx_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return r;
 }
@@ -867,6 +936,12 @@ uint32_t rs690_mc_rreg(struct radeon_device *rdev, uint32_t reg)
 void rs690_mc_wreg(struct radeon_device *rdev, uint32_t reg, uint32_t v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+
+	spin_lock_irqsave(&rdev->mc_idx_lock, flags);
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 
@@ -877,6 +952,10 @@ void rs690_mc_wreg(struct radeon_device *rdev, uint32_t reg, uint32_t v)
 	WREG32(R_00007C_MC_DATA, v);
 	WREG32(R_000078_MC_INDEX, 0x7F);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&rdev->mc_idx_lock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&rdev->mc_idx_lock, flags);
 >>>>>>> v3.18
@@ -991,6 +1070,10 @@ int rs690_resume(struct radeon_device *rdev)
 int rs690_suspend(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	radeon_pm_suspend(rdev);
+>>>>>>> v3.18
 =======
 	radeon_pm_suspend(rdev);
 >>>>>>> v3.18
@@ -1005,6 +1088,10 @@ int rs690_suspend(struct radeon_device *rdev)
 void rs690_fini(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	radeon_pm_fini(rdev);
+>>>>>>> v3.18
 =======
 	radeon_pm_fini(rdev);
 >>>>>>> v3.18
@@ -1078,6 +1165,12 @@ int rs690_init(struct radeon_device *rdev)
 	rs600_set_safe_registers(rdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Initialize power management */
+	radeon_pm_init(rdev);
+
+>>>>>>> v3.18
 =======
 	/* Initialize power management */
 	radeon_pm_init(rdev);

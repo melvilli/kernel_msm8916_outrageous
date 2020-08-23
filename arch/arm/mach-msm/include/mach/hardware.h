@@ -2,7 +2,10 @@
  *
  * Copyright (C) 2007 Google, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -19,9 +22,12 @@
 
 #ifndef __ASM_ARCH_MSM_HARDWARE_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __ASM_ARCH_MSM_HARDWARE_H
 
 #define pcibios_assign_all_busses()     1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

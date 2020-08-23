@@ -112,6 +112,11 @@ struct test_arg_end {
 	__asm__ __volatile__ (					\
 	"bl	__kprobes_test_case_start		\n\t"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	".pushsection .rodata				\n\t"	\
+	"10:						\n\t"	\
+>>>>>>> v3.18
 =======
 	".pushsection .rodata				\n\t"	\
 	"10:						\n\t"	\
@@ -121,7 +126,12 @@ struct test_arg_end {
 	".ascii "#title"				\n\t"	\
 	".byte	0					\n\t"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	".align	2					\n\t"
+=======
+	".popsection					\n\t"	\
+	".word	10b					\n\t"
+>>>>>>> v3.18
 =======
 	".popsection					\n\t"	\
 	".word	10b					\n\t"

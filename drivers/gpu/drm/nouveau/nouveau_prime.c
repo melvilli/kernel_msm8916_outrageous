@@ -24,6 +24,10 @@
 
 #include <drm/drmP.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dma-buf.h>
+>>>>>>> v3.18
 =======
 #include <linux/dma-buf.h>
 >>>>>>> v3.18
@@ -61,16 +65,22 @@ void nouveau_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr)
 
 struct drm_gem_object *nouveau_gem_prime_import_sg_table(struct drm_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							 size_t size,
 							 struct sg_table *sg)
 {
 	struct nouveau_bo *nvbo;
 =======
+=======
+>>>>>>> v3.18
 							 struct dma_buf_attachment *attach,
 							 struct sg_table *sg)
 {
 	struct nouveau_bo *nvbo;
 	struct reservation_object *robj = attach->dmabuf->resv;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 flags = 0;
 	int ret;
@@ -78,35 +88,51 @@ struct drm_gem_object *nouveau_gem_prime_import_sg_table(struct drm_device *dev,
 	flags = TTM_PL_FLAG_TT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nouveau_bo_new(dev, size, 0, flags, 0, 0,
 			     sg, &nvbo);
 =======
+=======
+>>>>>>> v3.18
 	ww_mutex_lock(&robj->lock, NULL);
 	ret = nouveau_bo_new(dev, attach->dmabuf->size, 0, flags, 0, 0,
 			     sg, robj, &nvbo);
 	ww_mutex_unlock(&robj->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ERR_PTR(ret);
 
 	nvbo->valid_domains = NOUVEAU_GEM_DOMAIN_GART;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvbo->gem = drm_gem_object_alloc(dev, nvbo->bo.mem.size);
 	if (!nvbo->gem) {
 =======
+=======
+>>>>>>> v3.18
 
 	/* Initialize the embedded gem-object. We return a single gem-reference
 	 * to the caller, instead of a normal nouveau_bo ttm reference. */
 	ret = drm_gem_object_init(dev, &nvbo->gem, nvbo->bo.mem.size);
 	if (ret) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nouveau_bo_ref(NULL, &nvbo);
 		return ERR_PTR(-ENOMEM);
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvbo->gem->driver_private = nvbo;
 	return nvbo->gem;
+=======
+	return &nvbo->gem;
+>>>>>>> v3.18
 =======
 	return &nvbo->gem;
 >>>>>>> v3.18
@@ -116,7 +142,11 @@ int nouveau_gem_prime_pin(struct drm_gem_object *obj)
 {
 	struct nouveau_bo *nvbo = nouveau_gem_object(obj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -129,7 +159,10 @@ int nouveau_gem_prime_pin(struct drm_gem_object *obj)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void nouveau_gem_prime_unpin(struct drm_gem_object *obj)
 {
@@ -144,4 +177,7 @@ struct reservation_object *nouveau_gem_prime_res_obj(struct drm_gem_object *obj)
 
 	return nvbo->bo.resv;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

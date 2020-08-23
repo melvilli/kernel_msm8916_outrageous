@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -21,6 +24,7 @@
  *
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
@@ -39,6 +43,8 @@ ieee754sp ieee754sp_fdp(ieee754dp x)
 
 	CLEARCX;
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
@@ -55,12 +61,16 @@ union ieee754sp ieee754sp_fdp(union ieee754dp x)
 	EXPLODEXDP;
 
 	ieee754_clearcx();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	FLUSHXDP;
 
 	switch (xc) {
 	case IEEE754_CLASS_SNAN:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754sp_nanxcpt(ieee754sp_indef(), "fdp");
@@ -83,6 +93,8 @@ union ieee754sp ieee754sp_fdp(union ieee754dp x)
 			return ieee754sp_xcpt(ieee754sp_mind(xs), "fdp", x);
 		return ieee754sp_xcpt(ieee754sp_zero(xs), "fdp", x);
 =======
+=======
+>>>>>>> v3.18
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754sp_nanxcpt(ieee754sp_indef());
 
@@ -108,11 +120,15 @@ union ieee754sp ieee754sp_fdp(union ieee754dp x)
 			return ieee754sp_mind(xs);
 		return ieee754sp_zero(xs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IEEE754_CLASS_NORM:
 		break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{
 		u32 rm;
@@ -125,6 +141,8 @@ union ieee754sp ieee754sp_fdp(union ieee754dp x)
 		SPNORMRET1(xs, xe, rm, "fdp", x);
 	}
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Convert from DP_FBITS to SP_FBITS+3 with sticky right shift.
 	 */
@@ -132,5 +150,8 @@ union ieee754sp ieee754sp_fdp(union ieee754dp x)
 	     ((xm << (64 - (DP_FBITS - (SP_FBITS + 3)))) != 0);
 
 	return ieee754sp_format(xs, xe, rm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -214,7 +214,11 @@ static bool tegra20_spdif_wr_rd_reg(struct device *dev, unsigned int reg)
 	default:
 		return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -239,7 +243,11 @@ static bool tegra20_spdif_volatile_reg(struct device *dev, unsigned int reg)
 	default:
 		return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -256,7 +264,11 @@ static bool tegra20_spdif_precious_reg(struct device *dev, unsigned int reg)
 	default:
 		return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -272,7 +284,11 @@ static const struct regmap_config tegra20_spdif_regmap_config = {
 	.volatile_reg = tegra20_spdif_volatile_reg,
 	.precious_reg = tegra20_spdif_precious_reg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cache_type = REGCACHE_RBTREE,
+=======
+	.cache_type = REGCACHE_FLAT,
+>>>>>>> v3.18
 =======
 	.cache_type = REGCACHE_FLAT,
 >>>>>>> v3.18

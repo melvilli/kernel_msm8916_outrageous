@@ -12,15 +12,21 @@ obj-$(CONFIG_9P_FS) := 9p.o
 	fid.o  \
 	xattr.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xattr_user.o
 
 9p-$(CONFIG_9P_FSCACHE) += cache.o
 9p-$(CONFIG_9P_FS_POSIX_ACL) += acl.o
 =======
+=======
+>>>>>>> v3.18
 	xattr_user.o \
 	xattr_trusted.o
 
 9p-$(CONFIG_9P_FSCACHE) += cache.o
 9p-$(CONFIG_9P_FS_POSIX_ACL) += acl.o
 9p-$(CONFIG_9P_FS_SECURITY) += xattr_security.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

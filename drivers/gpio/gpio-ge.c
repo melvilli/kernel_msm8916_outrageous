@@ -19,6 +19,7 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/compiler.h>
 #include <linux/init.h>
 #include <linux/io.h>
@@ -28,6 +29,11 @@
 #include <linux/of_gpio.h>
 #include <linux/gpio.h>
 #include <linux/slab.h>
+=======
+#include <linux/io.h>
+#include <linux/of_device.h>
+#include <linux/of_gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 #include <linux/of_device.h>
@@ -46,6 +52,7 @@
 #define GEF_GPIO_MODE		0x20
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void _gef_gpio_set(void __iomem *reg, unsigned int offset, int value)
 {
 	unsigned int data;
@@ -62,6 +69,8 @@ static void _gef_gpio_set(void __iomem *reg, unsigned int offset, int value)
 
 
 =======
+=======
+>>>>>>> v3.18
 static void gef_gpio_set(struct gpio_chip *chip, unsigned offset, int value)
 {
 	struct of_mm_gpio_chip *mmchip = to_of_mm_gpio_chip(chip);
@@ -75,6 +84,9 @@ static void gef_gpio_set(struct gpio_chip *chip, unsigned offset, int value)
 	iowrite32be(data, mmchip->regs + GEF_GPIO_OUT);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int gef_gpio_dir_in(struct gpio_chip *chip, unsigned offset)
 {
@@ -83,7 +95,11 @@ static int gef_gpio_dir_in(struct gpio_chip *chip, unsigned offset)
 
 	data = ioread32be(mmchip->regs + GEF_GPIO_DIRECT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = data | (0x1 << offset);
+=======
+	data = data | BIT(offset);
+>>>>>>> v3.18
 =======
 	data = data | BIT(offset);
 >>>>>>> v3.18
@@ -98,17 +114,23 @@ static int gef_gpio_dir_out(struct gpio_chip *chip, unsigned offset, int value)
 	struct of_mm_gpio_chip *mmchip = to_of_mm_gpio_chip(chip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set direction before switching to input */
 	_gef_gpio_set(mmchip->regs + GEF_GPIO_OUT, offset, value);
 
 	data = ioread32be(mmchip->regs + GEF_GPIO_DIRECT);
 	data = data & ~(0x1 << offset);
 =======
+=======
+>>>>>>> v3.18
 	/* Set value before switching to output */
 	gef_gpio_set(mmchip->regs + GEF_GPIO_OUT, offset, value);
 
 	data = ioread32be(mmchip->regs + GEF_GPIO_DIRECT);
 	data = data & ~BIT(offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iowrite32be(data, mmchip->regs + GEF_GPIO_DIRECT);
 
@@ -117,6 +139,7 @@ static int gef_gpio_dir_out(struct gpio_chip *chip, unsigned offset, int value)
 
 static int gef_gpio_get(struct gpio_chip *chip, unsigned offset)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int data;
 	int state = 0;
@@ -229,6 +252,8 @@ static int __init gef_gpio_init(void)
 };
 arch_initcall(gef_gpio_init);
 =======
+=======
+>>>>>>> v3.18
 	struct of_mm_gpio_chip *mmchip = to_of_mm_gpio_chip(chip);
 
 	return !!(ioread32be(mmchip->regs + GEF_GPIO_IN) & BIT(offset));
@@ -279,6 +304,9 @@ static struct platform_driver gef_gpio_driver = {
 	},
 };
 module_platform_driver_probe(gef_gpio_driver, gef_gpio_probe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_DESCRIPTION("GE I/O FPGA GPIO driver");

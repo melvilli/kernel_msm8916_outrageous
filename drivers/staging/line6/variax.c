@@ -96,6 +96,10 @@ static void variax_startup4(unsigned long data)
 {
 	struct usb_line6_variax *variax = (struct usb_line6_variax *)data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -112,6 +116,10 @@ static void variax_startup5(unsigned long data)
 {
 	struct usb_line6_variax *variax = (struct usb_line6_variax *)data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

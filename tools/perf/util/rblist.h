@@ -33,6 +33,10 @@ int rblist__add_node(struct rblist *rblist, const void *new_entry);
 void rblist__remove_node(struct rblist *rblist, struct rb_node *rb_node);
 struct rb_node *rblist__find(struct rblist *rblist, const void *entry);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct rb_node *rblist__findnew(struct rblist *rblist, const void *entry);
+>>>>>>> v3.18
 =======
 struct rb_node *rblist__findnew(struct rblist *rblist, const void *entry);
 >>>>>>> v3.18

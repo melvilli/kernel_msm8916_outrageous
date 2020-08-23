@@ -58,7 +58,11 @@ changes occur:
 	modifications for the address space 'vma->vm_mm' in the range
 	'start' to 'end-1' will be visible to the cpu.  That is, after
 <<<<<<< HEAD
+<<<<<<< HEAD
 	running, here will be no entries in the TLB for 'mm' for
+=======
+	running, there will be no entries in the TLB for 'mm' for
+>>>>>>> v3.18
 =======
 	running, there will be no entries in the TLB for 'mm' for
 >>>>>>> v3.18
@@ -380,8 +384,13 @@ maps this page at its virtual address.
   void flush_icache_page(struct vm_area_struct *vma, struct page *page)
 	All the functionality of flush_icache_page can be implemented in
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_dcache_page and update_mmu_cache. In 2.7 the hope is to
 	remove this interface completely.
+=======
+	flush_dcache_page and update_mmu_cache. In the future, the hope
+	is to remove this interface completely.
+>>>>>>> v3.18
 =======
 	flush_dcache_page and update_mmu_cache. In the future, the hope
 	is to remove this interface completely.

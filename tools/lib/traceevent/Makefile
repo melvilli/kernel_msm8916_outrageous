@@ -40,6 +40,7 @@ bindir = $(prefix)/$(bindir_relative)
 man_dir = $(prefix)/share/man
 man_dir_SQ = '$(subst ','\'',$(man_dir))'
 <<<<<<< HEAD
+<<<<<<< HEAD
 html_install = $(prefix)/share/kernelshark/html
 html_install_SQ = '$(subst ','\'',$(html_install))'
 img_install = $(prefix)/share/kernelshark/html/images
@@ -50,6 +51,8 @@ export img_install img_install_SQ
 export DESTDIR DESTDIR_SQ
 
 =======
+=======
+>>>>>>> v3.18
 
 export man_dir man_dir_SQ INSTALL
 export DESTDIR DESTDIR_SQ
@@ -80,6 +83,9 @@ endif
 
 include $(if $(BUILD_SRC),$(BUILD_SRC)/)../../scripts/Makefile.include
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # copy a bit from Linux kbuild
 
@@ -95,6 +101,7 @@ ifeq ("$(origin O)", "command line")
 endif
 
 ifeq ($(BUILD_SRC),)
+<<<<<<< HEAD
 <<<<<<< HEAD
 ifneq ($(BUILD_OUTPUT),)
 
@@ -115,6 +122,8 @@ gui: force
 
 $(filter-out gui,$(MAKECMDGOALS)): sub-make
 =======
+=======
+>>>>>>> v3.18
 ifneq ($(OUTPUT),)
 
 define build_output
@@ -125,6 +134,9 @@ endef
 all: sub-make
 
 $(MAKECMDGOALS): sub-make
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 sub-make: force
@@ -135,7 +147,11 @@ sub-make: force
 skip-makefile := 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endif # BUILD_OUTPUT
+=======
+endif # OUTPUT
+>>>>>>> v3.18
 =======
 endif # OUTPUT
 >>>>>>> v3.18
@@ -155,6 +171,10 @@ export prefix bindir src obj
 bindir_SQ = $(subst ','\'',$(bindir))
 bindir_relative_SQ = $(subst ','\'',$(bindir_relative))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+plugin_dir_SQ = $(subst ','\'',$(plugin_dir))
+>>>>>>> v3.18
 =======
 plugin_dir_SQ = $(subst ','\'',$(plugin_dir))
 >>>>>>> v3.18
@@ -177,7 +197,11 @@ export Q VERBOSE
 EVENT_PARSE_VERSION = $(EP_VERSION).$(EP_PATCHLEVEL).$(EP_EXTRAVERSION)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 INCLUDES = -I. $(CONFIG_INCLUDES)
+=======
+INCLUDES = -I. -I $(srctree)/../../include $(CONFIG_INCLUDES)
+>>>>>>> v3.18
 =======
 INCLUDES = -I. -I $(srctree)/../../include $(CONFIG_INCLUDES)
 >>>>>>> v3.18
@@ -191,6 +215,7 @@ override CFLAGS += $(udis86-flags) -D_GNU_SOURCE
 
 ifeq ($(VERBOSE),1)
   Q =
+<<<<<<< HEAD
 <<<<<<< HEAD
   print_compile =
   print_app_build =
@@ -225,15 +250,24 @@ else
 endif
 
 >>>>>>> v3.18
+=======
+else
+  Q = @
+endif
+
+>>>>>>> v3.18
 do_compile_shared_library =			\
 	($(print_shared_lib_compile)		\
 	$(CC) --shared $^ -o $@)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 do_compile_plugin_obj =				\
 	($(print_plugin_obj_compile)		\
 	$(CC) -c $(CFLAGS) -fPIC -o $@ $<)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 do_plugin_build =				\
@@ -245,6 +279,7 @@ do_build_static_lib =				\
 	$(RM) $@;  $(AR) rcs $@ $^)
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 define do_compile
 	$(print_compile)						\
@@ -263,6 +298,8 @@ ALL_OBJS = $(PEVENT_LIB_OBJS)
 
 CMD_TARGETS = $(LIB_FILE)
 =======
+=======
+>>>>>>> v3.18
 do_compile = $(QUIET_CC)$(CC) -c $(CFLAGS) $(EXT) $< -o $(obj)/$@;
 
 $(obj)/%.o: $(src)/%.c
@@ -294,6 +331,9 @@ PLUGINS := $(PLUGIN_OBJS:.o=.so)
 ALL_OBJS = $(PEVENT_LIB_OBJS) $(PLUGIN_OBJS)
 
 CMD_TARGETS = $(LIB_FILE) $(PLUGINS)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 TARGETS = $(CMD_TARGETS)
@@ -304,6 +344,7 @@ all: all_cmd
 all_cmd: $(CMD_TARGETS)
 
 libtraceevent.so: $(PEVENT_LIB_OBJS)
+<<<<<<< HEAD
 <<<<<<< HEAD
 	$(Q)$(do_compile_shared_library)
 
@@ -332,6 +373,8 @@ define update_version.h
 		mv -f $@.tmp $@;			\
 	fi);
 =======
+=======
+>>>>>>> v3.18
 	$(QUIET_LINK)$(CC) --shared $^ -o $@
 
 libtraceevent.a: $(PEVENT_LIB_OBJS)
@@ -366,6 +409,9 @@ define update_version.h
       echo '  UPDATE                 $@';	\
       mv -f $@.tmp $@;				\
     fi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endef
 
@@ -376,6 +422,7 @@ VERSION_FILES = ep_version.h
 
 define update_dir
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(echo $1 > $@.tmp;	\
 	if [ -r $@ ] && cmp -s $@ $@.tmp; then		\
 		rm -f $@.tmp;				\
@@ -384,6 +431,8 @@ define update_dir
 		mv -f $@.tmp $@;			\
 	fi);
 =======
+=======
+>>>>>>> v3.18
   (echo $1 > $@.tmp;				\
    if [ -r $@ ] && cmp -s $@ $@.tmp; then	\
      rm -f $@.tmp;				\
@@ -391,6 +440,9 @@ define update_dir
      echo '  UPDATE                 $@';	\
      mv -f $@.tmp $@;				\
    fi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endef
 
@@ -402,6 +454,7 @@ all_deps := $(all_objs:%.o=.%.d)
 # let .d file also depends on the source and header files
 define check_deps
 <<<<<<< HEAD
+<<<<<<< HEAD
 		@set -e; $(RM) $@; \
 		$(CC) -MM $(CFLAGS) $< > $@.$$$$; \
 		sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
@@ -412,12 +465,17 @@ $(gui_deps): ks_version.h
 $(non_gui_deps): tc_version.h
 
 =======
+=======
+>>>>>>> v3.18
   @set -e; $(RM) $@; \
   $(CC) -MM $(CFLAGS) $< > $@.$$$$; \
   sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
   $(RM) $@.$$$$
 endef
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 $(all_deps): .%.d: $(src)/%.c
 	$(Q)$(call check_deps)
@@ -437,7 +495,11 @@ TRACEEVENT-CFLAGS: force
 	@FLAGS='$(TRACK_CFLAGS)'; \
 	    if test x"$$FLAGS" != x"`cat TRACEEVENT-CFLAGS 2>/dev/null`" ; then \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		echo 1>&2 "    * new build flags or cross compiler"; \
+=======
+		echo 1>&2 "  FLAGS:   * new build flags or cross compiler"; \
+>>>>>>> v3.18
 =======
 		echo 1>&2 "  FLAGS:   * new build flags or cross compiler"; \
 >>>>>>> v3.18
@@ -456,7 +518,10 @@ TAGS:	force
 
 define do_install
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(print_install)				\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if [ ! -d '$(DESTDIR_SQ)$2' ]; then		\
@@ -466,9 +531,12 @@ define do_install
 endef
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 install_lib: all_cmd install_plugins install_python
 	$(Q)$(call do_install,$(LIB_FILE),$(bindir_SQ))
 =======
+=======
+>>>>>>> v3.18
 define do_install_plugins
 	for plugin in $1; do				\
 	  $(call do_install,$$plugin,$(plugin_dir_SQ));	\
@@ -482,11 +550,15 @@ install_lib: all_cmd install_plugins
 install_plugins: $(PLUGINS)
 	$(call QUIET_INSTALL, trace_plugins) \
 		$(call do_install_plugins, $(PLUGINS))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 install: install_lib
 
 clean:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	$(RM) *.o *~ $(TARGETS) *.a *.so $(VERSION_FILES) .*.d
 	$(RM) TRACEEVENT-CFLAGS tags TAGS
@@ -497,6 +569,8 @@ PHONY += force
 force:
 
 =======
+=======
+>>>>>>> v3.18
 	$(call QUIET_CLEAN, libtraceevent) \
 		$(RM) *.o *~ $(TARGETS) *.a *.so $(VERSION_FILES) .*.d \
 		$(RM) TRACEEVENT-CFLAGS tags TAGS
@@ -509,6 +583,9 @@ force:
 plugins:
 	@echo > /dev/null
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # Declare the contents of the .PHONY variable as phony.  We keep that
 # information in a variable so we can use it in if_changed and friends.

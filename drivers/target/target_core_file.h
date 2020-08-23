@@ -5,6 +5,10 @@
 
 #define FD_MAX_DEV_NAME		256
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FD_MAX_DEV_PROT_NAME	FD_MAX_DEV_NAME + 16
+>>>>>>> v3.18
 =======
 #define FD_MAX_DEV_PROT_NAME	FD_MAX_DEV_NAME + 16
 >>>>>>> v3.18
@@ -23,7 +27,10 @@
 #define FBDF_HAS_SIZE		0x02
 #define FDBD_HAS_BUFFERED_IO_WCE 0x04
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define FDBD_FORMAT_UNIT_SIZE	2048
 
 struct fd_prot {
@@ -31,6 +38,9 @@ struct fd_prot {
 	struct scatterlist *prot_sg;
 	u32 prot_sg_nents;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct fd_dev {
@@ -47,6 +57,10 @@ struct fd_dev {
 	unsigned long long fd_dev_size;
 	struct file	*fd_file;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct file	*fd_prot_file;
+>>>>>>> v3.18
 =======
 	struct file	*fd_prot_file;
 >>>>>>> v3.18

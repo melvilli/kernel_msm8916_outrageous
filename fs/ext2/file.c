@@ -63,15 +63,21 @@ int ext2_fsync(struct file *file, loff_t start, loff_t end, int datasync)
 const struct file_operations ext2_file_operations = {
 	.llseek		= generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.write		= do_sync_write,
 	.aio_read	= generic_file_aio_read,
 	.aio_write	= generic_file_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.read		= new_sync_read,
 	.write		= new_sync_write,
 	.read_iter	= generic_file_read_iter,
 	.write_iter	= generic_file_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.unlocked_ioctl = ext2_ioctl,
 #ifdef CONFIG_COMPAT
@@ -83,7 +89,11 @@ const struct file_operations ext2_file_operations = {
 	.fsync		= ext2_fsync,
 	.splice_read	= generic_file_splice_read,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.splice_write	= generic_file_splice_write,
+=======
+	.splice_write	= iter_file_splice_write,
+>>>>>>> v3.18
 =======
 	.splice_write	= iter_file_splice_write,
 >>>>>>> v3.18
@@ -115,6 +125,10 @@ const struct inode_operations ext2_file_inode_operations = {
 	.setattr	= ext2_setattr,
 	.get_acl	= ext2_get_acl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_acl	= ext2_set_acl,
+>>>>>>> v3.18
 =======
 	.set_acl	= ext2_set_acl,
 >>>>>>> v3.18

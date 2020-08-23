@@ -25,6 +25,11 @@
 #include "clockdomain.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MAX_CPUS	2
+
+>>>>>>> v3.18
 =======
 #define MAX_CPUS	2
 
@@ -55,17 +60,23 @@ static struct idle_statedata omap4_idle_data[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct powerdomain *mpu_pd, *cpu_pd[NR_CPUS];
 static struct clockdomain *cpu_clkdm[NR_CPUS];
 
 static atomic_t abort_barrier;
 static bool cpu_done[NR_CPUS];
 =======
+=======
+>>>>>>> v3.18
 static struct powerdomain *mpu_pd, *cpu_pd[MAX_CPUS];
 static struct clockdomain *cpu_clkdm[MAX_CPUS];
 
 static atomic_t abort_barrier;
 static bool cpu_done[MAX_CPUS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct idle_statedata *state_ptr = &omap4_idle_data[0];
 
@@ -95,6 +106,10 @@ static int omap_enter_idle_coupled(struct cpuidle_device *dev,
 {
 	struct idle_statedata *cx = state_ptr + index;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 mpuss_can_lose_context = 0;
+>>>>>>> v3.18
 =======
 	u32 mpuss_can_lose_context = 0;
 >>>>>>> v3.18
@@ -124,6 +139,12 @@ static int omap_enter_idle_coupled(struct cpuidle_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mpuss_can_lose_context = (cx->mpu_state == PWRDM_POWER_RET) &&
+				 (cx->mpu_logic_state == PWRDM_POWER_OFF);
+
+>>>>>>> v3.18
 =======
 	mpuss_can_lose_context = (cx->mpu_state == PWRDM_POWER_RET) &&
 				 (cx->mpu_logic_state == PWRDM_POWER_OFF);
@@ -146,9 +167,14 @@ static int omap_enter_idle_coupled(struct cpuidle_device *dev,
 		 * to save GIC and wakeupgen context.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((cx->mpu_state == PWRDM_POWER_RET) &&
 			(cx->mpu_logic_state == PWRDM_POWER_OFF))
 				cpu_cluster_pm_enter();
+=======
+		if (mpuss_can_lose_context)
+			cpu_cluster_pm_enter();
+>>>>>>> v3.18
 =======
 		if (mpuss_can_lose_context)
 			cpu_cluster_pm_enter();
@@ -161,10 +187,13 @@ static int omap_enter_idle_coupled(struct cpuidle_device *dev,
 	/* Wakeup CPU1 only if it is not offlined */
 	if (dev->cpu == 0 && cpumask_test_cpu(1, cpu_online_mask)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clkdm_wakeup(cpu_clkdm[1]);
 		omap_set_pwrdm_state(cpu_pd[1], PWRDM_POWER_ON);
 		clkdm_allow_idle(cpu_clkdm[1]);
 =======
+=======
+>>>>>>> v3.18
 
 		if (IS_PM44XX_ERRATUM(PM_OMAP4_ROM_SMP_BOOT_ERRATUM_GICD) &&
 		    mpuss_can_lose_context)
@@ -182,6 +211,9 @@ static int omap_enter_idle_coupled(struct cpuidle_device *dev,
 			}
 			gic_timer_retrigger();
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -196,8 +228,12 @@ static int omap_enter_idle_coupled(struct cpuidle_device *dev,
 	 * to restore GIC and wakeupgen context.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((cx->mpu_state == PWRDM_POWER_RET) &&
 		(cx->mpu_logic_state == PWRDM_POWER_OFF))
+=======
+	if (dev->cpu == 0 && mpuss_can_lose_context)
+>>>>>>> v3.18
 =======
 	if (dev->cpu == 0 && mpuss_can_lose_context)
 >>>>>>> v3.18

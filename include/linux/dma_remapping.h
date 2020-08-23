@@ -28,7 +28,10 @@ struct root_entry;
 
 #ifdef CONFIG_INTEL_IOMMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void free_dmar_iommu(struct intel_iommu *iommu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int iommu_calculate_agaw(struct intel_iommu *iommu);
@@ -45,9 +48,12 @@ static inline int iommu_calculate_max_sagaw(struct intel_iommu *iommu)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void free_dmar_iommu(struct intel_iommu *iommu)
 {
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define dmar_disabled	(1)

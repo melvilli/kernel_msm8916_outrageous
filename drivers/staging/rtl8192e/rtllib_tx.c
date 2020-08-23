@@ -26,7 +26,11 @@
 
   Few modifications for Realtek's Wi-Fi drivers by
 <<<<<<< HEAD
+<<<<<<< HEAD
   Andrea Merello <andreamrl@tiscali.it>
+=======
+  Andrea Merello <andrea.merello@gmail.com>
+>>>>>>> v3.18
 =======
   Andrea Merello <andrea.merello@gmail.com>
 >>>>>>> v3.18
@@ -176,7 +180,11 @@ inline int rtllib_put_snap(u8 *data, u16 h_proto)
 	snap->oui[2] = oui[2];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*(u16 *)(data + SNAP_SIZE) = htons(h_proto);
+=======
+	*(__be16 *)(data + SNAP_SIZE) = htons(h_proto);
+>>>>>>> v3.18
 =======
 	*(__be16 *)(data + SNAP_SIZE) = htons(h_proto);
 >>>>>>> v3.18
@@ -233,6 +241,10 @@ static struct rtllib_txb *rtllib_alloc_txb(int nr_frags, int txb_size,
 	struct rtllib_txb *txb;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -244,7 +256,11 @@ static struct rtllib_txb *rtllib_alloc_txb(int nr_frags, int txb_size,
 	memset(txb, 0, sizeof(struct rtllib_txb));
 	txb->nr_frags = nr_frags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	txb->frag_size = txb_size;
+=======
+	txb->frag_size = cpu_to_le16(txb_size);
+>>>>>>> v3.18
 =======
 	txb->frag_size = cpu_to_le16(txb_size);
 >>>>>>> v3.18
@@ -370,7 +386,10 @@ FORCED_AGG_SETTING:
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -385,7 +404,10 @@ static void rtllib_qurey_ShortPreambleMode(struct rtllib_device *ieee,
 		 WLAN_CAPABILITY_SHORT_PREAMBLE)
 		tcb_desc->bUseShortPreamble = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -430,7 +452,10 @@ static void rtllib_query_BandwidthMode(struct rtllib_device *ieee,
 	    !ieee->bandwidth_auto_switch.bforced_tx20Mhz)
 		tcb_desc->bPacketBW = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -464,6 +489,10 @@ static void rtllib_query_protectionmode(struct rtllib_device *ieee,
 	} else {
 		struct rt_hi_throughput *pHTInfo = ieee->pHTInfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -488,6 +517,10 @@ static void rtllib_query_protectionmode(struct rtllib_device *ieee,
 			if (pHTInfo->bCurrentHTSupport  && pHTInfo->bEnableHT) {
 				u8 HTOpMode = pHTInfo->CurrentOpMode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -552,6 +585,10 @@ u16 rtllib_query_seqnum(struct rtllib_device *ieee, struct sk_buff *skb,
 	if (IsQoSDataFrame(skb->data)) {
 		struct tx_ts_record *pTS = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -648,7 +685,11 @@ int rtllib_xmit_inter(struct sk_buff *skb, struct net_device *dev)
 
 			txb->encrypted = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			txb->payload_size = skb->len;
+=======
+			txb->payload_size = cpu_to_le16(skb->len);
+>>>>>>> v3.18
 =======
 			txb->payload_size = cpu_to_le16(skb->len);
 >>>>>>> v3.18
@@ -806,7 +847,11 @@ int rtllib_xmit_inter(struct sk_buff *skb, struct net_device *dev)
 		}
 		txb->encrypted = encrypt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		txb->payload_size = bytes;
+=======
+		txb->payload_size = cpu_to_le16(bytes);
+>>>>>>> v3.18
 =======
 		txb->payload_size = cpu_to_le16(bytes);
 >>>>>>> v3.18
@@ -858,15 +903,21 @@ int rtllib_xmit_inter(struct sk_buff *skb, struct net_device *dev)
 			if ((qos_actived) && (!bIsMulticast)) {
 				frag_hdr->seq_ctl =
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 rtllib_query_seqnum(ieee, skb_frag,
 							     header.addr1);
 				frag_hdr->seq_ctl =
 					 cpu_to_le16(frag_hdr->seq_ctl<<4 | i);
 =======
+=======
+>>>>>>> v3.18
 					 cpu_to_le16(rtllib_query_seqnum(ieee, skb_frag,
 							     header.addr1));
 				frag_hdr->seq_ctl =
 					 cpu_to_le16(le16_to_cpu(frag_hdr->seq_ctl)<<4 | i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			} else {
 				frag_hdr->seq_ctl =
@@ -923,7 +974,11 @@ int rtllib_xmit_inter(struct sk_buff *skb, struct net_device *dev)
 
 		txb->encrypted = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		txb->payload_size = skb->len;
+=======
+		txb->payload_size = cpu_to_le16(skb->len);
+>>>>>>> v3.18
 =======
 		txb->payload_size = cpu_to_le16(skb->len);
 >>>>>>> v3.18
@@ -965,7 +1020,11 @@ int rtllib_xmit_inter(struct sk_buff *skb, struct net_device *dev)
 					ieee->rate, ieee->HTCurrentOperaRate);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (bdhcp == true) {
+=======
+			if (bdhcp) {
+>>>>>>> v3.18
 =======
 			if (bdhcp) {
 >>>>>>> v3.18
@@ -1000,7 +1059,11 @@ int rtllib_xmit_inter(struct sk_buff *skb, struct net_device *dev)
 		if (ieee->softmac_features & IEEE_SOFTMAC_TX_QUEUE) {
 			dev->stats.tx_packets++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev->stats.tx_bytes += txb->payload_size;
+=======
+			dev->stats.tx_bytes += le16_to_cpu(txb->payload_size);
+>>>>>>> v3.18
 =======
 			dev->stats.tx_bytes += le16_to_cpu(txb->payload_size);
 >>>>>>> v3.18
@@ -1009,7 +1072,11 @@ int rtllib_xmit_inter(struct sk_buff *skb, struct net_device *dev)
 			if ((*ieee->hard_start_xmit)(txb, dev) == 0) {
 				stats->tx_packets++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				stats->tx_bytes += txb->payload_size;
+=======
+				stats->tx_bytes += le16_to_cpu(txb->payload_size);
+>>>>>>> v3.18
 =======
 				stats->tx_bytes += le16_to_cpu(txb->payload_size);
 >>>>>>> v3.18

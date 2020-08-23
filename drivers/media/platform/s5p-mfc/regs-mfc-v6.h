@@ -142,6 +142,10 @@
 #define S5P_FIMV_D_PICTURE_TAG_V6		0xf4c8
 #define S5P_FIMV_D_STREAM_DATA_SIZE_V6		0xf4d0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define S5P_FIMV_D_INIT_BUFFER_OPTIONS_V6	0xf47c
+>>>>>>> v3.18
 =======
 #define S5P_FIMV_D_INIT_BUFFER_OPTIONS_V6	0xf47c
 >>>>>>> v3.18
@@ -234,6 +238,10 @@
 #define S5P_FIMV_E_MV_HOR_RANGE_V6		0xf7ac
 #define S5P_FIMV_E_MV_VER_RANGE_V6		0xf7b0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define S5P_FIMV_E_MV_RANGE_V6_MASK		0x3fff
+>>>>>>> v3.18
 =======
 #define S5P_FIMV_E_MV_RANGE_V6_MASK		0x3fff
 >>>>>>> v3.18
@@ -383,6 +391,7 @@
 
 /* Buffer size requirements defined by hardware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S5P_FIMV_TMV_BUFFER_SIZE_V6(w, h)	(((w) + 1) * ((h) + 1) * 8)
 #define S5P_FIMV_ME_BUFFER_SIZE_V6(imw, imh, mbw, mbh) \
 	((DIV_ROUND_UP(imw, 64) *  DIV_ROUND_UP(imh, 64) * 256) + \
@@ -392,6 +401,8 @@
 			((w) * ((h) * 64 + 144) + (2048/16 * (h) * 64) + \
 			 (2048/16 * 256 + 8320))
 =======
+=======
+>>>>>>> v3.18
 #define S5P_FIMV_TMV_BUFFER_SIZE_V6(w, h)	(((w) + 1) * ((h) + 3) * 8)
 #define S5P_FIMV_ME_BUFFER_SIZE_V6(imw, imh, mbw, mbh) \
 	(((((imw + 127) / 64) * 16) *  DIV_ROUND_UP(imh, 64) * 256) + \
@@ -399,6 +410,9 @@
 #define S5P_FIMV_SCRATCH_BUF_SIZE_H264_DEC_V6(w, h)	(((w) * 192) + 64)
 #define S5P_FIMV_SCRATCH_BUF_SIZE_MPEG4_DEC_V6(w, h) \
 			((w) * 144 + 8192 * (h) + 49216 + 1048576)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define S5P_FIMV_SCRATCH_BUF_SIZE_VC1_DEC_V6(w, h) \
 						(2096 * ((w) + (h) + 1))

@@ -264,6 +264,7 @@ static int tc6393xb_ohci_disable(struct platform_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tc6393xb_ohci_suspend(struct platform_device *dev)
 {
 	struct tc6393xb_platform_data *tcpd = dev_get_platdata(dev->dev.parent);
@@ -275,6 +276,8 @@ static int tc6393xb_ohci_suspend(struct platform_device *dev)
 	return tc6393xb_ohci_disable(dev);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int tc6393xb_fb_enable(struct platform_device *dev)
@@ -418,7 +421,11 @@ static struct mfd_cell tc6393xb_cells[] = {
 		.resources = tc6393xb_ohci_resources,
 		.enable = tc6393xb_ohci_enable,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.suspend = tc6393xb_ohci_suspend,
+=======
+		.suspend = tc6393xb_ohci_disable,
+>>>>>>> v3.18
 =======
 		.suspend = tc6393xb_ohci_disable,
 >>>>>>> v3.18
@@ -623,15 +630,21 @@ static void tc6393xb_detach_irq(struct platform_device *dev)
 static int tc6393xb_probe(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc6393xb_platform_data *tcpd = dev->dev.platform_data;
 	struct tc6393xb *tc6393xb;
 	struct resource *iomem, *rscr;
 	int ret, temp;
 =======
+=======
+>>>>>>> v3.18
 	struct tc6393xb_platform_data *tcpd = dev_get_platdata(&dev->dev);
 	struct tc6393xb *tc6393xb;
 	struct resource *iomem, *rscr;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iomem = platform_get_resource(dev, IORESOURCE_MEM, 0);
@@ -740,7 +753,11 @@ err_setup:
 err_gpio_add:
 	if (tc6393xb->gpio.base != -1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		temp = gpiochip_remove(&tc6393xb->gpio);
+=======
+		gpiochip_remove(&tc6393xb->gpio);
+>>>>>>> v3.18
 =======
 		gpiochip_remove(&tc6393xb->gpio);
 >>>>>>> v3.18
@@ -763,7 +780,11 @@ err_kzalloc:
 static int tc6393xb_remove(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc6393xb_platform_data *tcpd = dev->dev.platform_data;
+=======
+	struct tc6393xb_platform_data *tcpd = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct tc6393xb_platform_data *tcpd = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -778,6 +799,7 @@ static int tc6393xb_remove(struct platform_device *dev)
 	tc6393xb_detach_irq(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tc6393xb->gpio.base != -1) {
 		ret = gpiochip_remove(&tc6393xb->gpio);
 		if (ret) {
@@ -789,13 +811,20 @@ static int tc6393xb_remove(struct platform_device *dev)
 	if (tc6393xb->gpio.base != -1)
 		gpiochip_remove(&tc6393xb->gpio);
 >>>>>>> v3.18
+=======
+	if (tc6393xb->gpio.base != -1)
+		gpiochip_remove(&tc6393xb->gpio);
+>>>>>>> v3.18
 
 	ret = tcpd->disable(dev);
 	clk_disable(tc6393xb->clk);
 	iounmap(tc6393xb->scr);
 	release_resource(&tc6393xb->rscr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clk_put(tc6393xb->clk);
@@ -808,7 +837,11 @@ static int tc6393xb_remove(struct platform_device *dev)
 static int tc6393xb_suspend(struct platform_device *dev, pm_message_t state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc6393xb_platform_data *tcpd = dev->dev.platform_data;
+=======
+	struct tc6393xb_platform_data *tcpd = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct tc6393xb_platform_data *tcpd = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -835,7 +868,11 @@ static int tc6393xb_suspend(struct platform_device *dev, pm_message_t state)
 static int tc6393xb_resume(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc6393xb_platform_data *tcpd = dev->dev.platform_data;
+=======
+	struct tc6393xb_platform_data *tcpd = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct tc6393xb_platform_data *tcpd = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18

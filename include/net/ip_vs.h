@@ -1,7 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *      IP Virtual Server
  *      data structure and functionality definitions
+=======
+/* IP Virtual Server
+ * data structure and functionality definitions
+>>>>>>> v3.18
 =======
 /* IP Virtual Server
  * data structure and functionality definitions
@@ -18,7 +23,11 @@
 #include <linux/list.h>                 /* for struct list_head */
 #include <linux/spinlock.h>             /* for struct rwlock_t */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/atomic.h>                 /* for struct atomic_t */
+=======
+#include <linux/atomic.h>               /* for struct atomic_t */
+>>>>>>> v3.18
 =======
 #include <linux/atomic.h>               /* for struct atomic_t */
 >>>>>>> v3.18
@@ -40,9 +49,13 @@
 #include <net/net_namespace.h>		/* Netw namespace */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Generic access of ipvs struct
  */
+=======
+/* Generic access of ipvs struct */
+>>>>>>> v3.18
 =======
 /* Generic access of ipvs struct */
 >>>>>>> v3.18
@@ -51,8 +64,13 @@ static inline struct netns_ipvs *net_ipvs(struct net* net)
 	return net->ipvs;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Get net ptr from skb in traffic cases
+=======
+
+/* Get net ptr from skb in traffic cases
+>>>>>>> v3.18
 =======
 
 /* Get net ptr from skb in traffic cases
@@ -109,8 +127,13 @@ static inline struct net *skb_sknet(const struct sk_buff *skb)
 #endif
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * This one needed for single_open_net since net is stored directly in
+=======
+
+/* This one needed for single_open_net since net is stored directly in
+>>>>>>> v3.18
 =======
 
 /* This one needed for single_open_net since net is stored directly in
@@ -132,7 +155,11 @@ extern int ip_vs_conn_tab_size;
 struct ip_vs_iphdr {
 	__u32 len;	/* IPv4 simply where L4 starts
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   IPv6 where L4 Transport Header starts */
+=======
+			 * IPv6 where L4 Transport Header starts */
+>>>>>>> v3.18
 =======
 			 * IPv6 where L4 Transport Header starts */
 >>>>>>> v3.18
@@ -195,6 +222,7 @@ ip_vs_fill_iph_skb(int af, const struct sk_buff *skb, struct ip_vs_iphdr *iphdr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This function is a faster version of ip_vs_fill_iph_skb().
  * Where we only populate {s,d}addr (and avoid calling ipv6_find_hdr()).
  * This is used by the some of the ip_vs_*_schedule() functions.
@@ -220,6 +248,8 @@ ip_vs_fill_iph_addr_only(int af, const struct sk_buff *skb,
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void ip_vs_addr_copy(int af, union nf_inet_addr *dst,
@@ -262,7 +292,11 @@ static inline int ip_vs_addr_equal(int af, const union nf_inet_addr *a,
 #include <linux/net.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ip_vs_get_debug_level(void);
+=======
+int ip_vs_get_debug_level(void);
+>>>>>>> v3.18
 =======
 int ip_vs_get_debug_level(void);
 >>>>>>> v3.18
@@ -364,6 +398,7 @@ static inline const char *ip_vs_dbg_addr(int af, char *buf, size_t buf_len,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  *      The port number of FTP service (in network order).
@@ -375,11 +410,16 @@ static inline const char *ip_vs_dbg_addr(int af, char *buf, size_t buf_len,
  *      TCP State Values
  */
 =======
+=======
+>>>>>>> v3.18
 /* The port number of FTP service (in network order). */
 #define FTPPORT  cpu_to_be16(21)
 #define FTPDATA  cpu_to_be16(20)
 
 /* TCP State Values */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	IP_VS_TCP_S_NONE = 0,
@@ -397,9 +437,13 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	UDP State Values
  */
+=======
+/* UDP State Values */
+>>>>>>> v3.18
 =======
 /* UDP State Values */
 >>>>>>> v3.18
@@ -409,9 +453,13 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	ICMP State Values
  */
+=======
+/* ICMP State Values */
+>>>>>>> v3.18
 =======
 /* ICMP State Values */
 >>>>>>> v3.18
@@ -420,6 +468,7 @@ enum {
 	IP_VS_ICMP_S_LAST,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  *	SCTP State Values
@@ -438,6 +487,8 @@ enum ip_vs_sctp_states {
 	IP_VS_SCTP_S_SHUT_ACK_CLI,
 	IP_VS_SCTP_S_SHUT_ACK_SER,
 =======
+=======
+>>>>>>> v3.18
 /* SCTP State Values */
 enum ip_vs_sctp_states {
 	IP_VS_SCTP_S_NONE,
@@ -453,16 +504,25 @@ enum ip_vs_sctp_states {
 	IP_VS_SCTP_S_SHUTDOWN_RECEIVED,
 	IP_VS_SCTP_S_SHUTDOWN_ACK_SENT,
 	IP_VS_SCTP_S_REJECTED,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	IP_VS_SCTP_S_CLOSED,
 	IP_VS_SCTP_S_LAST
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	Delta sequence info structure
  *	Each ip_vs_conn has 2 (output AND input seq. changes).
  *      Only used in the VS/NAT.
+=======
+/* Delta sequence info structure
+ * Each ip_vs_conn has 2 (output AND input seq. changes).
+ * Only used in the VS/NAT.
+>>>>>>> v3.18
 =======
 /* Delta sequence info structure
  * Each ip_vs_conn has 2 (output AND input seq. changes).
@@ -474,6 +534,7 @@ struct ip_vs_seq {
 	__u32			delta;		/* Delta in sequence numbers */
 	__u32			previous_delta;	/* Delta in sequence numbers
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   before last resized pkt */
 };
 
@@ -481,10 +542,15 @@ struct ip_vs_seq {
  * counters per cpu
  */
 =======
+=======
+>>>>>>> v3.18
 						 * before last resized pkt */
 };
 
 /* counters per cpu */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ip_vs_counters {
 	__u32		conns;		/* connections scheduled */
@@ -494,9 +560,13 @@ struct ip_vs_counters {
 	__u64		outbytes;	/* outgoing bytes */
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Stats per cpu
  */
+=======
+/* Stats per cpu */
+>>>>>>> v3.18
 =======
 /* Stats per cpu */
 >>>>>>> v3.18
@@ -506,9 +576,13 @@ struct ip_vs_cpu_stats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	IPVS statistics objects
  */
+=======
+/* IPVS statistics objects */
+>>>>>>> v3.18
 =======
 /* IPVS statistics objects */
 >>>>>>> v3.18
@@ -605,9 +679,13 @@ struct ip_vs_protocol {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * protocol data per netns
  */
+=======
+/* protocol data per netns */
+>>>>>>> v3.18
 =======
 /* protocol data per netns */
 >>>>>>> v3.18
@@ -620,9 +698,15 @@ struct ip_vs_proto_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct ip_vs_protocol   *ip_vs_proto_get(unsigned short proto);
 extern struct ip_vs_proto_data *ip_vs_proto_data_get(struct net *net,
 						     unsigned short proto);
+=======
+struct ip_vs_protocol   *ip_vs_proto_get(unsigned short proto);
+struct ip_vs_proto_data *ip_vs_proto_data_get(struct net *net,
+					      unsigned short proto);
+>>>>>>> v3.18
 =======
 struct ip_vs_protocol   *ip_vs_proto_get(unsigned short proto);
 struct ip_vs_proto_data *ip_vs_proto_data_get(struct net *net,
@@ -644,9 +728,13 @@ struct ip_vs_conn_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	IP_VS structure allocated for each dynamically scheduled connection
  */
+=======
+/* IP_VS structure allocated for each dynamically scheduled connection */
+>>>>>>> v3.18
 =======
 /* IP_VS structure allocated for each dynamically scheduled connection */
 >>>>>>> v3.18
@@ -663,6 +751,10 @@ struct ip_vs_conn {
 	volatile __u32          flags;          /* status flags */
 	__u16                   protocol;       /* Which protocol (TCP/UDP) */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__u16			daf;		/* Address family of the dest */
+>>>>>>> v3.18
 =======
 	__u16			daf;		/* Address family of the dest */
 >>>>>>> v3.18
@@ -692,15 +784,21 @@ struct ip_vs_conn {
 	atomic_t                in_pkts;        /* incoming packet counter */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* packet transmitter for different forwarding methods.  If it
 	   mangles the packet, it must return NF_DROP or better NF_STOLEN,
 	   otherwise this must be changed to a sk_buff **.
 	   NF_ACCEPT can be returned when destination is local.
 =======
+=======
+>>>>>>> v3.18
 	/* Packet transmitter for different forwarding methods.  If it
 	 * mangles the packet, it must return NF_DROP or better NF_STOLEN,
 	 * otherwise this must be changed to a sk_buff **.
 	 * NF_ACCEPT can be returned when destination is local.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	int (*packet_xmit)(struct sk_buff *skb, struct ip_vs_conn *cp,
@@ -708,8 +806,14 @@ struct ip_vs_conn {
 
 	/* Note: we can group the following members into a structure,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   in order to save more space, and the following members are
 	   only used in VS/NAT anyway */
+=======
+	 * in order to save more space, and the following members are
+	 * only used in VS/NAT anyway
+	 */
+>>>>>>> v3.18
 =======
 	 * in order to save more space, and the following members are
 	 * only used in VS/NAT anyway
@@ -728,9 +832,13 @@ struct ip_vs_conn {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *  To save some memory in conn table when name space is disabled.
  */
+=======
+/* To save some memory in conn table when name space is disabled. */
+>>>>>>> v3.18
 =======
 /* To save some memory in conn table when name space is disabled. */
 >>>>>>> v3.18
@@ -743,6 +851,10 @@ static inline struct net *ip_vs_conn_net(const struct ip_vs_conn *cp)
 #endif
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -764,6 +876,7 @@ static inline int ip_vs_conn_net_eq(const struct ip_vs_conn *cp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	Extended internal versions of struct ip_vs_service_user and
  *	ip_vs_dest_user for IPv6 support.
@@ -772,12 +885,17 @@ static inline int ip_vs_conn_net_eq(const struct ip_vs_conn *cp,
  *	options, but unfortunately, we also need to keep the old definitions to
  *	maintain userspace backwards compatibility for the setsockopt interface.
 =======
+=======
+>>>>>>> v3.18
 /* Extended internal versions of struct ip_vs_service_user and ip_vs_dest_user
  * for IPv6 support.
  *
  * We need these to conveniently pass around service and destination
  * options, but unfortunately, we also need to keep the old definitions to
  * maintain userspace backwards compatibility for the setsockopt interface.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct ip_vs_service_user_kern {
@@ -810,6 +928,12 @@ struct ip_vs_dest_user_kern {
 	u32			u_threshold;	/* upper threshold */
 	u32			l_threshold;	/* lower threshold */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* Address family of addr */
+	u16			af;
+>>>>>>> v3.18
 =======
 
 	/* Address family of addr */
@@ -820,8 +944,13 @@ struct ip_vs_dest_user_kern {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	The information about the virtual service offered to the net
  *	and the forwarding entries
+=======
+ * The information about the virtual service offered to the net and the
+ * forwarding entries.
+>>>>>>> v3.18
 =======
  * The information about the virtual service offered to the net and the
  * forwarding entries.
@@ -866,11 +995,16 @@ struct ip_vs_dest_dst {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* In grace period after removing */
 #define IP_VS_DEST_STATE_REMOVING	0x01
 /*
  *	The real server destination forwarding entry
  *	with ip address, port number, and so on.
+=======
+/* The real server destination forwarding entry with ip address, port number,
+ * and so on.
+>>>>>>> v3.18
 =======
 /* The real server destination forwarding entry with ip address, port number,
  * and so on.
@@ -890,7 +1024,11 @@ struct ip_vs_dest {
 	atomic_t		refcnt;		/* reference counter */
 	struct ip_vs_stats      stats;          /* statistics */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long		state;		/* state flags */
+=======
+	unsigned long		idle_start;	/* start time, jiffies */
+>>>>>>> v3.18
 =======
 	unsigned long		idle_start;	/* start time, jiffies */
 >>>>>>> v3.18
@@ -908,7 +1046,11 @@ struct ip_vs_dest {
 
 	/* for virtual service */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ip_vs_service	*svc;		/* service it belongs to */
+=======
+	struct ip_vs_service __rcu *svc;	/* service it belongs to */
+>>>>>>> v3.18
 =======
 	struct ip_vs_service __rcu *svc;	/* service it belongs to */
 >>>>>>> v3.18
@@ -919,6 +1061,7 @@ struct ip_vs_dest {
 
 	struct list_head	t_list;		/* in dest_trash */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rcu_head		rcu_head;
 	unsigned int		in_rs_table:1;	/* we are in rs_table */
 };
@@ -928,10 +1071,15 @@ struct ip_vs_dest {
  *	The scheduler object
  */
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		in_rs_table:1;	/* we are in rs_table */
 };
 
 /* The scheduler object */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ip_vs_scheduler {
 	struct list_head	n_list;		/* d-linked list head */
@@ -953,7 +1101,12 @@ struct ip_vs_scheduler {
 	/* selecting a server from the given service */
 	struct ip_vs_dest* (*schedule)(struct ip_vs_service *svc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       const struct sk_buff *skb);
+=======
+				       const struct sk_buff *skb,
+				       struct ip_vs_iphdr *iph);
+>>>>>>> v3.18
 =======
 				       const struct sk_buff *skb,
 				       struct ip_vs_iphdr *iph);
@@ -977,9 +1130,13 @@ struct ip_vs_pe {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	The application module object (a.k.a. app incarnation)
  */
+=======
+/* The application module object (a.k.a. app incarnation) */
+>>>>>>> v3.18
 =======
 /* The application module object (a.k.a. app incarnation) */
 >>>>>>> v3.18
@@ -999,8 +1156,12 @@ struct ip_vs_app {
 	struct rcu_head		rcu_head;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * output hook: Process packet in inout direction, diff set for TCP.
+=======
+	/* output hook: Process packet in inout direction, diff set for TCP.
+>>>>>>> v3.18
 =======
 	/* output hook: Process packet in inout direction, diff set for TCP.
 >>>>>>> v3.18
@@ -1011,8 +1172,12 @@ struct ip_vs_app {
 		       struct sk_buff *, int *diff);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * input hook: Process packet in outin direction, diff set for TCP.
+=======
+	/* input hook: Process packet in outin direction, diff set for TCP.
+>>>>>>> v3.18
 =======
 	/* input hook: Process packet in outin direction, diff set for TCP.
 >>>>>>> v3.18
@@ -1061,7 +1226,11 @@ struct ipvs_master_sync_state {
 	struct list_head	sync_queue;
 	struct ip_vs_sync_buff	*sync_buff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			sync_queue_len;
+=======
+	unsigned long		sync_queue_len;
+>>>>>>> v3.18
 =======
 	unsigned long		sync_queue_len;
 >>>>>>> v3.18
@@ -1079,9 +1248,13 @@ struct netns_ipvs {
 	int			gen;		/* Generation */
 	int			enable;		/* enable like nf_hooks do */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 *	Hash table: for real service lookups
 	 */
+=======
+	/* Hash table: for real service lookups */
+>>>>>>> v3.18
 =======
 	/* Hash table: for real service lookups */
 >>>>>>> v3.18
@@ -1119,7 +1292,11 @@ struct netns_ipvs {
 #endif
 	/* ip_vs_conn */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t		conn_count;      /*  connection counter */
+=======
+	atomic_t		conn_count;      /* connection counter */
+>>>>>>> v3.18
 =======
 	atomic_t		conn_count;      /* connection counter */
 >>>>>>> v3.18
@@ -1166,11 +1343,14 @@ struct netns_ipvs {
 	int			sysctl_sync_ver;
 	int			sysctl_sync_ports;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			sysctl_sync_qlen_max;
 	int			sysctl_sync_sock_size;
 	int			sysctl_cache_bypass;
 	int			sysctl_expire_nodest_conn;
 =======
+=======
+>>>>>>> v3.18
 	int			sysctl_sync_persist_mode;
 	unsigned long		sysctl_sync_qlen_max;
 	int			sysctl_sync_sock_size;
@@ -1178,6 +1358,9 @@ struct netns_ipvs {
 	int			sysctl_expire_nodest_conn;
 	int			sysctl_sloppy_tcp;
 	int			sysctl_sloppy_sctp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			sysctl_expire_quiescent_template;
 	int			sysctl_sync_threshold[2];
@@ -1217,11 +1400,17 @@ struct netns_ipvs {
 	/* net name space ptr */
 	struct net		*net;            /* Needed by timer routines */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Number of heterogeneous destinations, needed becaus heterogeneous
 	 * are not supported when synchronization is enabled.
 	 */
 	unsigned int		mixed_address_family_dests;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1229,6 +1418,11 @@ struct netns_ipvs {
 #define DEFAULT_SYNC_PERIOD	50
 #define DEFAULT_SYNC_VER	1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DEFAULT_SLOPPY_TCP	0
+#define DEFAULT_SLOPPY_SCTP	0
+>>>>>>> v3.18
 =======
 #define DEFAULT_SLOPPY_TCP	0
 #define DEFAULT_SLOPPY_SCTP	0
@@ -1270,7 +1464,10 @@ static inline int sysctl_sync_ver(struct netns_ipvs *ipvs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int sysctl_sloppy_tcp(struct netns_ipvs *ipvs)
 {
 	return ipvs->sysctl_sloppy_tcp;
@@ -1281,6 +1478,9 @@ static inline int sysctl_sloppy_sctp(struct netns_ipvs *ipvs)
 	return ipvs->sysctl_sloppy_sctp;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int sysctl_sync_ports(struct netns_ipvs *ipvs)
 {
@@ -1288,14 +1488,20 @@ static inline int sysctl_sync_ports(struct netns_ipvs *ipvs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int sysctl_sync_qlen_max(struct netns_ipvs *ipvs)
 =======
+=======
+>>>>>>> v3.18
 static inline int sysctl_sync_persist_mode(struct netns_ipvs *ipvs)
 {
 	return ipvs->sysctl_sync_persist_mode;
 }
 
 static inline unsigned long sysctl_sync_qlen_max(struct netns_ipvs *ipvs)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return ipvs->sysctl_sync_qlen_max;
@@ -1345,7 +1551,10 @@ static inline int sysctl_sync_ver(struct netns_ipvs *ipvs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int sysctl_sloppy_tcp(struct netns_ipvs *ipvs)
 {
 	return DEFAULT_SLOPPY_TCP;
@@ -1356,6 +1565,9 @@ static inline int sysctl_sloppy_sctp(struct netns_ipvs *ipvs)
 	return DEFAULT_SLOPPY_SCTP;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int sysctl_sync_ports(struct netns_ipvs *ipvs)
 {
@@ -1363,14 +1575,20 @@ static inline int sysctl_sync_ports(struct netns_ipvs *ipvs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int sysctl_sync_qlen_max(struct netns_ipvs *ipvs)
 =======
+=======
+>>>>>>> v3.18
 static inline int sysctl_sync_persist_mode(struct netns_ipvs *ipvs)
 {
 	return 0;
 }
 
 static inline unsigned long sysctl_sync_qlen_max(struct netns_ipvs *ipvs)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return IPVS_SYNC_QLEN_MAX;
@@ -1394,6 +1612,7 @@ static inline int sysctl_backup_only(struct netns_ipvs *ipvs)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *      IPVS core functions
  *      (from ip_vs_core.c)
@@ -1401,22 +1620,33 @@ static inline int sysctl_backup_only(struct netns_ipvs *ipvs)
 extern const char *ip_vs_proto_name(unsigned int proto);
 extern void ip_vs_init_hash_table(struct list_head *table, int rows);
 =======
+=======
+>>>>>>> v3.18
 /* IPVS core functions
  * (from ip_vs_core.c)
  */
 const char *ip_vs_proto_name(unsigned int proto);
 void ip_vs_init_hash_table(struct list_head *table, int rows);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IP_VS_INIT_HASH_TABLE(t) ip_vs_init_hash_table((t), ARRAY_SIZE((t)))
 
 #define IP_VS_APP_TYPE_FTP	1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *     ip_vs_conn handling functions
  *     (from ip_vs_conn.c)
  */
 
+=======
+/* ip_vs_conn handling functions
+ * (from ip_vs_conn.c)
+ */
+>>>>>>> v3.18
 =======
 /* ip_vs_conn handling functions
  * (from ip_vs_conn.c)
@@ -1476,6 +1706,7 @@ static inline void __ip_vs_conn_put(struct ip_vs_conn *cp)
 	atomic_dec(&cp->refcnt);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ip_vs_conn_put(struct ip_vs_conn *cp);
 extern void ip_vs_conn_fill_cport(struct ip_vs_conn *cp, __be16 cport);
 
@@ -1493,6 +1724,8 @@ extern void ip_vs_random_dropentry(struct net *net);
 extern int ip_vs_conn_init(void);
 extern void ip_vs_conn_cleanup(void);
 =======
+=======
+>>>>>>> v3.18
 void ip_vs_conn_put(struct ip_vs_conn *cp);
 void ip_vs_conn_fill_cport(struct ip_vs_conn *cp, __be16 cport);
 
@@ -1509,6 +1742,9 @@ int ip_vs_check_template(struct ip_vs_conn *ct);
 void ip_vs_random_dropentry(struct net *net);
 int ip_vs_conn_init(void);
 void ip_vs_conn_cleanup(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void ip_vs_control_del(struct ip_vs_conn *cp)
@@ -1572,6 +1808,7 @@ ip_vs_control_add(struct ip_vs_conn *cp, struct ip_vs_conn *ctl_cp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * IPVS netns init & cleanup functions
  */
@@ -1607,6 +1844,8 @@ extern void ip_vs_app_inc_put(struct ip_vs_app *inc);
 extern int ip_vs_app_pkt_out(struct ip_vs_conn *, struct sk_buff *skb);
 extern int ip_vs_app_pkt_in(struct ip_vs_conn *, struct sk_buff *skb);
 =======
+=======
+>>>>>>> v3.18
 /* IPVS netns init & cleanup functions */
 int ip_vs_estimator_net_init(struct net *net);
 int ip_vs_control_net_init(struct net *net);
@@ -1637,6 +1876,9 @@ void ip_vs_app_inc_put(struct ip_vs_app *inc);
 
 int ip_vs_app_pkt_out(struct ip_vs_conn *, struct sk_buff *skb);
 int ip_vs_app_pkt_in(struct ip_vs_conn *, struct sk_buff *skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int register_ip_vs_pe(struct ip_vs_pe *pe);
@@ -1645,9 +1887,13 @@ struct ip_vs_pe *ip_vs_pe_getbyname(const char *name);
 struct ip_vs_pe *__ip_vs_pe_getbyname(const char *pe_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Use a #define to avoid all of module.h just for these trivial ops
  */
+=======
+/* Use a #define to avoid all of module.h just for these trivial ops */
+>>>>>>> v3.18
 =======
 /* Use a #define to avoid all of module.h just for these trivial ops */
 >>>>>>> v3.18
@@ -1659,6 +1905,7 @@ struct ip_vs_pe *__ip_vs_pe_getbyname(const char *pe_name);
 	if (pe && pe->module)			\
 		module_put(pe->module);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  *	IPVS protocol functions (from ip_vs_proto.c)
@@ -1675,6 +1922,8 @@ ip_vs_tcpudp_debug_packet(int af, struct ip_vs_protocol *pp,
 			  const struct sk_buff *skb,
 			  int offset, const char *msg);
 =======
+=======
+>>>>>>> v3.18
 /* IPVS protocol functions (from ip_vs_proto.c) */
 int ip_vs_protocol_init(void);
 void ip_vs_protocol_cleanup(void);
@@ -1685,6 +1934,9 @@ int ip_vs_set_state_timeout(int *table, int num, const char *const *names,
 void ip_vs_tcpudp_debug_packet(int af, struct ip_vs_protocol *pp,
 			       const struct sk_buff *skb, int offset,
 			       const char *msg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct ip_vs_protocol ip_vs_protocol_tcp;
@@ -1694,6 +1946,7 @@ extern struct ip_vs_protocol ip_vs_protocol_esp;
 extern struct ip_vs_protocol ip_vs_protocol_ah;
 extern struct ip_vs_protocol ip_vs_protocol_sctp;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  *      Registering/unregistering scheduler functions
@@ -1743,6 +1996,8 @@ ip_vs_find_dest(struct net *net, int af, const union nf_inet_addr *daddr,
 		__u16 protocol, __u32 fwmark, __u32 flags);
 extern void ip_vs_try_bind_dest(struct ip_vs_conn *cp);
 =======
+=======
+>>>>>>> v3.18
 /* Registering/unregistering scheduler functions
  * (from ip_vs_sched.c)
  */
@@ -1786,6 +2041,9 @@ ip_vs_find_dest(struct net *net, int svc_af, int dest_af,
 		const union nf_inet_addr *vaddr, __be16 vport,
 		__u16 protocol, __u32 fwmark, __u32 flags);
 void ip_vs_try_bind_dest(struct ip_vs_conn *cp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void ip_vs_dest_hold(struct ip_vs_dest *dest)
@@ -1799,6 +2057,7 @@ static inline void ip_vs_dest_put(struct ip_vs_dest *dest)
 	atomic_dec(&dest->refcnt);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  *      IPVS sync daemon data and function prototypes
@@ -1864,6 +2123,8 @@ extern int ip_vs_icmp_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
  */
 
 =======
+=======
+>>>>>>> v3.18
 static inline void ip_vs_dest_put_and_free(struct ip_vs_dest *dest)
 {
 	if (atomic_dec_return(&dest->refcnt) < 0)
@@ -1919,6 +2180,9 @@ int ip_vs_icmp_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
  * we are loaded. Just set ip_vs_drop_rate to 'n' and
  * we start to drop 1/rate of the packets
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int ip_vs_todrop(struct netns_ipvs *ipvs)
 {
@@ -1934,9 +2198,13 @@ static inline int ip_vs_todrop(struct netns_ipvs *ipvs) { return 0; }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *      ip_vs_fwd_tag returns the forwarding tag of the connection
  */
+=======
+/* ip_vs_fwd_tag returns the forwarding tag of the connection */
+>>>>>>> v3.18
 =======
 /* ip_vs_fwd_tag returns the forwarding tag of the connection */
 >>>>>>> v3.18
@@ -1964,6 +2232,7 @@ static inline char ip_vs_fwd_tag(struct ip_vs_conn *cp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ip_vs_nat_icmp(struct sk_buff *skb, struct ip_vs_protocol *pp,
 			   struct ip_vs_conn *cp, int dir);
 
@@ -1974,6 +2243,8 @@ extern void ip_vs_nat_icmp_v6(struct sk_buff *skb, struct ip_vs_protocol *pp,
 
 extern __sum16 ip_vs_checksum_complete(struct sk_buff *skb, int offset);
 =======
+=======
+>>>>>>> v3.18
 void ip_vs_nat_icmp(struct sk_buff *skb, struct ip_vs_protocol *pp,
 		    struct ip_vs_conn *cp, int dir);
 
@@ -1983,6 +2254,9 @@ void ip_vs_nat_icmp_v6(struct sk_buff *skb, struct ip_vs_protocol *pp,
 #endif
 
 __sum16 ip_vs_checksum_complete(struct sk_buff *skb, int offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline __wsum ip_vs_check_diff4(__be32 old, __be32 new, __wsum oldsum)
@@ -2011,9 +2285,13 @@ static inline __wsum ip_vs_check_diff2(__be16 old, __be16 new, __wsum oldsum)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Forget current conntrack (unconfirmed) and attach notrack entry
  */
+=======
+/* Forget current conntrack (unconfirmed) and attach notrack entry */
+>>>>>>> v3.18
 =======
 /* Forget current conntrack (unconfirmed) and attach notrack entry */
 >>>>>>> v3.18
@@ -2034,9 +2312,14 @@ static inline void ip_vs_notrack(struct sk_buff *skb)
 
 #ifdef CONFIG_IP_VS_NFCT
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *      Netfilter connection tracking
  *      (from ip_vs_nfct.c)
+=======
+/* Netfilter connection tracking
+ * (from ip_vs_nfct.c)
+>>>>>>> v3.18
 =======
 /* Netfilter connection tracking
  * (from ip_vs_nfct.c)
@@ -2052,6 +2335,7 @@ static inline int ip_vs_conntrack_enabled(struct netns_ipvs *ipvs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ip_vs_update_conntrack(struct sk_buff *skb, struct ip_vs_conn *cp,
 				   int outin);
 extern int ip_vs_confirm_conntrack(struct sk_buff *skb);
@@ -2060,6 +2344,8 @@ extern void ip_vs_nfct_expect_related(struct sk_buff *skb, struct nf_conn *ct,
 				      const __be16 port, int from_rs);
 extern void ip_vs_conn_drop_conntrack(struct ip_vs_conn *cp);
 =======
+=======
+>>>>>>> v3.18
 void ip_vs_update_conntrack(struct sk_buff *skb, struct ip_vs_conn *cp,
 			    int outin);
 int ip_vs_confirm_conntrack(struct sk_buff *skb);
@@ -2067,6 +2353,9 @@ void ip_vs_nfct_expect_related(struct sk_buff *skb, struct nf_conn *ct,
 			       struct ip_vs_conn *cp, u_int8_t proto,
 			       const __be16 port, int from_rs);
 void ip_vs_conn_drop_conntrack(struct ip_vs_conn *cp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else
@@ -2090,6 +2379,7 @@ static inline void ip_vs_conn_drop_conntrack(struct ip_vs_conn *cp)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* CONFIG_IP_VS_NFCT */
 #endif
 
@@ -2099,12 +2389,17 @@ ip_vs_dest_conn_overhead(struct ip_vs_dest *dest)
 	/*
 	 * We think the overhead of processing active connections is 256
 =======
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_IP_VS_NFCT */
 
 static inline int
 ip_vs_dest_conn_overhead(struct ip_vs_dest *dest)
 {
 	/* We think the overhead of processing active connections is 256
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * times higher than that of inactive connections in average. (This
 	 * 256 times might not be accurate, we will change it later) We

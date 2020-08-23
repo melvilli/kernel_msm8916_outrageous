@@ -23,7 +23,10 @@
 /* IOC local definitions */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define bfa_ioc_state_disabled(__sm)			\
 	(((__sm) == BFI_IOC_UNINIT) ||			\
 	 ((__sm) == BFI_IOC_INITING) ||			\
@@ -32,6 +35,9 @@
 	 ((__sm) == BFI_IOC_FAIL) ||			\
 	 ((__sm) == BFI_IOC_CFG_DISABLED))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Asic specific macros : see bfa_hw_cb.c and bfa_hw_ct.c for details. */
 
@@ -54,7 +60,10 @@
 #define bfa_ioc_sync_complete(__ioc)			\
 			((__ioc)->ioc_hwif->ioc_sync_complete(__ioc))
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define bfa_ioc_set_cur_ioc_fwstate(__ioc, __fwstate)		\
 			((__ioc)->ioc_hwif->ioc_set_fwstate(__ioc, __fwstate))
 #define bfa_ioc_get_cur_ioc_fwstate(__ioc)		\
@@ -63,6 +72,9 @@
 		((__ioc)->ioc_hwif->ioc_set_alt_fwstate(__ioc, __fwstate))
 #define bfa_ioc_get_alt_ioc_fwstate(__ioc)		\
 			((__ioc)->ioc_hwif->ioc_get_alt_fwstate(__ioc))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define bfa_ioc_mbox_cmd_pending(__ioc)		\
@@ -99,8 +111,13 @@ static void bfa_ioc_pf_failed(struct bfa_ioc *ioc);
 static void bfa_ioc_pf_hwfailed(struct bfa_ioc *ioc);
 static void bfa_ioc_pf_fwmismatch(struct bfa_ioc *ioc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bfa_ioc_boot(struct bfa_ioc *ioc, enum bfi_fwboot_type boot_type,
 			 u32 boot_param);
+=======
+static enum bfa_status bfa_ioc_boot(struct bfa_ioc *ioc,
+			enum bfi_fwboot_type boot_type, u32 boot_param);
+>>>>>>> v3.18
 =======
 static enum bfa_status bfa_ioc_boot(struct bfa_ioc *ioc,
 			enum bfi_fwboot_type boot_type, u32 boot_param);
@@ -888,7 +905,11 @@ bfa_iocpf_sm_disabling(struct bfa_iocpf *iocpf, enum iocpf_event event)
 
 	case IOCPF_E_TIMEOUT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		writel(BFI_IOC_FAIL, ioc->ioc_regs.ioc_fwstate);
+=======
+		bfa_ioc_set_cur_ioc_fwstate(ioc, BFI_IOC_FAIL);
+>>>>>>> v3.18
 =======
 		bfa_ioc_set_cur_ioc_fwstate(ioc, BFI_IOC_FAIL);
 >>>>>>> v3.18
@@ -981,7 +1002,11 @@ bfa_iocpf_sm_initfail_sync(struct bfa_iocpf *iocpf, enum iocpf_event event)
 		bfa_ioc_notify_fail(ioc);
 		bfa_ioc_sync_leave(ioc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		writel(BFI_IOC_FAIL, ioc->ioc_regs.ioc_fwstate);
+=======
+		bfa_ioc_set_cur_ioc_fwstate(ioc, BFI_IOC_FAIL);
+>>>>>>> v3.18
 =======
 		bfa_ioc_set_cur_ioc_fwstate(ioc, BFI_IOC_FAIL);
 >>>>>>> v3.18
@@ -1067,7 +1092,11 @@ bfa_iocpf_sm_fail_sync(struct bfa_iocpf *iocpf, enum iocpf_event event)
 		if (!iocpf->auto_recover) {
 			bfa_ioc_sync_leave(ioc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			writel(BFI_IOC_FAIL, ioc->ioc_regs.ioc_fwstate);
+=======
+			bfa_ioc_set_cur_ioc_fwstate(ioc, BFI_IOC_FAIL);
+>>>>>>> v3.18
 =======
 			bfa_ioc_set_cur_ioc_fwstate(ioc, BFI_IOC_FAIL);
 >>>>>>> v3.18
@@ -1202,7 +1231,11 @@ bfa_ioc_hw_sem_init(struct bfa_ioc *ioc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fwstate = readl(ioc->ioc_regs.ioc_fwstate);
+=======
+	fwstate = bfa_ioc_get_cur_ioc_fwstate(ioc);
+>>>>>>> v3.18
 =======
 	fwstate = bfa_ioc_get_cur_ioc_fwstate(ioc);
 >>>>>>> v3.18
@@ -1220,8 +1253,13 @@ bfa_ioc_hw_sem_init(struct bfa_ioc *ioc)
 
 	bfa_ioc_fwver_clear(ioc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(BFI_IOC_UNINIT, ioc->ioc_regs.ioc_fwstate);
 	writel(BFI_IOC_UNINIT, ioc->ioc_regs.alt_ioc_fwstate);
+=======
+	bfa_ioc_set_cur_ioc_fwstate(ioc, BFI_IOC_UNINIT);
+	bfa_ioc_set_alt_ioc_fwstate(ioc, BFI_IOC_UNINIT);
+>>>>>>> v3.18
 =======
 	bfa_ioc_set_cur_ioc_fwstate(ioc, BFI_IOC_UNINIT);
 	bfa_ioc_set_alt_ioc_fwstate(ioc, BFI_IOC_UNINIT);
@@ -1358,8 +1396,11 @@ bfa_nw_ioc_fwver_get(struct bfa_ioc *ioc, struct bfi_ioc_image_hdr *fwhdr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Returns TRUE if same. */
 =======
+=======
+>>>>>>> v3.18
 static bool
 bfa_ioc_fwver_md5_check(struct bfi_ioc_image_hdr *fwhdr_1,
 			struct bfi_ioc_image_hdr *fwhdr_2)
@@ -1829,13 +1870,20 @@ bfa_ioc_flash_fwver_cmp(struct bfa_ioc *ioc,
 /**
  * Returns TRUE if driver is willing to work with current smem f/w version.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 bool
 bfa_nw_ioc_fwver_cmp(struct bfa_ioc *ioc, struct bfi_ioc_image_hdr *fwhdr)
 {
 	struct bfi_ioc_image_hdr *drv_fwhdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+	enum bfi_ioc_img_ver_cmp smem_flash_cmp, drv_smem_cmp;
+>>>>>>> v3.18
 =======
 	enum bfi_ioc_img_ver_cmp smem_flash_cmp, drv_smem_cmp;
 >>>>>>> v3.18
@@ -1844,6 +1892,7 @@ bfa_nw_ioc_fwver_cmp(struct bfa_ioc *ioc, struct bfi_ioc_image_hdr *fwhdr)
 		bfa_cb_image_get_chunk(bfa_ioc_asic_gen(ioc), 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < BFI_IOC_MD5SUM_SZ; i++) {
 		if (fwhdr->md5sum[i] != drv_fwhdr->md5sum[i])
 			return false;
@@ -1851,6 +1900,8 @@ bfa_nw_ioc_fwver_cmp(struct bfa_ioc *ioc, struct bfi_ioc_image_hdr *fwhdr)
 
 	return true;
 =======
+=======
+>>>>>>> v3.18
 	/* If smem is incompatible or old, driver should not work with it. */
 	drv_smem_cmp = bfa_ioc_fw_ver_patch_cmp(drv_fwhdr, fwhdr);
 	if (drv_smem_cmp == BFI_IOC_IMG_VER_INCOMP ||
@@ -1871,6 +1922,9 @@ bfa_nw_ioc_fwver_cmp(struct bfa_ioc *ioc, struct bfi_ioc_image_hdr *fwhdr)
 	else
 		return (drv_smem_cmp == BFI_IOC_IMG_VER_SAME) ?
 			true : false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1881,6 +1935,7 @@ static bool
 bfa_ioc_fwver_valid(struct bfa_ioc *ioc, u32 boot_env)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bfi_ioc_image_hdr fwhdr, *drv_fwhdr;
 
 	bfa_nw_ioc_fwver_get(ioc, &fwhdr);
@@ -1890,6 +1945,11 @@ bfa_ioc_fwver_valid(struct bfa_ioc *ioc, u32 boot_env)
 	if (fwhdr.signature != drv_fwhdr->signature)
 		return false;
 
+=======
+	struct bfi_ioc_image_hdr fwhdr;
+
+	bfa_nw_ioc_fwver_get(ioc, &fwhdr);
+>>>>>>> v3.18
 =======
 	struct bfi_ioc_image_hdr fwhdr;
 
@@ -1920,7 +1980,11 @@ bfa_ioc_hwinit(struct bfa_ioc *ioc, bool force)
 	u32 boot_env;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioc_fwstate = readl(ioc->ioc_regs.ioc_fwstate);
+=======
+	ioc_fwstate = bfa_ioc_get_cur_ioc_fwstate(ioc);
+>>>>>>> v3.18
 =======
 	ioc_fwstate = bfa_ioc_get_cur_ioc_fwstate(ioc);
 >>>>>>> v3.18
@@ -1938,13 +2002,19 @@ bfa_ioc_hwinit(struct bfa_ioc *ioc, bool force)
 
 	if (!fwvalid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bfa_ioc_boot(ioc, BFI_FWBOOT_TYPE_NORMAL, boot_env);
 		bfa_ioc_poll_fwinit(ioc);
 =======
+=======
+>>>>>>> v3.18
 		if (bfa_ioc_boot(ioc, BFI_FWBOOT_TYPE_NORMAL, boot_env) ==
 								BFA_STATUS_OK)
 			bfa_ioc_poll_fwinit(ioc);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -1976,8 +2046,14 @@ bfa_ioc_hwinit(struct bfa_ioc *ioc, bool force)
 	 * Initialize the h/w for any other states.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bfa_ioc_boot(ioc, BFI_FWBOOT_TYPE_NORMAL, boot_env);
 	bfa_ioc_poll_fwinit(ioc);
+=======
+	if (bfa_ioc_boot(ioc, BFI_FWBOOT_TYPE_NORMAL, boot_env) ==
+							BFA_STATUS_OK)
+		bfa_ioc_poll_fwinit(ioc);
+>>>>>>> v3.18
 =======
 	if (bfa_ioc_boot(ioc, BFI_FWBOOT_TYPE_NORMAL, boot_env) ==
 							BFA_STATUS_OK)
@@ -2088,7 +2164,11 @@ bfa_ioc_hb_stop(struct bfa_ioc *ioc)
 
 /* Initiate a full firmware download. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
+=======
+static enum bfa_status
+>>>>>>> v3.18
 =======
 static enum bfa_status
 >>>>>>> v3.18
@@ -2102,9 +2182,12 @@ bfa_ioc_download_fw(struct bfa_ioc *ioc, u32 boot_type,
 	u32 i;
 	u32 asicmode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	fwimg = bfa_cb_image_get_chunk(bfa_ioc_asic_gen(ioc), chunkno);
 =======
+=======
+>>>>>>> v3.18
 	u32 fwimg_size;
 	u32 fwimg_buf[BFI_FLASH_CHUNK_SZ_WORDS];
 	enum bfa_status status;
@@ -2124,6 +2207,9 @@ bfa_ioc_download_fw(struct bfa_ioc *ioc, u32 boot_type,
 		fwimg = bfa_cb_image_get_chunk(bfa_ioc_asic_gen(ioc),
 					BFA_IOC_FLASH_CHUNK_ADDR(chunkno));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pgnum = bfa_ioc_smem_pgnum(ioc, loff);
@@ -2131,12 +2217,15 @@ bfa_ioc_download_fw(struct bfa_ioc *ioc, u32 boot_type,
 	writel(pgnum, ioc->ioc_regs.host_page_num_fn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < bfa_cb_image_get_size(bfa_ioc_asic_gen(ioc)); i++) {
 		if (BFA_IOC_FLASH_CHUNK_NO(i) != chunkno) {
 			chunkno = BFA_IOC_FLASH_CHUNK_NO(i);
 			fwimg = bfa_cb_image_get_chunk(bfa_ioc_asic_gen(ioc),
 					BFA_IOC_FLASH_CHUNK_ADDR(chunkno));
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < fwimg_size; i++) {
 		if (BFA_IOC_FLASH_CHUNK_NO(i) != chunkno) {
 			chunkno = BFA_IOC_FLASH_CHUNK_NO(i);
@@ -2154,6 +2243,9 @@ bfa_ioc_download_fw(struct bfa_ioc *ioc, u32 boot_type,
 					bfa_ioc_asic_gen(ioc),
 					BFA_IOC_FLASH_CHUNK_ADDR(chunkno));
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -2183,11 +2275,17 @@ bfa_ioc_download_fw(struct bfa_ioc *ioc, u32 boot_type,
 	 * Set boot type, env and device mode at the end.
 	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (boot_env == BFI_FWBOOT_ENV_OS &&
 	    boot_type == BFI_FWBOOT_TYPE_FLASH) {
 		boot_type = BFI_FWBOOT_TYPE_NORMAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	asicmode = BFI_FWBOOT_DEVMODE(ioc->asic_gen, ioc->asic_mode,
 					ioc->port0_mode, ioc->port1_mode);
@@ -2198,6 +2296,10 @@ bfa_ioc_download_fw(struct bfa_ioc *ioc, u32 boot_type,
 	writel(boot_env, ((ioc->ioc_regs.smem_page_start)
 			+ (BFI_FWBOOT_ENV_OFF)));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return BFA_STATUS_OK;
+>>>>>>> v3.18
 =======
 	return BFA_STATUS_OK;
 >>>>>>> v3.18
@@ -2474,6 +2576,7 @@ bfa_ioc_pll_init(struct bfa_ioc *ioc)
  * as the entry vector.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 bfa_ioc_boot(struct bfa_ioc *ioc, enum bfi_fwboot_type boot_type,
 		u32 boot_env)
@@ -2483,6 +2586,8 @@ bfa_ioc_boot(struct bfa_ioc *ioc, enum bfi_fwboot_type boot_type,
 	if (bfa_ioc_pll_init(ioc) != BFA_STATUS_OK)
 		return;
 =======
+=======
+>>>>>>> v3.18
 static enum bfa_status
 bfa_ioc_boot(struct bfa_ioc *ioc, enum bfi_fwboot_type boot_type,
 		u32 boot_env)
@@ -2504,12 +2609,16 @@ bfa_ioc_boot(struct bfa_ioc *ioc, enum bfi_fwboot_type boot_type,
 			BFI_IOC_IMG_VER_BETTER)
 			boot_type = BFI_FWBOOT_TYPE_FLASH;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/**
 	 * Initialize IOC state of all functions on a chip reset.
 	 */
 	if (boot_type == BFI_FWBOOT_TYPE_MEMTEST) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		writel(BFI_IOC_MEMTEST, ioc->ioc_regs.ioc_fwstate);
 		writel(BFI_IOC_MEMTEST, ioc->ioc_regs.alt_ioc_fwstate);
@@ -2522,6 +2631,8 @@ bfa_ioc_boot(struct bfa_ioc *ioc, enum bfi_fwboot_type boot_type,
 	bfa_ioc_download_fw(ioc, boot_type, boot_env);
 	bfa_ioc_lpu_start(ioc);
 =======
+=======
+>>>>>>> v3.18
 		bfa_ioc_set_cur_ioc_fwstate(ioc, BFI_IOC_MEMTEST);
 		bfa_ioc_set_alt_ioc_fwstate(ioc, BFI_IOC_MEMTEST);
 	} else {
@@ -2537,6 +2648,9 @@ bfa_ioc_boot(struct bfa_ioc *ioc, enum bfi_fwboot_type boot_type,
 		bfa_nw_iocpf_timeout(ioc);
 
 	return status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3041,7 +3155,11 @@ bfa_nw_ioc_get_attr(struct bfa_ioc *ioc, struct bfa_ioc_attr *ioc_attr)
 
 	ioc_attr->state = bfa_ioc_get_state(ioc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioc_attr->port_id = ioc->port_id;
+=======
+	ioc_attr->port_id = bfa_ioc_portid(ioc);
+>>>>>>> v3.18
 =======
 	ioc_attr->port_id = bfa_ioc_portid(ioc);
 >>>>>>> v3.18
@@ -3055,8 +3173,14 @@ bfa_nw_ioc_get_attr(struct bfa_ioc *ioc, struct bfa_ioc_attr *ioc_attr)
 	bfa_ioc_get_adapter_attr(ioc, &ioc_attr->adapter_attr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioc_attr->pci_attr.device_id = ioc->pcidev.device_id;
 	ioc_attr->pci_attr.pcifn = ioc->pcidev.pci_func;
+=======
+	ioc_attr->pci_attr.device_id = bfa_ioc_devid(ioc);
+	ioc_attr->pci_attr.pcifn = bfa_ioc_pcifn(ioc);
+	ioc_attr->def_fn = bfa_ioc_is_default(ioc);
+>>>>>>> v3.18
 =======
 	ioc_attr->pci_attr.device_id = bfa_ioc_devid(ioc);
 	ioc_attr->pci_attr.pcifn = bfa_ioc_pcifn(ioc);
@@ -3152,7 +3276,11 @@ static void
 bfa_ioc_poll_fwinit(struct bfa_ioc *ioc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 fwstate = readl(ioc->ioc_regs.ioc_fwstate);
+=======
+	u32 fwstate = bfa_ioc_get_cur_ioc_fwstate(ioc);
+>>>>>>> v3.18
 =======
 	u32 fwstate = bfa_ioc_get_cur_ioc_fwstate(ioc);
 >>>>>>> v3.18

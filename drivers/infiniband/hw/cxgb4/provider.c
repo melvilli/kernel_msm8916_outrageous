@@ -107,6 +107,7 @@ static struct ib_ucontext *c4iw_alloc_ucontext(struct ib_device *ibdev,
 	struct c4iw_ucontext *context;
 	struct c4iw_dev *rhp = to_c4iw_dev(ibdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	PDBG("%s ibdev %p\n", __func__, ibdev);
 	context = kzalloc(sizeof(*context), GFP_KERNEL);
@@ -117,6 +118,8 @@ static struct ib_ucontext *c4iw_alloc_ucontext(struct ib_device *ibdev,
 	spin_lock_init(&context->mmap_lock);
 	return &context->ibucontext;
 =======
+=======
+>>>>>>> v3.18
 	static int warned;
 	struct c4iw_alloc_ucontext_resp uresp;
 	int ret = 0;
@@ -168,6 +171,9 @@ err_free:
 	kfree(context);
 err:
 	return ERR_PTR(ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -331,6 +337,7 @@ static int c4iw_query_device(struct ib_device *ibdev,
 	props->vendor_part_id = (u32)dev->rdev.lldi.pdev->device;
 	props->max_mr_size = T4_MAX_MR_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	props->max_qp = T4_MAX_NUM_QP;
 	props->max_qp_wr = T4_MAX_QP_DEPTH;
 	props->max_sge = T4_MAX_RECV_SGE;
@@ -344,6 +351,8 @@ static int c4iw_query_device(struct ib_device *ibdev,
 	props->local_ca_ack_delay = 0;
 	props->max_fast_reg_page_list_len = T4_MAX_FR_DEPTH;
 =======
+=======
+>>>>>>> v3.18
 	props->max_qp = dev->rdev.lldi.vr->qp.size / 2;
 	props->max_qp_wr = dev->rdev.hw_queue.t4_max_qp_depth;
 	props->max_sge = T4_MAX_RECV_SGE;
@@ -358,6 +367,9 @@ static int c4iw_query_device(struct ib_device *ibdev,
 	props->max_pd = T4_MAX_NUM_PD;
 	props->local_ca_ack_delay = 0;
 	props->max_fast_reg_page_list_len = t4_max_fr_depth(use_dsgl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -530,7 +542,11 @@ int c4iw_register_device(struct c4iw_dev *dev)
 	memcpy(dev->ibdev.node_desc, C4IW_NODE_DESC, sizeof(C4IW_NODE_DESC));
 	dev->ibdev.phys_port_cnt = dev->rdev.lldi.nports;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->ibdev.num_comp_vectors = 1;
+=======
+	dev->ibdev.num_comp_vectors =  dev->rdev.lldi.nciq;
+>>>>>>> v3.18
 =======
 	dev->ibdev.num_comp_vectors =  dev->rdev.lldi.nciq;
 >>>>>>> v3.18

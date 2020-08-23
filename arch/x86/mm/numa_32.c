@@ -53,6 +53,11 @@ void memory_present(int nid, unsigned long start, unsigned long end)
 	printk(KERN_DEBUG "  Setting physnode_map array to node %d for pfns:\n", nid);
 	printk(KERN_DEBUG "  ");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	start = round_down(start, PAGES_PER_SECTION);
+	end = round_up(end, PAGES_PER_SECTION);
+>>>>>>> v3.18
 =======
 	start = round_down(start, PAGES_PER_SECTION);
 	end = round_up(end, PAGES_PER_SECTION);
@@ -89,10 +94,15 @@ void __init initmem_init(void)
 	printk(KERN_NOTICE "%ldMB HIGHMEM available.\n",
 	       pages_to_mb(highend_pfn - highstart_pfn));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages = highend_pfn;
 	high_memory = (void *) __va(highstart_pfn * PAGE_SIZE - 1) + 1;
 #else
 	num_physpages = max_low_pfn;
+=======
+	high_memory = (void *) __va(highstart_pfn * PAGE_SIZE - 1) + 1;
+#else
+>>>>>>> v3.18
 =======
 	high_memory = (void *) __va(highstart_pfn * PAGE_SIZE - 1) + 1;
 #else
@@ -111,7 +121,10 @@ void __init initmem_init(void)
 			(ulong) pfn_to_kaddr(highstart_pfn));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__vmalloc_start_set = true;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	setup_bootmem_allocator();

@@ -15,6 +15,7 @@
 #define NV_I2C_TYPE_EXTAUX(e) (0x0006 | (e) << 8)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_i2c_port {
 	struct nouveau_object base;
 	struct i2c_adapter adapter;
@@ -22,6 +23,8 @@ struct nouveau_i2c_port {
 	struct list_head head;
 	u8  index;
 =======
+=======
+>>>>>>> v3.18
 struct nvkm_i2c_ntfy_req {
 #define NVKM_I2C_PLUG                                                      0x01
 #define NVKM_I2C_UNPLUG                                                    0x02
@@ -44,6 +47,9 @@ struct nouveau_i2c_port {
 	struct list_head head;
 	u8  index;
 	int aux;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	const struct nouveau_i2c_func *func;
@@ -51,9 +57,12 @@ struct nouveau_i2c_port {
 
 struct nouveau_i2c_func {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*acquire)(struct nouveau_i2c_port *);
 	void (*release)(struct nouveau_i2c_port *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void (*drive_scl)(struct nouveau_i2c_port *, int);
@@ -62,7 +71,11 @@ struct nouveau_i2c_func {
 	int  (*sense_sda)(struct nouveau_i2c_port *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int  (*aux)(struct nouveau_i2c_port *, u8, u32, u8 *, u8);
+=======
+	int  (*aux)(struct nouveau_i2c_port *, bool, u8, u32, u8 *, u8);
+>>>>>>> v3.18
 =======
 	int  (*aux)(struct nouveau_i2c_port *, bool, u8, u32, u8 *, u8);
 >>>>>>> v3.18
@@ -71,6 +84,7 @@ struct nouveau_i2c_func {
 	int  (*drv_ctl)(struct nouveau_i2c_port *, int lane, int sw, int pe);
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define nouveau_i2c_port_create(p,e,o,i,a,d)                                   \
 	nouveau_i2c_port_create_((p), (e), (o), (i), (a),                      \
@@ -101,6 +115,8 @@ struct nouveau_i2c {
 			bool (*match)(struct nouveau_i2c_port *,
 				      struct i2c_board_info *));
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_i2c_board_info {
 	struct i2c_board_info dev;
 	u8 udelay; /* set to 0 to use the standard delay */
@@ -122,6 +138,9 @@ struct nouveau_i2c {
 				      struct i2c_board_info *, void *), void *);
 
 	wait_queue_head_t wait;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head ports;
 };
@@ -132,6 +151,7 @@ nouveau_i2c(void *obj)
 	return (void *)nv_device(obj)->subdev[NVDEV_SUBDEV_I2C];
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define nouveau_i2c_create(p,e,o,s,d)                                          \
 	nouveau_i2c_create_((p), (e), (o), (s), sizeof(**d), (void **)d)
@@ -165,6 +185,8 @@ extern struct nouveau_oclass nouveau_anx9805_sclass[];
 extern const struct i2c_algorithm nouveau_i2c_bit_algo;
 extern const struct i2c_algorithm nouveau_i2c_aux_algo;
 =======
+=======
+>>>>>>> v3.18
 extern struct nouveau_oclass *nv04_i2c_oclass;
 extern struct nouveau_oclass *nv4e_i2c_oclass;
 extern struct nouveau_oclass *nv50_i2c_oclass;
@@ -172,6 +194,9 @@ extern struct nouveau_oclass *nv94_i2c_oclass;
 extern struct nouveau_oclass *nvd0_i2c_oclass;
 extern struct nouveau_oclass *gf117_i2c_oclass;
 extern struct nouveau_oclass *nve0_i2c_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int

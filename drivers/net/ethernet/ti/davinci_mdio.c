@@ -39,6 +39,11 @@
 #include <linux/of.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_mdio.h>
+#include <linux/pinctrl/consumer.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_mdio.h>
 #include <linux/pinctrl/consumer.h>
@@ -87,7 +92,11 @@ struct davinci_mdio_regs {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mdio_platform_data default_pdata = {
+=======
+static const struct mdio_platform_data default_pdata = {
+>>>>>>> v3.18
 =======
 static const struct mdio_platform_data default_pdata = {
 >>>>>>> v3.18
@@ -104,11 +113,17 @@ struct davinci_mdio_data {
 	bool		suspended;
 	unsigned long	access_time; /* jiffies */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Indicates that driver shouldn't modify phy_mask in case
 	 * if MDIO bus is registered from DT.
 	 */
 	bool		skip_scan;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -160,6 +175,12 @@ static int davinci_mdio_reset(struct mii_bus *bus)
 		 (ver >> 8) & 0xff, ver & 0xff);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (data->skip_scan)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (data->skip_scan)
 		return 0;
@@ -314,6 +335,10 @@ static int davinci_mdio_write(struct mii_bus *bus, int phy_id,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_OF)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_OF)
 >>>>>>> v3.18
@@ -328,7 +353,11 @@ static int davinci_mdio_probe_dt(struct mdio_platform_data *data,
 
 	if (of_property_read_u32(node, "bus_freq", &prop)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Missing bus_freq property in the DT.\n");
+=======
+		dev_err(&pdev->dev, "Missing bus_freq property in the DT.\n");
+>>>>>>> v3.18
 =======
 		dev_err(&pdev->dev, "Missing bus_freq property in the DT.\n");
 >>>>>>> v3.18
@@ -339,17 +368,23 @@ static int davinci_mdio_probe_dt(struct mdio_platform_data *data,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 static int davinci_mdio_probe(struct platform_device *pdev)
 {
 	struct mdio_platform_data *pdata = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 static int davinci_mdio_probe(struct platform_device *pdev)
 {
 	struct mdio_platform_data *pdata = dev_get_platdata(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct device *dev = &pdev->dev;
 	struct davinci_mdio_data *data;
@@ -357,6 +392,7 @@ static int davinci_mdio_probe(struct platform_device *pdev)
 	struct phy_device *phy;
 	int ret, addr;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	data = kzalloc(sizeof(*data), GFP_KERNEL);
 	if (!data)
@@ -368,6 +404,8 @@ static int davinci_mdio_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto bail_out;
 =======
+=======
+>>>>>>> v3.18
 	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
@@ -376,6 +414,9 @@ static int davinci_mdio_probe(struct platform_device *pdev)
 	if (!data->bus) {
 		dev_err(dev, "failed to alloc mii bus\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -399,7 +440,11 @@ static int davinci_mdio_probe(struct platform_device *pdev)
 	pm_runtime_enable(&pdev->dev);
 	pm_runtime_get_sync(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->clk = clk_get(&pdev->dev, "fck");
+=======
+	data->clk = devm_clk_get(dev, "fck");
+>>>>>>> v3.18
 =======
 	data->clk = devm_clk_get(dev, "fck");
 >>>>>>> v3.18
@@ -415,6 +460,7 @@ static int davinci_mdio_probe(struct platform_device *pdev)
 	spin_lock_init(&data->lock);
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!res) {
 		dev_err(dev, "could not find register map resource\n");
@@ -440,6 +486,8 @@ static int davinci_mdio_probe(struct platform_device *pdev)
 	/* register the mii bus */
 	ret = mdiobus_register(data->bus);
 =======
+=======
+>>>>>>> v3.18
 	data->regs = devm_ioremap_resource(dev, res);
 	if (IS_ERR(data->regs)) {
 		ret = PTR_ERR(data->regs);
@@ -457,6 +505,9 @@ static int davinci_mdio_probe(struct platform_device *pdev)
 	} else {
 		ret = mdiobus_register(data->bus);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		goto bail_out;
@@ -475,6 +526,7 @@ static int davinci_mdio_probe(struct platform_device *pdev)
 
 bail_out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data->bus)
 		mdiobus_free(data->bus);
 
@@ -490,11 +542,17 @@ bail_out:
 	pm_runtime_disable(&pdev->dev);
 
 >>>>>>> v3.18
+=======
+	pm_runtime_put_sync(&pdev->dev);
+	pm_runtime_disable(&pdev->dev);
+
+>>>>>>> v3.18
 	return ret;
 }
 
 static int davinci_mdio_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device *dev = &pdev->dev;
 	struct davinci_mdio_data *data = dev_get_drvdata(dev);
@@ -514,6 +572,8 @@ static int davinci_mdio_remove(struct platform_device *pdev)
 	kfree(data);
 
 =======
+=======
+>>>>>>> v3.18
 	struct davinci_mdio_data *data = platform_get_drvdata(pdev);
 
 	if (data->bus)
@@ -522,6 +582,9 @@ static int davinci_mdio_remove(struct platform_device *pdev)
 	pm_runtime_put_sync(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -544,6 +607,12 @@ static int davinci_mdio_suspend(struct device *dev)
 	pm_runtime_put_sync(data->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Select sleep pin state */
+	pinctrl_pm_select_sleep_state(dev);
+
+>>>>>>> v3.18
 =======
 	/* Select sleep pin state */
 	pinctrl_pm_select_sleep_state(dev);
@@ -557,6 +626,12 @@ static int davinci_mdio_resume(struct device *dev)
 	struct davinci_mdio_data *data = dev_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Select default pin state */
+	pinctrl_pm_select_default_state(dev);
+
+>>>>>>> v3.18
 =======
 	/* Select default pin state */
 	pinctrl_pm_select_default_state(dev);
@@ -580,6 +655,10 @@ static const struct dev_pm_ops davinci_mdio_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_OF)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_OF)
 >>>>>>> v3.18
@@ -589,6 +668,10 @@ static const struct of_device_id davinci_mdio_of_mtable[] = {
 };
 MODULE_DEVICE_TABLE(of, davinci_mdio_of_mtable);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -597,7 +680,10 @@ static struct platform_driver davinci_mdio_driver = {
 	.driver = {
 		.name	 = "davinci_mdio",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	 = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.pm	 = &davinci_mdio_pm_ops,

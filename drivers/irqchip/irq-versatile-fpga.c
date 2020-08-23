@@ -10,6 +10,10 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -18,6 +22,11 @@
 #include <asm/mach/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "irqchip.h"
+
+>>>>>>> v3.18
 =======
 #include "irqchip.h"
 
@@ -35,6 +44,11 @@
 #define FIQ_ENABLE_CLEAR	0x2C
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PIC_ENABLES             0x20	/* set interrupt pass through bits */
+
+>>>>>>> v3.18
 =======
 #define PIC_ENABLES             0x20	/* set interrupt pass through bits */
 
@@ -106,7 +120,11 @@ static int handle_one_fpga(struct fpga_irq_data *f, struct pt_regs *regs)
 	while ((status  = readl(f->base + IRQ_STATUS))) {
 		irq = ffs(status) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		handle_IRQ(irq_find_mapping(f->domain, irq), regs);
+=======
+		handle_domain_irq(f->domain, irq, regs);
+>>>>>>> v3.18
 =======
 		handle_domain_irq(f->domain, irq, regs);
 >>>>>>> v3.18
@@ -186,15 +204,21 @@ void __init fpga_irq_init(void __iomem *base, const char *name, int irq_start,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("FPGA IRQ chip %d \"%s\" @ %p, %u irqs\n",
 		fpga_irq_id, name, base, f->used_irqs);
 =======
+=======
+>>>>>>> v3.18
 	pr_info("FPGA IRQ chip %d \"%s\" @ %p, %u irqs",
 		fpga_irq_id, name, base, f->used_irqs);
 	if (parent_irq != -1)
 		pr_cont(", parent IRQ: %d\n", parent_irq);
 	else
 		pr_cont("\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	fpga_irq_id++;
@@ -208,6 +232,10 @@ int __init fpga_irq_of_init(struct device_node *node,
 	u32 clear_mask;
 	u32 valid_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int parent_irq;
+>>>>>>> v3.18
 =======
 	int parent_irq;
 >>>>>>> v3.18
@@ -225,8 +253,11 @@ int __init fpga_irq_of_init(struct device_node *node,
 		valid_mask = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fpga_irq_init(base, node->name, 0, -1, valid_mask, node);
 =======
+=======
+>>>>>>> v3.18
 	/* Some chips are cascaded from a parent IRQ */
 	parent_irq = irq_of_parse_and_map(node, 0);
 	if (!parent_irq) {
@@ -235,15 +266,21 @@ int __init fpga_irq_of_init(struct device_node *node,
 	}
 
 	fpga_irq_init(base, node->name, 0, parent_irq, valid_mask, node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	writel(clear_mask, base + IRQ_ENABLE_CLEAR);
 	writel(clear_mask, base + FIQ_ENABLE_CLEAR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * On Versatile AB/PB, some secondary interrupts have a direct
 	 * pass-thru to the primary controller for IRQs 20 and 22-31 which need
@@ -256,5 +293,8 @@ int __init fpga_irq_of_init(struct device_node *node,
 }
 IRQCHIP_DECLARE(arm_fpga, "arm,versatile-fpga-irq", fpga_irq_of_init);
 IRQCHIP_DECLARE(arm_fpga_sic, "arm,versatile-sic", fpga_irq_of_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2011, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2008-2009, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2008-2009, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -30,6 +34,7 @@ struct sirc_cascade_regs {
 	void    *int_status;
 	unsigned int    cascade_irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int    cascade_fiq;
 };
 
@@ -37,6 +42,8 @@ void msm_init_sirc(void);
 
 #if defined(CONFIG_ARCH_MSM_SCORPION) && !defined(CONFIG_MSM_SMP)
 =======
+=======
+>>>>>>> v3.18
 };
 
 void msm_init_sirc(void);
@@ -44,6 +51,9 @@ void msm_sirc_enter_sleep(void);
 void msm_sirc_exit_sleep(void);
 
 #if defined(CONFIG_ARCH_MSM_SCORPION)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <mach/msm_iomap.h>
@@ -55,10 +65,13 @@ void msm_sirc_exit_sleep(void);
 #define FIRST_SIRC_IRQ (NR_MSM_IRQS + NR_GPIO_IRQS)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_ARCH_FSM9XXX)
 #include <mach/sirc-fsm9xxx.h>
 #else /* CONFIG_ARCH_FSM9XXX */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define INT_UART1                     (FIRST_SIRC_IRQ + 0)
@@ -99,6 +112,11 @@ void msm_sirc_exit_sleep(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define LAST_SIRC_IRQ                 (FIRST_SIRC_IRQ + NR_SIRC_IRQS - 1)
+
+>>>>>>> v3.18
 =======
 #define LAST_SIRC_IRQ                 (FIRST_SIRC_IRQ + NR_SIRC_IRQS - 1)
 
@@ -117,11 +135,15 @@ void msm_sirc_exit_sleep(void);
 #define SPSS_SIRC_SOFT_INT            (MSM_SIRC_BASE + 0x2C)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_ARCH_FSM9XXX */
 
 #define LAST_SIRC_IRQ                 (FIRST_SIRC_IRQ + NR_SIRC_IRQS - 1)
 
 #endif /* CONFIG_ARCH_MSM_SCORPION */
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

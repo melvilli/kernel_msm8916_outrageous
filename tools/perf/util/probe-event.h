@@ -3,6 +3,10 @@
 
 #include <stdbool.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "intlist.h"
+>>>>>>> v3.18
 =======
 #include "intlist.h"
 >>>>>>> v3.18
@@ -17,6 +21,10 @@ struct probe_trace_point {
 	char		*module;	/* Module name */
 	unsigned long	offset;		/* Offset from symbol */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long	address;	/* Actual address of the trace point */
+>>>>>>> v3.18
 =======
 	unsigned long	address;	/* Actual address of the trace point */
 >>>>>>> v3.18
@@ -84,6 +92,7 @@ struct perf_probe_event {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line number container */
 struct line_node {
@@ -91,6 +100,8 @@ struct line_node {
 	int			line;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Line range */
@@ -103,7 +114,11 @@ struct line_range {
 	char			*path;		/* Real path name */
 	char			*comp_dir;	/* Compile directory */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	line_list;	/* Visible lines */
+=======
+	struct intlist		*line_list;	/* Visible lines */
+>>>>>>> v3.18
 =======
 	struct intlist		*line_list;	/* Visible lines */
 >>>>>>> v3.18
@@ -135,13 +150,19 @@ extern void clear_perf_probe_event(struct perf_probe_event *pev);
 extern int parse_line_range_desc(const char *cmd, struct line_range *lr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Release line range members */
 extern void line_range__clear(struct line_range *lr);
 
 /* Initialize line range */
 extern int line_range__init(struct line_range *lr);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Internal use: Return kernel/module path */
 extern const char *kernel_get_module_path(const char *module);
@@ -152,7 +173,12 @@ extern int add_perf_probe_events(struct perf_probe_event *pevs, int npevs,
 extern int del_perf_probe_events(struct strlist *dellist);
 extern int show_perf_probe_events(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int show_line_range(struct line_range *lr, const char *module);
+=======
+extern int show_line_range(struct line_range *lr, const char *module,
+			   bool user);
+>>>>>>> v3.18
 =======
 extern int show_line_range(struct line_range *lr, const char *module,
 			   bool user);

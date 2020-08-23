@@ -37,7 +37,10 @@
 struct sh_csi2 {
 	struct v4l2_subdev		subdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head		list;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int			irq;
@@ -48,6 +51,11 @@ struct sh_csi2 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void sh_csi2_hwinit(struct sh_csi2 *priv);
+
+>>>>>>> v3.18
 =======
 static void sh_csi2_hwinit(struct sh_csi2 *priv);
 
@@ -141,11 +149,14 @@ static int sh_csi2_g_mbus_config(struct v4l2_subdev *sd,
 				 struct v4l2_mbus_config *cfg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg->flags = V4L2_MBUS_PCLK_SAMPLE_RISING |
 		V4L2_MBUS_HSYNC_ACTIVE_HIGH | V4L2_MBUS_VSYNC_ACTIVE_HIGH |
 		V4L2_MBUS_MASTER | V4L2_MBUS_DATA_ACTIVE_HIGH;
 	cfg->type = V4L2_MBUS_PARALLEL;
 =======
+=======
+>>>>>>> v3.18
 	struct sh_csi2 *priv = container_of(sd, struct sh_csi2, subdev);
 
 	if (!priv->mipi_flags) {
@@ -198,6 +209,9 @@ static int sh_csi2_g_mbus_config(struct v4l2_subdev *sd,
 			V4L2_MBUS_MASTER | V4L2_MBUS_DATA_ACTIVE_HIGH;
 		cfg->type = V4L2_MBUS_PARALLEL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -210,9 +224,12 @@ static int sh_csi2_s_mbus_config(struct v4l2_subdev *sd,
 	struct soc_camera_device *icd = v4l2_get_subdev_hostdata(sd);
 	struct v4l2_subdev *client_sd = soc_camera_to_subdev(icd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct v4l2_mbus_config client_cfg = {.type = V4L2_MBUS_CSI2,
 					      .flags = priv->mipi_flags};
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_mbus_config client_cfg = {.type = V4L2_MBUS_CSI2,};
 	int ret = sh_csi2_g_mbus_config(sd, NULL);
 
@@ -224,6 +241,9 @@ static int sh_csi2_s_mbus_config(struct v4l2_subdev *sd,
 	sh_csi2_hwinit(priv);
 
 	client_cfg.flags = priv->mipi_flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return v4l2_subdev_call(client_sd, video, s_mbus_config, &client_cfg);
@@ -280,6 +300,7 @@ static void sh_csi2_hwinit(struct sh_csi2 *priv)
 static int sh_csi2_client_connect(struct sh_csi2 *priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sh_csi2_pdata *pdata = priv->pdev->dev.platform_data;
 	struct soc_camera_device *icd = v4l2_get_subdev_hostdata(&priv->subdev);
 	struct v4l2_subdev *client_sd = soc_camera_to_subdev(icd);
@@ -288,10 +309,15 @@ static int sh_csi2_client_connect(struct sh_csi2 *priv)
 	unsigned long common_flags, csi2_flags;
 	int i, ret;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = v4l2_get_subdevdata(&priv->subdev);
 	struct sh_csi2_pdata *pdata = dev->platform_data;
 	struct soc_camera_device *icd = v4l2_get_subdev_hostdata(&priv->subdev);
 	int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (priv->client)
@@ -299,12 +325,18 @@ static int sh_csi2_client_connect(struct sh_csi2 *priv)
 
 	for (i = 0; i < pdata->num_clients; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (&pdata->clients[i].pdev->dev == icd->pdev)
 =======
+=======
+>>>>>>> v3.18
 		if ((pdata->clients[i].pdev &&
 		     &pdata->clients[i].pdev->dev == icd->pdev) ||
 		    (icd->control &&
 		     strcmp(pdata->clients[i].name, dev_name(icd->control))))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -313,6 +345,7 @@ static int sh_csi2_client_connect(struct sh_csi2 *priv)
 	if (i == pdata->num_clients)
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Check if we can support this camera */
 	csi2_flags = V4L2_MBUS_CSI2_CONTINUOUS_CLOCK | V4L2_MBUS_CSI2_1_LANE;
@@ -354,6 +387,10 @@ static int sh_csi2_client_connect(struct sh_csi2 *priv)
 
 	sh_csi2_hwinit(priv);
 
+=======
+	priv->client = pdata->clients + i;
+
+>>>>>>> v3.18
 =======
 	priv->client = pdata->clients + i;
 
@@ -401,7 +438,10 @@ static int sh_csi2_probe(struct platform_device *pdev)
 	struct sh_csi2_pdata *pdata = pdev->dev.platform_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!pdata)
 		return -EINVAL;
 
@@ -409,13 +449,20 @@ static int sh_csi2_probe(struct platform_device *pdev)
 	if (!priv)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	/* Interrupt unused so far */
 	irq = platform_get_irq(pdev, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res || (int)irq <= 0 || !pdata) {
+=======
+	if (!res || (int)irq <= 0) {
+>>>>>>> v3.18
 =======
 	if (!res || (int)irq <= 0) {
 >>>>>>> v3.18
@@ -430,10 +477,13 @@ static int sh_csi2_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv = devm_kzalloc(&pdev->dev, sizeof(struct sh_csi2), GFP_KERNEL);
 	if (!priv)
 		return -ENOMEM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	priv->irq = irq;
@@ -444,7 +494,13 @@ static int sh_csi2_probe(struct platform_device *pdev)
 
 	priv->pdev = pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, priv);
+=======
+	priv->subdev.owner = THIS_MODULE;
+	priv->subdev.dev = &pdev->dev;
+	platform_set_drvdata(pdev, &priv->subdev);
+>>>>>>> v3.18
 =======
 	priv->subdev.owner = THIS_MODULE;
 	priv->subdev.dev = &pdev->dev;
@@ -456,17 +512,23 @@ static int sh_csi2_probe(struct platform_device *pdev)
 
 	snprintf(priv->subdev.name, V4L2_SUBDEV_NAME_SIZE, "%s.mipi-csi",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 dev_name(pdata->v4l2_dev->dev));
 	ret = v4l2_device_register_subdev(pdata->v4l2_dev, &priv->subdev);
 	dev_dbg(&pdev->dev, "%s(%p): ret(register_subdev) = %d\n", __func__, priv, ret);
 	if (ret < 0)
 		goto esdreg;
 =======
+=======
+>>>>>>> v3.18
 		 dev_name(&pdev->dev));
 
 	ret = v4l2_async_register_subdev(&priv->subdev);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pm_runtime_enable(&pdev->dev);
@@ -475,6 +537,7 @@ static int sh_csi2_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 esdreg:
 	platform_set_drvdata(pdev, NULL);
@@ -482,10 +545,13 @@ esdreg:
 	return ret;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int sh_csi2_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sh_csi2 *priv = platform_get_drvdata(pdev);
 
@@ -493,12 +559,17 @@ static int sh_csi2_remove(struct platform_device *pdev)
 	pm_runtime_disable(&pdev->dev);
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_subdev *subdev = platform_get_drvdata(pdev);
 	struct sh_csi2 *priv = container_of(subdev, struct sh_csi2, subdev);
 
 	v4l2_async_unregister_subdev(&priv->subdev);
 	v4l2_device_unregister_subdev(subdev);
 	pm_runtime_disable(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

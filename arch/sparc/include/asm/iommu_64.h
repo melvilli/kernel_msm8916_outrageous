@@ -59,9 +59,15 @@ struct strbuf {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int iommu_table_init(struct iommu *iommu, int tsbsize,
 			    u32 dma_offset, u32 dma_addr_mask,
 			    int numa_node);
+=======
+int iommu_table_init(struct iommu *iommu, int tsbsize,
+		     u32 dma_offset, u32 dma_addr_mask,
+		     int numa_node);
+>>>>>>> v3.18
 =======
 int iommu_table_init(struct iommu *iommu, int tsbsize,
 		     u32 dma_offset, u32 dma_addr_mask,

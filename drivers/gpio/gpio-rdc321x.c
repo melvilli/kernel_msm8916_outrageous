@@ -136,7 +136,11 @@ static int rdc321x_gpio_probe(struct platform_device *pdev)
 	struct rdc321x_gpio_pdata *pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -146,24 +150,34 @@ static int rdc321x_gpio_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdc321x_gpio_dev = kzalloc(sizeof(struct rdc321x_gpio), GFP_KERNEL);
 	if (!rdc321x_gpio_dev) {
 		dev_err(&pdev->dev, "failed to allocate private data\n");
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	rdc321x_gpio_dev = devm_kzalloc(&pdev->dev, sizeof(struct rdc321x_gpio),
 					GFP_KERNEL);
 	if (!rdc321x_gpio_dev)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	r = platform_get_resource_byname(pdev, IORESOURCE_IO, "gpio-reg1");
 	if (!r) {
 		dev_err(&pdev->dev, "failed to get gpio-reg1 resource\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENODEV;
 		goto out_free;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -178,8 +192,12 @@ static int rdc321x_gpio_probe(struct platform_device *pdev)
 	if (!r) {
 		dev_err(&pdev->dev, "failed to get gpio-reg2 resource\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENODEV;
 		goto out_free;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -207,7 +225,11 @@ static int rdc321x_gpio_probe(struct platform_device *pdev)
 					&rdc321x_gpio_dev->data_reg[0]);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_drvdata;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -217,7 +239,11 @@ static int rdc321x_gpio_probe(struct platform_device *pdev)
 					&rdc321x_gpio_dev->data_reg[1]);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_drvdata;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -225,6 +251,7 @@ static int rdc321x_gpio_probe(struct platform_device *pdev)
 	dev_info(&pdev->dev, "registering %d GPIOs\n",
 					rdc321x_gpio_dev->chip.ngpio);
 	return gpiochip_add(&rdc321x_gpio_dev->chip);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 out_drvdata:
@@ -234,10 +261,13 @@ out_free:
 	return err;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int rdc321x_gpio_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 	struct rdc321x_gpio *rdc321x_gpio_dev = platform_get_drvdata(pdev);
@@ -251,11 +281,16 @@ static int rdc321x_gpio_remove(struct platform_device *pdev)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	struct rdc321x_gpio *rdc321x_gpio_dev = platform_get_drvdata(pdev);
 
 	gpiochip_remove(&rdc321x_gpio_dev->chip);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -11,7 +11,13 @@
  *  similar parts.  The other devices are supported by different drivers.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Supports: IT8705F  Super I/O chip w/LPC interface
+=======
+ *  Supports: IT8603E  Super I/O chip w/LPC interface
+ *            IT8623E  Super I/O chip w/LPC interface
+ *            IT8705F  Super I/O chip w/LPC interface
+>>>>>>> v3.18
 =======
  *  Supports: IT8603E  Super I/O chip w/LPC interface
  *            IT8623E  Super I/O chip w/LPC interface
@@ -33,7 +39,11 @@
  *
  *  Copyright (C) 2001 Chris Gauthron
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2005-2010 Jean Delvare <khali@linux-fr.org>
+=======
+ *  Copyright (C) 2005-2010 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2005-2010 Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -75,7 +85,11 @@
 
 enum chips { it87, it8712, it8716, it8718, it8720, it8721, it8728, it8771,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     it8772, it8782, it8783 };
+=======
+	     it8772, it8782, it8783, it8603 };
+>>>>>>> v3.18
 =======
 	     it8772, it8782, it8783, it8603 };
 >>>>>>> v3.18
@@ -161,6 +175,11 @@ static inline void superio_exit(void)
 #define IT8782F_DEVID 0x8782
 #define IT8783E_DEVID 0x8783
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IT8603E_DEVID 0x8603
+#define IT8623E_DEVID 0x8623
+>>>>>>> v3.18
 =======
 #define IT8603E_DEVID 0x8603
 #define IT8623E_DEVID 0x8623
@@ -335,13 +354,19 @@ static const struct it87_devices it87_devices[] = {
 		.old_peci_mask = 0x4,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[it8603] = {
 		.name = "it8603",
 		.features = FEAT_NEWER_AUTOPWM | FEAT_12MV_ADC | FEAT_16BIT_FANS
 		  | FEAT_TEMP_OFFSET | FEAT_TEMP_PECI,
 		.peci_mask = 0x07,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -390,7 +415,11 @@ struct it87_data {
 
 	u16 in_scaled;		/* Internal voltage sensors are scaled */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 in[9][3];		/* [nr][0]=in, [1]=min, [2]=max */
+=======
+	u8 in[10][3];		/* [nr][0]=in, [1]=min, [2]=max */
+>>>>>>> v3.18
 =======
 	u8 in[10][3];		/* [nr][0]=in, [1]=min, [2]=max */
 >>>>>>> v3.18
@@ -611,6 +640,10 @@ static SENSOR_DEVICE_ATTR_2(in7_max, S_IRUGO | S_IWUSR, show_in, set_in,
 
 static SENSOR_DEVICE_ATTR_2(in8_input, S_IRUGO, show_in, NULL, 8, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static SENSOR_DEVICE_ATTR_2(in9_input, S_IRUGO, show_in, NULL, 9, 0);
+>>>>>>> v3.18
 =======
 static SENSOR_DEVICE_ATTR_2(in9_input, S_IRUGO, show_in, NULL, 9, 0);
 >>>>>>> v3.18
@@ -771,7 +804,11 @@ static int pwm_mode(const struct it87_data *data, int nr)
 	int ctrl = data->fan_main_ctrl & (1 << nr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ctrl == 0)					/* Full speed */
+=======
+	if (ctrl == 0 && data->type != it8603)		/* Full speed */
+>>>>>>> v3.18
 =======
 	if (ctrl == 0 && data->type != it8603)		/* Full speed */
 >>>>>>> v3.18
@@ -970,11 +1007,17 @@ static ssize_t set_pwm_enable(struct device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* IT8603E does not have on/off mode */
 	if (val == 0 && data->type == it8603)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_lock(&data->update_lock);
 
@@ -996,11 +1039,14 @@ static ssize_t set_pwm_enable(struct device *dev,
 			data->pwm_ctrl[nr] = 0x80 | data->pwm_temp_map[nr];
 		it87_write_value(data, IT87_REG_PWM(nr), data->pwm_ctrl[nr]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* set SmartGuardian mode */
 		data->fan_main_ctrl |= (1 << nr);
 		it87_write_value(data, IT87_REG_FAN_MAIN_CTRL,
 				 data->fan_main_ctrl);
 =======
+=======
+>>>>>>> v3.18
 
 		if (data->type != it8603) {
 			/* set SmartGuardian mode */
@@ -1008,6 +1054,9 @@ static ssize_t set_pwm_enable(struct device *dev,
 			it87_write_value(data, IT87_REG_FAN_MAIN_CTRL,
 					 data->fan_main_ctrl);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1473,6 +1522,11 @@ static SENSOR_DEVICE_ATTR(in3_label, S_IRUGO, show_label, NULL, 0);
 static SENSOR_DEVICE_ATTR(in7_label, S_IRUGO, show_label, NULL, 1);
 static SENSOR_DEVICE_ATTR(in8_label, S_IRUGO, show_label, NULL, 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* special AVCC3 IT8603E in9 */
+static SENSOR_DEVICE_ATTR(in9_label, S_IRUGO, show_label, NULL, 0);
+>>>>>>> v3.18
 =======
 /* special AVCC3 IT8603E in9 */
 static SENSOR_DEVICE_ATTR(in9_label, S_IRUGO, show_label, NULL, 0);
@@ -1487,7 +1541,11 @@ static ssize_t show_name(struct device *dev, struct device_attribute
 static DEVICE_ATTR(name, S_IRUGO, show_name, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *it87_attributes_in[9][5] = {
+=======
+static struct attribute *it87_attributes_in[10][5] = {
+>>>>>>> v3.18
 =======
 static struct attribute *it87_attributes_in[10][5] = {
 >>>>>>> v3.18
@@ -1543,16 +1601,22 @@ static struct attribute *it87_attributes_in[10][5] = {
 	&sensor_dev_attr_in8_input.dev_attr.attr,
 	NULL
 <<<<<<< HEAD
+<<<<<<< HEAD
 } };
 
 static const struct attribute_group it87_group_in[9] = {
 =======
+=======
+>>>>>>> v3.18
 }, {
 	&sensor_dev_attr_in9_input.dev_attr.attr,
 	NULL
 } };
 
 static const struct attribute_group it87_group_in[10] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .attrs = it87_attributes_in[0] },
 	{ .attrs = it87_attributes_in[1] },
@@ -1564,6 +1628,10 @@ static const struct attribute_group it87_group_in[10] = {
 	{ .attrs = it87_attributes_in[7] },
 	{ .attrs = it87_attributes_in[8] },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .attrs = it87_attributes_in[9] },
+>>>>>>> v3.18
 =======
 	{ .attrs = it87_attributes_in[9] },
 >>>>>>> v3.18
@@ -1626,7 +1694,12 @@ static struct attribute *it87_attributes_in_beep[] = {
 	&sensor_dev_attr_in6_beep.dev_attr.attr,
 	&sensor_dev_attr_in7_beep.dev_attr.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NULL
+=======
+	NULL,
+	NULL,
+>>>>>>> v3.18
 =======
 	NULL,
 	NULL,
@@ -1770,6 +1843,10 @@ static struct attribute *it87_attributes_label[] = {
 	&sensor_dev_attr_in7_label.dev_attr.attr,
 	&sensor_dev_attr_in8_label.dev_attr.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&sensor_dev_attr_in9_label.dev_attr.attr,
+>>>>>>> v3.18
 =======
 	&sensor_dev_attr_in9_label.dev_attr.attr,
 >>>>>>> v3.18
@@ -1831,11 +1908,17 @@ static int __init it87_find(unsigned short *address,
 		sio_data->type = it8783;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case IT8603E_DEVID:
 	case IT8623E_DEVID:
 		sio_data->type = it8603;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 0xffff:	/* No device at all */
 		goto exit;
@@ -1859,12 +1942,15 @@ static int __init it87_find(unsigned short *address,
 	err = 0;
 	sio_data->revision = superio_inb(DEVREV) & 0x0f;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("Found IT%04xF chip at 0x%x, revision %d\n",
 		chip_type, *address, sio_data->revision);
 
 	/* in8 (Vbat) is always internal */
 	sio_data->internal = (1 << 2);
 =======
+=======
+>>>>>>> v3.18
 	pr_info("Found IT%04x%c chip at 0x%x, revision %d\n", chip_type,
 		chip_type == 0x8771 || chip_type == 0x8772 ||
 		chip_type == 0x8603 ? 'E' : 'F', *address,
@@ -1875,6 +1961,9 @@ static int __init it87_find(unsigned short *address,
 	/* Only the IT8603E has in9 */
 	if (sio_data->type != it8603)
 		sio_data->skip_in |= (1 << 9);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Read GPIO config and VID value from LDN 7 (GPIO) */
@@ -1953,8 +2042,11 @@ static int __init it87_find(unsigned short *address,
 
 		sio_data->beep_pin = superio_inb(IT87_SIO_BEEP_PIN_REG) & 0x3f;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	} else if (sio_data->type == it8603) {
 		int reg27, reg29;
 
@@ -1987,6 +2079,9 @@ static int __init it87_find(unsigned short *address,
 		sio_data->internal |= (1 << 3); /* in9 is AVCC */
 
 		sio_data->beep_pin = superio_inb(IT87_SIO_BEEP_PIN_REG) & 0x3f;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		int reg;
@@ -2106,17 +2201,23 @@ static void it87_remove_files(struct device *dev)
 {
 	struct it87_data *data = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct it87_sio_data *sio_data = dev->platform_data;
 	int i;
 
 	sysfs_remove_group(&dev->kobj, &it87_group);
 	for (i = 0; i < 9; i++) {
 =======
+=======
+>>>>>>> v3.18
 	struct it87_sio_data *sio_data = dev_get_platdata(dev);
 	int i;
 
 	sysfs_remove_group(&dev->kobj, &it87_group);
 	for (i = 0; i < 10; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (sio_data->skip_in & (1 << i))
 			continue;
@@ -2166,7 +2267,11 @@ static int it87_probe(struct platform_device *pdev)
 	struct resource *res;
 	struct device *dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct it87_sio_data *sio_data = dev->platform_data;
+=======
+	struct it87_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct it87_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -2236,6 +2341,11 @@ static int it87_probe(struct platform_device *pdev)
 		if (sio_data->internal & (1 << 2))
 			data->in_scaled |= (1 << 8);	/* in8 is Vbat */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (sio_data->internal & (1 << 3))
+			data->in_scaled |= (1 << 9);	/* in9 is AVCC */
+>>>>>>> v3.18
 =======
 		if (sio_data->internal & (1 << 3))
 			data->in_scaled |= (1 << 9);	/* in9 is AVCC */
@@ -2263,7 +2373,11 @@ static int it87_probe(struct platform_device *pdev)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < 9; i++) {
+=======
+	for (i = 0; i < 10; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < 10; i++) {
 >>>>>>> v3.18
@@ -2367,7 +2481,11 @@ static int it87_probe(struct platform_device *pdev)
 
 	/* Export labels for internal sensors */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < 3; i++) {
+=======
+	for (i = 0; i < 4; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < 4; i++) {
 >>>>>>> v3.18
@@ -2485,7 +2603,11 @@ static int it87_check_pwm(struct device *dev)
 static void it87_init_device(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct it87_sio_data *sio_data = pdev->dev.platform_data;
+=======
+	struct it87_sio_data *sio_data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct it87_sio_data *sio_data = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -2556,8 +2678,14 @@ static void it87_init_device(struct platform_device *pdev)
 	data->has_fan = (data->fan_main_ctrl >> 4) & 0x07;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set tachometers to 16-bit mode if needed */
 	if (has_16bit_fans(data)) {
+=======
+	/* Set tachometers to 16-bit mode if needed, IT8603E (and IT8728F?)
+	 * has it by default */
+	if (has_16bit_fans(data) && data->type != it8603) {
+>>>>>>> v3.18
 =======
 	/* Set tachometers to 16-bit mode if needed, IT8603E (and IT8728F?)
 	 * has it by default */
@@ -2643,6 +2771,11 @@ static struct it87_data *it87_update_device(struct device *dev)
 		/* in8 (battery) has no limit registers */
 		data->in[8][0] = it87_read_value(data, IT87_REG_VIN(8));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (data->type == it8603)
+			data->in[9][0] = it87_read_value(data, 0x2f);
+>>>>>>> v3.18
 =======
 		if (data->type == it8603)
 			data->in[9][0] = it87_read_value(data, 0x2f);
@@ -2804,7 +2937,11 @@ static void __exit sm_it87_exit(void)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Chris Gauthron, Jean Delvare <khali@linux-fr.org>");
+=======
+MODULE_AUTHOR("Chris Gauthron, Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Chris Gauthron, Jean Delvare <jdelvare@suse.de>");
 >>>>>>> v3.18

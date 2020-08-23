@@ -18,6 +18,7 @@
 #define __MACH_TEGRA_CPUIDLE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_TEGRA_2x_SOC
 int tegra20_cpuidle_init(void);
 #else
@@ -35,6 +36,8 @@ int tegra114_cpuidle_init(void);
 #else
 static inline int tegra114_cpuidle_init(void) { return -ENODEV; }
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_IDLE
 int tegra20_cpuidle_init(void);
 void tegra20_cpuidle_pcie_irqs_in_use(void);
@@ -43,6 +46,9 @@ int tegra114_cpuidle_init(void);
 void tegra_cpuidle_init(void);
 #else
 static inline void tegra_cpuidle_init(void) {}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

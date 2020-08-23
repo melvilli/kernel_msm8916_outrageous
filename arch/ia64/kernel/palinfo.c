@@ -933,7 +933,11 @@ static const struct file_operations proc_palinfo_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -967,7 +971,11 @@ remove_palinfo_proc_entries(unsigned int hcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit palinfo_cpu_callback(struct notifier_block *nfb,
+=======
+static int palinfo_cpu_callback(struct notifier_block *nfb,
+>>>>>>> v3.18
 =======
 static int palinfo_cpu_callback(struct notifier_block *nfb,
 >>>>>>> v3.18
@@ -1005,6 +1013,11 @@ palinfo_init(void)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpu_notifier_register_begin();
+
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 
@@ -1016,7 +1029,13 @@ palinfo_init(void)
 
 	/* Register for future delivery via notify registration */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_hotcpu_notifier(&palinfo_cpu_notifier);
+=======
+	__register_hotcpu_notifier(&palinfo_cpu_notifier);
+
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__register_hotcpu_notifier(&palinfo_cpu_notifier);
 

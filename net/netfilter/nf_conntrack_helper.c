@@ -251,6 +251,10 @@ out:
 EXPORT_SYMBOL_GPL(__nf_ct_try_assign_helper);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* appropiate ct lock protecting must be taken by caller */
+>>>>>>> v3.18
 =======
 /* appropiate ct lock protecting must be taken by caller */
 >>>>>>> v3.18
@@ -261,10 +265,14 @@ static inline int unhelp(struct nf_conntrack_tuple_hash *i,
 	struct nf_conn_help *help = nfct_help(ct);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (help && rcu_dereference_protected(
 			help->helper,
 			lockdep_is_held(&nf_conntrack_lock)
 			) == me) {
+=======
+	if (help && rcu_dereference_raw(help->helper) == me) {
+>>>>>>> v3.18
 =======
 	if (help && rcu_dereference_raw(help->helper) == me) {
 >>>>>>> v3.18
@@ -293,9 +301,15 @@ static LIST_HEAD(nf_ct_helper_expectfn_list);
 void nf_ct_helper_expectfn_register(struct nf_ct_helper_expectfn *n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&nf_conntrack_lock);
 	list_add_rcu(&n->head, &nf_ct_helper_expectfn_list);
 	spin_unlock_bh(&nf_conntrack_lock);
+=======
+	spin_lock_bh(&nf_conntrack_expect_lock);
+	list_add_rcu(&n->head, &nf_ct_helper_expectfn_list);
+	spin_unlock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&nf_conntrack_expect_lock);
 	list_add_rcu(&n->head, &nf_ct_helper_expectfn_list);
@@ -307,9 +321,15 @@ EXPORT_SYMBOL_GPL(nf_ct_helper_expectfn_register);
 void nf_ct_helper_expectfn_unregister(struct nf_ct_helper_expectfn *n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&nf_conntrack_lock);
 	list_del_rcu(&n->head);
 	spin_unlock_bh(&nf_conntrack_lock);
+=======
+	spin_lock_bh(&nf_conntrack_expect_lock);
+	list_del_rcu(&n->head);
+	spin_unlock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&nf_conntrack_expect_lock);
 	list_del_rcu(&n->head);
@@ -417,13 +437,19 @@ static void __nf_conntrack_helper_unregister(struct nf_conntrack_helper *me,
 	const struct hlist_nulls_node *nn;
 	unsigned int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Get rid of expectations */
 =======
+=======
+>>>>>>> v3.18
 	int cpu;
 
 	/* Get rid of expectations */
 	spin_lock_bh(&nf_conntrack_expect_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < nf_ct_expect_hsize; i++) {
 		hlist_for_each_entry_safe(exp, next,
@@ -432,7 +458,11 @@ static void __nf_conntrack_helper_unregister(struct nf_conntrack_helper *me,
 			if ((rcu_dereference_protected(
 					help->helper,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					lockdep_is_held(&nf_conntrack_lock)
+=======
+					lockdep_is_held(&nf_conntrack_expect_lock)
+>>>>>>> v3.18
 =======
 					lockdep_is_held(&nf_conntrack_expect_lock)
 >>>>>>> v3.18
@@ -444,6 +474,7 @@ static void __nf_conntrack_helper_unregister(struct nf_conntrack_helper *me,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Get rid of expecteds, set helpers to NULL. */
 	hlist_nulls_for_each_entry(h, nn, &net->ct.unconfirmed, hnnode)
@@ -453,6 +484,8 @@ static void __nf_conntrack_helper_unregister(struct nf_conntrack_helper *me,
 			unhelp(h, me);
 	}
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_bh(&nf_conntrack_expect_lock);
 
 	/* Get rid of expecteds, set helpers to NULL. */
@@ -474,6 +507,9 @@ static void __nf_conntrack_helper_unregister(struct nf_conntrack_helper *me,
 		spin_unlock(&nf_conntrack_locks[i % CONNTRACK_LOCKS]);
 	}
 	local_bh_enable();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -493,10 +529,15 @@ void nf_conntrack_helper_unregister(struct nf_conntrack_helper *me)
 
 	rtnl_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&nf_conntrack_lock);
 	for_each_net(net)
 		__nf_conntrack_helper_unregister(me, net);
 	spin_unlock_bh(&nf_conntrack_lock);
+=======
+	for_each_net(net)
+		__nf_conntrack_helper_unregister(me, net);
+>>>>>>> v3.18
 =======
 	for_each_net(net)
 		__nf_conntrack_helper_unregister(me, net);

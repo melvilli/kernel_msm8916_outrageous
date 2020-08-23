@@ -11,6 +11,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * For flags member below
  * sg.h sg_io_hdr also has bits defined for it's flags member. However
  * none of these bits are implemented/used by bsg. The bits below are
@@ -18,6 +19,8 @@
  */
 #define BSG_FLAG_Q_AT_TAIL 0x10 /* default, == 0 at this bit, is Q_AT_HEAD */
 =======
+=======
+>>>>>>> v3.18
  * For flag constants below:
  * sg.h sg_io_hdr also has bits defined for it's flags member. These
  * two flag values (0x10 and 0x20) have the same meaning in sg.h . For
@@ -25,6 +28,9 @@
  */
 #define BSG_FLAG_Q_AT_TAIL 0x10 /* default is Q_AT_HEAD */
 #define BSG_FLAG_Q_AT_HEAD 0x20
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct sg_io_v4 {

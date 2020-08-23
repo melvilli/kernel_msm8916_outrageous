@@ -15,8 +15,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -26,6 +30,10 @@
 #define __MSCAN_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -292,6 +300,11 @@ struct mscan_priv {
 	unsigned long flags;
 	void __iomem *reg_base;	/* ioremap'ed address to registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *clk_ipg;	/* clock for registers */
+	struct clk *clk_can;	/* clock for bitrates */
+>>>>>>> v3.18
 =======
 	struct clk *clk_ipg;	/* clock for registers */
 	struct clk *clk_can;	/* clock for bitrates */
@@ -308,9 +321,15 @@ struct mscan_priv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct net_device *alloc_mscandev(void);
 extern int register_mscandev(struct net_device *dev, int mscan_clksrc);
 extern void unregister_mscandev(struct net_device *dev);
+=======
+struct net_device *alloc_mscandev(void);
+int register_mscandev(struct net_device *dev, int mscan_clksrc);
+void unregister_mscandev(struct net_device *dev);
+>>>>>>> v3.18
 =======
 struct net_device *alloc_mscandev(void);
 int register_mscandev(struct net_device *dev, int mscan_clksrc);

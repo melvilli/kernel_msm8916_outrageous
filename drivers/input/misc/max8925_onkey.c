@@ -27,6 +27,10 @@
 #include <linux/mfd/max8925.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -86,6 +90,7 @@ static int max8925_onkey_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = kzalloc(sizeof(struct max8925_onkey_info), GFP_KERNEL);
 	input = input_allocate_device();
 	if (!info || !input) {
@@ -93,6 +98,8 @@ static int max8925_onkey_probe(struct platform_device *pdev)
 		goto err_free_mem;
 	}
 =======
+=======
+>>>>>>> v3.18
 	info = devm_kzalloc(&pdev->dev, sizeof(struct max8925_onkey_info),
 			    GFP_KERNEL);
 	if (!info)
@@ -101,6 +108,9 @@ static int max8925_onkey_probe(struct platform_device *pdev)
 	input = devm_input_allocate_device(&pdev->dev);
 	if (!input)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	info->idev = input;
@@ -115,6 +125,7 @@ static int max8925_onkey_probe(struct platform_device *pdev)
 	input->dev.parent = &pdev->dev;
 	input_set_capability(input, EV_KEY, KEY_POWER);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	error = request_threaded_irq(irq[0], NULL, max8925_onkey_handler,
 				     IRQF_ONESHOT, "onkey-down", info);
@@ -131,6 +142,8 @@ static int max8925_onkey_probe(struct platform_device *pdev)
 			irq[1], error);
 		goto err_free_irq0;
 =======
+=======
+>>>>>>> v3.18
 	error = devm_request_threaded_irq(&pdev->dev, irq[0], NULL,
 					  max8925_onkey_handler, IRQF_ONESHOT,
 					  "onkey-down", info);
@@ -147,6 +160,9 @@ static int max8925_onkey_probe(struct platform_device *pdev)
 		dev_err(chip->dev, "Failed to request IRQ: #%d: %d\n",
 			irq[1], error);
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -154,7 +170,11 @@ static int max8925_onkey_probe(struct platform_device *pdev)
 	if (error) {
 		dev_err(chip->dev, "Can't register input device: %d\n", error);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free_irq1;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -164,6 +184,7 @@ static int max8925_onkey_probe(struct platform_device *pdev)
 	device_init_wakeup(&pdev->dev, 1);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err_free_irq1:
@@ -190,6 +211,8 @@ static int max8925_onkey_remove(struct platform_device *pdev)
 	platform_set_drvdata(pdev, NULL);
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -234,7 +257,10 @@ static struct platform_driver max8925_onkey_driver = {
 	},
 	.probe		= max8925_onkey_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= max8925_onkey_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

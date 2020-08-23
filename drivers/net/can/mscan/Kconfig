@@ -1,6 +1,10 @@
 config CAN_MSCAN
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PPC || M68K
+=======
+	depends on PPC
+>>>>>>> v3.18
 =======
 	depends on PPC
 >>>>>>> v3.18

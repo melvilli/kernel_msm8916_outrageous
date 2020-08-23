@@ -61,7 +61,11 @@ static struct resource vx855_gpio_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell vx855_cells[] = {
+=======
+static const struct mfd_cell vx855_cells[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell vx855_cells[] = {
 >>>>>>> v3.18
@@ -123,7 +127,11 @@ static void vx855_remove(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(vx855_pci_tbl) = {
+=======
+static const struct pci_device_id vx855_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id vx855_pci_tbl[] = {
 >>>>>>> v3.18

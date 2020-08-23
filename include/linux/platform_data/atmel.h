@@ -72,11 +72,17 @@ struct atmel_nand_data {
 	struct mtd_partition *parts;
 	unsigned int	num_parts;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool		has_dma;		/* support dma transfer */
 
 	/* default is false, only for at32ap7000 chip is true */
 	bool		need_reset_workaround;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -90,6 +96,7 @@ struct atmel_uart_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  /* Touchscreen Controller */
 struct at91_tsadcc_data {
 	unsigned int    adc_clock;
@@ -97,6 +104,8 @@ struct at91_tsadcc_data {
 	u8		ts_sample_hold_time;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* CAN */

@@ -82,7 +82,11 @@ void devm_iounmap(struct device *dev, void __iomem *addr)
 {
 	WARN_ON(devres_destroy(dev, devm_ioremap_release, devm_ioremap_match,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       (void *)addr));
+=======
+			       (__force void *)addr));
+>>>>>>> v3.18
 =======
 			       (__force void *)addr));
 >>>>>>> v3.18
@@ -119,7 +123,11 @@ void __iomem *devm_ioremap_resource(struct device *dev, struct resource *res)
 	if (!res || resource_type(res) != IORESOURCE_MEM) {
 		dev_err(dev, "invalid resource\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ERR_PTR(-EINVAL);
+=======
+		return IOMEM_ERR_PTR(-EINVAL);
+>>>>>>> v3.18
 =======
 		return IOMEM_ERR_PTR(-EINVAL);
 >>>>>>> v3.18
@@ -131,7 +139,11 @@ void __iomem *devm_ioremap_resource(struct device *dev, struct resource *res)
 	if (!devm_request_mem_region(dev, res->start, size, name)) {
 		dev_err(dev, "can't request region for resource %pR\n", res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ERR_PTR(-EBUSY);
+=======
+		return IOMEM_ERR_PTR(-EBUSY);
+>>>>>>> v3.18
 =======
 		return IOMEM_ERR_PTR(-EBUSY);
 >>>>>>> v3.18
@@ -146,7 +158,11 @@ void __iomem *devm_ioremap_resource(struct device *dev, struct resource *res)
 		dev_err(dev, "ioremap failed for resource %pR\n", res);
 		devm_release_mem_region(dev, res->start, size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dest_ptr = ERR_PTR(-ENOMEM);
+=======
+		dest_ptr = IOMEM_ERR_PTR(-ENOMEM);
+>>>>>>> v3.18
 =======
 		dest_ptr = IOMEM_ERR_PTR(-ENOMEM);
 >>>>>>> v3.18
@@ -156,6 +172,7 @@ void __iomem *devm_ioremap_resource(struct device *dev, struct resource *res)
 }
 EXPORT_SYMBOL(devm_ioremap_resource);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * devm_request_and_ioremap() - Check, request region, and ioremap resource
@@ -187,6 +204,8 @@ EXPORT_SYMBOL(devm_request_and_ioremap);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAS_IOPORT_MAP
 /*
  * Generic iomap devres
@@ -212,7 +231,11 @@ static int devm_ioport_map_match(struct device *dev, void *res,
  * detach.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __iomem * devm_ioport_map(struct device *dev, unsigned long port,
+=======
+void __iomem *devm_ioport_map(struct device *dev, unsigned long port,
+>>>>>>> v3.18
 =======
 void __iomem *devm_ioport_map(struct device *dev, unsigned long port,
 >>>>>>> v3.18
@@ -248,7 +271,11 @@ void devm_ioport_unmap(struct device *dev, void __iomem *addr)
 	ioport_unmap(addr);
 	WARN_ON(devres_destroy(dev, devm_ioport_map_release,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       devm_ioport_map_match, (void *)addr));
+=======
+			       devm_ioport_map_match, (__force void *)addr));
+>>>>>>> v3.18
 =======
 			       devm_ioport_map_match, (__force void *)addr));
 >>>>>>> v3.18
@@ -291,7 +318,11 @@ static void pcim_iomap_release(struct device *gendev, void *res)
  * allocated.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __iomem * const * pcim_iomap_table(struct pci_dev *pdev)
+=======
+void __iomem * const *pcim_iomap_table(struct pci_dev *pdev)
+>>>>>>> v3.18
 =======
 void __iomem * const *pcim_iomap_table(struct pci_dev *pdev)
 >>>>>>> v3.18
@@ -320,7 +351,11 @@ EXPORT_SYMBOL(pcim_iomap_table);
  * detach.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __iomem * pcim_iomap(struct pci_dev *pdev, int bar, unsigned long maxlen)
+=======
+void __iomem *pcim_iomap(struct pci_dev *pdev, int bar, unsigned long maxlen)
+>>>>>>> v3.18
 =======
 void __iomem *pcim_iomap(struct pci_dev *pdev, int bar, unsigned long maxlen)
 >>>>>>> v3.18
@@ -459,7 +494,11 @@ void pcim_iounmap_regions(struct pci_dev *pdev, int mask)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < PCIM_IOMAP_MAX; i++) {
+=======
+	for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
 >>>>>>> v3.18

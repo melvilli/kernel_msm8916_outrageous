@@ -56,7 +56,11 @@ unsigned long voltdm_get_voltage(struct voltagedomain *voltdm)
 {
 	if (!voltdm || IS_ERR(voltdm)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: VDD specified does not exist!\n", __func__);
+=======
+		pr_warn("%s: VDD specified does not exist!\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: VDD specified does not exist!\n", __func__);
 >>>>>>> v3.18
@@ -82,7 +86,11 @@ int voltdm_scale(struct voltagedomain *voltdm,
 
 	if (!voltdm || IS_ERR(voltdm)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: VDD specified does not exist!\n", __func__);
+=======
+		pr_warn("%s: VDD specified does not exist!\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: VDD specified does not exist!\n", __func__);
 >>>>>>> v3.18
@@ -105,8 +113,13 @@ int voltdm_scale(struct voltagedomain *voltdm,
 
 	if (!volt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: not scaling. OPP voltage for %lu, not found.\n",
 			   __func__, target_volt);
+=======
+		pr_warn("%s: not scaling. OPP voltage for %lu, not found.\n",
+			__func__, target_volt);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: not scaling. OPP voltage for %lu, not found.\n",
 			__func__, target_volt);
@@ -136,7 +149,11 @@ void voltdm_reset(struct voltagedomain *voltdm)
 
 	if (!voltdm || IS_ERR(voltdm)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: VDD specified does not exist!\n", __func__);
+=======
+		pr_warn("%s: VDD specified does not exist!\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: VDD specified does not exist!\n", __func__);
 >>>>>>> v3.18
@@ -170,7 +187,11 @@ void omap_voltage_get_volttable(struct voltagedomain *voltdm,
 {
 	if (!voltdm || IS_ERR(voltdm)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: VDD specified does not exist!\n", __func__);
+=======
+		pr_warn("%s: VDD specified does not exist!\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: VDD specified does not exist!\n", __func__);
 >>>>>>> v3.18
@@ -202,7 +223,11 @@ struct omap_volt_data *omap_voltage_get_voltdata(struct voltagedomain *voltdm,
 
 	if (!voltdm || IS_ERR(voltdm)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: VDD specified does not exist!\n", __func__);
+=======
+		pr_warn("%s: VDD specified does not exist!\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: VDD specified does not exist!\n", __func__);
 >>>>>>> v3.18
@@ -211,7 +236,11 @@ struct omap_volt_data *omap_voltage_get_voltdata(struct voltagedomain *voltdm,
 
 	if (!voltdm->volt_data) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: voltage table does not exist for vdd_%s\n",
+=======
+		pr_warn("%s: voltage table does not exist for vdd_%s\n",
+>>>>>>> v3.18
 =======
 		pr_warn("%s: voltage table does not exist for vdd_%s\n",
 >>>>>>> v3.18
@@ -244,7 +273,11 @@ int omap_voltage_register_pmic(struct voltagedomain *voltdm,
 {
 	if (!voltdm || IS_ERR(voltdm)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: VDD specified does not exist!\n", __func__);
+=======
+		pr_warn("%s: VDD specified does not exist!\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: VDD specified does not exist!\n", __func__);
 >>>>>>> v3.18
@@ -271,7 +304,11 @@ void omap_change_voltscale_method(struct voltagedomain *voltdm,
 {
 	if (!voltdm || IS_ERR(voltdm)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: VDD specified does not exist!\n", __func__);
+=======
+		pr_warn("%s: VDD specified does not exist!\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: VDD specified does not exist!\n", __func__);
 >>>>>>> v3.18
@@ -317,7 +354,11 @@ int __init omap_voltage_late_init(void)
 		sys_ck = clk_get(NULL, voltdm->sys_clk.name);
 		if (IS_ERR(sys_ck)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: Could not get sys clk.\n", __func__);
+=======
+			pr_warn("%s: Could not get sys clk.\n", __func__);
+>>>>>>> v3.18
 =======
 			pr_warn("%s: Could not get sys clk.\n", __func__);
 >>>>>>> v3.18

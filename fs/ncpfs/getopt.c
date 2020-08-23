@@ -3,6 +3,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -52,6 +57,7 @@ int ncp_getopt(const char *caller, char **options, const struct ncp_option *opts
 					return opts->val;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_INFO "%s: the %s option requires an argument\n",
 				       caller, token);
 				return -EINVAL;
@@ -67,6 +73,8 @@ int ncp_getopt(const char *caller, char **options, const struct ncp_option *opts
 					caller, token, val);
 				return -EDOM;
 =======
+=======
+>>>>>>> v3.18
 				pr_info("%s: the %s option requires an argument\n",
 					caller, token);
 				return -EINVAL;
@@ -80,13 +88,20 @@ int ncp_getopt(const char *caller, char **options, const struct ncp_option *opts
 					return rc;
 				}
 				return opts->val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			if (opts->has_arg & OPT_STRING) {
 				return opts->val;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "%s: unexpected argument %s to the %s option\n",
+=======
+			pr_info("%s: unexpected argument %s to the %s option\n",
+>>>>>>> v3.18
 =======
 			pr_info("%s: unexpected argument %s to the %s option\n",
 >>>>>>> v3.18
@@ -95,7 +110,11 @@ int ncp_getopt(const char *caller, char **options, const struct ncp_option *opts
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "%s: Unrecognized mount option %s\n", caller, token);
+=======
+	pr_info("%s: Unrecognized mount option %s\n", caller, token);
+>>>>>>> v3.18
 =======
 	pr_info("%s: Unrecognized mount option %s\n", caller, token);
 >>>>>>> v3.18

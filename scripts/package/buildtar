@@ -88,7 +88,10 @@ case "${ARCH}" in
 		[ -f "${objtree}/vmlinux.dsk" ] && cp -v -- "${objtree}/vmlinux.dsk" "${tmpdir}/boot/vmlinux-${KERNELRELEASE}.dsk"
 		;;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	mips)
 		if [ -f "${objtree}/arch/mips/boot/compressed/vmlinux.bin" ]; then
 			cp -v -- "${objtree}/arch/mips/boot/compressed/vmlinux.bin" "${tmpdir}/boot/vmlinuz-${KERNELRELEASE}"
@@ -110,6 +113,9 @@ case "${ARCH}" in
 			cp -v -- "${objtree}/vmlinux" "${tmpdir}/boot/vmlinux-${KERNELRELEASE}"
 		fi
 		;;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*)
 		[ -f "${KBUILD_IMAGE}" ] && cp -v -- "${KBUILD_IMAGE}" "${tmpdir}/boot/vmlinux-kbuild-${KERNELRELEASE}"
@@ -129,7 +135,10 @@ esac
 #
 (
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cd "${tmpdir}"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	opts=
@@ -137,7 +146,11 @@ esac
 		opts="--owner=root --group=root"
 	fi
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tar cf - boot/* lib/* $opts | ${compress} > "${tarball}${file_ext}"
+=======
+	tar cf - -C "$tmpdir" boot/ lib/ $opts | ${compress} > "${tarball}${file_ext}"
+>>>>>>> v3.18
 =======
 	tar cf - -C "$tmpdir" boot/ lib/ $opts | ${compress} > "${tarball}${file_ext}"
 >>>>>>> v3.18
@@ -147,6 +160,9 @@ echo "Tarball successfully created in ${tarball}${file_ext}"
 
 exit 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

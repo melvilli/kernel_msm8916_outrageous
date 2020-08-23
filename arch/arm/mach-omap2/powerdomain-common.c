@@ -18,7 +18,10 @@
 #include "cm.h"
 #include "cm-regbits-34xx.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "cm-regbits-44xx.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "prm-regbits-34xx.h"

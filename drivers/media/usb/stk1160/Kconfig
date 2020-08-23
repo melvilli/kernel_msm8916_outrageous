@@ -1,9 +1,15 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config VIDEO_STK1160
 	tristate "STK1160 USB video capture support"
 	depends on VIDEO_DEV && I2C
 	select VIDEOBUF2_VMALLOC
 	select VIDEO_SAA711X
+=======
+config VIDEO_STK1160_COMMON
+	tristate "STK1160 USB video capture support"
+	depends on VIDEO_DEV && I2C
+>>>>>>> v3.18
 =======
 config VIDEO_STK1160_COMMON
 	tristate "STK1160 USB video capture support"
@@ -19,6 +25,7 @@ config VIDEO_STK1160_COMMON
 config VIDEO_STK1160_AC97
 	bool "STK1160 AC97 codec support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIDEO_STK1160 && SND
 	select SND_AC97_CODEC
 
@@ -26,6 +33,8 @@ config VIDEO_STK1160_AC97
 	  Enables AC97 codec support for stk1160 driver.
 .
 =======
+=======
+>>>>>>> v3.18
 	depends on VIDEO_STK1160_COMMON && SND
 
 	---help---
@@ -38,4 +47,7 @@ config VIDEO_STK1160
 	select VIDEOBUF2_VMALLOC
 	select VIDEO_SAA711X
 	select SND_AC97_CODEC if SND
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

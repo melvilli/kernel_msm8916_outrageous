@@ -129,6 +129,7 @@
 
 /* CS42L73_PWRCTL1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PDN_ADCB		(1 << 7)
 #define PDN_DMICB		(1 << 6)
 #define PDN_ADCA		(1 << 5)
@@ -183,6 +184,8 @@
 #define MCLKSEL_MCLK2		(1 << 4)
 #define MCLKSEL_MCLK1		(0 << 4)
 =======
+=======
+>>>>>>> v3.18
 #define CS42L73_PDN_ADCB		(1 << 7)
 #define CS42L73_PDN_DMICB		(1 << 6)
 #define CS42L73_PDN_ADCA		(1 << 5)
@@ -237,6 +240,9 @@
 #define CS42L73_MCLKDIS			(1 << 0)
 #define CS42L73_MCLKSEL_MCLK2		(1 << 4)
 #define CS42L73_MCLKSEL_MCLK1		(0 << 4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* CS42L73 MCLK derived from MCLK1 or MCLK2 */
@@ -251,6 +257,7 @@
 #define CS42L73_VSP		2
 
 /* IS1, IM1 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MIC2_SDET		(1 << 6)
 #define THMOVLD			(1 << 4)
@@ -275,6 +282,8 @@
 #define CS42L73_RESET_GPIO 143
 
 =======
+=======
+>>>>>>> v3.18
 #define CS42L73_MIC2_SDET		(1 << 6)
 #define CS42L73_THMOVLD			(1 << 4)
 #define CS42L73_DIGMIXOVFL		(1 << 3)
@@ -295,6 +304,9 @@
 #define CS42L73_ESLD_MUTE		(1 << 3)
 
 /* Misc defines for codec */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CS42L73_DEVID		0x00042A73
 #define CS42L73_MCLKX_MIN	5644800

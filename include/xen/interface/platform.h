@@ -109,7 +109,10 @@ struct xenpf_platform_quirk {
 DEFINE_GUEST_HANDLE_STRUCT(xenpf_platform_quirk_t);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define XENPF_efi_runtime_call    49
 #define XEN_EFI_get_time                      1
 #define XEN_EFI_set_time                      2
@@ -210,13 +213,22 @@ DEFINE_GUEST_HANDLE_STRUCT(xenpf_efi_runtime_call);
 #define  XEN_FW_EFI_MEM_INFO       3
 #define  XEN_FW_EFI_RT_VERSION     4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define XENPF_firmware_info       50
 #define XEN_FW_DISK_INFO          1 /* from int 13 AH=08/41/48 */
 #define XEN_FW_DISK_MBR_SIGNATURE 2 /* from MBR offset 0x1b8 */
 #define XEN_FW_VBEDDC_INFO        3 /* from int 10 AX=4f15 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XEN_FW_KBD_SHIFT_FLAGS    5 /* Int16, Fn02: Get keyboard shift flags. */
+=======
+#define XEN_FW_EFI_INFO           4 /* from EFI */
+#define XEN_FW_KBD_SHIFT_FLAGS    5 /* Int16, Fn02: Get keyboard shift flags. */
+
+>>>>>>> v3.18
 =======
 #define XEN_FW_EFI_INFO           4 /* from EFI */
 #define XEN_FW_KBD_SHIFT_FLAGS    5 /* Int16, Fn02: Get keyboard shift flags. */
@@ -254,7 +266,10 @@ struct xenpf_firmware_info {
 		} vbeddc_info; /* XEN_FW_VBEDDC_INFO */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		union xenpf_efi_info {
 			uint32_t version;
 			struct {
@@ -275,6 +290,9 @@ struct xenpf_firmware_info {
 			} mem;
 		} efi_info; /* XEN_FW_EFI_INFO */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		uint8_t kbd_shift_flags; /* XEN_FW_KBD_SHIFT_FLAGS */
 	} u;
@@ -285,16 +303,22 @@ DEFINE_GUEST_HANDLE_STRUCT(xenpf_firmware_info_t);
 struct xenpf_enter_acpi_sleep {
 	/* IN variables */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t pm1a_cnt_val;      /* PM1a control value. */
 	uint16_t pm1b_cnt_val;      /* PM1b control value. */
 	uint32_t sleep_state;       /* Which state to enter (Sn). */
 	uint32_t flags;             /* Must be zero. */
 =======
+=======
+>>>>>>> v3.18
 	uint16_t val_a;             /* PM1a control / sleep type A. */
 	uint16_t val_b;             /* PM1b control / sleep type B. */
 	uint32_t sleep_state;       /* Which state to enter (Sn). */
 #define XENPF_ACPI_SLEEP_EXTENDED 0x00000001
 	uint32_t flags;             /* XENPF_ACPI_SLEEP_*. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 DEFINE_GUEST_HANDLE_STRUCT(xenpf_enter_acpi_sleep_t);
@@ -502,6 +526,10 @@ struct xen_platform_op {
 		struct xenpf_microcode_update  microcode;
 		struct xenpf_platform_quirk    platform_quirk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct xenpf_efi_runtime_call  efi_runtime_call;
+>>>>>>> v3.18
 =======
 		struct xenpf_efi_runtime_call  efi_runtime_call;
 >>>>>>> v3.18

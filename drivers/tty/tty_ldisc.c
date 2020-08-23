@@ -12,7 +12,10 @@
 #include <linux/poll.h>
 #include <linux/proc_fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -419,6 +422,7 @@ EXPORT_SYMBOL_GPL(tty_ldisc_flush);
  *	any harm.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	The line discipline-related tty_struct fields are reset to
  *	prevent the ldisc driver from re-using stale information for
  *	the new ldisc instance.
@@ -427,10 +431,14 @@ EXPORT_SYMBOL_GPL(tty_ldisc_flush);
 =======
  *	Locking: takes termios_rwsem
 >>>>>>> v3.18
+=======
+ *	Locking: takes termios_rwsem
+>>>>>>> v3.18
  */
 
 static void tty_set_termios_ldisc(struct tty_struct *tty, int num)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
 	tty->termios.c_line = num;
@@ -438,6 +446,11 @@ static void tty_set_termios_ldisc(struct tty_struct *tty, int num)
 
 	tty->disc_data = NULL;
 	tty->receive_room = 0;
+=======
+	down_write(&tty->termios_rwsem);
+	tty->termios.c_line = num;
+	up_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 =======
 	down_write(&tty->termios_rwsem);
 	tty->termios.c_line = num;
@@ -538,7 +551,11 @@ int tty_set_ldisc(struct tty_struct *tty, int ldisc)
 {
 	int retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tty_ldisc *o_ldisc, *new_ldisc;
+=======
+	struct tty_ldisc *old_ldisc, *new_ldisc;
+>>>>>>> v3.18
 =======
 	struct tty_ldisc *old_ldisc, *new_ldisc;
 >>>>>>> v3.18
@@ -565,6 +582,7 @@ int tty_set_ldisc(struct tty_struct *tty, int ldisc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* FIXME: why 'shutoff' input if the ldisc is locked? */
 	tty->receive_room = 0;
 
@@ -576,11 +594,16 @@ int tty_set_ldisc(struct tty_struct *tty, int ldisc)
 
 	if (test_bit(TTY_HUPPING, &tty->flags)) {
 =======
+=======
+>>>>>>> v3.18
 	old_ldisc = tty->ldisc;
 	tty_lock(tty);
 
 	if (test_bit(TTY_HUPPING, &tty->flags) ||
 	    test_bit(TTY_HUPPED, &tty->flags)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* We were raced by the hangup method. It will have stomped
 		   the ldisc data and closed the ldisc down */
@@ -591,8 +614,13 @@ int tty_set_ldisc(struct tty_struct *tty, int ldisc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Shutdown the current discipline. */
 	tty_ldisc_close(tty, o_ldisc);
+=======
+	/* Shutdown the old discipline. */
+	tty_ldisc_close(tty, old_ldisc);
+>>>>>>> v3.18
 =======
 	/* Shutdown the old discipline. */
 	tty_ldisc_close(tty, old_ldisc);
@@ -607,6 +635,7 @@ int tty_set_ldisc(struct tty_struct *tty, int ldisc)
 		/* Back to the old one or N_TTY if we can't */
 		tty_ldisc_put(new_ldisc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tty_ldisc_restore(tty, o_ldisc);
 	}
 
@@ -619,6 +648,8 @@ int tty_set_ldisc(struct tty_struct *tty, int ldisc)
 
 	tty_ldisc_put(o_ldisc);
 =======
+=======
+>>>>>>> v3.18
 		tty_ldisc_restore(tty, old_ldisc);
 	}
 
@@ -632,6 +663,9 @@ int tty_set_ldisc(struct tty_struct *tty, int ldisc)
 	   the old ldisc is correct. */
 
 	tty_ldisc_put(old_ldisc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -659,17 +693,23 @@ int tty_set_ldisc(struct tty_struct *tty, int ldisc)
 static void tty_reset_termios(struct tty_struct *tty)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
 	tty->termios = tty->driver->init_termios;
 	tty->termios.c_ispeed = tty_termios_input_baud_rate(&tty->termios);
 	tty->termios.c_ospeed = tty_termios_baud_rate(&tty->termios);
 	mutex_unlock(&tty->termios_mutex);
 =======
+=======
+>>>>>>> v3.18
 	down_write(&tty->termios_rwsem);
 	tty->termios = tty->driver->init_termios;
 	tty->termios.c_ispeed = tty_termios_input_baud_rate(&tty->termios);
 	tty->termios.c_ospeed = tty_termios_baud_rate(&tty->termios);
 	up_write(&tty->termios_rwsem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -127,7 +127,10 @@ struct thread_struct {
 	/* floating point info */
 	union thread_xstate *xstate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * fpu_counter contains the number of consecutive context switches
@@ -138,6 +141,9 @@ struct thread_struct {
 	 * a short time
 	 */
 	unsigned char fpu_counter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

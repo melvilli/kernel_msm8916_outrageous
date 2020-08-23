@@ -4,7 +4,11 @@
  * driver.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -45,8 +49,13 @@
 #define MWIFIEX_RXBD_MASK			0x3F
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MWIFIEX_MAX_EVT_BD			0x04
 #define MWIFIEX_EVTBD_MASK			0x07
+=======
+#define MWIFIEX_MAX_EVT_BD			0x08
+#define MWIFIEX_EVTBD_MASK			0x0f
+>>>>>>> v3.18
 =======
 #define MWIFIEX_MAX_EVT_BD			0x08
 #define MWIFIEX_EVTBD_MASK			0x0f
@@ -79,6 +88,10 @@
 #define CPU_INTR_SLEEP_CFM_DONE			BIT(2)
 #define CPU_INTR_RESET					BIT(3)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CPU_INTR_EVENT_DONE				BIT(5)
+>>>>>>> v3.18
 =======
 #define CPU_INTR_EVENT_DONE				BIT(5)
 >>>>>>> v3.18
@@ -111,6 +124,11 @@
 /* FW awake cookie after FW ready */
 #define FW_AWAKE_COOKIE						(0xAA55AA55)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MWIFIEX_DEF_SLEEP_COOKIE			0xBEEFBEEF
+#define MWIFIEX_MAX_DELAY_COUNT				5
+>>>>>>> v3.18
 =======
 #define MWIFIEX_DEF_SLEEP_COOKIE			0xBEEFBEEF
 #define MWIFIEX_MAX_DELAY_COUNT				5
@@ -146,6 +164,12 @@ struct mwifiex_pcie_card_reg {
 	u8 pfu_enabled;
 	u8 sleep_cookie;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 fw_dump_ctrl;
+	u16 fw_dump_start;
+	u16 fw_dump_end;
+>>>>>>> v3.18
 =======
 	u16 fw_dump_ctrl;
 	u16 fw_dump_start;
@@ -214,6 +238,12 @@ static const struct mwifiex_pcie_card_reg mwifiex_reg_8897 = {
 	.pfu_enabled = 1,
 	.sleep_cookie = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.fw_dump_ctrl = 0xcf4,
+	.fw_dump_start = 0xcf8,
+	.fw_dump_end = 0xcff
+>>>>>>> v3.18
 =======
 	.fw_dump_ctrl = 0xcf4,
 	.fw_dump_start = 0xcf8,
@@ -226,6 +256,11 @@ struct mwifiex_pcie_device {
 	const struct mwifiex_pcie_card_reg *reg;
 	u16 blksz_fw_dl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 tx_buf_size;
+	bool supports_fw_dump;
+>>>>>>> v3.18
 =======
 	u16 tx_buf_size;
 	bool supports_fw_dump;
@@ -237,6 +272,11 @@ static const struct mwifiex_pcie_device mwifiex_pcie8766 = {
 	.reg            = &mwifiex_reg_8766,
 	.blksz_fw_dl = MWIFIEX_PCIE_BLOCK_SIZE_FW_DNLD,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.tx_buf_size = MWIFIEX_TX_DATA_BUF_SIZE_2K,
+	.supports_fw_dump = false,
+>>>>>>> v3.18
 =======
 	.tx_buf_size = MWIFIEX_TX_DATA_BUF_SIZE_2K,
 	.supports_fw_dump = false,
@@ -248,6 +288,11 @@ static const struct mwifiex_pcie_device mwifiex_pcie8897 = {
 	.reg            = &mwifiex_reg_8897,
 	.blksz_fw_dl = MWIFIEX_PCIE_BLOCK_SIZE_FW_DNLD,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.tx_buf_size = MWIFIEX_TX_DATA_BUF_SIZE_4K,
+	.supports_fw_dump = true,
+>>>>>>> v3.18
 =======
 	.tx_buf_size = MWIFIEX_TX_DATA_BUF_SIZE_4K,
 	.supports_fw_dump = true,
@@ -363,6 +408,10 @@ mwifiex_pcie_txbd_not_full(struct pcie_service_card *card)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

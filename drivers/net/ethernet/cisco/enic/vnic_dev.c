@@ -176,6 +176,10 @@ unsigned int vnic_dev_get_res_count(struct vnic_dev *vdev,
 	return vdev->res[type].count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(vnic_dev_get_res_count);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(vnic_dev_get_res_count);
 >>>>>>> v3.18
@@ -198,6 +202,10 @@ void __iomem *vnic_dev_get_res(struct vnic_dev *vdev, enum vnic_res_type type,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(vnic_dev_get_res);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(vnic_dev_get_res);
 >>>>>>> v3.18
@@ -319,7 +327,11 @@ static int _vnic_dev_cmd(struct vnic_dev *vdev, enum vnic_devcmd_cmd cmd,
 				if (err == ERR_EINVAL &&
 				    cmd == CMD_CAPABILITY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					return err;
+=======
+					return -err;
+>>>>>>> v3.18
 =======
 					return -err;
 >>>>>>> v3.18
@@ -328,7 +340,11 @@ static int _vnic_dev_cmd(struct vnic_dev *vdev, enum vnic_devcmd_cmd cmd,
 					pr_err("Error %d devcmd %d\n",
 						err, _CMD_N(cmd));
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return err;
+=======
+				return -err;
+>>>>>>> v3.18
 =======
 				return -err;
 >>>>>>> v3.18
@@ -447,6 +463,7 @@ int vnic_dev_fw_info(struct vnic_dev *vdev,
 
 	if (!vdev->fw_info) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vdev->fw_info = pci_alloc_consistent(vdev->pdev,
 			sizeof(struct vnic_devcmd_fw_info),
 			&vdev->fw_info_pa);
@@ -456,12 +473,17 @@ int vnic_dev_fw_info(struct vnic_dev *vdev,
 		memset(vdev->fw_info, 0, sizeof(struct vnic_devcmd_fw_info));
 
 =======
+=======
+>>>>>>> v3.18
 		vdev->fw_info = pci_zalloc_consistent(vdev->pdev,
 						      sizeof(struct vnic_devcmd_fw_info),
 						      &vdev->fw_info_pa);
 		if (!vdev->fw_info)
 			return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		a0 = vdev->fw_info_pa;
 		a1 = sizeof(struct vnic_devcmd_fw_info);
@@ -681,7 +703,11 @@ int vnic_dev_packet_filter(struct vnic_dev *vdev, int directed, int multicast,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vnic_dev_add_addr(struct vnic_dev *vdev, u8 *addr)
+=======
+int vnic_dev_add_addr(struct vnic_dev *vdev, const u8 *addr)
+>>>>>>> v3.18
 =======
 int vnic_dev_add_addr(struct vnic_dev *vdev, const u8 *addr)
 >>>>>>> v3.18
@@ -702,7 +728,11 @@ int vnic_dev_add_addr(struct vnic_dev *vdev, const u8 *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vnic_dev_del_addr(struct vnic_dev *vdev, u8 *addr)
+=======
+int vnic_dev_del_addr(struct vnic_dev *vdev, const u8 *addr)
+>>>>>>> v3.18
 =======
 int vnic_dev_del_addr(struct vnic_dev *vdev, const u8 *addr)
 >>>>>>> v3.18
@@ -881,8 +911,12 @@ int vnic_dev_intr_coal_timer_info(struct vnic_dev *vdev)
 	if ((err == ERR_ECMDUNKNOWN) ||
 		(!err && !(vdev->args[0] && vdev->args[1] && vdev->args[2]))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("Using default conversion factor for "
 			"interrupt coalesce timer\n");
+=======
+		pr_warn("Using default conversion factor for interrupt coalesce timer\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Using default conversion factor for interrupt coalesce timer\n");
 >>>>>>> v3.18
@@ -980,6 +1014,10 @@ void vnic_dev_unregister(struct vnic_dev *vdev)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(vnic_dev_unregister);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(vnic_dev_unregister);
 >>>>>>> v3.18
@@ -1011,7 +1049,10 @@ err_out:
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(vnic_dev_register);
 
 struct pci_dev *vnic_dev_get_pdev(struct vnic_dev *vdev)
@@ -1019,6 +1060,9 @@ struct pci_dev *vnic_dev_get_pdev(struct vnic_dev *vdev)
 	return vdev->pdev;
 }
 EXPORT_SYMBOL(vnic_dev_get_pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int vnic_dev_init_prov2(struct vnic_dev *vdev, u8 *buf, u32 len)
@@ -1090,7 +1134,10 @@ int vnic_dev_set_mac_addr(struct vnic_dev *vdev, u8 *mac_addr)
 	return vnic_dev_cmd(vdev, CMD_SET_MAC_ADDR, &a0, &a1, wait);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* vnic_dev_classifier: Add/Delete classifier entries
  * @vdev: vdev of the device
@@ -1152,4 +1199,7 @@ int vnic_dev_classifier(struct vnic_dev *vdev, u8 cmd, u16 *entry,
 
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

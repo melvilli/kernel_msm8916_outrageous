@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -75,6 +85,10 @@
 #include "iwl-debug.h"
 #include "iwl-io.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "iwl-prph.h"
+>>>>>>> v3.18
 =======
 #include "iwl-prph.h"
 >>>>>>> v3.18
@@ -91,12 +105,18 @@ int iwl_mvm_send_cmd(struct iwl_mvm *mvm, struct iwl_host_cmd *cmd)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_IWLWIFI_DEBUGFS) && defined(CONFIG_PM_SLEEP)
 	if (WARN_ON(mvm->d3_test_active))
 		return -EIO;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Synchronous commands from this op-mode must hold
@@ -148,12 +168,18 @@ int iwl_mvm_send_cmd_status(struct iwl_mvm *mvm, struct iwl_host_cmd *cmd,
 	lockdep_assert_held(&mvm->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_IWLWIFI_DEBUGFS) && defined(CONFIG_PM_SLEEP)
 	if (WARN_ON(mvm->d3_test_active))
 		return -EIO;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Only synchronous commands can wait for status,
@@ -164,7 +190,11 @@ int iwl_mvm_send_cmd_status(struct iwl_mvm *mvm, struct iwl_host_cmd *cmd,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd->flags |= CMD_SYNC | CMD_WANT_SKB;
+=======
+	cmd->flags |= CMD_WANT_SKB;
+>>>>>>> v3.18
 =======
 	cmd->flags |= CMD_WANT_SKB;
 >>>>>>> v3.18
@@ -193,8 +223,13 @@ int iwl_mvm_send_cmd_status(struct iwl_mvm *mvm, struct iwl_host_cmd *cmd,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	resp_len = le32_to_cpu(pkt->len_n_flags) & FH_RSCSR_FRAME_SIZE_MSK;
 	if (WARN_ON_ONCE(resp_len != sizeof(pkt->hdr) + sizeof(*resp))) {
+=======
+	resp_len = iwl_rx_packet_payload_len(pkt);
+	if (WARN_ON_ONCE(resp_len != sizeof(*resp))) {
+>>>>>>> v3.18
 =======
 	resp_len = iwl_rx_packet_payload_len(pkt);
 	if (WARN_ON_ONCE(resp_len != sizeof(*resp))) {
@@ -319,8 +354,13 @@ u8 iwl_mvm_next_antenna(struct iwl_mvm *mvm, u8 valid, u8 last_idx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct {
 	char *name;
+=======
+static const struct {
+	const char *name;
+>>>>>>> v3.18
 =======
 static const struct {
 	const char *name;
@@ -411,10 +451,13 @@ struct iwl_error_event_table {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ERROR_START_OFFSET  (1 * sizeof(u32))
 #define ERROR_ELEM_SIZE     (7 * sizeof(u32))
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * UMAC error struct - relevant starting from family 8000 chip.
  * Note: This structure is read from the device with IO accesses,
@@ -485,6 +528,9 @@ static void iwl_mvm_dump_umac_error_log(struct iwl_mvm *mvm)
 	IWL_ERR(mvm, "0x%08X | isr status reg\n", table.nic_isr_pref);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void iwl_mvm_dump_nic_error_log(struct iwl_mvm *mvm)
 {
@@ -502,7 +548,11 @@ void iwl_mvm_dump_nic_error_log(struct iwl_mvm *mvm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (base < 0x800000 || base >= 0x80C000) {
+=======
+	if (base < 0x800000) {
+>>>>>>> v3.18
 =======
 	if (base < 0x800000) {
 >>>>>>> v3.18
@@ -523,6 +573,11 @@ void iwl_mvm_dump_nic_error_log(struct iwl_mvm *mvm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Do not change this output - scripts rely on it */
+
+>>>>>>> v3.18
 =======
 	/* Do not change this output - scripts rely on it */
 
@@ -570,7 +625,10 @@ void iwl_mvm_dump_nic_error_log(struct iwl_mvm *mvm)
 	IWL_ERR(mvm, "0x%08X | timestamp\n", table.u_timestamp);
 	IWL_ERR(mvm, "0x%08X | flow_handler\n", table.flow_handler);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (mvm->support_umac_log)
 		iwl_mvm_dump_umac_error_log(mvm);
@@ -620,6 +678,9 @@ void iwl_mvm_disable_txq(struct iwl_mvm *mvm, int queue)
 			IWL_ERR(mvm, "Failed to disable queue %d (ret=%d)\n",
 				queue, ret);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -634,8 +695,12 @@ void iwl_mvm_disable_txq(struct iwl_mvm *mvm, int queue)
  * progress.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int iwl_mvm_send_lq_cmd(struct iwl_mvm *mvm, struct iwl_lq_cmd *lq,
 			u8 flags, bool init)
+=======
+int iwl_mvm_send_lq_cmd(struct iwl_mvm *mvm, struct iwl_lq_cmd *lq, bool init)
+>>>>>>> v3.18
 =======
 int iwl_mvm_send_lq_cmd(struct iwl_mvm *mvm, struct iwl_lq_cmd *lq, bool init)
 >>>>>>> v3.18
@@ -644,7 +709,11 @@ int iwl_mvm_send_lq_cmd(struct iwl_mvm *mvm, struct iwl_lq_cmd *lq, bool init)
 		.id = LQ_CMD,
 		.len = { sizeof(struct iwl_lq_cmd), },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = flags,
+=======
+		.flags = init ? 0 : CMD_ASYNC,
+>>>>>>> v3.18
 =======
 		.flags = init ? 0 : CMD_ASYNC,
 >>>>>>> v3.18
@@ -655,12 +724,15 @@ int iwl_mvm_send_lq_cmd(struct iwl_mvm *mvm, struct iwl_lq_cmd *lq, bool init)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON(init && (cmd.flags & CMD_ASYNC)))
 		return -EINVAL;
 
 	return iwl_mvm_send_cmd(mvm, &cmd);
 }
 =======
+=======
+>>>>>>> v3.18
 	return iwl_mvm_send_cmd(mvm, &cmd);
 }
 
@@ -797,4 +869,7 @@ bool iwl_mvm_is_idle(struct iwl_mvm *mvm)
 
 	return idle;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

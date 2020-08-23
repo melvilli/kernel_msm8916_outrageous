@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 * USB FTDI client driver for Elan Digital Systems's Uxxx adapters
 *
 * Copyright(C) 2006 Elan Digital Systems Limited
@@ -37,6 +38,8 @@
 *
 */
 =======
+=======
+>>>>>>> v3.18
  * USB FTDI client driver for Elan Digital Systems's Uxxx adapters
  *
  * Copyright(C) 2006 Elan Digital Systems Limited
@@ -76,6 +79,9 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/errno.h>
@@ -98,8 +104,13 @@ MODULE_LICENSE("GPL");
 static bool distrust_firmware = 1;
 module_param(distrust_firmware, bool, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_PARM_DESC(distrust_firmware, "true to distrust firmware power/overcurren"
         "t setup");
+=======
+MODULE_PARM_DESC(distrust_firmware,
+		 "true to distrust firmware power/overcurrent setup");
+>>>>>>> v3.18
 =======
 MODULE_PARM_DESC(distrust_firmware,
 		 "true to distrust firmware power/overcurrent setup");
@@ -110,9 +121,15 @@ static struct workqueue_struct *command_queue;
 static struct workqueue_struct *respond_queue;
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 * ftdi_module_lock exists to protect access to global variables
 *
 */
+=======
+ * ftdi_module_lock exists to protect access to global variables
+ *
+ */
+>>>>>>> v3.18
 =======
  * ftdi_module_lock exists to protect access to global variables
  *
@@ -123,8 +140,13 @@ static int ftdi_instances = 0;
 static struct list_head ftdi_static_list;
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 * end of the global variables protected by ftdi_module_lock
 */
+=======
+ * end of the global variables protected by ftdi_module_lock
+ */
+>>>>>>> v3.18
 =======
  * end of the global variables protected by ftdi_module_lock
  */
@@ -134,17 +156,23 @@ static struct list_head ftdi_static_list;
 #include <linux/usb/hcd.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* FIXME ohci.h is ONLY for internal use by the OHCI driver.
 	 * If you're going to try stuff like this, you need to split
 	 * out shareable stuff (register declarations?) into its own
 	 * file, maybe name <linux/usb/ohci.h>
 	 */
 =======
+=======
+>>>>>>> v3.18
 /* FIXME ohci.h is ONLY for internal use by the OHCI driver.
  * If you're going to try stuff like this, you need to split
  * out shareable stuff (register declarations?) into its own
  * file, maybe name <linux/usb/ohci.h>
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "../host/ohci.h"
@@ -154,8 +182,13 @@ static struct list_head ftdi_static_list;
 /* table of devices that work with this driver*/
 static const struct usb_device_id ftdi_elan_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
         {USB_DEVICE(USB_FTDI_ELAN_VENDOR_ID, USB_FTDI_ELAN_PRODUCT_ID)},
         { /* Terminating entry */ }
+=======
+	{USB_DEVICE(USB_FTDI_ELAN_VENDOR_ID, USB_FTDI_ELAN_PRODUCT_ID)},
+	{ /* Terminating entry */ }
+>>>>>>> v3.18
 =======
 	{USB_DEVICE(USB_FTDI_ELAN_VENDOR_ID, USB_FTDI_ELAN_PRODUCT_ID)},
 	{ /* Terminating entry */ }
@@ -164,6 +197,7 @@ static const struct usb_device_id ftdi_elan_table[] = {
 
 MODULE_DEVICE_TABLE(usb, ftdi_elan_table);
 /* only the jtag(firmware upgrade device) interface requires
+<<<<<<< HEAD
 <<<<<<< HEAD
 * a device file and corresponding minor number, but the
 * interface is created unconditionally - I suppose it could
@@ -176,6 +210,8 @@ MODULE_DEVICE_TABLE(usb, ftdi_elan_table);
 * code and recompile
 */
 =======
+=======
+>>>>>>> v3.18
  * a device file and corresponding minor number, but the
  * interface is created unconditionally - I suppose it could
  * be configured or not according to a module parameter.
@@ -186,12 +222,16 @@ MODULE_DEVICE_TABLE(usb, ftdi_elan_table);
  * really requires more than 8 devices, then they can frig the
  * code and recompile
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define USB_FTDI_ELAN_MINOR_BASE 192
 #define COMMAND_BITS 5
 #define COMMAND_SIZE (1<<COMMAND_BITS)
 #define COMMAND_MASK (COMMAND_SIZE-1)
 struct u132_command {
+<<<<<<< HEAD
 <<<<<<< HEAD
         u8 header;
         u16 length;
@@ -201,6 +241,8 @@ struct u132_command {
         int follows;
         void *buffer;
 =======
+=======
+>>>>>>> v3.18
 	u8 header;
 	u16 length;
 	u8 address;
@@ -208,12 +250,16 @@ struct u132_command {
 	u32 value;
 	int follows;
 	void *buffer;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #define RESPOND_BITS 5
 #define RESPOND_SIZE (1<<RESPOND_BITS)
 #define RESPOND_MASK (RESPOND_SIZE-1)
 struct u132_respond {
+<<<<<<< HEAD
 <<<<<<< HEAD
         u8 header;
         u8 address;
@@ -302,6 +348,8 @@ static void ftdi_elan_delete(struct kref *kref)
         kfree(ftdi->bulk_in_buffer);
         ftdi->bulk_in_buffer = NULL;
 =======
+=======
+>>>>>>> v3.18
 	u8 header;
 	u8 address;
 	u32 *value;
@@ -388,13 +436,20 @@ static void ftdi_elan_delete(struct kref *kref)
 	mutex_unlock(&ftdi_module_lock);
 	kfree(ftdi->bulk_in_buffer);
 	ftdi->bulk_in_buffer = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void ftdi_elan_put_kref(struct usb_ftdi *ftdi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         kref_put(&ftdi->kref, ftdi_elan_delete);
+=======
+	kref_put(&ftdi->kref, ftdi_elan_delete);
+>>>>>>> v3.18
 =======
 	kref_put(&ftdi->kref, ftdi_elan_delete);
 >>>>>>> v3.18
@@ -403,7 +458,11 @@ static void ftdi_elan_put_kref(struct usb_ftdi *ftdi)
 static void ftdi_elan_get_kref(struct usb_ftdi *ftdi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         kref_get(&ftdi->kref);
+=======
+	kref_get(&ftdi->kref);
+>>>>>>> v3.18
 =======
 	kref_get(&ftdi->kref);
 >>>>>>> v3.18
@@ -412,7 +471,11 @@ static void ftdi_elan_get_kref(struct usb_ftdi *ftdi)
 static void ftdi_elan_init_kref(struct usb_ftdi *ftdi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         kref_init(&ftdi->kref);
+=======
+	kref_init(&ftdi->kref);
+>>>>>>> v3.18
 =======
 	kref_init(&ftdi->kref);
 >>>>>>> v3.18
@@ -433,8 +496,13 @@ static void ftdi_status_queue_work(struct usb_ftdi *ftdi, unsigned int delta)
 static void ftdi_status_cancel_work(struct usb_ftdi *ftdi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (cancel_delayed_work(&ftdi->status_work))
                 kref_put(&ftdi->kref, ftdi_elan_delete);
+=======
+	if (cancel_delayed_work(&ftdi->status_work))
+		kref_put(&ftdi->kref, ftdi_elan_delete);
+>>>>>>> v3.18
 =======
 	if (cancel_delayed_work(&ftdi->status_work))
 		kref_put(&ftdi->kref, ftdi_elan_delete);
@@ -456,6 +524,7 @@ static void ftdi_command_queue_work(struct usb_ftdi *ftdi, unsigned int delta)
 static void ftdi_command_cancel_work(struct usb_ftdi *ftdi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (cancel_delayed_work(&ftdi->command_work))
                 kref_put(&ftdi->kref, ftdi_elan_delete);
 }
@@ -463,12 +532,17 @@ static void ftdi_command_cancel_work(struct usb_ftdi *ftdi)
 static void ftdi_response_requeue_work(struct usb_ftdi *ftdi,
         unsigned int delta)
 =======
+=======
+>>>>>>> v3.18
 	if (cancel_delayed_work(&ftdi->command_work))
 		kref_put(&ftdi->kref, ftdi_elan_delete);
 }
 
 static void ftdi_response_requeue_work(struct usb_ftdi *ftdi,
 				       unsigned int delta)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (!queue_delayed_work(respond_queue, &ftdi->respond_work, delta))
@@ -484,8 +558,13 @@ static void ftdi_respond_queue_work(struct usb_ftdi *ftdi, unsigned int delta)
 static void ftdi_response_cancel_work(struct usb_ftdi *ftdi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (cancel_delayed_work(&ftdi->respond_work))
                 kref_put(&ftdi->kref, ftdi_elan_delete);
+=======
+	if (cancel_delayed_work(&ftdi->respond_work))
+		kref_put(&ftdi->kref, ftdi_elan_delete);
+>>>>>>> v3.18
 =======
 	if (cancel_delayed_work(&ftdi->respond_work))
 		kref_put(&ftdi->kref, ftdi_elan_delete);
@@ -495,9 +574,15 @@ static void ftdi_response_cancel_work(struct usb_ftdi *ftdi)
 void ftdi_elan_gone_away(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         struct usb_ftdi *ftdi = platform_device_to_usb_ftdi(pdev);
         ftdi->gone_away += 1;
         ftdi_elan_put_kref(ftdi);
+=======
+	struct usb_ftdi *ftdi = platform_device_to_usb_ftdi(pdev);
+	ftdi->gone_away += 1;
+	ftdi_elan_put_kref(ftdi);
+>>>>>>> v3.18
 =======
 	struct usb_ftdi *ftdi = platform_device_to_usb_ftdi(pdev);
 	ftdi->gone_away += 1;
@@ -510,17 +595,23 @@ EXPORT_SYMBOL_GPL(ftdi_elan_gone_away);
 static void ftdi_release_platform_dev(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         dev->parent = NULL;
 }
 
 static void ftdi_elan_do_callback(struct usb_ftdi *ftdi,
         struct u132_target *target, u8 *buffer, int length);
 =======
+=======
+>>>>>>> v3.18
 	dev->parent = NULL;
 }
 
 static void ftdi_elan_do_callback(struct usb_ftdi *ftdi,
 				  struct u132_target *target, u8 *buffer, int length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ftdi_elan_kick_command_queue(struct usb_ftdi *ftdi);
 static void ftdi_elan_kick_respond_queue(struct usb_ftdi *ftdi);
@@ -533,6 +624,7 @@ static int ftdi_elan_command_engine(struct usb_ftdi *ftdi);
 static int ftdi_elan_respond_engine(struct usb_ftdi *ftdi);
 static int ftdi_elan_hcd_init(struct usb_ftdi *ftdi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int result;
         if (ftdi->platform_dev.dev.parent)
@@ -556,6 +648,8 @@ static int ftdi_elan_hcd_init(struct usb_ftdi *ftdi)
         result = platform_device_register(&ftdi->platform_dev);
         return result;
 =======
+=======
+>>>>>>> v3.18
 	int result;
 	if (ftdi->platform_dev.dev.parent)
 		return -EBUSY;
@@ -577,11 +671,15 @@ static int ftdi_elan_hcd_init(struct usb_ftdi *ftdi)
 		 ftdi->platform_dev.name);
 	result = platform_device_register(&ftdi->platform_dev);
 	return result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void ftdi_elan_abandon_completions(struct usb_ftdi *ftdi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         mutex_lock(&ftdi->u132_lock);
         while (ftdi->respond_next > ftdi->respond_head) {
@@ -592,6 +690,8 @@ static void ftdi_elan_abandon_completions(struct usb_ftdi *ftdi)
                 complete(&respond->wait_completion);
         } mutex_unlock(&ftdi->u132_lock);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&ftdi->u132_lock);
 	while (ftdi->respond_next > ftdi->respond_head) {
 		struct u132_respond *respond = &ftdi->respond[RESPOND_MASK &
@@ -600,11 +700,15 @@ static void ftdi_elan_abandon_completions(struct usb_ftdi *ftdi)
 		*respond->value = 0;
 		complete(&respond->wait_completion);
 	} mutex_unlock(&ftdi->u132_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void ftdi_elan_abandon_targets(struct usb_ftdi *ftdi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int ed_number = 4;
         mutex_lock(&ftdi->u132_lock);
@@ -622,6 +726,8 @@ static void ftdi_elan_abandon_targets(struct usb_ftdi *ftdi)
         ftdi->ed_found = 0;
         mutex_unlock(&ftdi->u132_lock);
 =======
+=======
+>>>>>>> v3.18
 	int ed_number = 4;
 	mutex_lock(&ftdi->u132_lock);
 	while (ed_number-- > 0) {
@@ -637,11 +743,15 @@ static void ftdi_elan_abandon_targets(struct usb_ftdi *ftdi)
 	ftdi->expected = 4;
 	ftdi->ed_found = 0;
 	mutex_unlock(&ftdi->u132_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void ftdi_elan_flush_targets(struct usb_ftdi *ftdi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int ed_number = 4;
         mutex_lock(&ftdi->u132_lock);
@@ -698,6 +808,8 @@ static void ftdi_elan_flush_targets(struct usb_ftdi *ftdi)
         ftdi->ed_found = 0;
         mutex_unlock(&ftdi->u132_lock);
 =======
+=======
+>>>>>>> v3.18
 	int ed_number = 4;
 	mutex_lock(&ftdi->u132_lock);
 	while (ed_number-- > 0) {
@@ -752,11 +864,15 @@ static void ftdi_elan_flush_targets(struct usb_ftdi *ftdi)
 	ftdi->expected = 4;
 	ftdi->ed_found = 0;
 	mutex_unlock(&ftdi->u132_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void ftdi_elan_cancel_targets(struct usb_ftdi *ftdi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int ed_number = 4;
         mutex_lock(&ftdi->u132_lock);
@@ -791,6 +907,8 @@ static void ftdi_elan_cancel_targets(struct usb_ftdi *ftdi)
         ftdi->ed_found = 0;
         mutex_unlock(&ftdi->u132_lock);
 =======
+=======
+>>>>>>> v3.18
 	int ed_number = 4;
 	mutex_lock(&ftdi->u132_lock);
 	while (ed_number-- > 0) {
@@ -823,13 +941,20 @@ static void ftdi_elan_cancel_targets(struct usb_ftdi *ftdi)
 	ftdi->expected = 4;
 	ftdi->ed_found = 0;
 	mutex_unlock(&ftdi->u132_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void ftdi_elan_kick_command_queue(struct usb_ftdi *ftdi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         ftdi_command_queue_work(ftdi, 0);
+=======
+	ftdi_command_queue_work(ftdi, 0);
+>>>>>>> v3.18
 =======
 	ftdi_command_queue_work(ftdi, 0);
 >>>>>>> v3.18
@@ -837,6 +962,7 @@ static void ftdi_elan_kick_command_queue(struct usb_ftdi *ftdi)
 
 static void ftdi_elan_command_work(struct work_struct *work)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         struct usb_ftdi *ftdi =
 		container_of(work, struct usb_ftdi, command_work.work);
@@ -856,6 +982,8 @@ static void ftdi_elan_command_work(struct work_struct *work)
                 return;
         }
 =======
+=======
+>>>>>>> v3.18
 	struct usb_ftdi *ftdi =
 		container_of(work, struct usb_ftdi, command_work.work);
 
@@ -873,13 +1001,20 @@ static void ftdi_elan_command_work(struct work_struct *work)
 		ftdi_command_requeue_work(ftdi, msecs_to_jiffies(10));
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void ftdi_elan_kick_respond_queue(struct usb_ftdi *ftdi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         ftdi_respond_queue_work(ftdi, 0);
+=======
+	ftdi_respond_queue_work(ftdi, 0);
+>>>>>>> v3.18
 =======
 	ftdi_respond_queue_work(ftdi, 0);
 >>>>>>> v3.18
@@ -887,6 +1022,7 @@ static void ftdi_elan_kick_respond_queue(struct usb_ftdi *ftdi)
 
 static void ftdi_elan_respond_work(struct work_struct *work)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         struct usb_ftdi *ftdi =
 		container_of(work, struct usb_ftdi, respond_work.work);
@@ -914,6 +1050,8 @@ static void ftdi_elan_respond_work(struct work_struct *work)
                 return;
         }
 =======
+=======
+>>>>>>> v3.18
 	struct usb_ftdi *ftdi =
 		container_of(work, struct usb_ftdi, respond_work.work);
 	if (ftdi->disconnected > 0) {
@@ -939,11 +1077,15 @@ static void ftdi_elan_respond_work(struct work_struct *work)
 		ftdi_response_requeue_work(ftdi, msecs_to_jiffies(10));
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 * the sw_lock is initially held and will be freed
 * after the FTDI has been synchronized
@@ -1041,6 +1183,8 @@ static void ftdi_elan_status_work(struct work_struct *work)
                 return;
         }
 =======
+=======
+>>>>>>> v3.18
  * the sw_lock is initially held and will be freed
  * after the FTDI has been synchronized
  *
@@ -1131,11 +1275,15 @@ static void ftdi_elan_status_work(struct work_struct *work)
 					 msecs_to_jiffies(work_delay_in_msec));
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 * file_operations for the jtag interface
 *
@@ -1143,17 +1291,23 @@ static void ftdi_elan_status_work(struct work_struct *work)
 * and decremented on release()
 */
 =======
+=======
+>>>>>>> v3.18
  * file_operations for the jtag interface
  *
  * the usage count for the device is incremented on open()
  * and decremented on release()
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ftdi_elan_open(struct inode *inode, struct file *file)
 {
 	int subminor;
 	struct usb_interface *interface;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         subminor = iminor(inode);
         interface = usb_find_interface(&ftdi_elan_driver, subminor);
@@ -1176,6 +1330,8 @@ static int ftdi_elan_open(struct inode *inode, struct file *file)
                 }
         }
 =======
+=======
+>>>>>>> v3.18
 	subminor = iminor(inode);
 	interface = usb_find_interface(&ftdi_elan_driver, subminor);
 
@@ -1196,11 +1352,15 @@ static int ftdi_elan_open(struct inode *inode, struct file *file)
 			}
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ftdi_elan_release(struct inode *inode, struct file *file)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         struct usb_ftdi *ftdi = file->private_data;
         if (ftdi == NULL)
@@ -1209,17 +1369,23 @@ static int ftdi_elan_release(struct inode *inode, struct file *file)
         ftdi_elan_put_kref(ftdi);
         return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct usb_ftdi *ftdi = file->private_data;
 	if (ftdi == NULL)
 		return -ENODEV;
 	up(&ftdi->sw_lock);        /* decrement the count on our device */
 	ftdi_elan_put_kref(ftdi);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 *
 * blocking bulk reads are used to get data from the device
@@ -1284,6 +1450,8 @@ static ssize_t ftdi_elan_read(struct file *file, char __user *buffer,
         } else
                 return bytes_read;
 =======
+=======
+>>>>>>> v3.18
  *
  * blocking bulk reads are used to get data from the device
  *
@@ -1346,6 +1514,9 @@ more:if (count > 0) {
 			return retval;
 	} else
 		return bytes_read;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1355,6 +1526,7 @@ static void ftdi_elan_write_bulk_callback(struct urb *urb)
 	int status = urb->status;
 
 	if (status && !(status == -ENOENT || status == -ECONNRESET ||
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    status == -ESHUTDOWN)) {
                 dev_err(&ftdi->udev->dev, "urb=%p write bulk status received: %"
@@ -1390,6 +1562,8 @@ static int fill_buffer_with_all_queued_commands(struct usb_ftdi *ftdi,
         }
         return ed_commands;
 =======
+=======
+>>>>>>> v3.18
 			status == -ESHUTDOWN)) {
 		dev_err(&ftdi->udev->dev,
 			"urb=%p write bulk status received: %d\n", urb, status);
@@ -1423,11 +1597,15 @@ static int fill_buffer_with_all_queued_commands(struct usb_ftdi *ftdi,
 		}
 	}
 	return ed_commands;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ftdi_elan_total_command_size(struct usb_ftdi *ftdi, int command_size)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int total_size = 0;
         int I = command_size;
@@ -1438,6 +1616,8 @@ static int ftdi_elan_total_command_size(struct usb_ftdi *ftdi, int command_size)
                 total_size += 5 + command->follows;
         } return total_size;
 =======
+=======
+>>>>>>> v3.18
 	int total_size = 0;
 	int I = command_size;
 	int i = ftdi->command_head;
@@ -1446,11 +1626,15 @@ static int ftdi_elan_total_command_size(struct usb_ftdi *ftdi, int command_size)
 							      i++];
 		total_size += 5 + command->follows;
 	} return total_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ftdi_elan_command_engine(struct usb_ftdi *ftdi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int retval;
         char *buf;
@@ -1614,6 +1798,8 @@ static char *have_ed_get_response(struct usb_ftdi *ftdi,
         ftdi->ed_found = 0;
         return ftdi->response;
 =======
+=======
+>>>>>>> v3.18
 	int retval;
 	char *buf;
 	int ed_commands;
@@ -1772,11 +1958,15 @@ static char *have_ed_get_response(struct usb_ftdi *ftdi,
 	ftdi->expected = 4;
 	ftdi->ed_found = 0;
 	return ftdi->response;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 * The engine tries to empty the FTDI fifo
 *
@@ -1975,6 +2165,8 @@ static int ftdi_elan_respond_engine(struct usb_ftdi *ftdi)
         } else
                 goto more;
 =======
+=======
+>>>>>>> v3.18
  * The engine tries to empty the FTDI fifo
  *
  * all responses found in the fifo data are dispatched thus
@@ -2167,11 +2359,15 @@ have:if (ftdi->bulk_in_left > 0) {
 		}
 	} else
 		goto more;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 * create a urb, and a buffer for it, and copy the data to the urb
 *
@@ -2181,10 +2377,16 @@ have:if (ftdi->bulk_in_left > 0) {
  *
  */
 >>>>>>> v3.18
+=======
+ * create a urb, and a buffer for it, and copy the data to the urb
+ *
+ */
+>>>>>>> v3.18
 static ssize_t ftdi_elan_write(struct file *file,
 			       const char __user *user_buffer, size_t count,
 			       loff_t *ppos)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int retval = 0;
         struct urb *urb;
@@ -2227,6 +2429,8 @@ static ssize_t ftdi_elan_write(struct file *file,
 exit:
         return count;
 =======
+=======
+>>>>>>> v3.18
 	int retval = 0;
 	struct urb *urb;
 	char *buf;
@@ -2267,6 +2471,9 @@ exit:
 
 exit:
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error_3:
 	usb_free_coherent(ftdi->udev, count, buf, urb->transfer_dma);
@@ -2277,6 +2484,7 @@ error_1:
 }
 
 static const struct file_operations ftdi_elan_fops = {
+<<<<<<< HEAD
 <<<<<<< HEAD
         .owner = THIS_MODULE,
         .llseek = no_llseek,
@@ -2302,6 +2510,8 @@ static struct usb_class_driver ftdi_elan_jtag_class = {
 * lies on the other side of the FTDI chip
 */
 =======
+=======
+>>>>>>> v3.18
 	.owner = THIS_MODULE,
 	.llseek = no_llseek,
 	.read = ftdi_elan_read,
@@ -2325,6 +2535,9 @@ static struct usb_class_driver ftdi_elan_jtag_class = {
  * ELAN FPGA state machgine processor that
  * lies on the other side of the FTDI chip
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define cPCIu132rd 0x0
 #define cPCIu132wr 0x1
@@ -2356,6 +2569,7 @@ static struct usb_class_driver ftdi_elan_jtag_class = {
 #define cCCnotaccessed 0xF
 static int ftdi_elan_write_reg(struct usb_ftdi *ftdi, u32 data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
       wait:if (ftdi->disconnected > 0) {
                 return -ENODEV;
@@ -2455,6 +2669,8 @@ int usb_ftdi_elan_write_pcimem(struct platform_device *pdev, int mem_offset,
         struct usb_ftdi *ftdi = platform_device_to_usb_ftdi(pdev);
         return ftdi_elan_write_pcimem(ftdi, mem_offset, width, data);
 =======
+=======
+>>>>>>> v3.18
 wait:if (ftdi->disconnected > 0) {
 		return -ENODEV;
 	} else {
@@ -2552,6 +2768,9 @@ int usb_ftdi_elan_write_pcimem(struct platform_device *pdev, int mem_offset,
 {
 	struct usb_ftdi *ftdi = platform_device_to_usb_ftdi(pdev);
 	return ftdi_elan_write_pcimem(ftdi, mem_offset, width, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2559,6 +2778,7 @@ int usb_ftdi_elan_write_pcimem(struct platform_device *pdev, int mem_offset,
 EXPORT_SYMBOL_GPL(usb_ftdi_elan_write_pcimem);
 static int ftdi_elan_read_reg(struct usb_ftdi *ftdi, u32 *data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
       wait:if (ftdi->disconnected > 0) {
                 return -ENODEV;
@@ -2696,6 +2916,8 @@ int usb_ftdi_elan_read_pcimem(struct platform_device *pdev, int mem_offset,
         } else
                 return ftdi_elan_read_pcimem(ftdi, mem_offset, width, data);
 =======
+=======
+>>>>>>> v3.18
 wait:if (ftdi->disconnected > 0) {
 		return -ENODEV;
 	} else {
@@ -2831,12 +3053,16 @@ int usb_ftdi_elan_read_pcimem(struct platform_device *pdev, int mem_offset,
 		return -ENODEV;
 	} else
 		return ftdi_elan_read_pcimem(ftdi, mem_offset, width, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 EXPORT_SYMBOL_GPL(usb_ftdi_elan_read_pcimem);
 static int ftdi_elan_edset_setup(struct usb_ftdi *ftdi, u8 ed_number,
+<<<<<<< HEAD
 <<<<<<< HEAD
         void *endp, struct urb *urb, u8 address, u8 ep_number, u8 toggle_bits,
         void (*callback) (void *endp, struct urb *urb, u8 *buf, int len,
@@ -2891,6 +3117,8 @@ int usb_ftdi_elan_edset_setup(struct platform_device *pdev, u8 ed_number,
         return ftdi_elan_edset_setup(ftdi, ed_number, endp, urb, address,
                 ep_number, toggle_bits, callback);
 =======
+=======
+>>>>>>> v3.18
 				 void *endp, struct urb *urb, u8 address, u8 ep_number, u8 toggle_bits,
 				 void (*callback) (void *endp, struct urb *urb, u8 *buf, int len,
 						   int toggle_bits, int error_count, int condition_code, int repeat_number,
@@ -2943,12 +3171,16 @@ int usb_ftdi_elan_edset_setup(struct platform_device *pdev, u8 ed_number,
 	struct usb_ftdi *ftdi = platform_device_to_usb_ftdi(pdev);
 	return ftdi_elan_edset_setup(ftdi, ed_number, endp, urb, address,
 				     ep_number, toggle_bits, callback);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 EXPORT_SYMBOL_GPL(usb_ftdi_elan_edset_setup);
 static int ftdi_elan_edset_input(struct usb_ftdi *ftdi, u8 ed_number,
+<<<<<<< HEAD
 <<<<<<< HEAD
         void *endp, struct urb *urb, u8 address, u8 ep_number, u8 toggle_bits,
         void (*callback) (void *endp, struct urb *urb, u8 *buf, int len,
@@ -3011,6 +3243,8 @@ int usb_ftdi_elan_edset_input(struct platform_device *pdev, u8 ed_number,
         return ftdi_elan_edset_input(ftdi, ed_number, endp, urb, address,
                 ep_number, toggle_bits, callback);
 =======
+=======
+>>>>>>> v3.18
 				 void *endp, struct urb *urb, u8 address, u8 ep_number, u8 toggle_bits,
 				 void (*callback) (void *endp, struct urb *urb, u8 *buf, int len,
 						   int toggle_bits, int error_count, int condition_code, int repeat_number,
@@ -3071,12 +3305,16 @@ int usb_ftdi_elan_edset_input(struct platform_device *pdev, u8 ed_number,
 	struct usb_ftdi *ftdi = platform_device_to_usb_ftdi(pdev);
 	return ftdi_elan_edset_input(ftdi, ed_number, endp, urb, address,
 				     ep_number, toggle_bits, callback);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 EXPORT_SYMBOL_GPL(usb_ftdi_elan_edset_input);
 static int ftdi_elan_edset_empty(struct usb_ftdi *ftdi, u8 ed_number,
+<<<<<<< HEAD
 <<<<<<< HEAD
         void *endp, struct urb *urb, u8 address, u8 ep_number, u8 toggle_bits,
         void (*callback) (void *endp, struct urb *urb, u8 *buf, int len,
@@ -3131,6 +3369,8 @@ int usb_ftdi_elan_edset_empty(struct platform_device *pdev, u8 ed_number,
         return ftdi_elan_edset_empty(ftdi, ed_number, endp, urb, address,
                 ep_number, toggle_bits, callback);
 =======
+=======
+>>>>>>> v3.18
 				 void *endp, struct urb *urb, u8 address, u8 ep_number, u8 toggle_bits,
 				 void (*callback) (void *endp, struct urb *urb, u8 *buf, int len,
 						   int toggle_bits, int error_count, int condition_code, int repeat_number,
@@ -3183,12 +3423,16 @@ int usb_ftdi_elan_edset_empty(struct platform_device *pdev, u8 ed_number,
 	struct usb_ftdi *ftdi = platform_device_to_usb_ftdi(pdev);
 	return ftdi_elan_edset_empty(ftdi, ed_number, endp, urb, address,
 				     ep_number, toggle_bits, callback);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 EXPORT_SYMBOL_GPL(usb_ftdi_elan_edset_empty);
 static int ftdi_elan_edset_output(struct usb_ftdi *ftdi, u8 ed_number,
+<<<<<<< HEAD
 <<<<<<< HEAD
         void *endp, struct urb *urb, u8 address, u8 ep_number, u8 toggle_bits,
         void (*callback) (void *endp, struct urb *urb, u8 *buf, int len,
@@ -3265,6 +3509,8 @@ int usb_ftdi_elan_edset_output(struct platform_device *pdev, u8 ed_number,
         return ftdi_elan_edset_output(ftdi, ed_number, endp, urb, address,
                 ep_number, toggle_bits, callback);
 =======
+=======
+>>>>>>> v3.18
 				  void *endp, struct urb *urb, u8 address, u8 ep_number, u8 toggle_bits,
 				  void (*callback) (void *endp, struct urb *urb, u8 *buf, int len,
 						    int toggle_bits, int error_count, int condition_code, int repeat_number,
@@ -3339,12 +3585,16 @@ int usb_ftdi_elan_edset_output(struct platform_device *pdev, u8 ed_number,
 	struct usb_ftdi *ftdi = platform_device_to_usb_ftdi(pdev);
 	return ftdi_elan_edset_output(ftdi, ed_number, endp, urb, address,
 				      ep_number, toggle_bits, callback);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 EXPORT_SYMBOL_GPL(usb_ftdi_elan_edset_output);
 static int ftdi_elan_edset_single(struct usb_ftdi *ftdi, u8 ed_number,
+<<<<<<< HEAD
 <<<<<<< HEAD
         void *endp, struct urb *urb, u8 address, u8 ep_number, u8 toggle_bits,
         void (*callback) (void *endp, struct urb *urb, u8 *buf, int len,
@@ -3407,6 +3657,8 @@ int usb_ftdi_elan_edset_single(struct platform_device *pdev, u8 ed_number,
         return ftdi_elan_edset_single(ftdi, ed_number, endp, urb, address,
                 ep_number, toggle_bits, callback);
 =======
+=======
+>>>>>>> v3.18
 				  void *endp, struct urb *urb, u8 address, u8 ep_number, u8 toggle_bits,
 				  void (*callback) (void *endp, struct urb *urb, u8 *buf, int len,
 						    int toggle_bits, int error_count, int condition_code, int repeat_number,
@@ -3467,12 +3719,16 @@ int usb_ftdi_elan_edset_single(struct platform_device *pdev, u8 ed_number,
 	struct usb_ftdi *ftdi = platform_device_to_usb_ftdi(pdev);
 	return ftdi_elan_edset_single(ftdi, ed_number, endp, urb, address,
 				      ep_number, toggle_bits, callback);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 EXPORT_SYMBOL_GPL(usb_ftdi_elan_edset_single);
 static int ftdi_elan_edset_flush(struct usb_ftdi *ftdi, u8 ed_number,
+<<<<<<< HEAD
 <<<<<<< HEAD
         void *endp)
 {
@@ -3525,6 +3781,8 @@ int usb_ftdi_elan_edset_flush(struct platform_device *pdev, u8 ed_number,
         struct usb_ftdi *ftdi = platform_device_to_usb_ftdi(pdev);
         return ftdi_elan_edset_flush(ftdi, ed_number, endp);
 =======
+=======
+>>>>>>> v3.18
 				 void *endp)
 {
 	u8 ed = ed_number - 1;
@@ -3575,6 +3833,9 @@ int usb_ftdi_elan_edset_flush(struct platform_device *pdev, u8 ed_number,
 {
 	struct usb_ftdi *ftdi = platform_device_to_usb_ftdi(pdev);
 	return ftdi_elan_edset_flush(ftdi, ed_number, endp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3582,6 +3843,7 @@ int usb_ftdi_elan_edset_flush(struct platform_device *pdev, u8 ed_number,
 EXPORT_SYMBOL_GPL(usb_ftdi_elan_edset_flush);
 static int ftdi_elan_flush_input_fifo(struct usb_ftdi *ftdi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int retry_on_empty = 10;
         int retry_on_timeout = 5;
@@ -3657,6 +3919,8 @@ static int ftdi_elan_flush_input_fifo(struct usb_ftdi *ftdi)
         }
         return -1;
 =======
+=======
+>>>>>>> v3.18
 	int retry_on_empty = 10;
 	int retry_on_timeout = 5;
 	int retry_on_status = 20;
@@ -3726,11 +3990,15 @@ more:{
 		}
 	}
 	return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 * send the long flush sequence
 *
@@ -3772,6 +4040,8 @@ static int ftdi_elan_synchronize_flush(struct usb_ftdi *ftdi)
         usb_free_urb(urb);
         return 0;
 =======
+=======
+>>>>>>> v3.18
  * send the long flush sequence
  *
  */
@@ -3808,11 +4078,15 @@ static int ftdi_elan_synchronize_flush(struct usb_ftdi *ftdi)
 	}
 	usb_free_urb(urb);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 * send the reset sequence
 *
@@ -3856,6 +4130,8 @@ static int ftdi_elan_synchronize_reset(struct usb_ftdi *ftdi)
         usb_free_urb(urb);
         return 0;
 =======
+=======
+>>>>>>> v3.18
  * send the reset sequence
  *
  */
@@ -3894,11 +4170,15 @@ static int ftdi_elan_synchronize_reset(struct usb_ftdi *ftdi)
 	}
 	usb_free_urb(urb);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ftdi_elan_synchronize(struct usb_ftdi *ftdi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int retval;
         int long_stop = 10;
@@ -4028,6 +4308,8 @@ static int ftdi_elan_synchronize(struct usb_ftdi *ftdi)
         dev_err(&ftdi->udev->dev, "failed to synchronize\n");
         return -EFAULT;
 =======
+=======
+>>>>>>> v3.18
 	int retval;
 	int long_stop = 10;
 	int retry_on_timeout = 5;
@@ -4148,11 +4430,15 @@ static int ftdi_elan_synchronize(struct usb_ftdi *ftdi)
 	}
 	dev_err(&ftdi->udev->dev, "failed to synchronize\n");
 	return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ftdi_elan_stuck_waiting(struct usb_ftdi *ftdi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int retry_on_empty = 10;
         int retry_on_timeout = 5;
@@ -4227,6 +4513,8 @@ static int ftdi_elan_stuck_waiting(struct usb_ftdi *ftdi)
         }
         return -1;
 =======
+=======
+>>>>>>> v3.18
 	int retry_on_empty = 10;
 	int retry_on_timeout = 5;
 	int retry_on_status = 50;
@@ -4295,11 +4583,15 @@ more:{
 		}
 	}
 	return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ftdi_elan_checkingPCI(struct usb_ftdi *ftdi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int UxxxStatus = ftdi_elan_read_reg(ftdi, &ftdi->controlreg);
         if (UxxxStatus)
@@ -4337,6 +4629,8 @@ static int ftdi_elan_checkingPCI(struct usb_ftdi *ftdi)
                 }
         }
 =======
+=======
+>>>>>>> v3.18
 	int UxxxStatus = ftdi_elan_read_reg(ftdi, &ftdi->controlreg);
 	if (UxxxStatus)
 		return UxxxStatus;
@@ -4371,11 +4665,15 @@ static int ftdi_elan_checkingPCI(struct usb_ftdi *ftdi)
 			return -ENODEV;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 #define ftdi_read_pcimem(ftdi, member, data) ftdi_elan_read_pcimem(ftdi, \
+<<<<<<< HEAD
 <<<<<<< HEAD
         offsetof(struct ohci_regs, member), 0, data);
 #define ftdi_write_pcimem(ftdi, member, data) ftdi_elan_write_pcimem(ftdi, \
@@ -4586,6 +4884,8 @@ static int ftdi_elan_check_controller(struct usb_ftdi *ftdi, int quirk)
         }
         return devices;
 =======
+=======
+>>>>>>> v3.18
 								   offsetof(struct ohci_regs, member), 0, data);
 #define ftdi_write_pcimem(ftdi, member, data) ftdi_elan_write_pcimem(ftdi, \
 								     offsetof(struct ohci_regs, member), 0, data);
@@ -4793,11 +5093,15 @@ extra:{
 			devices += 1;
 	}
 	return devices;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ftdi_elan_setup_controller(struct usb_ftdi *ftdi, int fn)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         u32 latence_timer;
         int UxxxStatus;
@@ -4855,6 +5159,8 @@ static int ftdi_elan_setup_controller(struct usb_ftdi *ftdi, int fn)
         }
         return 0;
 =======
+=======
+>>>>>>> v3.18
 	u32 latence_timer;
 	int UxxxStatus;
 	u32 pcidata;
@@ -4910,11 +5216,15 @@ static int ftdi_elan_setup_controller(struct usb_ftdi *ftdi, int fn)
 			return UxxxStatus;
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ftdi_elan_close_controller(struct usb_ftdi *ftdi, int fn)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         u32 latence_timer;
         int UxxxStatus;
@@ -4967,6 +5277,8 @@ static int ftdi_elan_close_controller(struct usb_ftdi *ftdi, int fn)
                 return UxxxStatus;
         return 0;
 =======
+=======
+>>>>>>> v3.18
 	u32 latence_timer;
 	int UxxxStatus;
 	u32 pcidata;
@@ -5017,11 +5329,15 @@ static int ftdi_elan_close_controller(struct usb_ftdi *ftdi, int fn)
 	if (UxxxStatus)
 		return UxxxStatus;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ftdi_elan_found_controller(struct usb_ftdi *ftdi, int fn, int quirk)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int result;
         int UxxxStatus;
@@ -5034,6 +5350,8 @@ static int ftdi_elan_found_controller(struct usb_ftdi *ftdi, int fn, int quirk)
                 return UxxxStatus;
         return result;
 =======
+=======
+>>>>>>> v3.18
 	int result;
 	int UxxxStatus;
 	UxxxStatus = ftdi_elan_setup_controller(ftdi, fn);
@@ -5044,11 +5362,15 @@ static int ftdi_elan_found_controller(struct usb_ftdi *ftdi, int fn, int quirk)
 	if (UxxxStatus)
 		return UxxxStatus;
 	return result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ftdi_elan_enumeratePCI(struct usb_ftdi *ftdi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         u32 controlreg;
         u8 sensebits;
@@ -5097,6 +5419,8 @@ static int ftdi_elan_enumeratePCI(struct usb_ftdi *ftdi)
                 return 0;
         else
 =======
+=======
+>>>>>>> v3.18
 	u32 controlreg;
 	u8 sensebits;
 	int UxxxStatus;
@@ -5143,12 +5467,16 @@ static int ftdi_elan_enumeratePCI(struct usb_ftdi *ftdi)
 	if (0x0D == sensebits)
 		return 0;
 	else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return - ENXIO;
 }
 
 static int ftdi_elan_setupOHCI(struct usb_ftdi *ftdi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         int UxxxStatus;
         u32 pcidata;
@@ -5217,6 +5545,8 @@ static int ftdi_elan_setupOHCI(struct usb_ftdi *ftdi)
                 return -ENXIO;
         }
 =======
+=======
+>>>>>>> v3.18
 	int UxxxStatus;
 	u32 pcidata;
 	int reg = 0;
@@ -5283,11 +5613,15 @@ static int ftdi_elan_setupOHCI(struct usb_ftdi *ftdi)
 		ftdi->enumerated = 0;
 		return -ENXIO;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
 * we use only the first bulk-in and bulk-out endpoints
 */
@@ -5389,6 +5723,8 @@ static int ftdi_elan_probe(struct usb_interface *interface,
         }
         return retval;
 =======
+=======
+>>>>>>> v3.18
  * we use only the first bulk-in and bulk-out endpoints
  */
 static int ftdi_elan_probe(struct usb_interface *interface,
@@ -5482,11 +5818,15 @@ error:if (ftdi) {
 		ftdi_elan_put_kref(ftdi);
 	}
 	return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void ftdi_elan_disconnect(struct usb_interface *interface)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         struct usb_ftdi *ftdi = usb_get_intfdata(interface);
         ftdi->disconnected += 1;
@@ -5559,6 +5899,8 @@ static int __init ftdi_elan_init(void)
  err_status_queue:
 	printk(KERN_ERR "%s couldn't create workqueue\n", ftdi_elan_driver.name);
 =======
+=======
+>>>>>>> v3.18
 	struct usb_ftdi *ftdi = usb_get_intfdata(interface);
 	ftdi->disconnected += 1;
 	if (ftdi->class) {
@@ -5627,12 +5969,16 @@ err_command_queue:
 	destroy_workqueue(status_queue);
 err_status_queue:
 	pr_err("%s couldn't create workqueue\n", ftdi_elan_driver.name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return -ENOMEM;
 }
 
 static void __exit ftdi_elan_exit(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
         struct usb_ftdi *ftdi;
         struct usb_ftdi *temp;
@@ -5652,6 +5998,8 @@ static void __exit ftdi_elan_exit(void)
         destroy_workqueue(respond_queue);
         respond_queue = NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct usb_ftdi *ftdi;
 	struct usb_ftdi *temp;
 	usb_deregister(&ftdi_elan_driver);
@@ -5669,6 +6017,9 @@ static void __exit ftdi_elan_exit(void)
 	flush_workqueue(respond_queue);
 	destroy_workqueue(respond_queue);
 	respond_queue = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

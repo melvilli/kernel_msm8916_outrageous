@@ -111,11 +111,14 @@ int pud_huge(pud_t pud)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pmd_huge_support(void)
 {
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct page *follow_huge_pmd(struct mm_struct *mm, unsigned long address,
@@ -182,7 +185,11 @@ new_search:
 			return addr;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vma && (vma->vm_flags & MAP_HUGETLB)) {
+=======
+		if (vma->vm_flags & MAP_HUGETLB) {
+>>>>>>> v3.18
 =======
 		if (vma->vm_flags & MAP_HUGETLB) {
 >>>>>>> v3.18

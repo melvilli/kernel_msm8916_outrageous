@@ -7,11 +7,17 @@
 #include "serialio.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef SERIAL_PORT_DFNS
 #define SERIAL_PORT_DFNS
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void start_serial_interrupt(int irq);
 
@@ -44,7 +50,11 @@ const struct old_serial_port *spk_serial_init(int index)
 	if (synth_request_region(ser->port, 8)) {
 		/* try to take it back. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "Ports not available, trying to steal them\n");
+=======
+		pr_info("Ports not available, trying to steal them\n");
+>>>>>>> v3.18
 =======
 		pr_info("Ports not available, trying to steal them\n");
 >>>>>>> v3.18
@@ -91,7 +101,12 @@ static irqreturn_t synth_readbuf_handler(int irq, void *dev_id)
 /*pr_warn("in IRQ\n"); */
 	int c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
+=======
+
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
@@ -104,7 +119,11 @@ static irqreturn_t synth_readbuf_handler(int irq, void *dev_id)
 /*pr_warn("C = %d\n", c); */
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_unlock(flags);
+=======
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -123,7 +142,11 @@ static void start_serial_interrupt(int irq)
 
 	if (rv)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Unable to request Speakup serial I R Q\n");
+=======
+		pr_err("Unable to request Speakup serial I R Q\n");
+>>>>>>> v3.18
 =======
 		pr_err("Unable to request Speakup serial I R Q\n");
 >>>>>>> v3.18
@@ -158,6 +181,10 @@ int spk_wait_for_xmitr(void)
 {
 	int tmout = SPK_XMITR_TIMEOUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

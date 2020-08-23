@@ -47,9 +47,14 @@ static const struct file_operations r128_driver_fops = {
 	.release = drm_release,
 	.unlocked_ioctl = drm_ioctl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mmap = drm_mmap,
 	.poll = drm_poll,
 	.fasync = drm_fasync,
+=======
+	.mmap = drm_legacy_mmap,
+	.poll = drm_poll,
+>>>>>>> v3.18
 =======
 	.mmap = drm_legacy_mmap,
 	.poll = drm_poll,
@@ -63,7 +68,11 @@ static const struct file_operations r128_driver_fops = {
 static struct drm_driver driver = {
 	.driver_features =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    DRIVER_USE_AGP | DRIVER_USE_MTRR | DRIVER_PCI_DMA | DRIVER_SG |
+=======
+	    DRIVER_USE_AGP | DRIVER_PCI_DMA | DRIVER_SG |
+>>>>>>> v3.18
 =======
 	    DRIVER_USE_AGP | DRIVER_PCI_DMA | DRIVER_SG |
 >>>>>>> v3.18
@@ -73,6 +82,10 @@ static struct drm_driver driver = {
 	.preclose = r128_driver_preclose,
 	.lastclose = r128_driver_lastclose,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_busid = drm_pci_set_busid,
+>>>>>>> v3.18
 =======
 	.set_busid = drm_pci_set_busid,
 >>>>>>> v3.18

@@ -24,6 +24,10 @@ config IXP4XX_ETH
 	depends on ARM && ARCH_IXP4XX && IXP4XX_NPE && IXP4XX_QMGR
 	select PHYLIB
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select NET_PTP_CLASSIFY
+>>>>>>> v3.18
 =======
 	select NET_PTP_CLASSIFY
 >>>>>>> v3.18

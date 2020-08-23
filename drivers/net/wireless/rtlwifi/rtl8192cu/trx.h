@@ -421,7 +421,11 @@ struct sk_buff *rtl8192c_tx_aggregate_hdl(struct ieee80211_hw *,
 void rtl92cu_tx_fill_desc(struct ieee80211_hw *hw,
 			  struct ieee80211_hdr *hdr, u8 *pdesc_tx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct ieee80211_tx_info *info,
+=======
+			  u8 *pbd_desc_tx, struct ieee80211_tx_info *info,
+>>>>>>> v3.18
 =======
 			  u8 *pbd_desc_tx, struct ieee80211_tx_info *info,
 >>>>>>> v3.18

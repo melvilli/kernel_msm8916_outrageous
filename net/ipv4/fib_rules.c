@@ -106,7 +106,10 @@ errout:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool fib4_rule_suppress(struct fib_rule *rule, struct fib_lookup_arg *arg)
 {
 	struct fib_result *result = (struct fib_result *) arg->result;
@@ -134,6 +137,9 @@ suppress_route:
 		fib_info_put(result->fi);
 	return true;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int fib4_rule_match(struct fib_rule *rule, struct flowi *fl, int flags)
@@ -302,6 +308,10 @@ static const struct fib_rules_ops __net_initconst fib4_rules_ops_template = {
 	.addr_size	= sizeof(u32),
 	.action		= fib4_rule_action,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suppress	= fib4_rule_suppress,
+>>>>>>> v3.18
 =======
 	.suppress	= fib4_rule_suppress,
 >>>>>>> v3.18

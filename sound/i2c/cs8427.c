@@ -151,10 +151,15 @@ static void snd_cs8427_free(struct snd_i2c_device *device)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_cs8427_create(struct snd_i2c_bus *bus,
 		      unsigned char addr,
 		      unsigned int reset_timeout,
 		      struct snd_i2c_device **r_cs8427)
+=======
+int snd_cs8427_init(struct snd_i2c_bus *bus,
+		    struct snd_i2c_device *device)
+>>>>>>> v3.18
 =======
 int snd_cs8427_init(struct snd_i2c_bus *bus,
 		    struct snd_i2c_device *device)
@@ -206,6 +211,7 @@ int snd_cs8427_init(struct snd_i2c_bus *bus,
 	  CS8427_UD | CS8427_EFTUI | CS8427_DETUI,
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 	struct cs8427 *chip;
 	struct snd_i2c_device *device;
@@ -223,10 +229,15 @@ int snd_cs8427_init(struct snd_i2c_bus *bus,
 	device->private_free = snd_cs8427_free;
 	
 =======
+=======
+>>>>>>> v3.18
 	struct cs8427 *chip = device->private_data;
 	int err;
 	unsigned char buf[24];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	snd_i2c_lock(bus);
 	err = snd_cs8427_reg_read(device, CS8427_REG_ID_AND_VER);
@@ -277,11 +288,14 @@ int snd_cs8427_init(struct snd_i2c_bus *bus,
 
 	/* turn on run bit and rock'n'roll */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (reset_timeout < 1)
 		reset_timeout = 1;
 	chip->reset_timeout = reset_timeout;
 	snd_cs8427_reset(device);
 =======
+=======
+>>>>>>> v3.18
 	snd_cs8427_reset(device);
 
 	return 0;
@@ -320,6 +334,9 @@ int snd_cs8427_create(struct snd_i2c_bus *bus,
 	err = snd_cs8427_init(bus, device);
 	if (err)
 		goto __fail;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if 0	// it's nice for read tests
@@ -340,7 +357,10 @@ int snd_cs8427_create(struct snd_i2c_bus *bus,
 
       __fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
       	snd_i2c_unlock(bus);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
       	snd_i2c_device_free(device);

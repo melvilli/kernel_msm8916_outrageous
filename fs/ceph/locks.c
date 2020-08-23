@@ -3,6 +3,10 @@
 #include <linux/file.h>
 #include <linux/namei.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/random.h>
+>>>>>>> v3.18
 =======
 #include <linux/random.h>
 >>>>>>> v3.18
@@ -12,7 +16,10 @@
 #include <linux/ceph/pagelist.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u64 lock_secret;
 
 static inline u64 secure_addr(void *addr)
@@ -32,6 +39,9 @@ void __init ceph_flock_init(void)
 	get_random_bytes(&lock_secret, sizeof(lock_secret));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * Implement fcntl and flock locking functions.
@@ -41,17 +51,23 @@ static int ceph_lock_message(u8 lock_type, u16 operation, struct file *file,
 {
 	struct inode *inode = file_inode(file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ceph_mds_client *mdsc =
 		ceph_sb_to_client(inode->i_sb)->mdsc;
 	struct ceph_mds_request *req;
 	int err;
 	u64 length = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct ceph_mds_client *mdsc = ceph_sb_to_client(inode->i_sb)->mdsc;
 	struct ceph_mds_request *req;
 	int err;
 	u64 length = 0;
 	u64 owner;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	req = ceph_mdsc_create_request(mdsc, operation, USE_AUTH_MDS);
@@ -60,6 +76,10 @@ static int ceph_lock_message(u8 lock_type, u16 operation, struct file *file,
 	req->r_inode = inode;
 	ihold(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	req->r_num_caps = 1;
+>>>>>>> v3.18
 =======
 	req->r_num_caps = 1;
 >>>>>>> v3.18
@@ -70,6 +90,7 @@ static int ceph_lock_message(u8 lock_type, u16 operation, struct file *file,
 	else
 		length = fl->fl_end - fl->fl_start + 1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dout("ceph_lock_message: rule: %d, op: %d, pid: %llu, start: %llu, "
 	     "length: %llu, wait: %d, type: %d", (int)lock_type,
@@ -84,6 +105,8 @@ static int ceph_lock_message(u8 lock_type, u16 operation, struct file *file,
 	req->r_args.filelock_change.pid_namespace =
 		cpu_to_le64((u64)(unsigned long)fl->fl_nspid);
 =======
+=======
+>>>>>>> v3.18
 	owner = secure_addr(fl->fl_owner);
 
 	dout("ceph_lock_message: rule: %d, op: %d, owner: %llx, pid: %llu, "
@@ -95,6 +118,9 @@ static int ceph_lock_message(u8 lock_type, u16 operation, struct file *file,
 	req->r_args.filelock_change.type = cmd;
 	req->r_args.filelock_change.owner = cpu_to_le64(owner);
 	req->r_args.filelock_change.pid = cpu_to_le64((u64)fl->fl_pid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	req->r_args.filelock_change.start = cpu_to_le64(fl->fl_start);
 	req->r_args.filelock_change.length = cpu_to_le64(length);
@@ -103,7 +129,11 @@ static int ceph_lock_message(u8 lock_type, u16 operation, struct file *file,
 	err = ceph_mdsc_do_request(mdsc, inode, req);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ( operation == CEPH_MDS_OP_GETFILELOCK){
+=======
+	if (operation == CEPH_MDS_OP_GETFILELOCK) {
+>>>>>>> v3.18
 =======
 	if (operation == CEPH_MDS_OP_GETFILELOCK) {
 >>>>>>> v3.18
@@ -144,6 +174,7 @@ int ceph_lock(struct file *file, int cmd, struct file_lock *fl)
 	u16 op = CEPH_MDS_OP_SETFILELOCK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fl->fl_nspid = get_pid(task_tgid(current));
 	dout("ceph_lock, fl_pid:%d", fl->fl_pid);
 
@@ -153,6 +184,8 @@ int ceph_lock(struct file *file, int cmd, struct file_lock *fl)
 	if (F_GETLK == cmd)
 		op = CEPH_MDS_OP_GETFILELOCK;
 =======
+=======
+>>>>>>> v3.18
 	if (!(fl->fl_flags & FL_POSIX))
 		return -ENOLCK;
 	/* No mandatory locks */
@@ -166,6 +199,9 @@ int ceph_lock(struct file *file, int cmd, struct file_lock *fl)
 		op = CEPH_MDS_OP_GETFILELOCK;
 	else if (IS_SETLKW(cmd))
 		wait = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (F_RDLCK == fl->fl_type)
@@ -178,7 +214,11 @@ int ceph_lock(struct file *file, int cmd, struct file_lock *fl)
 	err = ceph_lock_message(CEPH_LOCK_FCNTL, op, file, lock_cmd, wait, fl);
 	if (!err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ( op != CEPH_MDS_OP_GETFILELOCK ){
+=======
+		if (op != CEPH_MDS_OP_GETFILELOCK) {
+>>>>>>> v3.18
 =======
 		if (op != CEPH_MDS_OP_GETFILELOCK) {
 >>>>>>> v3.18
@@ -208,6 +248,7 @@ int ceph_flock(struct file *file, int cmd, struct file_lock *fl)
 	u8 lock_cmd;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 wait = 1;
 
 	fl->fl_nspid = get_pid(task_tgid(current));
@@ -223,6 +264,8 @@ int ceph_flock(struct file *file, int cmd, struct file_lock *fl)
 		lock_cmd = CEPH_LOCK_SHARED;
 	else if (LOCK_EX == cmd)
 =======
+=======
+>>>>>>> v3.18
 	u8 wait = 0;
 
 	if (!(fl->fl_flags & FL_FLOCK))
@@ -239,6 +282,9 @@ int ceph_flock(struct file *file, int cmd, struct file_lock *fl)
 	if (F_RDLCK == fl->fl_type)
 		lock_cmd = CEPH_LOCK_SHARED;
 	else if (F_WRLCK == fl->fl_type)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lock_cmd = CEPH_LOCK_EXCL;
 	else
@@ -265,7 +311,11 @@ int ceph_flock(struct file *file, int cmd, struct file_lock *fl)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Must be called with BKL already held. Fills in the passed
+=======
+ * Must be called with lock_flocks() already held. Fills in the passed
+>>>>>>> v3.18
 =======
  * Must be called with lock_flocks() already held. Fills in the passed
 >>>>>>> v3.18
@@ -292,7 +342,11 @@ void ceph_count_locks(struct inode *inode, int *fcntl_count, int *flock_count)
 /**
  * Encode the flock and fcntl locks for the given inode into the ceph_filelock
 <<<<<<< HEAD
+<<<<<<< HEAD
  * array. Must be called with lock_flocks() already held.
+=======
+ * array. Must be called with inode->i_lock already held.
+>>>>>>> v3.18
 =======
  * array. Must be called with inode->i_lock already held.
 >>>>>>> v3.18
@@ -384,6 +438,7 @@ int lock_to_ceph_filelock(struct file_lock *lock,
 {
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	cephlock->start = cpu_to_le64(lock->fl_start);
 	cephlock->length = cpu_to_le64(lock->fl_end - lock->fl_start + 1);
@@ -392,11 +447,16 @@ int lock_to_ceph_filelock(struct file_lock *lock,
 	cephlock->pid_namespace =
 	        cpu_to_le64((u64)(unsigned long)lock->fl_nspid);
 =======
+=======
+>>>>>>> v3.18
 	cephlock->start = cpu_to_le64(lock->fl_start);
 	cephlock->length = cpu_to_le64(lock->fl_end - lock->fl_start + 1);
 	cephlock->client = cpu_to_le64(0);
 	cephlock->pid = cpu_to_le64((u64)lock->fl_pid);
 	cephlock->owner = cpu_to_le64(secure_addr(lock->fl_owner));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (lock->fl_type) {

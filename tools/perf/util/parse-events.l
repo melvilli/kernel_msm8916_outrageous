@@ -43,6 +43,7 @@ static int raw(yyscan_t scanner)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sh_raw(yyscan_t scanner)
 {
 	YYSTYPE *yylval = parse_events_get_lval(scanner);
@@ -55,21 +56,30 @@ static int fab_raw(yyscan_t scanner)
 =======
 static int str(yyscan_t scanner, int token)
 >>>>>>> v3.18
+=======
+static int str(yyscan_t scanner, int token)
+>>>>>>> v3.18
 {
 	YYSTYPE *yylval = parse_events_get_lval(scanner);
 	char *text = parse_events_get_text(scanner);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return __value(yylval, text + 2, 16, PE_FAB_RAW);
 }
 
 static int str(yyscan_t scanner, int token)
 =======
+=======
+>>>>>>> v3.18
 	yylval->str = strdup(text);
 	return token;
 }
 
 static int pmu_str_check(yyscan_t scanner)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	YYSTYPE *yylval = parse_events_get_lval(scanner);
@@ -77,8 +87,11 @@ static int pmu_str_check(yyscan_t scanner)
 
 	yylval->str = strdup(text);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return token;
 =======
+=======
+>>>>>>> v3.18
 	switch (perf_pmu__parse_check(text)) {
 		case PMU_EVENT_SYMBOL_PREFIX:
 			return PE_PMU_EVENT_PRE;
@@ -89,6 +102,9 @@ static int pmu_str_check(yyscan_t scanner)
 		default:
 			return PE_NAME;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -124,7 +140,12 @@ num_raw_hex	[a-fA-F0-9]+
 name		[a-zA-Z_*?][a-zA-Z0-9_*?]*
 name_minus	[a-zA-Z_*?][a-zA-Z0-9\-_*?]*
 <<<<<<< HEAD
+<<<<<<< HEAD
 modifier_event	[ukhpGH]+
+=======
+/* If you add a modifier you need to update check_modifier() */
+modifier_event	[ukhpGHSD]+
+>>>>>>> v3.18
 =======
 /* If you add a modifier you need to update check_modifier() */
 modifier_event	[ukhpGHSD]+
@@ -172,7 +193,10 @@ modifier_bp	[rwx]{1,3}
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 <config>{
 config			{ return term(yyscanner, PARSE_EVENTS__TERM_TYPE_CONFIG); }
 config1			{ return term(yyscanner, PARSE_EVENTS__TERM_TYPE_CONFIG1); }
@@ -204,6 +228,9 @@ branch_type		{ return term(yyscanner, PARSE_EVENTS__TERM_TYPE_BRANCH_SAMPLE_TYPE
 <<EOF>>			{ BEGIN(INITIAL); }
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 cpu-cycles|cycles				{ return sym(yyscanner, PERF_TYPE_HARDWARE, PERF_COUNT_HW_CPU_CYCLES); }
 stalled-cycles-frontend|idle-cycles-frontend	{ return sym(yyscanner, PERF_TYPE_HARDWARE, PERF_COUNT_HW_STALLED_CYCLES_FRONTEND); }
@@ -225,7 +252,10 @@ cpu-migrations|migrations			{ return sym(yyscanner, PERF_TYPE_SOFTWARE, PERF_COU
 alignment-faults				{ return sym(yyscanner, PERF_TYPE_SOFTWARE, PERF_COUNT_SW_ALIGNMENT_FAULTS); }
 emulation-faults				{ return sym(yyscanner, PERF_TYPE_SOFTWARE, PERF_COUNT_SW_EMULATION_FAULTS); }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 dummy						{ return sym(yyscanner, PERF_TYPE_SOFTWARE, PERF_COUNT_SW_DUMMY); }
 
 	/*
@@ -237,6 +267,9 @@ cycles-ct					{ return str(yyscanner, PE_KERNEL_PMU_EVENT); }
 cycles-t					{ return str(yyscanner, PE_KERNEL_PMU_EVENT); }
 mem-loads					{ return str(yyscanner, PE_KERNEL_PMU_EVENT); }
 mem-stores					{ return str(yyscanner, PE_KERNEL_PMU_EVENT); }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 L1-dcache|l1-d|l1d|L1-data		|
@@ -254,6 +287,7 @@ speculative-read|speculative-load	|
 refs|Reference|ops|access		|
 misses|miss				{ return str(yyscanner, PE_NAME_CACHE_OP_RESULT); }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <config>{
 config			{ return term(yyscanner, PARSE_EVENTS__TERM_TYPE_CONFIG); }
@@ -275,12 +309,20 @@ rm{num_raw_hex}		{ return fab_raw(yyscanner); }
 mem:			{ BEGIN(mem); return PE_PREFIX_MEM; }
 r{num_raw_hex}		{ return raw(yyscanner); }
 >>>>>>> v3.18
+=======
+mem:			{ BEGIN(mem); return PE_PREFIX_MEM; }
+r{num_raw_hex}		{ return raw(yyscanner); }
+>>>>>>> v3.18
 {num_dec}		{ return value(yyscanner, 10); }
 {num_hex}		{ return value(yyscanner, 16); }
 
 {modifier_event}	{ return str(yyscanner, PE_MODIFIER_EVENT); }
 <<<<<<< HEAD
+<<<<<<< HEAD
 {name}			{ return str(yyscanner, PE_NAME); }
+=======
+{name}			{ return pmu_str_check(yyscanner); }
+>>>>>>> v3.18
 =======
 {name}			{ return pmu_str_check(yyscanner); }
 >>>>>>> v3.18
@@ -292,6 +334,7 @@ r{num_raw_hex}		{ return raw(yyscanner); }
 "}"			{ return '}'; }
 =			{ return '='; }
 \n			{ }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 <mem>{
@@ -312,6 +355,9 @@ r{num_raw_hex}		{ return raw(yyscanner); }
 	 */
 <<EOF>>			{ BEGIN(INITIAL); }
 }
+=======
+.			{ }
+>>>>>>> v3.18
 =======
 .			{ }
 >>>>>>> v3.18

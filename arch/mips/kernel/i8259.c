@@ -43,9 +43,12 @@ static struct irq_chip i8259A_chip = {
 	.irq_unmask		= enable_8259A_irq,
 	.irq_mask_ack		= mask_and_ack_8259A,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC_IRQAFF
 	.irq_set_affinity	= plat_set_irq_affinity,
 #endif /* CONFIG_MIPS_MT_SMTC_IRQAFF */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -184,7 +187,10 @@ handle_real_irq:
 		outb(0x60+irq, PIC_MASTER_CMD); /* 'Specific EOI to master */
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smtc_im_ack_irq(irq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	raw_spin_unlock_irqrestore(&i8259A_lock, flags);

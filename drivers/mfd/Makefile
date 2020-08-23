@@ -9,6 +9,10 @@ obj-$(CONFIG_MFD_88PM805)	+= 88pm805.o 88pm80x.o
 obj-$(CONFIG_MFD_SM501)		+= sm501.o
 obj-$(CONFIG_MFD_ASIC3)		+= asic3.o tmio_core.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_MFD_BCM590XX)	+= bcm590xx.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MFD_BCM590XX)	+= bcm590xx.o
 >>>>>>> v3.18
@@ -19,6 +23,10 @@ obj-$(CONFIG_MFD_CROS_EC_SPI)	+= cros_ec_spi.o
 rtsx_pci-objs			:= rtsx_pcr.o rts5209.o rts5229.o rtl8411.o rts5227.o rts5249.o
 obj-$(CONFIG_MFD_RTSX_PCI)	+= rtsx_pci.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_MFD_RTSX_USB)	+= rtsx_usb.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MFD_RTSX_USB)	+= rtsx_usb.o
 >>>>>>> v3.18
@@ -30,7 +38,10 @@ obj-$(CONFIG_HTC_I2CPLD)	+= htc-i2cpld.o
 obj-$(CONFIG_MFD_DAVINCI_VOICECODEC)	+= davinci_voicecodec.o
 obj-$(CONFIG_MFD_DM355EVM_MSP)	+= dm355evm_msp.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MFD_TI_SSP)	+= ti-ssp.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_MFD_TI_AM335X_TSCADC)	+= ti_am335x_tscadc.o
@@ -40,6 +51,10 @@ obj-$(CONFIG_MFD_STMPE)		+= stmpe.o
 obj-$(CONFIG_STMPE_I2C)		+= stmpe-i2c.o
 obj-$(CONFIG_STMPE_SPI)		+= stmpe-spi.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_MFD_SUN6I_PRCM)	+= sun6i-prcm.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MFD_SUN6I_PRCM)	+= sun6i-prcm.o
 >>>>>>> v3.18
@@ -59,6 +74,12 @@ ifneq ($(CONFIG_MFD_WM5110),n)
 obj-$(CONFIG_MFD_ARIZONA)	+= wm5110-tables.o
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ifneq ($(CONFIG_MFD_WM8997),n)
+obj-$(CONFIG_MFD_ARIZONA)	+= wm8997-tables.o
+endif
+>>>>>>> v3.18
 =======
 ifneq ($(CONFIG_MFD_WM8997),n)
 obj-$(CONFIG_MFD_ARIZONA)	+= wm8997-tables.o
@@ -81,6 +102,10 @@ obj-$(CONFIG_TPS65010)		+= tps65010.o
 obj-$(CONFIG_TPS6507X)		+= tps6507x.o
 obj-$(CONFIG_MFD_TPS65217)	+= tps65217.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_MFD_TPS65218)	+= tps65218.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MFD_TPS65218)	+= tps65218.o
 >>>>>>> v3.18
@@ -94,7 +119,10 @@ obj-$(CONFIG_MENELAUS)		+= menelaus.o
 
 obj-$(CONFIG_TWL4030_CORE)	+= twl-core.o twl4030-irq.o twl6030-irq.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_TWL4030_MADC)      += twl4030-madc.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_TWL4030_POWER)    += twl4030-power.o
@@ -102,8 +130,11 @@ obj-$(CONFIG_MFD_TWL4030_AUDIO)	+= twl4030-audio.o
 obj-$(CONFIG_TWL6040_CORE)	+= twl6040.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_MFD_MC13XXX)	+= mc13xxx-core.o
@@ -120,6 +151,7 @@ obj-$(CONFIG_MCP_UCB1200)	+= ucb1x00-core.o
 obj-$(CONFIG_MFD_SMSC)        += smsc-ece1099.o
 obj-$(CONFIG_MCP_UCB1200_TS)	+= ucb1x00-ts.o
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 obj-$(CONFIG_WCD9310_CODEC)	+= wcd9xxx-core.o wcd9xxx-irq.o \
 						wcd9xxx-slimslave.o wcd9xxx-core-resource.o
@@ -141,6 +173,8 @@ obj-$(CONFIG_SND_SOC_MSM8909_WCD)	+= wcd9xxx-core.o wcd9xxx-irq.o\
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 ifeq ($(CONFIG_SA1100_ASSABET),y)
 obj-$(CONFIG_MCP_UCB1200)	+= ucb1x00-assabet.o
 endif
@@ -153,7 +187,13 @@ obj-$(CONFIG_PMIC_DA9052)	+= da9052-core.o
 obj-$(CONFIG_MFD_DA9052_SPI)	+= da9052-spi.o
 obj-$(CONFIG_MFD_DA9052_I2C)	+= da9052-i2c.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+obj-$(CONFIG_MFD_AXP20X)	+= axp20x.o
+
+obj-$(CONFIG_MFD_LP3943)	+= lp3943.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MFD_AXP20X)	+= axp20x.o
 
@@ -165,15 +205,21 @@ da9055-objs			:= da9055-core.o da9055-i2c.o
 obj-$(CONFIG_MFD_DA9055)	+= da9055.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MFD_MAX77686)	+= max77686.o max77686-irq.o
 obj-$(CONFIG_MFD_MAX77693)	+= max77693.o max77693-irq.o
 =======
+=======
+>>>>>>> v3.18
 da9063-objs			:= da9063-core.o da9063-irq.o da9063-i2c.o
 obj-$(CONFIG_MFD_DA9063)	+= da9063.o
 
 obj-$(CONFIG_MFD_MAX14577)	+= max14577.o
 obj-$(CONFIG_MFD_MAX77686)	+= max77686.o
 obj-$(CONFIG_MFD_MAX77693)	+= max77693.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_MFD_MAX8907)	+= max8907.o
 max8925-objs			:= max8925-core.o max8925-i2c.o
@@ -196,6 +242,10 @@ obj-$(CONFIG_AB8500_CORE)	+= ab8500-core.o ab8500-sysctrl.o
 obj-$(CONFIG_MFD_TIMBERDALE)    += timberdale.o
 obj-$(CONFIG_PMIC_ADP5520)	+= adp5520.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_MFD_KEMPLD)	+= kempld-core.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MFD_KEMPLD)	+= kempld-core.o
 >>>>>>> v3.18
@@ -214,8 +264,13 @@ obj-$(CONFIG_MFD_SI476X_CORE)	+= si476x-core.o
 obj-$(CONFIG_MFD_CS5535)	+= cs5535-mfd.o
 obj-$(CONFIG_MFD_OMAP_USB_HOST)	+= omap-usb-host.o omap-usb-tll.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MFD_PM8921_CORE) 	+= pm8921-core.o
 obj-$(CONFIG_MFD_PM8XXX_IRQ) 	+= pm8xxx-irq.o
+=======
+obj-$(CONFIG_MFD_PM8921_CORE) 	+= pm8921-core.o ssbi.o
+obj-$(CONFIG_MFD_SPMI_PMIC)	+= qcom-spmi-pmic.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MFD_PM8921_CORE) 	+= pm8921-core.o ssbi.o
 obj-$(CONFIG_MFD_SPMI_PMIC)	+= qcom-spmi-pmic.o
@@ -228,6 +283,7 @@ obj-$(CONFIG_MFD_PALMAS)	+= palmas.o
 obj-$(CONFIG_MFD_VIPERBOARD)    += viperboard.o
 obj-$(CONFIG_MFD_RC5T583)	+= rc5t583.o rc5t583-irq.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MFD_SEC_CORE)	+= sec-core.o sec-irq.o
 obj-$(CONFIG_MFD_SYSCON)	+= syscon.o
 obj-$(CONFIG_MFD_LM3533)	+= lm3533-core.o lm3533-ctrlbank.o
@@ -235,6 +291,8 @@ obj-$(CONFIG_VEXPRESS_CONFIG)	+= vexpress-config.o vexpress-sysreg.o
 obj-$(CONFIG_MFD_RETU)		+= retu-mfd.o
 obj-$(CONFIG_MFD_AS3711)	+= as3711.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_MFD_RK808)		+= rk808.o
 obj-$(CONFIG_MFD_RN5T618)	+= rn5t618.o
 obj-$(CONFIG_MFD_SEC_CORE)	+= sec-core.o sec-irq.o
@@ -251,4 +309,7 @@ obj-$(CONFIG_MFD_HI6421_PMIC)	+= hi6421-pmic-core.o
 
 intel-soc-pmic-objs		:= intel_soc_pmic_core.o intel_soc_pmic_crc.o
 obj-$(CONFIG_INTEL_SOC_PMIC)	+= intel-soc-pmic.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

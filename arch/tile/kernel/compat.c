@@ -85,7 +85,11 @@ COMPAT_SYSCALL_DEFINE5(llseek, unsigned int, fd, unsigned int, offset_high,
 	return sys_llseek(fd, offset_high, offset_low, result, origin);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

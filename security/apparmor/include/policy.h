@@ -30,6 +30,7 @@
 #include "resource.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const char *const profile_mode_names[];
 #define APPARMOR_NAMES_MAX_INDEX 3
 
@@ -44,6 +45,8 @@ extern const char *const profile_mode_names[];
 #define PROFILE_IS_HAT(_profile) ((_profile)->flags & PFLAG_HAT)
 
 =======
+=======
+>>>>>>> v3.18
 extern const char *const aa_profile_mode_names[];
 #define APPARMOR_MODE_NAMES_MAX_INDEX 4
 
@@ -61,6 +64,9 @@ extern const char *const aa_profile_mode_names[];
 
 #define on_list_rcu(X) (!list_empty(X) && (X)->prev != LIST_POISON2)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * FIXME: currently need a clean way to replace and remove profiles as a
@@ -73,6 +79,10 @@ enum profile_mode {
 	APPARMOR_COMPLAIN,	/* allow and log access violations */
 	APPARMOR_KILL,		/* kill task on access violation */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	APPARMOR_UNCONFINED,	/* profile set to unconfined */
+>>>>>>> v3.18
 =======
 	APPARMOR_UNCONFINED,	/* profile set to unconfined */
 >>>>>>> v3.18
@@ -81,7 +91,10 @@ enum profile_mode {
 enum profile_flags {
 	PFLAG_HAT = 1,			/* profile is a hat */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PFLAG_UNCONFINED = 2,		/* profile is an unconfined profile */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	PFLAG_NULL = 4,			/* profile is null learning profile */
@@ -91,6 +104,11 @@ enum profile_flags {
 	PFLAG_NO_LIST_REF = 0x40,	/* list doesn't keep profile ref */
 	PFLAG_OLD_NULL_TRANS = 0x100,	/* use // as the null transition */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PFLAG_INVALID = 0x200,		/* profile replaced/removed */
+	PFLAG_NS_COUNT = 0x400,		/* carries NS ref count */
+>>>>>>> v3.18
 =======
 	PFLAG_INVALID = 0x200,		/* profile replaced/removed */
 	PFLAG_NS_COUNT = 0x400,		/* carries NS ref count */
@@ -106,7 +124,10 @@ struct aa_profile;
  * @name: name of the object
  * @hname - The hierarchical name
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @count: reference count of the obj
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @list: list policy object is on
@@ -116,7 +137,10 @@ struct aa_policy {
 	char *name;
 	char *hname;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kref count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head list;
@@ -144,6 +168,12 @@ struct aa_ns_acct {
  * @unconfined: special unconfined profile for the namespace
  * @sub_ns: list of namespaces under the current namespace.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @uniq_null: uniq value used for null learning profiles
+ * @uniq_id: a unique id count for the profiles in the namespace
+ * @dents: dentries for the namespaces file entries in apparmorfs
+>>>>>>> v3.18
 =======
  * @uniq_null: uniq value used for null learning profiles
  * @uniq_id: a unique id count for the profiles in the namespace
@@ -168,11 +198,14 @@ struct aa_namespace {
 	struct aa_policy base;
 	struct aa_namespace *parent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rwlock_t lock;
 	struct aa_ns_acct acct;
 	struct aa_profile *unconfined;
 	struct list_head sub_ns;
 =======
+=======
+>>>>>>> v3.18
 	struct mutex lock;
 	struct aa_ns_acct acct;
 	struct aa_profile *unconfined;
@@ -181,6 +214,9 @@ struct aa_namespace {
 	long uniq_id;
 
 	struct dentry *dents[AAFS_NS_SIZEOF];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -196,9 +232,12 @@ struct aa_policydb {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* struct aa_profile - basic confinement data
  * @base - base components of the profile (name, refcount, lists, lock ...)
 =======
+=======
+>>>>>>> v3.18
 struct aa_replacedby {
 	struct kref count;
 	struct aa_profile __rcu *profile;
@@ -209,15 +248,24 @@ struct aa_replacedby {
  * @base - base components of the profile (name, refcount, lists, lock ...)
  * @count: reference count of the obj
  * @rcu: rcu head used when removing from @list
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @parent: parent of profile
  * @ns: namespace the profile is in
  * @replacedby: is set to the profile that replaced this profile
  * @rename: optional profile name that this profile renamed
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @xmatch: optional extended matching for unconfined executables names
  * @xmatch_len: xmatch prefix len, used to determine xmatch priority
  * @sid: the unique security id number of this profile
+=======
+ * @attach: human readable attachment string
+ * @xmatch: optional extended matching for unconfined executables names
+ * @xmatch_len: xmatch prefix len, used to determine xmatch priority
+>>>>>>> v3.18
 =======
  * @attach: human readable attachment string
  * @xmatch: optional extended matching for unconfined executables names
@@ -234,6 +282,12 @@ struct aa_replacedby {
  * @rlimits: rlimits for the profile
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @dents: dentries for the profiles file entries in apparmorfs
+ * @dirname: name of the profile dir in apparmorfs
+ *
+>>>>>>> v3.18
 =======
  * @dents: dentries for the profiles file entries in apparmorfs
  * @dirname: name of the profile dir in apparmorfs
@@ -245,8 +299,12 @@ struct aa_replacedby {
  * attachments are determined by profile X transition rules.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The @replacedby field is write protected by the profile lock.  Reads
  * are assumed to be atomic, and are done without locking.
+=======
+ * The @replacedby struct is write protected by the profile lock.
+>>>>>>> v3.18
 =======
  * The @replacedby struct is write protected by the profile lock.
 >>>>>>> v3.18
@@ -261,6 +319,7 @@ struct aa_replacedby {
 struct aa_profile {
 	struct aa_policy base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct aa_profile *parent;
 
 	struct aa_namespace *ns;
@@ -274,6 +333,8 @@ struct aa_profile {
 	enum profile_mode mode;
 	u32 flags;
 =======
+=======
+>>>>>>> v3.18
 	struct kref count;
 	struct rcu_head rcu;
 	struct aa_profile __rcu *parent;
@@ -288,6 +349,9 @@ struct aa_profile {
 	enum audit_mode audit;
 	long mode;
 	long flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 path_flags;
 	int size;
@@ -297,11 +361,17 @@ struct aa_profile {
 	struct aa_caps caps;
 	struct aa_rlimit rlimits;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	unsigned char *hash;
 	char *dirname;
 	struct dentry *dents[AAFS_PROF_SIZEOF];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -319,6 +389,7 @@ void aa_free_namespace_kref(struct kref *kref);
 struct aa_namespace *aa_find_namespace(struct aa_namespace *root,
 				       const char *name);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline struct aa_policy *aa_get_common(struct aa_policy *c)
 {
@@ -358,11 +429,16 @@ static inline void aa_put_namespace(struct aa_namespace *ns)
 struct aa_profile *aa_alloc_profile(const char *name);
 struct aa_profile *aa_new_null_profile(struct aa_profile *parent, int hat);
 =======
+=======
+>>>>>>> v3.18
 
 void aa_free_replacedby_kref(struct kref *kref);
 struct aa_profile *aa_alloc_profile(const char *name);
 struct aa_profile *aa_new_null_profile(struct aa_profile *parent, int hat);
 void aa_free_profile(struct aa_profile *profile);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void aa_free_profile_kref(struct kref *kref);
 struct aa_profile *aa_find_child(struct aa_profile *parent, const char *name);
@@ -375,6 +451,7 @@ ssize_t aa_remove_profiles(char *name, size_t size);
 #define PROF_ADD 1
 #define PROF_REPLACE 0
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define unconfined(X) ((X)->flags & PFLAG_UNCONFINED)
 
@@ -396,6 +473,8 @@ static inline struct aa_profile *aa_newest_version(struct aa_profile *profile)
 
 	return profile;
 =======
+=======
+>>>>>>> v3.18
 #define unconfined(X) ((X)->mode == APPARMOR_UNCONFINED)
 
 
@@ -403,6 +482,9 @@ static inline struct aa_profile *aa_deref_parent(struct aa_profile *p)
 {
 	return rcu_dereference_protected(p->parent,
 					 mutex_is_locked(&p->ns->lock));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -417,7 +499,11 @@ static inline struct aa_profile *aa_get_profile(struct aa_profile *p)
 {
 	if (p)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kref_get(&(p->base.count));
+=======
+		kref_get(&(p->count));
+>>>>>>> v3.18
 =======
 		kref_get(&(p->count));
 >>>>>>> v3.18
@@ -427,7 +513,10 @@ static inline struct aa_profile *aa_get_profile(struct aa_profile *p)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * aa_get_profile_not0 - increment refcount on profile @p found via lookup
  * @p: profile  (MAYBE NULL)
  *
@@ -482,6 +571,9 @@ static inline struct aa_profile *aa_get_newest_profile(struct aa_profile *p)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * aa_put_profile - decrement refcount on profile @p
  * @p: profile  (MAYBE NULL)
@@ -490,8 +582,11 @@ static inline void aa_put_profile(struct aa_profile *p)
 {
 	if (p)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kref_put(&p->base.count, aa_free_profile_kref);
 =======
+=======
+>>>>>>> v3.18
 		kref_put(&p->count, aa_free_profile_kref);
 }
 
@@ -546,6 +641,9 @@ static inline void aa_put_namespace(struct aa_namespace *ns)
 {
 	if (ns)
 		aa_put_profile(ns->unconfined);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -558,8 +656,11 @@ static inline int AUDIT_MODE(struct aa_profile *profile)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool policy_view_capable(void);
 bool policy_admin_capable(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 bool aa_may_manage_policy(int op);

@@ -33,6 +33,7 @@
 #include "cifs_spnego.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Checks if this is the first smb session to be reconnected after
  * the socket has been reestablished (so we know whether to use vc 0).
@@ -117,6 +118,8 @@ get_vc_num_exit:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static __u32 cifs_ssetup_hdr(struct cifs_ses *ses, SESSION_SETUP_ANDX *pSMB)
 {
 	__u32 capabilities = 0;
@@ -132,7 +135,11 @@ static __u32 cifs_ssetup_hdr(struct cifs_ses *ses, SESSION_SETUP_ANDX *pSMB)
 					USHRT_MAX));
 	pSMB->req.MaxMpxCount = cpu_to_le16(ses->server->maxReq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pSMB->req.VcNumber = get_next_vcnum(ses);
+=======
+	pSMB->req.VcNumber = __constant_cpu_to_le16(1);
+>>>>>>> v3.18
 =======
 	pSMB->req.VcNumber = __constant_cpu_to_le16(1);
 >>>>>>> v3.18
@@ -146,8 +153,12 @@ static __u32 cifs_ssetup_hdr(struct cifs_ses *ses, SESSION_SETUP_ANDX *pSMB)
 			CAP_LARGE_WRITE_X | CAP_LARGE_READ_X;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ses->server->sec_mode &
 	    (SECMODE_SIGN_REQUIRED | SECMODE_SIGN_ENABLED))
+=======
+	if (ses->server->sign)
+>>>>>>> v3.18
 =======
 	if (ses->server->sign)
 >>>>>>> v3.18
@@ -239,7 +250,11 @@ static void unicode_ssetup_strings(char **pbcc_area, struct cifs_ses *ses,
 	} else {
 		bytes_ret = cifs_strtoUTF16((__le16 *) bcc_ptr, ses->user_name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    MAX_USERNAME_SIZE, nls_cp);
+=======
+					    CIFS_MAX_USERNAME_LEN, nls_cp);
+>>>>>>> v3.18
 =======
 					    CIFS_MAX_USERNAME_LEN, nls_cp);
 >>>>>>> v3.18
@@ -263,8 +278,13 @@ static void ascii_ssetup_strings(char **pbcc_area, struct cifs_ses *ses,
 	/* copy user */
 	if (ses->user_name != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		strncpy(bcc_ptr, ses->user_name, MAX_USERNAME_SIZE);
 		bcc_ptr += strnlen(ses->user_name, MAX_USERNAME_SIZE);
+=======
+		strncpy(bcc_ptr, ses->user_name, CIFS_MAX_USERNAME_LEN);
+		bcc_ptr += strnlen(ses->user_name, CIFS_MAX_USERNAME_LEN);
+>>>>>>> v3.18
 =======
 		strncpy(bcc_ptr, ses->user_name, CIFS_MAX_USERNAME_LEN);
 		bcc_ptr += strnlen(ses->user_name, CIFS_MAX_USERNAME_LEN);
@@ -331,16 +351,22 @@ decode_unicode_ssetup(char **pbcc_area, int bleft, struct cifs_ses *ses,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int decode_ascii_ssetup(char **pbcc_area, __u16 bleft,
 			       struct cifs_ses *ses,
 			       const struct nls_table *nls_cp)
 {
 	int rc = 0;
 =======
+=======
+>>>>>>> v3.18
 static void decode_ascii_ssetup(char **pbcc_area, __u16 bleft,
 				struct cifs_ses *ses,
 				const struct nls_table *nls_cp)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int len;
 	char *bcc_ptr = *pbcc_area;
@@ -350,7 +376,11 @@ static void decode_ascii_ssetup(char **pbcc_area, __u16 bleft,
 	len = strnlen(bcc_ptr, bleft);
 	if (len >= bleft)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return rc;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -359,16 +389,22 @@ static void decode_ascii_ssetup(char **pbcc_area, __u16 bleft,
 
 	ses->serverOS = kzalloc(len + 1, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ses->serverOS)
 		strncpy(ses->serverOS, bcc_ptr, len);
 	if (strncmp(ses->serverOS, "OS/2", 4) == 0) {
 		cifs_dbg(FYI, "OS/2 server\n");
 			ses->flags |= CIFS_SES_OS2;
 =======
+=======
+>>>>>>> v3.18
 	if (ses->serverOS) {
 		strncpy(ses->serverOS, bcc_ptr, len);
 		if (strncmp(ses->serverOS, "OS/2", 4) == 0)
 			cifs_dbg(FYI, "OS/2 server\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -378,7 +414,11 @@ static void decode_ascii_ssetup(char **pbcc_area, __u16 bleft,
 	len = strnlen(bcc_ptr, bleft);
 	if (len >= bleft)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return rc;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -395,7 +435,11 @@ static void decode_ascii_ssetup(char **pbcc_area, __u16 bleft,
 	len = strnlen(bcc_ptr, bleft);
 	if (len > bleft)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return rc;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -407,8 +451,11 @@ static void decode_ascii_ssetup(char **pbcc_area, __u16 bleft,
 	   for it later, but it is not very important */
 	cifs_dbg(FYI, "ascii: bytes left %d\n", bleft);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return rc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -482,15 +529,21 @@ void build_ntlmssp_negotiate_blob(unsigned char *pbuffer,
 		NTLMSSP_NEGOTIATE_128 | NTLMSSP_NEGOTIATE_UNICODE |
 		NTLMSSP_NEGOTIATE_NTLM | NTLMSSP_NEGOTIATE_EXTENDED_SEC;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ses->server->sec_mode &
 			(SECMODE_SIGN_REQUIRED | SECMODE_SIGN_ENABLED)) {
 		flags |= NTLMSSP_NEGOTIATE_SIGN;
 		if (!ses->server->session_estab)
 =======
+=======
+>>>>>>> v3.18
 	if (ses->server->sign) {
 		flags |= NTLMSSP_NEGOTIATE_SIGN;
 		if (!ses->server->session_estab ||
 				ses->ntlmssp->sesskey_per_smbsess)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			flags |= NTLMSSP_NEGOTIATE_KEY_XCH;
 	}
@@ -528,15 +581,21 @@ int build_ntlmssp_auth_blob(unsigned char *pbuffer,
 		NTLMSSP_NEGOTIATE_128 | NTLMSSP_NEGOTIATE_UNICODE |
 		NTLMSSP_NEGOTIATE_NTLM | NTLMSSP_NEGOTIATE_EXTENDED_SEC;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ses->server->sec_mode &
 	   (SECMODE_SIGN_REQUIRED | SECMODE_SIGN_ENABLED)) {
 		flags |= NTLMSSP_NEGOTIATE_SIGN;
 		if (!ses->server->session_estab)
 =======
+=======
+>>>>>>> v3.18
 	if (ses->server->sign) {
 		flags |= NTLMSSP_NEGOTIATE_SIGN;
 		if (!ses->server->session_estab ||
 				ses->ntlmssp->sesskey_per_smbsess)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			flags |= NTLMSSP_NEGOTIATE_KEY_XCH;
 	}
@@ -550,6 +609,7 @@ int build_ntlmssp_auth_blob(unsigned char *pbuffer,
 	sec_blob->LmChallengeResponse.MaximumLength = 0;
 
 	sec_blob->NtChallengeResponse.BufferOffset = cpu_to_le32(tmp - pbuffer);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ses->user_name != NULL) {
 		rc = setup_ntlmv2_rsp(ses, nls_cp);
@@ -573,6 +633,8 @@ int build_ntlmssp_auth_blob(unsigned char *pbuffer,
 		sec_blob->NtChallengeResponse.MaximumLength = 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	rc = setup_ntlmv2_rsp(ses, nls_cp);
 	if (rc) {
 		cifs_dbg(VFS, "Error %d during NTLMSSP authentication\n", rc);
@@ -586,6 +648,9 @@ int build_ntlmssp_auth_blob(unsigned char *pbuffer,
 			cpu_to_le16(ses->auth_key.len - CIFS_SESS_KEY_SIZE);
 	sec_blob->NtChallengeResponse.MaximumLength =
 			cpu_to_le16(ses->auth_key.len - CIFS_SESS_KEY_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ses->domainName == NULL) {
@@ -597,7 +662,11 @@ int build_ntlmssp_auth_blob(unsigned char *pbuffer,
 		int len;
 		len = cifs_strtoUTF16((__le16 *)tmp, ses->domainName,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      MAX_USERNAME_SIZE, nls_cp);
+=======
+				      CIFS_MAX_USERNAME_LEN, nls_cp);
+>>>>>>> v3.18
 =======
 				      CIFS_MAX_USERNAME_LEN, nls_cp);
 >>>>>>> v3.18
@@ -617,7 +686,11 @@ int build_ntlmssp_auth_blob(unsigned char *pbuffer,
 		int len;
 		len = cifs_strtoUTF16((__le16 *)tmp, ses->user_name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      MAX_USERNAME_SIZE, nls_cp);
+=======
+				      CIFS_MAX_USERNAME_LEN, nls_cp);
+>>>>>>> v3.18
 =======
 				      CIFS_MAX_USERNAME_LEN, nls_cp);
 >>>>>>> v3.18
@@ -653,6 +726,7 @@ setup_ntlmv2_ret:
 	return rc;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int
 CIFS_SessSetup(const unsigned int xid, struct cifs_ses *ses,
@@ -1024,6 +1098,8 @@ ssetup_ntlmssp_authenticate:
 	}
 
 =======
+=======
+>>>>>>> v3.18
 enum securityEnum
 select_sectype(struct TCP_Server_Info *server, enum securityEnum requested)
 {
@@ -1869,6 +1945,9 @@ sess_auth_rawntlmssp_authenticate(struct sess_data *sess_data)
 	bytes_remaining -= blob_len;
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* BB check if Unicode and decode strings */
 	if (bytes_remaining == 0) {
@@ -1879,6 +1958,7 @@ sess_auth_rawntlmssp_authenticate(struct sess_data *sess_data)
 			++bcc_ptr;
 			--bytes_remaining;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		decode_unicode_ssetup(&bcc_ptr, bytes_remaining, ses, nls_cp);
 	} else {
@@ -1905,6 +1985,8 @@ ssetup_exit:
 		goto ssetup_ntlmssp_authenticate;
 
 =======
+=======
+>>>>>>> v3.18
 		decode_unicode_ssetup(&bcc_ptr, bytes_remaining, ses,
 				      sess_data->nls_cp);
 	} else {
@@ -2013,6 +2095,9 @@ int CIFS_SessSetup(const unsigned int xid, struct cifs_ses *ses,
 
 out:
 	kfree(sess_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }

@@ -6,6 +6,11 @@ raid6_pq-y	+= algos.o recov.o tables.o int1.o int2.o int4.o \
 raid6_pq-$(CONFIG_X86) += recov_ssse3.o recov_avx2.o mmx.o sse1.o sse2.o avx2.o
 raid6_pq-$(CONFIG_ALTIVEC) += altivec1.o altivec2.o altivec4.o altivec8.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+raid6_pq-$(CONFIG_KERNEL_MODE_NEON) += neon.o neon1.o neon2.o neon4.o neon8.o
+raid6_pq-$(CONFIG_TILEGX) += tilegx8.o
+>>>>>>> v3.18
 =======
 raid6_pq-$(CONFIG_KERNEL_MODE_NEON) += neon.o neon1.o neon2.o neon4.o neon8.o
 raid6_pq-$(CONFIG_TILEGX) += tilegx8.o
@@ -22,7 +27,10 @@ altivec_flags := -maltivec -mabi=altivec
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # The GCC option -ffreestanding is required in order to compile code containing
 # ARM/NEON intrinsics in a non C99-compliant environment (such as the kernel)
 ifeq ($(CONFIG_KERNEL_MODE_NEON),y)
@@ -38,6 +46,9 @@ CFLAGS_REMOVE_neon8.o += -mgeneral-regs-only
 endif
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 targets += int1.c
 $(obj)/int1.c:   UNROLL := 1
@@ -94,7 +105,10 @@ $(obj)/altivec8.c:   $(src)/altivec.uc $(src)/unroll.awk FORCE
 	$(call if_changed,unroll)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 CFLAGS_neon1.o += $(NEON_FLAGS)
 targets += neon1.c
 $(obj)/neon1.c:   UNROLL := 1
@@ -124,6 +138,9 @@ $(obj)/tilegx8.c:   UNROLL := 8
 $(obj)/tilegx8.c:   $(src)/tilegx.uc $(src)/unroll.awk FORCE
 	$(call if_changed,unroll)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 quiet_cmd_mktable = TABLE   $@
       cmd_mktable = $(obj)/mktables > $@ || ( rm -f $@ && exit 1 )

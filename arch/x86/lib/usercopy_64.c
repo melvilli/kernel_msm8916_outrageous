@@ -69,7 +69,11 @@ EXPORT_SYMBOL(copy_in_user);
  * it is not necessary to optimize tail handling.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long
+=======
+__visible unsigned long
+>>>>>>> v3.18
 =======
 __visible unsigned long
 >>>>>>> v3.18

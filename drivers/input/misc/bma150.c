@@ -71,6 +71,10 @@
 
 #define BMA150_CHIP_ID		2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BMA180_CHIP_ID		3
+>>>>>>> v3.18
 =======
 #define BMA180_CHIP_ID		3
 >>>>>>> v3.18
@@ -531,7 +535,12 @@ static int bma150_probe(struct i2c_client *client,
 				  const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct bma150_platform_data *pdata = client->dev.platform_data;
+=======
+	const struct bma150_platform_data *pdata =
+			dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	const struct bma150_platform_data *pdata =
 			dev_get_platdata(&client->dev);
@@ -548,7 +557,11 @@ static int bma150_probe(struct i2c_client *client,
 
 	chip_id = i2c_smbus_read_byte_data(client, BMA150_CHIP_ID_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (chip_id != BMA150_CHIP_ID) {
+=======
+	if (chip_id != BMA150_CHIP_ID && chip_id != BMA180_CHIP_ID) {
+>>>>>>> v3.18
 =======
 	if (chip_id != BMA150_CHIP_ID && chip_id != BMA180_CHIP_ID) {
 >>>>>>> v3.18
@@ -656,6 +669,10 @@ static UNIVERSAL_DEV_PM_OPS(bma150_pm, bma150_suspend, bma150_resume, NULL);
 static const struct i2c_device_id bma150_id[] = {
 	{ "bma150", 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "bma180", 0 },
+>>>>>>> v3.18
 =======
 	{ "bma180", 0 },
 >>>>>>> v3.18

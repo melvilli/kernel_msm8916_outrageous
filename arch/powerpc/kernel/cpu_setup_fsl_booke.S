@@ -54,6 +54,7 @@ _GLOBAL(__e500_dcache_setup)
 	blr
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(__setup_cpu_e6500)
 	mflr	r6
 #ifdef CONFIG_PPC64
@@ -65,6 +66,8 @@ _GLOBAL(__setup_cpu_e6500)
 
 #ifdef CONFIG_PPC32
 =======
+=======
+>>>>>>> v3.18
 /*
  * FIXME - we haven't yet done testing to determine a reasonable default
  * value for PW20_WAIT_IDLE_BIT.
@@ -124,6 +127,9 @@ _GLOBAL(__setup_cpu_e6500)
 
 #ifdef CONFIG_PPC32
 #ifdef CONFIG_E200
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 _GLOBAL(__setup_cpu_e200)
 	/* enable dedicated debug exception handling resources (Debug APU) */
@@ -132,11 +138,17 @@ _GLOBAL(__setup_cpu_e200)
 	mtspr	SPRN_HID0,r3
 	b	__setup_e200_ivors
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_E200 */
 
 #ifdef CONFIG_E500
 #ifndef CONFIG_PPC_E500MC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 _GLOBAL(__setup_cpu_e500v1)
 _GLOBAL(__setup_cpu_e500v2)
@@ -145,7 +157,11 @@ _GLOBAL(__setup_cpu_e500v2)
 	bl	__e500_dcache_setup
 	bl	__setup_e500_ivors
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_FSL_RIO
+=======
+#if defined(CONFIG_FSL_RIO) || defined(CONFIG_FSL_PCI)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_FSL_RIO) || defined(CONFIG_FSL_PCI)
 >>>>>>> v3.18
@@ -157,6 +173,10 @@ _GLOBAL(__setup_cpu_e500v2)
 	mtlr	r4
 	blr
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else /* CONFIG_PPC_E500MC */
+>>>>>>> v3.18
 =======
 #else /* CONFIG_PPC_E500MC */
 >>>>>>> v3.18
@@ -191,7 +211,13 @@ _GLOBAL(__setup_cpu_e5500)
 	mtlr	r5
 	blr
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif /* CONFIG_PPC_E500MC */
+#endif /* CONFIG_E500 */
+#endif /* CONFIG_PPC32 */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PPC_E500MC */
 #endif /* CONFIG_E500 */
@@ -202,8 +228,11 @@ _GLOBAL(__setup_cpu_e5500)
 _GLOBAL(__restore_cpu_e6500)
 	mflr	r5
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.setup_altivec_ivors
 =======
+=======
+>>>>>>> v3.18
 	bl	setup_altivec_ivors
 	/* Touch IVOR42 only if the CPU supports E.HV category */
 	mfspr	r10,SPRN_MMUCFG
@@ -213,6 +242,9 @@ _GLOBAL(__restore_cpu_e6500)
 1:
 	bl	setup_pw20_idle
 	bl	setup_altivec_idle
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bl	__restore_cpu_e5500
 	mtlr	r5
@@ -223,9 +255,15 @@ _GLOBAL(__restore_cpu_e5500)
 	bl	__e500_icache_setup
 	bl	__e500_dcache_setup
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.__setup_base_ivors
 	bl	.setup_perfmon_ivor
 	bl	.setup_doorbell_ivors
+=======
+	bl	__setup_base_ivors
+	bl	setup_perfmon_ivor
+	bl	setup_doorbell_ivors
+>>>>>>> v3.18
 =======
 	bl	__setup_base_ivors
 	bl	setup_perfmon_ivor
@@ -240,7 +278,11 @@ _GLOBAL(__restore_cpu_e5500)
 	rlwinm.	r10,r10,0,MMUCFG_LPIDSIZE
 	beq	1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.setup_ehv_ivors
+=======
+	bl	setup_ehv_ivors
+>>>>>>> v3.18
 =======
 	bl	setup_ehv_ivors
 >>>>>>> v3.18
@@ -253,9 +295,15 @@ _GLOBAL(__setup_cpu_e5500)
 	bl	__e500_icache_setup
 	bl	__e500_dcache_setup
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.__setup_base_ivors
 	bl	.setup_perfmon_ivor
 	bl	.setup_doorbell_ivors
+=======
+	bl	__setup_base_ivors
+	bl	setup_perfmon_ivor
+	bl	setup_doorbell_ivors
+>>>>>>> v3.18
 =======
 	bl	__setup_base_ivors
 	bl	setup_perfmon_ivor
@@ -270,7 +318,11 @@ _GLOBAL(__setup_cpu_e5500)
 	rlwinm.	r10,r10,0,MMUCFG_LPIDSIZE
 	beq	1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.setup_ehv_ivors
+=======
+	bl	setup_ehv_ivors
+>>>>>>> v3.18
 =======
 	bl	setup_ehv_ivors
 >>>>>>> v3.18

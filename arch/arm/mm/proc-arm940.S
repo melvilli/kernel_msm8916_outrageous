@@ -32,7 +32,11 @@
 ENTRY(cpu_arm940_proc_init)
 ENTRY(cpu_arm940_switch_mm)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -46,7 +50,11 @@ ENTRY(cpu_arm940_proc_fin)
 	bic	r0, r0, #0x00000004		@ d-cache
 	mcr	p15, 0, r0, c1, c0, 0		@ disable caches
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -67,7 +75,11 @@ ENTRY(cpu_arm940_reset)
 	bic	ip, ip, #0x00001000		@ i-cache
 	mcr	p15, 0, ip, c1, c0, 0		@ ctrl register
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r0
+=======
+	ret	r0
+>>>>>>> v3.18
 =======
 	ret	r0
 >>>>>>> v3.18
@@ -81,7 +93,11 @@ ENDPROC(cpu_arm940_reset)
 ENTRY(cpu_arm940_do_idle)
 	mcr	p15, 0, r0, c7, c0, 4		@ Wait for interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -95,7 +111,11 @@ ENTRY(arm940_flush_icache_all)
 	mov	r0, #0
 	mcr	p15, 0, r0, c7, c5, 0		@ invalidate I cache
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -143,7 +163,11 @@ ENTRY(arm940_flush_user_cache_range)
 	mcrne	p15, 0, ip, c7, c5, 0		@ invalidate I cache
 	mcrne	p15, 0, ip, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -195,7 +219,11 @@ ENTRY(arm940_flush_kern_dcache_area)
 	mcr	p15, 0, r0, c7, c5, 0		@ invalidate I cache
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -220,7 +248,11 @@ arm940_dma_inv_range:
 	bcs	1b				@ segments 7 to 0
 	mcr	p15, 0, ip, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -248,7 +280,11 @@ ENTRY(cpu_arm940_dcache_clean_area)
 #endif
 	mcr	p15, 0, ip, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -278,7 +314,11 @@ ENTRY(arm940_dma_flush_range)
 	bcs	1b				@ segments 7 to 0
 	mcr	p15, 0, ip, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -305,7 +345,11 @@ ENDPROC(arm940_dma_map_area)
  */
 ENTRY(arm940_dma_unmap_area)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -318,8 +362,11 @@ ENDPROC(arm940_dma_unmap_area)
 	define_cache_functions arm940
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.type	__arm940_setup, #function
@@ -387,7 +434,11 @@ __arm940_setup:
 	orr	r0, r0, #0x00000005		@ MPU/D-cache
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

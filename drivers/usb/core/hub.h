@@ -42,6 +42,7 @@ struct usb_hub {
 	int			nerrors;	/* track consecutive errors */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	event_list;	/* hubs w/data or errs ready */
 	unsigned long		event_bits[1];	/* status change bitmask */
 	unsigned long		change_bits[1];	/* ports with logical connect
@@ -53,17 +54,28 @@ struct usb_hub {
 	unsigned long		change_bits[1];	/* ports with logical connect
 							status change */
 >>>>>>> v3.18
+=======
+	unsigned long		event_bits[1];	/* status change bitmask */
+	unsigned long		change_bits[1];	/* ports with logical connect
+							status change */
+>>>>>>> v3.18
 	unsigned long		removed_bits[1]; /* ports with a "removed"
 							device present */
 	unsigned long		wakeup_bits[1];	/* ports that have signaled
 							remote wakeup */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned long		power_bits[1]; /* ports that are powered */
 	unsigned long		child_usage_bits[1]; /* ports powered on for
 							children */
 	unsigned long		warm_reset_bits[1]; /* ports requesting warm
 							reset recovery */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if USB_MAXCHILDREN > 31 /* 8*sizeof(unsigned long) - 1 */
 #error event_bits[] is too short!
@@ -81,6 +93,10 @@ struct usb_hub {
 	unsigned		quiescing:1;
 	unsigned		disconnected:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned		in_reset:1;
+>>>>>>> v3.18
 =======
 	unsigned		in_reset:1;
 >>>>>>> v3.18
@@ -92,6 +108,10 @@ struct usb_hub {
 	struct delayed_work	leds;
 	struct delayed_work	init_work;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct work_struct      events;
+>>>>>>> v3.18
 =======
 	struct work_struct      events;
 >>>>>>> v3.18
@@ -101,6 +121,7 @@ struct usb_hub {
 /**
  * struct usb port - kernel's representation of a usb port
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @child: usb device attatched to the port
  * @dev: generic device interface
  * @port_owner: port's owner
@@ -109,6 +130,8 @@ struct usb_hub {
  * @power_is_on: port's power state
  * @did_runtime_put: port has done pm_runtime_put().
 =======
+=======
+>>>>>>> v3.18
  * @child: usb device attached to the port
  * @dev: generic device interface
  * @port_owner: port's owner
@@ -119,11 +142,15 @@ struct usb_hub {
  * @status_lock: synchronize port_event() vs usb_port_{suspend|resume}
  * @portnum: port index num based one
  * @is_superspeed cache super-speed status
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct usb_port {
 	struct usb_device *child;
 	struct device dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct dev_state *port_owner;
 	enum usb_port_connect_type connect_type;
@@ -131,6 +158,8 @@ struct usb_port {
 	unsigned power_is_on:1;
 	unsigned did_runtime_put:1;
 =======
+=======
+>>>>>>> v3.18
 	struct usb_dev_state *port_owner;
 	struct usb_port *peer;
 	struct dev_pm_qos_request *req;
@@ -139,6 +168,9 @@ struct usb_port {
 	struct mutex status_lock;
 	u8 portnum;
 	unsigned int is_superspeed:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -158,7 +190,10 @@ extern int usb_clear_port_feature(struct usb_device *hdev,
 		int port1, int feature);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool hub_is_port_power_switchable(struct usb_hub *hub)
 {
 	__le16 hcs;
@@ -182,6 +217,9 @@ static inline unsigned hub_power_on_good_delay(struct usb_hub *hub)
 	return max(delay, 100U);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int hub_port_debounce_be_connected(struct usb_hub *hub,
 		int port1)

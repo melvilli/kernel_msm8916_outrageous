@@ -2,7 +2,11 @@
 
   Intel 82599 Virtual Function driver
 <<<<<<< HEAD
+<<<<<<< HEAD
   Copyright(c) 1999 - 2012 Intel Corporation.
+=======
+  Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
   Copyright(c) 1999 - 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -43,6 +47,7 @@
 #include "vf.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* wrapper around a pointer to a socket buffer,
  * so a DMA handle can be stored along with the buffer */
 struct ixgbevf_tx_buffer {
@@ -53,6 +58,8 @@ struct ixgbevf_tx_buffer {
 	u16 length;
 	u16 mapped_as_page;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 #include <net/busy_poll.h>
 #define BP_EXTENDED_STATS
@@ -70,6 +77,9 @@ struct ixgbevf_tx_buffer {
 	DEFINE_DMA_UNMAP_ADDR(dma);
 	DEFINE_DMA_UNMAP_LEN(len);
 	u32 tx_flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -79,7 +89,10 @@ struct ixgbevf_rx_buffer {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ixgbevf_stats {
 	u64 packets;
 	u64 bytes;
@@ -103,6 +116,9 @@ struct ixgbevf_rx_queue_stats {
 	u64 csum_err;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ixgbevf_ring {
 	struct ixgbevf_ring *next;
@@ -116,7 +132,10 @@ struct ixgbevf_ring {
 	unsigned int next_to_clean;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int queue_index; /* needed for multiqueue queue management */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	union {
@@ -124,6 +143,7 @@ struct ixgbevf_ring {
 		struct ixgbevf_rx_buffer *rx_buffer_info;
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u64			total_bytes;
 	u64			total_packets;
@@ -134,6 +154,8 @@ struct ixgbevf_ring {
 	u16 head;
 	u16 tail;
 =======
+=======
+>>>>>>> v3.18
 	struct ixgbevf_stats stats;
 	struct u64_stats_sync syncp;
 	union {
@@ -143,6 +165,9 @@ struct ixgbevf_ring {
 
 	u64 hw_csum_rx_error;
 	u8 __iomem *tail;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	u16 reg_idx; /* holds the special value that gets the hardware register
@@ -151,6 +176,10 @@ struct ixgbevf_ring {
 
 	u16 rx_buf_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int queue_index; /* needed for multiqueue queue management */
+>>>>>>> v3.18
 =======
 	int queue_index; /* needed for multiqueue queue management */
 >>>>>>> v3.18
@@ -185,8 +214,11 @@ struct ixgbevf_ring {
 #define IXGBE_TX_FLAGS_TSO		(u32)(1 << 2)
 #define IXGBE_TX_FLAGS_IPV4		(u32)(1 << 3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IXGBE_TX_FLAGS_FCOE		(u32)(1 << 4)
 #define IXGBE_TX_FLAGS_FSO		(u32)(1 << 5)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define IXGBE_TX_FLAGS_VLAN_MASK	0xffff0000
@@ -218,8 +250,11 @@ struct ixgbevf_q_vector {
 	struct ixgbevf_ring_container rx, tx;
 	char name[IFNAMSIZ + 9];
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 	unsigned int state;
 #define IXGBEVF_QV_STATE_IDLE		0
@@ -333,6 +368,9 @@ static inline bool ixgbevf_qv_disable(struct ixgbevf_q_vector *q_vector)
 }
 
 #endif /* CONFIG_NET_RX_BUSY_POLL */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -354,10 +392,13 @@ static inline bool ixgbevf_qv_disable(struct ixgbevf_q_vector *q_vector)
 #define EITR_REG_TO_INTS_PER_SEC EITR_INTS_PER_SEC_TO_REG
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IXGBE_DESC_UNUSED(R) \
 	((((R)->next_to_clean > (R)->next_to_use) ? 0 : (R)->count) + \
 	(R)->next_to_clean - (R)->next_to_use - 1)
 =======
+=======
+>>>>>>> v3.18
 static inline u16 ixgbevf_desc_unused(struct ixgbevf_ring *ring)
 {
 	u16 ntc = ring->next_to_clean;
@@ -370,6 +411,9 @@ static inline void ixgbevf_write_tail(struct ixgbevf_ring *ring, u32 value)
 {
 	writel(value, ring->tail);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define IXGBEVF_RX_DESC(R, i)	    \
@@ -394,7 +438,10 @@ struct ixgbevf_adapter {
 	struct timer_list watchdog_timer;
 	unsigned long active_vlans[BITS_TO_LONGS(VLAN_N_VID)];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 bd_number;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct work_struct reset_task;
@@ -409,6 +456,7 @@ struct ixgbevf_adapter {
 	u32 eims_other;
 
 	/* TX */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ixgbevf_ring *tx_ring;	/* One per active queue */
 	int num_tx_queues;
@@ -430,6 +478,8 @@ struct ixgbevf_adapter {
 	struct msix_entry *msix_entries;
 
 =======
+=======
+>>>>>>> v3.18
 	int num_tx_queues;
 	struct ixgbevf_ring *tx_ring[MAX_TX_QUEUES]; /* One per active queue */
 	u64 restart_queue;
@@ -442,6 +492,9 @@ struct ixgbevf_adapter {
 	u64 hw_rx_no_dma_resources;
 	u64 non_eop_descs;
 	int num_msix_vectors;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 alloc_rx_page_failed;
 	u32 alloc_rx_buff_failed;
@@ -453,6 +506,12 @@ struct ixgbevf_adapter {
 #define IXGBE_FLAG_IN_WATCHDOG_TASK             (u32)(1)
 #define IXGBE_FLAG_IN_NETPOLL                   (u32)(1 << 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IXGBEVF_FLAG_QUEUE_RESET_REQUESTED	(u32)(1 << 2)
+
+	struct msix_entry *msix_entries;
+>>>>>>> v3.18
 =======
 #define IXGBEVF_FLAG_QUEUE_RESET_REQUESTED	(u32)(1 << 2)
 
@@ -467,23 +526,30 @@ struct ixgbevf_adapter {
 	struct ixgbe_hw hw;
 	u16 msg_enable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ixgbevf_hw_stats stats;
 	u64 zero_base;
 	/* Interrupt Throttle Rate */
 	u32 eitr_param;
 
 =======
+=======
+>>>>>>> v3.18
 	/* Interrupt Throttle Rate */
 	u32 eitr_param;
 
 	struct ixgbevf_hw_stats stats;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long state;
 	u64 tx_busy;
 	unsigned int tx_ring_count;
 	unsigned int rx_ring_count;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 link_speed;
 	bool link_up;
@@ -492,6 +558,8 @@ struct ixgbevf_adapter {
 
 	spinlock_t mbx_lock;
 =======
+=======
+>>>>>>> v3.18
 #ifdef BP_EXTENDED_STATS
 	u64 bp_rx_yields;
 	u64 bp_rx_cleaned;
@@ -509,6 +577,9 @@ struct ixgbevf_adapter {
 	spinlock_t mbx_lock;
 
 	struct work_struct watchdog_task;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -516,12 +587,18 @@ enum ixbgevf_state_t {
 	__IXGBEVF_TESTING,
 	__IXGBEVF_RESETTING,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__IXGBEVF_DOWN
 =======
+=======
+>>>>>>> v3.18
 	__IXGBEVF_DOWN,
 	__IXGBEVF_DISABLED,
 	__IXGBEVF_REMOVING,
 	__IXGBEVF_WORK_INIT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -543,6 +620,7 @@ extern const struct ixgbe_mbx_operations ixgbevf_mbx_ops;
 extern const char ixgbevf_driver_name[];
 extern const char ixgbevf_driver_version[];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void ixgbevf_up(struct ixgbevf_adapter *adapter);
 extern void ixgbevf_down(struct ixgbevf_adapter *adapter);
@@ -566,6 +644,8 @@ extern void ixgbe_napi_del_all(struct ixgbevf_adapter *adapter);
 #ifdef DEBUG
 extern char *ixgbevf_get_hw_dev_name(struct ixgbe_hw *hw);
 =======
+=======
+>>>>>>> v3.18
 void ixgbevf_up(struct ixgbevf_adapter *adapter);
 void ixgbevf_down(struct ixgbevf_adapter *adapter);
 void ixgbevf_reinit_locked(struct ixgbevf_adapter *adapter);
@@ -585,6 +665,9 @@ void ixgbe_napi_del_all(struct ixgbevf_adapter *adapter);
 
 #ifdef DEBUG
 char *ixgbevf_get_hw_dev_name(struct ixgbe_hw *hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define hw_dbg(hw, format, arg...) \
 	printk(KERN_DEBUG "%s: " format, ixgbevf_get_hw_dev_name(hw), ##arg)

@@ -1,8 +1,11 @@
 # MIPS headers
 <<<<<<< HEAD
+<<<<<<< HEAD
 generic-y += mcs_spinlock.h
 generic-y += trace_clock.h
 =======
+=======
+>>>>>>> v3.18
 generic-y += cputime.h
 generic-y += current.h
 generic-y += dma-contiguous.h
@@ -23,4 +26,7 @@ generic-y += trace_clock.h
 generic-y += ucontext.h
 generic-y += user.h
 generic-y += xor.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

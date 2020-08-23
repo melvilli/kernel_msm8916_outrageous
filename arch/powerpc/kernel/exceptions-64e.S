@@ -35,8 +35,11 @@
  *     blow you up
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	SPECIAL_EXC_FRAME_SIZE	INT_FRAME_SIZE
 =======
+=======
+>>>>>>> v3.18
 #define SPECIAL_EXC_SRR0	0
 #define SPECIAL_EXC_SRR1	1
 #define SPECIAL_EXC_SPRG_GEN	2
@@ -281,6 +284,9 @@ ret_from_crit_except:
 ret_from_mc_except:
 	ret_from_level SPRN_MCSRR0 SPRN_MCSRR1 PACA_EXMC SPRN_SPRG_MC_SCRATCH
 	rfmci
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Exception prolog code for all exceptions */
@@ -290,7 +296,10 @@ ret_from_mc_except:
 	std	r10,PACA_EX##type+EX_R10(r13);				    \
 	std	r11,PACA_EX##type+EX_R11(r13);				    \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PROLOG_STORE_RESTORE_SCRATCH_##type;				    \
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mfcr	r10;			/* save CR */			    \
@@ -320,7 +329,11 @@ ret_from_mc_except:
 #define CRIT_SET_KSTACK						            \
 	ld	r1,PACA_CRIT_STACK(r13);				    \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	subi	r1,r1,SPECIAL_EXC_FRAME_SIZE;
+=======
+	subi	r1,r1,SPECIAL_EXC_FRAME_SIZE
+>>>>>>> v3.18
 =======
 	subi	r1,r1,SPECIAL_EXC_FRAME_SIZE
 >>>>>>> v3.18
@@ -330,7 +343,11 @@ ret_from_mc_except:
 #define DBG_SET_KSTACK						            \
 	ld	r1,PACA_DBG_STACK(r13);					    \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	subi	r1,r1,SPECIAL_EXC_FRAME_SIZE;
+=======
+	subi	r1,r1,SPECIAL_EXC_FRAME_SIZE
+>>>>>>> v3.18
 =======
 	subi	r1,r1,SPECIAL_EXC_FRAME_SIZE
 >>>>>>> v3.18
@@ -340,7 +357,11 @@ ret_from_mc_except:
 #define MC_SET_KSTACK						            \
 	ld	r1,PACA_MC_STACK(r13);					    \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	subi	r1,r1,SPECIAL_EXC_FRAME_SIZE;
+=======
+	subi	r1,r1,SPECIAL_EXC_FRAME_SIZE
+>>>>>>> v3.18
 =======
 	subi	r1,r1,SPECIAL_EXC_FRAME_SIZE
 >>>>>>> v3.18
@@ -363,6 +384,7 @@ ret_from_mc_except:
 	EXCEPTION_PROLOG(n, intnum, GDBELL, addition##_GDBELL(n))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Store user-visible scratch in PACA exception slots and restore proper value
  */
@@ -377,6 +399,8 @@ ret_from_mc_except:
 	ld	r11,PACA_SPRG3(r13);					    \
 	mtspr	SPRN_SPRG_CRIT_SCRATCH,r11;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Variants of the "addition" argument for the prolog
@@ -413,10 +437,15 @@ ret_from_mc_except:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Core exception code for all exceptions except TLB misses.
  * XXX: Needs to make SPRN_SPRG_GEN depend on exception type
  */
 #define EXCEPTION_COMMON(n, excf, ints)					    \
+=======
+/* Core exception code for all exceptions except TLB misses. */
+#define EXCEPTION_COMMON_LVL(n, scratch, excf)				    \
+>>>>>>> v3.18
 =======
 /* Core exception code for all exceptions except TLB misses. */
 #define EXCEPTION_COMMON_LVL(n, scratch, excf)				    \
@@ -434,7 +463,11 @@ exc_##n##_common:							    \
 2:	ld	r3,excf+EX_R10(r13);	/* get back r10 */		    \
 	ld	r4,excf+EX_R11(r13);	/* get back r11 */		    \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfspr	r5,SPRN_SPRG_GEN_SCRATCH;/* get back r13 */		    \
+=======
+	mfspr	r5,scratch;		/* get back r13 */		    \
+>>>>>>> v3.18
 =======
 	mfspr	r5,scratch;		/* get back r13 */		    \
 >>>>>>> v3.18
@@ -462,6 +495,7 @@ exc_##n##_common:							    \
 	std	r12,STACK_FRAME_OVERHEAD-16(r1); /* mark the frame */	    \
 	std	r3,_TRAP(r1);		/* set trap number		*/  \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std	r0,RESULT(r1);		/* clear regs->result */	    \
 	ints;
 
@@ -481,6 +515,8 @@ exc_##n##_common:							    \
  * irq indicators in the PACA). This will restore MSR:EE to it's previous
  * value
 =======
+=======
+>>>>>>> v3.18
 	std	r0,RESULT(r1);		/* clear regs->result */
 
 #define EXCEPTION_COMMON(n) \
@@ -504,6 +540,9 @@ exc_##n##_common:							    \
  * This is called by exceptions that don't use INTS_DISABLE (that did not
  * touch irq indicators in the PACA).  This will restore MSR:EE to it's
  * previous value
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * XXX In the long run, we may want to open-code it in order to separate the
@@ -563,7 +602,12 @@ exc_##n##_bad_stack:							    \
 	START_EXCEPTION(label);						\
 	NORMAL_EXCEPTION_PROLOG(trapnum, intnum, PROLOG_ADDITION_MASKABLE)\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_COMMON(trapnum, PACA_EXGEN, INTS_DISABLE)		\
+=======
+	EXCEPTION_COMMON(trapnum)					\
+	INTS_DISABLE;							\
+>>>>>>> v3.18
 =======
 	EXCEPTION_COMMON(trapnum)					\
 	INTS_DISABLE;							\
@@ -573,7 +617,11 @@ exc_##n##_bad_stack:							    \
 	addi	r3,r1,STACK_FRAME_OVERHEAD;				\
 	bl	hdlr;							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.ret_from_except_lite;
+=======
+	b	ret_from_except_lite;
+>>>>>>> v3.18
 =======
 	b	ret_from_except_lite;
 >>>>>>> v3.18
@@ -593,8 +641,13 @@ exception_marker:
 	.globl interrupt_base_book3e
 interrupt_base_book3e:					/* fake trap */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_STUB(0x000, machine_check)		/* 0x0200 */
 	EXCEPTION_STUB(0x020, critical_input)		/* 0x0580 */
+=======
+	EXCEPTION_STUB(0x000, machine_check)
+	EXCEPTION_STUB(0x020, critical_input)		/* 0x0100 */
+>>>>>>> v3.18
 =======
 	EXCEPTION_STUB(0x000, machine_check)
 	EXCEPTION_STUB(0x020, critical_input)		/* 0x0100 */
@@ -614,8 +667,13 @@ interrupt_base_book3e:					/* fake trap */
 	EXCEPTION_STUB(0x1c0, data_tlb_miss)
 	EXCEPTION_STUB(0x1e0, instruction_tlb_miss)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_STUB(0x200, altivec_unavailable)	/* 0x0f20 */
 	EXCEPTION_STUB(0x220, altivec_assist)		/* 0x1700 */
+=======
+	EXCEPTION_STUB(0x200, altivec_unavailable)
+	EXCEPTION_STUB(0x220, altivec_assist)
+>>>>>>> v3.18
 =======
 	EXCEPTION_STUB(0x200, altivec_unavailable)
 	EXCEPTION_STUB(0x220, altivec_assist)
@@ -628,6 +686,10 @@ interrupt_base_book3e:					/* fake trap */
 	EXCEPTION_STUB(0x300, hypercall)
 	EXCEPTION_STUB(0x320, ehpriv)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	EXCEPTION_STUB(0x340, lrat_error)
+>>>>>>> v3.18
 =======
 	EXCEPTION_STUB(0x340, lrat_error)
 >>>>>>> v3.18
@@ -639,6 +701,7 @@ interrupt_end_book3e:
 	START_EXCEPTION(critical_input);
 	CRIT_EXCEPTION_PROLOG(0x100, BOOKE_INTERRUPT_CRITICAL,
 			      PROLOG_ADDITION_NONE)
+<<<<<<< HEAD
 <<<<<<< HEAD
 //	EXCEPTION_COMMON(0x100, PACA_EXCRIT, INTS_DISABLE)
 //	bl	special_reg_save_crit
@@ -660,6 +723,8 @@ interrupt_end_book3e:
 //	b	ret_from_mc_except
 	b	.
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_COMMON_CRIT(0x100)
 	bl	save_nvgprs
 	bl	special_reg_save
@@ -679,6 +744,9 @@ interrupt_end_book3e:
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	machine_check_exception
 	b	ret_from_mc_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Data Storage Interrupt */
@@ -688,7 +756,12 @@ interrupt_end_book3e:
 	mfspr	r14,SPRN_DEAR
 	mfspr	r15,SPRN_ESR
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_COMMON(0x300, PACA_EXGEN, INTS_DISABLE)
+=======
+	EXCEPTION_COMMON(0x300)
+	INTS_DISABLE
+>>>>>>> v3.18
 =======
 	EXCEPTION_COMMON(0x300)
 	INTS_DISABLE
@@ -702,7 +775,12 @@ interrupt_end_book3e:
 	li	r15,0
 	mr	r14,r10
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_COMMON(0x400, PACA_EXGEN, INTS_DISABLE)
+=======
+	EXCEPTION_COMMON(0x400)
+	INTS_DISABLE
+>>>>>>> v3.18
 =======
 	EXCEPTION_COMMON(0x400)
 	INTS_DISABLE
@@ -712,7 +790,11 @@ interrupt_end_book3e:
 /* External Input Interrupt */
 	MASKABLE_EXCEPTION(0x500, BOOKE_INTERRUPT_EXTERNAL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   external_input, .do_IRQ, ACK_NONE)
+=======
+			   external_input, do_IRQ, ACK_NONE)
+>>>>>>> v3.18
 =======
 			   external_input, do_IRQ, ACK_NONE)
 >>>>>>> v3.18
@@ -724,7 +806,11 @@ interrupt_end_book3e:
 	mfspr	r14,SPRN_DEAR
 	mfspr	r15,SPRN_ESR
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_COMMON(0x600, PACA_EXGEN, INTS_KEEP)
+=======
+	EXCEPTION_COMMON(0x600)
+>>>>>>> v3.18
 =======
 	EXCEPTION_COMMON(0x600)
 >>>>>>> v3.18
@@ -736,6 +822,7 @@ interrupt_end_book3e:
 				PROLOG_ADDITION_1REG)
 	mfspr	r14,SPRN_ESR
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_COMMON(0x700, PACA_EXGEN, INTS_DISABLE)
 	std	r14,_DSISR(r1)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
@@ -744,6 +831,8 @@ interrupt_end_book3e:
 	bl	.program_check_exception
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_COMMON(0x700)
 	INTS_DISABLE
 	std	r14,_DSISR(r1)
@@ -752,6 +841,9 @@ interrupt_end_book3e:
 	bl	save_nvgprs
 	bl	program_check_exception
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Floating Point Unavailable Interrupt */
@@ -759,6 +851,7 @@ interrupt_end_book3e:
 	NORMAL_EXCEPTION_PROLOG(0x800, BOOKE_INTERRUPT_FP_UNAVAIL,
 				PROLOG_ADDITION_NONE)
 	/* we can probably do a shorter exception entry for that one... */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	EXCEPTION_COMMON(0x800, PACA_EXGEN, INTS_KEEP)
 	ld	r12,_MSR(r1)
@@ -772,6 +865,8 @@ interrupt_end_book3e:
 	bl	.kernel_fp_unavailable_exception
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_COMMON(0x800)
 	ld	r12,_MSR(r1)
 	andi.	r0,r12,MSR_PR;
@@ -783,6 +878,9 @@ interrupt_end_book3e:
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	kernel_fp_unavailable_exception
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Altivec Unavailable Interrupt */
@@ -791,7 +889,11 @@ interrupt_end_book3e:
 				PROLOG_ADDITION_NONE)
 	/* we can probably do a shorter exception entry for that one... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_COMMON(0x200, PACA_EXGEN, INTS_KEEP)
+=======
+	EXCEPTION_COMMON(0x200)
+>>>>>>> v3.18
 =======
 	EXCEPTION_COMMON(0x200)
 >>>>>>> v3.18
@@ -801,7 +903,11 @@ BEGIN_FTR_SECTION
 	andi.	r0,r12,MSR_PR;
 	beq-	1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.load_up_altivec
+=======
+	bl	load_up_altivec
+>>>>>>> v3.18
 =======
 	bl	load_up_altivec
 >>>>>>> v3.18
@@ -810,6 +916,7 @@ BEGIN_FTR_SECTION
 END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 #endif
 	INTS_DISABLE
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bl	.save_nvgprs
 	addi	r3,r1,STACK_FRAME_OVERHEAD
@@ -832,6 +939,8 @@ END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 #endif
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	bl	save_nvgprs
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	altivec_unavailable_exception
@@ -854,11 +963,15 @@ END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 	bl	unknown_exception
 #endif
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /* Decrementer Interrupt */
 	MASKABLE_EXCEPTION(0x900, BOOKE_INTERRUPT_DECREMENTER,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			   decrementer, .timer_interrupt, ACK_DEC)
 
@@ -866,17 +979,23 @@ END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 	MASKABLE_EXCEPTION(0x980, BOOKE_INTERRUPT_FIT,
 			   fixed_interval, .unknown_exception, ACK_FIT)
 =======
+=======
+>>>>>>> v3.18
 			   decrementer, timer_interrupt, ACK_DEC)
 
 /* Fixed Interval Timer Interrupt */
 	MASKABLE_EXCEPTION(0x980, BOOKE_INTERRUPT_FIT,
 			   fixed_interval, unknown_exception, ACK_FIT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Watchdog Timer Interrupt */
 	START_EXCEPTION(watchdog);
 	CRIT_EXCEPTION_PROLOG(0x9f0, BOOKE_INTERRUPT_WATCHDOG,
 			      PROLOG_ADDITION_NONE)
+<<<<<<< HEAD
 <<<<<<< HEAD
 //	EXCEPTION_COMMON(0x9f0, PACA_EXCRIT, INTS_DISABLE)
 //	bl	special_reg_save_crit
@@ -886,6 +1005,8 @@ END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 //	b	ret_from_crit_except
 	b	.
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_COMMON_CRIT(0x9f0)
 	bl	save_nvgprs
 	bl	special_reg_save
@@ -897,6 +1018,9 @@ END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 	bl	unknown_exception
 #endif
 	b	ret_from_crit_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* System Call Interrupt */
@@ -912,18 +1036,24 @@ END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 	NORMAL_EXCEPTION_PROLOG(0xf20, BOOKE_INTERRUPT_AP_UNAVAIL,
 				PROLOG_ADDITION_NONE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_COMMON(0xf20, PACA_EXGEN, INTS_DISABLE)
 	bl	.save_nvgprs
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	.unknown_exception
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_COMMON(0xf20)
 	INTS_DISABLE
 	bl	save_nvgprs
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	unknown_exception
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Debug exception as a critical interrupt*/
@@ -964,7 +1094,11 @@ END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 	ld	r10,PACA_EXCRIT+EX_R10(r13)	/* restore registers */
 	ld	r11,PACA_EXCRIT+EX_R11(r13)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld	r13,PACA_EXCRIT+EX_R13(r13)
+=======
+	mfspr	r13,SPRN_SPRG_CRIT_SCRATCH
+>>>>>>> v3.18
 =======
 	mfspr	r13,SPRN_SPRG_CRIT_SCRATCH
 >>>>>>> v3.18
@@ -981,10 +1115,15 @@ END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 	 * normal exception
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld	r15,PACA_EXCRIT+EX_R13(r13)
 	mtspr	SPRN_SPRG_GEN_SCRATCH,r15
 	mfspr	r14,SPRN_DBSR
 	EXCEPTION_COMMON(0xd00, PACA_EXCRIT, INTS_DISABLE)
+=======
+	mfspr	r14,SPRN_DBSR
+	EXCEPTION_COMMON_CRIT(0xd00)
+>>>>>>> v3.18
 =======
 	mfspr	r14,SPRN_DBSR
 	EXCEPTION_COMMON_CRIT(0xd00)
@@ -995,9 +1134,15 @@ END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 	ld	r14,PACA_EXCRIT+EX_R14(r13)
 	ld	r15,PACA_EXCRIT+EX_R15(r13)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.save_nvgprs
 	bl	.DebugException
 	b	.ret_from_except
+=======
+	bl	save_nvgprs
+	bl	DebugException
+	b	ret_from_except
+>>>>>>> v3.18
 =======
 	bl	save_nvgprs
 	bl	DebugException
@@ -1058,10 +1203,16 @@ kernel_dbg_exc:
 	 * normal exception
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfspr	r15,SPRN_SPRG_DBG_SCRATCH
 	mtspr	SPRN_SPRG_GEN_SCRATCH,r15
 	mfspr	r14,SPRN_DBSR
 	EXCEPTION_COMMON(0xd08, PACA_EXDBG, INTS_DISABLE)
+=======
+	mfspr	r14,SPRN_DBSR
+	EXCEPTION_COMMON_DBG(0xd08)
+	INTS_DISABLE
+>>>>>>> v3.18
 =======
 	mfspr	r14,SPRN_DBSR
 	EXCEPTION_COMMON_DBG(0xd08)
@@ -1073,9 +1224,15 @@ kernel_dbg_exc:
 	ld	r14,PACA_EXDBG+EX_R14(r13)
 	ld	r15,PACA_EXDBG+EX_R15(r13)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.save_nvgprs
 	bl	.DebugException
 	b	.ret_from_except
+=======
+	bl	save_nvgprs
+	bl	DebugException
+	b	ret_from_except
+>>>>>>> v3.18
 =======
 	bl	save_nvgprs
 	bl	DebugException
@@ -1086,6 +1243,7 @@ kernel_dbg_exc:
 	NORMAL_EXCEPTION_PROLOG(0x260, BOOKE_INTERRUPT_PERFORMANCE_MONITOR,
 				PROLOG_ADDITION_NONE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_COMMON(0x260, PACA_EXGEN, INTS_DISABLE)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	.performance_monitor_exception
@@ -1095,6 +1253,8 @@ kernel_dbg_exc:
 	MASKABLE_EXCEPTION(0x280, BOOKE_INTERRUPT_DOORBELL,
 			   doorbell, .doorbell_exception, ACK_NONE)
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_COMMON(0x260)
 	INTS_DISABLE
 	CHECK_NAPPING()
@@ -1105,12 +1265,16 @@ kernel_dbg_exc:
 /* Doorbell interrupt */
 	MASKABLE_EXCEPTION(0x280, BOOKE_INTERRUPT_DOORBELL,
 			   doorbell, doorbell_exception, ACK_NONE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Doorbell critical Interrupt */
 	START_EXCEPTION(doorbell_crit);
 	CRIT_EXCEPTION_PROLOG(0x2a0, BOOKE_INTERRUPT_DOORBELL_CRITICAL,
 			      PROLOG_ADDITION_NONE)
+<<<<<<< HEAD
 <<<<<<< HEAD
 //	EXCEPTION_COMMON(0x2a0, PACA_EXCRIT, INTS_DISABLE)
 //	bl	special_reg_save_crit
@@ -1120,6 +1284,8 @@ kernel_dbg_exc:
 //	b	ret_from_crit_except
 	b	.
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_COMMON_CRIT(0x2a0)
 	bl	save_nvgprs
 	bl	special_reg_save
@@ -1127,6 +1293,9 @@ kernel_dbg_exc:
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	unknown_exception
 	b	ret_from_crit_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1137,6 +1306,7 @@ kernel_dbg_exc:
 	GDBELL_EXCEPTION_PROLOG(0x2c0, BOOKE_INTERRUPT_GUEST_DBELL,
 			        PROLOG_ADDITION_NONE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_COMMON(0x2c0, PACA_EXGEN, INTS_KEEP)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	.save_nvgprs
@@ -1144,18 +1314,24 @@ kernel_dbg_exc:
 	bl	.unknown_exception
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_COMMON(0x2c0)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	save_nvgprs
 	INTS_RESTORE_HARD
 	bl	unknown_exception
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Guest Doorbell critical Interrupt */
 	START_EXCEPTION(guest_doorbell_crit);
 	CRIT_EXCEPTION_PROLOG(0x2e0, BOOKE_INTERRUPT_GUEST_DBELL_CRIT,
 			      PROLOG_ADDITION_NONE)
+<<<<<<< HEAD
 <<<<<<< HEAD
 //	EXCEPTION_COMMON(0x2e0, PACA_EXCRIT, INTS_DISABLE)
 //	bl	special_reg_save_crit
@@ -1165,6 +1341,8 @@ kernel_dbg_exc:
 //	b	ret_from_crit_except
 	b	.
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_COMMON_CRIT(0x2e0)
 	bl	save_nvgprs
 	bl	special_reg_save
@@ -1172,12 +1350,16 @@ kernel_dbg_exc:
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	unknown_exception
 	b	ret_from_crit_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Hypervisor call */
 	START_EXCEPTION(hypercall);
 	NORMAL_EXCEPTION_PROLOG(0x310, BOOKE_INTERRUPT_HV_SYSCALL,
 			        PROLOG_ADDITION_NONE)
+<<<<<<< HEAD
 <<<<<<< HEAD
 	EXCEPTION_COMMON(0x310, PACA_EXGEN, INTS_KEEP)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
@@ -1186,12 +1368,17 @@ kernel_dbg_exc:
 	bl	.unknown_exception
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_COMMON(0x310)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	save_nvgprs
 	INTS_RESTORE_HARD
 	bl	unknown_exception
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Embedded Hypervisor priviledged  */
@@ -1199,8 +1386,11 @@ kernel_dbg_exc:
 	NORMAL_EXCEPTION_PROLOG(0x320, BOOKE_INTERRUPT_HV_PRIV,
 			        PROLOG_ADDITION_NONE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_COMMON(0x320, PACA_EXGEN, INTS_KEEP)
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_COMMON(0x320)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	save_nvgprs
@@ -1213,6 +1403,9 @@ kernel_dbg_exc:
 	NORMAL_EXCEPTION_PROLOG(0x340, BOOKE_INTERRUPT_LRAT_ERROR,
 			        PROLOG_ADDITION_NONE)
 	EXCEPTION_COMMON(0x340)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	.save_nvgprs
@@ -1307,6 +1500,7 @@ storage_fault_common:
 	ld	r14,PACA_EXGEN+EX_R14(r13)
 	ld	r15,PACA_EXGEN+EX_R15(r13)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.do_page_fault
 	cmpdi	r3,0
 	bne-	1f
@@ -1318,6 +1512,8 @@ storage_fault_common:
 	bl	.bad_page_fault
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	bl	do_page_fault
 	cmpdi	r3,0
 	bne-	1f
@@ -1328,6 +1524,9 @@ storage_fault_common:
 	ld	r4,_DAR(r1)
 	bl	bad_page_fault
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1341,15 +1540,21 @@ alignment_more:
 	ld	r14,PACA_EXGEN+EX_R14(r13)
 	ld	r15,PACA_EXGEN+EX_R15(r13)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.save_nvgprs
 	INTS_RESTORE_HARD
 	bl	.alignment_exception
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	bl	save_nvgprs
 	INTS_RESTORE_HARD
 	bl	alignment_exception
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1423,6 +1628,10 @@ BAD_STACK_TRAMPOLINE(0x300)
 BAD_STACK_TRAMPOLINE(0x310)
 BAD_STACK_TRAMPOLINE(0x320)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+BAD_STACK_TRAMPOLINE(0x340)
+>>>>>>> v3.18
 =======
 BAD_STACK_TRAMPOLINE(0x340)
 >>>>>>> v3.18
@@ -1488,7 +1697,11 @@ bad_stack_book3e:
 	ld	r2,PACATOC(r13)
 1:	addi	r3,r1,STACK_FRAME_OVERHEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.kernel_bad_stack
+=======
+	bl	kernel_bad_stack
+>>>>>>> v3.18
 =======
 	bl	kernel_bad_stack
 >>>>>>> v3.18
@@ -1627,12 +1840,18 @@ skpinv:	addi	r6,r6,1				/* Increment */
 	tlbre
 	mfspr	r6,SPRN_MAS1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rlwinm	r6,r6,0,2,0	/* clear IPROT */
 	mtspr	SPRN_MAS1,r6
 	tlbwe
 
 	/* Invalidate TLB1 */
 	PPC_TLBILX_ALL(0,R0)
+=======
+	rlwinm	r6,r6,0,2,31	/* clear IPROT and VALID */
+	mtspr	SPRN_MAS1,r6
+	tlbwe
+>>>>>>> v3.18
 =======
 	rlwinm	r6,r6,0,2,31	/* clear IPROT and VALID */
 	mtspr	SPRN_MAS1,r6
@@ -1692,12 +1911,18 @@ skpinv:	addi	r6,r6,1				/* Increment */
 	tlbre
 	mfspr	r5,SPRN_MAS1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rlwinm	r5,r5,0,2,0	/* clear IPROT */
 	mtspr	SPRN_MAS1,r5
 	tlbwe
 
 	/* Invalidate TLB1 */
 	PPC_TLBILX_ALL(0,R0)
+=======
+	rlwinm	r5,r5,0,2,31	/* clear IPROT and VALID */
+	mtspr	SPRN_MAS1,r5
+	tlbwe
+>>>>>>> v3.18
 =======
 	rlwinm	r5,r5,0,2,31	/* clear IPROT and VALID */
 	mtspr	SPRN_MAS1,r5
@@ -1805,6 +2030,7 @@ a2_tlbinit_after_linear_map:
 a2_tlbinit_after_iprot_flush:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_EARLY_DEBUG_WSP
 	/* Now establish early debug mappings if applicable */
 	/* Restore the MAS0 we used for linear mapping load */
@@ -1821,6 +2047,8 @@ a2_tlbinit_after_iprot_flush:
 	tlbwe
 #endif /* CONFIG_PPC_EARLY_DEBUG_WSP */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	PPC_TLBILX(0,0,R0)
@@ -1862,6 +2090,7 @@ _GLOBAL(start_initialization_book3e)
 	 * address and never use 0 based addresses.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.initial_tlb_book3e
 
 	/* Init global core bits */
@@ -1870,6 +2099,8 @@ _GLOBAL(start_initialization_book3e)
 	/* Init per-thread bits */
 	bl	.init_thread_book3e
 =======
+=======
+>>>>>>> v3.18
 	bl	initial_tlb_book3e
 
 	/* Init global core bits */
@@ -1877,6 +2108,9 @@ _GLOBAL(start_initialization_book3e)
 
 	/* Init per-thread bits */
 	bl	init_thread_book3e
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Return to common init code */
@@ -1899,7 +2133,11 @@ _GLOBAL(start_initialization_book3e)
 _GLOBAL(book3e_secondary_core_init_tlb_set)
 	li	r4,1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.generic_secondary_smp_init
+=======
+	b	generic_secondary_smp_init
+>>>>>>> v3.18
 =======
 	b	generic_secondary_smp_init
 >>>>>>> v3.18
@@ -1913,7 +2151,11 @@ _GLOBAL(book3e_secondary_core_init)
 
 	/* Setup TLB for this core */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.initial_tlb_book3e
+=======
+	bl	initial_tlb_book3e
+>>>>>>> v3.18
 =======
 	bl	initial_tlb_book3e
 >>>>>>> v3.18
@@ -1921,6 +2163,7 @@ _GLOBAL(book3e_secondary_core_init)
 	/* We can return from the above running at a different
 	 * address, so recalculate r2 (TOC)
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bl	.relative_toc
 
@@ -1930,6 +2173,8 @@ _GLOBAL(book3e_secondary_core_init)
 	/* Init per-thread bits */
 3:	bl	.init_thread_book3e
 =======
+=======
+>>>>>>> v3.18
 	bl	relative_toc
 
 	/* Init global core bits */
@@ -1937,6 +2182,9 @@ _GLOBAL(book3e_secondary_core_init)
 
 	/* Init per-thread bits */
 3:	bl	init_thread_book3e
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Return to common init code at proper virtual address.
@@ -1965,7 +2213,11 @@ _GLOBAL(book3e_secondary_thread_init)
 	b	3b
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _STATIC(init_core_book3e)
+=======
+init_core_book3e:
+>>>>>>> v3.18
 =======
 init_core_book3e:
 >>>>>>> v3.18
@@ -1976,7 +2228,11 @@ init_core_book3e:
 	blr
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _STATIC(init_thread_book3e)
+=======
+init_thread_book3e:
+>>>>>>> v3.18
 =======
 init_thread_book3e:
 >>>>>>> v3.18
@@ -2037,9 +2293,15 @@ _GLOBAL(setup_ehv_ivors)
 	SET_IVOR(39, 0x2e0) /* Guest Processor Doorbell Crit/MC */
 	blr
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 _GLOBAL(setup_lrat_ivor)
 	SET_IVOR(42, 0x340) /* LRAT Error */
 	blr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

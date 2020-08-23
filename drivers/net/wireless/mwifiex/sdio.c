@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: SDIO specific handling
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -55,8 +59,11 @@ static struct mwifiex_if_ops sdio_ops;
 static struct semaphore add_remove_card_sem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mwifiex_sdio_resume(struct device *dev);
 =======
+=======
+>>>>>>> v3.18
 static struct memory_type_mapping mem_type_mapping_tbl[] = {
 	{"ITCM", NULL, 0, 0xF0},
 	{"DTCM", NULL, 0, 0xF1},
@@ -74,6 +81,9 @@ static struct memory_type_mapping mem_type_mapping_tbl[] = {
 	{"EXT13", NULL, 0, 0xFD},
 	{"EXTLAST", NULL, 0, 0xFE},
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -102,7 +112,10 @@ mwifiex_sdio_probe(struct sdio_func *func, const struct sdio_device_id *id)
 	func->card->quirks |= MMC_QUIRK_BLKSZ_FOR_BYTE_MODE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (id->driver_data) {
 		struct mwifiex_sdio_device *data = (void *)id->driver_data;
 
@@ -118,6 +131,9 @@ mwifiex_sdio_probe(struct sdio_func *func, const struct sdio_device_id *id)
 		card->supports_fw_dump = data->supports_fw_dump;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sdio_claim_host(func);
 	ret = sdio_enable_func(func);
@@ -144,7 +160,10 @@ mwifiex_sdio_probe(struct sdio_func *func, const struct sdio_device_id *id)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * SDIO resume.
  *
  * Kernel needs to suspend all functions separately. Therefore all
@@ -190,6 +209,9 @@ static int mwifiex_sdio_resume(struct device *dev)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * SDIO remove.
  *
@@ -202,7 +224,10 @@ mwifiex_sdio_remove(struct sdio_func *func)
 	struct mwifiex_adapter *adapter;
 	struct mwifiex_private *priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -217,8 +242,12 @@ mwifiex_sdio_remove(struct sdio_func *func)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* In case driver is removed when asynchronous FW load is in progress */
 	wait_for_completion(&adapter->fw_load);
+=======
+	cancel_work_sync(&adapter->iface_work);
+>>>>>>> v3.18
 =======
 	cancel_work_sync(&adapter->iface_work);
 >>>>>>> v3.18
@@ -228,11 +257,15 @@ mwifiex_sdio_remove(struct sdio_func *func)
 			mwifiex_sdio_resume(adapter->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < adapter->priv_num; i++)
 			if ((GET_BSS_ROLE(adapter->priv[i]) ==
 						MWIFIEX_BSS_ROLE_STA) &&
 			    adapter->priv[i]->media_connected)
 				mwifiex_deauthenticate(adapter->priv[i], NULL);
+=======
+		mwifiex_deauthenticate_all(adapter);
+>>>>>>> v3.18
 =======
 		mwifiex_deauthenticate_all(adapter);
 >>>>>>> v3.18
@@ -244,7 +277,10 @@ mwifiex_sdio_remove(struct sdio_func *func)
 
 	mwifiex_remove_card(card->adapter, &add_remove_card_sem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(card);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -293,6 +329,10 @@ static int mwifiex_sdio_suspend(struct device *dev)
 	if (!mwifiex_enable_hs(adapter)) {
 		dev_err(adapter->dev, "cmd: failed to suspend\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		adapter->hs_enabling = false;
+>>>>>>> v3.18
 =======
 		adapter->hs_enabling = false;
 >>>>>>> v3.18
@@ -305,6 +345,10 @@ static int mwifiex_sdio_suspend(struct device *dev)
 	/* Indicate device suspended */
 	adapter->is_suspended = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	adapter->hs_enabling = false;
+>>>>>>> v3.18
 =======
 	adapter->hs_enabling = false;
 >>>>>>> v3.18
@@ -312,6 +356,7 @@ static int mwifiex_sdio_suspend(struct device *dev)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * SDIO resume.
@@ -360,12 +405,15 @@ static int mwifiex_sdio_resume(struct device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Device ID for SD8786 */
 #define SDIO_DEVICE_ID_MARVELL_8786   (0x9116)
 /* Device ID for SD8787 */
 #define SDIO_DEVICE_ID_MARVELL_8787   (0x9119)
 /* Device ID for SD8797 */
 #define SDIO_DEVICE_ID_MARVELL_8797   (0x9129)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* WLAN IDs */
@@ -374,6 +422,8 @@ static const struct sdio_device_id mwifiex_ids[] = {
 	{SDIO_DEVICE(SDIO_VENDOR_ID_MARVELL, SDIO_DEVICE_ID_MARVELL_8787)},
 	{SDIO_DEVICE(SDIO_VENDOR_ID_MARVELL, SDIO_DEVICE_ID_MARVELL_8797)},
 =======
+=======
+>>>>>>> v3.18
 /* Device ID for SD8897 */
 #define SDIO_DEVICE_ID_MARVELL_8897   (0x912d)
 /* Device ID for SD8887 */
@@ -391,6 +441,9 @@ static const struct sdio_device_id mwifiex_ids[] = {
 		.driver_data = (unsigned long) &mwifiex_sdio_sd8897},
 	{SDIO_DEVICE(SDIO_VENDOR_ID_MARVELL, SDIO_DEVICE_ID_MARVELL_8887),
 		.driver_data = (unsigned long)&mwifiex_sdio_sd8887},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{},
 };
@@ -414,7 +467,10 @@ static struct sdio_driver mwifiex_sdio = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Write data into SDIO card register. Caller claims SDIO device. */
 static int
 mwifiex_write_reg_locked(struct sdio_func *func, u32 reg, u8 data)
@@ -424,11 +480,15 @@ mwifiex_write_reg_locked(struct sdio_func *func, u32 reg, u8 data)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This function writes data into SDIO card register.
  */
 static int
+<<<<<<< HEAD
 <<<<<<< HEAD
 mwifiex_write_reg(struct mwifiex_adapter *adapter, u32 reg, u32 data)
 {
@@ -438,6 +498,8 @@ mwifiex_write_reg(struct mwifiex_adapter *adapter, u32 reg, u32 data)
 	sdio_claim_host(card->func);
 	sdio_writeb(card->func, (u8) data, reg, &ret);
 =======
+=======
+>>>>>>> v3.18
 mwifiex_write_reg(struct mwifiex_adapter *adapter, u32 reg, u8 data)
 {
 	struct sdio_mmc_card *card = adapter->card;
@@ -445,6 +507,9 @@ mwifiex_write_reg(struct mwifiex_adapter *adapter, u32 reg, u8 data)
 
 	sdio_claim_host(card->func);
 	ret = mwifiex_write_reg_locked(card->func, reg, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sdio_release_host(card->func);
 
@@ -456,7 +521,11 @@ mwifiex_write_reg(struct mwifiex_adapter *adapter, u32 reg, u8 data)
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 mwifiex_read_reg(struct mwifiex_adapter *adapter, u32 reg, u32 *data)
+=======
+mwifiex_read_reg(struct mwifiex_adapter *adapter, u32 reg, u8 *data)
+>>>>>>> v3.18
 =======
 mwifiex_read_reg(struct mwifiex_adapter *adapter, u32 reg, u8 *data)
 >>>>>>> v3.18
@@ -562,8 +631,11 @@ static int mwifiex_pm_wakeup_card_complete(struct mwifiex_adapter *adapter)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This function initializes the IO ports.
 =======
+=======
+>>>>>>> v3.18
  * This function is used to initialize IO ports for the
  * chipsets supporting SDIO new mode eg SD8897.
  */
@@ -601,6 +673,9 @@ static int mwifiex_init_sdio_new_mode(struct mwifiex_adapter *adapter)
 }
 
 /* This function initializes the IO ports.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * The following operations are performed -
@@ -611,6 +686,7 @@ static int mwifiex_init_sdio_new_mode(struct mwifiex_adapter *adapter)
 static int mwifiex_init_sdio_ioport(struct mwifiex_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reg;
 
 	adapter->ioport = 0;
@@ -618,6 +694,8 @@ static int mwifiex_init_sdio_ioport(struct mwifiex_adapter *adapter)
 	/* Read the IO port */
 	if (!mwifiex_read_reg(adapter, IO_PORT_0_REG, &reg))
 =======
+=======
+>>>>>>> v3.18
 	u8 reg;
 	struct sdio_mmc_card *card = adapter->card;
 
@@ -631,13 +709,20 @@ static int mwifiex_init_sdio_ioport(struct mwifiex_adapter *adapter)
 
 	/* Read the IO port */
 	if (!mwifiex_read_reg(adapter, card->reg->io_port_0_reg, &reg))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		adapter->ioport |= (reg & 0xff);
 	else
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mwifiex_read_reg(adapter, IO_PORT_1_REG, &reg))
+=======
+	if (!mwifiex_read_reg(adapter, card->reg->io_port_1_reg, &reg))
+>>>>>>> v3.18
 =======
 	if (!mwifiex_read_reg(adapter, card->reg->io_port_1_reg, &reg))
 >>>>>>> v3.18
@@ -645,6 +730,7 @@ static int mwifiex_init_sdio_ioport(struct mwifiex_adapter *adapter)
 	else
 		return -1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!mwifiex_read_reg(adapter, IO_PORT_2_REG, &reg))
 		adapter->ioport |= ((reg & 0xff) << 16);
@@ -658,6 +744,8 @@ static int mwifiex_init_sdio_ioport(struct mwifiex_adapter *adapter)
 		mwifiex_write_reg(adapter, HOST_INT_RSR_REG,
 				  reg | SDIO_INT_MASK);
 =======
+=======
+>>>>>>> v3.18
 	if (!mwifiex_read_reg(adapter, card->reg->io_port_2_reg, &reg))
 		adapter->ioport |= ((reg & 0xff) << 16);
 	else
@@ -669,14 +757,22 @@ cont:
 	if (!mwifiex_read_reg(adapter, card->reg->host_int_rsr_reg, &reg))
 		mwifiex_write_reg(adapter, card->reg->host_int_rsr_reg,
 				  reg | card->reg->sdio_int_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		return -1;
 
 	/* Dnld/Upld ready set to auto reset */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mwifiex_read_reg(adapter, CARD_MISC_CFG_REG, &reg))
 		mwifiex_write_reg(adapter, CARD_MISC_CFG_REG,
+=======
+	if (!mwifiex_read_reg(adapter, card->reg->card_misc_cfg_reg, &reg))
+		mwifiex_write_reg(adapter, card->reg->card_misc_cfg_reg,
+>>>>>>> v3.18
 =======
 	if (!mwifiex_read_reg(adapter, card->reg->card_misc_cfg_reg, &reg))
 		mwifiex_write_reg(adapter, card->reg->card_misc_cfg_reg,
@@ -727,6 +823,7 @@ static int mwifiex_get_rd_port(struct mwifiex_adapter *adapter, u8 *port)
 {
 	struct sdio_mmc_card *card = adapter->card;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 rd_bitmap = card->mp_rd_bitmap;
 
 	dev_dbg(adapter->dev, "data: mp_rd_bitmap=0x%04x\n", rd_bitmap);
@@ -756,6 +853,8 @@ static int mwifiex_get_rd_port(struct mwifiex_adapter *adapter, u8 *port)
 			*port, rd_bitmap, card->mp_rd_bitmap);
 	}
 =======
+=======
+>>>>>>> v3.18
 	const struct mwifiex_sdio_card_reg *reg = card->reg;
 	u32 rd_bitmap = card->mp_rd_bitmap;
 
@@ -792,6 +891,9 @@ static int mwifiex_get_rd_port(struct mwifiex_adapter *adapter, u8 *port)
 		"data: port=%d mp_rd_bitmap=0x%08x -> 0x%08x\n",
 		*port, rd_bitmap, card->mp_rd_bitmap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -803,6 +905,7 @@ static int mwifiex_get_rd_port(struct mwifiex_adapter *adapter, u8 *port)
  * increased (provided it does not reach the maximum limit, in which
  * case it is reset to 1)
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int mwifiex_get_wr_port_data(struct mwifiex_adapter *adapter, u8 *port)
 {
@@ -820,6 +923,8 @@ static int mwifiex_get_wr_port_data(struct mwifiex_adapter *adapter, u8 *port)
 		if (++card->curr_wr_port == card->mp_end_port)
 			card->curr_wr_port = 1;
 =======
+=======
+>>>>>>> v3.18
 static int mwifiex_get_wr_port_data(struct mwifiex_adapter *adapter, u32 *port)
 {
 	struct sdio_mmc_card *card = adapter->card;
@@ -838,6 +943,9 @@ static int mwifiex_get_wr_port_data(struct mwifiex_adapter *adapter, u32 *port)
 		*port = card->curr_wr_port;
 		if (++card->curr_wr_port == card->mp_end_port)
 			card->curr_wr_port = reg->start_wr_port;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		adapter->data_sent = true;
@@ -845,9 +953,15 @@ static int mwifiex_get_wr_port_data(struct mwifiex_adapter *adapter, u32 *port)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*port == CTRL_PORT) {
 		dev_err(adapter->dev, "invalid data port=%d cur port=%d"
 			" mp_wr_bitmap=0x%04x -> 0x%04x\n",
+=======
+	if ((card->has_control_mask) && (*port == CTRL_PORT)) {
+		dev_err(adapter->dev,
+			"invalid data port=%d cur port=%d mp_wr_bitmap=0x%08x -> 0x%08x\n",
+>>>>>>> v3.18
 =======
 	if ((card->has_control_mask) && (*port == CTRL_PORT)) {
 		dev_err(adapter->dev,
@@ -859,7 +973,11 @@ static int mwifiex_get_wr_port_data(struct mwifiex_adapter *adapter, u32 *port)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(adapter->dev, "data: port=%d mp_wr_bitmap=0x%04x -> 0x%04x\n",
+=======
+	dev_dbg(adapter->dev, "data: port=%d mp_wr_bitmap=0x%08x -> 0x%08x\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(adapter->dev, "data: port=%d mp_wr_bitmap=0x%08x -> 0x%08x\n",
 >>>>>>> v3.18
@@ -875,18 +993,24 @@ static int
 mwifiex_sdio_poll_card_status(struct mwifiex_adapter *adapter, u8 bits)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 tries;
 	u32 cs;
 
 	for (tries = 0; tries < MAX_POLL_TRIES; tries++) {
 		if (mwifiex_read_reg(adapter, CARD_STATUS_REG, &cs))
 =======
+=======
+>>>>>>> v3.18
 	struct sdio_mmc_card *card = adapter->card;
 	u32 tries;
 	u8 cs;
 
 	for (tries = 0; tries < MAX_POLL_TRIES; tries++) {
 		if (mwifiex_read_reg(adapter, card->reg->poll_reg, &cs))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		else if ((cs & bits) == bits)
@@ -907,6 +1031,7 @@ static int
 mwifiex_sdio_read_fw_status(struct mwifiex_adapter *adapter, u16 *dat)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 fws0, fws1;
 
 	if (mwifiex_read_reg(adapter, CARD_FW_STATUS0_REG, &fws0))
@@ -914,6 +1039,8 @@ mwifiex_sdio_read_fw_status(struct mwifiex_adapter *adapter, u16 *dat)
 
 	if (mwifiex_read_reg(adapter, CARD_FW_STATUS1_REG, &fws1))
 =======
+=======
+>>>>>>> v3.18
 	struct sdio_mmc_card *card = adapter->card;
 	const struct mwifiex_sdio_card_reg *reg = card->reg;
 	u8 fws0, fws1;
@@ -922,6 +1049,9 @@ mwifiex_sdio_read_fw_status(struct mwifiex_adapter *adapter, u16 *dat)
 		return -1;
 
 	if (mwifiex_read_reg(adapter, reg->status_reg_1, &fws1))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -1;
 
@@ -936,6 +1066,7 @@ mwifiex_sdio_read_fw_status(struct mwifiex_adapter *adapter, u16 *dat)
  * The host interrupt mask is read, the disable bit is reset and
  * written back to the card host interrupt mask register.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int mwifiex_sdio_disable_host_int(struct mwifiex_adapter *adapter)
 {
@@ -955,6 +1086,8 @@ static int mwifiex_sdio_disable_host_int(struct mwifiex_adapter *adapter)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static void mwifiex_sdio_disable_host_int(struct mwifiex_adapter *adapter)
 {
 	struct sdio_mmc_card *card = adapter->card;
@@ -1023,6 +1156,9 @@ mwifiex_sdio_interrupt(struct sdio_func *func)
 
 	mwifiex_interrupt_status(adapter);
 	mwifiex_main_process(adapter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1035,6 +1171,7 @@ mwifiex_sdio_interrupt(struct sdio_func *func)
 static int mwifiex_sdio_enable_host_int(struct mwifiex_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Simply write the mask to the register */
 	if (mwifiex_write_reg(adapter, HOST_INT_MASK_REG, HOST_INT_ENABLE)) {
 		dev_err(adapter->dev, "enable host interrupt failed\n");
@@ -1042,6 +1179,8 @@ static int mwifiex_sdio_enable_host_int(struct mwifiex_adapter *adapter)
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct sdio_mmc_card *card = adapter->card;
 	struct sdio_func *func = card->func;
 	int ret;
@@ -1066,6 +1205,9 @@ static int mwifiex_sdio_enable_host_int(struct mwifiex_adapter *adapter)
 out:
 	sdio_release_host(func);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1115,6 +1257,11 @@ static int mwifiex_prog_fw_w_helper(struct mwifiex_adapter *adapter,
 				    struct mwifiex_fw_image *fw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct sdio_mmc_card *card = adapter->card;
+	const struct mwifiex_sdio_card_reg *reg = card->reg;
+>>>>>>> v3.18
 =======
 	struct sdio_mmc_card *card = adapter->card;
 	const struct mwifiex_sdio_card_reg *reg = card->reg;
@@ -1124,7 +1271,11 @@ static int mwifiex_prog_fw_w_helper(struct mwifiex_adapter *adapter,
 	u32 firmware_len = fw->fw_len;
 	u32 offset = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 base0, base1;
+=======
+	u8 base0, base1;
+>>>>>>> v3.18
 =======
 	u8 base0, base1;
 >>>>>>> v3.18
@@ -1165,7 +1316,11 @@ static int mwifiex_prog_fw_w_helper(struct mwifiex_adapter *adapter,
 
 		for (tries = 0; tries < MAX_POLL_TRIES; tries++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = mwifiex_read_reg(adapter, HOST_F1_RD_BASE_0,
+=======
+			ret = mwifiex_read_reg(adapter, reg->base_0_reg,
+>>>>>>> v3.18
 =======
 			ret = mwifiex_read_reg(adapter, reg->base_0_reg,
 >>>>>>> v3.18
@@ -1178,7 +1333,11 @@ static int mwifiex_prog_fw_w_helper(struct mwifiex_adapter *adapter,
 				goto done;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = mwifiex_read_reg(adapter, HOST_F1_RD_BASE_1,
+=======
+			ret = mwifiex_read_reg(adapter, reg->base_1_reg,
+>>>>>>> v3.18
 =======
 			ret = mwifiex_read_reg(adapter, reg->base_1_reg,
 >>>>>>> v3.18
@@ -1274,16 +1433,22 @@ static int mwifiex_check_fw_status(struct mwifiex_adapter *adapter,
 				   u32 poll_num)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 	u16 firmware_stat;
 	u32 tries;
 	u32 winner_status;
 =======
+=======
+>>>>>>> v3.18
 	struct sdio_mmc_card *card = adapter->card;
 	int ret = 0;
 	u16 firmware_stat;
 	u32 tries;
 	u8 winner_status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Wait for firmware initialization event */
@@ -1296,7 +1461,11 @@ static int mwifiex_check_fw_status(struct mwifiex_adapter *adapter,
 			break;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mdelay(100);
+=======
+			msleep(100);
+>>>>>>> v3.18
 =======
 			msleep(100);
 >>>>>>> v3.18
@@ -1307,7 +1476,11 @@ static int mwifiex_check_fw_status(struct mwifiex_adapter *adapter,
 	if (ret) {
 		if (mwifiex_read_reg
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (adapter, CARD_FW_STATUS0_REG, &winner_status))
+=======
+		    (adapter, card->reg->status_reg_0, &winner_status))
+>>>>>>> v3.18
 =======
 		    (adapter, card->reg->status_reg_0, &winner_status))
 >>>>>>> v3.18
@@ -1322,6 +1495,7 @@ static int mwifiex_check_fw_status(struct mwifiex_adapter *adapter,
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * This function reads the interrupt status from card.
  */
@@ -1384,6 +1558,8 @@ mwifiex_sdio_interrupt(struct sdio_func *func)
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * This function decodes a received packet.
  *
  * Based on the type, the packet is treated as either a data, or
@@ -1404,8 +1580,11 @@ static int mwifiex_decode_rx_packet(struct mwifiex_adapter *adapter,
 	case MWIFIEX_TYPE_DATA:
 		dev_dbg(adapter->dev, "info: --- Rx: Data packet ---\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mwifiex_handle_rx_packet(adapter, skb);
 =======
+=======
+>>>>>>> v3.18
 		if (adapter->rx_work_enabled) {
 			skb_queue_tail(&adapter->rx_data_q, skb);
 			adapter->data_received = true;
@@ -1413,6 +1592,9 @@ static int mwifiex_decode_rx_packet(struct mwifiex_adapter *adapter,
 		} else {
 			mwifiex_handle_rx_packet(adapter, skb);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -1441,7 +1623,11 @@ static int mwifiex_decode_rx_packet(struct mwifiex_adapter *adapter,
 	case MWIFIEX_TYPE_EVENT:
 		dev_dbg(adapter->dev, "info: --- Rx: Event ---\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		adapter->event_cause = *(u32 *) skb->data;
+=======
+		adapter->event_cause = le32_to_cpu(*(__le32 *) skb->data);
+>>>>>>> v3.18
 =======
 		adapter->event_cause = le32_to_cpu(*(__le32 *) skb->data);
 >>>>>>> v3.18
@@ -1485,17 +1671,23 @@ static int mwifiex_sdio_card_to_host_mp_aggr(struct mwifiex_adapter *adapter,
 	struct sk_buff *skb_deaggr;
 	u32 pind;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 pkt_len, pkt_type = 0;
 	u8 *curr_ptr;
 	u32 rx_len = skb->len;
 
 	if (port == CTRL_PORT) {
 =======
+=======
+>>>>>>> v3.18
 	u32 pkt_len, pkt_type, mport;
 	u8 *curr_ptr;
 	u32 rx_len = skb->len;
 
 	if ((card->has_control_mask) && (port == CTRL_PORT)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Read the command Resp without aggr */
 		dev_dbg(adapter->dev, "info: %s: no aggregation for cmd "
@@ -1514,12 +1706,18 @@ static int mwifiex_sdio_card_to_host_mp_aggr(struct mwifiex_adapter *adapter,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (card->mp_rd_bitmap & (~((u16) CTRL_PORT_MASK))) {
 =======
+=======
+>>>>>>> v3.18
 	if ((!card->has_control_mask && (card->mp_rd_bitmap &
 					 card->reg->data_port_mask)) ||
 	    (card->has_control_mask && (card->mp_rd_bitmap &
 					(~((u32) CTRL_PORT_MASK))))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Some more data RX pending */
 		dev_dbg(adapter->dev, "info: %s: not last packet\n", __func__);
@@ -1557,15 +1755,21 @@ static int mwifiex_sdio_card_to_host_mp_aggr(struct mwifiex_adapter *adapter,
 		dev_dbg(adapter->dev, "info: current packet aggregation\n");
 		/* Curr pkt can be aggregated */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MP_RX_AGGR_SETUP(card, skb, port);
 
 		if (MP_RX_AGGR_PKT_LIMIT_REACHED(card) ||
 		    MP_RX_AGGR_PORT_LIMIT_REACHED(card)) {
 =======
+=======
+>>>>>>> v3.18
 		mp_rx_aggr_setup(card, skb, port);
 
 		if (MP_RX_AGGR_PKT_LIMIT_REACHED(card) ||
 		    mp_rx_aggr_port_limit_reached(card)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev_dbg(adapter->dev, "info: %s: aggregated packet "
 				"limit reached\n", __func__);
@@ -1580,12 +1784,15 @@ static int mwifiex_sdio_card_to_host_mp_aggr(struct mwifiex_adapter *adapter,
 			card->mpa_rx.pkt_cnt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mwifiex_read_data_sync(adapter, card->mpa_rx.buf,
 					   card->mpa_rx.buf_len,
 					   (adapter->ioport | 0x1000 |
 					    (card->mpa_rx.ports << 4)) +
 					   card->mpa_rx.start_port, 1))
 =======
+=======
+>>>>>>> v3.18
 		if (card->supports_sdio_new_mode) {
 			int i;
 			u32 port_count;
@@ -1608,6 +1815,9 @@ static int mwifiex_sdio_card_to_host_mp_aggr(struct mwifiex_adapter *adapter,
 
 		if (mwifiex_read_data_sync(adapter, card->mpa_rx.buf,
 					   card->mpa_rx.buf_len, mport, 1))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto error;
 
@@ -1617,8 +1827,13 @@ static int mwifiex_sdio_card_to_host_mp_aggr(struct mwifiex_adapter *adapter,
 
 			/* get curr PKT len & type */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pkt_len = *(u16 *) &curr_ptr[0];
 			pkt_type = *(u16 *) &curr_ptr[2];
+=======
+			pkt_len = le16_to_cpu(*(__le16 *) &curr_ptr[0]);
+			pkt_type = le16_to_cpu(*(__le16 *) &curr_ptr[2]);
+>>>>>>> v3.18
 =======
 			pkt_len = le16_to_cpu(*(__le16 *) &curr_ptr[0]);
 			pkt_type = le16_to_cpu(*(__le16 *) &curr_ptr[2]);
@@ -1701,6 +1916,10 @@ static int mwifiex_process_int_status(struct mwifiex_adapter *adapter)
 {
 	struct sdio_mmc_card *card = adapter->card;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct mwifiex_sdio_card_reg *reg = card->reg;
+>>>>>>> v3.18
 =======
 	const struct mwifiex_sdio_card_reg *reg = card->reg;
 >>>>>>> v3.18
@@ -1713,6 +1932,11 @@ static int mwifiex_process_int_status(struct mwifiex_adapter *adapter)
 	u16 rx_len;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 bitmap;
+	u8 cr;
+>>>>>>> v3.18
 =======
 	u32 bitmap;
 	u8 cr;
@@ -1727,11 +1951,14 @@ static int mwifiex_process_int_status(struct mwifiex_adapter *adapter)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sdio_ireg & DN_LD_HOST_INT_STATUS) {
 		card->mp_wr_bitmap = ((u16) card->mp_regs[WR_BITMAP_U]) << 8;
 		card->mp_wr_bitmap |= (u16) card->mp_regs[WR_BITMAP_L];
 		dev_dbg(adapter->dev, "int: DNLD: wr_bitmap=0x%04x\n",
 =======
+=======
+>>>>>>> v3.18
 	/* Following interrupt is only for SDIO new mode */
 	if (sdio_ireg & DN_LD_CMD_PORT_HOST_INT_STATUS && adapter->cmd_sent)
 		adapter->cmd_sent = false;
@@ -1786,6 +2013,9 @@ static int mwifiex_process_int_status(struct mwifiex_adapter *adapter)
 		card->mp_wr_bitmap = bitmap;
 
 		dev_dbg(adapter->dev, "int: DNLD: wr_bitmap=0x%x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			card->mp_wr_bitmap);
 		if (adapter->data_sent &&
@@ -1800,17 +2030,23 @@ static int mwifiex_process_int_status(struct mwifiex_adapter *adapter)
 	   updated is command port only, cmd_sent should be done for any SDIO
 	   interrupt. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (adapter->cmd_sent) {
 		/* Check if firmware has attach buffer at command port and
 		   update just that in wr_bit_map. */
 		card->mp_wr_bitmap |=
 			(u16) card->mp_regs[WR_BITMAP_L] & CTRL_PORT_MASK;
 =======
+=======
+>>>>>>> v3.18
 	if (card->has_control_mask && adapter->cmd_sent) {
 		/* Check if firmware has attach buffer at command port and
 		   update just that in wr_bit_map. */
 		card->mp_wr_bitmap |=
 			(u32) card->mp_regs[reg->wr_bitmap_l] & CTRL_PORT_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (card->mp_wr_bitmap & CTRL_PORT_MASK)
 			adapter->cmd_sent = false;
@@ -1820,10 +2056,13 @@ static int mwifiex_process_int_status(struct mwifiex_adapter *adapter)
 		adapter->cmd_sent, adapter->data_sent);
 	if (sdio_ireg & UP_LD_HOST_INT_STATUS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		card->mp_rd_bitmap = ((u16) card->mp_regs[RD_BITMAP_U]) << 8;
 		card->mp_rd_bitmap |= (u16) card->mp_regs[RD_BITMAP_L];
 		dev_dbg(adapter->dev, "int: UPLD: rd_bitmap=0x%04x\n",
 =======
+=======
+>>>>>>> v3.18
 		bitmap = (u32) card->mp_regs[reg->rd_bitmap_l];
 		bitmap |= ((u32) card->mp_regs[reg->rd_bitmap_u]) << 8;
 		if (card->supports_sdio_new_mode) {
@@ -1834,6 +2073,9 @@ static int mwifiex_process_int_status(struct mwifiex_adapter *adapter)
 		}
 		card->mp_rd_bitmap = bitmap;
 		dev_dbg(adapter->dev, "int: UPLD: rd_bitmap=0x%x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			card->mp_rd_bitmap);
 
@@ -1845,8 +2087,13 @@ static int mwifiex_process_int_status(struct mwifiex_adapter *adapter)
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			len_reg_l = RD_LEN_P0_L + (port << 1);
 			len_reg_u = RD_LEN_P0_U + (port << 1);
+=======
+			len_reg_l = reg->rd_len_p0_l + (port << 1);
+			len_reg_u = reg->rd_len_p0_u + (port << 1);
+>>>>>>> v3.18
 =======
 			len_reg_l = reg->rd_len_p0_l + (port << 1);
 			len_reg_u = reg->rd_len_p0_u + (port << 1);
@@ -1883,6 +2130,7 @@ static int mwifiex_process_int_status(struct mwifiex_adapter *adapter)
 			if (mwifiex_sdio_card_to_host_mp_aggr(adapter, skb,
 							      port)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				u32 cr = 0;
 
 				dev_err(adapter->dev, "card_to_host_mpa failed:"
@@ -1914,13 +2162,21 @@ static int mwifiex_process_int_status(struct mwifiex_adapter *adapter)
 					" int status=%#x\n", sdio_ireg);
 				goto term_cmd;
 >>>>>>> v3.18
+=======
+				dev_err(adapter->dev, "card_to_host_mpa failed:"
+					" int status=%#x\n", sdio_ireg);
+				goto term_cmd;
+>>>>>>> v3.18
 			}
 		}
 	}
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 term_cmd:
 	/* terminate cmd */
@@ -1940,6 +2196,9 @@ term_cmd:
 		dev_dbg(adapter->dev, "info: CFG reg val =%x\n", cr);
 
 	return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1959,7 +2218,11 @@ term_cmd:
  */
 static int mwifiex_host_to_card_mp_aggr(struct mwifiex_adapter *adapter,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					u8 *payload, u32 pkt_len, u8 port,
+=======
+					u8 *payload, u32 pkt_len, u32 port,
+>>>>>>> v3.18
 =======
 					u8 *payload, u32 pkt_len, u32 port,
 >>>>>>> v3.18
@@ -1972,14 +2235,20 @@ static int mwifiex_host_to_card_mp_aggr(struct mwifiex_adapter *adapter,
 	s32 f_precopy_cur_buf = 0;
 	s32 f_postcopy_cur_buf = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if ((!card->mpa_tx.enabled) || (port == CTRL_PORT)) {
 =======
+=======
+>>>>>>> v3.18
 	u32 mport;
 
 	if (!card->mpa_tx.enabled ||
 	    (card->has_control_mask && (port == CTRL_PORT)) ||
 	    (card->supports_sdio_new_mode && (port == CMD_PORT_SLCT))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_dbg(adapter->dev, "info: %s: tx aggregation disabled\n",
 			__func__);
@@ -1995,8 +2264,12 @@ static int mwifiex_host_to_card_mp_aggr(struct mwifiex_adapter *adapter,
 
 		if (MP_TX_AGGR_IN_PROGRESS(card)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!MP_TX_AGGR_PORT_LIMIT_REACHED(card) &&
 			    MP_TX_AGGR_BUF_HAS_ROOM(card, pkt_len)) {
+=======
+			if (MP_TX_AGGR_BUF_HAS_ROOM(card, pkt_len)) {
+>>>>>>> v3.18
 =======
 			if (MP_TX_AGGR_BUF_HAS_ROOM(card, pkt_len)) {
 >>>>>>> v3.18
@@ -2012,8 +2285,12 @@ static int mwifiex_host_to_card_mp_aggr(struct mwifiex_adapter *adapter,
 				f_send_aggr_buf = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (MP_TX_AGGR_PORT_LIMIT_REACHED(card) ||
 				    !(card->mp_wr_bitmap &
+=======
+				if (!(card->mp_wr_bitmap &
+>>>>>>> v3.18
 =======
 				if (!(card->mp_wr_bitmap &
 >>>>>>> v3.18
@@ -2055,7 +2332,11 @@ static int mwifiex_host_to_card_mp_aggr(struct mwifiex_adapter *adapter,
 
 		if (MP_TX_AGGR_PKT_LIMIT_REACHED(card) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    MP_TX_AGGR_PORT_LIMIT_REACHED(card))
+=======
+		    mp_tx_aggr_port_limit_reached(card))
+>>>>>>> v3.18
 =======
 		    mp_tx_aggr_port_limit_reached(card))
 >>>>>>> v3.18
@@ -2068,12 +2349,15 @@ static int mwifiex_host_to_card_mp_aggr(struct mwifiex_adapter *adapter,
 			__func__,
 				card->mpa_tx.start_port, card->mpa_tx.ports);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = mwifiex_write_data_to_card(adapter, card->mpa_tx.buf,
 						 card->mpa_tx.buf_len,
 						 (adapter->ioport | 0x1000 |
 						 (card->mpa_tx.ports << 4)) +
 						  card->mpa_tx.start_port);
 =======
+=======
+>>>>>>> v3.18
 		if (card->supports_sdio_new_mode) {
 			u32 port_count;
 			int i;
@@ -2096,6 +2380,9 @@ static int mwifiex_host_to_card_mp_aggr(struct mwifiex_adapter *adapter,
 
 		ret = mwifiex_write_data_to_card(adapter, card->mpa_tx.buf,
 						 card->mpa_tx.buf_len, mport);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		MP_TX_AGGR_BUF_RESET(card);
@@ -2137,7 +2424,11 @@ static int mwifiex_sdio_host_to_card(struct mwifiex_adapter *adapter,
 	u32 buf_block_len;
 	u32 blk_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 port = CTRL_PORT;
+=======
+	u32 port = CTRL_PORT;
+>>>>>>> v3.18
 =======
 	u32 port = CTRL_PORT;
 >>>>>>> v3.18
@@ -2172,6 +2463,12 @@ static int mwifiex_sdio_host_to_card(struct mwifiex_adapter *adapter,
 			dev_err(adapter->dev, "%s: payload=%p, nb=%d\n",
 				__func__, payload, pkt_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		if (card->supports_sdio_new_mode)
+			port = CMD_PORT_SLCT;
+>>>>>>> v3.18
 =======
 
 		if (card->supports_sdio_new_mode)
@@ -2194,15 +2491,21 @@ static int mwifiex_sdio_host_to_card(struct mwifiex_adapter *adapter,
 		if (type == MWIFIEX_TYPE_CMD)
 			adapter->cmd_sent = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (type == MWIFIEX_TYPE_DATA)
 			adapter->data_sent = false;
 =======
+=======
+>>>>>>> v3.18
 		if (type == MWIFIEX_TYPE_DATA) {
 			adapter->data_sent = false;
 			/* restore curr_wr_port in error cases */
 			card->curr_wr_port = port;
 			card->mp_wr_bitmap |= (u32)(1 << card->curr_wr_port);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		if (type == MWIFIEX_TYPE_DATA) {
@@ -2263,12 +2566,18 @@ mwifiex_unregister_dev(struct mwifiex_adapter *adapter)
 
 	if (adapter->card) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Release the SDIO IRQ */
 		sdio_claim_host(card->func);
 		sdio_release_irq(card->func);
 		sdio_disable_func(card->func);
 		sdio_release_host(card->func);
 		sdio_set_drvdata(card->func, NULL);
+=======
+		sdio_claim_host(card->func);
+		sdio_disable_func(card->func);
+		sdio_release_host(card->func);
+>>>>>>> v3.18
 =======
 		sdio_claim_host(card->func);
 		sdio_disable_func(card->func);
@@ -2285,7 +2594,11 @@ mwifiex_unregister_dev(struct mwifiex_adapter *adapter)
 static int mwifiex_register_dev(struct mwifiex_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -2294,6 +2607,7 @@ static int mwifiex_register_dev(struct mwifiex_adapter *adapter)
 
 	/* save adapter pointer in card */
 	card->adapter = adapter;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	sdio_claim_host(func);
@@ -2342,6 +2656,8 @@ disable_func:
 
 	return -1;
 =======
+=======
+>>>>>>> v3.18
 	adapter->tx_buf_size = card->tx_buf_size;
 
 	sdio_claim_host(func);
@@ -2362,6 +2678,9 @@ disable_func:
 	adapter->num_mem_types = ARRAY_SIZE(mem_type_mapping_tbl);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2381,6 +2700,7 @@ static int mwifiex_init_sdio(struct mwifiex_adapter *adapter)
 {
 	struct sdio_mmc_card *card = adapter->card;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	u32 sdio_ireg;
 
@@ -2394,6 +2714,8 @@ static int mwifiex_init_sdio(struct mwifiex_adapter *adapter)
 	/* Disable host interrupt mask register for SDIO */
 	mwifiex_sdio_disable_host_int(adapter);
 =======
+=======
+>>>>>>> v3.18
 	const struct mwifiex_sdio_card_reg *reg = card->reg;
 	int ret;
 	u8 sdio_ireg;
@@ -2406,6 +2728,9 @@ static int mwifiex_init_sdio(struct mwifiex_adapter *adapter)
 	 * as soon as we register the irq.
 	 */
 	mwifiex_read_reg(adapter, card->reg->host_int_status_reg, &sdio_ireg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Get SDIO ioport */
@@ -2415,15 +2740,21 @@ static int mwifiex_init_sdio(struct mwifiex_adapter *adapter)
 	card->mp_rd_bitmap = 0;
 	card->mp_wr_bitmap = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	card->curr_rd_port = 1;
 	card->curr_wr_port = 1;
 
 	card->mp_data_port_mask = DATA_PORT_MASK;
 =======
+=======
+>>>>>>> v3.18
 	card->curr_rd_port = reg->start_rd_port;
 	card->curr_wr_port = reg->start_wr_port;
 
 	card->mp_data_port_mask = reg->data_port_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	card->mpa_tx.buf_len = 0;
@@ -2432,7 +2763,11 @@ static int mwifiex_init_sdio(struct mwifiex_adapter *adapter)
 
 	card->mpa_tx.enabled = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	card->mpa_tx.pkt_aggr_limit = SDIO_MP_AGGR_DEF_PKT_LIMIT;
+=======
+	card->mpa_tx.pkt_aggr_limit = card->mp_agg_pkt_limit;
+>>>>>>> v3.18
 =======
 	card->mpa_tx.pkt_aggr_limit = card->mp_agg_pkt_limit;
 >>>>>>> v3.18
@@ -2442,6 +2777,7 @@ static int mwifiex_init_sdio(struct mwifiex_adapter *adapter)
 	card->mpa_rx.start_port = 0;
 
 	card->mpa_rx.enabled = 1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	card->mpa_rx.pkt_aggr_limit = SDIO_MP_AGGR_DEF_PKT_LIMIT;
 
@@ -2454,6 +2790,8 @@ static int mwifiex_init_sdio(struct mwifiex_adapter *adapter)
 					     SDIO_MP_TX_AGGR_DEF_BUF_SIZE,
 					     SDIO_MP_RX_AGGR_DEF_BUF_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	card->mpa_rx.pkt_aggr_limit = card->mp_agg_pkt_limit;
 
 	/* Allocate buffers for SDIO MP-A */
@@ -2469,6 +2807,9 @@ static int mwifiex_init_sdio(struct mwifiex_adapter *adapter)
 	ret = mwifiex_alloc_sdio_mpa_buffers(adapter,
 					     card->mp_tx_agg_buf_size,
 					     card->mp_rx_agg_buf_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		dev_err(adapter->dev, "failed to alloc sdio mp-a buffers\n");
@@ -2504,15 +2845,21 @@ static void mwifiex_cleanup_sdio(struct mwifiex_adapter *adapter)
 
 	kfree(card->mp_regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(card->mpa_tx.buf);
 	kfree(card->mpa_rx.buf);
 =======
+=======
+>>>>>>> v3.18
 	kfree(card->mpa_rx.skb_arr);
 	kfree(card->mpa_rx.len_arr);
 	kfree(card->mpa_tx.buf);
 	kfree(card->mpa_rx.buf);
 	sdio_set_drvdata(card->func, NULL);
 	kfree(card);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2524,6 +2871,10 @@ mwifiex_update_mp_end_port(struct mwifiex_adapter *adapter, u16 port)
 {
 	struct sdio_mmc_card *card = adapter->card;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct mwifiex_sdio_card_reg *reg = card->reg;
+>>>>>>> v3.18
 =======
 	const struct mwifiex_sdio_card_reg *reg = card->reg;
 >>>>>>> v3.18
@@ -2532,6 +2883,7 @@ mwifiex_update_mp_end_port(struct mwifiex_adapter *adapter, u16 port)
 	card->mp_end_port = port;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	card->mp_data_port_mask = DATA_PORT_MASK;
 
 	for (i = 1; i <= MAX_PORT - card->mp_end_port; i++)
@@ -2539,6 +2891,8 @@ mwifiex_update_mp_end_port(struct mwifiex_adapter *adapter, u16 port)
 
 	card->curr_wr_port = 1;
 =======
+=======
+>>>>>>> v3.18
 	card->mp_data_port_mask = reg->data_port_mask;
 
 	if (reg->start_wr_port) {
@@ -2548,6 +2902,9 @@ mwifiex_update_mp_end_port(struct mwifiex_adapter *adapter, u16 port)
 	}
 
 	card->curr_wr_port = reg->start_wr_port;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(adapter->dev, "cmd: mp_end_port %d, data port mask 0x%x\n",
@@ -2555,15 +2912,21 @@ mwifiex_update_mp_end_port(struct mwifiex_adapter *adapter, u16 port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mmc_host *reset_host;
 static void sdio_card_reset_worker(struct work_struct *work)
 {
 	struct mmc_host *target = reset_host;
 =======
+=======
+>>>>>>> v3.18
 static void mwifiex_sdio_card_reset_work(struct mwifiex_adapter *adapter)
 {
 	struct sdio_mmc_card *card = adapter->card;
 	struct mmc_host *target = card->func->card->host;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* The actual reset operation must be run outside of driver thread.
@@ -2579,10 +2942,13 @@ static void mwifiex_sdio_card_reset_work(struct mwifiex_adapter *adapter)
 	/* 20ms delay is based on experiment with sdhci controller */
 	mdelay(20);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_add_host(target);
 }
 static DECLARE_WORK(card_reset_work, sdio_card_reset_worker);
 =======
+=======
+>>>>>>> v3.18
 	target->rescan_entered = 0; /* rescan non-removable cards */
 	mmc_add_host(target);
 }
@@ -2767,17 +3133,23 @@ static void mwifiex_sdio_work(struct work_struct *work)
 			       &adapter->iface_work_flags))
 		mwifiex_sdio_fw_dump_work(work);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* This function resets the card */
 static void mwifiex_sdio_card_reset(struct mwifiex_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sdio_mmc_card *card = adapter->card;
 
 	reset_host = card->func->card->host;
 	schedule_work(&card_reset_work);
 =======
+=======
+>>>>>>> v3.18
 	if (test_bit(MWIFIEX_IFACE_WORK_CARD_RESET, &adapter->iface_work_flags))
 		return;
 
@@ -2794,6 +3166,9 @@ static void mwifiex_sdio_fw_dump(struct mwifiex_adapter *adapter)
 
 	set_bit(MWIFIEX_IFACE_WORK_FW_DUMP, &adapter->iface_work_flags);
 	schedule_work(&adapter->iface_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2806,6 +3181,10 @@ static struct mwifiex_if_ops sdio_ops = {
 	.unregister_dev = mwifiex_unregister_dev,
 	.enable_int = mwifiex_sdio_enable_host_int,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.disable_int = mwifiex_sdio_disable_host_int,
+>>>>>>> v3.18
 =======
 	.disable_int = mwifiex_sdio_disable_host_int,
 >>>>>>> v3.18
@@ -2821,6 +3200,11 @@ static struct mwifiex_if_ops sdio_ops = {
 	.event_complete = mwifiex_sdio_event_complete,
 	.card_reset = mwifiex_sdio_card_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.iface_work = mwifiex_sdio_work,
+	.fw_dump = mwifiex_sdio_fw_dump,
+>>>>>>> v3.18
 =======
 	.iface_work = mwifiex_sdio_work,
 	.fw_dump = mwifiex_sdio_fw_dump,
@@ -2863,7 +3247,10 @@ mwifiex_sdio_cleanup_module(void)
 	user_rmmod = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cancel_work_sync(&card_reset_work);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sdio_unregister_driver(&mwifiex_sdio);
@@ -2880,6 +3267,11 @@ MODULE_FIRMWARE(SD8786_DEFAULT_FW_NAME);
 MODULE_FIRMWARE(SD8787_DEFAULT_FW_NAME);
 MODULE_FIRMWARE(SD8797_DEFAULT_FW_NAME);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_FIRMWARE(SD8897_DEFAULT_FW_NAME);
+MODULE_FIRMWARE(SD8887_DEFAULT_FW_NAME);
+>>>>>>> v3.18
 =======
 MODULE_FIRMWARE(SD8897_DEFAULT_FW_NAME);
 MODULE_FIRMWARE(SD8887_DEFAULT_FW_NAME);

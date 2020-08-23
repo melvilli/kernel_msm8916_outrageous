@@ -209,7 +209,11 @@ enum POWER_MODE {
 #define RX_PKT_PHY_MATCH	3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RPTMaxCount 0x000FFFFF;
+=======
+#define RPTMaxCount 0x000FFFFF
+>>>>>>> v3.18
 =======
 #define RPTMaxCount 0x000FFFFF
 >>>>>>> v3.18

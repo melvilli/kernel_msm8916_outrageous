@@ -18,6 +18,7 @@
 /* Definitions used by the flattened device tree */
 #define OF_DT_HEADER		0xd00dfeed	/* marker */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OF_DT_BEGIN_NODE	0x1		/* Start of node, full name */
 #define OF_DT_END_NODE		0x2		/* End node */
 #define OF_DT_PROP		0x3		/* Property: name off, size,
@@ -61,6 +62,10 @@ struct boot_param_header {
 
 #ifndef __ASSEMBLY__
 >>>>>>> v3.18
+=======
+
+#ifndef __ASSEMBLY__
+>>>>>>> v3.18
 
 #if defined(CONFIG_OF_FLATTREE)
 
@@ -86,6 +91,12 @@ extern int __initdata dt_root_size_cells;
 extern void *initial_boot_params;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern char __dtb_start[];
+extern char __dtb_end[];
+
+>>>>>>> v3.18
 =======
 extern char __dtb_start[];
 extern char __dtb_end[];
@@ -102,6 +113,7 @@ extern int of_flat_dt_match(unsigned long node, const char *const *matches);
 extern unsigned long of_get_flat_dt_root(void);
 extern int of_get_flat_dt_size(void);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * early_init_dt_scan_chosen - scan the device tree for ramdisk and bootargs
@@ -131,6 +143,10 @@ extern void early_init_dt_check_for_initrd(unsigned long node);
 extern int early_init_dt_scan_chosen(unsigned long node, const char *uname,
 				     int depth, void *data);
 >>>>>>> v3.18
+=======
+extern int early_init_dt_scan_chosen(unsigned long node, const char *uname,
+				     int depth, void *data);
+>>>>>>> v3.18
 extern int early_init_dt_scan_memory(unsigned long node, const char *uname,
 				     int depth, void *data);
 extern void early_init_fdt_scan_reserved_mem(void);
@@ -140,6 +156,7 @@ extern int early_init_dt_reserve_memory_arch(phys_addr_t base, phys_addr_t size,
 extern void * early_init_dt_alloc_memory_arch(u64 size, u64 align);
 extern u64 dt_mem_next_cell(int s, const __be32 **cellp);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * If BLK_DEV_INITRD, the fdt early init code will call this function,
@@ -152,12 +169,19 @@ extern void early_init_dt_setup_initrd_arch(u64 start, u64 end);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Early flat tree scan hooks */
 extern int early_init_dt_scan_root(unsigned long node, const char *uname,
 				   int depth, void *data);
 
 extern bool early_init_dt_scan(void *params);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool early_init_dt_verify(void *params);
+extern void early_init_dt_scan_nodes(void);
+>>>>>>> v3.18
 =======
 extern bool early_init_dt_verify(void *params);
 extern void early_init_dt_scan_nodes(void);
@@ -172,6 +196,12 @@ extern void unflatten_device_tree(void);
 extern void unflatten_and_copy_device_tree(void);
 extern void early_init_devtree(void *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void early_get_first_memblock_info(void *, phys_addr_t *);
+extern u64 fdt_translate_address(const void *blob, int node_offset);
+extern void of_fdt_limit_memory(int limit);
+>>>>>>> v3.18
 =======
 extern void early_get_first_memblock_info(void *, phys_addr_t *);
 extern u64 fdt_translate_address(const void *blob, int node_offset);
@@ -183,11 +213,14 @@ static inline const char *of_flat_dt_get_machine_name(void) { return NULL; }
 static inline void unflatten_device_tree(void) {}
 static inline void unflatten_and_copy_device_tree(void) {}
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void *of_get_flat_dt_prop(unsigned long node, const char *name,
 				 unsigned long *size) { return NULL; }
 
 static inline int of_flat_dt_is_compatible(unsigned long node,
 				const char *name) { return 0; }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* CONFIG_OF_FLATTREE */

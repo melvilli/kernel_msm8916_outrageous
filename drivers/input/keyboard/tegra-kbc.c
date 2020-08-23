@@ -32,7 +32,11 @@
 #include <linux/slab.h>
 #include <linux/input/matrix_keypad.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/clk/tegra.h>
+=======
+#include <linux/reset.h>
+>>>>>>> v3.18
 =======
 #include <linux/reset.h>
 >>>>>>> v3.18
@@ -121,6 +125,10 @@ struct tegra_kbc {
 	struct timer_list timer;
 	struct clk *clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct reset_control *rst;
+>>>>>>> v3.18
 =======
 	struct reset_control *rst;
 >>>>>>> v3.18
@@ -382,9 +390,15 @@ static int tegra_kbc_start(struct tegra_kbc *kbc)
 
 	/* Reset the KBC controller to clear all previous status.*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tegra_periph_reset_assert(kbc->clk);
 	udelay(100);
 	tegra_periph_reset_deassert(kbc->clk);
+=======
+	reset_control_assert(kbc->rst);
+	udelay(100);
+	reset_control_assert(kbc->rst);
+>>>>>>> v3.18
 =======
 	reset_control_assert(kbc->rst);
 	udelay(100);
@@ -629,7 +643,11 @@ static int tegra_kbc_probe(struct platform_device *pdev)
 	const struct of_device_id *match;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	match = of_match_device(of_match_ptr(tegra_kbc_of_match), &pdev->dev);
+=======
+	match = of_match_device(tegra_kbc_of_match, &pdev->dev);
+>>>>>>> v3.18
 =======
 	match = of_match_device(tegra_kbc_of_match, &pdev->dev);
 >>>>>>> v3.18
@@ -657,12 +675,15 @@ static int tegra_kbc_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
 		dev_err(&pdev->dev, "failed to get I/O memory\n");
 		return -ENXIO;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kbc->irq = platform_get_irq(pdev, 0);
@@ -680,6 +701,10 @@ static int tegra_kbc_probe(struct platform_device *pdev)
 	setup_timer(&kbc->timer, tegra_kbc_keypress_timer, (unsigned long)kbc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 >>>>>>> v3.18
@@ -694,13 +719,19 @@ static int tegra_kbc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	kbc->rst = devm_reset_control_get(&pdev->dev, "kbc");
 	if (IS_ERR(kbc->rst)) {
 		dev_err(&pdev->dev, "failed to get keyboard reset\n");
 		return PTR_ERR(kbc->rst);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * The time delay between two consecutive reads of the FIFO is

@@ -21,6 +21,10 @@
 /* Boundary values */
 static int		zero     = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			one      = 1,
+>>>>>>> v3.18
 =======
 			one      = 1,
 >>>>>>> v3.18
@@ -63,7 +67,11 @@ static struct ctl_table dccp_default_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec_minmax,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.extra1		= &zero,
+=======
+		.extra1		= &one,
+>>>>>>> v3.18
 =======
 		.extra1		= &one,
 >>>>>>> v3.18

@@ -36,6 +36,10 @@ struct mod_arch_specific {
 	unsigned int stubs_section;	/* Index of stubs section in module */
 	unsigned int toc_section;	/* What section is the TOC? */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool toc_fixed;			/* Have we fixed up .TOC.? */
+>>>>>>> v3.18
 =======
 	bool toc_fixed;			/* Have we fixed up .TOC.? */
 >>>>>>> v3.18
@@ -82,6 +86,12 @@ struct mod_arch_specific {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool is_module_trampoline(u32 *insns);
+int module_trampoline_target(struct module *mod, u32 *trampoline,
+			     unsigned long *target);
+>>>>>>> v3.18
 =======
 bool is_module_trampoline(u32 *insns);
 int module_trampoline_target(struct module *mod, u32 *trampoline,

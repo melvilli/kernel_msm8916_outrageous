@@ -157,7 +157,11 @@ static int bnep_net_proto_filter(struct sk_buff *skb, struct bnep_session *s)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("BNEP: filtered skb %pK, proto 0x%.4x", skb, proto);
+=======
+	BT_DBG("BNEP: filtered skb %p, proto 0x%.4x", skb, proto);
+>>>>>>> v3.18
 =======
 	BT_DBG("BNEP: filtered skb %p, proto 0x%.4x", skb, proto);
 >>>>>>> v3.18
@@ -172,7 +176,11 @@ static netdev_tx_t bnep_net_xmit(struct sk_buff *skb,
 	struct sock *sk = s->sock->sk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("skb %pK, dev %pK", skb, dev);
+=======
+	BT_DBG("skb %p, dev %p", skb, dev);
+>>>>>>> v3.18
 =======
 	BT_DBG("skb %p, dev %p", skb, dev);
 >>>>>>> v3.18

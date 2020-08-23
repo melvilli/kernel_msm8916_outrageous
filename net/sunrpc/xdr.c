@@ -463,6 +463,10 @@ void xdr_init_encode(struct xdr_stream *xdr, struct xdr_buf *buf, __be32 *p)
 	int scratch_len = buf->buflen - buf->page_len - buf->tail[0].iov_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xdr_set_scratch_buffer(xdr, NULL, 0);
+>>>>>>> v3.18
 =======
 	xdr_set_scratch_buffer(xdr, NULL, 0);
 >>>>>>> v3.18
@@ -487,7 +491,10 @@ EXPORT_SYMBOL_GPL(xdr_init_encode);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * xdr_commit_encode - Ensure all data is written to buffer
  * @xdr: pointer to xdr_stream
  *
@@ -556,6 +563,9 @@ static __be32 *xdr_get_next_encode_buffer(struct xdr_stream *xdr,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * xdr_reserve_space - Reserve buffer space for sending
  * @xdr: pointer to xdr_stream
@@ -571,6 +581,10 @@ __be32 * xdr_reserve_space(struct xdr_stream *xdr, size_t nbytes)
 	__be32 *q;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xdr_commit_encode(xdr);
+>>>>>>> v3.18
 =======
 	xdr_commit_encode(xdr);
 >>>>>>> v3.18
@@ -580,16 +594,22 @@ __be32 * xdr_reserve_space(struct xdr_stream *xdr, size_t nbytes)
 	q = p + (nbytes >> 2);
 	if (unlikely(q > xdr->end || q < p))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
 	xdr->p = q;
 	xdr->iov->iov_len += nbytes;
 =======
+=======
+>>>>>>> v3.18
 		return xdr_get_next_encode_buffer(xdr, nbytes);
 	xdr->p = q;
 	if (xdr->iov)
 		xdr->iov->iov_len += nbytes;
 	else
 		xdr->buf->page_len += nbytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xdr->buf->len += nbytes;
 	return p;
@@ -598,7 +618,10 @@ EXPORT_SYMBOL_GPL(xdr_reserve_space);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * xdr_truncate_encode - truncate an encode buffer
  * @xdr: pointer to xdr_stream
  * @len: new length of buffer
@@ -697,6 +720,9 @@ int xdr_restrict_buflen(struct xdr_stream *xdr, int newbuflen)
 EXPORT_SYMBOL(xdr_restrict_buflen);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * xdr_write_pages - Insert a list of pages into an XDR buffer for sending
  * @xdr: pointer to xdr_stream
@@ -1023,9 +1049,12 @@ xdr_buf_from_iov(struct kvec *iov, struct xdr_buf *buf)
 EXPORT_SYMBOL_GPL(xdr_buf_from_iov);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Sets subbuf to the portion of buf of length len beginning base bytes
  * from the start of buf. Returns -1 if base of length are out of bounds. */
 =======
+=======
+>>>>>>> v3.18
 /**
  * xdr_buf_subsegment - set subbuf to a portion of buf
  * @buf: an xdr buffer
@@ -1040,6 +1069,9 @@ EXPORT_SYMBOL_GPL(xdr_buf_from_iov);
  *
  * Returns -1 if base of length are out of bounds.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 xdr_buf_subsegment(struct xdr_buf *buf, struct xdr_buf *subbuf,
@@ -1054,9 +1086,14 @@ xdr_buf_subsegment(struct xdr_buf *buf, struct xdr_buf *subbuf,
 		base = 0;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		subbuf->head[0].iov_base = NULL;
 		subbuf->head[0].iov_len = 0;
 		base -= buf->head[0].iov_len;
+=======
+		base -= buf->head[0].iov_len;
+		subbuf->head[0].iov_len = 0;
+>>>>>>> v3.18
 =======
 		base -= buf->head[0].iov_len;
 		subbuf->head[0].iov_len = 0;
@@ -1083,9 +1120,14 @@ xdr_buf_subsegment(struct xdr_buf *buf, struct xdr_buf *subbuf,
 		base = 0;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		subbuf->tail[0].iov_base = NULL;
 		subbuf->tail[0].iov_len = 0;
 		base -= buf->tail[0].iov_len;
+=======
+		base -= buf->tail[0].iov_len;
+		subbuf->tail[0].iov_len = 0;
+>>>>>>> v3.18
 =======
 		base -= buf->tail[0].iov_len;
 		subbuf->tail[0].iov_len = 0;

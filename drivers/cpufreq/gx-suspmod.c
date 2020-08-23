@@ -184,7 +184,11 @@ static void gx_write_byte(int reg, int value)
  *
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __init struct pci_dev *gx_detect_chipset(void)
+=======
+static struct pci_dev * __init gx_detect_chipset(void)
+>>>>>>> v3.18
 =======
 static struct pci_dev * __init gx_detect_chipset(void)
 >>>>>>> v3.18
@@ -270,7 +274,11 @@ static void gx_set_cpuspeed(struct cpufreq_policy *policy, unsigned int khz)
 	freqs.new = new_khz;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
+=======
+	cpufreq_freq_transition_begin(policy, &freqs);
+>>>>>>> v3.18
 =======
 	cpufreq_freq_transition_begin(policy, &freqs);
 >>>>>>> v3.18
@@ -323,7 +331,11 @@ static void gx_set_cpuspeed(struct cpufreq_policy *policy, unsigned int khz)
 	gx_params->pci_suscfg = suscfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
+=======
+	cpufreq_freq_transition_end(policy, &freqs, 0);
+>>>>>>> v3.18
 =======
 	cpufreq_freq_transition_end(policy, &freqs, 0);
 >>>>>>> v3.18
@@ -414,7 +426,11 @@ static int cpufreq_gx_target(struct cpufreq_policy *policy,
 static int cpufreq_gx_cpu_init(struct cpufreq_policy *policy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int maxfreq, curfreq;
+=======
+	unsigned int maxfreq;
+>>>>>>> v3.18
 =======
 	unsigned int maxfreq;
 >>>>>>> v3.18
@@ -432,10 +448,15 @@ static int cpufreq_gx_cpu_init(struct cpufreq_policy *policy)
 
 	stock_freq = maxfreq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	curfreq = gx_get_cpuspeed(0);
 
 	pr_debug("cpu max frequency is %d.\n", maxfreq);
 	pr_debug("cpu current frequency is %dkHz.\n", curfreq);
+=======
+
+	pr_debug("cpu max frequency is %d.\n", maxfreq);
+>>>>>>> v3.18
 =======
 
 	pr_debug("cpu max frequency is %d.\n", maxfreq);
@@ -450,7 +471,10 @@ static int cpufreq_gx_cpu_init(struct cpufreq_policy *policy)
 		policy->min = maxfreq / POLICY_MIN_DIV;
 	policy->max = maxfreq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	policy->cur = curfreq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	policy->cpuinfo.min_freq = maxfreq / max_duration;

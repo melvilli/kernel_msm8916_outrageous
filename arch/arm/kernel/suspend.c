@@ -14,7 +14,10 @@ extern int __cpu_suspend(unsigned long, int (*)(unsigned long), u32 cpuid);
 extern void cpu_resume_mmu(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MMU
 /*
  * Hide the first two arguments to __cpu_suspend - these are an implementation
@@ -53,6 +56,9 @@ int cpu_suspend(unsigned long arg, int (*fn)(unsigned long))
 #define	idmap_pgd	NULL
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This is called by __cpu_suspend() to save the state, and do whatever
@@ -92,6 +98,7 @@ void __cpu_suspend_save(u32 *ptr, u32 ptrsz, u32 sp, u32 *save_ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Hide the first two arguments to __cpu_suspend - these are an implementation
  * detail which platform code shouldn't have to know about.
@@ -121,6 +128,8 @@ int cpu_suspend(unsigned long arg, int (*fn)(unsigned long))
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct sleep_save_sp sleep_save_sp;

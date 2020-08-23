@@ -1,7 +1,12 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2003 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -108,7 +113,11 @@ struct iwl_rxq {
 	struct list_head rx_free;
 	struct list_head rx_used;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int need_update;
+=======
+	bool need_update;
+>>>>>>> v3.18
 =======
 	bool need_update;
 >>>>>>> v3.18
@@ -127,16 +136,22 @@ struct iwl_dma_ptr {
  * iwl_queue_inc_wrap - increment queue index, wrap back to beginning
  * @index -- current index
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @n_bd -- total number of entries in queue (must be power of 2)
  */
 static inline int iwl_queue_inc_wrap(int index, int n_bd)
 {
 	return ++index & (n_bd - 1);
 =======
+=======
+>>>>>>> v3.18
  */
 static inline int iwl_queue_inc_wrap(int index)
 {
 	return ++index & (TFD_QUEUE_SIZE_MAX - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -144,16 +159,22 @@ static inline int iwl_queue_inc_wrap(int index)
  * iwl_queue_dec_wrap - decrement queue index, wrap back to end
  * @index -- current index
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @n_bd -- total number of entries in queue (must be power of 2)
  */
 static inline int iwl_queue_dec_wrap(int index, int n_bd)
 {
 	return --index & (n_bd - 1);
 =======
+=======
+>>>>>>> v3.18
  */
 static inline int iwl_queue_dec_wrap(int index)
 {
 	return --index & (TFD_QUEUE_SIZE_MAX - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -169,8 +190,13 @@ struct iwl_cmd_meta {
  * Contains common data for Rx and Tx queues.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Note the difference between n_bd and n_window: the hardware
  * always assumes 256 descriptors, so n_bd is always 256 (unless
+=======
+ * Note the difference between TFD_QUEUE_SIZE_MAX and n_window: the hardware
+ * always assumes 256 descriptors, so TFD_QUEUE_SIZE_MAX is always 256 (unless
+>>>>>>> v3.18
 =======
  * Note the difference between TFD_QUEUE_SIZE_MAX and n_window: the hardware
  * always assumes 256 descriptors, so TFD_QUEUE_SIZE_MAX is always 256 (unless
@@ -180,7 +206,11 @@ struct iwl_cmd_meta {
  * is also 256; however, for the command queue, n_window is only
  * 32 since we don't need so many commands pending. Since the HW
 <<<<<<< HEAD
+<<<<<<< HEAD
  * still uses 256 BDs for DMA though, n_bd stays 256. As a result,
+=======
+ * still uses 256 BDs for DMA though, TFD_QUEUE_SIZE_MAX stays 256. As a result,
+>>>>>>> v3.18
 =======
  * still uses 256 BDs for DMA though, TFD_QUEUE_SIZE_MAX stays 256. As a result,
 >>>>>>> v3.18
@@ -195,7 +225,10 @@ struct iwl_cmd_meta {
  */
 struct iwl_queue {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int n_bd;              /* number of BDs in this queue */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int write_ptr;       /* 1-st empty entry (index) host_w*/
@@ -253,6 +286,10 @@ struct iwl_pcie_txq_scratch_buf {
  * @need_update: indicates need to update read/write index
  * @active: stores if queue is active
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @ampdu: true if this queue is an ampdu queue for an specific RA/TID
+>>>>>>> v3.18
 =======
  * @ampdu: true if this queue is an ampdu queue for an specific RA/TID
 >>>>>>> v3.18
@@ -270,8 +307,14 @@ struct iwl_txq {
 	struct timer_list stuck_timer;
 	struct iwl_trans_pcie *trans_pcie;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 need_update;
 	u8 active;
+=======
+	bool need_update;
+	u8 active;
+	bool ampdu;
+>>>>>>> v3.18
 =======
 	bool need_update;
 	u8 active;
@@ -300,6 +343,7 @@ iwl_pcie_get_scratchbuf_dma(struct iwl_txq *txq, int idx)
  * @ucode_write_complete: indicates that the ucode has been copied.
  * @ucode_write_waitq: wait queue for uCode load
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @status - transport specific status flags
  * @cmd_queue - command queue number
  * @rx_buf_size_8k: 8 kB RX buffer size
@@ -308,6 +352,8 @@ iwl_pcie_get_scratchbuf_dma(struct iwl_txq *txq, int idx)
  * @wd_timeout: queue watchdog timeout (jiffies)
  * @reg_lock: protect hw register access
 =======
+=======
+>>>>>>> v3.18
  * @cmd_queue - command queue number
  * @rx_buf_size_8k: 8 kB RX buffer size
  * @bc_table_dword: true if the BC table expects DWORD (as opposed to bytes)
@@ -319,6 +365,9 @@ iwl_pcie_get_scratchbuf_dma(struct iwl_txq *txq, int idx)
  * @fw_mon_phys: physical address of the buffer for the firmware monitor
  * @fw_mon_page: points to the first page of the buffer for the firmware monitor
  * @fw_mon_size: size of the buffer for the firmware monitor
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct iwl_trans_pcie {
@@ -328,6 +377,12 @@ struct iwl_trans_pcie {
 	struct iwl_drv *drv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct net_device napi_dev;
+	struct napi_struct napi;
+
+>>>>>>> v3.18
 =======
 	struct net_device napi_dev;
 	struct napi_struct napi;
@@ -338,7 +393,10 @@ struct iwl_trans_pcie {
 	dma_addr_t ict_tbl_dma;
 	int ict_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 inta;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool use_ict;
@@ -363,7 +421,10 @@ struct iwl_trans_pcie {
 	wait_queue_head_t wait_command_queue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long status;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 cmd_queue;
@@ -374,14 +435,20 @@ struct iwl_trans_pcie {
 	bool rx_buf_size_8k;
 	bool bc_table_dword;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rx_page_order;
 
 	const char **command_names;
 =======
+=======
+>>>>>>> v3.18
 	bool scd_set_active;
 	u32 rx_page_order;
 
 	const char *const *command_names;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* queue watchdog */
@@ -389,6 +456,7 @@ struct iwl_trans_pcie {
 
 	/*protect hw register */
 	spinlock_t reg_lock;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -409,11 +477,16 @@ enum iwl_pcie_status {
 	STATUS_RFKILL,
 	STATUS_FW_ERROR,
 =======
+=======
+>>>>>>> v3.18
 	bool cmd_in_flight;
 
 	dma_addr_t fw_mon_phys;
 	struct page *fw_mon_page;
 	u32 fw_mon_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -448,7 +521,11 @@ void iwl_pcie_rx_free(struct iwl_trans *trans);
 * ICT - interrupt handling
 ******************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t iwl_pcie_isr_ict(int irq, void *data);
+=======
+irqreturn_t iwl_pcie_isr(int irq, void *data);
+>>>>>>> v3.18
 =======
 irqreturn_t iwl_pcie_isr(int irq, void *data);
 >>>>>>> v3.18
@@ -465,6 +542,7 @@ void iwl_pcie_tx_start(struct iwl_trans *trans, u32 scd_base_addr);
 int iwl_pcie_tx_stop(struct iwl_trans *trans);
 void iwl_pcie_tx_free(struct iwl_trans *trans);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void iwl_trans_pcie_txq_enable(struct iwl_trans *trans, int txq_id, int fifo,
 			       int sta_id, int tid, int frame_limit, u16 ssn);
 void iwl_trans_pcie_txq_disable(struct iwl_trans *trans, int queue);
@@ -472,6 +550,8 @@ int iwl_trans_pcie_tx(struct iwl_trans *trans, struct sk_buff *skb,
 		      struct iwl_device_cmd *dev_cmd, int txq_id);
 void iwl_pcie_txq_inc_wr_ptr(struct iwl_trans *trans, struct iwl_txq *txq);
 =======
+=======
+>>>>>>> v3.18
 void iwl_trans_pcie_txq_enable(struct iwl_trans *trans, int queue, u16 ssn,
 			       const struct iwl_trans_txq_scd_cfg *cfg);
 void iwl_trans_pcie_txq_disable(struct iwl_trans *trans, int queue,
@@ -479,6 +559,9 @@ void iwl_trans_pcie_txq_disable(struct iwl_trans *trans, int queue,
 int iwl_trans_pcie_tx(struct iwl_trans *trans, struct sk_buff *skb,
 		      struct iwl_device_cmd *dev_cmd, int txq_id);
 void iwl_pcie_txq_check_wrptrs(struct iwl_trans *trans);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int iwl_trans_pcie_send_hcmd(struct iwl_trans *trans, struct iwl_host_cmd *cmd);
 void iwl_pcie_hcmd_complete(struct iwl_trans *trans,
@@ -488,11 +571,14 @@ void iwl_trans_pcie_reclaim(struct iwl_trans *trans, int txq_id, int ssn,
 void iwl_trans_pcie_tx_reset(struct iwl_trans *trans);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*****************************************************
 * Error handling
 ******************************************************/
 int iwl_pcie_dump_fh(struct iwl_trans *trans, char **buf);
 =======
+=======
+>>>>>>> v3.18
 static inline u16 iwl_pcie_tfd_tb_get_len(struct iwl_tfd *tfd, u8 idx)
 {
 	struct iwl_tfd_tb *tb = &tfd->tbs[idx];
@@ -503,6 +589,9 @@ static inline u16 iwl_pcie_tfd_tb_get_len(struct iwl_tfd *tfd, u8 idx)
 /*****************************************************
 * Error handling
 ******************************************************/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void iwl_pcie_dump_csr(struct iwl_trans *trans);
 
@@ -512,8 +601,12 @@ void iwl_pcie_dump_csr(struct iwl_trans *trans);
 static inline void iwl_disable_interrupts(struct iwl_trans *trans)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iwl_trans_pcie *trans_pcie = IWL_TRANS_GET_PCIE_TRANS(trans);
 	clear_bit(STATUS_INT_ENABLED, &trans_pcie->status);
+=======
+	clear_bit(STATUS_INT_ENABLED, &trans->status);
+>>>>>>> v3.18
 =======
 	clear_bit(STATUS_INT_ENABLED, &trans->status);
 >>>>>>> v3.18
@@ -534,7 +627,12 @@ static inline void iwl_enable_interrupts(struct iwl_trans *trans)
 
 	IWL_DEBUG_ISR(trans, "Enabling interrupts\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(STATUS_INT_ENABLED, &trans_pcie->status);
+=======
+	set_bit(STATUS_INT_ENABLED, &trans->status);
+	trans_pcie->inta_mask = CSR_INI_SET_MASK;
+>>>>>>> v3.18
 =======
 	set_bit(STATUS_INT_ENABLED, &trans->status);
 	trans_pcie->inta_mask = CSR_INI_SET_MASK;
@@ -545,14 +643,20 @@ static inline void iwl_enable_interrupts(struct iwl_trans *trans)
 static inline void iwl_enable_rfkill_int(struct iwl_trans *trans)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IWL_DEBUG_ISR(trans, "Enabling rfkill interrupt\n");
 	iwl_write32(trans, CSR_INT_MASK, CSR_INT_BIT_RF_KILL);
 =======
+=======
+>>>>>>> v3.18
 	struct iwl_trans_pcie *trans_pcie = IWL_TRANS_GET_PCIE_TRANS(trans);
 
 	IWL_DEBUG_ISR(trans, "Enabling rfkill interrupt\n");
 	trans_pcie->inta_mask = CSR_INT_BIT_RF_KILL;
 	iwl_write32(trans, CSR_INT_MASK, trans_pcie->inta_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -607,7 +711,10 @@ static inline bool iwl_is_rfkill_set(struct iwl_trans *trans)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void __iwl_trans_pcie_set_bits_mask(struct iwl_trans *trans,
 						  u32 reg, u32 mask, u32 value)
 {
@@ -637,5 +744,8 @@ static inline void __iwl_trans_pcie_set_bit(struct iwl_trans *trans,
 
 void iwl_trans_pcie_rf_kill(struct iwl_trans *trans, bool state);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __iwl_trans_int_pcie_h__ */

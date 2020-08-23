@@ -161,7 +161,10 @@ struct _adapter {
 	u32	IsrContent;
 	u32	ImrContent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool	fw_found;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8	EepromAddressSize;
@@ -172,7 +175,11 @@ struct _adapter {
 	pid_t recvThread;
 	uint(*dvobj_init)(struct _adapter *adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void  (*dvobj_deinit)(struct _adapter *adapter);
+=======
+	void (*dvobj_deinit)(struct _adapter *adapter);
+>>>>>>> v3.18
 =======
 	void (*dvobj_deinit)(struct _adapter *adapter);
 >>>>>>> v3.18
@@ -182,7 +189,11 @@ struct _adapter {
 	struct iw_statistics iwstats;
 	int pid; /*process id from UI*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_workitem wkFilterRxFF0;
+=======
+	struct work_struct wkFilterRxFF0;
+>>>>>>> v3.18
 =======
 	struct work_struct wkFilterRxFF0;
 >>>>>>> v3.18

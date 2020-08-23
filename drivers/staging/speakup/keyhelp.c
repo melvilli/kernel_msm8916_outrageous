@@ -65,6 +65,10 @@ static void build_key_data(void)
 	u_short *p_key = key_data, key;
 	int i, offset = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -117,6 +121,10 @@ static void say_key(int key)
 {
 	int i, state = key >> 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -136,15 +144,21 @@ static int help_init(void)
 	int i;
 	int num_funcs = MSG_FUNCNAMES_END - MSG_FUNCNAMES_START + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 state_tbl = spk_our_keys[0]+SHIFT_TBL_SIZE+2;
 	for (i = 0; i < num_funcs; i++) {
 		char *cur_funcname = spk_msg_get(MSG_FUNCNAMES_START + i);
 =======
+=======
+>>>>>>> v3.18
 
 	state_tbl = spk_our_keys[0]+SHIFT_TBL_SIZE+2;
 	for (i = 0; i < num_funcs; i++) {
 		char *cur_funcname = spk_msg_get(MSG_FUNCNAMES_START + i);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (start == *cur_funcname)
 			continue;
@@ -161,6 +175,10 @@ int spk_handle_help(struct vc_data *vc, u_char type, u_char ch, u_short key)
 	u_char func, *kp;
 	u_short *p_keys, val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

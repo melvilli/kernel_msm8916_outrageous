@@ -39,6 +39,7 @@ Properties:
   - compatible : Should be "gianfar"
   - reg : Offset and length of the register set for the device
 <<<<<<< HEAD
+<<<<<<< HEAD
   - local-mac-address : List of bytes representing the ethernet address of
     this controller
   - interrupts : For FEC devices, the first interrupt is the device's
@@ -56,6 +57,8 @@ Properties:
     is of type "rgmii-id", as all other connection types are detected by
     hardware.
 =======
+=======
+>>>>>>> v3.18
   - interrupts : For FEC devices, the first interrupt is the device's
     interrupt.  For TSEC and eTSEC devices, the first interrupt is
     transmit, the second is receive, and the third is error.
@@ -64,6 +67,9 @@ Properties:
   - phy-connection-type : See ethernet.txt file in the same directory.
     This property is only really needed if the connection is of type
     "rgmii-id", as all other connection types are detected by hardware.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   - fsl,magic-packet : If present, indicates that the hardware supports
     waking up via magic packet.
@@ -98,6 +104,10 @@ General Properties:
 Clock Properties:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  - fsl,cksel        Timer reference clock source.
+>>>>>>> v3.18
 =======
   - fsl,cksel        Timer reference clock source.
 >>>>>>> v3.18
@@ -113,7 +123,11 @@ Clock Properties:
   Here is how to figure good values:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   TimerOsc     = system clock               MHz
+=======
+  TimerOsc     = selected reference clock   MHz
+>>>>>>> v3.18
 =======
   TimerOsc     = selected reference clock   MHz
 >>>>>>> v3.18
@@ -134,7 +148,10 @@ Clock Properties:
   subsystem to synchronize the Linux clock.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   Reference clock source is determined by the value, which is holded
   in CKSEL bits in TMR_CTRL register. "fsl,cksel" property keeps the
   value, which will be directly written in those bits, that is why,
@@ -149,6 +166,9 @@ Clock Properties:
   When this attribute is not used, eTSEC system clock will serve as
   IEEE 1588 timer reference clock.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 
@@ -158,6 +178,10 @@ Example:
 		interrupts = <12 0x8 13 0x8>;
 		interrupt-parent = < &ipic >;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		fsl,cksel       = <1>;
+>>>>>>> v3.18
 =======
 		fsl,cksel       = <1>;
 >>>>>>> v3.18

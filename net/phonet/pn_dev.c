@@ -37,7 +37,11 @@
 struct phonet_routes {
 	struct mutex		lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device	*table[64];
+=======
+	struct net_device __rcu	*table[64];
+>>>>>>> v3.18
 =======
 	struct net_device __rcu	*table[64];
 >>>>>>> v3.18
@@ -280,7 +284,11 @@ static void phonet_route_autodel(struct net_device *dev)
 	mutex_lock(&pnn->routes.lock);
 	for (i = 0; i < 64; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dev == pnn->routes.table[i]) {
+=======
+		if (rcu_access_pointer(pnn->routes.table[i]) == dev) {
+>>>>>>> v3.18
 =======
 		if (rcu_access_pointer(pnn->routes.table[i]) == dev) {
 >>>>>>> v3.18
@@ -301,9 +309,15 @@ static void phonet_route_autodel(struct net_device *dev)
 /* notify Phonet of device events */
 static int phonet_device_notify(struct notifier_block *me, unsigned long what,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				void *arg)
 {
 	struct net_device *dev = arg;
+=======
+				void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 				void *ptr)
 {
@@ -403,7 +417,11 @@ int phonet_route_del(struct net_device *dev, u8 daddr)
 	daddr = daddr >> 2;
 	mutex_lock(&routes->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev == routes->table[daddr])
+=======
+	if (rcu_access_pointer(routes->table[daddr]) == dev)
+>>>>>>> v3.18
 =======
 	if (rcu_access_pointer(routes->table[daddr]) == dev)
 >>>>>>> v3.18

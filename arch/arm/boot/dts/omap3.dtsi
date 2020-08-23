@@ -9,13 +9,19 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
 =======
+=======
+>>>>>>> v3.18
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/pinctrl/omap.h>
 
 #include "skeleton.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
@@ -24,6 +30,12 @@
 
 	aliases {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		i2c0 = &i2c1;
+		i2c1 = &i2c2;
+		i2c2 = &i2c3;
+>>>>>>> v3.18
 =======
 		i2c0 = &i2c1;
 		i2c1 = &i2c2;
@@ -36,9 +48,12 @@
 
 	cpus {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpu@0 {
 			compatible = "arm,cortex-a8";
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 
@@ -51,6 +66,9 @@
 			clock-names = "cpu";
 
 			clock-latency = <300000>; /* From omap-cpufreq driver */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -58,6 +76,10 @@
 	pmu {
 		compatible = "arm,cortex-a8-pmu";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		reg = <0x54000000 0x800000>;
+>>>>>>> v3.18
 =======
 		reg = <0x54000000 0x800000>;
 >>>>>>> v3.18
@@ -77,7 +99,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iva {
+=======
+		iva: iva {
+>>>>>>> v3.18
 =======
 		iva: iva {
 >>>>>>> v3.18
@@ -94,7 +120,11 @@
 	 * XXX: Use a flat representation of the OMAP3 interconnect.
 	 * The real OMAP interconnect network is quite complex.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Since that will not bring real advantage to represent that in DT for
+=======
+	 * Since it will not bring real advantage to represent that in DT for
+>>>>>>> v3.18
 =======
 	 * Since it will not bring real advantage to represent that in DT for
 >>>>>>> v3.18
@@ -104,6 +134,11 @@
 	ocp {
 		compatible = "simple-bus";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		reg = <0x68000000 0x10000>;
+		interrupts = <9 10>;
+>>>>>>> v3.18
 =======
 		reg = <0x68000000 0x10000>;
 		interrupts = <9 10>;
@@ -114,7 +149,10 @@
 		ti,hwmods = "l3_main";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		aes: aes@480c5000 {
 			compatible = "ti,omap3-aes";
 			ti,hwmods = "aes";
@@ -162,6 +200,9 @@
 			};
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		counter32k: counter@48320000 {
 			compatible = "ti,omap-counter32k";
@@ -171,10 +212,16 @@
 
 		intc: interrupt-controller@48200000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			compatible = "ti,omap2-intc";
 			interrupt-controller;
 			#interrupt-cells = <1>;
 			ti,intc-size = <96>;
+=======
+			compatible = "ti,omap3-intc";
+			interrupt-controller;
+			#interrupt-cells = <1>;
+>>>>>>> v3.18
 =======
 			compatible = "ti,omap3-intc";
 			interrupt-controller;
@@ -198,6 +245,7 @@
 		omap3_pmx_core: pinmux@48002030 {
 			compatible = "ti,omap3-padconf", "pinctrl-single";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			reg = <0x48002030 0x05cc>;
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -207,6 +255,8 @@
 
 		omap3_pmx_wkup: pinmux@0x48002a00 {
 =======
+=======
+>>>>>>> v3.18
 			reg = <0x48002030 0x0238>;
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -217,15 +267,21 @@
 		};
 
 		omap3_pmx_wkup: pinmux@48002a00 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			compatible = "ti,omap3-padconf", "pinctrl-single";
 			reg = <0x48002a00 0x5c>;
 			#address-cells = <1>;
 			#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pinctrl-single,register-width = <16>;
 			pinctrl-single,function-mask = <0x7f1f>;
 =======
+=======
+>>>>>>> v3.18
 			#interrupt-cells = <1>;
 			interrupt-controller;
 			pinctrl-single,register-width = <16>;
@@ -246,6 +302,9 @@
 				regulator-min-microvolt = <1800000>;
 				regulator-max-microvolt = <3000000>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -319,11 +378,17 @@
 		uart1: serial@4806a000 {
 			compatible = "ti,omap3-uart";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			reg = <0x4806a000 0x2000>;
 			interrupts-extended = <&intc 72>;
 			dmas = <&sdma 49 &sdma 50>;
 			dma-names = "tx", "rx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ti,hwmods = "uart1";
 			clock-frequency = <48000000>;
@@ -332,11 +397,17 @@
 		uart2: serial@4806c000 {
 			compatible = "ti,omap3-uart";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			reg = <0x4806c000 0x400>;
 			interrupts-extended = <&intc 73>;
 			dmas = <&sdma 51 &sdma 52>;
 			dma-names = "tx", "rx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ti,hwmods = "uart2";
 			clock-frequency = <48000000>;
@@ -345,11 +416,17 @@
 		uart3: serial@49020000 {
 			compatible = "ti,omap3-uart";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			reg = <0x49020000 0x400>;
 			interrupts-extended = <&intc 74>;
 			dmas = <&sdma 53 &sdma 54>;
 			dma-names = "tx", "rx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ti,hwmods = "uart3";
 			clock-frequency = <48000000>;
@@ -358,11 +435,17 @@
 		i2c1: i2c@48070000 {
 			compatible = "ti,omap3-i2c";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			reg = <0x48070000 0x80>;
 			interrupts = <56>;
 			dmas = <&sdma 27 &sdma 28>;
 			dma-names = "tx", "rx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -372,11 +455,17 @@
 		i2c2: i2c@48072000 {
 			compatible = "ti,omap3-i2c";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			reg = <0x48072000 0x80>;
 			interrupts = <57>;
 			dmas = <&sdma 29 &sdma 30>;
 			dma-names = "tx", "rx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -386,11 +475,17 @@
 		i2c3: i2c@48060000 {
 			compatible = "ti,omap3-i2c";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			reg = <0x48060000 0x80>;
 			interrupts = <61>;
 			dmas = <&sdma 25 &sdma 26>;
 			dma-names = "tx", "rx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -398,9 +493,12 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mcspi1: spi@48098000 {
 			compatible = "ti,omap2-mcspi";
 =======
+=======
+>>>>>>> v3.18
 		mailbox: mailbox@48094000 {
 			compatible = "ti,omap3-mailbox";
 			ti,hwmods = "mailbox";
@@ -418,6 +516,9 @@
 			compatible = "ti,omap2-mcspi";
 			reg = <0x48098000 0x100>;
 			interrupts = <65>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -438,6 +539,11 @@
 		mcspi2: spi@4809a000 {
 			compatible = "ti,omap2-mcspi";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			reg = <0x4809a000 0x100>;
+			interrupts = <66>;
+>>>>>>> v3.18
 =======
 			reg = <0x4809a000 0x100>;
 			interrupts = <66>;
@@ -456,6 +562,11 @@
 		mcspi3: spi@480b8000 {
 			compatible = "ti,omap2-mcspi";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			reg = <0x480b8000 0x100>;
+			interrupts = <91>;
+>>>>>>> v3.18
 =======
 			reg = <0x480b8000 0x100>;
 			interrupts = <91>;
@@ -474,6 +585,11 @@
 		mcspi4: spi@480ba000 {
 			compatible = "ti,omap2-mcspi";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			reg = <0x480ba000 0x100>;
+			interrupts = <48>;
+>>>>>>> v3.18
 =======
 			reg = <0x480ba000 0x100>;
 			interrupts = <48>;
@@ -487,9 +603,12 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mmc1: mmc@4809c000 {
 			compatible = "ti,omap3-hsmmc";
 =======
+=======
+>>>>>>> v3.18
 		hdqw1w: 1w@480b2000 {
 			compatible = "ti,omap3-1w";
 			reg = <0x480b2000 0x1000>;
@@ -501,12 +620,19 @@
 			compatible = "ti,omap3-hsmmc";
 			reg = <0x4809c000 0x200>;
 			interrupts = <83>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ti,hwmods = "mmc1";
 			ti,dual-volt;
 			dmas = <&sdma 61>, <&sdma 62>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			pbias-supply = <&pbias_mmc_reg>;
+>>>>>>> v3.18
 =======
 			pbias-supply = <&pbias_mmc_reg>;
 >>>>>>> v3.18
@@ -515,6 +641,11 @@
 		mmc2: mmc@480b4000 {
 			compatible = "ti,omap3-hsmmc";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			reg = <0x480b4000 0x200>;
+			interrupts = <86>;
+>>>>>>> v3.18
 =======
 			reg = <0x480b4000 0x200>;
 			interrupts = <86>;
@@ -527,6 +658,11 @@
 		mmc3: mmc@480ad000 {
 			compatible = "ti,omap3-hsmmc";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			reg = <0x480ad000 0x200>;
+			interrupts = <94>;
+>>>>>>> v3.18
 =======
 			reg = <0x480ad000 0x200>;
 			interrupts = <94>;
@@ -537,9 +673,12 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wdt2: wdt@48314000 {
 			compatible = "ti,omap3-wdt";
 =======
+=======
+>>>>>>> v3.18
 		mmu_isp: mmu@480bd400 {
 			compatible = "ti,omap2-iommu";
 			reg = <0x480bd400 0x80>;
@@ -559,6 +698,9 @@
 		wdt2: wdt@48314000 {
 			compatible = "ti,omap3-wdt";
 			reg = <0x48314000 0x80>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ti,hwmods = "wd_timer2";
 		};
@@ -577,6 +719,10 @@
 			       <&sdma 32>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -598,6 +744,10 @@
 			       <&sdma 34>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -619,6 +769,10 @@
 			       <&sdma 18>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -638,6 +792,10 @@
 			       <&sdma 20>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -657,7 +815,10 @@
 			       <&sdma 22>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			status = "disabled";
 		};
 
@@ -680,6 +841,9 @@
 			ti,hwmods = "smartreflex_mpu_iva";
 			reg = <0x480c9000 0x400>;
 			interrupts = <18>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -795,7 +959,11 @@
 
 			usbhsohci: ohci@48064400 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				compatible = "ti,ohci-omap3", "usb-ohci";
+=======
+				compatible = "ti,ohci-omap3";
+>>>>>>> v3.18
 =======
 				compatible = "ti,ohci-omap3";
 >>>>>>> v3.18
@@ -806,7 +974,11 @@
 
 			usbhsehci: ehci@48064800 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				compatible = "ti,ehci-omap", "usb-ehci";
+=======
+				compatible = "ti,ehci-omap";
+>>>>>>> v3.18
 =======
 				compatible = "ti,ehci-omap";
 >>>>>>> v3.18
@@ -838,9 +1010,12 @@
 			ram-bits = <12>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 };
 =======
+=======
+>>>>>>> v3.18
 
 		dss: dss@48050000 {
 			compatible = "ti,omap3-dss";
@@ -942,4 +1117,7 @@
 };
 
 /include/ "omap3xxx-clocks.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

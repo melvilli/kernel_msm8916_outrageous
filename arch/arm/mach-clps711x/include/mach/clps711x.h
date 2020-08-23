@@ -22,6 +22,11 @@
 #define __MACH_CLPS711X_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mfd/syscon/clps711x.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/mfd/syscon/clps711x.h>
 
@@ -44,8 +49,11 @@
 #define MEMCFG2		(0x01c0)
 #define DRFPR		(0x0200)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INTSR1		(0x0240)
 #define INTMR1		(0x0280)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define LCDCON		(0x02c0)
@@ -62,6 +70,7 @@
 #define PALMSW		(0x0580)
 #define STFCLR		(0x05c0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BLEOI		(0x0600)
 #define MCEOI		(0x0640)
 #define TEOI		(0x0680)
@@ -72,12 +81,15 @@
 #define COEOI		(0x07c0)
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define HALT		(0x0800)
 #define STDBY		(0x0840)
 
 #define FBADDR		(0x1000)
 #define SYSCON2		(0x1100)
 #define SYSFLG2		(0x1140)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define INTSR2		(0x1240)
 #define INTMR2		(0x1280)
@@ -93,6 +105,12 @@
 #define SS2DR		(0x1500)
 #define SS2POP		(0x16c0)
 >>>>>>> v3.18
+=======
+#define UARTDR2		(0x1480)
+#define UBRLCR2		(0x14c0)
+#define SS2DR		(0x1500)
+#define SS2POP		(0x16c0)
+>>>>>>> v3.18
 
 #define DAIR		(0x2000)
 #define DAIDR0		(0x2040)
@@ -101,8 +119,11 @@
 #define DAISR		(0x2100)
 #define SYSCON3		(0x2200)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INTSR3		(0x2240)
 #define INTMR3		(0x2280)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define LEDFLSH		(0x22c0)
@@ -117,6 +138,7 @@
 #define RANDID2		(0x2708)
 #define RANDID3		(0x270c)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* common bits: SYSCON1 / SYSCON2 */
 #define SYSCON_UARTEN		(1 << 8)
@@ -200,6 +222,11 @@
 #define LCDCON_GSMD		(1 << 31)
 
 >>>>>>> v3.18
+=======
+#define LCDCON_GSEN		(1 << 30)
+#define LCDCON_GSMD		(1 << 31)
+
+>>>>>>> v3.18
 /* common bits: UARTDR1 / UARTDR2 */
 #define UARTDR_FRMERR		(1 << 8)
 #define UARTDR_PARERR		(1 << 9)
@@ -256,6 +283,7 @@
 #define DAI64FS_LOOPBACK	(1 << 5)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SYSCON3_ADCCON		(1 << 0)
 #define SYSCON3_CLKCTL0		(1 << 1)
 #define SYSCON3_CLKCTL1		(1 << 2)
@@ -268,6 +296,8 @@
 #define SYSCON3_128FS		SYSCON3_DAIEN
 #define SYSCON3_ENPD67		(1 << 10)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SDCONF_ACTIVE		(1 << 10)

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
  /*
  * Sun3 SCSI stuff by Erik Verbruggen (erik@bigmama.xtdnet.nl)
  *
@@ -588,6 +589,11 @@ static struct scsi_host_template driver_template = {
 #include "scsi_module.c"
 
 MODULE_LICENSE("GPL");
+=======
+#define SUN3_SCSI_VME
+
+#include "sun3_scsi.c"
+>>>>>>> v3.18
 =======
 #define SUN3_SCSI_VME
 

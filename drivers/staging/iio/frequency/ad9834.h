@@ -66,8 +66,13 @@ struct ad9834_state {
 	 * transfer buffers to live in their own cache lines.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short			data ____cacheline_aligned;
 	unsigned short			freq_data[2] ;
+=======
+	__be16				data ____cacheline_aligned;
+	__be16				freq_data[2];
+>>>>>>> v3.18
 =======
 	__be16				data ____cacheline_aligned;
 	__be16				freq_data[2];

@@ -145,7 +145,10 @@ static struct usb_device_id rtl871x_usb_id_tbl[] = {
 	{USB_DEVICE(0x0DF6, 0x0049)},
 	{USB_DEVICE(0x0DF6, 0x004C)},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{USB_DEVICE(0x0DF6, 0x006C)},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{USB_DEVICE(0x0DF6, 0x0064)},
@@ -358,11 +361,14 @@ static void disable_ht_for_spec_devid(const struct usb_device_id *pdid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 key_2char2num(u8 hch, u8 lch)
 {
 	return (hex_to_bin(hch) << 4) | hex_to_bin(lch);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct device_type wlan_type = {
@@ -478,6 +484,7 @@ static int r871xu_drv_init(struct usb_interface *pusb_intf,
 						     &pdata[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (r8712_initmac) {
 				/* Users specify the mac address */
 				int jj, kk;
@@ -488,6 +495,9 @@ static int r871xu_drv_init(struct usb_interface *pusb_intf,
 					   key_2char2num(r8712_initmac[kk],
 					   r8712_initmac[kk + 1]);
 			} else {
+=======
+			if (!r8712_initmac || !mac_pton(r8712_initmac, mac)) {
+>>>>>>> v3.18
 =======
 			if (!r8712_initmac || !mac_pton(r8712_initmac, mac)) {
 >>>>>>> v3.18
@@ -607,15 +617,21 @@ static int r871xu_drv_init(struct usb_interface *pusb_intf,
 			 */
 			mac[0] &= 0xFE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_info(&udev->dev, "r8712u: MAC Address from user = %pM\n", mac);
 		} else
 			dev_info(&udev->dev, "r8712u: MAC Address from efuse = %pM\n", mac);
 =======
+=======
+>>>>>>> v3.18
 			dev_info(&udev->dev,
 				"r8712u: MAC Address from user = %pM\n", mac);
 		} else
 			dev_info(&udev->dev,
 				"r8712u: MAC Address from efuse = %pM\n", mac);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memcpy(pnetdev->dev_addr, mac, ETH_ALEN);
 	}
@@ -629,7 +645,11 @@ error:
 	usb_put_dev(udev);
 	usb_set_intfdata(pusb_intf, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (padapter->dvobj_deinit != NULL)
+=======
+	if (padapter && padapter->dvobj_deinit != NULL)
+>>>>>>> v3.18
 =======
 	if (padapter && padapter->dvobj_deinit != NULL)
 >>>>>>> v3.18
@@ -644,6 +664,7 @@ error:
 static void r871xu_dev_remove(struct usb_interface *pusb_intf)
 {
 	struct net_device *pnetdev = usb_get_intfdata(pusb_intf);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct _adapter *padapter = netdev_priv(pnetdev);
 	struct usb_device *udev = interface_to_usbdev(pusb_intf);
@@ -671,6 +692,8 @@ static void r871xu_dev_remove(struct usb_interface *pusb_intf)
 	 * when disconnect */
 	usb_put_dev(udev);
 =======
+=======
+>>>>>>> v3.18
 	struct usb_device *udev = interface_to_usbdev(pusb_intf);
 
 	if (pnetdev) {
@@ -694,6 +717,9 @@ static void r871xu_dev_remove(struct usb_interface *pusb_intf)
 		 * when disconnect */
 		usb_put_dev(udev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* If we didn't unplug usb dongle and remove/insert module, driver
 	 * fails on sitesurvey for the first time when device is up.
@@ -701,7 +727,10 @@ static void r871xu_dev_remove(struct usb_interface *pusb_intf)
 	if (udev->state != USB_STATE_NOTATTACHED)
 		usb_reset_device(udev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

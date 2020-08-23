@@ -17,6 +17,7 @@
 #include <linux/cpu_pm.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/suspend.h>
 
@@ -39,6 +40,8 @@ static int highbank_suspend_finish(unsigned long val)
 	highbank_clear_pwr_request();
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/suspend.h>
 
 #include <asm/suspend.h>
@@ -52,6 +55,9 @@ static int highbank_suspend_finish(unsigned long val)
 	};
 
 	return psci_ops.cpu_suspend(ps, __pa(cpu_resume));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -61,7 +67,10 @@ static int highbank_pm_enter(suspend_state_t state)
 	cpu_cluster_pm_enter();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	highbank_set_cpu_jump(0, cpu_resume);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cpu_suspend(0, highbank_suspend_finish);
@@ -70,9 +79,12 @@ static int highbank_pm_enter(suspend_state_t state)
 	cpu_pm_exit();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	highbank_smc1(0x102, 0x1);
 	if (scu_base_addr)
 		scu_enable(scu_base_addr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -86,6 +98,12 @@ static const struct platform_suspend_ops highbank_pm_ops = {
 void __init highbank_pm_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!psci_ops.cpu_suspend)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!psci_ops.cpu_suspend)
 		return;

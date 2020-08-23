@@ -17,8 +17,13 @@
 #include "conf_space_quirks.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool xen_pcibk_permissive;
 module_param_named(permissive, xen_pcibk_permissive, bool, 0644);
+=======
+static bool permissive;
+module_param(permissive, bool, 0644);
+>>>>>>> v3.18
 =======
 static bool permissive;
 module_param(permissive, bool, 0644);
@@ -189,7 +194,12 @@ int xen_pcibk_config_read(struct pci_dev *dev, int offset, int size,
 		field_end = OFFSET(cfg_entry) + field->size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 if (req_end > field_start && field_end > req_start) {
+=======
+		if ((req_start >= field_start && req_start < field_end)
+		    || (req_end > field_start && req_end <= field_end)) {
+>>>>>>> v3.18
 =======
 		if ((req_start >= field_start && req_start < field_end)
 		    || (req_end > field_start && req_end <= field_end)) {
@@ -240,7 +250,12 @@ int xen_pcibk_config_write(struct pci_dev *dev, int offset, int size, u32 value)
 		field_end = OFFSET(cfg_entry) + field->size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 if (req_end > field_start && field_end > req_start) {
+=======
+		if ((req_start >= field_start && req_start < field_end)
+		    || (req_end > field_start && req_end <= field_end)) {
+>>>>>>> v3.18
 =======
 		if ((req_start >= field_start && req_start < field_end)
 		    || (req_end > field_start && req_end <= field_end)) {
@@ -276,7 +291,11 @@ int xen_pcibk_config_write(struct pci_dev *dev, int offset, int size, u32 value)
 		 * they have entries in the config_field list that intercept
 		 * the write and do nothing. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dev_data->permissive || xen_pcibk_permissive) {
+=======
+		if (dev_data->permissive || permissive) {
+>>>>>>> v3.18
 =======
 		if (dev_data->permissive || permissive) {
 >>>>>>> v3.18

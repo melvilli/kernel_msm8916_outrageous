@@ -14,7 +14,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -26,10 +29,13 @@
 #include <linux/io.h>
 #include <linux/iio/iio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/mfd/ti_am335x_tscadc.h>
 #include <linux/platform_data/ti_am335x_adc.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_device.h>
 #include <linux/iio/machine.h>
@@ -38,17 +44,26 @@
 #include <linux/mfd/ti_am335x_tscadc.h>
 #include <linux/iio/buffer.h>
 #include <linux/iio/kfifo_buf.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct tiadc_device {
 	struct ti_tscadc_dev *mfd_tscadc;
 	int channels;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8 channel_line[8];
 	u8 channel_step[8];
 	int buffer_en_ch_steps;
 	u16 data[8];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -64,11 +79,14 @@ static void tiadc_writel(struct tiadc_device *adc, unsigned int reg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void tiadc_step_config(struct tiadc_device *adc_dev)
 {
 	unsigned int stepconfig;
 	int i, channels = 0, steps;
 =======
+=======
+>>>>>>> v3.18
 static u32 get_adc_step_mask(struct tiadc_device *adc_dev)
 {
 	u32 step_en;
@@ -106,6 +124,9 @@ static void tiadc_step_config(struct iio_dev *indio_dev)
 	struct tiadc_device *adc_dev = iio_priv(indio_dev);
 	unsigned int stepconfig;
 	int i, steps;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -119,6 +140,7 @@ static void tiadc_step_config(struct iio_dev *indio_dev)
 	 */
 
 	steps = TOTAL_STEPS - adc_dev->channels;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	channels = TOTAL_CHANNELS - adc_dev->channels;
 
@@ -153,6 +175,8 @@ static int tiadc_channel_init(struct iio_dev *indio_dev, int channels)
 		chan->channel = i;
 		chan->info_mask_separate = BIT(IIO_CHAN_INFO_RAW);
 =======
+=======
+>>>>>>> v3.18
 	if (iio_buffer_enabled(indio_dev))
 		stepconfig = STEPCONFIG_AVG_16 | STEPCONFIG_FIFO1
 					| STEPCONFIG_MODE_SWCNT;
@@ -379,13 +403,20 @@ static int tiadc_channel_init(struct iio_dev *indio_dev, int channels)
 		chan->scan_type.sign = 'u';
 		chan->scan_type.realbits = 12;
 		chan->scan_type.storagebits = 16;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	indio_dev->channels = chan_array;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return indio_dev->num_channels;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -401,6 +432,7 @@ static int tiadc_read_raw(struct iio_dev *indio_dev,
 		int *val, int *val2, long mask)
 {
 	struct tiadc_device *adc_dev = iio_priv(indio_dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 	unsigned int fifo1count, readx1;
@@ -425,6 +457,8 @@ static int tiadc_read_raw(struct iio_dev *indio_dev,
 	tiadc_writel(adc_dev, REG_SE, STPENB_STEPENB);
 
 =======
+=======
+>>>>>>> v3.18
 	int i, map_val;
 	unsigned int fifo1count, read, stepid;
 	bool found = false;
@@ -481,6 +515,9 @@ static int tiadc_read_raw(struct iio_dev *indio_dev,
 
 	if (found == false)
 		return -EBUSY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return IIO_VAL_INT;
 }
@@ -488,6 +525,10 @@ static int tiadc_read_raw(struct iio_dev *indio_dev,
 static const struct iio_info tiadc_info = {
 	.read_raw = &tiadc_read_raw,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.driver_module = THIS_MODULE,
+>>>>>>> v3.18
 =======
 	.driver_module = THIS_MODULE,
 >>>>>>> v3.18
@@ -497,6 +538,7 @@ static int tiadc_probe(struct platform_device *pdev)
 {
 	struct iio_dev		*indio_dev;
 	struct tiadc_device	*adc_dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ti_tscadc_dev	*tscadc_dev = pdev->dev.platform_data;
 	struct mfd_tscadc_board	*pdata;
@@ -519,6 +561,8 @@ static int tiadc_probe(struct platform_device *pdev)
 	adc_dev->mfd_tscadc = tscadc_dev;
 	adc_dev->channels = pdata->adc_init->adc_channels;
 =======
+=======
+>>>>>>> v3.18
 	struct device_node	*node = pdev->dev.of_node;
 	struct property		*prop;
 	const __be32		*cur;
@@ -546,6 +590,9 @@ static int tiadc_probe(struct platform_device *pdev)
 		channels++;
 	}
 	adc_dev->channels = channels;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	indio_dev->dev.parent = &pdev->dev;
@@ -553,6 +600,7 @@ static int tiadc_probe(struct platform_device *pdev)
 	indio_dev->modes = INDIO_DIRECT_MODE;
 	indio_dev->info = &tiadc_info;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tiadc_step_config(adc_dev);
 
@@ -565,6 +613,8 @@ static int tiadc_probe(struct platform_device *pdev)
 		goto err_free_channels;
 
 =======
+=======
+>>>>>>> v3.18
 	tiadc_step_config(indio_dev);
 	tiadc_writel(adc_dev, REG_FIFO1THR, FIFO1_THRESHOLD);
 
@@ -586,11 +636,15 @@ static int tiadc_probe(struct platform_device *pdev)
 	if (err)
 		goto err_buffer_unregister;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_set_drvdata(pdev, indio_dev);
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_free_channels:
 	tiadc_channels_remove(indio_dev);
@@ -598,10 +652,15 @@ err_free_device:
 	iio_device_free(indio_dev);
 err_ret:
 =======
+=======
+>>>>>>> v3.18
 err_buffer_unregister:
 	tiadc_iio_buffered_hardware_remove(indio_dev);
 err_free_channels:
 	tiadc_channels_remove(indio_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -610,12 +669,15 @@ static int tiadc_remove(struct platform_device *pdev)
 {
 	struct iio_dev *indio_dev = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	iio_device_unregister(indio_dev);
 	tiadc_channels_remove(indio_dev);
 
 	iio_device_free(indio_dev);
 =======
+=======
+>>>>>>> v3.18
 	struct tiadc_device *adc_dev = iio_priv(indio_dev);
 	u32 step_en;
 
@@ -625,6 +687,9 @@ static int tiadc_remove(struct platform_device *pdev)
 
 	step_en = get_adc_step_mask(adc_dev);
 	am335x_tsc_se_clr(adc_dev->mfd_tscadc, step_en);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -636,14 +701,20 @@ static int tiadc_suspend(struct device *dev)
 	struct iio_dev *indio_dev = dev_get_drvdata(dev);
 	struct tiadc_device *adc_dev = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ti_tscadc_dev *tscadc_dev = dev->platform_data;
 	unsigned int idle;
 
 =======
+=======
+>>>>>>> v3.18
 	struct ti_tscadc_dev *tscadc_dev;
 	unsigned int idle;
 
 	tscadc_dev = ti_tscadc_dev_get(to_platform_device(dev));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!device_may_wakeup(tscadc_dev->dev)) {
 		idle = tiadc_readl(adc_dev, REG_CTRL);
@@ -667,8 +738,14 @@ static int tiadc_resume(struct device *dev)
 	tiadc_writel(adc_dev, REG_CTRL, restore);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tiadc_step_config(adc_dev);
 
+=======
+	tiadc_step_config(indio_dev);
+	am335x_tsc_se_set_cache(adc_dev->mfd_tscadc,
+			adc_dev->buffer_en_ch_steps);
+>>>>>>> v3.18
 =======
 	tiadc_step_config(indio_dev);
 	am335x_tsc_se_set_cache(adc_dev->mfd_tscadc,
@@ -687,12 +764,15 @@ static const struct dev_pm_ops tiadc_pm_ops = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_driver tiadc_driver = {
 	.driver = {
 		.name   = "tiadc",
 		.owner	= THIS_MODULE,
 		.pm	= TIADC_PM_OPS,
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id ti_adc_dt_ids[] = {
 	{ .compatible = "ti,am3359-adc", },
 	{ }
@@ -704,13 +784,19 @@ static struct platform_driver tiadc_driver = {
 		.name   = "TI-am335x-adc",
 		.pm	= TIADC_PM_OPS,
 		.of_match_table = ti_adc_dt_ids,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.probe	= tiadc_probe,
 	.remove	= tiadc_remove,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 module_platform_driver(tiadc_driver);

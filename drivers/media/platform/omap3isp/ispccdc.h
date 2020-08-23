@@ -13,6 +13,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,6 +24,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -50,13 +53,19 @@ enum ccdc_input_entity {
 #define	OMAP3ISP_CCDC_NEVENTS	16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ispccdc_fpc {
 	void *addr;
 	dma_addr_t dma;
 	unsigned int fpnum;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum ispccdc_lsc_state {
 	LSC_STATE_STOPPED = 0,
@@ -70,20 +79,27 @@ struct ispccdc_lsc_config_req {
 	struct omap3isp_ccdc_lsc_config config;
 	unsigned char enable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 table;
 	struct iovm_struct *iovm;
 =======
+=======
+>>>>>>> v3.18
 
 	struct {
 		void *addr;
 		dma_addr_t dma;
 		struct sg_table sgt;
 	} table;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /*
  * ispccdc_lsc - CCDC LSC parameters
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @update_config: Set when user changes config
  * @request_enable: Whether LSC is requested to be enabled
@@ -91,6 +107,8 @@ struct ispccdc_lsc_config_req {
  * @update_table: Set when user provides a new LSC table to table_new
  * @table_new: LSC table set by user, ISP address
  * @table_inuse: LSC table currently in use, ISP address
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -124,11 +142,17 @@ struct ispccdc_lsc {
 #define CCDC_PADS_NUM			3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CCDC_FIELD_TOP			1
 #define CCDC_FIELD_BOTTOM		2
 #define CCDC_FIELD_BOTH			3
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * struct isp_ccdc_device - Structure for the CCDC module to store its own
@@ -151,6 +175,11 @@ struct ispccdc_lsc {
  * @update: Bitmask of controls to update during the next interrupt
  * @shadow_update: Controls update in progress by userspace
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @bt656: Whether the input interface uses BT.656 synchronization
+ * @fields: The fields (CCDC_FIELD_*) stored in the current buffer
+>>>>>>> v3.18
 =======
  * @bt656: Whether the input interface uses BT.656 synchronization
  * @fields: The fields (CCDC_FIELD_*) stored in the current buffer
@@ -161,6 +190,10 @@ struct ispccdc_lsc {
  * @wait: Wait queue used to stop the module
  * @stopping: Stopping state
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @running: Is the CCDC hardware running
+>>>>>>> v3.18
 =======
  * @running: Is the CCDC hardware running
 >>>>>>> v3.18
@@ -183,7 +216,11 @@ struct isp_ccdc_device {
 	struct omap3isp_ccdc_blcomp blcomp;
 	struct omap3isp_ccdc_bclamp clamp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap3isp_ccdc_fpc fpc;
+=======
+	struct ispccdc_fpc fpc;
+>>>>>>> v3.18
 =======
 	struct ispccdc_fpc fpc;
 >>>>>>> v3.18
@@ -192,6 +229,12 @@ struct isp_ccdc_device {
 	unsigned int shadow_update;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool bt656;
+	unsigned int fields;
+
+>>>>>>> v3.18
 =======
 	bool bt656;
 	unsigned int fields;
@@ -203,6 +246,10 @@ struct isp_ccdc_device {
 	wait_queue_head_t wait;
 	unsigned int stopping;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool running;
+>>>>>>> v3.18
 =======
 	bool running;
 >>>>>>> v3.18

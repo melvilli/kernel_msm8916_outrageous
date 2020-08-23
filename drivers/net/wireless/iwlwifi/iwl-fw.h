@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -76,6 +86,11 @@
 #include <net/mac80211.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "iwl-fw-file.h"
+
+>>>>>>> v3.18
 =======
 #include "iwl-fw-file.h"
 
@@ -90,6 +105,7 @@
  * @IWL_UCODE_TLV_FLAGS_P2P: This uCode image supports P2P.
  * @IWL_UCODE_TLV_FLAGS_DW_BC_TABLE: The SCD byte count table is in DWORDS
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 enum iwl_ucode_tlv_flag {
 	IWL_UCODE_TLV_FLAGS_PAN		= BIT(0),
@@ -98,6 +114,8 @@ enum iwl_ucode_tlv_flag {
 	IWL_UCODE_TLV_FLAGS_P2P		= BIT(3),
 	IWL_UCODE_TLV_FLAGS_DW_BC_TABLE	= BIT(4),
 =======
+=======
+>>>>>>> v3.18
  * @IWL_UCODE_TLV_FLAGS_UAPSD_SUPPORT: This uCode image supports uAPSD
  * @IWL_UCODE_TLV_FLAGS_SHORT_BL: 16 entries of black list instead of 64 in scan
  *	offload profile config command.
@@ -185,6 +203,9 @@ enum iwl_ucode_tlv_capa {
 	IWL_UCODE_TLV_CAPA_QUIET_PERIOD_SUPPORT		= BIT(11),
 	IWL_UCODE_TLV_CAPA_DQA_SUPPORT			= BIT(12),
 	IWL_UCODE_TLV_CAPA_HOTSPOT_SUPPORT		= BIT(18),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -194,6 +215,12 @@ enum iwl_ucode_tlv_capa {
 #define IWL_MAX_PHY_CALIBRATE_TBL_SIZE			253
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* The default max probe length if not specified by the firmware file */
+#define IWL_DEFAULT_MAX_PROBE_LENGTH	200
+
+>>>>>>> v3.18
 =======
 /* The default max probe length if not specified by the firmware file */
 #define IWL_DEFAULT_MAX_PROBE_LENGTH	200
@@ -218,12 +245,15 @@ enum iwl_ucode_type {
 /*
  * enumeration of ucode section.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This enumeration is used for legacy tlv style (before 16.0 uCode).
  */
 enum iwl_ucode_sec {
 	IWL_UCODE_SECTION_INST,
 	IWL_UCODE_SECTION_DATA,
 =======
+=======
+>>>>>>> v3.18
  * This enumeration is used directly for older firmware (before 16.0).
  * For new firmware, there can be up to 4 sections (see below) but the
  * first one packaged into the firmware file is the DATA section and
@@ -232,12 +262,16 @@ enum iwl_ucode_sec {
 enum iwl_ucode_sec {
 	IWL_UCODE_SECTION_DATA,
 	IWL_UCODE_SECTION_INST,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 /*
  * For 16.0 uCode and above, there is no differentiation between sections,
  * just an offset to the HW address.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IWL_UCODE_SECTION_MAX 4
 
@@ -246,6 +280,8 @@ struct iwl_ucode_capabilities {
 	u32 standard_phy_calibration_size;
 	u32 flags;
 =======
+=======
+>>>>>>> v3.18
 #define IWL_UCODE_SECTION_MAX 12
 #define IWL_API_ARRAY_SIZE	1
 #define IWL_CAPABILITIES_ARRAY_SIZE	1
@@ -258,6 +294,9 @@ struct iwl_ucode_capabilities {
 	u32 flags;
 	u32 api[IWL_API_ARRAY_SIZE];
 	u32 capa[IWL_CAPABILITIES_ARRAY_SIZE];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -271,7 +310,10 @@ struct fw_desc {
 struct fw_img {
 	struct fw_desc sec[IWL_UCODE_SECTION_MAX];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool is_secure;
 	bool is_dual_cpus;
 };
@@ -279,6 +321,9 @@ struct fw_img {
 struct iwl_sf_region {
 	u32 addr;
 	u32 size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -315,7 +360,10 @@ enum iwl_fw_phy_cfg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IWL_UCODE_MAX_CS		1
 
 /**
@@ -354,6 +402,9 @@ struct iwl_fw_cscheme_list {
 	struct iwl_fw_cipher_scheme cs[];
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct iwl_fw - variables associated with the firmware
@@ -371,6 +422,10 @@ struct iwl_fw_cscheme_list {
  * @inst_errlog_ptr: error log offfset for runtime ucode.
  * @mvm_fw: indicates this is MVM firmware
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @cipher_scheme: optional external cipher scheme.
+>>>>>>> v3.18
 =======
  * @cipher_scheme: optional external cipher scheme.
 >>>>>>> v3.18
@@ -392,6 +447,7 @@ struct iwl_fw {
 	struct iwl_tlv_calib_ctrl default_calib[IWL_UCODE_TYPE_MAX];
 	u32 phy_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	bool mvm_fw;
 };
@@ -408,6 +464,8 @@ static inline u8 iwl_fw_valid_rx_ant(const struct iwl_fw *fw)
 		FW_PHY_CFG_RX_CHAIN_POS;
 }
 =======
+=======
+>>>>>>> v3.18
 	u8 valid_tx_ant;
 	u8 valid_rx_ant;
 
@@ -416,6 +474,9 @@ static inline u8 iwl_fw_valid_rx_ant(const struct iwl_fw *fw)
 	struct ieee80211_cipher_scheme cs[IWL_UCODE_MAX_CS];
 	u8 human_readable[FW_VER_HUMAN_READABLE_SZ];
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif  /* __iwl_fw_h__ */

@@ -78,7 +78,11 @@ struct yamdrv_ioctl_cfg {
 struct yamdrv_ioctl_mcs {
 	int cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int bitrate;
+=======
+	unsigned int bitrate;
+>>>>>>> v3.18
 =======
 	unsigned int bitrate;
 >>>>>>> v3.18

@@ -226,7 +226,11 @@ out_up:
 	up_write(&c->commit_sem);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("commit failed, error %d", c->vi.ubi_num, err);
+=======
+	ubifs_err("commit failed, error %d", err);
+>>>>>>> v3.18
 =======
 	ubifs_err("commit failed, error %d", err);
 >>>>>>> v3.18
@@ -294,7 +298,11 @@ int ubifs_bg_thread(void *info)
 	struct ubifs_info *c = info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_msg("background thread \"%s\" started, PID %d", c->vi.ubi_num,
+=======
+	ubifs_msg("background thread \"%s\" started, PID %d",
+>>>>>>> v3.18
 =======
 	ubifs_msg("background thread \"%s\" started, PID %d",
 >>>>>>> v3.18
@@ -333,8 +341,12 @@ int ubifs_bg_thread(void *info)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_msg("background thread \"%s\" stops", c->vi.ubi_num,
 			c->bgt_name);
+=======
+	ubifs_msg("background thread \"%s\" stops", c->bgt_name);
+>>>>>>> v3.18
 =======
 	ubifs_msg("background thread \"%s\" stops", c->bgt_name);
 >>>>>>> v3.18
@@ -726,7 +738,11 @@ out:
 
 out_dump:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("dumping index node (iip=%d)", c->vi.ubi_num, i->iip);
+=======
+	ubifs_err("dumping index node (iip=%d)", i->iip);
+>>>>>>> v3.18
 =======
 	ubifs_err("dumping index node (iip=%d)", i->iip);
 >>>>>>> v3.18
@@ -736,7 +752,11 @@ out_dump:
 	if (!list_empty(&list)) {
 		i = list_entry(list.prev, struct idx_node, list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("dumping parent index node", c->vi.ubi_num);
+=======
+		ubifs_err("dumping parent index node");
+>>>>>>> v3.18
 =======
 		ubifs_err("dumping parent index node");
 >>>>>>> v3.18
@@ -749,7 +769,11 @@ out_free:
 		kfree(i);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("failed, error %d", c->vi.ubi_num, err);
+=======
+	ubifs_err("failed, error %d", err);
+>>>>>>> v3.18
 =======
 	ubifs_err("failed, error %d", err);
 >>>>>>> v3.18

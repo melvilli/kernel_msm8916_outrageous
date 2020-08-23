@@ -100,9 +100,12 @@ void __init paging_init(void)
 void __init mem_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int codesize, reservedpages, datasize, initsize;
 	int tmp;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	BUG_ON(!mem_map);
@@ -111,7 +114,11 @@ void __init mem_init(void)
 #define MAX_LOW_PFN	(contig_page_data.bdata->node_low_pfn)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max_mapnr = num_physpages = MAX_LOW_PFN - START_PFN;
+=======
+	max_mapnr = MAX_LOW_PFN - START_PFN;
+>>>>>>> v3.18
 =======
 	max_mapnr = MAX_LOW_PFN - START_PFN;
 >>>>>>> v3.18
@@ -123,6 +130,7 @@ void __init mem_init(void)
 	/* this will put all low memory onto the freelists */
 	free_all_bootmem();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	reservedpages = 0;
 	for (tmp = 0; tmp < num_physpages; tmp++)
@@ -147,6 +155,9 @@ void __init mem_init(void)
 =======
 	mem_init_print_info(NULL);
 >>>>>>> v3.18
+=======
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 }
 
 /*
@@ -164,7 +175,12 @@ void free_initmem(void)
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area(start, end, POISON_FREE_INITMEM, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, POISON_FREE_INITMEM,
+			   "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, POISON_FREE_INITMEM,
 			   "initrd");

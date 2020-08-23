@@ -2,6 +2,7 @@
      ========================================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The HID subsystem needs two kinds of drivers. In this document we call them:
 
  1. The "HID I/O Driver" is the driver that performs raw data I/O to the
@@ -25,6 +26,8 @@ This allows user-space to operate on the same level as USB-HID, Bluetooth-HID
 and similar. It does not provide a way to write HID Device Drivers, though. Use
 hidraw for this purpose.
 =======
+=======
+>>>>>>> v3.18
 UHID allows user-space to implement HID transport drivers. Please see
 hid-transport.txt for an introduction into HID transport drivers. This document
 relies heavily on the definitions declared there.
@@ -32,6 +35,9 @@ relies heavily on the definitions declared there.
 With UHID, a user-space transport driver can create kernel hid-devices for each
 device connected to the user-space controlled bus. The UHID API defines the I/O
 events provided from the kernel to user-space and vice versa.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 There is an example user-space application in ./samples/uhid/uhid-example.c
@@ -53,8 +59,14 @@ struct uhid_event {
         __u32 type;
         union {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 struct uhid_create_req create;
                 struct uhid_data_req data;
+=======
+                struct uhid_create2_req create2;
+                struct uhid_output_req output;
+                struct uhid_input2_req input2;
+>>>>>>> v3.18
 =======
                 struct uhid_create2_req create2;
                 struct uhid_output_req output;
@@ -71,14 +83,20 @@ only a single event can be sent per read() or write(). Pending data is ignored.
 If you want to handle multiple events in a single syscall, then use vectored
 I/O with readv()/writev().
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 The first thing you should do is sending an UHID_CREATE event. This will
 =======
+=======
+>>>>>>> v3.18
 The "type" field defines the payload. For each type, there is a
 payload-structure available in the union "u" (except for empty payloads). This
 payload contains management and/or device data.
 
 The first thing you should do is sending an UHID_CREATE2 event. This will
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 register the device. UHID will respond with an UHID_START event. You can now
 start sending data to and reading data from UHID. However, unless UHID sends the
@@ -94,6 +112,7 @@ You may decide to ignore UHID_OPEN/UHID_CLOSE, though. I/O is allowed even
 though the device may have no users.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 If you want to send data to the HID subsystem, you send an HID_INPUT event with
 your raw data payload. If the kernel wants to send data to the device, you will
 read an UHID_OUTPUT or UHID_OUTPUT_EV event.
@@ -101,6 +120,8 @@ read an UHID_OUTPUT or UHID_OUTPUT_EV event.
 If your device disconnects, you should send an UHID_DESTROY event. This will
 unregister the device. You can now send UHID_CREATE again to register a new
 =======
+=======
+>>>>>>> v3.18
 If you want to send data on the interrupt channel to the HID subsystem, you send
 an HID_INPUT2 event with your raw data payload. If the kernel wants to send data
 on the interrupt channel to the device, you will read an UHID_OUTPUT event.
@@ -115,6 +136,9 @@ after a hard-coded period).
 
 If your device disconnects, you should send an UHID_DESTROY event. This will
 unregister the device. You can now send UHID_CREATE2 again to register a new
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 device.
 If you close() the fd, the device is automatically unregistered and destroyed
@@ -123,6 +147,7 @@ internally.
 write()
 -------
 write() allows you to modify the state of the device and feed input data into
+<<<<<<< HEAD
 <<<<<<< HEAD
 the kernel. The following types are supported: UHID_CREATE, UHID_DESTROY and
 UHID_INPUT. The kernel will parse the event immediately and if the event ID is
@@ -134,6 +159,8 @@ the request was handled successfully.
   This creates the internal HID device. No I/O is possible until you send this
   event to the kernel. The payload is of type struct uhid_create_req and
 =======
+=======
+>>>>>>> v3.18
 the kernel. The kernel will parse the event immediately and if the event ID is
 not supported, it will return -EOPNOTSUPP. If the payload is invalid, then
 -EINVAL is returned, otherwise, the amount of data that was read is returned and
@@ -144,6 +171,9 @@ might make use of O_NONBLOCK, though.
   UHID_CREATE2:
   This creates the internal HID device. No I/O is possible until you send this
   event to the kernel. The payload is of type struct uhid_create2_req and
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   contains information about your device. You can start I/O now.
 
@@ -151,6 +181,7 @@ might make use of O_NONBLOCK, though.
   This destroys the internal HID device. No further I/O will be accepted. There
   may still be pending messages that you can receive with read() but no further
   UHID_INPUT events can be sent to the kernel.
+<<<<<<< HEAD
 <<<<<<< HEAD
   You can create a new device by sending UHID_CREATE again. There is no need to
   reopen the character device.
@@ -178,6 +209,8 @@ needs. Only UHID_OUTPUT and UHID_OUTPUT_EV have payloads.
   This is sent when the HID device is started. Consider this as an answer to
   UHID_CREATE. This is always the first event that is sent.
 =======
+=======
+>>>>>>> v3.18
   You can create a new device by sending UHID_CREATE2 again. There is no need to
   reopen the character device.
 
@@ -219,11 +252,15 @@ them but you should handle them according to your needs.
           prefix is added by the kernel.
           For messages sent by user-space to the kernel, you must adjust the
           prefixes according to these flags.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   UHID_STOP:
   This is sent when the HID device is stopped. Consider this as an answer to
   UHID_DESTROY.
+<<<<<<< HEAD
 <<<<<<< HEAD
   If the kernel HID device driver closes the device manually (that is, you
   didn't send UHID_DESTROY) then you should consider this device closed and send
@@ -231,11 +268,16 @@ them but you should handle them according to your needs.
   always the last message that is sent to you unless you reopen the device with
   UHID_CREATE.
 =======
+=======
+>>>>>>> v3.18
   If you didn't destroy your device via UHID_DESTROY, but the kernel sends an
   UHID_STOP event, this should usually be ignored. It means that the kernel
   reloaded/changed the device driver loaded on your HID device (or some other
   maintenance actions happened).
   You can usually ignored any UHID_STOP events safely.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   UHID_OPEN:
@@ -244,7 +286,11 @@ them but you should handle them according to your needs.
   it is useful for power-management. As long as you haven't received this event
   there is actually no other process that reads your data so there is no need to
 <<<<<<< HEAD
+<<<<<<< HEAD
   send UHID_INPUT events to the kernel.
+=======
+  send UHID_INPUT2 events to the kernel.
+>>>>>>> v3.18
 =======
   send UHID_INPUT2 events to the kernel.
 >>>>>>> v3.18
@@ -255,6 +301,7 @@ them but you should handle them according to your needs.
 
   UHID_OUTPUT:
   This is sent if the HID device driver wants to send raw data to the I/O
+<<<<<<< HEAD
 <<<<<<< HEAD
   device. You should read the payload and forward it to the device. The payload
   is of type "struct uhid_data_req".
@@ -279,6 +326,8 @@ them but you should handle them according to your needs.
 Document by:
   David Herrmann <dh.herrmann@googlemail.com>
 =======
+=======
+>>>>>>> v3.18
   device on the interrupt channel. You should read the payload and forward it to
   the device. The payload is of type "struct uhid_data_req".
   This may be received even though you haven't received UHID_OPEN, yet.
@@ -305,4 +354,7 @@ Document by:
 
 ----------------------------------------------------
 Written 2012, David Herrmann <dh.herrmann@gmail.com>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

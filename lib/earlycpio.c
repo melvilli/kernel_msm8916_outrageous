@@ -50,6 +50,7 @@ enum cpio_fields {
 /**
  * cpio_data find_cpio_data - Search for files in an uncompressed cpio
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @path:   The directory to search for, including a slash at the end
  * @data:   Pointer to the the cpio archive or a header inside
  * @len:    Remaining length of the cpio based on data pointer
@@ -67,6 +68,8 @@ enum cpio_fields {
 struct cpio_data __cpuinit find_cpio_data(const char *path, void *data,
 					  size_t len,  long *offset)
 =======
+=======
+>>>>>>> v3.18
  * @path:       The directory to search for, including a slash at the end
  * @data:       Pointer to the the cpio archive or a header inside
  * @len:        Remaining length of the cpio based on data pointer
@@ -84,6 +87,9 @@ struct cpio_data __cpuinit find_cpio_data(const char *path, void *data,
 
 struct cpio_data find_cpio_data(const char *path, void *data,
 				size_t len,  long *nextoff)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const size_t cpio_header_len = 8*C_NFIELDS - 2;
@@ -145,7 +151,11 @@ struct cpio_data find_cpio_data(const char *path, void *data,
 		    ch[C_NAMESIZE] >= mypathsize &&
 		    !memcmp(p, path, mypathsize)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*offset = (long)nptr - (long)data;
+=======
+			*nextoff = (long)nptr - (long)data;
+>>>>>>> v3.18
 =======
 			*nextoff = (long)nptr - (long)data;
 >>>>>>> v3.18

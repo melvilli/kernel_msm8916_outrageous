@@ -23,6 +23,11 @@
 #include <linux/fb.h>
 #include <linux/atmel-mci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pwm.h>
+#include <linux/leds_pwm.h>
+>>>>>>> v3.18
 =======
 #include <linux/pwm.h>
 #include <linux/leds_pwm.h>
@@ -173,6 +178,7 @@ static struct i2c_board_info __initdata i2c_info[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_LEDS_ATMEL_PWM
 static struct gpio_led stk_pwm_led[] = {
 	{
@@ -192,6 +198,8 @@ static struct platform_device stk_pwm_led_dev = {
 	.dev	= {
 		.platform_data	= &stk_pwm_led_data,
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_LEDS_PWM)
 static struct pwm_lookup pwm_lookup[] = {
 	PWM_LOOKUP("at91sam9rl-pwm", 0, "leds_pwm", "backlight",
@@ -215,6 +223,9 @@ static struct platform_device leds_pwm = {
 	.id     = -1,
 	.dev    = {
 		.platform_data = &pwm_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -310,14 +321,20 @@ static int __init merisc_init(void)
 	at32_add_device_mci(0, &mci0_data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_LEDS_ATMEL_PWM
 	at32_add_device_pwm((1 << 0) | (1 << 2));
 	platform_device_register(&stk_pwm_led_dev);
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_LEDS_PWM)
 	pwm_add_table(pwm_lookup, ARRAY_SIZE(pwm_lookup));
 	at32_add_device_pwm((1 << 0) | (1 << 2));
 	platform_device_register(&leds_pwm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 	at32_add_device_pwm((1 << 2));

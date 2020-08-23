@@ -20,8 +20,12 @@
 #define DFSO_DOWNDIFFERENCTIAL	(5)
 static int devfreq_simple_ondemand_func(struct devfreq *df,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					unsigned long *freq,
 					u32 *flag)
+=======
+					unsigned long *freq)
+>>>>>>> v3.18
 =======
 					unsigned long *freq)
 >>>>>>> v3.18
@@ -34,7 +38,10 @@ static int devfreq_simple_ondemand_func(struct devfreq *df,
 	struct devfreq_simple_ondemand_data *data = df->data;
 	unsigned long max = (df->max_freq) ? df->max_freq : UINT_MAX;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long min = (df->min_freq) ? df->min_freq : 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -51,6 +58,7 @@ static int devfreq_simple_ondemand_func(struct devfreq *df,
 	    dfso_upthreshold < dfso_downdifferential)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Prevent overflow */
 	if (stat.busy_time >= (1 << 24) || stat.total_time >= (1 << 24)) {
@@ -72,6 +80,8 @@ static int devfreq_simple_ondemand_func(struct devfreq *df,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Assume MAX if it is going to be divided by zero */
 	if (stat.total_time == 0) {
 		*freq = max;
@@ -79,13 +89,19 @@ static int devfreq_simple_ondemand_func(struct devfreq *df,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Prevent overflow */
 	if (stat.busy_time >= (1 << 24) || stat.total_time >= (1 << 24)) {
 		stat.busy_time >>= 7;
 		stat.total_time >>= 7;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Set MAX if it's busy enough */
 	if (stat.busy_time * 100 >

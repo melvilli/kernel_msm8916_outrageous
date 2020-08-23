@@ -16,7 +16,10 @@
 #define PERF_CKCTL_REG			0x4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CKCTL_3368_MAC_EN		(1 << 3)
 #define CKCTL_3368_TC_EN		(1 << 5)
 #define CKCTL_3368_US_TOP_EN		(1 << 6)
@@ -50,6 +53,9 @@
 					 CKCTL_3368_EMUSB_EN | \
 					 CKCTL_3368_USBU_EN)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CKCTL_6328_PHYMIPS_EN		(1 << 0)
 #define CKCTL_6328_ADSL_QPROC_EN	(1 << 1)
@@ -218,6 +224,7 @@
 
 /* Interrupt Mask register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PERF_IRQMASK_6328_REG		0x20
 #define PERF_IRQMASK_6338_REG		0xc
 #define PERF_IRQMASK_6345_REG		0xc
@@ -237,6 +244,8 @@
 
 /* External Interrupt Configuration register */
 =======
+=======
+>>>>>>> v3.18
 #define PERF_IRQMASK_3368_REG		0xc
 #define PERF_IRQMASK_6328_REG(x)	(0x20 + (x) * 0x10)
 #define PERF_IRQMASK_6338_REG		0xc
@@ -258,6 +267,9 @@
 
 /* External Interrupt Configuration register */
 #define PERF_EXTIRQ_CFG_REG_3368	0x14
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PERF_EXTIRQ_CFG_REG_6328	0x18
 #define PERF_EXTIRQ_CFG_REG_6338	0x14
@@ -297,7 +309,10 @@
 #define PERF_SOFTRESET_6368_REG		0x10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SOFTRESET_3368_SPI_MASK		(1 << 0)
 #define SOFTRESET_3368_ENET_MASK	(1 << 2)
 #define SOFTRESET_3368_MPI_MASK		(1 << 3)
@@ -305,6 +320,9 @@
 #define SOFTRESET_3368_USBS_MASK	(1 << 11)
 #define SOFTRESET_3368_PCM_MASK		(1 << 13)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SOFTRESET_6328_SPI_MASK		(1 << 0)
 #define SOFTRESET_6328_EPHY_MASK	(1 << 1)
@@ -491,6 +509,7 @@
 
 /*************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * _REG relative to RSET_UARTx
  *************************************************************************/
 
@@ -611,6 +630,8 @@
 
 
 /*************************************************************************
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * _REG relative to RSET_GPIO
@@ -801,6 +822,11 @@
  * _REG relative to RSET_ENETDMA
  *************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ENETDMA_CHAN_WIDTH		0x10
+#define ENETDMA_6345_CHAN_WIDTH		0x40
+>>>>>>> v3.18
 =======
 #define ENETDMA_CHAN_WIDTH		0x10
 #define ENETDMA_6345_CHAN_WIDTH		0x40
@@ -861,7 +887,10 @@
 #define ENETDMA_SRAM4_REG(x)		(0x20c + (x) * 0x10)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Broadcom 6345 ENET DMA definitions */
 #define ENETDMA_6345_CHANCFG_REG	(0x00)
 
@@ -881,6 +910,9 @@
 
 /* Shift down for EOP, SOP and WRAP bits */
 #define ENETDMA_6345_DESC_SHIFT		(3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*************************************************************************
@@ -889,7 +921,11 @@
 
 /* Channel Configuration register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ENETDMAC_CHANCFG_REG(x)		((x) * 0x10)
+=======
+#define ENETDMAC_CHANCFG_REG		(0x0)
+>>>>>>> v3.18
 =======
 #define ENETDMAC_CHANCFG_REG		(0x0)
 >>>>>>> v3.18
@@ -900,10 +936,13 @@
 #define ENETDMAC_CHANCFG_BUFHALT_SHIFT	2
 #define ENETDMAC_CHANCFG_BUFHALT_MASK	(1 << ENETDMAC_CHANCFG_BUFHALT_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Interrupt Control/Status register */
 #define ENETDMAC_IR_REG(x)		(0x4 + (x) * 0x10)
 =======
+=======
+>>>>>>> v3.18
 #define ENETDMAC_CHANCFG_CHAINING_SHIFT	2
 #define ENETDMAC_CHANCFG_CHAINING_MASK	(1 << ENETDMAC_CHANCFG_CHAINING_SHIFT)
 #define ENETDMAC_CHANCFG_WRAP_EN_SHIFT	3
@@ -913,6 +952,9 @@
 
 /* Interrupt Control/Status register */
 #define ENETDMAC_IR_REG			(0x4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ENETDMAC_IR_BUFDONE_MASK	(1 << 0)
 #define ENETDMAC_IR_PKTDONE_MASK	(1 << 1)
@@ -920,15 +962,21 @@
 
 /* Interrupt Mask register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ENETDMAC_IRMASK_REG(x)		(0x8 + (x) * 0x10)
 
 /* Maximum Burst Length */
 #define ENETDMAC_MAXBURST_REG(x)	(0xc + (x) * 0x10)
 =======
+=======
+>>>>>>> v3.18
 #define ENETDMAC_IRMASK_REG		(0x8)
 
 /* Maximum Burst Length */
 #define ENETDMAC_MAXBURST_REG		(0xc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -937,6 +985,7 @@
  *************************************************************************/
 
 /* Ring Start Address register */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define ENETDMAS_RSTART_REG(x)		((x) * 0x10)
 
@@ -949,6 +998,8 @@
 /* State Ram Word 4 */
 #define ENETDMAS_SRAM4_REG(x)		(0xc + (x) * 0x10)
 =======
+=======
+>>>>>>> v3.18
 #define ENETDMAS_RSTART_REG		(0x0)
 
 /* State Ram Word 2 */
@@ -959,6 +1010,9 @@
 
 /* State Ram Word 4 */
 #define ENETDMAS_SRAM4_REG		(0xc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -967,7 +1021,10 @@
  *************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Port traffic control */
 #define ENETSW_PTCTRL_REG(x)		(0x0 + (x))
 #define ENETSW_PTCTRL_RXDIS_MASK	(1 << 0)
@@ -1012,19 +1069,28 @@
 #define ENETSW_GMCR_REG			(0x200)
 #define ENETSW_GMCR_RST_MIB_MASK	(1 << 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* MIB register */
 #define ENETSW_MIB_REG(x)		(0x2800 + (x) * 4)
 #define ENETSW_MIB_REG_COUNT		47
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Jumbo control register port mask register */
 #define ENETSW_JMBCTL_PORT_REG		(0x4004)
 
 /* Jumbo control mib good frame register */
 #define ENETSW_JMBCTL_MAXSIZE_REG	(0x4008)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*************************************************************************
@@ -1486,7 +1552,11 @@
 #define SPI_6348_RX_DATA_SIZE		0x3f
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* BCM 6358/6262/6368 SPI core */
+=======
+/* BCM 3368/6358/6262/6368 SPI core */
+>>>>>>> v3.18
 =======
 /* BCM 3368/6358/6262/6368 SPI core */
 >>>>>>> v3.18
@@ -1631,7 +1701,10 @@
 #define PCIE_DEVICE_OFFSET		0x8000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*************************************************************************
  * _REG relative to RSET_OTP
  *************************************************************************/
@@ -1639,5 +1712,8 @@
 #define OTP_USER_BITS_6328_REG(i)	(0x20 + (i) * 4)
 #define   OTP_6328_REG3_TP1_DISABLED	BIT(9)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* BCM63XX_REGS_H_ */

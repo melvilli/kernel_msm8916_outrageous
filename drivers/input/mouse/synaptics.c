@@ -119,7 +119,10 @@ void synaptics_reset(struct psmouse *psmouse)
 #ifdef CONFIG_MOUSE_PS2_SYNAPTICS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool cr48_profile_sensor;
 
 struct min_max_quirk {
@@ -192,6 +195,9 @@ static const char * const topbuttonpad_pnp_ids[] = {
 	NULL
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*****************************************************************************
  *	Synaptics communications functions
@@ -342,14 +348,18 @@ static int synaptics_identify(struct psmouse *psmouse)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const int *quirk_min_max;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int synaptics_resolution(struct psmouse *psmouse)
 {
 	struct synaptics_data *priv = psmouse->private;
 	unsigned char resp[3];
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (quirk_min_max) {
@@ -359,6 +369,9 @@ static int synaptics_resolution(struct psmouse *psmouse)
 		priv->y_max = quirk_min_max[3];
 		return 0;
 	}
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -374,7 +387,10 @@ static int synaptics_resolution(struct psmouse *psmouse)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; min_max_pnpid_table[i].pnp_ids; i++) {
 		if (psmouse_matches_pnp_id(psmouse,
 					   min_max_pnpid_table[i].pnp_ids)) {
@@ -386,6 +402,9 @@ static int synaptics_resolution(struct psmouse *psmouse)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (SYN_EXT_CAP_REQUESTS(priv->capabilities) >= 5 &&
 	    SYN_CAP_MAX_DIMENSIONS(priv->ext_cap_0c)) {
@@ -635,6 +654,11 @@ static void synaptics_parse_agm(const unsigned char buf[],
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static bool is_forcepad;
+
+>>>>>>> v3.18
 =======
 static bool is_forcepad;
 
@@ -669,7 +693,11 @@ static int synaptics_parse_hw_state(const unsigned char buf[],
 		hw->right = (buf[0] & 0x02) ? 1 : 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (SYN_CAP_FORCEPAD(priv->ext_cap_0c)) {
+=======
+		if (is_forcepad) {
+>>>>>>> v3.18
 =======
 		if (is_forcepad) {
 >>>>>>> v3.18
@@ -1217,7 +1245,10 @@ static void synaptics_image_sensor_process(struct psmouse *psmouse,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void synaptics_profile_sensor_process(struct psmouse *psmouse,
 					     struct synaptics_hw_state *sgm,
 					     int num_fingers)
@@ -1254,6 +1285,9 @@ static void synaptics_profile_sensor_process(struct psmouse *psmouse,
 	input_sync(dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *  called for each full received packet from the touchpad
@@ -1319,12 +1353,18 @@ static void synaptics_process_packet(struct psmouse *psmouse)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cr48_profile_sensor) {
 		synaptics_profile_sensor_process(psmouse, &hw, num_fingers);
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (SYN_CAP_ADV_GESTURE(priv->ext_cap_0c))
 		synaptics_report_semi_mt_data(dev, &hw, &priv->agm,
@@ -1444,13 +1484,19 @@ static void set_abs_position_params(struct input_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void set_input_params(struct input_dev *dev, struct synaptics_data *priv)
 {
 =======
+=======
+>>>>>>> v3.18
 static void set_input_params(struct psmouse *psmouse,
 			     struct synaptics_data *priv)
 {
 	struct input_dev *dev = psmouse->dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i;
 
@@ -1477,6 +1523,12 @@ static void set_input_params(struct psmouse *psmouse,
 	input_set_abs_params(dev, ABS_PRESSURE, 0, 255, 0, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (cr48_profile_sensor)
+		input_set_abs_params(dev, ABS_MT_PRESSURE, 0, 255, 0, 0);
+
+>>>>>>> v3.18
 =======
 	if (cr48_profile_sensor)
 		input_set_abs_params(dev, ABS_MT_PRESSURE, 0, 255, 0, 0);
@@ -1494,12 +1546,15 @@ static void set_input_params(struct psmouse *psmouse,
 		__set_bit(BTN_TOOL_QUINTTAP, dev->keybit);
 	} else if (SYN_CAP_ADV_GESTURE(priv->ext_cap_0c)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Non-image sensors with AGM use semi-mt */
 		__set_bit(INPUT_PROP_SEMI_MT, dev->propbit);
 		input_mt_init_slots(dev, 2, 0);
 		set_abs_position_params(dev, priv, ABS_MT_POSITION_X,
 					ABS_MT_POSITION_Y);
 =======
+=======
+>>>>>>> v3.18
 		set_abs_position_params(dev, priv, ABS_MT_POSITION_X,
 					ABS_MT_POSITION_Y);
 		/*
@@ -1510,6 +1565,9 @@ static void set_input_params(struct psmouse *psmouse,
 				    INPUT_MT_POINTER |
 				    (cr48_profile_sensor ?
 					INPUT_MT_TRACK : INPUT_MT_SEMI_MT));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1540,6 +1598,11 @@ static void set_input_params(struct psmouse *psmouse,
 	if (SYN_CAP_CLICKPAD(priv->ext_cap_0c)) {
 		__set_bit(INPUT_PROP_BUTTONPAD, dev->propbit);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (psmouse_matches_pnp_id(psmouse, topbuttonpad_pnp_ids))
+			__set_bit(INPUT_PROP_TOPBUTTONPAD, dev->propbit);
+>>>>>>> v3.18
 =======
 		if (psmouse_matches_pnp_id(psmouse, topbuttonpad_pnp_ids))
 			__set_bit(INPUT_PROP_TOPBUTTONPAD, dev->propbit);
@@ -1664,7 +1727,11 @@ static int synaptics_reconnect(struct psmouse *psmouse)
 static bool impaired_toshiba_kbc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct dmi_system_id __initconst toshiba_dmi_table[] = {
+=======
+static const struct dmi_system_id toshiba_dmi_table[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct dmi_system_id toshiba_dmi_table[] __initconst = {
 >>>>>>> v3.18
@@ -1707,7 +1774,11 @@ static const struct dmi_system_id toshiba_dmi_table[] __initconst = {
 static bool broken_olpc_ec;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct dmi_system_id __initconst olpc_dmi_table[] = {
+=======
+static const struct dmi_system_id olpc_dmi_table[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct dmi_system_id olpc_dmi_table[] __initconst = {
 >>>>>>> v3.18
@@ -1723,6 +1794,7 @@ static const struct dmi_system_id olpc_dmi_table[] __initconst = {
 	{ }
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct dmi_system_id min_max_dmi_table[] __initconst = {
 #if defined(CONFIG_DMI)
@@ -1816,6 +1888,8 @@ static const struct dmi_system_id min_max_dmi_table[] __initconst = {
 		},
 		.driver_data = (int []){1024, 5112, 2024, 4832},
 =======
+=======
+>>>>>>> v3.18
 static const struct dmi_system_id __initconst cr48_dmi_table[] = {
 #if defined(CONFIG_DMI) && defined(CONFIG_X86)
 	{
@@ -1836,6 +1910,9 @@ static const struct dmi_system_id forcepad_dmi_table[] __initconst = {
 			DMI_MATCH(DMI_SYS_VENDOR, "Hewlett-Packard"),
 			DMI_MATCH(DMI_PRODUCT_NAME, "HP EliteBook Folio 1040 G1"),
 		},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 #endif
@@ -1844,6 +1921,7 @@ static const struct dmi_system_id forcepad_dmi_table[] __initconst = {
 
 void __init synaptics_module_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct dmi_system_id *min_max_dmi;
 
@@ -1854,6 +1932,8 @@ void __init synaptics_module_init(void)
 	if (min_max_dmi)
 		quirk_min_max = min_max_dmi->driver_data;
 =======
+=======
+>>>>>>> v3.18
 	impaired_toshiba_kbc = dmi_check_system(toshiba_dmi_table);
 	broken_olpc_ec = dmi_check_system(olpc_dmi_table);
 	cr48_profile_sensor = dmi_check_system(cr48_dmi_table);
@@ -1863,6 +1943,9 @@ void __init synaptics_module_init(void)
 	 * so we have to resort to checking DMI.
 	 */
 	is_forcepad = dmi_check_system(forcepad_dmi_table);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1914,7 +1997,11 @@ static int __synaptics_init(struct psmouse *psmouse, bool absolute_mode)
 		     priv->board_id, priv->firmware_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_input_params(psmouse->dev, priv);
+=======
+	set_input_params(psmouse, priv);
+>>>>>>> v3.18
 =======
 	set_input_params(psmouse, priv);
 >>>>>>> v3.18

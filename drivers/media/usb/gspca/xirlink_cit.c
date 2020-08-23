@@ -1472,7 +1472,11 @@ static int cit_get_clock_div(struct gspca_dev *gspca_dev)
 	while (clock_div > 3 &&
 			1000 * packet_size >
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gspca_dev->width * gspca_dev->height *
+=======
+			gspca_dev->pixfmt.width * gspca_dev->pixfmt.height *
+>>>>>>> v3.18
 =======
 			gspca_dev->pixfmt.width * gspca_dev->pixfmt.height *
 >>>>>>> v3.18
@@ -1482,8 +1486,13 @@ static int cit_get_clock_div(struct gspca_dev *gspca_dev)
 	PDEBUG(D_PROBE,
 	       "PacketSize: %d, res: %dx%d -> using clockdiv: %d (%d fps)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       packet_size, gspca_dev->width, gspca_dev->height, clock_div,
 	       fps[clock_div]);
+=======
+	       packet_size, gspca_dev->pixfmt.width, gspca_dev->pixfmt.height,
+	       clock_div, fps[clock_div]);
+>>>>>>> v3.18
 =======
 	       packet_size, gspca_dev->pixfmt.width, gspca_dev->pixfmt.height,
 	       clock_div, fps[clock_div]);
@@ -1512,7 +1521,11 @@ static int cit_start_model0(struct gspca_dev *gspca_dev)
 	cit_write_reg(gspca_dev, 0x0014, 0x0427);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -1657,7 +1670,11 @@ static int cit_start_model1(struct gspca_dev *gspca_dev)
 	cit_write_reg(gspca_dev, 0x00, 0x010a);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -1718,7 +1735,11 @@ static int cit_start_model1(struct gspca_dev *gspca_dev)
 
 	/* Assorted init */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -1775,7 +1796,11 @@ static int cit_start_model2(struct gspca_dev *gspca_dev)
 	cit_write_reg(gspca_dev, 0x0001, 0x0133);
 	cit_write_reg(gspca_dev, 0x0001, 0x0102);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -1818,7 +1843,11 @@ static int cit_start_model2(struct gspca_dev *gspca_dev)
 	cit_write_reg(gspca_dev, 0x0000, 0x0100);	/* LED on */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -1870,7 +1899,11 @@ static int cit_start_model2(struct gspca_dev *gspca_dev)
 	 * 0-3 work, and picture shifts left or right. Don't change.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -1933,7 +1966,11 @@ static int cit_start_model2(struct gspca_dev *gspca_dev)
 	 * be activated only at appropriate time. Don't change it randomly!
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -2061,7 +2098,11 @@ static int cit_start_model3(struct gspca_dev *gspca_dev)
 	cit_model3_Packet1(gspca_dev, 0x009f, 0x000a);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -2176,7 +2217,11 @@ static int cit_start_model3(struct gspca_dev *gspca_dev)
 	cit_write_reg(gspca_dev, clock_div, 0x0111); /* Clock Divider */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -2257,7 +2302,11 @@ static int cit_start_model4(struct gspca_dev *gspca_dev)
 	cit_model4_Packet1(gspca_dev, 0x0034, 0x0000);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -2581,7 +2630,11 @@ static int cit_start_ibm_netcam_pro(struct gspca_dev *gspca_dev)
 	cit_write_reg(gspca_dev, 0x0022, 0x012a); /* Same */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -2689,7 +2742,11 @@ static int sd_isoc_init(struct gspca_dev *gspca_dev)
 	int max_packet_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -2717,7 +2774,11 @@ static int sd_isoc_nego(struct gspca_dev *gspca_dev)
 	struct usb_host_interface *alt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -2842,7 +2903,11 @@ static u8 *cit_find_sof(struct gspca_dev *gspca_dev, u8 *data, int len)
 	case CIT_MODEL3:
 	case CIT_IBM_NETCAM_PRO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (gspca_dev->width) {
+=======
+		switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 		switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -2930,6 +2995,7 @@ static u8 *cit_find_sof(struct gspca_dev *gspca_dev, u8 *data, int len)
 					if (i >= 4)
 						PDEBUG(D_FRAM,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						       "header found at offset: %d: %02x %02x 00 %02x %02x %02x\n",
 						       i - 1,
 						       data[i - 4],
@@ -2945,6 +3011,8 @@ static u8 *cit_find_sof(struct gspca_dev *gspca_dev, u8 *data, int len)
 						       data[i + 1],
 						       data[i + 2]);
 =======
+=======
+>>>>>>> v3.18
 						       "header found at offset: %d: %02x %02x 00 %3ph\n",
 						       i - 1,
 						       data[i - 4],
@@ -2955,6 +3023,9 @@ static u8 *cit_find_sof(struct gspca_dev *gspca_dev, u8 *data, int len)
 						       "header found at offset: %d: 00 %3ph\n",
 						       i - 1,
 						       &data[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					return data + i + (sd->sof_len - 1);
 				}

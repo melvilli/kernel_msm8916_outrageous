@@ -5,7 +5,12 @@
 #include <linux/irqflags.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long wrong_size_cmpxchg(volatile void *ptr);
+=======
+extern unsigned long wrong_size_cmpxchg(volatile void *ptr)
+	__noreturn;
+>>>>>>> v3.18
 =======
 extern unsigned long wrong_size_cmpxchg(volatile void *ptr)
 	__noreturn;

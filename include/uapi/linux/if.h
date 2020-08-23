@@ -28,6 +28,7 @@
 #include <linux/hdlc/ioctl.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Standard interface flags (netdevice->flags). */
 #define	IFF_UP		0x1		/* interface is up		*/
 #define	IFF_BROADCAST	0x2		/* broadcast address valid	*/
@@ -54,6 +55,8 @@
 
 #define IFF_ECHO	0x40000		/* echo sent packets		*/
 =======
+=======
+>>>>>>> v3.18
 /**
  * enum net_device_flags - &struct net_device flags
  *
@@ -135,11 +138,15 @@ enum net_device_flags {
 #define IFF_LOWER_UP			IFF_LOWER_UP
 #define IFF_DORMANT			IFF_DORMANT
 #define IFF_ECHO			IFF_ECHO
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define IFF_VOLATILE	(IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
 		IFF_MASTER|IFF_SLAVE|IFF_RUNNING|IFF_LOWER_UP|IFF_DORMANT)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Private (from user) interface flags (netdevice->priv_flags). */
 #define IFF_802_1Q_VLAN 0x1             /* 802.1Q VLAN device.          */
@@ -170,6 +177,8 @@ enum net_device_flags {
 					 * change when it's running */
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define IF_GET_IFACE	0x0001		/* for querying only */

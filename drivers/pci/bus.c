@@ -14,7 +14,10 @@
 #include <linux/ioport.h>
 #include <linux/proc_fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -102,6 +105,7 @@ void pci_bus_remove_resources(struct pci_bus *bus)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * pci_bus_alloc_resource - allocate a resource from a parent bus
  * @bus: PCI bus
@@ -122,6 +126,8 @@ pci_bus_alloc_resource(struct pci_bus *bus, struct resource *res,
 		resource_size_t size, resource_size_t align,
 		resource_size_t min, unsigned int type_mask,
 =======
+=======
+>>>>>>> v3.18
 static struct pci_bus_region pci_32_bit = {0, 0xffffffffULL};
 #ifdef CONFIG_ARCH_DMA_ADDR_T_64BIT
 static struct pci_bus_region pci_64_bit = {0,
@@ -157,11 +163,15 @@ static void pci_clip_resource_to_region(struct pci_bus *bus,
 static int pci_bus_alloc_from_region(struct pci_bus *bus, struct resource *res,
 		resource_size_t size, resource_size_t align,
 		resource_size_t min, unsigned long type_mask,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		resource_size_t (*alignf)(void *,
 					  const struct resource *,
 					  resource_size_t,
 					  resource_size_t),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		void *alignf_data)
 {
@@ -175,6 +185,8 @@ static int pci_bus_alloc_from_region(struct pci_bus *bus, struct resource *res,
 	if (!(res->flags & IORESOURCE_MEM_64))
 		max = PCIBIOS_MAX_MEM_32;
 =======
+=======
+>>>>>>> v3.18
 		void *alignf_data,
 		struct pci_bus_region *region)
 {
@@ -183,6 +195,9 @@ static int pci_bus_alloc_from_region(struct pci_bus *bus, struct resource *res,
 	resource_size_t max;
 
 	type_mask |= IORESOURCE_TYPE_BITS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pci_bus_for_each_resource(bus, r, i) {
@@ -200,6 +215,7 @@ static int pci_bus_alloc_from_region(struct pci_bus *bus, struct resource *res,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Ok, try it out.. */
 		ret = allocate_resource(r, res, size,
 					r->start ? : min,
@@ -211,6 +227,8 @@ static int pci_bus_alloc_from_region(struct pci_bus *bus, struct resource *res,
 	return ret;
 }
 =======
+=======
+>>>>>>> v3.18
 		avail = *r;
 		pci_clip_resource_to_region(bus, &avail, region);
 
@@ -279,6 +297,9 @@ int pci_bus_alloc_resource(struct pci_bus *bus, struct resource *res,
 					 &pci_32_bit);
 }
 EXPORT_SYMBOL(pci_bus_alloc_resource);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void __weak pcibios_resource_survey_bus(struct pci_bus *bus) { }
@@ -290,7 +311,11 @@ void __weak pcibios_resource_survey_bus(struct pci_bus *bus) { }
  * This adds add sysfs entries and start device drivers
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pci_bus_add_device(struct pci_dev *dev)
+=======
+void pci_bus_add_device(struct pci_dev *dev)
+>>>>>>> v3.18
 =======
 void pci_bus_add_device(struct pci_dev *dev)
 >>>>>>> v3.18
@@ -304,6 +329,10 @@ void pci_bus_add_device(struct pci_dev *dev)
 	pci_fixup_device(pci_fixup_final, dev);
 	pci_create_sysfs_dev_files(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_proc_attach_device(dev);
+>>>>>>> v3.18
 =======
 	pci_proc_attach_device(dev);
 >>>>>>> v3.18
@@ -314,9 +343,14 @@ void pci_bus_add_device(struct pci_dev *dev)
 
 	dev->is_added = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 }
+=======
+}
+EXPORT_SYMBOL_GPL(pci_bus_add_device);
+>>>>>>> v3.18
 =======
 }
 EXPORT_SYMBOL_GPL(pci_bus_add_device);
@@ -333,7 +367,10 @@ void pci_bus_add_devices(const struct pci_bus *bus)
 	struct pci_dev *dev;
 	struct pci_bus *child;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int retval;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -342,10 +379,14 @@ void pci_bus_add_devices(const struct pci_bus *bus)
 		if (dev->is_added)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = pci_bus_add_device(dev);
 		if (retval)
 			dev_err(&dev->dev, "Error adding device (%d)\n",
 				retval);
+=======
+		pci_bus_add_device(dev);
+>>>>>>> v3.18
 =======
 		pci_bus_add_device(dev);
 >>>>>>> v3.18
@@ -358,6 +399,7 @@ void pci_bus_add_devices(const struct pci_bus *bus)
 			pci_bus_add_devices(child);
 	}
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void pci_enable_bridges(struct pci_bus *bus)
@@ -377,6 +419,9 @@ void pci_enable_bridges(struct pci_bus *bus)
 		}
 	}
 }
+=======
+EXPORT_SYMBOL(pci_bus_add_devices);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_bus_add_devices);
 >>>>>>> v3.18
@@ -431,11 +476,14 @@ void pci_walk_bus(struct pci_bus *top, int (*cb)(struct pci_dev *, void *),
 EXPORT_SYMBOL_GPL(pci_walk_bus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(pci_bus_alloc_resource);
 EXPORT_SYMBOL_GPL(pci_bus_add_device);
 EXPORT_SYMBOL(pci_bus_add_devices);
 EXPORT_SYMBOL(pci_enable_bridges);
 =======
+=======
+>>>>>>> v3.18
 struct pci_bus *pci_bus_get(struct pci_bus *bus)
 {
 	if (bus)
@@ -451,4 +499,7 @@ void pci_bus_put(struct pci_bus *bus)
 }
 EXPORT_SYMBOL(pci_bus_put);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

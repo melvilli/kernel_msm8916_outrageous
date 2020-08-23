@@ -116,11 +116,17 @@ static int ipath_map_sg(struct ib_device *dev, struct scatterlist *sgl,
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		sg->dma_address = addr + sg->offset;
 #ifdef CONFIG_NEED_SG_DMA_LENGTH
 		sg->dma_length = sg->length;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return ret;
@@ -133,6 +139,7 @@ static void ipath_unmap_sg(struct ib_device *dev,
 	BUG_ON(!valid_dma_direction(direction));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u64 ipath_sg_dma_address(struct ib_device *dev, struct scatterlist *sg)
 {
@@ -149,6 +156,8 @@ static unsigned int ipath_sg_dma_len(struct ib_device *dev,
 	return sg->length;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void ipath_sync_single_for_cpu(struct ib_device *dev,
@@ -187,6 +196,7 @@ static void ipath_dma_free_coherent(struct ib_device *dev, size_t size,
 
 struct ib_dma_mapping_ops ipath_dma_mapping_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ipath_mapping_error,
 	ipath_dma_map_single,
 	ipath_dma_unmap_single,
@@ -201,6 +211,8 @@ struct ib_dma_mapping_ops ipath_dma_mapping_ops = {
 	ipath_dma_alloc_coherent,
 	ipath_dma_free_coherent
 =======
+=======
+>>>>>>> v3.18
 	.mapping_error = ipath_mapping_error,
 	.map_single = ipath_dma_map_single,
 	.unmap_single = ipath_dma_unmap_single,
@@ -212,5 +224,8 @@ struct ib_dma_mapping_ops ipath_dma_mapping_ops = {
 	.sync_single_for_device = ipath_sync_single_for_device,
 	.alloc_coherent = ipath_dma_alloc_coherent,
 	.free_coherent = ipath_dma_free_coherent
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

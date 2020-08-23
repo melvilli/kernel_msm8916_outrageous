@@ -131,7 +131,10 @@ sclp_console_timeout(unsigned long data)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Drop oldest console buffer if sclp_con_drop is set
  */
 static int
@@ -157,6 +160,9 @@ sclp_console_drop_buffer(void)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Writes the given message to S390 system console
  */
@@ -179,10 +185,13 @@ sclp_console_write(struct console *console, const char *message,
 		/* make sure we have a console output buffer */
 		if (sclp_conbuf == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			while (list_empty(&sclp_con_pages)) {
 				if (sclp_con_suspended)
 					goto out;
 =======
+=======
+>>>>>>> v3.18
 			if (list_empty(&sclp_con_pages))
 				sclp_console_full++;
 			while (list_empty(&sclp_con_pages)) {
@@ -190,6 +199,9 @@ sclp_console_write(struct console *console, const char *message,
 					goto out;
 				if (sclp_console_drop_buffer())
 					break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				spin_unlock_irqrestore(&sclp_con_lock, flags);
 				sclp_sync_wait();
@@ -336,7 +348,11 @@ sclp_console_init(void)
 	/* Allocate pages for output buffering */
 	INIT_LIST_HEAD(&sclp_con_pages);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < MAX_CONSOLE_PAGES; i++) {
+=======
+	for (i = 0; i < sclp_console_pages; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < sclp_console_pages; i++) {
 >>>>>>> v3.18

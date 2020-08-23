@@ -2,7 +2,11 @@ config NTB
        tristate "Intel Non-Transparent Bridge support"
        depends on PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
        depends on X86_64
+=======
+       depends on X86
+>>>>>>> v3.18
 =======
        depends on X86
 >>>>>>> v3.18

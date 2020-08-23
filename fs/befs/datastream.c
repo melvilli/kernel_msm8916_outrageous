@@ -53,7 +53,11 @@ befs_read_datastream(struct super_block *sb, befs_data_stream * ds,
 	befs_blocknr_t block;	/* block coresponding to pos */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> befs_read_datastream() %Lu", pos);
+=======
+	befs_debug(sb, "---> %s %llu", __func__, pos);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "---> %s %llu", __func__, pos);
 >>>>>>> v3.18
@@ -64,8 +68,13 @@ befs_read_datastream(struct super_block *sb, befs_data_stream * ds,
 	if (befs_fblock2brun(sb, ds, block, &run) != BEFS_OK) {
 		befs_error(sb, "BeFS: Error finding disk addr of block %lu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   block);
 		befs_debug(sb, "<--- befs_read_datastream() ERROR");
+=======
+			   (unsigned long)block);
+		befs_debug(sb, "<--- %s ERROR", __func__);
+>>>>>>> v3.18
 =======
 			   (unsigned long)block);
 		befs_debug(sb, "<--- %s ERROR", __func__);
@@ -76,6 +85,7 @@ befs_read_datastream(struct super_block *sb, befs_data_stream * ds,
 	if (!bh) {
 		befs_error(sb, "BeFS: Error reading block %lu from datastream",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   block);
 		return NULL;
 	}
@@ -83,11 +93,16 @@ befs_read_datastream(struct super_block *sb, befs_data_stream * ds,
 	befs_debug(sb, "<--- befs_read_datastream() read data, starting at %Lu",
 		   pos);
 =======
+=======
+>>>>>>> v3.18
 			   (unsigned long)block);
 		return NULL;
 	}
 
 	befs_debug(sb, "<--- %s read data, starting at %llu", __func__, pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return bh;
@@ -124,7 +139,12 @@ befs_fblock2brun(struct super_block *sb, befs_data_stream * data,
 		befs_error(sb,
 			   "befs_fblock2brun() was asked to find block %lu, "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   "which is not mapped by the datastream\n", fblock);
+=======
+			   "which is not mapped by the datastream\n",
+			   (unsigned long)fblock);
+>>>>>>> v3.18
 =======
 			   "which is not mapped by the datastream\n",
 			   (unsigned long)fblock);
@@ -139,7 +159,11 @@ befs_fblock2brun(struct super_block *sb, befs_data_stream * data,
  * @sb: Filesystem superblock 
  * @ds: Datastrem to read from
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @buf: Buffer in which to place long symlink data
+=======
+ * @buff: Buffer in which to place long symlink data
+>>>>>>> v3.18
 =======
  * @buff: Buffer in which to place long symlink data
 >>>>>>> v3.18
@@ -155,7 +179,11 @@ befs_read_lsymlink(struct super_block * sb, befs_data_stream * ds, void *buff,
 	u16 plen;
 	struct buffer_head *bh = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> befs_read_lsymlink() length: %Lu", len);
+=======
+	befs_debug(sb, "---> %s length: %llu", __func__, len);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "---> %s length: %llu", __func__, len);
 >>>>>>> v3.18
@@ -165,8 +193,13 @@ befs_read_lsymlink(struct super_block * sb, befs_data_stream * ds, void *buff,
 		if (!bh) {
 			befs_error(sb, "BeFS: Error reading datastream block "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   "starting from %Lu", bytes_read);
 			befs_debug(sb, "<--- befs_read_lsymlink() ERROR");
+=======
+				   "starting from %llu", bytes_read);
+			befs_debug(sb, "<--- %s ERROR", __func__);
+>>>>>>> v3.18
 =======
 				   "starting from %llu", bytes_read);
 			befs_debug(sb, "<--- %s ERROR", __func__);
@@ -182,7 +215,12 @@ befs_read_lsymlink(struct super_block * sb, befs_data_stream * ds, void *buff,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "<--- befs_read_lsymlink() read %u bytes", bytes_read);
+=======
+	befs_debug(sb, "<--- %s read %u bytes", __func__, (unsigned int)
+		   bytes_read);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "<--- %s read %u bytes", __func__, (unsigned int)
 		   bytes_read);
@@ -210,7 +248,11 @@ befs_count_blocks(struct super_block * sb, befs_data_stream * ds)
 	befs_sb_info *befs_sb = BEFS_SB(sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> befs_count_blocks()");
+=======
+	befs_debug(sb, "---> %s", __func__);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "---> %s", __func__);
 >>>>>>> v3.18
@@ -251,7 +293,11 @@ befs_count_blocks(struct super_block * sb, befs_data_stream * ds)
 
 	blocks = datablocks + metablocks;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "<--- befs_count_blocks() %u blocks", blocks);
+=======
+	befs_debug(sb, "<--- %s %u blocks", __func__, (unsigned int)blocks);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "<--- %s %u blocks", __func__, (unsigned int)blocks);
 >>>>>>> v3.18
@@ -300,17 +346,23 @@ befs_find_brun_direct(struct super_block *sb, befs_data_stream * data,
 	    data->max_direct_range >> BEFS_SB(sb)->block_shift;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> befs_find_brun_direct(), find %lu", blockno);
 
 	if (blockno > max_block) {
 		befs_error(sb, "befs_find_brun_direct() passed block outside of"
 			   "direct region");
 =======
+=======
+>>>>>>> v3.18
 	befs_debug(sb, "---> %s, find %lu", __func__, (unsigned long)blockno);
 
 	if (blockno > max_block) {
 		befs_error(sb, "%s passed block outside of direct region",
 			   __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return BEFS_ERR;
 	}
@@ -324,8 +376,14 @@ befs_find_brun_direct(struct super_block *sb, befs_data_stream * data,
 			run->len = array[i].len - offset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			befs_debug(sb, "---> befs_find_brun_direct(), "
 				   "found %lu at direct[%d]", blockno, i);
+=======
+			befs_debug(sb, "---> %s, "
+				   "found %lu at direct[%d]", __func__,
+				   (unsigned long)blockno, i);
+>>>>>>> v3.18
 =======
 			befs_debug(sb, "---> %s, "
 				   "found %lu at direct[%d]", __func__,
@@ -336,7 +394,11 @@ befs_find_brun_direct(struct super_block *sb, befs_data_stream * data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> befs_find_brun_direct() ERROR");
+=======
+	befs_debug(sb, "---> %s ERROR", __func__);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "---> %s ERROR", __func__);
 >>>>>>> v3.18
@@ -383,7 +445,11 @@ befs_find_brun_indirect(struct super_block *sb,
 	int arraylen = befs_iaddrs_per_block(sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> befs_find_brun_indirect(), find %lu", blockno);
+=======
+	befs_debug(sb, "---> %s, find %lu", __func__, (unsigned long)blockno);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "---> %s, find %lu", __func__, (unsigned long)blockno);
 >>>>>>> v3.18
@@ -396,10 +462,16 @@ befs_find_brun_indirect(struct super_block *sb,
 		indirblock = befs_bread(sb, indirblockno + i);
 		if (indirblock == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			befs_debug(sb,
 				   "---> befs_find_brun_indirect() failed to "
 				   "read disk block %lu from the indirect brun",
 				   indirblockno + i);
+=======
+			befs_debug(sb, "---> %s failed to read "
+				   "disk block %lu from the indirect brun",
+				   __func__, (unsigned long)indirblockno + i);
+>>>>>>> v3.18
 =======
 			befs_debug(sb, "---> %s failed to read "
 				   "disk block %lu from the indirect brun",
@@ -425,14 +497,20 @@ befs_find_brun_indirect(struct super_block *sb,
 				brelse(indirblock);
 				befs_debug(sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   "<--- befs_find_brun_indirect() found "
 					   "file block %lu at indirect[%d]",
 					   blockno, j + (i * arraylen));
 =======
+=======
+>>>>>>> v3.18
 					   "<--- %s found file block "
 					   "%lu at indirect[%d]", __func__,
 					   (unsigned long)blockno,
 					   j + (i * arraylen));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return BEFS_OK;
 			}
@@ -444,15 +522,21 @@ befs_find_brun_indirect(struct super_block *sb,
 
 	/* Only fallthrough is an error */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_error(sb, "BeFS: befs_find_brun_indirect() failed to find "
 		   "file block %lu", blockno);
 
 	befs_debug(sb, "<--- befs_find_brun_indirect() ERROR");
 =======
+=======
+>>>>>>> v3.18
 	befs_error(sb, "BeFS: %s failed to find "
 		   "file block %lu", __func__, (unsigned long)blockno);
 
 	befs_debug(sb, "<--- %s ERROR", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return BEFS_ERR;
 }
@@ -535,7 +619,11 @@ befs_find_brun_dblindirect(struct super_block *sb,
 	    * BEFS_DBLINDIR_BRUN_LEN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> befs_find_brun_dblindirect() find %lu", blockno);
+=======
+	befs_debug(sb, "---> %s find %lu", __func__, (unsigned long)blockno);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "---> %s find %lu", __func__, (unsigned long)blockno);
 >>>>>>> v3.18
@@ -555,8 +643,14 @@ befs_find_brun_dblindirect(struct super_block *sb,
 	if (dbl_which_block > data->double_indirect.len) {
 		befs_error(sb, "The double-indirect index calculated by "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   "befs_read_brun_dblindirect(), %d, is outside the range "
 			   "of the double-indirect block", dblindir_indx);
+=======
+			   "%s, %d, is outside the range "
+			   "of the double-indirect block", __func__,
+			   dblindir_indx);
+>>>>>>> v3.18
 =======
 			   "%s, %d, is outside the range "
 			   "of the double-indirect block", __func__,
@@ -570,15 +664,21 @@ befs_find_brun_dblindirect(struct super_block *sb,
 					dbl_which_block);
 	if (dbl_indir_block == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		befs_error(sb, "befs_read_brun_dblindirect() couldn't read the "
 			   "double-indirect block at blockno %lu",
 			   iaddr2blockno(sb,
 					 &data->double_indirect) +
 =======
+=======
+>>>>>>> v3.18
 		befs_error(sb, "%s couldn't read the "
 			   "double-indirect block at blockno %lu", __func__,
 			   (unsigned long)
 			   iaddr2blockno(sb, &data->double_indirect) +
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			   dbl_which_block);
 		brelse(dbl_indir_block);
@@ -597,8 +697,13 @@ befs_find_brun_dblindirect(struct super_block *sb,
 	if (which_block > indir_run.len) {
 		befs_error(sb, "The indirect index calculated by "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   "befs_read_brun_dblindirect(), %d, is outside the range "
 			   "of the indirect block", indir_indx);
+=======
+			   "%s, %d, is outside the range "
+			   "of the indirect block", __func__, indir_indx);
+>>>>>>> v3.18
 =======
 			   "%s, %d, is outside the range "
 			   "of the indirect block", __func__, indir_indx);
@@ -610,8 +715,13 @@ befs_find_brun_dblindirect(struct super_block *sb,
 	    befs_bread(sb, iaddr2blockno(sb, &indir_run) + which_block);
 	if (indir_block == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		befs_error(sb, "befs_read_brun_dblindirect() couldn't read the "
 			   "indirect block at blockno %lu",
+=======
+		befs_error(sb, "%s couldn't read the indirect block "
+			   "at blockno %lu", __func__, (unsigned long)
+>>>>>>> v3.18
 =======
 		befs_error(sb, "%s couldn't read the indirect block "
 			   "at blockno %lu", __func__, (unsigned long)
@@ -637,7 +747,11 @@ befs_find_brun_dblindirect(struct super_block *sb,
 
 	befs_debug(sb, "Found file block %lu in double_indirect[%d][%d],"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   " double_indirect_leftover = %lu",
+=======
+		   " double_indirect_leftover = %lu", (unsigned long)
+>>>>>>> v3.18
 =======
 		   " double_indirect_leftover = %lu", (unsigned long)
 >>>>>>> v3.18

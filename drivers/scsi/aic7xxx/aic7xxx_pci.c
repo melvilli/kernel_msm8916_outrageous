@@ -693,7 +693,11 @@ ahc_find_pci_device(ahc_dev_softc_t pci)
 	 */
 	if (ahc_get_pci_function(pci) > 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 && ahc_9005_subdevinfo_valid(vendor, device, subvendor, subdevice)
+=======
+	 && ahc_9005_subdevinfo_valid(device, vendor, subdevice, subvendor)
+>>>>>>> v3.18
 =======
 	 && ahc_9005_subdevinfo_valid(device, vendor, subdevice, subvendor)
 >>>>>>> v3.18

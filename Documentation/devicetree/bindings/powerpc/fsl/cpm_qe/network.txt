@@ -11,7 +11,10 @@ Example:
 
 	ethernet@11300 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device_type = "network";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		compatible = "fsl,mpc8272-fcc-enet",
@@ -37,7 +40,10 @@ fsl,mdc-pin : pin of port C controlling mdio clock
 Example:
 	mdio@10d40 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device_type = "mdio";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		compatible = "fsl,mpc8272ads-mdio-bitbang",

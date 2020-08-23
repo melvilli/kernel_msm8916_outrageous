@@ -20,6 +20,10 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk/at91_pmc.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk/at91_pmc.h>
 >>>>>>> v3.18
@@ -30,8 +34,13 @@
 #include <asm/mach/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/at91_pmc.h>
 #include <mach/cpu.h>
+=======
+#include <mach/cpu.h>
+#include <mach/hardware.h>
+>>>>>>> v3.18
 =======
 #include <mach/cpu.h>
 #include <mach/hardware.h>
@@ -40,6 +49,7 @@
 #include "at91_aic.h"
 #include "generic.h"
 #include "pm.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*
@@ -117,6 +127,11 @@ static void __init show_reset_status(void)
 
 static void (*at91_pm_standby)(void);
 >>>>>>> v3.18
+=======
+#include "gpio.h"
+
+static void (*at91_pm_standby)(void);
+>>>>>>> v3.18
 
 static int at91_pm_valid_state(suspend_state_t state)
 {
@@ -169,9 +184,12 @@ static int at91_pm_verify_clocks(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ENABLED(CONFIG_AT91_PROGRAMMABLE_CLOCKS))
 		return 1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* PCK0..PCK3 must be disabled, or configured to use clk32k */
@@ -224,6 +242,7 @@ static int at91_pm_enter(suspend_state_t state)
 	else
 		at91_gpio_suspend();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	at91_irq_suspend();
 
 	pr_debug("AT91: PM - wake mask %08x, pm state %d\n",
@@ -235,6 +254,8 @@ static int at91_pm_enter(suspend_state_t state)
 				& at91_aic_read(AT91_AIC_IMR),
 			state);
 =======
+=======
+>>>>>>> v3.18
 
 	if (IS_ENABLED(CONFIG_OLD_IRQ_AT91) && at91_aic_base) {
 		at91_irq_suspend();
@@ -248,6 +269,9 @@ static int at91_pm_enter(suspend_state_t state)
 					& at91_aic_read(AT91_AIC_IMR),
 				state);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (state) {
@@ -301,6 +325,7 @@ static int at91_pm_enter(suspend_state_t state)
 			 * as at91sam9 can access a RAM in self-refresh mode.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (cpu_is_at91rm9200())
 				at91rm9200_standby();
 			else if (cpu_is_at91sam9g45())
@@ -309,6 +334,10 @@ static int at91_pm_enter(suspend_state_t state)
 				at91sam9263_standby();
 			else
 				at91sam9_standby();
+=======
+			if (at91_pm_standby)
+				at91_pm_standby();
+>>>>>>> v3.18
 =======
 			if (at91_pm_standby)
 				at91_pm_standby();
@@ -325,6 +354,7 @@ static int at91_pm_enter(suspend_state_t state)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AT91: PM - wakeup %08x\n",
 			at91_aic_read(AT91_AIC_IPR) & at91_aic_read(AT91_AIC_IMR));
 
@@ -332,6 +362,8 @@ error:
 	target_state = PM_SUSPEND_ON;
 	at91_irq_resume();
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_OLD_IRQ_AT91) && at91_aic_base)
 		pr_debug("AT91: PM - wakeup %08x\n",
 			 at91_aic_read(AT91_AIC_IPR) &
@@ -343,6 +375,9 @@ error:
 	if (IS_ENABLED(CONFIG_OLD_IRQ_AT91) && at91_aic_base)
 		at91_irq_resume();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (of_have_populated_dt())
 		at91_pinctrl_gpio_resume();
@@ -368,7 +403,10 @@ static const struct platform_suspend_ops at91_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device at91_cpuidle_device = {
 	.name = "cpuidle-at91",
 };
@@ -381,6 +419,9 @@ void at91_pm_set_standby(void (*at91_standby)(void))
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init at91_pm_init(void)
 {
@@ -394,17 +435,23 @@ static int __init at91_pm_init(void)
 	if (cpu_is_at91rm9200())
 		at91_ramc_write(0, AT91RM9200_SDRAMC_LPR, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	suspend_set_ops(&at91_pm_ops);
 
 	show_reset_status();
 =======
+=======
+>>>>>>> v3.18
 	
 	if (at91_cpuidle_device.dev.platform_data)
 		platform_device_register(&at91_cpuidle_device);
 
 	suspend_set_ops(&at91_pm_ops);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

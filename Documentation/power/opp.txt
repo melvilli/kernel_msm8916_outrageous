@@ -11,8 +11,12 @@ Contents
 4. OPP Availability Control Functions
 5. OPP Data Retrieval Functions
 <<<<<<< HEAD
+<<<<<<< HEAD
 6. Cpufreq Table Generation
 7. Data Structures
+=======
+6. Data Structures
+>>>>>>> v3.18
 =======
 6. Data Structures
 >>>>>>> v3.18
@@ -57,9 +61,12 @@ SoC framework	-> modifies on required cases certain OPPs	-> OPP layer
 		-> queries to search/retrieve information	->
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Architectures that provide a SoC framework for OPP should select ARCH_HAS_OPP
 to make the OPP layer available.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 OPP layer expects each domain to be represented by a unique device pointer. SoC
@@ -80,7 +87,10 @@ OPP library facilitates this concept in it's implementation. The following
 operational functions operate only on available opps:
 opp_find_freq_{ceil, floor}, dev_pm_opp_get_voltage, dev_pm_opp_get_freq, dev_pm_opp_get_opp_count
 <<<<<<< HEAD
+<<<<<<< HEAD
 and dev_pm_opp_init_cpufreq_table
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -107,10 +117,16 @@ opp_get_{voltage, freq, opp_count} fall into this category.
 
 opp_{add,enable,disable} are updaters which use mutex and implement it's own
 <<<<<<< HEAD
+<<<<<<< HEAD
 RCU locking mechanisms. dev_pm_opp_init_cpufreq_table acts as an updater and uses
 mutex to implment RCU updater strategy. These functions should *NOT* be called
 under RCU locks and other contexts that prevent blocking functions in RCU or
 mutex operations from working.
+=======
+RCU locking mechanisms. These functions should *NOT* be called under RCU locks
+and other contexts that prevent blocking functions in RCU or mutex operations
+from working.
+>>>>>>> v3.18
 =======
 RCU locking mechanisms. These functions should *NOT* be called under RCU locks
 and other contexts that prevent blocking functions in RCU or mutex operations
@@ -328,6 +344,7 @@ dev_pm_opp_get_opp_count - Retrieve the number of available opps for a device
 	 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 6. Cpufreq Table Generation
 ===========================
 dev_pm_opp_init_cpufreq_table - cpufreq framework typically is initialized with
@@ -359,6 +376,9 @@ dev_pm_opp_free_cpufreq_table - Free up the table allocated by dev_pm_opp_init_c
 =======
 6. Data Structures
 >>>>>>> v3.18
+=======
+6. Data Structures
+>>>>>>> v3.18
 ==================
 Typically an SoC contains multiple voltage domains which are variable. Each
 domain is represented by a device pointer. The relationship to OPP can be
@@ -379,7 +399,11 @@ representing the actual OPPs and domains are internal to the OPP library itself
 to allow for suitable abstraction reusable across systems.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct opp - The internal data structure of OPP library which is used to
+=======
+struct dev_pm_opp - The internal data structure of OPP library which is used to
+>>>>>>> v3.18
 =======
 struct dev_pm_opp - The internal data structure of OPP library which is used to
 >>>>>>> v3.18
@@ -390,7 +414,11 @@ struct dev_pm_opp - The internal data structure of OPP library which is used to
 	identifier for OPP in the interactions with OPP layer.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARNING: The struct opp pointer should not be parsed or modified by the
+=======
+	WARNING: The struct dev_pm_opp pointer should not be parsed or modified by the
+>>>>>>> v3.18
 =======
 	WARNING: The struct dev_pm_opp pointer should not be parsed or modified by the
 >>>>>>> v3.18

@@ -250,6 +250,7 @@ static int mdfld_dsi_connector_set_property(struct drm_connector *connector,
 
 	if (!strcmp(property->name, "scaling mode") && encoder) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct psb_intel_crtc *psb_crtc =
 					to_psb_intel_crtc(encoder->crtc);
 		bool centerechange;
@@ -257,11 +258,16 @@ static int mdfld_dsi_connector_set_property(struct drm_connector *connector,
 
 		if (!psb_crtc)
 =======
+=======
+>>>>>>> v3.18
 		struct gma_crtc *gma_crtc = to_gma_crtc(encoder->crtc);
 		bool centerechange;
 		uint64_t val;
 
 		if (!gma_crtc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto set_prop_error;
 
@@ -290,6 +296,7 @@ static int mdfld_dsi_connector_set_property(struct drm_connector *connector,
 			(value == DRM_MODE_SCALE_NO_SCALE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (psb_crtc->saved_mode.hdisplay != 0 &&
 		    psb_crtc->saved_mode.vdisplay != 0) {
 			if (centerechange) {
@@ -299,6 +306,8 @@ static int mdfld_dsi_connector_set_property(struct drm_connector *connector,
 						encoder->crtc->y,
 						encoder->crtc->fb))
 =======
+=======
+>>>>>>> v3.18
 		if (gma_crtc->saved_mode.hdisplay != 0 &&
 		    gma_crtc->saved_mode.vdisplay != 0) {
 			if (centerechange) {
@@ -307,6 +316,9 @@ static int mdfld_dsi_connector_set_property(struct drm_connector *connector,
 						encoder->crtc->x,
 						encoder->crtc->y,
 						encoder->crtc->primary->fb))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					goto set_prop_error;
 			} else {
@@ -314,8 +326,13 @@ static int mdfld_dsi_connector_set_property(struct drm_connector *connector,
 						encoder->helper_private;
 				funcs->mode_set(encoder,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					&psb_crtc->saved_mode,
 					&psb_crtc->saved_adjusted_mode);
+=======
+					&gma_crtc->saved_mode,
+					&gma_crtc->saved_adjusted_mode);
+>>>>>>> v3.18
 =======
 					&gma_crtc->saved_mode,
 					&gma_crtc->saved_adjusted_mode);
@@ -344,7 +361,11 @@ static void mdfld_dsi_connector_destroy(struct drm_connector *connector)
 	if (!dsi_connector)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_remove(connector);
+=======
+	drm_connector_unregister(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_unregister(connector);
 >>>>>>> v3.18
@@ -627,7 +648,11 @@ void mdfld_dsi_output_init(struct drm_device *dev,
 	encoder->base.type = (pipe == 0) ? INTEL_OUTPUT_MIPI :
 		INTEL_OUTPUT_MIPI2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
+=======
+	drm_connector_register(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_register(connector);
 >>>>>>> v3.18

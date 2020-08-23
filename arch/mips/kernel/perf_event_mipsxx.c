@@ -341,7 +341,11 @@ static int mipsxx_pmu_alloc_counter(struct cpu_hw_events *cpuc,
 static void mipsxx_pmu_enable_event(struct hw_perf_event *evt, int idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -365,7 +369,11 @@ static void mipsxx_pmu_enable_event(struct hw_perf_event *evt, int idx)
 static void mipsxx_pmu_disable_event(int idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -469,7 +477,11 @@ static void mipspmu_stop(struct perf_event *event, int flags)
 static int mipspmu_add(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -509,7 +521,11 @@ out:
 static void mipspmu_del(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -575,7 +591,11 @@ static int mipspmu_get_irq(void)
 		/* Request my own irq handler. */
 		err = request_irq(mipspmu.irq, mipsxx_pmu_handle_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_PERCPU | IRQF_NOBALANCING,
+=======
+			IRQF_PERCPU | IRQF_NOBALANCING | IRQF_NO_THREAD,
+>>>>>>> v3.18
 =======
 			IRQF_PERCPU | IRQF_NOBALANCING | IRQF_NO_THREAD,
 >>>>>>> v3.18
@@ -826,7 +846,11 @@ static void reset_counters(void *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 24K/34K/1004K cores can share the same event map. */
+=======
+/* 24K/34K/1004K/interAptiv/loongson1 cores share the same event map. */
+>>>>>>> v3.18
 =======
 /* 24K/34K/1004K/interAptiv/loongson1 cores share the same event map. */
 >>>>>>> v3.18
@@ -839,8 +863,13 @@ static const struct mips_perf_event mipsxxcore_event_map
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 74K core has different branch event code. */
 static const struct mips_perf_event mipsxx74Kcore_event_map
+=======
+/* 74K/proAptiv core has different branch event code. */
+static const struct mips_perf_event mipsxxcore_event_map2
+>>>>>>> v3.18
 =======
 /* 74K/proAptiv core has different branch event code. */
 static const struct mips_perf_event mipsxxcore_event_map2
@@ -879,7 +908,11 @@ static const struct mips_perf_event xlp_event_map[PERF_COUNT_HW_MAX] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 24K/34K/1004K cores can share the same cache event map. */
+=======
+/* 24K/34K/1004K/interAptiv/loongson1 cores share the same cache event map. */
+>>>>>>> v3.18
 =======
 /* 24K/34K/1004K/interAptiv/loongson1 cores share the same cache event map. */
 >>>>>>> v3.18
@@ -964,8 +997,13 @@ static const struct mips_perf_event mipsxxcore_cache_map
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 74K core has completely different cache event map. */
 static const struct mips_perf_event mipsxx74Kcore_cache_map
+=======
+/* 74K/proAptiv core has completely different cache event map. */
+static const struct mips_perf_event mipsxxcore_cache_map2
+>>>>>>> v3.18
 =======
 /* 74K/proAptiv core has completely different cache event map. */
 static const struct mips_perf_event mipsxxcore_cache_map2
@@ -1010,6 +1048,7 @@ static const struct mips_perf_event mipsxxcore_cache_map2
 	[C(OP_READ)] = {
 		[C(RESULT_ACCESS)]	= { 0x1c, CNTR_ODD, P },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[C(RESULT_MISS)]	= { 0x1d, CNTR_EVEN | CNTR_ODD, P },
 	},
 	[C(OP_WRITE)] = {
@@ -1018,6 +1057,8 @@ static const struct mips_perf_event mipsxxcore_cache_map2
 	},
 },
 =======
+=======
+>>>>>>> v3.18
 		[C(RESULT_MISS)]	= { 0x1d, CNTR_EVEN, P },
 	},
 	[C(OP_WRITE)] = {
@@ -1030,6 +1071,9 @@ static const struct mips_perf_event mipsxxcore_cache_map2
  * "speculative" DTLB events which are numbered 0x63 (even/odd) and
  * not included here. One can use raw events if really needed.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 [C(ITLB)] = {
 	[C(OP_READ)] = {
@@ -1324,7 +1368,11 @@ static int __hw_perf_event_init(struct perf_event *event)
 static void pause_local_counters(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1344,7 +1392,11 @@ static void pause_local_counters(void)
 static void resume_local_counters(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1359,7 +1411,11 @@ static void resume_local_counters(void)
 static int mipsxx_pmu_handle_shared_irq(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1444,7 +1500,10 @@ static irqreturn_t mipsxx_pmu_handle_irq(int irq, void *dev)
 	((b) == 0 || (b) == 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* proAptiv */
 #define IS_BOTH_COUNTERS_PROAPTIV_EVENT(b)				\
 	((b) == 0 || (b) == 1)
@@ -1452,6 +1511,9 @@ static irqreturn_t mipsxx_pmu_handle_irq(int irq, void *dev)
 #define IS_BOTH_COUNTERS_P5600_EVENT(b)					\
 	((b) == 0 || (b) == 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* 1004K */
 #define IS_BOTH_COUNTERS_1004K_EVENT(b)					\
@@ -1467,7 +1529,10 @@ static irqreturn_t mipsxx_pmu_handle_irq(int irq, void *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* interAptiv */
 #define IS_BOTH_COUNTERS_INTERAPTIV_EVENT(b)				\
 	((b) == 0 || (b) == 1 || (b) == 11)
@@ -1482,6 +1547,9 @@ static irqreturn_t mipsxx_pmu_handle_irq(int irq, void *dev)
 #define IS_RANGE_V_INTERAPTIV_EVENT(r)	((r) == 47 || (r) == 175)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* BMIPS5000 */
 #define IS_BOTH_COUNTERS_BMIPS5000_EVENT(b)				\
@@ -1489,6 +1557,7 @@ static irqreturn_t mipsxx_pmu_handle_irq(int irq, void *dev)
 
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * User can use 0-255 raw events, where 0-127 for the events of even
  * counters, and 128-255 for odd counters. Note that bit 7 is used to
@@ -1505,6 +1574,8 @@ static const struct mips_perf_event *mipsxx_pmu_map_raw_event(u64 config)
 	raw_event.event_id = base_id;
 
 =======
+=======
+>>>>>>> v3.18
  * For most cores the user can use 0-255 raw events, where 0-127 for the events
  * of even counters, and 128-255 for odd counters. Note that bit 7 is used to
  * indicate the even/odd bank selector. So, for example, when user wants to take
@@ -1522,6 +1593,9 @@ static const struct mips_perf_event *mipsxx_pmu_map_raw_event(u64 config)
 	unsigned int raw_id = config & 0xff;
 	unsigned int base_id = raw_id & 0x7f;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (current_cpu_type()) {
 	case CPU_24K:
@@ -1555,6 +1629,10 @@ static const struct mips_perf_event *mipsxx_pmu_map_raw_event(u64 config)
 		break;
 	case CPU_74K:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CPU_1074K:
+>>>>>>> v3.18
 =======
 	case CPU_1074K:
 >>>>>>> v3.18
@@ -1568,7 +1646,10 @@ static const struct mips_perf_event *mipsxx_pmu_map_raw_event(u64 config)
 #endif
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CPU_PROAPTIV:
 		if (IS_BOTH_COUNTERS_PROAPTIV_EVENT(base_id))
 			raw_event.cntr_mask = CNTR_EVEN | CNTR_ODD;
@@ -1592,6 +1673,9 @@ static const struct mips_perf_event *mipsxx_pmu_map_raw_event(u64 config)
 		raw_event.range = P;
 #endif
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CPU_1004K:
 		if (IS_BOTH_COUNTERS_1004K_EVENT(base_id))
@@ -1609,7 +1693,10 @@ static const struct mips_perf_event *mipsxx_pmu_map_raw_event(u64 config)
 #endif
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CPU_INTERAPTIV:
 		if (IS_BOTH_COUNTERS_INTERAPTIV_EVENT(base_id))
 			raw_event.cntr_mask = CNTR_EVEN | CNTR_ODD;
@@ -1625,6 +1712,9 @@ static const struct mips_perf_event *mipsxx_pmu_map_raw_event(u64 config)
 			raw_event.range = T;
 #endif
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CPU_BMIPS5000:
 		if (IS_BOTH_COUNTERS_BMIPS5000_EVENT(base_id))
@@ -1635,6 +1725,11 @@ static const struct mips_perf_event *mipsxx_pmu_map_raw_event(u64 config)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	raw_event.event_id = base_id;
+
+>>>>>>> v3.18
 =======
 	raw_event.event_id = base_id;
 
@@ -1742,9 +1837,12 @@ init_hw_perf_events(void)
 	case CPU_74K:
 		mipspmu.name = "mips/74K";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mipspmu.general_event_map = &mipsxx74Kcore_event_map;
 		mipspmu.cache_event_map = &mipsxx74Kcore_cache_map;
 =======
+=======
+>>>>>>> v3.18
 		mipspmu.general_event_map = &mipsxxcore_event_map2;
 		mipspmu.cache_event_map = &mipsxxcore_cache_map2;
 		break;
@@ -1757,6 +1855,9 @@ init_hw_perf_events(void)
 		mipspmu.name = "mips/P5600";
 		mipspmu.general_event_map = &mipsxxcore_event_map2;
 		mipspmu.cache_event_map = &mipsxxcore_cache_map2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case CPU_1004K:
@@ -1765,7 +1866,10 @@ init_hw_perf_events(void)
 		mipspmu.cache_event_map = &mipsxxcore_cache_map;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CPU_1074K:
 		mipspmu.name = "mips/1074K";
 		mipspmu.general_event_map = &mipsxxcore_event_map;
@@ -1776,6 +1880,9 @@ init_hw_perf_events(void)
 		mipspmu.general_event_map = &mipsxxcore_event_map;
 		mipspmu.cache_event_map = &mipsxxcore_cache_map;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CPU_LOONGSON1:
 		mipspmu.name = "mips/loongson1";

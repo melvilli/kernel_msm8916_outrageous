@@ -92,6 +92,10 @@ extern struct cpuinfo cpuinfo;
 /* fwd declarations of the various CPUinfo populators */
 void setup_cpuinfo(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void setup_cpuinfo_clk(void);
+>>>>>>> v3.18
 =======
 void setup_cpuinfo_clk(void);
 >>>>>>> v3.18
@@ -102,15 +106,21 @@ void set_cpuinfo_pvr_full(struct cpuinfo *ci, struct device_node *cpu);
 static inline unsigned int fcpu(struct device_node *cpu, char *n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const __be32 *val;
 	return (val = of_get_property(cpu, n, NULL)) ?
 							be32_to_cpup(val) : 0;
 =======
+=======
+>>>>>>> v3.18
 	u32 val = 0;
 
 	of_property_read_u32(cpu, n, &val);
 
 	return val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

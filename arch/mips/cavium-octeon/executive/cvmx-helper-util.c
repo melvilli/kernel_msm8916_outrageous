@@ -252,6 +252,10 @@ int cvmx_helper_setup_red(int pass_thresh, int drop_thresh)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_helper_setup_red);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_helper_setup_red);
 >>>>>>> v3.18
@@ -389,6 +393,10 @@ int cvmx_helper_get_ipd_port(int interface, int port)
 	return -1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_helper_get_ipd_port);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_helper_get_ipd_port);
 >>>>>>> v3.18
@@ -417,6 +425,10 @@ int cvmx_helper_get_interface_num(int ipd_port)
 	return -1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_helper_get_interface_num);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_helper_get_interface_num);
 >>>>>>> v3.18
@@ -444,6 +456,10 @@ int cvmx_helper_get_interface_index_num(int ipd_port)
 	return -1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_helper_get_interface_index_num);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_helper_get_interface_index_num);
 >>>>>>> v3.18

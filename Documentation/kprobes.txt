@@ -23,8 +23,14 @@ Appendix B: The kprobes sysctl interface
 Kprobes enables you to dynamically break into any kernel routine and
 collect debugging and performance information non-disruptively. You
 <<<<<<< HEAD
+<<<<<<< HEAD
 can trap at almost any kernel code address, specifying a handler
 routine to be invoked when the breakpoint is hit.
+=======
+can trap at almost any kernel code address(*), specifying a handler
+routine to be invoked when the breakpoint is hit.
+(*: some parts of the kernel code can not be trapped, see 1.5 Blacklist)
+>>>>>>> v3.18
 =======
 can trap at almost any kernel code address(*), specifying a handler
 routine to be invoked when the breakpoint is hit.
@@ -280,7 +286,10 @@ using one of the following techniques:
 - Execute 'sysctl -w debug.kprobes_optimization=n'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 1.5 Blacklist
 
 Kprobes can probe most of the kernel except itself. This means
@@ -294,6 +303,9 @@ to specify a blacklisted function.
 Kprobes checks the given probe address against the blacklist and
 rejects registering it, if the given address is in the blacklist.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 2. Architectures Supported
 
@@ -309,6 +321,10 @@ architectures:
 - ppc
 - mips
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- s390
+>>>>>>> v3.18
 =======
 - s390
 >>>>>>> v3.18

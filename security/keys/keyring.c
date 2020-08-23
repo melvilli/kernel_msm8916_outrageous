@@ -1,7 +1,11 @@
 /* Keyring handling
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2005, 2008 Red Hat, Inc. All Rights Reserved.
+=======
+ * Copyright (C) 2004-2005, 2008, 2013 Red Hat, Inc. All Rights Reserved.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2005, 2008, 2013 Red Hat, Inc. All Rights Reserved.
 >>>>>>> v3.18
@@ -21,6 +25,7 @@
 #include <linux/seq_file.h>
 #include <linux/err.h>
 #include <keys/keyring-type.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/uaccess.h>
 #include "internal.h"
@@ -42,11 +47,16 @@
 #define KEY_LINK_FIXQUOTA 1UL
 
 =======
+=======
+>>>>>>> v3.18
 #include <keys/user-type.h>
 #include <linux/assoc_array_priv.h>
 #include <linux/uaccess.h>
 #include "internal.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * When plumbing the depths of the key tree, this sets a hard limit
@@ -60,7 +70,10 @@
 #define KEYRING_NAME_HASH_SIZE	(1 << 5)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * We mark pointers we pass to the associative array with bit 1 set if
  * they're keyrings and clear otherwise.
@@ -83,6 +96,9 @@ static inline void *keyring_key_to_ptr(struct key *key)
 	return key;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct list_head	keyring_name_hash[KEYRING_NAME_HASH_SIZE];
 static DEFINE_RWLOCK(keyring_name_lock);
@@ -103,14 +119,20 @@ static inline unsigned keyring_hash(const char *desc)
  * operations.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int keyring_instantiate(struct key *keyring,
 			       struct key_preparsed_payload *prep);
 static int keyring_match(const struct key *keyring, const void *criterion);
 =======
+=======
+>>>>>>> v3.18
 static int keyring_preparse(struct key_preparsed_payload *prep);
 static void keyring_free_preparse(struct key_preparsed_payload *prep);
 static int keyring_instantiate(struct key *keyring,
 			       struct key_preparsed_payload *prep);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void keyring_revoke(struct key *keyring);
 static void keyring_destroy(struct key *keyring);
@@ -121,14 +143,20 @@ static long keyring_read(const struct key *keyring,
 struct key_type key_type_keyring = {
 	.name		= "keyring",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.def_datalen	= sizeof(struct keyring_list),
 	.instantiate	= keyring_instantiate,
 	.match		= keyring_match,
 =======
+=======
+>>>>>>> v3.18
 	.def_datalen	= 0,
 	.preparse	= keyring_preparse,
 	.free_preparse	= keyring_free_preparse,
 	.instantiate	= keyring_instantiate,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.revoke		= keyring_revoke,
 	.destroy	= keyring_destroy,
@@ -168,7 +196,10 @@ static void keyring_publish_name(struct key *keyring)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Preparse a keyring payload
  */
 static int keyring_preparse(struct key_preparsed_payload *prep)
@@ -184,6 +215,9 @@ static void keyring_free_preparse(struct key_preparsed_payload *prep)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Initialise a keyring.
  *
@@ -192,6 +226,7 @@ static void keyring_free_preparse(struct key_preparsed_payload *prep)
 static int keyring_instantiate(struct key *keyring,
 			       struct key_preparsed_payload *prep)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -216,6 +251,8 @@ static int keyring_match(const struct key *keyring, const void *description)
 
 /*
 =======
+=======
+>>>>>>> v3.18
 	assoc_array_init(&keyring->keys);
 	/* make the keyring available by name if it has one */
 	keyring_publish_name(keyring);
@@ -442,6 +479,9 @@ static const struct assoc_array_ops keyring_assoc_array_ops = {
 };
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Clean up a keyring when it is destroyed.  Unpublish its name if it had one
  * and dispose of its data.
@@ -454,9 +494,12 @@ static const struct assoc_array_ops keyring_assoc_array_ops = {
 static void keyring_destroy(struct key *keyring)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct keyring_list *klist;
 	int loop;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (keyring->description) {
@@ -470,12 +513,16 @@ static void keyring_destroy(struct key *keyring)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	klist = rcu_access_pointer(keyring->payload.subscriptions);
 	if (klist) {
 		for (loop = klist->nkeys - 1; loop >= 0; loop--)
 			key_put(rcu_access_pointer(klist->keys[loop]));
 		kfree(klist);
 	}
+=======
+	assoc_array_destroy(&keyring->keys, &keyring_assoc_array_ops);
+>>>>>>> v3.18
 =======
 	assoc_array_destroy(&keyring->keys, &keyring_assoc_array_ops);
 >>>>>>> v3.18
@@ -487,8 +534,11 @@ static void keyring_destroy(struct key *keyring)
 static void keyring_describe(const struct key *keyring, struct seq_file *m)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct keyring_list *klist;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (keyring->description)
@@ -497,6 +547,7 @@ static void keyring_describe(const struct key *keyring, struct seq_file *m)
 		seq_puts(m, "[anon]");
 
 	if (key_is_instantiated(keyring)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rcu_read_lock();
 		klist = rcu_dereference(keyring->payload.subscriptions);
@@ -513,6 +564,8 @@ static void keyring_describe(const struct key *keyring, struct seq_file *m)
  *
  * The keyring's semaphore is read-locked by the caller.
 =======
+=======
+>>>>>>> v3.18
 		if (keyring->keys.nr_leaves_on_tree != 0)
 			seq_printf(m, ": %lu", keyring->keys.nr_leaves_on_tree);
 		else
@@ -552,11 +605,15 @@ static int keyring_read_iterator(const void *object, void *data)
  * The keyring's semaphore is read-locked by the caller.  This prevents someone
  * from modifying it under us - which could cause us to read key IDs multiple
  * times.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static long keyring_read(const struct key *keyring,
 			 char __user *buffer, size_t buflen)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct keyring_list *klist;
 	struct key *key;
@@ -603,6 +660,8 @@ static long keyring_read(const struct key *keyring,
 error:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	struct keyring_read_iterator_context ctx;
 	unsigned long nr_keys;
 	int ret;
@@ -636,6 +695,9 @@ error:
 
 	kleave(" = %zu [ok]", ctx.count);
 	return ctx.count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -663,6 +725,7 @@ struct key *keyring_alloc(const char *description, kuid_t uid, kgid_t gid,
 }
 EXPORT_SYMBOL(keyring_alloc);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * keyring_search_aux - Search a keyring tree for a key matching some criteria
@@ -848,6 +911,8 @@ ascend:
 		if (key_task_permission(make_key_ref(key, possessed),
 					cred, KEY_SEARCH) < 0)
 =======
+=======
+>>>>>>> v3.18
 /*
  * By default, we keys found by getting an exact match on their descriptions.
  */
@@ -1081,14 +1146,22 @@ ascend_to_node:
 		if (!(ctx->flags & KEYRING_SEARCH_NO_CHECK_PERM) &&
 		    key_task_permission(make_key_ref(key, ctx->possessed),
 					ctx->cred, KEY_NEED_SEARCH) < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 
 		/* stack the current position */
 		stack[sp].keyring = keyring;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		stack[sp].keylist = keylist;
 		stack[sp].kix = kix;
+=======
+		stack[sp].node = node;
+		stack[sp].slot = slot;
+>>>>>>> v3.18
 =======
 		stack[sp].node = node;
 		stack[sp].slot = slot;
@@ -1097,6 +1170,7 @@ ascend_to_node:
 
 		/* begin again with the new keyring */
 		keyring = key;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto descend;
 	}
@@ -1130,6 +1204,8 @@ error_2:
 error:
 	return key_ref;
 =======
+=======
+>>>>>>> v3.18
 		goto descend_to_keyring;
 	}
 
@@ -1252,6 +1328,9 @@ key_ref_t keyring_search_aux(key_ref_t keyring_ref,
 		__key_get(key_ref_to_ptr(ctx->result));
 	rcu_read_unlock();
 	return ctx->result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1263,7 +1342,11 @@ key_ref_t keyring_search_aux(key_ref_t keyring_ref,
  *
  * As keyring_search_aux() above, but using the current task's credentials and
 <<<<<<< HEAD
+<<<<<<< HEAD
  * type's default matching function.
+=======
+ * type's default matching function and preferred search method.
+>>>>>>> v3.18
 =======
  * type's default matching function and preferred search method.
 >>>>>>> v3.18
@@ -1273,9 +1356,12 @@ key_ref_t keyring_search(key_ref_t keyring,
 			 const char *description)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return keyring_search_aux(keyring, current->cred,
 				  type, description, type->match, false);
 =======
+=======
+>>>>>>> v3.18
 	struct keyring_search_context ctx = {
 		.index_key.type		= type,
 		.index_key.description	= description,
@@ -1299,11 +1385,15 @@ key_ref_t keyring_search(key_ref_t keyring,
 	if (type->match_free)
 		type->match_free(&ctx.match_data);
 	return key;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(keyring_search);
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Search the given keyring only (no recursion).
  *
@@ -1316,6 +1406,8 @@ EXPORT_SYMBOL(keyring_search);
  * successful and returns -ENOKEY if not found.  Revoked keys and keys not
  * providing the requested permission are skipped over.
 =======
+=======
+>>>>>>> v3.18
  * Search the given keyring for a key that might be updated.
  *
  * The caller must guarantee that the keyring is a keyring and that the
@@ -1325,11 +1417,15 @@ EXPORT_SYMBOL(keyring_search);
  * Returns a pointer to the found key with usage count incremented if
  * successful and returns NULL if not found.  Revoked and invalidated keys are
  * skipped over.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * If successful, the possession indicator is propagated from the keyring ref
  * to the returned key reference.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 key_ref_t __keyring_search_one(key_ref_t keyring_ref,
 			       const struct key_type *ktype,
@@ -1374,6 +1470,8 @@ found:
 	rcu_read_unlock();
 	return make_key_ref(key, possessed);
 =======
+=======
+>>>>>>> v3.18
 key_ref_t find_key_to_update(key_ref_t keyring_ref,
 			     const struct keyring_index_key *index_key)
 {
@@ -1404,6 +1502,9 @@ found:
 	__key_get(key);
 	kleave(" = {%d}", key->serial);
 	return make_key_ref(key, is_key_possessed(keyring_ref));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1411,22 +1512,32 @@ found:
  * Find a keyring with the specified name.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Only keyrings that have nonzero refcount, are not revoked, and are owned by a
  * user in the current user namespace are considered.  If @uid_keyring is %true,
  * the keyring additionally must have been allocated as a user or user session
  * keyring; otherwise, it must grant Search permission directly to the caller.
 =======
+=======
+>>>>>>> v3.18
  * All named keyrings in the current user namespace are searched, provided they
  * grant Search permission directly to the caller (unless this check is
  * skipped).  Keyrings whose usage points have reached zero or who have been
  * revoked are skipped.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Returns a pointer to the keyring with the keyring's refcount having being
  * incremented on success.  -ENOKEY is returned if a key could not be found.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct key *find_keyring_by_name(const char *name, bool uid_keyring)
+=======
+struct key *find_keyring_by_name(const char *name, bool skip_perm_check)
+>>>>>>> v3.18
 =======
 struct key *find_keyring_by_name(const char *name, bool skip_perm_check)
 >>>>>>> v3.18
@@ -1458,6 +1569,7 @@ struct key *find_keyring_by_name(const char *name, bool skip_perm_check)
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (uid_keyring) {
 				if (!test_bit(KEY_FLAG_UID_KEYRING,
 					      &keyring->flags))
@@ -1468,10 +1580,15 @@ struct key *find_keyring_by_name(const char *name, bool skip_perm_check)
 					continue;
 			}
 =======
+=======
+>>>>>>> v3.18
 			if (!skip_perm_check &&
 			    key_permission(make_key_ref(keyring, 0),
 					   KEY_NEED_SEARCH) < 0)
 				continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* we've got a match but we might end up racing with
@@ -1491,7 +1608,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int keyring_detect_cycle_iterator(const void *object,
 					 void *iterator_data)
 {
@@ -1509,6 +1629,9 @@ static int keyring_detect_cycle_iterator(const void *object,
 	return 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * See if a cycle will will be created by inserting acyclic tree B in acyclic
@@ -1519,6 +1642,7 @@ static int keyring_detect_cycle_iterator(const void *object,
  */
 static int keyring_detect_cycle(struct key *A, struct key *B)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct {
 		struct keyring_list *keylist;
@@ -1613,6 +1737,8 @@ static void keyring_unlink_rcu_disposal(struct rcu_head *rcu)
 		key_put(rcu_access_pointer(klist->keys[klist->delkey]));
 	kfree(klist);
 =======
+=======
+>>>>>>> v3.18
 	struct keyring_search_context ctx = {
 		.index_key		= A->index_key,
 		.match_data.raw_data	= A,
@@ -1628,12 +1754,16 @@ static void keyring_unlink_rcu_disposal(struct rcu_head *rcu)
 	search_nested_keyrings(B, &ctx);
 	rcu_read_unlock();
 	return PTR_ERR(ctx.result) == -EAGAIN ? 0 : PTR_ERR(ctx.result);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*
  * Preallocate memory so that a key can be linked into to a keyring.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int __key_link_begin(struct key *keyring, const struct key_type *type,
 		     const char *description, unsigned long *_prealloc)
@@ -1649,6 +1779,8 @@ int __key_link_begin(struct key *keyring, const struct key_type *type,
 
 	kenter("%d,%s,%s,", key_serial(keyring), type->name, description);
 =======
+=======
+>>>>>>> v3.18
 int __key_link_begin(struct key *keyring,
 		     const struct keyring_index_key *index_key,
 		     struct assoc_array_edit **_edit)
@@ -1662,6 +1794,9 @@ int __key_link_begin(struct key *keyring,
 	       keyring->serial, index_key->type->name, index_key->description);
 
 	BUG_ON(index_key->desc_len == 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (keyring->type != &key_type_keyring)
@@ -1675,6 +1810,7 @@ int __key_link_begin(struct key *keyring,
 
 	/* serialise link/link calls to prevent parallel calls causing a cycle
 	 * when linking two keyring in opposite orders */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (type == &key_type_keyring)
 		down_write(&keyring_serialise_link_sem);
@@ -1771,6 +1907,8 @@ error_quota:
 error_sem:
 	if (type == &key_type_keyring)
 =======
+=======
+>>>>>>> v3.18
 	if (index_key->type == &key_type_keyring)
 		down_write(&keyring_serialise_link_sem);
 
@@ -1804,6 +1942,9 @@ error_cancel:
 	assoc_array_cancel_edit(edit);
 error_sem:
 	if (index_key->type == &key_type_keyring)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		up_write(&keyring_serialise_link_sem);
 error_krsem:
@@ -1835,6 +1976,7 @@ int __key_link_check_live_key(struct key *keyring, struct key *key)
  * holds at most one link to any given key of a particular type+description
  * combination.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __key_link(struct key *keyring, struct key *key,
 		unsigned long *_prealloc)
@@ -1891,12 +2033,17 @@ void __key_link(struct key *keyring, struct key *key,
 		klist->nkeys++;
 	}
 =======
+=======
+>>>>>>> v3.18
 void __key_link(struct key *key, struct assoc_array_edit **_edit)
 {
 	__key_get(key);
 	assoc_array_insert_set_object(*_edit, keyring_key_to_ptr(key));
 	assoc_array_apply_edit(*_edit);
 	*_edit = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1905,6 +2052,7 @@ void __key_link(struct key *key, struct assoc_array_edit **_edit)
  *
  * Must be called with __key_link_begin() having being called.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __key_link_end(struct key *keyring, struct key_type *type,
 		    unsigned long prealloc)
@@ -1925,6 +2073,8 @@ void __key_link_end(struct key *keyring, struct key_type *type,
 					    KEYQUOTA_LINK_BYTES);
 		kfree((struct keyring_list *)(prealloc & ~KEY_LINK_FIXQUOTA));
 =======
+=======
+>>>>>>> v3.18
 void __key_link_end(struct key *keyring,
 		    const struct keyring_index_key *index_key,
 		    struct assoc_array_edit *edit)
@@ -1941,6 +2091,9 @@ void __key_link_end(struct key *keyring,
 		key_payload_reserve(keyring,
 				    keyring->datalen - KEYQUOTA_LINK_BYTES);
 		assoc_array_cancel_edit(edit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	up_write(&keyring->sem);
@@ -1969,6 +2122,7 @@ void __key_link_end(struct key *keyring,
 int key_link(struct key *keyring, struct key *key)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long prealloc;
 	int ret;
 
@@ -1984,6 +2138,8 @@ int key_link(struct key *keyring, struct key *key)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct assoc_array_edit *edit;
 	int ret;
 
@@ -2006,6 +2162,9 @@ int key_link(struct key *keyring, struct key *key)
 	}
 
 	kleave(" = %d {%d,%d}", ret, keyring->serial, atomic_read(&keyring->usage));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -2031,8 +2190,13 @@ EXPORT_SYMBOL(key_link);
 int key_unlink(struct key *keyring, struct key *key)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct keyring_list *klist, *nklist;
 	int loop, ret;
+=======
+	struct assoc_array_edit *edit;
+	int ret;
+>>>>>>> v3.18
 =======
 	struct assoc_array_edit *edit;
 	int ret;
@@ -2041,6 +2205,7 @@ int key_unlink(struct key *keyring, struct key *key)
 	key_check(keyring);
 	key_check(key);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = -ENOTDIR;
 	if (keyring->type != &key_type_keyring)
@@ -2121,6 +2286,8 @@ static void keyring_clear_rcu_disposal(struct rcu_head *rcu)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (keyring->type != &key_type_keyring)
 		return -ENOTDIR;
 
@@ -2146,6 +2313,9 @@ error:
 }
 EXPORT_SYMBOL(key_unlink);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * keyring_clear - Clear a keyring
@@ -2157,6 +2327,7 @@ EXPORT_SYMBOL(key_unlink);
  */
 int keyring_clear(struct key *keyring)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct keyring_list *klist;
 	int ret;
@@ -2186,6 +2357,8 @@ int keyring_clear(struct key *keyring)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct assoc_array_edit *edit;
 	int ret;
 
@@ -2205,6 +2378,9 @@ int keyring_clear(struct key *keyring)
 	}
 
 	up_write(&keyring->sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -2217,6 +2393,7 @@ EXPORT_SYMBOL(keyring_clear);
  */
 static void keyring_revoke(struct key *keyring)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct keyring_list *klist;
 
@@ -2326,6 +2503,8 @@ nomem:
 	up_write(&keyring->sem);
 	kleave(" [oom]");
 =======
+=======
+>>>>>>> v3.18
 	struct assoc_array_edit *edit;
 
 	edit = assoc_array_clear(&keyring->keys, &keyring_assoc_array_ops);
@@ -2390,5 +2569,8 @@ do_gc:
 		       keyring_gc_select_iterator, &limit);
 	up_write(&keyring->sem);
 	kleave(" [gc]");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

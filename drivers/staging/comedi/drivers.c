@@ -5,6 +5,10 @@
     COMEDI - Linux Control and Measurement Device Interface
     Copyright (C) 1997-2000 David A. Schleef <ds@schleef.org>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    Copyright (C) 2002 Frank Mori Hess <fmhess@users.sourceforge.net>
+>>>>>>> v3.18
 =======
     Copyright (C) 2002 Frank Mori Hess <fmhess@users.sourceforge.net>
 >>>>>>> v3.18
@@ -19,11 +23,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -36,7 +43,10 @@
 #include <linux/sched.h>
 #include <linux/fcntl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/delay.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ioport.h>
@@ -49,6 +59,10 @@
 #include <linux/io.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/firmware.h>
+>>>>>>> v3.18
 =======
 #include <linux/firmware.h>
 >>>>>>> v3.18
@@ -58,6 +72,11 @@
 
 struct comedi_driver *comedi_drivers;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* protects access to comedi_drivers */
+DEFINE_MUTEX(comedi_drivers_list_lock);
+>>>>>>> v3.18
 =======
 /* protects access to comedi_drivers */
 DEFINE_MUTEX(comedi_drivers_list_lock);
@@ -81,7 +100,10 @@ static void comedi_clear_hw_dev(struct comedi_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * comedi_alloc_devpriv() - Allocate memory for the device private data.
  * @dev: comedi_device struct
@@ -94,6 +116,9 @@ void *comedi_alloc_devpriv(struct comedi_device *dev, size_t size)
 }
 EXPORT_SYMBOL_GPL(comedi_alloc_devpriv);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int comedi_alloc_subdevices(struct comedi_device *dev, int num_subdevices)
 {
@@ -122,6 +147,7 @@ int comedi_alloc_subdevices(struct comedi_device *dev, int num_subdevices)
 EXPORT_SYMBOL_GPL(comedi_alloc_subdevices);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void comedi_spriv_free(struct comedi_device *dev, int subdev_num)
 {
 	struct comedi_subdevice *s;
@@ -136,6 +162,8 @@ EXPORT_SYMBOL_GPL(comedi_spriv_free);
 
 static void cleanup_device(struct comedi_device *dev)
 =======
+=======
+>>>>>>> v3.18
 /**
  * comedi_alloc_subdev_readback() - Allocate memory for the subdevice readback.
  * @s: comedi_subdevice struct
@@ -153,6 +181,9 @@ int comedi_alloc_subdev_readback(struct comedi_subdevice *s)
 EXPORT_SYMBOL_GPL(comedi_alloc_subdev_readback);
 
 static void comedi_device_detach_cleanup(struct comedi_device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int i;
@@ -162,6 +193,11 @@ static void comedi_device_detach_cleanup(struct comedi_device *dev)
 		for (i = 0; i < dev->n_subdevices; i++) {
 			s = &dev->subdevices[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (s->runflags & SRF_FREE_SPRIV)
+				kfree(s->private);
+>>>>>>> v3.18
 =======
 			if (s->runflags & SRF_FREE_SPRIV)
 				kfree(s->private);
@@ -172,6 +208,10 @@ static void comedi_device_detach_cleanup(struct comedi_device *dev)
 				kfree(s->async);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			kfree(s->readback);
+>>>>>>> v3.18
 =======
 			kfree(s->readback);
 >>>>>>> v3.18
@@ -186,6 +226,10 @@ static void comedi_device_detach_cleanup(struct comedi_device *dev)
 	dev->board_name = NULL;
 	dev->board_ptr = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev->mmio = NULL;
+>>>>>>> v3.18
 =======
 	dev->mmio = NULL;
 >>>>>>> v3.18
@@ -203,11 +247,14 @@ static void comedi_device_detach_cleanup(struct comedi_device *dev)
 void comedi_device_detach(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->attached = false;
 	if (dev->driver)
 		dev->driver->detach(dev);
 	cleanup_device(dev);
 =======
+=======
+>>>>>>> v3.18
 	comedi_device_cancel_all(dev);
 	down_write(&dev->attach_lock);
 	dev->attached = false;
@@ -216,6 +263,9 @@ void comedi_device_detach(struct comedi_device *dev)
 		dev->driver->detach(dev);
 	comedi_device_detach_cleanup(dev);
 	up_write(&dev->attach_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -231,7 +281,10 @@ int insn_inval(struct comedi_device *dev, struct comedi_subdevice *s,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * comedi_readback_insn_read() - A generic (*insn_read) for subdevice readback.
  * @dev: comedi_device struct
@@ -443,6 +496,9 @@ unsigned int comedi_handle_events(struct comedi_device *dev,
 }
 EXPORT_SYMBOL_GPL(comedi_handle_events);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int insn_rw_emulate_bits(struct comedi_device *dev,
 				struct comedi_subdevice *s,
@@ -457,6 +513,10 @@ static int insn_rw_emulate_bits(struct comedi_device *dev,
 	    (chan < channels_per_bitfield) ? 0 : chan;
 	unsigned int new_data[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -509,7 +569,10 @@ static int __comedi_device_postconfig_async(struct comedi_device *dev,
 
 	init_waitqueue_head(&async->wait_head);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	async->subdevice = s;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s->async = async;
@@ -525,7 +588,11 @@ static int __comedi_device_postconfig_async(struct comedi_device *dev,
 	}
 	if (s->buf_change) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = s->buf_change(dev, s, buf_size);
+=======
+		ret = s->buf_change(dev, s);
+>>>>>>> v3.18
 =======
 		ret = s->buf_change(dev, s);
 >>>>>>> v3.18
@@ -551,7 +618,10 @@ static int __comedi_device_postconfig(struct comedi_device *dev)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (s->type == COMEDI_SUBD_DO) {
 			if (s->n_chan < 32)
 				s->io_bits = (1 << s->n_chan) - 1;
@@ -559,6 +629,9 @@ static int __comedi_device_postconfig(struct comedi_device *dev)
 				s->io_bits = 0xffffffff;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (s->len_chanlist == 0)
 			s->len_chanlist = 1;
@@ -602,8 +675,14 @@ static int comedi_device_postconfig(struct comedi_device *dev)
 	if (ret < 0)
 		return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smp_wmb();
 	dev->attached = true;
+=======
+	down_write(&dev->attach_lock);
+	dev->attached = true;
+	up_write(&dev->attach_lock);
+>>>>>>> v3.18
 =======
 	down_write(&dev->attach_lock);
 	dev->attached = true;
@@ -672,7 +751,10 @@ static void comedi_report_boards(struct comedi_driver *driv)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * comedi_load_firmware() - Request and load firmware for a device.
  * @dev: comedi_device struct
  * @hw_device: device struct for the comedi_device
@@ -705,6 +787,9 @@ int comedi_load_firmware(struct comedi_device *dev,
 EXPORT_SYMBOL_GPL(comedi_load_firmware);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * __comedi_request_region() - Request an I/O reqion for a legacy driver.
  * @dev: comedi_device struct
@@ -779,6 +864,10 @@ int comedi_device_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&comedi_drivers_list_lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&comedi_drivers_list_lock);
 >>>>>>> v3.18
@@ -790,8 +879,14 @@ int comedi_device_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 			if (dev->board_ptr)
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (strcmp(driv->driver_name, it->board_name) == 0)
 			break;
+=======
+		} else if (strcmp(driv->driver_name, it->board_name) == 0) {
+			break;
+		}
+>>>>>>> v3.18
 =======
 		} else if (strcmp(driv->driver_name, it->board_name) == 0) {
 			break;
@@ -809,7 +904,12 @@ int comedi_device_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 			module_put(driv->module);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EIO;
+=======
+		ret = -EIO;
+		goto out;
+>>>>>>> v3.18
 =======
 		ret = -EIO;
 		goto out;
@@ -822,10 +922,16 @@ int comedi_device_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 			 driv->driver_name);
 		module_put(driv->module);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOSYS;
 	}
 	/* initialize dev->driver here so
 	 * comedi_error() can be called from attach */
+=======
+		ret = -ENOSYS;
+		goto out;
+	}
+>>>>>>> v3.18
 =======
 		ret = -ENOSYS;
 		goto out;
@@ -843,6 +949,11 @@ int comedi_device_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	}
 	/* On success, the driver module count has been incremented. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+	mutex_unlock(&comedi_drivers_list_lock);
+>>>>>>> v3.18
 =======
 out:
 	mutex_unlock(&comedi_drivers_list_lock);
@@ -875,15 +986,21 @@ int comedi_auto_config(struct device *hardware_device,
 
 	dev = comedi_alloc_board_minor(hardware_device);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(dev))
 		return PTR_ERR(dev);
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ERR(dev)) {
 		dev_warn(hardware_device,
 			 "driver '%s' could not create device.\n",
 			 driver->driver_name);
 		return PTR_ERR(dev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Note: comedi_alloc_board_minor() locked dev->mutex. */
 
@@ -893,6 +1010,7 @@ int comedi_auto_config(struct device *hardware_device,
 	if (ret >= 0)
 		ret = comedi_device_postconfig(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0)
 		comedi_device_detach(dev);
 	mutex_unlock(&dev->mutex);
@@ -900,6 +1018,8 @@ int comedi_auto_config(struct device *hardware_device,
 	if (ret < 0)
 		comedi_release_hardware_device(hardware_device);
 =======
+=======
+>>>>>>> v3.18
 	mutex_unlock(&dev->mutex);
 
 	if (ret < 0) {
@@ -916,6 +1036,9 @@ int comedi_auto_config(struct device *hardware_device,
 			 "driver '%s' has successfully auto-configured '%s'.\n",
 			 driver->driver_name, dev->board_name);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -932,13 +1055,19 @@ EXPORT_SYMBOL_GPL(comedi_auto_unconfig);
 int comedi_driver_register(struct comedi_driver *driver)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	driver->next = comedi_drivers;
 	comedi_drivers = driver;
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&comedi_drivers_list_lock);
 	driver->next = comedi_drivers;
 	comedi_drivers = driver;
 	mutex_unlock(&comedi_drivers_list_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -946,7 +1075,11 @@ int comedi_driver_register(struct comedi_driver *driver)
 EXPORT_SYMBOL_GPL(comedi_driver_register);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int comedi_driver_unregister(struct comedi_driver *driver)
+=======
+void comedi_driver_unregister(struct comedi_driver *driver)
+>>>>>>> v3.18
 =======
 void comedi_driver_unregister(struct comedi_driver *driver)
 >>>>>>> v3.18
@@ -955,10 +1088,13 @@ void comedi_driver_unregister(struct comedi_driver *driver)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* check for devices using this driver */
 	for (i = 0; i < COMEDI_NUM_BOARD_MINORS; i++) {
 		struct comedi_device *dev = comedi_dev_from_minor(i);
 =======
+=======
+>>>>>>> v3.18
 	/* unlink the driver */
 	mutex_lock(&comedi_drivers_list_lock);
 	if (comedi_drivers == driver) {
@@ -976,6 +1112,9 @@ void comedi_driver_unregister(struct comedi_driver *driver)
 	/* check for devices using this driver */
 	for (i = 0; i < COMEDI_NUM_BOARD_MINORS; i++) {
 		struct comedi_device *dev = comedi_dev_get_from_minor(i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!dev)
@@ -991,6 +1130,7 @@ void comedi_driver_unregister(struct comedi_driver *driver)
 		}
 		mutex_unlock(&dev->mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	if (comedi_drivers == driver) {
@@ -1005,6 +1145,10 @@ void comedi_driver_unregister(struct comedi_driver *driver)
 		}
 	}
 	return -EINVAL;
+=======
+		comedi_dev_put(dev);
+	}
+>>>>>>> v3.18
 =======
 		comedi_dev_put(dev);
 	}

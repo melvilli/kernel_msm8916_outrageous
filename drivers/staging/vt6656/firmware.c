@@ -32,6 +32,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "firmware.h"
 #include "control.h"
 #include "rndis.h"
@@ -43,12 +44,18 @@ static int          msglevel                =MSG_LEVEL_INFO;
 #include "firmware.h"
 #include "usbpipe.h"
 >>>>>>> v3.18
+=======
+#include <linux/compiler.h>
+#include "firmware.h"
+#include "usbpipe.h"
+>>>>>>> v3.18
 
 #define FIRMWARE_VERSION	0x133		/* version 1.51 */
 #define FIRMWARE_NAME		"vntwusb.fw"
 
 #define FIRMWARE_CHUNK_SIZE	0x400
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int FIRMWAREbDownload(struct vnt_private *pDevice)
 {
@@ -63,6 +70,8 @@ int FIRMWAREbDownload(struct vnt_private *pDevice)
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO"---->Download firmware\n");
 	spin_unlock_irq(&pDevice->lock);
 =======
+=======
+>>>>>>> v3.18
 int vnt_download_firmware(struct vnt_private *priv)
 {
 	struct device *dev = &priv->usb->dev;
@@ -74,6 +83,9 @@ int vnt_download_firmware(struct vnt_private *priv)
 	int ii, rc;
 
 	dev_dbg(dev, "---->Download firmware\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rc = request_firmware(&fw, FIRMWARE_NAME, dev);
@@ -83,6 +95,7 @@ int vnt_download_firmware(struct vnt_private *priv)
 			goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pBuffer = kmalloc(FIRMWARE_CHUNK_SIZE, GFP_KERNEL);
 	if (!pBuffer)
@@ -106,6 +119,8 @@ int vnt_download_firmware(struct vnt_private *priv)
 			goto free_fw;
         }
 =======
+=======
+>>>>>>> v3.18
 	buffer = kmalloc(FIRMWARE_CHUNK_SIZE, GFP_KERNEL);
 	if (!buffer)
 		goto out;
@@ -126,6 +141,9 @@ int vnt_download_firmware(struct vnt_private *priv)
 		if (status != STATUS_SUCCESS)
 			goto free_fw;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	result = true;
@@ -134,9 +152,14 @@ free_fw:
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(pBuffer);
 
 	spin_lock_irq(&pDevice->lock);
+=======
+	kfree(buffer);
+
+>>>>>>> v3.18
 =======
 	kfree(buffer);
 
@@ -145,6 +168,7 @@ out:
 }
 MODULE_FIRMWARE(FIRMWARE_NAME);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int FIRMWAREbBrach2Sram(struct vnt_private *pDevice)
 {
@@ -195,6 +219,8 @@ int FIRMWAREbCheckVersion(struct vnt_private *pDevice)
     }
     return true;
 =======
+=======
+>>>>>>> v3.18
 int vnt_firmware_branch_to_sram(struct vnt_private *priv)
 {
 	int status;
@@ -242,5 +268,8 @@ int vnt_check_firmware_version(struct vnt_private *priv)
 		return false;
 	}
 	return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

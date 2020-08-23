@@ -25,6 +25,10 @@
 #include <linux/irq.h>
 #include <linux/bug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/nmi.h>
+>>>>>>> v3.18
 =======
 #include <linux/nmi.h>
 >>>>>>> v3.18
@@ -176,13 +180,19 @@ extern void xmon_leave(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GETWORD(v)	(((v)[0] << 24) + ((v)[1] << 16) + ((v)[2] << 8) + (v)[3])
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 #define GETWORD(v)	(((v)[3] << 24) + ((v)[2] << 16) + ((v)[1] << 8) + (v)[0])
 #else
 #define GETWORD(v)	(((v)[0] << 24) + ((v)[1] << 16) + ((v)[2] << 8) + (v)[3])
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define isxdigit(c)	(('0' <= (c) && (c) <= '9') \
@@ -301,7 +311,10 @@ static inline void disable_surveillance(void)
 	if (args.token == RTAS_UNKNOWN_SERVICE)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	args.token = cpu_to_be32(args.token);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	args.nargs = cpu_to_be32(3);
@@ -326,6 +339,7 @@ static void get_output_lock(void)
 	if (xmon_speaker == me)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (;;) {
 		if (xmon_speaker == 0) {
 			last_speaker = cmpxchg(&xmon_speaker, 0, me);
@@ -337,6 +351,8 @@ static void get_output_lock(void)
 			if (--timeout > 0)
 				continue;
 =======
+=======
+>>>>>>> v3.18
 
 	for (;;) {
 		last_speaker = cmpxchg(&xmon_speaker, 0, me);
@@ -354,6 +370,9 @@ static void get_output_lock(void)
 				continue;
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* hostile takeover */
 			prev = cmpxchg(&xmon_speaker, last_speaker, me);
@@ -400,6 +419,10 @@ static int xmon_core(struct pt_regs *regs, int fromipi)
 
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	hard_irq_disable();
+>>>>>>> v3.18
 =======
 	hard_irq_disable();
 >>>>>>> v3.18
@@ -438,7 +461,10 @@ static int xmon_core(struct pt_regs *regs, int fromipi)
 
 	xmon_fault_jmp[cpu] = recurse_jmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpumask_set_cpu(cpu, &cpus_in_xmon);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -453,7 +479,11 @@ static int xmon_core(struct pt_regs *regs, int fromipi)
 		excprint(regs);
 		if (bp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printf("cpu 0x%x stopped at breakpoint 0x%x (",
+=======
+			printf("cpu 0x%x stopped at breakpoint 0x%lx (",
+>>>>>>> v3.18
 =======
 			printf("cpu 0x%x stopped at breakpoint 0x%lx (",
 >>>>>>> v3.18
@@ -467,6 +497,11 @@ static int xmon_core(struct pt_regs *regs, int fromipi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpumask_set_cpu(cpu, &cpus_in_xmon);
+
+>>>>>>> v3.18
 =======
 	cpumask_set_cpu(cpu, &cpus_in_xmon);
 
@@ -554,7 +589,11 @@ static int xmon_core(struct pt_regs *regs, int fromipi)
 		bp = at_breakpoint(regs->nip);
 		if (bp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printf("Stopped at breakpoint %x (", BP_NUM(bp));
+=======
+			printf("Stopped at breakpoint %lx (", BP_NUM(bp));
+>>>>>>> v3.18
 =======
 			printf("Stopped at breakpoint %lx (", BP_NUM(bp));
 >>>>>>> v3.18
@@ -603,6 +642,10 @@ static int xmon_core(struct pt_regs *regs, int fromipi)
 	insert_cpu_bpts();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	touch_nmi_watchdog();
+>>>>>>> v3.18
 =======
 	touch_nmi_watchdog();
 >>>>>>> v3.18
@@ -808,7 +851,11 @@ static void insert_cpu_bpts(void)
 		brk.type = (dabr.enabled & HW_BRK_TYPE_DABR) | HW_BRK_TYPE_PRIV_ALL;
 		brk.len = 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_breakpoint(&brk);
+=======
+		__set_breakpoint(&brk);
+>>>>>>> v3.18
 =======
 		__set_breakpoint(&brk);
 >>>>>>> v3.18
@@ -1037,9 +1084,14 @@ static int cpu_cmd(void)
 {
 #ifdef CONFIG_SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long cpu;
 	int timeout;
 	int count;
+=======
+	unsigned long cpu, first_cpu, last_cpu;
+	int timeout;
+>>>>>>> v3.18
 =======
 	unsigned long cpu, first_cpu, last_cpu;
 	int timeout;
@@ -1048,6 +1100,7 @@ static int cpu_cmd(void)
 	if (!scanhex(&cpu)) {
 		/* print cpus waiting or in xmon */
 		printf("cpus stopped:");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		count = 0;
 		for_each_possible_cpu(cpu) {
@@ -1064,6 +1117,8 @@ static int cpu_cmd(void)
 		if (count > 1)
 			printf("-%x", NR_CPUS - 1);
 =======
+=======
+>>>>>>> v3.18
 		last_cpu = first_cpu = NR_CPUS;
 		for_each_possible_cpu(cpu) {
 			if (cpumask_test_cpu(cpu, &cpus_in_xmon)) {
@@ -1079,6 +1134,9 @@ static int cpu_cmd(void)
 		}
 		if (last_cpu != first_cpu)
 			printf("-0x%lx", last_cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printf("\n");
 		return 0;
@@ -1100,7 +1158,11 @@ static int cpu_cmd(void)
 			mb();
 			xmon_owner = smp_processor_id();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printf("cpu %u didn't take control\n", cpu);
+=======
+			printf("cpu 0x%x didn't take control\n", cpu);
+>>>>>>> v3.18
 =======
 			printf("cpu 0x%x didn't take control\n", cpu);
 >>>>>>> v3.18
@@ -1166,7 +1228,11 @@ csum(void)
 	for (i = 0; i < ncsum; ++i) {
 		if (mread(adrs+i, &v, 1) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printf("csum stopped at %x\n", adrs+i);
+=======
+			printf("csum stopped at "REG"\n", adrs+i);
+>>>>>>> v3.18
 =======
 			printf("csum stopped at "REG"\n", adrs+i);
 >>>>>>> v3.18
@@ -1286,7 +1352,11 @@ bpt_cmds(void)
 			bp = at_breakpoint(a);
 			if (bp == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printf("No breakpoint at %x\n", a);
+=======
+				printf("No breakpoint at %lx\n", a);
+>>>>>>> v3.18
 =======
 				printf("No breakpoint at %lx\n", a);
 >>>>>>> v3.18
@@ -1295,7 +1365,11 @@ bpt_cmds(void)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printf("Cleared breakpoint %x (", BP_NUM(bp));
+=======
+		printf("Cleared breakpoint %lx (", BP_NUM(bp));
+>>>>>>> v3.18
 =======
 		printf("Cleared breakpoint %lx (", BP_NUM(bp));
 >>>>>>> v3.18
@@ -1360,12 +1434,15 @@ const char *getvecname(unsigned long vec)
 	case 0x800:	ret = "(FPU Unavailable)"; break;
 	case 0x900:	ret = "(Decrementer)"; break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 0xc00:	ret = "(System Call)"; break;
 	case 0xd00:	ret = "(Single Step)"; break;
 	case 0xf00:	ret = "(Performance Monitor)"; break;
 	case 0xf20:	ret = "(Altivec Unavailable)"; break;
 	case 0x1300:	ret = "(Instruction Breakpoint)"; break;
 =======
+=======
+>>>>>>> v3.18
 	case 0x980:	ret = "(Hypervisor Decrementer)"; break;
 	case 0xa00:	ret = "(Doorbell)"; break;
 	case 0xc00:	ret = "(System Call)"; break;
@@ -1378,6 +1455,9 @@ const char *getvecname(unsigned long vec)
 	case 0x1300:	ret = "(Instruction Breakpoint)"; break;
 	case 0x1500:	ret = "(Denormalisation)"; break;
 	case 0x1700:	ret = "(Altivec Assist)"; break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default: ret = "";
 	}
@@ -1846,7 +1926,11 @@ mwrite(unsigned long adrs, void *buf, int size)
 		n = size;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printf("*** Error writing address %x\n", adrs + n);
+=======
+		printf("*** Error writing address "REG"\n", adrs + n);
+>>>>>>> v3.18
 =======
 		printf("*** Error writing address "REG"\n", adrs + n);
 >>>>>>> v3.18
@@ -2162,17 +2246,23 @@ static void dump_one_paca(int cpu)
 	DUMP(p, kernelbase, "lx");
 	DUMP(p, kernel_msr, "lx");
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_STD_MMU_64
 	DUMP(p, stab_real, "lx");
 	DUMP(p, stab_addr, "lx");
 #endif
 	DUMP(p, emergency_sp, "p");
 =======
+=======
+>>>>>>> v3.18
 	DUMP(p, emergency_sp, "p");
 #ifdef CONFIG_PPC_BOOK3S_64
 	DUMP(p, mc_emergency_sp, "p");
 	DUMP(p, in_mce, "x");
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	DUMP(p, data_offset, "lx");
 	DUMP(p, hw_cpu_id, "x");
@@ -2543,7 +2633,11 @@ static void proccall(void)
 			   args[4], args[5], args[6], args[7]);
 		sync();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printf("return value is %x\n", ret);
+=======
+		printf("return value is 0x%lx\n", ret);
+>>>>>>> v3.18
 =======
 		printf("return value is 0x%lx\n", ret);
 >>>>>>> v3.18
@@ -2806,7 +2900,11 @@ static void xmon_print_symbol(unsigned long address, const char *mid,
 
 #ifdef CONFIG_PPC_BOOK3S_64
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dump_slb(void)
+=======
+void dump_segments(void)
+>>>>>>> v3.18
 =======
 void dump_segments(void)
 >>>>>>> v3.18
@@ -2816,7 +2914,11 @@ void dump_segments(void)
 	unsigned long llp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("SLB contents of cpu %x\n", smp_processor_id());
+=======
+	printf("SLB contents of cpu 0x%x\n", smp_processor_id());
+>>>>>>> v3.18
 =======
 	printf("SLB contents of cpu 0x%x\n", smp_processor_id());
 >>>>>>> v3.18
@@ -2846,6 +2948,7 @@ void dump_segments(void)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void dump_stab(void)
 {
@@ -2874,6 +2977,8 @@ void dump_segments(void)
 	else
 		dump_stab();
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

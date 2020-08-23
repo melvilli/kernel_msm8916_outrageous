@@ -39,6 +39,10 @@
 #include <asm/processor.h>	/* For VMALLOC_START */
 #include <asm/thread_info.h>	/* For THREAD_SIZE */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/mmu.h>
+>>>>>>> v3.18
 =======
 #include <asm/mmu.h>
 >>>>>>> v3.18
@@ -54,6 +58,7 @@
  *      Eff Addr for load = [reg2]
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*--------------------------------------------------------------
  * Save caller saved registers (scratch registers) ( r0 - r12 )
@@ -158,6 +163,8 @@
 	st.a    r25, [sp, -4]
 	sub     sp, sp, 4
 =======
+=======
+>>>>>>> v3.18
 .macro PUSH reg
 	st.a	\reg, [sp, -4]
 .endm
@@ -291,11 +298,15 @@
 	sub     sp, sp, 4
 #else
 	PUSH	r25
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 .endm
 
 /*--------------------------------------------------------------
+<<<<<<< HEAD
 <<<<<<< HEAD
  * RESTORE_CALLEE_SAVED_KERNEL:
  * Loads callee (non scratch) Reg File by popping from Kernel mode stack.
@@ -366,6 +377,8 @@
 	ld.ab   r14, [sp, 4]
 	ld.ab   r13, [sp, 4]
 =======
+=======
+>>>>>>> v3.18
  * Opposite of SAVE_CALLEE_SAVED_KERNEL
  *-------------------------------------------------------------*/
 .macro RESTORE_CALLEE_SAVED_KERNEL
@@ -393,6 +406,9 @@
 	POP	r25
 #endif
 	RESTORE_R24_TO_R13
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .endm
 
@@ -400,6 +416,7 @@
  * Super FAST Restore callee saved regs by simply re-adjusting SP
  *-------------------------------------------------------------*/
 .macro DISCARD_CALLEE_SAVED_USER
+<<<<<<< HEAD
 <<<<<<< HEAD
 	add     sp, sp, 14 * 4
 .endm
@@ -409,6 +426,9 @@
  *-------------------------------------------------------------*/
 .macro RESTORE_USER_R25
 	ld  r25, [r25, TASK_THREAD + THREAD_USER_R25]
+=======
+	add     sp, sp, SZ_CALLEE_REGS
+>>>>>>> v3.18
 =======
 	add     sp, sp, SZ_CALLEE_REGS
 >>>>>>> v3.18
@@ -427,7 +447,11 @@
 
 	/* Go to end of page where stack begins (grows upwards) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	add2 \out, \out, (THREAD_SIZE - 4)/4   /* one word GUTTER */
+=======
+	add2 \out, \out, (THREAD_SIZE)/4
+>>>>>>> v3.18
 =======
 	add2 \out, \out, (THREAD_SIZE)/4
 >>>>>>> v3.18
@@ -484,9 +508,14 @@
 	 * (SP restore) simpler/uniform.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b.d	77f
 
 	st.a	sp, [sp, -12]	; Make room for orig_r0 and orig_r8
+=======
+	b.d	66f
+	mov	r9, sp
+>>>>>>> v3.18
 =======
 	b.d	66f
 	mov	r9, sp
@@ -496,6 +525,7 @@
 
 	GET_CURR_TASK_ON_CPU   r9
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_ARC_CURR_IN_REG
 
@@ -517,6 +547,8 @@
 	/* Save Pre Intr/Exception User SP on kernel stack */
 	st.a    sp, [r9, -12]	; Make room for orig_r0 and orig_r8
 =======
+=======
+>>>>>>> v3.18
 	/* With current tsk in r9, get it's kernel mode stack base */
 	GET_TSK_STACK_BASE  r9, r9
 
@@ -532,6 +564,9 @@
 
 	/* Save Pre Intr/Exception User SP on kernel stack */
 	st.a    sp, [r9, -16]	; Make room for orig_r0, ECR, user_r25
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* CAUTION:
@@ -544,7 +579,11 @@
 	mov sp, r9
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 77: /* ----- Stack Switched to kernel Mode, Now save REG FILE ----- */
+=======
+	/* ----- Stack Switched to kernel Mode, Now save REG FILE ----- */
+>>>>>>> v3.18
 =======
 	/* ----- Stack Switched to kernel Mode, Now save REG FILE ----- */
 >>>>>>> v3.18
@@ -575,7 +614,11 @@
  */
 .macro GET_CURR_THR_INFO_FROM_SP  reg
 <<<<<<< HEAD
+<<<<<<< HEAD
 	and \reg, sp, ~(THREAD_SIZE - 1)
+=======
+	bic \reg, sp, (THREAD_SIZE - 1)
+>>>>>>> v3.18
 =======
 	bic \reg, sp, (THREAD_SIZE - 1)
 >>>>>>> v3.18
@@ -596,7 +639,11 @@
  *
  * Before saving the full regfile - this reg is restored back, only
 <<<<<<< HEAD
+<<<<<<< HEAD
  * to be saved again on kernel mode stack, as part of ptregs.
+=======
+ * to be saved again on kernel mode stack, as part of pt_regs.
+>>>>>>> v3.18
 =======
  * to be saved again on kernel mode stack, as part of pt_regs.
 >>>>>>> v3.18
@@ -619,7 +666,10 @@
 
 /*--------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Exception Entry prologue
  * -Switches stack to K mode (if not already)
  * -Saves the register file
@@ -642,6 +692,9 @@
 .endm
 
 /*--------------------------------------------------------------
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Save all registers used by Exceptions (TLB Miss, Prot-V, Mem err etc)
  * Requires SP to be already switched to kernel mode Stack
@@ -652,20 +705,27 @@
  * from CPU's point of view
  *-------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 .macro SAVE_ALL_EXCEPTION   marker
 
 	st      \marker, [sp, 8]	/* orig_r8 */
 =======
+=======
+>>>>>>> v3.18
 .macro SAVE_ALL_SYS
 
 	lr	r9, [ecr]
 	st      r9, [sp, 8]    /* ECR */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	st      r0, [sp, 4]    /* orig_r0, needed only for sys calls */
 
 	/* Restore r9 used to code the early prologue */
 	EXCPN_PROLOG_RESTORE_REG  r9
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	SAVE_CALLER_SAVED
 	st.a    r26, [sp, -4]   /* gp */
@@ -716,6 +776,8 @@
 
 	SAVE_ALL_EXCEPTION  r9
 =======
+=======
+>>>>>>> v3.18
 	SAVE_R0_TO_R12
 	PUSH	gp
 	PUSH	fp
@@ -726,6 +788,9 @@
 	PUSHAX	lp_end
 	PUSHAX	lp_start
 	PUSHAX	erbta
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .endm
 
@@ -741,6 +806,7 @@
  * by hardware and that is not good.
  *-------------------------------------------------------------*/
 .macro RESTORE_ALL_SYS
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	add sp, sp, 4       /* hop over unused "pt_regs->stack_place_holder" */
@@ -765,6 +831,8 @@
 	ld  sp, [sp] /* restore original sp */
 	/* orig_r0 and orig_r8 skipped automatically */
 =======
+=======
+>>>>>>> v3.18
 	POPAX	erbta
 	POPAX	lp_start
 	POPAX	lp_end
@@ -781,6 +849,9 @@
 
 	ld  sp, [sp] /* restore original sp */
 	/* orig_r0, ECR, user_r25 skipped automatically */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .endm
 
@@ -791,9 +862,13 @@
 .macro SAVE_ALL_INT1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* restore original r9 , saved in int1_saved_reg
 	* It will be saved on stack in macro: SAVE_CALLER_SAVED
 	*/
+=======
+	/* restore original r9 to be saved as part of reg-file */
+>>>>>>> v3.18
 =======
 	/* restore original r9 to be saved as part of reg-file */
 >>>>>>> v3.18
@@ -804,6 +879,7 @@
 #endif
 
 	/* now we are ready to save the remaining context :) */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	st      orig_r8_IS_IRQ1, [sp, 8]    /* Event Type */
 	st      0, [sp, 4]    /* orig_r0 , N/A for IRQ */
@@ -829,6 +905,8 @@
 	/* move up by 1 word to "create" pt_regs->"stack_place_holder" */
 	sub sp, sp, 4
 =======
+=======
+>>>>>>> v3.18
 	st      event_IRQ1, [sp, 8]    /* Dummy ECR */
 	st      0, [sp, 4]    /* orig_r0 , N/A for IRQ */
 
@@ -842,6 +920,9 @@
 	PUSHAX	lp_end
 	PUSHAX	lp_start
 	PUSHAX	bta_l1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .endm
 
@@ -855,6 +936,7 @@
 	ld  r9, [@int2_saved_reg]
 
 	/* now we are ready to save the remaining context :) */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	st      orig_r8_IS_IRQ2, [sp, 8]    /* Event Type */
 	st      0, [sp, 4]    /* orig_r0 , N/A for IRQ */
@@ -881,6 +963,8 @@
 	/* move up by 1 word to "create" pt_regs->"stack_place_holder" */
 	sub sp, sp, 4
 =======
+=======
+>>>>>>> v3.18
 	st      event_IRQ2, [sp, 8]    /* Dummy ECR */
 	st      0, [sp, 4]    /* orig_r0 , N/A for IRQ */
 
@@ -894,6 +978,9 @@
 	PUSHAX	lp_end
 	PUSHAX	lp_start
 	PUSHAX	bta_l2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .endm
 
@@ -908,6 +995,7 @@
  *-------------------------------------------------------------*/
 
 .macro RESTORE_ALL_INT1
+<<<<<<< HEAD
 <<<<<<< HEAD
 	add sp, sp, 4       /* hop over unused "pt_regs->stack_place_holder" */
 
@@ -956,6 +1044,8 @@
 	/* orig_r0 and orig_r8 skipped automatically */
 
 =======
+=======
+>>>>>>> v3.18
 	POPAX	bta_l1
 	POPAX	lp_start
 	POPAX	lp_end
@@ -991,6 +1081,9 @@
 
 	ld  sp, [sp] /* restore original sp */
 	/* orig_r0, ECR, user_r25 skipped automatically */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .endm
 

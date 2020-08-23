@@ -38,6 +38,10 @@
  * DPI: DisplayPort Interoperability Guideline v1.1a
  * 1.2: DisplayPort 1.2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * MST: Multistream Transport - part of DP 1.2a
+>>>>>>> v3.18
 =======
  * MST: Multistream Transport - part of DP 1.2a
 >>>>>>> v3.18
@@ -45,6 +49,7 @@
  * 1.2 formally includes both eDP and DPI definitions.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define AUX_NATIVE_WRITE	0x8
 #define AUX_NATIVE_READ		0x9
@@ -63,6 +68,8 @@
 #define AUX_I2C_REPLY_DEFER	(0x2 << 6)
 #define AUX_I2C_REPLY_MASK	(0x3 << 6)
 =======
+=======
+>>>>>>> v3.18
 #define DP_AUX_I2C_WRITE		0x0
 #define DP_AUX_I2C_READ			0x1
 #define DP_AUX_I2C_STATUS		0x2
@@ -79,6 +86,9 @@
 #define DP_AUX_I2C_REPLY_NACK		(0x1 << 2)
 #define DP_AUX_I2C_REPLY_DEFER		(0x2 << 2)
 #define DP_AUX_I2C_REPLY_MASK		(0x3 << 2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* AUX CH addresses */
@@ -101,15 +111,21 @@
 # define DP_DWN_STRM_PORT_PRESENT           (1 << 0)
 # define DP_DWN_STRM_PORT_TYPE_MASK         0x06
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 00b = DisplayPort */
 /* 01b = Analog */
 /* 10b = TMDS or HDMI */
 /* 11b = Other */
 =======
+=======
+>>>>>>> v3.18
 # define DP_DWN_STRM_PORT_TYPE_DP           (0 << 1)
 # define DP_DWN_STRM_PORT_TYPE_ANALOG       (1 << 1)
 # define DP_DWN_STRM_PORT_TYPE_TMDS         (2 << 1)
 # define DP_DWN_STRM_PORT_TYPE_OTHER        (3 << 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define DP_FORMAT_CONVERSION               (1 << 3)
 # define DP_DETAILED_CAP_INFO_AVAILABLE	    (1 << 4) /* DPI */
@@ -134,10 +150,13 @@
 
 /* Multiple stream transport */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DP_MSTM_CAP			    0x021   /* 1.2 */
 # define DP_MST_CAP			    (1 << 0)
 
 =======
+=======
+>>>>>>> v3.18
 #define DP_FAUX_CAP			    0x020   /* 1.2 */
 # define DP_FAUX_CAP_1			    (1 << 0)
 
@@ -146,6 +165,9 @@
 
 #define DP_GUID				    0x030   /* 1.2 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DP_PSR_SUPPORT                      0x070   /* XXX 1.2? */
 # define DP_PSR_IS_SUPPORTED                1
@@ -226,6 +248,7 @@
 # define DP_TRAIN_VOLTAGE_SWING_SHIFT	    0
 # define DP_TRAIN_MAX_SWING_REACHED	    (1 << 2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define DP_TRAIN_VOLTAGE_SWING_400	    (0 << 0)
 # define DP_TRAIN_VOLTAGE_SWING_600	    (1 << 0)
 # define DP_TRAIN_VOLTAGE_SWING_800	    (2 << 0)
@@ -237,6 +260,8 @@
 # define DP_TRAIN_PRE_EMPHASIS_6	    (2 << 3)
 # define DP_TRAIN_PRE_EMPHASIS_9_5	    (3 << 3)
 =======
+=======
+>>>>>>> v3.18
 # define DP_TRAIN_VOLTAGE_SWING_LEVEL_0 (0 << 0)
 # define DP_TRAIN_VOLTAGE_SWING_LEVEL_1 (1 << 0)
 # define DP_TRAIN_VOLTAGE_SWING_LEVEL_2 (2 << 0)
@@ -247,6 +272,9 @@
 # define DP_TRAIN_PRE_EMPH_LEVEL_1		(1 << 3)
 # define DP_TRAIN_PRE_EMPH_LEVEL_2		(2 << 3)
 # define DP_TRAIN_PRE_EMPH_LEVEL_3		(3 << 3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # define DP_TRAIN_PRE_EMPHASIS_SHIFT	    3
@@ -276,7 +304,10 @@
 # define DP_PSR_FRAME_CAPTURE		    (1 << 3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DP_ADAPTER_CTRL			    0x1a0
 # define DP_ADAPTER_CTRL_FORCE_LOAD_SENSE   (1 << 0)
 
@@ -287,6 +318,9 @@
 #define DP_PAYLOAD_ALLOCATE_START_TIME_SLOT 0x1c1
 #define DP_PAYLOAD_ALLOCATE_TIME_SLOT_COUNT 0x1c2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DP_SINK_COUNT			    0x200
 /* prior to 1.2 bit 7 was reserved mbz */
@@ -298,6 +332,12 @@
 # define DP_AUTOMATED_TEST_REQUEST	    (1 << 1)
 # define DP_CP_IRQ			    (1 << 2)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# define DP_MCCS_IRQ			    (1 << 3)
+# define DP_DOWN_REP_MSG_RDY		    (1 << 4) /* 1.2 MST */
+# define DP_UP_REQ_MSG_RDY		    (1 << 5) /* 1.2 MST */
+>>>>>>> v3.18
 =======
 # define DP_MCCS_IRQ			    (1 << 3)
 # define DP_DOWN_REP_MSG_RDY		    (1 << 4) /* 1.2 MST */
@@ -340,14 +380,20 @@
 #define DP_TEST_REQUEST			    0x218
 # define DP_TEST_LINK_TRAINING		    (1 << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define DP_TEST_LINK_PATTERN		    (1 << 1)
 # define DP_TEST_LINK_EDID_READ		    (1 << 2)
 # define DP_TEST_LINK_PHY_TEST_PATTERN	    (1 << 3) /* DPCD >= 1.1 */
 =======
+=======
+>>>>>>> v3.18
 # define DP_TEST_LINK_VIDEO_PATTERN	    (1 << 1)
 # define DP_TEST_LINK_EDID_READ		    (1 << 2)
 # define DP_TEST_LINK_PHY_TEST_PATTERN	    (1 << 3) /* DPCD >= 1.1 */
 # define DP_TEST_LINK_FAUX_PATTERN	    (1 << 4) /* DPCD >= 1.2 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DP_TEST_LINK_RATE		    0x219
@@ -359,7 +405,10 @@
 #define DP_TEST_PATTERN			    0x221
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DP_TEST_CRC_R_CR		    0x240
 #define DP_TEST_CRC_G_Y			    0x242
 #define DP_TEST_CRC_B_CB		    0x244
@@ -367,6 +416,9 @@
 #define DP_TEST_SINK_MISC		    0x246
 #define DP_TEST_CRC_SUPPORTED		    (1 << 5)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DP_TEST_RESPONSE		    0x260
 # define DP_TEST_ACK			    (1 << 0)
@@ -374,7 +426,10 @@
 # define DP_TEST_EDID_CHECKSUM_WRITE	    (1 << 2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DP_TEST_EDID_CHECKSUM		    0x261
 
 #define DP_TEST_SINK			    0x270
@@ -387,6 +442,9 @@
 #define DP_VC_PAYLOAD_ID_SLOT_1             0x2c1   /* 1.2 MST */
 /* up to ID_SLOT_63 at 0x2ff */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DP_SOURCE_OUI			    0x300
 #define DP_SINK_OUI			    0x400
@@ -396,7 +454,10 @@
 # define DP_SET_POWER_D0                    0x1
 # define DP_SET_POWER_D3                    0x2
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # define DP_SET_POWER_MASK                  0x3
 
 #define DP_SIDEBAND_MSG_DOWN_REQ_BASE	    0x1000   /* 1.2 MST */
@@ -413,6 +474,9 @@
 #define DP_DEVICE_SERVICE_IRQ_VECTOR_ESI1   0x2004   /* 1.2 */
 
 #define DP_LINK_SERVICE_IRQ_VECTOR_ESI0     0x2005   /* 1.2 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DP_PSR_ERROR_STATUS                 0x2006  /* XXX 1.2? */
@@ -432,7 +496,10 @@
 # define DP_PSR_SINK_STATE_MASK             0x07
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* DP 1.2 Sideband message defines */
 /* peer device type - DP 1.2a Table 2-92 */
 #define DP_PEER_DEVICE_NONE		0x0
@@ -470,6 +537,9 @@
 #define DP_NAK_I2C_NAK			0x09
 #define DP_NAK_ALLOCATE_FAIL		0x0a
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MODE_I2C_START	1
 #define MODE_I2C_WRITE	2
@@ -498,6 +568,7 @@ i2c_dp_aux_add_bus(struct i2c_adapter *adapter);
 
 #define DP_LINK_STATUS_SIZE	   6
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool drm_dp_channel_eq_ok(u8 link_status[DP_LINK_STATUS_SIZE],
 			  int lane_count);
 bool drm_dp_clock_recovery_ok(u8 link_status[DP_LINK_STATUS_SIZE],
@@ -511,6 +582,8 @@ u8 drm_dp_get_adjust_request_pre_emphasis(u8 link_status[DP_LINK_STATUS_SIZE],
 void drm_dp_link_train_clock_recovery_delay(u8 dpcd[DP_RECEIVER_CAP_SIZE]);
 void drm_dp_link_train_channel_eq_delay(u8 dpcd[DP_RECEIVER_CAP_SIZE]);
 =======
+=======
+>>>>>>> v3.18
 bool drm_dp_channel_eq_ok(const u8 link_status[DP_LINK_STATUS_SIZE],
 			  int lane_count);
 bool drm_dp_clock_recovery_ok(const u8 link_status[DP_LINK_STATUS_SIZE],
@@ -525,15 +598,21 @@ u8 drm_dp_get_adjust_request_pre_emphasis(const u8 link_status[DP_LINK_STATUS_SI
 
 void drm_dp_link_train_clock_recovery_delay(const u8 dpcd[DP_RECEIVER_CAP_SIZE]);
 void drm_dp_link_train_channel_eq_delay(const u8 dpcd[DP_RECEIVER_CAP_SIZE]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 u8 drm_dp_link_rate_to_bw_code(int link_rate);
 int drm_dp_bw_code_to_link_rate(u8 link_bw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int
 drm_dp_max_link_rate(u8 dpcd[DP_RECEIVER_CAP_SIZE])
 =======
+=======
+>>>>>>> v3.18
 struct edp_sdp_header {
 	u8 HB0; /* Secondary Data Packet ID */
 	u8 HB1; /* Secondary Data Packet Type */
@@ -563,6 +642,9 @@ struct edp_vsc_psr {
 
 static inline int
 drm_dp_max_link_rate(const u8 dpcd[DP_RECEIVER_CAP_SIZE])
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return drm_dp_bw_code_to_link_rate(dpcd[DP_MAX_LINK_RATE]);
@@ -570,7 +652,11 @@ drm_dp_max_link_rate(const u8 dpcd[DP_RECEIVER_CAP_SIZE])
 
 static inline u8
 <<<<<<< HEAD
+<<<<<<< HEAD
 drm_dp_max_lane_count(u8 dpcd[DP_RECEIVER_CAP_SIZE])
+=======
+drm_dp_max_lane_count(const u8 dpcd[DP_RECEIVER_CAP_SIZE])
+>>>>>>> v3.18
 =======
 drm_dp_max_lane_count(const u8 dpcd[DP_RECEIVER_CAP_SIZE])
 >>>>>>> v3.18
@@ -579,7 +665,10 @@ drm_dp_max_lane_count(const u8 dpcd[DP_RECEIVER_CAP_SIZE])
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool
 drm_dp_enhanced_frame_cap(const u8 dpcd[DP_RECEIVER_CAP_SIZE])
 {
@@ -707,5 +796,8 @@ int drm_dp_link_configure(struct drm_dp_aux *aux, struct drm_dp_link *link);
 int drm_dp_aux_register(struct drm_dp_aux *aux);
 void drm_dp_aux_unregister(struct drm_dp_aux *aux);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _DRM_DP_HELPER_H_ */

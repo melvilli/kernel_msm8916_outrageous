@@ -41,6 +41,10 @@
 
 #include "uverbs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "core_priv.h"
+>>>>>>> v3.18
 =======
 #include "core_priv.h"
 >>>>>>> v3.18
@@ -59,6 +63,7 @@ static struct uverbs_lock_class ah_lock_class	= { .name = "AH-uobj" };
 static struct uverbs_lock_class srq_lock_class	= { .name = "SRQ-uobj" };
 static struct uverbs_lock_class xrcd_lock_class = { .name = "XRCD-uobj" };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define INIT_UDATA(udata, ibuf, obuf, ilen, olen)			\
 	do {								\
@@ -67,6 +72,9 @@ static struct uverbs_lock_class xrcd_lock_class = { .name = "XRCD-uobj" };
 		(udata)->inlen  = (ilen);				\
 		(udata)->outlen = (olen);				\
 	} while (0)
+=======
+static struct uverbs_lock_class rule_lock_class = { .name = "RULE-uobj" };
+>>>>>>> v3.18
 =======
 static struct uverbs_lock_class rule_lock_class = { .name = "RULE-uobj" };
 >>>>>>> v3.18
@@ -339,6 +347,10 @@ ssize_t ib_uverbs_get_context(struct ib_uverbs_file *file,
 	INIT_LIST_HEAD(&ucontext->ah_list);
 	INIT_LIST_HEAD(&ucontext->xrcd_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&ucontext->rule_list);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&ucontext->rule_list);
 >>>>>>> v3.18
@@ -347,7 +359,11 @@ ssize_t ib_uverbs_get_context(struct ib_uverbs_file *file,
 	resp.num_comp_vectors = file->device->num_comp_vectors;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = get_unused_fd();
+=======
+	ret = get_unused_fd_flags(O_CLOEXEC);
+>>>>>>> v3.18
 =======
 	ret = get_unused_fd_flags(O_CLOEXEC);
 >>>>>>> v3.18
@@ -952,6 +968,7 @@ ssize_t ib_uverbs_reg_mr(struct ib_uverbs_file *file,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Local write permission is required if remote write or
 	 * remote atomic permission is also requested.
@@ -959,6 +976,11 @@ ssize_t ib_uverbs_reg_mr(struct ib_uverbs_file *file,
 	if (cmd.access_flags & (IB_ACCESS_REMOTE_ATOMIC | IB_ACCESS_REMOTE_WRITE) &&
 	    !(cmd.access_flags & IB_ACCESS_LOCAL_WRITE))
 		return -EINVAL;
+=======
+	ret = ib_check_mr_access(cmd.access_flags);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = ib_check_mr_access(cmd.access_flags);
 	if (ret)
@@ -1034,7 +1056,10 @@ err_free:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ssize_t ib_uverbs_rereg_mr(struct ib_uverbs_file *file,
 			   const char __user *buf, int in_len,
 			   int out_len)
@@ -1128,6 +1153,9 @@ put_uobjs:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ssize_t ib_uverbs_dereg_mr(struct ib_uverbs_file *file,
 			   const char __user *buf, int in_len,
@@ -1303,7 +1331,11 @@ ssize_t ib_uverbs_create_comp_channel(struct ib_uverbs_file *file,
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = get_unused_fd();
+=======
+	ret = get_unused_fd_flags(O_CLOEXEC);
+>>>>>>> v3.18
 =======
 	ret = get_unused_fd_flags(O_CLOEXEC);
 >>>>>>> v3.18
@@ -1649,7 +1681,11 @@ ssize_t ib_uverbs_create_qp(struct ib_uverbs_file *file,
 		   in_len - sizeof cmd, out_len - sizeof resp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	obj = kmalloc(sizeof *obj, GFP_KERNEL);
+=======
+	obj = kzalloc(sizeof *obj, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	obj = kzalloc(sizeof *obj, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1769,9 +1805,12 @@ ssize_t ib_uverbs_create_qp(struct ib_uverbs_file *file,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xrcd)
 		put_xrcd_read(xrcd_uobj);
 =======
+=======
+>>>>>>> v3.18
 	if (xrcd) {
 		obj->uxrcd = container_of(xrcd_uobj, struct ib_uxrcd_object,
 					  uobject);
@@ -1779,6 +1818,9 @@ ssize_t ib_uverbs_create_qp(struct ib_uverbs_file *file,
 		put_xrcd_read(xrcd_uobj);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pd)
 		put_pd_read(pd);
@@ -1890,6 +1932,11 @@ ssize_t ib_uverbs_open_qp(struct ib_uverbs_file *file,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	obj->uxrcd = container_of(xrcd_uobj, struct ib_uxrcd_object, uobject);
+	atomic_inc(&obj->uxrcd->refcnt);
+>>>>>>> v3.18
 =======
 	obj->uxrcd = container_of(xrcd_uobj, struct ib_uxrcd_object, uobject);
 	atomic_inc(&obj->uxrcd->refcnt);
@@ -2106,6 +2153,12 @@ ssize_t ib_uverbs_modify_qp(struct ib_uverbs_file *file,
 
 	if (qp->real_qp == qp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ret = ib_resolve_eth_l2_attrs(qp, attr, &cmd.attr_mask);
+		if (ret)
+			goto out;
+>>>>>>> v3.18
 =======
 		ret = ib_resolve_eth_l2_attrs(qp, attr, &cmd.attr_mask);
 		if (ret)
@@ -2167,6 +2220,12 @@ ssize_t ib_uverbs_destroy_qp(struct ib_uverbs_file *file,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (obj->uxrcd)
+		atomic_dec(&obj->uxrcd->refcnt);
+
+>>>>>>> v3.18
 =======
 	if (obj->uxrcd)
 		atomic_dec(&obj->uxrcd->refcnt);
@@ -2260,12 +2319,15 @@ ssize_t ib_uverbs_post_send(struct ib_uverbs_file *file,
 
 		if (is_ud) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (next->opcode != IB_WR_SEND &&
 			    next->opcode != IB_WR_SEND_WITH_IMM) {
 				ret = -EINVAL;
 				goto out_put;
 			}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			next->wr.ud.ah = idr_read_ah(user_wr->wr.ud.ah,
@@ -2277,6 +2339,12 @@ ssize_t ib_uverbs_post_send(struct ib_uverbs_file *file,
 			next->wr.ud.remote_qpn  = user_wr->wr.ud.remote_qpn;
 			next->wr.ud.remote_qkey = user_wr->wr.ud.remote_qkey;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (next->opcode == IB_WR_SEND_WITH_IMM)
+				next->ex.imm_data =
+					(__be32 __force) user_wr->ex.imm_data;
+>>>>>>> v3.18
 =======
 			if (next->opcode == IB_WR_SEND_WITH_IMM)
 				next->ex.imm_data =
@@ -2311,11 +2379,17 @@ ssize_t ib_uverbs_post_send(struct ib_uverbs_file *file,
 				next->wr.atomic.swap = user_wr->wr.atomic.swap;
 				next->wr.atomic.rkey = user_wr->wr.atomic.rkey;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case IB_WR_SEND:
 				break;
 			default:
 				ret = -EINVAL;
 				goto out_put;
+=======
+				break;
+			default:
+				break;
+>>>>>>> v3.18
 =======
 				break;
 			default:
@@ -2595,6 +2669,11 @@ ssize_t ib_uverbs_create_ah(struct ib_uverbs_file *file,
 	attr.grh.hop_limit     = cmd.attr.grh.hop_limit;
 	attr.grh.traffic_class = cmd.attr.grh.traffic_class;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	attr.vlan_id           = 0;
+	memset(&attr.dmac, 0, sizeof(attr.dmac));
+>>>>>>> v3.18
 =======
 	attr.vlan_id           = 0;
 	memset(&attr.dmac, 0, sizeof(attr.dmac));
@@ -2769,7 +2848,10 @@ out_put:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int kern_spec_to_ib_spec(struct ib_uverbs_flow_spec *kern_spec,
 				union ib_flow_spec *ib_spec)
 {
@@ -3015,6 +3097,9 @@ int ib_uverbs_ex_destroy_flow(struct ib_uverbs_file *file,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __uverbs_create_xsrq(struct ib_uverbs_file *file,
 				struct ib_uverbs_create_xsrq *cmd,
@@ -3290,6 +3375,11 @@ ssize_t ib_uverbs_destroy_srq(struct ib_uverbs_file *file,
 	struct ib_uevent_object        	 *obj;
 	int                         	  ret = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ib_usrq_object		 *us;
+	enum ib_srq_type		  srq_type;
+>>>>>>> v3.18
 =======
 	struct ib_usrq_object		 *us;
 	enum ib_srq_type		  srq_type;
@@ -3304,6 +3394,10 @@ ssize_t ib_uverbs_destroy_srq(struct ib_uverbs_file *file,
 	srq = uobj->object;
 	obj = container_of(uobj, struct ib_uevent_object, uobject);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	srq_type = srq->srq_type;
+>>>>>>> v3.18
 =======
 	srq_type = srq->srq_type;
 >>>>>>> v3.18
@@ -3318,12 +3412,18 @@ ssize_t ib_uverbs_destroy_srq(struct ib_uverbs_file *file,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (srq_type == IB_SRQT_XRC) {
 		us = container_of(obj, struct ib_usrq_object, uevent);
 		atomic_dec(&us->uxrcd->refcnt);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	idr_remove_uobj(&ib_uverbs_srq_idr, uobj);
 

@@ -30,6 +30,10 @@
 #include "xen-ops.h"
 #include "vdso.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "p2m.h"
+>>>>>>> v3.18
 =======
 #include "p2m.h"
 >>>>>>> v3.18
@@ -38,6 +42,12 @@
 extern const char xen_hypervisor_callback[];
 extern const char xen_failsafe_callback[];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_X86_64
+extern asmlinkage void nmi(void);
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_X86_64
 extern asmlinkage void nmi(void);
@@ -54,6 +64,12 @@ struct xen_memory_region xen_extra_mem[XEN_EXTRA_MEM_MAX_REGIONS] __initdata;
 unsigned long xen_released_pages;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Buffer used to remap identity mapped pages */
+unsigned long xen_remap_buf[P2M_PER_PAGE] __initdata;
+
+>>>>>>> v3.18
 =======
 /* Buffer used to remap identity mapped pages */
 unsigned long xen_remap_buf[P2M_PER_PAGE] __initdata;
@@ -99,15 +115,21 @@ static void __init xen_add_extra_mem(u64 start, u64 size)
 		unsigned long mfn = pfn_to_mfn(pfn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (WARN(mfn == pfn, "Trying to over-write 1-1 mapping (pfn: %lx)\n", pfn))
 			continue;
 		WARN(mfn != INVALID_P2M_ENTRY, "Trying to remove %lx which has %lx mfn!\n",
 			pfn, mfn);
 =======
+=======
+>>>>>>> v3.18
 		if (WARN_ONCE(mfn == pfn, "Trying to over-write 1-1 mapping (pfn: %lx)\n", pfn))
 			continue;
 		WARN_ONCE(mfn != INVALID_P2M_ENTRY, "Trying to remove %lx which has %lx mfn!\n",
 			  pfn, mfn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		__set_phys_to_machine(pfn, INVALID_P2M_ENTRY);
@@ -172,6 +194,7 @@ static unsigned long __init xen_do_chunk(unsigned long start,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long __init xen_release_chunk(unsigned long start,
 					      unsigned long end)
 {
@@ -183,6 +206,8 @@ static unsigned long __init xen_populate_chunk(
 	unsigned long max_pfn, unsigned long *last_pfn,
 	unsigned long credits_left)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Finds the next RAM pfn available in the E820 map after min_pfn.
  * This function updates min_pfn with the pfn found and returns
@@ -191,19 +216,26 @@ static unsigned long __init xen_populate_chunk(
 static unsigned long __init xen_find_pfn_range(
 	const struct e820entry *list, size_t map_size,
 	unsigned long *min_pfn)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const struct e820entry *entry;
 	unsigned int i;
 	unsigned long done = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long dest_pfn;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	for (i = 0, entry = list; i < map_size; i++, entry++) {
 		unsigned long s_pfn;
 		unsigned long e_pfn;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		unsigned long pfns;
 		long capacity;
@@ -212,12 +244,15 @@ static unsigned long __init xen_find_pfn_range(
 			break;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 		if (entry->type != E820_RAM)
 			continue;
 
 		e_pfn = PFN_DOWN(entry->addr + entry->size);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* We only care about E820 after the xen_start_info->nr_pages */
 		if (e_pfn <= max_pfn)
@@ -255,6 +290,8 @@ static void __init xen_set_identity_and_release_chunk(
 {
 	unsigned long pfn;
 =======
+=======
+>>>>>>> v3.18
 		/* We only care about E820 after this */
 		if (e_pfn < *min_pfn)
 			continue;
@@ -523,6 +560,9 @@ static unsigned long __init xen_set_identity_and_remap_chunk(
 		*identity += size;
 		*remapped += size;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -534,6 +574,7 @@ static unsigned long __init xen_set_identity_and_remap_chunk(
 			(unsigned long)__va(pfn << PAGE_SHIFT),
 			mfn_pte(pfn, PAGE_KERNEL_IO), 0);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (start_pfn < nr_pages)
 		*released += xen_release_chunk(
@@ -550,6 +591,8 @@ static unsigned long __init xen_set_identity_and_release(
 	unsigned long identity = 0;
 	const struct e820entry *entry;
 =======
+=======
+>>>>>>> v3.18
 	return remap_pfn;
 }
 
@@ -563,6 +606,9 @@ static unsigned long __init xen_set_identity_and_remap(
 	unsigned long last_pfn = nr_pages;
 	const struct e820entry *entry;
 	unsigned long num_released = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i;
 
@@ -570,7 +616,11 @@ static unsigned long __init xen_set_identity_and_remap(
 	 * Combine non-RAM regions and gaps until a RAM region (or the
 	 * end of the map) is reached, then set the 1:1 map and
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * release the pages (if available) in those non-RAM regions.
+=======
+	 * remap the memory in those non-RAM regions.
+>>>>>>> v3.18
 =======
 	 * remap the memory in those non-RAM regions.
 >>>>>>> v3.18
@@ -592,21 +642,28 @@ static unsigned long __init xen_set_identity_and_remap(
 
 			if (start_pfn < end_pfn)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				xen_set_identity_and_release_chunk(
 					start_pfn, end_pfn, nr_pages,
 					&released, &identity);
 
 =======
+=======
+>>>>>>> v3.18
 				last_pfn = xen_set_identity_and_remap_chunk(
 						list, map_size, start_pfn,
 						end_pfn, nr_pages, last_pfn,
 						&identity, &remapped,
 						&num_released);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			start = end;
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (released)
 		printk(KERN_INFO "Released %lu pages of unused memory\n", released);
@@ -617,6 +674,8 @@ static unsigned long __init xen_set_identity_and_remap(
 }
 
 =======
+=======
+>>>>>>> v3.18
 	*released = num_released;
 
 	pr_info("Set %ld page(s) to 1-1 mapping\n", identity);
@@ -626,6 +685,9 @@ static unsigned long __init xen_set_identity_and_remap(
 
 	return last_pfn;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned long __init xen_get_max_pages(void)
 {
@@ -690,7 +752,10 @@ char * __init xen_memory_setup(void)
 	unsigned long last_pfn = 0;
 	unsigned long extra_pages = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long populated;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
@@ -718,6 +783,10 @@ char * __init xen_memory_setup(void)
 	}
 	BUG_ON(rc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUG_ON(memmap.nr_entries == 0);
+>>>>>>> v3.18
 =======
 	BUG_ON(memmap.nr_entries == 0);
 >>>>>>> v3.18
@@ -742,6 +811,7 @@ char * __init xen_memory_setup(void)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Set P2M for all non-RAM pages and E820 gaps to be identity
 	 * type PFNs.  Any RAM pages that would be made inaccesible by
 	 * this are first released.
@@ -757,11 +827,16 @@ char * __init xen_memory_setup(void)
 
 	xen_released_pages -= populated;
 =======
+=======
+>>>>>>> v3.18
 	 * Set identity map on non-RAM pages and remap the underlying RAM.
 	 */
 	last_pfn = xen_set_identity_and_remap(map, memmap.nr_entries, max_pfn,
 					      &xen_released_pages);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	extra_pages += xen_released_pages;
 
@@ -809,7 +884,10 @@ char * __init xen_memory_setup(void)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Set the rest as identity mapped, in case PCI BARs are
 	 * located here.
 	 *
@@ -819,6 +897,9 @@ char * __init xen_memory_setup(void)
 	set_phys_range_identity(map[i-1].addr / PAGE_SIZE, ~0ul);
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * In domU, the ISA region is normal, usable memory, but we
 	 * reserve ISA memory anyway because too many things poke
@@ -861,7 +942,10 @@ char * __init xen_memory_setup(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Machine specific memory setup for auto-translated guests.
  */
 char * __init xen_auto_xlated_memory_setup(void)
@@ -891,6 +975,9 @@ char * __init xen_auto_xlated_memory_setup(void)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Set the bit indicating "nosegneg" library variants should be used.
  * We only need to bother in pure 32-bit mode; compat 32-bit processes
@@ -900,11 +987,14 @@ static void __init fiddle_vdso(void)
 {
 #ifdef CONFIG_X86_32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 *mask;
 	mask = VDSO32_SYMBOL(&vdso32_int80_start, NOTE_MASK);
 	*mask |= 1 << VDSO_NOTE_NONEGSEG_BIT;
 	mask = VDSO32_SYMBOL(&vdso32_sysenter_start, NOTE_MASK);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * This could be called before selected_vdso32 is initialized, so
 	 * just fiddle with both possible images.  vdso_image_32_syscall
@@ -916,13 +1006,20 @@ static void __init fiddle_vdso(void)
 	*mask |= 1 << VDSO_NOTE_NONEGSEG_BIT;
 	mask = vdso_image_32_sysenter.data +
 		vdso_image_32_sysenter.sym_VDSO32_NOTE_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*mask |= 1 << VDSO_NOTE_NONEGSEG_BIT;
 #endif
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit register_callback(unsigned type, const void *func)
+=======
+static int register_callback(unsigned type, const void *func)
+>>>>>>> v3.18
 =======
 static int register_callback(unsigned type, const void *func)
 >>>>>>> v3.18
@@ -937,7 +1034,11 @@ static int register_callback(unsigned type, const void *func)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit xen_enable_sysenter(void)
+=======
+void xen_enable_sysenter(void)
+>>>>>>> v3.18
 =======
 void xen_enable_sysenter(void)
 >>>>>>> v3.18
@@ -960,7 +1061,11 @@ void xen_enable_sysenter(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit xen_enable_syscall(void)
+=======
+void xen_enable_syscall(void)
+>>>>>>> v3.18
 =======
 void xen_enable_syscall(void)
 >>>>>>> v3.18
@@ -985,6 +1090,7 @@ void xen_enable_syscall(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init xen_arch_setup(void)
 {
 	xen_panic_handler_init();
@@ -996,6 +1102,8 @@ void __init xen_arch_setup(void)
 		HYPERVISOR_vm_assist(VMASST_CMD_enable,
 				     VMASST_TYPE_pae_extended_cr3);
 =======
+=======
+>>>>>>> v3.18
 void __init xen_pvmmu_arch_setup(void)
 {
 	HYPERVISOR_vm_assist(VMASST_CMD_enable, VMASST_TYPE_4gb_segments);
@@ -1003,6 +1111,9 @@ void __init xen_pvmmu_arch_setup(void)
 
 	HYPERVISOR_vm_assist(VMASST_CMD_enable,
 			     VMASST_TYPE_pae_extended_cr3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (register_callback(CALLBACKTYPE_event, xen_hypervisor_callback) ||
@@ -1012,7 +1123,10 @@ void __init xen_pvmmu_arch_setup(void)
 	xen_enable_sysenter();
 	xen_enable_syscall();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }
 
 /* This function is not called for HVM domains */
@@ -1021,6 +1135,9 @@ void __init xen_arch_setup(void)
 	xen_panic_handler_init();
 	if (!xen_feature(XENFEAT_auto_translated_physmap))
 		xen_pvmmu_arch_setup();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_ACPI

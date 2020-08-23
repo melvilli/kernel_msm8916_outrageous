@@ -28,6 +28,7 @@
 #define __NOUVEAU_CONNECTOR_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <drm/drm_edid.h>
 #include "nouveau_crtc.h"
 
@@ -37,12 +38,17 @@
 #include <subdev/bios/gpio.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <nvif/notify.h>
 
 #include <drm/drm_edid.h>
 #include <drm/drm_dp_helper.h>
 #include "nouveau_crtc.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nouveau_i2c_port;
 
@@ -77,9 +83,15 @@ struct nouveau_connector {
 	u8 *dcb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dcb_gpio_func hpd;
 	struct work_struct hpd_work;
 	struct nouveau_eventh hpd_func;
+=======
+	struct nvif_notify hpd;
+
+	struct drm_dp_aux aux;
+>>>>>>> v3.18
 =======
 	struct nvif_notify hpd;
 
@@ -123,8 +135,14 @@ struct drm_connector *
 nouveau_connector_create(struct drm_device *, int index);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
 nouveau_connector_bpp(struct drm_connector *);
+=======
+extern int nouveau_tv_disable;
+extern int nouveau_ignorelid;
+extern int nouveau_duallink;
+>>>>>>> v3.18
 =======
 extern int nouveau_tv_disable;
 extern int nouveau_ignorelid;

@@ -44,9 +44,13 @@ static void __init mpc5121_ads_setup_arch(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_FB_FSL_DIU) || defined(CONFIG_FB_FSL_DIU_MODULE)
 	mpc512x_setup_diu();
 #endif
+=======
+	mpc512x_setup_arch();
+>>>>>>> v3.18
 =======
 	mpc512x_setup_arch();
 >>>>>>> v3.18
@@ -74,7 +78,11 @@ define_machine(mpc5121_ads) {
 	.setup_arch		= mpc5121_ads_setup_arch,
 	.init			= mpc512x_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_early		= mpc512x_init_diu,
+=======
+	.init_early		= mpc512x_init_early,
+>>>>>>> v3.18
 =======
 	.init_early		= mpc512x_init_early,
 >>>>>>> v3.18

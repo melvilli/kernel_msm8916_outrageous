@@ -41,12 +41,15 @@
 #define HUE_DEFAULT                     5000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned short _num_decoders;
 unsigned short _num_cameras;
 
 unsigned int _video_standard;
 int _display_field_cnt[MAX_DECODERS];
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

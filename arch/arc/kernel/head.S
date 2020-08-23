@@ -13,11 +13,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/asm-offsets.h>
 #include <asm/entry.h>
 #include <linux/linkage.h>
 #include <asm/arcregs.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/linkage.h>
 #include <asm/asm-offsets.h>
 #include <asm/entry.h>
@@ -54,6 +57,9 @@
 
 1:
 .endm
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.cpu A7
@@ -64,6 +70,7 @@
 stext:
 	;-------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 	; Don't clobber r0-r4 yet. It might have bootloader provided info
 	;-------------------------------------------------------------------
 
@@ -72,6 +79,8 @@ stext:
 #ifdef CONFIG_SMP
 	; Only Boot (Master) proceeds. Others wait in platform dependent way
 =======
+=======
+>>>>>>> v3.18
 	; Don't clobber r0-r2 yet. It might have bootloader provided info
 	;-------------------------------------------------------------------
 
@@ -79,6 +88,9 @@ stext:
 
 #ifdef CONFIG_SMP
 	; Ensure Boot (Master) proceeds. Others wait in platform dependent way
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	;	IDENTITY Reg [ 3  2  1  0 ]
 	;	(cpu-id)             ^^^	=> Zero for UP ARC700
@@ -89,7 +101,12 @@ stext:
 	GET_CPU_ID  r5
 	cmp	r5, 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jnz	arc_platform_smp_wait_to_boot
+=======
+	mov.ne	r0, r5
+	jne	arc_platform_smp_wait_to_boot
+>>>>>>> v3.18
 =======
 	mov.ne	r0, r5
 	jne	arc_platform_smp_wait_to_boot
@@ -98,6 +115,7 @@ stext:
 	; Clear BSS before updating any globals
 	; XXX: use ZOL here
 	mov	r5, __bss_start
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mov	r6, __bss_stop
 1:
@@ -134,6 +152,8 @@ stext:
 	mov.nz	r4, 1
 	st	r4, [@running_on_hw]
 =======
+=======
+>>>>>>> v3.18
 	sub	r6, __bss_stop, r5
 	lsr.f	lp_count, r6, 2
 	lpnz	1f
@@ -147,6 +167,9 @@ stext:
 	; These are handled later in setup_arch()
 	st	r0, [@uboot_tag]
 	st	r2, [@uboot_arg]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	; setup "current" tsk and optionally cache it in dedicated r25
@@ -166,7 +189,11 @@ stext:
 ;     First lines of code run by secondary before jumping to 'C'
 ;----------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.section .init.text, "ax",@progbits
+=======
+	.section .text, "ax",@progbits
+>>>>>>> v3.18
 =======
 	.section .text, "ax",@progbits
 >>>>>>> v3.18
@@ -176,7 +203,11 @@ stext:
 first_lines_of_secondary:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sr	@_int_vec_base_lds, [AUX_INTR_VEC_BASE]
+=======
+	CPU_EARLY_SETUP
+>>>>>>> v3.18
 =======
 	CPU_EARLY_SETUP
 >>>>>>> v3.18

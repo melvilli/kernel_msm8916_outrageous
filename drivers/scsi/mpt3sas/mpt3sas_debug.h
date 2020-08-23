@@ -3,7 +3,11 @@
  *
  * This code is based on drivers/scsi/mpt3sas/mpt3sas_debug.c
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012  LSI Corporation
+=======
+ * Copyright (C) 2012-2014  LSI Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2014  LSI Corporation
 >>>>>>> v3.18

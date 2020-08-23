@@ -1,7 +1,12 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2010-2011 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2010-2012 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2010-2012 Solarflare Communications Inc.
@@ -21,7 +26,11 @@
 #include "filter.h"
 #include "mcdi_pcol.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "regs.h"
+=======
+#include "farch_regs.h"
+>>>>>>> v3.18
 =======
 #include "farch_regs.h"
 >>>>>>> v3.18
@@ -207,8 +216,13 @@ static int efx_sriov_cmd(struct efx_nic *efx, bool enable,
 			 unsigned *vi_scale_out, unsigned *vf_total_out)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 inbuf[MC_CMD_SRIOV_IN_LEN];
 	u8 outbuf[MC_CMD_SRIOV_OUT_LEN];
+=======
+	MCDI_DECLARE_BUF(inbuf, MC_CMD_SRIOV_IN_LEN);
+	MCDI_DECLARE_BUF(outbuf, MC_CMD_SRIOV_OUT_LEN);
+>>>>>>> v3.18
 =======
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_SRIOV_IN_LEN);
 	MCDI_DECLARE_BUF(outbuf, MC_CMD_SRIOV_OUT_LEN);
@@ -255,20 +269,27 @@ static int efx_sriov_memcpy(struct efx_nic *efx, struct efx_memcpy_req *req,
 			    unsigned int count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *inbuf, *record;
 	unsigned int used;
 	u32 from_rid, from_hi, from_lo;
 =======
+=======
+>>>>>>> v3.18
 	MCDI_DECLARE_BUF(inbuf, MCDI_CTL_SDU_LEN_MAX_V1);
 	MCDI_DECLARE_STRUCT_PTR(record);
 	unsigned int index, used;
 	u64 from_addr;
 	u32 from_rid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rc;
 
 	mb();	/* Finish writing source/reading dest before DMA starts */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	used = MC_CMD_MEMCPY_IN_LEN(count);
 	if (WARN_ON(used > MCDI_CTL_SDU_LEN_MAX))
@@ -295,6 +316,8 @@ static int efx_sriov_memcpy(struct efx_nic *efx, struct efx_memcpy_req *req,
 		} else {
 			if (WARN_ON(used + req->length > MCDI_CTL_SDU_LEN_MAX)) {
 =======
+=======
+>>>>>>> v3.18
 	if (WARN_ON(count > MC_CMD_MEMCPY_IN_RECORD_MAXNUM))
 		return -ENOBUFS;
 	used = MC_CMD_MEMCPY_IN_LEN(count);
@@ -313,6 +336,9 @@ static int efx_sriov_memcpy(struct efx_nic *efx, struct efx_memcpy_req *req,
 		} else {
 			if (WARN_ON(used + req->length >
 				    MCDI_CTL_SDU_LEN_MAX_V1)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				rc = -ENOBUFS;
 				goto out;
@@ -320,9 +346,15 @@ static int efx_sriov_memcpy(struct efx_nic *efx, struct efx_memcpy_req *req,
 
 			from_rid = MC_CMD_MEMCPY_RECORD_TYPEDEF_RID_INLINE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			from_lo = used;
 			from_hi = 0;
 			memcpy(inbuf + used, req->from_buf, req->length);
+=======
+			from_addr = used;
+			memcpy(_MCDI_PTR(inbuf, used), req->from_buf,
+			       req->length);
+>>>>>>> v3.18
 =======
 			from_addr = used;
 			memcpy(_MCDI_PTR(inbuf, used), req->from_buf,
@@ -333,10 +365,15 @@ static int efx_sriov_memcpy(struct efx_nic *efx, struct efx_memcpy_req *req,
 
 		MCDI_SET_DWORD(record, MEMCPY_RECORD_TYPEDEF_FROM_RID, from_rid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MCDI_SET_DWORD(record, MEMCPY_RECORD_TYPEDEF_FROM_ADDR_LO,
 			       from_lo);
 		MCDI_SET_DWORD(record, MEMCPY_RECORD_TYPEDEF_FROM_ADDR_HI,
 			       from_hi);
+=======
+		MCDI_SET_QWORD(record, MEMCPY_RECORD_TYPEDEF_FROM_ADDR,
+			       from_addr);
+>>>>>>> v3.18
 =======
 		MCDI_SET_QWORD(record, MEMCPY_RECORD_TYPEDEF_FROM_ADDR,
 			       from_addr);
@@ -346,7 +383,10 @@ static int efx_sriov_memcpy(struct efx_nic *efx, struct efx_memcpy_req *req,
 
 		++req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		record += MC_CMD_MEMCPY_IN_RECORD_LEN;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -354,8 +394,11 @@ static int efx_sriov_memcpy(struct efx_nic *efx, struct efx_memcpy_req *req,
 	rc = efx_mcdi_rpc(efx, MC_CMD_MEMCPY, inbuf, used, NULL, 0, NULL);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(inbuf);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mb();	/* Don't write source/read dest before DMA is complete */
@@ -534,8 +577,14 @@ static void __efx_sriov_push_vf_status(struct efx_vf *vf)
 			     VFDI_EV_TYPE, VFDI_EV_TYPE_STATUS);
 	++vf->msg_seqno;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efx_generate_event(efx, EFX_VI_BASE + vf->index * efx_vf_size(efx),
 			      &event);
+=======
+	efx_farch_generate_event(efx,
+				 EFX_VI_BASE + vf->index * efx_vf_size(efx),
+				 &event);
+>>>>>>> v3.18
 =======
 	efx_farch_generate_event(efx,
 				 EFX_VI_BASE + vf->index * efx_vf_size(efx),
@@ -751,7 +800,11 @@ static int efx_vfdi_fini_all_queues(struct efx_vf *vf)
 	unsigned timeout = HZ;
 	unsigned index, rxqs_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 *rxqs;
+=======
+	MCDI_DECLARE_BUF(inbuf, MC_CMD_FLUSH_RX_QUEUES_IN_LENMAX);
+>>>>>>> v3.18
 =======
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_FLUSH_RX_QUEUES_IN_LENMAX);
 >>>>>>> v3.18
@@ -761,10 +814,13 @@ static int efx_vfdi_fini_all_queues(struct efx_vf *vf)
 		     MC_CMD_FLUSH_RX_QUEUES_IN_QID_OFST_MAXNUM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rxqs = kmalloc(count * sizeof(*rxqs), GFP_KERNEL);
 	if (rxqs == NULL)
 		return VFDI_RC_ENOMEM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rtnl_lock();
@@ -782,23 +838,35 @@ static int efx_vfdi_fini_all_queues(struct efx_vf *vf)
 			efx_writeo(efx, &reg, FR_AZ_TX_FLUSH_DESCQ);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(index, vf->rxq_mask))
 			rxqs[rxqs_count++] = cpu_to_le32(vf_offset + index);
 =======
+=======
+>>>>>>> v3.18
 		if (test_bit(index, vf->rxq_mask)) {
 			MCDI_SET_ARRAY_DWORD(
 				inbuf, FLUSH_RX_QUEUES_IN_QID_OFST,
 				rxqs_count, vf_offset + index);
 			rxqs_count++;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	atomic_set(&vf->rxq_retry_count, 0);
 	while (timeout && (vf->rxq_count || vf->txq_count)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = efx_mcdi_rpc(efx, MC_CMD_FLUSH_RX_QUEUES, (u8 *)rxqs,
 				  rxqs_count * sizeof(*rxqs), NULL, 0, NULL);
+=======
+		rc = efx_mcdi_rpc(efx, MC_CMD_FLUSH_RX_QUEUES, inbuf,
+				  MC_CMD_FLUSH_RX_QUEUES_IN_LEN(rxqs_count),
+				  NULL, 0, NULL);
+>>>>>>> v3.18
 =======
 		rc = efx_mcdi_rpc(efx, MC_CMD_FLUSH_RX_QUEUES, inbuf,
 				  MC_CMD_FLUSH_RX_QUEUES_IN_LEN(rxqs_count),
@@ -814,13 +882,19 @@ static int efx_vfdi_fini_all_queues(struct efx_vf *vf)
 			if (test_and_clear_bit(index, vf->rxq_retry_mask)) {
 				atomic_dec(&vf->rxq_retry_count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rxqs[rxqs_count++] =
 					cpu_to_le32(vf_offset + index);
 =======
+=======
+>>>>>>> v3.18
 				MCDI_SET_ARRAY_DWORD(
 					inbuf, FLUSH_RX_QUEUES_IN_QID_OFST,
 					rxqs_count, vf_offset + index);
 				rxqs_count++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -845,7 +919,10 @@ static int efx_vfdi_fini_all_queues(struct efx_vf *vf)
 	efx_sriov_bufs(efx, vf->buftbl_base, NULL,
 		       EFX_VF_BUFTBL_PER_VI * efx_vf_size(efx));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(rxqs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	efx_vfdi_flush_clear(vf);
@@ -1103,7 +1180,11 @@ static void efx_sriov_reset_vf_work(struct work_struct *work)
 	struct efx_buffer buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!efx_nic_alloc_buffer(efx, &buf, EFX_PAGE_SIZE)) {
+=======
+	if (!efx_nic_alloc_buffer(efx, &buf, EFX_PAGE_SIZE, GFP_NOIO)) {
+>>>>>>> v3.18
 =======
 	if (!efx_nic_alloc_buffer(efx, &buf, EFX_PAGE_SIZE, GFP_NOIO)) {
 >>>>>>> v3.18
@@ -1204,7 +1285,11 @@ static void efx_sriov_peer_work(struct work_struct *data)
 	/* Fill the remaining addresses */
 	list_for_each_entry(local_addr, &efx->local_addr_list, link) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(peer->mac_addr, local_addr->addr, ETH_ALEN);
+=======
+		ether_addr_copy(peer->mac_addr, local_addr->addr);
+>>>>>>> v3.18
 =======
 		ether_addr_copy(peer->mac_addr, local_addr->addr);
 >>>>>>> v3.18
@@ -1355,7 +1440,12 @@ static int efx_sriov_vfs_init(struct efx_nic *efx)
 			 PCI_SLOT(devfn), PCI_FUNC(devfn));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = efx_nic_alloc_buffer(efx, &vf->buf, EFX_PAGE_SIZE);
+=======
+		rc = efx_nic_alloc_buffer(efx, &vf->buf, EFX_PAGE_SIZE,
+					  GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		rc = efx_nic_alloc_buffer(efx, &vf->buf, EFX_PAGE_SIZE,
 					  GFP_KERNEL);
@@ -1392,7 +1482,12 @@ int efx_sriov_init(struct efx_nic *efx)
 		goto fail_cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = efx_nic_alloc_buffer(efx, &efx->vfdi_status, sizeof(*vfdi_status));
+=======
+	rc = efx_nic_alloc_buffer(efx, &efx->vfdi_status, sizeof(*vfdi_status),
+				  GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	rc = efx_nic_alloc_buffer(efx, &efx->vfdi_status, sizeof(*vfdi_status),
 				  GFP_KERNEL);
@@ -1424,8 +1519,12 @@ int efx_sriov_init(struct efx_nic *efx)
 
 	rtnl_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(vfdi_status->peers[0].mac_addr,
 	       net_dev->dev_addr, ETH_ALEN);
+=======
+	ether_addr_copy(vfdi_status->peers[0].mac_addr, net_dev->dev_addr);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(vfdi_status->peers[0].mac_addr, net_dev->dev_addr);
 >>>>>>> v3.18
@@ -1577,8 +1676,13 @@ void efx_sriov_mac_address_changed(struct efx_nic *efx)
 	if (!efx->vf_init_count)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(vfdi_status->peers[0].mac_addr,
 	       efx->net_dev->dev_addr, ETH_ALEN);
+=======
+	ether_addr_copy(vfdi_status->peers[0].mac_addr,
+			efx->net_dev->dev_addr);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(vfdi_status->peers[0].mac_addr,
 			efx->net_dev->dev_addr);
@@ -1661,7 +1765,11 @@ void efx_sriov_reset(struct efx_nic *efx)
 	(void)efx_sriov_cmd(efx, true, NULL, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (efx_nic_alloc_buffer(efx, &buf, EFX_PAGE_SIZE))
+=======
+	if (efx_nic_alloc_buffer(efx, &buf, EFX_PAGE_SIZE, GFP_NOIO))
+>>>>>>> v3.18
 =======
 	if (efx_nic_alloc_buffer(efx, &buf, EFX_PAGE_SIZE, GFP_NOIO))
 >>>>>>> v3.18
@@ -1704,7 +1812,11 @@ int efx_sriov_set_vf_mac(struct net_device *net_dev, int vf_i, u8 *mac)
 
 	mutex_lock(&vf->status_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(vf->addr.mac_addr, mac, ETH_ALEN);
+=======
+	ether_addr_copy(vf->addr.mac_addr, mac);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(vf->addr.mac_addr, mac);
 >>>>>>> v3.18
@@ -1771,8 +1883,14 @@ int efx_sriov_get_vf_config(struct net_device *net_dev, int vf_i,
 
 	ivi->vf = vf_i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(ivi->mac, vf->addr.mac_addr, ETH_ALEN);
 	ivi->tx_rate = 0;
+=======
+	ether_addr_copy(ivi->mac, vf->addr.mac_addr);
+	ivi->max_tx_rate = 0;
+	ivi->min_tx_rate = 0;
+>>>>>>> v3.18
 =======
 	ether_addr_copy(ivi->mac, vf->addr.mac_addr);
 	ivi->max_tx_rate = 0;

@@ -72,11 +72,17 @@ extern void __setup_cpu_power8(unsigned long offset, struct cpu_spec* spec);
 extern void __restore_cpu_power8(void);
 extern void __restore_cpu_a2(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern void __flush_tlb_power7(unsigned long inval_selector);
 extern void __flush_tlb_power8(unsigned long inval_selector);
 extern long __machine_check_early_realmode_p7(struct pt_regs *regs);
 extern long __machine_check_early_realmode_p8(struct pt_regs *regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PPC64 */
 #if defined(CONFIG_E500)
@@ -126,6 +132,7 @@ extern void __restore_cpu_e6500(void);
 
 static struct cpu_spec __initdata cpu_specs[] = {
 #ifdef CONFIG_PPC_BOOK3S_64
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{	/* Power3 */
 		.pvr_mask		= 0xffff0000,
@@ -217,6 +224,8 @@ static struct cpu_spec __initdata cpu_specs[] = {
 		.oprofile_type		= PPC_OPROFILE_RS64,
 		.platform		= "rs64",
 	},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{	/* Power4 */
@@ -452,6 +461,11 @@ static struct cpu_spec __initdata cpu_specs[] = {
 		.cpu_setup		= __setup_cpu_power7,
 		.cpu_restore		= __restore_cpu_power7,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.flush_tlb		= __flush_tlb_power7,
+		.machine_check_early	= __machine_check_early_realmode_p7,
+>>>>>>> v3.18
 =======
 		.flush_tlb		= __flush_tlb_power7,
 		.machine_check_early	= __machine_check_early_realmode_p7,
@@ -473,6 +487,11 @@ static struct cpu_spec __initdata cpu_specs[] = {
 		.cpu_setup		= __setup_cpu_power8,
 		.cpu_restore		= __restore_cpu_power8,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.flush_tlb		= __flush_tlb_power8,
+		.machine_check_early	= __machine_check_early_realmode_p8,
+>>>>>>> v3.18
 =======
 		.flush_tlb		= __flush_tlb_power8,
 		.machine_check_early	= __machine_check_early_realmode_p8,
@@ -496,6 +515,11 @@ static struct cpu_spec __initdata cpu_specs[] = {
 		.cpu_setup		= __setup_cpu_power7,
 		.cpu_restore		= __restore_cpu_power7,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.flush_tlb		= __flush_tlb_power7,
+		.machine_check_early	= __machine_check_early_realmode_p7,
+>>>>>>> v3.18
 =======
 		.flush_tlb		= __flush_tlb_power7,
 		.machine_check_early	= __machine_check_early_realmode_p7,
@@ -519,12 +543,15 @@ static struct cpu_spec __initdata cpu_specs[] = {
 		.cpu_setup		= __setup_cpu_power7,
 		.cpu_restore		= __restore_cpu_power7,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.platform		= "power7+",
 	},
 	{	/* Power8 */
 		.pvr_mask		= 0xffff0000,
 		.pvr_value		= 0x004b0000,
 =======
+=======
+>>>>>>> v3.18
 		.flush_tlb		= __flush_tlb_power7,
 		.machine_check_early	= __machine_check_early_realmode_p7,
 		.platform		= "power7+",
@@ -572,6 +599,9 @@ static struct cpu_spec __initdata cpu_specs[] = {
 	{	/* Power8 */
 		.pvr_mask		= 0xffff0000,
 		.pvr_value		= 0x004d0000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.cpu_name		= "POWER8 (raw)",
 		.cpu_features		= CPU_FTRS_POWER8,
@@ -587,6 +617,11 @@ static struct cpu_spec __initdata cpu_specs[] = {
 		.cpu_setup		= __setup_cpu_power8,
 		.cpu_restore		= __restore_cpu_power8,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.flush_tlb		= __flush_tlb_power8,
+		.machine_check_early	= __machine_check_early_realmode_p8,
+>>>>>>> v3.18
 =======
 		.flush_tlb		= __flush_tlb_power8,
 		.machine_check_early	= __machine_check_early_realmode_p8,
@@ -644,7 +679,11 @@ static struct cpu_spec __initdata cpu_specs[] = {
 
 #ifdef CONFIG_PPC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CLASSIC_PPC
+=======
+#ifdef CONFIG_PPC_BOOK3S_32
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PPC_BOOK3S_32
 >>>>>>> v3.18
@@ -1288,7 +1327,11 @@ static struct cpu_spec __initdata cpu_specs[] = {
 		.platform		= "ppc603",
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CLASSIC_PPC */
+=======
+#endif /* CONFIG_PPC_BOOK3S_32 */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PPC_BOOK3S_32 */
 >>>>>>> v3.18
@@ -2086,6 +2129,10 @@ static struct cpu_spec __initdata cpu_specs[] = {
 #ifdef CONFIG_E500
 #ifdef CONFIG_PPC32
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_PPC_E500MC
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_PPC_E500MC
 >>>>>>> v3.18
@@ -2129,6 +2176,10 @@ static struct cpu_spec __initdata cpu_specs[] = {
 		.platform		= "ppc8548",
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else
+>>>>>>> v3.18
 =======
 #else
 >>>>>>> v3.18
@@ -2151,7 +2202,13 @@ static struct cpu_spec __initdata cpu_specs[] = {
 		.platform		= "ppce500mc",
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_PPC32 */
+=======
+#endif /* CONFIG_PPC_E500MC */
+#endif /* CONFIG_PPC32 */
+#ifdef CONFIG_PPC_E500MC
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PPC_E500MC */
 #endif /* CONFIG_PPC32 */
@@ -2191,7 +2248,11 @@ static struct cpu_spec __initdata cpu_specs[] = {
 		.icache_bsize		= 64,
 		.dcache_bsize		= 64,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.num_pmcs		= 4,
+=======
+		.num_pmcs		= 6,
+>>>>>>> v3.18
 =======
 		.num_pmcs		= 6,
 >>>>>>> v3.18
@@ -2205,6 +2266,10 @@ static struct cpu_spec __initdata cpu_specs[] = {
 		.platform		= "ppce6500",
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_PPC_E500MC */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PPC_E500MC */
 >>>>>>> v3.18
@@ -2225,6 +2290,7 @@ static struct cpu_spec __initdata cpu_specs[] = {
 	}
 #endif /* CONFIG_PPC32 */
 #endif /* CONFIG_E500 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #ifdef CONFIG_PPC_A2
@@ -2264,6 +2330,8 @@ static struct cpu_spec __initdata cpu_specs[] = {
 		.platform		= "power6",
 	},
 #endif /* CONFIG_PPC_A2 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

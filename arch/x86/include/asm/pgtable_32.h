@@ -33,9 +33,12 @@ static inline void check_pgt_cache(void) { }
 void paging_init(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void set_pmd_pfn(unsigned long, unsigned long, pgprot_t);
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

@@ -119,12 +119,17 @@ static int func_prolog_dec(struct trace_array *tr,
 
 	local_save_flags(*flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Slight chance to get a false positive on tracing_cpu,
 	 * although I'm starting to think there isn't a chance.
 	 * Leave this for now just to be paranoid.
 	 */
 	if (!irqs_disabled_flags(*flags) && !preempt_count())
+=======
+	/* slight chance to get a false positive on tracing_cpu */
+	if (!irqs_disabled_flags(*flags))
+>>>>>>> v3.18
 =======
 	/* slight chance to get a false positive on tracing_cpu */
 	if (!irqs_disabled_flags(*flags))
@@ -161,6 +166,7 @@ irqsoff_tracer_call(unsigned long ip, unsigned long parent_ip,
 	atomic_dec(&data->disabled);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct ftrace_ops trace_ops __read_mostly =
 {
@@ -172,11 +178,16 @@ static struct ftrace_ops trace_ops __read_mostly =
 #ifdef CONFIG_FUNCTION_GRAPH_TRACER
 static int irqsoff_set_flag(u32 old_flags, u32 bit, int set)
 =======
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_FUNCTION_TRACER */
 
 #ifdef CONFIG_FUNCTION_GRAPH_TRACER
 static int
 irqsoff_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int cpu;
@@ -193,7 +204,11 @@ irqsoff_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
 		per_cpu(tracing_cpu, cpu) = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_max_latency = 0;
+=======
+	tr->max_latency = 0;
+>>>>>>> v3.18
 =======
 	tr->max_latency = 0;
 >>>>>>> v3.18
@@ -288,7 +303,12 @@ __trace_function(struct trace_array *tr,
 #define __trace_function trace_function
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int irqsoff_set_flag(u32 old_flags, u32 bit, int set)
+=======
+static int
+irqsoff_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
+>>>>>>> v3.18
 =======
 static int
 irqsoff_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
@@ -328,7 +348,11 @@ static void irqsoff_print_header(struct seq_file *s)
  * Should this new latency be reported/recorded?
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int report_latency(cycle_t delta)
+=======
+static int report_latency(struct trace_array *tr, cycle_t delta)
+>>>>>>> v3.18
 =======
 static int report_latency(struct trace_array *tr, cycle_t delta)
 >>>>>>> v3.18
@@ -338,7 +362,11 @@ static int report_latency(struct trace_array *tr, cycle_t delta)
 			return 0;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (delta <= tracing_max_latency)
+=======
+		if (delta <= tr->max_latency)
+>>>>>>> v3.18
 =======
 		if (delta <= tr->max_latency)
 >>>>>>> v3.18
@@ -366,7 +394,11 @@ check_critical_timing(struct trace_array *tr,
 	pc = preempt_count();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!report_latency(delta))
+=======
+	if (!report_latency(tr, delta))
+>>>>>>> v3.18
 =======
 	if (!report_latency(tr, delta))
 >>>>>>> v3.18
@@ -376,7 +408,11 @@ check_critical_timing(struct trace_array *tr,
 
 	/* check if we are still the max latency */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!report_latency(delta))
+=======
+	if (!report_latency(tr, delta))
+>>>>>>> v3.18
 =======
 	if (!report_latency(tr, delta))
 >>>>>>> v3.18
@@ -393,7 +429,11 @@ check_critical_timing(struct trace_array *tr,
 
 	if (likely(!is_tracing_stopped())) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tracing_max_latency = delta;
+=======
+		tr->max_latency = delta;
+>>>>>>> v3.18
 =======
 		tr->max_latency = delta;
 >>>>>>> v3.18
@@ -545,7 +585,11 @@ void trace_hardirqs_off(void)
 EXPORT_SYMBOL(trace_hardirqs_off);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void trace_hardirqs_on_caller(unsigned long caller_addr)
+=======
+__visible void trace_hardirqs_on_caller(unsigned long caller_addr)
+>>>>>>> v3.18
 =======
 __visible void trace_hardirqs_on_caller(unsigned long caller_addr)
 >>>>>>> v3.18
@@ -556,7 +600,11 @@ __visible void trace_hardirqs_on_caller(unsigned long caller_addr)
 EXPORT_SYMBOL(trace_hardirqs_on_caller);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void trace_hardirqs_off_caller(unsigned long caller_addr)
+=======
+__visible void trace_hardirqs_off_caller(unsigned long caller_addr)
+>>>>>>> v3.18
 =======
 __visible void trace_hardirqs_off_caller(unsigned long caller_addr)
 >>>>>>> v3.18
@@ -584,7 +632,11 @@ void trace_preempt_off(unsigned long a0, unsigned long a1)
 #endif /* CONFIG_PREEMPT_TRACER */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int register_irqsoff_function(int graph, int set)
+=======
+static int register_irqsoff_function(struct trace_array *tr, int graph, int set)
+>>>>>>> v3.18
 =======
 static int register_irqsoff_function(struct trace_array *tr, int graph, int set)
 >>>>>>> v3.18
@@ -600,7 +652,11 @@ static int register_irqsoff_function(struct trace_array *tr, int graph, int set)
 					    &irqsoff_graph_entry);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = register_ftrace_function(&trace_ops);
+=======
+		ret = register_ftrace_function(tr->ops);
+>>>>>>> v3.18
 =======
 		ret = register_ftrace_function(tr->ops);
 >>>>>>> v3.18
@@ -612,7 +668,11 @@ static int register_irqsoff_function(struct trace_array *tr, int graph, int set)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void unregister_irqsoff_function(int graph)
+=======
+static void unregister_irqsoff_function(struct trace_array *tr, int graph)
+>>>>>>> v3.18
 =======
 static void unregister_irqsoff_function(struct trace_array *tr, int graph)
 >>>>>>> v3.18
@@ -624,7 +684,11 @@ static void unregister_irqsoff_function(struct trace_array *tr, int graph)
 		unregister_ftrace_graph();
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unregister_ftrace_function(&trace_ops);
+=======
+		unregister_ftrace_function(tr->ops);
+>>>>>>> v3.18
 =======
 		unregister_ftrace_function(tr->ops);
 >>>>>>> v3.18
@@ -632,6 +696,7 @@ static void unregister_irqsoff_function(struct trace_array *tr, int graph)
 	function_enabled = false;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void irqsoff_function_set(int set)
 {
@@ -646,6 +711,8 @@ static int irqsoff_flag_changed(struct tracer *tracer, u32 mask, int set)
 	if (mask & TRACE_ITER_FUNCTION)
 		irqsoff_function_set(set);
 =======
+=======
+>>>>>>> v3.18
 static void irqsoff_function_set(struct trace_array *tr, int set)
 {
 	if (set)
@@ -660,6 +727,9 @@ static int irqsoff_flag_changed(struct trace_array *tr, u32 mask, int set)
 
 	if (mask & TRACE_ITER_FUNCTION)
 		irqsoff_function_set(tr, set);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return trace_keep_overwrite(tracer, mask, set);
@@ -670,7 +740,11 @@ static int start_irqsoff_tracer(struct trace_array *tr, int graph)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = register_irqsoff_function(graph, 0);
+=======
+	ret = register_irqsoff_function(tr, graph, 0);
+>>>>>>> v3.18
 =======
 	ret = register_irqsoff_function(tr, graph, 0);
 >>>>>>> v3.18
@@ -688,12 +762,15 @@ static void stop_irqsoff_tracer(struct trace_array *tr, int graph)
 	tracer_enabled = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_irqsoff_function(graph);
 }
 
 static void __irqsoff_tracer_init(struct trace_array *tr)
 {
 =======
+=======
+>>>>>>> v3.18
 	unregister_irqsoff_function(tr, graph);
 }
 
@@ -704,6 +781,9 @@ static int __irqsoff_tracer_init(struct trace_array *tr)
 	if (irqsoff_busy)
 		return -EBUSY;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	save_flags = trace_flags;
 
@@ -712,7 +792,11 @@ static int __irqsoff_tracer_init(struct trace_array *tr)
 	set_tracer_flag(tr, TRACE_ITER_LATENCY_FMT, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tracing_max_latency = 0;
+=======
+	tr->max_latency = 0;
+>>>>>>> v3.18
 =======
 	tr->max_latency = 0;
 >>>>>>> v3.18
@@ -722,9 +806,12 @@ static int __irqsoff_tracer_init(struct trace_array *tr)
 	tracing_reset_online_cpus(&tr->trace_buffer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (start_irqsoff_tracer(tr, is_graph()))
 		printk(KERN_ERR "failed to start irqsoff tracer\n");
 =======
+=======
+>>>>>>> v3.18
 	ftrace_init_array_ops(tr, irqsoff_tracer_call);
 
 	/* Only toplevel instance supports graph tracing */
@@ -734,6 +821,9 @@ static int __irqsoff_tracer_init(struct trace_array *tr)
 
 	irqsoff_busy = true;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -747,6 +837,12 @@ static void irqsoff_tracer_reset(struct trace_array *tr)
 	set_tracer_flag(tr, TRACE_ITER_LATENCY_FMT, lat_flag);
 	set_tracer_flag(tr, TRACE_ITER_OVERWRITE, overwrite_flag);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ftrace_reset_array_ops(tr);
+
+	irqsoff_busy = false;
+>>>>>>> v3.18
 =======
 	ftrace_reset_array_ops(tr);
 
@@ -770,8 +866,12 @@ static int irqsoff_tracer_init(struct trace_array *tr)
 	trace_type = TRACER_IRQS_OFF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__irqsoff_tracer_init(tr);
 	return 0;
+=======
+	return __irqsoff_tracer_init(tr);
+>>>>>>> v3.18
 =======
 	return __irqsoff_tracer_init(tr);
 >>>>>>> v3.18
@@ -795,6 +895,10 @@ static struct tracer irqsoff_tracer __read_mostly =
 	.open           = irqsoff_trace_open,
 	.close          = irqsoff_trace_close,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.allow_instances = true,
+>>>>>>> v3.18
 =======
 	.allow_instances = true,
 >>>>>>> v3.18
@@ -811,8 +915,12 @@ static int preemptoff_tracer_init(struct trace_array *tr)
 	trace_type = TRACER_PREEMPT_OFF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__irqsoff_tracer_init(tr);
 	return 0;
+=======
+	return __irqsoff_tracer_init(tr);
+>>>>>>> v3.18
 =======
 	return __irqsoff_tracer_init(tr);
 >>>>>>> v3.18
@@ -837,6 +945,10 @@ static struct tracer preemptoff_tracer __read_mostly =
 	.open		= irqsoff_trace_open,
 	.close		= irqsoff_trace_close,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.allow_instances = true,
+>>>>>>> v3.18
 =======
 	.allow_instances = true,
 >>>>>>> v3.18
@@ -855,8 +967,12 @@ static int preemptirqsoff_tracer_init(struct trace_array *tr)
 	trace_type = TRACER_IRQS_OFF | TRACER_PREEMPT_OFF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__irqsoff_tracer_init(tr);
 	return 0;
+=======
+	return __irqsoff_tracer_init(tr);
+>>>>>>> v3.18
 =======
 	return __irqsoff_tracer_init(tr);
 >>>>>>> v3.18
@@ -881,6 +997,10 @@ static struct tracer preemptirqsoff_tracer __read_mostly =
 	.open		= irqsoff_trace_open,
 	.close		= irqsoff_trace_close,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.allow_instances = true,
+>>>>>>> v3.18
 =======
 	.allow_instances = true,
 >>>>>>> v3.18

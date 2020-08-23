@@ -9,6 +9,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/types.h>
 #include <linux/init.h>
 #include <linux/device.h>
@@ -192,6 +193,11 @@ static void __init plat_fpga_populate_dev(void)
 #include <asm/mach_desc.h>
 #include <plat/smp.h>
 >>>>>>> v3.18
+=======
+#include <linux/init.h>
+#include <asm/mach_desc.h>
+#include <plat/smp.h>
+>>>>>>> v3.18
 
 /*----------------------- Machine Descriptions ------------------------------
  *
@@ -201,6 +207,7 @@ static void __init plat_fpga_populate_dev(void)
  * callback set, by matching the DT compatible name.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const char *aa4_compat[] __initdata = {
 	"snps,arc-angel4",
@@ -222,10 +229,15 @@ static const char *ml509_compat[] __initdata = {
 static const char *legacy_fpga_compat[] __initconst = {
 	"snps,arc-angel4",
 >>>>>>> v3.18
+=======
+static const char *legacy_fpga_compat[] __initconst = {
+	"snps,arc-angel4",
+>>>>>>> v3.18
 	"snps,arc-ml509",
 	NULL,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 MACHINE_START(ML509, "ml509")
 	.dt_compat	= ml509_compat,
@@ -234,17 +246,27 @@ MACHINE_START(ML509, "ml509")
 	.init_irq	= plat_fpga_init_IRQ,
 #ifdef CONFIG_SMP
 =======
+=======
+>>>>>>> v3.18
 MACHINE_START(LEGACY_FPGA, "legacy_fpga")
 	.dt_compat	= legacy_fpga_compat,
 #ifdef CONFIG_ISS_SMP_EXTN
 	.init_early	= iss_model_init_early_smp,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.init_smp	= iss_model_init_smp,
 #endif
 MACHINE_END
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *nsimosci_compat[] __initdata = {
+=======
+static const char *simulation_compat[] __initconst = {
+	"snps,nsim",
+>>>>>>> v3.18
 =======
 static const char *simulation_compat[] __initconst = {
 	"snps,nsim",
@@ -254,11 +276,16 @@ static const char *simulation_compat[] __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MACHINE_START(NSIMOSCI, "nsimosci")
 	.dt_compat	= nsimosci_compat,
 	.init_early	= NULL,
 	.init_machine	= plat_fpga_populate_dev,
 	.init_irq	= NULL,
+=======
+MACHINE_START(SIMULATION, "simulation")
+	.dt_compat	= simulation_compat,
+>>>>>>> v3.18
 =======
 MACHINE_START(SIMULATION, "simulation")
 	.dt_compat	= simulation_compat,

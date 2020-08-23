@@ -236,6 +236,7 @@ EXPORT_SYMBOL_GPL(pci_disable_pri);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pci_pri_enabled - Checks if PRI capability is enabled
  * @pdev: PCI device structure
  *
@@ -257,6 +258,8 @@ bool pci_pri_enabled(struct pci_dev *pdev)
 EXPORT_SYMBOL_GPL(pci_pri_enabled);
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * pci_reset_pri - Resets device's PRI state
@@ -285,6 +288,7 @@ int pci_reset_pri(struct pci_dev *pdev)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(pci_reset_pri);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /**
@@ -347,6 +351,8 @@ int pci_pri_status(struct pci_dev *pdev)
 	return status;
 }
 EXPORT_SYMBOL_GPL(pci_pri_status);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* CONFIG_PCI_PRI */
@@ -417,7 +423,11 @@ EXPORT_SYMBOL_GPL(pci_disable_pasid);
  * features reported are:
  * PCI_PASID_CAP_EXEC - Execute permission supported
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PCI_PASID_CAP_PRIV - Priviledged mode supported
+=======
+ * PCI_PASID_CAP_PRIV - Privileged mode supported
+>>>>>>> v3.18
 =======
  * PCI_PASID_CAP_PRIV - Privileged mode supported
 >>>>>>> v3.18

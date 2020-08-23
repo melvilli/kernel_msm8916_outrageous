@@ -189,7 +189,11 @@ void rpc_print_iostats(struct seq_file *seq, struct rpc_clnt *clnt)
 	seq_printf(seq, "\tRPC iostats version: %s  ", RPC_IOSTATS_VERS);
 	seq_printf(seq, "p/v: %u/%u (%s)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clnt->cl_prog, clnt->cl_vers, clnt->cl_protname);
+=======
+			clnt->cl_prog, clnt->cl_vers, clnt->cl_program->name);
+>>>>>>> v3.18
 =======
 			clnt->cl_prog, clnt->cl_vers, clnt->cl_program->name);
 >>>>>>> v3.18

@@ -29,6 +29,10 @@ struct cpu_stop_work {
 
 int stop_one_cpu(unsigned int cpu, cpu_stop_fn_t fn, void *arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int stop_two_cpus(unsigned int cpu1, unsigned int cpu2, cpu_stop_fn_t fn, void *arg);
+>>>>>>> v3.18
 =======
 int stop_two_cpus(unsigned int cpu1, unsigned int cpu2, cpu_stop_fn_t fn, void *arg);
 >>>>>>> v3.18

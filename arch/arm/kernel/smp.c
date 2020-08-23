@@ -26,6 +26,10 @@
 #include <linux/completion.h>
 #include <linux/cpufreq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irq_work.h>
+>>>>>>> v3.18
 =======
 #include <linux/irq_work.h>
 >>>>>>> v3.18
@@ -46,11 +50,14 @@
 #include <asm/tlbflush.h>
 #include <asm/ptrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/localtimer.h>
 #include <asm/smp_plat.h>
 #include <asm/virt.h>
 #include <asm/mach/arch.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/smp_plat.h>
 #include <asm/virt.h>
 #include <asm/mach/arch.h>
@@ -58,6 +65,9 @@
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/ipi.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -72,7 +82,11 @@ struct secondary_data secondary_data;
  * boot "holding pen"
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 volatile int __cpuinitdata pen_release = -1;
+=======
+volatile int pen_release = -1;
+>>>>>>> v3.18
 =======
 volatile int pen_release = -1;
 >>>>>>> v3.18
@@ -85,7 +99,12 @@ enum ipi_msg_type {
 	IPI_CALL_FUNC_SINGLE,
 	IPI_CPU_STOP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IPI_CPU_BACKTRACE,
+=======
+	IPI_IRQ_WORK,
+	IPI_COMPLETION,
+>>>>>>> v3.18
 =======
 	IPI_IRQ_WORK,
 	IPI_COMPLETION,
@@ -103,11 +122,14 @@ void __init smp_set_ops(struct smp_operations *ops)
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *idle)
 {
 	int ret;
 
 =======
+=======
+>>>>>>> v3.18
 static unsigned long get_arch_pgd(pgd_t *pgd)
 {
 	phys_addr_t pgdir = virt_to_idmap(pgd);
@@ -122,6 +144,9 @@ int __cpu_up(unsigned int cpu, struct task_struct *idle)
 	if (!smp_ops.smp_boot_secondary)
 		return -ENOSYS;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * We need to tell the secondary core where to find
@@ -129,11 +154,14 @@ int __cpu_up(unsigned int cpu, struct task_struct *idle)
 	 */
 	secondary_data.stack = task_stack_page(idle) + THREAD_START_SP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	secondary_data.pgdir = virt_to_phys(idmap_pgd);
 	secondary_data.swapper_pg_dir = virt_to_phys(swapper_pg_dir);
 	__cpuc_flush_dcache_area(&secondary_data, sizeof(secondary_data));
 	outer_clean_range(__pa(&secondary_data), __pa(&secondary_data + 1));
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ARM_MPU
 	secondary_data.mpu_rgn_szr = mpu_rgn_info.rgns[MPU_RAM_REGION].drsr;
 #endif
@@ -143,13 +171,20 @@ int __cpu_up(unsigned int cpu, struct task_struct *idle)
 	secondary_data.swapper_pg_dir = get_arch_pgd(swapper_pg_dir);
 #endif
 	sync_cache_w(&secondary_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * Now bring the CPU into our world.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = boot_secondary(cpu, idle);
+=======
+	ret = smp_ops.smp_boot_secondary(cpu, idle);
+>>>>>>> v3.18
 =======
 	ret = smp_ops.smp_boot_secondary(cpu, idle);
 >>>>>>> v3.18
@@ -170,9 +205,14 @@ int __cpu_up(unsigned int cpu, struct task_struct *idle)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	secondary_data.stack = NULL;
 	secondary_data.pgdir = 0;
 
+=======
+
+	memset(&secondary_data, 0, sizeof(secondary_data));
+>>>>>>> v3.18
 =======
 
 	memset(&secondary_data, 0, sizeof(secondary_data));
@@ -188,6 +228,7 @@ void __init smp_init_cpus(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit boot_secondary(unsigned int cpu, struct task_struct *idle)
 {
 	if (smp_ops.smp_boot_secondary)
@@ -199,6 +240,8 @@ int __cpuinit boot_secondary(unsigned int cpu, struct task_struct *idle)
 static void percpu_timer_stop(void);
 
 =======
+=======
+>>>>>>> v3.18
 int platform_can_cpu_hotplug(void)
 {
 #ifdef CONFIG_HOTPLUG_CPU
@@ -210,6 +253,9 @@ int platform_can_cpu_hotplug(void)
 }
 
 #ifdef CONFIG_HOTPLUG_CPU
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int platform_cpu_kill(unsigned int cpu)
 {
@@ -234,7 +280,11 @@ static int platform_cpu_disable(unsigned int cpu)
  * __cpu_disable runs on the processor to be shutdown.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_disable(void)
+=======
+int __cpu_disable(void)
+>>>>>>> v3.18
 =======
 int __cpu_disable(void)
 >>>>>>> v3.18
@@ -259,11 +309,14 @@ int __cpu_disable(void)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Stop the local timer for this CPU.
 	 */
 	percpu_timer_stop();
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * Flush user cache and TLB mappings, and then remove this CPU
@@ -287,7 +340,11 @@ static DECLARE_COMPLETION(cpu_died);
  * waits until shutdown has completed, or it is timed out.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit __cpu_die(unsigned int cpu)
+=======
+void __cpu_die(unsigned int cpu)
+>>>>>>> v3.18
 =======
 void __cpu_die(unsigned int cpu)
 >>>>>>> v3.18
@@ -297,7 +354,11 @@ void __cpu_die(unsigned int cpu)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("CPU%u: shutdown\n", cpu);
+=======
+	printk(KERN_NOTICE "CPU%u: shutdown\n", cpu);
+>>>>>>> v3.18
 =======
 	printk(KERN_NOTICE "CPU%u: shutdown\n", cpu);
 >>>>>>> v3.18
@@ -368,6 +429,12 @@ void __ref cpu_die(void)
 		smp_ops.cpu_die(cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pr_warn("CPU%u: smp_ops.cpu_die() returned, trying to resuscitate\n",
+		cpu);
+
+>>>>>>> v3.18
 =======
 	pr_warn("CPU%u: smp_ops.cpu_die() returned, trying to resuscitate\n",
 		cpu);
@@ -391,7 +458,11 @@ void __ref cpu_die(void)
  * per-processor storage.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit smp_store_cpu_info(unsigned int cpuid)
+=======
+static void smp_store_cpu_info(unsigned int cpuid)
+>>>>>>> v3.18
 =======
 static void smp_store_cpu_info(unsigned int cpuid)
 >>>>>>> v3.18
@@ -405,8 +476,11 @@ static void smp_store_cpu_info(unsigned int cpuid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void percpu_timer_setup(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -414,7 +488,11 @@ static void percpu_timer_setup(void);
  * idle thread stack, but a set of temporary page tables.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void __cpuinit secondary_start_kernel(void)
+=======
+asmlinkage void secondary_start_kernel(void)
+>>>>>>> v3.18
 =======
 asmlinkage void secondary_start_kernel(void)
 >>>>>>> v3.18
@@ -443,7 +521,11 @@ asmlinkage void secondary_start_kernel(void)
 	cpu_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("CPU%u: Booted secondary processor\n", cpu);
+=======
+	printk("CPU%u: Booted secondary processor\n", cpu);
+>>>>>>> v3.18
 =======
 	printk("CPU%u: Booted secondary processor\n", cpu);
 >>>>>>> v3.18
@@ -458,8 +540,11 @@ asmlinkage void secondary_start_kernel(void)
 		smp_ops.smp_secondary_init(cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smp_store_cpu_info(cpu);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	notify_cpu_starting(cpu);
@@ -467,6 +552,11 @@ asmlinkage void secondary_start_kernel(void)
 	calibrate_delay();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	smp_store_cpu_info(cpu);
+
+>>>>>>> v3.18
 =======
 	smp_store_cpu_info(cpu);
 
@@ -480,11 +570,14 @@ asmlinkage void secondary_start_kernel(void)
 	complete(&cpu_running);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Setup the percpu timer for this CPU.
 	 */
 	percpu_timer_setup();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	local_irq_enable();
@@ -499,6 +592,7 @@ asmlinkage void secondary_start_kernel(void)
 void __init smp_cpus_done(unsigned int max_cpus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cpu;
 	unsigned long bogosum = 0;
 
@@ -510,6 +604,10 @@ void __init smp_cpus_done(unsigned int max_cpus)
 	       num_online_cpus(),
 	       bogosum / (500000/HZ),
 	       (bogosum / (5000/HZ)) % 100);
+=======
+	printk(KERN_INFO "SMP: Total of %d processors activated.\n",
+	       num_online_cpus());
+>>>>>>> v3.18
 =======
 	printk(KERN_INFO "SMP: Total of %d processors activated.\n",
 	       num_online_cpus());
@@ -539,12 +637,15 @@ void __init smp_prepare_cpus(unsigned int max_cpus)
 	if (ncores > 1 && max_cpus) {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Enable the local timer or broadcast device for the
 		 * boot CPU, but only if we have more than one CPU.
 		 */
 		percpu_timer_setup();
 
 		/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		 * Initialise the present map, which describes the set of CPUs
@@ -563,6 +664,7 @@ void __init smp_prepare_cpus(unsigned int max_cpus)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void (*smp_cross_call)(const struct cpumask *, unsigned int);
 DEFINE_PER_CPU(bool, pending_ipi);
@@ -601,6 +703,8 @@ void arch_send_call_function_single_ipi(int cpu)
 
 static const char *ipi_types[NR_IPI] = {
 =======
+=======
+>>>>>>> v3.18
 static void (*__smp_cross_call)(const struct cpumask *, unsigned int);
 
 void __init set_smp_cross_call(void (*fn)(const struct cpumask *, unsigned int))
@@ -610,6 +714,9 @@ void __init set_smp_cross_call(void (*fn)(const struct cpumask *, unsigned int))
 }
 
 static const char *ipi_types[NR_IPI] __tracepoint_string = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define S(x,s)	[x] = s
 	S(IPI_WAKEUP, "CPU wakeup interrupts"),
@@ -619,10 +726,13 @@ static const char *ipi_types[NR_IPI] __tracepoint_string = {
 	S(IPI_CALL_FUNC_SINGLE, "Single function call interrupts"),
 	S(IPI_CPU_STOP, "CPU stop interrupts"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	S(IPI_CPU_BACKTRACE, "CPU backtrace"),
 };
 
 =======
+=======
+>>>>>>> v3.18
 	S(IPI_IRQ_WORK, "IRQ work interrupts"),
 	S(IPI_COMPLETION, "completion interrupts"),
 };
@@ -633,6 +743,9 @@ static void smp_cross_call(const struct cpumask *target, unsigned int ipinr)
 	__smp_cross_call(target, ipinr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void show_ipi_list(struct seq_file *p, int prec)
 {
@@ -660,6 +773,7 @@ u64 smp_irq_stat_cpu(unsigned int cpu)
 	return sum;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Timer (local or broadcast) support
@@ -732,6 +846,8 @@ static void percpu_timer_stop(void)
 	if (lt_ops)
 		lt_ops->stop(evt);
 =======
+=======
+>>>>>>> v3.18
 void arch_send_call_function_ipi_mask(const struct cpumask *mask)
 {
 	smp_cross_call(mask, IPI_CALL_FUNC);
@@ -759,12 +875,16 @@ void arch_irq_work_raise(void)
 void tick_broadcast(const struct cpumask *mask)
 {
 	smp_cross_call(mask, IPI_TIMER);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
 
 static DEFINE_RAW_SPINLOCK(stop_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 DEFINE_PER_CPU(struct pt_regs, regs_before_stop);
 /*
@@ -776,6 +896,8 @@ static void ipi_cpu_stop(unsigned int cpu, struct pt_regs *regs)
 	    system_state == SYSTEM_RUNNING) {
 		per_cpu(regs_before_stop, cpu) = *regs;
 =======
+=======
+>>>>>>> v3.18
 /*
  * ipi_cpu_stop - handle IPI from smp_send_stop()
  */
@@ -783,6 +905,9 @@ static void ipi_cpu_stop(unsigned int cpu)
 {
 	if (system_state == SYSTEM_BOOTING ||
 	    system_state == SYSTEM_RUNNING) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		raw_spin_lock(&stop_lock);
 		printk(KERN_CRIT "CPU%u: stopping\n", cpu);
@@ -791,7 +916,11 @@ static void ipi_cpu_stop(unsigned int cpu)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_cpu_active(cpu, false);
+=======
+	set_cpu_online(cpu, false);
+>>>>>>> v3.18
 =======
 	set_cpu_online(cpu, false);
 >>>>>>> v3.18
@@ -800,14 +929,18 @@ static void ipi_cpu_stop(unsigned int cpu)
 	local_irq_disable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_cache_all();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	while (1)
 		cpu_relax();
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static cpumask_t backtrace_mask;
 static DEFINE_RAW_SPINLOCK(backtrace_lock);
@@ -861,6 +994,8 @@ static void ipi_cpu_backtrace(unsigned int cpu, struct pt_regs *regs)
 		cpu_clear(cpu, backtrace_mask);
 	}
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_PER_CPU(struct completion *, cpu_completion);
 
 int register_ipi_completion(struct completion *completion, int cpu)
@@ -872,6 +1007,9 @@ int register_ipi_completion(struct completion *completion, int cpu)
 static void ipi_complete(unsigned int cpu)
 {
 	complete(per_cpu(cpu_completion, cpu));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -889,13 +1027,19 @@ void handle_IPI(int ipinr, struct pt_regs *regs)
 	struct pt_regs *old_regs = set_irq_regs(regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ipinr < NR_IPI)
 		__inc_irq_stat(cpu, ipi_irqs[ipinr]);
 =======
+=======
+>>>>>>> v3.18
 	if ((unsigned)ipinr < NR_IPI) {
 		trace_ipi_entry(ipi_types[ipinr]);
 		__inc_irq_stat(cpu, ipi_irqs[ipinr]);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (ipinr) {
@@ -929,6 +1073,7 @@ void handle_IPI(int ipinr, struct pt_regs *regs)
 	case IPI_CPU_STOP:
 		irq_enter();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ipi_cpu_stop(cpu, regs);
 		irq_exit();
 		break;
@@ -936,6 +1081,8 @@ void handle_IPI(int ipinr, struct pt_regs *regs)
 	case IPI_CPU_BACKTRACE:
 		ipi_cpu_backtrace(cpu, regs);
 =======
+=======
+>>>>>>> v3.18
 		ipi_cpu_stop(cpu);
 		irq_exit();
 		break;
@@ -952,6 +1099,9 @@ void handle_IPI(int ipinr, struct pt_regs *regs)
 		irq_enter();
 		ipi_complete(cpu);
 		irq_exit();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -961,8 +1111,14 @@ void handle_IPI(int ipinr, struct pt_regs *regs)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	per_cpu(pending_ipi, cpu) = false;
 
+=======
+
+	if ((unsigned)ipinr < NR_IPI)
+		trace_ipi_exit(ipi_types[ipinr]);
+>>>>>>> v3.18
 =======
 
 	if ((unsigned)ipinr < NR_IPI)
@@ -974,8 +1130,12 @@ void handle_IPI(int ipinr, struct pt_regs *regs)
 void smp_send_reschedule(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(cpu_is_offline(cpu));
 	smp_cross_call_common(cpumask_of(cpu), IPI_RESCHEDULE);
+=======
+	smp_cross_call(cpumask_of(cpu), IPI_RESCHEDULE);
+>>>>>>> v3.18
 =======
 	smp_cross_call(cpumask_of(cpu), IPI_RESCHEDULE);
 >>>>>>> v3.18
@@ -990,6 +1150,7 @@ void smp_send_stop(void)
 	cpumask_clear_cpu(smp_processor_id(), &mask);
 	if (!cpumask_empty(&mask))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		smp_cross_call_common(&mask, IPI_CPU_STOP);
 
 	/* Wait up to one second for other CPUs to stop */
@@ -1000,6 +1161,8 @@ void smp_send_stop(void)
 	if (num_active_cpus() > 1)
 		pr_warning("SMP: failed to stop secondary CPUs\n");
 =======
+=======
+>>>>>>> v3.18
 		smp_cross_call(&mask, IPI_CPU_STOP);
 
 	/* Wait up to one second for other CPUs to stop */
@@ -1009,6 +1172,9 @@ void smp_send_stop(void)
 
 	if (num_online_cpus() > 1)
 		pr_warn("SMP: failed to stop secondary CPUs\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1048,8 +1214,12 @@ static int cpufreq_callback(struct notifier_block *nb,
 
 	if ((val == CPUFREQ_PRECHANGE  && freq->old < freq->new) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (val == CPUFREQ_POSTCHANGE && freq->old > freq->new) ||
 	    (val == CPUFREQ_RESUMECHANGE || val == CPUFREQ_SUSPENDCHANGE)) {
+=======
+	    (val == CPUFREQ_POSTCHANGE && freq->old > freq->new)) {
+>>>>>>> v3.18
 =======
 	    (val == CPUFREQ_POSTCHANGE && freq->old > freq->new)) {
 >>>>>>> v3.18

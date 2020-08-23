@@ -151,6 +151,7 @@ static void cppi_pool_free(struct cppi_channel *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cppi_controller_start(struct dma_controller *c)
 {
 	struct cppi	*controller;
@@ -160,11 +161,16 @@ static int cppi_controller_start(struct dma_controller *c)
 	controller = container_of(c, struct cppi, controller);
 
 =======
+=======
+>>>>>>> v3.18
 static void cppi_controller_start(struct cppi *controller)
 {
 	void __iomem	*tibase;
 	int		i;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* do whatever is necessary to start controller */
 	for (i = 0; i < ARRAY_SIZE(controller->tx); i++) {
@@ -221,8 +227,11 @@ static void cppi_controller_start(struct cppi *controller)
 	musb_writel(tibase, DAVINCI_RNDIS_REG, 0);
 	musb_writel(tibase, DAVINCI_AUTOREQ_REG, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -234,9 +243,14 @@ static void cppi_controller_start(struct cppi *controller)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cppi_controller_stop(struct dma_controller *c)
 {
 	struct cppi		*controller;
+=======
+static void cppi_controller_stop(struct cppi *controller)
+{
+>>>>>>> v3.18
 =======
 static void cppi_controller_stop(struct cppi *controller)
 {
@@ -246,7 +260,10 @@ static void cppi_controller_stop(struct cppi *controller)
 	struct musb		*musb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	controller = container_of(c, struct cppi, controller);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	musb = controller->musb;
@@ -275,8 +292,11 @@ static void cppi_controller_stop(struct cppi *controller)
 	musb_writel(tibase, DAVINCI_TXCPPI_CTRL_REG, DAVINCI_DMA_CTRL_DISABLE);
 	musb_writel(tibase, DAVINCI_RXCPPI_CTRL_REG, DAVINCI_DMA_CTRL_DISABLE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1344,8 +1364,11 @@ struct dma_controller *dma_controller_create(struct musb *musb, void __iomem *mr
 
 	controller->musb = musb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	controller->controller.start = cppi_controller_start;
 	controller->controller.stop = cppi_controller_stop;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	controller->controller.channel_alloc = cppi_channel_allocate;
@@ -1377,6 +1400,10 @@ struct dma_controller *dma_controller_create(struct musb *musb, void __iomem *mr
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cppi_controller_start(controller);
+>>>>>>> v3.18
 =======
 	cppi_controller_start(controller);
 >>>>>>> v3.18
@@ -1393,6 +1420,11 @@ void dma_controller_destroy(struct dma_controller *c)
 	cppi = container_of(c, struct cppi, controller);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cppi_controller_stop(cppi);
+
+>>>>>>> v3.18
 =======
 	cppi_controller_stop(cppi);
 

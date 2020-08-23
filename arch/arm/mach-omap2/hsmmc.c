@@ -30,7 +30,10 @@
 static u16 control_pbias_offset;
 static u16 control_devconf1_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 control_mmc1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -125,6 +128,7 @@ static void omap_hsmmc1_after_set_reg(struct device *dev, int slot,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void omap4_hsmmc1_before_set_reg(struct device *dev, int slot,
 				  int power_on, int vdd)
 {
@@ -176,6 +180,8 @@ static void omap4_hsmmc1_after_set_reg(struct device *dev, int slot,
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void hsmmc2_select_input_clk_src(struct omap_mmc_platform_data *mmc)
@@ -324,11 +330,15 @@ static int __init omap_hsmmc_pdata_init(struct omap2_hsmmc_info *c,
 	mmc->slots[0].internal_clock = !c->ext_clock;
 	mmc->max_freq = c->max_freq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_is_omap44xx())
 		mmc->reg_offset = OMAP4_MMC_REG_OFFSET;
 	else
 		mmc->reg_offset = 0;
 
+=======
+	mmc->reg_offset = 0;
+>>>>>>> v3.18
 =======
 	mmc->reg_offset = 0;
 >>>>>>> v3.18
@@ -379,15 +389,19 @@ static int __init omap_hsmmc_pdata_init(struct omap2_hsmmc_info *c,
 		mmc->slots[0].features |= HSMMC_HAS_PBIAS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_is_omap44xx() && (omap_rev() > OMAP4430_REV_ES1_0))
 		mmc->slots[0].features |= HSMMC_HAS_UPDATED_RESET;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (c->mmc) {
 	case 1:
 		if (mmc->slots[0].features & HSMMC_HAS_PBIAS) {
 			/* on-chip level shifting via PBIAS0/PBIAS1 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (cpu_is_omap44xx()) {
 				mmc->slots[0].before_set_reg =
@@ -401,10 +415,15 @@ static int __init omap_hsmmc_pdata_init(struct omap2_hsmmc_info *c,
 						omap_hsmmc1_after_set_reg;
 			}
 =======
+=======
+>>>>>>> v3.18
 			mmc->slots[0].before_set_reg =
 					omap_hsmmc1_before_set_reg;
 			mmc->slots[0].after_set_reg =
 					omap_hsmmc1_after_set_reg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -584,8 +603,11 @@ free_mmc:
 void __init omap_hsmmc_init(struct omap2_hsmmc_info *controllers)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reg;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (omap_hsmmc_done)
@@ -593,6 +615,7 @@ void __init omap_hsmmc_init(struct omap2_hsmmc_info *controllers)
 
 	omap_hsmmc_done = 1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!cpu_is_omap44xx()) {
 		if (cpu_is_omap2430()) {
@@ -616,12 +639,17 @@ void __init omap_hsmmc_init(struct omap2_hsmmc_info *controllers)
 			OMAP4_SDMMC1_DR2_SPEEDCTRL_MASK);
 		omap4_ctrl_pad_writel(reg, control_mmc1);
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_is_omap2430()) {
 		control_pbias_offset = OMAP243X_CONTROL_PBIAS_LITE;
 		control_devconf1_offset = OMAP243X_CONTROL_DEVCONF1;
 	} else {
 		control_pbias_offset = OMAP343X_CONTROL_PBIAS_LITE;
 		control_devconf1_offset = OMAP343X_CONTROL_DEVCONF1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

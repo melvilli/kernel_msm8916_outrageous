@@ -89,12 +89,18 @@ static const unsigned int VMMC_VSEL_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* supported BBCH voltages in microvolts */
 static const unsigned int VBB_VSEL_table[] = {
 	3000000, 2520000, 3150000, 5000000,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct tps_info {
 	const char *name;
@@ -192,13 +198,19 @@ static struct tps_info tps65910_regs[] = {
 		.enable_time_us = 100,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.name = "vbb",
 		.vin_name = "vcc7",
 		.n_voltages = ARRAY_SIZE(VBB_VSEL_table),
 		.voltage_table = VBB_VSEL_table,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -357,6 +369,11 @@ static int tps65910_get_ctrl_register(int id)
 	case TPS65910_REG_VMMC:
 		return TPS65910_VMMC;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case TPS65910_REG_VBB:
+		return TPS65910_BBCH;
+>>>>>>> v3.18
 =======
 	case TPS65910_REG_VBB:
 		return TPS65910_BBCH;
@@ -504,7 +521,11 @@ static int tps65910_get_voltage_dcdc_sel(struct regulator_dev *dev)
 	/* multiplier 0 == 1 but 2,3 normal */
 	if (!mult)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mult=1;
+=======
+		mult = 1;
+>>>>>>> v3.18
 =======
 		mult = 1;
 >>>>>>> v3.18
@@ -555,11 +576,17 @@ static int tps65910_get_voltage_sel(struct regulator_dev *dev)
 		value >>= LDO_SEL_SHIFT;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case TPS65910_REG_VBB:
 		value &= BBCH_BBSEL_MASK;
 		value >>= BBCH_BBSEL_SHIFT;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -EINVAL;
@@ -672,6 +699,12 @@ static int tps65910_set_voltage_sel(struct regulator_dev *dev,
 		return tps65910_reg_update_bits(pmic->mfd, reg, LDO_SEL_MASK,
 						selector << LDO_SEL_SHIFT);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case TPS65910_REG_VBB:
+		return tps65910_reg_update_bits(pmic->mfd, reg, BBCH_BBSEL_MASK,
+						selector << BBCH_BBSEL_SHIFT);
+>>>>>>> v3.18
 =======
 	case TPS65910_REG_VBB:
 		return tps65910_reg_update_bits(pmic->mfd, reg, BBCH_BBSEL_MASK,
@@ -709,6 +742,12 @@ static int tps65911_set_voltage_sel(struct regulator_dev *dev,
 		return tps65910_reg_update_bits(pmic->mfd, reg, LDO_SEL_MASK,
 						selector << LDO_SEL_SHIFT);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case TPS65910_REG_VBB:
+		return tps65910_reg_update_bits(pmic->mfd, reg, BBCH_BBSEL_MASK,
+						selector << BBCH_BBSEL_SHIFT);
+>>>>>>> v3.18
 =======
 	case TPS65910_REG_VBB:
 		return tps65910_reg_update_bits(pmic->mfd, reg, BBCH_BBSEL_MASK,
@@ -731,7 +770,11 @@ static int tps65910_list_voltage_dcdc(struct regulator_dev *dev,
 		mult = (selector / VDD1_2_NUM_VOLT_FINE) + 1;
 		volt = VDD1_2_MIN_VOLT +
 <<<<<<< HEAD
+<<<<<<< HEAD
 				(selector % VDD1_2_NUM_VOLT_FINE) * VDD1_2_OFFSET;
+=======
+			(selector % VDD1_2_NUM_VOLT_FINE) * VDD1_2_OFFSET;
+>>>>>>> v3.18
 =======
 			(selector % VDD1_2_NUM_VOLT_FINE) * VDD1_2_OFFSET;
 >>>>>>> v3.18
@@ -753,7 +796,11 @@ static int tps65911_list_voltage(struct regulator_dev *dev, unsigned selector)
 	int step_mv = 0, id = rdev_get_id(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(id) {
+=======
+	switch (id) {
+>>>>>>> v3.18
 =======
 	switch (id) {
 >>>>>>> v3.18
@@ -816,7 +863,10 @@ static struct regulator_ops tps65910_ops_vdd3 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct regulator_ops tps65910_ops_vbb = {
 	.is_enabled		= regulator_is_enabled_regmap,
 	.enable			= regulator_enable_regmap,
@@ -829,6 +879,9 @@ static struct regulator_ops tps65910_ops_vbb = {
 	.map_voltage		= regulator_map_voltage_iterate,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct regulator_ops tps65910_ops = {
 	.is_enabled		= regulator_is_enabled_regmap,
@@ -975,7 +1028,11 @@ static int tps65910_set_ext_sleep_config(struct tps65910_reg *pmic,
 		ret = tps65910_reg_write(pmic->mfd, sr_reg_add, 0);
 		if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(mfd->dev, "Error in settting sr register\n");
+=======
+			dev_err(mfd->dev, "Error in setting sr register\n");
+>>>>>>> v3.18
 =======
 			dev_err(mfd->dev, "Error in setting sr register\n");
 >>>>>>> v3.18
@@ -1017,6 +1074,10 @@ static struct of_regulator_match tps65910_matches[] = {
 	{ .name = "vaux33",	.driver_data = (void *) &tps65910_regs[11] },
 	{ .name = "vmmc",	.driver_data = (void *) &tps65910_regs[12] },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .name = "vbb",	.driver_data = (void *) &tps65910_regs[13] },
+>>>>>>> v3.18
 =======
 	{ .name = "vbb",	.driver_data = (void *) &tps65910_regs[13] },
 >>>>>>> v3.18
@@ -1052,6 +1113,7 @@ static struct tps65910_board *tps65910_parse_dt_reg_data(
 	pmic_plat_data = devm_kzalloc(&pdev->dev, sizeof(*pmic_plat_data),
 					GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!pmic_plat_data) {
 		dev_err(&pdev->dev, "Failure to alloc pdata for regulators.\n");
@@ -1061,11 +1123,16 @@ static struct tps65910_board *tps65910_parse_dt_reg_data(
 	np = of_node_get(pdev->dev.parent->of_node);
 	regulators = of_find_node_by_name(np, "regulators");
 =======
+=======
+>>>>>>> v3.18
 	if (!pmic_plat_data)
 		return NULL;
 
 	np = pdev->dev.parent->of_node;
 	regulators = of_get_child_by_name(np, "regulators");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!regulators) {
 		dev_err(&pdev->dev, "regulator node not found\n");
@@ -1099,7 +1166,11 @@ static struct tps65910_board *tps65910_parse_dt_reg_data(
 
 	for (idx = 0; idx < count; idx++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!matches[idx].init_data || !matches[idx].of_node)
+=======
+		if (!matches[idx].of_node)
+>>>>>>> v3.18
 =======
 		if (!matches[idx].of_node)
 >>>>>>> v3.18
@@ -1133,7 +1204,10 @@ static int tps65910_probe(struct platform_device *pdev)
 	struct regulator_config config = { };
 	struct tps_info *info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_init_data *reg_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct regulator_dev *rdev;
@@ -1154,10 +1228,15 @@ static int tps65910_probe(struct platform_device *pdev)
 
 	pmic = devm_kzalloc(&pdev->dev, sizeof(*pmic), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pmic) {
 		dev_err(&pdev->dev, "Memory allocation failed for pmic\n");
 		return -ENOMEM;
 	}
+=======
+	if (!pmic)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!pmic)
 		return -ENOMEM;
@@ -1171,7 +1250,11 @@ static int tps65910_probe(struct platform_device *pdev)
 				DEVCTRL_SR_CTL_I2C_SEL_MASK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(tps65910_chip_id(tps65910)) {
+=======
+	switch (tps65910_chip_id(tps65910)) {
+>>>>>>> v3.18
 =======
 	switch (tps65910_chip_id(tps65910)) {
 >>>>>>> v3.18
@@ -1181,12 +1264,15 @@ static int tps65910_probe(struct platform_device *pdev)
 		pmic->ext_sleep_control = tps65910_ext_sleep_control;
 		info = tps65910_regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Work around silicon erratum SWCZ010: output programmed
 		 * voltage level can go higher than expected or crash
 		 * Workaround: use no synchronization of DCDC clocks
 		 */
 		tps65910_reg_clear_bits(pmic->mfd, TPS65910_DCDCCTRL,
 					DCDCCTRL_DCDCCKSYNC_MASK);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -1203,6 +1289,7 @@ static int tps65910_probe(struct platform_device *pdev)
 
 	pmic->desc = devm_kzalloc(&pdev->dev, pmic->num_regulators *
 			sizeof(struct regulator_desc), GFP_KERNEL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!pmic->desc) {
 		dev_err(&pdev->dev, "Memory alloc fails for desc\n");
@@ -1234,6 +1321,8 @@ static int tps65910_probe(struct platform_device *pdev)
 			continue;
 
 =======
+=======
+>>>>>>> v3.18
 	if (!pmic->desc)
 		return -ENOMEM;
 
@@ -1249,6 +1338,9 @@ static int tps65910_probe(struct platform_device *pdev)
 
 	for (i = 0; i < pmic->num_regulators && i < TPS65910_NUM_REGS;
 			i++, info++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Register the regulators */
 		pmic->info[i] = info;
@@ -1273,11 +1365,17 @@ static int tps65910_probe(struct platform_device *pdev)
 				pmic->desc[i].ramp_delay = 5000;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		} else if (i == TPS65910_REG_VBB &&
 				tps65910_chip_id(tps65910) == TPS65910) {
 			pmic->desc[i].ops = &tps65910_ops_vbb;
 			pmic->desc[i].volt_table = info->voltage_table;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			if (tps65910_chip_id(tps65910) == TPS65910) {
@@ -1305,7 +1403,11 @@ static int tps65910_probe(struct platform_device *pdev)
 
 		config.dev = tps65910->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		config.init_data = reg_data;
+=======
+		config.init_data = pmic_plat_data->tps65910_pmic_init_data[i];
+>>>>>>> v3.18
 =======
 		config.init_data = pmic_plat_data->tps65910_pmic_init_data[i];
 >>>>>>> v3.18
@@ -1316,7 +1418,12 @@ static int tps65910_probe(struct platform_device *pdev)
 			config.of_node = tps65910_reg_matches[i].of_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rdev = regulator_register(&pmic->desc[i], &config);
+=======
+		rdev = devm_regulator_register(&pdev->dev, &pmic->desc[i],
+					       &config);
+>>>>>>> v3.18
 =======
 		rdev = devm_regulator_register(&pdev->dev, &pmic->desc[i],
 					       &config);
@@ -1326,8 +1433,12 @@ static int tps65910_probe(struct platform_device *pdev)
 				"failed to register %s regulator\n",
 				pdev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = PTR_ERR(rdev);
 			goto err_unregister_regulator;
+=======
+			return PTR_ERR(rdev);
+>>>>>>> v3.18
 =======
 			return PTR_ERR(rdev);
 >>>>>>> v3.18
@@ -1337,6 +1448,7 @@ static int tps65910_probe(struct platform_device *pdev)
 		pmic->rdev[i] = rdev;
 	}
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err_unregister_regulator:
@@ -1354,6 +1466,8 @@ static int tps65910_remove(struct platform_device *pdev)
 		regulator_unregister(pmic->rdev[i]);
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1395,7 +1509,10 @@ static struct platform_driver tps65910_driver = {
 	},
 	.probe = tps65910_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = tps65910_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.shutdown = tps65910_shutdown,

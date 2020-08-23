@@ -126,8 +126,14 @@ static int da9052_backlight_probe(struct platform_device *pdev)
 	props.max_brightness = DA9052_MAX_BRIGHTNESS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl = backlight_device_register(pdev->name, wleds->da9052->dev, wleds,
 				       &da9052_backlight_ops, &props);
+=======
+	bl = devm_backlight_device_register(&pdev->dev, pdev->name,
+					wleds->da9052->dev, wleds,
+					&da9052_backlight_ops, &props);
+>>>>>>> v3.18
 =======
 	bl = devm_backlight_device_register(&pdev->dev, pdev->name,
 					wleds->da9052->dev, wleds,
@@ -154,7 +160,10 @@ static int da9052_backlight_remove(struct platform_device *pdev)
 	wleds->state = DA9052_WLEDS_OFF;
 	da9052_adjust_wled_brightness(wleds);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	backlight_device_unregister(bl);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -183,7 +192,10 @@ static struct platform_driver da9052_wled_driver = {
 	.driver	= {
 		.name	= "da9052-wled",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},

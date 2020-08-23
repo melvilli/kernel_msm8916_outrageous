@@ -38,8 +38,13 @@
 #define S5P_MFC_ENC_NAME	"s5p-mfc-enc"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int debug;
 module_param(debug, int, S_IRUGO | S_IWUSR);
+=======
+int mfc_debug_level;
+module_param_named(debug, mfc_debug_level, int, S_IRUGO | S_IWUSR);
+>>>>>>> v3.18
 =======
 int mfc_debug_level;
 module_param_named(debug, mfc_debug_level, int, S_IRUGO | S_IWUSR);
@@ -156,15 +161,21 @@ static void s5p_mfc_watchdog_worker(struct work_struct *work)
 			continue;
 		ctx->state = MFCINST_ERROR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s5p_mfc_hw_call(dev->mfc_ops, cleanup_queue, &ctx->dst_queue,
 				&ctx->vq_dst);
 		s5p_mfc_hw_call(dev->mfc_ops, cleanup_queue, &ctx->src_queue,
 				&ctx->vq_src);
 =======
+=======
+>>>>>>> v3.18
 		s5p_mfc_hw_call_void(dev->mfc_ops, cleanup_queue,
 						&ctx->dst_queue, &ctx->vq_dst);
 		s5p_mfc_hw_call_void(dev->mfc_ops, cleanup_queue,
 						&ctx->src_queue, &ctx->vq_src);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		clear_work_bit(ctx);
 		wake_up_ctx(ctx, S5P_MFC_R2H_CMD_ERR_RET, 0);
@@ -175,7 +186,11 @@ static void s5p_mfc_watchdog_worker(struct work_struct *work)
 	 * If no instance is in memory than no firmware should be present */
 	if (dev->num_inst > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = s5p_mfc_reload_firmware(dev);
+=======
+		ret = s5p_mfc_load_firmware(dev);
+>>>>>>> v3.18
 =======
 		ret = s5p_mfc_load_firmware(dev);
 >>>>>>> v3.18
@@ -241,7 +256,11 @@ static void s5p_mfc_handle_frame_copy_time(struct s5p_mfc_ctx *ctx)
 
 	/* Copy timestamp / timecode from decoded src to dst and set
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   appropraite flags */
+=======
+	   appropriate flags */
+>>>>>>> v3.18
 =======
 	   appropriate flags */
 >>>>>>> v3.18
@@ -253,12 +272,18 @@ static void s5p_mfc_handle_frame_copy_time(struct s5p_mfc_ctx *ctx)
 			dst_buf->b->v4l2_buf.timestamp =
 						src_buf->b->v4l2_buf.timestamp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			dst_buf->b->v4l2_buf.flags &=
 				~V4L2_BUF_FLAG_TSTAMP_SRC_MASK;
 			dst_buf->b->v4l2_buf.flags |=
 				src_buf->b->v4l2_buf.flags
 				& V4L2_BUF_FLAG_TSTAMP_SRC_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			switch (frame_type) {
 			case S5P_FIMV_DECODE_FRAME_I_FRAME:
@@ -288,14 +313,20 @@ static void s5p_mfc_handle_frame_new(struct s5p_mfc_ctx *ctx, unsigned int err)
 
 	dspl_y_addr = s5p_mfc_hw_call(dev->mfc_ops, get_dspl_y_adr, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame_type = s5p_mfc_hw_call(dev->mfc_ops, get_disp_frame_type, ctx);
 =======
+=======
+>>>>>>> v3.18
 	if (IS_MFCV6_PLUS(dev))
 		frame_type = s5p_mfc_hw_call(dev->mfc_ops,
 			get_disp_frame_type, ctx);
 	else
 		frame_type = s5p_mfc_hw_call(dev->mfc_ops,
 			get_dec_frame_type, dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* If frame is same as previous then skip and do not dequeue */
@@ -342,6 +373,10 @@ static void s5p_mfc_handle_frame(struct s5p_mfc_ctx *ctx,
 	struct s5p_mfc_dev *dev = ctx->dev;
 	unsigned int dst_frame_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int dec_frame_status;
+>>>>>>> v3.18
 =======
 	unsigned int dec_frame_status;
 >>>>>>> v3.18
@@ -352,6 +387,11 @@ static void s5p_mfc_handle_frame(struct s5p_mfc_ctx *ctx,
 	dst_frame_status = s5p_mfc_hw_call(dev->mfc_ops, get_dspl_status, dev)
 				& S5P_FIMV_DEC_STATUS_DECODING_STATUS_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dec_frame_status = s5p_mfc_hw_call(dev->mfc_ops, get_dec_status, dev)
+				& S5P_FIMV_DEC_STATUS_DECODING_STATUS_MASK;
+>>>>>>> v3.18
 =======
 	dec_frame_status = s5p_mfc_hw_call(dev->mfc_ops, get_dec_status, dev)
 				& S5P_FIMV_DEC_STATUS_DECODING_STATUS_MASK;
@@ -366,7 +406,11 @@ static void s5p_mfc_handle_frame(struct s5p_mfc_ctx *ctx,
 		res_change == S5P_FIMV_RES_DECREASE) {
 		ctx->state = MFCINST_RES_CHANGE_INIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s5p_mfc_hw_call(dev->mfc_ops, clear_int_flags, dev);
+=======
+		s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
+>>>>>>> v3.18
 =======
 		s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
 >>>>>>> v3.18
@@ -375,7 +419,11 @@ static void s5p_mfc_handle_frame(struct s5p_mfc_ctx *ctx,
 			BUG();
 		s5p_mfc_clock_off();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s5p_mfc_hw_call(dev->mfc_ops, try_run, dev);
+=======
+		s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
+>>>>>>> v3.18
 =======
 		s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
 >>>>>>> v3.18
@@ -389,9 +437,12 @@ static void s5p_mfc_handle_frame(struct s5p_mfc_ctx *ctx,
 	if (dst_frame_status == S5P_FIMV_DEC_STATUS_DECODING_EMPTY) {
 		if (ctx->state == MFCINST_RES_CHANGE_FLUSH) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			s5p_mfc_handle_frame_all_extracted(ctx);
 			ctx->state = MFCINST_RES_CHANGE_END;
 =======
+=======
+>>>>>>> v3.18
 			static const struct v4l2_event ev_src_ch = {
 				.type = V4L2_EVENT_SOURCE_CHANGE,
 				.u.src_change.changes =
@@ -402,6 +453,9 @@ static void s5p_mfc_handle_frame(struct s5p_mfc_ctx *ctx,
 			ctx->state = MFCINST_RES_CHANGE_END;
 			v4l2_event_queue_fh(&ctx->fh, &ev_src_ch);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto leave_handle_frame;
 		} else {
@@ -410,8 +464,12 @@ static void s5p_mfc_handle_frame(struct s5p_mfc_ctx *ctx,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dst_frame_status == S5P_FIMV_DEC_STATUS_DECODING_DISPLAY ||
 		dst_frame_status == S5P_FIMV_DEC_STATUS_DECODING_ONLY)
+=======
+	if (dec_frame_status == S5P_FIMV_DEC_STATUS_DECODING_DISPLAY)
+>>>>>>> v3.18
 =======
 	if (dec_frame_status == S5P_FIMV_DEC_STATUS_DECODING_DISPLAY)
 >>>>>>> v3.18
@@ -433,6 +491,10 @@ static void s5p_mfc_handle_frame(struct s5p_mfc_ctx *ctx,
 						get_consumed_stream, dev);
 		if (ctx->codec_mode != S5P_MFC_CODEC_H264_DEC &&
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			ctx->codec_mode != S5P_MFC_CODEC_VP8_DEC &&
+>>>>>>> v3.18
 =======
 			ctx->codec_mode != S5P_MFC_CODEC_VP8_DEC &&
 >>>>>>> v3.18
@@ -460,7 +522,11 @@ leave_handle_frame:
 				    || ctx->dst_queue_cnt < ctx->pb_count)
 		clear_work_bit(ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5p_mfc_hw_call(dev->mfc_ops, clear_int_flags, dev);
+=======
+	s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
+>>>>>>> v3.18
 =======
 	s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
 >>>>>>> v3.18
@@ -469,13 +535,19 @@ leave_handle_frame:
 		BUG();
 	s5p_mfc_clock_off();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5p_mfc_hw_call(dev->mfc_ops, try_run, dev);
 =======
+=======
+>>>>>>> v3.18
 	/* if suspending, wake up device and do not try_run again*/
 	if (test_bit(0, &dev->enter_suspend))
 		wake_up_dev(dev, reason, err);
 	else
 		s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -497,7 +569,11 @@ static void s5p_mfc_handle_error(struct s5p_mfc_dev *dev,
 		case MFCINST_FINISHED:
 		case MFCINST_RUNNING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* It is higly probable that an error occured
+=======
+			/* It is highly probable that an error occurred
+>>>>>>> v3.18
 =======
 			/* It is highly probable that an error occurred
 >>>>>>> v3.18
@@ -507,15 +583,21 @@ static void s5p_mfc_handle_error(struct s5p_mfc_dev *dev,
 			/* Mark all dst buffers as having an error */
 			spin_lock_irqsave(&dev->irqlock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			s5p_mfc_hw_call(dev->mfc_ops, cleanup_queue,
 						&ctx->dst_queue, &ctx->vq_dst);
 			/* Mark all src buffers as having an error */
 			s5p_mfc_hw_call(dev->mfc_ops, cleanup_queue,
 =======
+=======
+>>>>>>> v3.18
 			s5p_mfc_hw_call_void(dev->mfc_ops, cleanup_queue,
 						&ctx->dst_queue, &ctx->vq_dst);
 			/* Mark all src buffers as having an error */
 			s5p_mfc_hw_call_void(dev->mfc_ops, cleanup_queue,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						&ctx->src_queue, &ctx->vq_src);
 			spin_unlock_irqrestore(&dev->irqlock, flags);
@@ -531,7 +613,11 @@ static void s5p_mfc_handle_error(struct s5p_mfc_dev *dev,
 	if (test_and_clear_bit(0, &dev->hw_lock) == 0)
 		BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5p_mfc_hw_call(dev->mfc_ops, clear_int_flags, dev);
+=======
+	s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
+>>>>>>> v3.18
 =======
 	s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
 >>>>>>> v3.18
@@ -559,7 +645,11 @@ static void s5p_mfc_handle_seq_done(struct s5p_mfc_ctx *ctx,
 				dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s5p_mfc_hw_call(dev->mfc_ops, dec_calc_dpb_size, ctx);
+=======
+		s5p_mfc_hw_call_void(dev->mfc_ops, dec_calc_dpb_size, ctx);
+>>>>>>> v3.18
 =======
 		s5p_mfc_hw_call_void(dev->mfc_ops, dec_calc_dpb_size, ctx);
 >>>>>>> v3.18
@@ -590,7 +680,11 @@ static void s5p_mfc_handle_seq_done(struct s5p_mfc_ctx *ctx,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5p_mfc_hw_call(dev->mfc_ops, clear_int_flags, dev);
+=======
+	s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
+>>>>>>> v3.18
 =======
 	s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
 >>>>>>> v3.18
@@ -599,7 +693,11 @@ static void s5p_mfc_handle_seq_done(struct s5p_mfc_ctx *ctx,
 		BUG();
 	s5p_mfc_clock_off();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5p_mfc_hw_call(dev->mfc_ops, try_run, dev);
+=======
+	s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
+>>>>>>> v3.18
 =======
 	s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
 >>>>>>> v3.18
@@ -618,7 +716,11 @@ static void s5p_mfc_handle_init_buffers(struct s5p_mfc_ctx *ctx,
 		return;
 	dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5p_mfc_hw_call(dev->mfc_ops, clear_int_flags, dev);
+=======
+	s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
+>>>>>>> v3.18
 =======
 	s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
 >>>>>>> v3.18
@@ -649,7 +751,11 @@ static void s5p_mfc_handle_init_buffers(struct s5p_mfc_ctx *ctx,
 
 		wake_up(&ctx->queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s5p_mfc_hw_call(dev->mfc_ops, try_run, dev);
+=======
+		s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
+>>>>>>> v3.18
 =======
 		s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
 >>>>>>> v3.18
@@ -694,7 +800,11 @@ static void s5p_mfc_handle_stream_complete(struct s5p_mfc_ctx *ctx,
 	s5p_mfc_clock_off();
 	wake_up(&ctx->queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5p_mfc_hw_call(dev->mfc_ops, try_run, dev);
+=======
+	s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
+>>>>>>> v3.18
 =======
 	s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
 >>>>>>> v3.18
@@ -719,7 +829,11 @@ static irqreturn_t s5p_mfc_irq(int irq, void *priv)
 	switch (reason) {
 	case S5P_MFC_R2H_CMD_ERR_RET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* An error has occured */
+=======
+		/* An error has occurred */
+>>>>>>> v3.18
 =======
 		/* An error has occurred */
 >>>>>>> v3.18
@@ -739,7 +853,11 @@ static irqreturn_t s5p_mfc_irq(int irq, void *priv)
 			if (ctx->c_ops->post_frame_start(ctx))
 				mfc_err("post_frame_start() failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			s5p_mfc_hw_call(dev->mfc_ops, clear_int_flags, dev);
+=======
+			s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
+>>>>>>> v3.18
 =======
 			s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
 >>>>>>> v3.18
@@ -748,7 +866,11 @@ static irqreturn_t s5p_mfc_irq(int irq, void *priv)
 				BUG();
 			s5p_mfc_clock_off();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			s5p_mfc_hw_call(dev->mfc_ops, try_run, dev);
+=======
+			s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
+>>>>>>> v3.18
 =======
 			s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
 >>>>>>> v3.18
@@ -771,6 +893,10 @@ static irqreturn_t s5p_mfc_irq(int irq, void *priv)
 	case S5P_MFC_R2H_CMD_CLOSE_INSTANCE_RET:
 		clear_work_bit(ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ctx->inst_no = MFC_NO_INSTANCE_SET;
+>>>>>>> v3.18
 =======
 		ctx->inst_no = MFC_NO_INSTANCE_SET;
 >>>>>>> v3.18
@@ -785,7 +911,11 @@ static irqreturn_t s5p_mfc_irq(int irq, void *priv)
 		if (ctx)
 			clear_work_bit(ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s5p_mfc_hw_call(dev->mfc_ops, clear_int_flags, dev);
+=======
+		s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
+>>>>>>> v3.18
 =======
 		s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
 >>>>>>> v3.18
@@ -811,7 +941,11 @@ static irqreturn_t s5p_mfc_irq(int irq, void *priv)
 	default:
 		mfc_debug(2, "Unknown int reason\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s5p_mfc_hw_call(dev->mfc_ops, clear_int_flags, dev);
+=======
+		s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
+>>>>>>> v3.18
 =======
 		s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
 >>>>>>> v3.18
@@ -820,7 +954,11 @@ static irqreturn_t s5p_mfc_irq(int irq, void *priv)
 	return IRQ_HANDLED;
 irq_cleanup_hw:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5p_mfc_hw_call(dev->mfc_ops, clear_int_flags, dev);
+=======
+	s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
+>>>>>>> v3.18
 =======
 	s5p_mfc_hw_call_void(dev->mfc_ops, clear_int_flags, dev);
 >>>>>>> v3.18
@@ -833,7 +971,11 @@ irq_cleanup_hw:
 	s5p_mfc_clock_off();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5p_mfc_hw_call(dev->mfc_ops, try_run, dev);
+=======
+	s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
+>>>>>>> v3.18
 =======
 	s5p_mfc_hw_call_void(dev->mfc_ops, try_run, dev);
 >>>>>>> v3.18
@@ -862,7 +1004,11 @@ static int s5p_mfc_open(struct file *file)
 		goto err_alloc;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_fh_init(&ctx->fh, video_devdata(file));
+=======
+	v4l2_fh_init(&ctx->fh, vdev);
+>>>>>>> v3.18
 =======
 	v4l2_fh_init(&ctx->fh, vdev);
 >>>>>>> v3.18
@@ -915,7 +1061,11 @@ static int s5p_mfc_open(struct file *file)
 	}
 	ctx->fh.ctrl_handler = &ctx->ctrl_handler;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctx->inst_no = -1;
+=======
+	ctx->inst_no = MFC_NO_INSTANCE_SET;
+>>>>>>> v3.18
 =======
 	ctx->inst_no = MFC_NO_INSTANCE_SET;
 >>>>>>> v3.18
@@ -957,7 +1107,11 @@ static int s5p_mfc_open(struct file *file)
 	}
 	q->mem_ops = (struct vb2_mem_ops *)&vb2_dma_contig_memops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+=======
+	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+>>>>>>> v3.18
 =======
 	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
 >>>>>>> v3.18
@@ -983,7 +1137,11 @@ static int s5p_mfc_open(struct file *file)
 	}
 	q->mem_ops = (struct vb2_mem_ops *)&vb2_dma_contig_memops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+=======
+	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+>>>>>>> v3.18
 =======
 	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
 >>>>>>> v3.18
@@ -997,7 +1155,11 @@ static int s5p_mfc_open(struct file *file)
 	mfc_debug_leave();
 	return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Deinit when failure occured */
+=======
+	/* Deinit when failure occurred */
+>>>>>>> v3.18
 =======
 	/* Deinit when failure occurred */
 >>>>>>> v3.18
@@ -1041,6 +1203,7 @@ static int s5p_mfc_release(struct file *file)
 	/* Mark context as idle */
 	clear_work_bit_irqsave(ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If instance was initialised then
 	 * return instance and free reosurces */
 	if (ctx->inst_no != MFC_NO_INSTANCE_SET) {
@@ -1065,11 +1228,16 @@ static int s5p_mfc_release(struct file *file)
 
 		ctx->inst_no = MFC_NO_INSTANCE_SET;
 =======
+=======
+>>>>>>> v3.18
 	/* If instance was initialised and not yet freed,
 	 * return instance and free resources */
 	if (ctx->state != MFCINST_FREE && ctx->state != MFCINST_INIT) {
 		mfc_debug(2, "Has to free instance\n");
 		s5p_mfc_close_mfc_inst(dev, ctx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	/* hardware locking scheme */
@@ -1187,11 +1355,14 @@ static int match_child(struct device *dev, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void s5p_mfc_memdev_release(struct device *dev)
 {
 	dma_release_declared_memory(dev);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void *mfc_get_drv_data(struct platform_device *pdev);
@@ -1207,9 +1378,12 @@ static int s5p_mfc_alloc_memdevs(struct s5p_mfc_dev *dev)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dev_set_name(dev->mem_dev_l, "%s", "s5p-mfc-l");
 	dev->mem_dev_l->release = s5p_mfc_memdev_release;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	device_initialize(dev->mem_dev_l);
@@ -1230,9 +1404,12 @@ static int s5p_mfc_alloc_memdevs(struct s5p_mfc_dev *dev)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dev_set_name(dev->mem_dev_r, "%s", "s5p-mfc-r");
 	dev->mem_dev_r->release = s5p_mfc_memdev_release;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	device_initialize(dev->mem_dev_r);
@@ -1294,7 +1471,11 @@ static int s5p_mfc_probe(struct platform_device *pdev)
 	dev->irq = res->start;
 	ret = devm_request_irq(&pdev->dev, dev->irq, s5p_mfc_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IRQF_DISABLED, pdev->name, dev);
+=======
+					0, pdev->name, dev);
+>>>>>>> v3.18
 =======
 					0, pdev->name, dev);
 >>>>>>> v3.18
@@ -1354,9 +1535,15 @@ static int s5p_mfc_probe(struct platform_device *pdev)
 		goto err_dec_alloc;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vfd->fops	= &s5p_mfc_fops,
 	vfd->ioctl_ops	= get_dec_v4l2_ioctl_ops();
 	vfd->release	= video_device_release,
+=======
+	vfd->fops	= &s5p_mfc_fops;
+	vfd->ioctl_ops	= get_dec_v4l2_ioctl_ops();
+	vfd->release	= video_device_release;
+>>>>>>> v3.18
 =======
 	vfd->fops	= &s5p_mfc_fops;
 	vfd->ioctl_ops	= get_dec_v4l2_ioctl_ops();
@@ -1385,9 +1572,15 @@ static int s5p_mfc_probe(struct platform_device *pdev)
 		goto err_enc_alloc;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vfd->fops	= &s5p_mfc_fops,
 	vfd->ioctl_ops	= get_enc_v4l2_ioctl_ops();
 	vfd->release	= video_device_release,
+=======
+	vfd->fops	= &s5p_mfc_fops;
+	vfd->ioctl_ops	= get_enc_v4l2_ioctl_ops();
+	vfd->release	= video_device_release;
+>>>>>>> v3.18
 =======
 	vfd->fops	= &s5p_mfc_fops;
 	vfd->ioctl_ops	= get_enc_v4l2_ioctl_ops();
@@ -1421,6 +1614,10 @@ static int s5p_mfc_probe(struct platform_device *pdev)
 	s5p_mfc_init_hw_ops(dev);
 	s5p_mfc_init_hw_cmds(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	s5p_mfc_init_regs(dev);
+>>>>>>> v3.18
 =======
 	s5p_mfc_init_regs(dev);
 >>>>>>> v3.18
@@ -1499,9 +1696,13 @@ static int s5p_mfc_suspend(struct device *dev)
 		/* Wait on the interrupt waitqueue */
 		ret = wait_event_interruptible_timeout(m_dev->queue,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			m_dev->int_cond || m_dev->ctx[m_dev->curr_ctx]->int_cond,
 			msecs_to_jiffies(MFC_INT_TIMEOUT));
 
+=======
+			m_dev->int_cond, msecs_to_jiffies(MFC_INT_TIMEOUT));
+>>>>>>> v3.18
 =======
 			m_dev->int_cond, msecs_to_jiffies(MFC_INT_TIMEOUT));
 >>>>>>> v3.18
@@ -1540,11 +1741,17 @@ static int s5p_mfc_runtime_resume(struct device *dev)
 	struct platform_device *pdev = to_platform_device(dev);
 	struct s5p_mfc_dev *m_dev = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int pre_power;
 
 	if (!m_dev->alloc_ctx)
 		return 0;
 	pre_power = atomic_read(&m_dev->pm.power);
+=======
+
+	if (!m_dev->alloc_ctx)
+		return 0;
+>>>>>>> v3.18
 =======
 
 	if (!m_dev->alloc_ctx)
@@ -1563,7 +1770,11 @@ static const struct dev_pm_ops s5p_mfc_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct s5p_mfc_buf_size_v5 mfc_buf_size_v5 = {
+=======
+static struct s5p_mfc_buf_size_v5 mfc_buf_size_v5 = {
+>>>>>>> v3.18
 =======
 static struct s5p_mfc_buf_size_v5 mfc_buf_size_v5 = {
 >>>>>>> v3.18
@@ -1574,7 +1785,11 @@ static struct s5p_mfc_buf_size_v5 mfc_buf_size_v5 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct s5p_mfc_buf_size buf_size_v5 = {
+=======
+static struct s5p_mfc_buf_size buf_size_v5 = {
+>>>>>>> v3.18
 =======
 static struct s5p_mfc_buf_size buf_size_v5 = {
 >>>>>>> v3.18
@@ -1584,7 +1799,11 @@ static struct s5p_mfc_buf_size buf_size_v5 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct s5p_mfc_buf_align mfc_buf_align_v5 = {
+=======
+static struct s5p_mfc_buf_align mfc_buf_align_v5 = {
+>>>>>>> v3.18
 =======
 static struct s5p_mfc_buf_align mfc_buf_align_v5 = {
 >>>>>>> v3.18
@@ -1594,6 +1813,7 @@ static struct s5p_mfc_buf_align mfc_buf_align_v5 = {
 static struct s5p_mfc_variant mfc_drvdata_v5 = {
 	.version	= MFC_VERSION,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.port_num	= MFC_NUM_PORTS,
 	.buf_size	= &buf_size_v5,
 	.buf_align	= &mfc_buf_align_v5,
@@ -1602,6 +1822,8 @@ static struct s5p_mfc_variant mfc_drvdata_v5 = {
 
 struct s5p_mfc_buf_size_v6 mfc_buf_size_v6 = {
 =======
+=======
+>>>>>>> v3.18
 	.version_bit	= MFC_V5_BIT,
 	.port_num	= MFC_NUM_PORTS,
 	.buf_size	= &buf_size_v5,
@@ -1610,6 +1832,9 @@ struct s5p_mfc_buf_size_v6 mfc_buf_size_v6 = {
 };
 
 static struct s5p_mfc_buf_size_v6 mfc_buf_size_v6 = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.dev_ctx	= MFC_CTX_BUF_SIZE_V6,
 	.h264_dec_ctx	= MFC_H264_DEC_CTX_BUF_SIZE_V6,
@@ -1619,7 +1844,11 @@ static struct s5p_mfc_buf_size_v6 mfc_buf_size_v6 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct s5p_mfc_buf_size buf_size_v6 = {
+=======
+static struct s5p_mfc_buf_size buf_size_v6 = {
+>>>>>>> v3.18
 =======
 static struct s5p_mfc_buf_size buf_size_v6 = {
 >>>>>>> v3.18
@@ -1629,7 +1858,11 @@ static struct s5p_mfc_buf_size buf_size_v6 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct s5p_mfc_buf_align mfc_buf_align_v6 = {
+=======
+static struct s5p_mfc_buf_align mfc_buf_align_v6 = {
+>>>>>>> v3.18
 =======
 static struct s5p_mfc_buf_align mfc_buf_align_v6 = {
 >>>>>>> v3.18
@@ -1639,11 +1872,14 @@ static struct s5p_mfc_buf_align mfc_buf_align_v6 = {
 static struct s5p_mfc_variant mfc_drvdata_v6 = {
 	.version	= MFC_VERSION_V6,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.port_num	= MFC_NUM_PORTS_V6,
 	.buf_size	= &buf_size_v6,
 	.buf_align	= &mfc_buf_align_v6,
 	.fw_name        = "s5p-mfc-v6.fw",
 =======
+=======
+>>>>>>> v3.18
 	.version_bit	= MFC_V6_BIT,
 	.port_num	= MFC_NUM_PORTS_V6,
 	.buf_size	= &buf_size_v6,
@@ -1708,6 +1944,9 @@ static struct s5p_mfc_variant mfc_drvdata_v8 = {
 	.buf_size	= &buf_size_v8,
 	.buf_align	= &mfc_buf_align_v8,
 	.fw_name[0]     = "s5p-mfc-v8.fw",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1722,13 +1961,19 @@ static struct platform_device_id mfc_driver_ids[] = {
 		.name = "s5p-mfc-v6",
 		.driver_data = (unsigned long)&mfc_drvdata_v6,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.name = "s5p-mfc-v7",
 		.driver_data = (unsigned long)&mfc_drvdata_v7,
 	}, {
 		.name = "s5p-mfc-v8",
 		.driver_data = (unsigned long)&mfc_drvdata_v8,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{},
@@ -1743,13 +1988,19 @@ static const struct of_device_id exynos_mfc_match[] = {
 		.compatible = "samsung,mfc-v6",
 		.data = &mfc_drvdata_v6,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.compatible = "samsung,mfc-v7",
 		.data = &mfc_drvdata_v7,
 	}, {
 		.compatible = "samsung,mfc-v8",
 		.data = &mfc_drvdata_v8,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{},
@@ -1763,7 +2014,11 @@ static void *mfc_get_drv_data(struct platform_device *pdev)
 	if (pdev->dev.of_node) {
 		const struct of_device_id *match;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		match = of_match_node(of_match_ptr(exynos_mfc_match),
+=======
+		match = of_match_node(exynos_mfc_match,
+>>>>>>> v3.18
 =======
 		match = of_match_node(exynos_mfc_match,
 >>>>>>> v3.18

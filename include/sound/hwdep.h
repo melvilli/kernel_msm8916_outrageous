@@ -61,7 +61,10 @@ struct snd_hwdep {
 
 #ifdef CONFIG_SND_OSSEMUL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char oss_dev[32];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int oss_type;
@@ -73,6 +76,11 @@ struct snd_hwdep {
 	void *private_data;
 	void (*private_free) (struct snd_hwdep *hwdep);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *dev;
+	const struct attribute_group **groups;
+>>>>>>> v3.18
 =======
 	struct device *dev;
 	const struct attribute_group **groups;

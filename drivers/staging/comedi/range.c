@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -92,13 +95,19 @@ int do_rangeinfo_ioctl(struct comedi_device *dev,
 
 	if (RANGE_LENGTH(it.range_type) != lr->length) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DPRINTK("wrong length %d should be %d (0x%08x)\n",
 			RANGE_LENGTH(it.range_type), lr->length, it.range_type);
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(dev->class_dev,
 			"wrong length %d should be %d (0x%08x)\n",
 			RANGE_LENGTH(it.range_type),
 			lr->length, it.range_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -139,6 +148,7 @@ static int aref_invalid(struct comedi_subdevice *s, unsigned int chanspec)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DPRINTK("subdevice does not support aref %i", aref);
 	return 1;
 }
@@ -147,6 +157,8 @@ static int aref_invalid(struct comedi_subdevice *s, unsigned int chanspec)
    This function checks each element in a channel/gain list to make
    make sure it is valid.
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(s->device->class_dev, "subdevice does not support aref %i",
 		aref);
 	return 1;
@@ -157,12 +169,16 @@ static int aref_invalid(struct comedi_subdevice *s, unsigned int chanspec)
  * @s: comedi_subdevice struct
  * @n: number of elements in the chanlist
  * @chanlist: the chanlist to validate
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 */
 int comedi_check_chanlist(struct comedi_subdevice *s, int n,
 			  unsigned int *chanlist)
 {
 	struct comedi_device *dev = s->device;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 	int chan;
@@ -195,6 +211,8 @@ int comedi_check_chanlist(struct comedi_subdevice *s, int n,
 		dev_err(dev->class_dev, "(bug) no range type list!\n");
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int chanspec;
 	int chan, range_len, i;
 
@@ -215,6 +233,9 @@ int comedi_check_chanlist(struct comedi_subdevice *s, int n,
 				 i, chanspec, chan, range_len);
 			return -EINVAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;

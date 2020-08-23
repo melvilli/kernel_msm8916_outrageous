@@ -8,6 +8,11 @@
 #include <asm/cmpxchg.h>
 #include <arch/atomic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <arch/system.h>
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <arch/system.h>
 #include <asm/barrier.h>
@@ -21,7 +26,11 @@
 #define ATOMIC_INIT(i)  { (i) }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_read(v) (*(volatile int *)&(v)->counter)
+=======
+#define atomic_read(v) ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 =======
 #define atomic_read(v) ACCESS_ONCE((v)->counter)
 >>>>>>> v3.18
@@ -29,6 +38,7 @@
 
 /* These should be written in asm but we do it in C for now. */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void atomic_add(int i, volatile atomic_t *v)
 {
@@ -68,6 +78,8 @@ static inline int atomic_sub_return(int i, volatile atomic_t *v)
 	return retval;
 }
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC_OP(op, c_op)						\
 static inline void atomic_##op(int i, volatile atomic_t *v)		\
 {									\
@@ -98,6 +110,9 @@ ATOMIC_OPS(sub, -=)
 #undef ATOMIC_OP
 
 #define atomic_add_negative(a, v)	(atomic_add_return((a), (v)) < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int atomic_sub_and_test(int i, volatile atomic_t *v)
@@ -194,12 +209,15 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Atomic operations are already serializing */
 #define smp_mb__before_atomic_dec()    barrier()
 #define smp_mb__after_atomic_dec()     barrier()
 #define smp_mb__before_atomic_inc()    barrier()
 #define smp_mb__after_atomic_inc()     barrier()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

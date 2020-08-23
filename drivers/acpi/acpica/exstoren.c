@@ -7,7 +7,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -90,11 +94,17 @@ acpi_ex_resolve_object(union acpi_operand_object **source_desc_ptr,
 		 * can be converted to Integers (Strings or Buffers)
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	case ACPI_TYPE_INTEGER:
 	case ACPI_TYPE_STRING:
 	case ACPI_TYPE_BUFFER:
 
+=======
+	case ACPI_TYPE_INTEGER:
+	case ACPI_TYPE_STRING:
+	case ACPI_TYPE_BUFFER:
+>>>>>>> v3.18
 =======
 	case ACPI_TYPE_INTEGER:
 	case ACPI_TYPE_STRING:
@@ -144,7 +154,10 @@ acpi_ex_resolve_object(union acpi_operand_object **source_desc_ptr,
 	case ACPI_TYPE_LOCAL_ALIAS:
 	case ACPI_TYPE_LOCAL_METHOD_ALIAS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -158,7 +171,10 @@ acpi_ex_resolve_object(union acpi_operand_object **source_desc_ptr,
 	case ACPI_TYPE_PACKAGE:
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*

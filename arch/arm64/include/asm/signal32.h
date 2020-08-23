@@ -25,22 +25,32 @@
 extern const compat_ulong_t aarch32_sigret_code[6];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int compat_setup_frame(int usig, struct k_sigaction *ka, sigset_t *set,
 		       struct pt_regs *regs);
 int compat_setup_rt_frame(int usig, struct k_sigaction *ka, siginfo_t *info,
 			  sigset_t *set, struct pt_regs *regs);
 =======
+=======
+>>>>>>> v3.18
 int compat_setup_frame(int usig, struct ksignal *ksig, sigset_t *set,
 		       struct pt_regs *regs);
 int compat_setup_rt_frame(int usig, struct ksignal *ksig, sigset_t *set,
 			  struct pt_regs *regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void compat_setup_restart_syscall(struct pt_regs *regs);
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int compat_setup_frame(int usid, struct k_sigaction *ka,
+=======
+static inline int compat_setup_frame(int usid, struct ksignal *ksig,
+>>>>>>> v3.18
 =======
 static inline int compat_setup_frame(int usid, struct ksignal *ksig,
 >>>>>>> v3.18
@@ -50,8 +60,12 @@ static inline int compat_setup_frame(int usid, struct ksignal *ksig,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int compat_setup_rt_frame(int usig, struct k_sigaction *ka,
 					siginfo_t *info, sigset_t *set,
+=======
+static inline int compat_setup_rt_frame(int usig, struct ksignal *ksig, sigset_t *set,
+>>>>>>> v3.18
 =======
 static inline int compat_setup_rt_frame(int usig, struct ksignal *ksig, sigset_t *set,
 >>>>>>> v3.18

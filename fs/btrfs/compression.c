@@ -33,7 +33,10 @@
 #include <linux/bit_spinlock.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "compat.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "ctree.h"
@@ -96,8 +99,12 @@ static inline int compressed_bio_size(struct btrfs_root *root,
 
 	return sizeof(struct compressed_bio) +
 <<<<<<< HEAD
+<<<<<<< HEAD
 		((disk_size + root->sectorsize - 1) / root->sectorsize) *
 		csum_size;
+=======
+		(DIV_ROUND_UP(disk_size, root->sectorsize)) * csum_size;
+>>>>>>> v3.18
 =======
 		(DIV_ROUND_UP(disk_size, root->sectorsize)) * csum_size;
 >>>>>>> v3.18
@@ -137,6 +144,7 @@ static int check_compressed_csum(struct inode *inode,
 
 		if (csum != *cb_sum) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "btrfs csum failed ino %llu "
 			       "extent %llu csum %u "
 			       "wanted %u mirror %d\n",
@@ -144,10 +152,15 @@ static int check_compressed_csum(struct inode *inode,
 			       (unsigned long long)disk_start,
 			       csum, *cb_sum, cb->mirror_num);
 =======
+=======
+>>>>>>> v3.18
 			btrfs_info(BTRFS_I(inode)->root->fs_info,
 			   "csum failed ino %llu extent %llu csum %u wanted %u mirror %d",
 			   btrfs_ino(inode), disk_start, csum, *cb_sum,
 			   cb->mirror_num);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = -EIO;
 			goto fail;
@@ -189,7 +202,12 @@ static void end_compressed_bio_read(struct bio *bio, int err)
 
 	inode = cb->inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = check_compressed_csum(inode, cb, (u64)bio->bi_sector << 9);
+=======
+	ret = check_compressed_csum(inode, cb,
+				    (u64)bio->bi_iter.bi_sector << 9);
+>>>>>>> v3.18
 =======
 	ret = check_compressed_csum(inode, cb,
 				    (u64)bio->bi_iter.bi_sector << 9);
@@ -223,8 +241,13 @@ csum_failed:
 		bio_io_error(cb->orig_bio);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int bio_index = 0;
 		struct bio_vec *bvec = cb->orig_bio->bi_io_vec;
+=======
+		int i;
+		struct bio_vec *bvec;
+>>>>>>> v3.18
 =======
 		int i;
 		struct bio_vec *bvec;
@@ -235,11 +258,17 @@ csum_failed:
 		 * checked so the end_io handlers know about it
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (bio_index < cb->orig_bio->bi_vcnt) {
 			SetPageChecked(bvec->bv_page);
 			bvec++;
 			bio_index++;
 		}
+=======
+		bio_for_each_segment_all(bvec, cb->orig_bio, i)
+			SetPageChecked(bvec->bv_page);
+
+>>>>>>> v3.18
 =======
 		bio_for_each_segment_all(bvec, cb->orig_bio, i)
 			SetPageChecked(bvec->bv_page);
@@ -392,7 +421,11 @@ int btrfs_submit_compressed_write(struct inode *inode, u64 start,
 
 	bio = compressed_bio_alloc(bdev, first_byte, GFP_NOFS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!bio) {
+=======
+	if (!bio) {
+>>>>>>> v3.18
 =======
 	if (!bio) {
 >>>>>>> v3.18
@@ -409,7 +442,11 @@ int btrfs_submit_compressed_write(struct inode *inode, u64 start,
 		page = compressed_pages[pg_index];
 		page->mapping = inode->i_mapping;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bio->bi_size)
+=======
+		if (bio->bi_iter.bi_size)
+>>>>>>> v3.18
 =======
 		if (bio->bi_iter.bi_size)
 >>>>>>> v3.18
@@ -432,7 +469,12 @@ int btrfs_submit_compressed_write(struct inode *inode, u64 start,
 			 */
 			atomic_inc(&cb->pending_bios);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = btrfs_bio_wq_end_io(root->fs_info, bio, 0);
+=======
+			ret = btrfs_bio_wq_end_io(root->fs_info, bio,
+					BTRFS_WQ_ENDIO_DATA);
+>>>>>>> v3.18
 =======
 			ret = btrfs_bio_wq_end_io(root->fs_info, bio,
 					BTRFS_WQ_ENDIO_DATA);
@@ -458,7 +500,12 @@ int btrfs_submit_compressed_write(struct inode *inode, u64 start,
 		}
 		if (bytes_left < PAGE_CACHE_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("bytes left %lu compress len %lu nr %lu\n",
+=======
+			btrfs_info(BTRFS_I(inode)->root->fs_info,
+					"bytes left %lu compress len %lu nr %lu",
+>>>>>>> v3.18
 =======
 			btrfs_info(BTRFS_I(inode)->root->fs_info,
 					"bytes left %lu compress len %lu nr %lu",
@@ -472,7 +519,11 @@ int btrfs_submit_compressed_write(struct inode *inode, u64 start,
 	bio_get(bio);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = btrfs_bio_wq_end_io(root->fs_info, bio, 0);
+=======
+	ret = btrfs_bio_wq_end_io(root->fs_info, bio, BTRFS_WQ_ENDIO_DATA);
+>>>>>>> v3.18
 =======
 	ret = btrfs_bio_wq_end_io(root->fs_info, bio, BTRFS_WQ_ENDIO_DATA);
 >>>>>>> v3.18
@@ -528,7 +579,11 @@ static noinline int add_ra_bio_pages(struct inode *inode,
 		page = radix_tree_lookup(&mapping->page_tree, pg_index);
 		rcu_read_unlock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (page) {
+=======
+		if (page && !radix_tree_exceptional_entry(page)) {
+>>>>>>> v3.18
 =======
 		if (page && !radix_tree_exceptional_entry(page)) {
 >>>>>>> v3.18
@@ -565,7 +620,11 @@ static noinline int add_ra_bio_pages(struct inode *inode,
 		if (!em || last_offset < em->start ||
 		    (last_offset + PAGE_CACHE_SIZE > extent_map_end(em)) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (em->block_start >> 9) != cb->orig_bio->bi_sector) {
+=======
+		    (em->block_start >> 9) != cb->orig_bio->bi_iter.bi_sector) {
+>>>>>>> v3.18
 =======
 		    (em->block_start >> 9) != cb->orig_bio->bi_iter.bi_sector) {
 >>>>>>> v3.18
@@ -615,7 +674,11 @@ next:
  * to hold the compressed pages on disk.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * bio->bi_sector points to the compressed extent on disk
+=======
+ * bio->bi_iter.bi_sector points to the compressed extent on disk
+>>>>>>> v3.18
 =======
  * bio->bi_iter.bi_sector points to the compressed extent on disk
 >>>>>>> v3.18
@@ -640,7 +703,11 @@ int btrfs_submit_compressed_read(struct inode *inode, struct bio *bio,
 	struct block_device *bdev;
 	struct bio *comp_bio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 cur_disk_byte = (u64)bio->bi_sector << 9;
+=======
+	u64 cur_disk_byte = (u64)bio->bi_iter.bi_sector << 9;
+>>>>>>> v3.18
 =======
 	u64 cur_disk_byte = (u64)bio->bi_iter.bi_sector << 9;
 >>>>>>> v3.18
@@ -687,8 +754,12 @@ int btrfs_submit_compressed_read(struct inode *inode, struct bio *bio,
 	cb->orig_bio = bio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nr_pages = (compressed_len + PAGE_CACHE_SIZE - 1) /
 				 PAGE_CACHE_SIZE;
+=======
+	nr_pages = DIV_ROUND_UP(compressed_len, PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 =======
 	nr_pages = DIV_ROUND_UP(compressed_len, PAGE_CACHE_SIZE);
 >>>>>>> v3.18
@@ -712,13 +783,19 @@ int btrfs_submit_compressed_read(struct inode *inode, struct bio *bio,
 	cb->nr_pages = nr_pages;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	add_ra_bio_pages(inode, em_start + em_len, cb);
 =======
+=======
+>>>>>>> v3.18
 	/* In the parent-locked case, we only locked the range we are
 	 * interested in.  In all other cases, we can opportunistically
 	 * cache decompressed data that goes beyond the requested range. */
 	if (!(bio_flags & EXTENT_BIO_PARENT_LOCKED))
 		add_ra_bio_pages(inode, em_start + em_len, cb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* include any pages we added in add_ra-bio_pages */
@@ -738,7 +815,11 @@ int btrfs_submit_compressed_read(struct inode *inode, struct bio *bio,
 		page->index = em_start >> PAGE_CACHE_SHIFT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (comp_bio->bi_size)
+=======
+		if (comp_bio->bi_iter.bi_size)
+>>>>>>> v3.18
 =======
 		if (comp_bio->bi_iter.bi_size)
 >>>>>>> v3.18
@@ -754,7 +835,12 @@ int btrfs_submit_compressed_read(struct inode *inode, struct bio *bio,
 			bio_get(comp_bio);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = btrfs_bio_wq_end_io(root->fs_info, comp_bio, 0);
+=======
+			ret = btrfs_bio_wq_end_io(root->fs_info, comp_bio,
+					BTRFS_WQ_ENDIO_DATA);
+>>>>>>> v3.18
 =======
 			ret = btrfs_bio_wq_end_io(root->fs_info, comp_bio,
 					BTRFS_WQ_ENDIO_DATA);
@@ -775,8 +861,13 @@ int btrfs_submit_compressed_read(struct inode *inode, struct bio *bio,
 				BUG_ON(ret); /* -ENOMEM */
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sums += (comp_bio->bi_size + root->sectorsize - 1) /
 				root->sectorsize;
+=======
+			sums += DIV_ROUND_UP(comp_bio->bi_iter.bi_size,
+					     root->sectorsize);
+>>>>>>> v3.18
 =======
 			sums += DIV_ROUND_UP(comp_bio->bi_iter.bi_size,
 					     root->sectorsize);
@@ -802,7 +893,12 @@ int btrfs_submit_compressed_read(struct inode *inode, struct bio *bio,
 	bio_get(comp_bio);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = btrfs_bio_wq_end_io(root->fs_info, comp_bio, 0);
+=======
+	ret = btrfs_bio_wq_end_io(root->fs_info, comp_bio,
+			BTRFS_WQ_ENDIO_DATA);
+>>>>>>> v3.18
 =======
 	ret = btrfs_bio_wq_end_io(root->fs_info, comp_bio,
 			BTRFS_WQ_ENDIO_DATA);
@@ -920,7 +1016,11 @@ static void free_workspace(int type, struct list_head *workspace)
 	spin_lock(workspace_lock);
 	if (*num_workspace < num_online_cpus()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_add_tail(workspace, idle_workspace);
+=======
+		list_add(workspace, idle_workspace);
+>>>>>>> v3.18
 =======
 		list_add(workspace, idle_workspace);
 >>>>>>> v3.18
@@ -990,7 +1090,11 @@ int btrfs_compress_pages(int type, struct address_space *mapping,
 	workspace = find_workspace(type);
 	if (IS_ERR(workspace))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -1;
+=======
+		return PTR_ERR(workspace);
+>>>>>>> v3.18
 =======
 		return PTR_ERR(workspace);
 >>>>>>> v3.18
@@ -1030,7 +1134,11 @@ static int btrfs_decompress_biovec(int type, struct page **pages_in,
 	workspace = find_workspace(type);
 	if (IS_ERR(workspace))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
+=======
+		return PTR_ERR(workspace);
+>>>>>>> v3.18
 =======
 		return PTR_ERR(workspace);
 >>>>>>> v3.18
@@ -1056,7 +1164,11 @@ int btrfs_decompress(int type, unsigned char *data_in, struct page *dest_page,
 	workspace = find_workspace(type);
 	if (IS_ERR(workspace))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
+=======
+		return PTR_ERR(workspace);
+>>>>>>> v3.18
 =======
 		return PTR_ERR(workspace);
 >>>>>>> v3.18
@@ -1125,8 +1237,11 @@ int btrfs_decompress_buf2page(char *buf, unsigned long buf_start,
 		kaddr = kmap_atomic(page_out);
 		memcpy(kaddr + *pg_offset, buf + buf_offset, bytes);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (*pg_index == (vcnt - 1) && *pg_offset == 0)
 			memset(kaddr + bytes, 0, PAGE_CACHE_SIZE - bytes);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kunmap_atomic(kaddr);
@@ -1171,7 +1286,10 @@ int btrfs_decompress_buf2page(char *buf, unsigned long buf_start,
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * When uncompressing data, we need to make sure and zero any parts of
@@ -1203,4 +1321,7 @@ void btrfs_clear_biovec_end(struct bio_vec *bvec, int vcnt,
 		pg_offset = 0;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

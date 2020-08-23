@@ -20,7 +20,12 @@
 
 static int afs_readpage(struct file *file, struct page *page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void afs_invalidatepage(struct page *page, unsigned long offset);
+=======
+static void afs_invalidatepage(struct page *page, unsigned int offset,
+			       unsigned int length);
+>>>>>>> v3.18
 =======
 static void afs_invalidatepage(struct page *page, unsigned int offset,
 			       unsigned int length);
@@ -36,15 +41,21 @@ const struct file_operations afs_file_operations = {
 	.release	= afs_release,
 	.llseek		= generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.write		= do_sync_write,
 	.aio_read	= generic_file_aio_read,
 	.aio_write	= afs_file_write,
 =======
+=======
+>>>>>>> v3.18
 	.read		= new_sync_read,
 	.write		= new_sync_write,
 	.read_iter	= generic_file_read_iter,
 	.write_iter	= afs_file_write,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.mmap		= generic_file_readonly_mmap,
 	.splice_read	= generic_file_splice_read,
@@ -323,25 +334,35 @@ static int afs_launder_page(struct page *page)
  *   the entire page)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void afs_invalidatepage(struct page *page, unsigned long offset)
 {
 	struct afs_writeback *wb = (struct afs_writeback *) page_private(page);
 
 	_enter("{%lu},%lu", page->index, offset);
 =======
+=======
+>>>>>>> v3.18
 static void afs_invalidatepage(struct page *page, unsigned int offset,
 			       unsigned int length)
 {
 	struct afs_writeback *wb = (struct afs_writeback *) page_private(page);
 
 	_enter("{%lu},%u,%u", page->index, offset, length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	BUG_ON(!PageLocked(page));
 
 	/* we clean up only if the entire page is being invalidated */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (offset == 0) {
+=======
+	if (offset == 0 && length == PAGE_CACHE_SIZE) {
+>>>>>>> v3.18
 =======
 	if (offset == 0 && length == PAGE_CACHE_SIZE) {
 >>>>>>> v3.18

@@ -13,7 +13,11 @@ will stay locked up. Alternatively, the kernel can be configured to
 panic; a sysctl, "kernel.softlockup_panic", a kernel parameter,
 "softlockup_panic" (see "Documentation/kernel-parameters.txt" for
 <<<<<<< HEAD
+<<<<<<< HEAD
 details), and a compile option, "BOOTPARAM_HARDLOCKUP_PANIC", are
+=======
+details), and a compile option, "BOOTPARAM_SOFTLOCKUP_PANIC", are
+>>>>>>> v3.18
 =======
 details), and a compile option, "BOOTPARAM_SOFTLOCKUP_PANIC", are
 >>>>>>> v3.18

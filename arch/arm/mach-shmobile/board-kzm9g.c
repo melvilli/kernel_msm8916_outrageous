@@ -30,6 +30,10 @@
 #include <linux/mmc/sh_mmcif.h>
 #include <linux/mmc/sh_mobile_sdhi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mfd/as3711.h>
+>>>>>>> v3.18
 =======
 #include <linux/mfd/as3711.h>
 >>>>>>> v3.18
@@ -45,6 +49,7 @@
 #include <linux/usb/renesas_usbhs.h>
 #include <linux/videodev2.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sound/sh_fsi.h>
 #include <sound/simple_card.h>
 #include <mach/irqs.h>
@@ -55,11 +60,17 @@
 #include <sound/sh_fsi.h>
 #include <sound/simple_card.h>
 >>>>>>> v3.18
+=======
+
+#include <sound/sh_fsi.h>
+#include <sound/simple_card.h>
+>>>>>>> v3.18
 #include <asm/hardware/cache-l2x0.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <video/sh_mobile_lcdc.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * external GPIO
@@ -73,6 +84,8 @@
 #define GPIO_PCF8575_PORT15	(GPIO_NR + 13)
 #define GPIO_PCF8575_PORT16	(GPIO_NR + 14)
 =======
+=======
+>>>>>>> v3.18
 #include "common.h"
 #include "intc.h"
 #include "irqs.h"
@@ -89,6 +102,9 @@
 #define GPIO_PCF8575_PORT14	(GPIO_PCF8575_BASE + 12)
 #define GPIO_PCF8575_PORT15	(GPIO_PCF8575_BASE + 13)
 #define GPIO_PCF8575_PORT16	(GPIO_PCF8575_BASE + 14)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Dummy supplies, where voltage doesn't matter */
@@ -395,6 +411,10 @@ static struct sh_mmcif_plat_data sh_mmcif_platdata = {
 	.ocr		= MMC_VDD_165_195,
 	.caps		= MMC_CAP_8_BIT_DATA | MMC_CAP_NONREMOVABLE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ccs_unsupported = true,
+>>>>>>> v3.18
 =======
 	.ccs_unsupported = true,
 >>>>>>> v3.18
@@ -621,6 +641,7 @@ static struct asoc_simple_card_info fsi2_ak4648_info = {
 	.codec		= "ak4642-codec.0-0012",
 	.platform	= "sh_fsi2",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.daifmt		= SND_SOC_DAIFMT_LEFT_J,
 	.cpu_dai = {
 		.name	= "fsia-dai",
@@ -630,12 +651,17 @@ static struct asoc_simple_card_info fsi2_ak4648_info = {
 		.name	= "ak4642-hifi",
 		.fmt	= SND_SOC_DAIFMT_CBM_CFM,
 =======
+=======
+>>>>>>> v3.18
 	.daifmt		= SND_SOC_DAIFMT_LEFT_J | SND_SOC_DAIFMT_CBM_CFM,
 	.cpu_dai = {
 		.name	= "fsia-dai",
 	},
 	.codec_dai = {
 		.name	= "ak4642-hifi",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.sysclk	= 11289600,
 	},
@@ -646,6 +672,11 @@ static struct platform_device fsi_ak4648_device = {
 	.dev	= {
 		.platform_data	= &fsi2_ak4648_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.coherent_dma_mask = DMA_BIT_MASK(32),
+		.dma_mask = &fsi_ak4648_device.dev.coherent_dma_mask,
+>>>>>>> v3.18
 =======
 		.coherent_dma_mask = DMA_BIT_MASK(32),
 		.dma_mask = &fsi_ak4648_device.dev.coherent_dma_mask,
@@ -655,7 +686,10 @@ static struct platform_device fsi_ak4648_device = {
 
 /* I2C */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* StepDown1 is used to supply 1.315V to the CPU */
 static struct regulator_init_data as3711_sd1 = {
@@ -790,6 +824,9 @@ static struct as3711_platform_data as3711_pdata = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct pcf857x_platform_data pcf8575_pdata = {
 	.gpio_base	= GPIO_PCF8575_BASE,
@@ -811,12 +848,18 @@ static struct i2c_board_info i2c0_devices[] = {
 		.irq = irq_pin(26), /* IRQ26 */
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		I2C_BOARD_INFO("as3711", 0x40),
 		.irq = intcs_evt2irq(0x3300), /* IRQ24 */
 		.platform_data = &as3711_pdata,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -857,6 +900,7 @@ static unsigned long pin_pullup_conf[] = {
 static const struct pinctrl_map kzm_pinctrl_map[] = {
 	/* FSIA (AK4648) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2.0", "pfc-sh73a0",
 				  "fsia_mclk_in", "fsia"),
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2.0", "pfc-sh73a0",
@@ -865,6 +909,8 @@ static const struct pinctrl_map kzm_pinctrl_map[] = {
 				  "fsia_data_in", "fsia"),
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2.0", "pfc-sh73a0",
 =======
+=======
+>>>>>>> v3.18
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2", "pfc-sh73a0",
 				  "fsia_mclk_in", "fsia"),
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2", "pfc-sh73a0",
@@ -872,6 +918,9 @@ static const struct pinctrl_map kzm_pinctrl_map[] = {
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2", "pfc-sh73a0",
 				  "fsia_data_in", "fsia"),
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_fsi2", "pfc-sh73a0",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  "fsia_data_out", "fsia"),
 	/* I2C3 */
@@ -918,6 +967,7 @@ static const struct pinctrl_map kzm_pinctrl_map[] = {
 				  "usb_vbus", "usb"),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * FIXME
@@ -974,6 +1024,8 @@ device_initcall(as3711_enable_lcdc_backlight);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void __init kzm_init(void)
 {
 	regulator_register_always_on(2, "fixed-1.8V", fixed1v8_power_consumers,
@@ -995,12 +1047,18 @@ static void __init kzm_init(void)
 	gpio_request_one(223, GPIOF_IN, NULL); /* IRQ8 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable SD */
 	gpio_request(GPIO_FN_SDHI0_VCCQ_MC0_ON,	NULL);
 
 #ifdef CONFIG_CACHE_L2X0
 	/* Early BRESP enable, Shared attribute override enable, 64K*8way */
 	l2x0_init(IOMEM(0xf0100000), 0x40460000, 0x82000fff);
+=======
+#ifdef CONFIG_CACHE_L2X0
+	/* Shared attribute override enable, 64K*8way */
+	l2x0_init(IOMEM(0xf0100000), 0x00400000, 0xc20f0fff);
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_CACHE_L2X0
 	/* Shared attribute override enable, 64K*8way */
@@ -1035,7 +1093,10 @@ DT_MACHINE_START(KZM9G_DT, "kzm9g")
 	.map_io		= sh73a0_map_io,
 	.init_early	= sh73a0_add_early_devices,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.nr_irqs	= NR_IRQS_LEGACY,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_irq	= sh73a0_init_irq,

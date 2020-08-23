@@ -54,7 +54,11 @@
 
 /* Devices we match on for LED config info (typically laptops) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ath5k_led_devices) = {
+=======
+static const struct pci_device_id ath5k_led_devices[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ath5k_led_devices[] = {
 >>>>>>> v3.18
@@ -82,7 +86,11 @@ static const struct pci_device_id ath5k_led_devices[] = {
 	{ ATH_SDEVICE(PCI_VENDOR_ID_HP, 0x0137a), ATH_LED(3, 1) },
 	/* HP Compaq C700 (nitrousnrg@gmail.com) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ ATH_SDEVICE(PCI_VENDOR_ID_HP, 0x0137b), ATH_LED(3, 0) },
+=======
+	{ ATH_SDEVICE(PCI_VENDOR_ID_HP, 0x0137b), ATH_LED(3, 1) },
+>>>>>>> v3.18
 =======
 	{ ATH_SDEVICE(PCI_VENDOR_ID_HP, 0x0137b), ATH_LED(3, 1) },
 >>>>>>> v3.18
@@ -139,6 +147,10 @@ ath5k_register_led(struct ath5k_hw *ah, struct ath5k_led *led,
 	led->ah = ah;
 	strncpy(led->name, name, sizeof(led->name));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	led->name[sizeof(led->name)-1] = 0;
+>>>>>>> v3.18
 =======
 	led->name[sizeof(led->name)-1] = 0;
 >>>>>>> v3.18
@@ -175,9 +187,13 @@ int ath5k_init_leds(struct ath5k_hw *ah)
 	int ret = 0;
 	struct ieee80211_hw *hw = ah->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_ATHEROS_AR231X
 	struct pci_dev *pdev = ah->pdev;
 #endif
+=======
+	struct pci_dev *pdev = ah->pdev;
+>>>>>>> v3.18
 =======
 	struct pci_dev *pdev = ah->pdev;
 >>>>>>> v3.18
@@ -188,11 +204,15 @@ int ath5k_init_leds(struct ath5k_hw *ah)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ATHEROS_AR231X
 	match = NULL;
 #else
 	match = pci_match_id(&ath5k_led_devices[0], pdev);
 #endif
+=======
+	match = pci_match_id(&ath5k_led_devices[0], pdev);
+>>>>>>> v3.18
 =======
 	match = pci_match_id(&ath5k_led_devices[0], pdev);
 >>>>>>> v3.18

@@ -24,15 +24,21 @@ struct i2c_client;
 struct irq_domain;
 struct spi_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct regmap;
 struct regmap_range_cfg;
 struct regmap_field;
 struct swr_device;
 =======
+=======
+>>>>>>> v3.18
 struct spmi_device;
 struct regmap;
 struct regmap_range_cfg;
 struct regmap_field;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* An enum of all the supported cache types */
@@ -79,6 +85,11 @@ struct regmap_range {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define regmap_reg_range(low, high) { .range_min = low, .range_max = high, }
+
+>>>>>>> v3.18
 =======
 #define regmap_reg_range(low, high) { .range_min = low, .range_max = high, }
 
@@ -133,9 +144,15 @@ typedef void (*regmap_unlock)(void *);
  *                such table (a register is volatile if it belongs to one of
  *                the ranges specified by volatile_table).
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @precious_reg: Optional callback returning true if the rgister
  *		  should not be read outside of a call from the driver
  *		  (eg, a clear on read interrupt status register). If this
+=======
+ * @precious_reg: Optional callback returning true if the register
+ *		  should not be read outside of a call from the driver
+ *		  (e.g., a clear on read interrupt status register). If this
+>>>>>>> v3.18
 =======
  * @precious_reg: Optional callback returning true if the register
  *		  should not be read outside of a call from the driver
@@ -153,9 +170,15 @@ typedef void (*regmap_unlock)(void *);
  * @reg_read:	  Optional callback that if filled will be used to perform
  *           	  all the reads from the registers. Should only be provided for
 <<<<<<< HEAD
+<<<<<<< HEAD
  *		  devices whos read operation cannot be represented as a simple read
  *		  operation on a bus such as SPI, I2C, etc. Most of the devices do
  * 		  not need this.
+=======
+ *		  devices whose read operation cannot be represented as a simple
+ *		  read operation on a bus such as SPI, I2C, etc. Most of the
+ *		  devices do not need this.
+>>>>>>> v3.18
 =======
  *		  devices whose read operation cannot be represented as a simple
  *		  read operation on a bus such as SPI, I2C, etc. Most of the
@@ -190,6 +213,10 @@ typedef void (*regmap_unlock)(void *);
  *                   write operations, if clear multi write requests will be
  *                   split into individual write operations
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+>>>>>>> v3.18
 =======
  *
 >>>>>>> v3.18
@@ -245,6 +272,10 @@ struct regmap_config {
 	bool use_single_rw;
 	bool can_multi_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -305,11 +336,17 @@ typedef int (*regmap_hw_read)(void *context,
 			      const void *reg_buf, size_t reg_size,
 			      void *val_buf, size_t val_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef int (*regmap_hw_reg_read)(void *context, unsigned int reg,
 				  unsigned int *val);
 typedef int (*regmap_hw_reg_write)(void *context, unsigned int reg,
 				   unsigned int val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef struct regmap_async *(*regmap_hw_async_alloc)(void);
 typedef void (*regmap_hw_free_context)(void *context);
@@ -345,7 +382,13 @@ struct regmap_bus {
 	regmap_hw_gather_write gather_write;
 	regmap_hw_async_write async_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regmap_hw_read read;
+=======
+	regmap_hw_reg_write reg_write;
+	regmap_hw_read read;
+	regmap_hw_reg_read reg_read;
+>>>>>>> v3.18
 =======
 	regmap_hw_reg_write reg_write;
 	regmap_hw_read read;
@@ -363,6 +406,11 @@ struct regmap *regmap_init(struct device *dev,
 			   void *bus_context,
 			   const struct regmap_config *config);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int regmap_attach_dev(struct device *dev, struct regmap *map,
+				 const struct regmap_config *config);
+>>>>>>> v3.18
 =======
 int regmap_attach_dev(struct device *dev, struct regmap *map,
 				 const struct regmap_config *config);
@@ -372,12 +420,15 @@ struct regmap *regmap_init_i2c(struct i2c_client *i2c,
 struct regmap *regmap_init_spi(struct spi_device *dev,
 			       const struct regmap_config *config);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct regmap *regmap_init_mmio_clk(struct device *dev, const char *clk_id,
 				    void __iomem *regs,
 				    const struct regmap_config *config);
 struct regmap *regmap_init_swr(struct swr_device *dev,
 			       const struct regmap_config *config);
 =======
+=======
+>>>>>>> v3.18
 struct regmap *regmap_init_spmi_base(struct spmi_device *dev,
 				     const struct regmap_config *config);
 struct regmap *regmap_init_spmi_ext(struct spmi_device *dev,
@@ -385,6 +436,9 @@ struct regmap *regmap_init_spmi_ext(struct spmi_device *dev,
 struct regmap *regmap_init_mmio_clk(struct device *dev, const char *clk_id,
 				    void __iomem *regs,
 				    const struct regmap_config *config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct regmap *devm_regmap_init(struct device *dev,
@@ -396,12 +450,15 @@ struct regmap *devm_regmap_init_i2c(struct i2c_client *i2c,
 struct regmap *devm_regmap_init_spi(struct spi_device *dev,
 				    const struct regmap_config *config);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct regmap *devm_regmap_init_mmio_clk(struct device *dev, const char *clk_id,
 					 void __iomem *regs,
 					 const struct regmap_config *config);
 struct regmap *devm_regmap_init_swr(struct swr_device *dev,
 				    const struct regmap_config *config);
 =======
+=======
+>>>>>>> v3.18
 struct regmap *devm_regmap_init_spmi_base(struct spmi_device *dev,
 					  const struct regmap_config *config);
 struct regmap *devm_regmap_init_spmi_ext(struct spmi_device *dev,
@@ -409,6 +466,9 @@ struct regmap *devm_regmap_init_spmi_ext(struct spmi_device *dev,
 struct regmap *devm_regmap_init_mmio_clk(struct device *dev, const char *clk_id,
 					 void __iomem *regs,
 					 const struct regmap_config *config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -451,7 +511,13 @@ int regmap_reinit_cache(struct regmap *map,
 			const struct regmap_config *config);
 struct regmap *dev_get_regmap(struct device *dev, const char *name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int regmap_write(struct regmap *map, unsigned int reg, unsigned int val);
+=======
+struct device *regmap_get_device(struct regmap *map);
+int regmap_write(struct regmap *map, unsigned int reg, unsigned int val);
+int regmap_write_async(struct regmap *map, unsigned int reg, unsigned int val);
+>>>>>>> v3.18
 =======
 struct device *regmap_get_device(struct regmap *map);
 int regmap_write(struct regmap *map, unsigned int reg, unsigned int val);
@@ -476,10 +542,13 @@ int regmap_bulk_read(struct regmap *map, unsigned int reg, void *val,
 int regmap_update_bits(struct regmap *map, unsigned int reg,
 		       unsigned int mask, unsigned int val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int regmap_update_bits_check(struct regmap *map, unsigned int reg,
 			     unsigned int mask, unsigned int val,
 			     bool *change);
 =======
+=======
+>>>>>>> v3.18
 int regmap_update_bits_async(struct regmap *map, unsigned int reg,
 			     unsigned int mask, unsigned int val);
 int regmap_update_bits_check(struct regmap *map, unsigned int reg,
@@ -488,6 +557,9 @@ int regmap_update_bits_check(struct regmap *map, unsigned int reg,
 int regmap_update_bits_check_async(struct regmap *map, unsigned int reg,
 				   unsigned int mask, unsigned int val,
 				   bool *change);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int regmap_get_val_bytes(struct regmap *map);
 int regmap_async_complete(struct regmap *map);
@@ -497,6 +569,11 @@ int regcache_sync(struct regmap *map);
 int regcache_sync_region(struct regmap *map, unsigned int min,
 			 unsigned int max);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int regcache_drop_region(struct regmap *map, unsigned int min,
+			 unsigned int max);
+>>>>>>> v3.18
 =======
 int regcache_drop_region(struct regmap *map, unsigned int min,
 			 unsigned int max);
@@ -506,9 +583,12 @@ void regcache_cache_bypass(struct regmap *map, bool enable);
 void regcache_mark_dirty(struct regmap *map);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int regmap_register_patch(struct regmap *map, const struct reg_default *regs,
 			  int num_regs);
 =======
+=======
+>>>>>>> v3.18
 bool regmap_check_range_table(struct regmap *map, unsigned int reg,
 			      const struct regmap_access_table *table);
 
@@ -516,6 +596,9 @@ int regmap_register_patch(struct regmap *map, const struct reg_default *regs,
 			  int num_regs);
 int regmap_parse_val(struct regmap *map, const void *buf,
 				unsigned int *val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline bool regmap_reg_in_range(unsigned int reg,
@@ -530,7 +613,10 @@ bool regmap_reg_in_ranges(unsigned int reg,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Description of an register field
  *
  * @reg: Offset of the register within the regmap bank
@@ -574,6 +660,9 @@ int regmap_fields_update_bits(struct regmap_field *field,  unsigned int id,
 			      unsigned int mask, unsigned int val);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Description of an IRQ for the generic regmap irq_chip.
  *
@@ -595,10 +684,13 @@ struct regmap_irq {
  * @status_base: Base status register address.
  * @mask_base:   Base mask register address.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ack_base:    Base ack address.  If zero then the chip is clear on read.
  * @wake_base:   Base address for wake enables.  If zero unsupported.
  * @irq_reg_stride:  Stride to use for chips where registers are not contiguous.
 =======
+=======
+>>>>>>> v3.18
  * @ack_base:    Base ack address. If zero then the chip is clear on read.
  *               Using zero value is possible with @use_ack bit.
  * @wake_base:   Base address for wake enables.  If zero unsupported.
@@ -607,6 +699,9 @@ struct regmap_irq {
  * @mask_invert: Inverted mask register: cleared bits are masked out.
  * @use_ack:     Use @ack register even if it is zero.
  * @wake_invert: Inverted wake register: cleared bits are wake enabled.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @runtime_pm:  Hold a runtime PM lock on the device when accessing it.
  *
@@ -624,15 +719,21 @@ struct regmap_irq_chip {
 	unsigned int wake_base;
 	unsigned int irq_reg_stride;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int mask_invert;
 	unsigned int wake_invert;
 	bool runtime_pm;
 =======
+=======
+>>>>>>> v3.18
 	bool init_ack_masked:1;
 	bool mask_invert:1;
 	bool use_ack:1;
 	bool wake_invert:1;
 	bool runtime_pm:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int num_regs;
@@ -668,7 +769,10 @@ static inline int regmap_write(struct regmap *map, unsigned int reg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int regmap_write_async(struct regmap *map, unsigned int reg,
 				     unsigned int val)
 {
@@ -676,6 +780,9 @@ static inline int regmap_write_async(struct regmap *map, unsigned int reg,
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int regmap_raw_write(struct regmap *map, unsigned int reg,
 				   const void *val, size_t val_len)
@@ -727,7 +834,10 @@ static inline int regmap_update_bits(struct regmap *map, unsigned int reg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int regmap_update_bits_async(struct regmap *map,
 					   unsigned int reg,
 					   unsigned int mask, unsigned int val)
@@ -736,6 +846,9 @@ static inline int regmap_update_bits_async(struct regmap *map,
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int regmap_update_bits_check(struct regmap *map,
 					   unsigned int reg,
@@ -747,7 +860,10 @@ static inline int regmap_update_bits_check(struct regmap *map,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int regmap_update_bits_check_async(struct regmap *map,
 						 unsigned int reg,
 						 unsigned int mask,
@@ -758,6 +874,9 @@ static inline int regmap_update_bits_check_async(struct regmap *map,
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int regmap_get_val_bytes(struct regmap *map)
 {
@@ -779,7 +898,10 @@ static inline int regcache_sync_region(struct regmap *map, unsigned int min,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int regcache_drop_region(struct regmap *map, unsigned int min,
 				       unsigned int max)
 {
@@ -787,6 +909,9 @@ static inline int regcache_drop_region(struct regmap *map, unsigned int min,
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void regcache_cache_only(struct regmap *map, bool enable)
 {
@@ -817,7 +942,10 @@ static inline int regmap_register_patch(struct regmap *map,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int regmap_parse_val(struct regmap *map, const void *buf,
 				unsigned int *val)
 {
@@ -825,6 +953,9 @@ static inline int regmap_parse_val(struct regmap *map, const void *buf,
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct regmap *dev_get_regmap(struct device *dev,
 					    const char *name)
@@ -833,13 +964,19 @@ static inline struct regmap *dev_get_regmap(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct device *regmap_get_device(struct regmap *map)
 {
 	WARN_ONCE(1, "regmap API is disabled");
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

@@ -7,6 +7,7 @@
  *	    Sebastian Andrzej Siewior <bigeasy@linutronix.de>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -36,6 +37,8 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 =======
+=======
+>>>>>>> v3.18
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2  of
  * the License as published by the Free Software Foundation.
@@ -44,6 +47,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -60,7 +66,11 @@ struct dwc3;
 
 /* DEPCFG parameter 1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DWC3_DEPCFG_INT_NUM(n)		(((n) & 0x1f) << 0)
+=======
+#define DWC3_DEPCFG_INT_NUM(n)		((n) << 0)
+>>>>>>> v3.18
 =======
 #define DWC3_DEPCFG_INT_NUM(n)		((n) << 0)
 >>>>>>> v3.18
@@ -70,9 +80,15 @@ struct dwc3;
 #define DWC3_DEPCFG_FIFO_ERROR_EN	(1 << 11)
 #define DWC3_DEPCFG_STREAM_EVENT_EN	(1 << 13)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DWC3_DEPCFG_BINTERVAL_M1(n)	(((n) & 0xff) << 16)
 #define DWC3_DEPCFG_STREAM_CAPABLE	(1 << 24)
 #define DWC3_DEPCFG_EP_NUMBER(n)	(((n) & 0x1f) << 25)
+=======
+#define DWC3_DEPCFG_BINTERVAL_M1(n)	((n) << 16)
+#define DWC3_DEPCFG_STREAM_CAPABLE	(1 << 24)
+#define DWC3_DEPCFG_EP_NUMBER(n)	((n) << 25)
+>>>>>>> v3.18
 =======
 #define DWC3_DEPCFG_BINTERVAL_M1(n)	((n) << 16)
 #define DWC3_DEPCFG_STREAM_CAPABLE	(1 << 24)
@@ -83,15 +99,21 @@ struct dwc3;
 
 /* DEPCFG parameter 0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DWC3_DEPCFG_EP_TYPE(n)		(((n) & 0x3) << 1)
 #define DWC3_DEPCFG_MAX_PACKET_SIZE(n)	(((n) & 0x7ff) << 3)
 #define DWC3_DEPCFG_FIFO_NUMBER(n)	(((n) & 0x1f) << 17)
 #define DWC3_DEPCFG_BURST_SIZE(n)	(((n) & 0xf) << 22)
 =======
+=======
+>>>>>>> v3.18
 #define DWC3_DEPCFG_EP_TYPE(n)		((n) << 1)
 #define DWC3_DEPCFG_MAX_PACKET_SIZE(n)	((n) << 3)
 #define DWC3_DEPCFG_FIFO_NUMBER(n)	((n) << 17)
 #define DWC3_DEPCFG_BURST_SIZE(n)	((n) << 22)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DWC3_DEPCFG_DATA_SEQ_NUM(n)	((n) << 26)
 /* This applies for core versions earlier than 1.94a */
@@ -105,12 +127,15 @@ struct dwc3;
 #define DWC3_DEPXFERCFG_NUM_XFER_RES(n)	((n) & 0xffff)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dwc3_gadget_ep_cmd_params {
 	u32	param2;
 	u32	param1;
 	u32	param0;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* -------------------------------------------------------------------------- */
@@ -126,6 +151,7 @@ static inline struct dwc3_request *next_request(struct list_head *list)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void dwc3_gadget_move_request_list_front(struct dwc3_request *req)
 {
 	struct dwc3_ep		*dep = req->dep;
@@ -134,6 +160,8 @@ static inline void dwc3_gadget_move_request_list_front(struct dwc3_request *req)
 	list_move(&req->list, &dep->request_list);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void dwc3_gadget_move_request_queued(struct dwc3_request *req)
@@ -148,6 +176,7 @@ void dwc3_gadget_giveback(struct dwc3_ep *dep, struct dwc3_request *req,
 		int status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dwc3_gadget_set_test_mode(struct dwc3 *dwc, int mode);
 int dwc3_gadget_set_link_state(struct dwc3 *dwc, enum dwc3_link_state state);
 
@@ -155,21 +184,29 @@ void dwc3_ep0_interrupt(struct dwc3 *dwc,
 		const struct dwc3_event_depevt *event);
 void dwc3_ep0_out_start(struct dwc3 *dwc);
 =======
+=======
+>>>>>>> v3.18
 void dwc3_ep0_interrupt(struct dwc3 *dwc,
 		const struct dwc3_event_depevt *event);
 void dwc3_ep0_out_start(struct dwc3 *dwc);
 int __dwc3_gadget_ep0_set_halt(struct usb_ep *ep, int value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int dwc3_gadget_ep0_set_halt(struct usb_ep *ep, int value);
 int dwc3_gadget_ep0_queue(struct usb_ep *ep, struct usb_request *request,
 		gfp_t gfp_flags);
 int __dwc3_gadget_ep_set_halt(struct dwc3_ep *dep, int value, int protocol);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dwc3_send_gadget_ep_cmd(struct dwc3 *dwc, unsigned ep,
 		unsigned cmd, struct dwc3_gadget_ep_cmd_params *params);
 int dwc3_send_gadget_generic_command(struct dwc3 *dwc, int cmd, u32 param);
 dma_addr_t dwc3_trb_dma_offset(struct dwc3_ep *dep,
 		struct dwc3_trb *trb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -189,6 +226,7 @@ static inline u32 dwc3_gadget_ep_get_transfer_index(struct dwc3 *dwc, u8 number)
 	return DWC3_DEPCMD_GET_RSC_IDX(res_id);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * dwc3_gadget_event_string - returns event name
@@ -246,6 +284,8 @@ static inline const char *dwc3_ep_event_string(u8 event)
 	return "UNKNOWN";
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __DRIVERS_USB_DWC3_GADGET_H */

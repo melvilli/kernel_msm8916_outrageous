@@ -17,12 +17,18 @@
 struct platform_device;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* FSL PCI controller BRR1 register */
 #define PCI_FSL_BRR1      0xbf8
 #define PCI_FSL_BRR1_VER 0xffff
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PCIE_LTSSM	0x0404		/* PCIE Link Training and Status */
 #define PCIE_LTSSM_L0	0x16		/* L0 state */
@@ -36,7 +42,10 @@ struct platform_device;
 #define PIWAR_SZ_MASK          0x0000003f
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PEX_PMCR_PTOMR		0x1
 #define PEX_PMCR_EXL2S		0x2
 
@@ -44,6 +53,9 @@ struct platform_device;
 #define PME_DISR_EN_ENL23D	0x00002000
 #define PME_DISR_EN_EXL23D	0x00001000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* PCI/PCI Express outbound window reg */
 struct pci_outbound_window_regs {
@@ -125,6 +137,10 @@ struct ccsr_pci {
 extern int fsl_add_bridge(struct platform_device *pdev, int is_primary);
 extern void fsl_pcibios_fixup_bus(struct pci_bus *bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void fsl_pcibios_fixup_phb(struct pci_controller *phb);
+>>>>>>> v3.18
 =======
 extern void fsl_pcibios_fixup_phb(struct pci_controller *phb);
 >>>>>>> v3.18
@@ -149,13 +165,19 @@ static inline int mpc85xx_pci_err_probe(struct platform_device *op)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_FSL_PCI
 extern int fsl_pci_mcheck_exception(struct pt_regs *);
 #else
 static inline int fsl_pci_mcheck_exception(struct pt_regs *regs) {return 0; }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __POWERPC_FSL_PCI_H */
 #endif /* __KERNEL__ */

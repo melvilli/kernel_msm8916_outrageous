@@ -242,7 +242,11 @@ int hwspinlock_example2(void)
      Should be called from a process context (this function might sleep).
      Returns the address of hwspinlock on success, or NULL on error (e.g.
 <<<<<<< HEAD
+<<<<<<< HEAD
      if the hwspinlock is sill in use).
+=======
+     if the hwspinlock is still in use).
+>>>>>>> v3.18
 =======
      if the hwspinlock is still in use).
 >>>>>>> v3.18

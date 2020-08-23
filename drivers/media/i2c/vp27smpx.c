@@ -30,7 +30,10 @@
 #include <linux/videodev2.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -116,6 +119,7 @@ static int vp27smpx_g_tuner(struct v4l2_subdev *sd, struct v4l2_tuner *vt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vp27smpx_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -123,6 +127,8 @@ static int vp27smpx_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_id
 	return v4l2_chip_ident_i2c_client(client, chip, V4L2_IDENT_VP27SMPX, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int vp27smpx_log_status(struct v4l2_subdev *sd)
@@ -139,8 +145,11 @@ static int vp27smpx_log_status(struct v4l2_subdev *sd)
 static const struct v4l2_subdev_core_ops vp27smpx_core_ops = {
 	.log_status = vp27smpx_log_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = vp27smpx_g_chip_ident,
 	.s_std = vp27smpx_s_std,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -152,10 +161,13 @@ static const struct v4l2_subdev_tuner_ops vp27smpx_tuner_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct v4l2_subdev_ops vp27smpx_ops = {
 	.core = &vp27smpx_core_ops,
 	.tuner = &vp27smpx_tuner_ops,
 =======
+=======
+>>>>>>> v3.18
 static const struct v4l2_subdev_video_ops vp27smpx_video_ops = {
 	.s_std = vp27smpx_s_std,
 };
@@ -164,6 +176,9 @@ static const struct v4l2_subdev_ops vp27smpx_ops = {
 	.core = &vp27smpx_core_ops,
 	.tuner = &vp27smpx_tuner_ops,
 	.video = &vp27smpx_video_ops,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -190,7 +205,11 @@ static int vp27smpx_probe(struct i2c_client *client,
 			client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state = kzalloc(sizeof(struct vp27smpx_state), GFP_KERNEL);
+=======
+	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
 >>>>>>> v3.18
@@ -211,7 +230,10 @@ static int vp27smpx_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(to_state(sd));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

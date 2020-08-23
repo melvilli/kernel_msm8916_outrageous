@@ -27,8 +27,14 @@
 #include <sys/wait.h>
 #include <sys/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sys/poll.h>
 #include <limits.h>
+=======
+#include <poll.h>
+#include <limits.h>
+#include <err.h>
+>>>>>>> v3.18
 =======
 #include <poll.h>
 #include <limits.h>
@@ -57,12 +63,15 @@ struct receiver_context {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void barf(const char *msg)
 {
 	fprintf(stderr, "%s (error: %s)\n", msg, strerror(errno));
 	exit(1);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void fdpair(int fds[2])
@@ -76,7 +85,11 @@ static void fdpair(int fds[2])
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	barf(use_pipes ? "pipe()" : "socketpair()");
+=======
+	err(EXIT_FAILURE, use_pipes ? "pipe()" : "socketpair()");
+>>>>>>> v3.18
 =======
 	err(EXIT_FAILURE, use_pipes ? "pipe()" : "socketpair()");
 >>>>>>> v3.18
@@ -91,17 +104,23 @@ static void ready(int ready_out, int wakefd)
 	/* Tell them we're ready. */
 	if (write(ready_out, &dummy, 1) != 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		barf("CLIENT: ready write");
 
 	/* Wait for "GO" signal */
 	if (poll(&pollfd, 1, -1) != 1)
 		barf("poll");
 =======
+=======
+>>>>>>> v3.18
 		err(EXIT_FAILURE, "CLIENT: ready write");
 
 	/* Wait for "GO" signal */
 	if (poll(&pollfd, 1, -1) != 1)
 		err(EXIT_FAILURE, "poll");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -123,7 +142,11 @@ again:
 				    sizeof(data)-done);
 			if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				barf("SENDER: write");
+=======
+				err(EXIT_FAILURE, "SENDER: write");
+>>>>>>> v3.18
 =======
 				err(EXIT_FAILURE, "SENDER: write");
 >>>>>>> v3.18
@@ -157,7 +180,11 @@ again:
 		ret = read(ctx->in_fds[0], data + done, DATASIZE - done);
 		if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			barf("SERVER: read");
+=======
+			err(EXIT_FAILURE, "SERVER: read");
+>>>>>>> v3.18
 =======
 			err(EXIT_FAILURE, "SERVER: read");
 >>>>>>> v3.18
@@ -174,7 +201,11 @@ static pthread_t create_worker(void *ctx, void *(*func)(void *))
 	pthread_attr_t attr;
 	pthread_t childid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -185,7 +216,11 @@ static pthread_t create_worker(void *ctx, void *(*func)(void *))
 		switch (fork()) {
 		case -1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			barf("fork()");
+=======
+			err(EXIT_FAILURE, "fork()");
+>>>>>>> v3.18
 =======
 			err(EXIT_FAILURE, "fork()");
 >>>>>>> v3.18
@@ -203,6 +238,7 @@ static pthread_t create_worker(void *ctx, void *(*func)(void *))
 
 	if (pthread_attr_init(&attr) != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		barf("pthread_attr_init:");
 
 #ifndef __ia64__
@@ -217,6 +253,8 @@ static pthread_t create_worker(void *ctx, void *(*func)(void *))
 		exit(-1);
 	}
 =======
+=======
+>>>>>>> v3.18
 		err(EXIT_FAILURE, "pthread_attr_init:");
 
 #ifndef __ia64__
@@ -228,6 +266,9 @@ static pthread_t create_worker(void *ctx, void *(*func)(void *))
 	if (ret != 0)
 		err(EXIT_FAILURE, "pthread_create failed");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return childid;
 }
@@ -259,7 +300,11 @@ static unsigned int group(pthread_t *pth,
 
 	if (!snd_ctx)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		barf("malloc()");
+=======
+		err(EXIT_FAILURE, "malloc()");
+>>>>>>> v3.18
 =======
 		err(EXIT_FAILURE, "malloc()");
 >>>>>>> v3.18
@@ -270,7 +315,11 @@ static unsigned int group(pthread_t *pth,
 
 		if (!ctx)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			barf("malloc()");
+=======
+			err(EXIT_FAILURE, "malloc()");
+>>>>>>> v3.18
 =======
 			err(EXIT_FAILURE, "malloc()");
 >>>>>>> v3.18
@@ -341,7 +390,11 @@ int bench_sched_messaging(int argc, const char **argv,
 	pth_tab = malloc(num_fds * 2 * num_groups * sizeof(pthread_t));
 	if (!pth_tab)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		barf("main:malloc()");
+=======
+		err(EXIT_FAILURE, "main:malloc()");
+>>>>>>> v3.18
 =======
 		err(EXIT_FAILURE, "main:malloc()");
 >>>>>>> v3.18
@@ -358,7 +411,11 @@ int bench_sched_messaging(int argc, const char **argv,
 	for (i = 0; i < total_children; i++)
 		if (read(readyfds[0], &dummy, 1) != 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			barf("Reading for readyfds");
+=======
+			err(EXIT_FAILURE, "Reading for readyfds");
+>>>>>>> v3.18
 =======
 			err(EXIT_FAILURE, "Reading for readyfds");
 >>>>>>> v3.18
@@ -368,7 +425,11 @@ int bench_sched_messaging(int argc, const char **argv,
 	/* Kick them off */
 	if (write(wakefds[1], &dummy, 1) != 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		barf("Writing to start them");
+=======
+		err(EXIT_FAILURE, "Writing to start them");
+>>>>>>> v3.18
 =======
 		err(EXIT_FAILURE, "Writing to start them");
 >>>>>>> v3.18
@@ -404,6 +465,11 @@ int bench_sched_messaging(int argc, const char **argv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	free(pth_tab);
+
+>>>>>>> v3.18
 =======
 	free(pth_tab);
 

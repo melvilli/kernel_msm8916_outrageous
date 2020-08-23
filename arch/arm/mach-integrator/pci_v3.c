@@ -28,12 +28,15 @@
 #include <linux/init.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/hardware.h>
 #include <mach/platform.h>
 #include <mach/irqs.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/of.h>
 #include <linux/of_address.h>
@@ -42,14 +45,20 @@
 #include <video/vga.h>
 
 #include <asm/mach/map.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/signal.h>
 #include <asm/mach/pci.h>
 #include <asm/irq_regs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/hardware/pci_v3.h>
 =======
+=======
+>>>>>>> v3.18
 #include "pci_v3.h"
 #include "hardware.h"
 
@@ -228,6 +237,9 @@
 #define V3_LB_MAP2_MAP_ADR		0xff00
 
 #define v3_addr_to_lb_map2(a)	(((a) >> 16) & V3_LB_MAP2_MAP_ADR)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -294,6 +306,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // V3 access routines
 #define v3_writeb(o,v) __raw_writeb(v, PCI_V3_VADDR + (unsigned int)(o))
 #define v3_readb(o)    (__raw_readb(PCI_V3_VADDR + (unsigned int)(o)))
@@ -304,6 +317,8 @@
 #define v3_writel(o,v) __raw_writel(v, PCI_V3_VADDR + (unsigned int)(o))
 #define v3_readl(o)    (__raw_readl(PCI_V3_VADDR + (unsigned int)(o)))
 =======
+=======
+>>>>>>> v3.18
 /* Filled in by probe */
 static void __iomem *pci_v3_base;
 /* CPU side memory ranges */
@@ -326,6 +341,9 @@ static u64 pre_mem_pci_sz;
 
 #define v3_writel(o,v) __raw_writel(v, pci_v3_base + (unsigned int)(o))
 #define v3_readl(o)    (__raw_readl(pci_v3_base + (unsigned int)(o)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*============================================================================
@@ -383,6 +401,7 @@ static u64 pre_mem_pci_sz;
 static DEFINE_RAW_SPINLOCK(v3_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_BUS_NONMEM_START	0x00000000
 #define PCI_BUS_NONMEM_SIZE	SZ_256M
 
@@ -396,6 +415,8 @@ static DEFINE_RAW_SPINLOCK(v3_lock);
 #error PCI_BUS_PREMEM_START must be megabyte aligned
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #undef V3_LB_BASE_PREFETCH
@@ -464,7 +485,11 @@ static void __iomem *v3_open_config_window(struct pci_bus *bus,
 	 * configuration memory
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v3_writel(V3_LB_BASE0, v3_addr_to_lb_base(PHYS_PCI_MEM_BASE) |
+=======
+	v3_writel(V3_LB_BASE0, v3_addr_to_lb_base(non_mem.start) |
+>>>>>>> v3.18
 =======
 	v3_writel(V3_LB_BASE0, v3_addr_to_lb_base(non_mem.start) |
 >>>>>>> v3.18
@@ -474,7 +499,11 @@ static void __iomem *v3_open_config_window(struct pci_bus *bus,
 	 * Set up base1/map1 to point into configuration space.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v3_writel(V3_LB_BASE1, v3_addr_to_lb_base(PHYS_PCI_CONFIG_BASE) |
+=======
+	v3_writel(V3_LB_BASE1, v3_addr_to_lb_base(conf_mem.start) |
+>>>>>>> v3.18
 =======
 	v3_writel(V3_LB_BASE1, v3_addr_to_lb_base(conf_mem.start) |
 >>>>>>> v3.18
@@ -490,15 +519,21 @@ static void v3_close_config_window(void)
 	 * Reassign base1 for use by prefetchable PCI memory
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v3_writel(V3_LB_BASE1, v3_addr_to_lb_base(PHYS_PCI_MEM_BASE + SZ_256M) |
 			V3_LB_BASE_ADR_SIZE_256MB | V3_LB_BASE_PREFETCH |
 			V3_LB_BASE_ENABLE);
 	v3_writew(V3_LB_MAP1, v3_addr_to_lb_map(PCI_BUS_PREMEM_START) |
 =======
+=======
+>>>>>>> v3.18
 	v3_writel(V3_LB_BASE1, v3_addr_to_lb_base(pre_mem.start) |
 			V3_LB_BASE_ADR_SIZE_256MB | V3_LB_BASE_PREFETCH |
 			V3_LB_BASE_ENABLE);
 	v3_writew(V3_LB_MAP1, v3_addr_to_lb_map(pre_mem_pci) |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			V3_LB_MAP_TYPE_MEM_MULTIPLE);
 
@@ -506,7 +541,11 @@ static void v3_close_config_window(void)
 	 * And shrink base0 back to a 256M window (NOTE: MAP0 already correct)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v3_writel(V3_LB_BASE0, v3_addr_to_lb_base(PHYS_PCI_MEM_BASE) |
+=======
+	v3_writel(V3_LB_BASE0, v3_addr_to_lb_base(non_mem.start) |
+>>>>>>> v3.18
 =======
 	v3_writel(V3_LB_BASE0, v3_addr_to_lb_base(non_mem.start) |
 >>>>>>> v3.18
@@ -577,7 +616,11 @@ static int v3_write_config(struct pci_bus *bus, unsigned int devfn, int where,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pci_ops pci_v3_ops = {
+=======
+static struct pci_ops pci_v3_ops = {
+>>>>>>> v3.18
 =======
 static struct pci_ops pci_v3_ops = {
 >>>>>>> v3.18
@@ -585,6 +628,7 @@ static struct pci_ops pci_v3_ops = {
 	.write	= v3_write_config,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct resource non_mem = {
 	.name	= "PCI non-prefetchable",
@@ -600,6 +644,8 @@ static struct resource pre_mem = {
 	.flags	= IORESOURCE_MEM | IORESOURCE_PREFETCH,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __init pci_v3_setup_resources(struct pci_sys_data *sys)
@@ -683,7 +729,11 @@ v3_pci_fault(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static irqreturn_t v3_irq(int dummy, void *devid)
+=======
+static irqreturn_t v3_irq(int irq, void *devid)
+>>>>>>> v3.18
 =======
 static irqreturn_t v3_irq(int irq, void *devid)
 >>>>>>> v3.18
@@ -697,7 +747,11 @@ static irqreturn_t v3_irq(int irq, void *devid)
 
 	sprintf(buf, "V3 int %d: pc=0x%08lx [%08lx] LBFADDR=%08x LBFCODE=%02x "
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"ISTAT=%02x\n", IRQ_AP_V3INT, pc, instr,
+=======
+		"ISTAT=%02x\n", irq, pc, instr,
+>>>>>>> v3.18
 =======
 		"ISTAT=%02x\n", irq, pc, instr,
 >>>>>>> v3.18
@@ -726,7 +780,11 @@ static irqreturn_t v3_irq(int irq, void *devid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init pci_v3_setup(int nr, struct pci_sys_data *sys)
+=======
+static int __init pci_v3_setup(int nr, struct pci_sys_data *sys)
+>>>>>>> v3.18
 =======
 static int __init pci_v3_setup(int nr, struct pci_sys_data *sys)
 >>>>>>> v3.18
@@ -738,7 +796,11 @@ static int __init pci_v3_setup(int nr, struct pci_sys_data *sys)
 
 	if (nr == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sys->mem_offset = PHYS_PCI_MEM_BASE;
+=======
+		sys->mem_offset = non_mem.start;
+>>>>>>> v3.18
 =======
 		sys->mem_offset = non_mem.start;
 >>>>>>> v3.18
@@ -753,6 +815,7 @@ static int __init pci_v3_setup(int nr, struct pci_sys_data *sys)
  * V3_LB_MAP?  - pci bus address
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init pci_v3_preinit(void)
 {
 	unsigned long flags;
@@ -766,11 +829,16 @@ void __init pci_v3_preinit(void)
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 static void __init pci_v3_preinit(void)
 {
 	unsigned long flags;
 	unsigned int temp;
 	phys_addr_t io_address = pci_pio_to_address(io_mem.start);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pcibios_min_mem = 0x00100000;
@@ -796,9 +864,15 @@ static void __init pci_v3_preinit(void)
 	 *  Local: 0x40000000 Bus: 0x00000000 Size: 256MB
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v3_writel(V3_LB_BASE0, v3_addr_to_lb_base(PHYS_PCI_MEM_BASE) |
 			V3_LB_BASE_ADR_SIZE_256MB | V3_LB_BASE_ENABLE);
 	v3_writew(V3_LB_MAP0, v3_addr_to_lb_map(PCI_BUS_NONMEM_START) |
+=======
+	v3_writel(V3_LB_BASE0, v3_addr_to_lb_base(non_mem.start) |
+			V3_LB_BASE_ADR_SIZE_256MB | V3_LB_BASE_ENABLE);
+	v3_writew(V3_LB_MAP0, v3_addr_to_lb_map(non_mem_pci) |
+>>>>>>> v3.18
 =======
 	v3_writel(V3_LB_BASE0, v3_addr_to_lb_base(non_mem.start) |
 			V3_LB_BASE_ADR_SIZE_256MB | V3_LB_BASE_ENABLE);
@@ -811,15 +885,21 @@ static void __init pci_v3_preinit(void)
 	 *  Local: 0x50000000 Bus: 0x10000000 Size: 256MB
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v3_writel(V3_LB_BASE1, v3_addr_to_lb_base(PHYS_PCI_MEM_BASE + SZ_256M) |
 			V3_LB_BASE_ADR_SIZE_256MB | V3_LB_BASE_PREFETCH |
 			V3_LB_BASE_ENABLE);
 	v3_writew(V3_LB_MAP1, v3_addr_to_lb_map(PCI_BUS_PREMEM_START) |
 =======
+=======
+>>>>>>> v3.18
 	v3_writel(V3_LB_BASE1, v3_addr_to_lb_base(pre_mem.start) |
 			V3_LB_BASE_ADR_SIZE_256MB | V3_LB_BASE_PREFETCH |
 			V3_LB_BASE_ENABLE);
 	v3_writew(V3_LB_MAP1, v3_addr_to_lb_map(pre_mem_pci) |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			V3_LB_MAP_TYPE_MEM_MULTIPLE);
 
@@ -827,7 +907,11 @@ static void __init pci_v3_preinit(void)
 	 * Setup window 2 - PCI IO
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v3_writel(V3_LB_BASE2, v3_addr_to_lb_base2(PHYS_PCI_IO_BASE) |
+=======
+	v3_writel(V3_LB_BASE2, v3_addr_to_lb_base2(io_address) |
+>>>>>>> v3.18
 =======
 	v3_writel(V3_LB_BASE2, v3_addr_to_lb_base2(io_address) |
 >>>>>>> v3.18
@@ -866,6 +950,7 @@ static void __init pci_v3_preinit(void)
 	__raw_writel(3, ap_syscon_base + INTEGRATOR_SC_PCIENABLE_OFFSET);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Grab the PCI error interrupt.
 	 */
@@ -881,6 +966,8 @@ void __init pci_v3_postinit(void)
 {
 	unsigned int pci_cmd;
 =======
+=======
+>>>>>>> v3.18
 	raw_spin_unlock_irqrestore(&v3_lock, flags);
 }
 
@@ -888,6 +975,9 @@ static void __init pci_v3_postinit(void)
 {
 	unsigned int pci_cmd;
 	phys_addr_t io_address = pci_pio_to_address(io_mem.start);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pci_cmd = PCI_COMMAND_MEMORY |
@@ -906,8 +996,11 @@ static void __init pci_v3_postinit(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_isa_ports(PHYS_PCI_MEM_BASE, PHYS_PCI_IO_BASE, 0);
 =======
+=======
+>>>>>>> v3.18
 	register_isa_ports(non_mem.start, io_address, 0);
 }
 
@@ -1097,5 +1190,8 @@ int __init pci_v3_early_init(void)
 	vga_base = (unsigned long)PCI_MEMORY_VADDR;
 	pci_map_io_early(__phys_to_pfn(PHYS_PCI_IO_BASE));
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -23,7 +23,10 @@
 #include <linux/of.h>
 #include <linux/of_pdt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/prom.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -181,16 +184,22 @@ static struct device_node * __init of_pdt_create_node(phandle node,
 
 	dp = prom_early_alloc(sizeof(*dp));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_pdt_incr_unique_id(dp);
 	dp->parent = parent;
 
 	kref_init(&dp->kref);
 
 =======
+=======
+>>>>>>> v3.18
 	of_node_init(dp);
 	of_pdt_incr_unique_id(dp);
 	dp->parent = parent;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dp->name = of_pdt_get_one_property(node, "name");
 	dp->type = of_pdt_get_one_property(node, "device_type");
@@ -262,7 +271,11 @@ void __init of_pdt_build_devicetree(phandle root_node, struct of_pdt_ops *ops)
 			of_pdt_prom_ops->getchild(of_allnodes->phandle), &nextp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Get pointer to "/chosen" and "/aliasas" nodes for use everywhere */
+=======
+	/* Get pointer to "/chosen" and "/aliases" nodes for use everywhere */
+>>>>>>> v3.18
 =======
 	/* Get pointer to "/chosen" and "/aliases" nodes for use everywhere */
 >>>>>>> v3.18

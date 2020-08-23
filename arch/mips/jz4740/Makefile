@@ -5,7 +5,11 @@
 # Object file lists.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y += prom.o irq.o time.o reset.o setup.o dma.o \
+=======
+obj-y += prom.o irq.o time.o reset.o setup.o \
+>>>>>>> v3.18
 =======
 obj-y += prom.o irq.o time.o reset.o setup.o \
 >>>>>>> v3.18

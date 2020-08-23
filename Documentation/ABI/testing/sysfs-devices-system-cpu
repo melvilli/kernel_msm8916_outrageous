@@ -129,7 +129,11 @@ Description:	Discover cpuidle policy and mechanism
 What:		/sys/devices/system/cpu/cpu#/cpufreq/*
 Date:		pre-git history
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	cpufreq@vger.kernel.org
+=======
+Contact:	linux-pm@vger.kernel.org
+>>>>>>> v3.18
 =======
 Contact:	linux-pm@vger.kernel.org
 >>>>>>> v3.18
@@ -151,7 +155,11 @@ Description:	Discover and change clock speed of CPUs
 What:		/sys/devices/system/cpu/cpu#/cpufreq/freqdomain_cpus
 Date:		June 2013
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	cpufreq@vger.kernel.org
+=======
+Contact:	linux-pm@vger.kernel.org
+>>>>>>> v3.18
 =======
 Contact:	linux-pm@vger.kernel.org
 >>>>>>> v3.18
@@ -209,7 +217,10 @@ Description:	address and size of the percpu note.
 
 		crash_notes_size: size of the note of cpu#.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 
 What:		/sys/devices/system/cpu/intel_pstate/max_perf_pct
@@ -234,4 +245,7 @@ Description:	Parameters for the Intel P-state driver
 		frequency range.
 
 		More details can be found in Documentation/cpu-freq/intel-pstate.txt
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

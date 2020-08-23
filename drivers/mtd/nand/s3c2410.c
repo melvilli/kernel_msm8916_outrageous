@@ -30,7 +30,10 @@
 #include <linux/module.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -50,10 +53,13 @@
 #include <linux/mtd/partitions.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-nand.h>
 #include <linux/platform_data/mtd-nand-s3c2410.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/mtd-nand-s3c2410.h>
 
 #define S3C2410_NFREG(x) (x)
@@ -91,6 +97,9 @@
 #define S3C2412_NFCONT_nFCE0		(1<<1)
 #define S3C2412_NFSTAT_READY		(1<<0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* new oob placement block for use with hardware ecc generation
  */
@@ -194,7 +203,11 @@ static struct s3c2410_nand_info *to_nand_info(struct platform_device *dev)
 static struct s3c2410_platform_nand *to_nand_plat(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dev->dev.platform_data;
+=======
+	return dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	return dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -223,15 +236,21 @@ static void s3c2410_nand_clk_set_state(struct s3c2410_nand_info *info,
 	if (info->clk_state == CLOCK_ENABLE) {
 		if (new_state != CLOCK_ENABLE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clk_disable(info->clk);
 	} else {
 		if (new_state == CLOCK_ENABLE)
 			clk_enable(info->clk);
 =======
+=======
+>>>>>>> v3.18
 			clk_disable_unprepare(info->clk);
 	} else {
 		if (new_state == CLOCK_ENABLE)
 			clk_prepare_enable(info->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -752,8 +771,11 @@ static int s3c24xx_nand_remove(struct platform_device *pdev)
 	struct s3c2410_nand_info *info = to_nand_info(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (info == NULL)
@@ -979,7 +1001,10 @@ static int s3c24xx_nand_probe(struct platform_device *pdev)
 	info = devm_kzalloc(&pdev->dev, sizeof(*info), GFP_KERNEL);
 	if (info == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "no memory for flash info\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		err = -ENOMEM;
@@ -1037,7 +1062,10 @@ static int s3c24xx_nand_probe(struct platform_device *pdev)
 	info->mtds = devm_kzalloc(&pdev->dev, size, GFP_KERNEL);
 	if (info->mtds == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "failed to allocate mtd storage\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		err = -ENOMEM;

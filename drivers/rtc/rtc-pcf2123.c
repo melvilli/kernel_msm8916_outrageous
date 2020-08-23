@@ -19,17 +19,23 @@
  *
  * static struct spi_board_info ek_spi_devices[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	...
  * 	{
  * 		.modalias		= "rtc-pcf2123",
  * 		.chip_select		= 1,
  * 		.controller_data	= (void *)AT91_PIN_PA10,
 =======
+=======
+>>>>>>> v3.18
  *	...
  *	{
  *		.modalias		= "rtc-pcf2123",
  *		.chip_select		= 1,
  *		.controller_data	= (void *)AT91_PIN_PA10,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *		.max_speed_hz		= 1000 * 1000,
  *		.mode			= SPI_CS_HIGH,
@@ -103,8 +109,14 @@ static ssize_t pcf2123_show(struct device *dev, struct device_attribute *attr,
 	r = container_of(attr, struct pcf2123_sysfs_reg, attr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(r->name, 16, &reg))
 		return -EINVAL;
+=======
+	ret = kstrtoul(r->name, 16, &reg);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(r->name, 16, &reg);
 	if (ret)
@@ -132,10 +144,13 @@ static ssize_t pcf2123_store(struct device *dev, struct device_attribute *attr,
 	r = container_of(attr, struct pcf2123_sysfs_reg, attr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(r->name, 16, &reg)
 		|| strict_strtoul(buffer, 10, &val))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	ret = kstrtoul(r->name, 16, &reg);
 	if (ret)
 		return ret;
@@ -143,6 +158,9 @@ static ssize_t pcf2123_store(struct device *dev, struct device_attribute *attr,
 	ret = kstrtoul(buffer, 10, &val);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	txbuf[0] = PCF2123_WRITE | reg;
@@ -347,7 +365,11 @@ kfree_exit:
 static int pcf2123_remove(struct spi_device *spi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pcf2123_plat_data *pdata = spi->dev.platform_data;
+=======
+	struct pcf2123_plat_data *pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	struct pcf2123_plat_data *pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18

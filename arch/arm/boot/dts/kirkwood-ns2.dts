@@ -1,7 +1,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "kirkwood-ns2-common.dtsi"
+=======
+#include "kirkwood-ns2-common.dtsi"
+>>>>>>> v3.18
 =======
 #include "kirkwood-ns2-common.dtsi"
 >>>>>>> v3.18
@@ -18,6 +22,11 @@
 	ocp@f1000000 {
 		sata@80000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			pinctrl-0 = <&pmx_ns2_sata0>;
+			pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 			pinctrl-0 = <&pmx_ns2_sata0>;
 			pinctrl-names = "default";
@@ -38,6 +47,11 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+&ethphy0 { reg = <8>; };
+>>>>>>> v3.18
 =======
 
 &ethphy0 { reg = <8>; };

@@ -27,6 +27,7 @@
 #include "power.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void do_gma_backlight_set(struct drm_device *dev)
 {
 #ifdef CONFIG_BACKLIGHT_CLASS_DEVICE
@@ -35,6 +36,8 @@ static void do_gma_backlight_set(struct drm_device *dev)
 #endif	
 }
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_BACKLIGHT_CLASS_DEVICE
 static void do_gma_backlight_set(struct drm_device *dev)
 {
@@ -42,6 +45,9 @@ static void do_gma_backlight_set(struct drm_device *dev)
 	backlight_update_status(dev_priv->backlight_device);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void gma_backlight_enable(struct drm_device *dev)

@@ -8,6 +8,10 @@
 
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ide.h>
+>>>>>>> v3.18
 =======
 #include <linux/ide.h>
 >>>>>>> v3.18

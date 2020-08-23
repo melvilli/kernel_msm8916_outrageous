@@ -52,7 +52,11 @@
 
 /* big enough to hold our biggest descriptor */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USB_COMP_EP0_BUFSIZ	4096
+=======
+#define USB_COMP_EP0_BUFSIZ	1024
+>>>>>>> v3.18
 =======
 #define USB_COMP_EP0_BUFSIZ	1024
 >>>>>>> v3.18
@@ -62,7 +66,10 @@ struct usb_configuration;
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct usb_os_desc_ext_prop - describes one "Extended Property"
  * @entry: used to keep a list of extended properties
  * @type: Extended Property type
@@ -118,6 +125,9 @@ struct usb_os_desc_table {
 };
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * struct usb_function - describes one function of a configuration
  * @name: For diagnostics, identifies the function.
@@ -136,11 +146,17 @@ struct usb_os_desc_table {
  * @config: assigned when @usb_add_function() is called; this is the
  *	configuration with which this function is associated.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @os_desc_table: Table of (interface id, os descriptors) pairs. The function
  *	can expose more than one interface. If an interface is a member of
  *	an IAD, only the first interface of IAD has its entry in the table.
  * @os_desc_n: Number of entries in os_desc_table
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @bind: Before the gadget can register, all of its functions bind() to the
  *	available resources including string and interface identifiers used
@@ -162,6 +178,7 @@ struct usb_os_desc_table {
  * @resume: Notifies functions when the host restarts USB traffic.
  * @get_status: Returns function status as a reply to
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	GetStatus() request when the recepient is Interface.
  * @func_suspend: callback to be called when
  *	SetFeature(FUNCTION_SUSPEND) is received
@@ -172,6 +189,11 @@ struct usb_os_desc_table {
  * @func_wakeup_pending: Marks that the function has issued a Function Wakeup
  *	while the USB bus was suspended and therefore a Function Wakeup
  *	notification needs to be sent once the USB bus is resumed.
+=======
+ *	GetStatus() request when the recipient is Interface.
+ * @func_suspend: callback to be called when
+ *	SetFeature(FUNCTION_SUSPEND) is reseived
+>>>>>>> v3.18
 =======
  *	GetStatus() request when the recipient is Interface.
  * @func_suspend: callback to be called when
@@ -212,6 +234,12 @@ struct usb_function {
 	struct usb_configuration	*config;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct usb_os_desc_table	*os_desc_table;
+	unsigned			os_desc_n;
+
+>>>>>>> v3.18
 =======
 	struct usb_os_desc_table	*os_desc_table;
 	unsigned			os_desc_n;
@@ -247,9 +275,12 @@ struct usb_function {
 	int			(*func_suspend)(struct usb_function *,
 						u8 suspend_opt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		func_is_suspended:1;
 	unsigned		func_wakeup_allowed:1;
 	unsigned		func_wakeup_pending:1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* private: */
@@ -266,9 +297,12 @@ int usb_function_activate(struct usb_function *);
 
 int usb_interface_id(struct usb_configuration *, struct usb_function *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int usb_func_wakeup(struct usb_function *func);
 
 int usb_get_func_interface_id(struct usb_function *func);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -352,10 +386,13 @@ struct usb_configuration {
 	unsigned		fullspeed:1;
 	struct usb_function	*interface[MAX_CONFIG_INTERFACES];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* number of in and out eps used in this configuration */
 	int			num_ineps_used;
 	int			num_outeps_used;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -432,10 +469,13 @@ struct usb_composite_driver {
 extern int usb_composite_probe(struct usb_composite_driver *driver);
 extern void usb_composite_unregister(struct usb_composite_driver *driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void usb_composite_setup_continue(struct usb_composite_dev *cdev);
 extern int composite_dev_prepare(struct usb_composite_driver *composite,
 		struct usb_composite_dev *cdev);
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * module_usb_composite_driver() - Helper macro for registering a USB gadget
@@ -456,6 +496,9 @@ extern int composite_dev_prepare(struct usb_composite_driver *composite,
 		struct usb_composite_dev *cdev);
 extern int composite_os_desc_req_prepare(struct usb_composite_dev *cdev,
 					 struct usb_ep *ep0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void composite_dev_cleanup(struct usb_composite_dev *cdev);
 
@@ -466,6 +509,12 @@ static inline struct usb_composite_driver *to_cdriver(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define OS_STRING_QW_SIGN_LEN		14
+#define OS_STRING_IDX			0xEE
+
+>>>>>>> v3.18
 =======
 #define OS_STRING_QW_SIGN_LEN		14
 #define OS_STRING_IDX			0xEE
@@ -476,14 +525,20 @@ static inline struct usb_composite_driver *to_cdriver(
  * @gadget: read-only, abstracts the gadget's usb peripheral controller
  * @req: used for control responses; buffer is pre-allocated
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @config: the currently active configuration
 =======
+=======
+>>>>>>> v3.18
  * @os_desc_req: used for OS descriptors responses; buffer is pre-allocated
  * @config: the currently active configuration
  * @qw_sign: qwSignature part of the OS string
  * @b_vendor_code: bMS_VendorCode part of the OS string
  * @use_os_string: false by default, interested gadgets set it
  * @os_desc_config: the configuration to be used with OS descriptors
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * One of these devices is allocated and initialized before the
@@ -515,10 +570,13 @@ struct usb_composite_dev {
 	struct usb_gadget		*gadget;
 	struct usb_request		*req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct usb_configuration	*config;
 
 =======
+=======
+>>>>>>> v3.18
 	struct usb_request		*os_desc_req;
 
 	struct usb_configuration	*config;
@@ -529,6 +587,9 @@ struct usb_composite_dev {
 	struct usb_configuration	*os_desc_config;
 	unsigned int			use_os_string:1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* private: */
 	/* internals */
@@ -627,6 +688,11 @@ struct usb_function_instance {
 	struct list_head cfs_list;
 	struct usb_function_driver *fd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*set_inst_name)(struct usb_function_instance *inst,
+			      const char *name);
+>>>>>>> v3.18
 =======
 	int (*set_inst_name)(struct usb_function_instance *inst,
 			      const char *name);

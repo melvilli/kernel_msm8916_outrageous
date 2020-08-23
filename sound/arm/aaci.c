@@ -754,7 +754,11 @@ static struct snd_pcm_ops aaci_capture_ops = {
  */
 #ifdef CONFIG_PM
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int aaci_do_suspend(struct snd_card *card, unsigned int state)
+=======
+static int aaci_do_suspend(struct snd_card *card)
+>>>>>>> v3.18
 =======
 static int aaci_do_suspend(struct snd_card *card)
 >>>>>>> v3.18
@@ -766,7 +770,11 @@ static int aaci_do_suspend(struct snd_card *card)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int aaci_do_resume(struct snd_card *card, unsigned int state)
+=======
+static int aaci_do_resume(struct snd_card *card)
+>>>>>>> v3.18
 =======
 static int aaci_do_resume(struct snd_card *card)
 >>>>>>> v3.18
@@ -775,6 +783,7 @@ static int aaci_do_resume(struct snd_card *card)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int aaci_suspend(struct amba_device *dev, pm_message_t state)
 {
@@ -793,6 +802,8 @@ static int aaci_resume(struct amba_device *dev)
 #define aaci_suspend		NULL
 #define aaci_resume		NULL
 =======
+=======
+>>>>>>> v3.18
 static int aaci_suspend(struct device *dev)
 {
 	struct snd_card *card = dev_get_drvdata(dev);
@@ -809,6 +820,9 @@ static SIMPLE_DEV_PM_OPS(aaci_dev_pm_ops, aaci_suspend, aaci_resume);
 #define AACI_DEV_PM_OPS (&aaci_dev_pm_ops)
 #else
 #define AACI_DEV_PM_OPS NULL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -927,8 +941,13 @@ static struct aaci *aaci_init_card(struct amba_device *dev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
 			      THIS_MODULE, sizeof(struct aaci), &card);
+=======
+	err = snd_card_new(&dev->dev, SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
+			   THIS_MODULE, sizeof(struct aaci), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&dev->dev, SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
 			   THIS_MODULE, sizeof(struct aaci), &card);
@@ -1088,8 +1107,11 @@ static int aaci_probe(struct amba_device *dev,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(aaci->card, &dev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = snd_card_register(aaci->card);
@@ -1112,8 +1134,11 @@ static int aaci_remove(struct amba_device *dev)
 	struct snd_card *card = amba_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amba_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (card) {
@@ -1141,16 +1166,22 @@ static struct amba_driver aaci_driver = {
 	.drv		= {
 		.name	= DRIVER_NAME,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.probe		= aaci_probe,
 	.remove		= aaci_remove,
 	.suspend	= aaci_suspend,
 	.resume		= aaci_resume,
 =======
+=======
+>>>>>>> v3.18
 		.pm	= AACI_DEV_PM_OPS,
 	},
 	.probe		= aaci_probe,
 	.remove		= aaci_remove,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.id_table	= aaci_ids,
 };

@@ -17,7 +17,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/signal.h>
@@ -339,7 +342,11 @@ static void esd_usb2_rx_can_msg(struct esd_usb2_net_priv *priv,
 
 		cf->can_id = id & ESD_IDMASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cf->can_dlc = get_can_dlc(msg->msg.rx.dlc & ~ESD_RTR);
+=======
+		cf->can_dlc = get_can_dlc(msg->msg.rx.dlc);
+>>>>>>> v3.18
 =======
 		cf->can_dlc = get_can_dlc(msg->msg.rx.dlc);
 >>>>>>> v3.18
@@ -420,24 +427,36 @@ static void esd_usb2_read_bulk_callback(struct urb *urb)
 		switch (msg->msg.hdr.cmd) {
 		case CMD_CAN_RX:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (msg->msg.rx.net >= dev->net_count) {
 				dev_err(dev->udev->dev.parent, "format error\n");
 				break;
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			esd_usb2_rx_can_msg(dev->nets[msg->msg.rx.net], msg);
 			break;
 
 		case CMD_CAN_TX:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (msg->msg.txdone.net >= dev->net_count) {
 				dev_err(dev->udev->dev.parent, "format error\n");
 				break;
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			esd_usb2_tx_done_msg(dev->nets[msg->msg.txdone.net],
 					     msg);
@@ -479,7 +498,10 @@ static void esd_usb2_write_bulk_callback(struct urb *urb)
 	struct esd_tx_urb_context *context = urb->context;
 	struct esd_usb2_net_priv *priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esd_usb2 *dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct net_device *netdev;
@@ -490,7 +512,10 @@ static void esd_usb2_write_bulk_callback(struct urb *urb)
 	priv = context->priv;
 	netdev = priv->netdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = priv->usb2;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -909,6 +934,10 @@ static const struct net_device_ops esd_usb2_netdev_ops = {
 	.ndo_stop = esd_usb2_close,
 	.ndo_start_xmit = esd_usb2_start_xmit,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu = can_change_mtu,
+>>>>>>> v3.18
 =======
 	.ndo_change_mtu = can_change_mtu,
 >>>>>>> v3.18
@@ -1049,6 +1078,10 @@ static int esd_usb2_probe_one_net(struct usb_interface *intf, int index)
 
 	SET_NETDEV_DEV(netdev, &intf->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	netdev->dev_id = index;
+>>>>>>> v3.18
 =======
 	netdev->dev_id = index;
 >>>>>>> v3.18

@@ -20,6 +20,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -44,7 +48,10 @@
 #define PMD_FLAGS_SMP	(PMD_SECT_WBWA|PMD_SECT_S)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef __ARMEB__
 #  define rpgdl	r0
 #  define rpgdh	r1
@@ -53,6 +60,9 @@
 #  define rpgdh	r0
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * cpu_v7_switch_mm(pgd_phys, tsk)
@@ -63,6 +73,7 @@
 ENTRY(cpu_v7_switch_mm)
 #ifdef CONFIG_MMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmid	r1, r1				@ get mm->context.id
 	asid	r3, r1
 	mov	r3, r3, lsl #(48 - 32)		@ ASID
@@ -71,6 +82,8 @@ ENTRY(cpu_v7_switch_mm)
 #endif
 	mov	pc, lr
 =======
+=======
+>>>>>>> v3.18
 	mmid	r2, r2
 	asid	r2, r2
 	orr	rpgdh, rpgdh, r2, lsl #(48 - 32)	@ upper 32-bits of pgd
@@ -78,6 +91,9 @@ ENTRY(cpu_v7_switch_mm)
 	isb
 #endif
 	ret	lr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENDPROC(cpu_v7_switch_mm)
 
@@ -115,7 +131,11 @@ ENTRY(cpu_v7_set_pte_ext)
 	ALT_UP (mcr	p15, 0, r0, c7, c10, 1)		@ flush_pte
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -149,7 +169,12 @@ ENDPROC(cpu_v7_set_pte_ext)
 	.macro	v7_ttb_setup, zero, ttbr0, ttbr1, tmp
 	ldr	\tmp, =swapper_pg_dir		@ swapper_pg_dir virtual address
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmp	\ttbr1, \tmp			@ PHYS_OFFSET > PAGE_OFFSET? (branch below)
+=======
+	mov	\tmp, \tmp, lsr #ARCH_PGD_SHIFT
+	cmp	\ttbr1, \tmp			@ PHYS_OFFSET > PAGE_OFFSET?
+>>>>>>> v3.18
 =======
 	mov	\tmp, \tmp, lsr #ARCH_PGD_SHIFT
 	cmp	\ttbr1, \tmp			@ PHYS_OFFSET > PAGE_OFFSET?
@@ -161,6 +186,7 @@ ENDPROC(cpu_v7_set_pte_ext)
 	ALT_SMP(orr	\tmp, \tmp, #TTB_FLAGS_SMP << 16)
 	ALT_UP(orr	\tmp, \tmp, #TTB_FLAGS_UP << 16)
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * TTBR0/TTBR1 split (PAGE_OFFSET):
 	 *   0x40000000: T0SZ = 2, T1SZ = 0 (not used)
@@ -188,6 +214,8 @@ ENDPROC(cpu_v7_set_pte_ext)
 	__CPUINIT
 
 =======
+=======
+>>>>>>> v3.18
 	 * Only use split TTBRs if PHYS_OFFSET <= PAGE_OFFSET (cmp above),
 	 * otherwise booting secondary CPUs would end up using TTBR1 for the
 	 * identity mapping set up in TTBR0.
@@ -203,6 +231,9 @@ ENDPROC(cpu_v7_set_pte_ext)
 	mcrr	p15, 0, \ttbr0, \tmp, c2			@ load TTBR0
 	.endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 *   AT
@@ -210,7 +241,11 @@ ENDPROC(cpu_v7_set_pte_ext)
 	 * .EEE ..EE PUI. .TAT 4RVI ZWRS BLDP WCAM
 	 * rxxx rrxx xxx0 0101 xxxx xxxx x111 xxxx < forced
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *   11    0 110    1  0011 1100 .111 1101 < we want
+=======
+	 *   11    0 110    0  0011 1100 .111 1101 < we want
+>>>>>>> v3.18
 =======
 	 *   11    0 110    0  0011 1100 .111 1101 < we want
 >>>>>>> v3.18
@@ -219,9 +254,13 @@ ENDPROC(cpu_v7_set_pte_ext)
 	.type	v7_crval, #object
 v7_crval:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crval	clear=0x0120c302, mmuset=0x30c23c7d, ucset=0x00c01c7c
 
 	.previous
+=======
+	crval	clear=0x0122c302, mmuset=0x30c03c7d, ucset=0x00c01c7c
+>>>>>>> v3.18
 =======
 	crval	clear=0x0122c302, mmuset=0x30c03c7d, ucset=0x00c01c7c
 >>>>>>> v3.18

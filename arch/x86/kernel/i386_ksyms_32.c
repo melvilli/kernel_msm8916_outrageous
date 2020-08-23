@@ -38,7 +38,10 @@ EXPORT_SYMBOL(strstr);
 EXPORT_SYMBOL(csum_partial);
 EXPORT_SYMBOL(empty_zero_page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PREEMPT
 EXPORT_SYMBOL(___preempt_schedule);
@@ -46,4 +49,7 @@ EXPORT_SYMBOL(___preempt_schedule);
 EXPORT_SYMBOL(___preempt_schedule_context);
 #endif
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

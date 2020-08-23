@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -37,6 +40,7 @@
 	((rtlefuse->eeprom_svid == (_val1)) &&			\
 	 (rtlefuse->eeprom_smid == (_val2)))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void rtl8723ae_get_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val);
 void rtl8723ae_read_eeprom_info(struct ieee80211_hw *hw);
@@ -74,6 +78,8 @@ void rtl8723ae_resume(struct ieee80211_hw *hw);
 void rtl8723ae_allow_all_destaddr(struct ieee80211_hw *hw,
 				  bool allow_all_da, bool write_into_reg);
 =======
+=======
+>>>>>>> v3.18
 void rtl8723e_get_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val);
 void rtl8723e_read_eeprom_info(struct ieee80211_hw *hw);
 
@@ -107,6 +113,9 @@ void rtl8723e_bt_reg_init(struct ieee80211_hw *hw);
 void rtl8723e_bt_hw_init(struct ieee80211_hw *hw);
 void rtl8723e_suspend(struct ieee80211_hw *hw);
 void rtl8723e_resume(struct ieee80211_hw *hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

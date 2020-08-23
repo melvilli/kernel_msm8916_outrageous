@@ -1244,8 +1244,14 @@ static int ua101_probe(struct usb_interface *interface,
 		return -ENOENT;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[card_index], id[card_index], THIS_MODULE,
 			      sizeof(*ua), &card);
+=======
+	err = snd_card_new(&interface->dev,
+			   index[card_index], id[card_index], THIS_MODULE,
+			   sizeof(*ua), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&interface->dev,
 			   index[card_index], id[card_index], THIS_MODULE,
@@ -1290,8 +1296,11 @@ static int ua101_probe(struct usb_interface *interface,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &interface->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = detect_usb_format(ua);
@@ -1369,7 +1378,11 @@ static void ua101_disconnect(struct usb_interface *interface)
 
 	/* make sure that there are no pending USB requests */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__list_for_each(midi, &ua->midi_list)
+=======
+	list_for_each(midi, &ua->midi_list)
+>>>>>>> v3.18
 =======
 	list_for_each(midi, &ua->midi_list)
 >>>>>>> v3.18

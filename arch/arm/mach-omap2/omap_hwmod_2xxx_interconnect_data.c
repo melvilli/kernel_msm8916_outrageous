@@ -21,6 +21,7 @@
 #include "omap_hwmod_common_data.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct omap_hwmod_addr_space omap2xxx_uart1_addr_space[] = {
 	{
 		.pa_start	= OMAP2_UART1_BASE,
@@ -159,6 +160,8 @@ static struct omap_hwmod_addr_space omap2xxx_aes_addrs[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Common interconnect data
  */
@@ -186,7 +189,11 @@ struct omap_hwmod_ocp_if omap2xxx_dss__l3 = {
 			.l3_perm_bit  = OMAP2_L3_CORE_FW_CONNID_DSS,
 			.flags	= OMAP_FIREWALL_L3,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
+=======
+		},
+>>>>>>> v3.18
 =======
 		},
 >>>>>>> v3.18
@@ -207,7 +214,10 @@ struct omap_hwmod_ocp_if omap2_l4_core__uart1 = {
 	.slave		= &omap2xxx_uart1_hwmod,
 	.clk		= "uart1_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_uart1_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -219,7 +229,10 @@ struct omap_hwmod_ocp_if omap2_l4_core__uart2 = {
 	.slave		= &omap2xxx_uart2_hwmod,
 	.clk		= "uart2_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_uart2_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -231,7 +244,10 @@ struct omap_hwmod_ocp_if omap2_l4_core__uart3 = {
 	.slave		= &omap2xxx_uart3_hwmod,
 	.clk		= "uart3_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_uart3_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -243,7 +259,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__mcspi1 = {
 	.slave		= &omap2xxx_mcspi1_hwmod,
 	.clk		= "mcspi1_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2_mcspi1_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -255,7 +274,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__mcspi2 = {
 	.slave		= &omap2xxx_mcspi2_hwmod,
 	.clk		= "mcspi2_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2_mcspi2_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -267,7 +289,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__timer2 = {
 	.slave		= &omap2xxx_timer2_hwmod,
 	.clk		= "gpt2_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_timer2_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -279,7 +304,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__timer3 = {
 	.slave		= &omap2xxx_timer3_hwmod,
 	.clk		= "gpt3_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_timer3_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -291,7 +319,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__timer4 = {
 	.slave		= &omap2xxx_timer4_hwmod,
 	.clk		= "gpt4_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_timer4_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -303,7 +334,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__timer5 = {
 	.slave		= &omap2xxx_timer5_hwmod,
 	.clk		= "gpt5_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_timer5_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -315,7 +349,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__timer6 = {
 	.slave		= &omap2xxx_timer6_hwmod,
 	.clk		= "gpt6_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_timer6_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -327,7 +364,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__timer7 = {
 	.slave		= &omap2xxx_timer7_hwmod,
 	.clk		= "gpt7_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_timer7_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -339,7 +379,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__timer8 = {
 	.slave		= &omap2xxx_timer8_hwmod,
 	.clk		= "gpt8_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_timer8_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -351,7 +394,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__timer9 = {
 	.slave		= &omap2xxx_timer9_hwmod,
 	.clk		= "gpt9_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_timer9_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -363,7 +409,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__timer10 = {
 	.slave		= &omap2xxx_timer10_hwmod,
 	.clk		= "gpt10_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2_timer10_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -375,7 +424,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__timer11 = {
 	.slave		= &omap2xxx_timer11_hwmod,
 	.clk		= "gpt11_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2_timer11_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -387,7 +439,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__timer12 = {
 	.slave		= &omap2xxx_timer12_hwmod,
 	.clk		= "gpt12_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_timer12_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -404,7 +459,11 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__dss = {
 			.l4_fw_region  = OMAP2420_L4_CORE_FW_DSS_CORE_REGION,
 			.flags	= OMAP_FIREWALL_L4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
+=======
+		},
+>>>>>>> v3.18
 =======
 		},
 >>>>>>> v3.18
@@ -423,7 +482,11 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__dss_dispc = {
 			.l4_fw_region  = OMAP2420_L4_CORE_FW_DSS_DISPC_REGION,
 			.flags	= OMAP_FIREWALL_L4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
+=======
+		},
+>>>>>>> v3.18
 =======
 		},
 >>>>>>> v3.18
@@ -442,7 +505,11 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__dss_rfbi = {
 			.l4_fw_region  = OMAP2420_L4_CORE_FW_DSS_CORE_REGION,
 			.flags	= OMAP_FIREWALL_L4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
+=======
+		},
+>>>>>>> v3.18
 =======
 		},
 >>>>>>> v3.18
@@ -461,7 +528,11 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__dss_venc = {
 			.l4_fw_region  = OMAP2420_L4_CORE_FW_DSS_VENC_REGION,
 			.flags	= OMAP_FIREWALL_L4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
+=======
+		},
+>>>>>>> v3.18
 =======
 		},
 >>>>>>> v3.18
@@ -476,7 +547,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__rng = {
 	.slave		= &omap2xxx_rng_hwmod,
 	.clk		= "rng_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2_rng_addr_space,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -488,7 +562,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__sham = {
 	.slave		= &omap2xxx_sham_hwmod,
 	.clk		= "sha_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_sham_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,
@@ -500,7 +577,10 @@ struct omap_hwmod_ocp_if omap2xxx_l4_core__aes = {
 	.slave		= &omap2xxx_aes_hwmod,
 	.clk		= "aes_ick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr		= omap2xxx_aes_addrs,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.user		= OCP_USER_MPU | OCP_USER_SDMA,

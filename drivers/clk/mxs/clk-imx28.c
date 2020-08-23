@@ -13,6 +13,10 @@
 #include <linux/clk/mxs.h>
 #include <linux/clkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk-provider.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk-provider.h>
 >>>>>>> v3.18
@@ -159,6 +163,7 @@ static enum imx28_clk clks_init_on[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init mx28_clocks_init(void)
 {
 	struct device_node *np;
@@ -170,6 +175,8 @@ int __init mx28_clocks_init(void)
 
 	np = of_find_compatible_node(NULL, NULL, "fsl,imx28-clkctrl");
 =======
+=======
+>>>>>>> v3.18
 static void __init mx28_clocks_init(struct device_node *np)
 {
 	struct device_node *dcnp;
@@ -180,6 +187,9 @@ static void __init mx28_clocks_init(struct device_node *np)
 	WARN_ON(!digctrl);
 	of_node_put(dcnp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clkctrl = of_iomap(np, 0);
 	WARN_ON(!clkctrl);
@@ -257,7 +267,11 @@ static void __init mx28_clocks_init(struct device_node *np)
 			pr_err("i.MX28 clk %d: register failed with %ld\n",
 				i, PTR_ERR(clks[i]));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return PTR_ERR(clks[i]);
+=======
+			return;
+>>>>>>> v3.18
 =======
 			return;
 >>>>>>> v3.18
@@ -272,9 +286,14 @@ static void __init mx28_clocks_init(struct device_node *np)
 	for (i = 0; i < ARRAY_SIZE(clks_init_on); i++)
 		clk_prepare_enable(clks[clks_init_on[i]]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 }
+=======
+}
+CLK_OF_DECLARE(imx28_clkctrl, "fsl,imx28-clkctrl", mx28_clocks_init);
+>>>>>>> v3.18
 =======
 }
 CLK_OF_DECLARE(imx28_clkctrl, "fsl,imx28-clkctrl", mx28_clocks_init);

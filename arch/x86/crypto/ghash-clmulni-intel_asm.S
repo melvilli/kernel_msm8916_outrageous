@@ -93,7 +93,11 @@ __clmul_gf128mul_ble:
 ENDPROC(__clmul_gf128mul_ble)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* void clmul_ghash_mul(char *dst, const be128 *shash) */
+=======
+/* void clmul_ghash_mul(char *dst, const u128 *shash) */
+>>>>>>> v3.18
 =======
 /* void clmul_ghash_mul(char *dst, const u128 *shash) */
 >>>>>>> v3.18
@@ -111,7 +115,11 @@ ENDPROC(clmul_ghash_mul)
 /*
  * void clmul_ghash_update(char *dst, const char *src, unsigned int srclen,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *			   const be128 *shash);
+=======
+ *			   const u128 *shash);
+>>>>>>> v3.18
 =======
  *			   const u128 *shash);
 >>>>>>> v3.18

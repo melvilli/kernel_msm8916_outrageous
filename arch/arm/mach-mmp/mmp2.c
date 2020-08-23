@@ -14,6 +14,11 @@
 #include <linux/init.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+#include <linux/irqchip/mmp.h>
+>>>>>>> v3.18
 =======
 #include <linux/irq.h>
 #include <linux/irqchip/mmp.h>
@@ -32,6 +37,10 @@
 #include <mach/devices.h>
 #include <mach/mmp2.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/pm-mmp2.h>
+>>>>>>> v3.18
 =======
 #include <mach/pm-mmp2.h>
 >>>>>>> v3.18
@@ -104,6 +113,12 @@ void __init mmp2_init_irq(void)
 {
 	mmp2_init_icu();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM
+	icu_irq_chip.irq_set_wake = mmp2_set_wake;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM
 	icu_irq_chip.irq_set_wake = mmp2_set_wake;

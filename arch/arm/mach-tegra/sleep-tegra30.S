@@ -17,6 +17,7 @@
 #include <linux/linkage.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/assembler.h>
 #include <asm/asm-offsets.h>
 
@@ -26,6 +27,8 @@
 #define TEGRA30_POWER_HOTPLUG_SHUTDOWN	(1 << 27) /* Hotplug shutdown */
 
 =======
+=======
+>>>>>>> v3.18
 #include <soc/tegra/fuse.h>
 
 #include <asm/asm-offsets.h>
@@ -142,6 +145,9 @@
 	str	\rd, [\car, #\iddq]
 .endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(CONFIG_HOTPLUG_CPU) || defined(CONFIG_PM_SLEEP)
 /*
@@ -155,7 +161,11 @@ ENTRY(tegra30_hotplug_shutdown)
 	mov	r0, #TEGRA30_POWER_HOTPLUG_SHUTDOWN
 	bl	tegra30_cpu_shutdown
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr			@ should never get here
+=======
+	ret	lr			@ should never get here
+>>>>>>> v3.18
 =======
 	ret	lr			@ should never get here
 >>>>>>> v3.18
@@ -167,6 +177,7 @@ ENDPROC(tegra30_hotplug_shutdown)
  * Puts the current CPU in wait-for-event mode on the flow controller
  * and powergates it -- flags (in R0) indicate the request type.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Must never be called for CPU 0.
  *
  * corrupts r0-r4, r12
@@ -176,6 +187,8 @@ ENTRY(tegra30_cpu_shutdown)
 	cmp	r3, #0
 	moveq	pc, lr		@ Must never be called for CPU 0
 =======
+=======
+>>>>>>> v3.18
  *
  * r10 = SoC ID
  * corrupts r0-r4, r10-r12
@@ -189,6 +202,9 @@ ENTRY(tegra30_cpu_shutdown)
 	cmp	r3, #0
 	reteq	lr		@ Must never be called for CPU 0
 _no_cpu0_chk:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ldr	r12, =TEGRA_FLOW_CTRL_VIRT
@@ -205,7 +221,13 @@ _no_cpu0_chk:
 		FLOW_CTRL_CSR_INTR_FLAG | FLOW_CTRL_CSR_EVENT_FLAG | \
 		FLOW_CTRL_CSR_ENABLE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	r4, #(1 << 4)
+=======
+	cmp	r10, #TEGRA30
+	moveq	r4, #(1 << 4)			@ wfe bitmap
+	movne	r4, #(1 << 8)			@ wfi bitmap
+>>>>>>> v3.18
 =======
 	cmp	r10, #TEGRA30
 	moveq	r4, #(1 << 4)			@ wfe bitmap
@@ -225,10 +247,13 @@ delay_1:
 	ldr	r3, [r1]			@ read CSR
 	str	r3, [r1]			@ clear CSR
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tst	r0, #TEGRA30_POWER_HOTPLUG_SHUTDOWN
 	moveq   r3, #FLOW_CTRL_WAIT_FOR_INTERRUPT	@ For LP2
 	movne	r3, #FLOW_CTRL_WAITEVENT		@ For hotplug
 =======
+=======
+>>>>>>> v3.18
 
 	tst	r0, #TEGRA30_POWER_HOTPLUG_SHUTDOWN
 	beq	flow_ctrl_setting_for_lp2
@@ -245,6 +270,9 @@ flow_ctrl_setting_for_lp2:
 	orrne	r3, r3, #FLOW_CTRL_HALT_GIC_FIQ
 flow_ctrl_done:
 	cmp	r10, #TEGRA30
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	str	r3, [r2]
 	ldr	r0, [r2]
@@ -254,7 +282,12 @@ __cpu_reset_again:
 	dsb
 	.align 5
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wfe					@ CPU should be power gated here
+=======
+	wfeeq					@ CPU should be power gated here
+	wfine
+>>>>>>> v3.18
 =======
 	wfeeq					@ CPU should be power gated here
 	wfine
@@ -277,7 +310,10 @@ ENDPROC(tegra30_cpu_shutdown)
 #ifdef CONFIG_PM_SLEEP
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * tegra30_sleep_core_finish(unsigned long v2p)
  *
  * Enters suspend in LP0 or LP1 by turning off the MMU and jumping to
@@ -313,6 +349,9 @@ ENTRY(tegra30_sleep_core_finish)
 ENDPROC(tegra30_sleep_core_finish)
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * tegra30_sleep_cpu_secondary_finish(unsigned long v2p)
  *
@@ -323,6 +362,10 @@ ENTRY(tegra30_sleep_cpu_secondary_finish)
 
 	/* Flush and disable the L1 data cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mov 	r0, #TEGRA_FLUSH_CACHE_LOUIS
+>>>>>>> v3.18
 =======
 	mov 	r0, #TEGRA_FLUSH_CACHE_LOUIS
 >>>>>>> v3.18
@@ -333,7 +376,11 @@ ENTRY(tegra30_sleep_cpu_secondary_finish)
 	bl	tegra30_cpu_shutdown
 	mov	r0, #1                          @ never return here
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r7
+=======
+	ret	r7
+>>>>>>> v3.18
 =======
 	ret	r7
 >>>>>>> v3.18
@@ -351,7 +398,10 @@ ENTRY(tegra30_tear_down_cpu)
 ENDPROC(tegra30_tear_down_cpu)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* START OF ROUTINES COPIED TO IRAM */
 	.align L1_CACHE_SHIFT
 	.globl tegra30_iram_start
@@ -714,6 +764,9 @@ _no_pll_in_iddq:
 
 	ret	lr
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * tegra30_enter_sleep
@@ -733,15 +786,21 @@ tegra30_enter_sleep:
 	str	r0, [r6, r2]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	r0, #FLOW_CTRL_WAIT_FOR_INTERRUPT
 	orr	r0, r0, #FLOW_CTRL_HALT_CPU_IRQ | FLOW_CTRL_HALT_CPU_FIQ
 =======
+=======
+>>>>>>> v3.18
 	tegra_get_soc_id TEGRA_APB_MISC_BASE, r10
 	cmp	r10, #TEGRA30
 	mov	r0, #FLOW_CTRL_WAIT_FOR_INTERRUPT
 	orreq	r0, r0, #FLOW_CTRL_HALT_CPU_IRQ | FLOW_CTRL_HALT_CPU_FIQ
 	orrne   r0, r0, #FLOW_CTRL_HALT_LIC_IRQ | FLOW_CTRL_HALT_LIC_FIQ
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpu_to_halt_reg r2, r1
 	str	r0, [r6, r2]
@@ -757,7 +816,10 @@ halted:
 	b	halted
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * tegra30_sdram_self_refresh
  *
@@ -888,5 +950,8 @@ pmc_io_dpd_skip:
 	.global tegra30_iram_end
 tegra30_iram_end:
 	b	.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

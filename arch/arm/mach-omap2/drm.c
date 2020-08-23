@@ -27,10 +27,16 @@
 
 #include "soc.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "omap_device.h"
 #include "omap_hwmod.h"
 
 #if defined(CONFIG_DRM_OMAP) || (CONFIG_DRM_OMAP_MODULE)
+=======
+#include "display.h"
+
+#if defined(CONFIG_DRM_OMAP) || defined(CONFIG_DRM_OMAP_MODULE)
+>>>>>>> v3.18
 =======
 #include "display.h"
 
@@ -48,6 +54,7 @@ static struct platform_device omap_drm_device = {
 	.id = 0,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init omap_init_drm(void)
 {
@@ -67,15 +74,24 @@ static int __init omap_init_drm(void)
 int __init omap_init_drm(void)
 {
 >>>>>>> v3.18
+=======
+int __init omap_init_drm(void)
+{
+>>>>>>> v3.18
 	platform_data.omaprev = GET_OMAP_TYPE;
 
 	return platform_device_register(&omap_drm_device);
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 omap_arch_initcall(omap_init_drm);
 
+=======
+#else
+int __init omap_init_drm(void) { return 0; }
+>>>>>>> v3.18
 =======
 #else
 int __init omap_init_drm(void) { return 0; }

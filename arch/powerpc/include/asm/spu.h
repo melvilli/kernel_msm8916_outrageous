@@ -28,6 +28,11 @@
 #include <linux/device.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/reg.h>
+#include <asm/copro.h>
+>>>>>>> v3.18
 =======
 #include <asm/reg.h>
 #include <asm/copro.h>
@@ -241,6 +246,10 @@ extern long spu_sys_callback(struct spu_syscall_block *s);
 /* syscalls implemented in spufs */
 struct file;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct coredump_params;
+>>>>>>> v3.18
 =======
 struct coredump_params;
 >>>>>>> v3.18
@@ -252,7 +261,11 @@ struct spufs_calls {
 						__u32 __user *ustatus);
 	int (*coredump_extra_notes_size)(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*coredump_extra_notes_write)(struct file *file, loff_t *foffset);
+=======
+	int (*coredump_extra_notes_write)(struct coredump_params *cprm);
+>>>>>>> v3.18
 =======
 	int (*coredump_extra_notes_write)(struct coredump_params *cprm);
 >>>>>>> v3.18
@@ -290,9 +303,12 @@ int spu_add_dev_attr_group(struct attribute_group *attrs);
 void spu_remove_dev_attr_group(struct attribute_group *attrs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int spu_handle_mm_fault(struct mm_struct *mm, unsigned long ea,
 		unsigned long dsisr, unsigned *flt);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

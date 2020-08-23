@@ -1,8 +1,14 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2006-2010 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2006-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
@@ -20,6 +26,7 @@
 #include "net_driver.h"
 #include "filter.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Solarstorm controllers use BAR 0 for I/O space and BAR 2(&3) for memory */
 #define EFX_MEM_BAR 2
@@ -52,6 +59,8 @@ extern void efx_rx_packet(struct efx_rx_queue *rx_queue,
 			  unsigned int index, unsigned int n_frags,
 			  unsigned int len, u16 flags);
 =======
+=======
+>>>>>>> v3.18
 /* All controllers use BAR 0 for I/O space and BAR 2(&3) for memory */
 #define EFX_MEM_BAR 2
 
@@ -80,6 +89,9 @@ void efx_rx_slow_fill(unsigned long context);
 void __efx_rx_packet(struct efx_channel *channel);
 void efx_rx_packet(struct efx_rx_queue *rx_queue, unsigned int index,
 		   unsigned int n_frags, unsigned int len, u16 flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void efx_rx_flush_packet(struct efx_channel *channel)
 {
@@ -87,7 +99,11 @@ static inline void efx_rx_flush_packet(struct efx_channel *channel)
 		__efx_rx_packet(channel);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void efx_schedule_slow_fill(struct efx_rx_queue *rx_queue);
+=======
+void efx_schedule_slow_fill(struct efx_rx_queue *rx_queue);
+>>>>>>> v3.18
 =======
 void efx_schedule_slow_fill(struct efx_rx_queue *rx_queue);
 >>>>>>> v3.18
@@ -109,6 +125,7 @@ void efx_schedule_slow_fill(struct efx_rx_queue *rx_queue);
 #define EFX_RXQ_MIN_ENT		128U
 #define EFX_TXQ_MIN_ENT(efx)	(2 * efx_tx_max_skb_descs(efx))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Filters */
 extern int efx_probe_filters(struct efx_nic *efx);
@@ -137,6 +154,8 @@ extern int efx_filter_rfs(struct net_device *net_dev, const struct sk_buff *skb,
 			  u16 rxq_index, u32 flow_id);
 extern bool __efx_filter_rfs_expire(struct efx_nic *efx, unsigned quota);
 =======
+=======
+>>>>>>> v3.18
 #define EFX_TXQ_MAX_ENT(efx)	(EFX_WORKAROUND_35388(efx) ? \
 				 EFX_MAX_DMAQ_SIZE / 2 : EFX_MAX_DMAQ_SIZE)
 
@@ -227,6 +246,9 @@ static inline s32 efx_filter_get_rx_ids(struct efx_nic *efx,
 int efx_filter_rfs(struct net_device *net_dev, const struct sk_buff *skb,
 		   u16 rxq_index, u32 flow_id);
 bool __efx_filter_rfs_expire(struct efx_nic *efx, unsigned quota);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void efx_filter_rfs_expire(struct efx_channel *channel)
 {
@@ -240,6 +262,7 @@ static inline void efx_filter_rfs_expire(struct efx_channel *channel) {}
 #define efx_filter_rfs_enabled() 0
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Channels */
 extern int efx_channel_dummy_op_int(struct efx_channel *channel);
@@ -252,6 +275,8 @@ efx_realloc_channels(struct efx_nic *efx, u32 rxq_entries, u32 txq_entries);
 extern int efx_reconfigure_port(struct efx_nic *efx);
 extern int __efx_reconfigure_port(struct efx_nic *efx);
 =======
+=======
+>>>>>>> v3.18
 bool efx_filter_is_mc_recipient(const struct efx_filter_spec *spec);
 
 /* Channels */
@@ -262,12 +287,16 @@ int efx_realloc_channels(struct efx_nic *efx, u32 rxq_entries, u32 txq_entries);
 /* Ports */
 int efx_reconfigure_port(struct efx_nic *efx);
 int __efx_reconfigure_port(struct efx_nic *efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Ethtool support */
 extern const struct ethtool_ops efx_ethtool_ops;
 
 /* Reset handling */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int efx_reset(struct efx_nic *efx, enum reset_type method);
 extern void efx_reset_down(struct efx_nic *efx, enum reset_type method);
@@ -292,6 +321,8 @@ extern int efx_mtd_probe(struct efx_nic *efx);
 extern void efx_mtd_rename(struct efx_nic *efx);
 extern void efx_mtd_remove(struct efx_nic *efx);
 =======
+=======
+>>>>>>> v3.18
 int efx_reset(struct efx_nic *efx, enum reset_type method);
 void efx_reset_down(struct efx_nic *efx, enum reset_type method);
 int efx_reset_up(struct efx_nic *efx, enum reset_type method, bool ok);
@@ -324,6 +355,9 @@ static inline int efx_mtd_probe(struct efx_nic *efx)
 }
 void efx_mtd_rename(struct efx_nic *efx);
 void efx_mtd_remove(struct efx_nic *efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int efx_mtd_probe(struct efx_nic *efx) { return 0; }
@@ -337,7 +371,10 @@ static inline void efx_schedule_channel(struct efx_channel *channel)
 		   "channel %d scheduling NAPI poll on CPU%d\n",
 		   channel->channel, raw_smp_processor_id());
 <<<<<<< HEAD
+<<<<<<< HEAD
 	channel->work_pending = true;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -351,9 +388,15 @@ static inline void efx_schedule_channel_irq(struct efx_channel *channel)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void efx_link_status_changed(struct efx_nic *efx);
 extern void efx_link_set_advertising(struct efx_nic *efx, u32);
 extern void efx_link_set_wanted_fc(struct efx_nic *efx, u8);
+=======
+void efx_link_status_changed(struct efx_nic *efx);
+void efx_link_set_advertising(struct efx_nic *efx, u32);
+void efx_link_set_wanted_fc(struct efx_nic *efx, u8);
+>>>>>>> v3.18
 =======
 void efx_link_status_changed(struct efx_nic *efx);
 void efx_link_set_advertising(struct efx_nic *efx, u32);

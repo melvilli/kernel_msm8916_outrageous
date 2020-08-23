@@ -1,5 +1,9 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2013 Intel Corporation.  All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2013 Intel Corporation.  All rights reserved.
 >>>>>>> v3.18
@@ -39,13 +43,19 @@
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "qib_verbs.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kthread.h>
 
 #include "qib_verbs.h"
 #include "qib.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -114,8 +124,12 @@ void qib_cq_enter(struct qib_cq *cq, struct ib_wc *entry, int solicited)
 	    (cq->notify == IB_CQ_SOLICITED &&
 	     (solicited || entry->status != IB_WC_SUCCESS))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cq->notify = IB_CQ_NONE;
 		cq->triggered++;
+=======
+		struct kthread_worker *worker;
+>>>>>>> v3.18
 =======
 		struct kthread_worker *worker;
 >>>>>>> v3.18
@@ -124,8 +138,11 @@ void qib_cq_enter(struct qib_cq *cq, struct ib_wc *entry, int solicited)
 		 * another thread.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		queue_work(qib_cq_wq, &cq->comptask);
 =======
+=======
+>>>>>>> v3.18
 		smp_rmb();
 		worker = cq->dd->worker;
 		if (likely(worker)) {
@@ -133,6 +150,9 @@ void qib_cq_enter(struct qib_cq *cq, struct ib_wc *entry, int solicited)
 			cq->triggered++;
 			queue_kthread_work(worker, &cq->comptask);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -189,7 +209,11 @@ bail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void send_complete(struct work_struct *work)
+=======
+static void send_complete(struct kthread_work *work)
+>>>>>>> v3.18
 =======
 static void send_complete(struct kthread_work *work)
 >>>>>>> v3.18
@@ -317,6 +341,10 @@ struct ib_cq *qib_create_cq(struct ib_device *ibdev, int entries,
 	 * an error.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cq->dd = dd_from_dev(dev);
+>>>>>>> v3.18
 =======
 	cq->dd = dd_from_dev(dev);
 >>>>>>> v3.18
@@ -325,7 +353,11 @@ struct ib_cq *qib_create_cq(struct ib_device *ibdev, int entries,
 	cq->triggered = 0;
 	spin_lock_init(&cq->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&cq->comptask, send_complete);
+=======
+	init_kthread_work(&cq->comptask, send_complete);
+>>>>>>> v3.18
 =======
 	init_kthread_work(&cq->comptask, send_complete);
 >>>>>>> v3.18
@@ -361,7 +393,11 @@ int qib_destroy_cq(struct ib_cq *ibcq)
 	struct qib_cq *cq = to_icq(ibcq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_work(&cq->comptask);
+=======
+	flush_kthread_work(&cq->comptask);
+>>>>>>> v3.18
 =======
 	flush_kthread_work(&cq->comptask);
 >>>>>>> v3.18
@@ -525,7 +561,10 @@ bail:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int qib_cq_init(struct qib_devdata *dd)
 {
@@ -572,4 +611,7 @@ void qib_cq_exit(struct qib_devdata *dd)
 	kthread_stop(worker->task);
 	kfree(worker);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

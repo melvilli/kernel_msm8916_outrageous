@@ -33,10 +33,13 @@
 #include "omap4-sar-layout.h"
 #include "common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define MAX_NR_REG_BANKS	5
 #define MAX_IRQS		160
 =======
+=======
+>>>>>>> v3.18
 #include "pm.h"
 
 #define AM43XX_NR_REG_BANKS	7
@@ -45,6 +48,9 @@
 #define MAX_IRQS		AM43XX_IRQS
 #define DEFAULT_NR_REG_BANKS	5
 #define DEFAULT_IRQS		160
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define WKG_MASK_ALL		0x00000000
 #define WKG_UNMASK_ALL		0xffffffff
@@ -59,8 +65,13 @@ static void __iomem *sar_base;
 static DEFINE_RAW_SPINLOCK(wakeupgen_lock);
 static unsigned int irq_target_cpu[MAX_IRQS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int irq_banks = MAX_NR_REG_BANKS;
 static unsigned int max_irqs = MAX_IRQS;
+=======
+static unsigned int irq_banks = DEFAULT_NR_REG_BANKS;
+static unsigned int max_irqs = DEFAULT_IRQS;
+>>>>>>> v3.18
 =======
 static unsigned int irq_banks = DEFAULT_NR_REG_BANKS;
 static unsigned int max_irqs = DEFAULT_IRQS;
@@ -73,7 +84,11 @@ static unsigned int omap_secure_apis;
 static inline u32 wakeupgen_readl(u8 idx, u32 cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(wakeupgen_base + OMAP_WKG_ENB_A_0 +
+=======
+	return readl_relaxed(wakeupgen_base + OMAP_WKG_ENB_A_0 +
+>>>>>>> v3.18
 =======
 	return readl_relaxed(wakeupgen_base + OMAP_WKG_ENB_A_0 +
 >>>>>>> v3.18
@@ -83,7 +98,11 @@ static inline u32 wakeupgen_readl(u8 idx, u32 cpu)
 static inline void wakeupgen_writel(u32 val, u8 idx, u32 cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, wakeupgen_base + OMAP_WKG_ENB_A_0 +
+=======
+	writel_relaxed(val, wakeupgen_base + OMAP_WKG_ENB_A_0 +
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, wakeupgen_base + OMAP_WKG_ENB_A_0 +
 >>>>>>> v3.18
@@ -93,7 +112,11 @@ static inline void wakeupgen_writel(u32 val, u8 idx, u32 cpu)
 static inline void sar_writel(u32 val, u32 offset, u8 idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, sar_base + offset + (idx * 4));
+=======
+	writel_relaxed(val, sar_base + offset + (idx * 4));
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, sar_base + offset + (idx * 4));
 >>>>>>> v3.18
@@ -163,7 +186,11 @@ static void wakeupgen_mask(struct irq_data *d)
 
 	raw_spin_lock_irqsave(&wakeupgen_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_wakeupgen_clear(d->irq, irq_target_cpu[d->irq]);
+=======
+	_wakeupgen_clear(d->hwirq, irq_target_cpu[d->hwirq]);
+>>>>>>> v3.18
 =======
 	_wakeupgen_clear(d->hwirq, irq_target_cpu[d->hwirq]);
 >>>>>>> v3.18
@@ -179,7 +206,11 @@ static void wakeupgen_unmask(struct irq_data *d)
 
 	raw_spin_lock_irqsave(&wakeupgen_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_wakeupgen_set(d->irq, irq_target_cpu[d->irq]);
+=======
+	_wakeupgen_set(d->hwirq, irq_target_cpu[d->hwirq]);
+>>>>>>> v3.18
 =======
 	_wakeupgen_set(d->hwirq, irq_target_cpu[d->hwirq]);
 >>>>>>> v3.18
@@ -264,6 +295,7 @@ static inline void omap4_irq_save_context(void)
 
 	/* Save AuxBoot* registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = __raw_readl(wakeupgen_base + OMAP_AUX_CORE_BOOT_0);
 	__raw_writel(val, sar_base + AUXCOREBOOT0_OFFSET);
 	val = __raw_readl(wakeupgen_base + OMAP_AUX_CORE_BOOT_1);
@@ -280,6 +312,8 @@ static inline void omap4_irq_save_context(void)
 	val |= SAR_BACKUP_STATUS_WAKEUPGEN;
 	__raw_writel(val, sar_base + SAR_BACKUP_STATUS_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 	val = readl_relaxed(wakeupgen_base + OMAP_AUX_CORE_BOOT_0);
 	writel_relaxed(val, sar_base + AUXCOREBOOT0_OFFSET);
 	val = readl_relaxed(wakeupgen_base + OMAP_AUX_CORE_BOOT_1);
@@ -295,6 +329,9 @@ static inline void omap4_irq_save_context(void)
 	val = readl_relaxed(sar_base + SAR_BACKUP_STATUS_OFFSET);
 	val |= SAR_BACKUP_STATUS_WAKEUPGEN;
 	writel_relaxed(val, sar_base + SAR_BACKUP_STATUS_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 }
@@ -315,6 +352,7 @@ static inline void omap5_irq_save_context(void)
 
 	/* Save AuxBoot* registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = __raw_readl(wakeupgen_base + OMAP_AUX_CORE_BOOT_0);
 	__raw_writel(val, sar_base + OMAP5_AUXCOREBOOT0_OFFSET);
 	val = __raw_readl(wakeupgen_base + OMAP_AUX_CORE_BOOT_0);
@@ -325,6 +363,8 @@ static inline void omap5_irq_save_context(void)
 	val |= SAR_BACKUP_STATUS_WAKEUPGEN;
 	__raw_writel(val, sar_base + OMAP5_SAR_BACKUP_STATUS_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 	val = readl_relaxed(wakeupgen_base + OMAP_AUX_CORE_BOOT_0);
 	writel_relaxed(val, sar_base + OMAP5_AUXCOREBOOT0_OFFSET);
 	val = readl_relaxed(wakeupgen_base + OMAP_AUX_CORE_BOOT_0);
@@ -334,6 +374,9 @@ static inline void omap5_irq_save_context(void)
 	val = readl_relaxed(sar_base + OMAP5_SAR_BACKUP_STATUS_OFFSET);
 	val |= SAR_BACKUP_STATUS_WAKEUPGEN;
 	writel_relaxed(val, sar_base + OMAP5_SAR_BACKUP_STATUS_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 }
@@ -369,9 +412,15 @@ static void irq_sar_clear(void)
 		offset = OMAP5_SAR_BACKUP_STATUS_OFFSET;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = __raw_readl(sar_base + offset);
 	val &= ~SAR_BACKUP_STATUS_WAKEUPGEN;
 	__raw_writel(val, sar_base + offset);
+=======
+	val = readl_relaxed(sar_base + offset);
+	val &= ~SAR_BACKUP_STATUS_WAKEUPGEN;
+	writel_relaxed(val, sar_base + offset);
+>>>>>>> v3.18
 =======
 	val = readl_relaxed(sar_base + offset);
 	val &= ~SAR_BACKUP_STATUS_WAKEUPGEN;
@@ -396,8 +445,13 @@ static void irq_save_secure_context(void)
 
 #ifdef CONFIG_HOTPLUG_CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit irq_cpu_hotplug_notify(struct notifier_block *self,
 					 unsigned long action, void *hcpu)
+=======
+static int irq_cpu_hotplug_notify(struct notifier_block *self,
+				  unsigned long action, void *hcpu)
+>>>>>>> v3.18
 =======
 static int irq_cpu_hotplug_notify(struct notifier_block *self,
 				  unsigned long action, void *hcpu)
@@ -455,7 +509,11 @@ static void __init irq_pm_init(void)
 {
 	/* FIXME: Remove this when MPU OSWR support is added */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!soc_is_omap54xx())
+=======
+	if (!IS_PM44XX_ERRATUM(PM_OMAP4_CPU_OSWR_DISABLE))
+>>>>>>> v3.18
 =======
 	if (!IS_PM44XX_ERRATUM(PM_OMAP4_CPU_OSWR_DISABLE))
 >>>>>>> v3.18
@@ -484,6 +542,10 @@ int __init omap_wakeupgen_init(void)
 	int i;
 	unsigned int boot_cpu = smp_processor_id();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 val;
+>>>>>>> v3.18
 =======
 	u32 val;
 >>>>>>> v3.18
@@ -504,6 +566,12 @@ int __init omap_wakeupgen_init(void)
 		max_irqs = OMAP4_NR_IRQS;
 		omap_secure_apis = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	} else if (soc_is_am43xx()) {
+		irq_banks = AM43XX_NR_REG_BANKS;
+		max_irqs = AM43XX_IRQS;
+>>>>>>> v3.18
 =======
 	} else if (soc_is_am43xx()) {
 		irq_banks = AM43XX_NR_REG_BANKS;
@@ -515,7 +583,12 @@ int __init omap_wakeupgen_init(void)
 	for (i = 0; i < irq_banks; i++) {
 		wakeupgen_writel(0, i, CPU0_ID);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wakeupgen_writel(0, i, CPU1_ID);
+=======
+		if (!soc_is_am43xx())
+			wakeupgen_writel(0, i, CPU1_ID);
+>>>>>>> v3.18
 =======
 		if (!soc_is_am43xx())
 			wakeupgen_writel(0, i, CPU1_ID);
@@ -540,7 +613,10 @@ int __init omap_wakeupgen_init(void)
 		irq_target_cpu[i] = boot_cpu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Enables OMAP5 ES2 PM Mode using ES2_PM_MODE in AMBA_IF_MODE
 	 * 0x0:	ES1 behavior, CPU cores would enter and exit OFF mode together.
@@ -557,6 +633,9 @@ int __init omap_wakeupgen_init(void)
 		omap_smc1(OMAP5_MON_AMBA_IF_INDEX, val);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	irq_hotplug_init();
 	irq_pm_init();

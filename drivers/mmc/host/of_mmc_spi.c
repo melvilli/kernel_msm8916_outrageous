@@ -51,6 +51,7 @@ static struct of_mmc_spi *to_of_mmc_spi(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int of_mmc_spi_read_gpio(struct device *dev, int gpio_num)
 {
 	struct of_mmc_spi *oms = to_of_mmc_spi(dev);
@@ -70,6 +71,8 @@ static int of_mmc_spi_get_ro(struct device *dev)
 	return of_mmc_spi_read_gpio(dev, WP_GPIO);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int of_mmc_spi_init(struct device *dev,
@@ -134,6 +137,7 @@ struct mmc_spi_platform_data *mmc_spi_get_pdata(struct spi_device *spi)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = gpio_request(oms->gpios[i], dev_name(dev));
 		if (ret < 0) {
 			oms->gpios[i] = -EINVAL;
@@ -142,16 +146,21 @@ struct mmc_spi_platform_data *mmc_spi_get_pdata(struct spi_device *spi)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		if (gpio_flags & OF_GPIO_ACTIVE_LOW)
 			oms->alow_gpios[i] = true;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (gpio_is_valid(oms->gpios[CD_GPIO]))
 		oms->pdata.get_cd = of_mmc_spi_get_cd;
 	if (gpio_is_valid(oms->gpios[WP_GPIO]))
 		oms->pdata.get_ro = of_mmc_spi_get_ro;
 =======
+=======
+>>>>>>> v3.18
 	if (gpio_is_valid(oms->gpios[CD_GPIO])) {
 		oms->pdata.cd_gpio = oms->gpios[CD_GPIO];
 		oms->pdata.flags |= MMC_SPI_USE_CD_GPIO;
@@ -164,6 +173,9 @@ struct mmc_spi_platform_data *mmc_spi_get_pdata(struct spi_device *spi)
 		if (!oms->alow_gpios[WP_GPIO])
 			oms->pdata.caps2 |= MMC_CAP2_RO_ACTIVE_HIGH;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	oms->detect_irq = irq_of_parse_and_map(np, 0);
@@ -188,7 +200,10 @@ void mmc_spi_put_pdata(struct spi_device *spi)
 	struct device_node *np = dev->of_node;
 	struct of_mmc_spi *oms = to_of_mmc_spi(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -196,10 +211,13 @@ void mmc_spi_put_pdata(struct spi_device *spi)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < ARRAY_SIZE(oms->gpios); i++) {
 		if (gpio_is_valid(oms->gpios[i]))
 			gpio_free(oms->gpios[i]);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(oms);

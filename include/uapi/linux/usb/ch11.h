@@ -12,7 +12,10 @@
 #include <linux/types.h>	/* __u8 etc */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This is arbitrary.
  * From USB 2.0 spec Table 11-13, offset 7, a hub can
  * have up to 255 ports. The most yet reported is 10.
@@ -24,6 +27,9 @@
  */
 #define USB_MAXCHILDREN		31
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Hub request types

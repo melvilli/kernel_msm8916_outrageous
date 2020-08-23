@@ -33,7 +33,10 @@ static const struct bcma_device_id_name bcma_bcm_device_names[] = {
 	{ BCMA_CORE_4706_SOC_RAM, "BCM4706 SOC RAM" },
 	{ BCMA_CORE_4706_MAC_GBIT, "BCM4706 GBit MAC" },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{ BCMA_CORE_NS_PCIEG2, "PCIe Gen 2" },
 	{ BCMA_CORE_NS_DMA, "DMA" },
 	{ BCMA_CORE_NS_SDIO3, "SDIO3" },
@@ -46,6 +49,9 @@ static const struct bcma_device_id_name bcma_bcm_device_names[] = {
 	{ BCMA_CORE_NS_QSPI, "SPI flash controller" },
 	{ BCMA_CORE_NS_CHIPCOMMON_B, "Chipcommon B" },
 	{ BCMA_CORE_ARMCA9, "ARM Cortex A9 core (ihost)" },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ BCMA_CORE_AMEMC, "AMEMC (DDR)" },
 	{ BCMA_CORE_ALTA, "ALTA (I2S)" },
@@ -217,7 +223,11 @@ static s32 bcma_erom_get_mst_port(struct bcma_bus *bus, u32 __iomem **eromptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static s32 bcma_erom_get_addr_desc(struct bcma_bus *bus, u32 __iomem **eromptr,
+=======
+static u32 bcma_erom_get_addr_desc(struct bcma_bus *bus, u32 __iomem **eromptr,
+>>>>>>> v3.18
 =======
 static u32 bcma_erom_get_addr_desc(struct bcma_bus *bus, u32 __iomem **eromptr,
 >>>>>>> v3.18
@@ -233,7 +243,11 @@ static u32 bcma_erom_get_addr_desc(struct bcma_bus *bus, u32 __iomem **eromptr,
 	    (((ent & SCAN_ADDR_PORT) >> SCAN_ADDR_PORT_SHIFT) != port)) {
 		bcma_erom_push_ent(eromptr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return (u32)-EINVAL;
+>>>>>>> v3.18
 =======
 		return (u32)-EINVAL;
 >>>>>>> v3.18
@@ -281,6 +295,11 @@ static struct bcma_device *bcma_find_core_reverse(struct bcma_bus *bus, u16 core
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IS_ERR_VALUE_U32(x) ((x) >= (u32)-MAX_ERRNO)
+
+>>>>>>> v3.18
 =======
 #define IS_ERR_VALUE_U32(x) ((x) >= (u32)-MAX_ERRNO)
 
@@ -290,8 +309,13 @@ static int bcma_get_next_core(struct bcma_bus *bus, u32 __iomem **eromptr,
 			      struct bcma_device *core)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 tmp;
 	u8 i, j;
+=======
+	u32 tmp;
+	u8 i, j, k;
+>>>>>>> v3.18
 =======
 	u32 tmp;
 	u8 i, j, k;
@@ -334,6 +358,10 @@ static int bcma_get_next_core(struct bcma_bus *bus, u32 __iomem **eromptr,
 		switch (core->id.id) {
 		case BCMA_CORE_4706_MAC_GBIT_COMMON:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case BCMA_CORE_NS_CHIPCOMMON_B:
+>>>>>>> v3.18
 =======
 		case BCMA_CORE_NS_CHIPCOMMON_B:
 >>>>>>> v3.18
@@ -377,17 +405,23 @@ static int bcma_get_next_core(struct bcma_bus *bus, u32 __iomem **eromptr,
 	 */
 	tmp = bcma_erom_get_addr_desc(bus, eromptr, SCAN_ADDR_TYPE_SLAVE, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tmp <= 0) {
 		/* Try again to see if it is a bridge */
 		tmp = bcma_erom_get_addr_desc(bus, eromptr,
 					      SCAN_ADDR_TYPE_BRIDGE, 0);
 		if (tmp <= 0) {
 =======
+=======
+>>>>>>> v3.18
 	if (tmp == 0 || IS_ERR_VALUE_U32(tmp)) {
 		/* Try again to see if it is a bridge */
 		tmp = bcma_erom_get_addr_desc(bus, eromptr,
 					      SCAN_ADDR_TYPE_BRIDGE, 0);
 		if (tmp == 0 || IS_ERR_VALUE_U32(tmp)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EILSEQ;
 		} else {
@@ -399,6 +433,10 @@ static int bcma_get_next_core(struct bcma_bus *bus, u32 __iomem **eromptr,
 
 	/* get & parse slave ports */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	k = 0;
+>>>>>>> v3.18
 =======
 	k = 0;
 >>>>>>> v3.18
@@ -407,7 +445,11 @@ static int bcma_get_next_core(struct bcma_bus *bus, u32 __iomem **eromptr,
 			tmp = bcma_erom_get_addr_desc(bus, eromptr,
 				SCAN_ADDR_TYPE_SLAVE, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (tmp < 0) {
+=======
+			if (IS_ERR_VALUE_U32(tmp)) {
+>>>>>>> v3.18
 =======
 			if (IS_ERR_VALUE_U32(tmp)) {
 >>>>>>> v3.18
@@ -416,9 +458,15 @@ static int bcma_get_next_core(struct bcma_bus *bus, u32 __iomem **eromptr,
 				 * "has %d descriptors\n", i, j); */
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else {
 				if (i == 0 && j == 0)
 					core->addr1 = tmp;
+=======
+			} else if (k < ARRAY_SIZE(core->addr_s)) {
+				core->addr_s[k] = tmp;
+				k++;
+>>>>>>> v3.18
 =======
 			} else if (k < ARRAY_SIZE(core->addr_s)) {
 				core->addr_s[k] = tmp;
@@ -434,7 +482,11 @@ static int bcma_get_next_core(struct bcma_bus *bus, u32 __iomem **eromptr,
 			tmp = bcma_erom_get_addr_desc(bus, eromptr,
 				SCAN_ADDR_TYPE_MWRAP, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (tmp < 0) {
+=======
+			if (IS_ERR_VALUE_U32(tmp)) {
+>>>>>>> v3.18
 =======
 			if (IS_ERR_VALUE_U32(tmp)) {
 >>>>>>> v3.18
@@ -456,7 +508,11 @@ static int bcma_get_next_core(struct bcma_bus *bus, u32 __iomem **eromptr,
 			tmp = bcma_erom_get_addr_desc(bus, eromptr,
 				SCAN_ADDR_TYPE_SWRAP, i + hack);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (tmp < 0) {
+=======
+			if (IS_ERR_VALUE_U32(tmp)) {
+>>>>>>> v3.18
 =======
 			if (IS_ERR_VALUE_U32(tmp)) {
 >>>>>>> v3.18
@@ -475,11 +531,14 @@ static int bcma_get_next_core(struct bcma_bus *bus, u32 __iomem **eromptr,
 		if (!core->io_addr)
 			return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		core->io_wrap = ioremap_nocache(core->wrap, BCMA_CORE_SIZE);
 		if (!core->io_wrap) {
 			iounmap(core->io_addr);
 			return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 		if (core->wrap) {
 			core->io_wrap = ioremap_nocache(core->wrap,
 							BCMA_CORE_SIZE);
@@ -487,6 +546,9 @@ static int bcma_get_next_core(struct bcma_bus *bus, u32 __iomem **eromptr,
 				iounmap(core->io_addr);
 				return -ENOMEM;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -498,9 +560,13 @@ void bcma_init_bus(struct bcma_bus *bus)
 	s32 tmp;
 	struct bcma_chipinfo *chipinfo = &(bus->chipinfo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (bus->init_done)
 		return;
+=======
+	char chip_id[8];
+>>>>>>> v3.18
 =======
 	char chip_id[8];
 >>>>>>> v3.18
@@ -515,16 +581,22 @@ void bcma_init_bus(struct bcma_bus *bus)
 	chipinfo->rev = (tmp & BCMA_CC_ID_REV) >> BCMA_CC_ID_REV_SHIFT;
 	chipinfo->pkg = (tmp & BCMA_CC_ID_PKG) >> BCMA_CC_ID_PKG_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bcma_info(bus, "Found chip with id 0x%04X, rev 0x%02X and package 0x%02X\n",
 		  chipinfo->id, chipinfo->rev, chipinfo->pkg);
 
 	bus->init_done = true;
 =======
+=======
+>>>>>>> v3.18
 
 	snprintf(chip_id, ARRAY_SIZE(chip_id),
 		 (chipinfo->id > 0x9999) ? "%d" : "0x%04X", chipinfo->id);
 	bcma_info(bus, "Found chip with id %s, rev 0x%02X and package 0x%02X\n",
 		  chip_id, chipinfo->rev, chipinfo->pkg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -536,8 +608,11 @@ int bcma_bus_scan(struct bcma_bus *bus)
 	int err, core_num = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bcma_init_bus(bus);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	erombase = bcma_scan_read32(bus, 0, BCMA_CC_EROM);

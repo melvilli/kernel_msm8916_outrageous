@@ -208,7 +208,11 @@ static void jsfd_do_request(struct request_queue *q)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jsfd_read(req->buffer, jdp->dbase + offset, len);
+=======
+		jsfd_read(bio_data(req->bio), jdp->dbase + offset, len);
+>>>>>>> v3.18
 =======
 		jsfd_read(bio_data(req->bio), jdp->dbase + offset, len);
 >>>>>>> v3.18
@@ -512,7 +516,10 @@ static int jsflash_init(void)
 
 	/* Let us be really paranoid for modifications to probing code. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* extern enum sparc_cpu sparc_cpu_model; */ /* in <asm/system.h> */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sparc_cpu_model != sun4m) {

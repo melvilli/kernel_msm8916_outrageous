@@ -24,16 +24,22 @@ This document describes the Linux kernel Makefiles.
 	   --- 4.1 Simple Host Program
 	   --- 4.2 Composite Host Programs
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   --- 4.3 Defining shared libraries
 	   --- 4.4 Using C++ for host programs
 	   --- 4.5 Controlling compiler options for host programs
 	   --- 4.6 When host programs are actually built
 	   --- 4.7 Using hostprogs-$(CONFIG_FOO)
 =======
+=======
+>>>>>>> v3.18
 	   --- 4.3 Using C++ for host programs
 	   --- 4.4 Controlling compiler options for host programs
 	   --- 4.5 When host programs are actually built
 	   --- 4.6 Using hostprogs-$(CONFIG_FOO)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	=== 5 Kbuild clean infrastructure
@@ -183,7 +189,11 @@ more details, with real examples.
 --- 3.3 Loadable module goals - obj-m
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(obj-m) specify object files which are built as loadable
+=======
+	$(obj-m) specifies object files which are built as loadable
+>>>>>>> v3.18
 =======
 	$(obj-m) specifies object files which are built as loadable
 >>>>>>> v3.18
@@ -290,7 +300,11 @@ more details, with real examples.
 	Kbuild only uses this information to decide that it needs to visit
 	the directory, it is the Makefile in the subdirectory that
 <<<<<<< HEAD
+<<<<<<< HEAD
 	specifies what is modules and what is built-in.
+=======
+	specifies what is modular and what is built-in.
+>>>>>>> v3.18
 =======
 	specifies what is modular and what is built-in.
 >>>>>>> v3.18
@@ -420,7 +434,11 @@ more details, with real examples.
 	but when execution "make -s" one does not expect to see any output
 	except for warnings/errors.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	To support this kbuild define $(kecho) which will echo out the
+=======
+	To support this kbuild defines $(kecho) which will echo out the
+>>>>>>> v3.18
 =======
 	To support this kbuild defines $(kecho) which will echo out the
 >>>>>>> v3.18
@@ -438,7 +456,11 @@ more details, with real examples.
 	The kernel may be built with several different versions of
 	$(CC), each supporting a unique set of features and options.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kbuild provide basic support to check for valid options for $(CC).
+=======
+	kbuild provides basic support to check for valid options for $(CC).
+>>>>>>> v3.18
 =======
 	kbuild provides basic support to check for valid options for $(CC).
 >>>>>>> v3.18
@@ -481,8 +503,13 @@ more details, with real examples.
 
     cc-option
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cc-option is used to check if $(CC) supports a given option, and not
 	supported to use an optional second option.
+=======
+	cc-option is used to check if $(CC) supports a given option, and if
+	not supported to use an optional second option.
+>>>>>>> v3.18
 =======
 	cc-option is used to check if $(CC) supports a given option, and if
 	not supported to use an optional second option.
@@ -587,8 +614,13 @@ more details, with real examples.
 		fi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	In this example for a specific GCC version the build will error out explaining
 	to the user why it stops.
+=======
+	In this example for a specific GCC version the build will error out
+	explaining to the user why it stops.
+>>>>>>> v3.18
 =======
 	In this example for a specific GCC version the build will error out
 	explaining to the user why it stops.
@@ -677,6 +709,7 @@ Both possibilities are described in the following.
 	Note: The syntax <executable>-y is not permitted for host-programs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- 4.3 Defining shared libraries
 
 	Objects with extension .so are considered shared libraries, and
@@ -703,6 +736,9 @@ Both possibilities are described in the following.
 =======
 --- 4.3 Using C++ for host programs
 >>>>>>> v3.18
+=======
+--- 4.3 Using C++ for host programs
+>>>>>>> v3.18
 
 	kbuild offers support for host programs written in C++. This was
 	introduced solely to support kconfig, and is not recommended
@@ -717,7 +753,11 @@ Both possibilities are described in the following.
 	qconf.cc - identified by $(qconf-cxxobjs).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	If qconf is composed by a mixture of .c and .cc files, then an
+=======
+	If qconf is composed of a mixture of .c and .cc files, then an
+>>>>>>> v3.18
 =======
 	If qconf is composed of a mixture of .c and .cc files, then an
 >>>>>>> v3.18
@@ -730,7 +770,11 @@ Both possibilities are described in the following.
 		qconf-objs    := check.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- 4.5 Controlling compiler options for host programs
+=======
+--- 4.4 Controlling compiler options for host programs
+>>>>>>> v3.18
 =======
 --- 4.4 Controlling compiler options for host programs
 >>>>>>> v3.18
@@ -762,7 +806,11 @@ Both possibilities are described in the following.
 	"-L$(QTDIR)/lib".
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- 4.6 When host programs are actually built
+=======
+--- 4.5 When host programs are actually built
+>>>>>>> v3.18
 =======
 --- 4.5 When host programs are actually built
 >>>>>>> v3.18
@@ -797,7 +845,11 @@ Both possibilities are described in the following.
 	any rule.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- 4.7 Using hostprogs-$(CONFIG_FOO)
+=======
+--- 4.6 Using hostprogs-$(CONFIG_FOO)
+>>>>>>> v3.18
 =======
 --- 4.6 Using hostprogs-$(CONFIG_FOO)
 >>>>>>> v3.18
@@ -810,7 +862,11 @@ Both possibilities are described in the following.
 
 	Kbuild knows about both 'y' for built-in and 'm' for module.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	So if a config symbol evaluate to 'm', kbuild will still build
+=======
+	So if a config symbol evaluates to 'm', kbuild will still build
+>>>>>>> v3.18
 =======
 	So if a config symbol evaluates to 'm', kbuild will still build
 >>>>>>> v3.18
@@ -835,8 +891,13 @@ Additional files can be specified in kbuild makefiles by use of $(clean-files).
 		clean-files := devlist.h classlist.h
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 When executing "make clean", the two files "devlist.h classlist.h" will
 be deleted. Kbuild will assume files to be in same relative directory as the
+=======
+When executing "make clean", the two files "devlist.h classlist.h" will be
+deleted. Kbuild will assume files to be in the same relative directory as the
+>>>>>>> v3.18
 =======
 When executing "make clean", the two files "devlist.h classlist.h" will be
 deleted. Kbuild will assume files to be in the same relative directory as the
@@ -872,7 +933,11 @@ The above assignment instructs kbuild to descend down in the
 directory compressed/ when "make clean" is executed.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 To support the clean infrastructure in the Makefiles that builds the
+=======
+To support the clean infrastructure in the Makefiles that build the
+>>>>>>> v3.18
 =======
 To support the clean infrastructure in the Makefiles that build the
 >>>>>>> v3.18
@@ -908,6 +973,7 @@ When kbuild executes, the following steps are followed (roughly):
 1) Configuration of the kernel => produce .config
 2) Store kernel version in include/linux/version.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 3) Symlink include/asm to include/asm-$(ARCH)
 4) Updating all other prerequisites to the target prepare:
    - Additional prerequisites are specified in arch/$(ARCH)/Makefile
@@ -920,6 +986,8 @@ When kbuild executes, the following steps are followed (roughly):
    arch/$(ARCH)/Makefile.
 7) Finally, the architecture-specific part does any required post processing
 =======
+=======
+>>>>>>> v3.18
 3) Updating all other prerequisites to the target prepare:
    - Additional prerequisites are specified in arch/$(ARCH)/Makefile
 4) Recursively descend down in all directories listed in
@@ -930,6 +998,9 @@ When kbuild executes, the following steps are followed (roughly):
    The very first objects linked are listed in head-y, assigned by
    arch/$(ARCH)/Makefile.
 6) Finally, the architecture-specific part does any required post processing
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
    and builds the final bootimage.
    - This includes building boot records
@@ -1030,7 +1101,11 @@ When kbuild executes, the following steps are followed (roughly):
     KBUILD_AFLAGS_MODULE   Options for $(AS) when building modules
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(KBUILD_AFLAGS_MODULE) is used to add arch specific options that
+=======
+	$(KBUILD_AFLAGS_MODULE) is used to add arch-specific options that
+>>>>>>> v3.18
 =======
 	$(KBUILD_AFLAGS_MODULE) is used to add arch-specific options that
 >>>>>>> v3.18
@@ -1045,7 +1120,11 @@ When kbuild executes, the following steps are followed (roughly):
     KBUILD_CFLAGS_MODULE   Options for $(CC) when building modules
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(KBUILD_CFLAGS_MODULE) is used to add arch specific options that
+=======
+	$(KBUILD_CFLAGS_MODULE) is used to add arch-specific options that
+>>>>>>> v3.18
 =======
 	$(KBUILD_CFLAGS_MODULE) is used to add arch-specific options that
 >>>>>>> v3.18
@@ -1055,7 +1134,11 @@ When kbuild executes, the following steps are followed (roughly):
     KBUILD_LDFLAGS_MODULE   Options for $(LD) when linking modules
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(KBUILD_LDFLAGS_MODULE) is used to add arch specific options
+=======
+	$(KBUILD_LDFLAGS_MODULE) is used to add arch-specific options
+>>>>>>> v3.18
 =======
 	$(KBUILD_LDFLAGS_MODULE) is used to add arch-specific options
 >>>>>>> v3.18
@@ -1181,7 +1264,11 @@ When kbuild executes, the following steps are followed (roughly):
     extra-y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extra-y specify additional targets created in the current
+=======
+	extra-y specifies additional targets created in the current
+>>>>>>> v3.18
 =======
 	extra-y specifies additional targets created in the current
 >>>>>>> v3.18
@@ -1212,7 +1299,11 @@ When kbuild executes, the following steps are followed (roughly):
 	Usage:
 		target: source(s) FORCE
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$(call if_changed,ld/objcopy/gzip)
+=======
+			$(call if_changed,ld/objcopy/gzip/...)
+>>>>>>> v3.18
 =======
 			$(call if_changed,ld/objcopy/gzip/...)
 >>>>>>> v3.18
@@ -1234,7 +1325,11 @@ When kbuild executes, the following steps are followed (roughly):
 	after the comma):
 		target: source(s) FORCE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	#WRONG!#	$(call if_changed, ld/objcopy/gzip)
+=======
+	#WRONG!#	$(call if_changed, ld/objcopy/gzip/...)
+>>>>>>> v3.18
 =======
 	#WRONG!#	$(call if_changed, ld/objcopy/gzip/...)
 >>>>>>> v3.18
@@ -1269,8 +1364,13 @@ When kbuild executes, the following steps are followed (roughly):
 
 	The ": %: %.o" part of the prerequisite is a shorthand that
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free us from listing the setup.o and bootsect.o files.
 	Note: It is a common mistake to forget the "target :=" assignment,
+=======
+	frees us from listing the setup.o and bootsect.o files.
+	Note: It is a common mistake to forget the "targets :=" assignment,
+>>>>>>> v3.18
 =======
 	frees us from listing the setup.o and bootsect.o files.
 	Note: It is a common mistake to forget the "targets :=" assignment,
@@ -1280,7 +1380,11 @@ When kbuild executes, the following steps are followed (roughly):
 
     dtc
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Create flattend device tree blob object suitable for linking
+=======
+	Create flattened device tree blob object suitable for linking
+>>>>>>> v3.18
 =======
 	Create flattened device tree blob object suitable for linking
 >>>>>>> v3.18
@@ -1299,6 +1403,7 @@ When kbuild executes, the following steps are followed (roughly):
 		clean-files += *.dtb
 		DTC_FLAGS ?= -p 1024
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     dtc_cpp
 	This is just like dtc as describe above, except that the C pre-
@@ -1323,6 +1428,8 @@ When kbuild executes, the following steps are followed (roughly):
 	A central rule exists to create $(obj)/%.dtb from $(src)/%.dtsp;
 	architecture Makefiles do no need to explicitly write out that rule.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 --- 6.8 Custom kbuild commands
@@ -1376,17 +1483,23 @@ When kbuild executes, the following steps are followed (roughly):
 	KBUILD_CPPFLAGS	: Set in top-level Makefile
 	cppflags-y	: May be set in the kbuild makefile
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CPPFLAGS_$(@F)  : Target specific flags.
 	                  Note that the full filename is used in this
 	                  assignment.
 
 	The kbuild infrastructure for *lds file are used in several
 =======
+=======
+>>>>>>> v3.18
 	CPPFLAGS_$(@F)  : Target-specific flags.
 	                  Note that the full filename is used in this
 	                  assignment.
 
 	The kbuild infrastructure for *lds files is used in several
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	architecture-specific files.
 
@@ -1401,17 +1514,23 @@ When kbuild executes, the following steps are followed (roughly):
 === 7 Kbuild syntax for exported headers
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The kernel include a set of headers that is exported to userspace.
 Many headers can be exported as-is but other headers require a
 minimal pre-processing before they are ready for user-space.
 The pre-processing does:
 - drop kernel specific annotations
 =======
+=======
+>>>>>>> v3.18
 The kernel includes a set of headers that is exported to userspace.
 Many headers can be exported as-is but other headers require a
 minimal pre-processing before they are ready for user-space.
 The pre-processing does:
 - drop kernel-specific annotations
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - drop include of compiler.h
 - drop all sections that are kernel internal (guarded by ifdef __KERNEL__)
@@ -1423,7 +1542,11 @@ See subsequent chapter for the syntax of the Kbuild file.
 	--- 7.1 header-y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	header-y specify header files to be exported.
+=======
+	header-y specifies header files to be exported.
+>>>>>>> v3.18
 =======
 	header-y specifies header files to be exported.
 >>>>>>> v3.18
@@ -1437,7 +1560,11 @@ See subsequent chapter for the syntax of the Kbuild file.
 	preferably in alphabetic order.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	header-y also specify which subdirectories to visit.
+=======
+	header-y also specifies which subdirectories to visit.
+>>>>>>> v3.18
 =======
 	header-y also specifies which subdirectories to visit.
 >>>>>>> v3.18
@@ -1459,9 +1586,15 @@ See subsequent chapter for the syntax of the Kbuild file.
 	--- 7.3 destination-y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	When an architecture have a set of exported headers that needs to be
 	exported to a different directory destination-y is used.
 	destination-y specify the destination directory for all exported
+=======
+	When an architecture has a set of exported headers that needs to be
+	exported to a different directory destination-y is used.
+	destination-y specifies the destination directory for all exported
+>>>>>>> v3.18
 =======
 	When an architecture has a set of exported headers that needs to be
 	exported to a different directory destination-y is used.
@@ -1560,9 +1693,15 @@ The top Makefile exports the following variables:
     INSTALL_MOD_STRIP
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	If this variable is specified, will cause modules to be stripped
 	after they are installed.  If INSTALL_MOD_STRIP is '1', then the
 	default option --strip-debug will be used.  Otherwise,
+=======
+	If this variable is specified, it will cause modules to be stripped
+	after they are installed.  If INSTALL_MOD_STRIP is '1', then the
+	default option --strip-debug will be used.  Otherwise, the
+>>>>>>> v3.18
 =======
 	If this variable is specified, it will cause modules to be stripped
 	after they are installed.  If INSTALL_MOD_STRIP is '1', then the

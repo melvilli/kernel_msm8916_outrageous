@@ -458,9 +458,12 @@
 /* miscellaneous control */
 #define S3C2410_MISCCR	   S3C2410_GPIOREG(0x80)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S3C2410_DCLKCON	   S3C2410_GPIOREG(0x84)
 
 #define S3C24XX_DCLKCON	   S3C24XX_GPIOREG2(0x84)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

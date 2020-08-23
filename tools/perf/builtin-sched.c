@@ -11,6 +11,10 @@
 #include "util/session.h"
 #include "util/tool.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util/cloexec.h"
+>>>>>>> v3.18
 =======
 #include "util/cloexec.h"
 >>>>>>> v3.18
@@ -71,7 +75,11 @@ struct sched_atom {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TASK_STATE_TO_CHAR_STR "RSDTtZX"
+=======
+#define TASK_STATE_TO_CHAR_STR "RSDTtZXxKWP"
+>>>>>>> v3.18
 =======
 #define TASK_STATE_TO_CHAR_STR "RSDTtZXxKWP"
 >>>>>>> v3.18
@@ -118,8 +126,14 @@ struct trace_sched_handler {
 			    struct perf_sample *sample, struct machine *machine);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*fork_event)(struct perf_sched *sched, struct perf_evsel *evsel,
 			  struct perf_sample *sample);
+=======
+	/* PERF_RECORD_FORK event, not sched_process_fork tracepoint */
+	int (*fork_event)(struct perf_sched *sched, union perf_event *event,
+			  struct machine *machine);
+>>>>>>> v3.18
 =======
 	/* PERF_RECORD_FORK event, not sched_process_fork tracepoint */
 	int (*fork_event)(struct perf_sched *sched, union perf_event *event,
@@ -163,7 +177,10 @@ struct perf_sched {
 	unsigned long	 nr_timestamps;
 	unsigned long	 nr_unordered_timestamps;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long	 nr_state_machine_bugs;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long	 nr_context_switch_bugs;
@@ -445,6 +462,10 @@ static int self_open_counters(void)
 {
 	struct perf_event_attr attr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+>>>>>>> v3.18
 =======
 	char sbuf[STRERR_BUFSIZE];
 >>>>>>> v3.18
@@ -456,12 +477,15 @@ static int self_open_counters(void)
 	attr.config = PERF_COUNT_SW_TASK_CLOCK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fd = sys_perf_event_open(&attr, 0, -1, -1, 0);
 
 	if (fd < 0)
 		pr_err("Error: sys_perf_event_open() syscall returned "
 		       "with %d (%s)\n", fd, strerror(errno));
 =======
+=======
+>>>>>>> v3.18
 	fd = sys_perf_event_open(&attr, 0, -1, -1,
 				 perf_event_open_cloexec_flag());
 
@@ -469,6 +493,9 @@ static int self_open_counters(void)
 		pr_err("Error: sys_perf_event_open() syscall returned "
 		       "with %d (%s)\n", fd,
 		       strerror_r(errno, sbuf, sizeof(sbuf)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return fd;
 }
@@ -500,7 +527,11 @@ static void *thread_func(void *ctx)
 	int fd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(parms);
+=======
+	zfree(&parms);
+>>>>>>> v3.18
 =======
 	zfree(&parms);
 >>>>>>> v3.18
@@ -753,6 +784,7 @@ static int replay_switch_event(struct perf_sched *sched,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int replay_fork_event(struct perf_sched *sched, struct perf_evsel *evsel,
 			     struct perf_sample *sample)
 {
@@ -770,6 +802,8 @@ static int replay_fork_event(struct perf_sched *sched, struct perf_evsel *evsel,
 	register_pid(sched, parent_pid, parent_comm);
 	register_pid(sched, child_pid, child_comm);
 =======
+=======
+>>>>>>> v3.18
 static int replay_fork_event(struct perf_sched *sched,
 			     union perf_event *event,
 			     struct machine *machine)
@@ -795,6 +829,9 @@ static int replay_fork_event(struct perf_sched *sched,
 
 	register_pid(sched, parent->tid, thread__comm_str(parent));
 	register_pid(sched, child->tid, thread__comm_str(child));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -888,6 +925,7 @@ static int thread_atoms_insert(struct perf_sched *sched, struct thread *thread)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int latency_fork_event(struct perf_sched *sched __maybe_unused,
 			      struct perf_evsel *evsel __maybe_unused,
 			      struct perf_sample *sample __maybe_unused)
@@ -896,6 +934,8 @@ static int latency_fork_event(struct perf_sched *sched __maybe_unused,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static char sched_out_state(u64 prev_state)
@@ -1001,8 +1041,13 @@ static int latency_switch_event(struct perf_sched *sched,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sched_out = machine__findnew_thread(machine, prev_pid);
 	sched_in = machine__findnew_thread(machine, next_pid);
+=======
+	sched_out = machine__findnew_thread(machine, -1, prev_pid);
+	sched_in = machine__findnew_thread(machine, -1, next_pid);
+>>>>>>> v3.18
 =======
 	sched_out = machine__findnew_thread(machine, -1, prev_pid);
 	sched_in = machine__findnew_thread(machine, -1, next_pid);
@@ -1050,7 +1095,11 @@ static int latency_runtime_event(struct perf_sched *sched,
 	const u32 pid	   = perf_evsel__intval(evsel, sample, "pid");
 	const u64 runtime  = perf_evsel__intval(evsel, sample, "runtime");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct thread *thread = machine__findnew_thread(machine, pid);
+=======
+	struct thread *thread = machine__findnew_thread(machine, -1, pid);
+>>>>>>> v3.18
 =======
 	struct thread *thread = machine__findnew_thread(machine, -1, pid);
 >>>>>>> v3.18
@@ -1081,8 +1130,12 @@ static int latency_wakeup_event(struct perf_sched *sched,
 				struct machine *machine)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 pid	  = perf_evsel__intval(evsel, sample, "pid"),
 		  success = perf_evsel__intval(evsel, sample, "success");
+=======
+	const u32 pid	  = perf_evsel__intval(evsel, sample, "pid");
+>>>>>>> v3.18
 =======
 	const u32 pid	  = perf_evsel__intval(evsel, sample, "pid");
 >>>>>>> v3.18
@@ -1092,11 +1145,15 @@ static int latency_wakeup_event(struct perf_sched *sched,
 	u64 timestamp = sample->time;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Note for later, it may be interesting to observe the failing cases */
 	if (!success)
 		return 0;
 
 	wakee = machine__findnew_thread(machine, pid);
+=======
+	wakee = machine__findnew_thread(machine, -1, pid);
+>>>>>>> v3.18
 =======
 	wakee = machine__findnew_thread(machine, -1, pid);
 >>>>>>> v3.18
@@ -1119,6 +1176,7 @@ static int latency_wakeup_event(struct perf_sched *sched,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * You WILL be missing events if you've recorded only
 	 * one CPU, or are only looking at only one, so don't
 	 * make useless noise.
@@ -1126,6 +1184,8 @@ static int latency_wakeup_event(struct perf_sched *sched,
 	if (sched->profile_cpu == -1 && atom->state != THREAD_SLEEPING)
 		sched->nr_state_machine_bugs++;
 =======
+=======
+>>>>>>> v3.18
 	 * As we do not guarantee the wakeup event happens when
 	 * task is out of run queue, also may happen when task is
 	 * on run queue and wakeup only change ->state to TASK_RUNNING,
@@ -1138,6 +1198,9 @@ static int latency_wakeup_event(struct perf_sched *sched,
 	 */
 	if (sched->profile_cpu == -1 && atom->state != THREAD_SLEEPING)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sched->nr_timestamps++;
@@ -1169,7 +1232,11 @@ static int latency_migrate_task_event(struct perf_sched *sched,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	migrant = machine__findnew_thread(machine, pid);
+=======
+	migrant = machine__findnew_thread(machine, -1, pid);
+>>>>>>> v3.18
 =======
 	migrant = machine__findnew_thread(machine, -1, pid);
 >>>>>>> v3.18
@@ -1178,7 +1245,11 @@ static int latency_migrate_task_event(struct perf_sched *sched,
 		if (thread_atoms_insert(sched, migrant))
 			return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		register_pid(sched, migrant->pid, migrant->comm);
+=======
+		register_pid(sched, migrant->tid, thread__comm_str(migrant));
+>>>>>>> v3.18
 =======
 		register_pid(sched, migrant->tid, thread__comm_str(migrant));
 >>>>>>> v3.18
@@ -1216,7 +1287,11 @@ static void output_lat_thread(struct perf_sched *sched, struct work_atoms *work_
 	 * Ignore idle threads:
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strcmp(work_list->thread->comm, "swapper"))
+=======
+	if (!strcmp(thread__comm_str(work_list->thread), "swapper"))
+>>>>>>> v3.18
 =======
 	if (!strcmp(thread__comm_str(work_list->thread), "swapper"))
 >>>>>>> v3.18
@@ -1226,7 +1301,11 @@ static void output_lat_thread(struct perf_sched *sched, struct work_atoms *work_
 	sched->all_count   += work_list->nb_atoms;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = printf("  %s:%d ", work_list->thread->comm, work_list->thread->pid);
+=======
+	ret = printf("  %s:%d ", thread__comm_str(work_list->thread), work_list->thread->tid);
+>>>>>>> v3.18
 =======
 	ret = printf("  %s:%d ", thread__comm_str(work_list->thread), work_list->thread->tid);
 >>>>>>> v3.18
@@ -1237,7 +1316,11 @@ static void output_lat_thread(struct perf_sched *sched, struct work_atoms *work_
 	avg = work_list->total_lat / work_list->nb_atoms;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("|%11.3f ms |%9" PRIu64 " | avg:%9.3f ms | max:%9.3f ms | max at: %9.6f s\n",
+=======
+	printf("|%11.3f ms |%9" PRIu64 " | avg:%9.3f ms | max:%9.3f ms | max at: %13.6f s\n",
+>>>>>>> v3.18
 =======
 	printf("|%11.3f ms |%9" PRIu64 " | avg:%9.3f ms | max:%9.3f ms | max at: %13.6f s\n",
 >>>>>>> v3.18
@@ -1250,9 +1333,15 @@ static void output_lat_thread(struct perf_sched *sched, struct work_atoms *work_
 static int pid_cmp(struct work_atoms *l, struct work_atoms *r)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (l->thread->pid < r->thread->pid)
 		return -1;
 	if (l->thread->pid > r->thread->pid)
+=======
+	if (l->thread->tid < r->thread->tid)
+		return -1;
+	if (l->thread->tid > r->thread->tid)
+>>>>>>> v3.18
 =======
 	if (l->thread->tid < r->thread->tid)
 		return -1;
@@ -1389,9 +1478,14 @@ static int map_switch_event(struct perf_sched *sched, struct perf_evsel *evsel,
 			    struct perf_sample *sample, struct machine *machine)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 prev_pid = perf_evsel__intval(evsel, sample, "prev_pid"),
 		  next_pid = perf_evsel__intval(evsel, sample, "next_pid");
 	struct thread *sched_out __maybe_unused, *sched_in;
+=======
+	const u32 next_pid = perf_evsel__intval(evsel, sample, "next_pid");
+	struct thread *sched_in;
+>>>>>>> v3.18
 =======
 	const u32 next_pid = perf_evsel__intval(evsel, sample, "next_pid");
 	struct thread *sched_in;
@@ -1419,8 +1513,12 @@ static int map_switch_event(struct perf_sched *sched, struct perf_evsel *evsel,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sched_out = machine__findnew_thread(machine, prev_pid);
 	sched_in = machine__findnew_thread(machine, next_pid);
+=======
+	sched_in = machine__findnew_thread(machine, -1, next_pid);
+>>>>>>> v3.18
 =======
 	sched_in = machine__findnew_thread(machine, -1, next_pid);
 >>>>>>> v3.18
@@ -1431,6 +1529,7 @@ static int map_switch_event(struct perf_sched *sched, struct perf_evsel *evsel,
 
 	new_shortname = 0;
 	if (!sched_in->shortname[0]) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		sched_in->shortname[0] = sched->next_shortname1;
 		sched_in->shortname[1] = sched->next_shortname2;
@@ -1444,6 +1543,8 @@ static int map_switch_event(struct perf_sched *sched, struct perf_evsel *evsel,
 			} else {
 				sched->next_shortname2='0';
 =======
+=======
+>>>>>>> v3.18
 		if (!strcmp(thread__comm_str(sched_in), "swapper")) {
 			/*
 			 * Don't allocate a letter-number for swapper:0
@@ -1463,6 +1564,9 @@ static int map_switch_event(struct perf_sched *sched, struct perf_evsel *evsel,
 					sched->next_shortname2++;
 				else
 					sched->next_shortname2 = '0';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -1476,12 +1580,18 @@ static int map_switch_event(struct perf_sched *sched, struct perf_evsel *evsel,
 			printf("*");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sched->curr_thread[cpu]) {
 			if (sched->curr_thread[cpu]->pid)
 				printf("%2s ", sched->curr_thread[cpu]->shortname);
 			else
 				printf(".  ");
 		} else
+=======
+		if (sched->curr_thread[cpu])
+			printf("%2s ", sched->curr_thread[cpu]->shortname);
+		else
+>>>>>>> v3.18
 =======
 		if (sched->curr_thread[cpu])
 			printf("%2s ", sched->curr_thread[cpu]->shortname);
@@ -1494,7 +1604,11 @@ static int map_switch_event(struct perf_sched *sched, struct perf_evsel *evsel,
 	if (new_shortname) {
 		printf("%s => %s:%d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sched_in->shortname, sched_in->comm, sched_in->pid);
+=======
+		       sched_in->shortname, thread__comm_str(sched_in), sched_in->tid);
+>>>>>>> v3.18
 =======
 		       sched_in->shortname, thread__comm_str(sched_in), sched_in->tid);
 >>>>>>> v3.18
@@ -1545,6 +1659,7 @@ static int process_sched_runtime_event(struct perf_tool *tool,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int process_sched_fork_event(struct perf_tool *tool,
 				    struct perf_evsel *evsel,
 				    struct perf_sample *sample,
@@ -1565,6 +1680,8 @@ static int process_sched_exit_event(struct perf_tool *tool __maybe_unused,
 {
 	pr_debug("sched_exit event %p\n", evsel);
 =======
+=======
+>>>>>>> v3.18
 static int perf_sched__process_fork_event(struct perf_tool *tool,
 					  union perf_event *event,
 					  struct perf_sample *sample,
@@ -1579,6 +1696,9 @@ static int perf_sched__process_fork_event(struct perf_tool *tool,
 	if (sched->tp_handler->fork_event)
 		return sched->tp_handler->fork_event(sched, event, machine);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1608,6 +1728,7 @@ static int perf_sched__process_tracepoint_sample(struct perf_tool *tool __maybe_
 						 struct machine *machine)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct thread *thread = machine__findnew_thread(machine, sample->tid);
 	int err = 0;
 
@@ -1623,10 +1744,15 @@ static int perf_sched__process_tracepoint_sample(struct perf_tool *tool __maybe_
 	if (evsel->handler.func != NULL) {
 		tracepoint_handler f = evsel->handler.func;
 =======
+=======
+>>>>>>> v3.18
 	int err = 0;
 
 	if (evsel->handler != NULL) {
 		tracepoint_handler f = evsel->handler;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = f(tool, evsel, sample, machine);
 	}
@@ -1635,7 +1761,11 @@ static int perf_sched__process_tracepoint_sample(struct perf_tool *tool __maybe_
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int perf_sched__read_events(struct perf_sched *sched, bool destroy,
+=======
+static int perf_sched__read_events(struct perf_sched *sched,
+>>>>>>> v3.18
 =======
 static int perf_sched__read_events(struct perf_sched *sched,
 >>>>>>> v3.18
@@ -1647,6 +1777,7 @@ static int perf_sched__read_events(struct perf_sched *sched,
 		{ "sched:sched_wakeup",	      process_sched_wakeup_event, },
 		{ "sched:sched_wakeup_new",   process_sched_wakeup_event, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{ "sched:sched_process_fork", process_sched_fork_event, },
 		{ "sched:sched_process_exit", process_sched_exit_event, },
 		{ "sched:sched_migrate_task", process_sched_migrate_task_event, },
@@ -1655,6 +1786,8 @@ static int perf_sched__read_events(struct perf_sched *sched,
 
 	session = perf_session__new(input_name, O_RDONLY, 0, false, &sched->tool);
 =======
+=======
+>>>>>>> v3.18
 		{ "sched:sched_migrate_task", process_sched_migrate_task_event, },
 	};
 	struct perf_session *session;
@@ -1664,6 +1797,9 @@ static int perf_sched__read_events(struct perf_sched *sched,
 	};
 
 	session = perf_session__new(&file, false, &sched->tool);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (session == NULL) {
 		pr_debug("No Memory for session\n");
@@ -1671,6 +1807,11 @@ static int perf_sched__read_events(struct perf_sched *sched,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	symbol__init(&session->header.env);
+
+>>>>>>> v3.18
 =======
 	symbol__init(&session->header.env);
 
@@ -1691,16 +1832,22 @@ static int perf_sched__read_events(struct perf_sched *sched,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (destroy)
 		perf_session__delete(session);
 
 	if (psession)
 		*psession = session;
 =======
+=======
+>>>>>>> v3.18
 	if (psession)
 		*psession = session;
 	else
 		perf_session__delete(session);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1723,6 +1870,7 @@ static void print_bad_events(struct perf_sched *sched)
 			sched->nr_lost_events, sched->nr_events, sched->nr_lost_chunks);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sched->nr_state_machine_bugs && sched->nr_timestamps) {
 		printf("  INFO: %.3f%% state machine bugs (%ld out of %ld)",
 			(double)sched->nr_state_machine_bugs/(double)sched->nr_timestamps*100.0,
@@ -1731,6 +1879,8 @@ static void print_bad_events(struct perf_sched *sched)
 			printf(" (due to lost events?)");
 		printf("\n");
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sched->nr_context_switch_bugs && sched->nr_timestamps) {
@@ -1750,6 +1900,7 @@ static int perf_sched__lat(struct perf_sched *sched)
 
 	setup_pager();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (perf_sched__read_events(sched, false, &session))
 		return -1;
 	perf_sched__sort_lat(sched);
@@ -1758,6 +1909,8 @@ static int perf_sched__lat(struct perf_sched *sched)
 	printf("  Task                  |   Runtime ms  | Switches | Average delay ms | Maximum delay ms | Maximum delay at     |\n");
 	printf(" ---------------------------------------------------------------------------------------------------------------\n");
 =======
+=======
+>>>>>>> v3.18
 
 	/* save session -- references to threads are held in work_list */
 	if (perf_sched__read_events(sched, &session))
@@ -1768,6 +1921,9 @@ static int perf_sched__lat(struct perf_sched *sched)
 	printf("\n -----------------------------------------------------------------------------------------------------------------\n");
 	printf("  Task                  |   Runtime ms  | Switches | Average delay ms | Maximum delay ms | Maximum delay at       |\n");
 	printf(" -----------------------------------------------------------------------------------------------------------------\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	next = rb_first(&sched->sorted_atom_root);
@@ -1781,7 +1937,11 @@ static int perf_sched__lat(struct perf_sched *sched)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf(" -----------------------------------------------------------------------------------------\n");
+=======
+	printf(" -----------------------------------------------------------------------------------------------------------------\n");
+>>>>>>> v3.18
 =======
 	printf(" -----------------------------------------------------------------------------------------------------------------\n");
 >>>>>>> v3.18
@@ -1803,7 +1963,11 @@ static int perf_sched__map(struct perf_sched *sched)
 
 	setup_pager();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (perf_sched__read_events(sched, true, NULL))
+=======
+	if (perf_sched__read_events(sched, NULL))
+>>>>>>> v3.18
 =======
 	if (perf_sched__read_events(sched, NULL))
 >>>>>>> v3.18
@@ -1822,7 +1986,11 @@ static int perf_sched__replay(struct perf_sched *sched)
 	test_calibrations(sched);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (perf_sched__read_events(sched, true, NULL))
+=======
+	if (perf_sched__read_events(sched, NULL))
+>>>>>>> v3.18
 =======
 	if (perf_sched__read_events(sched, NULL))
 >>>>>>> v3.18
@@ -1878,7 +2046,10 @@ static int __cmd_record(int argc, const char **argv)
 		"-a",
 		"-R",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"-f",
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		"-m", "1024",
@@ -1889,9 +2060,15 @@ static int __cmd_record(int argc, const char **argv)
 		"-e", "sched:sched_stat_iowait",
 		"-e", "sched:sched_stat_runtime",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"-e", "sched:sched_process_exit",
 		"-e", "sched:sched_process_fork",
 		"-e", "sched:sched_wakeup",
+=======
+		"-e", "sched:sched_process_fork",
+		"-e", "sched:sched_wakeup",
+		"-e", "sched:sched_wakeup_new",
+>>>>>>> v3.18
 =======
 		"-e", "sched:sched_process_fork",
 		"-e", "sched:sched_wakeup",
@@ -1926,8 +2103,13 @@ int cmd_sched(int argc, const char **argv, const char *prefix __maybe_unused)
 			.comm		 = perf_event__process_comm,
 			.lost		 = perf_event__process_lost,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.fork		 = perf_event__process_fork,
 			.ordered_samples = true,
+=======
+			.fork		 = perf_sched__process_fork_event,
+			.ordered_events = true,
+>>>>>>> v3.18
 =======
 			.fork		 = perf_sched__process_fork_event,
 			.ordered_events = true,
@@ -1938,7 +2120,10 @@ int cmd_sched(int argc, const char **argv, const char *prefix __maybe_unused)
 		.start_work_mutex     = PTHREAD_MUTEX_INITIALIZER,
 		.work_done_wait_mutex = PTHREAD_MUTEX_INITIALIZER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.curr_pid	      = { [0 ... MAX_CPUS - 1] = -1 },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.sort_order	      = default_sort_order,
@@ -1985,13 +2170,19 @@ int cmd_sched(int argc, const char **argv, const char *prefix __maybe_unused)
 		NULL
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char * const sched_usage[] = {
 		"perf sched [<options>] {record|latency|map|replay|script}",
 =======
+=======
+>>>>>>> v3.18
 	const char *const sched_subcommands[] = { "record", "latency", "map",
 						  "replay", "script", NULL };
 	const char *sched_usage[] = {
 		NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		NULL
 	};
@@ -2000,7 +2191,10 @@ int cmd_sched(int argc, const char **argv, const char *prefix __maybe_unused)
 		.switch_event	    = latency_switch_event,
 		.runtime_event	    = latency_runtime_event,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.fork_event	    = latency_fork_event,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.migrate_task_event = latency_migrate_task_event,
@@ -2014,10 +2208,13 @@ int cmd_sched(int argc, const char **argv, const char *prefix __maybe_unused)
 		.fork_event	    = replay_fork_event,
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	argc = parse_options(argc, argv, sched_options, sched_usage,
 			     PARSE_OPT_STOP_AT_NON_OPTION);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int i;
 
 	for (i = 0; i < ARRAY_SIZE(sched.curr_pid); i++)
@@ -2025,6 +2222,9 @@ int cmd_sched(int argc, const char **argv, const char *prefix __maybe_unused)
 
 	argc = parse_options_subcommand(argc, argv, sched_options, sched_subcommands,
 					sched_usage, PARSE_OPT_STOP_AT_NON_OPTION);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!argc)
 		usage_with_options(sched_usage, sched_options);
@@ -2036,7 +2236,10 @@ int cmd_sched(int argc, const char **argv, const char *prefix __maybe_unused)
 		return cmd_script(argc, argv, prefix);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	symbol__init();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!strncmp(argv[0], "rec", 3)) {

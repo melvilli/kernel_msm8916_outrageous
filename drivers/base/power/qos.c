@@ -43,6 +43,10 @@
 #include <linux/pm_runtime.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <trace/events/power.h>
+>>>>>>> v3.18
 =======
 #include <trace/events/power.h>
 >>>>>>> v3.18
@@ -109,7 +113,11 @@ s32 __dev_pm_qos_read_value(struct device *dev)
 {
 	return IS_ERR_OR_NULL(dev->power.qos) ?
 <<<<<<< HEAD
+<<<<<<< HEAD
 		0 : pm_qos_read_value(&dev->power.qos->latency);
+=======
+		0 : pm_qos_read_value(&dev->power.qos->resume_latency);
+>>>>>>> v3.18
 =======
 		0 : pm_qos_read_value(&dev->power.qos->resume_latency);
 >>>>>>> v3.18
@@ -149,17 +157,23 @@ static int apply_constraint(struct dev_pm_qos_request *req,
 
 	switch(req->type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case DEV_PM_QOS_LATENCY:
 		ret = pm_qos_update_target(&qos->latency, &req->data.lat,
 					   action, value);
 		if (ret) {
 			value = pm_qos_read_value(&qos->latency);
 =======
+=======
+>>>>>>> v3.18
 	case DEV_PM_QOS_RESUME_LATENCY:
 		ret = pm_qos_update_target(&qos->resume_latency,
 					   &req->data.pnode, action, value);
 		if (ret) {
 			value = pm_qos_read_value(&qos->resume_latency);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			blocking_notifier_call_chain(&dev_pm_notifiers,
 						     (unsigned long)value,
@@ -167,7 +181,10 @@ static int apply_constraint(struct dev_pm_qos_request *req,
 		}
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case DEV_PM_QOS_LATENCY_TOLERANCE:
 		ret = pm_qos_update_target(&qos->latency_tolerance,
 					   &req->data.pnode, action, value);
@@ -176,6 +193,9 @@ static int apply_constraint(struct dev_pm_qos_request *req,
 			req->dev->power.set_latency_tolerance(req->dev, value);
 		}
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case DEV_PM_QOS_FLAGS:
 		ret = pm_qos_update_flags(&qos->flags, &req->data.flr,
@@ -213,6 +233,7 @@ static int dev_pm_qos_constraints_allocate(struct device *dev)
 	BLOCKING_INIT_NOTIFIER_HEAD(n);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c = &qos->latency;
 	plist_head_init(&c->list);
 	c->target_value = PM_QOS_DEV_LAT_DEFAULT_VALUE;
@@ -221,6 +242,8 @@ static int dev_pm_qos_constraints_allocate(struct device *dev)
 	c->notifiers = n;
 
 =======
+=======
+>>>>>>> v3.18
 	c = &qos->resume_latency;
 	plist_head_init(&c->list);
 	c->target_value = PM_QOS_RESUME_LATENCY_DEFAULT_VALUE;
@@ -236,6 +259,9 @@ static int dev_pm_qos_constraints_allocate(struct device *dev)
 	c->no_constraint_value = PM_QOS_LATENCY_TOLERANCE_NO_CONSTRAINT;
 	c->type = PM_QOS_MIN;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&qos->flags.list);
 
@@ -269,7 +295,11 @@ void dev_pm_qos_constraints_destroy(struct device *dev)
 	 * exposed to user space, they have to be hidden at this point.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_qos_sysfs_remove_latency(dev);
+=======
+	pm_qos_sysfs_remove_resume_latency(dev);
+>>>>>>> v3.18
 =======
 	pm_qos_sysfs_remove_resume_latency(dev);
 >>>>>>> v3.18
@@ -286,8 +316,13 @@ void dev_pm_qos_constraints_destroy(struct device *dev)
 
 	/* Flush the constraints lists for the device. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c = &qos->latency;
 	plist_for_each_entry_safe(req, tmp, &c->list, data.lat.node) {
+=======
+	c = &qos->resume_latency;
+	plist_for_each_entry_safe(req, tmp, &c->list, data.pnode) {
+>>>>>>> v3.18
 =======
 	c = &qos->resume_latency;
 	plist_for_each_entry_safe(req, tmp, &c->list, data.pnode) {
@@ -300,12 +335,18 @@ void dev_pm_qos_constraints_destroy(struct device *dev)
 		memset(req, 0, sizeof(*req));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	c = &qos->latency_tolerance;
 	plist_for_each_entry_safe(req, tmp, &c->list, data.pnode) {
 		apply_constraint(req, PM_QOS_REMOVE_REQ, PM_QOS_DEFAULT_VALUE);
 		memset(req, 0, sizeof(*req));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	f = &qos->flags;
 	list_for_each_entry_safe(req, tmp, &f->list, data.flr.node) {
@@ -327,7 +368,10 @@ void dev_pm_qos_constraints_destroy(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool dev_pm_qos_invalid_request(struct device *dev,
 				       struct dev_pm_qos_request *req)
 {
@@ -362,6 +406,9 @@ static int __dev_pm_qos_add_request(struct device *dev,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * dev_pm_qos_add_request - inserts new qos request into the list
@@ -389,6 +436,7 @@ int dev_pm_qos_add_request(struct device *dev, struct dev_pm_qos_request *req,
 			   enum dev_pm_qos_req_type type, s32 value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (!dev || !req) /*guard against callers passing in null */
@@ -414,11 +462,16 @@ int dev_pm_qos_add_request(struct device *dev, struct dev_pm_qos_request *req,
 	mutex_unlock(&dev_pm_qos_mtx);
 
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	mutex_lock(&dev_pm_qos_mtx);
 	ret = __dev_pm_qos_add_request(dev, req, type, value);
 	mutex_unlock(&dev_pm_qos_mtx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -447,8 +500,14 @@ static int __dev_pm_qos_update_request(struct dev_pm_qos_request *req,
 
 	switch(req->type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case DEV_PM_QOS_LATENCY:
 		curr_value = req->data.lat.node.prio;
+=======
+	case DEV_PM_QOS_RESUME_LATENCY:
+	case DEV_PM_QOS_LATENCY_TOLERANCE:
+		curr_value = req->data.pnode.prio;
+>>>>>>> v3.18
 =======
 	case DEV_PM_QOS_RESUME_LATENCY:
 	case DEV_PM_QOS_LATENCY_TOLERANCE:
@@ -463,6 +522,11 @@ static int __dev_pm_qos_update_request(struct dev_pm_qos_request *req,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_dev_pm_qos_update_request(dev_name(req->dev), req->type,
+					new_value);
+>>>>>>> v3.18
 =======
 	trace_dev_pm_qos_update_request(dev_name(req->dev), req->type,
 					new_value);
@@ -517,6 +581,11 @@ static int __dev_pm_qos_remove_request(struct dev_pm_qos_request *req)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_dev_pm_qos_remove_request(dev_name(req->dev), req->type,
+					PM_QOS_DEFAULT_VALUE);
+>>>>>>> v3.18
 =======
 	trace_dev_pm_qos_remove_request(dev_name(req->dev), req->type,
 					PM_QOS_DEFAULT_VALUE);
@@ -578,8 +647,13 @@ int dev_pm_qos_add_notifier(struct device *dev, struct notifier_block *notifier)
 
 	if (!ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = blocking_notifier_chain_register(
 				dev->power.qos->latency.notifiers, notifier);
+=======
+		ret = blocking_notifier_chain_register(dev->power.qos->resume_latency.notifiers,
+						       notifier);
+>>>>>>> v3.18
 =======
 		ret = blocking_notifier_chain_register(dev->power.qos->resume_latency.notifiers,
 						       notifier);
@@ -610,9 +684,14 @@ int dev_pm_qos_remove_notifier(struct device *dev,
 	/* Silently return if the constraints object is not present. */
 	if (!IS_ERR_OR_NULL(dev->power.qos))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = blocking_notifier_chain_unregister(
 				dev->power.qos->latency.notifiers,
 				notifier);
+=======
+		retval = blocking_notifier_chain_unregister(dev->power.qos->resume_latency.notifiers,
+							    notifier);
+>>>>>>> v3.18
 =======
 		retval = blocking_notifier_chain_unregister(dev->power.qos->resume_latency.notifiers,
 							    notifier);
@@ -658,22 +737,29 @@ EXPORT_SYMBOL_GPL(dev_pm_qos_remove_global_notifier);
  * @dev: Device whose ancestor to add the request for.
  * @req: Pointer to the preallocated handle.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @value: Constraint latency value.
  */
 int dev_pm_qos_add_ancestor_request(struct device *dev,
 				    struct dev_pm_qos_request *req, s32 value)
 =======
+=======
+>>>>>>> v3.18
  * @type: Type of the request.
  * @value: Constraint latency value.
  */
 int dev_pm_qos_add_ancestor_request(struct device *dev,
 				    struct dev_pm_qos_request *req,
 				    enum dev_pm_qos_req_type type, s32 value)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct device *ancestor = dev->parent;
 	int ret = -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while (ancestor && !ancestor->power.ignore_children)
 		ancestor = ancestor->parent;
@@ -682,6 +768,8 @@ int dev_pm_qos_add_ancestor_request(struct device *dev,
 		ret = dev_pm_qos_add_request(ancestor, req,
 					     DEV_PM_QOS_LATENCY, value);
 =======
+=======
+>>>>>>> v3.18
 	switch (type) {
 	case DEV_PM_QOS_RESUME_LATENCY:
 		while (ancestor && !ancestor->power.ignore_children)
@@ -698,6 +786,9 @@ int dev_pm_qos_add_ancestor_request(struct device *dev,
 	}
 	if (ancestor)
 		ret = dev_pm_qos_add_request(ancestor, req, type, value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret < 0)
@@ -715,10 +806,13 @@ static void __dev_pm_qos_drop_user_request(struct device *dev,
 
 	switch(type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case DEV_PM_QOS_LATENCY:
 		req = dev->power.qos->latency_req;
 		dev->power.qos->latency_req = NULL;
 =======
+=======
+>>>>>>> v3.18
 	case DEV_PM_QOS_RESUME_LATENCY:
 		req = dev->power.qos->resume_latency_req;
 		dev->power.qos->resume_latency_req = NULL;
@@ -726,6 +820,9 @@ static void __dev_pm_qos_drop_user_request(struct device *dev,
 	case DEV_PM_QOS_LATENCY_TOLERANCE:
 		req = dev->power.qos->latency_tolerance_req;
 		dev->power.qos->latency_tolerance_req = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case DEV_PM_QOS_FLAGS:
@@ -763,7 +860,11 @@ int dev_pm_qos_expose_latency_limit(struct device *dev, s32 value)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = dev_pm_qos_add_request(dev, req, DEV_PM_QOS_LATENCY, value);
+=======
+	ret = dev_pm_qos_add_request(dev, req, DEV_PM_QOS_RESUME_LATENCY, value);
+>>>>>>> v3.18
 =======
 	ret = dev_pm_qos_add_request(dev, req, DEV_PM_QOS_RESUME_LATENCY, value);
 >>>>>>> v3.18
@@ -779,7 +880,11 @@ int dev_pm_qos_expose_latency_limit(struct device *dev, s32 value)
 	if (IS_ERR_OR_NULL(dev->power.qos))
 		ret = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (dev->power.qos->latency_req)
+=======
+	else if (dev->power.qos->resume_latency_req)
+>>>>>>> v3.18
 =======
 	else if (dev->power.qos->resume_latency_req)
 >>>>>>> v3.18
@@ -792,6 +897,7 @@ int dev_pm_qos_expose_latency_limit(struct device *dev, s32 value)
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->power.qos->latency_req = req;
 
 	mutex_unlock(&dev_pm_qos_mtx);
@@ -800,6 +906,8 @@ int dev_pm_qos_expose_latency_limit(struct device *dev, s32 value)
 	if (ret)
 		dev_pm_qos_drop_user_request(dev, DEV_PM_QOS_LATENCY);
 =======
+=======
+>>>>>>> v3.18
 	dev->power.qos->resume_latency_req = req;
 
 	mutex_unlock(&dev_pm_qos_mtx);
@@ -807,6 +915,9 @@ int dev_pm_qos_expose_latency_limit(struct device *dev, s32 value)
 	ret = pm_qos_sysfs_add_resume_latency(dev);
 	if (ret)
 		dev_pm_qos_drop_user_request(dev, DEV_PM_QOS_RESUME_LATENCY);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  out:
@@ -818,8 +929,13 @@ EXPORT_SYMBOL_GPL(dev_pm_qos_expose_latency_limit);
 static void __dev_pm_qos_hide_latency_limit(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR_OR_NULL(dev->power.qos) && dev->power.qos->latency_req)
 		__dev_pm_qos_drop_user_request(dev, DEV_PM_QOS_LATENCY);
+=======
+	if (!IS_ERR_OR_NULL(dev->power.qos) && dev->power.qos->resume_latency_req)
+		__dev_pm_qos_drop_user_request(dev, DEV_PM_QOS_RESUME_LATENCY);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR_OR_NULL(dev->power.qos) && dev->power.qos->resume_latency_req)
 		__dev_pm_qos_drop_user_request(dev, DEV_PM_QOS_RESUME_LATENCY);
@@ -835,7 +951,11 @@ void dev_pm_qos_hide_latency_limit(struct device *dev)
 	mutex_lock(&dev_pm_qos_sysfs_mtx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_qos_sysfs_remove_latency(dev);
+=======
+	pm_qos_sysfs_remove_resume_latency(dev);
+>>>>>>> v3.18
 =======
 	pm_qos_sysfs_remove_resume_latency(dev);
 >>>>>>> v3.18
@@ -961,7 +1081,10 @@ int dev_pm_qos_update_flags(struct device *dev, s32 mask, bool set)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * dev_pm_qos_get_user_latency_tolerance - Get user space latency tolerance.
@@ -1023,6 +1146,9 @@ int dev_pm_qos_update_user_latency_tolerance(struct device *dev, s32 val)
 	mutex_unlock(&dev_pm_qos_mtx);
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* !CONFIG_PM_RUNTIME */
 static void __dev_pm_qos_hide_latency_limit(struct device *dev) {}

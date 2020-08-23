@@ -106,7 +106,11 @@
  *	QSPI module.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MCFQSPI_BASE		(MCF_MBAR + 0x300)	/* Base address QSPI */
+=======
+#define MCFQSPI_BASE		(MCF_MBAR + 0x400)	/* Base address QSPI */
+>>>>>>> v3.18
 =======
 #define MCFQSPI_BASE		(MCF_MBAR + 0x400)	/* Base address QSPI */
 >>>>>>> v3.18

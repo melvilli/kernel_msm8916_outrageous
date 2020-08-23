@@ -27,7 +27,10 @@ static int hose_mmap_page_range(struct pci_controller *hose,
 
 	vma->vm_pgoff += base >> PAGE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma->vm_flags |= VM_IO | VM_DONTEXPAND | VM_DONTDUMP;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -88,7 +91,11 @@ static int pci_mmap_resource(struct kobject *kobj,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcibios_resource_to_bus(pdev, &bar, res);
+=======
+	pcibios_resource_to_bus(pdev->bus, &bar, res);
+>>>>>>> v3.18
 =======
 	pcibios_resource_to_bus(pdev->bus, &bar, res);
 >>>>>>> v3.18
@@ -148,7 +155,11 @@ static int sparse_mem_mmap_fits(struct pci_dev *pdev, int num)
 	unsigned long sparse_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcibios_resource_to_bus(pdev, &bar, &pdev->resource[num]);
+=======
+	pcibios_resource_to_bus(pdev->bus, &bar, &pdev->resource[num]);
+>>>>>>> v3.18
 =======
 	pcibios_resource_to_bus(pdev->bus, &bar, &pdev->resource[num]);
 >>>>>>> v3.18

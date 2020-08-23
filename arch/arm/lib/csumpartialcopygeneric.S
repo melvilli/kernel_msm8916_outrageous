@@ -8,6 +8,10 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -45,7 +49,11 @@ sum	.req	r3
 		strb	ip, [dst], #1
 		tst	dst, #2
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moveq	pc, lr			@ dst is now 32bit aligned
+=======
+		reteq	lr			@ dst is now 32bit aligned
+>>>>>>> v3.18
 =======
 		reteq	lr			@ dst is now 32bit aligned
 >>>>>>> v3.18
@@ -57,7 +65,11 @@ sum	.req	r3
 		adcs	sum, sum, ip, put_byte_1
 		strb	ip, [dst], #1
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr			@ dst is now 32bit aligned
+=======
+		ret	lr			@ dst is now 32bit aligned
+>>>>>>> v3.18
 =======
 		ret	lr			@ dst is now 32bit aligned
 >>>>>>> v3.18
@@ -154,7 +166,11 @@ FN_ENTRY
 		mov	r5, r4, get_byte_0
 		beq	.Lexit
 <<<<<<< HEAD
+<<<<<<< HEAD
 		adcs	sum, sum, r4, push #16
+=======
+		adcs	sum, sum, r4, lspush #16
+>>>>>>> v3.18
 =======
 		adcs	sum, sum, r4, lspush #16
 >>>>>>> v3.18
@@ -188,6 +204,7 @@ FN_ENTRY
 		beq	.Lsrc2_aligned
 		bhi	.Lsrc3_aligned
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	r4, r5, pull #8		@ C = 0
 		bics	ip, len, #15
 		beq	2f
@@ -200,6 +217,8 @@ FN_ENTRY
 		mov	r7, r7, pull #8
 		orr	r7, r7, r8, push #24
 =======
+=======
+>>>>>>> v3.18
 		mov	r4, r5, lspull #8		@ C = 0
 		bics	ip, len, #15
 		beq	2f
@@ -211,6 +230,9 @@ FN_ENTRY
 		orr	r6, r6, r7, lspush #24
 		mov	r7, r7, lspull #8
 		orr	r7, r7, r8, lspush #24
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stmia	dst!, {r4, r5, r6, r7}
 		adcs	sum, sum, r4
@@ -218,7 +240,11 @@ FN_ENTRY
 		adcs	sum, sum, r6
 		adcs	sum, sum, r7
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	r4, r8, pull #8
+=======
+		mov	r4, r8, lspull #8
+>>>>>>> v3.18
 =======
 		mov	r4, r8, lspull #8
 >>>>>>> v3.18
@@ -230,6 +256,7 @@ FN_ENTRY
 		tst	ip, #8
 		beq	3f
 		load2l	r5, r6
+<<<<<<< HEAD
 <<<<<<< HEAD
 		orr	r4, r4, r5, push #24
 		mov	r5, r5, pull #8
@@ -246,6 +273,8 @@ FN_ENTRY
 		adcs	sum, sum, r4
 		mov	r4, r5, pull #8
 =======
+=======
+>>>>>>> v3.18
 		orr	r4, r4, r5, lspush #24
 		mov	r5, r5, lspull #8
 		orr	r5, r5, r6, lspush #24
@@ -260,6 +289,9 @@ FN_ENTRY
 		str	r4, [dst], #4
 		adcs	sum, sum, r4
 		mov	r4, r5, lspull #8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 4:		ands	len, len, #3
 		beq	.Ldone
@@ -267,7 +299,11 @@ FN_ENTRY
 		tst	len, #2
 		beq	.Lexit
 <<<<<<< HEAD
+<<<<<<< HEAD
 		adcs	sum, sum, r4, push #16
+=======
+		adcs	sum, sum, r4, lspush #16
+>>>>>>> v3.18
 =======
 		adcs	sum, sum, r4, lspush #16
 >>>>>>> v3.18
@@ -278,7 +314,11 @@ FN_ENTRY
 		b	.Lexit
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lsrc2_aligned:	mov	r4, r5, pull #16
+=======
+.Lsrc2_aligned:	mov	r4, r5, lspull #16
+>>>>>>> v3.18
 =======
 .Lsrc2_aligned:	mov	r4, r5, lspull #16
 >>>>>>> v3.18
@@ -286,6 +326,7 @@ FN_ENTRY
 		bics	ip, len, #15
 		beq	2f
 1:		load4l	r5, r6, r7, r8
+<<<<<<< HEAD
 <<<<<<< HEAD
 		orr	r4, r4, r5, push #16
 		mov	r5, r5, pull #16
@@ -295,6 +336,8 @@ FN_ENTRY
 		mov	r7, r7, pull #16
 		orr	r7, r7, r8, push #16
 =======
+=======
+>>>>>>> v3.18
 		orr	r4, r4, r5, lspush #16
 		mov	r5, r5, lspull #16
 		orr	r5, r5, r6, lspush #16
@@ -302,6 +345,9 @@ FN_ENTRY
 		orr	r6, r6, r7, lspush #16
 		mov	r7, r7, lspull #16
 		orr	r7, r7, r8, lspush #16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stmia	dst!, {r4, r5, r6, r7}
 		adcs	sum, sum, r4
@@ -309,7 +355,11 @@ FN_ENTRY
 		adcs	sum, sum, r6
 		adcs	sum, sum, r7
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	r4, r8, pull #16
+=======
+		mov	r4, r8, lspull #16
+>>>>>>> v3.18
 =======
 		mov	r4, r8, lspull #16
 >>>>>>> v3.18
@@ -321,6 +371,7 @@ FN_ENTRY
 		tst	ip, #8
 		beq	3f
 		load2l	r5, r6
+<<<<<<< HEAD
 <<<<<<< HEAD
 		orr	r4, r4, r5, push #16
 		mov	r5, r5, pull #16
@@ -337,6 +388,8 @@ FN_ENTRY
 		adcs	sum, sum, r4
 		mov	r4, r5, pull #16
 =======
+=======
+>>>>>>> v3.18
 		orr	r4, r4, r5, lspush #16
 		mov	r5, r5, lspull #16
 		orr	r5, r5, r6, lspush #16
@@ -351,6 +404,9 @@ FN_ENTRY
 		str	r4, [dst], #4
 		adcs	sum, sum, r4
 		mov	r4, r5, lspull #16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 4:		ands	len, len, #3
 		beq	.Ldone
@@ -367,7 +423,11 @@ FN_ENTRY
 		b	.Lexit
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lsrc3_aligned:	mov	r4, r5, pull #24
+=======
+.Lsrc3_aligned:	mov	r4, r5, lspull #24
+>>>>>>> v3.18
 =======
 .Lsrc3_aligned:	mov	r4, r5, lspull #24
 >>>>>>> v3.18
@@ -375,6 +435,7 @@ FN_ENTRY
 		bics	ip, len, #15
 		beq	2f
 1:		load4l	r5, r6, r7, r8
+<<<<<<< HEAD
 <<<<<<< HEAD
 		orr	r4, r4, r5, push #8
 		mov	r5, r5, pull #24
@@ -384,6 +445,8 @@ FN_ENTRY
 		mov	r7, r7, pull #24
 		orr	r7, r7, r8, push #8
 =======
+=======
+>>>>>>> v3.18
 		orr	r4, r4, r5, lspush #8
 		mov	r5, r5, lspull #24
 		orr	r5, r5, r6, lspush #8
@@ -391,6 +454,9 @@ FN_ENTRY
 		orr	r6, r6, r7, lspush #8
 		mov	r7, r7, lspull #24
 		orr	r7, r7, r8, lspush #8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		stmia	dst!, {r4, r5, r6, r7}
 		adcs	sum, sum, r4
@@ -398,7 +464,11 @@ FN_ENTRY
 		adcs	sum, sum, r6
 		adcs	sum, sum, r7
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	r4, r8, pull #24
+=======
+		mov	r4, r8, lspull #24
+>>>>>>> v3.18
 =======
 		mov	r4, r8, lspull #24
 >>>>>>> v3.18
@@ -410,6 +480,7 @@ FN_ENTRY
 		tst	ip, #8
 		beq	3f
 		load2l	r5, r6
+<<<<<<< HEAD
 <<<<<<< HEAD
 		orr	r4, r4, r5, push #8
 		mov	r5, r5, pull #24
@@ -426,6 +497,8 @@ FN_ENTRY
 		adcs	sum, sum, r4
 		mov	r4, r5, pull #24
 =======
+=======
+>>>>>>> v3.18
 		orr	r4, r4, r5, lspush #8
 		mov	r5, r5, lspull #24
 		orr	r5, r5, r6, lspush #8
@@ -440,6 +513,9 @@ FN_ENTRY
 		str	r4, [dst], #4
 		adcs	sum, sum, r4
 		mov	r4, r5, lspull #24
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 4:		ands	len, len, #3
 		beq	.Ldone
@@ -452,7 +528,11 @@ FN_ENTRY
 		mov	r5, r4, get_byte_0
 		strb	r5, [dst], #1
 <<<<<<< HEAD
+<<<<<<< HEAD
 		adcs	sum, sum, r4, push #24
+=======
+		adcs	sum, sum, r4, lspush #24
+>>>>>>> v3.18
 =======
 		adcs	sum, sum, r4, lspush #24
 >>>>>>> v3.18

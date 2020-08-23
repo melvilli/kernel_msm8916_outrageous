@@ -35,7 +35,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/hardirq.h>
@@ -61,11 +64,16 @@ void mlx4_cq_completion(struct mlx4_dev *dev, u32 cqn)
 	struct mlx4_cq *cq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_lock();
 	cq = radix_tree_lookup(&mlx4_priv(dev)->cq_table.tree,
 			       cqn & (dev->caps.num_cqs - 1));
 	rcu_read_unlock();
 
+=======
+	cq = radix_tree_lookup(&mlx4_priv(dev)->cq_table.tree,
+			       cqn & (dev->caps.num_cqs - 1));
+>>>>>>> v3.18
 =======
 	cq = radix_tree_lookup(&mlx4_priv(dev)->cq_table.tree,
 			       cqn & (dev->caps.num_cqs - 1));
@@ -76,9 +84,12 @@ void mlx4_cq_completion(struct mlx4_dev *dev, u32 cqn)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Acessing the CQ outside of rcu_read_lock is safe, because
 	 * the CQ is freed only after interrupt handling is completed.
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	++cq->arm_sn;
@@ -91,6 +102,7 @@ void mlx4_cq_event(struct mlx4_dev *dev, u32 cqn, int event_type)
 	struct mlx4_cq_table *cq_table = &mlx4_priv(dev)->cq_table;
 	struct mlx4_cq *cq;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rcu_read_lock();
 	cq = radix_tree_lookup(&cq_table->tree, cqn & (dev->caps.num_cqs - 1));
@@ -106,6 +118,8 @@ void mlx4_cq_event(struct mlx4_dev *dev, u32 cqn, int event_type)
 	 */
 	cq->event(cq, event_type);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&cq_table->lock);
 
 	cq = radix_tree_lookup(&cq_table->tree, cqn & (dev->caps.num_cqs - 1));
@@ -123,6 +137,9 @@ void mlx4_cq_event(struct mlx4_dev *dev, u32 cqn, int event_type)
 
 	if (atomic_dec_and_test(&cq->refcount))
 		complete(&cq->free);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -162,8 +179,11 @@ int mlx4_cq_modify(struct mlx4_dev *dev, struct mlx4_cq *cq,
 
 	cq_context = mailbox->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(cq_context, 0, sizeof *cq_context);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cq_context->cq_max_count = cpu_to_be16(count);
@@ -190,8 +210,11 @@ int mlx4_cq_resize(struct mlx4_dev *dev, struct mlx4_cq *cq,
 
 	cq_context = mailbox->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(cq_context, 0, sizeof *cq_context);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cq_context->logsize_usrpage = cpu_to_be32(ilog2(entries) << 24);
@@ -218,17 +241,23 @@ int __mlx4_cq_alloc_icm(struct mlx4_dev *dev, int *cqn)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = mlx4_table_get(dev, &cq_table->table, *cqn);
 	if (err)
 		goto err_out;
 
 	err = mlx4_table_get(dev, &cq_table->cmpt_table, *cqn);
 =======
+=======
+>>>>>>> v3.18
 	err = mlx4_table_get(dev, &cq_table->table, *cqn, GFP_KERNEL);
 	if (err)
 		goto err_out;
 
 	err = mlx4_table_get(dev, &cq_table->cmpt_table, *cqn, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		goto err_put;
@@ -239,7 +268,11 @@ err_put:
 
 err_out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_bitmap_free(&cq_table->bitmap, *cqn);
+=======
+	mlx4_bitmap_free(&cq_table->bitmap, *cqn, MLX4_NO_RR);
+>>>>>>> v3.18
 =======
 	mlx4_bitmap_free(&cq_table->bitmap, *cqn, MLX4_NO_RR);
 >>>>>>> v3.18
@@ -273,7 +306,11 @@ void __mlx4_cq_free_icm(struct mlx4_dev *dev, int cqn)
 	mlx4_table_put(dev, &cq_table->cmpt_table, cqn);
 	mlx4_table_put(dev, &cq_table->table, cqn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_bitmap_free(&cq_table->bitmap, cqn);
+=======
+	mlx4_bitmap_free(&cq_table->bitmap, cqn, MLX4_NO_RR);
+>>>>>>> v3.18
 =======
 	mlx4_bitmap_free(&cq_table->bitmap, cqn, MLX4_NO_RR);
 >>>>>>> v3.18
@@ -317,9 +354,15 @@ int mlx4_cq_alloc(struct mlx4_dev *dev, int nent,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&cq_table->lock);
 	err = radix_tree_insert(&cq_table->tree, cq->cqn, cq);
 	spin_unlock(&cq_table->lock);
+=======
+	spin_lock_irq(&cq_table->lock);
+	err = radix_tree_insert(&cq_table->tree, cq->cqn, cq);
+	spin_unlock_irq(&cq_table->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_irq(&cq_table->lock);
 	err = radix_tree_insert(&cq_table->tree, cq->cqn, cq);
@@ -336,8 +379,11 @@ int mlx4_cq_alloc(struct mlx4_dev *dev, int nent,
 
 	cq_context = mailbox->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(cq_context, 0, sizeof *cq_context);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cq_context->flags	    = cpu_to_be32(!!collapsed << 18);
@@ -365,6 +411,7 @@ int mlx4_cq_alloc(struct mlx4_dev *dev, int nent,
 	init_completion(&cq->free);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 err_radix:
@@ -372,6 +419,8 @@ err_radix:
 	radix_tree_delete(&cq_table->tree, cq->cqn);
 	spin_unlock(&cq_table->lock);
 =======
+=======
+>>>>>>> v3.18
 	cq->irq = priv->eq_table.eq[cq->vector].irq;
 	return 0;
 
@@ -379,6 +428,9 @@ err_radix:
 	spin_lock_irq(&cq_table->lock);
 	radix_tree_delete(&cq_table->tree, cq->cqn);
 	spin_unlock_irq(&cq_table->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 err_icm:
@@ -399,6 +451,7 @@ void mlx4_cq_free(struct mlx4_dev *dev, struct mlx4_cq *cq)
 		mlx4_warn(dev, "HW2SW_CQ failed (%d) for CQN %06x\n", err, cq->cqn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&cq_table->lock);
 	radix_tree_delete(&cq_table->tree, cq->cqn);
 	spin_unlock(&cq_table->lock);
@@ -406,12 +459,17 @@ void mlx4_cq_free(struct mlx4_dev *dev, struct mlx4_cq *cq)
 	synchronize_irq(priv->eq_table.eq[cq->vector].irq);
 
 =======
+=======
+>>>>>>> v3.18
 	synchronize_irq(priv->eq_table.eq[cq->vector].irq);
 
 	spin_lock_irq(&cq_table->lock);
 	radix_tree_delete(&cq_table->tree, cq->cqn);
 	spin_unlock_irq(&cq_table->lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (atomic_dec_and_test(&cq->refcount))
 		complete(&cq->free);

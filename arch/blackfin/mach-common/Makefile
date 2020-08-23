@@ -11,6 +11,10 @@ ifneq ($(CONFIG_BF60x),y)
 obj-$(CONFIG_PM)	  += dpmc_modes.o
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SCB_PRIORITY)	+= scb-init.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SCB_PRIORITY)	+= scb-init.o
 >>>>>>> v3.18

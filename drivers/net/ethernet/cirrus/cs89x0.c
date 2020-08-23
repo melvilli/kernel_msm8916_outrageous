@@ -146,7 +146,10 @@ struct net_local {
 	spinlock_t lock;
 	void __iomem *virt_addr;/* CS89x0 virtual address. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long size;	/* Length of CS89x0 memory region. */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if ALLOW_DMA
@@ -1178,7 +1181,11 @@ static netdev_tx_t net_send_packet(struct sk_buff *skb, struct net_device *dev)
 	spin_unlock_irqrestore(&lp->lock, flags);
 	dev->stats.tx_bytes += skb->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -1862,6 +1869,7 @@ static int __init cs89x0_platform_probe(struct platform_device *pdev)
 	lp = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	dev->irq = platform_get_irq(pdev, 0);
 	if (mem_res == NULL || dev->irq <= 0) {
@@ -1871,10 +1879,16 @@ static int __init cs89x0_platform_probe(struct platform_device *pdev)
 	if (dev->irq <= 0) {
 		dev_warn(&dev->dev, "interrupt resource missing\n");
 >>>>>>> v3.18
+=======
+	dev->irq = platform_get_irq(pdev, 0);
+	if (dev->irq <= 0) {
+		dev_warn(&dev->dev, "interrupt resource missing\n");
+>>>>>>> v3.18
 		err = -ENXIO;
 		goto free;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	lp->size = resource_size(mem_res);
 	if (!request_mem_region(mem_res->start, lp->size, DRV_NAME)) {
@@ -1895,6 +1909,8 @@ static int __init cs89x0_platform_probe(struct platform_device *pdev)
 		dev_warn(&dev->dev, "no cs8900 or cs8920 detected\n");
 		goto unmap;
 =======
+=======
+>>>>>>> v3.18
 	mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	virt_addr = devm_ioremap_resource(&pdev->dev, mem_res);
 	if (IS_ERR(virt_addr)) {
@@ -1906,6 +1922,9 @@ static int __init cs89x0_platform_probe(struct platform_device *pdev)
 	if (err) {
 		dev_warn(&dev->dev, "no cs8900 or cs8920 detected\n");
 		goto free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1913,10 +1932,13 @@ static int __init cs89x0_platform_probe(struct platform_device *pdev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unmap:
 	iounmap(virt_addr);
 release:
 	release_mem_region(mem_res->start, lp->size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 free:
@@ -1928,8 +1950,11 @@ static int cs89x0_platform_remove(struct platform_device *pdev)
 {
 	struct net_device *dev = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_local *lp = netdev_priv(dev);
 	struct resource *mem_res;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1938,10 +1963,14 @@ static int cs89x0_platform_remove(struct platform_device *pdev)
 	 * value.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	unregister_netdev(dev);
 	iounmap(lp->virt_addr);
 	release_mem_region(mem_res->start, lp->size);
+=======
+	unregister_netdev(dev);
+>>>>>>> v3.18
 =======
 	unregister_netdev(dev);
 >>>>>>> v3.18

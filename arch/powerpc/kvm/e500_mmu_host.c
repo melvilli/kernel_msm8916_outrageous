@@ -33,16 +33,22 @@
 
 #include "e500.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "trace.h"
 #include "timing.h"
 #include "e500_mmu_host.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include "timing.h"
 #include "e500_mmu_host.h"
 
 #include "trace_booke.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define to_htlb1_esel(esel) (host_tlb_params[1].entries - (esel) - 1)
 
@@ -73,6 +79,7 @@ static inline u32 e500_shadow_mas3_attrib(u32 mas3, int usermode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 e500_shadow_mas2_attrib(u32 mas2, int usermode)
 {
 #ifdef CONFIG_SMP
@@ -84,12 +91,19 @@ static inline u32 e500_shadow_mas2_attrib(u32 mas2, int usermode)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * writing shadow tlb entry to host TLB
  */
 static inline void __write_host_tlbe(struct kvm_book3e_206_tlb_entry *stlbe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     uint32_t mas0)
+=======
+				     uint32_t mas0,
+				     uint32_t lpid)
+>>>>>>> v3.18
 =======
 				     uint32_t mas0,
 				     uint32_t lpid)
@@ -105,7 +119,11 @@ static inline void __write_host_tlbe(struct kvm_book3e_206_tlb_entry *stlbe,
 	mtspr(SPRN_MAS7, (u32)(stlbe->mas7_3 >> 32));
 #ifdef CONFIG_KVM_BOOKE_HV
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mtspr(SPRN_MAS8, stlbe->mas8);
+=======
+	mtspr(SPRN_MAS8, MAS8_TGS | get_thread_specific_lpid(lpid));
+>>>>>>> v3.18
 =======
 	mtspr(SPRN_MAS8, MAS8_TGS | get_thread_specific_lpid(lpid));
 >>>>>>> v3.18
@@ -136,12 +154,15 @@ static u32 get_host_mas0(unsigned long eaddr)
 	unsigned long flags;
 	u32 mas0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	local_irq_save(flags);
 	mtspr(SPRN_MAS6, 0);
 	asm volatile("tlbsx 0, %0" : : "b" (eaddr & ~CONFIG_PAGE_OFFSET));
 	mas0 = mfspr(SPRN_MAS0);
 =======
+=======
+>>>>>>> v3.18
 	u32 mas4;
 
 	local_irq_save(flags);
@@ -151,6 +172,9 @@ static u32 get_host_mas0(unsigned long eaddr)
 	asm volatile("tlbsx 0, %0" : : "b" (eaddr & ~CONFIG_PAGE_OFFSET));
 	mas0 = mfspr(SPRN_MAS0);
 	mtspr(SPRN_MAS4, mas4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	local_irq_restore(flags);
 
@@ -166,18 +190,24 @@ static inline void write_host_tlbe(struct kvmppc_vcpu_e500 *vcpu_e500,
 	if (tlbsel == 0) {
 		mas0 = get_host_mas0(stlbe->mas2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__write_host_tlbe(stlbe, mas0);
 	} else {
 		__write_host_tlbe(stlbe,
 				  MAS0_TLBSEL(1) |
 				  MAS0_ESEL(to_htlb1_esel(sesel)));
 =======
+=======
+>>>>>>> v3.18
 		__write_host_tlbe(stlbe, mas0, vcpu_e500->vcpu.kvm->arch.lpid);
 	} else {
 		__write_host_tlbe(stlbe,
 				  MAS0_TLBSEL(1) |
 				  MAS0_ESEL(to_htlb1_esel(sesel)),
 				  vcpu_e500->vcpu.kvm->arch.lpid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -222,7 +252,11 @@ void kvmppc_map_magic(struct kvm_vcpu *vcpu)
 	magic.mas8 = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__write_host_tlbe(&magic, MAS0_TLBSEL(1) | MAS0_ESEL(tlbcam_index));
+=======
+	__write_host_tlbe(&magic, MAS0_TLBSEL(1) | MAS0_ESEL(tlbcam_index), 0);
+>>>>>>> v3.18
 =======
 	__write_host_tlbe(&magic, MAS0_TLBSEL(1) | MAS0_ESEL(tlbcam_index), 0);
 >>>>>>> v3.18
@@ -276,6 +310,7 @@ void inval_gtlbe_on_host(struct kvmppc_vcpu_e500 *vcpu_e500, int tlbsel,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Already invalidated in between */
 	if (!(ref->flags & E500_TLB_VALID))
 		return;
@@ -286,6 +321,8 @@ void inval_gtlbe_on_host(struct kvmppc_vcpu_e500 *vcpu_e500, int tlbsel,
 	/* Mark the TLB as not backed by the host anymore */
 	ref->flags &= ~E500_TLB_VALID;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If TLB entry is still valid then it's a TLB0 entry, and thus
 	 * backed by at most one host tlbe per shadow pid
@@ -295,6 +332,9 @@ void inval_gtlbe_on_host(struct kvmppc_vcpu_e500 *vcpu_e500, int tlbsel,
 
 	/* Mark the TLB as not backed by the host anymore */
 	ref->flags = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -306,11 +346,14 @@ static inline int tlbe_is_writable(struct kvm_book3e_206_tlb_entry *tlbe)
 static inline void kvmppc_e500_ref_setup(struct tlbe_ref *ref,
 					 struct kvm_book3e_206_tlb_entry *gtlbe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 pfn_t pfn)
 {
 	ref->pfn = pfn;
 	ref->flags |= E500_TLB_VALID;
 =======
+=======
+>>>>>>> v3.18
 					 pfn_t pfn, unsigned int wimg)
 {
 	ref->pfn = pfn;
@@ -321,6 +364,9 @@ static inline void kvmppc_e500_ref_setup(struct tlbe_ref *ref,
 
 	/* Mark the page accessed */
 	kvm_set_pfn_accessed(pfn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (tlbe_is_writable(gtlbe))
@@ -383,6 +429,7 @@ static void kvmppc_e500_setup_stlbe(
 	/* Force IPROT=0 for all guest mappings. */
 	stlbe->mas1 = MAS1_TSIZE(tsize) | get_tlb_sts(gtlbe) | MAS1_VALID;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stlbe->mas2 = (gvaddr & MAS2_EPN) |
 		      e500_shadow_mas2_attrib(gtlbe->mas2, pr);
 	stlbe->mas7_3 = ((u64)pfn << PAGE_SHIFT) |
@@ -391,6 +438,11 @@ static void kvmppc_e500_setup_stlbe(
 #ifdef CONFIG_KVM_BOOKE_HV
 	stlbe->mas8 = MAS8_TGS | vcpu->kvm->arch.lpid;
 #endif
+=======
+	stlbe->mas2 = (gvaddr & MAS2_EPN) | (ref->flags & E500_TLB_MAS2_ATTR);
+	stlbe->mas7_3 = ((u64)pfn << PAGE_SHIFT) |
+			e500_shadow_mas3_attrib(gtlbe->mas7_3, pr);
+>>>>>>> v3.18
 =======
 	stlbe->mas2 = (gvaddr & MAS2_EPN) | (ref->flags & E500_TLB_MAS2_ATTR);
 	stlbe->mas7_3 = ((u64)pfn << PAGE_SHIFT) |
@@ -409,7 +461,10 @@ static inline int kvmppc_e500_shadow_map(struct kvmppc_vcpu_e500 *vcpu_e500,
 	int pfnmap = 0;
 	int tsize = BOOK3E_PAGESZ_4K;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 	unsigned long mmu_seq;
 	struct kvm *kvm = vcpu_e500->vcpu.kvm;
@@ -421,6 +476,9 @@ static inline int kvmppc_e500_shadow_map(struct kvmppc_vcpu_e500 *vcpu_e500,
 	/* used to check for invalidations in progress */
 	mmu_seq = kvm->mmu_notifier_seq;
 	smp_rmb();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -485,7 +543,11 @@ static inline int kvmppc_e500_shadow_map(struct kvmppc_vcpu_e500 *vcpu_e500,
 
 			for (; tsize > BOOK3E_PAGESZ_4K; tsize -= 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				unsigned long gfn_start, gfn_end, tsize_pages;
+=======
+				unsigned long gfn_start, gfn_end;
+>>>>>>> v3.18
 =======
 				unsigned long gfn_start, gfn_end;
 >>>>>>> v3.18
@@ -531,18 +593,24 @@ static inline int kvmppc_e500_shadow_map(struct kvmppc_vcpu_e500 *vcpu_e500,
 
 	if (likely(!pfnmap)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long tsize_pages = 1 << (tsize + 10 - PAGE_SHIFT);
 		pfn = gfn_to_pfn_memslot(slot, gfn);
 		if (is_error_noslot_pfn(pfn)) {
 			printk(KERN_ERR "Couldn't get real page for gfn %lx!\n",
 					(long)gfn);
 =======
+=======
+>>>>>>> v3.18
 		tsize_pages = 1 << (tsize + 10 - PAGE_SHIFT);
 		pfn = gfn_to_pfn_memslot(slot, gfn);
 		if (is_error_noslot_pfn(pfn)) {
 			if (printk_ratelimit())
 				pr_err("%s: real page not found for gfn %lx\n",
 				       __func__, (long)gfn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EINVAL;
 		}
@@ -553,8 +621,11 @@ static inline int kvmppc_e500_shadow_map(struct kvmppc_vcpu_e500 *vcpu_e500,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kvmppc_e500_ref_setup(ref, gtlbe, pfn);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&kvm->mmu_lock);
 	if (mmu_notifier_retry(kvm, mmu_seq)) {
 		ret = -EAGAIN;
@@ -574,6 +645,9 @@ static inline int kvmppc_e500_shadow_map(struct kvmppc_vcpu_e500 *vcpu_e500,
 		goto out;
 	}
 	kvmppc_e500_ref_setup(ref, gtlbe, pfn, wimg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kvmppc_e500_setup_stlbe(&vcpu_e500->vcpu, gtlbe, tsize,
@@ -583,11 +657,14 @@ static inline int kvmppc_e500_shadow_map(struct kvmppc_vcpu_e500 *vcpu_e500,
 	kvmppc_mmu_flush_icache(pfn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Drop refcount on page, so that mmu notifiers can clear it */
 	kvm_release_pfn_clean(pfn);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 out:
 	spin_unlock(&kvm->mmu_lock);
 
@@ -595,6 +672,9 @@ out:
 	kvm_release_pfn_clean(pfn);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -713,7 +793,10 @@ void kvmppc_mmu_map(struct kvm_vcpu *vcpu, u64 eaddr, gpa_t gpaddr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KVM_BOOKE_HV
 int kvmppc_load_last_inst(struct kvm_vcpu *vcpu, enum instruction_type type,
 			  u32 *instr)
@@ -812,6 +895,9 @@ int kvmppc_load_last_inst(struct kvm_vcpu *vcpu, enum instruction_type type,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /************* MMU Notifiers *************/
 
@@ -837,7 +923,11 @@ int kvm_unmap_hva_range(struct kvm *kvm, unsigned long start, unsigned long end)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_age_hva(struct kvm *kvm, unsigned long hva)
+=======
+int kvm_age_hva(struct kvm *kvm, unsigned long start, unsigned long end)
+>>>>>>> v3.18
 =======
 int kvm_age_hva(struct kvm *kvm, unsigned long start, unsigned long end)
 >>>>>>> v3.18

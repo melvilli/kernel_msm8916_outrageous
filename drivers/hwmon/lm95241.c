@@ -90,7 +90,11 @@ static const u8 lm95241_reg_address[] = {
 /* Client data (each client gets its own) */
 struct lm95241_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -118,8 +122,13 @@ static int temp_from_reg_unsigned(u8 val_h, u8 val_l)
 static struct lm95241_data *lm95241_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm95241_data *data = i2c_get_clientdata(client);
+=======
+	struct lm95241_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm95241_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -132,7 +141,11 @@ static struct lm95241_data *lm95241_update_device(struct device *dev)
 		int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&client->dev, "Updating lm95241 data.\n");
+=======
+		dev_dbg(dev, "Updating lm95241 data.\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(dev, "Updating lm95241 data.\n");
 >>>>>>> v3.18
@@ -167,8 +180,12 @@ static ssize_t show_type(struct device *dev, struct device_attribute *attr,
 			 char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm95241_data *data = i2c_get_clientdata(client);
+=======
+	struct lm95241_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct lm95241_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -181,8 +198,13 @@ static ssize_t set_type(struct device *dev, struct device_attribute *attr,
 			const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm95241_data *data = i2c_get_clientdata(client);
+=======
+	struct lm95241_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm95241_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -224,8 +246,12 @@ static ssize_t show_min(struct device *dev, struct device_attribute *attr,
 			char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm95241_data *data = i2c_get_clientdata(client);
+=======
+	struct lm95241_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct lm95241_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -239,8 +265,12 @@ static ssize_t set_min(struct device *dev, struct device_attribute *attr,
 		       const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm95241_data *data = i2c_get_clientdata(client);
+=======
+	struct lm95241_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct lm95241_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -260,7 +290,12 @@ static ssize_t set_min(struct device *dev, struct device_attribute *attr,
 	data->valid = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_smbus_write_byte_data(client, LM95241_REG_RW_CONFIG, data->config);
+=======
+	i2c_smbus_write_byte_data(data->client, LM95241_REG_RW_CONFIG,
+				  data->config);
+>>>>>>> v3.18
 =======
 	i2c_smbus_write_byte_data(data->client, LM95241_REG_RW_CONFIG,
 				  data->config);
@@ -275,8 +310,12 @@ static ssize_t show_max(struct device *dev, struct device_attribute *attr,
 			char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm95241_data *data = i2c_get_clientdata(client);
+=======
+	struct lm95241_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct lm95241_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -290,8 +329,12 @@ static ssize_t set_max(struct device *dev, struct device_attribute *attr,
 		       const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm95241_data *data = i2c_get_clientdata(client);
+=======
+	struct lm95241_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct lm95241_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -311,7 +354,12 @@ static ssize_t set_max(struct device *dev, struct device_attribute *attr,
 	data->valid = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_smbus_write_byte_data(client, LM95241_REG_RW_CONFIG, data->config);
+=======
+	i2c_smbus_write_byte_data(data->client, LM95241_REG_RW_CONFIG,
+				  data->config);
+>>>>>>> v3.18
 =======
 	i2c_smbus_write_byte_data(data->client, LM95241_REG_RW_CONFIG,
 				  data->config);
@@ -335,8 +383,12 @@ static ssize_t set_interval(struct device *dev, struct device_attribute *attr,
 			    const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm95241_data *data = i2c_get_clientdata(client);
+=======
+	struct lm95241_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct lm95241_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -369,7 +421,11 @@ static DEVICE_ATTR(update_interval, S_IWUSR | S_IRUGO, show_interval,
 		   set_interval);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *lm95241_attributes[] = {
+=======
+static struct attribute *lm95241_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *lm95241_attrs[] = {
 >>>>>>> v3.18
@@ -386,10 +442,14 @@ static struct attribute *lm95241_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct attribute_group lm95241_group = {
 	.attrs = lm95241_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(lm95241);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(lm95241);
 >>>>>>> v3.18
@@ -427,6 +487,7 @@ static int lm95241_detect(struct i2c_client *new_client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void lm95241_init_client(struct i2c_client *client)
 {
 	struct lm95241_data *data = i2c_get_clientdata(client);
@@ -436,11 +497,16 @@ static void lm95241_init_client(struct i2c_client *client)
 	data->config = CFG_CR0076;
 	data->model = 0;
 =======
+=======
+>>>>>>> v3.18
 static void lm95241_init_client(struct i2c_client *client,
 				struct lm95241_data *data)
 {
 	data->interval = HZ;	/* 1 sec default */
 	data->config = CFG_CR0076;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data->trutherm = (TT_OFF << TT1_SHIFT) | (TT_OFF << TT2_SHIFT);
 
@@ -453,6 +519,7 @@ static void lm95241_init_client(struct i2c_client *client,
 				  data->model);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int lm95241_probe(struct i2c_client *new_client,
 			 const struct i2c_device_id *id)
@@ -498,6 +565,8 @@ static int lm95241_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static int lm95241_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
@@ -519,6 +588,9 @@ static int lm95241_probe(struct i2c_client *client,
 							   data,
 							   lm95241_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -537,7 +609,10 @@ static struct i2c_driver lm95241_driver = {
 	},
 	.probe		= lm95241_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= lm95241_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= lm95241_id,

@@ -11,14 +11,20 @@
 #include <linux/smp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/cacheflush.h>
 #include <asm/uaccess.h>
 
 #include "kernel.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Do save's until all user register windows are out of the cpu. */
 void flush_user_windows(void)

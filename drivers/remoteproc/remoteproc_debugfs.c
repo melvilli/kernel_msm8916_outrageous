@@ -157,7 +157,11 @@ rproc_recovery_write(struct file *filp, const char __user *user_buf,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (count < 1 || count > sizeof(buf))
+=======
+	if (count > sizeof(buf))
+>>>>>>> v3.18
 =======
 	if (count > sizeof(buf))
 >>>>>>> v3.18
@@ -253,8 +257,12 @@ void __init rproc_init_debugfs(void)
 void __exit rproc_exit_debugfs(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rproc_dbg)
 		debugfs_remove(rproc_dbg);
+=======
+	debugfs_remove(rproc_dbg);
+>>>>>>> v3.18
 =======
 	debugfs_remove(rproc_dbg);
 >>>>>>> v3.18

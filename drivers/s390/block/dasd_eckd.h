@@ -52,9 +52,12 @@
  * Perform Subsystem Function / Sub-Orders
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PSF_ORDER_PRSSD 0x18
 #define PSF_ORDER_SSC	0x1D
 =======
+=======
+>>>>>>> v3.18
 #define PSF_ORDER_PRSSD			 0x18
 #define PSF_ORDER_CUIR_RESPONSE		 0x1A
 #define PSF_ORDER_SSC			 0x1D
@@ -84,6 +87,9 @@
  */
 #define ATTENTION_LENGTH_CUIR		 0x0e
 #define ATTENTION_FORMAT_CUIR		 0x01
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -375,7 +381,10 @@ struct dasd_rssd_features {
 } __attribute__((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct dasd_rssd_messages {
 	__u16 length;
 	__u8 format;
@@ -408,6 +417,9 @@ struct dasd_psf_cuir_response {
 	__u8 cssid;
 	__u8 ssid;
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

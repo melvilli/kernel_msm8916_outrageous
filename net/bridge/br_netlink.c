@@ -31,6 +31,11 @@ static inline size_t br_port_info_size(void)
 		+ nla_total_size(1)	/* IFLA_BRPORT_PROTECT */
 		+ nla_total_size(1)	/* IFLA_BRPORT_FAST_LEAVE */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		+ nla_total_size(1)	/* IFLA_BRPORT_LEARNING */
+		+ nla_total_size(1)	/* IFLA_BRPORT_UNICAST_FLOOD */
+>>>>>>> v3.18
 =======
 		+ nla_total_size(1)	/* IFLA_BRPORT_LEARNING */
 		+ nla_total_size(1)	/* IFLA_BRPORT_UNICAST_FLOOD */
@@ -62,7 +67,13 @@ static int br_port_fill_attrs(struct sk_buff *skb,
 	    nla_put_u8(skb, IFLA_BRPORT_GUARD, !!(p->flags & BR_BPDU_GUARD)) ||
 	    nla_put_u8(skb, IFLA_BRPORT_PROTECT, !!(p->flags & BR_ROOT_BLOCK)) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    nla_put_u8(skb, IFLA_BRPORT_FAST_LEAVE, !!(p->flags & BR_MULTICAST_FAST_LEAVE)))
+=======
+	    nla_put_u8(skb, IFLA_BRPORT_FAST_LEAVE, !!(p->flags & BR_MULTICAST_FAST_LEAVE)) ||
+	    nla_put_u8(skb, IFLA_BRPORT_LEARNING, !!(p->flags & BR_LEARNING)) ||
+	    nla_put_u8(skb, IFLA_BRPORT_UNICAST_FLOOD, !!(p->flags & BR_FLOOD)))
+>>>>>>> v3.18
 =======
 	    nla_put_u8(skb, IFLA_BRPORT_FAST_LEAVE, !!(p->flags & BR_MULTICAST_FAST_LEAVE)) ||
 	    nla_put_u8(skb, IFLA_BRPORT_LEARNING, !!(p->flags & BR_LEARNING)) ||
@@ -203,8 +214,12 @@ void br_ifinfo_notify(int event, struct net_bridge_port *port)
 	return;
 errout:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err < 0)
 		rtnl_set_sk_err(net, RTNLGRP_LINK, err);
+=======
+	rtnl_set_sk_err(net, RTNLGRP_LINK, err);
+>>>>>>> v3.18
 =======
 	rtnl_set_sk_err(net, RTNLGRP_LINK, err);
 >>>>>>> v3.18
@@ -221,7 +236,10 @@ int br_getlink(struct sk_buff *skb, u32 pid, u32 seq,
 	struct net_bridge_port *port = br_port_get_rtnl(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* not a bridge port and  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!port && !(filter_mask & RTEXT_FILTER_BRVLAN))
@@ -258,7 +276,11 @@ static int br_afspec(struct net_bridge *br,
 		vinfo = nla_data(tb[IFLA_BRIDGE_VLAN_INFO]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vinfo->vid >= VLAN_N_VID)
+=======
+		if (!vinfo->vid || vinfo->vid >= VLAN_VID_MASK)
+>>>>>>> v3.18
 =======
 		if (!vinfo->vid || vinfo->vid >= VLAN_VID_MASK)
 >>>>>>> v3.18
@@ -278,9 +300,12 @@ static int br_afspec(struct net_bridge *br,
 				err = br_vlan_add(br, vinfo->vid, vinfo->flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (err)
 				break;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			break;
@@ -300,7 +325,11 @@ static int br_afspec(struct net_bridge *br,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct nla_policy ifla_brport_policy[IFLA_BRPORT_MAX + 1] = {
+=======
+static const struct nla_policy br_port_policy[IFLA_BRPORT_MAX + 1] = {
+>>>>>>> v3.18
 =======
 static const struct nla_policy br_port_policy[IFLA_BRPORT_MAX + 1] = {
 >>>>>>> v3.18
@@ -311,6 +340,12 @@ static const struct nla_policy br_port_policy[IFLA_BRPORT_MAX + 1] = {
 	[IFLA_BRPORT_GUARD]	= { .type = NLA_U8 },
 	[IFLA_BRPORT_PROTECT]	= { .type = NLA_U8 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[IFLA_BRPORT_FAST_LEAVE]= { .type = NLA_U8 },
+	[IFLA_BRPORT_LEARNING]	= { .type = NLA_U8 },
+	[IFLA_BRPORT_UNICAST_FLOOD] = { .type = NLA_U8 },
+>>>>>>> v3.18
 =======
 	[IFLA_BRPORT_FAST_LEAVE]= { .type = NLA_U8 },
 	[IFLA_BRPORT_LEARNING]	= { .type = NLA_U8 },
@@ -336,7 +371,11 @@ static int br_set_port_state(struct net_bridge_port *p, u8 state)
 		return -ENETDOWN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->state = state;
+=======
+	br_set_state(p, state);
+>>>>>>> v3.18
 =======
 	br_set_state(p, state);
 >>>>>>> v3.18
@@ -363,6 +402,10 @@ static int br_setport(struct net_bridge_port *p, struct nlattr *tb[])
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long old_flags = p->flags;
+>>>>>>> v3.18
 =======
 	unsigned long old_flags = p->flags;
 >>>>>>> v3.18
@@ -372,6 +415,11 @@ static int br_setport(struct net_bridge_port *p, struct nlattr *tb[])
 	br_set_port_flag(p, tb, IFLA_BRPORT_FAST_LEAVE, BR_MULTICAST_FAST_LEAVE);
 	br_set_port_flag(p, tb, IFLA_BRPORT_PROTECT, BR_ROOT_BLOCK);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	br_set_port_flag(p, tb, IFLA_BRPORT_LEARNING, BR_LEARNING);
+	br_set_port_flag(p, tb, IFLA_BRPORT_UNICAST_FLOOD, BR_FLOOD);
+>>>>>>> v3.18
 =======
 	br_set_port_flag(p, tb, IFLA_BRPORT_LEARNING, BR_LEARNING);
 	br_set_port_flag(p, tb, IFLA_BRPORT_UNICAST_FLOOD, BR_FLOOD);
@@ -395,6 +443,11 @@ static int br_setport(struct net_bridge_port *p, struct nlattr *tb[])
 			return err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	br_port_flags_change(p, old_flags ^ p->flags);
+>>>>>>> v3.18
 =======
 
 	br_port_flags_change(p, old_flags ^ p->flags);
@@ -419,7 +472,11 @@ int br_setlink(struct net_device *dev, struct nlmsghdr *nlh)
 	p = br_port_get_rtnl(dev);
 	/* We want to accept dev as bridge itself if the AF_SPEC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * is set to see if someone is setting vlan info on the brigde
+=======
+	 * is set to see if someone is setting vlan info on the bridge
+>>>>>>> v3.18
 =======
 	 * is set to see if someone is setting vlan info on the bridge
 >>>>>>> v3.18
@@ -431,7 +488,11 @@ int br_setlink(struct net_device *dev, struct nlmsghdr *nlh)
 		if (protinfo->nla_type & NLA_F_NESTED) {
 			err = nla_parse_nested(tb, IFLA_BRPORT_MAX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       protinfo, ifla_brport_policy);
+=======
+					       protinfo, br_port_policy);
+>>>>>>> v3.18
 =======
 					       protinfo, br_port_policy);
 >>>>>>> v3.18
@@ -443,7 +504,11 @@ int br_setlink(struct net_device *dev, struct nlmsghdr *nlh)
 			spin_unlock_bh(&p->br->lock);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Binary compatability with old RSTP */
+=======
+			/* Binary compatibility with old RSTP */
+>>>>>>> v3.18
 =======
 			/* Binary compatibility with old RSTP */
 >>>>>>> v3.18
@@ -518,7 +583,10 @@ static int br_dev_newlink(struct net *src_net, struct net_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int br_port_slave_changelink(struct net_device *brdev,
 				    struct net_device *dev,
 				    struct nlattr *tb[],
@@ -601,6 +669,9 @@ static int br_fill_info(struct sk_buff *skb, const struct net_device *brdev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static size_t br_get_link_af_size(const struct net_device *dev)
 {
@@ -627,6 +698,7 @@ static struct rtnl_af_ops br_af_ops = {
 
 struct rtnl_link_ops br_link_ops __read_mostly = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.kind		= "bridge",
 	.priv_size	= sizeof(struct net_bridge),
 	.setup		= br_dev_setup,
@@ -634,6 +706,8 @@ struct rtnl_link_ops br_link_ops __read_mostly = {
 	.newlink	= br_dev_newlink,
 	.dellink	= br_dev_delete,
 =======
+=======
+>>>>>>> v3.18
 	.kind			= "bridge",
 	.priv_size		= sizeof(struct net_bridge),
 	.setup			= br_dev_setup,
@@ -651,6 +725,9 @@ struct rtnl_link_ops br_link_ops __read_mostly = {
 	.slave_changelink	= br_port_slave_changelink,
 	.get_slave_size		= br_port_get_slave_size,
 	.fill_slave_info	= br_port_fill_slave_info,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -660,9 +737,13 @@ int __init br_netlink_init(void)
 
 	br_mdb_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = rtnl_af_register(&br_af_ops);
 	if (err)
 		goto out;
+=======
+	rtnl_af_register(&br_af_ops);
+>>>>>>> v3.18
 =======
 	rtnl_af_register(&br_af_ops);
 >>>>>>> v3.18
@@ -676,7 +757,10 @@ int __init br_netlink_init(void)
 out_af:
 	rtnl_af_unregister(&br_af_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	br_mdb_uninit();
@@ -684,7 +768,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __exit br_netlink_fini(void)
+=======
+void br_netlink_fini(void)
+>>>>>>> v3.18
 =======
 void br_netlink_fini(void)
 >>>>>>> v3.18

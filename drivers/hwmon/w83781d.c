@@ -5,7 +5,11 @@
  *			      Philip Edelbrock <phil@netroedge.com>,
  *			      and Mark Studebaker <mdsxyz123@yahoo.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2007 - 2008  Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (c) 2007 - 2008  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (c) 2007 - 2008  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

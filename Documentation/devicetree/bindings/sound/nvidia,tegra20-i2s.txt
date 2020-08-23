@@ -5,9 +5,12 @@ Required properties:
 - reg : Should contain I2S registers location and length
 - interrupts : Should contain I2S interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
 - nvidia,dma-request-selector : The Tegra DMA controller's phandle and
   request selector for this I2S controller
 =======
+=======
+>>>>>>> v3.18
 - resets : Must contain an entry for each entry in reset-names.
   See ../reset/reset.txt for details.
 - reset-names : Must include the following entries:
@@ -19,6 +22,9 @@ Required properties:
   - tx
 - clocks : Must contain one entry, for the module clock.
   See ../clocks/clock-bindings.txt for details.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
@@ -28,12 +34,18 @@ i2s@70002800 {
 	reg = <0x70002800 0x200>;
 	interrupts = < 45 >;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvidia,dma-request-selector = < &apbdma 2 >;
 =======
+=======
+>>>>>>> v3.18
 	clocks = <&tegra_car 11>;
 	resets = <&tegra_car 11>;
 	reset-names = "i2s";
 	dmas = <&apbdma 21>, <&apbdma 21>;
 	dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

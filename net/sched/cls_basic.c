@@ -25,6 +25,10 @@ struct basic_head {
 	u32			hgenerator;
 	struct list_head	flist;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rcu_head		rcu;
+>>>>>>> v3.18
 =======
 	struct rcu_head		rcu;
 >>>>>>> v3.18
@@ -35,6 +39,7 @@ struct basic_filter {
 	struct tcf_exts		exts;
 	struct tcf_ematch_tree	ematches;
 	struct tcf_result	res;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct list_head	link;
 };
@@ -47,6 +52,11 @@ static const struct tcf_ext_map basic_ext_map = {
 	struct list_head	link;
 	struct rcu_head		rcu;
 >>>>>>> v3.18
+=======
+	struct tcf_proto	*tp;
+	struct list_head	link;
+	struct rcu_head		rcu;
+>>>>>>> v3.18
 };
 
 static int basic_classify(struct sk_buff *skb, const struct tcf_proto *tp,
@@ -54,15 +64,21 @@ static int basic_classify(struct sk_buff *skb, const struct tcf_proto *tp,
 {
 	int r;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct basic_head *head = (struct basic_head *) tp->root;
 	struct basic_filter *f;
 
 	list_for_each_entry(f, &head->flist, link) {
 =======
+=======
+>>>>>>> v3.18
 	struct basic_head *head = rcu_dereference_bh(tp->root);
 	struct basic_filter *f;
 
 	list_for_each_entry_rcu(f, &head->flist, link) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!tcf_em_tree_match(skb, &f->ematches, NULL))
 			continue;
@@ -79,7 +95,11 @@ static unsigned long basic_get(struct tcf_proto *tp, u32 handle)
 {
 	unsigned long l = 0UL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct basic_head *head = (struct basic_head *) tp->root;
+=======
+	struct basic_head *head = rtnl_dereference(tp->root);
+>>>>>>> v3.18
 =======
 	struct basic_head *head = rtnl_dereference(tp->root);
 >>>>>>> v3.18
@@ -108,6 +128,7 @@ static int basic_init(struct tcf_proto *tp)
 		return -ENOBUFS;
 	INIT_LIST_HEAD(&head->flist);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tp->root = head;
 	return 0;
 }
@@ -118,6 +139,8 @@ static void basic_delete_filter(struct tcf_proto *tp, struct basic_filter *f)
 	tcf_exts_destroy(tp, &f->exts);
 	tcf_em_tree_destroy(tp, &f->ematches);
 =======
+=======
+>>>>>>> v3.18
 	rcu_assign_pointer(tp->root, head);
 	return 0;
 }
@@ -128,12 +151,16 @@ static void basic_delete_filter(struct rcu_head *head)
 
 	tcf_exts_destroy(&f->exts);
 	tcf_em_tree_destroy(&f->ematches);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(f);
 }
 
 static void basic_destroy(struct tcf_proto *tp)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct basic_head *head = tp->root;
 	struct basic_filter *f, *n;
@@ -144,6 +171,8 @@ static void basic_destroy(struct tcf_proto *tp)
 	}
 	kfree(head);
 =======
+=======
+>>>>>>> v3.18
 	struct basic_head *head = rtnl_dereference(tp->root);
 	struct basic_filter *f, *n;
 
@@ -154,13 +183,20 @@ static void basic_destroy(struct tcf_proto *tp)
 	}
 	RCU_INIT_POINTER(tp->root, NULL);
 	kfree_rcu(head, rcu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int basic_delete(struct tcf_proto *tp, unsigned long arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct basic_head *head = (struct basic_head *) tp->root;
+=======
+	struct basic_head *head = rtnl_dereference(tp->root);
+>>>>>>> v3.18
 =======
 	struct basic_head *head = rtnl_dereference(tp->root);
 >>>>>>> v3.18
@@ -169,10 +205,16 @@ static int basic_delete(struct tcf_proto *tp, unsigned long arg)
 	list_for_each_entry(t, &head->flist, link)
 		if (t == f) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tcf_tree_lock(tp);
 			list_del(&t->link);
 			tcf_tree_unlock(tp);
 			basic_delete_filter(tp, t);
+=======
+			list_del_rcu(&t->link);
+			tcf_unbind_filter(tp, &t->res);
+			call_rcu(&t->rcu, basic_delete_filter);
+>>>>>>> v3.18
 =======
 			list_del_rcu(&t->link);
 			tcf_unbind_filter(tp, &t->res);
@@ -193,6 +235,7 @@ static int basic_set_parms(struct net *net, struct tcf_proto *tp,
 			   struct basic_filter *f, unsigned long base,
 			   struct nlattr **tb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   struct nlattr *est)
 {
 	int err = -EINVAL;
@@ -201,6 +244,8 @@ static int basic_set_parms(struct net *net, struct tcf_proto *tp,
 
 	err = tcf_exts_validate(net, tp, tb, est, &e, &basic_ext_map);
 =======
+=======
+>>>>>>> v3.18
 			   struct nlattr *est, bool ovr)
 {
 	int err;
@@ -209,6 +254,9 @@ static int basic_set_parms(struct net *net, struct tcf_proto *tp,
 
 	tcf_exts_init(&e, TCA_BASIC_ACT, TCA_BASIC_POLICE);
 	err = tcf_exts_validate(net, tp, tb, est, &e, ovr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err < 0)
 		return err;
@@ -225,22 +273,29 @@ static int basic_set_parms(struct net *net, struct tcf_proto *tp,
 	tcf_exts_change(tp, &f->exts, &e);
 	tcf_em_tree_change(tp, &f->ematches, &t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 errout:
 	tcf_exts_destroy(tp, &e);
 =======
+=======
+>>>>>>> v3.18
 	f->tp = tp;
 
 	return 0;
 errout:
 	tcf_exts_destroy(&e);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
 
 static int basic_change(struct net *net, struct sk_buff *in_skb,
 			struct tcf_proto *tp, unsigned long base, u32 handle,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			struct nlattr **tca, unsigned long *arg)
 {
@@ -249,6 +304,8 @@ static int basic_change(struct net *net, struct sk_buff *in_skb,
 	struct nlattr *tb[TCA_BASIC_MAX + 1];
 	struct basic_filter *f = (struct basic_filter *) *arg;
 =======
+=======
+>>>>>>> v3.18
 			struct nlattr **tca, unsigned long *arg, bool ovr)
 {
 	int err;
@@ -256,6 +313,9 @@ static int basic_change(struct net *net, struct sk_buff *in_skb,
 	struct nlattr *tb[TCA_BASIC_MAX + 1];
 	struct basic_filter *fold = (struct basic_filter *) *arg;
 	struct basic_filter *fnew;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (tca[TCA_OPTIONS] == NULL)
@@ -266,6 +326,7 @@ static int basic_change(struct net *net, struct sk_buff *in_skb,
 	if (err < 0)
 		return err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (f != NULL) {
 		if (handle && f->handle != handle)
@@ -283,6 +344,8 @@ static int basic_change(struct net *net, struct sk_buff *in_skb,
 		f->handle = handle;
 	else {
 =======
+=======
+>>>>>>> v3.18
 	if (fold != NULL) {
 		if (handle && fold->handle != handle)
 			return -EINVAL;
@@ -300,6 +363,9 @@ static int basic_change(struct net *net, struct sk_buff *in_skb,
 	} else if (fold) {
 		fnew->handle = fold->handle;
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		unsigned int i = 0x80000000;
 		do {
@@ -312,6 +378,7 @@ static int basic_change(struct net *net, struct sk_buff *in_skb,
 			goto errout;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		f->handle = head->hgenerator;
 	}
@@ -331,6 +398,8 @@ errout:
 		kfree(f);
 
 =======
+=======
+>>>>>>> v3.18
 		fnew->handle = head->hgenerator;
 	}
 
@@ -351,6 +420,9 @@ errout:
 	return 0;
 errout:
 	kfree(fnew);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -358,7 +430,11 @@ errout:
 static void basic_walk(struct tcf_proto *tp, struct tcf_walker *arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct basic_head *head = (struct basic_head *) tp->root;
+=======
+	struct basic_head *head = rtnl_dereference(tp->root);
+>>>>>>> v3.18
 =======
 	struct basic_head *head = rtnl_dereference(tp->root);
 >>>>>>> v3.18
@@ -378,7 +454,11 @@ skip:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int basic_dump(struct tcf_proto *tp, unsigned long fh,
+=======
+static int basic_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
+>>>>>>> v3.18
 =======
 static int basic_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
 >>>>>>> v3.18
@@ -401,7 +481,11 @@ static int basic_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
 		goto nla_put_failure;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tcf_exts_dump(skb, &f->exts, &basic_ext_map) < 0 ||
+=======
+	if (tcf_exts_dump(skb, &f->exts) < 0 ||
+>>>>>>> v3.18
 =======
 	if (tcf_exts_dump(skb, &f->exts) < 0 ||
 >>>>>>> v3.18
@@ -411,7 +495,11 @@ static int basic_dump(struct net *net, struct tcf_proto *tp, unsigned long fh,
 	nla_nest_end(skb, nest);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tcf_exts_dump_stats(skb, &f->exts, &basic_ext_map) < 0)
+=======
+	if (tcf_exts_dump_stats(skb, &f->exts) < 0)
+>>>>>>> v3.18
 =======
 	if (tcf_exts_dump_stats(skb, &f->exts) < 0)
 >>>>>>> v3.18

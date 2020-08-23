@@ -14,7 +14,11 @@ config MFD_CS5535
 	tristate "AMD CS5535 and CS5536 southbridge core functions"
 	select MFD_CORE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI && X86
+=======
+	depends on PCI && (X86_32 || (X86 && COMPILE_TEST))
+>>>>>>> v3.18
 =======
 	depends on PCI && (X86_32 || (X86 && COMPILE_TEST))
 >>>>>>> v3.18
@@ -32,7 +36,10 @@ config MFD_AS3711
 	  Support for the AS3711 PMIC from AMS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MFD_AS3722
 	bool "ams AS3722 Power Management IC"
 	select MFD_CORE
@@ -45,6 +52,9 @@ config MFD_AS3722
 	  controllers, 11 LDOs, RTC, automatic battery, temperature and
 	  over current monitoring, GPIOs, ADC and a watchdog.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config PMIC_ADP5520
 	bool "Analog Devices ADP5520/01 MFD PMIC Core Support"
@@ -67,7 +77,10 @@ config MFD_AAT2870_CORE
 	  functionality of the device.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MFD_BCM590XX
 	tristate "Broadcom BCM590xx PMUs"
 	select MFD_CORE
@@ -88,6 +101,9 @@ config MFD_AXP20X
 	  components like regulators or the PEK (Power Enable Key) under the
 	  corresponding menus.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MFD_CROS_EC
 	tristate "ChromeOS Embedded Controller"
@@ -96,7 +112,11 @@ config MFD_CROS_EC
 	  If you say Y here you get support for the ChromeOS Embedded
 	  Controller (EC) providing keyboard, battery and power services.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  You also ned to enable the driver for the bus you are using. The
+=======
+	  You also need to enable the driver for the bus you are using. The
+>>>>>>> v3.18
 =======
 	  You also need to enable the driver for the bus you are using. The
 >>>>>>> v3.18
@@ -115,7 +135,11 @@ config MFD_CROS_EC_I2C
 config MFD_CROS_EC_SPI
 	tristate "ChromeOS Embedded Controller (SPI)"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MFD_CROS_EC && SPI
+=======
+	depends on MFD_CROS_EC && SPI && OF
+>>>>>>> v3.18
 =======
 	depends on MFD_CROS_EC && SPI && OF
 >>>>>>> v3.18
@@ -139,7 +163,11 @@ config PMIC_DA903X
 	depends on I2C=y
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Say yes here to support for Dialog Semiconductor DA9030 (a.k.a
+=======
+	  Say yes here to add support for Dialog Semiconductor DA9030 (a.k.a
+>>>>>>> v3.18
 =======
 	  Say yes here to add support for Dialog Semiconductor DA9030 (a.k.a
 >>>>>>> v3.18
@@ -194,9 +222,12 @@ config MFD_DA9055
 	  called "da9055"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MFD_MC13783
 	tristate
 =======
+=======
+>>>>>>> v3.18
 config MFD_DA9063
 	bool "Dialog Semiconductor DA9063 PMIC Support"
 	select MFD_CORE
@@ -208,6 +239,9 @@ config MFD_DA9063
 	  This includes the I2C driver and core APIs.
 	  Additional drivers must be enabled in order to use the functionality
 	  of the device.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config MFD_MC13XXX
@@ -215,7 +249,11 @@ config MFD_MC13XXX
 	depends on (SPI_MASTER || I2C)
 	select MFD_CORE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MFD_MC13783
+=======
+	select REGMAP_IRQ
+>>>>>>> v3.18
 =======
 	select REGMAP_IRQ
 >>>>>>> v3.18
@@ -242,7 +280,10 @@ config MFD_MC13XXX_I2C
 	  Select this if your MC13xxx is connected via an I2C bus.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MFD_HI6421_PMIC
 	tristate "HiSilicon Hi6421 PMU/Codec IC"
 	depends on OF
@@ -256,6 +297,9 @@ config MFD_HI6421_PMIC
 	  menus in order to enable them.
 	  We communicate with the Hi6421 via memory-mapped I/O.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HTC_EGPIO
 	bool "HTC EGPIO support"
@@ -302,7 +346,10 @@ config LPC_SCH
 	  System Management Bus and General Purpose I/O.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config INTEL_SOC_PMIC
 	bool "Support for Intel Atom SoC PMIC"
 	depends on I2C=y
@@ -315,6 +362,9 @@ config INTEL_SOC_PMIC
 	  thermal, charger and related power management functions
 	  on these systems.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MFD_INTEL_MSIC
 	bool "Intel MSIC"
@@ -326,7 +376,10 @@ config MFD_INTEL_MSIC
 	  devices used in Intel Medfield platforms.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MFD_IPAQ_MICRO
 	bool "Atmel Micro ASIC (iPAQ h3100/h3600/h3700) Support"
 	depends on SA1100_H3100 || SA1100_H3600
@@ -337,6 +390,9 @@ config MFD_IPAQ_MICRO
 	  AT90LS8535 microcontroller flashed with a special iPAQ
 	  firmware using the custom protocol implemented in this driver.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MFD_JANZ_CMODIO
 	tristate "Janz CMOD-IO PCI MODULbus Carrier Board"
@@ -358,7 +414,10 @@ config MFD_JZ4740_ADC
 	  This driver is necessary for jz4740-battery and jz4740-hwmon driver.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MFD_KEMPLD
 	tristate "Kontron module PLD device"
 	select MFD_CORE
@@ -385,6 +444,9 @@ config MFD_KEMPLD
 	  This driver can also be built as a module. If so, the module
 	  will be called kempld-core.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MFD_88PM800
 	tristate "Marvell 88PM800"
@@ -422,6 +484,7 @@ config MFD_88PM860X
 	  battery-charger under the corresponding menus.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MFD_MAX77686
 	bool "Maxim Semiconductor MAX77686 PMIC Support"
 	depends on I2C=y
@@ -432,6 +495,8 @@ config MFD_MAX77686
 	  Say yes here to support for Maxim Semiconductor MAX77686.
 	  This is a Power Management IC with RTC on chip.
 =======
+=======
+>>>>>>> v3.18
 config MFD_MAX14577
 	bool "Maxim Semiconductor MAX14577/77836 MUIC + Charger Support"
 	depends on I2C=y
@@ -456,6 +521,9 @@ config MFD_MAX77686
 	help
 	  Say yes here to add support for Maxim Semiconductor MAX77686 and
 	  MAX77802 which are Power Management IC with an RTC on chip.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  This driver provides common support for accessing the device;
 	  additional drivers must be enabled in order to use the functionality
@@ -467,8 +535,14 @@ config MFD_MAX77693
 	select MFD_CORE
 	select REGMAP_I2C
 <<<<<<< HEAD
+<<<<<<< HEAD
 	help
 	  Say yes here to support for Maxim Semiconductor MAX77693.
+=======
+	select REGMAP_IRQ
+	help
+	  Say yes here to add support for Maxim Semiconductor MAX77693.
+>>>>>>> v3.18
 =======
 	select REGMAP_IRQ
 	help
@@ -488,7 +562,11 @@ config MFD_MAX8907
 	select REGMAP_IRQ
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Say yes here to support for Maxim Semiconductor MAX8907. This is
+=======
+	  Say yes here to add support for Maxim Semiconductor MAX8907. This is
+>>>>>>> v3.18
 =======
 	  Say yes here to add support for Maxim Semiconductor MAX8907. This is
 >>>>>>> v3.18
@@ -502,7 +580,11 @@ config MFD_MAX8925
 	select MFD_CORE
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Say yes here to support for Maxim Semiconductor MAX8925. This is
+=======
+	  Say yes here to add support for Maxim Semiconductor MAX8925. This is
+>>>>>>> v3.18
 =======
 	  Say yes here to add support for Maxim Semiconductor MAX8925. This is
 >>>>>>> v3.18
@@ -517,7 +599,11 @@ config MFD_MAX8997
 	select IRQ_DOMAIN
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Say yes here to support for Maxim Semiconductor MAX8997/8966.
+=======
+	  Say yes here to add support for Maxim Semiconductor MAX8997/8966.
+>>>>>>> v3.18
 =======
 	  Say yes here to add support for Maxim Semiconductor MAX8997/8966.
 >>>>>>> v3.18
@@ -532,8 +618,14 @@ config MFD_MAX8998
 	depends on I2C=y
 	select MFD_CORE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	help
 	  Say yes here to support for Maxim Semiconductor MAX8998 and
+=======
+	select IRQ_DOMAIN
+	help
+	  Say yes here to add support for Maxim Semiconductor MAX8998 and
+>>>>>>> v3.18
 =======
 	select IRQ_DOMAIN
 	help
@@ -545,7 +637,10 @@ config MFD_MAX8998
 	  of the device.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MFD_MENF21BMC
 	tristate "MEN 14F021P00 Board Management Controller Support"
 	depends on I2C
@@ -561,6 +656,9 @@ config MFD_MENF21BMC
 	  This driver can also be built as a module. If so the module
 	  will be called menf21bmc.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config EZX_PCAP
 	bool "Motorola EZXPCAP Support"
@@ -633,15 +731,21 @@ config MFD_PM8XXX
 config MFD_PM8921_CORE
 	tristate "Qualcomm PM8921 PMIC chip"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SSBI && BROKEN
 	select MFD_CORE
 	select MFD_PM8XXX
 =======
+=======
+>>>>>>> v3.18
 	depends on (ARM || HEXAGON)
 	select IRQ_DOMAIN
 	select MFD_CORE
 	select MFD_PM8XXX
 	select REGMAP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  If you say yes to this option, support will be included for the
@@ -654,6 +758,7 @@ config MFD_PM8921_CORE
 	  This will build a module called "pm8921-core".
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MFD_PM8XXX_IRQ
 	bool "Qualcomm PM8xxx IRQ features"
 	depends on MFD_PM8XXX
@@ -664,6 +769,8 @@ config MFD_PM8XXX_IRQ
 	  This is required to use certain other PM 8xxx features, such as GPIO
 	  and MPP.
 =======
+=======
+>>>>>>> v3.18
 config MFD_SPMI_PMIC
 	tristate "Qualcomm SPMI PMICs"
 	depends on ARCH_QCOM || COMPILE_TEST
@@ -678,6 +785,9 @@ config MFD_SPMI_PMIC
 
 	  Say M here if you want to include support for the SPMI PMIC
 	  series as a module.  The module will be called "qcom-spmi-pmic".
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config MFD_RDC321X
@@ -700,7 +810,10 @@ config MFD_RTSX_PCI
 	  Secure Digital and MultiMediaCard.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MFD_RTSX_USB
 	tristate "Realtek USB card reader"
 	depends on USB
@@ -711,6 +824,9 @@ config MFD_RTSX_USB
 	  Realtek card reader supports access to many types of memory cards,
 	  such as Memory Stick Pro, Secure Digital and MultiMediaCard.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MFD_RC5T583
 	bool "Ricoh RC5T583 Power Management system device"
@@ -727,7 +843,10 @@ config MFD_RC5T583
 	  different functionality of the device.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MFD_RK808
 	tristate "Rockchip RK808 Power Management chip"
 	depends on I2C && OF
@@ -752,6 +871,9 @@ config MFD_RN5T618
 	  additional drivers must be enabled in order to use the
 	  functionality of the device.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MFD_SEC_CORE
 	bool "SAMSUNG Electronics PMIC Series Support"
@@ -760,6 +882,10 @@ config MFD_SEC_CORE
 	select REGMAP_I2C
 	select REGMAP_IRQ
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select REGULATOR
+>>>>>>> v3.18
 =======
 	select REGULATOR
 >>>>>>> v3.18
@@ -888,6 +1014,10 @@ config MFD_STMPE
 	bool "STMicroelectronics STMPE"
 	depends on (I2C=y || SPI_MASTER=y)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on OF
+>>>>>>> v3.18
 =======
 	depends on OF
 >>>>>>> v3.18
@@ -917,7 +1047,11 @@ depends on MFD_STMPE
 
 config STMPE_I2C
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "STMicroelectronics STMPE I2C Inteface"
+=======
+	bool "STMicroelectronics STMPE I2C Interface"
+>>>>>>> v3.18
 =======
 	bool "STMicroelectronics STMPE I2C Interface"
 >>>>>>> v3.18
@@ -928,7 +1062,11 @@ config STMPE_I2C
 
 config STMPE_SPI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "STMicroelectronics STMPE SPI Inteface"
+=======
+	bool "STMicroelectronics STMPE SPI Interface"
+>>>>>>> v3.18
 =======
 	bool "STMicroelectronics STMPE SPI Interface"
 >>>>>>> v3.18
@@ -944,7 +1082,10 @@ config MFD_STA2X11
 	select REGMAP_MMIO
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MFD_SUN6I_PRCM
 	bool "Allwinner A31 PRCM controller"
 	depends on ARCH_SUNXI
@@ -953,6 +1094,9 @@ config MFD_SUN6I_PRCM
 	  Support for the PRCM (Power/Reset/Clock Management) unit available
 	  in A31 SoC.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MFD_SYSCON
 	bool "System Controller Register R/W Based on Regmap"
@@ -965,6 +1109,10 @@ config MFD_DAVINCI_VOICECODEC
 	tristate
 	select MFD_CORE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select REGMAP_MMIO
+>>>>>>> v3.18
 =======
 	select REGMAP_MMIO
 >>>>>>> v3.18
@@ -989,7 +1137,10 @@ config MFD_DM355EVM_MSP
 	  inputs from buttons and the IR remote, LEDs, an RTC, and more.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MFD_LP3943
 	tristate "TI/National Semiconductor LP3943 MFD Driver"
 	depends on I2C
@@ -1001,6 +1152,9 @@ config MFD_LP3943
 	  With these functionalities, it can be used for LED string control or
 	  general usage such like a GPIO controller and a PWM controller.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MFD_LP8788
 	bool "TI LP8788 Power Management Unit Driver"
@@ -1032,6 +1186,7 @@ config MFD_PALMAS
 	  series of PMIC chips from Texas Instruments.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MFD_TI_SSP
 	tristate "TI Sequencer Serial Port support"
 	depends on ARCH_DAVINCI_TNETV107X
@@ -1043,6 +1198,8 @@ config MFD_TI_SSP
 	  To compile this driver as a module, choose M here: the
 	  module will be called ti-ssp.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config TPS6105X
@@ -1114,7 +1271,10 @@ config MFD_TPS65217
 	  will be called tps65217.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MFD_TPS65218
 	tristate "TI TPS65218 Power Management chips"
 	depends on I2C
@@ -1131,6 +1291,9 @@ config MFD_TPS65218
 	  This driver can also be built as a module.  If so, the module
 	  will be called tps65218.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MFD_TPS6586X
 	bool "TI TPS6586x Power Management chips"
@@ -1215,6 +1378,7 @@ config TWL4030_CORE
 	  versions) and many other features.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config TWL4030_MADC
 	tristate "TI TWL4030 MADC"
 	depends on TWL4030_CORE
@@ -1225,6 +1389,8 @@ config TWL4030_MADC
 	This driver can be built as a module. If so it will be
 	named twl4030-madc
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config TWL4030_POWER
@@ -1297,7 +1463,11 @@ config MFD_TIMBERDALE
 	tristate "Timberdale FPGA"
 	select MFD_CORE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI && GPIOLIB
+=======
+	depends on PCI && GPIOLIB && (X86_32 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on PCI && GPIOLIB && (X86_32 || COMPILE_TEST)
 >>>>>>> v3.18
@@ -1396,13 +1566,19 @@ config MFD_WM5110
 	  Support for Wolfson Microelectronics WM5110 low power audio SoC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MFD_WM8997
 	bool "Wolfson Microelectronics WM8997"
 	depends on MFD_ARIZONA
 	help
 	  Support for Wolfson Microelectronics WM8997 low power audio SoC
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MFD_WM8400
 	bool "Wolfson Microelectronics WM8400"
@@ -1460,17 +1636,23 @@ config MFD_WM8350_I2C
 
 config MFD_WM8994
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Wolfson Microelectronics WM8994"
 	select MFD_CORE
 	select REGMAP_I2C
 	select REGMAP_IRQ
 	depends on I2C=y
 =======
+=======
+>>>>>>> v3.18
 	tristate "Wolfson Microelectronics WM8994"
 	select MFD_CORE
 	select REGMAP_I2C
 	select REGMAP_IRQ
 	depends on I2C
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  The WM8994 is a highly integrated hi-fi CODEC designed for
@@ -1480,6 +1662,7 @@ config MFD_WM8994
 	  core support for the WM8994, in order to use the actual
 	  functionaltiy of the device other drivers must be enabled.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config WCD9304_CODEC
         tristate "WCD9304 Codec"
@@ -1550,6 +1733,8 @@ config WCD9335_CODEC
 endmenu
 endif
 =======
+=======
+>>>>>>> v3.18
 config MFD_STW481X
 	tristate "Support for ST Microelectronics STw481x"
 	depends on I2C && ARCH_NOMADIK
@@ -1559,6 +1744,9 @@ config MFD_STW481X
 	  Select this option to enable the STw481x chip driver used
 	  in various ST Microelectronics and ST-Ericsson embedded
 	  Nomadik series.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 menu "Multimedia Capabilities Port drivers"
@@ -1576,7 +1764,11 @@ config MCP_SA11X0
 # Chip drivers
 config MCP_UCB1200
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Support for UCB1200 / UCB1300"
+=======
+	tristate "Support for UCB1200 / UCB1300"
+>>>>>>> v3.18
 =======
 	tristate "Support for UCB1200 / UCB1300"
 >>>>>>> v3.18
@@ -1590,12 +1782,15 @@ config MCP_UCB1200_TS
 endmenu
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config VEXPRESS_CONFIG
 	bool
 	help
 	  Platform configuration infrastructure for the ARM Ltd.
 	  Versatile Express.
 =======
+=======
+>>>>>>> v3.18
 config MFD_VEXPRESS_SYSREG
 	bool "Versatile Express System Registers"
 	depends on VEXPRESS_CONFIG && GPIOLIB
@@ -1610,4 +1805,7 @@ config MFD_VEXPRESS_SYSREG
 
 endmenu
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

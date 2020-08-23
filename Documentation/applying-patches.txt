@@ -95,7 +95,11 @@ Common errors when patching
  When patch applies a patch file it attempts to verify the sanity of the
 file in different ways.
 <<<<<<< HEAD
+<<<<<<< HEAD
 Checking that the file looks like a valid patch file & checking the code
+=======
+Checking that the file looks like a valid patch file and checking the code
+>>>>>>> v3.18
 =======
 Checking that the file looks like a valid patch file and checking the code
 >>>>>>> v3.18

@@ -9,7 +9,11 @@ SYNOPSIS
 --------
 [verse]
 <<<<<<< HEAD
+<<<<<<< HEAD
 'perf timechart' {record}
+=======
+'perf timechart' [<timechart options>] {record} [<record options>]
+>>>>>>> v3.18
 =======
 'perf timechart' [<timechart options>] {record} [<record options>]
 >>>>>>> v3.18
@@ -20,6 +24,7 @@ There are two variants of perf timechart:
 
   'perf timechart record <command>' to record the system level events
 <<<<<<< HEAD
+<<<<<<< HEAD
   of an arbitrary workload.
 
   'perf timechart' to turn a trace into a Scalable Vector Graphics file,
@@ -28,6 +33,8 @@ There are two variants of perf timechart:
 OPTIONS
 -------
 =======
+=======
+>>>>>>> v3.18
   of an arbitrary workload. By default timechart records only scheduler
   and CPU events (task switches, running times, CPU power states, etc),
   but it's possible to record IO (disk, network) activity using -I argument.
@@ -45,6 +52,9 @@ OPTIONS
 
 TIMECHART OPTIONS
 -----------------
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 -o::
 --output=::
@@ -59,6 +69,12 @@ TIMECHART OPTIONS
 --power-only::
         Only output the CPU power section of the diagram
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+-T::
+--tasks-only::
+        Don't output processor state transitions
+>>>>>>> v3.18
 =======
 -T::
 --tasks-only::
@@ -71,7 +87,10 @@ TIMECHART OPTIONS
 --symfs=<directory>::
         Look for files with symbols relative to this directory.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 -n::
 --proc-num::
         Print task info for at least given number of tasks.
@@ -139,6 +158,9 @@ Record system-wide IO events:
   then generate timechart:
 
   $ perf timechart
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 SEE ALSO

@@ -45,6 +45,10 @@ int uwb_pal_register(struct uwb_pal *pal)
 
 	if (pal->device) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* create a link to the uwb_rc in the PAL device's directory. */
+>>>>>>> v3.18
 =======
 		/* create a link to the uwb_rc in the PAL device's directory. */
 >>>>>>> v3.18
@@ -53,6 +57,10 @@ int uwb_pal_register(struct uwb_pal *pal)
 		if (ret < 0)
 			return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* create a link to the PAL in the UWB device's directory. */
+>>>>>>> v3.18
 =======
 		/* create a link to the PAL in the UWB device's directory. */
 >>>>>>> v3.18
@@ -75,9 +83,12 @@ int uwb_pal_register(struct uwb_pal *pal)
 EXPORT_SYMBOL_GPL(uwb_pal_register);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * uwb_pal_register - unregister a UWB PAL
 =======
+=======
+>>>>>>> v3.18
 static int find_rc(struct device *dev, const void *data)
 {
 	const struct uwb_rc *target_rc = data;
@@ -112,6 +123,9 @@ static bool uwb_rc_class_device_exists(struct uwb_rc *target_rc)
 
 /**
  * uwb_pal_unregister - unregister a UWB PAL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @pal: the PAL
  */
@@ -129,13 +143,19 @@ void uwb_pal_unregister(struct uwb_pal *pal)
 
 	if (pal->device) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sysfs_remove_link(&rc->uwb_dev.dev.kobj, pal->name);
 =======
+=======
+>>>>>>> v3.18
 		/* remove link to the PAL in the UWB device's directory. */
 		if (uwb_rc_class_device_exists(rc))
 			sysfs_remove_link(&rc->uwb_dev.dev.kobj, pal->name);
 
 		/* remove link to uwb_rc in the PAL device's directory. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sysfs_remove_link(&pal->device->kobj, "uwb_rc");
 	}

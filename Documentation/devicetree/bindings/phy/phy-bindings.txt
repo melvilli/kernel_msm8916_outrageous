@@ -11,11 +11,17 @@ Required Properties:
 		PHY.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Optional Properties:
 phy-supply:	Phandle to a regulator that provides power to the PHY. This
 		regulator will be managed during the PHY power on/off sequence.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 For example:
 
@@ -31,7 +37,11 @@ phys: phy {
 
 That node describes an IP block (PHY provider) that implements 2 different PHYs.
 <<<<<<< HEAD
+<<<<<<< HEAD
 In order to differentiate between these 2 PHYs, an additonal specifier should be
+=======
+In order to differentiate between these 2 PHYs, an additional specifier should be
+>>>>>>> v3.18
 =======
 In order to differentiate between these 2 PHYs, an additional specifier should be
 >>>>>>> v3.18

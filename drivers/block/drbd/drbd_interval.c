@@ -38,6 +38,7 @@ compute_subtree_last(struct drbd_interval *node)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void augment_propagate(struct rb_node *rb, struct rb_node *stop)
 {
 	while (rb != stop) {
@@ -72,6 +73,10 @@ static const struct rb_augment_callbacks augment_callbacks = {
 	augment_copy,
 	augment_rotate,
 };
+=======
+RB_DECLARE_CALLBACKS(static, augment_callbacks, struct drbd_interval, rb,
+		     sector_t, end, compute_subtree_last);
+>>>>>>> v3.18
 =======
 RB_DECLARE_CALLBACKS(static, augment_callbacks, struct drbd_interval, rb,
 		     sector_t, end, compute_subtree_last);

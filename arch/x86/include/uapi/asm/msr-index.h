@@ -148,12 +148,18 @@
 #define MSR_PP1_POLICY			0x00000642
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MSR_CORE_C1_RES			0x00000660
 
 #define MSR_CC6_DEMOTION_POLICY_CONFIG	0x00000668
 #define MSR_MC6_DEMOTION_POLICY_CONFIG	0x00000669
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MSR_AMD64_MC0_MASK		0xc0010044
 
@@ -179,6 +185,12 @@
 #define MSR_KNC_EVNTSEL1               0x00000029
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Alternative perfctr range with full access. */
+#define MSR_IA32_PMC0			0x000004c1
+
+>>>>>>> v3.18
 =======
 /* Alternative perfctr range with full access. */
 #define MSR_IA32_PMC0			0x000004c1
@@ -305,6 +317,12 @@
 #define MSR_IA32_FEATURE_CONTROL        0x0000003a
 #define MSR_IA32_TSC_ADJUST             0x0000003b
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MSR_IA32_BNDCFGS		0x00000d90
+
+#define MSR_IA32_XSS			0x00000da0
+>>>>>>> v3.18
 =======
 #define MSR_IA32_BNDCFGS		0x00000d90
 
@@ -384,6 +402,7 @@
 
 /* MISC_ENABLE bits: architectural */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MSR_IA32_MISC_ENABLE_FAST_STRING	(1ULL << 0)
 #define MSR_IA32_MISC_ENABLE_TCC		(1ULL << 1)
 #define MSR_IA32_MISC_ENABLE_EMON		(1ULL << 7)
@@ -412,6 +431,8 @@
 #define MSR_IA32_MISC_ENABLE_TURBO_DISABLE	(1ULL << 38)
 #define MSR_IA32_MISC_ENABLE_IP_PREF_DISABLE	(1ULL << 39)
 =======
+=======
+>>>>>>> v3.18
 #define MSR_IA32_MISC_ENABLE_FAST_STRING_BIT		0
 #define MSR_IA32_MISC_ENABLE_FAST_STRING		(1ULL << MSR_IA32_MISC_ENABLE_FAST_STRING_BIT)
 #define MSR_IA32_MISC_ENABLE_TCC_BIT			1
@@ -464,6 +485,9 @@
 #define MSR_IA32_MISC_ENABLE_TURBO_DISABLE		(1ULL << MSR_IA32_MISC_ENABLE_TURBO_DISABLE_BIT)
 #define MSR_IA32_MISC_ENABLE_IP_PREF_DISABLE_BIT	39
 #define MSR_IA32_MISC_ENABLE_IP_PREF_DISABLE		(1ULL << MSR_IA32_MISC_ENABLE_IP_PREF_DISABLE_BIT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MSR_IA32_TSC_DEADLINE		0x000006E0
@@ -599,15 +623,21 @@
 #define MSR_IA32_VMX_TRUE_EXIT_CTLS      0x0000048f
 #define MSR_IA32_VMX_TRUE_ENTRY_CTLS     0x00000490
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* VMX_BASIC bits and bitmasks */
 #define VMX_BASIC_VMCS_SIZE_SHIFT	32
 =======
+=======
+>>>>>>> v3.18
 #define MSR_IA32_VMX_VMFUNC             0x00000491
 
 /* VMX_BASIC bits and bitmasks */
 #define VMX_BASIC_VMCS_SIZE_SHIFT	32
 #define VMX_BASIC_TRUE_CTLS		(1ULL << 55)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define VMX_BASIC_64		0x0001000000000000LLU
 #define VMX_BASIC_MEM_TYPE_SHIFT	50
@@ -618,6 +648,10 @@
 /* MSR_IA32_VMX_MISC bits */
 #define MSR_IA32_VMX_MISC_VMWRITE_SHADOW_RO_FIELDS (1ULL << 29)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MSR_IA32_VMX_MISC_PREEMPTION_TIMER_SCALE   0x1F
+>>>>>>> v3.18
 =======
 #define MSR_IA32_VMX_MISC_PREEMPTION_TIMER_SCALE   0x1F
 >>>>>>> v3.18

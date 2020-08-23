@@ -437,6 +437,12 @@ static void sunsab_start_tx(struct uart_port *port)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (uart_circ_empty(xmit) || uart_tx_stopped(port))
+		return;
+
+>>>>>>> v3.18
 =======
 	if (uart_circ_empty(xmit) || uart_tx_stopped(port))
 		return;
@@ -472,6 +478,12 @@ static void sunsab_send_xchar(struct uart_port *port, char ch)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ch == __DISABLED_CHAR)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (ch == __DISABLED_CHAR)
 		return;
@@ -495,12 +507,15 @@ static void sunsab_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* port->lock held by caller.  */
 static void sunsab_enable_ms(struct uart_port *port)
 {
 	/* For now we always receive these interrupts.  */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* port->lock is not held.  */
@@ -744,7 +759,11 @@ static void sunsab_convert_to_sab(struct uart_sunsab_port *up, unsigned int cfla
 		up->port.read_status_mask |= (SAB82532_ISR0_PERR |
 					      SAB82532_ISR0_FERR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iflag & (BRKINT | PARMRK))
+=======
+	if (iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -836,7 +855,10 @@ static struct uart_ops sunsab_pops = {
 	.send_xchar	= sunsab_send_xchar,
 	.stop_rx	= sunsab_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= sunsab_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= sunsab_break_ctl,
@@ -876,6 +898,7 @@ static void sunsab_console_write(struct console *con, const char *s, unsigned n)
 	int locked = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_irq_save(flags);
 	if (up->port.sysrq) {
 		locked = 0;
@@ -884,10 +907,15 @@ static void sunsab_console_write(struct console *con, const char *s, unsigned n)
 	} else
 		spin_lock(&up->port.lock);
 =======
+=======
+>>>>>>> v3.18
 	if (up->port.sysrq || oops_in_progress)
 		locked = spin_trylock_irqsave(&up->port.lock, flags);
 	else
 		spin_lock_irqsave(&up->port.lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	uart_console_write(&up->port, s, n, sunsab_console_putchar);
@@ -895,8 +923,12 @@ static void sunsab_console_write(struct console *con, const char *s, unsigned n)
 
 	if (locked)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock(&up->port.lock);
 	local_irq_restore(flags);
+=======
+		spin_unlock_irqrestore(&up->port.lock, flags);
+>>>>>>> v3.18
 =======
 		spin_unlock_irqrestore(&up->port.lock, flags);
 >>>>>>> v3.18
@@ -937,7 +969,11 @@ static int sunsab_console_setup(struct console *con, char *options)
 	case B230400: baud = 230400; break;
 	case B460800: baud = 460800; break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -1084,7 +1120,11 @@ static int sab_probe(struct platform_device *op)
 		goto out3;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, &up[0]);
+=======
+	platform_set_drvdata(op, &up[0]);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, &up[0]);
 >>>>>>> v3.18
@@ -1110,7 +1150,11 @@ out:
 static int sab_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uart_sunsab_port *up = dev_get_drvdata(&op->dev);
+=======
+	struct uart_sunsab_port *up = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct uart_sunsab_port *up = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -1125,8 +1169,11 @@ static int sab_remove(struct platform_device *op)
 		   sizeof(union sab82532_async_regs));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

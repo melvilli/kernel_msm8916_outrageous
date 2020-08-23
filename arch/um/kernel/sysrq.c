@@ -1,13 +1,19 @@
 /*
  * Copyright (C) 2001 - 2007 Jeff Dike (jdike@{addtoit,linux.intel}.com)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Licensed under the GPL
 =======
+=======
+>>>>>>> v3.18
  * Copyright (C) 2013 Richard Weinberger <richrd@nod.at>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -16,6 +22,7 @@
 #include <linux/module.h>
 #include <linux/sched.h>
 #include <asm/sysrq.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* Catch non-i386 SUBARCH's. */
@@ -73,6 +80,8 @@ void show_stack(struct task_struct *task, unsigned long *esp)
 
 	show_trace(task, esp);
 =======
+=======
+>>>>>>> v3.18
 #include <asm/stacktrace.h>
 #include <os.h>
 
@@ -121,5 +130,8 @@ void show_stack(struct task_struct *task, unsigned long *stack)
 	pr_info("Call Trace:\n");
 	dump_trace(current, &stackops, NULL);
 	pr_info("\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

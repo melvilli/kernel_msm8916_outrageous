@@ -88,6 +88,7 @@ mxm_shadow_dsm(struct nouveau_mxm *mxm, u8 version)
 	};
 	u32 mxms_args[] = { 0x00000000 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union acpi_object args[4] = {
 		/* _DSM MUID */
 		{ .buffer.type = 3,
@@ -138,6 +139,8 @@ mxm_shadow_dsm(struct nouveau_mxm *mxm, u8 version)
 
 	kfree(obj);
 =======
+=======
+>>>>>>> v3.18
 	union acpi_object argv4 = {
 		.buffer.type = ACPI_TYPE_BUFFER,
 		.buffer.length = sizeof(mxms_args),
@@ -171,6 +174,9 @@ mxm_shadow_dsm(struct nouveau_mxm *mxm, u8 version)
 	}
 
 	ACPI_FREE(obj);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return mxm->mxms != NULL;
 }

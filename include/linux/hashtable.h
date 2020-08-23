@@ -175,7 +175,10 @@ static inline void hash_del_rcu(struct hlist_node *node)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * hash_for_each_possible_rcu_notrace - iterate over all possible objects hashing
  * to the same bucket in an rcu enabled hashtable in a rcu enabled hashtable
  * @name: hashtable to iterate
@@ -191,6 +194,9 @@ static inline void hash_del_rcu(struct hlist_node *node)
 		&name[hash_min(key, HASH_BITS(name))], member)
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * hash_for_each_possible_safe - iterate over all possible objects hashing to the
  * same bucket safe against removals

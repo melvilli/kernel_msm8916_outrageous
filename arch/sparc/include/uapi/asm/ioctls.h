@@ -25,6 +25,11 @@
 #define TIOCGPTLCK	_IOR('T', 0x39, int) /* Get Pty lock state */
 #define TIOCGEXCL	_IOR('T', 0x40, int) /* Get exclusive mode state */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TIOCGRS485	_IOR('T', 0x41, struct serial_rs485)
+#define TIOCSRS485	_IOWR('T', 0x42, struct serial_rs485)
+>>>>>>> v3.18
 =======
 #define TIOCGRS485	_IOR('T', 0x41, struct serial_rs485)
 #define TIOCSRS485	_IOWR('T', 0x42, struct serial_rs485)

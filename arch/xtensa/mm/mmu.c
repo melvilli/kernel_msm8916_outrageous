@@ -4,6 +4,10 @@
  * Extracted from init.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bootmem.h>
+>>>>>>> v3.18
 =======
 #include <linux/bootmem.h>
 >>>>>>> v3.18
@@ -18,7 +22,10 @@
 #include <asm/mmu_context.h>
 #include <asm/page.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <asm/initialize_mmu.h>
 #include <asm/io.h>
 
@@ -57,18 +64,27 @@ static void __init fixedrange_init(void)
 	init_pmd(__fix_to_virt(0), __end_of_fixed_addresses);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void __init paging_init(void)
 {
 	memset(swapper_pg_dir, 0, PAGE_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HIGHMEM
 	fixedrange_init();
 	pkmap_page_table = init_pmd(PKMAP_BASE, LAST_PKMAP);
 	kmap_init();
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -76,7 +92,11 @@ void __init paging_init(void)
  * Flush the mmu and reset associated register to default values.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init init_mmu(void)
+=======
+void init_mmu(void)
+>>>>>>> v3.18
 =======
 void init_mmu(void)
 >>>>>>> v3.18
@@ -95,8 +115,11 @@ void init_mmu(void)
 	set_dtlbcfg_register(0);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_tlb_all();
 =======
+=======
+>>>>>>> v3.18
 #if XCHAL_HAVE_PTP_MMU && XCHAL_HAVE_SPANNING_WAY && defined(CONFIG_OF)
 	/*
 	 * Update the IO area mapping in case xtensa_kio_paddr has changed
@@ -112,6 +135,9 @@ void init_mmu(void)
 #endif
 
 	local_flush_tlb_all();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Set rasid register to a known value. */
@@ -125,6 +151,7 @@ void init_mmu(void)
 	 */
 	set_ptevaddr_register(PGTABLE_START);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct kmem_cache *pgtable_cache __read_mostly;
@@ -146,5 +173,7 @@ void __init pgtable_cache_init(void)
 			SLAB_HWCACHE_ALIGN,
 			pgd_ctor);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

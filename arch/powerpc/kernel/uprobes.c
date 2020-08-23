@@ -187,7 +187,11 @@ bool arch_uprobe_skip_sstep(struct arch_uprobe *auprobe, struct pt_regs *regs)
 	 * For all other cases, we need to single-step in hardware.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = emulate_step(regs, auprobe->ainsn);
+=======
+	ret = emulate_step(regs, auprobe->insn);
+>>>>>>> v3.18
 =======
 	ret = emulate_step(regs, auprobe->insn);
 >>>>>>> v3.18

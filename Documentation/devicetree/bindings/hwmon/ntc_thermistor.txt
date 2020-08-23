@@ -4,12 +4,15 @@ NTC Thermistor hwmon sensors
 Requires node properties:
 - "compatible" value : one of
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"ntc,ncp15wb473"
 	"ntc,ncp18wb473"
 	"ntc,ncp21wb473"
 	"ntc,ncp03wb473"
 	"ntc,ncp15wl333"
 =======
+=======
+>>>>>>> v3.18
 	"epcos,b57330v2103"
 	"murata,ncp15wb473"
 	"murata,ncp18wb473"
@@ -24,6 +27,9 @@ Requires node properties:
 <DEPRECATED>	"ntc,ncp03wb473"
 <DEPRECATED>	"ntc,ncp15wl333"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - "pullup-uv"	Pull up voltage in micro volts
 - "pullup-ohm"	Pull up resistor value in ohms
@@ -34,6 +40,12 @@ Requires node properties:
 		conversion.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+Optional node properties:
+- "#thermal-sensor-cells" Used to expose itself to thermal fw.
+
+>>>>>>> v3.18
 =======
 Optional node properties:
 - "#thermal-sensor-cells" Used to expose itself to thermal fw.
@@ -45,7 +57,11 @@ Read more about iio bindings at
 Example:
 	ncp15wb473@0 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "ntc,ncp15wb473";
+=======
+		compatible = "murata,ncp15wb473";
+>>>>>>> v3.18
 =======
 		compatible = "murata,ncp15wb473";
 >>>>>>> v3.18

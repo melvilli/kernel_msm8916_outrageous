@@ -3,7 +3,11 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y				+= common.o devices.o time.o irq.o
+=======
+obj-y				+= common.o devices.o time.o
+>>>>>>> v3.18
 =======
 obj-y				+= common.o devices.o time.o
 >>>>>>> v3.18
@@ -12,7 +16,12 @@ obj-y				+= common.o devices.o time.o
 obj-$(CONFIG_CPU_PXA168)	+= pxa168.o
 obj-$(CONFIG_CPU_PXA910)	+= pxa910.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_CPU_MMP2)		+= mmp2.o sram.o
+=======
+obj-$(CONFIG_CPU_MMP2)		+= mmp2.o
+obj-$(CONFIG_MMP_SRAM)		+= sram.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_CPU_MMP2)		+= mmp2.o
 obj-$(CONFIG_MMP_SRAM)		+= sram.o

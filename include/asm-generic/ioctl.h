@@ -4,6 +4,12 @@
 #include <uapi/asm-generic/ioctl.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef __CHECKER__
+#define _IOC_TYPECHECK(t) (sizeof(t))
+#else
+>>>>>>> v3.18
 =======
 #ifdef __CHECKER__
 #define _IOC_TYPECHECK(t) (sizeof(t))
@@ -16,6 +22,11 @@ extern unsigned int __invalid_size_argument_for_IOC;
 	  sizeof(t) < (1 << _IOC_SIZEBITS)) ? \
 	  sizeof(t) : __invalid_size_argument_for_IOC)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+
+>>>>>>> v3.18
 =======
 #endif
 

@@ -94,6 +94,7 @@ struct hlist_nulls_head *llc_sk_laddr_hash(struct llc_sap *sap,
 
 extern struct list_head llc_sap_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern spinlock_t llc_sap_list_lock;
 
 extern int llc_rcv(struct sk_buff *skb, struct net_device *dev,
@@ -114,6 +115,8 @@ extern struct llc_sap *llc_sap_open(unsigned char lsap,
 					       struct packet_type *pt,
 					       struct net_device *orig_dev));
 =======
+=======
+>>>>>>> v3.18
 
 int llc_rcv(struct sk_buff *skb, struct net_device *dev, struct packet_type *pt,
 	    struct net_device *orig_dev);
@@ -132,6 +135,9 @@ struct llc_sap *llc_sap_open(unsigned char lsap,
 					struct net_device *dev,
 					struct packet_type *pt,
 					struct net_device *orig_dev));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void llc_sap_hold(struct llc_sap *sap)
 {
@@ -139,7 +145,11 @@ static inline void llc_sap_hold(struct llc_sap *sap)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void llc_sap_close(struct llc_sap *sap);
+=======
+void llc_sap_close(struct llc_sap *sap);
+>>>>>>> v3.18
 =======
 void llc_sap_close(struct llc_sap *sap);
 >>>>>>> v3.18
@@ -150,6 +160,7 @@ static inline void llc_sap_put(struct llc_sap *sap)
 		llc_sap_close(sap);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct llc_sap *llc_sap_find(unsigned char sap_value);
 
@@ -166,6 +177,8 @@ extern void llc_station_exit(void);
 extern int llc_proc_init(void);
 extern void llc_proc_exit(void);
 =======
+=======
+>>>>>>> v3.18
 struct llc_sap *llc_sap_find(unsigned char sap_value);
 
 int llc_build_and_send_ui_pkt(struct llc_sap *sap, struct sk_buff *skb,
@@ -180,6 +193,9 @@ void llc_station_exit(void);
 #ifdef CONFIG_PROC_FS
 int llc_proc_init(void);
 void llc_proc_exit(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 #define llc_proc_init()	(0)
@@ -187,8 +203,13 @@ void llc_proc_exit(void);
 #endif /* CONFIG_PROC_FS */
 #ifdef CONFIG_SYSCTL
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int llc_sysctl_init(void);
 extern void llc_sysctl_exit(void);
+=======
+int llc_sysctl_init(void);
+void llc_sysctl_exit(void);
+>>>>>>> v3.18
 =======
 int llc_sysctl_init(void);
 void llc_sysctl_exit(void);

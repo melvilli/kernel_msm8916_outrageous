@@ -15,7 +15,11 @@
 #include <linux/genalloc.h>
 #include <linux/platform_data/davinci_asp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/edma.h>
+=======
+#include <linux/platform_data/edma.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/edma.h>
 >>>>>>> v3.18
@@ -34,9 +38,12 @@ struct davinci_pcm_dma_params {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int davinci_soc_platform_register(struct device *dev);
 void davinci_soc_platform_unregister(struct device *dev);
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_SND_DAVINCI_SOC)
 int davinci_soc_platform_register(struct device *dev);
 #else
@@ -45,6 +52,9 @@ static inline int davinci_soc_platform_register(struct device *dev)
 	return 0;
 }
 #endif /* CONFIG_SND_DAVINCI_SOC */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

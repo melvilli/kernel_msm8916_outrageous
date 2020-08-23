@@ -453,7 +453,11 @@ frame_data:
 
 			if (sd->bridge == BRIDGE_ST6422)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sd->to_skip = gspca_dev->width * 4;
+=======
+				sd->to_skip = gspca_dev->pixfmt.width * 4;
+>>>>>>> v3.18
 =======
 				sd->to_skip = gspca_dev->pixfmt.width * 4;
 >>>>>>> v3.18

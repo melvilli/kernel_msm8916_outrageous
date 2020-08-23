@@ -16,7 +16,11 @@
 static inline void pagefault_disable(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inc_preempt_count();
+=======
+	preempt_count_inc();
+>>>>>>> v3.18
 =======
 	preempt_count_inc();
 >>>>>>> v3.18
@@ -30,6 +34,10 @@ static inline void pagefault_disable(void)
 static inline void pagefault_enable(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_PREEMPT
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_PREEMPT
 >>>>>>> v3.18
@@ -39,6 +47,7 @@ static inline void pagefault_enable(void)
 	 */
 	barrier();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dec_preempt_count();
 	/*
 	 * make sure we do..
@@ -46,10 +55,15 @@ static inline void pagefault_enable(void)
 	barrier();
 	preempt_check_resched();
 =======
+=======
+>>>>>>> v3.18
 	preempt_count_dec();
 #else
 	preempt_enable();
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

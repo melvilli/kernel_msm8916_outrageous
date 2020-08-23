@@ -141,7 +141,11 @@ EXPORT_SYMBOL(zalloc_cpumask_var);
 void __init alloc_bootmem_cpumask_var(cpumask_var_t *mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*mask = alloc_bootmem(cpumask_size());
+=======
+	*mask = memblock_virt_alloc(cpumask_size(), 0);
+>>>>>>> v3.18
 =======
 	*mask = memblock_virt_alloc(cpumask_size(), 0);
 >>>>>>> v3.18
@@ -166,10 +170,13 @@ EXPORT_SYMBOL(free_cpumask_var);
 void __init free_bootmem_cpumask_var(cpumask_var_t mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_bootmem(__pa(mask), cpumask_size());
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	memblock_free_early(__pa(mask), cpumask_size());
 }
 #endif
@@ -236,4 +243,7 @@ out:
 	return ret;
 }
 EXPORT_SYMBOL(cpumask_set_cpu_local_first);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

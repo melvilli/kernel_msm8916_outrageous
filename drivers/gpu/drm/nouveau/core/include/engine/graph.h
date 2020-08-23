@@ -62,9 +62,12 @@ extern struct nouveau_oclass nv35_graph_oclass;
 extern struct nouveau_oclass nv40_graph_oclass;
 extern struct nouveau_oclass nv50_graph_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct nouveau_oclass nvc0_graph_oclass;
 extern struct nouveau_oclass nve0_graph_oclass;
 =======
+=======
+>>>>>>> v3.18
 extern struct nouveau_oclass *nvc0_graph_oclass;
 extern struct nouveau_oclass *nvc1_graph_oclass;
 extern struct nouveau_oclass *nvc4_graph_oclass;
@@ -77,6 +80,9 @@ extern struct nouveau_oclass *nvf0_graph_oclass;
 extern struct nouveau_oclass *gk110b_graph_oclass;
 extern struct nouveau_oclass *nv108_graph_oclass;
 extern struct nouveau_oclass *gm107_graph_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern const struct nouveau_bitfield nv04_graph_nsource[];

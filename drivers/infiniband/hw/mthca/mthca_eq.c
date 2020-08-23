@@ -358,7 +358,11 @@ static int mthca_eq_int(struct mthca_dev *dev, struct mthca_eq *eq)
 				   eqe->type, eqe->subtype, eq->eqn);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18

@@ -60,10 +60,13 @@ struct pt_regs {
 # define user_mode(regs) (((regs)->ps & 0x00000020)!=0)
 # define instruction_pointer(regs) ((regs)->pc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # ifndef CONFIG_SMP
 #  define profile_pc(regs) instruction_pointer(regs)
 =======
+=======
+>>>>>>> v3.18
 # define return_pointer(regs) (MAKE_PC_FROM_RA((regs)->areg[0], \
 					       (regs)->areg[1]))
 
@@ -75,6 +78,9 @@ struct pt_regs {
 		in_lock_functions(instruction_pointer(regs)) ?		\
 		return_pointer(regs) : instruction_pointer(regs);	\
 	})
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # endif
 

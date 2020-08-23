@@ -1,12 +1,18 @@
 Davinci SPI controller device bindings
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Links on DM:
 Keystone 2 - http://www.ti.com/lit/ug/sprugp2a/sprugp2a.pdf
 dm644x - http://www.ti.com/lit/ug/sprue32a/sprue32a.pdf
 OMAP-L138/da830 - http://www.ti.com/lit/ug/spruh77a/spruh77a.pdf
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Required properties:
 - #address-cells: number of cells required to define a chip select
@@ -17,7 +23,12 @@ Required properties:
 	- "ti,da830-spi" for SPI used similar to that on DA8xx SoC family
 - reg: Offset and length of SPI controller register space
 <<<<<<< HEAD
+<<<<<<< HEAD
 - num-cs: Number of chip selects
+=======
+- num-cs: Number of chip selects. This includes internal as well as
+	GPIO chip selects.
+>>>>>>> v3.18
 =======
 - num-cs: Number of chip selects. This includes internal as well as
 	GPIO chip selects.
@@ -31,7 +42,10 @@ Required properties:
 - clocks: spi clk phandle
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Optional:
 - cs-gpios: gpio chip selects
 	For example to have 3 internal CS and 2 GPIO CS, user could define
@@ -62,6 +76,9 @@ SPI_SOMI/SIMO+-----------------+                           +-----------
                                           WDELAY
                                 <-------------------------->
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example of a NOR flash slave device (n25q032) connected to DaVinci
 SPI controller device over the SPI bus.
@@ -83,6 +100,10 @@ spi0:spi@20BF0000 {
 		spi-max-frequency = <25000000>;
 		reg = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ti,spi-wdelay = <8>;
+>>>>>>> v3.18
 =======
 		ti,spi-wdelay = <8>;
 >>>>>>> v3.18

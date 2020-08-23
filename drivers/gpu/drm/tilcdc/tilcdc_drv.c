@@ -27,6 +27,10 @@
 
 static LIST_HEAD(module_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static bool slave_probing;
+>>>>>>> v3.18
 =======
 static bool slave_probing;
 >>>>>>> v3.18
@@ -46,12 +50,18 @@ void tilcdc_module_cleanup(struct tilcdc_module *mod)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void tilcdc_slave_probedefer(bool defered)
 {
 	slave_probing = defered;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct of_device_id tilcdc_of_match[];
 
@@ -128,7 +138,10 @@ static int tilcdc_unload(struct drm_device *dev)
 {
 	struct tilcdc_drm_private *priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tilcdc_module *mod, *cur;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -160,11 +173,14 @@ static int tilcdc_unload(struct drm_device *dev)
 	pm_runtime_disable(dev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_safe(mod, cur, &module_list, list) {
 		DBG("destroying module: %s", mod->name);
 		mod->funcs->destroy(mod);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(priv);
@@ -178,7 +194,13 @@ static int tilcdc_load(struct drm_device *dev, unsigned long flags)
 	struct device_node *node = pdev->dev.of_node;
 	struct tilcdc_drm_private *priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *res;
+=======
+	struct tilcdc_module *mod;
+	struct resource *res;
+	u32 bpp = 0;
+>>>>>>> v3.18
 =======
 	struct tilcdc_module *mod;
 	struct resource *res;
@@ -241,8 +263,11 @@ static int tilcdc_load(struct drm_device *dev, unsigned long flags)
 
 	if (of_property_read_u32(node, "max-bandwidth", &priv->max_bandwidth))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->max_bandwidth = 1280 * 1024 * 60;
 =======
+=======
+>>>>>>> v3.18
 		priv->max_bandwidth = TILCDC_DEFAULT_MAX_BANDWIDTH;
 
 	DBG("Maximum Bandwidth Value %d", priv->max_bandwidth);
@@ -257,6 +282,9 @@ static int tilcdc_load(struct drm_device *dev, unsigned long flags)
 		priv->max_pixelclock = TILCDC_DEFAULT_MAX_PIXELCLOCK;
 
 	DBG("Maximum Pixel Clock Value %dKHz", priv->max_pixelclock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pm_runtime_enable(dev->dev);
@@ -295,7 +323,11 @@ static int tilcdc_load(struct drm_device *dev, unsigned long flags)
 
 	pm_runtime_get_sync(dev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = drm_irq_install(dev);
+=======
+	ret = drm_irq_install(dev, platform_get_irq(dev->platformdev, 0));
+>>>>>>> v3.18
 =======
 	ret = drm_irq_install(dev, platform_get_irq(dev->platformdev, 0));
 >>>>>>> v3.18
@@ -308,8 +340,11 @@ static int tilcdc_load(struct drm_device *dev, unsigned long flags)
 	platform_set_drvdata(pdev, dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->fbdev = drm_fbdev_cma_init(dev, 16,
 =======
+=======
+>>>>>>> v3.18
 
 	list_for_each_entry(mod, &module_list, list) {
 		DBG("%s: preferred_bpp: %d", mod->name, mod->preferred_bpp);
@@ -319,6 +354,9 @@ static int tilcdc_load(struct drm_device *dev, unsigned long flags)
 	}
 
 	priv->fbdev = drm_fbdev_cma_init(dev, bpp,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev->mode_config.num_crtc,
 			dev->mode_config.num_connector);
@@ -381,7 +419,11 @@ static void tilcdc_lastclose(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static irqreturn_t tilcdc_irq(DRM_IRQ_ARGS)
+=======
+static irqreturn_t tilcdc_irq(int irq, void *arg)
+>>>>>>> v3.18
 =======
 static irqreturn_t tilcdc_irq(int irq, void *arg)
 >>>>>>> v3.18
@@ -518,7 +560,11 @@ static int tilcdc_mm_show(struct seq_file *m, void *arg)
 	struct drm_info_node *node = (struct drm_info_node *) m->private;
 	struct drm_device *dev = node->minor->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return drm_mm_dump_table(m, dev->mm_private);
+=======
+	return drm_mm_dump_table(m, &dev->vma_offset_manager->vm_addr_space_mm);
+>>>>>>> v3.18
 =======
 	return drm_mm_dump_table(m, &dev->vma_offset_manager->vm_addr_space_mm);
 >>>>>>> v3.18
@@ -575,7 +621,10 @@ static const struct file_operations fops = {
 	.poll               = drm_poll,
 	.read               = drm_read,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fasync             = drm_fasync,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.llseek             = no_llseek,
@@ -589,6 +638,10 @@ static struct drm_driver tilcdc_driver = {
 	.preclose           = tilcdc_preclose,
 	.lastclose          = tilcdc_lastclose,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_busid          = drm_platform_set_busid,
+>>>>>>> v3.18
 =======
 	.set_busid          = drm_platform_set_busid,
 >>>>>>> v3.18
@@ -604,7 +657,11 @@ static struct drm_driver tilcdc_driver = {
 	.dumb_create        = drm_gem_cma_dumb_create,
 	.dumb_map_offset    = drm_gem_cma_dumb_map_offset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dumb_destroy       = drm_gem_cma_dumb_destroy,
+=======
+	.dumb_destroy       = drm_gem_dumb_destroy,
+>>>>>>> v3.18
 =======
 	.dumb_destroy       = drm_gem_dumb_destroy,
 >>>>>>> v3.18
@@ -675,11 +732,17 @@ static int tilcdc_pdev_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* defer probing if slave is in deferred probing */
 	if (slave_probing == true)
 		return -EPROBE_DEFER;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return drm_platform_init(&tilcdc_driver, pdev);
 }
@@ -687,7 +750,11 @@ static int tilcdc_pdev_probe(struct platform_device *pdev)
 static int tilcdc_pdev_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_platform_exit(&tilcdc_driver, pdev);
+=======
+	drm_put_dev(platform_get_drvdata(pdev));
+>>>>>>> v3.18
 =======
 	drm_put_dev(platform_get_drvdata(pdev));
 >>>>>>> v3.18
@@ -731,7 +798,11 @@ static void __exit tilcdc_drm_fini(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 late_initcall(tilcdc_drm_init);
+=======
+module_init(tilcdc_drm_init);
+>>>>>>> v3.18
 =======
 module_init(tilcdc_drm_init);
 >>>>>>> v3.18

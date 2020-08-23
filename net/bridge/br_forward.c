@@ -27,6 +27,7 @@ static int deliver_clone(const struct net_bridge_port *prev,
 					       struct sk_buff *skb));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Don't forward packets to originating port or forwarding diasabled */
 static inline int should_deliver(const struct net_bridge_port *p,
 				 const struct sk_buff *skb)
@@ -40,6 +41,8 @@ static inline unsigned int packet_length(const struct sk_buff *skb)
 {
 	return skb->len - (skb->protocol == htons(ETH_P_8021Q) ? VLAN_HLEN : 0);
 =======
+=======
+>>>>>>> v3.18
 /* Don't forward packets to originating port or forwarding disabled */
 static inline int should_deliver(const struct net_bridge_port *p,
 				 const struct sk_buff *skb)
@@ -47,6 +50,9 @@ static inline int should_deliver(const struct net_bridge_port *p,
 	return ((p->flags & BR_HAIRPIN_MODE) || skb->dev != p->dev) &&
 		br_allowed_egress(p->br, nbp_get_vlan_info(p), skb) &&
 		p->state == BR_STATE_FORWARDING;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -55,7 +61,11 @@ int br_dev_queue_push_xmit(struct sk_buff *skb)
 	/* ip_fragment doesn't copy the MAC header */
 	if (nf_bridge_maybe_copy_header(skb) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (packet_length(skb) > skb->dev->mtu && !skb_is_gso(skb))) {
+=======
+	    !is_skb_forwardable(skb->dev, skb)) {
+>>>>>>> v3.18
 =======
 	    !is_skb_forwardable(skb->dev, skb)) {
 >>>>>>> v3.18
@@ -69,6 +79,10 @@ int br_dev_queue_push_xmit(struct sk_buff *skb)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(br_dev_queue_push_xmit);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(br_dev_queue_push_xmit);
 >>>>>>> v3.18
@@ -80,6 +94,10 @@ int br_forward_finish(struct sk_buff *skb)
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(br_forward_finish);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(br_forward_finish);
 >>>>>>> v3.18
@@ -94,7 +112,11 @@ static void __br_deliver(const struct net_bridge_port *to, struct sk_buff *skb)
 
 	if (unlikely(netpoll_tx_running(to->br->dev))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (packet_length(skb) > skb->dev->mtu && !skb_is_gso(skb))
+=======
+		if (!is_skb_forwardable(skb->dev, skb))
+>>>>>>> v3.18
 =======
 		if (!is_skb_forwardable(skb->dev, skb))
 >>>>>>> v3.18
@@ -142,6 +164,10 @@ void br_deliver(const struct net_bridge_port *to, struct sk_buff *skb)
 	kfree_skb(skb);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(br_deliver);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(br_deliver);
 >>>>>>> v3.18
@@ -205,7 +231,12 @@ static void br_flood(struct net_bridge *br, struct sk_buff *skb,
 		     struct sk_buff *skb0,
 		     void (*__packet_hook)(const struct net_bridge_port *p,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   struct sk_buff *skb))
+=======
+					   struct sk_buff *skb),
+		     bool unicast)
+>>>>>>> v3.18
 =======
 					   struct sk_buff *skb),
 		     bool unicast)
@@ -218,6 +249,12 @@ static void br_flood(struct net_bridge *br, struct sk_buff *skb,
 
 	list_for_each_entry_rcu(p, &br->port_list, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* Do not flood unicast traffic to ports that turn it off */
+		if (unicast && !(p->flags & BR_FLOOD))
+			continue;
+>>>>>>> v3.18
 =======
 		/* Do not flood unicast traffic to ports that turn it off */
 		if (unicast && !(p->flags & BR_FLOOD))
@@ -245,9 +282,15 @@ out:
 
 /* called with rcu_read_lock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void br_flood_deliver(struct net_bridge *br, struct sk_buff *skb)
 {
 	br_flood(br, skb, NULL, __br_deliver);
+=======
+void br_flood_deliver(struct net_bridge *br, struct sk_buff *skb, bool unicast)
+{
+	br_flood(br, skb, NULL, __br_deliver, unicast);
+>>>>>>> v3.18
 =======
 void br_flood_deliver(struct net_bridge *br, struct sk_buff *skb, bool unicast)
 {
@@ -258,9 +301,15 @@ void br_flood_deliver(struct net_bridge *br, struct sk_buff *skb, bool unicast)
 /* called under bridge lock */
 void br_flood_forward(struct net_bridge *br, struct sk_buff *skb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      struct sk_buff *skb2)
 {
 	br_flood(br, skb, skb2, __br_forward);
+=======
+		      struct sk_buff *skb2, bool unicast)
+{
+	br_flood(br, skb, skb2, __br_forward, unicast);
+>>>>>>> v3.18
 =======
 		      struct sk_buff *skb2, bool unicast)
 {

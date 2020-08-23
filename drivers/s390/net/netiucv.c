@@ -106,6 +106,7 @@ MODULE_DESCRIPTION ("Linux for S/390 IUCV network driver");
 DECLARE_PER_CPU(char[256], iucv_dbf_txt_buf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Allow to sort out low debug levels early to avoid wasted sprints */
 static inline int iucv_dbf_passes(debug_info_t *dbf_grp, int level)
 {
@@ -115,6 +116,11 @@ static inline int iucv_dbf_passes(debug_info_t *dbf_grp, int level)
 #define IUCV_DBF_TEXT_(name, level, text...) \
 	do { \
 		if (iucv_dbf_passes(iucv_dbf_##name, level)) { \
+=======
+#define IUCV_DBF_TEXT_(name, level, text...) \
+	do { \
+		if (debug_level_enabled(iucv_dbf_##name, level)) { \
+>>>>>>> v3.18
 =======
 #define IUCV_DBF_TEXT_(name, level, text...) \
 	do { \
@@ -137,6 +143,7 @@ static inline int iucv_dbf_passes(debug_info_t *dbf_grp, int level)
  * some more debug stuff
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IUCV_HEXDUMP16(importance,header,ptr) \
 PRINT_##importance(header "%02x %02x %02x %02x  %02x %02x %02x %02x  " \
 		   "%02x %02x %02x %02x  %02x %02x %02x %02x\n", \
@@ -157,6 +164,8 @@ PRINT_##importance(header "%02x %02x %02x %02x  %02x %02x %02x %02x  " \
 		   *(((char*)ptr)+28),*(((char*)ptr)+29), \
 		   *(((char*)ptr)+30),*(((char*)ptr)+31));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PRINTK_HEADER " iucv: "       /* for debugging */
@@ -775,15 +784,21 @@ static void conn_action_txdone(fsm_instance *fi, int event, void *arg)
 	IUCV_DBF_TEXT(trace, 4, __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (conn && conn->netdev)
 		privptr = netdev_priv(conn->netdev);
 =======
+=======
+>>>>>>> v3.18
 	if (!conn || !conn->netdev) {
 		IUCV_DBF_TEXT(data, 2,
 			      "Send confirmation for unlinked connection\n");
 		return;
 	}
 	privptr = netdev_priv(conn->netdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	conn->prof.tx_pending--;
 	if (single_flag) {
@@ -2056,7 +2071,11 @@ static struct net_device *netiucv_init_netdevice(char *username, char *userdata)
 
 	dev = alloc_netdev(sizeof(struct netiucv_priv), "iucv%d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   netiucv_setup_netdevice);
+=======
+			   NET_NAME_UNKNOWN, netiucv_setup_netdevice);
+>>>>>>> v3.18
 =======
 			   NET_NAME_UNKNOWN, netiucv_setup_netdevice);
 >>>>>>> v3.18

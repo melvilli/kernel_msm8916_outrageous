@@ -212,7 +212,11 @@
 #define PORT_VT8500	97
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Xilinx PSS UART */
+=======
+/* Cadence (Xilinx Zynq) UART */
+>>>>>>> v3.18
 =======
 /* Cadence (Xilinx Zynq) UART */
 >>>>>>> v3.18
@@ -231,7 +235,10 @@
 #define PORT_RP2	102
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Freescale lpuart */
 #define PORT_LPUART	103
 
@@ -253,5 +260,8 @@
 /* MESON */
 #define PORT_MESON	109
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _UAPILINUX_SERIAL_CORE_H */

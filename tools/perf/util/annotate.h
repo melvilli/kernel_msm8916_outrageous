@@ -4,7 +4,11 @@
 #include <stdbool.h>
 #include <stdint.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "types.h"
+=======
+#include <linux/types.h>
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 >>>>>>> v3.18
@@ -137,19 +141,31 @@ static inline struct annotation *symbol__annotation(struct symbol *sym)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int symbol__inc_addr_samples(struct symbol *sym, struct map *map,
 			     int evidx, u64 addr);
 =======
+=======
+>>>>>>> v3.18
 int addr_map_symbol__inc_samples(struct addr_map_symbol *ams, int evidx);
 
 int hist_entry__inc_addr_samples(struct hist_entry *he, int evidx, u64 addr);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int symbol__alloc_hist(struct symbol *sym);
 void symbol__annotate_zero_histograms(struct symbol *sym);
 
 int symbol__annotate(struct symbol *sym, struct map *map, size_t privsize);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+int hist_entry__annotate(struct hist_entry *he, size_t privsize);
+
+>>>>>>> v3.18
 =======
 
 int hist_entry__annotate(struct hist_entry *he, size_t privsize);
@@ -164,6 +180,11 @@ void symbol__annotate_decay_histogram(struct symbol *sym, int evidx);
 void disasm__purge(struct list_head *head);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool ui__has_annotation(void);
+
+>>>>>>> v3.18
 =======
 bool ui__has_annotation(void);
 
@@ -173,7 +194,11 @@ int symbol__tty_annotate(struct symbol *sym, struct map *map,
 			 bool full_paths, int min_pcnt, int max_lines);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef SLANG_SUPPORT
+=======
+#ifdef HAVE_SLANG_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_SLANG_SUPPORT
 >>>>>>> v3.18
@@ -191,6 +216,7 @@ static inline int symbol__tui_annotate(struct symbol *sym __maybe_unused,
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef GTK2_SUPPORT
 int symbol__gtk_annotate(struct symbol *sym, struct map *map,
@@ -216,6 +242,8 @@ static inline int hist_entry__gtk_annotate(struct hist_entry *he __maybe_unused,
 static inline void perf_gtk__show_annotations(void) {}
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern const char	*disassembler_style;

@@ -100,7 +100,11 @@ struct net_device *alloc_ieee80211(int sizeof_priv)
 	struct ieee80211_device *ieee;
 	struct net_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i,err;
+=======
+	int i, err;
+>>>>>>> v3.18
 =======
 	int i, err;
 >>>>>>> v3.18
@@ -246,7 +250,11 @@ static int debug = \
 			    IEEE80211_DL_ERR	  //awayls open this flags to show error out
 			    ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct proc_dir_entry *ieee80211_proc;
+=======
+static struct proc_dir_entry *ieee80211_proc;
+>>>>>>> v3.18
 =======
 static struct proc_dir_entry *ieee80211_proc;
 >>>>>>> v3.18
@@ -277,7 +285,12 @@ static const struct file_operations fops = {
 	.read = seq_read,
 	.llseek = seq_lseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.write = write_debug_level
+=======
+	.write = write_debug_level,
+	.release = single_release,
+>>>>>>> v3.18
 =======
 	.write = write_debug_level,
 	.release = single_release,

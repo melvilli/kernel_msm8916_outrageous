@@ -10,6 +10,10 @@
 #include <linux/errno.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -99,6 +103,10 @@ int pcmcia_jornada720_init(struct device *dev)
 {
 	int ret = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct sa1111_dev *sadev = SA1111_DEV(dev);
+>>>>>>> v3.18
 =======
 	struct sa1111_dev *sadev = SA1111_DEV(dev);
 >>>>>>> v3.18
@@ -110,6 +118,7 @@ int pcmcia_jornada720_init(struct device *dev)
 
 		/* Set GPIO_A<3:1> to be outputs for PCMCIA/CF power controller: */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sa1111_set_io_dir(dev, pin, 0, 0);
 		sa1111_set_io(dev, pin, 0);
 		sa1111_set_sleep_io(dev, pin, 0);
@@ -117,12 +126,17 @@ int pcmcia_jornada720_init(struct device *dev)
 		sa11xx_drv_pcmcia_ops(&jornada720_pcmcia_ops);
 		ret = sa1111_pcmcia_add(dev, &jornada720_pcmcia_ops,
 =======
+=======
+>>>>>>> v3.18
 		sa1111_set_io_dir(sadev, pin, 0, 0);
 		sa1111_set_io(sadev, pin, 0);
 		sa1111_set_sleep_io(sadev, pin, 0);
 
 		sa11xx_drv_pcmcia_ops(&jornada720_pcmcia_ops);
 		ret = sa1111_pcmcia_add(sadev, &jornada720_pcmcia_ops,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				sa11xx_drv_pcmcia_add_one);
 	}

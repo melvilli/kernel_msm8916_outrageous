@@ -25,6 +25,10 @@
 #include <linux/usb/hcd.h>
 #include <linux/usb/chipidea.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regulator/consumer.h>
+>>>>>>> v3.18
 =======
 #include <linux/regulator/consumer.h>
 >>>>>>> v3.18
@@ -38,7 +42,11 @@
 static struct hc_driver __read_mostly ci_ehci_hc_driver;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static irqreturn_t host_irq(struct ci13xxx *ci)
+=======
+static irqreturn_t host_irq(struct ci_hdrc *ci)
+>>>>>>> v3.18
 =======
 static irqreturn_t host_irq(struct ci_hdrc *ci)
 >>>>>>> v3.18
@@ -47,7 +55,11 @@ static irqreturn_t host_irq(struct ci_hdrc *ci)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int host_start(struct ci13xxx *ci)
+=======
+static int host_start(struct ci_hdrc *ci)
+>>>>>>> v3.18
 =======
 static int host_start(struct ci_hdrc *ci)
 >>>>>>> v3.18
@@ -71,7 +83,12 @@ static int host_start(struct ci_hdrc *ci)
 
 	hcd->power_budget = ci->platdata->power_budget;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hcd->phy = ci->transceiver;
+=======
+	hcd->usb_phy = ci->transceiver;
+	hcd->tpl_support = ci->platdata->tpl_support;
+>>>>>>> v3.18
 =======
 	hcd->usb_phy = ci->transceiver;
 	hcd->tpl_support = ci->platdata->tpl_support;
@@ -80,6 +97,7 @@ static int host_start(struct ci_hdrc *ci)
 	ehci = hcd_to_ehci(hcd);
 	ehci->caps = ci->hw_bank.cap;
 	ehci->has_hostpc = ci->hw_bank.lpm;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	ret = usb_add_hcd(hcd, 0, 0);
@@ -104,6 +122,8 @@ static void host_stop(struct ci13xxx *ci)
 
 int ci_hdrc_host_init(struct ci13xxx *ci)
 =======
+=======
+>>>>>>> v3.18
 	ehci->has_tdi_phy_lpm = ci->hw_bank.lpm;
 	ehci->imx28_write_fix = ci->imx28_write_fix;
 
@@ -169,6 +189,9 @@ void ci_hdrc_host_destroy(struct ci_hdrc *ci)
 }
 
 int ci_hdrc_host_init(struct ci_hdrc *ci)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ci_role_driver *rdrv;

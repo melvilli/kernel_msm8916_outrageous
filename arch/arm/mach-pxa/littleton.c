@@ -223,7 +223,11 @@ static inline void littleton_init_spi(void) {}
 
 #if defined(CONFIG_KEYBOARD_PXA27x) || defined(CONFIG_KEYBOARD_PXA27x_MODULE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int littleton_matrix_key_map[] = {
+=======
+static const unsigned int littleton_matrix_key_map[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int littleton_matrix_key_map[] = {
 >>>>>>> v3.18
@@ -254,12 +258,15 @@ static const unsigned int littleton_matrix_key_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data littleton_keypad_info = {
 	.matrix_key_rows	= 6,
 	.matrix_key_cols	= 5,
 	.matrix_key_map		= littleton_matrix_key_map,
 	.matrix_key_map_size	= ARRAY_SIZE(littleton_matrix_key_map),
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data littleton_matrix_keymap_data = {
 	.keymap			= littleton_matrix_key_map,
 	.keymap_size		= ARRAY_SIZE(littleton_matrix_key_map),
@@ -269,6 +276,9 @@ static struct pxa27x_keypad_platform_data littleton_keypad_info = {
 	.matrix_key_rows	= 6,
 	.matrix_key_cols	= 5,
 	.matrix_keymap_data	= &littleton_matrix_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.enable_rotary0		= 1,

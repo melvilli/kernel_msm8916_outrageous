@@ -48,6 +48,7 @@ static ssize_t class_attr_store(struct kobject *kobj, struct attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const void *class_attr_namespace(struct kobject *kobj,
 					const struct attribute *attr)
 {
@@ -60,6 +61,8 @@ static const void *class_attr_namespace(struct kobject *kobj,
 	return ns;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void class_release(struct kobject *kobj)
@@ -90,7 +93,10 @@ static const struct sysfs_ops class_sysfs_ops = {
 	.show	   = class_attr_show,
 	.store	   = class_attr_store,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.namespace = class_attr_namespace,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -106,6 +112,7 @@ static struct kset *class_kset;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int class_create_file(struct class *cls, const struct class_attribute *attr)
 {
 	int error;
@@ -113,6 +120,8 @@ int class_create_file(struct class *cls, const struct class_attribute *attr)
 		error = sysfs_create_file(&cls->p->subsys.kobj,
 					  &attr->attr);
 =======
+=======
+>>>>>>> v3.18
 int class_create_file_ns(struct class *cls, const struct class_attribute *attr,
 			 const void *ns)
 {
@@ -120,6 +129,9 @@ int class_create_file_ns(struct class *cls, const struct class_attribute *attr,
 	if (cls)
 		error = sysfs_create_file_ns(&cls->p->subsys.kobj,
 					     &attr->attr, ns);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		error = -EINVAL;
@@ -127,16 +139,22 @@ int class_create_file_ns(struct class *cls, const struct class_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void class_remove_file(struct class *cls, const struct class_attribute *attr)
 {
 	if (cls)
 		sysfs_remove_file(&cls->p->subsys.kobj, &attr->attr);
 =======
+=======
+>>>>>>> v3.18
 void class_remove_file_ns(struct class *cls, const struct class_attribute *attr,
 			  const void *ns)
 {
 	if (cls)
 		sysfs_remove_file_ns(&cls->p->subsys.kobj, &attr->attr, ns);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -160,7 +178,11 @@ static int add_class_attrs(struct class *cls)
 
 	if (cls->class_attrs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; attr_name(cls->class_attrs[i]); i++) {
+=======
+		for (i = 0; cls->class_attrs[i].attr.name; i++) {
+>>>>>>> v3.18
 =======
 		for (i = 0; cls->class_attrs[i].attr.name; i++) {
 >>>>>>> v3.18
@@ -183,7 +205,11 @@ static void remove_class_attrs(struct class *cls)
 
 	if (cls->class_attrs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; attr_name(cls->class_attrs[i]); i++)
+=======
+		for (i = 0; cls->class_attrs[i].attr.name; i++)
+>>>>>>> v3.18
 =======
 		for (i = 0; cls->class_attrs[i].attr.name; i++)
 >>>>>>> v3.18
@@ -633,8 +659,13 @@ int __init classes_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(class_create_file);
 EXPORT_SYMBOL_GPL(class_remove_file);
+=======
+EXPORT_SYMBOL_GPL(class_create_file_ns);
+EXPORT_SYMBOL_GPL(class_remove_file_ns);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(class_create_file_ns);
 EXPORT_SYMBOL_GPL(class_remove_file_ns);

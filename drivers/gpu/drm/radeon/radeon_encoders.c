@@ -159,11 +159,14 @@ radeon_get_encoder_enum(struct drm_device *dev, uint32_t supported_device, uint8
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 radeon_link_encoder_connector(struct drm_device *dev)
 {
 	struct radeon_device *rdev = dev->dev_private;
 =======
+=======
+>>>>>>> v3.18
 static void radeon_encoder_add_backlight(struct radeon_encoder *radeon_encoder,
 					 struct drm_connector *connector)
 {
@@ -204,6 +207,9 @@ static void radeon_encoder_add_backlight(struct radeon_encoder *radeon_encoder,
 void
 radeon_link_encoder_connector(struct drm_device *dev)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct drm_connector *connector;
 	struct radeon_connector *radeon_connector;
@@ -218,6 +224,7 @@ radeon_link_encoder_connector(struct drm_device *dev)
 			if (radeon_encoder->devices & radeon_connector->devices) {
 				drm_mode_connector_attach_encoder(connector, encoder);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (radeon_encoder->devices & (ATOM_DEVICE_LCD_SUPPORT)) {
 					if (rdev->is_atom_bios)
 						radeon_atom_backlight_init(radeon_encoder, connector);
@@ -225,6 +232,10 @@ radeon_link_encoder_connector(struct drm_device *dev)
 						radeon_legacy_backlight_init(radeon_encoder, connector);
 					rdev->mode_info.bl_encoder = radeon_encoder;
 				}
+=======
+				if (radeon_encoder->devices & (ATOM_DEVICE_LCD_SUPPORT))
+					radeon_encoder_add_backlight(radeon_encoder, connector);
+>>>>>>> v3.18
 =======
 				if (radeon_encoder->devices & (ATOM_DEVICE_LCD_SUPPORT))
 					radeon_encoder_add_backlight(radeon_encoder, connector);
@@ -392,7 +403,11 @@ bool radeon_dig_monitor_is_duallink(struct drm_encoder *encoder,
 		if (radeon_connector->use_digital) {
 			/* HDMI 1.3 supports up to 340 Mhz over single link */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ASIC_IS_DCE6(rdev) && drm_detect_hdmi_monitor(radeon_connector->edid)) {
+=======
+			if (ASIC_IS_DCE6(rdev) && drm_detect_hdmi_monitor(radeon_connector_edid(connector))) {
+>>>>>>> v3.18
 =======
 			if (ASIC_IS_DCE6(rdev) && drm_detect_hdmi_monitor(radeon_connector_edid(connector))) {
 >>>>>>> v3.18
@@ -418,7 +433,11 @@ bool radeon_dig_monitor_is_duallink(struct drm_encoder *encoder,
 		else {
 			/* HDMI 1.3 supports up to 340 Mhz over single link */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ASIC_IS_DCE6(rdev) && drm_detect_hdmi_monitor(radeon_connector->edid)) {
+=======
+			if (ASIC_IS_DCE6(rdev) && drm_detect_hdmi_monitor(radeon_connector_edid(connector))) {
+>>>>>>> v3.18
 =======
 			if (ASIC_IS_DCE6(rdev) && drm_detect_hdmi_monitor(radeon_connector_edid(connector))) {
 >>>>>>> v3.18
@@ -439,7 +458,10 @@ bool radeon_dig_monitor_is_duallink(struct drm_encoder *encoder,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool radeon_encoder_is_digital(struct drm_encoder *encoder)
 {
 	struct radeon_encoder *radeon_encoder = to_radeon_encoder(encoder);
@@ -461,4 +483,7 @@ bool radeon_encoder_is_digital(struct drm_encoder *encoder)
 		return false;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

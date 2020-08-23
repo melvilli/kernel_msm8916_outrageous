@@ -182,8 +182,11 @@ extern int gfs2_glock_get(struct gfs2_sbd *sdp, u64 number,
 			  const struct gfs2_glock_operations *glops,
 			  int create, struct gfs2_glock **glp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void gfs2_glock_hold(struct gfs2_glock *gl);
 extern void gfs2_glock_put_nolock(struct gfs2_glock *gl);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void gfs2_glock_put(struct gfs2_glock *gl);
@@ -205,7 +208,11 @@ extern int gfs2_glock_nq_num(struct gfs2_sbd *sdp, u64 number,
 extern int gfs2_glock_nq_m(unsigned int num_gh, struct gfs2_holder *ghs);
 extern void gfs2_glock_dq_m(unsigned int num_gh, struct gfs2_holder *ghs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int gfs2_dump_glock(struct seq_file *seq, const struct gfs2_glock *gl);
+=======
+extern void gfs2_dump_glock(struct seq_file *seq, const struct gfs2_glock *gl);
+>>>>>>> v3.18
 =======
 extern void gfs2_dump_glock(struct seq_file *seq, const struct gfs2_glock *gl);
 >>>>>>> v3.18

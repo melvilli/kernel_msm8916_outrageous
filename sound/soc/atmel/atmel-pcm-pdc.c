@@ -59,7 +59,10 @@ static const struct snd_pcm_hardware atmel_pcm_hardware = {
 				  SNDRV_PCM_INFO_INTERLEAVED |
 				  SNDRV_PCM_INFO_PAUSE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.formats		= SNDRV_PCM_FMTBIT_S16_LE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.period_bytes_min	= 32,
@@ -81,12 +84,15 @@ struct atmel_runtime_data {
 
 	dma_addr_t period_ptr;		/* physical address of next period */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* PDC register save */
 	u32 pdc_xpr_save;
 	u32 pdc_xcr_save;
 	u32 pdc_xnpr_save;
 	u32 pdc_xncr_save;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -328,6 +334,7 @@ static struct snd_pcm_ops atmel_pcm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*--------------------------------------------------------------------------*\
  * ASoC platform driver
@@ -385,13 +392,18 @@ static int atmel_pcm_resume(struct snd_soc_dai *dai)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct snd_soc_platform_driver atmel_soc_platform = {
 	.ops		= &atmel_pcm_ops,
 	.pcm_new	= atmel_pcm_new,
 	.pcm_free	= atmel_pcm_free,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend	= atmel_pcm_suspend,
 	.resume		= atmel_pcm_resume,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

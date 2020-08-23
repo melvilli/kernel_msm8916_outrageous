@@ -467,7 +467,11 @@ static int __init setup_adapter(int card_base, int type, int n)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->dev[0] = alloc_netdev(0, "", dev_setup);
+=======
+	info->dev[0] = alloc_netdev(0, "", NET_NAME_UNKNOWN, dev_setup);
+>>>>>>> v3.18
 =======
 	info->dev[0] = alloc_netdev(0, "", NET_NAME_UNKNOWN, dev_setup);
 >>>>>>> v3.18
@@ -479,7 +483,11 @@ static int __init setup_adapter(int card_base, int type, int n)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->dev[1] = alloc_netdev(0, "", dev_setup);
+=======
+	info->dev[1] = alloc_netdev(0, "", NET_NAME_UNKNOWN, dev_setup);
+>>>>>>> v3.18
 =======
 	info->dev[1] = alloc_netdev(0, "", NET_NAME_UNKNOWN, dev_setup);
 >>>>>>> v3.18

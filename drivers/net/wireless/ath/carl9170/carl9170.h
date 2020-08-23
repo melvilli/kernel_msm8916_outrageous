@@ -134,6 +134,12 @@ struct carl9170_sta_tid {
 	/* Preaggregation reorder queue */
 	struct sk_buff_head queue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	struct ieee80211_sta *sta;
+	struct ieee80211_vif *vif;
+>>>>>>> v3.18
 =======
 
 	struct ieee80211_sta *sta;

@@ -2,7 +2,11 @@
  * lm83.c - Part of lm_sensors, Linux kernel modules for hardware
  *          monitoring
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2003-2009  Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2003-2009  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2003-2009  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -30,10 +34,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -119,6 +126,7 @@ static const u8 LM83_REG_W_HIGH[] = {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Functions declaration
  */
 
@@ -155,12 +163,19 @@ static struct i2c_driver lm83_driver = {
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Client data (each client gets its own)
  */
 
 struct lm83_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+	const struct attribute_group *groups[3];
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 	const struct attribute_group *groups[3];
@@ -177,7 +192,10 @@ struct lm83_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct lm83_data *lm83_update_device(struct device *dev)
 {
 	struct lm83_data *data = dev_get_drvdata(dev);
@@ -208,6 +226,9 @@ static struct lm83_data *lm83_update_device(struct device *dev)
 	return data;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Sysfs stuff
@@ -226,8 +247,13 @@ static ssize_t set_temp(struct device *dev, struct device_attribute *devattr,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm83_data *data = i2c_get_clientdata(client);
+=======
+	struct lm83_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm83_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -394,8 +420,13 @@ static int lm83_probe(struct i2c_client *new_client,
 		      const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lm83_data *data;
 	int err;
+=======
+	struct device *hwmon_dev;
+	struct lm83_data *data;
+>>>>>>> v3.18
 =======
 	struct device *hwmon_dev;
 	struct lm83_data *data;
@@ -407,8 +438,12 @@ static int lm83_probe(struct i2c_client *new_client,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_set_clientdata(new_client, data);
 	data->valid = 0;
+=======
+	data->client = new_client;
+>>>>>>> v3.18
 =======
 	data->client = new_client;
 >>>>>>> v3.18
@@ -420,6 +455,7 @@ static int lm83_probe(struct i2c_client *new_client,
 	 * at the same register as the LM83 temp3 entry - so we
 	 * declare 1 and 3 common, and then 2 and 4 only for the LM83.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	err = sysfs_create_group(&new_client->dev.kobj, &lm83_group);
@@ -492,6 +528,8 @@ module_i2c_driver(lm83_driver);
 
 MODULE_AUTHOR("Jean Delvare <khali@linux-fr.org>");
 =======
+=======
+>>>>>>> v3.18
 	data->groups[0] = &lm83_group;
 	if (id->driver_data == lm83)
 		data->groups[1] = &lm83_group_opt;
@@ -527,6 +565,9 @@ static struct i2c_driver lm83_driver = {
 module_i2c_driver(lm83_driver);
 
 MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_DESCRIPTION("LM83 driver");
 MODULE_LICENSE("GPL");

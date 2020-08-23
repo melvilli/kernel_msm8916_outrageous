@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -290,6 +294,10 @@ acpi_ds_method_data_get_node(u8 type,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -437,7 +445,10 @@ acpi_ds_method_data_get_value(u8 type,
 
 			case ACPI_REFCLASS_LOCAL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				/*

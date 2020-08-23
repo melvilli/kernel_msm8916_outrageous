@@ -24,7 +24,11 @@
 #include <asm/netlogic/xlr/xlr.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int nlm_xlr_uart_in(struct uart_port *p, int offset)
+=======
+static unsigned int nlm_xlr_uart_in(struct uart_port *p, int offset)
+>>>>>>> v3.18
 =======
 static unsigned int nlm_xlr_uart_in(struct uart_port *p, int offset)
 >>>>>>> v3.18
@@ -46,7 +50,11 @@ static unsigned int nlm_xlr_uart_in(struct uart_port *p, int offset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nlm_xlr_uart_out(struct uart_port *p, int offset, int value)
+=======
+static void nlm_xlr_uart_out(struct uart_port *p, int offset, int value)
+>>>>>>> v3.18
 =======
 static void nlm_xlr_uart_out(struct uart_port *p, int offset, int value)
 >>>>>>> v3.18

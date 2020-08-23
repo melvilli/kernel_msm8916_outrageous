@@ -1,6 +1,10 @@
 /* Copyright (C) 2010 Google, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2011,2013-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2011, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2011, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -21,6 +25,7 @@
 
 #include <linux/types.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct ssbi_slave_info {
 	const char	*name;
@@ -54,6 +59,8 @@ int ssbi_read(struct device *dev, u16 addr, u8 *buf, int len);
 void  set_ssbi_mode_1(void __iomem *geni_offset);
 void  set_ssbi_mode_2(void __iomem *geni_offset);
 =======
+=======
+>>>>>>> v3.18
 int ssbi_write(struct device *dev, u16 addr, const u8 *buf, int len);
 int ssbi_read(struct device *dev, u16 addr, u8 *buf, int len);
 
@@ -77,5 +84,8 @@ ssbi_reg_write(void *context, unsigned int reg, unsigned int val)
 	return ssbi_write(context, reg, &v, 1);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

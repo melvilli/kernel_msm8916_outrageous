@@ -54,6 +54,7 @@ static inline int dma_mapping_error(struct device *dev, dma_addr_t dma_addr)
 	if (dma_ops->mapping_error)
 		return dma_ops->mapping_error(dev, dma_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (dma_addr == DMA_ERROR_CODE);
 }
 
@@ -76,6 +77,8 @@ static inline void dma_free_coherent(struct device *dev, size_t size,
 	debug_dma_free_coherent(dev, size, cpu_addr, dma_handle);
 	dma_ops->free(dev, size, cpu_addr, dma_handle, NULL);
 =======
+=======
+>>>>>>> v3.18
 	return dma_addr == DMA_ERROR_CODE;
 }
 
@@ -108,6 +111,9 @@ static inline void dma_free_attrs(struct device *dev, size_t size,
 
 	debug_dma_free_coherent(dev, size, cpu_addr, dma_handle);
 	ops->free(dev, size, cpu_addr, dma_handle, attrs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

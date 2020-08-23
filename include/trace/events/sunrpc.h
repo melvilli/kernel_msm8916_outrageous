@@ -7,6 +7,11 @@
 #include <linux/sunrpc/sched.h>
 #include <linux/sunrpc/clnt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/tcp_states.h>
+#include <linux/net.h>
+>>>>>>> v3.18
 =======
 #include <net/tcp_states.h>
 #include <linux/net.h>
@@ -21,8 +26,13 @@ DECLARE_EVENT_CLASS(rpc_task_status,
 
 	TP_STRUCT__entry(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(const struct rpc_task *, task)
 		__field(const struct rpc_clnt *, clnt)
+=======
+		__field(unsigned int, task_id)
+		__field(unsigned int, client_id)
+>>>>>>> v3.18
 =======
 		__field(unsigned int, task_id)
 		__field(unsigned int, client_id)
@@ -32,6 +42,7 @@ DECLARE_EVENT_CLASS(rpc_task_status,
 
 	TP_fast_assign(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__entry->task = task;
 		__entry->clnt = task->tk_client;
 		__entry->status = task->tk_status;
@@ -39,6 +50,8 @@ DECLARE_EVENT_CLASS(rpc_task_status,
 
 	TP_printk("task:%p@%p, status %d",__entry->task, __entry->clnt, __entry->status)
 =======
+=======
+>>>>>>> v3.18
 		__entry->task_id = task->tk_pid;
 		__entry->client_id = task->tk_client->cl_clid;
 		__entry->status = task->tk_status;
@@ -47,6 +60,9 @@ DECLARE_EVENT_CLASS(rpc_task_status,
 	TP_printk("task:%u@%u, status %d",
 		__entry->task_id, __entry->client_id,
 		__entry->status)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -69,8 +85,13 @@ TRACE_EVENT(rpc_connect_status,
 
 	TP_STRUCT__entry(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(const struct rpc_task *, task)
 		__field(const struct rpc_clnt *, clnt)
+=======
+		__field(unsigned int, task_id)
+		__field(unsigned int, client_id)
+>>>>>>> v3.18
 =======
 		__field(unsigned int, task_id)
 		__field(unsigned int, client_id)
@@ -80,6 +101,7 @@ TRACE_EVENT(rpc_connect_status,
 
 	TP_fast_assign(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__entry->task = task;
 		__entry->clnt = task->tk_client;
 		__entry->status = status;
@@ -87,6 +109,8 @@ TRACE_EVENT(rpc_connect_status,
 
 	TP_printk("task:%p@%p, status %d",__entry->task, __entry->clnt, __entry->status)
 =======
+=======
+>>>>>>> v3.18
 		__entry->task_id = task->tk_pid;
 		__entry->client_id = task->tk_client->cl_clid;
 		__entry->status = status;
@@ -95,6 +119,9 @@ TRACE_EVENT(rpc_connect_status,
 	TP_printk("task:%u@%u, status %d",
 		__entry->task_id, __entry->client_id,
 		__entry->status)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -106,8 +133,13 @@ DECLARE_EVENT_CLASS(rpc_task_running,
 
 	TP_STRUCT__entry(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(const struct rpc_clnt *, clnt)
 		__field(const struct rpc_task *, task)
+=======
+		__field(unsigned int, task_id)
+		__field(unsigned int, client_id)
+>>>>>>> v3.18
 =======
 		__field(unsigned int, task_id)
 		__field(unsigned int, client_id)
@@ -120,8 +152,13 @@ DECLARE_EVENT_CLASS(rpc_task_running,
 
 	TP_fast_assign(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__entry->clnt = clnt;
 		__entry->task = task;
+=======
+		__entry->client_id = clnt ? clnt->cl_clid : -1;
+		__entry->task_id = task->tk_pid;
+>>>>>>> v3.18
 =======
 		__entry->client_id = clnt ? clnt->cl_clid : -1;
 		__entry->task_id = task->tk_pid;
@@ -133,9 +170,14 @@ DECLARE_EVENT_CLASS(rpc_task_running,
 		),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("task:%p@%p flags=%4.4x state=%4.4lx status=%d action=%pf",
 		__entry->task,
 		__entry->clnt,
+=======
+	TP_printk("task:%u@%d flags=%4.4x state=%4.4lx status=%d action=%pf",
+		__entry->task_id, __entry->client_id,
+>>>>>>> v3.18
 =======
 	TP_printk("task:%u@%d flags=%4.4x state=%4.4lx status=%d action=%pf",
 		__entry->task_id, __entry->client_id,
@@ -179,8 +221,13 @@ DECLARE_EVENT_CLASS(rpc_task_queued,
 
 	TP_STRUCT__entry(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(const struct rpc_clnt *, clnt)
 		__field(const struct rpc_task *, task)
+=======
+		__field(unsigned int, task_id)
+		__field(unsigned int, client_id)
+>>>>>>> v3.18
 =======
 		__field(unsigned int, task_id)
 		__field(unsigned int, client_id)
@@ -194,8 +241,13 @@ DECLARE_EVENT_CLASS(rpc_task_queued,
 
 	TP_fast_assign(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__entry->clnt = clnt;
 		__entry->task = task;
+=======
+		__entry->client_id = clnt->cl_clid;
+		__entry->task_id = task->tk_pid;
+>>>>>>> v3.18
 =======
 		__entry->client_id = clnt->cl_clid;
 		__entry->task_id = task->tk_pid;
@@ -208,9 +260,14 @@ DECLARE_EVENT_CLASS(rpc_task_queued,
 		),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("task:%p@%p flags=%4.4x state=%4.4lx status=%d timeout=%lu queue=%s",
 		__entry->task,
 		__entry->clnt,
+=======
+	TP_printk("task:%u@%u flags=%4.4x state=%4.4lx status=%d timeout=%lu queue=%s",
+		__entry->task_id, __entry->client_id,
+>>>>>>> v3.18
 =======
 	TP_printk("task:%u@%u flags=%4.4x state=%4.4lx status=%d timeout=%lu queue=%s",
 		__entry->task_id, __entry->client_id,
@@ -240,7 +297,10 @@ DEFINE_EVENT(rpc_task_queued, rpc_task_wakeup,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define rpc_show_socket_state(state) \
 	__print_symbolic(state, \
 		{ SS_FREE, "FREE" }, \
@@ -371,6 +431,9 @@ DEFINE_RPC_SOCKET_EVENT_DONE(rpc_socket_reset_connection);
 DEFINE_RPC_SOCKET_EVENT(rpc_socket_close);
 DEFINE_RPC_SOCKET_EVENT(rpc_socket_shutdown);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _TRACE_SUNRPC_H */
 

@@ -50,11 +50,17 @@ struct fwspk {
 	struct fw_unit *unit;
 	const struct device_info *device_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_pcm_substream *pcm;
 	struct mutex mutex;
 	struct cmp_connection connection;
 	struct amdtp_out_stream stream;
 	bool stream_running;
+=======
+	struct mutex mutex;
+	struct cmp_connection connection;
+	struct amdtp_stream stream;
+>>>>>>> v3.18
 =======
 	struct mutex mutex;
 	struct cmp_connection connection;
@@ -176,6 +182,7 @@ static int fwspk_open(struct snd_pcm_substream *substream)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_pcm_hw_constraint_minmax(runtime,
 					   SNDRV_PCM_HW_PARAM_PERIOD_TIME,
 					   5000, UINT_MAX);
@@ -183,6 +190,9 @@ static int fwspk_open(struct snd_pcm_substream *substream)
 		return err;
 
 	err = snd_pcm_hw_constraint_msbits(runtime, 0, 32, 24);
+=======
+	err = amdtp_stream_add_pcm_hw_constraints(&fwspk->stream, runtime);
+>>>>>>> v3.18
 =======
 	err = amdtp_stream_add_pcm_hw_constraints(&fwspk->stream, runtime);
 >>>>>>> v3.18
@@ -199,6 +209,7 @@ static int fwspk_close(struct snd_pcm_substream *substream)
 
 static void fwspk_stop_stream(struct fwspk *fwspk)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (fwspk->stream_running) {
 		amdtp_out_stream_stop(&fwspk->stream);
@@ -244,12 +255,17 @@ error:
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (amdtp_stream_running(&fwspk->stream)) {
 		amdtp_stream_stop(&fwspk->stream);
 		cmp_connection_break(&fwspk->connection);
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int fwspk_hw_params(struct snd_pcm_substream *substream,
 			   struct snd_pcm_hw_params *hw_params)
@@ -267,6 +283,7 @@ static int fwspk_hw_params(struct snd_pcm_substream *substream,
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amdtp_out_stream_set_rate(&fwspk->stream, params_rate(hw_params));
 	amdtp_out_stream_set_pcm(&fwspk->stream, params_channels(hw_params));
 
@@ -277,6 +294,8 @@ static int fwspk_hw_params(struct snd_pcm_substream *substream,
 	if (err < 0)
 		goto err_buffer;
 =======
+=======
+>>>>>>> v3.18
 	amdtp_stream_set_parameters(&fwspk->stream,
 				    params_rate(hw_params),
 				    params_channels(hw_params),
@@ -291,6 +310,9 @@ static int fwspk_hw_params(struct snd_pcm_substream *substream,
 		dev_err(&fwspk->unit->device, "failed to set sample rate\n");
 		goto err_buffer;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -320,6 +342,7 @@ static int fwspk_prepare(struct snd_pcm_substream *substream)
 	mutex_lock(&fwspk->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (amdtp_out_streaming_error(&fwspk->stream))
 		fwspk_stop_stream(fwspk);
 
@@ -337,6 +360,8 @@ static int fwspk_prepare(struct snd_pcm_substream *substream)
 
 		fwspk->stream_running = true;
 =======
+=======
+>>>>>>> v3.18
 	if (amdtp_streaming_error(&fwspk->stream))
 		fwspk_stop_stream(fwspk);
 
@@ -351,13 +376,20 @@ static int fwspk_prepare(struct snd_pcm_substream *substream)
 					 fwspk->connection.speed);
 		if (err < 0)
 			goto err_connection;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	mutex_unlock(&fwspk->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amdtp_out_stream_pcm_prepare(&fwspk->stream);
+=======
+	amdtp_stream_pcm_prepare(&fwspk->stream);
+>>>>>>> v3.18
 =======
 	amdtp_stream_pcm_prepare(&fwspk->stream);
 >>>>>>> v3.18
@@ -388,7 +420,11 @@ static int fwspk_trigger(struct snd_pcm_substream *substream, int cmd)
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amdtp_out_stream_pcm_trigger(&fwspk->stream, pcm);
+=======
+	amdtp_stream_pcm_trigger(&fwspk->stream, pcm);
+>>>>>>> v3.18
 =======
 	amdtp_stream_pcm_trigger(&fwspk->stream, pcm);
 >>>>>>> v3.18
@@ -400,7 +436,11 @@ static snd_pcm_uframes_t fwspk_pointer(struct snd_pcm_substream *substream)
 	struct fwspk *fwspk = substream->private_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return amdtp_out_stream_pcm_pointer(&fwspk->stream);
+=======
+	return amdtp_stream_pcm_pointer(&fwspk->stream);
+>>>>>>> v3.18
 =======
 	return amdtp_stream_pcm_pointer(&fwspk->stream);
 >>>>>>> v3.18
@@ -429,8 +469,12 @@ static int fwspk_create_pcm(struct fwspk *fwspk)
 	pcm->private_data = fwspk;
 	strcpy(pcm->name, fwspk->device_info->short_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fwspk->pcm = pcm->streams[SNDRV_PCM_STREAM_PLAYBACK].substream;
 	fwspk->pcm->ops = &ops;
+=======
+	snd_pcm_set_ops(pcm, SNDRV_PCM_STREAM_PLAYBACK, &ops);
+>>>>>>> v3.18
 =======
 	snd_pcm_set_ops(pcm, SNDRV_PCM_STREAM_PLAYBACK, &ops);
 >>>>>>> v3.18
@@ -719,7 +763,11 @@ static u32 fwspk_read_firmware_version(struct fw_unit *unit)
 
 	err = snd_fw_transaction(unit, TCODE_READ_QUADLET_REQUEST,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 OXFORD_FIRMWARE_ID_ADDRESS, &data, 4);
+=======
+				 OXFORD_FIRMWARE_ID_ADDRESS, &data, 4, 0);
+>>>>>>> v3.18
 =======
 				 OXFORD_FIRMWARE_ID_ADDRESS, &data, 4, 0);
 >>>>>>> v3.18
@@ -731,7 +779,11 @@ static void fwspk_card_free(struct snd_card *card)
 	struct fwspk *fwspk = card->private_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amdtp_out_stream_destroy(&fwspk->stream);
+=======
+	amdtp_stream_destroy(&fwspk->stream);
+>>>>>>> v3.18
 =======
 	amdtp_stream_destroy(&fwspk->stream);
 >>>>>>> v3.18
@@ -740,6 +792,7 @@ static void fwspk_card_free(struct snd_card *card)
 	mutex_destroy(&fwspk->mutex);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct device_info *fwspk_detect(struct fw_device *dev)
 {
@@ -785,6 +838,11 @@ static int fwspk_probe(struct fw_unit *unit,
 		       const struct ieee1394_device_id *id)
 {
 >>>>>>> v3.18
+=======
+static int fwspk_probe(struct fw_unit *unit,
+		       const struct ieee1394_device_id *id)
+{
+>>>>>>> v3.18
 	struct fw_device *fw_dev = fw_parent_device(unit);
 	struct snd_card *card;
 	struct fwspk *fwspk;
@@ -792,21 +850,28 @@ static int fwspk_probe(struct fw_unit *unit,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(-1, NULL, THIS_MODULE, sizeof(*fwspk), &card);
 	if (err < 0)
 		return err;
 	snd_card_set_dev(card, unit_dev);
 =======
+=======
+>>>>>>> v3.18
 	err = snd_card_new(&unit->device, -1, NULL, THIS_MODULE,
 			   sizeof(*fwspk), &card);
 	if (err < 0)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	fwspk = card->private_data;
 	fwspk->card = card;
 	mutex_init(&fwspk->mutex);
 	fwspk->unit = fw_unit_get(unit);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fwspk->device_info = fwspk_detect(fw_dev);
 	if (!fwspk->device_info) {
@@ -820,6 +885,8 @@ static int fwspk_probe(struct fw_unit *unit,
 
 	err = amdtp_out_stream_init(&fwspk->stream, unit, CIP_NONBLOCKING);
 =======
+=======
+>>>>>>> v3.18
 	fwspk->device_info = (const struct device_info *)id->driver_data;
 
 	err = cmp_connection_init(&fwspk->connection, unit, CMP_INPUT, 0);
@@ -828,6 +895,9 @@ static int fwspk_probe(struct fw_unit *unit,
 
 	err = amdtp_stream_init(&fwspk->stream, unit, AMDTP_OUT_STREAM,
 				CIP_NONBLOCKING);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err < 0)
 		goto err_connection;
@@ -858,7 +928,11 @@ static int fwspk_probe(struct fw_unit *unit,
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(unit_dev, fwspk);
+=======
+	dev_set_drvdata(&unit->device, fwspk);
+>>>>>>> v3.18
 =======
 	dev_set_drvdata(&unit->device, fwspk);
 >>>>>>> v3.18
@@ -875,6 +949,7 @@ error:
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int fwspk_remove(struct device *dev)
 {
@@ -894,6 +969,8 @@ static int fwspk_remove(struct device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void fwspk_bus_reset(struct fw_unit *unit)
 {
 	struct fwspk *fwspk = dev_get_drvdata(&unit->device);
@@ -902,7 +979,11 @@ static void fwspk_bus_reset(struct fw_unit *unit)
 
 	if (cmp_connection_update(&fwspk->connection) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		amdtp_out_stream_pcm_abort(&fwspk->stream);
+=======
+		amdtp_stream_pcm_abort(&fwspk->stream);
+>>>>>>> v3.18
 =======
 		amdtp_stream_pcm_abort(&fwspk->stream);
 >>>>>>> v3.18
@@ -913,10 +994,13 @@ static void fwspk_bus_reset(struct fw_unit *unit)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amdtp_out_stream_update(&fwspk->stream);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	amdtp_stream_update(&fwspk->stream);
 }
 
@@ -954,6 +1038,9 @@ static const struct device_info lacie_speakers = {
 	.volume_fb_id = 0x01,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct ieee1394_device_id fwspk_id_table[] = {
 	{
@@ -966,6 +1053,10 @@ static const struct ieee1394_device_id fwspk_id_table[] = {
 		.specifier_id = SPECIFIER_1394TA,
 		.version      = VERSION_AVC,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.driver_data  = (kernel_ulong_t)&griffin_firewave,
+>>>>>>> v3.18
 =======
 		.driver_data  = (kernel_ulong_t)&griffin_firewave,
 >>>>>>> v3.18
@@ -980,6 +1071,10 @@ static const struct ieee1394_device_id fwspk_id_table[] = {
 		.specifier_id = SPECIFIER_1394TA,
 		.version      = VERSION_AVC,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.driver_data  = (kernel_ulong_t)&lacie_speakers,
+>>>>>>> v3.18
 =======
 		.driver_data  = (kernel_ulong_t)&lacie_speakers,
 >>>>>>> v3.18
@@ -994,15 +1089,21 @@ static struct fw_driver fwspk_driver = {
 		.name	= KBUILD_MODNAME,
 		.bus	= &fw_bus_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.probe	= fwspk_probe,
 		.remove	= fwspk_remove,
 	},
 	.update   = fwspk_bus_reset,
 =======
+=======
+>>>>>>> v3.18
 	},
 	.probe    = fwspk_probe,
 	.update   = fwspk_bus_reset,
 	.remove   = fwspk_remove,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.id_table = fwspk_id_table,
 };

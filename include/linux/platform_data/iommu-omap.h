@@ -32,8 +32,11 @@ struct omap_iommu_arch_data {
 /**
  * struct omap_mmu_dev_attr - OMAP mmu device attributes for omap_hwmod
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @da_start:		device address where the va space starts.
  * @da_end:		device address where the va space ends.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @nr_tlb_entries:	number of entries supported by the translation
@@ -41,8 +44,11 @@ struct omap_iommu_arch_data {
  */
 struct omap_mmu_dev_attr {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 da_start;
 	u32 da_end;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int nr_tlb_entries;
@@ -53,8 +59,11 @@ struct iommu_platform_data {
 	const char *reset_name;
 	int nr_tlb_entries;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 da_start;
 	u32 da_end;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

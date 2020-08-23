@@ -9,7 +9,10 @@
  * Copyright (C) 1999 Silicon Graphics, Inc.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

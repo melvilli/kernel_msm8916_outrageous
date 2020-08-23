@@ -2,6 +2,7 @@
 #define __ASM_PARISC_BITSPERLONG_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * using CONFIG_* outside of __KERNEL__ is wrong,
  * __LP64__ was also removed from headers, so what
@@ -13,12 +14,17 @@
 #else
 #define __BITS_PER_LONG 32
 =======
+=======
+>>>>>>> v3.18
 #if defined(__LP64__)
 #define __BITS_PER_LONG 64
 #define SHIFT_PER_LONG 6
 #else
 #define __BITS_PER_LONG 32
 #define SHIFT_PER_LONG 5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

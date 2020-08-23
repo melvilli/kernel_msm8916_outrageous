@@ -200,6 +200,10 @@ struct ov9640_priv {
 	struct v4l2_subdev		subdev;
 	struct v4l2_ctrl_handler	hdl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_clk			*clk;
+>>>>>>> v3.18
 =======
 	struct v4l2_clk			*clk;
 >>>>>>> v3.18

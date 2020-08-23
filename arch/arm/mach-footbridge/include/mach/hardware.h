@@ -52,11 +52,15 @@
 #define PCIMEM_BASE		MMU_IO(0xf0000000, 0x80000000)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XBUS_LEDS		((volatile unsigned char *)(XBUS_BASE + 0x12000))
 #define XBUS_LED_AMBER		(1 << 0)
 #define XBUS_LED_GREEN		(1 << 1)
 #define XBUS_LED_RED		(1 << 2)
 #define XBUS_LED_TOGGLE		(1 << 8)
+=======
+#define XBUS_CS2		0x40012000
+>>>>>>> v3.18
 =======
 #define XBUS_CS2		0x40012000
 >>>>>>> v3.18

@@ -26,8 +26,11 @@
 #define __STMMAC_PTP_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define STMMAC_SYSCLOCK 62500000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* IEEE 1588 PTP register offsets */

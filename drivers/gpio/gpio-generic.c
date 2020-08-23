@@ -140,7 +140,11 @@ static int bgpio_get(struct gpio_chip *gc, unsigned int gpio)
 	struct bgpio_chip *bgc = to_bgpio_chip(gc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return bgc->read_reg(bgc->reg_dat) & bgc->pin2mask(bgc, gpio);
+=======
+	return !!(bgc->read_reg(bgc->reg_dat) & bgc->pin2mask(bgc, gpio));
+>>>>>>> v3.18
 =======
 	return !!(bgc->read_reg(bgc->reg_dat) & bgc->pin2mask(bgc, gpio));
 >>>>>>> v3.18
@@ -393,10 +397,13 @@ static int bgpio_setup_direction(struct bgpio_chip *bgc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bgpio_remove(struct bgpio_chip *bgc)
 {
 	return gpiochip_remove(&bgc->gc);
 =======
+=======
+>>>>>>> v3.18
 static int bgpio_request(struct gpio_chip *chip, unsigned gpio_pin)
 {
 	if (gpio_pin < chip->ngpio)
@@ -409,6 +416,9 @@ int bgpio_remove(struct bgpio_chip *bgc)
 {
 	gpiochip_remove(&bgc->gc);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(bgpio_remove);
@@ -433,6 +443,10 @@ int bgpio_init(struct bgpio_chip *bgc, struct device *dev,
 	bgc->gc.base = -1;
 	bgc->gc.ngpio = bgc->bits;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bgc->gc.request = bgpio_request;
+>>>>>>> v3.18
 =======
 	bgc->gc.request = bgpio_request;
 >>>>>>> v3.18
@@ -512,7 +526,11 @@ static int bgpio_pdev_probe(struct platform_device *pdev)
 	void __iomem *dirin;
 	unsigned long sz;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags = 0;
+=======
+	unsigned long flags = pdev->id_entry->driver_data;
+>>>>>>> v3.18
 =======
 	unsigned long flags = pdev->id_entry->driver_data;
 >>>>>>> v3.18
@@ -547,9 +565,12 @@ static int bgpio_pdev_probe(struct platform_device *pdev)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strcmp(platform_get_device_id(pdev)->name, "basic-mmio-gpio-be"))
 		flags |= BGPIOF_BIG_ENDIAN;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bgc = devm_kzalloc(&pdev->dev, sizeof(*bgc), GFP_KERNEL);
@@ -562,6 +583,11 @@ static int bgpio_pdev_probe(struct platform_device *pdev)
 
 	if (pdata) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (pdata->label)
+			bgc->gc.label = pdata->label;
+>>>>>>> v3.18
 =======
 		if (pdata->label)
 			bgc->gc.label = pdata->label;
@@ -585,10 +611,13 @@ static int bgpio_pdev_remove(struct platform_device *pdev)
 
 static const struct platform_device_id bgpio_id_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "basic-mmio-gpio", },
 	{ "basic-mmio-gpio-be", },
 	{},
 =======
+=======
+>>>>>>> v3.18
 	{
 		.name		= "basic-mmio-gpio",
 		.driver_data	= 0,
@@ -597,6 +626,9 @@ static const struct platform_device_id bgpio_id_table[] = {
 		.driver_data	= BGPIOF_BIG_ENDIAN,
 	},
 	{ }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 MODULE_DEVICE_TABLE(platform, bgpio_id_table);

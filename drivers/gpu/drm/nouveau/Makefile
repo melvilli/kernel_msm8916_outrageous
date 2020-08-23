@@ -13,18 +13,24 @@ nouveau-y += core/core/engine.o
 nouveau-y += core/core/enum.o
 nouveau-y += core/core/event.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau-y += core/core/falcon.o
 nouveau-y += core/core/gpuobj.o
 nouveau-y += core/core/handle.o
 nouveau-y += core/core/mm.o
 nouveau-y += core/core/namedb.o
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/core/gpuobj.o
 nouveau-y += core/core/handle.o
 nouveau-y += core/core/ioctl.o
 nouveau-y += core/core/mm.o
 nouveau-y += core/core/namedb.o
 nouveau-y += core/core/notify.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau-y += core/core/object.o
 nouveau-y += core/core/option.o
@@ -37,22 +43,32 @@ nouveau-y += core/subdev/bar/base.o
 nouveau-y += core/subdev/bar/nv50.o
 nouveau-y += core/subdev/bar/nvc0.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau-y += core/subdev/bios/base.o
 nouveau-y += core/subdev/bios/bit.o
 nouveau-y += core/subdev/bios/conn.o
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/subdev/bar/gk20a.o
 nouveau-y += core/subdev/bios/base.o
 nouveau-y += core/subdev/bios/bit.o
 nouveau-y += core/subdev/bios/boost.o
 nouveau-y += core/subdev/bios/conn.o
 nouveau-y += core/subdev/bios/cstep.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau-y += core/subdev/bios/dcb.o
 nouveau-y += core/subdev/bios/disp.o
 nouveau-y += core/subdev/bios/dp.o
 nouveau-y += core/subdev/bios/extdev.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+nouveau-y += core/subdev/bios/fan.o
+>>>>>>> v3.18
 =======
 nouveau-y += core/subdev/bios/fan.o
 >>>>>>> v3.18
@@ -62,6 +78,7 @@ nouveau-y += core/subdev/bios/init.o
 nouveau-y += core/subdev/bios/mxm.o
 nouveau-y += core/subdev/bios/perf.o
 nouveau-y += core/subdev/bios/pll.o
+<<<<<<< HEAD
 <<<<<<< HEAD
 nouveau-y += core/subdev/bios/therm.o
 nouveau-y += core/subdev/bios/xpio.o
@@ -75,6 +92,8 @@ nouveau-y += core/subdev/clock/nv50.o
 nouveau-y += core/subdev/clock/nva3.o
 nouveau-y += core/subdev/clock/nvc0.o
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/subdev/bios/ramcfg.o
 nouveau-y += core/subdev/bios/rammap.o
 nouveau-y += core/subdev/bios/timing.o
@@ -101,6 +120,9 @@ nouveau-y += core/subdev/clock/nvaa.o
 nouveau-y += core/subdev/clock/nvc0.o
 nouveau-y += core/subdev/clock/nve0.o
 nouveau-y += core/subdev/clock/gk20a.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau-y += core/subdev/clock/pllnv04.o
 nouveau-y += core/subdev/clock/pllnva3.o
@@ -112,13 +134,19 @@ nouveau-y += core/subdev/devinit/nv1a.o
 nouveau-y += core/subdev/devinit/nv20.o
 nouveau-y += core/subdev/devinit/nv50.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/subdev/devinit/nv84.o
 nouveau-y += core/subdev/devinit/nv98.o
 nouveau-y += core/subdev/devinit/nva3.o
 nouveau-y += core/subdev/devinit/nvaf.o
 nouveau-y += core/subdev/devinit/nvc0.o
 nouveau-y += core/subdev/devinit/gm107.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau-y += core/subdev/fb/base.o
 nouveau-y += core/subdev/fb/nv04.o
@@ -138,11 +166,14 @@ nouveau-y += core/subdev/fb/nv49.o
 nouveau-y += core/subdev/fb/nv4e.o
 nouveau-y += core/subdev/fb/nv50.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau-y += core/subdev/fb/nvc0.o
 nouveau-y += core/subdev/gpio/base.o
 nouveau-y += core/subdev/gpio/nv10.o
 nouveau-y += core/subdev/gpio/nv50.o
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/subdev/fb/nv84.o
 nouveau-y += core/subdev/fb/nva3.o
 nouveau-y += core/subdev/fb/nvaa.o
@@ -178,6 +209,9 @@ nouveau-y += core/subdev/gpio/base.o
 nouveau-y += core/subdev/gpio/nv10.o
 nouveau-y += core/subdev/gpio/nv50.o
 nouveau-y += core/subdev/gpio/nv94.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau-y += core/subdev/gpio/nvd0.o
 nouveau-y += core/subdev/gpio/nve0.o
@@ -186,6 +220,12 @@ nouveau-y += core/subdev/i2c/anx9805.o
 nouveau-y += core/subdev/i2c/aux.o
 nouveau-y += core/subdev/i2c/bit.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+nouveau-y += core/subdev/i2c/pad.o
+nouveau-y += core/subdev/i2c/padnv04.o
+nouveau-y += core/subdev/i2c/padnv94.o
+>>>>>>> v3.18
 =======
 nouveau-y += core/subdev/i2c/pad.o
 nouveau-y += core/subdev/i2c/padnv04.o
@@ -197,19 +237,26 @@ nouveau-y += core/subdev/i2c/nv50.o
 nouveau-y += core/subdev/i2c/nv94.o
 nouveau-y += core/subdev/i2c/nvd0.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau-y += core/subdev/ibus/nvc0.o
 nouveau-y += core/subdev/ibus/nve0.o
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/subdev/i2c/gf117.o
 nouveau-y += core/subdev/i2c/nve0.o
 nouveau-y += core/subdev/ibus/nvc0.o
 nouveau-y += core/subdev/ibus/nve0.o
 nouveau-y += core/subdev/ibus/gk20a.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau-y += core/subdev/instmem/base.o
 nouveau-y += core/subdev/instmem/nv04.o
 nouveau-y += core/subdev/instmem/nv40.o
 nouveau-y += core/subdev/instmem/nv50.o
+<<<<<<< HEAD
 <<<<<<< HEAD
 nouveau-y += core/subdev/ltcg/nvc0.o
 nouveau-y += core/subdev/mc/base.o
@@ -222,6 +269,8 @@ nouveau-y += core/subdev/mxm/base.o
 nouveau-y += core/subdev/mxm/mxms.o
 nouveau-y += core/subdev/mxm/nv50.o
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/subdev/ltc/base.o
 nouveau-y += core/subdev/ltc/gf100.o
 nouveau-y += core/subdev/ltc/gk104.o
@@ -247,6 +296,9 @@ nouveau-y += core/subdev/pwr/nvc0.o
 nouveau-y += core/subdev/pwr/nvd0.o
 nouveau-y += core/subdev/pwr/gk104.o
 nouveau-y += core/subdev/pwr/nv108.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau-y += core/subdev/therm/base.o
 nouveau-y += core/subdev/therm/fan.o
@@ -261,13 +313,19 @@ nouveau-y += core/subdev/therm/nv84.o
 nouveau-y += core/subdev/therm/nva3.o
 nouveau-y += core/subdev/therm/nvd0.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau-y += core/subdev/timer/base.o
 nouveau-y += core/subdev/timer/nv04.o
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/subdev/therm/gm107.o
 nouveau-y += core/subdev/timer/base.o
 nouveau-y += core/subdev/timer/nv04.o
 nouveau-y += core/subdev/timer/gk20a.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau-y += core/subdev/vm/base.o
 nouveau-y += core/subdev/vm/nv04.o
@@ -276,14 +334,20 @@ nouveau-y += core/subdev/vm/nv44.o
 nouveau-y += core/subdev/vm/nv50.o
 nouveau-y += core/subdev/vm/nvc0.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/subdev/volt/base.o
 nouveau-y += core/subdev/volt/gpio.o
 nouveau-y += core/subdev/volt/nv40.o
 
 nouveau-y += core/engine/falcon.o
 nouveau-y += core/engine/xtensa.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau-y += core/engine/dmaobj/base.o
 nouveau-y += core/engine/dmaobj/nv04.o
@@ -292,6 +356,10 @@ nouveau-y += core/engine/dmaobj/nvc0.o
 nouveau-y += core/engine/dmaobj/nvd0.o
 nouveau-y += core/engine/bsp/nv84.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+nouveau-y += core/engine/bsp/nv98.o
+>>>>>>> v3.18
 =======
 nouveau-y += core/engine/bsp/nv98.o
 >>>>>>> v3.18
@@ -303,7 +371,13 @@ nouveau-y += core/engine/copy/nve0.o
 nouveau-y += core/engine/crypt/nv84.o
 nouveau-y += core/engine/crypt/nv98.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau-y += core/engine/device/base.o
+=======
+nouveau-y += core/engine/device/acpi.o
+nouveau-y += core/engine/device/base.o
+nouveau-y += core/engine/device/ctrl.o
+>>>>>>> v3.18
 =======
 nouveau-y += core/engine/device/acpi.o
 nouveau-y += core/engine/device/base.o
@@ -318,13 +392,19 @@ nouveau-y += core/engine/device/nv50.o
 nouveau-y += core/engine/device/nvc0.o
 nouveau-y += core/engine/device/nve0.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau-y += core/engine/disp/base.o
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/engine/device/gm100.o
 nouveau-y += core/engine/disp/base.o
 nouveau-y += core/engine/disp/conn.o
 nouveau-y += core/engine/disp/outp.o
 nouveau-y += core/engine/disp/outpdp.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau-y += core/engine/disp/nv04.o
 nouveau-y += core/engine/disp/nv50.o
@@ -336,6 +416,10 @@ nouveau-y += core/engine/disp/nvd0.o
 nouveau-y += core/engine/disp/nve0.o
 nouveau-y += core/engine/disp/nvf0.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+nouveau-y += core/engine/disp/gm107.o
+>>>>>>> v3.18
 =======
 nouveau-y += core/engine/disp/gm107.o
 >>>>>>> v3.18
@@ -347,6 +431,10 @@ nouveau-y += core/engine/disp/hdminv84.o
 nouveau-y += core/engine/disp/hdminva3.o
 nouveau-y += core/engine/disp/hdminvd0.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+nouveau-y += core/engine/disp/hdminve0.o
+>>>>>>> v3.18
 =======
 nouveau-y += core/engine/disp/hdminve0.o
 >>>>>>> v3.18
@@ -365,11 +453,14 @@ nouveau-y += core/engine/fifo/nv84.o
 nouveau-y += core/engine/fifo/nvc0.o
 nouveau-y += core/engine/fifo/nve0.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau-y += core/engine/graph/ctxnv40.o
 nouveau-y += core/engine/graph/ctxnv50.o
 nouveau-y += core/engine/graph/ctxnvc0.o
 nouveau-y += core/engine/graph/ctxnve0.o
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/engine/fifo/gk20a.o
 nouveau-y += core/engine/fifo/nv108.o
 nouveau-y += core/engine/graph/ctxnv40.o
@@ -386,6 +477,9 @@ nouveau-y += core/engine/graph/ctxnvf0.o
 nouveau-y += core/engine/graph/ctxgk110b.o
 nouveau-y += core/engine/graph/ctxnv108.o
 nouveau-y += core/engine/graph/ctxgm107.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau-y += core/engine/graph/nv04.o
 nouveau-y += core/engine/graph/nv10.o
@@ -399,12 +493,15 @@ nouveau-y += core/engine/graph/nv40.o
 nouveau-y += core/engine/graph/nv50.o
 nouveau-y += core/engine/graph/nvc0.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau-y += core/engine/graph/nve0.o
 nouveau-y += core/engine/mpeg/nv31.o
 nouveau-y += core/engine/mpeg/nv40.o
 nouveau-y += core/engine/mpeg/nv50.o
 nouveau-y += core/engine/mpeg/nv84.o
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/engine/graph/nvc1.o
 nouveau-y += core/engine/graph/nvc4.o
 nouveau-y += core/engine/graph/nvc8.o
@@ -430,6 +527,9 @@ nouveau-y += core/engine/perfmon/nva3.o
 nouveau-y += core/engine/perfmon/nvc0.o
 nouveau-y += core/engine/perfmon/nve0.o
 nouveau-y += core/engine/perfmon/nvf0.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau-y += core/engine/ppp/nv98.o
 nouveau-y += core/engine/ppp/nvc0.o
@@ -439,10 +539,13 @@ nouveau-y += core/engine/software/nv50.o
 nouveau-y += core/engine/software/nvc0.o
 nouveau-y += core/engine/vp/nv84.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau-y += core/engine/vp/nvc0.o
 nouveau-y += core/engine/vp/nve0.o
 
 =======
+=======
+>>>>>>> v3.18
 nouveau-y += core/engine/vp/nv98.o
 nouveau-y += core/engine/vp/nvc0.o
 nouveau-y += core/engine/vp/nve0.o
@@ -453,6 +556,9 @@ nouveau-y += nvif/client.o
 nouveau-y += nvif/device.o
 nouveau-y += nvif/notify.o
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # drm/core
 nouveau-y += nouveau_drm.o nouveau_chan.o nouveau_dma.o nouveau_fence.o
@@ -460,6 +566,10 @@ nouveau-y += nouveau_vga.o nouveau_agp.o
 nouveau-y += nouveau_ttm.o nouveau_sgdma.o nouveau_bo.o nouveau_gem.o
 nouveau-y += nouveau_prime.o nouveau_abi16.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+nouveau-y += nouveau_nvif.o nouveau_usif.o
+>>>>>>> v3.18
 =======
 nouveau-y += nouveau_nvif.o nouveau_usif.o
 >>>>>>> v3.18
@@ -479,9 +589,13 @@ nouveau-y += nv50_display.o
 
 # drm/pm
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau-y += nouveau_pm.o nouveau_volt.o nouveau_perf.o
 nouveau-y += nv04_pm.o nv40_pm.o nv50_pm.o nva3_pm.o nvc0_pm.o
 nouveau-y += nouveau_mem.o
+=======
+nouveau-y += nouveau_hwmon.o nouveau_sysfs.o
+>>>>>>> v3.18
 =======
 nouveau-y += nouveau_hwmon.o nouveau_sysfs.o
 >>>>>>> v3.18
@@ -496,6 +610,12 @@ nouveau-$(CONFIG_DEBUG_FS) += nouveau_debugfs.o
 
 obj-$(CONFIG_DRM_NOUVEAU)+= nouveau.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+# platform driver
+obj-$(CONFIG_NOUVEAU_PLATFORM_DRIVER) += nouveau_platform.o
+>>>>>>> v3.18
 =======
 
 # platform driver

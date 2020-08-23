@@ -55,6 +55,11 @@
 		 + (clk) / 1000 - 1) / ((clk) / 1000))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SMIAPP_COLOUR_COMPONENTS	4
+
+>>>>>>> v3.18
 =======
 #define SMIAPP_COLOUR_COMPONENTS	4
 
@@ -247,6 +252,11 @@ struct smiapp_sensor {
 	struct v4l2_ctrl *link_freq;
 	struct v4l2_ctrl *pixel_rate_csi;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* test pattern colour components */
+	struct v4l2_ctrl *test_data[SMIAPP_COLOUR_COMPONENTS];
+>>>>>>> v3.18
 =======
 	/* test pattern colour components */
 	struct v4l2_ctrl *test_data[SMIAPP_COLOUR_COMPONENTS];

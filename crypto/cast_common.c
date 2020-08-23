@@ -16,7 +16,11 @@
 #include <crypto/cast_common.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const u32 cast_s1[256] = {
+=======
+__visible const u32 cast_s1[256] = {
+>>>>>>> v3.18
 =======
 __visible const u32 cast_s1[256] = {
 >>>>>>> v3.18
@@ -88,7 +92,11 @@ __visible const u32 cast_s1[256] = {
 EXPORT_SYMBOL_GPL(cast_s1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const u32 cast_s2[256] = {
+=======
+__visible const u32 cast_s2[256] = {
+>>>>>>> v3.18
 =======
 __visible const u32 cast_s2[256] = {
 >>>>>>> v3.18
@@ -160,7 +168,11 @@ __visible const u32 cast_s2[256] = {
 EXPORT_SYMBOL_GPL(cast_s2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const u32 cast_s3[256] = {
+=======
+__visible const u32 cast_s3[256] = {
+>>>>>>> v3.18
 =======
 __visible const u32 cast_s3[256] = {
 >>>>>>> v3.18
@@ -232,7 +244,11 @@ __visible const u32 cast_s3[256] = {
 EXPORT_SYMBOL_GPL(cast_s3);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const u32 cast_s4[256] = {
+=======
+__visible const u32 cast_s4[256] = {
+>>>>>>> v3.18
 =======
 __visible const u32 cast_s4[256] = {
 >>>>>>> v3.18

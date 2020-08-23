@@ -7,6 +7,11 @@ CFLAGS_physaddr.o		:= $(nostackp)
 CFLAGS_setup_nx.o		:= $(nostackp)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CFLAGS_fault.o := -I$(src)/../include/asm/trace
+
+>>>>>>> v3.18
 =======
 CFLAGS_fault.o := -I$(src)/../include/asm/trace
 

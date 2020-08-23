@@ -30,7 +30,10 @@
 #include <linux/dynamic_debug.h>
 #include "drbd_int.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "drbd_wrappers.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -97,6 +100,7 @@ struct __packed al_transaction_on_disk {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct update_odbm_work {
 	struct drbd_work w;
 	unsigned int enr;
@@ -128,6 +132,8 @@ void drbd_md_put_buffer(struct drbd_conf *mdev)
 
 void wait_until_done_or_force_detached(struct drbd_conf *mdev, struct drbd_backing_dev *bdev,
 =======
+=======
+>>>>>>> v3.18
 void *drbd_md_get_buffer(struct drbd_device *device, const char *intent)
 {
 	int r;
@@ -152,6 +158,9 @@ void drbd_md_put_buffer(struct drbd_device *device)
 }
 
 void wait_until_done_or_force_detached(struct drbd_device *device, struct drbd_backing_dev *bdev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				     unsigned int *done)
 {
@@ -164,6 +173,7 @@ void wait_until_done_or_force_detached(struct drbd_device *device, struct drbd_b
 	if (dt == 0)
 		dt = MAX_SCHEDULE_TIMEOUT;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dt = wait_event_timeout(mdev->misc_wait,
 			*done || test_bit(FORCE_DETACH, &mdev->flags), dt);
@@ -205,6 +215,8 @@ static int _drbd_md_sync_page_io(struct drbd_conf *mdev,
 		/* Corresponding put_ldev in drbd_md_io_complete() */
 		dev_err(DEV, "ASSERT FAILED: get_ldev_if_state() == 1 in _drbd_md_sync_page_io()\n");
 =======
+=======
+>>>>>>> v3.18
 	dt = wait_event_timeout(device->misc_wait,
 			*done || test_bit(FORCE_DETACH, &device->flags), dt);
 	if (dt == 0) {
@@ -245,12 +257,16 @@ static int _drbd_md_sync_page_io(struct drbd_device *device,
 	else if (!get_ldev_if_state(device, D_ATTACHING)) {
 		/* Corresponding put_ldev in drbd_md_endio() */
 		drbd_err(device, "ASSERT FAILED: get_ldev_if_state() == 1 in _drbd_md_sync_page_io()\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = -ENODEV;
 		goto out;
 	}
 
 	bio_get(bio); /* one bio_put() is in the completion handler */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	atomic_inc(&mdev->md_io_in_use); /* drbd_md_put_buffer() is in the completion handler */
 	if (drbd_insert_fault(mdev, (rw & WRITE) ? DRBD_FAULT_MD_WR : DRBD_FAULT_MD_RD))
@@ -261,6 +277,8 @@ static int _drbd_md_sync_page_io(struct drbd_device *device,
 	if (bio_flagged(bio, BIO_UPTODATE))
 		err = mdev->md_io.error;
 =======
+=======
+>>>>>>> v3.18
 	atomic_inc(&device->md_io.in_use); /* drbd_md_put_buffer() is in the completion handler */
 	device->md_io.submit_jif = jiffies;
 	if (drbd_insert_fault(device, (rw & WRITE) ? DRBD_FAULT_MD_WR : DRBD_FAULT_MD_RD))
@@ -270,6 +288,9 @@ static int _drbd_md_sync_page_io(struct drbd_device *device,
 	wait_until_done_or_force_detached(device, bdev, &device->md_io.done);
 	if (bio_flagged(bio, BIO_UPTODATE))
 		err = device->md_io.error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  out:
@@ -277,6 +298,7 @@ static int _drbd_md_sync_page_io(struct drbd_device *device,
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int drbd_md_sync_page_io(struct drbd_conf *mdev, struct drbd_backing_dev *bdev,
 			 sector_t sector, int rw)
@@ -290,6 +312,8 @@ int drbd_md_sync_page_io(struct drbd_conf *mdev, struct drbd_backing_dev *bdev,
 
 	dev_dbg(DEV, "meta_data io: %s [%d]:%s(,%llus,%s) %pS\n",
 =======
+=======
+>>>>>>> v3.18
 int drbd_md_sync_page_io(struct drbd_device *device, struct drbd_backing_dev *bdev,
 			 sector_t sector, int rw)
 {
@@ -299,6 +323,9 @@ int drbd_md_sync_page_io(struct drbd_device *device, struct drbd_backing_dev *bd
 	BUG_ON(!bdev->md_bdev);
 
 	dynamic_drbd_dbg(device, "meta_data io: %s [%d]:%s(,%llus,%s) %pS\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	     current->comm, current->pid, __func__,
 	     (unsigned long long)sector, (rw & WRITE) ? "WRITE" : "READ",
@@ -306,6 +333,7 @@ int drbd_md_sync_page_io(struct drbd_device *device, struct drbd_backing_dev *bd
 
 	if (sector < drbd_md_first_sector(bdev) ||
 	    sector + 7 > drbd_md_last_sector(bdev))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_alert(DEV, "%s [%d]:%s(,%llus,%s) out of range md access!\n",
 		     current->comm, current->pid, __func__,
@@ -316,6 +344,8 @@ int drbd_md_sync_page_io(struct drbd_device *device, struct drbd_backing_dev *bd
 	if (err) {
 		dev_err(DEV, "drbd_md_sync_page_io(,%llus,%s) failed with error %d\n",
 =======
+=======
+>>>>>>> v3.18
 		drbd_alert(device, "%s [%d]:%s(,%llus,%s) out of range md access!\n",
 		     current->comm, current->pid, __func__,
 		     (unsigned long long)sector, (rw & WRITE) ? "WRITE" : "READ");
@@ -323,6 +353,9 @@ int drbd_md_sync_page_io(struct drbd_device *device, struct drbd_backing_dev *bd
 	err = _drbd_md_sync_page_io(device, bdev, sector, rw);
 	if (err) {
 		drbd_err(device, "drbd_md_sync_page_io(,%llus,%s) failed with error %d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    (unsigned long long)sector, (rw & WRITE) ? "WRITE" : "READ", err);
 	}
@@ -330,15 +363,21 @@ int drbd_md_sync_page_io(struct drbd_device *device, struct drbd_backing_dev *bd
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct bm_extent *find_active_resync_extent(struct drbd_conf *mdev, unsigned int enr)
 {
 	struct lc_element *tmp;
 	tmp = lc_find(mdev->resync, enr/AL_EXT_PER_BM_SECT);
 =======
+=======
+>>>>>>> v3.18
 static struct bm_extent *find_active_resync_extent(struct drbd_device *device, unsigned int enr)
 {
 	struct lc_element *tmp;
 	tmp = lc_find(device->resync, enr/AL_EXT_PER_BM_SECT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(tmp != NULL)) {
 		struct bm_extent  *bm_ext = lc_entry(tmp, struct bm_extent, lce);
@@ -349,7 +388,11 @@ static struct bm_extent *find_active_resync_extent(struct drbd_device *device, u
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct lc_element *_al_get(struct drbd_conf *mdev, unsigned int enr, bool nonblock)
+=======
+static struct lc_element *_al_get(struct drbd_device *device, unsigned int enr, bool nonblock)
+>>>>>>> v3.18
 =======
 static struct lc_element *_al_get(struct drbd_device *device, unsigned int enr, bool nonblock)
 >>>>>>> v3.18
@@ -358,6 +401,7 @@ static struct lc_element *_al_get(struct drbd_device *device, unsigned int enr, 
 	struct bm_extent *bm_ext;
 	int wake;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irq(&mdev->al_lock);
 	bm_ext = find_active_resync_extent(mdev, enr);
@@ -378,6 +422,8 @@ static struct lc_element *_al_get(struct drbd_device *device, unsigned int enr, 
 
 bool drbd_al_begin_io_fastpath(struct drbd_conf *mdev, struct drbd_interval *i)
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irq(&device->al_lock);
 	bm_ext = find_active_resync_extent(device, enr);
 	if (bm_ext) {
@@ -396,6 +442,9 @@ bool drbd_al_begin_io_fastpath(struct drbd_conf *mdev, struct drbd_interval *i)
 }
 
 bool drbd_al_begin_io_fastpath(struct drbd_device *device, struct drbd_interval *i)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* for bios crossing activity log extent boundaries,
@@ -404,8 +453,13 @@ bool drbd_al_begin_io_fastpath(struct drbd_device *device, struct drbd_interval 
 	unsigned last = i->size == 0 ? first : (i->sector + (i->size >> 9) - 1) >> (AL_EXTENT_SHIFT-9);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	D_ASSERT((unsigned)(last - first) <= 1);
 	D_ASSERT(atomic_read(&mdev->local_cnt) > 0);
+=======
+	D_ASSERT(device, (unsigned)(last - first) <= 1);
+	D_ASSERT(device, atomic_read(&device->local_cnt) > 0);
+>>>>>>> v3.18
 =======
 	D_ASSERT(device, (unsigned)(last - first) <= 1);
 	D_ASSERT(device, atomic_read(&device->local_cnt) > 0);
@@ -416,15 +470,21 @@ bool drbd_al_begin_io_fastpath(struct drbd_device *device, struct drbd_interval 
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return _al_get(mdev, first, true);
 }
 
 bool drbd_al_begin_io_prepare(struct drbd_conf *mdev, struct drbd_interval *i)
 =======
+=======
+>>>>>>> v3.18
 	return _al_get(device, first, true);
 }
 
 bool drbd_al_begin_io_prepare(struct drbd_device *device, struct drbd_interval *i)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* for bios crossing activity log extent boundaries,
@@ -435,6 +495,7 @@ bool drbd_al_begin_io_prepare(struct drbd_device *device, struct drbd_interval *
 	bool need_transaction = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	D_ASSERT(first <= last);
 	D_ASSERT(atomic_read(&mdev->local_cnt) > 0);
 
@@ -443,6 +504,8 @@ bool drbd_al_begin_io_prepare(struct drbd_device *device, struct drbd_interval *
 		wait_event(mdev->al_wait,
 				(al_ext = _al_get(mdev, enr, false)) != NULL);
 =======
+=======
+>>>>>>> v3.18
 	D_ASSERT(device, first <= last);
 	D_ASSERT(device, atomic_read(&device->local_cnt) > 0);
 
@@ -450,6 +513,9 @@ bool drbd_al_begin_io_prepare(struct drbd_device *device, struct drbd_interval *
 		struct lc_element *al_ext;
 		wait_event(device->al_wait,
 				(al_ext = _al_get(device, enr, false)) != NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (al_ext->lc_number != enr)
 			need_transaction = true;
@@ -457,6 +523,7 @@ bool drbd_al_begin_io_prepare(struct drbd_device *device, struct drbd_interval *
 	return need_transaction;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int al_write_transaction(struct drbd_conf *mdev, bool delegate);
 
@@ -485,6 +552,8 @@ void drbd_al_begin_io_commit(struct drbd_conf *mdev, bool delegate)
 			mdev->act_log->pending_changes == 0 ||
 			(locked = lc_try_lock_for_transaction(mdev->act_log)));
 =======
+=======
+>>>>>>> v3.18
 static int al_write_transaction(struct drbd_device *device);
 
 void drbd_al_begin_io_commit(struct drbd_device *device)
@@ -497,11 +566,15 @@ void drbd_al_begin_io_commit(struct drbd_device *device)
 	wait_event(device->al_wait,
 			device->act_log->pending_changes == 0 ||
 			(locked = lc_try_lock_for_transaction(device->act_log)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (locked) {
 		/* Double check: it may have been committed by someone else,
 		 * while we have been waiting for the lock. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (mdev->act_log->pending_changes) {
 			bool write_al_updates;
@@ -514,6 +587,8 @@ void drbd_al_begin_io_commit(struct drbd_device *device)
 				al_write_transaction(mdev, delegate);
 			spin_lock_irq(&mdev->al_lock);
 =======
+=======
+>>>>>>> v3.18
 		if (device->act_log->pending_changes) {
 			bool write_al_updates;
 
@@ -524,11 +599,15 @@ void drbd_al_begin_io_commit(struct drbd_device *device)
 			if (write_al_updates)
 				al_write_transaction(device);
 			spin_lock_irq(&device->al_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* FIXME
 			if (err)
 				we need an "lc_cancel" here;
 			*/
+<<<<<<< HEAD
 <<<<<<< HEAD
 			lc_committed(mdev->act_log);
 			spin_unlock_irq(&mdev->al_lock);
@@ -536,11 +615,16 @@ void drbd_al_begin_io_commit(struct drbd_device *device)
 		lc_unlock(mdev->act_log);
 		wake_up(&mdev->al_wait);
 =======
+=======
+>>>>>>> v3.18
 			lc_committed(device->act_log);
 			spin_unlock_irq(&device->al_lock);
 		}
 		lc_unlock(device->act_log);
 		wake_up(&device->al_wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -548,6 +632,7 @@ void drbd_al_begin_io_commit(struct drbd_device *device)
 /*
  * @delegate:   delegate activity log I/O to the worker thread
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void drbd_al_begin_io(struct drbd_conf *mdev, struct drbd_interval *i, bool delegate)
 {
@@ -561,6 +646,8 @@ int drbd_al_begin_io_nonblock(struct drbd_conf *mdev, struct drbd_interval *i)
 {
 	struct lru_cache *al = mdev->act_log;
 =======
+=======
+>>>>>>> v3.18
 void drbd_al_begin_io(struct drbd_device *device, struct drbd_interval *i)
 {
 	if (drbd_al_begin_io_prepare(device, i))
@@ -570,6 +657,9 @@ void drbd_al_begin_io(struct drbd_device *device, struct drbd_interval *i)
 int drbd_al_begin_io_nonblock(struct drbd_device *device, struct drbd_interval *i)
 {
 	struct lru_cache *al = device->act_log;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* for bios crossing activity log extent boundaries,
 	 * we may need to activate two extents in one go */
@@ -580,7 +670,11 @@ int drbd_al_begin_io_nonblock(struct drbd_device *device, struct drbd_interval *
 	unsigned enr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	D_ASSERT(first <= last);
+=======
+	D_ASSERT(device, first <= last);
+>>>>>>> v3.18
 =======
 	D_ASSERT(device, first <= last);
 >>>>>>> v3.18
@@ -593,9 +687,12 @@ int drbd_al_begin_io_nonblock(struct drbd_device *device, struct drbd_interval *
 	 * We could first check how many updates are *actually* needed,
 	 * and use that instead of the worst-case nr_al_extents */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (available_update_slots < nr_al_extents)
 		return -EWOULDBLOCK;
 =======
+=======
+>>>>>>> v3.18
 	if (available_update_slots < nr_al_extents) {
 		/* Too many activity log extents are currently "hot".
 		 *
@@ -609,13 +706,20 @@ int drbd_al_begin_io_nonblock(struct drbd_device *device, struct drbd_interval *
 			__set_bit(__LC_STARVING, &device->act_log->flags);
 		return -ENOBUFS;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Is resync active in this area? */
 	for (enr = first; enr <= last; enr++) {
 		struct lc_element *tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = lc_find(mdev->resync, enr/AL_EXT_PER_BM_SECT);
+=======
+		tmp = lc_find(device->resync, enr/AL_EXT_PER_BM_SECT);
+>>>>>>> v3.18
 =======
 		tmp = lc_find(device->resync, enr/AL_EXT_PER_BM_SECT);
 >>>>>>> v3.18
@@ -635,9 +739,15 @@ int drbd_al_begin_io_nonblock(struct drbd_device *device, struct drbd_interval *
 	for (enr = first; enr <= last; enr++) {
 		struct lc_element *al_ext;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		al_ext = lc_get_cumulative(mdev->act_log, enr);
 		if (!al_ext)
 			dev_info(DEV, "LOGIC BUG for enr=%u\n", enr);
+=======
+		al_ext = lc_get_cumulative(device->act_log, enr);
+		if (!al_ext)
+			drbd_info(device, "LOGIC BUG for enr=%u\n", enr);
+>>>>>>> v3.18
 =======
 		al_ext = lc_get_cumulative(device->act_log, enr);
 		if (!al_ext)
@@ -648,7 +758,11 @@ int drbd_al_begin_io_nonblock(struct drbd_device *device, struct drbd_interval *
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drbd_al_complete_io(struct drbd_conf *mdev, struct drbd_interval *i)
+=======
+void drbd_al_complete_io(struct drbd_device *device, struct drbd_interval *i)
+>>>>>>> v3.18
 =======
 void drbd_al_complete_io(struct drbd_device *device, struct drbd_interval *i)
 >>>>>>> v3.18
@@ -661,6 +775,7 @@ void drbd_al_complete_io(struct drbd_device *device, struct drbd_interval *i)
 	struct lc_element *extent;
 	unsigned long flags;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	D_ASSERT(first <= last);
 	spin_lock_irqsave(&mdev->al_lock, flags);
@@ -676,6 +791,8 @@ void drbd_al_complete_io(struct drbd_device *device, struct drbd_interval *i)
 	spin_unlock_irqrestore(&mdev->al_lock, flags);
 	wake_up(&mdev->al_wait);
 =======
+=======
+>>>>>>> v3.18
 	D_ASSERT(device, first <= last);
 	spin_lock_irqsave(&device->al_lock, flags);
 
@@ -689,6 +806,9 @@ void drbd_al_complete_io(struct drbd_device *device, struct drbd_interval *i)
 	}
 	spin_unlock_irqrestore(&device->al_lock, flags);
 	wake_up(&device->al_wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -711,6 +831,7 @@ static unsigned int al_extent_to_bm_page(unsigned int al_enr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int rs_extent_to_bm_page(unsigned int rs_enr)
 {
 	return rs_enr >>
@@ -728,6 +849,8 @@ static sector_t al_tr_number_to_on_disk_sector(struct drbd_conf *mdev)
 	/* transaction number, modulo on-disk ring buffer wrap around */
 	unsigned int t = mdev->al_tr_number % (mdev->ldev->md.al_size_4k);
 =======
+=======
+>>>>>>> v3.18
 static sector_t al_tr_number_to_on_disk_sector(struct drbd_device *device)
 {
 	const unsigned int stripes = device->ldev->md.al_stripes;
@@ -735,6 +858,9 @@ static sector_t al_tr_number_to_on_disk_sector(struct drbd_device *device)
 
 	/* transaction number, modulo on-disk ring buffer wrap around */
 	unsigned int t = device->al_tr_number % (device->ldev->md.al_size_4k);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* ... to aligned 4k on disk block */
@@ -745,16 +871,22 @@ static sector_t al_tr_number_to_on_disk_sector(struct drbd_device *device)
 
 	/* ... plus offset to the on disk position */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mdev->ldev->md.md_offset + mdev->ldev->md.al_offset + t;
 }
 
 static int
 _al_write_transaction(struct drbd_conf *mdev)
 =======
+=======
+>>>>>>> v3.18
 	return device->ldev->md.md_offset + device->ldev->md.al_offset + t;
 }
 
 int al_write_transaction(struct drbd_device *device)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct al_transaction_on_disk *buffer;
@@ -766,9 +898,15 @@ int al_write_transaction(struct drbd_device *device)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!get_ldev(mdev)) {
 		dev_err(DEV, "disk is %s, cannot start al transaction\n",
 			drbd_disk_str(mdev->state.disk));
+=======
+	if (!get_ldev(device)) {
+		drbd_err(device, "disk is %s, cannot start al transaction\n",
+			drbd_disk_str(device->state.disk));
+>>>>>>> v3.18
 =======
 	if (!get_ldev(device)) {
 		drbd_err(device, "disk is %s, cannot start al transaction\n",
@@ -778,6 +916,7 @@ int al_write_transaction(struct drbd_device *device)
 	}
 
 	/* The bitmap write may have failed, causing a state change. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (mdev->state.disk < D_INCONSISTENT) {
 		dev_err(DEV,
@@ -792,6 +931,8 @@ int al_write_transaction(struct drbd_device *device)
 		dev_err(DEV, "disk failed while waiting for md_io buffer\n");
 		put_ldev(mdev);
 =======
+=======
+>>>>>>> v3.18
 	if (device->state.disk < D_INCONSISTENT) {
 		drbd_err(device,
 			"disk is %s, cannot write al transaction\n",
@@ -805,6 +946,9 @@ int al_write_transaction(struct drbd_device *device)
 	if (!buffer) {
 		drbd_err(device, "disk failed while waiting for md_io buffer\n");
 		put_ldev(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENODEV;
 	}
@@ -812,7 +956,11 @@ int al_write_transaction(struct drbd_device *device)
 	memset(buffer, 0, sizeof(*buffer));
 	buffer->magic = cpu_to_be32(DRBD_AL_MAGIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buffer->tr_number = cpu_to_be32(mdev->al_tr_number);
+=======
+	buffer->tr_number = cpu_to_be32(device->al_tr_number);
+>>>>>>> v3.18
 =======
 	buffer->tr_number = cpu_to_be32(device->al_tr_number);
 >>>>>>> v3.18
@@ -824,8 +972,13 @@ int al_write_transaction(struct drbd_device *device)
 	 * lc_try_lock_for_transaction() --, someone may still
 	 * be in the process of changing it. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&mdev->al_lock);
 	list_for_each_entry(e, &mdev->act_log->to_be_changed, list) {
+=======
+	spin_lock_irq(&device->al_lock);
+	list_for_each_entry(e, &device->act_log->to_be_changed, list) {
+>>>>>>> v3.18
 =======
 	spin_lock_irq(&device->al_lock);
 	list_for_each_entry(e, &device->act_log->to_be_changed, list) {
@@ -838,17 +991,23 @@ int al_write_transaction(struct drbd_device *device)
 		buffer->update_extent_nr[i] = cpu_to_be32(e->lc_new_number);
 		if (e->lc_number != LC_FREE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			drbd_bm_mark_for_writeout(mdev,
 					al_extent_to_bm_page(e->lc_number));
 		i++;
 	}
 	spin_unlock_irq(&mdev->al_lock);
 =======
+=======
+>>>>>>> v3.18
 			drbd_bm_mark_for_writeout(device,
 					al_extent_to_bm_page(e->lc_number));
 		i++;
 	}
 	spin_unlock_irq(&device->al_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BUG_ON(i > AL_UPDATES_PER_TRANSACTION);
 
@@ -859,6 +1018,7 @@ int al_write_transaction(struct drbd_device *device)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buffer->context_size = cpu_to_be16(mdev->act_log->nr_elements);
 	buffer->context_start_slot_nr = cpu_to_be16(mdev->al_tr_cycle);
 
@@ -868,6 +1028,8 @@ int al_write_transaction(struct drbd_device *device)
 		unsigned idx = mdev->al_tr_cycle + i;
 		extent_nr = lc_element_by_index(mdev->act_log, idx)->lc_number;
 =======
+=======
+>>>>>>> v3.18
 	buffer->context_size = cpu_to_be16(device->act_log->nr_elements);
 	buffer->context_start_slot_nr = cpu_to_be16(device->al_tr_cycle);
 
@@ -876,6 +1038,9 @@ int al_write_transaction(struct drbd_device *device)
 	for (i = 0; i < mx; i++) {
 		unsigned idx = device->al_tr_cycle + i;
 		extent_nr = lc_element_by_index(device->act_log, idx)->lc_number;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		buffer->context[i] = cpu_to_be32(extent_nr);
 	}
@@ -883,24 +1048,34 @@ int al_write_transaction(struct drbd_device *device)
 		buffer->context[i] = cpu_to_be32(LC_FREE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mdev->al_tr_cycle += AL_CONTEXT_PER_TRANSACTION;
 	if (mdev->al_tr_cycle >= mdev->act_log->nr_elements)
 		mdev->al_tr_cycle = 0;
 
 	sector = al_tr_number_to_on_disk_sector(mdev);
 =======
+=======
+>>>>>>> v3.18
 	device->al_tr_cycle += AL_CONTEXT_PER_TRANSACTION;
 	if (device->al_tr_cycle >= device->act_log->nr_elements)
 		device->al_tr_cycle = 0;
 
 	sector = al_tr_number_to_on_disk_sector(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	crc = crc32c(0, buffer, 4096);
 	buffer->crc32c = cpu_to_be32(crc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (drbd_bm_write_hinted(mdev))
+=======
+	if (drbd_bm_write_hinted(device))
+>>>>>>> v3.18
 =======
 	if (drbd_bm_write_hinted(device))
 >>>>>>> v3.18
@@ -908,6 +1083,7 @@ int al_write_transaction(struct drbd_device *device)
 	else {
 		bool write_al_updates;
 		rcu_read_lock();
+<<<<<<< HEAD
 <<<<<<< HEAD
 		write_al_updates = rcu_dereference(mdev->ldev->disk_conf)->al_updates;
 		rcu_read_unlock();
@@ -919,6 +1095,8 @@ int al_write_transaction(struct drbd_device *device)
 				mdev->al_tr_number++;
 				mdev->al_writ_cnt++;
 =======
+=======
+>>>>>>> v3.18
 		write_al_updates = rcu_dereference(device->ldev->disk_conf)->al_updates;
 		rcu_read_unlock();
 		if (write_al_updates) {
@@ -928,14 +1106,22 @@ int al_write_transaction(struct drbd_device *device)
 			} else {
 				device->al_tr_number++;
 				device->al_writ_cnt++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drbd_md_put_buffer(mdev);
 	put_ldev(mdev);
+=======
+	drbd_md_put_buffer(device);
+	put_ldev(device);
+>>>>>>> v3.18
 =======
 	drbd_md_put_buffer(device);
 	put_ldev(device);
@@ -944,6 +1130,7 @@ int al_write_transaction(struct drbd_device *device)
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int w_al_write_transaction(struct drbd_work *w, int unused)
@@ -986,6 +1173,8 @@ static int _try_lc_del(struct drbd_conf *mdev, struct lc_element *al_ext)
 		lc_del(mdev->act_log, al_ext);
 	spin_unlock_irq(&mdev->al_lock);
 =======
+=======
+>>>>>>> v3.18
 static int _try_lc_del(struct drbd_device *device, struct lc_element *al_ext)
 {
 	int rv;
@@ -995,6 +1184,9 @@ static int _try_lc_del(struct drbd_device *device, struct lc_element *al_ext)
 	if (likely(rv))
 		lc_del(device->act_log, al_ext);
 	spin_unlock_irq(&device->al_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rv;
@@ -1003,7 +1195,11 @@ static int _try_lc_del(struct drbd_device *device, struct lc_element *al_ext)
 /**
  * drbd_al_shrink() - Removes all active extents form the activity log
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -1011,6 +1207,7 @@ static int _try_lc_del(struct drbd_device *device, struct lc_element *al_ext)
  * Removes all active extents form the activity log, waiting until
  * the reference count of each entry dropped to 0 first, of course.
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * You need to lock mdev->act_log with lc_try_lock() / lc_unlock()
  */
@@ -1020,10 +1217,16 @@ void drbd_al_shrink(struct drbd_conf *mdev)
  */
 void drbd_al_shrink(struct drbd_device *device)
 >>>>>>> v3.18
+=======
+ * You need to lock device->act_log with lc_try_lock() / lc_unlock()
+ */
+void drbd_al_shrink(struct drbd_device *device)
+>>>>>>> v3.18
 {
 	struct lc_element *al_ext;
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	D_ASSERT(test_bit(__LC_LOCKED, &mdev->act_log->flags));
 
@@ -1071,6 +1274,8 @@ static int w_update_odbm(struct drbd_work *w, int unused)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	D_ASSERT(device, test_bit(__LC_LOCKED, &device->act_log->flags));
 
 	for (i = 0; i < device->act_log->nr_elements; i++) {
@@ -1109,12 +1314,16 @@ static const char *drbd_change_sync_fname[] = {
 	[SET_IN_SYNC] = "drbd_set_in_sync",
 	[SET_OUT_OF_SYNC] = "drbd_set_out_of_sync"
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* ATTENTION. The AL's extents are 4MB each, while the extents in the
  * resync LRU-cache are 16MB each.
  * The caller of this function has to hold an get_ldev() reference.
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * TODO will be obsoleted once we have a caching lru of the on disk bitmap
  */
@@ -1148,6 +1357,8 @@ static void drbd_try_clear_on_disk_bm(struct drbd_conf *mdev, sector_t sector,
 				     ext->rs_failed, count,
 				     drbd_conn_str(mdev->state.conn));
 =======
+=======
+>>>>>>> v3.18
  * Adjusts the caching members ->rs_left (success) or ->rs_failed (!success),
  * potentially pulling in (and recounting the corresponding bits)
  * this resync extent into the resync extent lru cache.
@@ -1191,6 +1402,9 @@ static bool update_rs_extent(struct drbd_device *device,
 				     ext->lce.lc_number, ext->rs_left,
 				     ext->rs_failed, count,
 				     drbd_conn_str(device->state.conn));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				/* We don't expect to be able to clear more bits
@@ -1200,7 +1414,11 @@ static bool update_rs_extent(struct drbd_device *device,
 				 * delayed local completion of an application write),
 				 * try to fix it up by recounting here. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ext->rs_left = drbd_bm_e_weight(mdev, enr);
+=======
+				ext->rs_left = drbd_bm_e_weight(device, enr);
+>>>>>>> v3.18
 =======
 				ext->rs_left = drbd_bm_e_weight(device, enr);
 >>>>>>> v3.18
@@ -1213,9 +1431,15 @@ static bool update_rs_extent(struct drbd_device *device,
 			 * something outside the resync lru_cache in sync.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int rs_left = drbd_bm_e_weight(mdev, enr);
 			if (ext->flags != 0) {
 				dev_warn(DEV, "changing resync lce: %d[%u;%02lx]"
+=======
+			int rs_left = drbd_bm_e_weight(device, enr);
+			if (ext->flags != 0) {
+				drbd_warn(device, "changing resync lce: %d[%u;%02lx]"
+>>>>>>> v3.18
 =======
 			int rs_left = drbd_bm_e_weight(device, enr);
 			if (ext->flags != 0) {
@@ -1228,7 +1452,11 @@ static bool update_rs_extent(struct drbd_device *device,
 			}
 			if (ext->rs_failed) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_warn(DEV, "Kicking resync_lru element enr=%u "
+=======
+				drbd_warn(device, "Kicking resync_lru element enr=%u "
+>>>>>>> v3.18
 =======
 				drbd_warn(device, "Kicking resync_lru element enr=%u "
 >>>>>>> v3.18
@@ -1236,6 +1464,7 @@ static bool update_rs_extent(struct drbd_device *device,
 				     ext->lce.lc_number, ext->rs_failed);
 			}
 			ext->rs_left = rs_left;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			ext->rs_failed = success ? 0 : count;
 			/* we don't keep a persistent log of the resync lru,
@@ -1279,6 +1508,8 @@ void drbd_advance_rs_marks(struct drbd_conf *mdev, unsigned long still_to_go)
 			mdev->rs_mark_left[next] = still_to_go;
 			mdev->rs_last_mark = next;
 =======
+=======
+>>>>>>> v3.18
 			ext->rs_failed = (mode == RECORD_RS_FAILED) ? count : 0;
 			/* we don't keep a persistent log of the resync lru,
 			 * we can commit any change right away. */
@@ -1314,11 +1545,15 @@ void drbd_advance_rs_marks(struct drbd_device *device, unsigned long still_to_go
 			device->rs_mark_time[next] = now;
 			device->rs_mark_left[next] = still_to_go;
 			device->rs_last_mark = next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* clear the bit corresponding to the piece of storage in question:
  * size byte of data starting from sector.  Only clear a bits of the affected
@@ -1422,6 +1657,8 @@ int __drbd_set_out_of_sync(struct drbd_conf *mdev, sector_t sector, int size,
 
 	nr_sectors = drbd_get_capacity(mdev->this_bdev);
 =======
+=======
+>>>>>>> v3.18
 /* It is called lazy update, so don't do write-out too often. */
 static bool lazy_bitmap_update_due(struct drbd_device *device)
 {
@@ -1523,6 +1760,9 @@ int __drbd_change_sync(struct drbd_device *device, sector_t sector, int size,
 		return 0; /* no disk, no metadata, no bitmap to manipulate bits in */
 
 	nr_sectors = drbd_get_capacity(device->this_bdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	esector = sector + (size >> 9) - 1;
 
@@ -1531,6 +1771,7 @@ int __drbd_change_sync(struct drbd_device *device, sector_t sector, int size,
 	if (!expect(esector < nr_sectors))
 		esector = nr_sectors - 1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* we set it out of sync,
 	 * we do not need to round anything here */
@@ -1552,6 +1793,8 @@ out:
 	put_ldev(mdev);
 
 =======
+=======
+>>>>>>> v3.18
 	lbnr = BM_SECT_TO_BIT(nr_sectors-1);
 
 	if (mode == SET_IN_SYNC) {
@@ -1574,13 +1817,20 @@ out:
 	count = update_sync_bits(device, sbnr, ebnr, mode);
 out:
 	put_ldev(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return count;
 }
 
 static
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct bm_extent *_bme_get(struct drbd_conf *mdev, unsigned int enr)
+=======
+struct bm_extent *_bme_get(struct drbd_device *device, unsigned int enr)
+>>>>>>> v3.18
 =======
 struct bm_extent *_bme_get(struct drbd_device *device, unsigned int enr)
 >>>>>>> v3.18
@@ -1590,6 +1840,7 @@ struct bm_extent *_bme_get(struct drbd_device *device, unsigned int enr)
 	int wakeup = 0;
 	unsigned long rs_flags;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irq(&mdev->al_lock);
 	if (mdev->resync_locked > mdev->resync->nr_elements/2) {
@@ -1618,6 +1869,8 @@ struct bm_extent *_bme_get(struct drbd_device *device, unsigned int enr)
 		if (rs_flags & LC_STARVING)
 			dev_warn(DEV, "Have to wait for element"
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irq(&device->al_lock);
 	if (device->resync_locked > device->resync->nr_elements/2) {
 		spin_unlock_irq(&device->al_lock);
@@ -1644,6 +1897,9 @@ struct bm_extent *_bme_get(struct drbd_device *device, unsigned int enr)
 	if (!bm_ext) {
 		if (rs_flags & LC_STARVING)
 			drbd_warn(device, "Have to wait for element"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			     " (resync LRU too small?)\n");
 		BUG_ON(rs_flags & LC_LOCKED);
@@ -1653,6 +1909,7 @@ struct bm_extent *_bme_get(struct drbd_device *device, unsigned int enr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int _is_in_al(struct drbd_conf *mdev, unsigned int enr)
 {
 	int rv;
@@ -1661,6 +1918,8 @@ static int _is_in_al(struct drbd_conf *mdev, unsigned int enr)
 	rv = lc_is_used(mdev->act_log, enr);
 	spin_unlock_irq(&mdev->al_lock);
 =======
+=======
+>>>>>>> v3.18
 static int _is_in_al(struct drbd_device *device, unsigned int enr)
 {
 	int rv;
@@ -1668,6 +1927,9 @@ static int _is_in_al(struct drbd_device *device, unsigned int enr)
 	spin_lock_irq(&device->al_lock);
 	rv = lc_is_used(device->act_log, enr);
 	spin_unlock_irq(&device->al_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rv;
@@ -1676,7 +1938,11 @@ static int _is_in_al(struct drbd_device *device, unsigned int enr)
 /**
  * drbd_rs_begin_io() - Gets an extent in the resync LRU cache and sets it to BME_LOCKED
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -1685,7 +1951,11 @@ static int _is_in_al(struct drbd_device *device, unsigned int enr)
  * This functions sleeps on al_wait. Returns 0 on success, -EINTR if interrupted.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_rs_begin_io(struct drbd_conf *mdev, sector_t sector)
+=======
+int drbd_rs_begin_io(struct drbd_device *device, sector_t sector)
+>>>>>>> v3.18
 =======
 int drbd_rs_begin_io(struct drbd_device *device, sector_t sector)
 >>>>>>> v3.18
@@ -1694,6 +1964,7 @@ int drbd_rs_begin_io(struct drbd_device *device, sector_t sector)
 	struct bm_extent *bm_ext;
 	int i, sig;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int sa = 200; /* Step aside 200 times, then grab the extent and let app-IO wait.
 			 200 times -> 20 seconds. */
 
@@ -1701,11 +1972,16 @@ retry:
 	sig = wait_event_interruptible(mdev->al_wait,
 			(bm_ext = _bme_get(mdev, enr)));
 =======
+=======
+>>>>>>> v3.18
 	bool sa;
 
 retry:
 	sig = wait_event_interruptible(device->al_wait,
 			(bm_ext = _bme_get(device, enr)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sig)
 		return -EINTR;
@@ -1713,6 +1989,7 @@ retry:
 	if (test_bit(BME_LOCKED, &bm_ext->flags))
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < AL_EXT_PER_BM_SECT; i++) {
 		sig = wait_event_interruptible(mdev->al_wait,
@@ -1728,6 +2005,8 @@ retry:
 			}
 			spin_unlock_irq(&mdev->al_lock);
 =======
+=======
+>>>>>>> v3.18
 	/* step aside only while we are above c-min-rate; unless disabled. */
 	sa = drbd_rs_c_min_rate_throttle(device);
 
@@ -1744,15 +2023,21 @@ retry:
 				wake_up(&device->al_wait);
 			}
 			spin_unlock_irq(&device->al_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (sig)
 				return -EINTR;
 			if (schedule_timeout_interruptible(HZ/10))
 				return -EINTR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (sa && --sa == 0)
 				dev_warn(DEV,"drbd_rs_begin_io() stepped aside for 20sec."
 					 "Resync stalled?\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			goto retry;
@@ -1765,7 +2050,11 @@ retry:
 /**
  * drbd_try_rs_begin_io() - Gets an extent in the resync LRU cache, does not sleep
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -1776,7 +2065,11 @@ retry:
  * if there is still application IO going on in this area.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_try_rs_begin_io(struct drbd_conf *mdev, sector_t sector)
+=======
+int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
+>>>>>>> v3.18
 =======
 int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 >>>>>>> v3.18
@@ -1787,10 +2080,13 @@ int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 	struct bm_extent *bm_ext;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_lock_irq(&mdev->al_lock);
 	if (mdev->resync_wenr != LC_FREE && mdev->resync_wenr != enr) {
 =======
+=======
+>>>>>>> v3.18
 	bool throttle = drbd_rs_should_slow_down(device, sector, true);
 
 	/* If we need to throttle, a half-locked (only marked BME_NO_WRITES,
@@ -1803,6 +2099,9 @@ int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 
 	spin_lock_irq(&device->al_lock);
 	if (device->resync_wenr != LC_FREE && device->resync_wenr != enr) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* in case you have very heavy scattered io, it may
 		 * stall the syncer undefined if we give up the ref count
@@ -1817,6 +2116,7 @@ int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 		 * the lc_put here...
 		 * we also have to wake_up
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		e = lc_find(mdev->resync, mdev->resync_wenr);
 		bm_ext = e ? lc_entry(e, struct bm_extent, lce) : NULL;
@@ -1835,6 +2135,8 @@ int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 	/* TRY. */
 	e = lc_try_get(mdev->resync, enr);
 =======
+=======
+>>>>>>> v3.18
 		e = lc_find(device->resync, device->resync_wenr);
 		bm_ext = e ? lc_entry(e, struct bm_extent, lce) : NULL;
 		if (bm_ext) {
@@ -1853,6 +2155,9 @@ int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 	}
 	/* TRY. */
 	e = lc_try_get(device->resync, enr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bm_ext = e ? lc_entry(e, struct bm_extent, lce) : NULL;
 	if (bm_ext) {
@@ -1860,7 +2165,11 @@ int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 			goto proceed;
 		if (!test_and_set_bit(BME_NO_WRITES, &bm_ext->flags)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mdev->resync_locked++;
+=======
+			device->resync_locked++;
+>>>>>>> v3.18
 =======
 			device->resync_locked++;
 >>>>>>> v3.18
@@ -1871,7 +2180,11 @@ int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 			 * drop the extra reference. */
 			bm_ext->lce.refcnt--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			D_ASSERT(bm_ext->lce.refcnt > 0);
+=======
+			D_ASSERT(device, bm_ext->lce.refcnt > 0);
+>>>>>>> v3.18
 =======
 			D_ASSERT(device, bm_ext->lce.refcnt > 0);
 >>>>>>> v3.18
@@ -1879,6 +2192,7 @@ int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 		goto check_al;
 	} else {
 		/* do we rather want to try later? */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (mdev->resync_locked > mdev->resync->nr_elements-3)
 			goto try_again;
@@ -1890,6 +2204,8 @@ int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 			if (rs_flags & LC_STARVING)
 				dev_warn(DEV, "Have to wait for element"
 =======
+=======
+>>>>>>> v3.18
 		if (device->resync_locked > device->resync->nr_elements-3)
 			goto try_again;
 		/* Do or do not. There is no try. -- Yoda */
@@ -1899,12 +2215,16 @@ int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 			const unsigned long rs_flags = device->resync->flags;
 			if (rs_flags & LC_STARVING)
 				drbd_warn(device, "Have to wait for element"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				     " (resync LRU too small?)\n");
 			BUG_ON(rs_flags & LC_LOCKED);
 			goto try_again;
 		}
 		if (bm_ext->lce.lc_number != enr) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			bm_ext->rs_left = drbd_bm_e_weight(mdev, enr);
 			bm_ext->rs_failed = 0;
@@ -1916,6 +2236,8 @@ int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 		D_ASSERT(bm_ext->lce.refcnt == 1);
 		mdev->resync_locked++;
 =======
+=======
+>>>>>>> v3.18
 			bm_ext->rs_left = drbd_bm_e_weight(device, enr);
 			bm_ext->rs_failed = 0;
 			lc_committed(device->resync);
@@ -1925,13 +2247,20 @@ int drbd_try_rs_begin_io(struct drbd_device *device, sector_t sector)
 		set_bit(BME_NO_WRITES, &bm_ext->flags);
 		D_ASSERT(device, bm_ext->lce.refcnt == 1);
 		device->resync_locked++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto check_al;
 	}
 check_al:
 	for (i = 0; i < AL_EXT_PER_BM_SECT; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (lc_is_used(mdev->act_log, al_enr+i))
+=======
+		if (lc_is_used(device->act_log, al_enr+i))
+>>>>>>> v3.18
 =======
 		if (lc_is_used(device->act_log, al_enr+i))
 >>>>>>> v3.18
@@ -1939,6 +2268,7 @@ check_al:
 	}
 	set_bit(BME_LOCKED, &bm_ext->flags);
 proceed:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mdev->resync_wenr = LC_FREE;
 	spin_unlock_irq(&mdev->al_lock);
@@ -1953,6 +2283,8 @@ try_again:
 
 void drbd_rs_complete_io(struct drbd_conf *mdev, sector_t sector)
 =======
+=======
+>>>>>>> v3.18
 	device->resync_wenr = LC_FREE;
 	spin_unlock_irq(&device->al_lock);
 	return 0;
@@ -1977,6 +2309,9 @@ try_again:
 }
 
 void drbd_rs_complete_io(struct drbd_device *device, sector_t sector)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned int enr = BM_SECT_TO_EXT(sector);
@@ -1984,6 +2319,7 @@ void drbd_rs_complete_io(struct drbd_device *device, sector_t sector)
 	struct bm_extent *bm_ext;
 	unsigned long flags;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irqsave(&mdev->al_lock, flags);
 	e = lc_find(mdev->resync, enr);
@@ -1993,6 +2329,8 @@ void drbd_rs_complete_io(struct drbd_device *device, sector_t sector)
 		if (__ratelimit(&drbd_ratelimit_state))
 			dev_err(DEV, "drbd_rs_complete_io() called, but extent not found\n");
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&device->al_lock, flags);
 	e = lc_find(device->resync, enr);
 	bm_ext = e ? lc_entry(e, struct bm_extent, lce) : NULL;
@@ -2000,14 +2338,22 @@ void drbd_rs_complete_io(struct drbd_device *device, sector_t sector)
 		spin_unlock_irqrestore(&device->al_lock, flags);
 		if (__ratelimit(&drbd_ratelimit_state))
 			drbd_err(device, "drbd_rs_complete_io() called, but extent not found\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
 
 	if (bm_ext->lce.refcnt == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_irqrestore(&mdev->al_lock, flags);
 		dev_err(DEV, "drbd_rs_complete_io(,%llu [=%u]) called, "
+=======
+		spin_unlock_irqrestore(&device->al_lock, flags);
+		drbd_err(device, "drbd_rs_complete_io(,%llu [=%u]) called, "
+>>>>>>> v3.18
 =======
 		spin_unlock_irqrestore(&device->al_lock, flags);
 		drbd_err(device, "drbd_rs_complete_io(,%llu [=%u]) called, "
@@ -2018,6 +2364,7 @@ void drbd_rs_complete_io(struct drbd_device *device, sector_t sector)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lc_put(mdev->resync, &bm_ext->lce) == 0) {
 		bm_ext->flags = 0; /* clear BME_LOCKED, BME_NO_WRITES and BME_PRIORITY */
 		mdev->resync_locked--;
@@ -2026,6 +2373,8 @@ void drbd_rs_complete_io(struct drbd_device *device, sector_t sector)
 
 	spin_unlock_irqrestore(&mdev->al_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	if (lc_put(device->resync, &bm_ext->lce) == 0) {
 		bm_ext->flags = 0; /* clear BME_LOCKED, BME_NO_WRITES and BME_PRIORITY */
 		device->resync_locked--;
@@ -2033,11 +2382,15 @@ void drbd_rs_complete_io(struct drbd_device *device, sector_t sector)
 	}
 
 	spin_unlock_irqrestore(&device->al_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * drbd_rs_cancel_all() - Removes all extents from the resync LRU (even BME_LOCKED)
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @mdev:	DRBD device.
  */
@@ -2054,6 +2407,8 @@ void drbd_rs_cancel_all(struct drbd_conf *mdev)
 	spin_unlock_irq(&mdev->al_lock);
 	wake_up(&mdev->al_wait);
 =======
+=======
+>>>>>>> v3.18
  * @device:	DRBD device.
  */
 void drbd_rs_cancel_all(struct drbd_device *device)
@@ -2068,13 +2423,20 @@ void drbd_rs_cancel_all(struct drbd_device *device)
 	device->resync_wenr = LC_FREE;
 	spin_unlock_irq(&device->al_lock);
 	wake_up(&device->al_wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * drbd_rs_del_all() - Gracefully remove all extents from the resync LRU
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -2083,7 +2445,11 @@ void drbd_rs_cancel_all(struct drbd_device *device)
  * not zero.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_rs_del_all(struct drbd_conf *mdev)
+=======
+int drbd_rs_del_all(struct drbd_device *device)
+>>>>>>> v3.18
 =======
 int drbd_rs_del_all(struct drbd_device *device)
 >>>>>>> v3.18
@@ -2092,6 +2458,7 @@ int drbd_rs_del_all(struct drbd_device *device)
 	struct bm_extent *bm_ext;
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irq(&mdev->al_lock);
 
@@ -2198,6 +2565,8 @@ void drbd_rs_failed_io(struct drbd_conf *mdev, sector_t sector, int size)
 		wake_up(&mdev->al_wait);
 }
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irq(&device->al_lock);
 
 	if (get_ldev_if_state(device, D_FAILED)) {
@@ -2236,4 +2605,7 @@ void drbd_rs_failed_io(struct drbd_conf *mdev, sector_t sector, int size)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

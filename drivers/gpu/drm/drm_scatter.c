@@ -35,6 +35,10 @@
 #include <linux/slab.h>
 #include <drm/drmP.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "drm_legacy.h"
+>>>>>>> v3.18
 =======
 #include "drm_legacy.h"
 >>>>>>> v3.18
@@ -51,7 +55,11 @@ static inline void *drm_vmalloc_dma(unsigned long size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drm_sg_cleanup(struct drm_sg_mem * entry)
+=======
+static void drm_sg_cleanup(struct drm_sg_mem * entry)
+>>>>>>> v3.18
 =======
 static void drm_sg_cleanup(struct drm_sg_mem * entry)
 >>>>>>> v3.18
@@ -73,7 +81,10 @@ static void drm_sg_cleanup(struct drm_sg_mem * entry)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void drm_legacy_sg_cleanup(struct drm_device *dev)
 {
 	if (drm_core_check_feature(dev, DRIVER_SG) && dev->sg &&
@@ -82,6 +93,9 @@ void drm_legacy_sg_cleanup(struct drm_device *dev)
 		dev->sg = NULL;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef _LP64
 # define ScatterHandle(x) (unsigned int)((x >> 32) + (x & ((1L << 32) - 1)))
@@ -90,13 +104,19 @@ void drm_legacy_sg_cleanup(struct drm_device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_sg_alloc(struct drm_device *dev, struct drm_scatter_gather * request)
 {
 =======
+=======
+>>>>>>> v3.18
 int drm_legacy_sg_alloc(struct drm_device *dev, void *data,
 			struct drm_file *file_priv)
 {
 	struct drm_scatter_gather *request = data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct drm_sg_mem *entry;
 	unsigned long pages, i, j;
@@ -104,6 +124,12 @@ int drm_legacy_sg_alloc(struct drm_device *dev, void *data,
 	DRM_DEBUG("\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (drm_core_check_feature(dev, DRIVER_MODESET))
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (drm_core_check_feature(dev, DRIVER_MODESET))
 		return -EINVAL;
@@ -214,6 +240,7 @@ int drm_legacy_sg_alloc(struct drm_device *dev, void *data,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_sg_alloc_ioctl(struct drm_device *dev, void *data,
 		       struct drm_file *file_priv)
 {
@@ -230,6 +257,8 @@ int drm_sg_free(struct drm_device *dev, void *data,
 	struct drm_sg_mem *entry;
 
 =======
+=======
+>>>>>>> v3.18
 int drm_legacy_sg_free(struct drm_device *dev, void *data,
 		       struct drm_file *file_priv)
 {
@@ -239,6 +268,9 @@ int drm_legacy_sg_free(struct drm_device *dev, void *data,
 	if (drm_core_check_feature(dev, DRIVER_MODESET))
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!drm_core_check_feature(dev, DRIVER_SG))
 		return -EINVAL;

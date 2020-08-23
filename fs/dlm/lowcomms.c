@@ -53,7 +53,10 @@
 #include <linux/sctp.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sctp.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <net/sctp/sctp.h>
@@ -130,6 +133,10 @@ struct connection {
 	struct work_struct rwork; /* Receive workqueue */
 	struct work_struct swork; /* Send workqueue */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool try_new_addr;
+>>>>>>> v3.18
 =======
 	bool try_new_addr;
 >>>>>>> v3.18
@@ -152,6 +159,10 @@ struct dlm_node_addr {
 	int nodeid;
 	int addr_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int curr_addr_index;
+>>>>>>> v3.18
 =======
 	int curr_addr_index;
 >>>>>>> v3.18
@@ -322,7 +333,11 @@ static int addr_compare(struct sockaddr_storage *x, struct sockaddr_storage *y)
 
 static int nodeid_to_addr(int nodeid, struct sockaddr_storage *sas_out,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct sockaddr *sa_out)
+=======
+			  struct sockaddr *sa_out, bool try_new_addr)
+>>>>>>> v3.18
 =======
 			  struct sockaddr *sa_out, bool try_new_addr)
 >>>>>>> v3.18
@@ -336,9 +351,12 @@ static int nodeid_to_addr(int nodeid, struct sockaddr_storage *sas_out,
 	spin_lock(&dlm_node_addrs_spin);
 	na = find_node_addr(nodeid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (na && na->addr_count)
 		memcpy(&sas, na->addr[0], sizeof(struct sockaddr_storage));
 =======
+=======
+>>>>>>> v3.18
 	if (na && na->addr_count) {
 		if (try_new_addr) {
 			na->curr_addr_index++;
@@ -349,6 +367,9 @@ static int nodeid_to_addr(int nodeid, struct sockaddr_storage *sas_out,
 		memcpy(&sas, na->addr[na->curr_addr_index ],
 			sizeof(struct sockaddr_storage));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&dlm_node_addrs_spin);
 
@@ -382,6 +403,10 @@ static int addr_to_nodeid(struct sockaddr_storage *addr, int *nodeid)
 	struct dlm_node_addr *na;
 	int rv = -EEXIST;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int addr_i;
+>>>>>>> v3.18
 =======
 	int addr_i;
 >>>>>>> v3.18
@@ -392,6 +417,7 @@ static int addr_to_nodeid(struct sockaddr_storage *addr, int *nodeid)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!addr_compare(na->addr[0], addr))
 			continue;
 
@@ -400,6 +426,8 @@ static int addr_to_nodeid(struct sockaddr_storage *addr, int *nodeid)
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 		for (addr_i = 0; addr_i < na->addr_count; addr_i++) {
 			if (addr_compare(na->addr[addr_i], addr)) {
 				*nodeid = na->nodeid;
@@ -409,6 +437,9 @@ static int addr_to_nodeid(struct sockaddr_storage *addr, int *nodeid)
 		}
 	}
 unlock:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&dlm_node_addrs_spin);
 	return rv;
@@ -457,7 +488,11 @@ int dlm_lowcomms_addr(int nodeid, struct sockaddr_storage *addr, int len)
 
 /* Data available on socket or listen socket received a connect */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void lowcomms_data_ready(struct sock *sk, int count_unused)
+=======
+static void lowcomms_data_ready(struct sock *sk)
+>>>>>>> v3.18
 =======
 static void lowcomms_data_ready(struct sock *sk)
 >>>>>>> v3.18
@@ -610,9 +645,12 @@ static void sctp_send_shutdown(sctp_assoc_t associd)
 static void sctp_init_failed_foreach(struct connection *con)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	con->sctp_assoc = 0;
 	if (test_and_clear_bit(CF_CONNECT_PENDING, &con->flags)) {
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Don't try to recover base con and handle race where the
@@ -630,6 +668,9 @@ static void sctp_init_failed_foreach(struct connection *con)
 	con->try_new_addr = true;
 	con->sctp_assoc = 0;
 	if (test_and_clear_bit(CF_INIT_PENDING, &con->flags)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!test_and_set_bit(CF_WRITE_PENDING, &con->flags))
 			queue_work(send_workqueue, &con->swork);
@@ -648,7 +689,10 @@ static void sctp_init_failed(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void retry_failed_sctp_send(struct connection *recv_con,
 				   struct sctp_send_failed *sn_send_failed,
 				   char *buf)
@@ -692,6 +736,9 @@ static void retry_failed_sctp_send(struct connection *recv_con,
 		sctp_init_failed_foreach(con);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Something happened to an association */
 static void process_sctp_notification(struct connection *con,
@@ -699,11 +746,14 @@ static void process_sctp_notification(struct connection *con,
 {
 	union sctp_notification *sn = (union sctp_notification *)buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (sn->sn_header.sn_type == SCTP_ASSOC_CHANGE) {
 		switch (sn->sn_assoc_change.sac_state) {
 
 =======
+=======
+>>>>>>> v3.18
 	struct linger linger;
 
 	switch (sn->sn_header.sn_type) {
@@ -712,6 +762,9 @@ static void process_sctp_notification(struct connection *con,
 		break;
 	case SCTP_ASSOC_CHANGE:
 		switch (sn->sn_assoc_change.sac_state) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case SCTP_COMM_UP:
 		case SCTP_RESTART:
@@ -771,17 +824,23 @@ static void process_sctp_notification(struct connection *con,
 
 			/* Peel off a new sock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sctp_lock_sock(con->sock->sk);
 			ret = sctp_do_peeloff(con->sock->sk,
 				sn->sn_assoc_change.sac_assoc_id,
 				&new_con->sock);
 			sctp_release_sock(con->sock->sk);
 =======
+=======
+>>>>>>> v3.18
 			lock_sock(con->sock->sk);
 			ret = sctp_do_peeloff(con->sock->sk,
 				sn->sn_assoc_change.sac_assoc_id,
 				&new_con->sock);
 			release_sock(con->sock->sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ret < 0) {
 				log_print("Can't peel off a socket for "
@@ -793,6 +852,7 @@ static void process_sctp_notification(struct connection *con,
 			add_sock(new_con->sock, new_con);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			log_print("connecting to %d sctp association %d",
 				 nodeid, (int)sn->sn_assoc_change.sac_assoc_id);
 
@@ -800,6 +860,8 @@ static void process_sctp_notification(struct connection *con,
 			clear_bit(CF_CONNECT_PENDING, &new_con->flags);
 			clear_bit(CF_INIT_PENDING, &con->flags);
 =======
+=======
+>>>>>>> v3.18
 			linger.l_onoff = 1;
 			linger.l_linger = 0;
 			ret = kernel_setsockopt(new_con->sock, SOL_SOCKET, SO_LINGER,
@@ -815,6 +877,9 @@ static void process_sctp_notification(struct connection *con,
 			/* Send any pending writes */
 			clear_bit(CF_CONNECT_PENDING, &new_con->flags);
 			clear_bit(CF_INIT_PENDING, &new_con->flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!test_and_set_bit(CF_WRITE_PENDING, &new_con->flags)) {
 				queue_work(send_workqueue, &new_con->swork);
@@ -835,6 +900,7 @@ static void process_sctp_notification(struct connection *con,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* We don't know which INIT failed, so clear the PENDING flags
 		 * on them all.  if assoc_id is zero then it will then try
 		 * again */
@@ -844,10 +910,15 @@ static void process_sctp_notification(struct connection *con,
 			log_print("Can't start SCTP association - retrying");
 			sctp_init_failed();
 =======
+=======
+>>>>>>> v3.18
 		case SCTP_CANT_STR_ASSOC:
 		{
 			/* Will retry init when we get the send failed notification */
 			log_print("Can't start SCTP association - retrying");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -858,6 +929,11 @@ static void process_sctp_notification(struct connection *con,
 				  sn->sn_assoc_change.sac_state);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	default:
+		; /* fall through */
+>>>>>>> v3.18
 =======
 	default:
 		; /* fall through */
@@ -1122,7 +1198,10 @@ static void free_entry(struct writequeue_entry *e)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * writequeue_entry_complete - try to delete and free write queue entry
  * @e: write queue entry to try to delete
@@ -1141,6 +1220,9 @@ static void writequeue_entry_complete(struct writequeue_entry *e, int completed)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Initiate an SCTP association.
    This is a special case of send_to_sock() in that we don't yet have a
@@ -1162,6 +1244,7 @@ static void sctp_init_assoc(struct connection *con)
 	struct kvec iov[1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_and_set_bit(CF_INIT_PENDING, &con->flags))
 		return;
 
@@ -1172,6 +1255,8 @@ static void sctp_init_assoc(struct connection *con)
 		log_print("no address for nodeid %d", con->nodeid);
 		return;
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&con->sock_mutex);
 	if (test_and_set_bit(CF_INIT_PENDING, &con->flags))
 		goto unlock;
@@ -1180,6 +1265,9 @@ static void sctp_init_assoc(struct connection *con)
 			   con->try_new_addr)) {
 		log_print("no address for nodeid %d", con->nodeid);
 		goto unlock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	base_con = nodeid2con(0, 0);
@@ -1199,7 +1287,11 @@ static void sctp_init_assoc(struct connection *con)
 		spin_unlock(&con->writequeue_lock);
 		log_print("writequeue empty for nodeid %d", con->nodeid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto unlock;
+>>>>>>> v3.18
 =======
 		goto unlock;
 >>>>>>> v3.18
@@ -1209,7 +1301,10 @@ static void sctp_init_assoc(struct connection *con)
 	len = e->len;
 	offset = e->offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&con->writequeue_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1217,7 +1312,10 @@ static void sctp_init_assoc(struct connection *con)
 	iov[0].iov_base = page_address(e->page)+offset;
 	iov[0].iov_len = len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock(&con->writequeue_lock);
 
 	if (rem_addr.ss_family == AF_INET) {
@@ -1227,6 +1325,9 @@ static void sctp_init_assoc(struct connection *con)
 		struct sockaddr_in6 *sin6 = (struct sockaddr_in6 *)&rem_addr;
 		log_print("Trying to connect to %pI6", &sin6->sin6_addr);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cmsg = CMSG_FIRSTHDR(&outmessage);
@@ -1236,8 +1337,14 @@ static void sctp_init_assoc(struct connection *con)
 	sinfo = CMSG_DATA(cmsg);
 	memset(sinfo, 0x00, sizeof(struct sctp_sndrcvinfo));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sinfo->sinfo_ppid = cpu_to_le32(dlm_our_nodeid());
 	outmessage.msg_controllen = cmsg->cmsg_len;
+=======
+	sinfo->sinfo_ppid = cpu_to_le32(con->nodeid);
+	outmessage.msg_controllen = cmsg->cmsg_len;
+	sinfo->sinfo_flags |= SCTP_ADDR_OVER;
+>>>>>>> v3.18
 =======
 	sinfo->sinfo_ppid = cpu_to_le32(con->nodeid);
 	outmessage.msg_controllen = cmsg->cmsg_len;
@@ -1256,6 +1363,7 @@ static void sctp_init_assoc(struct connection *con)
 	else {
 		spin_lock(&con->writequeue_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		e->offset += ret;
 		e->len -= ret;
 
@@ -1266,12 +1374,17 @@ static void sctp_init_assoc(struct connection *con)
 		spin_unlock(&con->writequeue_lock);
 	}
 =======
+=======
+>>>>>>> v3.18
 		writequeue_entry_complete(e, ret);
 		spin_unlock(&con->writequeue_lock);
 	}
 
 unlock:
 	mutex_unlock(&con->sock_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1305,7 +1418,11 @@ static void tcp_connect_to_sock(struct connection *con)
 
 	memset(&saddr, 0, sizeof(saddr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = nodeid_to_addr(con->nodeid, &saddr, NULL);
+=======
+	result = nodeid_to_addr(con->nodeid, &saddr, NULL, false);
+>>>>>>> v3.18
 =======
 	result = nodeid_to_addr(con->nodeid, &saddr, NULL, false);
 >>>>>>> v3.18
@@ -1488,6 +1605,10 @@ static int sctp_listen_for_all(void)
 	struct connection *con = nodeid2con(0, GFP_NOFS);
 	int bufsize = NEEDED_RMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int one = 1;
+>>>>>>> v3.18
 =======
 	int one = 1;
 >>>>>>> v3.18
@@ -1526,12 +1647,18 @@ static int sctp_listen_for_all(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	result = kernel_setsockopt(sock, SOL_SCTP, SCTP_NODELAY, (char *)&one,
 				   sizeof(one));
 	if (result < 0)
 		log_print("Could not set SCTP NODELAY error %d\n", result);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Init con struct */
 	sock->sk->sk_user_data = con;
@@ -1739,6 +1866,7 @@ static void send_to_sock(struct connection *con)
 
 		spin_lock(&con->writequeue_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		e->offset += ret;
 		e->len -= ret;
 
@@ -1746,6 +1874,9 @@ static void send_to_sock(struct connection *con)
 			list_del(&e->list);
 			free_entry(e);
 		}
+=======
+		writequeue_entry_complete(e, ret);
+>>>>>>> v3.18
 =======
 		writequeue_entry_complete(e, ret);
 >>>>>>> v3.18

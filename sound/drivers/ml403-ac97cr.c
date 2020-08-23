@@ -1281,7 +1281,12 @@ static int snd_ml403_ac97cr_probe(struct platform_device *pfdev)
 		return -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pfdev->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pfdev->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -1316,8 +1321,11 @@ static int snd_ml403_ac97cr_probe(struct platform_device *pfdev)
 		ml403_ac97cr->capture_irq, dev + 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pfdev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = snd_card_register(card);
@@ -1334,7 +1342,10 @@ static int snd_ml403_ac97cr_remove(struct platform_device *pfdev)
 {
 	snd_card_free(platform_get_drvdata(pfdev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pfdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -10,8 +10,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct key *modsign_keyring;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int mod_verify_sig(const void *mod, unsigned long *_modlen);

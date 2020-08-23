@@ -14,9 +14,15 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum perf_target_errno perf_target__validate(struct perf_target *target)
 {
 	enum perf_target_errno ret = PERF_ERRNO_TARGET__SUCCESS;
+=======
+enum target_errno target__validate(struct target *target)
+{
+	enum target_errno ret = TARGET_ERRNO__SUCCESS;
+>>>>>>> v3.18
 =======
 enum target_errno target__validate(struct target *target)
 {
@@ -30,8 +36,13 @@ enum target_errno target__validate(struct target *target)
 	if (target->tid && target->cpu_list) {
 		target->cpu_list = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret == PERF_ERRNO_TARGET__SUCCESS)
 			ret = PERF_ERRNO_TARGET__PID_OVERRIDE_CPU;
+=======
+		if (ret == TARGET_ERRNO__SUCCESS)
+			ret = TARGET_ERRNO__PID_OVERRIDE_CPU;
+>>>>>>> v3.18
 =======
 		if (ret == TARGET_ERRNO__SUCCESS)
 			ret = TARGET_ERRNO__PID_OVERRIDE_CPU;
@@ -42,8 +53,13 @@ enum target_errno target__validate(struct target *target)
 	if (target->tid && target->uid_str) {
 		target->uid_str = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret == PERF_ERRNO_TARGET__SUCCESS)
 			ret = PERF_ERRNO_TARGET__PID_OVERRIDE_UID;
+=======
+		if (ret == TARGET_ERRNO__SUCCESS)
+			ret = TARGET_ERRNO__PID_OVERRIDE_UID;
+>>>>>>> v3.18
 =======
 		if (ret == TARGET_ERRNO__SUCCESS)
 			ret = TARGET_ERRNO__PID_OVERRIDE_UID;
@@ -54,8 +70,13 @@ enum target_errno target__validate(struct target *target)
 	if (target->uid_str && target->cpu_list) {
 		target->cpu_list = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret == PERF_ERRNO_TARGET__SUCCESS)
 			ret = PERF_ERRNO_TARGET__UID_OVERRIDE_CPU;
+=======
+		if (ret == TARGET_ERRNO__SUCCESS)
+			ret = TARGET_ERRNO__UID_OVERRIDE_CPU;
+>>>>>>> v3.18
 =======
 		if (ret == TARGET_ERRNO__SUCCESS)
 			ret = TARGET_ERRNO__UID_OVERRIDE_CPU;
@@ -66,8 +87,13 @@ enum target_errno target__validate(struct target *target)
 	if (target->tid && target->system_wide) {
 		target->system_wide = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret == PERF_ERRNO_TARGET__SUCCESS)
 			ret = PERF_ERRNO_TARGET__PID_OVERRIDE_SYSTEM;
+=======
+		if (ret == TARGET_ERRNO__SUCCESS)
+			ret = TARGET_ERRNO__PID_OVERRIDE_SYSTEM;
+>>>>>>> v3.18
 =======
 		if (ret == TARGET_ERRNO__SUCCESS)
 			ret = TARGET_ERRNO__PID_OVERRIDE_SYSTEM;
@@ -78,9 +104,12 @@ enum target_errno target__validate(struct target *target)
 	if (target->uid_str && target->system_wide) {
 		target->system_wide = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret == PERF_ERRNO_TARGET__SUCCESS)
 			ret = PERF_ERRNO_TARGET__UID_OVERRIDE_SYSTEM;
 =======
+=======
+>>>>>>> v3.18
 		if (ret == TARGET_ERRNO__SUCCESS)
 			ret = TARGET_ERRNO__UID_OVERRIDE_SYSTEM;
 	}
@@ -90,6 +119,9 @@ enum target_errno target__validate(struct target *target)
 		target->per_thread = false;
 		if (ret == TARGET_ERRNO__SUCCESS)
 			ret = TARGET_ERRNO__SYSTEM_OVERRIDE_THREAD;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -97,7 +129,11 @@ enum target_errno target__validate(struct target *target)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum perf_target_errno perf_target__parse_uid(struct perf_target *target)
+=======
+enum target_errno target__parse_uid(struct target *target)
+>>>>>>> v3.18
 =======
 enum target_errno target__parse_uid(struct target *target)
 >>>>>>> v3.18
@@ -109,7 +145,11 @@ enum target_errno target__parse_uid(struct target *target)
 	target->uid = UINT_MAX;
 	if (str == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return PERF_ERRNO_TARGET__SUCCESS;
+=======
+		return TARGET_ERRNO__SUCCESS;
+>>>>>>> v3.18
 =======
 		return TARGET_ERRNO__SUCCESS;
 >>>>>>> v3.18
@@ -126,7 +166,11 @@ enum target_errno target__parse_uid(struct target *target)
 
 		if (*endptr != '\0')
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return PERF_ERRNO_TARGET__INVALID_UID;
+=======
+			return TARGET_ERRNO__INVALID_UID;
+>>>>>>> v3.18
 =======
 			return TARGET_ERRNO__INVALID_UID;
 >>>>>>> v3.18
@@ -134,6 +178,7 @@ enum target_errno target__parse_uid(struct target *target)
 		getpwuid_r(uid, &pwd, buf, sizeof(buf), &result);
 
 		if (result == NULL)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			return PERF_ERRNO_TARGET__USER_NOT_FOUND;
 	}
@@ -147,6 +192,8 @@ enum target_errno target__parse_uid(struct target *target)
  */
 static const char *perf_target__error_str[] = {
 =======
+=======
+>>>>>>> v3.18
 			return TARGET_ERRNO__USER_NOT_FOUND;
 	}
 
@@ -158,6 +205,9 @@ static const char *perf_target__error_str[] = {
  * This must have a same ordering as the enum target_errno.
  */
 static const char *target__error_str[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"PID/TID switch overriding CPU",
 	"PID/TID switch overriding UID",
@@ -165,6 +215,10 @@ static const char *target__error_str[] = {
 	"PID/TID switch overriding SYSTEM",
 	"UID switch overriding SYSTEM",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	"SYSTEM/CPU switch overriding PER-THREAD",
+>>>>>>> v3.18
 =======
 	"SYSTEM/CPU switch overriding PER-THREAD",
 >>>>>>> v3.18
@@ -173,7 +227,11 @@ static const char *target__error_str[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int perf_target__strerror(struct perf_target *target, int errnum,
+=======
+int target__strerror(struct target *target, int errnum,
+>>>>>>> v3.18
 =======
 int target__strerror(struct target *target, int errnum,
 >>>>>>> v3.18
@@ -197,6 +255,7 @@ int target__strerror(struct target *target, int errnum,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (errnum <  __PERF_ERRNO_TARGET__START ||
 	    errnum >= __PERF_ERRNO_TARGET__END)
 		return -1;
@@ -213,6 +272,8 @@ int target__strerror(struct target *target, int errnum,
 	case PERF_ERRNO_TARGET__INVALID_UID:
 	case PERF_ERRNO_TARGET__USER_NOT_FOUND:
 =======
+=======
+>>>>>>> v3.18
 	if (errnum <  __TARGET_ERRNO__START || errnum >= __TARGET_ERRNO__END)
 		return -1;
 
@@ -227,6 +288,9 @@ int target__strerror(struct target *target, int errnum,
 
 	case TARGET_ERRNO__INVALID_UID:
 	case TARGET_ERRNO__USER_NOT_FOUND:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		snprintf(buf, buflen, msg, target->uid_str);
 		break;

@@ -20,6 +20,10 @@
 __kernel_gettimeofday:
 	.cfi_startproc
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	aghi	%r15,-16
+>>>>>>> v3.18
 =======
 	aghi	%r15,-16
 >>>>>>> v3.18
@@ -33,6 +37,7 @@ __kernel_gettimeofday:
 	tmll	%r4,0x0001			/* pending update ? loop */
 	jnz	0b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stck	48(%r15)			/* Store TOD clock */
 	lg	%r1,48(%r15)
 	sg	%r1,__VDSO_XTIME_STAMP(%r5)	/* TOD - cycle_last */
@@ -43,6 +48,8 @@ __kernel_gettimeofday:
 	clg	%r4,__VDSO_UPD_COUNT(%r5)	/* check update counter */
 	jne	0b
 =======
+=======
+>>>>>>> v3.18
 	stcke	0(%r15)				/* Store TOD clock */
 	lg	%r1,1(%r15)
 	sg	%r1,__VDSO_XTIME_STAMP(%r5)	/* TOD - cycle_last */
@@ -53,6 +60,9 @@ __kernel_gettimeofday:
 	jne	0b
 	lgf	%r5,__VDSO_TK_SHIFT(%r5)	/* Timekeeper shift */
 	srlg	%r1,%r1,0(%r5)			/*  >> tk->shift */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	larl	%r5,5f
 2:	clg	%r1,0(%r5)
@@ -67,6 +77,10 @@ __kernel_gettimeofday:
 	stg	%r0,8(%r2)			/* store tv->tv_usec */
 4:	lghi	%r2,0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	aghi	%r15,16
+>>>>>>> v3.18
 =======
 	aghi	%r15,16
 >>>>>>> v3.18

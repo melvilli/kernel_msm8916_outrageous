@@ -10,7 +10,12 @@
  */
 #define ELF_HWCAP	(elf_hwcap)
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int elf_hwcap;
+=======
+#define ELF_HWCAP2	(elf_hwcap2)
+extern unsigned int elf_hwcap, elf_hwcap2;
+>>>>>>> v3.18
 =======
 #define ELF_HWCAP2	(elf_hwcap2)
 extern unsigned int elf_hwcap, elf_hwcap2;

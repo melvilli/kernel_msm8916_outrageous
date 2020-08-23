@@ -24,6 +24,10 @@
 #include <linux/ctype.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 >>>>>>> v3.18
@@ -41,8 +45,13 @@
  * during the second link stage.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const unsigned long kallsyms_addresses[] __attribute__((weak));
 extern const u8 kallsyms_names[] __attribute__((weak));
+=======
+extern const unsigned long kallsyms_addresses[] __weak;
+extern const u8 kallsyms_names[] __weak;
+>>>>>>> v3.18
 =======
 extern const unsigned long kallsyms_addresses[] __weak;
 extern const u8 kallsyms_names[] __weak;
@@ -56,15 +65,21 @@ extern const unsigned long kallsyms_num_syms
 __attribute__((weak, section(".rodata")));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const u8 kallsyms_token_table[] __attribute__((weak));
 extern const u16 kallsyms_token_index[] __attribute__((weak));
 
 extern const unsigned long kallsyms_markers[] __attribute__((weak));
 =======
+=======
+>>>>>>> v3.18
 extern const u8 kallsyms_token_table[] __weak;
 extern const u16 kallsyms_token_index[] __weak;
 
 extern const unsigned long kallsyms_markers[] __weak;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int is_kernel_inittext(unsigned long addr)
@@ -380,7 +395,11 @@ static int __sprint_symbol(char *buffer, unsigned long address,
 	name = kallsyms_lookup(address, &size, &offset, &modname, buffer);
 	if (!name)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return sprintf(buffer, "0x%lx", address);
+=======
+		return sprintf(buffer, "0x%lx", address - symbol_offset);
+>>>>>>> v3.18
 =======
 		return sprintf(buffer, "0x%lx", address - symbol_offset);
 >>>>>>> v3.18
@@ -585,9 +604,13 @@ static int kallsyms_open(struct inode *inode, struct file *file)
 	 */
 	struct kallsym_iter *iter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	iter = kmalloc(sizeof(*iter), GFP_KERNEL);
+=======
+	iter = __seq_open_private(file, &kallsyms_op, sizeof(*iter));
+>>>>>>> v3.18
 =======
 	iter = __seq_open_private(file, &kallsyms_op, sizeof(*iter));
 >>>>>>> v3.18
@@ -596,12 +619,16 @@ static int kallsyms_open(struct inode *inode, struct file *file)
 	reset_iter(iter, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = seq_open(file, &kallsyms_op);
 	if (ret == 0)
 		((struct seq_file *)file->private_data)->private = iter;
 	else
 		kfree(iter);
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

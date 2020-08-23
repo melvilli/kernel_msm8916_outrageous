@@ -36,6 +36,10 @@
 #include <linux/mutex.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -1261,7 +1265,12 @@ static unsigned int smu_fpoll(struct file *file, poll_table *wait)
 			mask |= POLLIN;
 		spin_unlock_irqrestore(&pp->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} if (pp->mode == smu_file_events) {
+=======
+	}
+	if (pp->mode == smu_file_events) {
+>>>>>>> v3.18
 =======
 	}
 	if (pp->mode == smu_file_events) {

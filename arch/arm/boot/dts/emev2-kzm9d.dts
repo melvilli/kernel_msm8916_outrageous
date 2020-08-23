@@ -2,7 +2,11 @@
  * Device Tree Source for the KZM9D board
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012 Renesas Solutions Corp.
+=======
+ * Copyright (C) 2013 Renesas Solutions Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013 Renesas Solutions Corp.
 >>>>>>> v3.18
@@ -14,12 +18,18 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "emev2.dtsi"
 =======
+=======
+>>>>>>> v3.18
 #include "emev2.dtsi"
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/interrupt-controller/irq.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
@@ -33,8 +43,11 @@
 
 	chosen {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bootargs = "console=tty0 console=ttyS1,115200n81 earlyprintk=serial8250-em.1,115200n81 mem=128M@0x40000000 ignore_loglevel root=/dev/nfs ip=dhcp nfsroot=,rsize=4096,wsize=4096";
 =======
+=======
+>>>>>>> v3.18
 		bootargs = "console=ttyS1,115200n81 ignore_loglevel root=/dev/nfs ip=dhcp";
 	};
 
@@ -102,6 +115,9 @@
 			linux,code = <KEY_4>;
 			gpios = <&gpio0 17 GPIO_ACTIVE_HIGH>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

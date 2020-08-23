@@ -28,6 +28,10 @@ enum display_flags {
 	DISPLAY_FLAGS_INTERLACED	= BIT(8),
 	DISPLAY_FLAGS_DOUBLESCAN	= BIT(9),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DISPLAY_FLAGS_DOUBLECLK		= BIT(10),
+>>>>>>> v3.18
 =======
 	DISPLAY_FLAGS_DOUBLECLK		= BIT(10),
 >>>>>>> v3.18

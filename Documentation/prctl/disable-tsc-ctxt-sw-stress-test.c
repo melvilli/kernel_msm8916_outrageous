@@ -28,7 +28,12 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 uint64_t rdtsc() {
+=======
+static uint64_t rdtsc(void)
+{
+>>>>>>> v3.18
 =======
 static uint64_t rdtsc(void)
 {
@@ -40,7 +45,11 @@ return (uint64_t)hi << 32 | lo;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sigsegv_expect(int sig)
+=======
+static void sigsegv_expect(int sig)
+>>>>>>> v3.18
 =======
 static void sigsegv_expect(int sig)
 >>>>>>> v3.18
@@ -49,7 +58,11 @@ static void sigsegv_expect(int sig)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void segvtask(void)
+=======
+static void segvtask(void)
+>>>>>>> v3.18
 =======
 static void segvtask(void)
 >>>>>>> v3.18
@@ -68,7 +81,11 @@ static void segvtask(void)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sigsegv_fail(int sig)
+=======
+static void sigsegv_fail(int sig)
+>>>>>>> v3.18
 =======
 static void sigsegv_fail(int sig)
 >>>>>>> v3.18
@@ -78,7 +95,11 @@ static void sigsegv_fail(int sig)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rdtsctask(void)
+=======
+static void rdtsctask(void)
+>>>>>>> v3.18
 =======
 static void rdtsctask(void)
 >>>>>>> v3.18

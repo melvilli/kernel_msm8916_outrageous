@@ -114,7 +114,11 @@ static struct lock_class_key gpio_lock_class;
 /* pins are just named GPIO0..GPIO53 */
 #define BCM2835_GPIO_PIN(a) PINCTRL_PIN(a, "gpio" #a)
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pinctrl_pin_desc bcm2835_gpio_pins[] = {
+=======
+static struct pinctrl_pin_desc bcm2835_gpio_pins[] = {
+>>>>>>> v3.18
 =======
 static struct pinctrl_pin_desc bcm2835_gpio_pins[] = {
 >>>>>>> v3.18
@@ -389,7 +393,11 @@ static struct gpio_chip bcm2835_gpio_chip = {
 	.base = -1,
 	.ngpio = BCM2835_NUM_GPIOS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.can_sleep = 0,
+=======
+	.can_sleep = false,
+>>>>>>> v3.18
 =======
 	.can_sleep = false,
 >>>>>>> v3.18
@@ -839,7 +847,11 @@ static int bcm2835_pmx_get_function_groups(struct pinctrl_dev *pctldev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bcm2835_pmx_enable(struct pinctrl_dev *pctldev,
+=======
+static int bcm2835_pmx_set(struct pinctrl_dev *pctldev,
+>>>>>>> v3.18
 =======
 static int bcm2835_pmx_set(struct pinctrl_dev *pctldev,
 >>>>>>> v3.18
@@ -854,6 +866,7 @@ static int bcm2835_pmx_set(struct pinctrl_dev *pctldev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bcm2835_pmx_disable(struct pinctrl_dev *pctldev,
 		unsigned func_selector,
 		unsigned group_selector)
@@ -864,6 +877,8 @@ static void bcm2835_pmx_disable(struct pinctrl_dev *pctldev,
 	bcm2835_pinctrl_fsel_set(pc, group_selector, BCM2835_FSEL_GPIO_IN);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void bcm2835_pmx_gpio_disable_free(struct pinctrl_dev *pctldev,
@@ -895,8 +910,12 @@ static const struct pinmux_ops bcm2835_pmx_ops = {
 	.get_function_name = bcm2835_pmx_get_function_name,
 	.get_function_groups = bcm2835_pmx_get_function_groups,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable = bcm2835_pmx_enable,
 	.disable = bcm2835_pmx_disable,
+=======
+	.set_mux = bcm2835_pmx_set,
+>>>>>>> v3.18
 =======
 	.set_mux = bcm2835_pmx_set,
 >>>>>>> v3.18
@@ -912,6 +931,7 @@ static int bcm2835_pinconf_get(struct pinctrl_dev *pctldev,
 }
 
 static int bcm2835_pinconf_set(struct pinctrl_dev *pctldev,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			unsigned pin, unsigned long config)
 {
@@ -936,6 +956,8 @@ static int bcm2835_pinconf_set(struct pinctrl_dev *pctldev,
 	udelay(150);
 	bcm2835_gpio_wr(pc, GPPUDCLK0 + (off * 4), 0);
 =======
+=======
+>>>>>>> v3.18
 			unsigned pin, unsigned long *configs,
 			unsigned num_configs)
 {
@@ -965,6 +987,9 @@ static int bcm2835_pinconf_set(struct pinctrl_dev *pctldev,
 		udelay(150);
 		bcm2835_gpio_wr(pc, GPPUDCLK0 + (off * 4), 0);
 	} /* for each config */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

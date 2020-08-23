@@ -449,6 +449,7 @@ static int adpt_queue_lck(struct scsi_cmnd * cmd, void (*done) (struct scsi_cmnd
 
 	rmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * TODO: I need to block here if I am processing ioctl cmds
 	 * but if the outstanding cmds all finish before the ioctl,
@@ -466,6 +467,10 @@ static int adpt_queue_lck(struct scsi_cmnd * cmd, void (*done) (struct scsi_cmnd
 	if ((pHba->state) & DPTI_STATE_RESET)
 		return SCSI_MLQUEUE_HOST_BUSY;
 >>>>>>> v3.18
+=======
+	if ((pHba->state) & DPTI_STATE_RESET)
+		return SCSI_MLQUEUE_HOST_BUSY;
+>>>>>>> v3.18
 
 	// TODO if the cmd->device if offline then I may need to issue a bus rescan
 	// followed by a get_lct to see if the device is there anymore
@@ -476,7 +481,11 @@ static int adpt_queue_lck(struct scsi_cmnd * cmd, void (*done) (struct scsi_cmnd
 		 * command from scan_scsis_single.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((pDev = adpt_find_device(pHba, (u32)cmd->device->channel, (u32)cmd->device->id, (u32)cmd->device->lun)) == NULL) {
+=======
+		if ((pDev = adpt_find_device(pHba, (u32)cmd->device->channel, (u32)cmd->device->id, cmd->device->lun)) == NULL) {
+>>>>>>> v3.18
 =======
 		if ((pDev = adpt_find_device(pHba, (u32)cmd->device->channel, (u32)cmd->device->id, cmd->device->lun)) == NULL) {
 >>>>>>> v3.18
@@ -600,8 +609,13 @@ static int adpt_show_info(struct seq_file *m, struct Scsi_Host *host)
 
 				unit = d->pI2o_dev->lct_data.tid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				seq_printf(m, "\tTID=%d, (Channel=%d, Target=%d, Lun=%d)  (%s)\n\n",
 					       unit, (int)d->scsi_channel, (int)d->scsi_id, (int)d->scsi_lun,
+=======
+				seq_printf(m, "\tTID=%d, (Channel=%d, Target=%d, Lun=%llu)  (%s)\n\n",
+					       unit, (int)d->scsi_channel, (int)d->scsi_id, d->scsi_lun,
+>>>>>>> v3.18
 =======
 				seq_printf(m, "\tTID=%d, (Channel=%d, Target=%d, Lun=%llu)  (%s)\n\n",
 					       unit, (int)d->scsi_channel, (int)d->scsi_id, d->scsi_lun,
@@ -1188,7 +1202,11 @@ static void adpt_i2o_delete_hba(adpt_hba* pHba)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct adpt_device* adpt_find_device(adpt_hba* pHba, u32 chan, u32 id, u32 lun)
+=======
+static struct adpt_device* adpt_find_device(adpt_hba* pHba, u32 chan, u32 id, u64 lun)
+>>>>>>> v3.18
 =======
 static struct adpt_device* adpt_find_device(adpt_hba* pHba, u32 chan, u32 id, u64 lun)
 >>>>>>> v3.18
@@ -1492,7 +1510,11 @@ static int adpt_i2o_parse_lct(adpt_hba* pHba)
 	u8 bus_no = 0;
 	s16 scsi_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s16 scsi_lun;
+=======
+	u64 scsi_lun;
+>>>>>>> v3.18
 =======
 	u64 scsi_lun;
 >>>>>>> v3.18
@@ -1530,7 +1552,11 @@ static int adpt_i2o_parse_lct(adpt_hba* pHba)
 			bus_no = buf[0]>>16;
 			scsi_id = buf[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			scsi_lun = (buf[2]>>8 )&0xff;
+=======
+			scsi_lun = scsilun_to_int((struct scsi_lun *)&buf[2]);
+>>>>>>> v3.18
 =======
 			scsi_lun = scsilun_to_int((struct scsi_lun *)&buf[2]);
 >>>>>>> v3.18
@@ -1609,7 +1635,11 @@ static int adpt_i2o_parse_lct(adpt_hba* pHba)
 				bus_no = buf[0]>>16;
 				scsi_id = buf[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 				scsi_lun = (buf[2]>>8 )&0xff;
+=======
+				scsi_lun = scsilun_to_int((struct scsi_lun *)&buf[2]);
+>>>>>>> v3.18
 =======
 				scsi_lun = scsilun_to_int((struct scsi_lun *)&buf[2]);
 >>>>>>> v3.18
@@ -1842,6 +1872,7 @@ static int adpt_i2o_passthru(adpt_hba* pHba, u32 __user *arg)
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if(pHba->host)
 			spin_lock_irqsave(pHba->host->host_lock, flags);
 		// This state stops any new commands from enterring the
@@ -1850,6 +1881,8 @@ static int adpt_i2o_passthru(adpt_hba* pHba, u32 __user *arg)
 //		We can't set this now - The scsi subsystem sets host_blocked and
 //		the queue empties and stops.  We need a way to restart the queue
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Stop any new commands from enterring the
 		 * controller while processing the ioctl
@@ -1858,22 +1891,31 @@ static int adpt_i2o_passthru(adpt_hba* pHba, u32 __user *arg)
 			scsi_block_requests(pHba->host);
 			spin_lock_irqsave(pHba->host->host_lock, flags);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rcode = adpt_i2o_post_wait(pHba, msg, size, FOREVER);
 		if (rcode != 0)
 			printk("adpt_i2o_passthru: post wait failed %d %p\n",
 					rcode, reply);
 <<<<<<< HEAD
+<<<<<<< HEAD
 //		pHba->state &= ~DPTI_STATE_IOCTL;
 		if(pHba->host)
 			spin_unlock_irqrestore(pHba->host->host_lock, flags);
 	} while(rcode == -ETIMEDOUT);  
 =======
+=======
+>>>>>>> v3.18
 		if (pHba->host) {
 			spin_unlock_irqrestore(pHba->host->host_lock, flags);
 			scsi_unblock_requests(pHba->host);
 		}
 	} while (rcode == -ETIMEDOUT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if(rcode){
@@ -2422,6 +2464,10 @@ static s32 adpt_scsi_host_alloc(adpt_hba* pHba, struct scsi_host_template *sht)
 	host->sg_tablesize = pHba->sg_tablesize;
 	host->can_queue = pHba->post_fifo_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	host->use_cmd_list = 1;
+>>>>>>> v3.18
 =======
 	host->use_cmd_list = 1;
 >>>>>>> v3.18
@@ -2470,8 +2516,13 @@ static s32 adpt_i2o_to_scsi(void __iomem *reply, struct scsi_cmnd* cmd)
 		case I2O_SCSI_DSC_NO_ADAPTER:
 		case I2O_SCSI_DSC_RESOURCE_UNAVAILABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING"%s: SCSI Timeout-Device (%d,%d,%d) hba status=0x%x, dev status=0x%x, cmd=0x%x\n",
 				pHba->name, (u32)cmd->device->channel, (u32)cmd->device->id, (u32)cmd->device->lun, hba_status, dev_status, cmd->cmnd[0]);
+=======
+			printk(KERN_WARNING"%s: SCSI Timeout-Device (%d,%d,%llu) hba status=0x%x, dev status=0x%x, cmd=0x%x\n",
+				pHba->name, (u32)cmd->device->channel, (u32)cmd->device->id, cmd->device->lun, hba_status, dev_status, cmd->cmnd[0]);
+>>>>>>> v3.18
 =======
 			printk(KERN_WARNING"%s: SCSI Timeout-Device (%d,%d,%llu) hba status=0x%x, dev status=0x%x, cmd=0x%x\n",
 				pHba->name, (u32)cmd->device->channel, (u32)cmd->device->id, cmd->device->lun, hba_status, dev_status, cmd->cmnd[0]);
@@ -2515,8 +2566,13 @@ static s32 adpt_i2o_to_scsi(void __iomem *reply, struct scsi_cmnd* cmd)
 		case I2O_SCSI_DSC_REQUEST_INVALID:
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING"%s: SCSI error %0x-Device(%d,%d,%d) hba_status=0x%x, dev_status=0x%x, cmd=0x%x\n",
 				pHba->name, detailed_status & I2O_SCSI_DSC_MASK, (u32)cmd->device->channel, (u32)cmd->device->id, (u32)cmd->device->lun,
+=======
+			printk(KERN_WARNING"%s: SCSI error %0x-Device(%d,%d,%llu) hba_status=0x%x, dev_status=0x%x, cmd=0x%x\n",
+				pHba->name, detailed_status & I2O_SCSI_DSC_MASK, (u32)cmd->device->channel, (u32)cmd->device->id, cmd->device->lun,
+>>>>>>> v3.18
 =======
 			printk(KERN_WARNING"%s: SCSI error %0x-Device(%d,%d,%llu) hba_status=0x%x, dev_status=0x%x, cmd=0x%x\n",
 				pHba->name, detailed_status & I2O_SCSI_DSC_MASK, (u32)cmd->device->channel, (u32)cmd->device->id, cmd->device->lun,
@@ -2537,8 +2593,13 @@ static s32 adpt_i2o_to_scsi(void __iomem *reply, struct scsi_cmnd* cmd)
 				/* This is to handle an array failed */
 				cmd->result = (DID_TIME_OUT << 16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_WARNING"%s: SCSI Data Protect-Device (%d,%d,%d) hba_status=0x%x, dev_status=0x%x, cmd=0x%x\n",
 					pHba->name, (u32)cmd->device->channel, (u32)cmd->device->id, (u32)cmd->device->lun, 
+=======
+				printk(KERN_WARNING"%s: SCSI Data Protect-Device (%d,%d,%llu) hba_status=0x%x, dev_status=0x%x, cmd=0x%x\n",
+					pHba->name, (u32)cmd->device->channel, (u32)cmd->device->id, cmd->device->lun,
+>>>>>>> v3.18
 =======
 				printk(KERN_WARNING"%s: SCSI Data Protect-Device (%d,%d,%llu) hba_status=0x%x, dev_status=0x%x, cmd=0x%x\n",
 					pHba->name, (u32)cmd->device->channel, (u32)cmd->device->id, cmd->device->lun,
@@ -2554,8 +2615,13 @@ static s32 adpt_i2o_to_scsi(void __iomem *reply, struct scsi_cmnd* cmd)
 		 */
 		cmd->result = (DID_TIME_OUT << 16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING"%s: I2O MSG_FAIL - Device (%d,%d,%d) tid=%d, cmd=0x%x\n",
 			pHba->name, (u32)cmd->device->channel, (u32)cmd->device->id, (u32)cmd->device->lun,
+=======
+		printk(KERN_WARNING"%s: I2O MSG_FAIL - Device (%d,%d,%llu) tid=%d, cmd=0x%x\n",
+			pHba->name, (u32)cmd->device->channel, (u32)cmd->device->id, cmd->device->lun,
+>>>>>>> v3.18
 =======
 		printk(KERN_WARNING"%s: I2O MSG_FAIL - Device (%d,%d,%llu) tid=%d, cmd=0x%x\n",
 			pHba->name, (u32)cmd->device->channel, (u32)cmd->device->id, cmd->device->lun,
@@ -2600,7 +2666,11 @@ static s32 adpt_i2o_reparse_lct(adpt_hba* pHba)
 	u8 bus_no = 0;
 	s16 scsi_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s16 scsi_lun;
+=======
+	u64 scsi_lun;
+>>>>>>> v3.18
 =======
 	u64 scsi_lun;
 >>>>>>> v3.18
@@ -2651,7 +2721,11 @@ static s32 adpt_i2o_reparse_lct(adpt_hba* pHba)
 
 			scsi_id = buf[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			scsi_lun = (buf[2]>>8 )&0xff;
+=======
+			scsi_lun = scsilun_to_int((struct scsi_lun *)&buf[2]);
+>>>>>>> v3.18
 =======
 			scsi_lun = scsilun_to_int((struct scsi_lun *)&buf[2]);
 >>>>>>> v3.18
@@ -2724,7 +2798,11 @@ static s32 adpt_i2o_reparse_lct(adpt_hba* pHba)
 				if(pDev->scsi_lun == scsi_lun) {
 					if(!scsi_device_online(pDev->pScsi_dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 						printk(KERN_WARNING"%s: Setting device (%d,%d,%d) back online\n",
+=======
+						printk(KERN_WARNING"%s: Setting device (%d,%d,%llu) back online\n",
+>>>>>>> v3.18
 =======
 						printk(KERN_WARNING"%s: Setting device (%d,%d,%llu) back online\n",
 >>>>>>> v3.18
@@ -2760,7 +2838,11 @@ static s32 adpt_i2o_reparse_lct(adpt_hba* pHba)
 		if (pDev->state & DPTI_DEV_UNSCANNED){
 			pDev->state = DPTI_DEV_OFFLINE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING"%s: Device (%d,%d,%d) offline\n",pHba->name,pDev->scsi_channel,pDev->scsi_id,pDev->scsi_lun);
+=======
+			printk(KERN_WARNING"%s: Device (%d,%d,%llu) offline\n",pHba->name,pDev->scsi_channel,pDev->scsi_id,pDev->scsi_lun);
+>>>>>>> v3.18
 =======
 			printk(KERN_WARNING"%s: Device (%d,%d,%llu) offline\n",pHba->name,pDev->scsi_channel,pDev->scsi_id,pDev->scsi_lun);
 >>>>>>> v3.18

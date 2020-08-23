@@ -11,6 +11,10 @@
 #include <asm/pgtable-ppc64-4k.h>
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -25,13 +29,19 @@
 #define PGTABLE_RANGE (ASM_CONST(1) << PGTABLE_EADDR_SIZE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 #define PMD_CACHE_INDEX	(PMD_INDEX_SIZE + 1)
 #else
 #define PMD_CACHE_INDEX	PMD_INDEX_SIZE
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Define the address range of the kernel non-linear virtual area
@@ -143,6 +153,7 @@
 
 #ifdef CONFIG_PPC_HAS_HASH_64K
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * We expect this to be called only for user addresses or kernel virtual
  * addresses other than the linear mapping.
@@ -156,6 +167,9 @@
 			psize = get_slice_psize(mm, addr);	\
 		psize;						\
 	})
+=======
+#define pte_pagesize_index(mm, addr, pte)	get_slice_psize(mm, addr)
+>>>>>>> v3.18
 =======
 #define pte_pagesize_index(mm, addr, pte)	get_slice_psize(mm, addr)
 >>>>>>> v3.18
@@ -179,7 +193,11 @@
 #define	pmd_clear(pmdp)		(pmd_val(*(pmdp)) = 0)
 #define pmd_page_vaddr(pmd)	(pmd_val(pmd) & ~PMD_MASKED_BITS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pmd_page(pmd)		virt_to_page(pmd_page_vaddr(pmd))
+=======
+extern struct page *pmd_page(pmd_t pmd);
+>>>>>>> v3.18
 =======
 extern struct page *pmd_page(pmd_t pmd);
 >>>>>>> v3.18
@@ -223,6 +241,10 @@ static inline unsigned long pte_update(struct mm_struct *mm,
 				       unsigned long addr,
 				       pte_t *ptep, unsigned long clr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				       unsigned long set,
+>>>>>>> v3.18
 =======
 				       unsigned long set,
 >>>>>>> v3.18
@@ -237,6 +259,7 @@ static inline unsigned long pte_update(struct mm_struct *mm,
 	bne-	1b \n\
 	andc	%1,%0,%4 \n\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stdcx.	%1,0,%3 \n\
 	bne-	1b"
 	: "=&r" (old), "=&r" (tmp), "=m" (*ptep)
@@ -246,6 +269,8 @@ static inline unsigned long pte_update(struct mm_struct *mm,
 	unsigned long old = pte_val(*ptep);
 	*ptep = __pte(old & ~clr);
 =======
+=======
+>>>>>>> v3.18
 	or	%1,%1,%7\n\
 	stdcx.	%1,0,%3 \n\
 	bne-	1b"
@@ -255,6 +280,9 @@ static inline unsigned long pte_update(struct mm_struct *mm,
 #else
 	unsigned long old = pte_val(*ptep);
 	*ptep = __pte((old & ~clr) | set);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	/* huge pages use the old page table lock */
@@ -275,9 +303,15 @@ static inline int __ptep_test_and_clear_young(struct mm_struct *mm,
 	unsigned long old;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
        	if ((pte_val(*ptep) & (_PAGE_ACCESSED | _PAGE_HASHPTE)) == 0)
 		return 0;
 	old = pte_update(mm, addr, ptep, _PAGE_ACCESSED, 0);
+=======
+	if ((pte_val(*ptep) & (_PAGE_ACCESSED | _PAGE_HASHPTE)) == 0)
+		return 0;
+	old = pte_update(mm, addr, ptep, _PAGE_ACCESSED, 0, 0);
+>>>>>>> v3.18
 =======
 	if ((pte_val(*ptep) & (_PAGE_ACCESSED | _PAGE_HASHPTE)) == 0)
 		return 0;
@@ -302,7 +336,11 @@ static inline void ptep_set_wrprotect(struct mm_struct *mm, unsigned long addr,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte_update(mm, addr, ptep, _PAGE_RW, 0);
+=======
+	pte_update(mm, addr, ptep, _PAGE_RW, 0, 0);
+>>>>>>> v3.18
 =======
 	pte_update(mm, addr, ptep, _PAGE_RW, 0, 0);
 >>>>>>> v3.18
@@ -315,7 +353,11 @@ static inline void huge_ptep_set_wrprotect(struct mm_struct *mm,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte_update(mm, addr, ptep, _PAGE_RW, 1);
+=======
+	pte_update(mm, addr, ptep, _PAGE_RW, 0, 1);
+>>>>>>> v3.18
 =======
 	pte_update(mm, addr, ptep, _PAGE_RW, 0, 1);
 >>>>>>> v3.18
@@ -342,7 +384,11 @@ static inline pte_t ptep_get_and_clear(struct mm_struct *mm,
 				       unsigned long addr, pte_t *ptep)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long old = pte_update(mm, addr, ptep, ~0UL, 0);
+=======
+	unsigned long old = pte_update(mm, addr, ptep, ~0UL, 0, 0);
+>>>>>>> v3.18
 =======
 	unsigned long old = pte_update(mm, addr, ptep, ~0UL, 0, 0);
 >>>>>>> v3.18
@@ -353,7 +399,11 @@ static inline void pte_clear(struct mm_struct *mm, unsigned long addr,
 			     pte_t * ptep)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte_update(mm, addr, ptep, ~0UL, 0);
+=======
+	pte_update(mm, addr, ptep, ~0UL, 0, 0);
+>>>>>>> v3.18
 =======
 	pte_update(mm, addr, ptep, ~0UL, 0, 0);
 >>>>>>> v3.18
@@ -392,17 +442,23 @@ static inline void __ptep_set_access_flags(pte_t *ptep, pte_t entry)
 
 #define pte_ERROR(e) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s:%d: bad pte %08lx.\n", __FILE__, __LINE__, pte_val(e))
 #define pmd_ERROR(e) \
 	printk("%s:%d: bad pmd %08lx.\n", __FILE__, __LINE__, pmd_val(e))
 #define pgd_ERROR(e) \
 	printk("%s:%d: bad pgd %08lx.\n", __FILE__, __LINE__, pgd_val(e))
 =======
+=======
+>>>>>>> v3.18
 	pr_err("%s:%d: bad pte %08lx.\n", __FILE__, __LINE__, pte_val(e))
 #define pmd_ERROR(e) \
 	pr_err("%s:%d: bad pmd %08lx.\n", __FILE__, __LINE__, pmd_val(e))
 #define pgd_ERROR(e) \
 	pr_err("%s:%d: bad pgd %08lx.\n", __FILE__, __LINE__, pgd_val(e))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Encode and de-code a swap entry */
@@ -417,6 +473,7 @@ static inline void __ptep_set_access_flags(pte_t *ptep, pte_t entry)
 
 void pgtable_cache_add(unsigned shift, void (*ctor)(void *));
 void pgtable_cache_init(void);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*
@@ -458,6 +515,8 @@ static inline pte_t *find_linux_pte_or_hugepte(pgd_t *pgdir, unsigned long ea,
 #endif /* __ASSEMBLY__ */
 
 =======
+=======
+>>>>>>> v3.18
 #endif /* __ASSEMBLY__ */
 
 /*
@@ -689,5 +748,8 @@ static inline int pmd_move_must_withdraw(struct spinlock *new_pmd_ptl,
 }
 
 #endif /* __ASSEMBLY__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_POWERPC_PGTABLE_PPC64_H_ */

@@ -146,7 +146,11 @@ V_FUNCTION_BEGIN(__kernel_clock_getres)
 
 	li	r3,0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmpldi	cr0,r4,0
+=======
+	cmpli	cr0,r4,0
+>>>>>>> v3.18
 =======
 	cmpli	cr0,r4,0
 >>>>>>> v3.18

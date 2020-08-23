@@ -23,7 +23,11 @@
 #include <linux/of.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 >>>>>>> v3.18
@@ -433,6 +437,12 @@ static ssize_t at24_bin_write(struct file *filp, struct kobject *kobj,
 	struct at24_data *at24;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (unlikely(off >= attr->size))
+		return -EFBIG;
+
+>>>>>>> v3.18
 =======
 	if (unlikely(off >= attr->size))
 		return -EFBIG;
@@ -503,10 +513,16 @@ static int at24_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		chip = *(struct at24_platform_data *)client->dev.platform_data;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!id->driver_data) {
 			err = -ENODEV;
 			goto err_out;
 		}
+=======
+		if (!id->driver_data)
+			return -ENODEV;
+
+>>>>>>> v3.18
 =======
 		if (!id->driver_data)
 			return -ENODEV;
@@ -536,8 +552,12 @@ static int at24_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	if (!chip.page_size) {
 		dev_err(&client->dev, "page_size must not be 0!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -EINVAL;
 		goto err_out;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -549,10 +569,16 @@ static int at24_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	/* Use I2C operations unless we're stuck with SMBus extensions. */
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_I2C)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (chip.flags & AT24_FLAG_ADDR16) {
 			err = -EPFNOSUPPORT;
 			goto err_out;
 		}
+=======
+		if (chip.flags & AT24_FLAG_ADDR16)
+			return -EPFNOSUPPORT;
+
+>>>>>>> v3.18
 =======
 		if (chip.flags & AT24_FLAG_ADDR16)
 			return -EPFNOSUPPORT;
@@ -569,8 +595,12 @@ static int at24_probe(struct i2c_client *client, const struct i2c_device_id *id)
 			use_smbus = I2C_SMBUS_BYTE_DATA;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = -EPFNOSUPPORT;
 			goto err_out;
+=======
+			return -EPFNOSUPPORT;
+>>>>>>> v3.18
 =======
 			return -EPFNOSUPPORT;
 >>>>>>> v3.18
@@ -584,6 +614,7 @@ static int at24_probe(struct i2c_client *client, const struct i2c_device_id *id)
 			(chip.flags & AT24_FLAG_ADDR16) ? 65536 : 256);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	at24 = kzalloc(sizeof(struct at24_data) +
 		num_addresses * sizeof(struct i2c_client *), GFP_KERNEL);
 	if (!at24) {
@@ -591,10 +622,15 @@ static int at24_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		goto err_out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	at24 = devm_kzalloc(&client->dev, sizeof(struct at24_data) +
 		num_addresses * sizeof(struct i2c_client *), GFP_KERNEL);
 	if (!at24)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_init(&at24->lock);
@@ -634,16 +670,22 @@ static int at24_probe(struct i2c_client *client, const struct i2c_device_id *id)
 
 			/* buffer (data + address at the beginning) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			at24->writebuf = kmalloc(write_max + 2, GFP_KERNEL);
 			if (!at24->writebuf) {
 				err = -ENOMEM;
 				goto err_struct;
 			}
 =======
+=======
+>>>>>>> v3.18
 			at24->writebuf = devm_kzalloc(&client->dev,
 				write_max + 2, GFP_KERNEL);
 			if (!at24->writebuf)
 				return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			dev_warn(&client->dev,
@@ -693,11 +735,14 @@ err_clients:
 			i2c_unregister_device(at24->client[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(at24->writebuf);
 err_struct:
 	kfree(at24);
 err_out:
 	dev_dbg(&client->dev, "probe error %d\n", err);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;
@@ -715,8 +760,11 @@ static int at24_remove(struct i2c_client *client)
 		i2c_unregister_device(at24->client[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(at24->writebuf);
 	kfree(at24);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

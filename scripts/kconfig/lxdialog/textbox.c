@@ -81,7 +81,11 @@ int dialog_textbox(const char *title, char *tbuf, int initial_height,
 do_resize:
 	getmaxyx(stdscr, height, width);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (height < 8 || width < 8)
+=======
+	if (height < TEXTBOX_HEIGTH_MIN || width < TEXTBOX_WIDTH_MIN)
+>>>>>>> v3.18
 =======
 	if (height < TEXTBOX_HEIGTH_MIN || width < TEXTBOX_WIDTH_MIN)
 >>>>>>> v3.18
@@ -103,8 +107,13 @@ do_resize:
 
 	/* center dialog box on screen */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	x = (COLS - width) / 2;
 	y = (LINES - height) / 2;
+=======
+	x = (getmaxx(stdscr) - width) / 2;
+	y = (getmaxy(stdscr) - height) / 2;
+>>>>>>> v3.18
 =======
 	x = (getmaxx(stdscr) - width) / 2;
 	y = (getmaxy(stdscr) - height) / 2;

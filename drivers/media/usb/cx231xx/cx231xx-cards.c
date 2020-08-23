@@ -30,7 +30,10 @@
 #include <media/tveeprom.h>
 #include <media/v4l2-common.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -448,7 +451,10 @@ struct cx231xx_board cx231xx_boards[] = {
 		} },
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[CX231XX_BOARD_KWORLD_UB445_USB_HYBRID] = {
 		.name = "Kworld UB445 USB Hybrid",
 		.tuner_type = TUNER_NXP_TDA18271,
@@ -487,6 +493,9 @@ struct cx231xx_board cx231xx_boards[] = {
 			.gpio = NULL,
 		} },
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[CX231XX_BOARD_PV_PLAYTV_USB_HYBRID] = {
 		.name = "Pixelview PlayTV USB Hybrid",
@@ -497,7 +506,11 @@ struct cx231xx_board cx231xx_boards[] = {
 		.demod_xfer_mode = 0,
 		.ctl_pin_status_mask = 0xFFFFFFC4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.agc_analog_digital_select_gpio = 0x1c,
+=======
+		.agc_analog_digital_select_gpio = 0x00,	/* According with PV cxPolaris.inf file */
+>>>>>>> v3.18
 =======
 		.agc_analog_digital_select_gpio = 0x00,	/* According with PV cxPolaris.inf file */
 >>>>>>> v3.18
@@ -716,7 +729,10 @@ struct cx231xx_board cx231xx_boards[] = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx] = {
 		.name = "Hauppauge WinTV 930C-HD (1113xx) / HVR-900H (111xxx) / PCTV QuatroStick 521e",
 		.tuner_type = TUNER_NXP_TDA18271,
@@ -795,6 +811,9 @@ struct cx231xx_board cx231xx_boards[] = {
 			.gpio = NULL,
 		} },
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 const unsigned int cx231xx_bcount = ARRAY_SIZE(cx231xx_boards);
@@ -802,6 +821,11 @@ const unsigned int cx231xx_bcount = ARRAY_SIZE(cx231xx_boards);
 /* table of devices that work with this driver */
 struct usb_device_id cx231xx_id_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{USB_DEVICE(0x1D19, 0x6109),
+	.driver_info = CX231XX_BOARD_PV_XCAPTURE_USB},
+>>>>>>> v3.18
 =======
 	{USB_DEVICE(0x1D19, 0x6109),
 	.driver_info = CX231XX_BOARD_PV_XCAPTURE_USB},
@@ -829,7 +853,10 @@ struct usb_device_id cx231xx_id_table[] = {
 	{USB_DEVICE(0x2040, 0xb120),
 	 .driver_info = CX231XX_BOARD_HAUPPAUGE_EXETER},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{USB_DEVICE(0x2040, 0xb130),
 	 .driver_info = CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx},
 	{USB_DEVICE(0x2040, 0xb131),
@@ -840,19 +867,28 @@ struct usb_device_id cx231xx_id_table[] = {
 	/* Hauppauge WinTV-HVR-901-H */
 	{USB_DEVICE(0x2040, 0xb139),
 	 .driver_info = CX231XX_BOARD_HAUPPAUGE_930C_HD_1114xx},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{USB_DEVICE(0x2040, 0xb140),
 	 .driver_info = CX231XX_BOARD_HAUPPAUGE_EXETER},
 	{USB_DEVICE(0x2040, 0xc200),
 	 .driver_info = CX231XX_BOARD_HAUPPAUGE_USBLIVE2},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* PCTV QuatroStick 521e */
 	{USB_DEVICE(0x2013, 0x0259),
 	 .driver_info = CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx},
 	/* PCTV QuatroStick 522e */
 	{USB_DEVICE(0x2013, 0x025e),
 	 .driver_info = CX231XX_BOARD_HAUPPAUGE_930C_HD_1114xx},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{USB_DEVICE_VER(USB_VID_PIXELVIEW, USB_PID_PIXELVIEW_SBTVD, 0x4000, 0x4001),
 	 .driver_info = CX231XX_BOARD_PV_PLAYTV_USB_HYBRID},
@@ -861,6 +897,11 @@ struct usb_device_id cx231xx_id_table[] = {
 	{USB_DEVICE(0x1b80, 0xe424),
 	 .driver_info = CX231XX_BOARD_KWORLD_UB430_USB_HYBRID},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{USB_DEVICE(0x1b80, 0xe421),
+	 .driver_info = CX231XX_BOARD_KWORLD_UB445_USB_HYBRID},
+>>>>>>> v3.18
 =======
 	{USB_DEVICE(0x1b80, 0xe421),
 	 .driver_info = CX231XX_BOARD_KWORLD_UB445_USB_HYBRID},
@@ -1007,7 +1048,10 @@ static void cx231xx_config_tuner(struct cx231xx *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int read_eeprom(struct cx231xx *dev, u8 *eedata, int len)
 {
 	int ret = 0;
@@ -1052,6 +1096,9 @@ static int read_eeprom(struct cx231xx *dev, u8 *eedata, int len)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void cx231xx_card_setup(struct cx231xx *dev)
 {
@@ -1085,7 +1132,10 @@ void cx231xx_card_setup(struct cx231xx *dev)
 			cx231xx_config_tuner(dev);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	switch (dev->model) {
 	case CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx:
@@ -1101,6 +1151,9 @@ void cx231xx_card_setup(struct cx231xx *dev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1150,12 +1203,15 @@ void cx231xx_release_resources(struct cx231xx *dev)
 	/* Mark device as unused */
 	clear_bit(dev->devno, &cx231xx_devused);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	kfree(dev->video_mode.alt_max_pkt_size);
 	kfree(dev->vbi_mode.alt_max_pkt_size);
 	kfree(dev->sliced_cc_mode.alt_max_pkt_size);
 	kfree(dev->ts1_mode.alt_max_pkt_size);
 	kfree(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1169,7 +1225,10 @@ static int cx231xx_init_dev(struct cx231xx *dev, struct usb_device *udev,
 {
 	int retval = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int errCode;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int maxh, maxw;
@@ -1196,13 +1255,19 @@ static int cx231xx_init_dev(struct cx231xx *dev, struct usb_device *udev,
 
 	/* Query cx231xx to find what pcb config it is related to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	initialize_cx231xx(dev);
 =======
+=======
+>>>>>>> v3.18
 	retval = initialize_cx231xx(dev);
 	if (retval < 0) {
 		cx231xx_errdev("Failed to read PCB config\n");
 		return retval;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*To workaround error number=-71 on EP0 for VideoGrabber,
@@ -1216,8 +1281,13 @@ static int cx231xx_init_dev(struct cx231xx *dev, struct usb_device *udev,
 	cx231xx_pre_card_setup(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	errCode = cx231xx_config(dev);
 	if (errCode) {
+=======
+	retval = cx231xx_config(dev);
+	if (retval) {
+>>>>>>> v3.18
 =======
 	retval = cx231xx_config(dev);
 	if (retval) {
@@ -1231,6 +1301,7 @@ static int cx231xx_init_dev(struct cx231xx *dev, struct usb_device *udev,
 
 	/* register i2c bus */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	errCode = cx231xx_dev_init(dev);
 	if (errCode < 0) {
 		cx231xx_dev_uninit(dev);
@@ -1238,11 +1309,16 @@ static int cx231xx_init_dev(struct cx231xx *dev, struct usb_device *udev,
 			       __func__, errCode);
 		return errCode;
 =======
+=======
+>>>>>>> v3.18
 	retval = cx231xx_dev_init(dev);
 	if (retval) {
 		cx231xx_errdev("%s: cx231xx_i2c_register - errCode [%d]!\n",
 			       __func__, retval);
 		goto err_dev_init;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1262,17 +1338,23 @@ static int cx231xx_init_dev(struct cx231xx *dev, struct usb_device *udev,
 	dev->video_input = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	errCode = cx231xx_config(dev);
 	if (errCode < 0) {
 		cx231xx_errdev("%s: cx231xx_config - errCode [%d]!\n",
 			       __func__, errCode);
 		return errCode;
 =======
+=======
+>>>>>>> v3.18
 	retval = cx231xx_config(dev);
 	if (retval) {
 		cx231xx_errdev("%s: cx231xx_config - errCode [%d]!\n",
 			       __func__, retval);
 		goto err_dev_init;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1298,9 +1380,15 @@ static int cx231xx_init_dev(struct cx231xx *dev, struct usb_device *udev,
 
 	retval = cx231xx_register_analog_devices(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval < 0) {
 		cx231xx_release_resources(dev);
 		return retval;
+=======
+	if (retval) {
+		cx231xx_release_analog_resources(dev);
+		goto err_analog;
+>>>>>>> v3.18
 =======
 	if (retval) {
 		cx231xx_release_analog_resources(dev);
@@ -1314,12 +1402,18 @@ static int cx231xx_init_dev(struct cx231xx *dev, struct usb_device *udev,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 err_analog:
 	cx231xx_remove_from_devlist(dev);
 err_dev_init:
 	cx231xx_dev_uninit(dev);
 	return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1353,7 +1447,10 @@ static void flush_request_modules(struct cx231xx *dev)
 #endif /* CONFIG_MODULES */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int cx231xx_init_v4l2(struct cx231xx *dev,
 			     struct usb_device *udev,
 			     struct usb_interface *interface,
@@ -1465,6 +1562,9 @@ static int cx231xx_init_v4l2(struct cx231xx *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * cx231xx_usb_probe()
@@ -1481,9 +1581,15 @@ static int cx231xx_usb_probe(struct usb_interface *interface,
 	int i, isoc_pipe = 0;
 	char *speed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_interface_assoc_descriptor *assoc_desc;
 
 	udev = usb_get_dev(interface_to_usbdev(interface));
+=======
+	u8 idx;
+	struct usb_interface_assoc_descriptor *assoc_desc;
+
+>>>>>>> v3.18
 =======
 	u8 idx;
 	struct usb_interface_assoc_descriptor *assoc_desc;
@@ -1510,13 +1616,19 @@ static int cx231xx_usb_probe(struct usb_interface *interface,
 	} while (test_and_set_bit(nr, &cx231xx_devused));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* allocate memory for our device state and initialize it */
 	dev = kzalloc(sizeof(*dev), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	udev = usb_get_dev(interface_to_usbdev(interface));
 
 	/* allocate memory for our device state and initialize it */
 	dev = devm_kzalloc(&udev->dev, sizeof(*dev), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dev == NULL) {
 		cx231xx_err(DRIVER_NAME ": out of memory!\n");
@@ -1543,8 +1655,12 @@ static int cx231xx_usb_probe(struct usb_interface *interface,
 
 	/* get maximum no.of IAD interfaces */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	assoc_desc = udev->actconfig->intf_assoc[0];
 	dev->max_iad_interface_count = assoc_desc->bInterfaceCount;
+=======
+	dev->max_iad_interface_count = udev->config->desc.bNumInterfaces;
+>>>>>>> v3.18
 =======
 	dev->max_iad_interface_count = udev->config->desc.bNumInterfaces;
 >>>>>>> v3.18
@@ -1591,10 +1707,15 @@ static int cx231xx_usb_probe(struct usb_interface *interface,
 		cx231xx_err(DRIVER_NAME ": Not found "
 			    "matching IAD interface\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(dev->devno, &cx231xx_devused);
 		kfree(dev);
 		dev = NULL;
 		return -ENODEV;
+=======
+		retval = -ENODEV;
+		goto err_if;
+>>>>>>> v3.18
 =======
 		retval = -ENODEV;
 		goto err_if;
@@ -1607,16 +1728,20 @@ static int cx231xx_usb_probe(struct usb_interface *interface,
 	usb_set_intfdata(interface, dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * AV device initialization - only done at the last interface
 	 */
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Create v4l2 device */
 	retval = v4l2_device_register(&interface->dev, &dev->v4l2_dev);
 	if (retval) {
 		cx231xx_errdev("v4l2_device_register failed\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		clear_bit(dev->devno, &cx231xx_devused);
 		kfree(dev);
@@ -1743,6 +1868,8 @@ static int cx231xx_usb_probe(struct usb_interface *interface,
 					       interface_info.
 					       ts1_index + 1];
 =======
+=======
+>>>>>>> v3.18
 		goto err_v4l2;
 	}
 
@@ -1764,6 +1891,9 @@ static int cx231xx_usb_probe(struct usb_interface *interface,
 			goto err_video_alt;
 		}
 		uif = udev->actconfig->interface[idx];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		dev->ts1_mode.end_point_addr =
@@ -1774,6 +1904,7 @@ static int cx231xx_usb_probe(struct usb_interface *interface,
 		cx231xx_info("EndPoint Addr 0x%x, Alternate settings: %i\n",
 			     dev->ts1_mode.end_point_addr,
 			     dev->ts1_mode.num_alt);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev->ts1_mode.alt_max_pkt_size =
 			kmalloc(32 * dev->ts1_mode.num_alt, GFP_KERNEL);
@@ -1786,12 +1917,17 @@ static int cx231xx_usb_probe(struct usb_interface *interface,
 			dev = NULL;
 			return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 
 		dev->ts1_mode.alt_max_pkt_size = devm_kmalloc_array(&udev->dev, 32, dev->ts1_mode.num_alt, GFP_KERNEL);
 		if (dev->ts1_mode.alt_max_pkt_size == NULL) {
 			cx231xx_errdev("out of memory!\n");
 			retval = -ENOMEM;
 			goto err_video_alt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1820,7 +1956,10 @@ static int cx231xx_usb_probe(struct usb_interface *interface,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 err_video_alt:
 	/* cx231xx_uninit_dev: */
 	cx231xx_close_extension(dev);
@@ -1837,6 +1976,9 @@ err_if:
 	usb_put_dev(udev);
 	clear_bit(dev->devno, &cx231xx_devused);
 	return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

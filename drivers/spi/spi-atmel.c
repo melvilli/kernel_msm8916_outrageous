@@ -10,7 +10,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/clk.h>
@@ -30,6 +33,10 @@
 #include <linux/io.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pinctrl/consumer.h>
+>>>>>>> v3.18
 =======
 #include <linux/pinctrl/consumer.h>
 >>>>>>> v3.18
@@ -178,6 +185,7 @@
 #define SPI_BIT(name) \
 	(1 << SPI_##name##_OFFSET)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SPI_BF(name,value) \
 	(((value) & ((1 << SPI_##name##_SIZE) - 1)) << SPI_##name##_OFFSET)
 #define SPI_BFEXT(name,value) \
@@ -191,6 +199,8 @@
 	__raw_readl((port)->regs + SPI_##reg)
 #define spi_writel(port,reg,value) \
 =======
+=======
+>>>>>>> v3.18
 #define SPI_BF(name, value) \
 	(((value) & ((1 << SPI_##name##_SIZE) - 1)) << SPI_##name##_OFFSET)
 #define SPI_BFEXT(name, value) \
@@ -203,6 +213,9 @@
 #define spi_readl(port, reg) \
 	__raw_readl((port)->regs + SPI_##reg)
 #define spi_writel(port, reg, value) \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__raw_writel((value), (port)->regs + SPI_##reg)
 
@@ -212,6 +225,11 @@
 #define DMA_MIN_BYTES	16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SPI_DMA_TIMEOUT		(msecs_to_jiffies(1000))
+
+>>>>>>> v3.18
 =======
 #define SPI_DMA_TIMEOUT		(msecs_to_jiffies(1000))
 
@@ -248,6 +266,7 @@ struct atmel_spi {
 	struct clk		*clk;
 	struct platform_device	*pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_device	*stay;
 
 	u8			stopping;
@@ -260,6 +279,8 @@ struct atmel_spi {
 	int			done_status;
 
 =======
+=======
+>>>>>>> v3.18
 
 	struct spi_transfer	*current_transfer;
 	int			current_remaining_bytes;
@@ -267,6 +288,9 @@ struct atmel_spi {
 
 	struct completion	xfer_completion;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* scratch buffer */
 	void			*buffer;
@@ -279,6 +303,12 @@ struct atmel_spi {
 	/* dmaengine data */
 	struct atmel_spi_dma	dma;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	bool			keep_cs;
+	bool			cs_active;
+>>>>>>> v3.18
 =======
 
 	bool			keep_cs;
@@ -404,7 +434,11 @@ static void cs_deactivate(struct atmel_spi *as, struct spi_device *spi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void atmel_spi_lock(struct atmel_spi *as)
+=======
+static void atmel_spi_lock(struct atmel_spi *as) __acquires(&as->lock)
+>>>>>>> v3.18
 =======
 static void atmel_spi_lock(struct atmel_spi *as) __acquires(&as->lock)
 >>>>>>> v3.18
@@ -413,7 +447,11 @@ static void atmel_spi_lock(struct atmel_spi *as) __acquires(&as->lock)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void atmel_spi_unlock(struct atmel_spi *as)
+=======
+static void atmel_spi_unlock(struct atmel_spi *as) __releases(&as->lock)
+>>>>>>> v3.18
 =======
 static void atmel_spi_unlock(struct atmel_spi *as) __releases(&as->lock)
 >>>>>>> v3.18
@@ -428,6 +466,7 @@ static inline bool atmel_spi_use_dma(struct atmel_spi *as,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int atmel_spi_xfer_is_last(struct spi_message *msg,
 					struct spi_transfer *xfer)
 {
@@ -439,6 +478,8 @@ static inline int atmel_spi_xfer_can_be_chained(struct spi_transfer *xfer)
 	return xfer->delay_usecs == 0 && !xfer->cs_change;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int atmel_spi_dma_slave_config(struct atmel_spi *as,
@@ -479,11 +520,14 @@ static int atmel_spi_dma_slave_config(struct atmel_spi *as,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool filter(struct dma_chan *chan, void *slave)
 {
 	struct	at_dma_slave *sl = slave;
 
 =======
+=======
+>>>>>>> v3.18
 static bool filter(struct dma_chan *chan, void *pdata)
 {
 	struct atmel_spi_dma *sl_pdata = pdata;
@@ -493,6 +537,9 @@ static bool filter(struct dma_chan *chan, void *pdata)
 		return false;
 
 	sl = &sl_pdata->dma_slave;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sl->dma_dev == chan->device->dev) {
 		chan->private = sl;
@@ -504,6 +551,7 @@ static bool filter(struct dma_chan *chan, void *pdata)
 
 static int atmel_spi_configure_dma(struct atmel_spi *as)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct at_dma_slave *sdata = &as->dma.dma_slave;
 	struct dma_slave_config	slave_config;
@@ -524,6 +572,8 @@ static int atmel_spi_configure_dma(struct atmel_spi *as)
 		dev_err(&as->pdev->dev,
 			"DMA channel not available, SPI unable to use DMA\n");
 =======
+=======
+>>>>>>> v3.18
 	struct dma_slave_config	slave_config;
 	struct device *dev = &as->pdev->dev;
 	int err;
@@ -549,6 +599,9 @@ static int atmel_spi_configure_dma(struct atmel_spi *as)
 	if (!as->dma.chan_rx) {
 		dev_err(dev,
 			"DMA RX channel not available, SPI unable to use DMA\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = -EBUSY;
 		goto error;
@@ -596,8 +649,12 @@ static void dma_callback(void *data)
 	struct atmel_spi	*as = spi_master_get_devdata(master);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* trigger SPI tasklet */
 	tasklet_schedule(&as->tasklet);
+=======
+	complete(&as->xfer_completion);
+>>>>>>> v3.18
 =======
 	complete(&as->xfer_completion);
 >>>>>>> v3.18
@@ -606,7 +663,10 @@ static void dma_callback(void *data)
 /*
  * Next transfer using PIO.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * lock is held, spi tasklet is blocked
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -615,16 +675,22 @@ static void atmel_spi_next_xfer_pio(struct spi_master *master,
 {
 	struct atmel_spi	*as = spi_master_get_devdata(master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dev_vdbg(master->dev.parent, "atmel_spi_next_xfer_pio\n");
 
 	as->current_remaining_bytes = xfer->len;
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long xfer_pos = xfer->len - as->current_remaining_bytes;
 
 	dev_vdbg(master->dev.parent, "atmel_spi_next_xfer_pio\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Make sure data is not remaining in RDR */
 	spi_readl(as, RDR);
@@ -634,6 +700,7 @@ static void atmel_spi_next_xfer_pio(struct spi_master *master,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xfer->tx_buf)
 		if (xfer->bits_per_word > 8)
 			spi_writel(as, TDR, *(u16 *)(xfer->tx_buf));
@@ -642,6 +709,8 @@ static void atmel_spi_next_xfer_pio(struct spi_master *master,
 	else
 		spi_writel(as, TDR, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (xfer->tx_buf) {
 		if (xfer->bits_per_word > 8)
 			spi_writel(as, TDR, *(u16 *)(xfer->tx_buf + xfer_pos));
@@ -650,6 +719,9 @@ static void atmel_spi_next_xfer_pio(struct spi_master *master,
 	} else {
 		spi_writel(as, TDR, 0);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(master->dev.parent,
@@ -664,7 +736,10 @@ static void atmel_spi_next_xfer_pio(struct spi_master *master,
 /*
  * Submit next transfer for DMA.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * lock is held, spi tasklet is blocked
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -717,6 +792,7 @@ static int atmel_spi_next_xfer_dma_submit(struct spi_master *master,
 	*plen = len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atmel_spi_dma_slave_config(as, &slave_config,
 				       xfer->bits_per_word))
 		goto err_exit;
@@ -738,6 +814,8 @@ static int atmel_spi_next_xfer_dma_submit(struct spi_master *master,
 					DMA_PREP_INTERRUPT | DMA_CTRL_ACK,
 					NULL);
 =======
+=======
+>>>>>>> v3.18
 	if (atmel_spi_dma_slave_config(as, &slave_config, 8))
 		goto err_exit;
 
@@ -751,15 +829,24 @@ static int atmel_spi_next_xfer_dma_submit(struct spi_master *master,
 	txdesc = dmaengine_prep_slave_sg(txchan, &as->dma.sgtx, 1,
 					 DMA_TO_DEVICE,
 					 DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!txdesc)
 		goto err_dma;
 
 	dev_dbg(master->dev.parent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"  start dma xfer %p: len %u tx %p/%08x rx %p/%08x\n",
 		xfer, xfer->len, xfer->tx_buf, xfer->tx_dma,
 		xfer->rx_buf, xfer->rx_dma);
+=======
+		"  start dma xfer %p: len %u tx %p/%08llx rx %p/%08llx\n",
+		xfer, xfer->len, xfer->tx_buf, (unsigned long long)xfer->tx_dma,
+		xfer->rx_buf, (unsigned long long)xfer->rx_dma);
+>>>>>>> v3.18
 =======
 		"  start dma xfer %p: len %u tx %p/%08llx rx %p/%08llx\n",
 		xfer, xfer->len, xfer->tx_buf, (unsigned long long)xfer->tx_dma,
@@ -828,7 +915,10 @@ static void atmel_spi_next_xfer_data(struct spi_master *master,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int atmel_spi_set_xfer_speed(struct atmel_spi *as,
 				    struct spi_device *spi,
 				    struct spi_transfer *xfer)
@@ -877,12 +967,16 @@ static int atmel_spi_set_xfer_speed(struct atmel_spi *as,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Submit next transfer for PDC.
  * lock is held, spi irq is blocked
  */
 static void atmel_spi_pdc_next_xfer(struct spi_master *master,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				struct spi_message *msg)
 {
@@ -947,6 +1041,8 @@ static void atmel_spi_pdc_next_xfer(struct spi_master *master,
 		atmel_spi_next_xfer_data(master, xfer, &tx_dma, &rx_dma, &len);
 		as->next_remaining_bytes = total - len;
 =======
+=======
+>>>>>>> v3.18
 					struct spi_message *msg,
 					struct spi_transfer *xfer)
 {
@@ -978,6 +1074,9 @@ static void atmel_spi_pdc_next_xfer(struct spi_master *master,
 		len = as->current_remaining_bytes;
 		atmel_spi_next_xfer_data(master, xfer, &tx_dma, &rx_dma, &len);
 		as->current_remaining_bytes -= len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		spi_writel(as, RNPR, rx_dma);
@@ -990,6 +1089,7 @@ static void atmel_spi_pdc_next_xfer(struct spi_master *master,
 
 		dev_dbg(&msg->spi->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"  next xfer %p: len %u tx %p/%08x rx %p/%08x\n",
 			xfer, xfer->len, xfer->tx_buf, xfer->tx_dma,
 			xfer->rx_buf, xfer->rx_dma);
@@ -999,10 +1099,15 @@ static void atmel_spi_pdc_next_xfer(struct spi_master *master,
 		spi_writel(as, TNCR, 0);
 		ieval = SPI_BIT(RXBUFF) | SPI_BIT(ENDRX) | SPI_BIT(OVRES);
 =======
+=======
+>>>>>>> v3.18
 			"  next xfer %p: len %u tx %p/%08llx rx %p/%08llx\n",
 			xfer, xfer->len, xfer->tx_buf,
 			(unsigned long long)xfer->tx_dma, xfer->rx_buf,
 			(unsigned long long)xfer->rx_dma);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1017,7 +1122,11 @@ static void atmel_spi_pdc_next_xfer(struct spi_master *master,
 	 * It should be doable, though. Just not now...
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_writel(as, IER, ieval);
+=======
+	spi_writel(as, IER, SPI_BIT(ENDRX) | SPI_BIT(OVRES));
+>>>>>>> v3.18
 =======
 	spi_writel(as, IER, SPI_BIT(ENDRX) | SPI_BIT(OVRES));
 >>>>>>> v3.18
@@ -1025,6 +1134,7 @@ static void atmel_spi_pdc_next_xfer(struct spi_master *master,
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Choose way to submit next transfer and start it.
  * lock is held, spi tasklet is blocked
@@ -1100,6 +1210,8 @@ static void atmel_spi_next_message(struct spi_master *master)
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * For DMA, tx_buf/tx_dma have the same relationship as rx_buf/rx_dma:
  *  - The buffer is either valid for CPU access, else NULL
  *  - If the buffer is valid, so is its DMA address
@@ -1155,6 +1267,7 @@ static void atmel_spi_disable_pdc_transfer(struct atmel_spi *as)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 atmel_spi_msg_done(struct spi_master *master, struct atmel_spi *as,
 		struct spi_message *msg, int stay)
@@ -1193,6 +1306,9 @@ atmel_spi_msg_done(struct spi_master *master, struct atmel_spi *as,
 =======
 /* Called from IRQ
 >>>>>>> v3.18
+=======
+/* Called from IRQ
+>>>>>>> v3.18
  *
  * Must update "current_remaining_bytes" to keep track of data
  * to transfer.
@@ -1201,9 +1317,13 @@ static void
 atmel_spi_pump_pio_data(struct atmel_spi *as, struct spi_transfer *xfer)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8		*txp;
 	u8		*rxp;
 	u16		*txp16;
+=======
+	u8		*rxp;
+>>>>>>> v3.18
 =======
 	u8		*rxp;
 >>>>>>> v3.18
@@ -1223,8 +1343,14 @@ atmel_spi_pump_pio_data(struct atmel_spi *as, struct spi_transfer *xfer)
 	}
 	if (xfer->bits_per_word > 8) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		as->current_remaining_bytes -= 2;
 		if (as->current_remaining_bytes < 0)
+=======
+		if (as->current_remaining_bytes > 2)
+			as->current_remaining_bytes -= 2;
+		else
+>>>>>>> v3.18
 =======
 		if (as->current_remaining_bytes > 2)
 			as->current_remaining_bytes -= 2;
@@ -1234,6 +1360,7 @@ atmel_spi_pump_pio_data(struct atmel_spi *as, struct spi_transfer *xfer)
 	} else {
 		as->current_remaining_bytes--;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (as->current_remaining_bytes) {
@@ -1320,14 +1447,20 @@ tasklet_out:
 	atmel_spi_unlock(as);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 /* Interrupt
  *
  * No need for locking in this Interrupt handler: done_status is the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * only information modified. What we need is the update of this field
  * before tasklet runs. This is ensured by using barrier.
+=======
+ * only information modified.
+>>>>>>> v3.18
 =======
  * only information modified.
 >>>>>>> v3.18
@@ -1359,8 +1492,11 @@ atmel_spi_pio_interrupt(int irq, void *dev_id)
 		 * We will also not process any remaning transfers in
 		 * the message.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 *
 		 * All actions are done in tasklet with done_status indication
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		 */
@@ -1371,7 +1507,11 @@ atmel_spi_pio_interrupt(int irq, void *dev_id)
 		spi_readl(as, SR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tasklet_schedule(&as->tasklet);
+=======
+		complete(&as->xfer_completion);
+>>>>>>> v3.18
 =======
 		complete(&as->xfer_completion);
 >>>>>>> v3.18
@@ -1384,16 +1524,22 @@ atmel_spi_pio_interrupt(int irq, void *dev_id)
 			xfer = as->current_transfer;
 			atmel_spi_pump_pio_data(as, xfer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!as->current_remaining_bytes) {
 				/* no more data to xfer, kick tasklet */
 				spi_writel(as, IDR, pending);
 				tasklet_schedule(&as->tasklet);
 			}
 =======
+=======
+>>>>>>> v3.18
 			if (!as->current_remaining_bytes)
 				spi_writel(as, IDR, pending);
 
 			complete(&as->xfer_completion);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1413,6 +1559,7 @@ atmel_spi_pdc_interrupt(int irq, void *dev_id)
 	struct spi_master	*master = dev_id;
 	struct atmel_spi	*as = spi_master_get_devdata(master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_message	*msg;
 	struct spi_transfer	*xfer;
 	u32			status, pending, imr;
@@ -1428,13 +1575,21 @@ atmel_spi_pdc_interrupt(int irq, void *dev_id)
 	int			ret = IRQ_NONE;
 
 >>>>>>> v3.18
+=======
+	u32			status, pending, imr;
+	int			ret = IRQ_NONE;
+
+>>>>>>> v3.18
 	imr = spi_readl(as, IMR);
 	status = spi_readl(as, SR);
 	pending = status & imr;
 
 	if (pending & SPI_BIT(OVRES)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int timeout;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1443,6 +1598,7 @@ atmel_spi_pdc_interrupt(int irq, void *dev_id)
 		spi_writel(as, IDR, (SPI_BIT(RXBUFF) | SPI_BIT(ENDRX)
 				     | SPI_BIT(OVRES)));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/*
 		 * When we get an overrun, we disregard the current
@@ -1485,12 +1641,20 @@ atmel_spi_pdc_interrupt(int irq, void *dev_id)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		/* Clear any overrun happening while cleaning up */
 		spi_readl(as, SR);
 
 		as->done_status = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atmel_spi_msg_done(master, as, msg, 0);
+=======
+
+		complete(&as->xfer_completion);
+
+>>>>>>> v3.18
 =======
 
 		complete(&as->xfer_completion);
@@ -1501,6 +1665,7 @@ atmel_spi_pdc_interrupt(int irq, void *dev_id)
 
 		spi_writel(as, IDR, pending);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (as->current_remaining_bytes == 0) {
 			msg->actual_length += xfer->len;
@@ -1546,6 +1711,11 @@ atmel_spi_pdc_interrupt(int irq, void *dev_id)
 	}
 
 >>>>>>> v3.18
+=======
+		complete(&as->xfer_completion);
+	}
+
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -1554,9 +1724,14 @@ static int atmel_spi_setup(struct spi_device *spi)
 	struct atmel_spi	*as;
 	struct atmel_spi_device	*asd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			scbr, csr;
 	unsigned int		bits = spi->bits_per_word;
 	unsigned long		bus_hz;
+=======
+	u32			csr;
+	unsigned int		bits = spi->bits_per_word;
+>>>>>>> v3.18
 =======
 	u32			csr;
 	unsigned int		bits = spi->bits_per_word;
@@ -1566,6 +1741,7 @@ static int atmel_spi_setup(struct spi_device *spi)
 
 	as = spi_master_get_devdata(spi->master);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (as->stopping)
 		return -ESHUTDOWN;
@@ -1586,6 +1762,8 @@ static int atmel_spi_setup(struct spi_device *spi)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* see notes above re chipselect */
 	if (!atmel_spi_is_v2(as)
 			&& spi->chip_select == 0
@@ -1594,6 +1772,7 @@ static int atmel_spi_setup(struct spi_device *spi)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* v1 chips start out at half the peripheral bus speed. */
 	bus_hz = clk_get_rate(as->clk);
@@ -1625,6 +1804,9 @@ static int atmel_spi_setup(struct spi_device *spi)
 =======
 	csr = SPI_BF(BITS, bits - 8);
 >>>>>>> v3.18
+=======
+	csr = SPI_BF(BITS, bits - 8);
+>>>>>>> v3.18
 	if (spi->mode & SPI_CPOL)
 		csr |= SPI_BIT(CPOL);
 	if (!(spi->mode & SPI_CPHA))
@@ -1641,7 +1823,11 @@ static int atmel_spi_setup(struct spi_device *spi)
 
 	/* chipselect must have been muxed as GPIO (e.g. in board setup) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	npcs_pin = (unsigned int)spi->controller_data;
+=======
+	npcs_pin = (unsigned long)spi->controller_data;
+>>>>>>> v3.18
 =======
 	npcs_pin = (unsigned long)spi->controller_data;
 >>>>>>> v3.18
@@ -1665,6 +1851,7 @@ static int atmel_spi_setup(struct spi_device *spi)
 		spi->controller_state = asd;
 		gpio_direction_output(npcs_pin, !(spi->mode & SPI_CS_HIGH));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		atmel_spi_lock(as);
 		if (as->stay == spi)
@@ -1673,14 +1860,21 @@ static int atmel_spi_setup(struct spi_device *spi)
 		atmel_spi_unlock(as);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	}
 
 	asd->csr = csr;
 
 	dev_dbg(&spi->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"setup: %lu Hz bpw %u mode 0x%x -> csr%d %08x\n",
 		bus_hz / scbr, bits, spi->mode, spi->chip_select, csr);
+=======
+		"setup: bpw %u mode 0x%x -> csr%d %08x\n",
+		bits, spi->mode, spi->chip_select, csr);
+>>>>>>> v3.18
 =======
 		"setup: bpw %u mode 0x%x -> csr%d %08x\n",
 		bits, spi->mode, spi->chip_select, csr);
@@ -1692,6 +1886,7 @@ static int atmel_spi_setup(struct spi_device *spi)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int atmel_spi_transfer(struct spi_device *spi, struct spi_message *msg)
 {
@@ -1773,6 +1968,8 @@ static int atmel_spi_transfer(struct spi_device *spi, struct spi_message *msg)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static int atmel_spi_one_transfer(struct spi_master *master,
 					struct spi_message *msg,
 					struct spi_transfer *xfer)
@@ -1969,15 +2166,23 @@ msg_done:
 	spi_finalize_current_message(spi->master);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void atmel_spi_cleanup(struct spi_device *spi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct atmel_spi	*as = spi_master_get_devdata(spi->master);
 	struct atmel_spi_device	*asd = spi->controller_state;
 	unsigned		gpio = (unsigned) spi->controller_data;
+=======
+	struct atmel_spi_device	*asd = spi->controller_state;
+	unsigned		gpio = (unsigned long) spi->controller_data;
+>>>>>>> v3.18
 =======
 	struct atmel_spi_device	*asd = spi->controller_state;
 	unsigned		gpio = (unsigned long) spi->controller_data;
@@ -1987,6 +2192,7 @@ static void atmel_spi_cleanup(struct spi_device *spi)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atmel_spi_lock(as);
 	if (as->stay == spi) {
 		as->stay = NULL;
@@ -1994,6 +2200,8 @@ static void atmel_spi_cleanup(struct spi_device *spi)
 	}
 	atmel_spi_unlock(as);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spi->controller_state = NULL;
@@ -2030,6 +2238,12 @@ static int atmel_spi_probe(struct platform_device *pdev)
 	struct atmel_spi	*as;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Select default pin state */
+	pinctrl_pm_select_default_state(&pdev->dev);
+
+>>>>>>> v3.18
 =======
 	/* Select default pin state */
 	pinctrl_pm_select_default_state(&pdev->dev);
@@ -2044,7 +2258,11 @@ static int atmel_spi_probe(struct platform_device *pdev)
 		return irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk = clk_get(&pdev->dev, "spi_clk");
+=======
+	clk = devm_clk_get(&pdev->dev, "spi_clk");
+>>>>>>> v3.18
 =======
 	clk = devm_clk_get(&pdev->dev, "spi_clk");
 >>>>>>> v3.18
@@ -2054,7 +2272,11 @@ static int atmel_spi_probe(struct platform_device *pdev)
 	/* setup spi core then atmel-specific driver state */
 	ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master = spi_alloc_master(&pdev->dev, sizeof *as);
+=======
+	master = spi_alloc_master(&pdev->dev, sizeof(*as));
+>>>>>>> v3.18
 =======
 	master = spi_alloc_master(&pdev->dev, sizeof(*as));
 >>>>>>> v3.18
@@ -2064,7 +2286,11 @@ static int atmel_spi_probe(struct platform_device *pdev)
 	/* the spi->mode bits understood by this driver: */
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_CS_HIGH;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(8, 16);
+>>>>>>> v3.18
 =======
 	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(8, 16);
 >>>>>>> v3.18
@@ -2073,7 +2299,11 @@ static int atmel_spi_probe(struct platform_device *pdev)
 	master->num_chipselect = master->dev.of_node ? 0 : 4;
 	master->setup = atmel_spi_setup;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->transfer = atmel_spi_transfer;
+=======
+	master->transfer_one_message = atmel_spi_transfer_one_message;
+>>>>>>> v3.18
 =======
 	master->transfer_one_message = atmel_spi_transfer_one_message;
 >>>>>>> v3.18
@@ -2093,6 +2323,7 @@ static int atmel_spi_probe(struct platform_device *pdev)
 
 	spin_lock_init(&as->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&as->queue);
 
 	as->pdev = pdev;
@@ -2100,6 +2331,8 @@ static int atmel_spi_probe(struct platform_device *pdev)
 	if (!as->regs)
 		goto out_free_buffer;
 =======
+=======
+>>>>>>> v3.18
 
 	as->pdev = pdev;
 	as->regs = devm_ioremap_resource(&pdev->dev, regs);
@@ -2107,12 +2340,20 @@ static int atmel_spi_probe(struct platform_device *pdev)
 		ret = PTR_ERR(as->regs);
 		goto out_free_buffer;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	as->phybase = regs->start;
 	as->irq = irq;
 	as->clk = clk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	init_completion(&as->xfer_completion);
+
+>>>>>>> v3.18
 =======
 	init_completion(&as->xfer_completion);
 
@@ -2133,6 +2374,7 @@ static int atmel_spi_probe(struct platform_device *pdev)
 
 	if (as->use_pdc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = request_irq(irq, atmel_spi_pdc_interrupt, 0,
 					dev_name(&pdev->dev), master);
 	} else {
@@ -2142,11 +2384,16 @@ static int atmel_spi_probe(struct platform_device *pdev)
 		ret = request_irq(irq, atmel_spi_pio_interrupt, 0,
 					dev_name(&pdev->dev), master);
 =======
+=======
+>>>>>>> v3.18
 		ret = devm_request_irq(&pdev->dev, irq, atmel_spi_pdc_interrupt,
 					0, dev_name(&pdev->dev), master);
 	} else {
 		ret = devm_request_irq(&pdev->dev, irq, atmel_spi_pio_interrupt,
 					0, dev_name(&pdev->dev), master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (ret)
@@ -2154,7 +2401,13 @@ static int atmel_spi_probe(struct platform_device *pdev)
 
 	/* Initialize the hardware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(clk);
+=======
+	ret = clk_prepare_enable(clk);
+	if (ret)
+		goto out_free_irq;
+>>>>>>> v3.18
 =======
 	ret = clk_prepare_enable(clk);
 	if (ret)
@@ -2178,7 +2431,11 @@ static int atmel_spi_probe(struct platform_device *pdev)
 			(unsigned long)regs->start, irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = spi_register_master(master);
+=======
+	ret = devm_spi_register_master(&pdev->dev, master);
+>>>>>>> v3.18
 =======
 	ret = devm_spi_register_master(&pdev->dev, master);
 >>>>>>> v3.18
@@ -2194,6 +2451,7 @@ out_free_dma:
 	spi_writel(as, CR, SPI_BIT(SWRST));
 	spi_writel(as, CR, SPI_BIT(SWRST)); /* AT91SAM9263 Rev B workaround */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(clk);
 	free_irq(irq, master);
 out_unmap_regs:
@@ -2206,6 +2464,8 @@ out_free_buffer:
 out_free:
 	clk_put(clk);
 =======
+=======
+>>>>>>> v3.18
 	clk_disable_unprepare(clk);
 out_free_irq:
 out_unmap_regs:
@@ -2213,6 +2473,9 @@ out_free_buffer:
 	dma_free_coherent(&pdev->dev, BUFFER_SIZE, as->buffer,
 			as->buffer_dma);
 out_free:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spi_master_put(master);
 	return ret;
@@ -2223,12 +2486,18 @@ static int atmel_spi_remove(struct platform_device *pdev)
 	struct spi_master	*master = platform_get_drvdata(pdev);
 	struct atmel_spi	*as = spi_master_get_devdata(master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_message	*msg;
 	struct spi_transfer	*xfer;
 
 	/* reset the hardware and block queue progress */
 	spin_lock_irq(&as->lock);
 	as->stopping = 1;
+=======
+
+	/* reset the hardware and block queue progress */
+	spin_lock_irq(&as->lock);
+>>>>>>> v3.18
 =======
 
 	/* reset the hardware and block queue progress */
@@ -2244,6 +2513,7 @@ static int atmel_spi_remove(struct platform_device *pdev)
 	spi_readl(as, SR);
 	spin_unlock_irq(&as->lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Terminate remaining queued transfers */
 	list_for_each_entry(msg, &as->queue, queue) {
@@ -2269,10 +2539,13 @@ static int atmel_spi_remove(struct platform_device *pdev)
 
 	spi_unregister_master(master);
 =======
+=======
+>>>>>>> v3.18
 	dma_free_coherent(&pdev->dev, BUFFER_SIZE, as->buffer,
 			as->buffer_dma);
 
 	clk_disable_unprepare(as->clk);
+<<<<<<< HEAD
 >>>>>>> v3.18
 
 	return 0;
@@ -2303,6 +2576,12 @@ static int atmel_spi_resume(struct platform_device *pdev)
 #define	atmel_spi_suspend	NULL
 #define	atmel_spi_resume	NULL
 =======
+=======
+
+	return 0;
+}
+
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int atmel_spi_suspend(struct device *dev)
 {
@@ -2347,6 +2626,9 @@ static SIMPLE_DEV_PM_OPS(atmel_spi_pm_ops, atmel_spi_suspend, atmel_spi_resume);
 #define ATMEL_SPI_PM_OPS	(&atmel_spi_pm_ops)
 #else
 #define ATMEL_SPI_PM_OPS	NULL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -2364,10 +2646,16 @@ static struct platform_driver atmel_spi_driver = {
 		.name	= "atmel_spi",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table	= of_match_ptr(atmel_spi_dt_ids),
 	},
 	.suspend	= atmel_spi_suspend,
 	.resume		= atmel_spi_resume,
+=======
+		.pm	= ATMEL_SPI_PM_OPS,
+		.of_match_table	= of_match_ptr(atmel_spi_dt_ids),
+	},
+>>>>>>> v3.18
 =======
 		.pm	= ATMEL_SPI_PM_OPS,
 		.of_match_table	= of_match_ptr(atmel_spi_dt_ids),

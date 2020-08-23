@@ -39,8 +39,12 @@
 #include <asm/udbg.h>
 #include <asm/mmu_context.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "setup.h"
+=======
+#include <asm/epapr_hcalls.h>
+>>>>>>> v3.18
 =======
 #include <asm/epapr_hcalls.h>
 >>>>>>> v3.18
@@ -50,8 +54,11 @@
 extern void bootx_init(unsigned long r4, unsigned long phys);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int boot_cpuid = -1;
 EXPORT_SYMBOL_GPL(boot_cpuid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int boot_cpuid_phys;
@@ -136,6 +143,11 @@ notrace void __init machine_init(u64 dt_ptr)
 	early_init_devtree(__va(dt_ptr));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	epapr_paravirt_early_init();
+
+>>>>>>> v3.18
 =======
 	epapr_paravirt_early_init();
 
@@ -259,14 +271,20 @@ static void __init exc_lvl_early_init(void)
 	 * as the memblock is limited to lowmem by MEMBLOCK_REAL_LIMIT */
 	for_each_possible_cpu(i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hw_cpu = get_hard_smp_processor_id(i);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 		hw_cpu = get_hard_smp_processor_id(i);
 #else
 		hw_cpu = 0;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		critirq_ctx[hw_cpu] = (struct thread_info *)
 			__va(memblock_alloc(THREAD_SIZE, THREAD_SIZE));
@@ -286,7 +304,11 @@ static void __init exc_lvl_early_init(void)
 void __init setup_arch(char **cmdline_p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*cmdline_p = cmd_line;
+=======
+	*cmdline_p = boot_command_line;
+>>>>>>> v3.18
 =======
 	*cmdline_p = boot_command_line;
 >>>>>>> v3.18
@@ -321,9 +343,12 @@ void __init setup_arch(char **cmdline_p)
 		ucache_bsize = icache_bsize = dcache_bsize;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* reboot on panic */
 	panic_timeout = 180;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ppc_md.panic)
@@ -355,7 +380,10 @@ void __init setup_arch(char **cmdline_p)
 	/* Initialize the MMU context management stuff */
 	mmu_context_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

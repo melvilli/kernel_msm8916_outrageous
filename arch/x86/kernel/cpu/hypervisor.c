@@ -26,11 +26,14 @@
 #include <asm/hypervisor.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Hypervisor detect order.  This is specified explicitly here because
  * some hypervisors might implement compatibility modes for other
  * hypervisors and therefore need to be detected in specific sequence.
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const __initconst struct hypervisor_x86 * const hypervisors[] =
@@ -53,6 +56,7 @@ detect_hypervisor_vendor(void)
 {
 	const struct hypervisor_x86 *h, * const *p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	for (p = hypervisors; p < hypervisors + ARRAY_SIZE(hypervisors); p++) {
 		h = *p;
@@ -66,6 +70,8 @@ detect_hypervisor_vendor(void)
 
 void __cpuinit init_hypervisor(struct cpuinfo_x86 *c)
 =======
+=======
+>>>>>>> v3.18
 	uint32_t pri, max_pri = 0;
 
 	for (p = hypervisors; p < hypervisors + ARRAY_SIZE(hypervisors); p++) {
@@ -82,6 +88,9 @@ void __cpuinit init_hypervisor(struct cpuinfo_x86 *c)
 }
 
 void init_hypervisor(struct cpuinfo_x86 *c)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (x86_hyper && x86_hyper->set_cpu_features)

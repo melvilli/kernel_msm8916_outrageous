@@ -24,11 +24,17 @@
 #include <linux/slab.h>
 #include <linux/kthread.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/completion.h>
 #include <linux/scatterlist.h>
 
 struct dma_chan;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -82,7 +88,12 @@ struct spi_device {
 	u32			max_speed_hz;
 	u8			chip_select;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8			mode;
+=======
+	u8			bits_per_word;
+	u16			mode;
+>>>>>>> v3.18
 =======
 	u8			bits_per_word;
 	u16			mode;
@@ -100,12 +111,18 @@ struct spi_device {
 #define	SPI_NO_CS	0x40			/* 1 dev/bus, no chipselect */
 #define	SPI_READY	0x80			/* slave pulls low to pause */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8			bits_per_word;
 =======
+=======
+>>>>>>> v3.18
 #define	SPI_TX_DUAL	0x100			/* transmit with 2 wires */
 #define	SPI_TX_QUAD	0x200			/* transmit with 4 wires */
 #define	SPI_RX_DUAL	0x400			/* receive with 2 wires */
 #define	SPI_RX_QUAD	0x800			/* receive with 4 wires */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			irq;
 	void			*controller_state;
@@ -166,8 +183,12 @@ static inline void *spi_get_drvdata(struct spi_device *spi)
 
 struct spi_message;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+struct spi_transfer;
+>>>>>>> v3.18
 =======
 struct spi_transfer;
 >>>>>>> v3.18
@@ -254,15 +275,21 @@ static inline void spi_unregister_driver(struct spi_driver *sdrv)
  * @bits_per_word_mask: A mask indicating which values of bits_per_word are
  *	supported by the driver. Bit n indicates that a bits_per_word n+1 is
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	suported. If set, the SPI core will reject any transfer with an
  *	unsupported bits_per_word. If not set, this value is simply ignored,
  *	and it's up to the individual driver to perform any validation.
 =======
+=======
+>>>>>>> v3.18
  *	supported. If set, the SPI core will reject any transfer with an
  *	unsupported bits_per_word. If not set, this value is simply ignored,
  *	and it's up to the individual driver to perform any validation.
  * @min_speed_hz: Lowest supported transfer speed
  * @max_speed_hz: Highest supported transfer speed
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @flags: other constraints relevant to this driver
  * @bus_lock_spinlock: spinlock for SPI bus locking
@@ -276,6 +303,10 @@ static inline void spi_unregister_driver(struct spi_driver *sdrv)
  * @transfer: adds a message to the controller's transfer queue.
  * @cleanup: frees controller-specific state
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @can_dma: determine whether this master supports DMA
+>>>>>>> v3.18
 =======
  * @can_dma: determine whether this master supports DMA
 >>>>>>> v3.18
@@ -287,10 +318,13 @@ static inline void spi_unregister_driver(struct spi_driver *sdrv)
  * @queue: message queue
  * @cur_msg: the currently in-flight message
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @busy: message pump is busy
  * @running: message pump is running
  * @rt: whether this queue is set to run as a realtime task
 =======
+=======
+>>>>>>> v3.18
  * @cur_msg_prepared: spi_prepare_message was called for the currently
  *                    in-flight message
  * @cur_msg_mapped: message has been mapped for DMA
@@ -302,6 +336,9 @@ static inline void spi_unregister_driver(struct spi_driver *sdrv)
  *                   while the hardware is prepared, using the parent
  *                   device for the spidev
  * @max_dma_len: Maximum length of a DMA transfer for the device.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @prepare_transfer_hardware: a message will soon arrive from the queue
  *	so the subsystem requests the driver to prepare the transfer hardware
@@ -311,6 +348,7 @@ static inline void spi_unregister_driver(struct spi_driver *sdrv)
  *	driver is finished with this message, it must call
  *	spi_finalize_current_message() so the subsystem can issue the next
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	transfer
  * @unprepare_transfer_hardware: there are currently no more messages on the
  *	queue so the subsystem notifies the driver that it may relax the
@@ -319,6 +357,8 @@ static inline void spi_unregister_driver(struct spi_driver *sdrv)
  *	number. Any individual value may be -ENOENT for CS lines that
  *	are not GPIOs (driven by the SPI controller itself).
 =======
+=======
+>>>>>>> v3.18
  *	message
  * @unprepare_transfer_hardware: there are currently no more messages on the
  *	queue so the subsystem notifies the driver that it may relax the
@@ -345,6 +385,9 @@ static inline void spi_unregister_driver(struct spi_driver *sdrv)
  * @dma_rx: DMA receive channel
  * @dummy_rx: dummy receive buffer for full-duplex devices
  * @dummy_tx: dummy transmit buffer for full-duplex devices
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Each SPI master controller can communicate with one or more @spi_device
@@ -387,7 +430,10 @@ struct spi_master {
 	/* bitmask of supported bits_per_word for transfers */
 	u32			bits_per_word_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SPI_BPW_MASK(bits) BIT((bits) - 1)
 #define SPI_BIT_MASK(bits) (((bits) == 32) ? ~0U : (BIT(bits) - 1))
 #define SPI_BPW_RANGE_MASK(min, max) (SPI_BIT_MASK(max) - SPI_BIT_MASK(min - 1))
@@ -395,6 +441,9 @@ struct spi_master {
 	/* limits on transfer speed */
 	u32			min_speed_hz;
 	u32			max_speed_hz;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* other constraints relevant to this driver */
@@ -403,6 +452,11 @@ struct spi_master {
 #define SPI_MASTER_NO_RX	BIT(1)		/* can't do buffer read */
 #define SPI_MASTER_NO_TX	BIT(2)		/* can't do buffer write */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SPI_MASTER_MUST_RX      BIT(3)		/* requires rx */
+#define SPI_MASTER_MUST_TX      BIT(4)		/* requires tx */
+>>>>>>> v3.18
 =======
 #define SPI_MASTER_MUST_RX      BIT(3)		/* requires rx */
 #define SPI_MASTER_MUST_TX      BIT(4)		/* requires tx */
@@ -450,7 +504,10 @@ struct spi_master {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Used to enable core support for DMA handling, if can_dma()
 	 * exists and returns true then the transfer will be mapped
 	 * prior to transfer_one() being called.  The driver should
@@ -462,6 +519,9 @@ struct spi_master {
 					   struct spi_transfer *xfer);
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * These hooks are for drivers that want to use the generic
 	 * master transfer queueing mechanism. If these are used, the
@@ -479,12 +539,18 @@ struct spi_master {
 	bool				running;
 	bool				rt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool				auto_runtime_pm;
 	bool                            cur_msg_prepared;
 	bool				cur_msg_mapped;
 	struct completion               xfer_completion;
 	size_t				max_dma_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int (*prepare_transfer_hardware)(struct spi_master *master);
@@ -492,9 +558,12 @@ struct spi_master {
 				    struct spi_message *mesg);
 	int (*unprepare_transfer_hardware)(struct spi_master *master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* gpio chip select */
 	int			*cs_gpios;
 =======
+=======
+>>>>>>> v3.18
 	int (*prepare_message)(struct spi_master *master,
 			       struct spi_message *message);
 	int (*unprepare_message)(struct spi_master *master,
@@ -518,6 +587,9 @@ struct spi_master {
 	/* dummy data for full duplex devices */
 	void			*dummy_rx;
 	void			*dummy_tx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -552,6 +624,10 @@ extern int spi_master_resume(struct spi_master *master);
 extern struct spi_message *spi_get_next_queued_message(struct spi_master *master);
 extern void spi_finalize_current_message(struct spi_master *master);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void spi_finalize_current_transfer(struct spi_master *master);
+>>>>>>> v3.18
 =======
 extern void spi_finalize_current_transfer(struct spi_master *master);
 >>>>>>> v3.18
@@ -562,6 +638,11 @@ spi_alloc_master(struct device *host, unsigned size);
 
 extern int spi_register_master(struct spi_master *master);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int devm_spi_register_master(struct device *dev,
+				    struct spi_master *master);
+>>>>>>> v3.18
 =======
 extern int devm_spi_register_master(struct device *dev,
 				    struct spi_master *master);
@@ -596,11 +677,17 @@ extern struct spi_master *spi_busnum_to_master(u16 busnum);
  * @tx_dma: DMA address of tx_buf, if @spi_message.is_dma_mapped
  * @rx_dma: DMA address of rx_buf, if @spi_message.is_dma_mapped
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @tx_nbits: number of bits used for writing. If 0 the default
  *      (SPI_NBITS_SINGLE) is used.
  * @rx_nbits: number of bits used for reading. If 0 the default
  *      (SPI_NBITS_SINGLE) is used.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @len: size of rx and tx buffers (in bytes)
  * @speed_hz: Select a speed other than the device default for this
@@ -613,6 +700,11 @@ extern struct spi_master *spi_busnum_to_master(u16 busnum);
  *	the next transfer or completing this @spi_message.
  * @transfer_list: transfers are sequenced through @spi_message.transfers
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @tx_sg: Scatterlist for transmit, currently not for client use
+ * @rx_sg: Scatterlist for receive, currently not for client use
+>>>>>>> v3.18
 =======
  * @tx_sg: Scatterlist for transmit, currently not for client use
  * @rx_sg: Scatterlist for receive, currently not for client use
@@ -662,12 +754,18 @@ extern struct spi_master *spi_busnum_to_master(u16 busnum);
  * ends when the chipselect goes intactive.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * When SPI can transfer in 1x,2x or 4x. It can get this transfer information
  * from device through @tx_nbits and @rx_nbits. In Bi-direction, these
  * two should both be set. User can set transfer mode with SPI_NBITS_SINGLE(1x)
  * SPI_NBITS_DUAL(2x) and SPI_NBITS_QUAD(4x) to support these three transfer.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * The code that submits an spi_message (and its spi_transfers)
  * to the lower layers is responsible for managing its memory.
@@ -688,9 +786,12 @@ struct spi_transfer {
 	dma_addr_t	tx_dma;
 	dma_addr_t	rx_dma;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	unsigned	cs_change:1;
 =======
+=======
+>>>>>>> v3.18
 	struct sg_table tx_sg;
 	struct sg_table rx_sg;
 
@@ -700,6 +801,9 @@ struct spi_transfer {
 #define	SPI_NBITS_SINGLE	0x01 /* 1bit transfer */
 #define	SPI_NBITS_DUAL		0x02 /* 2bits transfer */
 #define	SPI_NBITS_QUAD		0x04 /* 4bits transfer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8		bits_per_word;
 	u16		delay_usecs;
@@ -717,6 +821,10 @@ struct spi_transfer {
  * @complete: called to report transaction completions
  * @context: the argument to complete() when it's called
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @frame_length: the total number of bytes in the message
+>>>>>>> v3.18
 =======
  * @frame_length: the total number of bytes in the message
 >>>>>>> v3.18
@@ -762,6 +870,10 @@ struct spi_message {
 	void			(*complete)(void *context);
 	void			*context;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned		frame_length;
+>>>>>>> v3.18
 =======
 	unsigned		frame_length;
 >>>>>>> v3.18
@@ -975,7 +1087,11 @@ static inline ssize_t spi_w8r16(struct spi_device *spi, u8 cmd)
 	u16			result;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = spi_write_then_read(spi, &cmd, 1, (u8 *) &result, 2);
+=======
+	status = spi_write_then_read(spi, &cmd, 1, &result, 2);
+>>>>>>> v3.18
 =======
 	status = spi_write_then_read(spi, &cmd, 1, &result, 2);
 >>>>>>> v3.18
@@ -985,7 +1101,10 @@ static inline ssize_t spi_w8r16(struct spi_device *spi, u8 cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * spi_w8r16be - SPI synchronous 8 bit write followed by 16 bit big-endian read
  * @spi: device with which data will be exchanged
@@ -1013,6 +1132,9 @@ static inline ssize_t spi_w8r16be(struct spi_device *spi, u8 cmd)
 	return be16_to_cpu(result);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*---------------------------------------------------------------------------*/
 
@@ -1091,7 +1213,11 @@ struct spi_board_info {
 	 * where the default of SPI_CS_HIGH = 0 is wrong.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8		mode;
+=======
+	u16		mode;
+>>>>>>> v3.18
 =======
 	u16		mode;
 >>>>>>> v3.18

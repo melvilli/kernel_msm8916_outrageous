@@ -49,6 +49,10 @@
 #include <linux/scatterlist.h>
 #include <linux/workqueue.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/linux/if_ether.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/if_ether.h>
 >>>>>>> v3.18
@@ -72,7 +76,13 @@ enum rdma_node_type {
 	RDMA_NODE_IB_SWITCH,
 	RDMA_NODE_IB_ROUTER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RDMA_NODE_RNIC
+=======
+	RDMA_NODE_RNIC,
+	RDMA_NODE_USNIC,
+	RDMA_NODE_USNIC_UDP,
+>>>>>>> v3.18
 =======
 	RDMA_NODE_RNIC,
 	RDMA_NODE_USNIC,
@@ -83,12 +93,15 @@ enum rdma_node_type {
 enum rdma_transport_type {
 	RDMA_TRANSPORT_IB,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RDMA_TRANSPORT_IWARP
 };
 
 enum rdma_transport_type
 rdma_node_get_transport(enum rdma_node_type node_type) __attribute_const__;
 =======
+=======
+>>>>>>> v3.18
 	RDMA_TRANSPORT_IWARP,
 	RDMA_TRANSPORT_USNIC,
 	RDMA_TRANSPORT_USNIC_UDP
@@ -96,6 +109,9 @@ rdma_node_get_transport(enum rdma_node_type node_type) __attribute_const__;
 
 __attribute_const__ enum rdma_transport_type
 rdma_node_get_transport(enum rdma_node_type node_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum rdma_link_layer {
@@ -137,8 +153,11 @@ enum ib_device_cap_flags {
 	IB_DEVICE_BLOCK_MULTICAST_LOOPBACK = (1<<22),
 	IB_DEVICE_MEM_WINDOW_TYPE_2A	= (1<<23),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IB_DEVICE_MEM_WINDOW_TYPE_2B	= (1<<24)
 =======
+=======
+>>>>>>> v3.18
 	IB_DEVICE_MEM_WINDOW_TYPE_2B	= (1<<24),
 	IB_DEVICE_MANAGED_FLOW_STEERING = (1<<29),
 	IB_DEVICE_SIGNATURE_HANDOVER	= (1<<30)
@@ -153,6 +172,9 @@ enum ib_signature_prot_cap {
 enum ib_signature_guard_cap {
 	IB_GUARD_T10DIF_CRC	= 1,
 	IB_GUARD_T10DIF_CSUM	= 1 << 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -204,6 +226,11 @@ struct ib_device_attr {
 	u16			max_pkeys;
 	u8			local_ca_ack_delay;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			sig_prot_cap;
+	int			sig_guard_cap;
+>>>>>>> v3.18
 =======
 	int			sig_prot_cap;
 	int			sig_guard_cap;
@@ -263,7 +290,12 @@ enum ib_port_cap_flags {
 	IB_PORT_BOOT_MGMT_SUP			= 1 << 23,
 	IB_PORT_LINK_LATENCY_SUP		= 1 << 24,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IB_PORT_CLIENT_REG_SUP			= 1 << 25
+=======
+	IB_PORT_CLIENT_REG_SUP			= 1 << 25,
+	IB_PORT_IP_BASED_GIDS			= 1 << 26
+>>>>>>> v3.18
 =======
 	IB_PORT_CLIENT_REG_SUP			= 1 << 25,
 	IB_PORT_IP_BASED_GIDS			= 1 << 26
@@ -493,7 +525,11 @@ enum ib_rate {
  * @rate: rate to convert.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ib_rate_to_mult(enum ib_rate rate) __attribute_const__;
+=======
+__attribute_const__ int ib_rate_to_mult(enum ib_rate rate);
+>>>>>>> v3.18
 =======
 __attribute_const__ int ib_rate_to_mult(enum ib_rate rate);
 >>>>>>> v3.18
@@ -504,8 +540,11 @@ __attribute_const__ int ib_rate_to_mult(enum ib_rate rate);
  * @rate: rate to convert.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ib_rate_to_mbps(enum ib_rate rate) __attribute_const__;
 =======
+=======
+>>>>>>> v3.18
 __attribute_const__ int ib_rate_to_mbps(enum ib_rate rate);
 
 enum ib_mr_create_flags {
@@ -627,6 +666,9 @@ struct ib_mr_status {
 	u32		    fail_status;
 	struct ib_sig_err   sig_err;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -635,7 +677,11 @@ struct ib_mr_status {
  * @mult: multiple to convert.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum ib_rate mult_to_ib_rate(int mult) __attribute_const__;
+=======
+__attribute_const__ enum ib_rate mult_to_ib_rate(int mult);
+>>>>>>> v3.18
 =======
 __attribute_const__ enum ib_rate mult_to_ib_rate(int mult);
 >>>>>>> v3.18
@@ -649,6 +695,11 @@ struct ib_ah_attr {
 	u8			ah_flags;
 	u8			port_num;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8			dmac[ETH_ALEN];
+	u16			vlan_id;
+>>>>>>> v3.18
 =======
 	u8			dmac[ETH_ALEN];
 	u16			vlan_id;
@@ -706,6 +757,11 @@ enum ib_wc_flags {
 	IB_WC_WITH_INVALIDATE	= (1<<2),
 	IB_WC_IP_CSUM_OK	= (1<<3),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IB_WC_WITH_SMAC		= (1<<4),
+	IB_WC_WITH_VLAN		= (1<<5),
+>>>>>>> v3.18
 =======
 	IB_WC_WITH_SMAC		= (1<<4),
 	IB_WC_WITH_VLAN		= (1<<5),
@@ -731,6 +787,11 @@ struct ib_wc {
 	u8			dlid_path_bits;
 	u8			port_num;	/* valid only for DR SMPs on switches */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8			smac[ETH_ALEN];
+	u16			vlan_id;
+>>>>>>> v3.18
 =======
 	u8			smac[ETH_ALEN];
 	u16			vlan_id;
@@ -805,8 +866,11 @@ enum ib_qp_type {
 	IB_QPT_XRC_INI = 9,
 	IB_QPT_XRC_TGT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IB_QPT_MAX
 =======
+=======
+>>>>>>> v3.18
 	IB_QPT_MAX,
 	/* Reserve a range for qp types internal to the low level driver.
 	 * These qp types will not be visible at the IB core layer, so the
@@ -822,6 +886,9 @@ enum ib_qp_type {
 	IB_QPT_RESERVED8,
 	IB_QPT_RESERVED9,
 	IB_QPT_RESERVED10,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -829,6 +896,12 @@ enum ib_qp_create_flags {
 	IB_QP_CREATE_IPOIB_UD_LSO		= 1 << 0,
 	IB_QP_CREATE_BLOCK_MULTICAST_LOOPBACK	= 1 << 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IB_QP_CREATE_NETIF_QP			= 1 << 5,
+	IB_QP_CREATE_SIGNATURE_EN		= 1 << 6,
+	IB_QP_CREATE_USE_GFP_NOIO		= 1 << 7,
+>>>>>>> v3.18
 =======
 	IB_QP_CREATE_NETIF_QP			= 1 << 5,
 	IB_QP_CREATE_SIGNATURE_EN		= 1 << 6,
@@ -840,13 +913,19 @@ enum ib_qp_create_flags {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Note: users may not call ib_close_qp or ib_destroy_qp from the event_handler
  * callback to destroy the passed in QP.
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ib_qp_init_attr {
 	void                  (*event_handler)(struct ib_event *, void *);
@@ -926,13 +1005,19 @@ enum ib_qp_attr_mask {
 	IB_QP_PATH_MIG_STATE		= (1<<18),
 	IB_QP_CAP			= (1<<19),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IB_QP_DEST_QPN			= (1<<20)
 =======
+=======
+>>>>>>> v3.18
 	IB_QP_DEST_QPN			= (1<<20),
 	IB_QP_SMAC			= (1<<21),
 	IB_QP_ALT_SMAC			= (1<<22),
 	IB_QP_VID			= (1<<23),
 	IB_QP_ALT_VID			= (1<<24),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -984,11 +1069,17 @@ struct ib_qp_attr {
 	u8			alt_port_num;
 	u8			alt_timeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8			smac[ETH_ALEN];
 	u8			alt_smac[ETH_ALEN];
 	u16			vlan_id;
 	u16			alt_vlan_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1009,7 +1100,10 @@ enum ib_wr_opcode {
 	IB_WR_MASKED_ATOMIC_FETCH_AND_ADD,
 	IB_WR_BIND_MW,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IB_WR_REG_SIG_MR,
 	/* reserve values for low level drivers' internal use.
 	 * These values will not be used at all in the ib core layer.
@@ -1024,6 +1118,9 @@ enum ib_wr_opcode {
 	IB_WR_RESERVED8,
 	IB_WR_RESERVED9,
 	IB_WR_RESERVED10,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1033,13 +1130,19 @@ enum ib_send_flags {
 	IB_SEND_SOLICITED	= (1<<2),
 	IB_SEND_INLINE		= (1<<3),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IB_SEND_IP_CSUM		= (1<<4)
 =======
+=======
+>>>>>>> v3.18
 	IB_SEND_IP_CSUM		= (1<<4),
 
 	/* reserve bits 26-31 for low level drivers' internal use */
 	IB_SEND_RESERVED_START	= (1 << 26),
 	IB_SEND_RESERVED_END	= (1 << 31),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1122,13 +1225,19 @@ struct ib_send_wr {
 			struct ib_mw_bind_info   bind_info;
 		} bind_mw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		struct {
 			struct ib_sig_attrs    *sig_attrs;
 			struct ib_mr	       *sig_mr;
 			int			access_flags;
 			struct ib_sge	       *prot;
 		} sig_handover;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} wr;
 	u32			xrc_remote_srq_num;	/* XRC TGT QPs only */
@@ -1168,7 +1277,12 @@ enum ib_mr_rereg_flags {
 	IB_MR_REREG_TRANS	= 1,
 	IB_MR_REREG_PD		= (1<<1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IB_MR_REREG_ACCESS	= (1<<2)
+=======
+	IB_MR_REREG_ACCESS	= (1<<2),
+	IB_MR_REREG_SUPPORTED	= ((IB_MR_REREG_ACCESS << 1) - 1)
+>>>>>>> v3.18
 =======
 	IB_MR_REREG_ACCESS	= (1<<2),
 	IB_MR_REREG_SUPPORTED	= ((IB_MR_REREG_ACCESS << 1) - 1)
@@ -1204,6 +1318,10 @@ struct ib_ucontext {
 	struct list_head	ah_list;
 	struct list_head	xrcd_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head	rule_list;
+>>>>>>> v3.18
 =======
 	struct list_head	rule_list;
 >>>>>>> v3.18
@@ -1223,7 +1341,11 @@ struct ib_uobject {
 
 struct ib_udata {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __user *inbuf;
+=======
+	const void __user *inbuf;
+>>>>>>> v3.18
 =======
 	const void __user *inbuf;
 >>>>>>> v3.18
@@ -1292,7 +1414,12 @@ struct ib_qp {
 	struct ib_xrcd	       *xrcd; /* XRC TGT QPs only */
 	struct list_head	xrcd_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t		usecnt; /* count times opened, mcast attaches */
+=======
+	/* count times opened, mcast attaches, flow attaches */
+	atomic_t		usecnt;
+>>>>>>> v3.18
 =======
 	/* count times opened, mcast attaches, flow attaches */
 	atomic_t		usecnt;
@@ -1332,7 +1459,10 @@ struct ib_fmr {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Supported steering options */
 enum ib_flow_attr_type {
 	/* steering according to rule specifications */
@@ -1453,6 +1583,9 @@ struct ib_flow {
 	struct ib_uobject	*uobject;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ib_mad;
 struct ib_grh;
@@ -1503,10 +1636,13 @@ struct ib_dma_mapping_ops {
 				    struct scatterlist *sg, int nents,
 				    enum dma_data_direction direction);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64		(*dma_address)(struct ib_device *dev,
 				       struct scatterlist *sg);
 	unsigned int	(*dma_len)(struct ib_device *dev,
 				   struct scatterlist *sg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void		(*sync_single_for_cpu)(struct ib_device *dev,
@@ -1644,10 +1780,13 @@ struct ib_device {
 						  int mr_access_flags,
 						  struct ib_udata *udata);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int                        (*query_mr)(struct ib_mr *mr,
 					       struct ib_mr_attr *mr_attr);
 	int                        (*dereg_mr)(struct ib_mr *mr);
 =======
+=======
+>>>>>>> v3.18
 	int			   (*rereg_user_mr)(struct ib_mr *mr,
 						    int flags,
 						    u64 start, u64 length,
@@ -1661,6 +1800,9 @@ struct ib_device {
 	int                        (*destroy_mr)(struct ib_mr *mr);
 	struct ib_mr *		   (*create_mr)(struct ib_pd *pd,
 						struct ib_mr_init_attr *mr_init_attr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct ib_mr *		   (*alloc_fast_reg_mr)(struct ib_pd *pd,
 					       int max_page_list_len);
@@ -1706,7 +1848,10 @@ struct ib_device {
 						 struct ib_udata *udata);
 	int			   (*dealloc_xrcd)(struct ib_xrcd *xrcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct ib_flow *	   (*create_flow)(struct ib_qp *qp,
 						  struct ib_flow_attr
 						  *flow_attr,
@@ -1714,6 +1859,9 @@ struct ib_device {
 	int			   (*destroy_flow)(struct ib_flow *flow_id);
 	int			   (*check_mr_status)(struct ib_mr *mr, u32 check_mask,
 						      struct ib_mr_status *mr_status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct ib_dma_mapping_ops   *dma_ops;
@@ -1732,6 +1880,10 @@ struct ib_device {
 	int			     uverbs_abi_ver;
 	u64			     uverbs_cmd_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64			     uverbs_ex_cmd_mask;
+>>>>>>> v3.18
 =======
 	u64			     uverbs_ex_cmd_mask;
 >>>>>>> v3.18
@@ -1785,6 +1937,10 @@ static inline int ib_copy_to_udata(struct ib_udata *udata, void *src, size_t len
  * @type: QP type
  * @mask: Mask of supplied QP attributes
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @ll : link layer of port
+>>>>>>> v3.18
 =======
  * @ll : link layer of port
 >>>>>>> v3.18
@@ -1797,7 +1953,12 @@ static inline int ib_copy_to_udata(struct ib_udata *udata, void *src, size_t len
  */
 int ib_modify_qp_is_ok(enum ib_qp_state cur_state, enum ib_qp_state next_state,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       enum ib_qp_type type, enum ib_qp_attr_mask mask);
+=======
+		       enum ib_qp_type type, enum ib_qp_attr_mask mask,
+		       enum rdma_link_layer ll);
+>>>>>>> v3.18
 =======
 		       enum ib_qp_type type, enum ib_qp_attr_mask mask,
 		       enum rdma_link_layer ll);
@@ -2360,6 +2521,12 @@ static inline void ib_dma_unmap_sg_attrs(struct ib_device *dev,
  * @dev: The device for which the DMA addresses were created
  * @sg: The scatter/gather entry
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Note: this function is obsolete. To do: change all occurrences of
+ * ib_sg_dma_address() into sg_dma_address().
+>>>>>>> v3.18
 =======
  *
  * Note: this function is obsolete. To do: change all occurrences of
@@ -2370,8 +2537,11 @@ static inline u64 ib_sg_dma_address(struct ib_device *dev,
 				    struct scatterlist *sg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->dma_ops)
 		return dev->dma_ops->dma_address(dev, sg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return sg_dma_address(sg);
@@ -2382,6 +2552,12 @@ static inline u64 ib_sg_dma_address(struct ib_device *dev,
  * @dev: The device for which the DMA addresses were created
  * @sg: The scatter/gather entry
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Note: this function is obsolete. To do: change all occurrences of
+ * ib_sg_dma_len() into sg_dma_len().
+>>>>>>> v3.18
 =======
  *
  * Note: this function is obsolete. To do: change all occurrences of
@@ -2392,8 +2568,11 @@ static inline unsigned int ib_sg_dma_len(struct ib_device *dev,
 					 struct scatterlist *sg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->dma_ops)
 		return dev->dma_ops->dma_len(dev, sg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return sg_dma_len(sg);
@@ -2539,7 +2718,10 @@ int ib_query_mr(struct ib_mr *mr, struct ib_mr_attr *mr_attr);
 int ib_dereg_mr(struct ib_mr *mr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * ib_create_mr - Allocates a memory region that may be used for
@@ -2559,6 +2741,9 @@ struct ib_mr *ib_create_mr(struct ib_pd *pd,
  */
 int ib_destroy_mr(struct ib_mr *mr);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * ib_alloc_fast_reg_mr - Allocates memory region usable with the
@@ -2729,7 +2914,10 @@ struct ib_xrcd *ib_alloc_xrcd(struct ib_device *device);
 int ib_dealloc_xrcd(struct ib_xrcd *xrcd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ib_flow *ib_create_flow(struct ib_qp *qp,
 			       struct ib_flow_attr *flow_attr, int domain);
 int ib_destroy_flow(struct ib_flow *flow_id);
@@ -2762,5 +2950,8 @@ static inline int ib_check_mr_access(int flags)
 int ib_check_mr_status(struct ib_mr *mr, u32 check_mask,
 		       struct ib_mr_status *mr_status);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* IB_VERBS_H */

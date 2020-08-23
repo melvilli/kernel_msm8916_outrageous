@@ -26,8 +26,11 @@
 #include <linux/init.h>
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <acpi/hed.h>

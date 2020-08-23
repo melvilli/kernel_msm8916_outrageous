@@ -2,9 +2,12 @@ menu "CPU support"
 	depends on BCM63XX
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config BCM63XX_CPU_6328
 	bool "support 6328 CPU"
 =======
+=======
+>>>>>>> v3.18
 config BCM63XX_CPU_3368
 	bool "support 3368 CPU"
 	select SYS_HAS_CPU_BMIPS4350
@@ -13,11 +16,15 @@ config BCM63XX_CPU_3368
 config BCM63XX_CPU_6328
 	bool "support 6328 CPU"
 	select SYS_HAS_CPU_BMIPS4350
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HW_HAS_PCI
 
 config BCM63XX_CPU_6338
 	bool "support 6338 CPU"
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select HW_HAS_PCI
 	select USB_ARCH_HAS_OHCI
@@ -32,6 +39,8 @@ config BCM63XX_CPU_6345
 config BCM63XX_CPU_6348
 	bool "support 6348 CPU"
 =======
+=======
+>>>>>>> v3.18
 	select SYS_HAS_CPU_BMIPS32_3300
 	select HW_HAS_PCI
 
@@ -42,12 +51,19 @@ config BCM63XX_CPU_6345
 config BCM63XX_CPU_6348
 	bool "support 6348 CPU"
 	select SYS_HAS_CPU_BMIPS32_3300
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HW_HAS_PCI
 
 config BCM63XX_CPU_6358
 	bool "support 6358 CPU"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SYS_HAS_CPU_BMIPS4350
+>>>>>>> v3.18
 =======
 	select SYS_HAS_CPU_BMIPS4350
 >>>>>>> v3.18
@@ -56,6 +72,10 @@ config BCM63XX_CPU_6358
 config BCM63XX_CPU_6362
 	bool "support 6362 CPU"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SYS_HAS_CPU_BMIPS4350
+>>>>>>> v3.18
 =======
 	select SYS_HAS_CPU_BMIPS4350
 >>>>>>> v3.18
@@ -64,6 +84,10 @@ config BCM63XX_CPU_6362
 config BCM63XX_CPU_6368
 	bool "support 6368 CPU"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SYS_HAS_CPU_BMIPS4350
+>>>>>>> v3.18
 =======
 	select SYS_HAS_CPU_BMIPS4350
 >>>>>>> v3.18

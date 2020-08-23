@@ -1,15 +1,21 @@
 config DRM_NOUVEAU
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Nouveau (nVidia) cards"
 	depends on DRM && PCI
         select FW_LOADER
 	select DRM_KMS_HELPER
 =======
+=======
+>>>>>>> v3.18
 	tristate "Nouveau (NVIDIA) cards"
 	depends on DRM && PCI
         select FW_LOADER
 	select DRM_KMS_HELPER
 	select DRM_KMS_FB_HELPER
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select DRM_TTM
 	select FB_CFB_FILLRECT
@@ -19,7 +25,11 @@ config DRM_NOUVEAU
 	select FRAMEBUFFER_CONSOLE if !EXPERT
 	select FB_BACKLIGHT if DRM_NOUVEAU_BACKLIGHT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ACPI_VIDEO if ACPI && X86 && BACKLIGHT_CLASS_DEVICE && VIDEO_OUTPUT_CONTROL && INPUT
+=======
+	select ACPI_VIDEO if ACPI && X86 && BACKLIGHT_CLASS_DEVICE && INPUT
+>>>>>>> v3.18
 =======
 	select ACPI_VIDEO if ACPI && X86 && BACKLIGHT_CLASS_DEVICE && INPUT
 >>>>>>> v3.18
@@ -28,9 +38,12 @@ config DRM_NOUVEAU
 	select MXM_WMI if ACPI && X86
 	select POWER_SUPPLY
 <<<<<<< HEAD
+<<<<<<< HEAD
 	help
 	  Choose this option for open-source nVidia support.
 =======
+=======
+>>>>>>> v3.18
 	# Similar to i915, we need to select ACPI_VIDEO and it's dependencies
 	select BACKLIGHT_LCD_SUPPORT if ACPI && X86
 	select BACKLIGHT_CLASS_DEVICE if ACPI && X86
@@ -47,6 +60,9 @@ config NOUVEAU_PLATFORM_DRIVER
 	help
 	  Support for Nouveau platform driver, used for SoC GPUs as found
 	  on NVIDIA Tegra K1.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config NOUVEAU_DEBUG

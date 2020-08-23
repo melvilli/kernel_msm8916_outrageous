@@ -56,6 +56,7 @@
 /* End of chiptype definitions */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* RS-232 serial data communication protocol definitions */
 /* these are sent / read at byte 0 of the input/output hid reports */
 /* You can find these values defined in the CY4601 USB to Serial design notes */
@@ -70,6 +71,8 @@
 /* Note - the below has nothing to do with the "feature report" reset */
 #define CONTROL_RESET	0x08	/* sent with output report - host to device */
 =======
+=======
+>>>>>>> v3.18
 /*
  * RS-232 serial data communication protocol definitions.
  *
@@ -87,6 +90,9 @@
 #define UART_DSR	0x20	/* data set ready */
 #define UART_CTS	0x10	/* clear to send */
 #define CYP_ERROR	0x08	/* received from input report */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* End of RS-232 protocol definitions */

@@ -40,8 +40,13 @@
 #include <asm/dma.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "bf5xx-i2s-pcm.h"
 #include "bf5xx-sport.h"
+=======
+#include "bf5xx-sport.h"
+#include "bf5xx-i2s-pcm.h"
+>>>>>>> v3.18
 =======
 #include "bf5xx-sport.h"
 #include "bf5xx-i2s-pcm.h"
@@ -56,12 +61,17 @@ static void bf5xx_dma_irq(void *data)
 static const struct snd_pcm_hardware bf5xx_pcm_hardware = {
 	.info			= SNDRV_PCM_INFO_INTERLEAVED |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   SNDRV_PCM_INFO_MMAP |
 				   SNDRV_PCM_INFO_MMAP_VALID |
 				   SNDRV_PCM_INFO_BLOCK_TRANSFER,
 	.formats		= SNDRV_PCM_FMTBIT_S16_LE |
 				   SNDRV_PCM_FMTBIT_S24_LE |
 				   SNDRV_PCM_FMTBIT_S32_LE,
+=======
+				   SNDRV_PCM_INFO_MMAP_VALID |
+				   SNDRV_PCM_INFO_BLOCK_TRANSFER,
+>>>>>>> v3.18
 =======
 				   SNDRV_PCM_INFO_MMAP_VALID |
 				   SNDRV_PCM_INFO_BLOCK_TRANSFER,
@@ -78,11 +88,14 @@ static int bf5xx_pcm_hw_params(struct snd_pcm_substream *substream,
 	struct snd_pcm_hw_params *params)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t size = bf5xx_pcm_hardware.buffer_bytes_max;
 	snd_pcm_lib_malloc_pages(substream, size);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	unsigned int buffer_size = params_buffer_bytes(params);
 	struct bf5xx_i2s_pcm_data *dma_data;
@@ -93,6 +106,9 @@ static int bf5xx_pcm_hw_params(struct snd_pcm_substream *substream,
 		buffer_size = buffer_size / params_channels(params) * 8;
 
 	return snd_pcm_lib_malloc_pages(substream, buffer_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -106,10 +122,13 @@ static int bf5xx_pcm_hw_free(struct snd_pcm_substream *substream)
 static int bf5xx_pcm_prepare(struct snd_pcm_substream *substream)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_pcm_runtime *runtime = substream->runtime;
 	struct sport_device *sport = runtime->private_data;
 	int period_bytes = frames_to_bytes(runtime, runtime->period_size);
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct snd_pcm_runtime *runtime = substream->runtime;
 	struct sport_device *sport = runtime->private_data;
@@ -120,6 +139,9 @@ static int bf5xx_pcm_prepare(struct snd_pcm_substream *substream)
 
 	if (dma_data->tdm_mode)
 		period_bytes = period_bytes / runtime->channels * 8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pr_debug("%s enter\n", __func__);
@@ -168,6 +190,10 @@ static int bf5xx_pcm_trigger(struct snd_pcm_substream *substream, int cmd)
 static snd_pcm_uframes_t bf5xx_pcm_pointer(struct snd_pcm_substream *substream)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+>>>>>>> v3.18
 =======
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 >>>>>>> v3.18
@@ -176,11 +202,17 @@ static snd_pcm_uframes_t bf5xx_pcm_pointer(struct snd_pcm_substream *substream)
 	unsigned int diff;
 	snd_pcm_uframes_t frames;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct bf5xx_i2s_pcm_data *dma_data;
 
 	dma_data = snd_soc_dai_get_dma_data(rtd->cpu_dai, substream);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_debug("%s enter\n", __func__);
 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
@@ -199,6 +231,11 @@ static snd_pcm_uframes_t bf5xx_pcm_pointer(struct snd_pcm_substream *substream)
 
 	frames = bytes_to_frames(substream->runtime, diff);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (dma_data->tdm_mode)
+		frames = frames * runtime->channels / 8;
+>>>>>>> v3.18
 =======
 	if (dma_data->tdm_mode)
 		frames = frames * runtime->channels / 8;
@@ -215,12 +252,15 @@ static int bf5xx_pcm_open(struct snd_pcm_substream *substream)
 	struct snd_pcm_runtime *runtime = substream->runtime;
 	struct snd_dma_buffer *buf = &substream->dma_buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	pr_debug("%s enter\n", __func__);
 
 	snd_soc_set_runtime_hwparams(substream, &bf5xx_pcm_hardware);
 =======
+=======
+>>>>>>> v3.18
 	struct bf5xx_i2s_pcm_data *dma_data;
 	int ret;
 
@@ -233,6 +273,9 @@ static int bf5xx_pcm_open(struct snd_pcm_substream *substream)
 		runtime->hw.buffer_bytes_max /= 4;
 	else
 		runtime->hw.info |= SNDRV_PCM_INFO_MMAP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = snd_pcm_hw_constraint_integer(runtime,
@@ -270,6 +313,7 @@ static int bf5xx_pcm_mmap(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct snd_pcm_ops bf5xx_pcm_i2s_ops = {
 	.open		= bf5xx_pcm_open,
 	.ioctl		= snd_pcm_lib_ioctl,
@@ -301,6 +345,8 @@ static int bf5xx_pcm_preallocate_dma_buffer(struct snd_pcm *pcm, int stream)
 	pr_debug("%s, area:%p, size:0x%08lx\n", __func__,
 		buf->area, buf->bytes);
 =======
+=======
+>>>>>>> v3.18
 static int bf5xx_pcm_copy(struct snd_pcm_substream *substream, int channel,
 	snd_pcm_uframes_t pos, void *buf, snd_pcm_uframes_t count)
 {
@@ -354,11 +400,15 @@ static int bf5xx_pcm_copy(struct snd_pcm_substream *substream, int channel,
 
 		memcpy(dst, src, frames_to_bytes(runtime, count));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void bf5xx_pcm_free_dma_buffers(struct snd_pcm *pcm)
 {
@@ -381,6 +431,8 @@ static void bf5xx_pcm_free_dma_buffers(struct snd_pcm *pcm)
 
 static u64 bf5xx_pcm_dmamask = DMA_BIT_MASK(32);
 =======
+=======
+>>>>>>> v3.18
 static int bf5xx_pcm_silence(struct snd_pcm_substream *substream,
 	int channel, snd_pcm_uframes_t pos, snd_pcm_uframes_t count)
 {
@@ -418,11 +470,15 @@ static struct snd_pcm_ops bf5xx_pcm_i2s_ops = {
 	.copy		= bf5xx_pcm_copy,
 	.silence	= bf5xx_pcm_silence,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int bf5xx_pcm_i2s_new(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_card *card = rtd->card->snd_card;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct snd_pcm *pcm = rtd->pcm;
 	int ret = 0;
@@ -449,6 +505,8 @@ static int bf5xx_pcm_i2s_new(struct snd_soc_pcm_runtime *rtd)
  out:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	size_t size = bf5xx_pcm_hardware.buffer_bytes_max;
 	int ret;
 
@@ -459,6 +517,9 @@ static int bf5xx_pcm_i2s_new(struct snd_soc_pcm_runtime *rtd)
 
 	return snd_pcm_lib_preallocate_pages_for_all(rtd->pcm,
 				SNDRV_DMA_TYPE_DEV, card->dev, size, size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -466,7 +527,10 @@ static struct snd_soc_platform_driver bf5xx_i2s_soc_platform = {
 	.ops		= &bf5xx_pcm_i2s_ops,
 	.pcm_new	= bf5xx_pcm_i2s_new,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.pcm_free	= bf5xx_pcm_free_dma_buffers,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

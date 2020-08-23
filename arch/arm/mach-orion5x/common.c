@@ -25,7 +25,10 @@
 #include <asm/setup.h>
 #include <asm/system_misc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/timex.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/mach/arch.h>
@@ -139,7 +142,11 @@ void __init orion5x_sata_init(struct mv_sata_platform_data *sata_data)
  * SPI
  ****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init orion5x_spi_init()
+=======
+void __init orion5x_spi_init(void)
+>>>>>>> v3.18
 =======
 void __init orion5x_spi_init(void)
 >>>>>>> v3.18
@@ -182,13 +189,19 @@ void __init orion5x_xor_init(void)
 static void __init orion5x_crypto_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mvebu_mbus_add_window("sram", ORION5X_SRAM_PHYS_BASE,
 			      ORION5X_SRAM_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	mvebu_mbus_add_window_by_id(ORION_MBUS_SRAM_TARGET,
 				    ORION_MBUS_SRAM_ATTR,
 				    ORION5X_SRAM_PHYS_BASE,
 				    ORION5X_SRAM_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	orion_crypto_init(ORION5X_CRYPTO_PHYS_BASE, ORION5X_SRAM_PHYS_BASE,
 			  SZ_8K, IRQ_ORION5X_CESA);
@@ -198,7 +211,11 @@ static void __init orion5x_crypto_init(void)
  * Watchdog
  ****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init orion5x_wdt_init(void)
+=======
+static void __init orion5x_wdt_init(void)
+>>>>>>> v3.18
 =======
 static void __init orion5x_wdt_init(void)
 >>>>>>> v3.18
@@ -232,7 +249,11 @@ void __init orion5x_init_early(void)
 	mvebu_mbus_init(mbus_soc_name, ORION5X_BRIDGE_WINS_BASE,
 			ORION5X_BRIDGE_WINS_SZ,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ORION5X_DDR_WINS_BASE, ORION5X_DDR_WINS_SZ, 0);
+=======
+			ORION5X_DDR_WINS_BASE, ORION5X_DDR_WINS_SZ);
+>>>>>>> v3.18
 =======
 			ORION5X_DDR_WINS_BASE, ORION5X_DDR_WINS_SZ);
 >>>>>>> v3.18
@@ -244,6 +265,7 @@ void orion5x_setup_wins(void)
 	 * The PCIe windows will no longer be statically allocated
 	 * here once Orion5x is migrated to the pci-mvebu driver.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mvebu_mbus_add_window_remap_flags("pcie0.0", ORION5X_PCIE_IO_PHYS_BASE,
 					  ORION5X_PCIE_IO_SIZE,
@@ -262,6 +284,8 @@ void orion5x_setup_wins(void)
 					  MVEBU_MBUS_NO_REMAP,
 					  MVEBU_MBUS_PCI_MEM);
 =======
+=======
+>>>>>>> v3.18
 	mvebu_mbus_add_window_remap_by_id(ORION_MBUS_PCIE_IO_TARGET,
 					  ORION_MBUS_PCIE_IO_ATTR,
 					  ORION5X_PCIE_IO_PHYS_BASE,
@@ -280,13 +304,20 @@ void orion5x_setup_wins(void)
 				    ORION_MBUS_PCI_MEM_ATTR,
 				    ORION5X_PCI_MEM_PHYS_BASE,
 				    ORION5X_PCI_MEM_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int orion5x_tclk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init orion5x_find_tclk(void)
+=======
+static int __init orion5x_find_tclk(void)
+>>>>>>> v3.18
 =======
 static int __init orion5x_find_tclk(void)
 >>>>>>> v3.18
@@ -410,8 +441,12 @@ void orion5x_restart(enum reboot_mode mode, const char *cmd)
  * This is a common fixup for bogus memory tags.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init tag_fixup_mem32(struct tag *t, char **from,
 			    struct meminfo *meminfo)
+=======
+void __init tag_fixup_mem32(struct tag *t, char **from)
+>>>>>>> v3.18
 =======
 void __init tag_fixup_mem32(struct tag *t, char **from)
 >>>>>>> v3.18

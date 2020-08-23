@@ -4,6 +4,10 @@
 #include <linux/linkage.h>
 #include <linux/lockdep.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/debug_locks.h>
+>>>>>>> v3.18
 =======
 #include <linux/debug_locks.h>
 >>>>>>> v3.18

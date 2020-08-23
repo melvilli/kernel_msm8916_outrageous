@@ -285,7 +285,11 @@ struct cma3000_accl_data *cma3000_init(struct device *dev, int irq,
 				       const struct cma3000_bus_ops *bops)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct cma3000_platform_data *pdata = dev->platform_data;
+=======
+	const struct cma3000_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	const struct cma3000_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18

@@ -245,7 +245,11 @@ static int ep93xx_keypad_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	keypad->pdata = pdev->dev.platform_data;
+=======
+	keypad->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	keypad->pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -334,8 +338,12 @@ static int ep93xx_keypad_probe(struct platform_device *pdev)
 
 failed_free_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(keypad->irq, pdev);
 	platform_set_drvdata(pdev, NULL);
+=======
+	free_irq(keypad->irq, keypad);
+>>>>>>> v3.18
 =======
 	free_irq(keypad->irq, keypad);
 >>>>>>> v3.18
@@ -360,9 +368,13 @@ static int ep93xx_keypad_remove(struct platform_device *pdev)
 	struct resource *res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(keypad->irq, pdev);
 
 	platform_set_drvdata(pdev, NULL);
+=======
+	free_irq(keypad->irq, keypad);
+>>>>>>> v3.18
 =======
 	free_irq(keypad->irq, keypad);
 >>>>>>> v3.18

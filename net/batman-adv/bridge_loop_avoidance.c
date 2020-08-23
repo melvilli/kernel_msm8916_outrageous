@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (C) 2011-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2011-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
 =======
 /* Copyright (C) 2011-2014 B.A.T.M.A.N. contributors:
 >>>>>>> v3.18
@@ -17,9 +21,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -141,7 +149,13 @@ static void batadv_claim_free_ref(struct batadv_bla_claim *claim)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* @bat_priv: the bat priv with all the soft interface information
+=======
+/**
+ * batadv_claim_hash_find
+ * @bat_priv: the bat priv with all the soft interface information
+>>>>>>> v3.18
 =======
 /**
  * batadv_claim_hash_find
@@ -195,7 +209,11 @@ static struct batadv_bla_claim
 static struct batadv_bla_backbone_gw *
 batadv_backbone_hash_find(struct batadv_priv *bat_priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  uint8_t *addr, short vid)
+=======
+			  uint8_t *addr, unsigned short vid)
+>>>>>>> v3.18
 =======
 			  uint8_t *addr, unsigned short vid)
 >>>>>>> v3.18
@@ -210,7 +228,11 @@ batadv_backbone_hash_find(struct batadv_priv *bat_priv,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(search_entry.orig, addr, ETH_ALEN);
+=======
+	ether_addr_copy(search_entry.orig, addr);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(search_entry.orig, addr);
 >>>>>>> v3.18
@@ -280,7 +302,11 @@ batadv_bla_del_backbone_claims(struct batadv_bla_backbone_gw *backbone_gw)
  */
 static void batadv_bla_send_claim(struct batadv_priv *bat_priv, uint8_t *mac,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  short vid, int claimtype)
+=======
+				  unsigned short vid, int claimtype)
+>>>>>>> v3.18
 =======
 				  unsigned short vid, int claimtype)
 >>>>>>> v3.18
@@ -332,14 +358,20 @@ static void batadv_bla_send_claim(struct batadv_priv *bat_priv, uint8_t *mac,
 		 * set Ethernet SRC to the clients mac
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(ethhdr->h_source, mac, ETH_ALEN);
 		batadv_dbg(BATADV_DBG_BLA, bat_priv,
 			   "bla_send_claim(): CLAIM %pM on vid %d\n", mac, vid);
 =======
+=======
+>>>>>>> v3.18
 		ether_addr_copy(ethhdr->h_source, mac);
 		batadv_dbg(BATADV_DBG_BLA, bat_priv,
 			   "bla_send_claim(): CLAIM %pM on vid %d\n", mac,
 			   BATADV_PRINT_VID(vid));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case BATADV_CLAIM_TYPE_UNCLAIM:
@@ -347,15 +379,21 @@ static void batadv_bla_send_claim(struct batadv_priv *bat_priv, uint8_t *mac,
 		 * set HW SRC to the clients mac
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(hw_src, mac, ETH_ALEN);
 		batadv_dbg(BATADV_DBG_BLA, bat_priv,
 			   "bla_send_claim(): UNCLAIM %pM on vid %d\n", mac,
 			   vid);
 =======
+=======
+>>>>>>> v3.18
 		ether_addr_copy(hw_src, mac);
 		batadv_dbg(BATADV_DBG_BLA, bat_priv,
 			   "bla_send_claim(): UNCLAIM %pM on vid %d\n", mac,
 			   BATADV_PRINT_VID(vid));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case BATADV_CLAIM_TYPE_ANNOUNCE:
@@ -363,15 +401,21 @@ static void batadv_bla_send_claim(struct batadv_priv *bat_priv, uint8_t *mac,
 		 * set HW SRC to the special mac containg the crc
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(hw_src, mac, ETH_ALEN);
 		batadv_dbg(BATADV_DBG_BLA, bat_priv,
 			   "bla_send_claim(): ANNOUNCE of %pM on vid %d\n",
 			   ethhdr->h_source, vid);
 =======
+=======
+>>>>>>> v3.18
 		ether_addr_copy(hw_src, mac);
 		batadv_dbg(BATADV_DBG_BLA, bat_priv,
 			   "bla_send_claim(): ANNOUNCE of %pM on vid %d\n",
 			   ethhdr->h_source, BATADV_PRINT_VID(vid));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case BATADV_CLAIM_TYPE_REQUEST:
@@ -379,6 +423,7 @@ static void batadv_bla_send_claim(struct batadv_priv *bat_priv, uint8_t *mac,
 		 * set HW SRC and header destination to the receiving backbone
 		 * gws mac
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		memcpy(hw_src, mac, ETH_ALEN);
 		memcpy(ethhdr->h_dest, mac, ETH_ALEN);
@@ -391,6 +436,8 @@ static void batadv_bla_send_claim(struct batadv_priv *bat_priv, uint8_t *mac,
 	if (vid != -1)
 		skb = vlan_insert_tag(skb, htons(ETH_P_8021Q), vid);
 =======
+=======
+>>>>>>> v3.18
 		ether_addr_copy(hw_src, mac);
 		ether_addr_copy(ethhdr->h_dest, mac);
 		batadv_dbg(BATADV_DBG_BLA, bat_priv,
@@ -403,6 +450,9 @@ static void batadv_bla_send_claim(struct batadv_priv *bat_priv, uint8_t *mac,
 	if (vid & BATADV_VLAN_HAS_TAG)
 		skb = vlan_insert_tag(skb, htons(ETH_P_8021Q),
 				      vid & VLAN_VID_MASK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	skb_reset_mac_header(skb);
@@ -430,7 +480,11 @@ out:
 static struct batadv_bla_backbone_gw *
 batadv_bla_get_backbone_gw(struct batadv_priv *bat_priv, uint8_t *orig,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   short vid, bool own_backbone)
+=======
+			   unsigned short vid, bool own_backbone)
+>>>>>>> v3.18
 =======
 			   unsigned short vid, bool own_backbone)
 >>>>>>> v3.18
@@ -447,7 +501,11 @@ batadv_bla_get_backbone_gw(struct batadv_priv *bat_priv, uint8_t *orig,
 	batadv_dbg(BATADV_DBG_BLA, bat_priv,
 		   "bla_get_backbone_gw(): not found (%pM, %d), creating new entry\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   orig, vid);
+=======
+		   orig, BATADV_PRINT_VID(vid));
+>>>>>>> v3.18
 =======
 		   orig, BATADV_PRINT_VID(vid));
 >>>>>>> v3.18
@@ -463,7 +521,11 @@ batadv_bla_get_backbone_gw(struct batadv_priv *bat_priv, uint8_t *orig,
 	atomic_set(&entry->request_sent, 0);
 	atomic_set(&entry->wait_periods, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(entry->orig, orig, ETH_ALEN);
+=======
+	ether_addr_copy(entry->orig, orig);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(entry->orig, orig);
 >>>>>>> v3.18
@@ -483,15 +545,21 @@ batadv_bla_get_backbone_gw(struct batadv_priv *bat_priv, uint8_t *orig,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* this is a gateway now, remove any tt entries */
 	orig_node = batadv_orig_hash_find(bat_priv, orig);
 	if (orig_node) {
 		batadv_tt_global_del_orig(bat_priv, orig_node,
 =======
+=======
+>>>>>>> v3.18
 	/* this is a gateway now, remove any TT entry on this VLAN */
 	orig_node = batadv_orig_hash_find(bat_priv, orig);
 	if (orig_node) {
 		batadv_tt_global_del_orig(bat_priv, orig_node, vid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					  "became a backbone gateway");
 		batadv_orig_node_free_ref(orig_node);
@@ -516,7 +584,11 @@ static void
 batadv_bla_update_own_backbone_gw(struct batadv_priv *bat_priv,
 				  struct batadv_hard_iface *primary_if,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  short vid)
+=======
+				  unsigned short vid)
+>>>>>>> v3.18
 =======
 				  unsigned short vid)
 >>>>>>> v3.18
@@ -534,7 +606,13 @@ batadv_bla_update_own_backbone_gw(struct batadv_priv *bat_priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* @bat_priv: the bat priv with all the soft interface information
+=======
+/**
+ * batadv_bla_answer_request - answer a bla request by sending own claims
+ * @bat_priv: the bat priv with all the soft interface information
+>>>>>>> v3.18
 =======
 /**
  * batadv_bla_answer_request - answer a bla request by sending own claims
@@ -548,7 +626,11 @@ batadv_bla_update_own_backbone_gw(struct batadv_priv *bat_priv,
 static void batadv_bla_answer_request(struct batadv_priv *bat_priv,
 				      struct batadv_hard_iface *primary_if,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      short vid)
+=======
+				      unsigned short vid)
+>>>>>>> v3.18
 =======
 				      unsigned short vid)
 >>>>>>> v3.18
@@ -590,7 +672,13 @@ static void batadv_bla_answer_request(struct batadv_priv *bat_priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* @backbone_gw: the backbone gateway from whom we are out of sync
+=======
+/**
+ * batadv_bla_send_request - send a request to repeat claims
+ * @backbone_gw: the backbone gateway from whom we are out of sync
+>>>>>>> v3.18
 =======
 /**
  * batadv_bla_send_request - send a request to repeat claims
@@ -621,7 +709,13 @@ static void batadv_bla_send_request(struct batadv_bla_backbone_gw *backbone_gw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* @bat_priv: the bat priv with all the soft interface information
+=======
+/**
+ * batadv_bla_send_announce
+ * @bat_priv: the bat priv with all the soft interface information
+>>>>>>> v3.18
 =======
 /**
  * batadv_bla_send_announce
@@ -655,7 +749,11 @@ static void batadv_bla_send_announce(struct batadv_priv *bat_priv,
  */
 static void batadv_bla_add_claim(struct batadv_priv *bat_priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 const uint8_t *mac, const short vid,
+=======
+				 const uint8_t *mac, const unsigned short vid,
+>>>>>>> v3.18
 =======
 				 const uint8_t *mac, const unsigned short vid,
 >>>>>>> v3.18
@@ -666,7 +764,11 @@ static void batadv_bla_add_claim(struct batadv_priv *bat_priv,
 	int hash_added;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(search_claim.addr, mac, ETH_ALEN);
+=======
+	ether_addr_copy(search_claim.addr, mac);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(search_claim.addr, mac);
 >>>>>>> v3.18
@@ -680,7 +782,11 @@ static void batadv_bla_add_claim(struct batadv_priv *bat_priv,
 			return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(claim->addr, mac, ETH_ALEN);
+=======
+		ether_addr_copy(claim->addr, mac);
+>>>>>>> v3.18
 =======
 		ether_addr_copy(claim->addr, mac);
 >>>>>>> v3.18
@@ -692,7 +798,11 @@ static void batadv_bla_add_claim(struct batadv_priv *bat_priv,
 		batadv_dbg(BATADV_DBG_BLA, bat_priv,
 			   "bla_add_claim(): adding new entry %pM, vid %d to hash ...\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   mac, vid);
+=======
+			   mac, BATADV_PRINT_VID(vid));
+>>>>>>> v3.18
 =======
 			   mac, BATADV_PRINT_VID(vid));
 >>>>>>> v3.18
@@ -715,7 +825,11 @@ static void batadv_bla_add_claim(struct batadv_priv *bat_priv,
 		batadv_dbg(BATADV_DBG_BLA, bat_priv,
 			   "bla_add_claim(): changing ownership for %pM, vid %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   mac, vid);
+=======
+			   mac, BATADV_PRINT_VID(vid));
+>>>>>>> v3.18
 =======
 			   mac, BATADV_PRINT_VID(vid));
 >>>>>>> v3.18
@@ -739,17 +853,23 @@ claim_free_ref:
  */
 static void batadv_bla_del_claim(struct batadv_priv *bat_priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 const uint8_t *mac, const short vid)
 {
 	struct batadv_bla_claim search_claim, *claim;
 
 	memcpy(search_claim.addr, mac, ETH_ALEN);
 =======
+=======
+>>>>>>> v3.18
 				 const uint8_t *mac, const unsigned short vid)
 {
 	struct batadv_bla_claim search_claim, *claim;
 
 	ether_addr_copy(search_claim.addr, mac);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	search_claim.vid = vid;
 	claim = batadv_claim_hash_find(bat_priv, &search_claim);
@@ -758,7 +878,11 @@ static void batadv_bla_del_claim(struct batadv_priv *bat_priv,
 
 	batadv_dbg(BATADV_DBG_BLA, bat_priv, "bla_del_claim(): %pM, vid %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   mac, vid);
+=======
+		   mac, BATADV_PRINT_VID(vid));
+>>>>>>> v3.18
 =======
 		   mac, BATADV_PRINT_VID(vid));
 >>>>>>> v3.18
@@ -777,7 +901,11 @@ static void batadv_bla_del_claim(struct batadv_priv *bat_priv,
 static int batadv_handle_announce(struct batadv_priv *bat_priv,
 				  uint8_t *an_addr, uint8_t *backbone_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  short vid)
+=======
+				  unsigned short vid)
+>>>>>>> v3.18
 =======
 				  unsigned short vid)
 >>>>>>> v3.18
@@ -802,7 +930,11 @@ static int batadv_handle_announce(struct batadv_priv *bat_priv,
 	batadv_dbg(BATADV_DBG_BLA, bat_priv,
 		   "handle_announce(): ANNOUNCE vid %d (sent by %pM)... CRC = %#.4x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   vid, backbone_gw->orig, crc);
+=======
+		   BATADV_PRINT_VID(vid), backbone_gw->orig, crc);
+>>>>>>> v3.18
 =======
 		   BATADV_PRINT_VID(vid), backbone_gw->orig, crc);
 >>>>>>> v3.18
@@ -811,7 +943,12 @@ static int batadv_handle_announce(struct batadv_priv *bat_priv,
 		batadv_dbg(BATADV_DBG_BLA, backbone_gw->bat_priv,
 			   "handle_announce(): CRC FAILED for %pM/%d (my = %#.4x, sent = %#.4x)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   backbone_gw->orig, backbone_gw->vid,
+=======
+			   backbone_gw->orig,
+			   BATADV_PRINT_VID(backbone_gw->vid),
+>>>>>>> v3.18
 =======
 			   backbone_gw->orig,
 			   BATADV_PRINT_VID(backbone_gw->vid),
@@ -838,7 +975,11 @@ static int batadv_handle_request(struct batadv_priv *bat_priv,
 				 struct batadv_hard_iface *primary_if,
 				 uint8_t *backbone_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 struct ethhdr *ethhdr, short vid)
+=======
+				 struct ethhdr *ethhdr, unsigned short vid)
+>>>>>>> v3.18
 =======
 				 struct ethhdr *ethhdr, unsigned short vid)
 >>>>>>> v3.18
@@ -856,7 +997,11 @@ static int batadv_handle_request(struct batadv_priv *bat_priv,
 	batadv_dbg(BATADV_DBG_BLA, bat_priv,
 		   "handle_request(): REQUEST vid %d (sent by %pM)...\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   vid, ethhdr->h_source);
+=======
+		   BATADV_PRINT_VID(vid), ethhdr->h_source);
+>>>>>>> v3.18
 =======
 		   BATADV_PRINT_VID(vid), ethhdr->h_source);
 >>>>>>> v3.18
@@ -870,7 +1015,11 @@ static int batadv_handle_unclaim(struct batadv_priv *bat_priv,
 				 struct batadv_hard_iface *primary_if,
 				 uint8_t *backbone_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 uint8_t *claim_addr, short vid)
+=======
+				 uint8_t *claim_addr, unsigned short vid)
+>>>>>>> v3.18
 =======
 				 uint8_t *claim_addr, unsigned short vid)
 >>>>>>> v3.18
@@ -892,7 +1041,11 @@ static int batadv_handle_unclaim(struct batadv_priv *bat_priv,
 	batadv_dbg(BATADV_DBG_BLA, bat_priv,
 		   "handle_unclaim(): UNCLAIM %pM on vid %d (sent by %pM)...\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   claim_addr, vid, backbone_gw->orig);
+=======
+		   claim_addr, BATADV_PRINT_VID(vid), backbone_gw->orig);
+>>>>>>> v3.18
 =======
 		   claim_addr, BATADV_PRINT_VID(vid), backbone_gw->orig);
 >>>>>>> v3.18
@@ -907,7 +1060,11 @@ static int batadv_handle_claim(struct batadv_priv *bat_priv,
 			       struct batadv_hard_iface *primary_if,
 			       uint8_t *backbone_addr, uint8_t *claim_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       short vid)
+=======
+			       unsigned short vid)
+>>>>>>> v3.18
 =======
 			       unsigned short vid)
 >>>>>>> v3.18
@@ -963,11 +1120,14 @@ static int batadv_check_claim_group(struct batadv_priv *bat_priv,
 	bla_dst_own = &bat_priv->bla.claim_dest;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* check if it is a claim packet in general */
 	if (memcmp(bla_dst->magic, bla_dst_own->magic,
 		   sizeof(bla_dst->magic)) != 0)
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* if announcement packet, use the source,
@@ -1018,7 +1178,13 @@ static int batadv_check_claim_group(struct batadv_priv *bat_priv,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* @bat_priv: the bat priv with all the soft interface information
+=======
+/**
+ * batadv_bla_process_claim
+ * @bat_priv: the bat priv with all the soft interface information
+>>>>>>> v3.18
 =======
 /**
  * batadv_bla_process_claim
@@ -1035,6 +1201,7 @@ static int batadv_bla_process_claim(struct batadv_priv *bat_priv,
 				    struct batadv_hard_iface *primary_if,
 				    struct sk_buff *skb)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ethhdr *ethhdr;
 	struct vlan_ethhdr *vhdr;
@@ -1060,6 +1227,8 @@ static int batadv_bla_process_claim(struct batadv_priv *bat_priv,
 
 	if (proto != ETH_P_ARP)
 =======
+=======
+>>>>>>> v3.18
 	struct batadv_bla_claim_dst *bla_dst, *bla_dst_own;
 	uint8_t *hw_src, *hw_dst;
 	struct vlan_hdr *vhdr, vhdr_buf;
@@ -1098,6 +1267,9 @@ static int batadv_bla_process_claim(struct batadv_priv *bat_priv,
 	}
 
 	if (proto != htons(ETH_P_ARP))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0; /* not a claim frame */
 
@@ -1108,7 +1280,11 @@ static int batadv_bla_process_claim(struct batadv_priv *bat_priv,
 
 	/* pskb_may_pull() may have modified the pointers, get ethhdr again */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ethhdr = (struct ethhdr *)skb_mac_header(skb);
+=======
+	ethhdr = eth_hdr(skb);
+>>>>>>> v3.18
 =======
 	ethhdr = eth_hdr(skb);
 >>>>>>> v3.18
@@ -1130,7 +1306,10 @@ static int batadv_bla_process_claim(struct batadv_priv *bat_priv,
 	hw_dst = hw_src + ETH_ALEN + 4;
 	bla_dst = (struct batadv_bla_claim_dst *)hw_dst;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bla_dst_own = &bat_priv->bla.claim_dest;
 
 	/* check if it is a claim frame in general */
@@ -1144,6 +1323,9 @@ static int batadv_bla_process_claim(struct batadv_priv *bat_priv,
 	 */
 	if (vlan_depth > 1)
 		return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* check if it is a claim frame. */
@@ -1153,7 +1335,12 @@ static int batadv_bla_process_claim(struct batadv_priv *bat_priv,
 		batadv_dbg(BATADV_DBG_BLA, bat_priv,
 			   "bla_process_claim(): received a claim frame from another group. From: %pM on vid %d ...(hw_src %pM, hw_dst %pM)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   ethhdr->h_source, vid, hw_src, hw_dst);
+=======
+			   ethhdr->h_source, BATADV_PRINT_VID(vid), hw_src,
+			   hw_dst);
+>>>>>>> v3.18
 =======
 			   ethhdr->h_source, BATADV_PRINT_VID(vid), hw_src,
 			   hw_dst);
@@ -1193,7 +1380,11 @@ static int batadv_bla_process_claim(struct batadv_priv *bat_priv,
 	batadv_dbg(BATADV_DBG_BLA, bat_priv,
 		   "bla_process_claim(): ERROR - this looks like a claim frame, but is useless. eth src %pM on vid %d ...(hw_src %pM, hw_dst %pM)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   ethhdr->h_source, vid, hw_src, hw_dst);
+=======
+		   ethhdr->h_source, BATADV_PRINT_VID(vid), hw_src, hw_dst);
+>>>>>>> v3.18
 =======
 		   ethhdr->h_source, BATADV_PRINT_VID(vid), hw_src, hw_dst);
 >>>>>>> v3.18
@@ -1343,8 +1534,13 @@ void batadv_bla_update_orig_address(struct batadv_priv *bat_priv,
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(backbone_gw->orig,
 			       primary_if->net_dev->dev_addr, ETH_ALEN);
+=======
+			ether_addr_copy(backbone_gw->orig,
+					primary_if->net_dev->dev_addr);
+>>>>>>> v3.18
 =======
 			ether_addr_copy(backbone_gw->orig,
 					primary_if->net_dev->dev_addr);
@@ -1555,7 +1751,11 @@ int batadv_bla_check_bcast_duplist(struct batadv_priv *bat_priv,
 	entry->crc = crc;
 	entry->entrytime = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(entry->orig, bcast_packet->orig, ETH_ALEN);
+=======
+	ether_addr_copy(entry->orig, bcast_packet->orig);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(entry->orig, bcast_packet->orig);
 >>>>>>> v3.18
@@ -1570,6 +1770,7 @@ out:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* @bat_priv: the bat priv with all the soft interface information
  * @orig: originator mac address
  *
@@ -1579,6 +1780,8 @@ out:
  */
 int batadv_bla_is_backbone_gw_orig(struct batadv_priv *bat_priv, uint8_t *orig)
 =======
+=======
+>>>>>>> v3.18
 /**
  * batadv_bla_is_backbone_gw_orig
  * @bat_priv: the bat priv with all the soft interface information
@@ -1591,6 +1794,9 @@ int batadv_bla_is_backbone_gw_orig(struct batadv_priv *bat_priv, uint8_t *orig)
  */
 bool batadv_bla_is_backbone_gw_orig(struct batadv_priv *bat_priv, uint8_t *orig,
 				    unsigned short vid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct batadv_hashtable *hash = bat_priv->bla.backbone_hash;
@@ -1600,15 +1806,21 @@ bool batadv_bla_is_backbone_gw_orig(struct batadv_priv *bat_priv, uint8_t *orig,
 
 	if (!atomic_read(&bat_priv->bridge_loop_avoidance))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 
 	if (!hash)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 		return false;
 
 	if (!hash)
 		return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < hash->size; i++) {
@@ -1617,14 +1829,20 @@ bool batadv_bla_is_backbone_gw_orig(struct batadv_priv *bat_priv, uint8_t *orig,
 		rcu_read_lock();
 		hlist_for_each_entry_rcu(backbone_gw, head, hash_entry) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (batadv_compare_eth(backbone_gw->orig, orig)) {
 				rcu_read_unlock();
 				return 1;
 =======
+=======
+>>>>>>> v3.18
 			if (batadv_compare_eth(backbone_gw->orig, orig) &&
 			    backbone_gw->vid == vid) {
 				rcu_read_unlock();
 				return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -1632,7 +1850,11 @@ bool batadv_bla_is_backbone_gw_orig(struct batadv_priv *bat_priv, uint8_t *orig,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return false;
+>>>>>>> v3.18
 =======
 	return false;
 >>>>>>> v3.18
@@ -1653,10 +1875,15 @@ int batadv_bla_is_backbone_gw(struct sk_buff *skb,
 			      struct batadv_orig_node *orig_node, int hdr_size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ethhdr *ethhdr;
 	struct vlan_ethhdr *vhdr;
 	struct batadv_bla_backbone_gw *backbone_gw;
 	short vid = -1;
+=======
+	struct batadv_bla_backbone_gw *backbone_gw;
+	unsigned short vid;
+>>>>>>> v3.18
 =======
 	struct batadv_bla_backbone_gw *backbone_gw;
 	unsigned short vid;
@@ -1670,6 +1897,7 @@ int batadv_bla_is_backbone_gw(struct sk_buff *skb,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ethhdr = (struct ethhdr *)(((uint8_t *)skb->data) + hdr_size);
 
 	if (ntohs(ethhdr->h_proto) == ETH_P_8021Q) {
@@ -1679,6 +1907,9 @@ int batadv_bla_is_backbone_gw(struct sk_buff *skb,
 		vhdr = (struct vlan_ethhdr *)(skb->data + hdr_size);
 		vid = ntohs(vhdr->h_vlan_TCI) & VLAN_VID_MASK;
 	}
+=======
+	vid = batadv_get_vid(skb, hdr_size);
+>>>>>>> v3.18
 =======
 	vid = batadv_get_vid(skb, hdr_size);
 >>>>>>> v3.18
@@ -1731,8 +1962,13 @@ void batadv_bla_free(struct batadv_priv *bat_priv)
  * process the skb.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int batadv_bla_rx(struct batadv_priv *bat_priv, struct sk_buff *skb, short vid,
 		  bool is_bcast)
+=======
+int batadv_bla_rx(struct batadv_priv *bat_priv, struct sk_buff *skb,
+		  unsigned short vid, bool is_bcast)
+>>>>>>> v3.18
 =======
 int batadv_bla_rx(struct batadv_priv *bat_priv, struct sk_buff *skb,
 		  unsigned short vid, bool is_bcast)
@@ -1744,7 +1980,11 @@ int batadv_bla_rx(struct batadv_priv *bat_priv, struct sk_buff *skb,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ethhdr = (struct ethhdr *)skb_mac_header(skb);
+=======
+	ethhdr = eth_hdr(skb);
+>>>>>>> v3.18
 =======
 	ethhdr = eth_hdr(skb);
 >>>>>>> v3.18
@@ -1763,7 +2003,11 @@ int batadv_bla_rx(struct batadv_priv *bat_priv, struct sk_buff *skb,
 			goto handled;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(search_claim.addr, ethhdr->h_source, ETH_ALEN);
+=======
+	ether_addr_copy(search_claim.addr, ethhdr->h_source);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(search_claim.addr, ethhdr->h_source);
 >>>>>>> v3.18
@@ -1838,14 +2082,20 @@ out:
  * returns 1, otherwise it returns 0 and the caller shall further
  * process the skb.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 int batadv_bla_tx(struct batadv_priv *bat_priv, struct sk_buff *skb, short vid)
 =======
+=======
+>>>>>>> v3.18
  *
  * This call might reallocate skb data.
  */
 int batadv_bla_tx(struct batadv_priv *bat_priv, struct sk_buff *skb,
 		  unsigned short vid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ethhdr *ethhdr;
@@ -1861,6 +2111,7 @@ int batadv_bla_tx(struct batadv_priv *bat_priv, struct sk_buff *skb,
 		goto allow;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* in VLAN case, the mac header might not be set. */
 	skb_reset_mac_header(skb);
 
@@ -1869,10 +2120,15 @@ int batadv_bla_tx(struct batadv_priv *bat_priv, struct sk_buff *skb,
 
 	ethhdr = (struct ethhdr *)skb_mac_header(skb);
 =======
+=======
+>>>>>>> v3.18
 	if (batadv_bla_process_claim(bat_priv, primary_if, skb))
 		goto handled;
 
 	ethhdr = eth_hdr(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(atomic_read(&bat_priv->bla.num_requests)))
@@ -1881,7 +2137,11 @@ int batadv_bla_tx(struct batadv_priv *bat_priv, struct sk_buff *skb,
 			goto handled;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(search_claim.addr, ethhdr->h_source, ETH_ALEN);
+=======
+	ether_addr_copy(search_claim.addr, ethhdr->h_source);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(search_claim.addr, ethhdr->h_source);
 >>>>>>> v3.18
@@ -1962,8 +2222,13 @@ int batadv_bla_claim_table_seq_print_text(struct seq_file *seq, void *offset)
 			is_own = batadv_compare_eth(claim->backbone_gw->orig,
 						    primary_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(seq,	" * %pM on % 5d by %pM [%c] (%#.4x)\n",
 				   claim->addr, claim->vid,
+=======
+			seq_printf(seq, " * %pM on %5d by %pM [%c] (%#.4x)\n",
+				   claim->addr, BATADV_PRINT_VID(claim->vid),
+>>>>>>> v3.18
 =======
 			seq_printf(seq, " * %pM on %5d by %pM [%c] (%#.4x)\n",
 				   claim->addr, BATADV_PRINT_VID(claim->vid),
@@ -2020,15 +2285,21 @@ int batadv_bla_backbone_table_seq_print_text(struct seq_file *seq, void *offset)
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(seq,
 				   " * %pM on % 5d % 4i.%03is (%#.4x)\n",
 				   backbone_gw->orig, backbone_gw->vid,
 				   secs, msecs, backbone_gw->crc);
 =======
+=======
+>>>>>>> v3.18
 			seq_printf(seq, " * %pM on %5d %4i.%03is (%#.4x)\n",
 				   backbone_gw->orig,
 				   BATADV_PRINT_VID(backbone_gw->vid), secs,
 				   msecs, backbone_gw->crc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		rcu_read_unlock();

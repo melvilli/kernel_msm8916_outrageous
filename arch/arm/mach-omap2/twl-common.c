@@ -25,6 +25,10 @@
 #include <linux/gpio.h>
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/phy/phy.h>
+>>>>>>> v3.18
 =======
 #include <linux/phy/phy.h>
 >>>>>>> v3.18
@@ -95,9 +99,12 @@ void __init omap_pmic_late_init(void)
 
 #if defined(CONFIG_ARCH_OMAP3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct twl4030_usb_data omap3_usb_pdata = {
 	.usb_mode	= T2_USB_MODE_ULPI,
 =======
+=======
+>>>>>>> v3.18
 struct phy_consumer consumers[] = {
 	PHY_CONSUMER("musb-hdrc.0", "usb"),
 };
@@ -110,6 +117,9 @@ struct phy_init_data init_data = {
 static struct twl4030_usb_data omap3_usb_pdata = {
 	.usb_mode	= T2_USB_MODE_ULPI,
 	.init_data	= &init_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -160,6 +170,10 @@ static struct regulator_init_data omap3_vdac_idata = {
 static struct regulator_consumer_supply omap3_vpll2_supplies[] = {
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss"),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dpi.0"),
+>>>>>>> v3.18
 =======
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dpi.0"),
 >>>>>>> v3.18

@@ -126,7 +126,11 @@ void rtl92d_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 
 	tmpval = tx_agc[RF90_PATH_A] & 0xff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl_set_bbreg(hw, RTXAGC_A_CCK1_MCS32, BMASKBYTE1, tmpval);
+=======
+	rtl_set_bbreg(hw, RTXAGC_A_CCK1_MCS32, MASKBYTE1, tmpval);
+>>>>>>> v3.18
 =======
 	rtl_set_bbreg(hw, RTXAGC_A_CCK1_MCS32, MASKBYTE1, tmpval);
 >>>>>>> v3.18
@@ -140,7 +144,11 @@ void rtl92d_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 		tmpval, RTXAGC_B_CCK11_A_CCK2_11);
 	tmpval = tx_agc[RF90_PATH_B] >> 24;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl_set_bbreg(hw, RTXAGC_B_CCK11_A_CCK2_11, BMASKBYTE0, tmpval);
+=======
+	rtl_set_bbreg(hw, RTXAGC_B_CCK11_A_CCK2_11, MASKBYTE0, tmpval);
+>>>>>>> v3.18
 =======
 	rtl_set_bbreg(hw, RTXAGC_B_CCK11_A_CCK2_11, MASKBYTE0, tmpval);
 >>>>>>> v3.18
@@ -369,7 +377,11 @@ static void _rtl92d_write_ofdm_power_reg(struct ieee80211_hw *hw,
 		else
 			regoffset = regoffset_b[index];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtl_set_bbreg(hw, regoffset, BMASKDWORD, writeval);
+=======
+		rtl_set_bbreg(hw, regoffset, MASKDWORD, writeval);
+>>>>>>> v3.18
 =======
 		rtl_set_bbreg(hw, regoffset, MASKDWORD, writeval);
 >>>>>>> v3.18

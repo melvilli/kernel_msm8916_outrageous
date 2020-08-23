@@ -5,7 +5,11 @@
  * License version 2.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013 by Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (c) 2013 by Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (c) 2013 by Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -302,7 +306,11 @@ void ghes_edac_report_mem_error(struct ghes *ghes, int sev,
 
 	/* Error address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mem_err->validation_bits & CPER_MEM_VALID_PHYSICAL_ADDRESS) {
+=======
+	if (mem_err->validation_bits & CPER_MEM_VALID_PA) {
+>>>>>>> v3.18
 =======
 	if (mem_err->validation_bits & CPER_MEM_VALID_PA) {
 >>>>>>> v3.18
@@ -312,9 +320,14 @@ void ghes_edac_report_mem_error(struct ghes *ghes, int sev,
 
 	/* Error grain */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mem_err->validation_bits & CPER_MEM_VALID_PHYSICAL_ADDRESS_MASK) {
 		e->grain = ~(mem_err->physical_addr_mask & ~PAGE_MASK);
 	}
+=======
+	if (mem_err->validation_bits & CPER_MEM_VALID_PA_MASK)
+		e->grain = ~(mem_err->physical_addr_mask & ~PAGE_MASK);
+>>>>>>> v3.18
 =======
 	if (mem_err->validation_bits & CPER_MEM_VALID_PA_MASK)
 		e->grain = ~(mem_err->physical_addr_mask & ~PAGE_MASK);
@@ -329,6 +342,11 @@ void ghes_edac_report_mem_error(struct ghes *ghes, int sev,
 	if (mem_err->validation_bits & CPER_MEM_VALID_MODULE)
 		p += sprintf(p, "module:%d ", mem_err->module);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (mem_err->validation_bits & CPER_MEM_VALID_RANK_NUMBER)
+		p += sprintf(p, "rank:%d ", mem_err->rank);
+>>>>>>> v3.18
 =======
 	if (mem_err->validation_bits & CPER_MEM_VALID_RANK_NUMBER)
 		p += sprintf(p, "rank:%d ", mem_err->rank);
@@ -342,7 +360,10 @@ void ghes_edac_report_mem_error(struct ghes *ghes, int sev,
 	if (mem_err->validation_bits & CPER_MEM_VALID_BIT_POSITION)
 		p += sprintf(p, "bit_pos:%d ", mem_err->bit_pos);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (mem_err->validation_bits & CPER_MEM_VALID_MODULE_HANDLE) {
 		const char *bank = NULL, *device = NULL;
 		dmi_memdev_name(mem_err->mem_dev_handle, &bank, &device);
@@ -352,6 +373,9 @@ void ghes_edac_report_mem_error(struct ghes *ghes, int sev,
 			p += sprintf(p, "DIMM DMI handle: 0x%.4x ",
 				     mem_err->mem_dev_handle);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (p > e->location)
 		*(p - 1) = '\0';

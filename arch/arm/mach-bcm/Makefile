@@ -1,6 +1,10 @@
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Copyright (C) 2012 Broadcom Corporation
+=======
+# Copyright (C) 2012-2014 Broadcom Corporation
+>>>>>>> v3.18
 =======
 # Copyright (C) 2012-2014 Broadcom Corporation
 >>>>>>> v3.18
@@ -15,10 +19,13 @@
 # GNU General Public License for more details.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ARCH_BCM)		:= board_bcm.o bcm_kona_smc.o bcm_kona_smc_asm.o
 plus_sec := $(call as-instr,.arch_extension sec,+sec)
 AFLAGS_bcm_kona_smc_asm.o	:=-Wa,-march=armv7-a$(plus_sec)
 =======
+=======
+>>>>>>> v3.18
 # BCM281XX
 obj-$(CONFIG_ARCH_BCM_281XX)	+= board_bcm281xx.o
 
@@ -49,4 +56,7 @@ obj-$(CONFIG_ARCH_BCM_63XX)	:= bcm63xx.o
 ifeq ($(CONFIG_ARCH_BRCMSTB),y)
 obj-y				+= brcmstb.o
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

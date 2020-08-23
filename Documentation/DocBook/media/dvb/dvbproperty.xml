@@ -197,7 +197,11 @@ get/set up to 64 properties. The actual meaning of each property is described on
 			For the other ones, it is measured in Hz.</para>
 		<para>2)For ISDB-T, the channels are usually transmitted with an offset of 143kHz.
 <<<<<<< HEAD
+<<<<<<< HEAD
 			E.g. a valid frequncy could be 474143 kHz. The stepping is bound to the bandwidth of
+=======
+			E.g. a valid frequency could be 474143 kHz. The stepping is bound to the bandwidth of
+>>>>>>> v3.18
 =======
 			E.g. a valid frequency could be 474143 kHz. The stepping is bound to the bandwidth of
 >>>>>>> v3.18
@@ -560,11 +564,14 @@ typedef enum fe_delivery_system {
 		<section id="DTV-ISDBT-LAYER-TIME-INTERLEAVING">
 			<title><constant>DTV_ISDBT_LAYER*_TIME_INTERLEAVING</constant></title>
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<para>Possible values: 0, 1, 2, 3, -1 (AUTO)</para>
 			<para>Note: The real inter-leaver depth-names depend on the mode (fft-size); the values
 				here are referring to what can be found in the TMCC-structure -
 				independent of the mode.</para>
 =======
+=======
+>>>>>>> v3.18
 			<para>Valid values: 0, 1, 2, 4, -1 (AUTO)</para>
 			<para>when DTV_ISDBT_SOUND_BROADCASTING is active, value 8 is also valid.</para>
 			<para>Note: The real time interleaving length depends on the mode (fft-size). The values
@@ -605,6 +612,9 @@ typedef enum fe_delivery_system {
 					</tbody>
 				</tgroup>
 			</informaltable>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		</section>
 		<section id="DTV-ATSCMH-FIC-VER">

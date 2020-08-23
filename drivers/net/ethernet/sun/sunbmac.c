@@ -14,7 +14,10 @@
 #include <linux/string.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/crc32.h>
@@ -999,7 +1002,10 @@ static void bigmac_set_multicast(struct net_device *dev)
 	void __iomem *bregs = bp->bregs;
 	struct netdev_hw_addr *ha;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 tmp, crc;
@@ -1024,10 +1030,14 @@ static void bigmac_set_multicast(struct net_device *dev)
 		sbus_writel(tmp, bregs + BMAC_RXCFG);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u16 hash_table[4];
 
 		for (i = 0; i < 4; i++)
 			hash_table[i] = 0;
+=======
+		u16 hash_table[4] = { 0 };
+>>>>>>> v3.18
 =======
 		u16 hash_table[4] = { 0 };
 >>>>>>> v3.18
@@ -1254,7 +1264,11 @@ static int bigmac_sbus_probe(struct platform_device *op)
 static int bigmac_sbus_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bigmac *bp = dev_get_drvdata(&op->dev);
+=======
+	struct bigmac *bp = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct bigmac *bp = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -1278,8 +1292,11 @@ static int bigmac_sbus_remove(struct platform_device *op)
 	free_netdev(net_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

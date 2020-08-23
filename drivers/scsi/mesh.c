@@ -1231,7 +1231,11 @@ static void handle_msgin(struct mesh_state *ms)
 			} else if (code != cmd->device->lun + IDENTIFY_BASE) {
 				printk(KERN_WARNING "mesh: lun mismatch "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       "(%d != %d) on reselection from "
+=======
+				       "(%d != %llu) on reselection from "
+>>>>>>> v3.18
 =======
 				       "(%d != %llu) on reselection from "
 >>>>>>> v3.18
@@ -1920,9 +1924,14 @@ static int mesh_probe(struct macio_dev *mdev, const struct of_device_id *match)
 	 * enough or until we get some macio-specific versions
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_cmd_space = pci_alloc_consistent(macio_get_pci_dev(mdev),
 					     ms->dma_cmd_size,
 					     &dma_cmd_bus);
+=======
+	dma_cmd_space = pci_zalloc_consistent(macio_get_pci_dev(mdev),
+					      ms->dma_cmd_size, &dma_cmd_bus);
+>>>>>>> v3.18
 =======
 	dma_cmd_space = pci_zalloc_consistent(macio_get_pci_dev(mdev),
 					      ms->dma_cmd_size, &dma_cmd_bus);
@@ -1932,7 +1941,10 @@ static int mesh_probe(struct macio_dev *mdev, const struct of_device_id *match)
 		goto out_unmap;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(dma_cmd_space, 0, ms->dma_cmd_size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

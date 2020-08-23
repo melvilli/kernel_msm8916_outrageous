@@ -33,6 +33,10 @@
 #include <linux/platform_data/clk-realview.h>
 #include <linux/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+>>>>>>> v3.18
 =======
 #include <linux/memblock.h>
 >>>>>>> v3.18
@@ -344,8 +348,12 @@ static void realview_pb1176_restart(enum reboot_mode mode, const char *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void realview_pb1176_fixup(struct tag *tags, char **from,
 				  struct meminfo *meminfo)
+=======
+static void realview_pb1176_fixup(struct tag *tags, char **from)
+>>>>>>> v3.18
 =======
 static void realview_pb1176_fixup(struct tag *tags, char **from)
 >>>>>>> v3.18
@@ -354,9 +362,13 @@ static void realview_pb1176_fixup(struct tag *tags, char **from)
 	 * RealView PB1176 only has 128MB of RAM mapped at 0.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	meminfo->bank[0].start = 0;
 	meminfo->bank[0].size = SZ_128M;
 	meminfo->nr_banks = 1;
+=======
+	memblock_add(0, SZ_128M);
+>>>>>>> v3.18
 =======
 	memblock_add(0, SZ_128M);
 >>>>>>> v3.18
@@ -368,8 +380,11 @@ static void __init realview_pb1176_init(void)
 
 #ifdef CONFIG_CACHE_L2X0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* 128Kb (16Kb/way) 8-way associativity. evmon/parity/share enabled. */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The PL220 needs to be manually configured as the hardware
 	 * doesn't report the correct sizes.
@@ -377,6 +392,9 @@ static void __init realview_pb1176_init(void)
 	 * parity enabled, ignore share bit, no force write allocate
 	 * Bits:  .... ...0 0111 0011 0000 .... .... ....
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	l2x0_init(__io_address(REALVIEW_PB1176_L220_BASE), 0x00730000, 0xfe000fff);
 #endif
@@ -390,6 +408,10 @@ static void __init realview_pb1176_init(void)
 	platform_device_register(&pmu_device);
 	platform_device_register(&char_lcd_device);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	platform_device_register(&realview_leds_device);
+>>>>>>> v3.18
 =======
 	platform_device_register(&realview_leds_device);
 >>>>>>> v3.18

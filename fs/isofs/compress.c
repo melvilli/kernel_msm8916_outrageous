@@ -159,8 +159,13 @@ static loff_t zisofs_uncompress_block(struct inode *inode, loff_t block_start,
 					       " %d, inode = %lu,"
 					       " page idx = %d, bh idx = %d,"
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       " avail_in = %d,"
 					       " avail_out = %d\n",
+=======
+					       " avail_in = %ld,"
+					       " avail_out = %ld\n",
+>>>>>>> v3.18
 =======
 					       " avail_in = %ld,"
 					       " avail_out = %ld\n",

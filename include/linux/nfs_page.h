@@ -23,6 +23,7 @@
  */
 enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PG_BUSY = 0,
 	PG_MAPPED,
 	PG_CLEAN,
@@ -30,6 +31,8 @@ enum {
 	PG_NEED_RESCHED,
 	PG_COMMIT_TO_DS,
 =======
+=======
+>>>>>>> v3.18
 	PG_BUSY = 0,		/* nfs_{un}lock_request */
 	PG_MAPPED,		/* page private set for buffered io */
 	PG_CLEAN,		/* write succeeded */
@@ -41,6 +44,9 @@ enum {
 	PG_UPTODATE,		/* page group sync bit in read path */
 	PG_WB_END,		/* page group sync bit in write path */
 	PG_REMOVE,		/* page group sync bit in write path */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -58,6 +64,11 @@ struct nfs_page {
 	unsigned long		wb_flags;
 	struct nfs_write_verifier	wb_verf;	/* Commit cookie */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs_page		*wb_this_page;  /* list of reqs for this page */
+	struct nfs_page		*wb_head;       /* head pointer for req list */
+>>>>>>> v3.18
 =======
 	struct nfs_page		*wb_this_page;  /* list of reqs for this page */
 	struct nfs_page		*wb_head;       /* head pointer for req list */
@@ -68,11 +79,14 @@ struct nfs_pageio_descriptor;
 struct nfs_pageio_ops {
 	void	(*pg_init)(struct nfs_pageio_descriptor *, struct nfs_page *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool	(*pg_test)(struct nfs_pageio_descriptor *, struct nfs_page *, struct nfs_page *);
 	int	(*pg_doio)(struct nfs_pageio_descriptor *);
 };
 
 =======
+=======
+>>>>>>> v3.18
 	size_t	(*pg_test)(struct nfs_pageio_descriptor *, struct nfs_page *,
 			   struct nfs_page *);
 	int	(*pg_doio)(struct nfs_pageio_descriptor *);
@@ -90,6 +104,9 @@ struct nfs_rw_ops {
 			    struct rpc_task_setup *, int);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nfs_pageio_descriptor {
 	struct list_head	pg_list;
@@ -103,6 +120,10 @@ struct nfs_pageio_descriptor {
 	struct inode		*pg_inode;
 	const struct nfs_pageio_ops *pg_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct nfs_rw_ops *pg_rw_ops;
+>>>>>>> v3.18
 =======
 	const struct nfs_rw_ops *pg_rw_ops;
 >>>>>>> v3.18
@@ -119,17 +140,23 @@ struct nfs_pageio_descriptor {
 
 extern	struct nfs_page *nfs_create_request(struct nfs_open_context *ctx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    struct inode *inode,
 					    struct page *page,
 					    unsigned int offset,
 					    unsigned int count);
 extern	void nfs_release_request(struct nfs_page *req);
 =======
+=======
+>>>>>>> v3.18
 					    struct page *page,
 					    struct nfs_page *last,
 					    unsigned int offset,
 					    unsigned int count);
 extern	void nfs_release_request(struct nfs_page *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -138,6 +165,10 @@ extern	void nfs_pageio_init(struct nfs_pageio_descriptor *desc,
 			     const struct nfs_pageio_ops *pg_ops,
 			     const struct nfs_pgio_completion_ops *compl_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			     const struct nfs_rw_ops *rw_ops,
+>>>>>>> v3.18
 =======
 			     const struct nfs_rw_ops *rw_ops,
 >>>>>>> v3.18
@@ -146,28 +177,40 @@ extern	void nfs_pageio_init(struct nfs_pageio_descriptor *desc,
 extern	int nfs_pageio_add_request(struct nfs_pageio_descriptor *,
 				   struct nfs_page *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern	void nfs_pageio_complete(struct nfs_pageio_descriptor *desc);
 extern	void nfs_pageio_cond_complete(struct nfs_pageio_descriptor *, pgoff_t);
 extern bool nfs_generic_pg_test(struct nfs_pageio_descriptor *desc,
 =======
+=======
+>>>>>>> v3.18
 extern  int nfs_pageio_resend(struct nfs_pageio_descriptor *,
 			      struct nfs_pgio_header *);
 extern	void nfs_pageio_complete(struct nfs_pageio_descriptor *desc);
 extern	void nfs_pageio_cond_complete(struct nfs_pageio_descriptor *, pgoff_t);
 extern size_t nfs_generic_pg_test(struct nfs_pageio_descriptor *desc,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				struct nfs_page *prev,
 				struct nfs_page *req);
 extern  int nfs_wait_on_request(struct nfs_page *);
 extern	void nfs_unlock_request(struct nfs_page *req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern	void nfs_unlock_and_release_request(struct nfs_page *req);
 =======
+=======
+>>>>>>> v3.18
 extern	void nfs_unlock_and_release_request(struct nfs_page *);
 extern int nfs_page_group_lock(struct nfs_page *, bool);
 extern void nfs_page_group_lock_wait(struct nfs_page *);
 extern void nfs_page_group_unlock(struct nfs_page *);
 extern bool nfs_page_group_sync_on_bit(struct nfs_page *, unsigned int);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

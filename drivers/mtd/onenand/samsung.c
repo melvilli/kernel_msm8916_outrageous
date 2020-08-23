@@ -11,7 +11,11 @@
  *
  * Implementation:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	S3C64XX and S5PC100: emulate the pseudo BufferRAM
+=======
+ *	S3C64XX: emulate the pseudo BufferRAM
+>>>>>>> v3.18
 =======
  *	S3C64XX: emulate the pseudo BufferRAM
 >>>>>>> v3.18
@@ -37,7 +41,10 @@ enum soc_type {
 	TYPE_S3C6400,
 	TYPE_S3C6410,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TYPE_S5PC100,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	TYPE_S5PC110,
@@ -67,7 +74,10 @@ enum soc_type {
 
 #define S3C64XX_CMD_MAP_SHIFT		24
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S5PC100_CMD_MAP_SHIFT		26
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -80,10 +90,13 @@ enum soc_type {
 #define S3C6410_FSA_SHIFT		4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S5PC100_FBA_SHIFT		13
 #define S5PC100_FPA_SHIFT		7
 #define S5PC100_FSA_SHIFT		5
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* S5PC110 specific definitions */
@@ -209,11 +222,14 @@ static unsigned int s3c64xx_cmd_map(unsigned type, unsigned val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int s5pc1xx_cmd_map(unsigned type, unsigned val)
 {
 	return (type << S5PC100_CMD_MAP_SHIFT) | val;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static unsigned int s3c6400_mem_addr(int fba, int fpa, int fsa)
@@ -229,12 +245,15 @@ static unsigned int s3c6410_mem_addr(int fba, int fpa, int fsa)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int s5pc100_mem_addr(int fba, int fpa, int fsa)
 {
 	return (fba << S5PC100_FBA_SHIFT) | (fpa << S5PC100_FPA_SHIFT) |
 		(fsa << S5PC100_FSA_SHIFT);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void s3c_onenand_reset(void)
@@ -557,9 +576,15 @@ static int onenand_write_bufferram(struct mtd_info *mtd, int area,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int (*s5pc110_dma_ops)(void *dst, void *src, size_t count, int direction);
 
 static int s5pc110_dma_poll(void *dst, void *src, size_t count, int direction)
+=======
+static int (*s5pc110_dma_ops)(dma_addr_t dst, dma_addr_t src, size_t count, int direction);
+
+static int s5pc110_dma_poll(dma_addr_t dst, dma_addr_t src, size_t count, int direction)
+>>>>>>> v3.18
 =======
 static int (*s5pc110_dma_ops)(dma_addr_t dst, dma_addr_t src, size_t count, int direction);
 
@@ -631,7 +656,11 @@ static irqreturn_t s5pc110_onenand_irq(int irq, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int s5pc110_dma_irq(void *dst, void *src, size_t count, int direction)
+=======
+static int s5pc110_dma_irq(dma_addr_t dst, dma_addr_t src, size_t count, int direction)
+>>>>>>> v3.18
 =======
 static int s5pc110_dma_irq(dma_addr_t dst, dma_addr_t src, size_t count, int direction)
 >>>>>>> v3.18
@@ -716,7 +745,11 @@ static int s5pc110_read_bufferram(struct mtd_info *mtd, int area,
 		goto normal;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = s5pc110_dma_ops((void *) dma_dst, (void *) dma_src,
+=======
+	err = s5pc110_dma_ops(dma_dst, dma_src,
+>>>>>>> v3.18
 =======
 	err = s5pc110_dma_ops(dma_dst, dma_src,
 >>>>>>> v3.18
@@ -869,9 +902,12 @@ static void s3c_onenand_setup(struct mtd_info *mtd)
 		onenand->mem_addr = s3c6410_mem_addr;
 		onenand->cmd_map = s3c64xx_cmd_map;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (onenand->type == TYPE_S5PC100) {
 		onenand->mem_addr = s5pc100_mem_addr;
 		onenand->cmd_map = s5pc1xx_cmd_map;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else if (onenand->type == TYPE_S5PC110) {
@@ -904,7 +940,11 @@ static int s3c_onenand_probe(struct platform_device *pdev)
 	int size, err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -913,10 +953,15 @@ static int s3c_onenand_probe(struct platform_device *pdev)
 	size = sizeof(struct mtd_info) + sizeof(struct onenand_chip);
 	mtd = kzalloc(size, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mtd) {
 		dev_err(&pdev->dev, "failed to allocate memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!mtd)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!mtd)
 		return -ENOMEM;
@@ -1119,7 +1164,10 @@ static int s3c_onenand_remove(struct platform_device *pdev)
 			   resource_size(onenand->base_res));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(onenand->oob_buf);
@@ -1163,9 +1211,12 @@ static struct platform_device_id s3c_onenand_driver_ids[] = {
 		.driver_data	= TYPE_S3C6410,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name		= "s5pc100-onenand",
 		.driver_data	= TYPE_S5PC100,
 	}, {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name		= "s5pc110-onenand",

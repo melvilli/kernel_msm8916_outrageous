@@ -120,7 +120,11 @@ static void op_powerpc_stop(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int op_powerpc_create_files(struct super_block *sb, struct dentry *root)
+=======
+static int op_powerpc_create_files(struct dentry *root)
+>>>>>>> v3.18
 =======
 static int op_powerpc_create_files(struct dentry *root)
 >>>>>>> v3.18
@@ -133,9 +137,15 @@ static int op_powerpc_create_files(struct dentry *root)
 	 * all of the counters.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oprofilefs_create_ulong(sb, root, "mmcr0", &sys.mmcr0);
 	oprofilefs_create_ulong(sb, root, "mmcr1", &sys.mmcr1);
 	oprofilefs_create_ulong(sb, root, "mmcra", &sys.mmcra);
+=======
+	oprofilefs_create_ulong(root, "mmcr0", &sys.mmcr0);
+	oprofilefs_create_ulong(root, "mmcr1", &sys.mmcr1);
+	oprofilefs_create_ulong(root, "mmcra", &sys.mmcra);
+>>>>>>> v3.18
 =======
 	oprofilefs_create_ulong(root, "mmcr0", &sys.mmcr0);
 	oprofilefs_create_ulong(root, "mmcr1", &sys.mmcr1);
@@ -153,7 +163,11 @@ static int op_powerpc_create_files(struct dentry *root)
 	 * cycle profiling, PPU event and cycle profiling.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oprofilefs_create_ulong(sb, root, "cell_support", &sys.cell_support);
+=======
+	oprofilefs_create_ulong(root, "cell_support", &sys.cell_support);
+>>>>>>> v3.18
 =======
 	oprofilefs_create_ulong(root, "cell_support", &sys.cell_support);
 >>>>>>> v3.18
@@ -175,17 +189,23 @@ static int op_powerpc_create_files(struct dentry *root)
 
 		snprintf(buf, sizeof buf, "%d", i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dir = oprofilefs_mkdir(sb, root, buf);
 
 		oprofilefs_create_ulong(sb, dir, "enabled", &ctr[i].enabled);
 		oprofilefs_create_ulong(sb, dir, "event", &ctr[i].event);
 		oprofilefs_create_ulong(sb, dir, "count", &ctr[i].count);
 =======
+=======
+>>>>>>> v3.18
 		dir = oprofilefs_mkdir(root, buf);
 
 		oprofilefs_create_ulong(dir, "enabled", &ctr[i].enabled);
 		oprofilefs_create_ulong(dir, "event", &ctr[i].event);
 		oprofilefs_create_ulong(dir, "count", &ctr[i].count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -196,6 +216,7 @@ static int op_powerpc_create_files(struct dentry *root)
 		 * support them.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		oprofilefs_create_ulong(sb, dir, "kernel", &ctr[i].kernel);
 		oprofilefs_create_ulong(sb, dir, "user", &ctr[i].user);
 
@@ -205,6 +226,8 @@ static int op_powerpc_create_files(struct dentry *root)
 	oprofilefs_create_ulong(sb, root, "enable_kernel", &sys.enable_kernel);
 	oprofilefs_create_ulong(sb, root, "enable_user", &sys.enable_user);
 =======
+=======
+>>>>>>> v3.18
 		oprofilefs_create_ulong(dir, "kernel", &ctr[i].kernel);
 		oprofilefs_create_ulong(dir, "user", &ctr[i].user);
 
@@ -213,6 +236,9 @@ static int op_powerpc_create_files(struct dentry *root)
 
 	oprofilefs_create_ulong(root, "enable_kernel", &sys.enable_kernel);
 	oprofilefs_create_ulong(root, "enable_user", &sys.enable_user);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Default to tracing both kernel and user */
@@ -239,9 +265,12 @@ int __init oprofile_arch_init(struct oprofile_operations *ops)
 			break;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case PPC_OPROFILE_RS64:
 			model = &op_model_rs64;
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		case PPC_OPROFILE_POWER4:

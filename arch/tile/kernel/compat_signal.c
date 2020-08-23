@@ -33,6 +33,10 @@
 #include <asm/sigframe.h>
 #include <asm/syscalls.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/vdso.h>
+>>>>>>> v3.18
 =======
 #include <asm/vdso.h>
 >>>>>>> v3.18
@@ -194,6 +198,7 @@ static inline void __user *compat_get_sigframe(struct k_sigaction *ka,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int compat_setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 			  sigset_t *set, struct pt_regs *regs)
 {
@@ -207,6 +212,8 @@ int compat_setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 		goto give_sigsegv;
 =======
+=======
+>>>>>>> v3.18
 int compat_setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 			  struct pt_regs *regs)
 {
@@ -219,6 +226,9 @@ int compat_setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 		goto err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	usig = current_thread_info()->exec_domain
@@ -229,6 +239,7 @@ int compat_setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 
 	/* Always write at least the signal number for the stack backtracer. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_SIGINFO) {
 		/* At sigreturn time, restore the callee-save registers too. */
 		err |= copy_siginfo_to_user32(&frame->info, info);
@@ -236,12 +247,17 @@ int compat_setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 	} else {
 		err |= __put_user(info->si_signo, &frame->info.si_signo);
 =======
+=======
+>>>>>>> v3.18
 	if (ksig->ka.sa.sa_flags & SA_SIGINFO) {
 		/* At sigreturn time, restore the callee-save registers too. */
 		err |= copy_siginfo_to_user32(&frame->info, &ksig->info);
 		regs->flags |= PT_FLAGS_RESTORE_REGS;
 	} else {
 		err |= __put_user(ksig->info.si_signo, &frame->info.si_signo);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -254,17 +270,23 @@ int compat_setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 	err |= __copy_to_user(&frame->uc.uc_sigmask, set, sizeof(*set));
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto give_sigsegv;
 
 	restorer = VDSO_BASE;
 	if (ka->sa.sa_flags & SA_RESTORER)
 		restorer = ptr_to_compat_reg(ka->sa.sa_restorer);
 =======
+=======
+>>>>>>> v3.18
 		goto err;
 
 	restorer = VDSO_SYM(&__vdso_rt_sigreturn);
 	if (ksig->ka.sa.sa_flags & SA_RESTORER)
 		restorer = ptr_to_compat_reg(ksig->ka.sa.sa_restorer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -275,7 +297,11 @@ int compat_setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 	 * since some things rely on this (e.g. glibc's debug/segfault.c).
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->pc = ptr_to_compat_reg(ka->sa.sa_handler);
+=======
+	regs->pc = ptr_to_compat_reg(ksig->ka.sa.sa_handler);
+>>>>>>> v3.18
 =======
 	regs->pc = ptr_to_compat_reg(ksig->ka.sa.sa_handler);
 >>>>>>> v3.18
@@ -289,8 +315,14 @@ int compat_setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 give_sigsegv:
 	signal_fault("bad setup frame", regs, frame, sig);
+=======
+err:
+	trace_unhandled_signal("bad sigreturn frame", regs,
+			      (unsigned long)frame, SIGSEGV);
+>>>>>>> v3.18
 =======
 err:
 	trace_unhandled_signal("bad sigreturn frame", regs,

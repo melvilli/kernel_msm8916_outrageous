@@ -86,7 +86,11 @@ struct alx_priv {
 		dma_addr_t dma;
 		void *virt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int size;
+=======
+		unsigned int size;
+>>>>>>> v3.18
 =======
 		unsigned int size;
 >>>>>>> v3.18
@@ -97,9 +101,15 @@ struct alx_priv {
 	u32 int_mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int tx_ringsz;
 	int rx_ringsz;
 	int rxbuf_size;
+=======
+	unsigned int tx_ringsz;
+	unsigned int rx_ringsz;
+	unsigned int rxbuf_size;
+>>>>>>> v3.18
 =======
 	unsigned int tx_ringsz;
 	unsigned int rx_ringsz;
@@ -117,6 +127,12 @@ struct alx_priv {
 
 	bool msi;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* protects hw.stats */
+	spinlock_t stats_lock;
+>>>>>>> v3.18
 =======
 
 	/* protects hw.stats */

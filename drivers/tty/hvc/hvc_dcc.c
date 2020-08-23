@@ -11,7 +11,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/console.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/init.h>
@@ -53,7 +56,10 @@ static int hvc_dcc_get_chars(uint32_t vt, char *buf, int count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool hvc_dcc_check(void)
 {
 	unsigned long time = jiffies + (HZ / 10);
@@ -69,6 +75,9 @@ static bool hvc_dcc_check(void)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct hv_ops hvc_dcc_get_put_ops = {
 	.get_chars = hvc_dcc_get_chars,
@@ -78,6 +87,12 @@ static const struct hv_ops hvc_dcc_get_put_ops = {
 static int __init hvc_dcc_console_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!hvc_dcc_check())
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (!hvc_dcc_check())
 		return -ENODEV;
@@ -91,6 +106,12 @@ console_initcall(hvc_dcc_console_init);
 static int __init hvc_dcc_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!hvc_dcc_check())
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (!hvc_dcc_check())
 		return -ENODEV;

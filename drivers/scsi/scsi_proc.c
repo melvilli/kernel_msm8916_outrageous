@@ -186,7 +186,11 @@ static int proc_print_scsidevice(struct device *dev, void *data)
 	sdev = to_scsi_device(dev);
 	seq_printf(s,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"Host: scsi%d Channel: %02d Id: %02d Lun: %02d\n  Vendor: ",
+=======
+		"Host: scsi%d Channel: %02d Id: %02d Lun: %02llu\n  Vendor: ",
+>>>>>>> v3.18
 =======
 		"Host: scsi%d Channel: %02d Id: %02d Lun: %02llu\n  Vendor: ",
 >>>>>>> v3.18

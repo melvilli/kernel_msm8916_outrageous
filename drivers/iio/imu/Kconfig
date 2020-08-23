@@ -2,6 +2,11 @@
 # IIO imu drivers configuration
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# When adding new entries keep the list in alphabetical order
+
+>>>>>>> v3.18
 =======
 # When adding new entries keep the list in alphabetical order
 
@@ -29,6 +34,11 @@ config ADIS16480
 	  ADIS16485, ADIS16488 inertial sensors.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/iio/imu/inv_mpu6050/Kconfig"
+
+>>>>>>> v3.18
 =======
 source "drivers/iio/imu/inv_mpu6050/Kconfig"
 
@@ -47,7 +57,10 @@ config IIO_ADIS_LIB_BUFFER
 	  A set of buffer helper functions for the Analog Devices ADIS* device
 	  family.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 source "drivers/iio/imu/inv_mpu6050/Kconfig"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

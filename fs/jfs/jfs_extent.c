@@ -389,7 +389,11 @@ int extHint(struct inode *ip, s64 offset, xad_t * xp)
 	if ((rc == 0) && xlen) {
 		if (xlen != nbperpage) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(ip->i_sb, "extHint: corrupt xtree");
+=======
+			jfs_error(ip->i_sb, "corrupt xtree\n");
+>>>>>>> v3.18
 =======
 			jfs_error(ip->i_sb, "corrupt xtree\n");
 >>>>>>> v3.18

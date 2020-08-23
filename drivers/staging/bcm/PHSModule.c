@@ -1,6 +1,7 @@
 #include "headers.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static UINT CreateSFToClassifierRuleMapping(B_UINT16 uiVcid, B_UINT16 uiClsId, struct bcm_phs_table *psServiceFlowTable, struct bcm_phs_rule *psPhsRule, B_UINT8 u8AssociatedPHSI);
 
 static UINT CreateClassiferToPHSRuleMapping(B_UINT16 uiVcid, B_UINT16  uiClsId, struct bcm_phs_entry *pstServiceFlowEntry, struct bcm_phs_rule *psPhsRule, B_UINT8 u8AssociatedPHSI);
@@ -43,6 +44,8 @@ static ULONG PhsDeCompress(void *pvContext,
 			UINT *pInHeaderSize,
 			UINT *pOutHeaderSize);
 =======
+=======
+>>>>>>> v3.18
 static UINT CreateSFToClassifierRuleMapping(B_UINT16 uiVcid,
 					    B_UINT16 uiClsId,
 					    struct bcm_phs_table *psServiceFlowTable,
@@ -118,6 +121,9 @@ static ULONG PhsDeCompress(void *pvContext,
 			   void *pvOutputBuffer,
 			   UINT *pInHeaderSize,
 			   UINT *pOutHeaderSize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define IN
@@ -146,7 +152,11 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 		USHORT Vcid,
 		B_UINT16 uiClassifierRuleID,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BOOLEAN bHeaderSuppressionEnabled,
+=======
+		bool bHeaderSuppressionEnabled,
+>>>>>>> v3.18
 =======
 		bool bHeaderSuppressionEnabled,
 >>>>>>> v3.18
@@ -159,6 +169,7 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 	UINT unPHSNewPktHeaderLen = 0;
 	/* Pointer to PHS IN Hdr Buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PUCHAR pucPHSPktHdrInBuf = Adapter->stPhsTxContextInfo.ucaHdrSuppressionInBuf;
 	/* Pointer to PHS OUT Hdr Buffer */
 	PUCHAR pucPHSPktHdrOutBuf = Adapter->stPhsTxContextInfo.ucaHdrSuppressionOutBuf;
@@ -166,6 +177,8 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 	UINT BytesToRemove = 0;
 	BOOLEAN bPHSI = 0;
 =======
+=======
+>>>>>>> v3.18
 	PUCHAR pucPHSPktHdrInBuf =
 		Adapter->stPhsTxContextInfo.ucaHdrSuppressionInBuf;
 	/* Pointer to PHS OUT Hdr Buffer */
@@ -174,6 +187,9 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 	UINT usPacketType;
 	UINT BytesToRemove = 0;
 	bool bPHSI = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	LONG ulPhsStatus = 0;
 	UINT numBytesCompressed = 0;
@@ -181,7 +197,12 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 	struct sk_buff *Packet = *pPacket;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "In PHSTransmit");
+=======
+	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
+			"In PHSTransmit");
+>>>>>>> v3.18
 =======
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
 			"In PHSTransmit");
@@ -208,19 +229,26 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Step 2 Suppress Header using PHS and fill into intermediate ucaPHSPktHdrOutBuf.
 		 * Suppress only if IP Header and PHS Enabled For the Service Flow
 =======
+=======
+>>>>>>> v3.18
 		 * Step 2 Suppress Header using PHS and fill into intermediate
 		 * ucaPHSPktHdrOutBuf.
 		 * Suppress only if IP Header and PHS Enabled For the
 		 * Service Flow
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		if (((usPacketType == ETHERNET_FRAMETYPE_IPV4) ||
 				(usPacketType == ETHERNET_FRAMETYPE_IPV6)) &&
 			(bHeaderSuppressionEnabled)) {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "\nTrying to PHS Compress Using Classifier rule 0x%X", uiClassifierRuleID);
 			unPHSNewPktHeaderLen = unPHSPktHdrBytesCopied;
@@ -233,6 +261,8 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 						&unPHSNewPktHeaderLen);
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "\nPHS Old header Size : %d New Header Size  %d\n", unPhsOldHdrSize, unPHSNewPktHeaderLen);
 =======
+=======
+>>>>>>> v3.18
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND,
 					DBG_LVL_ALL,
 					"\nTrying to PHS Compress Using Classifier rule 0x%X",
@@ -249,6 +279,9 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 					DBG_LVL_ALL,
 					"\nPHS Old header Size : %d New Header Size  %d\n",
 					unPhsOldHdrSize, unPHSNewPktHeaderLen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (unPHSNewPktHeaderLen == unPhsOldHdrSize) {
@@ -262,11 +295,14 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 			if (ulPhsStatus == STATUS_PHS_COMPRESSED) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "PHS Sending packet Compressed");
 
 				if (skb_cloned(Packet)) {
 					newPacket = skb_copy(Packet, GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 				BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS,
 						PHS_SEND, DBG_LVL_ALL,
 						"PHS Sending packet Compressed");
@@ -274,6 +310,9 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 				if (skb_cloned(Packet)) {
 					newPacket =
 						skb_copy(Packet, GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 					if (newPacket == NULL)
@@ -281,6 +320,7 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 
 					dev_kfree_skb(Packet);
 					*pPacket = Packet = newPacket;
+<<<<<<< HEAD
 <<<<<<< HEAD
 					pucPHSPktHdrInBuf = Packet->data  + BytesToRemove;
 				}
@@ -290,6 +330,8 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 				memcpy(pucPHSPktHdrInBuf + numBytesCompressed, pucPHSPktHdrOutBuf, unPHSNewPktHeaderLen + PHSI_LEN);
 				memcpy(Packet->data + numBytesCompressed, Packet->data, BytesToRemove);
 =======
+=======
+>>>>>>> v3.18
 					pucPHSPktHdrInBuf =
 						Packet->data + BytesToRemove;
 				}
@@ -302,11 +344,15 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 				       unPHSNewPktHeaderLen + PHSI_LEN);
 				memcpy(Packet->data + numBytesCompressed,
 				       Packet->data, BytesToRemove);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				skb_pull(Packet, numBytesCompressed);
 
 				return STATUS_SUCCESS;
 			} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				/* if one byte headroom is not available, increase it through skb_cow */
 				if (!(skb_headroom(Packet) > 0)) {
@@ -314,6 +360,8 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 					if (skb_cow(Packet, 1)) {
 						BCM_DEBUG_PRINT(Adapter, DBG_TYPE_PRINTK, 0, 0, "SKB Cow Failed\n");
 =======
+=======
+>>>>>>> v3.18
 				/* if one byte headroom is not available,
 				 * increase it through skb_cow
 				 */
@@ -324,6 +372,9 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 								DBG_TYPE_PRINTK,
 								0, 0,
 								"SKB Cow Failed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						return STATUS_FAILURE;
 					}
@@ -342,7 +393,13 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 
 			if (!bHeaderSuppressionEnabled)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "\nHeader Suppression Disabled For SF: No PHS\n");
+=======
+				BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS,
+						PHS_SEND, DBG_LVL_ALL,
+						"\nHeader Suppression Disabled For SF: No PHS\n");
+>>>>>>> v3.18
 =======
 				BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS,
 						PHS_SEND, DBG_LVL_ALL,
@@ -354,7 +411,12 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,"PHSTransmit : Dumping data packet After PHS"); */
+=======
+	/* BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
+	 * "PHSTransmit : Dumping data packet After PHS"); */
+>>>>>>> v3.18
 =======
 	/* BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
 	 * "PHSTransmit : Dumping data packet After PHS"); */
@@ -364,17 +426,23 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 
 int PHSReceive(struct bcm_mini_adapter *Adapter,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	USHORT usVcid,
 	struct sk_buff *packet,
 	UINT *punPacketLen,
 	UCHAR *pucEthernetHdr,
 	UINT bHeaderSuppressionEnabled)
 =======
+=======
+>>>>>>> v3.18
 	       USHORT usVcid,
 	       struct sk_buff *packet,
 	       UINT *punPacketLen,
 	       UCHAR *pucEthernetHdr,
 	       UINT bHeaderSuppressionEnabled)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 nStandardPktHdrLen = 0;
@@ -385,7 +453,13 @@ int PHSReceive(struct bcm_mini_adapter *Adapter,
 
 	if (!bHeaderSuppressionEnabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE, DBG_LVL_ALL, "\nPhs Disabled for incoming packet");
+=======
+		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE,
+				DBG_LVL_ALL,
+				"\nPhs Disabled for incoming packet");
+>>>>>>> v3.18
 =======
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE,
 				DBG_LVL_ALL,
@@ -400,6 +474,7 @@ int PHSReceive(struct bcm_mini_adapter *Adapter,
 	nStandardPktHdrLen = packet->len;
 	ulPhsStatus = PhsDeCompress(&Adapter->stBCMPhsContext,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				usVcid,
 				pucInBuff,
 				Adapter->ucaPHSPktRestoreBuf,
@@ -408,6 +483,8 @@ int PHSReceive(struct bcm_mini_adapter *Adapter,
 
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE, DBG_LVL_ALL, "\nSuppressed PktHdrLen : 0x%x Restored PktHdrLen : 0x%x",
 =======
+=======
+>>>>>>> v3.18
 				    usVcid,
 				    pucInBuff,
 				    Adapter->ucaPHSPktRestoreBuf,
@@ -416,6 +493,9 @@ int PHSReceive(struct bcm_mini_adapter *Adapter,
 
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE, DBG_LVL_ALL,
 			"\nSuppressed PktHdrLen : 0x%x Restored PktHdrLen : 0x%x",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			nTotalsuppressedPktHdrBytes, nStandardPktHdrLen);
 
@@ -424,7 +504,12 @@ int PHSReceive(struct bcm_mini_adapter *Adapter,
 		return STATUS_SUCCESS;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		TotalBytesAdded = nStandardPktHdrLen - nTotalsuppressedPktHdrBytes - PHSI_LEN;
+=======
+		TotalBytesAdded = nStandardPktHdrLen -
+			nTotalsuppressedPktHdrBytes - PHSI_LEN;
+>>>>>>> v3.18
 =======
 		TotalBytesAdded = nStandardPktHdrLen -
 			nTotalsuppressedPktHdrBytes - PHSI_LEN;
@@ -436,7 +521,13 @@ int PHSReceive(struct bcm_mini_adapter *Adapter,
 			else {
 				if (skb_cow(packet, skb_headroom(packet) + TotalBytesAdded)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					BCM_DEBUG_PRINT(Adapter, DBG_TYPE_PRINTK, 0, 0, "cow failed in receive\n");
+=======
+					BCM_DEBUG_PRINT(Adapter,
+							DBG_TYPE_PRINTK, 0, 0,
+							"cow failed in receive\n");
+>>>>>>> v3.18
 =======
 					BCM_DEBUG_PRINT(Adapter,
 							DBG_TYPE_PRINTK, 0, 0,
@@ -450,7 +541,12 @@ int PHSReceive(struct bcm_mini_adapter *Adapter,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(packet->data, Adapter->ucaPHSPktRestoreBuf, nStandardPktHdrLen);
+=======
+		memcpy(packet->data, Adapter->ucaPHSPktRestoreBuf,
+		       nStandardPktHdrLen);
+>>>>>>> v3.18
 =======
 		memcpy(packet->data, Adapter->ucaPHSPktRestoreBuf,
 		       nStandardPktHdrLen);
@@ -465,13 +561,19 @@ void DumpFullPacket(UCHAR *pBuf, UINT nPktLen)
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_TX, IPV4_DBG, DBG_LVL_ALL, "Dumping Data Packet");
 	BCM_DEBUG_PRINT_BUFFER(Adapter, DBG_TYPE_TX, IPV4_DBG, DBG_LVL_ALL, pBuf, nPktLen);
 =======
+=======
+>>>>>>> v3.18
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_TX, IPV4_DBG, DBG_LVL_ALL,
 			"Dumping Data Packet");
 	BCM_DEBUG_PRINT_BUFFER(Adapter, DBG_TYPE_TX, IPV4_DBG, DBG_LVL_ALL,
 			       pBuf, nPktLen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -479,18 +581,24 @@ void DumpFullPacket(UCHAR *pBuf, UINT nPktLen)
  * Procedure:   phs_init
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Description: This routine is responsible for allocating memory for classifier and
  * PHS rules.
  *
  * Arguments:
  * pPhsdeviceExtension - ptr to Device extension containing PHS Classifier rules and PHS Rules , RX, TX buffer etc
 =======
+=======
+>>>>>>> v3.18
  * Description: This routine is responsible for allocating memory for classifier
  * and PHS rules.
  *
  * Arguments:
  * pPhsdeviceExtension - ptr to Device extension containing PHS Classifier rules
  * and PHS Rules , RX, TX buffer etc
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Returns:
@@ -498,7 +606,12 @@ void DumpFullPacket(UCHAR *pBuf, UINT nPktLen)
  * FALSE	-If allocation of memory fails.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int phs_init(struct bcm_phs_extension *pPhsdeviceExtension, struct bcm_mini_adapter *Adapter)
+=======
+int phs_init(struct bcm_phs_extension *pPhsdeviceExtension,
+	     struct bcm_mini_adapter *Adapter)
+>>>>>>> v3.18
 =======
 int phs_init(struct bcm_phs_extension *pPhsdeviceExtension,
 	     struct bcm_mini_adapter *Adapter)
@@ -508,7 +621,12 @@ int phs_init(struct bcm_phs_extension *pPhsdeviceExtension,
 	struct bcm_phs_table *pstServiceFlowTable;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "\nPHS:phs_init function");
+=======
+	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL,
+			"\nPHS:phs_init function");
+>>>>>>> v3.18
 =======
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL,
 			"\nPHS:phs_init function");
@@ -518,11 +636,14 @@ int phs_init(struct bcm_phs_extension *pPhsdeviceExtension,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pPhsdeviceExtension->pstServiceFlowPhsRulesTable = kzalloc(sizeof(struct bcm_phs_table), GFP_KERNEL);
 
 	if (!pPhsdeviceExtension->pstServiceFlowPhsRulesTable) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "\nAllocation ServiceFlowPhsRulesTable failed");
 =======
+=======
+>>>>>>> v3.18
 	pPhsdeviceExtension->pstServiceFlowPhsRulesTable =
 		kzalloc(sizeof(struct bcm_phs_table), GFP_KERNEL);
 
@@ -530,6 +651,9 @@ int phs_init(struct bcm_phs_extension *pPhsdeviceExtension,
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH,
 				DBG_LVL_ALL,
 				"\nAllocation ServiceFlowPhsRulesTable failed");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENOMEM;
 	}
@@ -537,11 +661,14 @@ int phs_init(struct bcm_phs_extension *pPhsdeviceExtension,
 	pstServiceFlowTable = pPhsdeviceExtension->pstServiceFlowPhsRulesTable;
 	for (i = 0; i < MAX_SERVICEFLOWS; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct bcm_phs_entry sServiceFlow = pstServiceFlowTable->stSFList[i];
 		sServiceFlow.pstClassifierTable = kzalloc(sizeof(struct bcm_phs_classifier_table), GFP_KERNEL);
 		if (!sServiceFlow.pstClassifierTable) {
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "\nAllocation failed");
 =======
+=======
+>>>>>>> v3.18
 		struct bcm_phs_entry sServiceFlow =
 			pstServiceFlowTable->stSFList[i];
 		sServiceFlow.pstClassifierTable =
@@ -550,6 +677,9 @@ int phs_init(struct bcm_phs_extension *pPhsdeviceExtension,
 		if (!sServiceFlow.pstClassifierTable) {
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH,
 					DBG_LVL_ALL, "\nAllocation failed");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			free_phs_serviceflow_rules(pPhsdeviceExtension->pstServiceFlowPhsRulesTable);
 			pPhsdeviceExtension->pstServiceFlowPhsRulesTable = NULL;
@@ -560,7 +690,12 @@ int phs_init(struct bcm_phs_extension *pPhsdeviceExtension,
 	pPhsdeviceExtension->CompressedTxBuffer = kmalloc(PHS_BUFFER_SIZE, GFP_KERNEL);
 	if (pPhsdeviceExtension->CompressedTxBuffer == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "\nAllocation failed");
+=======
+		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH,
+				DBG_LVL_ALL, "\nAllocation failed");
+>>>>>>> v3.18
 =======
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH,
 				DBG_LVL_ALL, "\nAllocation failed");
@@ -571,15 +706,21 @@ int phs_init(struct bcm_phs_extension *pPhsdeviceExtension,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pPhsdeviceExtension->UnCompressedRxBuffer = kmalloc(PHS_BUFFER_SIZE, GFP_KERNEL);
 	if (pPhsdeviceExtension->UnCompressedRxBuffer == NULL) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "\nAllocation failed");
 =======
+=======
+>>>>>>> v3.18
 	pPhsdeviceExtension->UnCompressedRxBuffer =
 		kmalloc(PHS_BUFFER_SIZE, GFP_KERNEL);
 	if (pPhsdeviceExtension->UnCompressedRxBuffer == NULL) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH,
 				DBG_LVL_ALL, "\nAllocation failed");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree(pPhsdeviceExtension->CompressedTxBuffer);
 		free_phs_serviceflow_rules(pPhsdeviceExtension->pstServiceFlowPhsRulesTable);
@@ -588,7 +729,12 @@ int phs_init(struct bcm_phs_extension *pPhsdeviceExtension,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "\n phs_init Successful");
+=======
+	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL,
+			"\n phs_init Successful");
+>>>>>>> v3.18
 =======
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL,
 			"\n phs_init Successful");
@@ -632,21 +778,28 @@ int PhsCleanup(IN struct bcm_phs_extension *pPHSDeviceExt)
  */
 ULONG PhsUpdateClassifierRule(IN void *pvContext,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IN B_UINT16 uiVcid ,
 			IN B_UINT16 uiClsId   ,
 			IN struct bcm_phs_rule *psPhsRule,
 			IN B_UINT8 u8AssociatedPHSI)
 =======
+=======
+>>>>>>> v3.18
 			      IN B_UINT16 uiVcid ,
 			      IN B_UINT16 uiClsId   ,
 			      IN struct bcm_phs_rule *psPhsRule,
 			      IN B_UINT8 u8AssociatedPHSI)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	ULONG lStatus = 0;
 	UINT nSFIndex = 0;
 	struct bcm_phs_entry *pstServiceFlowEntry = NULL;
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct bcm_phs_extension *pDeviceExtension = (struct bcm_phs_extension *)pvContext;
 
@@ -655,6 +808,8 @@ ULONG PhsUpdateClassifierRule(IN void *pvContext,
 	if (pDeviceExtension == NULL) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "Invalid Device Extension\n");
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_phs_extension *pDeviceExtension =
 		(struct bcm_phs_extension *)pvContext;
 
@@ -664,6 +819,9 @@ ULONG PhsUpdateClassifierRule(IN void *pvContext,
 	if (pDeviceExtension == NULL) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH,
 				DBG_LVL_ALL, "Invalid Device Extension\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ERR_PHS_INVALID_DEVICE_EXETENSION;
 	}
@@ -674,7 +832,11 @@ ULONG PhsUpdateClassifierRule(IN void *pvContext,
 	/* Retrieve the SFID Entry Index for requested Service Flow */
 	nSFIndex = GetServiceFlowEntry(pDeviceExtension->pstServiceFlowPhsRulesTable,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				uiVcid, &pstServiceFlowEntry);
+=======
+				       uiVcid, &pstServiceFlowEntry);
+>>>>>>> v3.18
 =======
 				       uiVcid, &pstServiceFlowEntry);
 >>>>>>> v3.18
@@ -683,7 +845,13 @@ ULONG PhsUpdateClassifierRule(IN void *pvContext,
 		/* This is a new SF. Create a mapping entry for this */
 		lStatus = CreateSFToClassifierRuleMapping(uiVcid, uiClsId,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							pDeviceExtension->pstServiceFlowPhsRulesTable, psPhsRule, u8AssociatedPHSI);
+=======
+							  pDeviceExtension->pstServiceFlowPhsRulesTable,
+							  psPhsRule,
+							  u8AssociatedPHSI);
+>>>>>>> v3.18
 =======
 							  pDeviceExtension->pstServiceFlowPhsRulesTable,
 							  psPhsRule,
@@ -695,7 +863,13 @@ ULONG PhsUpdateClassifierRule(IN void *pvContext,
 	/* SF already Exists Add PHS Rule to existing SF */
 	lStatus = CreateClassiferToPHSRuleMapping(uiVcid, uiClsId,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						pstServiceFlowEntry, psPhsRule, u8AssociatedPHSI);
+=======
+						  pstServiceFlowEntry,
+						  psPhsRule,
+						  u8AssociatedPHSI);
+>>>>>>> v3.18
 =======
 						  pstServiceFlowEntry,
 						  psPhsRule,
@@ -722,20 +896,27 @@ ULONG PhsUpdateClassifierRule(IN void *pvContext,
  * >0 Error.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ULONG PhsDeletePHSRule(IN void *pvContext, IN B_UINT16 uiVcid, IN B_UINT8 u8PHSI)
 {
 	ULONG lStatus = 0;
 =======
+=======
+>>>>>>> v3.18
 ULONG PhsDeletePHSRule(IN void *pvContext,
 		       IN B_UINT16 uiVcid,
 		       IN B_UINT8 u8PHSI)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	UINT nSFIndex = 0, nClsidIndex = 0;
 	struct bcm_phs_entry *pstServiceFlowEntry = NULL;
 	struct bcm_phs_classifier_table *pstClassifierRulesTable = NULL;
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
 	struct bcm_phs_extension *pDeviceExtension = (struct bcm_phs_extension *)pvContext;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "======>\n");
@@ -747,6 +928,8 @@ ULONG PhsDeletePHSRule(IN void *pvContext,
 		if (nSFIndex == PHS_INVALID_TABLE_INDEX) {
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "SFID Match Failed\n");
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_phs_classifier_entry *curr_entry;
 
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL,
@@ -760,6 +943,9 @@ ULONG PhsDeletePHSRule(IN void *pvContext,
 		if (nSFIndex == PHS_INVALID_TABLE_INDEX) {
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH,
 					DBG_LVL_ALL, "SFID Match Failed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return ERR_SF_MATCH_FAIL;
 		}
@@ -767,6 +953,7 @@ ULONG PhsDeletePHSRule(IN void *pvContext,
 		pstClassifierRulesTable = pstServiceFlowEntry->pstClassifierTable;
 		if (pstClassifierRulesTable) {
 			for (nClsidIndex = 0; nClsidIndex < MAX_PHSRULE_PER_SF; nClsidIndex++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				if (pstClassifierRulesTable->stActivePhsRulesList[nClsidIndex].bUsed && pstClassifierRulesTable->stActivePhsRulesList[nClsidIndex].pstPhsRule) {
 					if (pstClassifierRulesTable->stActivePhsRulesList[nClsidIndex].pstPhsRule->u8PHSI == u8PHSI) {
@@ -781,6 +968,8 @@ ULONG PhsDeletePHSRule(IN void *pvContext,
 							sizeof(struct bcm_phs_classifier_entry));
 					}
 =======
+=======
+>>>>>>> v3.18
 				curr_entry = &pstClassifierRulesTable->stActivePhsRulesList[nClsidIndex];
 				if (curr_entry->bUsed &&
 				    curr_entry->pstPhsRule &&
@@ -795,13 +984,20 @@ ULONG PhsDeletePHSRule(IN void *pvContext,
 					memset(curr_entry,
 					       0,
 					       sizeof(struct bcm_phs_classifier_entry));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return lStatus;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -824,19 +1020,26 @@ ULONG PhsDeletePHSRule(IN void *pvContext,
  * >0 Error.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ULONG PhsDeleteClassifierRule(IN void *pvContext, IN B_UINT16 uiVcid, IN B_UINT16 uiClsId)
 {
 	ULONG lStatus = 0;
 =======
+=======
+>>>>>>> v3.18
 ULONG PhsDeleteClassifierRule(IN void *pvContext,
 			      IN B_UINT16 uiVcid,
 			      IN B_UINT16 uiClsId)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	UINT nSFIndex = 0, nClsidIndex = 0;
 	struct bcm_phs_entry *pstServiceFlowEntry = NULL;
 	struct bcm_phs_classifier_entry *pstClassifierEntry = NULL;
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct bcm_phs_extension *pDeviceExtension = (struct bcm_phs_extension *)pvContext;
 
@@ -872,6 +1075,8 @@ ULONG PhsDeleteClassifierRule(IN void *pvContext,
 	}
 	return lStatus;
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_phs_extension *pDeviceExtension =
 		(struct bcm_phs_extension *)pvContext;
 
@@ -921,6 +1126,9 @@ ULONG PhsDeleteClassifierRule(IN void *pvContext,
 
 out:
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -942,13 +1150,17 @@ out:
 ULONG PhsDeleteSFRules(IN void *pvContext, IN B_UINT16 uiVcid)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ULONG lStatus = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	UINT nSFIndex = 0, nClsidIndex = 0;
 	struct bcm_phs_entry *pstServiceFlowEntry = NULL;
 	struct bcm_phs_classifier_table *pstClassifierRulesTable = NULL;
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct bcm_phs_extension *pDeviceExtension = (struct bcm_phs_extension *)pvContext;
 
@@ -996,6 +1208,8 @@ ULONG PhsDeleteSFRules(IN void *pvContext, IN B_UINT16 uiVcid)
 
 	return lStatus;
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_phs_extension *pDeviceExtension =
 		(struct bcm_phs_extension *)pvContext;
 	struct bcm_phs_classifier_entry *curr_clsf_entry;
@@ -1056,6 +1270,9 @@ ULONG PhsDeleteSFRules(IN void *pvContext, IN B_UINT16 uiVcid)
 
 out:
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1067,6 +1284,7 @@ out:
  *
  * Arguments:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	IN void* pvContext - PHS Driver Specific Context.
  *	IN B_UINT16 uiVcid    - The Service Flow ID to which current packet header compression applies.
  *	IN UINT  uiClsId   - The Classifier ID to which current packet header compression applies.
@@ -1075,6 +1293,8 @@ out:
  *	IN UINT *pOldHeaderSize  - The actual size of the header before PHS
  *	IN UINT *pNewHeaderSize - The new size of the header after applying PHS
 =======
+=======
+>>>>>>> v3.18
  *	IN void* pvContext	    - PHS Driver Specific Context.
  *	IN B_UINT16 uiVcid	    - The Service Flow ID to which current
  *				      packet header compression applies.
@@ -1087,6 +1307,9 @@ out:
  *	IN UINT *pOldHeaderSize	    - The actual size of the header before PHS
  *	IN UINT *pNewHeaderSize	    - The new size of the header after applying
  *				      PHS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Return Value:
@@ -1094,6 +1317,7 @@ out:
  * 0 if successful,
  * >0 Error.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 ULONG PhsCompress(IN void *pvContext,
 		IN B_UINT16 uiVcid,
@@ -1103,6 +1327,8 @@ ULONG PhsCompress(IN void *pvContext,
 		OUT UINT *pOldHeaderSize,
 		OUT UINT *pNewHeaderSize)
 =======
+=======
+>>>>>>> v3.18
 static ULONG PhsCompress(IN void *pvContext,
 			 IN B_UINT16 uiVcid,
 			 IN B_UINT16 uiClsId,
@@ -1110,6 +1336,9 @@ static ULONG PhsCompress(IN void *pvContext,
 			 OUT void *pvOutputBuffer,
 			 OUT UINT *pOldHeaderSize,
 			 OUT UINT *pNewHeaderSize)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	UINT nSFIndex = 0, nClsidIndex = 0;
@@ -1119,22 +1348,29 @@ static ULONG PhsCompress(IN void *pvContext,
 	ULONG lStatus = 0;
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcm_phs_extension *pDeviceExtension = (struct bcm_phs_extension *)pvContext;
 
 	if (pDeviceExtension == NULL) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "Invalid Device Extension\n");
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_phs_extension *pDeviceExtension =
 		(struct bcm_phs_extension *)pvContext;
 
 	if (pDeviceExtension == NULL) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
 				"Invalid Device Extension\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lStatus = STATUS_PHS_NOCOMPRESSION;
 		return lStatus;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "Suppressing header\n");
 
@@ -1144,6 +1380,8 @@ static ULONG PhsCompress(IN void *pvContext,
 	if (nSFIndex == PHS_INVALID_TABLE_INDEX) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "SFID Match Failed\n");
 =======
+=======
+>>>>>>> v3.18
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
 			"Suppressing header\n");
 
@@ -1153,6 +1391,9 @@ static ULONG PhsCompress(IN void *pvContext,
 	if (nSFIndex == PHS_INVALID_TABLE_INDEX) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
 				"SFID Match Failed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lStatus = STATUS_PHS_NOCOMPRESSION;
 		return lStatus;
@@ -1160,17 +1401,23 @@ static ULONG PhsCompress(IN void *pvContext,
 
 	nClsidIndex = GetClassifierEntry(pstServiceFlowEntry->pstClassifierTable,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					uiClsId, eActiveClassifierRuleContext, &pstClassifierEntry);
 
 	if (nClsidIndex == PHS_INVALID_TABLE_INDEX) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "No PHS Rule Defined For Classifier\n");
 =======
+=======
+>>>>>>> v3.18
 					 uiClsId, eActiveClassifierRuleContext,
 					 &pstClassifierEntry);
 
 	if (nClsidIndex == PHS_INVALID_TABLE_INDEX) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
 				"No PHS Rule Defined For Classifier\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lStatus =  STATUS_PHS_NOCOMPRESSION;
 		return lStatus;
@@ -1180,7 +1427,12 @@ static ULONG PhsCompress(IN void *pvContext,
 	pstPhsRule = pstClassifierEntry->pstPhsRule;
 	if (!ValidatePHSRuleComplete(pstPhsRule)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "PHS Rule Defined For Classifier But Not Complete\n");
+=======
+		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL,
+				"PHS Rule Defined For Classifier But Not Complete\n");
+>>>>>>> v3.18
 =======
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL,
 				"PHS Rule Defined For Classifier But Not Complete\n");
@@ -1191,6 +1443,7 @@ static ULONG PhsCompress(IN void *pvContext,
 
 	/* Compress Packet */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lStatus = phs_compress(pstPhsRule, (PUCHAR)pvInputBuffer,
 			(PUCHAR)pvOutputBuffer, pOldHeaderSize, pNewHeaderSize);
 
@@ -1200,6 +1453,8 @@ static ULONG PhsCompress(IN void *pvContext,
 	} else
 		pstPhsRule->PHSErrorNumPackets++;
 =======
+=======
+>>>>>>> v3.18
 	lStatus = phs_compress(pstPhsRule,
 			       (PUCHAR)pvInputBuffer,
 			       (PUCHAR)pvOutputBuffer,
@@ -1213,6 +1468,9 @@ static ULONG PhsCompress(IN void *pvContext,
 	} else {
 		pstPhsRule->PHSErrorNumPackets++;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return lStatus;
@@ -1226,12 +1484,15 @@ static ULONG PhsCompress(IN void *pvContext,
  *
  * Arguments:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	IN void* pvContext - PHS Driver Specific Context.
  *	IN B_UINT16 uiVcid    - The Service Flow ID to which current packet header restoration applies.
  *	IN  void *pvInputBuffer - The Input buffer containg suppressed packet header data
  *	OUT void *pvOutputBuffer - The output buffer returned by this function after restoration
  *	OUT UINT *pHeaderSize   - The packet header size after restoration is returned in this parameter.
 =======
+=======
+>>>>>>> v3.18
  *	IN void* pvContext	    - PHS Driver Specific Context.
  *	IN B_UINT16 uiVcid	    - The Service Flow ID to which current
  *				      packet header restoration applies.
@@ -1241,6 +1502,9 @@ static ULONG PhsCompress(IN void *pvContext,
  *				      function after restoration
  *	OUT UINT *pHeaderSize	    - The packet header size after restoration
  *				      is returned in this parameter.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Return Value:
@@ -1249,6 +1513,7 @@ static ULONG PhsCompress(IN void *pvContext,
  * >0 Error.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ULONG PhsDeCompress(IN void *pvContext,
 		IN B_UINT16 uiVcid,
 		IN void *pvInputBuffer,
@@ -1256,12 +1521,17 @@ ULONG PhsDeCompress(IN void *pvContext,
 		OUT UINT *pInHeaderSize,
 		OUT UINT *pOutHeaderSize)
 =======
+=======
+>>>>>>> v3.18
 static ULONG PhsDeCompress(IN void *pvContext,
 			   IN B_UINT16 uiVcid,
 			   IN void *pvInputBuffer,
 			   OUT void *pvOutputBuffer,
 			   OUT UINT *pInHeaderSize,
 			   OUT UINT *pOutHeaderSize)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	UINT nSFIndex = 0, nPhsRuleIndex = 0;
@@ -1269,6 +1539,7 @@ static ULONG PhsDeCompress(IN void *pvContext,
 	struct bcm_phs_rule *pstPhsRule = NULL;
 	UINT phsi;
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct bcm_phs_extension *pDeviceExtension = (struct bcm_phs_extension *)pvContext;
 
@@ -1283,6 +1554,8 @@ static ULONG PhsDeCompress(IN void *pvContext,
 	phsi = *((unsigned char *)(pvInputBuffer));
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE, DBG_LVL_ALL, "PHSI To Be Used For restore : %x\n", phsi);
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_phs_extension *pDeviceExtension =
 		(struct bcm_phs_extension *)pvContext;
 
@@ -1299,12 +1572,16 @@ static ULONG PhsDeCompress(IN void *pvContext,
 	phsi = *((unsigned char *)(pvInputBuffer));
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE, DBG_LVL_ALL,
 			"PHSI To Be Used For restore : %x\n", phsi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (phsi == UNCOMPRESSED_PACKET)
 		return STATUS_PHS_NOCOMPRESSION;
 
 	/* Retrieve the SFID Entry Index for requested Service Flow */
 	nSFIndex = GetServiceFlowEntry(pDeviceExtension->pstServiceFlowPhsRulesTable,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				uiVcid, &pstServiceFlowEntry);
 	if (nSFIndex == PHS_INVALID_TABLE_INDEX) {
@@ -1319,6 +1596,8 @@ static ULONG PhsDeCompress(IN void *pvContext,
 		nPhsRuleIndex = GetPhsRuleEntry(pstServiceFlowEntry->pstClassifierTable,
 						phsi, eOldClassifierRuleContext, &pstPhsRule);
 =======
+=======
+>>>>>>> v3.18
 				       uiVcid, &pstServiceFlowEntry);
 	if (nSFIndex == PHS_INVALID_TABLE_INDEX) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE,
@@ -1338,6 +1617,9 @@ static ULONG PhsDeCompress(IN void *pvContext,
 						phsi,
 						eOldClassifierRuleContext,
 						&pstPhsRule);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (nPhsRuleIndex == PHS_INVALID_TABLE_INDEX)
 			return ERR_PHSRULE_MATCH_FAIL;
@@ -1345,7 +1627,13 @@ static ULONG PhsDeCompress(IN void *pvContext,
 
 	*pInHeaderSize = phs_decompress((PUCHAR)pvInputBuffer,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					(PUCHAR)pvOutputBuffer, pstPhsRule, pOutHeaderSize);
+=======
+					(PUCHAR)pvOutputBuffer,
+					pstPhsRule,
+					pOutHeaderSize);
+>>>>>>> v3.18
 =======
 					(PUCHAR)pvOutputBuffer,
 					pstPhsRule,
@@ -1362,7 +1650,12 @@ static ULONG PhsDeCompress(IN void *pvContext,
  * Procedure:   free_phs_serviceflow_rules
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Description: This routine is responsible for freeing memory allocated for PHS rules.
+=======
+ * Description: This routine is responsible for freeing memory allocated for
+ * PHS rules.
+>>>>>>> v3.18
 =======
  * Description: This routine is responsible for freeing memory allocated for
  * PHS rules.
@@ -1378,6 +1671,7 @@ static void free_phs_serviceflow_rules(struct bcm_phs_table *psServiceFlowRulesT
 {
 	int i, j;
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "=======>\n");
@@ -1418,6 +1712,8 @@ static void free_phs_serviceflow_rules(struct bcm_phs_table *psServiceFlowRulesT
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_phs_classifier_entry *curr_act_rules_list;
 	struct bcm_phs_classifier_entry *curr_old_rules_list;
 
@@ -1471,11 +1767,15 @@ static void free_phs_serviceflow_rules(struct bcm_phs_table *psServiceFlowRulesT
 
 out:
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(psServiceFlowRulesTable);
 	psServiceFlowRulesTable = NULL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static BOOLEAN ValidatePHSRuleComplete(IN struct bcm_phs_rule *psPhsRule)
 {
@@ -1512,6 +1812,8 @@ UINT GetServiceFlowEntry(IN struct bcm_phs_table *psServiceFlowTable,
 				return i;
 			}
 =======
+=======
+>>>>>>> v3.18
 static bool ValidatePHSRuleComplete(IN const struct bcm_phs_rule *psPhsRule)
 {
 	return (psPhsRule &&
@@ -1532,6 +1834,9 @@ UINT GetServiceFlowEntry(IN struct bcm_phs_table *psServiceFlowTable,
 		if (curr_sf_list->bUsed && (curr_sf_list->uiVcid == uiVcid)) {
 			*ppstServiceFlowEntry = curr_sf_list;
 			return i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1541,14 +1846,20 @@ UINT GetServiceFlowEntry(IN struct bcm_phs_table *psServiceFlowTable,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 UINT GetClassifierEntry(IN struct bcm_phs_classifier_table *pstClassifierTable,
 			IN B_UINT32 uiClsid, enum bcm_phs_classifier_context eClsContext,
 			OUT struct bcm_phs_classifier_entry **ppstClassifierEntry)
 =======
+=======
+>>>>>>> v3.18
 static UINT GetClassifierEntry(IN struct bcm_phs_classifier_table *pstClassifierTable,
 			       IN B_UINT32 uiClsid,
 			       enum bcm_phs_classifier_context eClsContext,
 			       OUT struct bcm_phs_classifier_entry **ppstClassifierEntry)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int  i;
@@ -1557,6 +1868,7 @@ static UINT GetClassifierEntry(IN struct bcm_phs_classifier_table *pstClassifier
 	for (i = 0; i < MAX_PHSRULE_PER_SF; i++) {
 
 		if (eClsContext == eActiveClassifierRuleContext)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			psClassifierRules = &pstClassifierTable->stActivePhsRulesList[i];
 		else
@@ -1568,6 +1880,8 @@ static UINT GetClassifierEntry(IN struct bcm_phs_classifier_table *pstClassifier
 				return i;
 			}
 =======
+=======
+>>>>>>> v3.18
 			psClassifierRules =
 				&pstClassifierTable->stActivePhsRulesList[i];
 		else
@@ -1578,6 +1892,9 @@ static UINT GetClassifierEntry(IN struct bcm_phs_classifier_table *pstClassifier
 		   (psClassifierRules->uiClassifierRuleId == uiClsid)) {
 			*ppstClassifierEntry = psClassifierRules;
 			return i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1588,8 +1905,14 @@ static UINT GetClassifierEntry(IN struct bcm_phs_classifier_table *pstClassifier
 
 static UINT GetPhsRuleEntry(IN struct bcm_phs_classifier_table *pstClassifierTable,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IN B_UINT32 uiPHSI, enum bcm_phs_classifier_context eClsContext,
 			OUT struct bcm_phs_rule **ppstPhsRule)
+=======
+			    IN B_UINT32 uiPHSI,
+			    enum bcm_phs_classifier_context eClsContext,
+			    OUT struct bcm_phs_rule **ppstPhsRule)
+>>>>>>> v3.18
 =======
 			    IN B_UINT32 uiPHSI,
 			    enum bcm_phs_classifier_context eClsContext,
@@ -1602,6 +1925,7 @@ static UINT GetPhsRuleEntry(IN struct bcm_phs_classifier_table *pstClassifierTab
 	for (i = 0; i < MAX_PHSRULE_PER_SF; i++) {
 		if (eClsContext == eActiveClassifierRuleContext)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pstClassifierRule = &pstClassifierTable->stActivePhsRulesList[i];
 		else
 			pstClassifierRule = &pstClassifierTable->stOldPhsRulesList[i];
@@ -1612,6 +1936,8 @@ static UINT GetPhsRuleEntry(IN struct bcm_phs_classifier_table *pstClassifierTab
 				return i;
 			}
 =======
+=======
+>>>>>>> v3.18
 			pstClassifierRule =
 				&pstClassifierTable->stActivePhsRulesList[i];
 		else
@@ -1622,6 +1948,9 @@ static UINT GetPhsRuleEntry(IN struct bcm_phs_classifier_table *pstClassifierTab
 		   (pstClassifierRule->u8PHSI == uiPHSI)) {
 			*ppstPhsRule = pstClassifierRule->pstPhsRule;
 			return i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1631,21 +1960,28 @@ static UINT GetPhsRuleEntry(IN struct bcm_phs_classifier_table *pstClassifierTab
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 UINT CreateSFToClassifierRuleMapping(IN B_UINT16 uiVcid, IN B_UINT16  uiClsId,
 				IN struct bcm_phs_table *psServiceFlowTable,
 				struct bcm_phs_rule *psPhsRule,
 				B_UINT8 u8AssociatedPHSI)
 =======
+=======
+>>>>>>> v3.18
 static UINT CreateSFToClassifierRuleMapping(IN B_UINT16 uiVcid,
 					    IN B_UINT16  uiClsId,
 					    IN struct bcm_phs_table *psServiceFlowTable,
 					    struct bcm_phs_rule *psPhsRule,
 					    B_UINT8 u8AssociatedPHSI)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct bcm_phs_classifier_table *psaClassifiertable = NULL;
 	UINT uiStatus = 0;
 	int iSfIndex;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BOOLEAN bFreeEntryFound = FALSE;
 
@@ -1653,6 +1989,8 @@ static UINT CreateSFToClassifierRuleMapping(IN B_UINT16 uiVcid,
 	for (iSfIndex = 0; iSfIndex < MAX_SERVICEFLOWS; iSfIndex++) {
 		if (!psServiceFlowTable->stSFList[iSfIndex].bUsed) {
 =======
+=======
+>>>>>>> v3.18
 	bool bFreeEntryFound = false;
 	struct bcm_phs_entry *curr_list;
 
@@ -1660,6 +1998,9 @@ static UINT CreateSFToClassifierRuleMapping(IN B_UINT16 uiVcid,
 	for (iSfIndex = 0; iSfIndex < MAX_SERVICEFLOWS; iSfIndex++) {
 		curr_list = &psServiceFlowTable->stSFList[iSfIndex];
 		if (!curr_list->bUsed) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			bFreeEntryFound = TRUE;
 			break;
@@ -1670,6 +2011,7 @@ static UINT CreateSFToClassifierRuleMapping(IN B_UINT16 uiVcid,
 		return ERR_SFTABLE_FULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psaClassifiertable = psServiceFlowTable->stSFList[iSfIndex].pstClassifierTable;
 	uiStatus = CreateClassifierPHSRule(uiClsId, psaClassifiertable, psPhsRule,
 					eActiveClassifierRuleContext, u8AssociatedPHSI);
@@ -1678,6 +2020,8 @@ static UINT CreateSFToClassifierRuleMapping(IN B_UINT16 uiVcid,
 		psServiceFlowTable->stSFList[iSfIndex].bUsed = TRUE;
 		psServiceFlowTable->stSFList[iSfIndex].uiVcid = uiVcid;
 =======
+=======
+>>>>>>> v3.18
 	psaClassifiertable = curr_list->pstClassifierTable;
 	uiStatus = CreateClassifierPHSRule(uiClsId,
 					   psaClassifiertable,
@@ -1688,6 +2032,9 @@ static UINT CreateSFToClassifierRuleMapping(IN B_UINT16 uiVcid,
 		/* Add entry at free index to the SF */
 		curr_list->bUsed = TRUE;
 		curr_list->uiVcid = uiVcid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1695,17 +2042,23 @@ static UINT CreateSFToClassifierRuleMapping(IN B_UINT16 uiVcid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 UINT CreateClassiferToPHSRuleMapping(IN B_UINT16 uiVcid,
 				IN B_UINT16 uiClsId,
 				IN struct bcm_phs_entry *pstServiceFlowEntry,
 				struct bcm_phs_rule *psPhsRule,
 				B_UINT8 u8AssociatedPHSI)
 =======
+=======
+>>>>>>> v3.18
 static UINT CreateClassiferToPHSRuleMapping(IN B_UINT16 uiVcid,
 					    IN B_UINT16 uiClsId,
 					    IN struct bcm_phs_entry *pstServiceFlowEntry,
 					    struct bcm_phs_rule *psPhsRule,
 					    B_UINT8 u8AssociatedPHSI)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct bcm_phs_classifier_entry *pstClassifierEntry = NULL;
@@ -1717,7 +2070,12 @@ static UINT CreateClassiferToPHSRuleMapping(IN B_UINT16 uiVcid,
 	psaClassifiertable = pstServiceFlowEntry->pstClassifierTable;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "==>");
+=======
+	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL,
+			"==>");
+>>>>>>> v3.18
 =======
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL,
 			"==>");
@@ -1733,7 +2091,12 @@ static UINT CreateClassiferToPHSRuleMapping(IN B_UINT16 uiVcid,
 	if (nClassifierIndex == PHS_INVALID_TABLE_INDEX) {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * The Classifier doesn't exist. So its a new classifier being added.
+=======
+		 * The Classifier doesn't exist. So its a new classifier being
+		 * added.
+>>>>>>> v3.18
 =======
 		 * The Classifier doesn't exist. So its a new classifier being
 		 * added.
@@ -1743,9 +2106,15 @@ static UINT CreateClassiferToPHSRuleMapping(IN B_UINT16 uiVcid,
 
 		uiStatus = CreateClassifierPHSRule(uiClsId, psaClassifiertable,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						psPhsRule,
 						eActiveClassifierRuleContext,
 						u8AssociatedPHSI);
+=======
+						   psPhsRule,
+						   eActiveClassifierRuleContext,
+						   u8AssociatedPHSI);
+>>>>>>> v3.18
 =======
 						   psPhsRule,
 						   eActiveClassifierRuleContext,
@@ -1765,8 +2134,13 @@ static UINT CreateClassiferToPHSRuleMapping(IN B_UINT16 uiVcid,
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * This rule already exists if any fields are changed for this PHS
 		 * rule update them.
+=======
+		 * This rule already exists if any fields are changed for this
+		 * PHS rule update them.
+>>>>>>> v3.18
 =======
 		 * This rule already exists if any fields are changed for this
 		 * PHS rule update them.
@@ -1777,7 +2151,12 @@ static UINT CreateClassiferToPHSRuleMapping(IN B_UINT16 uiVcid,
 			/* update PHSF */
 			memcpy(pstClassifierEntry->pstPhsRule->u8PHSF,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				psPhsRule->u8PHSF, MAX_PHS_LENGTHS);
+=======
+			       psPhsRule->u8PHSF,
+			       MAX_PHS_LENGTHS);
+>>>>>>> v3.18
 =======
 			       psPhsRule->u8PHSF,
 			       MAX_PHS_LENGTHS);
@@ -1787,7 +2166,12 @@ static UINT CreateClassiferToPHSRuleMapping(IN B_UINT16 uiVcid,
 		if (psPhsRule->u8PHSFLength) {
 			/* update PHSFLen */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pstClassifierEntry->pstPhsRule->u8PHSFLength = psPhsRule->u8PHSFLength;
+=======
+			pstClassifierEntry->pstPhsRule->u8PHSFLength =
+				psPhsRule->u8PHSFLength;
+>>>>>>> v3.18
 =======
 			pstClassifierEntry->pstPhsRule->u8PHSFLength =
 				psPhsRule->u8PHSFLength;
@@ -1798,7 +2182,12 @@ static UINT CreateClassiferToPHSRuleMapping(IN B_UINT16 uiVcid,
 			/* update PHSM */
 			memcpy(pstClassifierEntry->pstPhsRule->u8PHSM,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				psPhsRule->u8PHSM, MAX_PHS_LENGTHS);
+=======
+			       psPhsRule->u8PHSM,
+			       MAX_PHS_LENGTHS);
+>>>>>>> v3.18
 =======
 			       psPhsRule->u8PHSM,
 			       MAX_PHS_LENGTHS);
@@ -1814,7 +2203,12 @@ static UINT CreateClassiferToPHSRuleMapping(IN B_UINT16 uiVcid,
 		if (psPhsRule->u8PHSS) {
 			/* update PHSS */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pstClassifierEntry->pstPhsRule->u8PHSS = psPhsRule->u8PHSS;
+=======
+			pstClassifierEntry->pstPhsRule->u8PHSS =
+				psPhsRule->u8PHSS;
+>>>>>>> v3.18
 =======
 			pstClassifierEntry->pstPhsRule->u8PHSS =
 				psPhsRule->u8PHSS;
@@ -1826,14 +2220,20 @@ static UINT CreateClassiferToPHSRuleMapping(IN B_UINT16 uiVcid,
 	} else {
 		/* A new rule is being set for this classifier. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uiStatus = UpdateClassifierPHSRule(uiClsId, pstClassifierEntry,
 						psaClassifiertable, psPhsRule, u8AssociatedPHSI);
 =======
+=======
+>>>>>>> v3.18
 		uiStatus = UpdateClassifierPHSRule(uiClsId,
 						   pstClassifierEntry,
 						   psaClassifiertable,
 						   psPhsRule,
 						   u8AssociatedPHSI);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1841,6 +2241,7 @@ static UINT CreateClassiferToPHSRuleMapping(IN B_UINT16 uiVcid,
 }
 
 static UINT CreateClassifierPHSRule(IN B_UINT16  uiClsId,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				struct bcm_phs_classifier_table *psaClassifiertable,
 				struct bcm_phs_rule *psPhsRule,
@@ -1850,6 +2251,8 @@ static UINT CreateClassifierPHSRule(IN B_UINT16  uiClsId,
 	UINT iClassifierIndex = 0;
 	BOOLEAN bFreeEntryFound = FALSE;
 =======
+=======
+>>>>>>> v3.18
 				    struct bcm_phs_classifier_table *psaClassifiertable,
 				    struct bcm_phs_rule *psPhsRule,
 				    enum bcm_phs_classifier_context eClsContext,
@@ -1857,13 +2260,21 @@ static UINT CreateClassifierPHSRule(IN B_UINT16  uiClsId,
 {
 	UINT iClassifierIndex = 0;
 	bool bFreeEntryFound = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct bcm_phs_classifier_entry *psClassifierRules = NULL;
 	UINT nStatus = PHS_SUCCESS;
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "Inside CreateClassifierPHSRule");
+=======
+	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL,
+			"Inside CreateClassifierPHSRule");
+>>>>>>> v3.18
 =======
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL,
 			"Inside CreateClassifierPHSRule");
@@ -1879,14 +2290,20 @@ static UINT CreateClassifierPHSRule(IN B_UINT16  uiClsId,
 		 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iClassifierIndex =
 			GetClassifierEntry(psaClassifiertable, uiClsId,
 					eClsContext, &psClassifierRules);
 =======
+=======
+>>>>>>> v3.18
 		iClassifierIndex = GetClassifierEntry(psaClassifiertable,
 						      uiClsId,
 						      eClsContext,
 						      &psClassifierRules);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (iClassifierIndex != PHS_INVALID_TABLE_INDEX) {
@@ -1920,6 +2337,7 @@ static UINT CreateClassifierPHSRule(IN B_UINT16  uiClsId,
 			return ERR_CLSASSIFIER_TABLE_FULL;
 		else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Lets replace the oldest rule if we are looking in old Rule table */
 			if (psaClassifiertable->uiOldestPhsRuleIndex >= MAX_PHSRULE_PER_SF)
 				psaClassifiertable->uiOldestPhsRuleIndex = 0;
@@ -1927,6 +2345,8 @@ static UINT CreateClassifierPHSRule(IN B_UINT16  uiClsId,
 			iClassifierIndex = psaClassifiertable->uiOldestPhsRuleIndex;
 			psClassifierRules = &psaClassifiertable->stOldPhsRulesList[iClassifierIndex];
 =======
+=======
+>>>>>>> v3.18
 			/* Lets replace the oldest rule if we are looking in
 			 * old Rule table */
 			if (psaClassifiertable->uiOldestPhsRuleIndex >= MAX_PHSRULE_PER_SF)
@@ -1936,6 +2356,9 @@ static UINT CreateClassifierPHSRule(IN B_UINT16  uiClsId,
 				psaClassifiertable->uiOldestPhsRuleIndex;
 			psClassifierRules =
 				&psaClassifiertable->stOldPhsRulesList[iClassifierIndex];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			(psaClassifiertable->uiOldestPhsRuleIndex)++;
@@ -1947,7 +2370,13 @@ static UINT CreateClassifierPHSRule(IN B_UINT16  uiClsId,
 		if (psClassifierRules->pstPhsRule == NULL) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			psClassifierRules->pstPhsRule = kmalloc(sizeof(struct bcm_phs_rule), GFP_KERNEL);
+=======
+			psClassifierRules->pstPhsRule =
+				kmalloc(sizeof(struct bcm_phs_rule),
+					GFP_KERNEL);
+>>>>>>> v3.18
 =======
 			psClassifierRules->pstPhsRule =
 				kmalloc(sizeof(struct bcm_phs_rule),
@@ -1962,6 +2391,7 @@ static UINT CreateClassifierPHSRule(IN B_UINT16  uiClsId,
 		psClassifierRules->uiClassifierRuleId = uiClsId;
 		psClassifierRules->u8PHSI = psPhsRule->u8PHSI;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psClassifierRules->bUnclassifiedPHSRule = psPhsRule->bUnclassifiedPHSRule;
 
 		/* Update The PHS rule */
@@ -1970,6 +2400,8 @@ static UINT CreateClassifierPHSRule(IN B_UINT16  uiClsId,
 		nStatus = UpdateClassifierPHSRule(uiClsId, psClassifierRules,
 						psaClassifiertable, psPhsRule, u8AssociatedPHSI);
 =======
+=======
+>>>>>>> v3.18
 		psClassifierRules->bUnclassifiedPHSRule =
 			psPhsRule->bUnclassifiedPHSRule;
 
@@ -1982,12 +2414,16 @@ static UINT CreateClassifierPHSRule(IN B_UINT16  uiClsId,
 						  psaClassifiertable,
 						  psPhsRule,
 						  u8AssociatedPHSI);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return nStatus;
 }
 
 static UINT UpdateClassifierPHSRule(IN B_UINT16  uiClsId,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				IN struct bcm_phs_classifier_entry *pstClassifierEntry,
 				struct bcm_phs_classifier_table *psaClassifiertable,
@@ -1998,6 +2434,8 @@ static UINT UpdateClassifierPHSRule(IN B_UINT16  uiClsId,
 	UINT nPhsRuleIndex = 0;
 	BOOLEAN bPHSRuleOrphaned = FALSE;
 =======
+=======
+>>>>>>> v3.18
 				    IN struct bcm_phs_classifier_entry *pstClassifierEntry,
 				    struct bcm_phs_classifier_table *psaClassifiertable,
 				    struct bcm_phs_rule *psPhsRule,
@@ -2006,6 +2444,9 @@ static UINT UpdateClassifierPHSRule(IN B_UINT16  uiClsId,
 	struct bcm_phs_rule *pstAddPhsRule = NULL;
 	UINT nPhsRuleIndex = 0;
 	bool bPHSRuleOrphaned = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
 
@@ -2015,6 +2456,7 @@ static UINT UpdateClassifierPHSRule(IN B_UINT16  uiClsId,
 	bPHSRuleOrphaned = DerefPhsRule(uiClsId, psaClassifiertable,
 					pstClassifierEntry->pstPhsRule);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Step 2 Search if there is a PHS Rule with u8AssociatedPHSI in Classifier table for this SF */
 	nPhsRuleIndex = GetPhsRuleEntry(psaClassifiertable, u8AssociatedPHSI,
@@ -2040,6 +2482,8 @@ static UINT UpdateClassifierPHSRule(IN B_UINT16  uiClsId,
 		/* Step 2.b PHS Rule  Exists Tie uiClsId with the existing PHS Rule */
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH, DBG_LVL_ALL, "\nTying Classifier to Existing PHS Rule");
 =======
+=======
+>>>>>>> v3.18
 	/* Step 2 Search if there is a PHS Rule with u8AssociatedPHSI in
 	 * Classifier table for this SF */
 	nPhsRuleIndex = GetPhsRuleEntry(psaClassifiertable, u8AssociatedPHSI,
@@ -2075,6 +2519,9 @@ static UINT UpdateClassifierPHSRule(IN B_UINT16  uiClsId,
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_DISPATCH,
 				DBG_LVL_ALL,
 				"\nTying Classifier to Existing PHS Rule");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (bPHSRuleOrphaned) {
 			kfree(pstClassifierEntry->pstPhsRule);
@@ -2088,7 +2535,12 @@ static UINT UpdateClassifierPHSRule(IN B_UINT16  uiClsId,
 	pstClassifierEntry->uiClassifierRuleId = uiClsId;
 	pstClassifierEntry->pstPhsRule->u8RefCnt++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pstClassifierEntry->bUnclassifiedPHSRule = pstClassifierEntry->pstPhsRule->bUnclassifiedPHSRule;
+=======
+	pstClassifierEntry->bUnclassifiedPHSRule =
+		pstClassifierEntry->pstPhsRule->bUnclassifiedPHSRule;
+>>>>>>> v3.18
 =======
 	pstClassifierEntry->bUnclassifiedPHSRule =
 		pstClassifierEntry->pstPhsRule->bUnclassifiedPHSRule;
@@ -2098,22 +2550,29 @@ static UINT UpdateClassifierPHSRule(IN B_UINT16  uiClsId,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static BOOLEAN DerefPhsRule(IN B_UINT16  uiClsId, struct bcm_phs_classifier_table *psaClassifiertable, struct bcm_phs_rule *pstPhsRule)
 {
 	if (pstPhsRule == NULL)
 		return FALSE;
 =======
+=======
+>>>>>>> v3.18
 static bool DerefPhsRule(IN B_UINT16  uiClsId,
 			 struct bcm_phs_classifier_table *psaClassifiertable,
 			 struct bcm_phs_rule *pstPhsRule)
 {
 	if (pstPhsRule == NULL)
 		return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pstPhsRule->u8RefCnt)
 		pstPhsRule->u8RefCnt--;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (0 == pstPhsRule->u8RefCnt) {
 		/*
@@ -2125,6 +2584,8 @@ static bool DerefPhsRule(IN B_UINT16  uiClsId,
 	} else
 		return FALSE;
 =======
+=======
+>>>>>>> v3.18
 	return (0 == pstPhsRule->u8RefCnt);
 }
 
@@ -2189,28 +2650,38 @@ static void phsrules_per_sf_dbg_print(struct bcm_mini_adapter *ad,
 			}
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void DumpPhsRules(struct bcm_phs_extension *pDeviceExtension)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, j, k, l;
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
 
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, DUMP_INFO, DBG_LVL_ALL, "\n Dumping PHS Rules :\n");
 =======
+=======
+>>>>>>> v3.18
 	int i;
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
 
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, DUMP_INFO, DBG_LVL_ALL,
 			"\n Dumping PHS Rules :\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < MAX_SERVICEFLOWS; i++) {
 
 		struct bcm_phs_entry stServFlowEntry =
 			pDeviceExtension->pstServiceFlowPhsRulesTable->stSFList[i];
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (stServFlowEntry.bUsed) {
 
@@ -2253,11 +2724,16 @@ void DumpPhsRules(struct bcm_phs_extension *pDeviceExtension)
 			}
 		}
 =======
+=======
+>>>>>>> v3.18
 
 		if (!stServFlowEntry.bUsed)
 			continue;
 
 		phsrules_per_sf_dbg_print(Adapter, &stServFlowEntry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -2269,6 +2745,7 @@ void DumpPhsRules(struct bcm_phs_extension *pDeviceExtension)
  *
  * Arguments:
  *	in_buf			- ptr to incoming packet buffer.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *	out_buf			- ptr to output buffer where the suppressed header is copied.
  *	decomp_phs_rules - ptr to PHS rule.
@@ -2284,6 +2761,8 @@ int phs_decompress(unsigned char *in_buf,
 		struct bcm_phs_rule *decomp_phs_rules,
 		UINT *header_size)
 =======
+=======
+>>>>>>> v3.18
  *	out_buf			- ptr to output buffer where the suppressed
  *				  header is copied.
  *	decomp_phs_rules	- ptr to PHS rule.
@@ -2300,6 +2779,9 @@ static int phs_decompress(unsigned char *in_buf,
 			  unsigned char *out_buf,
 			  struct bcm_phs_rule *decomp_phs_rules,
 			  UINT *header_size)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int phss, size = 0;
@@ -2312,23 +2794,34 @@ static int phs_decompress(unsigned char *in_buf,
 	in_buf++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE, DBG_LVL_ALL, "====>\n");
 	*header_size = 0;
 
 	if ((decomp_phs_rules == NULL))
 =======
+=======
+>>>>>>> v3.18
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE, DBG_LVL_ALL,
 			"====>\n");
 	*header_size = 0;
 
 	if (decomp_phs_rules == NULL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
 	tmp_memb = decomp_phs_rules;
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, PHS_RECEIVE,DBG_LVL_ALL,"\nDECOMP:In phs_decompress PHSI 1  %d",phsi));
+=======
+	 * BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, PHS_RECEIVE,DBG_LVL_ALL,
+	 * "\nDECOMP:In phs_decompress PHSI 1  %d",phsi));
+>>>>>>> v3.18
 =======
 	 * BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, PHS_RECEIVE,DBG_LVL_ALL,
 	 * "\nDECOMP:In phs_decompress PHSI 1  %d",phsi));
@@ -2344,7 +2837,12 @@ static int phs_decompress(unsigned char *in_buf,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, PHS_RECEIVE,DBG_LVL_ALL,"\nDECOMP:
+=======
+	 * BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, PHS_RECEIVE,DBG_LVL_ALL,
+	 * "\nDECOMP:
+>>>>>>> v3.18
 =======
 	 * BCM_DEBUG_PRINT(Adapter,DBG_TYPE_OTHERS, PHS_RECEIVE,DBG_LVL_ALL,
 	 * "\nDECOMP:
@@ -2357,12 +2855,15 @@ static int phs_decompress(unsigned char *in_buf,
 		if (bit == SUPPRESS) {
 			*out_buf = *phsf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE, DBG_LVL_ALL, "\nDECOMP:In phss  %d phsf %d ouput %d",
 					phss, *phsf, *out_buf);
 		} else {
 			*out_buf = *in_buf;
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE, DBG_LVL_ALL, "\nDECOMP:In phss  %d input %d ouput %d",
 =======
+=======
+>>>>>>> v3.18
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE,
 					DBG_LVL_ALL,
 					"\nDECOMP:In phss  %d phsf %d output %d",
@@ -2372,6 +2873,9 @@ static int phs_decompress(unsigned char *in_buf,
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_RECEIVE,
 					DBG_LVL_ALL,
 					"\nDECOMP:In phss  %d input %d output %d",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					phss, *in_buf, *out_buf);
 			in_buf++;
@@ -2396,6 +2900,7 @@ static int phs_decompress(unsigned char *in_buf,
  * Procedure:   phs_compress
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Description: This routine suppresses the static fields within the packet.Before
  * that it will verify the fields to be suppressed with the corresponding fields in the
  * phsf. For verification it checks the phsv field of PHS rule. If set and verification
@@ -2403,17 +2908,23 @@ static int phs_decompress(unsigned char *in_buf,
  * the static fields are suppressed then the packet is sent as uncompressed packet with
  * phsi=0.
 =======
+=======
+>>>>>>> v3.18
  * Description: This routine suppresses the static fields within the packet.
  * Before that it will verify the fields to be suppressed with the corresponding
  * fields in the phsf. For verification it checks the phsv field of PHS rule.
  * If set and verification succeeds it suppresses the field.If any one static
  * field is found different none of the static fields are suppressed then the
  * packet is sent as uncompressed packet with phsi=0.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Arguments:
  *	phs_rule - ptr to PHS rule.
  *	in_buf		- ptr to incoming packet buffer.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *	out_buf		- ptr to output buffer where the suppressed header is copied.
  *	header_size	- ptr to field which holds the phss.
@@ -2422,6 +2933,8 @@ static int phs_decompress(unsigned char *in_buf,
  *	size-The number of bytes copied into the output buffer i.e dynamic fields
  *	0	-If PHS rule is NULL.If PHSV field is not set.If the verification fails.
 =======
+=======
+>>>>>>> v3.18
  *	out_buf		- ptr to output buffer where the suppressed header is
  *			  copied.
  *	header_size	- ptr to field which holds the phss.
@@ -2431,6 +2944,9 @@ static int phs_decompress(unsigned char *in_buf,
  *		  dynamic fields
  *	0	- If PHS rule is NULL.If PHSV field is not set. If the
  *		  verification fails.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static int phs_compress(struct bcm_phs_rule *phs_rule,
@@ -2445,7 +2961,12 @@ static int phs_compress(struct bcm_phs_rule *phs_rule,
 
 	if (phs_rule == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "\nphs_compress(): phs_rule null!");
+=======
+		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
+				"\nphs_compress(): phs_rule null!");
+>>>>>>> v3.18
 =======
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
 				"\nphs_compress(): phs_rule null!");
@@ -2468,11 +2989,14 @@ static int phs_compress(struct bcm_phs_rule *phs_rule,
 	if (suppress == STATUS_PHS_COMPRESSED) {
 		*old_addr = (unsigned char)phs_rule->u8PHSI;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "\nCOMP:In phs_compress phsi %d", phs_rule->u8PHSI);
 	} else {
 		*old_addr = ZERO_PHSI;
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "\nCOMP:In phs_compress PHSV Verification failed");
 =======
+=======
+>>>>>>> v3.18
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
 				"\nCOMP:In phs_compress phsi %d",
 				phs_rule->u8PHSI);
@@ -2480,6 +3004,9 @@ static int phs_compress(struct bcm_phs_rule *phs_rule,
 		*old_addr = ZERO_PHSI;
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
 				"\nCOMP:In phs_compress PHSV Verification failed");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2498,6 +3025,7 @@ static int phs_compress(struct bcm_phs_rule *phs_rule,
  * in_buffer	- ptr to incoming packet buffer.
  * out_buffer	- ptr to output buffer where the suppressed header is copied.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * phsf			- ptr to phsf.
  * phsm			- ptr to phsm.
  * phss			- variable holding phss.
@@ -2506,6 +3034,8 @@ static int phs_compress(struct bcm_phs_rule *phs_rule,
  *	size-The number of bytes copied into the output buffer i.e dynamic fields.
  *	0	-Packet has failed the verification.
 =======
+=======
+>>>>>>> v3.18
  * phsf		- ptr to phsf.
  * phsm		- ptr to phsm.
  * phss		- variable holding phss.
@@ -2514,6 +3044,9 @@ static int phs_compress(struct bcm_phs_rule *phs_rule,
  *	size    - The number of bytes copied into the output buffer i.e dynamic
  *		  fields.
  *	0	- Packet has failed the verification.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static int verify_suppress_phsf(unsigned char *in_buffer,
@@ -2529,7 +3062,12 @@ static int verify_suppress_phsf(unsigned char *in_buffer,
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(gblpnetdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "\nCOMP:In verify_phsf PHSM - 0x%X", *phsm);
+=======
+	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
+			"\nCOMP:In verify_phsf PHSM - 0x%X", *phsm);
+>>>>>>> v3.18
 =======
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
 			"\nCOMP:In verify_phsf PHSM - 0x%X", *phsm);
@@ -2586,7 +3124,12 @@ static int verify_suppress_phsf(unsigned char *in_buffer,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL, "\nCOMP:In verify_phsf success");
+=======
+	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
+			"\nCOMP:In verify_phsf success");
+>>>>>>> v3.18
 =======
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_OTHERS, PHS_SEND, DBG_LVL_ALL,
 			"\nCOMP:In verify_phsf success");

@@ -8,6 +8,10 @@ obj-y	:= ip27-berr.o ip27-irq.o ip27-init.o ip27-klconfig.o ip27-klnuma.o \
 
 obj-$(CONFIG_EARLY_PRINTK)	+= ip27-console.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_PCI)		+= ip27-irq-pci.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_PCI)		+= ip27-irq-pci.o
 >>>>>>> v3.18

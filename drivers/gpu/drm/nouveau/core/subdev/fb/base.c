@@ -23,14 +23,20 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "subdev/fb.h"
 #include "subdev/bios.h"
 #include "subdev/bios/bit.h"
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/bios.h>
 #include <subdev/bios/bit.h>
 
 #include "priv.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int
@@ -65,9 +71,12 @@ nouveau_fb_bios_memtype(struct nouveau_bios *bios)
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau_fb_preinit(struct nouveau_fb *pfb)
 {
 =======
+=======
+>>>>>>> v3.18
 _nouveau_fb_fini(struct nouveau_object *object, bool suspend)
 {
 	struct nouveau_fb *pfb = (void *)object;
@@ -120,6 +129,9 @@ nouveau_fb_create_(struct nouveau_object *parent, struct nouveau_object *engine,
 		   struct nouveau_oclass *oclass, int length, void **pobject)
 {
 	struct nouveau_fb_impl *impl = (void *)oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	static const char *name[] = {
 		[NV_MEM_TYPE_UNKNOWN] = "unknown",
@@ -135,6 +147,7 @@ nouveau_fb_create_(struct nouveau_object *parent, struct nouveau_object *engine,
 		[NV_MEM_TYPE_GDDR5  ] = "GDDR5",
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, tags;
 
 	tags = pfb->ram.init(pfb);
@@ -146,6 +159,8 @@ nouveau_fb_create_(struct nouveau_object *parent, struct nouveau_object *engine,
 	if (!nouveau_mm_initialised(&pfb->vram)) {
 		ret = nouveau_mm_init(&pfb->vram, 0, pfb->ram.size >> 12, 1);
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_object *ram;
 	struct nouveau_fb *pfb;
 	int ret;
@@ -171,6 +186,9 @@ nouveau_fb_create_(struct nouveau_object *parent, struct nouveau_object *engine,
 
 	if (!nouveau_mm_initialised(&pfb->vram)) {
 		ret = nouveau_mm_init(&pfb->vram, 0, pfb->ram->size >> 12, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret)
 			return ret;
@@ -178,7 +196,12 @@ nouveau_fb_create_(struct nouveau_object *parent, struct nouveau_object *engine,
 
 	if (!nouveau_mm_initialised(&pfb->tags)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = nouveau_mm_init(&pfb->tags, 0, tags ? ++tags : 0, 1);
+=======
+		ret = nouveau_mm_init(&pfb->tags, 0, pfb->ram->tags ?
+				     ++pfb->ram->tags : 0, 1);
+>>>>>>> v3.18
 =======
 		ret = nouveau_mm_init(&pfb->tags, 0, pfb->ram->tags ?
 				     ++pfb->ram->tags : 0, 1);
@@ -187,6 +210,7 @@ nouveau_fb_create_(struct nouveau_object *parent, struct nouveau_object *engine,
 			return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	nv_info(pfb, "RAM type: %s\n", name[pfb->ram.type]);
 	nv_info(pfb, "RAM size: %d MiB\n", (int)(pfb->ram.size >> 20));
@@ -235,9 +259,14 @@ _nouveau_fb_init(struct nouveau_object *object)
 	return nouveau_fb_init(pfb);
 }
 =======
+=======
+>>>>>>> v3.18
 	nv_info(pfb, "RAM type: %s\n", name[pfb->ram->type]);
 	nv_info(pfb, "RAM size: %d MiB\n", (int)(pfb->ram->size >> 20));
 	nv_info(pfb, "   ZCOMP: %d tags\n", pfb->ram->tags);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

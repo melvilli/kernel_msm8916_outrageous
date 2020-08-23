@@ -1,13 +1,19 @@
 config SCSI_BNX2_ISCSI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Broadcom NetXtreme II iSCSI support"
 	depends on NET
 	depends on PCI
 =======
+=======
+>>>>>>> v3.18
 	tristate "QLogic NetXtreme II iSCSI support"
 	depends on NET
 	depends on PCI
 	depends on (IPV6 || IPV6=n)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select SCSI_ISCSI_ATTRS
 	select NETDEVICES
@@ -16,7 +22,11 @@ config SCSI_BNX2_ISCSI
 	select CNIC
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 	This driver supports iSCSI offload for the Broadcom NetXtreme II
+=======
+	This driver supports iSCSI offload for the QLogic NetXtreme II
+>>>>>>> v3.18
 =======
 	This driver supports iSCSI offload for the QLogic NetXtreme II
 >>>>>>> v3.18

@@ -574,8 +574,11 @@ static int dma_xfer(struct fsmc_nand_data *host, void *buffer, int len,
 	dma_addr = dma_map_single(dma_dev->dev, buffer, len, direction);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flags |= DMA_COMPL_SKIP_SRC_UNMAP | DMA_COMPL_SKIP_DEST_UNMAP;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (direction == DMA_TO_DEVICE) {
@@ -611,7 +614,11 @@ static int dma_xfer(struct fsmc_nand_data *host, void *buffer, int len,
 				msecs_to_jiffies(3000));
 	if (ret <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chan->device->device_control(chan, DMA_TERMINATE_ALL, 0);
+=======
+		dmaengine_terminate_all(chan);
+>>>>>>> v3.18
 =======
 		dmaengine_terminate_all(chan);
 >>>>>>> v3.18
@@ -897,7 +904,10 @@ static int fsmc_nand_probe_config_dt(struct platform_device *pdev,
 		pdata->options = NAND_SKIP_BBTSCAN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pdata->nand_timings = devm_kzalloc(&pdev->dev,
 				sizeof(*pdata->nand_timings), GFP_KERNEL);
 	if (!pdata->nand_timings)
@@ -914,6 +924,9 @@ static int fsmc_nand_probe_config_dt(struct platform_device *pdev,
 		}
 		pdata->bank = val;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -961,6 +974,7 @@ static int __init fsmc_nand_probe(struct platform_device *pdev)
 	/* Allocate memory for the device structure (and zero it) */
 	host = devm_kzalloc(&pdev->dev, sizeof(*host), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!host) {
 		dev_err(&pdev->dev, "failed to allocate device structure\n");
 		return -ENOMEM;
@@ -971,10 +985,15 @@ static int __init fsmc_nand_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 =======
+=======
+>>>>>>> v3.18
 	if (!host)
 		return -ENOMEM;
 
 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "nand_data");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	host->data_va = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(host->data_va))
@@ -984,9 +1003,12 @@ static int __init fsmc_nand_probe(struct platform_device *pdev)
 
 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "nand_addr");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	host->addr_va = devm_ioremap_resource(&pdev->dev, res);
@@ -995,9 +1017,12 @@ static int __init fsmc_nand_probe(struct platform_device *pdev)
 
 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "nand_cmd");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	host->cmd_va = devm_ioremap_resource(&pdev->dev, res);
@@ -1006,9 +1031,12 @@ static int __init fsmc_nand_probe(struct platform_device *pdev)
 
 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "fsmc_regs");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	host->regs_va = devm_ioremap_resource(&pdev->dev, res);
@@ -1147,8 +1175,13 @@ static int __init fsmc_nand_probe(struct platform_device *pdev)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "No oob scheme defined for "
 			       "oobsize %d\n", mtd->oobsize);
+=======
+			dev_warn(&pdev->dev, "No oob scheme defined for oobsize %d\n",
+				 mtd->oobsize);
+>>>>>>> v3.18
 =======
 			dev_warn(&pdev->dev, "No oob scheme defined for oobsize %d\n",
 				 mtd->oobsize);
@@ -1168,8 +1201,13 @@ static int __init fsmc_nand_probe(struct platform_device *pdev)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "No oob scheme defined for "
 			       "oobsize %d\n", mtd->oobsize);
+=======
+			dev_warn(&pdev->dev, "No oob scheme defined for oobsize %d\n",
+				 mtd->oobsize);
+>>>>>>> v3.18
 =======
 			dev_warn(&pdev->dev, "No oob scheme defined for oobsize %d\n",
 				 mtd->oobsize);
@@ -1227,8 +1265,11 @@ static int fsmc_nand_remove(struct platform_device *pdev)
 	struct fsmc_nand_data *host = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (host) {
@@ -1246,7 +1287,11 @@ static int fsmc_nand_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -1270,9 +1315,15 @@ static int fsmc_nand_resume(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static SIMPLE_DEV_PM_OPS(fsmc_nand_pm_ops, fsmc_nand_suspend, fsmc_nand_resume);
 #endif
+=======
+#endif
+
+static SIMPLE_DEV_PM_OPS(fsmc_nand_pm_ops, fsmc_nand_suspend, fsmc_nand_resume);
+>>>>>>> v3.18
 =======
 #endif
 
@@ -1295,9 +1346,13 @@ static struct platform_driver fsmc_nand_driver = {
 		.name = "fsmc-nand",
 		.of_match_table = of_match_ptr(fsmc_nand_id_table),
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 		.pm = &fsmc_nand_pm_ops,
 #endif
+=======
+		.pm = &fsmc_nand_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm = &fsmc_nand_pm_ops,
 >>>>>>> v3.18

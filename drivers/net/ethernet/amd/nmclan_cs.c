@@ -133,7 +133,10 @@ Include Files
 #include <linux/module.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ptrace.h>
@@ -462,7 +465,11 @@ static int nmclan_probe(struct pcmcia_device *link)
 
     dev->netdev_ops = &mace_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
     SET_ETHTOOL_OPS(dev, &netdev_ethtool_ops);
+=======
+    dev->ethtool_ops = &netdev_ethtool_ops;
+>>>>>>> v3.18
 =======
     dev->ethtool_ops = &netdev_ethtool_ops;
 >>>>>>> v3.18
@@ -630,7 +637,11 @@ static int nmclan_config(struct pcmcia_device *link)
   if (ret)
 	  goto failed;
 <<<<<<< HEAD
+<<<<<<< HEAD
   ret = pcmcia_request_exclusive_irq(link, mace_interrupt);
+=======
+  ret = pcmcia_request_irq(link, mace_interrupt);
+>>>>>>> v3.18
 =======
   ret = pcmcia_request_irq(link, mace_interrupt);
 >>>>>>> v3.18

@@ -31,6 +31,7 @@ enum bcm63xx_regs_spi {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __GEN_SPI_RSET_BASE(__cpu, __rset)				\
 	case SPI_## __rset:						\
 		return SPI_## __cpu ##_## __rset;
@@ -53,6 +54,8 @@ enum bcm63xx_regs_spi {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define __GEN_SPI_REGS_TABLE(__cpu)					\
 	[SPI_CMD]		= SPI_## __cpu ##_CMD,			\
 	[SPI_INT_STATUS]	= SPI_## __cpu ##_INT_STATUS,		\
@@ -70,6 +73,7 @@ enum bcm63xx_regs_spi {
 static inline unsigned long bcm63xx_spireg(enum bcm63xx_regs_spi reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef BCMCPU_RUNTIME_DETECT
 	extern const unsigned long *bcm63xx_regs_spi;
 
@@ -84,6 +88,11 @@ static inline unsigned long bcm63xx_spireg(enum bcm63xx_regs_spi reg)
 #endif
 #endif
 	return 0;
+=======
+	extern const unsigned long *bcm63xx_regs_spi;
+
+	return bcm63xx_regs_spi[reg];
+>>>>>>> v3.18
 =======
 	extern const unsigned long *bcm63xx_regs_spi;
 

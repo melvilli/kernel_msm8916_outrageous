@@ -8,6 +8,7 @@
 
 #include "internal.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define NFSDBG_FACILITY	NFSDBG_PROC
 
@@ -185,11 +186,16 @@ static void nfs3_cache_acls(struct inode *inode, struct posix_acl *acl,
 
 struct posix_acl *nfs3_proc_getacl(struct inode *inode, int type)
 =======
+=======
+>>>>>>> v3.18
 #include "nfs3_fs.h"
 
 #define NFSDBG_FACILITY	NFSDBG_PROC
 
 struct posix_acl *nfs3_get_acl(struct inode *inode, int type)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct nfs_server *server = NFS_SERVER(inode);
@@ -207,7 +213,10 @@ struct posix_acl *nfs3_get_acl(struct inode *inode, int type)
 		.rpc_resp	= &res,
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct posix_acl *acl;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int status, count;
@@ -219,10 +228,13 @@ struct posix_acl *nfs3_get_acl(struct inode *inode, int type)
 	if (status < 0)
 		return ERR_PTR(status);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acl = nfs3_get_cached_acl(inode, type);
 	if (acl != ERR_PTR(-EAGAIN))
 		return acl;
 	acl = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -272,7 +284,12 @@ struct posix_acl *nfs3_get_acl(struct inode *inode, int type)
 
 	if (res.acl_access != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (posix_acl_equiv_mode(res.acl_access, NULL) == 0) {
+=======
+		if ((posix_acl_equiv_mode(res.acl_access, NULL) == 0) ||
+		    res.acl_access->a_count == 0) {
+>>>>>>> v3.18
 =======
 		if ((posix_acl_equiv_mode(res.acl_access, NULL) == 0) ||
 		    res.acl_access->a_count == 0) {
@@ -281,6 +298,7 @@ struct posix_acl *nfs3_get_acl(struct inode *inode, int type)
 			res.acl_access = NULL;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	nfs3_cache_acls(inode,
 		(res.mask & NFS_ACL)   ? res.acl_access  : ERR_PTR(-EINVAL),
@@ -296,6 +314,8 @@ struct posix_acl *nfs3_get_acl(struct inode *inode, int type)
 			acl = res.acl_default;
 			res.acl_default = NULL;
 =======
+=======
+>>>>>>> v3.18
 
 	if (res.mask & NFS_ACL)
 		set_cached_acl(inode, ACL_TYPE_ACCESS, res.acl_access);
@@ -314,6 +334,9 @@ struct posix_acl *nfs3_get_acl(struct inode *inode, int type)
 	} else {
 		posix_acl_release(res.acl_access);
 		return res.acl_default;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -321,6 +344,7 @@ getout:
 	posix_acl_release(res.acl_access);
 	posix_acl_release(res.acl_default);
 	nfs_free_fattr(res.fattr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (status != 0) {
@@ -333,11 +357,16 @@ getout:
 static int nfs3_proc_setacls(struct inode *inode, struct posix_acl *acl,
 		  struct posix_acl *dfacl)
 =======
+=======
+>>>>>>> v3.18
 	return ERR_PTR(status);
 }
 
 static int __nfs3_proc_setacls(struct inode *inode, struct posix_acl *acl,
 		struct posix_acl *dfacl)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct nfs_server *server = NFS_SERVER(inode);
@@ -405,7 +434,12 @@ static int __nfs3_proc_setacls(struct inode *inode, struct posix_acl *acl,
 		case 0:
 			status = nfs_refresh_inode(inode, fattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nfs3_cache_acls(inode, acl, dfacl);
+=======
+			set_cached_acl(inode, ACL_TYPE_ACCESS, acl);
+			set_cached_acl(inode, ACL_TYPE_DEFAULT, dfacl);
+>>>>>>> v3.18
 =======
 			set_cached_acl(inode, ACL_TYPE_ACCESS, acl);
 			set_cached_acl(inode, ACL_TYPE_DEFAULT, dfacl);
@@ -430,8 +464,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int nfs3_proc_setacl(struct inode *inode, int type, struct posix_acl *acl)
 =======
+=======
+>>>>>>> v3.18
 int nfs3_proc_setacls(struct inode *inode, struct posix_acl *acl,
 		struct posix_acl *dfacl)
 {
@@ -442,6 +479,9 @@ int nfs3_proc_setacls(struct inode *inode, struct posix_acl *acl,
 }
 
 int nfs3_set_acl(struct inode *inode, struct posix_acl *acl, int type)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct posix_acl *alloc = NULL, *dfacl = NULL;
@@ -449,6 +489,7 @@ int nfs3_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 
 	if (S_ISDIR(inode->i_mode)) {
 		switch(type) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			case ACL_TYPE_ACCESS:
 				alloc = dfacl = nfs3_proc_getacl(inode,
@@ -471,6 +512,8 @@ int nfs3_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 	} else if (type != ACL_TYPE_ACCESS)
 			return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		case ACL_TYPE_ACCESS:
 			alloc = dfacl = get_acl(inode, ACL_TYPE_DEFAULT);
 			if (IS_ERR(alloc))
@@ -485,6 +528,9 @@ int nfs3_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 			break;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (acl == NULL) {
@@ -493,7 +539,11 @@ int nfs3_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 			goto fail;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = nfs3_proc_setacls(inode, acl, dfacl);
+=======
+	status = __nfs3_proc_setacls(inode, acl, dfacl);
+>>>>>>> v3.18
 =======
 	status = __nfs3_proc_setacls(inode, acl, dfacl);
 >>>>>>> v3.18
@@ -504,6 +554,7 @@ fail:
 	return PTR_ERR(alloc);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int nfs3_proc_set_default_acl(struct inode *dir, struct inode *inode,
 		umode_t mode)
@@ -529,6 +580,8 @@ out_release_dfacl:
 	posix_acl_release(dfacl);
 	return error;
 =======
+=======
+>>>>>>> v3.18
 const struct xattr_handler *nfs3_xattr_handlers[] = {
 	&posix_acl_access_xattr_handler,
 	&posix_acl_default_xattr_handler,
@@ -576,5 +629,8 @@ nfs3_listxattr(struct dentry *dentry, char *data, size_t size)
 	if (error)
 		return error;
 	return result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

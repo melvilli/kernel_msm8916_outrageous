@@ -70,7 +70,12 @@ static int call_fn_known_sch(struct device *dev, void *data)
 	int rc = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idset_sch_del(cb->set, sch->schid);
+=======
+	if (cb->set)
+		idset_sch_del(cb->set, sch->schid);
+>>>>>>> v3.18
 =======
 	if (cb->set)
 		idset_sch_del(cb->set, sch->schid);
@@ -121,7 +126,10 @@ int for_each_subchannel_staged(int (*fn_known)(struct subchannel *, void *),
 	cb.fn_unknown_sch = fn_unknown;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (fn_known && !fn_unknown) {
 		/* Skip idset allocation in case of known-only loop. */
 		cb.set = NULL;
@@ -129,6 +137,9 @@ int for_each_subchannel_staged(int (*fn_known)(struct subchannel *, void *),
 					call_fn_known_sch);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cb.set = idset_sch_new();
 	if (!cb.set)
@@ -562,7 +573,13 @@ static int slow_eval_unknown_fn(struct subchannel_id schid, void *data)
 		case -EIO:
 			/* These should abort looping */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			idset_sch_del_subseq(slow_subchannel_set, schid);
+=======
+			spin_lock_irq(&slow_subchannel_lock);
+			idset_sch_del_subseq(slow_subchannel_set, schid);
+			spin_unlock_irq(&slow_subchannel_lock);
+>>>>>>> v3.18
 =======
 			spin_lock_irq(&slow_subchannel_lock);
 			idset_sch_del_subseq(slow_subchannel_set, schid);
@@ -573,6 +590,12 @@ static int slow_eval_unknown_fn(struct subchannel_id schid, void *data)
 			rc = 0;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* Allow scheduling here since the containing loop might
+		 * take a while.  */
+		cond_resched();
+>>>>>>> v3.18
 =======
 		/* Allow scheduling here since the containing loop might
 		 * take a while.  */
@@ -598,7 +621,11 @@ static void css_slow_path_func(struct work_struct *unused)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DECLARE_WORK(slow_path_work, css_slow_path_func);
+=======
+static DECLARE_DELAYED_WORK(slow_path_work, css_slow_path_func);
+>>>>>>> v3.18
 =======
 static DECLARE_DELAYED_WORK(slow_path_work, css_slow_path_func);
 >>>>>>> v3.18
@@ -612,7 +639,11 @@ void css_schedule_eval(struct subchannel_id schid)
 	idset_sch_add(slow_subchannel_set, schid);
 	atomic_set(&css_eval_scheduled, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	queue_work(cio_work_q, &slow_path_work);
+=======
+	queue_delayed_work(cio_work_q, &slow_path_work, 0);
+>>>>>>> v3.18
 =======
 	queue_delayed_work(cio_work_q, &slow_path_work, 0);
 >>>>>>> v3.18
@@ -627,7 +658,11 @@ void css_schedule_eval_all(void)
 	idset_fill(slow_subchannel_set);
 	atomic_set(&css_eval_scheduled, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	queue_work(cio_work_q, &slow_path_work);
+=======
+	queue_delayed_work(cio_work_q, &slow_path_work, 0);
+>>>>>>> v3.18
 =======
 	queue_delayed_work(cio_work_q, &slow_path_work, 0);
 >>>>>>> v3.18
@@ -644,7 +679,11 @@ static int __unset_registered(struct device *dev, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void css_schedule_eval_all_unreg(void)
+=======
+void css_schedule_eval_all_unreg(unsigned long delay)
+>>>>>>> v3.18
 =======
 void css_schedule_eval_all_unreg(unsigned long delay)
 >>>>>>> v3.18
@@ -666,7 +705,11 @@ void css_schedule_eval_all_unreg(unsigned long delay)
 	idset_add_set(slow_subchannel_set, unreg_set);
 	atomic_set(&css_eval_scheduled, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	queue_work(cio_work_q, &slow_path_work);
+=======
+	queue_delayed_work(cio_work_q, &slow_path_work, delay);
+>>>>>>> v3.18
 =======
 	queue_delayed_work(cio_work_q, &slow_path_work, delay);
 >>>>>>> v3.18
@@ -683,7 +726,12 @@ void css_wait_for_slow_path(void)
 void css_schedule_reprobe(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	css_schedule_eval_all_unreg();
+=======
+	/* Schedule with a delay to allow merging of subsequent calls. */
+	css_schedule_eval_all_unreg(1 * HZ);
+>>>>>>> v3.18
 =======
 	/* Schedule with a delay to allow merging of subsequent calls. */
 	css_schedule_eval_all_unreg(1 * HZ);
@@ -793,7 +841,11 @@ css_cm_enable_store(struct device *dev, struct device_attribute *attr,
 	unsigned long val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(buf, 16, &val);
+=======
+	ret = kstrtoul(buf, 16, &val);
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 16, &val);
 >>>>>>> v3.18

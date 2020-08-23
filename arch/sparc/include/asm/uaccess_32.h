@@ -79,9 +79,15 @@ struct exception_table_entry
 
 /* Returns 0 if exception not found and fixup otherwise.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long search_extables_range(unsigned long addr, unsigned long *g2);
 
 extern void __ret_efault(void);
+=======
+unsigned long search_extables_range(unsigned long addr, unsigned long *g2);
+
+void __ret_efault(void);
+>>>>>>> v3.18
 =======
 unsigned long search_extables_range(unsigned long addr, unsigned long *g2);
 
@@ -159,7 +165,11 @@ __asm__ __volatile__(							\
 	 "i" (-EFAULT))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __put_user_bad(void);
+=======
+int __put_user_bad(void);
+>>>>>>> v3.18
 =======
 int __put_user_bad(void);
 >>>>>>> v3.18
@@ -255,9 +265,15 @@ __asm__ __volatile__(							\
        : "=&r" (x) : "m" (*__m(addr)), "i" (retval))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __get_user_bad(void);
 
 extern unsigned long __copy_user(void __user *to, const void __user *from, unsigned long size);
+=======
+int __get_user_bad(void);
+
+unsigned long __copy_user(void __user *to, const void __user *from, unsigned long size);
+>>>>>>> v3.18
 =======
 int __get_user_bad(void);
 
@@ -282,10 +298,15 @@ static inline unsigned long copy_from_user(void *to, const void __user *from, un
 	if (n && __access_ok((unsigned long) from, n))
 		return __copy_user((__force void __user *) to, from, n);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else {
 		memset(to, 0, n);
 		return n;
 	}
+=======
+	else
+		return n;
+>>>>>>> v3.18
 =======
 	else
 		return n;
@@ -330,8 +351,13 @@ static inline unsigned long clear_user(void __user *addr, unsigned long n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern __must_check long strlen_user(const char __user *str);
 extern __must_check long strnlen_user(const char __user *str, long n);
+=======
+__must_check long strlen_user(const char __user *str);
+__must_check long strnlen_user(const char __user *str, long n);
+>>>>>>> v3.18
 =======
 __must_check long strlen_user(const char __user *str);
 __must_check long strnlen_user(const char __user *str, long n);

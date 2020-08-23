@@ -25,11 +25,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/fb.h>
 
 struct nv25_fb_priv {
 	struct nouveau_fb base;
 };
+=======
+#include "nv04.h"
+>>>>>>> v3.18
 =======
 #include "nv04.h"
 >>>>>>> v3.18
@@ -40,8 +44,13 @@ nv25_fb_tile_comp(struct nouveau_fb *pfb, int i, u32 size, u32 flags,
 {
 	u32 tiles = DIV_ROUND_UP(size, 0x40);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 tags  = round_up(tiles / pfb->ram.parts, 0x40);
 	if (!nouveau_mm_head(&pfb->tags, 1, tags, tags, 1, &tile->tag)) {
+=======
+	u32 tags  = round_up(tiles / pfb->ram->parts, 0x40);
+	if (!nouveau_mm_head(&pfb->tags, 0, 1, tags, tags, 1, &tile->tag)) {
+>>>>>>> v3.18
 =======
 	u32 tags  = round_up(tiles / pfb->ram->parts, 0x40);
 	if (!nouveau_mm_head(&pfb->tags, 0, 1, tags, tags, 1, &tile->tag)) {
@@ -55,6 +64,7 @@ nv25_fb_tile_comp(struct nouveau_fb *pfb, int i, u32 size, u32 flags,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 nv25_fb_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
@@ -85,19 +95,27 @@ nv25_fb_oclass = {
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv25_fb_ctor,
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_oclass *
 nv25_fb_oclass = &(struct nv04_fb_impl) {
 	.base.base.handle = NV_SUBDEV(FB, 0x25),
 	.base.base.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv04_fb_ctor,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.dtor = _nouveau_fb_dtor,
 		.init = _nouveau_fb_init,
 		.fini = _nouveau_fb_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 	.base.memtype = nv04_fb_memtype_valid,
 	.base.ram = &nv20_ram_oclass,
 	.tile.regions = 8,
@@ -106,4 +124,7 @@ nv25_fb_oclass = &(struct nv04_fb_impl) {
 	.tile.fini = nv20_fb_tile_fini,
 	.tile.prog = nv20_fb_tile_prog,
 }.base.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

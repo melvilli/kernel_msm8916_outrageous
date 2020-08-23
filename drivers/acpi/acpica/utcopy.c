@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -183,7 +187,10 @@ acpi_ut_copy_isimple_to_esimple(union acpi_operand_object *internal_object,
 		switch (internal_object->reference.class) {
 		case ACPI_REFCLASS_NAME:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -272,7 +279,10 @@ acpi_ut_copy_ielement_to_eelement(u8 object_type,
 	switch (object_type) {
 	case ACPI_COPY_TYPE_SIMPLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -289,7 +299,10 @@ acpi_ut_copy_ielement_to_eelement(u8 object_type,
 
 	case ACPI_COPY_TYPE_PACKAGE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -318,6 +331,10 @@ acpi_ut_copy_ielement_to_eelement(u8 object_type,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -499,6 +516,10 @@ acpi_ut_copy_esimple_to_isimple(union acpi_object *external_object,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -558,22 +579,34 @@ acpi_ut_copy_esimple_to_isimple(union acpi_object *external_object,
 	case ACPI_TYPE_LOCAL_REFERENCE:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* TBD: should validate incoming handle */
 
 		internal_object->reference.class = ACPI_REFCLASS_NAME;
 		internal_object->reference.node =
 =======
+=======
+>>>>>>> v3.18
 		/* An incoming reference is defined to be a namespace node */
 
 		internal_object->reference.class = ACPI_REFCLASS_REFOF;
 		internal_object->reference.object =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    external_object->reference.handle;
 		break;
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Other types can't get here */
+=======
+
+		/* Other types can't get here */
+
+>>>>>>> v3.18
 =======
 
 		/* Other types can't get here */
@@ -586,7 +619,11 @@ acpi_ut_copy_esimple_to_isimple(union acpi_object *external_object,
 	return_ACPI_STATUS(AE_OK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       error_exit:
+=======
+error_exit:
+>>>>>>> v3.18
 =======
 error_exit:
 >>>>>>> v3.18
@@ -839,7 +876,13 @@ acpi_ut_copy_simple_object(union acpi_operand_object *source_desc,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Nothing to do for other simple objects */
+=======
+
+		/* Nothing to do for other simple objects */
+
+>>>>>>> v3.18
 =======
 
 		/* Nothing to do for other simple objects */
@@ -913,7 +956,10 @@ acpi_ut_copy_ielement_to_ielement(u8 object_type,
 
 	case ACPI_COPY_TYPE_PACKAGE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -939,6 +985,10 @@ acpi_ut_copy_ielement_to_ielement(u8 object_type,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -948,7 +998,11 @@ acpi_ut_copy_ielement_to_ielement(u8 object_type,
 	return (status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       error_exit:
+=======
+error_exit:
+>>>>>>> v3.18
 =======
 error_exit:
 >>>>>>> v3.18

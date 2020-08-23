@@ -20,7 +20,10 @@
 
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pm_runtime.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -29,6 +32,7 @@
 #include "psb_drv.h"
 #include "psb_intel_drv.h"
 #include "psb_intel_reg.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "psb_intel_display.h"
 #include "power.h"
@@ -72,6 +76,8 @@ static bool cdv_intel_find_dp_pll(const struct cdv_intel_limit_t *limit, struct 
 				int refclk,
 				struct cdv_intel_clock_t *best_clock);
 =======
+=======
+>>>>>>> v3.18
 #include "gma_display.h"
 #include "power.h"
 #include "cdv_device.h"
@@ -80,6 +86,9 @@ static bool cdv_intel_find_dp_pll(const struct gma_limit_t *limit,
 				  struct drm_crtc *crtc, int target,
 				  int refclk, struct gma_clock_t *best_clock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define CDV_LIMIT_SINGLE_LVDS_96	0
@@ -90,7 +99,11 @@ static bool cdv_intel_find_dp_pll(const struct gma_limit_t *limit,
 #define CDV_LIMIT_DP_100		5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct cdv_intel_limit_t cdv_intel_limits[] = {
+=======
+static const struct gma_limit_t cdv_intel_limits[] = {
+>>>>>>> v3.18
 =======
 static const struct gma_limit_t cdv_intel_limits[] = {
 >>>>>>> v3.18
@@ -104,9 +117,14 @@ static const struct gma_limit_t cdv_intel_limits[] = {
 	 .p = {.min = 28, .max = 140},
 	 .p1 = {.min = 2, .max = 10},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 .p2 = {.dot_limit = 200000,
 		.p2_slow = 14, .p2_fast = 14},
 		.find_pll = cdv_intel_find_best_PLL,
+=======
+	 .p2 = {.dot_limit = 200000, .p2_slow = 14, .p2_fast = 14},
+	 .find_pll = gma_find_best_pll,
+>>>>>>> v3.18
 =======
 	 .p2 = {.dot_limit = 200000, .p2_slow = 14, .p2_fast = 14},
 	 .find_pll = gma_find_best_pll,
@@ -126,7 +144,11 @@ static const struct gma_limit_t cdv_intel_limits[] = {
 	  */
 	 .p2 = {.dot_limit = 200000, .p2_slow = 14, .p2_fast = 14},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.find_pll = cdv_intel_find_best_PLL,
+=======
+	 .find_pll = gma_find_best_pll,
+>>>>>>> v3.18
 =======
 	 .find_pll = gma_find_best_pll,
 >>>>>>> v3.18
@@ -142,7 +164,11 @@ static const struct gma_limit_t cdv_intel_limits[] = {
 	 .p1 = {.min = 1, .max = 9},
 	 .p2 = {.dot_limit = 225000, .p2_slow = 10, .p2_fast = 5},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.find_pll = cdv_intel_find_best_PLL,
+=======
+	 .find_pll = gma_find_best_pll,
+>>>>>>> v3.18
 =======
 	 .find_pll = gma_find_best_pll,
 >>>>>>> v3.18
@@ -158,7 +184,11 @@ static const struct gma_limit_t cdv_intel_limits[] = {
 	 .p1 = {.min = 1, .max = 10},
 	 .p2 = {.dot_limit = 225000, .p2_slow = 10, .p2_fast = 5},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.find_pll = cdv_intel_find_best_PLL,
+=======
+	 .find_pll = gma_find_best_pll,
+>>>>>>> v3.18
 =======
 	 .find_pll = gma_find_best_pll,
 >>>>>>> v3.18
@@ -291,15 +321,21 @@ void cdv_sb_reset(struct drm_device *dev)
 static int
 cdv_dpll_set_clock_cdv(struct drm_device *dev, struct drm_crtc *crtc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       struct cdv_intel_clock_t *clock, bool is_lvds, u32 ddi_select)
 {
 	struct psb_intel_crtc *psb_crtc = to_psb_intel_crtc(crtc);
 	int pipe = psb_crtc->pipe;
 =======
+=======
+>>>>>>> v3.18
 		       struct gma_clock_t *clock, bool is_lvds, u32 ddi_select)
 {
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	int pipe = gma_crtc->pipe;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 m, n_vco, p;
 	int ret = 0;
@@ -448,6 +484,7 @@ cdv_dpll_set_clock_cdv(struct drm_device *dev, struct drm_crtc *crtc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Returns whether any encoder on the specified pipe is of the specified type
  */
@@ -474,11 +511,16 @@ static const struct cdv_intel_limit_t *cdv_intel_limit(struct drm_crtc *crtc,
 	const struct cdv_intel_limit_t *limit;
 	if (cdv_intel_pipe_has_type(crtc, INTEL_OUTPUT_LVDS)) {
 =======
+=======
+>>>>>>> v3.18
 static const struct gma_limit_t *cdv_intel_limit(struct drm_crtc *crtc,
 						 int refclk)
 {
 	const struct gma_limit_t *limit;
 	if (gma_pipe_has_type(crtc, INTEL_OUTPUT_LVDS)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Now only single-channel LVDS is supported on CDV. If it is
@@ -489,8 +531,13 @@ static const struct gma_limit_t *cdv_intel_limit(struct drm_crtc *crtc,
 		else
 			limit = &cdv_intel_limits[CDV_LIMIT_SINGLE_LVDS_100];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (psb_intel_pipe_has_type(crtc, INTEL_OUTPUT_DISPLAYPORT) ||
 			psb_intel_pipe_has_type(crtc, INTEL_OUTPUT_EDP)) {
+=======
+	} else if (gma_pipe_has_type(crtc, INTEL_OUTPUT_DISPLAYPORT) ||
+			gma_pipe_has_type(crtc, INTEL_OUTPUT_EDP)) {
+>>>>>>> v3.18
 =======
 	} else if (gma_pipe_has_type(crtc, INTEL_OUTPUT_DISPLAYPORT) ||
 			gma_pipe_has_type(crtc, INTEL_OUTPUT_EDP)) {
@@ -510,8 +557,12 @@ static const struct gma_limit_t *cdv_intel_limit(struct drm_crtc *crtc,
 
 /* m1 is reserved as 0 in CDV, n is a ring counter */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cdv_intel_clock(struct drm_device *dev,
 			int refclk, struct cdv_intel_clock_t *clock)
+=======
+static void cdv_intel_clock(int refclk, struct gma_clock_t *clock)
+>>>>>>> v3.18
 =======
 static void cdv_intel_clock(int refclk, struct gma_clock_t *clock)
 >>>>>>> v3.18
@@ -522,6 +573,7 @@ static void cdv_intel_clock(int refclk, struct gma_clock_t *clock)
 	clock->dot = clock->vco / clock->p;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define INTELPllInvalid(s)   { /* ErrorF (s) */; return false; }
@@ -612,6 +664,8 @@ static bool cdv_intel_find_dp_pll(const struct cdv_intel_limit_t *limit, struct 
 	struct cdv_intel_clock_t clock;
 	if (refclk == 27000) {
 =======
+=======
+>>>>>>> v3.18
 static bool cdv_intel_find_dp_pll(const struct gma_limit_t *limit,
 				  struct drm_crtc *crtc, int target,
 				  int refclk,
@@ -622,6 +676,9 @@ static bool cdv_intel_find_dp_pll(const struct gma_limit_t *limit,
 
 	switch (refclk) {
 	case 27000:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (target < 200000) {
 			clock.p1 = 2;
@@ -637,7 +694,13 @@ static bool cdv_intel_find_dp_pll(const struct gma_limit_t *limit,
 			clock.m2 = 98;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (refclk == 100000) {
+=======
+		break;
+
+	case 100000:
+>>>>>>> v3.18
 =======
 		break;
 
@@ -656,6 +719,7 @@ static bool cdv_intel_find_dp_pll(const struct gma_limit_t *limit,
 			clock.m1 = 0;
 			clock.m2 = 133;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else
 		return false;
@@ -741,6 +805,8 @@ psb_intel_pipe_set_base_exit:
 	gma_power_end(dev);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		break;
 
 	default:
@@ -750,6 +816,9 @@ psb_intel_pipe_set_base_exit:
 	gma_crtc->clock_funcs->clock(refclk, &clock);
 	memcpy(best_clock, &clock, sizeof(struct gma_clock_t));
 	return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -761,6 +830,7 @@ static bool cdv_intel_pipe_enabled(struct drm_device *dev, int pipe)
 	struct drm_crtc *crtc;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = NULL;
 
 	crtc = dev_priv->pipe_to_crtc_mapping[pipe];
@@ -768,17 +838,23 @@ static bool cdv_intel_pipe_enabled(struct drm_device *dev, int pipe)
 
 	if (crtc->fb == NULL || !psb_intel_crtc->active)
 =======
+=======
+>>>>>>> v3.18
 	struct gma_crtc *gma_crtc = NULL;
 
 	crtc = dev_priv->pipe_to_crtc_mapping[pipe];
 	gma_crtc = to_gma_crtc(crtc);
 
 	if (crtc->primary->fb == NULL || !gma_crtc->active)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return false;
 	return true;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool cdv_intel_single_pipe_active (struct drm_device *dev)
 {
@@ -827,6 +903,9 @@ static void cdv_intel_disable_self_refresh (struct drm_device *dev)
 =======
 void cdv_disable_sr(struct drm_device *dev)
 >>>>>>> v3.18
+=======
+void cdv_disable_sr(struct drm_device *dev)
+>>>>>>> v3.18
 {
 	if (REG_READ(FW_BLC_SELF) & FW_BLC_SELF_EN) {
 
@@ -835,7 +914,11 @@ void cdv_disable_sr(struct drm_device *dev)
 		REG_READ(FW_BLC_SELF);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cdv_intel_wait_for_vblank(dev);
+=======
+		gma_wait_for_vblank(dev);
+>>>>>>> v3.18
 =======
 		gma_wait_for_vblank(dev);
 >>>>>>> v3.18
@@ -847,7 +930,11 @@ void cdv_disable_sr(struct drm_device *dev)
 		REG_READ(OV_OVADD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cdv_intel_wait_for_vblank(dev);
+=======
+		gma_wait_for_vblank(dev);
+>>>>>>> v3.18
 =======
 		gma_wait_for_vblank(dev);
 >>>>>>> v3.18
@@ -856,11 +943,14 @@ void cdv_disable_sr(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cdv_intel_update_watermark (struct drm_device *dev, struct drm_crtc *crtc)
 {
 
 	if (cdv_intel_single_pipe_active(dev)) {
 =======
+=======
+>>>>>>> v3.18
 void cdv_update_wm(struct drm_device *dev, struct drm_crtc *crtc)
 {
 	struct drm_psb_private *dev_priv = dev->dev_private;
@@ -868,6 +958,9 @@ void cdv_update_wm(struct drm_device *dev, struct drm_crtc *crtc)
 
 	/* Is only one pipe enabled? */
 	if (cdv_intel_pipe_enabled(dev, 0) ^ cdv_intel_pipe_enabled(dev, 1)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		u32 fw;
 
@@ -890,7 +983,13 @@ void cdv_update_wm(struct drm_device *dev, struct drm_crtc *crtc)
 		/* ignore FW4 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (is_pipeb_lvds(dev, crtc)) {
+=======
+		/* Is pipe b lvds ? */
+		if (gma_crtc->pipe == 1 &&
+		    gma_pipe_has_type(crtc, INTEL_OUTPUT_LVDS)) {
+>>>>>>> v3.18
 =======
 		/* Is pipe b lvds ? */
 		if (gma_crtc->pipe == 1 &&
@@ -908,7 +1007,11 @@ void cdv_update_wm(struct drm_device *dev, struct drm_crtc *crtc)
 		REG_WRITE(DSPFW6, 0x10);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cdv_intel_wait_for_vblank(dev);
+=======
+		gma_wait_for_vblank(dev);
+>>>>>>> v3.18
 =======
 		gma_wait_for_vblank(dev);
 >>>>>>> v3.18
@@ -917,7 +1020,11 @@ void cdv_update_wm(struct drm_device *dev, struct drm_crtc *crtc)
 		REG_WRITE(FW_BLC_SELF, FW_BLC_SELF_EN);
 		REG_READ(FW_BLC_SELF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cdv_intel_wait_for_vblank(dev);
+=======
+		gma_wait_for_vblank(dev);
+>>>>>>> v3.18
 =======
 		gma_wait_for_vblank(dev);
 >>>>>>> v3.18
@@ -932,6 +1039,7 @@ void cdv_update_wm(struct drm_device *dev, struct drm_crtc *crtc)
 		REG_WRITE(DSPFW5, 0x01010101);
 		REG_WRITE(DSPFW6, 0x1d0);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		cdv_intel_wait_for_vblank(dev);
 
@@ -1144,12 +1252,17 @@ static bool cdv_intel_crtc_mode_fixup(struct drm_crtc *crtc,
 
 
 =======
+=======
+>>>>>>> v3.18
 		gma_wait_for_vblank(dev);
 
 		dev_priv->ops->disable_sr(dev);
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * Return the pipe currently connected to the panel fitter,
@@ -1176,17 +1289,23 @@ static int cdv_intel_crtc_mode_set(struct drm_crtc *crtc,
 	struct drm_device *dev = crtc->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 	int pipe = psb_intel_crtc->pipe;
 	const struct psb_offset *map = &dev_priv->regmap[pipe];
 	int refclk;
 	struct cdv_intel_clock_t clock;
 =======
+=======
+>>>>>>> v3.18
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	int pipe = gma_crtc->pipe;
 	const struct psb_offset *map = &dev_priv->regmap[pipe];
 	int refclk;
 	struct gma_clock_t clock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 dpll = 0, dspcntr, pipeconf;
 	bool ok;
@@ -1195,7 +1314,11 @@ static int cdv_intel_crtc_mode_set(struct drm_crtc *crtc,
 	struct drm_mode_config *mode_config = &dev->mode_config;
 	struct drm_connector *connector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct cdv_intel_limit_t *limit;
+=======
+	const struct gma_limit_t *limit;
+>>>>>>> v3.18
 =======
 	const struct gma_limit_t *limit;
 >>>>>>> v3.18
@@ -1204,8 +1327,13 @@ static int cdv_intel_crtc_mode_set(struct drm_crtc *crtc,
 
 	list_for_each_entry(connector, &mode_config->connector_list, head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct psb_intel_encoder *psb_intel_encoder =
 					psb_intel_attached_encoder(connector);
+=======
+		struct gma_encoder *gma_encoder =
+					gma_attached_encoder(connector);
+>>>>>>> v3.18
 =======
 		struct gma_encoder *gma_encoder =
 					gma_attached_encoder(connector);
@@ -1216,8 +1344,13 @@ static int cdv_intel_crtc_mode_set(struct drm_crtc *crtc,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ddi_select = psb_intel_encoder->ddi_select;
 		switch (psb_intel_encoder->type) {
+=======
+		ddi_select = gma_encoder->ddi_select;
+		switch (gma_encoder->type) {
+>>>>>>> v3.18
 =======
 		ddi_select = gma_encoder->ddi_select;
 		switch (gma_encoder->type) {
@@ -1275,7 +1408,11 @@ static int cdv_intel_crtc_mode_set(struct drm_crtc *crtc,
 	drm_mode_debug_printmodeline(adjusted_mode);
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	limit = cdv_intel_limit(crtc, refclk);
+=======
+	limit = gma_crtc->clock_funcs->limit(crtc, refclk);
+>>>>>>> v3.18
 =======
 	limit = gma_crtc->clock_funcs->limit(crtc, refclk);
 >>>>>>> v3.18
@@ -1284,7 +1421,12 @@ static int cdv_intel_crtc_mode_set(struct drm_crtc *crtc,
 				 &clock);
 	if (!ok) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev->dev, "Couldn't find PLL settings for mode!\n");
+=======
+		DRM_ERROR("Couldn't find PLL settings for mode! target: %d, actual: %d",
+			  adjusted_mode->clock, clock.dot);
+>>>>>>> v3.18
 =======
 		DRM_ERROR("Couldn't find PLL settings for mode! target: %d, actual: %d",
 			  adjusted_mode->clock, clock.dot);
@@ -1440,7 +1582,11 @@ static int cdv_intel_crtc_mode_set(struct drm_crtc *crtc,
 	REG_READ(map->conf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cdv_intel_wait_for_vblank(dev);
+=======
+	gma_wait_for_vblank(dev);
+>>>>>>> v3.18
 =======
 	gma_wait_for_vblank(dev);
 >>>>>>> v3.18
@@ -1454,6 +1600,7 @@ static int cdv_intel_crtc_mode_set(struct drm_crtc *crtc,
 		crtc_funcs->mode_set_base(crtc, x, y, old_fb);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cdv_intel_wait_for_vblank(dev);
 
@@ -1789,18 +1936,27 @@ static int cdv_crtc_set_config(struct drm_mode_set *set)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	gma_wait_for_vblank(dev);
 
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /** Derive the pixel clock for the given refclk and divisors for 8xx chips. */
 
 /* FIXME: why are we using this, should it be cdv_ in this tree ? */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void i8xx_clock(int refclk, struct cdv_intel_clock_t *clock)
+=======
+static void i8xx_clock(int refclk, struct gma_clock_t *clock)
+>>>>>>> v3.18
 =======
 static void i8xx_clock(int refclk, struct gma_clock_t *clock)
 >>>>>>> v3.18
@@ -1817,6 +1973,7 @@ static int cdv_intel_crtc_clock_get(struct drm_device *dev,
 {
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 	int pipe = psb_intel_crtc->pipe;
 	const struct psb_offset *map = &dev_priv->regmap[pipe];
@@ -1824,12 +1981,17 @@ static int cdv_intel_crtc_clock_get(struct drm_device *dev,
 	u32 fp;
 	struct cdv_intel_clock_t clock;
 =======
+=======
+>>>>>>> v3.18
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	int pipe = gma_crtc->pipe;
 	const struct psb_offset *map = &dev_priv->regmap[pipe];
 	u32 dpll;
 	u32 fp;
 	struct gma_clock_t clock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool is_lvds;
 	struct psb_pipe *p = &dev_priv->regs.pipe[pipe];
@@ -1904,8 +2066,13 @@ struct drm_display_mode *cdv_intel_crtc_mode_get(struct drm_device *dev,
 					     struct drm_crtc *crtc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 	int pipe = psb_intel_crtc->pipe;
+=======
+	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
+	int pipe = gma_crtc->pipe;
+>>>>>>> v3.18
 =======
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	int pipe = gma_crtc->pipe;
@@ -1953,6 +2120,7 @@ struct drm_display_mode *cdv_intel_crtc_mode_get(struct drm_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cdv_intel_crtc_destroy(struct drm_crtc *crtc)
 {
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
@@ -1994,6 +2162,8 @@ const struct drm_crtc_funcs cdv_intel_crtc_funcs = {
 	.set_config = cdv_crtc_set_config,
 	.destroy = cdv_intel_crtc_destroy,
 =======
+=======
+>>>>>>> v3.18
 const struct drm_crtc_helper_funcs cdv_intel_helper_funcs = {
 	.dpms = gma_crtc_dpms,
 	.mode_fixup = gma_crtc_mode_fixup,
@@ -2018,5 +2188,8 @@ const struct gma_clock_funcs cdv_clock_funcs = {
 	.clock = cdv_intel_clock,
 	.limit = cdv_intel_limit,
 	.pll_is_valid = gma_pll_is_valid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

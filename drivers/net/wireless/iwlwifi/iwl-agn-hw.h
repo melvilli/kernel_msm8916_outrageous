@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2007 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -111,9 +119,13 @@
 /* EEPROM */
 #define IWLAGN_EEPROM_IMG_SIZE		2048
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* OTP */
 /* lower blocks contain EEPROM image and calibration data */
 #define OTP_LOW_IMAGE_SIZE		(2 * 512 * sizeof(u16)) /* 2 KB */
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

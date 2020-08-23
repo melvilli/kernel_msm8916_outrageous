@@ -111,6 +111,7 @@ ENTRY(__tlbtemp_mapping_start)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * clear_user_page (void *addr, unsigned long vaddr, struct page *page)
  *                     a2              a3                 a4
  */
@@ -147,6 +148,8 @@ ENTRY(clear_user_page)
 	add	a2, a5, a3				# add 'color'
 
 =======
+=======
+>>>>>>> v3.18
  * clear_page_alias(void *addr, unsigned long paddr)
  *                     a2              a3
  */
@@ -165,6 +168,9 @@ ENTRY(clear_page_alias)
 
 	addi	a6, a3, (PAGE_KERNEL | _PAGE_HW_WRITE)
 	mov	a4, a2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wdtlb	a6, a2
 	dsync
@@ -187,8 +193,12 @@ ENTRY(clear_page_alias)
 	/* We need to invalidate the temporary idtlb entry, if any. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 1:	addi	a2, a2, -PAGE_SIZE
 	idtlb	a2
+=======
+1:	idtlb	a4
+>>>>>>> v3.18
 =======
 1:	idtlb	a4
 >>>>>>> v3.18
@@ -196,6 +206,7 @@ ENTRY(clear_page_alias)
 
 	retw
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ENDPROC(clear_user_page)
 
@@ -248,6 +259,8 @@ ENTRY(copy_user_page)
 	add	a7, a3, a5				# ppn
 	add	a3, a8, a4
 =======
+=======
+>>>>>>> v3.18
 ENDPROC(clear_page_alias)
 
 /*
@@ -280,6 +293,9 @@ ENTRY(copy_page_alias)
 	/* Setup a temporary DTLB for source. */
 
 	addi	a7, a5, PAGE_KERNEL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	addi	a8, a3, 1				# way1
 
@@ -332,7 +348,11 @@ ENTRY(copy_page_alias)
 	retw
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENDPROC(copy_user_page)
+=======
+ENDPROC(copy_page_alias)
+>>>>>>> v3.18
 =======
 ENDPROC(copy_page_alias)
 >>>>>>> v3.18
@@ -365,7 +385,10 @@ ENTRY(__flush_invalidate_dcache_page_alias)
 
 ENDPROC(__flush_invalidate_dcache_page_alias)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * void __invalidate_dcache_page_alias (addr, phys)
@@ -390,6 +413,9 @@ ENTRY(__invalidate_dcache_page_alias)
 	retw
 
 ENDPROC(__invalidate_dcache_page_alias)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

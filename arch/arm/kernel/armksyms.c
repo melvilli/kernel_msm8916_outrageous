@@ -36,6 +36,11 @@ extern void __udivsi3(void);
 extern void __umodsi3(void);
 extern void __do_div64(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void __bswapsi2(void);
+extern void __bswapdi2(void);
+>>>>>>> v3.18
 =======
 extern void __bswapsi2(void);
 extern void __bswapdi2(void);
@@ -102,7 +107,10 @@ EXPORT_SYMBOL(__get_user_1);
 EXPORT_SYMBOL(__get_user_2);
 EXPORT_SYMBOL(__get_user_4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(__get_user_8);
 
 #ifdef __ARMEB__
@@ -111,6 +119,9 @@ EXPORT_SYMBOL(__get_user_64t_2);
 EXPORT_SYMBOL(__get_user_64t_4);
 EXPORT_SYMBOL(__get_user_32t_8);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 EXPORT_SYMBOL(__put_user_1);
@@ -131,6 +142,11 @@ EXPORT_SYMBOL(__udivsi3);
 EXPORT_SYMBOL(__umodsi3);
 EXPORT_SYMBOL(__do_div64);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(__bswapsi2);
+EXPORT_SYMBOL(__bswapdi2);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(__bswapsi2);
 EXPORT_SYMBOL(__bswapdi2);
@@ -176,7 +192,12 @@ EXPORT_SYMBOL(__gnu_mcount_nc);
 
 #ifdef CONFIG_ARM_PATCH_PHYS_VIRT
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(__pv_phys_offset);
+=======
+EXPORT_SYMBOL(__pv_phys_pfn_offset);
+EXPORT_SYMBOL(__pv_offset);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(__pv_phys_pfn_offset);
 EXPORT_SYMBOL(__pv_offset);

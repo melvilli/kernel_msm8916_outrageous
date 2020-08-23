@@ -20,8 +20,13 @@
 #include <linux/init.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/common.h>
 #include <asm/mach/map.h>
+=======
+#include <asm/mach/map.h>
+#include "common.h"
+>>>>>>> v3.18
 =======
 #include <asm/mach/map.h>
 #include "common.h"

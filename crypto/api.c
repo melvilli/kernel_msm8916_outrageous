@@ -173,7 +173,11 @@ static struct crypto_alg *crypto_larval_wait(struct crypto_alg *alg)
 	long timeout;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	timeout = wait_for_completion_killable_timeout(
+=======
+	timeout = wait_for_completion_interruptible_timeout(
+>>>>>>> v3.18
 =======
 	timeout = wait_for_completion_interruptible_timeout(
 >>>>>>> v3.18
@@ -221,17 +225,23 @@ struct crypto_alg *crypto_larval_lookup(const char *name, u32 type, u32 mask)
 	alg = crypto_alg_lookup(name, type, mask);
 	if (!alg) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		request_module("crypto-%s", name);
 
 		if (!((type ^ CRYPTO_ALG_NEED_FALLBACK) & mask &
 		      CRYPTO_ALG_NEED_FALLBACK))
 			request_module("crypto-%s-all", name);
 =======
+=======
+>>>>>>> v3.18
 		request_module("%s", name);
 
 		if (!((type ^ CRYPTO_ALG_NEED_FALLBACK) & mask &
 		      CRYPTO_ALG_NEED_FALLBACK))
 			request_module("%s-all", name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		alg = crypto_alg_lookup(name, type, mask);
@@ -409,7 +419,11 @@ EXPORT_SYMBOL_GPL(__crypto_alloc_tfm);
  *
  *	This function should not be used by new algorithm types.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Plesae use crypto_alloc_tfm instead.
+=======
+ *	Please use crypto_alloc_tfm instead.
+>>>>>>> v3.18
 =======
  *	Please use crypto_alloc_tfm instead.
 >>>>>>> v3.18
@@ -452,7 +466,11 @@ err:
 		if (err != -EAGAIN)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fatal_signal_pending(current)) {
+=======
+		if (signal_pending(current)) {
+>>>>>>> v3.18
 =======
 		if (signal_pending(current)) {
 >>>>>>> v3.18
@@ -573,7 +591,11 @@ err:
 		if (err != -EAGAIN)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fatal_signal_pending(current)) {
+=======
+		if (signal_pending(current)) {
+>>>>>>> v3.18
 =======
 		if (signal_pending(current)) {
 >>>>>>> v3.18

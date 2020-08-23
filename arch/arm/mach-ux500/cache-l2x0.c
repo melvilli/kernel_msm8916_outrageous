@@ -8,7 +8,10 @@
 #include <linux/of.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/cacheflush.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/hardware/cache-l2x0.h>
@@ -17,16 +20,22 @@
 #include "id.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __iomem *l2x0_base;
 
 static int __init ux500_l2x0_unlock(void)
 {
 	int i;
 =======
+=======
+>>>>>>> v3.18
 static int __init ux500_l2x0_unlock(void)
 {
 	int i;
 	void __iomem *l2x0_base = __io_address(U8500_L2CC_BASE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -45,6 +54,7 @@ static int __init ux500_l2x0_unlock(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init ux500_l2x0_init(void)
 {
@@ -84,6 +94,8 @@ static int __init ux500_l2x0_init(void)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static void ux500_l2c310_write_sec(unsigned long val, unsigned reg)
 {
 	/*
@@ -105,5 +117,8 @@ static int __init ux500_l2x0_init(void)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 early_initcall(ux500_l2x0_init);

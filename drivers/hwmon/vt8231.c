@@ -767,7 +767,11 @@ static struct platform_driver vt8231_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(vt8231_pci_ids) = {
+=======
+static const struct pci_device_id vt8231_pci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id vt8231_pci_ids[] = {
 >>>>>>> v3.18

@@ -44,7 +44,10 @@ static inline int rpc_reply_expected(struct rpc_task *task)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int sock_is_loopback(struct sock *sk)
 {
 	struct dst_entry *dst;
@@ -58,6 +61,9 @@ static inline int sock_is_loopback(struct sock *sk)
 	return loopback;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int svc_send_common(struct socket *sock, struct xdr_buf *xdr,
 		    struct page *headpage, unsigned long headoffset,

@@ -163,7 +163,10 @@ static int tm6000_ir_config(struct tm6000_IR *ir)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void tm6000_ir_keydown(struct tm6000_IR *ir,
 			      const char *buf, unsigned int len)
 {
@@ -196,13 +199,19 @@ static void tm6000_ir_keydown(struct tm6000_IR *ir,
 	rc_keydown(ir->rc, protocol, scancode, 0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void tm6000_ir_urb_received(struct urb *urb)
 {
 	struct tm6000_core *dev = urb->context;
 	struct tm6000_IR *ir = dev->ir;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tm6000_ir_poll_result poll_result;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	char *buf;
@@ -223,12 +232,16 @@ static void tm6000_ir_urb_received(struct urb *urb)
 			       buf, urb->actual_length, false);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	poll_result.rc_data = buf[0];
 	if (urb->actual_length > 1)
 		poll_result.rc_data |= buf[1] << 8;
 
 	dprintk(1, "%s, scancode: 0x%04x\n",__func__, poll_result.rc_data);
 	rc_keydown(ir->rc, poll_result.rc_data, 0);
+=======
+	tm6000_ir_keydown(ir, urb->transfer_buffer, urb->actual_length);
+>>>>>>> v3.18
 =======
 	tm6000_ir_keydown(ir, urb->transfer_buffer, urb->actual_length);
 >>>>>>> v3.18
@@ -247,7 +260,10 @@ static void tm6000_ir_handle_key(struct work_struct *work)
 	struct tm6000_IR *ir = container_of(work, struct tm6000_IR, work.work);
 	struct tm6000_core *dev = ir->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tm6000_ir_poll_result poll_result;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int rc;
@@ -265,6 +281,7 @@ static void tm6000_ir_handle_key(struct work_struct *work)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc > 1)
 		poll_result.rc_data = buf[0] | buf[1] << 8;
 	else
@@ -272,6 +289,10 @@ static void tm6000_ir_handle_key(struct work_struct *work)
 
 	/* Check if something was read */
 	if ((poll_result.rc_data & 0xff) == 0xff) {
+=======
+	/* Check if something was read */
+	if ((buf[0] & 0xff) == 0xff) {
+>>>>>>> v3.18
 =======
 	/* Check if something was read */
 	if ((buf[0] & 0xff) == 0xff) {
@@ -284,8 +305,12 @@ static void tm6000_ir_handle_key(struct work_struct *work)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk(1, "%s, scancode: 0x%04x\n",__func__, poll_result.rc_data);
 	rc_keydown(ir->rc, poll_result.rc_data, 0);
+=======
+	tm6000_ir_keydown(ir, buf, rc);
+>>>>>>> v3.18
 =======
 	tm6000_ir_keydown(ir, buf, rc);
 >>>>>>> v3.18
@@ -477,9 +502,15 @@ int tm6000_ir_init(struct tm6000_core *dev)
 
 	/* input setup */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc->allowed_protos = RC_BIT_RC5 | RC_BIT_NEC;
 	/* Neded, in order to support NEC remotes with 24 or 32 bits */
 	rc->scanmask = 0xffff;
+=======
+	rc->allowed_protocols = RC_BIT_RC5 | RC_BIT_NEC;
+	/* Neded, in order to support NEC remotes with 24 or 32 bits */
+	rc->scancode_mask = 0xffff;
+>>>>>>> v3.18
 =======
 	rc->allowed_protocols = RC_BIT_RC5 | RC_BIT_NEC;
 	/* Neded, in order to support NEC remotes with 24 or 32 bits */

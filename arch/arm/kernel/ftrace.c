@@ -15,6 +15,10 @@
 #include <linux/ftrace.h>
 #include <linux/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -68,7 +72,10 @@ static unsigned long adjust_address(struct dyn_ftrace *rec, unsigned long addr)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ftrace_arch_code_modify_prepare(void)
 {
 	set_all_modules_text_rw();
@@ -81,6 +88,9 @@ int ftrace_arch_code_modify_post_process(void)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned long ftrace_call_replace(unsigned long pc, unsigned long addr)
 {
@@ -176,10 +186,15 @@ int ftrace_make_nop(struct module *mod,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init ftrace_dyn_arch_init(void *data)
 {
 	*(unsigned long *)data = 0;
 
+=======
+int __init ftrace_dyn_arch_init(void)
+{
+>>>>>>> v3.18
 =======
 int __init ftrace_dyn_arch_init(void)
 {

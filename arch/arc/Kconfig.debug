@@ -16,6 +16,7 @@ config EARLY_PRINTK
 	  unless you want to debug such a crash.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DEBUG_STACKOVERFLOW
 	bool "Check for stack overflows"
 	depends on DEBUG_KERNEL
@@ -23,6 +24,8 @@ config DEBUG_STACKOVERFLOW
 	  This option will cause messages to be printed if free stack space
 	  drops below a certain limit.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config 16KSTACKS

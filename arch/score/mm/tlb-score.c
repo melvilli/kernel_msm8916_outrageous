@@ -241,7 +241,11 @@ void __update_tlb(struct vm_area_struct *vma, unsigned long address, pte_t pte)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit tlb_init(void)
+=======
+void tlb_init(void)
+>>>>>>> v3.18
 =======
 void tlb_init(void)
 >>>>>>> v3.18

@@ -54,8 +54,11 @@
 static u16 ocfs2_calc_new_backup_super(struct inode *inode,
 				       struct ocfs2_group_desc *gd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       int new_clusters,
 				       u32 first_new_cluster,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				       u16 cl_cpg,
@@ -131,8 +134,11 @@ static int ocfs2_update_last_group_and_inode(handle_t *handle,
 		backups = ocfs2_calc_new_backup_super(bm_inode,
 						     group,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						     new_clusters,
 						     first_new_cluster,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 						     cl_cpg, 1);
@@ -164,7 +170,11 @@ static int ocfs2_update_last_group_and_inode(handle_t *handle,
 	spin_lock(&OCFS2_I(bm_inode)->ip_lock);
 	OCFS2_I(bm_inode)->ip_clusters = le32_to_cpu(fe->i_clusters);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	le64_add_cpu(&fe->i_size, new_clusters << osb->s_clustersize_bits);
+=======
+	le64_add_cpu(&fe->i_size, (u64)new_clusters << osb->s_clustersize_bits);
+>>>>>>> v3.18
 =======
 	le64_add_cpu(&fe->i_size, (u64)new_clusters << osb->s_clustersize_bits);
 >>>>>>> v3.18
@@ -178,8 +188,11 @@ out_rollback:
 		ocfs2_calc_new_backup_super(bm_inode,
 					    group,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    new_clusters,
 					    first_new_cluster,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					    cl_cpg, 0);
@@ -483,6 +496,10 @@ int ocfs2_group_add(struct inode *inode, struct ocfs2_new_group_input *input)
 	struct ocfs2_chain_rec *cr;
 	u16 cl_bpc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 bg_ptr;
+>>>>>>> v3.18
 =======
 	u64 bg_ptr;
 >>>>>>> v3.18
@@ -531,7 +548,11 @@ int ocfs2_group_add(struct inode *inode, struct ocfs2_new_group_input *input)
 	if (ret) {
 		mlog_errno(ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_unlock;
+=======
+		goto out_free_group_bh;
+>>>>>>> v3.18
 =======
 		goto out_free_group_bh;
 >>>>>>> v3.18
@@ -545,7 +566,11 @@ int ocfs2_group_add(struct inode *inode, struct ocfs2_new_group_input *input)
 		mlog_errno(PTR_ERR(handle));
 		ret = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_unlock;
+=======
+		goto out_free_group_bh;
+>>>>>>> v3.18
 =======
 		goto out_free_group_bh;
 >>>>>>> v3.18
@@ -564,6 +589,10 @@ int ocfs2_group_add(struct inode *inode, struct ocfs2_new_group_input *input)
 
 	group = (struct ocfs2_group_desc *)group_bh->b_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bg_ptr = le64_to_cpu(group->bg_next_group);
+>>>>>>> v3.18
 =======
 	bg_ptr = le64_to_cpu(group->bg_next_group);
 >>>>>>> v3.18
@@ -574,6 +603,10 @@ int ocfs2_group_add(struct inode *inode, struct ocfs2_new_group_input *input)
 				      main_bm_bh, OCFS2_JOURNAL_ACCESS_WRITE);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		group->bg_next_group = cpu_to_le64(bg_ptr);
+>>>>>>> v3.18
 =======
 		group->bg_next_group = cpu_to_le64(bg_ptr);
 >>>>>>> v3.18
@@ -600,7 +633,11 @@ int ocfs2_group_add(struct inode *inode, struct ocfs2_new_group_input *input)
 	spin_lock(&OCFS2_I(main_bm_inode)->ip_lock);
 	OCFS2_I(main_bm_inode)->ip_clusters = le32_to_cpu(fe->i_clusters);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	le64_add_cpu(&fe->i_size, input->clusters << osb->s_clustersize_bits);
+=======
+	le64_add_cpu(&fe->i_size, (u64)input->clusters << osb->s_clustersize_bits);
+>>>>>>> v3.18
 =======
 	le64_add_cpu(&fe->i_size, (u64)input->clusters << osb->s_clustersize_bits);
 >>>>>>> v3.18
@@ -612,14 +649,20 @@ int ocfs2_group_add(struct inode *inode, struct ocfs2_new_group_input *input)
 out_commit:
 	ocfs2_commit_trans(osb, handle);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_unlock:
 	brelse(group_bh);
 =======
+=======
+>>>>>>> v3.18
 
 out_free_group_bh:
 	brelse(group_bh);
 
 out_unlock:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	brelse(main_bm_bh);
 

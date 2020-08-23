@@ -25,7 +25,11 @@
 #define BHRB_TARGET		0x0000000000000002
 #define BHRB_PREDICTION		0x0000000000000001
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BHRB_EA			0xFFFFFFFFFFFFFFFC
+=======
+#define BHRB_EA			0xFFFFFFFFFFFFFFFCUL
+>>>>>>> v3.18
 =======
 #define BHRB_EA			0xFFFFFFFFFFFFFFFCUL
 >>>>>>> v3.18
@@ -41,14 +45,20 @@ struct cpu_hw_events {
 	u64 events[MAX_HWEVENTS];
 	unsigned int flags[MAX_HWEVENTS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long mmcr[3];
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The order of the MMCR array is:
 	 *  - 64-bit, MMCR0, MMCR1, MMCRA, MMCR2
 	 *  - 32-bit, MMCR0, MMCR1, MMCR2
 	 */
 	unsigned long mmcr[4];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct perf_event *limited_counter[MAX_LIMITED_HWCOUNTERS];
 	u8  limited_hwidx[MAX_LIMITED_HWCOUNTERS];
@@ -68,9 +78,15 @@ struct cpu_hw_events {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_PER_CPU(struct cpu_hw_events, cpu_hw_events);
 
 struct power_pmu *ppmu;
+=======
+static DEFINE_PER_CPU(struct cpu_hw_events, cpu_hw_events);
+
+static struct power_pmu *ppmu;
+>>>>>>> v3.18
 =======
 static DEFINE_PER_CPU(struct cpu_hw_events, cpu_hw_events);
 
@@ -97,11 +113,17 @@ static unsigned int freeze_events_kernel = MMCR0_FCS;
 #define MMCR0_FC56		0
 #define MMCR0_PMAO		0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MMCR0_EBE		0
 #define MMCR0_BHRBA		0
 #define MMCR0_PMCC		0
 #define MMCR0_PMCC_U6		0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SPRN_MMCRA		SPRN_MMCR2
@@ -131,11 +153,14 @@ static inline int siar_valid(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void power_pmu_bhrb_enable(struct perf_event *event) {}
 static inline void power_pmu_bhrb_disable(struct perf_event *event) {}
 void power_pmu_flush_branch_stack(void) {}
 static inline void power_pmu_bhrb_read(struct cpu_hw_events *cpuhw) {}
 =======
+=======
+>>>>>>> v3.18
 static bool is_ebb_event(struct perf_event *event) { return false; }
 static int ebb_event_check(struct perf_event *event) { return 0; }
 static void ebb_event_add(struct perf_event *event) { }
@@ -150,11 +175,15 @@ static inline void power_pmu_bhrb_disable(struct perf_event *event) {}
 static void power_pmu_flush_branch_stack(void) {}
 static inline void power_pmu_bhrb_read(struct cpu_hw_events *cpuhw) {}
 static void pmao_restore_workaround(bool ebb) { }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PPC32 */
 
 static bool regs_use_siar(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * When we take a performance monitor exception the regs are setup
@@ -166,6 +195,9 @@ static bool regs_use_siar(struct pt_regs *regs)
 	 * is something random.
 	 */
 	return ((TRAP(regs) == 0xf00) && regs->result);
+=======
+	return !!regs->result;
+>>>>>>> v3.18
 =======
 	return !!regs->result;
 >>>>>>> v3.18
@@ -413,7 +445,11 @@ static void power_pmu_bhrb_disable(struct perf_event *event)
  * mingle with the other process's entries during context switch.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void power_pmu_flush_branch_stack(void)
+=======
+static void power_pmu_flush_branch_stack(void)
+>>>>>>> v3.18
 =======
 static void power_pmu_flush_branch_stack(void)
 >>>>>>> v3.18
@@ -450,7 +486,11 @@ static __u64 power_pmu_bhrb_to(u64 addr)
 
 /* Processing BHRB entries */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void power_pmu_bhrb_read(struct cpu_hw_events *cpuhw)
+=======
+static void power_pmu_bhrb_read(struct cpu_hw_events *cpuhw)
+>>>>>>> v3.18
 =======
 static void power_pmu_bhrb_read(struct cpu_hw_events *cpuhw)
 >>>>>>> v3.18
@@ -529,6 +569,7 @@ static void power_pmu_bhrb_read(struct cpu_hw_events *cpuhw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_PPC64 */
 
 static void perf_event_interrupt(struct pt_regs *regs);
@@ -538,6 +579,8 @@ void perf_event_print_debug(void)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static bool is_ebb_event(struct perf_event *event)
 {
 	/*
@@ -731,6 +774,9 @@ static void pmao_restore_workaround(bool ebb)
 
 static void perf_event_interrupt(struct pt_regs *regs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Read one performance monitor counter (PMC).
@@ -811,7 +857,10 @@ static void write_pmc(int idx, unsigned long val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Called from sysrq_handle_showregs() */
 void perf_event_print_debug(void)
 {
@@ -863,6 +912,9 @@ void perf_event_print_debug(void)
 	local_irq_restore(flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Check if a set of events can all go on the PMU at once.
@@ -990,7 +1042,10 @@ static int check_excludes(struct perf_event **ctrs, unsigned int cflags[],
 	struct perf_event *event;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If the PMU we're on supports per event exclude settings then we
 	 * don't need to do any of this logic. NB. This assumes no PMU has both
@@ -999,6 +1054,9 @@ static int check_excludes(struct perf_event **ctrs, unsigned int cflags[],
 	if (ppmu->flags & PPMU_ARCH_207S)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	n = n_prev + n_new;
 	if (n <= 1)
@@ -1060,7 +1118,10 @@ static void power_pmu_read(struct perf_event *event)
 	if (!event->hw.idx)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (is_ebb_event(event)) {
 		val = read_pmc(event->hw.idx);
@@ -1068,6 +1129,9 @@ static void power_pmu_read(struct perf_event *event)
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Performance monitor interrupts come even when interrupts
@@ -1205,7 +1269,11 @@ static void power_pmu_disable(struct pmu *pmu)
 {
 	struct cpu_hw_events *cpuhw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags, val;
+=======
+	unsigned long flags, mmcr0, val;
+>>>>>>> v3.18
 =======
 	unsigned long flags, mmcr0, val;
 >>>>>>> v3.18
@@ -1226,18 +1294,24 @@ static void power_pmu_disable(struct pmu *pmu)
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Set the 'freeze counters' bit, clear PMAO/FC56.
 		 */
 		val  = mfspr(SPRN_MMCR0);
 		val |= MMCR0_FC;
 		val &= ~(MMCR0_PMAO | MMCR0_FC56);
 =======
+=======
+>>>>>>> v3.18
 		 * Set the 'freeze counters' bit, clear EBE/BHRBA/PMCC/PMAO/FC56
 		 */
 		val  = mmcr0 = mfspr(SPRN_MMCR0);
 		val |= MMCR0_FC;
 		val &= ~(MMCR0_EBE | MMCR0_BHRBA | MMCR0_PMCC | MMCR0_PMAO |
 			 MMCR0_FC56);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -1260,12 +1334,18 @@ static void power_pmu_disable(struct pmu *pmu)
 		cpuhw->disabled = 1;
 		cpuhw->n_added = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 =======
+=======
+>>>>>>> v3.18
 
 		ebb_switch_out(mmcr0);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	local_irq_restore(flags);
 }
@@ -1282,7 +1362,11 @@ static void power_pmu_enable(struct pmu *pmu)
 	unsigned long flags;
 	long i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long val;
+=======
+	unsigned long val, mmcr0;
+>>>>>>> v3.18
 =======
 	unsigned long val, mmcr0;
 >>>>>>> v3.18
@@ -1291,15 +1375,21 @@ static void power_pmu_enable(struct pmu *pmu)
 	int n_lim;
 	int idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!ppmu)
 		return;
 
 =======
+=======
+>>>>>>> v3.18
 	bool ebb;
 
 	if (!ppmu)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	local_irq_save(flags);
 
@@ -1316,7 +1406,10 @@ static void power_pmu_enable(struct pmu *pmu)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * EBB requires an exclusive group and all events must have the EBB
 	 * flag set, or not set, so we can just check a single event. Also we
 	 * know we have at least one event.
@@ -1324,6 +1417,9 @@ static void power_pmu_enable(struct pmu *pmu)
 	ebb = is_ebb_event(cpuhw->event[0]);
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * If we didn't change anything, or only removed events,
 	 * no need to recalculate MMCR* settings and reset the PMCs.
@@ -1338,23 +1434,30 @@ static void power_pmu_enable(struct pmu *pmu)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Compute MMCR* values for the new set of events
 	 */
 	if (ppmu->compute_mmcr(cpuhw->events, cpuhw->n_events, hwc_index,
 			       cpuhw->mmcr)) {
 =======
+=======
+>>>>>>> v3.18
 	 * Clear all MMCR settings and recompute them for the new set of events.
 	 */
 	memset(cpuhw->mmcr, 0, sizeof(cpuhw->mmcr));
 
 	if (ppmu->compute_mmcr(cpuhw->events, cpuhw->n_events, hwc_index,
 			       cpuhw->mmcr, cpuhw->event)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* shouldn't ever get here */
 		printk(KERN_ERR "oops compute_mmcr failed\n");
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Add in MMCR0 freeze bits corresponding to the
@@ -1370,6 +1473,8 @@ static void power_pmu_enable(struct pmu *pmu)
 	if (event->attr.exclude_hv)
 		cpuhw->mmcr[0] |= MMCR0_FCHV;
 =======
+=======
+>>>>>>> v3.18
 	if (!(ppmu->flags & PPMU_ARCH_207S)) {
 		/*
 		 * Add in MMCR0 freeze bits corresponding to the attr.exclude_*
@@ -1384,6 +1489,9 @@ static void power_pmu_enable(struct pmu *pmu)
 		if (event->attr.exclude_hv)
 			cpuhw->mmcr[0] |= MMCR0_FCHV;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1397,6 +1505,11 @@ static void power_pmu_enable(struct pmu *pmu)
 	mtspr(SPRN_MMCR0, (cpuhw->mmcr[0] & ~(MMCR0_PMC1CE | MMCR0_PMCjCE))
 				| MMCR0_FC);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ppmu->flags & PPMU_ARCH_207S)
+		mtspr(SPRN_MMCR2, cpuhw->mmcr[3]);
+>>>>>>> v3.18
 =======
 	if (ppmu->flags & PPMU_ARCH_207S)
 		mtspr(SPRN_MMCR2, cpuhw->mmcr[3]);
@@ -1431,6 +1544,7 @@ static void power_pmu_enable(struct pmu *pmu)
 			continue;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = 0;
 		if (event->hw.sample_period) {
 			left = local64_read(&event->hw.period_left);
@@ -1439,6 +1553,8 @@ static void power_pmu_enable(struct pmu *pmu)
 		}
 		local64_set(&event->hw.prev_count, val);
 =======
+=======
+>>>>>>> v3.18
 
 		if (ebb)
 			val = local64_read(&event->hw.prev_count);
@@ -1452,12 +1568,19 @@ static void power_pmu_enable(struct pmu *pmu)
 			local64_set(&event->hw.prev_count, val);
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		event->hw.idx = idx;
 		if (event->hw.state & PERF_HES_STOPPED)
 			val = 0;
 		write_pmc(idx, val);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1468,9 +1591,12 @@ static void power_pmu_enable(struct pmu *pmu)
 
  out_enable:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mb();
 	write_mmcr0(cpuhw, cpuhw->mmcr[0]);
 =======
+=======
+>>>>>>> v3.18
 	pmao_restore_workaround(ebb);
 
 	mmcr0 = ebb_switch_in(ebb, cpuhw);
@@ -1480,6 +1606,9 @@ static void power_pmu_enable(struct pmu *pmu)
 		ppmu->config_bhrb(cpuhw->bhrb_filter);
 
 	write_mmcr0(cpuhw, mmcr0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1492,8 +1621,11 @@ static void power_pmu_enable(struct pmu *pmu)
 
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpuhw->bhrb_users)
 		ppmu->config_bhrb(cpuhw->bhrb_filter);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1582,6 +1714,11 @@ static int power_pmu_add(struct perf_event *event, int ef_flags)
 
 nocheck:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ebb_event_add(event);
+
+>>>>>>> v3.18
 =======
 	ebb_event_add(event);
 
@@ -1592,14 +1729,20 @@ nocheck:
 	ret = 0;
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (has_branch_stack(event))
 		power_pmu_bhrb_enable(event);
 =======
+=======
+>>>>>>> v3.18
 	if (has_branch_stack(event)) {
 		power_pmu_bhrb_enable(event);
 		cpuhw->bhrb_filter = ppmu->bhrb_filter_map(
 					event->attr.branch_sample_type);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	perf_pmu_enable(event->pmu);
@@ -1726,7 +1869,11 @@ static void power_pmu_stop(struct perf_event *event, int ef_flags)
  * schedulability test, it will be performed at commit time
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void power_pmu_start_txn(struct pmu *pmu)
+=======
+static void power_pmu_start_txn(struct pmu *pmu)
+>>>>>>> v3.18
 =======
 static void power_pmu_start_txn(struct pmu *pmu)
 >>>>>>> v3.18
@@ -1744,7 +1891,11 @@ static void power_pmu_start_txn(struct pmu *pmu)
  * schedulability test.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void power_pmu_cancel_txn(struct pmu *pmu)
+=======
+static void power_pmu_cancel_txn(struct pmu *pmu)
+>>>>>>> v3.18
 =======
 static void power_pmu_cancel_txn(struct pmu *pmu)
 >>>>>>> v3.18
@@ -1761,7 +1912,11 @@ static void power_pmu_cancel_txn(struct pmu *pmu)
  * Return 0 if success
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int power_pmu_commit_txn(struct pmu *pmu)
+=======
+static int power_pmu_commit_txn(struct pmu *pmu)
+>>>>>>> v3.18
 =======
 static int power_pmu_commit_txn(struct pmu *pmu)
 >>>>>>> v3.18
@@ -1810,9 +1965,12 @@ static int can_go_on_limited_pmc(struct perf_event *event, u64 ev,
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ppmu->flags & PPMU_ARCH_207S)
 		mtspr(SPRN_MMCR2, 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1973,12 +2131,18 @@ static int power_pmu_event_init(struct perf_event *event)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Extra checks for EBB */
 	err = ebb_event_check(event);
 	if (err)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * If this is in a group, check if it can go on with all the
@@ -2020,7 +2184,10 @@ static int power_pmu_event_init(struct perf_event *event)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * For EBB events we just context switch the PMC value, we don't do any
 	 * of the sample_period logic. We use hw.prev_count for this.
 	 */
@@ -2028,6 +2195,9 @@ static int power_pmu_event_init(struct perf_event *event)
 		local64_set(&event->hw.prev_count, 0);
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * See if we need to reserve the PMU.
 	 * If no events are currently in use, then we have to take a
@@ -2065,7 +2235,11 @@ ssize_t power_events_sysfs_show(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pmu power_pmu = {
+=======
+static struct pmu power_pmu = {
+>>>>>>> v3.18
 =======
 static struct pmu power_pmu = {
 >>>>>>> v3.18
@@ -2309,7 +2483,11 @@ static void power_pmu_setup(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -2330,7 +2508,11 @@ power_pmu_notifier(struct notifier_block *self, unsigned long action, void *hcpu
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit register_power_pmu(struct power_pmu *pmu)
+=======
+int register_power_pmu(struct power_pmu *pmu)
+>>>>>>> v3.18
 =======
 int register_power_pmu(struct power_pmu *pmu)
 >>>>>>> v3.18

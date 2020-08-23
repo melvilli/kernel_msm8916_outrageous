@@ -26,7 +26,11 @@ struct drr_class {
 	struct gnet_stats_basic_packed		bstats;
 	struct gnet_stats_queue		qstats;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gnet_stats_rate_est	rate_est;
+=======
+	struct gnet_stats_rate_est64	rate_est;
+>>>>>>> v3.18
 =======
 	struct gnet_stats_rate_est64	rate_est;
 >>>>>>> v3.18
@@ -40,7 +44,11 @@ struct drr_class {
 struct drr_sched {
 	struct list_head		active;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcf_proto		*filter_list;
+=======
+	struct tcf_proto __rcu		*filter_list;
+>>>>>>> v3.18
 =======
 	struct tcf_proto __rcu		*filter_list;
 >>>>>>> v3.18
@@ -97,7 +105,12 @@ static int drr_change_class(struct Qdisc *sch, u32 classid, u32 parentid,
 	if (cl != NULL) {
 		if (tca[TCA_RATE]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = gen_replace_estimator(&cl->bstats, &cl->rate_est,
+=======
+			err = gen_replace_estimator(&cl->bstats, NULL,
+						    &cl->rate_est,
+>>>>>>> v3.18
 =======
 			err = gen_replace_estimator(&cl->bstats, NULL,
 						    &cl->rate_est,
@@ -130,7 +143,11 @@ static int drr_change_class(struct Qdisc *sch, u32 classid, u32 parentid,
 
 	if (tca[TCA_RATE]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = gen_replace_estimator(&cl->bstats, &cl->rate_est,
+=======
+		err = gen_replace_estimator(&cl->bstats, NULL, &cl->rate_est,
+>>>>>>> v3.18
 =======
 		err = gen_replace_estimator(&cl->bstats, NULL, &cl->rate_est,
 >>>>>>> v3.18
@@ -202,7 +219,12 @@ static void drr_put_class(struct Qdisc *sch, unsigned long arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_proto **drr_tcf_chain(struct Qdisc *sch, unsigned long cl)
+=======
+static struct tcf_proto __rcu **drr_tcf_chain(struct Qdisc *sch,
+					      unsigned long cl)
+>>>>>>> v3.18
 =======
 static struct tcf_proto __rcu **drr_tcf_chain(struct Qdisc *sch,
 					      unsigned long cl)
@@ -296,6 +318,7 @@ static int drr_dump_class_stats(struct Qdisc *sch, unsigned long arg,
 {
 	struct drr_class *cl = (struct drr_class *)arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc_drr_stats xstats;
 
 	memset(&xstats, 0, sizeof(xstats));
@@ -308,6 +331,8 @@ static int drr_dump_class_stats(struct Qdisc *sch, unsigned long arg,
 	    gnet_stats_copy_rate_est(d, &cl->bstats, &cl->rate_est) < 0 ||
 	    gnet_stats_copy_queue(d, &cl->qdisc->qstats) < 0)
 =======
+=======
+>>>>>>> v3.18
 	__u32 qlen = cl->qdisc->q.qlen;
 	struct tc_drr_stats xstats;
 
@@ -318,6 +343,9 @@ static int drr_dump_class_stats(struct Qdisc *sch, unsigned long arg,
 	if (gnet_stats_copy_basic(d, NULL, &cl->bstats) < 0 ||
 	    gnet_stats_copy_rate_est(d, &cl->bstats, &cl->rate_est) < 0 ||
 	    gnet_stats_copy_queue(d, NULL, &cl->qdisc->qstats, qlen) < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -1;
 
@@ -355,6 +383,10 @@ static struct drr_class *drr_classify(struct sk_buff *skb, struct Qdisc *sch,
 	struct drr_class *cl;
 	struct tcf_result res;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tcf_proto *fl;
+>>>>>>> v3.18
 =======
 	struct tcf_proto *fl;
 >>>>>>> v3.18
@@ -368,7 +400,12 @@ static struct drr_class *drr_classify(struct sk_buff *skb, struct Qdisc *sch,
 
 	*qerr = NET_XMIT_SUCCESS | __NET_XMIT_BYPASS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = tc_classify(skb, q->filter_list, &res);
+=======
+	fl = rcu_dereference_bh(q->filter_list);
+	result = tc_classify(skb, fl, &res);
+>>>>>>> v3.18
 =======
 	fl = rcu_dereference_bh(q->filter_list);
 	result = tc_classify(skb, fl, &res);
@@ -401,7 +438,11 @@ static int drr_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	if (cl == NULL) {
 		if (err & __NET_XMIT_BYPASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.drops++;
+=======
+			qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -414,7 +455,11 @@ static int drr_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 		if (net_xmit_drop_count(err)) {
 			cl->qstats.drops++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.drops++;
+=======
+			qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -444,13 +489,19 @@ static struct sk_buff *drr_dequeue(struct Qdisc *sch)
 		cl = list_first_entry(&q->active, struct drr_class, alist);
 		skb = cl->qdisc->ops->peek(cl->qdisc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (skb == NULL)
 			goto out;
 =======
+=======
+>>>>>>> v3.18
 		if (skb == NULL) {
 			qdisc_warn_nonwc(__func__, cl->qdisc);
 			goto out;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		len = qdisc_pkt_len(skb);

@@ -48,7 +48,11 @@ static void line6_midi_transmit(struct snd_rawmidi_substream *substream)
 	struct midi_buffer *mb = &line6midi->midibuf_out;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char chunk[line6->max_packet_size];
+=======
+	unsigned char chunk[LINE6_FALLBACK_MAXPACKETSIZE];
+>>>>>>> v3.18
 =======
 	unsigned char chunk[LINE6_FALLBACK_MAXPACKETSIZE];
 >>>>>>> v3.18
@@ -69,7 +73,12 @@ static void line6_midi_transmit(struct snd_rawmidi_substream *substream)
 
 	for (;;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		done = line6_midibuf_read(mb, chunk, line6->max_packet_size);
+=======
+		done = line6_midibuf_read(mb, chunk,
+					  LINE6_FALLBACK_MAXPACKETSIZE);
+>>>>>>> v3.18
 =======
 		done = line6_midibuf_read(mb, chunk,
 					  LINE6_FALLBACK_MAXPACKETSIZE);
@@ -154,7 +163,11 @@ static int send_midi_async(struct usb_line6 *line6, unsigned char *data,
 		dev_err(line6->ifcdev, "usb_submit_urb failed\n");
 		usb_free_urb(urb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return retval;
+>>>>>>> v3.18
 =======
 		return retval;
 >>>>>>> v3.18
@@ -196,6 +209,10 @@ static void line6_midi_output_drain(struct snd_rawmidi_substream *substream)
 	    line6_rawmidi_substream_midi(substream)->line6;
 	struct snd_line6_midi *midi = line6->line6midi;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -223,7 +240,11 @@ static void line6_midi_input_trigger(struct snd_rawmidi_substream *substream,
 		line6->line6midi->substream_receive = substream;
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		line6->line6midi->substream_receive = 0;
+=======
+		line6->line6midi->substream_receive = NULL;
+>>>>>>> v3.18
 =======
 		line6->line6midi->substream_receive = NULL;
 >>>>>>> v3.18
@@ -281,6 +302,10 @@ static int snd_line6_midi_free(struct snd_device *device)
 {
 	struct snd_line6_midi *line6midi = device->device_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -333,8 +358,11 @@ int line6_init_midi(struct usb_line6 *line6)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(line6->card, line6->ifcdev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = snd_line6_new_midi(line6midi);

@@ -68,7 +68,11 @@ static int fscache_max_active_sysctl(struct ctl_table *table, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ctl_table fscache_sysctls[] = {
+=======
+static struct ctl_table fscache_sysctls[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table fscache_sysctls[] = {
 >>>>>>> v3.18
@@ -92,7 +96,11 @@ static struct ctl_table fscache_sysctls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ctl_table fscache_sysctls_root[] = {
+=======
+static struct ctl_table fscache_sysctls_root[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table fscache_sysctls_root[] = {
 >>>>>>> v3.18
@@ -155,8 +163,12 @@ static int __init fscache_init(void)
 					       fscache_cookie_init_once);
 	if (!fscache_cookie_jar) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_NOTICE
 		       "FS-Cache: Failed to allocate a cookie jar\n");
+=======
+		pr_notice("Failed to allocate a cookie jar\n");
+>>>>>>> v3.18
 =======
 		pr_notice("Failed to allocate a cookie jar\n");
 >>>>>>> v3.18
@@ -169,7 +181,11 @@ static int __init fscache_init(void)
 		goto error_kobj;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_NOTICE "FS-Cache: Loaded\n");
+=======
+	pr_notice("Loaded\n");
+>>>>>>> v3.18
 =======
 	pr_notice("Loaded\n");
 >>>>>>> v3.18
@@ -209,7 +225,11 @@ static void __exit fscache_exit(void)
 	destroy_workqueue(fscache_op_wq);
 	destroy_workqueue(fscache_object_wq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_NOTICE "FS-Cache: Unloaded\n");
+=======
+	pr_notice("Unloaded\n");
+>>>>>>> v3.18
 =======
 	pr_notice("Unloaded\n");
 >>>>>>> v3.18
@@ -219,9 +239,15 @@ module_exit(fscache_exit);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * wait_on_bit() sleep function for uninterruptible waiting
  */
 int fscache_wait_bit(void *flags)
+=======
+ * wait_on_atomic_t() sleep function for uninterruptible waiting
+ */
+int fscache_wait_atomic_t(atomic_t *p)
+>>>>>>> v3.18
 =======
  * wait_on_atomic_t() sleep function for uninterruptible waiting
  */
@@ -231,6 +257,7 @@ int fscache_wait_atomic_t(atomic_t *p)
 	schedule();
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL(fscache_wait_bit);
 
@@ -243,5 +270,7 @@ int fscache_wait_bit_interruptible(void *flags)
 	return signal_pending(current);
 }
 EXPORT_SYMBOL(fscache_wait_bit_interruptible);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

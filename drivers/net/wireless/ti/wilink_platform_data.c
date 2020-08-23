@@ -24,25 +24,36 @@
 #include <linux/wl12xx.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct wl12xx_platform_data *platform_data;
 
 int __init wl12xx_set_platform_data(const struct wl12xx_platform_data *data)
 {
 	if (platform_data)
 =======
+=======
+>>>>>>> v3.18
 static struct wl12xx_platform_data *wl12xx_platform_data;
 
 int __init wl12xx_set_platform_data(const struct wl12xx_platform_data *data)
 {
 	if (wl12xx_platform_data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EBUSY;
 	if (!data)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_data = kmemdup(data, sizeof(*data), GFP_KERNEL);
 	if (!platform_data)
+=======
+	wl12xx_platform_data = kmemdup(data, sizeof(*data), GFP_KERNEL);
+	if (!wl12xx_platform_data)
+>>>>>>> v3.18
 =======
 	wl12xx_platform_data = kmemdup(data, sizeof(*data), GFP_KERNEL);
 	if (!wl12xx_platform_data)
@@ -55,6 +66,7 @@ int __init wl12xx_set_platform_data(const struct wl12xx_platform_data *data)
 struct wl12xx_platform_data *wl12xx_get_platform_data(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!platform_data)
 		return ERR_PTR(-ENODEV);
 
@@ -62,6 +74,8 @@ struct wl12xx_platform_data *wl12xx_get_platform_data(void)
 }
 EXPORT_SYMBOL(wl12xx_get_platform_data);
 =======
+=======
+>>>>>>> v3.18
 	if (!wl12xx_platform_data)
 		return ERR_PTR(-ENODEV);
 
@@ -93,4 +107,7 @@ struct wl1251_platform_data *wl1251_get_platform_data(void)
 	return wl1251_platform_data;
 }
 EXPORT_SYMBOL(wl1251_get_platform_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

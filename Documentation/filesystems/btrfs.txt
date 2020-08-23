@@ -39,7 +39,11 @@ Mount Options
 
 When mounting a btrfs filesystem, the following option are accepted.
 <<<<<<< HEAD
+<<<<<<< HEAD
 Unless otherwise specified, all options default to off.
+=======
+Options with (*) are default options and will not show in the mount options.
+>>>>>>> v3.18
 =======
 Options with (*) are default options and will not show in the mount options.
 >>>>>>> v3.18
@@ -51,17 +55,23 @@ Options with (*) are default options and will not show in the mount options.
 	Default is 1MB.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   autodefrag
 	Detect small random writes into files and queue them up for the
 	defrag process.  Works best for small files; Not well suited for
 	large database workloads.
 =======
+=======
+>>>>>>> v3.18
   noautodefrag(*)
   autodefrag
 	Disable/enable auto defragmentation.
 	Auto defragmentation detects small random writes into files and queue
 	them up for the defrag process.  Works best for small files;
 	Not well suited for large database workloads.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   check_int
@@ -84,13 +94,19 @@ Options with (*) are default options and will not show in the mount options.
 	See comments at the top of fs/btrfs/check-integrity.c for more info.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   commit=<seconds>
 	Set the interval of periodic commit, 30 seconds by default. Higher
 	values defer data being synced to permanent storage with obvious
 	consequences when the system crashes. The upper bound is not forced,
 	but a warning is printed if it's more than 300 seconds (5 minutes).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   compress
   compress=<type>
@@ -110,6 +126,7 @@ Options with (*) are default options and will not show in the mount options.
   device=<devicepath>
 	Specify a device during mount so that ioctls on the control device
 <<<<<<< HEAD
+<<<<<<< HEAD
 	can be avoided.  Especialy useful when trying to mount a multi-device
 	setup as root.  May be specified multiple times for multiple devices.
 
@@ -117,6 +134,8 @@ Options with (*) are default options and will not show in the mount options.
 	Issue frequent commands to let the block device reclaim space freed by
 	the filesystem.  This is useful for SSD devices, thinly provisioned
 =======
+=======
+>>>>>>> v3.18
 	can be avoided.  Especially useful when trying to mount a multi-device
 	setup as root.  May be specified multiple times for multiple devices.
 
@@ -126,14 +145,23 @@ Options with (*) are default options and will not show in the mount options.
 	Discard issues frequent commands to let the block device reclaim space
 	freed by the filesystem.
 	This is useful for SSD devices, thinly provisioned
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	LUNs and virtual machine images, but may have a significant
 	performance impact.  (The fstrim command is also available to
 	initiate batch trims from userspace).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   enospc_debug
 	Debugging option to be more verbose in some ENOSPC conditions.
+=======
+  noenospc_debug(*)
+  enospc_debug
+	Disable/enable debugging option to be more verbose in some ENOSPC conditions.
+>>>>>>> v3.18
 =======
   noenospc_debug(*)
   enospc_debug
@@ -146,6 +174,10 @@ Options with (*) are default options and will not show in the mount options.
 	  "panic" - panic() on a fatal error.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  noflushoncommit(*)
+>>>>>>> v3.18
 =======
   noflushoncommit(*)
 >>>>>>> v3.18
@@ -173,6 +205,7 @@ Options with (*) are default options and will not show in the mount options.
 	data chunks.  Off by default.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   noacl
 	Disable support for Posix Access Control Lists (ACLs).  See the
 	acl(5) manual page for more information about ACLs.
@@ -194,6 +227,8 @@ Options with (*) are default options and will not show in the mount options.
   notreelog
 	Disable the tree logging used for fsync and O_SYNC writes.
 =======
+=======
+>>>>>>> v3.18
   acl(*)
   noacl
 	Enable/disable support for Posix Access Control Lists (ACLs).  See the
@@ -220,6 +255,9 @@ Options with (*) are default options and will not show in the mount options.
   treelog(*)
   notreelog
 	Enable/disable the tree logging used for fsync and O_SYNC writes.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   recovery
@@ -228,13 +266,19 @@ Options with (*) are default options and will not show in the mount options.
 	use the first readable.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  skip_balance
 =======
+=======
+>>>>>>> v3.18
   rescan_uuid_tree
 	Force check and rebuild procedure of the UUID tree. This should not
 	normally be needed.
 
   skip_balance
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	Skip automatic resume of interrupted balance operation after mount.
 	May be resumed with "btrfs balance resume."
@@ -316,6 +360,7 @@ available from the git repository at the following location:
 These include the following tools:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 mkfs.btrfs: create a filesystem
 
 btrfsctl: control program to create snapshots and subvolumes:
@@ -338,6 +383,8 @@ btrfs-debug-tree: print all of the FS metadata in text form.  Example:
 
 	btrfs-debug-tree /dev/sda2 >& big_output_file
 =======
+=======
+>>>>>>> v3.18
 * mkfs.btrfs: create a filesystem
 
 * btrfs: a single tool to manage the filesystems, refer to the manpage for more details
@@ -349,4 +396,7 @@ Other tools for specific tasks:
 * btrfs-convert: in-place conversion from ext2/3/4 filesystems
 
 * btrfs-image: dump filesystem metadata for debugging
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

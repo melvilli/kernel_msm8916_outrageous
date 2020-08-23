@@ -30,6 +30,7 @@
 
 #define IPT_TAB_MASK     15
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_common *tcf_ipt_ht[IPT_TAB_MASK + 1];
 static u32 ipt_idx_gen;
 static DEFINE_RWLOCK(ipt_lock);
@@ -39,6 +40,8 @@ static struct tcf_hashinfo ipt_hash_info = {
 	.hmask	=	IPT_TAB_MASK,
 	.lock	=	&ipt_lock,
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -81,6 +84,7 @@ static void ipt_destroy_target(struct xt_entry_target *t)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tcf_ipt_release(struct tcf_ipt *ipt, int bind)
 {
 	int ret = 0;
@@ -98,12 +102,17 @@ static int tcf_ipt_release(struct tcf_ipt *ipt, int bind)
 	}
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static void tcf_ipt_release(struct tc_action *a, int bind)
 {
 	struct tcf_ipt *ipt = to_ipt(a);
 	ipt_destroy_target(ipt->tcfi_t);
 	kfree(ipt->tcfi_tname);
 	kfree(ipt->tcfi_t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -120,7 +129,10 @@ static int tcf_ipt_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 	struct nlattr *tb[TCA_IPT_MAX + 1];
 	struct tcf_ipt *ipt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcf_common *pc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct xt_entry_target *td, *t;
@@ -149,6 +161,7 @@ static int tcf_ipt_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 		index = nla_get_u32(tb[TCA_IPT_INDEX]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pc = tcf_hash_check(index, a, bind, &ipt_hash_info);
 	if (!pc) {
 		pc = tcf_hash_create(index, est, a, sizeof(*ipt), bind,
@@ -164,6 +177,8 @@ static int tcf_ipt_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 	}
 	ipt = to_ipt(pc);
 =======
+=======
+>>>>>>> v3.18
 	if (!tcf_hash_check(index, a, bind) ) {
 		ret = tcf_hash_create(index, est, a, sizeof(*ipt), bind);
 		if (ret)
@@ -178,6 +193,9 @@ static int tcf_ipt_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 			return -EEXIST;
 	}
 	ipt = to_ipt(a);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hook = nla_get_u32(tb[TCA_IPT_HOOK]);
@@ -210,7 +228,11 @@ static int tcf_ipt_init(struct net *net, struct nlattr *nla, struct nlattr *est,
 	spin_unlock_bh(&ipt->tcf_lock);
 	if (ret == ACT_P_CREATED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcf_hash_insert(pc, &ipt_hash_info);
+=======
+		tcf_hash_insert(a);
+>>>>>>> v3.18
 =======
 		tcf_hash_insert(a);
 >>>>>>> v3.18
@@ -221,6 +243,7 @@ err3:
 err2:
 	kfree(tname);
 err1:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ret == ACT_P_CREATED) {
 		if (est)
@@ -238,11 +261,16 @@ static int tcf_ipt_cleanup(struct tc_action *a, int bind)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (ret == ACT_P_CREATED)
 		tcf_hash_cleanup(a, est);
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int tcf_ipt(struct sk_buff *skb, const struct tc_action *a,
 		   struct tcf_result *res)
@@ -336,28 +364,6 @@ nla_put_failure:
 static struct tc_action_ops act_ipt_ops = {
 	.kind		=	"ipt",
 <<<<<<< HEAD
-	.hinfo		=	&ipt_hash_info,
-	.type		=	TCA_ACT_IPT,
-	.capab		=	TCA_CAP_NONE,
-	.owner		=	THIS_MODULE,
-	.act		=	tcf_ipt,
-	.dump		=	tcf_ipt_dump,
-	.cleanup	=	tcf_ipt_cleanup,
-	.lookup		=	tcf_hash_search,
-	.init		=	tcf_ipt_init,
-	.walk		=	tcf_generic_walker
-=======
-	.type		=	TCA_ACT_IPT,
-	.owner		=	THIS_MODULE,
-	.act		=	tcf_ipt,
-	.dump		=	tcf_ipt_dump,
-	.cleanup	=	tcf_ipt_release,
-	.init		=	tcf_ipt_init,
->>>>>>> v3.18
-};
-
-static struct tc_action_ops act_xt_ops = {
-	.kind		=	"xt",
 <<<<<<< HEAD
 	.hinfo		=	&ipt_hash_info,
 	.type		=	TCA_ACT_IPT,
@@ -370,12 +376,46 @@ static struct tc_action_ops act_xt_ops = {
 	.init		=	tcf_ipt_init,
 	.walk		=	tcf_generic_walker
 =======
+=======
+>>>>>>> v3.18
+	.type		=	TCA_ACT_IPT,
+	.owner		=	THIS_MODULE,
+	.act		=	tcf_ipt,
+	.dump		=	tcf_ipt_dump,
+	.cleanup	=	tcf_ipt_release,
+	.init		=	tcf_ipt_init,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
+>>>>>>> v3.18
+};
+
+static struct tc_action_ops act_xt_ops = {
+	.kind		=	"xt",
+<<<<<<< HEAD
+<<<<<<< HEAD
+	.hinfo		=	&ipt_hash_info,
+	.type		=	TCA_ACT_IPT,
+	.capab		=	TCA_CAP_NONE,
+	.owner		=	THIS_MODULE,
+	.act		=	tcf_ipt,
+	.dump		=	tcf_ipt_dump,
+	.cleanup	=	tcf_ipt_cleanup,
+	.lookup		=	tcf_hash_search,
+	.init		=	tcf_ipt_init,
+	.walk		=	tcf_generic_walker
+=======
+=======
+>>>>>>> v3.18
 	.type		=	TCA_ACT_XT,
 	.owner		=	THIS_MODULE,
 	.act		=	tcf_ipt,
 	.dump		=	tcf_ipt_dump,
 	.cleanup	=	tcf_ipt_release,
 	.init		=	tcf_ipt_init,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -388,6 +428,7 @@ static int __init ipt_init_module(void)
 {
 	int ret1, ret2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret1 = tcf_register_action(&act_xt_ops);
 	if (ret1 < 0)
 		printk("Failed to load xt action\n");
@@ -399,6 +440,8 @@ static int __init ipt_init_module(void)
 		return ret1;
 	else
 =======
+=======
+>>>>>>> v3.18
 
 	ret1 = tcf_register_action(&act_xt_ops, IPT_TAB_MASK);
 	if (ret1 < 0)
@@ -410,6 +453,9 @@ static int __init ipt_init_module(void)
 	if (ret1 < 0 && ret2 < 0) {
 		return ret1;
 	} else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 }

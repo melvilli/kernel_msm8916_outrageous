@@ -140,7 +140,12 @@ static inline void gpio_free(unsigned gpio)
 #if defined(CONFIG_M520x) || defined(CONFIG_M523x) || \
     defined(CONFIG_M527x) || defined(CONFIG_M528x) || \
 <<<<<<< HEAD
+<<<<<<< HEAD
     defined(CONFIG_M53xx) || defined(CONFIG_M5441x)
+=======
+    defined(CONFIG_M53xx) || defined(CONFIG_M54xx) || \
+    defined(CONFIG_M5441x)
+>>>>>>> v3.18
 =======
     defined(CONFIG_M53xx) || defined(CONFIG_M54xx) || \
     defined(CONFIG_M5441x)
@@ -201,7 +206,12 @@ static inline u32 __mcfgpio_ppdr(unsigned gpio)
 #elif defined(CONFIG_M520x) || defined(CONFIG_M523x) || \
       defined(CONFIG_M527x) || defined(CONFIG_M528x) || \
 <<<<<<< HEAD
+<<<<<<< HEAD
       defined(CONFIG_M53xx) || defined(CONFIG_M5441x)
+=======
+      defined(CONFIG_M53xx) || defined(CONFIG_M54xx) || \
+      defined(CONFIG_M5441x)
+>>>>>>> v3.18
 =======
       defined(CONFIG_M53xx) || defined(CONFIG_M54xx) || \
       defined(CONFIG_M5441x)
@@ -248,7 +258,12 @@ static inline u32 __mcfgpio_podr(unsigned gpio)
 #elif defined(CONFIG_M520x) || defined(CONFIG_M523x) || \
       defined(CONFIG_M527x) || defined(CONFIG_M528x) || \
 <<<<<<< HEAD
+<<<<<<< HEAD
       defined(CONFIG_M53xx) || defined(CONFIG_M5441x)
+=======
+      defined(CONFIG_M53xx) || defined(CONFIG_M54xx) || \
+      defined(CONFIG_M5441x)
+>>>>>>> v3.18
 =======
       defined(CONFIG_M53xx) || defined(CONFIG_M54xx) || \
       defined(CONFIG_M5441x)
@@ -295,7 +310,12 @@ static inline u32 __mcfgpio_pddr(unsigned gpio)
 #elif defined(CONFIG_M520x) || defined(CONFIG_M523x) || \
       defined(CONFIG_M527x) || defined(CONFIG_M528x) || \
 <<<<<<< HEAD
+<<<<<<< HEAD
       defined(CONFIG_M53xx) || defined(CONFIG_M5441x)
+=======
+      defined(CONFIG_M53xx) || defined(CONFIG_M54xx) || \
+      defined(CONFIG_M5441x)
+>>>>>>> v3.18
 =======
       defined(CONFIG_M53xx) || defined(CONFIG_M54xx) || \
       defined(CONFIG_M5441x)

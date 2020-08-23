@@ -19,6 +19,12 @@ struct ifaddrmsg {
  * but for point-to-point IFA_ADDRESS is DESTINATION address,
  * local address is supplied in IFA_LOCAL attribute.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * IFA_FLAGS is a u32 attribute that extends the u8 field ifa_flags.
+ * If present, the value from struct ifaddrmsg will be ignored.
+>>>>>>> v3.18
 =======
  *
  * IFA_FLAGS is a u32 attribute that extends the u8 field ifa_flags.
@@ -35,6 +41,10 @@ enum {
 	IFA_CACHEINFO,
 	IFA_MULTICAST,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IFA_FLAGS,
+>>>>>>> v3.18
 =======
 	IFA_FLAGS,
 >>>>>>> v3.18
@@ -55,6 +65,11 @@ enum {
 #define IFA_F_TENTATIVE		0x40
 #define IFA_F_PERMANENT		0x80
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IFA_F_MANAGETEMPADDR	0x100
+#define IFA_F_NOPREFIXROUTE	0x200
+>>>>>>> v3.18
 =======
 #define IFA_F_MANAGETEMPADDR	0x100
 #define IFA_F_NOPREFIXROUTE	0x200

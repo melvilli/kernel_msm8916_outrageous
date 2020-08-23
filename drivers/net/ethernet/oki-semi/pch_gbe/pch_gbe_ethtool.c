@@ -15,8 +15,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -97,7 +101,11 @@ static int pch_gbe_get_settings(struct net_device *netdev,
 
 	if (!netif_carrier_ok(adapter->netdev))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(ecmd, -1);
+=======
+		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
+>>>>>>> v3.18
 =======
 		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
 >>>>>>> v3.18
@@ -127,6 +135,10 @@ static int pch_gbe_set_settings(struct net_device *netdev,
 	if (speed == UINT_MAX) {
 		speed = SPEED_1000;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ethtool_cmd_speed_set(ecmd, speed);
+>>>>>>> v3.18
 =======
 		ethtool_cmd_speed_set(ecmd, speed);
 >>>>>>> v3.18
@@ -135,7 +147,11 @@ static int pch_gbe_set_settings(struct net_device *netdev,
 	ret = mii_ethtool_sset(&adapter->mii, ecmd);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Error: mii_ethtool_sset\n");
+=======
+		netdev_err(netdev, "Error: mii_ethtool_sset\n");
+>>>>>>> v3.18
 =======
 		netdev_err(netdev, "Error: mii_ethtool_sset\n");
 >>>>>>> v3.18
@@ -525,7 +541,11 @@ static const struct ethtool_ops pch_gbe_ethtool_ops = {
 void pch_gbe_set_ethtool_ops(struct net_device *netdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &pch_gbe_ethtool_ops);
+=======
+	netdev->ethtool_ops = &pch_gbe_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &pch_gbe_ethtool_ops;
 >>>>>>> v3.18

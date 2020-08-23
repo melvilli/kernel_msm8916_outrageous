@@ -176,7 +176,11 @@ static const struct file_operations dump_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void oprofile_create_files(struct super_block *sb, struct dentry *root)
+=======
+void oprofile_create_files(struct dentry *root)
+>>>>>>> v3.18
 =======
 void oprofile_create_files(struct dentry *root)
 >>>>>>> v3.18
@@ -187,6 +191,7 @@ void oprofile_create_files(struct dentry *root)
 	oprofile_buffer_watershed =	BUFFER_WATERSHED_DEFAULT;
 	oprofile_time_slice =		msecs_to_jiffies(TIME_SLICE_DEFAULT);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	oprofilefs_create_file(sb, root, "enable", &enable_fops);
 	oprofilefs_create_file_perm(sb, root, "dump", &dump_fops, 0666);
@@ -204,6 +209,8 @@ void oprofile_create_files(struct dentry *root)
 	if (oprofile_ops.create_files)
 		oprofile_ops.create_files(sb, root);
 =======
+=======
+>>>>>>> v3.18
 	oprofilefs_create_file(root, "enable", &enable_fops);
 	oprofilefs_create_file_perm(root, "dump", &dump_fops, 0666);
 	oprofilefs_create_file(root, "buffer", &event_buffer_fops);
@@ -219,5 +226,8 @@ void oprofile_create_files(struct dentry *root)
 	oprofile_create_stats_files(root);
 	if (oprofile_ops.create_files)
 		oprofile_ops.create_files(root);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

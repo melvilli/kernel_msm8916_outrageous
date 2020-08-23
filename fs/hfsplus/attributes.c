@@ -12,7 +12,11 @@
 static struct kmem_cache *hfsplus_attr_tree_cachep;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hfsplus_create_attr_tree_cache(void)
+=======
+int __init hfsplus_create_attr_tree_cache(void)
+>>>>>>> v3.18
 =======
 int __init hfsplus_create_attr_tree_cache(void)
 >>>>>>> v3.18
@@ -59,6 +63,7 @@ int hfsplus_attr_build_key(struct super_block *sb, hfsplus_btree_key *key,
 	key->attr.cnid = cpu_to_be32(cnid);
 	if (name) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len = strlen(name);
 		if (len > HFSPLUS_ATTR_MAX_STRLEN) {
 			pr_err("invalid xattr name's length\n");
@@ -68,11 +73,16 @@ int hfsplus_attr_build_key(struct super_block *sb, hfsplus_btree_key *key,
 				(struct hfsplus_unistr *)&key->attr.key_name,
 				HFSPLUS_ATTR_MAX_STRLEN, name, len);
 =======
+=======
+>>>>>>> v3.18
 		int res = hfsplus_asc2uni(sb,
 				(struct hfsplus_unistr *)&key->attr.key_name,
 				HFSPLUS_ATTR_MAX_STRLEN, name, strlen(name));
 		if (res)
 			return res;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		len = be16_to_cpu(key->attr.key_name.length);
 	} else {
@@ -94,6 +104,7 @@ int hfsplus_attr_build_key(struct super_block *sb, hfsplus_btree_key *key,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void hfsplus_attr_build_key_uni(hfsplus_btree_key *key,
 					u32 cnid,
@@ -120,6 +131,8 @@ void hfsplus_attr_build_key_uni(hfsplus_btree_key *key,
 				ustrlen);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 hfsplus_attr_entry *hfsplus_alloc_attr_entry(void)

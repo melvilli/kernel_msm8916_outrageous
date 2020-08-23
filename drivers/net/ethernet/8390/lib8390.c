@@ -100,11 +100,14 @@
 #define ei_get_8390_hdr (ei_local->get_8390_hdr)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* use 0 for production, 1 for verification, >2 for debug */
 #ifndef ei_debug
 int ei_debug = 1;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Index to functions. */
@@ -120,12 +123,18 @@ static void do_set_multicast_list(struct net_device *dev);
 static void __NS8390_init(struct net_device *dev, int startp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned version_printed;
 static u32 msg_enable;
 module_param(msg_enable, uint, (S_IRUSR|S_IRGRP|S_IROTH));
 MODULE_PARM_DESC(msg_enable, "Debug message level (see linux/netdevice.h for bitmap)");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *	SMP and the 8390 setup.
@@ -357,18 +366,25 @@ static netdev_tx_t __ei_start_xmit(struct sk_buff *skb,
 		output_page = ei_local->tx_start_page;
 		ei_local->tx1 = send_length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ei_debug  &&  ei_local->tx2 > 0)
 			netdev_dbg(dev, "idle transmitter tx2=%d, lasttx=%d, txing=%d\n",
 =======
+=======
+>>>>>>> v3.18
 		if ((netif_msg_tx_queued(ei_local)) &&
 		    ei_local->tx2 > 0)
 			netdev_dbg(dev,
 				   "idle transmitter tx2=%d, lasttx=%d, txing=%d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				   ei_local->tx2, ei_local->lasttx, ei_local->txing);
 	} else if (ei_local->tx2 == 0) {
 		output_page = ei_local->tx_start_page + TX_PAGES/2;
 		ei_local->tx2 = send_length;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ei_debug  &&  ei_local->tx1 > 0)
 			netdev_dbg(dev, "idle transmitter, tx1=%d, lasttx=%d, txing=%d\n",
@@ -378,6 +394,8 @@ static netdev_tx_t __ei_start_xmit(struct sk_buff *skb,
 			netdev_dbg(dev, "No Tx buffers free! tx1=%d tx2=%d last=%d\n",
 				   ei_local->tx1, ei_local->tx2, ei_local->lasttx);
 =======
+=======
+>>>>>>> v3.18
 		if ((netif_msg_tx_queued(ei_local)) &&
 		    ei_local->tx1 > 0)
 			netdev_dbg(dev,
@@ -387,6 +405,9 @@ static netdev_tx_t __ei_start_xmit(struct sk_buff *skb,
 		netif_dbg(ei_local, tx_err, dev,
 			  "No Tx buffers free! tx1=%d tx2=%d last=%d\n",
 			  ei_local->tx1, ei_local->tx2, ei_local->lasttx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ei_local->irqlock = 0;
 		netif_stop_queue(dev);
@@ -419,7 +440,11 @@ static netdev_tx_t __ei_start_xmit(struct sk_buff *skb,
 		ei_local->txqueue++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_local->tx1  &&  ei_local->tx2)
+=======
+	if (ei_local->tx1 && ei_local->tx2)
+>>>>>>> v3.18
 =======
 	if (ei_local->tx1 && ei_local->tx2)
 >>>>>>> v3.18
@@ -435,7 +460,11 @@ static netdev_tx_t __ei_start_xmit(struct sk_buff *skb,
 	enable_irq_lockdep_irqrestore(dev->irq, &flags);
 	skb_tx_timestamp(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -484,9 +513,14 @@ static irqreturn_t __ei_interrupt(int irq, void *dev_id)
 	/* Change to page 0 and read the intr status reg. */
 	ei_outb_p(E8390_NODMA+E8390_PAGE0, e8390_base + E8390_CMD);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_debug > 3)
 		netdev_dbg(dev, "interrupt(isr=%#2.2x)\n",
 			   ei_inb_p(e8390_base + EN0_ISR));
+=======
+	netif_dbg(ei_local, intr, dev, "interrupt(isr=%#2.2x)\n",
+		  ei_inb_p(e8390_base + EN0_ISR));
+>>>>>>> v3.18
 =======
 	netif_dbg(ei_local, intr, dev, "interrupt(isr=%#2.2x)\n",
 		  ei_inb_p(e8390_base + EN0_ISR));
@@ -529,7 +563,11 @@ static irqreturn_t __ei_interrupt(int irq, void *dev_id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (interrupts && ei_debug) {
+=======
+	if (interrupts && (netif_msg_intr(ei_local))) {
+>>>>>>> v3.18
 =======
 	if (interrupts && (netif_msg_intr(ei_local))) {
 >>>>>>> v3.18
@@ -724,16 +762,22 @@ static void ei_receive(struct net_device *dev)
 		   is that some clones crash in roughly the same way.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ei_debug > 0 &&
 		    this_frame != ei_local->current_page &&
 		    (this_frame != 0x0 || rxing_page != 0xFF))
 			netdev_err(dev, "mismatched read page pointers %2x vs %2x\n",
 =======
+=======
+>>>>>>> v3.18
 		if ((netif_msg_rx_status(ei_local)) &&
 		    this_frame != ei_local->current_page &&
 		    (this_frame != 0x0 || rxing_page != 0xFF))
 			netdev_err(dev,
 				   "mismatched read page pointers %2x vs %2x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				   this_frame, ei_local->current_page);
 
@@ -763,15 +807,21 @@ static void ei_receive(struct net_device *dev)
 
 		if (pkt_len < 60  ||  pkt_len > 1518) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ei_debug)
 				netdev_dbg(dev, "bogus packet size: %d, status=%#2x nxpg=%#2x\n",
 					   rx_frame.count, rx_frame.status,
 					   rx_frame.next);
 =======
+=======
+>>>>>>> v3.18
 			netif_dbg(ei_local, rx_status, dev,
 				  "bogus packet size: %d, status=%#2x nxpg=%#2x\n",
 				  rx_frame.count, rx_frame.status,
 				  rx_frame.next);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev->stats.rx_errors++;
 			dev->stats.rx_length_errors++;
@@ -781,9 +831,15 @@ static void ei_receive(struct net_device *dev)
 			skb = netdev_alloc_skb(dev, pkt_len + 2);
 			if (skb == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (ei_debug > 1)
 					netdev_dbg(dev, "Couldn't allocate a sk_buff of size %d\n",
 						   pkt_len);
+=======
+				netif_err(ei_local, rx_err, dev,
+					  "Couldn't allocate a sk_buff of size %d\n",
+					  pkt_len);
+>>>>>>> v3.18
 =======
 				netif_err(ei_local, rx_err, dev,
 					  "Couldn't allocate a sk_buff of size %d\n",
@@ -805,15 +861,21 @@ static void ei_receive(struct net_device *dev)
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ei_debug)
 				netdev_dbg(dev, "bogus packet: status=%#2x nxpg=%#2x size=%d\n",
 					   rx_frame.status, rx_frame.next,
 					   rx_frame.count);
 =======
+=======
+>>>>>>> v3.18
 			netif_err(ei_local, rx_err, dev,
 				  "bogus packet: status=%#2x nxpg=%#2x size=%d\n",
 				  rx_frame.status, rx_frame.next,
 				  rx_frame.count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev->stats.rx_errors++;
 			/* NB: The NIC counts CRC, frame and missed errors. */
@@ -865,8 +927,12 @@ static void ei_rx_overrun(struct net_device *dev)
 	ei_outb_p(E8390_NODMA+E8390_PAGE0+E8390_STOP, e8390_base+E8390_CMD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_debug > 1)
 		netdev_dbg(dev, "Receiver overrun\n");
+=======
+	netif_dbg(ei_local, rx_err, dev, "Receiver overrun\n");
+>>>>>>> v3.18
 =======
 	netif_dbg(ei_local, rx_err, dev, "Receiver overrun\n");
 >>>>>>> v3.18
@@ -1045,8 +1111,14 @@ static void ethdev_setup(struct net_device *dev)
 {
 	struct ei_device *ei_local = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_debug > 1)
 		printk(version);
+=======
+
+	if ((msg_enable & NETIF_MSG_DRV) && (version_printed++ == 0))
+		pr_info("%s", version);
+>>>>>>> v3.18
 =======
 
 	if ((msg_enable & NETIF_MSG_DRV) && (version_printed++ == 0))
@@ -1068,7 +1140,11 @@ static struct net_device *____alloc_ei_netdev(int size)
 {
 	return alloc_netdev(sizeof(struct ei_device) + size, "eth%d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ethdev_setup);
+=======
+			    NET_NAME_UNKNOWN, ethdev_setup);
+>>>>>>> v3.18
 =======
 			    NET_NAME_UNKNOWN, ethdev_setup);
 >>>>>>> v3.18
@@ -1125,14 +1201,20 @@ static void __NS8390_init(struct net_device *dev, int startp)
 	for (i = 0; i < 6; i++) {
 		ei_outb_p(dev->dev_addr[i], e8390_base + EN1_PHYS_SHIFT(i));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ei_debug > 1 &&
 		    ei_inb_p(e8390_base + EN1_PHYS_SHIFT(i)) != dev->dev_addr[i])
 			netdev_err(dev, "Hw. address read/write mismap %d\n", i);
 =======
+=======
+>>>>>>> v3.18
 		if ((netif_msg_probe(ei_local)) &&
 		    ei_inb_p(e8390_base + EN1_PHYS_SHIFT(i)) != dev->dev_addr[i])
 			netdev_err(dev,
 				   "Hw. address read/write mismap %d\n", i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

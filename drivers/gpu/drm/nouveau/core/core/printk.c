@@ -28,6 +28,7 @@
 #include <core/printk.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 nv_printk_(struct nouveau_object *object, const char *pfx, int level,
 	   const char *fmt, ...)
@@ -37,6 +38,8 @@ nv_printk_(struct nouveau_object *object, const char *pfx, int level,
 	va_list args;
 
 =======
+=======
+>>>>>>> v3.18
 int nv_info_debug_level = NV_DBG_INFO_NORMAL;
 
 void
@@ -69,6 +72,9 @@ nv_printk_(struct nouveau_object *object, int level, const char *fmt, ...)
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (object && !nv_iclass(object, NV_CLIENT_CLASS)) {
 		struct nouveau_object *device = object;

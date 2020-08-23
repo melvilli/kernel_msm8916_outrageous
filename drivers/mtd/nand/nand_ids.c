@@ -32,6 +32,7 @@ struct nand_flash_dev nand_flash_ids[] = {
 	 * the most specific match.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{"TC58NYG1S3H 2G 1.8V 8-bit",
 		{ .id = {0x98, 0xaa, 0x90, 0x15, 0x00, 0x00, 0x00, 0x00} },
 		  SZ_2K, SZ_256, SZ_128K, 0, 4, 128, 8},
@@ -54,6 +55,8 @@ struct nand_flash_dev nand_flash_ids[] = {
 		{ .id = {0x98, 0xde, 0x94, 0x82, 0x76, 0x56, 0x04, 0x20} },
 		  SZ_8K, SZ_8K, SZ_2M, 0, 8, 640},
 =======
+=======
+>>>>>>> v3.18
 	{"TC58NVG2S0F 4G 3.3V 8-bit",
 		{ .id = {0x98, 0xdc, 0x90, 0x26, 0x76, 0x15, 0x01, 0x08} },
 		  SZ_4K, SZ_512, SZ_256K, 0, 8, 224, NAND_ECC_INFO(4, SZ_512) },
@@ -73,6 +76,9 @@ struct nand_flash_dev nand_flash_ids[] = {
 		{ .id = {0xad, 0xde, 0x94, 0xda, 0x74, 0xc4} },
 		  SZ_8K, SZ_8K, SZ_2M, 0, 6, 640, NAND_ECC_INFO(40, SZ_1K),
 		  4 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	LEGACY_ID_NAND("NAND 4MiB 5V 8-bit",   0x6B, 4, SZ_8K, SP_OPTIONS),
@@ -185,7 +191,10 @@ struct nand_flash_dev nand_flash_ids[] = {
 	EXTENDED_ID_NAND("NAND 64GiB 3,3V 16-bit", 0x4E, 65536, LP_OPTIONS16),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{"NAND 4GiB 1,8V 8-bit", {{ 0xAC }} , 2048, 4096, 0x20000, 0 },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{NULL}
@@ -205,7 +214,12 @@ struct nand_manufacturers nand_manuf_ids[] = {
 	{NAND_MFR_MACRONIX, "Macronix"},
 	{NAND_MFR_EON, "Eon"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{NAND_MFR_ESMT, "Elite Semiconductor"},
+=======
+	{NAND_MFR_SANDISK, "SanDisk"},
+	{NAND_MFR_INTEL, "Intel"},
+>>>>>>> v3.18
 =======
 	{NAND_MFR_SANDISK, "SanDisk"},
 	{NAND_MFR_INTEL, "Intel"},

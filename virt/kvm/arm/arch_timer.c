@@ -31,9 +31,13 @@
 static struct timecounter *timecounter;
 static struct workqueue_struct *wqueue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct kvm_irq_level timer_irq = {
 	.level	= 1,
 };
+=======
+static unsigned int host_vtimer_irq;
+>>>>>>> v3.18
 =======
 static unsigned int host_vtimer_irq;
 >>>>>>> v3.18
@@ -72,8 +76,13 @@ static void kvm_timer_inject_irq(struct kvm_vcpu *vcpu)
 	timer->cntv_ctl |= ARCH_TIMER_CTRL_IT_MASK;
 	kvm_vgic_inject_irq(vcpu->kvm, vcpu->vcpu_id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    vcpu->arch.timer_cpu.irq->irq,
 			    vcpu->arch.timer_cpu.irq->level);
+=======
+			    timer->irq->irq,
+			    timer->irq->level);
+>>>>>>> v3.18
 =======
 			    timer->irq->irq,
 			    timer->irq->level);
@@ -166,7 +175,10 @@ void kvm_timer_sync_hwstate(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void kvm_timer_vcpu_reset(struct kvm_vcpu *vcpu,
 			  const struct kvm_irq_level *irq)
 {
@@ -181,6 +193,9 @@ void kvm_timer_vcpu_reset(struct kvm_vcpu *vcpu,
 	timer->irq = irq;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void kvm_timer_vcpu_init(struct kvm_vcpu *vcpu)
 {
@@ -190,7 +205,10 @@ void kvm_timer_vcpu_init(struct kvm_vcpu *vcpu)
 	hrtimer_init(&timer->timer, CLOCK_MONOTONIC, HRTIMER_MODE_ABS);
 	timer->timer.function = kvm_timer_expire;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	timer->irq = &timer_irq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -198,7 +216,11 @@ void kvm_timer_vcpu_init(struct kvm_vcpu *vcpu)
 static void kvm_timer_init_interrupt(void *info)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enable_percpu_irq(timer_irq.irq, 0);
+=======
+	enable_percpu_irq(host_vtimer_irq, 0);
+>>>>>>> v3.18
 =======
 	enable_percpu_irq(host_vtimer_irq, 0);
 >>>>>>> v3.18
@@ -250,7 +272,11 @@ static int kvm_timer_cpu_notify(struct notifier_block *self,
 	case CPU_DYING:
 	case CPU_DYING_FROZEN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		disable_percpu_irq(timer_irq.irq);
+=======
+		disable_percpu_irq(host_vtimer_irq);
+>>>>>>> v3.18
 =======
 		disable_percpu_irq(host_vtimer_irq);
 >>>>>>> v3.18
@@ -267,6 +293,10 @@ static struct notifier_block kvm_timer_cpu_nb = {
 static const struct of_device_id arch_timer_of_match[] = {
 	{ .compatible	= "arm,armv7-timer",	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible	= "arm,armv8-timer",	},
+>>>>>>> v3.18
 =======
 	{ .compatible	= "arm,armv8-timer",	},
 >>>>>>> v3.18
@@ -305,9 +335,15 @@ int kvm_timer_hyp_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	timer_irq.irq = ppi;
 
 	err = register_cpu_notifier(&kvm_timer_cpu_nb);
+=======
+	host_vtimer_irq = ppi;
+
+	err = __register_cpu_notifier(&kvm_timer_cpu_nb);
+>>>>>>> v3.18
 =======
 	host_vtimer_irq = ppi;
 

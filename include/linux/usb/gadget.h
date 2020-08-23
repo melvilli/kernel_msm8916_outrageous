@@ -47,11 +47,14 @@ struct usb_ep;
  * @short_not_ok: When reading data, makes short packets be
  *     treated as errors (queue stops advancing till cleanup).
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dma_pre_mapped: Tells the USB core driver whether this request should be
  *	DMA-mapped before it is queued to the USB HW. When set to true, it means
  *	that the request has already been mapped in advance and therefore the
  *	USB core driver does NOT need to do DMA-mapping when the request is
  *	queued to the USB HW.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @complete: Function called when request completes, so this request and
@@ -78,7 +81,10 @@ struct usb_ep;
  *	reside in a device-side FIFO when the request is reported as
  *	complete.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *@udc_priv: Vendor private data in usage by the UDC.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -114,7 +120,10 @@ struct usb_request {
 	unsigned		zero:1;
 	unsigned		short_not_ok:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		dma_pre_mapped:1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -126,7 +135,10 @@ struct usb_request {
 	int			status;
 	unsigned		actual;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		udc_priv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -149,6 +161,10 @@ struct usb_ep_ops {
 		gfp_t gfp_flags);
 	void (*free_request) (struct usb_ep *ep, struct usb_request *req);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -172,6 +188,12 @@ struct usb_ep_ops {
  *	value can sometimes be reduced (hardware allowing), according to
  *      the endpoint descriptor used to configure the endpoint.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @maxpacket_limit:The maximum packet size value which can be handled by this
+ *	endpoint. It's set once by UDC driver when endpoint is initialized, and
+ *	should not be changed. Should not be confused with maxpacket.
+>>>>>>> v3.18
 =======
  * @maxpacket_limit:The maximum packet size value which can be handled by this
  *	endpoint. It's set once by UDC driver when endpoint is initialized, and
@@ -189,8 +211,11 @@ struct usb_ep_ops {
  * @comp_desc: In case of SuperSpeed support, this is the endpoint companion
  *	descriptor that is used to configure the endpoint
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @endless: In case where endless transfer is being initiated, this is set
  *	to disable usb event interrupt for few events.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -206,6 +231,10 @@ struct usb_ep {
 	struct list_head	ep_list;
 	unsigned		maxpacket:16;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned		maxpacket_limit:16;
+>>>>>>> v3.18
 =======
 	unsigned		maxpacket_limit:16;
 >>>>>>> v3.18
@@ -216,7 +245,10 @@ struct usb_ep {
 	const struct usb_endpoint_descriptor	*desc;
 	const struct usb_ss_ep_comp_descriptor	*comp_desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool			endless;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -225,7 +257,10 @@ struct usb_ep {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * usb_ep_set_maxpacket_limit - set maximum packet size limit for endpoint
  * @ep:the endpoint being configured
  * @maxpacket_limit:value of maximum packet size limit
@@ -241,6 +276,9 @@ static inline void usb_ep_set_maxpacket_limit(struct usb_ep *ep,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * usb_ep_enable - configure endpoint, making it usable
  * @ep:the endpoint being configured.  may not be the endpoint named "ep0".
@@ -387,6 +425,7 @@ static inline int usb_ep_queue(struct usb_ep *ep,
  * @req:the request being canceled
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * if the request is still active on the endpoint, it is dequeued and its
  * completion routine is called (with status -ECONNRESET); else a negative
  * error code is returned.
@@ -394,6 +433,8 @@ static inline int usb_ep_queue(struct usb_ep *ep,
  * note that some hardware can't clear out write fifos (to unlink the request
  * at the head of the queue) except as part of disconnecting from usb.  such
 =======
+=======
+>>>>>>> v3.18
  * If the request is still active on the endpoint, it is dequeued and its
  * completion routine is called (with status -ECONNRESET); else a negative
  * error code is returned. This is guaranteed to happen before the call to
@@ -401,6 +442,9 @@ static inline int usb_ep_queue(struct usb_ep *ep,
  *
  * Note that some hardware can't clear out write fifos (to unlink the request
  * at the head of the queue) except as part of disconnecting from usb. Such
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * restrictions prevent drivers from supporting configuration changes,
  * even to configuration zero (a "chapter 9" requirement).
@@ -532,7 +576,10 @@ struct usb_gadget_ops {
 	int	(*get_frame)(struct usb_gadget *);
 	int	(*wakeup)(struct usb_gadget *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	(*func_wakeup)(struct usb_gadget *, int interface_id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int	(*set_selfpowered) (struct usb_gadget *, int is_selfpowered);
@@ -560,12 +607,18 @@ struct usb_gadget_ops {
  *      and all slower speeds.
  * @state: the state we are now (attached, suspended, configured, etc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @name: Identifies the controller hardware type.  Used in diagnostics
  *	and sometimes configuration.
  * @dev: Driver model state for this abstract device.
  * @out_epnum: last used out ep number
  * @in_epnum: last used in ep number
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @sg_supported: true if we can handle scatter-gather
  * @is_otg: True if the USB device port uses a Mini-AB jack, so that the
@@ -580,6 +633,7 @@ struct usb_gadget_ops {
  * @b_hnp_enable: OTG device feature flag, indicating that the A-Host
  *	enabled HNP support.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @host_request: A flag set by user when wishes to take up host role.
  * @otg_srp_reqd: OTG test mode feature to initiate SRP after the end of
  * current session.
@@ -592,6 +646,10 @@ struct usb_gadget_ops {
  *		 Used in case of more then one core operates concurrently.
  * @streaming_enabled: Enable streaming mode with usb core.
  * @xfer_isr_count: UI (transfer complete) interrupts count
+=======
+ * @quirk_ep_out_aligned_size: epout requires buffer size to be aligned to
+ *	MaxPacketSize.
+>>>>>>> v3.18
 =======
  * @quirk_ep_out_aligned_size: epout requires buffer size to be aligned to
  *	MaxPacketSize.
@@ -625,12 +683,18 @@ struct usb_gadget {
 	enum usb_device_speed		max_speed;
 	enum usb_device_state		state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	const char			*name;
 	struct device			dev;
 	unsigned			out_epnum;
 	unsigned			in_epnum;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned			sg_supported:1;
 	unsigned			is_otg:1;
@@ -638,6 +702,7 @@ struct usb_gadget {
 	unsigned			b_hnp_enable:1;
 	unsigned			a_hnp_support:1;
 	unsigned			a_alt_hnp_support:1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned			host_request:1;
 	unsigned			otg_srp_reqd:1;
@@ -651,6 +716,9 @@ struct usb_gadget {
 	bool				remote_wakeup;
 	void				*private;
 	u32				xfer_isr_count;
+=======
+	unsigned			quirk_ep_out_aligned_size:1;
+>>>>>>> v3.18
 =======
 	unsigned			quirk_ep_out_aligned_size:1;
 >>>>>>> v3.18
@@ -673,7 +741,10 @@ static inline struct usb_gadget *dev_to_usb_gadget(struct device *dev)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * usb_ep_align_maybe - returns @len aligned to ep's maxpacketsize if gadget
  *	requires quirk_ep_out_aligned_size, otherwise reguens len.
  * @g: controller to check for quirk
@@ -691,6 +762,9 @@ usb_ep_align_maybe(struct usb_gadget *g, struct usb_ep *ep, size_t len)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * gadget_is_dualspeed - return true iff the hardware handles high speed
  * @g: controller that might support both high and full speeds
@@ -759,6 +833,7 @@ static inline int usb_gadget_wakeup(struct usb_gadget *gadget)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * usb_gadget_func_wakeup - send a function remote wakeup up notification
  * to the host connected to this gadget
  * @gadget: controller used to wake up the host
@@ -779,6 +854,8 @@ static inline int usb_gadget_func_wakeup(struct usb_gadget *gadget,
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * usb_gadget_set_selfpowered - sets the device selfpowered feature.
@@ -934,9 +1011,15 @@ static inline int usb_gadget_disconnect(struct usb_gadget *gadget)
  * @suspend: Invoked on USB suspend.  May be called in_interrupt.
  * @resume: Invoked on USB resume.  May be called in_interrupt.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @driver: Driver model state for this driver.
  * @usb_core_id: Identifies the usb core controlled by this usb_gadget_driver.
  *               Used in case of more then one core operates concurrently.
+=======
+ * @reset: Invoked on USB bus reset. It is mandatory for all gadget drivers
+ *	and should be called in_interrupt.
+ * @driver: Driver model state for this driver.
+>>>>>>> v3.18
 =======
  * @reset: Invoked on USB bus reset. It is mandatory for all gadget drivers
  *	and should be called in_interrupt.
@@ -999,16 +1082,22 @@ struct usb_gadget_driver {
 	void			(*suspend)(struct usb_gadget *);
 	void			(*resume)(struct usb_gadget *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* FIXME support safe rmmod */
 	struct device_driver	driver;
 
 	u8			usb_core_id;
 =======
+=======
+>>>>>>> v3.18
 	void			(*reset)(struct usb_gadget *);
 
 	/* FIXME support safe rmmod */
 	struct device_driver	driver;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1101,11 +1190,14 @@ int usb_gadget_get_string(struct usb_gadget_strings *table, int id, u8 *buf);
 /* utility to simplify managing config descriptors */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Find and fill the requested descriptor into buffer */
 int
 usb_find_descriptor_fillbuf(void *, unsigned,
 		const struct usb_descriptor_header **, u8);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* write vector of descriptors into buffer */
@@ -1139,6 +1231,7 @@ void usb_free_all_descriptors(struct usb_function *f);
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * usb_func_ep_queue - queues (submits) an I/O request to a function endpoint.
  * This function is similar to the usb_ep_queue function, but in addition it
@@ -1159,6 +1252,8 @@ int usb_func_ep_queue(struct usb_function *func, struct usb_ep *ep,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* utility to simplify map/unmap of usb_requests to/from DMA */
 
 extern int usb_gadget_map_request(struct usb_gadget *gadget,
@@ -1177,7 +1272,10 @@ extern void usb_gadget_set_state(struct usb_gadget *gadget,
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* utility to tell udc core that the bus reset occurs */
 extern void usb_gadget_udc_reset(struct usb_gadget *gadget,
 		struct usb_gadget_driver *driver);
@@ -1192,6 +1290,9 @@ extern void usb_gadget_giveback_request(struct usb_ep *ep,
 
 /*-------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* utility wrapping a simple endpoint selection policy */
 

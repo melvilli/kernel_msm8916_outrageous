@@ -33,7 +33,11 @@
 #include <linux/interrupt.h>
 #include <linux/smsc911x.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 >>>>>>> v3.18
@@ -98,6 +102,7 @@ static void __init omap3_stalker_display_init(void)
 	return;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct omap_dss_device omap3_stalker_tv_device = {
 	.name			= "tv",
@@ -133,6 +138,8 @@ static struct omap_dss_board_info omap3_stalker_dss_data = {
 	.devices	= omap3_stalker_dss_devices,
 	.default_device	= &omap3_stalker_dvi_device,
 =======
+=======
+>>>>>>> v3.18
 static struct connector_dvi_platform_data omap3stalker_dvi_connector_pdata = {
 	.name                   = "dvi",
 	.source                 = "tfp410.0",
@@ -173,6 +180,9 @@ static struct platform_device omap3stalker_tv_connector_device = {
 
 static struct omap_dss_board_info omap3_stalker_dss_data = {
 	.default_display_name = "dvi",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -404,6 +414,12 @@ static struct usbhs_phy_data phy_data[] __initdata = {
 static struct platform_device *omap3_stalker_devices[] __initdata = {
 	&keys_gpio,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&omap3stalker_tfp410_device,
+	&omap3stalker_dvi_connector_device,
+	&omap3stalker_tv_connector_device,
+>>>>>>> v3.18
 =======
 	&omap3stalker_tfp410_device,
 	&omap3stalker_dvi_connector_device,
@@ -471,7 +487,10 @@ MACHINE_START(SBC3530, "OMAP3 STALKER")
 	.init_early		= omap35xx_init_early,
 	.init_irq		= omap3_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq		= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine		= omap3_stalker_init,

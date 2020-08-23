@@ -180,7 +180,11 @@ static void au1xac97c_ac97_cold_reset(struct snd_ac97 *ac97)
 
 /* AC97 controller operations */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_ac97_bus_ops soc_ac97_ops = {
+=======
+static struct snd_ac97_bus_ops ac97c_bus_ops = {
+>>>>>>> v3.18
 =======
 static struct snd_ac97_bus_ops ac97c_bus_ops = {
 >>>>>>> v3.18
@@ -190,7 +194,10 @@ static struct snd_ac97_bus_ops ac97c_bus_ops = {
 	.warm_reset	= au1xac97c_ac97_warm_reset,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(soc_ac97_ops);	/* globals be gone! */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -280,11 +287,17 @@ static int au1xac97c_drvprobe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, ctx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = snd_soc_set_ac97_ops(&ac97c_bus_ops);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = snd_soc_register_component(&pdev->dev, &au1xac97c_component,
 					 &au1xac97c_dai_driver, 1);
@@ -353,6 +366,7 @@ static struct platform_driver au1xac97c_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init au1xac97c_load(void)
 {
 	ac97c_workdata = NULL;
@@ -366,6 +380,9 @@ static void __exit au1xac97c_unload(void)
 
 module_init(au1xac97c_load);
 module_exit(au1xac97c_unload);
+=======
+module_platform_driver(au1xac97c_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(au1xac97c_driver);
 >>>>>>> v3.18

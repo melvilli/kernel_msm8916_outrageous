@@ -2781,7 +2781,11 @@ static struct pci_driver fore200e_pca_driver = {
 static int __init fore200e_module_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+	int err = 0;
+>>>>>>> v3.18
 =======
 	int err = 0;
 >>>>>>> v3.18

@@ -116,8 +116,11 @@ static DEFINE_SPINLOCK(e1000_phy_lock);
 static s32 e1000_set_phy_type(struct e1000_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_set_phy_type");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->mac_type == e1000_undefined)
@@ -163,8 +166,11 @@ static void e1000_phy_init_script(struct e1000_hw *hw)
 	u16 phy_saved_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_phy_init_script");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->phy_init_script) {
@@ -260,8 +266,11 @@ static void e1000_phy_init_script(struct e1000_hw *hw)
 s32 e1000_set_mac_type(struct e1000_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_set_mac_type");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (hw->device_id) {
@@ -375,8 +384,11 @@ void e1000_set_media_type(struct e1000_hw *hw)
 	u32 status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_set_media_type");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->mac_type != e1000_82543) {
@@ -428,8 +440,11 @@ s32 e1000_reset_hw(struct e1000_hw *hw)
 	s32 ret_val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_reset_hw");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* For 82542 (rev 2.0), disable MWI before issuing a device reset */
@@ -582,8 +597,11 @@ s32 e1000_init_hw(struct e1000_hw *hw)
 	u32 ctrl_ext;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_init_hw");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Initialize Identification LED */
@@ -702,8 +720,11 @@ static s32 e1000_adjust_serdes_amplitude(struct e1000_hw *hw)
 	s32 ret_val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_adjust_serdes_amplitude");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->media_type != e1000_media_type_internal_serdes)
@@ -752,8 +773,11 @@ s32 e1000_setup_link(struct e1000_hw *hw)
 	u16 eeprom_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_setup_link");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Read and store word 0x0F of the EEPROM. This word contains bits
@@ -873,8 +897,11 @@ static s32 e1000_setup_fiber_serdes_link(struct e1000_hw *hw)
 	s32 ret_val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_setup_fiber_serdes_link");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* On adapters with a MAC newer than 82544, SWDP 1 will be
@@ -948,7 +975,10 @@ static s32 e1000_setup_fiber_serdes_link(struct e1000_hw *hw)
 		e_dbg("Flow control param set incorrectly\n");
 		return -E1000_ERR_CONFIG;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1082,8 +1112,11 @@ static s32 e1000_copper_link_preconfig(struct e1000_hw *hw)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_copper_link_preconfig");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ctrl = er32(CTRL);
@@ -1146,8 +1179,11 @@ static s32 e1000_copper_link_igp_setup(struct e1000_hw *hw)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_copper_link_igp_setup");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->phy_reset_disable)
@@ -1291,8 +1327,11 @@ static s32 e1000_copper_link_mgp_setup(struct e1000_hw *hw)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_copper_link_mgp_setup");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->phy_reset_disable)
@@ -1402,8 +1441,11 @@ static s32 e1000_copper_link_autoneg(struct e1000_hw *hw)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_copper_link_autoneg");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Perform some bounds checking on the hw->autoneg_advertised
@@ -1475,7 +1517,10 @@ static s32 e1000_copper_link_postconfig(struct e1000_hw *hw)
 {
 	s32 ret_val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_copper_link_postconfig");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1519,8 +1564,11 @@ static s32 e1000_setup_copper_link(struct e1000_hw *hw)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_setup_copper_link");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Check if it is a valid PHY and set PHY mode if necessary. */
@@ -1603,8 +1651,11 @@ s32 e1000_phy_setup_autoneg(struct e1000_hw *hw)
 	u16 mii_1000t_ctrl_reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_phy_setup_autoneg");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Read the MII Auto-Neg Advertisement Register (Address 4). */
@@ -1759,8 +1810,11 @@ static s32 e1000_phy_force_speed_duplex(struct e1000_hw *hw)
 	u16 i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_phy_force_speed_duplex");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Turn off Flow control if we are forcing speed and duplex. */
@@ -1994,8 +2048,11 @@ void e1000_config_collision_dist(struct e1000_hw *hw)
 	u32 tctl, coll_dist;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_config_collision_dist");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->mac_type < e1000_82543)
@@ -2028,8 +2085,11 @@ static s32 e1000_config_mac_to_phy(struct e1000_hw *hw)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_config_mac_to_phy");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* 82544 or newer MAC, Auto Speed Detection takes care of
@@ -2110,8 +2170,11 @@ s32 e1000_force_mac_fc(struct e1000_hw *hw)
 	u32 ctrl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_force_mac_fc");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Get the current configuration of the Device Control Register */
@@ -2184,8 +2247,11 @@ static s32 e1000_config_fc_after_link_up(struct e1000_hw *hw)
 	u16 duplex;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_config_fc_after_link_up");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Check for the case where we have fiber media and auto-neg failed
@@ -2404,8 +2470,11 @@ static s32 e1000_check_for_serdes_link_generic(struct e1000_hw *hw)
 	s32 ret_val = E1000_SUCCESS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_check_for_serdes_link_generic");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ctrl = er32(CTRL);
@@ -2519,8 +2588,11 @@ s32 e1000_check_for_link(struct e1000_hw *hw)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_check_for_link");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ctrl = er32(CTRL);
@@ -2705,8 +2777,11 @@ s32 e1000_get_speed_and_duplex(struct e1000_hw *hw, u16 *speed, u16 *duplex)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_get_speed_and_duplex");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->mac_type >= e1000_82543) {
@@ -2775,7 +2850,10 @@ static s32 e1000_wait_autoneg(struct e1000_hw *hw)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_wait_autoneg");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	e_dbg("Waiting for Auto-Neg to complete.\n");
@@ -2945,8 +3023,11 @@ s32 e1000_read_phy_reg(struct e1000_hw *hw, u32 reg_addr, u16 *phy_data)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_read_phy_reg");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&e1000_phy_lock, flags);
@@ -2976,8 +3057,11 @@ static s32 e1000_read_phy_reg_ex(struct e1000_hw *hw, u32 reg_addr,
 	const u32 phy_addr = (hw->mac_type == e1000_ce4100) ? hw->phy_addr : 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_read_phy_reg_ex");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (reg_addr > MAX_PHY_REG_ADDRESS) {
@@ -3093,8 +3177,11 @@ s32 e1000_write_phy_reg(struct e1000_hw *hw, u32 reg_addr, u16 phy_data)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_write_phy_reg");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&e1000_phy_lock, flags);
@@ -3124,8 +3211,11 @@ static s32 e1000_write_phy_reg_ex(struct e1000_hw *hw, u32 reg_addr,
 	const u32 phy_addr = (hw->mac_type == e1000_ce4100) ? hw->phy_addr : 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_write_phy_reg_ex");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (reg_addr > MAX_PHY_REG_ADDRESS) {
@@ -3220,8 +3310,11 @@ s32 e1000_phy_hw_reset(struct e1000_hw *hw)
 	u32 led_ctrl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_phy_hw_reset");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	e_dbg("Resetting Phy...\n");
@@ -3283,8 +3376,11 @@ s32 e1000_phy_reset(struct e1000_hw *hw)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_phy_reset");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (hw->phy_type) {
@@ -3326,8 +3422,11 @@ static s32 e1000_detect_gig_phy(struct e1000_hw *hw)
 	bool match = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_detect_gig_phy");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->phy_id != 0)
@@ -3401,7 +3500,10 @@ static s32 e1000_phy_reset_dsp(struct e1000_hw *hw)
 {
 	s32 ret_val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_phy_reset_dsp");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3436,8 +3538,11 @@ static s32 e1000_phy_igp_get_info(struct e1000_hw *hw,
 	e1000_rev_polarity polarity;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_phy_igp_get_info");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* The downshift status is checked only once, after link is established,
@@ -3520,8 +3625,11 @@ static s32 e1000_phy_m88_get_info(struct e1000_hw *hw,
 	e1000_rev_polarity polarity;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_phy_m88_get_info");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* The downshift status is checked only once, after link is established,
@@ -3596,8 +3704,11 @@ s32 e1000_phy_get_info(struct e1000_hw *hw, struct e1000_phy_info *phy_info)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_phy_get_info");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	phy_info->cable_length = e1000_cable_length_undefined;
@@ -3639,8 +3750,11 @@ s32 e1000_phy_get_info(struct e1000_hw *hw, struct e1000_phy_info *phy_info)
 s32 e1000_validate_mdi_setting(struct e1000_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_validate_mdi_settings");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!hw->autoneg && (hw->mdix == 0 || hw->mdix == 3)) {
@@ -3666,8 +3780,11 @@ s32 e1000_init_eeprom_params(struct e1000_hw *hw)
 	u16 eeprom_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_init_eeprom_params");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (hw->mac_type) {
@@ -3888,8 +4005,11 @@ static s32 e1000_acquire_eeprom(struct e1000_hw *hw)
 	u32 eecd, i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_acquire_eeprom");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	eecd = er32(EECD);
@@ -3992,8 +4112,11 @@ static void e1000_release_eeprom(struct e1000_hw *hw)
 	u32 eecd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_release_eeprom");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	eecd = er32(EECD);
@@ -4044,8 +4167,11 @@ static s32 e1000_spi_eeprom_ready(struct e1000_hw *hw)
 	u8 spi_stat_reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_spi_eeprom_ready");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Read "Status Register" repeatedly until the LSB is cleared.  The
@@ -4101,8 +4227,11 @@ static s32 e1000_do_read_eeprom(struct e1000_hw *hw, u16 offset, u16 words,
 	u32 i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_read_eeprom");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->mac_type == e1000_ce4100) {
@@ -4206,8 +4335,11 @@ s32 e1000_validate_eeprom_checksum(struct e1000_hw *hw)
 	u16 i, eeprom_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_validate_eeprom_checksum");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < (EEPROM_CHECKSUM_REG + 1); i++) {
@@ -4245,8 +4377,11 @@ s32 e1000_update_eeprom_checksum(struct e1000_hw *hw)
 	u16 i, eeprom_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_update_eeprom_checksum");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < EEPROM_CHECKSUM_REG; i++) {
@@ -4290,8 +4425,11 @@ static s32 e1000_do_write_eeprom(struct e1000_hw *hw, u16 offset, u16 words,
 	s32 status = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_write_eeprom");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->mac_type == e1000_ce4100) {
@@ -4344,8 +4482,11 @@ static s32 e1000_write_eeprom_spi(struct e1000_hw *hw, u16 offset, u16 words,
 	u16 widx = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_write_eeprom_spi");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	while (widx < words) {
@@ -4416,8 +4557,11 @@ static s32 e1000_write_eeprom_microwire(struct e1000_hw *hw, u16 offset,
 	u16 i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_write_eeprom_microwire");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Send the write enable command to the EEPROM (3-bit opcode plus
@@ -4499,8 +4643,11 @@ s32 e1000_read_mac_addr(struct e1000_hw *hw)
 	u16 eeprom_data, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_read_mac_addr");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < NODE_ADDRESS_SIZE; i += 2) {
@@ -4542,8 +4689,11 @@ static void e1000_init_rx_addrs(struct e1000_hw *hw)
 	u32 rar_num;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_init_rx_addrs");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Setup the receive address. */
@@ -4704,8 +4854,11 @@ static s32 e1000_id_led_init(struct e1000_hw *hw)
 	const u16 led_mask = 0x0F;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_id_led_init");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->mac_type < e1000_82540) {
@@ -4780,8 +4933,11 @@ s32 e1000_setup_led(struct e1000_hw *hw)
 	s32 ret_val = E1000_SUCCESS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_setup_led");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (hw->mac_type) {
@@ -4835,8 +4991,11 @@ s32 e1000_cleanup_led(struct e1000_hw *hw)
 	s32 ret_val = E1000_SUCCESS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_cleanup_led");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (hw->mac_type) {
@@ -4874,8 +5033,11 @@ s32 e1000_led_on(struct e1000_hw *hw)
 	u32 ctrl = er32(CTRL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_led_on");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (hw->mac_type) {
@@ -4923,8 +5085,11 @@ s32 e1000_led_off(struct e1000_hw *hw)
 	u32 ctrl = er32(CTRL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_led_off");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (hw->mac_type) {
@@ -5055,8 +5220,11 @@ static void e1000_clear_hw_cntrs(struct e1000_hw *hw)
 void e1000_reset_adaptive(struct e1000_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_reset_adaptive");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->adaptive_ifs) {
@@ -5086,8 +5254,11 @@ void e1000_reset_adaptive(struct e1000_hw *hw)
 void e1000_update_adaptive(struct e1000_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_update_adaptive");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->adaptive_ifs) {
@@ -5118,6 +5289,7 @@ void e1000_update_adaptive(struct e1000_hw *hw)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * e1000_tbi_adjust_stats
  * @hw: Struct containing variables accessed by shared code
@@ -5197,6 +5369,8 @@ void e1000_tbi_adjust_stats(struct e1000_hw *hw, struct e1000_hw_stats *stats,
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * e1000_get_bus_info
@@ -5289,8 +5463,11 @@ static s32 e1000_get_cable_length(struct e1000_hw *hw, u16 *min_length,
 	u16 cable_length;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_get_cable_length");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*min_length = *max_length = 0;
@@ -5330,7 +5507,10 @@ static s32 e1000_get_cable_length(struct e1000_hw *hw, u16 *min_length,
 		default:
 			return -E1000_ERR_PHY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -5412,8 +5592,11 @@ static s32 e1000_check_polarity(struct e1000_hw *hw,
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_check_polarity");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->phy_type == e1000_phy_m88) {
@@ -5483,8 +5666,11 @@ static s32 e1000_check_downshift(struct e1000_hw *hw)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_check_downshift");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->phy_type == e1000_phy_igp) {
@@ -5598,8 +5784,11 @@ static s32 e1000_config_dsp_after_link_change(struct e1000_hw *hw, bool link_up)
 	u16 phy_data, phy_saved_data, speed, duplex, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_config_dsp_after_link_change");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hw->phy_type != e1000_phy_igp)
@@ -5736,8 +5925,11 @@ static s32 e1000_set_phy_mode(struct e1000_hw *hw)
 	u16 eeprom_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_set_phy_mode");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((hw->mac_type == e1000_82545_rev_3) &&
@@ -5787,7 +5979,10 @@ static s32 e1000_set_d3_lplu_state(struct e1000_hw *hw, bool active)
 	s32 ret_val;
 	u16 phy_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_set_d3_lplu_state");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -5895,8 +6090,11 @@ static s32 e1000_set_vco_speed(struct e1000_hw *hw)
 	u16 phy_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_set_vco_speed");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (hw->mac_type) {
@@ -6071,7 +6269,10 @@ static s32 e1000_polarity_reversal_workaround(struct e1000_hw *hw)
 static s32 e1000_get_auto_rd_done(struct e1000_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_get_auto_rd_done");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	msleep(5);
@@ -6089,7 +6290,10 @@ static s32 e1000_get_auto_rd_done(struct e1000_hw *hw)
 static s32 e1000_get_phy_cfg_done(struct e1000_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e_dbg("e1000_get_phy_cfg_done");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	msleep(10);

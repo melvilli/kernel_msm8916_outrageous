@@ -22,6 +22,7 @@ struct xen_p2m_entry {
 	unsigned long mfn;
 	unsigned long nr_pages;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rb_node rbnode_mach;
 	struct rb_node rbnode_phys;
 };
@@ -30,12 +31,17 @@ rwlock_t p2m_lock;
 struct rb_root phys_to_mach = RB_ROOT;
 static struct rb_root mach_to_phys = RB_ROOT;
 =======
+=======
+>>>>>>> v3.18
 	struct rb_node rbnode_phys;
 };
 
 static rwlock_t p2m_lock;
 struct rb_root phys_to_mach = RB_ROOT;
 EXPORT_SYMBOL_GPL(phys_to_mach);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int xen_add_phys_to_mach_entry(struct xen_p2m_entry *new)
@@ -50,8 +56,11 @@ static int xen_add_phys_to_mach_entry(struct xen_p2m_entry *new)
 		entry = rb_entry(parent, struct xen_p2m_entry, rbnode_phys);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (new->mfn == entry->mfn)
 			goto err_out;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (new->pfn == entry->pfn)
@@ -99,6 +108,7 @@ unsigned long __pfn_to_mfn(unsigned long pfn)
 }
 EXPORT_SYMBOL_GPL(__pfn_to_mfn);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int xen_add_mach_to_phys_entry(struct xen_p2m_entry *new)
 {
@@ -158,6 +168,8 @@ unsigned long __mfn_to_pfn(unsigned long mfn)
 }
 EXPORT_SYMBOL_GPL(__mfn_to_pfn);
 =======
+=======
+>>>>>>> v3.18
 int set_foreign_p2m_mapping(struct gnttab_map_grant_ref *map_ops,
 			    struct gnttab_map_grant_ref *kmap_ops,
 			    struct page **pages, unsigned int count)
@@ -189,6 +201,9 @@ int clear_foreign_p2m_mapping(struct gnttab_unmap_grant_ref *unmap_ops,
 	return 0;
 }
 EXPORT_SYMBOL_GPL(clear_foreign_p2m_mapping);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 bool __set_phys_to_machine_multi(unsigned long pfn,
@@ -206,10 +221,16 @@ bool __set_phys_to_machine_multi(unsigned long pfn,
 			if (p2m_entry->pfn <= pfn &&
 					p2m_entry->pfn + p2m_entry->nr_pages > pfn) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rb_erase(&p2m_entry->rbnode_mach, &mach_to_phys);
 				rb_erase(&p2m_entry->rbnode_phys, &phys_to_mach);
 				write_unlock_irqrestore(&p2m_lock, irqflags);
 				kfree(p2m_entry);	
+=======
+				rb_erase(&p2m_entry->rbnode_phys, &phys_to_mach);
+				write_unlock_irqrestore(&p2m_lock, irqflags);
+				kfree(p2m_entry);
+>>>>>>> v3.18
 =======
 				rb_erase(&p2m_entry->rbnode_phys, &phys_to_mach);
 				write_unlock_irqrestore(&p2m_lock, irqflags);
@@ -237,8 +258,12 @@ bool __set_phys_to_machine_multi(unsigned long pfn,
 
 	write_lock_irqsave(&p2m_lock, irqflags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((rc = xen_add_phys_to_mach_entry(p2m_entry) < 0) ||
 		(rc = xen_add_mach_to_phys_entry(p2m_entry) < 0)) {
+=======
+	if ((rc = xen_add_phys_to_mach_entry(p2m_entry)) < 0) {
+>>>>>>> v3.18
 =======
 	if ((rc = xen_add_phys_to_mach_entry(p2m_entry)) < 0) {
 >>>>>>> v3.18
@@ -257,7 +282,11 @@ bool __set_phys_to_machine(unsigned long pfn, unsigned long mfn)
 EXPORT_SYMBOL_GPL(__set_phys_to_machine);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int p2m_init(void)
+=======
+static int p2m_init(void)
+>>>>>>> v3.18
 =======
 static int p2m_init(void)
 >>>>>>> v3.18

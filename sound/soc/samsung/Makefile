@@ -1,6 +1,10 @@
 # S3c24XX Platform Support
 <<<<<<< HEAD
+<<<<<<< HEAD
 snd-soc-s3c24xx-objs := dma.o
+=======
+snd-soc-s3c-dma-objs := dmaengine.o
+>>>>>>> v3.18
 =======
 snd-soc-s3c-dma-objs := dmaengine.o
 >>>>>>> v3.18
@@ -14,7 +18,11 @@ snd-soc-pcm-objs := pcm.o
 snd-soc-i2s-objs := i2s.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SND_SOC_SAMSUNG) += snd-soc-s3c24xx.o
+=======
+obj-$(CONFIG_SND_SOC_SAMSUNG) += snd-soc-s3c-dma.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SND_SOC_SAMSUNG) += snd-soc-s3c-dma.o
 >>>>>>> v3.18
@@ -41,6 +49,10 @@ snd-soc-rx1950-uda1380-objs := rx1950_uda1380.o
 snd-soc-smdk-wm8580-objs := smdk_wm8580.o
 snd-soc-smdk-wm8994-objs := smdk_wm8994.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+snd-soc-snow-objs := snow.o
+>>>>>>> v3.18
 =======
 snd-soc-snow-objs := snow.o
 >>>>>>> v3.18
@@ -56,6 +68,10 @@ snd-soc-lowland-objs := lowland.o
 snd-soc-littlemill-objs := littlemill.o
 snd-soc-bells-objs := bells.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+snd-soc-odroidx2-max98090-objs := odroidx2_max98090.o
+>>>>>>> v3.18
 =======
 snd-soc-odroidx2-max98090-objs := odroidx2_max98090.o
 >>>>>>> v3.18
@@ -73,6 +89,10 @@ obj-$(CONFIG_SND_SOC_SAMSUNG_RX1950_UDA1380) += snd-soc-rx1950-uda1380.o
 obj-$(CONFIG_SND_SOC_SAMSUNG_SMDK_WM8580) += snd-soc-smdk-wm8580.o
 obj-$(CONFIG_SND_SOC_SAMSUNG_SMDK_WM8994) += snd-soc-smdk-wm8994.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SND_SOC_SNOW) += snd-soc-snow.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SND_SOC_SNOW) += snd-soc-snow.o
 >>>>>>> v3.18
@@ -88,6 +108,10 @@ obj-$(CONFIG_SND_SOC_LOWLAND) += snd-soc-lowland.o
 obj-$(CONFIG_SND_SOC_LITTLEMILL) += snd-soc-littlemill.o
 obj-$(CONFIG_SND_SOC_BELLS) += snd-soc-bells.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SND_SOC_ODROIDX2) += snd-soc-odroidx2-max98090.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SND_SOC_ODROIDX2) += snd-soc-odroidx2-max98090.o
 >>>>>>> v3.18

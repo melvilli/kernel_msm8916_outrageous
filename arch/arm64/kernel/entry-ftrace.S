@@ -97,11 +97,14 @@
  */
 ENTRY(_mcount)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HAVE_FUNCTION_TRACE_MCOUNT_TEST
 	ldr	x0, =ftrace_trace_stop
 	ldr	x0, [x0]		// if ftrace_trace_stop
 	ret				//   return;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mcount_enter

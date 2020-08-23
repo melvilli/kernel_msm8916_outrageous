@@ -19,15 +19,21 @@
 
 	cpus {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpu@0 {
 			compatible = "arm,arm926ejs";
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <0>;
 		#size-cells = <0>;
 
 		cpu {
 			compatible = "arm,arm926ej-s";
 			device_type = "cpu";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};

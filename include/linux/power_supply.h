@@ -16,9 +16,14 @@
 #include <linux/workqueue.h>
 #include <linux/leds.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/types.h>
 
 struct device;
+=======
+#include <linux/spinlock.h>
+#include <linux/notifier.h>
+>>>>>>> v3.18
 =======
 #include <linux/spinlock.h>
 #include <linux/notifier.h>
@@ -51,10 +56,13 @@ enum {
 	POWER_SUPPLY_CHARGE_TYPE_TRICKLE,
 	POWER_SUPPLY_CHARGE_TYPE_FAST,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_CHARGE_TYPE_TAPER,
 #ifdef CONFIG_MACH_OPPO
 	POWER_SUPPLY_CHARGE_TYPE_TERMINATE,
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -64,7 +72,10 @@ enum {
 	POWER_SUPPLY_HEALTH_GOOD,
 	POWER_SUPPLY_HEALTH_OVERHEAT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_HEALTH_WARM,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	POWER_SUPPLY_HEALTH_DEAD,
@@ -72,7 +83,10 @@ enum {
 	POWER_SUPPLY_HEALTH_UNSPEC_FAILURE,
 	POWER_SUPPLY_HEALTH_COLD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_HEALTH_COOL,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	POWER_SUPPLY_HEALTH_WATCHDOG_TIMER_EXPIRE,
@@ -105,6 +119,7 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum {
 	POWER_SUPPLY_DP_DM_UNKNOWN = 0,
 	POWER_SUPPLY_DP_DM_PREPARE = 1,
@@ -120,6 +135,8 @@ enum {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 enum power_supply_property {
 	/* Properties of type `int' */
 	POWER_SUPPLY_PROP_STATUS = 0,
@@ -129,8 +146,11 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_ONLINE,
 	POWER_SUPPLY_PROP_AUTHENTIC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_PROP_BATTERY_CHARGING_ENABLED,
 	POWER_SUPPLY_PROP_CHARGING_ENABLED,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	POWER_SUPPLY_PROP_TECHNOLOGY,
@@ -143,6 +163,7 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_VOLTAGE_AVG,
 	POWER_SUPPLY_PROP_VOLTAGE_OCV,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_PROP_INPUT_VOLTAGE_REGULATION,
 	POWER_SUPPLY_PROP_CURRENT_MAX,
 	POWER_SUPPLY_PROP_INPUT_CURRENT_MAX,
@@ -152,11 +173,16 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_CURRENT_NOW,
 	POWER_SUPPLY_PROP_CURRENT_AVG,
 =======
+=======
+>>>>>>> v3.18
 	POWER_SUPPLY_PROP_VOLTAGE_BOOT,
 	POWER_SUPPLY_PROP_CURRENT_MAX,
 	POWER_SUPPLY_PROP_CURRENT_NOW,
 	POWER_SUPPLY_PROP_CURRENT_AVG,
 	POWER_SUPPLY_PROP_CURRENT_BOOT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	POWER_SUPPLY_PROP_POWER_NOW,
 	POWER_SUPPLY_PROP_POWER_AVG,
@@ -168,7 +194,10 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_CHARGE_AVG,
 	POWER_SUPPLY_PROP_CHARGE_COUNTER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_PROP_CHARGE_COUNTER_SHADOW,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	POWER_SUPPLY_PROP_CONSTANT_CHARGE_CURRENT,
@@ -178,6 +207,10 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT,
 	POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT_MAX,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	POWER_SUPPLY_PROP_INPUT_CURRENT_LIMIT,
+>>>>>>> v3.18
 =======
 	POWER_SUPPLY_PROP_INPUT_CURRENT_LIMIT,
 >>>>>>> v3.18
@@ -188,8 +221,11 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_ENERGY_NOW,
 	POWER_SUPPLY_PROP_ENERGY_AVG,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_PROP_HI_POWER,
 	POWER_SUPPLY_PROP_LOW_POWER,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	POWER_SUPPLY_PROP_CAPACITY, /* in percents! */
@@ -198,15 +234,21 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_CAPACITY_LEVEL,
 	POWER_SUPPLY_PROP_TEMP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_PROP_TEMP_ALERT_MIN,
 	POWER_SUPPLY_PROP_TEMP_ALERT_MAX,
 	POWER_SUPPLY_PROP_COOL_TEMP,
 	POWER_SUPPLY_PROP_WARM_TEMP,
 =======
+=======
+>>>>>>> v3.18
 	POWER_SUPPLY_PROP_TEMP_MAX,
 	POWER_SUPPLY_PROP_TEMP_MIN,
 	POWER_SUPPLY_PROP_TEMP_ALERT_MIN,
 	POWER_SUPPLY_PROP_TEMP_ALERT_MAX,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	POWER_SUPPLY_PROP_TEMP_AMBIENT,
 	POWER_SUPPLY_PROP_TEMP_AMBIENT_ALERT_MIN,
@@ -217,6 +259,7 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_TIME_TO_FULL_AVG,
 	POWER_SUPPLY_PROP_TYPE, /* use power_supply.type instead */
 	POWER_SUPPLY_PROP_SCOPE,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	POWER_SUPPLY_PROP_SYSTEM_TEMP_LEVEL,
 	POWER_SUPPLY_PROP_RESISTANCE,
@@ -256,12 +299,19 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_CHARGE_TERM_CURRENT,
 	POWER_SUPPLY_PROP_CALIBRATE,
 >>>>>>> v3.18
+=======
+	POWER_SUPPLY_PROP_CHARGE_TERM_CURRENT,
+	POWER_SUPPLY_PROP_CALIBRATE,
+>>>>>>> v3.18
 	/* Properties of type `const char *' */
 	POWER_SUPPLY_PROP_MODEL_NAME,
 	POWER_SUPPLY_PROP_MANUFACTURER,
 	POWER_SUPPLY_PROP_SERIAL_NUMBER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_PROP_BATTERY_TYPE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -276,16 +326,22 @@ enum power_supply_type {
 	POWER_SUPPLY_TYPE_USB_CDP,	/* Charging Downstream Port */
 	POWER_SUPPLY_TYPE_USB_ACA,	/* Accessory Charger Adapters */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_TYPE_USB_HVDCP,	/* High Voltage DCP */
 	POWER_SUPPLY_TYPE_USB_HVDCP_3,  /* Efficient High Voltage DCP */
 	POWER_SUPPLY_TYPE_WIRELESS,	/* Accessory Charger Adapters */
 	POWER_SUPPLY_TYPE_BMS,		/* Battery Monitor System */
 	POWER_SUPPLY_TYPE_USB_PARALLEL,		/* USB Parallel Path */
 =======
+=======
+>>>>>>> v3.18
 };
 
 enum power_supply_notifier_events {
 	PSY_EVENT_PROP_CHANGED,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -293,15 +349,21 @@ union power_supply_propval {
 	int intval;
 	const char *strval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int64_t int64val;
 };
 
 =======
+=======
+>>>>>>> v3.18
 };
 
 struct device;
 struct device_node;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct power_supply {
 	const char *name;
@@ -315,9 +377,13 @@ struct power_supply {
 	char **supplied_from;
 	size_t num_supplies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OF
 	struct device_node *of_node;
 #endif
+=======
+	struct device_node *of_node;
+>>>>>>> v3.18
 =======
 	struct device_node *of_node;
 >>>>>>> v3.18
@@ -334,13 +400,19 @@ struct power_supply {
 	void (*set_charged)(struct power_supply *psy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Set if thermal zone should not be created for this power supply.
 	 * For example for virtual supplies forwarding calls to actual
 	 * sensors or other supplies.
 	 */
 	bool no_thermal;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* For APM emulation, think legacy userspace. */
 	int use_for_apm;
@@ -388,6 +460,7 @@ struct power_supply_info {
 	int use_for_apm;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_POWER_SUPPLY)
 extern struct power_supply *power_supply_get_by_name(const char *name);
@@ -467,6 +540,8 @@ static inline int power_supply_powers(struct power_supply *psy,
 							{ return -ENOSYS; }
 #endif
 =======
+=======
+>>>>>>> v3.18
 extern struct atomic_notifier_head power_supply_notifier;
 extern int power_supply_reg_notifier(struct notifier_block *nb);
 extern void power_supply_unreg_notifier(struct notifier_block *nb);
@@ -495,6 +570,9 @@ extern int power_supply_register_no_ws(struct device *parent,
 				 struct power_supply *psy);
 extern void power_supply_unregister(struct power_supply *psy);
 extern int power_supply_powers(struct power_supply *psy, struct device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* For APM emulation, think legacy userspace. */
@@ -511,6 +589,7 @@ static inline bool power_supply_is_amp_property(enum power_supply_property psp)
 	case POWER_SUPPLY_PROP_CHARGE_AVG:
 	case POWER_SUPPLY_PROP_CHARGE_COUNTER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case POWER_SUPPLY_PROP_CHARGE_COUNTER_SHADOW:
 	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_CURRENT:
 	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_CURRENT_MAX:
@@ -520,12 +599,17 @@ static inline bool power_supply_is_amp_property(enum power_supply_property psp)
 	case POWER_SUPPLY_PROP_CURRENT_AVG:
 	case POWER_SUPPLY_PROP_FLASH_CURRENT_MAX:
 =======
+=======
+>>>>>>> v3.18
 	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_CURRENT:
 	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_CURRENT_MAX:
 	case POWER_SUPPLY_PROP_CURRENT_MAX:
 	case POWER_SUPPLY_PROP_CURRENT_NOW:
 	case POWER_SUPPLY_PROP_CURRENT_AVG:
 	case POWER_SUPPLY_PROP_CURRENT_BOOT:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 	default:
@@ -552,6 +636,10 @@ static inline bool power_supply_is_watt_property(enum power_supply_property psp)
 	case POWER_SUPPLY_PROP_VOLTAGE_AVG:
 	case POWER_SUPPLY_PROP_VOLTAGE_OCV:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case POWER_SUPPLY_PROP_VOLTAGE_BOOT:
+>>>>>>> v3.18
 =======
 	case POWER_SUPPLY_PROP_VOLTAGE_BOOT:
 >>>>>>> v3.18

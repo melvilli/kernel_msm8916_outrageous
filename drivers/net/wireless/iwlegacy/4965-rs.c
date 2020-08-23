@@ -25,7 +25,10 @@
  *****************************************************************************/
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/skbuff.h>
@@ -2807,6 +2810,10 @@ il4965_rs_remove_debugfs(void *il, void *il_sta)
 static void
 il4965_rs_rate_init_stub(void *il_r, struct ieee80211_supported_band *sband,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			 struct cfg80211_chan_def *chandef,
+>>>>>>> v3.18
 =======
 			 struct cfg80211_chan_def *chandef,
 >>>>>>> v3.18
@@ -2815,8 +2822,12 @@ il4965_rs_rate_init_stub(void *il_r, struct ieee80211_supported_band *sband,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct rate_control_ops rs_4965_ops = {
 	.module = NULL,
+=======
+static const struct rate_control_ops rs_4965_ops = {
+>>>>>>> v3.18
 =======
 static const struct rate_control_ops rs_4965_ops = {
 >>>>>>> v3.18

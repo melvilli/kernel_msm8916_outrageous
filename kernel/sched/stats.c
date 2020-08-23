@@ -143,7 +143,11 @@ static int __init proc_schedstat_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(proc_schedstat_init);
+=======
+subsys_initcall(proc_schedstat_init);
+>>>>>>> v3.18
 =======
 subsys_initcall(proc_schedstat_init);
 >>>>>>> v3.18

@@ -17,6 +17,7 @@
  */
 #include "xfs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_log.h"
 #include "xfs_sb.h"
 #include "xfs_ag.h"
@@ -26,6 +27,8 @@
 #include "xfs_dinode.h"
 #include "xfs_inode.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_shared.h"
 #include "xfs_format.h"
 #include "xfs_log_format.h"
@@ -35,21 +38,30 @@
 #include "xfs_mount.h"
 #include "xfs_inode.h"
 #include "xfs_trans.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_inode_item.h"
 #include "xfs_alloc.h"
 #include "xfs_error.h"
 #include "xfs_iomap.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_vnodeops.h"
 #include "xfs_trace.h"
 #include "xfs_bmap.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_trace.h"
 #include "xfs_bmap.h"
 #include "xfs_bmap_util.h"
 #include "xfs_bmap_btree.h"
 #include "xfs_dinode.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/aio.h>
 #include <linux/gfp.h>
@@ -107,6 +119,7 @@ xfs_destroy_ioend(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ioend->io_iocb) {
 		inode_dio_done(ioend->io_inode);
 		if (ioend->io_isasync) {
@@ -115,6 +128,8 @@ xfs_destroy_ioend(
 		}
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mempool_free(ioend, xfs_ioend_pool);
@@ -140,7 +155,11 @@ xfs_setfilesize_trans_alloc(
 	tp = xfs_trans_alloc(mp, XFS_TRANS_FSYNC_TS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_trans_reserve(tp, 0, XFS_FSYNC_TS_LOG_RES(mp), 0, 0, 0);
+=======
+	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_fsyncts, 0, 0);
+>>>>>>> v3.18
 =======
 	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_fsyncts, 0, 0);
 >>>>>>> v3.18
@@ -186,12 +205,15 @@ xfs_setfilesize(
 			   0, 1, _THIS_IP_);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we abort the update if there was an IO error */
 	if (ioend->io_error) {
 		xfs_trans_cancel(tp, 0);
 		return ioend->io_error;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	xfs_ilock(ip, XFS_ILOCK_EXCL);
@@ -250,6 +272,11 @@ xfs_end_io(
 		goto done;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ioend->io_error)
+		goto done;
+>>>>>>> v3.18
 =======
 	if (ioend->io_error)
 		goto done;
@@ -259,6 +286,7 @@ xfs_end_io(
 	 * For unwritten extents we need to issue transactions to convert a
 	 * range to normal written extens after the data I/O has finished.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Detecting and handling completion IO errors is done individually
 	 * for each case as different cleanup operations need to be performed
 	 * on error.
@@ -266,6 +294,10 @@ xfs_end_io(
 	if (ioend->io_type == XFS_IO_UNWRITTEN) {
 		if (ioend->io_error)
 			goto done;
+=======
+	 */
+	if (ioend->io_type == XFS_IO_UNWRITTEN) {
+>>>>>>> v3.18
 =======
 	 */
 	if (ioend->io_type == XFS_IO_UNWRITTEN) {
@@ -295,7 +327,11 @@ xfs_end_io(
 done:
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ioend->io_error = -error;
+=======
+		ioend->io_error = error;
+>>>>>>> v3.18
 =======
 		ioend->io_error = error;
 >>>>>>> v3.18
@@ -335,7 +371,10 @@ xfs_alloc_ioend(
 	 */
 	atomic_set(&ioend->io_remaining, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioend->io_isasync = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ioend->io_isdirect = 0;
@@ -348,8 +387,11 @@ xfs_alloc_ioend(
 	ioend->io_offset = 0;
 	ioend->io_size = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioend->io_iocb = NULL;
 	ioend->io_result = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ioend->io_append_trans = NULL;
@@ -376,7 +418,11 @@ xfs_map_blocks(
 
 	if (XFS_FORCED_SHUTDOWN(mp))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EIO);
+=======
+		return -EIO;
+>>>>>>> v3.18
 =======
 		return -EIO;
 >>>>>>> v3.18
@@ -387,7 +433,11 @@ xfs_map_blocks(
 	if (!xfs_ilock_nowait(ip, XFS_ILOCK_SHARED)) {
 		if (nonblocking)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -XFS_ERROR(EAGAIN);
+=======
+			return -EAGAIN;
+>>>>>>> v3.18
 =======
 			return -EAGAIN;
 >>>>>>> v3.18
@@ -408,6 +458,7 @@ xfs_map_blocks(
 
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(error);
 
 	if (type == XFS_IO_DELALLOC &&
@@ -417,6 +468,8 @@ xfs_map_blocks(
 			trace_xfs_map_blocks_alloc(ip, offset, count, type, imap);
 		return -XFS_ERROR(error);
 =======
+=======
+>>>>>>> v3.18
 		return error;
 
 	if (type == XFS_IO_DELALLOC &&
@@ -425,6 +478,9 @@ xfs_map_blocks(
 		if (!error)
 			trace_xfs_map_blocks_alloc(ip, offset, count, type, imap);
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -494,7 +550,11 @@ xfs_alloc_ioend_bio(
 
 	ASSERT(bio->bi_private == NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_sector = bh->b_blocknr * (bh->b_size >> 9);
+=======
+	bio->bi_iter.bi_sector = bh->b_blocknr * (bh->b_size >> 9);
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_sector = bh->b_blocknr * (bh->b_size >> 9);
 >>>>>>> v3.18
@@ -525,11 +585,14 @@ xfs_start_page_writeback(
 	ASSERT(PageLocked(page));
 	ASSERT(!PageWriteback(page));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (clear_dirty)
 		clear_page_dirty_for_io(page);
 	set_page_writeback(page);
 	unlock_page(page);
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * if the page was not fully cleaned, we need to ensure that the higher
@@ -546,6 +609,9 @@ xfs_start_page_writeback(
 
 	unlock_page(page);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* If no buffers on the page are to be written, finish it here */
 	if (!buffers)
@@ -553,7 +619,11 @@ xfs_start_page_writeback(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int bio_add_buffer(struct bio *bio, struct buffer_head *bh)
+=======
+static inline int xfs_bio_add_buffer(struct bio *bio, struct buffer_head *bh)
+>>>>>>> v3.18
 =======
 static inline int xfs_bio_add_buffer(struct bio *bio, struct buffer_head *bh)
 >>>>>>> v3.18
@@ -616,7 +686,11 @@ xfs_submit_ioend(
 		 */
 		if (fail) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ioend->io_error = -fail;
+=======
+			ioend->io_error = fail;
+>>>>>>> v3.18
 =======
 			ioend->io_error = fail;
 >>>>>>> v3.18
@@ -635,7 +709,11 @@ xfs_submit_ioend(
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (bio_add_buffer(bio, bh) != bh->b_size) {
+=======
+			if (xfs_bio_add_buffer(bio, bh) != bh->b_size) {
+>>>>>>> v3.18
 =======
 			if (xfs_bio_add_buffer(bio, bh) != bh->b_size) {
 >>>>>>> v3.18
@@ -670,7 +748,10 @@ xfs_cancel_ioend(
 			next_bh = bh->b_private;
 			clear_buffer_async_write(bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * The unwritten flag is cleared when added to the
 			 * ioend. We're not submitting for I/O so mark the
@@ -678,6 +759,9 @@ xfs_cancel_ioend(
 			 */
 			if (ioend->io_type == XFS_IO_UNWRITTEN)
 				set_buffer_unwritten(bh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			unlock_buffer(bh);
 		} while ((bh = next_bh) != NULL);
@@ -764,6 +848,7 @@ xfs_map_at_offset(
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Test if a given page is suitable for writing as part of an unwritten
  * or delayed allocate extent.
  */
@@ -797,6 +882,8 @@ xfs_check_page_type(
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
  * Test if a given page contains at least one buffer of a given @type.
  * If @check_all_buffers is true, then we walk all the buffers in the page to
  * try to find one of the type passed in. If it is not set, then the caller only
@@ -837,6 +924,9 @@ xfs_check_page_type(
 	} while ((bh = bh->b_this_page) != head);
 
 	return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -872,7 +962,11 @@ xfs_convert_page(
 	if (page->mapping != inode->i_mapping)
 		goto fail_unlock_page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!xfs_check_page_type(page, (*ioendp)->io_type))
+=======
+	if (!xfs_check_page_type(page, (*ioendp)->io_type, false))
+>>>>>>> v3.18
 =======
 	if (!xfs_check_page_type(page, (*ioendp)->io_type, false))
 >>>>>>> v3.18
@@ -921,7 +1015,10 @@ xfs_convert_page(
 	page_dirty = p_offset / len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The moment we find a buffer that doesn't match our current type
 	 * specification or can't be written, abort the loop and start
@@ -931,6 +1028,9 @@ xfs_convert_page(
 	 * ioend, and hence a buffer we can't write breaks that contiguity and
 	 * we have to defer the rest of the IO to xfs_vm_writepage().
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bh = head = page_buffers(page);
 	do {
@@ -941,7 +1041,11 @@ xfs_convert_page(
 		if (!(PageUptodate(page) || buffer_uptodate(bh))) {
 			done = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			continue;
+=======
+			break;
+>>>>>>> v3.18
 =======
 			break;
 >>>>>>> v3.18
@@ -957,16 +1061,22 @@ xfs_convert_page(
 				type = XFS_IO_OVERWRITE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!xfs_imap_valid(inode, imap, offset)) {
 				done = 1;
 				continue;
 			}
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * imap should always be valid because of the above
 			 * partial page end_offset check on the imap.
 			 */
 			ASSERT(xfs_imap_valid(inode, imap, offset));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			lock_buffer(bh);
@@ -980,6 +1090,10 @@ xfs_convert_page(
 		} else {
 			done = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			break;
+>>>>>>> v3.18
 =======
 			break;
 >>>>>>> v3.18
@@ -1042,17 +1156,23 @@ STATIC void
 xfs_vm_invalidatepage(
 	struct page		*page,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long		offset)
 {
 	trace_xfs_invalidatepage(page->mapping->host, page, offset);
 	block_invalidatepage(page, offset);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		offset,
 	unsigned int		length)
 {
 	trace_xfs_invalidatepage(page->mapping->host, page, offset,
 				 length);
 	block_invalidatepage(page, offset, length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1082,7 +1202,11 @@ xfs_aops_discard_page(
 	loff_t			offset = page_offset(page);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!xfs_check_page_type(page, XFS_IO_DELALLOC))
+=======
+	if (!xfs_check_page_type(page, XFS_IO_DELALLOC, true))
+>>>>>>> v3.18
 =======
 	if (!xfs_check_page_type(page, XFS_IO_DELALLOC, true))
 >>>>>>> v3.18
@@ -1122,7 +1246,11 @@ next_buffer:
 	xfs_iunlock(ip, XFS_ILOCK_EXCL);
 out_invalidate:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_vm_invalidatepage(page, 0);
+=======
+	xfs_vm_invalidatepage(page, 0, PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 =======
 	xfs_vm_invalidatepage(page, 0, PAGE_CACHE_SIZE);
 >>>>>>> v3.18
@@ -1156,7 +1284,11 @@ xfs_vm_writepage(
 	int			nonblocking = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_xfs_writepage(inode, page, 0);
+=======
+	trace_xfs_writepage(inode, page, 0, 0);
+>>>>>>> v3.18
 =======
 	trace_xfs_writepage(inode, page, 0, 0);
 >>>>>>> v3.18
@@ -1182,7 +1314,11 @@ xfs_vm_writepage(
 	 * never be called while in a filesystem transaction.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON(current->flags & PF_FSTRANS))
+=======
+	if (WARN_ON_ONCE(current->flags & PF_FSTRANS))
+>>>>>>> v3.18
 =======
 	if (WARN_ON_ONCE(current->flags & PF_FSTRANS))
 >>>>>>> v3.18
@@ -1193,8 +1329,11 @@ xfs_vm_writepage(
 	end_index = offset >> PAGE_CACHE_SHIFT;
 	last_index = (offset - 1) >> PAGE_CACHE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (page->index >= end_index) {
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * The page index is less than the end_index, adjust the end_offset
@@ -1221,6 +1360,9 @@ xfs_vm_writepage(
 		 * |				    |      Straddles     |
 		 * ---------------------------------^-----------|--------|
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		unsigned offset_into_page = offset & (PAGE_CACHE_SIZE - 1);
 
@@ -1230,9 +1372,12 @@ xfs_vm_writepage(
 		 * page so that reclaim stops reclaiming it. Otherwise
 		 * xfs_vm_releasepage() is called on it and gets confused.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 */
 		if (page->index >= end_index + 1 || offset_into_page == 0)
 =======
+=======
+>>>>>>> v3.18
 		 *
 		 * Note that the end_index is unsigned long, it would overflow
 		 * if the given offset is greater than 16TB on 32-bit system
@@ -1247,6 +1392,9 @@ xfs_vm_writepage(
 		 */
 		if (page->index > end_index ||
 		    (page->index == end_index && offset_into_page == 0))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto redirty;
 
@@ -1255,7 +1403,11 @@ xfs_vm_writepage(
 		 * and every writepage invocation because it may be mmapped.
 		 * "A file is mapped in multiples of the page size.  For a file
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * that is not a multiple of the  page size, the remaining
+=======
+		 * that is not a multiple of the page size, the remaining
+>>>>>>> v3.18
 =======
 		 * that is not a multiple of the page size, the remaining
 >>>>>>> v3.18
@@ -1264,17 +1416,23 @@ xfs_vm_writepage(
 		 */
 		zero_user_segment(page, offset_into_page, PAGE_CACHE_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	end_offset = min_t(unsigned long long,
 			(xfs_off_t)(page->index + 1) << PAGE_CACHE_SHIFT,
 			offset);
 =======
+=======
+>>>>>>> v3.18
 
 		/* Adjust the end_offset to the end of file */
 		end_offset = offset;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	len = 1 << inode->i_blkbits;
 
@@ -1453,6 +1611,7 @@ xfs_vm_releasepage(
 	int			delalloc, unwritten;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_xfs_releasepage(page->mapping->host, page, 0);
 
 	xfs_count_page_state(page, &delalloc, &unwritten);
@@ -1461,6 +1620,8 @@ xfs_vm_releasepage(
 		return 0;
 	if (WARN_ON(unwritten))
 =======
+=======
+>>>>>>> v3.18
 	trace_xfs_releasepage(page->mapping->host, page, 0, 0);
 
 	xfs_count_page_state(page, &delalloc, &unwritten);
@@ -1468,6 +1629,9 @@ xfs_vm_releasepage(
 	if (WARN_ON_ONCE(delalloc))
 		return 0;
 	if (WARN_ON_ONCE(unwritten))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -1495,7 +1659,11 @@ __xfs_get_blocks(
 
 	if (XFS_FORCED_SHUTDOWN(mp))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EIO);
+=======
+		return -EIO;
+>>>>>>> v3.18
 =======
 		return -EIO;
 >>>>>>> v3.18
@@ -1519,7 +1687,11 @@ __xfs_get_blocks(
 		xfs_ilock(ip, lockmode);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lockmode = xfs_ilock_map_shared(ip);
+=======
+		lockmode = xfs_ilock_data_map_shared(ip);
+>>>>>>> v3.18
 =======
 		lockmode = xfs_ilock_data_map_shared(ip);
 >>>>>>> v3.18
@@ -1552,7 +1724,11 @@ __xfs_get_blocks(
 						       &imap, nimaps);
 			if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return -error;
+=======
+				return error;
+>>>>>>> v3.18
 =======
 				return error;
 >>>>>>> v3.18
@@ -1594,13 +1770,19 @@ __xfs_get_blocks(
 			xfs_map_buffer(inode, bh_result, &imap, offset);
 		if (create && ISUNWRITTEN(&imap)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (direct)
 				bh_result->b_private = inode;
 =======
+=======
+>>>>>>> v3.18
 			if (direct) {
 				bh_result->b_private = inode;
 				set_buffer_defer_completion(bh_result);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			set_buffer_unwritten(bh_result);
 		}
@@ -1640,7 +1822,10 @@ __xfs_get_blocks(
 	 * If this is O_DIRECT or the mpage code calling tell them how large
 	 * the mapping is, so that we can avoid repeated get_blocks calls.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 *
 	 * If the mapping spans EOF, then we have to break the mapping up as the
 	 * mapping for blocks beyond EOF must be marked new so that sub block
@@ -1649,6 +1834,9 @@ __xfs_get_blocks(
 	 * the callers would overwrite existing data with zeros. Hence we have
 	 * to split the mapping into a range up to and including EOF, and a
 	 * second mapping for beyond EOF.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	if (direct || size > (1 << inode->i_blkbits)) {
@@ -1661,13 +1849,19 @@ __xfs_get_blocks(
 		if (mapping_size > size)
 			mapping_size = size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (offset < i_size_read(inode) &&
 		    offset + mapping_size >= i_size_read(inode)) {
 			/* limit mapping to block that spans EOF */
 			mapping_size = roundup_64(i_size_read(inode) - offset,
 						  1 << inode->i_blkbits);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (mapping_size > LONG_MAX)
 			mapping_size = LONG_MAX;
@@ -1680,7 +1874,11 @@ __xfs_get_blocks(
 out_unlock:
 	xfs_iunlock(ip, lockmode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -error;
+=======
+	return error;
+>>>>>>> v3.18
 =======
 	return error;
 >>>>>>> v3.18
@@ -1723,9 +1921,13 @@ xfs_end_io_direct_write(
 	loff_t			offset,
 	ssize_t			size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void			*private,
 	int			ret,
 	bool			is_async)
+=======
+	void			*private)
+>>>>>>> v3.18
 =======
 	void			*private)
 >>>>>>> v3.18
@@ -1751,6 +1953,7 @@ xfs_end_io_direct_write(
 	ioend->io_offset = offset;
 	ioend->io_size = size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioend->io_iocb = iocb;
 	ioend->io_result = ret;
 	if (private && size > 0)
@@ -1763,10 +1966,15 @@ xfs_end_io_direct_write(
 		xfs_finish_ioend_sync(ioend);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (private && size > 0)
 		ioend->io_type = XFS_IO_UNWRITTEN;
 
 	xfs_finish_ioend_sync(ioend);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1775,9 +1983,14 @@ xfs_vm_direct_IO(
 	int			rw,
 	struct kiocb		*iocb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct iovec	*iov,
 	loff_t			offset,
 	unsigned long		nr_segs)
+=======
+	struct iov_iter		*iter,
+	loff_t			offset)
+>>>>>>> v3.18
 =======
 	struct iov_iter		*iter,
 	loff_t			offset)
@@ -1790,7 +2003,11 @@ xfs_vm_direct_IO(
 
 	if (rw & WRITE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		size_t size = iov_length(iov, nr_segs);
+=======
+		size_t size = iov_iter_count(iter);
+>>>>>>> v3.18
 =======
 		size_t size = iov_iter_count(iter);
 >>>>>>> v3.18
@@ -1806,6 +2023,7 @@ xfs_vm_direct_IO(
 			ioend->io_isdirect = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = __blockdev_direct_IO(rw, iocb, inode, bdev, iov,
 					    offset, nr_segs,
 					    xfs_get_blocks_direct,
@@ -1817,6 +2035,8 @@ xfs_vm_direct_IO(
 					    offset, nr_segs,
 					    xfs_get_blocks_direct,
 =======
+=======
+>>>>>>> v3.18
 		ret = __blockdev_direct_IO(rw, iocb, inode, bdev, iter,
 					    offset, xfs_get_blocks_direct,
 					    xfs_end_io_direct_write, NULL,
@@ -1826,6 +2046,9 @@ xfs_vm_direct_IO(
 	} else {
 		ret = __blockdev_direct_IO(rw, iocb, inode, bdev, iter,
 					    offset, xfs_get_blocks_direct,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					    NULL, NULL, 0);
 	}
@@ -1881,7 +2104,11 @@ xfs_vm_write_failed(
 	unsigned		len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	loff_t			block_offset = pos & PAGE_MASK;
+=======
+	loff_t			block_offset;
+>>>>>>> v3.18
 =======
 	loff_t			block_offset;
 >>>>>>> v3.18
@@ -1892,7 +2119,10 @@ xfs_vm_write_failed(
 	struct buffer_head	*bh, *head;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The request pos offset might be 32 or 64 bit, this is all fine
 	 * on 64-bit platform.  However, for 64-bit pos request on 32-bit
@@ -1906,6 +2136,9 @@ xfs_vm_write_failed(
 	 */
 	block_offset = (pos >> PAGE_CACHE_SHIFT) << PAGE_CACHE_SHIFT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ASSERT(block_offset + from == pos);
 
@@ -1933,7 +2166,10 @@ xfs_vm_write_failed(
 		xfs_vm_kill_delalloc_range(inode, block_offset,
 					   block_offset + bh->b_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/*
 		 * This buffer does not contain data anymore. make sure anyone
@@ -1944,6 +2180,9 @@ xfs_vm_write_failed(
 		clear_buffer_mapped(bh);
 		clear_buffer_new(bh);
 		clear_buffer_dirty(bh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1972,8 +2211,12 @@ xfs_vm_write_begin(
 	ASSERT(len <= PAGE_CACHE_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	page = grab_cache_page_write_begin(mapping, index,
 					   flags | AOP_FLAG_NOFS);
+=======
+	page = grab_cache_page_write_begin(mapping, index, flags);
+>>>>>>> v3.18
 =======
 	page = grab_cache_page_write_begin(mapping, index, flags);
 >>>>>>> v3.18
@@ -1984,6 +2227,10 @@ xfs_vm_write_begin(
 	if (unlikely(status)) {
 		struct inode	*inode = mapping->host;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		size_t		isize = i_size_read(inode);
+>>>>>>> v3.18
 =======
 		size_t		isize = i_size_read(inode);
 >>>>>>> v3.18
@@ -1992,9 +2239,12 @@ xfs_vm_write_begin(
 		unlock_page(page);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pos + len > i_size_read(inode))
 			truncate_pagecache(inode, pos + len, i_size_read(inode));
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * If the write is beyond EOF, we only want to kill blocks
 		 * allocated in this write, not blocks that were previously
@@ -2005,6 +2255,9 @@ xfs_vm_write_begin(
 
 			truncate_pagecache_range(inode, start, pos + len);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		page_cache_release(page);
@@ -2017,16 +2270,22 @@ xfs_vm_write_begin(
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * On failure, we only need to kill delalloc blocks beyond EOF because they
  * will never be written. For blocks within EOF, generic_write_end() zeros them
  * so they are safe to leave alone and be written with all the other valid data.
 =======
+=======
+>>>>>>> v3.18
  * On failure, we only need to kill delalloc blocks beyond EOF in the range of
  * this specific write because they will never be written. Previous writes
  * beyond EOF where block allocation succeeded do not need to be trashed, so
  * only new blocks from this write should be trashed. For blocks within
  * EOF, generic_write_end() zeros them so they are safe to leave alone and be
  * written with all the other valid data.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 STATIC int
@@ -2051,14 +2310,20 @@ xfs_vm_write_end(
 
 		if (to > isize) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			truncate_pagecache(inode, to, isize);
 			xfs_vm_kill_delalloc_range(inode, isize, to);
 =======
+=======
+>>>>>>> v3.18
 			/* only kill blocks in this write beyond EOF */
 			if (pos > isize)
 				isize = pos;
 			xfs_vm_kill_delalloc_range(inode, isize, to);
 			truncate_pagecache_range(inode, isize, to);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}

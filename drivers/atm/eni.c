@@ -2156,7 +2156,11 @@ static int eni_proc_read(struct atm_dev *dev,loff_t *pos,char *page)
 		if (!tx->send) continue;
 		if (!--left) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return sprintf(page,"tx[%d]:    0x%ld-0x%ld "
+=======
+			return sprintf(page, "tx[%d]:    0x%lx-0x%lx "
+>>>>>>> v3.18
 =======
 			return sprintf(page, "tx[%d]:    0x%lx-0x%lx "
 >>>>>>> v3.18
@@ -2186,7 +2190,11 @@ static int eni_proc_read(struct atm_dev *dev,loff_t *pos,char *page)
 			length = sprintf(page,"vcc %4d: ",vcc->vci);
 			if (eni_vcc->rx) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				length += sprintf(page+length,"0x%ld-0x%ld "
+=======
+				length += sprintf(page+length, "0x%lx-0x%lx "
+>>>>>>> v3.18
 =======
 				length += sprintf(page+length, "0x%lx-0x%lx "
 >>>>>>> v3.18

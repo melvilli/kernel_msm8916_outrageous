@@ -26,7 +26,10 @@
 #include <linux/etherdevice.h>
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/crc32.h>
@@ -413,7 +416,11 @@ struct netdev_private {
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(rio_pci_tbl) = {
+=======
+static const struct pci_device_id rio_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id rio_pci_tbl[] = {
 >>>>>>> v3.18

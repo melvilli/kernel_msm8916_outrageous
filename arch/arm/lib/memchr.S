@@ -23,7 +23,11 @@ ENTRY(memchr)
 	sub	r0, r0, #1
 2:	movne	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

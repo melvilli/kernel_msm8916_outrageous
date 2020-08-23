@@ -1,7 +1,11 @@
 /*
  * QLogic iSCSI HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2012 QLogic Corporation
+=======
+ * Copyright (c)  2003-2013 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2013 QLogic Corporation
 >>>>>>> v3.18
@@ -10,6 +14,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ctype.h>
+>>>>>>> v3.18
 =======
 #include <linux/ctype.h>
 >>>>>>> v3.18
@@ -61,7 +69,11 @@ static int qla4xxx_is_intr_poll_mode(struct scsi_qla_host *ha)
 	int rval = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_qla8032(ha)) {
+=======
+	if (is_qla8032(ha) || is_qla8042(ha)) {
+>>>>>>> v3.18
 =======
 	if (is_qla8032(ha) || is_qla8042(ha)) {
 >>>>>>> v3.18
@@ -224,9 +236,14 @@ int qla4xxx_mailbox_command(struct scsi_qla_host *ha, uint8_t inCount,
 			goto mbox_exit;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG2(printk("scsi%ld: Mailbox Cmd 0x%08X timed out ...,"
 			      " Scheduling Adapter Reset\n", ha->host_no,
 			      mbx_cmd[0]));
+=======
+		ql4_printk(KERN_WARNING, ha, "scsi%ld: Mailbox Cmd 0x%08X timed out, Scheduling Adapter Reset\n",
+			   ha->host_no, mbx_cmd[0]);
+>>>>>>> v3.18
 =======
 		ql4_printk(KERN_WARNING, ha, "scsi%ld: Mailbox Cmd 0x%08X timed out, Scheduling Adapter Reset\n",
 			   ha->host_no, mbx_cmd[0]);
@@ -241,7 +258,11 @@ int qla4xxx_mailbox_command(struct scsi_qla_host *ha, uint8_t inCount,
 					CRB_NIU_XG_PAUSE_CTL_P0 |
 					CRB_NIU_XG_PAUSE_CTL_P1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (is_qla8032(ha)) {
+=======
+		} else if (is_qla8032(ha) || is_qla8042(ha)) {
+>>>>>>> v3.18
 =======
 		} else if (is_qla8032(ha) || is_qla8042(ha)) {
 >>>>>>> v3.18
@@ -272,8 +293,13 @@ int qla4xxx_mailbox_command(struct scsi_qla_host *ha, uint8_t inCount,
 
 	case MBOX_STS_BUSY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG2( printk("scsi%ld: %s: Cmd = %08X, ISP BUSY\n",
 			       ha->host_no, __func__, mbx_cmd[0]));
+=======
+		ql4_printk(KERN_WARNING, ha, "scsi%ld: %s: Cmd = %08X, ISP BUSY\n",
+			   ha->host_no, __func__, mbx_cmd[0]);
+>>>>>>> v3.18
 =======
 		ql4_printk(KERN_WARNING, ha, "scsi%ld: %s: Cmd = %08X, ISP BUSY\n",
 			   ha->host_no, __func__, mbx_cmd[0]);
@@ -283,14 +309,20 @@ int qla4xxx_mailbox_command(struct scsi_qla_host *ha, uint8_t inCount,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG2(printk("scsi%ld: %s: **** FAILED, cmd = %08X, "
 			      "sts = %08X ****\n", ha->host_no, __func__,
 			      mbx_cmd[0], mbx_sts[0]));
 =======
+=======
+>>>>>>> v3.18
 		ql4_printk(KERN_WARNING, ha, "scsi%ld: %s: FAILED, MBOX CMD = %08X, MBOX STS = %08X %08X %08X %08X %08X %08X %08X %08X\n",
 			   ha->host_no, __func__, mbx_cmd[0], mbx_sts[0],
 			   mbx_sts[1], mbx_sts[2], mbx_sts[3], mbx_sts[4],
 			   mbx_sts[5], mbx_sts[6], mbx_sts[7]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -416,7 +448,10 @@ qla4xxx_set_ifcb(struct scsi_qla_host *ha, uint32_t *mbox_cmd,
 	mbox_cmd[3] = MSDW(init_fw_cb_dma);
 	mbox_cmd[4] = sizeof(struct addr_ctrl_blk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mbox_cmd[5] = (IFCB_VER_MAX << 8) | IFCB_VER_MIN;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -454,7 +489,10 @@ qla4xxx_get_ifcb(struct scsi_qla_host *ha, uint32_t *mbox_cmd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 uint8_t qla4xxx_set_ipaddr_state(uint8_t fw_ipaddr_state)
 {
 	uint8_t ipaddr_state;
@@ -487,6 +525,9 @@ uint8_t qla4xxx_set_ipaddr_state(uint8_t fw_ipaddr_state)
 	return ipaddr_state;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void
 qla4xxx_update_local_ip(struct scsi_qla_host *ha,
@@ -496,7 +537,11 @@ qla4xxx_update_local_ip(struct scsi_qla_host *ha,
 	ha->ip_config.ipv4_options = le16_to_cpu(init_fw_cb->ipv4_ip_opts);
 	ha->ip_config.ipv4_addr_state =
 <<<<<<< HEAD
+<<<<<<< HEAD
 				le16_to_cpu(init_fw_cb->ipv4_addr_state);
+=======
+			qla4xxx_set_ipaddr_state(init_fw_cb->ipv4_addr_state);
+>>>>>>> v3.18
 =======
 			qla4xxx_set_ipaddr_state(init_fw_cb->ipv4_addr_state);
 >>>>>>> v3.18
@@ -509,6 +554,11 @@ qla4xxx_update_local_ip(struct scsi_qla_host *ha,
 		ha->ip_config.ipv6_addl_options =
 				le16_to_cpu(init_fw_cb->ipv6_addtl_opts);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ha->ip_config.ipv6_tcp_options =
+				le16_to_cpu(init_fw_cb->ipv6_tcp_opts);
+>>>>>>> v3.18
 =======
 		ha->ip_config.ipv6_tcp_options =
 				le16_to_cpu(init_fw_cb->ipv6_tcp_opts);
@@ -528,7 +578,10 @@ qla4xxx_update_local_ip(struct scsi_qla_host *ha,
 
 	ha->ip_config.ipv4_vlan_tag = be16_to_cpu(init_fw_cb->ipv4_vlan_tag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ha->ip_config.control = init_fw_cb->control;
 	ha->ip_config.tcp_wsf = init_fw_cb->ipv4_tcp_wsf;
 	ha->ip_config.ipv4_tos = init_fw_cb->ipv4_tos;
@@ -556,11 +609,15 @@ qla4xxx_update_local_ip(struct scsi_qla_host *ha,
 	memcpy(ha->ip_config.iscsi_name, init_fw_cb->iscsi_name,
 	       min(sizeof(ha->ip_config.iscsi_name),
 		   sizeof(init_fw_cb->iscsi_name)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (is_ipv6_enabled(ha)) {
 		/* Save IPv6 Address */
 		ha->ip_config.ipv6_link_local_state =
+<<<<<<< HEAD
 <<<<<<< HEAD
 			le16_to_cpu(init_fw_cb->ipv6_lnk_lcl_addr_state);
 		ha->ip_config.ipv6_addr0_state =
@@ -570,6 +627,8 @@ qla4xxx_update_local_ip(struct scsi_qla_host *ha,
 		ha->ip_config.ipv6_default_router_state =
 				le16_to_cpu(init_fw_cb->ipv6_dflt_rtr_state);
 =======
+=======
+>>>>>>> v3.18
 		  qla4xxx_set_ipaddr_state(init_fw_cb->ipv6_lnk_lcl_addr_state);
 		ha->ip_config.ipv6_addr0_state =
 			qla4xxx_set_ipaddr_state(init_fw_cb->ipv6_addr0_state);
@@ -598,6 +657,9 @@ qla4xxx_update_local_ip(struct scsi_qla_host *ha,
 						ISCSI_ROUTER_STATE_UNKNOWN;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ha->ip_config.ipv6_link_local_addr.in6_u.u6_addr8[0] = 0xFE;
 		ha->ip_config.ipv6_link_local_addr.in6_u.u6_addr8[1] = 0x80;
@@ -620,7 +682,10 @@ qla4xxx_update_local_ip(struct scsi_qla_host *ha,
 				be16_to_cpu(init_fw_cb->ipv6_vlan_tag);
 		ha->ip_config.ipv6_port = le16_to_cpu(init_fw_cb->ipv6_port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		ha->ip_config.ipv6_cache_id = init_fw_cb->ipv6_cache_id;
 		ha->ip_config.ipv6_flow_lbl =
 				le16_to_cpu(init_fw_cb->ipv6_flow_lbl);
@@ -638,6 +703,9 @@ qla4xxx_update_local_ip(struct scsi_qla_host *ha,
 		ha->ip_config.ipv6_gw_advrt_mtu =
 				le32_to_cpu(init_fw_cb->ipv6_gw_advrt_mtu);
 		ha->ip_config.ipv6_tcp_wsf = init_fw_cb->ipv6_tcp_wsf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -710,9 +778,12 @@ int qla4xxx_initialize_fw_cb(struct scsi_qla_host * ha)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Initialize request and response queues. */
 	qla4xxx_init_rings(ha);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Fill in the request and response queue information. */
@@ -1067,11 +1138,17 @@ int qla4xxx_session_logout_ddb(struct scsi_qla_host *ha,
 				  "failed sts %04X %04X", __func__,
 				  mbox_sts[0], mbox_sts[1]));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if ((mbox_sts[0] == MBOX_STS_COMMAND_ERROR) &&
 		    (mbox_sts[1] == DDB_NOT_LOGGED_IN)) {
 			set_bit(DDB_CONN_CLOSE_FAILURE, &ddb_entry->flags);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1277,7 +1354,11 @@ int qla4xxx_abort_task(struct scsi_qla_host *ha, struct srb *srb)
 		status = QLA_ERROR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG2(printk(KERN_WARNING "scsi%ld:%d:%d: abort task FAILED: "
+=======
+		DEBUG2(printk(KERN_WARNING "scsi%ld:%d:%llu: abort task FAILED: "
+>>>>>>> v3.18
 =======
 		DEBUG2(printk(KERN_WARNING "scsi%ld:%d:%llu: abort task FAILED: "
 >>>>>>> v3.18
@@ -1301,7 +1382,11 @@ int qla4xxx_abort_task(struct scsi_qla_host *ha, struct srb *srb)
  **/
 int qla4xxx_reset_lun(struct scsi_qla_host * ha, struct ddb_entry * ddb_entry,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      int lun)
+=======
+		      uint64_t lun)
+>>>>>>> v3.18
 =======
 		      uint64_t lun)
 >>>>>>> v3.18
@@ -1312,7 +1397,11 @@ int qla4xxx_reset_lun(struct scsi_qla_host * ha, struct ddb_entry * ddb_entry,
 	int status = QLA_SUCCESS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG2(printk("scsi%ld:%d:%d: lun reset issued\n", ha->host_no,
+=======
+	DEBUG2(printk("scsi%ld:%d:%llu: lun reset issued\n", ha->host_no,
+>>>>>>> v3.18
 =======
 	DEBUG2(printk("scsi%ld:%d:%llu: lun reset issued\n", ha->host_no,
 >>>>>>> v3.18
@@ -1454,6 +1543,7 @@ int qla4xxx_about_firmware(struct scsi_qla_host *ha)
 
 	/* Save version information. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ha->firmware_version[0] = le16_to_cpu(about_fw->fw_major);
 	ha->firmware_version[1] = le16_to_cpu(about_fw->fw_minor);
 	ha->patch_number = le16_to_cpu(about_fw->fw_patch);
@@ -1465,6 +1555,8 @@ int qla4xxx_about_firmware(struct scsi_qla_host *ha)
 	ha->bootload_patch = le16_to_cpu(about_fw->bootload_patch);
 	ha->bootload_build = le16_to_cpu(about_fw->bootload_build);
 =======
+=======
+>>>>>>> v3.18
 	ha->fw_info.fw_major = le16_to_cpu(about_fw->fw_major);
 	ha->fw_info.fw_minor = le16_to_cpu(about_fw->fw_minor);
 	ha->fw_info.fw_patch = le16_to_cpu(about_fw->fw_patch);
@@ -1487,6 +1579,9 @@ int qla4xxx_about_firmware(struct scsi_qla_host *ha)
 
 	ha->fw_uptime_secs = le32_to_cpu(mbox_sts[5]);
 	ha->fw_uptime_msecs = le32_to_cpu(mbox_sts[6]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = QLA_SUCCESS;
 
@@ -1717,8 +1812,13 @@ int qla4xxx_get_chap(struct scsi_qla_host *ha, char *username, char *password,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(password, chap_table->secret, QL4_CHAP_MAX_SECRET_LEN);
 	strncpy(username, chap_table->name, QL4_CHAP_MAX_NAME_LEN);
+=======
+	strlcpy(password, chap_table->secret, QL4_CHAP_MAX_SECRET_LEN);
+	strlcpy(username, chap_table->name, QL4_CHAP_MAX_NAME_LEN);
+>>>>>>> v3.18
 =======
 	strlcpy(password, chap_table->secret, QL4_CHAP_MAX_SECRET_LEN);
 	strlcpy(username, chap_table->name, QL4_CHAP_MAX_NAME_LEN);
@@ -1731,9 +1831,12 @@ exit_get_chap:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qla4xxx_set_chap(struct scsi_qla_host *ha, char *username,
 			    char *password, uint16_t idx, int bidi)
 =======
+=======
+>>>>>>> v3.18
 /**
  * qla4xxx_set_chap - Make a chap entry at the given index
  * @ha: pointer to adapter structure
@@ -1748,6 +1851,9 @@ static int qla4xxx_set_chap(struct scsi_qla_host *ha, char *username,
  **/
 int qla4xxx_set_chap(struct scsi_qla_host *ha, char *username, char *password,
 		     uint16_t idx, int bidi)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret = 0;
@@ -1755,6 +1861,10 @@ int qla4xxx_set_chap(struct scsi_qla_host *ha, char *username, char *password,
 	uint32_t offset = 0;
 	struct ql4_chap_table *chap_table;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t chap_size = 0;
+>>>>>>> v3.18
 =======
 	uint32_t chap_size = 0;
 >>>>>>> v3.18
@@ -1773,11 +1883,14 @@ int qla4xxx_set_chap(struct scsi_qla_host *ha, char *username, char *password,
 		chap_table->flags |= BIT_7; /* local */
 	chap_table->secret_len = strlen(password);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(chap_table->secret, password, MAX_CHAP_SECRET_LEN);
 	strncpy(chap_table->name, username, MAX_CHAP_NAME_LEN);
 	chap_table->cookie = __constant_cpu_to_le16(CHAP_VALID_COOKIE);
 	offset = FLASH_CHAP_OFFSET | (idx * sizeof(struct ql4_chap_table));
 =======
+=======
+>>>>>>> v3.18
 	strncpy(chap_table->secret, password, MAX_CHAP_SECRET_LEN - 1);
 	strncpy(chap_table->name, username, MAX_CHAP_NAME_LEN - 1);
 	chap_table->cookie = __constant_cpu_to_le16(CHAP_VALID_COOKIE);
@@ -1795,6 +1908,9 @@ int qla4xxx_set_chap(struct scsi_qla_host *ha, char *username, char *password,
 	}
 
 	offset += (idx * sizeof(struct ql4_chap_table));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rval = qla4xxx_set_flash(ha, chap_dma, offset,
 				sizeof(struct ql4_chap_table),
@@ -1853,7 +1969,11 @@ int qla4xxx_get_uni_chap_at_index(struct scsi_qla_host *ha, char *username,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(chap_table->flags & BIT_6)) {
+=======
+	if (!(chap_table->flags & BIT_7)) {
+>>>>>>> v3.18
 =======
 	if (!(chap_table->flags & BIT_7)) {
 >>>>>>> v3.18
@@ -1863,8 +1983,13 @@ int qla4xxx_get_uni_chap_at_index(struct scsi_qla_host *ha, char *username,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(password, chap_table->secret, MAX_CHAP_SECRET_LEN);
 	strncpy(username, chap_table->name, MAX_CHAP_NAME_LEN);
+=======
+	strlcpy(password, chap_table->secret, MAX_CHAP_SECRET_LEN);
+	strlcpy(username, chap_table->name, MAX_CHAP_NAME_LEN);
+>>>>>>> v3.18
 =======
 	strlcpy(password, chap_table->secret, MAX_CHAP_SECRET_LEN);
 	strlcpy(username, chap_table->name, MAX_CHAP_NAME_LEN);
@@ -1987,7 +2112,10 @@ int qla4xxx_conn_close_sess_logout(struct scsi_qla_host *ha,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * qla4_84xx_extend_idc_tmo - Extend IDC Timeout.
  * @ha: Pointer to host adapter structure.
@@ -2027,6 +2155,9 @@ static int qla4_84xx_extend_idc_tmo(struct scsi_qla_host *ha, uint32_t ext_tmo)
 	return QLA_SUCCESS;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int qla4xxx_disable_acb(struct scsi_qla_host *ha)
 {
@@ -2045,7 +2176,10 @@ int qla4xxx_disable_acb(struct scsi_qla_host *ha)
 				  "failed w/ status %04X %04X %04X", __func__,
 				  mbox_sts[0], mbox_sts[1], mbox_sts[2]));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		if (is_qla8042(ha) &&
 		    test_bit(DPC_POST_IDC_ACK, &ha->dpc_flags) &&
@@ -2064,6 +2198,9 @@ int qla4xxx_disable_acb(struct scsi_qla_host *ha)
 					   __func__);
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return status;
@@ -2427,7 +2564,11 @@ int qla4_8xxx_set_param(struct scsi_qla_host *ha, int param)
 		mbox_cmd[1] = SET_DRVR_VERSION;
 		strncpy((char *)&mbox_cmd[2], QLA4XXX_DRIVER_VERSION,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			MAX_DRVR_VER_LEN);
+=======
+			MAX_DRVR_VER_LEN - 1);
+>>>>>>> v3.18
 =======
 			MAX_DRVR_VER_LEN - 1);
 >>>>>>> v3.18
@@ -2476,9 +2617,12 @@ int qla4_83xx_post_idc_ack(struct scsi_qla_host *ha)
 			   mbox_sts[0]);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       DEBUG2(ql4_printk(KERN_INFO, ha, "%s: IDC ACK posted\n",
 				 __func__));
 =======
+=======
+>>>>>>> v3.18
 	       ql4_printk(KERN_INFO, ha, "%s: IDC ACK posted\n", __func__);
 
 	return status;
@@ -2598,6 +2742,9 @@ int qla4_83xx_set_port_config(struct scsi_qla_host *ha, uint32_t *config)
 	if (status != QLA_SUCCESS)
 		ql4_printk(KERN_ERR, ha, "%s: failed status %04X\n", __func__,
 			   mbox_sts[0]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return status;

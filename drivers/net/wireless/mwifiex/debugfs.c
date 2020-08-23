@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: debugfs
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -90,8 +94,13 @@ static struct mwifiex_debug_data items[] = {
 	{"num_tx_timeout", item_size(num_tx_timeout),
 	 item_addr(num_tx_timeout), 1},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{"num_cmd_timeout", item_size(num_cmd_timeout),
 	 item_addr(num_cmd_timeout), 1},
+=======
+	{"is_cmd_timedout", item_size(is_cmd_timedout),
+	 item_addr(is_cmd_timedout), 1},
+>>>>>>> v3.18
 =======
 	{"is_cmd_timedout", item_size(is_cmd_timedout),
 	 item_addr(is_cmd_timedout), 1},
@@ -267,7 +276,10 @@ free_and_exit:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Proc firmware dump read handler.
  *
  * This function is called when the 'fw_dump' file is opened for
@@ -291,6 +303,9 @@ mwifiex_fw_dump_read(struct file *file, char __user *ubuf,
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Proc getlog file read handler.
  *
@@ -529,7 +544,11 @@ mwifiex_regrdwr_write(struct file *file,
 	unsigned long addr = get_zeroed_page(GFP_KERNEL);
 	char *buf = (char *) addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t buf_size = min(count, (size_t) (PAGE_SIZE - 1));
+=======
+	size_t buf_size = min_t(size_t, count, PAGE_SIZE - 1);
+>>>>>>> v3.18
 =======
 	size_t buf_size = min_t(size_t, count, PAGE_SIZE - 1);
 >>>>>>> v3.18
@@ -634,7 +653,11 @@ mwifiex_rdeeprom_write(struct file *file,
 	unsigned long addr = get_zeroed_page(GFP_KERNEL);
 	char *buf = (char *) addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t buf_size = min(count, (size_t) (PAGE_SIZE - 1));
+=======
+	size_t buf_size = min_t(size_t, count, PAGE_SIZE - 1);
+>>>>>>> v3.18
 =======
 	size_t buf_size = min_t(size_t, count, PAGE_SIZE - 1);
 >>>>>>> v3.18
@@ -681,7 +704,11 @@ mwifiex_rdeeprom_read(struct file *file, char __user *ubuf,
 	unsigned long addr = get_zeroed_page(GFP_KERNEL);
 	char *buf = (char *) addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int pos, ret, i;
+=======
+	int pos = 0, ret = 0, i;
+>>>>>>> v3.18
 =======
 	int pos = 0, ret = 0, i;
 >>>>>>> v3.18
@@ -693,7 +720,11 @@ mwifiex_rdeeprom_read(struct file *file, char __user *ubuf,
 	if (saved_offset == -1) {
 		/* No command has been given */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pos = snprintf(buf, PAGE_SIZE, "0");
+=======
+		pos += snprintf(buf, PAGE_SIZE, "0");
+>>>>>>> v3.18
 =======
 		pos += snprintf(buf, PAGE_SIZE, "0");
 >>>>>>> v3.18
@@ -705,6 +736,7 @@ mwifiex_rdeeprom_read(struct file *file, char __user *ubuf,
 				  (u16) saved_bytes, value);
 	if (ret) {
 		ret = -EINVAL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out_free;
 	}
@@ -718,6 +750,8 @@ done:
 	ret = simple_read_from_buffer(ubuf, count, ppos, buf, pos);
 out_free:
 =======
+=======
+>>>>>>> v3.18
 		goto done;
 	}
 
@@ -792,13 +826,19 @@ mwifiex_hscfg_write(struct file *file, const char __user *ubuf,
 	priv->adapter->hs_enabling = false;
 	ret = count;
 done:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_page(addr);
 	return ret;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Proc hscfg file read handler
  * This function can be used to read host sleep configuration
  * parameters from driver.
@@ -827,6 +867,9 @@ mwifiex_hscfg_read(struct file *file, char __user *ubuf,
 	free_page(addr);
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MWIFIEX_DFS_ADD_FILE(name) do {                                 \
@@ -859,13 +902,19 @@ MWIFIEX_DFS_FILE_READ_OPS(info);
 MWIFIEX_DFS_FILE_READ_OPS(debug);
 MWIFIEX_DFS_FILE_READ_OPS(getlog);
 <<<<<<< HEAD
+<<<<<<< HEAD
 MWIFIEX_DFS_FILE_OPS(regrdwr);
 MWIFIEX_DFS_FILE_OPS(rdeeprom);
 =======
+=======
+>>>>>>> v3.18
 MWIFIEX_DFS_FILE_READ_OPS(fw_dump);
 MWIFIEX_DFS_FILE_OPS(regrdwr);
 MWIFIEX_DFS_FILE_OPS(rdeeprom);
 MWIFIEX_DFS_FILE_OPS(hscfg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -889,6 +938,11 @@ mwifiex_dev_debugfs_init(struct mwifiex_private *priv)
 	MWIFIEX_DFS_ADD_FILE(regrdwr);
 	MWIFIEX_DFS_ADD_FILE(rdeeprom);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	MWIFIEX_DFS_ADD_FILE(fw_dump);
+	MWIFIEX_DFS_ADD_FILE(hscfg);
+>>>>>>> v3.18
 =======
 	MWIFIEX_DFS_ADD_FILE(fw_dump);
 	MWIFIEX_DFS_ADD_FILE(hscfg);

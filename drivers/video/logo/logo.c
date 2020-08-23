@@ -18,16 +18,20 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS
 #include <asm/bootinfo.h>
 #endif
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static bool nologo;
 module_param(nologo, bool, 0);
 MODULE_PARM_DESC(nologo, "Disables startup logo");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Logos are located in the initdata, and will be freed in kernel_init.
@@ -46,6 +50,8 @@ late_initcall(fb_logo_late_init);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* logo's are marked __initdata. Use __init_refok to tell
  * modpost that it is intended that this function uses data
  * marked __initdata.
@@ -55,7 +61,11 @@ const struct linux_logo * __init_refok fb_find_logo(int depth)
 	const struct linux_logo *logo = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nologo || logos_freed)
+=======
+	if (nologo)
+>>>>>>> v3.18
 =======
 	if (nologo)
 >>>>>>> v3.18
@@ -111,7 +121,11 @@ const struct linux_logo * __init_refok fb_find_logo(int depth)
 #endif
 #ifdef CONFIG_LOGO_SGI_CLUT224
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* SGI Linux logo on MIPS/MIPS64 and VISWS */
+=======
+		/* SGI Linux logo on MIPS/MIPS64 */
+>>>>>>> v3.18
 =======
 		/* SGI Linux logo on MIPS/MIPS64 */
 >>>>>>> v3.18

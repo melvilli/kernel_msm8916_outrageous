@@ -15,9 +15,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston,
  * MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -136,8 +140,12 @@ netxen_get_minidump_template(struct netxen_adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = pci_alloc_consistent(adapter->pdev, size, &md_template_addr);
 
+=======
+	addr = pci_zalloc_consistent(adapter->pdev, size, &md_template_addr);
+>>>>>>> v3.18
 =======
 	addr = pci_zalloc_consistent(adapter->pdev, size, &md_template_addr);
 >>>>>>> v3.18
@@ -147,7 +155,10 @@ netxen_get_minidump_template(struct netxen_adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(addr, 0, size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memset(&cmd, 0, sizeof(cmd));

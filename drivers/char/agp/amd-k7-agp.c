@@ -12,7 +12,11 @@
 #include "agp.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AMD_MMBASE	0x14
+=======
+#define AMD_MMBASE_BAR	1
+>>>>>>> v3.18
 =======
 #define AMD_MMBASE_BAR	1
 >>>>>>> v3.18
@@ -131,7 +135,10 @@ static int amd_create_gatt_table(struct agp_bridge_data *bridge)
 	unsigned long addr;
 	int retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
@@ -157,8 +164,12 @@ static int amd_create_gatt_table(struct agp_bridge_data *bridge)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	addr = pci_bus_address(agp_bridge->dev, AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	addr = pci_bus_address(agp_bridge->dev, AGP_APERTURE_BAR);
 >>>>>>> v3.18
@@ -219,6 +230,10 @@ static int amd_irongate_configure(void)
 {
 	struct aper_size_info_lvl2 *current_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phys_addr_t reg;
+>>>>>>> v3.18
 =======
 	phys_addr_t reg;
 >>>>>>> v3.18
@@ -230,9 +245,14 @@ static int amd_irongate_configure(void)
 	if (!amd_irongate_private.registers) {
 		/* Get the memory mapped registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_read_config_dword(agp_bridge->dev, AMD_MMBASE, &temp);
 		temp = (temp & PCI_BASE_ADDRESS_MEM_MASK);
 		amd_irongate_private.registers = (volatile u8 __iomem *) ioremap(temp, 4096);
+=======
+		reg = pci_resource_start(agp_bridge->dev, AMD_MMBASE_BAR);
+		amd_irongate_private.registers = (volatile u8 __iomem *) ioremap(reg, 4096);
+>>>>>>> v3.18
 =======
 		reg = pci_resource_start(agp_bridge->dev, AMD_MMBASE_BAR);
 		amd_irongate_private.registers = (volatile u8 __iomem *) ioremap(reg, 4096);

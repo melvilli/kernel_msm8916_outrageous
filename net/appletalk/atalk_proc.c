@@ -179,7 +179,11 @@ static int atalk_seq_socket_show(struct seq_file *seq, void *v)
 
 	seq_printf(seq, "%02X   %04X:%02X:%02X  %04X:%02X:%02X  %08X:%08X "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"%02X %d\n",
+=======
+			"%02X %u\n",
+>>>>>>> v3.18
 =======
 			"%02X %u\n",
 >>>>>>> v3.18

@@ -45,8 +45,12 @@ csum_partial(const void *buff, int len, __wsum sum)
  * better 64-bit) boundary
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copy from userspace and compute checksum.  If we catch an exception
  * then zero the rest of the buffer.
+=======
+ * Copy from userspace and compute checksum.
+>>>>>>> v3.18
 =======
  * Copy from userspace and compute checksum.
 >>>>>>> v3.18
@@ -57,6 +61,7 @@ csum_partial_copy_from_user(const void __user *src, void *dst,
                                           int *err_ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int missing;
 
 	missing = copy_from_user(dst, src, len);
@@ -65,6 +70,10 @@ csum_partial_copy_from_user(const void __user *src, void *dst,
 		*err_ptr = -EFAULT;
 	}
 		
+=======
+	if (unlikely(copy_from_user(dst, src, len)))
+		*err_ptr = -EFAULT;
+>>>>>>> v3.18
 =======
 	if (unlikely(copy_from_user(dst, src, len)))
 		*err_ptr = -EFAULT;

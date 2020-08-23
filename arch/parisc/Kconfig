@@ -2,6 +2,10 @@ config PARISC
 	def_bool y
 	select ARCH_HAS_DEBUG_STRICT_USER_COPY_CHECKS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_MIGHT_HAVE_PC_PARPORT
+>>>>>>> v3.18
 =======
 	select ARCH_MIGHT_HAVE_PC_PARPORT
 >>>>>>> v3.18
@@ -10,7 +14,10 @@ config PARISC
 	select HAVE_FUNCTION_TRACER if 64BIT
 	select HAVE_FUNCTION_GRAPH_TRACER if 64BIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_FUNCTION_TRACE_MCOUNT_TEST if 64BIT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select ARCH_WANT_FRAME_POINTERS
@@ -29,6 +36,10 @@ config PARISC
 	select GENERIC_STRNCPY_FROM_USER
 	select SYSCTL_ARCH_UNALIGN_ALLOW
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SYSCTL_EXCEPTION_TRACE
+>>>>>>> v3.18
 =======
 	select SYSCTL_EXCEPTION_TRACE
 >>>>>>> v3.18
@@ -38,6 +49,11 @@ config PARISC
 	select CLONE_BACKWARDS
 	select TTY # Needed for pdc_cons.c
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_DEBUG_STACKOVERFLOW
+	select HAVE_ARCH_AUDITSYSCALL
+>>>>>>> v3.18
 =======
 	select HAVE_DEBUG_STACKOVERFLOW
 	select HAVE_ARCH_AUDITSYSCALL
@@ -244,6 +260,7 @@ config SMP
 	---help---
 	  This enables support for systems with more than one CPU. If you have
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  a system with only one CPU, like most personal computers, say N. If
 	  you have a system with more than one CPU, say Y.
 
@@ -252,6 +269,8 @@ config SMP
 	  you say Y here, the kernel will run on many, but not all,
 	  singleprocessor machines. On a singleprocessor machine, the kernel
 =======
+=======
+>>>>>>> v3.18
 	  a system with only one CPU, say N. If you have a system with more
 	  than one CPU, say Y.
 
@@ -259,6 +278,9 @@ config SMP
 	  machines, but will use only one CPU of a multiprocessor machine. If
 	  you say Y here, the kernel will run on many, but not all,
 	  uniprocessor machines. On a uniprocessor machine, the kernel
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  will run faster if you say N here.
 
@@ -279,7 +301,10 @@ config HOTPLUG_CPU
 	bool
 	default y if SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HOTPLUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -316,6 +341,12 @@ config SYSVIPC_COMPAT
 	depends on COMPAT && SYSVIPC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config AUDIT_ARCH
+	def_bool y
+
+>>>>>>> v3.18
 =======
 config AUDIT_ARCH
 	def_bool y
@@ -352,7 +383,10 @@ source "fs/Kconfig"
 source "arch/parisc/Kconfig.debug"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SECCOMP
 	def_bool y
 	prompt "Enable seccomp to safely compute untrusted bytecode"
@@ -369,6 +403,9 @@ config SECCOMP
 
 	  If unsure, say Y. Only embedded should say N here.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "security/Kconfig"
 

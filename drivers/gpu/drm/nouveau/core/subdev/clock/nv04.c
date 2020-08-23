@@ -23,14 +23,20 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/clock.h>
 #include <subdev/bios.h>
 #include <subdev/bios/pll.h>
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/bios.h>
 #include <subdev/bios/pll.h>
 #include <subdev/clock.h>
 #include <subdev/devinit/nv04.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "pll.h"
@@ -39,6 +45,7 @@ struct nv04_clock_priv {
 	struct nouveau_clock base;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 powerctrl_1_shift(int chip_version, int reg)
@@ -302,13 +309,19 @@ nv04_clock_pll_set(struct nouveau_clock *clk, u32 type, u32 freq)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int
 nv04_clock_pll_calc(struct nouveau_clock *clock, struct nvbios_pll *info,
 		    int clk, struct nouveau_pll_vals *pv)
 {
 	int N1, M1, N2, M2, P;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = nv04_pll_calc(clock, info, clk, &N1, &M1, &N2, &M2, &P);
+=======
+	int ret = nv04_pll_calc(nv_subdev(clock), info, clk, &N1, &M1, &N2, &M2, &P);
+>>>>>>> v3.18
 =======
 	int ret = nv04_pll_calc(nv_subdev(clock), info, clk, &N1, &M1, &N2, &M2, &P);
 >>>>>>> v3.18
@@ -328,7 +341,11 @@ nv04_clock_pll_prog(struct nouveau_clock *clk, u32 reg1,
 		    struct nouveau_pll_vals *pv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nv04_clock_priv *priv = (void *)clk;
+=======
+	struct nouveau_devinit *devinit = nouveau_devinit(clk);
+>>>>>>> v3.18
 =======
 	struct nouveau_devinit *devinit = nouveau_devinit(clk);
 >>>>>>> v3.18
@@ -338,29 +355,41 @@ nv04_clock_pll_prog(struct nouveau_clock *clk, u32 reg1,
 	    cv >= 0x40) {
 		if (reg1 > 0x405c)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			setPLL_double_highregs(priv, reg1, pv);
 		else
 			setPLL_double_lowregs(priv, reg1, pv);
 	} else
 		setPLL_single(priv, reg1, pv);
 =======
+=======
+>>>>>>> v3.18
 			setPLL_double_highregs(devinit, reg1, pv);
 		else
 			setPLL_double_lowregs(devinit, reg1, pv);
 	} else
 		setPLL_single(devinit, reg1, pv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct nouveau_clocks
 nv04_domain[] = {
 	{ nv_clk_src_max }
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nv04_clock_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
@@ -371,7 +400,12 @@ nv04_clock_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nouveau_clock_create(parent, engine, oclass, &priv);
+=======
+	ret = nouveau_clock_create(parent, engine, oclass, nv04_domain, NULL, 0,
+				   false, &priv);
+>>>>>>> v3.18
 =======
 	ret = nouveau_clock_create(parent, engine, oclass, nv04_domain, NULL, 0,
 				   false, &priv);
@@ -381,7 +415,10 @@ nv04_clock_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->base.pll_set = nv04_clock_pll_set;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	priv->base.pll_calc = nv04_clock_pll_calc;

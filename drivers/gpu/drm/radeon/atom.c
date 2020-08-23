@@ -1218,7 +1218,11 @@ free:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int atom_execute_table(struct atom_context *ctx, int index, uint32_t * params)
+=======
+int atom_execute_table_scratch_unlocked(struct atom_context *ctx, int index, uint32_t * params)
+>>>>>>> v3.18
 =======
 int atom_execute_table_scratch_unlocked(struct atom_context *ctx, int index, uint32_t * params)
 >>>>>>> v3.18
@@ -1243,7 +1247,10 @@ int atom_execute_table_scratch_unlocked(struct atom_context *ctx, int index, uin
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int atom_execute_table(struct atom_context *ctx, int index, uint32_t * params)
 {
 	int r;
@@ -1253,6 +1260,9 @@ int atom_execute_table(struct atom_context *ctx, int index, uint32_t * params)
 	return r;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int atom_iio_len[] = { 1, 2, 3, 3, 3, 3, 4, 4, 4, 3 };
 

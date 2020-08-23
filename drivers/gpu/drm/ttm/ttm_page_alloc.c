@@ -298,13 +298,19 @@ static void ttm_pool_update_free_locked(struct ttm_page_pool *pool,
  * @pool: to free the pages from
  * @free_all: If set to true will free all pages in pool
 <<<<<<< HEAD
+<<<<<<< HEAD
  **/
 static int ttm_page_pool_free(struct ttm_page_pool *pool, unsigned nr_free)
 =======
+=======
+>>>>>>> v3.18
  * @gfp: GFP flags.
  **/
 static int ttm_page_pool_free(struct ttm_page_pool *pool, unsigned nr_free,
 			      gfp_t gfp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long irq_flags;
@@ -317,8 +323,12 @@ static int ttm_page_pool_free(struct ttm_page_pool *pool, unsigned nr_free,
 		npages_to_free = NUM_PAGES_TO_ALLOC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pages_to_free = kmalloc(npages_to_free * sizeof(struct page *),
 			GFP_KERNEL);
+=======
+	pages_to_free = kmalloc(npages_to_free * sizeof(struct page *), gfp);
+>>>>>>> v3.18
 =======
 	pages_to_free = kmalloc(npages_to_free * sizeof(struct page *), gfp);
 >>>>>>> v3.18
@@ -389,6 +399,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Get good estimation how many pages are free in pools */
 static int ttm_pool_get_num_unused_pages(void)
 {
@@ -414,6 +425,8 @@ static int ttm_pool_mm_shrink(struct shrinker *shrink,
 
 	pool_offset = pool_offset % NUM_POOLS;
 =======
+=======
+>>>>>>> v3.18
 /**
  * Callback for mm to request pool to reduce number of page held.
  *
@@ -437,6 +450,9 @@ ttm_pool_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 	if (!mutex_trylock(&lock))
 		return SHRINK_STOP;
 	pool_offset = ++start_pool % NUM_POOLS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* select start pool in round robin fashion */
 	for (i = 0; i < NUM_POOLS; ++i) {
@@ -445,11 +461,14 @@ ttm_pool_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 			break;
 		pool = &_manager->pools[(i + pool_offset)%NUM_POOLS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		shrink_pages = ttm_page_pool_free(pool, nr_free);
 	}
 	/* return estimated number of unused pages in pool */
 	return ttm_pool_get_num_unused_pages();
 =======
+=======
+>>>>>>> v3.18
 		shrink_pages = ttm_page_pool_free(pool, nr_free,
 						  sc->gfp_mask);
 		freed += nr_free - shrink_pages;
@@ -469,13 +488,21 @@ ttm_pool_shrink_count(struct shrinker *shrink, struct shrink_control *sc)
 		count += _manager->pools[i].npages;
 
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void ttm_pool_mm_shrink_init(struct ttm_pool_manager *manager)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	manager->mm_shrink.shrink = &ttm_pool_mm_shrink;
+=======
+	manager->mm_shrink.count_objects = ttm_pool_shrink_count;
+	manager->mm_shrink.scan_objects = ttm_pool_shrink_scan;
+>>>>>>> v3.18
 =======
 	manager->mm_shrink.count_objects = ttm_pool_shrink_count;
 	manager->mm_shrink.scan_objects = ttm_pool_shrink_scan;
@@ -759,7 +786,11 @@ static void ttm_put_pages(struct page **pages, unsigned npages, int flags,
 	spin_unlock_irqrestore(&pool->lock, irq_flags);
 	if (npages)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ttm_page_pool_free(pool, npages);
+=======
+		ttm_page_pool_free(pool, npages, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		ttm_page_pool_free(pool, npages, GFP_KERNEL);
 >>>>>>> v3.18
@@ -847,7 +878,11 @@ static int ttm_get_pages(struct page **pages, unsigned npages, int flags,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ttm_page_pool_init_locked(struct ttm_page_pool *pool, int flags,
+=======
+static void ttm_page_pool_init_locked(struct ttm_page_pool *pool, gfp_t flags,
+>>>>>>> v3.18
 =======
 static void ttm_page_pool_init_locked(struct ttm_page_pool *pool, gfp_t flags,
 >>>>>>> v3.18
@@ -907,7 +942,12 @@ void ttm_page_alloc_fini(void)
 
 	for (i = 0; i < NUM_POOLS; ++i)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ttm_page_pool_free(&_manager->pools[i], FREE_ALL_PAGES);
+=======
+		ttm_page_pool_free(&_manager->pools[i], FREE_ALL_PAGES,
+				   GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		ttm_page_pool_free(&_manager->pools[i], FREE_ALL_PAGES,
 				   GFP_KERNEL);

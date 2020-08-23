@@ -2,7 +2,11 @@ USB EHCI controllers
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - compatible : should be "usb-ehci".
+=======
+  - compatible : should be "generic-ehci".
+>>>>>>> v3.18
 =======
   - compatible : should be "generic-ehci".
 >>>>>>> v3.18
@@ -12,6 +16,7 @@ Required properties:
     definition of standard EHCI registers.
   - interrupts : one EHCI interrupt should be described here.
 <<<<<<< HEAD
+<<<<<<< HEAD
 If device registers are implemented in big endian mode, the device
 node should have "big-endian-regs" property.
 If controller implementation operates with big endian descriptors,
@@ -20,6 +25,8 @@ If both big endian registers and descriptors are used by the controller
 implementation, "big-endian" property can be specified instead of having
 both "big-endian-regs" and "big-endian-desc".
 =======
+=======
+>>>>>>> v3.18
 
 Optional properties:
  - big-endian-regs : boolean, set this for hcds with big-endian registers
@@ -29,6 +36,9 @@ Optional properties:
  - phys : phandle + phy specifier pair
  - phy-names : "usb"
  - resets : phandle + reset specifier pair
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example (Sequoia 440EPx):
@@ -40,7 +50,10 @@ Example (Sequoia 440EPx):
 	   big-endian;
    };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 Example (Allwinner sun4i A10 SoC):
    ehci0: usb@01c14000 {
@@ -51,4 +64,7 @@ Example (Allwinner sun4i A10 SoC):
 	   phys = <&usbphy 1>;
 	   phy-names = "usb";
    };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

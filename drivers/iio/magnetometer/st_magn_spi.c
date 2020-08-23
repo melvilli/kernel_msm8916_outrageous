@@ -25,11 +25,17 @@ static int st_magn_spi_probe(struct spi_device *spi)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*mdata));
 	if (indio_dev == NULL) {
 		err = -ENOMEM;
 		goto iio_device_alloc_error;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*mdata));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*mdata));
 	if (!indio_dev)
@@ -42,6 +48,7 @@ static int st_magn_spi_probe(struct spi_device *spi)
 	st_sensors_spi_configure(indio_dev, spi, mdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = st_magn_common_probe(indio_dev);
 	if (err < 0)
 		goto st_magn_common_probe_error;
@@ -53,11 +60,16 @@ st_magn_common_probe_error:
 iio_device_alloc_error:
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	err = st_magn_common_probe(indio_dev, NULL);
 	if (err < 0)
 		return err;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

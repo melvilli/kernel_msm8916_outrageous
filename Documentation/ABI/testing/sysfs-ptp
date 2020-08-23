@@ -55,7 +55,10 @@ Description:
 		output channels offered by the PTP hardware clock.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 What:		/sys/class/ptp/ptpN/n_pins
 Date:		March 2014
 Contact:	Richard Cochran <richardcochran@gmail.com>
@@ -76,6 +79,9 @@ Description:
 		assignment may be changed by two writing numbers into
 		the file.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 What:		/sys/class/ptp/ptpN/pps_avaiable
 Date:		September 2010

@@ -29,7 +29,10 @@
 	list_entry((root)->nl_entry.dir, struct nouveau_mm_node, nl_entry)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 nouveau_mm_dump(struct nouveau_mm *mm, const char *header)
 {
@@ -48,6 +51,9 @@ nouveau_mm_dump(struct nouveau_mm *mm, const char *header)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void
 nouveau_mm_free(struct nouveau_mm *mm, struct nouveau_mm_node **pthis)
@@ -59,7 +65,11 @@ nouveau_mm_free(struct nouveau_mm *mm, struct nouveau_mm_node **pthis)
 		struct nouveau_mm_node *next = node(this, next);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (prev && prev->type == 0) {
+=======
+		if (prev && prev->type == NVKM_MM_TYPE_NONE) {
+>>>>>>> v3.18
 =======
 		if (prev && prev->type == NVKM_MM_TYPE_NONE) {
 >>>>>>> v3.18
@@ -69,15 +79,21 @@ nouveau_mm_free(struct nouveau_mm *mm, struct nouveau_mm_node **pthis)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (next && next->type == 0) {
 			next->offset  = this->offset;
 			next->length += this->length;
 			if (this->type == 0)
 =======
+=======
+>>>>>>> v3.18
 		if (next && next->type == NVKM_MM_TYPE_NONE) {
 			next->offset  = this->offset;
 			next->length += this->length;
 			if (this->type == NVKM_MM_TYPE_NONE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				list_del(&this->fl_entry);
 			list_del(&this->nl_entry);
@@ -85,7 +101,11 @@ nouveau_mm_free(struct nouveau_mm *mm, struct nouveau_mm_node **pthis)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (this && this->type != 0) {
+=======
+		if (this && this->type != NVKM_MM_TYPE_NONE) {
+>>>>>>> v3.18
 =======
 		if (this && this->type != NVKM_MM_TYPE_NONE) {
 >>>>>>> v3.18
@@ -96,7 +116,11 @@ nouveau_mm_free(struct nouveau_mm *mm, struct nouveau_mm_node **pthis)
 
 			list_add_tail(&this->fl_entry, &prev->fl_entry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			this->type = 0;
+=======
+			this->type = NVKM_MM_TYPE_NONE;
+>>>>>>> v3.18
 =======
 			this->type = NVKM_MM_TYPE_NONE;
 >>>>>>> v3.18
@@ -121,6 +145,10 @@ region_head(struct nouveau_mm *mm, struct nouveau_mm_node *a, u32 size)
 	b->offset = a->offset;
 	b->length = size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	b->heap   = a->heap;
+>>>>>>> v3.18
 =======
 	b->heap   = a->heap;
 >>>>>>> v3.18
@@ -129,7 +157,11 @@ region_head(struct nouveau_mm *mm, struct nouveau_mm_node *a, u32 size)
 	a->length -= size;
 	list_add_tail(&b->nl_entry, &a->nl_entry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (b->type == 0)
+=======
+	if (b->type == NVKM_MM_TYPE_NONE)
+>>>>>>> v3.18
 =======
 	if (b->type == NVKM_MM_TYPE_NONE)
 >>>>>>> v3.18
@@ -139,8 +171,13 @@ region_head(struct nouveau_mm *mm, struct nouveau_mm_node *a, u32 size)
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau_mm_head(struct nouveau_mm *mm, u8 type, u32 size_max, u32 size_min,
 		u32 align, struct nouveau_mm_node **pnode)
+=======
+nouveau_mm_head(struct nouveau_mm *mm, u8 heap, u8 type, u32 size_max,
+		u32 size_min, u32 align, struct nouveau_mm_node **pnode)
+>>>>>>> v3.18
 =======
 nouveau_mm_head(struct nouveau_mm *mm, u8 heap, u8 type, u32 size_max,
 		u32 size_min, u32 align, struct nouveau_mm_node **pnode)
@@ -152,8 +189,11 @@ nouveau_mm_head(struct nouveau_mm *mm, u8 heap, u8 type, u32 size_max,
 	u32 s, e;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(this, &mm->free, fl_entry) {
 =======
+=======
+>>>>>>> v3.18
 	BUG_ON(type == NVKM_MM_TYPE_NONE || type == NVKM_MM_TYPE_HOLE);
 
 	list_for_each_entry(this, &mm->free, fl_entry) {
@@ -161,6 +201,9 @@ nouveau_mm_head(struct nouveau_mm *mm, u8 heap, u8 type, u32 size_max,
 			if (this->heap != heap)
 				continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		e = this->offset + this->length;
 		s = this->offset;
@@ -211,16 +254,22 @@ region_tail(struct nouveau_mm *mm, struct nouveau_mm_node *a, u32 size)
 	b->offset  = a->offset + a->length;
 	b->length  = size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b->type    = a->type;
 
 	list_add(&b->nl_entry, &a->nl_entry);
 	if (b->type == 0)
 =======
+=======
+>>>>>>> v3.18
 	b->heap    = a->heap;
 	b->type    = a->type;
 
 	list_add(&b->nl_entry, &a->nl_entry);
 	if (b->type == NVKM_MM_TYPE_NONE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		list_add(&b->fl_entry, &a->fl_entry);
 	return b;
@@ -228,8 +277,13 @@ region_tail(struct nouveau_mm *mm, struct nouveau_mm_node *a, u32 size)
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau_mm_tail(struct nouveau_mm *mm, u8 type, u32 size_max, u32 size_min,
 		u32 align, struct nouveau_mm_node **pnode)
+=======
+nouveau_mm_tail(struct nouveau_mm *mm, u8 heap, u8 type, u32 size_max,
+		u32 size_min, u32 align, struct nouveau_mm_node **pnode)
+>>>>>>> v3.18
 =======
 nouveau_mm_tail(struct nouveau_mm *mm, u8 heap, u8 type, u32 size_max,
 		u32 size_min, u32 align, struct nouveau_mm_node **pnode)
@@ -239,6 +293,11 @@ nouveau_mm_tail(struct nouveau_mm *mm, u8 heap, u8 type, u32 size_max,
 	u32 mask = align - 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUG_ON(type == NVKM_MM_TYPE_NONE || type == NVKM_MM_TYPE_HOLE);
+
+>>>>>>> v3.18
 =======
 	BUG_ON(type == NVKM_MM_TYPE_NONE || type == NVKM_MM_TYPE_HOLE);
 
@@ -248,11 +307,17 @@ nouveau_mm_tail(struct nouveau_mm *mm, u8 heap, u8 type, u32 size_max,
 		u32 s = this->offset;
 		u32 c = 0, a;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (unlikely(heap != NVKM_MM_HEAP_ANY)) {
 			if (this->heap != heap)
 				continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		prev = node(this, prev);
@@ -294,11 +359,14 @@ int
 nouveau_mm_init(struct nouveau_mm *mm, u32 offset, u32 length, u32 block)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_mm_node *node;
 
 	if (block) {
 		mutex_init(&mm->mutex);
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_mm_node *node, *prev;
 	u32 next;
 
@@ -316,6 +384,9 @@ nouveau_mm_init(struct nouveau_mm *mm, u32 offset, u32 length, u32 block)
 		}
 		BUG_ON(block != mm->block_size);
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		INIT_LIST_HEAD(&mm->nodes);
 		INIT_LIST_HEAD(&mm->free);
@@ -336,7 +407,11 @@ nouveau_mm_init(struct nouveau_mm *mm, u32 offset, u32 length, u32 block)
 	list_add_tail(&node->nl_entry, &mm->nodes);
 	list_add_tail(&node->fl_entry, &mm->free);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mm->heap_nodes++;
+=======
+	node->heap = ++mm->heap_nodes;
+>>>>>>> v3.18
 =======
 	node->heap = ++mm->heap_nodes;
 >>>>>>> v3.18
@@ -346,6 +421,7 @@ nouveau_mm_init(struct nouveau_mm *mm, u32 offset, u32 length, u32 block)
 int
 nouveau_mm_fini(struct nouveau_mm *mm)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (nouveau_mm_initialised(mm)) {
 		struct nouveau_mm_node *node, *heap =
@@ -361,6 +437,8 @@ nouveau_mm_fini(struct nouveau_mm *mm)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_mm_node *node, *temp;
 	int nodes = 0;
 
@@ -381,6 +459,9 @@ nouveau_mm_fini(struct nouveau_mm *mm)
 		kfree(node);
 	}
 	mm->heap_nodes = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

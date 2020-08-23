@@ -3,7 +3,11 @@
 struct map;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int map__browse(struct map *self);
+=======
+int map__browse(struct map *map);
+>>>>>>> v3.18
 =======
 int map__browse(struct map *map);
 >>>>>>> v3.18

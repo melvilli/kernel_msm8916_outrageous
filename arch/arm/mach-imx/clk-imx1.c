@@ -16,6 +16,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/clk.h>
@@ -23,6 +24,8 @@
 #include <linux/clkdev.h>
 #include <linux/err.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/clkdev.h>
 #include <linux/clk-provider.h>
@@ -31,12 +34,16 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <dt-bindings/clock/imx1-clock.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "clk.h"
 #include "common.h"
 #include "hardware.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* CCM register addresses */
 #define IO_ADDR_CCM(off)	(MX1_IO_ADDRESS(MX1_CCM_BASE_ADDR + (off)))
@@ -121,6 +128,8 @@ int __init mx1_clocks_init(unsigned long fref)
 	clk_register_clkdev(clk[clk32], NULL, "imx1-rtc.0");
 	clk_register_clkdev(clk[clko], "clko", NULL);
 =======
+=======
+>>>>>>> v3.18
 static const char *prem_sel_clks[] = { "clk32_premult", "clk16m", };
 static const char *clko_sel_clks[] = { "per1", "hclk", "clk48m", "clk16m",
 				       "prem", "fclk", };
@@ -190,6 +199,9 @@ int __init mx1_clocks_init(unsigned long fref)
 	clk_register_clkdev(clk[IMX1_CLK_PER2], "per", "imx1-fb.0");
 	clk_register_clkdev(clk[IMX1_CLK_DUMMY], "ipg", "imx1-fb.0");
 	clk_register_clkdev(clk[IMX1_CLK_DUMMY], "ahb", "imx1-fb.0");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mxc_timer_init(MX1_IO_ADDRESS(MX1_TIM1_BASE_ADDR), MX1_TIM1_INT);
@@ -197,7 +209,10 @@ int __init mx1_clocks_init(unsigned long fref)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void __init mx1_clocks_init_dt(struct device_node *np)
 {
@@ -211,4 +226,7 @@ static void __init mx1_clocks_init_dt(struct device_node *np)
 	of_clk_add_provider(np, of_clk_src_onecell_get, &clk_data);
 }
 CLK_OF_DECLARE(imx1_ccm, "fsl,imx1-ccm", mx1_clocks_init_dt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

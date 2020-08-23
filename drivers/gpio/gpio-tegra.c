@@ -76,6 +76,10 @@ struct tegra_gpio_bank {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct device *dev;
+>>>>>>> v3.18
 =======
 static struct device *dev;
 >>>>>>> v3.18
@@ -210,6 +214,10 @@ static int tegra_gpio_irq_set_type(struct irq_data *d, unsigned int type)
 	int val;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -240,13 +248,19 @@ static int tegra_gpio_irq_set_type(struct irq_data *d, unsigned int type)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = gpio_lock_as_irq(&tegra_gpio_chip, gpio);
 	if (ret) {
 		dev_err(dev, "unable to lock Tegra GPIO %d as IRQ\n", gpio);
 		return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&bank->lvl_lock[port], flags);
 
@@ -269,7 +283,10 @@ static int tegra_gpio_irq_set_type(struct irq_data *d, unsigned int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void tegra_gpio_irq_shutdown(struct irq_data *d)
 {
 	int gpio = d->hwirq;
@@ -277,6 +294,9 @@ static void tegra_gpio_irq_shutdown(struct irq_data *d)
 	gpio_unlock_as_irq(&tegra_gpio_chip, gpio);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void tegra_gpio_irq_handler(unsigned int irq, struct irq_desc *desc)
 {
@@ -396,6 +416,10 @@ static struct irq_chip tegra_gpio_irq_chip = {
 	.irq_unmask	= tegra_gpio_irq_unmask,
 	.irq_set_type	= tegra_gpio_irq_set_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.irq_shutdown	= tegra_gpio_irq_shutdown,
+>>>>>>> v3.18
 =======
 	.irq_shutdown	= tegra_gpio_irq_shutdown,
 >>>>>>> v3.18
@@ -424,7 +448,11 @@ static struct tegra_gpio_soc_config tegra30_gpio_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id tegra_gpio_of_match[] = {
+=======
+static const struct of_device_id tegra_gpio_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id tegra_gpio_of_match[] = {
 >>>>>>> v3.18
@@ -445,6 +473,10 @@ static int tegra_gpio_probe(struct platform_device *pdev)
 	struct resource *res;
 	struct tegra_gpio_bank *bank;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -453,6 +485,11 @@ static int tegra_gpio_probe(struct platform_device *pdev)
 	int j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev = &pdev->dev;
+
+>>>>>>> v3.18
 =======
 	dev = &pdev->dev;
 
@@ -484,10 +521,15 @@ static int tegra_gpio_probe(struct platform_device *pdev)
 			tegra_gpio_bank_count * sizeof(*tegra_gpio_banks),
 			GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tegra_gpio_banks) {
 		dev_err(&pdev->dev, "Couldn't allocate bank structure\n");
 		return -ENODEV;
 	}
+=======
+	if (!tegra_gpio_banks)
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 	if (!tegra_gpio_banks)
 		return -ENODEV;
@@ -526,13 +568,19 @@ static int tegra_gpio_probe(struct platform_device *pdev)
 	tegra_gpio_chip.of_node = pdev->dev.of_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpiochip_add(&tegra_gpio_chip);
 =======
+=======
+>>>>>>> v3.18
 	ret = gpiochip_add(&tegra_gpio_chip);
 	if (ret < 0) {
 		irq_domain_remove(irq_domain);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (gpio = 0; gpio < tegra_gpio_chip.ngpio; gpio++) {

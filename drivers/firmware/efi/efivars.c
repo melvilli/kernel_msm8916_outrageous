@@ -70,6 +70,10 @@
 #include <linux/slab.h>
 #include <linux/ucs2_string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compat.h>
+>>>>>>> v3.18
 =======
 #include <linux/compat.h>
 >>>>>>> v3.18
@@ -82,6 +86,10 @@ MODULE_DESCRIPTION("sysfs interface to EFI Variables");
 MODULE_LICENSE("GPL");
 MODULE_VERSION(EFIVARS_VERSION);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("platform:efivars");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("platform:efivars");
 >>>>>>> v3.18
@@ -95,7 +103,10 @@ static struct bin_attribute *efivars_new_var;
 static struct bin_attribute *efivars_del_var;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct compat_efi_variable {
 	efi_char16_t  VariableName[EFI_VAR_NAME_LEN/sizeof(efi_char16_t)];
 	efi_guid_t    VendorGuid;
@@ -105,6 +116,9 @@ struct compat_efi_variable {
 	__u32         Attributes;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct efivar_attribute {
 	struct attribute attr;
@@ -210,6 +224,7 @@ efivar_data_read(struct efivar_entry *entry, char *buf)
 	return var->DataSize;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * We allow each variable to be edited via rewriting the
  * entire efi variable structure.
@@ -225,19 +240,29 @@ efivar_store_raw(struct efivar_entry *entry, const char *buf, size_t count)
 
 	new_var = (struct efi_variable *)buf;
 =======
+=======
+>>>>>>> v3.18
 
 static inline int
 sanity_check(struct efi_variable *var, efi_char16_t *name, efi_guid_t vendor,
 	     unsigned long size, u32 attributes, u8 *data)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * If only updating the variable data, then the name
 	 * and guid should remain the same
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(new_var->VariableName, var->VariableName, sizeof(var->VariableName)) ||
 		efi_guidcmp(new_var->VendorGuid, var->VendorGuid)) {
+=======
+	if (memcmp(name, var->VariableName, sizeof(var->VariableName)) ||
+		efi_guidcmp(vendor, var->VendorGuid)) {
+>>>>>>> v3.18
 =======
 	if (memcmp(name, var->VariableName, sizeof(var->VariableName)) ||
 		efi_guidcmp(vendor, var->VendorGuid)) {
@@ -247,7 +272,11 @@ sanity_check(struct efi_variable *var, efi_char16_t *name, efi_guid_t vendor,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((new_var->DataSize <= 0) || (new_var->Attributes == 0)){
+=======
+	if ((size <= 0) || (attributes == 0)){
+>>>>>>> v3.18
 =======
 	if ((size <= 0) || (attributes == 0)){
 >>>>>>> v3.18
@@ -256,9 +285,14 @@ sanity_check(struct efi_variable *var, efi_char16_t *name, efi_guid_t vendor,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((new_var->Attributes & ~EFI_VARIABLE_MASK) != 0 ||
 	    efivar_validate(new_var->VendorGuid, new_var->VariableName,
 			    new_var->Data, new_var->DataSize) == false) {
+=======
+	if ((attributes & ~EFI_VARIABLE_MASK) != 0 ||
+	    efivar_validate(name, data, size) == false) {
+>>>>>>> v3.18
 =======
 	if ((attributes & ~EFI_VARIABLE_MASK) != 0 ||
 	    efivar_validate(name, data, size) == false) {
@@ -268,11 +302,14 @@ sanity_check(struct efi_variable *var, efi_char16_t *name, efi_guid_t vendor,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&entry->var, new_var, count);
 
 	err = efivar_entry_set(entry, new_var->Attributes,
 			       new_var->DataSize, new_var->Data, false);
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -348,6 +385,9 @@ efivar_store_raw(struct efivar_entry *entry, const char *buf, size_t count)
 	}
 
 	err = efivar_entry_set(entry, attributes, size, data, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err) {
 		printk(KERN_WARNING "efivars: set_variable() failed: status=%d\n", err);
@@ -362,6 +402,11 @@ efivar_show_raw(struct efivar_entry *entry, char *buf)
 {
 	struct efi_variable *var = &entry->var;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct compat_efi_variable *compat;
+	size_t size;
+>>>>>>> v3.18
 =======
 	struct compat_efi_variable *compat;
 	size_t size;
@@ -376,10 +421,13 @@ efivar_show_raw(struct efivar_entry *entry, char *buf)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(buf, var, sizeof(*var));
 
 	return sizeof(*var);
 =======
+=======
+>>>>>>> v3.18
 	if (is_compat()) {
 		compat = (struct compat_efi_variable *)buf;
 
@@ -397,6 +445,9 @@ efivar_show_raw(struct efivar_entry *entry, char *buf)
 	}
 
 	return size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -473,9 +524,12 @@ static ssize_t efivar_create(struct file *filp, struct kobject *kobj,
 			     char *buf, loff_t pos, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct efi_variable *new_var = (struct efi_variable *)buf;
 	struct efivar_entry *new_entry;
 =======
+=======
+>>>>>>> v3.18
 	struct compat_efi_variable *compat = (struct compat_efi_variable *)buf;
 	struct efi_variable *new_var = (struct efi_variable *)buf;
 	struct efivar_entry *new_entry;
@@ -484,6 +538,9 @@ static ssize_t efivar_create(struct file *filp, struct kobject *kobj,
 	unsigned long size;
 	u32 attributes;
 	u8 *data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err;
 
@@ -491,10 +548,13 @@ static ssize_t efivar_create(struct file *filp, struct kobject *kobj,
 		return -EACCES;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((new_var->Attributes & ~EFI_VARIABLE_MASK) != 0 ||
 	    efivar_validate(new_var->VendorGuid, new_var->VariableName,
 			    new_var->Data, new_var->DataSize) == false) {
 =======
+=======
+>>>>>>> v3.18
 	if (need_compat) {
 		if (count != sizeof(*compat))
 			return -EINVAL;
@@ -515,6 +575,9 @@ static ssize_t efivar_create(struct file *filp, struct kobject *kobj,
 
 	if ((attributes & ~EFI_VARIABLE_MASK) != 0 ||
 	    efivar_validate(name, data, size) == false) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printk(KERN_ERR "efivars: Malformed variable content\n");
 		return -EINVAL;
@@ -525,11 +588,14 @@ static ssize_t efivar_create(struct file *filp, struct kobject *kobj,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&new_entry->var, new_var, sizeof(*new_var));
 
 	err = efivar_entry_set(new_entry, new_var->Attributes, new_var->DataSize,
 			       new_var->Data, &efivar_sysfs_list);
 =======
+=======
+>>>>>>> v3.18
 	if (need_compat)
 		copy_out_compat(&new_entry->var, compat);
 	else
@@ -537,6 +603,9 @@ static ssize_t efivar_create(struct file *filp, struct kobject *kobj,
 
 	err = efivar_entry_set(new_entry, attributes, size,
 			       data, &efivar_sysfs_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err) {
 		if (err == -EEXIST)
@@ -561,12 +630,18 @@ static ssize_t efivar_delete(struct file *filp, struct kobject *kobj,
 {
 	struct efi_variable *del_var = (struct efi_variable *)buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct efivar_entry *entry;
 =======
+=======
+>>>>>>> v3.18
 	struct compat_efi_variable *compat;
 	struct efivar_entry *entry;
 	efi_char16_t *name;
 	efi_guid_t vendor;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err = 0;
 
@@ -574,10 +649,13 @@ static ssize_t efivar_delete(struct file *filp, struct kobject *kobj,
 		return -EACCES;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efivar_entry_iter_begin();
 	entry = efivar_entry_find(del_var->VariableName, del_var->VendorGuid,
 				  &efivar_sysfs_list, true);
 =======
+=======
+>>>>>>> v3.18
 	if (is_compat()) {
 		if (count != sizeof(*compat))
 			return -EINVAL;
@@ -595,12 +673,16 @@ static ssize_t efivar_delete(struct file *filp, struct kobject *kobj,
 
 	efivar_entry_iter_begin();
 	entry = efivar_entry_find(name, vendor, &efivar_sysfs_list, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!entry)
 		err = -EINVAL;
 	else if (__efivar_entry_delete(entry))
 		err = -EIO;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	efivar_entry_iter_end();
 
@@ -609,6 +691,8 @@ static ssize_t efivar_delete(struct file *filp, struct kobject *kobj,
 
 	efivar_unregister(entry);
 =======
+=======
+>>>>>>> v3.18
 	if (err) {
 		efivar_entry_iter_end();
 		return err;
@@ -619,6 +703,9 @@ static ssize_t efivar_delete(struct file *filp, struct kobject *kobj,
 		efivar_unregister(entry);
 	} else
 		efivar_entry_iter_end();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* It's dead Jim.... */
@@ -636,6 +723,7 @@ efivar_create_sysfs_entry(struct efivar_entry *new_var)
 {
 	int i, short_name_size;
 	char *short_name;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long utf8_name_size;
 	efi_char16_t *variable_name = new_var->var.VariableName;
@@ -659,6 +747,8 @@ efivar_create_sysfs_entry(struct efivar_entry *new_var)
 	efi_guid_unparse(&new_var->var.VendorGuid,
 			 short_name + utf8_name_size + 1);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long variable_name_size;
 	efi_char16_t *variable_name;
 
@@ -688,6 +778,9 @@ efivar_create_sysfs_entry(struct efivar_entry *new_var)
 	*(short_name + strlen(short_name)) = '-';
 	efi_guid_unparse(&new_var->var.VendorGuid,
 			 short_name + strlen(short_name));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	new_var->kobj.kset = efivars_kset;
@@ -820,7 +913,11 @@ static int efivar_sysfs_destroy(struct efivar_entry *entry, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void efivars_sysfs_exit(void)
+=======
+static void efivars_sysfs_exit(void)
+>>>>>>> v3.18
 =======
 static void efivars_sysfs_exit(void)
 >>>>>>> v3.18
@@ -843,6 +940,12 @@ int efivars_sysfs_init(void)
 	int error = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!efi_enabled(EFI_RUNTIME_SERVICES))
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (!efi_enabled(EFI_RUNTIME_SERVICES))
 		return -ENODEV;

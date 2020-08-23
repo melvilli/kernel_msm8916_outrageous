@@ -211,7 +211,11 @@
 			samsung,pin-function = <2>;
 			samsung,pin-pud = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -222,7 +226,11 @@
 			samsung,pin-function = <3>;
 			samsung,pin-pud = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -233,7 +241,11 @@
 			samsung,pin-function = <4>;
 			samsung,pin-pud = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -251,7 +263,11 @@
 			samsung,pin-function = <2>;
 			samsung,pin-pud = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -262,7 +278,11 @@
 			samsung,pin-function = <3>;
 			samsung,pin-pud = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -273,7 +293,11 @@
 			samsung,pin-function = <4>;
 			samsung,pin-pud = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -298,7 +322,11 @@
 			samsung,pin-function = <3>;
 			samsung,pin-pud = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -309,7 +337,11 @@
 			samsung,pin-function = <3>;
 			samsung,pin-pud = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -384,7 +416,10 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		pwm0_out: pwm0-out {
 			samsung,pins = "gpb2-0";
 			samsung,pin-function = <2>;
@@ -413,6 +448,9 @@
 			samsung,pin-drv = <0>;
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		i2c7_bus: i2c7-bus {
 			samsung,pins = "gpb2-2", "gpb2-3";
@@ -440,7 +478,11 @@
 			samsung,pin-function = <4>;
 			samsung,pin-pud = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -451,7 +493,11 @@
 			samsung,pin-function = <4>;
 			samsung,pin-pud = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -623,8 +669,11 @@
 			samsung,pin-function = <2>;
 			samsung,pin-pud = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
 =======
+=======
+>>>>>>> v3.18
 			samsung,pin-drv = <0>;
 		};
 
@@ -633,6 +682,9 @@
 			samsung,pin-function = <3>;
 			samsung,pin-pud = <0>;
 			samsung,pin-drv = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -725,7 +777,11 @@
 			samsung,pin-function = <3>;
 			samsung,pin-pud = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -736,7 +792,11 @@
 			samsung,pin-function = <4>;
 			samsung,pin-pud = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -747,7 +807,11 @@
 			samsung,pin-function = <4>;
 			samsung,pin-pud = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -758,7 +822,11 @@
 			samsung,pin-function = <2>;
 			samsung,pin-pud = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -769,7 +837,11 @@
 			samsung,pin-function = <2>;
 			samsung,pin-pud = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -780,7 +852,11 @@
 			samsung,pin-function = <2>;
 			samsung,pin-pud = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -795,7 +871,11 @@
 			samsung,pin-function = <2>;
 			samsung,pin-pud = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -808,7 +888,11 @@
 			samsung,pin-function = <2>;
 			samsung,pin-pud = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -864,7 +948,11 @@
 			samsung,pin-function = <2>;
 			samsung,pin-pud = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18
@@ -878,7 +966,11 @@
 			samsung,pin-function = <2>;
 			samsung,pin-pud = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			samaung,pin-drv = <0>;
+=======
+			samsung,pin-drv = <0>;
+>>>>>>> v3.18
 =======
 			samsung,pin-drv = <0>;
 >>>>>>> v3.18

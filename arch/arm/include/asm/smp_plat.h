@@ -9,6 +9,10 @@
 #include <linux/err.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu.h>
 >>>>>>> v3.18
@@ -30,8 +34,11 @@ static inline bool is_smp(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* all SMP configurations have the extended CPUID registers */
 =======
+=======
+>>>>>>> v3.18
 /**
  * smp_cpuid_part() - return part id for a given cpu
  * @cpu:	logical cpu id.
@@ -50,6 +57,9 @@ static inline unsigned int smp_cpuid_part(int cpu)
 #ifndef CONFIG_MMU
 #define tlb_ops_need_broadcast()	0
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int tlb_ops_need_broadcast(void)
 {
@@ -59,6 +69,10 @@ static inline int tlb_ops_need_broadcast(void)
 	return ((read_cpuid_ext(CPUID_EXT_MMFR3) >> 12) & 0xf) < 2;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -114,6 +128,12 @@ static inline u32 mpidr_hash_size(void)
 	return 1 << mpidr_hash.bits;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+extern int platform_can_cpu_hotplug(void);
+
+>>>>>>> v3.18
 =======
 
 extern int platform_can_cpu_hotplug(void);

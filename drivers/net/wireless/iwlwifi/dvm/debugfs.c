@@ -3,7 +3,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -74,6 +78,7 @@
 
 /* file operation */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEBUGFS_READ_FUNC(name)                                         \
 static ssize_t iwl_dbgfs_##name##_read(struct file *file,               \
 					char __user *user_buf,          \
@@ -90,6 +95,9 @@ static ssize_t iwl_dbgfs_##name##_write(struct file *file,              \
 =======
 #define DEBUGFS_READ_FILE_OPS(name)                                     \
 >>>>>>> v3.18
+=======
+#define DEBUGFS_READ_FILE_OPS(name)                                     \
+>>>>>>> v3.18
 static const struct file_operations iwl_dbgfs_##name##_ops = {          \
 	.read = iwl_dbgfs_##name##_read,				\
 	.open = simple_open,						\
@@ -98,7 +106,10 @@ static const struct file_operations iwl_dbgfs_##name##_ops = {          \
 
 #define DEBUGFS_WRITE_FILE_OPS(name)                                    \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUGFS_WRITE_FUNC(name);                                       \
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct file_operations iwl_dbgfs_##name##_ops = {          \
@@ -110,8 +121,11 @@ static const struct file_operations iwl_dbgfs_##name##_ops = {          \
 
 #define DEBUGFS_READ_WRITE_FILE_OPS(name)                               \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUGFS_READ_FUNC(name);                                        \
 	DEBUGFS_WRITE_FUNC(name);                                       \
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct file_operations iwl_dbgfs_##name##_ops = {          \
@@ -382,7 +396,11 @@ static ssize_t iwl_dbgfs_channels_read(struct file *file, char __user *user_buf,
 					channels[i].flags & IEEE80211_CHAN_RADAR ?
 					" (IEEE 802.11h required)" : "",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					((channels[i].flags & IEEE80211_CHAN_NO_IBSS)
+=======
+					((channels[i].flags & IEEE80211_CHAN_NO_IR)
+>>>>>>> v3.18
 =======
 					((channels[i].flags & IEEE80211_CHAN_NO_IR)
 >>>>>>> v3.18
@@ -391,7 +409,11 @@ static ssize_t iwl_dbgfs_channels_read(struct file *file, char __user *user_buf,
 					", IBSS",
 					channels[i].flags &
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IEEE80211_CHAN_PASSIVE_SCAN ?
+=======
+					IEEE80211_CHAN_NO_IR ?
+>>>>>>> v3.18
 =======
 					IEEE80211_CHAN_NO_IR ?
 >>>>>>> v3.18
@@ -413,7 +435,11 @@ static ssize_t iwl_dbgfs_channels_read(struct file *file, char __user *user_buf,
 					channels[i].flags & IEEE80211_CHAN_RADAR ?
 					" (IEEE 802.11h required)" : "",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					((channels[i].flags & IEEE80211_CHAN_NO_IBSS)
+=======
+					((channels[i].flags & IEEE80211_CHAN_NO_IR)
+>>>>>>> v3.18
 =======
 					((channels[i].flags & IEEE80211_CHAN_NO_IR)
 >>>>>>> v3.18
@@ -422,7 +448,11 @@ static ssize_t iwl_dbgfs_channels_read(struct file *file, char __user *user_buf,
 					", IBSS",
 					channels[i].flags &
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IEEE80211_CHAN_PASSIVE_SCAN ?
+=======
+					IEEE80211_CHAN_NO_IR ?
+>>>>>>> v3.18
 =======
 					IEEE80211_CHAN_NO_IR ?
 >>>>>>> v3.18
@@ -1527,7 +1557,11 @@ static ssize_t iwl_dbgfs_ucode_bt_stats_read(struct file *file,
 	/* make request to uCode to retrieve statistics information */
 	mutex_lock(&priv->mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_send_statistics_request(priv, CMD_SYNC, false);
+=======
+	ret = iwl_send_statistics_request(priv, 0, false);
+>>>>>>> v3.18
 =======
 	ret = iwl_send_statistics_request(priv, 0, false);
 >>>>>>> v3.18
@@ -1918,7 +1952,11 @@ static ssize_t iwl_dbgfs_clear_ucode_statistics_write(struct file *file,
 	/* make request to uCode to retrieve statistics information */
 	mutex_lock(&priv->mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_send_statistics_request(priv, CMD_SYNC, true);
+=======
+	iwl_send_statistics_request(priv, 0, true);
+>>>>>>> v3.18
 =======
 	iwl_send_statistics_request(priv, 0, true);
 >>>>>>> v3.18
@@ -2242,7 +2280,10 @@ static int iwl_cmd_echo_test(struct iwl_priv *priv)
 		.id = REPLY_ECHO,
 		.len = { 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	};
@@ -2377,7 +2418,11 @@ static ssize_t iwl_dbgfs_fw_restart_write(struct file *file,
 
 	/* take the return value to make compiler happy - it will fail anyway */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_dvm_send_cmd_pdu(priv, REPLY_ERROR, CMD_SYNC, 0, NULL);
+=======
+	ret = iwl_dvm_send_cmd_pdu(priv, REPLY_ERROR, 0, 0, NULL);
+>>>>>>> v3.18
 =======
 	ret = iwl_dvm_send_cmd_pdu(priv, REPLY_ERROR, 0, 0, NULL);
 >>>>>>> v3.18

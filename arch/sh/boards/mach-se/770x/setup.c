@@ -129,8 +129,13 @@ static struct resource sh_eth0_resources[] = {
 
 static struct platform_device sh_eth0_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name = "sh-eth",
 	.id	= 0,
+=======
+	.name = "sh771x-ether",
+	.id = 0,
+>>>>>>> v3.18
 =======
 	.name = "sh771x-ether",
 	.id = 0,
@@ -157,8 +162,13 @@ static struct resource sh_eth1_resources[] = {
 
 static struct platform_device sh_eth1_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name = "sh-eth",
 	.id	= 1,
+=======
+	.name = "sh771x-ether",
+	.id = 1,
+>>>>>>> v3.18
 =======
 	.name = "sh771x-ether",
 	.id = 1,

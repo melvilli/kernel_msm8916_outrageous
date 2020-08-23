@@ -30,7 +30,10 @@ ssize_t nfs_dns_resolve_name(struct net *net, char *name, size_t namelen,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(nfs_dns_resolve_name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -51,7 +54,13 @@ EXPORT_SYMBOL_GPL(nfs_dns_resolve_name);
 #include <linux/sunrpc/svcauth.h>
 #include <linux/sunrpc/rpc_pipe_fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <linux/nfs_fs.h>
+
+#include "nfs4_fs.h"
+>>>>>>> v3.18
 =======
 #include <linux/nfs_fs.h>
 
@@ -361,7 +370,10 @@ ssize_t nfs_dns_resolve_name(struct net *net, char *name,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(nfs_dns_resolve_name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -409,7 +421,10 @@ void nfs_dns_resolver_cache_destroy(struct net *net)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int nfs4_dns_net_init(struct net *net)
 {
 	return nfs_dns_resolver_cache_init(net);
@@ -425,6 +440,9 @@ static struct pernet_operations nfs4_dns_resolver_ops = {
 	.exit = nfs4_dns_net_exit,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int rpc_pipefs_event(struct notifier_block *nb, unsigned long event,
 			   void *ptr)
@@ -463,8 +481,11 @@ static struct notifier_block nfs_dns_resolver_block = {
 int nfs_dns_resolver_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rpc_pipefs_notifier_register(&nfs_dns_resolver_block);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	err = register_pernet_subsys(&nfs4_dns_resolver_ops);
@@ -478,6 +499,9 @@ out1:
 	unregister_pernet_subsys(&nfs4_dns_resolver_ops);
 out:
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -485,6 +509,10 @@ void nfs_dns_resolver_destroy(void)
 {
 	rpc_pipefs_notifier_unregister(&nfs_dns_resolver_block);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unregister_pernet_subsys(&nfs4_dns_resolver_ops);
+>>>>>>> v3.18
 =======
 	unregister_pernet_subsys(&nfs4_dns_resolver_ops);
 >>>>>>> v3.18

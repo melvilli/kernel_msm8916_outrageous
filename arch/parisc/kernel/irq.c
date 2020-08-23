@@ -118,7 +118,11 @@ int cpu_check_affinity(struct irq_data *d, const struct cpumask *dest)
 
 	/* whatever mask they set, we just allow one CPU */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_dest = first_cpu(*dest);
+=======
+	cpu_dest = cpumask_first_and(dest, cpu_online_mask);
+>>>>>>> v3.18
 =======
 	cpu_dest = cpumask_first_and(dest, cpu_online_mask);
 >>>>>>> v3.18
@@ -184,10 +188,13 @@ int arch_show_interrupts(struct seq_file *p, int prec)
 		seq_printf(p, "%10u ", irq_stats(j)->irq_resched_count);
 	seq_puts(p, "  Rescheduling interrupts\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(p, "%*s: ", prec, "CAL");
 	for_each_online_cpu(j)
 		seq_printf(p, "%10u ", irq_stats(j)->irq_call_count);
 	seq_puts(p, "  Function call interrupts\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -507,6 +514,7 @@ static void execute_on_irq_stack(void *func, unsigned long param1)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void do_softirq(void)
 {
 	__u32 pending;
@@ -528,6 +536,11 @@ void do_softirq_own_stack(void)
 {
 	execute_on_irq_stack(__do_softirq, 0);
 >>>>>>> v3.18
+=======
+void do_softirq_own_stack(void)
+{
+	execute_on_irq_stack(__do_softirq, 0);
+>>>>>>> v3.18
 }
 #endif /* CONFIG_IRQSTACKS */
 
@@ -538,8 +551,13 @@ void do_cpu_irq_mask(struct pt_regs *regs)
 	unsigned long eirr_val;
 	int irq, cpu = smp_processor_id();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct irq_desc *desc;
 #ifdef CONFIG_SMP
+=======
+#ifdef CONFIG_SMP
+	struct irq_desc *desc;
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_SMP
 	struct irq_desc *desc;
@@ -557,12 +575,17 @@ void do_cpu_irq_mask(struct pt_regs *regs)
 	irq = eirr_to_irq(eirr_val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Filter out spurious interrupts, mostly from serial port at bootup */
 	desc = irq_to_desc(irq);
 	if (unlikely(!desc->action))
 		goto set_out;
 
 #ifdef CONFIG_SMP
+=======
+#ifdef CONFIG_SMP
+	desc = irq_to_desc(irq);
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_SMP
 	desc = irq_to_desc(irq);

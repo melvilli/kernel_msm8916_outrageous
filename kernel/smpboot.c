@@ -13,7 +13,10 @@
 #include <linux/kthread.h>
 #include <linux/smpboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kmemleak.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -29,7 +32,11 @@
 static DEFINE_PER_CPU(struct task_struct *, idle_threads);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct task_struct * __cpuinit idle_thread_get(unsigned int cpu)
+=======
+struct task_struct *idle_thread_get(unsigned int cpu)
+>>>>>>> v3.18
 =======
 struct task_struct *idle_thread_get(unsigned int cpu)
 >>>>>>> v3.18
@@ -183,8 +190,11 @@ __smpboot_create_thread(struct smp_hotplug_thread *ht, unsigned int cpu)
 	if (!td)
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	kmemleak_not_leak(td);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	td->cpu = cpu;
@@ -293,7 +303,10 @@ int smpboot_register_percpu_thread(struct smp_hotplug_thread *plug_thread)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_online_cpus();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&smpboot_threads_lock);
@@ -309,7 +322,10 @@ int smpboot_register_percpu_thread(struct smp_hotplug_thread *plug_thread)
 out:
 	mutex_unlock(&smpboot_threads_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_online_cpus();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;

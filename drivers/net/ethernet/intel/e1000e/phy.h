@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -27,6 +28,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel PRO/1000 Linux driver
  * Copyright(c) 1999 - 2014 Intel Corporation.
  *
@@ -47,6 +50,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _E1000E_PHY_H_
@@ -195,6 +201,10 @@ s32 e1000_get_cable_length_82577(struct e1000_hw *hw);
 #define HV_M_STATUS_SPEED_MASK		0x0300
 #define HV_M_STATUS_SPEED_1000		0x0200
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HV_M_STATUS_SPEED_100		0x0100
+>>>>>>> v3.18
 =======
 #define HV_M_STATUS_SPEED_100		0x0100
 >>>>>>> v3.18

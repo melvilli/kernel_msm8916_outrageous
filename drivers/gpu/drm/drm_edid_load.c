@@ -32,8 +32,14 @@ MODULE_PARM_DESC(edid_firmware, "Do not probe monitor, use specified EDID blob "
 	"from built-in data or /lib/firmware instead. ");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GENERIC_EDIDS 5
 static char *generic_edid_name[GENERIC_EDIDS] = {
+=======
+#define GENERIC_EDIDS 6
+static const char *generic_edid_name[GENERIC_EDIDS] = {
+	"edid/800x600.bin",
+>>>>>>> v3.18
 =======
 #define GENERIC_EDIDS 6
 static const char *generic_edid_name[GENERIC_EDIDS] = {
@@ -47,8 +53,11 @@ static const char *generic_edid_name[GENERIC_EDIDS] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 generic_edid[GENERIC_EDIDS][128] = {
 =======
+=======
+>>>>>>> v3.18
 static const u8 generic_edid[GENERIC_EDIDS][128] = {
 	{
 	0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00,
@@ -68,6 +77,9 @@ static const u8 generic_edid[GENERIC_EDIDS][128] = {
 	0x00, 0x4c, 0x69, 0x6e, 0x75, 0x78, 0x20, 0x53,
 	0x56, 0x47, 0x41, 0x0a, 0x20, 0x20, 0x00, 0xc2,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 	0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00,
@@ -162,6 +174,7 @@ static const u8 generic_edid[GENERIC_EDIDS][128] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 *edid_load(struct drm_connector *connector, char *name,
 			char *connector_name)
 {
@@ -222,6 +235,8 @@ static u8 *edid_load(struct drm_connector *connector, char *name,
 	}
 	memcpy(edid, fwdata, fwsize);
 =======
+=======
+>>>>>>> v3.18
 static int edid_size(const u8 *edid, int data_size)
 {
 	if (data_size < EDID_LENGTH)
@@ -285,6 +300,9 @@ static void *edid_load(struct drm_connector *connector, const char *name,
 		edid = ERR_PTR(-ENOMEM);
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!drm_edid_block_valid(edid, 0, print_bad_edid)) {
@@ -293,8 +311,13 @@ static void *edid_load(struct drm_connector *connector, const char *name,
 		    name);
 		kfree(edid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -EINVAL;
 		goto relfw_out;
+=======
+		edid = ERR_PTR(-EINVAL);
+		goto out;
+>>>>>>> v3.18
 =======
 		edid = ERR_PTR(-EINVAL);
 		goto out;
@@ -311,6 +334,11 @@ static void *edid_load(struct drm_connector *connector, const char *name,
 
 	if (valid_extensions != edid[0x7e]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		u8 *new_edid;
+
+>>>>>>> v3.18
 =======
 		u8 *new_edid;
 
@@ -321,6 +349,7 @@ static void *edid_load(struct drm_connector *connector, const char *name,
 		    edid[0x7e], name, connector_name);
 		edid[0x7e] = valid_extensions;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		new_edid = krealloc(edid, (valid_extensions + 1) * EDID_LENGTH,
 		    GFP_KERNEL);
 		if (new_edid == NULL) {
@@ -330,11 +359,16 @@ static void *edid_load(struct drm_connector *connector, const char *name,
 		}
 		edid = new_edid;
 =======
+=======
+>>>>>>> v3.18
 
 		new_edid = krealloc(edid, (valid_extensions + 1) * EDID_LENGTH,
 				    GFP_KERNEL);
 		if (new_edid)
 			edid = new_edid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -343,6 +377,7 @@ static void *edid_load(struct drm_connector *connector, const char *name,
 	    "external", valid_extensions, valid_extensions == 1 ? "" : "s",
 	    name, connector_name);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 relfw_out:
 	release_firmware(fw);
@@ -356,13 +391,22 @@ out:
 	if (fw)
 		release_firmware(fw);
 >>>>>>> v3.18
+=======
+out:
+	if (fw)
+		release_firmware(fw);
+>>>>>>> v3.18
 	return edid;
 }
 
 int drm_load_edid_firmware(struct drm_connector *connector)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *connector_name = drm_get_connector_name(connector);
+=======
+	const char *connector_name = connector->name;
+>>>>>>> v3.18
 =======
 	const char *connector_name = connector->name;
 >>>>>>> v3.18
@@ -387,7 +431,11 @@ int drm_load_edid_firmware(struct drm_connector *connector)
 		*last = '\0';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	edid = (struct edid *) edid_load(connector, edidname, connector_name);
+=======
+	edid = edid_load(connector, edidname, connector_name);
+>>>>>>> v3.18
 =======
 	edid = edid_load(connector, edidname, connector_name);
 >>>>>>> v3.18

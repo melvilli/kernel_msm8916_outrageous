@@ -387,7 +387,11 @@ int diRead(struct inode *ip)
 
 	if (ip->i_ino != le32_to_cpu(dp->di_number)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "diRead: i_ino != di_number");
+=======
+		jfs_error(ip->i_sb, "i_ino != di_number\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "i_ino != di_number\n");
 >>>>>>> v3.18
@@ -630,7 +634,11 @@ int diWrite(tid_t tid, struct inode *ip)
 	    (lengthPXD(&(jfs_ip->ixpxd)) !=
 	     JFS_IP(ipimap)->i_imap->im_nbperiext)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "diWrite: ixpxd invalid");
+=======
+		jfs_error(ip->i_sb, "ixpxd invalid\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "ixpxd invalid\n");
 >>>>>>> v3.18
@@ -902,8 +910,12 @@ int diFree(struct inode *ip)
 		print_hex_dump(KERN_ERR, "imap: ", DUMP_PREFIX_ADDRESS, 16, 4,
 			       imap, 32, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb,
 			  "diFree: inum = %d, iagno = %d, nextiag = %d",
+=======
+		jfs_error(ip->i_sb, "inum = %d, iagno = %d, nextiag = %d\n",
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "inum = %d, iagno = %d, nextiag = %d\n",
 >>>>>>> v3.18
@@ -943,8 +955,12 @@ int diFree(struct inode *ip)
 
 	if (!(le32_to_cpu(iagp->wmap[extno]) & mask)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb,
 			  "diFree: wmap shows inode already free");
+=======
+		jfs_error(ip->i_sb, "wmap shows inode already free\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "wmap shows inode already free\n");
 >>>>>>> v3.18
@@ -955,7 +971,11 @@ int diFree(struct inode *ip)
 		IREAD_UNLOCK(ipimap);
 		AG_UNLOCK(imap, agno);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "diFree: invalid inoext");
+=======
+		jfs_error(ip->i_sb, "invalid inoext\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "invalid inoext\n");
 >>>>>>> v3.18
@@ -971,7 +991,11 @@ int diFree(struct inode *ip)
 		IREAD_UNLOCK(ipimap);
 		AG_UNLOCK(imap, agno);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "diFree: numfree > numinos");
+=======
+		jfs_error(ip->i_sb, "numfree > numinos\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "numfree > numinos\n");
 >>>>>>> v3.18
@@ -1224,7 +1248,11 @@ int diFree(struct inode *ip)
 	 */
 	if (iagp->pmap[extno] != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "diFree: the pmap does not show inode free");
+=======
+		jfs_error(ip->i_sb, "the pmap does not show inode free\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "the pmap does not show inode free\n");
 >>>>>>> v3.18
@@ -1547,8 +1575,12 @@ int diAlloc(struct inode *pip, bool dir, struct inode *ip)
 					AG_UNLOCK(imap, agno);
 					jfs_error(ip->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  "diAlloc: can't find free bit "
 						  "in wmap");
+=======
+						  "can't find free bit in wmap\n");
+>>>>>>> v3.18
 =======
 						  "can't find free bit in wmap\n");
 >>>>>>> v3.18
@@ -1693,7 +1725,11 @@ diAllocAG(struct inomap * imap, int agno, bool dir, struct inode *ip)
 
 	if (numfree > numinos) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "diAllocAG: numfree > numinos");
+=======
+		jfs_error(ip->i_sb, "numfree > numinos\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "numfree > numinos\n");
 >>>>>>> v3.18
@@ -1848,8 +1884,12 @@ static int diAllocIno(struct inomap * imap, int agno, struct inode *ip)
 		IREAD_UNLOCK(imap->im_ipimap);
 		release_metapage(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb,
 			  "diAllocIno: nfreeinos = 0, but iag on freelist");
+=======
+		jfs_error(ip->i_sb, "nfreeinos = 0, but iag on freelist\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "nfreeinos = 0, but iag on freelist\n");
 >>>>>>> v3.18
@@ -1865,7 +1905,11 @@ static int diAllocIno(struct inomap * imap, int agno, struct inode *ip)
 			release_metapage(mp);
 			jfs_error(ip->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "diAllocIno: free inode not found in summary map");
+=======
+				  "free inode not found in summary map\n");
+>>>>>>> v3.18
 =======
 				  "free inode not found in summary map\n");
 >>>>>>> v3.18
@@ -1884,7 +1928,11 @@ static int diAllocIno(struct inomap * imap, int agno, struct inode *ip)
 		IREAD_UNLOCK(imap->im_ipimap);
 		release_metapage(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "diAllocIno: no free extent found");
+=======
+		jfs_error(ip->i_sb, "no free extent found\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "no free extent found\n");
 >>>>>>> v3.18
@@ -1899,7 +1947,11 @@ static int diAllocIno(struct inomap * imap, int agno, struct inode *ip)
 		IREAD_UNLOCK(imap->im_ipimap);
 		release_metapage(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "diAllocIno: free inode not found");
+=======
+		jfs_error(ip->i_sb, "free inode not found\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "free inode not found\n");
 >>>>>>> v3.18
@@ -1989,7 +2041,11 @@ static int diAllocExt(struct inomap * imap, int agno, struct inode *ip)
 		if ((rc = diIAGRead(imap, iagno, &mp))) {
 			IREAD_UNLOCK(imap->im_ipimap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(ip->i_sb, "diAllocExt: error reading iag");
+=======
+			jfs_error(ip->i_sb, "error reading iag\n");
+>>>>>>> v3.18
 =======
 			jfs_error(ip->i_sb, "error reading iag\n");
 >>>>>>> v3.18
@@ -2005,8 +2061,12 @@ static int diAllocExt(struct inomap * imap, int agno, struct inode *ip)
 			release_metapage(mp);
 			IREAD_UNLOCK(imap->im_ipimap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(ip->i_sb,
 				  "diAllocExt: free ext summary map not found");
+=======
+			jfs_error(ip->i_sb, "free ext summary map not found\n");
+>>>>>>> v3.18
 =======
 			jfs_error(ip->i_sb, "free ext summary map not found\n");
 >>>>>>> v3.18
@@ -2023,7 +2083,11 @@ static int diAllocExt(struct inomap * imap, int agno, struct inode *ip)
 		release_metapage(mp);
 		IREAD_UNLOCK(imap->im_ipimap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "diAllocExt: free extent not found");
+=======
+		jfs_error(ip->i_sb, "free extent not found\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "free extent not found\n");
 >>>>>>> v3.18
@@ -2146,8 +2210,12 @@ static int diAllocBit(struct inomap * imap, struct iag * iagp, int ino)
 			release_metapage(bmp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(imap->im_ipimap->i_sb,
 			  "diAllocBit: iag inconsistent");
+=======
+		jfs_error(imap->im_ipimap->i_sb, "iag inconsistent\n");
+>>>>>>> v3.18
 =======
 		jfs_error(imap->im_ipimap->i_sb, "iag inconsistent\n");
 >>>>>>> v3.18
@@ -2258,7 +2326,11 @@ static int diNewExt(struct inomap * imap, struct iag * iagp, int extno)
 	 */
 	if (!iagp->nfreeexts) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(imap->im_ipimap->i_sb, "diNewExt: no free extents");
+=======
+		jfs_error(imap->im_ipimap->i_sb, "no free extents\n");
+>>>>>>> v3.18
 =======
 		jfs_error(imap->im_ipimap->i_sb, "no free extents\n");
 >>>>>>> v3.18
@@ -2334,7 +2406,11 @@ static int diNewExt(struct inomap * imap, struct iag * iagp, int extno)
 			if (ciagp == NULL) {
 				jfs_error(imap->im_ipimap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  "diNewExt: ciagp == NULL");
+=======
+					  "ciagp == NULL\n");
+>>>>>>> v3.18
 =======
 					  "ciagp == NULL\n");
 >>>>>>> v3.18
@@ -2575,7 +2651,11 @@ diNewIAG(struct inomap * imap, int *iagnop, int agno, struct metapage ** mpp)
 			IAGFREE_UNLOCK(imap);
 			jfs_error(imap->im_ipimap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "diNewIAG: ipimap->i_size is wrong");
+=======
+				  "ipimap->i_size is wrong\n");
+>>>>>>> v3.18
 =======
 				  "ipimap->i_size is wrong\n");
 >>>>>>> v3.18
@@ -2839,8 +2919,12 @@ diUpdatePMap(struct inode *ipimap,
 	/* make sure that the iag is contained within the map */
 	if (iagno >= imap->im_nextiag) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ipimap->i_sb,
 			  "diUpdatePMap: the iag is outside the map");
+=======
+		jfs_error(ipimap->i_sb, "the iag is outside the map\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ipimap->i_sb, "the iag is outside the map\n");
 >>>>>>> v3.18
@@ -2873,6 +2957,7 @@ diUpdatePMap(struct inode *ipimap,
 		if (!(le32_to_cpu(iagp->wmap[extno]) & mask)) {
 			jfs_error(ipimap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "diUpdatePMap: inode %ld not marked as "
 				  "allocated in wmap!", inum);
 		}
@@ -2881,6 +2966,8 @@ diUpdatePMap(struct inode *ipimap,
 				  "diUpdatePMap: inode %ld not marked as "
 				  "allocated in pmap!", inum);
 =======
+=======
+>>>>>>> v3.18
 				  "inode %ld not marked as allocated in wmap!\n",
 				  inum);
 		}
@@ -2888,6 +2975,9 @@ diUpdatePMap(struct inode *ipimap,
 			jfs_error(ipimap->i_sb,
 				  "inode %ld not marked as allocated in pmap!\n",
 				  inum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		/* update the bitmap for the extent of the freed inode */
@@ -2904,8 +2994,12 @@ diUpdatePMap(struct inode *ipimap,
 			release_metapage(mp);
 			jfs_error(ipimap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "diUpdatePMap: the inode is not allocated in "
 				  "the working map");
+=======
+				  "the inode is not allocated in the working map\n");
+>>>>>>> v3.18
 =======
 				  "the inode is not allocated in the working map\n");
 >>>>>>> v3.18
@@ -2915,8 +3009,12 @@ diUpdatePMap(struct inode *ipimap,
 			release_metapage(mp);
 			jfs_error(ipimap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "diUpdatePMap: the inode is not free in the "
 				  "persistent map");
+=======
+				  "the inode is not free in the persistent map\n");
+>>>>>>> v3.18
 =======
 				  "the inode is not free in the persistent map\n");
 >>>>>>> v3.18
@@ -3012,8 +3110,12 @@ int diExtendFS(struct inode *ipimap, struct inode *ipbmap)
 		if (le32_to_cpu(iagp->iagnum) != i) {
 			release_metapage(bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(ipimap->i_sb,
 				  "diExtendFs: unexpected value of iagnum");
+=======
+			jfs_error(ipimap->i_sb, "unexpected value of iagnum\n");
+>>>>>>> v3.18
 =======
 			jfs_error(ipimap->i_sb, "unexpected value of iagnum\n");
 >>>>>>> v3.18
@@ -3093,8 +3195,12 @@ int diExtendFS(struct inode *ipimap, struct inode *ipbmap)
 	if (xnuminos != atomic_read(&imap->im_numinos) ||
 	    xnumfree != atomic_read(&imap->im_numfree)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ipimap->i_sb,
 			  "diExtendFs: numinos or numfree incorrect");
+=======
+		jfs_error(ipimap->i_sb, "numinos or numfree incorrect\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ipimap->i_sb, "numinos or numfree incorrect\n");
 >>>>>>> v3.18

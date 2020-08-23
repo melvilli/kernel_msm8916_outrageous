@@ -64,7 +64,11 @@
 
 struct ina209_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -83,8 +87,13 @@ struct ina209_data {
 static struct ina209_data *ina209_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ina209_data *data = i2c_get_clientdata(client);
+=======
+	struct ina209_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct ina209_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -244,7 +253,10 @@ static ssize_t ina209_set_interval(struct device *dev,
 				   const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ina209_data *data = ina209_update_device(dev);
@@ -263,7 +275,12 @@ static ssize_t ina209_set_interval(struct device *dev,
 	regval = ina209_reg_from_interval(data->regs[INA209_CONFIGURATION],
 					  val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_smbus_write_word_swapped(client, INA209_CONFIGURATION, regval);
+=======
+	i2c_smbus_write_word_swapped(data->client, INA209_CONFIGURATION,
+				     regval);
+>>>>>>> v3.18
 =======
 	i2c_smbus_write_word_swapped(data->client, INA209_CONFIGURATION,
 				     regval);
@@ -278,8 +295,12 @@ static ssize_t ina209_show_interval(struct device *dev,
 				    struct device_attribute *da, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ina209_data *data = i2c_get_clientdata(client);
+=======
+	struct ina209_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct ina209_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -307,9 +328,15 @@ static ssize_t ina209_reset_history(struct device *dev,
 				    size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ina209_data *data = i2c_get_clientdata(client);
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(da);
+=======
+	struct sensor_device_attribute *attr = to_sensor_dev_attr(da);
+	struct ina209_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(da);
 	struct ina209_data *data = dev_get_drvdata(dev);
@@ -340,7 +367,10 @@ static ssize_t ina209_set_value(struct device *dev,
 				size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ina209_data *data = ina209_update_device(dev);
@@ -363,7 +393,11 @@ static ssize_t ina209_set_value(struct device *dev,
 		goto abort;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_smbus_write_word_swapped(client, reg, ret);
+=======
+	i2c_smbus_write_word_swapped(data->client, reg, ret);
+>>>>>>> v3.18
 =======
 	i2c_smbus_write_word_swapped(data->client, reg, ret);
 >>>>>>> v3.18
@@ -492,7 +526,11 @@ static SENSOR_DEVICE_ATTR(update_interval, S_IRUGO | S_IWUSR,
  * as required for sysfs_create_group()
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *ina209_attributes[] = {
+=======
+static struct attribute *ina209_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *ina209_attrs[] = {
 >>>>>>> v3.18
@@ -537,10 +575,14 @@ static struct attribute *ina209_attrs[] = {
 	NULL,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct attribute_group ina209_group = {
 	.attrs = ina209_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(ina209);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(ina209);
 >>>>>>> v3.18
@@ -608,6 +650,10 @@ static int ina209_probe(struct i2c_client *client,
 	struct i2c_adapter *adapter = client->adapter;
 	struct ina209_data *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *hwmon_dev;
+>>>>>>> v3.18
 =======
 	struct device *hwmon_dev;
 >>>>>>> v3.18
@@ -622,6 +668,10 @@ static int ina209_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	data->client = client;
+>>>>>>> v3.18
 =======
 	data->client = client;
 >>>>>>> v3.18
@@ -631,6 +681,7 @@ static int ina209_probe(struct i2c_client *client,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register sysfs hooks */
 	ret = sysfs_create_group(&client->dev.kobj, &ina209_group);
@@ -642,20 +693,28 @@ static int ina209_probe(struct i2c_client *client,
 		ret = PTR_ERR(data->hwmon_dev);
 		goto out_hwmon_device_register;
 =======
+=======
+>>>>>>> v3.18
 	hwmon_dev = devm_hwmon_device_register_with_groups(&client->dev,
 							   client->name,
 							   data, ina209_groups);
 	if (IS_ERR(hwmon_dev)) {
 		ret = PTR_ERR(hwmon_dev);
 		goto out_restore_conf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_hwmon_device_register:
 	sysfs_remove_group(&client->dev.kobj, &ina209_group);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out_restore_conf:
@@ -668,8 +727,11 @@ static int ina209_remove(struct i2c_client *client)
 	struct ina209_data *data = i2c_get_clientdata(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hwmon_device_unregister(data->hwmon_dev);
 	sysfs_remove_group(&client->dev.kobj, &ina209_group);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ina209_restore_conf(client, data);

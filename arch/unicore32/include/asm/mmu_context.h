@@ -15,6 +15,11 @@
 #include <linux/compiler.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mm.h>
+#include <linux/vmacache.h>
+>>>>>>> v3.18
 =======
 #include <linux/mm.h>
 #include <linux/vmacache.h>
@@ -79,7 +84,11 @@ do { \
 			mm->mmap = NULL; \
 		rb_erase(&high_vma->vm_rb, &mm->mm_rb); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mm->mmap_cache = NULL; \
+=======
+		vmacache_invalidate(mm); \
+>>>>>>> v3.18
 =======
 		vmacache_invalidate(mm); \
 >>>>>>> v3.18

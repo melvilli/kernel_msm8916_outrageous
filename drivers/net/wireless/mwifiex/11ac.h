@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: 802.11ac
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2013, Marvell International Ltd.
+=======
+ * Copyright (C) 2013-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -45,6 +49,11 @@ int mwifiex_cmd_11ac_cfg(struct mwifiex_private *priv,
 			 struct host_cmd_ds_command *cmd, u16 cmd_action,
 			 struct mwifiex_11ac_vht_cfg *cfg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void mwifiex_fill_vht_cap_tlv(struct mwifiex_private *priv,
+			      struct ieee80211_vht_cap *vht_cap, u8 bands);
+>>>>>>> v3.18
 =======
 void mwifiex_fill_vht_cap_tlv(struct mwifiex_private *priv,
 			      struct ieee80211_vht_cap *vht_cap, u8 bands);

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -191,11 +195,14 @@ acpi_status acpi_ut_strtoul64(char *string, u32 base, u64 *ret_integer)
 	case ACPI_ANY_BASE:
 	case 16:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 
 	default:
 		/* Invalid Base */
 =======
+=======
+>>>>>>> v3.18
 
 		break;
 
@@ -203,6 +210,9 @@ acpi_status acpi_ut_strtoul64(char *string, u32 base, u64 *ret_integer)
 
 		/* Invalid Base */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return_ACPI_STATUS(AE_BAD_PARAMETER);
 	}
@@ -322,7 +332,11 @@ acpi_status acpi_ut_strtoul64(char *string, u32 base, u64 *ret_integer)
 	/* All done, normal exit */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       all_done:
+=======
+all_done:
+>>>>>>> v3.18
 =======
 all_done:
 >>>>>>> v3.18
@@ -334,7 +348,11 @@ all_done:
 	return_ACPI_STATUS(AE_OK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       error_exit:
+=======
+error_exit:
+>>>>>>> v3.18
 =======
 error_exit:
 >>>>>>> v3.18
@@ -353,7 +371,12 @@ error_exit:
  *
  * PARAMETERS:  string          - Null terminated ASCII string
 <<<<<<< HEAD
+<<<<<<< HEAD
  *              max_length      - Maximum output length
+=======
+ *              max_length      - Maximum output length. Used to constrain the
+ *                                length of strings during debug output only.
+>>>>>>> v3.18
 =======
  *              max_length      - Maximum output length. Used to constrain the
  *                                length of strings during debug output only.
@@ -367,7 +390,11 @@ error_exit:
  ******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void acpi_ut_print_string(char *string, u8 max_length)
+=======
+void acpi_ut_print_string(char *string, u16 max_length)
+>>>>>>> v3.18
 =======
 void acpi_ut_print_string(char *string, u16 max_length)
 >>>>>>> v3.18
@@ -387,6 +414,10 @@ void acpi_ut_print_string(char *string, u16 max_length)
 		switch (string[i]) {
 		case 0x07:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -395,6 +426,10 @@ void acpi_ut_print_string(char *string, u16 max_length)
 
 		case 0x08:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -403,6 +438,10 @@ void acpi_ut_print_string(char *string, u16 max_length)
 
 		case 0x0C:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -411,6 +450,10 @@ void acpi_ut_print_string(char *string, u16 max_length)
 
 		case 0x0A:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -419,6 +462,10 @@ void acpi_ut_print_string(char *string, u16 max_length)
 
 		case 0x0D:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -427,6 +474,10 @@ void acpi_ut_print_string(char *string, u16 max_length)
 
 		case 0x09:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -435,6 +486,10 @@ void acpi_ut_print_string(char *string, u16 max_length)
 
 		case 0x0B:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -445,6 +500,10 @@ void acpi_ut_print_string(char *string, u16 max_length)
 		case '\"':	/* Double Quote */
 		case '\\':	/* Backslash */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -515,7 +574,12 @@ u8 acpi_ut_valid_acpi_char(char character, u32 position)
  * FUNCTION:    acpi_ut_valid_acpi_name
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PARAMETERS:  name            - The name to be examined
+=======
+ * PARAMETERS:  name            - The name to be examined. Does not have to
+ *                                be NULL terminated string.
+>>>>>>> v3.18
 =======
  * PARAMETERS:  name            - The name to be examined. Does not have to
  *                                be NULL terminated string.
@@ -531,7 +595,11 @@ u8 acpi_ut_valid_acpi_char(char character, u32 position)
  ******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 acpi_ut_valid_acpi_name(u32 name)
+=======
+u8 acpi_ut_valid_acpi_name(char *name)
+>>>>>>> v3.18
 =======
 u8 acpi_ut_valid_acpi_name(char *name)
 >>>>>>> v3.18
@@ -542,8 +610,12 @@ u8 acpi_ut_valid_acpi_name(char *name)
 
 	for (i = 0; i < ACPI_NAME_SIZE; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!acpi_ut_valid_acpi_char
 		    ((ACPI_CAST_PTR(char, &name))[i], i)) {
+=======
+		if (!acpi_ut_valid_acpi_char(name[i], i)) {
+>>>>>>> v3.18
 =======
 		if (!acpi_ut_valid_acpi_char(name[i], i)) {
 >>>>>>> v3.18
@@ -649,7 +721,10 @@ void ut_convert_backslashes(char *pathname)
 }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #if defined (ACPI_DEBUGGER) || defined (ACPI_APPLICATION)
 /*******************************************************************************
@@ -712,4 +787,7 @@ acpi_ut_safe_strncat(char *dest,
 	return (FALSE);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

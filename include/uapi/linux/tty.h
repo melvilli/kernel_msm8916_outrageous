@@ -35,7 +35,10 @@
 #define N_TRACESINK	23	/* Trace data routing for MIPI P1149.7 */
 #define N_TRACEROUTER	24	/* Trace data routing for MIPI P1149.7 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define N_SMUX		25	/* Serial MUX */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

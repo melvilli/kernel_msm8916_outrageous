@@ -1220,7 +1220,11 @@ syscall_trace_enter (long arg0, long arg1, long arg2, long arg3,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_syscall_entry(AUDIT_ARCH_IA64, regs.r15, arg0, arg1, arg2, arg3);
+=======
+	audit_syscall_entry(regs.r15, arg0, arg1, arg2, arg3);
+>>>>>>> v3.18
 =======
 	audit_syscall_entry(regs.r15, arg0, arg1, arg2, arg3);
 >>>>>>> v3.18

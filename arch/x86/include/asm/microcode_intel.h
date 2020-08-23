@@ -44,7 +44,11 @@ struct extended_sigtable {
 
 #define get_totalsize(mc) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(((struct microcode_intel *)mc)->hdr.totalsize ? \
+=======
+	(((struct microcode_intel *)mc)->hdr.datasize ? \
+>>>>>>> v3.18
 =======
 	(((struct microcode_intel *)mc)->hdr.datasize ? \
 >>>>>>> v3.18
@@ -70,6 +74,7 @@ update_match_revision(struct microcode_header_intel *mc_header, int rev);
 #ifdef CONFIG_MICROCODE_INTEL_EARLY
 extern void __init load_ucode_intel_bsp(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __cpuinit load_ucode_intel_ap(void);
 extern void show_ucode_info_early(void);
 #else
@@ -77,6 +82,8 @@ static inline __init void load_ucode_intel_bsp(void) {}
 static inline __cpuinit void load_ucode_intel_ap(void) {}
 static inline void show_ucode_info_early(void) {}
 =======
+=======
+>>>>>>> v3.18
 extern void load_ucode_intel_ap(void);
 extern void show_ucode_info_early(void);
 extern int __init save_microcode_in_initrd_intel(void);
@@ -85,6 +92,9 @@ static inline __init void load_ucode_intel_bsp(void) {}
 static inline void load_ucode_intel_ap(void) {}
 static inline void show_ucode_info_early(void) {}
 static inline int __init save_microcode_in_initrd_intel(void) { return -EINVAL; }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

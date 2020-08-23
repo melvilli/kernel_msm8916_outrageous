@@ -23,7 +23,10 @@
 #include <linux/interrupt.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <net/wpan-phy.h>
@@ -87,7 +90,10 @@ struct mrf24j40 {
 	struct mutex buffer_mutex; /* only used to protect buf */
 	struct completion tx_complete;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct irqwork;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 *buf; /* 3 bytes. Used for SPI single-register transfers. */
@@ -332,8 +338,13 @@ static int mrf24j40_read_rx_buf(struct mrf24j40 *devrec,
 	print_hex_dump(KERN_DEBUG, "mrf24j40 rx: ",
 		DUMP_PREFIX_OFFSET, 16, 1, data, *len, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "mrf24j40 rx: lqi: %02hhx rssi: %02hhx\n",
 		lqi_rssi[0], lqi_rssi[1]);
+=======
+	pr_debug("mrf24j40 rx: lqi: %02hhx rssi: %02hhx\n",
+		 lqi_rssi[0], lqi_rssi[1]);
+>>>>>>> v3.18
 =======
 	pr_debug("mrf24j40 rx: lqi: %02hhx rssi: %02hhx\n",
 		 lqi_rssi[0], lqi_rssi[1]);
@@ -357,6 +368,11 @@ static int mrf24j40_tx(struct ieee802154_dev *dev, struct sk_buff *skb)
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	reinit_completion(&devrec->tx_complete);
+
+>>>>>>> v3.18
 =======
 	reinit_completion(&devrec->tx_complete);
 
@@ -372,8 +388,11 @@ static int mrf24j40_tx(struct ieee802154_dev *dev, struct sk_buff *skb)
 	write_short_reg(devrec, REG_TXNCON, val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(devrec->tx_complete);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Wait for the device to send the TX complete interrupt. */
@@ -407,7 +426,11 @@ static int mrf24j40_ed(struct ieee802154_dev *dev, u8 *level)
 {
 	/* TODO: */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING "mrf24j40: ed not implemented\n");
+=======
+	pr_warn("mrf24j40: ed not implemented\n");
+>>>>>>> v3.18
 =======
 	pr_warn("mrf24j40: ed not implemented\n");
 >>>>>>> v3.18
@@ -438,6 +461,10 @@ static void mrf24j40_stop(struct ieee802154_dev *dev)
 	u8 val;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -449,8 +476,11 @@ static void mrf24j40_stop(struct ieee802154_dev *dev)
 	val |= 0x1|0x8; /* Set TXNIE and RXIE. Disable Interrupts */
 	write_short_reg(devrec, REG_INTCON, val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -498,8 +528,14 @@ static int mrf24j40_filter(struct ieee802154_dev *dev,
 		/* Short Addr */
 		u8 addrh, addrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		addrh = filt->short_addr >> 8 & 0xff;
 		addrl = filt->short_addr & 0xff;
+=======
+
+		addrh = le16_to_cpu(filt->short_addr) >> 8 & 0xff;
+		addrl = le16_to_cpu(filt->short_addr) & 0xff;
+>>>>>>> v3.18
 =======
 
 		addrh = le16_to_cpu(filt->short_addr) >> 8 & 0xff;
@@ -515,6 +551,7 @@ static int mrf24j40_filter(struct ieee802154_dev *dev,
 	if (changed & IEEE802515_AFILT_IEEEADDR_CHANGED) {
 		/* Device Address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int i;
 		for (i = 0; i < 8; i++)
 			write_short_reg(devrec, REG_EADR0+i,
@@ -526,6 +563,8 @@ static int mrf24j40_filter(struct ieee802154_dev *dev,
 			printk("%02hhx ", filt->ieee_addr[i]);
 		printk(KERN_DEBUG "\n");
 =======
+=======
+>>>>>>> v3.18
 		u8 i, addr[8];
 
 		memcpy(addr, &filt->ieee_addr, 8);
@@ -537,6 +576,9 @@ static int mrf24j40_filter(struct ieee802154_dev *dev,
 		for (i = 0; i < 8; i++)
 			pr_debug("%02hhx ", addr[7 - i]);
 		pr_debug("\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	}
@@ -545,8 +587,14 @@ static int mrf24j40_filter(struct ieee802154_dev *dev,
 		/* PAN ID */
 		u8 panidl, panidh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		panidh = filt->pan_id >> 8 & 0xff;
 		panidl = filt->pan_id & 0xff;
+=======
+
+		panidh = le16_to_cpu(filt->pan_id) >> 8 & 0xff;
+		panidl = le16_to_cpu(filt->pan_id) & 0xff;
+>>>>>>> v3.18
 =======
 
 		panidh = le16_to_cpu(filt->pan_id) >> 8 & 0xff;
@@ -648,6 +696,7 @@ static irqreturn_t mrf24j40_isr(int irq, void *data)
 {
 	struct mrf24j40 *devrec = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	disable_irq_nosync(irq);
 
@@ -659,6 +708,8 @@ static irqreturn_t mrf24j40_isr(int irq, void *data)
 static void mrf24j40_isrwork(struct work_struct *work)
 {
 	struct mrf24j40 *devrec = container_of(work, struct mrf24j40, irqwork);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 intstat;
@@ -679,8 +730,11 @@ static void mrf24j40_isrwork(struct work_struct *work)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enable_irq(devrec->spi->irq);
 =======
+=======
+>>>>>>> v3.18
 	return IRQ_HANDLED;
 }
 
@@ -768,12 +822,16 @@ static int mrf24j40_hw_init(struct mrf24j40 *devrec)
 
 err_ret:
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int mrf24j40_probe(struct spi_device *spi)
 {
 	int ret = -ENOMEM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 val;
 	struct mrf24j40 *devrec;
@@ -793,6 +851,8 @@ static int mrf24j40_probe(struct spi_device *spi)
 		dev_warn(&spi->dev,
 			"pinctrl pins are not configured from the driver");
 =======
+=======
+>>>>>>> v3.18
 	struct mrf24j40 *devrec;
 
 	dev_info(&spi->dev, "probe(). IRQ: %d\n", spi->irq);
@@ -803,6 +863,9 @@ static int mrf24j40_probe(struct spi_device *spi)
 	devrec->buf = devm_kzalloc(&spi->dev, 3, GFP_KERNEL);
 	if (!devrec->buf)
 		goto err_ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spi->mode = SPI_MODE_0; /* TODO: Is this appropriate for right here? */
@@ -812,7 +875,10 @@ static int mrf24j40_probe(struct spi_device *spi)
 	mutex_init(&devrec->buffer_mutex);
 	init_completion(&devrec->tx_complete);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&devrec->irqwork, mrf24j40_isrwork);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	devrec->spi = spi;
@@ -823,7 +889,11 @@ static int mrf24j40_probe(struct spi_device *spi)
 	devrec->dev = ieee802154_alloc_device(0, &mrf24j40_ops);
 	if (!devrec->dev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_alloc_dev;
+=======
+		goto err_ret;
+>>>>>>> v3.18
 =======
 		goto err_ret;
 >>>>>>> v3.18
@@ -838,6 +908,7 @@ static int mrf24j40_probe(struct spi_device *spi)
 	if (ret)
 		goto err_register_device;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Initialize the device.
 		From datasheet section 3.2: Initialization. */
@@ -871,6 +942,8 @@ static int mrf24j40_probe(struct spi_device *spi)
 			  dev_name(&spi->dev),
 			  devrec);
 =======
+=======
+>>>>>>> v3.18
 	ret = mrf24j40_hw_init(devrec);
 	if (ret)
 		goto err_hw_init;
@@ -882,6 +955,9 @@ static int mrf24j40_probe(struct spi_device *spi)
 					IRQF_TRIGGER_LOW|IRQF_ONESHOT,
 					dev_name(&spi->dev),
 					devrec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret) {
@@ -893,6 +969,7 @@ static int mrf24j40_probe(struct spi_device *spi)
 
 err_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_read_reg:
 	ieee802154_unregister_device(devrec->dev);
 err_register_device:
@@ -903,11 +980,16 @@ err_buf:
 	kfree(devrec);
 err_devrec:
 =======
+=======
+>>>>>>> v3.18
 err_hw_init:
 	ieee802154_unregister_device(devrec->dev);
 err_register_device:
 	ieee802154_free_device(devrec->dev);
 err_ret:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -919,8 +1001,11 @@ static int mrf24j40_remove(struct spi_device *spi)
 	dev_dbg(printdev(devrec), "remove\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(spi->irq, devrec);
 	flush_work(&devrec->irqwork); /* TODO: Is this the right call? */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ieee802154_unregister_device(devrec->dev);
@@ -929,10 +1014,13 @@ static int mrf24j40_remove(struct spi_device *spi)
 	 * complete? */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Clean up the SPI stuff. */
 	spi_set_drvdata(spi, NULL);
 	kfree(devrec->buf);
 	kfree(devrec);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

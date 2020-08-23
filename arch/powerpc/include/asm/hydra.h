@@ -96,7 +96,10 @@ extern volatile struct Hydra __iomem *Hydra;
 
 extern int hydra_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void macio_adb_init(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

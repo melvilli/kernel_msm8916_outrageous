@@ -253,7 +253,11 @@ static int gart_iommu_map(struct iommu_domain *domain, unsigned long iova,
 	pfn = __phys_to_pfn(pa);
 	if (!pfn_valid(pfn)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(gart->dev, "Invalid page: %08x\n", pa);
+=======
+		dev_err(gart->dev, "Invalid page: %pa\n", &pa);
+>>>>>>> v3.18
 =======
 		dev_err(gart->dev, "Invalid page: %pa\n", &pa);
 >>>>>>> v3.18
@@ -300,8 +304,13 @@ static phys_addr_t gart_iommu_iova_to_phys(struct iommu_domain *domain,
 	pa = (pte & GART_PAGE_MASK);
 	if (!pfn_valid(__phys_to_pfn(pa))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(gart->dev, "No entry for %08llx:%08x\n",
 			 (unsigned long long)iova, pa);
+=======
+		dev_err(gart->dev, "No entry for %08llx:%pa\n",
+			 (unsigned long long)iova, &pa);
+>>>>>>> v3.18
 =======
 		dev_err(gart->dev, "No entry for %08llx:%pa\n",
 			 (unsigned long long)iova, &pa);
@@ -313,6 +322,7 @@ static phys_addr_t gart_iommu_iova_to_phys(struct iommu_domain *domain,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int gart_iommu_domain_has_cap(struct iommu_domain *domain,
 				     unsigned long cap)
 {
@@ -321,6 +331,8 @@ static int gart_iommu_domain_has_cap(struct iommu_domain *domain,
 
 static struct iommu_ops gart_iommu_ops = {
 =======
+=======
+>>>>>>> v3.18
 static bool gart_iommu_capable(enum iommu_cap cap)
 {
 	return false;
@@ -328,6 +340,9 @@ static bool gart_iommu_capable(enum iommu_cap cap)
 
 static const struct iommu_ops gart_iommu_ops = {
 	.capable	= gart_iommu_capable,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.domain_init	= gart_iommu_domain_init,
 	.domain_destroy	= gart_iommu_domain_destroy,
@@ -337,7 +352,10 @@ static const struct iommu_ops gart_iommu_ops = {
 	.unmap		= gart_iommu_unmap,
 	.iova_to_phys	= gart_iommu_iova_to_phys,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.domain_has_cap	= gart_iommu_domain_has_cap,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.pgsize_bitmap	= GART_IOMMU_PGSIZES,
@@ -374,7 +392,10 @@ static int tegra_gart_probe(struct platform_device *pdev)
 	struct resource *res, *res_remap;
 	void __iomem *gart_regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct device *dev = &pdev->dev;
@@ -402,8 +423,12 @@ static int tegra_gart_probe(struct platform_device *pdev)
 	if (!gart_regs) {
 		dev_err(dev, "failed to remap GART registers\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENXIO;
 		goto fail;
+=======
+		return -ENXIO;
+>>>>>>> v3.18
 =======
 		return -ENXIO;
 >>>>>>> v3.18
@@ -421,8 +446,12 @@ static int tegra_gart_probe(struct platform_device *pdev)
 	if (!gart->savedata) {
 		dev_err(dev, "failed to allocate context save area\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENOMEM;
 		goto fail;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -435,6 +464,7 @@ static int tegra_gart_probe(struct platform_device *pdev)
 	bus_set_iommu(&platform_bus_type, &gart_iommu_ops);
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 fail:
 	if (gart_regs)
@@ -445,13 +475,18 @@ fail:
 	return err;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int tegra_gart_remove(struct platform_device *pdev)
 {
 	struct gart_device *gart = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev = gart->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -459,9 +494,12 @@ static int tegra_gart_remove(struct platform_device *pdev)
 	if (gart->savedata)
 		vfree(gart->savedata);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gart->regs)
 		devm_iounmap(dev, gart->regs);
 	devm_kfree(dev, gart);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	gart_handle = NULL;
@@ -469,7 +507,11 @@ static int tegra_gart_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct dev_pm_ops tegra_gart_pm_ops = {
+=======
+static const struct dev_pm_ops tegra_gart_pm_ops = {
+>>>>>>> v3.18
 =======
 static const struct dev_pm_ops tegra_gart_pm_ops = {
 >>>>>>> v3.18
@@ -478,7 +520,11 @@ static const struct dev_pm_ops tegra_gart_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id tegra_gart_of_match[] = {
+=======
+static const struct of_device_id tegra_gart_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id tegra_gart_of_match[] = {
 >>>>>>> v3.18

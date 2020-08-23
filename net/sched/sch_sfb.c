@@ -56,7 +56,11 @@ struct sfb_bins {
 struct sfb_sched_data {
 	struct Qdisc	*qdisc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcf_proto *filter_list;
+=======
+	struct tcf_proto __rcu *filter_list;
+>>>>>>> v3.18
 =======
 	struct tcf_proto __rcu *filter_list;
 >>>>>>> v3.18
@@ -225,7 +229,11 @@ static u32 sfb_compute_qlen(u32 *prob_r, u32 *avgpm_r, const struct sfb_sched_da
 static void sfb_init_perturbation(u32 slot, struct sfb_sched_data *q)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->bins[slot].perturbation = net_random();
+=======
+	q->bins[slot].perturbation = prandom_u32();
+>>>>>>> v3.18
 =======
 	q->bins[slot].perturbation = prandom_u32();
 >>>>>>> v3.18
@@ -262,7 +270,11 @@ static bool sfb_rate_limit(struct sk_buff *skb, struct sfb_sched_data *q)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool sfb_classify(struct sk_buff *skb, struct sfb_sched_data *q,
+=======
+static bool sfb_classify(struct sk_buff *skb, struct tcf_proto *fl,
+>>>>>>> v3.18
 =======
 static bool sfb_classify(struct sk_buff *skb, struct tcf_proto *fl,
 >>>>>>> v3.18
@@ -272,7 +284,11 @@ static bool sfb_classify(struct sk_buff *skb, struct tcf_proto *fl,
 	int result;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = tc_classify(skb, q->filter_list, &res);
+=======
+	result = tc_classify(skb, fl, &res);
+>>>>>>> v3.18
 =======
 	result = tc_classify(skb, fl, &res);
 >>>>>>> v3.18
@@ -298,6 +314,10 @@ static int sfb_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	struct sfb_sched_data *q = qdisc_priv(sch);
 	struct Qdisc *child = q->qdisc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tcf_proto *fl;
+>>>>>>> v3.18
 =======
 	struct tcf_proto *fl;
 >>>>>>> v3.18
@@ -310,7 +330,11 @@ static int sfb_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 
 	if (unlikely(sch->q.qlen >= q->limit)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.overlimits++;
+=======
+		qdisc_qstats_overlimit(sch);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_overlimit(sch);
 >>>>>>> v3.18
@@ -331,14 +355,20 @@ static int sfb_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (q->filter_list) {
 		/* If using external classifiers, get result and record it. */
 		if (!sfb_classify(skb, q, &ret, &salt))
 =======
+=======
+>>>>>>> v3.18
 	fl = rcu_dereference_bh(q->filter_list);
 	if (fl) {
 		/* If using external classifiers, get result and record it. */
 		if (!sfb_classify(skb, fl, &ret, &salt))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto other_drop;
 		keys.src = salt;
@@ -378,7 +408,11 @@ static int sfb_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 
 	if (unlikely(minqlen >= q->max)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.overlimits++;
+=======
+		qdisc_qstats_overlimit(sch);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_overlimit(sch);
 >>>>>>> v3.18
@@ -410,7 +444,11 @@ static int sfb_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 		}
 		if (sfb_rate_limit(skb, q)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.overlimits++;
+=======
+			qdisc_qstats_overlimit(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_overlimit(sch);
 >>>>>>> v3.18
@@ -421,7 +459,11 @@ static int sfb_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = net_random() & SFB_MAX_PROB;
+=======
+	r = prandom_u32() & SFB_MAX_PROB;
+>>>>>>> v3.18
 =======
 	r = prandom_u32() & SFB_MAX_PROB;
 >>>>>>> v3.18
@@ -453,7 +495,11 @@ enqueue:
 	} else if (net_xmit_drop_count(ret)) {
 		q->stats.childdrop++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.drops++;
+=======
+		qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -466,7 +512,11 @@ drop:
 other_drop:
 	if (ret & __NET_XMIT_BYPASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.drops++;
+=======
+		qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -712,7 +762,12 @@ static void sfb_walk(struct Qdisc *sch, struct qdisc_walker *walker)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_proto **sfb_find_tcf(struct Qdisc *sch, unsigned long cl)
+=======
+static struct tcf_proto __rcu **sfb_find_tcf(struct Qdisc *sch,
+					     unsigned long cl)
+>>>>>>> v3.18
 =======
 static struct tcf_proto __rcu **sfb_find_tcf(struct Qdisc *sch,
 					     unsigned long cl)

@@ -1427,7 +1427,12 @@ __u8 *irlmp_hint_to_service(__u8 *hint)
 			IRDA_DEBUG(1, "Telephony ");
 			service[i++] = S_TELEPHONY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} if (hint[1] & HINT_FILE_SERVER)
+=======
+		}
+		if (hint[1] & HINT_FILE_SERVER)
+>>>>>>> v3.18
 =======
 		}
 		if (hint[1] & HINT_FILE_SERVER)
@@ -1882,7 +1887,11 @@ static void *irlmp_seq_hb_idx(struct irlmp_iter_state *iter, loff_t *off)
 	     element != NULL;
 	     element = hashbin_get_next(iter->hashbin)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!off || (*off)-- == 0) {
+=======
+		if (!off || *off-- == 0) {
+>>>>>>> v3.18
 =======
 		if (!off || *off-- == 0) {
 >>>>>>> v3.18

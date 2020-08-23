@@ -13,6 +13,10 @@
 
 #include <linux/clk-provider.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kref.h>
+>>>>>>> v3.18
 =======
 #include <linux/kref.h>
 >>>>>>> v3.18
@@ -30,6 +34,11 @@
 #ifdef CONFIG_COMMON_CLK
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct module;
+
+>>>>>>> v3.18
 =======
 struct module;
 
@@ -39,6 +48,10 @@ struct clk {
 	const struct clk_ops	*ops;
 	struct clk_hw		*hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct module		*owner;
+>>>>>>> v3.18
 =======
 	struct module		*owner;
 >>>>>>> v3.18
@@ -46,6 +59,7 @@ struct clk {
 	const char		**parent_names;
 	struct clk		**parents;
 	u8			num_parents;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long		rate;
 	unsigned long		new_rate;
@@ -59,6 +73,8 @@ struct clk {
 	struct dentry		*dentry;
 #endif
 =======
+=======
+>>>>>>> v3.18
 	u8			new_parent_index;
 	unsigned long		rate;
 	unsigned long		new_rate;
@@ -77,6 +93,9 @@ struct clk {
 	struct dentry		*dentry;
 #endif
 	struct kref		ref;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

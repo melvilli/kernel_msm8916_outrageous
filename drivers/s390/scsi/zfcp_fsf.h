@@ -4,7 +4,11 @@
  * Interface to the FSF support functions.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright IBM Corp. 2002, 2016
+=======
+ * Copyright IBM Corp. 2002, 2010
+>>>>>>> v3.18
 =======
  * Copyright IBM Corp. 2002, 2010
 >>>>>>> v3.18
@@ -41,6 +45,7 @@
 #define FSF_PORT_COMMAND			0x00000004
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* FSF control file upload/download operations' subtype and options */
 #define FSF_CFDC_OPERATION_SUBTYPE		0x00020001
 #define FSF_CFDC_OPTION_NORMAL_MODE		0x00000000
@@ -48,6 +53,8 @@
 #define FSF_CFDC_OPTION_FULL_ACCESS		0x00000002
 #define FSF_CFDC_OPTION_RESTRICTED_ACCESS	0x00000004
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* FSF protocol states */
@@ -72,7 +79,10 @@
 #define FSF_SERVICE_CLASS_NOT_SUPPORTED		0x00000006
 #define FSF_FCPLUN_NOT_VALID			0x00000009
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FSF_ACCESS_DENIED			0x00000010
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define FSF_LUN_SHARING_VIOLATION               0x00000012
@@ -97,7 +107,10 @@
 #define FSF_REF_TAG_CHECK_FAILURE		0x00000083
 #define FSF_ADAPTER_STATUS_AVAILABLE		0x000000AD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FSF_FCP_RSP_AVAILABLE			0x000000AF
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define FSF_UNKNOWN_COMMAND			0x000000E2
@@ -145,7 +158,10 @@
 #define FSF_STATUS_READ_LINK_UP          	0x00000006
 #define FSF_STATUS_READ_NOTIFICATION_LOST	0x00000009
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FSF_STATUS_READ_CFDC_UPDATED		0x0000000A
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define FSF_STATUS_READ_FEATURE_UPDATE_ALERT	0x0000000C
@@ -158,7 +174,10 @@
 /* status subtypes for unsolicited status notification lost */
 #define FSF_STATUS_READ_SUB_INCOMING_ELS	0x00000001
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FSF_STATUS_READ_SUB_ACT_UPDATED		0x00000020
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -187,8 +206,11 @@
 
 /* channel features */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FSF_FEATURE_CFDC			0x00000002
 #define FSF_FEATURE_LUN_SHARING			0x00000004
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define FSF_FEATURE_NOTIFICATION_LOST		0x00000008
@@ -206,6 +228,7 @@
 #define FSF_OPEN_LUN_SUPPRESS_BOXING		0x00000001
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* open LUN access flags*/
 #define FSF_UNIT_ACCESS_EXCLUSIVE		0x02000000
 #define FSF_UNIT_ACCESS_OUTBOUND_TRANSFER	0x10000000
@@ -220,6 +243,8 @@ struct zfcp_fsf_cfdc {
 	u32 option;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct fsf_queue_designator {
@@ -489,7 +514,10 @@ struct zfcp_blk_drv_data {
  * @port: Optional pointer to port for zfcp internal ELS (only test link ADISC)
  * @status: used to pass error status to calling function
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @d_id: Destination ID of either open WKA port for CT or of D_ID for ELS
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -501,7 +529,10 @@ struct zfcp_fsf_ct_els {
 	struct zfcp_port *port;
 	int status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 d_id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

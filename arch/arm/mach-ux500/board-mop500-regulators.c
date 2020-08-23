@@ -31,6 +31,7 @@ struct regulator_init_data gpio_en_3v3_regulator = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct regulator_consumer_supply sdi0_reg_consumers[] = {
         REGULATOR_SUPPLY("vqmmc", "sdi0"),
 };
@@ -45,6 +46,8 @@ struct regulator_init_data sdi0_reg_init_data = {
         .consumer_supplies      = sdi0_reg_consumers,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -814,7 +817,11 @@ static struct ab8500_regulator_reg_init ab8505_reg_init[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct regulator_init_data ab8505_regulators[AB8505_NUM_REGULATORS] = {
+=======
+static struct regulator_init_data ab8505_regulators[AB8505_NUM_REGULATORS] = {
+>>>>>>> v3.18
 =======
 static struct regulator_init_data ab8505_regulators[AB8505_NUM_REGULATORS] = {
 >>>>>>> v3.18
@@ -1007,7 +1014,10 @@ struct ab8500_regulator_platform_data ab8500_regulator_plat_data = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Use the AB8500 init settings for AB8505 as they are the same right now */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct ab8500_regulator_platform_data ab8505_regulator_plat_data = {

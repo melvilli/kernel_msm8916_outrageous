@@ -13,7 +13,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -29,6 +32,7 @@
 #include "inv_mpu_iio.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void inv_clear_kfifo(struct inv_mpu6050_state *st)
 {
 	unsigned long flags;
@@ -39,6 +43,8 @@ static void inv_clear_kfifo(struct inv_mpu6050_state *st)
 	spin_unlock_irqrestore(&st->time_stamp_lock, flags);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int inv_reset_fifo(struct iio_dev *indio_dev)
@@ -68,10 +74,13 @@ int inv_reset_fifo(struct iio_dev *indio_dev)
 	if (result)
 		goto reset_fifo_fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* clear timestamps fifo */
 	inv_clear_kfifo(st);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* enable interrupt */
@@ -108,7 +117,10 @@ reset_fifo_fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void inv_clear_kfifo(struct inv_mpu6050_state *st)
 {
 	unsigned long flags;
@@ -119,6 +131,9 @@ static void inv_clear_kfifo(struct inv_mpu6050_state *st)
 	spin_unlock_irqrestore(&st->time_stamp_lock, flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * inv_mpu6050_irq_handler() - Cache a timestamp at each data ready interrupt.
@@ -151,7 +166,10 @@ irqreturn_t inv_mpu6050_read_fifo(int irq, void *p)
 	u16 fifo_count;
 	s64 timestamp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 *tmp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -200,9 +218,14 @@ irqreturn_t inv_mpu6050_read_fifo(int irq, void *p)
 			timestamp = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = (u64 *)data;
 		tmp[DIV_ROUND_UP(bytes_per_datum, 8)] = timestamp;
 		result = iio_push_to_buffers(indio_dev, data);
+=======
+		result = iio_push_to_buffers_with_timestamp(indio_dev, data,
+			timestamp);
+>>>>>>> v3.18
 =======
 		result = iio_push_to_buffers_with_timestamp(indio_dev, data,
 			timestamp);
@@ -222,6 +245,10 @@ flush_fifo:
 	/* Flush HW and SW FIFOs. */
 	inv_reset_fifo(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	inv_clear_kfifo(st);
+>>>>>>> v3.18
 =======
 	inv_clear_kfifo(st);
 >>>>>>> v3.18

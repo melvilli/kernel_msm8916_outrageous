@@ -31,9 +31,15 @@
 #include <linux/phy.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/io.h>
 #include <asm/irq.h>
 #include <asm/uaccess.h>
+=======
+#include <linux/io.h>
+#include <asm/irq.h>
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 #include <asm/irq.h>
@@ -99,8 +105,13 @@ static int cis820x_config_intr(struct phy_device *phydev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(phydev->interrupts == PHY_INTERRUPT_ENABLED)
 		err = phy_write(phydev, MII_CIS8201_IMASK, 
+=======
+	if (phydev->interrupts == PHY_INTERRUPT_ENABLED)
+		err = phy_write(phydev, MII_CIS8201_IMASK,
+>>>>>>> v3.18
 =======
 	if (phydev->interrupts == PHY_INTERRUPT_ENABLED)
 		err = phy_write(phydev, MII_CIS8201_IMASK,

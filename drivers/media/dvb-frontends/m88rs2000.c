@@ -298,7 +298,11 @@ struct inittab {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct inittab m88rs2000_setup[] = {
+=======
+static struct inittab m88rs2000_setup[] = {
+>>>>>>> v3.18
 =======
 static struct inittab m88rs2000_setup[] = {
 >>>>>>> v3.18
@@ -320,7 +324,11 @@ static struct inittab m88rs2000_setup[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct inittab m88rs2000_shutdown[] = {
+=======
+static struct inittab m88rs2000_shutdown[] = {
+>>>>>>> v3.18
 =======
 static struct inittab m88rs2000_shutdown[] = {
 >>>>>>> v3.18
@@ -334,7 +342,11 @@ static struct inittab m88rs2000_shutdown[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct inittab fe_reset[] = {
+=======
+static struct inittab fe_reset[] = {
+>>>>>>> v3.18
 =======
 static struct inittab fe_reset[] = {
 >>>>>>> v3.18
@@ -376,7 +388,11 @@ static struct inittab fe_reset[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct inittab fe_trigger[] = {
+=======
+static struct inittab fe_trigger[] = {
+>>>>>>> v3.18
 =======
 static struct inittab fe_trigger[] = {
 >>>>>>> v3.18
@@ -486,7 +502,11 @@ static int m88rs2000_read_status(struct dvb_frontend *fe, fe_status_t *status)
 	*status = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((reg & 0x7) == 0x7) {
+=======
+	if ((reg & 0xee) == 0xee) {
+>>>>>>> v3.18
 =======
 	if ((reg & 0xee) == 0xee) {
 >>>>>>> v3.18
@@ -562,6 +582,7 @@ static int m88rs2000_set_fec(struct m88rs2000_state *state,
 		fe_code_rate_t fec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 fec_set;
 	switch (fec) {
 	/* This is not confirmed kept for reference */
@@ -590,6 +611,8 @@ static int m88rs2000_set_fec(struct m88rs2000_state *state,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	u8 fec_set, reg;
 	int ret;
 
@@ -622,6 +645,9 @@ static int m88rs2000_set_fec(struct m88rs2000_state *state,
 
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static fe_code_rate_t m88rs2000_get_fec(struct m88rs2000_state *state)
@@ -631,6 +657,7 @@ static fe_code_rate_t m88rs2000_get_fec(struct m88rs2000_state *state)
 	reg = m88rs2000_readreg(state, 0x76);
 	m88rs2000_writereg(state, 0x9a, 0xb0);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (reg) {
 	case 0x88:
@@ -645,6 +672,8 @@ static fe_code_rate_t m88rs2000_get_fec(struct m88rs2000_state *state)
 		return FEC_7_8;
 	case 0x08:
 =======
+=======
+>>>>>>> v3.18
 	reg &= 0xf0;
 	reg >>= 5;
 
@@ -659,6 +688,9 @@ static fe_code_rate_t m88rs2000_get_fec(struct m88rs2000_state *state)
 		return FEC_5_6;
 	case 0x0:
 		return FEC_7_8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
@@ -723,12 +755,17 @@ static int m88rs2000_set_frontend(struct dvb_frontend *fe)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Unknown */
 	reg = m88rs2000_readreg(state, 0x70);
 	ret = m88rs2000_writereg(state, 0x70, reg);
 
 	/* Set FEC */
 	ret |= m88rs2000_set_fec(state, c->fec_inner);
+=======
+	/* Set FEC */
+	ret = m88rs2000_set_fec(state, c->fec_inner);
+>>>>>>> v3.18
 =======
 	/* Set FEC */
 	ret = m88rs2000_set_fec(state, c->fec_inner);
@@ -755,7 +792,11 @@ static int m88rs2000_set_frontend(struct dvb_frontend *fe)
 	for (i = 0; i < 25; i++) {
 		reg = m88rs2000_readreg(state, 0x8c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((reg & 0x7) == 0x7) {
+=======
+		if ((reg & 0xee) == 0xee) {
+>>>>>>> v3.18
 =======
 		if ((reg & 0xee) == 0xee) {
 >>>>>>> v3.18

@@ -19,7 +19,10 @@ extern void destroy_context(struct mm_struct *mm);
 
 extern void switch_mmu_context(struct mm_struct *prev, struct mm_struct *next);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void switch_stab(struct task_struct *tsk, struct mm_struct *mm);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void switch_slb(struct task_struct *tsk, struct mm_struct *mm);
@@ -42,7 +45,11 @@ extern void drop_cop(unsigned long acop, struct mm_struct *mm);
 /*
  * switch_mm is the entry point called from the architecture independent
 <<<<<<< HEAD
+<<<<<<< HEAD
  * code in kernel/sched.c
+=======
+ * code in kernel/sched/core.c
+>>>>>>> v3.18
 =======
  * code in kernel/sched/core.c
 >>>>>>> v3.18
@@ -85,10 +92,14 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 	 */
 #ifdef CONFIG_PPC_STD_MMU_64
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mmu_has_feature(MMU_FTR_SLB))
 		switch_slb(tsk, next);
 	else
 		switch_stab(tsk, next);
+=======
+	switch_slb(tsk, next);
+>>>>>>> v3.18
 =======
 	switch_slb(tsk, next);
 >>>>>>> v3.18

@@ -230,7 +230,10 @@ static int nvt_hw_detect(struct nvt_dev *nvt)
 	unsigned long flags;
 	u8 chip_major, chip_minor;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	char chip_id[12];
@@ -289,7 +292,11 @@ static int nvt_hw_detect(struct nvt_dev *nvt)
 	spin_unlock_irqrestore(&nvt->nvt_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -338,9 +345,12 @@ static void nvt_cir_wake_ldev_init(struct nvt_dev *nvt)
 	nvt_set_reg_bit(nvt, CIR_WAKE_ENABLE_BIT, CR_ACPI_CIR_WAKE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable cir interrupt of mouse/keyboard IRQ event */
 	nvt_set_reg_bit(nvt, CIR_INTR_MOUSE_IRQ_BIT, CR_ACPI_IRQ_EVENTS);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* enable pme interrupt of cir wakeup event */
@@ -467,7 +477,10 @@ static void nvt_enable_wake(struct nvt_dev *nvt)
 	nvt_select_logical_dev(nvt, LOGICAL_DEV_ACPI);
 	nvt_set_reg_bit(nvt, CIR_WAKE_ENABLE_BIT, CR_ACPI_CIR_WAKE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvt_set_reg_bit(nvt, CIR_INTR_MOUSE_IRQ_BIT, CR_ACPI_IRQ_EVENTS);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nvt_set_reg_bit(nvt, PME_INTR_CIR_PASS_BIT, CR_ACPI_IRQ_EVENTS2);
@@ -1003,13 +1016,19 @@ static int nvt_probe(struct pnp_dev *pdev, const struct pnp_device_id *dev_id)
 
 	ret = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* activate pnp device */
 	if (pnp_activate_dev(pdev) < 0) {
 		dev_err(&pdev->dev, "Could not activate PNP device!\n");
 		goto exit_free_dev_rdev;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* validate pnp resources */
 	if (!pnp_port_valid(pdev, 0) ||
@@ -1065,7 +1084,11 @@ static int nvt_probe(struct pnp_dev *pdev, const struct pnp_device_id *dev_id)
 	rdev->priv = nvt;
 	rdev->driver_type = RC_DRIVER_IR_RAW;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev->allowed_protos = RC_BIT_ALL;
+=======
+	rdev->allowed_protocols = RC_BIT_ALL;
+>>>>>>> v3.18
 =======
 	rdev->allowed_protocols = RC_BIT_ALL;
 >>>>>>> v3.18
@@ -1202,7 +1225,10 @@ static int nvt_suspend(struct pnp_dev *pdev, pm_message_t state)
 static int nvt_resume(struct pnp_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct nvt_dev *nvt = pnp_get_drvdata(pdev);
@@ -1223,7 +1249,11 @@ static int nvt_resume(struct pnp_dev *pdev)
 	nvt_cir_wake_regs_init(nvt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1253,7 +1283,11 @@ static struct pnp_driver nvt_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nvt_init(void)
+=======
+static int __init nvt_init(void)
+>>>>>>> v3.18
 =======
 static int __init nvt_init(void)
 >>>>>>> v3.18
@@ -1262,7 +1296,11 @@ static int __init nvt_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void nvt_exit(void)
+=======
+static void __exit nvt_exit(void)
+>>>>>>> v3.18
 =======
 static void __exit nvt_exit(void)
 >>>>>>> v3.18

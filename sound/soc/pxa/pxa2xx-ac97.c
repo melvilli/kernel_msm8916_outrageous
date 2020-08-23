@@ -15,6 +15,10 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dmaengine.h>
+>>>>>>> v3.18
 =======
 #include <linux/dmaengine.h>
 >>>>>>> v3.18
@@ -24,15 +28,21 @@
 #include <sound/soc.h>
 #include <sound/pxa2xx-lib.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/hardware.h>
 #include <mach/regs-ac97.h>
 #include <mach/dma.h>
 =======
+=======
+>>>>>>> v3.18
 #include <sound/dmaengine_pcm.h>
 
 #include <mach/hardware.h>
 #include <mach/regs-ac97.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <mach/audio.h>
 
@@ -53,7 +63,11 @@ static void pxa2xx_ac97_cold_reset(struct snd_ac97 *ac97)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_ac97_bus_ops soc_ac97_ops = {
+=======
+static struct snd_ac97_bus_ops pxa2xx_ac97_ops = {
+>>>>>>> v3.18
 =======
 static struct snd_ac97_bus_ops pxa2xx_ac97_ops = {
 >>>>>>> v3.18
@@ -62,6 +76,7 @@ static struct snd_ac97_bus_ops pxa2xx_ac97_ops = {
 	.warm_reset	= pxa2xx_ac97_warm_reset,
 	.reset	= pxa2xx_ac97_cold_reset,
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL_GPL(soc_ac97_ops);
 
@@ -132,6 +147,8 @@ static int pxa2xx_ac97_remove(struct snd_soc_dai *dai)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 
 static unsigned long pxa2xx_ac97_pcm_stereo_in_req = 12;
 static struct snd_dmaengine_dai_dma_data pxa2xx_ac97_pcm_stereo_in = {
@@ -172,6 +189,9 @@ static struct snd_dmaengine_dai_dma_data pxa2xx_ac97_pcm_mic_mono_in = {
 	.maxburst	= 16,
 	.filter_data	= &pxa2xx_ac97_pcm_aux_mic_mono_req,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int pxa2xx_ac97_hw_params(struct snd_pcm_substream *substream,
@@ -179,7 +199,11 @@ static int pxa2xx_ac97_hw_params(struct snd_pcm_substream *substream,
 				 struct snd_soc_dai *cpu_dai)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa2xx_pcm_dma_params *dma_data;
+=======
+	struct snd_dmaengine_dai_dma_data *dma_data;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data *dma_data;
 >>>>>>> v3.18
@@ -199,7 +223,11 @@ static int pxa2xx_ac97_hw_aux_params(struct snd_pcm_substream *substream,
 				     struct snd_soc_dai *cpu_dai)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa2xx_pcm_dma_params *dma_data;
+=======
+	struct snd_dmaengine_dai_dma_data *dma_data;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data *dma_data;
 >>>>>>> v3.18
@@ -252,10 +280,13 @@ static struct snd_soc_dai_driver pxa_ac97_dai_driver[] = {
 	.name = "pxa2xx-ac97",
 	.ac97_control = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.probe = pxa2xx_ac97_probe,
 	.remove = pxa2xx_ac97_remove,
 	.suspend = pxa2xx_ac97_suspend,
 	.resume = pxa2xx_ac97_resume,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.playback = {
@@ -309,6 +340,11 @@ static const struct snd_soc_component_driver pxa_ac97_component = {
 static int pxa2xx_ac97_dev_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+
+>>>>>>> v3.18
 =======
 	int ret;
 
@@ -319,7 +355,10 @@ static int pxa2xx_ac97_dev_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = pxa2xx_ac97_hw_probe(pdev);
 	if (ret) {
 		dev_err(&pdev->dev, "PXA2xx AC97 hw probe error (%d)\n", ret);
@@ -330,6 +369,9 @@ static int pxa2xx_ac97_dev_probe(struct platform_device *pdev)
 	if (ret != 0)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Punt most of the init to the SoC probe; we may need the machine
 	 * driver to do interesting things with the clocking to get us up
@@ -343,10 +385,13 @@ static int pxa2xx_ac97_dev_remove(struct platform_device *pdev)
 {
 	snd_soc_unregister_component(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	snd_soc_set_ac97_ops(NULL);
 	pxa2xx_ac97_hw_remove(pdev);
 	return 0;
@@ -367,6 +412,9 @@ static SIMPLE_DEV_PM_OPS(pxa2xx_ac97_pm_ops,
 		pxa2xx_ac97_dev_suspend, pxa2xx_ac97_dev_resume);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver pxa2xx_ac97_driver = {
 	.probe		= pxa2xx_ac97_dev_probe,
@@ -375,6 +423,12 @@ static struct platform_driver pxa2xx_ac97_driver = {
 		.name	= "pxa2xx-ac97",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_SLEEP
+		.pm	= &pxa2xx_ac97_pm_ops,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 		.pm	= &pxa2xx_ac97_pm_ops,

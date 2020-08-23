@@ -46,7 +46,11 @@ static struct resource touch_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell touch_devs[] = {
+=======
+static const struct mfd_cell touch_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell touch_devs[] = {
 >>>>>>> v3.18
@@ -68,7 +72,11 @@ static struct resource power_supply_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell power_devs[] = {
+=======
+static const struct mfd_cell power_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell power_devs[] = {
 >>>>>>> v3.18
@@ -90,7 +98,11 @@ static struct resource rtc_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell rtc_devs[] = {
+=======
+static const struct mfd_cell rtc_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell rtc_devs[] = {
 >>>>>>> v3.18
@@ -117,7 +129,11 @@ static struct resource onkey_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell onkey_devs[] = {
+=======
+static const struct mfd_cell onkey_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell onkey_devs[] = {
 >>>>>>> v3.18
@@ -641,6 +657,10 @@ static void max8925_irq_enable(struct irq_data *data)
 {
 	struct max8925_chip *chip = irq_data_get_irq_chip_data(data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -652,6 +672,10 @@ static void max8925_irq_disable(struct irq_data *data)
 {
 	struct max8925_chip *chip = irq_data_get_irq_chip_data(data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

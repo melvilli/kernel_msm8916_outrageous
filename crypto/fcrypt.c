@@ -111,7 +111,11 @@ static const __be32 sbox0[256] = {
 
 #undef Z
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define Z(x) cpu_to_be32((x << 27) | (x >> 5))
+=======
+#define Z(x) cpu_to_be32(((x & 0x1f) << 27) | (x >> 5))
+>>>>>>> v3.18
 =======
 #define Z(x) cpu_to_be32(((x & 0x1f) << 27) | (x >> 5))
 >>>>>>> v3.18
@@ -425,6 +429,9 @@ MODULE_LICENSE("Dual BSD/GPL");
 MODULE_DESCRIPTION("FCrypt Cipher Algorithm");
 MODULE_AUTHOR("David Howells <dhowells@redhat.com>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("fcrypt");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

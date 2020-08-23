@@ -11,6 +11,11 @@ Required properties:
 	(a) "samsung,mfc-v5" for MFC v5 present in Exynos4 SoCs
 	(b) "samsung,mfc-v6" for MFC v6 present in Exynos5 SoCs
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	(c) "samsung,mfc-v7" for MFC v7 present in Exynos5420 SoC
+	(d) "samsung,mfc-v8" for MFC v8 present in Exynos5800 SoC
+>>>>>>> v3.18
 =======
 	(c) "samsung,mfc-v7" for MFC v7 present in Exynos5420 SoC
 	(d) "samsung,mfc-v8" for MFC v8 present in Exynos5800 SoC
@@ -21,6 +26,12 @@ Required properties:
 
   - interrupts : MFC interrupt number to the CPU.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  - clocks : from common clock binding: handle to mfc clock.
+  - clock-names : from common clock binding: must contain "mfc",
+		  corresponding to entry in the clocks property.
+>>>>>>> v3.18
 =======
   - clocks : from common clock binding: handle to mfc clock.
   - clock-names : from common clock binding: must contain "mfc",
@@ -46,6 +57,11 @@ mfc: codec@13400000 {
 	interrupts = <0 94 0>;
 	samsung,power-domain = <&pd_mfc>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clocks = <&clock 273>;
+	clock-names = "mfc";
+>>>>>>> v3.18
 =======
 	clocks = <&clock 273>;
 	clock-names = "mfc";

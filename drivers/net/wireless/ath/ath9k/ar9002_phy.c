@@ -202,7 +202,10 @@ static void ar9002_hw_spur_mitigate(struct ath_hw *ah,
 	freq = centers.synth_center;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ah->config.spurmode = SPUR_ENABLE_EEPROM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < AR_EEPROM_MODAL_SPURS; i++) {
@@ -489,7 +492,11 @@ static void ar9002_hw_do_getnf(struct ath_hw *ah,
 		nfarray[3] = sign_extend32(nf, 8);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (AR_SREV_9285(ah) || AR_SREV_9271(ah))
+=======
+	if (!(ah->rxchainmask & BIT(1)))
+>>>>>>> v3.18
 =======
 	if (!(ah->rxchainmask & BIT(1)))
 >>>>>>> v3.18
@@ -540,6 +547,10 @@ static void ar9002_hw_antdiv_comb_conf_get(struct ath_hw *ah,
 	antconf->fast_div_bias = (regval & AR_PHY_9285_FAST_DIV_BIAS) >>
 				  AR_PHY_9285_FAST_DIV_BIAS_S;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	antconf->lna1_lna2_switch_delta = -1;
+>>>>>>> v3.18
 =======
 	antconf->lna1_lna2_switch_delta = -1;
 >>>>>>> v3.18
@@ -567,7 +578,10 @@ static void ar9002_hw_antdiv_comb_conf_set(struct ath_hw *ah,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ATH9K_BTCOEX_SUPPORT
 
 static void ar9002_hw_set_bt_ant_diversity(struct ath_hw *ah, bool enable)
@@ -631,6 +645,9 @@ static void ar9002_hw_set_bt_ant_diversity(struct ath_hw *ah, bool enable)
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ar9002_hw_spectral_scan_config(struct ath_hw *ah,
 				    struct ath_spec_scan *param)
@@ -694,7 +711,10 @@ static void ar9002_hw_spectral_scan_wait(struct ath_hw *ah)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ar9002_hw_tx99_start(struct ath_hw *ah, u32 qnum)
 {
 	REG_SET_BIT(ah, 0x9864, 0x7f000);
@@ -715,6 +735,9 @@ static void ar9002_hw_tx99_stop(struct ath_hw *ah)
 	REG_SET_BIT(ah, AR_DIAG_SW, AR_DIAG_RX_DIS);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ar9002_hw_attach_phy_ops(struct ath_hw *ah)
 {
@@ -735,13 +758,19 @@ void ar9002_hw_attach_phy_ops(struct ath_hw *ah)
 	ops->spectral_scan_wait = ar9002_hw_spectral_scan_wait;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ATH9K_BTCOEX_SUPPORT
 	ops->set_bt_ant_diversity = ar9002_hw_set_bt_ant_diversity;
 #endif
 	ops->tx99_start = ar9002_hw_tx99_start;
 	ops->tx99_stop = ar9002_hw_tx99_stop;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ar9002_hw_set_nf_limits(ah);
 }

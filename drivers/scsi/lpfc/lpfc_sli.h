@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2007 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -63,14 +67,20 @@ struct lpfc_iocbq {
 	IOCB_t iocb;		/* IOCB cmd */
 	uint8_t retry;		/* retry counter for IOCB cmd - if needed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t iocb_flag;
 #define LPFC_IO_LIBDFC		1	/* libdfc iocb */
 #define LPFC_IO_WAKE		2	/* High Priority Queue signal flag */
 =======
+=======
+>>>>>>> v3.18
 	uint32_t iocb_flag;
 #define LPFC_IO_LIBDFC		1	/* libdfc iocb */
 #define LPFC_IO_WAKE		2	/* Synchronous I/O completed */
 #define LPFC_IO_WAKE_TMO	LPFC_IO_WAKE /* Synchronous I/O timed out */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define LPFC_IO_FCP		4	/* FCP command -- iocbq in scsi_buf */
 #define LPFC_DRIVER_ABORTED	8	/* driver aborted this request */
@@ -84,6 +94,10 @@ struct lpfc_iocbq {
 #define LPFC_IO_DIF_STRIP	0x800	/* T10 DIF IO strip prot */
 #define LPFC_IO_DIF_INSERT	0x1000	/* T10 DIF IO insert prot */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define LPFC_IO_CMD_OUTSTANDING	0x2000 /* timeout handler abort window */
+>>>>>>> v3.18
 =======
 #define LPFC_IO_CMD_OUTSTANDING	0x2000 /* timeout handler abort window */
 >>>>>>> v3.18
@@ -92,7 +106,13 @@ struct lpfc_iocbq {
 #define LPFC_FIP_ELS_ID_SHIFT	14
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t rsvd2;
+=======
+#define LPFC_IO_OAS		0x10000 /* OAS FCP IO */
+#define LPFC_IO_FOF		0x20000 /* FOF FCP IO */
+
+>>>>>>> v3.18
 =======
 #define LPFC_IO_OAS		0x10000 /* OAS FCP IO */
 #define LPFC_IO_FOF		0x20000 /* FOF FCP IO */
@@ -115,6 +135,11 @@ struct lpfc_iocbq {
 	void (*fabric_iocb_cmpl) (struct lpfc_hba *, struct lpfc_iocbq *,
 			   struct lpfc_iocbq *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*wait_iocb_cmpl) (struct lpfc_hba *, struct lpfc_iocbq *,
+			   struct lpfc_iocbq *);
+>>>>>>> v3.18
 =======
 	void (*wait_iocb_cmpl) (struct lpfc_hba *, struct lpfc_iocbq *,
 			   struct lpfc_iocbq *);

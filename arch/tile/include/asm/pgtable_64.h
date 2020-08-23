@@ -53,6 +53,7 @@
  * guard page between each allocation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _VMALLOC_END	HUGE_VMAP_BASE
 #define VMALLOC_END	_VMALLOC_END
 #define VMALLOC_START	_VMALLOC_START
@@ -60,10 +61,15 @@
 #define HUGE_VMAP_END	(HUGE_VMAP_BASE + PGDIR_SIZE)
 
 =======
+=======
+>>>>>>> v3.18
 #define _VMALLOC_END	MEM_SV_START
 #define VMALLOC_END	_VMALLOC_END
 #define VMALLOC_START	_VMALLOC_START
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
@@ -71,7 +77,10 @@
 #include <asm-generic/pgtable-nopud.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * pmds are the same as pgds and ptes, so converting is a no-op.
  */
@@ -81,6 +90,9 @@
 
 #define pud_pte(pud) ((pud).pgd)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int pud_none(pud_t pud)
 {
@@ -93,12 +105,18 @@ static inline int pud_present(pud_t pud)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int pud_huge_page(pud_t pud)
 {
 	return pud_val(pud) & _PAGE_HUGE_PAGE;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define pmd_ERROR(e) \
 	pr_err("%s:%d: bad pmd 0x%016llx.\n", __FILE__, __LINE__, pmd_val(e))
@@ -117,6 +135,12 @@ static inline int pud_bad(pud_t pud)
 #define pud_ptfn(pud) hv_pte_get_ptfn((pud).pgd)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Return the page frame number (pfn) that a pud_t points at. */
+#define pud_pfn(pud) pte_pfn(pud_pte(pud))
+
+>>>>>>> v3.18
 =======
 /* Return the page frame number (pfn) that a pud_t points at. */
 #define pud_pfn(pud) pte_pfn(pud_pte(pud))
@@ -157,8 +181,12 @@ static inline unsigned long pgd_addr_normalize(unsigned long addr)
 static inline int pgd_addr_invalid(unsigned long addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return addr >= MEM_HV_START ||
 		(addr > MEM_LOW_END && addr < MEM_HIGH_START);
+=======
+	return addr >= KERNEL_HIGH_VADDR || addr != pgd_addr_normalize(addr);
+>>>>>>> v3.18
 =======
 	return addr >= KERNEL_HIGH_VADDR || addr != pgd_addr_normalize(addr);
 >>>>>>> v3.18
@@ -190,6 +218,7 @@ static inline pte_t ptep_get_and_clear(struct mm_struct *mm,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * pmds are the same as pgds and ptes, so converting is a no-op.
  */
@@ -197,6 +226,8 @@ static inline pte_t ptep_get_and_clear(struct mm_struct *mm,
 #define pmdp_ptep(pmdp) (pmdp)
 #define pte_pmd(pte) (pte)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __ASSEMBLY__ */

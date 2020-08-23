@@ -168,7 +168,13 @@
 #define SAA7134_HSYNC_STOP                      0x107
 #define SAA7134_SYNC_CTRL                       0x108
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SAA7134_LUMA_CTRL                       0x109
+=======
+#define   SAA7134_SYNC_CTRL_AUFD                (1 << 7)
+#define SAA7134_LUMA_CTRL                       0x109
+#define   SAA7134_LUMA_CTRL_LDEL                (1 << 5)
+>>>>>>> v3.18
 =======
 #define   SAA7134_SYNC_CTRL_AUFD                (1 << 7)
 #define SAA7134_LUMA_CTRL                       0x109
@@ -180,6 +186,11 @@
 #define SAA7134_DEC_CHROMA_HUE                  0x10d
 #define SAA7134_CHROMA_CTRL1                    0x10e
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   SAA7134_CHROMA_CTRL1_AUTO0            (1 << 1)
+#define   SAA7134_CHROMA_CTRL1_FCTC             (1 << 2)
+>>>>>>> v3.18
 =======
 #define   SAA7134_CHROMA_CTRL1_AUTO0            (1 << 1)
 #define   SAA7134_CHROMA_CTRL1_FCTC             (1 << 2)
@@ -190,6 +201,10 @@
 
 #define SAA7134_ANALOG_ADC                      0x114
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   SAA7134_ANALOG_ADC_AUTO1              (1 << 2)
+>>>>>>> v3.18
 =======
 #define   SAA7134_ANALOG_ADC_AUTO1              (1 << 2)
 >>>>>>> v3.18
@@ -385,6 +400,7 @@
 
 #define SAA7133_I2S_AUDIO_CONTROL               0x591
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* ------------------------------------------------------------------ */
 /*
  * Local variables:
@@ -392,5 +408,7 @@
  * End:
  */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

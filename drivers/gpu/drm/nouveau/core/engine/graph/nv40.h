@@ -2,6 +2,12 @@
 #define __NV40_GRAPH_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <core/device.h>
+#include <core/gpuobj.h>
+
+>>>>>>> v3.18
 =======
 #include <core/device.h>
 #include <core/gpuobj.h>

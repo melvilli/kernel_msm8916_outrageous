@@ -62,8 +62,12 @@ int nx_hcall_sync(struct nx_crypto_ctx *nx_ctx,
 	do {
 		rc = vio_h_cop_sync(viodev, op);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while ((rc == -EBUSY && !may_sleep && retries--) ||
 	         (rc == -EBUSY && may_sleep && cond_resched()));
+=======
+	} while (rc == -EBUSY && !may_sleep && retries--);
+>>>>>>> v3.18
 =======
 	} while (rc == -EBUSY && !may_sleep && retries--);
 >>>>>>> v3.18
@@ -119,6 +123,7 @@ struct nx_sg *nx_build_sg_list(struct nx_sg *sg_head,
 	 * loop ends. min_t is used to ensure @end_addr falls on the same page
 	 * as sg_addr, if not, we need to create another nx_sg element for the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * data on the next page */
 	for (sg = sg_head; sg_len < len; sg++) {
 		sg->addr = sg_addr;
@@ -127,6 +132,8 @@ struct nx_sg *nx_build_sg_list(struct nx_sg *sg_head,
 		sg_len += sg->len;
 
 =======
+=======
+>>>>>>> v3.18
 	 * data on the next page.
 	 *
 	 * Also when using vmalloc'ed data, every time that a system page
@@ -150,6 +157,9 @@ struct nx_sg *nx_build_sg_list(struct nx_sg *sg_head,
 			end_addr = sg_addr + len - sg_len;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if ((sg - sg_head) == sgmax) {
 			pr_err("nx: scatter/gather list overflow, pid: %d\n",
@@ -227,6 +237,11 @@ struct nx_sg *nx_walk_and_build(struct nx_sg       *nx_dst,
  * @src: source scatterlist
  * @nbytes: length of data described in the scatterlists
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @offset: number of bytes to fast-forward past at the beginning of
+ *          scatterlists.
+>>>>>>> v3.18
 =======
  * @offset: number of bytes to fast-forward past at the beginning of
  *          scatterlists.
@@ -243,6 +258,10 @@ int nx_build_sg_lists(struct nx_crypto_ctx  *nx_ctx,
 		      struct scatterlist    *src,
 		      unsigned int           nbytes,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		      unsigned int           offset,
+>>>>>>> v3.18
 =======
 		      unsigned int           offset,
 >>>>>>> v3.18
@@ -255,13 +274,19 @@ int nx_build_sg_lists(struct nx_crypto_ctx  *nx_ctx,
 		memcpy(iv, desc->info, AES_BLOCK_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nx_insg = nx_walk_and_build(nx_insg, nx_ctx->ap->sglen, src, 0, nbytes);
 	nx_outsg = nx_walk_and_build(nx_outsg, nx_ctx->ap->sglen, dst, 0, nbytes);
 =======
+=======
+>>>>>>> v3.18
 	nx_insg = nx_walk_and_build(nx_insg, nx_ctx->ap->sglen, src,
 				    offset, nbytes);
 	nx_outsg = nx_walk_and_build(nx_outsg, nx_ctx->ap->sglen, dst,
 				    offset, nbytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* these lengths should be negative, which will indicate to phyp that
@@ -282,6 +307,10 @@ int nx_build_sg_lists(struct nx_crypto_ctx  *nx_ctx,
 void nx_ctx_init(struct nx_crypto_ctx *nx_ctx, unsigned int function)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&nx_ctx->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&nx_ctx->lock);
 >>>>>>> v3.18
@@ -360,7 +389,11 @@ static void nx_of_update_msc(struct device   *dev,
 		     i < msc->triplets;
 		     i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (msc->fc >= NX_MAX_FC || msc->mode >= NX_MAX_MODE) {
+=======
+			if (msc->fc > NX_MAX_FC || msc->mode > NX_MAX_MODE) {
+>>>>>>> v3.18
 =======
 			if (msc->fc > NX_MAX_FC || msc->mode > NX_MAX_MODE) {
 >>>>>>> v3.18

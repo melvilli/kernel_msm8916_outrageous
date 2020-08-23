@@ -16,9 +16,13 @@
 #include <linux/net.h>
 #include <linux/netdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/if_arp.h>
 #include <linux/in6.h>
 #include <linux/route.h>
+=======
+#include <linux/in6.h>
+>>>>>>> v3.18
 =======
 #include <linux/in6.h>
 >>>>>>> v3.18
@@ -33,12 +37,16 @@
 
 #include <net/ipv6.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/ndisc.h>
 #include <net/protocol.h>
 #include <net/ip6_route.h>
 #include <net/addrconf.h>
 #include <net/rawv6.h>
 #include <net/icmp.h>
+=======
+#include <net/rawv6.h>
+>>>>>>> v3.18
 =======
 #include <net/rawv6.h>
 >>>>>>> v3.18
@@ -50,7 +58,11 @@
 				   in old IPv6 RFC. Well, it was reasonable value.
 				 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FL_MAX_LINGER	60	/* Maximal linger timeout */
+=======
+#define FL_MAX_LINGER	150	/* Maximal linger timeout */
+>>>>>>> v3.18
 =======
 #define FL_MAX_LINGER	150	/* Maximal linger timeout */
 >>>>>>> v3.18
@@ -156,7 +168,11 @@ static void ip6_fl_gc(unsigned long dummy)
 	spin_lock(&ip6_fl_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0; i<=FL_HASH_MASK; i++) {
+=======
+	for (i = 0; i <= FL_HASH_MASK; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i <= FL_HASH_MASK; i++) {
 >>>>>>> v3.18
@@ -227,7 +243,11 @@ static struct ip6_flowlabel *fl_intern(struct net *net,
 	if (label == 0) {
 		for (;;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fl->label = htonl(net_random())&IPV6_FLOWLABEL_MASK;
+=======
+			fl->label = htonl(prandom_u32())&IPV6_FLOWLABEL_MASK;
+>>>>>>> v3.18
 =======
 			fl->label = htonl(prandom_u32())&IPV6_FLOWLABEL_MASK;
 >>>>>>> v3.18
@@ -267,7 +287,11 @@ static struct ip6_flowlabel *fl_intern(struct net *net,
 /* Socket flowlabel lists */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ip6_flowlabel * fl6_sock_lookup(struct sock *sk, __be32 label)
+=======
+struct ip6_flowlabel *fl6_sock_lookup(struct sock *sk, __be32 label)
+>>>>>>> v3.18
 =======
 struct ip6_flowlabel *fl6_sock_lookup(struct sock *sk, __be32 label)
 >>>>>>> v3.18
@@ -291,7 +315,10 @@ struct ip6_flowlabel *fl6_sock_lookup(struct sock *sk, __be32 label)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(fl6_sock_lookup);
@@ -328,17 +355,23 @@ void fl6_free_socklist(struct sock *sk)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ipv6_txoptions *fl6_merge_options(struct ipv6_txoptions * opt_space,
 					 struct ip6_flowlabel * fl,
 					 struct ipv6_txoptions * fopt)
 {
 	struct ipv6_txoptions * fl_opt = fl->opt;
 =======
+=======
+>>>>>>> v3.18
 struct ipv6_txoptions *fl6_merge_options(struct ipv6_txoptions *opt_space,
 					 struct ip6_flowlabel *fl,
 					 struct ipv6_txoptions *fopt)
 {
 	struct ipv6_txoptions *fl_opt = fl->opt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (fopt == NULL || fopt->opt_flen == 0)
@@ -381,6 +414,11 @@ static int fl6_renew(struct ip6_flowlabel *fl, unsigned long linger, unsigned lo
 	if (!expires)
 		return -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	spin_lock_bh(&ip6_fl_lock);
+>>>>>>> v3.18
 =======
 
 	spin_lock_bh(&ip6_fl_lock);
@@ -393,6 +431,11 @@ static int fl6_renew(struct ip6_flowlabel *fl, unsigned long linger, unsigned lo
 	if (time_before(fl->expires, fl->lastuse + expires))
 		fl->expires = fl->lastuse + expires;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_bh(&ip6_fl_lock);
+
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&ip6_fl_lock);
 
@@ -437,7 +480,11 @@ fl_create(struct net *net, struct sock *sk, struct in6_flowlabel_req *freq,
 
 		msg.msg_controllen = olen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		msg.msg_control = (void*)(fl->opt+1);
+=======
+		msg.msg_control = (void *)(fl->opt+1);
+>>>>>>> v3.18
 =======
 		msg.msg_control = (void *)(fl->opt+1);
 >>>>>>> v3.18
@@ -517,6 +564,7 @@ static int mem_check(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool ipv6_hdr_cmp(struct ipv6_opt_hdr *h1, struct ipv6_opt_hdr *h2)
 {
 	if (h1 == h2)
@@ -547,6 +595,8 @@ static bool ipv6_opt_cmp(struct ipv6_txoptions *o1, struct ipv6_txoptions *o2)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline void fl_link(struct ipv6_pinfo *np, struct ipv6_fl_socklist *sfl,
 		struct ip6_flowlabel *fl)
 {
@@ -558,7 +608,10 @@ static inline void fl_link(struct ipv6_pinfo *np, struct ipv6_fl_socklist *sfl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ipv6_flowlabel_opt_get(struct sock *sk, struct in6_flowlabel_req *freq,
 			   int flags)
 {
@@ -596,6 +649,9 @@ int ipv6_flowlabel_opt_get(struct sock *sk, struct in6_flowlabel_req *freq,
 	return -ENOENT;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ipv6_flowlabel_opt(struct sock *sk, char __user *optval, int optlen)
 {
@@ -604,7 +660,11 @@ int ipv6_flowlabel_opt(struct sock *sk, char __user *optval, int optlen)
 	struct ipv6_pinfo *np = inet6_sk(sk);
 	struct in6_flowlabel_req freq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ipv6_fl_socklist *sfl1=NULL;
+=======
+	struct ipv6_fl_socklist *sfl1 = NULL;
+>>>>>>> v3.18
 =======
 	struct ipv6_fl_socklist *sfl1 = NULL;
 >>>>>>> v3.18
@@ -622,10 +682,13 @@ int ipv6_flowlabel_opt(struct sock *sk, char __user *optval, int optlen)
 	switch (freq.flr_action) {
 	case IPV6_FL_A_PUT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&ip6_sk_fl_lock);
 		for (sflp = &np->ipv6_fl_list;
 		     (sfl = rcu_dereference(*sflp))!=NULL;
 =======
+=======
+>>>>>>> v3.18
 		if (freq.flr_flags & IPV6_FL_F_REFLECT) {
 			if (sk->sk_protocol != IPPROTO_TCP)
 				return -ENOPROTOOPT;
@@ -638,6 +701,9 @@ int ipv6_flowlabel_opt(struct sock *sk, char __user *optval, int optlen)
 		spin_lock_bh(&ip6_sk_fl_lock);
 		for (sflp = &np->ipv6_fl_list;
 		     (sfl = rcu_dereference(*sflp)) != NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		     sflp = &sfl->next) {
 			if (sfl->fl->label == freq.flr_label) {
@@ -677,7 +743,10 @@ int ipv6_flowlabel_opt(struct sock *sk, char __user *optval, int optlen)
 
 	case IPV6_FL_A_GET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (freq.flr_flags & IPV6_FL_F_REFLECT) {
 			struct net *net = sock_net(sk);
 			if (net->ipv6.sysctl.flowlabel_consistency) {
@@ -692,6 +761,9 @@ int ipv6_flowlabel_opt(struct sock *sk, char __user *optval, int optlen)
 			return 0;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (freq.flr_label & ~IPV6_FLOWLABEL_MASK)
 			return -EINVAL;
@@ -734,11 +806,14 @@ recheck:
 					goto release;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				err = -EINVAL;
 				if (!ipv6_addr_equal(&fl1->dst, &fl->dst) ||
 				    ipv6_opt_cmp(fl1->opt, fl->opt))
 					goto release;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				err = -ENOMEM;

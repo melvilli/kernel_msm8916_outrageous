@@ -172,7 +172,10 @@ static int spi_sh_send(struct spi_sh_data *ss, struct spi_message *mesg,
 	int cur_len;
 	unsigned char *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long tmp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	long ret;
@@ -217,9 +220,13 @@ static int spi_sh_send(struct spi_sh_data *ss, struct spi_message *mesg,
 
 	if (list_is_last(&t->transfer_list, &mesg->transfers)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = spi_sh_read(ss, SPI_SH_CR1);
 		tmp = tmp & ~(SPI_SH_SSD | SPI_SH_SSDB);
 		spi_sh_write(ss, tmp, SPI_SH_CR1);
+=======
+		spi_sh_clear_bit(ss, SPI_SH_SSD | SPI_SH_SSDB, SPI_SH_CR1);
+>>>>>>> v3.18
 =======
 		spi_sh_clear_bit(ss, SPI_SH_SSD | SPI_SH_SSDB, SPI_SH_CR1);
 >>>>>>> v3.18
@@ -247,7 +254,10 @@ static int spi_sh_receive(struct spi_sh_data *ss, struct spi_message *mesg,
 	int cur_len;
 	unsigned char *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long tmp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	long ret;
@@ -258,9 +268,13 @@ static int spi_sh_receive(struct spi_sh_data *ss, struct spi_message *mesg,
 		spi_sh_write(ss, t->len, SPI_SH_CR3);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = spi_sh_read(ss, SPI_SH_CR1);
 	tmp = tmp & ~(SPI_SH_SSD | SPI_SH_SSDB);
 	spi_sh_write(ss, tmp, SPI_SH_CR1);
+=======
+	spi_sh_clear_bit(ss, SPI_SH_SSD | SPI_SH_SSDB, SPI_SH_CR1);
+>>>>>>> v3.18
 =======
 	spi_sh_clear_bit(ss, SPI_SH_SSD | SPI_SH_SSDB, SPI_SH_CR1);
 >>>>>>> v3.18
@@ -343,7 +357,12 @@ static void spi_sh_work(struct work_struct *work)
 
 		mesg->status = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mesg->complete(mesg->context);
+=======
+		if (mesg->complete)
+			mesg->complete(mesg->context);
+>>>>>>> v3.18
 =======
 		if (mesg->complete)
 			mesg->complete(mesg->context);
@@ -366,7 +385,12 @@ static void spi_sh_work(struct work_struct *work)
  error:
 	mesg->status = ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mesg->complete(mesg->context);
+=======
+	if (mesg->complete)
+		mesg->complete(mesg->context);
+>>>>>>> v3.18
 =======
 	if (mesg->complete)
 		mesg->complete(mesg->context);
@@ -383,9 +407,12 @@ static int spi_sh_setup(struct spi_device *spi)
 	struct spi_sh_data *ss = spi_master_get_devdata(spi->master);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!spi->bits_per_word)
 		spi->bits_per_word = 8;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pr_debug("%s: enter\n", __func__);
@@ -462,7 +489,11 @@ static irqreturn_t spi_sh_irq(int irq, void *_ss)
 static int spi_sh_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_sh_data *ss = dev_get_drvdata(&pdev->dev);
+=======
+	struct spi_sh_data *ss = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct spi_sh_data *ss = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -471,7 +502,10 @@ static int spi_sh_remove(struct platform_device *pdev)
 	destroy_workqueue(ss->workqueue);
 	free_irq(ss->irq, ss);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(ss->addr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -506,7 +540,11 @@ static int spi_sh_probe(struct platform_device *pdev)
 
 	ss = spi_master_get_devdata(master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, ss);
+=======
+	platform_set_drvdata(pdev, ss);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, ss);
 >>>>>>> v3.18
@@ -526,7 +564,11 @@ static int spi_sh_probe(struct platform_device *pdev)
 	ss->irq = irq;
 	ss->master = master;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ss->addr = ioremap(res->start, resource_size(res));
+=======
+	ss->addr = devm_ioremap(&pdev->dev, res->start, resource_size(res));
+>>>>>>> v3.18
 =======
 	ss->addr = devm_ioremap(&pdev->dev, res->start, resource_size(res));
 >>>>>>> v3.18
@@ -545,7 +587,11 @@ static int spi_sh_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "create workqueue error\n");
 		ret = -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error2;
+=======
+		goto error1;
+>>>>>>> v3.18
 =======
 		goto error1;
 >>>>>>> v3.18
@@ -555,7 +601,11 @@ static int spi_sh_probe(struct platform_device *pdev)
 	if (ret < 0) {
 		dev_err(&pdev->dev, "request_irq error\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error3;
+=======
+		goto error2;
+>>>>>>> v3.18
 =======
 		goto error2;
 >>>>>>> v3.18
@@ -571,7 +621,11 @@ static int spi_sh_probe(struct platform_device *pdev)
 	if (ret < 0) {
 		printk(KERN_ERR "spi_register_master error.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error4;
+=======
+		goto error3;
+>>>>>>> v3.18
 =======
 		goto error3;
 >>>>>>> v3.18
@@ -580,6 +634,7 @@ static int spi_sh_probe(struct platform_device *pdev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  error4:
 	free_irq(irq, ss);
  error3:
@@ -587,10 +642,15 @@ static int spi_sh_probe(struct platform_device *pdev)
  error2:
 	iounmap(ss->addr);
 =======
+=======
+>>>>>>> v3.18
  error3:
 	free_irq(irq, ss);
  error2:
 	destroy_workqueue(ss->workqueue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  error1:
 	spi_master_put(master);

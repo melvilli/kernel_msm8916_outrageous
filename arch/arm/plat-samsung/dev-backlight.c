@@ -21,6 +21,7 @@
 #include <plat/backlight.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int samsung_bl_init(struct device *dev)
 {
 	int ret = 0;
@@ -29,6 +30,8 @@ static int samsung_bl_init(struct device *dev)
 	struct samsung_bl_gpio_info *bl_gpio_info =
 			timer_dev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 struct samsung_bl_drvdata {
 	struct platform_pwm_backlight_data plat_data;
 	struct samsung_bl_gpio_info *gpio_info;
@@ -41,6 +44,9 @@ static int samsung_bl_init(struct device *dev)
 	struct samsung_bl_drvdata *drvdata = container_of(pdata,
 					struct samsung_bl_drvdata, plat_data);
 	struct samsung_bl_gpio_info *bl_gpio_info = drvdata->gpio_info;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = gpio_request(bl_gpio_info->no, "Backlight");
@@ -58,15 +64,21 @@ static int samsung_bl_init(struct device *dev)
 static void samsung_bl_exit(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct platform_device *timer_dev =
 			container_of(dev->parent, struct platform_device, dev);
 	struct samsung_bl_gpio_info *bl_gpio_info =
 			timer_dev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	struct platform_pwm_backlight_data *pdata = dev->platform_data;
 	struct samsung_bl_drvdata *drvdata = container_of(pdata,
 					struct samsung_bl_drvdata, plat_data);
 	struct samsung_bl_gpio_info *bl_gpio_info = drvdata->gpio_info;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s3c_gpio_cfgpin(bl_gpio_info->no, S3C_GPIO_OUTPUT);
@@ -83,6 +95,7 @@ static void samsung_bl_exit(struct device *dev)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_pwm_backlight_data samsung_dfl_bl_data __initdata = {
 	.max_brightness = 255,
 	.dft_brightness = 255,
@@ -90,6 +103,8 @@ static struct platform_pwm_backlight_data samsung_dfl_bl_data __initdata = {
 	.init           = samsung_bl_init,
 	.exit           = samsung_bl_exit,
 =======
+=======
+>>>>>>> v3.18
 static struct samsung_bl_drvdata samsung_dfl_bl_data __initdata = {
 	.plat_data = {
 		.max_brightness = 255,
@@ -99,6 +114,9 @@ static struct samsung_bl_drvdata samsung_dfl_bl_data __initdata = {
 		.init           = samsung_bl_init,
 		.exit           = samsung_bl_exit,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -117,6 +135,10 @@ void __init samsung_bl_set(struct samsung_bl_gpio_info *gpio_info,
 	int ret = 0;
 	struct platform_device *samsung_bl_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct samsung_bl_drvdata *samsung_bl_drvdata;
+>>>>>>> v3.18
 =======
 	struct samsung_bl_drvdata *samsung_bl_drvdata;
 >>>>>>> v3.18
@@ -130,6 +152,7 @@ void __init samsung_bl_set(struct samsung_bl_gpio_info *gpio_info,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	samsung_bl_data = s3c_set_platdata(&samsung_dfl_bl_data,
 		sizeof(struct platform_pwm_backlight_data), samsung_bl_device);
 	if (!samsung_bl_data) {
@@ -142,6 +165,8 @@ void __init samsung_bl_set(struct samsung_bl_gpio_info *gpio_info,
 	samsung_bl_device->dev.parent =
 			&s3c_device_timer[samsung_bl_data->pwm_id].dev;
 =======
+=======
+>>>>>>> v3.18
 	samsung_bl_drvdata = kmemdup(&samsung_dfl_bl_data,
 				sizeof(samsung_dfl_bl_data), GFP_KERNEL);
 	if (!samsung_bl_drvdata) {
@@ -155,6 +180,9 @@ void __init samsung_bl_set(struct samsung_bl_gpio_info *gpio_info,
 	/* Copy board specific data provided by user */
 	samsung_bl_data->pwm_id = bl_data->pwm_id;
 	samsung_bl_device->dev.parent = &samsung_device_pwm.dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (bl_data->max_brightness)
@@ -166,6 +194,11 @@ void __init samsung_bl_set(struct samsung_bl_gpio_info *gpio_info,
 	if (bl_data->pwm_period_ns)
 		samsung_bl_data->pwm_period_ns = bl_data->pwm_period_ns;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (bl_data->enable_gpio >= 0)
+		samsung_bl_data->enable_gpio = bl_data->enable_gpio;
+>>>>>>> v3.18
 =======
 	if (bl_data->enable_gpio >= 0)
 		samsung_bl_data->enable_gpio = bl_data->enable_gpio;
@@ -182,6 +215,7 @@ void __init samsung_bl_set(struct samsung_bl_gpio_info *gpio_info,
 		samsung_bl_data->check_fb = bl_data->check_fb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Keep the GPIO info for future use */
 	s3c_device_timer[samsung_bl_data->pwm_id].dev.platform_data = gpio_info;
 
@@ -195,6 +229,8 @@ void __init samsung_bl_set(struct samsung_bl_gpio_info *gpio_info,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Register the Backlight dev */
 	ret = platform_device_register(samsung_bl_device);
 	if (ret) {
@@ -206,8 +242,11 @@ void __init samsung_bl_set(struct samsung_bl_gpio_info *gpio_info,
 
 err_plat_reg2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_unregister(&s3c_device_timer[samsung_bl_data->pwm_id]);
 err_plat_reg1:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(samsung_bl_data);

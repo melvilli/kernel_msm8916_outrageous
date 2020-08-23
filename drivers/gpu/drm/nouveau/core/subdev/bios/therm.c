@@ -165,6 +165,10 @@ nvbios_therm_fan_parse(struct nouveau_bios *bios,
 	i = 0;
 	fan->nr_fan_trip = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fan->fan_mode = NVBIOS_THERM_FAN_OTHER;
+>>>>>>> v3.18
 =======
 	fan->fan_mode = NVBIOS_THERM_FAN_OTHER;
 >>>>>>> v3.18
@@ -179,6 +183,11 @@ nvbios_therm_fan_parse(struct nouveau_bios *bios,
 		case 0x24:
 			fan->nr_fan_trip++;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (fan->fan_mode > NVBIOS_THERM_FAN_TRIP)
+				fan->fan_mode = NVBIOS_THERM_FAN_TRIP;
+>>>>>>> v3.18
 =======
 			if (fan->fan_mode > NVBIOS_THERM_FAN_TRIP)
 				fan->fan_mode = NVBIOS_THERM_FAN_TRIP;
@@ -194,7 +203,12 @@ nvbios_therm_fan_parse(struct nouveau_bios *bios,
 			break;
 		case 0x26:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fan->pwm_freq = value;
+=======
+			if (!fan->pwm_freq)
+				fan->pwm_freq = value;
+>>>>>>> v3.18
 =======
 			if (!fan->pwm_freq)
 				fan->pwm_freq = value;
@@ -208,6 +222,11 @@ nvbios_therm_fan_parse(struct nouveau_bios *bios,
 			break;
 		case 0x46:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (fan->fan_mode > NVBIOS_THERM_FAN_LINEAR)
+				fan->fan_mode = NVBIOS_THERM_FAN_LINEAR;
+>>>>>>> v3.18
 =======
 			if (fan->fan_mode > NVBIOS_THERM_FAN_LINEAR)
 				fan->fan_mode = NVBIOS_THERM_FAN_LINEAR;
@@ -219,13 +238,19 @@ nvbios_therm_fan_parse(struct nouveau_bios *bios,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* starting from fermi, fan management is always linear */
 	if (nv_device(bios)->card_type >= NV_C0 &&
 		fan->fan_mode == NVBIOS_THERM_FAN_OTHER) {
 		fan->fan_mode = NVBIOS_THERM_FAN_LINEAR;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

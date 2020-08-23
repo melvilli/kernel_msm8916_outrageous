@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * arch/arm/mach-w90x900/include/mach/nuc900_spi.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Copyright (c) 2009 Nuvoton technology corporation.
@@ -15,8 +18,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_ARCH_SPI_H
 #define __ASM_ARCH_SPI_H
+=======
+#ifndef __SPI_NUC900_H
+#define __SPI_NUC900_H
+>>>>>>> v3.18
 =======
 #ifndef __SPI_NUC900_H
 #define __SPI_NUC900_H
@@ -41,7 +49,11 @@ struct nuc900_spi_chip {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_ARCH_SPI_H */
+=======
+#endif /* __SPI_NUC900_H */
+>>>>>>> v3.18
 =======
 #endif /* __SPI_NUC900_H */
 >>>>>>> v3.18

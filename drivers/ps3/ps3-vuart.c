@@ -700,8 +700,11 @@ int ps3_vuart_read_async(struct ps3_system_bus_device *dev, unsigned int bytes)
 	BUG_ON(!bytes);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PREPARE_WORK(&priv->rx_list.work.work, ps3_vuart_work);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&priv->rx_list.lock, flags);
@@ -1056,7 +1059,11 @@ static int ps3_vuart_probe(struct ps3_system_bus_device *dev)
 	spin_lock_init(&priv->rx_list.lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&priv->rx_list.work.work, NULL);
+=======
+	INIT_WORK(&priv->rx_list.work.work, ps3_vuart_work);
+>>>>>>> v3.18
 =======
 	INIT_WORK(&priv->rx_list.work.work, ps3_vuart_work);
 >>>>>>> v3.18

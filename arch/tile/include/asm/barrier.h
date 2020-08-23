@@ -23,6 +23,7 @@
 #include <asm/timex.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * read_barrier_depends - Flush all pending reads that subsequents reads
  * depend on.
@@ -83,6 +84,10 @@
 #define __sync()	__insn_mf()
 
 >>>>>>> v3.18
+=======
+#define __sync()	__insn_mf()
+
+>>>>>>> v3.18
 #include <hv/syscall_public.h>
 /*
  * Issue an uncacheable load to each memory controller, then
@@ -102,7 +107,10 @@ static inline void __mb_incoherent(void)
 		       "r25", "r26", "r27", "r28", "r29");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -113,7 +121,10 @@ mb_incoherent(void)
 	__insn_mf();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !CHIP_HAS_MF_WAITS_FOR_VICTIMS()
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{
@@ -128,7 +139,10 @@ mb_incoherent(void)
 		(void) __mb_incoherent();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CHIP_HAS_MF_WAITS_FOR_VICTIMS() */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -143,6 +157,7 @@ mb_incoherent(void)
 #define mb()		fast_mb()
 #define iob()		fast_iob()
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_SMP
 #define smp_mb()	mb()
@@ -159,6 +174,8 @@ mb_incoherent(void)
 #define set_mb(var, value) \
 	do { var = value; mb(); } while (0)
 =======
+=======
+>>>>>>> v3.18
 #ifndef __tilegx__ /* 32 bit */
 /*
  * We need to barrier before modifying the word, since the _atomic_xxx()
@@ -174,6 +191,9 @@ mb_incoherent(void)
 #endif
 
 #include <asm-generic/barrier.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* !__ASSEMBLY__ */

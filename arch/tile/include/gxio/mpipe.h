@@ -221,7 +221,10 @@ typedef MPIPE_PDESC_t gxio_mpipe_idesc_t;
 typedef MPIPE_EDMA_DESC_t gxio_mpipe_edesc_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Max # of mpipe instances. 2 currently.
  */
@@ -229,6 +232,9 @@ typedef MPIPE_EDMA_DESC_t gxio_mpipe_edesc_t;
 
 #define NR_MPIPE_MAX   GXIO_MPIPE_INSTANCE_MAX
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Get the "va" field from an "idesc".
  *
@@ -322,6 +328,12 @@ typedef struct {
 	int fd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Corresponding mpipe instance #. */
+	int instance;
+
+>>>>>>> v3.18
 =======
 	/* Corresponding mpipe instance #. */
 	int instance;
@@ -827,7 +839,11 @@ extern int gxio_mpipe_alloc_edma_rings(gxio_mpipe_context_t *context,
  *
  * @param context An initialized mPIPE context.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @param ring The eDMA ring index.
+=======
+ * @param ering The eDMA ring index.
+>>>>>>> v3.18
 =======
  * @param ering The eDMA ring index.
 >>>>>>> v3.18
@@ -844,11 +860,14 @@ extern int gxio_mpipe_alloc_edma_rings(gxio_mpipe_context_t *context,
  */
 extern int gxio_mpipe_init_edma_ring(gxio_mpipe_context_t *context,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     unsigned int ring, unsigned int channel,
 				     void *mem, size_t mem_size,
 				     unsigned int mem_flags);
 
 =======
+=======
+>>>>>>> v3.18
 				     unsigned int ering, unsigned int channel,
 				     void *mem, size_t mem_size,
 				     unsigned int mem_flags);
@@ -880,6 +899,9 @@ extern int gxio_mpipe_config_edma_ring_blks(gxio_mpipe_context_t *context,
 					    unsigned int min_snf_blks,
 					    unsigned int db);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*****************************************************************
  *                      Classifier Program                        *
@@ -1343,7 +1365,10 @@ typedef struct {
 	unsigned long log2_num_entries;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* The context. */
 	gxio_mpipe_context_t *context;
 
@@ -1353,11 +1378,15 @@ typedef struct {
 	/* The channel. */
 	unsigned int channel;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } gxio_mpipe_equeue_t;
 
 /* Initialize an "equeue".
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Takes the equeue plus the same args as gxio_mpipe_init_edma_ring().
  */
@@ -1365,6 +1394,8 @@ extern int gxio_mpipe_equeue_init(gxio_mpipe_equeue_t *equeue,
 				  gxio_mpipe_context_t *context,
 				  unsigned int edma_ring_id,
 =======
+=======
+>>>>>>> v3.18
  * This function uses gxio_mpipe_init_edma_ring() to initialize the
  * underlying edma_ring using the provided arguments.
  *
@@ -1385,6 +1416,9 @@ extern int gxio_mpipe_equeue_init(gxio_mpipe_equeue_t *equeue,
 extern int gxio_mpipe_equeue_init(gxio_mpipe_equeue_t *equeue,
 				  gxio_mpipe_context_t *context,
 				  unsigned int ering,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  unsigned int channel,
 				  void *mem, unsigned int mem_size,
@@ -1584,7 +1618,10 @@ static inline int gxio_mpipe_equeue_is_complete(gxio_mpipe_equeue_t *equeue,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Set the snf (store and forward) size for an equeue.
  *
  * The snf size for an equeue defaults to 1536, and encodes the size
@@ -1616,6 +1653,9 @@ static inline int gxio_mpipe_equeue_set_snf_size(gxio_mpipe_equeue_t *equeue,
 						blks + 1, blks, 1);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*****************************************************************
  *                        Link Management                         *
@@ -1758,7 +1798,10 @@ typedef struct {
 } gxio_mpipe_link_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Translate a link name to the instance number of the mPIPE shim which is
  *  connected to that link.  This call does not verify whether the link is
  *  currently available, and does not reserve any link resources;
@@ -1777,6 +1820,9 @@ typedef struct {
  */
 extern int gxio_mpipe_link_instance(const char *link_name);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Retrieve one of this system's legal link names, and its MAC address.
  *
@@ -1842,7 +1888,10 @@ static inline int gxio_mpipe_link_channel(gxio_mpipe_link_t *link)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Set a link attribute.
  *
  * @param link A properly initialized link state object.
@@ -1854,6 +1903,9 @@ static inline int gxio_mpipe_link_channel(gxio_mpipe_link_t *link)
 extern int gxio_mpipe_link_set_attr(gxio_mpipe_link_t *link, uint32_t attr,
 				    int64_t val);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ///////////////////////////////////////////////////////////////////
 //                             Timestamp                         //
@@ -1892,7 +1944,10 @@ extern int gxio_mpipe_adjust_timestamp(gxio_mpipe_context_t *context,
 				       int64_t delta);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /** Adjust the mPIPE timestamp clock frequency.
  *
  * @param context An initialized mPIPE context.
@@ -1907,5 +1962,8 @@ extern int gxio_mpipe_adjust_timestamp(gxio_mpipe_context_t *context,
 extern int gxio_mpipe_adjust_timestamp_freq(gxio_mpipe_context_t* context,
                                             int32_t ppb);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !_GXIO_MPIPE_H_ */

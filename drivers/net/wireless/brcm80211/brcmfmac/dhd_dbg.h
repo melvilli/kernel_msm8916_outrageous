@@ -19,6 +19,7 @@
 
 /* message levels */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BRCMF_TRACE_VAL	0x00000002
 #define BRCMF_INFO_VAL	0x00000004
 #define BRCMF_DATA_VAL	0x00000008
@@ -37,6 +38,8 @@
 #define BRCMF_CDC_VAL	0x00010000
 #define BRCMF_SDIO_VAL	0x00020000
 =======
+=======
+>>>>>>> v3.18
 #define BRCMF_TRACE_VAL		0x00000002
 #define BRCMF_INFO_VAL		0x00000004
 #define BRCMF_DATA_VAL		0x00000008
@@ -56,6 +59,9 @@
 #define BRCMF_SDIO_VAL		0x00020000
 #define BRCMF_MSGBUF_VAL	0x00040000
 #define BRCMF_PCIE_VAL		0x00080000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* set default print format */
@@ -123,6 +129,7 @@ do {									\
 extern int brcmf_msg_level;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * hold counter variables used in brcmfmac sdio driver.
  */
@@ -185,6 +192,8 @@ struct brcmf_fws_stats {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct brcmf_pub;
 #ifdef DEBUG
 void brcmf_debugfs_init(void);
@@ -193,10 +202,15 @@ int brcmf_debugfs_attach(struct brcmf_pub *drvr);
 void brcmf_debugfs_detach(struct brcmf_pub *drvr);
 struct dentry *brcmf_debugfs_get_devdir(struct brcmf_pub *drvr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void brcmf_debugfs_create_sdio_count(struct brcmf_pub *drvr,
 				     struct brcmf_sdio_count *sdcnt);
 void brcmf_debugfs_create_fws_stats(struct brcmf_pub *drvr,
 				    struct brcmf_fws_stats *stats);
+=======
+int brcmf_debugfs_add_entry(struct brcmf_pub *drvr, const char *fn,
+			    int (*read_fn)(struct seq_file *seq, void *data));
+>>>>>>> v3.18
 =======
 int brcmf_debugfs_add_entry(struct brcmf_pub *drvr, const char *fn,
 			    int (*read_fn)(struct seq_file *seq, void *data));
@@ -216,15 +230,21 @@ static inline void brcmf_debugfs_detach(struct brcmf_pub *drvr)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void brcmf_debugfs_create_fws_stats(struct brcmf_pub *drvr,
 						  struct brcmf_fws_stats *stats)
 {
 =======
+=======
+>>>>>>> v3.18
 static inline
 int brcmf_debugfs_add_entry(struct brcmf_pub *drvr, const char *fn,
 			    int (*read_fn)(struct seq_file *seq, void *data))
 {
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif

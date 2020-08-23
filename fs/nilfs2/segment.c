@@ -306,6 +306,10 @@ static void nilfs_transaction_lock(struct super_block *sb,
 	ti->ti_save = cur_ti;
 	ti->ti_magic = NILFS_TI_MAGIC;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&ti->ti_garbage);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&ti->ti_garbage);
 >>>>>>> v3.18
@@ -336,6 +340,11 @@ static void nilfs_transaction_unlock(struct super_block *sb)
 	up_write(&nilfs->ns_segctor_sem);
 	current->journal_info = ti->ti_save;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!list_empty(&ti->ti_garbage))
+		nilfs_dispose_list(nilfs, &ti->ti_garbage, 0);
+>>>>>>> v3.18
 =======
 	if (!list_empty(&ti->ti_garbage))
 		nilfs_dispose_list(nilfs, &ti->ti_garbage, 0);
@@ -753,6 +762,7 @@ static void nilfs_dispose_list(struct the_nilfs *nilfs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void nilfs_iput_work_func(struct work_struct *work)
 {
 	struct nilfs_sc_info *sci = container_of(work, struct nilfs_sc_info,
@@ -762,6 +772,8 @@ static void nilfs_iput_work_func(struct work_struct *work)
 	nilfs_dispose_list(nilfs, &sci->sc_iput_queue, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int nilfs_test_metadata_dirty(struct the_nilfs *nilfs,
@@ -855,9 +867,15 @@ static int nilfs_segctor_fill_in_checkpoint(struct nilfs_sc_info *sci)
 	raw_cp->cp_snapshot_list.ssl_prev = 0;
 	raw_cp->cp_inodes_count =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpu_to_le64(atomic_read(&sci->sc_root->inodes_count));
 	raw_cp->cp_blocks_count =
 		cpu_to_le64(atomic_read(&sci->sc_root->blocks_count));
+=======
+		cpu_to_le64(atomic64_read(&sci->sc_root->inodes_count));
+	raw_cp->cp_blocks_count =
+		cpu_to_le64(atomic64_read(&sci->sc_root->blocks_count));
+>>>>>>> v3.18
 =======
 		cpu_to_le64(atomic64_read(&sci->sc_root->inodes_count));
 	raw_cp->cp_blocks_count =
@@ -955,7 +973,11 @@ static void nilfs_drop_collected_inodes(struct list_head *head)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(NILFS_I_INODE_DIRTY, &ii->i_state);
+=======
+		clear_bit(NILFS_I_INODE_SYNC, &ii->i_state);
+>>>>>>> v3.18
 =======
 		clear_bit(NILFS_I_INODE_SYNC, &ii->i_state);
 >>>>>>> v3.18
@@ -1862,6 +1884,10 @@ static void nilfs_segctor_complete_write(struct nilfs_sc_info *sci)
 
 	if (update_sr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		nilfs->ns_flushed_device = 0;
+>>>>>>> v3.18
 =======
 		nilfs->ns_flushed_device = 0;
 >>>>>>> v3.18
@@ -1932,9 +1958,14 @@ static void nilfs_segctor_drop_written_files(struct nilfs_sc_info *sci,
 					     struct the_nilfs *nilfs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nilfs_inode_info *ii, *n;
 	int during_mount = !(sci->sc_super->s_flags & MS_ACTIVE);
 	int defer_iput = false;
+=======
+	struct nilfs_transaction_info *ti = current->journal_info;
+	struct nilfs_inode_info *ii, *n;
+>>>>>>> v3.18
 =======
 	struct nilfs_transaction_info *ti = current->journal_info;
 	struct nilfs_inode_info *ii, *n;
@@ -1949,6 +1980,7 @@ static void nilfs_segctor_drop_written_files(struct nilfs_sc_info *sci,
 		clear_bit(NILFS_I_BUSY, &ii->i_state);
 		brelse(ii->i_bh);
 		ii->i_bh = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		list_del_init(&ii->i_dirty);
 		if (!ii->vfs_inode.i_nlink || during_mount) {
@@ -1968,6 +2000,11 @@ static void nilfs_segctor_drop_written_files(struct nilfs_sc_info *sci,
 
 	if (defer_iput)
 		schedule_work(&sci->sc_iput_work);
+=======
+		list_move_tail(&ii->i_dirty, &ti->ti_garbage);
+	}
+	spin_unlock(&nilfs->ns_inode_lock);
+>>>>>>> v3.18
 =======
 		list_move_tail(&ii->i_dirty, &ti->ti_garbage);
 	}
@@ -2254,7 +2291,11 @@ int nilfs_construct_dsync_segment(struct super_block *sb, struct inode *inode,
 
 	ii = NILFS_I(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(NILFS_I_INODE_DIRTY, &ii->i_state) ||
+=======
+	if (test_bit(NILFS_I_INODE_SYNC, &ii->i_state) ||
+>>>>>>> v3.18
 =======
 	if (test_bit(NILFS_I_INODE_SYNC, &ii->i_state) ||
 >>>>>>> v3.18
@@ -2280,6 +2321,11 @@ int nilfs_construct_dsync_segment(struct super_block *sb, struct inode *inode,
 
 	err = nilfs_segctor_do_construct(sci, SC_LSEG_DSYNC);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!err)
+		nilfs->ns_flushed_device = 0;
+>>>>>>> v3.18
 =======
 	if (!err)
 		nilfs->ns_flushed_device = 0;
@@ -2649,8 +2695,11 @@ static struct nilfs_sc_info *nilfs_segctor_new(struct super_block *sb,
 	INIT_LIST_HEAD(&sci->sc_write_logs);
 	INIT_LIST_HEAD(&sci->sc_gc_inodes);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&sci->sc_iput_queue);
 	INIT_WORK(&sci->sc_iput_work, nilfs_iput_work_func);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	init_timer(&sci->sc_timer);
@@ -2680,8 +2729,11 @@ static void nilfs_segctor_write_out(struct nilfs_sc_info *sci)
 		nilfs_transaction_unlock(sci->sc_super);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		flush_work(&sci->sc_iput_work);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} while (ret && retrycount-- > 0);
@@ -2709,9 +2761,12 @@ static void nilfs_segctor_destroy(struct nilfs_sc_info *sci)
 	spin_unlock(&sci->sc_state_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (flush_work(&sci->sc_iput_work))
 		flag = true;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (flag || !nilfs_segctor_confirm(sci))
@@ -2724,12 +2779,15 @@ static void nilfs_segctor_destroy(struct nilfs_sc_info *sci)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!list_empty(&sci->sc_iput_queue)) {
 		nilfs_warning(sci->sc_super, __func__,
 			      "iput queue is not empty\n");
 		nilfs_dispose_list(nilfs, &sci->sc_iput_queue, 1);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	WARN_ON(!list_empty(&sci->sc_segbufs));

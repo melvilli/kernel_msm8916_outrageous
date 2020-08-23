@@ -53,7 +53,11 @@ ENTRY(fpsimd_save_partial_state)
 	fpsimd_save_partial x0, 1, 8, 9
 	ret
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENDPROC(fpsimd_load_partial_state)
+=======
+ENDPROC(fpsimd_save_partial_state)
+>>>>>>> v3.18
 =======
 ENDPROC(fpsimd_save_partial_state)
 >>>>>>> v3.18

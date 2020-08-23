@@ -70,12 +70,18 @@ static inline QString qgettext(const QString& str)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ConfigSettings::ConfigSettings()
 	: QSettings("kernel.org", "qconf")
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * Reads a list of integer values from the application settings.

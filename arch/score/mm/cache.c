@@ -73,6 +73,10 @@ void flush_dcache_page(struct page *page)
 	flush_data_cache_page(addr);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(flush_dcache_page);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(flush_dcache_page);
 >>>>>>> v3.18
@@ -282,6 +286,10 @@ void flush_icache_range(unsigned long start, unsigned long end)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(flush_icache_range);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(flush_icache_range);
 >>>>>>> v3.18

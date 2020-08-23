@@ -52,10 +52,13 @@
 #include <asm/mtrr.h>
 #include <asm/msr.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "mtrr.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/pat.h>
 
 #include "mtrr.h"
@@ -63,6 +66,9 @@
 /* arch_phys_wc_add returns an MTRR register index plus this offset. */
 #define MTRR_TO_PHYS_WC_OFFSET 1000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 u32 num_var_ranges;
 
@@ -536,7 +542,10 @@ int mtrr_del(int reg, unsigned long base, unsigned long size)
 EXPORT_SYMBOL(mtrr_del);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * arch_phys_wc_add - add a WC MTRR and handle errors if PAT is unavailable
  * @base: Physical base address
@@ -604,6 +613,9 @@ int phys_wc_to_mtrr_index(int handle)
 }
 EXPORT_SYMBOL_GPL(phys_wc_to_mtrr_index);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * HACK ALERT!
@@ -717,7 +729,11 @@ void __init mtrr_bp_init(void)
 		switch (boot_cpu_data.x86_vendor) {
 		case X86_VENDOR_AMD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (cpu_has_k6_mtrr) {
+=======
+			if (cpu_feature_enabled(X86_FEATURE_K6_MTRR)) {
+>>>>>>> v3.18
 =======
 			if (cpu_feature_enabled(X86_FEATURE_K6_MTRR)) {
 >>>>>>> v3.18
@@ -729,7 +745,11 @@ void __init mtrr_bp_init(void)
 			break;
 		case X86_VENDOR_CENTAUR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (cpu_has_centaur_mcr) {
+=======
+			if (cpu_feature_enabled(X86_FEATURE_CENTAUR_MCR)) {
+>>>>>>> v3.18
 =======
 			if (cpu_feature_enabled(X86_FEATURE_CENTAUR_MCR)) {
 >>>>>>> v3.18
@@ -740,7 +760,11 @@ void __init mtrr_bp_init(void)
 			break;
 		case X86_VENDOR_CYRIX:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (cpu_has_cyrix_arr) {
+=======
+			if (cpu_feature_enabled(X86_FEATURE_CYRIX_ARR)) {
+>>>>>>> v3.18
 =======
 			if (cpu_feature_enabled(X86_FEATURE_CYRIX_ARR)) {
 >>>>>>> v3.18

@@ -62,7 +62,11 @@ void platform_init(unsigned long r3, unsigned long r4, unsigned long r5,
 			fatal("Memory range is not based at address 0\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* get the memsize and trucate it to under 4G on 32 bit machines */
+=======
+	/* get the memsize and truncate it to under 4G on 32 bit machines */
+>>>>>>> v3.18
 =======
 	/* get the memsize and truncate it to under 4G on 32 bit machines */
 >>>>>>> v3.18

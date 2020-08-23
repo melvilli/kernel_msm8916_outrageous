@@ -5,7 +5,10 @@ header-y += byteorder.h
 header-y += ech.h
 header-y += ptrace.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += resource.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += sigcontext.h
@@ -15,6 +18,10 @@ header-y += unistd.h
 
 generic-y += mman.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += resource.h
+>>>>>>> v3.18
 =======
 generic-y += resource.h
 >>>>>>> v3.18

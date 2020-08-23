@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2010-2012, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2010-2011, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2010-2011, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -16,7 +20,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -26,10 +33,16 @@
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/log2.h>
 
 #include <linux/mfd/pm8xxx/core.h>
 #include <linux/input/pmic8xxx-pwrkey.h>
+=======
+#include <linux/regmap.h>
+#include <linux/log2.h>
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 #include <linux/log2.h>
@@ -43,6 +56,7 @@
 /**
  * struct pmic8xxx_pwrkey - pmic8xxx pwrkey information
  * @key_press_irq: key press irq number
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @pdata: platform data
  */
@@ -68,6 +82,8 @@ static irqreturn_t pwrkey_press_irq(int irq, void *_pwrkey)
 	input_report_key(pwrkey->pwr, KEY_POWER, 1);
 	input_sync(pwrkey->pwr);
 =======
+=======
+>>>>>>> v3.18
  */
 struct pmic8xxx_pwrkey {
 	int key_press_irq;
@@ -79,11 +95,15 @@ static irqreturn_t pwrkey_press_irq(int irq, void *_pwr)
 
 	input_report_key(pwr, KEY_POWER, 1);
 	input_sync(pwr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static irqreturn_t pwrkey_release_irq(int irq, void *_pwrkey)
 {
@@ -100,12 +120,17 @@ static irqreturn_t pwrkey_release_irq(int irq, void *_pwrkey)
 	input_report_key(pwrkey->pwr, KEY_POWER, 0);
 	input_sync(pwrkey->pwr);
 =======
+=======
+>>>>>>> v3.18
 static irqreturn_t pwrkey_release_irq(int irq, void *_pwr)
 {
 	struct input_dev *pwr = _pwr;
 
 	input_report_key(pwr, KEY_POWER, 0);
 	input_sync(pwr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return IRQ_HANDLED;
@@ -117,10 +142,15 @@ static int pmic8xxx_pwrkey_suspend(struct device *dev)
 	struct pmic8xxx_pwrkey *pwrkey = dev_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device_may_wakeup(dev)) {
 		enable_irq_wake(pwrkey->key_press_irq);
 		enable_irq_wake(pwrkey->key_release_irq);
 	}
+=======
+	if (device_may_wakeup(dev))
+		enable_irq_wake(pwrkey->key_press_irq);
+>>>>>>> v3.18
 =======
 	if (device_may_wakeup(dev))
 		enable_irq_wake(pwrkey->key_press_irq);
@@ -134,10 +164,15 @@ static int pmic8xxx_pwrkey_resume(struct device *dev)
 	struct pmic8xxx_pwrkey *pwrkey = dev_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device_may_wakeup(dev)) {
 		disable_irq_wake(pwrkey->key_press_irq);
 		disable_irq_wake(pwrkey->key_release_irq);
 	}
+=======
+	if (device_may_wakeup(dev))
+		disable_irq_wake(pwrkey->key_press_irq);
+>>>>>>> v3.18
 =======
 	if (device_may_wakeup(dev))
 		disable_irq_wake(pwrkey->key_press_irq);
@@ -150,6 +185,7 @@ static int pmic8xxx_pwrkey_resume(struct device *dev)
 static SIMPLE_DEV_PM_OPS(pm8xxx_pwr_key_pm_ops,
 		pmic8xxx_pwrkey_suspend, pmic8xxx_pwrkey_resume);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int pmic8xxx_set_pon1(struct device *dev, u32 debounce_us, bool pull_up)
 {
@@ -216,12 +252,15 @@ static DEVICE_ATTR(debounce_us, 0664, NULL, pmic8xxx_debounce_store);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int pmic8xxx_pwrkey_probe(struct platform_device *pdev)
 {
 	struct input_dev *pwr;
 	int key_release_irq = platform_get_irq(pdev, 0);
 	int key_press_irq = platform_get_irq(pdev, 1);
 	int err;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pmic8xxx_pwrkey *pwrkey;
 	const struct pm8xxx_pwrkey_platform_data *pdata =
@@ -244,6 +283,8 @@ static int pmic8xxx_pwrkey_probe(struct platform_device *pdev)
 		err = -ENOMEM;
 		goto free_pwrkey;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int delay;
 	unsigned int pon_cntl;
 	struct regmap *regmap;
@@ -277,6 +318,9 @@ static int pmic8xxx_pwrkey_probe(struct platform_device *pdev)
 	if (!pwr) {
 		dev_dbg(&pdev->dev, "Can't allocate power button\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -284,6 +328,7 @@ static int pmic8xxx_pwrkey_probe(struct platform_device *pdev)
 
 	pwr->name = "pmic8xxx_pwrkey";
 	pwr->phys = "pmic8xxx_pwrkey/input0";
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pwr->dev.parent = &pdev->dev;
 
@@ -362,6 +407,8 @@ free_pwrkey:
 	kfree(pwrkey);
 	return err;
 =======
+=======
+>>>>>>> v3.18
 
 	delay = (kpd_delay << 10) / USEC_PER_SEC;
 	delay = 1 + ilog2(delay);
@@ -413,11 +460,15 @@ free_pwrkey:
 	device_init_wakeup(&pdev->dev, 1);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int pmic8xxx_pwrkey_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pmic8xxx_pwrkey *pwrkey = platform_get_drvdata(pdev);
 	int key_release_irq = platform_get_irq(pdev, 0);
@@ -436,6 +487,8 @@ static int pmic8xxx_pwrkey_remove(struct platform_device *pdev)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	device_init_wakeup(&pdev->dev, 0);
 
 	return 0;
@@ -448,20 +501,29 @@ static const struct of_device_id pm8xxx_pwr_key_id_table[] = {
 };
 MODULE_DEVICE_TABLE(of, pm8xxx_pwr_key_id_table);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver pmic8xxx_pwrkey_driver = {
 	.probe		= pmic8xxx_pwrkey_probe,
 	.remove		= pmic8xxx_pwrkey_remove,
 	.driver		= {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name	= PM8XXX_PWRKEY_DEV_NAME,
 		.owner	= THIS_MODULE,
 		.pm	= &pm8xxx_pwr_key_pm_ops,
 =======
+=======
+>>>>>>> v3.18
 		.name	= "pm8xxx-pwrkey",
 		.owner	= THIS_MODULE,
 		.pm	= &pm8xxx_pwr_key_pm_ops,
 		.of_match_table = pm8xxx_pwr_key_id_table,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };

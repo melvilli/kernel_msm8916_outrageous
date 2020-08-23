@@ -18,6 +18,12 @@
 #include <linux/interrupt.h>
 #include <linux/usb/musb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pinctrl/machine.h>
+#include <linux/pinctrl/pinconf-generic.h>
+#include <linux/platform_data/pinctrl-adi2.h>
+>>>>>>> v3.18
 =======
 #include <linux/pinctrl/machine.h>
 #include <linux/pinctrl/pinconf-generic.h>
@@ -45,7 +51,11 @@ const char bfin_board_name[] = "ADI BF548-EZKIT";
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_USB_ISP1760_HCD) || defined(CONFIG_USB_ISP1760_HCD_MODULE)
+=======
+#if IS_ENABLED(CONFIG_USB_ISP1760_HCD)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_ISP1760_HCD)
 >>>>>>> v3.18
@@ -84,7 +94,11 @@ static struct platform_device bfin_isp1760_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_FB_BF54X_LQ043) || defined(CONFIG_FB_BF54X_LQ043_MODULE)
+=======
+#if IS_ENABLED(CONFIG_FB_BF54X_LQ043)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_FB_BF54X_LQ043)
 >>>>>>> v3.18
@@ -120,7 +134,11 @@ static struct platform_device bf54x_lq043_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_KEYBOARD_BFIN) || defined(CONFIG_KEYBOARD_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_KEYBOARD_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_KEYBOARD_BFIN)
 >>>>>>> v3.18
@@ -174,7 +192,11 @@ static struct platform_device bf54x_kpad_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_INPUT_BFIN_ROTARY) || defined(CONFIG_INPUT_BFIN_ROTARY_MODULE)
+=======
+#if IS_ENABLED(CONFIG_INPUT_BFIN_ROTARY)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_INPUT_BFIN_ROTARY)
 >>>>>>> v3.18
@@ -210,7 +232,11 @@ static struct platform_device bfin_rotary_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_INPUT_ADXL34X) || defined(CONFIG_INPUT_ADXL34X_MODULE)
+=======
+#if IS_ENABLED(CONFIG_INPUT_ADXL34X)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_INPUT_ADXL34X)
 >>>>>>> v3.18
@@ -253,7 +279,11 @@ static const struct adxl34x_platform_data adxl34x_info = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_RTC_DRV_BFIN) || defined(CONFIG_RTC_DRV_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_RTC_DRV_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_RTC_DRV_BFIN)
 >>>>>>> v3.18
@@ -264,7 +294,11 @@ static struct platform_device rtc_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SERIAL_BFIN) || defined(CONFIG_SERIAL_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SERIAL_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SERIAL_BFIN)
 >>>>>>> v3.18
@@ -276,7 +310,10 @@ static struct resource bfin_uart0_resources[] = {
 		.flags = IORESOURCE_MEM,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EARLY_PRINTK
 	{
 		.start = PORTE_FER,
@@ -284,6 +321,9 @@ static struct resource bfin_uart0_resources[] = {
 		.flags = IORESOURCE_REG,
 	},
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.start = IRQ_UART0_TX,
@@ -334,7 +374,10 @@ static struct resource bfin_uart1_resources[] = {
 		.flags = IORESOURCE_MEM,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EARLY_PRINTK
 	{
 		.start = PORTH_FER,
@@ -342,6 +385,9 @@ static struct resource bfin_uart1_resources[] = {
 		.flags = IORESOURCE_REG,
 	},
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.start = IRQ_UART1_TX,
@@ -408,7 +454,10 @@ static struct resource bfin_uart2_resources[] = {
 		.flags = IORESOURCE_MEM,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EARLY_PRINTK
 	{
 		.start = PORTB_FER,
@@ -416,6 +465,9 @@ static struct resource bfin_uart2_resources[] = {
 		.flags = IORESOURCE_REG,
 	},
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.start = IRQ_UART2_TX,
@@ -466,7 +518,10 @@ static struct resource bfin_uart3_resources[] = {
 		.flags = IORESOURCE_MEM,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EARLY_PRINTK
 	{
 		.start = PORTB_FER,
@@ -474,6 +529,9 @@ static struct resource bfin_uart3_resources[] = {
 		.flags = IORESOURCE_REG,
 	},
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.start = IRQ_UART3_TX,
@@ -535,7 +593,11 @@ static struct platform_device bfin_uart3_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_BFIN_SIR) || defined(CONFIG_BFIN_SIR_MODULE)
+=======
+#if IS_ENABLED(CONFIG_BFIN_SIR)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BFIN_SIR)
 >>>>>>> v3.18
@@ -642,7 +704,11 @@ static struct platform_device bfin_sir3_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SMSC911X) || defined(CONFIG_SMSC911X_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SMSC911X)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SMSC911X)
 >>>>>>> v3.18
@@ -681,7 +747,11 @@ static struct platform_device smsc911x_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_USB_MUSB_HDRC) || defined(CONFIG_USB_MUSB_HDRC_MODULE)
+=======
+#if IS_ENABLED(CONFIG_USB_MUSB_HDRC)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_MUSB_HDRC)
 >>>>>>> v3.18
@@ -747,7 +817,11 @@ static struct platform_device musb_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SERIAL_BFIN_SPORT) || defined(CONFIG_SERIAL_BFIN_SPORT_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SERIAL_BFIN_SPORT)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SERIAL_BFIN_SPORT)
 >>>>>>> v3.18
@@ -890,7 +964,11 @@ static struct platform_device bfin_sport3_uart_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_CAN_BFIN) || defined(CONFIG_CAN_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_CAN_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_CAN_BFIN)
 >>>>>>> v3.18
@@ -972,7 +1050,11 @@ static struct platform_device bfin_can1_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_PATA_BF54X) || defined(CONFIG_PATA_BF54X_MODULE)
+=======
+#if IS_ENABLED(CONFIG_PATA_BF54X)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_PATA_BF54X)
 >>>>>>> v3.18
@@ -998,7 +1080,11 @@ static struct platform_device bfin_atapi_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_NAND_BF5XX) || defined(CONFIG_MTD_NAND_BF5XX_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_NAND_BF5XX)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_NAND_BF5XX)
 >>>>>>> v3.18
@@ -1052,7 +1138,11 @@ static struct platform_device bf5xx_nand_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SDH_BFIN) || defined(CONFIG_SDH_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SDH_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SDH_BFIN)
 >>>>>>> v3.18
@@ -1073,7 +1163,11 @@ static struct platform_device bf54x_sdh_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_PHYSMAP) || defined(CONFIG_MTD_PHYSMAP_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_PHYSMAP)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_PHYSMAP)
 >>>>>>> v3.18
@@ -1125,8 +1219,12 @@ static struct platform_device ezkit_flash_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_M25P80) \
 	|| defined(CONFIG_MTD_M25P80_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_M25P80)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_M25P80)
 >>>>>>> v3.18
@@ -1157,7 +1255,11 @@ static struct bfin5xx_spi_chip spi_flash_chip_info = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_TOUCHSCREEN_AD7877) || defined(CONFIG_TOUCHSCREEN_AD7877_MODULE)
+=======
+#if IS_ENABLED(CONFIG_TOUCHSCREEN_AD7877)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_TOUCHSCREEN_AD7877)
 >>>>>>> v3.18
@@ -1177,10 +1279,13 @@ static const struct ad7877_platform_data bfin_ad7877_ts_info = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct spi_board_info bfin_spi_board_info[] __initdata = {
 #if defined(CONFIG_MTD_M25P80) \
 	|| defined(CONFIG_MTD_M25P80_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PINCTRL_ADI2
 
 # define ADI_PINT_DEVNAME "adi-gpio-pint"
@@ -1588,6 +1693,9 @@ static struct platform_device bfin_gpj_device = {
 
 static struct spi_board_info bfin_spi_board_info[] __initdata = {
 #if IS_ENABLED(CONFIG_MTD_M25P80)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		/* the modalias must be the same as spi device driver name */
@@ -1595,7 +1703,11 @@ static struct spi_board_info bfin_spi_board_info[] __initdata = {
 		.max_speed_hz = 25000000,     /* max spi clock (SCK) speed in HZ */
 		.bus_num = 0, /* Framework bus number */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chip_select = 1, /* SPI_SSEL1*/
+=======
+		.chip_select = MAX_CTRL_CS + GPIO_PE4, /* SPI_SSEL1*/
+>>>>>>> v3.18
 =======
 		.chip_select = MAX_CTRL_CS + GPIO_PE4, /* SPI_SSEL1*/
 >>>>>>> v3.18
@@ -1605,8 +1717,12 @@ static struct spi_board_info bfin_spi_board_info[] __initdata = {
 	},
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_BF5XX_SOC_AD183X) \
 	|| defined(CONFIG_SND_BF5XX_SOC_AD183X_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_BF5XX_SOC_AD183X)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_BF5XX_SOC_AD183X)
 >>>>>>> v3.18
@@ -1615,15 +1731,21 @@ static struct spi_board_info bfin_spi_board_info[] __initdata = {
 		.max_speed_hz = 3125000,     /* max spi clock (SCK) speed in HZ */
 		.bus_num = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chip_select = 4,
 	},
 #endif
 #if defined(CONFIG_TOUCHSCREEN_AD7877) || defined(CONFIG_TOUCHSCREEN_AD7877_MODULE)
 =======
+=======
+>>>>>>> v3.18
 		.chip_select = MAX_CTRL_CS + GPIO_PG6, /* SPI_SSEL2 */
 	},
 #endif
 #if IS_ENABLED(CONFIG_TOUCHSCREEN_AD7877)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.modalias		= "ad7877",
@@ -1632,30 +1754,42 @@ static struct spi_board_info bfin_spi_board_info[] __initdata = {
 		.max_speed_hz		= 12500000,     /* max spi clock (SCK) speed in HZ */
 		.bus_num		= 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chip_select  		= 2,
 	},
 #endif
 #if defined(CONFIG_SPI_SPIDEV) || defined(CONFIG_SPI_SPIDEV_MODULE)
 =======
+=======
+>>>>>>> v3.18
 		.chip_select		= MAX_CTRL_CS + GPIO_PE5, /* SPI_SSEL2 */
 	},
 #endif
 #if IS_ENABLED(CONFIG_SPI_SPIDEV)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.modalias = "spidev",
 		.max_speed_hz = 3125000,     /* max spi clock (SCK) speed in HZ */
 		.bus_num = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chip_select = 1,
 	},
 #endif
 #if defined(CONFIG_INPUT_ADXL34X_SPI) || defined(CONFIG_INPUT_ADXL34X_SPI_MODULE)
 =======
+=======
+>>>>>>> v3.18
 		.chip_select = MAX_CTRL_CS + GPIO_PE4, /* SPI_SSEL1 */
 	},
 #endif
 #if IS_ENABLED(CONFIG_INPUT_ADXL34X_SPI)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.modalias		= "adxl34x",
@@ -1664,7 +1798,11 @@ static struct spi_board_info bfin_spi_board_info[] __initdata = {
 		.max_speed_hz		= 5000000,     /* max spi clock (SCK) speed in HZ */
 		.bus_num		= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chip_select  		= 2,
+=======
+		.chip_select		= MAX_CTRL_CS + GPIO_PG6, /* SPI_SSEL2 */
+>>>>>>> v3.18
 =======
 		.chip_select		= MAX_CTRL_CS + GPIO_PG6, /* SPI_SSEL2 */
 >>>>>>> v3.18
@@ -1673,7 +1811,11 @@ static struct spi_board_info bfin_spi_board_info[] __initdata = {
 #endif
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SPI_BFIN5XX) || defined(CONFIG_SPI_BFIN5XX_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SPI_BFIN5XX)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SPI_BFIN5XX)
 >>>>>>> v3.18
@@ -1718,7 +1860,11 @@ static struct resource bfin_spi1_resource[] = {
 /* SPI controller data */
 static struct bfin5xx_spi_master bf54x_spi_master_info0 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.num_chipselect = 4,
+=======
+	.num_chipselect = MAX_CTRL_CS + MAX_BLACKFIN_GPIOS,
+>>>>>>> v3.18
 =======
 	.num_chipselect = MAX_CTRL_CS + MAX_BLACKFIN_GPIOS,
 >>>>>>> v3.18
@@ -1738,7 +1884,11 @@ static struct platform_device bf54x_spi_master0 = {
 
 static struct bfin5xx_spi_master bf54x_spi_master_info1 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.num_chipselect = 4,
+=======
+	.num_chipselect = MAX_CTRL_CS + MAX_BLACKFIN_GPIOS,
+>>>>>>> v3.18
 =======
 	.num_chipselect = MAX_CTRL_CS + MAX_BLACKFIN_GPIOS,
 >>>>>>> v3.18
@@ -1758,8 +1908,12 @@ static struct platform_device bf54x_spi_master1 = {
 #endif  /* spi master and devices */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_VIDEO_BLACKFIN_CAPTURE) \
 	|| defined(CONFIG_VIDEO_BLACKFIN_CAPTURE_MODULE)
+=======
+#if IS_ENABLED(CONFIG_VIDEO_BLACKFIN_CAPTURE)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_VIDEO_BLACKFIN_CAPTURE)
 >>>>>>> v3.18
@@ -1783,8 +1937,12 @@ static const struct ppi_info ppi_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_VIDEO_VS6624) \
 	|| defined(CONFIG_VIDEO_VS6624_MODULE)
+=======
+#if IS_ENABLED(CONFIG_VIDEO_VS6624)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_VIDEO_VS6624)
 >>>>>>> v3.18
@@ -1833,7 +1991,11 @@ static struct platform_device bfin_capture_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C_BLACKFIN_TWI) || defined(CONFIG_I2C_BLACKFIN_TWI_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C_BLACKFIN_TWI)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C_BLACKFIN_TWI)
 >>>>>>> v3.18
@@ -1892,7 +2054,11 @@ static struct platform_device i2c_bfin_twi1_device = {
 
 static struct i2c_board_info __initdata bfin_i2c_board_info0[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_SOC_SSM2602) || defined(CONFIG_SND_SOC_SSM2602_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_SOC_SSM2602)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_SOC_SSM2602)
 >>>>>>> v3.18
@@ -1905,7 +2071,11 @@ static struct i2c_board_info __initdata bfin_i2c_board_info0[] = {
 #if !defined(CONFIG_BF542)	/* The BF542 only has 1 TWI */
 static struct i2c_board_info __initdata bfin_i2c_board_info1[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_BFIN_TWI_LCD) || defined(CONFIG_BFIN_TWI_LCD_MODULE)
+=======
+#if IS_ENABLED(CONFIG_BFIN_TWI_LCD)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BFIN_TWI_LCD)
 >>>>>>> v3.18
@@ -1914,7 +2084,11 @@ static struct i2c_board_info __initdata bfin_i2c_board_info1[] = {
 	},
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_INPUT_PCF8574) || defined(CONFIG_INPUT_PCF8574_MODULE)
+=======
+#if IS_ENABLED(CONFIG_INPUT_PCF8574)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_INPUT_PCF8574)
 >>>>>>> v3.18
@@ -1924,7 +2098,11 @@ static struct i2c_board_info __initdata bfin_i2c_board_info1[] = {
 	},
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_INPUT_ADXL34X_I2C) || defined(CONFIG_INPUT_ADXL34X_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_INPUT_ADXL34X_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_INPUT_ADXL34X_I2C)
 >>>>>>> v3.18
@@ -1935,7 +2113,11 @@ static struct i2c_board_info __initdata bfin_i2c_board_info1[] = {
 	},
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_BFIN_TWI_LCD) || defined(CONFIG_BFIN_TWI_LCD_MODULE)
+=======
+#if IS_ENABLED(CONFIG_BFIN_TWI_LCD)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BFIN_TWI_LCD)
 >>>>>>> v3.18
@@ -1947,7 +2129,11 @@ static struct i2c_board_info __initdata bfin_i2c_board_info1[] = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_KEYBOARD_GPIO) || defined(CONFIG_KEYBOARD_GPIO_MODULE)
+=======
+#if IS_ENABLED(CONFIG_KEYBOARD_GPIO)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_KEYBOARD_GPIO)
 >>>>>>> v3.18
@@ -2002,9 +2188,14 @@ static struct platform_device bfin_dpmc = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_BF5XX_I2S) || defined(CONFIG_SND_BF5XX_I2S_MODULE) || \
 	defined(CONFIG_SND_BF5XX_TDM) || defined(CONFIG_SND_BF5XX_TDM_MODULE) || \
 	defined(CONFIG_SND_BF5XX_AC97) || defined(CONFIG_SND_BF5XX_AC97_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_BF5XX_I2S) || \
+	IS_ENABLED(CONFIG_SND_BF5XX_AC97)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_BF5XX_I2S) || \
 	IS_ENABLED(CONFIG_SND_BF5XX_AC97)
@@ -2069,7 +2260,11 @@ static struct resource bfin_snd_resources[][4] = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_BF5XX_I2S) || defined(CONFIG_SND_BF5XX_I2S_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_BF5XX_I2S)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_BF5XX_I2S)
 >>>>>>> v3.18
@@ -2079,6 +2274,7 @@ static struct platform_device bfin_i2s_pcm = {
 };
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_SND_BF5XX_TDM) || defined(CONFIG_SND_BF5XX_TDM_MODULE)
 static struct platform_device bfin_tdm_pcm = {
@@ -2091,6 +2287,9 @@ static struct platform_device bfin_tdm_pcm = {
 =======
 #if IS_ENABLED(CONFIG_SND_BF5XX_AC97)
 >>>>>>> v3.18
+=======
+#if IS_ENABLED(CONFIG_SND_BF5XX_AC97)
+>>>>>>> v3.18
 static struct platform_device bfin_ac97_pcm = {
 	.name = "bfin-ac97-pcm-audio",
 	.id = -1,
@@ -2098,7 +2297,11 @@ static struct platform_device bfin_ac97_pcm = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_BF5XX_SOC_AD73311) || defined(CONFIG_SND_BF5XX_SOC_AD73311_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_BF5XX_SOC_AD73311)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_BF5XX_SOC_AD73311)
 >>>>>>> v3.18
@@ -2109,7 +2312,11 @@ static struct platform_device bfin_ad73311_codec_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_BF5XX_SOC_AD1980) || defined(CONFIG_SND_BF5XX_SOC_AD1980_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_BF5XX_SOC_AD1980)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_BF5XX_SOC_AD1980)
 >>>>>>> v3.18
@@ -2120,7 +2327,11 @@ static struct platform_device bfin_ad1980_codec_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_BF5XX_SOC_I2S) || defined(CONFIG_SND_BF5XX_SOC_I2S_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_BF5XX_SOC_I2S)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_BF5XX_SOC_I2S)
 >>>>>>> v3.18
@@ -2136,6 +2347,7 @@ static struct platform_device bfin_i2s = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_BF5XX_SOC_TDM) || defined(CONFIG_SND_BF5XX_SOC_TDM_MODULE)
 static struct platform_device bfin_tdm = {
 	.name = "bfin-tdm",
@@ -2149,6 +2361,9 @@ static struct platform_device bfin_tdm = {
 #endif
 
 #if defined(CONFIG_SND_BF5XX_SOC_AC97) || defined(CONFIG_SND_BF5XX_SOC_AC97_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_BF5XX_SOC_AC97)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_BF5XX_SOC_AC97)
 >>>>>>> v3.18
@@ -2167,6 +2382,7 @@ static struct platform_device *ezkit_devices[] __initdata = {
 
 	&bfin_dpmc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #if defined(CONFIG_RTC_DRV_BFIN) || defined(CONFIG_RTC_DRV_BFIN_MODULE)
 	&rtc_device,
@@ -2174,6 +2390,8 @@ static struct platform_device *ezkit_devices[] __initdata = {
 
 #if defined(CONFIG_SERIAL_BFIN) || defined(CONFIG_SERIAL_BFIN_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_PINCTRL_ADI2)
 	&bfin_pinctrl_device,
 	&bfin_pint0_device,
@@ -2197,6 +2415,9 @@ static struct platform_device *ezkit_devices[] __initdata = {
 #endif
 
 #if IS_ENABLED(CONFIG_SERIAL_BFIN)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SERIAL_BFIN_UART0
 	&bfin_uart0_device,
@@ -2213,7 +2434,11 @@ static struct platform_device *ezkit_devices[] __initdata = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_BFIN_SIR) || defined(CONFIG_BFIN_SIR_MODULE)
+=======
+#if IS_ENABLED(CONFIG_BFIN_SIR)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BFIN_SIR)
 >>>>>>> v3.18
@@ -2231,6 +2456,7 @@ static struct platform_device *ezkit_devices[] __initdata = {
 #endif
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_FB_BF54X_LQ043) || defined(CONFIG_FB_BF54X_LQ043_MODULE)
 	&bf54x_lq043_device,
@@ -2250,6 +2476,8 @@ static struct platform_device *ezkit_devices[] __initdata = {
 
 #if defined(CONFIG_SERIAL_BFIN_SPORT) || defined(CONFIG_SERIAL_BFIN_SPORT_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_FB_BF54X_LQ043)
 	&bf54x_lq043_device,
 #endif
@@ -2267,6 +2495,9 @@ static struct platform_device *ezkit_devices[] __initdata = {
 #endif
 
 #if IS_ENABLED(CONFIG_SERIAL_BFIN_SPORT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SERIAL_BFIN_SPORT0_UART
 	&bfin_sport0_uart_device,
@@ -2283,7 +2514,11 @@ static struct platform_device *ezkit_devices[] __initdata = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_CAN_BFIN) || defined(CONFIG_CAN_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_CAN_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_CAN_BFIN)
 >>>>>>> v3.18
@@ -2291,6 +2526,7 @@ static struct platform_device *ezkit_devices[] __initdata = {
 	&bfin_can1_device,
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_PATA_BF54X) || defined(CONFIG_PATA_BF54X_MODULE)
 	&bfin_atapi_device,
@@ -2323,6 +2559,8 @@ static struct platform_device *ezkit_devices[] __initdata = {
 
 #if defined(CONFIG_I2C_BLACKFIN_TWI) || defined(CONFIG_I2C_BLACKFIN_TWI_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_PATA_BF54X)
 	&bfin_atapi_device,
 #endif
@@ -2352,6 +2590,9 @@ static struct platform_device *ezkit_devices[] __initdata = {
 #endif
 
 #if IS_ENABLED(CONFIG_I2C_BLACKFIN_TWI)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&i2c_bfin_twi0_device,
 #if !defined(CONFIG_BF542)
@@ -2359,6 +2600,7 @@ static struct platform_device *ezkit_devices[] __initdata = {
 #endif
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_KEYBOARD_GPIO) || defined(CONFIG_KEYBOARD_GPIO_MODULE)
 	&bfin_device_gpiokeys,
@@ -2394,6 +2636,8 @@ static struct platform_device *ezkit_devices[] __initdata = {
 	&bfin_ac97,
 #endif
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_KEYBOARD_GPIO)
 	&bfin_device_gpiokeys,
 #endif
@@ -2475,6 +2719,9 @@ static struct pinctrl_map __initdata bfin_pinmux_map[] = {
 	PIN_MAP_MUX_GROUP_DEFAULT("bf54x-keys",  "pinctrl-adi2.0", "keys_4x4grp", "keys"),
 	PIN_MAP_MUX_GROUP("bf54x-keys", "4bit",  "pinctrl-adi2.0", "keys_4x4grp", "keys"),
 	PIN_MAP_MUX_GROUP("bf54x-keys", "8bit",  "pinctrl-adi2.0", "keys_8x8grp", "keys"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2483,11 +2730,17 @@ static int __init ezkit_init(void)
 	printk(KERN_INFO "%s(): registering device resources\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Initialize pinmuxing */
 	pinctrl_register_mappings(bfin_pinmux_map,
 				ARRAY_SIZE(bfin_pinmux_map));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c_register_board_info(0, bfin_i2c_board_info0,
 				ARRAY_SIZE(bfin_i2c_board_info0));
@@ -2521,6 +2774,7 @@ static struct platform_device *ezkit_early_devices[] __initdata = {
 #endif
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #if defined(CONFIG_SERIAL_BFIN_SPORT_CONSOLE)
 #ifdef CONFIG_SERIAL_BFIN_SPORT0_UART
@@ -2536,6 +2790,8 @@ static struct platform_device *ezkit_early_devices[] __initdata = {
 	&bfin_sport3_uart_device,
 #endif
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

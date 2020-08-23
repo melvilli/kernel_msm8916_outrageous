@@ -92,9 +92,15 @@ static int rx_copybreak;
 /* These identify the driver base version and may not be removed. */
 static char version[] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 DRV_NAME ".c:v1.11 1/7/2001 Written by Donald Becker <becker@scyld.com>\n";
 static char version2[] =
 "  (unofficial 2.4.x kernel port, version " DRV_VERSION ", " DRV_RELDATE ")\n";
+=======
+DRV_NAME ".c:v1.11 1/7/2001 Written by Donald Becker <becker@scyld.com>";
+static char version2[] =
+"  (unofficial 2.4.x kernel port, version " DRV_VERSION ", " DRV_RELDATE ")";
+>>>>>>> v3.18
 =======
 DRV_NAME ".c:v1.11 1/7/2001 Written by Donald Becker <becker@scyld.com>";
 static char version2[] =
@@ -180,7 +186,11 @@ static const struct epic_chip_info pci_id_tbl[] = {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(epic_pci_tbl) = {
+=======
+static const struct pci_device_id epic_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id epic_pci_tbl[] = {
 >>>>>>> v3.18
@@ -343,9 +353,13 @@ static int epic_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 /* when built into the kernel, we only print version if device is found */
 #ifndef MODULE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static int printed_version;
 	if (!printed_version++)
 		printk(KERN_INFO "%s%s", version, version2);
+=======
+	pr_info_once("%s%s\n", version, version2);
+>>>>>>> v3.18
 =======
 	pr_info_once("%s%s\n", version, version2);
 >>>>>>> v3.18
@@ -438,9 +452,15 @@ static int epic_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	if (debug > 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_printk(KERN_DEBUG, &pdev->dev, "EEPROM contents:\n");
 		for (i = 0; i < 64; i++)
 			printk(" %4.4x%s", read_eeprom(ep, i),
+=======
+		dev_dbg(&pdev->dev, "EEPROM contents:\n");
+		for (i = 0; i < 64; i++)
+			pr_cont(" %4.4x%s", read_eeprom(ep, i),
+>>>>>>> v3.18
 =======
 		dev_dbg(&pdev->dev, "EEPROM contents:\n");
 		for (i = 0; i < 64; i++)
@@ -511,15 +531,21 @@ static int epic_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 		goto err_out_unmap_rx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "%s: %s at %lx, IRQ %d, %pM\n",
 	       dev->name, pci_id_tbl[chip_idx].name,
 	       (long)pci_resource_start(pdev, EPIC_BAR), pdev->irq,
 	       dev->dev_addr);
 =======
+=======
+>>>>>>> v3.18
 	netdev_info(dev, "%s at %lx, IRQ %d, %pM\n",
 		    pci_id_tbl[chip_idx].name,
 		    (long)pci_resource_start(pdev, EPIC_BAR), pdev->irq,
 		    dev->dev_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -731,9 +757,14 @@ static int epic_open(struct net_device *dev)
 		if (dev->if_port == 1) {
 			if (debug > 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_INFO "%s: Using the 10base2 transceiver, MII "
 					   "status %4.4x.\n",
 					   dev->name, mdio_read(dev, ep->phys[0], MII_BMSR));
+=======
+				netdev_info(dev, "Using the 10base2 transceiver, MII status %4.4x.\n",
+					    mdio_read(dev, ep->phys[0], MII_BMSR));
+>>>>>>> v3.18
 =======
 				netdev_info(dev, "Using the 10base2 transceiver, MII status %4.4x.\n",
 					    mdio_read(dev, ep->phys[0], MII_BMSR));
@@ -748,15 +779,21 @@ static int epic_open(struct net_device *dev)
 				mdio_write(dev, ep->phys[0], MII_BMCR, BMCR_ANENABLE|BMCR_ANRESTART);
 			if (debug > 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_INFO "%s: Setting %s-duplex based on MII xcvr %d"
 					   " register read of %4.4x.\n", dev->name,
 					   ep->mii.full_duplex ? "full" : "half",
 					   ep->phys[0], mii_lpa);
 =======
+=======
+>>>>>>> v3.18
 				netdev_info(dev, "Setting %s-duplex based on MII xcvr %d register read of %4.4x.\n",
 					    ep->mii.full_duplex ? "full"
 								: "half",
 					    ep->phys[0], mii_lpa);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -778,10 +815,16 @@ static int epic_open(struct net_device *dev)
 
 	if (debug > 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "%s: epic_open() ioaddr %p IRQ %d "
 		       "status %4.4x %s-duplex.\n",
 		       dev->name, ioaddr, irq, er32(GENCTL),
 		       ep->mii.full_duplex ? "full" : "half");
+=======
+		netdev_dbg(dev, "epic_open() ioaddr %p IRQ %d status %4.4x %s-duplex.\n",
+			   ioaddr, irq, er32(GENCTL),
+			   ep->mii.full_duplex ? "full" : "half");
+>>>>>>> v3.18
 =======
 		netdev_dbg(dev, "epic_open() ioaddr %p IRQ %d status %4.4x %s-duplex.\n",
 			   ioaddr, irq, er32(GENCTL),
@@ -836,8 +879,13 @@ static void epic_restart(struct net_device *dev)
 	ew32(GENCTL, 0x4001);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "%s: Restarting the EPIC chip, Rx %d/%d Tx %d/%d.\n",
 		   dev->name, ep->cur_rx, ep->dirty_rx, ep->dirty_tx, ep->cur_tx);
+=======
+	netdev_dbg(dev, "Restarting the EPIC chip, Rx %d/%d Tx %d/%d.\n",
+		   ep->cur_rx, ep->dirty_rx, ep->dirty_tx, ep->cur_tx);
+>>>>>>> v3.18
 =======
 	netdev_dbg(dev, "Restarting the EPIC chip, Rx %d/%d Tx %d/%d.\n",
 		   ep->cur_rx, ep->dirty_rx, ep->dirty_tx, ep->cur_tx);
@@ -878,9 +926,14 @@ static void epic_restart(struct net_device *dev)
 	     TxUnderrun);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "%s: epic_restart() done, cmd status %4.4x, ctl %4.4x"
 		   " interrupt %4.4x.\n",
 		   dev->name, er32(COMMAND), er32(GENCTL), er32(INTSTAT));
+=======
+	netdev_dbg(dev, "epic_restart() done, cmd status %4.4x, ctl %4.4x interrupt %4.4x.\n",
+		   er32(COMMAND), er32(GENCTL), er32(INTSTAT));
+>>>>>>> v3.18
 =======
 	netdev_dbg(dev, "epic_restart() done, cmd status %4.4x, ctl %4.4x interrupt %4.4x.\n",
 		   er32(COMMAND), er32(GENCTL), er32(INTSTAT));
@@ -902,9 +955,15 @@ static void check_media(struct net_device *dev)
 	if (ep->mii.full_duplex != duplex) {
 		ep->mii.full_duplex = duplex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "%s: Setting %s-duplex based on MII #%d link"
 			   " partner capability of %4.4x.\n", dev->name,
 			   ep->mii.full_duplex ? "full" : "half", ep->phys[0], mii_lpa);
+=======
+		netdev_info(dev, "Setting %s-duplex based on MII #%d link partner capability of %4.4x.\n",
+			    ep->mii.full_duplex ? "full" : "half",
+			    ep->phys[0], mii_lpa);
+>>>>>>> v3.18
 =======
 		netdev_info(dev, "Setting %s-duplex based on MII #%d link partner capability of %4.4x.\n",
 			    ep->mii.full_duplex ? "full" : "half",
@@ -923,16 +982,22 @@ static void epic_timer(unsigned long data)
 
 	if (debug > 3) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "%s: Media monitor tick, Tx status %8.8x.\n",
 		       dev->name, er32(TxSTAT));
 		printk(KERN_DEBUG "%s: Other registers are IntMask %4.4x "
 		       "IntStatus %4.4x RxStatus %4.4x.\n", dev->name,
 		       er32(INTMASK), er32(INTSTAT), er32(RxSTAT));
 =======
+=======
+>>>>>>> v3.18
 		netdev_dbg(dev, "Media monitor tick, Tx status %8.8x.\n",
 			   er32(TxSTAT));
 		netdev_dbg(dev, "Other registers are IntMask %4.4x IntStatus %4.4x RxStatus %4.4x.\n",
 			   er32(INTMASK), er32(INTSTAT), er32(RxSTAT));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -949,17 +1014,23 @@ static void epic_tx_timeout(struct net_device *dev)
 
 	if (debug > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: Transmit timeout using MII device, "
 		       "Tx status %4.4x.\n", dev->name, er16(TxSTAT));
 		if (debug > 1) {
 			printk(KERN_DEBUG "%s: Tx indices: dirty_tx %d, cur_tx %d.\n",
 				   dev->name, ep->dirty_tx, ep->cur_tx);
 =======
+=======
+>>>>>>> v3.18
 		netdev_warn(dev, "Transmit timeout using MII device, Tx status %4.4x.\n",
 			    er16(TxSTAT));
 		if (debug > 1) {
 			netdev_dbg(dev, "Tx indices: dirty_tx %d, cur_tx %d.\n",
 				   ep->dirty_tx, ep->cur_tx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1071,9 +1142,14 @@ static netdev_tx_t epic_start_xmit(struct sk_buff *skb, struct net_device *dev)
 
 	if (debug > 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "%s: Queued Tx packet size %d to slot %d, "
 		       "flag %2.2x Tx status %8.8x.\n", dev->name, skb->len,
 		       entry, ctrl_word, er32(TxSTAT));
+=======
+		netdev_dbg(dev, "Queued Tx packet size %d to slot %d, flag %2.2x Tx status %8.8x.\n",
+			   skb->len, entry, ctrl_word, er32(TxSTAT));
+>>>>>>> v3.18
 =======
 		netdev_dbg(dev, "Queued Tx packet size %d to slot %d, flag %2.2x Tx status %8.8x.\n",
 			   skb->len, entry, ctrl_word, er32(TxSTAT));
@@ -1091,8 +1167,13 @@ static void epic_tx_error(struct net_device *dev, struct epic_private *ep,
 	/* There was an major error, log it. */
 	if (debug > 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "%s: Transmit error, Tx status %8.8x.\n",
 		       dev->name, status);
+=======
+		netdev_dbg(dev, "Transmit error, Tx status %8.8x.\n",
+			   status);
+>>>>>>> v3.18
 =======
 		netdev_dbg(dev, "Transmit error, Tx status %8.8x.\n",
 			   status);
@@ -1144,9 +1225,14 @@ static void epic_tx(struct net_device *dev, struct epic_private *ep)
 #ifndef final_version
 	if (cur_tx - dirty_tx > TX_RING_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "%s: Out-of-sync dirty pointer, %d vs. %d, full=%d.\n",
 		       dev->name, dirty_tx, cur_tx, ep->tx_full);
+=======
+		netdev_warn(dev, "Out-of-sync dirty pointer, %d vs. %d, full=%d.\n",
+			    dirty_tx, cur_tx, ep->tx_full);
+>>>>>>> v3.18
 =======
 		netdev_warn(dev, "Out-of-sync dirty pointer, %d vs. %d, full=%d.\n",
 			    dirty_tx, cur_tx, ep->tx_full);
@@ -1178,8 +1264,13 @@ static irqreturn_t epic_interrupt(int irq, void *dev_instance)
 
 	if (debug > 4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "%s: Interrupt, status=%#8.8x new "
 		       "intstat=%#8.8x.\n", dev->name, status, er32(INTSTAT));
+=======
+		netdev_dbg(dev, "Interrupt, status=%#8.8x new intstat=%#8.8x.\n",
+			   status, er32(INTSTAT));
+>>>>>>> v3.18
 =======
 		netdev_dbg(dev, "Interrupt, status=%#8.8x new intstat=%#8.8x.\n",
 			   status, er32(INTSTAT));
@@ -1222,8 +1313,13 @@ static irqreturn_t epic_interrupt(int irq, void *dev_instance)
 		}
 		if (status & PCIBusErr170) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "%s: PCI Bus Error! status %4.4x.\n",
 					 dev->name, status);
+=======
+			netdev_err(dev, "PCI Bus Error! status %4.4x.\n",
+				   status);
+>>>>>>> v3.18
 =======
 			netdev_err(dev, "PCI Bus Error! status %4.4x.\n",
 				   status);
@@ -1238,8 +1334,13 @@ static irqreturn_t epic_interrupt(int irq, void *dev_instance)
 out:
 	if (debug > 3) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "%s: exit interrupt, intr_status=%#4.4x.\n",
 				   dev->name, status);
+=======
+		netdev_dbg(dev, "exit interrupt, intr_status=%#4.4x.\n",
+			   status);
+>>>>>>> v3.18
 =======
 		netdev_dbg(dev, "exit interrupt, intr_status=%#4.4x.\n",
 			   status);
@@ -1258,7 +1359,11 @@ static int epic_rx(struct net_device *dev, int budget)
 
 	if (debug > 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG " In epic_rx(), entry %d %8.8x.\n", entry,
+=======
+		netdev_dbg(dev, " In epic_rx(), entry %d %8.8x.\n", entry,
+>>>>>>> v3.18
 =======
 		netdev_dbg(dev, " In epic_rx(), entry %d %8.8x.\n", entry,
 >>>>>>> v3.18
@@ -1273,7 +1378,12 @@ static int epic_rx(struct net_device *dev, int budget)
 
 		if (debug > 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "  epic_rx() status was %8.8x.\n", status);
+=======
+			netdev_dbg(dev, "  epic_rx() status was %8.8x.\n",
+				   status);
+>>>>>>> v3.18
 =======
 			netdev_dbg(dev, "  epic_rx() status was %8.8x.\n",
 				   status);
@@ -1283,17 +1393,23 @@ static int epic_rx(struct net_device *dev, int budget)
 		if (status & 0x2006) {
 			if (debug > 2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_DEBUG "%s: epic_rx() error status was %8.8x.\n",
 					   dev->name, status);
 			if (status & 0x2000) {
 				printk(KERN_WARNING "%s: Oversized Ethernet frame spanned "
 					   "multiple buffers, status %4.4x!\n", dev->name, status);
 =======
+=======
+>>>>>>> v3.18
 				netdev_dbg(dev, "epic_rx() error status was %8.8x.\n",
 					   status);
 			if (status & 0x2000) {
 				netdev_warn(dev, "Oversized Ethernet frame spanned multiple buffers, status %4.4x!\n",
 					    status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				dev->stats.rx_length_errors++;
 			} else if (status & 0x0006)
@@ -1307,9 +1423,14 @@ static int epic_rx(struct net_device *dev, int budget)
 
 			if (pkt_len > PKT_BUF_SZ - 4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "%s: Oversized Ethernet frame, status %x "
 					   "%d bytes.\n",
 					   dev->name, status, pkt_len);
+=======
+				netdev_err(dev, "Oversized Ethernet frame, status %x %d bytes.\n",
+					   status, pkt_len);
+>>>>>>> v3.18
 =======
 				netdev_err(dev, "Oversized Ethernet frame, status %x %d bytes.\n",
 					   status, pkt_len);
@@ -1434,8 +1555,13 @@ static int epic_close(struct net_device *dev)
 
 	if (debug > 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "%s: Shutting down ethercard, status was %2.2x.\n",
 		       dev->name, er32(INTSTAT));
+=======
+		netdev_dbg(dev, "Shutting down ethercard, status was %2.2x.\n",
+			   er32(INTSTAT));
+>>>>>>> v3.18
 =======
 		netdev_dbg(dev, "Shutting down ethercard, status was %2.2x.\n",
 			   er32(INTSTAT));
@@ -1458,7 +1584,11 @@ static int epic_close(struct net_device *dev)
 		if (skb) {
 			pci_unmap_single(pdev, ep->rx_ring[i].bufaddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 	 ep->rx_buf_sz, PCI_DMA_FROMDEVICE);
+=======
+					 ep->rx_buf_sz, PCI_DMA_FROMDEVICE);
+>>>>>>> v3.18
 =======
 					 ep->rx_buf_sz, PCI_DMA_FROMDEVICE);
 >>>>>>> v3.18
@@ -1673,7 +1803,10 @@ static void epic_remove_one(struct pci_dev *pdev)
 	free_netdev(dev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* pci_power_off(pdev, -1); */
@@ -1729,8 +1862,12 @@ static int __init epic_init (void)
 /* when a module, this is printed whether or not devices are found in probe */
 #ifdef MODULE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk (KERN_INFO "%s%s",
 		version, version2);
+=======
+	pr_info("%s%s\n", version, version2);
+>>>>>>> v3.18
 =======
 	pr_info("%s%s\n", version, version2);
 >>>>>>> v3.18

@@ -197,7 +197,11 @@ static void netx_txint(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void netx_rxint(struct uart_port *port)
+=======
+static void netx_rxint(struct uart_port *port, unsigned long *flags)
+>>>>>>> v3.18
 =======
 static void netx_rxint(struct uart_port *port, unsigned long *flags)
 >>>>>>> v3.18
@@ -241,7 +245,13 @@ static void netx_rxint(struct uart_port *port, unsigned long *flags)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_flip_buffer_push(&port->state->port);
+=======
+	spin_unlock_irqrestore(&port->lock, *flags);
+	tty_flip_buffer_push(&port->state->port);
+	spin_lock_irqsave(&port->lock, *flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&port->lock, *flags);
 	tty_flip_buffer_push(&port->state->port);
@@ -261,7 +271,11 @@ static irqreturn_t netx_int(int irq, void *dev_id)
 	while (status) {
 		if (status & IIR_RIS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			netx_rxint(port);
+=======
+			netx_rxint(port, &flags);
+>>>>>>> v3.18
 =======
 			netx_rxint(port, &flags);
 >>>>>>> v3.18
@@ -432,7 +446,11 @@ netx_set_termios(struct uart_port *port, struct ktermios *termios,
 
 	port->read_status_mask = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -712,8 +730,11 @@ static int serial_netx_remove(struct platform_device *pdev)
 	struct netx_port *sport = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sport)

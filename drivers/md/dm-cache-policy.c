@@ -120,7 +120,11 @@ struct dm_cache_policy *dm_cache_policy_create(const char *name,
 	if (!type) {
 		DMWARN("unknown policy type");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-EINVAL);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(-EINVAL);
 >>>>>>> v3.18
@@ -130,7 +134,11 @@ struct dm_cache_policy *dm_cache_policy_create(const char *name,
 	if (!p) {
 		put_policy(type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-ENOMEM);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(-ENOMEM);
 >>>>>>> v3.18
@@ -155,11 +163,17 @@ const char *dm_cache_policy_get_name(struct dm_cache_policy *p)
 	struct dm_cache_policy_type *t = p->private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* if t->real is set then an alias was used (e.g. "default") */
 	if (t->real)
 		return t->real->name;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return t->name;
 }

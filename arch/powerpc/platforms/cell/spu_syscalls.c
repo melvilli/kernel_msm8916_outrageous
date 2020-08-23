@@ -26,6 +26,10 @@
 #include <linux/syscalls.h>
 #include <linux/rcupdate.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/binfmts.h>
+>>>>>>> v3.18
 =======
 #include <linux/binfmts.h>
 >>>>>>> v3.18
@@ -115,6 +119,10 @@ asmlinkage long sys_spu_run(int fd, __u32 __user *unpc, __u32 __user *ustatus)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_COREDUMP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_COREDUMP
 >>>>>>> v3.18
@@ -135,7 +143,11 @@ int elf_coredump_extra_notes_size(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int elf_coredump_extra_notes_write(struct file *file, loff_t *foffset)
+=======
+int elf_coredump_extra_notes_write(struct coredump_params *cprm)
+>>>>>>> v3.18
 =======
 int elf_coredump_extra_notes_write(struct coredump_params *cprm)
 >>>>>>> v3.18
@@ -148,7 +160,11 @@ int elf_coredump_extra_notes_write(struct coredump_params *cprm)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = calls->coredump_extra_notes_write(file, foffset);
+=======
+	ret = calls->coredump_extra_notes_write(cprm);
+>>>>>>> v3.18
 =======
 	ret = calls->coredump_extra_notes_write(cprm);
 >>>>>>> v3.18
@@ -158,6 +174,10 @@ int elf_coredump_extra_notes_write(struct coredump_params *cprm)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -190,7 +210,11 @@ void unregister_spu_syscalls(struct spufs_calls *calls)
 {
 	BUG_ON(spufs_calls->owner != calls->owner);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_assign_pointer(spufs_calls, NULL);
+=======
+	RCU_INIT_POINTER(spufs_calls, NULL);
+>>>>>>> v3.18
 =======
 	RCU_INIT_POINTER(spufs_calls, NULL);
 >>>>>>> v3.18

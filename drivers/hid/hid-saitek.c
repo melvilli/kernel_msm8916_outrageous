@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  HID driver for Saitek devices, currently only the PS1000 (USB gamepad).
  *  Fixes the HID report descriptor by removing a non-existent axis and
  *  clearing the constant bit on the input reports for buttons and d-pad.
@@ -7,6 +8,8 @@
  *
  *  Copyright (c) 2012 Andreas Hübner
 =======
+=======
+>>>>>>> v3.18
  *  HID driver for Saitek devices.
  *
  *  PS1000 (USB gamepad):
@@ -20,6 +23,9 @@
  *  buttons. All three press events are mapped to one button and the
  *  missing release event is generated immediately.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -38,6 +44,7 @@
 #include "hid-ids.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __u8 *saitek_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 		unsigned int *rsize)
 {
@@ -45,6 +52,8 @@ static __u8 *saitek_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 			&& rdesc[94] == 0x81 && rdesc[95] == 0x03
 			&& rdesc[110] == 0x81 && rdesc[111] == 0x03) {
 =======
+=======
+>>>>>>> v3.18
 #define SAITEK_FIX_PS1000	0x0001
 #define SAITEK_RELEASE_MODE_RAT7	0x0002
 #define SAITEK_RELEASE_MODE_MMO7	0x0004
@@ -96,6 +105,9 @@ static __u8 *saitek_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 			rdesc[20] == 0x09 && rdesc[21] == 0x33 &&
 			rdesc[94] == 0x81 && rdesc[95] == 0x03 &&
 			rdesc[110] == 0x81 && rdesc[111] == 0x03) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		hid_info(hdev, "Fixing up Saitek PS1000 report descriptor\n");
@@ -113,9 +125,12 @@ static __u8 *saitek_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct hid_device_id saitek_devices[] = {
 	{ HID_USB_DEVICE(USB_VENDOR_ID_SAITEK, USB_DEVICE_ID_SAITEK_PS1000)},
 =======
+=======
+>>>>>>> v3.18
 static int saitek_raw_event(struct hid_device *hdev,
 		struct hid_report *report, u8 *raw_data, int size)
 {
@@ -203,6 +218,9 @@ static const struct hid_device_id saitek_devices[] = {
 		.driver_data = SAITEK_RELEASE_MODE_RAT7 },
 	{ HID_USB_DEVICE(USB_VENDOR_ID_SAITEK, USB_DEVICE_ID_SAITEK_MMO7),
 		.driver_data = SAITEK_RELEASE_MODE_MMO7 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };
@@ -213,12 +231,18 @@ static struct hid_driver saitek_driver = {
 	.name = "saitek",
 	.id_table = saitek_devices,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.report_fixup = saitek_report_fixup
 =======
+=======
+>>>>>>> v3.18
 	.probe = saitek_probe,
 	.report_fixup = saitek_report_fixup,
 	.raw_event = saitek_raw_event,
 	.event = saitek_event,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 module_hid_driver(saitek_driver);

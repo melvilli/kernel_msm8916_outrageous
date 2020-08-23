@@ -131,8 +131,13 @@ static inline void nv_write_ptv(struct drm_device *dev, uint32_t reg,
 				uint32_t val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nouveau_dev(dev);
 	nv_wr32(device, reg, val);
+=======
+	struct nvif_device *device = &nouveau_drm(dev)->device;
+	nvif_wr32(device, reg, val);
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &nouveau_drm(dev)->device;
 	nvif_wr32(device, reg, val);
@@ -142,8 +147,13 @@ static inline void nv_write_ptv(struct drm_device *dev, uint32_t reg,
 static inline uint32_t nv_read_ptv(struct drm_device *dev, uint32_t reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nouveau_dev(dev);
 	return nv_rd32(device, reg);
+=======
+	struct nvif_device *device = &nouveau_drm(dev)->device;
+	return nvif_rd32(device, reg);
+>>>>>>> v3.18
 =======
 	struct nvif_device *device = &nouveau_drm(dev)->device;
 	return nvif_rd32(device, reg);

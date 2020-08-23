@@ -16,7 +16,11 @@
 #include "affs.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int affs_readdir(struct file *, void *, filldir_t);
+=======
+static int affs_readdir(struct file *, struct dir_context *);
+>>>>>>> v3.18
 =======
 static int affs_readdir(struct file *, struct dir_context *);
 >>>>>>> v3.18
@@ -25,7 +29,11 @@ const struct file_operations affs_dir_operations = {
 	.read		= generic_read_dir,
 	.llseek		= generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= affs_readdir,
+=======
+	.iterate	= affs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= affs_readdir,
 >>>>>>> v3.18
@@ -49,6 +57,7 @@ const struct inode_operations affs_dir_inode_operations = {
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 affs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode		*inode = file_inode(filp);
@@ -56,18 +65,24 @@ affs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 	struct buffer_head	*dir_bh;
 	struct buffer_head	*fh_bh;
 =======
+=======
+>>>>>>> v3.18
 affs_readdir(struct file *file, struct dir_context *ctx)
 {
 	struct inode		*inode = file_inode(file);
 	struct super_block	*sb = inode->i_sb;
 	struct buffer_head	*dir_bh = NULL;
 	struct buffer_head	*fh_bh = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char		*name;
 	int			 namelen;
 	u32			 i;
 	int			 hash_pos;
 	int			 chain_pos;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32			 f_pos;
 	u32			 ino;
@@ -100,6 +115,8 @@ affs_readdir(struct file *file, struct dir_context *ctx)
 	chain_pos = (f_pos - 2) & 0xffff;
 	hash_pos  = (f_pos - 2) >> 16;
 =======
+=======
+>>>>>>> v3.18
 	u32			 ino;
 	int			 error = 0;
 
@@ -115,11 +132,15 @@ affs_readdir(struct file *file, struct dir_context *ctx)
 	affs_lock_dir(inode);
 	chain_pos = (ctx->pos - 2) & 0xffff;
 	hash_pos  = (ctx->pos - 2) >> 16;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (chain_pos == 0xffff) {
 		affs_warning(sb, "readdir", "More than 65535 entries in chain");
 		chain_pos = 0;
 		hash_pos++;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		filp->f_pos = ((hash_pos << 16) | chain_pos) + 2;
 	}
@@ -127,20 +148,31 @@ affs_readdir(struct file *file, struct dir_context *ctx)
 	if (!dir_bh)
 		goto readdir_out;
 =======
+=======
+>>>>>>> v3.18
 		ctx->pos = ((hash_pos << 16) | chain_pos) + 2;
 	}
 	dir_bh = affs_bread(sb, inode->i_ino);
 	if (!dir_bh)
 		goto out_unlock_dir;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* If the directory hasn't changed since the last call to readdir(),
 	 * we can jump directly to where we left off.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ino = (u32)(long)filp->private_data;
 	if (ino && filp->f_version == inode->i_version) {
 		pr_debug("AFFS: readdir() left off=%d\n", ino);
+=======
+	ino = (u32)(long)file->private_data;
+	if (ino && file->f_version == inode->i_version) {
+		pr_debug("readdir() left off=%d\n", ino);
+>>>>>>> v3.18
 =======
 	ino = (u32)(long)file->private_data;
 	if (ino && file->f_version == inode->i_version) {
@@ -155,7 +187,12 @@ affs_readdir(struct file *file, struct dir_context *ctx)
 		if (!fh_bh) {
 			affs_error(sb, "readdir","Cannot read block %d", i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto readdir_out;
+=======
+			error = -EIO;
+			goto out_brelse_dir;
+>>>>>>> v3.18
 =======
 			error = -EIO;
 			goto out_brelse_dir;
@@ -174,7 +211,11 @@ affs_readdir(struct file *file, struct dir_context *ctx)
 		if (!ino)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		f_pos = (hash_pos << 16) + 2;
+=======
+		ctx->pos = (hash_pos << 16) + 2;
+>>>>>>> v3.18
 =======
 		ctx->pos = (hash_pos << 16) + 2;
 >>>>>>> v3.18
@@ -183,8 +224,14 @@ inside:
 			fh_bh = affs_bread(sb, ino);
 			if (!fh_bh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				affs_error(sb, "readdir","Cannot read block %d", ino);
 				goto readdir_done;
+=======
+				affs_error(sb, "readdir",
+					   "Cannot read block %d", ino);
+				break;
+>>>>>>> v3.18
 =======
 				affs_error(sb, "readdir",
 					   "Cannot read block %d", ino);
@@ -195,6 +242,7 @@ inside:
 			namelen = min(AFFS_TAIL(sb, fh_bh)->name[0], (u8)30);
 			name = AFFS_TAIL(sb, fh_bh)->name + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_debug("AFFS: readdir(): filldir(\"%.*s\", ino=%u), hash=%d, f_pos=%x\n",
 				 namelen, name, ino, hash_pos, f_pos);
 			if (filldir(dirent, name, namelen, f_pos, ino, DT_UNKNOWN) < 0)
@@ -202,6 +250,8 @@ inside:
 			stored++;
 			f_pos++;
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("readdir(): dir_emit(\"%.*s\", "
 				 "ino=%u), hash=%d, f_pos=%x\n",
 				 namelen, name, ino, hash_pos, (u32)ctx->pos);
@@ -209,12 +259,16 @@ inside:
 			if (!dir_emit(ctx, name, namelen, ino, DT_UNKNOWN))
 				goto done;
 			ctx->pos++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ino = be32_to_cpu(AFFS_TAIL(sb, fh_bh)->hash_chain);
 			affs_brelse(fh_bh);
 			fh_bh = NULL;
 		} while (ino);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 readdir_done:
 	filp->f_pos = f_pos;
@@ -229,6 +283,8 @@ readdir_out:
 	pr_debug("AFFS: readdir()=%d\n", stored);
 	return res;
 =======
+=======
+>>>>>>> v3.18
 done:
 	file->f_version = inode->i_version;
 	file->private_data = (void *)(long)ino;
@@ -240,5 +296,8 @@ out_brelse_dir:
 out_unlock_dir:
 	affs_unlock_dir(inode);
 	return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

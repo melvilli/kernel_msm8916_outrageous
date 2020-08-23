@@ -39,7 +39,11 @@
 #include <linux/mutex.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -198,8 +202,12 @@ static int adb_scan_bus(void)
 
 				noMovement = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}
 			else {
+=======
+			} else {
+>>>>>>> v3.18
 =======
 			} else {
 >>>>>>> v3.18
@@ -272,7 +280,11 @@ adb_reset_bus(void)
  * notify clients before sleep
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adb_suspend(struct platform_device *dev, pm_message_t state)
+=======
+static int __adb_suspend(struct platform_device *dev, pm_message_t state)
+>>>>>>> v3.18
 =======
 static int __adb_suspend(struct platform_device *dev, pm_message_t state)
 >>>>>>> v3.18
@@ -289,11 +301,14 @@ static int __adb_suspend(struct platform_device *dev, pm_message_t state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * reset bus after sleep
  */
 static int adb_resume(struct platform_device *dev)
 =======
+=======
+>>>>>>> v3.18
 static int adb_suspend(struct device *dev)
 {
 	return __adb_suspend(to_platform_device(dev), PMSG_SUSPEND);
@@ -313,6 +328,9 @@ static int adb_poweroff(struct device *dev)
  * reset bus after sleep
  */
 static int __adb_resume(struct platform_device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	adb_got_sleep = 0;
@@ -322,12 +340,18 @@ static int __adb_resume(struct platform_device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int adb_resume(struct device *dev)
 {
 	return __adb_resume(to_platform_device(dev));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PM */
 
@@ -435,6 +459,10 @@ adb_poll(void)
 	adb_controller->poll();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(adb_poll);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(adb_poll);
 >>>>>>> v3.18
@@ -488,6 +516,10 @@ adb_request(struct adb_request *req, void (*done)(struct adb_request *),
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(adb_request);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(adb_request);
 >>>>>>> v3.18
@@ -527,6 +559,10 @@ adb_register(int default_id, int handler_id, struct adb_ids *ids,
 	return ids->nids;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(adb_register);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(adb_register);
 >>>>>>> v3.18
@@ -552,6 +588,10 @@ adb_unregister(int index)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(adb_unregister);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(adb_unregister);
 >>>>>>> v3.18
@@ -561,7 +601,11 @@ adb_input(unsigned char *buf, int nb, int autopoll)
 {
 	int i, id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static int dump_adb_input = 0;
+=======
+	static int dump_adb_input;
+>>>>>>> v3.18
 =======
 	static int dump_adb_input;
 >>>>>>> v3.18
@@ -626,6 +670,10 @@ adb_try_handler_change(int address, int new_id)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(adb_try_handler_change);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(adb_try_handler_change);
 >>>>>>> v3.18
@@ -691,8 +739,12 @@ do_adb_query(struct adb_request *req)
 	int	ret = -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(req->data[1])
 	{
+=======
+	switch(req->data[1]) {
+>>>>>>> v3.18
 =======
 	switch(req->data[1]) {
 >>>>>>> v3.18
@@ -768,7 +820,11 @@ static ssize_t adb_read(struct file *file, char __user *buf,
 	struct adbdev_state *state = file->private_data;
 	struct adb_request *req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_t wait = __WAITQUEUE_INITIALIZER(wait,current);
+=======
+	DECLARE_WAITQUEUE(wait, current);
+>>>>>>> v3.18
 =======
 	DECLARE_WAITQUEUE(wait, current);
 >>>>>>> v3.18
@@ -869,8 +925,13 @@ static ssize_t adb_write(struct file *file, const char __user *buf,
 	/* Special case for ADB_BUSRESET request, all others are sent to
 	   the controller */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if ((req->data[0] == ADB_PACKET)&&(count > 1)
 		&&(req->data[1] == ADB_BUSRESET)) {
+=======
+	else if ((req->data[0] == ADB_PACKET) && (count > 1)
+		&& (req->data[1] == ADB_BUSRESET)) {
+>>>>>>> v3.18
 =======
 	else if ((req->data[0] == ADB_PACKET) && (count > 1)
 		&& (req->data[1] == ADB_BUSRESET)) {
@@ -911,6 +972,7 @@ static const struct file_operations adb_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_driver adb_pfdrv = {
 	.driver = {
 		.name = "adb",
@@ -920,6 +982,8 @@ static struct platform_driver adb_pfdrv = {
 	.resume = adb_resume,
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 static const struct dev_pm_ops adb_dev_pm_ops = {
 	.suspend = adb_suspend,
@@ -939,6 +1003,9 @@ static struct platform_driver adb_pfdrv = {
 		.pm = &adb_dev_pm_ops,
 #endif
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

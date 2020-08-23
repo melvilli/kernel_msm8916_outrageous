@@ -2,6 +2,7 @@
 #define _LINUX_SHM_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/page.h>
 #include <uapi/linux/shm.h>
 
@@ -12,6 +13,8 @@ struct shmid_kernel /* private to the kernel */
 	struct kern_ipc_perm	shm_perm;
 	struct file *		shm_file;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/list.h>
 #include <asm/page.h>
 #include <uapi/linux/shm.h>
@@ -21,6 +24,9 @@ struct shmid_kernel /* private to the kernel */
 {	
 	struct kern_ipc_perm	shm_perm;
 	struct file		*shm_file;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long		shm_nattch;
 	unsigned long		shm_segsz;
@@ -34,6 +40,10 @@ struct shmid_kernel /* private to the kernel */
 	/* The task created the shm object.  NULL if the task is dead. */
 	struct task_struct	*shm_creator;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head	shm_clist;	/* list by creator */
+>>>>>>> v3.18
 =======
 	struct list_head	shm_clist;	/* list by creator */
 >>>>>>> v3.18
@@ -62,12 +72,15 @@ struct shmid_kernel /* private to the kernel */
 
 #ifdef CONFIG_SYSVIPC
 <<<<<<< HEAD
+<<<<<<< HEAD
 long do_shmat(int shmid, char __user *shmaddr, int shmflg, unsigned long *addr,
 	      unsigned long shmlba);
 extern int is_file_shm_hugepages(struct file *file);
 extern void exit_shm(struct task_struct *task);
 #else
 =======
+=======
+>>>>>>> v3.18
 struct sysv_shm {
 	struct list_head shm_clist;
 };
@@ -82,6 +95,9 @@ struct sysv_shm {
 	/* empty */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline long do_shmat(int shmid, char __user *shmaddr,
 			    int shmflg, unsigned long *addr,
@@ -97,6 +113,12 @@ static inline void exit_shm(struct task_struct *task)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void shm_init_task(struct task_struct *task)
+{
+}
+>>>>>>> v3.18
 =======
 static inline void shm_init_task(struct task_struct *task)
 {

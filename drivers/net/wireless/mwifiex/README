@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Copyright (C) 2011, Marvell International Ltd.
+=======
+# Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
 # Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -136,7 +140,11 @@ info
 	hs_activated = <0/1, extended host sleep not activated/activated>
 	num_tx_timeout = <number of Tx timeout>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_cmd_timeout = <number of timeout commands>
+=======
+	is_cmd_timedout = <0/1 command timeout not occurred/occurred>
+>>>>>>> v3.18
 =======
 	is_cmd_timedout = <0/1 command timeout not occurred/occurred>
 >>>>>>> v3.18
@@ -203,7 +211,10 @@ rdeeprom
 		echo "0 20" > rdeeprom      : Read 20 bytes of EEPROM data from offset 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 hscfg
 	This command is used to debug/simulate host sleep feature using
 	different configuration parameters.
@@ -234,6 +245,9 @@ hscfg
 		echo "2 1 0xff" > hscfg  : Unicast data, GPIO 1; Wait for host
 					   to ack before sending wakeup event
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 getlog
         This command is used to get the statistics available in the station.
@@ -242,7 +256,10 @@ getlog
 	cat getlog
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 fw_dump
 	This command is used to dump firmware memory into files.
 	Separate file will be created for each memory segment.
@@ -250,5 +267,8 @@ fw_dump
 
 	cat fw_dump
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ===============================================================================

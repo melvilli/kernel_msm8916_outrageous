@@ -10,6 +10,7 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "r8a7740.dtsi"
 
 / {
@@ -19,6 +20,8 @@
 	chosen {
 		bootargs = "console=tty0 console=ttySC1,115200 earlyprintk=sh-sci.1,115200 ignore_loglevel root=/dev/nfs ip=dhcp nfsroot=,rsize=4096,wsize=4096 rw";
 =======
+=======
+>>>>>>> v3.18
 #include "r8a7740.dtsi"
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
@@ -35,6 +38,9 @@
 
 	chosen {
 		bootargs = "console=tty0 console=ttySC1,115200 earlyprintk=sh-sci.1,115200 ignore_loglevel root=/dev/nfs ip=dhcp rw";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -43,7 +49,10 @@
 		reg = <0x40000000 0x20000000>;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	reg_3p3v: regulator@0 {
 		compatible = "regulator-fixed";
@@ -310,5 +319,8 @@
 	pinctrl-names = "default";
 
 	status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

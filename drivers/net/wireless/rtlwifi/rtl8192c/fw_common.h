@@ -37,6 +37,10 @@
 #define FW_8192C_POLLING_DELAY			5
 #define FW_8192C_POLLING_TIMEOUT_COUNT		100
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NORMAL_CHIP				BIT(4)
+>>>>>>> v3.18
 =======
 #define NORMAL_CHIP				BIT(4)
 >>>>>>> v3.18
@@ -46,7 +50,10 @@
 	(le16_to_cpu(_pfwhdr->signature)&0xFFF0) == 0x88C0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CUT_VERSION_MASK		(BIT(6)|BIT(7))
 #define CHIP_VENDOR_UMC			BIT(5)
 #define CHIP_VENDOR_UMC_B_CUT		BIT(6) /* Chip version for ECO */
@@ -73,6 +80,9 @@
 	((GET_CVID_CUT_VERSION(version) == \
 		CHIP_VENDOR_UMC_B_CUT) ? true : false) : false)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rtl92c_firmware_header {
 	__le16 signature;
@@ -94,6 +104,7 @@ struct rtl92c_firmware_header {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum rtl8192c_h2c_cmd {
 	H2C_AP_OFFLOAD = 0,
 	H2C_SETPWRMODE = 1,
@@ -107,6 +118,8 @@ enum rtl8192c_h2c_cmd {
 	MAX_H2CCMD
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define pagenum_128(_len)	(u32)(((_len)>>7) + ((_len)&0x7F ? 1 : 0))
@@ -132,7 +145,13 @@ void rtl92c_fill_h2c_cmd(struct ieee80211_hw *hw, u8 element_id,
 void rtl92c_firmware_selfreset(struct ieee80211_hw *hw);
 void rtl92c_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished);
+=======
+void rtl92c_set_fw_rsvdpagepkt
+	(struct ieee80211_hw *hw,
+	 bool (*cmd_send_packet)(struct ieee80211_hw *, struct sk_buff *));
+>>>>>>> v3.18
 =======
 void rtl92c_set_fw_rsvdpagepkt
 	(struct ieee80211_hw *hw,

@@ -14,6 +14,7 @@
 #include <asm/mipsregs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro	fpu_save_16even thread tmp=t0
 	cfc1	\tmp, fcr31
 	sdc1	$f0,  THREAD_FPR0(\thread)
@@ -110,6 +111,8 @@
 1:	fpu_restore_16even \thread \tmp
 	.endm
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.macro	cpu_save_nonscratch thread

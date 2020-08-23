@@ -183,6 +183,10 @@ struct at_lli {
  * @desc_node: node on the channed descriptors list
  * @len: total transaction bytecount
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @tx_width: transfer width
+>>>>>>> v3.18
 =======
  * @tx_width: transfer width
 >>>>>>> v3.18
@@ -197,6 +201,10 @@ struct at_desc {
 	struct list_head		desc_node;
 	size_t				len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32				tx_width;
+>>>>>>> v3.18
 =======
 	u32				tx_width;
 >>>>>>> v3.18
@@ -220,6 +228,10 @@ enum atc_status {
 	ATC_IS_ERROR = 0,
 	ATC_IS_PAUSED = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ATC_IS_BTC = 2,
+>>>>>>> v3.18
 =======
 	ATC_IS_BTC = 2,
 >>>>>>> v3.18
@@ -241,6 +253,10 @@ enum atc_status {
  * @save_dscr: for cyclic operations, preserve next descriptor address in
  *             the cyclic list on suspend/resume cycle
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @remain_desc: to save remain desc length
+>>>>>>> v3.18
 =======
  * @remain_desc: to save remain desc length
 >>>>>>> v3.18
@@ -263,6 +279,10 @@ struct at_dma_chan {
 	u32			save_cfg;
 	u32			save_dscr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32			remain_desc;
+>>>>>>> v3.18
 =======
 	u32			remain_desc;
 >>>>>>> v3.18
@@ -363,10 +383,13 @@ static struct device *chan2dev(struct dma_chan *chan)
 	return &chan->dev->device;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device *chan2parent(struct dma_chan *chan)
 {
 	return chan->dev->device.parent;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

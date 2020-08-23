@@ -32,7 +32,10 @@ config 9P_FS_POSIX_ACL
 
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 
 config 9P_FS_SECURITY
@@ -46,4 +49,7 @@ config 9P_FS_SECURITY
 
           If you are not using a security module that requires using
           extended attributes for file security labels, say N.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -60,7 +60,11 @@
 #include <asm/mmu_context.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void exit_mm(struct task_struct * tsk);
+=======
+static void exit_mm(struct task_struct *tsk);
+>>>>>>> v3.18
 =======
 static void exit_mm(struct task_struct *tsk);
 >>>>>>> v3.18
@@ -120,6 +124,7 @@ static void __exit_signal(struct task_struct *tsk)
 		if (tsk == sig->curr_target)
 			sig->curr_target = next_thread(tsk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Accumulate here the counters for all threads but the
 		 * group leader as they die, so they can be added into
@@ -147,6 +152,8 @@ static void __exit_signal(struct task_struct *tsk)
 	sig->nr_threads--;
 	__unhash_process(tsk, group_dead);
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	/*
@@ -174,6 +181,9 @@ static void __exit_signal(struct task_struct *tsk)
 	sig->nr_threads--;
 	__unhash_process(tsk, group_dead);
 	write_sequnlock(&sig->stats_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -186,7 +196,11 @@ static void __exit_signal(struct task_struct *tsk)
 
 	__cleanup_sighand(sighand);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_tsk_thread_flag(tsk,TIF_SIGPENDING);
+=======
+	clear_tsk_thread_flag(tsk, TIF_SIGPENDING);
+>>>>>>> v3.18
 =======
 	clear_tsk_thread_flag(tsk, TIF_SIGPENDING);
 >>>>>>> v3.18
@@ -207,7 +221,11 @@ static void delayed_put_task_struct(struct rcu_head *rhp)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void release_task(struct task_struct * p)
+=======
+void release_task(struct task_struct *p)
+>>>>>>> v3.18
 =======
 void release_task(struct task_struct *p)
 >>>>>>> v3.18
@@ -235,7 +253,12 @@ repeat:
 	zap_leader = 0;
 	leader = p->group_leader;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (leader != p && thread_group_empty(leader) && leader->exit_state == EXIT_ZOMBIE) {
+=======
+	if (leader != p && thread_group_empty(leader)
+			&& leader->exit_state == EXIT_ZOMBIE) {
+>>>>>>> v3.18
 =======
 	if (leader != p && thread_group_empty(leader)
 			&& leader->exit_state == EXIT_ZOMBIE) {
@@ -289,7 +312,12 @@ struct pid *session_of_pgrp(struct pid *pgrp)
  * "I ask you, have you ever known what it is to be an orphan?"
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int will_become_orphaned_pgrp(struct pid *pgrp, struct task_struct *ignored_task)
+=======
+static int will_become_orphaned_pgrp(struct pid *pgrp,
+					struct task_struct *ignored_task)
+>>>>>>> v3.18
 =======
 static int will_become_orphaned_pgrp(struct pid *pgrp,
 					struct task_struct *ignored_task)
@@ -347,9 +375,15 @@ kill_orphaned_pgrp(struct task_struct *tsk, struct task_struct *parent)
 
 	if (!parent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 /* exit: our father is in a different pgrp than
 		  * we are and we were the only connection outside.
 		  */
+=======
+		/* exit: our father is in a different pgrp than
+		 * we are and we were the only connection outside.
+		 */
+>>>>>>> v3.18
 =======
 		/* exit: our father is in a different pgrp than
 		 * we are and we were the only connection outside.
@@ -371,6 +405,7 @@ kill_orphaned_pgrp(struct task_struct *tsk, struct task_struct *parent)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __set_special_pids(struct pid *pid)
 {
@@ -426,6 +461,9 @@ EXPORT_SYMBOL(disallow_signal);
 =======
 #ifdef CONFIG_MEMCG
 >>>>>>> v3.18
+=======
+#ifdef CONFIG_MEMCG
+>>>>>>> v3.18
 /*
  * A task is exiting.   If it owned this mm, find a new owner for the mm.
  */
@@ -469,6 +507,7 @@ retry:
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Search through everything else. We should not get
 	 * here often
 	 */
@@ -478,6 +517,8 @@ retry:
 	} while_each_thread(g, c);
 
 =======
+=======
+>>>>>>> v3.18
 	 * Search through everything else, we should not get here often.
 	 */
 	for_each_process(g) {
@@ -490,6 +531,9 @@ retry:
 				break;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	read_unlock(&tasklist_lock);
 	/*
@@ -523,7 +567,11 @@ assign_new_owner:
 	put_task_struct(c);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_MM_OWNER */
+=======
+#endif /* CONFIG_MEMCG */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_MEMCG */
 >>>>>>> v3.18
@@ -533,16 +581,22 @@ assign_new_owner:
  * aren't already..
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void exit_mm(struct task_struct * tsk)
 {
 	struct mm_struct *mm = tsk->mm;
 	struct core_state *core_state;
 	int mm_released;
 =======
+=======
+>>>>>>> v3.18
 static void exit_mm(struct task_struct *tsk)
 {
 	struct mm_struct *mm = tsk->mm;
 	struct core_state *core_state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mm_release(tsk, mm);
@@ -561,6 +615,10 @@ static void exit_mm(struct task_struct *tsk)
 	if (core_state) {
 		struct core_thread self;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -594,10 +652,15 @@ static void exit_mm(struct task_struct *tsk)
 	task_unlock(tsk);
 	mm_update_next_owner(mm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mm_released = mmput(mm);
 	if (mm_released)
 		set_tsk_thread_flag(tsk, TIF_MM_RELEASED);
+=======
+	mmput(mm);
+	clear_thread_flag(TIF_MEMDIE);
+>>>>>>> v3.18
 =======
 	mmput(mm);
 	clear_thread_flag(TIF_MEMDIE);
@@ -673,6 +736,12 @@ static void reparent_leader(struct task_struct *father, struct task_struct *p,
 {
 	list_move_tail(&p->sibling, &p->real_parent->children);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	if (p->exit_state == EXIT_DEAD)
+		return;
+>>>>>>> v3.18
 =======
 
 	if (p->exit_state == EXIT_DEAD)
@@ -685,6 +754,7 @@ static void reparent_leader(struct task_struct *father, struct task_struct *p,
 	if (same_thread_group(p->real_parent, father))
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * We don't want people slaying init.
@@ -699,6 +769,11 @@ static void reparent_leader(struct task_struct *father, struct task_struct *p,
 	if (p->exit_state == EXIT_DEAD)
 		return;
 
+=======
+	/* We don't want people slaying init. */
+	p->exit_signal = SIGCHLD;
+
+>>>>>>> v3.18
 =======
 	/* We don't want people slaying init. */
 	p->exit_signal = SIGCHLD;
@@ -732,6 +807,10 @@ static void forget_original_parent(struct task_struct *father)
 	list_for_each_entry_safe(p, n, &father->children, sibling) {
 		struct task_struct *t = p;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -769,7 +848,11 @@ static void exit_notify(struct task_struct *tsk, int group_dead)
 	 * This does two things:
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
   	 * A.  Make init inherit all the child processes
+=======
+	 * A.  Make init inherit all the child processes
+>>>>>>> v3.18
 =======
 	 * A.  Make init inherit all the child processes
 >>>>>>> v3.18
@@ -815,7 +898,10 @@ static void check_stack_usage(void)
 	static int lowest_to_date = THREAD_SIZE;
 	unsigned long free;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int islower = false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -826,6 +912,7 @@ static void check_stack_usage(void)
 
 	spin_lock(&low_water_lock);
 	if (free < lowest_to_date) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		lowest_to_date = free;
 		islower = true;
@@ -838,11 +925,16 @@ static void check_stack_usage(void)
 				current->comm, task_pid_nr(current), free);
 	}
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("%s (%d) used greatest stack depth: %lu bytes left\n",
 			current->comm, task_pid_nr(current), free);
 		lowest_to_date = free;
 	}
 	spin_unlock(&low_water_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #else
@@ -854,6 +946,10 @@ void do_exit(long code)
 	struct task_struct *tsk = current;
 	int group_dead;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TASKS_RCU(int tasks_rcu_i);
+>>>>>>> v3.18
 =======
 	TASKS_RCU(int tasks_rcu_i);
 >>>>>>> v3.18
@@ -886,12 +982,16 @@ void do_exit(long code)
 	 */
 	if (unlikely(tsk->flags & PF_EXITING)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PANIC_ON_RECURSIVE_FAULT
 		panic("Recursive fault!\n");
 #else
 		printk(KERN_ALERT
 			"Fixing recursive fault but reboot is needed!\n");
 #endif
+=======
+		pr_alert("Fixing recursive fault but reboot is needed!\n");
+>>>>>>> v3.18
 =======
 		pr_alert("Fixing recursive fault but reboot is needed!\n");
 >>>>>>> v3.18
@@ -911,6 +1011,7 @@ void do_exit(long code)
 
 	exit_signals(tsk);  /* sets PF_EXITING */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	sched_exit(tsk);
 
@@ -918,6 +1019,8 @@ void do_exit(long code)
 		su_exit();
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -929,9 +1032,15 @@ void do_exit(long code)
 
 	if (unlikely(in_atomic()))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "note: %s[%d] exited with preempt_count %d\n",
 				current->comm, task_pid_nr(current),
 				preempt_count());
+=======
+		pr_info("note: %s[%d] exited with preempt_count %d\n",
+			current->comm, task_pid_nr(current),
+			preempt_count());
+>>>>>>> v3.18
 =======
 		pr_info("note: %s[%d] exited with preempt_count %d\n",
 			current->comm, task_pid_nr(current),
@@ -972,7 +1081,10 @@ void do_exit(long code)
 	exit_task_namespaces(tsk);
 	exit_task_work(tsk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	check_stack_usage();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	exit_thread();
@@ -986,6 +1098,7 @@ void do_exit(long code)
 	perf_event_exit_task(tsk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cgroup_exit(tsk, 1);
 
 	module_put(task_thread_info(tsk)->exec_domain->module);
@@ -998,6 +1111,8 @@ void do_exit(long code)
 
 	exit_notify(tsk, group_dead);
 =======
+=======
+>>>>>>> v3.18
 	cgroup_exit(tsk);
 
 	module_put(task_thread_info(tsk)->exec_domain->module);
@@ -1010,6 +1125,9 @@ void do_exit(long code)
 	TASKS_RCU(tasks_rcu_i = __srcu_read_lock(&tasks_rcu_exit_srcu));
 	exit_notify(tsk, group_dead);
 	proc_exit_connector(tsk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_NUMA
 	task_lock(tsk);
@@ -1044,6 +1162,10 @@ void do_exit(long code)
 	validate_creds_for_do_exit(tsk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	check_stack_usage();
+>>>>>>> v3.18
 =======
 	check_stack_usage();
 >>>>>>> v3.18
@@ -1052,6 +1174,10 @@ void do_exit(long code)
 		__this_cpu_add(dirty_throttle_leaks, tsk->nr_dirtied);
 	exit_rcu();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TASKS_RCU(__srcu_read_unlock(&tasks_rcu_exit_srcu, tasks_rcu_i));
+>>>>>>> v3.18
 =======
 	TASKS_RCU(__srcu_read_unlock(&tasks_rcu_exit_srcu, tasks_rcu_i));
 >>>>>>> v3.18
@@ -1081,7 +1207,10 @@ void do_exit(long code)
 		cpu_relax();	/* For when BUG is null */
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(do_exit);
@@ -1094,7 +1223,10 @@ void complete_and_exit(struct completion *comp, long code)
 	do_exit(code);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(complete_and_exit);
@@ -1120,6 +1252,10 @@ do_group_exit(int exit_code)
 	else if (!thread_group_empty(current)) {
 		struct sighand_struct *const sighand = current->sighand;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1256,6 +1392,7 @@ static int wait_task_zombie(struct wait_opts *wo, struct task_struct *p)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Try to move the task's state to DEAD
 	 * only one thread is allowed to do this:
@@ -1268,6 +1405,8 @@ static int wait_task_zombie(struct wait_opts *wo, struct task_struct *p)
 
 	traced = ptrace_reparented(p);
 =======
+=======
+>>>>>>> v3.18
 	traced = ptrace_reparented(p);
 	/*
 	 * Move the task's state to DEAD/TRACE, only one thread can do this.
@@ -1275,6 +1414,9 @@ static int wait_task_zombie(struct wait_opts *wo, struct task_struct *p)
 	state = traced && thread_group_leader(p) ? EXIT_TRACE : EXIT_DEAD;
 	if (cmpxchg(&p->exit_state, EXIT_ZOMBIE, state) != EXIT_ZOMBIE)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * It can be ptraced but not reparented, check
@@ -1302,9 +1444,15 @@ static int wait_task_zombie(struct wait_opts *wo, struct task_struct *p)
 		 * here reaping other children at the same time.
 		 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * We use thread_group_cputime_adjusted() to get times for the thread
 		 * group, which consolidates times for all threads in the
 		 * group including the group leader.
+=======
+		 * We use thread_group_cputime_adjusted() to get times for
+		 * the thread group, which consolidates times for all threads
+		 * in the group including the group leader.
+>>>>>>> v3.18
 =======
 		 * We use thread_group_cputime_adjusted() to get times for
 		 * the thread group, which consolidates times for all threads
@@ -1316,6 +1464,10 @@ static int wait_task_zombie(struct wait_opts *wo, struct task_struct *p)
 		psig = p->real_parent->signal;
 		sig = p->signal;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		write_seqlock(&psig->stats_lock);
+>>>>>>> v3.18
 =======
 		write_seqlock(&psig->stats_lock);
 >>>>>>> v3.18
@@ -1342,6 +1494,10 @@ static int wait_task_zombie(struct wait_opts *wo, struct task_struct *p)
 		task_io_accounting_add(&psig->ioac, &p->ioac);
 		task_io_accounting_add(&psig->ioac, &sig->ioac);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		write_sequnlock(&psig->stats_lock);
+>>>>>>> v3.18
 =======
 		write_sequnlock(&psig->stats_lock);
 >>>>>>> v3.18
@@ -1351,7 +1507,11 @@ static int wait_task_zombie(struct wait_opts *wo, struct task_struct *p)
 	/*
 	 * Now we are sure this task is interesting, and no other
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * thread can reap it because we set its state to EXIT_DEAD.
+=======
+	 * thread can reap it because we its state == DEAD/TRACE.
+>>>>>>> v3.18
 =======
 	 * thread can reap it because we its state == DEAD/TRACE.
 >>>>>>> v3.18
@@ -1392,6 +1552,7 @@ static int wait_task_zombie(struct wait_opts *wo, struct task_struct *p)
 		retval = pid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (traced) {
 		write_lock_irq(&tasklist_lock);
 		/* We dropped tasklist, ptracer could die and untrace */
@@ -1409,6 +1570,8 @@ static int wait_task_zombie(struct wait_opts *wo, struct task_struct *p)
 	}
 	if (p != NULL)
 =======
+=======
+>>>>>>> v3.18
 	if (state == EXIT_TRACE) {
 		write_lock_irq(&tasklist_lock);
 		/* We dropped tasklist, ptracer could die and untrace */
@@ -1422,6 +1585,9 @@ static int wait_task_zombie(struct wait_opts *wo, struct task_struct *p)
 		write_unlock_irq(&tasklist_lock);
 	}
 	if (state == EXIT_DEAD)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		release_task(p);
 
@@ -1600,14 +1766,20 @@ static int wait_consider_task(struct wait_opts *wo, int ptrace,
 				struct task_struct *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = eligible_child(wo, p);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	if (unlikely(p->exit_state == EXIT_DEAD))
 		return 0;
 
 	ret = eligible_child(wo, p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ret)
 		return ret;
@@ -1627,6 +1799,7 @@ static int wait_consider_task(struct wait_opts *wo, int ptrace,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* dead body doesn't have much to contribute */
 	if (unlikely(p->exit_state == EXIT_DEAD)) {
 		/*
@@ -1635,17 +1808,23 @@ static int wait_consider_task(struct wait_opts *wo, int ptrace,
 		 */
 		if (likely(!ptrace) && unlikely(ptrace_reparented(p)))
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(p->exit_state == EXIT_TRACE)) {
 		/*
 		 * ptrace == 0 means we are the natural parent. In this case
 		 * we should clear notask_error, debugger will notify us.
 		 */
 		if (likely(!ptrace))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			wo->notask_error = 0;
 		return 0;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* slay zombie? */
 	if (p->exit_state == EXIT_ZOMBIE) {
@@ -1664,6 +1843,8 @@ static int wait_consider_task(struct wait_opts *wo, int ptrace,
 		if (!delay_group_leader(p))
 			return wait_task_zombie(wo, p);
 =======
+=======
+>>>>>>> v3.18
 	if (likely(!ptrace) && unlikely(p->ptrace)) {
 		/*
 		 * If it is traced by its real parent's group, just pretend
@@ -1692,6 +1873,9 @@ static int wait_consider_task(struct wait_opts *wo, int ptrace,
 			if (unlikely(ptrace) || likely(!p->ptrace))
 				return wait_task_zombie(wo, p);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -1719,6 +1903,7 @@ static int wait_consider_task(struct wait_opts *wo, int ptrace,
 	} else {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * If @p is ptraced by a task in its real parent's group,
 		 * hide group stop/continued state when looking at @p as
 		 * the real parent; otherwise, a single stop can be
@@ -1732,6 +1917,8 @@ static int wait_consider_task(struct wait_opts *wo, int ptrace,
 			return 0;
 
 		/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		 * @p is alive and it's gonna stop, continue or exit, so
@@ -1772,6 +1959,10 @@ static int do_wait_thread(struct wait_opts *wo, struct task_struct *tsk)
 	list_for_each_entry(p, &tsk->children, sibling) {
 		int ret = wait_consider_task(wo, 0, p);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1789,6 +1980,10 @@ static int ptrace_do_wait(struct wait_opts *wo, struct task_struct *tsk)
 	list_for_each_entry(p, &tsk->ptraced, ptrace_entry) {
 		int ret = wait_consider_task(wo, 1, p);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

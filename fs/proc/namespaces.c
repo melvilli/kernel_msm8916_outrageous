@@ -43,12 +43,15 @@ static const struct inode_operations ns_inode_operations = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ns_delete_dentry(const struct dentry *dentry)
 {
 	/* Don't cache namespace inodes when not in use */
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static char *ns_dname(struct dentry *dentry, char *buffer, int buflen)
@@ -63,7 +66,11 @@ static char *ns_dname(struct dentry *dentry, char *buffer, int buflen)
 const struct dentry_operations ns_dentry_operations =
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.d_delete	= ns_delete_dentry,
+=======
+	.d_delete	= always_delete_dentry,
+>>>>>>> v3.18
 =======
 	.d_delete	= always_delete_dentry,
 >>>>>>> v3.18
@@ -133,7 +140,11 @@ static void *proc_ns_follow_link(struct dentry *dentry, struct nameidata *nd)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ptrace_may_access(task, PTRACE_MODE_READ_FSCREDS))
+=======
+	if (!ptrace_may_access(task, PTRACE_MODE_READ))
+>>>>>>> v3.18
 =======
 	if (!ptrace_may_access(task, PTRACE_MODE_READ))
 >>>>>>> v3.18
@@ -164,7 +175,11 @@ static int proc_ns_readlink(struct dentry *dentry, char __user *buffer, int bufl
 	void *ns;
 	char name[50];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int len = -EACCES;
+=======
+	int res = -EACCES;
+>>>>>>> v3.18
 =======
 	int res = -EACCES;
 >>>>>>> v3.18
@@ -174,21 +189,28 @@ static int proc_ns_readlink(struct dentry *dentry, char __user *buffer, int bufl
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ptrace_may_access(task, PTRACE_MODE_READ_FSCREDS))
 		goto out_put_task;
 
 	len = -ENOENT;
 =======
+=======
+>>>>>>> v3.18
 	if (!ptrace_may_access(task, PTRACE_MODE_READ))
 		goto out_put_task;
 
 	res = -ENOENT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ns = ns_ops->get(task);
 	if (!ns)
 		goto out_put_task;
 
 	snprintf(name, sizeof(name), "%s:[%u]", ns_ops->name, ns_ops->inum(ns));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	len = strlen(name);
 
@@ -200,12 +222,19 @@ static int proc_ns_readlink(struct dentry *dentry, char __user *buffer, int bufl
 =======
 	res = readlink_copy(buffer, buflen, name);
 >>>>>>> v3.18
+=======
+	res = readlink_copy(buffer, buflen, name);
+>>>>>>> v3.18
 	ns_ops->put(ns);
 out_put_task:
 	put_task_struct(task);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return len;
+=======
+	return res;
+>>>>>>> v3.18
 =======
 	return res;
 >>>>>>> v3.18
@@ -218,7 +247,11 @@ static const struct inode_operations proc_ns_link_inode_operations = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dentry *proc_ns_instantiate(struct inode *dir,
+=======
+static int proc_ns_instantiate(struct inode *dir,
+>>>>>>> v3.18
 =======
 static int proc_ns_instantiate(struct inode *dir,
 >>>>>>> v3.18
@@ -228,7 +261,10 @@ static int proc_ns_instantiate(struct inode *dir,
 	struct inode *inode;
 	struct proc_inode *ei;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry *error = ERR_PTR(-ENOENT);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -245,6 +281,7 @@ static int proc_ns_instantiate(struct inode *dir,
 	d_add(dentry, inode);
 	/* Close the race of the process dying before we return the dentry */
 	if (pid_revalidate(dentry, 0))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		error = NULL;
 out:
@@ -315,6 +352,8 @@ out:
 out_no_task:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 out:
 	return -ENOENT;
@@ -345,13 +384,20 @@ static int proc_ns_dir_readdir(struct file *file, struct dir_context *ctx)
 out:
 	put_task_struct(task);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 const struct file_operations proc_ns_dir_operations = {
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= proc_ns_dir_readdir,
+=======
+	.iterate	= proc_ns_dir_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= proc_ns_dir_readdir,
 >>>>>>> v3.18
@@ -361,7 +407,11 @@ static struct dentry *proc_ns_dir_lookup(struct inode *dir,
 				struct dentry *dentry, unsigned int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry *error;
+=======
+	int error;
+>>>>>>> v3.18
 =======
 	int error;
 >>>>>>> v3.18
@@ -370,7 +420,11 @@ static struct dentry *proc_ns_dir_lookup(struct inode *dir,
 	unsigned int len = dentry->d_name.len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = ERR_PTR(-ENOENT);
+=======
+	error = -ENOENT;
+>>>>>>> v3.18
 =======
 	error = -ENOENT;
 >>>>>>> v3.18
@@ -393,7 +447,11 @@ out:
 	put_task_struct(task);
 out_no_task:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return error;
+=======
+	return ERR_PTR(error);
+>>>>>>> v3.18
 =======
 	return ERR_PTR(error);
 >>>>>>> v3.18

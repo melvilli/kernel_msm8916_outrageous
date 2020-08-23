@@ -109,6 +109,10 @@ psmouse_ret_t psmouse_process_byte(struct psmouse *psmouse);
 int psmouse_activate(struct psmouse *psmouse);
 int psmouse_deactivate(struct psmouse *psmouse);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool psmouse_matches_pnp_id(struct psmouse *psmouse, const char * const ids[]);
+>>>>>>> v3.18
 =======
 bool psmouse_matches_pnp_id(struct psmouse *psmouse, const char * const ids[]);
 >>>>>>> v3.18

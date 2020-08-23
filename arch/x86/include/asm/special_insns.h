@@ -17,7 +17,11 @@ static inline void native_clts(void)
  * use a variable and mimic reads and writes to it to enforce serialization
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long __force_order;
+=======
+extern unsigned long __force_order;
+>>>>>>> v3.18
 =======
 extern unsigned long __force_order;
 >>>>>>> v3.18
@@ -106,7 +110,11 @@ static inline void native_wbinvd(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void native_load_gs_index(unsigned);
+=======
+extern asmlinkage void native_load_gs_index(unsigned);
+>>>>>>> v3.18
 =======
 extern asmlinkage void native_load_gs_index(unsigned);
 >>>>>>> v3.18
@@ -200,7 +208,10 @@ static inline void clflush(volatile void *__p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void clflushopt(volatile void *__p)
 {
 	alternative_io(".byte " __stringify(NOP_DS_PREFIX) "; clflush %P0",
@@ -209,6 +220,9 @@ static inline void clflushopt(volatile void *__p)
 		       "+m" (*(volatile char __force *)__p));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define nop() asm volatile ("nop")
 

@@ -230,12 +230,18 @@ static int nat_rtp_rtcp(struct sk_buff *skb, struct nf_conn *ct,
 			if (ret == 0)
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			else if (ret != -EBUSY) {
 =======
+=======
+>>>>>>> v3.18
 			else if (ret == -EBUSY) {
 				nf_ct_unexpect_related(rtp_exp);
 				continue;
 			} else if (ret < 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				nf_ct_unexpect_related(rtp_exp);
 				nated_port = 0;

@@ -102,6 +102,10 @@ extern unsigned long thread_saved_pc(struct task_struct *t);
 
 #define cpu_relax()     barrier()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency() cpu_relax()
 >>>>>>> v3.18

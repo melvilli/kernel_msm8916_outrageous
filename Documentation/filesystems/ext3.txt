@@ -27,18 +27,24 @@ journal=inum		When a journal already exists, this option is ignored.
 			will represent the ext3 file system's journal file.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 journal_dev=devnum	When the external journal device's major/minor numbers
 			have changed, this option allows the user to specify
 			the new journal location.  The journal device is
 			identified through its new major/minor numbers encoded
 			in devnum.
 =======
+=======
+>>>>>>> v3.18
 journal_path=path
 journal_dev=devnum	When the external journal device's major/minor numbers
 			have changed, these options allow the user to specify
 			the new journal location.  The journal device is
 			identified through either its new major/minor numbers
 			encoded in devnum, or via a path to the device.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 norecovery		Don't load the journal on mounting. Note that this forces

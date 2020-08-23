@@ -169,7 +169,10 @@ static int prism2_bss_list_proc_show(struct seq_file *m, void *v)
 	struct list_head *ptr = v;
 	struct hostap_bss_info *bss;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -185,6 +188,7 @@ static int prism2_bss_list_proc_show(struct seq_file *m, void *v)
 		   bss->count, bss->capab_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < bss->ssid_len; i++)
 		seq_putc(m,bss->ssid[i] >= 32 && bss->ssid[i] < 127 ?
 			   bss->ssid[i] : '_');
@@ -196,12 +200,17 @@ static int prism2_bss_list_proc_show(struct seq_file *m, void *v)
 	for (i = 0; i < bss->wpa_ie_len; i++)
 		seq_printf(m, "%02x", bss->wpa_ie[i]);
 =======
+=======
+>>>>>>> v3.18
 	seq_printf(m, "%*pE", (int)bss->ssid_len, bss->ssid);
 
 	seq_putc(m, '\t');
 	seq_printf(m, "%*phN", (int)bss->ssid_len, bss->ssid);
 	seq_putc(m, '\t');
 	seq_printf(m, "%*phN", (int)bss->wpa_ie_len, bss->wpa_ie);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	seq_putc(m, '\n');
 	return 0;
@@ -509,7 +518,11 @@ void hostap_init_proc(local_info_t *local)
 void hostap_remove_proc(local_info_t *local)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	remove_proc_subtree(local->ddev->name, hostap_proc);
+=======
+	proc_remove(local->proc);
+>>>>>>> v3.18
 =======
 	proc_remove(local->proc);
 >>>>>>> v3.18

@@ -13,7 +13,11 @@ CONFIG_RCU_CPU_STALL_TIMEOUT
 	that RCU will wait from the beginning of a grace period until it
 	issues an RCU CPU stall warning.  This time period is normally
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sixty seconds.
+=======
+	21 seconds.
+>>>>>>> v3.18
 =======
 	21 seconds.
 >>>>>>> v3.18
@@ -22,7 +26,11 @@ CONFIG_RCU_CPU_STALL_TIMEOUT
 	/sys/module/rcutree/parameters/rcu_cpu_stall_timeout, however
 	this parameter is checked only at the beginning of a cycle.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	So if you are 30 seconds into a 70-second stall, setting this
+=======
+	So if you are 10 seconds into a 40-second stall, setting this
+>>>>>>> v3.18
 =======
 	So if you are 10 seconds into a 40-second stall, setting this
 >>>>>>> v3.18
@@ -33,7 +41,11 @@ CONFIG_RCU_CPU_STALL_TIMEOUT
 
 	Stall-warning messages may be enabled and disabled completely via
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/sys/module/rcutree/parameters/rcu_cpu_stall_suppress.
+=======
+	/sys/module/rcupdate/parameters/rcu_cpu_stall_suppress.
+>>>>>>> v3.18
 =======
 	/sys/module/rcupdate/parameters/rcu_cpu_stall_suppress.
 >>>>>>> v3.18
@@ -45,7 +57,11 @@ CONFIG_RCU_CPU_STALL_VERBOSE
 	RCU-preempt grace period.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 RCU_CPU_STALL_INFO
+=======
+CONFIG_RCU_CPU_STALL_INFO
+>>>>>>> v3.18
 =======
 CONFIG_RCU_CPU_STALL_INFO
 >>>>>>> v3.18
@@ -60,7 +76,12 @@ RCU_STALL_DELAY_DELTA
 	some overhead.  Therefore, under CONFIG_PROVE_RCU, the
 	RCU_STALL_DELAY_DELTA macro allows five extra seconds before
 <<<<<<< HEAD
+<<<<<<< HEAD
 	giving an RCU CPU stall warning message.
+=======
+	giving an RCU CPU stall warning message.  (This is a cpp
+	macro, not a kernel configuration parameter.)
+>>>>>>> v3.18
 =======
 	giving an RCU CPU stall warning message.  (This is a cpp
 	macro, not a kernel configuration parameter.)
@@ -74,11 +95,14 @@ RCU_STALL_RAT_DELAY
 	the number of jiffies specified by RCU_STALL_RAT_DELAY, then
 	some other CPU will complain.  This delay is normally set to
 <<<<<<< HEAD
+<<<<<<< HEAD
 	two jiffies.
 
 When a CPU detects that it is stalling, it will print a message similar
 to the following:
 =======
+=======
+>>>>>>> v3.18
 	two jiffies.  (This is a cpp macro, not a kernel configuration
 	parameter.)
 
@@ -96,6 +120,9 @@ rcupdate.rcu_task_stall_timeout
 
 For non-RCU-tasks flavors of RCU, when a CPU detects that it is stalling,
 it will print a message similar to the following:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 INFO: rcu_sched_state detected stall on CPU 5 (t=2500 jiffies)
@@ -128,14 +155,20 @@ printing, there will be a spurious stall-warning message:
 INFO: rcu_bh_state detected stalls on CPUs/tasks: { } (detected by 4, 2502 jiffies)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 This is rare, but does happen from time to time in real life.
 =======
+=======
+>>>>>>> v3.18
 This is rare, but does happen from time to time in real life.  It is also
 possible for a zero-jiffy stall to be flagged in this case, depending
 on how the stall warning and the grace-period initialization happen to
 interact.  Please note that it is not possible to entirely eliminate this
 sort of false positive without resorting to things like stop_machine(),
 which is overkill for this sort of problem.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 If the CONFIG_RCU_CPU_STALL_INFO kernel configuration parameter is set,
@@ -190,6 +223,7 @@ no non-lazy callbacks ("." is printed otherwise, as shown above) and
 otherwise, for example, if disabled via the "nohz=" kernel boot parameter).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 If the relevant grace-period kthread has been unable to run prior to
 the stall warning, the following additional line is printed:
 
@@ -199,6 +233,8 @@ Starving the grace-period kthreads of CPU time can of course result in
 RCU CPU stall warnings even when all CPUs and tasks have passed through
 the required quiescent states.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -230,6 +266,7 @@ o	A CPU looping with bottom halves disabled.  This condition can
 	result in RCU-sched and RCU-bh stalls.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 o	For !CONFIG_PREEMPT kernels, a CPU looping anywhere in the kernel
 	without invoking schedule().
 
@@ -238,12 +275,17 @@ o	Anything that prevents RCU's grace-period kthreads from running.
 	This message will include information on when the kthread last
 	ran and how often it should be expected to run.
 =======
+=======
+>>>>>>> v3.18
 o	For !CONFIG_PREEMPT kernels, a CPU looping anywhere in the
 	kernel without invoking schedule().  Note that cond_resched()
 	does not necessarily prevent RCU CPU stall warnings.  Therefore,
 	if the looping in the kernel is really expected and desirable
 	behavior, you might need to replace some of the cond_resched()
 	calls with calls to cond_resched_rcu_qs().
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 o	A CPU-bound real-time task in a CONFIG_PREEMPT kernel, which might
@@ -278,16 +320,22 @@ o	A hardware failure.  This is quite unlikely, but has occurred
 	leading the realization that the CPU had failed.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The RCU, RCU-sched, and RCU-bh implementations have CPU stall warning.
 SRCU does not have its own CPU stall warnings, but its calls to
 synchronize_sched() will result in RCU-sched detecting RCU-sched-related
 CPU stalls.  Please note that RCU only detects CPU stalls when there is
 a grace period in progress.  No grace period, no CPU stall warnings.
 =======
+=======
+>>>>>>> v3.18
 The RCU, RCU-sched, RCU-bh, and RCU-tasks implementations have CPU stall
 warning.  Note that SRCU does -not- have CPU stall warnings.  Please note
 that RCU only detects CPU stalls when there is a grace period in progress.
 No grace period, no CPU stall warnings.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 To diagnose the cause of the stall, inspect the stack traces.
@@ -300,7 +348,12 @@ If you can reliably trigger the stall, ftrace can be quite helpful.
 
 RCU bugs can often be debugged with the help of CONFIG_RCU_TRACE
 <<<<<<< HEAD
+<<<<<<< HEAD
 and with RCU's event tracing.
+=======
+and with RCU's event tracing.  For information on RCU's event tracing,
+see include/trace/events/rcu.h.
+>>>>>>> v3.18
 =======
 and with RCU's event tracing.  For information on RCU's event tracing,
 see include/trace/events/rcu.h.

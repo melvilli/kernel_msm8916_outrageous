@@ -7,9 +7,13 @@ Required properties:
 - interrupt-parent : Should be the phandle for the interrupt controller
   that services interrupts for this device
 <<<<<<< HEAD
+<<<<<<< HEAD
 - phy-mode : String, operation mode of the PHY interface.
   Supported values are: "mii", "gmii", "sgmii", "tbi", "rmii",
   "rgmii", "rgmii-id", "rgmii-rxid", "rgmii-txid", "rtbi", "smii".
+=======
+- phy-mode : See ethernet.txt file in the same directory
+>>>>>>> v3.18
 =======
 - phy-mode : See ethernet.txt file in the same directory
 >>>>>>> v3.18
@@ -28,7 +32,10 @@ Optional properties:
 - smsc,save-mac-address : Indicates that mac address needs to be saved
   before resetting the controller
 <<<<<<< HEAD
+<<<<<<< HEAD
 - local-mac-address : 6 bytes, mac address
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

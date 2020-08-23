@@ -215,7 +215,11 @@ static void md4_final_ascii(struct md4_ctx *mctx, char *out, unsigned int len)
 	mctx->block[15] = mctx->byte_count >> 29;
 	le32_to_cpu_array(mctx->block, (sizeof(mctx->block) -
 <<<<<<< HEAD
+<<<<<<< HEAD
 	                  sizeof(uint64_t)) / sizeof(uint32_t));
+=======
+			  sizeof(uint64_t)) / sizeof(uint32_t));
+>>>>>>> v3.18
 =======
 			  sizeof(uint64_t)) / sizeof(uint32_t));
 >>>>>>> v3.18
@@ -372,7 +376,11 @@ static int parse_source_files(const char *objfile, struct md4_ctx *md)
 		/* Terminate line at first space, to get rid of final ' \' */
 		while (*p) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                        if (isspace(*p)) {
+=======
+			if (isspace(*p)) {
+>>>>>>> v3.18
 =======
 			if (isspace(*p)) {
 >>>>>>> v3.18
@@ -425,7 +433,11 @@ void get_src_version(const char *modname, char sum[], unsigned sumlen)
 	else
 		basename = modname;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(filelist, "%s/%.*s.mod", modverdir,
+=======
+	snprintf(filelist, sizeof(filelist), "%s/%.*s.mod", modverdir,
+>>>>>>> v3.18
 =======
 	snprintf(filelist, sizeof(filelist), "%s/%.*s.mod", modverdir,
 >>>>>>> v3.18

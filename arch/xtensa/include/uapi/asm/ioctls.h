@@ -96,6 +96,11 @@
 #define TCSETSW2	_IOW('T', 44, struct termios2)
 #define TCSETSF2	_IOW('T', 45, struct termios2)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TIOCGRS485	_IOR('T', 46, struct serial_rs485)
+#define TIOCSRS485	_IOWR('T', 47, struct serial_rs485)
+>>>>>>> v3.18
 =======
 #define TIOCGRS485	_IOR('T', 46, struct serial_rs485)
 #define TIOCSRS485	_IOWR('T', 47, struct serial_rs485)

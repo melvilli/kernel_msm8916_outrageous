@@ -32,8 +32,11 @@
 #define USBCMD_SUTW           BIT(13)
 #define USBCMD_ATDTW          BIT(14)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USBCMD_ITC(n)         (n << 16) /* n = 0, 1, 2, 4, 8, 16, 32, 64 */
 #define USBCMD_ITC_MASK       (0xFF << 16)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -50,6 +53,7 @@
 
 /* PORTSC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PORTSC_FPR            BIT(6)
 #define PORTSC_SUSP           BIT(7)
 #define PORTSC_HSP            BIT(9)
@@ -62,6 +66,8 @@
 /* OTGSC */
 #define OTGSC_IDPU	      BIT(5)
 =======
+=======
+>>>>>>> v3.18
 #define PORTSC_CCS            BIT(0)
 #define PORTSC_CSC            BIT(1)
 #define PORTSC_PEC            BIT(3)
@@ -100,6 +106,9 @@
 #define OTGSC_IDPU	      BIT(5)
 #define OTGSC_HADP	      BIT(6)
 #define OTGSC_HABA	      BIT(7)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define OTGSC_ID	      BIT(8)
 #define OTGSC_AVV	      BIT(9)
@@ -112,6 +121,11 @@
 #define OTGSC_BSVIS	      BIT(19)
 #define OTGSC_BSEIS	      BIT(20)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define OTGSC_1MSIS	      BIT(21)
+#define OTGSC_DPIS	      BIT(22)
+>>>>>>> v3.18
 =======
 #define OTGSC_1MSIS	      BIT(21)
 #define OTGSC_DPIS	      BIT(22)
@@ -122,7 +136,10 @@
 #define OTGSC_BSVIE	      BIT(27)
 #define OTGSC_BSEIE	      BIT(28)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define OTGSC_1MSIE	      BIT(29)
 #define OTGSC_DPIE	      BIT(30)
 #define OTGSC_INT_EN_BITS	(OTGSC_IDIE | OTGSC_AVVIE | OTGSC_ASVIE \
@@ -131,6 +148,9 @@
 #define OTGSC_INT_STATUS_BITS	(OTGSC_IDIS | OTGSC_AVVIS | OTGSC_ASVIS	\
 				| OTGSC_BSVIS | OTGSC_BSEIS | OTGSC_1MSIS \
 				| OTGSC_DPIS)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* USBMODE */

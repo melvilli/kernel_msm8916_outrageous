@@ -7,7 +7,11 @@
  *
  *  Benny Halevy <bhalevy@panasas.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Boaz Harrosh <bharrosh@panasas.com>
+=======
+ *  Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  *  Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18
@@ -124,8 +128,13 @@ extern void objio_free_lseg(struct pnfs_layout_segment *lseg);
 extern void objio_free_result(struct objlayout_io_res *oir);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int objio_read_pagelist(struct nfs_read_data *rdata);
 extern int objio_write_pagelist(struct nfs_write_data *wdata, int how);
+=======
+extern int objio_read_pagelist(struct nfs_pgio_header *rdata);
+extern int objio_write_pagelist(struct nfs_pgio_header *wdata, int how);
+>>>>>>> v3.18
 =======
 extern int objio_read_pagelist(struct nfs_pgio_header *rdata);
 extern int objio_write_pagelist(struct nfs_pgio_header *wdata, int how);
@@ -159,11 +168,14 @@ extern void objlayout_write_done(struct objlayout_io_res *oir,
 				 ssize_t status, bool sync);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int objlayout_get_deviceinfo(struct pnfs_layout_hdr *pnfslay,
 	struct nfs4_deviceid *d_id, struct pnfs_osd_deviceaddr **deviceaddr,
 	gfp_t gfp_flags);
 extern void objlayout_put_deviceinfo(struct pnfs_osd_deviceaddr *deviceaddr);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -181,15 +193,21 @@ extern void objlayout_free_lseg(struct pnfs_layout_segment *);
 
 extern enum pnfs_try_status objlayout_read_pagelist(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfs_read_data *);
 
 extern enum pnfs_try_status objlayout_write_pagelist(
 	struct nfs_write_data *,
 =======
+=======
+>>>>>>> v3.18
 	struct nfs_pgio_header *);
 
 extern enum pnfs_try_status objlayout_write_pagelist(
 	struct nfs_pgio_header *,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int how);
 

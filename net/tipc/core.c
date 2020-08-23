@@ -2,8 +2,13 @@
  * net/tipc/core.c: TIPC module code
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2003-2006, Ericsson AB
  * Copyright (c) 2005-2006, 2010-2011, Wind River Systems
+=======
+ * Copyright (c) 2003-2006, 2013, Ericsson AB
+ * Copyright (c) 2005-2006, 2010-2013, Wind River Systems
+>>>>>>> v3.18
 =======
  * Copyright (c) 2003-2006, 2013, Ericsson AB
  * Copyright (c) 2005-2006, 2010-2013, Wind River Systems
@@ -41,15 +46,21 @@
 
 #include "core.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ref.h"
 #include "name_table.h"
 #include "subscr.h"
 #include "config.h"
 =======
+=======
+>>>>>>> v3.18
 #include "name_table.h"
 #include "subscr.h"
 #include "config.h"
 #include "socket.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/module.h>
@@ -62,8 +73,12 @@ u32 tipc_own_addr __read_mostly;
 int tipc_max_ports __read_mostly;
 int tipc_net_id __read_mostly;
 <<<<<<< HEAD
+<<<<<<< HEAD
 int tipc_remote_management __read_mostly;
 
+=======
+int sysctl_tipc_rmem[3] __read_mostly;	/* min/default/max */
+>>>>>>> v3.18
 =======
 int sysctl_tipc_rmem[3] __read_mostly;	/* min/default/max */
 >>>>>>> v3.18
@@ -92,6 +107,7 @@ struct sk_buff *tipc_buf_acquire(u32 size)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * tipc_core_stop_net - shut down TIPC networking sub-systems
  */
@@ -126,10 +142,13 @@ err:
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * tipc_core_stop - switch TIPC from SINGLE NODE to NOT RUNNING mode
  */
 static void tipc_core_stop(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tipc_netlink_stop();
 	tipc_handler_stop();
@@ -139,6 +158,8 @@ static void tipc_core_stop(void)
 	tipc_ref_table_stop();
 	tipc_socket_stop();
 =======
+=======
+>>>>>>> v3.18
 	tipc_net_stop();
 	tipc_bearer_cleanup();
 	tipc_netlink_stop();
@@ -147,6 +168,9 @@ static void tipc_core_stop(void)
 	tipc_sk_ref_table_stop();
 	tipc_socket_stop();
 	tipc_unregister_sysctl();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -155,6 +179,7 @@ static void tipc_core_stop(void)
  */
 static int tipc_core_start(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int res;
 
@@ -180,6 +205,8 @@ static int tipc_core_start(void)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	get_random_bytes(&tipc_random, sizeof(tipc_random));
@@ -228,6 +255,9 @@ out_nametbl:
 out_reftbl:
 	return err;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __init tipc_init(void)
@@ -238,11 +268,14 @@ static int __init tipc_init(void)
 
 	tipc_own_addr = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tipc_remote_management = 1;
 	tipc_max_ports = CONFIG_TIPC_PORTS;
 	tipc_net_id = 4711;
 
 =======
+=======
+>>>>>>> v3.18
 	tipc_max_ports = CONFIG_TIPC_PORTS;
 	tipc_net_id = 4711;
 
@@ -252,6 +285,9 @@ static int __init tipc_init(void)
 			      TIPC_CRITICAL_IMPORTANCE;
 	sysctl_tipc_rmem[2] = TIPC_CONN_OVERLOAD_LIMIT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	res = tipc_core_start();
 	if (res)
@@ -264,7 +300,10 @@ static int __init tipc_init(void)
 static void __exit tipc_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tipc_core_stop_net();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tipc_core_stop();

@@ -24,6 +24,10 @@
 #include <linux/slab.h>
 #include <linux/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sched.h>
+>>>>>>> v3.18
 =======
 #include <linux/sched.h>
 >>>>>>> v3.18
@@ -107,13 +111,19 @@
 #define OCFS2_CONTROL_MESSAGE_VERNUM_LEN	2
 #define OCFS2_CONTROL_MESSAGE_NODENUM_LEN	8
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define VERSION_LOCK				"version_lock"
 
 enum ocfs2_connection_type {
 	WITH_CONTROLD,
 	NO_CONTROLD
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -124,7 +134,10 @@ struct ocfs2_live_connection {
 	struct list_head		oc_list;
 	struct ocfs2_cluster_connection	*oc_conn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	enum ocfs2_connection_type	oc_type;
 	atomic_t                        oc_this_node;
 	int                             oc_our_slot;
@@ -132,6 +145,9 @@ struct ocfs2_live_connection {
 	char                            oc_lvb[DLM_LVB_LEN];
 	struct completion               oc_sync_wait;
 	wait_queue_head_t		oc_wait;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -222,6 +238,7 @@ static struct ocfs2_live_connection *ocfs2_connection_find(const char *name)
  * fill_super(), we can't get dupes here.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ocfs2_live_connection_new(struct ocfs2_cluster_connection *conn,
 				     struct ocfs2_live_connection **c_ret)
 {
@@ -232,17 +249,26 @@ static int ocfs2_live_connection_new(struct ocfs2_cluster_connection *conn,
 	if (!c)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 static int ocfs2_live_connection_attach(struct ocfs2_cluster_connection *conn,
 				     struct ocfs2_live_connection *c)
 {
 	int rc = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&ocfs2_control_lock);
 	c->oc_conn = conn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_read(&ocfs2_control_opened))
+=======
+	if ((c->oc_type == NO_CONTROLD) || atomic_read(&ocfs2_control_opened))
+>>>>>>> v3.18
 =======
 	if ((c->oc_type == NO_CONTROLD) || atomic_read(&ocfs2_control_opened))
 >>>>>>> v3.18
@@ -255,12 +281,15 @@ static int ocfs2_live_connection_attach(struct ocfs2_cluster_connection *conn,
 
 	mutex_unlock(&ocfs2_control_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!rc)
 		*c_ret = c;
 	else
 		kfree(c);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return rc;
@@ -626,7 +655,11 @@ static int ocfs2_control_release(struct inode *inode, struct file *file)
 		ocfs2_control_this_node = -1;
 		running_proto.pv_major = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		running_proto.pv_major = 0;
+=======
+		running_proto.pv_minor = 0;
+>>>>>>> v3.18
 =======
 		running_proto.pv_minor = 0;
 >>>>>>> v3.18
@@ -841,6 +874,7 @@ static int fs_protocol_compare(struct ocfs2_protocol_version *existing,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int user_cluster_connect(struct ocfs2_cluster_connection *conn)
 {
 	dlm_lockspace_t *fsdlm;
@@ -854,6 +888,8 @@ static int user_cluster_connect(struct ocfs2_cluster_connection *conn)
 		goto out;
 
 =======
+=======
+>>>>>>> v3.18
 static void lvb_to_version(char *lvb, struct ocfs2_protocol_version *ver)
 {
 	struct ocfs2_protocol_version *pv =
@@ -1099,6 +1135,9 @@ static int user_cluster_connect(struct ocfs2_cluster_connection *conn)
 		wait_event(lc->oc_wait, (atomic_read(&lc->oc_this_node) > 0));
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * running_proto must have been set before we allowed any mounts
@@ -1107,6 +1146,7 @@ static int user_cluster_connect(struct ocfs2_cluster_connection *conn)
 	if (fs_protocol_compare(&running_proto, &conn->cc_version)) {
 		printk(KERN_ERR
 		       "Unable to mount with fs locking protocol version "
+<<<<<<< HEAD
 <<<<<<< HEAD
 		       "%u.%u because the userspace control daemon has "
 		       "negotiated %u.%u\n",
@@ -1145,6 +1185,8 @@ static int user_cluster_this_node(unsigned int *this_node)
 
 	rc = ocfs2_control_get_this_node();
 =======
+=======
+>>>>>>> v3.18
 		       "%u.%u because negotiated protocol is %u.%u\n",
 		       conn->cc_version.pv_major, conn->cc_version.pv_minor,
 		       running_proto.pv_major, running_proto.pv_minor);
@@ -1173,6 +1215,9 @@ static int user_cluster_this_node(struct ocfs2_cluster_connection *conn,
 	else
 		rc = -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc < 0)
 		return rc;

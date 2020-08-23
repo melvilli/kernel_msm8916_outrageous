@@ -63,11 +63,14 @@ ieee80211_tx_h_michael_mic_add(struct ieee80211_tx_data *tx)
 	tail = MICHAEL_MIC_LEN;
 	if (!info->control.hw_key)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tail += TKIP_ICV_LEN;
 
 	if (WARN_ON(skb_tailroom(skb) < tail ||
 		    skb_headroom(skb) < TKIP_IV_LEN))
 =======
+=======
+>>>>>>> v3.18
 		tail += IEEE80211_TKIP_ICV_LEN;
 
 	if (WARN(skb_tailroom(skb) < tail ||
@@ -75,6 +78,9 @@ ieee80211_tx_h_michael_mic_add(struct ieee80211_tx_data *tx)
 		 "mmic: not enough head/tail (%d/%d,%d/%d)\n",
 		 skb_headroom(skb), IEEE80211_TKIP_IV_LEN,
 		 skb_tailroom(skb), tail))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return TX_DROP;
 
@@ -138,7 +144,11 @@ ieee80211_rx_h_michael_mic_verify(struct ieee80211_rx_data *rx)
 		 * errors for non-zero keyidx because these are reserved for
 		 * group keys and only the AP is sending real multicast
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * frames in the BSS. (
+=======
+		 * frames in the BSS.
+>>>>>>> v3.18
 =======
 		 * frames in the BSS.
 >>>>>>> v3.18
@@ -213,6 +223,7 @@ static int tkip_encrypt_skb(struct ieee80211_tx_data *tx, struct sk_buff *skb)
 		tail = 0;
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tail = TKIP_ICV_LEN;
 
 	if (WARN_ON(skb_tailroom(skb) < tail ||
@@ -223,6 +234,8 @@ static int tkip_encrypt_skb(struct ieee80211_tx_data *tx, struct sk_buff *skb)
 	memmove(pos, pos + TKIP_IV_LEN, hdrlen);
 	skb_set_network_header(skb, skb_network_offset(skb) + TKIP_IV_LEN);
 =======
+=======
+>>>>>>> v3.18
 		tail = IEEE80211_TKIP_ICV_LEN;
 
 	if (WARN_ON(skb_tailroom(skb) < tail ||
@@ -233,6 +246,9 @@ static int tkip_encrypt_skb(struct ieee80211_tx_data *tx, struct sk_buff *skb)
 	memmove(pos, pos + IEEE80211_TKIP_IV_LEN, hdrlen);
 	skb_set_network_header(skb, skb_network_offset(skb) +
 				    IEEE80211_TKIP_IV_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pos += hdrlen;
 
@@ -255,7 +271,11 @@ static int tkip_encrypt_skb(struct ieee80211_tx_data *tx, struct sk_buff *skb)
 
 	/* Add room for ICV */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb_put(skb, TKIP_ICV_LEN);
+=======
+	skb_put(skb, IEEE80211_TKIP_ICV_LEN);
+>>>>>>> v3.18
 =======
 	skb_put(skb, IEEE80211_TKIP_ICV_LEN);
 >>>>>>> v3.18
@@ -322,17 +342,23 @@ ieee80211_crypto_tkip_decrypt(struct ieee80211_rx_data *rx)
 
 	/* Trim ICV */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb_trim(skb, skb->len - TKIP_ICV_LEN);
 
 	/* Remove IV */
 	memmove(skb->data + TKIP_IV_LEN, skb->data, hdrlen);
 	skb_pull(skb, TKIP_IV_LEN);
 =======
+=======
+>>>>>>> v3.18
 	skb_trim(skb, skb->len - IEEE80211_TKIP_ICV_LEN);
 
 	/* Remove IV */
 	memmove(skb->data + IEEE80211_TKIP_IV_LEN, skb->data, hdrlen);
 	skb_pull(skb, IEEE80211_TKIP_IV_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return RX_CONTINUE;
@@ -340,8 +366,12 @@ ieee80211_crypto_tkip_decrypt(struct ieee80211_rx_data *rx)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ccmp_special_blocks(struct sk_buff *skb, u8 *pn, u8 *scratch,
 				int encrypted)
+=======
+static void ccmp_special_blocks(struct sk_buff *skb, u8 *pn, u8 *b_0, u8 *aad)
+>>>>>>> v3.18
 =======
 static void ccmp_special_blocks(struct sk_buff *skb, u8 *pn, u8 *b_0, u8 *aad)
 >>>>>>> v3.18
@@ -349,6 +379,7 @@ static void ccmp_special_blocks(struct sk_buff *skb, u8 *pn, u8 *b_0, u8 *aad)
 	__le16 mask_fc;
 	int a4_included, mgmt;
 	u8 qos_tid;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 *b_0, *aad;
 	u16 data_len, len_a;
@@ -361,10 +392,15 @@ static void ccmp_special_blocks(struct sk_buff *skb, u8 *pn, u8 *b_0, u8 *aad)
 	aad = scratch + 4 * AES_BLOCK_SIZE;
 
 =======
+=======
+>>>>>>> v3.18
 	u16 len_a;
 	unsigned int hdrlen;
 	struct ieee80211_hdr *hdr = (struct ieee80211_hdr *)skb->data;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Mask FC: zero subtype b4 b5 b6 (if not mgmt)
@@ -388,6 +424,7 @@ static void ccmp_special_blocks(struct sk_buff *skb, u8 *pn, u8 *b_0, u8 *aad)
 		qos_tid = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data_len = skb->len - hdrlen - CCMP_HDR_LEN;
 	if (encrypted)
 		data_len -= CCMP_MIC_LEN;
@@ -395,6 +432,8 @@ static void ccmp_special_blocks(struct sk_buff *skb, u8 *pn, u8 *b_0, u8 *aad)
 	/* First block, b_0 */
 	b_0[0] = 0x59; /* flags: Adata: 1, M: 011, L: 001 */
 =======
+=======
+>>>>>>> v3.18
 	/* In CCM, the initial vectors (IV) used for CTR mode encryption and CBC
 	 * mode authentication are not allowed to collide, yet both are derived
 	 * from this vector b_0. We only set L := 1 here to indicate that the
@@ -404,6 +443,9 @@ static void ccmp_special_blocks(struct sk_buff *skb, u8 *pn, u8 *b_0, u8 *aad)
 	 */
 	b_0[0] = 0x1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Nonce: Nonce Flags | A2 | PN
 	 * Nonce Flags: Priority (b0..b3) | Management (b4) | Reserved (b5..b7)
@@ -411,9 +453,13 @@ static void ccmp_special_blocks(struct sk_buff *skb, u8 *pn, u8 *b_0, u8 *aad)
 	b_0[1] = qos_tid | (mgmt << 4);
 	memcpy(&b_0[2], hdr->addr2, ETH_ALEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&b_0[8], pn, CCMP_PN_LEN);
 	/* l(m) */
 	put_unaligned_be16(data_len, &b_0[14]);
+=======
+	memcpy(&b_0[8], pn, IEEE80211_CCMP_PN_LEN);
+>>>>>>> v3.18
 =======
 	memcpy(&b_0[8], pn, IEEE80211_CCMP_PN_LEN);
 >>>>>>> v3.18
@@ -473,12 +519,15 @@ static int ccmp_encrypt_skb(struct ieee80211_tx_data *tx, struct sk_buff *skb)
 	u8 pn[6];
 	u64 pn64;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 scratch[6 * AES_BLOCK_SIZE];
 
 	if (info->control.hw_key &&
 	    !(info->control.hw_key->flags & IEEE80211_KEY_FLAG_GENERATE_IV) &&
 	    !(info->control.hw_key->flags & IEEE80211_KEY_FLAG_PUT_IV_SPACE)) {
 =======
+=======
+>>>>>>> v3.18
 	u8 aad[2 * AES_BLOCK_SIZE];
 	u8 b_0[AES_BLOCK_SIZE];
 
@@ -488,6 +537,9 @@ static int ccmp_encrypt_skb(struct ieee80211_tx_data *tx, struct sk_buff *skb)
 	    !((info->control.hw_key->flags &
 	       IEEE80211_KEY_FLAG_GENERATE_IV_MGMT) &&
 	      ieee80211_is_mgmt(hdr->frame_control))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * hwaccel has no need for preallocated room for CCMP
@@ -503,6 +555,7 @@ static int ccmp_encrypt_skb(struct ieee80211_tx_data *tx, struct sk_buff *skb)
 		tail = 0;
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tail = CCMP_MIC_LEN;
 
 	if (WARN_ON(skb_tailroom(skb) < tail ||
@@ -513,6 +566,8 @@ static int ccmp_encrypt_skb(struct ieee80211_tx_data *tx, struct sk_buff *skb)
 	memmove(pos, pos + CCMP_HDR_LEN, hdrlen);
 	skb_set_network_header(skb, skb_network_offset(skb) + CCMP_HDR_LEN);
 =======
+=======
+>>>>>>> v3.18
 		tail = IEEE80211_CCMP_MIC_LEN;
 
 	if (WARN_ON(skb_tailroom(skb) < tail ||
@@ -523,6 +578,9 @@ static int ccmp_encrypt_skb(struct ieee80211_tx_data *tx, struct sk_buff *skb)
 	memmove(pos, pos + IEEE80211_CCMP_HDR_LEN, hdrlen);
 	skb_set_network_header(skb, skb_network_offset(skb) +
 				    IEEE80211_CCMP_HDR_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* the HW only needs room for the IV, but not the actual IV */
@@ -549,15 +607,21 @@ static int ccmp_encrypt_skb(struct ieee80211_tx_data *tx, struct sk_buff *skb)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pos += CCMP_HDR_LEN;
 	ccmp_special_blocks(skb, pn, scratch, 0);
 	ieee80211_aes_ccm_encrypt(key->u.ccmp.tfm, scratch, pos, len,
 				  pos, skb_put(skb, CCMP_MIC_LEN));
 =======
+=======
+>>>>>>> v3.18
 	pos += IEEE80211_CCMP_HDR_LEN;
 	ccmp_special_blocks(skb, pn, b_0, aad);
 	ieee80211_aes_ccm_encrypt(key->u.ccmp.tfm, b_0, aad, pos, len,
 				  skb_put(skb, IEEE80211_CCMP_MIC_LEN));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -589,7 +653,11 @@ ieee80211_crypto_ccmp_decrypt(struct ieee80211_rx_data *rx)
 	struct sk_buff *skb = rx->skb;
 	struct ieee80211_rx_status *status = IEEE80211_SKB_RXCB(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 pn[CCMP_PN_LEN];
+=======
+	u8 pn[IEEE80211_CCMP_PN_LEN];
+>>>>>>> v3.18
 =======
 	u8 pn[IEEE80211_CCMP_PN_LEN];
 >>>>>>> v3.18
@@ -600,23 +668,33 @@ ieee80211_crypto_ccmp_decrypt(struct ieee80211_rx_data *rx)
 
 	if (!ieee80211_is_data(hdr->frame_control) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !ieee80211_is_robust_mgmt_frame(hdr))
 		return RX_CONTINUE;
 
 	data_len = skb->len - hdrlen - CCMP_HDR_LEN - CCMP_MIC_LEN;
 =======
+=======
+>>>>>>> v3.18
 	    !ieee80211_is_robust_mgmt_frame(skb))
 		return RX_CONTINUE;
 
 	data_len = skb->len - hdrlen - IEEE80211_CCMP_HDR_LEN -
 		   IEEE80211_CCMP_MIC_LEN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!rx->sta || data_len < 0)
 		return RX_DROP_UNUSABLE;
 
 	if (status->flag & RX_FLAG_DECRYPTED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!pskb_may_pull(rx->skb, hdrlen + CCMP_HDR_LEN))
+=======
+		if (!pskb_may_pull(rx->skb, hdrlen + IEEE80211_CCMP_HDR_LEN))
+>>>>>>> v3.18
 =======
 		if (!pskb_may_pull(rx->skb, hdrlen + IEEE80211_CCMP_HDR_LEN))
 >>>>>>> v3.18
@@ -631,7 +709,11 @@ ieee80211_crypto_ccmp_decrypt(struct ieee80211_rx_data *rx)
 	queue = rx->security_idx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(pn, key->u.ccmp.rx_pn[queue], CCMP_PN_LEN) <= 0) {
+=======
+	if (memcmp(pn, key->u.ccmp.rx_pn[queue], IEEE80211_CCMP_PN_LEN) <= 0) {
+>>>>>>> v3.18
 =======
 	if (memcmp(pn, key->u.ccmp.rx_pn[queue], IEEE80211_CCMP_PN_LEN) <= 0) {
 >>>>>>> v3.18
@@ -640,6 +722,7 @@ ieee80211_crypto_ccmp_decrypt(struct ieee80211_rx_data *rx)
 	}
 
 	if (!(status->flag & RX_FLAG_DECRYPTED)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		u8 scratch[6 * AES_BLOCK_SIZE];
 		/* hardware didn't decrypt/verify MIC */
@@ -661,6 +744,8 @@ ieee80211_crypto_ccmp_decrypt(struct ieee80211_rx_data *rx)
 	memmove(skb->data + CCMP_HDR_LEN, skb->data, hdrlen);
 	skb_pull(skb, CCMP_HDR_LEN);
 =======
+=======
+>>>>>>> v3.18
 		u8 aad[2 * AES_BLOCK_SIZE];
 		u8 b_0[AES_BLOCK_SIZE];
 		/* hardware didn't decrypt/verify MIC */
@@ -681,13 +766,19 @@ ieee80211_crypto_ccmp_decrypt(struct ieee80211_rx_data *rx)
 		return RX_DROP_UNUSABLE;
 	memmove(skb->data + IEEE80211_CCMP_HDR_LEN, skb->data, hdrlen);
 	skb_pull(skb, IEEE80211_CCMP_HDR_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return RX_CONTINUE;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ieee80211_tx_result
 ieee80211_crypto_cs_encrypt(struct ieee80211_tx_data *tx,
 			    struct sk_buff *skb)
@@ -788,6 +879,9 @@ ieee80211_crypto_cs_decrypt(struct ieee80211_rx_data *rx)
 
 	return RX_CONTINUE;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void bip_aad(struct sk_buff *skb, u8 *aad)
@@ -930,6 +1024,10 @@ ieee80211_crypto_hw_encrypt(struct ieee80211_tx_data *tx)
 	struct sk_buff *skb;
 	struct ieee80211_tx_info *info = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ieee80211_tx_result res;
+>>>>>>> v3.18
 =======
 	ieee80211_tx_result res;
 >>>>>>> v3.18
@@ -941,13 +1039,19 @@ ieee80211_crypto_hw_encrypt(struct ieee80211_tx_data *tx)
 		if (!info->control.hw_key)
 			return TX_DROP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (tx->key->sta->cipher_scheme) {
 			res = ieee80211_crypto_cs_encrypt(tx, skb);
 			if (res != TX_CONTINUE)
 				return res;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -956,7 +1060,10 @@ ieee80211_crypto_hw_encrypt(struct ieee80211_tx_data *tx)
 	return TX_CONTINUE;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 ieee80211_rx_result
 ieee80211_crypto_hw_decrypt(struct ieee80211_rx_data *rx)
@@ -966,4 +1073,7 @@ ieee80211_crypto_hw_decrypt(struct ieee80211_rx_data *rx)
 
 	return RX_DROP_UNUSABLE;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

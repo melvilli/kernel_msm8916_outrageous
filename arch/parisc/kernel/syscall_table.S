@@ -419,7 +419,11 @@
 	ENTRY_SAME(prlimit64)
 	ENTRY_SAME(fanotify_init)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ENTRY_COMP(fanotify_mark)
+=======
+	ENTRY_DIFF(fanotify_mark)
+>>>>>>> v3.18
 =======
 	ENTRY_DIFF(fanotify_mark)
 >>>>>>> v3.18
@@ -434,7 +438,10 @@
 	ENTRY_SAME(kcmp)
 	ENTRY_SAME(finit_module)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ENTRY_SAME(sched_setattr)
 	ENTRY_SAME(sched_getattr)	/* 335 */
 	ENTRY_COMP(utimes)
@@ -443,6 +450,9 @@
 	ENTRY_SAME(getrandom)
 	ENTRY_SAME(memfd_create)	/* 340 */
 	ENTRY_SAME(bpf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Nothing yet */

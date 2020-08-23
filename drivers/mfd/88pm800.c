@@ -23,6 +23,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -32,8 +36,11 @@
 #include <linux/slab.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PM800_CHIP_ID			(0x00)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Interrupt Registers */
@@ -121,6 +128,7 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum {
 	/* Procida */
 	PM800_CHIP_A0  = 0x60,
@@ -136,11 +144,16 @@ enum {
 static const struct i2c_device_id pm80x_id_table[] = {
 	{"88PM800", CHIP_PM800},
 =======
+=======
+>>>>>>> v3.18
 /* PM800: generation identification number */
 #define PM800_CHIP_GEN_ID_NUM	0x3
 
 static const struct i2c_device_id pm80x_id_table[] = {
 	{"88PM800", 0},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{} /* NULL terminated */
 };
@@ -174,7 +187,11 @@ static struct resource onkey_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell onkey_devs[] = {
+=======
+static const struct mfd_cell onkey_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell onkey_devs[] = {
 >>>>>>> v3.18
@@ -187,7 +204,10 @@ static const struct mfd_cell onkey_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct mfd_cell regulator_devs[] = {
 	{
 	 .name = "88pm80x-regulator",
@@ -195,6 +215,9 @@ static const struct mfd_cell regulator_devs[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct regmap_irq pm800_irqs[] = {
 	/* INT0 */
@@ -345,11 +368,14 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int device_irq_init_800(struct pm80x_chip *chip)
 {
 	struct regmap *map = chip->regmap;
 	unsigned long flags = IRQF_TRIGGER_FALLING | IRQF_ONESHOT;
 =======
+=======
+>>>>>>> v3.18
 static int device_onkey_init(struct pm80x_chip *chip,
 				struct pm80x_platform_data *pdata)
 {
@@ -405,6 +431,9 @@ static int device_irq_init_800(struct pm80x_chip *chip)
 {
 	struct regmap *map = chip->regmap;
 	unsigned long flags = IRQF_ONESHOT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int data, mask, ret = -EINVAL;
 
@@ -450,6 +479,10 @@ static struct regmap_irq_chip pm800_irq_chip = {
 	.mask_base = PM800_INT_ENA_1,
 	.ack_base = PM800_INT_STATUS1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.mask_invert = 1,
+>>>>>>> v3.18
 =======
 	.mask_invert = 1,
 >>>>>>> v3.18
@@ -460,6 +493,7 @@ static int pm800_pages_init(struct pm80x_chip *chip)
 	struct pm80x_subchip *subchip;
 	struct i2c_client *client = chip->client;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	subchip = chip->subchip;
 	/* PM800 block power: i2c addr 0x31 */
@@ -488,6 +522,8 @@ static int pm800_pages_init(struct pm80x_chip *chip)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 
 	subchip = chip->subchip;
@@ -533,6 +569,9 @@ static int pm800_pages_init(struct pm80x_chip *chip)
 
 out:
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -540,6 +579,7 @@ static void pm800_pages_exit(struct pm80x_chip *chip)
 {
 	struct pm80x_subchip *subchip;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	regmap_exit(chip->regmap);
 	i2c_unregister_device(chip->client);
@@ -554,6 +594,8 @@ static void pm800_pages_exit(struct pm80x_chip *chip)
 		i2c_unregister_device(subchip->gpadc_page);
 	}
 =======
+=======
+>>>>>>> v3.18
 	subchip = chip->subchip;
 
 	if (subchip && subchip->power_page)
@@ -561,12 +603,16 @@ static void pm800_pages_exit(struct pm80x_chip *chip)
 
 	if (subchip && subchip->gpadc_page)
 		i2c_unregister_device(subchip->gpadc_page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int device_800_init(struct pm80x_chip *chip,
 				     struct pm80x_platform_data *pdata)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret, pmic_id;
 	unsigned int val;
@@ -590,6 +636,11 @@ static int device_800_init(struct pm80x_chip *chip,
 		goto out;
 	}
 
+=======
+	int ret;
+	unsigned int val;
+
+>>>>>>> v3.18
 =======
 	int ret;
 	unsigned int val;
@@ -624,6 +675,7 @@ static int device_800_init(struct pm80x_chip *chip,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret =
 	    mfd_add_devices(chip->dev, 0, &onkey_devs[0],
 			    ARRAY_SIZE(onkey_devs), &onkey_resources[0], 0,
@@ -646,6 +698,8 @@ static int device_800_init(struct pm80x_chip *chip,
 			dev_info(chip->dev,
 				 "[%s]:Added mfd rtc_devs\n", __func__);
 =======
+=======
+>>>>>>> v3.18
 	ret = device_onkey_init(chip, pdata);
 	if (ret) {
 		dev_err(chip->dev, "Failed to add onkey subdev\n");
@@ -662,6 +716,9 @@ static int device_800_init(struct pm80x_chip *chip,
 	if (ret) {
 		dev_err(chip->dev, "Failed to add regulators subdev\n");
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -679,15 +736,21 @@ static int pm800_probe(struct i2c_client *client,
 	int ret = 0;
 	struct pm80x_chip *chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pm80x_platform_data *pdata = client->dev.platform_data;
 	struct pm80x_subchip *subchip;
 
 	ret = pm80x_init(client, id);
 =======
+=======
+>>>>>>> v3.18
 	struct pm80x_platform_data *pdata = dev_get_platdata(&client->dev);
 	struct pm80x_subchip *subchip;
 
 	ret = pm80x_init(client);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		dev_err(&client->dev, "pm800_init fail\n");
@@ -705,6 +768,7 @@ static int pm800_probe(struct i2c_client *client,
 		goto err_subchip_alloc;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	subchip->power_page_addr = pdata->power_page_addr;
 	subchip->gpadc_page_addr = pdata->gpadc_page_addr;
@@ -729,6 +793,8 @@ err_page_init:
 	mfd_remove_devices(chip->dev);
 	device_irq_exit_800(chip);
 =======
+=======
+>>>>>>> v3.18
 	/* pm800 has 2 addtional pages to support power and gpadc. */
 	subchip->power_page_addr = client->addr + 1;
 	subchip->gpadc_page_addr = client->addr + 2;
@@ -753,6 +819,9 @@ err_page_init:
 
 err_device_init:
 	pm800_pages_exit(chip);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_subchip_alloc:
 	pm80x_deinit();
@@ -776,7 +845,11 @@ static int pm800_remove(struct i2c_client *client)
 static struct i2c_driver pm800_driver = {
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name = "88PM80X",
+=======
+		.name = "88PM800",
+>>>>>>> v3.18
 =======
 		.name = "88PM800",
 >>>>>>> v3.18

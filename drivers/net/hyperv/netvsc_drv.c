@@ -12,8 +12,12 @@
  *
  * You should have received a copy of the GNU General Public License along with
 <<<<<<< HEAD
+<<<<<<< HEAD
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place - Suite 330, Boston, MA 02111-1307 USA.
+=======
+ * this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -53,9 +57,12 @@ struct net_device_context {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Restrict GSO size to account for NVGRE */
 #define NETVSC_GSO_MAX_SIZE	62768
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RING_SIZE_MIN 64
@@ -100,15 +107,21 @@ static int netvsc_open(struct net_device *net)
 	struct net_device_context *net_device_ctx = netdev_priv(net);
 	struct hv_device *device_obj = net_device_ctx->device_ctx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	struct netvsc_device *nvdev;
 	struct rndis_device *rdev;
 	int ret = 0;
 
 	netif_carrier_off(net);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Open up the device */
 	ret = rndis_filter_open(device_obj);
@@ -118,14 +131,20 @@ static int netvsc_open(struct net_device *net)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_start_queue(net);
 =======
+=======
+>>>>>>> v3.18
 	netif_tx_start_all_queues(net);
 
 	nvdev = hv_get_drvdata(device_obj);
 	rdev = nvdev->extension;
 	if (!rdev->link_state)
 		netif_carrier_on(net);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -149,7 +168,10 @@ static int netvsc_close(struct net_device *net)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void *init_ppi_data(struct rndis_message *msg, u32 ppi_size,
 				int pkt_type)
 {
@@ -249,11 +271,15 @@ static u16 netvsc_select_queue(struct net_device *ndev, struct sk_buff *skb,
 	return q_idx;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void netvsc_xmit_completion(void *context)
 {
 	struct hv_netvsc_packet *packet = (struct hv_netvsc_packet *)context;
 	struct sk_buff *skb = (struct sk_buff *)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		(unsigned long)packet->completion.send.send_completion_tid;
 
@@ -264,6 +290,8 @@ static void netvsc_xmit_completion(void *context)
 }
 
 =======
+=======
+>>>>>>> v3.18
 		(unsigned long)packet->send_completion_tid;
 	u32 index = packet->send_buf_index;
 
@@ -398,12 +426,16 @@ not_ip:
 	return ret_val;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int netvsc_start_xmit(struct sk_buff *skb, struct net_device *net)
 {
 	struct net_device_context *net_device_ctx = netdev_priv(net);
 	struct hv_netvsc_packet *packet;
 	int ret;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int i, num_pages, npg_data;
 	u32 skb_length = skb->len;
@@ -419,6 +451,8 @@ static int netvsc_start_xmit(struct sk_buff *skb, struct net_device *net)
 			 sizeof(struct rndis_filter_packet) +
 			 NDIS_VLAN_PPI_SIZE, GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int num_data_pgs;
 	struct rndis_message *rndis_msg;
 	struct rndis_packet *rndis_pkt;
@@ -451,6 +485,9 @@ static int netvsc_start_xmit(struct sk_buff *skb, struct net_device *net)
 			 sizeof(struct rndis_message) +
 			 NDIS_VLAN_PPI_SIZE + NDIS_CSUM_PPI_SIZE +
 			 NDIS_LSO_PPI_SIZE + NDIS_HASH_PPI_SIZE, GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!packet) {
 		/* out of memory, drop packet */
@@ -463,6 +500,7 @@ static int netvsc_start_xmit(struct sk_buff *skb, struct net_device *net)
 
 	packet->vlan_tci = skb->vlan_tci;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	packet->extension = (void *)(unsigned long)packet +
 				sizeof(struct hv_netvsc_packet) +
@@ -512,6 +550,8 @@ static int netvsc_start_xmit(struct sk_buff *skb, struct net_device *net)
 	ret = rndis_filter_send(net_device_ctx->device_ctx,
 				  packet);
 =======
+=======
+>>>>>>> v3.18
 	packet->q_idx = skb_get_queue_mapping(skb);
 
 	packet->is_data_pkt = true;
@@ -656,6 +696,9 @@ do_send:
 	ret = netvsc_send(net_device_ctx->device_ctx, packet);
 
 drop:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret == 0) {
 		net->stats.tx_bytes += skb_length;
@@ -675,6 +718,7 @@ drop:
  * netvsc_linkstatus_callback - Link up/down notification
  */
 void netvsc_linkstatus_callback(struct hv_device *device_obj,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				       unsigned int status)
 {
@@ -699,6 +743,8 @@ void netvsc_linkstatus_callback(struct hv_device *device_obj,
 	} else {
 		netif_carrier_off(net);
 =======
+=======
+>>>>>>> v3.18
 				struct rndis_message *resp)
 {
 	struct rndis_indicate_status *indicate = &resp->msg.indicate_status;
@@ -735,6 +781,9 @@ void netvsc_linkstatus_callback(struct hv_device *device_obj,
 		schedule_delayed_work(&ndev_ctx->dwork, msecs_to_jiffies(20));
 	} else {
 		schedule_delayed_work(&ndev_ctx->dwork, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -745,7 +794,12 @@ void netvsc_linkstatus_callback(struct hv_device *device_obj,
  */
 int netvsc_recv_callback(struct hv_device *device_obj,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct hv_netvsc_packet *packet)
+=======
+				struct hv_netvsc_packet *packet,
+				struct ndis_tcp_ip_checksum_info *csum_info)
+>>>>>>> v3.18
 =======
 				struct hv_netvsc_packet *packet,
 				struct ndis_tcp_ip_checksum_info *csum_info)
@@ -756,9 +810,13 @@ int netvsc_recv_callback(struct hv_device *device_obj,
 
 	net = ((struct netvsc_device *)hv_get_drvdata(device_obj))->ndev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!net) {
 		netdev_err(net, "got receive callback but net device"
 			" not initialized yet\n");
+=======
+	if (!net || net->reg_state != NETREG_REGISTERED) {
+>>>>>>> v3.18
 =======
 	if (!net || net->reg_state != NETREG_REGISTERED) {
 >>>>>>> v3.18
@@ -783,8 +841,11 @@ int netvsc_recv_callback(struct hv_device *device_obj,
 
 	skb->protocol = eth_type_trans(skb, net);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->ip_summed = CHECKSUM_NONE;
 =======
+=======
+>>>>>>> v3.18
 	if (csum_info) {
 		/* We only look at the IP checksum here.
 		 * Should we be dropping the packet if checksum
@@ -796,12 +857,21 @@ int netvsc_recv_callback(struct hv_device *device_obj,
 			skb->ip_summed = CHECKSUM_NONE;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (packet->vlan_tci & VLAN_TAG_PRESENT)
 		__vlan_hwaccel_put_tag(skb, htons(ETH_P_8021Q),
 				       packet->vlan_tci);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	skb_record_rx_queue(skb, packet->channel->
+			    offermsg.offer.sub_channel_index);
+
+>>>>>>> v3.18
 =======
 	skb_record_rx_queue(skb, packet->channel->
 			    offermsg.offer.sub_channel_index);
@@ -825,7 +895,10 @@ static void netvsc_get_drvinfo(struct net_device *net,
 {
 	strlcpy(info->driver, KBUILD_MODNAME, sizeof(info->driver));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strlcpy(info->version, HV_DRV_VERSION, sizeof(info->version));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	strlcpy(info->fw_version, "N/A", sizeof(info->fw_version));
@@ -843,7 +916,11 @@ static int netvsc_change_mtu(struct net_device *ndev, int mtu)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nvdev->nvsp_version == NVSP_PROTOCOL_VERSION_2)
+=======
+	if (nvdev->nvsp_version >= NVSP_PROTOCOL_VERSION_2)
+>>>>>>> v3.18
 =======
 	if (nvdev->nvsp_version >= NVSP_PROTOCOL_VERSION_2)
 >>>>>>> v3.18
@@ -864,7 +941,11 @@ static int netvsc_change_mtu(struct net_device *ndev, int mtu)
 	device_info.ring_size = ring_size;
 	rndis_filter_device_add(hdev, &device_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_wake_queue(ndev);
+=======
+	netif_tx_wake_all_queues(ndev);
+>>>>>>> v3.18
 =======
 	netif_tx_wake_all_queues(ndev);
 >>>>>>> v3.18
@@ -900,7 +981,10 @@ static int netvsc_set_mac_addr(struct net_device *ndev, void *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_POLL_CONTROLLER
 static void netvsc_poll_controller(struct net_device *net)
 {
@@ -909,6 +993,9 @@ static void netvsc_poll_controller(struct net_device *net)
 	 */
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct ethtool_ops ethtool_ops = {
@@ -925,11 +1012,17 @@ static const struct net_device_ops device_ops = {
 	.ndo_validate_addr =		eth_validate_addr,
 	.ndo_set_mac_address =		netvsc_set_mac_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.ndo_select_queue =		netvsc_select_queue,
 #ifdef CONFIG_NET_POLL_CONTROLLER
 	.ndo_poll_controller =		netvsc_poll_controller,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -940,8 +1033,14 @@ static const struct net_device_ops device_ops = {
  * another netif_notify_peers() into a delayed work, otherwise GARP packet
  * will not be sent after quick migration, and cause network disconnection.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 static void netvsc_send_garp(struct work_struct *w)
+=======
+ * Also, we update the carrier status here.
+ */
+static void netvsc_link_change(struct work_struct *w)
+>>>>>>> v3.18
 =======
  * Also, we update the carrier status here.
  */
@@ -952,12 +1051,15 @@ static void netvsc_link_change(struct work_struct *w)
 	struct net_device *net;
 	struct netvsc_device *net_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ndev_ctx = container_of(w, struct net_device_context, dwork.work);
 	net_device = hv_get_drvdata(ndev_ctx->device_ctx);
 	net = net_device->ndev;
 	netdev_notify_peers(net);
 =======
+=======
+>>>>>>> v3.18
 	struct rndis_device *rdev;
 	bool notify, refresh = false;
 	char *argv[] = { "/etc/init.d/network", "restart", NULL };
@@ -989,6 +1091,9 @@ static void netvsc_link_change(struct work_struct *w)
 
 	if (notify)
 		netdev_notify_peers(net);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1000,6 +1105,7 @@ static int netvsc_probe(struct hv_device *dev,
 	struct net_device_context *net_device_ctx;
 	struct netvsc_device_info device_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	net = alloc_etherdev(sizeof(struct net_device_context));
@@ -1008,6 +1114,8 @@ static int netvsc_probe(struct hv_device *dev,
 
 	/* Set initial state */
 =======
+=======
+>>>>>>> v3.18
 	struct netvsc_device *nvdev;
 	int ret;
 
@@ -1016,6 +1124,9 @@ static int netvsc_probe(struct hv_device *dev,
 	if (!net)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	netif_carrier_off(net);
 
@@ -1023,7 +1134,11 @@ static int netvsc_probe(struct hv_device *dev,
 	net_device_ctx->device_ctx = dev;
 	hv_set_drvdata(dev, net);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_DELAYED_WORK(&net_device_ctx->dwork, netvsc_send_garp);
+=======
+	INIT_DELAYED_WORK(&net_device_ctx->dwork, netvsc_link_change);
+>>>>>>> v3.18
 =======
 	INIT_DELAYED_WORK(&net_device_ctx->dwork, netvsc_link_change);
 >>>>>>> v3.18
@@ -1031,6 +1146,7 @@ static int netvsc_probe(struct hv_device *dev,
 
 	net->netdev_ops = &device_ops;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* TODO: Add GSO and Checksum offload */
 	net->hw_features = 0;
@@ -1047,6 +1163,8 @@ static int netvsc_probe(struct hv_device *dev,
 		goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	net->hw_features = NETIF_F_RXCSUM | NETIF_F_SG | NETIF_F_IP_CSUM |
 				NETIF_F_TSO;
 	net->features = NETIF_F_HW_VLAN_CTAG_TX | NETIF_F_SG | NETIF_F_RXCSUM |
@@ -1054,6 +1172,9 @@ static int netvsc_probe(struct hv_device *dev,
 
 	net->ethtool_ops = &ethtool_ops;
 	SET_NETDEV_DEV(net, &dev->device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Notify the netvsc driver of the new device */
@@ -1062,7 +1183,10 @@ static int netvsc_probe(struct hv_device *dev,
 	if (ret != 0) {
 		netdev_err(net, "unable to add netvsc device (ret %d)\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unregister_netdev(net);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		free_netdev(net);
@@ -1072,10 +1196,13 @@ static int netvsc_probe(struct hv_device *dev,
 	memcpy(net->dev_addr, device_info.mac_adr, ETH_ALEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_carrier_on(net);
 
 out:
 =======
+=======
+>>>>>>> v3.18
 	nvdev = hv_get_drvdata(dev);
 	netif_set_real_num_tx_queues(net, nvdev->num_chn);
 	netif_set_real_num_rx_queues(net, nvdev->num_chn);
@@ -1089,6 +1216,9 @@ out:
 		schedule_delayed_work(&net_device_ctx->dwork, 0);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1161,7 +1291,10 @@ static int __init netvsc_drv_init(void)
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_VERSION(HV_DRV_VERSION);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_DESCRIPTION("Microsoft Hyper-V network driver");

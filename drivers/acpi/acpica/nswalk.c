@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -161,9 +165,15 @@ struct acpi_namespace_node *acpi_ns_get_next_node_typed(acpi_object_type type,
  *              flags               - Whether to unlock the NS before invoking
  *                                    the callback routine
 <<<<<<< HEAD
+<<<<<<< HEAD
  *              pre_order_visit     - Called during tree pre-order visit
  *                                    when an object of "Type" is found
  *              post_order_visit    - Called during tree post-order visit
+=======
+ *              descending_callback - Called during tree descent
+ *                                    when an object of "Type" is found
+ *              ascending_callback  - Called during tree ascent
+>>>>>>> v3.18
 =======
  *              descending_callback - Called during tree descent
  *                                    when an object of "Type" is found
@@ -196,8 +206,13 @@ acpi_ns_walk_namespace(acpi_object_type type,
 		       u32 max_depth,
 		       u32 flags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       acpi_walk_callback pre_order_visit,
 		       acpi_walk_callback post_order_visit,
+=======
+		       acpi_walk_callback descending_callback,
+		       acpi_walk_callback ascending_callback,
+>>>>>>> v3.18
 =======
 		       acpi_walk_callback descending_callback,
 		       acpi_walk_callback ascending_callback,
@@ -271,6 +286,7 @@ acpi_ns_walk_namespace(acpi_object_type type,
 
 			/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * Invoke the user function, either pre-order or post-order
 			 * or both.
 			 */
@@ -288,6 +304,8 @@ acpi_ns_walk_namespace(acpi_object_type type,
 							     context,
 							     return_value);
 =======
+=======
+>>>>>>> v3.18
 			 * Invoke the user function, either descending, ascending,
 			 * or both.
 			 */
@@ -304,6 +322,9 @@ acpi_ns_walk_namespace(acpi_object_type type,
 					    ascending_callback(child_node,
 							       level, context,
 							       return_value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}

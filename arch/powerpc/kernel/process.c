@@ -26,7 +26,10 @@
 #include <linux/user.h>
 #include <linux/elf.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/prctl.h>
@@ -59,6 +62,10 @@
 #include <asm/firmware.h>
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/code-patching.h>
+>>>>>>> v3.18
 =======
 #include <asm/code-patching.h>
 >>>>>>> v3.18
@@ -82,7 +89,10 @@ struct task_struct *last_task_used_spe = NULL;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 void giveup_fpu_maybe_transactional(struct task_struct *tsk)
 {
@@ -126,6 +136,9 @@ void giveup_altivec_maybe_transactional(struct task_struct *tsk)
 #endif /* CONFIG_PPC_TRANSACTIONAL_MEM */
 
 #ifdef CONFIG_PPC_FPU
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Make sure the floating-point register state in the
@@ -155,7 +168,11 @@ void flush_fp_to_thread(struct task_struct *tsk)
 			BUG_ON(tsk != current);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 			giveup_fpu(tsk);
+=======
+			giveup_fpu_maybe_transactional(tsk);
+>>>>>>> v3.18
 =======
 			giveup_fpu_maybe_transactional(tsk);
 >>>>>>> v3.18
@@ -165,6 +182,10 @@ void flush_fp_to_thread(struct task_struct *tsk)
 }
 EXPORT_SYMBOL_GPL(flush_fp_to_thread);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_PPC_FPU */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PPC_FPU */
 >>>>>>> v3.18
@@ -176,17 +197,23 @@ void enable_kernel_fp(void)
 #ifdef CONFIG_SMP
 	if (current->thread.regs && (current->thread.regs->msr & MSR_FP))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		giveup_fpu(current);
 	else
 		giveup_fpu(NULL);	/* just enables FP for kernel */
 #else
 	giveup_fpu(last_task_used_math);
 =======
+=======
+>>>>>>> v3.18
 		giveup_fpu_maybe_transactional(current);
 	else
 		giveup_fpu(NULL);	/* just enables FP for kernel */
 #else
 	giveup_fpu_maybe_transactional(last_task_used_math);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_SMP */
 }
@@ -200,17 +227,23 @@ void enable_kernel_altivec(void)
 #ifdef CONFIG_SMP
 	if (current->thread.regs && (current->thread.regs->msr & MSR_VEC))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		giveup_altivec(current);
 	else
 		giveup_altivec_notask();
 #else
 	giveup_altivec(last_task_used_altivec);
 =======
+=======
+>>>>>>> v3.18
 		giveup_altivec_maybe_transactional(current);
 	else
 		giveup_altivec_notask();
 #else
 	giveup_altivec_maybe_transactional(last_task_used_altivec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_SMP */
 }
@@ -229,7 +262,11 @@ void flush_altivec_to_thread(struct task_struct *tsk)
 			BUG_ON(tsk != current);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 			giveup_altivec(tsk);
+=======
+			giveup_altivec_maybe_transactional(tsk);
+>>>>>>> v3.18
 =======
 			giveup_altivec_maybe_transactional(tsk);
 >>>>>>> v3.18
@@ -262,16 +299,22 @@ EXPORT_SYMBOL(enable_kernel_vsx);
 void giveup_vsx(struct task_struct *tsk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	giveup_fpu(tsk);
 	giveup_altivec(tsk);
 	__giveup_vsx(tsk);
 }
 =======
+=======
+>>>>>>> v3.18
 	giveup_fpu_maybe_transactional(tsk);
 	giveup_altivec_maybe_transactional(tsk);
 	__giveup_vsx(tsk);
 }
 EXPORT_SYMBOL(giveup_vsx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void flush_vsx_to_thread(struct task_struct *tsk)
@@ -402,6 +445,7 @@ static DEFINE_PER_CPU(struct arch_hw_breakpoint, current_brk);
 static void set_debug_reg_defaults(struct thread_struct *thread)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	thread->iac1 = thread->iac2 = 0;
 #if CONFIG_PPC_ADV_DEBUG_IACS > 2
 	thread->iac3 = thread->iac4 = 0;
@@ -412,6 +456,8 @@ static void set_debug_reg_defaults(struct thread_struct *thread)
 #endif
 	thread->dbcr0 = 0;
 =======
+=======
+>>>>>>> v3.18
 	thread->debug.iac1 = thread->debug.iac2 = 0;
 #if CONFIG_PPC_ADV_DEBUG_IACS > 2
 	thread->debug.iac3 = thread->debug.iac4 = 0;
@@ -421,13 +467,20 @@ static void set_debug_reg_defaults(struct thread_struct *thread)
 	thread->debug.dvc1 = thread->debug.dvc2 = 0;
 #endif
 	thread->debug.dbcr0 = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_BOOKE
 	/*
 	 * Force User/Supervisor bits to b11 (user-only MSR[PR]=1)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	thread->dbcr1 = DBCR1_IAC1US | DBCR1_IAC2US |	\
+=======
+	thread->debug.dbcr1 = DBCR1_IAC1US | DBCR1_IAC2US |
+>>>>>>> v3.18
 =======
 	thread->debug.dbcr1 = DBCR1_IAC1US | DBCR1_IAC2US |
 >>>>>>> v3.18
@@ -437,6 +490,7 @@ static void set_debug_reg_defaults(struct thread_struct *thread)
 	 * (0b11 MSR[PR]=1) and set all other bits in DBCR2 register to be 0.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	thread->dbcr2 = DBCR2_DAC1US | DBCR2_DAC2US;
 #else
 	thread->dbcr1 = 0;
@@ -445,6 +499,8 @@ static void set_debug_reg_defaults(struct thread_struct *thread)
 
 static void prime_debug_regs(struct thread_struct *thread)
 =======
+=======
+>>>>>>> v3.18
 	thread->debug.dbcr2 = DBCR2_DAC1US | DBCR2_DAC2US;
 #else
 	thread->debug.dbcr1 = 0;
@@ -452,6 +508,9 @@ static void prime_debug_regs(struct thread_struct *thread)
 }
 
 static void prime_debug_regs(struct debug_reg *debug)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/*
@@ -461,6 +520,7 @@ static void prime_debug_regs(struct debug_reg *debug)
 	 */
 	mtmsr(mfmsr() & ~MSR_DE);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mtspr(SPRN_IAC1, thread->iac1);
 	mtspr(SPRN_IAC2, thread->iac2);
@@ -479,6 +539,8 @@ static void prime_debug_regs(struct debug_reg *debug)
 #ifdef CONFIG_BOOKE
 	mtspr(SPRN_DBCR2, thread->dbcr2);
 =======
+=======
+>>>>>>> v3.18
 	mtspr(SPRN_IAC1, debug->iac1);
 	mtspr(SPRN_IAC2, debug->iac2);
 #if CONFIG_PPC_ADV_DEBUG_IACS > 2
@@ -495,6 +557,9 @@ static void prime_debug_regs(struct debug_reg *debug)
 	mtspr(SPRN_DBCR1, debug->dbcr1);
 #ifdef CONFIG_BOOKE
 	mtspr(SPRN_DBCR2, debug->dbcr2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 }
@@ -504,6 +569,7 @@ static void prime_debug_regs(struct debug_reg *debug)
  * stored in the new thread.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void switch_booke_debug_regs(struct thread_struct *new_thread)
 {
 	if ((current->thread.dbcr0 & DBCR0_IDM)
@@ -511,6 +577,8 @@ static void switch_booke_debug_regs(struct thread_struct *new_thread)
 			prime_debug_regs(new_thread);
 }
 =======
+=======
+>>>>>>> v3.18
 void switch_booke_debug_regs(struct debug_reg *new_debug)
 {
 	if ((current->thread.debug.dbcr0 & DBCR0_IDM)
@@ -518,6 +586,9 @@ void switch_booke_debug_regs(struct debug_reg *new_debug)
 			prime_debug_regs(new_debug);
 }
 EXPORT_SYMBOL_GPL(switch_booke_debug_regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else	/* !CONFIG_PPC_ADV_DEBUG_REGS */
 #ifndef CONFIG_HAVE_HW_BREAKPOINT
@@ -596,7 +667,11 @@ static inline int set_dawr(struct arch_hw_breakpoint *brk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int set_breakpoint(struct arch_hw_breakpoint *brk)
+=======
+void __set_breakpoint(struct arch_hw_breakpoint *brk)
+>>>>>>> v3.18
 =======
 void __set_breakpoint(struct arch_hw_breakpoint *brk)
 >>>>>>> v3.18
@@ -605,10 +680,13 @@ void __set_breakpoint(struct arch_hw_breakpoint *brk)
 
 	if (cpu_has_feature(CPU_FTR_DAWR))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return set_dawr(brk);
 
 	return set_dabr(brk);
 =======
+=======
+>>>>>>> v3.18
 		set_dawr(brk);
 	else
 		set_dabr(brk);
@@ -619,6 +697,9 @@ void set_breakpoint(struct arch_hw_breakpoint *brk)
 	preempt_disable();
 	__set_breakpoint(brk);
 	preempt_enable();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -638,8 +719,11 @@ static inline bool hw_brk_match(struct arch_hw_breakpoint *a,
 	return true;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 static void tm_reclaim_thread(struct thread_struct *thr,
@@ -682,6 +766,9 @@ void tm_reclaim_current(uint8_t cause)
 	tm_reclaim_thread(&current->thread, current_thread_info(), cause);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void tm_reclaim_task(struct task_struct *tsk)
 {
@@ -706,15 +793,21 @@ static inline void tm_reclaim_task(struct task_struct *tsk)
 	/* Stash the original thread MSR, as giveup_fpu et al will
 	 * modify it.  We hold onto it to see whether the task used
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * FP & vector regs.
 	 */
 	thr->tm_orig_msr = thr->regs->msr;
 =======
+=======
+>>>>>>> v3.18
 	 * FP & vector regs.  If the TIF_RESTORE_TM flag is set,
 	 * tm_orig_msr is already set.
 	 */
 	if (!test_ti_thread_flag(task_thread_info(tsk), TIF_RESTORE_TM))
 		thr->tm_orig_msr = thr->regs->msr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TM_DEBUG("--- tm_reclaim on pid %d (NIP=%lx, "
@@ -724,7 +817,11 @@ static inline void tm_reclaim_task(struct task_struct *tsk)
 		 thr->regs->trap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm_reclaim(thr, thr->regs->msr, TM_CAUSE_RESCHED);
+=======
+	tm_reclaim_thread(thr, task_thread_info(tsk), TM_CAUSE_RESCHED);
+>>>>>>> v3.18
 =======
 	tm_reclaim_thread(thr, task_thread_info(tsk), TM_CAUSE_RESCHED);
 >>>>>>> v3.18
@@ -826,7 +923,10 @@ static inline void __switch_to_tm(struct task_struct *prev)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * This is called if we are on the way out to userspace and the
@@ -864,6 +964,9 @@ void restore_tm_state(struct pt_regs *regs)
 	regs->msr |= msr_diff;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 #define tm_recheckpoint_new_task(new)
@@ -875,7 +978,10 @@ struct task_struct *__switch_to(struct task_struct *prev,
 {
 	struct thread_struct *new_thread, *old_thread;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct task_struct *last;
@@ -884,7 +990,13 @@ struct task_struct *__switch_to(struct task_struct *prev,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Back up the TAR across context switches.
+=======
+	WARN_ON(!irqs_disabled());
+
+	/* Back up the TAR and DSCR across context switches.
+>>>>>>> v3.18
 =======
 	WARN_ON(!irqs_disabled());
 
@@ -895,15 +1007,21 @@ struct task_struct *__switch_to(struct task_struct *prev,
 	 * entry/exit instead, and be in pt_regs.  FIXME, this should be in
 	 * pt_regs anyway (for debug).)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Save the TAR here before we do treclaim/trecheckpoint as these
 	 * will change the TAR.
 	 */
 	save_tar(&prev->thread);
 =======
+=======
+>>>>>>> v3.18
 	 * Save the TAR and DSCR here before we do treclaim/trecheckpoint as
 	 * these will change them.
 	 */
 	save_early_sprs(&prev->thread);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	__switch_to_tm(prev);
@@ -976,7 +1094,11 @@ struct task_struct *__switch_to(struct task_struct *prev,
 
 #ifdef CONFIG_PPC_ADV_DEBUG_REGS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch_booke_debug_regs(&new->thread);
+=======
+	switch_booke_debug_regs(&new->thread.debug);
+>>>>>>> v3.18
 =======
 	switch_booke_debug_regs(&new->thread.debug);
 >>>>>>> v3.18
@@ -987,8 +1109,13 @@ struct task_struct *__switch_to(struct task_struct *prev,
  */
 #ifndef CONFIG_HAVE_HW_BREAKPOINT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(hw_brk_match(&__get_cpu_var(current_brk), &new->thread.hw_brk)))
 		set_breakpoint(&new->thread.hw_brk);
+=======
+	if (unlikely(!hw_brk_match(&__get_cpu_var(current_brk), &new->thread.hw_brk)))
+		__set_breakpoint(&new->thread.hw_brk);
+>>>>>>> v3.18
 =======
 	if (unlikely(!hw_brk_match(&__get_cpu_var(current_brk), &new->thread.hw_brk)))
 		__set_breakpoint(&new->thread.hw_brk);
@@ -1025,8 +1152,11 @@ struct task_struct *__switch_to(struct task_struct *prev,
 #endif /* CONFIG_PPC_BOOK3S_64 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_irq_save(flags);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1049,8 +1179,11 @@ struct task_struct *__switch_to(struct task_struct *prev,
 #endif /* CONFIG_PPC_BOOK3S_64 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_irq_restore(flags);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return last;
@@ -1170,6 +1303,7 @@ void show_regs(struct pt_regs * regs)
 	printbits(regs->msr, msr_bits);
 	printk("  CR: %08lx  XER: %08lx\n", regs->ccr, regs->xer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC64
 	printk("SOFTE: %ld\n", regs->softe);
 #endif
@@ -1182,6 +1316,8 @@ void show_regs(struct pt_regs * regs)
 #else
 		printk("DAR: "REG", DSISR: %08lx\n", regs->dar, regs->dsisr);
 =======
+=======
+>>>>>>> v3.18
 	trap = TRAP(regs);
 	if ((regs->trap != 0xc00) && cpu_has_feature(CPU_FTR_CFAR))
 		printk("CFAR: "REG" ", regs->orig_gpr3);
@@ -1197,6 +1333,9 @@ void show_regs(struct pt_regs * regs)
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 	if (MSR_TM_ACTIVE(regs->msr))
 		printk("\nPACATMSCRATCH: %016llx ", get_paca()->tm_scratch);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -1217,9 +1356,12 @@ void show_regs(struct pt_regs * regs)
 	printk("LR ["REG"] %pS\n", regs->link, (void *)regs->link);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 	printk("PACATMSCRATCH [%llx]\n", get_paca()->tm_scratch);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	show_stack(current, (unsigned long *) regs->gpr[1]);
@@ -1260,6 +1402,7 @@ int arch_dup_task_struct(struct task_struct *dst, struct task_struct *src)
 	flush_spe_to_thread(src);
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	* Flush TM state out so we can copy it.  __switch_to_tm() does this
 	* flush but it removes the checkpointed state from the current CPU and
 	* transitions the CPU out of TM mode.  Hence we need to call
@@ -1267,22 +1410,30 @@ int arch_dup_task_struct(struct task_struct *dst, struct task_struct *src)
 	* checkpointed state back and the TM mode.
 	*/
 =======
+=======
+>>>>>>> v3.18
 	 * Flush TM state out so we can copy it.  __switch_to_tm() does this
 	 * flush but it removes the checkpointed state from the current CPU and
 	 * transitions the CPU out of TM mode.  Hence we need to call
 	 * tm_recheckpoint_new_task() (on the same task) to restore the
 	 * checkpointed state back and the TM mode.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__switch_to_tm(src);
 	tm_recheckpoint_new_task(src);
 
 	*dst = *src;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	clear_task_ebb(dst);
 
@@ -1306,6 +1457,9 @@ static void setup_ksp_vsid(struct task_struct *p, unsigned long sp)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Copy a thread..
@@ -1329,7 +1483,13 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 		memset(childregs, 0, sizeof(struct pt_regs));
 		childregs->gpr[1] = sp + sizeof(struct pt_regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		childregs->gpr[14] = usp;	/* function */
+=======
+		/* function */
+		if (usp)
+			childregs->gpr[14] = ppc_function_entry((void *)usp);
+>>>>>>> v3.18
 =======
 		/* function */
 		if (usp)
@@ -1378,19 +1538,26 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 	sp -= STACK_FRAME_OVERHEAD;
 	p->thread.ksp = sp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->thread.ksp_limit = (unsigned long)task_stack_page(p) +
 				_ALIGN_UP(sizeof(struct thread_info), 16);
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC32
 	p->thread.ksp_limit = (unsigned long)task_stack_page(p) +
 				_ALIGN_UP(sizeof(struct thread_info), 16);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_HAVE_HW_BREAKPOINT
 	p->thread.ptrace_bps[0] = NULL;
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PPC_STD_MMU_64
 	if (mmu_has_feature(MMU_FTR_SLB)) {
@@ -1408,6 +1575,8 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 	}
 #endif /* CONFIG_PPC_STD_MMU_64 */
 =======
+=======
+>>>>>>> v3.18
 	p->thread.fp_save_area = NULL;
 #ifdef CONFIG_ALTIVEC
 	p->thread.vr_save_area = NULL;
@@ -1415,6 +1584,9 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 
 	setup_ksp_vsid(p, sp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC64 
 	if (cpu_has_feature(CPU_FTR_DSCR)) {
@@ -1424,6 +1596,7 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 	if (cpu_has_feature(CPU_FTR_HAS_PPR))
 		p->thread.ppr = INIT_PPR;
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * The PPC64 ABI makes use of a TOC to contain function 
@@ -1436,6 +1609,9 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 #else
 	kregs->nip = (unsigned long)f;
 #endif
+=======
+	kregs->nip = ppc_function_entry(f);
+>>>>>>> v3.18
 =======
 	kregs->nip = ppc_function_entry(f);
 >>>>>>> v3.18
@@ -1481,6 +1657,7 @@ void start_thread(struct pt_regs *regs, unsigned long start, unsigned long sp)
 #else
 	if (!is_32bit_task()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long entry, toc;
 
 		/* start is a relocated pointer to the function descriptor for
@@ -1501,6 +1678,8 @@ void start_thread(struct pt_regs *regs, unsigned long start, unsigned long sp)
 		regs->nip = entry;
 		regs->gpr[2] = toc;
 =======
+=======
+>>>>>>> v3.18
 		unsigned long entry;
 
 		if (is_elf2_task()) {
@@ -1540,6 +1719,9 @@ void start_thread(struct pt_regs *regs, unsigned long start, unsigned long sp)
 			regs->gpr[2] = toc;
 		}
 		regs->nip = entry;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		regs->msr = MSR_USER64;
 	} else {
@@ -1553,6 +1735,7 @@ void start_thread(struct pt_regs *regs, unsigned long start, unsigned long sp)
 	current->thread.used_vsr = 0;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(current->thread.fpr, 0, sizeof(current->thread.fpr));
 	current->thread.fpscr.val = 0;
 #ifdef CONFIG_ALTIVEC
@@ -1560,12 +1743,17 @@ void start_thread(struct pt_regs *regs, unsigned long start, unsigned long sp)
 	memset(&current->thread.vscr, 0, sizeof(current->thread.vscr));
 	current->thread.vscr.u[3] = 0x00010000; /* Java mode disabled */
 =======
+=======
+>>>>>>> v3.18
 	memset(&current->thread.fp_state, 0, sizeof(current->thread.fp_state));
 	current->thread.fp_save_area = NULL;
 #ifdef CONFIG_ALTIVEC
 	memset(&current->thread.vr_state, 0, sizeof(current->thread.vr_state));
 	current->thread.vr_state.vscr.u[3] = 0x00010000; /* Java mode disabled */
 	current->thread.vr_save_area = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	current->thread.vrsave = 0;
 	current->thread.used_vr = 0;
@@ -1585,6 +1773,10 @@ void start_thread(struct pt_regs *regs, unsigned long start, unsigned long sp)
 #endif /* CONFIG_PPC_TRANSACTIONAL_MEM */
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(start_thread);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(start_thread);
 >>>>>>> v3.18
@@ -1604,7 +1796,10 @@ int set_fpexc_mode(struct task_struct *tsk, unsigned int val)
 #ifdef CONFIG_SPE
 		if (cpu_has_feature(CPU_FTR_SPE)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * When the sticky exception bits are set
 			 * directly by userspace, it must call prctl
@@ -1618,6 +1813,9 @@ int set_fpexc_mode(struct task_struct *tsk, unsigned int val)
 			 * the saved environment.
 			 */
 			tsk->thread.spefscr_last = mfspr(SPRN_SPEFSCR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			tsk->thread.fpexc_mode = val &
 				(PR_FP_EXC_SW_ENABLE | PR_FP_ALL_EXCEPT);
@@ -1651,10 +1849,13 @@ int get_fpexc_mode(struct task_struct *tsk, unsigned long adr)
 	if (tsk->thread.fpexc_mode & PR_FP_EXC_SW_ENABLE)
 #ifdef CONFIG_SPE
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cpu_has_feature(CPU_FTR_SPE))
 			val = tsk->thread.fpexc_mode;
 		else
 =======
+=======
+>>>>>>> v3.18
 		if (cpu_has_feature(CPU_FTR_SPE)) {
 			/*
 			 * When the sticky exception bits are set
@@ -1671,6 +1872,9 @@ int get_fpexc_mode(struct task_struct *tsk, unsigned long adr)
 			tsk->thread.spefscr_last = mfspr(SPRN_SPEFSCR);
 			val = tsk->thread.fpexc_mode;
 		} else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EINVAL;
 #else
@@ -1825,7 +2029,11 @@ void show_stack(struct task_struct *tsk, unsigned long *stack)
 	if (sp == 0) {
 		if (tsk == current)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			asm("mr %0,1" : "=r" (sp));
+=======
+			sp = current_stack_pointer();
+>>>>>>> v3.18
 =======
 			sp = current_stack_pointer();
 >>>>>>> v3.18
@@ -1867,7 +2075,11 @@ void show_stack(struct task_struct *tsk, unsigned long *stack)
 				(sp + STACK_FRAME_OVERHEAD);
 			lr = regs->link;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("--- Exception: %lx at %pS\n    LR = %pS\n",
+=======
+			printk("--- interrupt: %lx at %pS\n    LR = %pS\n",
+>>>>>>> v3.18
 =======
 			printk("--- interrupt: %lx at %pS\n    LR = %pS\n",
 >>>>>>> v3.18
@@ -1911,7 +2123,11 @@ unsigned long arch_align_stack(unsigned long sp)
 {
 	if (!(current->personality & ADDR_NO_RANDOMIZE) && randomize_va_space)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sp -= get_random_long() & ~PAGE_MASK;
+=======
+		sp -= get_random_int() & ~PAGE_MASK;
+>>>>>>> v3.18
 =======
 		sp -= get_random_int() & ~PAGE_MASK;
 >>>>>>> v3.18
@@ -1925,9 +2141,15 @@ static inline unsigned long brk_rnd(void)
 	/* 8MB for 32bit, 1GB for 64bit */
 	if (is_32bit_task())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rnd = (get_random_long() % (1UL<<(23-PAGE_SHIFT)));
 	else
 		rnd = (get_random_long() % (1UL<<(30-PAGE_SHIFT)));
+=======
+		rnd = (long)(get_random_int() % (1<<(23-PAGE_SHIFT)));
+	else
+		rnd = (long)(get_random_int() % (1<<(30-PAGE_SHIFT)));
+>>>>>>> v3.18
 =======
 		rnd = (long)(get_random_int() % (1<<(23-PAGE_SHIFT)));
 	else

@@ -372,9 +372,15 @@ static int cx231xx_i2c_xfer(struct i2c_adapter *i2c_adap,
 	for (i = 0; i < num; i++) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		addr = msgs[i].addr >> 1;
 
 		dprintk2(2, "%s %s addr=%x len=%d:",
+=======
+		addr = msgs[i].addr;
+
+		dprintk2(2, "%s %s addr=0x%x len=%d:",
+>>>>>>> v3.18
 =======
 		addr = msgs[i].addr;
 
@@ -397,7 +403,11 @@ static int cx231xx_i2c_xfer(struct i2c_adapter *i2c_adap,
 			if (i2c_debug >= 2) {
 				for (byte = 0; byte < msgs[i].len; byte++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					printk(" %02x", msgs[i].buf[byte]);
+=======
+					printk(KERN_CONT " %02x", msgs[i].buf[byte]);
+>>>>>>> v3.18
 =======
 					printk(KERN_CONT " %02x", msgs[i].buf[byte]);
 >>>>>>> v3.18
@@ -406,8 +416,11 @@ static int cx231xx_i2c_xfer(struct i2c_adapter *i2c_adap,
 			   msgs[i].addr == msgs[i + 1].addr
 			   && (msgs[i].len <= 2) && (bus->nr < 3)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* read bytes */
 =======
+=======
+>>>>>>> v3.18
 			/* write bytes */
 			if (i2c_debug >= 2) {
 				for (byte = 0; byte < msgs[i].len; byte++)
@@ -418,14 +431,22 @@ static int cx231xx_i2c_xfer(struct i2c_adapter *i2c_adap,
 			dprintk2(2, "plus %s %s addr=0x%x len=%d:",
 				(msgs[i+1].flags & I2C_M_RD) ? "read" : "write",
 				i+1 == num - 1 ? "stop" : "nonstop", addr, msgs[i+1].len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			rc = cx231xx_i2c_recv_bytes_with_saddr(i2c_adap,
 							       &msgs[i],
 							       &msgs[i + 1]);
 			if (i2c_debug >= 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				for (byte = 0; byte < msgs[i].len; byte++)
 					printk(" %02x", msgs[i].buf[byte]);
+=======
+				for (byte = 0; byte < msgs[i+1].len; byte++)
+					printk(KERN_CONT " %02x", msgs[i+1].buf[byte]);
+>>>>>>> v3.18
 =======
 				for (byte = 0; byte < msgs[i+1].len; byte++)
 					printk(KERN_CONT " %02x", msgs[i+1].buf[byte]);
@@ -437,7 +458,11 @@ static int cx231xx_i2c_xfer(struct i2c_adapter *i2c_adap,
 			if (i2c_debug >= 2) {
 				for (byte = 0; byte < msgs[i].len; byte++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					printk(" %02x", msgs[i].buf[byte]);
+=======
+					printk(KERN_CONT " %02x", msgs[i].buf[byte]);
+>>>>>>> v3.18
 =======
 					printk(KERN_CONT " %02x", msgs[i].buf[byte]);
 >>>>>>> v3.18
@@ -448,7 +473,11 @@ static int cx231xx_i2c_xfer(struct i2c_adapter *i2c_adap,
 			goto err;
 		if (i2c_debug >= 2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("\n");
+=======
+			printk(KERN_CONT "\n");
+>>>>>>> v3.18
 =======
 			printk(KERN_CONT "\n");
 >>>>>>> v3.18

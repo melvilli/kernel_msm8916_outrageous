@@ -1717,10 +1717,13 @@ struct snd_cs46xx {
 	struct snd_pcm *pcm_center_lfe;
 	struct snd_pcm *pcm_iec958;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* for compatibility */
 	struct snd_cs46xx_pcm *playback_pcm;
 	unsigned int play_ctl;
 =======
+=======
+>>>>>>> v3.18
 
 #define CS46XX_DSP_MODULES	5
 	struct dsp_module_desc *modules[CS46XX_DSP_MODULES];
@@ -1729,6 +1732,9 @@ struct snd_cs46xx {
 	unsigned int play_ctl;
 
 	struct ba1_struct *ba1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

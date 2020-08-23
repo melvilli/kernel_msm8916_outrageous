@@ -6,14 +6,20 @@
  * Copyright (C) 1995, 96, 97, 98, 99, 2003, 05 Ralf Baechle
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _ASM_FCNTL_H
 #define _ASM_FCNTL_H
 
 =======
+=======
+>>>>>>> v3.18
 #ifndef _UAPI_ASM_FCNTL_H
 #define _UAPI_ASM_FCNTL_H
 
 #include <asm/sgidefs.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define O_APPEND	0x0008
@@ -63,7 +69,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_32BIT
+=======
+#if _MIPS_SIM != _MIPS_SIM_ABI64
+
+>>>>>>> v3.18
 =======
 #if _MIPS_SIM != _MIPS_SIM_ABI64
 
@@ -74,8 +85,13 @@ struct flock {
 	short	l_type;
 	short	l_whence;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	off_t	l_start;
 	off_t	l_len;
+=======
+	__kernel_off_t	l_start;
+	__kernel_off_t	l_len;
+>>>>>>> v3.18
 =======
 	__kernel_off_t	l_start;
 	__kernel_off_t	l_len;
@@ -88,15 +104,21 @@ struct flock {
 #define HAVE_ARCH_STRUCT_FLOCK
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_32BIT */
 
 #include <asm-generic/fcntl.h>
 
 #endif /* _ASM_FCNTL_H */
 =======
+=======
+>>>>>>> v3.18
 #endif /* _MIPS_SIM == _MIPS_SIM_ABI32 */
 
 #include <asm-generic/fcntl.h>
 
 #endif /* _UAPI_ASM_FCNTL_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

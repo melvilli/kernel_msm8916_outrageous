@@ -8,7 +8,13 @@ extern struct iscsi_tiqn *iscsit_add_tiqn(unsigned char *);
 extern void iscsit_del_tiqn(struct iscsi_tiqn *);
 extern int iscsit_access_np(struct iscsi_np *, struct iscsi_portal_group *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int iscsit_deaccess_np(struct iscsi_np *, struct iscsi_portal_group *);
+=======
+extern void iscsit_login_kref_put(struct kref *);
+extern int iscsit_deaccess_np(struct iscsi_np *, struct iscsi_portal_group *,
+				struct iscsi_tpg_np *);
+>>>>>>> v3.18
 =======
 extern void iscsit_login_kref_put(struct kref *);
 extern int iscsit_deaccess_np(struct iscsi_np *, struct iscsi_portal_group *,
@@ -20,7 +26,11 @@ extern struct iscsi_np *iscsit_add_np(struct __kernel_sockaddr_storage *,
 				char *, int);
 extern int iscsit_reset_np_thread(struct iscsi_np *, struct iscsi_tpg_np *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct iscsi_portal_group *);
+=======
+				struct iscsi_portal_group *, bool);
+>>>>>>> v3.18
 =======
 				struct iscsi_portal_group *, bool);
 >>>>>>> v3.18
@@ -48,7 +58,10 @@ extern struct target_fabric_configfs *lio_target_fabric_configfs;
 extern struct kmem_cache *lio_dr_cache;
 extern struct kmem_cache *lio_ooo_cache;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct kmem_cache *lio_cmd_cache;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct kmem_cache *lio_qr_cache;

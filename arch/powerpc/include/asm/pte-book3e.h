@@ -41,7 +41,11 @@
 #define _PAGE_U0	0x020000
 #define _PAGE_ACCESSED	0x040000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PAGE_LENDIAN	0x080000
+=======
+#define _PAGE_ENDIAN	0x080000
+>>>>>>> v3.18
 =======
 #define _PAGE_ENDIAN	0x080000
 >>>>>>> v3.18

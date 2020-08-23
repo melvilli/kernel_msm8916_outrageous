@@ -366,6 +366,7 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 				int manifest_sync_timeout)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *block;
 	struct dfu_status dfu_stat_buf;
 	int ret = 0;
@@ -376,6 +377,8 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 	int bsize = 0;
 	int blockno = 0;
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 	int need_dfu_state = 1;
 	int is_done = 0;
@@ -385,6 +388,9 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 	struct dfu_status *dfu_stat_buf = NULL;
 	u8 *dfu_state = NULL;
 	u8 *block = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	at76_dbg(DBG_DFU, "%s( %p, %u, %d)", __func__, buf, size,
@@ -396,6 +402,7 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	block = kmalloc(FW_BLOCK_SIZE, GFP_KERNEL);
 	if (!block)
 		return -ENOMEM;
@@ -404,6 +411,8 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 		if (need_dfu_state) {
 			ret = at76_dfu_get_state(udev, &dfu_state);
 =======
+=======
+>>>>>>> v3.18
 	dfu_stat_buf = kmalloc(sizeof(struct dfu_status), GFP_KERNEL);
 	if (!dfu_stat_buf) {
 		ret = -ENOMEM;
@@ -426,6 +435,9 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 	do {
 		if (need_dfu_state) {
 			ret = at76_dfu_get_state(udev, dfu_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ret < 0) {
 				dev_err(&udev->dev,
@@ -436,6 +448,7 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (dfu_state) {
 		case STATE_DFU_DOWNLOAD_SYNC:
 			at76_dbg(DBG_DFU, "STATE_DFU_DOWNLOAD_SYNC");
@@ -444,6 +457,8 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 				dfu_state = dfu_stat_buf.state;
 				dfu_timeout = at76_get_timeout(&dfu_stat_buf);
 =======
+=======
+>>>>>>> v3.18
 		switch (*dfu_state) {
 		case STATE_DFU_DOWNLOAD_SYNC:
 			at76_dbg(DBG_DFU, "STATE_DFU_DOWNLOAD_SYNC");
@@ -451,6 +466,9 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 			if (ret >= 0) {
 				*dfu_state = dfu_stat_buf->state;
 				dfu_timeout = at76_get_timeout(dfu_stat_buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				need_dfu_state = 0;
 			} else
@@ -495,6 +513,7 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 			at76_dbg(DBG_DFU, "STATE_DFU_MANIFEST_SYNC");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = at76_dfu_get_status(udev, &dfu_stat_buf);
 			if (ret < 0)
 				break;
@@ -502,12 +521,17 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 			dfu_state = dfu_stat_buf.state;
 			dfu_timeout = at76_get_timeout(&dfu_stat_buf);
 =======
+=======
+>>>>>>> v3.18
 			ret = at76_dfu_get_status(udev, dfu_stat_buf);
 			if (ret < 0)
 				break;
 
 			*dfu_state = dfu_stat_buf->state;
 			dfu_timeout = at76_get_timeout(dfu_stat_buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			need_dfu_state = 0;
 
@@ -541,7 +565,11 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			at76_dbg(DBG_DFU, "DFU UNKNOWN STATE (%d)", dfu_state);
+=======
+			at76_dbg(DBG_DFU, "DFU UNKNOWN STATE (%d)", *dfu_state);
+>>>>>>> v3.18
 =======
 			at76_dbg(DBG_DFU, "DFU UNKNOWN STATE (%d)", *dfu_state);
 >>>>>>> v3.18
@@ -552,12 +580,18 @@ static int at76_usbdfu_download(struct usb_device *udev, u8 *buf, u32 size,
 
 exit:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(block);
 =======
+=======
+>>>>>>> v3.18
 	kfree(dfu_state);
 	kfree(block);
 	kfree(dfu_stat_buf);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret >= 0)
 		ret = 0;
@@ -1345,6 +1379,10 @@ static int at76_load_external_fw(struct usb_device *udev, struct fwentry *fwe)
 				"loading %dth firmware block failed: %d\n",
 				blockno, ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			ret = -EIO;
+>>>>>>> v3.18
 =======
 			ret = -EIO;
 >>>>>>> v3.18
@@ -1482,6 +1520,11 @@ static int at76_startup_device(struct at76_priv *priv)
 	memset(priv->bssid, 0, ETH_ALEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->scanning = false;
+
+>>>>>>> v3.18
 =======
 	priv->scanning = false;
 
@@ -1560,7 +1603,10 @@ static void at76_work_submit_rx(struct work_struct *work)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This is a workaround to make scan working:
  * currently mac80211 does not process frames with no frequency
  * information.
@@ -1607,6 +1653,9 @@ exit:
 	return ieee80211_channel_to_frequency(channel, IEEE80211_BAND_2GHZ);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void at76_rx_tasklet(unsigned long param)
 {
@@ -1649,6 +1698,11 @@ static void at76_rx_tasklet(unsigned long param)
 	rx_status.flag |= RX_FLAG_DECRYPTED;
 	rx_status.flag |= RX_FLAG_IV_STRIPPED;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rx_status.band = IEEE80211_BAND_2GHZ;
+	rx_status.freq = at76_guess_freq(priv);
+>>>>>>> v3.18
 =======
 	rx_status.band = IEEE80211_BAND_2GHZ;
 	rx_status.freq = at76_guess_freq(priv);
@@ -1852,7 +1906,11 @@ static void at76_mac80211_tx(struct ieee80211_hw *hw,
 	 * authentication frame extract the bssid and send the CMD_JOIN. */
 	if (mgmt->frame_control & cpu_to_le16(IEEE80211_STYPE_AUTH)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!ether_addr_equal(priv->bssid, mgmt->bssid)) {
+=======
+		if (!ether_addr_equal_64bits(priv->bssid, mgmt->bssid)) {
+>>>>>>> v3.18
 =======
 		if (!ether_addr_equal_64bits(priv->bssid, mgmt->bssid)) {
 >>>>>>> v3.18
@@ -2010,6 +2068,11 @@ static void at76_dwork_hw_scan(struct work_struct *work)
 		at76_join(priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->scanning = false;
+
+>>>>>>> v3.18
 =======
 	priv->scanning = false;
 
@@ -2024,8 +2087,14 @@ static void at76_dwork_hw_scan(struct work_struct *work)
 static int at76_hw_scan(struct ieee80211_hw *hw,
 			struct ieee80211_vif *vif,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct cfg80211_scan_request *req)
 {
+=======
+			struct ieee80211_scan_request *hw_req)
+{
+	struct cfg80211_scan_request *req = &hw_req->req;
+>>>>>>> v3.18
 =======
 			struct ieee80211_scan_request *hw_req)
 {
@@ -2075,6 +2144,10 @@ static int at76_hw_scan(struct ieee80211_hw *hw,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->scanning = true;
+>>>>>>> v3.18
 =======
 	priv->scanning = true;
 >>>>>>> v3.18
@@ -2170,7 +2243,10 @@ static void at76_configure_filter(struct ieee80211_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int at76_set_wep(struct at76_priv *priv)
 {
 	int ret = 0;
@@ -2209,6 +2285,9 @@ static int at76_set_wep(struct at76_priv *priv)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int at76_set_key(struct ieee80211_hw *hw, enum set_key_cmd cmd,
 			struct ieee80211_vif *vif, struct ieee80211_sta *sta,
@@ -2253,7 +2332,11 @@ static int at76_set_key(struct ieee80211_hw *hw, enum set_key_cmd cmd,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	at76_startup_device(priv);
+=======
+	at76_set_wep(priv);
+>>>>>>> v3.18
 =======
 	at76_set_wep(priv);
 >>>>>>> v3.18
@@ -2307,7 +2390,10 @@ static struct at76_priv *at76_alloc_new_device(struct usb_device *udev)
 
 	/* unit us */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->hw->channel_change_time = 100000;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2511,8 +2597,11 @@ static void at76_delete_device(struct at76_priv *priv)
 	kfree_skb(priv->rx_skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_put_dev(priv->udev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	at76_dbg(DBG_PROC_ENTRY, "%s: before freeing priv/ieee80211_hw",
@@ -2532,7 +2621,11 @@ static int at76_probe(struct usb_interface *interface,
 	int op_mode;
 	int need_ext_fw = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mib_fw_version fwv;
+=======
+	struct mib_fw_version *fwv = NULL;
+>>>>>>> v3.18
 =======
 	struct mib_fw_version *fwv = NULL;
 >>>>>>> v3.18
@@ -2541,20 +2634,30 @@ static int at76_probe(struct usb_interface *interface,
 	udev = usb_get_dev(interface_to_usbdev(interface));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	fwv = kmalloc(sizeof(*fwv), GFP_KERNEL);
 	if (!fwv) {
 		ret = -ENOMEM;
 		goto exit;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Load firmware into kernel memory */
 	fwe = at76_load_firmware(udev, board_type);
 	if (!fwe) {
 		ret = -ENOENT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error;
+=======
+		goto exit;
+>>>>>>> v3.18
 =======
 		goto exit;
 >>>>>>> v3.18
@@ -2572,7 +2675,11 @@ static int at76_probe(struct usb_interface *interface,
 			"cannot handle a device in HW_CONFIG_MODE\n");
 		ret = -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error;
+=======
+		goto exit;
+>>>>>>> v3.18
 =======
 		goto exit;
 >>>>>>> v3.18
@@ -2589,15 +2696,21 @@ static int at76_probe(struct usb_interface *interface,
 				"error %d downloading internal firmware\n",
 				ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto error;
 		}
 		usb_put_dev(udev);
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 			goto exit;
 		}
 		usb_put_dev(udev);
 		goto exit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2612,8 +2725,13 @@ static int at76_probe(struct usb_interface *interface,
 	if ((fwe->fw_version.major > 0 || fwe->fw_version.minor >= 100)
 	    || (op_mode == OPMODE_NORMAL_NIC_WITH_FLASH)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = at76_get_mib(udev, MIB_FW_VERSION, &fwv, sizeof(fwv));
 		if (ret < 0 || (fwv.major | fwv.minor) == 0)
+=======
+		ret = at76_get_mib(udev, MIB_FW_VERSION, fwv, sizeof(*fwv));
+		if (ret < 0 || (fwv->major | fwv->minor) == 0)
+>>>>>>> v3.18
 =======
 		ret = at76_get_mib(udev, MIB_FW_VERSION, fwv, sizeof(*fwv));
 		if (ret < 0 || (fwv->major | fwv->minor) == 0)
@@ -2629,6 +2747,7 @@ static int at76_probe(struct usb_interface *interface,
 
 		ret = at76_load_external_fw(udev, fwe);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret)
 			goto error;
 
@@ -2639,6 +2758,8 @@ static int at76_probe(struct usb_interface *interface,
 				"error %d getting firmware version\n", ret);
 			goto error;
 =======
+=======
+>>>>>>> v3.18
 		if (ret < 0)
 			goto exit;
 
@@ -2648,6 +2769,9 @@ static int at76_probe(struct usb_interface *interface,
 			dev_err(&interface->dev,
 				"error %d getting firmware version\n", ret);
 			goto exit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -2656,7 +2780,11 @@ static int at76_probe(struct usb_interface *interface,
 	if (!priv) {
 		ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error;
+=======
+		goto exit;
+>>>>>>> v3.18
 =======
 		goto exit;
 >>>>>>> v3.18
@@ -2665,7 +2793,11 @@ static int at76_probe(struct usb_interface *interface,
 	usb_set_intfdata(interface, priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&priv->fw_version, &fwv, sizeof(struct mib_fw_version));
+=======
+	memcpy(&priv->fw_version, fwv, sizeof(struct mib_fw_version));
+>>>>>>> v3.18
 =======
 	memcpy(&priv->fw_version, fwv, sizeof(struct mib_fw_version));
 >>>>>>> v3.18
@@ -2676,15 +2808,21 @@ static int at76_probe(struct usb_interface *interface,
 		at76_delete_device(priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
 
 error:
 	usb_put_dev(udev);
 =======
+=======
+>>>>>>> v3.18
 exit:
 	kfree(fwv);
 	if (ret < 0)
 		usb_put_dev(udev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -2703,6 +2841,10 @@ static void at76_disconnect(struct usb_interface *interface)
 	wiphy_info(priv->hw->wiphy, "disconnecting\n");
 	at76_delete_device(priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usb_put_dev(priv->udev);
+>>>>>>> v3.18
 =======
 	usb_put_dev(priv->udev);
 >>>>>>> v3.18

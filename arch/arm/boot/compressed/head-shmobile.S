@@ -47,7 +47,11 @@ __image_end:
 	.long	_got_end
 __load_base:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long	CONFIG_MEMORY_START + 0x02000000 @ Load at 32Mb into SDRAM
+=======
+	.long	MEMORY_START + 0x02000000 @ Load at 32Mb into SDRAM
+>>>>>>> v3.18
 =======
 	.long	MEMORY_START + 0x02000000 @ Load at 32Mb into SDRAM
 >>>>>>> v3.18
@@ -59,6 +63,7 @@ __tmp_stack:
 __continue:
 #endif /* CONFIG_ZBOOT_ROM_MMC || CONFIG_ZBOOT_ROM_SH_MOBILE_SDHI */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	b	1f
 __atags:@ tag #1
@@ -84,6 +89,8 @@ __atags:@ tag #1
 
 1 :	.long MACH_TYPE
 =======
+=======
+>>>>>>> v3.18
 	adr	r0, dtb_info
 	ldmia	r0, {r1, r3, r4, r5, r7}
 
@@ -125,6 +132,9 @@ dtb_info:
 	/* Failure: Zero board ID, NULL atag/dtb */
 	mov 	r7, #0
 	mov	r8, #0			@ pass null pointer as atag
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 2 :
 

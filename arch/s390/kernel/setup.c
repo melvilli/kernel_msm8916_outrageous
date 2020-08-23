@@ -25,6 +25,10 @@
 #include <linux/unistd.h>
 #include <linux/ptrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/random.h>
+>>>>>>> v3.18
 =======
 #include <linux/random.h>
 >>>>>>> v3.18
@@ -52,7 +56,10 @@
 
 #include <asm/ipl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/facility.h>
@@ -70,6 +77,7 @@
 #include <asm/os_info.h>
 #include <asm/sclp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "entry.h"
 
 long psw_kernel_bits	= PSW_DEFAULT_KEY | PSW_MASK_BASE | PSW_ASC_PRIMARY |
@@ -84,6 +92,11 @@ long psw_user_bits	= PSW_MASK_DAT | PSW_MASK_IO | PSW_MASK_EXT |
 struct uaccess_ops uaccess;
 EXPORT_SYMBOL(uaccess);
 
+=======
+#include <asm/sysinfo.h>
+#include "entry.h"
+
+>>>>>>> v3.18
 =======
 #include <asm/sysinfo.h>
 #include "entry.h"
@@ -105,10 +118,16 @@ unsigned long elf_hwcap = 0;
 char elf_platform[ELF_PLATFORM_SIZE];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mem_chunk __initdata memory_chunk[MEMORY_CHUNKS];
 
 int __initdata memory_end_set;
 unsigned long __initdata memory_end;
+=======
+int __initdata memory_end_set;
+unsigned long __initdata memory_end;
+unsigned long __initdata max_physmem_end;
+>>>>>>> v3.18
 =======
 int __initdata memory_end_set;
 unsigned long __initdata memory_end;
@@ -245,7 +264,11 @@ static void __init conmode_default(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ZFCPDUMP
+=======
+#ifdef CONFIG_CRASH_DUMP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_CRASH_DUMP
 >>>>>>> v3.18
@@ -261,7 +284,11 @@ static void __init setup_zfcpdump(void)
 #else
 static inline void setup_zfcpdump(void) {}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_ZFCPDUMP */
+=======
+#endif /* CONFIG_CRASH_DUMP */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_CRASH_DUMP */
 >>>>>>> v3.18
@@ -314,6 +341,10 @@ static int __init early_parse_mem(char *p)
 {
 	memory_end = memparse(p, &p);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memory_end &= PAGE_MASK;
+>>>>>>> v3.18
 =======
 	memory_end &= PAGE_MASK;
 >>>>>>> v3.18
@@ -331,6 +362,7 @@ static int __init parse_vmalloc(char *arg)
 }
 early_param("vmalloc", parse_vmalloc);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 unsigned int s390_user_mode = PRIMARY_SPACE_MODE;
 EXPORT_SYMBOL_GPL(s390_user_mode);
@@ -371,6 +403,8 @@ static void __init setup_addressing_mode(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void *restart_stack __attribute__((__section__(".data")));
 
 static void __init setup_lowcore(void)
@@ -382,6 +416,7 @@ static void __init setup_lowcore(void)
 	 */
 	BUILD_BUG_ON(sizeof(struct _lowcore) != LC_PAGES * 4096);
 	lc = __alloc_bootmem_low(LC_PAGES * PAGE_SIZE, LC_PAGES * PAGE_SIZE, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	lc->restart_psw.mask = psw_kernel_bits;
 	lc->restart_psw.addr =
@@ -402,6 +437,8 @@ static void __init setup_lowcore(void)
 		PSW_ADDR_AMODE | (unsigned long) mcck_int_handler;
 	lc->io_new_psw.mask = psw_kernel_bits |
 =======
+=======
+>>>>>>> v3.18
 	lc->restart_psw.mask = PSW_KERNEL_BITS;
 	lc->restart_psw.addr =
 		PSW_ADDR_AMODE | (unsigned long) restart_int_handler;
@@ -420,6 +457,9 @@ static void __init setup_lowcore(void)
 	lc->mcck_new_psw.addr =
 		PSW_ADDR_AMODE | (unsigned long) mcck_int_handler;
 	lc->io_new_psw.mask = PSW_KERNEL_BITS |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		PSW_MASK_DAT | PSW_MASK_MCHECK;
 	lc->io_new_psw.addr = PSW_ADDR_AMODE | (unsigned long) io_int_handler;
@@ -447,6 +487,12 @@ static void __init setup_lowcore(void)
 	}
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (MACHINE_HAS_VX)
+		lc->vector_save_area_addr =
+			(unsigned long) &lc->vector_save_area;
+>>>>>>> v3.18
 =======
 	if (MACHINE_HAS_VX)
 		lc->vector_save_area_addr =
@@ -470,7 +516,11 @@ static void __init setup_lowcore(void)
 	/*
 	 * Set up PSW restart to call ipl.c:do_restart(). Copy the relevant
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * restart data to the absolute zero lowcore. This is necesary if
+=======
+	 * restart data to the absolute zero lowcore. This is necessary if
+>>>>>>> v3.18
 =======
 	 * restart data to the absolute zero lowcore. This is necessary if
 >>>>>>> v3.18
@@ -489,11 +539,17 @@ static void __init setup_lowcore(void)
 	mem_assign_absolute(S390_lowcore.restart_psw, lc->restart_psw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 	lc->spinlock_lockval = arch_spin_lockval(0);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_prefix((u32)(unsigned long) lc);
 	lowcore_ptr[0] = lc;
@@ -524,7 +580,12 @@ static void __init setup_resources(void)
 {
 	struct resource *res, *std_res, *sub_res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, j;
+=======
+	struct memblock_region *reg;
+	int j;
+>>>>>>> v3.18
 =======
 	struct memblock_region *reg;
 	int j;
@@ -537,6 +598,7 @@ static void __init setup_resources(void)
 	bss_resource.start = (unsigned long) &__bss_start;
 	bss_resource.end = (unsigned long) &__bss_stop - 1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < MEMORY_CHUNKS; i++) {
 		if (!memory_chunk[i].size)
@@ -557,6 +619,8 @@ static void __init setup_resources(void)
 		res->start = memory_chunk[i].addr;
 		res->end = res->start + memory_chunk[i].size - 1;
 =======
+=======
+>>>>>>> v3.18
 	for_each_memblock(memory, reg) {
 		res = alloc_bootmem_low(sizeof(*res));
 		res->flags = IORESOURCE_BUSY | IORESOURCE_MEM;
@@ -564,6 +628,9 @@ static void __init setup_resources(void)
 		res->name = "System RAM";
 		res->start = reg->base;
 		res->end = reg->base + reg->size - 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		request_resource(&iomem_resource, res);
 
@@ -588,6 +655,7 @@ static void __init setup_resources(void)
 static void __init setup_memory_end(void)
 {
 	unsigned long vmax, vmalloc_size, tmp;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long real_memory_size = 0;
 	int i;
@@ -627,14 +695,22 @@ static void __init setup_memory_end(void)
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	/* Choose kernel address space layout: 2, 3, or 4 levels. */
 #ifdef CONFIG_64BIT
 	vmalloc_size = VMALLOC_END ?: (128UL << 30) - MODULES_LEN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = (memory_end ?: real_memory_size) / PAGE_SIZE;
 	tmp = tmp * (sizeof(struct page) + PAGE_SIZE) + vmalloc_size;
 	if (tmp <= (1UL << 42))
+=======
+	tmp = (memory_end ?: max_physmem_end) / PAGE_SIZE;
+	tmp = tmp * (sizeof(struct page) + PAGE_SIZE);
+	if (tmp + vmalloc_size + MODULES_LEN <= (1UL << 42))
+>>>>>>> v3.18
 =======
 	tmp = (memory_end ?: max_physmem_end) / PAGE_SIZE;
 	tmp = tmp * (sizeof(struct page) + PAGE_SIZE);
@@ -666,6 +742,7 @@ static void __init setup_memory_end(void)
 
 	/* Take care that memory_end is set and <= vmemmap */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memory_end = min(memory_end ?: real_memory_size, tmp);
 
 	/* Fixup memory chunk array to fit into 0..memory_end */
@@ -682,11 +759,16 @@ static void __init setup_memory_end(void)
 			chunk->size = memory_end - chunk->addr;
 	}
 =======
+=======
+>>>>>>> v3.18
 	memory_end = min(memory_end ?: max_physmem_end, tmp);
 	max_pfn = max_low_pfn = PFN_DOWN(memory_end);
 	memblock_remove(memory_end, ULONG_MAX);
 
 	pr_notice("Max memory size: %luMB\n", memory_end >> 20);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -698,6 +780,7 @@ static void __init setup_vmcoreinfo(void)
 #ifdef CONFIG_CRASH_DUMP
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Find suitable location for crashkernel memory
  */
@@ -784,6 +867,8 @@ static int __init verify_crash_base(unsigned long crash_base,
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * When kdump is enabled, we have to ensure that no memory from
  * the area [0 - crashkernel memory size] and
  * [crashk_res.start - crashk_res.end] is set offline.
@@ -794,6 +879,11 @@ static int kdump_mem_notifier(struct notifier_block *nb,
 	struct memory_notify *arg = data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (action != MEM_GOING_OFFLINE)
+		return NOTIFY_OK;
+>>>>>>> v3.18
 =======
 	if (action != MEM_GOING_OFFLINE)
 		return NOTIFY_OK;
@@ -815,7 +905,10 @@ static struct notifier_block kdump_mem_nb = {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Make sure that the area behind memory_end is protected
  */
 static void reserve_memory_end(void)
@@ -834,12 +927,16 @@ static void reserve_memory_end(void)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Make sure that oldmem, where the dump is stored, is protected
  */
 static void reserve_oldmem(void)
 {
 #ifdef CONFIG_CRASH_DUMP
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long real_size = 0;
 	int i;
@@ -858,6 +955,8 @@ static void reserve_oldmem(void)
 	else
 		saved_max_pfn = PFN_DOWN(real_size) - 1;
 =======
+=======
+>>>>>>> v3.18
 	if (OLDMEM_BASE)
 		/* Forget all memory above the running kdump system */
 		memblock_reserve(OLDMEM_SIZE, (phys_addr_t)ULONG_MAX);
@@ -873,6 +972,9 @@ static void remove_oldmem(void)
 	if (OLDMEM_BASE)
 		/* Forget all memory above the running kdump system */
 		memblock_remove(OLDMEM_SIZE, (phys_addr_t)ULONG_MAX);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 }
@@ -885,7 +987,11 @@ static void __init reserve_crashkernel(void)
 #ifdef CONFIG_CRASH_DUMP
 	unsigned long long crash_base, crash_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *msg = NULL;
+=======
+	phys_addr_t low, high;
+>>>>>>> v3.18
 =======
 	phys_addr_t low, high;
 >>>>>>> v3.18
@@ -893,6 +999,7 @@ static void __init reserve_crashkernel(void)
 
 	rc = parse_crashkernel(boot_command_line, memory_end, &crash_size,
 			       &crash_base);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (rc || crash_size == 0)
 		return;
@@ -913,6 +1020,8 @@ static void __init reserve_crashkernel(void)
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	crash_base = ALIGN(crash_base, KEXEC_CRASH_MEM_ALIGN);
 	crash_size = ALIGN(crash_size, KEXEC_CRASH_MEM_ALIGN);
@@ -954,6 +1063,9 @@ static void __init reserve_crashkernel(void)
 	if (register_memory_notifier(&kdump_mem_nb))
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!OLDMEM_BASE && MACHINE_IS_VM)
 		diag10_range(PFN_DOWN(crash_base), PFN_DOWN(crash_size));
@@ -961,21 +1073,28 @@ static void __init reserve_crashkernel(void)
 	crashk_res.end = crash_base + crash_size - 1;
 	insert_resource(&iomem_resource, &crashk_res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	create_mem_hole(memory_chunk, crash_base, crash_size);
 	pr_info("Reserving %lluMB of memory at %lluMB "
 		"for crashkernel (System RAM: %luMB)\n",
 		crash_size >> 20, crash_base >> 20, memory_end >> 20);
 =======
+=======
+>>>>>>> v3.18
 	memblock_remove(crash_base, crash_size);
 	pr_info("Reserving %lluMB of memory at %lluMB "
 		"for crashkernel (System RAM: %luMB)\n",
 		crash_size >> 20, crash_base >> 20,
 		(unsigned long)memblock.memory.total_size >> 20);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	os_info_crashkernel_add(crash_base, crash_size);
 #endif
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __init setup_memory(void)
 {
@@ -1103,6 +1222,8 @@ static void __init setup_memory(void)
 	}
 #endif
 =======
+=======
+>>>>>>> v3.18
 /*
  * Reserve the initrd from being used by memblock
  */
@@ -1169,6 +1290,9 @@ static void __init setup_memory(void)
 
 	/* Only cosmetics */
 	memblock_enforce_memory_limit(memblock_end_of_DRAM());
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1241,10 +1365,13 @@ static void __init setup_hwcaps(void)
 	if (test_facility(50) && test_facility(73))
 		elf_hwcap |= HWCAP_S390_TE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 	get_cpu_id(&cpu_id);
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Vector extension HWCAP_S390_VXRS is bit 11.
@@ -1255,6 +1382,9 @@ static void __init setup_hwcaps(void)
 
 	get_cpu_id(&cpu_id);
 	add_device_randomness(&cpu_id, sizeof(cpu_id));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (cpu_id.machine) {
 	case 0x9672:
@@ -1295,7 +1425,10 @@ static void __init setup_hwcaps(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Add system information as device randomness
  */
 static void __init setup_randomness(void)
@@ -1309,6 +1442,9 @@ static void __init setup_randomness(void)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Setup function called from init/main.c just after the banner
  * was printed.
@@ -1348,6 +1484,10 @@ void __init setup_arch(char **cmdline_p)
         ROOT_DEV = Root_RAM0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Is init_mm really needed? */
+>>>>>>> v3.18
 =======
 	/* Is init_mm really needed? */
 >>>>>>> v3.18
@@ -1356,6 +1496,7 @@ void __init setup_arch(char **cmdline_p)
 	init_mm.end_data = (unsigned long) &_edata;
 	init_mm.brk = (unsigned long) &_end;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (MACHINE_HAS_MVCOS)
 		memcpy(&uaccess, &uaccess_mvcos, sizeof(uaccess));
@@ -1376,6 +1517,8 @@ void __init setup_arch(char **cmdline_p)
 	setup_lowcore();
 
 =======
+=======
+>>>>>>> v3.18
 	parse_early_param();
 	os_info_init();
 	setup_ipl();
@@ -1411,6 +1554,9 @@ void __init setup_arch(char **cmdline_p)
 	setup_vmcoreinfo();
 	setup_lowcore();
 	smp_fill_possible_mask();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
         cpu_init();
 	s390_init_cpu_topology();
@@ -1432,8 +1578,11 @@ void __init setup_arch(char **cmdline_p)
 	/* Setup zfcpdump support */
 	setup_zfcpdump();
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
+=======
+>>>>>>> v3.18
 
 	/* Add system specific data to the random pool */
 	setup_randomness();
@@ -1470,4 +1619,7 @@ static int __init removal_warning(void)
 }
 early_initcall(removal_warning);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

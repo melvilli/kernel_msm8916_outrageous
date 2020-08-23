@@ -11,6 +11,7 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/linkage.h>
 #include <linux/init.h>
 #include <asm/memory.h>
@@ -18,6 +19,8 @@
 	__CPUINIT
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/linkage.h>
 #include <linux/threads.h>
@@ -25,12 +28,19 @@
 #include <asm/memory.h>
 
 #ifdef CONFIG_SMP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENTRY(shmobile_invalidate_start)
 	bl	v7_invalidate_l1
 	b	secondary_startup
 ENDPROC(shmobile_invalidate_start)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -41,12 +51,15 @@ ENDPROC(shmobile_invalidate_start)
  * We need _long_ jump to the physical address.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.align  12
 ENTRY(shmobile_secondary_vector)
 	ldr     pc, 1f
 1:	.long   shmobile_invalidate_start - PAGE_OFFSET + PLAT_PHYS_OFFSET
 ENDPROC(shmobile_secondary_vector)
 =======
+=======
+>>>>>>> v3.18
 	.arm
 	.align  12
 ENTRY(shmobile_boot_vector)
@@ -115,4 +128,7 @@ shmobile_smp_fn:
 	.globl	shmobile_smp_arg
 shmobile_smp_arg:
 3:	.space	NR_CPUS * 4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

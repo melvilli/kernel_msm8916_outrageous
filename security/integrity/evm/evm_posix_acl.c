@@ -12,8 +12,14 @@
 #include <linux/module.h>
 #include <linux/xattr.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int posix_xattr_acl(char *xattr)
+=======
+#include <linux/evm.h>
+
+int posix_xattr_acl(const char *xattr)
+>>>>>>> v3.18
 =======
 #include <linux/evm.h>
 

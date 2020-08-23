@@ -2,7 +2,11 @@
  * rc-map.h - define RC map names used by RC drivers
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2010 by Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (c) 2010 by Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (c) 2010 by Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -35,6 +39,11 @@ enum rc_type {
 	RC_TYPE_RC6_6A_32	= 16,	/* Philips RC6-6A-32 protocol */
 	RC_TYPE_RC6_MCE		= 17,	/* MCE (Philips RC6-6A-32 subtype) protocol */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RC_TYPE_SHARP		= 18,	/* Sharp protocol */
+	RC_TYPE_XMP		= 19,	/* XMP protocol */
+>>>>>>> v3.18
 =======
 	RC_TYPE_SHARP		= 18,	/* Sharp protocol */
 	RC_TYPE_XMP		= 19,	/* XMP protocol */
@@ -61,6 +70,11 @@ enum rc_type {
 #define RC_BIT_RC6_6A_32	(1 << RC_TYPE_RC6_6A_32)
 #define RC_BIT_RC6_MCE		(1 << RC_TYPE_RC6_MCE)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RC_BIT_SHARP		(1 << RC_TYPE_SHARP)
+#define RC_BIT_XMP		(1 << RC_TYPE_XMP)
+>>>>>>> v3.18
 =======
 #define RC_BIT_SHARP		(1 << RC_TYPE_SHARP)
 #define RC_BIT_XMP		(1 << RC_TYPE_XMP)
@@ -73,8 +87,11 @@ enum rc_type {
 			 RC_BIT_NEC | RC_BIT_SANYO | RC_BIT_MCE_KBD | \
 			 RC_BIT_RC6_0 | RC_BIT_RC6_6A_20 | RC_BIT_RC6_6A_24 | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 RC_BIT_RC6_6A_32 | RC_BIT_RC6_MCE)
 =======
+=======
+>>>>>>> v3.18
 			 RC_BIT_RC6_6A_32 | RC_BIT_RC6_MCE | RC_BIT_SHARP | \
 			 RC_BIT_XMP)
 
@@ -88,6 +105,9 @@ enum rc_type {
 #define RC_SCANCODE_RC5_SZ(sys, cmd)		(((sys) << 8) | (cmd))
 #define RC_SCANCODE_RC6_0(sys, cmd)		(((sys) << 8) | (cmd))
 #define RC_SCANCODE_RC6_6A(vendor, sys, cmd)	(((vendor) << 16) | ((sys) << 8) | (cmd))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct rc_map_table {
@@ -142,6 +162,10 @@ void rc_map_init(void);
 #define RC_MAP_CINERGY_1400              "rc-cinergy-1400"
 #define RC_MAP_CINERGY                   "rc-cinergy"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RC_MAP_DELOCK_61959              "rc-delock-61959"
+>>>>>>> v3.18
 =======
 #define RC_MAP_DELOCK_61959              "rc-delock-61959"
 >>>>>>> v3.18
@@ -153,6 +177,10 @@ void rc_map_init(void);
 #define RC_MAP_DNTV_LIVE_DVBT_PRO        "rc-dntv-live-dvbt-pro"
 #define RC_MAP_DNTV_LIVE_DVB_T           "rc-dntv-live-dvb-t"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RC_MAP_DVBSKY                    "rc-dvbsky"
+>>>>>>> v3.18
 =======
 #define RC_MAP_DVBSKY                    "rc-dvbsky"
 >>>>>>> v3.18
@@ -196,7 +224,10 @@ void rc_map_init(void);
 #define RC_MAP_NPGTECH                   "rc-npgtech"
 #define RC_MAP_PCTV_SEDNA                "rc-pctv-sedna"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RC_MAP_RC6_PHILIPS		 "rc-philips"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RC_MAP_PINNACLE_COLOR            "rc-pinnacle-color"
@@ -217,7 +248,10 @@ void rc_map_init(void);
 #define RC_MAP_REDDO                     "rc-reddo"
 #define RC_MAP_SNAPSTREAM_FIREFLY        "rc-snapstream-firefly"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RC_MAP_SAMSUNG_NECX	             "rc-samsung-necx"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RC_MAP_STREAMZAP                 "rc-streamzap"
@@ -234,7 +268,10 @@ void rc_map_init(void);
 #define RC_MAP_TT_1500                   "rc-tt-1500"
 #define RC_MAP_TWINHAN_VP1027_DVBS       "rc-twinhan1027"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RC_MAP_UE_RF4CE			 "rc-ue-rf4ce"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RC_MAP_VIDEOMATE_K100            "rc-videomate-k100"
@@ -243,6 +280,10 @@ void rc_map_init(void);
 #define RC_MAP_WINFAST                   "rc-winfast"
 #define RC_MAP_WINFAST_USBII_DELUXE      "rc-winfast-usbii-deluxe"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RC_MAP_SU3000                    "rc-su3000"
+>>>>>>> v3.18
 =======
 #define RC_MAP_SU3000                    "rc-su3000"
 >>>>>>> v3.18

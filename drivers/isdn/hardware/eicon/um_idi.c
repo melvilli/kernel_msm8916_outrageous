@@ -289,9 +289,15 @@ int divas_um_idi_delete_entity(int adapter_nr, void *entity)
 	diva_os_free(0, e->os_context);
 	memset(e, 0x00, sizeof(*e));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	diva_os_free(0, e);
 
 	DBG_LOG(("A(%d) remove E:%08x", adapter_nr, e));
+=======
+
+	DBG_LOG(("A(%d) remove E:%08x", adapter_nr, e));
+	diva_os_free(0, e);
+>>>>>>> v3.18
 =======
 
 	DBG_LOG(("A(%d) remove E:%08x", adapter_nr, e));

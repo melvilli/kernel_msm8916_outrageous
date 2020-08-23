@@ -69,6 +69,11 @@
 #include <linux/blkdev.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/completion.h>
+#include <linux/wait.h>
+>>>>>>> v3.18
 =======
 #include <linux/completion.h>
 #include <linux/wait.h>
@@ -307,7 +312,11 @@ module_param_array(UserSteprate, int, NULL, 0);
 static volatile int fdc_busy = 0;
 static DECLARE_WAIT_QUEUE_HEAD(fdc_wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DECLARE_WAIT_QUEUE_HEAD(format_wait);
+=======
+static DECLARE_COMPLETION(format_wait);
+>>>>>>> v3.18
 =======
 static DECLARE_COMPLETION(format_wait);
 >>>>>>> v3.18
@@ -618,7 +627,11 @@ static void fd_error( void )
 		IsFormatting = 0;
 		FormatError = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wake_up( &format_wait );
+=======
+		complete(&format_wait);
+>>>>>>> v3.18
 =======
 		complete(&format_wait);
 >>>>>>> v3.18
@@ -664,9 +677,14 @@ static int do_format(int drive, int type, struct atari_format_descr *desc)
 		drive, desc->track, desc->head, desc->sect_offset ));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_irq_save(flags);
 	while( fdc_busy ) sleep_on( &fdc_wait );
 	fdc_busy = 1;
+=======
+	wait_event(fdc_wait, cmpxchg(&fdc_busy, 0, 1) == 0);
+	local_irq_save(flags);
+>>>>>>> v3.18
 =======
 	wait_event(fdc_wait, cmpxchg(&fdc_busy, 0, 1) == 0);
 	local_irq_save(flags);
@@ -725,7 +743,11 @@ static int do_format(int drive, int type, struct atari_format_descr *desc)
 	do_fd_action( drive );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sleep_on( &format_wait );
+=======
+	wait_for_completion(&format_wait);
+>>>>>>> v3.18
 =======
 	wait_for_completion(&format_wait);
 >>>>>>> v3.18
@@ -1252,7 +1274,11 @@ static void fd_writetrack_done( int status )
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wake_up( &format_wait );
+=======
+	complete(&format_wait);
+>>>>>>> v3.18
 =======
 	complete(&format_wait);
 >>>>>>> v3.18
@@ -1510,7 +1536,11 @@ repeat:
 	ReqCmd = rq_data_dir(fd_request);
 	ReqBlock = blk_rq_pos(fd_request);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ReqBuffer = fd_request->buffer;
+=======
+	ReqBuffer = bio_data(fd_request->bio);
+>>>>>>> v3.18
 =======
 	ReqBuffer = bio_data(fd_request->bio);
 >>>>>>> v3.18
@@ -1528,8 +1558,12 @@ void do_fd_request(struct request_queue * q)
 {
 	DPRINT(("do_fd_request for pid %d\n",current->pid));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while( fdc_busy ) sleep_on( &fdc_wait );
 	fdc_busy = 1;
+=======
+	wait_event(fdc_wait, cmpxchg(&fdc_busy, 0, 1) == 0);
+>>>>>>> v3.18
 =======
 	wait_event(fdc_wait, cmpxchg(&fdc_busy, 0, 1) == 0);
 >>>>>>> v3.18
@@ -1987,7 +2021,11 @@ static int __init atari_floppy_init (void)
 	}
 	TrackBuffer = DMABuffer + 512;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PhysDMABuffer = virt_to_phys(DMABuffer);
+=======
+	PhysDMABuffer = atari_stram_to_phys(DMABuffer);
+>>>>>>> v3.18
 =======
 	PhysDMABuffer = atari_stram_to_phys(DMABuffer);
 >>>>>>> v3.18

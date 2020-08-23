@@ -3,7 +3,11 @@
  * Avishay Traeger (avishay@gmail.com)
  * Copyright (C) 2008, 2009
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Boaz Harrosh <bharrosh@panasas.com>
+=======
+ * Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  * Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18
@@ -244,23 +248,33 @@ void exofs_set_de_type(struct exofs_dir_entry *de, struct inode *inode)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 exofs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	loff_t pos = filp->f_pos;
 	struct inode *inode = file_inode(filp);
 =======
+=======
+>>>>>>> v3.18
 exofs_readdir(struct file *file, struct dir_context *ctx)
 {
 	loff_t pos = ctx->pos;
 	struct inode *inode = file_inode(file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int offset = pos & ~PAGE_CACHE_MASK;
 	unsigned long n = pos >> PAGE_CACHE_SHIFT;
 	unsigned long npages = dir_pages(inode);
 	unsigned chunk_mask = ~(exofs_chunk_size(inode)-1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char *types = NULL;
 	int need_revalidate = (filp->f_version != inode->i_version);
+=======
+	int need_revalidate = (file->f_version != inode->i_version);
+>>>>>>> v3.18
 =======
 	int need_revalidate = (file->f_version != inode->i_version);
 >>>>>>> v3.18
@@ -269,8 +283,11 @@ exofs_readdir(struct file *file, struct dir_context *ctx)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	types = exofs_filetype_table;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for ( ; n < npages; n++, offset = 0) {
@@ -282,7 +299,11 @@ exofs_readdir(struct file *file, struct dir_context *ctx)
 			EXOFS_ERR("ERROR: bad page in directory(0x%lx)\n",
 				  inode->i_ino);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos += PAGE_CACHE_SIZE - offset;
+=======
+			ctx->pos += PAGE_CACHE_SIZE - offset;
+>>>>>>> v3.18
 =======
 			ctx->pos += PAGE_CACHE_SIZE - offset;
 >>>>>>> v3.18
@@ -294,9 +315,15 @@ exofs_readdir(struct file *file, struct dir_context *ctx)
 				offset = exofs_validate_entry(kaddr, offset,
 								chunk_mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				filp->f_pos = (n<<PAGE_CACHE_SHIFT) + offset;
 			}
 			filp->f_version = inode->i_version;
+=======
+				ctx->pos = (n<<PAGE_CACHE_SHIFT) + offset;
+			}
+			file->f_version = inode->i_version;
+>>>>>>> v3.18
 =======
 				ctx->pos = (n<<PAGE_CACHE_SHIFT) + offset;
 			}
@@ -317,6 +344,7 @@ exofs_readdir(struct file *file, struct dir_context *ctx)
 			}
 			if (de->inode_no) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				int over;
 				unsigned char d_type = DT_UNKNOWN;
 
@@ -330,6 +358,8 @@ exofs_readdir(struct file *file, struct dir_context *ctx)
 						d_type);
 				if (over) {
 =======
+=======
+>>>>>>> v3.18
 				unsigned char t;
 
 				if (de->file_type < EXOFS_FT_MAX)
@@ -340,11 +370,15 @@ exofs_readdir(struct file *file, struct dir_context *ctx)
 				if (!dir_emit(ctx, de->name, de->name_len,
 						le64_to_cpu(de->inode_no),
 						t)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					exofs_put_page(page);
 					return 0;
 				}
 			}
+<<<<<<< HEAD
 <<<<<<< HEAD
 			filp->f_pos += le16_to_cpu(de->rec_len);
 		}
@@ -352,10 +386,15 @@ exofs_readdir(struct file *file, struct dir_context *ctx)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 			ctx->pos += le16_to_cpu(de->rec_len);
 		}
 		exofs_put_page(page);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -718,7 +757,11 @@ const struct file_operations exofs_dir_operations = {
 	.llseek		= generic_file_llseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= exofs_readdir,
+=======
+	.iterate	= exofs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= exofs_readdir,
 >>>>>>> v3.18

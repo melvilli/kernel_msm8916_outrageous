@@ -37,7 +37,10 @@ void *return_address(unsigned int level)
 	struct return_address_data data;
 	struct stackframe frame;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register unsigned long current_sp asm ("sp");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -46,7 +49,11 @@ void *return_address(unsigned int level)
 
 	frame.fp = (unsigned long)__builtin_frame_address(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame.sp = current_sp;
+=======
+	frame.sp = current_stack_pointer;
+>>>>>>> v3.18
 =======
 	frame.sp = current_stack_pointer;
 >>>>>>> v3.18

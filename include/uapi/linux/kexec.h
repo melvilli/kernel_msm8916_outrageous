@@ -14,7 +14,10 @@
 #define KEXEC_ARCH_MASK		0xffff0000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Kexec file load interface flags.
  * KEXEC_FILE_UNLOAD : Unload already loaded kexec/kdump image.
@@ -26,6 +29,9 @@
 #define KEXEC_FILE_ON_CRASH	0x00000002
 #define KEXEC_FILE_NO_INITRAMFS	0x00000004
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* These values match the ELF architecture values.
  * Unless there is a good reason that should continue to be the case.
@@ -33,6 +39,10 @@
 #define KEXEC_ARCH_DEFAULT ( 0 << 16)
 #define KEXEC_ARCH_386     ( 3 << 16)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KEXEC_ARCH_68K     ( 4 << 16)
+>>>>>>> v3.18
 =======
 #define KEXEC_ARCH_68K     ( 4 << 16)
 >>>>>>> v3.18

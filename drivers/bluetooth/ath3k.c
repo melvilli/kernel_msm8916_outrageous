@@ -1,7 +1,10 @@
 /*
  * Copyright (c) 2008-2009 Atheros Communications Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -32,6 +35,10 @@
 #include <linux/firmware.h>
 #include <linux/usb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 =======
 #include <asm/unaligned.h>
 >>>>>>> v3.18
@@ -40,6 +47,7 @@
 #define VERSION "1.0"
 #define ATH3K_FIRMWARE	"ath3k-1.fw"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define ROME1_1_USB_RAMPATCH_FILE	"ar3k/rampatch_1.1.img"
 #define ROME1_1_USB_NVM_FILE		"ar3k/nvm_tlv_usb_1.1.bin"
@@ -62,6 +70,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define ATH3K_DNLOAD				0x01
 #define ATH3K_GETSTATE				0x05
 #define ATH3K_SET_NORMAL_MODE			0x07
@@ -72,10 +82,15 @@
 #define ATH3K_NORMAL_MODE			0x0E
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ATH3K_PATCH_UPDATE			0xA0
 #define ATH3K_SYSCFG_UPDATE			0x60
 #define ATH3K_PATCH_SYSCFG_UPDATE		(ATH3K_PATCH_UPDATE | \
 							ATH3K_SYSCFG_UPDATE)
+=======
+#define ATH3K_PATCH_UPDATE			0x80
+#define ATH3K_SYSCFG_UPDATE			0x40
+>>>>>>> v3.18
 =======
 #define ATH3K_PATCH_UPDATE			0x80
 #define ATH3K_SYSCFG_UPDATE			0x40
@@ -87,6 +102,7 @@
 #define ATH3K_NAME_LEN				0xFF
 
 struct ath3k_version {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int	rom_version;
 	unsigned int	build_version;
@@ -125,6 +141,8 @@ struct __packed rome2_1_version {
 
 static struct usb_device_id ath3k_table[] = {
 =======
+=======
+>>>>>>> v3.18
 	__le32	rom_version;
 	__le32	build_version;
 	__le32	ram_version;
@@ -133,11 +151,15 @@ static struct usb_device_id ath3k_table[] = {
 } __packed;
 
 static const struct usb_device_id ath3k_table[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Atheros AR3011 */
 	{ USB_DEVICE(0x0CF3, 0x3000) },
 
 	/* Atheros AR3011 with sflash firmware*/
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ USB_DEVICE(0x0CF3, 0x3002) },
 	{ USB_DEVICE(0x0CF3, 0xE019) },
@@ -146,12 +168,17 @@ static const struct usb_device_id ath3k_table[] = {
 	{ USB_DEVICE(0x0489, 0xE03D) },
 	{ USB_DEVICE(0x0489, 0xE027) },
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x0489, 0xE027) },
 	{ USB_DEVICE(0x0489, 0xE03D) },
 	{ USB_DEVICE(0x0930, 0x0215) },
 	{ USB_DEVICE(0x0CF3, 0x3002) },
 	{ USB_DEVICE(0x0CF3, 0xE019) },
 	{ USB_DEVICE(0x13d3, 0x3304) },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Atheros AR9285 Malbec with sflash firmware */
@@ -159,7 +186,10 @@ static const struct usb_device_id ath3k_table[] = {
 
 	/* Atheros AR3012 with sflash firmware*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x0489, 0xe04d) },
 	{ USB_DEVICE(0x0489, 0xe04e) },
 	{ USB_DEVICE(0x0489, 0xe057) },
@@ -176,6 +206,9 @@ static const struct usb_device_id ath3k_table[] = {
 	{ USB_DEVICE(0x0930, 0x0220) },
 	{ USB_DEVICE(0x0930, 0x0227) },
 	{ USB_DEVICE(0x0b05, 0x17d0) },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x0CF3, 0x0036) },
 	{ USB_DEVICE(0x0CF3, 0x3004) },
@@ -183,6 +216,7 @@ static const struct usb_device_id ath3k_table[] = {
 	{ USB_DEVICE(0x0CF3, 0x311D) },
 	{ USB_DEVICE(0x0CF3, 0x311E) },
 	{ USB_DEVICE(0x0CF3, 0x311F) },
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ USB_DEVICE(0x0CF3, 0x817a) },
 	{ USB_DEVICE(0x13d3, 0x3375) },
@@ -205,6 +239,8 @@ static const struct usb_device_id ath3k_table[] = {
 	{ USB_DEVICE(0x0cf3, 0x3121) },
 	{ USB_DEVICE(0x0cf3, 0xe003) },
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x0cf3, 0x3121) },
 	{ USB_DEVICE(0x0CF3, 0x817a) },
 	{ USB_DEVICE(0x0cf3, 0xe003) },
@@ -215,6 +251,9 @@ static const struct usb_device_id ath3k_table[] = {
 	{ USB_DEVICE(0x13d3, 0x3393) },
 	{ USB_DEVICE(0x13d3, 0x3402) },
 	{ USB_DEVICE(0x13d3, 0x3432) },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Atheros AR5BBU12 with sflash firmware */
@@ -222,8 +261,13 @@ static const struct usb_device_id ath3k_table[] = {
 
 	/* Atheros AR5BBU22 with sflash firmware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x0489, 0xE03C) },
 	{ USB_DEVICE(0x0489, 0xE036) },
+=======
+	{ USB_DEVICE(0x0489, 0xE036) },
+	{ USB_DEVICE(0x0489, 0xE03C) },
+>>>>>>> v3.18
 =======
 	{ USB_DEVICE(0x0489, 0xE036) },
 	{ USB_DEVICE(0x0489, 0xE03C) },
@@ -238,10 +282,13 @@ MODULE_DEVICE_TABLE(usb, ath3k_table);
 /* This table is to load patch and sysconfig files
  * for AR3012 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct usb_device_id ath3k_blist_tbl[] = {
 
 	/* Atheros AR3012 with sflash firmware*/
 =======
+=======
+>>>>>>> v3.18
 static const struct usb_device_id ath3k_blist_tbl[] = {
 
 	/* Atheros AR3012 with sflash firmware*/
@@ -261,6 +308,9 @@ static const struct usb_device_id ath3k_blist_tbl[] = {
 	{ USB_DEVICE(0x0930, 0x0220), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0930, 0x0227), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0b05, 0x17d0), .driver_info = BTUSB_ATH3012 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x0CF3, 0x0036), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0cf3, 0x3004), .driver_info = BTUSB_ATH3012 },
@@ -268,6 +318,7 @@ static const struct usb_device_id ath3k_blist_tbl[] = {
 	{ USB_DEVICE(0x0cf3, 0x311D), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0cf3, 0x311E), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0cf3, 0x311F), .driver_info = BTUSB_ATH3012 },
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ USB_DEVICE(0x0CF3, 0x817a), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x13d3, 0x3375), .driver_info = BTUSB_ATH3012 },
@@ -294,6 +345,8 @@ static const struct usb_device_id ath3k_blist_tbl[] = {
 	{ USB_DEVICE(0x0489, 0xE03C), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0489, 0xE036), .driver_info = BTUSB_ATH3012 },
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x0cf3, 0x3121), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0CF3, 0x817a), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0cf3, 0xe004), .driver_info = BTUSB_ATH3012 },
@@ -308,6 +361,9 @@ static const struct usb_device_id ath3k_blist_tbl[] = {
 	/* Atheros AR5BBU22 with sflash firmware */
 	{ USB_DEVICE(0x0489, 0xE036), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0489, 0xE03C), .driver_info = BTUSB_ATH3012 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	{ }	/* Terminating entry */
@@ -317,8 +373,11 @@ static const struct usb_device_id ath3k_blist_tbl[] = {
 #define BULK_SIZE		4096
 #define FW_HDR_SIZE		20
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIMEGAP_USEC_MIN	50
 #define TIMEGAP_USEC_MAX	100
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -327,6 +386,7 @@ static int ath3k_load_firmware(struct usb_device *udev,
 {
 	u8 *send_buf;
 	int err, pipe, len, size, sent = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int count;
 
@@ -350,6 +410,8 @@ static int ath3k_load_firmware(struct usb_device *udev,
 
 	send_buf = kzalloc(BULK_SIZE, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	int count = firmware->size;
 
 	BT_DBG("udev %p", udev);
@@ -357,6 +419,9 @@ static int ath3k_load_firmware(struct usb_device *udev,
 	pipe = usb_sndctrlpipe(udev, 0);
 
 	send_buf = kmalloc(BULK_SIZE, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!send_buf) {
 		BT_ERR("Can't allocate memory chunk for firmware");
@@ -365,10 +430,16 @@ static int ath3k_load_firmware(struct usb_device *udev,
 
 	memcpy(send_buf, firmware->data, 20);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((err = usb_control_msg(udev, pipe,
 				USB_REQ_DFU_DNLOAD,
 				USB_TYPE_VENDOR, 0, 0,
 				send_buf, 20, USB_CTRL_SET_TIMEOUT)) < 0) {
+=======
+	err = usb_control_msg(udev, pipe, USB_REQ_DFU_DNLOAD, USB_TYPE_VENDOR,
+			      0, 0, send_buf, 20, USB_CTRL_SET_TIMEOUT);
+	if (err < 0) {
+>>>>>>> v3.18
 =======
 	err = usb_control_msg(udev, pipe, USB_REQ_DFU_DNLOAD, USB_TYPE_VENDOR,
 			      0, 0, send_buf, 20, USB_CTRL_SET_TIMEOUT);
@@ -381,6 +452,7 @@ static int ath3k_load_firmware(struct usb_device *udev,
 	count -= 20;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (count) {
 		/* workaround the compatibility issue with xHCI controller*/
 		usleep_range(TIMEGAP_USEC_MIN, TIMEGAP_USEC_MAX);
@@ -388,10 +460,15 @@ static int ath3k_load_firmware(struct usb_device *udev,
 		size = min_t(uint, count, BULK_SIZE);
 		pipe = usb_sndbulkpipe(udev, 0x02);
 =======
+=======
+>>>>>>> v3.18
 	pipe = usb_sndbulkpipe(udev, 0x02);
 
 	while (count) {
 		size = min_t(uint, count, BULK_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memcpy(send_buf, firmware->data + sent, size);
 
@@ -456,6 +533,7 @@ static int ath3k_get_version(struct usb_device *udev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int get_rome_version(struct usb_device *udev)
 {
 	struct ath3k_version fw_version;
@@ -487,6 +565,10 @@ static int ath3k_load_fwfile(struct usb_device *udev,
 static int ath3k_load_fwfile(struct usb_device *udev,
 		const struct firmware *firmware)
 >>>>>>> v3.18
+=======
+static int ath3k_load_fwfile(struct usb_device *udev,
+		const struct firmware *firmware)
+>>>>>>> v3.18
 {
 	u8 *send_buf;
 	int err, pipe, len, size, count, sent = 0;
@@ -501,7 +583,11 @@ static int ath3k_load_fwfile(struct usb_device *udev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = min_t(uint, count, header_h);
+=======
+	size = min_t(uint, count, FW_HDR_SIZE);
+>>>>>>> v3.18
 =======
 	size = min_t(uint, count, FW_HDR_SIZE);
 >>>>>>> v3.18
@@ -521,6 +607,7 @@ static int ath3k_load_fwfile(struct usb_device *udev,
 	count -= size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (count) {
 		/* workaround the compatibility issue with xHCI controller*/
 		usleep_range(TIMEGAP_USEC_MIN, TIMEGAP_USEC_MAX);
@@ -529,10 +616,15 @@ static int ath3k_load_fwfile(struct usb_device *udev,
 		pipe = usb_sndbulkpipe(udev, 0x02);
 
 =======
+=======
+>>>>>>> v3.18
 	pipe = usb_sndbulkpipe(udev, 0x02);
 
 	while (count) {
 		size = min_t(uint, count, BULK_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memcpy(send_buf, firmware->data + sent, size);
 
@@ -590,9 +682,14 @@ static int ath3k_load_patch(struct usb_device *udev)
 	char filename[ATH3K_NAME_LEN] = {0};
 	const struct firmware *firmware;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath3k_version fw_version, pt_version;
 	struct rome2_1_version *rome2_1_version;
 	struct rome1_1_version *rome1_1_version;
+=======
+	struct ath3k_version fw_version;
+	__u32 pt_rom_version, pt_build_version;
+>>>>>>> v3.18
 =======
 	struct ath3k_version fw_version;
 	__u32 pt_rom_version, pt_build_version;
@@ -606,6 +703,7 @@ static int ath3k_load_patch(struct usb_device *udev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((fw_state == ATH3K_PATCH_UPDATE) ||
 		(fw_state == ATH3K_PATCH_SYSCFG_UPDATE)) {
 		BT_INFO("%s: Patch already downloaded(fw_state: %d)", __func__,
@@ -615,10 +713,15 @@ static int ath3k_load_patch(struct usb_device *udev)
 		BT_DBG("%s: Downloading RamPatch(fw_state: %d)", __func__,
 			fw_state);
 =======
+=======
+>>>>>>> v3.18
 	if (fw_state & ATH3K_PATCH_UPDATE) {
 		BT_DBG("Patch was already downloaded");
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = ath3k_get_version(udev, &fw_version);
@@ -626,6 +729,7 @@ static int ath3k_load_patch(struct usb_device *udev)
 		BT_ERR("Can't get version to change to load ram patch err");
 		return ret;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (fw_version.rom_version == ROME1_1_USB_CHIP_VERSION) {
 		BT_DBG("Chip Detected as ROME1.1");
@@ -642,10 +746,15 @@ static int ath3k_load_patch(struct usb_device *udev)
 		fw_version.rom_version);
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	snprintf(filename, ATH3K_NAME_LEN, "ar3k/AthrBT_0x%08x.dfu",
 		 le32_to_cpu(fw_version.rom_version));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = request_firmware(&firmware, filename, &udev->dev);
 	if (ret < 0) {
@@ -653,6 +762,7 @@ static int ath3k_load_patch(struct usb_device *udev)
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((fw_version.rom_version == ROME2_1_USB_CHIP_VERSION) ||
 		(fw_version.rom_version == ROME3_0_USB_CHIP_VERSION)) {
@@ -680,6 +790,8 @@ static int ath3k_load_patch(struct usb_device *udev)
 	if ((pt_version.rom_version != fw_version.rom_version) ||
 		(pt_version.build_version <= fw_version.build_version)) {
 =======
+=======
+>>>>>>> v3.18
 	pt_rom_version = get_unaligned_le32(firmware->data +
 					    firmware->size - 8);
 	pt_build_version = get_unaligned_le32(firmware->data +
@@ -687,12 +799,16 @@ static int ath3k_load_patch(struct usb_device *udev)
 
 	if (pt_rom_version != le32_to_cpu(fw_version.rom_version) ||
 	    pt_build_version <= le32_to_cpu(fw_version.build_version)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		BT_ERR("Patch file version did not match with firmware");
 		release_firmware(firmware);
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((fw_version.rom_version == ROME2_1_USB_CHIP_VERSION) ||
 		(fw_version.rom_version == ROME3_0_USB_CHIP_VERSION))
@@ -704,6 +820,9 @@ static int ath3k_load_patch(struct usb_device *udev)
 	else
 		ret = ath3k_load_fwfile(udev, firmware, FW_HDR_SIZE);
 
+=======
+	ret = ath3k_load_fwfile(udev, firmware);
+>>>>>>> v3.18
 =======
 	ret = ath3k_load_fwfile(udev, firmware);
 >>>>>>> v3.18
@@ -727,6 +846,7 @@ static int ath3k_load_syscfg(struct usb_device *udev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((fw_state == ATH3K_SYSCFG_UPDATE) ||
 		(fw_state == ATH3K_PATCH_SYSCFG_UPDATE)) {
 		BT_INFO("%s: NVM already downloaded(fw_state: %d)", __func__,
@@ -735,6 +855,8 @@ static int ath3k_load_syscfg(struct usb_device *udev)
 	} else
 		BT_DBG("%s: Downloading NVM(fw_state: %d)", __func__, fw_state);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = ath3k_get_version(udev, &fw_version);
@@ -760,6 +882,7 @@ static int ath3k_load_syscfg(struct usb_device *udev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fw_version.rom_version == ROME2_1_USB_CHIP_VERSION)
 		snprintf(filename, ATH3K_NAME_LEN, ROME2_1_USB_NVM_FILE);
 	else if (fw_version.rom_version == ROME3_0_USB_CHIP_VERSION)
@@ -773,6 +896,10 @@ static int ath3k_load_syscfg(struct usb_device *udev)
 	snprintf(filename, ATH3K_NAME_LEN, "ar3k/ramps_0x%08x_%d%s",
 		le32_to_cpu(fw_version.rom_version), clk_value, ".dfu");
 >>>>>>> v3.18
+=======
+	snprintf(filename, ATH3K_NAME_LEN, "ar3k/ramps_0x%08x_%d%s",
+		le32_to_cpu(fw_version.rom_version), clk_value, ".dfu");
+>>>>>>> v3.18
 
 	ret = request_firmware(&firmware, filename, &udev->dev);
 	if (ret < 0) {
@@ -780,6 +907,7 @@ static int ath3k_load_syscfg(struct usb_device *udev)
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((fw_version.rom_version == ROME2_1_USB_CHIP_VERSION) ||
 		(fw_version.rom_version == ROME3_0_USB_CHIP_VERSION))
@@ -791,11 +919,15 @@ static int ath3k_load_syscfg(struct usb_device *udev)
 =======
 	ret = ath3k_load_fwfile(udev, firmware);
 >>>>>>> v3.18
+=======
+	ret = ath3k_load_fwfile(udev, firmware);
+>>>>>>> v3.18
 	release_firmware(firmware);
 
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int rome_download(struct usb_device *udev)
@@ -818,6 +950,8 @@ int rome_download(struct usb_device *udev)
 EXPORT_SYMBOL(rome_download);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int ath3k_probe(struct usb_interface *intf,
 			const struct usb_device_id *id)
 {
@@ -830,10 +964,14 @@ static int ath3k_probe(struct usb_interface *intf,
 	if (intf->cur_altsetting->desc.bInterfaceNumber != 0)
 		return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_rome_version(udev)) {
 		BT_INFO("Rome detected, fw dnld will be triggered from btusb");
 		return -ENODEV;
 	}
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

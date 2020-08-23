@@ -10,8 +10,13 @@ struct tcf_csum {
 	u32 update_flags;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define to_tcf_csum(pc) \
 	container_of(pc,struct tcf_csum,common)
+=======
+#define to_tcf_csum(a) \
+	container_of(a->priv,struct tcf_csum,common)
+>>>>>>> v3.18
 =======
 #define to_tcf_csum(a) \
 	container_of(a->priv,struct tcf_csum,common)

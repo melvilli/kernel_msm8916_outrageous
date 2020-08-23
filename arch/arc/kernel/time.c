@@ -45,7 +45,10 @@
 #include <asm/mach_desc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Timer related Aux registers */
 #define ARC_REG_TIMER0_LIMIT	0x23	/* timer 0 limit */
 #define ARC_REG_TIMER0_CTRL	0x22	/* timer 0 control */
@@ -57,6 +60,9 @@
 #define TIMER_CTRL_IE		(1 << 0) /* Interupt when Count reachs limit */
 #define TIMER_CTRL_NH		(1 << 1) /* Count only when CPU NOT halted */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ARC_TIMER_MAX	0xFFFFFFFF
 
@@ -65,18 +71,24 @@
 #ifdef CONFIG_ARC_HAS_RTSC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit arc_counter_setup(void)
 {
 	/* RTSC insn taps into cpu clk, needs no setup */
 
 	/* For SMP, only allowed if cross-core-sync, hence usable as cs */
 =======
+=======
+>>>>>>> v3.18
 int arc_counter_setup(void)
 {
 	/*
 	 * For SMP this needs to be 0. However Kconfig glue doesn't
 	 * enable this option for SMP configs
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 1;
 }
@@ -129,7 +141,11 @@ static bool is_usable_as_clocksource(void)
  * set 32bit TIMER1 to keep counting monotonically and wraparound
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit arc_counter_setup(void)
+=======
+int arc_counter_setup(void)
+>>>>>>> v3.18
 =======
 int arc_counter_setup(void)
 >>>>>>> v3.18
@@ -160,6 +176,7 @@ static struct clocksource arc_counter = {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Arm the timer to interrupt after @limit cycles
  * The distinction for oneshot/periodic is done in arc_event_timer_ack() below
  */
@@ -167,18 +184,24 @@ static void arc_timer_event_setup(unsigned int limit)
 {
 	write_aux_reg(ARC_REG_TIMER0_LIMIT, limit);
 =======
+=======
+>>>>>>> v3.18
  * Arm the timer to interrupt after @cycles
  * The distinction for oneshot/periodic is done in arc_event_timer_ack() below
  */
 static void arc_timer_event_setup(unsigned int cycles)
 {
 	write_aux_reg(ARC_REG_TIMER0_LIMIT, cycles);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	write_aux_reg(ARC_REG_TIMER0_CNT, 0);	/* start from 0 */
 
 	write_aux_reg(ARC_REG_TIMER0_CTRL, TIMER_CTRL_IE | TIMER_CTRL_NH);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Acknowledge the interrupt (oneshot) and optionally re-arm it (periodic)
@@ -198,6 +221,8 @@ static void arc_timer_event_ack(unsigned int irq_reenable)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 static int arc_clkevent_set_next_event(unsigned long delta,
 				       struct clock_event_device *dev)
@@ -212,11 +237,17 @@ static void arc_clkevent_set_mode(enum clock_event_mode mode,
 	switch (mode) {
 	case CLOCK_EVT_MODE_PERIODIC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
                 /*
                  * At X Hz, 1 sec = 1000ms -> X cycles;
                  *                    10ms -> X / 100 cycles
                  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		arc_timer_event_setup(arc_get_core_freq() / HZ);
 		break;
@@ -241,6 +272,7 @@ static DEFINE_PER_CPU(struct clock_event_device, arc_clockevent_device) = {
 
 static irqreturn_t timer_irq_handler(int irq, void *dev_id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct clock_event_device *clk = &__get_cpu_var(arc_clockevent_device);
 
@@ -280,6 +312,8 @@ void __attribute__((weak)) __cpuinit arc_local_timer_setup(unsigned int cpu)
 	else
 		arch_unmask_irq(TIMER0_IRQ);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Note that generic IRQ core could have passed @evt for @dev_id if
 	 * irq_set_chip_and_handler() asked for handle_percpu_devid_irq()
@@ -314,6 +348,9 @@ void arc_local_timer_setup()
 	/* setup the per-cpu timer IRQ handler - for all cpus */
 	arc_request_percpu_irq(TIMER0_IRQ, cpu, timer_irq_handler,
 			       "Timer0 (per-cpu-tick)", evt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -341,7 +378,11 @@ void __init time_init(void)
 
 	/* sets up the periodic event timer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arc_local_timer_setup(smp_processor_id());
+=======
+	arc_local_timer_setup();
+>>>>>>> v3.18
 =======
 	arc_local_timer_setup();
 >>>>>>> v3.18

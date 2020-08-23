@@ -149,11 +149,14 @@ static struct policydb_compat_info policydb_compat[] = {
 		.ocon_num	= OCON_NUM,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		.version	= POLICYDB_VERSION_XPERMS_IOCTL,
 		.sym_num	= SYM_NUM,
 		.ocon_num	= OCON_NUM,
 	},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1089,7 +1092,10 @@ out:
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int str_read(char **strp, gfp_t flags, void *fp, u32 len)
 {
 	int rc;
@@ -1110,6 +1116,9 @@ static int str_read(char **strp, gfp_t flags, void *fp, u32 len)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int perm_read(struct policydb *p, struct hashtab *h, void *fp)
 {
@@ -1132,6 +1141,7 @@ static int perm_read(struct policydb *p, struct hashtab *h, void *fp)
 	perdatum->value = le32_to_cpu(buf[1]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = -ENOMEM;
 	key = kmalloc(len + 1, GFP_KERNEL);
 	if (!key)
@@ -1141,6 +1151,11 @@ static int perm_read(struct policydb *p, struct hashtab *h, void *fp)
 	if (rc)
 		goto bad;
 	key[len] = '\0';
+=======
+	rc = str_read(&key, GFP_KERNEL, fp, len);
+	if (rc)
+		goto bad;
+>>>>>>> v3.18
 =======
 	rc = str_read(&key, GFP_KERNEL, fp, len);
 	if (rc)
@@ -1184,6 +1199,7 @@ static int common_read(struct policydb *p, struct hashtab *h, void *fp)
 	nel = le32_to_cpu(buf[3]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = -ENOMEM;
 	key = kmalloc(len + 1, GFP_KERNEL);
 	if (!key)
@@ -1193,6 +1209,11 @@ static int common_read(struct policydb *p, struct hashtab *h, void *fp)
 	if (rc)
 		goto bad;
 	key[len] = '\0';
+=======
+	rc = str_read(&key, GFP_KERNEL, fp, len);
+	if (rc)
+		goto bad;
+>>>>>>> v3.18
 =======
 	rc = str_read(&key, GFP_KERNEL, fp, len);
 	if (rc)
@@ -1365,6 +1386,7 @@ static int class_read(struct policydb *p, struct hashtab *h, void *fp)
 	ncons = le32_to_cpu(buf[5]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = -ENOMEM;
 	key = kmalloc(len + 1, GFP_KERNEL);
 	if (!key)
@@ -1385,6 +1407,8 @@ static int class_read(struct policydb *p, struct hashtab *h, void *fp)
 			goto bad;
 		cladatum->comkey[len2] = '\0';
 =======
+=======
+>>>>>>> v3.18
 	rc = str_read(&key, GFP_KERNEL, fp, len);
 	if (rc)
 		goto bad;
@@ -1393,6 +1417,9 @@ static int class_read(struct policydb *p, struct hashtab *h, void *fp)
 		rc = str_read(&cladatum->comkey, GFP_KERNEL, fp, len2);
 		if (rc)
 			goto bad;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		rc = -EINVAL;
@@ -1477,6 +1504,7 @@ static int role_read(struct policydb *p, struct hashtab *h, void *fp)
 		role->bounds = le32_to_cpu(buf[2]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = -ENOMEM;
 	key = kmalloc(len + 1, GFP_KERNEL);
 	if (!key)
@@ -1486,6 +1514,11 @@ static int role_read(struct policydb *p, struct hashtab *h, void *fp)
 	if (rc)
 		goto bad;
 	key[len] = '\0';
+=======
+	rc = str_read(&key, GFP_KERNEL, fp, len);
+	if (rc)
+		goto bad;
+>>>>>>> v3.18
 =======
 	rc = str_read(&key, GFP_KERNEL, fp, len);
 	if (rc)
@@ -1556,6 +1589,7 @@ static int type_read(struct policydb *p, struct hashtab *h, void *fp)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = -ENOMEM;
 	key = kmalloc(len + 1, GFP_KERNEL);
 	if (!key)
@@ -1564,6 +1598,11 @@ static int type_read(struct policydb *p, struct hashtab *h, void *fp)
 	if (rc)
 		goto bad;
 	key[len] = '\0';
+=======
+	rc = str_read(&key, GFP_KERNEL, fp, len);
+	if (rc)
+		goto bad;
+>>>>>>> v3.18
 =======
 	rc = str_read(&key, GFP_KERNEL, fp, len);
 	if (rc)
@@ -1632,6 +1671,7 @@ static int user_read(struct policydb *p, struct hashtab *h, void *fp)
 		usrdatum->bounds = le32_to_cpu(buf[2]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = -ENOMEM;
 	key = kmalloc(len + 1, GFP_KERNEL);
 	if (!key)
@@ -1640,6 +1680,11 @@ static int user_read(struct policydb *p, struct hashtab *h, void *fp)
 	if (rc)
 		goto bad;
 	key[len] = '\0';
+=======
+	rc = str_read(&key, GFP_KERNEL, fp, len);
+	if (rc)
+		goto bad;
+>>>>>>> v3.18
 =======
 	rc = str_read(&key, GFP_KERNEL, fp, len);
 	if (rc)
@@ -1689,6 +1734,7 @@ static int sens_read(struct policydb *p, struct hashtab *h, void *fp)
 	levdatum->isalias = le32_to_cpu(buf[1]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = -ENOMEM;
 	key = kmalloc(len + 1, GFP_ATOMIC);
 	if (!key)
@@ -1697,6 +1743,11 @@ static int sens_read(struct policydb *p, struct hashtab *h, void *fp)
 	if (rc)
 		goto bad;
 	key[len] = '\0';
+=======
+	rc = str_read(&key, GFP_ATOMIC, fp, len);
+	if (rc)
+		goto bad;
+>>>>>>> v3.18
 =======
 	rc = str_read(&key, GFP_ATOMIC, fp, len);
 	if (rc)
@@ -1743,6 +1794,7 @@ static int cat_read(struct policydb *p, struct hashtab *h, void *fp)
 	catdatum->isalias = le32_to_cpu(buf[2]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = -ENOMEM;
 	key = kmalloc(len + 1, GFP_ATOMIC);
 	if (!key)
@@ -1751,6 +1803,11 @@ static int cat_read(struct policydb *p, struct hashtab *h, void *fp)
 	if (rc)
 		goto bad;
 	key[len] = '\0';
+=======
+	rc = str_read(&key, GFP_ATOMIC, fp, len);
+	if (rc)
+		goto bad;
+>>>>>>> v3.18
 =======
 	rc = str_read(&key, GFP_ATOMIC, fp, len);
 	if (rc)
@@ -2053,6 +2110,7 @@ static int filename_trans_read(struct policydb *p, void *fp)
 		len = le32_to_cpu(buf[0]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = -ENOMEM;
 		name = kmalloc(len + 1, GFP_KERNEL);
 		if (!name)
@@ -2066,12 +2124,17 @@ static int filename_trans_read(struct policydb *p, void *fp)
 			goto out;
 		name[len] = 0;
 =======
+=======
+>>>>>>> v3.18
 		/* path component string */
 		rc = str_read(&name, GFP_KERNEL, fp, len);
 		if (rc)
 			goto out;
 
 		ft->name = name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		rc = next_entry(buf, fp, sizeof(u32) * 4);
@@ -2139,6 +2202,7 @@ static int genfs_read(struct policydb *p, void *fp)
 			goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = -ENOMEM;
 		newgenfs->fstype = kmalloc(len + 1, GFP_KERNEL);
 		if (!newgenfs->fstype)
@@ -2151,10 +2215,15 @@ static int genfs_read(struct policydb *p, void *fp)
 		newgenfs->fstype[len] = 0;
 
 =======
+=======
+>>>>>>> v3.18
 		rc = str_read(&newgenfs->fstype, GFP_KERNEL, fp, len);
 		if (rc)
 			goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		for (genfs_p = NULL, genfs = p->genfs; genfs;
 		     genfs_p = genfs, genfs = genfs->next) {
@@ -2192,6 +2261,7 @@ static int genfs_read(struct policydb *p, void *fp)
 				goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = -ENOMEM;
 			newc->u.name = kmalloc(len + 1, GFP_KERNEL);
 			if (!newc->u.name)
@@ -2201,6 +2271,11 @@ static int genfs_read(struct policydb *p, void *fp)
 			if (rc)
 				goto out;
 			newc->u.name[len] = 0;
+=======
+			rc = str_read(&newc->u.name, GFP_KERNEL, fp, len);
+			if (rc)
+				goto out;
+>>>>>>> v3.18
 =======
 			rc = str_read(&newc->u.name, GFP_KERNEL, fp, len);
 			if (rc)
@@ -2296,6 +2371,7 @@ static int ocontext_read(struct policydb *p, struct policydb_compat_info *info,
 				len = le32_to_cpu(buf[0]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rc = -ENOMEM;
 				c->u.name = kmalloc(len + 1, GFP_KERNEL);
 				if (!c->u.name)
@@ -2307,10 +2383,15 @@ static int ocontext_read(struct policydb *p, struct policydb_compat_info *info,
 
 				c->u.name[len] = 0;
 =======
+=======
+>>>>>>> v3.18
 				rc = str_read(&c->u.name, GFP_KERNEL, fp, len);
 				if (rc)
 					goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				rc = context_read_and_validate(&c->context[0], p, fp);
 				if (rc)
@@ -2348,6 +2429,7 @@ static int ocontext_read(struct policydb *p, struct policydb_compat_info *info,
 				rc = -EINVAL;
 				c->v.behavior = le32_to_cpu(buf[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (c->v.behavior > SECURITY_FS_USE_NONE)
 					goto out;
 
@@ -2362,6 +2444,8 @@ static int ocontext_read(struct policydb *p, struct policydb_compat_info *info,
 					goto out;
 				c->u.name[len] = 0;
 =======
+=======
+>>>>>>> v3.18
 				/* Determined at runtime, not in policy DB. */
 				if (c->v.behavior == SECURITY_FS_USE_MNTPOINT)
 					goto out;
@@ -2373,6 +2457,9 @@ static int ocontext_read(struct policydb *p, struct policydb_compat_info *info,
 				if (rc)
 					goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				rc = context_read_and_validate(&c->context[0], p, fp);
 				if (rc)
@@ -2733,7 +2820,11 @@ static int mls_write_range_helper(struct mls_range *r, void *fp)
 		buf[2] = cpu_to_le32(r->level[1].sens);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(items > (sizeof(buf)/sizeof(buf[0])));
+=======
+	BUG_ON(items > ARRAY_SIZE(buf));
+>>>>>>> v3.18
 =======
 	BUG_ON(items > ARRAY_SIZE(buf));
 >>>>>>> v3.18
@@ -3119,7 +3210,11 @@ static int role_write(void *vkey, void *datum, void *ptr)
 		buf[items++] = cpu_to_le32(role->bounds);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(items > (sizeof(buf)/sizeof(buf[0])));
+=======
+	BUG_ON(items > ARRAY_SIZE(buf));
+>>>>>>> v3.18
 =======
 	BUG_ON(items > ARRAY_SIZE(buf));
 >>>>>>> v3.18
@@ -3173,7 +3268,11 @@ static int type_write(void *vkey, void *datum, void *ptr)
 		buf[items++] = cpu_to_le32(typdatum->primary);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(items > (sizeof(buf) / sizeof(buf[0])));
+=======
+	BUG_ON(items > ARRAY_SIZE(buf));
+>>>>>>> v3.18
 =======
 	BUG_ON(items > ARRAY_SIZE(buf));
 >>>>>>> v3.18
@@ -3206,7 +3305,11 @@ static int user_write(void *vkey, void *datum, void *ptr)
 	if (p->policyvers >= POLICYDB_VERSION_BOUNDARY)
 		buf[items++] = cpu_to_le32(usrdatum->bounds);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(items > (sizeof(buf) / sizeof(buf[0])));
+=======
+	BUG_ON(items > ARRAY_SIZE(buf));
+>>>>>>> v3.18
 =======
 	BUG_ON(items > ARRAY_SIZE(buf));
 >>>>>>> v3.18
@@ -3434,9 +3537,14 @@ static int range_write_helper(void *key, void *data, void *ptr)
 static int range_write(struct policydb *p, void *fp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t nel;
 	__le32 buf[1];
 	int rc;
+=======
+	__le32 buf[1];
+	int rc, nel;
+>>>>>>> v3.18
 =======
 	__le32 buf[1];
 	int rc, nel;

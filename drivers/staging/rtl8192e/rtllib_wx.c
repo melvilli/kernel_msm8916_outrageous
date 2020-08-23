@@ -159,6 +159,10 @@ static inline char *rtl819x_translate_scan(struct rtllib_device *ieee,
 		bool is40M = false, isShortGI = false;
 		u8 max_mcs = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -217,6 +221,10 @@ static inline char *rtl819x_translate_scan(struct rtllib_device *ieee,
 	if (network->wpa_ie_len) {
 		char buf[MAX_WPA_IE_LEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -229,6 +237,10 @@ static inline char *rtl819x_translate_scan(struct rtllib_device *ieee,
 	if (network->rsn_ie_len) {
 		char buf[MAX_WPA_IE_LEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -243,6 +255,10 @@ static inline char *rtl819x_translate_scan(struct rtllib_device *ieee,
 	if (network->wzc_ie_len) {
 		char buf[MAX_WZC_IE_LEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -279,6 +295,10 @@ int rtllib_wx_get_scan(struct rtllib_device *ieee,
 	int i = 0;
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -774,7 +794,11 @@ int rtllib_wx_set_mlme(struct rtllib_device *ieee,
 
 	case IW_MLME_DISASSOC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (deauth == true)
+=======
+		if (deauth)
+>>>>>>> v3.18
 =======
 		if (deauth)
 >>>>>>> v3.18

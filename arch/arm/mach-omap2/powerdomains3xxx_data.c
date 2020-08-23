@@ -337,7 +337,10 @@ static struct powerdomain dpll5_pwrdm = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct powerdomain alwon_81xx_pwrdm = {
 	.name		  = "alwon_pwrdm",
 	.prcm_offs	  = TI81XX_PRM_ALWON_MOD,
@@ -393,6 +396,9 @@ static struct powerdomain sgx_816x_pwrdm = {
 	.voltdm		  = { .name = "core" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* As powerdomains are added or removed above, this list must also be changed */
 static struct powerdomain *powerdomains_omap3430_common[] __initdata = {
@@ -452,7 +458,10 @@ static struct powerdomain *powerdomains_am35x[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct powerdomain *powerdomains_ti81xx[] __initdata = {
 	&alwon_81xx_pwrdm,
 	&device_81xx_pwrdm,
@@ -465,6 +474,9 @@ static struct powerdomain *powerdomains_ti81xx[] __initdata = {
 	NULL
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init omap3xxx_powerdomains_init(void)
 {
@@ -480,6 +492,12 @@ void __init omap3xxx_powerdomains_init(void)
 	if (rev == AM35XX_REV_ES1_0 || rev == AM35XX_REV_ES1_1) {
 		pwrdm_register_pwrdms(powerdomains_am35x);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	} else if (rev == TI8168_REV_ES1_0 || rev == TI8168_REV_ES1_1
+			|| rev == TI8168_REV_ES2_0 || rev == TI8168_REV_ES2_1) {
+		pwrdm_register_pwrdms(powerdomains_ti81xx);
+>>>>>>> v3.18
 =======
 	} else if (rev == TI8168_REV_ES1_0 || rev == TI8168_REV_ES1_1
 			|| rev == TI8168_REV_ES2_0 || rev == TI8168_REV_ES2_1) {

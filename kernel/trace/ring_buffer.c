@@ -37,17 +37,23 @@ int ring_buffer_print_entry_header(struct trace_seq *s)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = trace_seq_printf(s, "# compressed entry header\n");
 	ret = trace_seq_printf(s, "\ttype_len    :    5 bits\n");
 	ret = trace_seq_printf(s, "\ttime_delta  :   27 bits\n");
 	ret = trace_seq_printf(s, "\tarray       :   32 bits\n");
 	ret = trace_seq_printf(s, "\n");
 =======
+=======
+>>>>>>> v3.18
 	ret = trace_seq_puts(s, "# compressed entry header\n");
 	ret = trace_seq_puts(s, "\ttype_len    :    5 bits\n");
 	ret = trace_seq_puts(s, "\ttime_delta  :   27 bits\n");
 	ret = trace_seq_puts(s, "\tarray       :   32 bits\n");
 	ret = trace_seq_putc(s, '\n');
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = trace_seq_printf(s, "\tpadding     : type == %d\n",
 			       RINGBUF_TYPE_PADDING);
@@ -472,7 +478,11 @@ struct ring_buffer_per_cpu {
 	arch_spinlock_t			lock;
 	struct lock_class_key		lock_key;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long			nr_pages;
+=======
+	unsigned int			nr_pages;
+>>>>>>> v3.18
 =======
 	unsigned int			nr_pages;
 >>>>>>> v3.18
@@ -496,7 +506,11 @@ struct ring_buffer_per_cpu {
 	u64				read_stamp;
 	/* ring buffer pages to update, > 0 to add, < 0 to remove */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long				nr_pages_to_update;
+=======
+	int				nr_pages_to_update;
+>>>>>>> v3.18
 =======
 	int				nr_pages_to_update;
 >>>>>>> v3.18
@@ -555,6 +569,10 @@ static void rb_wake_up_waiters(struct irq_work *work)
  * @buffer: buffer to wait on
  * @cpu: the cpu buffer to wait on
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @full: wait until a full page is available, if @cpu != RING_BUFFER_ALL_CPUS
+>>>>>>> v3.18
 =======
  * @full: wait until a full page is available, if @cpu != RING_BUFFER_ALL_CPUS
 >>>>>>> v3.18
@@ -564,18 +582,24 @@ static void rb_wake_up_waiters(struct irq_work *work)
  * it will wait for data to be added to a specific cpu buffer.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ring_buffer_wait(struct ring_buffer *buffer, int cpu)
 {
 	struct ring_buffer_per_cpu *cpu_buffer;
 	DEFINE_WAIT(wait);
 	struct rb_irq_work *work;
 =======
+=======
+>>>>>>> v3.18
 int ring_buffer_wait(struct ring_buffer *buffer, int cpu, bool full)
 {
 	struct ring_buffer_per_cpu *uninitialized_var(cpu_buffer);
 	DEFINE_WAIT(wait);
 	struct rb_irq_work *work;
 	int ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -593,6 +617,7 @@ int ring_buffer_wait(struct ring_buffer *buffer, int cpu, bool full)
 	}
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	prepare_to_wait(&work->waiters, &wait, TASK_INTERRUPTIBLE);
 
@@ -625,6 +650,8 @@ int ring_buffer_wait(struct ring_buffer *buffer, int cpu, bool full)
 	finish_wait(&work->waiters, &wait);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	while (true) {
 		prepare_to_wait(&work->waiters, &wait, TASK_INTERRUPTIBLE);
 
@@ -680,6 +707,9 @@ int ring_buffer_wait(struct ring_buffer *buffer, int cpu, bool full)
 	finish_wait(&work->waiters, &wait);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1167,7 +1197,11 @@ static int rb_check_list(struct ring_buffer_per_cpu *cpu_buffer,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * check_pages - integrity check of buffer pages
+=======
+ * rb_check_pages - integrity check of buffer pages
+>>>>>>> v3.18
 =======
  * rb_check_pages - integrity check of buffer pages
 >>>>>>> v3.18
@@ -1212,15 +1246,21 @@ static int rb_check_pages(struct ring_buffer_per_cpu *cpu_buffer)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __rb_allocate_pages(long nr_pages, struct list_head *pages, int cpu)
 {
 	struct buffer_page *bpage, *tmp;
 	long i;
 =======
+=======
+>>>>>>> v3.18
 static int __rb_allocate_pages(int nr_pages, struct list_head *pages, int cpu)
 {
 	int i;
 	struct buffer_page *bpage, *tmp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < nr_pages; i++) {
@@ -1259,7 +1299,11 @@ free_pages:
 
 static int rb_allocate_pages(struct ring_buffer_per_cpu *cpu_buffer,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     unsigned long nr_pages)
+=======
+			     unsigned nr_pages)
+>>>>>>> v3.18
 =======
 			     unsigned nr_pages)
 >>>>>>> v3.18
@@ -1288,7 +1332,11 @@ static int rb_allocate_pages(struct ring_buffer_per_cpu *cpu_buffer,
 
 static struct ring_buffer_per_cpu *
 <<<<<<< HEAD
+<<<<<<< HEAD
 rb_allocate_cpu_buffer(struct ring_buffer *buffer, long nr_pages, int cpu)
+=======
+rb_allocate_cpu_buffer(struct ring_buffer *buffer, int nr_pages, int cpu)
+>>>>>>> v3.18
 =======
 rb_allocate_cpu_buffer(struct ring_buffer *buffer, int nr_pages, int cpu)
 >>>>>>> v3.18
@@ -1378,7 +1426,11 @@ static int rb_cpu_notify(struct notifier_block *self,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ring_buffer_alloc - allocate a new ring_buffer
+=======
+ * __ring_buffer_alloc - allocate a new ring_buffer
+>>>>>>> v3.18
 =======
  * __ring_buffer_alloc - allocate a new ring_buffer
 >>>>>>> v3.18
@@ -1395,9 +1447,14 @@ struct ring_buffer *__ring_buffer_alloc(unsigned long size, unsigned flags,
 {
 	struct ring_buffer *buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long nr_pages;
 	int bsize;
 	int cpu;
+=======
+	int bsize;
+	int cpu, nr_pages;
+>>>>>>> v3.18
 =======
 	int bsize;
 	int cpu, nr_pages;
@@ -1528,7 +1585,11 @@ static inline unsigned long rb_page_write(struct buffer_page *bpage)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 rb_remove_pages(struct ring_buffer_per_cpu *cpu_buffer, unsigned long nr_pages)
+=======
+rb_remove_pages(struct ring_buffer_per_cpu *cpu_buffer, unsigned int nr_pages)
+>>>>>>> v3.18
 =======
 rb_remove_pages(struct ring_buffer_per_cpu *cpu_buffer, unsigned int nr_pages)
 >>>>>>> v3.18
@@ -1537,7 +1598,11 @@ rb_remove_pages(struct ring_buffer_per_cpu *cpu_buffer, unsigned int nr_pages)
 	struct buffer_page *to_remove_page, *tmp_iter_page;
 	struct buffer_page *last_page, *first_page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long nr_removed;
+=======
+	unsigned int nr_removed;
+>>>>>>> v3.18
 =======
 	unsigned int nr_removed;
 >>>>>>> v3.18
@@ -1748,6 +1813,10 @@ static void update_pages_handler(struct work_struct *work)
  * @buffer: the buffer to resize.
  * @size: the new size.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @cpu_id: the cpu buffer to resize
+>>>>>>> v3.18
 =======
  * @cpu_id: the cpu buffer to resize
 >>>>>>> v3.18
@@ -1761,7 +1830,11 @@ int ring_buffer_resize(struct ring_buffer *buffer, unsigned long size,
 {
 	struct ring_buffer_per_cpu *cpu_buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long nr_pages;
+=======
+	unsigned nr_pages;
+>>>>>>> v3.18
 =======
 	unsigned nr_pages;
 >>>>>>> v3.18
@@ -1779,6 +1852,7 @@ int ring_buffer_resize(struct ring_buffer *buffer, unsigned long size,
 		return size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nr_pages = DIV_ROUND_UP(size, BUF_PAGE_SIZE);
 
 	/* we need a minimum of two pages */
@@ -1787,6 +1861,8 @@ int ring_buffer_resize(struct ring_buffer *buffer, unsigned long size,
 
 	size = nr_pages * BUF_PAGE_SIZE;
 =======
+=======
+>>>>>>> v3.18
 	size = DIV_ROUND_UP(size, BUF_PAGE_SIZE);
 	size *= BUF_PAGE_SIZE;
 
@@ -1795,6 +1871,9 @@ int ring_buffer_resize(struct ring_buffer *buffer, unsigned long size,
 		size = BUF_PAGE_SIZE * 2;
 
 	nr_pages = DIV_ROUND_UP(size, BUF_PAGE_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1845,6 +1924,7 @@ int ring_buffer_resize(struct ring_buffer *buffer, unsigned long size,
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* The update must run on the CPU that is being updated. */
 			preempt_disable();
 			if (cpu == smp_processor_id() || !cpu_online(cpu)) {
@@ -1862,6 +1942,8 @@ int ring_buffer_resize(struct ring_buffer *buffer, unsigned long size,
 			}
 			preempt_enable();
 =======
+=======
+>>>>>>> v3.18
 			/* Can't run something on an offline CPU. */
 			if (!cpu_online(cpu)) {
 				rb_update_pages(cpu_buffer);
@@ -1870,6 +1952,9 @@ int ring_buffer_resize(struct ring_buffer *buffer, unsigned long size,
 				schedule_work_on(cpu,
 						&cpu_buffer->update_pages_work);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1909,6 +1994,7 @@ int ring_buffer_resize(struct ring_buffer *buffer, unsigned long size,
 		get_online_cpus();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		preempt_disable();
 		/* The update must run on the CPU that is being updated. */
 		if (cpu_id == smp_processor_id() || !cpu_online(cpu_id))
@@ -1926,6 +2012,8 @@ int ring_buffer_resize(struct ring_buffer *buffer, unsigned long size,
 		}
 		preempt_enable();
 =======
+=======
+>>>>>>> v3.18
 		/* Can't run something on an offline CPU. */
 		if (!cpu_online(cpu_id))
 			rb_update_pages(cpu_buffer);
@@ -1934,6 +2022,9 @@ int ring_buffer_resize(struct ring_buffer *buffer, unsigned long size,
 					 &cpu_buffer->update_pages_work);
 			wait_for_completion(&cpu_buffer->update_done);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		cpu_buffer->nr_pages_to_update = 0;
@@ -2116,13 +2207,19 @@ rb_set_commit_to_write(struct ring_buffer_per_cpu *cpu_buffer)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void rb_reset_reader_page(struct ring_buffer_per_cpu *cpu_buffer)
 {
 	cpu_buffer->read_stamp = cpu_buffer->reader_page->page->time_stamp;
 	cpu_buffer->reader_page->read = 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void rb_inc_iter(struct ring_buffer_iter *iter)
 {
@@ -2748,7 +2845,11 @@ rb_reserve_next_event(struct ring_buffer *buffer,
 			int local_clock_stable = 1;
 #ifdef CONFIG_HAVE_UNSTABLE_SCHED_CLOCK
 <<<<<<< HEAD
+<<<<<<< HEAD
 			local_clock_stable = sched_clock_stable;
+=======
+			local_clock_stable = sched_clock_stable();
+>>>>>>> v3.18
 =======
 			local_clock_stable = sched_clock_stable();
 >>>>>>> v3.18
@@ -2825,7 +2926,11 @@ static DEFINE_PER_CPU(unsigned int, current_context);
 static __always_inline int trace_recursive_lock(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int val = __this_cpu_read(current_context);
+=======
+	unsigned int val = this_cpu_read(current_context);
+>>>>>>> v3.18
 =======
 	unsigned int val = this_cpu_read(current_context);
 >>>>>>> v3.18
@@ -2846,7 +2951,11 @@ static __always_inline int trace_recursive_lock(void)
 
 	val |= (1 << bit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__this_cpu_write(current_context, val);
+=======
+	this_cpu_write(current_context, val);
+>>>>>>> v3.18
 =======
 	this_cpu_write(current_context, val);
 >>>>>>> v3.18
@@ -2857,16 +2966,22 @@ static __always_inline int trace_recursive_lock(void)
 static __always_inline void trace_recursive_unlock(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int val = __this_cpu_read(current_context);
 
 	val &= val & (val - 1);
 	__this_cpu_write(current_context, val);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int val = this_cpu_read(current_context);
 
 	val--;
 	val &= this_cpu_read(current_context);
 	this_cpu_write(current_context, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3599,6 +3714,7 @@ int ring_buffer_iter_empty(struct ring_buffer_iter *iter)
 {
 	struct ring_buffer_per_cpu *cpu_buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct buffer_page *reader;
 	struct buffer_page *head_page;
 	struct buffer_page *commit_page;
@@ -3617,11 +3733,16 @@ int ring_buffer_iter_empty(struct ring_buffer_iter *iter)
 		 head_page->read == commit &&
 		 iter->head == rb_page_commit(cpu_buffer->reader_page)));
 =======
+=======
+>>>>>>> v3.18
 
 	cpu_buffer = iter->cpu_buffer;
 
 	return iter->head_page == cpu_buffer->commit_page &&
 		iter->head == rb_commit_index(cpu_buffer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(ring_buffer_iter_empty);
@@ -3802,7 +3923,11 @@ rb_get_reader_page(struct ring_buffer_per_cpu *cpu_buffer)
 	/* Finally update the reader page to the new head */
 	cpu_buffer->reader_page = reader;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_buffer->reader_page->read = 0;
+=======
+	rb_reset_reader_page(cpu_buffer);
+>>>>>>> v3.18
 =======
 	rb_reset_reader_page(cpu_buffer);
 >>>>>>> v3.18
@@ -3816,10 +3941,13 @@ rb_get_reader_page(struct ring_buffer_per_cpu *cpu_buffer)
 
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Update the read_stamp on the first event */
 	if (reader && reader->read == 0)
 		cpu_buffer->read_stamp = reader->page->time_stamp;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	arch_spin_unlock(&cpu_buffer->lock);
@@ -4003,7 +4131,11 @@ rb_iter_peek(struct ring_buffer_iter *iter, u64 *ts)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iter->head >= local_read(&iter->head_page->page->commit)) {
+=======
+	if (iter->head >= rb_page_size(iter->head_page)) {
+>>>>>>> v3.18
 =======
 	if (iter->head >= rb_page_size(iter->head_page)) {
 >>>>>>> v3.18
@@ -4198,17 +4330,23 @@ EXPORT_SYMBOL_GPL(ring_buffer_consume);
  *
  * After a sequence of ring_buffer_read_prepare calls, the user is
 <<<<<<< HEAD
+<<<<<<< HEAD
  * expected to make at least one call to ring_buffer_prepare_sync.
  * Afterwards, ring_buffer_read_start is invoked to get things going
  * for real.
  *
  * This overall must be paired with ring_buffer_finish.
 =======
+=======
+>>>>>>> v3.18
  * expected to make at least one call to ring_buffer_read_prepare_sync.
  * Afterwards, ring_buffer_read_start is invoked to get things going
  * for real.
  *
  * This overall must be paired with ring_buffer_read_finish.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct ring_buffer_iter *
@@ -4259,7 +4397,11 @@ EXPORT_SYMBOL_GPL(ring_buffer_read_prepare_sync);
  * performed.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Must be paired with ring_buffer_finish.
+=======
+ * Must be paired with ring_buffer_read_finish.
+>>>>>>> v3.18
 =======
  * Must be paired with ring_buffer_read_finish.
 >>>>>>> v3.18
@@ -4285,7 +4427,11 @@ EXPORT_SYMBOL_GPL(ring_buffer_read_start);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ring_buffer_finish - finish reading the iterator of the buffer
+=======
+ * ring_buffer_read_finish - finish reading the iterator of the buffer
+>>>>>>> v3.18
 =======
  * ring_buffer_read_finish - finish reading the iterator of the buffer
 >>>>>>> v3.18
@@ -4604,6 +4750,10 @@ EXPORT_SYMBOL_GPL(ring_buffer_swap_cpu);
  * ring_buffer_alloc_read_page - allocate a page to read from buffer
  * @buffer: the buffer to allocate for.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @cpu: the cpu buffer to allocate.
+>>>>>>> v3.18
 =======
  * @cpu: the cpu buffer to allocate.
 >>>>>>> v3.18
@@ -4665,7 +4815,11 @@ EXPORT_SYMBOL_GPL(ring_buffer_free_read_page);
  *
  * for example:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	rpage = ring_buffer_alloc_read_page(buffer);
+=======
+ *	rpage = ring_buffer_alloc_read_page(buffer, cpu);
+>>>>>>> v3.18
 =======
  *	rpage = ring_buffer_alloc_read_page(buffer, cpu);
 >>>>>>> v3.18
@@ -4859,9 +5013,14 @@ static int rb_cpu_notify(struct notifier_block *self,
 		container_of(self, struct ring_buffer, cpu_notify);
 	long cpu = (long)hcpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long nr_pages_same;
 	int cpu_i;
 	unsigned long nr_pages;
+=======
+	int cpu_i, nr_pages_same;
+	unsigned int nr_pages;
+>>>>>>> v3.18
 =======
 	int cpu_i, nr_pages_same;
 	unsigned int nr_pages;
@@ -5094,9 +5253,15 @@ static __init int test_ringbuffer(void)
 		rb_threads[cpu] = kthread_create(rb_test, &rb_data[cpu],
 						 "rbtester/%d", cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (WARN_ON(IS_ERR(rb_threads[cpu]))) {
 			pr_cont("FAILED\n");
 			ret = PTR_ERR(rb_threads[cpu]);
+=======
+		if (WARN_ON(!rb_threads[cpu])) {
+			pr_cont("FAILED\n");
+			ret = -1;
+>>>>>>> v3.18
 =======
 		if (WARN_ON(!rb_threads[cpu])) {
 			pr_cont("FAILED\n");
@@ -5112,9 +5277,15 @@ static __init int test_ringbuffer(void)
 	/* Now create the rb hammer! */
 	rb_hammer = kthread_run(rb_hammer_test, NULL, "rbhammer");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON(IS_ERR(rb_hammer))) {
 		pr_cont("FAILED\n");
 		ret = PTR_ERR(rb_hammer);
+=======
+	if (WARN_ON(!rb_hammer)) {
+		pr_cont("FAILED\n");
+		ret = -1;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!rb_hammer)) {
 		pr_cont("FAILED\n");

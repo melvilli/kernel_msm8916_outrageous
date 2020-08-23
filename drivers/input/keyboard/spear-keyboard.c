@@ -13,7 +13,10 @@
 #include <linux/clk.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -195,12 +198,15 @@ static int spear_kbd_probe(struct platform_device *pdev)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
 		dev_err(&pdev->dev, "no keyboard resource defined\n");
 		return -EBUSY;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	irq = platform_get_irq(pdev, 0);
@@ -235,6 +241,10 @@ static int spear_kbd_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 >>>>>>> v3.18
@@ -301,7 +311,10 @@ static int spear_kbd_remove(struct platform_device *pdev)
 
 	device_init_wakeup(&pdev->dev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -56,6 +56,11 @@ struct sdo_device {
 	/** clock for control of VPLL */
 	struct clk *fout_vpll;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/** vpll rate before sdo stream was on */
+	unsigned long vpll_rate;
+>>>>>>> v3.18
 =======
 	/** vpll rate before sdo stream was on */
 	unsigned long vpll_rate;
@@ -194,7 +199,11 @@ static int sdo_s_power(struct v4l2_subdev *sd, int on)
 
 	/* only values < 0 indicate errors */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return IS_ERR_VALUE(ret) ? ret : 0;
+=======
+	return ret < 0 ? ret : 0;
+>>>>>>> v3.18
 =======
 	return ret < 0 ? ret : 0;
 >>>>>>> v3.18
@@ -203,9 +212,12 @@ static int sdo_s_power(struct v4l2_subdev *sd, int on)
 static int sdo_streamon(struct sdo_device *sdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* set proper clock for Timing Generator */
 	clk_set_rate(sdev->fout_vpll, 54000000);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	/* set proper clock for Timing Generator */
@@ -215,31 +227,46 @@ static int sdo_streamon(struct sdo_device *sdev)
 		dev_err(sdev->dev, "Failed to set vpll rate\n");
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_info(sdev->dev, "fout_vpll.rate = %lu\n",
 	clk_get_rate(sdev->fout_vpll));
 	/* enable clock in SDO */
 	sdo_write_mask(sdev, SDO_CLKCON, ~0, SDO_TVOUT_CLOCK_ON);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(sdev->dacphy);
 =======
+=======
+>>>>>>> v3.18
 	ret = clk_prepare_enable(sdev->dacphy);
 	if (ret < 0) {
 		dev_err(sdev->dev, "clk_prepare_enable(dacphy) failed\n");
 		goto fail;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* enable DAC */
 	sdo_write_mask(sdev, SDO_DAC, ~0, SDO_POWER_ON_DAC);
 	sdo_reg_debug(sdev);
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 fail:
 	sdo_write_mask(sdev, SDO_CLKCON, 0, SDO_TVOUT_CLOCK_ON);
 	clk_set_rate(sdev->fout_vpll, sdev->vpll_rate);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -249,7 +276,11 @@ static int sdo_streamoff(struct sdo_device *sdev)
 
 	sdo_write_mask(sdev, SDO_DAC, 0, SDO_POWER_ON_DAC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(sdev->dacphy);
+=======
+	clk_disable_unprepare(sdev->dacphy);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(sdev->dacphy);
 >>>>>>> v3.18
@@ -262,6 +293,10 @@ static int sdo_streamoff(struct sdo_device *sdev)
 	if (tries == 0)
 		dev_err(sdev->dev, "failed to stop streaming\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clk_set_rate(sdev->fout_vpll, sdev->vpll_rate);
+>>>>>>> v3.18
 =======
 	clk_set_rate(sdev->fout_vpll, sdev->vpll_rate);
 >>>>>>> v3.18
@@ -300,7 +335,11 @@ static int sdo_runtime_suspend(struct device *dev)
 	regulator_disable(sdev->vdet);
 	regulator_disable(sdev->vdac);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(sdev->sclk_dac);
+=======
+	clk_disable_unprepare(sdev->sclk_dac);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(sdev->sclk_dac);
 >>>>>>> v3.18
@@ -312,12 +351,15 @@ static int sdo_runtime_resume(struct device *dev)
 	struct v4l2_subdev *sd = dev_get_drvdata(dev);
 	struct sdo_device *sdev = sd_to_sdev(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dev_info(dev, "resume\n");
 	clk_enable(sdev->sclk_dac);
 	regulator_enable(sdev->vdac);
 	regulator_enable(sdev->vdet);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	dev_info(dev, "resume\n");
@@ -333,6 +375,9 @@ static int sdo_runtime_resume(struct device *dev)
 	ret = regulator_enable(sdev->vdet);
 	if (ret < 0)
 		goto vdac_r_dis;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* software reset */
@@ -353,13 +398,19 @@ static int sdo_runtime_resume(struct device *dev)
 	sdo_reg_debug(sdev);
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 vdac_r_dis:
 	regulator_disable(sdev->vdac);
 dac_clk_dis:
 	clk_disable_unprepare(sdev->sclk_dac);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -466,13 +517,19 @@ static int sdo_probe(struct platform_device *pdev)
 
 	/* enable gate for dac clock, because mixer uses it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(sdev->dac);
 =======
+=======
+>>>>>>> v3.18
 	ret = clk_prepare_enable(sdev->dac);
 	if (ret < 0) {
 		dev_err(dev, "clk_prepare_enable(dac) failed\n");
 		goto fail_fout_vpll;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* configure power management */
@@ -513,7 +570,11 @@ static int sdo_remove(struct platform_device *pdev)
 
 	pm_runtime_disable(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(sdev->dac);
+=======
+	clk_disable_unprepare(sdev->dac);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(sdev->dac);
 >>>>>>> v3.18

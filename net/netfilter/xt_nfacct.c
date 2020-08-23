@@ -22,6 +22,10 @@ MODULE_ALIAS("ip6t_nfacct");
 static bool nfacct_mt(const struct sk_buff *skb, struct xt_action_param *par)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int overquota;
+>>>>>>> v3.18
 =======
 	int overquota;
 >>>>>>> v3.18
@@ -30,7 +34,13 @@ static bool nfacct_mt(const struct sk_buff *skb, struct xt_action_param *par)
 	nfnl_acct_update(skb, info->nfacct);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return true;
+=======
+	overquota = nfnl_acct_overquota(skb, info->nfacct);
+
+	return overquota == NFACCT_UNDERQUOTA ? false : true;
+>>>>>>> v3.18
 =======
 	overquota = nfnl_acct_overquota(skb, info->nfacct);
 

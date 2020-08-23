@@ -8,7 +8,11 @@
 struct iio_cb_buffer {
 	struct iio_buffer buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*cb)(u8 *data, void *private);
+=======
+	int (*cb)(const void *data, void *private);
+>>>>>>> v3.18
 =======
 	int (*cb)(const void *data, void *private);
 >>>>>>> v3.18
@@ -16,6 +20,7 @@ struct iio_cb_buffer {
 	struct iio_channel *channels;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int iio_buffer_cb_store_to(struct iio_buffer *buffer, u8 *data)
 {
@@ -33,6 +38,8 @@ static struct iio_buffer_access_funcs iio_cb_access = {
 struct iio_cb_buffer *iio_channel_get_all_cb(struct device *dev,
 					     int (*cb)(u8 *data,
 =======
+=======
+>>>>>>> v3.18
 static struct iio_cb_buffer *buffer_to_cb_buffer(struct iio_buffer *buffer)
 {
 	return container_of(buffer, struct iio_cb_buffer, buffer);
@@ -58,6 +65,9 @@ static const struct iio_buffer_access_funcs iio_cb_access = {
 
 struct iio_cb_buffer *iio_channel_get_all_cb(struct device *dev,
 					     int (*cb)(const void *data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						       void *private),
 					     void *private)
@@ -69,15 +79,21 @@ struct iio_cb_buffer *iio_channel_get_all_cb(struct device *dev,
 
 	cb_buff = kzalloc(sizeof(*cb_buff), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cb_buff == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (cb_buff == NULL)
 		return ERR_PTR(-ENOMEM);
 
 	iio_buffer_init(&cb_buff->buffer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cb_buff->private = private;
@@ -119,7 +135,10 @@ error_release_channels:
 error_free_cb_buff:
 	kfree(cb_buff);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ERR_PTR(ret);
@@ -145,9 +164,14 @@ EXPORT_SYMBOL_GPL(iio_channel_stop_all_cb);
 void iio_channel_release_all_cb(struct iio_cb_buffer *cb_buff)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(cb_buff->buffer.scan_mask);
 	iio_channel_release_all(cb_buff->channels);
 	kfree(cb_buff);
+=======
+	iio_channel_release_all(cb_buff->channels);
+	iio_buffer_put(&cb_buff->buffer);
+>>>>>>> v3.18
 =======
 	iio_channel_release_all(cb_buff->channels);
 	iio_buffer_put(&cb_buff->buffer);

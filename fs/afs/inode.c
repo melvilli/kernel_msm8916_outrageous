@@ -260,7 +260,11 @@ struct inode *afs_iget(struct super_block *sb, struct key *key,
 	vnode->cache = fscache_acquire_cookie(vnode->volume->cache,
 					      &afs_vnode_cache_index_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      vnode);
+=======
+					      vnode, true);
+>>>>>>> v3.18
 =======
 					      vnode, true);
 >>>>>>> v3.18
@@ -427,7 +431,11 @@ void afs_evict_inode(struct inode *inode)
 	ASSERTCMP(inode->i_ino, ==, vnode->fid.vnode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18

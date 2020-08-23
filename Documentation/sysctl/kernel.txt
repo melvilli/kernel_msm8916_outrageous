@@ -24,10 +24,15 @@ show up in /proc/sys/kernel:
 - bootloader_type	     [ X86 only ]
 - bootloader_version	     [ X86 only ]
 <<<<<<< HEAD
+<<<<<<< HEAD
 - boot_reason		     [ ARM and ARM64 only ]
 - callhome		     [ S390 only ]
 - cap_last_cap
 - cold_boot		     [ ARM and ARM64 only ]
+=======
+- callhome		     [ S390 only ]
+- cap_last_cap
+>>>>>>> v3.18
 =======
 - callhome		     [ S390 only ]
 - cap_last_cap
@@ -41,12 +46,18 @@ show up in /proc/sys/kernel:
 - hostname
 - hotplug
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - hung_task_panic
 - hung_task_check_count
 - hung_task_timeout_secs
 - hung_task_warnings
 - kexec_load_disabled
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - kptr_restrict
 - kstack_depth_to_print       [ X86 only ]
@@ -65,9 +76,14 @@ show up in /proc/sys/kernel:
 - panic
 - panic_on_oops
 <<<<<<< HEAD
+<<<<<<< HEAD
 - panic_on_stackoverflow
 - panic_on_unrecovered_nmi
 - perf_event_paranoid
+=======
+- panic_on_unrecovered_nmi
+- panic_on_stackoverflow
+>>>>>>> v3.18
 =======
 - panic_on_unrecovered_nmi
 - panic_on_stackoverflow
@@ -92,6 +108,7 @@ show up in /proc/sys/kernel:
 - shmmax                      [ sysv ipc ]
 - shmmni
 <<<<<<< HEAD
+<<<<<<< HEAD
 - softlockup_thresh
 - stop-a                      [ SPARC only ]
 - sysrq                       ==> Documentation/sysrq.txt
@@ -99,6 +116,8 @@ show up in /proc/sys/kernel:
 - threads-max
 - unknown_nmi_panic
 =======
+=======
+>>>>>>> v3.18
 - softlockup_all_cpu_backtrace
 - stop-a                      [ SPARC only ]
 - sysrq                       ==> Documentation/sysrq.txt
@@ -107,6 +126,9 @@ show up in /proc/sys/kernel:
 - threads-max
 - unknown_nmi_panic
 - watchdog_thresh
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - version
 
@@ -178,6 +200,7 @@ Documentation/x86/boot.txt for additional information.
 ==============================================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 boot_reason:
 
 ARM and ARM64 -- reason for device boot
@@ -191,6 +214,8 @@ Documentation/arm/msm/boot.txt for Qualcomm's family of devices.
 
 ==============================================================
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 callhome:
@@ -214,6 +239,7 @@ Highest valid capability of the running kernel.  Exports
 CAP_LAST_CAP from the kernel.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ===============================================================
 
 cold_boot
@@ -224,6 +250,8 @@ A single bit will be set in the unsigned integer value to identify
 whether the device was booted from a cold or warm state. Zero
 indicating a warm boot and one indicating a cold boot.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ==============================================================
@@ -244,6 +272,12 @@ core_pattern is used to specify a core dumpfile pattern name.
 	%%	output one '%'
 	%p	pid
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	%P	global pid (init PID namespace)
+	%i	tid
+	%I	global tid (init PID namespace)
+>>>>>>> v3.18
 =======
 	%P	global pid (init PID namespace)
 	%i	tid
@@ -354,7 +388,10 @@ Default value is "/sbin/hotplug".
 ==============================================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 hung_task_panic:
 
 Controls the kernel's behavior when a hung task is detected.
@@ -407,6 +444,9 @@ with the "modules_disabled" sysctl.
 
 ==============================================================
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 kptr_restrict:
 
@@ -453,7 +493,11 @@ in an otherwise modular kernel.  This toggle defaults to off
 (0), but can be set true (1).  Once true, modules can be
 neither loaded nor unloaded, and the toggle cannot be set back
 <<<<<<< HEAD
+<<<<<<< HEAD
 to false.
+=======
+to false.  Generally used with the "kexec_load_disabled" toggle.
+>>>>>>> v3.18
 =======
 to false.  Generally used with the "kexec_load_disabled" toggle.
 >>>>>>> v3.18
@@ -492,7 +536,10 @@ utilize.
 ==============================================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 numa_balancing
 
 Enables/disables automatic page fault based NUMA memory
@@ -556,6 +603,9 @@ scanned for a given scan.
 
 ==============================================================
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 osrelease, ostype & version:
 
@@ -595,7 +645,10 @@ the recommended setting is 60.
 ==============================================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 panic_on_unrecovered_nmi:
 
 The default Linux behaviour on an NMI of either memory or unknown is
@@ -609,6 +662,9 @@ the existing panic controls already in that directory.
 
 ==============================================================
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 panic_on_oops:
 
@@ -630,6 +686,10 @@ This file shows up if CONFIG_DEBUG_STACKOVERFLOW is enabled.
 0: try to continue operation.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+1: panic immediately.
+>>>>>>> v3.18
 =======
 1: panic immediately.
 >>>>>>> v3.18
@@ -663,6 +723,7 @@ allowed to execute.
 ==============================================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 panic_on_unrecovered_nmi:
 
 The default Linux behaviour on an NMI of either memory or unknown is
@@ -689,6 +750,8 @@ CONFIG_SECURITY_PERF_EVENTS_RESTRICT is set, or 1 otherwise.
 >=3: Disallow all event access by users without CAP_SYS_ADMIN
 
 ==============================================================
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -869,6 +932,7 @@ without users and with a dead originative process will be destroyed.
 ==============================================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 softlockup_thresh:
 
 This value can be used to lower the softlockup tolerance threshold.  The
@@ -876,6 +940,8 @@ default threshold is 60 seconds.  If a cpu is locked up for 60 seconds,
 the kernel complains.  Valid values are 1-60 seconds.  Setting this
 tunable to zero will disable the softlockup detection altogether.
 =======
+=======
+>>>>>>> v3.18
 sysctl_writes_strict:
 
 Control how file position affects the behavior of updating sysctl values
@@ -909,6 +975,9 @@ NMI.
 0: do nothing. This is the default behavior.
 
 1: on detection capture more debug information.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ==============================================================
@@ -938,6 +1007,12 @@ can be ORed together:
 2048 - The system is working around a severe firmware bug.
 4096 - An out-of-tree module has been loaded.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+8192 - An unsigned module has been loaded in a kernel supporting module
+       signature.
+16384 - A soft lockup has previously occurred on the system.
+>>>>>>> v3.18
 =======
 8192 - An unsigned module has been loaded in a kernel supporting module
        signature.
@@ -955,7 +1030,10 @@ that time, kernel debugging information is displayed on console.
 NMI switch that most IA32 servers have fires unknown NMI up, for
 example.  If a system hangs up, try pressing the NMI switch.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 ==============================================================
 
@@ -969,4 +1047,7 @@ The softlockup threshold is (2 * watchdog_thresh). Setting this
 tunable to zero will disable lockup detection altogether.
 
 ==============================================================
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

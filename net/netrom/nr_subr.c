@@ -23,7 +23,11 @@
 #include <net/sock.h>
 #include <net/tcp_states.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18

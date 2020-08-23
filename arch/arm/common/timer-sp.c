@@ -67,7 +67,11 @@ static long __init sp804_get_clock_rate(struct clk *clk)
 static void __iomem *sched_clock_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 sp804_read(void)
+=======
+static u64 notrace sp804_read(void)
+>>>>>>> v3.18
 =======
 static u64 notrace sp804_read(void)
 >>>>>>> v3.18
@@ -109,7 +113,11 @@ void __init __sp804_clocksource_and_sched_clock_init(void __iomem *base,
 	if (use_sched_clock) {
 		sched_clock_base = base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		setup_sched_clock(sp804_read, 32, rate);
+=======
+		sched_clock_register(sp804_read, 32, rate);
+>>>>>>> v3.18
 =======
 		sched_clock_register(sp804_read, 32, rate);
 >>>>>>> v3.18
@@ -175,7 +183,12 @@ static int sp804_set_next_event(unsigned long next,
 
 static struct clock_event_device sp804_clockevent = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.features       = CLOCK_EVT_FEAT_PERIODIC | CLOCK_EVT_FEAT_ONESHOT,
+=======
+	.features       = CLOCK_EVT_FEAT_PERIODIC | CLOCK_EVT_FEAT_ONESHOT |
+		CLOCK_EVT_FEAT_DYNIRQ,
+>>>>>>> v3.18
 =======
 	.features       = CLOCK_EVT_FEAT_PERIODIC | CLOCK_EVT_FEAT_ONESHOT |
 		CLOCK_EVT_FEAT_DYNIRQ,
@@ -188,7 +201,11 @@ static struct clock_event_device sp804_clockevent = {
 static struct irqaction sp804_timer_irq = {
 	.name		= "timer",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -250,7 +267,11 @@ static void __init sp804_of_init(struct device_node *np)
 		clk1 = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Get the 2nd clock if the timer has 2 timer clocks */
+=======
+	/* Get the 2nd clock if the timer has 3 timer clocks */
+>>>>>>> v3.18
 =======
 	/* Get the 2nd clock if the timer has 3 timer clocks */
 >>>>>>> v3.18
@@ -260,7 +281,11 @@ static void __init sp804_of_init(struct device_node *np)
 			pr_err("sp804: %s clock not found: %d\n", np->name,
 				(int)PTR_ERR(clk2));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err;
+=======
+			clk2 = NULL;
+>>>>>>> v3.18
 =======
 			clk2 = NULL;
 >>>>>>> v3.18
@@ -296,6 +321,10 @@ static void __init integrator_cp_of_init(struct device_node *np)
 	int irq;
 	const char *name = of_get_property(np, "compatible", NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *clk;
+>>>>>>> v3.18
 =======
 	struct clk *clk;
 >>>>>>> v3.18
@@ -304,6 +333,12 @@ static void __init integrator_cp_of_init(struct device_node *np)
 	if (WARN_ON(!base))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clk = of_clk_get(np, 0);
+	if (WARN_ON(IS_ERR(clk)))
+		return;
+>>>>>>> v3.18
 =======
 	clk = of_clk_get(np, 0);
 	if (WARN_ON(IS_ERR(clk)))
@@ -318,7 +353,11 @@ static void __init integrator_cp_of_init(struct device_node *np)
 
 	if (!init_count)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sp804_clocksource_init(base, name);
+=======
+		__sp804_clocksource_and_sched_clock_init(base, name, clk, 0);
+>>>>>>> v3.18
 =======
 		__sp804_clocksource_and_sched_clock_init(base, name, clk, 0);
 >>>>>>> v3.18
@@ -328,7 +367,11 @@ static void __init integrator_cp_of_init(struct device_node *np)
 			goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sp804_clockevents_init(base, irq, name);
+=======
+		__sp804_clockevents_init(base, irq, clk, name);
+>>>>>>> v3.18
 =======
 		__sp804_clockevents_init(base, irq, clk, name);
 >>>>>>> v3.18

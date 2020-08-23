@@ -101,6 +101,7 @@ EXPORT_SYMBOL_GPL(blk_queue_lld_busy);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * blk_urgent_request() - Set an urgent_request handler function for queue
  * @q:		queue
  * @fn:		handler for urgent requests
@@ -113,6 +114,8 @@ void blk_urgent_request(struct request_queue *q, request_fn_proc *fn)
 EXPORT_SYMBOL(blk_urgent_request);
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * blk_set_default_limits - reset limits to default values
@@ -129,6 +132,10 @@ void blk_set_default_limits(struct queue_limits *lim)
 	lim->max_segment_size = BLK_MAX_SEGMENT_SIZE;
 	lim->max_sectors = lim->max_hw_sectors = BLK_SAFE_MAX_SECTORS;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lim->chunk_sectors = 0;
+>>>>>>> v3.18
 =======
 	lim->chunk_sectors = 0;
 >>>>>>> v3.18
@@ -216,7 +223,11 @@ EXPORT_SYMBOL(blk_queue_make_request);
  * blk_queue_bounce_limit - set bounce buffer limit for queue
  * @q: the request queue for the device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dma_mask: the maximum address the device can handle
+=======
+ * @max_addr: the maximum address the device can handle
+>>>>>>> v3.18
 =======
  * @max_addr: the maximum address the device can handle
 >>>>>>> v3.18
@@ -226,17 +237,23 @@ EXPORT_SYMBOL(blk_queue_make_request);
  *    it can do I/O directly to. A low level driver can call
  *    blk_queue_bounce_limit to have lower memory pages allocated as bounce
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    buffers for doing I/O to pages residing above @dma_mask.
  **/
 void blk_queue_bounce_limit(struct request_queue *q, u64 dma_mask)
 {
 	unsigned long b_pfn = dma_mask >> PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
  *    buffers for doing I/O to pages residing above @max_addr.
  **/
 void blk_queue_bounce_limit(struct request_queue *q, u64 max_addr)
 {
 	unsigned long b_pfn = max_addr >> PAGE_SHIFT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int dma = 0;
 
@@ -309,7 +326,10 @@ EXPORT_SYMBOL(blk_queue_max_hw_sectors);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * blk_queue_chunk_sectors - set size of the chunk for this queue
  * @q:  the request queue for the device
  * @chunk_sectors:  chunk sectors in the usual 512b unit
@@ -330,6 +350,9 @@ void blk_queue_chunk_sectors(struct request_queue *q, unsigned int chunk_sectors
 EXPORT_SYMBOL(blk_queue_chunk_sectors);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * blk_queue_max_discard_sectors - set max sectors for a single discard
  * @q:  the request queue for the device
@@ -647,11 +670,17 @@ int blk_stack_limits(struct queue_limits *t, struct queue_limits *b,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	t->raid_partial_stripes_expensive =
 		max(t->raid_partial_stripes_expensive,
 		    b->raid_partial_stripes_expensive);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Find lowest common alignment_offset */
 	t->alignment_offset = lcm(t->alignment_offset, alignment)

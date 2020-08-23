@@ -7,7 +7,11 @@
  * Copyright (C) 1995 - 2000, 01, 03 by Ralf Baechle
  * Copyright (C) 1999, 2000 Silicon Graphics, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2007  Maciej W. Rozycki
+=======
+ * Copyright (C) 2007, 2014 Maciej W. Rozycki
+>>>>>>> v3.18
 =======
  * Copyright (C) 2007, 2014 Maciej W. Rozycki
 >>>>>>> v3.18
@@ -16,11 +20,14 @@
 #include <linux/param.h>
 #include <linux/smp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/compiler.h>
 #include <asm/war.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/stringify.h>
 
 #include <asm/asm.h>
@@ -33,6 +40,9 @@
 #define GCC_DADDI_IMM_ASM() "r"
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __delay(unsigned long loops)
 {
@@ -40,6 +50,7 @@ void __delay(unsigned long loops)
 	"	.set	noreorder				\n"
 	"	.align	3					\n"
 	"1:	bnez	%0, 1b					\n"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if BITS_PER_LONG == 32
 	"	subu	%0, 1					\n"
@@ -50,10 +61,15 @@ void __delay(unsigned long loops)
 	: "=r" (loops)
 	: "0" (loops));
 =======
+=======
+>>>>>>> v3.18
 	"	 " __stringify(LONG_SUBU) "	%0, %1		\n"
 	"	.set	reorder					\n"
 	: "=r" (loops)
 	: GCC_DADDI_IMM_ASM() (1), "0" (loops));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(__delay);

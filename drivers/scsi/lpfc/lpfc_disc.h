@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2008 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2013 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2013 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -83,7 +87,12 @@ struct lpfc_nodelist {
 	struct lpfc_name nlp_portname;
 	struct lpfc_name nlp_nodename;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t         nlp_flag;		/* entry  flags */
+=======
+	uint32_t         nlp_flag;		/* entry flags */
+	uint32_t         nlp_add_flag;		/* additional flags */
+>>>>>>> v3.18
 =======
 	uint32_t         nlp_flag;		/* entry flags */
 	uint32_t         nlp_add_flag;		/* additional flags */
@@ -126,7 +135,11 @@ struct lpfc_nodelist {
 	uint32_t cmd_qdepth;
 	unsigned long last_change_time;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lpfc_node_rrqs active_rrqs;
+=======
+	unsigned long *active_rrqs_xri_bitmap;
+>>>>>>> v3.18
 =======
 	unsigned long *active_rrqs_xri_bitmap;
 >>>>>>> v3.18
@@ -168,15 +181,21 @@ struct lpfc_node_rrq {
 #define NLP_TARGET_REMOVE  0x10000000   /* Target remove in process */
 #define NLP_SC_REQ         0x20000000	/* Target requires authentication */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NLP_RPI_REGISTERED 0x80000000	/* nlp_rpi is valid */
 
 =======
+=======
+>>>>>>> v3.18
 #define NLP_FIRSTBURST     0x40000000	/* Target supports FirstBurst */
 #define NLP_RPI_REGISTERED 0x80000000	/* nlp_rpi is valid */
 
 /* Defines for nlp_add_flag (uint32) */
 #define NLP_IN_DEV_LOSS  0x00000001	/* Dev Loss processing in progress */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* ndlp usage management macros */
 #define NLP_CHK_NODE_ACT(ndlp)		(((ndlp)->nlp_usg_map \

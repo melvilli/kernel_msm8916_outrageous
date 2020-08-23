@@ -52,6 +52,7 @@ enum {
 	NvSubSw		= 1,
 	NvSubImageBlit  = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NvSub2D		= 3,
 	NvSubGdiRect    = 3,
 	NvSubCopy	= 4,
@@ -83,6 +84,8 @@ enum {
 	NvEvoVRAM_LP	= 0x01000003,
 	NvEvoSync	= 0xcafe0000
 =======
+=======
+>>>>>>> v3.18
 	NvSubGdiRect    = 3,
 
 	NvSub2D		= 3, /* DO NOT CHANGE - hardcoded for kepler gr fifo */
@@ -98,6 +101,9 @@ enum {
 	NvSema		= 0x8000000f,
 	NvEvoSema0	= 0x80000010,
 	NvEvoSema1	= 0x80000011,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -172,9 +178,15 @@ BEGIN_IMC0(struct nouveau_channel *chan, int subc, int mthd, u16 data)
 
 #define WRITE_PUT(val) do {                                                    \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_MEMORYBARRIER();                                                   \
 	nouveau_bo_rd32(chan->push.buffer, 0);                                 \
 	nv_wo32(chan->object, chan->user_put, ((val) << 2) + chan->push.vma.offset);  \
+=======
+	mb();                                                   \
+	nouveau_bo_rd32(chan->push.buffer, 0);                                 \
+	nvif_wr32(chan, chan->user_put, ((val) << 2) + chan->push.vma.offset); \
+>>>>>>> v3.18
 =======
 	mb();                                                   \
 	nouveau_bo_rd32(chan->push.buffer, 0);                                 \
@@ -219,7 +231,10 @@ WIND_RING(struct nouveau_channel *chan)
 #define NV84_SUBCHAN_WRCACHE_FLUSH                                   0x00000024
 #define NV10_SUBCHAN_REF_CNT                                         0x00000050
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NVSW_SUBCHAN_PAGE_FLIP                                       0x00000054
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define NV11_SUBCHAN_DMA_SEMAPHORE                                   0x00000060

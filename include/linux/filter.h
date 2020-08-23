@@ -5,6 +5,7 @@
 #define __LINUX_FILTER_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/atomic.h>
 #include <linux/compat.h>
 #include <uapi/linux/filter.h>
@@ -61,6 +62,8 @@ extern void sk_decode_filter(struct sock_filter *filt, struct sock_filter *to);
 extern void bpf_jit_compile(struct sk_filter *fp);
 extern void bpf_jit_free(struct sk_filter *fp);
 =======
+=======
+>>>>>>> v3.18
 #include <stdarg.h>
 
 #include <linux/atomic.h>
@@ -461,11 +464,15 @@ void bpf_jit_binary_free(struct bpf_binary_header *hdr);
 
 void bpf_jit_compile(struct bpf_prog *fp);
 void bpf_jit_free(struct bpf_prog *fp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void bpf_jit_dump(unsigned int flen, unsigned int proglen,
 				u32 pass, void *image)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pr_err("flen=%u proglen=%u pass=%u image=%p\n",
 	       flen, proglen, pass, image);
@@ -552,6 +559,8 @@ enum {
 	BPF_S_ANC_PAY_OFFSET,
 };
 =======
+=======
+>>>>>>> v3.18
 	pr_err("flen=%u proglen=%u pass=%u image=%pK\n",
 	       flen, proglen, pass, image);
 	if (image)
@@ -620,6 +629,9 @@ static inline int bpf_tell_extensions(void)
 {
 	return SKF_AD_MAX;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __LINUX_FILTER_H__ */

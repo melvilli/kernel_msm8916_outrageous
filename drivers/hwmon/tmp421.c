@@ -14,10 +14,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -25,7 +28,11 @@
 /*
  * Driver for the Texas Instruments TMP421 SMBus temperature sensor IC.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Supported models: TMP421, TMP422, TMP423
+=======
+ * Supported models: TMP421, TMP422, TMP423, TMP441, TMP442
+>>>>>>> v3.18
 =======
  * Supported models: TMP421, TMP422, TMP423, TMP441, TMP442
 >>>>>>> v3.18
@@ -47,14 +54,20 @@ static const unsigned short normal_i2c[] = { 0x2a, 0x4c, 0x4d, 0x4e, 0x4f,
 					     I2C_CLIENT_END };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum chips { tmp421, tmp422, tmp423 };
 
 /* The TMP421 registers */
 =======
+=======
+>>>>>>> v3.18
 enum chips { tmp421, tmp422, tmp423, tmp441, tmp442 };
 
 /* The TMP421 registers */
 #define TMP421_STATUS_REG			0x08
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TMP421_CONFIG_REG_1			0x09
 #define TMP421_CONVERSION_RATE_REG		0x0B
@@ -74,6 +87,11 @@ static const u8 TMP421_TEMP_LSB[4]		= { 0x10, 0x11, 0x12, 0x13 };
 #define TMP422_DEVICE_ID			0x22
 #define TMP423_DEVICE_ID			0x23
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TMP441_DEVICE_ID			0x41
+#define TMP442_DEVICE_ID			0x42
+>>>>>>> v3.18
 =======
 #define TMP441_DEVICE_ID			0x41
 #define TMP442_DEVICE_ID			0x42
@@ -84,6 +102,11 @@ static const struct i2c_device_id tmp421_id[] = {
 	{ "tmp422", 3 },
 	{ "tmp423", 4 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "tmp441", 2 },
+	{ "tmp442", 3 },
+>>>>>>> v3.18
 =======
 	{ "tmp441", 2 },
 	{ "tmp442", 3 },
@@ -94,7 +117,11 @@ MODULE_DEVICE_TABLE(i2c, tmp421_id);
 
 struct tmp421_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -128,8 +155,13 @@ static int temp_from_u16(u16 reg)
 static struct tmp421_data *tmp421_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct tmp421_data *data = i2c_get_clientdata(client);
+=======
+	struct tmp421_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct tmp421_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -232,12 +264,18 @@ static const struct attribute_group tmp421_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct attribute_group *tmp421_groups[] = {
 	&tmp421_group,
 	NULL
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int tmp421_init_client(struct i2c_client *client)
 {
@@ -252,7 +290,11 @@ static int tmp421_init_client(struct i2c_client *client)
 		dev_err(&client->dev,
 			"Could not read configuration register (%d)\n", config);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENODEV;
+=======
+		return config;
+>>>>>>> v3.18
 =======
 		return config;
 >>>>>>> v3.18
@@ -275,7 +317,13 @@ static int tmp421_detect(struct i2c_client *client,
 	enum chips kind;
 	struct i2c_adapter *adapter = client->adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *names[] = { "TMP421", "TMP422", "TMP423" };
+=======
+	const char * const names[] = { "TMP421", "TMP422", "TMP423",
+				       "TMP441", "TMP442" };
+	int addr = client->addr;
+>>>>>>> v3.18
 =======
 	const char * const names[] = { "TMP421", "TMP422", "TMP423",
 				       "TMP441", "TMP442" };
@@ -291,7 +339,10 @@ static int tmp421_detect(struct i2c_client *client,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	reg = i2c_smbus_read_byte_data(client, TMP421_CONVERSION_RATE_REG);
 	if (reg & 0xf8)
 		return -ENODEV;
@@ -300,6 +351,9 @@ static int tmp421_detect(struct i2c_client *client,
 	if (reg & 0x7f)
 		return -ENODEV;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reg = i2c_smbus_read_byte_data(client, TMP421_DEVICE_ID_REG);
 	switch (reg) {
@@ -308,12 +362,15 @@ static int tmp421_detect(struct i2c_client *client,
 		break;
 	case TMP422_DEVICE_ID:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kind = tmp422;
 		break;
 	case TMP423_DEVICE_ID:
 		kind = tmp423;
 		break;
 =======
+=======
+>>>>>>> v3.18
 		if (addr == 0x2a)
 			return -ENODEV;
 		kind = tmp422;
@@ -331,6 +388,9 @@ static int tmp421_detect(struct i2c_client *client,
 			return -ENODEV;
 		kind = tmp442;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -ENODEV;
@@ -347,6 +407,7 @@ static int tmp421_probe(struct i2c_client *client,
 			const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tmp421_data *data;
 	int err;
 
@@ -359,6 +420,8 @@ static int tmp421_probe(struct i2c_client *client,
 	mutex_init(&data->update_lock);
 	data->channels = id->driver_data;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct device *hwmon_dev;
 	struct tmp421_data *data;
@@ -371,12 +434,16 @@ static int tmp421_probe(struct i2c_client *client,
 	mutex_init(&data->update_lock);
 	data->channels = id->driver_data;
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = tmp421_init_client(client);
 	if (err)
 		return err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = sysfs_create_group(&client->dev.kobj, &tmp421_group);
 	if (err)
@@ -408,6 +475,11 @@ static int tmp421_remove(struct i2c_client *client)
 							   data, tmp421_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
 >>>>>>> v3.18
+=======
+	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
+							   data, tmp421_groups);
+	return PTR_ERR_OR_ZERO(hwmon_dev);
+>>>>>>> v3.18
 }
 
 static struct i2c_driver tmp421_driver = {
@@ -417,7 +489,10 @@ static struct i2c_driver tmp421_driver = {
 	},
 	.probe = tmp421_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = tmp421_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = tmp421_id,
@@ -429,7 +504,11 @@ module_i2c_driver(tmp421_driver);
 
 MODULE_AUTHOR("Andre Prendel <andre.prendel@gmx.de>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Texas Instruments TMP421/422/423 temperature sensor driver");
+=======
+MODULE_DESCRIPTION("Texas Instruments TMP421/422/423/441/442 temperature sensor driver");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Texas Instruments TMP421/422/423/441/442 temperature sensor driver");
 >>>>>>> v3.18

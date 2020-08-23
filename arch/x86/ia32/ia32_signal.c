@@ -35,8 +35,11 @@
 #include <asm/smap.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FIX_EFLAGS	__FIX_EFLAGS
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int copy_siginfo_to_user32(compat_siginfo_t __user *to, const siginfo_t *from)
@@ -389,8 +392,13 @@ int ia32_setup_frame(int sig, struct ksignal *ksig,
 		/* Return stub is in 32bit vsyscall page */
 		if (current->mm->context.vdso)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			restorer = VDSO32_SYMBOL(current->mm->context.vdso,
 						 sigreturn);
+=======
+			restorer = current->mm->context.vdso +
+				selected_vdso32->sym___kernel_sigreturn;
+>>>>>>> v3.18
 =======
 			restorer = current->mm->context.vdso +
 				selected_vdso32->sym___kernel_sigreturn;
@@ -473,8 +481,13 @@ int ia32_setup_rt_frame(int sig, struct ksignal *ksig,
 			restorer = ksig->ka.sa.sa_restorer;
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			restorer = VDSO32_SYMBOL(current->mm->context.vdso,
 						 rt_sigreturn);
+=======
+			restorer = current->mm->context.vdso +
+				selected_vdso32->sym___kernel_rt_sigreturn;
+>>>>>>> v3.18
 =======
 			restorer = current->mm->context.vdso +
 				selected_vdso32->sym___kernel_rt_sigreturn;

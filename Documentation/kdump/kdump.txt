@@ -19,7 +19,11 @@ a remote system.
 
 Kdump and kexec are currently supported on the x86, x86_64, ppc64, ia64,
 <<<<<<< HEAD
+<<<<<<< HEAD
 and s390x architectures.
+=======
+s390x and arm architectures.
+>>>>>>> v3.18
 =======
 s390x and arm architectures.
 >>>>>>> v3.18
@@ -52,6 +56,7 @@ when using the elfcorehdr=[size[KMG]@]offset[KMG] syntax.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 With the dump-capture kernel, you can access the memory image, or "old
 memory," in two ways:
 
@@ -66,12 +71,17 @@ memory," in two ways:
   tool to debug the dump file. This method ensures that the dump pages are
   correctly ordered.
 =======
+=======
+>>>>>>> v3.18
 With the dump-capture kernel, you can access the memory image through
 /proc/vmcore. This exports the dump as an ELF-format file that you can
 write out using file copy commands such as cp or scp. Further, you can
 use analysis tools such as the GNU Debugger (GDB) and the Crash tool to
 debug the dump file. This method ensures that the dump pages are correctly
 ordered.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -133,7 +143,11 @@ There are two possible methods of using Kdump.
    no need to build a separate dump-capture kernel. This is possible
    only with the architectures which support a relocatable kernel. As
 <<<<<<< HEAD
+<<<<<<< HEAD
    of today, i386, x86_64, ppc64 and ia64 architectures support relocatable
+=======
+   of today, i386, x86_64, ppc64, ia64 and arm architectures support relocatable
+>>>>>>> v3.18
 =======
    of today, i386, x86_64, ppc64, ia64 and arm architectures support relocatable
 >>>>>>> v3.18
@@ -266,7 +280,10 @@ Dump-capture kernel config options (Arch Dependent, ia64)
   any space below the alignment point will be wasted.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Dump-capture kernel config options (Arch Dependent, arm)
 ----------------------------------------------------------
 
@@ -274,6 +291,9 @@ Dump-capture kernel config options (Arch Dependent, arm)
     Enable "AUTO_ZRELADDR" support under "Boot" options:
 
     AUTO_ZRELADDR=y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Extended crashkernel syntax
@@ -291,11 +311,17 @@ The syntax is:
     range=start-[end]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Please note, on arm, the offset is required.
     crashkernel=<range1>:<size1>[,<range2>:<size2>,...]@offset
     range=start-[end]
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     'start' is inclusive and 'end' is exclusive.
 
@@ -338,13 +364,19 @@ Boot into System Kernel
    dependent on the memory size of the production system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
    On arm, use "crashkernel=Y@X". Note that the start address of the kernel
    will be aligned to 128MiB (0x08000000), so if the start address is not then
    any space below the alignment point may be overwritten by the dump-capture kernel,
    which means it is possible that the vmcore is not that precise as expected.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Load the Dump-capture Kernel
 ============================
@@ -366,7 +398,12 @@ For ia64:
 For s390x:
 	- Use image or bzImage
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+For arm:
+	- Use zImage
+>>>>>>> v3.18
 =======
 For arm:
 	- Use zImage
@@ -387,7 +424,10 @@ to load dump-capture kernel.
    --append="root=<root-dev> <arch-specific-options>"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 If you are using a compressed zImage, then use following command
 to load dump-capture kernel.
 
@@ -397,6 +437,9 @@ to load dump-capture kernel.
    --append="root=<root-dev> <arch-specific-options>"
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Please note, that --args-linux does not need to be specified for ia64.
 It is planned to make this a no-op on that architecture, but for now
@@ -415,6 +458,12 @@ For s390x:
 	"1 maxcpus=1 cgroup_disable=memory"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+For arm:
+	"1 maxcpus=1 reset_devices"
+
+>>>>>>> v3.18
 =======
 For arm:
 	"1 maxcpus=1 reset_devices"
@@ -490,6 +539,7 @@ the following command:
    cp /proc/vmcore <dump-file>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 You can also access dumped memory as a /dev/oldmem device for a linear
 and raw view. To create the device, use the following command:
 
@@ -502,6 +552,8 @@ To see the entire memory, use the following command:
 
    dd if=/dev/oldmem of=oldmem.001
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -531,6 +583,7 @@ format. Crash is available on Dave Anderson's site at the following URL:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 To Do
 =====
 
@@ -539,6 +592,8 @@ To Do
    can be used to capture the dump.
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 Contact

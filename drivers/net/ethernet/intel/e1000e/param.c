@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -27,6 +28,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel PRO/1000 Linux driver
  * Copyright(c) 1999 - 2014 Intel Corporation.
  *
@@ -47,6 +50,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/netdevice.h>
@@ -405,13 +411,19 @@ void e1000e_check_options(struct e1000_adapter *adapter)
 			adapter->itr = 20000;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 2:
 			dev_info(&adapter->pdev->dev,
 				 "%s Invalid mode - setting default\n",
 				 opt.name);
 			adapter->itr_setting = opt.def;
 			/* fall-through */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case 3:
 			dev_info(&adapter->pdev->dev,
@@ -470,6 +482,10 @@ void e1000e_check_options(struct e1000_adapter *adapter)
 		if (num_IntMode > bd) {
 			unsigned int int_mode = IntMode[bd];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -495,6 +511,10 @@ void e1000e_check_options(struct e1000_adapter *adapter)
 		if (num_SmartPowerDownEnable > bd) {
 			unsigned int spd = SmartPowerDownEnable[bd];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -515,6 +535,10 @@ void e1000e_check_options(struct e1000_adapter *adapter)
 		if (num_CrcStripping > bd) {
 			unsigned int crc_stripping = CrcStripping[bd];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -541,6 +565,10 @@ void e1000e_check_options(struct e1000_adapter *adapter)
 		if (num_KumeranLockLoss > bd) {
 			unsigned int kmrn_lock_loss = KumeranLockLoss[bd];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

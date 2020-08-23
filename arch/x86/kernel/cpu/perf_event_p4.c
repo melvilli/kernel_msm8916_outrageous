@@ -916,7 +916,11 @@ static inline void p4_pmu_disable_event(struct perf_event *event)
 static void p4_pmu_disable_all(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -989,7 +993,11 @@ static void p4_pmu_enable_event(struct perf_event *event)
 static void p4_pmu_enable_all(int added)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1013,7 +1021,11 @@ static int p4_pmu_handle_irq(struct pt_regs *regs)
 	u64 val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1270,8 +1282,11 @@ again:
 			goto again;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Perf does test runs to see if a whole group can be assigned
 		 * together succesfully.  There can be multiple rounds of this.
@@ -1290,6 +1305,9 @@ again:
 		 */
 		if (p4_should_swap_ts(hwc->config, cpu))
 			hwc->idx = -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		p4_pmu_swap_config_ts(hwc, cpu);
 		if (assign)
@@ -1356,6 +1374,10 @@ __init int p4_pmu_init(void)
 {
 	unsigned int low, high;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int i, reg;
+>>>>>>> v3.18
 =======
 	int i, reg;
 >>>>>>> v3.18
@@ -1378,7 +1400,10 @@ __init int p4_pmu_init(void)
 	x86_pmu = p4_pmu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Even though the counters are configured to interrupt a particular
 	 * logical processor when an overflow happens, testing has shown that
@@ -1393,6 +1418,9 @@ __init int p4_pmu_init(void)
 		wrmsrl_safe(reg, 0ULL);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

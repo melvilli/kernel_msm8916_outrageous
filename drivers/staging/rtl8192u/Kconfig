@@ -6,7 +6,10 @@ config RTL8192U
 	select WEXT_PRIV
 	select CRYPTO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default N
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---

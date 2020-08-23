@@ -6,6 +6,12 @@
  * Copyright (C) 2009 Wind River Systems,
  *   written by Ralf Baechle <ralf@linux-mips.org>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Copyright (c) 2013 by Cisco Systems, Inc.
+ * All rights reserved.
+>>>>>>> v3.18
 =======
  *
  * Copyright (c) 2013 by Cisco Systems, Inc.
@@ -18,6 +24,10 @@
 #include <linux/io.h>
 #include <linux/edac.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ctype.h>
+>>>>>>> v3.18
 =======
 #include <linux/ctype.h>
 >>>>>>> v3.18
@@ -31,7 +41,10 @@
 #define OCTEON_MAX_MC 4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define to_mci(k) container_of(k, struct mem_ctl_info, dev)
 
 struct octeon_lmc_pvt {
@@ -44,6 +57,9 @@ struct octeon_lmc_pvt {
 	unsigned long col;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void octeon_lmc_edac_poll(struct mem_ctl_info *mci)
 {
@@ -81,6 +97,10 @@ static void octeon_lmc_edac_poll(struct mem_ctl_info *mci)
 static void octeon_lmc_edac_poll_o2(struct mem_ctl_info *mci)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct octeon_lmc_pvt *pvt = mci->pvt_info;
+>>>>>>> v3.18
 =======
 	struct octeon_lmc_pvt *pvt = mci->pvt_info;
 >>>>>>> v3.18
@@ -89,11 +109,14 @@ static void octeon_lmc_edac_poll_o2(struct mem_ctl_info *mci)
 	char msg[64];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int_reg.u64 = cvmx_read_csr(CVMX_LMCX_INT(mci->mc_idx));
 	if (int_reg.s.sec_err || int_reg.s.ded_err) {
 		union cvmx_lmcx_fadr fadr;
 		fadr.u64 = cvmx_read_csr(CVMX_LMCX_FADR(mci->mc_idx));
 =======
+=======
+>>>>>>> v3.18
 	if (!pvt->inject)
 		int_reg.u64 = cvmx_read_csr(CVMX_LMCX_INT(mci->mc_idx));
 	else {
@@ -114,6 +137,9 @@ static void octeon_lmc_edac_poll_o2(struct mem_ctl_info *mci)
 			fadr.cn61xx.frow = pvt->row;
 			fadr.cn61xx.fcol = pvt->col;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		snprintf(msg, sizeof(msg),
 			 "DIMM %d rank %d bank %d row %d col %d",
@@ -135,9 +161,12 @@ static void octeon_lmc_edac_poll_o2(struct mem_ctl_info *mci)
 		do_clear = true;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (do_clear)
 		cvmx_write_csr(CVMX_LMCX_INT(mci->mc_idx), int_reg.u64);
 =======
+=======
+>>>>>>> v3.18
 
 	if (do_clear) {
 		if (likely(!pvt->inject))
@@ -260,6 +289,9 @@ static int octeon_set_mc_sysfs_attributes(struct mem_ctl_info *mci)
 		return rc;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -270,6 +302,11 @@ static int octeon_lmc_edac_probe(struct platform_device *pdev)
 	int mc = pdev->id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	opstate_init();
+
+>>>>>>> v3.18
 =======
 	opstate_init();
 
@@ -288,7 +325,11 @@ static int octeon_lmc_edac_probe(struct platform_device *pdev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mci = edac_mc_alloc(mc, ARRAY_SIZE(layers), layers, 0);
+=======
+		mci = edac_mc_alloc(mc, ARRAY_SIZE(layers), layers, sizeof(struct octeon_lmc_pvt));
+>>>>>>> v3.18
 =======
 		mci = edac_mc_alloc(mc, ARRAY_SIZE(layers), layers, sizeof(struct octeon_lmc_pvt));
 >>>>>>> v3.18
@@ -309,13 +350,19 @@ static int octeon_lmc_edac_probe(struct platform_device *pdev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (octeon_set_mc_sysfs_attributes(mci)) {
 			dev_err(&pdev->dev, "octeon_set_mc_sysfs_attributes() failed\n");
 			return -ENXIO;
 		}
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cfg0.u64 = cvmx_read_csr(CVMX_LMCX_MEM_CFG0(mc));
 		cfg0.s.intr_ded_ena = 0;	/* We poll */
@@ -333,7 +380,11 @@ static int octeon_lmc_edac_probe(struct platform_device *pdev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mci = edac_mc_alloc(mc, ARRAY_SIZE(layers), layers, 0);
+=======
+		mci = edac_mc_alloc(mc, ARRAY_SIZE(layers), layers, sizeof(struct octeon_lmc_pvt));
+>>>>>>> v3.18
 =======
 		mci = edac_mc_alloc(mc, ARRAY_SIZE(layers), layers, sizeof(struct octeon_lmc_pvt));
 >>>>>>> v3.18
@@ -354,13 +405,19 @@ static int octeon_lmc_edac_probe(struct platform_device *pdev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (octeon_set_mc_sysfs_attributes(mci)) {
 			dev_err(&pdev->dev, "octeon_set_mc_sysfs_attributes() failed\n");
 			return -ENXIO;
 		}
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		en.u64 = cvmx_read_csr(CVMX_LMCX_MEM_CFG0(mc));
 		en.s.intr_ded_ena = 0;	/* We poll */

@@ -252,7 +252,11 @@ static void gather_partition_info(void)
 
 	const char *ppartition_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const unsigned int *p_number_ptr;
+=======
+	const __be32 *p_number_ptr;
+>>>>>>> v3.18
 =======
 	const __be32 *p_number_ptr;
 >>>>>>> v3.18
@@ -270,7 +274,11 @@ static void gather_partition_info(void)
 	p_number_ptr = of_get_property(rootdn, "ibm,partition-no", NULL);
 	if (p_number_ptr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		partition_number = *p_number_ptr;
+=======
+		partition_number = of_read_number(p_number_ptr, 1);
+>>>>>>> v3.18
 =======
 		partition_number = of_read_number(p_number_ptr, 1);
 >>>>>>> v3.18
@@ -289,16 +297,22 @@ static void set_adapter_info(struct ibmvscsi_host_data *hostdata)
 			sizeof(hostdata->madapter_info.partition_name));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hostdata->madapter_info.partition_number = partition_number;
 
 	hostdata->madapter_info.mad_version = 1;
 	hostdata->madapter_info.os_type = 2;
 =======
+=======
+>>>>>>> v3.18
 	hostdata->madapter_info.partition_number =
 					cpu_to_be32(partition_number);
 
 	hostdata->madapter_info.mad_version = cpu_to_be32(1);
 	hostdata->madapter_info.os_type = cpu_to_be32(2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -491,9 +505,15 @@ static int initialize_event_pool(struct event_pool *pool,
 		atomic_set(&evt->free, 1);
 		evt->crq.valid = 0x80;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		evt->crq.IU_length = sizeof(*evt->xfer_iu);
 		evt->crq.IU_data_ptr = pool->iu_token + 
 			sizeof(*evt->xfer_iu) * i;
+=======
+		evt->crq.IU_length = cpu_to_be16(sizeof(*evt->xfer_iu));
+		evt->crq.IU_data_ptr = cpu_to_be64(pool->iu_token +
+			sizeof(*evt->xfer_iu) * i);
+>>>>>>> v3.18
 =======
 		evt->crq.IU_length = cpu_to_be16(sizeof(*evt->xfer_iu));
 		evt->crq.IU_data_ptr = cpu_to_be64(pool->iu_token +
@@ -621,7 +641,11 @@ static void init_event_struct(struct srp_event_struct *evt_struct,
 	evt_struct->sync_srp = NULL;
 	evt_struct->crq.format = format;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	evt_struct->crq.timeout = timeout;
+=======
+	evt_struct->crq.timeout = cpu_to_be16(timeout);
+>>>>>>> v3.18
 =======
 	evt_struct->crq.timeout = cpu_to_be16(timeout);
 >>>>>>> v3.18
@@ -696,8 +720,13 @@ static int map_sg_list(struct scsi_cmnd *cmd, int nseg,
 	scsi_for_each_sg(cmd, sg, nseg, i) {
 		struct srp_direct_buf *descr = md + i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		descr->va = sg_dma_address(sg);
 		descr->len = sg_dma_len(sg);
+=======
+		descr->va = cpu_to_be64(sg_dma_address(sg));
+		descr->len = cpu_to_be32(sg_dma_len(sg));
+>>>>>>> v3.18
 =======
 		descr->va = cpu_to_be64(sg_dma_address(sg));
 		descr->len = cpu_to_be32(sg_dma_len(sg));
@@ -745,7 +774,12 @@ static int map_sg_data(struct scsi_cmnd *cmd,
 
 	indirect->table_desc.va = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indirect->table_desc.len = sg_mapped * sizeof(struct srp_direct_buf);
+=======
+	indirect->table_desc.len = cpu_to_be32(sg_mapped *
+					       sizeof(struct srp_direct_buf));
+>>>>>>> v3.18
 =======
 	indirect->table_desc.len = cpu_to_be32(sg_mapped *
 					       sizeof(struct srp_direct_buf));
@@ -756,7 +790,11 @@ static int map_sg_data(struct scsi_cmnd *cmd,
 		total_length = map_sg_list(cmd, sg_mapped,
 					   &indirect->desc_list[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		indirect->len = total_length;
+=======
+		indirect->len = cpu_to_be32(total_length);
+>>>>>>> v3.18
 =======
 		indirect->len = cpu_to_be32(total_length);
 >>>>>>> v3.18
@@ -782,14 +820,20 @@ static int map_sg_data(struct scsi_cmnd *cmd,
 	total_length = map_sg_list(cmd, sg_mapped, evt_struct->ext_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indirect->len = total_length;
 	indirect->table_desc.va = evt_struct->ext_list_token;
 	indirect->table_desc.len = sg_mapped * sizeof(indirect->desc_list[0]);
 =======
+=======
+>>>>>>> v3.18
 	indirect->len = cpu_to_be32(total_length);
 	indirect->table_desc.va = cpu_to_be64(evt_struct->ext_list_token);
 	indirect->table_desc.len = cpu_to_be32(sg_mapped *
 					       sizeof(indirect->desc_list[0]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memcpy(indirect->desc_list, evt_struct->ext_list,
 	       MAX_INDIRECT_BUFS * sizeof(struct srp_direct_buf));
@@ -908,7 +952,11 @@ static int ibmvscsi_send_srp_event(struct srp_event_struct *evt_struct,
 				   unsigned long timeout)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 *crq_as_u64 = (u64 *) &evt_struct->crq;
+=======
+	__be64 *crq_as_u64 = (__be64 *)&evt_struct->crq;
+>>>>>>> v3.18
 =======
 	__be64 *crq_as_u64 = (__be64 *)&evt_struct->crq;
 >>>>>>> v3.18
@@ -983,8 +1031,14 @@ static int ibmvscsi_send_srp_event(struct srp_event_struct *evt_struct,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((rc =
 	     ibmvscsi_send_crq(hostdata, crq_as_u64[0], crq_as_u64[1])) != 0) {
+=======
+	rc = ibmvscsi_send_crq(hostdata, be64_to_cpu(crq_as_u64[0]),
+			       be64_to_cpu(crq_as_u64[1]));
+	if (rc != 0) {
+>>>>>>> v3.18
 =======
 	rc = ibmvscsi_send_crq(hostdata, be64_to_cpu(crq_as_u64[0]),
 			       be64_to_cpu(crq_as_u64[1]));
@@ -1056,7 +1110,11 @@ static void handle_cmd_rsp(struct srp_event_struct *evt_struct)
 			memcpy(cmnd->sense_buffer,
 			       rsp->data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       rsp->sense_data_len);
+=======
+			       be32_to_cpu(rsp->sense_data_len));
+>>>>>>> v3.18
 =======
 			       be32_to_cpu(rsp->sense_data_len));
 >>>>>>> v3.18
@@ -1066,14 +1124,20 @@ static void handle_cmd_rsp(struct srp_event_struct *evt_struct)
 
 		if (rsp->flags & SRP_RSP_FLAG_DOOVER)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			scsi_set_resid(cmnd, rsp->data_out_res_cnt);
 		else if (rsp->flags & SRP_RSP_FLAG_DIOVER)
 			scsi_set_resid(cmnd, rsp->data_in_res_cnt);
 =======
+=======
+>>>>>>> v3.18
 			scsi_set_resid(cmnd,
 				       be32_to_cpu(rsp->data_out_res_cnt));
 		else if (rsp->flags & SRP_RSP_FLAG_DIOVER)
 			scsi_set_resid(cmnd, be32_to_cpu(rsp->data_in_res_cnt));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1117,7 +1181,11 @@ static int ibmvscsi_queuecommand_lck(struct scsi_cmnd *cmnd,
 	srp_cmd->opcode = SRP_CMD;
 	memcpy(srp_cmd->cdb, cmnd->cmnd, sizeof(srp_cmd->cdb));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	srp_cmd->lun = ((u64) lun) << 48;
+=======
+	srp_cmd->lun = cpu_to_be64(((u64)lun) << 48);
+>>>>>>> v3.18
 =======
 	srp_cmd->lun = cpu_to_be64(((u64)lun) << 48);
 >>>>>>> v3.18
@@ -1146,14 +1214,20 @@ static int ibmvscsi_queuecommand_lck(struct scsi_cmnd *cmnd,
 	     out_fmt == SRP_DATA_DESC_INDIRECT) &&
 	    indirect->table_desc.va == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		indirect->table_desc.va = evt_struct->crq.IU_data_ptr +
 			offsetof(struct srp_cmd, add_data) +
 			offsetof(struct srp_indirect_buf, desc_list);
 =======
+=======
+>>>>>>> v3.18
 		indirect->table_desc.va =
 			cpu_to_be64(be64_to_cpu(evt_struct->crq.IU_data_ptr) +
 			offsetof(struct srp_cmd, add_data) +
 			offsetof(struct srp_indirect_buf, desc_list));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1249,7 +1323,11 @@ static void login_rsp(struct srp_event_struct *evt_struct)
 	 */
 	atomic_set(&hostdata->request_limit,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   evt_struct->xfer_iu->srp.login_rsp.req_lim_delta);
+=======
+		   be32_to_cpu(evt_struct->xfer_iu->srp.login_rsp.req_lim_delta));
+>>>>>>> v3.18
 =======
 		   be32_to_cpu(evt_struct->xfer_iu->srp.login_rsp.req_lim_delta));
 >>>>>>> v3.18
@@ -1279,8 +1357,14 @@ static int send_srp_login(struct ibmvscsi_host_data *hostdata)
 	memset(login, 0, sizeof(*login));
 	login->opcode = SRP_LOGIN_REQ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	login->req_it_iu_len = sizeof(union srp_iu);
 	login->req_buf_fmt = SRP_BUF_FORMAT_DIRECT | SRP_BUF_FORMAT_INDIRECT;
+=======
+	login->req_it_iu_len = cpu_to_be32(sizeof(union srp_iu));
+	login->req_buf_fmt = cpu_to_be16(SRP_BUF_FORMAT_DIRECT |
+					 SRP_BUF_FORMAT_INDIRECT);
+>>>>>>> v3.18
 =======
 	login->req_it_iu_len = cpu_to_be32(sizeof(union srp_iu));
 	login->req_buf_fmt = cpu_to_be16(SRP_BUF_FORMAT_DIRECT |
@@ -1315,7 +1399,12 @@ static void capabilities_rsp(struct srp_event_struct *evt_struct)
 			evt_struct->xfer_iu->mad.capabilities.common.status);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (hostdata->caps.migration.common.server_support != SERVER_SUPPORTS_CAP)
+=======
+		if (hostdata->caps.migration.common.server_support !=
+		    cpu_to_be16(SERVER_SUPPORTS_CAP))
+>>>>>>> v3.18
 =======
 		if (hostdata->caps.migration.common.server_support !=
 		    cpu_to_be16(SERVER_SUPPORTS_CAP))
@@ -1325,7 +1414,11 @@ static void capabilities_rsp(struct srp_event_struct *evt_struct)
 		if (client_reserve) {
 			if (hostdata->caps.reserve.common.server_support ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    SERVER_SUPPORTS_CAP)
+=======
+			    cpu_to_be16(SERVER_SUPPORTS_CAP))
+>>>>>>> v3.18
 =======
 			    cpu_to_be16(SERVER_SUPPORTS_CAP))
 >>>>>>> v3.18
@@ -1361,9 +1454,15 @@ static void send_mad_capabilities(struct ibmvscsi_host_data *hostdata)
 	memset(req, 0, sizeof(*req));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hostdata->caps.flags = CAP_LIST_SUPPORTED;
 	if (hostdata->client_migrated)
 		hostdata->caps.flags |= CLIENT_MIGRATED;
+=======
+	hostdata->caps.flags = cpu_to_be32(CAP_LIST_SUPPORTED);
+	if (hostdata->client_migrated)
+		hostdata->caps.flags |= cpu_to_be32(CLIENT_MIGRATED);
+>>>>>>> v3.18
 =======
 	hostdata->caps.flags = cpu_to_be32(CAP_LIST_SUPPORTED);
 	if (hostdata->client_migrated)
@@ -1379,6 +1478,7 @@ static void send_mad_capabilities(struct ibmvscsi_host_data *hostdata)
 	strncpy(hostdata->caps.loc, location, sizeof(hostdata->caps.loc));
 	hostdata->caps.loc[sizeof(hostdata->caps.loc) - 1] = '\0';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	req->common.type = VIOSRP_CAPABILITIES_TYPE;
 	req->buffer = hostdata->caps_addr;
@@ -1397,6 +1497,8 @@ static void send_mad_capabilities(struct ibmvscsi_host_data *hostdata)
 	} else
 		req->common.length = sizeof(hostdata->caps) - sizeof(hostdata->caps.reserve);
 =======
+=======
+>>>>>>> v3.18
 	req->common.type = cpu_to_be32(VIOSRP_CAPABILITIES_TYPE);
 	req->buffer = cpu_to_be64(hostdata->caps_addr);
 
@@ -1422,6 +1524,9 @@ static void send_mad_capabilities(struct ibmvscsi_host_data *hostdata)
 	} else
 		req->common.length = cpu_to_be16(sizeof(hostdata->caps) -
 						sizeof(hostdata->caps.reserve));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_irqsave(hostdata->host->host_lock, flags);
@@ -1441,7 +1546,11 @@ static void fast_fail_rsp(struct srp_event_struct *evt_struct)
 {
 	struct ibmvscsi_host_data *hostdata = evt_struct->hostdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 status = evt_struct->xfer_iu->mad.fast_fail.common.status;
+=======
+	u16 status = be16_to_cpu(evt_struct->xfer_iu->mad.fast_fail.common.status);
+>>>>>>> v3.18
 =======
 	u16 status = be16_to_cpu(evt_struct->xfer_iu->mad.fast_fail.common.status);
 >>>>>>> v3.18
@@ -1482,8 +1591,13 @@ static int enable_fast_fail(struct ibmvscsi_host_data *hostdata)
 	fast_fail_mad = &evt_struct->iu.mad.fast_fail;
 	memset(fast_fail_mad, 0, sizeof(*fast_fail_mad));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fast_fail_mad->common.type = VIOSRP_ENABLE_FAST_FAIL;
 	fast_fail_mad->common.length = sizeof(*fast_fail_mad);
+=======
+	fast_fail_mad->common.type = cpu_to_be32(VIOSRP_ENABLE_FAST_FAIL);
+	fast_fail_mad->common.length = cpu_to_be16(sizeof(*fast_fail_mad));
+>>>>>>> v3.18
 =======
 	fast_fail_mad->common.type = cpu_to_be32(VIOSRP_ENABLE_FAST_FAIL);
 	fast_fail_mad->common.length = cpu_to_be16(sizeof(*fast_fail_mad));
@@ -1515,6 +1629,7 @@ static void adapter_info_rsp(struct srp_event_struct *evt_struct)
 			 hostdata->madapter_info.srp_version,
 			 hostdata->madapter_info.partition_name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 hostdata->madapter_info.partition_number,
 			 hostdata->madapter_info.os_type,
 			 hostdata->madapter_info.port_max_txu[0]);
@@ -1525,6 +1640,8 @@ static void adapter_info_rsp(struct srp_event_struct *evt_struct)
 		
 		if (hostdata->madapter_info.os_type == 3 &&
 =======
+=======
+>>>>>>> v3.18
 			 be32_to_cpu(hostdata->madapter_info.partition_number),
 			 be32_to_cpu(hostdata->madapter_info.os_type),
 			 be32_to_cpu(hostdata->madapter_info.port_max_txu[0]));
@@ -1534,6 +1651,9 @@ static void adapter_info_rsp(struct srp_event_struct *evt_struct)
 				be32_to_cpu(hostdata->madapter_info.port_max_txu[0]) >> 9;
 		
 		if (be32_to_cpu(hostdata->madapter_info.os_type) == 3 &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    strcmp(hostdata->madapter_info.srp_version, "1.6a") <= 0) {
 			dev_err(hostdata->dev, "host (Ver. %s) doesn't support large transfers\n",
@@ -1544,7 +1664,11 @@ static void adapter_info_rsp(struct srp_event_struct *evt_struct)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (hostdata->madapter_info.os_type == 3) {
+=======
+		if (be32_to_cpu(hostdata->madapter_info.os_type) == 3) {
+>>>>>>> v3.18
 =======
 		if (be32_to_cpu(hostdata->madapter_info.os_type) == 3) {
 >>>>>>> v3.18
@@ -1583,9 +1707,15 @@ static void send_mad_adapter_info(struct ibmvscsi_host_data *hostdata)
 	memset(req, 0x00, sizeof(*req));
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req->common.type = VIOSRP_ADAPTER_INFO_TYPE;
 	req->common.length = sizeof(hostdata->madapter_info);
 	req->buffer = hostdata->adapter_info_addr;
+=======
+	req->common.type = cpu_to_be32(VIOSRP_ADAPTER_INFO_TYPE);
+	req->common.length = cpu_to_be16(sizeof(hostdata->madapter_info));
+	req->buffer = cpu_to_be64(hostdata->adapter_info_addr);
+>>>>>>> v3.18
 =======
 	req->common.type = cpu_to_be32(VIOSRP_ADAPTER_INFO_TYPE);
 	req->common.length = cpu_to_be16(sizeof(hostdata->madapter_info));
@@ -1676,7 +1806,11 @@ static int ibmvscsi_eh_abort_handler(struct scsi_cmnd *cmd)
 		memset(tsk_mgmt, 0x00, sizeof(*tsk_mgmt));
 		tsk_mgmt->opcode = SRP_TSK_MGMT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsk_mgmt->lun = ((u64) lun) << 48;
+=======
+		tsk_mgmt->lun = cpu_to_be64(((u64) lun) << 48);
+>>>>>>> v3.18
 =======
 		tsk_mgmt->lun = cpu_to_be64(((u64) lun) << 48);
 >>>>>>> v3.18
@@ -1803,7 +1937,11 @@ static int ibmvscsi_eh_device_reset_handler(struct scsi_cmnd *cmd)
 		memset(tsk_mgmt, 0x00, sizeof(*tsk_mgmt));
 		tsk_mgmt->opcode = SRP_TSK_MGMT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsk_mgmt->lun = ((u64) lun) << 48;
+=======
+		tsk_mgmt->lun = cpu_to_be64(((u64) lun) << 48);
+>>>>>>> v3.18
 =======
 		tsk_mgmt->lun = cpu_to_be64(((u64) lun) << 48);
 >>>>>>> v3.18
@@ -1918,8 +2056,14 @@ static void ibmvscsi_handle_crq(struct viosrp_crq *crq,
 	long rc;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct srp_event_struct *evt_struct =
 	    (struct srp_event_struct *)crq->IU_data_ptr;
+=======
+	/* The hypervisor copies our tag value here so no byteswapping */
+	struct srp_event_struct *evt_struct =
+			(__force struct srp_event_struct *)crq->IU_data_ptr;
+>>>>>>> v3.18
 =======
 	/* The hypervisor copies our tag value here so no byteswapping */
 	struct srp_event_struct *evt_struct =
@@ -1981,7 +2125,11 @@ static void ibmvscsi_handle_crq(struct viosrp_crq *crq,
 	if (!valid_event_struct(&hostdata->pool, evt_struct)) {
 		dev_err(hostdata->dev, "returned correlation_token 0x%p is invalid!\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       (void *)crq->IU_data_ptr);
+=======
+		       evt_struct);
+>>>>>>> v3.18
 =======
 		       evt_struct);
 >>>>>>> v3.18
@@ -1991,7 +2139,11 @@ static void ibmvscsi_handle_crq(struct viosrp_crq *crq,
 	if (atomic_read(&evt_struct->free)) {
 		dev_err(hostdata->dev, "received duplicate correlation_token 0x%p!\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(void *)crq->IU_data_ptr);
+=======
+			evt_struct);
+>>>>>>> v3.18
 =======
 			evt_struct);
 >>>>>>> v3.18
@@ -2000,7 +2152,11 @@ static void ibmvscsi_handle_crq(struct viosrp_crq *crq,
 
 	if (crq->format == VIOSRP_SRP_FORMAT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_add(evt_struct->xfer_iu->srp.rsp.req_lim_delta,
+=======
+		atomic_add(be32_to_cpu(evt_struct->xfer_iu->srp.rsp.req_lim_delta),
+>>>>>>> v3.18
 =======
 		atomic_add(be32_to_cpu(evt_struct->xfer_iu->srp.rsp.req_lim_delta),
 >>>>>>> v3.18
@@ -2057,6 +2213,7 @@ static int ibmvscsi_do_host_config(struct ibmvscsi_host_data *hostdata,
 	/* Set up a lun reset SRP command */
 	memset(host_config, 0x00, sizeof(*host_config));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host_config->common.type = VIOSRP_HOST_CONFIG_TYPE;
 	host_config->common.length = length;
 	host_config->buffer = addr = dma_map_single(hostdata->dev, buffer,
@@ -2065,11 +2222,16 @@ static int ibmvscsi_do_host_config(struct ibmvscsi_host_data *hostdata,
 
 	if (dma_mapping_error(hostdata->dev, host_config->buffer)) {
 =======
+=======
+>>>>>>> v3.18
 	host_config->common.type = cpu_to_be32(VIOSRP_HOST_CONFIG_TYPE);
 	host_config->common.length = cpu_to_be16(length);
 	addr = dma_map_single(hostdata->dev, buffer, length, DMA_BIDIRECTIONAL);
 
 	if (dma_mapping_error(hostdata->dev, addr)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!firmware_has_feature(FW_FEATURE_CMO))
 			dev_err(hostdata->dev,
@@ -2079,6 +2241,11 @@ static int ibmvscsi_do_host_config(struct ibmvscsi_host_data *hostdata,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	host_config->buffer = cpu_to_be64(addr);
+
+>>>>>>> v3.18
 =======
 	host_config->buffer = cpu_to_be64(addr);
 
@@ -2409,7 +2576,11 @@ static int ibmvscsi_work(void *data)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_user_nice(current, -20);
+=======
+	set_user_nice(current, MIN_NICE);
+>>>>>>> v3.18
 =======
 	set_user_nice(current, MIN_NICE);
 >>>>>>> v3.18

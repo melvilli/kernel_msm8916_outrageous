@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -192,7 +200,10 @@ int iwl_mvm_binding_add_vif(struct iwl_mvm *mvm, struct ieee80211_vif *vif)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Update SF - Disable if needed. if this fails, SF might still be on
 	 * while many macs are bound, which is forbidden - so fail the binding.
@@ -200,6 +211,9 @@ int iwl_mvm_binding_add_vif(struct iwl_mvm *mvm, struct ieee80211_vif *vif)
 	if (iwl_mvm_sf_update(mvm, vif, false))
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return iwl_mvm_binding_update(mvm, vif, mvmvif->phy_ctxt, true);
 }
@@ -208,6 +222,10 @@ int iwl_mvm_binding_remove_vif(struct iwl_mvm *mvm, struct ieee80211_vif *vif)
 {
 	struct iwl_mvm_vif *mvmvif = iwl_mvm_vif_from_mac80211(vif);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -216,8 +234,11 @@ int iwl_mvm_binding_remove_vif(struct iwl_mvm *mvm, struct ieee80211_vif *vif)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return iwl_mvm_binding_update(mvm, vif, mvmvif->phy_ctxt, false);
 =======
+=======
+>>>>>>> v3.18
 	ret = iwl_mvm_binding_update(mvm, vif, mvmvif->phy_ctxt, false);
 
 	if (!ret)
@@ -225,5 +246,8 @@ int iwl_mvm_binding_remove_vif(struct iwl_mvm *mvm, struct ieee80211_vif *vif)
 			IWL_ERR(mvm, "Failed to update SF state\n");
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

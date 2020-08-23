@@ -52,11 +52,17 @@ enum
 	IPSTATS_MIB_OUTBCASTOCTETS,		/* OutBcastOctets */
 	IPSTATS_MIB_CSUMERRORS,			/* InCsumErrors */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IPSTATS_MIB_NOECTPKTS,			/* InNoECTPkts */
 	IPSTATS_MIB_ECT1PKTS,			/* InECT1Pkts */
 	IPSTATS_MIB_ECT0PKTS,			/* InECT0Pkts */
 	IPSTATS_MIB_CEPKTS,			/* InCEPkts */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__IPSTATS_MIB_MAX
 };
@@ -256,6 +262,10 @@ enum
 	LINUX_MIB_TCPSYNCHALLENGE,		/* TCPSYNChallenge */
 	LINUX_MIB_TCPFASTOPENACTIVE,		/* TCPFastOpenActive */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	LINUX_MIB_TCPFASTOPENACTIVEFAIL,	/* TCPFastOpenActiveFail */
+>>>>>>> v3.18
 =======
 	LINUX_MIB_TCPFASTOPENACTIVEFAIL,	/* TCPFastOpenActiveFail */
 >>>>>>> v3.18
@@ -265,7 +275,10 @@ enum
 	LINUX_MIB_TCPFASTOPENCOOKIEREQD,	/* TCPFastOpenCookieReqd */
 	LINUX_MIB_TCPSPURIOUS_RTX_HOSTQUEUES, /* TCPSpuriousRtxHostQueues */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	LINUX_MIB_BUSYPOLLRXPACKETS,		/* BusyPollRxPackets */
 	LINUX_MIB_TCPAUTOCORKING,		/* TCPAutoCorking */
 	LINUX_MIB_TCPFROMZEROWINDOWADV,		/* TCPFromZeroWindowAdv */
@@ -273,6 +286,9 @@ enum
 	LINUX_MIB_TCPWANTZEROWINDOWADV,		/* TCPWantZeroWindowAdv */
 	LINUX_MIB_TCPSYNRETRANS,		/* TCPSynRetrans */
 	LINUX_MIB_TCPORIGDATASENT,		/* TCPOrigDataSent */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__LINUX_MIB_MAX
 };
@@ -309,6 +325,10 @@ enum
 	LINUX_MIB_XFRMFWDHDRERROR,		/* XfrmFwdHdrError*/
 	LINUX_MIB_XFRMOUTSTATEINVALID,		/* XfrmOutStateInvalid */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	LINUX_MIB_XFRMACQUIREERROR,		/* XfrmAcquireError */
+>>>>>>> v3.18
 =======
 	LINUX_MIB_XFRMACQUIREERROR,		/* XfrmAcquireError */
 >>>>>>> v3.18

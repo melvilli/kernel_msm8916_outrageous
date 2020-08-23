@@ -24,7 +24,10 @@
 #include <asm-generic/tlb.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pagemap.h>
 #include <linux/swap.h>
 
@@ -39,6 +42,9 @@ static inline void __tlb_remove_table(void *_table)
 #define tlb_remove_entry(tlb, entry)	tlb_remove_page(tlb, entry)
 #endif /* CONFIG_HAVE_RCU_TABLE_FREE */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * There's three ways the TLB shootdown code is used:
@@ -106,23 +112,32 @@ static inline void __pte_free_tlb(struct mmu_gather *tlb, pgtable_t pte,
 	pgtable_page_dtor(pte);
 	tlb_add_flush(tlb, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tlb_remove_page(tlb, pte);
 }
 
 #ifndef CONFIG_ARM64_64K_PAGES
 =======
+=======
+>>>>>>> v3.18
 	tlb_remove_entry(tlb, pte);
 }
 
 #if CONFIG_ARM64_PGTABLE_LEVELS > 2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void __pmd_free_tlb(struct mmu_gather *tlb, pmd_t *pmdp,
 				  unsigned long addr)
 {
 	tlb_add_flush(tlb, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tlb_remove_page(tlb, virt_to_page(pmdp));
 =======
+=======
+>>>>>>> v3.18
 	tlb_remove_entry(tlb, virt_to_page(pmdp));
 }
 #endif
@@ -133,6 +148,9 @@ static inline void __pud_free_tlb(struct mmu_gather *tlb, pud_t *pudp,
 {
 	tlb_add_flush(tlb, addr);
 	tlb_remove_entry(tlb, virt_to_page(pudp));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif

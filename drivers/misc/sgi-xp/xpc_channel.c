@@ -829,6 +829,10 @@ xpc_allocate_msg_wait(struct xpc_channel *ch)
 {
 	enum xp_retval ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DEFINE_WAIT(wait);
+>>>>>>> v3.18
 =======
 	DEFINE_WAIT(wait);
 >>>>>>> v3.18
@@ -840,7 +844,13 @@ xpc_allocate_msg_wait(struct xpc_channel *ch)
 
 	atomic_inc(&ch->n_on_msg_allocate_wq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = interruptible_sleep_on_timeout(&ch->msg_allocate_wq, 1);
+=======
+	prepare_to_wait(&ch->msg_allocate_wq, &wait, TASK_INTERRUPTIBLE);
+	ret = schedule_timeout(1);
+	finish_wait(&ch->msg_allocate_wq, &wait);
+>>>>>>> v3.18
 =======
 	prepare_to_wait(&ch->msg_allocate_wq, &wait, TASK_INTERRUPTIBLE);
 	ret = schedule_timeout(1);

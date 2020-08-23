@@ -736,6 +736,11 @@ static struct crypto_alg xts_aes_alg = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int xts_aes_alg_reg;
+
+>>>>>>> v3.18
 =======
 static int xts_aes_alg_reg;
 
@@ -890,6 +895,11 @@ static struct crypto_alg ctr_aes_alg = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int ctr_aes_alg_reg;
+
+>>>>>>> v3.18
 =======
 static int ctr_aes_alg_reg;
 
@@ -933,6 +943,10 @@ static int __init aes_s390_init(void)
 		if (ret)
 			goto xts_aes_err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		xts_aes_alg_reg = 1;
+>>>>>>> v3.18
 =======
 		xts_aes_alg_reg = 1;
 >>>>>>> v3.18
@@ -955,6 +969,10 @@ static int __init aes_s390_init(void)
 			goto ctr_aes_err;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ctr_aes_alg_reg = 1;
+>>>>>>> v3.18
 =======
 		ctr_aes_alg_reg = 1;
 >>>>>>> v3.18
@@ -978,16 +996,22 @@ aes_err:
 static void __exit aes_s390_fini(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crypto_unregister_alg(&ctr_aes_alg);
 	free_page((unsigned long) ctrblk);
 	crypto_unregister_alg(&xts_aes_alg);
 =======
+=======
+>>>>>>> v3.18
 	if (ctr_aes_alg_reg) {
 		crypto_unregister_alg(&ctr_aes_alg);
 		free_page((unsigned long) ctrblk);
 	}
 	if (xts_aes_alg_reg)
 		crypto_unregister_alg(&xts_aes_alg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	crypto_unregister_alg(&cbc_aes_alg);
 	crypto_unregister_alg(&ecb_aes_alg);
@@ -998,7 +1022,11 @@ module_init(aes_s390_init);
 module_exit(aes_s390_fini);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("aes-all");
+=======
+MODULE_ALIAS("aes-all");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("aes-all");
 >>>>>>> v3.18

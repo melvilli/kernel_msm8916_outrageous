@@ -40,7 +40,11 @@ static int __init example_init(void)
 
 	for (i = 0; i != 9; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfifo_put(&fifo, &i);
+=======
+		kfifo_put(&fifo, i);
+>>>>>>> v3.18
 =======
 		kfifo_put(&fifo, i);
 >>>>>>> v3.18

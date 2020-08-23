@@ -220,7 +220,11 @@ static void vm_reset(struct virtio_device *vdev)
 
 /* the notify function used when creating a virt queue */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void vm_notify(struct virtqueue *vq)
+=======
+static bool vm_notify(struct virtqueue *vq)
+>>>>>>> v3.18
 =======
 static bool vm_notify(struct virtqueue *vq)
 >>>>>>> v3.18
@@ -231,6 +235,10 @@ static bool vm_notify(struct virtqueue *vq)
 	 * signal the other end */
 	writel(vq->index, vm_dev->base + VIRTIO_MMIO_QUEUE_NOTIFY);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return true;
+>>>>>>> v3.18
 =======
 	return true;
 >>>>>>> v3.18
@@ -242,8 +250,11 @@ static irqreturn_t vm_interrupt(int irq, void *opaque)
 	struct virtio_mmio_device *vm_dev = opaque;
 	struct virtio_mmio_vq_info *info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct virtio_driver *vdrv = container_of(vm_dev->vdev.dev.driver,
 			struct virtio_driver, driver);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long status;
@@ -255,9 +266,14 @@ static irqreturn_t vm_interrupt(int irq, void *opaque)
 	writel(status, vm_dev->base + VIRTIO_MMIO_INTERRUPT_ACK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(status & VIRTIO_MMIO_INT_CONFIG)
 			&& vdrv && vdrv->config_changed) {
 		vdrv->config_changed(&vm_dev->vdev);
+=======
+	if (unlikely(status & VIRTIO_MMIO_INT_CONFIG)) {
+		virtio_config_changed(&vm_dev->vdev);
+>>>>>>> v3.18
 =======
 	if (unlikely(status & VIRTIO_MMIO_INT_CONFIG)) {
 		virtio_config_changed(&vm_dev->vdev);
@@ -487,7 +503,11 @@ static int virtio_mmio_probe(struct platform_device *pdev)
 	/* Check magic value */
 	magic = readl(vm_dev->base + VIRTIO_MMIO_MAGIC_VALUE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(&magic, "virt", 4) != 0) {
+=======
+	if (magic != ('v' | 'i' << 8 | 'r' << 16 | 't' << 24)) {
+>>>>>>> v3.18
 =======
 	if (magic != ('v' | 'i' << 8 | 'r' << 16 | 't' << 24)) {
 >>>>>>> v3.18

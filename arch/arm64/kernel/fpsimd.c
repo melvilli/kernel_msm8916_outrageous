@@ -35,7 +35,10 @@
 #define FPEXC_IDF	(1 << 7)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * In order to reduce the number of times the FPSIMD state is needlessly saved
  * and restored, we need to keep track of two things:
@@ -89,6 +92,9 @@
  *   whatever is in the FPSIMD registers is not saved to memory, but discarded.
  */
 static DEFINE_PER_CPU(struct fpsimd_state *, fpsimd_last_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -130,12 +136,15 @@ void do_fpsimd_exc(unsigned int esr, struct pt_regs *regs)
 void fpsimd_thread_switch(struct task_struct *next)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (current->mm)
 		fpsimd_save_state(&current->thread.fpsimd_state);
 
 	if (next->mm)
 		fpsimd_load_state(&next->thread.fpsimd_state);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Save the current FPSIMD state to memory, but only if whatever is in
 	 * the registers is in fact the most recent userland FPSIMD state of
@@ -162,16 +171,24 @@ void fpsimd_thread_switch(struct task_struct *next)
 			set_ti_thread_flag(task_thread_info(next),
 					   TIF_FOREIGN_FPSTATE);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void fpsimd_flush_thread(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_disable();
 	memset(&current->thread.fpsimd_state, 0, sizeof(struct fpsimd_state));
 	fpsimd_load_state(&current->thread.fpsimd_state);
 	preempt_enable();
+=======
+	memset(&current->thread.fpsimd_state, 0, sizeof(struct fpsimd_state));
+	set_thread_flag(TIF_FOREIGN_FPSTATE);
+>>>>>>> v3.18
 =======
 	memset(&current->thread.fpsimd_state, 0, sizeof(struct fpsimd_state));
 	set_thread_flag(TIF_FOREIGN_FPSTATE);
@@ -186,7 +203,12 @@ void fpsimd_preserve_current_state(void)
 {
 	preempt_disable();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fpsimd_save_state(&current->thread.fpsimd_state);
+=======
+	if (!test_thread_flag(TIF_FOREIGN_FPSTATE))
+		fpsimd_save_state(&current->thread.fpsimd_state);
+>>>>>>> v3.18
 =======
 	if (!test_thread_flag(TIF_FOREIGN_FPSTATE))
 		fpsimd_save_state(&current->thread.fpsimd_state);
@@ -196,8 +218,11 @@ void fpsimd_preserve_current_state(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Load an updated userland FPSIMD state for 'current' from memory
 =======
+=======
+>>>>>>> v3.18
  * Load the userland FPSIMD state of 'current' from memory, but only if the
  * FPSIMD state already held in the registers is /not/ the most recent FPSIMD
  * state of 'current'
@@ -219,6 +244,9 @@ void fpsimd_restore_current_state(void)
  * Load an updated userland FPSIMD state for 'current' from memory and set the
  * flag that indicates that the FPSIMD register contents are the most recent
  * FPSIMD state of 'current'
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void fpsimd_update_current_state(struct fpsimd_state *state)
@@ -226,10 +254,13 @@ void fpsimd_update_current_state(struct fpsimd_state *state)
 	preempt_disable();
 	fpsimd_load_state(state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_enable();
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (test_and_clear_thread_flag(TIF_FOREIGN_FPSTATE)) {
 		struct fpsimd_state *st = &current->thread.fpsimd_state;
 
@@ -247,6 +278,9 @@ void fpsimd_flush_task_state(struct task_struct *t)
 	t->thread.fpsimd_state.cpu = NR_CPUS;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_KERNEL_MODE_NEON
 
@@ -273,13 +307,19 @@ void kernel_neon_begin_partial(u32 num_regs)
 		 */
 		preempt_disable();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (current->mm)
 			fpsimd_save_state(&current->thread.fpsimd_state);
 =======
+=======
+>>>>>>> v3.18
 		if (current->mm &&
 		    !test_and_set_thread_flag(TIF_FOREIGN_FPSTATE))
 			fpsimd_save_state(&current->thread.fpsimd_state);
 		this_cpu_write(fpsimd_last_state, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -293,9 +333,12 @@ void kernel_neon_end(void)
 		fpsimd_load_partial_state(s);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (current->mm)
 			fpsimd_load_state(&current->thread.fpsimd_state);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		preempt_enable();
@@ -312,6 +355,7 @@ static int fpsimd_cpu_pm_notifier(struct notifier_block *self,
 	switch (cmd) {
 	case CPU_PM_ENTER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (current->mm)
 			fpsimd_save_state(&current->thread.fpsimd_state);
 		break;
@@ -319,6 +363,8 @@ static int fpsimd_cpu_pm_notifier(struct notifier_block *self,
 		if (current->mm)
 			fpsimd_load_state(&current->thread.fpsimd_state);
 =======
+=======
+>>>>>>> v3.18
 		if (current->mm && !test_thread_flag(TIF_FOREIGN_FPSTATE))
 			fpsimd_save_state(&current->thread.fpsimd_state);
 		this_cpu_write(fpsimd_last_state, NULL);
@@ -326,6 +372,9 @@ static int fpsimd_cpu_pm_notifier(struct notifier_block *self,
 	case CPU_PM_EXIT:
 		if (current->mm)
 			set_thread_flag(TIF_FOREIGN_FPSTATE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case CPU_PM_ENTER_FAILED:

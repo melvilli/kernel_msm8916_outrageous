@@ -2,6 +2,10 @@
  * Freescale MXS I2C bus driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2012-2013 Marek Vasut <marex@denx.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2013 Marek Vasut <marex@denx.de>
 >>>>>>> v3.18
@@ -29,11 +33,17 @@
 #include <linux/jiffies.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
 #include <linux/stmp_device.h>
 #include <linux/of.h>
 #include <linux/of_device.h>
 #include <linux/of_i2c.h>
+=======
+#include <linux/stmp_device.h>
+#include <linux/of.h>
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/stmp_device.h>
 #include <linux/of.h>
@@ -47,6 +57,10 @@
 #define MXS_I2C_CTRL0		(0x00)
 #define MXS_I2C_CTRL0_SET	(0x04)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MXS_I2C_CTRL0_CLR	(0x08)
+>>>>>>> v3.18
 =======
 #define MXS_I2C_CTRL0_CLR	(0x08)
 >>>>>>> v3.18
@@ -55,6 +69,10 @@
 #define MXS_I2C_CTRL0_RUN			0x20000000
 #define MXS_I2C_CTRL0_SEND_NAK_ON_LAST		0x02000000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MXS_I2C_CTRL0_PIO_MODE			0x01000000
+>>>>>>> v3.18
 =======
 #define MXS_I2C_CTRL0_PIO_MODE			0x01000000
 >>>>>>> v3.18
@@ -85,6 +103,7 @@
 
 #define MXS_I2C_STAT		(0x50)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MXS_I2C_STAT_BUS_BUSY			0x00000800
 #define MXS_I2C_STAT_CLK_GEN_BUSY		0x00000400
 
@@ -93,6 +112,8 @@
 #define MXS_I2C_DEBUG0		(0xb0)
 #define MXS_I2C_DEBUG0_CLR	(0xb8)
 =======
+=======
+>>>>>>> v3.18
 #define MXS_I2C_STAT_GOT_A_NAK			0x10000000
 #define MXS_I2C_STAT_BUS_BUSY			0x00000800
 #define MXS_I2C_STAT_CLK_GEN_BUSY		0x00000400
@@ -100,6 +121,9 @@
 #define MXS_I2C_DATA(i2c)	((i2c->dev_type == MXS_I2C_V1) ? 0x60 : 0xa0)
 
 #define MXS_I2C_DEBUG0_CLR(i2c)	((i2c->dev_type == MXS_I2C_V1) ? 0x78 : 0xb8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MXS_I2C_DEBUG0_DMAREQ	0x80000000
@@ -126,19 +150,29 @@
 				 MXS_I2C_CTRL0_MASTER_MODE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum mxs_i2c_devtype {
 	MXS_I2C_UNKNOWN = 0,
 	MXS_I2C_V1,
 	MXS_I2C_V2,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct mxs_i2c_dev - per device, private MXS-I2C data
  *
  * @dev: driver model device node
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @dev_type: distinguish i.MX23/i.MX28 features
+>>>>>>> v3.18
 =======
  * @dev_type: distinguish i.MX23/i.MX28 features
 >>>>>>> v3.18
@@ -150,6 +184,10 @@ enum mxs_i2c_devtype {
 struct mxs_i2c_dev {
 	struct device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum mxs_i2c_devtype dev_type;
+>>>>>>> v3.18
 =======
 	enum mxs_i2c_devtype dev_type;
 >>>>>>> v3.18
@@ -161,14 +199,20 @@ struct mxs_i2c_dev {
 	uint32_t timing0;
 	uint32_t timing1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* DMA support components */
 	struct dma_chan         	*dmach;
 =======
+=======
+>>>>>>> v3.18
 	uint32_t timing2;
 
 	/* DMA support components */
 	struct dma_chan			*dmach;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint32_t			pio_data[2];
 	uint32_t			addr_data;
@@ -177,15 +221,21 @@ struct mxs_i2c_dev {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mxs_i2c_reset(struct mxs_i2c_dev *i2c)
 {
 	stmp_reset_block(i2c->regs);
 =======
+=======
+>>>>>>> v3.18
 static int mxs_i2c_reset(struct mxs_i2c_dev *i2c)
 {
 	int ret = stmp_reset_block(i2c->regs);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -198,15 +248,21 @@ static int mxs_i2c_reset(struct mxs_i2c_dev *i2c)
 	writel(i2c->timing0, i2c->regs + MXS_I2C_TIMING0);
 	writel(i2c->timing1, i2c->regs + MXS_I2C_TIMING1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(0x00300030, i2c->regs + MXS_I2C_TIMING2);
 
 	writel(MXS_I2C_IRQ_MASK << 8, i2c->regs + MXS_I2C_CTRL1_SET);
 =======
+=======
+>>>>>>> v3.18
 	writel(i2c->timing2, i2c->regs + MXS_I2C_TIMING2);
 
 	writel(MXS_I2C_IRQ_MASK << 8, i2c->regs + MXS_I2C_CTRL1_SET);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -357,6 +413,7 @@ write_init_pio_fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mxs_i2c_pio_wait_dmareq(struct mxs_i2c_dev *i2c)
 {
 	unsigned long timeout = jiffies + msecs_to_jiffies(1000);
@@ -400,6 +457,8 @@ static int mxs_i2c_pio_wait_cplt(struct mxs_i2c_dev *i2c, int last)
 	while (last && (readl(i2c->regs + MXS_I2C_STAT) &
 			(MXS_I2C_STAT_BUS_BUSY | MXS_I2C_STAT_CLK_GEN_BUSY))) {
 =======
+=======
+>>>>>>> v3.18
 static int mxs_i2c_pio_wait_xfer_end(struct mxs_i2c_dev *i2c)
 {
 	unsigned long timeout = jiffies + msecs_to_jiffies(1000);
@@ -408,6 +467,9 @@ static int mxs_i2c_pio_wait_xfer_end(struct mxs_i2c_dev *i2c)
 		if (readl(i2c->regs + MXS_I2C_CTRL1) &
 				MXS_I2C_CTRL1_NO_SLAVE_ACK_IRQ)
 			return -ENXIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (time_after(jiffies, timeout))
 			return -ETIMEDOUT;
@@ -447,7 +509,10 @@ static void mxs_i2c_pio_trigger_cmd(struct mxs_i2c_dev *i2c, u32 cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Start WRITE transaction on the I2C bus. By studying i.MX23 datasheet,
  * CTRL0::PIO_MODE bit description clarifies the order in which the registers
@@ -468,6 +533,9 @@ static void mxs_i2c_pio_trigger_write_cmd(struct mxs_i2c_dev *i2c, u32 cmd,
 	writel(MXS_I2C_CTRL0_RUN, i2c->regs + MXS_I2C_CTRL0_SET);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mxs_i2c_pio_setup_xfer(struct i2c_adapter *adap,
 			struct i2c_msg *msg, uint32_t flags)
@@ -476,7 +544,12 @@ static int mxs_i2c_pio_setup_xfer(struct i2c_adapter *adap,
 	uint32_t addr_data = msg->addr << 1;
 	uint32_t data = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, shifts_left, ret;
+=======
+	int i, ret, xlen = 0, xmit = 0;
+	uint32_t start;
+>>>>>>> v3.18
 =======
 	int i, ret, xlen = 0, xmit = 0;
 	uint32_t start;
@@ -485,6 +558,7 @@ static int mxs_i2c_pio_setup_xfer(struct i2c_adapter *adap,
 	/* Mute IRQs coming from this block. */
 	writel(MXS_I2C_IRQ_MASK << 8, i2c->regs + MXS_I2C_CTRL1_CLR);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (msg->flags & I2C_M_RD) {
 		addr_data |= I2C_SMBUS_READ;
@@ -506,6 +580,8 @@ static int mxs_i2c_pio_setup_xfer(struct i2c_adapter *adap,
 		if (mxs_i2c_pio_check_error_state(i2c))
 			goto cleanup;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * MX23 idea:
 	 * - Enable CTRL0::PIO_MODE (1 << 24)
@@ -550,6 +626,9 @@ static int mxs_i2c_pio_setup_xfer(struct i2c_adapter *adap,
 				"PIO: Failed to send SELECT command!\n");
 			goto cleanup;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* READ command. */
@@ -557,6 +636,7 @@ static int mxs_i2c_pio_setup_xfer(struct i2c_adapter *adap,
 					MXS_CMD_I2C_READ | flags |
 					MXS_I2C_CTRL0_XFER_COUNT(msg->len));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for (i = 0; i < msg->len; i++) {
 			if ((i & 3) == 0) {
@@ -568,6 +648,8 @@ static int mxs_i2c_pio_setup_xfer(struct i2c_adapter *adap,
 				       i2c->regs + MXS_I2C_DEBUG0_CLR);
 			}
 =======
+=======
+>>>>>>> v3.18
 		ret = mxs_i2c_pio_wait_xfer_end(i2c);
 		if (ret) {
 			dev_err(i2c->dev,
@@ -577,11 +659,15 @@ static int mxs_i2c_pio_setup_xfer(struct i2c_adapter *adap,
 
 		data = readl(i2c->regs + MXS_I2C_DATA(i2c));
 		for (i = 0; i < msg->len; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			msg->buf[i] = data & 0xff;
 			data >>= 8;
 		}
 	} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		addr_data |= I2C_SMBUS_WRITE;
 
@@ -591,6 +677,8 @@ static int mxs_i2c_pio_setup_xfer(struct i2c_adapter *adap,
 					MXS_I2C_CTRL0_XFER_COUNT(msg->len + 1));
 
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * PIO WRITE transfer:
 		 *
@@ -601,12 +689,16 @@ static int mxs_i2c_pio_setup_xfer(struct i2c_adapter *adap,
 		 */
 		addr_data |= I2C_SMBUS_WRITE;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * The LSB of data buffer is the first byte blasted across
 		 * the bus. Higher order bytes follow. Thus the following
 		 * filling schematic.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		data = addr_data << 24;
 		for (i = 0; i < msg->len; i++) {
@@ -641,6 +733,8 @@ static int mxs_i2c_pio_setup_xfer(struct i2c_adapter *adap,
 	/* make sure we capture any occurred error into cmd_err */
 	mxs_i2c_pio_check_error_state(i2c);
 =======
+=======
+>>>>>>> v3.18
 
 		data = addr_data << 24;
 
@@ -729,6 +823,9 @@ static int mxs_i2c_pio_setup_xfer(struct i2c_adapter *adap,
 
 	/* make sure we capture any occurred error into cmd_err */
 	ret = mxs_i2c_pio_check_error_state(i2c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 cleanup:
@@ -737,13 +834,19 @@ cleanup:
 	writel(MXS_I2C_IRQ_MASK << 8, i2c->regs + MXS_I2C_CTRL1_SET);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	/* Clear the PIO_MODE on i.MX23 */
 	if (i2c->dev_type == MXS_I2C_V1)
 		writel(MXS_I2C_CTRL0_PIO_MODE, i2c->regs + MXS_I2C_CTRL0_CLR);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -757,6 +860,10 @@ static int mxs_i2c_xfer_msg(struct i2c_adapter *adap, struct i2c_msg *msg,
 	int ret;
 	int flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int use_pio = 0;
+>>>>>>> v3.18
 =======
 	int use_pio = 0;
 >>>>>>> v3.18
@@ -771,6 +878,7 @@ static int mxs_i2c_xfer_msg(struct i2c_adapter *adap, struct i2c_msg *msg,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * The current boundary to select between PIO/DMA transfer method
 	 * is set to 8 bytes, transfers shorter than 8 bytes are transfered
 	 * using PIO mode while longer transfers use DMA. The 8 byte border is
@@ -784,6 +892,8 @@ static int mxs_i2c_xfer_msg(struct i2c_adapter *adap, struct i2c_msg *msg,
 	} else {
 		INIT_COMPLETION(i2c->cmd_complete);
 =======
+=======
+>>>>>>> v3.18
 	 * The MX28 I2C IP block can only do PIO READ for transfer of to up
 	 * 4 bytes of length. The write transfer is not limited as it can use
 	 * clock stretching to avoid FIFO underruns.
@@ -801,6 +911,9 @@ static int mxs_i2c_xfer_msg(struct i2c_adapter *adap, struct i2c_msg *msg,
 			mxs_i2c_reset(i2c);
 	} else {
 		reinit_completion(&i2c->cmd_complete);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = mxs_i2c_dma_setup_xfer(adap, msg, flags);
 		if (ret)
@@ -811,15 +924,21 @@ static int mxs_i2c_xfer_msg(struct i2c_adapter *adap, struct i2c_msg *msg,
 		if (ret == 0)
 			goto timeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	if (i2c->cmd_err == -ENXIO) {
 =======
+=======
+>>>>>>> v3.18
 
 		ret = i2c->cmd_err;
 	}
 
 	if (ret == -ENXIO) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * If the transfer fails with a NAK from the slave the
@@ -830,8 +949,11 @@ static int mxs_i2c_xfer_msg(struct i2c_adapter *adap, struct i2c_msg *msg,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = i2c->cmd_err;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * WARNING!
 	 * The i.MX23 is strange. After each and every operation, it's I2C IP
@@ -845,6 +967,9 @@ static int mxs_i2c_xfer_msg(struct i2c_adapter *adap, struct i2c_msg *msg,
 	 */
 	if (i2c->dev_type == MXS_I2C_V1)
 		mxs_i2c_reset(i2c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(i2c->dev, "Done with err=%d\n", ret);
@@ -855,12 +980,18 @@ timeout:
 	dev_dbg(i2c->dev, "Timeout!\n");
 	mxs_i2c_dma_finish(i2c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mxs_i2c_reset(i2c);
 =======
+=======
+>>>>>>> v3.18
 	ret = mxs_i2c_reset(i2c);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return -ETIMEDOUT;
 }
@@ -912,6 +1043,7 @@ static const struct i2c_algorithm mxs_i2c_algo = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mxs_i2c_derive_timing(struct mxs_i2c_dev *i2c, int speed)
 {
 	/* The I2C block clock run at 24MHz */
@@ -948,6 +1080,8 @@ static void mxs_i2c_derive_timing(struct mxs_i2c_dev *i2c, int speed)
 	i2c->timing0 = (high_count << 16) | rcv_count;
 	i2c->timing1 = (low_count << 16) | xmit_count;
 =======
+=======
+>>>>>>> v3.18
 static void mxs_i2c_derive_timing(struct mxs_i2c_dev *i2c, uint32_t speed)
 {
 	/* The I2C block clock runs at 24MHz */
@@ -1021,6 +1155,9 @@ static void mxs_i2c_derive_timing(struct mxs_i2c_dev *i2c, uint32_t speed)
 	i2c->timing0 = (high_count << 16) | rcv_count;
 	i2c->timing1 = (low_count << 16) | xmit_count;
 	i2c->timing2 = (bus_free << 16 | leadin);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1043,6 +1180,7 @@ static int mxs_i2c_get_ofdata(struct mxs_i2c_dev *i2c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mxs_i2c_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
@@ -1058,6 +1196,8 @@ static int mxs_i2c_probe(struct platform_device *pdev)
 		return PTR_ERR(pinctrl);
 
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device_id mxs_i2c_devtype[] = {
 	{
 		.name = "imx23-i2c",
@@ -1086,11 +1226,15 @@ static int mxs_i2c_probe(struct platform_device *pdev)
 	struct resource *res;
 	int err, irq;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c = devm_kzalloc(dev, sizeof(struct mxs_i2c_dev), GFP_KERNEL);
 	if (!i2c)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	irq = platform_get_irq(pdev, 0);
@@ -1106,6 +1250,8 @@ static int mxs_i2c_probe(struct platform_device *pdev)
 	if (!i2c->regs)
 		return -EBUSY;
 =======
+=======
+>>>>>>> v3.18
 	if (of_id) {
 		const struct platform_device_id *device_id = of_id->data;
 		i2c->dev_type = device_id->driver_data;
@@ -1119,6 +1265,9 @@ static int mxs_i2c_probe(struct platform_device *pdev)
 	irq = platform_get_irq(pdev, 0);
 	if (irq < 0)
 		return irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = devm_request_irq(dev, irq, mxs_i2c_isr, 0, dev_name(dev), i2c);
@@ -1146,7 +1295,13 @@ static int mxs_i2c_probe(struct platform_device *pdev)
 
 	/* Do reset to enforce correct startup after pinmuxing */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mxs_i2c_reset(i2c);
+=======
+	err = mxs_i2c_reset(i2c);
+	if (err)
+		return err;
+>>>>>>> v3.18
 =======
 	err = mxs_i2c_reset(i2c);
 	if (err)
@@ -1170,8 +1325,11 @@ static int mxs_i2c_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_i2c_register_devices(adap);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1192,12 +1350,15 @@ static int mxs_i2c_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id mxs_i2c_dt_ids[] = {
 	{ .compatible = "fsl,imx28-i2c", },
 	{ /* sentinel */ }
 };
 MODULE_DEVICE_TABLE(of, mxs_i2c_dt_ids);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver mxs_i2c_driver = {
@@ -1207,6 +1368,10 @@ static struct platform_driver mxs_i2c_driver = {
 		   .of_match_table = mxs_i2c_dt_ids,
 		   },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.probe = mxs_i2c_probe,
+>>>>>>> v3.18
 =======
 	.probe = mxs_i2c_probe,
 >>>>>>> v3.18
@@ -1216,7 +1381,11 @@ static struct platform_driver mxs_i2c_driver = {
 static int __init mxs_i2c_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return platform_driver_probe(&mxs_i2c_driver, mxs_i2c_probe);
+=======
+	return platform_driver_register(&mxs_i2c_driver);
+>>>>>>> v3.18
 =======
 	return platform_driver_register(&mxs_i2c_driver);
 >>>>>>> v3.18
@@ -1230,6 +1399,10 @@ static void __exit mxs_i2c_exit(void)
 module_exit(mxs_i2c_exit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_AUTHOR("Marek Vasut <marex@denx.de>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Marek Vasut <marex@denx.de>");
 >>>>>>> v3.18

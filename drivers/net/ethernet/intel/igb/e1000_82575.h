@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -48,11 +51,15 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _E1000_82575_H_
 #define _E1000_82575_H_
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void igb_shutdown_serdes_link_82575(struct e1000_hw *hw);
 extern void igb_power_up_serdes_link_82575(struct e1000_hw *hw);
@@ -68,6 +75,8 @@ extern s32 igb_write_i2c_byte(struct e1000_hw *hw, u8 byte_offset,
                                      (ID_LED_DEF1_DEF2 <<  4) | \
                                      (ID_LED_OFF1_ON2))
 =======
+=======
+>>>>>>> v3.18
 void igb_shutdown_serdes_link_82575(struct e1000_hw *hw);
 void igb_power_up_serdes_link_82575(struct e1000_hw *hw);
 void igb_power_down_phy_copper_82575(struct e1000_hw *hw);
@@ -81,6 +90,9 @@ s32 igb_write_i2c_byte(struct e1000_hw *hw, u8 byte_offset, u8 dev_addr,
 				     (ID_LED_DEF1_DEF2 <<  8) | \
 				     (ID_LED_DEF1_DEF2 <<  4) | \
 				     (ID_LED_OFF1_ON2))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define E1000_RAR_ENTRIES_82575        16
@@ -110,6 +122,7 @@ s32 igb_write_i2c_byte(struct e1000_hw *hw, u8 byte_offset, u8 dev_addr,
 
 #define E1000_EICR_TX_QUEUE ( \
 <<<<<<< HEAD
+<<<<<<< HEAD
     E1000_EICR_TX_QUEUE0 |    \
     E1000_EICR_TX_QUEUE1 |    \
     E1000_EICR_TX_QUEUE2 |    \
@@ -121,6 +134,8 @@ s32 igb_write_i2c_byte(struct e1000_hw *hw, u8 byte_offset, u8 dev_addr,
     E1000_EICR_RX_QUEUE2 |    \
     E1000_EICR_RX_QUEUE3)
 =======
+=======
+>>>>>>> v3.18
 	E1000_EICR_TX_QUEUE0 |    \
 	E1000_EICR_TX_QUEUE1 |    \
 	E1000_EICR_TX_QUEUE2 |    \
@@ -131,6 +146,9 @@ s32 igb_write_i2c_byte(struct e1000_hw *hw, u8 byte_offset, u8 dev_addr,
 	E1000_EICR_RX_QUEUE1 |    \
 	E1000_EICR_RX_QUEUE2 |    \
 	E1000_EICR_RX_QUEUE3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Immediate Interrupt Rx (A.K.A. Low Latency Interrupt) */
@@ -148,8 +166,12 @@ union e1000_adv_rx_desc {
 			struct {
 				__le16 pkt_info;   /* RSS type, Packet type */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				__le16 hdr_info;   /* Split Header,
 						    * header buffer length */
+=======
+				__le16 hdr_info;   /* Split Head, buf len */
+>>>>>>> v3.18
 =======
 				__le16 hdr_info;   /* Split Head, buf len */
 >>>>>>> v3.18
@@ -290,11 +312,17 @@ struct e1000_adv_tx_context_desc {
 #define E1000_VMOLR_STRCRC     0x80000000 /* CRC stripping enable */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define E1000_DVMOLR_HIDEVLAN  0x20000000 /* Hide vlan enable */
 #define E1000_DVMOLR_STRVLAN   0x40000000 /* Vlan stripping enable */
 #define E1000_DVMOLR_STRCRC    0x80000000 /* CRC stripping enable */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define E1000_VLVF_ARRAY_SIZE     32
 #define E1000_VLVF_VLANID_MASK    0x00000FFF
@@ -330,10 +358,16 @@ void igb_vmdq_set_replication_pf(struct e1000_hw *, bool);
 u16 igb_rxpbs_adjust_82580(u32 data);
 s32 igb_read_emi_reg(struct e1000_hw *, u16 addr, u16 *data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 igb_set_eee_i350(struct e1000_hw *);
 s32 igb_set_eee_i354(struct e1000_hw *);
 s32 igb_init_thermal_sensor_thresh_generic(struct e1000_hw *);
 s32 igb_get_thermal_sensor_data_generic(struct e1000_hw *hw);
+=======
+s32 igb_set_eee_i350(struct e1000_hw *, bool adv1G, bool adv100M);
+s32 igb_set_eee_i354(struct e1000_hw *, bool adv1G, bool adv100M);
+s32 igb_get_eee_status_i354(struct e1000_hw *hw, bool *status);
+>>>>>>> v3.18
 =======
 s32 igb_set_eee_i350(struct e1000_hw *, bool adv1G, bool adv100M);
 s32 igb_set_eee_i354(struct e1000_hw *, bool adv1G, bool adv100M);

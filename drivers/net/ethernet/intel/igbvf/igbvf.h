@@ -313,6 +313,7 @@ extern char igbvf_driver_name[];
 extern const char igbvf_driver_version[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void igbvf_check_options(struct igbvf_adapter *);
 extern void igbvf_set_ethtool_ops(struct net_device *);
 
@@ -325,6 +326,8 @@ extern void igbvf_free_rx_resources(struct igbvf_ring *);
 extern void igbvf_free_tx_resources(struct igbvf_ring *);
 extern void igbvf_update_stats(struct igbvf_adapter *);
 =======
+=======
+>>>>>>> v3.18
 void igbvf_check_options(struct igbvf_adapter *);
 void igbvf_set_ethtool_ops(struct net_device *);
 
@@ -336,6 +339,9 @@ int igbvf_setup_tx_resources(struct igbvf_adapter *, struct igbvf_ring *);
 void igbvf_free_rx_resources(struct igbvf_ring *);
 void igbvf_free_tx_resources(struct igbvf_ring *);
 void igbvf_update_stats(struct igbvf_adapter *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern unsigned int copybreak;

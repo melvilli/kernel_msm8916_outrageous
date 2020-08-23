@@ -433,7 +433,11 @@ static int mirror_available(struct mirror_set *ms, struct bio *bio)
 
 	if (log->type->in_sync(log, region, 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return choose_mirror(ms,  bio->bi_sector) ? 1 : 0;
+=======
+		return choose_mirror(ms,  bio->bi_iter.bi_sector) ? 1 : 0;
+>>>>>>> v3.18
 =======
 		return choose_mirror(ms,  bio->bi_iter.bi_sector) ? 1 : 0;
 >>>>>>> v3.18
@@ -447,9 +451,15 @@ static int mirror_available(struct mirror_set *ms, struct bio *bio)
 static sector_t map_sector(struct mirror *m, struct bio *bio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(!bio->bi_size))
 		return 0;
 	return m->offset + dm_target_offset(m->ms->ti, bio->bi_sector);
+=======
+	if (unlikely(!bio->bi_iter.bi_size))
+		return 0;
+	return m->offset + dm_target_offset(m->ms->ti, bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 =======
 	if (unlikely(!bio->bi_iter.bi_size))
 		return 0;
@@ -461,7 +471,11 @@ static void map_bio(struct mirror *m, struct bio *bio)
 {
 	bio->bi_bdev = m->dev->bdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_sector = map_sector(m, bio);
+=======
+	bio->bi_iter.bi_sector = map_sector(m, bio);
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_sector = map_sector(m, bio);
 >>>>>>> v3.18
@@ -541,8 +555,13 @@ static void read_async_bio(struct mirror *m, struct bio *bio)
 	struct dm_io_request io_req = {
 		.bi_rw = READ,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.mem.type = DM_IO_BVEC,
 		.mem.ptr.bvec = bio->bi_io_vec + bio->bi_idx,
+=======
+		.mem.type = DM_IO_BIO,
+		.mem.ptr.bio = bio,
+>>>>>>> v3.18
 =======
 		.mem.type = DM_IO_BIO,
 		.mem.ptr.bio = bio,
@@ -579,7 +598,11 @@ static void do_reads(struct mirror_set *ms, struct bio_list *reads)
 		 */
 		if (likely(region_in_sync(ms, region, 1)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			m = choose_mirror(ms, bio->bi_sector);
+=======
+			m = choose_mirror(ms, bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 =======
 			m = choose_mirror(ms, bio->bi_iter.bi_sector);
 >>>>>>> v3.18
@@ -628,6 +651,7 @@ static void write_callback(unsigned long error, void *context)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * If the bio is discard, return an error, but do not
 	 * degrade the array.
@@ -637,6 +661,8 @@ static void write_callback(unsigned long error, void *context)
 		return;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < ms->nr_mirrors; i++)
@@ -665,8 +691,13 @@ static void do_write(struct mirror_set *ms, struct bio *bio)
 	struct dm_io_request io_req = {
 		.bi_rw = WRITE | (bio->bi_rw & WRITE_FLUSH_FUA),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.mem.type = DM_IO_BVEC,
 		.mem.ptr.bvec = bio->bi_io_vec + bio->bi_idx,
+=======
+		.mem.type = DM_IO_BIO,
+		.mem.ptr.bio = bio,
+>>>>>>> v3.18
 =======
 		.mem.type = DM_IO_BIO,
 		.mem.ptr.bio = bio,
@@ -1121,8 +1152,12 @@ static int mirror_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 	ti->discard_zeroes_data_unsupported = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ms->kmirrord_wq = alloc_workqueue("kmirrord",
 					  WQ_NON_REENTRANT | WQ_MEM_RECLAIM, 0);
+=======
+	ms->kmirrord_wq = alloc_workqueue("kmirrord", WQ_MEM_RECLAIM, 0);
+>>>>>>> v3.18
 =======
 	ms->kmirrord_wq = alloc_workqueue("kmirrord", WQ_MEM_RECLAIM, 0);
 >>>>>>> v3.18
@@ -1227,7 +1262,11 @@ static int mirror_map(struct dm_target *ti, struct bio *bio)
 	 * Store enough information so we can retry if it fails.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	m = choose_mirror(ms, bio->bi_sector);
+=======
+	m = choose_mirror(ms, bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 =======
 	m = choose_mirror(ms, bio->bi_iter.bi_sector);
 >>>>>>> v3.18
@@ -1294,6 +1333,12 @@ static int mirror_end_io(struct dm_target *ti, struct bio *bio, int error)
 			dm_bio_restore(bd, bio);
 			bio_record->details.bi_bdev = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+			atomic_inc(&bio->bi_remaining);
+
+>>>>>>> v3.18
 =======
 
 			atomic_inc(&bio->bi_remaining);

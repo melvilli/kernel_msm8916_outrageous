@@ -31,6 +31,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -211,6 +216,7 @@ int xb_init_comms(void)
 
 	if (intf->req_prod != intf->req_cons)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "XENBUS request ring is not quiescent "
 		       "(%08x:%08x)!\n", intf->req_cons, intf->req_prod);
 
@@ -219,12 +225,17 @@ int xb_init_comms(void)
 		       "(%08x:%08x): fixing up\n",
 		       intf->rsp_cons, intf->rsp_prod);
 =======
+=======
+>>>>>>> v3.18
 		pr_err("request ring is not quiescent (%08x:%08x)!\n",
 		       intf->req_cons, intf->req_prod);
 
 	if (intf->rsp_prod != intf->rsp_cons) {
 		pr_warn("response ring is not quiescent (%08x:%08x): fixing up\n",
 			intf->rsp_cons, intf->rsp_prod);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* breaks kdump */
 		if (!reset_devices)
@@ -240,7 +251,11 @@ int xb_init_comms(void)
 						0, "xenbus", &xb_waitq);
 		if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "XENBUS request irq failed %i\n", err);
+=======
+			pr_err("request irq failed %i\n", err);
+>>>>>>> v3.18
 =======
 			pr_err("request irq failed %i\n", err);
 >>>>>>> v3.18

@@ -18,7 +18,11 @@
 
 #include <media/soc_camera.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+#include <media/v4l2-clk.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-clk.h>
 >>>>>>> v3.18
@@ -201,8 +205,13 @@ struct ov9740_priv {
 	struct v4l2_subdev		subdev;
 	struct v4l2_ctrl_handler	hdl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	int				ident;
+=======
+	struct v4l2_clk			*clk;
+
+>>>>>>> v3.18
 =======
 	struct v4l2_clk			*clk;
 
@@ -574,7 +583,11 @@ static int ov9740_set_res(struct i2c_client *client, u32 width, u32 height)
 	u32 x_end;
 	u32 y_end;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool scaling = 0;
+=======
+	bool scaling = false;
+>>>>>>> v3.18
 =======
 	bool scaling = false;
 >>>>>>> v3.18
@@ -584,7 +597,11 @@ static int ov9740_set_res(struct i2c_client *client, u32 width, u32 height)
 
 	if ((width != OV9740_MAX_WIDTH) || (height != OV9740_MAX_HEIGHT))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scaling = 1;
+=======
+		scaling = true;
+>>>>>>> v3.18
 =======
 		scaling = true;
 >>>>>>> v3.18
@@ -790,6 +807,7 @@ static int ov9740_s_ctrl(struct v4l2_ctrl *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Get chip identification */
 static int ov9740_g_chip_ident(struct v4l2_subdev *sd,
 			       struct v4l2_dbg_chip_ident *id)
@@ -804,6 +822,8 @@ static int ov9740_g_chip_ident(struct v4l2_subdev *sd,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int ov9740_s_power(struct v4l2_subdev *sd, int on)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -813,7 +833,11 @@ static int ov9740_s_power(struct v4l2_subdev *sd, int on)
 
 	if (on) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = soc_camera_power_on(&client->dev, ssdd);
+=======
+		ret = soc_camera_power_on(&client->dev, ssdd, priv->clk);
+>>>>>>> v3.18
 =======
 		ret = soc_camera_power_on(&client->dev, ssdd, priv->clk);
 >>>>>>> v3.18
@@ -831,7 +855,11 @@ static int ov9740_s_power(struct v4l2_subdev *sd, int on)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		soc_camera_power_off(&client->dev, ssdd);
+=======
+		soc_camera_power_off(&client->dev, ssdd, priv->clk);
+>>>>>>> v3.18
 =======
 		soc_camera_power_off(&client->dev, ssdd, priv->clk);
 >>>>>>> v3.18
@@ -916,8 +944,11 @@ static int ov9740_video_probe(struct i2c_client *client)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->ident = V4L2_IDENT_OV9740;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_info(&client->dev, "ov9740 Model ID 0x%04x, Revision 0x%02x, "
@@ -959,7 +990,10 @@ static struct v4l2_subdev_video_ops ov9740_video_ops = {
 
 static struct v4l2_subdev_core_ops ov9740_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident		= ov9740_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.s_power		= ov9740_s_power,
@@ -1010,10 +1044,13 @@ static int ov9740_probe(struct i2c_client *client,
 		return priv->hdl.error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ov9740_video_probe(client);
 	if (ret < 0)
 		v4l2_ctrl_handler_free(&priv->hdl);
 =======
+=======
+>>>>>>> v3.18
 	priv->clk = v4l2_clk_get(&client->dev, "mclk");
 	if (IS_ERR(priv->clk)) {
 		ret = PTR_ERR(priv->clk);
@@ -1026,6 +1063,9 @@ static int ov9740_probe(struct i2c_client *client,
 eclkget:
 		v4l2_ctrl_handler_free(&priv->hdl);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1036,6 +1076,10 @@ static int ov9740_remove(struct i2c_client *client)
 	struct ov9740_priv *priv = i2c_get_clientdata(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l2_clk_put(priv->clk);
+>>>>>>> v3.18
 =======
 	v4l2_clk_put(priv->clk);
 >>>>>>> v3.18

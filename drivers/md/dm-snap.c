@@ -611,6 +611,7 @@ static struct dm_exception *dm_lookup_exception(struct dm_exception_table *et,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dm_exception *alloc_completed_exception(void)
 {
 	struct dm_exception *e;
@@ -618,12 +619,17 @@ static struct dm_exception *alloc_completed_exception(void)
 	e = kmem_cache_alloc(exception_cache, GFP_NOIO);
 	if (!e)
 =======
+=======
+>>>>>>> v3.18
 static struct dm_exception *alloc_completed_exception(gfp_t gfp)
 {
 	struct dm_exception *e;
 
 	e = kmem_cache_alloc(exception_cache, gfp);
 	if (!e && gfp == GFP_NOIO)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		e = kmem_cache_alloc(exception_cache, GFP_ATOMIC);
 
@@ -707,7 +713,11 @@ static int dm_add_exception(void *context, chunk_t old, chunk_t new)
 	struct dm_exception *e;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e = alloc_completed_exception();
+=======
+	e = alloc_completed_exception(GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	e = alloc_completed_exception(GFP_KERNEL);
 >>>>>>> v3.18
@@ -1046,6 +1056,7 @@ static void start_merge(struct dm_snapshot *s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wait_schedule(void *ptr)
 {
 	schedule();
@@ -1055,6 +1066,8 @@ static int wait_schedule(void *ptr)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Stop the merging process and wait until it finishes.
  */
@@ -1062,8 +1075,12 @@ static void stop_merge(struct dm_snapshot *s)
 {
 	set_bit(SHUTDOWN_MERGE, &s->state_bits);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_on_bit(&s->state_bits, RUNNING_MERGE, wait_schedule,
 		    TASK_UNINTERRUPTIBLE);
+=======
+	wait_on_bit(&s->state_bits, RUNNING_MERGE, TASK_UNINTERRUPTIBLE);
+>>>>>>> v3.18
 =======
 	wait_on_bit(&s->state_bits, RUNNING_MERGE, TASK_UNINTERRUPTIBLE);
 >>>>>>> v3.18
@@ -1409,9 +1426,14 @@ static void __invalidate_snapshot(struct dm_snapshot *s, int err)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pending_complete(void *context, int success)
 {
 	struct dm_snap_pending_exception *pe = context;
+=======
+static void pending_complete(struct dm_snap_pending_exception *pe, int success)
+{
+>>>>>>> v3.18
 =======
 static void pending_complete(struct dm_snap_pending_exception *pe, int success)
 {
@@ -1432,7 +1454,11 @@ static void pending_complete(struct dm_snap_pending_exception *pe, int success)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e = alloc_completed_exception();
+=======
+	e = alloc_completed_exception(GFP_NOIO);
+>>>>>>> v3.18
 =======
 	e = alloc_completed_exception(GFP_NOIO);
 >>>>>>> v3.18
@@ -1469,12 +1495,18 @@ out:
 		full_bio->bi_end_io = pe->full_bio_end_io;
 		full_bio->bi_private = pe->full_bio_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 =======
+=======
+>>>>>>> v3.18
 		atomic_inc(&full_bio->bi_remaining);
 	}
 	free_pending_exception(pe);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	increment_pending_exceptions_done_count();
 
@@ -1493,9 +1525,12 @@ out:
 
 	retry_origin_bios(s, origin_bios);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	free_pending_exception(pe);
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void commit_callback(void *context, int success)
@@ -1503,6 +1538,9 @@ static void commit_callback(void *context, int success)
 	struct dm_snap_pending_exception *pe = context;
 
 	pending_complete(pe, success);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1511,10 +1549,13 @@ static void complete_exception(struct dm_snap_pending_exception *pe)
 	struct dm_snapshot *s = pe->snap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Update the metadata if we are persistent */
 	s->store->type->commit_exception(s->store, &pe->e, !pe->copy_error,
 					 pending_complete, pe);
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(pe->copy_error))
 		pending_complete(pe, 0);
 
@@ -1522,6 +1563,9 @@ static void complete_exception(struct dm_snap_pending_exception *pe)
 		/* Update the metadata if we are persistent */
 		s->store->type->commit_exception(s->store, &pe->e,
 						 commit_callback, pe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1666,16 +1710,22 @@ static void remap_exception(struct dm_snapshot *s, struct dm_exception *e,
 {
 	bio->bi_bdev = s->cow->bdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_sector = chunk_to_sector(s->store,
 					 dm_chunk_number(e->new_chunk) +
 					 (chunk - e->old_chunk)) +
 					 (bio->bi_sector &
 					  s->store->chunk_mask);
 =======
+=======
+>>>>>>> v3.18
 	bio->bi_iter.bi_sector =
 		chunk_to_sector(s->store, dm_chunk_number(e->new_chunk) +
 				(chunk - e->old_chunk)) +
 		(bio->bi_iter.bi_sector & s->store->chunk_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1695,7 +1745,11 @@ static int snapshot_map(struct dm_target *ti, struct bio *bio)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chunk = sector_to_chunk(s->store, bio->bi_sector);
+=======
+	chunk = sector_to_chunk(s->store, bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 =======
 	chunk = sector_to_chunk(s->store, bio->bi_iter.bi_sector);
 >>>>>>> v3.18
@@ -1760,7 +1814,12 @@ static int snapshot_map(struct dm_target *ti, struct bio *bio)
 
 		if (!pe->started &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    bio->bi_size == (s->store->chunk_size << SECTOR_SHIFT)) {
+=======
+		    bio->bi_iter.bi_size ==
+		    (s->store->chunk_size << SECTOR_SHIFT)) {
+>>>>>>> v3.18
 =======
 		    bio->bi_iter.bi_size ==
 		    (s->store->chunk_size << SECTOR_SHIFT)) {
@@ -1821,7 +1880,11 @@ static int snapshot_merge_map(struct dm_target *ti, struct bio *bio)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chunk = sector_to_chunk(s->store, bio->bi_sector);
+=======
+	chunk = sector_to_chunk(s->store, bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 =======
 	chunk = sector_to_chunk(s->store, bio->bi_iter.bi_sector);
 >>>>>>> v3.18
@@ -2162,7 +2225,11 @@ static int do_origin(struct dm_dev *origin, struct bio *bio)
 	o = __lookup_origin(origin->bdev);
 	if (o)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		r = __origin_write(&o->snapshots, bio->bi_sector, bio);
+=======
+		r = __origin_write(&o->snapshots, bio->bi_iter.bi_sector, bio);
+>>>>>>> v3.18
 =======
 		r = __origin_write(&o->snapshots, bio->bi_iter.bi_sector, bio);
 >>>>>>> v3.18
@@ -2211,12 +2278,18 @@ static int origin_write_extent(struct dm_snapshot *merging_snap,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct dm_origin {
 	struct dm_dev *dev;
 	unsigned split_boundary;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Construct an origin mapping: <dev_path>
@@ -2227,7 +2300,11 @@ static int origin_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 {
 	int r;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dm_dev *dev;
+=======
+	struct dm_origin *o;
+>>>>>>> v3.18
 =======
 	struct dm_origin *o;
 >>>>>>> v3.18
@@ -2237,6 +2314,7 @@ static int origin_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	r = dm_get_device(ti, argv[0], dm_table_get_mode(ti->table), &dev);
 	if (r) {
@@ -2249,6 +2327,8 @@ static int origin_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	o = kmalloc(sizeof(struct dm_origin), GFP_KERNEL);
 	if (!o) {
 		ti->error = "Cannot allocate private origin structure";
@@ -2271,14 +2351,23 @@ bad_open:
 	kfree(o);
 bad_alloc:
 	return r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void origin_dtr(struct dm_target *ti)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dm_dev *dev = ti->private;
 	dm_put_device(ti, dev);
+=======
+	struct dm_origin *o = ti->private;
+	dm_put_device(ti, o->dev);
+	kfree(o);
+>>>>>>> v3.18
 =======
 	struct dm_origin *o = ti->private;
 	dm_put_device(ti, o->dev);
@@ -2289,6 +2378,7 @@ static void origin_dtr(struct dm_target *ti)
 static int origin_map(struct dm_target *ti, struct bio *bio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dm_dev *dev = ti->private;
 	bio->bi_bdev = dev->bdev;
 
@@ -2298,6 +2388,8 @@ static int origin_map(struct dm_target *ti, struct bio *bio)
 	/* Only tell snapshots if this is a write */
 	return (bio_rw(bio) == WRITE) ? do_origin(dev, bio) : DM_MAPIO_REMAPPED;
 =======
+=======
+>>>>>>> v3.18
 	struct dm_origin *o = ti->private;
 	unsigned available_sectors;
 
@@ -2317,6 +2409,9 @@ static int origin_map(struct dm_target *ti, struct bio *bio)
 
 	/* Only tell snapshots if this is a write */
 	return do_origin(o->dev, bio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2327,9 +2422,15 @@ static int origin_map(struct dm_target *ti, struct bio *bio)
 static void origin_resume(struct dm_target *ti)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dm_dev *dev = ti->private;
 
 	ti->max_io_len = get_origin_minimum_chunksize(dev->bdev);
+=======
+	struct dm_origin *o = ti->private;
+
+	o->split_boundary = get_origin_minimum_chunksize(o->dev->bdev);
+>>>>>>> v3.18
 =======
 	struct dm_origin *o = ti->private;
 
@@ -2341,7 +2442,11 @@ static void origin_status(struct dm_target *ti, status_type_t type,
 			  unsigned status_flags, char *result, unsigned maxlen)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dm_dev *dev = ti->private;
+=======
+	struct dm_origin *o = ti->private;
+>>>>>>> v3.18
 =======
 	struct dm_origin *o = ti->private;
 >>>>>>> v3.18
@@ -2353,7 +2458,11 @@ static void origin_status(struct dm_target *ti, status_type_t type,
 
 	case STATUSTYPE_TABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snprintf(result, maxlen, "%s", dev->name);
+=======
+		snprintf(result, maxlen, "%s", o->dev->name);
+>>>>>>> v3.18
 =======
 		snprintf(result, maxlen, "%s", o->dev->name);
 >>>>>>> v3.18
@@ -2365,8 +2474,13 @@ static int origin_merge(struct dm_target *ti, struct bvec_merge_data *bvm,
 			struct bio_vec *biovec, int max_size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dm_dev *dev = ti->private;
 	struct request_queue *q = bdev_get_queue(dev->bdev);
+=======
+	struct dm_origin *o = ti->private;
+	struct request_queue *q = bdev_get_queue(o->dev->bdev);
+>>>>>>> v3.18
 =======
 	struct dm_origin *o = ti->private;
 	struct request_queue *q = bdev_get_queue(o->dev->bdev);
@@ -2376,7 +2490,11 @@ static int origin_merge(struct dm_target *ti, struct bvec_merge_data *bvm,
 		return max_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bvm->bi_bdev = dev->bdev;
+=======
+	bvm->bi_bdev = o->dev->bdev;
+>>>>>>> v3.18
 =======
 	bvm->bi_bdev = o->dev->bdev;
 >>>>>>> v3.18
@@ -2388,9 +2506,15 @@ static int origin_iterate_devices(struct dm_target *ti,
 				  iterate_devices_callout_fn fn, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dm_dev *dev = ti->private;
 
 	return fn(ti, dev, 0, ti->len, data);
+=======
+	struct dm_origin *o = ti->private;
+
+	return fn(ti, o->dev, 0, ti->len, data);
+>>>>>>> v3.18
 =======
 	struct dm_origin *o = ti->private;
 

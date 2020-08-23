@@ -24,6 +24,7 @@
 #include <media/v4l2-device.h>
 #include <media/v4l2-mediabus.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/s5p_fimc.h>
 
 #define FIMC_LITE_DRV_NAME	"exynos-fimc-lite"
@@ -31,6 +32,8 @@
 #define FIMC_LITE_MAX_DEVS	2
 #define FLITE_REQ_BUFS_MIN	2
 =======
+=======
+>>>>>>> v3.18
 #include <media/exynos-fimc.h>
 
 #define FIMC_LITE_DRV_NAME	"exynos-fimc-lite"
@@ -39,6 +42,9 @@
 #define FLITE_REQ_BUFS_MIN	2
 #define FLITE_DEFAULT_WIDTH	640
 #define FLITE_DEFAULT_HEIGHT	480
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Bit index definitions for struct fimc_lite::state */
@@ -60,7 +66,10 @@ enum {
 #define FLITE_SD_PADS_NUM	3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct flite_drvdata - FIMC-LITE IP variant data structure
  * @max_width: maximum camera interface input width in pixels
@@ -73,6 +82,9 @@ enum {
  * @max_dma_bufs: number of output DMA buffer start address registers
  * @num_instances: total number of FIMC-LITE IP instances available
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct flite_drvdata {
 	unsigned short max_width;
@@ -81,16 +93,22 @@ struct flite_drvdata {
 	unsigned short win_hor_offs_align;
 	unsigned short out_hor_offs_align;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 #define fimc_lite_get_drvdata(_pdev) \
 	((struct flite_drvdata *) platform_get_device_id(_pdev)->driver_data)
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned short max_dma_bufs;
 	unsigned short num_instances;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct fimc_lite_events {
 	unsigned int data_overflow;
@@ -117,7 +135,12 @@ struct flite_frame {
  * @vb:    vb2 buffer
  * @list:  list head for the buffers queue
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @paddr: precalculated physical address
+=======
+ * @paddr: DMA buffer start address
+ * @index: DMA start address register's index
+>>>>>>> v3.18
 =======
  * @paddr: DMA buffer start address
  * @index: DMA start address register's index
@@ -128,6 +151,10 @@ struct flite_buffer {
 	struct list_head list;
 	dma_addr_t paddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned short index;
+>>>>>>> v3.18
 =======
 	unsigned short index;
 >>>>>>> v3.18
@@ -138,8 +165,13 @@ struct flite_buffer {
  * @pdev: pointer to FIMC-LITE platform device
  * @dd: SoC specific driver data structure
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @v4l2_dev: pointer to top the level v4l2_device
  * @vfd: video device node
+=======
+ * @ve: exynos video device entity structure
+ * @v4l2_dev: pointer to top the level v4l2_device
+>>>>>>> v3.18
 =======
  * @ve: exynos video device entity structure
  * @v4l2_dev: pointer to top the level v4l2_device
@@ -170,23 +202,34 @@ struct flite_buffer {
  * @active_buf_q: the queue head of buffers scheduled in hardware
  * @vb_queue: vb2 buffers queue
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @active_buf_count: number of video buffers scheduled in hardware
  * @frame_count: the captured frames counter
  * @reqbufs_count: the number of buffers requested with REQBUFS ioctl
  * @ref_count: driver's private reference counter
 =======
+=======
+>>>>>>> v3.18
  * @buf_index: helps to keep track of the DMA start address register index
  * @active_buf_count: number of video buffers scheduled in hardware
  * @frame_count: the captured frames counter
  * @reqbufs_count: the number of buffers requested with REQBUFS ioctl
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct fimc_lite {
 	struct platform_device	*pdev;
 	struct flite_drvdata	*dd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct v4l2_device	*v4l2_dev;
 	struct video_device	vfd;
+=======
+	struct exynos_video_entity ve;
+	struct v4l2_device	*v4l2_dev;
+>>>>>>> v3.18
 =======
 	struct exynos_video_entity ve;
 	struct v4l2_device	*v4l2_dev;
@@ -201,8 +244,11 @@ struct fimc_lite {
 	struct v4l2_ctrl	*test_pattern;
 	int			index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fimc_pipeline	pipeline;
 	const struct fimc_pipeline_ops *pipeline_ops;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -224,9 +270,15 @@ struct fimc_lite {
 	struct list_head	active_buf_q;
 	struct vb2_queue	vb_queue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		frame_count;
 	unsigned int		reqbufs_count;
 	int			ref_count;
+=======
+	unsigned short		buf_index;
+	unsigned int		frame_count;
+	unsigned int		reqbufs_count;
+>>>>>>> v3.18
 =======
 	unsigned short		buf_index;
 	unsigned int		frame_count;

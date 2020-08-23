@@ -40,7 +40,11 @@
 #define c7_PAR		18	/* Physical Address Register */
 #define c7_PAR_high	19	/* PAR top 32 bits */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define c9_L2CTLR	20	/* Cortex A15 L2 Control Register */
+=======
+#define c9_L2CTLR	20	/* Cortex A15/A7 L2 Control Register */
+>>>>>>> v3.18
 =======
 #define c9_L2CTLR	20	/* Cortex A15/A7 L2 Control Register */
 >>>>>>> v3.18
@@ -53,7 +57,13 @@
 #define c13_TID_PRIV	27	/* Thread ID, Privileged */
 #define c14_CNTKCTL	28	/* Timer Control Register (PL1) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NR_CP15_REGS	29	/* Number of regs (incl. invalid) */
+=======
+#define c10_AMAIR0	29	/* Auxilary Memory Attribute Indirection Reg0 */
+#define c10_AMAIR1	30	/* Auxilary Memory Attribute Indirection Reg1 */
+#define NR_CP15_REGS	31	/* Number of regs (incl. invalid) */
+>>>>>>> v3.18
 =======
 #define c10_AMAIR0	29	/* Auxilary Memory Attribute Indirection Reg0 */
 #define c10_AMAIR1	30	/* Auxilary Memory Attribute Indirection Reg1 */
@@ -70,7 +80,10 @@
 #define ARM_EXCEPTION_HVC	  7
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * The rr_lo_hi macro swaps a pair of registers depending on
  * current endianness. It is used in conjunction with ldrd and strd
@@ -89,6 +102,9 @@
 #define rr_lo_hi(a1, a2) a1, a2
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __ASSEMBLY__
 struct kvm;
@@ -106,8 +122,11 @@ extern char __kvm_hyp_code_start[];
 extern char __kvm_hyp_code_end[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __kvm_tlb_flush_vmid(struct kvm *kvm);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void __kvm_flush_vm_context(void);

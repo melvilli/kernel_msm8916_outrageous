@@ -21,6 +21,11 @@
 #include <asm/apic.h>
 #include <asm/pci_x86.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+#include <asm/i8259.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 #include <asm/i8259.h>
@@ -32,6 +37,7 @@ char __initdata cmd_line[COMMAND_LINE_SIZE];
 int __initdata of_ioapic;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long pci_address_to_pio(phys_addr_t address)
 {
 	/*
@@ -42,6 +48,8 @@ unsigned long pci_address_to_pio(phys_addr_t address)
 }
 EXPORT_SYMBOL_GPL(pci_address_to_pio);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init early_init_dt_scan_chosen_arch(unsigned long node)
@@ -60,6 +68,7 @@ void * __init early_init_dt_alloc_memory_arch(u64 size, u64 align)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BLK_DEV_INITRD
 void __init early_init_dt_setup_initrd_arch(u64 start, u64 end)
 {
@@ -69,6 +78,8 @@ void __init early_init_dt_setup_initrd_arch(u64 start, u64 end)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init add_dtb(u64 data)
@@ -117,7 +128,10 @@ struct device_node *pcibios_get_phb_of_node(struct pci_bus *bus)
 static int x86_of_pci_irq_enable(struct pci_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_irq oirq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 virq;
@@ -131,12 +145,16 @@ static int x86_of_pci_irq_enable(struct pci_dev *dev)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = of_irq_map_pci(dev, &oirq);
 	if (ret)
 		return ret;
 
 	virq = irq_create_of_mapping(oirq.controller, oirq.specifier,
 			oirq.size);
+=======
+	virq = of_irq_parse_and_map_pci(dev, 0, 0);
+>>>>>>> v3.18
 =======
 	virq = of_irq_parse_and_map_pci(dev, 0, 0);
 >>>>>>> v3.18
@@ -151,7 +169,11 @@ static void x86_of_pci_irq_disable(struct pci_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit x86_of_pci_init(void)
+=======
+void x86_of_pci_init(void)
+>>>>>>> v3.18
 =======
 void x86_of_pci_init(void)
 >>>>>>> v3.18
@@ -211,6 +233,7 @@ static void __init dtb_lapic_setup(void)
 #ifdef CONFIG_X86_IO_APIC
 static unsigned int ioapic_id;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __init dtb_add_ioapic(struct device_node *dn)
 {
@@ -299,6 +322,8 @@ void __init x86_dtb_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct of_ioapic_type {
 	u32 out_type;
 	u32 trigger;
@@ -335,10 +360,15 @@ static int ioapic_xlate(struct irq_domain *domain,
 			irq_hw_number_t *out_hwirq, u32 *out_type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct io_apic_irq_attr attr;
 	struct of_ioapic_type *it;
 	u32 line, idx;
 	int rc;
+=======
+	struct of_ioapic_type *it;
+	u32 line, idx, gsi;
+>>>>>>> v3.18
 =======
 	struct of_ioapic_type *it;
 	u32 line, idx, gsi;
@@ -355,6 +385,7 @@ static int ioapic_xlate(struct irq_domain *domain,
 	it = &of_ioapic_type[intspec[1]];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idx = (u32) domain->host_data;
 	set_io_apic_irq_attr(&attr, idx, line, it->trigger, it->polarity);
 
@@ -363,10 +394,15 @@ static int ioapic_xlate(struct irq_domain *domain,
 	if (rc)
 		return rc;
 =======
+=======
+>>>>>>> v3.18
 	idx = (u32)(long)domain->host_data;
 	gsi = mp_pin_to_gsi(idx, line);
 	if (mp_set_gsi_attr(gsi, it->trigger, it->polarity, cpu_to_node(0)))
 		return -EBUSY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*out_hwirq = line;
@@ -375,6 +411,7 @@ static int ioapic_xlate(struct irq_domain *domain,
 }
 
 const struct irq_domain_ops ioapic_irq_domain_ops = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.xlate = ioapic_xlate,
 };
@@ -457,6 +494,8 @@ void __init x86_add_irq_domains(void)
 void __init x86_add_irq_domains(void) { }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	.map = mp_irqdomain_map,
 	.unmap = mp_irqdomain_unmap,
 	.xlate = ioapic_xlate,
@@ -540,4 +579,7 @@ void __init x86_dtb_init(void)
 	dtb_setup_hpet();
 	dtb_apic_setup();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

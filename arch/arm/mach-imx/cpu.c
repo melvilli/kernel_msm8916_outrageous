@@ -1,8 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/module.h>
 #include <linux/io.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/err.h>
 #include <linux/module.h>
 #include <linux/io.h>
@@ -10,6 +13,9 @@
 #include <linux/of_address.h>
 #include <linux/slab.h>
 #include <linux/sys_soc.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "hardware.h"
@@ -19,6 +25,11 @@ unsigned int __mxc_cpu_type;
 EXPORT_SYMBOL(__mxc_cpu_type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static unsigned int imx_soc_revision;
+
+>>>>>>> v3.18
 =======
 static unsigned int imx_soc_revision;
 
@@ -29,7 +40,10 @@ void mxc_set_cpu_type(unsigned int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void imx_set_soc_revision(unsigned int rev)
 {
 	imx_soc_revision = rev;
@@ -40,6 +54,9 @@ unsigned int imx_get_soc_revision(void)
 	return imx_soc_revision;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void imx_print_silicon_rev(const char *cpu, int srev)
 {
@@ -73,7 +90,10 @@ void __init imx_set_aips(void __iomem *base)
 	__raw_writel(reg, base + 0x50);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void __init imx_aips_allow_unprivileged_access(
 		const char *compat)
@@ -167,4 +187,7 @@ free_soc:
 	kfree(soc_dev_attr);
 	return NULL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

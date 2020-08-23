@@ -1013,7 +1013,11 @@ int cx88_set_tvnorm(struct cx88_core *core, v4l2_std_id norm)
 
 	// tell i2c chips
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call_all(core, core, s_std, norm);
+=======
+	call_all(core, video, s_std, norm);
+>>>>>>> v3.18
 =======
 	call_all(core, video, s_std, norm);
 >>>>>>> v3.18
@@ -1039,12 +1043,15 @@ struct video_device *cx88_vdev_init(struct cx88_core *core,
 		return NULL;
 	*vfd = *template_;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vfd->v4l2_dev = &core->v4l2_dev;
 	vfd->release = video_device_release;
 	snprintf(vfd->name, sizeof(vfd->name), "%s %s (%s)",
 		 core->name, type, core->board.name);
 	set_bit(V4L2_FL_USE_FH_PRIO, &vfd->flags);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The dev pointer of v4l2_device is NULL, instead we set the
 	 * video_device dev_parent pointer to the correct PCI bus device.
@@ -1056,6 +1063,9 @@ struct video_device *cx88_vdev_init(struct cx88_core *core,
 	vfd->release = video_device_release;
 	snprintf(vfd->name, sizeof(vfd->name), "%s %s (%s)",
 		 core->name, type, core->board.name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return vfd;
 }

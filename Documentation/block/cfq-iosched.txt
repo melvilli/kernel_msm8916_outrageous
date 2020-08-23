@@ -70,7 +70,11 @@ group_idle
 -----------
 This parameter forces idling at the CFQ group level instead of CFQ
 <<<<<<< HEAD
+<<<<<<< HEAD
 queue level. This was introduced after after a bottleneck was observed
+=======
+queue level. This was introduced after a bottleneck was observed
+>>>>>>> v3.18
 =======
 queue level. This was introduced after a bottleneck was observed
 >>>>>>> v3.18

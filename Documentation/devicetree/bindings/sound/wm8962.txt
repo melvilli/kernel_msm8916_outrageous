@@ -9,7 +9,10 @@ Required properties:
   - reg : the I2C address of the device.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Optional properties:
   - spk-mono: This is a boolean property. If present, the SPK_MONO bit
     of R51 (Class D Control 2) gets set, indicating that the speaker is
@@ -24,6 +27,9 @@ Optional properties:
     Any other value is regarded as setting the GPIO register by its reset
     value 0x0.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 
@@ -31,7 +37,10 @@ codec: wm8962@1a {
 	compatible = "wlf,wm8962";
 	reg = <0x1a>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	gpio-cfg = <
 		0x0000 /* 0:Default */
@@ -41,5 +50,8 @@ codec: wm8962@1a {
 		0x8014 /* 4:FN_DMICCDAT */
 		0x0000 /* 5:Default */
 	>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

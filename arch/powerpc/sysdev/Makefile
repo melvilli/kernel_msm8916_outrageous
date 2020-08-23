@@ -5,6 +5,11 @@ ccflags-$(CONFIG_PPC64)		:= $(NO_MINIMAL_TOC)
 mpic-msi-obj-$(CONFIG_PCI_MSI)	+= mpic_msi.o mpic_u3msi.o mpic_pasemi_msi.o
 obj-$(CONFIG_MPIC)		+= mpic.o $(mpic-msi-obj-y)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_MPIC_TIMER)        += mpic_timer.o
+obj-$(CONFIG_FSL_MPIC_TIMER_WAKEUP)	+= fsl_mpic_timer_wakeup.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MPIC_TIMER)        += mpic_timer.o
 obj-$(CONFIG_FSL_MPIC_TIMER_WAKEUP)	+= fsl_mpic_timer_wakeup.o
@@ -25,7 +30,10 @@ obj-$(CONFIG_FSL_PCI)		+= fsl_pci.o $(fsl-msi-obj-y)
 obj-$(CONFIG_FSL_PMC)		+= fsl_pmc.o
 obj-$(CONFIG_FSL_LBC)		+= fsl_lbc.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_FSL_IFC)		+= fsl_ifc.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_FSL_GTM)		+= fsl_gtm.o
@@ -53,6 +61,10 @@ ifeq ($(CONFIG_PCI),y)
 obj-$(CONFIG_4xx)		+= ppc4xx_pci.o
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_PPC4xx_HSTA_MSI)	+= ppc4xx_hsta_msi.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_PPC4xx_HSTA_MSI)	+= ppc4xx_hsta_msi.o
 >>>>>>> v3.18

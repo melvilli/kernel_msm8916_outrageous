@@ -114,9 +114,12 @@ void __init msp_per_irq_init(void)
 	for (i = MSP_PER_INTBASE; i < MSP_PER_INTBASE + 32; i++) {
 		irq_set_chip(i, &msp_per_irq_controller);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 		irq_hwmask[i] = C_IRQ4;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

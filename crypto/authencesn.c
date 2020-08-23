@@ -60,6 +60,7 @@ static int crypto_authenc_esn_setkey(struct crypto_aead *authenc_esn, const u8 *
 				     unsigned int keylen)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int authkeylen;
 	unsigned int enckeylen;
 	struct crypto_authenc_esn_ctx *ctx = crypto_aead_ctx(authenc_esn);
@@ -87,6 +88,8 @@ static int crypto_authenc_esn_setkey(struct crypto_aead *authenc_esn, const u8 *
 
 	authkeylen = keylen - enckeylen;
 =======
+=======
+>>>>>>> v3.18
 	struct crypto_authenc_esn_ctx *ctx = crypto_aead_ctx(authenc_esn);
 	struct crypto_ahash *auth = ctx->auth;
 	struct crypto_ablkcipher *enc = ctx->enc;
@@ -95,13 +98,20 @@ static int crypto_authenc_esn_setkey(struct crypto_aead *authenc_esn, const u8 *
 
 	if (crypto_authenc_extractkeys(&keys, key, keylen) != 0)
 		goto badkey;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	crypto_ahash_clear_flags(auth, CRYPTO_TFM_REQ_MASK);
 	crypto_ahash_set_flags(auth, crypto_aead_get_flags(authenc_esn) &
 				     CRYPTO_TFM_REQ_MASK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = crypto_ahash_setkey(auth, key, authkeylen);
+=======
+	err = crypto_ahash_setkey(auth, keys.authkey, keys.authkeylen);
+>>>>>>> v3.18
 =======
 	err = crypto_ahash_setkey(auth, keys.authkey, keys.authkeylen);
 >>>>>>> v3.18
@@ -115,7 +125,11 @@ static int crypto_authenc_esn_setkey(struct crypto_aead *authenc_esn, const u8 *
 	crypto_ablkcipher_set_flags(enc, crypto_aead_get_flags(authenc_esn) &
 					 CRYPTO_TFM_REQ_MASK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = crypto_ablkcipher_setkey(enc, key + authkeylen, enckeylen);
+=======
+	err = crypto_ablkcipher_setkey(enc, keys.enckey, keys.enckeylen);
+>>>>>>> v3.18
 =======
 	err = crypto_ablkcipher_setkey(enc, keys.enckey, keys.enckeylen);
 >>>>>>> v3.18
@@ -852,6 +866,9 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Steffen Klassert <steffen.klassert@secunet.com>");
 MODULE_DESCRIPTION("AEAD wrapper for IPsec with extended sequence numbers");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("authencesn");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

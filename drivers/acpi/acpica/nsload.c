@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -119,7 +123,11 @@ acpi_ns_load_table(u32 table_index, struct acpi_namespace_node *node)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock:
+=======
+unlock:
+>>>>>>> v3.18
 =======
 unlock:
 >>>>>>> v3.18
@@ -137,7 +145,11 @@ unlock:
 	 */
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  "**** Begin Table Method Parsing and Object Initialization\n"));
+=======
+			  "**** Begin Table Object Initialization\n"));
+>>>>>>> v3.18
 =======
 			  "**** Begin Table Object Initialization\n"));
 >>>>>>> v3.18
@@ -146,7 +158,11 @@ unlock:
 
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  "**** Completed Table Method Parsing and Object Initialization\n"));
+=======
+			  "**** Completed Table Object Initialization\n"));
+>>>>>>> v3.18
 =======
 			  "**** Completed Table Object Initialization\n"));
 >>>>>>> v3.18

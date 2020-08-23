@@ -19,6 +19,7 @@
 
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/kvm_book3s.h>
 
 #ifdef CONFIG_KVM_BOOK3S_64_HV
@@ -30,6 +31,8 @@ EXPORT_SYMBOL_GPL(kvmppc_load_up_fpu);
 EXPORT_SYMBOL_GPL(kvmppc_load_up_altivec);
 #endif
 =======
+=======
+>>>>>>> v3.18
 #include <asm/kvm_ppc.h>
 #include <asm/kvm_book3s.h>
 
@@ -38,6 +41,9 @@ EXPORT_SYMBOL_GPL(kvmppc_hv_entry_trampoline);
 #endif
 #ifdef CONFIG_KVM_BOOK3S_PR_POSSIBLE
 EXPORT_SYMBOL_GPL(kvmppc_entry_trampoline);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

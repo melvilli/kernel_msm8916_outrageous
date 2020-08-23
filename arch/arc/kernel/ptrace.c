@@ -41,8 +41,11 @@ static int genregs_get(struct task_struct *target,
 			offsetof(struct user_regs_struct, LOC) + 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REG_O_CHUNK(scratch, callee, ptregs);
 =======
+=======
+>>>>>>> v3.18
 #define REG_O_ZERO(LOC)		\
 	if (!ret)		\
 		ret = user_regset_copyout_zero(&pos, &count, &kbuf, &ubuf, \
@@ -52,6 +55,9 @@ static int genregs_get(struct task_struct *target,
 	REG_O_ZERO(pad);
 	REG_O_CHUNK(scratch, callee, ptregs);
 	REG_O_ZERO(pad2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	REG_O_CHUNK(callee, efa, cregs);
 	REG_O_CHUNK(efa, stop_pc, &target->thread.fault_address);
@@ -101,13 +107,19 @@ static int genregs_set(struct task_struct *target,
 			offsetof(struct user_regs_struct, LOC) + 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* TBD: disallow updates to STATUS32, orig_r8 etc*/
 	REG_IN_CHUNK(scratch, callee, ptregs);	/* pt_regs[bta..orig_r8] */
 =======
+=======
+>>>>>>> v3.18
 	REG_IGNORE_ONE(pad);
 	/* TBD: disallow updates to STATUS32 etc*/
 	REG_IN_CHUNK(scratch, pad2, ptregs);	/* pt_regs[bta..sp] */
 	REG_IGNORE_ONE(pad2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	REG_IN_CHUNK(callee, efa, cregs);	/* callee_regs[r25..r13] */
 	REG_IGNORE_ONE(efa);			/* efa update invalid */

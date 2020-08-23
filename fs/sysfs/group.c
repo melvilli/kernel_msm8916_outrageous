@@ -4,13 +4,19 @@
  * Copyright (c) 2003 Patrick Mochel
  * Copyright (c) 2003 Open Source Development Lab
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * This file is released undert the GPL v2. 
 =======
+=======
+>>>>>>> v3.18
  * Copyright (c) 2013 Greg Kroah-Hartman
  * Copyright (c) 2013 The Linux Foundation
  *
  * This file is released undert the GPL v2.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  */
@@ -23,6 +29,7 @@
 #include "sysfs.h"
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void remove_files(struct sysfs_dirent *dir_sd, struct kobject *kobj,
 			 const struct attribute_group *grp)
@@ -61,6 +68,8 @@ static int create_files(struct sysfs_dirent *dir_sd, struct kobject *kobj,
 	if (error)
 		remove_files(dir_sd, kobj, grp);
 =======
+=======
+>>>>>>> v3.18
 static void remove_files(struct kernfs_node *parent,
 			 const struct attribute_group *grp)
 {
@@ -125,6 +134,9 @@ static int create_files(struct kernfs_node *parent, struct kobject *kobj,
 			remove_files(parent, grp);
 	}
 exit:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return error;
 }
@@ -134,7 +146,11 @@ static int internal_create_group(struct kobject *kobj, int update,
 				 const struct attribute_group *grp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sysfs_dirent *sd;
+=======
+	struct kernfs_node *kn;
+>>>>>>> v3.18
 =======
 	struct kernfs_node *kn;
 >>>>>>> v3.18
@@ -146,8 +162,13 @@ static int internal_create_group(struct kobject *kobj, int update,
 	if (unlikely(update && !kobj->sd))
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!grp->attrs) {
 		WARN(1, "sysfs: attrs not set by subsystem for group: %s/%s\n",
+=======
+	if (!grp->attrs && !grp->bin_attrs) {
+		WARN(1, "sysfs: (bin_)attrs not set by subsystem for group: %s/%s\n",
+>>>>>>> v3.18
 =======
 	if (!grp->attrs && !grp->bin_attrs) {
 		WARN(1, "sysfs: (bin_)attrs not set by subsystem for group: %s/%s\n",
@@ -156,6 +177,7 @@ static int internal_create_group(struct kobject *kobj, int update,
 		return -EINVAL;
 	}
 	if (grp->name) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		error = sysfs_create_subdir(kobj, grp->name, &sd);
 		if (error)
@@ -170,6 +192,8 @@ static int internal_create_group(struct kobject *kobj, int update,
 	}
 	sysfs_put(sd);
 =======
+=======
+>>>>>>> v3.18
 		kn = kernfs_create_dir(kobj->sd, grp->name,
 				       S_IRWXU | S_IRUGO | S_IXUGO, kobj);
 		if (IS_ERR(kn)) {
@@ -186,6 +210,9 @@ static int internal_create_group(struct kobject *kobj, int update,
 			kernfs_remove(kn);
 	}
 	kernfs_put(kn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return error;
 }
@@ -206,7 +233,10 @@ int sysfs_create_group(struct kobject *kobj,
 	return internal_create_group(kobj, 0, grp);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(sysfs_create_group);
 
 /**
@@ -242,6 +272,9 @@ int sysfs_create_groups(struct kobject *kobj,
 	return error;
 }
 EXPORT_SYMBOL_GPL(sysfs_create_groups);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -266,6 +299,7 @@ int sysfs_update_group(struct kobject *kobj,
 {
 	return internal_create_group(kobj, 1, grp);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -293,6 +327,8 @@ void sysfs_remove_group(struct kobject * kobj,
 	sysfs_put(sd);
 }
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(sysfs_update_group);
 
 /**
@@ -349,6 +385,9 @@ void sysfs_remove_groups(struct kobject *kobj,
 		sysfs_remove_group(kobj, groups[i]);
 }
 EXPORT_SYMBOL_GPL(sysfs_remove_groups);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -364,7 +403,11 @@ int sysfs_merge_group(struct kobject *kobj,
 		       const struct attribute_group *grp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sysfs_dirent *dir_sd;
+=======
+	struct kernfs_node *parent;
+>>>>>>> v3.18
 =======
 	struct kernfs_node *parent;
 >>>>>>> v3.18
@@ -372,6 +415,7 @@ int sysfs_merge_group(struct kobject *kobj,
 	struct attribute *const *attr;
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dir_sd = sysfs_get_dirent(kobj->sd, NULL, grp->name);
 	if (!dir_sd)
@@ -385,6 +429,8 @@ int sysfs_merge_group(struct kobject *kobj,
 	}
 	sysfs_put(dir_sd);
 =======
+=======
+>>>>>>> v3.18
 	parent = kernfs_find_and_get(kobj->sd, grp->name);
 	if (!parent)
 		return -ENOENT;
@@ -396,6 +442,9 @@ int sysfs_merge_group(struct kobject *kobj,
 			kernfs_remove_by_name(parent, (*--attr)->name);
 	}
 	kernfs_put(parent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return error;
@@ -411,6 +460,7 @@ void sysfs_unmerge_group(struct kobject *kobj,
 		       const struct attribute_group *grp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sysfs_dirent *dir_sd;
 	struct attribute *const *attr;
 
@@ -420,6 +470,8 @@ void sysfs_unmerge_group(struct kobject *kobj,
 			sysfs_hash_and_remove(dir_sd, NULL, (*attr)->name);
 		sysfs_put(dir_sd);
 =======
+=======
+>>>>>>> v3.18
 	struct kernfs_node *parent;
 	struct attribute *const *attr;
 
@@ -428,6 +480,9 @@ void sysfs_unmerge_group(struct kobject *kobj,
 		for (attr = grp->attrs; *attr; ++attr)
 			kernfs_remove_by_name(parent, (*attr)->name);
 		kernfs_put(parent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -444,6 +499,7 @@ int sysfs_add_link_to_group(struct kobject *kobj, const char *group_name,
 			    struct kobject *target, const char *link_name)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sysfs_dirent *dir_sd;
 	int error = 0;
 
@@ -454,6 +510,8 @@ int sysfs_add_link_to_group(struct kobject *kobj, const char *group_name,
 	error = sysfs_create_link_sd(dir_sd, target, link_name);
 	sysfs_put(dir_sd);
 =======
+=======
+>>>>>>> v3.18
 	struct kernfs_node *parent;
 	int error = 0;
 
@@ -463,6 +521,9 @@ int sysfs_add_link_to_group(struct kobject *kobj, const char *group_name,
 
 	error = sysfs_create_link_sd(parent, target, link_name);
 	kernfs_put(parent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return error;
@@ -479,6 +540,7 @@ void sysfs_remove_link_from_group(struct kobject *kobj, const char *group_name,
 				  const char *link_name)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sysfs_dirent *dir_sd;
 
 	dir_sd = sysfs_get_dirent(kobj->sd, NULL, group_name);
@@ -493,6 +555,8 @@ EXPORT_SYMBOL_GPL(sysfs_create_group);
 EXPORT_SYMBOL_GPL(sysfs_update_group);
 EXPORT_SYMBOL_GPL(sysfs_remove_group);
 =======
+=======
+>>>>>>> v3.18
 	struct kernfs_node *parent;
 
 	parent = kernfs_find_and_get(kobj->sd, group_name);
@@ -502,4 +566,7 @@ EXPORT_SYMBOL_GPL(sysfs_remove_group);
 	}
 }
 EXPORT_SYMBOL_GPL(sysfs_remove_link_from_group);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

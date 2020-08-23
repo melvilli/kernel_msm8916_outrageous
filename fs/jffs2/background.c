@@ -76,11 +76,14 @@ static int jffs2_garbage_collect_thread(void *_c)
 {
 	struct jffs2_sb_info *c = _c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	allow_signal(SIGKILL);
 	allow_signal(SIGSTOP);
 	allow_signal(SIGCONT);
 =======
+=======
+>>>>>>> v3.18
 	sigset_t hupmask;
 
 	siginitset(&hupmask, sigmask(SIGHUP));
@@ -88,6 +91,9 @@ static int jffs2_garbage_collect_thread(void *_c)
 	allow_signal(SIGSTOP);
 	allow_signal(SIGCONT);
 	allow_signal(SIGHUP);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	c->gc_task = current;
@@ -98,7 +104,11 @@ static int jffs2_garbage_collect_thread(void *_c)
 	set_freezable();
 	for (;;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		allow_signal(SIGHUP);
+=======
+		sigprocmask(SIG_UNBLOCK, &hupmask, NULL);
+>>>>>>> v3.18
 =======
 		sigprocmask(SIG_UNBLOCK, &hupmask, NULL);
 >>>>>>> v3.18
@@ -110,10 +120,16 @@ static int jffs2_garbage_collect_thread(void *_c)
 			jffs2_dbg(1, "%s(): sleeping...\n", __func__);
 			schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
 			spin_unlock(&c->erase_completion_lock);
 			
 
+=======
+		} else {
+			spin_unlock(&c->erase_completion_lock);
+		}
+>>>>>>> v3.18
 =======
 		} else {
 			spin_unlock(&c->erase_completion_lock);
@@ -171,7 +187,11 @@ static int jffs2_garbage_collect_thread(void *_c)
 		}
 		/* We don't want SIGHUP to interrupt us. STOP and KILL are OK though. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		disallow_signal(SIGHUP);
+=======
+		sigprocmask(SIG_BLOCK, &hupmask, NULL);
+>>>>>>> v3.18
 =======
 		sigprocmask(SIG_BLOCK, &hupmask, NULL);
 >>>>>>> v3.18

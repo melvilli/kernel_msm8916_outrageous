@@ -57,6 +57,7 @@ _GLOBAL(copypage_power7)
 #ifdef CONFIG_ALTIVEC
 	mflr	r0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std	r3,48(r1)
 	std	r4,56(r1)
 	std	r0,16(r1)
@@ -67,6 +68,8 @@ _GLOBAL(copypage_power7)
 	ld	r3,STACKFRAMESIZE+48(r1)
 	ld	r4,STACKFRAMESIZE+56(r1)
 =======
+=======
+>>>>>>> v3.18
 	std	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)
 	std	r4,-STACKFRAMESIZE+STK_REG(R30)(r1)
 	std	r0,16(r1)
@@ -76,6 +79,9 @@ _GLOBAL(copypage_power7)
 	ld	r0,STACKFRAMESIZE+16(r1)
 	ld	r3,STK_REG(R31)(r1)
 	ld	r4,STK_REG(R30)(r1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mtlr	r0
 
@@ -116,7 +122,11 @@ _GLOBAL(copypage_power7)
 	bdnz	1b
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.exit_vmx_copy		/* tail call optimise */
+=======
+	b	exit_vmx_copy		/* tail call optimise */
+>>>>>>> v3.18
 =======
 	b	exit_vmx_copy		/* tail call optimise */
 >>>>>>> v3.18

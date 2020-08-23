@@ -34,6 +34,10 @@ struct sh_csi2_client_config {
 	unsigned char channel;		/* 0..3 */
 	struct platform_device *pdev;	/* client platform device */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *name;		/* async matching: client name */
+>>>>>>> v3.18
 =======
 	const char *name;		/* async matching: client name */
 >>>>>>> v3.18
@@ -47,7 +51,10 @@ struct sh_csi2_pdata {
 	struct sh_csi2_client_config *clients;
 	int num_clients;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct v4l2_device *v4l2_dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

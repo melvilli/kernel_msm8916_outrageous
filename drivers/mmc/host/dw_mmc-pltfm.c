@@ -22,6 +22,7 @@
 #include <linux/mmc/dw_mmc.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "dw_mmc.h"
 
@@ -32,6 +33,8 @@ int dw_mci_pltfm_register(struct platform_device *pdev,
 	struct resource	*regs;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 
 #include "dw_mmc.h"
@@ -51,6 +54,9 @@ int dw_mci_pltfm_register(struct platform_device *pdev,
 {
 	struct dw_mci *host;
 	struct resource	*regs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	host = devm_kzalloc(&pdev->dev, sizeof(struct dw_mci), GFP_KERNEL);
@@ -58,10 +64,13 @@ int dw_mci_pltfm_register(struct platform_device *pdev,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!regs)
 		return -ENXIO;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	host->irq = platform_get_irq(pdev, 0);
@@ -73,6 +82,11 @@ int dw_mci_pltfm_register(struct platform_device *pdev,
 	host->irq_flags = 0;
 	host->pdata = pdev->dev.platform_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	regs = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 
 	regs = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -81,6 +95,7 @@ int dw_mci_pltfm_register(struct platform_device *pdev,
 	if (IS_ERR(host->regs))
 		return PTR_ERR(host->regs);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (drv_data && drv_data->init) {
 		ret = drv_data->init(host);
@@ -110,11 +125,16 @@ static int dw_mci_pltfm_remove(struct platform_device *pdev)
 EXPORT_SYMBOL_GPL(dw_mci_pltfm_remove);
 
 =======
+=======
+>>>>>>> v3.18
 	platform_set_drvdata(pdev, host);
 	return dw_mci_probe(host);
 }
 EXPORT_SYMBOL_GPL(dw_mci_pltfm_register);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 /*
@@ -122,6 +142,7 @@ EXPORT_SYMBOL_GPL(dw_mci_pltfm_register);
  */
 static int dw_mci_pltfm_suspend(struct device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 	struct dw_mci *host = dev_get_drvdata(dev);
@@ -136,10 +157,16 @@ static int dw_mci_pltfm_suspend(struct device *dev)
 
 	return dw_mci_suspend(host);
 >>>>>>> v3.18
+=======
+	struct dw_mci *host = dev_get_drvdata(dev);
+
+	return dw_mci_suspend(host);
+>>>>>>> v3.18
 }
 
 static int dw_mci_pltfm_resume(struct device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 	struct dw_mci *host = dev_get_drvdata(dev);
@@ -154,10 +181,15 @@ static int dw_mci_pltfm_resume(struct device *dev)
 #define dw_mci_pltfm_suspend	NULL
 #define dw_mci_pltfm_resume	NULL
 =======
+=======
+>>>>>>> v3.18
 	struct dw_mci *host = dev_get_drvdata(dev);
 
 	return dw_mci_resume(host);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PM_SLEEP */
 
@@ -167,6 +199,11 @@ EXPORT_SYMBOL_GPL(dw_mci_pltfm_pmops);
 static const struct of_device_id dw_mci_pltfm_match[] = {
 	{ .compatible = "snps,dw-mshc", },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible = "altr,socfpga-dw-mshc",
+		.data = &socfpga_drv_data },
+>>>>>>> v3.18
 =======
 	{ .compatible = "altr,socfpga-dw-mshc",
 		.data = &socfpga_drv_data },
@@ -176,7 +213,10 @@ static const struct of_device_id dw_mci_pltfm_match[] = {
 MODULE_DEVICE_TABLE(of, dw_mci_pltfm_match);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int dw_mci_pltfm_probe(struct platform_device *pdev)
 {
 	const struct dw_mci_drv_data *drv_data = NULL;
@@ -199,6 +239,9 @@ int dw_mci_pltfm_remove(struct platform_device *pdev)
 }
 EXPORT_SYMBOL_GPL(dw_mci_pltfm_remove);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver dw_mci_pltfm_driver = {
 	.probe		= dw_mci_pltfm_probe,
@@ -206,7 +249,11 @@ static struct platform_driver dw_mci_pltfm_driver = {
 	.driver		= {
 		.name		= "dw_mmc",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table	= of_match_ptr(dw_mci_pltfm_match),
+=======
+		.of_match_table	= dw_mci_pltfm_match,
+>>>>>>> v3.18
 =======
 		.of_match_table	= dw_mci_pltfm_match,
 >>>>>>> v3.18

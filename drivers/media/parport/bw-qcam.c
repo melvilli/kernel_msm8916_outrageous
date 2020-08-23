@@ -668,7 +668,11 @@ static void buffer_queue(struct vb2_buffer *vb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int buffer_finish(struct vb2_buffer *vb)
+=======
+static void buffer_finish(struct vb2_buffer *vb)
+>>>>>>> v3.18
 =======
 static void buffer_finish(struct vb2_buffer *vb)
 >>>>>>> v3.18
@@ -679,6 +683,12 @@ static void buffer_finish(struct vb2_buffer *vb)
 	int len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!vb2_is_streaming(vb->vb2_queue))
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!vb2_is_streaming(vb->vb2_queue))
 		return;
@@ -698,15 +708,21 @@ static void buffer_finish(struct vb2_buffer *vb)
 	parport_release(qcam->pdev);
 	mutex_unlock(&qcam->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len != size)
 		vb->state = VB2_BUF_STATE_ERROR;
 	vb2_set_plane_payload(vb, 0, len);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	v4l2_get_timestamp(&vb->v4l2_buf.timestamp);
 	if (len != size)
 		vb->state = VB2_BUF_STATE_ERROR;
 	vb2_set_plane_payload(vb, 0, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -774,7 +790,10 @@ static int qcam_g_fmt_vid_cap(struct file *file, void *fh, struct v4l2_format *f
 	/* Just a guess */
 	pix->colorspace = V4L2_COLORSPACE_SRGB;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pix->priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -803,7 +822,10 @@ static int qcam_try_fmt_vid_cap(struct file *file, void *fh, struct v4l2_format 
 	/* Just a guess */
 	pix->colorspace = V4L2_COLORSPACE_SRGB;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pix->priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -958,7 +980,11 @@ static struct qcam *qcam_init(struct parport *port)
 
 	v4l2_dev = &qcam->v4l2_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snprintf(v4l2_dev->name, sizeof(v4l2_dev->name), "bw-qcam%d", num_cams);
+=======
+	snprintf(v4l2_dev->name, sizeof(v4l2_dev->name), "bw-qcam%u", num_cams);
+>>>>>>> v3.18
 =======
 	snprintf(v4l2_dev->name, sizeof(v4l2_dev->name), "bw-qcam%u", num_cams);
 >>>>>>> v3.18
@@ -992,6 +1018,10 @@ static struct qcam *qcam_init(struct parport *port)
 	q->ops = &qcam_video_qops;
 	q->mem_ops = &vb2_vmalloc_memops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+>>>>>>> v3.18
 =======
 	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
 >>>>>>> v3.18
@@ -1018,7 +1048,10 @@ static struct qcam *qcam_init(struct parport *port)
 	qcam->vdev.lock = &qcam->lock;
 	qcam->vdev.ioctl_ops = &qcam_ioctl_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &qcam->vdev.flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	qcam->vdev.release = video_device_release_empty;

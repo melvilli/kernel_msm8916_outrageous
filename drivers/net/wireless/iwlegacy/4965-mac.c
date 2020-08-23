@@ -93,7 +93,10 @@ il4965_check_abort_status(struct il_priv *il, u8 frame_count, u32 status)
  */
 struct il_mod_params il4965_mod_params = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.amsdu_size_8K = 1,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.restart_fw = 1,
@@ -594,12 +597,18 @@ il4965_pass_packet_to_mac80211(struct il_priv *il, struct ieee80211_hdr *hdr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(test_bit(IL_STOP_REASON_PASSIVE, &il->stop_reason))) {
 		il_wake_queues_by_reason(il, IL_STOP_REASON_PASSIVE);
 		D_INFO("Woke queues - frame received on passive channel\n");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* In case of HW accelerated crypto and bad decryption, drop */
 	if (!il->cfg->mod_params->sw_crypto &&
@@ -678,7 +687,11 @@ il4965_hdl_rx(struct il_priv *il, struct il_rx_buf *rxb)
 
 	if ((unlikely(phy_res->cfg_phy_cnt > 20))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		D_DROP("dsp size out of range [0,20]: %d/n",
+=======
+		D_DROP("dsp size out of range [0,20]: %d\n",
+>>>>>>> v3.18
 =======
 		D_DROP("dsp size out of range [0,20]: %d\n",
 >>>>>>> v3.18
@@ -816,7 +829,11 @@ il4965_get_channels_for_scan(struct il_priv *il, struct ieee80211_vif *vif,
 
 		if (!is_active || il_is_channel_passive(ch_info) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (chan->flags & IEEE80211_CHAN_PASSIVE_SCAN))
+=======
+		    (chan->flags & IEEE80211_CHAN_NO_IR))
+>>>>>>> v3.18
 =======
 		    (chan->flags & IEEE80211_CHAN_NO_IR))
 >>>>>>> v3.18
@@ -2832,7 +2849,10 @@ il4965_hdl_tx(struct il_priv *il, struct il_rx_buf *rxb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Firmware will not transmit frame on passive channel, if it not yet
 	 * received some valid frame on that channel. When this error happen
@@ -2846,6 +2866,9 @@ il4965_hdl_tx(struct il_priv *il, struct il_rx_buf *rxb)
 		D_INFO("Stopped queues - RX waiting on passive channel\n");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&il->sta_lock, flags);
 	if (txq->sched_retry) {
@@ -4292,6 +4315,7 @@ il4965_rx_handle(struct il_priv *il)
 		len += sizeof(u32);	/* account for status word */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Reclaim a command buffer only if this packet is a response
 		 *   to a (driver-originated) command.
 		 * If the packet (e.g. Rx frame) originated from uCode,
@@ -4303,6 +4327,9 @@ il4965_rx_handle(struct il_priv *il)
 		    (pkt->hdr.cmd != N_RX_MPDU) &&
 		    (pkt->hdr.cmd != N_COMPRESSED_BA) &&
 		    (pkt->hdr.cmd != N_STATS) && (pkt->hdr.cmd != C_TX);
+=======
+		reclaim = il_need_reclaim(il, pkt);
+>>>>>>> v3.18
 =======
 		reclaim = il_need_reclaim(il, pkt);
 >>>>>>> v3.18
@@ -4613,7 +4640,11 @@ il4965_store_debug_level(struct device *d, struct device_attribute *attr,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(buf, 0, &val);
+=======
+	ret = kstrtoul(buf, 0, &val);
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 0, &val);
 >>>>>>> v3.18
@@ -4664,7 +4695,11 @@ il4965_store_tx_power(struct device *d, struct device_attribute *attr,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(buf, 10, &val);
+=======
+	ret = kstrtoul(buf, 10, &val);
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 10, &val);
 >>>>>>> v3.18
@@ -4674,7 +4709,11 @@ il4965_store_tx_power(struct device *d, struct device_attribute *attr,
 		ret = il_set_tx_power(il, val, false);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IL_ERR("failed setting tx power (0x%d).\n", ret);
+=======
+			IL_ERR("failed setting tx power (0x%08x).\n", ret);
+>>>>>>> v3.18
 =======
 			IL_ERR("failed setting tx power (0x%08x).\n", ret);
 >>>>>>> v3.18
@@ -5799,17 +5838,23 @@ il4965_mac_setup_register(struct il_priv *il, u32 max_probe_length)
 	    IEEE80211_HW_SIGNAL_DBM | IEEE80211_HW_AMPDU_AGGREGATION |
 	    IEEE80211_HW_NEED_DTIM_BEFORE_ASSOC | IEEE80211_HW_SPECTRUM_MGMT |
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    IEEE80211_HW_SUPPORTS_PS | IEEE80211_HW_SUPPORTS_DYNAMIC_PS;
 	if (il->cfg->sku & IL_SKU_N)
 		hw->flags |=
 		    IEEE80211_HW_SUPPORTS_DYNAMIC_SMPS |
 		    IEEE80211_HW_SUPPORTS_STATIC_SMPS;
 =======
+=======
+>>>>>>> v3.18
 	    IEEE80211_HW_REPORTS_TX_ACK_STATUS | IEEE80211_HW_SUPPORTS_PS |
 	    IEEE80211_HW_SUPPORTS_DYNAMIC_PS;
 	if (il->cfg->sku & IL_SKU_N)
 		hw->wiphy->features |= NL80211_FEATURE_DYNAMIC_SMPS |
 				       NL80211_FEATURE_STATIC_SMPS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hw->sta_data_size = sizeof(struct il_station_priv);
@@ -5819,9 +5864,15 @@ il4965_mac_setup_register(struct il_priv *il, u32 max_probe_length)
 	    BIT(NL80211_IFTYPE_STATION) | BIT(NL80211_IFTYPE_ADHOC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->wiphy->flags |=
 	    WIPHY_FLAG_CUSTOM_REGULATORY | WIPHY_FLAG_DISABLE_BEACON_HINTS |
 	    WIPHY_FLAG_IBSS_RSN;
+=======
+	hw->wiphy->flags |= WIPHY_FLAG_IBSS_RSN;
+	hw->wiphy->regulatory_flags |= REGULATORY_CUSTOM_REG |
+				       REGULATORY_DISABLE_BEACON_HINTS;
+>>>>>>> v3.18
 =======
 	hw->wiphy->flags |= WIPHY_FLAG_IBSS_RSN;
 	hw->wiphy->regulatory_flags |= REGULATORY_CUSTOM_REG |
@@ -6753,7 +6804,10 @@ out_iounmap:
 	iounmap(il->hw_base);
 out_pci_release_regions:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_release_regions(pdev);
@@ -6837,7 +6891,10 @@ il4965_pci_remove(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -6866,7 +6923,11 @@ il4965_txq_set_sched(struct il_priv *il, u32 mask)
 
 /* Hardware specific file defines the PCI IDs table for that hardware module */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(il4965_hw_card_ids) = {
+=======
+static const struct pci_device_id il4965_hw_card_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id il4965_hw_card_ids[] = {
 >>>>>>> v3.18
@@ -6935,7 +6996,11 @@ MODULE_PARM_DESC(11n_disable, "disable 11n functionality");
 module_param_named(amsdu_size_8K, il4965_mod_params.amsdu_size_8K, int,
 		   S_IRUGO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_PARM_DESC(amsdu_size_8K, "enable 8K amsdu size");
+=======
+MODULE_PARM_DESC(amsdu_size_8K, "enable 8K amsdu size (default 0 [disabled])");
+>>>>>>> v3.18
 =======
 MODULE_PARM_DESC(amsdu_size_8K, "enable 8K amsdu size (default 0 [disabled])");
 >>>>>>> v3.18

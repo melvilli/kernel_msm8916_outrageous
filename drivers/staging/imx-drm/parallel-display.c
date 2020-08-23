@@ -19,6 +19,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/component.h>
+>>>>>>> v3.18
 =======
 #include <linux/component.h>
 >>>>>>> v3.18
@@ -27,8 +31,14 @@
 #include <drm/drm_fb_helper.h>
 #include <drm/drm_crtc_helper.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/videodev2.h>
 #include <linux/pinctrl/consumer.h>
+=======
+#include <drm/drm_panel.h>
+#include <linux/videodev2.h>
+#include <video/of_display_timing.h>
+>>>>>>> v3.18
 =======
 #include <drm/drm_panel.h>
 #include <linux/videodev2.h>
@@ -43,9 +53,13 @@
 struct imx_parallel_display {
 	struct drm_connector connector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct imx_drm_connector *imx_drm_connector;
 	struct drm_encoder encoder;
 	struct imx_drm_encoder *imx_drm_encoder;
+=======
+	struct drm_encoder encoder;
+>>>>>>> v3.18
 =======
 	struct drm_encoder encoder;
 >>>>>>> v3.18
@@ -56,6 +70,10 @@ struct imx_parallel_display {
 	int mode_valid;
 	struct drm_display_mode mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct drm_panel *panel;
+>>>>>>> v3.18
 =======
 	struct drm_panel *panel;
 >>>>>>> v3.18
@@ -68,11 +86,14 @@ static enum drm_connector_status imx_pd_connector_detect(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void imx_pd_connector_destroy(struct drm_connector *connector)
 {
 	/* do not free here */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int imx_pd_connector_get_modes(struct drm_connector *connector)
@@ -82,7 +103,10 @@ static int imx_pd_connector_get_modes(struct drm_connector *connector)
 	int num_modes = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (imxpd->panel && imxpd->panel->funcs &&
 	    imxpd->panel->funcs->get_modes) {
 		num_modes = imxpd->panel->funcs->get_modes(imxpd->panel);
@@ -90,6 +114,9 @@ static int imx_pd_connector_get_modes(struct drm_connector *connector)
 			return num_modes;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (imxpd->edid) {
 		drm_mode_connector_update_edid_property(connector, imxpd->edid);
@@ -99,6 +126,12 @@ static int imx_pd_connector_get_modes(struct drm_connector *connector)
 	if (imxpd->mode_valid) {
 		struct drm_display_mode *mode = drm_mode_create(connector->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		if (!mode)
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 
 		if (!mode)
@@ -113,12 +146,18 @@ static int imx_pd_connector_get_modes(struct drm_connector *connector)
 	if (np) {
 		struct drm_display_mode *mode = drm_mode_create(connector->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		of_get_drm_display_mode(np, &imxpd->mode, 0);
 =======
+=======
+>>>>>>> v3.18
 
 		if (!mode)
 			return -EINVAL;
 		of_get_drm_display_mode(np, &imxpd->mode, OF_USE_NATIVE_MODE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		drm_mode_copy(mode, &imxpd->mode);
 		mode->type |= DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
@@ -130,12 +169,15 @@ static int imx_pd_connector_get_modes(struct drm_connector *connector)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int imx_pd_connector_mode_valid(struct drm_connector *connector,
 			  struct drm_display_mode *mode)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct drm_encoder *imx_pd_connector_best_encoder(
@@ -149,13 +191,19 @@ static struct drm_encoder *imx_pd_connector_best_encoder(
 static void imx_pd_encoder_dpms(struct drm_encoder *encoder, int mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct imx_parallel_display *imxpd = enc_to_imxpd(encoder);
 
 	if (mode != DRM_MODE_DPMS_ON)
 		drm_panel_disable(imxpd->panel);
 	else
 		drm_panel_enable(imxpd->panel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -171,8 +219,12 @@ static void imx_pd_encoder_prepare(struct drm_encoder *encoder)
 	struct imx_parallel_display *imxpd = enc_to_imxpd(encoder);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	imx_drm_crtc_panel_format(encoder->crtc, DRM_MODE_ENCODER_NONE,
 			imxpd->interface_pix_fmt);
+=======
+	imx_drm_panel_format(encoder, imxpd->interface_pix_fmt);
+>>>>>>> v3.18
 =======
 	imx_drm_panel_format(encoder, imxpd->interface_pix_fmt);
 >>>>>>> v3.18
@@ -193,6 +245,7 @@ static void imx_pd_encoder_disable(struct drm_encoder *encoder)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void imx_pd_encoder_destroy(struct drm_encoder *encoder)
 {
 	/* do not free here */
@@ -200,12 +253,18 @@ static void imx_pd_encoder_destroy(struct drm_encoder *encoder)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct drm_connector_funcs imx_pd_connector_funcs = {
 	.dpms = drm_helper_connector_dpms,
 	.fill_modes = drm_helper_probe_single_connector_modes,
 	.detect = imx_pd_connector_detect,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.destroy = imx_pd_connector_destroy,
+=======
+	.destroy = imx_drm_connector_destroy,
+>>>>>>> v3.18
 =======
 	.destroy = imx_drm_connector_destroy,
 >>>>>>> v3.18
@@ -215,16 +274,22 @@ static struct drm_connector_helper_funcs imx_pd_connector_helper_funcs = {
 	.get_modes = imx_pd_connector_get_modes,
 	.best_encoder = imx_pd_connector_best_encoder,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mode_valid = imx_pd_connector_mode_valid,
 };
 
 static struct drm_encoder_funcs imx_pd_encoder_funcs = {
 	.destroy = imx_pd_encoder_destroy,
 =======
+=======
+>>>>>>> v3.18
 };
 
 static struct drm_encoder_funcs imx_pd_encoder_funcs = {
 	.destroy = imx_drm_encoder_destroy,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -237,6 +302,7 @@ static struct drm_encoder_helper_funcs imx_pd_encoder_helper_funcs = {
 	.disable = imx_pd_encoder_disable,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int imx_pd_register(struct imx_parallel_display *imxpd)
 {
@@ -269,6 +335,8 @@ static int imx_pd_register(struct imx_parallel_display *imxpd)
 		return ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 static int imx_pd_register(struct drm_device *drm,
 	struct imx_parallel_display *imxpd)
 {
@@ -299,6 +367,9 @@ static int imx_pd_register(struct drm_device *drm,
 		drm_panel_attach(imxpd->panel, &imxpd->connector);
 
 	drm_mode_connector_attach_encoder(&imxpd->connector, &imxpd->encoder);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	imxpd->connector.encoder = &imxpd->encoder;
@@ -307,20 +378,27 @@ static int imx_pd_register(struct drm_device *drm,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int imx_pd_probe(struct platform_device *pdev)
 {
 	struct device_node *np = pdev->dev.of_node;
 =======
+=======
+>>>>>>> v3.18
 static int imx_pd_bind(struct device *dev, struct device *master, void *data)
 {
 	struct drm_device *drm = data;
 	struct device_node *np = dev->of_node;
 	struct device_node *panel_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const u8 *edidp;
 	struct imx_parallel_display *imxpd;
 	int ret;
 	const char *fmt;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pinctrl *pinctrl;
 
@@ -337,11 +415,16 @@ static int imx_pd_bind(struct device *dev, struct device *master, void *data)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 
 	imxpd = devm_kzalloc(dev, sizeof(*imxpd), GFP_KERNEL);
 	if (!imxpd)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	edidp = of_get_property(np, "edid", &imxpd->edid_len);
 	if (edidp)
@@ -356,6 +439,7 @@ static int imx_pd_bind(struct device *dev, struct device *master, void *data)
 		else if (!strcmp(fmt, "bgr666"))
 			imxpd->interface_pix_fmt = V4L2_PIX_FMT_BGR666;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	imxpd->dev = &pdev->dev;
@@ -368,6 +452,8 @@ static int imx_pd_bind(struct device *dev, struct device *master, void *data)
 
 	platform_set_drvdata(pdev, imxpd);
 =======
+=======
+>>>>>>> v3.18
 		else if (!strcmp(fmt, "lvds666"))
 			imxpd->interface_pix_fmt =
 					v4l2_fourcc('L', 'V', 'D', '6');
@@ -384,11 +470,15 @@ static int imx_pd_bind(struct device *dev, struct device *master, void *data)
 		return ret;
 
 	dev_set_drvdata(dev, imxpd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int imx_pd_remove(struct platform_device *pdev)
 {
@@ -402,6 +492,8 @@ static int imx_pd_remove(struct platform_device *pdev)
 	imx_drm_remove_encoder(imxpd->imx_drm_encoder);
 
 =======
+=======
+>>>>>>> v3.18
 static void imx_pd_unbind(struct device *dev, struct device *master,
 	void *data)
 {
@@ -424,6 +516,9 @@ static int imx_pd_probe(struct platform_device *pdev)
 static int imx_pd_remove(struct platform_device *pdev)
 {
 	component_del(&pdev->dev, &imx_pd_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -433,6 +528,10 @@ static const struct of_device_id imx_pd_dt_ids[] = {
 	{ /* sentinel */ }
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DEVICE_TABLE(of, imx_pd_dt_ids);
+>>>>>>> v3.18
 =======
 MODULE_DEVICE_TABLE(of, imx_pd_dt_ids);
 >>>>>>> v3.18
@@ -453,6 +552,10 @@ MODULE_DESCRIPTION("i.MX parallel display driver");
 MODULE_AUTHOR("Sascha Hauer, Pengutronix");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("platform:imx-parallel-display");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("platform:imx-parallel-display");
 >>>>>>> v3.18

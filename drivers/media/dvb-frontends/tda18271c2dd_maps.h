@@ -6,7 +6,11 @@ enum HF_S {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct SStandardParam m_StandardTable[] = {
+=======
+static struct SStandardParam m_StandardTable[] = {
+>>>>>>> v3.18
 =======
 static struct SStandardParam m_StandardTable[] = {
 >>>>>>> v3.18
@@ -32,7 +36,11 @@ static struct SStandardParam m_StandardTable[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct SMap  m_BP_Filter_Map[] = {
+=======
+static struct SMap  m_BP_Filter_Map[] = {
+>>>>>>> v3.18
 =======
 static struct SMap  m_BP_Filter_Map[] = {
 >>>>>>> v3.18
@@ -808,7 +816,11 @@ static struct SRFBandMap  m_RF_Band_Map[7] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 m_Thermometer_Map_1[16] = {
+=======
+static u8 m_Thermometer_Map_1[16] = {
+>>>>>>> v3.18
 =======
 static u8 m_Thermometer_Map_1[16] = {
 >>>>>>> v3.18
@@ -819,7 +831,11 @@ static u8 m_Thermometer_Map_1[16] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 m_Thermometer_Map_2[16] = {
+=======
+static u8 m_Thermometer_Map_2[16] = {
+>>>>>>> v3.18
 =======
 static u8 m_Thermometer_Map_2[16] = {
 >>>>>>> v3.18

@@ -15,6 +15,7 @@
  * A very rough approximation to the sqrt() function.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline unsigned long int_sqrt(unsigned long x)
 {
 	register unsigned long tmp;
@@ -25,10 +26,16 @@ unsigned long int_sqrt(unsigned long x)
 {
 	unsigned long b, m, y = 0;
 >>>>>>> v3.18
+=======
+unsigned long int_sqrt(unsigned long x)
+{
+	unsigned long b, m, y = 0;
+>>>>>>> v3.18
 
 	if (x <= 1)
 		return x;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	place = 1UL << (BITS_PER_LONG - 2);
 
@@ -53,6 +60,8 @@ unsigned long int_sqrt(unsigned long x)
 EXPORT_SYMBOL(int_sqrt);
 
 =======
+=======
+>>>>>>> v3.18
 	m = 1UL << (BITS_PER_LONG - 2);
 	while (m != 0) {
 		b = y + m;
@@ -68,4 +77,7 @@ EXPORT_SYMBOL(int_sqrt);
 	return y;
 }
 EXPORT_SYMBOL(int_sqrt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

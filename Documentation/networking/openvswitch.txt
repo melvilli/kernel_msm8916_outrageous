@@ -92,7 +92,10 @@ Often we ellipsize arguments not important to the discussion, e.g.:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Wildcarded flow key format
 --------------------------
 
@@ -133,6 +136,9 @@ performs best-effort detection of overlapping wildcarded flows and may reject
 some but not all of them. However, this behavior may change in future versions.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Basic rule for evolving flow keys
 ---------------------------------

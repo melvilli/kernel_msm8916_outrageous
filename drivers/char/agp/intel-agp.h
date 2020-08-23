@@ -56,8 +56,13 @@
 
 /* Intel i810 registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define I810_GMADDR		0x10
 #define I810_MMADDR		0x14
+=======
+#define I810_GMADR_BAR		0
+#define I810_MMADR_BAR		1
+>>>>>>> v3.18
 =======
 #define I810_GMADR_BAR		0
 #define I810_MMADR_BAR		1
@@ -119,9 +124,15 @@
 
 /* intel 915G registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define I915_GMADDR	0x18
 #define I915_MMADDR	0x10
 #define I915_PTEADDR	0x1C
+=======
+#define I915_GMADR_BAR	2
+#define I915_MMADR_BAR	0
+#define I915_PTE_BAR	3
+>>>>>>> v3.18
 =======
 #define I915_GMADR_BAR	2
 #define I915_MMADR_BAR	0

@@ -333,7 +333,10 @@
 
 				phy1: ethernet-phy@1 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					compatible = "national,DP83848VV";
@@ -342,7 +345,10 @@
 
 				phy2: ethernet-phy@2 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					compatible = "broadcom,BCM5481UA2KMLG";
@@ -351,7 +357,10 @@
 
 				phy3: ethernet-phy@3 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					compatible = "national,DP83848VV";
@@ -360,7 +369,10 @@
 
 				phy4: ethernet-phy@4 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					compatible = "broadcom,BCM5481UA2KMLG";

@@ -1,7 +1,11 @@
 /*
  * QLogic Fibre Channel HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2013 QLogic Corporation
+=======
+ * Copyright (c)  2003-2014 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2014 QLogic Corporation
 >>>>>>> v3.18
@@ -570,15 +574,21 @@ qla2xxx_find_flt_start(scsi_qla_host_t *vha, uint32_t *start)
 	else if (IS_QLA81XX(ha))
 		*start = FA_FLASH_LAYOUT_ADDR_81;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (IS_QLA82XX(ha)) {
 		*start = FA_FLASH_LAYOUT_ADDR_82;
 		goto end;
 	} else if (IS_QLA83XX(ha)) {
 =======
+=======
+>>>>>>> v3.18
 	else if (IS_P3P_TYPE(ha)) {
 		*start = FA_FLASH_LAYOUT_ADDR_82;
 		goto end;
 	} else if (IS_QLA83XX(ha) || IS_QLA27XX(ha)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*start = FA_FLASH_LAYOUT_ADDR_83;
 		goto end;
@@ -694,7 +704,11 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 	   FCP prio region in it's FLT.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ha->flt_region_fcp_prio = ha->flags.port0 ?
+=======
+	ha->flt_region_fcp_prio = (ha->port_no == 0) ?
+>>>>>>> v3.18
 =======
 	ha->flt_region_fcp_prio = (ha->port_no == 0) ?
 >>>>>>> v3.18
@@ -735,7 +749,11 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 		ql_dbg(ql_dbg_init, vha, 0x0049,
 		    "FLT[%02x]: start=0x%x "
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    "end=0x%x size=0x%x.\n", le32_to_cpu(region->code),
+=======
+		    "end=0x%x size=0x%x.\n", le32_to_cpu(region->code) & 0xff,
+>>>>>>> v3.18
 =======
 		    "end=0x%x size=0x%x.\n", le32_to_cpu(region->code) & 0xff,
 >>>>>>> v3.18
@@ -761,6 +779,7 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 				break;
 			ha->flt_region_vpd_nvram = start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (IS_QLA82XX(ha))
 				break;
 			if (ha->flags.port0)
@@ -771,6 +790,8 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 				break;
 			if (!ha->flags.port0)
 =======
+=======
+>>>>>>> v3.18
 			if (IS_P3P_TYPE(ha))
 				break;
 			if (ha->port_no == 0)
@@ -792,6 +813,9 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 			if (!IS_QLA27XX(ha))
 				break;
 			if (ha->port_no == 3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ha->flt_region_vpd = start;
 			break;
@@ -799,7 +823,11 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 			if (IS_QLA8031(ha))
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ha->flags.port0)
+=======
+			if (ha->port_no == 0)
+>>>>>>> v3.18
 =======
 			if (ha->port_no == 0)
 >>>>>>> v3.18
@@ -809,8 +837,11 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 			if (IS_QLA8031(ha))
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!ha->flags.port0)
 =======
+=======
+>>>>>>> v3.18
 			if (ha->port_no == 1)
 				ha->flt_region_nvram = start;
 			break;
@@ -824,6 +855,9 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 			if (!IS_QLA27XX(ha))
 				break;
 			if (ha->port_no == 3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ha->flt_region_nvram = start;
 			break;
@@ -832,17 +866,23 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 			break;
 		case FLT_REG_NPIV_CONF_0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ha->flags.port0)
 				ha->flt_region_npiv_conf = start;
 			break;
 		case FLT_REG_NPIV_CONF_1:
 			if (!ha->flags.port0)
 =======
+=======
+>>>>>>> v3.18
 			if (ha->port_no == 0)
 				ha->flt_region_npiv_conf = start;
 			break;
 		case FLT_REG_NPIV_CONF_1:
 			if (ha->port_no == 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ha->flt_region_npiv_conf = start;
 			break;
@@ -851,17 +891,23 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 			break;
 		case FLT_REG_FCP_PRIO_0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ha->flags.port0)
 				ha->flt_region_fcp_prio = start;
 			break;
 		case FLT_REG_FCP_PRIO_1:
 			if (!ha->flags.port0)
 =======
+=======
+>>>>>>> v3.18
 			if (ha->port_no == 0)
 				ha->flt_region_fcp_prio = start;
 			break;
 		case FLT_REG_FCP_PRIO_1:
 			if (ha->port_no == 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ha->flt_region_fcp_prio = start;
 			break;
@@ -869,10 +915,13 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 			ha->flt_region_boot = start;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case FLT_REG_FW_82XX:
 			ha->flt_region_fw = start;
 			break;
 =======
+=======
+>>>>>>> v3.18
 		case FLT_REG_BOOT_CODE_8044:
 			if (IS_QLA8044(ha))
 				ha->flt_region_boot = start;
@@ -884,6 +933,9 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 			if (IS_CNA_CAPABLE(ha))
 				ha->flt_region_fw = start;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case FLT_REG_GOLD_FW_82XX:
 			ha->flt_region_gold_fw = start;
@@ -897,6 +949,7 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 			break;
 		case FLT_REG_FCOE_NVRAM_0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!IS_QLA8031(ha))
 				break;
 			if (ha->flags.port0)
@@ -907,6 +960,8 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 				break;
 			if (!ha->flags.port0)
 =======
+=======
+>>>>>>> v3.18
 			if (!(IS_QLA8031(ha) || IS_QLA8044(ha)))
 				break;
 			if (ha->port_no == 0)
@@ -916,6 +971,9 @@ qla2xxx_get_flt_info(scsi_qla_host_t *vha, uint32_t flt_addr)
 			if (!(IS_QLA8031(ha) || IS_QLA8044(ha)))
 				break;
 			if (ha->port_no == 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ha->flt_region_nvram = start;
 			break;
@@ -930,6 +988,7 @@ no_flash_data:
 	ha->flt_region_boot = def_boot[def];
 	ha->flt_region_vpd_nvram = def_vpd_nvram[def];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ha->flt_region_vpd = ha->flags.port0 ?
 	    def_vpd0[def] : def_vpd1[def];
 	ha->flt_region_nvram = ha->flags.port0 ?
@@ -937,12 +996,17 @@ no_flash_data:
 	ha->flt_region_fdt = def_fdt[def];
 	ha->flt_region_npiv_conf = ha->flags.port0 ?
 =======
+=======
+>>>>>>> v3.18
 	ha->flt_region_vpd = (ha->port_no == 0) ?
 	    def_vpd0[def] : def_vpd1[def];
 	ha->flt_region_nvram = (ha->port_no == 0) ?
 	    def_nvram0[def] : def_nvram1[def];
 	ha->flt_region_fdt = def_fdt[def];
 	ha->flt_region_npiv_conf = (ha->port_no == 0) ?
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    def_npiv_conf0[def] : def_npiv_conf1[def];
 done:
@@ -998,8 +1062,11 @@ qla2xxx_get_fdt_info(scsi_qla_host_t *vha)
 	fid = le16_to_cpu(fdt->id);
 	ha->fdt_wrt_disable = fdt->wrt_disable_bits;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ha->fdt_erase_cmd = flash_conf_addr(ha, 0x0300 | fdt->erase_cmd);
 =======
+=======
+>>>>>>> v3.18
 	ha->fdt_wrt_enable = fdt->wrt_enable_bits;
 	ha->fdt_wrt_sts_reg_cmd = fdt->wrt_sts_reg_cmd;
 	if (IS_QLA8044(ha))
@@ -1007,6 +1074,9 @@ qla2xxx_get_fdt_info(scsi_qla_host_t *vha)
 	else
 		ha->fdt_erase_cmd =
 		    flash_conf_addr(ha, 0x0300 | fdt->erase_cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ha->fdt_block_size = le32_to_cpu(fdt->block_size);
 	if (fdt->unprotect_sec_cmd) {
@@ -1020,7 +1090,11 @@ qla2xxx_get_fdt_info(scsi_qla_host_t *vha)
 no_flash_data:
 	loc = locations[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_QLA82XX(ha)) {
+=======
+	if (IS_P3P_TYPE(ha)) {
+>>>>>>> v3.18
 =======
 	if (IS_P3P_TYPE(ha)) {
 >>>>>>> v3.18
@@ -1075,7 +1149,11 @@ qla2xxx_get_idc_param(scsi_qla_host_t *vha)
 	struct req_que *req = ha->req_q_map[0];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_QLA82XX(ha))
+=======
+	if (!(IS_P3P_TYPE(ha)))
+>>>>>>> v3.18
 =======
 	if (!(IS_P3P_TYPE(ha)))
 >>>>>>> v3.18
@@ -1108,7 +1186,11 @@ qla2xxx_get_flash_info(scsi_qla_host_t *vha)
 
 	if (!IS_QLA24XX_TYPE(ha) && !IS_QLA25XX(ha) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !IS_CNA_CAPABLE(ha) && !IS_QLA2031(ha))
+=======
+	    !IS_CNA_CAPABLE(ha) && !IS_QLA2031(ha) && !IS_QLA27XX(ha))
+>>>>>>> v3.18
 =======
 	    !IS_CNA_CAPABLE(ha) && !IS_QLA2031(ha) && !IS_QLA27XX(ha))
 >>>>>>> v3.18
@@ -1145,6 +1227,12 @@ qla2xxx_flash_npiv_conf(scsi_qla_host_t *vha)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (IS_QLA8044(ha))
+		return;
+
+>>>>>>> v3.18
 =======
 	if (IS_QLA8044(ha))
 		return;
@@ -1318,7 +1406,12 @@ qla24xx_write_flash_data(scsi_qla_host_t *vha, uint32_t *dwptr, uint32_t faddr,
 
 	/* Prepare burst-capable write on supported ISPs. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((IS_QLA25XX(ha) || IS_QLA81XX(ha) || IS_QLA83XX(ha)) &&
+=======
+	if ((IS_QLA25XX(ha) || IS_QLA81XX(ha) || IS_QLA83XX(ha) ||
+	    IS_QLA27XX(ha)) &&
+>>>>>>> v3.18
 =======
 	if ((IS_QLA25XX(ha) || IS_QLA81XX(ha) || IS_QLA83XX(ha) ||
 	    IS_QLA27XX(ha)) &&
@@ -1450,7 +1543,11 @@ qla24xx_read_nvram_data(scsi_qla_host_t *vha, uint8_t *buf, uint32_t naddr,
 	struct qla_hw_data *ha = vha->hw;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_QLA82XX(ha))
+=======
+	if (IS_P3P_TYPE(ha))
+>>>>>>> v3.18
 =======
 	if (IS_P3P_TYPE(ha))
 >>>>>>> v3.18
@@ -1512,7 +1609,11 @@ qla24xx_write_nvram_data(scsi_qla_host_t *vha, uint8_t *buf, uint32_t naddr,
 	ret = QLA_SUCCESS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_QLA82XX(ha))
+=======
+	if (IS_P3P_TYPE(ha))
+>>>>>>> v3.18
 =======
 	if (IS_P3P_TYPE(ha))
 >>>>>>> v3.18
@@ -1630,7 +1731,11 @@ qla2x00_beacon_blink(struct scsi_qla_host *vha)
 	struct device_reg_2xxx __iomem *reg = &ha->iobase->isp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_QLA82XX(ha))
+=======
+	if (IS_P3P_TYPE(ha))
+>>>>>>> v3.18
 =======
 	if (IS_P3P_TYPE(ha))
 >>>>>>> v3.18
@@ -1818,7 +1923,11 @@ qla83xx_select_led_port(struct qla_hw_data *ha)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ha->flags.port0)
+=======
+	if (ha->port_no == 0)
+>>>>>>> v3.18
 =======
 	if (ha->port_no == 0)
 >>>>>>> v3.18
@@ -1849,11 +1958,16 @@ qla83xx_beacon_blink(struct scsi_qla_host *vha)
 		led_select_value = qla83xx_select_led_port(ha);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qla83xx_wr_reg(vha, led_select_value, 0x40002000);
 		qla83xx_wr_reg(vha, led_select_value + 4, 0x40002000);
 		msleep(1000);
 		qla83xx_wr_reg(vha, led_select_value, 0x40004000);
 		qla83xx_wr_reg(vha, led_select_value + 4, 0x40004000);
+=======
+		qla83xx_wr_reg(vha, led_select_value, 0x40000230);
+		qla83xx_wr_reg(vha, led_select_value + 4, 0x40000230);
+>>>>>>> v3.18
 =======
 		qla83xx_wr_reg(vha, led_select_value, 0x40000230);
 		qla83xx_wr_reg(vha, led_select_value + 4, 0x40000230);
@@ -1921,7 +2035,11 @@ qla24xx_beacon_on(struct scsi_qla_host *vha)
 	struct device_reg_24xx __iomem *reg = &ha->iobase->isp24;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_QLA82XX(ha))
+=======
+	if (IS_P3P_TYPE(ha))
+>>>>>>> v3.18
 =======
 	if (IS_P3P_TYPE(ha))
 >>>>>>> v3.18
@@ -1977,7 +2095,11 @@ qla24xx_beacon_off(struct scsi_qla_host *vha)
 	struct device_reg_24xx __iomem *reg = &ha->iobase->isp24;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_QLA82XX(ha))
+=======
+	if (IS_P3P_TYPE(ha))
+>>>>>>> v3.18
 =======
 	if (IS_P3P_TYPE(ha))
 >>>>>>> v3.18
@@ -2492,7 +2614,11 @@ qla2x00_write_optrom_data(struct scsi_qla_host *vha, uint8_t *buf,
 				rest_addr = 0xffff;
 				sec_mask = 0x10000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;   
+=======
+				break;
+>>>>>>> v3.18
 =======
 				break;
 >>>>>>> v3.18
@@ -2722,7 +2848,12 @@ qla25xx_read_optrom_data(struct scsi_qla_host *vha, uint8_t *buf,
 	struct qla_hw_data *ha = vha->hw;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_QLA25XX(ha) || IS_QLA81XX(ha))
+=======
+	if (IS_QLA25XX(ha) || IS_QLA81XX(ha) || IS_QLA83XX(ha) ||
+	    IS_QLA27XX(ha))
+>>>>>>> v3.18
 =======
 	if (IS_QLA25XX(ha) || IS_QLA81XX(ha) || IS_QLA83XX(ha) ||
 	    IS_QLA27XX(ha))
@@ -3008,7 +3139,10 @@ qla2x00_get_flash_version(scsi_qla_host_t *vha, void *mbuf)
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 qla82xx_get_flash_version(scsi_qla_host_t *vha, void *mbuf)
 {
 	int ret = QLA_SUCCESS;
@@ -3124,6 +3258,9 @@ qla82xx_get_flash_version(scsi_qla_host_t *vha, void *mbuf)
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 qla24xx_get_flash_version(scsi_qla_host_t *vha, void *mbuf)
 {
@@ -3136,7 +3273,11 @@ qla24xx_get_flash_version(scsi_qla_host_t *vha, void *mbuf)
 	struct qla_hw_data *ha = vha->hw;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_QLA82XX(ha))
+=======
+	if (IS_P3P_TYPE(ha))
+>>>>>>> v3.18
 =======
 	if (IS_P3P_TYPE(ha))
 >>>>>>> v3.18
@@ -3245,7 +3386,11 @@ qla24xx_get_flash_version(scsi_qla_host_t *vha, void *mbuf)
 		ha->fw_revision[3] = dcode[3];
 		ql_dbg(ql_dbg_init, vha, 0x0060,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    "Firmware revision %d.%d.%d.%d.\n",
+=======
+		    "Firmware revision %d.%d.%d (%x).\n",
+>>>>>>> v3.18
 =======
 		    "Firmware revision %d.%d.%d (%x).\n",
 >>>>>>> v3.18
@@ -3320,7 +3465,11 @@ qla2xxx_get_vpd_field(scsi_qla_host_t *vha, char *key, char *str, size_t size)
 
 	if (pos < end - len && *pos != 0x78)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return snprintf(str, size, "%.*s", len, pos + 3);
+=======
+		return scnprintf(str, size, "%.*s", len, pos + 3);
+>>>>>>> v3.18
 =======
 		return scnprintf(str, size, "%.*s", len, pos + 3);
 >>>>>>> v3.18

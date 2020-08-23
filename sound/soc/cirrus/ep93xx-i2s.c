@@ -22,6 +22,10 @@
 
 #include <sound/core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/dmaengine_pcm.h>
+>>>>>>> v3.18
 =======
 #include <sound/dmaengine_pcm.h>
 >>>>>>> v3.18
@@ -35,6 +39,11 @@
 #include <linux/platform_data/dma-ep93xx.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ep93xx-pcm.h"
+
+>>>>>>> v3.18
 =======
 #include "ep93xx-pcm.h"
 
@@ -70,18 +79,24 @@ struct ep93xx_i2s_info {
 	struct clk			*sclk;
 	struct clk			*lrclk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ep93xx_dma_data		*dma_data;
 	void __iomem			*regs;
 };
 
 struct ep93xx_dma_data ep93xx_i2s_dma_data[] = {
 =======
+=======
+>>>>>>> v3.18
 	void __iomem			*regs;
 	struct snd_dmaengine_dai_dma_data dma_params_rx;
 	struct snd_dmaengine_dai_dma_data dma_params_tx;
 };
 
 static struct ep93xx_dma_data ep93xx_i2s_dma_data[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[SNDRV_PCM_STREAM_PLAYBACK] = {
 		.name		= "i2s-pcm-out",
@@ -158,6 +173,7 @@ static void ep93xx_i2s_disable(struct ep93xx_i2s_info *info, int stream)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ep93xx_i2s_startup(struct snd_pcm_substream *substream,
 			      struct snd_soc_dai *dai)
 {
@@ -168,6 +184,8 @@ static int ep93xx_i2s_startup(struct snd_pcm_substream *substream,
 	snd_soc_dai_set_dma_data(cpu_dai, substream,
 				 &info->dma_data[substream->stream]);
 =======
+=======
+>>>>>>> v3.18
 static int ep93xx_i2s_dai_probe(struct snd_soc_dai *dai)
 {
 	struct ep93xx_i2s_info *info = snd_soc_dai_get_drvdata(dai);
@@ -180,6 +198,9 @@ static int ep93xx_i2s_dai_probe(struct snd_soc_dai *dai)
 	dai->playback_dma_data = &info->dma_params_tx;
 	dai->capture_dma_data = &info->dma_params_rx;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -372,7 +393,10 @@ static int ep93xx_i2s_resume(struct snd_soc_dai *dai)
 
 static const struct snd_soc_dai_ops ep93xx_i2s_dai_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.startup	= ep93xx_i2s_startup,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.shutdown	= ep93xx_i2s_shutdown,
@@ -386,6 +410,10 @@ static const struct snd_soc_dai_ops ep93xx_i2s_dai_ops = {
 static struct snd_soc_dai_driver ep93xx_i2s_dai = {
 	.symmetric_rates= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.probe		= ep93xx_i2s_dai_probe,
+>>>>>>> v3.18
 =======
 	.probe		= ep93xx_i2s_dai_probe,
 >>>>>>> v3.18
@@ -422,9 +450,12 @@ static int ep93xx_i2s_probe(struct platform_device *pdev)
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	info->regs = devm_ioremap_resource(&pdev->dev, res);
@@ -451,7 +482,10 @@ static int ep93xx_i2s_probe(struct platform_device *pdev)
 
 	dev_set_drvdata(&pdev->dev, info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->dma_data = ep93xx_i2s_dma_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -461,11 +495,14 @@ static int ep93xx_i2s_probe(struct platform_device *pdev)
 		goto fail_put_lrclk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 fail_put_lrclk:
 	dev_set_drvdata(&pdev->dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	err = devm_ep93xx_pcm_platform_register(&pdev->dev);
 	if (err)
 		goto fail_unregister;
@@ -475,6 +512,9 @@ fail_put_lrclk:
 fail_unregister:
 	snd_soc_unregister_component(&pdev->dev);
 fail_put_lrclk:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk_put(info->lrclk);
 fail_put_sclk:
@@ -491,7 +531,10 @@ static int ep93xx_i2s_remove(struct platform_device *pdev)
 
 	snd_soc_unregister_component(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clk_put(info->lrclk);

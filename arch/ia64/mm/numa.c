@@ -87,7 +87,11 @@ int __meminit __early_pfn_to_nid(unsigned long pfn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit numa_clear_node(int cpu)
+=======
+void numa_clear_node(int cpu)
+>>>>>>> v3.18
 =======
 void numa_clear_node(int cpu)
 >>>>>>> v3.18

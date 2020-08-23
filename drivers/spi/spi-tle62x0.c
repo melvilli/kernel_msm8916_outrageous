@@ -53,8 +53,12 @@ static inline int tle62x0_write(struct tle62x0_state *st)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&st->us->dev, "buff %02x,%02x,%02x\n",
 		buff[0], buff[1], buff[2]);
+=======
+	dev_dbg(&st->us->dev, "buff %3ph\n", buff);
+>>>>>>> v3.18
 =======
 	dev_dbg(&st->us->dev, "buff %3ph\n", buff);
 >>>>>>> v3.18
@@ -252,7 +256,11 @@ static int tle62x0_probe(struct spi_device *spi)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = spi->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -263,10 +271,15 @@ static int tle62x0_probe(struct spi_device *spi)
 
 	st = kzalloc(sizeof(struct tle62x0_state), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (st == NULL) {
 		dev_err(&spi->dev, "no memory for device state\n");
 		return -ENOMEM;
 	}
+=======
+	if (st == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (st == NULL)
 		return -ENOMEM;

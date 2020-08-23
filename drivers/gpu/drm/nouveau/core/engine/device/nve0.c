@@ -27,6 +27,10 @@
 #include <subdev/gpio.h>
 #include <subdev/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <subdev/fuse.h>
+>>>>>>> v3.18
 =======
 #include <subdev/fuse.h>
 >>>>>>> v3.18
@@ -38,7 +42,11 @@
 #include <subdev/timer.h>
 #include <subdev/fb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/ltcg.h>
+=======
+#include <subdev/ltc.h>
+>>>>>>> v3.18
 =======
 #include <subdev/ltc.h>
 >>>>>>> v3.18
@@ -47,6 +55,11 @@
 #include <subdev/vm.h>
 #include <subdev/bar.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <subdev/pwr.h>
+#include <subdev/volt.h>
+>>>>>>> v3.18
 =======
 #include <subdev/pwr.h>
 #include <subdev/volt.h>
@@ -63,6 +76,10 @@
 #include <engine/vp.h>
 #include <engine/ppp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <engine/perfmon.h>
+>>>>>>> v3.18
 =======
 #include <engine/perfmon.h>
 >>>>>>> v3.18
@@ -74,6 +91,7 @@ nve0_identify(struct nouveau_device *device)
 	case 0xe4:
 		device->cname = "GK104";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nve0_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nvd0_i2c_oclass;
@@ -101,6 +119,8 @@ nve0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_VP     ] = &nve0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_PPP    ] = &nvc0_ppp_oclass;
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nve0_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  nve0_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -131,11 +151,15 @@ nve0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_VP     ] = &nve0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_PPP    ] = &nvc0_ppp_oclass;
 		device->oclass[NVDEV_ENGINE_PERFMON] = &nve0_perfmon_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case 0xe7:
 		device->cname = "GK107";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nve0_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nvd0_i2c_oclass;
@@ -163,6 +187,8 @@ nve0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_VP     ] = &nve0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_PPP    ] = &nvc0_ppp_oclass;
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nve0_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  nve0_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -193,11 +219,15 @@ nve0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_VP     ] = &nve0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_PPP    ] = &nvc0_ppp_oclass;
 		device->oclass[NVDEV_ENGINE_PERFMON] = &nve0_perfmon_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case 0xe6:
 		device->cname = "GK106";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nve0_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nvd0_i2c_oclass;
@@ -225,6 +255,8 @@ nve0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_VP     ] = &nve0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_PPP    ] = &nvc0_ppp_oclass;
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nve0_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  nve0_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -275,11 +307,15 @@ nve0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_GR     ] =  gk20a_graph_oclass;
 		device->oclass[NVDEV_ENGINE_COPY2  ] = &nve0_copy2_oclass;
 		device->oclass[NVDEV_ENGINE_PERFMON] = &nve0_perfmon_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case 0xf0:
 		device->cname = "GK110";
 		device->oclass[NVDEV_SUBDEV_VBIOS  ] = &nouveau_bios_oclass;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		device->oclass[NVDEV_SUBDEV_GPIO   ] = &nve0_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] = &nvd0_i2c_oclass;
@@ -305,6 +341,8 @@ nve0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_DISP   ] = &nvf0_disp_oclass;
 #if 0
 =======
+=======
+>>>>>>> v3.18
 		device->oclass[NVDEV_SUBDEV_GPIO   ] =  nve0_gpio_oclass;
 		device->oclass[NVDEV_SUBDEV_I2C    ] =  nve0_i2c_oclass;
 		device->oclass[NVDEV_SUBDEV_FUSE   ] = &gf100_fuse_oclass;
@@ -396,6 +434,9 @@ nve0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_SW     ] =  nvc0_software_oclass;
 		device->oclass[NVDEV_ENGINE_GR     ] =  nv108_graph_oclass;
 		device->oclass[NVDEV_ENGINE_DISP   ] =  nvf0_disp_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		device->oclass[NVDEV_ENGINE_COPY0  ] = &nve0_copy0_oclass;
 		device->oclass[NVDEV_ENGINE_COPY1  ] = &nve0_copy1_oclass;
@@ -404,7 +445,10 @@ nve0_identify(struct nouveau_device *device)
 		device->oclass[NVDEV_ENGINE_VP     ] = &nve0_vp_oclass;
 		device->oclass[NVDEV_ENGINE_PPP    ] = &nvc0_ppp_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;

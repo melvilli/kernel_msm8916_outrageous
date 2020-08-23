@@ -21,6 +21,10 @@
 #include <linux/spinlock.h>
 #include <linux/kallsyms.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/time.h>
+>>>>>>> v3.18
 =======
 #include <linux/time.h>
 >>>>>>> v3.18
@@ -37,7 +41,10 @@ static fnic_trace_dbg_t fnic_trace_entries;
 int fnic_tracing_enabled = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* static char *fnic_fc_ctlr_trace_buf_p; */
 
 static int fc_trace_max_entries;
@@ -48,6 +55,9 @@ int fnic_fc_trace_cleared = 1;
 static DEFINE_SPINLOCK(fnic_fc_trace_lock);
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * fnic_trace_get_buf - Give buffer pointer to user to fill up trace information
@@ -207,7 +217,10 @@ int fnic_get_trace_data(fnic_dbgfs_t *fnic_dbgfs_prt)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * fnic_get_stats_data - Copy fnic stats buffer to a memory file
  * @fnic_dbgfs_t: pointer to debugfs fnic stats buffer
  *
@@ -393,6 +406,9 @@ int fnic_get_stats_data(struct stats_debug_info *debug,
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * fnic_trace_buf_init - Initialize fnic trace buffer logging facility
  *
@@ -449,15 +465,21 @@ int fnic_trace_buf_init(void)
 	err = fnic_trace_debugfs_init();
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "Failed to initialize debugfs for tracing\n");
 		goto err_fnic_trace_debugfs_init;
 	}
 	printk(KERN_INFO PFX "Successfully Initialized Trace Buffer\n");
 =======
+=======
+>>>>>>> v3.18
 		pr_err("fnic: Failed to initialize debugfs for tracing\n");
 		goto err_fnic_trace_debugfs_init;
 	}
 	pr_info("fnic: Successfully Initialized Trace Buffer\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 err_fnic_trace_debugfs_init:
@@ -484,7 +506,10 @@ void fnic_trace_free(void)
 	printk(KERN_INFO PFX "Successfully Freed Trace Buffer\n");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * fnic_fc_ctlr_trace_buf_init -
@@ -795,4 +820,7 @@ void copy_and_format_trace_data(struct fc_trace_hdr *tdata,
 		max_size - len, "\n");
 	*orig_len = len;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

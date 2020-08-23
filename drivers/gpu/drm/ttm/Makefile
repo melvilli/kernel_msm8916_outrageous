@@ -6,11 +6,15 @@ ttm-y := ttm_agp_backend.o ttm_memory.o ttm_tt.o ttm_bo.o \
 	ttm_bo_util.o ttm_bo_vm.o ttm_module.o \
 	ttm_object.o ttm_lock.o ttm_execbuf_util.o ttm_page_alloc.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_bo_manager.o
 
 ifeq ($(CONFIG_SWIOTLB),y)
 ttm-y += ttm_page_alloc_dma.o
 endif
+=======
+	ttm_bo_manager.o ttm_page_alloc_dma.o
+>>>>>>> v3.18
 =======
 	ttm_bo_manager.o ttm_page_alloc_dma.o
 >>>>>>> v3.18

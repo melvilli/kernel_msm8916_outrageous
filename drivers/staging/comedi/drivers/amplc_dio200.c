@@ -18,11 +18,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -201,8 +204,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/slab.h>
 
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -215,6 +222,7 @@
  */
 static const struct dio200_board dio200_isa_boards[] = {
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.name = "pc212e",
 		.bustype = isa_bustype,
@@ -274,6 +282,8 @@ static const struct dio200_board dio200_isa_boards[] = {
 			.has_int_sce = true,
 		},
 =======
+=======
+>>>>>>> v3.18
 		.name		= "pc212e",
 		.n_subdevs	= 6,
 		.sdtype		= {
@@ -315,12 +325,16 @@ static const struct dio200_board dio200_isa_boards[] = {
 		},
 		.sdinfo		= { 0x00, 0x08, 0x10, 0x3f },
 		.has_int_sce = true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
 
 static int dio200_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct dio200_board *thisboard = comedi_board(dev);
 	struct dio200_private *devpriv;
@@ -357,6 +371,8 @@ static struct comedi_driver amplc_dio200_driver = {
 	.offset = sizeof(struct dio200_board),
 	.num_names = ARRAY_SIZE(dio200_isa_boards),
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = comedi_request_region(dev, it->options[0], 0x20);
@@ -374,6 +390,9 @@ static struct comedi_driver amplc_dio200_driver = {
 	.board_name	= &dio200_isa_boards[0].name,
 	.offset		= sizeof(struct dio200_board),
 	.num_names	= ARRAY_SIZE(dio200_isa_boards),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 module_comedi_driver(amplc_dio200_driver);

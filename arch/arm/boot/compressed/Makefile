@@ -28,7 +28,11 @@ ifeq ($(CONFIG_DEBUG_UNCOMPRESS),y)
 OBJS	+= debug.o
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 FONTC	= $(srctree)/drivers/video/console/font_acorn_8x8.c
+=======
+FONTC	= $(srctree)/lib/fonts/font_acorn_8x8.c
+>>>>>>> v3.18
 =======
 FONTC	= $(srctree)/lib/fonts/font_acorn_8x8.c
 >>>>>>> v3.18
@@ -42,6 +46,11 @@ OBJS		+= hyp-stub.o
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+GCOV_PROFILE		:= n
+
+>>>>>>> v3.18
 =======
 GCOV_PROFILE		:= n
 
@@ -54,10 +63,13 @@ OBJS		+= ll_char_wr.o font.o
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifeq ($(CONFIG_ARCH_SHARK),y)
 OBJS		+= head-shark.o ofw-shark.o
 endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ifeq ($(CONFIG_ARCH_SA1100),y)
@@ -81,7 +93,11 @@ endif
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifeq ($(CONFIG_ARCH_SHMOBILE),y)
+=======
+ifeq ($(CONFIG_ARCH_SHMOBILE_LEGACY),y)
+>>>>>>> v3.18
 =======
 ifeq ($(CONFIG_ARCH_SHMOBILE_LEGACY),y)
 >>>>>>> v3.18
@@ -102,7 +118,11 @@ ZBSSADDR	:= ALIGN(8)
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SEDFLAGS	= s/TEXT_START/$(ZTEXTADDR)/;s/BSS_START/$(ZBSSADDR)/
+=======
+CPPFLAGS_vmlinux.lds := -DTEXT_START="$(ZTEXTADDR)" -DBSS_START="$(ZBSSADDR)"
+>>>>>>> v3.18
 =======
 CPPFLAGS_vmlinux.lds := -DTEXT_START="$(ZTEXTADDR)" -DBSS_START="$(ZBSSADDR)"
 >>>>>>> v3.18
@@ -112,6 +132,10 @@ suffix_$(CONFIG_KERNEL_LZO)  = lzo
 suffix_$(CONFIG_KERNEL_LZMA) = lzma
 suffix_$(CONFIG_KERNEL_XZ)   = xzkern
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+suffix_$(CONFIG_KERNEL_LZ4)  = lz4
+>>>>>>> v3.18
 =======
 suffix_$(CONFIG_KERNEL_LZ4)  = lz4
 >>>>>>> v3.18
@@ -136,6 +160,7 @@ endif
 targets       := vmlinux vmlinux.lds \
 		 piggy.$(suffix_y) piggy.$(suffix_y).o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 lib1funcs.o lib1funcs.S ashldi3.o ashldi3.S \
 		 font.o font.c head.o misc.o $(OBJS)
 
@@ -143,12 +168,17 @@ targets       := vmlinux vmlinux.lds \
 extra-y       += piggy.gzip piggy.lzo piggy.lzma piggy.xzkern \
 		 lib1funcs.S ashldi3.S $(libfdt) $(libfdt_hdrs) \
 =======
+=======
+>>>>>>> v3.18
 		 lib1funcs.o lib1funcs.S ashldi3.o ashldi3.S bswapsdi2.o \
 		 bswapsdi2.S font.o font.c head.o misc.o $(OBJS)
 
 # Make sure files are removed during clean
 extra-y       += piggy.gzip piggy.lzo piggy.lzma piggy.xzkern piggy.lz4 \
 		 lib1funcs.S ashldi3.S bswapsdi2.S $(libfdt) $(libfdt_hdrs) \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 hyp-stub.S
 
@@ -193,13 +223,19 @@ $(obj)/ashldi3.S: $(srctree)/arch/$(SRCARCH)/lib/ashldi3.S
 	$(call cmd,shipped)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # For __bswapsi2, __bswapdi2
 bswapsdi2 = $(obj)/bswapsdi2.o
 
 $(obj)/bswapsdi2.S: $(srctree)/arch/$(SRCARCH)/lib/bswapsdi2.S
 	$(call cmd,shipped)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # We need to prevent any GOTOFF relocs being used with references
 # to symbols in the .bss section since we cannot relocate them
@@ -223,7 +259,12 @@ fi
 
 $(obj)/vmlinux: $(obj)/vmlinux.lds $(obj)/$(HEAD) $(obj)/piggy.$(suffix_y).o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$(addprefix $(obj)/, $(OBJS)) $(lib1funcs) $(ashldi3) FORCE
+=======
+		$(addprefix $(obj)/, $(OBJS)) $(lib1funcs) $(ashldi3) \
+		$(bswapsdi2) FORCE
+>>>>>>> v3.18
 =======
 		$(addprefix $(obj)/, $(OBJS)) $(lib1funcs) $(ashldi3) \
 		$(bswapsdi2) FORCE
@@ -243,9 +284,12 @@ $(obj)/font.c: $(FONTC)
 	$(call cmd,shipped)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $(obj)/vmlinux.lds: $(obj)/vmlinux.lds.in arch/arm/boot/Makefile $(KCONFIG_CONFIG)
 	@sed "$(SEDFLAGS)" < $< > $@
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 $(obj)/hyp-stub.S: $(srctree)/arch/$(SRCARCH)/kernel/hyp-stub.S

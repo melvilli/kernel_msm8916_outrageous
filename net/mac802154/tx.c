@@ -90,8 +90,12 @@ netdev_tx_t mac802154_tx(struct mac802154_priv *priv, struct sk_buff *skb,
 	if (!(priv->phy->channels_supported[page] & (1 << chan))) {
 		WARN_ON(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree_skb(skb);
 		return NETDEV_TX_OK;
+=======
+		goto err_tx;
+>>>>>>> v3.18
 =======
 		goto err_tx;
 >>>>>>> v3.18
@@ -103,6 +107,10 @@ netdev_tx_t mac802154_tx(struct mac802154_priv *priv, struct sk_buff *skb,
 		u16 crc = crc_ccitt(0, skb->data, skb->len);
 		u8 *data = skb_put(skb, 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -111,6 +119,7 @@ netdev_tx_t mac802154_tx(struct mac802154_priv *priv, struct sk_buff *skb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb_cow_head(skb, priv->hw.extra_tx_headroom)) {
 		kfree_skb(skb);
 		return NETDEV_TX_OK;
@@ -118,10 +127,15 @@ netdev_tx_t mac802154_tx(struct mac802154_priv *priv, struct sk_buff *skb,
 
 	work = kzalloc(sizeof(struct xmit_work), GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 	if (skb_cow_head(skb, priv->hw.extra_tx_headroom))
 		goto err_tx;
 
 	work = kzalloc(sizeof(*work), GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!work) {
 		kfree_skb(skb);
@@ -144,10 +158,16 @@ netdev_tx_t mac802154_tx(struct mac802154_priv *priv, struct sk_buff *skb,
 
 	return NETDEV_TX_OK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 err_tx:
 	kfree_skb(skb);
 	return NETDEV_TX_OK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

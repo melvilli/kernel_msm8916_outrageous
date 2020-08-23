@@ -36,12 +36,18 @@ enum pstore_type_id {
 	PSTORE_TYPE_CONSOLE	= 2,
 	PSTORE_TYPE_FTRACE	= 3,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSTORE_TYPE_PMSG	= 4, /* Backport: 7 in upstream 3.19.0-rc3 */
 =======
+=======
+>>>>>>> v3.18
 	/* PPC64 partition types */
 	PSTORE_TYPE_PPC_RTAS	= 4,
 	PSTORE_TYPE_PPC_OF	= 5,
 	PSTORE_TYPE_PPC_COMMON	= 6,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	PSTORE_TYPE_UNKNOWN	= 255
 };
@@ -56,6 +62,10 @@ struct pstore_info {
 	size_t		bufsize;
 	struct mutex	read_mutex;	/* serialize open/read/close */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int		flags;
+>>>>>>> v3.18
 =======
 	int		flags;
 >>>>>>> v3.18
@@ -63,6 +73,7 @@ struct pstore_info {
 	int		(*close)(struct pstore_info *psi);
 	ssize_t		(*read)(u64 *id, enum pstore_type_id *type,
 			int *count, struct timespec *time, char **buf,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			struct pstore_info *psi);
 	int		(*write)(enum pstore_type_id type,
@@ -74,6 +85,8 @@ struct pstore_info {
 			unsigned int part, const char *buf, size_t size,
 			struct pstore_info *psi);
 =======
+=======
+>>>>>>> v3.18
 			bool *compressed, struct pstore_info *psi);
 	int		(*write)(enum pstore_type_id type,
 			enum kmsg_dump_reason reason, u64 *id,
@@ -83,6 +96,9 @@ struct pstore_info {
 			enum kmsg_dump_reason reason, u64 *id,
 			unsigned int part, const char *buf, bool compressed,
 			size_t size, struct pstore_info *psi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int		(*erase)(enum pstore_type_id type, u64 id,
 			int count, struct timespec time,
@@ -91,6 +107,11 @@ struct pstore_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	PSTORE_FLAGS_FRAGILE	1
+
+>>>>>>> v3.18
 =======
 #define	PSTORE_FLAGS_FRAGILE	1
 

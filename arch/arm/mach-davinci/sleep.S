@@ -214,7 +214,11 @@ ddr2clk_stop_done:
 	bne	ddr2clk_stop_done
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

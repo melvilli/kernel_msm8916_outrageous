@@ -438,6 +438,10 @@ static ssize_t driver_state_read(struct file *file, char __user *user_buf,
 	ssize_t ret;
 	char *buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct wl12xx_vif *wlvif;
+>>>>>>> v3.18
 =======
 	struct wl12xx_vif *wlvif;
 >>>>>>> v3.18
@@ -455,11 +459,17 @@ static ssize_t driver_state_read(struct file *file, char __user *user_buf,
 			  #x " = " fmt "\n", wl->x))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DRIVER_STATE_PRINT_GENERIC(x, fmt, args...)   \
 	(res += scnprintf(buf + res, DRIVER_STATE_BUF_LEN - res,\
 			  #x " = " fmt "\n", args))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DRIVER_STATE_PRINT_LONG(x) DRIVER_STATE_PRINT(x, "%ld")
 #define DRIVER_STATE_PRINT_INT(x)  DRIVER_STATE_PRINT(x, "%d")
@@ -468,7 +478,10 @@ static ssize_t driver_state_read(struct file *file, char __user *user_buf,
 #define DRIVER_STATE_PRINT_HEX(x)  DRIVER_STATE_PRINT(x, "0x%x")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	wl12xx_for_each_wlvif_sta(wl, wlvif) {
 		if (!test_bit(WLVIF_FLAG_STA_ASSOCIATED, &wlvif->flags))
 			continue;
@@ -481,6 +494,9 @@ static ssize_t driver_state_read(struct file *file, char __user *user_buf,
 		DRIVER_STATE_PRINT_GENERIC(channel, "%d (%s)", wlvif->channel,
 					   wlvif->p2p ? "P2P-GO" : "AP");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	DRIVER_STATE_PRINT_INT(tx_blocks_available);
 	DRIVER_STATE_PRINT_INT(tx_allocated_blocks);
@@ -501,7 +517,10 @@ static ssize_t driver_state_read(struct file *file, char __user *user_buf,
 	DRIVER_STATE_PRINT_INT(rx_counter);
 	DRIVER_STATE_PRINT_INT(state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRIVER_STATE_PRINT_INT(channel);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	DRIVER_STATE_PRINT_INT(band);
@@ -510,7 +529,11 @@ static ssize_t driver_state_read(struct file *file, char __user *user_buf,
 	DRIVER_STATE_PRINT_INT(enable_11a);
 	DRIVER_STATE_PRINT_INT(noise);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRIVER_STATE_PRINT_HEX(ap_fw_ps_map);
+=======
+	DRIVER_STATE_PRINT_LHEX(ap_fw_ps_map);
+>>>>>>> v3.18
 =======
 	DRIVER_STATE_PRINT_LHEX(ap_fw_ps_map);
 >>>>>>> v3.18
@@ -1090,7 +1113,11 @@ static ssize_t dev_mem_read(struct file *file,
 
 	memset(&part, 0, sizeof(part));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	part.mem.start = file->f_pos;
+=======
+	part.mem.start = *ppos;
+>>>>>>> v3.18
 =======
 	part.mem.start = *ppos;
 >>>>>>> v3.18
@@ -1175,7 +1202,11 @@ static ssize_t dev_mem_write(struct file *file, const char __user *user_buf,
 
 	memset(&part, 0, sizeof(part));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	part.mem.start = file->f_pos;
+=======
+	part.mem.start = *ppos;
+>>>>>>> v3.18
 =======
 	part.mem.start = *ppos;
 >>>>>>> v3.18

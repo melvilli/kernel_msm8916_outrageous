@@ -31,7 +31,10 @@
 #define HAINAN_GB_ADDR_CONFIG_GOLDEN        0x02010001
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SI_MAX_SH_GPRS           256
 #define SI_MAX_TEMP_GPRS         16
 #define SI_MAX_SH_THREADS        256
@@ -125,6 +128,9 @@
 #define	CG_SPLL_AUTOSCALE_CNTL				0x62c
 #       define AUTOSCALE_ON_SS_CLEAR                    (1 << 9)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* discrete uvd clocks */
 #define	CG_UPLL_FUNC_CNTL				0x634
@@ -156,7 +162,10 @@
 #	define SSEN_MASK				0x00000001
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	MPLL_BYPASSCLK_SEL				0x65c
 #	define MPLL_CLKOUT_SEL(x)			((x) << 8)
 #	define MPLL_CLKOUT_SEL_MASK			0xFF00
@@ -196,6 +205,9 @@
 #define 	THERM_INT_MASK_HIGH			(1 << 24)
 #define 	THERM_INT_MASK_LOW			(1 << 25)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	CG_MULT_THERMAL_STATUS					0x714
 #define		ASIC_MAX_TEMP(x)				((x) << 0)
@@ -205,6 +217,7 @@
 #define		CTF_TEMP_MASK					0x0003fe00
 #define		CTF_TEMP_SHIFT					9
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SI_MAX_SH_GPRS           256
 #define SI_MAX_TEMP_GPRS         16
@@ -232,6 +245,8 @@
 #define CG_CLKPIN_CNTL_2                                  0x664
 #       define MUX_TCLK_TO_XCLK                           (1 << 8)
 =======
+=======
+>>>>>>> v3.18
 #define GENERAL_PWRMGT                                  0x780
 #       define GLOBAL_PWRMGT_EN                         (1 << 0)
 #       define STATIC_PM_EN                             (1 << 1)
@@ -315,6 +330,9 @@
 #define	CG_CAC_CTRL					0x8b8
 #	define CAC_WINDOW(x)				((x) << 0)
 #	define CAC_WINDOW_MASK				0x00ffffff
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DMIF_ADDR_CONFIG  				0xBD4
@@ -397,6 +415,10 @@
 #define		WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT		(1 << 18)
 #define		WRITE_PROTECTION_FAULT_ENABLE_DEFAULT		(1 << 19)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define		PAGE_TABLE_BLOCK_SIZE(x)			(((x) & 0xF) << 24)
+>>>>>>> v3.18
 =======
 #define		PAGE_TABLE_BLOCK_SIZE(x)			(((x) & 0xF) << 24)
 >>>>>>> v3.18
@@ -415,7 +437,10 @@
 #define	VM_CONTEXT1_PROTECTION_FAULT_ADDR		0x14FC
 #define	VM_CONTEXT1_PROTECTION_FAULT_STATUS		0x14DC
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define		PROTECTIONS_MASK			(0xf << 0)
 #define		PROTECTIONS_SHIFT			0
 		/* bit 0: range
@@ -430,6 +455,9 @@
 #define		MEMORY_CLIENT_RW_SHIFT			24
 #define		FAULT_VMID_MASK				(0xf << 25)
 #define		FAULT_VMID_SHIFT			25
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define VM_INVALIDATE_REQUEST				0x1478
@@ -453,11 +481,17 @@
 #define	VM_CONTEXT1_PAGE_TABLE_END_ADDR			0x1580
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define VM_L2_CG           				0x15c0
 #define		MC_CG_ENABLE				(1 << 18)
 #define		MC_LS_ENABLE				(1 << 19)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MC_SHARED_CHMAP						0x2004
 #define		NOOFCHAN_SHIFT					12
@@ -485,7 +519,10 @@
 #define MC_SHARED_BLACKOUT_CNTL           		0x20ac
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MC_HUB_MISC_HUB_CG           			0x20b8
 #define MC_HUB_MISC_VM_CG           			0x20bc
 
@@ -497,6 +534,9 @@
 #define MC_CITF_MISC_WR_CG           			0x264c
 #define MC_CITF_MISC_VM_CG           			0x2650
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	MC_ARB_RAMCFG					0x2760
 #define		NOOFBANK_SHIFT					0
@@ -514,7 +554,10 @@
 #define		NOOFGROUPS_MASK					0x00001000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	MC_ARB_DRAM_TIMING				0x2774
 #define	MC_ARB_DRAM_TIMING2				0x2778
 
@@ -532,6 +575,9 @@
 #define		STATE3_MASK				(0x1f << 15)
 #define		STATE3_SHIFT				15
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	MC_SEQ_TRAIN_WAKEUP_CNTL			0x28e8
 #define		TRAIN_DONE_D0      			(1 << 30)
@@ -541,6 +587,10 @@
 #define		RUN_MASK      				(1 << 0)
 #define MC_SEQ_SUP_PGM           			0x28cc
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MC_PMG_AUTO_CMD           			0x28d0
+>>>>>>> v3.18
 =======
 #define MC_PMG_AUTO_CMD           			0x28d0
 >>>>>>> v3.18
@@ -549,11 +599,14 @@
 #define		MEM_FALL_OUT_CMD      			(1 << 8)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MC_SEQ_IO_DEBUG_INDEX           		0x2a44
 #define MC_SEQ_IO_DEBUG_DATA           			0x2a48
 
 #define	HDP_HOST_PATH_CNTL				0x2C00
 =======
+=======
+>>>>>>> v3.18
 #define MC_SEQ_RAS_TIMING                               0x28a0
 #define MC_SEQ_CAS_TIMING                               0x28a4
 #define MC_SEQ_MISC_TIMING                              0x28a8
@@ -652,6 +705,9 @@
 
 #define	HDP_HOST_PATH_CNTL				0x2C00
 #define 	CLOCK_GATING_DIS			(1 << 23)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	HDP_NONSURFACE_BASE				0x2C04
 #define	HDP_NONSURFACE_INFO				0x2C08
@@ -661,11 +717,17 @@
 #define HDP_MISC_CNTL					0x2F4C
 #define 	HDP_FLUSH_INVALIDATE_CACHE			(1 << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define HDP_MEM_POWER_LS				0x2F50
 #define 	HDP_LS_ENABLE				(1 << 0)
 
 #define ATC_MISC_CG           				0x3350
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define IH_RB_CNTL                                        0x3e00
@@ -713,7 +775,10 @@
 #define HDP_REG_COHERENCY_FLUSH_CNTL			0x54A0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* DCE6 ELD audio interface */
 #define AZ_F0_CODEC_ENDPOINT_INDEX                       0x5E00
 #       define AZ_ENDPOINT_REG_INDEX(x)                  (((x) & 0xff) << 0)
@@ -807,6 +872,9 @@
 #define		PORT_CONNECTIVITY_MASK				(3 << 30)
 #define		PORT_CONNECTIVITY_SHIFT				30
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	DC_LB_MEMORY_SPLIT					0x6b0c
 #define		DC_LB_MEMORY_CONFIG(x)				((x) << 20)
@@ -923,10 +991,13 @@
 #       define DC_HPDx_EN                                 (1 << 28)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 0x6e98, 0x7a98, 0x10698, 0x11298, 0x11e98, 0x12a98 */
 #define CRTC_STATUS_FRAME_COUNT                         0x6e98
 
 =======
+=======
+>>>>>>> v3.18
 #define DPG_PIPE_STUTTER_CONTROL                          0x6cd4
 #       define STUTTER_ENABLE                             (1 << 0)
 
@@ -944,6 +1015,9 @@
  * 5 = stream5
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	GRBM_CNTL					0x8000
 #define		GRBM_READ_TIMEOUT(x)				((x) << 0)
@@ -1118,7 +1192,10 @@
 #define	SQC_CACHES					0x8C08
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SQ_POWER_THROTTLE                               0x8e58
 #define		MIN_POWER(x)				((x) << 0)
 #define		MIN_POWER_MASK				(0x3fff << 0)
@@ -1137,6 +1214,9 @@
 #define		LTI_RATIO_MASK				(0xf << 27)
 #define		LTI_RATIO_SHIFT				27
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	SX_DEBUG_1					0x9060
 
@@ -1156,12 +1236,18 @@
 #define		TCC_DISABLE_MASK				0xFFFF0000
 #define		TCC_DISABLE_SHIFT				16
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	CGTS_SM_CTRL_REG				0x9150
 #define		OVERRIDE				(1 << 21)
 #define		LS_OVERRIDE				(1 << 22)
 
 #define	SPI_LB_CU_MASK					0x9354
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	TA_CNTL_AUX					0x9508
@@ -1253,6 +1339,11 @@
 #define	CB_PERFCOUNTER3_SELECT1				0x9a3c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	CB_CGTT_SCLK_CTRL				0x9a60
+
+>>>>>>> v3.18
 =======
 #define	CB_CGTT_SCLK_CTRL				0x9a60
 
@@ -1315,6 +1406,12 @@
 #       define CP_RINGID0_INT_STAT                      (1 << 31)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	CP_MEM_SLP_CNTL					0xC1E4
+#       define CP_MEM_LS_EN                             (1 << 0)
+
+>>>>>>> v3.18
 =======
 #define	CP_MEM_SLP_CNTL					0xC1E4
 #       define CP_MEM_LS_EN                             (1 << 0)
@@ -1328,6 +1425,10 @@
 #define RLC_RL_SIZE                                       0xC308
 #define RLC_LB_CNTL                                       0xC30C
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#       define LOAD_BALANCE_ENABLE                        (1 << 0)
+>>>>>>> v3.18
 =======
 #       define LOAD_BALANCE_ENABLE                        (1 << 0)
 >>>>>>> v3.18
@@ -1346,7 +1447,10 @@
 #define RLC_MC_CNTL                                       0xC344
 #define RLC_UCODE_CNTL                                    0xC348
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define RLC_STAT                                          0xC34C
 #       define RLC_BUSY_STATUS                            (1 << 0)
 #       define GFX_POWER_STATUS                           (1 << 1)
@@ -1397,6 +1501,9 @@
 #define	DB_RENDER_CONTROL				0x28000
 
 #define DB_DEPTH_INFO                                   0x2803c
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PA_SC_RASTER_CONFIG                             0x28350
@@ -1445,7 +1552,10 @@
 #       define THREAD_TRACE_FINISH                      (55 << 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* PIF PHY0 registers idx/data 0x8/0xc */
 #define PB0_PIF_CNTL                                      0x10
 #       define LS2_EXIT_TIME(x)                           ((x) << 17)
@@ -1587,6 +1697,9 @@
 #       define LC_REDO_EQ                                 (1 << 5)
 #       define LC_SET_QUIESCE                             (1 << 13)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * UVD
@@ -1598,7 +1711,10 @@
 #define UVD_RBC_RB_WPTR					0xF694
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	UVD_CGC_CTRL					0xF4B0
 #	define DCM					(1 << 0)
 #	define CG_DT(x)					((x) << 2)
@@ -1614,6 +1730,9 @@
 #	define G_DIV_ID(x)				((x) << 2)
 #	define G_DIV_ID_MASK				(0x7 << 2)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * PM4
@@ -1860,7 +1979,10 @@
 #define DMA_TILING_CONFIG  				  0xd0b8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	DMA_POWER_CNTL					0xd0bc
 #       define MEM_POWER_OVERRIDE                       (1 << 8)
 #define	DMA_CLK_CTRL					0xd0c0
@@ -1870,6 +1992,9 @@
 #define	DMA_PGFSM_CONFIG				0xd0d8
 #define	DMA_PGFSM_WRITE					0xd0dc
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DMA_PACKET(cmd, b, t, s, n)	((((cmd) & 0xF) << 28) |	\
 					 (((b) & 0x1) << 26) |		\
@@ -1898,7 +2023,10 @@
 #define	DMA_PACKET_NOP					  0xf
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define VCE_STATUS					0x20004
 #define VCE_VCPU_CNTL					0x20014
 #define		VCE_CLK_EN				(1 << 0)
@@ -1946,5 +2074,8 @@
 #define VCE_CMD_IB_AUTO					0x00000005
 #define VCE_CMD_SEMAPHORE				0x00000006
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

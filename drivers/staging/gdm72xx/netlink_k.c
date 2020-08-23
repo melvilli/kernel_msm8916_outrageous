@@ -57,7 +57,11 @@ static void netlink_rcv_cb(struct sk_buff *skb)
 
 		if (skb->len < nlh->nlmsg_len ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nlh->nlmsg_len > ND_MAX_MSG_LEN) {
+=======
+		    nlh->nlmsg_len > ND_MAX_MSG_LEN) {
+>>>>>>> v3.18
 =======
 		    nlh->nlmsg_len > ND_MAX_MSG_LEN) {
 >>>>>>> v3.18
@@ -80,8 +84,14 @@ static void netlink_rcv_cb(struct sk_buff *skb)
 					   "dev_get_by_index(%d) is not found.\n",
 					   ifindex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
 			netdev_err(skb->dev, "Unregistered Callback\n");
+=======
+		} else {
+			netdev_err(skb->dev, "Unregistered Callback\n");
+		}
+>>>>>>> v3.18
 =======
 		} else {
 			netdev_err(skb->dev, "Unregistered Callback\n");
@@ -99,7 +109,11 @@ static void netlink_rcv(struct sk_buff *skb)
 
 struct sock *netlink_init(int unit, void (*cb)(struct net_device *dev, u16 type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						void *msg, int len))
+=======
+					       void *msg, int len))
+>>>>>>> v3.18
 =======
 					       void *msg, int len))
 >>>>>>> v3.18
@@ -161,6 +175,7 @@ int netlink_send(struct sock *sock, int group, u16 type, void *msg, int len)
 	if (!ret)
 		return len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else {
 		if (ret != -ESRCH) {
 			pr_err("netlink_broadcast g=%d, t=%d, l=%d, r=%d\n",
@@ -169,11 +184,16 @@ int netlink_send(struct sock *sock, int group, u16 type, void *msg, int len)
 		ret = 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (ret != -ESRCH) {
 		pr_err("netlink_broadcast g=%d, t=%d, l=%d, r=%d\n",
 		       group, type, len, ret);
 	}
 	ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }

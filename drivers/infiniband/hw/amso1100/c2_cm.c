@@ -47,11 +47,17 @@ int c2_llp_connect(struct iw_cm_id *cm_id, struct iw_cm_conn_param *iw_param)
 	struct c2_vq_req *vq_req;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct sockaddr_in *raddr = (struct sockaddr_in *)&cm_id->remote_addr;
 
 	if (cm_id->remote_addr.ss_family != AF_INET)
 		return -ENOSYS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ibqp = c2_get_qp(cm_id->device, iw_param->qpn);
@@ -99,8 +105,13 @@ int c2_llp_connect(struct iw_cm_id *cm_id, struct iw_cm_conn_param *iw_param)
 	wr->qp_handle = qp->adapter_handle;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wr->remote_addr = cm_id->remote_addr.sin_addr.s_addr;
 	wr->remote_port = cm_id->remote_addr.sin_port;
+=======
+	wr->remote_addr = raddr->sin_addr.s_addr;
+	wr->remote_port = raddr->sin_port;
+>>>>>>> v3.18
 =======
 	wr->remote_addr = raddr->sin_addr.s_addr;
 	wr->remote_port = raddr->sin_port;
@@ -148,11 +159,17 @@ int c2_llp_service_create(struct iw_cm_id *cm_id, int backlog)
 	struct c2_vq_req *vq_req;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct sockaddr_in *laddr = (struct sockaddr_in *)&cm_id->local_addr;
 
 	if (cm_id->local_addr.ss_family != AF_INET)
 		return -ENOSYS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	c2dev = to_c2dev(cm_id->device);
@@ -173,8 +190,13 @@ int c2_llp_service_create(struct iw_cm_id *cm_id, int backlog)
 	wr.hdr.context = (u64) (unsigned long) vq_req;
 	wr.rnic_handle = c2dev->adapter_handle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wr.local_addr = cm_id->local_addr.sin_addr.s_addr;
 	wr.local_port = cm_id->local_addr.sin_port;
+=======
+	wr.local_addr = laddr->sin_addr.s_addr;
+	wr.local_port = laddr->sin_port;
+>>>>>>> v3.18
 =======
 	wr.local_addr = laddr->sin_addr.s_addr;
 	wr.local_port = laddr->sin_port;

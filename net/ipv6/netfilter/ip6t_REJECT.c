@@ -24,6 +24,7 @@
 #include <linux/icmpv6.h>
 #include <linux/netdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/ipv6.h>
 #include <net/tcp.h>
 #include <net/icmp.h>
@@ -33,12 +34,20 @@
 =======
 #include <net/icmp.h>
 >>>>>>> v3.18
+=======
+#include <net/icmp.h>
+>>>>>>> v3.18
 #include <net/flow.h>
 #include <linux/netfilter/x_tables.h>
 #include <linux/netfilter_ipv6/ip6_tables.h>
 #include <linux/netfilter_ipv6/ip6t_REJECT.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netfilter/ipv6/nf_reject.h>
+
+>>>>>>> v3.18
 =======
 #include <net/netfilter/ipv6/nf_reject.h>
 
@@ -47,6 +56,7 @@ MODULE_AUTHOR("Yasuyuki KOZAKAI <yasuyuki.kozakai@toshiba.co.jp>");
 MODULE_DESCRIPTION("Xtables: packet \"rejection\" target for IPv6");
 MODULE_LICENSE("GPL");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Send RST reply */
 static void send_reset(struct net *net, struct sk_buff *oldskb)
@@ -202,6 +212,8 @@ send_unreach(struct net *net, struct sk_buff *skb_in, unsigned char code,
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 static unsigned int
 reject_tg6(struct sk_buff *skb, const struct xt_action_param *par)
@@ -212,6 +224,7 @@ reject_tg6(struct sk_buff *skb, const struct xt_action_param *par)
 	pr_debug("%s: medium point\n", __func__);
 	switch (reject->with) {
 	case IP6T_ICMP6_NO_ROUTE:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		send_unreach(net, skb, ICMPV6_NOROUTE, par->hooknum);
 		break;
@@ -227,6 +240,8 @@ reject_tg6(struct sk_buff *skb, const struct xt_action_param *par)
 	case IP6T_ICMP6_PORT_UNREACH:
 		send_unreach(net, skb, ICMPV6_PORT_UNREACH, par->hooknum);
 =======
+=======
+>>>>>>> v3.18
 		nf_send_unreach6(net, skb, ICMPV6_NOROUTE, par->hooknum);
 		break;
 	case IP6T_ICMP6_ADM_PROHIBITED:
@@ -240,6 +255,9 @@ reject_tg6(struct sk_buff *skb, const struct xt_action_param *par)
 		break;
 	case IP6T_ICMP6_PORT_UNREACH:
 		nf_send_unreach6(net, skb, ICMPV6_PORT_UNREACH, par->hooknum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case IP6T_ICMP6_ECHOREPLY:
@@ -247,7 +265,11 @@ reject_tg6(struct sk_buff *skb, const struct xt_action_param *par)
 		break;
 	case IP6T_TCP_RESET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		send_reset(net, skb);
+=======
+		nf_send_reset6(net, skb, par->hooknum);
+>>>>>>> v3.18
 =======
 		nf_send_reset6(net, skb, par->hooknum);
 >>>>>>> v3.18

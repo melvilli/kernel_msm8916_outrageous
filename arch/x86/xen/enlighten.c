@@ -34,10 +34,13 @@
 #include <linux/edd.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_KEXEC
 #include <linux/kexec.h>
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <xen/xen.h>
@@ -270,8 +273,14 @@ static void __init xen_banner(void)
 	HYPERVISOR_xen_version(XENVER_extraversion, &extra);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Booting paravirtualized kernel on %s\n",
 	       pv_info.name);
+=======
+	pr_info("Booting paravirtualized kernel %son %s\n",
+		xen_feature(XENFEAT_auto_translated_physmap) ?
+			"with PVH extensions " : "", pv_info.name);
+>>>>>>> v3.18
 =======
 	pr_info("Booting paravirtualized kernel %son %s\n",
 		xen_feature(XENFEAT_auto_translated_physmap) ?
@@ -441,8 +450,12 @@ static void __init xen_init_cpuid_mask(void)
 	if (!xen_initial_domain())
 		cpuid_leaf1_edx_mask &=
 <<<<<<< HEAD
+<<<<<<< HEAD
 			~((1 << X86_FEATURE_APIC) |  /* disable local APIC */
 			  (1 << X86_FEATURE_ACPI));  /* disable ACPI */
+=======
+			~((1 << X86_FEATURE_ACPI));  /* disable ACPI */
+>>>>>>> v3.18
 =======
 			~((1 << X86_FEATURE_ACPI));  /* disable ACPI */
 >>>>>>> v3.18
@@ -452,7 +465,11 @@ static void __init xen_init_cpuid_mask(void)
 	ax = 1;
 	cx = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xen_cpuid(&ax, &bx, &cx, &dx);
+=======
+	cpuid(1, &ax, &bx, &cx, &dx);
+>>>>>>> v3.18
 =======
 	cpuid(1, &ax, &bx, &cx, &dx);
 >>>>>>> v3.18
@@ -503,7 +520,10 @@ static void set_aliased_prot(void *v, pgprot_t prot)
 	unsigned long pfn;
 	struct page *page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char dummy;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -515,6 +535,7 @@ static void set_aliased_prot(void *v, pgprot_t prot)
 
 	pte = pfn_pte(pfn, prot);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Careful: update_va_mapping() will fail if the virtual address
@@ -544,6 +565,8 @@ static void set_aliased_prot(void *v, pgprot_t prot)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (HYPERVISOR_update_va_mapping((unsigned long)v, pte, 0))
 		BUG();
 
@@ -556,8 +579,11 @@ static void set_aliased_prot(void *v, pgprot_t prot)
 	} else
 		kmap_flush_unused();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	preempt_enable();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -567,6 +593,7 @@ static void xen_alloc_ldt(struct desc_struct *ldt, unsigned entries)
 	const unsigned entries_per_page = PAGE_SIZE / LDT_ENTRY_SIZE;
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * We need to mark the all aliases of the LDT pages RO.  We
@@ -579,6 +606,8 @@ static void xen_alloc_ldt(struct desc_struct *ldt, unsigned entries)
 	 * LDT is faulted in due to subsequent descriptor access.
 	 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for(i = 0; i < entries; i += entries_per_page)
@@ -809,8 +838,12 @@ static int cvt_gate_to_trap(int vector, const gate_desc *val,
 	else if (addr == (unsigned long)stack_segment)
 		addr = (unsigned long)xen_stack_segment;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (addr == (unsigned long)double_fault ||
 		 addr == (unsigned long)nmi) {
+=======
+	else if (addr == (unsigned long)double_fault) {
+>>>>>>> v3.18
 =======
 	else if (addr == (unsigned long)double_fault) {
 >>>>>>> v3.18
@@ -825,14 +858,20 @@ static int cvt_gate_to_trap(int vector, const gate_desc *val,
 		;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 =======
+=======
+>>>>>>> v3.18
 	} else if (addr == (unsigned long)nmi)
 		/*
 		 * Use the native version as well.
 		 */
 		;
 	else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Some other trap using IST? */
 		if (WARN_ON(val->ist != 0))
@@ -904,7 +943,11 @@ static void xen_convert_trap_info(const struct desc_ptr *desc,
 void xen_copy_trap_info(struct trap_info *traps)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct desc_ptr *desc = &__get_cpu_var(idt_desc);
+=======
+	const struct desc_ptr *desc = this_cpu_ptr(&idt_desc);
+>>>>>>> v3.18
 =======
 	const struct desc_ptr *desc = this_cpu_ptr(&idt_desc);
 >>>>>>> v3.18
@@ -925,7 +968,11 @@ static void xen_load_idt(const struct desc_ptr *desc)
 	spin_lock(&lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(idt_desc) = *desc;
+=======
+	memcpy(this_cpu_ptr(&idt_desc), desc, sizeof(idt_desc));
+>>>>>>> v3.18
 =======
 	memcpy(this_cpu_ptr(&idt_desc), desc, sizeof(idt_desc));
 >>>>>>> v3.18
@@ -1003,7 +1050,11 @@ static void xen_load_sp0(struct tss_struct *tss,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xen_set_iopl_mask(unsigned mask)
+=======
+static void xen_set_iopl_mask(unsigned mask)
+>>>>>>> v3.18
 =======
 static void xen_set_iopl_mask(unsigned mask)
 >>>>>>> v3.18
@@ -1238,8 +1289,14 @@ void xen_setup_vcpu_info_placement(void)
 
 	/* xen_vcpu_setup managed to place the vcpu_info within the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   percpu area for all cpus, so make use of it */
 	if (have_vcpu_info_placement) {
+=======
+	 * percpu area for all cpus, so make use of it. Note that for
+	 * PVH we want to use native IRQ mechanism. */
+	if (have_vcpu_info_placement && !xen_pvh_domain()) {
+>>>>>>> v3.18
 =======
 	 * percpu area for all cpus, so make use of it. Note that for
 	 * PVH we want to use native IRQ mechanism. */
@@ -1439,6 +1496,10 @@ xen_panic_event(struct notifier_block *this, unsigned long event, void *ptr)
 static struct notifier_block xen_panic_block = {
 	.notifier_call= xen_panic_event,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.priority = INT_MIN
+>>>>>>> v3.18
 =======
 	.priority = INT_MIN
 >>>>>>> v3.18
@@ -1513,10 +1574,13 @@ static void __init xen_boot_params_init_edd(void)
  * we do this, we have to be careful not to call any stack-protected
  * function, which is most of the kernel.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 static void __init xen_setup_stackprotector(void)
 {
 =======
+=======
+>>>>>>> v3.18
  *
  * Note, that it is __ref because the only caller of this after init
  * is PVH which is not going to use xen_load_gdt_boot or other
@@ -1560,6 +1624,9 @@ static void __ref xen_setup_gdt(int cpu)
 #endif
 		return; /* PVH does not need any PV GDT ops. */
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pv_cpu_ops.write_gdt_entry = xen_write_gdt_entry_boot;
 	pv_cpu_ops.load_gdt = xen_load_gdt_boot;
@@ -1572,11 +1639,14 @@ static void __ref xen_setup_gdt(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* First C function to be called on Xen boot */
 asmlinkage void __init xen_start_kernel(void)
 {
 	struct physdev_set_iopl set_iopl;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_XEN_PVH
 /*
  * A PV guest starts with default flags that are not set for PVH, set them
@@ -1638,6 +1708,9 @@ asmlinkage __visible void __init xen_start_kernel(void)
 {
 	struct physdev_set_iopl set_iopl;
 	unsigned long initrd_start = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rc;
 
@@ -1647,11 +1720,17 @@ asmlinkage __visible void __init xen_start_kernel(void)
 	xen_domain_type = XEN_PV_DOMAIN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	xen_setup_features();
 #ifdef CONFIG_XEN_PVH
 	xen_pvh_early_guest_init();
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xen_setup_machphys_mapping();
 
@@ -1659,11 +1738,14 @@ asmlinkage __visible void __init xen_start_kernel(void)
 	pv_info = xen_info;
 	pv_init_ops = xen_init_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pv_cpu_ops = xen_cpu_ops;
 	pv_apic_ops = xen_apic_ops;
 
 	x86_init.resources.memory_setup = xen_memory_setup;
 =======
+=======
+>>>>>>> v3.18
 	pv_apic_ops = xen_apic_ops;
 	if (!xen_pvh_domain())
 		pv_cpu_ops = xen_cpu_ops;
@@ -1672,6 +1754,9 @@ asmlinkage __visible void __init xen_start_kernel(void)
 		x86_init.resources.memory_setup = xen_auto_xlated_memory_setup;
 	else
 		x86_init.resources.memory_setup = xen_memory_setup;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	x86_init.oem.arch_setup = xen_arch_setup;
 	x86_init.oem.banner = xen_banner;
@@ -1692,8 +1777,11 @@ asmlinkage __visible void __init xen_start_kernel(void)
 		__supported_pte_mask &= ~(_PAGE_PWT | _PAGE_PCD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__supported_pte_mask |= _PAGE_IOMAP;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1706,11 +1794,16 @@ asmlinkage __visible void __init xen_start_kernel(void)
 	x86_configure_nx();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xen_setup_features();
 
 	/* Get mfn list */
 	if (!xen_feature(XENFEAT_auto_translated_physmap))
 		xen_build_dynamic_phys_to_machine();
+=======
+	/* Get mfn list */
+	xen_build_dynamic_phys_to_machine();
+>>>>>>> v3.18
 =======
 	/* Get mfn list */
 	xen_build_dynamic_phys_to_machine();
@@ -1721,7 +1814,11 @@ asmlinkage __visible void __init xen_start_kernel(void)
 	 * -fstack-protector code can be executed.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xen_setup_stackprotector();
+=======
+	xen_setup_gdt(0);
+>>>>>>> v3.18
 =======
 	xen_setup_gdt(0);
 >>>>>>> v3.18
@@ -1779,9 +1876,12 @@ asmlinkage __visible void __init xen_start_kernel(void)
 	xen_setup_kernel_pagetable((pgd_t *)xen_start_info->pt_base, xen_start_info->nr_pages);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Allocate and initialize top and mid mfn levels for p2m structure */
 	xen_build_mfn_list_list();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* keep using Xen gdt for now; no urgent need to change it */
@@ -1797,6 +1897,7 @@ asmlinkage __visible void __init xen_start_kernel(void)
 	xen_reserve_top();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We used to do this in xen_arch_setup, but that is too late on AMD
 	 * were early_cpu_init (run before ->arch_setup()) calls early_amd_init
 	 * which pokes 0xcf8 port.
@@ -1806,6 +1907,8 @@ asmlinkage __visible void __init xen_start_kernel(void)
 	if (rc != 0)
 		xen_raw_printk("physdev_op failed %d\n", rc);
 =======
+=======
+>>>>>>> v3.18
 	/* PVH: runs at default kernel iopl of 0 */
 	if (!xen_pvh_domain()) {
 		/*
@@ -1818,13 +1921,20 @@ asmlinkage __visible void __init xen_start_kernel(void)
 		if (rc != 0)
 			xen_raw_printk("physdev_op failed %d\n", rc);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_X86_32
 	/* set up basic CPUID stuff */
 	cpu_detect(&new_cpu_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new_cpu_data.hard_math = 1;
+=======
+	set_cpu_cap(&new_cpu_data, X86_FEATURE_FPU);
+>>>>>>> v3.18
 =======
 	set_cpu_cap(&new_cpu_data, X86_FEATURE_FPU);
 >>>>>>> v3.18
@@ -1833,11 +1943,14 @@ asmlinkage __visible void __init xen_start_kernel(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Poke various useful things into boot_params */
 	boot_params.hdr.type_of_loader = (9 << 4) | 0;
 	boot_params.hdr.ramdisk_image = xen_start_info->mod_start
 		? __pa(xen_start_info->mod_start) : 0;
 =======
+=======
+>>>>>>> v3.18
 	if (xen_start_info->mod_start) {
 	    if (xen_start_info->flags & SIF_MOD_START_PFN)
 		initrd_start = PFN_PHYS(xen_start_info->mod_start);
@@ -1848,6 +1961,9 @@ asmlinkage __visible void __init xen_start_kernel(void)
 	/* Poke various useful things into boot_params */
 	boot_params.hdr.type_of_loader = (9 << 4) | 0;
 	boot_params.hdr.ramdisk_image = initrd_start;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	boot_params.hdr.ramdisk_size = xen_start_info->mod_len;
 	boot_params.hdr.cmd_line_ptr = __pa(xen_start_info->cmd_line);
@@ -1897,6 +2013,11 @@ asmlinkage __visible void __init xen_start_kernel(void)
 	xen_setup_runstate_info(0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xen_efi_init();
+
+>>>>>>> v3.18
 =======
 	xen_efi_init();
 
@@ -1970,8 +2091,13 @@ static void __init init_hvm_pv_info(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit xen_hvm_cpu_notify(struct notifier_block *self,
 				    unsigned long action, void *hcpu)
+=======
+static int xen_hvm_cpu_notify(struct notifier_block *self, unsigned long action,
+			      void *hcpu)
+>>>>>>> v3.18
 =======
 static int xen_hvm_cpu_notify(struct notifier_block *self, unsigned long action,
 			      void *hcpu)
@@ -1983,7 +2109,10 @@ static int xen_hvm_cpu_notify(struct notifier_block *self, unsigned long action,
 		xen_vcpu_setup(cpu);
 		if (xen_have_vector_callback) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			xen_init_lock_cpu(cpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			if (xen_feature(XENFEAT_hvm_safe_pvclock))
@@ -1996,6 +2125,7 @@ static int xen_hvm_cpu_notify(struct notifier_block *self, unsigned long action,
 	return NOTIFY_OK;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct notifier_block xen_hvm_cpu_notifier __cpuinitdata = {
 	.notifier_call	= xen_hvm_cpu_notify,
@@ -2017,10 +2147,15 @@ static void xen_hvm_crash_shutdown(struct pt_regs *regs)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 static struct notifier_block xen_hvm_cpu_notifier = {
 	.notifier_call	= xen_hvm_cpu_notify,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init xen_hvm_guest_init(void)
 {
@@ -2029,6 +2164,11 @@ static void __init xen_hvm_guest_init(void)
 	xen_hvm_init_shared_info();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xen_panic_handler_init();
+
+>>>>>>> v3.18
 =======
 	xen_panic_handler_init();
 
@@ -2041,6 +2181,7 @@ static void __init xen_hvm_guest_init(void)
 	x86_init.irqs.intr_init = xen_init_IRQ;
 	xen_hvm_init_time_ops();
 	xen_hvm_init_mmu_ops();
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_KEXEC
 	machine_ops.shutdown = xen_hvm_shutdown;
@@ -2058,6 +2199,8 @@ static bool __init xen_hvm_platform(void)
 
 	return true;
 =======
+=======
+>>>>>>> v3.18
 }
 
 static bool xen_nopv = false;
@@ -2077,12 +2220,20 @@ static uint32_t __init xen_hvm_platform(void)
 		return 0;
 
 	return xen_cpuid_base();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 bool xen_hvm_need_lapic(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (xen_nopv)
+		return false;
+>>>>>>> v3.18
 =======
 	if (xen_nopv)
 		return false;

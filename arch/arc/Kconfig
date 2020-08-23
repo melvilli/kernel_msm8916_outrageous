@@ -9,6 +9,11 @@
 config ARC
 	def_bool y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select BUILDTIME_EXTABLE_SORT
+	select COMMON_CLK
+>>>>>>> v3.18
 =======
 	select BUILDTIME_EXTABLE_SORT
 	select COMMON_CLK
@@ -39,7 +44,10 @@ config ARC
 	select OF_EARLY_FLATTREE
 	select PERF_USE_VMALLOC
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	select HAVE_DEBUG_STACKOVERFLOW
 
 config TRACE_IRQFLAGS_SUPPORT
@@ -47,6 +55,9 @@ config TRACE_IRQFLAGS_SUPPORT
 
 config LOCKDEP_SUPPORT
 	def_bool y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SCHED_OMIT_FRAME_POINTER
@@ -81,9 +92,12 @@ config HAVE_LATENCYTOP_SUPPORT
 	def_bool y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config NO_DMA
 	def_bool n
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "init/Kconfig"
@@ -139,8 +153,13 @@ config SMP
 	help
 	  This enables support for systems with more than one CPU. If you have
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  a system with only one CPU, like most personal computers, say N. If
 	  you have a system with more than one CPU, say Y.
+=======
+	  a system with only one CPU, say N. If you have a system with more
+	  than one CPU, say Y.
+>>>>>>> v3.18
 =======
 	  a system with only one CPU, say N. If you have a system with more
 	  than one CPU, say Y.
@@ -152,9 +171,12 @@ config ARC_HAS_COH_CACHES
 	def_bool n
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARC_HAS_COH_RTSC
 	def_bool n
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ARC_HAS_REENTRANT_IRQ_LV2
@@ -164,8 +186,13 @@ endif
 
 config NR_CPUS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int "Maximum number of CPUs (2-32)"
 	range 2 32
+=======
+	int "Maximum number of CPUs (2-4096)"
+	range 2 4096
+>>>>>>> v3.18
 =======
 	int "Maximum number of CPUs (2-4096)"
 	range 2 4096
@@ -214,6 +241,10 @@ config ARC_CACHE_PAGES
 config ARC_CACHE_VIPT_ALIASING
 	bool "Support VIPT Aliasing D$"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on ARC_HAS_DCACHE
+>>>>>>> v3.18
 =======
 	depends on ARC_HAS_DCACHE
 >>>>>>> v3.18
@@ -359,8 +390,12 @@ config ARC_HAS_RTSC
 	default y
 	depends on ARC_CPU_REL_4_10
 <<<<<<< HEAD
+<<<<<<< HEAD
 	# if SMP, enable RTSC only if counter is coherent across cores
 	depends on !SMP || ARC_HAS_COH_RTSC
+=======
+	depends on !SMP
+>>>>>>> v3.18
 =======
 	depends on !SMP
 >>>>>>> v3.18
@@ -389,9 +424,14 @@ config ARC_CURR_IN_REG
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARC_MISALIGN_ACCESS
 	bool "Emulate unaligned memory access (userspace only)"
 	default N
+=======
+config ARC_EMUL_UNALIGNED
+	bool "Emulate unaligned memory access (userspace only)"
+>>>>>>> v3.18
 =======
 config ARC_EMUL_UNALIGNED
 	bool "Emulate unaligned memory access (userspace only)"
@@ -404,6 +444,7 @@ config ARC_EMUL_UNALIGNED
 	  potential bugs in code
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARC_STACK_NONEXEC
 	bool "Make stack non-executable"
 	default n
@@ -411,6 +452,8 @@ config ARC_STACK_NONEXEC
 	  To disable the execute permissions of stack/heap of processes
 	  which are enabled by default.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config HZ
@@ -459,6 +502,7 @@ config ARC_DBG_TLB_MISS_COUNT
 	  The counters can be cleared via Debugfs as well
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CMDLINE_UBOOT
 	bool "Support U-boot kernel command line passing"
 	default n
@@ -470,6 +514,8 @@ config CMDLINE_UBOOT
 	  to it. kernel startup code will append this to DeviceTree
 	  /bootargs provided cmdline args.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ARC_BUILTIN_DTB_NAME

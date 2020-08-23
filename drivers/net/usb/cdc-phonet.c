@@ -329,7 +329,11 @@ MODULE_DEVICE_TABLE(usb, usbpn_ids);
 static struct usb_driver usbpn_driver;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int usbpn_probe(struct usb_interface *intf, const struct usb_device_id *id)
+=======
+static int usbpn_probe(struct usb_interface *intf, const struct usb_device_id *id)
+>>>>>>> v3.18
 =======
 static int usbpn_probe(struct usb_interface *intf, const struct usb_device_id *id)
 >>>>>>> v3.18
@@ -392,7 +396,11 @@ static int usbpn_probe(struct usb_interface *intf, const struct usb_device_id *i
 
 	dev = alloc_netdev(sizeof(*pnd) + sizeof(pnd->urbs[0]) * rxq_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ifname, usbpn_setup);
+=======
+			   ifname, NET_NAME_UNKNOWN, usbpn_setup);
+>>>>>>> v3.18
 =======
 			   ifname, NET_NAME_UNKNOWN, usbpn_setup);
 >>>>>>> v3.18

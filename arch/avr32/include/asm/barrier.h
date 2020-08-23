@@ -9,6 +9,7 @@
 #define __ASM_AVR32_BARRIER_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define nop()			asm volatile("nop")
 
 #define mb()			asm volatile("" : : : "memory")
@@ -27,6 +28,8 @@
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * Weirdest thing ever.. no full barrier, but it has a write barrier!
  */
@@ -37,6 +40,9 @@
 #endif
 
 #include <asm-generic/barrier.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __ASM_AVR32_BARRIER_H */

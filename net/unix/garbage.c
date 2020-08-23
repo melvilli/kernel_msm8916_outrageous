@@ -123,6 +123,7 @@ struct sock *unix_get_socket(struct file *filp)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void unix_inflight(struct user_struct *user, struct file *fp)
 {
 	struct sock *s = unix_get_socket(fp);
@@ -133,12 +134,17 @@ void unix_inflight(struct user_struct *user, struct file *fp)
 		struct unix_sock *u = unix_sk(s);
 
 =======
+=======
+>>>>>>> v3.18
 void unix_inflight(struct file *fp)
 {
 	struct sock *s = unix_get_socket(fp);
 	if (s) {
 		struct unix_sock *u = unix_sk(s);
 		spin_lock(&unix_gc_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (atomic_long_inc_return(&u->inflight) == 1) {
 			BUG_ON(!list_empty(&u->link));
@@ -147,6 +153,7 @@ void unix_inflight(struct file *fp)
 			BUG_ON(list_empty(&u->link));
 		}
 		unix_tot_inflight++;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 	user->unix_inflight++;
@@ -164,6 +171,8 @@ void unix_notinflight(struct user_struct *user, struct file *fp)
 
 		BUG_ON(!atomic_long_read(&u->inflight));
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock(&unix_gc_lock);
 	}
 }
@@ -174,15 +183,23 @@ void unix_notinflight(struct file *fp)
 	if (s) {
 		struct unix_sock *u = unix_sk(s);
 		spin_lock(&unix_gc_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		BUG_ON(list_empty(&u->link));
 		if (atomic_long_dec_and_test(&u->inflight))
 			list_del_init(&u->link);
 		unix_tot_inflight--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	user->unix_inflight--;
 	spin_unlock(&unix_gc_lock);
+=======
+		spin_unlock(&unix_gc_lock);
+	}
+>>>>>>> v3.18
 =======
 		spin_unlock(&unix_gc_lock);
 	}
@@ -295,7 +312,11 @@ static void inc_inflight_move_tail(struct unix_sock *u)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool gc_in_progress = false;
+=======
+static bool gc_in_progress;
+>>>>>>> v3.18
 =======
 static bool gc_in_progress;
 >>>>>>> v3.18
@@ -391,6 +412,7 @@ void unix_gc(void)
 	list_del(&cursor);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Now gc_candidates contains only garbage.  Restore original
 	 * inflight counters for these as well, and remove the skbuffs
 	 * which are creating the cycle(s).
@@ -399,6 +421,8 @@ void unix_gc(void)
 	list_for_each_entry(u, &gc_candidates, link)
 		scan_children(&u->sk, inc_inflight, &hitlist);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -412,7 +436,10 @@ void unix_gc(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Now gc_candidates contains only garbage.  Restore original
 	 * inflight counters for these as well, and remove the skbuffs
@@ -422,6 +449,9 @@ void unix_gc(void)
 	list_for_each_entry(u, &gc_candidates, link)
 	scan_children(&u->sk, inc_inflight, &hitlist);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&unix_gc_lock);
 

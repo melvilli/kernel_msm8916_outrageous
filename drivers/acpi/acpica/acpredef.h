@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -53,7 +57,11 @@
  * Return Package types
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 1) PTYPE1 packages do not contain sub-packages.
+=======
+ * 1) PTYPE1 packages do not contain subpackages.
+>>>>>>> v3.18
 =======
  * 1) PTYPE1 packages do not contain subpackages.
 >>>>>>> v3.18
@@ -72,8 +80,13 @@
  *
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 2) PTYPE2 packages contain a Variable-length number of sub-packages. Each
  *    of the different types describe the contents of each of the sub-packages.
+=======
+ * 2) PTYPE2 packages contain a Variable-length number of subpackages. Each
+ *    of the different types describe the contents of each of the subpackages.
+>>>>>>> v3.18
 =======
  * 2) PTYPE2 packages contain a Variable-length number of subpackages. Each
  *    of the different types describe the contents of each of the subpackages.
@@ -119,12 +132,18 @@
  *      (Used for _DLM)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * ACPI_PTYPE2_UUID_PAIR: Each subpackage is preceded by a UUID Buffer. The UUID
  *      defines the format of the package. Zero-length parent package is
  *      allowed.
  *      (Used for _DSD)
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *****************************************************************************/
 
@@ -139,7 +158,12 @@ enum acpi_return_package_types {
 	ACPI_PTYPE2_MIN = 8,
 	ACPI_PTYPE2_REV_FIXED = 9,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_PTYPE2_FIX_VAR = 10
+=======
+	ACPI_PTYPE2_FIX_VAR = 10,
+	ACPI_PTYPE2_UUID_PAIR = 11
+>>>>>>> v3.18
 =======
 	ACPI_PTYPE2_FIX_VAR = 10,
 	ACPI_PTYPE2_UUID_PAIR = 11
@@ -155,8 +179,13 @@ enum acpi_return_package_types {
 #define METHOD_MAX_ARG_TYPE             ACPI_TYPE_PACKAGE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define METHOD_GET_COUNT(arg_list)      (arg_list & METHOD_ARG_MASK)
 #define METHOD_GET_NEXT_ARG(arg_list)   (arg_list >> METHOD_ARG_BIT_WIDTH)
+=======
+#define METHOD_GET_ARG_COUNT(arg_list)  ((arg_list) & METHOD_ARG_MASK)
+#define METHOD_GET_NEXT_TYPE(arg_list)  (((arg_list) >>= METHOD_ARG_BIT_WIDTH) & METHOD_ARG_MASK)
+>>>>>>> v3.18
 =======
 #define METHOD_GET_ARG_COUNT(arg_list)  ((arg_list) & METHOD_ARG_MASK)
 #define METHOD_GET_NEXT_TYPE(arg_list)  (((arg_list) >>= METHOD_ARG_BIT_WIDTH) & METHOD_ARG_MASK)
@@ -396,6 +425,12 @@ const union acpi_predefined_info acpi_gbl_predefined_methods[] = {
 	  METHOD_RETURNS(ACPI_RTYPE_INTEGER)}},	/* See PCI firmware spec 3.0 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{{"_CCA", METHOD_0ARGS,
+	  METHOD_RETURNS(ACPI_RTYPE_INTEGER)}},	/* ACPI 5.1 */
+
+>>>>>>> v3.18
 =======
 	{{"_CCA", METHOD_0ARGS,
 	  METHOD_RETURNS(ACPI_RTYPE_INTEGER)}},	/* ACPI 5.1 */
@@ -474,12 +509,18 @@ const union acpi_predefined_info acpi_gbl_predefined_methods[] = {
 	  METHOD_NO_RETURN_VALUE}},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{{"_DSD", METHOD_0ARGS,
 	  METHOD_RETURNS(ACPI_RTYPE_PACKAGE)}},	/* Variable-length (Pkgs) each: 1 Buf, 1 Pkg */
 	PACKAGE_INFO(ACPI_PTYPE2_UUID_PAIR, ACPI_RTYPE_BUFFER, 1,
 		     ACPI_RTYPE_PACKAGE, 1, 0),
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{{"_DSM",
 	  METHOD_4ARGS(ACPI_TYPE_BUFFER, ACPI_TYPE_INTEGER, ACPI_TYPE_INTEGER,
@@ -606,7 +647,11 @@ const union acpi_predefined_info acpi_gbl_predefined_methods[] = {
 	/*
 	 * For _HPX, a single package is returned, containing a variable-length number
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * of sub-packages. Each sub-package contains a PCI record setting.
+=======
+	 * of subpackages. Each subpackage contains a PCI record setting.
+>>>>>>> v3.18
 =======
 	 * of subpackages. Each subpackage contains a PCI record setting.
 >>>>>>> v3.18
@@ -636,11 +681,17 @@ const union acpi_predefined_info acpi_gbl_predefined_methods[] = {
 	  METHOD_RETURNS(ACPI_RTYPE_INTEGER)}},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{{"_LPD", METHOD_0ARGS,
 	  METHOD_RETURNS(ACPI_RTYPE_PACKAGE)}},	/* Variable-length (1 Int(rev), n Pkg (2 Int) */
 	PACKAGE_INFO(ACPI_PTYPE2_REV_FIXED, ACPI_RTYPE_INTEGER, 2, 0, 0, 0),
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{{"_MAT", METHOD_0ARGS,
 	  METHOD_RETURNS(ACPI_RTYPE_BUFFER)}},

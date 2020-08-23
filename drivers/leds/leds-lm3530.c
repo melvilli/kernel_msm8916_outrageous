@@ -401,11 +401,14 @@ static ssize_t lm3530_mode_set(struct device *dev, struct device_attribute
 static DEVICE_ATTR(mode, 0644, lm3530_mode_get, lm3530_mode_set);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int lm3530_probe(struct i2c_client *client,
 			   const struct i2c_device_id *id)
 {
 	struct lm3530_platform_data *pdata = client->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *lm3530_attrs[] = {
 	&dev_attr_mode.attr,
 	NULL
@@ -416,6 +419,9 @@ static int lm3530_probe(struct i2c_client *client,
 			   const struct i2c_device_id *id)
 {
 	struct lm3530_platform_data *pdata = dev_get_platdata(&client->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct lm3530_data *drvdata;
 	int err = 0;
@@ -450,6 +456,10 @@ static int lm3530_probe(struct i2c_client *client,
 	drvdata->led_dev.brightness_set = lm3530_brightness_set;
 	drvdata->led_dev.max_brightness = MAX_BRIGHTNESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	drvdata->led_dev.groups = lm3530_groups;
+>>>>>>> v3.18
 =======
 	drvdata->led_dev.groups = lm3530_groups;
 >>>>>>> v3.18
@@ -479,6 +489,7 @@ static int lm3530_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = device_create_file(drvdata->led_dev.dev, &dev_attr_mode);
 	if (err < 0) {
 		dev_err(&client->dev, "File device creation failed: %d\n", err);
@@ -494,6 +505,9 @@ err_create_file:
 =======
 	return 0;
 >>>>>>> v3.18
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static int lm3530_remove(struct i2c_client *client)
@@ -501,8 +515,11 @@ static int lm3530_remove(struct i2c_client *client)
 	struct lm3530_data *drvdata = i2c_get_clientdata(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_remove_file(drvdata->led_dev.dev, &dev_attr_mode);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	lm3530_led_disable(drvdata);

@@ -54,7 +54,11 @@ typedef struct {
  *  GXIO_ERR_xxx error code.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int gxio_usb_host_init(gxio_usb_host_context_t * context, int usb_index,
+=======
+extern int gxio_usb_host_init(gxio_usb_host_context_t *context, int usb_index,
+>>>>>>> v3.18
 =======
 extern int gxio_usb_host_init(gxio_usb_host_context_t *context, int usb_index,
 >>>>>>> v3.18
@@ -73,7 +77,11 @@ extern int gxio_usb_host_init(gxio_usb_host_context_t *context, int usb_index,
  *  GXIO_ERR_xxx error code.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int gxio_usb_host_destroy(gxio_usb_host_context_t * context);
+=======
+extern int gxio_usb_host_destroy(gxio_usb_host_context_t *context);
+>>>>>>> v3.18
 =======
 extern int gxio_usb_host_destroy(gxio_usb_host_context_t *context);
 >>>>>>> v3.18
@@ -84,7 +92,11 @@ extern int gxio_usb_host_destroy(gxio_usb_host_context_t *context);
  * @return The address of the shim's MMIO registers.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void *gxio_usb_host_get_reg_start(gxio_usb_host_context_t * context);
+=======
+extern void *gxio_usb_host_get_reg_start(gxio_usb_host_context_t *context);
+>>>>>>> v3.18
 =======
 extern void *gxio_usb_host_get_reg_start(gxio_usb_host_context_t *context);
 >>>>>>> v3.18
@@ -95,7 +107,11 @@ extern void *gxio_usb_host_get_reg_start(gxio_usb_host_context_t *context);
  * @return The length of the shim's MMIO registers.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern size_t gxio_usb_host_get_reg_len(gxio_usb_host_context_t * context);
+=======
+extern size_t gxio_usb_host_get_reg_len(gxio_usb_host_context_t *context);
+>>>>>>> v3.18
 =======
 extern size_t gxio_usb_host_get_reg_len(gxio_usb_host_context_t *context);
 >>>>>>> v3.18

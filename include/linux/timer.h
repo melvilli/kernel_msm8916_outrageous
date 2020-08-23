@@ -24,12 +24,18 @@ struct timer_list {
 	int slack;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TIMER_STATS
 	int start_pid;
 	void *start_site;
 	char start_comm[16];
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_LOCKDEP
 	struct lockdep_map lockdep_map;
@@ -198,7 +204,10 @@ extern void set_timer_slack(struct timer_list *time, int slack_hz);
 extern unsigned long get_next_timer_interrupt(unsigned long now);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Timer-statistics info:
  */
@@ -242,6 +251,9 @@ static inline void timer_stats_timer_clear_start_info(struct timer_list *timer)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void add_timer(struct timer_list *timer);
 

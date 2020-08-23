@@ -3,6 +3,10 @@
  *
  * Copyright(c) 2008 Intel Corporation.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2013 Anssi Hannula <anssi.hannula@iki.fi>
+>>>>>>> v3.18
 =======
  * Copyright (c) 2013 Anssi Hannula <anssi.hannula@iki.fi>
 >>>>>>> v3.18
@@ -157,7 +161,11 @@ static unsigned int hdmi_get_eld_data(struct hda_codec *codec, hda_nid_t nid,
 					AC_VERB_GET_HDMI_ELDD, byte_index);
 #ifdef BE_PARANOID
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "HDMI: ELD data byte %d: 0x%x\n", byte_index, val);
+=======
+	codec_info(codec, "HDMI: ELD data byte %d: 0x%x\n", byte_index, val);
+>>>>>>> v3.18
 =======
 	codec_info(codec, "HDMI: ELD data byte %d: 0x%x\n", byte_index, val);
 >>>>>>> v3.18
@@ -175,7 +183,12 @@ static unsigned int hdmi_get_eld_data(struct hda_codec *codec, hda_nid_t nid,
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void hdmi_update_short_audio_desc(struct cea_sad *a,
+=======
+static void hdmi_update_short_audio_desc(struct hda_codec *codec,
+					 struct cea_sad *a,
+>>>>>>> v3.18
 =======
 static void hdmi_update_short_audio_desc(struct hda_codec *codec,
 					 struct cea_sad *a,
@@ -201,8 +214,12 @@ static void hdmi_update_short_audio_desc(struct hda_codec *codec,
 	switch (a->format) {
 	case AUDIO_CODING_TYPE_REF_STREAM_HEADER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd(KERN_INFO
 				"HDMI: audio coding type 0 not expected\n");
+=======
+		codec_info(codec, "HDMI: audio coding type 0 not expected\n");
+>>>>>>> v3.18
 =======
 		codec_info(codec, "HDMI: audio coding type 0 not expected\n");
 >>>>>>> v3.18
@@ -250,9 +267,15 @@ static void hdmi_update_short_audio_desc(struct hda_codec *codec,
 		if (a->format == AUDIO_CODING_XTYPE_HE_REF_CT ||
 		    a->format >= AUDIO_CODING_XTYPE_FIRST_RESERVED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printd(KERN_INFO
 				"HDMI: audio coding xtype %d not expected\n",
 				a->format);
+=======
+			codec_info(codec,
+				   "HDMI: audio coding xtype %d not expected\n",
+				   a->format);
+>>>>>>> v3.18
 =======
 			codec_info(codec,
 				   "HDMI: audio coding xtype %d not expected\n",
@@ -270,7 +293,11 @@ static void hdmi_update_short_audio_desc(struct hda_codec *codec,
  * Be careful, ELD buf could be totally rubbish!
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_hdmi_parse_eld(struct parsed_hdmi_eld *e,
+=======
+int snd_hdmi_parse_eld(struct hda_codec *codec, struct parsed_hdmi_eld *e,
+>>>>>>> v3.18
 =======
 int snd_hdmi_parse_eld(struct hda_codec *codec, struct parsed_hdmi_eld *e,
 >>>>>>> v3.18
@@ -283,8 +310,12 @@ int snd_hdmi_parse_eld(struct hda_codec *codec, struct parsed_hdmi_eld *e,
 	if (e->eld_ver != ELD_VER_CEA_861D &&
 	    e->eld_ver != ELD_VER_PARTIAL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd(KERN_INFO "HDMI: Unknown ELD version %d\n",
 								e->eld_ver);
+=======
+		codec_info(codec, "HDMI: Unknown ELD version %d\n", e->eld_ver);
+>>>>>>> v3.18
 =======
 		codec_info(codec, "HDMI: Unknown ELD version %d\n", e->eld_ver);
 >>>>>>> v3.18
@@ -311,15 +342,21 @@ int snd_hdmi_parse_eld(struct hda_codec *codec, struct parsed_hdmi_eld *e,
 
 	if (mnl > ELD_MAX_MNL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd(KERN_INFO "HDMI: MNL is reserved value %d\n", mnl);
 		goto out_fail;
 	} else if (ELD_FIXED_BYTES + mnl > size) {
 		snd_printd(KERN_INFO "HDMI: out of range MNL %d\n", mnl);
 =======
+=======
+>>>>>>> v3.18
 		codec_info(codec, "HDMI: MNL is reserved value %d\n", mnl);
 		goto out_fail;
 	} else if (ELD_FIXED_BYTES + mnl > size) {
 		codec_info(codec, "HDMI: out of range MNL %d\n", mnl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out_fail;
 	} else
@@ -328,15 +365,21 @@ int snd_hdmi_parse_eld(struct hda_codec *codec, struct parsed_hdmi_eld *e,
 	for (i = 0; i < e->sad_count; i++) {
 		if (ELD_FIXED_BYTES + mnl + 3 * (i + 1) > size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printd(KERN_INFO "HDMI: out of range SAD %d\n", i);
 			goto out_fail;
 		}
 		hdmi_update_short_audio_desc(e->sad + i,
 =======
+=======
+>>>>>>> v3.18
 			codec_info(codec, "HDMI: out of range SAD %d\n", i);
 			goto out_fail;
 		}
 		hdmi_update_short_audio_desc(codec, e->sad + i,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					buf + ELD_FIXED_BYTES + mnl + 3 * i);
 	}
@@ -377,17 +420,23 @@ int snd_hdmi_get_eld(struct hda_codec *codec, hda_nid_t nid,
 	if (size == 0) {
 		/* wfg: workaround for ASUS P5E-VM HDMI board */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd(KERN_INFO "HDMI: ELD buf size is 0, force 128\n");
 		size = 128;
 	}
 	if (size < ELD_FIXED_BYTES || size > ELD_MAX_SIZE) {
 		snd_printd(KERN_INFO "HDMI: invalid ELD buf size %d\n", size);
 =======
+=======
+>>>>>>> v3.18
 		codec_info(codec, "HDMI: ELD buf size is 0, force 128\n");
 		size = 128;
 	}
 	if (size < ELD_FIXED_BYTES || size > ELD_MAX_SIZE) {
 		codec_info(codec, "HDMI: invalid ELD buf size %d\n", size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ERANGE;
 	}
@@ -401,8 +450,12 @@ int snd_hdmi_get_eld(struct hda_codec *codec, hda_nid_t nid,
 		 */
 		if (!(val & AC_ELDD_ELD_VALID)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printd(KERN_INFO
 				  "HDMI: invalid ELD data byte %d\n", i);
+=======
+			codec_info(codec, "HDMI: invalid ELD data byte %d\n", i);
+>>>>>>> v3.18
 =======
 			codec_info(codec, "HDMI: invalid ELD data byte %d\n", i);
 >>>>>>> v3.18
@@ -418,7 +471,11 @@ int snd_hdmi_get_eld(struct hda_codec *codec, hda_nid_t nid,
 		 */
 		if (!val && !i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_INFO "HDMI: 0 ELD data\n");
+=======
+			codec_dbg(codec, "HDMI: 0 ELD data\n");
+>>>>>>> v3.18
 =======
 			codec_dbg(codec, "HDMI: 0 ELD data\n");
 >>>>>>> v3.18
@@ -456,7 +513,12 @@ static void hdmi_print_pcm_rates(int pcm, char *buf, int buflen)
 #define SND_PRINT_RATES_ADVISED_BUFSIZE	80
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void hdmi_show_short_audio_desc(struct cea_sad *a)
+=======
+static void hdmi_show_short_audio_desc(struct hda_codec *codec,
+				       struct cea_sad *a)
+>>>>>>> v3.18
 =======
 static void hdmi_show_short_audio_desc(struct hda_codec *codec,
 				       struct cea_sad *a)
@@ -479,6 +541,7 @@ static void hdmi_show_short_audio_desc(struct hda_codec *codec,
 		buf2[0] = '\0';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_snd_printd(SND_PR_VERBOSE, "HDMI: supports coding type %s:"
 			" channels = %d, rates =%s%s\n",
 			cea_audio_coding_type_names[a->format],
@@ -486,10 +549,15 @@ static void hdmi_show_short_audio_desc(struct hda_codec *codec,
 			buf,
 			buf2);
 =======
+=======
+>>>>>>> v3.18
 	codec_dbg(codec,
 		  "HDMI: supports coding type %s: channels = %d, rates =%s%s\n",
 		  cea_audio_coding_type_names[a->format],
 		  a->channels, buf, buf2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -506,17 +574,23 @@ void snd_print_channel_allocation(int spk_alloc, char *buf, int buflen)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_hdmi_show_eld(struct parsed_hdmi_eld *e)
 {
 	int i;
 
 	_snd_printd(SND_PR_VERBOSE, "HDMI: detected monitor %s at connection type %s\n",
 =======
+=======
+>>>>>>> v3.18
 void snd_hdmi_show_eld(struct hda_codec *codec, struct parsed_hdmi_eld *e)
 {
 	int i;
 
 	codec_dbg(codec, "HDMI: detected monitor %s at connection type %s\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			e->monitor_name,
 			eld_connection_type_names[e->conn_type]);
@@ -525,17 +599,23 @@ void snd_hdmi_show_eld(struct hda_codec *codec, struct parsed_hdmi_eld *e)
 		char buf[SND_PRINT_CHANNEL_ALLOCATION_ADVISED_BUFSIZE];
 		snd_print_channel_allocation(e->spk_alloc, buf, sizeof(buf));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_snd_printd(SND_PR_VERBOSE, "HDMI: available speakers:%s\n", buf);
 	}
 
 	for (i = 0; i < e->sad_count; i++)
 		hdmi_show_short_audio_desc(e->sad + i);
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "HDMI: available speakers:%s\n", buf);
 	}
 
 	for (i = 0; i < e->sad_count; i++)
 		hdmi_show_short_audio_desc(codec, e->sad + i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -568,10 +648,16 @@ static void hdmi_print_sad_info(int i, struct cea_sad *a,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void hdmi_print_eld_info(struct snd_info_entry *entry,
 				struct snd_info_buffer *buffer)
 {
 	struct hdmi_eld *eld = entry->private_data;
+=======
+void snd_hdmi_print_eld_info(struct hdmi_eld *eld,
+			     struct snd_info_buffer *buffer)
+{
+>>>>>>> v3.18
 =======
 void snd_hdmi_print_eld_info(struct hdmi_eld *eld,
 			     struct snd_info_buffer *buffer)
@@ -596,6 +682,7 @@ void snd_hdmi_print_eld_info(struct hdmi_eld *eld,
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&eld->lock);
 	snd_iprintf(buffer, "monitor_present\t\t%d\n", eld->monitor_present);
 	snd_iprintf(buffer, "eld_valid\t\t%d\n", eld->eld_valid);
@@ -604,10 +691,15 @@ void snd_hdmi_print_eld_info(struct hdmi_eld *eld,
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 	snd_iprintf(buffer, "monitor_present\t\t%d\n", eld->monitor_present);
 	snd_iprintf(buffer, "eld_valid\t\t%d\n", eld->eld_valid);
 	if (!eld->eld_valid)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	snd_iprintf(buffer, "monitor_name\t\t%s\n", e->monitor_name);
 	snd_iprintf(buffer, "connection_type\t\t%s\n",
@@ -631,6 +723,7 @@ void snd_hdmi_print_eld_info(struct hdmi_eld *eld,
 	for (i = 0; i < e->sad_count; i++)
 		hdmi_print_sad_info(i, e->sad + i, buffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&eld->lock);
 }
 
@@ -639,11 +732,16 @@ static void hdmi_write_eld_info(struct snd_info_entry *entry,
 {
 	struct hdmi_eld *eld = entry->private_data;
 =======
+=======
+>>>>>>> v3.18
 }
 
 void snd_hdmi_write_eld_info(struct hdmi_eld *eld,
 			     struct snd_info_buffer *buffer)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct parsed_hdmi_eld *e = &eld->info;
 	char line[64];
@@ -653,7 +751,10 @@ void snd_hdmi_write_eld_info(struct hdmi_eld *eld,
 	unsigned int n;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&eld->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	while (!snd_info_get_line(buffer, line, sizeof(line))) {
@@ -708,6 +809,7 @@ void snd_hdmi_write_eld_info(struct hdmi_eld *eld,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&eld->lock);
 }
 
@@ -740,6 +842,9 @@ void snd_hda_eld_proc_free(struct hda_codec *codec, struct hdmi_eld *eld)
 	}
 }
 
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -789,7 +894,10 @@ void snd_hdmi_eld_update_pcm_info(struct parsed_hdmi_eld *e,
 	hinfo->channels_max = min(hinfo->channels_max, channels_max);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 
 /* ATI/AMD specific stuff (ELD emulation) */
@@ -961,4 +1069,7 @@ int snd_hdmi_get_eld_ati(struct hda_codec *codec, hda_nid_t nid,
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

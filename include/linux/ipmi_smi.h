@@ -110,7 +110,10 @@ struct ipmi_smi_handlers {
 	void (*request_events)(void *send_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Called by the upper layer when some user requires that the
 	   interface watch for events, received messages, watchdog
 	   pretimeouts, or not.  Used by the SMI to know if it should
@@ -118,6 +121,9 @@ struct ipmi_smi_handlers {
 	   implement it. */
 	void (*set_need_watch)(void *send_info, bool enable);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Called when the interface should go into "run to
 	   completion" mode.  If this call sets the value to true, the
@@ -125,7 +131,11 @@ struct ipmi_smi_handlers {
 	   out and that none are pending, and any new requests are run
 	   to completion immediately. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*set_run_to_completion)(void *send_info, int run_to_completion);
+=======
+	void (*set_run_to_completion)(void *send_info, bool run_to_completion);
+>>>>>>> v3.18
 =======
 	void (*set_run_to_completion)(void *send_info, bool run_to_completion);
 >>>>>>> v3.18
@@ -140,7 +150,11 @@ struct ipmi_smi_handlers {
 	   that this is called from interrupt context, so it cannot
 	   block. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*set_maintenance_mode)(void *send_info, int enable);
+=======
+	void (*set_maintenance_mode)(void *send_info, bool enable);
+>>>>>>> v3.18
 =======
 	void (*set_maintenance_mode)(void *send_info, bool enable);
 >>>>>>> v3.18

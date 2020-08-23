@@ -44,7 +44,11 @@ static const struct hc_driver ehci_grlib_hc_driver = {
 	 */
 	.irq			= ehci_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags			= HCD_MEMORY | HCD_USB2,
+=======
+	.flags			= HCD_MEMORY | HCD_USB2 | HCD_BH,
+>>>>>>> v3.18
 =======
 	.flags			= HCD_MEMORY | HCD_USB2 | HCD_BH,
 >>>>>>> v3.18
@@ -118,7 +122,12 @@ static int ehci_hcd_grlib_probe(struct platform_device *op)
 	irq = irq_of_parse_and_map(dn, 0);
 	if (irq == NO_IRQ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: irq_of_parse_and_map failed\n", __FILE__);
+=======
+		dev_err(&op->dev, "%s: irq_of_parse_and_map failed\n",
+			__FILE__);
+>>>>>>> v3.18
 =======
 		dev_err(&op->dev, "%s: irq_of_parse_and_map failed\n",
 			__FILE__);
@@ -150,6 +159,10 @@ static int ehci_hcd_grlib_probe(struct platform_device *op)
 		goto err_ioremap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -167,9 +180,13 @@ err_irq:
 static int ehci_hcd_grlib_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_hcd *hcd = dev_get_drvdata(&op->dev);
 
 	dev_set_drvdata(&op->dev, NULL);
+=======
+	struct usb_hcd *hcd = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct usb_hcd *hcd = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -187,6 +204,7 @@ static int ehci_hcd_grlib_remove(struct platform_device *op)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ehci_hcd_grlib_shutdown(struct platform_device *op)
 {
 	struct usb_hcd *hcd = dev_get_drvdata(&op->dev);
@@ -196,6 +214,8 @@ static void ehci_hcd_grlib_shutdown(struct platform_device *op)
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct of_device_id ehci_hcd_grlib_of_match[] = {
@@ -214,7 +234,11 @@ static struct platform_driver ehci_grlib_driver = {
 	.probe		= ehci_hcd_grlib_probe,
 	.remove		= ehci_hcd_grlib_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shutdown	= ehci_hcd_grlib_shutdown,
+=======
+	.shutdown	= usb_hcd_platform_shutdown,
+>>>>>>> v3.18
 =======
 	.shutdown	= usb_hcd_platform_shutdown,
 >>>>>>> v3.18

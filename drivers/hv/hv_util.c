@@ -29,7 +29,10 @@
 #include <linux/hyperv.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "hyperv_vmbus.h"
 
 #define SD_MAJOR	3
@@ -58,6 +61,9 @@ static int ts_srv_version;
 static int hb_srv_version;
 static int util_fw_version;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void shutdown_onchannelcallback(void *context);
 static struct hv_util_service util_shutdown = {
@@ -87,13 +93,19 @@ static struct hv_util_service util_vss = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct hv_util_service util_fcopy = {
 	.util_cb = hv_fcopy_onchannelcallback,
 	.util_init = hv_fcopy_init,
 	.util_deinit = hv_fcopy_deinit,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void perform_shutdown(struct work_struct *dummy)
 {
@@ -111,7 +123,11 @@ static void shutdown_onchannelcallback(void *context)
 	u32 recvlen;
 	u64 requestid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8  execute_shutdown = false;
+=======
+	bool execute_shutdown = false;
+>>>>>>> v3.18
 =======
 	bool execute_shutdown = false;
 >>>>>>> v3.18
@@ -132,7 +148,12 @@ static void shutdown_onchannelcallback(void *context)
 		if (icmsghdrp->icmsgtype == ICMSGTYPE_NEGOTIATE) {
 			vmbus_prep_negotiate_resp(icmsghdrp, negop,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					shut_txf_buf, MAX_SRV_VER, MAX_SRV_VER);
+=======
+					shut_txf_buf, util_fw_version,
+					sd_srv_version);
+>>>>>>> v3.18
 =======
 					shut_txf_buf, util_fw_version,
 					sd_srv_version);
@@ -253,6 +274,10 @@ static void timesync_onchannelcallback(void *context)
 	struct ictimesync_data *timedatap;
 	u8 *time_txf_buf = util_timesynch.recv_buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct icmsg_negotiate *negop = NULL;
+>>>>>>> v3.18
 =======
 	struct icmsg_negotiate *negop = NULL;
 >>>>>>> v3.18
@@ -266,13 +291,19 @@ static void timesync_onchannelcallback(void *context)
 
 		if (icmsghdrp->icmsgtype == ICMSGTYPE_NEGOTIATE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vmbus_prep_negotiate_resp(icmsghdrp, NULL, time_txf_buf,
 						MAX_SRV_VER, MAX_SRV_VER);
 =======
+=======
+>>>>>>> v3.18
 			vmbus_prep_negotiate_resp(icmsghdrp, negop,
 						time_txf_buf,
 						util_fw_version,
 						ts_srv_version);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			timedatap = (struct ictimesync_data *)&time_txf_buf[
@@ -304,6 +335,7 @@ static void heartbeat_onchannelcallback(void *context)
 	struct heartbeat_msg_data *heartbeat_msg;
 	u8 *hbeat_txf_buf = util_heartbeat.recv_buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	while (1) {
 
@@ -314,20 +346,31 @@ static void heartbeat_onchannelcallback(void *context)
 			break;
 
 =======
+=======
+>>>>>>> v3.18
 	struct icmsg_negotiate *negop = NULL;
 
 	vmbus_recvpacket(channel, hbeat_txf_buf,
 			 PAGE_SIZE, &recvlen, &requestid);
 
 	if (recvlen > 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		icmsghdrp = (struct icmsg_hdr *)&hbeat_txf_buf[
 				sizeof(struct vmbuspipe_hdr)];
 
 		if (icmsghdrp->icmsgtype == ICMSGTYPE_NEGOTIATE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vmbus_prep_negotiate_resp(icmsghdrp, NULL,
 				hbeat_txf_buf, MAX_SRV_VER, MAX_SRV_VER);
+=======
+			vmbus_prep_negotiate_resp(icmsghdrp, negop,
+				hbeat_txf_buf, util_fw_version,
+				hb_srv_version);
+>>>>>>> v3.18
 =======
 			vmbus_prep_negotiate_resp(icmsghdrp, negop,
 				hbeat_txf_buf, util_fw_version,
@@ -386,7 +429,10 @@ static int util_probe(struct hv_device *dev,
 
 	hv_set_drvdata(dev, srv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Based on the host; initialize the framework and
 	 * service version numbers we will negotiate.
@@ -406,6 +452,9 @@ static int util_probe(struct hv_device *dev,
 		hb_srv_version = HB_VERSION;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -451,11 +500,17 @@ static const struct hv_vmbus_device_id id_table[] = {
 	  .driver_data = (unsigned long)&util_vss
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* File copy GUID */
 	{ HV_FCOPY_GUID,
 	  .driver_data = (unsigned long)&util_fcopy
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ },
 };
@@ -489,7 +544,10 @@ module_exit(exit_hyperv_utils);
 
 MODULE_DESCRIPTION("Hyper-V Utilities");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_VERSION(HV_DRV_VERSION);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");

@@ -80,6 +80,7 @@ extern void __set_fixmap(enum fixed_addresses idx,
 extern void __clear_fixmap(enum fixed_addresses idx, pgprot_t flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define set_fixmap(idx, phys) \
 		__set_fixmap(idx, phys, PAGE_KERNEL)
 /*
@@ -87,6 +88,8 @@ extern void __clear_fixmap(enum fixed_addresses idx, pgprot_t flags);
  */
 #define set_fixmap_nocache(idx, phys) \
 		__set_fixmap(idx, phys, PAGE_KERNEL_NOCACHE)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -104,6 +107,7 @@ extern void __clear_fixmap(enum fixed_addresses idx, pgprot_t flags);
 #define FIXADDR_SIZE	(__end_of_fixed_addresses << PAGE_SHIFT)
 #define FIXADDR_START	(FIXADDR_TOP - FIXADDR_SIZE)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define __fix_to_virt(x)	(FIXADDR_TOP - ((x) << PAGE_SHIFT))
 #define __virt_to_fix(x)	((FIXADDR_TOP - ((x)&PAGE_MASK)) >> PAGE_SHIFT)
@@ -138,9 +142,14 @@ static inline unsigned long virt_to_fix(const unsigned long vaddr)
 	return __virt_to_fix(vaddr);
 }
 =======
+=======
+>>>>>>> v3.18
 #define FIXMAP_PAGE_NOCACHE PAGE_KERNEL_NOCACHE
 
 #include <asm-generic/fixmap.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

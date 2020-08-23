@@ -19,7 +19,11 @@ typedef struct {
 
 	struct mutex lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *vdso;
+=======
+	void __user *vdso;
+>>>>>>> v3.18
 =======
 	void __user *vdso;
 >>>>>>> v3.18

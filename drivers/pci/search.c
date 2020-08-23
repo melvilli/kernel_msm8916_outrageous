@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	PCI searching functions.
+=======
+ *	PCI searching functions.
+>>>>>>> v3.18
 =======
  *	PCI searching functions.
 >>>>>>> v3.18
@@ -12,7 +16,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pci.h>
@@ -45,7 +52,10 @@ int pci_for_each_dma_alias(struct pci_dev *pdev,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If the device is broken and uses an alias requester ID for
 	 * DMA, iterate over that too.
@@ -57,6 +67,9 @@ int pci_for_each_dma_alias(struct pci_dev *pdev,
 			return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (bus = pdev->bus; !pci_is_root_bus(bus); bus = bus->parent) {
 		struct pci_dev *tmp;
@@ -99,9 +112,12 @@ int pci_for_each_dma_alias(struct pci_dev *pdev,
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = fn(tmp, PCI_DEVID(tmp->bus->number, tmp->devfn),
 				 data);
 =======
+=======
+>>>>>>> v3.18
 			if (tmp->dev_flags & PCI_DEV_FLAG_PCIE_BRIDGE_ALIAS)
 				ret = fn(tmp,
 					 PCI_DEVID(tmp->subordinate->number,
@@ -110,6 +126,9 @@ int pci_for_each_dma_alias(struct pci_dev *pdev,
 				ret = fn(tmp,
 					 PCI_DEVID(tmp->bus->number,
 						   tmp->devfn), data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ret)
 				return ret;
@@ -119,6 +138,7 @@ int pci_for_each_dma_alias(struct pci_dev *pdev,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * find the upstream PCIe-to-PCI bridge of a PCI device
@@ -167,6 +187,8 @@ static struct pci_bus *pci_do_find_bus(struct pci_bus *bus, unsigned char busnr)
 		child = pci_do_find_bus(pci_bus_b(tmp), busnr);
 		if(child)
 =======
+=======
+>>>>>>> v3.18
 static struct pci_bus *pci_do_find_bus(struct pci_bus *bus, unsigned char busnr)
 {
 	struct pci_bus *child;
@@ -178,6 +200,9 @@ static struct pci_bus *pci_do_find_bus(struct pci_bus *bus, unsigned char busnr)
 	list_for_each_entry(tmp, &bus->children, node) {
 		child = pci_do_find_bus(tmp, busnr);
 		if (child)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return child;
 	}
@@ -194,7 +219,11 @@ static struct pci_bus *pci_do_find_bus(struct pci_bus *bus, unsigned char busnr)
  * data structure is returned.  If no bus is found, %NULL is returned.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pci_bus * pci_find_bus(int domain, int busnr)
+=======
+struct pci_bus *pci_find_bus(int domain, int busnr)
+>>>>>>> v3.18
 =======
 struct pci_bus *pci_find_bus(int domain, int busnr)
 >>>>>>> v3.18
@@ -212,6 +241,10 @@ struct pci_bus *pci_find_bus(int domain, int busnr)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_find_bus);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_find_bus);
 >>>>>>> v3.18
@@ -221,7 +254,11 @@ EXPORT_SYMBOL(pci_find_bus);
  * @from: Previous PCI bus found, or %NULL for new search.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Iterates through the list of known PCI busses.  A new search is
+=======
+ * Iterates through the list of known PCI buses.  A new search is
+>>>>>>> v3.18
 =======
  * Iterates through the list of known PCI buses.  A new search is
 >>>>>>> v3.18
@@ -230,8 +267,12 @@ EXPORT_SYMBOL(pci_find_bus);
  * global list.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pci_bus * 
 pci_find_next_bus(const struct pci_bus *from)
+=======
+struct pci_bus *pci_find_next_bus(const struct pci_bus *from)
+>>>>>>> v3.18
 =======
 struct pci_bus *pci_find_next_bus(const struct pci_bus *from)
 >>>>>>> v3.18
@@ -244,21 +285,28 @@ struct pci_bus *pci_find_next_bus(const struct pci_bus *from)
 	n = from ? from->node.next : pci_root_buses.next;
 	if (n != &pci_root_buses)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		b = pci_bus_b(n);
 	up_read(&pci_bus_sem);
 	return b;
 }
 =======
+=======
+>>>>>>> v3.18
 		b = list_entry(n, struct pci_bus, node);
 	up_read(&pci_bus_sem);
 	return b;
 }
 EXPORT_SYMBOL(pci_find_next_bus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
  * pci_get_slot - locate PCI device for a given PCI slot
  * @bus: PCI bus on which desired PCI device resides
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @devfn: encodes number of PCI slot in which the desired PCI 
  * device resides and the logical device number within that slot 
@@ -266,11 +314,16 @@ EXPORT_SYMBOL(pci_find_next_bus);
  *
  * Given a PCI bus and slot/function number, the desired PCI device 
 =======
+=======
+>>>>>>> v3.18
  * @devfn: encodes number of PCI slot in which the desired PCI
  * device resides and the logical device number within that slot
  * in case of multi-function devices.
  *
  * Given a PCI bus and slot/function number, the desired PCI device
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * is located in the list of PCI devices.
  * If the device is found, its reference count is increased and this
@@ -297,6 +350,10 @@ struct pci_dev *pci_get_slot(struct pci_bus *bus, unsigned int devfn)
 	return dev;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_get_slot);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_get_slot);
 >>>>>>> v3.18
@@ -405,6 +462,10 @@ struct pci_dev *pci_get_subsys(unsigned int vendor, unsigned int device,
 	return pci_get_dev_by_id(&id, from);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_get_subsys);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_get_subsys);
 >>>>>>> v3.18
@@ -424,18 +485,24 @@ EXPORT_SYMBOL(pci_get_subsys);
  * always decremented if it is not %NULL.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pci_dev *
 pci_get_device(unsigned int vendor, unsigned int device, struct pci_dev *from)
 {
 	return pci_get_subsys(vendor, device, PCI_ANY_ID, PCI_ANY_ID, from);
 }
 =======
+=======
+>>>>>>> v3.18
 struct pci_dev *pci_get_device(unsigned int vendor, unsigned int device,
 			       struct pci_dev *from)
 {
 	return pci_get_subsys(vendor, device, PCI_ANY_ID, PCI_ANY_ID, from);
 }
 EXPORT_SYMBOL(pci_get_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -466,6 +533,10 @@ struct pci_dev *pci_get_class(unsigned int class, struct pci_dev *from)
 	return pci_get_dev_by_id(&id, from);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pci_get_class);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pci_get_class);
 >>>>>>> v3.18
@@ -499,6 +570,7 @@ int pci_dev_present(const struct pci_device_id *ids)
 }
 EXPORT_SYMBOL(pci_dev_present);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* For boot time work */
 EXPORT_SYMBOL(pci_find_bus);
@@ -508,5 +580,7 @@ EXPORT_SYMBOL(pci_get_device);
 EXPORT_SYMBOL(pci_get_subsys);
 EXPORT_SYMBOL(pci_get_slot);
 EXPORT_SYMBOL(pci_get_class);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

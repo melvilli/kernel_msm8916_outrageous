@@ -45,6 +45,10 @@
 #include <linux/clk.h>
 #include <linux/pinctrl/consumer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irqchip/chained_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqchip/chained_irq.h>
 >>>>>>> v3.18
@@ -443,6 +447,10 @@ static void mvebu_gpio_irq_handler(unsigned int irq, struct irq_desc *desc)
 {
 	struct mvebu_gpio_chip *mvchip = irq_get_handler_data(irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct irq_chip *chip = irq_desc_get_chip(desc);
+>>>>>>> v3.18
 =======
 	struct irq_chip *chip = irq_desc_get_chip(desc);
 >>>>>>> v3.18
@@ -453,6 +461,11 @@ static void mvebu_gpio_irq_handler(unsigned int irq, struct irq_desc *desc)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	chained_irq_enter(chip, desc);
+
+>>>>>>> v3.18
 =======
 	chained_irq_enter(chip, desc);
 
@@ -471,7 +484,11 @@ static void mvebu_gpio_irq_handler(unsigned int irq, struct irq_desc *desc)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		type = irqd_get_trigger_type(irq_get_irq_data(irq));
+=======
+		type = irq_get_trigger_type(irq);
+>>>>>>> v3.18
 =======
 		type = irq_get_trigger_type(irq);
 >>>>>>> v3.18
@@ -484,14 +501,20 @@ static void mvebu_gpio_irq_handler(unsigned int irq, struct irq_desc *desc)
 			writel_relaxed(polarity, mvebu_gpioreg_in_pol(mvchip));
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		generic_handle_irq(irq);
 	}
 =======
+=======
+>>>>>>> v3.18
 
 		generic_handle_irq(irq);
 	}
 
 	chained_irq_exit(chip, desc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -554,7 +577,11 @@ static void mvebu_gpio_dbg_show(struct seq_file *s, struct gpio_chip *chip)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mvebu_gpio_of_match[] = {
+=======
+static const struct of_device_id mvebu_gpio_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mvebu_gpio_of_match[] = {
 >>>>>>> v3.18
@@ -596,6 +623,7 @@ static int mvebu_gpio_probe(struct platform_device *pdev)
 		soc_variant = MVEBU_GPIO_SOC_VARIANT_ORION;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
 		dev_err(&pdev->dev, "Cannot get memory resource\n");
@@ -607,6 +635,11 @@ static int mvebu_gpio_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Cannot allocate memory\n");
 		return -ENOMEM;
 	}
+=======
+	mvchip = devm_kzalloc(&pdev->dev, sizeof(struct mvebu_gpio_chip), GFP_KERNEL);
+	if (!mvchip)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	mvchip = devm_kzalloc(&pdev->dev, sizeof(struct mvebu_gpio_chip), GFP_KERNEL);
 	if (!mvchip)
@@ -642,7 +675,11 @@ static int mvebu_gpio_probe(struct platform_device *pdev)
 	mvchip->chip.base = id * MVEBU_MAX_GPIO_PER_BANK;
 	mvchip->chip.ngpio = ngpios;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mvchip->chip.can_sleep = 0;
+=======
+	mvchip->chip.can_sleep = false;
+>>>>>>> v3.18
 =======
 	mvchip->chip.can_sleep = false;
 >>>>>>> v3.18
@@ -651,6 +688,10 @@ static int mvebu_gpio_probe(struct platform_device *pdev)
 
 	spin_lock_init(&mvchip->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 >>>>>>> v3.18
@@ -725,7 +766,11 @@ static int mvebu_gpio_probe(struct platform_device *pdev)
 	if (mvchip->irqbase < 0) {
 		dev_err(&pdev->dev, "no irqs\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
+=======
+		return mvchip->irqbase;
+>>>>>>> v3.18
 =======
 		return mvchip->irqbase;
 >>>>>>> v3.18
@@ -784,12 +829,16 @@ static struct platform_driver mvebu_gpio_driver = {
 	.probe		= mvebu_gpio_probe,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int __init mvebu_gpio_init(void)
 {
 	return platform_driver_register(&mvebu_gpio_driver);
 }
 postcore_initcall(mvebu_gpio_init);
+=======
+module_platform_driver(mvebu_gpio_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(mvebu_gpio_driver);
 >>>>>>> v3.18

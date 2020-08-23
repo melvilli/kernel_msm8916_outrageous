@@ -11,12 +11,15 @@
 #include <linux/signal.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/regulator/consumer.h>
 /* Those are just for writing in syscon */
 #include <linux/io.h>
 #include <mach/hardware.h>
 #include <mach/syscon.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
@@ -29,6 +32,9 @@
 #define U300_SYSCON_PMCR					(0x50)
 #define U300_SYSCON_PMCR_DCON_ENABLE				(0x0002)
 #define U300_SYSCON_PMCR_PWR_MGNT_ENABLE			(0x0001)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -63,6 +69,7 @@ void u300_pm_poweroff(void)
  * Hog the regulators needed to power up the board.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init u300_init_boardpower(void)
 {
 	int err;
@@ -71,6 +78,8 @@ static int __init u300_init_boardpower(void)
 	pr_info("U300: setting up board power\n");
 	main_power_15 = regulator_get(NULL, "vana15");
 =======
+=======
+>>>>>>> v3.18
 static int __init __u300_init_boardpower(struct platform_device *pdev)
 {
 	struct device_node *np = pdev->dev.of_node;
@@ -93,6 +102,9 @@ static int __init __u300_init_boardpower(struct platform_device *pdev)
 
 	main_power_15 = regulator_get(&pdev->dev, "vana15");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(main_power_15)) {
 		pr_err("could not get vana15");
@@ -113,9 +125,14 @@ static int __init __u300_init_boardpower(struct platform_device *pdev)
 	 */
 	pr_info("U300: disable system controller pull-up\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = readw(U300_SYSCON_VBASE + U300_SYSCON_PMCR);
 	val &= ~U300_SYSCON_PMCR_DCON_ENABLE;
 	writew(val, U300_SYSCON_VBASE + U300_SYSCON_PMCR);
+=======
+	regmap_update_bits(regmap, U300_SYSCON_PMCR,
+			   U300_SYSCON_PMCR_DCON_ENABLE, 0);
+>>>>>>> v3.18
 =======
 	regmap_update_bits(regmap, U300_SYSCON_PMCR,
 			   U300_SYSCON_PMCR_DCON_ENABLE, 0);
@@ -128,11 +145,14 @@ static int __init __u300_init_boardpower(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * So at module init time we hog the regulator!
  */
 module_init(u300_init_boardpower);
 =======
+=======
+>>>>>>> v3.18
 static int __init s365_board_probe(struct platform_device *pdev)
 {
 	return __u300_init_boardpower(pdev);
@@ -161,4 +181,7 @@ static int __init u300_init_boardpower(void)
 }
 
 device_initcall(u300_init_boardpower);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

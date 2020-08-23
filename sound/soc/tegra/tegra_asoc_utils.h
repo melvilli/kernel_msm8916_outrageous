@@ -22,7 +22,11 @@
 
 #ifndef __TEGRA_ASOC_UTILS_H__
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __TEGRA_ASOC_UTILS_H_
+=======
+#define __TEGRA_ASOC_UTILS_H__
+>>>>>>> v3.18
 =======
 #define __TEGRA_ASOC_UTILS_H__
 >>>>>>> v3.18
@@ -35,6 +39,10 @@ enum tegra_asoc_utils_soc {
 	TEGRA_ASOC_UTILS_SOC_TEGRA30,
 	TEGRA_ASOC_UTILS_SOC_TEGRA114,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TEGRA_ASOC_UTILS_SOC_TEGRA124,
+>>>>>>> v3.18
 =======
 	TEGRA_ASOC_UTILS_SOC_TEGRA124,
 >>>>>>> v3.18

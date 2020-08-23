@@ -39,6 +39,10 @@ static const struct usb_device_id line6_id_table[] = {
 	{USB_DEVICE(LINE6_VENDOR_ID, LINE6_DEVID_POCKETPOD)},
 	{USB_DEVICE(LINE6_VENDOR_ID, LINE6_DEVID_PODHD300)},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{USB_DEVICE(LINE6_VENDOR_ID, LINE6_DEVID_PODHD400)},
+>>>>>>> v3.18
 =======
 	{USB_DEVICE(LINE6_VENDOR_ID, LINE6_DEVID_PODHD400)},
 >>>>>>> v3.18
@@ -60,6 +64,7 @@ static const struct usb_device_id line6_id_table[] = {
 
 MODULE_DEVICE_TABLE(usb, line6_id_table);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* *INDENT-OFF* */
 static struct line6_properties line6_properties_table[] = {
@@ -83,6 +88,8 @@ static struct line6_properties line6_properties_table[] = {
 	{ LINE6_BIT_TONEPORT_UX2,  "TonePortUX2",   "TonePort UX2",     LINE6_BIT_PCM               },
 	{ LINE6_BIT_VARIAX,        "Variax",        "Variax Workbench", LINE6_BIT_CONTROL           },
 =======
+=======
+>>>>>>> v3.18
 #define L6PROP(dev_bit, dev_id, dev_name, dev_cap)\
 	{.device_bit = LINE6_BIT_##dev_bit, .id = dev_id,\
 	 .name = dev_name, .capabilities = LINE6_BIT_##dev_cap}
@@ -109,6 +116,9 @@ static const struct line6_properties line6_properties_table[] = {
 	L6PROP(TONEPORT_UX1,  "TonePortUX1",   "TonePort UX1",     PCM),
 	L6PROP(TONEPORT_UX2,  "TonePortUX2",   "TonePort UX2",     PCM),
 	L6PROP(VARIAX,        "Variax",        "Variax Workbench", CONTROL),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 /* *INDENT-ON* */
@@ -152,6 +162,10 @@ static int line6_start_listen(struct usb_line6 *line6)
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -188,15 +202,21 @@ int line6_send_raw_message(struct usb_line6 *line6, const char *buffer,
 
 		retval = usb_interrupt_msg(line6->usbdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   usb_sndintpipe(line6->usbdev,
 							  line6->ep_control_write),
 					   (char *)frag_buf, frag_size,
 					   &partial, LINE6_TIMEOUT * HZ);
 =======
+=======
+>>>>>>> v3.18
 					usb_sndintpipe(line6->usbdev,
 						line6->ep_control_write),
 					(char *)frag_buf, frag_size,
 					&partial, LINE6_TIMEOUT * HZ);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (retval) {
@@ -250,7 +270,11 @@ static int line6_send_raw_message_async_part(struct message *msg,
 		usb_free_urb(urb);
 		kfree(msg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return retval;
+>>>>>>> v3.18
 =======
 		return retval;
 >>>>>>> v3.18
@@ -264,7 +288,11 @@ static int line6_send_raw_message_async_part(struct message *msg,
 */
 void line6_start_timer(struct timer_list *timer, unsigned int msecs,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       void (*function) (unsigned long), unsigned long data)
+=======
+		       void (*function)(unsigned long), unsigned long data)
+>>>>>>> v3.18
 =======
 		       void (*function)(unsigned long), unsigned long data)
 >>>>>>> v3.18
@@ -393,7 +421,11 @@ static void line6_data_received(struct urb *urb)
 		line6_midi_receive(line6, line6->buffer_message, done);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (line6->usbdev->descriptor.idProduct) {
+=======
+		switch (le16_to_cpu(line6->usbdev->descriptor.idProduct)) {
+>>>>>>> v3.18
 =======
 		switch (le16_to_cpu(line6->usbdev->descriptor.idProduct)) {
 >>>>>>> v3.18
@@ -409,6 +441,10 @@ static void line6_data_received(struct urb *urb)
 
 		case LINE6_DEVID_PODHD300:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case LINE6_DEVID_PODHD400:
+>>>>>>> v3.18
 =======
 		case LINE6_DEVID_PODHD400:
 >>>>>>> v3.18
@@ -629,6 +665,7 @@ ssize_t line6_nop_read(struct device *dev, struct device_attribute *attr,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	No operation (i.e., unsupported).
 */
 ssize_t line6_nop_write(struct device *dev, struct device_attribute *attr,
@@ -638,6 +675,8 @@ ssize_t line6_nop_write(struct device *dev, struct device_attribute *attr,
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	Generic destructor.
@@ -728,7 +767,11 @@ static int line6_probe(struct usb_interface *interface,
 		switch (interface_number) {
 		case 0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;	/* this interface has no endpoints */
+=======
+			return -ENODEV;	/* this interface has no endpoints */
+>>>>>>> v3.18
 =======
 			return -ENODEV;	/* this interface has no endpoints */
 >>>>>>> v3.18
@@ -761,6 +804,10 @@ static int line6_probe(struct usb_interface *interface,
 	case LINE6_DEVID_PODXTPRO:
 	case LINE6_DEVID_PODHD300:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case LINE6_DEVID_PODHD400:
+>>>>>>> v3.18
 =======
 	case LINE6_DEVID_PODHD400:
 >>>>>>> v3.18
@@ -819,6 +866,10 @@ static int line6_probe(struct usb_interface *interface,
 
 	case LINE6_DEVID_PODHD300:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case LINE6_DEVID_PODHD400:
+>>>>>>> v3.18
 =======
 	case LINE6_DEVID_PODHD400:
 >>>>>>> v3.18
@@ -981,6 +1032,10 @@ static int line6_probe(struct usb_interface *interface,
 
 	case LINE6_DEVID_PODHD300:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case LINE6_DEVID_PODHD400:
+>>>>>>> v3.18
 =======
 	case LINE6_DEVID_PODHD400:
 >>>>>>> v3.18
@@ -1099,7 +1154,11 @@ static void line6_disconnect(struct usb_interface *interface)
 				"driver bug: inconsistent usb device\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (line6->usbdev->descriptor.idProduct) {
+=======
+		switch (le16_to_cpu(line6->usbdev->descriptor.idProduct)) {
+>>>>>>> v3.18
 =======
 		switch (le16_to_cpu(line6->usbdev->descriptor.idProduct)) {
 >>>>>>> v3.18
@@ -1116,6 +1175,10 @@ static void line6_disconnect(struct usb_interface *interface)
 
 		case LINE6_DEVID_PODHD300:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case LINE6_DEVID_PODHD400:
+>>>>>>> v3.18
 =======
 		case LINE6_DEVID_PODHD400:
 >>>>>>> v3.18
@@ -1211,7 +1274,11 @@ static int line6_reset_resume(struct usb_interface *interface)
 	struct usb_line6 *line6 = usb_get_intfdata(interface);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (line6->usbdev->descriptor.idProduct) {
+=======
+	switch (le16_to_cpu(line6->usbdev->descriptor.idProduct)) {
+>>>>>>> v3.18
 =======
 	switch (le16_to_cpu(line6->usbdev->descriptor.idProduct)) {
 >>>>>>> v3.18

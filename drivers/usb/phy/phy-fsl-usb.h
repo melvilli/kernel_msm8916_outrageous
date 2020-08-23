@@ -16,7 +16,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "phy-fsm-usb.h"
+=======
+#include <linux/usb/otg-fsm.h>
+>>>>>>> v3.18
 =======
 #include <linux/usb/otg-fsm.h>
 >>>>>>> v3.18
@@ -406,8 +410,13 @@ struct fsl_otg_config {
 #define GET_B_BUS_REQ		_IOR(OTG_IOCTL_MAGIC, 9, int)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fsl_otg_add_timer(void *timer);
 void fsl_otg_del_timer(void *timer);
+=======
+void fsl_otg_add_timer(struct otg_fsm *fsm, void *timer);
+void fsl_otg_del_timer(struct otg_fsm *fsm, void *timer);
+>>>>>>> v3.18
 =======
 void fsl_otg_add_timer(struct otg_fsm *fsm, void *timer);
 void fsl_otg_del_timer(struct otg_fsm *fsm, void *timer);

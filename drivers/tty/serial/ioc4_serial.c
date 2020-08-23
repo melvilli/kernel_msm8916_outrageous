@@ -298,7 +298,11 @@ struct ioc4_serial {
 	struct ioc4_uartregs uart_2;
 	struct ioc4_uartregs uart_3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } ioc4_serial;
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -2602,7 +2606,10 @@ static struct uart_ops ioc4_ops = {
 	.start_tx	= ic4_start_tx,
 	.stop_rx	= null_void_function,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= null_void_function,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= ic4_break_ctl,
@@ -2775,7 +2782,11 @@ ioc4_serial_core_attach(struct pci_dev *pdev, int port_type)
  * @idd: Master module data for this IOC4
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18

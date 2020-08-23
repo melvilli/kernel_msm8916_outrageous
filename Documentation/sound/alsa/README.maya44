@@ -121,7 +121,11 @@ Mic Phantom+48V: switch for +48V phantom power for electrostatic microphones on 
     It might damage the source and/or the maya44 card.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Mic/Line input: if switch is is on, input jack 1/2 is microphone input (mono), otherwise line input (stereo).
+=======
+Mic/Line input: if switch is on, input jack 1/2 is microphone input (mono), otherwise line input (stereo).
+>>>>>>> v3.18
 =======
 Mic/Line input: if switch is on, input jack 1/2 is microphone input (mono), otherwise line input (stereo).
 >>>>>>> v3.18

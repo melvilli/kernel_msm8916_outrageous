@@ -21,6 +21,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
@@ -31,10 +32,15 @@
  */
 
 =======
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/delay.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define NVRAM_USER_DATA_START	0x100
 
@@ -192,7 +198,11 @@ static void addi_eeprom_read_di_info(struct comedi_device *dev,
 				     unsigned short addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct addi_board *this_board = comedi_board(dev);
+=======
+	const struct addi_board *this_board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct addi_board *this_board = dev->board_ptr;
 >>>>>>> v3.18
@@ -217,7 +227,11 @@ static void addi_eeprom_read_do_info(struct comedi_device *dev,
 				     unsigned short addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct addi_board *this_board = comedi_board(dev);
+=======
+	const struct addi_board *this_board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct addi_board *this_board = dev->board_ptr;
 >>>>>>> v3.18
@@ -239,7 +253,11 @@ static void addi_eeprom_read_timer_info(struct comedi_device *dev,
 	struct addi_private *devpriv = dev->private;
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct addi_board *this_board = comedi_board(dev);
+=======
+	const struct addi_board *this_board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct addi_board *this_board = dev->board_ptr;
 >>>>>>> v3.18
@@ -284,7 +302,11 @@ static void addi_eeprom_read_ao_info(struct comedi_device *dev,
 				     unsigned short addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct addi_board *this_board = comedi_board(dev);
+=======
+	const struct addi_board *this_board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct addi_board *this_board = dev->board_ptr;
 >>>>>>> v3.18
@@ -307,7 +329,11 @@ static void addi_eeprom_read_ai_info(struct comedi_device *dev,
 				     unsigned short addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct addi_board *this_board = comedi_board(dev);
+=======
+	const struct addi_board *this_board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct addi_board *this_board = dev->board_ptr;
 >>>>>>> v3.18
@@ -330,7 +356,11 @@ static void addi_eeprom_read_ai_info(struct comedi_device *dev,
 
 	tmp = addi_eeprom_readw(iobase, type, addr + 20);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv->s_EeParameters.i_Dma = (tmp >> 13) & 0x01;
+=======
+	/* dma = (tmp >> 13) & 0x01; */
+>>>>>>> v3.18
 =======
 	/* dma = (tmp >> 13) & 0x01; */
 >>>>>>> v3.18
@@ -352,7 +382,11 @@ static void addi_eeprom_read_info(struct comedi_device *dev,
 				  unsigned long iobase)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct addi_board *this_board = comedi_board(dev);
+=======
+	const struct addi_board *this_board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct addi_board *this_board = dev->board_ptr;
 >>>>>>> v3.18

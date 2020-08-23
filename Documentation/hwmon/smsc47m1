@@ -26,7 +26,11 @@ Authors:
         fan.c program: http://www.lsc-group.phys.uwm.edu/%7Eballen/driver/
         Gabriele Gorla <gorlik@yahoo.com>,
 <<<<<<< HEAD
+<<<<<<< HEAD
         Jean Delvare <khali@linux-fr.org>
+=======
+        Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
         Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

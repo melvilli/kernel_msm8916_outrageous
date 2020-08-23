@@ -394,6 +394,7 @@ static struct fb_ops udlfb_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void udl_crtc_fb_gamma_set(struct drm_crtc *crtc, u16 red, u16 green,
 			   u16 blue, int regno)
 {
@@ -409,6 +410,8 @@ static void udl_crtc_fb_gamma_get(struct drm_crtc *crtc, u16 *red, u16 *green,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int udl_user_framebuffer_dirty(struct drm_framebuffer *fb,
 				      struct drm_file *file,
 				      unsigned flags, unsigned color,
@@ -420,13 +423,19 @@ static int udl_user_framebuffer_dirty(struct drm_framebuffer *fb,
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ufb->active_16)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	drm_modeset_lock_all(fb->dev);
 
 	if (!ufb->active_16)
 		goto unlock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ufb->obj->base.import_attach) {
@@ -435,7 +444,11 @@ static int udl_user_framebuffer_dirty(struct drm_framebuffer *fb,
 					       DMA_FROM_DEVICE);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return ret;
+=======
+			goto unlock;
+>>>>>>> v3.18
 =======
 			goto unlock;
 >>>>>>> v3.18
@@ -455,11 +468,17 @@ static int udl_user_framebuffer_dirty(struct drm_framebuffer *fb,
 				       DMA_FROM_DEVICE);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
  unlock:
 	drm_modeset_unlock_all(fb->dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -501,7 +520,12 @@ static int udlfb_create(struct drm_fb_helper *helper,
 			struct drm_fb_helper_surface_size *sizes)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct udl_fbdev *ufbdev = (struct udl_fbdev *)helper;
+=======
+	struct udl_fbdev *ufbdev =
+		container_of(helper, struct udl_fbdev, helper);
+>>>>>>> v3.18
 =======
 	struct udl_fbdev *ufbdev =
 		container_of(helper, struct udl_fbdev, helper);
@@ -584,9 +608,13 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct drm_fb_helper_funcs udl_fb_helper_funcs = {
 	.gamma_set = udl_crtc_fb_gamma_set,
 	.gamma_get = udl_crtc_fb_gamma_get,
+=======
+static const struct drm_fb_helper_funcs udl_fb_helper_funcs = {
+>>>>>>> v3.18
 =======
 static const struct drm_fb_helper_funcs udl_fb_helper_funcs = {
 >>>>>>> v3.18
@@ -623,7 +651,12 @@ int udl_fbdev_init(struct drm_device *dev)
 
 	udl->fbdev = ufbdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ufbdev->helper.funcs = &udl_fb_helper_funcs;
+=======
+
+	drm_fb_helper_prepare(dev, &ufbdev->helper, &udl_fb_helper_funcs);
+>>>>>>> v3.18
 =======
 
 	drm_fb_helper_prepare(dev, &ufbdev->helper, &udl_fb_helper_funcs);

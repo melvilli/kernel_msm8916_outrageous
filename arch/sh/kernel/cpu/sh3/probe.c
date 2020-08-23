@@ -17,7 +17,11 @@
 #include <asm/io.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit cpu_probe(void)
+=======
+void cpu_probe(void)
+>>>>>>> v3.18
 =======
 void cpu_probe(void)
 >>>>>>> v3.18

@@ -40,7 +40,11 @@ static struct media_entity *vpfe_get_input_entity
 	struct media_pad *remote;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	remote = media_entity_remote_source(&vpfe_dev->vpfe_isif.pads[0]);
+=======
+	remote = media_entity_remote_pad(&vpfe_dev->vpfe_isif.pads[0]);
+>>>>>>> v3.18
 =======
 	remote = media_entity_remote_pad(&vpfe_dev->vpfe_isif.pads[0]);
 >>>>>>> v3.18
@@ -61,7 +65,11 @@ static int vpfe_update_current_ext_subdev(struct vpfe_video_device *video)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	remote = media_entity_remote_source(&vpfe_dev->vpfe_isif.pads[0]);
+=======
+	remote = media_entity_remote_pad(&vpfe_dev->vpfe_isif.pads[0]);
+>>>>>>> v3.18
 =======
 	remote = media_entity_remote_pad(&vpfe_dev->vpfe_isif.pads[0]);
 >>>>>>> v3.18
@@ -98,7 +106,11 @@ static struct v4l2_subdev *
 vpfe_video_remote_subdev(struct vpfe_video_device *video, u32 *pad)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct media_pad *remote = media_entity_remote_source(&video->pad);
+=======
+	struct media_pad *remote = media_entity_remote_pad(&video->pad);
+>>>>>>> v3.18
 =======
 	struct media_pad *remote = media_entity_remote_pad(&video->pad);
 >>>>>>> v3.18
@@ -127,7 +139,11 @@ __vpfe_video_get_format(struct vpfe_video_device *video,
 
 	fmt.which = V4L2_SUBDEV_FORMAT_ACTIVE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	remote = media_entity_remote_source(&video->pad);
+=======
+	remote = media_entity_remote_pad(&video->pad);
+>>>>>>> v3.18
 =======
 	remote = media_entity_remote_pad(&video->pad);
 >>>>>>> v3.18
@@ -262,7 +278,11 @@ static int vpfe_video_validate_pipeline(struct vpfe_pipeline *pipe)
 
 		/* Retrieve the source format */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pad = media_entity_remote_source(pad);
+=======
+		pad = media_entity_remote_pad(pad);
+>>>>>>> v3.18
 =======
 		pad = media_entity_remote_pad(pad);
 >>>>>>> v3.18
@@ -367,7 +387,11 @@ static int vpfe_pipeline_disable(struct vpfe_pipeline *pipe)
 	mutex_unlock(&mdev->graph_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (ret == 0) ? ret : -ETIMEDOUT ;
+=======
+	return ret ? -ETIMEDOUT : 0;
+>>>>>>> v3.18
 =======
 	return ret ? -ETIMEDOUT : 0;
 >>>>>>> v3.18
@@ -440,7 +464,10 @@ static int vpfe_open(struct file *file)
 	/* Set io_allowed member to false */
 	handle->io_allowed = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_prio_open(&video->prio, &handle->prio);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	handle->video = video;
@@ -560,8 +587,13 @@ static int vpfe_release(struct file *file)
 	/* Decrement device users counter */
 	video->usrs--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Close the priority */
 	v4l2_prio_close(&video->prio, fh->prio);
+=======
+	v4l2_fh_del(&fh->vfh);
+	v4l2_fh_exit(&fh->vfh);
+>>>>>>> v3.18
 =======
 	v4l2_fh_del(&fh->vfh);
 	v4l2_fh_exit(&fh->vfh);
@@ -700,7 +732,11 @@ static int vpfe_enum_fmt(struct file *file, void  *priv,
 	}
 	/* get the remote pad */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	remote = media_entity_remote_source(&video->pad);
+=======
+	remote = media_entity_remote_pad(&video->pad);
+>>>>>>> v3.18
 =======
 	remote = media_entity_remote_pad(&video->pad);
 >>>>>>> v3.18
@@ -982,7 +1018,11 @@ static int vpfe_s_std(struct file *file, void *priv, v4l2_std_id std_id)
 	}
 	ret = v4l2_device_call_until_err(&vpfe_dev->v4l2_dev, sdinfo->grp_id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 core, s_std, std_id);
+=======
+					 video, s_std, std_id);
+>>>>>>> v3.18
 =======
 					 video, s_std, std_id);
 >>>>>>> v3.18
@@ -1028,13 +1068,19 @@ vpfe_enum_dv_timings(struct file *file, void *fh,
 	struct v4l2_subdev *subdev = video->current_ext_subdev->subdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_dbg(1, debug, &vpfe_dev->v4l2_dev, "vpfe_enum_dv_timings\n");
 	return v4l2_subdev_call(subdev, video, enum_dv_timings, timings);
 =======
+=======
+>>>>>>> v3.18
 	timings->pad = 0;
 
 	v4l2_dbg(1, debug, &vpfe_dev->v4l2_dev, "vpfe_enum_dv_timings\n");
 	return v4l2_subdev_call(subdev, pad, enum_dv_timings, timings);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1267,9 +1313,12 @@ static int vpfe_start_streaming(struct vb2_queue *vq, unsigned int count)
 
 	ret = vpfe_start_capture(video);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret)
 		goto unlock_out;
 =======
+=======
+>>>>>>> v3.18
 	if (ret) {
 		struct vpfe_cap_buffer *buf, *tmp;
 
@@ -1280,6 +1329,9 @@ static int vpfe_start_streaming(struct vb2_queue *vq, unsigned int count)
 		}
 		goto unlock_out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&video->lock);
@@ -1303,7 +1355,11 @@ static int vpfe_buffer_init(struct vb2_buffer *vb)
 
 /* abort streaming and wait for last buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vpfe_stop_streaming(struct vb2_queue *vq)
+=======
+static void vpfe_stop_streaming(struct vb2_queue *vq)
+>>>>>>> v3.18
 =======
 static void vpfe_stop_streaming(struct vb2_queue *vq)
 >>>>>>> v3.18
@@ -1312,10 +1368,13 @@ static void vpfe_stop_streaming(struct vb2_queue *vq)
 	struct vpfe_video_device *video = fh->video;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!vb2_is_streaming(vq))
 		return 0;
 	/* release all active buffers */
 =======
+=======
+>>>>>>> v3.18
 	/* release all active buffers */
 	if (video->cur_frm == video->next_frm) {
 		vb2_buffer_done(&video->cur_frm->vb, VB2_BUF_STATE_ERROR);
@@ -1328,6 +1387,9 @@ static void vpfe_stop_streaming(struct vb2_queue *vq)
 					VB2_BUF_STATE_ERROR);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (!list_empty(&video->dma_queue)) {
 		video->next_frm = list_entry(video->dma_queue.next,
@@ -1336,7 +1398,10 @@ static void vpfe_stop_streaming(struct vb2_queue *vq)
 		vb2_buffer_done(&video->next_frm->vb, VB2_BUF_STATE_ERROR);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1408,6 +1473,10 @@ static int vpfe_reqbufs(struct file *file, void *priv,
 	q->io_modes = VB2_MMAP | VB2_USERPTR;
 	q->drv_priv = fh;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	q->min_buffers_needed = 1;
+>>>>>>> v3.18
 =======
 	q->min_buffers_needed = 1;
 >>>>>>> v3.18
@@ -1667,8 +1736,11 @@ int vpfe_video_init(struct vpfe_video_device *video, const char *name)
 		 "DAVINCI VIDEO %s %s", name, direction);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Initialize prio member of device object */
 	v4l2_prio_init(&video->prio);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_init(&video->irqlock);
@@ -1704,8 +1776,13 @@ void vpfe_video_unregister(struct vpfe_video_device *video)
 {
 	if (video_is_registered(&video->video_dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		media_entity_cleanup(&video->video_dev.entity);
 		video_unregister_device(&video->video_dev);
+=======
+		video_unregister_device(&video->video_dev);
+		media_entity_cleanup(&video->video_dev.entity);
+>>>>>>> v3.18
 =======
 		video_unregister_device(&video->video_dev);
 		media_entity_cleanup(&video->video_dev.entity);

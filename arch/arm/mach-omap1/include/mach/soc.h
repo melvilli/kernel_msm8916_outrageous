@@ -196,6 +196,10 @@ IS_OMAP_TYPE(1710, 0x1710)
 #define cpu_is_omap44xx()		0
 #define soc_is_omap54xx()		0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define soc_is_dra7xx()			0
+>>>>>>> v3.18
 =======
 #define soc_is_dra7xx()			0
 >>>>>>> v3.18

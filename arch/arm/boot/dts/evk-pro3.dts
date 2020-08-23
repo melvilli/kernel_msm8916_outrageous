@@ -10,7 +10,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "ge863-pro3.dtsi"
+=======
+#include "ge863-pro3.dtsi"
+>>>>>>> v3.18
 =======
 #include "ge863-pro3.dtsi"
 >>>>>>> v3.18
@@ -20,13 +24,19 @@
 	compatible = "telit,evk-pro3", "atmel,at91sam9260", "atmel,at91sam9";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	clocks {
 		slow_xtal {
 			clock-frequency = <32768>;
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ahb {
 		apb {
@@ -45,7 +55,11 @@
 
 			usb1: gadget@fffa4000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				atmel,vbus-gpio = <&pioC 5 0>;
+=======
+				atmel,vbus-gpio = <&pioC 5 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 				atmel,vbus-gpio = <&pioC 5 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -68,7 +82,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18

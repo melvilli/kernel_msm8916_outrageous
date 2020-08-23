@@ -1,9 +1,15 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ntfs.h - Defines for NTFS Linux kernel driver. Part of the Linux-NTFS
  *	    project.
  *
  * Copyright (c) 2001-2005 Anton Altaparmakov
+=======
+ * ntfs.h - Defines for NTFS Linux kernel driver.
+ *
+ * Copyright (c) 2001-2014 Anton Altaparmakov and Tuxera Inc.
+>>>>>>> v3.18
 =======
  * ntfs.h - Defines for NTFS Linux kernel driver.
  *
@@ -64,7 +70,12 @@ extern struct kmem_cache *ntfs_index_ctx_cache;
 
 /* The various operations structs defined throughout the driver files. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct address_space_operations ntfs_aops;
+=======
+extern const struct address_space_operations ntfs_normal_aops;
+extern const struct address_space_operations ntfs_compressed_aops;
+>>>>>>> v3.18
 =======
 extern const struct address_space_operations ntfs_normal_aops;
 extern const struct address_space_operations ntfs_compressed_aops;

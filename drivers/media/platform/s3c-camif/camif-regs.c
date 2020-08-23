@@ -107,6 +107,7 @@ void camif_hw_set_source_format(struct camif_dev *camif)
 {
 	struct v4l2_mbus_framefmt *mf = &camif->mbus_fmt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int i = ARRAY_SIZE(src_pixfmt_map);
 	u32 cfg;
 
@@ -117,6 +118,8 @@ void camif_hw_set_source_format(struct camif_dev *camif)
 
 	if (i == 0 && src_pixfmt_map[i][0] != mf->code) {
 =======
+=======
+>>>>>>> v3.18
 	int i;
 	u32 cfg;
 
@@ -126,6 +129,9 @@ void camif_hw_set_source_format(struct camif_dev *camif)
 	}
 	if (i < 0) {
 		i = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(camif->dev,
 			"Unsupported pixel code, falling back to %#08x\n",
@@ -227,8 +233,13 @@ void camif_hw_set_output_addr(struct camif_vp *vp,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("dst_buf[%d]: %#X, cb: %#X, cr: %#X\n",
 		 i, paddr->y, paddr->cb, paddr->cr);
+=======
+	pr_debug("dst_buf[%d]: %pad, cb: %pad, cr: %pad\n",
+		 i, &paddr->y, &paddr->cb, &paddr->cr);
+>>>>>>> v3.18
 =======
 	pr_debug("dst_buf[%d]: %pad, cb: %pad, cr: %pad\n",
 		 i, &paddr->y, &paddr->cb, &paddr->cr);
@@ -397,7 +408,11 @@ static void camif_hw_set_prescaler(struct camif_vp *vp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void camif_s3c244x_hw_set_scaler(struct camif_vp *vp)
+=======
+static void camif_s3c244x_hw_set_scaler(struct camif_vp *vp)
+>>>>>>> v3.18
 =======
 static void camif_s3c244x_hw_set_scaler(struct camif_vp *vp)
 >>>>>>> v3.18
@@ -448,7 +463,11 @@ static void camif_s3c244x_hw_set_scaler(struct camif_vp *vp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void camif_s3c64xx_hw_set_scaler(struct camif_vp *vp)
+=======
+static void camif_s3c64xx_hw_set_scaler(struct camif_vp *vp)
+>>>>>>> v3.18
 =======
 static void camif_s3c64xx_hw_set_scaler(struct camif_vp *vp)
 >>>>>>> v3.18
@@ -627,7 +646,11 @@ void camif_hw_dump_regs(struct camif_dev *camif, const char *label)
 	for (i = 0; i < ARRAY_SIZE(registers); i++) {
 		u32 cfg = readl(camif->io_base + registers[i].offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "%s:\t0x%08x\n", registers[i].name, cfg);
+=======
+		dev_info(camif->dev, "%s:\t0x%08x\n", registers[i].name, cfg);
+>>>>>>> v3.18
 =======
 		dev_info(camif->dev, "%s:\t0x%08x\n", registers[i].name, cfg);
 >>>>>>> v3.18

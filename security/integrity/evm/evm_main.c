@@ -15,21 +15,30 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/crypto.h>
 =======
+=======
+>>>>>>> v3.18
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/module.h>
 #include <linux/crypto.h>
 #include <linux/audit.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/xattr.h>
 #include <linux/integrity.h>
 #include <linux/evm.h>
 #include <crypto/hash.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <crypto/algapi.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "evm.h"
@@ -37,16 +46,22 @@
 int evm_initialized;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 char *evm_hmac = "hmac(sha1)";
 char *evm_hash = "sha1";
 int evm_hmac_version = CONFIG_EVM_HMAC_VERSION;
 =======
+=======
+>>>>>>> v3.18
 static char *integrity_status_msg[] = {
 	"pass", "fail", "no_label", "no_xattrs", "unknown"
 };
 char *evm_hmac = "hmac(sha1)";
 char *evm_hash = "sha1";
 int evm_hmac_attrs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 char *evm_config_xattrnames[] = {
@@ -56,12 +71,18 @@ char *evm_config_xattrnames[] = {
 #ifdef CONFIG_SECURITY_SMACK
 	XATTR_NAME_SMACK,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EVM_EXTRA_SMACK_XATTRS
 	XATTR_NAME_SMACKEXEC,
 	XATTR_NAME_SMACKTRANSMUTE,
 	XATTR_NAME_SMACKMMAP,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #ifdef CONFIG_IMA_APPRAISE
@@ -81,7 +102,10 @@ static int __init evm_set_fixmode(char *str)
 __setup("evm=", evm_set_fixmode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init evm_init_config(void)
 {
 #ifdef CONFIG_EVM_ATTR_FSUUID
@@ -90,6 +114,9 @@ static void __init evm_init_config(void)
 	pr_info("HMAC attrs: 0x%x\n", evm_hmac_attrs);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int evm_find_protected_xattrs(struct dentry *dentry)
 {
@@ -99,7 +126,11 @@ static int evm_find_protected_xattrs(struct dentry *dentry)
 	int count = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!inode->i_op || !inode->i_op->getxattr)
+=======
+	if (!inode->i_op->getxattr)
+>>>>>>> v3.18
 =======
 	if (!inode->i_op->getxattr)
 >>>>>>> v3.18
@@ -152,9 +183,14 @@ static enum integrity_status evm_verify_hmac(struct dentry *dentry,
 				GFP_NOFS);
 	if (rc <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rc == 0)
 			evm_status = INTEGRITY_FAIL; /* empty */
 		else if (rc == -ENODATA) {
+=======
+		evm_status = INTEGRITY_FAIL;
+		if (rc == -ENODATA) {
+>>>>>>> v3.18
 =======
 		evm_status = INTEGRITY_FAIL;
 		if (rc == -ENODATA) {
@@ -165,6 +201,11 @@ static enum integrity_status evm_verify_hmac(struct dentry *dentry,
 			else if (rc == 0)
 				evm_status = INTEGRITY_NOXATTRS; /* new file */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		} else if (rc == -EOPNOTSUPP) {
+			evm_status = INTEGRITY_UNKNOWN;
+>>>>>>> v3.18
 =======
 		} else if (rc == -EOPNOTSUPP) {
 			evm_status = INTEGRITY_UNKNOWN;
@@ -174,7 +215,11 @@ static enum integrity_status evm_verify_hmac(struct dentry *dentry,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xattr_len = rc - 1;
+=======
+	xattr_len = rc;
+>>>>>>> v3.18
 =======
 	xattr_len = rc;
 >>>>>>> v3.18
@@ -187,7 +232,11 @@ static enum integrity_status evm_verify_hmac(struct dentry *dentry,
 		if (rc)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = crypto_memneq(xattr_data->digest, calc.digest,
+=======
+		rc = memcmp(xattr_data->digest, calc.digest,
+>>>>>>> v3.18
 =======
 		rc = memcmp(xattr_data->digest, calc.digest,
 >>>>>>> v3.18
@@ -202,7 +251,11 @@ static enum integrity_status evm_verify_hmac(struct dentry *dentry,
 			break;
 		rc = integrity_digsig_verify(INTEGRITY_KEYRING_EVM,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					xattr_data->digest, xattr_len,
+=======
+					(const char *)xattr_data, xattr_len,
+>>>>>>> v3.18
 =======
 					(const char *)xattr_data, xattr_len,
 >>>>>>> v3.18
@@ -329,10 +382,13 @@ static int evm_protect_xattr(struct dentry *dentry, const char *xattr_name,
 		    (evm_status == INTEGRITY_NOXATTRS))
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EPERM;
 	}
 	evm_status = evm_verify_current_integrity(dentry);
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 	}
 	evm_status = evm_verify_current_integrity(dentry);
@@ -349,6 +405,9 @@ out:
 				    dentry->d_name.name, "appraise_metadata",
 				    integrity_status_msg[evm_status],
 				    -EPERM, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return evm_status == INTEGRITY_PASS ? 0 : -EPERM;
 }
@@ -416,7 +475,10 @@ void evm_inode_post_setxattr(struct dentry *dentry, const char *xattr_name,
 
 	evm_update_evmxattr(dentry, xattr_name, xattr_value, xattr_value_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -439,7 +501,10 @@ void evm_inode_post_removexattr(struct dentry *dentry, const char *xattr_name)
 	evm_update_evmxattr(dentry, xattr_name, NULL, 0);
 	mutex_unlock(&inode->i_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -460,6 +525,12 @@ int evm_inode_setattr(struct dentry *dentry, struct iattr *attr)
 	    (evm_status == INTEGRITY_NOXATTRS))
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	integrity_audit_msg(AUDIT_INTEGRITY_METADATA, dentry->d_inode,
+			    dentry->d_name.name, "appraise_metadata",
+			    integrity_status_msg[evm_status], -EPERM, 0);
+>>>>>>> v3.18
 =======
 	integrity_audit_msg(AUDIT_INTEGRITY_METADATA, dentry->d_inode,
 			    dentry->d_name.name, "appraise_metadata",
@@ -487,7 +558,10 @@ void evm_inode_post_setattr(struct dentry *dentry, int ia_valid)
 	if (ia_valid & (ATTR_MODE | ATTR_UID | ATTR_GID))
 		evm_update_evmxattr(dentry, NULL, NULL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -517,7 +591,11 @@ int evm_inode_init_security(struct inode *inode,
 	evm_xattr->value = xattr_data;
 	evm_xattr->value_len = sizeof(*xattr_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	evm_xattr->name = kstrdup(XATTR_EVM_SUFFIX, GFP_NOFS);
+=======
+	evm_xattr->name = XATTR_EVM_SUFFIX;
+>>>>>>> v3.18
 =======
 	evm_xattr->name = XATTR_EVM_SUFFIX;
 >>>>>>> v3.18
@@ -533,15 +611,21 @@ static int __init init_evm(void)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = evm_init_secfs();
 	if (error < 0) {
 		printk(KERN_INFO "EVM: Error registering secfs\n");
 =======
+=======
+>>>>>>> v3.18
 	evm_init_config();
 
 	error = evm_init_secfs();
 	if (error < 0) {
 		pr_info("Error registering secfs\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err;
 	}
@@ -560,7 +644,11 @@ static int __init evm_display_config(void)
 
 	for (xattrname = evm_config_xattrnames; *xattrname != NULL; xattrname++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "EVM: %s\n", *xattrname);
+=======
+		pr_info("%s\n", *xattrname);
+>>>>>>> v3.18
 =======
 		pr_info("%s\n", *xattrname);
 >>>>>>> v3.18

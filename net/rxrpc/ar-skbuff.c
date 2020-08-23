@@ -84,10 +84,13 @@ static void rxrpc_hard_ACK_data(struct rxrpc_call *call,
 	} else if (atomic_dec_and_test(&call->ackr_not_idle) &&
 		   test_and_clear_bit(RXRPC_CALL_TX_SOFT_ACK, &call->flags)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_debug("send Rx idle ACK");
 		__rxrpc_propose_ACK(call, RXRPC_ACK_IDLE, sp->hdr.serial,
 				    true);
 =======
+=======
+>>>>>>> v3.18
 		/* We previously soft-ACK'd some received packets that have now
 		 * been consumed, so send a hard-ACK if no more packets are
 		 * immediately forthcoming to allow the transmitter to free up
@@ -96,6 +99,9 @@ static void rxrpc_hard_ACK_data(struct rxrpc_call *call,
 		_debug("send Rx idle ACK");
 		__rxrpc_propose_ACK(call, RXRPC_ACK_IDLE, sp->hdr.serial,
 				    false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

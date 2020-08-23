@@ -5,7 +5,11 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "ste-nomadik-stn8815.dtsi"
+=======
+#include "ste-nomadik-stn8815.dtsi"
+>>>>>>> v3.18
 =======
 #include "ste-nomadik-stn8815.dtsi"
 >>>>>>> v3.18
@@ -27,6 +31,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Custom board node with GPIO pins to active etc */
 	usb-s8815 {
 		/* The S8815 is using this very GPIO pin for the SMSC91x IRQs */
@@ -34,6 +39,8 @@
 			gpios = <&gpio3 8 0x1>;
 		};
 =======
+=======
+>>>>>>> v3.18
 	src@101e0000 {
 		/* These chrystal drivers are not used on this board */
 		disable-sxtalo;
@@ -79,6 +86,9 @@
 
 	/* Custom board node with GPIO pins to active etc */
 	usb-s8815 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* This will bias the MMC/SD card detect line */
 		mmcsd-gpio {
@@ -86,7 +96,10 @@
 		};
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* The user LED on the board is set up to be used for heartbeat */
 	leds {
@@ -113,5 +126,8 @@
 			pinctrl-0 = <&user_button_default_mode>;
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

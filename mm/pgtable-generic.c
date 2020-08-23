@@ -11,7 +11,10 @@
 #include <asm-generic/pgtable.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * If a p?d_bad entry is found while walking page tables, report
  * the error, before resetting entry to p?d_none.  Usually (but
@@ -36,6 +39,9 @@ void pmd_clear_bad(pmd_t *pmd)
 	pmd_clear(pmd);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __HAVE_ARCH_PTEP_SET_ACCESS_FLAGS
 /*
@@ -153,6 +159,7 @@ void pmdp_splitting_flush(struct vm_area_struct *vma, unsigned long address,
 #ifndef __HAVE_ARCH_PGTABLE_DEPOSIT
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pgtable_trans_huge_deposit(struct mm_struct *mm, pgtable_t pgtable)
 {
 	assert_spin_locked(&mm->page_table_lock);
@@ -164,6 +171,8 @@ void pgtable_trans_huge_deposit(struct mm_struct *mm, pgtable_t pgtable)
 		list_add(&pgtable->lru, &mm->pmd_huge_pte->lru);
 	mm->pmd_huge_pte = pgtable;
 =======
+=======
+>>>>>>> v3.18
 void pgtable_trans_huge_deposit(struct mm_struct *mm, pmd_t *pmdp,
 				pgtable_t pgtable)
 {
@@ -175,6 +184,9 @@ void pgtable_trans_huge_deposit(struct mm_struct *mm, pmd_t *pmdp,
 	else
 		list_add(&pgtable->lru, &pmd_huge_pte(mm, pmdp)->lru);
 	pmd_huge_pte(mm, pmdp) = pgtable;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif /* CONFIG_TRANSPARENT_HUGEPAGE */
@@ -183,6 +195,7 @@ void pgtable_trans_huge_deposit(struct mm_struct *mm, pmd_t *pmdp,
 #ifndef __HAVE_ARCH_PGTABLE_WITHDRAW
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 /* no "address" argument so destroys page coloring of some arch */
+<<<<<<< HEAD
 <<<<<<< HEAD
 pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm)
 {
@@ -197,6 +210,8 @@ pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm)
 	else {
 		mm->pmd_huge_pte = list_entry(pgtable->lru.next,
 =======
+=======
+>>>>>>> v3.18
 pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp)
 {
 	pgtable_t pgtable;
@@ -209,6 +224,9 @@ pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp)
 		pmd_huge_pte(mm, pmdp) = NULL;
 	else {
 		pmd_huge_pte(mm, pmdp) = list_entry(pgtable->lru.next,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					      struct page, lru);
 		list_del(&pgtable->lru);
@@ -227,7 +245,11 @@ void pmdp_invalidate(struct vm_area_struct *vma, unsigned long address,
 	if (pmd_numa(entry))
 		entry = pmd_mknonnuma(entry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_pmd_at(vma->vm_mm, address, pmdp, pmd_mknotpresent(*pmdp));
+=======
+	set_pmd_at(vma->vm_mm, address, pmdp, pmd_mknotpresent(entry));
+>>>>>>> v3.18
 =======
 	set_pmd_at(vma->vm_mm, address, pmdp, pmd_mknotpresent(entry));
 >>>>>>> v3.18

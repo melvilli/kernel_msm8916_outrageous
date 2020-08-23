@@ -7,9 +7,12 @@ the pins includes drive strength and pull-up.
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: "allwinner,<soc>-pinctrl". Supported SoCs for now are:
   sun5i-a13.
 =======
+=======
+>>>>>>> v3.18
 - compatible: Should be one of the followings (depending on you SoC):
   "allwinner,sun4i-a10-pinctrl"
   "allwinner,sun5i-a10s-pinctrl"
@@ -19,6 +22,9 @@ Required properties:
   "allwinner,sun7i-a20-pinctrl"
   "allwinner,sun8i-a23-pinctrl"
   "allwinner,sun8i-a23-r-pinctrl"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - reg: Should contain the register physical address and length for the
   pin controller.

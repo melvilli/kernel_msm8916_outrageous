@@ -52,7 +52,11 @@ static const unsigned char lzop_magic[] = {
 #define HEADER_SIZE_MAX       (9 + 7 + 1 + 8 + 8 + 4 + 1 + 255 + 4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 STATIC inline int INIT parse_header(u8 *input, int *skip, int in_len)
+=======
+STATIC inline long INIT parse_header(u8 *input, long *skip, long in_len)
+>>>>>>> v3.18
 =======
 STATIC inline long INIT parse_header(u8 *input, long *skip, long in_len)
 >>>>>>> v3.18
@@ -113,6 +117,7 @@ STATIC inline long INIT parse_header(u8 *input, long *skip, long in_len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 STATIC inline int INIT unlzo(u8 *input, int in_len,
 				int (*fill) (void *, unsigned int),
 				int (*flush) (void *, unsigned int),
@@ -122,6 +127,8 @@ STATIC inline int INIT unlzo(u8 *input, int in_len,
 	u8 r = 0;
 	int skip = 0;
 =======
+=======
+>>>>>>> v3.18
 STATIC int INIT unlzo(u8 *input, long in_len,
 				long (*fill)(void *, unsigned long),
 				long (*flush)(void *, unsigned long),
@@ -130,6 +137,9 @@ STATIC int INIT unlzo(u8 *input, long in_len,
 {
 	u8 r = 0;
 	long skip = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 src_len, dst_len;
 	size_t tmp;

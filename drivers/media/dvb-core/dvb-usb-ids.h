@@ -145,6 +145,10 @@
 #define USB_PID_ITETECH_IT9135_9005			0x9005
 #define USB_PID_ITETECH_IT9135_9006			0x9006
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USB_PID_ITETECH_IT9303				0x9306
+>>>>>>> v3.18
 =======
 #define USB_PID_ITETECH_IT9303				0x9306
 >>>>>>> v3.18
@@ -244,6 +248,10 @@
 #define USB_PID_AVERMEDIA_1867				0x1867
 #define USB_PID_AVERMEDIA_A867				0xa867
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USB_PID_AVERMEDIA_H335				0x0335
+>>>>>>> v3.18
 =======
 #define USB_PID_AVERMEDIA_H335				0x0335
 >>>>>>> v3.18
@@ -252,6 +260,11 @@
 #define USB_PID_TECHNOTREND_CONNECT_S2400_8KEEPROM	0x3009
 #define USB_PID_TECHNOTREND_CONNECT_CT3650		0x300d
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USB_PID_TECHNOTREND_CONNECT_CT2_4650_CI		0x3012
+#define USB_PID_TECHNOTREND_TVSTICK_CT2_4400		0x3014
+>>>>>>> v3.18
 =======
 #define USB_PID_TECHNOTREND_CONNECT_CT2_4650_CI		0x3012
 #define USB_PID_TECHNOTREND_TVSTICK_CT2_4400		0x3014
@@ -270,6 +283,10 @@
 #define USB_PID_NOXON_DAB_STICK				0x00b3
 #define USB_PID_NOXON_DAB_STICK_REV2			0x00e0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USB_PID_NOXON_DAB_STICK_REV3			0x00b4
+>>>>>>> v3.18
 =======
 #define USB_PID_NOXON_DAB_STICK_REV3			0x00b4
 >>>>>>> v3.18
@@ -295,6 +312,11 @@
 #define USB_PID_PCTV_450E				0x0222
 #define USB_PID_PCTV_452E				0x021f
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USB_PID_PCTV_78E				0x025a
+#define USB_PID_PCTV_79E				0x0262
+>>>>>>> v3.18
 =======
 #define USB_PID_PCTV_78E				0x025a
 #define USB_PID_PCTV_79E				0x0262
@@ -340,6 +362,10 @@
 #define USB_PID_WINFAST_DTV_DONGLE_STK7700P_2		0x6f01
 #define USB_PID_WINFAST_DTV_DONGLE_GOLD			0x6029
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USB_PID_WINFAST_DTV_DONGLE_MINID		0x6f0f
+>>>>>>> v3.18
 =======
 #define USB_PID_WINFAST_DTV_DONGLE_MINID		0x6f0f
 >>>>>>> v3.18
@@ -380,6 +406,10 @@
 #define USB_PID_ELGATO_EYETV_DTT_Dlx			0x0020
 #define USB_PID_ELGATO_EYETV_SAT			0x002a
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USB_PID_ELGATO_EYETV_SAT_V2			0x0025
+>>>>>>> v3.18
 =======
 #define USB_PID_ELGATO_EYETV_SAT_V2			0x0025
 >>>>>>> v3.18
@@ -389,6 +419,11 @@
 #define USB_PID_TVWAY_PLUS				0x0002
 #define USB_PID_SVEON_STV20				0xe39d
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USB_PID_SVEON_STV20_RTL2832U			0xd39d
+#define USB_PID_SVEON_STV21				0xd3b0
+>>>>>>> v3.18
 =======
 #define USB_PID_SVEON_STV20_RTL2832U			0xd39d
 #define USB_PID_SVEON_STV21				0xd3b0
@@ -401,9 +436,12 @@
 #define USB_PID_TECHNISAT_USB2_HDCI_V1			0x0001
 #define USB_PID_TECHNISAT_USB2_HDCI_V2			0x0002
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USB_PID_TECHNISAT_AIRSTAR_TELESTICK_2		0x0004
 #define USB_PID_TECHNISAT_USB2_DVB_S2			0x0500
 =======
+=======
+>>>>>>> v3.18
 #define USB_PID_TECHNISAT_USB2_CABLESTAR_HDCI		0x0003
 #define USB_PID_TECHNISAT_AIRSTAR_TELESTICK_2		0x0004
 #define USB_PID_TECHNISAT_USB2_DVB_S2			0x0500
@@ -412,5 +450,8 @@
 #define USB_PID_PCTV_2002E                              0x025c
 #define USB_PID_PCTV_2002E_SE                           0x025d
 #define USB_PID_SVEON_STV27                             0xd3af
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

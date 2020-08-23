@@ -20,6 +20,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clocksource.h>
+>>>>>>> v3.18
 =======
 #include <linux/clocksource.h>
 >>>>>>> v3.18
@@ -41,6 +45,10 @@ struct arm_delay_ops arm_delay_ops = {
 static const struct delay_timer *delay_timer;
 static bool delay_calibrated;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static u64 delay_res;
+>>>>>>> v3.18
 =======
 static u64 delay_res;
 >>>>>>> v3.18
@@ -56,12 +64,18 @@ int read_current_timer(unsigned long *timer_val)
 EXPORT_SYMBOL_GPL(read_current_timer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline u64 cyc_to_ns(u64 cyc, u32 mult, u32 shift)
 {
 	return (cyc * mult) >> shift;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __timer_delay(unsigned long cycles)
 {
@@ -86,11 +100,14 @@ static void __timer_udelay(unsigned long usecs)
 void __init register_current_timer_delay(const struct delay_timer *timer)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!delay_calibrated) {
 		pr_info("Switching to timer-based delay loop\n");
 		delay_timer			= timer;
 		lpj_fine			= timer->freq / HZ;
 =======
+=======
+>>>>>>> v3.18
 	u32 new_mult, new_shift;
 	u64 res;
 
@@ -103,6 +120,9 @@ void __init register_current_timer_delay(const struct delay_timer *timer)
 		delay_timer			= timer;
 		lpj_fine			= timer->freq / HZ;
 		delay_res			= res;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* cpufreq may scale loops_per_jiffy, so keep a private copy */
@@ -111,8 +131,11 @@ void __init register_current_timer_delay(const struct delay_timer *timer)
 		arm_delay_ops.const_udelay	= __timer_const_udelay;
 		arm_delay_ops.udelay		= __timer_udelay;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		delay_calibrated		= true;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {
@@ -121,7 +144,11 @@ void __init register_current_timer_delay(const struct delay_timer *timer)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long __cpuinit calibrate_delay_is_known(void)
+=======
+unsigned long calibrate_delay_is_known(void)
+>>>>>>> v3.18
 =======
 unsigned long calibrate_delay_is_known(void)
 >>>>>>> v3.18
@@ -130,10 +157,16 @@ unsigned long calibrate_delay_is_known(void)
 	return lpj_fine;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void calibration_delay_done(void)
 {
 	delay_calibrated = true;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

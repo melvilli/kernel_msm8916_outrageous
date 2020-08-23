@@ -14,7 +14,11 @@
 
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/plist.h>
+=======
+#include <linux/rbtree.h>
+>>>>>>> v3.18
 =======
 #include <linux/rbtree.h>
 >>>>>>> v3.18
@@ -27,7 +31,12 @@ extern int max_lock_depth; /* for sysctl */
  *
  * @wait_lock:	spinlock to protect the structure
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @wait_list:	pilist head to enqueue waiters in priority order
+=======
+ * @waiters:	rbtree root to enqueue waiters in priority order
+ * @waiters_leftmost: top waiter
+>>>>>>> v3.18
 =======
  * @waiters:	rbtree root to enqueue waiters in priority order
  * @waiters_leftmost: top waiter
@@ -37,7 +46,12 @@ extern int max_lock_depth; /* for sysctl */
 struct rt_mutex {
 	raw_spinlock_t		wait_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct plist_head	wait_list;
+=======
+	struct rb_root          waiters;
+	struct rb_node          *waiters_leftmost;
+>>>>>>> v3.18
 =======
 	struct rb_root          waiters;
 	struct rb_node          *waiters_leftmost;
@@ -81,7 +95,11 @@ struct hrtimer_sleeper;
 #define __RT_MUTEX_INITIALIZER(mutexname) \
 	{ .wait_lock = __RAW_SPIN_LOCK_UNLOCKED(mutexname.wait_lock) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	, .wait_list = PLIST_HEAD_INIT(mutexname.wait_list) \
+=======
+	, .waiters = RB_ROOT \
+>>>>>>> v3.18
 =======
 	, .waiters = RB_ROOT \
 >>>>>>> v3.18
@@ -115,6 +133,7 @@ extern int rt_mutex_trylock(struct rt_mutex *lock);
 extern void rt_mutex_unlock(struct rt_mutex *lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_RT_MUTEXES
 # define INIT_RT_MUTEXES(tsk)						\
 	.pi_waiters	= PLIST_HEAD_INIT(tsk.pi_waiters),	\
@@ -123,6 +142,8 @@ extern void rt_mutex_unlock(struct rt_mutex *lock);
 # define INIT_RT_MUTEXES(tsk)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

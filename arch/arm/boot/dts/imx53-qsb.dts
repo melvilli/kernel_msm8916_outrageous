@@ -12,7 +12,11 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "imx53.dtsi"
+=======
+#include "imx53-qsb-common.dtsi"
+>>>>>>> v3.18
 =======
 #include "imx53-qsb-common.dtsi"
 >>>>>>> v3.18
@@ -20,6 +24,7 @@
 / {
 	model = "Freescale i.MX53 Quick Start Board";
 	compatible = "fsl,imx53-qsb", "fsl,imx53";
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	memory {
@@ -170,6 +175,11 @@
 
 &i2c1 {
 >>>>>>> v3.18
+=======
+};
+
+&i2c1 {
+>>>>>>> v3.18
 	pmic: dialog@48 {
 		compatible = "dlg,da9053-aa", "dlg,da9052";
 		reg = <0x48>;
@@ -265,6 +275,7 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 &audmux {
 	pinctrl-names = "default";
@@ -279,5 +290,7 @@
 	phy-reset-gpios = <&gpio7 6 0>;
 	status = "okay";
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

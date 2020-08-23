@@ -92,7 +92,12 @@ static int ioctl_internal_command(struct scsi_device *sdev, char *cmd,
 	struct scsi_sense_hdr sshdr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCSI_LOG_IOCTL(1, printk("Trying ioctl with scsi command %d\n", *cmd));
+=======
+	SCSI_LOG_IOCTL(1, sdev_printk(KERN_INFO, sdev,
+				      "Trying ioctl with scsi command %d\n", *cmd));
+>>>>>>> v3.18
 =======
 	SCSI_LOG_IOCTL(1, sdev_printk(KERN_INFO, sdev,
 				      "Trying ioctl with scsi command %d\n", *cmd));
@@ -102,7 +107,12 @@ static int ioctl_internal_command(struct scsi_device *sdev, char *cmd,
 				  &sshdr, timeout, retries, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCSI_LOG_IOCTL(2, printk("Ioctl returned  0x%x\n", result));
+=======
+	SCSI_LOG_IOCTL(2, sdev_printk(KERN_INFO, sdev,
+				      "Ioctl returned  0x%x\n", result));
+>>>>>>> v3.18
 =======
 	SCSI_LOG_IOCTL(2, sdev_printk(KERN_INFO, sdev,
 				      "Ioctl returned  0x%x\n", result));
@@ -116,15 +126,21 @@ static int ioctl_internal_command(struct scsi_device *sdev, char *cmd,
 				sdev->lockable = 0;
 			else
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_INFO "ioctl_internal_command: "
 				       "ILLEGAL REQUEST asc=0x%x ascq=0x%x\n",
 				       sshdr.asc, sshdr.ascq);
 =======
+=======
+>>>>>>> v3.18
 				sdev_printk(KERN_INFO, sdev,
 					    "ioctl_internal_command: "
 					    "ILLEGAL REQUEST "
 					    "asc=0x%x ascq=0x%x\n",
 					    sshdr.asc, sshdr.ascq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case NOT_READY:	/* This happens if there is no disc in drive */
@@ -146,7 +162,12 @@ static int ioctl_internal_command(struct scsi_device *sdev, char *cmd,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCSI_LOG_IOCTL(2, printk("IOCTL Releasing command\n"));
+=======
+	SCSI_LOG_IOCTL(2, sdev_printk(KERN_INFO, sdev,
+				      "IOCTL Releasing command\n"));
+>>>>>>> v3.18
 =======
 	SCSI_LOG_IOCTL(2, sdev_printk(KERN_INFO, sdev,
 				      "IOCTL Releasing command\n"));

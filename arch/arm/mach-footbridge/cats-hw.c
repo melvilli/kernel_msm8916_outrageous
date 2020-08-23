@@ -77,12 +77,15 @@ __initcall(cats_hw_init);
  */
 static void __init
 <<<<<<< HEAD
+<<<<<<< HEAD
 fixup_cats(struct tag *tags, char **cmdline, struct meminfo *mi)
 {
 	screen_info.orig_video_lines  = 25;
 	screen_info.orig_video_points = 16;
 	screen_info.orig_y = 24;
 =======
+=======
+>>>>>>> v3.18
 fixup_cats(struct tag *tags, char **cmdline)
 {
 #if defined(CONFIG_VGA_CONSOLE) || defined(CONFIG_DUMMY_CONSOLE)
@@ -90,6 +93,9 @@ fixup_cats(struct tag *tags, char **cmdline)
 	screen_info.orig_video_points = 16;
 	screen_info.orig_y = 24;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

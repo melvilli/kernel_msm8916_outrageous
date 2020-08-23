@@ -71,10 +71,15 @@ void __init mem_init(void)
 	setup_highmem(end_iomem, highmem);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages = totalram_pages;
 	max_pfn = totalram_pages;
 	printk(KERN_INFO "Memory: %luk available\n",
 	       nr_free_pages() << (PAGE_SHIFT-10));
+=======
+	max_pfn = totalram_pages;
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 =======
 	max_pfn = totalram_pages;
 	mem_init_print_info(NULL);
@@ -250,7 +255,11 @@ void free_initmem(void)
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, -1, "initrd");
 >>>>>>> v3.18
@@ -291,15 +300,21 @@ pgtable_t pte_alloc_one(struct mm_struct *mm, unsigned long address)
 
 	pte = alloc_page(GFP_KERNEL|__GFP_REPEAT|__GFP_ZERO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pte)
 		pgtable_page_ctor(pte);
 =======
+=======
+>>>>>>> v3.18
 	if (!pte)
 		return NULL;
 	if (!pgtable_page_ctor(pte)) {
 		__free_page(pte);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pte;
 }

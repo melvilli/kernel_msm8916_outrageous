@@ -170,6 +170,10 @@ void scsi_remove_host(struct Scsi_Host *shost)
 
 	scsi_autopm_get_host(shost);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	flush_workqueue(shost->tmf_work_q);
+>>>>>>> v3.18
 =======
 	flush_workqueue(shost->tmf_work_q);
 >>>>>>> v3.18
@@ -208,6 +212,7 @@ int scsi_add_host_with_dma(struct Scsi_Host *shost, struct device *dev,
 	int error = -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "scsi%d : %s\n", shost->host_no,
 			sht->info ? sht->info(shost) : sht->name);
 
@@ -221,6 +226,8 @@ int scsi_add_host_with_dma(struct Scsi_Host *shost, struct device *dev,
 	if (error)
 		goto fail;
 =======
+=======
+>>>>>>> v3.18
 	shost_printk(KERN_INFO, shost, "%s\n",
 			sht->info ? sht->info(shost) : sht->name);
 
@@ -248,6 +255,9 @@ int scsi_add_host_with_dma(struct Scsi_Host *shost, struct device *dev,
 	if (error)
 		goto out_destroy_tags;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!shost->shost_gendev.parent)
@@ -260,7 +270,11 @@ int scsi_add_host_with_dma(struct Scsi_Host *shost, struct device *dev,
 	error = device_add(&shost->shost_gendev);
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		goto out_destroy_freelist;
+>>>>>>> v3.18
 =======
 		goto out_destroy_freelist;
 >>>>>>> v3.18
@@ -317,14 +331,20 @@ int scsi_add_host_with_dma(struct Scsi_Host *shost, struct device *dev,
  out_del_gendev:
 	device_del(&shost->shost_gendev);
 <<<<<<< HEAD
+<<<<<<< HEAD
  out:
 	scsi_destroy_command_freelist(shost);
 =======
+=======
+>>>>>>> v3.18
  out_destroy_freelist:
 	scsi_destroy_command_freelist(shost);
  out_destroy_tags:
 	if (shost_use_blk_mq(shost))
 		scsi_mq_destroy_tags(shost);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  fail:
 	return error;
@@ -341,6 +361,11 @@ static void scsi_host_dev_release(struct device *dev)
 	scsi_proc_hostdir_rm(shost->hostt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (shost->tmf_work_q)
+		destroy_workqueue(shost->tmf_work_q);
+>>>>>>> v3.18
 =======
 	if (shost->tmf_work_q)
 		destroy_workqueue(shost->tmf_work_q);
@@ -357,6 +382,7 @@ static void scsi_host_dev_release(struct device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (shost->shost_state == SHOST_CREATED) {
 		/*
 		 * Free the shost_dev device name here if scsi_host_alloc()
@@ -372,6 +398,8 @@ static void scsi_host_dev_release(struct device *dev)
 	if (shost->bqt)
 		blk_free_tags(shost->bqt);
 =======
+=======
+>>>>>>> v3.18
 	scsi_destroy_command_freelist(shost);
 	if (shost_use_blk_mq(shost)) {
 		if (shost->tag_set.tags)
@@ -380,6 +408,9 @@ static void scsi_host_dev_release(struct device *dev)
 		if (shost->bqt)
 			blk_free_tags(shost->bqt);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(shost->shost_data);
@@ -390,13 +421,19 @@ static void scsi_host_dev_release(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int shost_eh_deadline = -1;
 
 module_param_named(eh_deadline, shost_eh_deadline, int, S_IRUGO|S_IWUSR);
 MODULE_PARM_DESC(eh_deadline,
 		 "SCSI EH timeout in seconds (should be between 0 and 2^31-1)");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct device_type scsi_host_type = {
 	.name =		"scsi_host",
@@ -437,7 +474,10 @@ struct Scsi_Host *scsi_host_alloc(struct scsi_host_template *sht, int privsize)
 	INIT_LIST_HEAD(&shost->starved_list);
 	init_waitqueue_head(&shost->host_wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_init(&shost->scan_mutex);
@@ -476,7 +516,10 @@ struct Scsi_Host *scsi_host_alloc(struct scsi_host_template *sht, int privsize)
 	shost->no_write_same = sht->no_write_same;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (shost_eh_deadline == -1 || !sht->eh_host_reset_handler)
 		shost->eh_deadline = -1;
 	else if ((ulong) shost_eh_deadline * HZ > INT_MAX) {
@@ -487,6 +530,9 @@ struct Scsi_Host *scsi_host_alloc(struct scsi_host_template *sht, int privsize)
 	} else
 		shost->eh_deadline = shost_eh_deadline * HZ;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sht->supported_mode == MODE_UNKNOWN)
 		/* means we didn't set it ... default to INITIATOR */
@@ -517,6 +563,11 @@ struct Scsi_Host *scsi_host_alloc(struct scsi_host_template *sht, int privsize)
 		shost->dma_boundary = 0xffffffff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	shost->use_blk_mq = scsi_use_blk_mq && !shost->hostt->disable_blk_mq;
+
+>>>>>>> v3.18
 =======
 	shost->use_blk_mq = scsi_use_blk_mq && !shost->hostt->disable_blk_mq;
 
@@ -536,6 +587,7 @@ struct Scsi_Host *scsi_host_alloc(struct scsi_host_template *sht, int privsize)
 			"scsi_eh_%d", shost->host_no);
 	if (IS_ERR(shost->ehandler)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "scsi%d: error handler thread failed to spawn, error = %ld\n",
 			shost->host_no, PTR_ERR(shost->ehandler));
 		goto fail_kfree;
@@ -545,6 +597,8 @@ struct Scsi_Host *scsi_host_alloc(struct scsi_host_template *sht, int privsize)
 	return shost;
 
 =======
+=======
+>>>>>>> v3.18
 		shost_printk(KERN_WARNING, shost,
 			"error handler thread failed to spawn, error = %ld\n",
 			PTR_ERR(shost->ehandler));
@@ -564,6 +618,9 @@ struct Scsi_Host *scsi_host_alloc(struct scsi_host_template *sht, int privsize)
 
  fail_kthread:
 	kthread_stop(shost->ehandler);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  fail_kfree:
 	kfree(shost);
@@ -682,7 +739,11 @@ int scsi_queue_work(struct Scsi_Host *shost, struct work_struct *work)
 {
 	if (unlikely(!shost->work_q)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
+=======
+		shost_printk(KERN_ERR, shost,
+>>>>>>> v3.18
 =======
 		shost_printk(KERN_ERR, shost,
 >>>>>>> v3.18
@@ -705,7 +766,11 @@ void scsi_flush_work(struct Scsi_Host *shost)
 {
 	if (!shost->work_q) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
+=======
+		shost_printk(KERN_ERR, shost,
+>>>>>>> v3.18
 =======
 		shost_printk(KERN_ERR, shost,
 >>>>>>> v3.18

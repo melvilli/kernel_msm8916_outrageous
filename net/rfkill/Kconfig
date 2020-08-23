@@ -11,11 +11,14 @@ menuconfig RFKILL
 	  module will be called rfkill.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config RFKILL_PM
 	bool "Power off on suspend"
 	depends on RFKILL && PM
 	default y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # LED trigger support
@@ -45,7 +48,11 @@ config RFKILL_REGULATOR
 config RFKILL_GPIO
 	tristate "GPIO RFKILL driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on RFKILL && GPIOLIB && HAVE_CLK
+=======
+	depends on RFKILL && GPIOLIB
+>>>>>>> v3.18
 =======
 	depends on RFKILL && GPIOLIB
 >>>>>>> v3.18

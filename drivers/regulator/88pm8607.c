@@ -3,7 +3,11 @@
  *
  * Copyright (C) 2009 Marvell International Ltd.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	Haojian Zhuang <haojian.zhuang@marvell.com>
+=======
+ *	Haojian Zhuang <haojian.zhuang@marvell.com>
+>>>>>>> v3.18
 =======
  *	Haojian Zhuang <haojian.zhuang@marvell.com>
 >>>>>>> v3.18
@@ -83,7 +87,11 @@ static const unsigned int BUCK2_suspend_table[] = {
 
 static const unsigned int BUCK3_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
               0,   25000,   50000,   75000,  100000,  125000,  150000,  175000,
+=======
+	      0,   25000,   50000,   75000,  100000,  125000,  150000,  175000,
+>>>>>>> v3.18
 =======
 	      0,   25000,   50000,   75000,  100000,  125000,  150000,  175000,
 >>>>>>> v3.18
@@ -98,7 +106,11 @@ static const unsigned int BUCK3_table[] = {
 
 static const unsigned int BUCK3_suspend_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
               0,   25000,   50000,   75000,  100000,  125000,  150000,  175000,
+=======
+	      0,   25000,   50000,   75000,  100000,  125000,  150000,  175000,
+>>>>>>> v3.18
 =======
 	      0,   25000,   50000,   75000,  100000,  125000,  150000,  175000,
 >>>>>>> v3.18
@@ -332,15 +344,21 @@ static int pm8607_regulator_dt_init(struct platform_device *pdev,
 {
 	struct device_node *nproot, *np;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nproot = of_node_get(pdev->dev.parent->of_node);
 	if (!nproot)
 		return -ENODEV;
 	nproot = of_find_node_by_name(nproot, "regulators");
 =======
+=======
+>>>>>>> v3.18
 	nproot = pdev->dev.parent->of_node;
 	if (!nproot)
 		return -ENODEV;
 	nproot = of_get_child_by_name(nproot, "regulators");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!nproot) {
 		dev_err(&pdev->dev, "failed to find regulators node\n");
@@ -366,7 +384,11 @@ static int pm8607_regulator_probe(struct platform_device *pdev)
 	struct pm860x_chip *chip = dev_get_drvdata(pdev->dev.parent);
 	struct pm8607_regulator_info *info = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_init_data *pdata = pdev->dev.platform_data;
+=======
+	struct regulator_init_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct regulator_init_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -415,7 +437,12 @@ static int pm8607_regulator_probe(struct platform_device *pdev)
 		config.regmap = chip->regmap_companion;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->regulator = regulator_register(&info->desc, &config);
+=======
+	info->regulator = devm_regulator_register(&pdev->dev, &info->desc,
+						  &config);
+>>>>>>> v3.18
 =======
 	info->regulator = devm_regulator_register(&pdev->dev, &info->desc,
 						  &config);
@@ -431,6 +458,7 @@ static int pm8607_regulator_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pm8607_regulator_remove(struct platform_device *pdev)
 {
 	struct pm8607_regulator_info *info = platform_get_drvdata(pdev);
@@ -440,6 +468,8 @@ static int pm8607_regulator_remove(struct platform_device *pdev)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_device_id pm8607_regulator_driver_ids[] = {
@@ -461,7 +491,10 @@ static struct platform_driver pm8607_regulator_driver = {
 	},
 	.probe		= pm8607_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= pm8607_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= pm8607_regulator_driver_ids,

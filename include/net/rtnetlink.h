@@ -9,6 +9,7 @@ typedef int (*rtnl_dumpit_func)(struct sk_buff *, struct netlink_callback *);
 typedef u16 (*rtnl_calcit_func)(struct sk_buff *, struct nlmsghdr *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int	__rtnl_register(int protocol, int msgtype,
 				rtnl_doit_func, rtnl_dumpit_func,
 				rtnl_calcit_func);
@@ -18,12 +19,17 @@ extern void	rtnl_register(int protocol, int msgtype,
 extern int	rtnl_unregister(int protocol, int msgtype);
 extern void	rtnl_unregister_all(int protocol);
 =======
+=======
+>>>>>>> v3.18
 int __rtnl_register(int protocol, int msgtype,
 		    rtnl_doit_func, rtnl_dumpit_func, rtnl_calcit_func);
 void rtnl_register(int protocol, int msgtype,
 		   rtnl_doit_func, rtnl_dumpit_func, rtnl_calcit_func);
 int rtnl_unregister(int protocol, int msgtype);
 void rtnl_unregister_all(int protocol);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int rtnl_msg_family(const struct nlmsghdr *nlh)
@@ -91,6 +97,7 @@ struct rtnl_link_ops {
 	unsigned int		(*get_num_tx_queues)(void);
 	unsigned int		(*get_num_rx_queues)(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 extern int	__rtnl_link_register(struct rtnl_link_ops *ops);
@@ -99,6 +106,8 @@ extern void	__rtnl_link_unregister(struct rtnl_link_ops *ops);
 extern int	rtnl_link_register(struct rtnl_link_ops *ops);
 extern void	rtnl_link_unregister(struct rtnl_link_ops *ops);
 =======
+=======
+>>>>>>> v3.18
 
 	int			slave_maxtype;
 	const struct nla_policy	*slave_policy;
@@ -120,6 +129,9 @@ void __rtnl_link_unregister(struct rtnl_link_ops *ops);
 
 int rtnl_link_register(struct rtnl_link_ops *ops);
 void rtnl_link_unregister(struct rtnl_link_ops *ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -151,6 +163,7 @@ struct rtnl_af_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int	__rtnl_af_register(struct rtnl_af_ops *ops);
 extern void	__rtnl_af_unregister(struct rtnl_af_ops *ops);
 
@@ -165,6 +178,8 @@ extern int rtnl_configure_link(struct net_device *dev,
 			       const struct ifinfomsg *ifm);
 extern const struct nla_policy ifla_policy[IFLA_MAX+1];
 =======
+=======
+>>>>>>> v3.18
 void __rtnl_af_unregister(struct rtnl_af_ops *ops);
 
 void rtnl_af_register(struct rtnl_af_ops *ops);
@@ -178,6 +193,9 @@ struct net_device *rtnl_create_link(struct net *net, char *ifname,
 int rtnl_configure_link(struct net_device *dev, const struct ifinfomsg *ifm);
 
 int rtnl_nla_parse_ifla(struct nlattr **tb, const struct nlattr *head, int len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MODULE_ALIAS_RTNL_LINK(kind) MODULE_ALIAS("rtnl-link-" kind)

@@ -81,7 +81,11 @@ struct card_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __videocard struct card_info __attribute__((section(".videocards")))
+=======
+#define __videocard struct card_info __attribute__((used,section(".videocards")))
+>>>>>>> v3.18
 =======
 #define __videocard struct card_info __attribute__((used,section(".videocards")))
 >>>>>>> v3.18

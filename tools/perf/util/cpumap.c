@@ -1,6 +1,10 @@
 #include "util.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "sysfs.h"
+=======
+#include <api/fs/fs.h>
+>>>>>>> v3.18
 =======
 #include <api/fs/fs.h>
 >>>>>>> v3.18
@@ -221,7 +225,11 @@ int cpu_map__get_socket(struct cpu_map *map, int idx)
 	cpu = map->map[idx];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mnt = sysfs_find_mountpoint();
+=======
+	mnt = sysfs__mountpoint();
+>>>>>>> v3.18
 =======
 	mnt = sysfs__mountpoint();
 >>>>>>> v3.18
@@ -288,7 +296,11 @@ int cpu_map__get_core(struct cpu_map *map, int idx)
 	cpu = map->map[idx];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mnt = sysfs_find_mountpoint();
+=======
+	mnt = sysfs__mountpoint();
+>>>>>>> v3.18
 =======
 	mnt = sysfs__mountpoint();
 >>>>>>> v3.18
@@ -330,7 +342,10 @@ int cpu_map__build_core_map(struct cpu_map *cpus, struct cpu_map **corep)
 	return cpu_map__build_map(cpus, corep, cpu_map__get_core);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* setup simple routines to easily access node numbers given a cpu number */
 static int get_max_num(char *path, int *max)
@@ -491,4 +506,7 @@ int cpu__setup_cpunode_map(void)
 	closedir(dir1);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

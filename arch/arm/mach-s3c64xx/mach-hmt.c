@@ -12,6 +12,10 @@
 #include <linux/init.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -38,6 +42,7 @@
 #include <asm/mach-types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
 #include <linux/platform_data/i2c-s3c2410.h>
 #include <plat/fb.h>
@@ -45,11 +50,16 @@
 
 #include <plat/clock.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/i2c-s3c2410.h>
 #include <mach/gpio-samsung.h>
 #include <plat/fb.h>
 #include <linux/platform_data/mtd-nand-s3c2410.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <plat/devs.h>
 #include <plat/cpu.h>
@@ -127,6 +137,10 @@ static struct platform_pwm_backlight_data hmt_backlight_data = {
 	.dft_brightness	= 40 * 256,
 	.pwm_period_ns	= 1000000000 / (100 * 256 * 20),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio	= -1,
 >>>>>>> v3.18
@@ -140,7 +154,11 @@ static struct platform_device hmt_backlight_device = {
 	.name		= "pwm-backlight",
 	.dev		= {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.parent	= &s3c_device_timer[1].dev,
+=======
+		.parent	= &samsung_device_pwm.dev,
+>>>>>>> v3.18
 =======
 		.parent	= &samsung_device_pwm.dev,
 >>>>>>> v3.18
@@ -260,7 +278,11 @@ static struct platform_device *hmt_devices[] __initdata = {
 	&s3c_device_fb,
 	&s3c_device_ohci,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&s3c_device_timer[1],
+=======
+	&samsung_device_pwm,
+>>>>>>> v3.18
 =======
 	&samsung_device_pwm,
 >>>>>>> v3.18
@@ -272,7 +294,11 @@ static void __init hmt_map_io(void)
 {
 	s3c64xx_init_io(hmt_iodesc, ARRAY_SIZE(hmt_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(12000000);
+=======
+	s3c64xx_set_xtal_freq(12000000);
+>>>>>>> v3.18
 =======
 	s3c64xx_set_xtal_freq(12000000);
 >>>>>>> v3.18
@@ -305,7 +331,10 @@ MACHINE_START(HMT, "Airgoo-HMT")
 	.map_io		= hmt_map_io,
 	.init_machine	= hmt_machine_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_late	= s3c64xx_init_late,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= samsung_timer_init,

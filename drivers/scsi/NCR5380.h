@@ -22,10 +22,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * $Log: NCR5380.h,v $
  */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef NCR5380_H
@@ -64,6 +67,12 @@
 #define NDEBUG_C400_PWRITE	0x200000
 #define NDEBUG_LISTS		0x400000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NDEBUG_ABORT		0x800000
+#define NDEBUG_TAGS		0x1000000
+#define NDEBUG_MERGING		0x2000000
+>>>>>>> v3.18
 =======
 #define NDEBUG_ABORT		0x800000
 #define NDEBUG_TAGS		0x1000000
@@ -302,10 +311,13 @@ struct NCR5380_hostdata {
 #ifdef __KERNEL__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dprintk(a,b)			do {} while(0)
 #define NCR5380_dprint(a,b)		do {} while(0)
 #define NCR5380_dprint_phase(a,b)	do {} while(0)
 =======
+=======
+>>>>>>> v3.18
 #ifndef NDEBUG
 #define NDEBUG (0)
 #endif
@@ -324,6 +336,9 @@ static void NCR5380_print(struct Scsi_Host *instance);
 #define NCR5380_dprint(flg, arg)       do {} while (0)
 #define NCR5380_dprint_phase(flg, arg) do {} while (0)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if defined(AUTOPROBE_IRQ)
@@ -338,10 +353,13 @@ static irqreturn_t NCR5380_intr(int irq, void *dev_id);
 static void NCR5380_main(struct work_struct *work);
 static void __maybe_unused NCR5380_print_options(struct Scsi_Host *instance);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef NDEBUG
 static void NCR5380_print_phase(struct Scsi_Host *instance);
 static void NCR5380_print(struct Scsi_Host *instance);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int NCR5380_abort(Scsi_Cmnd * cmd);

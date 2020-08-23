@@ -53,6 +53,7 @@
 <constant>VIDIOC_STREAMOFF</constant> ioctl start and stop the capture
 or output process during streaming (<link linkend="mmap">memory
 <<<<<<< HEAD
+<<<<<<< HEAD
 mapping</link> or <link linkend="userp">user pointer</link>) I/O.</para>
 
     <para>Specifically the capture hardware is disabled and no input
@@ -64,6 +65,8 @@ The ioctl will succeed only when at least one output buffer is in the
 incoming queue.</para>
 
 =======
+=======
+>>>>>>> v3.18
 mapping</link>, <link linkend="userp">user pointer</link> or
 <link linkend="dmabuf">DMABUF</link>) I/O.</para>
 
@@ -82,6 +85,9 @@ and output stream types.</para>
     <para>If <constant>VIDIOC_STREAMON</constant> fails then any already
 queued buffers will remain queued.</para>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     <para>The <constant>VIDIOC_STREAMOFF</constant> ioctl, apart of
 aborting or finishing any DMA in progress, unlocks any user pointer
@@ -92,7 +98,10 @@ not transmitted yet. I/O returns to the same state as after calling
 &VIDIOC-REQBUFS; and can be restarted accordingly.</para>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
     <para>If buffers have been queued with &VIDIOC-QBUF; and
 <constant>VIDIOC_STREAMOFF</constant> is called without ever having
 called <constant>VIDIOC_STREAMON</constant>, then those queued buffers
@@ -100,6 +109,9 @@ will also be removed from the incoming queue and all are returned to the
 same state as after calling &VIDIOC-REQBUFS; and can be restarted
 accordingly.</para>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     <para>Both ioctls take a pointer to an integer, the desired buffer or
 stream type. This is the same as &v4l2-requestbuffers;
@@ -108,8 +120,14 @@ stream type. This is the same as &v4l2-requestbuffers;
     <para>If <constant>VIDIOC_STREAMON</constant> is called when streaming
 is already in progress, or if <constant>VIDIOC_STREAMOFF</constant> is called
 <<<<<<< HEAD
+<<<<<<< HEAD
 when streaming is already stopped, then the ioctl does nothing and 0 is
 returned.</para>
+=======
+when streaming is already stopped, then 0 is returned. Nothing happens in the
+case of <constant>VIDIOC_STREAMON</constant>, but <constant>VIDIOC_STREAMOFF</constant>
+will return queued buffers to their starting state as mentioned above.</para>
+>>>>>>> v3.18
 =======
 when streaming is already stopped, then 0 is returned. Nothing happens in the
 case of <constant>VIDIOC_STREAMON</constant>, but <constant>VIDIOC_STREAMOFF</constant>
@@ -131,7 +149,11 @@ synchronize with other events.</para>
 	<term><errorcode>EINVAL</errorcode></term>
 	<listitem>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <para>The buffer<structfield>type</structfield> is not supported,
+=======
+	  <para>The buffer <structfield>type</structfield> is not supported,
+>>>>>>> v3.18
 =======
 	  <para>The buffer <structfield>type</structfield> is not supported,
 >>>>>>> v3.18

@@ -22,6 +22,10 @@
 #include <linux/atomic.h>
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -47,7 +51,11 @@
  * clear_bit() is atomic and may not be reordered.  However, it does
  * not contain a memory barrier, so if it is used for locking purposes,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * you should call smp_mb__before_clear_bit() and/or smp_mb__after_clear_bit()
+=======
+ * you should call smp_mb__before_atomic() and/or smp_mb__after_atomic()
+>>>>>>> v3.18
 =======
  * you should call smp_mb__before_atomic() and/or smp_mb__after_atomic()
 >>>>>>> v3.18
@@ -93,12 +101,15 @@ static inline int test_and_set_bit(int nr, volatile unsigned long *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * clear_bit() doesn't provide any barrier for the compiler.
  */
 #define smp_mb__before_clear_bit()      barrier()
 #define smp_mb__after_clear_bit()       barrier()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -156,7 +167,11 @@ static inline int test_and_change_bit(int nr, volatile unsigned long *addr)
  * use -fno-builtin, so just hide the name ffs.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ffs kernel_ffs
+=======
+#define ffs(x) kernel_ffs(x)
+>>>>>>> v3.18
 =======
 #define ffs(x) kernel_ffs(x)
 >>>>>>> v3.18

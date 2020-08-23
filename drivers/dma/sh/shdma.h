@@ -29,14 +29,20 @@ struct sh_dmae_chan {
 	const struct sh_dmae_slave_config *config; /* Slave DMA configuration */
 	int xmit_shift;			/* log_2(bytes_per_xfer) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 __iomem *base;
 	char dev_id[16];		/* unique name per DMAC of channel */
 	int pm_error;
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *base;
 	char dev_id[16];		/* unique name per DMAC of channel */
 	int pm_error;
 	dma_addr_t slave_addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -44,15 +50,21 @@ struct sh_dmae_device {
 	struct shdma_dev shdma_dev;
 	struct sh_dmae_chan *chan[SH_DMAE_MAX_CHANNELS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sh_dmae_pdata *pdata;
 	struct list_head node;
 	u32 __iomem *chan_reg;
 	u16 __iomem *dmars;
 =======
+=======
+>>>>>>> v3.18
 	const struct sh_dmae_pdata *pdata;
 	struct list_head node;
 	void __iomem *chan_reg;
 	void __iomem *dmars;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int chcr_offset;
 	u32 chcr_ie_bit;
@@ -76,7 +88,10 @@ struct sh_dmae_desc {
 				     struct sh_dmae_device, shdma_dev.dma_dev)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SH_DMAE_R8A73A4
 extern const struct sh_dmae_pdata r8a73a4_dma_pdata;
 #define r8a73a4_shdma_devid (&r8a73a4_dma_pdata)
@@ -84,5 +99,8 @@ extern const struct sh_dmae_pdata r8a73a4_dma_pdata;
 #define r8a73a4_shdma_devid NULL
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* __DMA_SHDMA_H */

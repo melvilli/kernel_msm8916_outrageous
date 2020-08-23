@@ -6,7 +6,11 @@ menu "PHY Subsystem"
 
 config GENERIC_PHY
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "PHY Core"
+=======
+	bool "PHY Core"
+>>>>>>> v3.18
 =======
 	bool "PHY Core"
 >>>>>>> v3.18
@@ -20,6 +24,7 @@ config GENERIC_PHY
 	  framework should select this config.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PHY_MSM_SATA
 	tristate "MSM SoC SATA 6Gbps PHY driver"
 	depends on OF && ARCH_MSM
@@ -27,6 +32,8 @@ config PHY_MSM_SATA
 	help
 	  Support for 6Gbps SATA PHY on MSM chipsets.
 =======
+=======
+>>>>>>> v3.18
 config PHY_BERLIN_SATA
 	tristate "Marvell Berlin SATA PHY driver"
 	depends on ARCH_BERLIN && HAS_IOMEM && OF
@@ -268,5 +275,8 @@ config PHY_STIH41X_USB
 	  Enable this to support the USB transceiver that is part of
 	  STMicroelectronics STiH41x SoC series.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu

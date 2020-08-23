@@ -27,14 +27,20 @@
  *
  * Functions:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      BBuGetFrameTime        - Calculate data frame transmitting time
  *      BBvCalculateParameter   - Calculate PhyLength, PhyService and Phy Signal parameter for baseband Tx
  *      BBbVT3184Init          - VIA VT3184 baseband chip init code
 =======
+=======
+>>>>>>> v3.18
  *	vnt_get_frame_time	- Calculate data frame transmitting time
  *	vnt_get_phy_field	- Calculate PhyLength, PhyService and Phy
  *				  Signal parameter for baseband Tx
  *	vnt_vt3184_init		- VIA VT3184 baseband chip init code
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Revision History:
@@ -42,6 +48,7 @@
  *
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "tmacro.h"
 #include "tether.h"
@@ -659,6 +666,8 @@ void
 s_vClearSQ3Value(PSDevice pDevice);
 */
 =======
+=======
+>>>>>>> v3.18
 #include "mac.h"
 #include "baseband.h"
 #include "rf.h"
@@ -749,6 +758,9 @@ static u8 vnt_vt3184_vt3226d0[] = {
 static const u16 vnt_frame_time[MAX_RATE] = {
 	10, 20, 55, 110, 24, 36, 48, 72, 96, 144, 192, 216
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -757,21 +769,28 @@ static const u16 vnt_frame_time[MAX_RATE] = {
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      byPreambleType  - Preamble Type
  *      byPktType        - PK_TYPE_11A, PK_TYPE_11B, PK_TYPE_11GB, PK_TYPE_11GA
  *      cbFrameLength   - Baseband Type
  *      wRate           - Tx Rate
 =======
+=======
+>>>>>>> v3.18
  *	preamble_type	- Preamble Type
  *	pkt_type	- PK_TYPE_11A, PK_TYPE_11B, PK_TYPE_11GB, PK_TYPE_11GA
  *	frame_length	- Baseband Type
  *	tx_rate		- Tx Rate
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *  Out:
  *
  * Return Value: FrameTime
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 unsigned int
 BBuGetFrameTime(
@@ -822,6 +841,8 @@ BBuGetFrameTime(
         return (20 + uFrameTime); //??????
     }
 =======
+=======
+>>>>>>> v3.18
 unsigned int vnt_get_frame_time(u8 preamble_type, u8 pkt_type,
 	unsigned int frame_length, u16 tx_rate)
 {
@@ -860,6 +881,9 @@ unsigned int vnt_get_frame_time(u8 preamble_type, u8 pkt_type,
 	if (pkt_type != PK_TYPE_11A)
 		frame_time += 6;
 	return 20 + frame_time;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -869,6 +893,7 @@ unsigned int vnt_get_frame_time(u8 preamble_type, u8 pkt_type,
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice         - Device Structure
  *      cbFrameLength   - Tx Frame Length
  *      wRate           - Tx Rate
@@ -877,6 +902,8 @@ unsigned int vnt_get_frame_time(u8 preamble_type, u8 pkt_type,
  *      pbyPhySrv       - pointer to Phy Service field
  *      pbyPhySgn       - pointer to Phy Signal field
 =======
+=======
+>>>>>>> v3.18
  *      priv         - Device Structure
  *      frame_length   - Tx Frame Length
  *      tx_rate           - Tx Rate
@@ -885,11 +912,15 @@ unsigned int vnt_get_frame_time(u8 preamble_type, u8 pkt_type,
  *		- pointer to Phy Length field
  *		- pointer to Phy Service field
  *		- pointer to Phy Signal field
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void BBvCalculateParameter(struct vnt_private *pDevice, u32 cbFrameLength,
 	u16 wRate, u8 byPacketType, u16 *pwPhyLen, u8 *pbyPhySrv,
@@ -1042,6 +1073,8 @@ void BBvCalculateParameter(struct vnt_private *pDevice, u32 cbFrameLength,
         *pwPhyLen = (u16)cbFrameLength;
     }
 =======
+=======
+>>>>>>> v3.18
 void vnt_get_phy_field(struct vnt_private *priv, u32 frame_length,
 	u16 tx_rate, u8 pkt_type, struct vnt_phy_field *phy)
 {
@@ -1172,6 +1205,9 @@ void vnt_get_phy_field(struct vnt_private *priv, u32 frame_length,
 		phy->service = 0x00;
 		phy->len = cpu_to_le16((u16)frame_length);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1181,8 +1217,13 @@ void vnt_get_phy_field(struct vnt_private *priv, u32 frame_length,
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice          - Device Structure
  *      byAntennaMode    - Antenna Mode
+=======
+ *	priv		- Device Structure
+ *	antenna_mode	- Antenna Mode
+>>>>>>> v3.18
 =======
  *	priv		- Device Structure
  *	antenna_mode	- Antenna Mode
@@ -1193,6 +1234,7 @@ void vnt_get_phy_field(struct vnt_private *priv, u32 frame_length,
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void BBvSetAntennaMode(struct vnt_private *pDevice, u8 byAntennaMode)
 {
@@ -1216,6 +1258,8 @@ void BBvSetAntennaMode(struct vnt_private *pDevice, u8 byAntennaMode)
                     0,
                     NULL);
 =======
+=======
+>>>>>>> v3.18
 void vnt_set_antenna_mode(struct vnt_private *priv, u8 antenna_mode)
 {
 	switch (antenna_mode) {
@@ -1233,6 +1277,9 @@ void vnt_set_antenna_mode(struct vnt_private *priv, u8 antenna_mode)
 
 	vnt_control_out(priv, MESSAGE_TYPE_SET_ANTMD,
 		(u16)antenna_mode, 0, 0, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1250,6 +1297,7 @@ void vnt_set_antenna_mode(struct vnt_private *priv, u8 antenna_mode)
  *
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int BBbVT3184Init(struct vnt_private *pDevice)
 {
@@ -1429,6 +1477,8 @@ else {
 	/* Fix for TX USB resets from vendors driver */
 	CONTROLnsRequestIn(pDevice, MESSAGE_TYPE_READ, USB_REG4,
 =======
+=======
+>>>>>>> v3.18
 int vnt_vt3184_init(struct vnt_private *priv)
 {
 	int status;
@@ -1539,21 +1589,30 @@ int vnt_vt3184_init(struct vnt_private *priv)
 
 	/* Fix for TX USB resets from vendors driver */
 	vnt_control_in(priv, MESSAGE_TYPE_READ, USB_REG4,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		MESSAGE_REQUEST_MEM, sizeof(data), &data);
 
 	data |= 0x2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CONTROLnsRequestOut(pDevice, MESSAGE_TYPE_WRITE, USB_REG4,
 		MESSAGE_REQUEST_MEM, sizeof(data), &data);
 
     return true;//ntStatus;
 =======
+=======
+>>>>>>> v3.18
 	vnt_control_out(priv, MESSAGE_TYPE_WRITE, USB_REG4,
 		MESSAGE_REQUEST_MEM, sizeof(data), &data);
 
 	return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1562,6 +1621,7 @@ int vnt_vt3184_init(struct vnt_private *priv)
  *
  * Parameters:
  *  In:
+<<<<<<< HEAD
 <<<<<<< HEAD
  *      pDevice     - Device Structure
 =======
@@ -1610,12 +1670,16 @@ void BBvSetVGAGainOffset(struct vnt_private *pDevice, u8 byData)
  * Parameters:
  *  In:
  *      pDevice          - Device Structure
+=======
+ *	priv	- Device Structure
+>>>>>>> v3.18
  *  Out:
  *      none
  *
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 void BBvSetDeepSleep(struct vnt_private *pDevice)
 {
     ControlvWriteByte(pDevice, MESSAGE_REQUEST_BBREG, 0x0c, 0x17);//CR12
@@ -1694,6 +1758,8 @@ static void s_vClearSQ3Value(struct vnt_private *pDevice)
  *      byRSR            - RSR from received packet
  *      bySQ3            - SQ3 value from received packet
 =======
+=======
+>>>>>>> v3.18
 void vnt_set_short_slot_time(struct vnt_private *priv)
 {
 	u8 bb_vga = 0;
@@ -1731,6 +1797,9 @@ void vnt_set_vga_gain_offset(struct vnt_private *priv, u8 data)
  * Parameters:
  *  In:
  *	priv	- Device Structure
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *  Out:
  *      none
@@ -1738,6 +1807,7 @@ void vnt_set_vga_gain_offset(struct vnt_private *priv, u8 data)
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void BBvAntennaDiversity(struct vnt_private *pDevice,
@@ -2380,6 +2450,8 @@ void BBvUpdatePreEDThreshold(struct vnt_private *pDevice, int bScanning)
     }
 
 =======
+=======
+>>>>>>> v3.18
 void vnt_set_deep_sleep(struct vnt_private *priv)
 {
 	vnt_control_out_u8(priv, MESSAGE_REQUEST_BBREG, 0x0c, 0x17);/* CR12 */
@@ -2656,6 +2728,9 @@ void vnt_update_pre_ed_threshold(struct vnt_private *priv, int scanning)
 
 	vnt_control_out_u8(priv, MESSAGE_REQUEST_BBREG, 0xc9, cr_201);
 	vnt_control_out_u8(priv, MESSAGE_REQUEST_BBREG, 0xce, cr_206);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

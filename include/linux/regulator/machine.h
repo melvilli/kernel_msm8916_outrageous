@@ -86,6 +86,10 @@ struct regulator_state {
  *           applied.
  * @apply_uV: Apply the voltage constraint when initialising.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @ramp_disable: Disable ramp delay when initialising or when setting voltage.
+>>>>>>> v3.18
 =======
  * @ramp_disable: Disable ramp delay when initialising or when setting voltage.
 >>>>>>> v3.18
@@ -100,6 +104,10 @@ struct regulator_state {
  * @initial_mode: Mode to set at startup.
  * @ramp_delay: Time to settle down after voltage change (unit: uV/us)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @enable_time: Turn-on time of the rails (unit: microseconds)
+>>>>>>> v3.18
 =======
  * @enable_time: Turn-on time of the rails (unit: microseconds)
 >>>>>>> v3.18
@@ -138,6 +146,10 @@ struct regulation_constraints {
 
 	unsigned int ramp_delay;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int enable_time;
+>>>>>>> v3.18
 =======
 	unsigned int enable_time;
 >>>>>>> v3.18
@@ -147,6 +159,10 @@ struct regulation_constraints {
 	unsigned boot_on:1;	/* bootloader/firmware enabled regulator */
 	unsigned apply_uV:1;	/* apply uV constraint if min == max */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned ramp_disable:1; /* disable ramp delay */
+>>>>>>> v3.18
 =======
 	unsigned ramp_disable:1; /* disable ramp delay */
 >>>>>>> v3.18
@@ -209,14 +225,18 @@ int regulator_suspend_finish(void);
 #ifdef CONFIG_REGULATOR
 void regulator_has_full_constraints(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void regulator_use_dummy_regulator(void);
 void regulator_suppress_info_printing(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else
 static inline void regulator_has_full_constraints(void)
 {
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static inline void regulator_use_dummy_regulator(void)
@@ -226,6 +246,8 @@ static inline void regulator_use_dummy_regulator(void)
 static inline void regulator_suppress_info_printing(void)
 {
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

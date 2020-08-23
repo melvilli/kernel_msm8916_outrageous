@@ -30,6 +30,10 @@
 
 #ifndef __ASSEMBLY__
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cacheflush.h>
+>>>>>>> v3.18
 =======
 #include <asm/cacheflush.h>
 >>>>>>> v3.18
@@ -46,7 +50,10 @@
 extern int __boot_cpu_mode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void sync_boot_mode(void)
 {
 	/*
@@ -57,12 +64,19 @@ static inline void sync_boot_mode(void)
 	sync_cache_r(&__boot_cpu_mode);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __hyp_set_vectors(unsigned long phys_vector_base);
 unsigned long __hyp_get_vectors(void);
 #else
 #define __boot_cpu_mode	(SVC_MODE)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define sync_boot_mode()
+>>>>>>> v3.18
 =======
 #define sync_boot_mode()
 >>>>>>> v3.18

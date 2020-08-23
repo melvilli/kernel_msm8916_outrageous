@@ -42,7 +42,11 @@ static void hfs_write_failed(struct address_space *mapping, loff_t to)
 
 	if (to > inode->i_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_pagecache(inode, to, inode->i_size);
+=======
+		truncate_pagecache(inode, inode->i_size);
+>>>>>>> v3.18
 =======
 		truncate_pagecache(inode, inode->i_size);
 >>>>>>> v3.18
@@ -130,7 +134,11 @@ static int hfs_releasepage(struct page *page, gfp_t mask)
 
 static ssize_t hfs_direct_IO(int rw, struct kiocb *iocb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const struct iovec *iov, loff_t offset, unsigned long nr_segs)
+=======
+		struct iov_iter *iter, loff_t offset)
+>>>>>>> v3.18
 =======
 		struct iov_iter *iter, loff_t offset)
 >>>>>>> v3.18
@@ -139,15 +147,21 @@ static ssize_t hfs_direct_IO(int rw, struct kiocb *iocb,
 	struct address_space *mapping = file->f_mapping;
 	struct inode *inode = file_inode(file)->i_mapping->host;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssize_t ret;
 
 	ret = blockdev_direct_IO(rw, iocb, inode, iov, offset, nr_segs,
 				 hfs_get_block);
 =======
+=======
+>>>>>>> v3.18
 	size_t count = iov_iter_count(iter);
 	ssize_t ret;
 
 	ret = blockdev_direct_IO(rw, iocb, inode, iter, offset, hfs_get_block);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -157,7 +171,11 @@ static ssize_t hfs_direct_IO(int rw, struct kiocb *iocb,
 	if (unlikely((rw & WRITE) && ret < 0)) {
 		loff_t isize = i_size_read(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		loff_t end = offset + iov_length(iov, nr_segs);
+=======
+		loff_t end = offset + count;
+>>>>>>> v3.18
 =======
 		loff_t end = offset + count;
 >>>>>>> v3.18
@@ -567,7 +585,11 @@ out:
 void hfs_evict_inode(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -698,15 +720,21 @@ static int hfs_file_fsync(struct file *filp, loff_t start, loff_t end,
 static const struct file_operations hfs_file_operations = {
 	.llseek		= generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.aio_read	= generic_file_aio_read,
 	.write		= do_sync_write,
 	.aio_write	= generic_file_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.read		= new_sync_read,
 	.read_iter	= generic_file_read_iter,
 	.write		= new_sync_write,
 	.write_iter	= generic_file_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.mmap		= generic_file_mmap,
 	.splice_read	= generic_file_splice_read,

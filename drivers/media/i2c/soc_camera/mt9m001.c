@@ -17,8 +17,13 @@
 #include <media/soc_camera.h>
 #include <media/soc_mediabus.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-subdev.h>
 #include <media/v4l2-chip-ident.h>
+=======
+#include <media/v4l2-clk.h>
+#include <media/v4l2-subdev.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-clk.h>
 #include <media/v4l2-subdev.h>
@@ -100,15 +105,21 @@ struct mt9m001 {
 	};
 	struct v4l2_rect rect;	/* Sensor window */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct mt9m001_datafmt *fmt;
 	const struct mt9m001_datafmt *fmts;
 	int num_fmts;
 	int model;	/* V4L2_IDENT_MT9M001* codes from v4l2-chip-ident.h */
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_clk *clk;
 	const struct mt9m001_datafmt *fmt;
 	const struct mt9m001_datafmt *fmts;
 	int num_fmts;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int total_h;
 	unsigned short y_skip_top;	/* Lines to skip at the top */
@@ -333,6 +344,7 @@ static int mt9m001_try_fmt(struct v4l2_subdev *sd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mt9m001_g_chip_ident(struct v4l2_subdev *sd,
 				struct v4l2_dbg_chip_ident *id)
 {
@@ -353,6 +365,8 @@ static int mt9m001_g_chip_ident(struct v4l2_subdev *sd,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int mt9m001_g_register(struct v4l2_subdev *sd,
 			      struct v4l2_dbg_register *reg)
@@ -360,12 +374,18 @@ static int mt9m001_g_register(struct v4l2_subdev *sd,
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (reg->match.type != V4L2_CHIP_MATCH_I2C_ADDR || reg->reg > 0xff)
 		return -EINVAL;
 
 	if (reg->match.addr != client->addr)
 		return -ENODEV;
 
+=======
+	if (reg->reg > 0xff)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (reg->reg > 0xff)
 		return -EINVAL;
@@ -386,12 +406,18 @@ static int mt9m001_s_register(struct v4l2_subdev *sd,
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (reg->match.type != V4L2_CHIP_MATCH_I2C_ADDR || reg->reg > 0xff)
 		return -EINVAL;
 
 	if (reg->match.addr != client->addr)
 		return -ENODEV;
 
+=======
+	if (reg->reg > 0xff)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (reg->reg > 0xff)
 		return -EINVAL;
@@ -409,8 +435,14 @@ static int mt9m001_s_power(struct v4l2_subdev *sd, int on)
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return soc_camera_set_power(&client->dev, ssdd, on);
+=======
+	struct mt9m001 *mt9m001 = to_mt9m001(client);
+
+	return soc_camera_set_power(&client->dev, ssdd, mt9m001->clk, on);
+>>>>>>> v3.18
 =======
 	struct mt9m001 *mt9m001 = to_mt9m001(client);
 
@@ -460,7 +492,11 @@ static int mt9m001_s_ctrl(struct v4l2_ctrl *ctrl)
 			/* Pack it into 0..1 step 0.125, register values 0..8 */
 			unsigned long range = ctrl->default_value - ctrl->minimum;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			data = ((ctrl->val - ctrl->minimum) * 8 + range / 2) / range;
+=======
+			data = ((ctrl->val - (s32)ctrl->minimum) * 8 + range / 2) / range;
+>>>>>>> v3.18
 =======
 			data = ((ctrl->val - (s32)ctrl->minimum) * 8 + range / 2) / range;
 >>>>>>> v3.18
@@ -474,7 +510,11 @@ static int mt9m001_s_ctrl(struct v4l2_ctrl *ctrl)
 			/* We assume qctrl->maximum - qctrl->default_value - 1 > 0 */
 			unsigned long range = ctrl->maximum - ctrl->default_value - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned long gain = ((ctrl->val - ctrl->default_value - 1) *
+=======
+			unsigned long gain = ((ctrl->val - (s32)ctrl->default_value - 1) *
+>>>>>>> v3.18
 =======
 			unsigned long gain = ((ctrl->val - (s32)ctrl->default_value - 1) *
 >>>>>>> v3.18
@@ -499,7 +539,11 @@ static int mt9m001_s_ctrl(struct v4l2_ctrl *ctrl)
 		if (ctrl->val == V4L2_EXPOSURE_MANUAL) {
 			unsigned long range = exp->maximum - exp->minimum;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned long shutter = ((exp->val - exp->minimum) * 1048 +
+=======
+			unsigned long shutter = ((exp->val - (s32)exp->minimum) * 1048 +
+>>>>>>> v3.18
 =======
 			unsigned long shutter = ((exp->val - (s32)exp->minimum) * 1048 +
 >>>>>>> v3.18
@@ -551,11 +595,17 @@ static int mt9m001_video_probe(struct soc_camera_subdev_desc *ssdd,
 	case 0x8411:
 	case 0x8421:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mt9m001->model = V4L2_IDENT_MT9M001C12ST;
 		mt9m001->fmts = mt9m001_colour_fmts;
 		break;
 	case 0x8431:
 		mt9m001->model = V4L2_IDENT_MT9M001C12STM;
+=======
+		mt9m001->fmts = mt9m001_colour_fmts;
+		break;
+	case 0x8431:
+>>>>>>> v3.18
 =======
 		mt9m001->fmts = mt9m001_colour_fmts;
 		break;
@@ -632,7 +682,10 @@ static const struct v4l2_ctrl_ops mt9m001_ctrl_ops = {
 
 static struct v4l2_subdev_core_ops mt9m001_subdev_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident	= mt9m001_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -765,10 +818,13 @@ static int mt9m001_probe(struct i2c_client *client,
 	mt9m001->rect.height	= MT9M001_MAX_HEIGHT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mt9m001_video_probe(ssdd, client);
 	if (ret)
 		v4l2_ctrl_handler_free(&mt9m001->hdl);
 =======
+=======
+>>>>>>> v3.18
 	mt9m001->clk = v4l2_clk_get(&client->dev, "mclk");
 	if (IS_ERR(mt9m001->clk)) {
 		ret = PTR_ERR(mt9m001->clk);
@@ -781,6 +837,9 @@ static int mt9m001_probe(struct i2c_client *client,
 eclkget:
 		v4l2_ctrl_handler_free(&mt9m001->hdl);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -792,6 +851,10 @@ static int mt9m001_remove(struct i2c_client *client)
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l2_clk_put(mt9m001->clk);
+>>>>>>> v3.18
 =======
 	v4l2_clk_put(mt9m001->clk);
 >>>>>>> v3.18

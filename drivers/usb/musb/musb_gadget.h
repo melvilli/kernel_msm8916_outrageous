@@ -38,7 +38,10 @@
 #include <linux/list.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_USB_MUSB_GADGET) || IS_ENABLED(CONFIG_USB_MUSB_DUAL_ROLE)
 extern irqreturn_t musb_g_ep0_irq(struct musb *);
 extern void musb_g_tx(struct musb *, u8);
@@ -71,6 +74,9 @@ static inline int musb_gadget_setup(struct musb *musb)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum buffer_map_state {
 	UN_MAPPED = 0,
@@ -142,6 +148,7 @@ static inline struct musb_request *next_request(struct musb_ep *ep)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void musb_g_tx(struct musb *musb, u8 epnum);
 extern void musb_g_rx(struct musb *musb, u8 epnum);
 
@@ -150,6 +157,10 @@ extern const struct usb_ep_ops musb_g_ep0_ops;
 extern int musb_gadget_setup(struct musb *);
 extern void musb_gadget_cleanup(struct musb *);
 
+=======
+extern const struct usb_ep_ops musb_g_ep0_ops;
+
+>>>>>>> v3.18
 =======
 extern const struct usb_ep_ops musb_g_ep0_ops;
 

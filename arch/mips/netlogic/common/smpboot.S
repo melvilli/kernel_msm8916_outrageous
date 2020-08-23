@@ -33,7 +33,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -53,6 +56,7 @@
 #include <asm/netlogic/xlp-hal/cpucontrol.h>
 
 #define CP0_EBASE	$15
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SYS_CPU_COHERENT_BASE(node)	CKSEG1ADDR(XLP_DEFAULT_IO_BASE) + \
 			XLP_IO_SYS_OFFSET(node) + XLP_IO_PCI_HDRSZ + \
@@ -247,6 +251,8 @@ FEXPORT(xlp_boot_core0_siblings)	/* "Master" cpu starts from here */
 	xlp_config_lsu
 	dmtc0	sp, $4, 2		/* SP saved in UserLocal */
 =======
+=======
+>>>>>>> v3.18
 
 	.set	noreorder
 	.set	noat
@@ -255,6 +261,9 @@ FEXPORT(xlp_boot_core0_siblings)	/* "Master" cpu starts from here */
 /* Called by the boot cpu to wake up its sibling threads */
 NESTED(xlp_boot_core0_siblings, PT_SIZE, sp)
 	/* CPU register contents lost when enabling threads, save them first */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SAVE_ALL
 	sync
@@ -266,12 +275,15 @@ NESTED(xlp_boot_core0_siblings, PT_SIZE, sp)
 	daddu	t2, t0
 	/* call it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jr	t2
 	nop
 	/* not reached */
 
 	__CPUINIT
 =======
+=======
+>>>>>>> v3.18
 	jalr	t2
 	nop
 	RESTORE_ALL
@@ -279,6 +291,9 @@ NESTED(xlp_boot_core0_siblings, PT_SIZE, sp)
 	nop
 END(xlp_boot_core0_siblings)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 NESTED(nlm_boot_secondary_cpus, 16, sp)
 	/* Initialize CP0 Status */
@@ -304,7 +319,10 @@ NESTED(nlm_boot_secondary_cpus, 16, sp)
 	nop
 END(nlm_boot_secondary_cpus)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__FINIT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -313,9 +331,14 @@ END(nlm_boot_secondary_cpus)
  * be already woken up and waiting in bootloader code.
  * This will get them out of the bootloader code and into linux. Needed
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  because the bootloader area will be taken and initialized by linux.
  */
 	__CPUINIT
+=======
+ * because the bootloader area will be taken and initialized by linux.
+ */
+>>>>>>> v3.18
 =======
  * because the bootloader area will be taken and initialized by linux.
  */
@@ -327,8 +350,14 @@ NESTED(nlm_rmiboot_preboot, 16, sp)
 	sll	t0, 2		/* offset in cpu array */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PTR_LA	t1, nlm_cpu_ready /* mark CPU ready */
 	PTR_ADDU t1, t0
+=======
+	li	t3, CKSEG1ADDR(RESET_DATA_PHYS)
+	ADDIU	t1, t3, BOOT_CPU_READY
+	ADDU	t1, t0
+>>>>>>> v3.18
 =======
 	li	t3, CKSEG1ADDR(RESET_DATA_PHYS)
 	ADDIU	t1, t3, BOOT_CPU_READY
@@ -359,15 +388,21 @@ NESTED(nlm_rmiboot_preboot, 16, sp)
 	mtcr	t1, t0		/* update core control */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 1:	wait
 	j	1b
 	nop
 END(nlm_rmiboot_preboot)
 	__FINIT
 =======
+=======
+>>>>>>> v3.18
 	/* wait for NMI to hit */
 1:	wait
 	b	1b
 	nop
 END(nlm_rmiboot_preboot)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

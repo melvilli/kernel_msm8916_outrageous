@@ -49,7 +49,11 @@ int __init setup_profiling_timer(unsigned int multiplier) /* not supported */
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit platform_secondary_init(unsigned int cpu)
+=======
+void platform_secondary_init(unsigned int cpu)
+>>>>>>> v3.18
 =======
 void platform_secondary_init(unsigned int cpu)
 >>>>>>> v3.18
@@ -74,7 +78,10 @@ void platform_secondary_init(unsigned int cpu)
 
 	/* We are done with local CPU inits, unblock the boot CPU. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_cpu_online(cpu, true);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock(&boot_lock);
@@ -82,7 +89,11 @@ void platform_secondary_init(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit platform_boot_secondary(unsigned int cpu, struct task_struct *idle)
+=======
+int platform_boot_secondary(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 int platform_boot_secondary(unsigned int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -103,7 +114,13 @@ int platform_boot_secondary(unsigned int cpu, struct task_struct *idle)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	timeout = jiffies + 1 * HZ;
+=======
+	timeout = jiffies + HZ;
+	/* release the lock and let coreb run */
+	spin_unlock(&boot_lock);
+>>>>>>> v3.18
 =======
 	timeout = jiffies + HZ;
 	/* release the lock and let coreb run */
@@ -118,8 +135,11 @@ int platform_boot_secondary(unsigned int cpu, struct task_struct *idle)
 
 	if (cpu_online(cpu)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* release the lock and let coreb run */
 		spin_unlock(&boot_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return 0;
@@ -176,7 +196,11 @@ void platform_clear_ipi(unsigned int cpu, int irq)
  * In SMP, core timer is used for clock event device.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit bfin_local_timer_setup(void)
+=======
+void bfin_local_timer_setup(void)
+>>>>>>> v3.18
 =======
 void bfin_local_timer_setup(void)
 >>>>>>> v3.18

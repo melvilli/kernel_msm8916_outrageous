@@ -3,8 +3,11 @@
 Required SoC Specific Properties:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : "samsung,i2s-v5"
 =======
+=======
+>>>>>>> v3.18
 - compatible : should be one of the following.
    - samsung,s3c6410-i2s: for 8/16/24bit stereo I2S.
    - samsung,s5pv210-i2s: for 8/16/24bit multichannel(5.1) I2S with
@@ -14,12 +17,16 @@ Required SoC Specific Properties:
      TDM support. TDM (Time division multiplexing) is to allow transfer of
      multiple channel audio data on single data line.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - reg: physical base address of the controller and length of memory mapped
   region.
 - dmas: list of DMA controller phandle and DMA request line ordered pairs.
 - dma-names: identifier string for each DMA request line in the dmas property.
   These strings correspond 1:1 with the ordered pairs in dmas.
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 Optional SoC Specific Properties:
@@ -53,6 +60,8 @@ Example:
 i2s@03830000 {
 	compatible = "samsung,i2s-v5";
 =======
+=======
+>>>>>>> v3.18
 - clocks: Handle to iis clock and RCLK source clk.
 - clock-names:
   i2s0 uses some base clks from CMU and some are from audio subsystem internal
@@ -75,12 +84,16 @@ Example:
 
 i2s0: i2s@03830000 {
 	compatible = "samsung,s5pv210-i2s";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reg = <0x03830000 0x100>;
 	dmas = <&pdma0 10
 		&pdma0 9
 		&pdma0 8>;
 	dma-names = "tx", "rx", "tx-sec";
+<<<<<<< HEAD
 <<<<<<< HEAD
 	samsung,supports-6ch;
 	samsung,supports-rstclr;
@@ -99,6 +112,8 @@ i2s@03830000 {
 		<&gpz 5 2 0 0>, /* I2S_0_SDO[2] */
 		<&gpz 6 2 0 0>; /* I2S_0_SDO[3] */
 =======
+=======
+>>>>>>> v3.18
 	clocks = <&clock_audss EXYNOS_I2S_BUS>,
 		<&clock_audss EXYNOS_I2S_BUS>,
 		<&clock_audss EXYNOS_SCLK_I2S>;
@@ -106,5 +121,8 @@ i2s@03830000 {
 	samsung,idma-addr = <0x03000000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&i2s0_bus>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

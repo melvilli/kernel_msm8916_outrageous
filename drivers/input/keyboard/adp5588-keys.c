@@ -10,7 +10,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -81,9 +84,12 @@ static int adp5588_gpio_get_value(struct gpio_chip *chip, unsigned off)
 	unsigned int bank = ADP5588_BANK(kpad->gpiomap[off]);
 	unsigned int bit = ADP5588_BIT(kpad->gpiomap[off]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return !!(adp5588_read(kpad->client, GPIO_DAT_STAT1 + bank) & bit);
 =======
+=======
+>>>>>>> v3.18
 	int val;
 
 	mutex_lock(&kpad->gpio_lock);
@@ -96,6 +102,9 @@ static int adp5588_gpio_get_value(struct gpio_chip *chip, unsigned off)
 	mutex_unlock(&kpad->gpio_lock);
 
 	return !!(val & bit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -192,7 +201,11 @@ static int adp5588_gpio_add(struct adp5588_kpad *kpad)
 {
 	struct device *dev = &kpad->client->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct adp5588_kpad_platform_data *pdata = dev->platform_data;
+=======
+	const struct adp5588_kpad_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	const struct adp5588_kpad_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -250,7 +263,11 @@ static void adp5588_gpio_remove(struct adp5588_kpad *kpad)
 {
 	struct device *dev = &kpad->client->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct adp5588_kpad_platform_data *pdata = dev->platform_data;
+=======
+	const struct adp5588_kpad_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	const struct adp5588_kpad_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -269,9 +286,13 @@ static void adp5588_gpio_remove(struct adp5588_kpad *kpad)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = gpiochip_remove(&kpad->gc);
 	if (error)
 		dev_warn(dev, "gpiochip_remove failed %d\n", error);
+=======
+	gpiochip_remove(&kpad->gc);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&kpad->gc);
 >>>>>>> v3.18
@@ -352,7 +373,12 @@ static irqreturn_t adp5588_irq(int irq, void *handle)
 static int adp5588_setup(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct adp5588_kpad_platform_data *pdata = client->dev.platform_data;
+=======
+	const struct adp5588_kpad_platform_data *pdata =
+			dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	const struct adp5588_kpad_platform_data *pdata =
 			dev_get_platdata(&client->dev);
@@ -460,7 +486,12 @@ static int adp5588_probe(struct i2c_client *client,
 {
 	struct adp5588_kpad *kpad;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct adp5588_kpad_platform_data *pdata = client->dev.platform_data;
+=======
+	const struct adp5588_kpad_platform_data *pdata =
+			dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	const struct adp5588_kpad_platform_data *pdata =
 			dev_get_platdata(&client->dev);
@@ -577,7 +608,12 @@ static int adp5588_probe(struct i2c_client *client,
 
 	for (i = 0; i < input->keycodemax; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__set_bit(kpad->keycode[i] & KEY_MAX, input->keybit);
+=======
+		if (kpad->keycode[i] <= KEY_MAX)
+			__set_bit(kpad->keycode[i], input->keybit);
+>>>>>>> v3.18
 =======
 		if (kpad->keycode[i] <= KEY_MAX)
 			__set_bit(kpad->keycode[i], input->keybit);
@@ -623,6 +659,10 @@ static int adp5588_probe(struct i2c_client *client,
  err_free_irq:
 	free_irq(client->irq, kpad);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cancel_delayed_work_sync(&kpad->work);
+>>>>>>> v3.18
 =======
 	cancel_delayed_work_sync(&kpad->work);
 >>>>>>> v3.18

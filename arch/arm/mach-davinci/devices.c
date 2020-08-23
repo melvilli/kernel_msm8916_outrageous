@@ -21,14 +21,20 @@
 #include <mach/cputype.h>
 #include <mach/mux.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/edma.h>
 #include <linux/platform_data/mmc-davinci.h>
 #include <mach/time.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/mmc-davinci.h>
 #include <mach/time.h>
 #include <linux/platform_data/edma.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "davinci.h"
@@ -43,6 +49,12 @@
 #define DM365_MMCSD1_BASE	     0x01D00000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DAVINCI_DMA_MMCRXEVT	26
+#define DAVINCI_DMA_MMCTXEVT	27
+
+>>>>>>> v3.18
 =======
 #define DAVINCI_DMA_MMCRXEVT	26
 #define DAVINCI_DMA_MMCTXEVT	27
@@ -312,7 +324,11 @@ static struct resource wdt_resources[] = {
 
 struct platform_device davinci_wdt_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "watchdog",
+=======
+	.name		= "davinci-wdt",
+>>>>>>> v3.18
 =======
 	.name		= "davinci-wdt",
 >>>>>>> v3.18
@@ -327,10 +343,13 @@ void davinci_restart(enum reboot_mode mode, const char *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void davinci_init_wdt(void)
 {
 	platform_device_register(&davinci_wdt_device);
 =======
+=======
+>>>>>>> v3.18
 int davinci_init_wdt(void)
 {
 	return platform_device_register(&davinci_wdt_device);
@@ -347,6 +366,9 @@ int davinci_gpio_register(struct resource *res, int size, void *pdata)
 	davinci_gpio_device.num_resources = size;
 	davinci_gpio_device.dev.platform_data = pdata;
 	return platform_device_register(&davinci_gpio_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -368,6 +390,7 @@ struct davinci_timer_instance davinci_timer_instance[2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*-------------------------------------------------------------------------*/
 
 static int __init davinci_init_devices(void)
@@ -381,5 +404,7 @@ static int __init davinci_init_devices(void)
 }
 arch_initcall(davinci_init_devices);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -22,6 +22,11 @@
 #include <linux/err.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_address.h>
@@ -31,6 +36,10 @@
 #include <asm/proc-fns.h>
 #include <asm/mach-types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/hardware/cache-l2x0.h>
+>>>>>>> v3.18
 =======
 #include <asm/hardware/cache-l2x0.h>
 >>>>>>> v3.18
@@ -40,6 +49,10 @@
 
 static void __iomem *wdog_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct clk *wdog_clk;
+>>>>>>> v3.18
 =======
 static struct clk *wdog_clk;
 >>>>>>> v3.18
@@ -51,6 +64,7 @@ void mxc_restart(enum reboot_mode mode, const char *cmd)
 {
 	unsigned int wcr_enable;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cpu_is_mx1()) {
 		wcr_enable = (1 << 0);
@@ -66,6 +80,8 @@ void mxc_restart(enum reboot_mode mode, const char *cmd)
 	/* Assert SRS signal */
 	__raw_writew(wcr_enable, wdog_base);
 =======
+=======
+>>>>>>> v3.18
 	if (!wdog_base)
 		goto reset_fallback;
 
@@ -88,13 +104,20 @@ void mxc_restart(enum reboot_mode mode, const char *cmd)
 	 */
 	__raw_writew(wcr_enable, wdog_base);
 	__raw_writew(wcr_enable, wdog_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* wait for reset to assert... */
 	mdelay(500);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "Watchdog reset failed to assert reset\n");
+=======
+	pr_err("%s: Watchdog reset failed to assert reset\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_err("%s: Watchdog reset failed to assert reset\n", __func__);
 >>>>>>> v3.18
@@ -103,6 +126,10 @@ void mxc_restart(enum reboot_mode mode, const char *cmd)
 	mdelay(50);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+reset_fallback:
+>>>>>>> v3.18
 =======
 reset_fallback:
 >>>>>>> v3.18
@@ -111,11 +138,14 @@ reset_fallback:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mxc_arch_reset_init(void __iomem *base)
 {
 	wdog_base = base;
 }
 =======
+=======
+>>>>>>> v3.18
 void __init mxc_arch_reset_init(void __iomem *base)
 {
 	wdog_base = base;
@@ -182,4 +212,7 @@ out:
 	l2x0_of_init(0, ~0);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

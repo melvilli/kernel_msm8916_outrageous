@@ -30,16 +30,22 @@
 #include <linux/pm.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c.h>
 #include <linux/cdev.h>
 #include <linux/slab.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_gpio.h>
 #include <linux/i2c.h>
 #include <linux/cdev.h>
 #include <linux/slab.h>
 #include <linux/clk.h>
 #include <linux/regulator/consumer.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <sound/tlv320aic32x4.h>
@@ -70,9 +76,14 @@ struct aic32x4_rate_divs {
 
 struct aic32x4_priv {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 sysclk;
 	u8 page_no;
 	void *control_data;
+=======
+	struct regmap *regmap;
+	u32 sysclk;
+>>>>>>> v3.18
 =======
 	struct regmap *regmap;
 	u32 sysclk;
@@ -81,6 +92,7 @@ struct aic32x4_priv {
 	u32 micpga_routing;
 	bool swapdacs;
 	int rstn_gpio;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -97,6 +109,8 @@ static const struct snd_kcontrol_new aic32x4_snd_controls[] = {
 	SOC_DOUBLE_R_TLV("LO Driver Gain Volume", AIC32X4_LOLGAIN,
 			AIC32X4_LORGAIN, 0, 0x1D, 0, tlv_step_1),
 =======
+=======
+>>>>>>> v3.18
 	struct clk *mclk;
 
 	struct regulator *supply_ldo;
@@ -123,6 +137,9 @@ static const struct snd_kcontrol_new aic32x4_snd_controls[] = {
 	SOC_DOUBLE_R_S_TLV("LO Driver Gain Volume", AIC32X4_LOLGAIN,
 			AIC32X4_LORGAIN, 0, -0x6, 0x1d, 5, 0,
 			tlv_driver_gain),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SOC_DOUBLE_R("HP DAC Playback Switch", AIC32X4_HPLGAIN,
 			AIC32X4_HPRGAIN, 6, 0x01, 1),
@@ -135,8 +152,13 @@ static const struct snd_kcontrol_new aic32x4_snd_controls[] = {
 	SOC_SINGLE("ADCFGA Right Mute Switch", AIC32X4_ADCFGA, 3, 1, 0),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SOC_DOUBLE_R_TLV("ADC Level Volume", AIC32X4_LADCVOL,
 			AIC32X4_RADCVOL, 0, 0x28, 0, tlv_step_0_5),
+=======
+	SOC_DOUBLE_R_S_TLV("ADC Level Volume", AIC32X4_LADCVOL,
+			AIC32X4_RADCVOL, 0, -0x18, 0x28, 6, 0, tlv_adc_vol),
+>>>>>>> v3.18
 =======
 	SOC_DOUBLE_R_S_TLV("ADC Level Volume", AIC32X4_LADCVOL,
 			AIC32X4_RADCVOL, 0, -0x18, 0x28, 6, 0, tlv_adc_vol),
@@ -311,6 +333,7 @@ static const struct snd_soc_dapm_route aic32x4_dapm_routes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int aic32x4_change_page(struct snd_soc_codec *codec,
 					unsigned int new_page)
 {
@@ -373,6 +396,8 @@ static unsigned int aic32x4_read(struct snd_soc_codec *codec, unsigned int reg)
 	return i2c_smbus_read_byte_data(codec->control_data, fixed_reg & 0xff);
 }
 =======
+=======
+>>>>>>> v3.18
 static const struct regmap_range_cfg aic32x4_regmap_pages[] = {
 	{
 		.selector_reg = 0,
@@ -392,6 +417,9 @@ static const struct regmap_config aic32x4_regmap = {
 	.ranges = aic32x4_regmap_pages,
 	.num_ranges = ARRAY_SIZE(aic32x4_regmap_pages),
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int aic32x4_get_divs(int mclk, int rate)
@@ -409,6 +437,7 @@ static inline int aic32x4_get_divs(int mclk, int rate)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int aic32x4_add_widgets(struct snd_soc_codec *codec)
 {
 	snd_soc_dapm_new_controls(&codec->dapm, aic32x4_dapm_widgets,
@@ -421,6 +450,8 @@ static int aic32x4_add_widgets(struct snd_soc_codec *codec)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int aic32x4_set_dai_sysclk(struct snd_soc_dai *codec_dai,
@@ -564,6 +595,7 @@ static int aic32x4_hw_params(struct snd_pcm_substream *substream,
 	data = snd_soc_read(codec, AIC32X4_IFACE1);
 	data = data & ~(3 << 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -575,6 +607,8 @@ static int aic32x4_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -585,6 +619,9 @@ static int aic32x4_hw_params(struct snd_pcm_substream *substream,
 		data |= (AIC32X4_WORD_LEN_24BITS << AIC32X4_DOSRMSB_SHIFT);
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		data |= (AIC32X4_WORD_LEN_32BITS << AIC32X4_DOSRMSB_SHIFT);
 		break;
@@ -592,7 +629,10 @@ static int aic32x4_hw_params(struct snd_pcm_substream *substream,
 	snd_soc_write(codec, AIC32X4_IFACE1, data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (params_channels(params) == 1) {
 		data = AIC32X4_RDAC2LCHN | AIC32X4_LDAC2LCHN;
 	} else {
@@ -604,6 +644,9 @@ static int aic32x4_hw_params(struct snd_pcm_substream *substream,
 	snd_soc_update_bits(codec, AIC32X4_DACSETUP, AIC32X4_DAC_CHAN_MASK,
 			data);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -625,9 +668,12 @@ static int aic32x4_set_bias_level(struct snd_soc_codec *codec,
 				  enum snd_soc_bias_level level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (level) {
 	case SND_SOC_BIAS_ON:
 =======
+=======
+>>>>>>> v3.18
 	struct aic32x4_priv *aic32x4 = snd_soc_codec_get_drvdata(codec);
 	int ret;
 
@@ -640,6 +686,9 @@ static int aic32x4_set_bias_level(struct snd_soc_codec *codec,
 			return ret;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Switch on PLL */
 		snd_soc_update_bits(codec, AIC32X4_PLLPR,
@@ -669,6 +718,7 @@ static int aic32x4_set_bias_level(struct snd_soc_codec *codec,
 		break;
 	case SND_SOC_BIAS_STANDBY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Switch off PLL */
 		snd_soc_update_bits(codec, AIC32X4_PLLPR,
 				    AIC32X4_PLLEN, 0);
@@ -677,6 +727,8 @@ static int aic32x4_set_bias_level(struct snd_soc_codec *codec,
 		snd_soc_update_bits(codec, AIC32X4_NDAC,
 				    AIC32X4_NDACEN, 0);
 =======
+=======
+>>>>>>> v3.18
 		/* Switch off BCLK_N Divider */
 		snd_soc_update_bits(codec, AIC32X4_BCLKN,
 				    AIC32X4_BCLKEN, 0);
@@ -688,12 +740,16 @@ static int aic32x4_set_bias_level(struct snd_soc_codec *codec,
 		/* Switch off NADC Divider */
 		snd_soc_update_bits(codec, AIC32X4_NADC,
 				    AIC32X4_NADCEN, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Switch off MDAC Divider */
 		snd_soc_update_bits(codec, AIC32X4_MDAC,
 				    AIC32X4_MDACEN, 0);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Switch off NADC Divider */
 		snd_soc_update_bits(codec, AIC32X4_NADC,
@@ -707,6 +763,8 @@ static int aic32x4_set_bias_level(struct snd_soc_codec *codec,
 		snd_soc_update_bits(codec, AIC32X4_BCLKN,
 				    AIC32X4_BCLKEN, 0);
 =======
+=======
+>>>>>>> v3.18
 		/* Switch off NDAC Divider */
 		snd_soc_update_bits(codec, AIC32X4_NDAC,
 				    AIC32X4_NDACEN, 0);
@@ -717,6 +775,9 @@ static int aic32x4_set_bias_level(struct snd_soc_codec *codec,
 
 		/* Switch off master clock */
 		clk_disable_unprepare(aic32x4->mclk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case SND_SOC_BIAS_OFF:
@@ -772,6 +833,7 @@ static int aic32x4_probe(struct snd_soc_codec *codec)
 	struct aic32x4_priv *aic32x4 = snd_soc_codec_get_drvdata(codec);
 	u32 tmp_reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	codec->hw_write = (hw_write_t) i2c_master_send;
@@ -782,6 +844,10 @@ static int aic32x4_probe(struct snd_soc_codec *codec)
 				GPIOF_OUT_INIT_LOW, "tlv320aic32x4 rstn");
 		if (ret != 0)
 			return ret;
+=======
+
+	if (gpio_is_valid(aic32x4->rstn_gpio)) {
+>>>>>>> v3.18
 =======
 
 	if (gpio_is_valid(aic32x4->rstn_gpio)) {
@@ -798,9 +864,14 @@ static int aic32x4_probe(struct snd_soc_codec *codec)
 						      AIC32X4_MICBIAS_2075V);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (aic32x4->power_cfg & AIC32X4_PWR_AVDD_DVDD_WEAK_DISABLE) {
 		snd_soc_write(codec, AIC32X4_PWRCFG, AIC32X4_AVDDWEAKDISABLE);
 	}
+=======
+	if (aic32x4->power_cfg & AIC32X4_PWR_AVDD_DVDD_WEAK_DISABLE)
+		snd_soc_write(codec, AIC32X4_PWRCFG, AIC32X4_AVDDWEAKDISABLE);
+>>>>>>> v3.18
 =======
 	if (aic32x4->power_cfg & AIC32X4_PWR_AVDD_DVDD_WEAK_DISABLE)
 		snd_soc_write(codec, AIC32X4_PWRCFG, AIC32X4_AVDDWEAKDISABLE);
@@ -811,6 +882,7 @@ static int aic32x4_probe(struct snd_soc_codec *codec)
 	snd_soc_write(codec, AIC32X4_LDOCTL, tmp_reg);
 
 	tmp_reg = snd_soc_read(codec, AIC32X4_CMMODE);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (aic32x4->power_cfg & AIC32X4_PWR_CMMODE_LDOIN_RANGE_18_36) {
 		tmp_reg |= AIC32X4_LDOIN_18_36;
@@ -840,6 +912,8 @@ static int aic32x4_probe(struct snd_soc_codec *codec)
 			     ARRAY_SIZE(aic32x4_snd_controls));
 	aic32x4_add_widgets(codec);
 =======
+=======
+>>>>>>> v3.18
 	if (aic32x4->power_cfg & AIC32X4_PWR_CMMODE_LDOIN_RANGE_18_36)
 		tmp_reg |= AIC32X4_LDOIN_18_36;
 	if (aic32x4->power_cfg & AIC32X4_PWR_CMMODE_HP_LDOIN_POWERED)
@@ -861,6 +935,9 @@ static int aic32x4_probe(struct snd_soc_codec *codec)
 				AIC32X4_RMICPGANIN_CM1R_10K);
 
 	aic32x4_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -884,8 +961,11 @@ static int aic32x4_remove(struct snd_soc_codec *codec)
 
 static struct snd_soc_codec_driver soc_codec_dev_aic32x4 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read = aic32x4_read,
 	.write = aic32x4_write,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.probe = aic32x4_probe,
@@ -894,9 +974,12 @@ static struct snd_soc_codec_driver soc_codec_dev_aic32x4 = {
 	.resume = aic32x4_resume,
 	.set_bias_level = aic32x4_set_bias_level,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 
 	.controls = aic32x4_snd_controls,
 	.num_controls = ARRAY_SIZE(aic32x4_snd_controls),
@@ -1016,6 +1099,9 @@ error_ldo:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int aic32x4_i2c_probe(struct i2c_client *i2c,
 			     const struct i2c_device_id *id)
@@ -1023,6 +1109,10 @@ static int aic32x4_i2c_probe(struct i2c_client *i2c,
 	struct aic32x4_pdata *pdata = i2c->dev.platform_data;
 	struct aic32x4_priv *aic32x4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node *np = i2c->dev.of_node;
+>>>>>>> v3.18
 =======
 	struct device_node *np = i2c->dev.of_node;
 >>>>>>> v3.18
@@ -1034,12 +1124,18 @@ static int aic32x4_i2c_probe(struct i2c_client *i2c,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aic32x4->control_data = i2c;
 =======
+=======
+>>>>>>> v3.18
 	aic32x4->regmap = devm_regmap_init_i2c(i2c, &aic32x4_regmap);
 	if (IS_ERR(aic32x4->regmap))
 		return PTR_ERR(aic32x4->regmap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c_set_clientdata(i2c, aic32x4);
 
@@ -1049,13 +1145,19 @@ static int aic32x4_i2c_probe(struct i2c_client *i2c,
 		aic32x4->micpga_routing = pdata->micpga_routing;
 		aic32x4->rstn_gpio = pdata->rstn_gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else if (np) {
 		ret = aic32x4_parse_dt(aic32x4, np);
 		if (ret) {
 			dev_err(&i2c->dev, "Failed to parse DT node\n");
 			return ret;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		aic32x4->power_cfg = 0;
@@ -1065,10 +1167,13 @@ static int aic32x4_i2c_probe(struct i2c_client *i2c,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_register_codec(&i2c->dev,
 			&soc_codec_dev_aic32x4, &aic32x4_dai, 1);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	aic32x4->mclk = devm_clk_get(&i2c->dev, "mclk");
 	if (IS_ERR(aic32x4->mclk)) {
 		dev_err(&i2c->dev, "Failed getting the mclk. The current implementation does not support the usage of this codec without mclk\n");
@@ -1099,17 +1204,26 @@ static int aic32x4_i2c_probe(struct i2c_client *i2c,
 	i2c_set_clientdata(i2c, aic32x4);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int aic32x4_i2c_remove(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct aic32x4_priv *aic32x4 = i2c_get_clientdata(client);
 
 	aic32x4_disable_regulators(aic32x4);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	snd_soc_unregister_codec(&client->dev);
 	return 0;
@@ -1122,19 +1236,29 @@ static const struct i2c_device_id aic32x4_i2c_id[] = {
 MODULE_DEVICE_TABLE(i2c, aic32x4_i2c_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id aic32x4_of_id[] = {
 	{ .compatible = "ti,tlv320aic32x4", },
 	{ /* senitel */ }
 };
 MODULE_DEVICE_TABLE(of, aic32x4_of_id);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct i2c_driver aic32x4_i2c_driver = {
 	.driver = {
 		.name = "tlv320aic32x4",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = aic32x4_of_id,
+>>>>>>> v3.18
 =======
 		.of_match_table = aic32x4_of_id,
 >>>>>>> v3.18

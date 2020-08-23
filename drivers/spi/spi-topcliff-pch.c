@@ -218,7 +218,11 @@ struct pch_pd_dev_save {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pch_spi_pcidev_id) = {
+=======
+static const struct pci_device_id pch_spi_pcidev_id[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pch_spi_pcidev_id[] = {
 >>>>>>> v3.18
@@ -337,7 +341,11 @@ static void pch_spi_handler_sub(struct pch_spi_data *data, u32 reg_spsr_val,
 				wake_up(&data->wait);
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_err(&data->master->dev,
+=======
+				dev_vdbg(&data->master->dev,
+>>>>>>> v3.18
 =======
 				dev_vdbg(&data->master->dev,
 >>>>>>> v3.18
@@ -376,7 +384,11 @@ static irqreturn_t pch_spi_handler(int irq, void *dev_id)
 	if (reg_spsr_val & SPSR_ORF_BIT) {
 		dev_err(&board_dat->pdev->dev, "%s Over run error\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (data->current_msg->complete != 0) {
+=======
+		if (data->current_msg->complete) {
+>>>>>>> v3.18
 =======
 		if (data->current_msg->complete) {
 >>>>>>> v3.18
@@ -477,6 +489,7 @@ static void pch_spi_reset(struct spi_master *master)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pch_spi_setup(struct spi_device *pspi)
 {
 	/* check bits per word */
@@ -504,6 +517,8 @@ static int pch_spi_setup(struct spi_device *pspi)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int pch_spi_transfer(struct spi_device *pspi, struct spi_message *pmsg)
 {
 
@@ -512,6 +527,7 @@ static int pch_spi_transfer(struct spi_device *pspi, struct spi_message *pmsg)
 	int retval;
 	unsigned long flags;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* validate spi message and baud rate */
 	if (unlikely(list_empty(&pmsg->transfers) == 1)) {
@@ -532,6 +548,8 @@ static int pch_spi_transfer(struct spi_device *pspi, struct spi_message *pmsg)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&data->lock, flags);
 	/* validate Tx/Rx buffers and Transfer length */
 	list_for_each_entry(transfer, &pmsg->transfers, transfer_list) {
@@ -550,6 +568,7 @@ static int pch_spi_transfer(struct spi_device *pspi, struct spi_message *pmsg)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&pspi->dev, "%s Tx/Rx buffer valid. Transfer length"
 			" valid\n", __func__);
 
@@ -567,6 +586,11 @@ static int pch_spi_transfer(struct spi_device *pspi, struct spi_message *pmsg)
 				goto err_return_spinlock;
 			}
 		}
+=======
+		dev_dbg(&pspi->dev,
+			"%s Tx/Rx buffer valid. Transfer length valid\n",
+			__func__);
+>>>>>>> v3.18
 =======
 		dev_dbg(&pspi->dev,
 			"%s Tx/Rx buffer valid. Transfer length valid\n",
@@ -684,7 +708,11 @@ static void pch_spi_set_tx(struct pch_spi_data *data, int *bpw)
 			pmsg->status = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (pmsg->complete != 0)
+=======
+			if (pmsg->complete)
+>>>>>>> v3.18
 =======
 			if (pmsg->complete)
 >>>>>>> v3.18
@@ -738,7 +766,11 @@ static void pch_spi_nomore_transfer(struct pch_spi_data *data)
 	data->current_msg->status = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data->current_msg->complete != 0) {
+=======
+	if (data->current_msg->complete) {
+>>>>>>> v3.18
 =======
 	if (data->current_msg->complete) {
 >>>>>>> v3.18
@@ -963,8 +995,13 @@ static void pch_spi_request_dma(struct pch_spi_data *data, int bpw)
 
 	/* Get DMA's dev information */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_dev = pci_get_bus_and_slot(data->board_dat->pdev->bus->number,
 				       PCI_DEVFN(12, 0));
+=======
+	dma_dev = pci_get_slot(data->board_dat->pdev->bus,
+			PCI_DEVFN(PCI_SLOT(data->board_dat->pdev->devfn), 0));
+>>>>>>> v3.18
 =======
 	dma_dev = pci_get_slot(data->board_dat->pdev->bus,
 			PCI_DEVFN(PCI_SLOT(data->board_dat->pdev->devfn), 0));
@@ -974,7 +1011,11 @@ static void pch_spi_request_dma(struct pch_spi_data *data, int bpw)
 	param = &dma->param_tx;
 	param->dma_dev = &dma_dev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	param->chan_id = data->master->bus_num * 2; /* Tx = 0, 2 */
+=======
+	param->chan_id = data->ch * 2; /* Tx = 0, 2 */;
+>>>>>>> v3.18
 =======
 	param->chan_id = data->ch * 2; /* Tx = 0, 2 */;
 >>>>>>> v3.18
@@ -993,7 +1034,11 @@ static void pch_spi_request_dma(struct pch_spi_data *data, int bpw)
 	param = &dma->param_rx;
 	param->dma_dev = &dma_dev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	param->chan_id = data->master->bus_num * 2 + 1; /* Rx = Tx + 1 */
+=======
+	param->chan_id = data->ch * 2 + 1; /* Rx = Tx + 1 */;
+>>>>>>> v3.18
 =======
 	param->chan_id = data->ch * 2 + 1; /* Rx = Tx + 1 */;
 >>>>>>> v3.18
@@ -1149,8 +1194,13 @@ static void pch_spi_handle_dma(struct pch_spi_data *data, int *bpw)
 					DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
 	if (!desc_rx) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&data->master->dev, "%s:device_prep_slave_sg Failed\n",
 			__func__);
+=======
+		dev_err(&data->master->dev,
+			"%s:dmaengine_prep_slave_sg Failed\n", __func__);
+>>>>>>> v3.18
 =======
 		dev_err(&data->master->dev,
 			"%s:dmaengine_prep_slave_sg Failed\n", __func__);
@@ -1213,8 +1263,13 @@ static void pch_spi_handle_dma(struct pch_spi_data *data, int *bpw)
 					DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
 	if (!desc_tx) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&data->master->dev, "%s:device_prep_slave_sg Failed\n",
 			__func__);
+=======
+		dev_err(&data->master->dev,
+			"%s:dmaengine_prep_slave_sg Failed\n", __func__);
+>>>>>>> v3.18
 =======
 		dev_err(&data->master->dev,
 			"%s:dmaengine_prep_slave_sg Failed\n", __func__);
@@ -1228,8 +1283,12 @@ static void pch_spi_handle_dma(struct pch_spi_data *data, int *bpw)
 	dma->desc_tx = desc_tx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&data->master->dev, "\n%s:Pulling down SSN low - writing "
 		"0x2 to SSNXCR\n", __func__);
+=======
+	dev_dbg(&data->master->dev, "%s:Pulling down SSN low - writing 0x2 to SSNXCR\n", __func__);
+>>>>>>> v3.18
 =======
 	dev_dbg(&data->master->dev, "%s:Pulling down SSN low - writing 0x2 to SSNXCR\n", __func__);
 >>>>>>> v3.18
@@ -1257,6 +1316,7 @@ static void pch_spi_process_messages(struct work_struct *pwork)
 	/* check if suspend has been initiated;if yes flush queue */
 	if (data->board_dat->suspend_sts || (data->status == STATUS_EXITING)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&data->master->dev, "%s suspend/remove initiated,"
 			"flushing queue\n", __func__);
 		list_for_each_entry_safe(pmsg, tmp, data->queue.next, queue) {
@@ -1264,12 +1324,17 @@ static void pch_spi_process_messages(struct work_struct *pwork)
 
 			if (pmsg->complete != 0) {
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(&data->master->dev,
 			"%s suspend/remove initiated, flushing queue\n", __func__);
 		list_for_each_entry_safe(pmsg, tmp, data->queue.next, queue) {
 			pmsg->status = -EIO;
 
 			if (pmsg->complete) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				spin_unlock(&data->lock);
 				pmsg->complete(pmsg->context);
@@ -1495,8 +1560,12 @@ static int pch_spi_pd_probe(struct platform_device *plat_dev)
 	data->io_base_addr = pci_resource_start(board_dat->pdev, 1) +
 					 PCH_ADDRESS_SIZE * plat_dev->id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->io_remap_addr = pci_iomap(board_dat->pdev, 1, 0) +
 					 PCH_ADDRESS_SIZE * plat_dev->id;
+=======
+	data->io_remap_addr = pci_iomap(board_dat->pdev, 1, 0);
+>>>>>>> v3.18
 =======
 	data->io_remap_addr = pci_iomap(board_dat->pdev, 1, 0);
 >>>>>>> v3.18
@@ -1506,6 +1575,10 @@ static int pch_spi_pd_probe(struct platform_device *plat_dev)
 		goto err_pci_iomap;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	data->io_remap_addr += PCH_ADDRESS_SIZE * plat_dev->id;
+>>>>>>> v3.18
 =======
 	data->io_remap_addr += PCH_ADDRESS_SIZE * plat_dev->id;
 >>>>>>> v3.18
@@ -1516,14 +1589,20 @@ static int pch_spi_pd_probe(struct platform_device *plat_dev)
 	/* initialize members of SPI master */
 	master->num_chipselect = PCH_MAX_CS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->setup = pch_spi_setup;
 	master->transfer = pch_spi_transfer;
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_LSB_FIRST;
 =======
+=======
+>>>>>>> v3.18
 	master->transfer = pch_spi_transfer;
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_LSB_FIRST;
 	master->bits_per_word_mask = SPI_BPW_MASK(8) | SPI_BPW_MASK(16);
 	master->max_speed_hz = PCH_MAX_BAUDRATE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data->board_dat = board_dat;
@@ -1556,12 +1635,18 @@ static int pch_spi_pd_probe(struct platform_device *plat_dev)
 	pch_spi_set_master_mode(master);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (use_dma) {
 		dev_info(&plat_dev->dev, "Use DMA for data transfers\n");
 		pch_alloc_dma_buf(board_dat, data);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = spi_register_master(master);
 	if (ret != 0) {
@@ -1570,6 +1655,7 @@ static int pch_spi_pd_probe(struct platform_device *plat_dev)
 		goto err_spi_register_master;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (use_dma) {
 		dev_info(&plat_dev->dev, "Use DMA for data transfers\n");
@@ -1580,10 +1666,15 @@ static int pch_spi_pd_probe(struct platform_device *plat_dev)
 
 err_spi_register_master:
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 
 err_spi_register_master:
 	pch_free_dma_buf(board_dat, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_irq(board_dat->pdev->irq, data);
 err_request_irq:
@@ -1723,8 +1814,12 @@ static struct platform_driver pch_spi_pd_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pch_spi_probe(struct pci_dev *pdev,
 				   const struct pci_device_id *id)
+=======
+static int pch_spi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+>>>>>>> v3.18
 =======
 static int pch_spi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 >>>>>>> v3.18
@@ -1737,6 +1832,7 @@ static int pch_spi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 
 	pd_dev_save = kzalloc(sizeof(struct pch_pd_dev_save), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pd_dev_save) {
 		dev_err(&pdev->dev, "%s Can't allocate pd_dev_sav\n", __func__);
 		return -ENOMEM;
@@ -1746,11 +1842,16 @@ static int pch_spi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	if (!board_dat) {
 		dev_err(&pdev->dev, "%s Can't allocate board_dat\n", __func__);
 =======
+=======
+>>>>>>> v3.18
 	if (!pd_dev_save)
 		return -ENOMEM;
 
 	board_dat = kzalloc(sizeof(struct pch_spi_board_data), GFP_KERNEL);
 	if (!board_dat) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		retval = -ENOMEM;
 		goto err_no_mem;
@@ -1806,6 +1907,11 @@ static int pch_spi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 
 err_platform_device:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	while (--i >= 0)
+		platform_device_unregister(pd_dev_save->pd_save[i]);
+>>>>>>> v3.18
 =======
 	while (--i >= 0)
 		platform_device_unregister(pd_dev_save->pd_save[i]);
@@ -1928,6 +2034,11 @@ MODULE_PARM_DESC(use_dma,
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Intel EG20T PCH/LAPIS Semiconductor ML7xxx IOH SPI Driver");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DEVICE_TABLE(pci, pch_spi_pcidev_id);
+
+>>>>>>> v3.18
 =======
 MODULE_DEVICE_TABLE(pci, pch_spi_pcidev_id);
 

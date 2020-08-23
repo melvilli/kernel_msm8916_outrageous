@@ -1405,7 +1405,11 @@ static void display_tree(struct menu *menu)
 			continue;
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (((menu != &rootmenu) && !(menu->flags & MENU_ROOT))
+=======
+		if (((menu != &rootmenu) && !(menu->flags & MENU_ROOT))
+>>>>>>> v3.18
 =======
 		if (((menu != &rootmenu) && !(menu->flags & MENU_ROOT))
 >>>>>>> v3.18

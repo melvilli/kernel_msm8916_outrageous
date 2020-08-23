@@ -26,13 +26,19 @@
 #include <net/inet_ecn.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define INETFRAGS_EVICT_BUCKETS   128
 #define INETFRAGS_EVICT_MAX	  512
 
 /* don't rebuild inetfrag table with new secret more often than this */
 #define INETFRAGS_MIN_REBUILD_INTERVAL (5 * HZ)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Given the OR values of all fragments, apply RFC 3168 5.3 requirements
  * Value : 0xff if frame should be dropped.
@@ -56,6 +62,7 @@ const u8 ip_frag_ecn_table[16] = {
 EXPORT_SYMBOL(ip_frag_ecn_table);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void inet_frag_secret_rebuild(unsigned long dummy)
 {
 	struct inet_frags *f = (struct inet_frags *)dummy;
@@ -67,6 +74,8 @@ static void inet_frag_secret_rebuild(unsigned long dummy)
 
 	get_random_bytes(&f->rnd, sizeof(u32));
 =======
+=======
+>>>>>>> v3.18
 static unsigned int
 inet_frag_hashfn(const struct inet_frags *f, const struct inet_frag_queue *q)
 {
@@ -90,6 +99,9 @@ static void inet_frag_secret_rebuild(struct inet_frags *f)
 
 	get_random_bytes(&f->rnd, sizeof(u32));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < INETFRAGS_HASHSZ; i++) {
 		struct inet_frag_bucket *hb;
@@ -98,13 +110,19 @@ static void inet_frag_secret_rebuild(struct inet_frags *f)
 
 		hb = &f->hash[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hlist_for_each_entry_safe(q, n, &hb->chain, list) {
 			unsigned int hval = f->hashfn(q);
 =======
+=======
+>>>>>>> v3.18
 		spin_lock(&hb->chain_lock);
 
 		hlist_for_each_entry_safe(q, n, &hb->chain, list) {
 			unsigned int hval = inet_frag_hashfn(f, q);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (hval != i) {
@@ -114,6 +132,7 @@ static void inet_frag_secret_rebuild(struct inet_frags *f)
 
 				/* Relink to new hash chain. */
 				hb_dest = &f->hash[hval];
+<<<<<<< HEAD
 <<<<<<< HEAD
 				hlist_add_head(&q->list, &hb_dest->chain);
 			}
@@ -129,6 +148,8 @@ void inet_frags_init(struct inet_frags *f)
 	int i;
 
 =======
+=======
+>>>>>>> v3.18
 
 				/* This is the only place where we take
 				 * another chain_lock while already holding
@@ -239,6 +260,9 @@ int inet_frags_init(struct inet_frags *f)
 
 	INIT_WORK(&f->frags_work, inet_frag_worker);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < INETFRAGS_HASHSZ; i++) {
 		struct inet_frag_bucket *hb = &f->hash[i];
@@ -246,6 +270,7 @@ int inet_frags_init(struct inet_frags *f)
 		spin_lock_init(&hb->chain_lock);
 		INIT_HLIST_HEAD(&hb->chain);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rwlock_init(&f->lock);
 
@@ -257,6 +282,8 @@ int inet_frags_init(struct inet_frags *f)
 	f->secret_timer.expires = jiffies + f->secret_interval;
 	add_timer(&f->secret_timer);
 =======
+=======
+>>>>>>> v3.18
 
 	seqlock_init(&f->rnd_seqlock);
 	f->last_rebuild_jiffies = 0;
@@ -266,6 +293,9 @@ int inet_frags_init(struct inet_frags *f)
 		return -ENOMEM;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(inet_frags_init);
@@ -273,10 +303,14 @@ EXPORT_SYMBOL(inet_frags_init);
 void inet_frags_init_net(struct netns_frags *nf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf->nqueues = 0;
 	init_frag_mem_limit(nf);
 	INIT_LIST_HEAD(&nf->lru_list);
 	spin_lock_init(&nf->lru_lock);
+=======
+	init_frag_mem_limit(nf);
+>>>>>>> v3.18
 =======
 	init_frag_mem_limit(nf);
 >>>>>>> v3.18
@@ -286,7 +320,12 @@ EXPORT_SYMBOL(inet_frags_init_net);
 void inet_frags_fini(struct inet_frags *f)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&f->secret_timer);
+=======
+	cancel_work_sync(&f->frags_work);
+	kmem_cache_destroy(f->frags_cachep);
+>>>>>>> v3.18
 =======
 	cancel_work_sync(&f->frags_work);
 	kmem_cache_destroy(f->frags_cachep);
@@ -297,11 +336,14 @@ EXPORT_SYMBOL(inet_frags_fini);
 void inet_frags_exit_net(struct netns_frags *nf, struct inet_frags *f)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf->low_thresh = 0;
 
 	local_bh_disable();
 	inet_frag_evictor(nf, f, true);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int seq;
 	int i;
 
@@ -317,6 +359,9 @@ evict_again:
 	if (read_seqretry(&f->rnd_seqlock, seq))
 		goto evict_again;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	local_bh_enable();
 
@@ -324,6 +369,7 @@ evict_again:
 }
 EXPORT_SYMBOL(inet_frags_exit_net);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void fq_unlink(struct inet_frag_queue *fq, struct inet_frags *f)
 {
@@ -341,6 +387,8 @@ static inline void fq_unlink(struct inet_frag_queue *fq, struct inet_frags *f)
 	read_unlock(&f->lock);
 	inet_frag_lru_del(fq);
 =======
+=======
+>>>>>>> v3.18
 static struct inet_frag_bucket *
 get_frag_bucket_locked(struct inet_frag_queue *fq, struct inet_frags *f)
 __acquires(hb->chain_lock)
@@ -371,6 +419,9 @@ static inline void fq_unlink(struct inet_frag_queue *fq, struct inet_frags *f)
 	if (!(fq->flags & INET_FRAG_EVICTED))
 		hlist_del(&fq->list);
 	spin_unlock(&hb->chain_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -380,15 +431,21 @@ void inet_frag_kill(struct inet_frag_queue *fq, struct inet_frags *f)
 		atomic_dec(&fq->refcnt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(fq->last_in & INET_FRAG_COMPLETE)) {
 		fq_unlink(fq, f);
 		atomic_dec(&fq->refcnt);
 		fq->last_in |= INET_FRAG_COMPLETE;
 =======
+=======
+>>>>>>> v3.18
 	if (!(fq->flags & INET_FRAG_COMPLETE)) {
 		fq_unlink(fq, f);
 		atomic_dec(&fq->refcnt);
 		fq->flags |= INET_FRAG_COMPLETE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -396,7 +453,11 @@ EXPORT_SYMBOL(inet_frag_kill);
 
 static inline void frag_kfree_skb(struct netns_frags *nf, struct inet_frags *f,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sk_buff *skb)
+=======
+				  struct sk_buff *skb)
+>>>>>>> v3.18
 =======
 				  struct sk_buff *skb)
 >>>>>>> v3.18
@@ -407,8 +468,12 @@ static inline void frag_kfree_skb(struct netns_frags *nf, struct inet_frags *f,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void inet_frag_destroy(struct inet_frag_queue *q, struct inet_frags *f,
 					int *work)
+=======
+void inet_frag_destroy(struct inet_frag_queue *q, struct inet_frags *f)
+>>>>>>> v3.18
 =======
 void inet_frag_destroy(struct inet_frag_queue *q, struct inet_frags *f)
 >>>>>>> v3.18
@@ -418,7 +483,11 @@ void inet_frag_destroy(struct inet_frag_queue *q, struct inet_frags *f)
 	unsigned int sum, sum_truesize = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(!(q->last_in & INET_FRAG_COMPLETE));
+=======
+	WARN_ON(!(q->flags & INET_FRAG_COMPLETE));
+>>>>>>> v3.18
 =======
 	WARN_ON(!(q->flags & INET_FRAG_COMPLETE));
 >>>>>>> v3.18
@@ -436,14 +505,18 @@ void inet_frag_destroy(struct inet_frag_queue *q, struct inet_frags *f)
 	}
 	sum = sum_truesize + f->qsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (work)
 		*work -= sum;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sub_frag_mem_limit(q, sum);
 
 	if (f->destructor)
 		f->destructor(q);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kfree(q);
 
@@ -516,6 +589,8 @@ static struct inet_frag_queue *inet_frag_intern(struct netns_frags *nf,
 	 * such entry could be created on other cpu, while we
 	 * released the hash bucket lock.
 =======
+=======
+>>>>>>> v3.18
 	kmem_cache_free(f->frags_cachep, q);
 }
 EXPORT_SYMBOL(inet_frag_destroy);
@@ -532,6 +607,9 @@ static struct inet_frag_queue *inet_frag_intern(struct netns_frags *nf,
 	/* With SMP race we have to recheck hash table, because
 	 * such entry could have been created on other cpu before
 	 * we acquired hash bucket lock.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	hlist_for_each_entry(qp, &hb->chain, list) {
@@ -539,8 +617,12 @@ static struct inet_frag_queue *inet_frag_intern(struct netns_frags *nf,
 			atomic_inc(&qp->refcnt);
 			spin_unlock(&hb->chain_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			read_unlock(&f->lock);
 			qp_in->last_in |= INET_FRAG_COMPLETE;
+=======
+			qp_in->flags |= INET_FRAG_COMPLETE;
+>>>>>>> v3.18
 =======
 			qp_in->flags |= INET_FRAG_COMPLETE;
 >>>>>>> v3.18
@@ -556,9 +638,14 @@ static struct inet_frag_queue *inet_frag_intern(struct netns_frags *nf,
 	atomic_inc(&qp->refcnt);
 	hlist_add_head(&qp->list, &hb->chain);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inet_frag_lru_add(nf, qp);
 	spin_unlock(&hb->chain_lock);
 	read_unlock(&f->lock);
+=======
+
+	spin_unlock(&hb->chain_lock);
+>>>>>>> v3.18
 =======
 
 	spin_unlock(&hb->chain_lock);
@@ -569,12 +656,15 @@ static struct inet_frag_queue *inet_frag_intern(struct netns_frags *nf,
 
 static struct inet_frag_queue *inet_frag_alloc(struct netns_frags *nf,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct inet_frags *f, void *arg)
 {
 	struct inet_frag_queue *q;
 
 	q = kzalloc(f->qsize, GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 					       struct inet_frags *f,
 					       void *arg)
 {
@@ -586,6 +676,9 @@ static struct inet_frag_queue *inet_frag_alloc(struct netns_frags *nf,
 	}
 
 	q = kmem_cache_zalloc(f->frags_cachep, GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (q == NULL)
 		return NULL;
@@ -598,7 +691,10 @@ static struct inet_frag_queue *inet_frag_alloc(struct netns_frags *nf,
 	spin_lock_init(&q->lock);
 	atomic_set(&q->refcnt, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&q->lru_list);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -607,7 +703,12 @@ static struct inet_frag_queue *inet_frag_alloc(struct netns_frags *nf,
 
 static struct inet_frag_queue *inet_frag_create(struct netns_frags *nf,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct inet_frags *f, void *arg)
+=======
+						struct inet_frags *f,
+						void *arg)
+>>>>>>> v3.18
 =======
 						struct inet_frags *f,
 						void *arg)
@@ -624,8 +725,13 @@ static struct inet_frag_queue *inet_frag_create(struct netns_frags *nf,
 
 struct inet_frag_queue *inet_frag_find(struct netns_frags *nf,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct inet_frags *f, void *key, unsigned int hash)
 	__releases(&f->lock)
+=======
+				       struct inet_frags *f, void *key,
+				       unsigned int hash)
+>>>>>>> v3.18
 =======
 				       struct inet_frags *f, void *key,
 				       unsigned int hash)
@@ -636,11 +742,17 @@ struct inet_frag_queue *inet_frag_find(struct netns_frags *nf,
 	int depth = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (frag_mem_limit(nf) > nf->low_thresh)
 		inet_frag_schedule_worker(f);
 
 	hash &= (INETFRAGS_HASHSZ - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hb = &f->hash[hash];
 
@@ -650,7 +762,10 @@ struct inet_frag_queue *inet_frag_find(struct netns_frags *nf,
 			atomic_inc(&q->refcnt);
 			spin_unlock(&hb->chain_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			read_unlock(&f->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			return q;
@@ -659,6 +774,7 @@ struct inet_frag_queue *inet_frag_find(struct netns_frags *nf,
 	}
 	spin_unlock(&hb->chain_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_unlock(&f->lock);
 
 	if (depth <= INETFRAGS_MAXDEPTH)
@@ -666,6 +782,8 @@ struct inet_frag_queue *inet_frag_find(struct netns_frags *nf,
 	else
 		return ERR_PTR(-ENOBUFS);
 =======
+=======
+>>>>>>> v3.18
 
 	if (depth <= INETFRAGS_MAXDEPTH)
 		return inet_frag_create(nf, f, key);
@@ -677,6 +795,9 @@ struct inet_frag_queue *inet_frag_find(struct netns_frags *nf,
 	}
 
 	return ERR_PTR(-ENOBUFS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(inet_frag_find);

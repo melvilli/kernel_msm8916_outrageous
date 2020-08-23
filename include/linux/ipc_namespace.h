@@ -22,7 +22,10 @@ struct ipc_ids {
 	int in_use;
 	unsigned short seq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short seq_max;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct rw_semaphore rwsem;

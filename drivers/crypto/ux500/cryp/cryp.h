@@ -115,6 +115,12 @@ enum cryp_status_id {
 
 /* Cryp DMA interface */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CRYP_DMA_TX_FIFO	0x08
+#define CRYP_DMA_RX_FIFO	0x10
+
+>>>>>>> v3.18
 =======
 #define CRYP_DMA_TX_FIFO	0x08
 #define CRYP_DMA_RX_FIFO	0x10
@@ -224,7 +230,12 @@ struct cryp_dma {
 /**
  * struct cryp_device_data - structure for a cryp device.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @base: Pointer to the hardware base address.
+=======
+ * @base: Pointer to virtual base address of the cryp device.
+ * @phybase: Pointer to physical memory location of the cryp device.
+>>>>>>> v3.18
 =======
  * @base: Pointer to virtual base address of the cryp device.
  * @phybase: Pointer to physical memory location of the cryp device.
@@ -244,6 +255,10 @@ struct cryp_dma {
 struct cryp_device_data {
 	struct cryp_register __iomem *base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phys_addr_t phybase;
+>>>>>>> v3.18
 =======
 	phys_addr_t phybase;
 >>>>>>> v3.18

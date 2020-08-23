@@ -935,7 +935,11 @@ static int snd_opti9xx_probe(struct snd_card *card)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int snd_opti9xx_card_new(struct snd_card **cardp)
+=======
+static int snd_opti9xx_card_new(struct device *pdev, struct snd_card **cardp)
+>>>>>>> v3.18
 =======
 static int snd_opti9xx_card_new(struct device *pdev, struct snd_card **cardp)
 >>>>>>> v3.18
@@ -944,8 +948,13 @@ static int snd_opti9xx_card_new(struct device *pdev, struct snd_card **cardp)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index, id, THIS_MODULE,
 			      sizeof(struct snd_opti9xx), &card);
+=======
+	err = snd_card_new(pdev, index, id, THIS_MODULE,
+			   sizeof(struct snd_opti9xx), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(pdev, index, id, THIS_MODULE,
 			   sizeof(struct snd_opti9xx), &card);
@@ -1020,7 +1029,11 @@ static int snd_opti9xx_isa_probe(struct device *devptr,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = snd_opti9xx_card_new(&card);
+=======
+	error = snd_opti9xx_card_new(devptr, &card);
+>>>>>>> v3.18
 =======
 	error = snd_opti9xx_card_new(devptr, &card);
 >>>>>>> v3.18
@@ -1032,7 +1045,10 @@ static int snd_opti9xx_isa_probe(struct device *devptr,
 		return error;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, devptr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((error = snd_opti9xx_probe(card)) < 0) {
@@ -1048,7 +1064,10 @@ static int snd_opti9xx_isa_remove(struct device *devptr,
 {
 	snd_card_free(dev_get_drvdata(devptr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1121,7 +1140,11 @@ static int snd_opti9xx_pnp_probe(struct pnp_card_link *pcard,
 	if (! isapnp)
 		return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = snd_opti9xx_card_new(&card);
+=======
+	error = snd_opti9xx_card_new(&pcard->card->dev, &card);
+>>>>>>> v3.18
 =======
 	error = snd_opti9xx_card_new(&pcard->card->dev, &card);
 >>>>>>> v3.18
@@ -1156,7 +1179,10 @@ static int snd_opti9xx_pnp_probe(struct pnp_card_link *pcard,
 		return error;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pcard->card->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((error = snd_opti9xx_probe(card)) < 0) {

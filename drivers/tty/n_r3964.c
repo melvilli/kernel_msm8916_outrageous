@@ -1245,7 +1245,11 @@ static void r3964_receive_buf(struct tty_struct *tty, const unsigned char *cp,
 	struct r3964_info *pInfo = tty->disc_data;
 	const unsigned char *p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *f, flags = 0;
+=======
+	char *f, flags = TTY_NORMAL;
+>>>>>>> v3.18
 =======
 	char *f, flags = TTY_NORMAL;
 >>>>>>> v3.18

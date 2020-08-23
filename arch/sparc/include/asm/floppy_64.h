@@ -255,7 +255,11 @@ static int sun_fd_request_irq(void)
 
 		error = request_irq(FLOPPY_IRQ, sparc_floppy_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    IRQF_DISABLED, "floppy", NULL);
+=======
+				    0, "floppy", NULL);
+>>>>>>> v3.18
 =======
 				    0, "floppy", NULL);
 >>>>>>> v3.18
@@ -301,7 +305,11 @@ static struct sun_pci_dma_op sun_pci_dma_current = { -1U, 0, 0, NULL};
 static struct sun_pci_dma_op sun_pci_dma_pending = { -1U, 0, 0, NULL};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern irqreturn_t floppy_interrupt(int irq, void *dev_id);
+=======
+irqreturn_t floppy_interrupt(int irq, void *dev_id);
+>>>>>>> v3.18
 =======
 irqreturn_t floppy_interrupt(int irq, void *dev_id);
 >>>>>>> v3.18

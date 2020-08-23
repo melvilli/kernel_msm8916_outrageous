@@ -20,6 +20,10 @@
 #include <linux/platform_data/clk-lpss.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -29,16 +33,23 @@
 ACPI_MODULE_NAME("acpi_lpss");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_INTEL_LPSS
 
 #define LPSS_ADDR(desc) ((unsigned long)&desc)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define LPSS_CLK_SIZE	0x04
 #define LPSS_LTR_SIZE	0x18
 
 /* Offsets relative to LPSS_PRIVATE_OFFSET */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define LPSS_GENERAL			0x08
 #define LPSS_GENERAL_LTR_MODE_SW	BIT(2)
@@ -56,6 +67,8 @@ static struct lpss_device_desc lpss_dma_desc = {
 	.clk_required = true,
 	.clkdev_name = "hclk",
 =======
+=======
+>>>>>>> v3.18
 #define LPSS_CLK_DIVIDER_DEF_MASK	(BIT(1) | BIT(16))
 #define LPSS_RESETS			0x04
 #define LPSS_RESETS_RESET_FUNC		BIT(0)
@@ -95,12 +108,16 @@ struct lpss_device_desc {
 
 static struct lpss_device_desc lpss_dma_desc = {
 	.flags = LPSS_CLK,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 struct lpss_private_data {
 	void __iomem *mmio_base;
 	resource_size_t mmio_size;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct clk *clk;
 	const struct lpss_device_desc *dev_desc;
@@ -135,6 +152,8 @@ static const struct acpi_device_id acpi_lpss_device_ids[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned int fixed_clk_rate;
 	struct clk *clk;
 	const struct lpss_device_desc *dev_desc;
@@ -276,6 +295,9 @@ static const struct acpi_device_id acpi_lpss_device_ids[] = {
 
 #ifdef CONFIG_X86_INTEL_LPSS
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int is_memory(struct acpi_resource *res, void *not_used)
 {
@@ -296,13 +318,19 @@ static int register_device_clock(struct acpi_device *adev,
 {
 	const struct lpss_device_desc *dev_desc = pdata->dev_desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lpss_clk_data *clk_data;
 =======
+=======
+>>>>>>> v3.18
 	const char *devname = dev_name(&adev->dev);
 	struct clk *clk = ERR_PTR(-ENODEV);
 	struct lpss_clk_data *clk_data;
 	const char *parent, *clk_name;
 	void __iomem *prv_base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!lpss_clk_dev)
@@ -311,6 +339,7 @@ static int register_device_clock(struct acpi_device *adev,
 	clk_data = platform_get_drvdata(lpss_clk_dev);
 	if (!clk_data)
 		return -ENODEV;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (dev_desc->clkdev_name) {
@@ -321,11 +350,15 @@ static int register_device_clock(struct acpi_device *adev,
 =======
 	clk = clk_data->clk;
 >>>>>>> v3.18
+=======
+	clk = clk_data->clk;
+>>>>>>> v3.18
 
 	if (!pdata->mmio_base
 	    || pdata->mmio_size < dev_desc->prv_offset + LPSS_CLK_SIZE)
 		return -ENODATA;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pdata->clk = clk_register_gate(NULL, dev_name(&adev->dev),
 				       clk_data->name, 0,
@@ -336,6 +369,8 @@ static int register_device_clock(struct acpi_device *adev,
 
 	clk_register_clkdev(pdata->clk, NULL, dev_name(&adev->dev));
 =======
+=======
+>>>>>>> v3.18
 	parent = clk_data->name;
 	prv_base = pdata->mmio_base + dev_desc->prv_offset;
 
@@ -381,6 +416,9 @@ out:
 
 	pdata->clk = clk;
 	clk_register_clkdev(clk, NULL, devname);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -393,6 +431,7 @@ static int acpi_lpss_create_device(struct acpi_device *adev,
 	struct resource_list_entry *rentry;
 	struct list_head resource_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	dev_desc = (struct lpss_device_desc *)id->driver_data;
@@ -400,6 +439,8 @@ static int acpi_lpss_create_device(struct acpi_device *adev,
 		return acpi_create_platform_device(adev, id);
 
 =======
+=======
+>>>>>>> v3.18
 	struct platform_device *pdev;
 	int ret;
 
@@ -408,6 +449,9 @@ static int acpi_lpss_create_device(struct acpi_device *adev,
 		pdev = acpi_create_platform_device(adev);
 		return IS_ERR_OR_NULL(pdev) ? PTR_ERR(pdev) : 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pdata = kzalloc(sizeof(*pdata), GFP_KERNEL);
 	if (!pdata)
@@ -421,12 +465,18 @@ static int acpi_lpss_create_device(struct acpi_device *adev,
 	list_for_each_entry(rentry, &resource_list, node)
 		if (resource_type(&rentry->res) == IORESOURCE_MEM) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pdata->mmio_size = resource_size(&rentry->res);
 =======
+=======
+>>>>>>> v3.18
 			if (dev_desc->prv_size_override)
 				pdata->mmio_size = dev_desc->prv_size_override;
 			else
 				pdata->mmio_size = resource_size(&rentry->res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pdata->mmio_base = ioremap(rentry->res.start,
 						   pdata->mmio_size);
@@ -438,12 +488,18 @@ static int acpi_lpss_create_device(struct acpi_device *adev,
 	pdata->dev_desc = dev_desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev_desc->clk_required) {
 =======
+=======
+>>>>>>> v3.18
 	if (dev_desc->setup)
 		dev_desc->setup(pdata);
 
 	if (dev_desc->flags & LPSS_CLK) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = register_device_clock(adev, pdata);
 		if (ret) {
@@ -467,17 +523,23 @@ static int acpi_lpss_create_device(struct acpi_device *adev,
 
 	adev->driver_data = pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = acpi_create_platform_device(adev, id);
 	if (ret > 0)
 		return ret;
 
 =======
+=======
+>>>>>>> v3.18
 	pdev = acpi_create_platform_device(adev);
 	if (!IS_ERR_OR_NULL(pdev)) {
 		return 1;
 	}
 
 	ret = PTR_ERR(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	adev->driver_data = NULL;
 
@@ -487,7 +549,10 @@ static int acpi_lpss_create_device(struct acpi_device *adev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 __lpss_reg_read(struct lpss_private_data *pdata, unsigned int reg)
 {
 	return readl(pdata->mmio_base + pdata->dev_desc->prv_offset + reg);
@@ -499,6 +564,9 @@ static void __lpss_reg_write(u32 val, struct lpss_private_data *pdata,
 	writel(val, pdata->mmio_base + pdata->dev_desc->prv_offset + reg);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int lpss_reg_read(struct device *dev, unsigned int reg, u32 *val)
 {
@@ -522,7 +590,11 @@ static int lpss_reg_read(struct device *dev, unsigned int reg, u32 *val)
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*val = readl(pdata->mmio_base + pdata->dev_desc->prv_offset + reg);
+=======
+	*val = __lpss_reg_read(pdata, reg);
+>>>>>>> v3.18
 =======
 	*val = __lpss_reg_read(pdata, reg);
 >>>>>>> v3.18
@@ -579,7 +651,10 @@ static struct attribute_group lpss_attr_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void acpi_lpss_set_ltr(struct device *dev, s32 val)
 {
 	struct lpss_private_data *pdata = acpi_driver_data(ACPI_COMPANION(dev));
@@ -731,6 +806,9 @@ static struct dev_pm_domain acpi_lpss_pm_domain = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int acpi_lpss_platform_notify(struct notifier_block *nb,
 				     unsigned long action, void *data)
@@ -740,7 +818,10 @@ static int acpi_lpss_platform_notify(struct notifier_block *nb,
 	struct acpi_device *adev;
 	const struct acpi_device_id *id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -753,7 +834,11 @@ static int acpi_lpss_platform_notify(struct notifier_block *nb,
 
 	pdata = acpi_driver_data(adev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdata || !pdata->mmio_base || !pdata->dev_desc->ltr_required)
+=======
+	if (!pdata || !pdata->mmio_base)
+>>>>>>> v3.18
 =======
 	if (!pdata || !pdata->mmio_base)
 >>>>>>> v3.18
@@ -765,6 +850,7 @@ static int acpi_lpss_platform_notify(struct notifier_block *nb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (action == BUS_NOTIFY_ADD_DEVICE)
 		ret = sysfs_create_group(&pdev->dev.kobj, &lpss_attr_group);
 	else if (action == BUS_NOTIFY_DEL_DEVICE)
@@ -772,6 +858,8 @@ static int acpi_lpss_platform_notify(struct notifier_block *nb,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	switch (action) {
 	case BUS_NOTIFY_BOUND_DRIVER:
 		if (pdata->dev_desc->flags & LPSS_SAVE_CTX)
@@ -793,6 +881,9 @@ static int acpi_lpss_platform_notify(struct notifier_block *nb,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -801,10 +892,13 @@ static struct notifier_block acpi_lpss_nb = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct acpi_scan_handler lpss_handler = {
 	.ids = acpi_lpss_device_ids,
 	.attach = acpi_lpss_create_device,
 =======
+=======
+>>>>>>> v3.18
 static void acpi_lpss_bind(struct device *dev)
 {
 	struct lpss_private_data *pdata = acpi_driver_data(ACPI_COMPANION(dev));
@@ -828,6 +922,9 @@ static struct acpi_scan_handler lpss_handler = {
 	.attach = acpi_lpss_create_device,
 	.bind = acpi_lpss_bind,
 	.unbind = acpi_lpss_unbind,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -839,7 +936,10 @@ void __init acpi_lpss_init(void)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #else
 
@@ -853,4 +953,7 @@ void __init acpi_lpss_init(void)
 }
 
 #endif /* CONFIG_X86_INTEL_LPSS */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

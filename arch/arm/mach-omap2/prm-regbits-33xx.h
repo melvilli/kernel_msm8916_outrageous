@@ -19,6 +19,7 @@
 #include "prm.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Used by PRM_LDO_SRAM_CORE_SETUP, PRM_LDO_SRAM_MPU_SETUP */
 #define AM33XX_ABBOFF_ACT_EXPORT_SHIFT			1
 #define AM33XX_ABBOFF_ACT_EXPORT_MASK			(1 << 1)
@@ -356,6 +357,8 @@
 #define AM33XX_WKUP_M3_LRST_5_5_MASK			(1 << 5)
 
 =======
+=======
+>>>>>>> v3.18
 #define AM33XX_GFX_MEM_ONSTATE_MASK			(0x3 << 17)
 #define AM33XX_GFX_MEM_RETSTATE_MASK			(1 << 6)
 #define AM33XX_GFX_MEM_STATEST_MASK			(0x3 << 4)
@@ -387,5 +390,8 @@
 #define AM33XX_RAM_MEM_ONSTATE_MASK			(0x3 << 30)
 #define AM33XX_RAM_MEM_RETSTATE_MASK			(1 << 27)
 #define AM33XX_RAM_MEM_STATEST_MASK			(0x3 << 21)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

@@ -23,6 +23,7 @@
 #include <linux/io.h>
 #include <linux/stat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/hardware.h>
 #include <mach/platform.h>
@@ -32,11 +33,16 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 >>>>>>> v3.18
+=======
+#include <linux/of.h>
+#include <linux/of_address.h>
+>>>>>>> v3.18
 
 #include <asm/mach-types.h>
 #include <asm/mach/time.h>
 #include <asm/pgtable.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "common.h"
 
@@ -100,6 +106,8 @@ int __init integrator_init(bool is_cp)
 static DEFINE_RAW_SPINLOCK(cm_lock);
 
 =======
+=======
+>>>>>>> v3.18
 #include "hardware.h"
 #include "cm.h"
 #include "common.h"
@@ -115,6 +123,9 @@ u32 cm_get(void)
 	return readl(cm_base + INTEGRATOR_HDR_CTRL_OFFSET);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * cm_control - update the CM_CTRL register.
@@ -128,6 +139,7 @@ void cm_control(u32 mask, u32 set)
 
 	raw_spin_lock_irqsave(&cm_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = readl(CM_CTRL) & ~mask;
 	writel(val | set, CM_CTRL);
 	raw_spin_unlock_irqrestore(&cm_lock, flags);
@@ -135,6 +147,8 @@ void cm_control(u32 mask, u32 set)
 
 EXPORT_SYMBOL(cm_control);
 =======
+=======
+>>>>>>> v3.18
 	val = readl(cm_base + INTEGRATOR_HDR_CTRL_OFFSET) & ~mask;
 	writel(val | set, cm_base + INTEGRATOR_HDR_CTRL_OFFSET);
 	raw_spin_unlock_irqrestore(&cm_lock, flags);
@@ -209,6 +223,9 @@ void cm_init(void)
 	pr_info("    Build: %02x\n", (val >> 4) & 0xFF);
 	pr_info("    Rev: %c\n", ('A' + (val & 0x03)));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -246,6 +263,7 @@ static ssize_t intcp_get_arch(struct device *dev,
 			      char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *arch;
 
 	switch ((integrator_id >> 16) & 0xff) {
@@ -270,6 +288,9 @@ static ssize_t intcp_get_arch(struct device *dev,
 =======
 	return sprintf(buf, "%s\n", integrator_arch_str(integrator_id));
 >>>>>>> v3.18
+=======
+	return sprintf(buf, "%s\n", integrator_arch_str(integrator_id));
+>>>>>>> v3.18
 }
 
 static struct device_attribute intcp_arch_attr =
@@ -279,6 +300,7 @@ static ssize_t intcp_get_fpga(struct device *dev,
 			      struct device_attribute *attr,
 			      char *buf)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const char *fpga;
 
@@ -298,6 +320,9 @@ static ssize_t intcp_get_fpga(struct device *dev,
 	}
 
 	return sprintf(buf, "%s\n", fpga);
+=======
+	return sprintf(buf, "%s\n", integrator_fpga_str(integrator_id));
+>>>>>>> v3.18
 =======
 	return sprintf(buf, "%s\n", integrator_fpga_str(integrator_id));
 >>>>>>> v3.18

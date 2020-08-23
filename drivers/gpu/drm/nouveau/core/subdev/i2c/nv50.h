@@ -2,7 +2,11 @@
 #define __NV50_I2C_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/i2c.h>
+=======
+#include "priv.h"
+>>>>>>> v3.18
 =======
 #include "priv.h"
 >>>>>>> v3.18

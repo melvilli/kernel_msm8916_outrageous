@@ -27,7 +27,10 @@
 #include <linux/pm_runtime.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -143,7 +146,11 @@ static inline struct ehrpwm_pwm_chip *to_ehrpwm_pwm_chip(struct pwm_chip *chip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 ehrpwm_read(void *base, int offset)
+=======
+static inline u16 ehrpwm_read(void __iomem *base, int offset)
+>>>>>>> v3.18
 =======
 static inline u16 ehrpwm_read(void __iomem *base, int offset)
 >>>>>>> v3.18
@@ -152,7 +159,11 @@ static inline u16 ehrpwm_read(void __iomem *base, int offset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ehrpwm_write(void *base, int offset, unsigned int val)
+=======
+static inline void ehrpwm_write(void __iomem *base, int offset, unsigned int val)
+>>>>>>> v3.18
 =======
 static inline void ehrpwm_write(void __iomem *base, int offset, unsigned int val)
 >>>>>>> v3.18
@@ -161,7 +172,11 @@ static inline void ehrpwm_write(void __iomem *base, int offset, unsigned int val
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ehrpwm_modify(void *base, int offset,
+=======
+static void ehrpwm_modify(void __iomem *base, int offset,
+>>>>>>> v3.18
 =======
 static void ehrpwm_modify(void __iomem *base, int offset,
 >>>>>>> v3.18
@@ -375,15 +390,21 @@ static int ehrpwm_pwm_enable(struct pwm_chip *chip, struct pwm_device *pwm)
 
 	/* Enable TBCLK before enabling PWM device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = clk_prepare_enable(pc->tbclk);
 	if (ret) {
 		pr_err("Failed to enable TBCLK for %s\n",
 				dev_name(pc->chip.dev));
 =======
+=======
+>>>>>>> v3.18
 	ret = clk_enable(pc->tbclk);
 	if (ret) {
 		dev_err(chip->dev, "Failed to enable TBCLK for %s\n",
 			dev_name(pc->chip.dev));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}
@@ -418,7 +439,11 @@ static void ehrpwm_pwm_disable(struct pwm_chip *chip, struct pwm_device *pwm)
 
 	/* Disabling TBCLK on PWM disable */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable_unprepare(pc->tbclk);
+=======
+	clk_disable(pc->tbclk);
+>>>>>>> v3.18
 =======
 	clk_disable(pc->tbclk);
 >>>>>>> v3.18
@@ -466,6 +491,7 @@ static int ehrpwm_pwm_probe(struct platform_device *pdev)
 	struct ehrpwm_pwm_chip *pc;
 	u16 status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pinctrl *pinctrl;
 
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
@@ -478,10 +504,15 @@ static int ehrpwm_pwm_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	pc = devm_kzalloc(&pdev->dev, sizeof(*pc), GFP_KERNEL);
 	if (!pc)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	clk = devm_clk_get(&pdev->dev, "fck");
@@ -516,13 +547,19 @@ static int ehrpwm_pwm_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = clk_prepare(pc->tbclk);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "clk_prepare() failed: %d\n", ret);
 		return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = pwmchip_add(&pc->chip);
 	if (ret < 0) {
@@ -551,6 +588,10 @@ pwmss_clk_failure:
 	pm_runtime_disable(&pdev->dev);
 	pwmchip_remove(&pc->chip);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clk_unprepare(pc->tbclk);
+>>>>>>> v3.18
 =======
 	clk_unprepare(pc->tbclk);
 >>>>>>> v3.18
@@ -562,6 +603,11 @@ static int ehrpwm_pwm_remove(struct platform_device *pdev)
 	struct ehrpwm_pwm_chip *pc = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clk_unprepare(pc->tbclk);
+
+>>>>>>> v3.18
 =======
 	clk_unprepare(pc->tbclk);
 
@@ -580,6 +626,10 @@ static int ehrpwm_pwm_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -610,7 +660,10 @@ static void ehrpwm_pwm_restore_context(struct ehrpwm_pwm_chip *pc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ehrpwm_pwm_suspend(struct device *dev)

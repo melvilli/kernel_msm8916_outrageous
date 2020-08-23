@@ -15,6 +15,10 @@
 #include <linux/init.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bug.h>
+>>>>>>> v3.18
 =======
 #include <linux/bug.h>
 >>>>>>> v3.18
@@ -23,7 +27,10 @@
 #include "cm3xxx.h"
 #include "cm44xx.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "common.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

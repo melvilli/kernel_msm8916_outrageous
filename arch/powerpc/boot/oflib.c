@@ -17,6 +17,7 @@
 #include "of.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int (*prom) (void *);
 
 void of_init(void *promptr)
@@ -43,6 +44,8 @@ int of_call_prom(const char *service, int nargs, int nret, ...)
 	for (i = 0; i < nargs; i++)
 		args.args[i] = va_arg(list, unsigned int);
 =======
+=======
+>>>>>>> v3.18
 typedef u32 prom_arg_t;
 
 /* The following structure is used to communicate with open firmware.
@@ -82,6 +85,9 @@ int of_call_prom(const char *service, int nargs, int nret, ...)
 	va_start(list, nret);
 	for (i = 0; i < nargs; i++)
 		args.args[i] = cpu_to_be32(va_arg(list, prom_arg_t));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	va_end(list);
 
@@ -89,6 +95,7 @@ int of_call_prom(const char *service, int nargs, int nret, ...)
 		args.args[nargs+i] = 0;
 
 	if (prom(&args) < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -1;
 
@@ -115,6 +122,8 @@ static int of_call_prom_ret(const char *service, int nargs, int nret,
 	for (i = 0; i < nargs; i++)
 		args.args[i] = va_arg(list, unsigned int);
 =======
+=======
+>>>>>>> v3.18
 		return PROM_ERROR;
 
 	return (nret > 0) ? be32_to_cpu(args.args[nargs]) : 0;
@@ -134,6 +143,9 @@ static int of_call_prom_ret(const char *service, int nargs, int nret,
 	va_start(list, rets);
 	for (i = 0; i < nargs; i++)
 		args.args[i] = cpu_to_be32(va_arg(list, prom_arg_t));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	va_end(list);
 
@@ -141,6 +153,7 @@ static int of_call_prom_ret(const char *service, int nargs, int nret,
 		args.args[nargs+i] = 0;
 
 	if (prom(&args) < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -1;
 
@@ -150,6 +163,8 @@ static int of_call_prom_ret(const char *service, int nargs, int nret,
 
 	return (nret > 0)? args.args[nargs]: 0;
 =======
+=======
+>>>>>>> v3.18
 		return PROM_ERROR;
 
 	if (rets != NULL)
@@ -157,6 +172,9 @@ static int of_call_prom_ret(const char *service, int nargs, int nret,
 			rets[i-1] = be32_to_cpu(args.args[nargs+i]);
 
 	return (nret > 0) ? be32_to_cpu(args.args[nargs]) : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -178,7 +196,11 @@ static int string_match(const char *s1, const char *s2)
 static int need_map = -1;
 static ihandle chosen_mmu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static phandle memory;
+=======
+static ihandle memory;
+>>>>>>> v3.18
 =======
 static ihandle memory;
 >>>>>>> v3.18
@@ -211,15 +233,21 @@ static int check_of_version(void)
 		return 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memory = (ihandle) of_call_prom("open", 1, 1, "/memory");
 	if (memory == (ihandle) -1) {
 		memory = (ihandle) of_call_prom("open", 1, 1, "/memory@0");
 		if (memory == (ihandle) -1) {
 =======
+=======
+>>>>>>> v3.18
 	memory = of_call_prom("open", 1, 1, "/memory");
 	if (memory == PROM_ERROR) {
 		memory = of_call_prom("open", 1, 1, "/memory@0");
 		if (memory == PROM_ERROR) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			printf("no memory node\n");
 			return 0;
@@ -230,23 +258,33 @@ static int check_of_version(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *of_claim(unsigned long virt, unsigned long size, unsigned long align)
 {
 	int ret;
 	unsigned int result;
 =======
+=======
+>>>>>>> v3.18
 unsigned int of_claim(unsigned long virt, unsigned long size,
 		      unsigned long align)
 {
 	int ret;
 	prom_arg_t result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (need_map < 0)
 		need_map = check_of_version();
 	if (align || !need_map)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (void *) of_call_prom("claim", 3, 1, virt, size, align);
+=======
+		return of_call_prom("claim", 3, 1, virt, size, align);
+>>>>>>> v3.18
 =======
 		return of_call_prom("claim", 3, 1, virt, size, align);
 >>>>>>> v3.18
@@ -255,7 +293,11 @@ unsigned int of_claim(unsigned long virt, unsigned long size,
 			       align, size, virt);
 	if (ret != 0 || result == -1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (void *) -1;
+=======
+		return  -1;
+>>>>>>> v3.18
 =======
 		return  -1;
 >>>>>>> v3.18
@@ -265,7 +307,11 @@ unsigned int of_claim(unsigned long virt, unsigned long size,
 	ret = of_call_prom("call-method", 6, 1, "map", chosen_mmu,
 			   0x12, size, virt, virt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (void *) virt;
+=======
+	return virt;
+>>>>>>> v3.18
 =======
 	return virt;
 >>>>>>> v3.18
@@ -275,7 +321,11 @@ void *of_vmlinux_alloc(unsigned long size)
 {
 	unsigned long start = (unsigned long)_start, end = (unsigned long)_end;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *addr;
+=======
+	unsigned long addr;
+>>>>>>> v3.18
 =======
 	unsigned long addr;
 >>>>>>> v3.18
@@ -286,8 +336,13 @@ void *of_vmlinux_alloc(unsigned long size)
 	 * the return value.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = of_claim(start, end - start, 0);
 	printf("Trying to claim from 0x%lx to 0x%lx (0x%lx) got %p\r\n",
+=======
+	addr = (unsigned long) of_claim(start, end - start, 0);
+	printf("Trying to claim from 0x%lx to 0x%lx (0x%lx) got %lx\r\n",
+>>>>>>> v3.18
 =======
 	addr = (unsigned long) of_claim(start, end - start, 0);
 	printf("Trying to claim from 0x%lx to 0x%lx (0x%lx) got %lx\r\n",
@@ -312,7 +367,11 @@ void of_exit(void)
 void *of_finddevice(const char *name)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (phandle) of_call_prom("finddevice", 1, 1, name);
+=======
+	return (void *) (unsigned long) of_call_prom("finddevice", 1, 1, name);
+>>>>>>> v3.18
 =======
 	return (void *) (unsigned long) of_call_prom("finddevice", 1, 1, name);
 >>>>>>> v3.18

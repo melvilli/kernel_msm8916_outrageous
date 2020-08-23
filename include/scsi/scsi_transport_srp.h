@@ -14,7 +14,10 @@ struct srp_rport_identifiers {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * enum srp_rport_state - SRP transport layer state
  * @SRP_RPORT_RUNNING:   Transport layer operational.
@@ -51,6 +54,9 @@ enum srp_rport_state {
  * @fast_io_fail_work: Work structure used for scheduling fast I/O fail work.
  * @dev_loss_work:     Work structure used for scheduling device loss work.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct srp_rport {
 	/* for initiator and target drivers */
@@ -63,12 +69,15 @@ struct srp_rport {
 	/* for initiator drivers */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *lld_data;	/* LLD private data */
 };
 
 struct srp_function_template {
 	/* for initiator drivers */
 =======
+=======
+>>>>>>> v3.18
 	void			*lld_data;
 
 	struct mutex		mutex;
@@ -112,6 +121,9 @@ struct srp_function_template {
 	int *dev_loss_tmo;
 	int (*reconnect)(struct srp_rport *rport);
 	void (*terminate_rport_io)(struct srp_rport *rport);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void (*rport_delete)(struct srp_rport *rport);
 	/* for target drivers */
@@ -124,12 +136,15 @@ srp_attach_transport(struct srp_function_template *);
 extern void srp_release_transport(struct scsi_transport_template *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct srp_rport *srp_rport_add(struct Scsi_Host *,
 				       struct srp_rport_identifiers *);
 extern void srp_rport_del(struct srp_rport *);
 
 extern void srp_remove_host(struct Scsi_Host *);
 =======
+=======
+>>>>>>> v3.18
 extern void srp_rport_get(struct srp_rport *rport);
 extern void srp_rport_put(struct srp_rport *rport);
 extern struct srp_rport *srp_rport_add(struct Scsi_Host *,
@@ -163,6 +178,9 @@ static inline int srp_chkready(struct srp_rport *rport)
 		return DID_NO_CONNECT << 16;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

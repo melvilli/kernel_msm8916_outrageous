@@ -39,11 +39,17 @@ Contents
         7.2.2 Head packet
         7.2.3 Motion packet
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  8. Trackpoint (for Hardware version 3 and 4)
     8.1 Registers
     8.2 Native relative mode 6 byte packet format
         8.2.1 Status Packet
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -52,12 +58,15 @@ Contents
    ~~~~~~~~~~~~
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Currently the Linux Elantech touchpad driver is aware of two different
 hardware versions unimaginatively called version 1 and version 2. Version 1
 is found in "older" laptops and uses 4 bytes per packet. Version 2 seems to
 be introduced with the EeePC and uses 6 bytes per packet, and provides
 additional features such as position of two fingers, and width of the touch.
 =======
+=======
+>>>>>>> v3.18
 Currently the Linux Elantech touchpad driver is aware of four different
 hardware versions unimaginatively called version 1,version 2, version 3
 and version 4. Version 1 is found in "older" laptops and uses 4 bytes per
@@ -71,6 +80,9 @@ combine a status packet with multiple head or motion packets. Hardware version
 
 Some Hardware version 3 and version 4 also have a trackpoint which uses a
 separate packet format. It is also 6 bytes per packet.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The driver tries to support both hardware versions and should be compatible
@@ -78,11 +90,17 @@ with the Xorg Synaptics touchpad driver and its graphical configuration
 utilities.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Note that a mouse button is also associated with either the touchpad or the
 trackpoint when a trackpoint is available.  Disabling the Touchpad in xorg
 (TouchPadOff=0) will also disable the buttons associated with the touchpad.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Additionally the operation of the touchpad can be altered by adjusting the
 contents of some of its internal registers. These registers are represented
@@ -109,7 +127,11 @@ completeness sake.
    ~~~~~~~~~~~
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Currently the Linux Elantech touchpad driver provides two extra knobs under
+=======
+Currently the Linux Elantech touchpad driver provides three extra knobs under
+>>>>>>> v3.18
 =======
 Currently the Linux Elantech touchpad driver provides three extra knobs under
 >>>>>>> v3.18
@@ -147,7 +169,10 @@ Currently the Linux Elantech touchpad driver provides three extra knobs under
    default. Currently even turning it on will do nothing.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 * crc_enabled
 
    Sets crc_enabled to 0/1. The name "crc_enabled" is the official name of
@@ -162,6 +187,9 @@ Currently the Linux Elantech touchpad driver provides three extra knobs under
    Reading the crc_enabled value will show the active value. Echoing
    "0" or "1" to this file will set the state to "0" or "1".
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /////////////////////////////////////////////////////////////////////////////
 
@@ -798,7 +826,10 @@ byte 5:
         byte 0 ~ 2 for one finger
         byte 3 ~ 5 for another
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 
 8. Trackpoint (for Hardware version 3 and 4)
@@ -838,4 +869,7 @@ byte 5:
 	 ~sx is the inverse of sx, ~sy is the inverse of sy.
          The sign of y is opposite to what the input driver
              expects for a relative movement
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

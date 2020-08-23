@@ -34,7 +34,10 @@
 #include "quirks.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EP_FLAG_ACTIVATED	0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EP_FLAG_RUNNING		1
@@ -338,8 +341,14 @@ static void queue_pending_output_urbs(struct snd_usb_endpoint *ep)
 		err = usb_submit_urb(ctx->urb, GFP_ATOMIC);
 		if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "Unable to submit urb #%d: %d (urb %pK)\n",
 				   ctx->index, err, ctx->urb);
+=======
+			usb_audio_err(ep->chip,
+				"Unable to submit urb #%d: %d (urb %p)\n",
+				ctx->index, err, ctx->urb);
+>>>>>>> v3.18
 =======
 			usb_audio_err(ep->chip,
 				"Unable to submit urb #%d: %d (urb %p)\n",
@@ -360,12 +369,15 @@ static void snd_complete_urb(struct urb *urb)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Add this dev state check to avoid to call invalid ctx which is
 	 * free during disconnetion handler.
 	 */
 	if (urb->dev->state == USB_STATE_NOTATTACHED)
 		return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (unlikely(urb->status == -ENOENT ||		/* unlinked */
@@ -407,7 +419,11 @@ static void snd_complete_urb(struct urb *urb)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "cannot submit urb (err = %d)\n", err);
+=======
+	usb_audio_err(ep->chip, "cannot submit urb (err = %d)\n", err);
+>>>>>>> v3.18
 =======
 	usb_audio_err(ep->chip, "cannot submit urb (err = %d)\n", err);
 >>>>>>> v3.18
@@ -441,6 +457,12 @@ struct snd_usb_endpoint *snd_usb_add_endpoint(struct snd_usb_audio *chip,
 	int is_playback = direction == SNDRV_PCM_STREAM_PLAYBACK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (WARN_ON(!alts))
+		return NULL;
+
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!alts))
 		return NULL;
@@ -452,21 +474,31 @@ struct snd_usb_endpoint *snd_usb_add_endpoint(struct snd_usb_audio *chip,
 		if (ep->ep_num == ep_num &&
 		    ep->iface == alts->desc.bInterfaceNumber &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    ep->alt_idx == alts->desc.bAlternateSetting) {
 			snd_printdd(KERN_DEBUG "Re-using EP %x in iface %d,%d @%pK\n",
 					ep_num, ep->iface, ep->alt_idx, ep);
 =======
+=======
+>>>>>>> v3.18
 		    ep->altsetting == alts->desc.bAlternateSetting) {
 			usb_audio_dbg(ep->chip,
 				      "Re-using EP %x in iface %d,%d @%p\n",
 					ep_num, ep->iface, ep->altsetting, ep);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto __exit_unlock;
 		}
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_DEBUG "Creating new %s %s endpoint #%x\n",
+=======
+	usb_audio_dbg(chip, "Creating new %s %s endpoint #%x\n",
+>>>>>>> v3.18
 =======
 	usb_audio_dbg(chip, "Creating new %s %s endpoint #%x\n",
 >>>>>>> v3.18
@@ -484,7 +516,11 @@ struct snd_usb_endpoint *snd_usb_add_endpoint(struct snd_usb_audio *chip,
 	ep->ep_num = ep_num;
 	ep->iface = alts->desc.bInterfaceNumber;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ep->alt_idx = alts->desc.bAlternateSetting;
+=======
+	ep->altsetting = alts->desc.bAlternateSetting;
+>>>>>>> v3.18
 =======
 	ep->altsetting = alts->desc.bAlternateSetting;
 >>>>>>> v3.18
@@ -542,8 +578,14 @@ static int wait_clear_urbs(struct snd_usb_endpoint *ep)
 
 	if (alive)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "timeout: still %d active urbs on EP #%x\n",
 					alive, ep->ep_num);
+=======
+		usb_audio_err(ep->chip,
+			"timeout: still %d active urbs on EP #%x\n",
+			alive, ep->ep_num);
+>>>>>>> v3.18
 =======
 		usb_audio_err(ep->chip,
 			"timeout: still %d active urbs on EP #%x\n",
@@ -625,12 +667,15 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep,
 			      unsigned int channels,
 			      unsigned int period_bytes,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      struct audioformat *fmt,
 			      struct snd_usb_endpoint *sync_ep)
 {
 	unsigned int maxsize, i, urb_packs, total_packs, packs_per_ms;
 	int is_playback = usb_pipeout(ep->pipe);
 =======
+=======
+>>>>>>> v3.18
 			      unsigned int frames_per_period,
 			      unsigned int periods_per_buffer,
 			      struct audioformat *fmt,
@@ -639,6 +684,9 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep,
 	unsigned int maxsize, minsize, packs_per_ms, max_packs_per_urb;
 	unsigned int max_packs_per_period, urbs_per_period, urb_packs;
 	unsigned int max_urbs, i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int frame_bits = snd_pcm_format_physical_width(pcm_format) * channels;
 
@@ -673,6 +721,7 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep,
 		ep->curpacksize = maxsize;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (snd_usb_get_speed(ep->chip->dev) != USB_SPEED_FULL)
 		packs_per_ms = 8 >> ep->datainterval;
 	else
@@ -697,6 +746,8 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep,
 		minsize = (ep->freqn >> (16 - ep->datainterval))
 			  * (frame_bits >> 3);
 =======
+=======
+>>>>>>> v3.18
 	if (snd_usb_get_speed(ep->chip->dev) != USB_SPEED_FULL) {
 		packs_per_ms = 8 >> ep->datainterval;
 		max_packs_per_urb = MAX_PACKS_HS;
@@ -750,11 +801,15 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep,
 		/* determine how small a packet can be */
 		minsize = (ep->freqn >> (16 - ep->datainterval)) *
 				(frame_bits >> 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* with sync from device, assume it can be 12% lower */
 		if (sync_ep)
 			minsize -= minsize >> 3;
 		minsize = max(minsize, 1u);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		total_packs = (period_bytes + minsize - 1) / minsize;
 		/* we need at least two URBs for queueing */
@@ -782,6 +837,8 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep,
 		 */
 		ep->nurbs = 2;
 =======
+=======
+>>>>>>> v3.18
 
 		/* how many packets will contain an entire ALSA period? */
 		max_packs_per_period = DIV_ROUND_UP(period_bytes, minsize);
@@ -800,6 +857,9 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep,
 		max_urbs = min((unsigned) MAX_URBS,
 				MAX_QUEUE * packs_per_ms / urb_packs);
 		ep->nurbs = min(max_urbs, urbs_per_period * periods_per_buffer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -809,8 +869,12 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep,
 		u->index = i;
 		u->ep = ep;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u->packets = (i + 1) * total_packs / ep->nurbs
 			- i * total_packs / ep->nurbs;
+=======
+		u->packets = urb_packs;
+>>>>>>> v3.18
 =======
 		u->packets = urb_packs;
 >>>>>>> v3.18
@@ -846,8 +910,12 @@ out_of_memory:
  * configure a sync endpoint
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sync_ep_set_params(struct snd_usb_endpoint *ep,
 			      struct audioformat *fmt)
+=======
+static int sync_ep_set_params(struct snd_usb_endpoint *ep)
+>>>>>>> v3.18
 =======
 static int sync_ep_set_params(struct snd_usb_endpoint *ep)
 >>>>>>> v3.18
@@ -895,6 +963,11 @@ out_of_memory:
  * @channels: the number of audio channels.
  * @period_bytes: the number of bytes in one alsa period.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @period_frames: the number of frames in one alsa period.
+ * @buffer_periods: the number of periods in one alsa buffer.
+>>>>>>> v3.18
 =======
  * @period_frames: the number of frames in one alsa period.
  * @buffer_periods: the number of periods in one alsa buffer.
@@ -912,6 +985,11 @@ int snd_usb_endpoint_set_params(struct snd_usb_endpoint *ep,
 				unsigned int channels,
 				unsigned int period_bytes,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				unsigned int period_frames,
+				unsigned int buffer_periods,
+>>>>>>> v3.18
 =======
 				unsigned int period_frames,
 				unsigned int buffer_periods,
@@ -924,8 +1002,14 @@ int snd_usb_endpoint_set_params(struct snd_usb_endpoint *ep,
 
 	if (ep->use_count != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_WARNING "Unable to change format on ep #%x: already in use\n",
 			   ep->ep_num);
+=======
+		usb_audio_warn(ep->chip,
+			 "Unable to change format on ep #%x: already in use\n",
+			 ep->ep_num);
+>>>>>>> v3.18
 =======
 		usb_audio_warn(ep->chip,
 			 "Unable to change format on ep #%x: already in use\n",
@@ -956,16 +1040,22 @@ int snd_usb_endpoint_set_params(struct snd_usb_endpoint *ep,
 	case  SND_USB_ENDPOINT_TYPE_DATA:
 		err = data_ep_set_params(ep, pcm_format, channels,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 period_bytes, fmt, sync_ep);
 		break;
 	case  SND_USB_ENDPOINT_TYPE_SYNC:
 		err = sync_ep_set_params(ep, fmt);
 =======
+=======
+>>>>>>> v3.18
 					 period_bytes, period_frames,
 					 buffer_periods, fmt, sync_ep);
 		break;
 	case  SND_USB_ENDPOINT_TYPE_SYNC:
 		err = sync_ep_set_params(ep);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -973,8 +1063,14 @@ int snd_usb_endpoint_set_params(struct snd_usb_endpoint *ep,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_DEBUG "Setting params for ep #%x (type %d, %d urbs), ret=%d\n",
 		   ep->ep_num, ep->type, ep->nurbs, err);
+=======
+	usb_audio_dbg(ep->chip,
+		"Setting params for ep #%x (type %d, %d urbs), ret=%d\n",
+		ep->ep_num, ep->type, ep->nurbs, err);
+>>>>>>> v3.18
 =======
 	usb_audio_dbg(ep->chip,
 		"Setting params for ep #%x (type %d, %d urbs), ret=%d\n",
@@ -1055,8 +1151,14 @@ int snd_usb_endpoint_start(struct snd_usb_endpoint *ep, bool can_sleep)
 		err = usb_submit_urb(urb, GFP_ATOMIC);
 		if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "cannot submit urb %d, error %d: %s\n",
 				   i, err, usb_error_string(err));
+=======
+			usb_audio_err(ep->chip,
+				"cannot submit urb %d, error %d: %s\n",
+				i, err, usb_error_string(err));
+>>>>>>> v3.18
 =======
 			usb_audio_err(ep->chip,
 				"cannot submit urb %d, error %d: %s\n",
@@ -1114,6 +1216,7 @@ void snd_usb_endpoint_stop(struct snd_usb_endpoint *ep)
  * @ep: the endpoint to deactivate
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If the endpoint is not currently in use, this functions will select the
  * alternate interface setting 0 for the interface of this endpoint.
  *
@@ -1137,6 +1240,8 @@ int snd_usb_endpoint_deactivate(struct snd_usb_endpoint *ep)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
  * If the endpoint is not currently in use, this functions will
  * deactivate its associated URBs.
  *
@@ -1165,6 +1270,9 @@ void snd_usb_endpoint_deactivate(struct snd_usb_endpoint *ep)
 void snd_usb_endpoint_release(struct snd_usb_endpoint *ep)
 {
 	release_urbs(ep, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1174,8 +1282,12 @@ void snd_usb_endpoint_release(struct snd_usb_endpoint *ep)
  * @ep: the list header of the endpoint to free
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This function does not care for the endpoint's use count but will tear
  * down all the streaming URBs immediately and free all resources.
+=======
+ * This free all resources of the given ep.
+>>>>>>> v3.18
 =======
  * This free all resources of the given ep.
 >>>>>>> v3.18
@@ -1186,7 +1298,10 @@ void snd_usb_endpoint_free(struct list_head *head)
 
 	ep = list_entry(head, struct snd_usb_endpoint, list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_urbs(ep, 1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(ep);

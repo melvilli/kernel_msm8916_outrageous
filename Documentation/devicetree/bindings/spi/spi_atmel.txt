@@ -6,6 +6,12 @@ Required properties:
 - interrupts: Should contain spi interrupt
 - cs-gpios: chipselects
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- clock-names: tuple listing input clock names.
+	Required elements: "spi_clk"
+- clocks: phandles to input clocks.
+>>>>>>> v3.18
 =======
 - clock-names: tuple listing input clock names.
 	Required elements: "spi_clk"
@@ -21,6 +27,11 @@ spi1: spi@fffcc000 {
 	#address-cells = <1>;
 	#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clocks = <&spi1_clk>;
+	clock-names = "spi_clk";
+>>>>>>> v3.18
 =======
 	clocks = <&spi1_clk>;
 	clock-names = "spi_clk";

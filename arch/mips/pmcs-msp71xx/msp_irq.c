@@ -17,6 +17,10 @@
 
 #include <asm/irq_cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18
@@ -37,7 +41,11 @@ extern void msp_vsmp_int_init(void);
 /* vectored interrupt implementation */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* SW0/1 interrupts are used for SMP/SMTC */
+=======
+/* SW0/1 interrupts are used for SMP  */
+>>>>>>> v3.18
 =======
 /* SW0/1 interrupts are used for SMP  */
 >>>>>>> v3.18
@@ -60,7 +68,11 @@ static inline void sec_int_dispatch(void)  { do_IRQ(MSP_INT_SEC);  }
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void plat_irq_dispatch(struct pt_regs *regs)
+=======
+asmlinkage void plat_irq_dispatch(void)
+>>>>>>> v3.18
 =======
 asmlinkage void plat_irq_dispatch(void)
 >>>>>>> v3.18
@@ -151,6 +163,7 @@ void __init arch_init_irq(void)
 #ifdef CONFIG_MIPS_MT_SMP
 	msp_vsmp_int_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined CONFIG_MIPS_MT_SMTC
 	/*Set hwmask for all platform devices */
 	irq_hwmask[MSP_INT_MAC0] = C_IRQ0;
@@ -161,6 +174,8 @@ void __init arch_init_irq(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #endif	/* CONFIG_MIPS_MT_SMP */
 #endif	/* CONFIG_MIPS_MT */
 	/* setup the cascaded interrupts */
@@ -169,13 +184,19 @@ void __init arch_init_irq(void)
 
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* setup the 2nd-level SLP register based interrupt controller */
 	/* VSMP /SMTC support support is not enabled for SLP */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Setup the 2nd-level SLP register based interrupt controller.
 	 * VSMP support support is not enabled for SLP.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	msp_slp_irq_init();
 

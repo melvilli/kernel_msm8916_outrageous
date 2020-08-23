@@ -44,6 +44,7 @@ struct brcms_ucode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int
 brcms_ucode_data_init(struct brcms_info *wl, struct brcms_ucode *ucode);
 
@@ -56,6 +57,8 @@ extern int brcms_ucode_init_uint(struct brcms_info *wl, size_t *n_bytes,
 extern void brcms_ucode_free_buf(void *);
 extern int  brcms_check_firmwares(struct brcms_info *wl);
 =======
+=======
+>>>>>>> v3.18
 int brcms_ucode_data_init(struct brcms_info *wl, struct brcms_ucode *ucode);
 
 void brcms_ucode_data_free(struct brcms_ucode *ucode);
@@ -65,6 +68,9 @@ int brcms_ucode_init_uint(struct brcms_info *wl, size_t *n_bytes,
 			  unsigned int idx);
 void brcms_ucode_free_buf(void *);
 int  brcms_check_firmwares(struct brcms_info *wl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif	/* _BRCM_UCODE_H_ */

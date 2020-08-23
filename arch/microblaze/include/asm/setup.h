@@ -20,8 +20,11 @@ extern char cmd_line[COMMAND_LINE_SIZE];
 extern char *klimit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void early_printk(const char *fmt, ...);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int setup_early_printk(char *opt);
@@ -29,8 +32,13 @@ void remap_early_printk(void);
 void disable_early_printk(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void heartbeat(void);
 void setup_heartbeat(void);
+=======
+void microblaze_heartbeat(void);
+void microblaze_setup_heartbeat(void);
+>>>>>>> v3.18
 =======
 void microblaze_heartbeat(void);
 void microblaze_setup_heartbeat(void);

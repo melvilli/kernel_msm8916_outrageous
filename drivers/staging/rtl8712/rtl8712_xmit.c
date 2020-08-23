@@ -167,6 +167,7 @@ static struct xmit_frame *dequeue_one_xmitframe(struct xmit_priv *pxmitpriv,
 	struct	xmit_frame *pxmitframe = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xmitframe_phead = get_list_head(pframe_queue);
 	xmitframe_plist = get_next(xmitframe_phead);
 	if ((end_of_queue_search(xmitframe_phead, xmitframe_plist)) == false) {
@@ -174,12 +175,17 @@ static struct xmit_frame *dequeue_one_xmitframe(struct xmit_priv *pxmitpriv,
 			     struct xmit_frame, list);
 		list_delete(&pxmitframe->list);
 =======
+=======
+>>>>>>> v3.18
 	xmitframe_phead = &pframe_queue->queue;
 	xmitframe_plist = xmitframe_phead->next;
 	if ((end_of_queue_search(xmitframe_phead, xmitframe_plist)) == false) {
 		pxmitframe = LIST_CONTAINOR(xmitframe_plist,
 			     struct xmit_frame, list);
 		list_del_init(&pxmitframe->list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ptxservq->qcnt--;
 		phwxmit->txcmdcnt++;
@@ -220,8 +226,13 @@ static struct xmit_frame *dequeue_xframe_ex(struct xmit_priv *pxmitpriv,
 	for (i = 0; i < entry; i++) {
 		phwxmit = phwxmit_i + inx[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sta_phead = get_list_head(phwxmit->sta_queue);
 		sta_plist = get_next(sta_phead);
+=======
+		sta_phead = &phwxmit->sta_queue->queue;
+		sta_plist = sta_phead->next;
+>>>>>>> v3.18
 =======
 		sta_phead = &phwxmit->sta_queue->queue;
 		sta_plist = sta_phead->next;
@@ -237,12 +248,15 @@ static struct xmit_frame *dequeue_xframe_ex(struct xmit_priv *pxmitpriv,
 				goto exit_dequeue_xframe_ex;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sta_plist = get_next(sta_plist);
 			/*Remove sta node when there are no pending packets.*/
 			if (_queue_empty(pframe_queue)) {
 				/*must be done after get_next and before break*/
 				list_delete(&ptxservq->tx_pending);
 =======
+=======
+>>>>>>> v3.18
 			sta_plist = sta_plist->next;
 			/*Remove sta node when there are no pending packets.*/
 			if (list_empty(&pframe_queue->queue)) {
@@ -250,6 +264,9 @@ static struct xmit_frame *dequeue_xframe_ex(struct xmit_priv *pxmitpriv,
 				 * and before break
 				 */
 				list_del_init(&ptxservq->tx_pending);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -347,6 +364,10 @@ u8 r8712_append_mpdu_unit(struct xmit_buf *pxmitbuf,
 	if ((last_txcmdsz % 8) != 0) {
 		int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -581,6 +602,10 @@ static void update_txdesc(struct xmit_frame *pxmitframe, uint *pmem, int sz)
 		if (pattrib->pctrl == 1) { /* mp tx packets */
 			struct tx_desc *ptxdesc_mp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -686,6 +711,10 @@ int r8712_xmitframe_complete(struct _adapter *padapter,
 		if (p2ndxmitframe != NULL) {
 			u16 total_length;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

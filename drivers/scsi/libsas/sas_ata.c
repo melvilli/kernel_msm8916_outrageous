@@ -220,7 +220,11 @@ static unsigned int sas_ata_qc_issue(struct ata_queued_cmd *qc)
 	} else {
 		for_each_sg(qc->sg, sg, qc->n_elem, si)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			xfer += sg_dma_len(sg);
+=======
+			xfer += sg->length;
+>>>>>>> v3.18
 =======
 			xfer += sg->length;
 >>>>>>> v3.18
@@ -705,6 +709,7 @@ void sas_probe_sata(struct asd_sas_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool sas_ata_flush_pm_eh(struct asd_sas_port *port, const char *func)
 {
 	struct domain_device *dev, *n;
@@ -714,16 +719,22 @@ static bool sas_ata_flush_pm_eh(struct asd_sas_port *port, const char *func)
 		int rc;
 
 =======
+=======
+>>>>>>> v3.18
 static void sas_ata_flush_pm_eh(struct asd_sas_port *port, const char *func)
 {
 	struct domain_device *dev, *n;
 
 	list_for_each_entry_safe(dev, n, &port->dev_list, dev_list_node) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!dev_is_sata(dev))
 			continue;
 
 		sas_ata_wait_eh(dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rc = dev->sata_dev.pm_result;
 		if (rc == -EAGAIN)
@@ -741,14 +752,19 @@ static void sas_ata_flush_pm_eh(struct asd_sas_port *port, const char *func)
 		}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 		/* if libata failed to power manage the device, tear it down */
 		if (ata_dev_disabled(sas_to_ata_dev(dev)))
 			sas_fail_probe(dev, func, -ENODEV);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return retry;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -758,7 +774,10 @@ void sas_suspend_sata(struct asd_sas_port *port)
 	struct domain_device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  retry:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&port->ha->disco_mutex);
@@ -773,6 +792,7 @@ void sas_suspend_sata(struct asd_sas_port *port)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sata->pm_result = -EIO;
 		ata_sas_port_async_suspend(sata->ap, &sata->pm_result);
 	}
@@ -781,11 +801,16 @@ void sas_suspend_sata(struct asd_sas_port *port)
 	if (sas_ata_flush_pm_eh(port, __func__))
 		goto retry;
 =======
+=======
+>>>>>>> v3.18
 		ata_sas_port_suspend(sata->ap);
 	}
 	mutex_unlock(&port->ha->disco_mutex);
 
 	sas_ata_flush_pm_eh(port, __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -794,7 +819,10 @@ void sas_resume_sata(struct asd_sas_port *port)
 	struct domain_device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  retry:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&port->ha->disco_mutex);
@@ -809,6 +837,7 @@ void sas_resume_sata(struct asd_sas_port *port)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sata->pm_result = -EIO;
 		ata_sas_port_async_resume(sata->ap, &sata->pm_result);
 	}
@@ -817,11 +846,16 @@ void sas_resume_sata(struct asd_sas_port *port)
 	if (sas_ata_flush_pm_eh(port, __func__))
 		goto retry;
 =======
+=======
+>>>>>>> v3.18
 		ata_sas_port_resume(sata->ap);
 	}
 	mutex_unlock(&port->ha->disco_mutex);
 
 	sas_ata_flush_pm_eh(port, __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

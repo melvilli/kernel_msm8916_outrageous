@@ -24,7 +24,10 @@
 #include <linux/delay.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/fsl/mxs-dma.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/stmp_device.h>
@@ -32,6 +35,10 @@
 #include <linux/of_device.h>
 #include <linux/of_dma.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/list.h>
+>>>>>>> v3.18
 =======
 #include <linux/list.h>
 >>>>>>> v3.18
@@ -66,6 +73,12 @@
 #define HW_APBHX_CHn_SEMA(d, n) \
 	(((dma_is_apbh(d) && apbh_is_old(d)) ? 0x080 : 0x140) + (n) * 0x70)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HW_APBHX_CHn_BAR(d, n) \
+	(((dma_is_apbh(d) && apbh_is_old(d)) ? 0x070 : 0x130) + (n) * 0x70)
+#define HW_APBX_CHn_DEBUG1(d, n) (0x150 + (n) * 0x70)
+>>>>>>> v3.18
 =======
 #define HW_APBHX_CHn_BAR(d, n) \
 	(((dma_is_apbh(d) && apbh_is_old(d)) ? 0x070 : 0x130) + (n) * 0x70)
@@ -130,7 +143,13 @@ struct mxs_dma_chan {
 	enum dma_status			status;
 	unsigned int			flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MXS_DMA_SG_LOOP			(1 << 0)
+=======
+	bool				reset;
+#define MXS_DMA_SG_LOOP			(1 << 0)
+#define MXS_DMA_USE_SEMAPHORE		(1 << 1)
+>>>>>>> v3.18
 =======
 	bool				reset;
 #define MXS_DMA_SG_LOOP			(1 << 0)
@@ -217,6 +236,7 @@ static struct mxs_dma_chan *to_mxs_dma_chan(struct dma_chan *chan)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mxs_dma_is_apbh(struct dma_chan *chan)
 {
 	struct mxs_dma_chan *mxs_chan = to_mxs_dma_chan(chan);
@@ -237,11 +257,14 @@ EXPORT_SYMBOL_GPL(mxs_dma_is_apbx);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void mxs_dma_reset_chan(struct mxs_dma_chan *mxs_chan)
 {
 	struct mxs_dma_engine *mxs_dma = mxs_chan->mxs_dma;
 	int chan_id = mxs_chan->chan.chan_id;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dma_is_apbh(mxs_dma) && apbh_is_old(mxs_dma))
 		writel(1 << (chan_id + BP_APBH_CTRL0_RESET_CHANNEL),
@@ -250,6 +273,8 @@ static void mxs_dma_reset_chan(struct mxs_dma_chan *mxs_chan)
 		writel(1 << (chan_id + BP_APBHX_CHANNEL_CTRL_RESET_CHANNEL),
 			mxs_dma->base + HW_APBHX_CHANNEL_CTRL + STMP_OFFSET_REG_SET);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * mxs dma channel resets can cause a channel stall. To recover from a
 	 * channel stall, we have to reset the whole DMA engine. To avoid this,
@@ -291,6 +316,9 @@ static void mxs_dma_reset_chan(struct mxs_dma_chan *mxs_chan)
 	}
 
 	mxs_chan->status = DMA_COMPLETE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -305,8 +333,11 @@ static void mxs_dma_enable_chan(struct mxs_dma_chan *mxs_chan)
 
 	/* write 1 to SEMA to kick off the channel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(1, mxs_dma->base + HW_APBHX_CHn_SEMA(mxs_dma, chan_id));
 =======
+=======
+>>>>>>> v3.18
 	if (mxs_chan->flags & MXS_DMA_USE_SEMAPHORE &&
 			mxs_chan->flags & MXS_DMA_SG_LOOP) {
 		/* A cyclic DMA consists of at least 2 segments, so initialize
@@ -317,13 +348,20 @@ static void mxs_dma_enable_chan(struct mxs_dma_chan *mxs_chan)
 		writel(1, mxs_dma->base + HW_APBHX_CHn_SEMA(mxs_dma, chan_id));
 	}
 	mxs_chan->reset = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void mxs_dma_disable_chan(struct mxs_dma_chan *mxs_chan)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mxs_chan->status = DMA_SUCCESS;
+=======
+	mxs_chan->status = DMA_COMPLETE;
+>>>>>>> v3.18
 =======
 	mxs_chan->status = DMA_COMPLETE;
 >>>>>>> v3.18
@@ -375,6 +413,7 @@ static void mxs_dma_tasklet(unsigned long data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static irqreturn_t mxs_dma_int_handler(int irq, void *dev_id)
 {
 	struct mxs_dma_engine *mxs_dma = dev_id;
@@ -389,6 +428,8 @@ static irqreturn_t mxs_dma_int_handler(int irq, void *dev_id)
 	stat2 = readl(mxs_dma->base + HW_APBHX_CTRL2);
 	writel(stat2, mxs_dma->base + HW_APBHX_CTRL2 + STMP_OFFSET_REG_CLR);
 =======
+=======
+>>>>>>> v3.18
 static int mxs_dma_irq_to_chan(struct mxs_dma_engine *mxs_dma, int irq)
 {
 	int i;
@@ -433,11 +474,15 @@ static irqreturn_t mxs_dma_int_handler(int irq, void *dev_id)
 	/* Clear error irq */
 	writel((1 << chan),
 			mxs_dma->base + HW_APBHX_CTRL2 + STMP_OFFSET_REG_CLR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * When both completion and error of termination bits set at the
 	 * same time, we do not take it as an error.  IOW, it only becomes
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * an error we need to handle here in case of either it's (1) a bus
 	 * error or (2) a termination error with no completion.
@@ -475,6 +520,8 @@ static irqreturn_t mxs_dma_int_handler(int irq, void *dev_id)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	 * an error we need to handle here in case of either it's a bus
 	 * error or a termination error with no completion. 0x01 is termination
 	 * error, so we can subtract err & completed to get the real error case.
@@ -509,6 +556,9 @@ static irqreturn_t mxs_dma_int_handler(int irq, void *dev_id)
 	/* schedule tasklet on this channel */
 	tasklet_schedule(&mxs_chan->tasklet);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return IRQ_HANDLED;
 }
@@ -516,6 +566,7 @@ static irqreturn_t mxs_dma_int_handler(int irq, void *dev_id)
 static int mxs_dma_alloc_chan_resources(struct dma_chan *chan)
 {
 	struct mxs_dma_chan *mxs_chan = to_mxs_dma_chan(chan);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mxs_dma_data *data = chan->private;
 	struct mxs_dma_engine *mxs_dma = mxs_chan->mxs_dma;
@@ -528,12 +579,17 @@ static int mxs_dma_alloc_chan_resources(struct dma_chan *chan)
 				CCW_BLOCK_SIZE, &mxs_chan->ccw_phys,
 				GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	struct mxs_dma_engine *mxs_dma = mxs_chan->mxs_dma;
 	int ret;
 
 	mxs_chan->ccw = dma_zalloc_coherent(mxs_dma->dma_device.dev,
 					    CCW_BLOCK_SIZE,
 					    &mxs_chan->ccw_phys, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!mxs_chan->ccw) {
 		ret = -ENOMEM;
@@ -541,8 +597,11 @@ static int mxs_dma_alloc_chan_resources(struct dma_chan *chan)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(mxs_chan->ccw, 0, CCW_BLOCK_SIZE);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (mxs_chan->chan_irq != NO_IRQ) {
@@ -714,7 +773,11 @@ static struct dma_async_tx_descriptor *mxs_dma_prep_dma_cyclic(
 		struct dma_chan *chan, dma_addr_t dma_addr, size_t buf_len,
 		size_t period_len, enum dma_transfer_direction direction,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long flags, void *context)
+=======
+		unsigned long flags)
+>>>>>>> v3.18
 =======
 		unsigned long flags)
 >>>>>>> v3.18
@@ -730,6 +793,10 @@ static struct dma_async_tx_descriptor *mxs_dma_prep_dma_cyclic(
 	mxs_chan->status = DMA_IN_PROGRESS;
 	mxs_chan->flags |= MXS_DMA_SG_LOOP;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mxs_chan->flags |= MXS_DMA_USE_SEMAPHORE;
+>>>>>>> v3.18
 =======
 	mxs_chan->flags |= MXS_DMA_USE_SEMAPHORE;
 >>>>>>> v3.18
@@ -765,6 +832,10 @@ static struct dma_async_tx_descriptor *mxs_dma_prep_dma_cyclic(
 		ccw->bits |= CCW_HALT_ON_TERM;
 		ccw->bits |= CCW_TERM_FLUSH;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ccw->bits |= CCW_DEC_SEM;
+>>>>>>> v3.18
 =======
 		ccw->bits |= CCW_DEC_SEM;
 >>>>>>> v3.18
@@ -814,11 +885,14 @@ static enum dma_status mxs_dma_tx_status(struct dma_chan *chan,
 {
 	struct mxs_dma_chan *mxs_chan = to_mxs_dma_chan(chan);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_cookie_t last_used;
 
 	last_used = chan->cookie;
 	dma_set_tx_state(txstate, chan->completed_cookie, last_used, 0);
 =======
+=======
+>>>>>>> v3.18
 	struct mxs_dma_engine *mxs_dma = mxs_chan->mxs_dma;
 	u32 residue = 0;
 
@@ -837,6 +911,9 @@ static enum dma_status mxs_dma_tx_status(struct dma_chan *chan,
 
 	dma_set_tx_state(txstate, chan->completed_cookie, chan->cookie,
 			residue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return mxs_chan->status;
@@ -906,7 +983,11 @@ static bool mxs_dma_filter_fn(struct dma_chan *chan, void *fn_param)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dma_chan *mxs_dma_xlate(struct of_phandle_args *dma_spec,
+=======
+static struct dma_chan *mxs_dma_xlate(struct of_phandle_args *dma_spec,
+>>>>>>> v3.18
 =======
 static struct dma_chan *mxs_dma_xlate(struct of_phandle_args *dma_spec,
 >>>>>>> v3.18

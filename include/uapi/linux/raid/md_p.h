@@ -17,6 +17,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 =======
 #include <asm/byteorder.h>
 >>>>>>> v3.18
@@ -296,6 +300,12 @@ struct mdp_superblock_1 {
 					    */
 #define	MD_FEATURE_NEW_OFFSET		64 /* new_offset must be honoured */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	MD_FEATURE_RECOVERY_BITMAP	128 /* recovery that is happening
+					     * is guided by bitmap.
+					     */
+>>>>>>> v3.18
 =======
 #define	MD_FEATURE_RECOVERY_BITMAP	128 /* recovery that is happening
 					     * is guided by bitmap.
@@ -309,12 +319,18 @@ struct mdp_superblock_1 {
 					|MD_FEATURE_RESHAPE_BACKWARDS	\
 					|MD_FEATURE_NEW_OFFSET		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 					)
 
 #endif 
 =======
+=======
+>>>>>>> v3.18
 					|MD_FEATURE_RECOVERY_BITMAP	\
 					)
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

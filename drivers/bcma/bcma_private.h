@@ -23,6 +23,11 @@ struct bcma_bus;
 
 /* main.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool bcma_wait_value(struct bcma_device *core, u16 reg, u32 mask, u32 value,
+		     int timeout);
+>>>>>>> v3.18
 =======
 bool bcma_wait_value(struct bcma_device *core, u16 reg, u32 mask, u32 value,
 		     int timeout);
@@ -37,8 +42,11 @@ int bcma_bus_suspend(struct bcma_bus *bus);
 int bcma_bus_resume(struct bcma_bus *bus);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct bcma_device *bcma_find_core_unit(struct bcma_bus *bus, u16 coreid,
 					u8 unit);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -59,11 +67,17 @@ extern struct platform_device bcma_pflash_dev;
 #endif /* CONFIG_BCMA_DRIVER_MIPS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* driver_chipcommon_b.c */
 int bcma_core_chipcommon_b_init(struct bcma_drv_cc_b *ccb);
 void bcma_core_chipcommon_b_free(struct bcma_drv_cc_b *ccb);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* driver_chipcommon_pmu.c */
 u32 bcma_pmu_get_alp_clock(struct bcma_drv_cc *cc);
@@ -100,7 +114,10 @@ extern void __exit bcma_host_pci_exit(void);
 #endif /* CONFIG_BCMA_HOST_PCI */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* host_soc.c */
 #if defined(CONFIG_BCMA_HOST_SOC) && defined(CONFIG_OF)
 extern int __init bcma_host_soc_register_driver(void);
@@ -115,6 +132,9 @@ static inline void __exit bcma_host_soc_unregister_driver(void)
 }
 #endif /* CONFIG_BCMA_HOST_SOC && CONFIG_OF */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* driver_pci.c */
 u32 bcma_pcie_read(struct bcma_drv_pci *pc, u32 address);

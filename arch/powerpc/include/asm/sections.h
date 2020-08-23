@@ -9,6 +9,10 @@
 #ifdef __powerpc64__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern char __start_interrupts[];
+>>>>>>> v3.18
 =======
 extern char __start_interrupts[];
 >>>>>>> v3.18
@@ -26,7 +30,10 @@ static inline int in_kernel_text(unsigned long addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int overlaps_interrupt_vector_text(unsigned long start,
 							unsigned long end)
 {
@@ -38,6 +45,9 @@ static inline int overlaps_interrupt_vector_text(unsigned long start,
 		(unsigned long)__va(real_start) < end;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int overlaps_kernel_text(unsigned long start, unsigned long end)
 {
@@ -46,7 +56,10 @@ static inline int overlaps_kernel_text(unsigned long start, unsigned long end)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int overlaps_kvm_tmp(unsigned long start, unsigned long end)
 {
 #ifdef CONFIG_KVM_GUEST
@@ -59,6 +72,9 @@ static inline int overlaps_kvm_tmp(unsigned long start, unsigned long end)
 }
 
 #if !defined(_CALL_ELF) || _CALL_ELF != 2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef dereference_function_descriptor
 static inline void *dereference_function_descriptor(void *ptr)
@@ -71,6 +87,10 @@ static inline void *dereference_function_descriptor(void *ptr)
 	return ptr;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

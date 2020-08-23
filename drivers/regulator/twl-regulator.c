@@ -59,7 +59,11 @@ struct twlreg_info {
 
 	/* chip specific features */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long 		features;
+=======
+	unsigned long		features;
+>>>>>>> v3.18
 =======
 	unsigned long		features;
 >>>>>>> v3.18
@@ -114,7 +118,11 @@ struct twlreg_info {
 #define SMPS_EXTENDED_EN	BIT(1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* twl6025 SMPS EPROM values */
+=======
+/* twl6032 SMPS EPROM values */
+>>>>>>> v3.18
 =======
 /* twl6032 SMPS EPROM values */
 >>>>>>> v3.18
@@ -182,7 +190,11 @@ static int twl6030reg_is_enabled(struct regulator_dev *rdev)
 	int			grp = 0, val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(twl_class_is_6030() && (info->features & TWL6025_SUBCLASS))) {
+=======
+	if (!(twl_class_is_6030() && (info->features & TWL6032_SUBCLASS))) {
+>>>>>>> v3.18
 =======
 	if (!(twl_class_is_6030() && (info->features & TWL6032_SUBCLASS))) {
 >>>>>>> v3.18
@@ -224,7 +236,11 @@ static int twl6030reg_enable(struct regulator_dev *rdev)
 	int			ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(twl_class_is_6030() && (info->features & TWL6025_SUBCLASS)))
+=======
+	if (!(twl_class_is_6030() && (info->features & TWL6032_SUBCLASS)))
+>>>>>>> v3.18
 =======
 	if (!(twl_class_is_6030() && (info->features & TWL6032_SUBCLASS)))
 >>>>>>> v3.18
@@ -262,7 +278,11 @@ static int twl6030reg_disable(struct regulator_dev *rdev)
 	int			ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(twl_class_is_6030() && (info->features & TWL6025_SUBCLASS)))
+=======
+	if (!(twl_class_is_6030() && (info->features & TWL6032_SUBCLASS)))
+>>>>>>> v3.18
 =======
 	if (!(twl_class_is_6030() && (info->features & TWL6032_SUBCLASS)))
 >>>>>>> v3.18
@@ -360,7 +380,11 @@ static int twl6030reg_set_mode(struct regulator_dev *rdev, unsigned mode)
 	int val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(twl_class_is_6030() && (info->features & TWL6025_SUBCLASS)))
+=======
+	if (!(twl_class_is_6030() && (info->features & TWL6032_SUBCLASS)))
+>>>>>>> v3.18
 =======
 	if (!(twl_class_is_6030() && (info->features & TWL6032_SUBCLASS)))
 >>>>>>> v3.18
@@ -924,8 +948,13 @@ static const struct twlreg_info TWL6030_INFO_##label = { \
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TWL6025_ADJUSTABLE_LDO(label, offset, min_mVolts, max_mVolts) \
 static const struct twlreg_info TWL6025_INFO_##label = { \
+=======
+#define TWL6032_ADJUSTABLE_LDO(label, offset, min_mVolts, max_mVolts) \
+static const struct twlreg_info TWL6032_INFO_##label = { \
+>>>>>>> v3.18
 =======
 #define TWL6032_ADJUSTABLE_LDO(label, offset, min_mVolts, max_mVolts) \
 static const struct twlreg_info TWL6032_INFO_##label = { \
@@ -936,7 +965,11 @@ static const struct twlreg_info TWL6032_INFO_##label = { \
 	.desc = { \
 		.name = #label, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.id = TWL6025_REG_##label, \
+=======
+		.id = TWL6032_REG_##label, \
+>>>>>>> v3.18
 =======
 		.id = TWL6032_REG_##label, \
 >>>>>>> v3.18
@@ -967,7 +1000,11 @@ static const struct twlreg_info TWLFIXED_INFO_##label = { \
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TWL6025_ADJUSTABLE_SMPS(label, offset) \
+=======
+#define TWL6032_ADJUSTABLE_SMPS(label, offset) \
+>>>>>>> v3.18
 =======
 #define TWL6032_ADJUSTABLE_SMPS(label, offset) \
 >>>>>>> v3.18
@@ -978,7 +1015,11 @@ static const struct twlreg_info TWLSMPS_INFO_##label = { \
 	.desc = { \
 		.name = #label, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.id = TWL6025_REG_##label, \
+=======
+		.id = TWL6032_REG_##label, \
+>>>>>>> v3.18
 =======
 		.id = TWL6032_REG_##label, \
 >>>>>>> v3.18
@@ -1023,6 +1064,7 @@ TWL6030_ADJUSTABLE_LDO(VPP, 0x6c, 1000, 3300);
 TWL6030_ADJUSTABLE_LDO(VUSIM, 0x74, 1000, 3300);
 /* 6025 are renamed compared to 6030 versions */
 <<<<<<< HEAD
+<<<<<<< HEAD
 TWL6025_ADJUSTABLE_LDO(LDO2, 0x54, 1000, 3300);
 TWL6025_ADJUSTABLE_LDO(LDO4, 0x58, 1000, 3300);
 TWL6025_ADJUSTABLE_LDO(LDO3, 0x5c, 1000, 3300);
@@ -1033,6 +1075,8 @@ TWL6025_ADJUSTABLE_LDO(LDO6, 0x60, 1000, 3300);
 TWL6025_ADJUSTABLE_LDO(LDOLN, 0x64, 1000, 3300);
 TWL6025_ADJUSTABLE_LDO(LDOUSB, 0x70, 1000, 3300);
 =======
+=======
+>>>>>>> v3.18
 TWL6032_ADJUSTABLE_LDO(LDO2, 0x54, 1000, 3300);
 TWL6032_ADJUSTABLE_LDO(LDO4, 0x58, 1000, 3300);
 TWL6032_ADJUSTABLE_LDO(LDO3, 0x5c, 1000, 3300);
@@ -1042,6 +1086,9 @@ TWL6032_ADJUSTABLE_LDO(LDO7, 0x74, 1000, 3300);
 TWL6032_ADJUSTABLE_LDO(LDO6, 0x60, 1000, 3300);
 TWL6032_ADJUSTABLE_LDO(LDOLN, 0x64, 1000, 3300);
 TWL6032_ADJUSTABLE_LDO(LDOUSB, 0x70, 1000, 3300);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 TWL4030_FIXED_LDO(VINTANA1, 0x3f, 1500, 11, 100, 0x08);
 TWL4030_FIXED_LDO(VINTDIG, 0x47, 1500, 13, 100, 0x08);
@@ -1055,9 +1102,15 @@ TWL6030_FIXED_LDO(VUSB, 0x70, 3300, 0);
 TWL6030_FIXED_LDO(V1V8, 0x16, 1800, 0);
 TWL6030_FIXED_LDO(V2V1, 0x1c, 2100, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 TWL6025_ADJUSTABLE_SMPS(SMPS3, 0x34);
 TWL6025_ADJUSTABLE_SMPS(SMPS4, 0x10);
 TWL6025_ADJUSTABLE_SMPS(VIO, 0x16);
+=======
+TWL6032_ADJUSTABLE_SMPS(SMPS3, 0x34);
+TWL6032_ADJUSTABLE_SMPS(SMPS4, 0x10);
+TWL6032_ADJUSTABLE_SMPS(VIO, 0x16);
+>>>>>>> v3.18
 =======
 TWL6032_ADJUSTABLE_SMPS(SMPS3, 0x34);
 TWL6032_ADJUSTABLE_SMPS(SMPS4, 0x10);
@@ -1091,7 +1144,11 @@ static u8 twl_get_smps_mult(void)
 #define TWL4030_OF_MATCH(comp, label) TWL_OF_MATCH(comp, TWL4030, label)
 #define TWL6030_OF_MATCH(comp, label) TWL_OF_MATCH(comp, TWL6030, label)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TWL6025_OF_MATCH(comp, label) TWL_OF_MATCH(comp, TWL6025, label)
+=======
+#define TWL6032_OF_MATCH(comp, label) TWL_OF_MATCH(comp, TWL6032, label)
+>>>>>>> v3.18
 =======
 #define TWL6032_OF_MATCH(comp, label) TWL_OF_MATCH(comp, TWL6032, label)
 >>>>>>> v3.18
@@ -1124,6 +1181,7 @@ static const struct of_device_id twl_of_match[] = {
 	TWL6030_OF_MATCH("ti,twl6030-vpp", VPP),
 	TWL6030_OF_MATCH("ti,twl6030-vusim", VUSIM),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TWL6025_OF_MATCH("ti,twl6025-ldo2", LDO2),
 	TWL6025_OF_MATCH("ti,twl6025-ldo4", LDO4),
 	TWL6025_OF_MATCH("ti,twl6025-ldo3", LDO3),
@@ -1134,6 +1192,8 @@ static const struct of_device_id twl_of_match[] = {
 	TWL6025_OF_MATCH("ti,twl6025-ldoln", LDOLN),
 	TWL6025_OF_MATCH("ti,twl6025-ldousb", LDOUSB),
 =======
+=======
+>>>>>>> v3.18
 	TWL6032_OF_MATCH("ti,twl6032-ldo2", LDO2),
 	TWL6032_OF_MATCH("ti,twl6032-ldo4", LDO4),
 	TWL6032_OF_MATCH("ti,twl6032-ldo3", LDO3),
@@ -1143,6 +1203,9 @@ static const struct of_device_id twl_of_match[] = {
 	TWL6032_OF_MATCH("ti,twl6032-ldo6", LDO6),
 	TWL6032_OF_MATCH("ti,twl6032-ldoln", LDOLN),
 	TWL6032_OF_MATCH("ti,twl6032-ldousb", LDOUSB),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TWLFIXED_OF_MATCH("ti,twl4030-vintana1", VINTANA1),
 	TWLFIXED_OF_MATCH("ti,twl4030-vintdig", VINTDIG),
@@ -1156,9 +1219,15 @@ static const struct of_device_id twl_of_match[] = {
 	TWLFIXED_OF_MATCH("ti,twl6030-v1v8", V1V8),
 	TWLFIXED_OF_MATCH("ti,twl6030-v2v1", V2V1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TWLSMPS_OF_MATCH("ti,twl6025-smps3", SMPS3),
 	TWLSMPS_OF_MATCH("ti,twl6025-smps4", SMPS4),
 	TWLSMPS_OF_MATCH("ti,twl6025-vio", VIO),
+=======
+	TWLSMPS_OF_MATCH("ti,twl6032-smps3", SMPS3),
+	TWLSMPS_OF_MATCH("ti,twl6032-smps4", SMPS4),
+	TWLSMPS_OF_MATCH("ti,twl6032-vio", VIO),
+>>>>>>> v3.18
 =======
 	TWLSMPS_OF_MATCH("ti,twl6032-smps3", SMPS3),
 	TWLSMPS_OF_MATCH("ti,twl6032-smps4", SMPS4),
@@ -1190,7 +1259,11 @@ static int twlreg_probe(struct platform_device *pdev)
 	} else {
 		id = pdev->id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		initdata = pdev->dev.platform_data;
+=======
+		initdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 		initdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1214,7 +1287,11 @@ static int twlreg_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = kmemdup(template, sizeof (*info), GFP_KERNEL);
+=======
+	info = devm_kmemdup(&pdev->dev, template, sizeof(*info), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	info = devm_kmemdup(&pdev->dev, template, sizeof(*info), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1253,7 +1330,11 @@ static int twlreg_probe(struct platform_device *pdev)
 
 	switch (id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case TWL6025_REG_SMPS3:
+=======
+	case TWL6032_REG_SMPS3:
+>>>>>>> v3.18
 =======
 	case TWL6032_REG_SMPS3:
 >>>>>>> v3.18
@@ -1263,7 +1344,11 @@ static int twlreg_probe(struct platform_device *pdev)
 			info->flags |= SMPS_OFFSET_EN;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case TWL6025_REG_SMPS4:
+=======
+	case TWL6032_REG_SMPS4:
+>>>>>>> v3.18
 =======
 	case TWL6032_REG_SMPS4:
 >>>>>>> v3.18
@@ -1273,7 +1358,11 @@ static int twlreg_probe(struct platform_device *pdev)
 			info->flags |= SMPS_OFFSET_EN;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case TWL6025_REG_VIO:
+=======
+	case TWL6032_REG_VIO:
+>>>>>>> v3.18
 =======
 	case TWL6032_REG_VIO:
 >>>>>>> v3.18
@@ -1290,16 +1379,22 @@ static int twlreg_probe(struct platform_device *pdev)
 	config.of_node = pdev->dev.of_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev = regulator_register(&info->desc, &config);
 	if (IS_ERR(rdev)) {
 		dev_err(&pdev->dev, "can't register %s, %ld\n",
 				info->desc.name, PTR_ERR(rdev));
 		kfree(info);
 =======
+=======
+>>>>>>> v3.18
 	rdev = devm_regulator_register(&pdev->dev, &info->desc, &config);
 	if (IS_ERR(rdev)) {
 		dev_err(&pdev->dev, "can't register %s, %ld\n",
 				info->desc.name, PTR_ERR(rdev));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return PTR_ERR(rdev);
 	}
@@ -1321,6 +1416,7 @@ static int twlreg_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int twlreg_remove(struct platform_device *pdev)
 {
 	struct regulator_dev *rdev = platform_get_drvdata(pdev);
@@ -1333,12 +1429,17 @@ static int twlreg_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 MODULE_ALIAS("platform:twl_reg");
 
 static struct platform_driver twlreg_driver = {
 	.probe		= twlreg_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= twlreg_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* NOTE: short name, to work around driver model truncation of

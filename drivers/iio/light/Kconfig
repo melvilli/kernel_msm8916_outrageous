@@ -2,6 +2,11 @@
 # Light sensors
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# When adding new entries keep the list in alphabetical order
+
+>>>>>>> v3.18
 =======
 # When adding new entries keep the list in alphabetical order
 
@@ -21,7 +26,10 @@ config ADJD_S311
 	 will be called adjd_s311.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config AL3320A
 	tristate "AL3320A ambient light sensor"
 	depends on I2C
@@ -114,6 +122,9 @@ config HID_SENSOR_PROX
 	  To compile this driver as a module, choose M here: the
 	  module will be called hid-sensor-prox.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_LM3533
 	tristate "LM3533 ambient light sensor"
@@ -133,7 +144,10 @@ config SENSORS_LM3533
 	  three current output channels.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config LTR501
 	tristate "LTR-501ALS-01 light sensor"
 	depends on I2C
@@ -170,6 +184,9 @@ config TCS3472
 	 This driver can also be built as a module.  If so, the module
 	 will be called tcs3472.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_TSL2563
 	tristate "TAOS TSL2560, TSL2561, TSL2562 and TSL2563 ambient light sensors"
@@ -182,7 +199,10 @@ config SENSORS_TSL2563
 	 will be called tsl2563.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config TSL4531
 	tristate "TAOS TSL4531 ambient light sensors"
 	depends on I2C
@@ -193,6 +213,9 @@ config TSL4531
 	 To compile this driver as a module, choose M here: the
 	 module will be called tsl4531.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config VCNL4000
 	tristate "VCNL4000 combined ALS and proximity sensor"
@@ -205,6 +228,7 @@ config VCNL4000
 	 module will be called vcnl4000.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HID_SENSOR_ALS
 	depends on HID_SENSOR_HUB
 	select IIO_BUFFER
@@ -216,6 +240,8 @@ config HID_SENSOR_ALS
 	  Say yes here to build support for the HID SENSOR
 	  Ambient light sensor.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endmenu

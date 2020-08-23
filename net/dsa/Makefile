@@ -4,6 +4,10 @@ dsa_core-y += dsa.o slave.o
 
 # tagging formats
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+dsa_core-$(CONFIG_NET_DSA_TAG_BRCM) += tag_brcm.o
+>>>>>>> v3.18
 =======
 dsa_core-$(CONFIG_NET_DSA_TAG_BRCM) += tag_brcm.o
 >>>>>>> v3.18

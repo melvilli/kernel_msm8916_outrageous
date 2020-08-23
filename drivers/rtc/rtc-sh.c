@@ -594,7 +594,11 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 	int clk_id, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc = kzalloc(sizeof(struct sh_rtc), GFP_KERNEL);
+=======
+	rtc = devm_kzalloc(&pdev->dev, sizeof(*rtc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	rtc = devm_kzalloc(&pdev->dev, sizeof(*rtc), GFP_KERNEL);
 >>>>>>> v3.18
@@ -607,9 +611,14 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 	ret = platform_get_irq(pdev, 0);
 	if (unlikely(ret <= 0)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOENT;
 		dev_err(&pdev->dev, "No IRQ resource\n");
 		goto err_badres;
+=======
+		dev_err(&pdev->dev, "No IRQ resource\n");
+		return -ENOENT;
+>>>>>>> v3.18
 =======
 		dev_err(&pdev->dev, "No IRQ resource\n");
 		return -ENOENT;
@@ -623,9 +632,14 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 	res = platform_get_resource(pdev, IORESOURCE_IO, 0);
 	if (unlikely(res == NULL)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOENT;
 		dev_err(&pdev->dev, "No IO resource\n");
 		goto err_badres;
+=======
+		dev_err(&pdev->dev, "No IO resource\n");
+		return -ENOENT;
+>>>>>>> v3.18
 =======
 		dev_err(&pdev->dev, "No IO resource\n");
 		return -ENOENT;
@@ -634,6 +648,7 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 
 	rtc->regsize = resource_size(res);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rtc->res = request_mem_region(res->start, rtc->regsize, pdev->name);
 	if (unlikely(!rtc->res)) {
@@ -647,6 +662,8 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 		goto err_badmap;
 	}
 =======
+=======
+>>>>>>> v3.18
 	rtc->res = devm_request_mem_region(&pdev->dev, res->start,
 					rtc->regsize, pdev->name);
 	if (unlikely(!rtc->res))
@@ -656,6 +673,9 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 					rtc->regsize);
 	if (unlikely(!rtc->regbase))
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	clk_id = pdev->id;
@@ -666,7 +686,11 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 	snprintf(clk_name, sizeof(clk_name), "rtc%d", clk_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc->clk = clk_get(&pdev->dev, clk_name);
+=======
+	rtc->clk = devm_clk_get(&pdev->dev, clk_name);
+>>>>>>> v3.18
 =======
 	rtc->clk = devm_clk_get(&pdev->dev, clk_name);
 >>>>>>> v3.18
@@ -684,8 +708,14 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 
 	rtc->capabilities = RTC_DEF_CAPABILITIES;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->dev.platform_data) {
 		struct sh_rtc_platform_info *pinfo = pdev->dev.platform_data;
+=======
+	if (dev_get_platdata(&pdev->dev)) {
+		struct sh_rtc_platform_info *pinfo =
+			dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	if (dev_get_platdata(&pdev->dev)) {
 		struct sh_rtc_platform_info *pinfo =
@@ -702,8 +732,13 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 	if (rtc->carry_irq <= 0) {
 		/* register shared periodic/carry/alarm irq */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = request_irq(rtc->periodic_irq, sh_rtc_shared,
 				  0, "sh-rtc", rtc);
+=======
+		ret = devm_request_irq(&pdev->dev, rtc->periodic_irq,
+				sh_rtc_shared, 0, "sh-rtc", rtc);
+>>>>>>> v3.18
 =======
 		ret = devm_request_irq(&pdev->dev, rtc->periodic_irq,
 				sh_rtc_shared, 0, "sh-rtc", rtc);
@@ -717,8 +752,13 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 	} else {
 		/* register periodic/carry/alarm irqs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = request_irq(rtc->periodic_irq, sh_rtc_periodic,
 				  0, "sh-rtc period", rtc);
+=======
+		ret = devm_request_irq(&pdev->dev, rtc->periodic_irq,
+				sh_rtc_periodic, 0, "sh-rtc period", rtc);
+>>>>>>> v3.18
 =======
 		ret = devm_request_irq(&pdev->dev, rtc->periodic_irq,
 				sh_rtc_periodic, 0, "sh-rtc period", rtc);
@@ -731,8 +771,13 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = request_irq(rtc->carry_irq, sh_rtc_interrupt,
 				  0, "sh-rtc carry", rtc);
+=======
+		ret = devm_request_irq(&pdev->dev, rtc->carry_irq,
+				sh_rtc_interrupt, 0, "sh-rtc carry", rtc);
+>>>>>>> v3.18
 =======
 		ret = devm_request_irq(&pdev->dev, rtc->carry_irq,
 				sh_rtc_interrupt, 0, "sh-rtc carry", rtc);
@@ -742,6 +787,7 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 				"request carry IRQ failed with %d, IRQ %d\n",
 				ret, rtc->carry_irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			free_irq(rtc->periodic_irq, rtc);
 			goto err_unmap;
 		}
@@ -749,19 +795,27 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 		ret = request_irq(rtc->alarm_irq, sh_rtc_alarm,
 				  0, "sh-rtc alarm", rtc);
 =======
+=======
+>>>>>>> v3.18
 			goto err_unmap;
 		}
 
 		ret = devm_request_irq(&pdev->dev, rtc->alarm_irq,
 				sh_rtc_alarm, 0, "sh-rtc alarm", rtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (unlikely(ret)) {
 			dev_err(&pdev->dev,
 				"request alarm IRQ failed with %d, IRQ %d\n",
 				ret, rtc->alarm_irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			free_irq(rtc->carry_irq, rtc);
 			free_irq(rtc->periodic_irq, rtc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			goto err_unmap;
@@ -777,6 +831,7 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 	sh_rtc_setcie(&pdev->dev, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc->rtc_dev = rtc_device_register("sh", &pdev->dev,
 					   &sh_rtc_ops, THIS_MODULE);
 	if (IS_ERR(rtc->rtc_dev)) {
@@ -785,10 +840,15 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 		free_irq(rtc->carry_irq, rtc);
 		free_irq(rtc->alarm_irq, rtc);
 =======
+=======
+>>>>>>> v3.18
 	rtc->rtc_dev = devm_rtc_device_register(&pdev->dev, "sh",
 					   &sh_rtc_ops, THIS_MODULE);
 	if (IS_ERR(rtc->rtc_dev)) {
 		ret = PTR_ERR(rtc->rtc_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err_unmap;
 	}
@@ -807,12 +867,15 @@ static int __init sh_rtc_probe(struct platform_device *pdev)
 err_unmap:
 	clk_disable(rtc->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(rtc->clk);
 	iounmap(rtc->regbase);
 err_badmap:
 	release_mem_region(rtc->res->start, rtc->regsize);
 err_badres:
 	kfree(rtc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -824,7 +887,10 @@ static int __exit sh_rtc_remove(struct platform_device *pdev)
 	struct sh_rtc *rtc = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc_device_unregister(rtc->rtc_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sh_rtc_irq_set_state(&pdev->dev, 0);
@@ -832,6 +898,7 @@ static int __exit sh_rtc_remove(struct platform_device *pdev)
 	sh_rtc_setaie(&pdev->dev, 0);
 	sh_rtc_setcie(&pdev->dev, 0);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	free_irq(rtc->periodic_irq, rtc);
 
@@ -849,6 +916,9 @@ static int __exit sh_rtc_remove(struct platform_device *pdev)
 	platform_set_drvdata(pdev, NULL);
 
 	kfree(rtc);
+=======
+	clk_disable(rtc->clk);
+>>>>>>> v3.18
 =======
 	clk_disable(rtc->clk);
 >>>>>>> v3.18

@@ -135,7 +135,12 @@ static inline int INET_ECN_set_ce(struct sk_buff *skb)
 	switch (skb->protocol) {
 	case cpu_to_be16(ETH_P_IP):
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (skb->network_header + sizeof(struct iphdr) <= skb->tail)
+=======
+		if (skb_network_header(skb) + sizeof(struct iphdr) <=
+		    skb_tail_pointer(skb))
+>>>>>>> v3.18
 =======
 		if (skb_network_header(skb) + sizeof(struct iphdr) <=
 		    skb_tail_pointer(skb))
@@ -145,7 +150,12 @@ static inline int INET_ECN_set_ce(struct sk_buff *skb)
 
 	case cpu_to_be16(ETH_P_IPV6):
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (skb->network_header + sizeof(struct ipv6hdr) <= skb->tail)
+=======
+		if (skb_network_header(skb) + sizeof(struct ipv6hdr) <=
+		    skb_tail_pointer(skb))
+>>>>>>> v3.18
 =======
 		if (skb_network_header(skb) + sizeof(struct ipv6hdr) <=
 		    skb_tail_pointer(skb))
@@ -159,7 +169,11 @@ static inline int INET_ECN_set_ce(struct sk_buff *skb)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * RFC 6080 4.2
+=======
+ * RFC 6040 4.2
+>>>>>>> v3.18
 =======
  * RFC 6040 4.2
 >>>>>>> v3.18

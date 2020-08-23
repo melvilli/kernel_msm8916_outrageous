@@ -29,13 +29,19 @@
 
 #include <net/inet_sock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/snmp.h>
 #include <net/flow.h>
 =======
+=======
+>>>>>>> v3.18
 #include <net/route.h>
 #include <net/snmp.h>
 #include <net/flow.h>
 #include <net/flow_keys.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct sock;
@@ -45,6 +51,7 @@ struct inet_skb_parm {
 	unsigned char		flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IPSKB_FORWARDED		BIT(0)
 #define IPSKB_XFRM_TUNNEL_SIZE	BIT(1)
 #define IPSKB_XFRM_TRANSFORMED	BIT(2)
@@ -52,11 +59,16 @@ struct inet_skb_parm {
 #define IPSKB_REROUTED		BIT(4)
 #define IPSKB_DOREDIRECT	BIT(5)
 =======
+=======
+>>>>>>> v3.18
 #define IPSKB_FORWARDED		1
 #define IPSKB_XFRM_TUNNEL_SIZE	2
 #define IPSKB_XFRM_TRANSFORMED	4
 #define IPSKB_FRAG_COMPLETE	8
 #define IPSKB_REROUTED		16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	u16			frag_max_size;
@@ -73,10 +85,13 @@ struct ipcm_cookie {
 	struct ip_options_rcu	*opt;
 	__u8			tx_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 #define IPCB(skb) ((struct inet_skb_parm*)((skb)->cb))
 =======
+=======
+>>>>>>> v3.18
 	__u8			ttl;
 	__s16			tos;
 	char			priority;
@@ -84,6 +99,9 @@ struct ipcm_cookie {
 
 #define IPCB(skb) ((struct inet_skb_parm*)((skb)->cb))
 #define PKTINFO_SKB_CB(skb) ((struct in_pktinfo *)((skb)->cb))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct ip_ra_chain {
@@ -113,7 +131,11 @@ struct rtable;
 struct sockaddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int		igmp_mc_proc_init(void);
+=======
+int igmp_mc_init(void);
+>>>>>>> v3.18
 =======
 int igmp_mc_init(void);
 >>>>>>> v3.18
@@ -122,6 +144,7 @@ int igmp_mc_init(void);
  *	Functions provided by ip.c
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int		ip_build_and_send_pkt(struct sk_buff *skb, struct sock *sk,
 					      __be32 saddr, __be32 daddr,
@@ -165,6 +188,8 @@ extern struct sk_buff  *ip_make_skb(struct sock *sk,
 				    struct rtable **rtp,
 				    unsigned int flags);
 =======
+=======
+>>>>>>> v3.18
 int ip_build_and_send_pkt(struct sk_buff *skb, struct sock *sk,
 			  __be32 saddr, __be32 daddr,
 			  struct ip_options_rcu *opt);
@@ -209,6 +234,9 @@ struct sk_buff *ip_make_skb(struct sock *sk, struct flowi4 *fl4,
 			    void *from, int length, int transhdrlen,
 			    struct ipcm_cookie *ipc, struct rtable **rtp,
 			    unsigned int flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct sk_buff *ip_finish_skb(struct sock *sk, struct flowi4 *fl4)
@@ -217,6 +245,7 @@ static inline struct sk_buff *ip_finish_skb(struct sock *sk, struct flowi4 *fl4)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* datagram.c */
 int __ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len);
 extern int		ip4_datagram_connect(struct sock *sk, 
@@ -224,6 +253,8 @@ extern int		ip4_datagram_connect(struct sock *sk,
 
 extern void ip4_datagram_release_cb(struct sock *sk);
 =======
+=======
+>>>>>>> v3.18
 static inline __u8 get_rttos(struct ipcm_cookie* ipc, struct inet_sock *inet)
 {
 	return (ipc->tos != -1) ? RT_TOS(ipc->tos) : RT_TOS(inet->tos);
@@ -238,6 +269,9 @@ static inline __u8 get_rtconn_flags(struct ipcm_cookie* ipc, struct sock* sk)
 int ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len);
 
 void ip4_datagram_release_cb(struct sock *sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct ip_reply_arg {
@@ -249,7 +283,10 @@ struct ip_reply_arg {
 	int	    bound_dev_if;
 	u8  	    tos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uid_t	    uid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }; 
@@ -262,6 +299,7 @@ static inline __u8 ip_reply_arg_flowi_flags(const struct ip_reply_arg *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ip_send_unicast_reply(struct sock *sk, struct sk_buff *skb, __be32 daddr,
 			   __be32 saddr, const struct ip_reply_arg *arg,
 			   unsigned int len);
@@ -273,12 +311,17 @@ struct ipv4_config {
 
 extern struct ipv4_config ipv4_config;
 =======
+=======
+>>>>>>> v3.18
 void ip_send_unicast_reply(struct net *net, struct sk_buff *skb,
 			   const struct ip_options *sopt,
 			   __be32 daddr, __be32 saddr,
 			   const struct ip_reply_arg *arg,
 			   unsigned int len);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IP_INC_STATS(net, field)	SNMP_INC_STATS64((net)->mib.ip_statistics, field)
 #define IP_INC_STATS_BH(net, field)	SNMP_INC_STATS64_BH((net)->mib.ip_statistics, field)
@@ -290,6 +333,7 @@ void ip_send_unicast_reply(struct net *net, struct sk_buff *skb,
 #define NET_INC_STATS_BH(net, field)	SNMP_INC_STATS_BH((net)->mib.net_statistics, field)
 #define NET_INC_STATS_USER(net, field) 	SNMP_INC_STATS_USER((net)->mib.net_statistics, field)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NET_ADD_STATS_BH(net, field, adnd) SNMP_ADD_STATS_BH((net)->mib.net_statistics, field, adnd)
 #define NET_ADD_STATS_USER(net, field, adnd) SNMP_ADD_STATS_USER((net)->mib.net_statistics, field, adnd)
 
@@ -299,6 +343,8 @@ extern u64 snmp_fold_field64(void __percpu *mib[], int offt, size_t sync_off);
 #else
 static inline u64 snmp_fold_field64(void __percpu *mib[], int offt, size_t syncp_off)
 =======
+=======
+>>>>>>> v3.18
 #define NET_ADD_STATS(net, field, adnd)	SNMP_ADD_STATS((net)->mib.net_statistics, field, adnd)
 #define NET_ADD_STATS_BH(net, field, adnd) SNMP_ADD_STATS_BH((net)->mib.net_statistics, field, adnd)
 #define NET_ADD_STATS_USER(net, field, adnd) SNMP_ADD_STATS_USER((net)->mib.net_statistics, field, adnd)
@@ -308,11 +354,15 @@ unsigned long snmp_fold_field(void __percpu *mib, int offt);
 u64 snmp_fold_field64(void __percpu *mib, int offt, size_t sync_off);
 #else
 static inline u64 snmp_fold_field64(void __percpu *mib, int offt, size_t syncp_off)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return snmp_fold_field(mib, offt);
 }
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int snmp_mib_init(void __percpu *ptr[2], size_t mibsize, size_t align);
 extern void snmp_mib_free(void __percpu *ptr[2]);
@@ -331,6 +381,8 @@ static inline int inet_is_reserved_local_port(int port)
 
 extern int sysctl_ip_nonlocal_bind;
 =======
+=======
+>>>>>>> v3.18
 
 void inet_get_local_port_range(struct net *net, int *low, int *high);
 
@@ -353,6 +405,9 @@ static inline int inet_is_local_reserved_port(struct net *net, int port)
 	return 0;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* From inetpeer.c */
@@ -367,9 +422,15 @@ extern int sysctl_ip_early_demux;
 extern int sysctl_ip_dynaddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ipfrag_init(void);
 
 extern void ip_static_sysctl_init(void);
+=======
+void ipfrag_init(void);
+
+void ip_static_sysctl_init(void);
+>>>>>>> v3.18
 =======
 void ipfrag_init(void);
 
@@ -407,7 +468,10 @@ int ip_dont_fragment(struct sock *sk, struct dst_entry *dst)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool ip_sk_accept_pmtu(const struct sock *sk)
 {
 	return inet_sk(sk)->pmtudisc != IP_PMTUDISC_INTERFACE &&
@@ -448,6 +512,9 @@ static inline unsigned int ip_skb_dst_mtu(const struct sk_buff *skb)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 u32 ip_idents_reserve(u32 hash, int segs);
 void __ip_select_ident(struct iphdr *iph, int segs);
@@ -457,7 +524,11 @@ static inline void ip_select_ident_segs(struct sk_buff *skb, struct sock *sk, in
 	struct iphdr *iph = ip_hdr(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((iph->frag_off & htons(IP_DF)) && !skb->local_df) {
+=======
+	if ((iph->frag_off & htons(IP_DF)) && !skb->ignore_df) {
+>>>>>>> v3.18
 =======
 	if ((iph->frag_off & htons(IP_DF)) && !skb->ignore_df) {
 >>>>>>> v3.18
@@ -483,7 +554,10 @@ static inline void ip_select_ident(struct sk_buff *skb, struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline __wsum inet_compute_pseudo(struct sk_buff *skb, int proto)
 {
 	return csum_tcpudp_nofold(ip_hdr(skb)->saddr, ip_hdr(skb)->daddr,
@@ -511,6 +585,9 @@ static inline __wsum inet_gro_compute_pseudo(struct sk_buff *skb, int proto)
 				  skb_gro_len(skb), proto, 0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *	Map a multicast IP onto multicast MAC for type ethernet.
@@ -586,7 +663,11 @@ static __inline__ void inet_reset_saddr(struct sock *sk)
 
 		memset(&np->saddr, 0, sizeof(np->saddr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(&np->rcv_saddr, 0, sizeof(np->rcv_saddr));
+=======
+		memset(&sk->sk_v6_rcv_saddr, 0, sizeof(sk->sk_v6_rcv_saddr));
+>>>>>>> v3.18
 =======
 		memset(&sk->sk_v6_rcv_saddr, 0, sizeof(sk->sk_v6_rcv_saddr));
 >>>>>>> v3.18
@@ -613,7 +694,11 @@ static inline int sk_mc_loop(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool ip_call_ra_chain(struct sk_buff *skb);
+=======
+bool ip_call_ra_chain(struct sk_buff *skb);
+>>>>>>> v3.18
 =======
 bool ip_call_ra_chain(struct sk_buff *skb);
 >>>>>>> v3.18
@@ -649,7 +734,10 @@ static inline struct sk_buff *ip_check_defrag(struct sk_buff *skb, u32 user)
 #endif
 int ip_frag_mem(struct net *net);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ip_frag_nqueues(struct net *net);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -658,7 +746,11 @@ int ip_frag_nqueues(struct net *net);
  */
  
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ip_forward(struct sk_buff *skb);
+=======
+int ip_forward(struct sk_buff *skb);
+>>>>>>> v3.18
 =======
 int ip_forward(struct sk_buff *skb);
 >>>>>>> v3.18
@@ -667,6 +759,7 @@ int ip_forward(struct sk_buff *skb);
  *	Functions provided by ip_options.c
  */
  
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void ip_options_build(struct sk_buff *skb, struct ip_options *opt,
 			     __be32 daddr, struct rtable *rt, int is_frag);
@@ -682,6 +775,8 @@ extern void ip_options_undo(struct ip_options * opt);
 extern void ip_forward_options(struct sk_buff *skb);
 extern int ip_options_rcv_srr(struct sk_buff *skb);
 =======
+=======
+>>>>>>> v3.18
 void ip_options_build(struct sk_buff *skb, struct ip_options *opt,
 		      __be32 daddr, struct rtable *rt, int is_frag);
 
@@ -702,12 +797,16 @@ int ip_options_get_from_user(struct net *net, struct ip_options_rcu **optp,
 void ip_options_undo(struct ip_options *opt);
 void ip_forward_options(struct sk_buff *skb);
 int ip_options_rcv_srr(struct sk_buff *skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  *	Functions provided by ip_sockglue.c
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void	ipv4_pktinfo_prepare(struct sk_buff *skb);
 extern void	ip_cmsg_recv(struct msghdr *msg, struct sk_buff *skb);
@@ -730,6 +829,8 @@ extern void	ip_local_error(struct sock *sk, int err, __be32 daddr, __be16 dport,
 #ifdef CONFIG_PROC_FS
 extern int ip_misc_proc_init(void);
 =======
+=======
+>>>>>>> v3.18
 void ipv4_pktinfo_prepare(const struct sock *sk, struct sk_buff *skb);
 void ip_cmsg_recv(struct msghdr *msg, struct sk_buff *skb);
 int ip_cmsg_send(struct net *net, struct msghdr *msg,
@@ -757,6 +858,9 @@ extern int sysctl_icmp_msgs_burst;
 
 #ifdef CONFIG_PROC_FS
 int ip_misc_proc_init(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

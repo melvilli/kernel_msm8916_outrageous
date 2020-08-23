@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (C) 2010-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2010-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
 =======
 /* Copyright (C) 2010-2014 B.A.T.M.A.N. contributors:
 >>>>>>> v3.18
@@ -17,9 +21,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -30,24 +38,34 @@
 #include "translation-table.h"
 #include "distributed-arp-table.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "originator.h"
 #include "hard-interface.h"
 #include "gateway_common.h"
 #include "gateway_client.h"
 #include "vis.h"
 =======
+=======
+>>>>>>> v3.18
 #include "network-coding.h"
 #include "originator.h"
 #include "hard-interface.h"
 #include "soft-interface.h"
 #include "gateway_common.h"
 #include "gateway_client.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct net_device *batadv_kobj_to_netdev(struct kobject *obj)
 {
 	struct device *dev = container_of(obj->parent, struct device, kobj);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -58,10 +76,13 @@ static struct batadv_priv *batadv_kobj_to_batpriv(struct kobject *obj)
 {
 	struct net_device *net_dev = batadv_kobj_to_netdev(obj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return netdev_priv(net_dev);
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	return netdev_priv(net_dev);
 }
@@ -113,6 +134,9 @@ batadv_kobj_to_vlan(struct batadv_priv *bat_priv, struct kobject *obj)
 	return vlan;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BATADV_UEV_TYPE_VAR	"BATTYPE="
 #define BATADV_UEV_ACTION_VAR	"BATACTION="
@@ -129,7 +153,10 @@ static char *batadv_uev_type_str[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Use this, if you have customized show and store functions for vlan attrs */
 #define BATADV_ATTR_VLAN(_name, _mode, _show, _store)	\
 struct batadv_attribute batadv_attr_vlan_##_name = {	\
@@ -139,6 +166,9 @@ struct batadv_attribute batadv_attr_vlan_##_name = {	\
 	.store  = _store,				\
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Use this, if you have customized show and store functions */
 #define BATADV_ATTR(_name, _mode, _show, _store)	\
@@ -148,7 +178,11 @@ struct batadv_attribute batadv_attr_##_name = {		\
 	.show   = _show,				\
 	.store  = _store,				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -161,6 +195,10 @@ ssize_t batadv_store_##_name(struct kobject *kobj,			\
 	struct net_device *net_dev = batadv_kobj_to_netdev(kobj);	\
 	struct batadv_priv *bat_priv = netdev_priv(net_dev);		\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+									\
+>>>>>>> v3.18
 =======
 									\
 >>>>>>> v3.18
@@ -174,6 +212,10 @@ ssize_t batadv_show_##_name(struct kobject *kobj,			\
 {									\
 	struct batadv_priv *bat_priv = batadv_kobj_to_batpriv(kobj);	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+									\
+>>>>>>> v3.18
 =======
 									\
 >>>>>>> v3.18
@@ -200,6 +242,10 @@ ssize_t batadv_store_##_name(struct kobject *kobj,			\
 	struct net_device *net_dev = batadv_kobj_to_netdev(kobj);	\
 	struct batadv_priv *bat_priv = netdev_priv(net_dev);		\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+									\
+>>>>>>> v3.18
 =======
 									\
 >>>>>>> v3.18
@@ -214,6 +260,10 @@ ssize_t batadv_show_##_name(struct kobject *kobj,			\
 {									\
 	struct batadv_priv *bat_priv = batadv_kobj_to_batpriv(kobj);	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+									\
+>>>>>>> v3.18
 =======
 									\
 >>>>>>> v3.18
@@ -230,7 +280,10 @@ ssize_t batadv_show_##_name(struct kobject *kobj,			\
 			   batadv_store_##_name)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BATADV_ATTR_VLAN_STORE_BOOL(_name, _post_func)			\
 ssize_t batadv_store_vlan_##_name(struct kobject *kobj,			\
 				  struct attribute *attr, char *buff,	\
@@ -268,6 +321,9 @@ ssize_t batadv_show_vlan_##_name(struct kobject *kobj,			\
 	static BATADV_ATTR_VLAN_SHOW_BOOL(_name)			\
 	static BATADV_ATTR_VLAN(_name, _mode, batadv_show_vlan_##_name,	\
 				batadv_store_vlan_##_name)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int batadv_store_bool_attr(char *buff, size_t count,
@@ -378,6 +434,7 @@ __batadv_store_uint_attr(const char *buff, size_t count,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t batadv_show_vis_mode(struct kobject *kobj,
 				    struct attribute *attr, char *buff)
 {
@@ -448,10 +505,13 @@ static ssize_t batadv_store_vis_mode(struct kobject *kobj,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static ssize_t batadv_show_bat_algo(struct kobject *kobj,
 				    struct attribute *attr, char *buff)
 {
 	struct batadv_priv *bat_priv = batadv_kobj_to_batpriv(kobj);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return sprintf(buff, "%s\n", bat_priv->bat_algo_ops->name);
 }
@@ -461,6 +521,8 @@ static void batadv_post_gw_deselect(struct net_device *net_dev)
 	struct batadv_priv *bat_priv = netdev_priv(net_dev);
 	batadv_gw_deselect(bat_priv);
 =======
+=======
+>>>>>>> v3.18
 
 	return sprintf(buff, "%s\n", bat_priv->bat_algo_ops->name);
 }
@@ -470,6 +532,9 @@ static void batadv_post_gw_reselect(struct net_device *net_dev)
 	struct batadv_priv *bat_priv = netdev_priv(net_dev);
 
 	batadv_gw_reselect(bat_priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -547,9 +612,12 @@ static ssize_t batadv_store_gw_mode(struct kobject *kobj,
 		    curr_gw_mode_str, buff);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	batadv_gw_deselect(bat_priv);
 	atomic_set(&bat_priv->gw_mode, (unsigned int)gw_mode_tmp);
 =======
+=======
+>>>>>>> v3.18
 	/* Invoking batadv_gw_reselect() is not enough to really de-select the
 	 * current GW. It will only instruct the gateway client code to perform
 	 * a re-election the next time that this is needed.
@@ -566,6 +634,9 @@ static ssize_t batadv_store_gw_mode(struct kobject *kobj,
 	batadv_gw_check_client_stop(bat_priv);
 	atomic_set(&bat_priv->gw_mode, (unsigned int)gw_mode_tmp);
 	batadv_gw_tvlv_container_update(bat_priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return count;
 }
@@ -574,6 +645,7 @@ static ssize_t batadv_show_gw_bwidth(struct kobject *kobj,
 				     struct attribute *attr, char *buff)
 {
 	struct batadv_priv *bat_priv = batadv_kobj_to_batpriv(kobj);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int down, up;
 	int gw_bandwidth = atomic_read(&bat_priv->gw_bandwidth);
@@ -585,6 +657,8 @@ static ssize_t batadv_show_gw_bwidth(struct kobject *kobj,
 		       (up > 2048 ? up / 1024 : up),
 		       (up > 2048 ? "MBit" : "KBit"));
 =======
+=======
+>>>>>>> v3.18
 	uint32_t down, up;
 
 	down = atomic_read(&bat_priv->gw.bandwidth_down);
@@ -592,6 +666,9 @@ static ssize_t batadv_show_gw_bwidth(struct kobject *kobj,
 
 	return sprintf(buff, "%u.%u/%u.%u MBit\n", down / 10,
 		       down % 10, up / 10, up % 10);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -608,7 +685,10 @@ static ssize_t batadv_store_gw_bwidth(struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * batadv_show_isolation_mark - print the current isolation mark/mask
  * @kobj: kobject representing the private mesh sysfs directory
@@ -677,6 +757,9 @@ static ssize_t batadv_store_isolation_mark(struct kobject *kobj,
 	return count;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 BATADV_ATTR_SIF_BOOL(aggregated_ogms, S_IRUGO | S_IWUSR, NULL);
 BATADV_ATTR_SIF_BOOL(bonding, S_IRUGO | S_IWUSR, NULL);
@@ -685,6 +768,7 @@ BATADV_ATTR_SIF_BOOL(bridge_loop_avoidance, S_IRUGO | S_IWUSR, NULL);
 #endif
 #ifdef CONFIG_BATMAN_ADV_DAT
 <<<<<<< HEAD
+<<<<<<< HEAD
 BATADV_ATTR_SIF_BOOL(distributed_arp_table, S_IRUGO | S_IWUSR, NULL);
 #endif
 BATADV_ATTR_SIF_BOOL(fragmentation, S_IRUGO | S_IWUSR, batadv_update_min_mtu);
@@ -692,10 +776,15 @@ BATADV_ATTR_SIF_BOOL(ap_isolation, S_IRUGO | S_IWUSR, NULL);
 static BATADV_ATTR(vis_mode, S_IRUGO | S_IWUSR, batadv_show_vis_mode,
 		   batadv_store_vis_mode);
 =======
+=======
+>>>>>>> v3.18
 BATADV_ATTR_SIF_BOOL(distributed_arp_table, S_IRUGO | S_IWUSR,
 		     batadv_dat_status_update);
 #endif
 BATADV_ATTR_SIF_BOOL(fragmentation, S_IRUGO | S_IWUSR, batadv_update_min_mtu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static BATADV_ATTR(routing_algo, S_IRUGO, batadv_show_bat_algo, NULL);
 static BATADV_ATTR(gw_mode, S_IRUGO | S_IWUSR, batadv_show_gw_mode,
@@ -706,30 +795,42 @@ BATADV_ATTR_SIF_UINT(hop_penalty, S_IRUGO | S_IWUSR, 0, BATADV_TQ_MAX_VALUE,
 		     NULL);
 BATADV_ATTR_SIF_UINT(gw_sel_class, S_IRUGO | S_IWUSR, 1, BATADV_TQ_MAX_VALUE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     batadv_post_gw_deselect);
 static BATADV_ATTR(gw_bandwidth, S_IRUGO | S_IWUSR, batadv_show_gw_bwidth,
 		   batadv_store_gw_bwidth);
 =======
+=======
+>>>>>>> v3.18
 		     batadv_post_gw_reselect);
 static BATADV_ATTR(gw_bandwidth, S_IRUGO | S_IWUSR, batadv_show_gw_bwidth,
 		   batadv_store_gw_bwidth);
 #ifdef CONFIG_BATMAN_ADV_MCAST
 BATADV_ATTR_SIF_BOOL(multicast_mode, S_IRUGO | S_IWUSR, NULL);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_BATMAN_ADV_DEBUG
 BATADV_ATTR_SIF_UINT(log_level, S_IRUGO | S_IWUSR, 0, BATADV_DBG_ALL, NULL);
 #endif
 #ifdef CONFIG_BATMAN_ADV_NC
 <<<<<<< HEAD
+<<<<<<< HEAD
 BATADV_ATTR_SIF_BOOL(network_coding, S_IRUGO | S_IWUSR, NULL);
 #endif
 =======
+=======
+>>>>>>> v3.18
 BATADV_ATTR_SIF_BOOL(network_coding, S_IRUGO | S_IWUSR,
 		     batadv_nc_status_update);
 #endif
 static BATADV_ATTR(isolation_mark, S_IRUGO | S_IWUSR,
 		   batadv_show_isolation_mark, batadv_store_isolation_mark);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct batadv_attribute *batadv_mesh_attrs[] = {
@@ -742,14 +843,20 @@ static struct batadv_attribute *batadv_mesh_attrs[] = {
 	&batadv_attr_distributed_arp_table,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&batadv_attr_fragmentation,
 	&batadv_attr_ap_isolation,
 	&batadv_attr_vis_mode,
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_BATMAN_ADV_MCAST
 	&batadv_attr_multicast_mode,
 #endif
 	&batadv_attr_fragmentation,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&batadv_attr_routing_algo,
 	&batadv_attr_gw_mode,
@@ -764,7 +871,10 @@ static struct batadv_attribute *batadv_mesh_attrs[] = {
 	&batadv_attr_network_coding,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	&batadv_attr_isolation_mark,
 	NULL,
 };
@@ -776,6 +886,9 @@ BATADV_ATTR_VLAN_BOOL(ap_isolation, S_IRUGO | S_IWUSR, NULL);
  */
 static struct batadv_attribute *batadv_vlan_attrs[] = {
 	&batadv_attr_vlan_ap_isolation,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NULL,
 };
@@ -831,7 +944,10 @@ void batadv_sysfs_del_meshif(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * batadv_sysfs_add_vlan - add all the needed sysfs objects for the new vlan
  * @dev: netdev of the mesh interface
@@ -906,6 +1022,9 @@ void batadv_sysfs_del_vlan(struct batadv_priv *bat_priv,
 	vlan->kobj = NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t batadv_show_mesh_iface(struct kobject *kobj,
 				      struct attribute *attr, char *buff)
@@ -1083,6 +1202,7 @@ int batadv_throw_uevent(struct batadv_priv *bat_priv, enum batadv_uev_type type,
 	bat_kobj = &bat_priv->soft_iface->dev.kobj;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uevent_env[0] = kmalloc(strlen(BATADV_UEV_TYPE_VAR) +
 				strlen(batadv_uev_type_str[type]) + 1,
 				GFP_ATOMIC);
@@ -1110,6 +1230,8 @@ int batadv_throw_uevent(struct batadv_priv *bat_priv, enum batadv_uev_type type,
 
 		sprintf(uevent_env[2], "%s%s", BATADV_UEV_DATA_VAR, data);
 =======
+=======
+>>>>>>> v3.18
 	uevent_env[0] = kasprintf(GFP_ATOMIC,
 				  "%s%s", BATADV_UEV_TYPE_VAR,
 				  batadv_uev_type_str[type]);
@@ -1128,6 +1250,9 @@ int batadv_throw_uevent(struct batadv_priv *bat_priv, enum batadv_uev_type type,
 					  "%s%s", BATADV_UEV_DATA_VAR, data);
 		if (!uevent_env[2])
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

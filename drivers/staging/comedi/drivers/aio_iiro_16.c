@@ -15,10 +15,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -38,10 +41,16 @@ Configuration Options:
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../comedidev.h"
 #include <linux/ioport.h>
 
 #define AIO_IIRO_16_SIZE	0x08
+=======
+#include <linux/module.h>
+#include "../comedidev.h"
+
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 #include "../comedidev.h"
@@ -59,9 +68,13 @@ static int aio_iiro_16_dio_insn_bits_write(struct comedi_device *dev,
 					   unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data[0]) {
 		s->state &= ~data[0];
 		s->state |= data[0] & data[1];
+=======
+	if (comedi_dio_update_state(s, data)) {
+>>>>>>> v3.18
 =======
 	if (comedi_dio_update_state(s, data)) {
 >>>>>>> v3.18
@@ -94,7 +107,11 @@ static int aio_iiro_16_attach(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = comedi_request_region(dev, it->options[0], AIO_IIRO_16_SIZE);
+=======
+	ret = comedi_request_region(dev, it->options[0], 0x8);
+>>>>>>> v3.18
 =======
 	ret = comedi_request_region(dev, it->options[0], 0x8);
 >>>>>>> v3.18
@@ -122,7 +139,11 @@ static int aio_iiro_16_attach(struct comedi_device *dev,
 	s->insn_bits = aio_iiro_16_dio_insn_bits_read;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

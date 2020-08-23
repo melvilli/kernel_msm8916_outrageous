@@ -476,7 +476,11 @@ static void bcm63xx_cb_exit(struct pci_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(bcm63xx_cb_table) = {
+=======
+static const struct pci_device_id bcm63xx_cb_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id bcm63xx_cb_table[] = {
 >>>>>>> v3.18

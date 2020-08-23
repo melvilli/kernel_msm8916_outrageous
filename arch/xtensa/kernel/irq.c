@@ -5,7 +5,11 @@
  * from i386.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2002 - 2006 Tensilica, Inc.
+=======
+ * Copyright (C) 2002 - 2013 Tensilica, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2002 - 2013 Tensilica, Inc.
 >>>>>>> v3.18
@@ -22,6 +26,7 @@
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 #include <linux/kernel_stat.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/irqdomain.h>
 #include <linux/of.h>
@@ -46,6 +51,8 @@ asmlinkage void do_IRQ(int hwirq, struct pt_regs *regs)
 	struct pt_regs *old_regs = set_irq_regs(regs);
 	int irq = irq_find_mapping(root_domain, hwirq);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/irqchip.h>
 #include <linux/irqchip/xtensa-mx.h>
 #include <linux/irqchip/xtensa-pic.h>
@@ -61,6 +68,9 @@ atomic_t irq_err_count;
 asmlinkage void do_IRQ(int hwirq, struct pt_regs *regs)
 {
 	int irq = irq_find_mapping(NULL, hwirq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (hwirq >= NR_IRQS) {
@@ -69,8 +79,11 @@ asmlinkage void do_IRQ(int hwirq, struct pt_regs *regs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_enter();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_DEBUG_STACKOVERFLOW
@@ -88,9 +101,12 @@ asmlinkage void do_IRQ(int hwirq, struct pt_regs *regs)
 #endif
 	generic_handle_irq(irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	irq_exit();
 	set_irq_regs(old_regs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -98,6 +114,12 @@ asmlinkage void do_IRQ(int hwirq, struct pt_regs *regs)
 int arch_show_interrupts(struct seq_file *p, int prec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SMP
+	show_ipi_list(p, prec);
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_SMP
 	show_ipi_list(p, prec);
@@ -108,6 +130,7 @@ int arch_show_interrupts(struct seq_file *p, int prec)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void xtensa_irq_mask(struct irq_data *d)
 {
@@ -180,6 +203,8 @@ static int xtensa_irq_map(struct irq_domain *d, unsigned int irq,
 
 		irq_set_chip_and_handler_name(irq, &xtensa_irq_chip,
 =======
+=======
+>>>>>>> v3.18
 int xtensa_irq_domain_xlate(const u32 *intspec, unsigned int intsize,
 		unsigned long int_irq, unsigned long ext_irq,
 		unsigned long *out_hwirq, unsigned int *out_type)
@@ -224,6 +249,9 @@ int xtensa_irq_map(struct irq_domain *d, unsigned int irq,
 	} else {/* XCHAL_INTTYPE_MASK_WRITE_ERROR */
 		/* XCHAL_INTTYPE_MASK_NMI */
 		irq_set_chip_and_handler_name(irq, irq_chip,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				handle_level_irq, "level");
 		irq_set_status_flags(irq, IRQ_LEVEL);
@@ -232,7 +260,11 @@ int xtensa_irq_map(struct irq_domain *d, unsigned int irq,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned map_ext_irq(unsigned ext_irq)
+=======
+unsigned xtensa_map_ext_irq(unsigned ext_irq)
+>>>>>>> v3.18
 =======
 unsigned xtensa_map_ext_irq(unsigned ext_irq)
 >>>>>>> v3.18
@@ -248,6 +280,7 @@ unsigned xtensa_map_ext_irq(unsigned ext_irq)
 	return XCHAL_NUM_INTERRUPTS;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Device Tree IRQ specifier translation function which works with one or
@@ -302,6 +335,8 @@ void __init init_IRQ(void)
 	variant_init_irq();
 }
 =======
+=======
+>>>>>>> v3.18
 unsigned xtensa_get_ext_irq_no(unsigned irq)
 {
 	unsigned mask = (XCHAL_INTTYPE_MASK_EXTERN_EDGE |
@@ -360,4 +395,7 @@ void migrate_irqs(void)
 	}
 }
 #endif /* CONFIG_HOTPLUG_CPU */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

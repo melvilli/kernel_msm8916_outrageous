@@ -213,6 +213,7 @@
 
 #ifdef __KERNEL__
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * early_idt_handler_array is an array of entry points referenced in the
@@ -227,11 +228,16 @@
 
 extern const char early_idt_handler_array[NUM_EXCEPTION_VECTORS][EARLY_IDT_HANDLER_SIZE];
 =======
+=======
+>>>>>>> v3.18
 #ifndef __ASSEMBLY__
 extern const char early_idt_handlers[NUM_EXCEPTION_VECTORS][2+2+5];
 #ifdef CONFIG_TRACING
 #define trace_early_idt_handlers early_idt_handlers
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

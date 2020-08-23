@@ -18,6 +18,10 @@
 #include <asm/spr-regs.h>
 #include <asm/cmpxchg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -34,6 +38,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Atomic operations are already serializing */
 #define smp_mb__before_atomic_dec()	barrier()
 #define smp_mb__after_atomic_dec()	barrier()
@@ -42,6 +47,10 @@
 
 #define ATOMIC_INIT(i)		{ (i) }
 #define atomic_read(v)		(*(volatile int *)&(v)->counter)
+=======
+#define ATOMIC_INIT(i)		{ (i) }
+#define atomic_read(v)		ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 =======
 #define ATOMIC_INIT(i)		{ (i) }
 #define atomic_read(v)		ACCESS_ONCE((v)->counter)

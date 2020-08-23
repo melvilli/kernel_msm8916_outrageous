@@ -24,6 +24,10 @@
 #include <linux/platform_device.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -48,6 +52,7 @@
 #include <mach/regs-gpio.h>
 #include <mach/regs-lcd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <plat/clock.h>
 #include <plat/cpu.h>
@@ -55,11 +60,16 @@
 #include <plat/pm.h>
 #include <plat/regs-serial.h>
 =======
+=======
+>>>>>>> v3.18
 #include <mach/gpio-samsung.h>
 
 #include <plat/cpu.h>
 #include <plat/devs.h>
 #include <plat/pm.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <plat/samsung-time.h>
 
@@ -191,7 +201,10 @@ static void __init rx3715_map_io(void)
 {
 	s3c24xx_init_io(rx3715_iodesc, ARRAY_SIZE(rx3715_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(16934000);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s3c24xx_init_uarts(rx3715_uartcfgs, ARRAY_SIZE(rx3715_uartcfgs));
@@ -199,13 +212,19 @@ static void __init rx3715_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init rx3715_init_time(void)
 {
 	s3c2440_init_clocks(16934000);
 	samsung_timer_init();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* H1940 and RX3715 need to reserve this for suspend */
 static void __init rx3715_reserve(void)
@@ -234,8 +253,12 @@ MACHINE_START(RX3715, "IPAQ-RX3715")
 	.init_irq	= s3c2440_init_irq,
 	.init_machine	= rx3715_init_machine,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= samsung_timer_init,
 	.restart	= s3c244x_restart,
+=======
+	.init_time	= rx3715_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= rx3715_init_time,
 >>>>>>> v3.18

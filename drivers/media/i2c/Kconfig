@@ -197,7 +197,11 @@ config VIDEO_ADV7183
 config VIDEO_ADV7604
 	tristate "Analog Devices ADV7604 decoder"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIDEO_V4L2 && I2C && VIDEO_V4L2_SUBDEV_API
+=======
+	depends on VIDEO_V4L2 && I2C && VIDEO_V4L2_SUBDEV_API && MEDIA_CONTROLLER
+>>>>>>> v3.18
 =======
 	depends on VIDEO_V4L2 && I2C && VIDEO_V4L2_SUBDEV_API && MEDIA_CONTROLLER
 >>>>>>> v3.18
@@ -211,7 +215,10 @@ config VIDEO_ADV7604
 	  module will be called adv7604.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config VIDEO_ADV7842
 	tristate "Analog Devices ADV7842 decoder"
 	depends on VIDEO_V4L2 && I2C && VIDEO_V4L2_SUBDEV_API && MEDIA_CONTROLLER
@@ -224,6 +231,9 @@ config VIDEO_ADV7842
 	  To compile this driver as a module, choose M here: the
 	  module will be called adv7842.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config VIDEO_BT819
 	tristate "BT819A VideoStream decoder"
@@ -265,7 +275,10 @@ config VIDEO_KS0127
 	  module will be called ks0127.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config VIDEO_ML86V7667
 	tristate "OKI ML86V7667 video decoder"
 	depends on VIDEO_V4L2 && I2C
@@ -275,6 +288,9 @@ config VIDEO_ML86V7667
 	  To compile this driver as a module, choose M here: the
 	  module will be called ml86v7667.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config VIDEO_SAA7110
 	tristate "Philips SAA7110 video decoder"
@@ -440,7 +456,10 @@ config VIDEO_ADV7393
 	  module will be called adv7393.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config VIDEO_ADV7511
 	tristate "Analog Devices ADV7511 encoder"
 	depends on VIDEO_V4L2 && I2C && VIDEO_V4L2_SUBDEV_API && MEDIA_CONTROLLER
@@ -452,6 +471,9 @@ config VIDEO_ADV7511
 	  To compile this driver as a module, choose M here: the
 	  module will be called adv7511.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config VIDEO_AD9389B
 	tristate "Analog Devices AD9389B encoder"
@@ -471,7 +493,10 @@ config VIDEO_AK881X
 	  Video output driver for AKM AK8813 and AK8814 TV encoders
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config VIDEO_THS8200
 	tristate "Texas Instruments THS8200 video encoder"
 	depends on VIDEO_V4L2 && I2C
@@ -481,6 +506,9 @@ config VIDEO_THS8200
 	  To compile this driver as a module, choose M here: the
 	  module will be called ths8200.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 comment "Camera sensor devices"
 
@@ -568,6 +596,10 @@ config VIDEO_MT9V032
 	depends on I2C && VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
 	depends on MEDIA_CAMERA_SUPPORT
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select REGMAP_I2C
+>>>>>>> v3.18
 =======
 	select REGMAP_I2C
 >>>>>>> v3.18
@@ -575,6 +607,7 @@ config VIDEO_MT9V032
 	  This is a Video4Linux2 sensor-level driver for the Micron
 	  MT9V032 752x480 CMOS sensor.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config VIDEO_TCM825X
 	tristate "TCM825x camera sensor support"
@@ -584,6 +617,8 @@ config VIDEO_TCM825X
 	  This is a driver for the Toshiba TCM825x VGA camera sensor.
 	  It is used for example in Nokia N800.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config VIDEO_SR030PC30
@@ -611,11 +646,14 @@ config VIDEO_S5K6AA
 	  camera sensor with an embedded SoC image signal processor.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config VIDEO_S5K4ECGX
         tristate "Samsung S5K4ECGX sensor support"
         depends on I2C && VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
 	select CRC32
 =======
+=======
+>>>>>>> v3.18
 config VIDEO_S5K6A3
 	tristate "Samsung S5K6A3 sensor support"
 	depends on MEDIA_CAMERA_SUPPORT
@@ -627,13 +665,19 @@ config VIDEO_S5K6A3
 config VIDEO_S5K4ECGX
         tristate "Samsung S5K4ECGX sensor support"
         depends on I2C && VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
         ---help---
           This is a V4L2 sensor-level driver for Samsung S5K4ECGX 5M
           camera sensor with an embedded SoC image signal processor.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config VIDEO_S5K5BAF
 	tristate "Samsung S5K5BAF sensor support"
 	depends on I2C && VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
@@ -641,6 +685,9 @@ config VIDEO_S5K5BAF
 	  This is a V4L2 sensor-level driver for Samsung S5K5BAF 2M
 	  camera sensor with an embedded SoC image signal processor.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "drivers/media/i2c/smiapp/Kconfig"
 
@@ -670,7 +717,10 @@ config VIDEO_AS3645A
 	  build in control for flash, torch and indicator LEDs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config VIDEO_LM3560
 	tristate "LM3560 dual flash driver support"
 	depends on I2C && VIDEO_V4L2 && MEDIA_CONTROLLER
@@ -689,6 +739,9 @@ config VIDEO_LM3646
 	  This is a driver for the lm3646 dual flash controllers. It controls
 	  flash, torch LEDs.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 comment "Video improvement chips"
 
@@ -716,8 +769,11 @@ config VIDEO_UPD64083
 	  module will be called upd64083.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 comment "Miscelaneous helper chips"
 =======
+=======
+>>>>>>> v3.18
 comment "Audio/Video compression chips"
 
 config VIDEO_SAA6752HS
@@ -732,6 +788,9 @@ config VIDEO_SAA6752HS
 	  module will be called saa6752hs.
 
 comment "Miscellaneous helper chips"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config VIDEO_THS7303

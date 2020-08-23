@@ -355,13 +355,19 @@
 #define __NR_kcmp		347
 #define __NR_finit_module	348
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define __NR_sched_setattr	349
 #define __NR_sched_getattr	350
 #define __NR_renameat2		351
 #define __NR_getrandom		352
 #define __NR_memfd_create	353
 #define __NR_bpf		354
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UAPI_ASM_M68K_UNISTD_H_ */

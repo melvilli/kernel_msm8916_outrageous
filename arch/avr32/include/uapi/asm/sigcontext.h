@@ -6,8 +6,13 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_AVR32_SIGCONTEXT_H
 #define __ASM_AVR32_SIGCONTEXT_H
+=======
+#ifndef _UAPI__ASM_AVR32_SIGCONTEXT_H
+#define _UAPI__ASM_AVR32_SIGCONTEXT_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI__ASM_AVR32_SIGCONTEXT_H
 #define _UAPI__ASM_AVR32_SIGCONTEXT_H
@@ -37,7 +42,11 @@ struct sigcontext {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_AVR32_SIGCONTEXT_H */
+=======
+#endif /* _UAPI__ASM_AVR32_SIGCONTEXT_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI__ASM_AVR32_SIGCONTEXT_H */
 >>>>>>> v3.18

@@ -45,13 +45,19 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MAC80211_MESH_CSA_DEBUG
 #define MAC80211_MESH_CSA_DEBUG 1
 #else
 #define MAC80211_MESH_CSA_DEBUG 0
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_MAC80211_MESH_PS_DEBUG
 #define MAC80211_MESH_PS_DEBUG 1
@@ -167,11 +173,17 @@ do {									\
 		   sdata, fmt, ##__VA_ARGS__)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define mcsa_dbg(sdata, fmt, ...)					\
 	_sdata_dbg(MAC80211_MESH_CSA_DEBUG,				\
 		   sdata, fmt, ##__VA_ARGS__)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define mps_dbg(sdata, fmt, ...)					\
 	_sdata_dbg(MAC80211_MESH_PS_DEBUG,				\

@@ -12,6 +12,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -24,6 +25,8 @@
  * 02110-1301 USA
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  */
 
 #ifndef OMAP3_ISP_VIDEO_H
@@ -34,8 +37,12 @@
 #include <media/v4l2-dev.h>
 #include <media/v4l2-fh.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "ispqueue.h"
+=======
+#include <media/videobuf2-core.h>
+>>>>>>> v3.18
 =======
 #include <media/videobuf2-core.h>
 >>>>>>> v3.18
@@ -97,6 +104,10 @@ enum isp_pipeline_state {
 /*
  * struct isp_pipeline - An ISP hardware pipeline
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @field: The field being processed by the pipeline
+>>>>>>> v3.18
 =======
  * @field: The field being processed by the pipeline
 >>>>>>> v3.18
@@ -114,6 +125,10 @@ struct isp_pipeline {
 	unsigned long l3_ick;
 	unsigned int max_rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum v4l2_field field;
+>>>>>>> v3.18
 =======
 	enum v4l2_field field;
 >>>>>>> v3.18
@@ -140,6 +155,7 @@ static inline int isp_pipeline_ready(struct isp_pipeline *pipe)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * struct isp_buffer - ISP buffer
  * @buffer: ISP video buffer
@@ -152,6 +168,8 @@ struct isp_buffer {
 
 #define to_isp_buffer(buf)	container_of(buf, struct isp_buffer, buffer)
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct isp_buffer - ISP video buffer
  * @vb: videobuf2 buffer
@@ -165,6 +183,9 @@ struct isp_buffer {
 };
 
 #define to_isp_buffer(buf)	container_of(buf, struct isp_buffer, vb)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum isp_video_dmaqueue_flags {
@@ -204,6 +225,7 @@ struct isp_video {
 	unsigned int bpl_padding;	/* padding at end of line */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Entity video node streaming */
 	unsigned int streaming:1;
 
@@ -214,6 +236,8 @@ struct isp_video {
 	/* Video buffers queue */
 	struct isp_video_queue *queue;
 =======
+=======
+>>>>>>> v3.18
 	/* Pipeline state */
 	struct isp_pipeline pipe;
 	struct mutex stream_lock;	/* pipeline and stream states */
@@ -224,6 +248,9 @@ struct isp_video {
 	struct vb2_queue *queue;
 	struct mutex queue_lock;	/* protects the queue */
 	spinlock_t irqlock;		/* protects dmaqueue */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head dmaqueue;
 	enum isp_video_dmaqueue_flags dmaqueue_flags;
@@ -237,7 +264,11 @@ struct isp_video_fh {
 	struct v4l2_fh vfh;
 	struct isp_video *video;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct isp_video_queue queue;
+=======
+	struct vb2_queue queue;
+>>>>>>> v3.18
 =======
 	struct vb2_queue queue;
 >>>>>>> v3.18
@@ -256,6 +287,10 @@ int omap3isp_video_register(struct isp_video *video,
 void omap3isp_video_unregister(struct isp_video *video);
 struct isp_buffer *omap3isp_video_buffer_next(struct isp_video *video);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void omap3isp_video_cancel_stream(struct isp_video *video);
+>>>>>>> v3.18
 =======
 void omap3isp_video_cancel_stream(struct isp_video *video);
 >>>>>>> v3.18

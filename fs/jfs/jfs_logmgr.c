@@ -168,7 +168,11 @@ do {						\
  */
 static LIST_HEAD(jfs_external_logs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct jfs_log *dummy_log = NULL;
+=======
+static struct jfs_log *dummy_log;
+>>>>>>> v3.18
 =======
 static struct jfs_log *dummy_log;
 >>>>>>> v3.18
@@ -1590,7 +1594,10 @@ void jfs_flush_journal(struct jfs_log *log, int wait)
 		LOGGC_UNLOCK(log);
 		schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		LOGGC_LOCK(log);
@@ -2006,7 +2013,11 @@ static int lbmRead(struct jfs_log * log, int pn, struct lbuf ** bpp)
 	bio = bio_alloc(GFP_NOFS, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_sector = bp->l_blkno << (log->l2bsize - 9);
+=======
+	bio->bi_iter.bi_sector = bp->l_blkno << (log->l2bsize - 9);
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_sector = bp->l_blkno << (log->l2bsize - 9);
 >>>>>>> v3.18
@@ -2017,7 +2028,11 @@ static int lbmRead(struct jfs_log * log, int pn, struct lbuf ** bpp)
 
 	bio->bi_vcnt = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_size = LOGPSIZE;
+=======
+	bio->bi_iter.bi_size = LOGPSIZE;
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_size = LOGPSIZE;
 >>>>>>> v3.18
@@ -2027,7 +2042,11 @@ static int lbmRead(struct jfs_log * log, int pn, struct lbuf ** bpp)
 	/*check if journaling to disk has been disabled*/
 	if (log->no_integrity) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio->bi_size = 0;
+=======
+		bio->bi_iter.bi_size = 0;
+>>>>>>> v3.18
 =======
 		bio->bi_iter.bi_size = 0;
 >>>>>>> v3.18
@@ -2164,7 +2183,11 @@ static void lbmStartIO(struct lbuf * bp)
 
 	bio = bio_alloc(GFP_NOFS, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_sector = bp->l_blkno << (log->l2bsize - 9);
+=======
+	bio->bi_iter.bi_sector = bp->l_blkno << (log->l2bsize - 9);
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_sector = bp->l_blkno << (log->l2bsize - 9);
 >>>>>>> v3.18
@@ -2175,7 +2198,11 @@ static void lbmStartIO(struct lbuf * bp)
 
 	bio->bi_vcnt = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_size = LOGPSIZE;
+=======
+	bio->bi_iter.bi_size = LOGPSIZE;
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_size = LOGPSIZE;
 >>>>>>> v3.18
@@ -2186,7 +2213,11 @@ static void lbmStartIO(struct lbuf * bp)
 	/* check if journaling to disk has been disabled */
 	if (log->no_integrity) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio->bi_size = 0;
+=======
+		bio->bi_iter.bi_size = 0;
+>>>>>>> v3.18
 =======
 		bio->bi_iter.bi_size = 0;
 >>>>>>> v3.18
@@ -2391,7 +2422,10 @@ int jfsIOWait(void *arg)
 			spin_unlock_irq(&log_redrive_lock);
 			schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}

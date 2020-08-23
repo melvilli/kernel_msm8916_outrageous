@@ -84,6 +84,7 @@ static ssize_t iio_bfin_tmr_frequency_store(struct device *dev,
 	struct iio_trigger *trig = to_iio_trigger(dev);
 	struct bfin_tmr_state *st = iio_trigger_get_drvdata(trig);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long val;
 	bool enabled;
 	int ret;
@@ -97,6 +98,8 @@ static ssize_t iio_bfin_tmr_frequency_store(struct device *dev,
 		goto error_ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	unsigned int val;
 	bool enabled;
 	int ret;
@@ -107,6 +110,9 @@ static ssize_t iio_bfin_tmr_frequency_store(struct device *dev,
 
 	if (val > 100000)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	enabled = get_enabled_gptimers() & st->t->bit;
@@ -114,6 +120,7 @@ static ssize_t iio_bfin_tmr_frequency_store(struct device *dev,
 	if (enabled)
 		disable_gptimers(st->t->bit);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!val)
 		goto error_ret;
@@ -124,12 +131,17 @@ static ssize_t iio_bfin_tmr_frequency_store(struct device *dev,
 		goto error_ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (val == 0)
 		return count;
 
 	val = get_sclk() / val;
 	if (val <= 4 || val <= st->duty)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	set_gptimer_period(st->t->id, val);
@@ -139,8 +151,12 @@ static ssize_t iio_bfin_tmr_frequency_store(struct device *dev,
 		enable_gptimers(st->t->bit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_ret:
 	return ret ? ret : count;
+=======
+	return count;
+>>>>>>> v3.18
 =======
 	return count;
 >>>>>>> v3.18
@@ -186,7 +202,11 @@ static irqreturn_t iio_bfin_tmr_trigger_isr(int irq, void *devid)
 
 	clear_gptimer_intr(st->t->id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_trigger_poll(st->trig, 0);
+=======
+	iio_trigger_poll(st->trig);
+>>>>>>> v3.18
 =======
 	iio_trigger_poll(st->trig);
 >>>>>>> v3.18
@@ -218,6 +238,7 @@ static int iio_bfin_tmr_trigger_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st = kzalloc(sizeof(*st), GFP_KERNEL);
 	if (st == NULL) {
 		ret = -ENOMEM;
@@ -228,13 +249,22 @@ static int iio_bfin_tmr_trigger_probe(struct platform_device *pdev)
 	if (st == NULL)
 		return -ENOMEM;
 >>>>>>> v3.18
+=======
+	st = devm_kzalloc(&pdev->dev, sizeof(*st), GFP_KERNEL);
+	if (st == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 
 	st->irq = platform_get_irq(pdev, 0);
 	if (!st->irq) {
 		dev_err(&pdev->dev, "No IRQs specified");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENODEV;
 		goto out1;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -243,7 +273,11 @@ static int iio_bfin_tmr_trigger_probe(struct platform_device *pdev)
 	ret = iio_bfin_tmr_get_number(st->irq);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out1;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -253,10 +287,15 @@ static int iio_bfin_tmr_trigger_probe(struct platform_device *pdev)
 
 	st->trig = iio_trigger_alloc("bfintmr%d", st->timer_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!st->trig) {
 		ret = -ENOMEM;
 		goto out1;
 	}
+=======
+	if (!st->trig)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!st->trig)
 		return -ENOMEM;
@@ -268,7 +307,11 @@ static int iio_bfin_tmr_trigger_probe(struct platform_device *pdev)
 	ret = iio_trigger_register(st->trig);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out2;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -279,7 +322,11 @@ static int iio_bfin_tmr_trigger_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev,
 			"request IRQ-%d failed", st->irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out4;
+=======
+		goto out1;
+>>>>>>> v3.18
 =======
 		goto out1;
 >>>>>>> v3.18
@@ -323,6 +370,7 @@ static int iio_bfin_tmr_trigger_probe(struct platform_device *pdev)
 out_free_irq:
 	free_irq(st->irq, st);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out4:
 	iio_trigger_unregister(st->trig);
 out2:
@@ -331,10 +379,15 @@ out1:
 	kfree(st);
 out:
 =======
+=======
+>>>>>>> v3.18
 out1:
 	iio_trigger_unregister(st->trig);
 out:
 	iio_trigger_put(st->trig);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -350,7 +403,10 @@ static int iio_bfin_tmr_trigger_remove(struct platform_device *pdev)
 	iio_trigger_unregister(st->trig);
 	iio_trigger_put(st->trig);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(st);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -64,8 +64,11 @@ struct uio_port {
 #define MAX_UIO_PORT_REGIONS	5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct uio_device;
 =======
+=======
+>>>>>>> v3.18
 struct uio_device {
         struct module           *owner;
         struct device           *dev;
@@ -77,6 +80,9 @@ struct uio_device {
         struct kobject          *map_dir;
         struct kobject          *portio_dir;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**

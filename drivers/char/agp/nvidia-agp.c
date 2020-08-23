@@ -107,6 +107,10 @@ static int nvidia_configure(void)
 	int i, rc, num_dirs;
 	u32 apbase, aplimit;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phys_addr_t apbase_phys;
+>>>>>>> v3.18
 =======
 	phys_addr_t apbase_phys;
 >>>>>>> v3.18
@@ -120,9 +124,14 @@ static int nvidia_configure(void)
 		current_size->size_value);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     /* address to map to */
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &apbase);
 	apbase &= PCI_BASE_ADDRESS_MEM_MASK;
+=======
+	/* address to map to */
+	apbase = pci_bus_address(agp_bridge->dev, AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	/* address to map to */
 	apbase = pci_bus_address(agp_bridge->dev, AGP_APERTURE_BAR);
@@ -163,8 +172,14 @@ static int nvidia_configure(void)
 
 	/* map aperture */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvidia_private.aperture =
 		(volatile u32 __iomem *) ioremap(apbase, 33 * PAGE_SIZE);
+=======
+	apbase_phys = pci_resource_start(agp_bridge->dev, AGP_APERTURE_BAR);
+	nvidia_private.aperture =
+		(volatile u32 __iomem *) ioremap(apbase_phys, 33 * PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	apbase_phys = pci_resource_start(agp_bridge->dev, AGP_APERTURE_BAR);
 	nvidia_private.aperture =
@@ -415,8 +430,13 @@ static void agp_nvidia_remove(struct pci_dev *pdev)
 static int agp_nvidia_suspend(struct pci_dev *pdev, pm_message_t state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_save_state (pdev);
 	pci_set_power_state (pdev, 3);
+=======
+	pci_save_state(pdev);
+	pci_set_power_state(pdev, PCI_D3hot);
+>>>>>>> v3.18
 =======
 	pci_save_state(pdev);
 	pci_set_power_state(pdev, PCI_D3hot);
@@ -429,7 +449,11 @@ static int agp_nvidia_resume(struct pci_dev *pdev)
 {
 	/* set power state 0 and restore PCI space */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_power_state (pdev, 0);
+=======
+	pci_set_power_state(pdev, PCI_D0);
+>>>>>>> v3.18
 =======
 	pci_set_power_state(pdev, PCI_D0);
 >>>>>>> v3.18

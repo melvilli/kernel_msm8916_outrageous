@@ -31,7 +31,10 @@
 #include <media/tveeprom.h>
 #include <media/videobuf-dma-sg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/cx2341x.h>
@@ -263,12 +266,18 @@ struct cx88_input {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum cx88_audio_chip {
 	CX88_AUDIO_WM8775 = 1,
 	CX88_AUDIO_TVAUDIO,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct cx88_board {
 	const char              *name;
@@ -281,7 +290,11 @@ struct cx88_board {
 	struct cx88_input       radio;
 	enum cx88_board_type    mpeg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int            audio_chip;
+=======
+	enum cx88_audio_chip	audio_chip;
+>>>>>>> v3.18
 =======
 	enum cx88_audio_chip	audio_chip;
 >>>>>>> v3.18

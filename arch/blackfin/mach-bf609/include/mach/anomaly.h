@@ -24,17 +24,23 @@
 #define ANOMALY_16000003 (1)
 /* The EPPI Data Enable (DEN) Signal is Not Functional */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ANOMALY_16000004 (1)
 /* Using L1 Instruction Cache with Parity Enabled is Unreliable */
 #define ANOMALY_16000005 (1)
 /* SEQSTAT.SYSNMI Clears Upon Entering the NMI ISR */
 #define ANOMALY_16000006 (1)
 =======
+=======
+>>>>>>> v3.18
 #define ANOMALY_16000004 (__SILICON_REVISION__ < 1)
 /* Using L1 Instruction Cache with Parity Enabled is Unreliable */
 #define ANOMALY_16000005 (__SILICON_REVISION__ < 1)
 /* SEQSTAT.SYSNMI Clears Upon Entering the NMI ISR */
 #define ANOMALY_16000006 (__SILICON_REVISION__ < 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* DDR2 Memory Reads May Fail Intermittently */
 #define ANOMALY_16000007 (1)
@@ -58,6 +64,7 @@
 #define ANOMALY_16000017 (1)
 /* RSI Boot Cleanup Routine Does Not Clear Registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ANOMALY_16000018 (1)
 /* SPI Master Boot Device Auto-detection Frequency is Set Incorrectly */
 #define ANOMALY_16000019 (1)
@@ -72,6 +79,8 @@
 /* Interrupted Core Reads of MMRs May Cause Data Loss */
 #define ANOMALY_16000030 (1)
 =======
+=======
+>>>>>>> v3.18
 #define ANOMALY_16000018 (__SILICON_REVISION__ < 1)
 /* SPI Master Boot Device Auto-detection Frequency is Set Incorrectly */
 #define ANOMALY_16000019 (__SILICON_REVISION__ < 1)
@@ -119,6 +128,9 @@
 #define ANOMALY_16000041 (1)
 /* Instruction Cache Failure When Parity Is Enabled */
 #define ANOMALY_16000042 (__SILICON_REVISION__ == 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Anomalies that don't exist on this proc */

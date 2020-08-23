@@ -26,6 +26,11 @@
 #include <asm/oplib.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "mm_32.h"
+
+>>>>>>> v3.18
 =======
 #include "mm_32.h"
 
@@ -44,7 +49,12 @@ static void __init iounit_iommu_init(struct platform_device *op)
 {
 	struct iounit_struct *iounit;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iopte_t *xpt, *xptend;
+=======
+	iopte_t __iomem *xpt;
+	iopte_t __iomem *xptend;
+>>>>>>> v3.18
 =======
 	iopte_t __iomem *xpt;
 	iopte_t __iomem *xptend;
@@ -73,15 +83,21 @@ static void __init iounit_iommu_init(struct platform_device *op)
 	iounit->page_table = xpt;
 	spin_lock_init(&iounit->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	for (xptend = iounit->page_table + (16 * PAGE_SIZE) / sizeof(iopte_t);
 	     xpt < xptend;)
 	     	iopte_val(*xpt++) = 0;
 =======
+=======
+>>>>>>> v3.18
 
 	xptend = iounit->page_table + (16 * PAGE_SIZE) / sizeof(iopte_t);
 	for (; xpt < xptend; xpt++)
 		sbus_writel(0, xpt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -148,7 +164,11 @@ nexti:	scan = find_next_zero_bit(iounit->bmap, limit, scan);
 	for (k = 0; k < npages; k++, iopte = __iopte(iopte_val(iopte) + 0x100), scan++) {
 		set_bit(scan, iounit->bmap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iounit->page_table[scan] = iopte;
+=======
+		sbus_writel(iopte, &iounit->page_table[scan]);
+>>>>>>> v3.18
 =======
 		sbus_writel(iopte, &iounit->page_table[scan]);
 >>>>>>> v3.18
@@ -224,7 +244,11 @@ static int iounit_map_dma_area(struct device *dev, dma_addr_t *pba, unsigned lon
 	unsigned long page, end;
 	pgprot_t dvma_prot;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iopte_t *iopte;
+=======
+	iopte_t __iomem *iopte;
+>>>>>>> v3.18
 =======
 	iopte_t __iomem *iopte;
 >>>>>>> v3.18
@@ -250,8 +274,13 @@ static int iounit_map_dma_area(struct device *dev, dma_addr_t *pba, unsigned lon
 			i = ((addr - IOUNIT_DMA_BASE) >> PAGE_SHIFT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iopte = (iopte_t *)(iounit->page_table + i);
 			*iopte = MKIOPTE(__pa(page));
+=======
+			iopte = iounit->page_table + i;
+			sbus_writel(MKIOPTE(__pa(page)), iopte);
+>>>>>>> v3.18
 =======
 			iopte = iounit->page_table + i;
 			sbus_writel(MKIOPTE(__pa(page)), iopte);

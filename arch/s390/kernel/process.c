@@ -62,6 +62,7 @@ unsigned long thread_saved_pc(struct task_struct *tsk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void arch_cpu_idle(void)
 {
 	local_mcck_disable();
@@ -85,6 +86,8 @@ void arch_cpu_idle_dead(void)
 	cpu_die();
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void __kprobes kernel_thread_starter(void);
@@ -126,7 +129,10 @@ int copy_thread(unsigned long clone_flags, unsigned long new_stackp,
 	memset(&p->thread.per_event, 0, sizeof(p->thread.per_event));
 	clear_tsk_thread_flag(p, TIF_SINGLE_STEP);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_tsk_thread_flag(p, TIF_PER_TRAP);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Initialize per thread user and system timer values */
@@ -145,7 +151,11 @@ int copy_thread(unsigned long clone_flags, unsigned long new_stackp,
 		/* kernel thread */
 		memset(&frame->childregs, 0, sizeof(struct pt_regs));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		frame->childregs.psw.mask = psw_kernel_bits | PSW_MASK_DAT |
+=======
+		frame->childregs.psw.mask = PSW_KERNEL_BITS | PSW_MASK_DAT |
+>>>>>>> v3.18
 =======
 		frame->childregs.psw.mask = PSW_KERNEL_BITS | PSW_MASK_DAT |
 >>>>>>> v3.18
@@ -162,6 +172,10 @@ int copy_thread(unsigned long clone_flags, unsigned long new_stackp,
 	frame->childregs = *current_pt_regs();
 	frame->childregs.gprs[2] = 0;	/* child returns 0 on fork. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	frame->childregs.flags = 0;
+>>>>>>> v3.18
 =======
 	frame->childregs.flags = 0;
 >>>>>>> v3.18
@@ -179,7 +193,12 @@ int copy_thread(unsigned long clone_flags, unsigned long new_stackp,
 	 * the emulated registers and then copy the result to the child.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	save_fp_regs(&current->thread.fp_regs);
+=======
+	save_fp_ctl(&current->thread.fp_regs.fpc);
+	save_fp_regs(current->thread.fp_regs.fprs);
+>>>>>>> v3.18
 =======
 	save_fp_ctl(&current->thread.fp_regs.fpc);
 	save_fp_regs(current->thread.fp_regs.fprs);
@@ -192,7 +211,13 @@ int copy_thread(unsigned long clone_flags, unsigned long new_stackp,
 #else /* CONFIG_64BIT */
 	/* Save the fpu registers to new thread structure. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	save_fp_regs(&p->thread.fp_regs);
+=======
+	save_fp_ctl(&p->thread.fp_regs.fpc);
+	save_fp_regs(p->thread.fp_regs.fprs);
+	p->thread.fp_regs.pad = 0;
+>>>>>>> v3.18
 =======
 	save_fp_ctl(&p->thread.fp_regs.fpc);
 	save_fp_regs(p->thread.fp_regs.fprs);
@@ -230,17 +255,23 @@ int dump_fpu (struct pt_regs * regs, s390_fp_regs *fpregs)
 	 * the emulated registers and then copy the result to the dump.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	save_fp_regs(&current->thread.fp_regs);
 	memcpy(fpregs, &current->thread.fp_regs, sizeof(s390_fp_regs));
 #else /* CONFIG_64BIT */
 	save_fp_regs(fpregs);
 =======
+=======
+>>>>>>> v3.18
 	save_fp_ctl(&current->thread.fp_regs.fpc);
 	save_fp_regs(current->thread.fp_regs.fprs);
 	memcpy(fpregs, &current->thread.fp_regs, sizeof(s390_fp_regs));
 #else /* CONFIG_64BIT */
 	save_fp_ctl(&fpregs->fpc);
 	save_fp_regs(fpregs->fprs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_64BIT */
 	return 1;
@@ -290,21 +321,28 @@ static inline unsigned long brk_rnd(void)
 unsigned long arch_randomize_brk(struct mm_struct *mm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long ret = PAGE_ALIGN(mm->brk + brk_rnd());
 
 	if (ret < mm->brk)
 		return mm->brk;
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long ret;
 
 	ret = PAGE_ALIGN(mm->brk + brk_rnd());
 	return (ret > mm->brk) ? ret : mm->brk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 unsigned long randomize_et_dyn(unsigned long base)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long ret = PAGE_ALIGN(base + brk_rnd());
 
@@ -314,11 +352,16 @@ unsigned long randomize_et_dyn(unsigned long base)
 		return base;
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long ret;
 
 	if (!(current->flags & PF_RANDOMIZE))
 		return base;
 	ret = PAGE_ALIGN(base + brk_rnd());
 	return (ret > base) ? ret : base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -388,6 +388,9 @@ MODULE_AUTHOR("Jakob Oestergaard <jakob@unthought.net>");
 MODULE_DESCRIPTION("60xx Single Board Computer Watchdog Timer driver");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -25,7 +25,10 @@
 #include <linux/gfp.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/percpu.h>
@@ -36,8 +39,11 @@
 #include <asm/tlb.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "mmu_decl.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int is_exec_fault(void)
@@ -58,7 +64,11 @@ static inline int pte_looks_normal(pte_t pte)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct page * maybe_pte_to_page(pte_t pte)
+=======
+static struct page *maybe_pte_to_page(pte_t pte)
+>>>>>>> v3.18
 =======
 static struct page *maybe_pte_to_page(pte_t pte)
 >>>>>>> v3.18
@@ -83,7 +93,11 @@ static struct page *maybe_pte_to_page(pte_t pte)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pte_t set_pte_filter(pte_t pte, unsigned long addr)
+=======
+static pte_t set_pte_filter(pte_t pte)
+>>>>>>> v3.18
 =======
 static pte_t set_pte_filter(pte_t pte)
 >>>>>>> v3.18
@@ -96,6 +110,7 @@ static pte_t set_pte_filter(pte_t pte)
 			return pte;
 		if (!test_bit(PG_arch_1, &pg->flags)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_8xx
 			/* On 8xx, cache control instructions (particularly
 			 * "dcbst" from flush_dcache_icache) fault as write
@@ -107,6 +122,8 @@ static pte_t set_pte_filter(pte_t pte)
 			/* 8xx doesn't care about PID, size or ind args */
 			_tlbil_va(addr, 0, 0, 0);
 #endif /* CONFIG_8xx */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			flush_dcache_icache_page(pg);
@@ -129,7 +146,11 @@ static pte_t set_access_flags_filter(pte_t pte, struct vm_area_struct *vma,
  * instead we "filter out" the exec permission for non clean pages.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pte_t set_pte_filter(pte_t pte, unsigned long addr)
+=======
+static pte_t set_pte_filter(pte_t pte)
+>>>>>>> v3.18
 =======
 static pte_t set_pte_filter(pte_t pte)
 >>>>>>> v3.18
@@ -209,7 +230,11 @@ void set_pte_at(struct mm_struct *mm, unsigned long addr, pte_t *ptep,
 {
 #ifdef CONFIG_DEBUG_VM
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(pte_present(*ptep));
+=======
+	WARN_ON(pte_val(*ptep) & _PAGE_PRESENT);
+>>>>>>> v3.18
 =======
 	WARN_ON(pte_val(*ptep) & _PAGE_PRESENT);
 >>>>>>> v3.18
@@ -219,7 +244,11 @@ void set_pte_at(struct mm_struct *mm, unsigned long addr, pte_t *ptep,
 	 * is called.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte = set_pte_filter(pte, addr);
+=======
+	pte = set_pte_filter(pte);
+>>>>>>> v3.18
 =======
 	pte = set_pte_filter(pte);
 >>>>>>> v3.18
@@ -265,7 +294,10 @@ void assert_pte_locked(struct mm_struct *mm, unsigned long addr)
 	BUG_ON(pud_none(*pud));
 	pmd = pmd_offset(pud, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * khugepaged to collapse normal pages to hugepage, first set
 	 * pmd to none to force page fault/gup to take mmap_sem. After
@@ -274,6 +306,9 @@ void assert_pte_locked(struct mm_struct *mm, unsigned long addr)
 	 */
 	if (pmd_none(*pmd))
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BUG_ON(!pmd_present(*pmd));
 	assert_spin_locked(pte_lockptr(mm, pmd));

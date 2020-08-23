@@ -67,6 +67,7 @@ do_entInt(unsigned long type, unsigned long vector,
 	case 1:
 		old_regs = set_irq_regs(regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SMP
 	  {
 		long cpu;
@@ -82,6 +83,9 @@ do_entInt(unsigned long type, unsigned long vector,
 #else
 		handle_irq(RTC_IRQ);
 #endif
+=======
+		handle_irq(RTC_IRQ);
+>>>>>>> v3.18
 =======
 		handle_irq(RTC_IRQ);
 >>>>>>> v3.18
@@ -233,7 +237,11 @@ process_mcheck_info(unsigned long vector, unsigned long la_ptr,
 
 struct irqaction timer_irqaction = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handler	= timer_interrupt,
+=======
+	.handler	= rtc_timer_interrupt,
+>>>>>>> v3.18
 =======
 	.handler	= rtc_timer_interrupt,
 >>>>>>> v3.18
@@ -245,7 +253,11 @@ init_rtc_irq(void)
 {
 	irq_set_chip_and_handler_name(RTC_IRQ, &dummy_irq_chip,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      handle_simple_irq, "RTC");
+=======
+				      handle_percpu_irq, "RTC");
+>>>>>>> v3.18
 =======
 				      handle_percpu_irq, "RTC");
 >>>>>>> v3.18

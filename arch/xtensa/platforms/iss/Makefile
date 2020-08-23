@@ -5,7 +5,12 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y			= console.o setup.o
+=======
+obj-y			= setup.o
+obj-$(CONFIG_TTY)	+= console.o
+>>>>>>> v3.18
 =======
 obj-y			= setup.o
 obj-$(CONFIG_TTY)	+= console.o

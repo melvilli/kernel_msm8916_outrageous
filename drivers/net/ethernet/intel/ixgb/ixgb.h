@@ -34,7 +34,10 @@
 #include <linux/types.h>
 #include <asm/byteorder.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mm.h>
@@ -191,6 +194,7 @@ enum ixgb_state_t {
 
 /* Exported from other modules */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ixgb_check_options(struct ixgb_adapter *adapter);
 extern void ixgb_set_ethtool_ops(struct net_device *netdev);
 extern char ixgb_driver_name[];
@@ -207,6 +211,8 @@ extern void ixgb_free_rx_resources(struct ixgb_adapter *adapter);
 extern void ixgb_free_tx_resources(struct ixgb_adapter *adapter);
 extern void ixgb_update_stats(struct ixgb_adapter *adapter);
 =======
+=======
+>>>>>>> v3.18
 void ixgb_check_options(struct ixgb_adapter *adapter);
 void ixgb_set_ethtool_ops(struct net_device *netdev);
 extern char ixgb_driver_name[];
@@ -222,6 +228,9 @@ int ixgb_setup_tx_resources(struct ixgb_adapter *adapter);
 void ixgb_free_rx_resources(struct ixgb_adapter *adapter);
 void ixgb_free_tx_resources(struct ixgb_adapter *adapter);
 void ixgb_update_stats(struct ixgb_adapter *adapter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

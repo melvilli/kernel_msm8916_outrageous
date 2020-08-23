@@ -67,7 +67,11 @@
 
 #define MAJ 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MIN 1
+=======
+#define MIN 2
+>>>>>>> v3.18
 =======
 #define MIN 2
 >>>>>>> v3.18
@@ -80,7 +84,11 @@ MODULE_VERSION(DRV_VERSION);
 static struct scsi_transport_template *isci_transport_template;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(isci_id_table) = {
+=======
+static const struct pci_device_id isci_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id isci_id_table[] = {
 >>>>>>> v3.18
@@ -365,7 +373,11 @@ static int isci_setup_interrupts(struct pci_dev *pdev)
 		pci_info->msix_entries[i].entry = i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = pci_enable_msix(pdev, pci_info->msix_entries, num_msix);
+=======
+	err = pci_enable_msix_exact(pdev, pci_info->msix_entries, num_msix);
+>>>>>>> v3.18
 =======
 	err = pci_enable_msix_exact(pdev, pci_info->msix_entries, num_msix);
 >>>>>>> v3.18

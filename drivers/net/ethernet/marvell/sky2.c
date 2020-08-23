@@ -45,6 +45,11 @@
 #include <linux/debugfs.h>
 #include <linux/mii.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+#include <linux/of_net.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 #include <linux/of_net.h>
@@ -105,7 +110,11 @@ module_param(legacy_pme, int, 0);
 MODULE_PARM_DESC(legacy_pme, "Legacy power management");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(sky2_id_table) = {
+=======
+static const struct pci_device_id sky2_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id sky2_id_table[] = {
 >>>>>>> v3.18
@@ -1630,16 +1639,22 @@ static int sky2_alloc_buffers(struct sky2_port *sky2)
 		goto nomem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sky2->rx_le = pci_alloc_consistent(hw->pdev, RX_LE_BYTES,
 					   &sky2->rx_le_map);
 	if (!sky2->rx_le)
 		goto nomem;
 	memset(sky2->rx_le, 0, RX_LE_BYTES);
 =======
+=======
+>>>>>>> v3.18
 	sky2->rx_le = pci_zalloc_consistent(hw->pdev, RX_LE_BYTES,
 					    &sky2->rx_le_map);
 	if (!sky2->rx_le)
 		goto nomem;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sky2->rx_ring = kcalloc(sky2->rx_pending, sizeof(struct rx_ring_info),
@@ -2017,7 +2032,11 @@ mapping_error:
 	if (net_ratelimit())
 		dev_warn(&hw->pdev->dev, "%s: tx mapping error\n", dev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -2516,7 +2535,11 @@ static struct sk_buff *receive_copy(struct sky2_port *sky2,
 		skb->ip_summed = re->skb->ip_summed;
 		skb->csum = re->skb->csum;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb->rxhash = re->skb->rxhash;
+=======
+		skb_copy_hash(skb, re->skb);
+>>>>>>> v3.18
 =======
 		skb_copy_hash(skb, re->skb);
 >>>>>>> v3.18
@@ -2528,7 +2551,11 @@ static struct sk_buff *receive_copy(struct sky2_port *sky2,
 		re->skb->vlan_proto = 0;
 		re->skb->vlan_tci = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		re->skb->rxhash = 0;
+=======
+		skb_clear_hash(re->skb);
+>>>>>>> v3.18
 =======
 		skb_clear_hash(re->skb);
 >>>>>>> v3.18
@@ -2752,7 +2779,11 @@ static void sky2_rx_hash(struct sky2_port *sky2, u32 status)
 
 	skb = sky2->rx_ring[sky2->rx_next].skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->rxhash = le32_to_cpu(status);
+=======
+	skb_set_hash(skb, le32_to_cpu(status), PKT_HASH_TYPE_L3);
+>>>>>>> v3.18
 =======
 	skb_set_hash(skb, le32_to_cpu(status), PKT_HASH_TYPE_L3);
 >>>>>>> v3.18
@@ -2766,6 +2797,12 @@ static int sky2_status_intr(struct sky2_hw *hw, int to_do, u16 idx)
 	unsigned int total_packets[2] = { 0 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (to_do <= 0)
+		return work_done;
+
+>>>>>>> v3.18
 =======
 	if (to_do <= 0)
 		return work_done;
@@ -2849,7 +2886,11 @@ static int sky2_status_intr(struct sky2_hw *hw, int to_do, u16 idx)
 		default:
 			if (net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warning("unknown status opcode 0x%x\n", opcode);
+=======
+				pr_warn("unknown status opcode 0x%x\n", opcode);
+>>>>>>> v3.18
 =======
 				pr_warn("unknown status opcode 0x%x\n", opcode);
 >>>>>>> v3.18
@@ -3949,15 +3990,21 @@ static struct rtnl_link_stats64 *sky2_get_stats(struct net_device *dev,
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		start = u64_stats_fetch_begin_bh(&sky2->rx_stats.syncp);
 		_bytes = sky2->rx_stats.bytes;
 		_packets = sky2->rx_stats.packets;
 	} while (u64_stats_fetch_retry_bh(&sky2->rx_stats.syncp, start));
 =======
+=======
+>>>>>>> v3.18
 		start = u64_stats_fetch_begin_irq(&sky2->rx_stats.syncp);
 		_bytes = sky2->rx_stats.bytes;
 		_packets = sky2->rx_stats.packets;
 	} while (u64_stats_fetch_retry_irq(&sky2->rx_stats.syncp, start));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	stats->rx_packets = _packets;
@@ -3965,15 +4012,21 @@ static struct rtnl_link_stats64 *sky2_get_stats(struct net_device *dev,
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		start = u64_stats_fetch_begin_bh(&sky2->tx_stats.syncp);
 		_bytes = sky2->tx_stats.bytes;
 		_packets = sky2->tx_stats.packets;
 	} while (u64_stats_fetch_retry_bh(&sky2->tx_stats.syncp, start));
 =======
+=======
+>>>>>>> v3.18
 		start = u64_stats_fetch_begin_irq(&sky2->tx_stats.syncp);
 		_bytes = sky2->tx_stats.bytes;
 		_packets = sky2->tx_stats.packets;
 	} while (u64_stats_fetch_retry_irq(&sky2->tx_stats.syncp, start));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	stats->tx_packets = _packets;
@@ -4699,7 +4752,11 @@ static int sky2_device_event(struct notifier_block *unused,
 			     unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -4809,6 +4866,10 @@ static struct net_device *sky2_init_netdev(struct sky2_hw *hw, unsigned port,
 	struct sky2_port *sky2;
 	struct net_device *dev = alloc_etherdev(sizeof(*sky2));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const void *iap;
+>>>>>>> v3.18
 =======
 	const void *iap;
 >>>>>>> v3.18
@@ -4819,7 +4880,11 @@ static struct net_device *sky2_init_netdev(struct sky2_hw *hw, unsigned port,
 	SET_NETDEV_DEV(dev, &hw->pdev->dev);
 	dev->irq = hw->pdev->irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &sky2_ethtool_ops);
+=======
+	dev->ethtool_ops = &sky2_ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &sky2_ethtool_ops;
 >>>>>>> v3.18
@@ -4832,6 +4897,12 @@ static struct net_device *sky2_init_netdev(struct sky2_hw *hw, unsigned port,
 	sky2->msg_enable = netif_msg_init(debug, default_msg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64_stats_init(&sky2->tx_stats.syncp);
+	u64_stats_init(&sky2->rx_stats.syncp);
+
+>>>>>>> v3.18
 =======
 	u64_stats_init(&sky2->tx_stats.syncp);
 	u64_stats_init(&sky2->rx_stats.syncp);
@@ -4877,9 +4948,12 @@ static struct net_device *sky2_init_netdev(struct sky2_hw *hw, unsigned port,
 	dev->features |= dev->hw_features;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* read the mac address */
 	memcpy_fromio(dev->dev_addr, hw->regs + B2_MAC_1 + port * 8, ETH_ALEN);
 =======
+=======
+>>>>>>> v3.18
 	/* try to get mac address in the following order:
 	 * 1) from device tree data
 	 * 2) from internal registers set by bootloader
@@ -4890,6 +4964,9 @@ static struct net_device *sky2_init_netdev(struct sky2_hw *hw, unsigned port,
 	else
 		memcpy_fromio(dev->dev_addr, hw->regs + B2_MAC_1 + port * 8,
 			      ETH_ALEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return dev;
@@ -5105,6 +5182,11 @@ static int sky2_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
  	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	netif_napi_add(dev, &hw->napi, sky2_poll, NAPI_WEIGHT);
+
+>>>>>>> v3.18
 =======
 	netif_napi_add(dev, &hw->napi, sky2_poll, NAPI_WEIGHT);
 
@@ -5118,8 +5200,11 @@ static int sky2_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	netif_carrier_off(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_napi_add(dev, &hw->napi, sky2_poll, NAPI_WEIGHT);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sky2_show_addr(dev);
@@ -5177,7 +5262,10 @@ err_out_disable:
 	pci_disable_device(pdev);
 err_out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;
@@ -5223,8 +5311,11 @@ static void sky2_remove(struct pci_dev *pdev)
 	iounmap(hw->regs);
 	kfree(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -5299,6 +5390,7 @@ static SIMPLE_DEV_PM_OPS(sky2_pm_ops, sky2_suspend, sky2_resume);
 static void sky2_shutdown(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sky2_hw *hw = pci_get_drvdata(pdev);
 	int port;
 
@@ -5312,6 +5404,8 @@ static void sky2_shutdown(struct pci_dev *pdev)
 		}
 		rtnl_unlock();
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sky2_suspend(&pdev->dev);

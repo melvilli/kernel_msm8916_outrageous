@@ -28,12 +28,18 @@
 #define S5C73M3_SPI_DRV_NAME "S5C73M3-SPI"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id s5c73m3_spi_ids[] = {
 	{ .compatible = "samsung,s5c73m3" },
 	{ }
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum spi_direction {
 	SPI_DIR_RX,
@@ -82,7 +88,11 @@ int s5c73m3_spi_write(struct s5c73m3 *state, const void *addr,
 	memset(padding, 0, sizeof(padding));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < count ; i++) {
+=======
+	for (i = 0; i < count; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < count; i++) {
 >>>>>>> v3.18
@@ -111,7 +121,11 @@ int s5c73m3_spi_read(struct s5c73m3 *state, void *addr,
 	int r = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < count ; i++) {
+=======
+	for (i = 0; i < count; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < count; i++) {
 >>>>>>> v3.18
@@ -163,6 +177,10 @@ int s5c73m3_register_spi_driver(struct s5c73m3 *state)
 	spidrv->driver.bus = &spi_bus_type;
 	spidrv->driver.owner = THIS_MODULE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spidrv->driver.of_match_table = s5c73m3_spi_ids;
+>>>>>>> v3.18
 =======
 	spidrv->driver.of_match_table = s5c73m3_spi_ids;
 >>>>>>> v3.18

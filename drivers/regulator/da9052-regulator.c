@@ -71,6 +71,10 @@ struct da9052_regulator_info {
 	int min_uV;
 	int max_uV;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned char activate_bit;
+>>>>>>> v3.18
 =======
 	unsigned char activate_bit;
 >>>>>>> v3.18
@@ -214,7 +218,10 @@ static int da9052_map_voltage(struct regulator_dev *rdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int da9052_regulator_set_voltage_sel(struct regulator_dev *rdev,
 					    unsigned int selector)
 {
@@ -270,6 +277,9 @@ static int da9052_regulator_set_voltage_time_sel(struct regulator_dev *rdev,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct regulator_ops da9052_dcdc_ops = {
 	.get_current_limit = da9052_dcdc_get_current_limit,
@@ -279,7 +289,12 @@ static struct regulator_ops da9052_dcdc_ops = {
 	.map_voltage = da9052_map_voltage,
 	.get_voltage_sel = regulator_get_voltage_sel_regmap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.set_voltage_sel = regulator_set_voltage_sel_regmap,
+=======
+	.set_voltage_sel = da9052_regulator_set_voltage_sel,
+	.set_voltage_time_sel = da9052_regulator_set_voltage_time_sel,
+>>>>>>> v3.18
 =======
 	.set_voltage_sel = da9052_regulator_set_voltage_sel,
 	.set_voltage_time_sel = da9052_regulator_set_voltage_time_sel,
@@ -294,7 +309,12 @@ static struct regulator_ops da9052_ldo_ops = {
 	.map_voltage = da9052_map_voltage,
 	.get_voltage_sel = regulator_get_voltage_sel_regmap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.set_voltage_sel = regulator_set_voltage_sel_regmap,
+=======
+	.set_voltage_sel = da9052_regulator_set_voltage_sel,
+	.set_voltage_time_sel = da9052_regulator_set_voltage_time_sel,
+>>>>>>> v3.18
 =======
 	.set_voltage_sel = da9052_regulator_set_voltage_sel,
 	.set_voltage_time_sel = da9052_regulator_set_voltage_time_sel,
@@ -316,8 +336,11 @@ static struct regulator_ops da9052_ldo_ops = {
 		.vsel_reg = DA9052_BUCKCORE_REG + DA9052_ID_##_id, \
 		.vsel_mask = (1 << (sbits)) - 1,\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.apply_reg = DA9052_SUPPLY_REG, \
 		.apply_bit = (abits), \
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.enable_reg = DA9052_BUCKCORE_REG + DA9052_ID_##_id, \
@@ -327,6 +350,10 @@ static struct regulator_ops da9052_ldo_ops = {
 	.max_uV = (max) * 1000,\
 	.step_uV = (step) * 1000,\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.activate_bit = (abits),\
+>>>>>>> v3.18
 =======
 	.activate_bit = (abits),\
 >>>>>>> v3.18
@@ -344,8 +371,11 @@ static struct regulator_ops da9052_ldo_ops = {
 		.vsel_reg = DA9052_BUCKCORE_REG + DA9052_ID_##_id, \
 		.vsel_mask = (1 << (sbits)) - 1,\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.apply_reg = DA9052_SUPPLY_REG, \
 		.apply_bit = (abits), \
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.enable_reg = DA9052_BUCKCORE_REG + DA9052_ID_##_id, \
@@ -355,6 +385,10 @@ static struct regulator_ops da9052_ldo_ops = {
 	.max_uV = (max) * 1000,\
 	.step_uV = (step) * 1000,\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.activate_bit = (abits),\
+>>>>>>> v3.18
 =======
 	.activate_bit = (abits),\
 >>>>>>> v3.18
@@ -436,7 +470,11 @@ static int da9052_regulator_probe(struct platform_device *pdev)
 
 	da9052 = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = da9052->dev->platform_data;
+=======
+	pdata = dev_get_platdata(da9052->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(da9052->dev);
 >>>>>>> v3.18
@@ -457,6 +495,7 @@ static int da9052_regulator_probe(struct platform_device *pdev)
 	} else {
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct device_node *nproot, *np;
 
 		nproot = of_node_get(da9052->dev->of_node);
@@ -465,6 +504,8 @@ static int da9052_regulator_probe(struct platform_device *pdev)
 
 		nproot = of_find_node_by_name(nproot, "regulators");
 =======
+=======
+>>>>>>> v3.18
 		struct device_node *nproot = da9052->dev->of_node;
 		struct device_node *np;
 
@@ -472,6 +513,9 @@ static int da9052_regulator_probe(struct platform_device *pdev)
 			return -ENODEV;
 
 		nproot = of_get_child_by_name(nproot, "regulators");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!nproot)
 			return -ENODEV;
@@ -490,8 +534,14 @@ static int da9052_regulator_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regulator->rdev = regulator_register(&regulator->info->reg_desc,
 					     &config);
+=======
+	regulator->rdev = devm_regulator_register(&pdev->dev,
+						  &regulator->info->reg_desc,
+						  &config);
+>>>>>>> v3.18
 =======
 	regulator->rdev = devm_regulator_register(&pdev->dev,
 						  &regulator->info->reg_desc,
@@ -509,6 +559,7 @@ static int da9052_regulator_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int da9052_regulator_remove(struct platform_device *pdev)
 {
 	struct da9052_regulator *regulator = platform_get_drvdata(pdev);
@@ -520,6 +571,10 @@ static int da9052_regulator_remove(struct platform_device *pdev)
 static struct platform_driver da9052_regulator_driver = {
 	.probe = da9052_regulator_probe,
 	.remove = da9052_regulator_remove,
+=======
+static struct platform_driver da9052_regulator_driver = {
+	.probe = da9052_regulator_probe,
+>>>>>>> v3.18
 =======
 static struct platform_driver da9052_regulator_driver = {
 	.probe = da9052_regulator_probe,

@@ -10,6 +10,10 @@
 #include "../libslang.h"
 #include "../keysyms.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "tui.h"
+>>>>>>> v3.18
 =======
 #include "tui.h"
 >>>>>>> v3.18
@@ -124,7 +128,11 @@ int ui__init(void)
 	ui_helpline__init();
 	ui_browser__init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ui_progress__init();
+=======
+	tui_progress__init();
+>>>>>>> v3.18
 =======
 	tui_progress__init();
 >>>>>>> v3.18

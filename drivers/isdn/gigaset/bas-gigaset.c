@@ -2318,9 +2318,12 @@ static int gigaset_probe(struct usb_interface *interface,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hostif->desc.bNumEndpoints < 1)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_info(&udev->dev,
@@ -2372,7 +2375,11 @@ static int gigaset_probe(struct usb_interface *interface,
 	usb_fill_int_urb(ucs->urb_int_in, udev,
 			 usb_rcvintpipe(udev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					(endpoint->bEndpointAddress) & 0x0f),
+=======
+					usb_endpoint_num(endpoint)),
+>>>>>>> v3.18
 =======
 					usb_endpoint_num(endpoint)),
 >>>>>>> v3.18
@@ -2411,6 +2418,10 @@ error:
 	freeurbs(cs);
 	usb_set_intfdata(interface, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usb_put_dev(udev);
+>>>>>>> v3.18
 =======
 	usb_put_dev(udev);
 >>>>>>> v3.18

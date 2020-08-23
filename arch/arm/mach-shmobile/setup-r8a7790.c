@@ -20,6 +20,7 @@
 
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irqchip.h>
 #include <linux/kernel.h>
 #include <linux/of_platform.h>
@@ -93,6 +94,8 @@ static struct renesas_irqc_config irqc0_data = {
 
 static struct resource irqc0_resources[] = {
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/of_platform.h>
 #include <linux/platform_data/gpio-rcar.h>
@@ -315,6 +318,9 @@ static const struct renesas_irqc_config irqc0_data __initconst = {
 };
 
 static const struct resource irqc0_resources[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	DEFINE_RES_MEM(0xe61c0000, 0x200), /* IRQC Event Detector Block_0 */
 	DEFINE_RES_IRQ(gic_spi(0)), /* IRQ0 */
@@ -325,7 +331,11 @@ static const struct resource irqc0_resources[] __initconst = {
 
 #define r8a7790_register_irqc(idx)					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_register_resndata(&platform_bus, "renesas_irqc", \
+=======
+	platform_device_register_resndata(NULL, "renesas_irqc",		\
+>>>>>>> v3.18
 =======
 	platform_device_register_resndata(NULL, "renesas_irqc",		\
 >>>>>>> v3.18
@@ -334,6 +344,7 @@ static const struct resource irqc0_resources[] __initconst = {
 					  &irqc##idx##_data,		\
 					  sizeof(struct renesas_irqc_config))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __init r8a7790_add_standard_devices(void)
 {
@@ -368,6 +379,8 @@ void __init r8a7790_add_standard_devices_dt(void)
 
 static const char *r8a7790_boards_compat_dt[] __initdata = {
 =======
+=======
+>>>>>>> v3.18
 static const struct resource thermal_resources[] __initconst = {
 	DEFINE_RES_MEM(0xe61f0000, 0x14),
 	DEFINE_RES_MEM(0xe61f0100, 0x38),
@@ -421,6 +434,9 @@ void __init r8a7790_add_standard_devices(void)
 #ifdef CONFIG_USE_OF
 
 static const char * const r8a7790_boards_compat_dt[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"renesas,r8a7790",
 	NULL,
@@ -428,15 +444,21 @@ static const char * const r8a7790_boards_compat_dt[] __initconst = {
 
 DT_MACHINE_START(R8A7790_DT, "Generic R8A7790 (Flattened Device Tree)")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	= irqchip_init,
 	.init_machine	= r8a7790_add_standard_devices_dt,
 	.init_time	= r8a7790_timer_init,
 =======
+=======
+>>>>>>> v3.18
 	.smp		= smp_ops(r8a7790_smp_ops),
 	.init_early	= shmobile_init_delay,
 	.init_time	= rcar_gen2_timer_init,
 	.init_late	= shmobile_init_late,
 	.reserve	= rcar_gen2_reserve,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.dt_compat	= r8a7790_boards_compat_dt,
 MACHINE_END

@@ -99,9 +99,15 @@ bool ETHbIsBufferCrc32Ok(unsigned char *pbyBuffer, unsigned int cbFrameLength)
 
 	dwCRC = CRCdwGetCrc32(pbyBuffer, cbFrameLength - 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_to_le32(*((unsigned long *)(pbyBuffer + cbFrameLength - 4))) != dwCRC) {
 		return false;
 	}
+=======
+	if (cpu_to_le32(*((unsigned long *)(pbyBuffer + cbFrameLength - 4))) != dwCRC)
+		return false;
+
+>>>>>>> v3.18
 =======
 	if (cpu_to_le32(*((unsigned long *)(pbyBuffer + cbFrameLength - 4))) != dwCRC)
 		return false;

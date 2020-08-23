@@ -10,7 +10,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "ge863-pro3.dtsi"
+=======
+#include "ge863-pro3.dtsi"
+>>>>>>> v3.18
 =======
 #include "ge863-pro3.dtsi"
 >>>>>>> v3.18
@@ -21,13 +25,19 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	clocks {
 		slow_xtal {
 			clock-frequency = <32768>;
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ahb {
 		apb {
@@ -60,7 +70,11 @@
 
 			usb1: gadget@fffa4000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				atmel,vbus-gpio = <&pioC 15 0>;
+=======
+				atmel,vbus-gpio = <&pioC 15 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 				atmel,vbus-gpio = <&pioC 15 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -108,7 +122,11 @@
 
 		red {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioC 10 0>;
+=======
+			gpios = <&pioC 10 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioC 10 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -117,7 +135,11 @@
 
 		green {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioA 5 1>;
+=======
+			gpios = <&pioA 5 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioA 5 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -127,7 +149,11 @@
 
 		yellow {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 20 1>;
+=======
+			gpios = <&pioB 20 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 20 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -136,7 +162,11 @@
 
 		blue {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 21 1>;
+=======
+			gpios = <&pioB 21 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 21 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18

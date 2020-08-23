@@ -9,7 +9,11 @@ obj-$(CONFIG_ARCH_INTEGRATOR_AP)	+= integrator_ap.o
 obj-$(CONFIG_ARCH_INTEGRATOR_CP)	+= integrator_cp.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_PCI)			+= pci_v3.o pci.o
+=======
+obj-$(CONFIG_PCI)			+= pci_v3.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_PCI)			+= pci_v3.o
 >>>>>>> v3.18

@@ -13,11 +13,17 @@ extern void fsnotify_flush_notify(struct fsnotify_group *group);
 extern struct srcu_struct fsnotify_mark_srcu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* compare two groups for sorting of marks lists */
 extern int fsnotify_compare_groups(struct fsnotify_group *a,
 				   struct fsnotify_group *b);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void fsnotify_set_inode_mark_mask_locked(struct fsnotify_mark *fsn_mark,
 						__u32 mask);
@@ -31,9 +37,12 @@ extern int fsnotify_add_vfsmount_mark(struct fsnotify_mark *mark,
 				      int allow_dups);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* final kfree of a group */
 extern void fsnotify_final_destroy_group(struct fsnotify_group *group);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* vfsmount specific destruction of a mark */

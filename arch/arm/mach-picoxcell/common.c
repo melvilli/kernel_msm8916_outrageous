@@ -9,12 +9,17 @@
  */
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irq.h>
 #include <linux/irqchip.h>
 #include <linux/irqdomain.h>
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
+=======
+#include <linux/of.h>
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_address.h>
@@ -26,8 +31,11 @@
 #include <asm/mach/map.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "common.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PHYS_TO_IO(x)			(((x) & 0x00ffffff) | 0xfe000000)
@@ -95,9 +103,12 @@ static void picoxcell_wdt_restart(enum reboot_mode mode, const char *cmd)
 DT_MACHINE_START(PICOXCELL, "Picochip picoXcell")
 	.map_io		= picoxcell_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.nr_irqs	= NR_IRQS_LEGACY,
 	.init_irq	= irqchip_init,
 	.init_time	= dw_apb_timer_init,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= picoxcell_init_machine,

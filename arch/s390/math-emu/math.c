@@ -20,6 +20,11 @@
 #include <math-emu/quad.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FPC_VALID_MASK		0xF8F8FF03
+
+>>>>>>> v3.18
 =======
 #define FPC_VALID_MASK		0xF8F8FF03
 

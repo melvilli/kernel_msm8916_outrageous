@@ -119,13 +119,19 @@ struct tps65912_reg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct regulator_linear_range tps65912_ldo_ranges[] = {
 	REGULATOR_LINEAR_RANGE(800000, 0, 32, 25000),
 	REGULATOR_LINEAR_RANGE(1650000, 33, 60, 50000),
 	REGULATOR_LINEAR_RANGE(3100000, 61, 63, 100000),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int tps65912_get_range(struct tps65912_reg *pmic, int id)
 {
@@ -194,6 +200,7 @@ static unsigned long tps65912_vsel_to_uv_range3(u8 vsel)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long tps65912_vsel_to_uv_ldo(u8 vsel)
 {
 	unsigned long uv = 0;
@@ -208,6 +215,8 @@ static unsigned long tps65912_vsel_to_uv_ldo(u8 vsel)
 	return uv;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int tps65912_get_ctrl_register(int id)
@@ -389,9 +398,12 @@ static int tps65912_list_voltage(struct regulator_dev *dev, unsigned selector)
 	int range, voltage = 0, id = rdev_get_id(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id >= TPS65912_REG_LDO1 && id <= TPS65912_REG_LDO10)
 		return tps65912_vsel_to_uv_ldo(selector);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (id > TPS65912_REG_DCDC4)
@@ -472,7 +484,12 @@ static struct regulator_ops tps65912_ops_ldo = {
 	.get_voltage_sel = tps65912_get_voltage_sel,
 	.set_voltage_sel = tps65912_set_voltage_sel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.list_voltage = tps65912_list_voltage,
+=======
+	.list_voltage = regulator_list_voltage_linear_range,
+	.map_voltage = regulator_map_voltage_linear_range,
+>>>>>>> v3.18
 =======
 	.list_voltage = regulator_list_voltage_linear_range,
 	.map_voltage = regulator_map_voltage_linear_range,
@@ -489,7 +506,11 @@ static int tps65912_probe(struct platform_device *pdev)
 	struct tps65912_reg *pmic;
 	struct tps65912_board *pmic_plat_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, err;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -520,9 +541,12 @@ static int tps65912_probe(struct platform_device *pdev)
 		pmic->desc[i].id = i;
 		pmic->desc[i].n_voltages = 64;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pmic->desc[i].ops = (i > TPS65912_REG_DCDC4 ?
 			&tps65912_ops_ldo : &tps65912_ops_dcdc);
 =======
+=======
+>>>>>>> v3.18
 		if (i > TPS65912_REG_DCDC4) {
 			pmic->desc[i].ops = &tps65912_ops_ldo;
 			pmic->desc[i].linear_ranges = tps65912_ldo_ranges;
@@ -531,6 +555,9 @@ static int tps65912_probe(struct platform_device *pdev)
 		} else {
 			pmic->desc[i].ops = &tps65912_ops_dcdc;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pmic->desc[i].type = REGULATOR_VOLTAGE;
 		pmic->desc[i].owner = THIS_MODULE;
@@ -541,7 +568,12 @@ static int tps65912_probe(struct platform_device *pdev)
 		config.driver_data = pmic;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rdev = regulator_register(&pmic->desc[i], &config);
+=======
+		rdev = devm_regulator_register(&pdev->dev, &pmic->desc[i],
+					       &config);
+>>>>>>> v3.18
 =======
 		rdev = devm_regulator_register(&pdev->dev, &pmic->desc[i],
 					       &config);
@@ -551,8 +583,12 @@ static int tps65912_probe(struct platform_device *pdev)
 				"failed to register %s regulator\n",
 				pdev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = PTR_ERR(rdev);
 			goto err;
+=======
+			return PTR_ERR(rdev);
+>>>>>>> v3.18
 =======
 			return PTR_ERR(rdev);
 >>>>>>> v3.18
@@ -562,6 +598,7 @@ static int tps65912_probe(struct platform_device *pdev)
 		pmic->rdev[i] = rdev;
 	}
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err:
@@ -580,6 +617,8 @@ static int tps65912_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver tps65912_driver = {
@@ -589,7 +628,10 @@ static struct platform_driver tps65912_driver = {
 	},
 	.probe = tps65912_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = tps65912_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

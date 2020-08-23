@@ -14,7 +14,11 @@ lib-y		:= backtrace.o changebit.o csumipv6.o csumpartial.o   \
 		   ucmpdi2.o lib1funcs.o div64.o                      \
 		   io-readsb.o io-writesb.o io-readsl.o io-writesl.o  \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   call_with_stack.o
+=======
+		   call_with_stack.o bswapsdi2.o
+>>>>>>> v3.18
 =======
 		   call_with_stack.o bswapsdi2.o
 >>>>>>> v3.18
@@ -46,11 +50,14 @@ endif
 
 lib-$(CONFIG_ARCH_RPC)		+= ecard.o io-acorn.o floppydma.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 lib-$(CONFIG_ARCH_SHARK)	+= io-shark.o
 
 $(obj)/csumpartialcopy.o:	$(obj)/csumpartialcopygeneric.S
 $(obj)/csumpartialcopyuser.o:	$(obj)/csumpartialcopygeneric.S
 =======
+=======
+>>>>>>> v3.18
 
 $(obj)/csumpartialcopy.o:	$(obj)/csumpartialcopygeneric.S
 $(obj)/csumpartialcopyuser.o:	$(obj)/csumpartialcopygeneric.S
@@ -60,4 +67,7 @@ ifeq ($(CONFIG_KERNEL_MODE_NEON),y)
   CFLAGS_xor-neon.o		+= $(NEON_FLAGS)
   obj-$(CONFIG_XOR_BLOCKS)	+= xor-neon.o
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

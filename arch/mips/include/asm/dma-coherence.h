@@ -10,9 +10,12 @@
 #define __ASM_DMA_COHERENCE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int coherentio;
 extern int hw_coherentio;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DMA_MAYBE_COHERENT
 extern int coherentio;
 extern int hw_coherentio;
@@ -24,6 +27,9 @@ extern int hw_coherentio;
 #endif
 #define hw_coherentio	0
 #endif /* CONFIG_DMA_MAYBE_COHERENT */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

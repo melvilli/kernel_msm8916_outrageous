@@ -35,7 +35,11 @@ static void dump_tlb(int first, int last)
 
 		/* Unused entries have a virtual address of KSEG0.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((entryhi & 0xffffe000) != 0x80000000
+=======
+		if ((entryhi & 0xfffff000) != 0x80000000
+>>>>>>> v3.18
 =======
 		if ((entryhi & 0xfffff000) != 0x80000000
 >>>>>>> v3.18
@@ -48,7 +52,11 @@ static void dump_tlb(int first, int last)
 			printk("va=%08lx asid=%08lx"
 			       "  [pa=%06lx n=%d d=%d v=%d g=%d]",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       (entryhi & 0xffffe000),
+=======
+			       (entryhi & 0xfffff000),
+>>>>>>> v3.18
 =======
 			       (entryhi & 0xfffff000),
 >>>>>>> v3.18

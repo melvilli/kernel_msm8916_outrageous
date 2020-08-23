@@ -6,7 +6,10 @@
  * Copyright (C) 2001, 2002 Ralf Baechle
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

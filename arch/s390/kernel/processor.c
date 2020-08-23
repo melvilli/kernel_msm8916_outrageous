@@ -22,10 +22,16 @@ static DEFINE_PER_CPU(struct cpuid, cpu_id);
  * cpu_init - initializes state that is per-CPU.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit cpu_init(void)
 {
 	struct s390_idle_data *idle = &__get_cpu_var(s390_idle);
 	struct cpuid *id = &__get_cpu_var(cpu_id);
+=======
+void cpu_init(void)
+{
+	struct cpuid *id = this_cpu_ptr(&cpu_id);
+>>>>>>> v3.18
 =======
 void cpu_init(void)
 {
@@ -38,7 +44,10 @@ void cpu_init(void)
 	BUG_ON(current->mm);
 	enter_lazy_tlb(&init_mm, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(idle, 0, sizeof(*idle));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -51,7 +60,11 @@ static int show_cpuinfo(struct seq_file *m, void *v)
 	static const char *hwcap_str[] = {
 		"esan3", "zarch", "stfle", "msa", "ldisp", "eimm", "dfp",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"edat", "etf3eh", "highgprs", "te"
+=======
+		"edat", "etf3eh", "highgprs", "te", "vx"
+>>>>>>> v3.18
 =======
 		"edat", "etf3eh", "highgprs", "te", "vx"
 >>>>>>> v3.18

@@ -207,7 +207,11 @@ static int pcf8523_rtc_read_time(struct device *dev, struct rtc_time *tm)
 	tm->tm_mday = bcd2bin(regs[3] & 0x3f);
 	tm->tm_wday = regs[4] & 0x7;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm->tm_mon = bcd2bin(regs[5] & 0x1f);
+=======
+	tm->tm_mon = bcd2bin(regs[5] & 0x1f) - 1;
+>>>>>>> v3.18
 =======
 	tm->tm_mon = bcd2bin(regs[5] & 0x1f) - 1;
 >>>>>>> v3.18
@@ -234,7 +238,11 @@ static int pcf8523_rtc_set_time(struct device *dev, struct rtc_time *tm)
 	regs[4] = bin2bcd(tm->tm_mday);
 	regs[5] = tm->tm_wday;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs[6] = bin2bcd(tm->tm_mon);
+=======
+	regs[6] = bin2bcd(tm->tm_mon + 1);
+>>>>>>> v3.18
 =======
 	regs[6] = bin2bcd(tm->tm_mon + 1);
 >>>>>>> v3.18
@@ -326,11 +334,14 @@ static int pcf8523_probe(struct i2c_client *client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pcf8523_remove(struct i2c_client *client)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct i2c_device_id pcf8523_id[] = {
@@ -355,7 +366,10 @@ static struct i2c_driver pcf8523_driver = {
 	},
 	.probe = pcf8523_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = pcf8523_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = pcf8523_id,

@@ -79,7 +79,11 @@ struct ad5686_state {
 
 	union {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 d32;
+=======
+		__be32 d32;
+>>>>>>> v3.18
 =======
 		__be32 d32;
 >>>>>>> v3.18
@@ -206,7 +210,10 @@ static int ad5686_read_raw(struct iio_dev *indio_dev,
 {
 	struct ad5686_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long scale_uv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -221,6 +228,7 @@ static int ad5686_read_raw(struct iio_dev *indio_dev,
 		*val = ret;
 		return IIO_VAL_INT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case IIO_CHAN_INFO_SCALE:
 		scale_uv = (st->vref_mv * 100000)
@@ -230,10 +238,15 @@ static int ad5686_read_raw(struct iio_dev *indio_dev,
 		return IIO_VAL_INT_PLUS_MICRO;
 
 =======
+=======
+>>>>>>> v3.18
 	case IIO_CHAN_INFO_SCALE:
 		*val = st->vref_mv;
 		*val2 = chan->scan_type.realbits;
 		return IIO_VAL_FRACTIONAL_LOG2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return -EINVAL;
@@ -280,8 +293,14 @@ static const struct iio_chan_spec_ext_info ad5686_ext_info[] = {
 		.read = ad5686_read_dac_powerdown,
 		.write = ad5686_write_dac_powerdown,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	IIO_ENUM("powerdown_mode", false, &ad5686_powerdown_mode_enum),
+=======
+		.shared = IIO_SEPARATE,
+	},
+	IIO_ENUM("powerdown_mode", IIO_SEPARATE, &ad5686_powerdown_mode_enum),
+>>>>>>> v3.18
 =======
 		.shared = IIO_SEPARATE,
 	},
@@ -292,7 +311,11 @@ static const struct iio_chan_spec_ext_info ad5686_ext_info[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AD5868_CHANNEL(chan, bits, shift) {			\
+=======
+#define AD5868_CHANNEL(chan, bits, _shift) {			\
+>>>>>>> v3.18
 =======
 #define AD5868_CHANNEL(chan, bits, _shift) {			\
 >>>>>>> v3.18
@@ -304,14 +327,20 @@ static const struct iio_chan_spec_ext_info ad5686_ext_info[] = {
 		.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE),\
 		.address = AD5686_ADDR_DAC(chan),		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.scan_type = IIO_ST('u', bits, 16, shift),	\
 =======
+=======
+>>>>>>> v3.18
 		.scan_type = {					\
 			.sign = 'u',				\
 			.realbits = (bits),			\
 			.storagebits = 16,			\
 			.shift = (_shift),			\
 		},						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ext_info = ad5686_ext_info,			\
 }
@@ -346,9 +375,15 @@ static int ad5686_probe(struct spi_device *spi)
 	struct ad5686_state *st;
 	struct iio_dev *indio_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, regdone = 0, voltage_uv = 0;
 
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	int ret, voltage_uv = 0;
+
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 =======
 	int ret, voltage_uv = 0;
 
@@ -361,17 +396,23 @@ static int ad5686_probe(struct spi_device *spi)
 	spi_set_drvdata(spi, indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st->reg = regulator_get(&spi->dev, "vcc");
 	if (!IS_ERR(st->reg)) {
 		ret = regulator_enable(st->reg);
 		if (ret)
 			goto error_put_reg;
 =======
+=======
+>>>>>>> v3.18
 	st->reg = devm_regulator_get(&spi->dev, "vcc");
 	if (!IS_ERR(st->reg)) {
 		ret = regulator_enable(st->reg);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ret = regulator_get_voltage(st->reg);
@@ -402,7 +443,10 @@ static int ad5686_probe(struct spi_device *spi)
 	indio_dev->num_channels = AD5686_DAC_CHANNELS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regdone = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = ad5686_spi_write(st, AD5686_CMD_INTERNAL_REFER_SETUP, 0,
@@ -420,12 +464,15 @@ error_disable_reg:
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_put_reg:
 	if (!IS_ERR(st->reg))
 		regulator_put(st->reg);
 
 	iio_device_free(indio_dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -438,11 +485,16 @@ static int ad5686_remove(struct spi_device *spi)
 
 	iio_device_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR(st->reg)) {
 		regulator_disable(st->reg);
 		regulator_put(st->reg);
 	}
 	iio_device_free(indio_dev);
+=======
+	if (!IS_ERR(st->reg))
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);

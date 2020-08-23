@@ -395,7 +395,11 @@ static void _fdt_packblocks(const char *old, char *new,
 			    int mem_rsv_size, int struct_size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t mem_rsv_off, struct_off, strings_off;
+=======
+	int mem_rsv_off, struct_off, strings_off;
+>>>>>>> v3.18
 =======
 	int mem_rsv_off, struct_off, strings_off;
 >>>>>>> v3.18

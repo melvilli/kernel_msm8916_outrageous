@@ -31,12 +31,18 @@ static int vnic_rq_alloc_bufs(struct vnic_rq *rq)
 {
 	struct vnic_rq_buf *buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vnic_dev *vdev;
 	unsigned int i, j, count = rq->ring.desc_count;
 	unsigned int blks = VNIC_RQ_BUF_BLKS_NEEDED(count);
 
 	vdev = rq->vdev;
 
+=======
+	unsigned int i, j, count = rq->ring.desc_count;
+	unsigned int blks = VNIC_RQ_BUF_BLKS_NEEDED(count);
+
+>>>>>>> v3.18
 =======
 	unsigned int i, j, count = rq->ring.desc_count;
 	unsigned int blks = VNIC_RQ_BUF_BLKS_NEEDED(count);
@@ -148,7 +154,11 @@ void vnic_rq_init(struct vnic_rq *rq, unsigned int cq_index,
 	unsigned int error_interrupt_offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 fetch_index;
+=======
+	u32 fetch_index = 0;
+>>>>>>> v3.18
 =======
 	u32 fetch_index = 0;
 >>>>>>> v3.18

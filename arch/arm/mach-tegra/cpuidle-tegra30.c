@@ -20,6 +20,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/cpuidle.h>
@@ -32,6 +33,8 @@
 #include <asm/suspend.h>
 #include <asm/smp_plat.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk/tegra.h>
 #include <linux/clockchips.h>
 #include <linux/cpuidle.h>
@@ -43,6 +46,9 @@
 #include <asm/proc-fns.h>
 #include <asm/smp_plat.h>
 #include <asm/suspend.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "pm.h"
@@ -129,7 +135,10 @@ static int tegra30_idle_lp2(struct cpuidle_device *dev,
 			    int index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 cpu = is_smp() ? cpu_logical_map(dev->cpu) : dev->cpu;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool entered_lp2 = false;
@@ -138,15 +147,21 @@ static int tegra30_idle_lp2(struct cpuidle_device *dev,
 	local_fiq_disable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	last_cpu = tegra_set_cpu_in_lp2(cpu);
 	cpu_pm_enter();
 
 	if (cpu == 0) {
 =======
+=======
+>>>>>>> v3.18
 	last_cpu = tegra_set_cpu_in_lp2();
 	cpu_pm_enter();
 
 	if (dev->cpu == 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (last_cpu)
 			entered_lp2 = tegra30_cpu_cluster_power_down(dev, drv,
@@ -159,7 +174,11 @@ static int tegra30_idle_lp2(struct cpuidle_device *dev,
 
 	cpu_pm_exit();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tegra_clear_cpu_in_lp2(cpu);
+=======
+	tegra_clear_cpu_in_lp2();
+>>>>>>> v3.18
 =======
 	tegra_clear_cpu_in_lp2();
 >>>>>>> v3.18
@@ -175,9 +194,12 @@ static int tegra30_idle_lp2(struct cpuidle_device *dev,
 int __init tegra30_cpuidle_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
 	tegra_tear_down_cpu = tegra30_tear_down_cpu;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return cpuidle_register(&tegra_idle_driver, NULL);

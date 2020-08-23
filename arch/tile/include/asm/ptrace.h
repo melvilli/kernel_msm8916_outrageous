@@ -34,6 +34,10 @@ typedef unsigned long pt_reg_t;
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define regs_return_value(regs) ((regs)->regs[0])
+>>>>>>> v3.18
 =======
 #define regs_return_value(regs) ((regs)->regs[0])
 >>>>>>> v3.18
@@ -43,7 +47,11 @@ typedef unsigned long pt_reg_t;
 
 /* Does the process account for user or for system time? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define user_mode(regs) (EX1_PL((regs)->ex1) == USER_PL)
+=======
+#define user_mode(regs) (EX1_PL((regs)->ex1) < KERNEL_PL)
+>>>>>>> v3.18
 =======
 #define user_mode(regs) (EX1_PL((regs)->ex1) < KERNEL_PL)
 >>>>>>> v3.18
@@ -88,8 +96,12 @@ extern void single_step_execve(void);
 struct task_struct;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void send_sigtrap(struct task_struct *tsk, struct pt_regs *regs,
 			 int error_code);
+=======
+extern void send_sigtrap(struct task_struct *tsk, struct pt_regs *regs);
+>>>>>>> v3.18
 =======
 extern void send_sigtrap(struct task_struct *tsk, struct pt_regs *regs);
 >>>>>>> v3.18

@@ -4,7 +4,11 @@
  * External function declarations.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright IBM Corp. 2002, 2016
+=======
+ * Copyright IBM Corp. 2002, 2010
+>>>>>>> v3.18
 =======
  * Copyright IBM Corp. 2002, 2010
 >>>>>>> v3.18
@@ -26,8 +30,11 @@ extern struct zfcp_port *zfcp_port_enqueue(struct zfcp_adapter *, u64, u32,
 extern void zfcp_sg_free_table(struct scatterlist *, int);
 extern int zfcp_sg_setup_table(struct scatterlist *, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void zfcp_device_unregister(struct device *,
 				   const struct attribute_group *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void zfcp_adapter_release(struct kref *);
@@ -35,13 +42,17 @@ extern void zfcp_adapter_unregister(struct zfcp_adapter *);
 
 /* zfcp_ccw.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int zfcp_ccw_priv_sch(struct zfcp_adapter *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct ccw_driver zfcp_ccw_driver;
 extern struct zfcp_adapter *zfcp_ccw_adapter_by_cdev(struct ccw_device *);
 extern void zfcp_ccw_adapter_put(struct zfcp_adapter *);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* zfcp_cfdc.c */
 extern struct miscdevice zfcp_cfdc_misc;
@@ -56,6 +67,8 @@ extern void zfcp_cfdc_adapter_access_changed(struct zfcp_adapter *);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* zfcp_dbf.c */
 extern int zfcp_dbf_adapter_register(struct zfcp_adapter *);
 extern void zfcp_dbf_adapter_unregister(struct zfcp_adapter *);
@@ -63,11 +76,16 @@ extern void zfcp_dbf_rec_trig(char *, struct zfcp_adapter *,
 			      struct zfcp_port *, struct scsi_device *, u8, u8);
 extern void zfcp_dbf_rec_run(char *, struct zfcp_erp_action *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void zfcp_dbf_rec_run_lvl(int level, char *tag,
 				 struct zfcp_erp_action *erp);
 extern void zfcp_dbf_rec_run_wka(char *, struct zfcp_fc_wka_port *, u64);
 extern void zfcp_dbf_hba_fsf_uss(char *, struct zfcp_fsf_req *);
 extern void zfcp_dbf_hba_fsf_res(char *, int, struct zfcp_fsf_req *);
+=======
+extern void zfcp_dbf_hba_fsf_uss(char *, struct zfcp_fsf_req *);
+extern void zfcp_dbf_hba_fsf_res(char *, struct zfcp_fsf_req *);
+>>>>>>> v3.18
 =======
 extern void zfcp_dbf_hba_fsf_uss(char *, struct zfcp_fsf_req *);
 extern void zfcp_dbf_hba_fsf_res(char *, struct zfcp_fsf_req *);
@@ -80,8 +98,12 @@ extern void zfcp_dbf_san_req(char *, struct zfcp_fsf_req *, u32);
 extern void zfcp_dbf_san_res(char *, struct zfcp_fsf_req *);
 extern void zfcp_dbf_san_in_els(char *, struct zfcp_fsf_req *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void zfcp_dbf_scsi(char *, int, struct scsi_cmnd *,
 			  struct zfcp_fsf_req *);
+=======
+extern void zfcp_dbf_scsi(char *, struct scsi_cmnd *, struct zfcp_fsf_req *);
+>>>>>>> v3.18
 =======
 extern void zfcp_dbf_scsi(char *, struct scsi_cmnd *, struct zfcp_fsf_req *);
 >>>>>>> v3.18
@@ -144,8 +166,11 @@ extern int zfcp_fsf_exchange_port_data(struct zfcp_erp_action *);
 extern int zfcp_fsf_exchange_port_data_sync(struct zfcp_qdio *,
 					    struct fsf_qtcb_bottom_port *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct zfcp_fsf_req *zfcp_fsf_control_file(struct zfcp_adapter *,
 						  struct zfcp_fsf_cfdc *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void zfcp_fsf_req_dismiss_all(struct zfcp_adapter *);
@@ -172,8 +197,11 @@ extern int zfcp_qdio_open(struct zfcp_qdio *);
 extern void zfcp_qdio_close(struct zfcp_qdio *);
 extern void zfcp_qdio_siosl(struct zfcp_adapter *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct zfcp_fsf_req *zfcp_fsf_get_req(struct zfcp_qdio *,
 					     struct qdio_buffer *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -191,9 +219,15 @@ extern void zfcp_scsi_dif_sense_error(struct scsi_cmnd *, int);
 
 /* zfcp_sysfs.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct attribute_group zfcp_sysfs_unit_attrs;
 extern struct attribute_group zfcp_sysfs_adapter_attrs;
 extern struct attribute_group zfcp_sysfs_port_attrs;
+=======
+extern const struct attribute_group *zfcp_unit_attr_groups[];
+extern struct attribute_group zfcp_sysfs_adapter_attrs;
+extern const struct attribute_group *zfcp_port_attr_groups[];
+>>>>>>> v3.18
 =======
 extern const struct attribute_group *zfcp_unit_attr_groups[];
 extern struct attribute_group zfcp_sysfs_adapter_attrs;

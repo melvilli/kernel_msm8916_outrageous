@@ -40,6 +40,7 @@
 #include "mlx4_ib.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mlx4_ib_resolve_grh(struct mlx4_ib_dev *dev, const struct ib_ah_attr *ah_attr,
 			u8 *mac, int *is_mcast, u8 port)
 {
@@ -61,6 +62,8 @@ int mlx4_ib_resolve_grh(struct mlx4_ib_dev *dev, const struct ib_ah_attr *ah_att
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct ib_ah *create_ib_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr,
 				  struct mlx4_ib_ah *ah)
 {
@@ -69,7 +72,10 @@ static struct ib_ah *create_ib_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr,
 	ah->av.ib.port_pd = cpu_to_be32(to_mpd(pd)->pdn | (ah_attr->port_num << 24));
 	ah->av.ib.g_slid  = ah_attr->src_path_bits;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ah->av.ib.sl_tclass_flowlabel = cpu_to_be32(ah_attr->sl << 28);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ah_attr->ah_flags & IB_AH_GRH) {
@@ -90,6 +96,10 @@ static struct ib_ah *create_ib_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr,
 			--ah->av.ib.stat_rate;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ah->av.ib.sl_tclass_flowlabel = cpu_to_be32(ah_attr->sl << 28);
+>>>>>>> v3.18
 =======
 	ah->av.ib.sl_tclass_flowlabel = cpu_to_be32(ah_attr->sl << 28);
 >>>>>>> v3.18
@@ -102,6 +112,7 @@ static struct ib_ah *create_iboe_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr
 {
 	struct mlx4_ib_dev *ibdev = to_mdev(pd->device);
 	struct mlx4_dev *dev = ibdev->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	union ib_gid sgid;
 	u8 mac[6];
@@ -119,6 +130,8 @@ static struct ib_ah *create_iboe_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr
 		return ERR_PTR(err);
 	vlan_tag = rdma_get_vlan_id(&sgid);
 =======
+=======
+>>>>>>> v3.18
 	int is_mcast = 0;
 	struct in6_addr in6;
 	u16 vlan_tag;
@@ -131,6 +144,9 @@ static struct ib_ah *create_iboe_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr
 		memcpy(ah->av.eth.mac, ah_attr->dmac, ETH_ALEN);
 	}
 	vlan_tag = ah_attr->vlan_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (vlan_tag < 0x1000)
 		vlan_tag |= (ah_attr->sl & 7) << 13;
@@ -144,9 +160,13 @@ static struct ib_ah *create_iboe_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr
 			--ah->av.eth.stat_rate;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ah->av.eth.sl_tclass_flowlabel |=
 			cpu_to_be32((ah_attr->grh.traffic_class << 20) |
 				    ah_attr->grh.flow_label);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -158,7 +178,11 @@ static struct ib_ah *create_iboe_ah(struct ib_pd *pd, struct ib_ah_attr *ah_attr
 
 	memcpy(ah->av.eth.dgid, ah_attr->grh.dgid.raw, 16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ah->av.eth.sl_tclass_flowlabel |= cpu_to_be32(ah_attr->sl << 29);
+=======
+	ah->av.eth.sl_tclass_flowlabel = cpu_to_be32(ah_attr->sl << 29);
+>>>>>>> v3.18
 =======
 	ah->av.eth.sl_tclass_flowlabel = cpu_to_be32(ah_attr->sl << 29);
 >>>>>>> v3.18
@@ -205,6 +229,7 @@ int mlx4_ib_query_ah(struct ib_ah *ibah, struct ib_ah_attr *ah_attr)
 
 	memset(ah_attr, 0, sizeof *ah_attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ah_attr->port_num = be32_to_cpu(ah->av.ib.port_pd) >> 24;
 	ll = rdma_port_get_link_layer(ibah->device, ah_attr->port_num);
 	if (ll == IB_LINK_LAYER_ETHERNET)
@@ -212,6 +237,11 @@ int mlx4_ib_query_ah(struct ib_ah *ibah, struct ib_ah_attr *ah_attr)
 	else
 		ah_attr->sl = be32_to_cpu(ah->av.ib.sl_tclass_flowlabel) >> 28;
 
+=======
+	ah_attr->sl = be32_to_cpu(ah->av.ib.sl_tclass_flowlabel) >> 28;
+	ah_attr->port_num = be32_to_cpu(ah->av.ib.port_pd) >> 24;
+	ll = rdma_port_get_link_layer(ibah->device, ah_attr->port_num);
+>>>>>>> v3.18
 =======
 	ah_attr->sl = be32_to_cpu(ah->av.ib.sl_tclass_flowlabel) >> 28;
 	ah_attr->port_num = be32_to_cpu(ah->av.ib.port_pd) >> 24;

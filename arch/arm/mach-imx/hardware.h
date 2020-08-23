@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2004-2007 Freescale Semiconductor, Inc. All Rights Reserved.
+=======
+ * Copyright 2004-2007, 2014 Freescale Semiconductor, Inc. All Rights Reserved.
+>>>>>>> v3.18
 =======
  * Copyright 2004-2007, 2014 Freescale Semiconductor, Inc. All Rights Reserved.
 >>>>>>> v3.18
@@ -25,6 +29,12 @@
 #define __ASM_ARCH_MXC_HARDWARE_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef __ASSEMBLY__
+#include <asm/io.h>
+#endif
+>>>>>>> v3.18
 =======
 #ifndef __ASSEMBLY__
 #include <asm/io.h>
@@ -113,8 +123,11 @@
 #include "mxc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "mx51.h"
 #include "mx53.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "mx3x.h"

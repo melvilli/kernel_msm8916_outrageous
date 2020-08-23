@@ -7,6 +7,10 @@ Required properties:
 - compatible: "marvell,dove-pinctrl"
 - clocks: (optional) phandle of pdma clock
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- reg: register specifiers of MPP, MPP4, and PMU MPP registers
+>>>>>>> v3.18
 =======
 - reg: register specifiers of MPP, MPP4, and PMU MPP registers
 >>>>>>> v3.18
@@ -14,6 +18,7 @@ Required properties:
 Available mpp pins/groups and functions:
 Note: brackets (x) are not part of the mpp name for marvell,function and given
 only for more detailed description in this document.
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 name          pins     functions
@@ -39,6 +44,8 @@ mpp13         13       gpio, pmu, uart2(cts), audio1(extclk), sdio1(wp),
 mpp14         14       gpio, pmu, uart2(txd), sdio1(buspwr), ssp(rxd)
 mpp15         15       gpio, pmu, uart2(rxd), sdio1(ledctrl), ssp(sfrm)
 =======
+=======
+>>>>>>> v3.18
 Note: pmu* also allows for Power Management functions listed below
 
 name          pins     functions
@@ -64,6 +71,9 @@ mpp13         13       gpio, pmu, uart2(cts), audio1(extclk), sdio1(wp),
                        ssp(extclk), pmu*
 mpp14         14       gpio, pmu, uart2(txd), sdio1(buspwr), ssp(rxd), pmu*
 mpp15         15       gpio, pmu, uart2(rxd), sdio1(ledctrl), ssp(sfrm), pmu*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 mpp16         16       gpio, uart3(rts), sdio0(cd), ac97(sdi1), lcd-spi(cs1)
 mpp17         17       gpio, uart3(cts), sdio0(wp), ac97(sdi2), twsi(sda),
@@ -90,7 +100,10 @@ audio0        -        i2s, ac97
 twsi          -        none, opt1, opt2, opt3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Power Management functions (pmu*):
 pmu-nc               Pin not driven by any PM function
 pmu-low              Pin driven low (0)
@@ -106,6 +119,9 @@ ext1-wakeup          Pin is used for EXT0_WU
 ext2-wakeup          Pin is used for EXT0_WU
 pmu-blink            Pin is used for blink function
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Notes:
 * group "mpp_audio1" allows the following functions and gpio pins:

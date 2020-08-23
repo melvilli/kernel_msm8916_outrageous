@@ -45,6 +45,11 @@ struct octeon_ethernet {
 	/* Hardware fetch and add to count outstanding tx buffers */
 	int fau;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* My netdev. */
+	struct net_device *netdev;
+>>>>>>> v3.18
 =======
 	/* My netdev. */
 	struct net_device *netdev;
@@ -64,7 +69,11 @@ struct octeon_ethernet {
 	uint64_t link_info;
 	/* Called periodically to check link status */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*poll) (struct net_device *dev);
+=======
+	void (*poll)(struct net_device *dev);
+>>>>>>> v3.18
 =======
 	void (*poll)(struct net_device *dev);
 >>>>>>> v3.18
@@ -95,6 +104,11 @@ extern int cvm_oct_xaui_stop(struct net_device *dev);
 extern int cvm_oct_common_init(struct net_device *dev);
 extern void cvm_oct_common_uninit(struct net_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void cvm_oct_adjust_link(struct net_device *dev);
+int cvm_oct_common_stop(struct net_device *dev);
+>>>>>>> v3.18
 =======
 void cvm_oct_adjust_link(struct net_device *dev);
 int cvm_oct_common_stop(struct net_device *dev);

@@ -29,6 +29,10 @@
 #include <linux/crypto.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <crypto/ablk_helper.h>
+>>>>>>> v3.18
 =======
 #include <crypto/ablk_helper.h>
 >>>>>>> v3.18
@@ -44,7 +48,10 @@
 #include <asm/xsave.h>
 #include <asm/crypto/twofish.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/crypto/ablk_helper.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/crypto/glue_helper.h>
@@ -57,6 +64,7 @@
 /* 8-way parallel cipher functions */
 asmlinkage void twofish_ecb_enc_8way(struct twofish_ctx *ctx, u8 *dst,
 				     const u8 *src);
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL_GPL(twofish_ecb_enc_8way);
 
@@ -92,6 +100,20 @@ asmlinkage void twofish_xts_enc_8way(struct twofish_ctx *ctx, u8 *dst,
 asmlinkage void twofish_xts_dec_8way(struct twofish_ctx *ctx, u8 *dst,
 				     const u8 *src, le128 *iv);
 >>>>>>> v3.18
+=======
+asmlinkage void twofish_ecb_dec_8way(struct twofish_ctx *ctx, u8 *dst,
+				     const u8 *src);
+
+asmlinkage void twofish_cbc_dec_8way(struct twofish_ctx *ctx, u8 *dst,
+				     const u8 *src);
+asmlinkage void twofish_ctr_8way(struct twofish_ctx *ctx, u8 *dst,
+				 const u8 *src, le128 *iv);
+
+asmlinkage void twofish_xts_enc_8way(struct twofish_ctx *ctx, u8 *dst,
+				     const u8 *src, le128 *iv);
+asmlinkage void twofish_xts_dec_8way(struct twofish_ctx *ctx, u8 *dst,
+				     const u8 *src, le128 *iv);
+>>>>>>> v3.18
 
 static inline void twofish_enc_blk_3way(struct twofish_ctx *ctx, u8 *dst,
 					const u8 *src)
@@ -100,7 +122,11 @@ static inline void twofish_enc_blk_3way(struct twofish_ctx *ctx, u8 *dst,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void twofish_xts_enc(void *ctx, u128 *dst, const u128 *src, le128 *iv)
+=======
+static void twofish_xts_enc(void *ctx, u128 *dst, const u128 *src, le128 *iv)
+>>>>>>> v3.18
 =======
 static void twofish_xts_enc(void *ctx, u128 *dst, const u128 *src, le128 *iv)
 >>>>>>> v3.18
@@ -109,9 +135,14 @@ static void twofish_xts_enc(void *ctx, u128 *dst, const u128 *src, le128 *iv)
 				  GLUE_FUNC_CAST(twofish_enc_blk));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(twofish_xts_enc);
 
 void twofish_xts_dec(void *ctx, u128 *dst, const u128 *src, le128 *iv)
+=======
+
+static void twofish_xts_dec(void *ctx, u128 *dst, const u128 *src, le128 *iv)
+>>>>>>> v3.18
 =======
 
 static void twofish_xts_dec(void *ctx, u128 *dst, const u128 *src, le128 *iv)
@@ -121,7 +152,10 @@ static void twofish_xts_dec(void *ctx, u128 *dst, const u128 *src, le128 *iv)
 				  GLUE_FUNC_CAST(twofish_dec_blk));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(twofish_xts_dec);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -624,7 +658,11 @@ module_exit(twofish_exit);
 MODULE_DESCRIPTION("Twofish Cipher Algorithm, AVX optimized");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("twofish");
+=======
+MODULE_ALIAS("twofish");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("twofish");
 >>>>>>> v3.18

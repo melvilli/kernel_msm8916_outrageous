@@ -72,6 +72,10 @@ struct dm_disk_bitset {
 
 	bool current_index_set:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool dirty:1;
+>>>>>>> v3.18
 =======
 	bool dirty:1;
 >>>>>>> v3.18

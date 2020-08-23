@@ -72,6 +72,10 @@ static irqreturn_t iio_simple_dummy_trigger_h(int irq, void *p)
 		 */
 		int i, j;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -87,11 +91,16 @@ static irqreturn_t iio_simple_dummy_trigger_h(int irq, void *p)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Store the timestamp at an 8 byte aligned offset */
 	if (indio_dev->scan_timestamp)
 		*(s64 *)((u8 *)data + ALIGN(len, sizeof(s64)))
 			= iio_get_time_ns();
 	iio_push_to_buffers(indio_dev, (u8 *)data);
+=======
+
+	iio_push_to_buffers_with_timestamp(indio_dev, data, iio_get_time_ns());
+>>>>>>> v3.18
 =======
 
 	iio_push_to_buffers_with_timestamp(indio_dev, data, iio_get_time_ns());
@@ -112,6 +121,7 @@ done:
 static const struct iio_buffer_setup_ops iio_simple_dummy_buffer_setup_ops = {
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * iio_sw_buffer_preenable:
 	 * Generic function for equal sized ring elements + 64 bit timestamp
 	 * Assumes that any combination of channels can be enabled.
@@ -120,6 +130,8 @@ static const struct iio_buffer_setup_ops iio_simple_dummy_buffer_setup_ops = {
 	 */
 	.preenable = &iio_sw_buffer_preenable,
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * iio_triggered_buffer_postenable:
@@ -151,7 +163,11 @@ int iio_simple_dummy_configure_buffer(struct iio_dev *indio_dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev->buffer = buffer;
+=======
+	iio_device_attach_buffer(indio_dev, buffer);
+>>>>>>> v3.18
 =======
 	iio_device_attach_buffer(indio_dev, buffer);
 >>>>>>> v3.18

@@ -19,6 +19,10 @@
 #include <linux/slab.h>
 #include <linux/kmsg_dump.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pstore.h>
+>>>>>>> v3.18
 =======
 #include <linux/pstore.h>
 >>>>>>> v3.18
@@ -34,7 +38,10 @@
 #define NVRW_CNT 0x20
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Set oops header version to distinguish between old and new format header.
  * lnx,oops-log partition max size is 4000, header version > 4000 will
@@ -42,6 +49,9 @@
  */
 #define OOPS_HDR_VERSION 5000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned int nvram_size;
 static int nvram_fetch, nvram_store;
@@ -50,8 +60,13 @@ static DEFINE_SPINLOCK(nvram_lock);
 
 struct err_log_info {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int error_type;
 	unsigned int seq_num;
+=======
+	__be32 error_type;
+	__be32 seq_num;
+>>>>>>> v3.18
 =======
 	__be32 error_type;
 	__be32 seq_num;
@@ -65,6 +80,10 @@ struct nvram_os_partition {
 	long size;	/* size of data portion (excluding err_log_info) */
 	long index;	/* offset of data portion of partition */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool os_partition; /* partition initialized by OS, not FW */
+>>>>>>> v3.18
 =======
 	bool os_partition; /* partition initialized by OS, not FW */
 >>>>>>> v3.18
@@ -75,7 +94,12 @@ static struct nvram_os_partition rtas_log_partition = {
 	.req_size = 2079,
 	.min_size = 1055,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.index = -1
+=======
+	.index = -1,
+	.os_partition = true
+>>>>>>> v3.18
 =======
 	.index = -1,
 	.os_partition = true
@@ -87,7 +111,12 @@ static struct nvram_os_partition oops_log_partition = {
 	.req_size = 4000,
 	.min_size = 2000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.index = -1
+=======
+	.index = -1,
+	.os_partition = true
+>>>>>>> v3.18
 =======
 	.index = -1,
 	.os_partition = true
@@ -101,13 +130,19 @@ static const char *pseries_nvram_os_partitions[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct oops_log_info {
 	__be16 version;
 	__be16 report_length;
 	__be64 timestamp;
 } __attribute__((packed));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void oops_to_nvram(struct kmsg_dumper *dumper,
 			  enum kmsg_dump_reason reason);
@@ -126,6 +161,7 @@ static unsigned long last_unread_rtas_event;	/* timestamp */
  * big_oops_buf[] holds the uncompressed text we're capturing.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * oops_buf[] holds the compressed text, preceded by a prefix.
  * The prefix is just a u16 holding the length of the compressed* text.
  * (*Or uncompressed, if compression fails.)  oops_buf[] gets written
@@ -143,6 +179,8 @@ static unsigned long last_unread_rtas_event;	/* timestamp */
  * ^
  * +- oops_len
 =======
+=======
+>>>>>>> v3.18
  * oops_buf[] holds the compressed text, preceded by a oops header.
  * oops header has u16 holding the version of oops header (to differentiate
  * between old and new format header) followed by u16 holding the length of
@@ -160,6 +198,9 @@ static unsigned long last_unread_rtas_event;	/* timestamp */
  * +-----------+-----------+-----------+------------------------+
  * ^
  * +- oops_log_info
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * We preallocate these buffers during init to avoid kmalloc during oops/panic.
@@ -167,7 +208,10 @@ static unsigned long last_unread_rtas_event;	/* timestamp */
 static size_t big_oops_buf_sz;
 static char *big_oops_buf, *oops_buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 *oops_len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static char *oops_data;
@@ -180,7 +224,10 @@ static size_t oops_data_sz;
 static struct z_stream_s stream;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PSTORE
 static struct nvram_os_partition of_config_partition = {
 	.name = "of-config",
@@ -205,6 +252,9 @@ static int read_type;
 static unsigned long last_rtas_event;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t pSeries_nvram_read(char *buf, size_t count, loff_t *index)
 {
@@ -328,13 +378,19 @@ static ssize_t pSeries_nvram_get_size(void)
  * error log: The error log from event_scan
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int nvram_write_os_partition(struct nvram_os_partition *part, char * buff,
 		int length, unsigned int err_type, unsigned int error_log_cnt)
 =======
+=======
+>>>>>>> v3.18
 static int nvram_write_os_partition(struct nvram_os_partition *part,
 				    char *buff, int length,
 				    unsigned int err_type,
 				    unsigned int error_log_cnt)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int rc;
@@ -350,8 +406,13 @@ static int nvram_write_os_partition(struct nvram_os_partition *part,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info.error_type = err_type;
 	info.seq_num = error_log_cnt;
+=======
+	info.error_type = cpu_to_be32(err_type);
+	info.seq_num = cpu_to_be32(error_log_cnt);
+>>>>>>> v3.18
 =======
 	info.error_type = cpu_to_be32(err_type);
 	info.seq_num = cpu_to_be32(error_log_cnt);
@@ -362,7 +423,11 @@ static int nvram_write_os_partition(struct nvram_os_partition *part,
 	rc = ppc_md.nvram_write((char *)&info, sizeof(struct err_log_info), &tmp_index);
 	if (rc <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("%s: Failed nvram_write (%d)\n", __FUNCTION__, rc);
+=======
+		pr_err("%s: Failed nvram_write (%d)\n", __func__, rc);
+>>>>>>> v3.18
 =======
 		pr_err("%s: Failed nvram_write (%d)\n", __func__, rc);
 >>>>>>> v3.18
@@ -372,7 +437,11 @@ static int nvram_write_os_partition(struct nvram_os_partition *part,
 	rc = ppc_md.nvram_write(buff, length, &tmp_index);
 	if (rc <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("%s: Failed nvram_write (%d)\n", __FUNCTION__, rc);
+=======
+		pr_err("%s: Failed nvram_write (%d)\n", __func__, rc);
+>>>>>>> v3.18
 =======
 		pr_err("%s: Failed nvram_write (%d)\n", __func__, rc);
 >>>>>>> v3.18
@@ -388,6 +457,7 @@ int nvram_write_error_log(char * buff, int length,
 	int rc = nvram_write_os_partition(&rtas_log_partition, buff, length,
 						err_type, error_log_cnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rc)
 		last_unread_rtas_event = get_seconds();
 	return rc;
@@ -400,6 +470,8 @@ int nvram_write_error_log(char * buff, int length,
 int nvram_read_error_log(char * buff, int length,
                          unsigned int * err_type, unsigned int * error_log_cnt)
 =======
+=======
+>>>>>>> v3.18
 	if (!rc) {
 		last_unread_rtas_event = get_seconds();
 #ifdef CONFIG_PSTORE
@@ -417,12 +489,16 @@ int nvram_read_error_log(char * buff, int length,
 static int nvram_read_partition(struct nvram_os_partition *part, char *buff,
 				int length, unsigned int *err_type,
 				unsigned int *error_log_cnt)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int rc;
 	loff_t tmp_index;
 	struct err_log_info info;
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (rtas_log_partition.index == -1)
 		return -1;
@@ -437,6 +513,8 @@ static int nvram_read_partition(struct nvram_os_partition *part, char *buff,
 		printk(KERN_ERR "nvram_read_error_log: Failed nvram_read (%d)\n", rc);
 		return rc;
 =======
+=======
+>>>>>>> v3.18
 	if (part->index == -1)
 		return -1;
 
@@ -453,11 +531,15 @@ static int nvram_read_partition(struct nvram_os_partition *part, char *buff,
 			pr_err("%s: Failed nvram_read (%d)\n", __func__, rc);
 			return rc;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	rc = ppc_md.nvram_read(buff, length, &tmp_index);
 	if (rc <= 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk(KERN_ERR "nvram_read_error_log: Failed nvram_read (%d)\n", rc);
 		return rc;
@@ -466,6 +548,8 @@ static int nvram_read_partition(struct nvram_os_partition *part, char *buff,
 	*error_log_cnt = info.seq_num;
 	*err_type = info.error_type;
 =======
+=======
+>>>>>>> v3.18
 		pr_err("%s: Failed nvram_read (%d)\n", __func__, rc);
 		return rc;
 	}
@@ -474,13 +558,19 @@ static int nvram_read_partition(struct nvram_os_partition *part, char *buff,
 		*error_log_cnt = be32_to_cpu(info.seq_num);
 		*err_type = be32_to_cpu(info.error_type);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* nvram_read_error_log
  *
  * Reads nvram for error log for at most 'length'
@@ -492,6 +582,9 @@ int nvram_read_error_log(char *buff, int length,
 						err_type, error_log_cnt);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* This doesn't actually zero anything, but it sets the event_logged
  * word to tell that this event is safely in syslog.
@@ -541,9 +634,12 @@ static int __init pseries_nvram_init_os_partition(struct nvram_os_partition
 	int size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Scan nvram for partitions */
 	nvram_scan_partitions();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Look for ours */
@@ -585,7 +681,10 @@ static int __init pseries_nvram_init_os_partition(struct nvram_os_partition
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Are we using the ibm,rtas-log for oops/panic reports?  And if so,
  * would logging this oops/panic overwrite an RTAS event that rtas_errd
@@ -847,6 +946,9 @@ static int nvram_pstore_init(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init nvram_init_oops_partition(int rtas_partition_exists)
 {
@@ -869,10 +971,13 @@ static void __init nvram_init_oops_partition(int rtas_partition_exists)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oops_len = (u16*) oops_buf;
 	oops_data = oops_buf + sizeof(u16);
 	oops_data_sz = oops_log_partition.size - sizeof(u16);
 =======
+=======
+>>>>>>> v3.18
 	oops_data = oops_buf + sizeof(struct oops_log_info);
 	oops_data_sz = oops_log_partition.size - sizeof(struct oops_log_info);
 
@@ -880,6 +985,9 @@ static void __init nvram_init_oops_partition(int rtas_partition_exists)
 
 	if (!rc)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -891,8 +999,13 @@ static void __init nvram_init_oops_partition(int rtas_partition_exists)
 	big_oops_buf = kmalloc(big_oops_buf_sz, GFP_KERNEL);
 	if (big_oops_buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		stream.workspace = kmalloc(zlib_deflate_workspacesize(
 				WINDOW_BITS, MEM_LEVEL), GFP_KERNEL);
+=======
+		stream.workspace =  kmalloc(zlib_deflate_workspacesize(
+					WINDOW_BITS, MEM_LEVEL), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		stream.workspace =  kmalloc(zlib_deflate_workspacesize(
 					WINDOW_BITS, MEM_LEVEL), GFP_KERNEL);
@@ -924,6 +1037,12 @@ static int __init pseries_nvram_init_log_partitions(void)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Scan nvram for partitions */
+	nvram_scan_partitions();
+
+>>>>>>> v3.18
 =======
 	/* Scan nvram for partitions */
 	nvram_scan_partitions();
@@ -939,7 +1058,11 @@ int __init pSeries_nvram_init(void)
 {
 	struct device_node *nvram;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const unsigned int *nbytes_p;
+=======
+	const __be32 *nbytes_p;
+>>>>>>> v3.18
 =======
 	const __be32 *nbytes_p;
 >>>>>>> v3.18
@@ -956,7 +1079,11 @@ int __init pSeries_nvram_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvram_size = *nbytes_p;
+=======
+	nvram_size = be32_to_cpup(nbytes_p);
+>>>>>>> v3.18
 =======
 	nvram_size = be32_to_cpup(nbytes_p);
 >>>>>>> v3.18
@@ -973,6 +1100,7 @@ int __init pSeries_nvram_init(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Are we using the ibm,rtas-log for oops/panic reports?  And if so,
@@ -1040,6 +1168,8 @@ static int zip_oops(size_t text_len)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /*
  * This is our kmsg_dump callback, called after an oops or panic report
@@ -1052,6 +1182,10 @@ static void oops_to_nvram(struct kmsg_dumper *dumper,
 			  enum kmsg_dump_reason reason)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct oops_log_info *oops_hdr = (struct oops_log_info *)oops_buf;
+>>>>>>> v3.18
 =======
 	struct oops_log_info *oops_hdr = (struct oops_log_info *)oops_buf;
 >>>>>>> v3.18
@@ -1082,7 +1216,11 @@ static void oops_to_nvram(struct kmsg_dumper *dumper,
 	default:
 		pr_err("%s: ignoring unrecognized KMSG_DUMP_* reason %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 						__FUNCTION__, (int) reason);
+=======
+		       __func__, (int) reason);
+>>>>>>> v3.18
 =======
 		       __func__, (int) reason);
 >>>>>>> v3.18
@@ -1103,6 +1241,7 @@ static void oops_to_nvram(struct kmsg_dumper *dumper,
 	if (rc != 0) {
 		kmsg_dump_rewind(dumper);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kmsg_dump_get_buffer(dumper, true,
 				     oops_data, oops_data_sz, &text_len);
 		err_type = ERR_TYPE_KERNEL_PANIC;
@@ -1112,6 +1251,8 @@ static void oops_to_nvram(struct kmsg_dumper *dumper,
 	(void) nvram_write_os_partition(&oops_log_partition, oops_buf,
 		(int) (sizeof(*oops_len) + *oops_len), err_type, ++oops_count);
 =======
+=======
+>>>>>>> v3.18
 		kmsg_dump_get_buffer(dumper, false,
 				     oops_data, oops_data_sz, &text_len);
 		err_type = ERR_TYPE_KERNEL_PANIC;
@@ -1123,6 +1264,9 @@ static void oops_to_nvram(struct kmsg_dumper *dumper,
 	(void) nvram_write_os_partition(&oops_log_partition, oops_buf,
 		(int) (sizeof(*oops_hdr) + text_len), err_type,
 		++oops_count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock_irqrestore(&lock, flags);

@@ -26,6 +26,10 @@
 #define LINE6_DEVID_POCKETPOD     0x5051
 #define LINE6_DEVID_PODHD300      0x5057
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define LINE6_DEVID_PODHD400      0x5058
+>>>>>>> v3.18
 =======
 #define LINE6_DEVID_PODHD400      0x5058
 >>>>>>> v3.18
@@ -53,6 +57,10 @@ enum {
 	LINE6_INDEX_POCKETPOD,
 	LINE6_INDEX_PODHD300,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	LINE6_INDEX_PODHD400,
+>>>>>>> v3.18
 =======
 	LINE6_INDEX_PODHD400,
 >>>>>>> v3.18
@@ -77,6 +85,10 @@ enum {
 	LINE6_BIT(POCKETPOD),
 	LINE6_BIT(PODHD300),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	LINE6_BIT(PODHD400),
+>>>>>>> v3.18
 =======
 	LINE6_BIT(PODHD400),
 >>>>>>> v3.18
@@ -101,7 +113,13 @@ enum {
 			      LINE6_BIT_PODXTPRO,
 	LINE6_BITS_PODX3ALL = LINE6_BIT_PODX3 | LINE6_BIT_PODX3LIVE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LINE6_BITS_PODHDALL = LINE6_BIT_PODHD300 | LINE6_BIT_PODHD500,
+=======
+	LINE6_BITS_PODHDALL = LINE6_BIT_PODHD300 |
+			      LINE6_BIT_PODHD400 |
+			      LINE6_BIT_PODHD500,
+>>>>>>> v3.18
 =======
 	LINE6_BITS_PODHDALL = LINE6_BIT_PODHD300 |
 			      LINE6_BIT_PODHD400 |
@@ -120,7 +138,11 @@ enum {
 #define LINE6_BIT_HWMON (1 << 2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LINE6_BIT_CONTROL_PCM_HWMON	(LINE6_BIT_CONTROL |	\
+=======
+#define LINE6_BIT_CTRL_PCM_HW	(LINE6_BIT_CONTROL |	\
+>>>>>>> v3.18
 =======
 #define LINE6_BIT_CTRL_PCM_HW	(LINE6_BIT_CONTROL |	\
 >>>>>>> v3.18

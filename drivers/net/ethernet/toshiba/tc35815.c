@@ -39,7 +39,10 @@ static const char *version = "tc35815.c:v" DRV_VERSION "\n";
 #include <linux/spinlock.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/netdevice.h>
@@ -70,7 +73,11 @@ static const struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(tc35815_pci_tbl) = {
+=======
+static const struct pci_device_id tc35815_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id tc35815_pci_tbl[] = {
 >>>>>>> v3.18
@@ -895,7 +902,10 @@ static void tc35815_remove_one(struct pci_dev *pdev)
 	unregister_netdev(dev);
 	free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1182,6 +1192,7 @@ static void tc35815_restart(struct net_device *dev)
 {
 	struct tc35815_local *lp = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (lp->phy_dev) {
 		int timeout;
@@ -1196,12 +1207,17 @@ static void tc35815_restart(struct net_device *dev)
 		if (!timeout)
 			printk(KERN_ERR "%s: BMCR reset failed.\n", dev->name);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	if (lp->phy_dev) {
 		ret = phy_init_hw(lp->phy_dev);
 		if (ret)
 			printk(KERN_ERR "%s: PHY init failed.\n", dev->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1674,6 +1690,12 @@ static int tc35815_poll(struct napi_struct *napi, int budget)
 	u32 status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (budget <= 0)
+		return received;
+
+>>>>>>> v3.18
 =======
 	if (budget <= 0)
 		return received;
@@ -2235,6 +2257,7 @@ module_param_named(duplex, options.duplex, int, 0);
 MODULE_PARM_DESC(duplex, "0:auto, 1:half, 2:full");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init tc35815_init_module(void)
 {
 	return pci_register_driver(&tc35815_pci_driver);
@@ -2248,6 +2271,9 @@ static void __exit tc35815_cleanup_module(void)
 module_init(tc35815_init_module);
 module_exit(tc35815_cleanup_module);
 
+=======
+module_pci_driver(tc35815_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(tc35815_pci_driver);
 >>>>>>> v3.18

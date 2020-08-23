@@ -18,6 +18,7 @@
 
 /* include hw specification */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "hw/host1x01.h"
 #include "hw/host1x01_hardware.h"
 
@@ -30,6 +31,8 @@
 
 #include "dev.h"
 =======
+=======
+>>>>>>> v3.18
 #include "host1x01.h"
 #include "host1x01_hardware.h"
 
@@ -41,6 +44,9 @@
 #include "syncpt_hw.c"
 
 #include "../dev.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int host1x01_init(struct host1x *host)

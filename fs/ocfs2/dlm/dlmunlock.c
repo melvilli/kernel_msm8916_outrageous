@@ -192,7 +192,13 @@ static enum dlm_status dlmunlock_common(struct dlm_ctxt *dlm,
 		} else if (status == DLM_RECOVERING ||
 			   status == DLM_MIGRATING ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   status == DLM_FORWARD) {
+=======
+			   status == DLM_FORWARD ||
+			   status == DLM_NOLOCKMGR
+			   ) {
+>>>>>>> v3.18
 =======
 			   status == DLM_FORWARD ||
 			   status == DLM_NOLOCKMGR
@@ -207,7 +213,12 @@ static enum dlm_status dlmunlock_common(struct dlm_ctxt *dlm,
 			     status==DLM_RECOVERING?"recovering":
 			     (status==DLM_MIGRATING?"migrating":
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      "forward"));
+=======
+				(status == DLM_FORWARD ? "forward" :
+						"nolockmanager")));
+>>>>>>> v3.18
 =======
 				(status == DLM_FORWARD ? "forward" :
 						"nolockmanager")));
@@ -376,12 +387,18 @@ static enum dlm_status dlm_send_remote_unlock_request(struct dlm_ctxt *dlm,
 			 * just needs to finish out the operation and call
 			 * the unlockast. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = DLM_NORMAL;
 =======
+=======
+>>>>>>> v3.18
 			if (dlm_is_node_dead(dlm, owner))
 				ret = DLM_NORMAL;
 			else
 				ret = DLM_NOLOCKMGR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			/* something bad.  this will BUG in ocfs2 */
@@ -407,7 +424,10 @@ int dlm_unlock_lock_handler(struct o2net_msg *msg, u32 len, void *data,
 	struct dlm_unlock_lock *unlock = (struct dlm_unlock_lock *)msg->buf;
 	struct dlm_lock_resource *res = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *iter;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dlm_lock *lock = NULL;
@@ -480,8 +500,12 @@ int dlm_unlock_lock_handler(struct o2net_msg *msg, u32 len, void *data,
 
 	for (i=0; i<3; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_for_each(iter, queue) {
 			lock = list_entry(iter, struct dlm_lock, list);
+=======
+		list_for_each_entry(lock, queue, list) {
+>>>>>>> v3.18
 =======
 		list_for_each_entry(lock, queue, list) {
 >>>>>>> v3.18
@@ -666,7 +690,13 @@ retry:
 	if (status == DLM_RECOVERING ||
 	    status == DLM_MIGRATING ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    status == DLM_FORWARD) {
+=======
+	    status == DLM_FORWARD ||
+	    status == DLM_NOLOCKMGR) {
+
+>>>>>>> v3.18
 =======
 	    status == DLM_FORWARD ||
 	    status == DLM_NOLOCKMGR) {
@@ -684,7 +714,11 @@ retry:
 
 		mlog(0, "retrying unlock due to pending recovery/"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     "migration/in-progress\n");
+=======
+		     "migration/in-progress/reconnect\n");
+>>>>>>> v3.18
 =======
 		     "migration/in-progress/reconnect\n");
 >>>>>>> v3.18

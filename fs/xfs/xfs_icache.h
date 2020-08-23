@@ -22,6 +22,7 @@ struct xfs_mount;
 struct xfs_perag;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SYNC_WAIT		0x0001	/* wait for i/o to complete */
 #define SYNC_TRYLOCK		0x0002  /* only try to lock inodes */
 
@@ -29,6 +30,8 @@ int xfs_iget(struct xfs_mount *mp, struct xfs_trans *tp, xfs_ino_t ino,
 	     uint flags, uint lock_flags, xfs_inode_t **ipp);
 
 =======
+=======
+>>>>>>> v3.18
 struct xfs_eofblocks {
 	__u32		eof_flags;
 	kuid_t		eof_uid;
@@ -55,13 +58,20 @@ int xfs_iget(struct xfs_mount *mp, struct xfs_trans *tp, xfs_ino_t ino,
 struct xfs_inode * xfs_inode_alloc(struct xfs_mount *mp, xfs_ino_t ino);
 void xfs_inode_free(struct xfs_inode *ip);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void xfs_reclaim_worker(struct work_struct *work);
 
 int xfs_reclaim_inodes(struct xfs_mount *mp, int mode);
 int xfs_reclaim_inodes_count(struct xfs_mount *mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xfs_reclaim_inodes_nr(struct xfs_mount *mp, int nr_to_scan);
+=======
+long xfs_reclaim_inodes_nr(struct xfs_mount *mp, int nr_to_scan);
+>>>>>>> v3.18
 =======
 long xfs_reclaim_inodes_nr(struct xfs_mount *mp, int nr_to_scan);
 >>>>>>> v3.18
@@ -71,6 +81,7 @@ void xfs_inode_set_reclaim_tag(struct xfs_inode *ip);
 void xfs_inode_set_eofblocks_tag(struct xfs_inode *ip);
 void xfs_inode_clear_eofblocks_tag(struct xfs_inode *ip);
 int xfs_icache_free_eofblocks(struct xfs_mount *, struct xfs_eofblocks *);
+<<<<<<< HEAD
 <<<<<<< HEAD
 void xfs_eofblocks_worker(struct work_struct *);
 
@@ -85,6 +96,8 @@ int xfs_inode_ag_iterator_tag(struct xfs_mount *mp,
 	int flags, void *args, int tag);
 
 =======
+=======
+>>>>>>> v3.18
 int xfs_inode_free_quota_eofblocks(struct xfs_inode *ip);
 void xfs_eofblocks_worker(struct work_struct *);
 
@@ -131,5 +144,8 @@ xfs_fs_eofblocks_from_user(
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

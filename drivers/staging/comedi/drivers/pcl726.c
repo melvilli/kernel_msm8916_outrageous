@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/pcl726.c
 
     hardware driver for Advantech cards:
@@ -100,6 +101,8 @@ static const struct comedi_lrange *const rangelist_726[] = {
 static const struct comedi_lrange *const rangelist_727[] = {
 	&range_unipolar5, &range_unipolar10,
 =======
+=======
+>>>>>>> v3.18
  * pcl726.c
  * Comedi driver for 6/12-Channel D/A Output and DIO cards
  *
@@ -192,12 +195,16 @@ static const struct comedi_lrange *const rangelist_726[] = {
 static const struct comedi_lrange *const rangelist_727[] = {
 	&range_unipolar5,
 	&range_unipolar10,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&range_bipolar5,
 	&range_4_20mA
 };
 
 static const struct comedi_lrange *const rangelist_728[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	&range_unipolar5, &range_unipolar10,
 	&range_bipolar5, &range_bipolar10,
@@ -283,6 +290,8 @@ static int pcl726_ao_insn_read(struct comedi_device *dev,
 		data[n] = devpriv->ao_readback[chan];
 	return n;
 =======
+=======
+>>>>>>> v3.18
 	&range_unipolar5,
 	&range_unipolar10,
 	&range_bipolar5,
@@ -454,11 +463,15 @@ static int pcl726_ao_insn_write(struct comedi_device *dev,
 	}
 
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int pcl726_di_insn_bits(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			       struct comedi_insn *insn, unsigned int *data)
 {
@@ -467,6 +480,8 @@ static int pcl726_di_insn_bits(struct comedi_device *dev,
 	data[1] = inb(dev->iobase + board->di_lo) |
 	    (inb(dev->iobase + board->di_hi) << 8);
 =======
+=======
+>>>>>>> v3.18
 			       struct comedi_insn *insn,
 			       unsigned int *data)
 {
@@ -482,6 +497,9 @@ static int pcl726_di_insn_bits(struct comedi_device *dev,
 	}
 
 	data[1] = val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
@@ -489,6 +507,7 @@ static int pcl726_di_insn_bits(struct comedi_device *dev,
 
 static int pcl726_do_insn_bits(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			       struct comedi_insn *insn, unsigned int *data)
 {
@@ -503,6 +522,8 @@ static int pcl726_do_insn_bits(struct comedi_device *dev,
 	if (data[1] & 0xff00)
 		outb((s->state >> 8), dev->iobase + board->do_hi);
 =======
+=======
+>>>>>>> v3.18
 			       struct comedi_insn *insn,
 			       unsigned int *data)
 {
@@ -524,6 +545,9 @@ static int pcl726_do_insn_bits(struct comedi_device *dev,
 				outb((s->state >> 8), io + PCL726_DO_MSB_REG);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data[1] = s->state;
@@ -531,6 +555,7 @@ static int pcl726_do_insn_bits(struct comedi_device *dev,
 	return insn->n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int pcl726_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 {
@@ -643,6 +668,8 @@ static int pcl726_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		s->insn_bits = pcl726_do_insn_bits;
 		s->range_table = &range_digital;
 =======
+=======
+>>>>>>> v3.18
 static int pcl726_attach(struct comedi_device *dev,
 			 struct comedi_devconfig *it)
 {
@@ -741,6 +768,9 @@ static int pcl726_attach(struct comedi_device *dev,
 		s->do_cmdtest	= pcl726_intr_cmdtest;
 		s->do_cmd	= pcl726_intr_cmd;
 		s->cancel	= pcl726_intr_cancel;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -753,8 +783,13 @@ static struct comedi_driver pcl726_driver = {
 	.attach		= pcl726_attach,
 	.detach		= comedi_legacy_detach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.board_name	= &boardtypes[0].name,
 	.num_names	= ARRAY_SIZE(boardtypes),
+=======
+	.board_name	= &pcl726_boards[0].name,
+	.num_names	= ARRAY_SIZE(pcl726_boards),
+>>>>>>> v3.18
 =======
 	.board_name	= &pcl726_boards[0].name,
 	.num_names	= ARRAY_SIZE(pcl726_boards),
@@ -765,7 +800,11 @@ module_comedi_driver(pcl726_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("Comedi driver for Advantech PCL-726 & compatibles");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Comedi driver for Advantech PCL-726 & compatibles");
 >>>>>>> v3.18

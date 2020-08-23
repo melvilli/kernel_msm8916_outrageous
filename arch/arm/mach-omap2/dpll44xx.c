@@ -16,10 +16,14 @@
 #include <linux/bitops.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "soc.h"
 #include "clock.h"
 #include "clock44xx.h"
 #include "cm-regbits-44xx.h"
+=======
+#include "clock.h"
+>>>>>>> v3.18
 =======
 #include "clock.h"
 >>>>>>> v3.18
@@ -34,7 +38,10 @@
 #define OMAP4_DPLL_LP_FOUT_MAX	100000000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Bitfield declarations
  */
@@ -45,6 +52,9 @@
 /* Static rate multiplier for OMAP4 REGM4XEN clocks */
 #define OMAP4430_REGM4XEN_MULT				4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Supported only on OMAP4 */
 int omap4_dpllmx_gatectrl_read(struct clk_hw_omap *clk)
@@ -53,7 +63,11 @@ int omap4_dpllmx_gatectrl_read(struct clk_hw_omap *clk)
 	u32 mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!clk || !clk->clksel_reg || !cpu_is_omap44xx())
+=======
+	if (!clk || !clk->clksel_reg)
+>>>>>>> v3.18
 =======
 	if (!clk || !clk->clksel_reg)
 >>>>>>> v3.18
@@ -64,7 +78,11 @@ int omap4_dpllmx_gatectrl_read(struct clk_hw_omap *clk)
 			OMAP4430_DPLL_CLKOUT_GATE_CTRL_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(clk->clksel_reg);
+=======
+	v = omap2_clk_readl(clk, clk->clksel_reg);
+>>>>>>> v3.18
 =======
 	v = omap2_clk_readl(clk, clk->clksel_reg);
 >>>>>>> v3.18
@@ -80,7 +98,11 @@ void omap4_dpllmx_allow_gatectrl(struct clk_hw_omap *clk)
 	u32 mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!clk || !clk->clksel_reg || !cpu_is_omap44xx())
+=======
+	if (!clk || !clk->clksel_reg)
+>>>>>>> v3.18
 =======
 	if (!clk || !clk->clksel_reg)
 >>>>>>> v3.18
@@ -91,15 +113,21 @@ void omap4_dpllmx_allow_gatectrl(struct clk_hw_omap *clk)
 			OMAP4430_DPLL_CLKOUT_GATE_CTRL_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(clk->clksel_reg);
 	/* Clear the bit to allow gatectrl */
 	v &= ~mask;
 	__raw_writel(v, clk->clksel_reg);
 =======
+=======
+>>>>>>> v3.18
 	v = omap2_clk_readl(clk, clk->clksel_reg);
 	/* Clear the bit to allow gatectrl */
 	v &= ~mask;
 	omap2_clk_writel(v, clk, clk->clksel_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -109,7 +137,11 @@ void omap4_dpllmx_deny_gatectrl(struct clk_hw_omap *clk)
 	u32 mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!clk || !clk->clksel_reg || !cpu_is_omap44xx())
+=======
+	if (!clk || !clk->clksel_reg)
+>>>>>>> v3.18
 =======
 	if (!clk || !clk->clksel_reg)
 >>>>>>> v3.18
@@ -120,15 +152,21 @@ void omap4_dpllmx_deny_gatectrl(struct clk_hw_omap *clk)
 			OMAP4430_DPLL_CLKOUT_GATE_CTRL_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(clk->clksel_reg);
 	/* Set the bit to deny gatectrl */
 	v |= mask;
 	__raw_writel(v, clk->clksel_reg);
 =======
+=======
+>>>>>>> v3.18
 	v = omap2_clk_readl(clk, clk->clksel_reg);
 	/* Set the bit to deny gatectrl */
 	v |= mask;
 	omap2_clk_writel(v, clk, clk->clksel_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -188,7 +226,11 @@ unsigned long omap4_dpll_regm4xen_recalc(struct clk_hw *hw,
 
 	/* regm4xen adds a multiplier of 4 to DPLL calculations */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(dd->control_reg);
+=======
+	v = omap2_clk_readl(clk, dd->control_reg);
+>>>>>>> v3.18
 =======
 	v = omap2_clk_readl(clk, dd->control_reg);
 >>>>>>> v3.18

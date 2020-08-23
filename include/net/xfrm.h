@@ -54,7 +54,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct mutex xfrm_cfg_mutex;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -123,16 +126,22 @@ struct xfrm_state_walk {
 	struct list_head	all;
 	u8			state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union {
 		u8		dying;
 		u8		proto;
 	};
 	u32			seq;
 =======
+=======
+>>>>>>> v3.18
 	u8			dying;
 	u8			proto;
 	u32			seq;
 	struct xfrm_address_filter *filter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -318,6 +327,7 @@ struct xfrm_policy_afinfo {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int xfrm_policy_register_afinfo(struct xfrm_policy_afinfo *afinfo);
 extern int xfrm_policy_unregister_afinfo(struct xfrm_policy_afinfo *afinfo);
 extern void km_policy_notify(struct xfrm_policy *xp, int dir, const struct km_event *c);
@@ -328,6 +338,8 @@ extern int km_query(struct xfrm_state *x, struct xfrm_tmpl *t, struct xfrm_polic
 extern void km_state_expired(struct xfrm_state *x, int hard, u32 portid);
 extern int __xfrm_state_delete(struct xfrm_state *x);
 =======
+=======
+>>>>>>> v3.18
 int xfrm_policy_register_afinfo(struct xfrm_policy_afinfo *afinfo);
 int xfrm_policy_unregister_afinfo(struct xfrm_policy_afinfo *afinfo);
 void km_policy_notify(struct xfrm_policy *xp, int dir,
@@ -339,6 +351,9 @@ int km_query(struct xfrm_state *x, struct xfrm_tmpl *t,
 	     struct xfrm_policy *pol);
 void km_state_expired(struct xfrm_state *x, int hard, u32 portid);
 int __xfrm_state_delete(struct xfrm_state *x);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct xfrm_state_afinfo {
@@ -358,7 +373,11 @@ struct xfrm_state_afinfo {
 	int			(*tmpl_sort)(struct xfrm_tmpl **dst, struct xfrm_tmpl **src, int n);
 	int			(*state_sort)(struct xfrm_state **dst, struct xfrm_state **src, int n);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			(*output)(struct sk_buff *skb);
+=======
+	int			(*output)(struct sock *sk, struct sk_buff *skb);
+>>>>>>> v3.18
 =======
 	int			(*output)(struct sock *sk, struct sk_buff *skb);
 >>>>>>> v3.18
@@ -370,6 +389,7 @@ struct xfrm_state_afinfo {
 	int			(*transport_finish)(struct sk_buff *skb,
 						    int async);
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 extern int xfrm_state_register_afinfo(struct xfrm_state_afinfo *afinfo);
@@ -377,6 +397,8 @@ extern int xfrm_state_unregister_afinfo(struct xfrm_state_afinfo *afinfo);
 
 extern void xfrm_state_delete_tunnel(struct xfrm_state *x);
 =======
+=======
+>>>>>>> v3.18
 	void			(*local_error)(struct sk_buff *skb, u32 mtu);
 };
 
@@ -396,6 +418,9 @@ int xfrm_input_register_afinfo(struct xfrm_input_afinfo *afinfo);
 int xfrm_input_unregister_afinfo(struct xfrm_input_afinfo *afinfo);
 
 void xfrm_state_delete_tunnel(struct xfrm_state *x);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct xfrm_type {
@@ -420,8 +445,13 @@ struct xfrm_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int xfrm_register_type(const struct xfrm_type *type, unsigned short family);
 extern int xfrm_unregister_type(const struct xfrm_type *type, unsigned short family);
+=======
+int xfrm_register_type(const struct xfrm_type *type, unsigned short family);
+int xfrm_unregister_type(const struct xfrm_type *type, unsigned short family);
+>>>>>>> v3.18
 =======
 int xfrm_register_type(const struct xfrm_type *type, unsigned short family);
 int xfrm_unregister_type(const struct xfrm_type *type, unsigned short family);
@@ -487,8 +517,13 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int xfrm_register_mode(struct xfrm_mode *mode, int family);
 extern int xfrm_unregister_mode(struct xfrm_mode *mode, int family);
+=======
+int xfrm_register_mode(struct xfrm_mode *mode, int family);
+int xfrm_unregister_mode(struct xfrm_mode *mode, int family);
+>>>>>>> v3.18
 =======
 int xfrm_register_mode(struct xfrm_mode *mode, int family);
 int xfrm_unregister_mode(struct xfrm_mode *mode, int family);
@@ -651,11 +686,14 @@ struct xfrm_mgr {
 					   int num_bundles,
 					   const struct xfrm_kmaddress *k);
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 extern int xfrm_register_km(struct xfrm_mgr *km);
 extern int xfrm_unregister_km(struct xfrm_mgr *km);
 =======
+=======
+>>>>>>> v3.18
 	bool			(*is_alive)(const struct km_event *c);
 };
 
@@ -675,6 +713,9 @@ struct xfrm_tunnel_skb_cb {
 };
 
 #define XFRM_TUNNEL_SKB_CB(__skb) ((struct xfrm_tunnel_skb_cb *)&((__skb)->cb[0]))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -684,10 +725,14 @@ struct xfrm_tunnel_skb_cb {
  */
 struct xfrm_skb_cb {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union {
 		struct inet_skb_parm h4;
 		struct inet6_skb_parm h6;
         } header;
+=======
+	struct xfrm_tunnel_skb_cb header;
+>>>>>>> v3.18
 =======
 	struct xfrm_tunnel_skb_cb header;
 >>>>>>> v3.18
@@ -713,10 +758,14 @@ struct xfrm_skb_cb {
  */
 struct xfrm_mode_skb_cb {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union {
 		struct inet_skb_parm h4;
 		struct inet6_skb_parm h6;
 	} header;
+=======
+	struct xfrm_tunnel_skb_cb header;
+>>>>>>> v3.18
 =======
 	struct xfrm_tunnel_skb_cb header;
 >>>>>>> v3.18
@@ -752,10 +801,14 @@ struct xfrm_mode_skb_cb {
  */
 struct xfrm_spi_skb_cb {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union {
 		struct inet_skb_parm h4;
 		struct inet6_skb_parm h6;
 	} header;
+=======
+	struct xfrm_tunnel_skb_cb header;
+>>>>>>> v3.18
 =======
 	struct xfrm_tunnel_skb_cb header;
 >>>>>>> v3.18
@@ -767,6 +820,7 @@ struct xfrm_spi_skb_cb {
 #define XFRM_SPI_SKB_CB(__skb) ((struct xfrm_spi_skb_cb *)&((__skb)->cb[0]))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Audit Information */
 struct xfrm_audit {
 	u32	secid;
@@ -774,6 +828,8 @@ struct xfrm_audit {
 	u32	sessionid;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_AUDITSYSCALL
@@ -791,6 +847,7 @@ static inline struct audit_buffer *xfrm_audit_start(const char *op)
 	return audit_buf;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void xfrm_audit_helper_usrinfo(kuid_t auid, u32 ses, u32 secid,
 					     struct audit_buffer *audit_buf)
@@ -830,6 +887,8 @@ extern void xfrm_audit_state_icvfail(struct xfrm_state *x,
 static inline void xfrm_audit_policy_add(struct xfrm_policy *xp, int result,
 				  kuid_t auid, u32 ses, u32 secid)
 =======
+=======
+>>>>>>> v3.18
 static inline void xfrm_audit_helper_usrinfo(bool task_valid,
 					     struct audit_buffer *audit_buf)
 {
@@ -861,13 +920,20 @@ void xfrm_audit_state_icvfail(struct xfrm_state *x, struct sk_buff *skb,
 
 static inline void xfrm_audit_policy_add(struct xfrm_policy *xp, int result,
 					 bool task_valid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 }
 
 static inline void xfrm_audit_policy_delete(struct xfrm_policy *xp, int result,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  kuid_t auid, u32 ses, u32 secid)
+=======
+					    bool task_valid)
+>>>>>>> v3.18
 =======
 					    bool task_valid)
 >>>>>>> v3.18
@@ -876,7 +942,11 @@ static inline void xfrm_audit_policy_delete(struct xfrm_policy *xp, int result,
 
 static inline void xfrm_audit_state_add(struct xfrm_state *x, int result,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 kuid_t auid, u32 ses, u32 secid)
+=======
+					bool task_valid)
+>>>>>>> v3.18
 =======
 					bool task_valid)
 >>>>>>> v3.18
@@ -885,7 +955,11 @@ static inline void xfrm_audit_state_add(struct xfrm_state *x, int result,
 
 static inline void xfrm_audit_state_delete(struct xfrm_state *x, int result,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    kuid_t auid, u32 ses, u32 secid)
+=======
+					   bool task_valid)
+>>>>>>> v3.18
 =======
 					   bool task_valid)
 >>>>>>> v3.18
@@ -925,7 +999,11 @@ static inline void xfrm_pol_hold(struct xfrm_policy *policy)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void xfrm_policy_destroy(struct xfrm_policy *policy);
+=======
+void xfrm_policy_destroy(struct xfrm_policy *policy);
+>>>>>>> v3.18
 =======
 void xfrm_policy_destroy(struct xfrm_policy *policy);
 >>>>>>> v3.18
@@ -944,7 +1022,11 @@ static inline void xfrm_pols_put(struct xfrm_policy **pols, int npols)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __xfrm_state_destroy(struct xfrm_state *);
+=======
+void __xfrm_state_destroy(struct xfrm_state *);
+>>>>>>> v3.18
 =======
 void __xfrm_state_destroy(struct xfrm_state *);
 >>>>>>> v3.18
@@ -1052,9 +1134,14 @@ __be16 xfrm_flowi_dport(const struct flowi *fl, const union flowi_uli *uli)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool xfrm_selector_match(const struct xfrm_selector *sel,
 				const struct flowi *fl,
 				unsigned short family);
+=======
+bool xfrm_selector_match(const struct xfrm_selector *sel,
+			 const struct flowi *fl, unsigned short family);
+>>>>>>> v3.18
 =======
 bool xfrm_selector_match(const struct xfrm_selector *sel,
 			 const struct flowi *fl, unsigned short family);
@@ -1129,7 +1216,11 @@ static inline void xfrm_dst_destroy(struct xfrm_dst *xdst)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void xfrm_dst_ifdown(struct dst_entry *dst, struct net_device *dev);
+=======
+void xfrm_dst_ifdown(struct dst_entry *dst, struct net_device *dev);
+>>>>>>> v3.18
 =======
 void xfrm_dst_ifdown(struct dst_entry *dst, struct net_device *dev);
 >>>>>>> v3.18
@@ -1158,7 +1249,11 @@ secpath_get(struct sec_path *sp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __secpath_destroy(struct sec_path *sp);
+=======
+void __secpath_destroy(struct sec_path *sp);
+>>>>>>> v3.18
 =======
 void __secpath_destroy(struct sec_path *sp);
 >>>>>>> v3.18
@@ -1171,7 +1266,11 @@ secpath_put(struct sec_path *sp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct sec_path *secpath_dup(struct sec_path *src);
+=======
+struct sec_path *secpath_dup(struct sec_path *src);
+>>>>>>> v3.18
 =======
 struct sec_path *secpath_dup(struct sec_path *src);
 >>>>>>> v3.18
@@ -1225,7 +1324,12 @@ xfrm_state_addr_cmp(const struct xfrm_tmpl *tmpl, const struct xfrm_state *x, un
 
 #ifdef CONFIG_XFRM
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __xfrm_policy_check(struct sock *, int dir, struct sk_buff *skb, unsigned short family);
+=======
+int __xfrm_policy_check(struct sock *, int dir, struct sk_buff *skb,
+			unsigned short family);
+>>>>>>> v3.18
 =======
 int __xfrm_policy_check(struct sock *, int dir, struct sk_buff *skb,
 			unsigned short family);
@@ -1274,8 +1378,13 @@ static inline int xfrm6_policy_check_reverse(struct sock *sk, int dir,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __xfrm_decode_session(struct sk_buff *skb, struct flowi *fl,
 				 unsigned int family, int reverse);
+=======
+int __xfrm_decode_session(struct sk_buff *skb, struct flowi *fl,
+			  unsigned int family, int reverse);
+>>>>>>> v3.18
 =======
 int __xfrm_decode_session(struct sk_buff *skb, struct flowi *fl,
 			  unsigned int family, int reverse);
@@ -1295,7 +1404,11 @@ static inline int xfrm_decode_session_reverse(struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __xfrm_route_forward(struct sk_buff *skb, unsigned short family);
+=======
+int __xfrm_route_forward(struct sk_buff *skb, unsigned short family);
+>>>>>>> v3.18
 =======
 int __xfrm_route_forward(struct sk_buff *skb, unsigned short family);
 >>>>>>> v3.18
@@ -1320,7 +1433,11 @@ static inline int xfrm6_route_forward(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __xfrm_sk_clone_policy(struct sock *sk);
+=======
+int __xfrm_sk_clone_policy(struct sock *sk);
+>>>>>>> v3.18
 =======
 int __xfrm_sk_clone_policy(struct sock *sk);
 >>>>>>> v3.18
@@ -1333,7 +1450,11 @@ static inline int xfrm_sk_clone_policy(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int xfrm_policy_delete(struct xfrm_policy *pol, int dir);
+=======
+int xfrm_policy_delete(struct xfrm_policy *pol, int dir);
+>>>>>>> v3.18
 =======
 int xfrm_policy_delete(struct xfrm_policy *pol, int dir);
 >>>>>>> v3.18
@@ -1351,7 +1472,11 @@ static inline void xfrm_sk_free_policy(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void xfrm_garbage_collect(struct net *net);
+=======
+void xfrm_garbage_collect(struct net *net);
+>>>>>>> v3.18
 =======
 void xfrm_garbage_collect(struct net *net);
 >>>>>>> v3.18
@@ -1538,7 +1663,10 @@ struct xfrm_algo_desc {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* XFRM protocol handlers.  */
 struct xfrm4_protocol {
 	int (*handler)(struct sk_buff *skb);
@@ -1561,6 +1689,9 @@ struct xfrm6_protocol {
 	int priority;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* XFRM tunnel handlers.  */
 struct xfrm_tunnel {
@@ -1580,6 +1711,7 @@ struct xfrm6_tunnel {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void xfrm_init(void);
 extern void xfrm4_init(void);
 extern int xfrm_state_init(struct net *net);
@@ -1591,6 +1723,8 @@ extern void xfrm6_fini(void);
 extern int xfrm6_state_init(void);
 extern void xfrm6_state_fini(void);
 =======
+=======
+>>>>>>> v3.18
 void xfrm_init(void);
 void xfrm4_init(void);
 int xfrm_state_init(struct net *net);
@@ -1604,6 +1738,9 @@ int xfrm6_state_init(void);
 void xfrm6_state_fini(void);
 int xfrm6_protocol_init(void);
 void xfrm6_protocol_fini(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int xfrm6_init(void)
@@ -1618,6 +1755,7 @@ static inline void xfrm6_fini(void)
 
 #ifdef CONFIG_XFRM_STATISTICS
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int xfrm_proc_init(struct net *net);
 extern void xfrm_proc_fini(struct net *net);
 #endif
@@ -1626,6 +1764,8 @@ extern int xfrm_sysctl_init(struct net *net);
 #ifdef CONFIG_SYSCTL
 extern void xfrm_sysctl_fini(struct net *net);
 =======
+=======
+>>>>>>> v3.18
 int xfrm_proc_init(struct net *net);
 void xfrm_proc_fini(struct net *net);
 #endif
@@ -1633,6 +1773,9 @@ void xfrm_proc_fini(struct net *net);
 int xfrm_sysctl_init(struct net *net);
 #ifdef CONFIG_SYSCTL
 void xfrm_sysctl_fini(struct net *net);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline void xfrm_sysctl_fini(struct net *net)
@@ -1640,6 +1783,7 @@ static inline void xfrm_sysctl_fini(struct net *net)
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void xfrm_state_walk_init(struct xfrm_state_walk *walk, u8 proto);
 extern int xfrm_state_walk(struct net *net, struct xfrm_state_walk *walk,
@@ -1678,6 +1822,8 @@ extern int xfrm_state_sort(struct xfrm_state **dst, struct xfrm_state **src,
 static inline int xfrm_tmpl_sort(struct xfrm_tmpl **dst, struct xfrm_tmpl **src,
 				 int n, unsigned short family)
 =======
+=======
+>>>>>>> v3.18
 void xfrm_state_walk_init(struct xfrm_state_walk *walk, u8 proto,
 			  struct xfrm_address_filter *filter);
 int xfrm_state_walk(struct net *net, struct xfrm_state_walk *walk,
@@ -1717,6 +1863,9 @@ int xfrm_state_sort(struct xfrm_state **dst, struct xfrm_state **src, int n,
 #else
 static inline int xfrm_tmpl_sort(struct xfrm_tmpl **dst, struct xfrm_tmpl **src,
 				 int n, unsigned short family, struct net *net)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return -ENOSYS;
@@ -1746,6 +1895,7 @@ struct xfrmk_spdinfo {
 	u32 spdhmcnt;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct xfrm_state *xfrm_find_acq_byseq(struct net *net, u32 mark,
 					      u32 seq);
@@ -1807,6 +1957,8 @@ extern int xfrm6_find_1stfragopt(struct xfrm_state *x, struct sk_buff *skb,
 extern int xfrm4_udp_encap_rcv(struct sock *sk, struct sk_buff *skb);
 extern int xfrm_user_policy(struct sock *sk, int optname, u8 __user *optval, int optlen);
 =======
+=======
+>>>>>>> v3.18
 struct xfrm_state *xfrm_find_acq_byseq(struct net *net, u32 mark, u32 seq);
 int xfrm_state_delete(struct xfrm_state *x);
 int xfrm_state_flush(struct net *net, u8 proto, bool task_valid);
@@ -1875,6 +2027,9 @@ int xfrm6_find_1stfragopt(struct xfrm_state *x, struct sk_buff *skb,
 int xfrm4_udp_encap_rcv(struct sock *sk, struct sk_buff *skb);
 int xfrm_user_policy(struct sock *sk, int optname,
 		     u8 __user *optval, int optlen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int xfrm_user_policy(struct sock *sk, int optname, u8 __user *optval, int optlen)
@@ -1893,16 +2048,22 @@ static inline int xfrm4_udp_encap_rcv(struct sock *sk, struct sk_buff *skb)
 struct xfrm_policy *xfrm_policy_alloc(struct net *net, gfp_t gfp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void xfrm_policy_walk_init(struct xfrm_policy_walk *walk, u8 type);
 extern int xfrm_policy_walk(struct net *net, struct xfrm_policy_walk *walk,
 	int (*func)(struct xfrm_policy *, int, int, void*), void *);
 extern void xfrm_policy_walk_done(struct xfrm_policy_walk *walk);
 =======
+=======
+>>>>>>> v3.18
 void xfrm_policy_walk_init(struct xfrm_policy_walk *walk, u8 type);
 int xfrm_policy_walk(struct net *net, struct xfrm_policy_walk *walk,
 		     int (*func)(struct xfrm_policy *, int, int, void*),
 		     void *);
 void xfrm_policy_walk_done(struct xfrm_policy_walk *walk, struct net *net);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int xfrm_policy_insert(int dir, struct xfrm_policy *policy, int excl);
 struct xfrm_policy *xfrm_policy_bysel_ctx(struct net *net, u32 mark,
@@ -1911,12 +2072,15 @@ struct xfrm_policy *xfrm_policy_bysel_ctx(struct net *net, u32 mark,
 					  struct xfrm_sec_ctx *ctx, int delete,
 					  int *err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct xfrm_policy *xfrm_policy_byid(struct net *net, u32 mark, u8, int dir, u32 id, int delete, int *err);
 int xfrm_policy_flush(struct net *net, u8 type, struct xfrm_audit *audit_info);
 u32 xfrm_get_acqseq(void);
 extern int xfrm_alloc_spi(struct xfrm_state *x, u32 minspi, u32 maxspi);
 struct xfrm_state *xfrm_find_acq(struct net *net, struct xfrm_mark *mark,
 =======
+=======
+>>>>>>> v3.18
 struct xfrm_policy *xfrm_policy_byid(struct net *net, u32 mark, u8, int dir,
 				     u32 id, int delete, int *err);
 int xfrm_policy_flush(struct net *net, u8 type, bool task_valid);
@@ -1925,11 +2089,15 @@ u32 xfrm_get_acqseq(void);
 int verify_spi_info(u8 proto, u32 min, u32 max);
 int xfrm_alloc_spi(struct xfrm_state *x, u32 minspi, u32 maxspi);
 struct xfrm_state *xfrm_find_acq(struct net *net, const struct xfrm_mark *mark,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 u8 mode, u32 reqid, u8 proto,
 				 const xfrm_address_t *daddr,
 				 const xfrm_address_t *saddr, int create,
 				 unsigned short family);
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int xfrm_sk_policy_insert(struct sock *sk, int dir, struct xfrm_policy *pol);
 
@@ -1966,6 +2134,8 @@ extern struct xfrm_algo_desc *xfrm_calg_get_byname(const char *name, int probe);
 extern struct xfrm_algo_desc *xfrm_aead_get_byname(const char *name, int icv_len,
 						   int probe);
 =======
+=======
+>>>>>>> v3.18
 int xfrm_sk_policy_insert(struct sock *sk, int dir, struct xfrm_policy *pol);
 
 #ifdef CONFIG_XFRM_MIGRATE
@@ -2001,6 +2171,9 @@ struct xfrm_algo_desc *xfrm_ealg_get_byname(const char *name, int probe);
 struct xfrm_algo_desc *xfrm_calg_get_byname(const char *name, int probe);
 struct xfrm_algo_desc *xfrm_aead_get_byname(const char *name, int icv_len,
 					    int probe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline bool xfrm6_addr_equal(const xfrm_address_t *a,
@@ -2042,9 +2215,12 @@ static inline int xfrm_aevent_is_on(struct net *net)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 
 static inline int xfrm_acquire_is_on(struct net *net)
 {
@@ -2066,6 +2242,9 @@ static inline int aead_len(struct xfrm_algo_aead *alg)
 	return sizeof(*alg) + ((alg->alg_key_len + 7) / 8);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int xfrm_alg_len(const struct xfrm_algo *alg)
 {
@@ -2106,13 +2285,19 @@ static inline int xfrm_replay_clone(struct xfrm_state *x,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct xfrm_algo_aead *xfrm_algo_aead_clone(struct xfrm_algo_aead *orig)
 {
 	return kmemdup(orig, aead_len(orig), GFP_KERNEL);
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct xfrm_algo *xfrm_algo_clone(struct xfrm_algo *orig)
 {
@@ -2166,7 +2351,10 @@ static inline int xfrm_mark_put(struct sk_buff *skb, const struct xfrm_mark *m)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int xfrm_tunnel_check(struct sk_buff *skb, struct xfrm_state *x,
 				    unsigned int family)
 {
@@ -2187,5 +2375,8 @@ static inline int xfrm_tunnel_check(struct sk_buff *skb, struct xfrm_state *x,
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* _NET_XFRM_H */

@@ -136,9 +136,12 @@ struct dm_cache_policy {
 	int (*lookup)(struct dm_cache_policy *p, dm_oblock_t oblock, dm_cblock_t *cblock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * oblock must be a mapped block.  Must not block.
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void (*set_dirty)(struct dm_cache_policy *p, dm_oblock_t oblock);
@@ -163,9 +166,12 @@ struct dm_cache_policy {
 			      dm_oblock_t new_oblock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*writeback_work)(struct dm_cache_policy *p, dm_oblock_t *oblock, dm_cblock_t *cblock);
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * This is called via the invalidate_cblocks message.  It is
 	 * possible the particular cblock has already been removed due to a
@@ -184,6 +190,9 @@ struct dm_cache_policy {
 	 * -ENODATA: no dirty blocks available
 	 */
 	int (*writeback_work)(struct dm_cache_policy *p, dm_oblock_t *oblock, dm_cblock_t *cblock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -235,13 +244,19 @@ struct dm_cache_policy_type {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * For use by an alias dm_cache_policy_type to point to the
 	 * real dm_cache_policy_type.
 	 */
 	struct dm_cache_policy_type *real;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Policies may store a hint for each each cache block.
 	 * Currently the size of this hint must be 0 or 4 bytes but we

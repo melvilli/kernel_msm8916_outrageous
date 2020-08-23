@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2009 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2009 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2009 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -38,16 +42,22 @@ static inline bool iwl_trace_data(struct sk_buff *skb)
 {
 	struct ieee80211_hdr *hdr = (void *)skb->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (ieee80211_is_data(hdr->frame_control))
 		return skb->protocol != cpu_to_be16(ETH_P_PAE);
 	return false;
 =======
+=======
+>>>>>>> v3.18
 	struct ieee80211_tx_info *info = IEEE80211_SKB_CB(skb);
 
 	if (!ieee80211_is_data(hdr->frame_control))
 		return false;
 	return !(info->control.flags & IEEE80211_TX_CTRL_PORT_CTRL_PROTO);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

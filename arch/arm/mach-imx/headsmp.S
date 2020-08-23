@@ -13,12 +13,16 @@
 #include <linux/linkage.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/asm-offsets.h>
 #include <asm/hardware/cache-l2x0.h>
 
 	.section ".text.head", "ax"
 
 #ifdef CONFIG_SMP
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -38,6 +42,7 @@ ENTRY(v7_secondary_startup)
 	set_diag_reg
 	b	secondary_startup
 ENDPROC(v7_secondary_startup)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 
@@ -74,5 +79,7 @@ ENTRY(v7_cpu_resume)
 	b	cpu_resume
 ENDPROC(v7_cpu_resume)
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

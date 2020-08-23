@@ -9,6 +9,7 @@
 #include <linux/hardirq.h>
 #include <asm/apic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void smp_irq_work_interrupt(struct pt_regs *regs)
 {
@@ -18,6 +19,8 @@ void smp_irq_work_interrupt(struct pt_regs *regs)
 	irq_work_run();
 	irq_exit();
 =======
+=======
+>>>>>>> v3.18
 #include <asm/trace/irq_vectors.h>
 
 static inline void irq_work_entering_irq(void)
@@ -46,6 +49,9 @@ __visible void smp_trace_irq_work_interrupt(struct pt_regs *regs)
 	__smp_irq_work_interrupt();
 	trace_irq_work_exit(IRQ_WORK_VECTOR);
 	exiting_irq();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -53,7 +59,11 @@ void arch_irq_work_raise(void)
 {
 #ifdef CONFIG_X86_LOCAL_APIC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpu_has_apic)
+=======
+	if (!arch_irq_work_has_interrupt())
+>>>>>>> v3.18
 =======
 	if (!arch_irq_work_has_interrupt())
 >>>>>>> v3.18

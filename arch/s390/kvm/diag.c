@@ -14,6 +14,10 @@
 #include <linux/kvm.h>
 #include <linux/kvm_host.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/pgalloc.h>
+>>>>>>> v3.18
 =======
 #include <asm/pgalloc.h>
 >>>>>>> v3.18
@@ -22,6 +26,10 @@
 #include "trace.h"
 #include "trace-s390.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gaccess.h"
+>>>>>>> v3.18
 =======
 #include "gaccess.h"
 >>>>>>> v3.18
@@ -30,7 +38,11 @@ static int diag_release_pages(struct kvm_vcpu *vcpu)
 {
 	unsigned long start, end;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long prefix  = vcpu->arch.sie_block->prefix;
+=======
+	unsigned long prefix  = kvm_s390_get_prefix(vcpu);
+>>>>>>> v3.18
 =======
 	unsigned long prefix  = kvm_s390_get_prefix(vcpu);
 >>>>>>> v3.18
@@ -39,7 +51,11 @@ static int diag_release_pages(struct kvm_vcpu *vcpu)
 	end = vcpu->run->s.regs.gprs[vcpu->arch.sie_block->ipa & 0xf] + 4096;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (start & ~PAGE_MASK || end & ~PAGE_MASK || start > end
+=======
+	if (start & ~PAGE_MASK || end & ~PAGE_MASK || start >= end
+>>>>>>> v3.18
 =======
 	if (start & ~PAGE_MASK || end & ~PAGE_MASK || start >= end
 >>>>>>> v3.18
@@ -49,6 +65,7 @@ static int diag_release_pages(struct kvm_vcpu *vcpu)
 	VCPU_EVENT(vcpu, 5, "diag release pages %lX %lX", start, end);
 	vcpu->stat.diagnose_10++;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* we checked for start > end above */
 	if (end < prefix || start >= prefix + 2 * PAGE_SIZE) {
@@ -60,6 +77,8 @@ static int diag_release_pages(struct kvm_vcpu *vcpu)
 			gmap_discard(prefix + 2 * PAGE_SIZE,
 				     end, vcpu->arch.gmap);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We checked for start >= end above, so lets check for the
 	 * fast path (no prefix swap page involved)
@@ -79,13 +98,19 @@ static int diag_release_pages(struct kvm_vcpu *vcpu)
 		if (end > prefix + 4096)
 			gmap_discard(vcpu->arch.gmap, 4096, 8192);
 		gmap_discard(vcpu->arch.gmap, prefix + 2 * PAGE_SIZE, end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __diag_page_ref_service(struct kvm_vcpu *vcpu)
 {
 	struct prs_parm {
@@ -166,6 +191,9 @@ static int __diag_page_ref_service(struct kvm_vcpu *vcpu)
 	return rc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __diag_time_slice_end(struct kvm_vcpu *vcpu)
 {
@@ -216,7 +244,12 @@ static int __diag_ipl_functions(struct kvm_vcpu *vcpu)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set_mask(CPUSTAT_STOPPED, &vcpu->arch.sie_block->cpuflags);
+=======
+	if (!kvm_s390_user_cpu_state_ctrl(vcpu->kvm))
+		kvm_s390_vcpu_stop(vcpu);
+>>>>>>> v3.18
 =======
 	if (!kvm_s390_user_cpu_state_ctrl(vcpu->kvm))
 		kvm_s390_vcpu_stop(vcpu);
@@ -234,7 +267,11 @@ static int __diag_ipl_functions(struct kvm_vcpu *vcpu)
 static int __diag_virtio_hypercall(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, idx;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -245,13 +282,17 @@ static int __diag_virtio_hypercall(struct kvm_vcpu *vcpu)
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idx = srcu_read_lock(&vcpu->kvm->srcu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
 	 * The layout is as follows:
 	 * - gpr 2 contains the subchannel id (passed as addr)
 	 * - gpr 3 contains the virtqueue index (passed as datamatch)
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 */
 	ret = kvm_io_bus_write(vcpu->kvm, KVM_VIRTIO_CCW_NOTIFY_BUS,
@@ -260,6 +301,8 @@ static int __diag_virtio_hypercall(struct kvm_vcpu *vcpu)
 	srcu_read_unlock(&vcpu->kvm->srcu, idx);
 	/* kvm_io_bus_write returns -EOPNOTSUPP if it found no match. */
 =======
+=======
+>>>>>>> v3.18
 	 * - gpr 4 contains the index on the bus (optionally)
 	 */
 	ret = kvm_io_bus_write_cookie(vcpu->kvm, KVM_VIRTIO_CCW_NOTIFY_BUS,
@@ -274,6 +317,9 @@ static int __diag_virtio_hypercall(struct kvm_vcpu *vcpu)
 	if (ret != -EOPNOTSUPP)
 		vcpu->run->s.regs.gprs[2] = ret;
 	/* kvm_io_bus_write_cookie returns -EOPNOTSUPP if it found no match. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret < 0 ? ret : 0;
 }
@@ -283,6 +329,12 @@ int kvm_s390_handle_diag(struct kvm_vcpu *vcpu)
 	int code = kvm_s390_get_base_disp_rs(vcpu) & 0xffff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (vcpu->arch.sie_block->gpsw.mask & PSW_MASK_PSTATE)
+		return kvm_s390_inject_program_int(vcpu, PGM_PRIVILEGED_OP);
+
+>>>>>>> v3.18
 =======
 	if (vcpu->arch.sie_block->gpsw.mask & PSW_MASK_PSTATE)
 		return kvm_s390_inject_program_int(vcpu, PGM_PRIVILEGED_OP);
@@ -297,6 +349,11 @@ int kvm_s390_handle_diag(struct kvm_vcpu *vcpu)
 	case 0x9c:
 		return __diag_time_slice_end_directed(vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case 0x258:
+		return __diag_page_ref_service(vcpu);
+>>>>>>> v3.18
 =======
 	case 0x258:
 		return __diag_page_ref_service(vcpu);

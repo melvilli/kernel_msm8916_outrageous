@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -30,7 +33,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit early_init_intel(struct cpuinfo_x86 *c)
+=======
+static void early_init_intel(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void early_init_intel(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -40,11 +47,16 @@ static void early_init_intel(struct cpuinfo_x86 *c)
 	/* Unmask CPUID levels if masked: */
 	if (c->x86 > 6 || (c->x86 == 6 && c->x86_model >= 0xd)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rdmsrl(MSR_IA32_MISC_ENABLE, misc_enable);
 
 		if (misc_enable & MSR_IA32_MISC_ENABLE_LIMIT_CPUID) {
 			misc_enable &= ~MSR_IA32_MISC_ENABLE_LIMIT_CPUID;
 			wrmsrl(MSR_IA32_MISC_ENABLE, misc_enable);
+=======
+		if (msr_clear_bit(MSR_IA32_MISC_ENABLE,
+				  MSR_IA32_MISC_ENABLE_LIMIT_CPUID_BIT) > 0) {
+>>>>>>> v3.18
 =======
 		if (msr_clear_bit(MSR_IA32_MISC_ENABLE,
 				  MSR_IA32_MISC_ENABLE_LIMIT_CPUID_BIT) > 0) {
@@ -106,7 +118,11 @@ static void early_init_intel(struct cpuinfo_x86 *c)
 		set_cpu_cap(c, X86_FEATURE_NONSTOP_TSC);
 		if (!check_tsc_unstable())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sched_clock_stable = 1;
+=======
+			set_sched_clock_stable();
+>>>>>>> v3.18
 =======
 			set_sched_clock_stable();
 >>>>>>> v3.18
@@ -147,6 +163,7 @@ static void early_init_intel(struct cpuinfo_x86 *c)
 	 * (model 2) with the same problem.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c->x86 == 15) {
 		rdmsrl(MSR_IA32_MISC_ENABLE, misc_enable);
 
@@ -158,10 +175,15 @@ static void early_init_intel(struct cpuinfo_x86 *c)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (c->x86 == 15)
 		if (msr_clear_bit(MSR_IA32_MISC_ENABLE,
 				  MSR_IA32_MISC_ENABLE_FAST_STRING_BIT) > 0)
 			pr_info("kmemcheck: Disabling fast string operations\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -202,7 +224,11 @@ static void early_init_intel(struct cpuinfo_x86 *c)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit ppro_with_ram_bug(void)
+=======
+int ppro_with_ram_bug(void)
+>>>>>>> v3.18
 =======
 int ppro_with_ram_bug(void)
 >>>>>>> v3.18
@@ -219,7 +245,11 @@ int ppro_with_ram_bug(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit intel_smp_check(struct cpuinfo_x86 *c)
+=======
+static void intel_smp_check(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void intel_smp_check(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -243,6 +273,7 @@ static void intel_smp_check(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit intel_workarounds(struct cpuinfo_x86 *c)
 {
 	unsigned long lo, hi;
@@ -256,6 +287,8 @@ static void __cpuinit intel_workarounds(struct cpuinfo_x86 *c)
 	clear_cpu_bug(c, X86_BUG_F00F);
 	if (!paravirt_enabled() && c->x86 == 5) {
 =======
+=======
+>>>>>>> v3.18
 static int forcepae;
 static int __init forcepae_setup(char *__unused)
 {
@@ -275,6 +308,9 @@ static void intel_workarounds(struct cpuinfo_x86 *c)
 	 */
 	clear_cpu_bug(c, X86_BUG_F00F);
 	if (!paravirt_enabled() && c->x86 == 5 && c->x86_model < 9) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		static int f00f_workaround_enabled;
 
@@ -295,7 +331,10 @@ static void intel_workarounds(struct cpuinfo_x86 *c)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * PAE CPUID issue: many Pentium M report no PAE but may have a
 	 * functionally usable PAE implementation.
 	 * Forcefully enable PAE if kernel parameter "forcepae" is present.
@@ -307,11 +346,15 @@ static void intel_workarounds(struct cpuinfo_x86 *c)
 	}
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * P4 Xeon errata 037 workaround.
 	 * Hardware prefetcher may cause stale data to be loaded into the cache.
 	 */
 	if ((c->x86 == 15) && (c->x86_model == 1) && (c->x86_mask == 1)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rdmsr(MSR_IA32_MISC_ENABLE, lo, hi);
 		if ((lo & MSR_IA32_MISC_ENABLE_PREFETCH_DISABLE) == 0) {
@@ -320,11 +363,16 @@ static void intel_workarounds(struct cpuinfo_x86 *c)
 			lo |= MSR_IA32_MISC_ENABLE_PREFETCH_DISABLE;
 			wrmsr(MSR_IA32_MISC_ENABLE, lo, hi);
 =======
+=======
+>>>>>>> v3.18
 		if (msr_set_bit(MSR_IA32_MISC_ENABLE,
 				MSR_IA32_MISC_ENABLE_PREFETCH_DISABLE_BIT)
 		    > 0) {
 			pr_info("CPU: C0 stepping P4 Xeon detected.\n");
 			pr_info("CPU: Disabling hardware prefetching (Errata 037)\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -338,7 +386,11 @@ static void intel_workarounds(struct cpuinfo_x86 *c)
 	if (cpu_has_apic && (c->x86<<8 | c->x86_model<<4) == 0x520 &&
 	    (c->x86_mask < 0x6 || c->x86_mask == 0xb))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_cpu_cap(c, X86_FEATURE_11AP);
+=======
+		set_cpu_bug(c, X86_BUG_11AP);
+>>>>>>> v3.18
 =======
 		set_cpu_bug(c, X86_BUG_11AP);
 >>>>>>> v3.18
@@ -363,6 +415,7 @@ static void intel_workarounds(struct cpuinfo_x86 *c)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_NUMAQ
 	numaq_tsc_disable();
 #endif
@@ -372,17 +425,26 @@ static void intel_workarounds(struct cpuinfo_x86 *c)
 #else
 static void __cpuinit intel_workarounds(struct cpuinfo_x86 *c)
 =======
+=======
+>>>>>>> v3.18
 	intel_smp_check(c);
 }
 #else
 static void intel_workarounds(struct cpuinfo_x86 *c)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit srat_detect_node(struct cpuinfo_x86 *c)
+=======
+static void srat_detect_node(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void srat_detect_node(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -406,7 +468,11 @@ static void srat_detect_node(struct cpuinfo_x86 *c)
  * find out the number of processor cores on the die
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit intel_num_cpu_cores(struct cpuinfo_x86 *c)
+=======
+static int intel_num_cpu_cores(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static int intel_num_cpu_cores(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -425,7 +491,11 @@ static int intel_num_cpu_cores(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit detect_vmx_virtcap(struct cpuinfo_x86 *c)
+=======
+static void detect_vmx_virtcap(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void detect_vmx_virtcap(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -467,7 +537,11 @@ static void detect_vmx_virtcap(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit init_intel(struct cpuinfo_x86 *c)
+=======
+static void init_intel(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void init_intel(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -486,8 +560,11 @@ static void init_intel(struct cpuinfo_x86 *c)
 	detect_extended_topology(c);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	l2 = init_intel_cacheinfo(c);
 =======
+=======
+>>>>>>> v3.18
 	if (!cpu_has(c, X86_FEATURE_XTOPOLOGY)) {
 		/*
 		 * let's use the legacy cpuid vector 0x1 and 0x4 for topology
@@ -507,6 +584,9 @@ static void init_intel(struct cpuinfo_x86 *c)
 		l2 = c->x86_cache_size;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (c->cpuid_level > 9) {
 		unsigned eax = cpuid_eax(10);
@@ -529,7 +609,11 @@ static void init_intel(struct cpuinfo_x86 *c)
 	if (c->x86 == 6 && cpu_has_clflush &&
 	    (c->x86_model == 29 || c->x86_model == 46 || c->x86_model == 47))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_cpu_cap(c, X86_FEATURE_CLFLUSH_MONITOR);
+=======
+		set_cpu_bug(c, X86_BUG_CLFLUSH_MONITOR);
+>>>>>>> v3.18
 =======
 		set_cpu_bug(c, X86_BUG_CLFLUSH_MONITOR);
 >>>>>>> v3.18
@@ -580,6 +664,7 @@ static void init_intel(struct cpuinfo_x86 *c)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpu_has(c, X86_FEATURE_XTOPOLOGY)) {
 		/*
 		 * let's use the legacy cpuid vector 0x1 and 0x4 for topology
@@ -591,6 +676,8 @@ static void init_intel(struct cpuinfo_x86 *c)
 #endif
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Work around errata */
@@ -620,7 +707,11 @@ static void init_intel(struct cpuinfo_x86 *c)
 
 #ifdef CONFIG_X86_32
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int __cpuinit intel_size_cache(struct cpuinfo_x86 *c, unsigned int size)
+=======
+static unsigned int intel_size_cache(struct cpuinfo_x86 *c, unsigned int size)
+>>>>>>> v3.18
 =======
 static unsigned int intel_size_cache(struct cpuinfo_x86 *c, unsigned int size)
 >>>>>>> v3.18
@@ -634,7 +725,10 @@ static unsigned int intel_size_cache(struct cpuinfo_x86 *c, unsigned int size)
 	if ((c->x86 == 6) && (c->x86_model == 11) && (size == 0))
 		size = 256;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Intel Quark SoC X1000 contains a 4-way set associative
@@ -642,6 +736,9 @@ static unsigned int intel_size_cache(struct cpuinfo_x86 *c, unsigned int size)
 	 */
 	if ((c->x86 == 5) && (c->x86_model == 9))
 		size = 16;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return size;
 }
@@ -667,8 +764,14 @@ static unsigned int intel_size_cache(struct cpuinfo_x86 *c, unsigned int size)
 
 #define STLB_4K		0x41
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct _tlb_table intel_tlb_table[] __cpuinitconst = {
+=======
+#define STLB_4K_2M	0x42
+
+static const struct _tlb_table intel_tlb_table[] = {
+>>>>>>> v3.18
 =======
 #define STLB_4K_2M	0x42
 
@@ -693,6 +796,12 @@ static const struct _tlb_table intel_tlb_table[] = {
 	{ 0x5c, TLB_DATA_4K_4M,		128,	" TLB_DATA 4 KByte and 4 MByte pages" },
 	{ 0x5d, TLB_DATA_4K_4M,		256,	" TLB_DATA 4 KByte and 4 MByte pages" },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ 0x61, TLB_INST_4K,		48,	" TLB_INST 4 KByte pages, full associative" },
+	{ 0x63, TLB_DATA_1G,		4,	" TLB_DATA 1 GByte pages, 4-way set associative" },
+	{ 0x76, TLB_INST_2M_4M,		8,	" TLB_INST 2-MByte or 4-MByte pages, fully associative" },
+>>>>>>> v3.18
 =======
 	{ 0x61, TLB_INST_4K,		48,	" TLB_INST 4 KByte pages, full associative" },
 	{ 0x63, TLB_DATA_1G,		4,	" TLB_DATA 1 GByte pages, 4-way set associative" },
@@ -704,22 +813,32 @@ static const struct _tlb_table intel_tlb_table[] = {
 	{ 0xb3, TLB_DATA_4K,		128,	" TLB_DATA 4 KByte pages, 4-way set associative" },
 	{ 0xb4, TLB_DATA_4K,		256,	" TLB_DATA 4 KByte pages, 4-way associative" },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0xba, TLB_DATA_4K,		64,	" TLB_DATA 4 KByte pages, 4-way associative" },
 	{ 0xc0, TLB_DATA_4K_4M,		8,	" TLB_DATA 4 KByte and 4 MByte pages, 4-way associative" },
 =======
+=======
+>>>>>>> v3.18
 	{ 0xb5, TLB_INST_4K,		64,	" TLB_INST 4 KByte pages, 8-way set ssociative" },
 	{ 0xb6, TLB_INST_4K,		128,	" TLB_INST 4 KByte pages, 8-way set ssociative" },
 	{ 0xba, TLB_DATA_4K,		64,	" TLB_DATA 4 KByte pages, 4-way associative" },
 	{ 0xc0, TLB_DATA_4K_4M,		8,	" TLB_DATA 4 KByte and 4 MByte pages, 4-way associative" },
 	{ 0xc1, STLB_4K_2M,		1024,	" STLB 4 KByte and 2 MByte pages, 8-way associative" },
 	{ 0xc2, TLB_DATA_2M_4M,		16,	" DTLB 2 MByte/4MByte pages, 4-way associative" },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0xca, STLB_4K,		512,	" STLB 4 KByte pages, 4-way associative" },
 	{ 0x00, 0, 0 }
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit intel_tlb_lookup(const unsigned char desc)
+=======
+static void intel_tlb_lookup(const unsigned char desc)
+>>>>>>> v3.18
 =======
 static void intel_tlb_lookup(const unsigned char desc)
 >>>>>>> v3.18
@@ -744,7 +863,10 @@ static void intel_tlb_lookup(const unsigned char desc)
 			tlb_lld_4k[ENTRIES] = intel_tlb_table[k].entries;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case STLB_4K_2M:
 		if (tlb_lli_4k[ENTRIES] < intel_tlb_table[k].entries)
 			tlb_lli_4k[ENTRIES] = intel_tlb_table[k].entries;
@@ -759,6 +881,9 @@ static void intel_tlb_lookup(const unsigned char desc)
 		if (tlb_lld_4m[ENTRIES] < intel_tlb_table[k].entries)
 			tlb_lld_4m[ENTRIES] = intel_tlb_table[k].entries;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case TLB_INST_ALL:
 		if (tlb_lli_4k[ENTRIES] < intel_tlb_table[k].entries)
@@ -806,6 +931,7 @@ static void intel_tlb_lookup(const unsigned char desc)
 			tlb_lld_4m[ENTRIES] = intel_tlb_table[k].entries;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 }
 
@@ -840,6 +966,8 @@ static void __cpuinit intel_tlb_flushall_shift_set(struct cpuinfo_x86 *c)
 
 static void __cpuinit intel_detect_tlb(struct cpuinfo_x86 *c)
 =======
+=======
+>>>>>>> v3.18
 	case TLB_DATA_1G:
 		if (tlb_lld_1g[ENTRIES] < intel_tlb_table[k].entries)
 			tlb_lld_1g[ENTRIES] = intel_tlb_table[k].entries;
@@ -848,6 +976,9 @@ static void __cpuinit intel_detect_tlb(struct cpuinfo_x86 *c)
 }
 
 static void intel_detect_tlb(struct cpuinfo_x86 *c)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int i, j, n;
@@ -873,6 +1004,7 @@ static void intel_detect_tlb(struct cpuinfo_x86 *c)
 			intel_tlb_lookup(desc[j]);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	intel_tlb_flushall_shift_set(c);
 }
 
@@ -883,6 +1015,8 @@ static const struct cpu_dev __cpuinitconst intel_cpu_dev = {
 	.c_models = {
 		{ .vendor = X86_VENDOR_INTEL, .family = 4, .model_names =
 =======
+=======
+>>>>>>> v3.18
 }
 
 static const struct cpu_dev intel_cpu_dev = {
@@ -891,6 +1025,9 @@ static const struct cpu_dev intel_cpu_dev = {
 #ifdef CONFIG_X86_32
 	.legacy_models = {
 		{ .family = 4, .model_names =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  {
 			  [0] = "486 DX-25/33",
@@ -905,7 +1042,11 @@ static const struct cpu_dev intel_cpu_dev = {
 		  }
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{ .vendor = X86_VENDOR_INTEL, .family = 5, .model_names =
+=======
+		{ .family = 5, .model_names =
+>>>>>>> v3.18
 =======
 		{ .family = 5, .model_names =
 >>>>>>> v3.18
@@ -917,16 +1058,22 @@ static const struct cpu_dev intel_cpu_dev = {
 			  [4] = "Pentium MMX",
 			  [7] = "Mobile Pentium 75 - 200",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  [8] = "Mobile Pentium MMX"
 		  }
 		},
 		{ .vendor = X86_VENDOR_INTEL, .family = 6, .model_names =
 =======
+=======
+>>>>>>> v3.18
 			  [8] = "Mobile Pentium MMX",
 			  [9] = "Quark SoC X1000",
 		  }
 		},
 		{ .family = 6, .model_names =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  {
 			  [0] = "Pentium Pro A-step",
@@ -942,7 +1089,11 @@ static const struct cpu_dev intel_cpu_dev = {
 		  }
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{ .vendor = X86_VENDOR_INTEL, .family = 15, .model_names =
+=======
+		{ .family = 15, .model_names =
+>>>>>>> v3.18
 =======
 		{ .family = 15, .model_names =
 >>>>>>> v3.18
@@ -956,7 +1107,11 @@ static const struct cpu_dev intel_cpu_dev = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.c_size_cache	= intel_size_cache,
+=======
+	.legacy_cache_size = intel_size_cache,
+>>>>>>> v3.18
 =======
 	.legacy_cache_size = intel_size_cache,
 >>>>>>> v3.18

@@ -28,8 +28,13 @@
 #include <core/ramht.h>
 #include <core/event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
 #include <core/math.h>
+=======
+#include <nvif/unpack.h>
+#include <nvif/class.h>
+>>>>>>> v3.18
 =======
 #include <nvif/unpack.h>
 #include <nvif/class.h>
@@ -42,6 +47,10 @@
 #include <engine/fifo.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "nv04.h"
+>>>>>>> v3.18
 =======
 #include "nv04.h"
 >>>>>>> v3.18
@@ -66,12 +75,18 @@ nv84_fifo_context_attach(struct nouveau_object *parent,
 	case NVDEV_ENGINE_SW   : return 0;
 	case NVDEV_ENGINE_GR   : addr = 0x0020; break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case NVDEV_ENGINE_MPEG : addr = 0x0060; break;
 =======
+=======
+>>>>>>> v3.18
 	case NVDEV_ENGINE_VP   : addr = 0x0040; break;
 	case NVDEV_ENGINE_PPP  :
 	case NVDEV_ENGINE_MPEG : addr = 0x0060; break;
 	case NVDEV_ENGINE_BSP  : addr = 0x0080; break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case NVDEV_ENGINE_CRYPT: addr = 0x00a0; break;
 	case NVDEV_ENGINE_COPY0: addr = 0x00c0; break;
@@ -106,12 +121,18 @@ nv84_fifo_context_detach(struct nouveau_object *parent, bool suspend,
 	case NVDEV_ENGINE_SW   : return 0;
 	case NVDEV_ENGINE_GR   : engn = 0; addr = 0x0020; break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case NVDEV_ENGINE_MPEG : engn = 1; addr = 0x0060; break;
 =======
+=======
+>>>>>>> v3.18
 	case NVDEV_ENGINE_VP   : engn = 3; addr = 0x0040; break;
 	case NVDEV_ENGINE_PPP  :
 	case NVDEV_ENGINE_MPEG : engn = 1; addr = 0x0060; break;
 	case NVDEV_ENGINE_BSP  : engn = 5; addr = 0x0080; break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case NVDEV_ENGINE_CRYPT: engn = 4; addr = 0x00a0; break;
 	case NVDEV_ENGINE_COPY0: engn = 2; addr = 0x00c0; break;
@@ -163,7 +184,11 @@ nv84_fifo_object_attach(struct nouveau_object *parent,
 	case NVDEV_ENGINE_VP    : context |= 0x00400000; break;
 	case NVDEV_ENGINE_CRYPT :
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case NVDEV_ENGINE_UNK1C1: context |= 0x00500000; break;
+=======
+	case NVDEV_ENGINE_VIC   : context |= 0x00500000; break;
+>>>>>>> v3.18
 =======
 	case NVDEV_ENGINE_VIC   : context |= 0x00500000; break;
 >>>>>>> v3.18
@@ -182,6 +207,7 @@ nv84_fifo_chan_ctor_dma(struct nouveau_object *parent,
 			struct nouveau_object **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_bar *bar = nouveau_bar(parent);
 	struct nv50_fifo_base *base = (void *)parent;
 	struct nv50_fifo_chan *chan;
@@ -194,6 +220,8 @@ nv84_fifo_chan_ctor_dma(struct nouveau_object *parent,
 	ret = nouveau_fifo_channel_create(parent, engine, oclass, 0, 0xc00000,
 					  0x2000, args->pushbuf,
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct nv03_channel_dma_v0 v0;
 	} *args = data;
@@ -212,6 +240,9 @@ nv84_fifo_chan_ctor_dma(struct nouveau_object *parent,
 
 	ret = nouveau_fifo_channel_create(parent, engine, oclass, 0, 0xc00000,
 					  0x2000, args->v0.pushbuf,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					  (1ULL << NVDEV_ENGINE_DMAOBJ) |
 					  (1ULL << NVDEV_ENGINE_SW) |
@@ -224,7 +255,11 @@ nv84_fifo_chan_ctor_dma(struct nouveau_object *parent,
 					  (1ULL << NVDEV_ENGINE_PPP) |
 					  (1ULL << NVDEV_ENGINE_COPY0) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  (1ULL << NVDEV_ENGINE_UNK1C1), &chan);
+=======
+					  (1ULL << NVDEV_ENGINE_VIC), &chan);
+>>>>>>> v3.18
 =======
 					  (1ULL << NVDEV_ENGINE_VIC), &chan);
 >>>>>>> v3.18
@@ -233,6 +268,11 @@ nv84_fifo_chan_ctor_dma(struct nouveau_object *parent,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	args->v0.chid = chan->base.chid;
+
+>>>>>>> v3.18
 =======
 	args->v0.chid = chan->base.chid;
 
@@ -248,15 +288,21 @@ nv84_fifo_chan_ctor_dma(struct nouveau_object *parent,
 	nv_parent(chan)->object_detach = nv50_fifo_object_detach;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_wo32(base->ramfc, 0x08, lower_32_bits(args->offset));
 	nv_wo32(base->ramfc, 0x0c, upper_32_bits(args->offset));
 	nv_wo32(base->ramfc, 0x10, lower_32_bits(args->offset));
 	nv_wo32(base->ramfc, 0x14, upper_32_bits(args->offset));
 =======
+=======
+>>>>>>> v3.18
 	nv_wo32(base->ramfc, 0x08, lower_32_bits(args->v0.offset));
 	nv_wo32(base->ramfc, 0x0c, upper_32_bits(args->v0.offset));
 	nv_wo32(base->ramfc, 0x10, lower_32_bits(args->v0.offset));
 	nv_wo32(base->ramfc, 0x14, upper_32_bits(args->v0.offset));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nv_wo32(base->ramfc, 0x3c, 0x003f6078);
 	nv_wo32(base->ramfc, 0x44, 0x01003fff);
@@ -281,6 +327,7 @@ nv84_fifo_chan_ctor_ind(struct nouveau_object *parent,
 			struct nouveau_object **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_bar *bar = nouveau_bar(parent);
 	struct nv50_fifo_base *base = (void *)parent;
 	struct nv50_fifo_chan *chan;
@@ -294,6 +341,8 @@ nv84_fifo_chan_ctor_ind(struct nouveau_object *parent,
 	ret = nouveau_fifo_channel_create(parent, engine, oclass, 0, 0xc00000,
 					  0x2000, args->pushbuf,
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct nv50_channel_gpfifo_v0 v0;
 	} *args = data;
@@ -314,6 +363,9 @@ nv84_fifo_chan_ctor_ind(struct nouveau_object *parent,
 
 	ret = nouveau_fifo_channel_create(parent, engine, oclass, 0, 0xc00000,
 					  0x2000, args->v0.pushbuf,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					  (1ULL << NVDEV_ENGINE_DMAOBJ) |
 					  (1ULL << NVDEV_ENGINE_SW) |
@@ -326,7 +378,11 @@ nv84_fifo_chan_ctor_ind(struct nouveau_object *parent,
 					  (1ULL << NVDEV_ENGINE_PPP) |
 					  (1ULL << NVDEV_ENGINE_COPY0) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  (1ULL << NVDEV_ENGINE_UNK1C1), &chan);
+=======
+					  (1ULL << NVDEV_ENGINE_VIC), &chan);
+>>>>>>> v3.18
 =======
 					  (1ULL << NVDEV_ENGINE_VIC), &chan);
 >>>>>>> v3.18
@@ -335,6 +391,11 @@ nv84_fifo_chan_ctor_ind(struct nouveau_object *parent,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	args->v0.chid = chan->base.chid;
+
+>>>>>>> v3.18
 =======
 	args->v0.chid = chan->base.chid;
 
@@ -350,8 +411,13 @@ nv84_fifo_chan_ctor_ind(struct nouveau_object *parent,
 	nv_parent(chan)->object_detach = nv50_fifo_object_detach;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioffset = args->ioffset;
 	ilength = log2i(args->ilength / 8);
+=======
+	ioffset = args->v0.ioffset;
+	ilength = order_base_2(args->v0.ilength / 8);
+>>>>>>> v3.18
 =======
 	ioffset = args->v0.ioffset;
 	ilength = order_base_2(args->v0.ilength / 8);
@@ -400,13 +466,19 @@ nv84_fifo_ofuncs_dma = {
 	.init = nv84_fifo_chan_init,
 	.fini = nv50_fifo_chan_fini,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rd32 = _nouveau_fifo_channel_rd32,
 	.wr32 = _nouveau_fifo_channel_wr32,
 =======
+=======
+>>>>>>> v3.18
 	.map  = _nouveau_fifo_channel_map,
 	.rd32 = _nouveau_fifo_channel_rd32,
 	.wr32 = _nouveau_fifo_channel_wr32,
 	.ntfy = _nouveau_fifo_channel_ntfy
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -417,21 +489,32 @@ nv84_fifo_ofuncs_ind = {
 	.init = nv84_fifo_chan_init,
 	.fini = nv50_fifo_chan_fini,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rd32 = _nouveau_fifo_channel_rd32,
 	.wr32 = _nouveau_fifo_channel_wr32,
 =======
+=======
+>>>>>>> v3.18
 	.map  = _nouveau_fifo_channel_map,
 	.rd32 = _nouveau_fifo_channel_rd32,
 	.wr32 = _nouveau_fifo_channel_wr32,
 	.ntfy = _nouveau_fifo_channel_ntfy
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static struct nouveau_oclass
 nv84_fifo_sclass[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ NV84_CHANNEL_DMA_CLASS, &nv84_fifo_ofuncs_dma },
 	{ NV84_CHANNEL_IND_CLASS, &nv84_fifo_ofuncs_ind },
+=======
+	{ G82_CHANNEL_DMA, &nv84_fifo_ofuncs_dma },
+	{ G82_CHANNEL_GPFIFO, &nv84_fifo_ofuncs_ind },
+>>>>>>> v3.18
 =======
 	{ G82_CHANNEL_DMA, &nv84_fifo_ofuncs_dma },
 	{ G82_CHANNEL_GPFIFO, &nv84_fifo_ofuncs_ind },
@@ -504,6 +587,7 @@ nv84_fifo_cclass = {
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 nv84_fifo_uevent_enable(struct nouveau_event *event, int index)
 {
 	struct nv84_fifo_priv *priv = event->priv;
@@ -518,6 +602,8 @@ nv84_fifo_uevent_disable(struct nouveau_event *event, int index)
 }
 
 =======
+=======
+>>>>>>> v3.18
 nv84_fifo_uevent_init(struct nvkm_event *event, int type, int index)
 {
 	struct nouveau_fifo *fifo = container_of(event, typeof(*fifo), uevent);
@@ -538,6 +624,9 @@ nv84_fifo_uevent_func = {
 	.fini = nv84_fifo_uevent_fini,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nv84_fifo_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
@@ -563,9 +652,15 @@ nv84_fifo_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->base.uevent->enable = nv84_fifo_uevent_enable;
 	priv->base.uevent->disable = nv84_fifo_uevent_disable;
 	priv->base.uevent->priv = priv;
+=======
+	ret = nvkm_event_init(&nv84_fifo_uevent_func, 1, 1, &priv->base.uevent);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = nvkm_event_init(&nv84_fifo_uevent_func, 1, 1, &priv->base.uevent);
 	if (ret)
@@ -577,12 +672,15 @@ nv84_fifo_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	nv_engine(priv)->cclass = &nv84_fifo_cclass;
 	nv_engine(priv)->sclass = nv84_fifo_sclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 struct nouveau_oclass
 nv84_fifo_oclass = {
 =======
+=======
+>>>>>>> v3.18
 	priv->base.pause = nv04_fifo_pause;
 	priv->base.start = nv04_fifo_start;
 	return 0;
@@ -590,6 +688,9 @@ nv84_fifo_oclass = {
 
 struct nouveau_oclass *
 nv84_fifo_oclass = &(struct nouveau_oclass) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.handle = NV_ENGINE(FIFO, 0x84),
 	.ofuncs = &(struct nouveau_ofuncs) {

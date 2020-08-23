@@ -192,7 +192,10 @@ static const struct pcr_ops n4_pcr_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u64 n5_pcr_read(unsigned long reg_num)
 {
 	unsigned long val;
@@ -220,6 +223,9 @@ static const struct pcr_ops n5_pcr_ops = {
 };
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned long perf_hsvc_group;
 static unsigned long perf_hsvc_major;
@@ -228,6 +234,11 @@ static unsigned long perf_hsvc_minor;
 static int __init register_perf_hsvc(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long hverror;
+
+>>>>>>> v3.18
 =======
 	unsigned long hverror;
 
@@ -251,11 +262,17 @@ static int __init register_perf_hsvc(void)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case SUN4V_CHIP_NIAGARA5:
 			perf_hsvc_group = HV_GRP_T5_CPU;
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			return -ENODEV;
@@ -265,17 +282,23 @@ static int __init register_perf_hsvc(void)
 		perf_hsvc_major = 1;
 		perf_hsvc_minor = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sun4v_hvapi_register(perf_hsvc_group,
 					 perf_hsvc_major,
 					 &perf_hsvc_minor)) {
 			printk("perfmon: Could not register hvapi.\n");
 =======
+=======
+>>>>>>> v3.18
 		hverror = sun4v_hvapi_register(perf_hsvc_group,
 					       perf_hsvc_major,
 					       &perf_hsvc_minor);
 		if (hverror) {
 			pr_err("perfmon: Could not register hvapi(0x%lx).\n",
 			       hverror);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -ENODEV;
 		}
@@ -306,11 +329,17 @@ static int __init setup_sun4v_pcr_ops(void)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case SUN4V_CHIP_NIAGARA5:
 		pcr_ops = &n5_pcr_ops;
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		ret = -ENODEV;

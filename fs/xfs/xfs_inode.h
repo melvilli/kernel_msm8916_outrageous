@@ -19,6 +19,7 @@
 #define	__XFS_INODE_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct posix_acl;
 struct xfs_dinode;
 struct xfs_inode;
@@ -239,6 +240,8 @@ static inline uint xfs_icdinode_size(int version)
 #ifdef __KERNEL__
 
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_inode_buf.h"
 #include "xfs_inode_fork.h"
 #include "xfs_dinode.h"
@@ -248,6 +251,9 @@ static inline uint xfs_icdinode_size(int version)
  */
 struct xfs_dinode;
 struct xfs_inode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct xfs_buf;
 struct xfs_bmap_free;
@@ -263,6 +269,10 @@ typedef struct xfs_inode {
 	struct xfs_dquot	*i_udquot;	/* user dquot */
 	struct xfs_dquot	*i_gdquot;	/* group dquot */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct xfs_dquot	*i_pdquot;	/* project dquot */
+>>>>>>> v3.18
 =======
 	struct xfs_dquot	*i_pdquot;	/* project dquot */
 >>>>>>> v3.18
@@ -276,6 +286,12 @@ typedef struct xfs_inode {
 	xfs_ifork_t		i_df;		/* data fork */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* operations vectors */
+	const struct xfs_dir_ops *d_ops;		/* directory ops vector */
+
+>>>>>>> v3.18
 =======
 	/* operations vectors */
 	const struct xfs_dir_ops *d_ops;		/* directory ops vector */
@@ -331,7 +347,11 @@ xfs_new_eof(struct xfs_inode *ip, xfs_fsize_t new_size)
 	xfs_fsize_t i_size = i_size_read(VFS_I(ip));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_size > i_size)
+=======
+	if (new_size > i_size || new_size < 0)
+>>>>>>> v3.18
 =======
 	if (new_size > i_size || new_size < 0)
 >>>>>>> v3.18
@@ -426,7 +446,10 @@ xfs_set_projid(struct xfs_inode *ip,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline prid_t
 xfs_get_initial_prid(struct xfs_inode *dp)
 {
@@ -436,6 +459,9 @@ xfs_get_initial_prid(struct xfs_inode *dp)
 	return XFS_PROJID_DEFAULT;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * In-core inode flags.
@@ -445,7 +471,10 @@ xfs_get_initial_prid(struct xfs_inode *dp)
 #define XFS_IRECLAIMABLE	(1 << 2) /* inode can be reclaimed */
 #define XFS_INEW		(1 << 3) /* inode has just been allocated */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XFS_IFILESTREAM		(1 << 4) /* inode is in a filestream dir. */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define XFS_ITRUNCATED		(1 << 5) /* truncated down so flush-on-close */
@@ -464,8 +493,12 @@ xfs_get_initial_prid(struct xfs_inode *dp)
 #define XFS_IRECLAIM_RESET_FLAGS	\
 	(XFS_IRECLAIMABLE | XFS_IRECLAIM | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 XFS_IDIRTY_RELEASE | XFS_ITRUNCATED | \
 	 XFS_IFILESTREAM);
+=======
+	 XFS_IDIRTY_RELEASE | XFS_ITRUNCATED)
+>>>>>>> v3.18
 =======
 	 XFS_IDIRTY_RELEASE | XFS_ITRUNCATED)
 >>>>>>> v3.18
@@ -570,10 +603,13 @@ static inline int xfs_isiflocked(struct xfs_inode *ip)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * xfs_inode.c prototypes.
  */
 =======
+=======
+>>>>>>> v3.18
 int		xfs_release(struct xfs_inode *ip);
 void		xfs_inactive(struct xfs_inode *ip);
 int		xfs_lookup(struct xfs_inode *dp, struct xfs_name *name,
@@ -591,6 +627,9 @@ int		xfs_rename(struct xfs_inode *src_dp, struct xfs_name *src_name,
 			   struct xfs_name *target_name,
 			   struct xfs_inode *target_ip);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void		xfs_ilock(xfs_inode_t *, uint);
 int		xfs_ilock_nowait(xfs_inode_t *, uint);
@@ -598,8 +637,13 @@ void		xfs_iunlock(xfs_inode_t *, uint);
 void		xfs_ilock_demote(xfs_inode_t *, uint);
 int		xfs_isilocked(xfs_inode_t *, uint);
 <<<<<<< HEAD
+<<<<<<< HEAD
 uint		xfs_ilock_map_shared(xfs_inode_t *);
 void		xfs_iunlock_map_shared(xfs_inode_t *, uint);
+=======
+uint		xfs_ilock_data_map_shared(struct xfs_inode *);
+uint		xfs_ilock_attr_map_shared(struct xfs_inode *);
+>>>>>>> v3.18
 =======
 uint		xfs_ilock_data_map_shared(struct xfs_inode *);
 uint		xfs_ilock_attr_map_shared(struct xfs_inode *);
@@ -618,12 +662,18 @@ int		xfs_iunlink(struct xfs_trans *, xfs_inode_t *);
 
 void		xfs_iext_realloc(xfs_inode_t *, int, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void		xfs_iunpin_wait(xfs_inode_t *);
 =======
+=======
+>>>>>>> v3.18
 
 void		xfs_iunpin_wait(xfs_inode_t *);
 #define xfs_ipincount(ip)	((unsigned int) atomic_read(&ip->i_pincount))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int		xfs_iflush(struct xfs_inode *, struct xfs_buf **);
 void		xfs_lock_inodes(xfs_inode_t **, int, uint);
@@ -632,7 +682,10 @@ void		xfs_lock_two_inodes(xfs_inode_t *, xfs_inode_t *, uint);
 xfs_extlen_t	xfs_get_extsz_hint(struct xfs_inode *ip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int		xfs_dir_ialloc(struct xfs_trans **, struct xfs_inode *, umode_t,
 			       xfs_nlink_t, xfs_dev_t, prid_t, int,
 			       struct xfs_inode **, int *);
@@ -644,6 +697,9 @@ int		xfs_zero_eof(struct xfs_inode *, xfs_off_t, xfs_fsize_t);
 int		xfs_iozero(struct xfs_inode *, loff_t, size_t);
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IHOLD(ip) \
 do { \
@@ -658,6 +714,7 @@ do { \
 	iput(VFS_I(ip)); \
 } while (0)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif /* __KERNEL__ */
 
@@ -720,6 +777,8 @@ extern struct kmem_zone	*xfs_inode_zone;
 extern struct kmem_zone	*xfs_ili_zone;
 extern const struct xfs_buf_ops xfs_inode_buf_ops;
 =======
+=======
+>>>>>>> v3.18
 extern struct kmem_zone	*xfs_inode_zone;
 
 /*
@@ -731,6 +790,9 @@ extern struct kmem_zone	*xfs_inode_zone;
 #define XFS_IO_FLAGS \
 	{ XFS_IO_ISDIRECT,	"DIRECT" }, \
 	{ XFS_IO_INVIS,		"INVIS"}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif	/* __XFS_INODE_H__ */

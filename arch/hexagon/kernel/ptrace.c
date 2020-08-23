@@ -184,6 +184,10 @@ static const struct user_regset_view hexagon_user_view = {
 	.ei_osabi = ELF_OSABI,
 	.regsets = hexagon_regsets,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.e_flags = ELF_CORE_EFLAGS,
+>>>>>>> v3.18
 =======
 	.e_flags = ELF_CORE_EFLAGS,
 >>>>>>> v3.18

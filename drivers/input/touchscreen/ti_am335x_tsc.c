@@ -15,7 +15,10 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -28,8 +31,14 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/input/ti_am335x_tsc.h>
 #include <linux/delay.h>
+=======
+#include <linux/delay.h>
+#include <linux/of.h>
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 #include <linux/of.h>
@@ -43,7 +52,10 @@
 #define MAX_12BIT		((1 << 12) - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const int config_pins[] = {
 	STEPCONFIG_XPP,
 	STEPCONFIG_XNN,
@@ -51,6 +63,9 @@ static const int config_pins[] = {
 	STEPCONFIG_YNN,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct titsc {
 	struct input_dev	*input;
@@ -60,13 +75,19 @@ struct titsc {
 	unsigned int		x_plate_resistance;
 	bool			pen_down;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			steps_to_configure;
 =======
+=======
+>>>>>>> v3.18
 	int			coordinate_readouts;
 	u32			config_inp[4];
 	u32			bit_xp, bit_xn, bit_yp, bit_yn;
 	u32			inp_xp, inp_xn, inp_yp, inp_yn;
 	u32			step_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -81,6 +102,7 @@ static void titsc_writel(struct titsc *tsc, unsigned int reg,
 	writel(val, tsc->mfd_tscadc->tscadc_base + reg);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void titsc_step_config(struct titsc *ts_dev)
 {
@@ -108,6 +130,8 @@ static void titsc_step_config(struct titsc *ts_dev)
 
 	for (i = 1; i <= ts_dev->steps_to_configure; i++) {
 =======
+=======
+>>>>>>> v3.18
 static int titsc_config_wires(struct titsc *ts_dev)
 {
 	u32 analog_line[4];
@@ -186,6 +210,9 @@ static void titsc_step_config(struct titsc *ts_dev)
 	/* 1 … coordinate_readouts is for X */
 	end_step = ts_dev->coordinate_readouts;
 	for (i = 0; i < end_step; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		titsc_writel(ts_dev, REG_STEPCONFIG(i), config);
 		titsc_writel(ts_dev, REG_STEPDELAY(i), STEPCONFIG_OPENDLY);
@@ -193,6 +220,7 @@ static void titsc_step_config(struct titsc *ts_dev)
 
 	config = 0;
 	config = STEPCONFIG_MODE_HWSYNC |
+<<<<<<< HEAD
 <<<<<<< HEAD
 			STEPCONFIG_AVG_16 | STEPCONFIG_YNN |
 			STEPCONFIG_INM_ADCREFM | STEPCONFIG_FIFO1;
@@ -211,6 +239,8 @@ static void titsc_step_config(struct titsc *ts_dev)
 
 	for (i = (ts_dev->steps_to_configure + 1); i <= total_steps; i++) {
 =======
+=======
+>>>>>>> v3.18
 			STEPCONFIG_AVG_16 | ts_dev->bit_yn |
 			STEPCONFIG_INM_ADCREFM;
 	switch (ts_dev->wires) {
@@ -229,11 +259,15 @@ static void titsc_step_config(struct titsc *ts_dev)
 	/* coordinate_readouts … coordinate_readouts * 2 is for Y */
 	end_step = ts_dev->coordinate_readouts * 2;
 	for (i = ts_dev->coordinate_readouts; i < end_step; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		titsc_writel(ts_dev, REG_STEPCONFIG(i), config);
 		titsc_writel(ts_dev, REG_STEPDELAY(i), STEPCONFIG_OPENDLY);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	config = 0;
 	/* Charge step configuration */
@@ -241,15 +275,21 @@ static void titsc_step_config(struct titsc *ts_dev)
 			STEPCHARGE_RFP_XPUL | STEPCHARGE_RFM_XNUR |
 			STEPCHARGE_INM_AN1 | STEPCHARGE_INP_AN1;
 =======
+=======
+>>>>>>> v3.18
 	/* Charge step configuration */
 	config = ts_dev->bit_xp | ts_dev->bit_yn |
 			STEPCHARGE_RFP_XPUL | STEPCHARGE_RFM_XNUR |
 			STEPCHARGE_INM_AN1 | STEPCHARGE_INP(ts_dev->inp_yp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	titsc_writel(ts_dev, REG_CHARGECONFIG, config);
 	titsc_writel(ts_dev, REG_CHARGEDELAY, CHARGEDLY_OPENDLY);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	config = 0;
 	/* Configure to calculate pressure */
@@ -271,6 +311,8 @@ static void titsc_step_config(struct titsc *ts_dev)
 static void titsc_read_coordinates(struct titsc *ts_dev,
 				    unsigned int *x, unsigned int *y)
 =======
+=======
+>>>>>>> v3.18
 	/* coordinate_readouts * 2 … coordinate_readouts * 2 + 2 is for Z */
 	config = STEPCONFIG_MODE_HWSYNC |
 			STEPCONFIG_AVG_16 | ts_dev->bit_yp |
@@ -294,6 +336,9 @@ static void titsc_read_coordinates(struct titsc *ts_dev,
 
 static void titsc_read_coordinates(struct titsc *ts_dev,
 		u32 *x, u32 *y, u32 *z1, u32 *z2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned int fifocount = titsc_readl(ts_dev, REG_FIFO0CNT);
@@ -302,13 +347,19 @@ static void titsc_read_coordinates(struct titsc *ts_dev,
 	unsigned int read, diff;
 	unsigned int i, channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned int creads = ts_dev->coordinate_readouts;
 
 	*z1 = *z2 = 0;
 	if (fifocount % (creads * 2 + 2))
 		fifocount -= fifocount % (creads * 2 + 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Delta filter is used to remove large variations in sampled
@@ -319,6 +370,7 @@ static void titsc_read_coordinates(struct titsc *ts_dev,
 	 * if true the value is reported to the sub system.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < fifocount - 1; i++) {
 		read = titsc_readl(ts_dev, REG_FIFO0);
 		channel = read & 0xf0000;
@@ -326,12 +378,17 @@ static void titsc_read_coordinates(struct titsc *ts_dev,
 		if ((channel >= 0) && (channel < ts_dev->steps_to_configure)) {
 			read &= 0xfff;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < fifocount; i++) {
 		read = titsc_readl(ts_dev, REG_FIFO0);
 
 		channel = (read & 0xf0000) >> 16;
 		read &= 0xfff;
 		if (channel < creads) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			diff = abs(read - prev_val_x);
 			if (diff < prev_diff_x) {
@@ -339,6 +396,7 @@ static void titsc_read_coordinates(struct titsc *ts_dev,
 				*x = read;
 			}
 			prev_val_x = read;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		}
 
@@ -352,6 +410,10 @@ static void titsc_read_coordinates(struct titsc *ts_dev,
 
 		} else if (channel < creads * 2) {
 >>>>>>> v3.18
+=======
+
+		} else if (channel < creads * 2) {
+>>>>>>> v3.18
 			diff = abs(read - prev_val_y);
 			if (diff < prev_diff_y) {
 				prev_diff_y = diff;
@@ -359,13 +421,19 @@ static void titsc_read_coordinates(struct titsc *ts_dev,
 			}
 			prev_val_y = read;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		} else if (channel < creads * 2 + 1) {
 			*z1 = read;
 
 		} else if (channel < creads * 2 + 2) {
 			*z2 = read;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -379,6 +447,7 @@ static irqreturn_t titsc_irq(int irq, void *dev)
 	unsigned int x = 0, y = 0;
 	unsigned int z1, z2, z;
 	unsigned int fsm;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int fifo1count, fifo0count;
 	int i;
@@ -398,6 +467,8 @@ static irqreturn_t titsc_irq(int irq, void *dev)
 		for (i = 0; i < fifo0count; i++)
 			titsc_readl(ts_dev, REG_FIFO0);
 =======
+=======
+>>>>>>> v3.18
 
 	status = titsc_readl(ts_dev, REG_IRQSTATUS);
 	/*
@@ -407,6 +478,9 @@ static irqreturn_t titsc_irq(int irq, void *dev)
 	if (status & IRQENB_FIFO0THRES) {
 
 		titsc_read_coordinates(ts_dev, &x, &y, &z1, &z2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (ts_dev->pen_down && z1 != 0 && z2 != 0) {
@@ -416,15 +490,21 @@ static irqreturn_t titsc_irq(int irq, void *dev)
 			 * x postion/4096 * ((z2 / z1) - 1)
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			z = z2 - z1;
 			z *= x;
 			z *= ts_dev->x_plate_resistance;
 			z /= z1;
 =======
+=======
+>>>>>>> v3.18
 			z = z1 - z2;
 			z *= x;
 			z *= ts_dev->x_plate_resistance;
 			z /= z2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			z = (z + 2047) >> 12;
 
@@ -461,11 +541,14 @@ static irqreturn_t titsc_irq(int irq, void *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	titsc_writel(ts_dev, REG_IRQSTATUS, irqclr);
 
 	titsc_writel(ts_dev, REG_SE, STPENB_STEPENB_TC);
 	return IRQ_HANDLED;
 =======
+=======
+>>>>>>> v3.18
 	if (status & IRQENB_HW_PEN) {
 
 		titsc_writel(ts_dev, REG_IRQWAKEUP, 0x00);
@@ -523,6 +606,9 @@ static int titsc_parse_dt(struct platform_device *pdev,
 
 	return of_property_read_u32_array(node, "ti,wire-config",
 			ts_dev->config_inp, ARRAY_SIZE(ts_dev->config_inp));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -535,6 +621,7 @@ static int titsc_probe(struct platform_device *pdev)
 	struct titsc *ts_dev;
 	struct input_dev *input_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ti_tscadc_dev *tscadc_dev = pdev->dev.platform_data;
 	struct mfd_tscadc_board	*pdata;
 	int err;
@@ -546,6 +633,11 @@ static int titsc_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
+=======
+	struct ti_tscadc_dev *tscadc_dev = ti_tscadc_dev_get(pdev);
+	int err;
+
+>>>>>>> v3.18
 =======
 	struct ti_tscadc_dev *tscadc_dev = ti_tscadc_dev_get(pdev);
 	int err;
@@ -565,6 +657,7 @@ static int titsc_probe(struct platform_device *pdev)
 	ts_dev->input = input_dev;
 	ts_dev->irq = tscadc_dev->irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ts_dev->wires = pdata->tsc_init->wires;
 	ts_dev->x_plate_resistance = pdata->tsc_init->x_plate_resistance;
 	ts_dev->steps_to_configure = pdata->tsc_init->steps_to_configure;
@@ -572,6 +665,8 @@ static int titsc_probe(struct platform_device *pdev)
 	err = request_irq(ts_dev->irq, titsc_irq,
 			  0, pdev->dev.driver->name, ts_dev);
 =======
+=======
+>>>>>>> v3.18
 
 	err = titsc_parse_dt(pdev, ts_dev);
 	if (err) {
@@ -581,6 +676,9 @@ static int titsc_probe(struct platform_device *pdev)
 
 	err = request_irq(ts_dev->irq, titsc_irq,
 			  IRQF_SHARED, pdev->dev.driver->name, ts_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err) {
 		dev_err(&pdev->dev, "failed to allocate irq.\n");
@@ -589,9 +687,12 @@ static int titsc_probe(struct platform_device *pdev)
 
 	titsc_writel(ts_dev, REG_IRQENABLE, IRQENB_FIFO0THRES);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	titsc_step_config(ts_dev);
 	titsc_writel(ts_dev, REG_FIFO0THR, ts_dev->steps_to_configure);
 =======
+=======
+>>>>>>> v3.18
 	err = titsc_config_wires(ts_dev);
 	if (err) {
 		dev_err(&pdev->dev, "wrong i/p wire configuration\n");
@@ -600,6 +701,9 @@ static int titsc_probe(struct platform_device *pdev)
 	titsc_step_config(ts_dev);
 	titsc_writel(ts_dev, REG_FIFO0THR,
 			ts_dev->coordinate_readouts * 2 + 2 - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	input_dev->name = "ti-tsc";
@@ -631,6 +735,7 @@ err_free_mem:
 static int titsc_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ti_tscadc_dev *tscadc_dev = pdev->dev.platform_data;
 	struct titsc *ts_dev = tscadc_dev->tsc;
 
@@ -640,6 +745,8 @@ static int titsc_remove(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct titsc *ts_dev = platform_get_drvdata(pdev);
 	u32 steps;
 
@@ -652,6 +759,9 @@ static int titsc_remove(struct platform_device *pdev)
 
 	input_unregister_device(ts_dev->input);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(ts_dev);
 	return 0;
@@ -661,16 +771,22 @@ static int titsc_remove(struct platform_device *pdev)
 static int titsc_suspend(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ti_tscadc_dev *tscadc_dev = dev->platform_data;
 	struct titsc *ts_dev = tscadc_dev->tsc;
 	unsigned int idle;
 
 =======
+=======
+>>>>>>> v3.18
 	struct titsc *ts_dev = dev_get_drvdata(dev);
 	struct ti_tscadc_dev *tscadc_dev;
 	unsigned int idle;
 
 	tscadc_dev = ti_tscadc_dev_get(to_platform_device(dev));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (device_may_wakeup(tscadc_dev->dev)) {
 		idle = titsc_readl(ts_dev, REG_IRQENABLE);
@@ -684,14 +800,20 @@ static int titsc_suspend(struct device *dev)
 static int titsc_resume(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ti_tscadc_dev *tscadc_dev = dev->platform_data;
 	struct titsc *ts_dev = tscadc_dev->tsc;
 
 =======
+=======
+>>>>>>> v3.18
 	struct titsc *ts_dev = dev_get_drvdata(dev);
 	struct ti_tscadc_dev *tscadc_dev;
 
 	tscadc_dev = ti_tscadc_dev_get(to_platform_device(dev));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (device_may_wakeup(tscadc_dev->dev)) {
 		titsc_writel(ts_dev, REG_IRQWAKEUP,
@@ -701,7 +823,11 @@ static int titsc_resume(struct device *dev)
 	titsc_step_config(ts_dev);
 	titsc_writel(ts_dev, REG_FIFO0THR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ts_dev->steps_to_configure);
+=======
+			ts_dev->coordinate_readouts * 2 + 2 - 1);
+>>>>>>> v3.18
 =======
 			ts_dev->coordinate_readouts * 2 + 2 - 1);
 >>>>>>> v3.18
@@ -718,27 +844,39 @@ static const struct dev_pm_ops titsc_pm_ops = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id ti_tsc_dt_ids[] = {
 	{ .compatible = "ti,am3359-tsc", },
 	{ }
 };
 MODULE_DEVICE_TABLE(of, ti_tsc_dt_ids);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver ti_tsc_driver = {
 	.probe	= titsc_probe,
 	.remove	= titsc_remove,
 	.driver	= {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name   = "tsc",
 		.owner	= THIS_MODULE,
 		.pm	= TITSC_PM_OPS,
 =======
+=======
+>>>>>>> v3.18
 		.name   = "TI-am335x-tsc",
 		.owner	= THIS_MODULE,
 		.pm	= TITSC_PM_OPS,
 		.of_match_table = ti_tsc_dt_ids,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };

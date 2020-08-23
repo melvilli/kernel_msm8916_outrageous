@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -84,6 +94,10 @@
 
 struct iwl_mvm;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct iwl_mvm_vif;
+>>>>>>> v3.18
 =======
 struct iwl_mvm_vif;
 >>>>>>> v3.18
@@ -210,6 +224,7 @@ struct iwl_mvm_vif;
  * DOC: AP mode - PS
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * When a station is asleep, the fw will set it as "asleep". All the
  * non-aggregation frames to that station will be dropped by the fw
  * (%TX_STATUS_FAIL_DEST_PS failure code).
@@ -229,6 +244,8 @@ struct iwl_mvm_vif;
  *
  * TODO - EOSP handling
 =======
+=======
+>>>>>>> v3.18
  * When a station is asleep, the fw will set it as "asleep". All frames on
  * shared queues (i.e. non-aggregation queues) to that station will be dropped
  * by the fw (%TX_STATUS_FAIL_DEST_PS failure code).
@@ -256,6 +273,9 @@ struct iwl_mvm_vif;
  * already sent to the device will be rejected again.
  *
  * See also "AP support for powersaving clients" in mac80211.h.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -289,6 +309,11 @@ enum iwl_mvm_agg_state {
  * @rate_n_flags: Rate at which Tx was attempted. Holds the data between the
  *	Tx response (TX_CMD), and the block ack notification (COMPRESSED_BA).
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @reduced_tpc: Reduced tx power. Holds the data between the
+ *	Tx response (TX_CMD), and the block ack notification (COMPRESSED_BA).
+>>>>>>> v3.18
 =======
  * @reduced_tpc: Reduced tx power. Holds the data between the
  *	Tx response (TX_CMD), and the block ack notification (COMPRESSED_BA).
@@ -300,7 +325,10 @@ enum iwl_mvm_agg_state {
  *	Basically when next_reclaimed reaches ssn, we can tell mac80211 that
  *	we are ready to finish the Tx AGG stop / start flow.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @wait_for_ba: Expect block-ack before next Tx reply
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -310,6 +338,7 @@ struct iwl_mvm_tid_data {
 	/* The rest is Tx AGG related */
 	u32 rate_n_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum iwl_mvm_agg_state state;
 	u16 txq_id;
 	u16 ssn;
@@ -317,6 +346,8 @@ struct iwl_mvm_tid_data {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	u8 reduced_tpc;
 	enum iwl_mvm_agg_state state;
 	u16 txq_id;
@@ -329,6 +360,9 @@ static inline u16 iwl_mvm_tid_queued(struct iwl_mvm_tid_data *tid_data)
 				tid_data->next_reclaimed);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct iwl_mvm_sta - representation of a station in the driver
@@ -340,10 +374,13 @@ static inline u16 iwl_mvm_tid_queued(struct iwl_mvm_tid_data *tid_data)
  * @max_agg_bufsize: the maximal size of the AGG buffer for this station
  * @bt_reduced_txpower: is reduced tx power enabled for this station
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @lock: lock to protect the whole struct. Since %tid_data is access from Tx
  * and from Tx response flow, it needs a spinlock.
  * @tid_data: per tid data. Look at %iwl_mvm_tid_data.
 =======
+=======
+>>>>>>> v3.18
  * @next_status_eosp: the next reclaimed packet is a PS-Poll response and
  *	we need to signal the EOSP
  * @lock: lock to protect the whole struct. Since %tid_data is access from Tx
@@ -353,6 +390,9 @@ static inline u16 iwl_mvm_tid_queued(struct iwl_mvm_tid_data *tid_data)
  * @tt_tx_protection: is thermal throttling enable Tx protection?
  * @disable_tx: is tx to this STA disabled?
  * @agg_tids: bitmap of tids whose status is operational aggregated (IWL_AGG_ON)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * When mac80211 creates a station it reserves some space (hw->sta_data_size)
@@ -368,6 +408,10 @@ struct iwl_mvm_sta {
 	u8 max_agg_bufsize;
 	bool bt_reduced_txpower;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool next_status_eosp;
+>>>>>>> v3.18
 =======
 	bool next_status_eosp;
 >>>>>>> v3.18
@@ -377,12 +421,15 @@ struct iwl_mvm_sta {
 	struct ieee80211_vif *vif;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
 	u16 last_seq_ctl;
 #endif
 };
 
 =======
+=======
+>>>>>>> v3.18
 	/* Temporary, until the new TLC will control the Tx protection */
 	s8 tx_protection;
 	bool tt_tx_protection;
@@ -397,6 +444,9 @@ iwl_mvm_sta_from_mac80211(struct ieee80211_sta *sta)
 	return (void *)sta->drv_priv;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct iwl_mvm_int_sta - representation of an internal station (auxiliary or
@@ -440,11 +490,17 @@ void iwl_mvm_update_tkip_key(struct iwl_mvm *mvm,
 			     u16 *phase1key);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int iwl_mvm_rx_eosp_notif(struct iwl_mvm *mvm,
 			  struct iwl_rx_cmd_buffer *rxb,
 			  struct iwl_device_cmd *cmd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* AMPDU */
 int iwl_mvm_sta_rx_agg(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
@@ -460,6 +516,7 @@ int iwl_mvm_sta_tx_agg_flush(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 
 int iwl_mvm_add_aux_sta(struct iwl_mvm *mvm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int iwl_mvm_allocate_int_sta(struct iwl_mvm *mvm, struct iwl_mvm_int_sta *sta,
 			     u32 qmask);
 void iwl_mvm_dealloc_int_sta(struct iwl_mvm *mvm,
@@ -472,6 +529,8 @@ int iwl_mvm_add_bcast_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 			  struct iwl_mvm_int_sta *bsta);
 int iwl_mvm_rm_bcast_sta(struct iwl_mvm *mvm, struct iwl_mvm_int_sta *bsta);
 =======
+=======
+>>>>>>> v3.18
 void iwl_mvm_del_aux_sta(struct iwl_mvm *mvm);
 
 int iwl_mvm_alloc_bcast_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif);
@@ -481,6 +540,9 @@ int iwl_mvm_send_rm_bcast_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif);
 int iwl_mvm_rm_bcast_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif);
 void iwl_mvm_dealloc_bcast_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void iwl_mvm_sta_drained_wk(struct work_struct *wk);
 void iwl_mvm_sta_modify_ps_wake(struct iwl_mvm *mvm,
@@ -489,10 +551,13 @@ void iwl_mvm_sta_modify_sleep_tx_count(struct iwl_mvm *mvm,
 				       struct ieee80211_sta *sta,
 				       enum ieee80211_frame_release_type reason,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       u16 cnt);
 int iwl_mvm_drain_sta(struct iwl_mvm *mvm, struct iwl_mvm_sta *mvmsta,
 		      bool drain);
 =======
+=======
+>>>>>>> v3.18
 				       u16 cnt, u16 tids, bool more_data,
 				       bool agg);
 int iwl_mvm_drain_sta(struct iwl_mvm *mvm, struct iwl_mvm_sta *mvmsta,
@@ -505,6 +570,9 @@ void iwl_mvm_sta_modify_disable_tx_ap(struct iwl_mvm *mvm,
 void iwl_mvm_modify_all_sta_disable_tx(struct iwl_mvm *mvm,
 				       struct iwl_mvm_vif *mvmvif,
 				       bool disable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __sta_h__ */

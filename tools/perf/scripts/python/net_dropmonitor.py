@@ -67,7 +67,11 @@ def trace_end():
 
 # called from perf, when it finds a correspoinding event
 <<<<<<< HEAD
+<<<<<<< HEAD
 def skb__kfree_skb(name, context, cpu, sec, nsec, pid, comm,
+=======
+def skb__kfree_skb(name, context, cpu, sec, nsec, pid, comm, callchain,
+>>>>>>> v3.18
 =======
 def skb__kfree_skb(name, context, cpu, sec, nsec, pid, comm, callchain,
 >>>>>>> v3.18

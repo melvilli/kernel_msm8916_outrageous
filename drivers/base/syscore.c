@@ -10,7 +10,12 @@
 #include <linux/mutex.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
+=======
+#include <linux/suspend.h>
+#include <trace/events/power.h>
+>>>>>>> v3.18
 =======
 #include <linux/suspend.h>
 #include <trace/events/power.h>
@@ -55,6 +60,7 @@ int syscore_suspend(void)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("Checking wakeup interrupts\n");
 
 	/* Return error code if there are any wakeup interrupts pending. */
@@ -62,12 +68,17 @@ int syscore_suspend(void)
 	if (ret)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	trace_suspend_resume(TPS("syscore_suspend"), 0, true);
 	pr_debug("Checking wakeup interrupts\n");
 
 	/* Return error code if there are any wakeup interrupts pending. */
 	if (pm_wakeup_pending())
 		return -EBUSY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	WARN_ONCE(!irqs_disabled(),
@@ -85,6 +96,10 @@ int syscore_suspend(void)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_suspend_resume(TPS("syscore_suspend"), 0, false);
+>>>>>>> v3.18
 =======
 	trace_suspend_resume(TPS("syscore_suspend"), 0, false);
 >>>>>>> v3.18
@@ -111,6 +126,10 @@ void syscore_resume(void)
 	struct syscore_ops *ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_suspend_resume(TPS("syscore_resume"), 0, true);
+>>>>>>> v3.18
 =======
 	trace_suspend_resume(TPS("syscore_resume"), 0, true);
 >>>>>>> v3.18
@@ -126,6 +145,10 @@ void syscore_resume(void)
 				"Interrupts enabled after %pF\n", ops->resume);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_suspend_resume(TPS("syscore_resume"), 0, false);
+>>>>>>> v3.18
 =======
 	trace_suspend_resume(TPS("syscore_resume"), 0, false);
 >>>>>>> v3.18

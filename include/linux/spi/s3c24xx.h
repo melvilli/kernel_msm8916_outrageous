@@ -24,6 +24,11 @@ struct s3c2410_spi_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int s3c24xx_set_fiq(unsigned int irq, bool on);
+
+>>>>>>> v3.18
 =======
 extern int s3c24xx_set_fiq(unsigned int irq, bool on);
 

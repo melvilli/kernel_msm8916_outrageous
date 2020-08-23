@@ -14,6 +14,7 @@
 #include "util/parse-events.h"
 #include "util/cache.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int cmd_list(int argc, const char **argv, const char *prefix __maybe_unused)
 {
@@ -58,6 +59,8 @@ int cmd_list(int argc, const char **argv, const char *prefix __maybe_unused)
 				free(s);
 			}
 =======
+=======
+>>>>>>> v3.18
 #include "util/pmu.h"
 #include "util/parse-options.h"
 
@@ -116,6 +119,9 @@ int cmd_list(int argc, const char **argv, const char *prefix __maybe_unused)
 			s[sep_idx] = '\0';
 			print_tracepoint_events(s, s + sep_idx + 1, false);
 			free(s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}

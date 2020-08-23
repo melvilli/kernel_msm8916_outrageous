@@ -126,6 +126,7 @@ static int nx_gca(struct nx_crypto_ctx  *nx_ctx,
 		  u8                    *out)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nx_csbcpb *csbcpb_aead = nx_ctx->csbcpb_aead;
 	int rc = -EINVAL;
 	struct scatter_walk walk;
@@ -159,6 +160,8 @@ static int nx_gca(struct nx_crypto_ctx  *nx_ctx,
 	memcpy(out, csbcpb_aead->cpb.aes_gca.out_pat, AES_BLOCK_SIZE);
 out:
 =======
+=======
+>>>>>>> v3.18
 	int rc;
 	struct nx_csbcpb *csbcpb_aead = nx_ctx->csbcpb_aead;
 	struct scatter_walk walk;
@@ -340,6 +343,9 @@ out:
 	 */
 	memset(csbcpb->cpb.aes_ecb.key, 0, sizeof(csbcpb->cpb.aes_ecb.key));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -351,23 +357,30 @@ static int gcm_aes_nx_crypt(struct aead_request *req, int enc)
 	struct blkcipher_desc desc;
 	unsigned int nbytes = req->cryptlen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = -EINVAL;
 
 	if (nbytes > nx_ctx->ap->databytelen)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int processed = 0, to_process;
 	unsigned long irq_flags;
 	u32 max_sg_len;
 	int rc = -EINVAL;
 
 	spin_lock_irqsave(&nx_ctx->lock, irq_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	desc.info = nx_ctx->priv.gcm.iv;
 	/* initialize the counter */
 	*(u32 *)(desc.info + NX_GCM_CTR_OFFSET) = 1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* For scenarios where the input message is zero length, AES CTR mode
 	 * may be used. Set the source data to be a single block (16B) of all
@@ -405,6 +418,8 @@ static int gcm_aes_nx_crypt(struct aead_request *req, int enc)
 	csbcpb->cpb.aes_gcm.bit_length_aad = req->assoclen * 8;
 
 =======
+=======
+>>>>>>> v3.18
 	if (nbytes == 0) {
 		if (req->assoclen == 0)
 			rc = gcm_empty(req, &desc, enc);
@@ -418,6 +433,9 @@ static int gcm_aes_nx_crypt(struct aead_request *req, int enc)
 
 	/* Process associated data */
 	csbcpb->cpb.aes_gcm.bit_length_aad = req->assoclen * 8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (req->assoclen) {
 		rc = nx_gca(nx_ctx, req, csbcpb->cpb.aes_gcm.in_pat_or_aad);
@@ -425,6 +443,7 @@ static int gcm_aes_nx_crypt(struct aead_request *req, int enc)
 			goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (enc)
 		NX_CPB_FDM(csbcpb) |= NX_FDM_ENDE_ENCRYPT;
@@ -448,6 +467,8 @@ static int gcm_aes_nx_crypt(struct aead_request *req, int enc)
 		     &(nx_ctx->stats->aes_bytes));
 
 =======
+=======
+>>>>>>> v3.18
 	/* Set flags for encryption */
 	NX_CPB_FDM(csbcpb) &= ~NX_FDM_CONTINUATION;
 	if (enc) {
@@ -505,6 +526,9 @@ static int gcm_aes_nx_crypt(struct aead_request *req, int enc)
 	} while (processed < nbytes);
 
 mac:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (enc) {
 		/* copy out the auth tag */
@@ -513,17 +537,23 @@ mac:
 				 crypto_aead_authsize(crypto_aead_reqtfm(req)),
 				 SCATTERWALK_TO_SG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (req->assoclen) {
 		u8 *itag = nx_ctx->priv.gcm.iauth_tag;
 		u8 *otag = csbcpb->cpb.aes_gcm.out_pat_or_mac;
 
 		scatterwalk_map_and_copy(itag, req->dst, nbytes,
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		u8 *itag = nx_ctx->priv.gcm.iauth_tag;
 		u8 *otag = csbcpb->cpb.aes_gcm.out_pat_or_mac;
 
 		scatterwalk_map_and_copy(itag, req->src, nbytes,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 crypto_aead_authsize(crypto_aead_reqtfm(req)),
 				 SCATTERWALK_FROM_SG);
@@ -533,6 +563,10 @@ mac:
 	}
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
 >>>>>>> v3.18

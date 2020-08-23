@@ -34,9 +34,13 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/serial_8250.h>
 #include <linux/pm.h>
 #include <linux/bootmem.h>
+=======
+#include <linux/of_fdt.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_fdt.h>
 >>>>>>> v3.18
@@ -47,10 +51,13 @@
 #include <asm/bootinfo.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_fdt.h>
 #include <linux/of_platform.h>
 #include <linux/of_device.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/netlogic/haldefs.h>
@@ -65,7 +72,11 @@ struct nlm_soc_info nlm_nodes[NLM_NR_NODES];
 cpumask_t nlm_cpumask = CPU_MASK_CPU0;
 unsigned int nlm_threads_per_core;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32 __dtb_xlp_evp_begin[], __dtb_xlp_svp_begin[], __dtb_start[];
+=======
+unsigned int xlp_cores_per_node;
+>>>>>>> v3.18
 =======
 unsigned int xlp_cores_per_node;
 >>>>>>> v3.18
@@ -75,17 +86,24 @@ static void nlm_linux_exit(void)
 	uint64_t sysbase = nlm_get_node(0)->sysbase;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nlm_write_sys_reg(sysbase, SYS_CHIP_RESET, 1);
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_is_xlp9xx())
 		nlm_write_sys_reg(sysbase, SYS_9XX_CHIP_RESET, 1);
 	else
 		nlm_write_sys_reg(sysbase, SYS_CHIP_RESET, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for ( ; ; )
 		cpu_wait();
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __init plat_mem_setup(void)
 {
@@ -93,6 +111,8 @@ void __init plat_mem_setup(void)
 
 	panic_timeout	= 5;
 =======
+=======
+>>>>>>> v3.18
 static void nlm_fixup_mem(void)
 {
 	const int pref_backup = 512;
@@ -132,11 +152,15 @@ void __init plat_mem_setup(void)
 
 	register_smp_ops(&nlm_smp_ops);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	_machine_restart = (void (*)(char *))nlm_linux_exit;
 	_machine_halt	= nlm_linux_exit;
 	pm_power_off	= nlm_linux_exit;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * If no FDT pointer is passed in, use the built-in FDT.
@@ -165,6 +189,8 @@ void __init plat_mem_setup(void)
 	fdtp = phys_to_virt(__pa(fdtp));
 	early_init_devtree(fdtp);
 =======
+=======
+>>>>>>> v3.18
 	/* memory and bootargs from DT */
 	xlp_early_init_devtree();
 
@@ -174,14 +200,20 @@ void __init plat_mem_setup(void)
 	}
 	/* Calculate and setup wired entries for mapped kernel */
 	nlm_fixup_mem();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 const char *get_system_type(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return "Netlogic XLP Series";
 =======
+=======
+>>>>>>> v3.18
 	switch (read_c0_prid() & PRID_IMP_MASK) {
 	case PRID_IMP_NETLOGIC_XLP9XX:
 	case PRID_IMP_NETLOGIC_XLP5XX:
@@ -190,6 +222,9 @@ const char *get_system_type(void)
 	default:
 		return "Netlogic XLP Series";
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -201,6 +236,7 @@ void __init prom_free_prom_memory(void)
 void xlp_mmu_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable extended TLB and Large Fixed TLB */
 	write_c0_config6(read_c0_config6() | 0x24);
 
@@ -208,6 +244,8 @@ void xlp_mmu_init(void)
 	write_c0_config7(PM_DEFAULT_MASK >>
 		(13 + (ffz(PM_DEFAULT_MASK >> 13) / 2)));
 =======
+=======
+>>>>>>> v3.18
 	u32 conf4;
 
 	if (cpu_is_xlpii()) {
@@ -222,6 +260,9 @@ void xlp_mmu_init(void)
 		write_c0_config7(PM_DEFAULT_MASK >>
 			(13 + (ffz(PM_DEFAULT_MASK >> 13) / 2)));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -231,6 +272,7 @@ void nlm_percpu_init(int hwcpuid)
 
 void __init prom_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	nlm_io_base = CKSEG1ADDR(XLP_DEFAULT_IO_BASE);
 	xlp_mmu_init();
@@ -280,6 +322,8 @@ int __init xlp8xx_ds_publish_devices(void)
 
 device_initcall(xlp8xx_ds_publish_devices);
 =======
+=======
+>>>>>>> v3.18
 	void *reset_vec;
 
 	nlm_io_base = CKSEG1ADDR(XLP_DEFAULT_IO_BASE);
@@ -302,4 +346,7 @@ device_initcall(xlp8xx_ds_publish_devices);
 	cpumask_setall(&nlm_cpumask);
 #endif
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

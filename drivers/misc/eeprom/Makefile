@@ -5,6 +5,10 @@ obj-$(CONFIG_EEPROM_MAX6875)	+= max6875.o
 obj-$(CONFIG_EEPROM_93CX6)	+= eeprom_93cx6.o
 obj-$(CONFIG_EEPROM_93XX46)	+= eeprom_93xx46.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_EEPROM_SUNXI_SID)	+= sunxi_sid.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_EEPROM_SUNXI_SID)	+= sunxi_sid.o
 >>>>>>> v3.18

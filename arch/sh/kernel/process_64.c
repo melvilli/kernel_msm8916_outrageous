@@ -375,7 +375,11 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 		unsigned long arg, struct task_struct *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pt_regs *childregs, *regs = current_pt_regs();
+=======
+	struct pt_regs *childregs;
+>>>>>>> v3.18
 =======
 	struct pt_regs *childregs;
 >>>>>>> v3.18
@@ -398,7 +402,11 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 		memset(childregs, 0, sizeof(struct pt_regs));
 		childregs->regs[2] = (unsigned long)arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		childregs->regs[3] = (unsigned long)fn;
+=======
+		childregs->regs[3] = (unsigned long)usp;
+>>>>>>> v3.18
 =======
 		childregs->regs[3] = (unsigned long)usp;
 >>>>>>> v3.18

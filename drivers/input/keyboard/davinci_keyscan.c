@@ -173,7 +173,11 @@ static int __init davinci_ks_probe(struct platform_device *pdev)
 	struct resource *res, *mem;
 	struct device *dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct davinci_ks_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct davinci_ks_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct davinci_ks_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -319,8 +323,11 @@ static int davinci_ks_remove(struct platform_device *pdev)
 	release_mem_region(davinci_ks->pbase, davinci_ks->base_size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(davinci_ks);

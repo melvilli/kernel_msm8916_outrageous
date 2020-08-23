@@ -3,7 +3,11 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HW_RANDOM
+=======
+menuconfig HW_RANDOM
+>>>>>>> v3.18
 =======
 menuconfig HW_RANDOM
 >>>>>>> v3.18
@@ -25,15 +29,21 @@ menuconfig HW_RANDOM
 	  If unsure, say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HW_RANDOM_TIMERIOMEM
 	tristate "Timer IOMEM HW Random Number Generator support"
 	depends on HW_RANDOM && HAS_IOMEM
 =======
+=======
+>>>>>>> v3.18
 if HW_RANDOM
 
 config HW_RANDOM_TIMERIOMEM
 	tristate "Timer IOMEM HW Random Number Generator support"
 	depends on HAS_IOMEM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  This driver provides kernel-side support for a generic Random
@@ -49,7 +59,11 @@ config HW_RANDOM_TIMERIOMEM
 config HW_RANDOM_INTEL
 	tristate "Intel HW Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && (X86 || IA64) && PCI
+=======
+	depends on (X86 || IA64) && PCI
+>>>>>>> v3.18
 =======
 	depends on (X86 || IA64) && PCI
 >>>>>>> v3.18
@@ -66,7 +80,11 @@ config HW_RANDOM_INTEL
 config HW_RANDOM_AMD
 	tristate "AMD HW Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && (X86 || PPC_MAPLE) && PCI
+=======
+	depends on (X86 || PPC_MAPLE) && PCI
+>>>>>>> v3.18
 =======
 	depends on (X86 || PPC_MAPLE) && PCI
 >>>>>>> v3.18
@@ -83,8 +101,13 @@ config HW_RANDOM_AMD
 config HW_RANDOM_ATMEL
 	tristate "Atmel Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && HAVE_CLK
 	default (HW_RANDOM && ARCH_AT91)
+=======
+	depends on ARCH_AT91 && HAVE_CLK
+	default HW_RANDOM
+>>>>>>> v3.18
 =======
 	depends on ARCH_AT91 && HAVE_CLK
 	default HW_RANDOM
@@ -101,7 +124,11 @@ config HW_RANDOM_ATMEL
 config HW_RANDOM_BCM63XX
 	tristate "Broadcom BCM63xx Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && BCM63XX
+=======
+	depends on BCM63XX
+>>>>>>> v3.18
 =======
 	depends on BCM63XX
 >>>>>>> v3.18
@@ -118,7 +145,11 @@ config HW_RANDOM_BCM63XX
 config HW_RANDOM_BCM2835
 	tristate "Broadcom BCM2835 Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && ARCH_BCM2835
+=======
+	depends on ARCH_BCM2835
+>>>>>>> v3.18
 =======
 	depends on ARCH_BCM2835
 >>>>>>> v3.18
@@ -135,7 +166,11 @@ config HW_RANDOM_BCM2835
 config HW_RANDOM_GEODE
 	tristate "AMD Geode HW Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && X86_32 && PCI
+=======
+	depends on X86_32 && PCI
+>>>>>>> v3.18
 =======
 	depends on X86_32 && PCI
 >>>>>>> v3.18
@@ -152,7 +187,11 @@ config HW_RANDOM_GEODE
 config HW_RANDOM_N2RNG
 	tristate "Niagara2 Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && SPARC64
+=======
+	depends on SPARC64
+>>>>>>> v3.18
 =======
 	depends on SPARC64
 >>>>>>> v3.18
@@ -169,7 +208,11 @@ config HW_RANDOM_N2RNG
 config HW_RANDOM_VIA
 	tristate "VIA HW Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && X86
+=======
+	depends on X86
+>>>>>>> v3.18
 =======
 	depends on X86
 >>>>>>> v3.18
@@ -186,7 +229,11 @@ config HW_RANDOM_VIA
 config HW_RANDOM_IXP4XX
 	tristate "Intel IXP4xx NPU HW Pseudo-Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && ARCH_IXP4XX
+=======
+	depends on ARCH_IXP4XX
+>>>>>>> v3.18
 =======
 	depends on ARCH_IXP4XX
 >>>>>>> v3.18
@@ -203,6 +250,7 @@ config HW_RANDOM_IXP4XX
 config HW_RANDOM_OMAP
 	tristate "OMAP Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && (ARCH_OMAP16XX || ARCH_OMAP2)
 	default HW_RANDOM
  	---help---
@@ -210,12 +258,17 @@ config HW_RANDOM_OMAP
 	  Generator hardware found on OMAP16xx and OMAP24xx multimedia
 	  processors.
 =======
+=======
+>>>>>>> v3.18
 	depends on ARCH_OMAP16XX || ARCH_OMAP2PLUS
 	default HW_RANDOM
  	---help---
  	  This driver provides kernel-side support for the Random Number
 	  Generator hardware found on OMAP16xx, OMAP2/3/4/5 and AM33xx/AM43xx
 	  multimedia processors.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  To compile this driver as a module, choose M here: the
@@ -224,10 +277,13 @@ config HW_RANDOM_OMAP
  	  If unsure, say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HW_RANDOM_OCTEON
 	tristate "Octeon Random Number Generator support"
 	depends on HW_RANDOM && CPU_CAVIUM_OCTEON
 =======
+=======
+>>>>>>> v3.18
 config HW_RANDOM_OMAP3_ROM
 	tristate "OMAP3 ROM Random Number Generator support"
 	depends on ARCH_OMAP3
@@ -244,6 +300,9 @@ config HW_RANDOM_OMAP3_ROM
 config HW_RANDOM_OCTEON
 	tristate "Octeon Random Number Generator support"
 	depends on CAVIUM_OCTEON_SOC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default HW_RANDOM
 	---help---
@@ -258,7 +317,11 @@ config HW_RANDOM_OCTEON
 config HW_RANDOM_PASEMI
 	tristate "PA Semi HW Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && PPC_PASEMI
+=======
+	depends on PPC_PASEMI
+>>>>>>> v3.18
 =======
 	depends on PPC_PASEMI
 >>>>>>> v3.18
@@ -275,7 +338,11 @@ config HW_RANDOM_PASEMI
 config HW_RANDOM_VIRTIO
 	tristate "VirtIO Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && VIRTIO
+=======
+	depends on VIRTIO
+>>>>>>> v3.18
 =======
 	depends on VIRTIO
 >>>>>>> v3.18
@@ -289,7 +356,11 @@ config HW_RANDOM_VIRTIO
 config HW_RANDOM_TX4939
 	tristate "TX4939 Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && SOC_TX4939
+=======
+	depends on SOC_TX4939
+>>>>>>> v3.18
 =======
 	depends on SOC_TX4939
 >>>>>>> v3.18
@@ -306,7 +377,12 @@ config HW_RANDOM_TX4939
 config HW_RANDOM_MXC_RNGA
 	tristate "Freescale i.MX RNGA Random Number Generator"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && ARCH_HAS_RNGA
+=======
+	depends on ARCH_HAS_RNGA
+	default HW_RANDOM
+>>>>>>> v3.18
 =======
 	depends on ARCH_HAS_RNGA
 	default HW_RANDOM
@@ -323,7 +399,12 @@ config HW_RANDOM_MXC_RNGA
 config HW_RANDOM_NOMADIK
 	tristate "ST-Ericsson Nomadik Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && ARCH_NOMADIK
+=======
+	depends on ARCH_NOMADIK
+	default HW_RANDOM
+>>>>>>> v3.18
 =======
 	depends on ARCH_NOMADIK
 	default HW_RANDOM
@@ -337,6 +418,7 @@ config HW_RANDOM_NOMADIK
 
 	  If unsure, say Y.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config HW_RANDOM_PICOXCELL
 	tristate "Picochip picoXcell true random number generator support"
@@ -354,10 +436,15 @@ config HW_RANDOM_PPC4XX
 	tristate "PowerPC 4xx generic true random number generator support"
 	depends on HW_RANDOM && PPC && 4xx
 =======
+=======
+>>>>>>> v3.18
 config HW_RANDOM_PPC4XX
 	tristate "PowerPC 4xx generic true random number generator support"
 	depends on PPC && 4xx
 	default HW_RANDOM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	 This driver provides the kernel-side support for the TRNG hardware
@@ -368,6 +455,7 @@ config HW_RANDOM_PPC4XX
 
 	 If unsure, say N.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config UML_RANDOM
 	depends on UML
@@ -392,6 +480,11 @@ config HW_RANDOM_PSERIES
 	tristate "pSeries HW Random Number Generator support"
 	depends on PPC64 && IBMVIO
 >>>>>>> v3.18
+=======
+config HW_RANDOM_PSERIES
+	tristate "pSeries HW Random Number Generator support"
+	depends on PPC64 && IBMVIO
+>>>>>>> v3.18
 	default HW_RANDOM
 	---help---
 	  This driver provides kernel-side support for the Random Number
@@ -403,10 +496,13 @@ config HW_RANDOM_PSERIES
 	  If unsure, say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HW_RANDOM_EXYNOS
 	tristate "EXYNOS HW random number generator support"
 	depends on HW_RANDOM && HAS_IOMEM && HAVE_CLK
 =======
+=======
+>>>>>>> v3.18
 config HW_RANDOM_POWERNV
 	tristate "PowerNV Random Number Generator support"
 	depends on PPC_POWERNV
@@ -424,6 +520,9 @@ config HW_RANDOM_EXYNOS
 	tristate "EXYNOS HW random number generator support"
 	depends on ARCH_EXYNOS
 	default HW_RANDOM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  This driver provides kernel-side support for the Random Number
@@ -437,7 +536,11 @@ config HW_RANDOM_EXYNOS
 config HW_RANDOM_TPM
 	tristate "TPM HW Random Number Generator support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HW_RANDOM && TCG_TPM
+=======
+	depends on TCG_TPM
+>>>>>>> v3.18
 =======
 	depends on TCG_TPM
 >>>>>>> v3.18
@@ -449,6 +552,7 @@ config HW_RANDOM_TPM
 	  To compile this driver as a module, choose M here: the
 	  module will be called tpm-rng.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config HW_RANDOM_MSM
 	tristate "Qualcomm MSM Random Number Generator support"
@@ -465,6 +569,8 @@ config HW_RANDOM_MSM
 
 	  If unsure, say Y.
 =======
+=======
+>>>>>>> v3.18
 	  If unsure, say Y.
 
 config HW_RANDOM_MSM
@@ -509,4 +615,7 @@ config UML_RANDOM
 	  (check your distro, or download from
 	  http://sourceforge.net/projects/gkernel/).  rngd periodically reads
 	  /dev/hwrng and injects the entropy into /dev/random.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

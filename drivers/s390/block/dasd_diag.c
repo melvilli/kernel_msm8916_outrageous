@@ -360,6 +360,10 @@ dasd_diag_check_device(struct dasd_device *device)
 
 	device->default_expires = DIAG_TIMEOUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device->default_retries = DIAG_MAX_RETRIES;
+>>>>>>> v3.18
 =======
 	device->default_retries = DIAG_MAX_RETRIES;
 >>>>>>> v3.18
@@ -508,7 +512,11 @@ static struct dasd_ccw_req *dasd_diag_build_cp(struct dasd_device *memdev,
 	struct dasd_diag_bio *dbio;
 	struct req_iterator iter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bv;
+=======
+	struct bio_vec bv;
+>>>>>>> v3.18
 =======
 	struct bio_vec bv;
 >>>>>>> v3.18
@@ -533,15 +541,21 @@ static struct dasd_ccw_req *dasd_diag_build_cp(struct dasd_device *memdev,
 	count = 0;
 	rq_for_each_segment(bv, req, iter) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bv->bv_len & (blksize - 1))
 			/* Fba can only do full blocks. */
 			return ERR_PTR(-EINVAL);
 		count += bv->bv_len >> (block->s2b_shift + 9);
 =======
+=======
+>>>>>>> v3.18
 		if (bv.bv_len & (blksize - 1))
 			/* Fba can only do full blocks. */
 			return ERR_PTR(-EINVAL);
 		count += bv.bv_len >> (block->s2b_shift + 9);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	/* Paranoia. */
@@ -560,8 +574,13 @@ static struct dasd_ccw_req *dasd_diag_build_cp(struct dasd_device *memdev,
 	recid = first_rec;
 	rq_for_each_segment(bv, req, iter) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dst = page_address(bv->bv_page) + bv->bv_offset;
 		for (off = 0; off < bv->bv_len; off += blksize) {
+=======
+		dst = page_address(bv.bv_page) + bv.bv_offset;
+		for (off = 0; off < bv.bv_len; off += blksize) {
+>>>>>>> v3.18
 =======
 		dst = page_address(bv.bv_page) + bv.bv_offset;
 		for (off = 0; off < bv.bv_len; off += blksize) {
@@ -576,7 +595,11 @@ static struct dasd_ccw_req *dasd_diag_build_cp(struct dasd_device *memdev,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cqr->retries = DIAG_MAX_RETRIES;
+=======
+	cqr->retries = memdev->default_retries;
+>>>>>>> v3.18
 =======
 	cqr->retries = memdev->default_retries;
 >>>>>>> v3.18
@@ -607,12 +630,18 @@ dasd_diag_free_cp(struct dasd_ccw_req *cqr, struct request *req)
 static void dasd_diag_handle_terminated_request(struct dasd_ccw_req *cqr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cqr->status = DASD_CQR_FILLED;
 =======
+=======
+>>>>>>> v3.18
 	if (cqr->retries < 0)
 		cqr->status = DASD_CQR_FAILED;
 	else
 		cqr->status = DASD_CQR_FILLED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -673,8 +702,13 @@ dasd_diag_init(void)
 	ASCEBC(dasd_diag_discipline.ebcname, 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	service_subclass_irq_register();
 	register_external_interrupt(0x2603, dasd_ext_handler);
+=======
+	irq_subclass_register(IRQ_SUBCLASS_SERVICE_SIGNAL);
+	register_external_irq(EXT_IRQ_CP_SERVICE, dasd_ext_handler);
+>>>>>>> v3.18
 =======
 	irq_subclass_register(IRQ_SUBCLASS_SERVICE_SIGNAL);
 	register_external_irq(EXT_IRQ_CP_SERVICE, dasd_ext_handler);
@@ -687,8 +721,13 @@ static void __exit
 dasd_diag_cleanup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_external_interrupt(0x2603, dasd_ext_handler);
 	service_subclass_irq_unregister();
+=======
+	unregister_external_irq(EXT_IRQ_CP_SERVICE, dasd_ext_handler);
+	irq_subclass_unregister(IRQ_SUBCLASS_SERVICE_SIGNAL);
+>>>>>>> v3.18
 =======
 	unregister_external_irq(EXT_IRQ_CP_SERVICE, dasd_ext_handler);
 	irq_subclass_unregister(IRQ_SUBCLASS_SERVICE_SIGNAL);

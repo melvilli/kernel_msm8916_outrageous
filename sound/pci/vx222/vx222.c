@@ -61,7 +61,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_vx222_ids) = {
+=======
+static const struct pci_device_id snd_vx222_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_vx222_ids[] = {
 >>>>>>> v3.18
@@ -173,14 +177,20 @@ static int snd_vx222_create(struct snd_card *card, struct pci_dev *pci,
 		vx->port[i] = pci_resource_start(pci, i + 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(pci->irq, snd_vx_irq_handler, IRQF_SHARED,
 			KBUILD_MODNAME, chip)) {
 		snd_printk(KERN_ERR "unable to grab IRQ %d\n", pci->irq);
 =======
+=======
+>>>>>>> v3.18
 	if (request_threaded_irq(pci->irq, snd_vx_irq_handler,
 				 snd_vx_threaded_irq_handler, IRQF_SHARED,
 				 KBUILD_MODNAME, chip)) {
 		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		snd_vx222_free(chip);
 		return -EBUSY;
@@ -193,8 +203,11 @@ static int snd_vx222_create(struct snd_card *card, struct pci_dev *pci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*rchip = vx;
@@ -219,7 +232,12 @@ static int snd_vx222_probe(struct pci_dev *pci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -249,7 +267,11 @@ static int snd_vx222_probe(struct pci_dev *pci,
 	sprintf(card->longname, "%s at 0x%lx & 0x%lx, irq %i",
 		card->shortname, vx->port[0], vx->port[1], vx->core.irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("%s at 0x%lx & 0x%lx, irq %i\n",
+=======
+	dev_dbg(card->dev, "%s at 0x%lx & 0x%lx, irq %i\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(card->dev, "%s at 0x%lx & 0x%lx, irq %i\n",
 >>>>>>> v3.18
@@ -278,7 +300,10 @@ static void snd_vx222_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -308,8 +333,12 @@ static int snd_vx222_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "vx222: pci_enable_device failed, "
 		       "disabling device\n");
+=======
+		dev_err(dev, "pci_enable_device failed, disabling device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_enable_device failed, disabling device\n");
 >>>>>>> v3.18

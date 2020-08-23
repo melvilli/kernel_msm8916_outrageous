@@ -29,7 +29,11 @@
 #include <linux/if_ether.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // General definitions
+=======
+/* General definitions */
+>>>>>>> v3.18
 =======
 /* General definitions */
 >>>>>>> v3.18
@@ -51,6 +55,7 @@ enum {
 	BOND_AD_COUNT = 2,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 // rx machine states(43.4.11 in the 802.3ad standard)
 typedef enum {
@@ -101,6 +106,8 @@ typedef enum {
 
 // timers types(43.4.9 in the 802.3ad standard)
 =======
+=======
+>>>>>>> v3.18
 /* rx machine states(43.4.11 in the 802.3ad standard) */
 typedef enum {
 	AD_RX_DUMMY,
@@ -149,6 +156,9 @@ typedef enum {
 } bond_marker_subtype_t;
 
 /* timers types(43.4.9 in the 802.3ad standard) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef enum {
 	AD_CURRENT_WHILE_TIMER,
@@ -161,6 +171,7 @@ typedef enum {
 #pragma pack(1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Link Aggregation Control Protocol(LACP) data unit structure(43.4.2.2 in the 802.3ad standard)
 typedef struct lacpdu {
 	u8 subtype;		     // = LACP(= 0x01)
@@ -168,12 +179,17 @@ typedef struct lacpdu {
 	u8 tlv_type_actor_info;	      // = actor information(type/length/value)
 	u8 actor_information_length; // = 20
 =======
+=======
+>>>>>>> v3.18
 /* Link Aggregation Control Protocol(LACP) data unit structure(43.4.2.2 in the 802.3ad standard) */
 typedef struct lacpdu {
 	u8 subtype;		/* = LACP(= 0x01) */
 	u8 version_number;
 	u8 tlv_type_actor_info;	/* = actor information(type/length/value) */
 	u8 actor_information_length;	/* = 20 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__be16 actor_system_priority;
 	struct mac_addr actor_system;
@@ -182,9 +198,15 @@ typedef struct lacpdu {
 	__be16 actor_port;
 	u8 actor_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 reserved_3_1[3];	     // = 0
 	u8 tlv_type_partner_info;     // = partner information
 	u8 partner_information_length;	 // = 20
+=======
+	u8 reserved_3_1[3];		/* = 0 */
+	u8 tlv_type_partner_info;	/* = partner information */
+	u8 partner_information_length;	/* = 20 */
+>>>>>>> v3.18
 =======
 	u8 reserved_3_1[3];		/* = 0 */
 	u8 tlv_type_partner_info;	/* = partner information */
@@ -197,6 +219,7 @@ typedef struct lacpdu {
 	__be16 partner_port;
 	u8 partner_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 reserved_3_2[3];	     // = 0
 	u8 tlv_type_collector_info;	  // = collector information
 	u8 collector_information_length; // = 16
@@ -206,6 +229,8 @@ typedef struct lacpdu {
 	u8 terminator_length;	     // = 0
 	u8 reserved_50[50];	     // = 0
 =======
+=======
+>>>>>>> v3.18
 	u8 reserved_3_2[3];		/* = 0 */
 	u8 tlv_type_collector_info;	/* = collector information */
 	u8 collector_information_length;/* = 16 */
@@ -214,6 +239,9 @@ typedef struct lacpdu {
 	u8 tlv_type_terminator;		/* = terminator */
 	u8 terminator_length;		/* = 0 */
 	u8 reserved_50[50];		/* = 0 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed lacpdu_t;
 
@@ -222,6 +250,7 @@ typedef struct lacpdu_header {
 	struct lacpdu lacpdu;
 } __packed lacpdu_header_t;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 // Marker Protocol Data Unit(PDU) structure(43.5.3.2 in the 802.3ad standard)
 typedef struct bond_marker {
@@ -238,6 +267,8 @@ typedef struct bond_marker {
 	u8 terminator_length;	     //  = 0x00
 	u8 reserved_90[90];	     //  = 0
 =======
+=======
+>>>>>>> v3.18
 /* Marker Protocol Data Unit(PDU) structure(43.5.3.2 in the 802.3ad standard) */
 typedef struct bond_marker {
 	u8 subtype;		/* = 0x02  (marker PDU) */
@@ -252,6 +283,9 @@ typedef struct bond_marker {
 	u8 tlv_type_terminator;	/* = 0x00 */
 	u8 terminator_length;	/* = 0x00 */
 	u8 reserved_90[90];	/* = 0 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed bond_marker_t;
 
@@ -272,7 +306,11 @@ struct port;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // aggregator structure(43.4.5 in the 802.3ad standard)
+=======
+/* aggregator structure(43.4.5 in the 802.3ad standard) */
+>>>>>>> v3.18
 =======
 /* aggregator structure(43.4.5 in the 802.3ad standard) */
 >>>>>>> v3.18
@@ -286,6 +324,7 @@ typedef struct aggregator {
 	u16 partner_system_priority;
 	u16 partner_oper_aggregator_key;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 receive_state;		// BOOLEAN
 	u16 transmit_state;		// BOOLEAN
 	struct port *lag_ports;
@@ -293,12 +332,17 @@ typedef struct aggregator {
 	struct slave *slave;	    // pointer to the bond slave that this aggregator belongs to
 	u16 is_active;	    // BOOLEAN. Indicates if this aggregator is active
 =======
+=======
+>>>>>>> v3.18
 	u16 receive_state;	/* BOOLEAN */
 	u16 transmit_state;	/* BOOLEAN */
 	struct port *lag_ports;
 	/* ****** PRIVATE PARAMETERS ****** */
 	struct slave *slave;	/* pointer to the bond slave that this aggregator belongs to */
 	u16 is_active;		/* BOOLEAN. Indicates if this aggregator is active */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 num_of_ports;
 } aggregator_t;
@@ -313,6 +357,7 @@ struct port_params {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // port structure(43.4.6 in the 802.3ad standard)
 typedef struct port {
 	u16 actor_port_number;
@@ -320,12 +365,17 @@ typedef struct port {
 	struct mac_addr actor_system;	       // This parameter is added here although it is not specified in the standard, just for simplification
 	u16 actor_system_priority;	 // This parameter is added here although it is not specified in the standard, just for simplification
 =======
+=======
+>>>>>>> v3.18
 /* port structure(43.4.6 in the 802.3ad standard) */
 typedef struct port {
 	u16 actor_port_number;
 	u16 actor_port_priority;
 	struct mac_addr actor_system;	/* This parameter is added here although it is not specified in the standard, just for simplification */
 	u16 actor_system_priority;	/* This parameter is added here although it is not specified in the standard, just for simplification */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 actor_port_aggregator_identifier;
 	bool ntt;
@@ -339,6 +389,7 @@ typedef struct port {
 
 	bool is_enabled;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// ****** PRIVATE PARAMETERS ******
 	u16 sm_vars;	      // all state machines variables for this port
@@ -359,6 +410,8 @@ typedef struct port {
 
 // system structure
 =======
+=======
+>>>>>>> v3.18
 	/* ****** PRIVATE PARAMETERS ****** */
 	u16 sm_vars;		/* all state machines variables for this port */
 	rx_states_t sm_rx_state;	/* state machine rx state */
@@ -377,6 +430,9 @@ typedef struct port {
 } port_t;
 
 /* system structure */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ad_system {
 	u16 sys_priority;
@@ -388,7 +444,11 @@ struct ad_system {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // ================= AD Exported structures to the main bonding code ==================
+=======
+/* ========== AD Exported structures to the main bonding code ========== */
+>>>>>>> v3.18
 =======
 /* ========== AD Exported structures to the main bonding code ========== */
 >>>>>>> v3.18
@@ -397,8 +457,13 @@ struct ad_system {
 
 struct ad_bond_info {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ad_system system;	    /* 802.3ad system structure */
 	u32 agg_select_timer;	    // Timer to select aggregator after all adapter's hand shakes
+=======
+	struct ad_system system;	/* 802.3ad system structure */
+	u32 agg_select_timer;		/* Timer to select aggregator after all adapter's hand shakes */
+>>>>>>> v3.18
 =======
 	struct ad_system system;	/* 802.3ad system structure */
 	u32 agg_select_timer;		/* Timer to select aggregator after all adapter's hand shakes */
@@ -407,6 +472,7 @@ struct ad_bond_info {
 };
 
 struct ad_slave_info {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct aggregator aggregator;	    // 802.3ad aggregator structure
 	struct port port;		    // 802.3ad port structure
@@ -419,6 +485,8 @@ struct ad_slave_info {
 void bond_3ad_initialize(struct bonding *bond, u16 tick_resolution);
 int  bond_3ad_bind_slave(struct slave *slave);
 =======
+=======
+>>>>>>> v3.18
 	struct aggregator aggregator;	/* 802.3ad aggregator structure */
 	struct port port;		/* 802.3ad port structure */
 	u16 id;
@@ -427,6 +495,9 @@ int  bond_3ad_bind_slave(struct slave *slave);
 /* ========== AD Exported functions to the main bonding code ========== */
 void bond_3ad_initialize(struct bonding *bond, u16 tick_resolution);
 void bond_3ad_bind_slave(struct slave *slave);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void bond_3ad_unbind_slave(struct slave *slave);
 void bond_3ad_state_machine_handler(struct work_struct *);
@@ -443,7 +514,11 @@ int bond_3ad_lacpdu_recv(const struct sk_buff *skb, struct bonding *bond,
 int bond_3ad_set_carrier(struct bonding *bond);
 void bond_3ad_update_lacp_rate(struct bonding *bond);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif //__BOND_3AD_H__
+=======
+#endif /* __BOND_3AD_H__ */
+>>>>>>> v3.18
 =======
 #endif /* __BOND_3AD_H__ */
 >>>>>>> v3.18

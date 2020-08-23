@@ -66,6 +66,7 @@ enum armv6_counters {
  */
 static const unsigned armv6_perf_map[PERF_COUNT_HW_MAX] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[PERF_COUNT_HW_CPU_CYCLES]		= ARMV6_PERFCTR_CPU_CYCLES,
 	[PERF_COUNT_HW_INSTRUCTIONS]		= ARMV6_PERFCTR_INSTR_EXEC,
 	[PERF_COUNT_HW_CACHE_REFERENCES]	= HW_OP_UNSUPPORTED,
@@ -74,16 +75,22 @@ static const unsigned armv6_perf_map[PERF_COUNT_HW_MAX] = {
 	[PERF_COUNT_HW_BRANCH_MISSES]		= ARMV6_PERFCTR_BR_MISPREDICT,
 	[PERF_COUNT_HW_BUS_CYCLES]		= HW_OP_UNSUPPORTED,
 =======
+=======
+>>>>>>> v3.18
 	PERF_MAP_ALL_UNSUPPORTED,
 	[PERF_COUNT_HW_CPU_CYCLES]		= ARMV6_PERFCTR_CPU_CYCLES,
 	[PERF_COUNT_HW_INSTRUCTIONS]		= ARMV6_PERFCTR_INSTR_EXEC,
 	[PERF_COUNT_HW_BRANCH_INSTRUCTIONS]	= ARMV6_PERFCTR_BR_EXEC,
 	[PERF_COUNT_HW_BRANCH_MISSES]		= ARMV6_PERFCTR_BR_MISPREDICT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[PERF_COUNT_HW_STALLED_CYCLES_FRONTEND]	= ARMV6_PERFCTR_IBUF_STALL,
 	[PERF_COUNT_HW_STALLED_CYCLES_BACKEND]	= ARMV6_PERFCTR_LSU_FULL_STALL,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned armv6_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 					  [PERF_COUNT_HW_CACHE_OP_MAX]
@@ -199,6 +206,8 @@ static unsigned armv6_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 		},
 	},
 =======
+=======
+>>>>>>> v3.18
 static const unsigned armv6_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 					  [PERF_COUNT_HW_CACHE_OP_MAX]
 					  [PERF_COUNT_HW_CACHE_RESULT_MAX] = {
@@ -227,6 +236,9 @@ static const unsigned armv6_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 
 	[C(ITLB)][C(OP_READ)][C(RESULT_MISS)]	= ARMV6_PERFCTR_ITLB_MISS,
 	[C(ITLB)][C(OP_WRITE)][C(RESULT_MISS)]	= ARMV6_PERFCTR_ITLB_MISS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -260,6 +272,7 @@ enum armv6mpcore_perf_types {
  */
 static const unsigned armv6mpcore_perf_map[PERF_COUNT_HW_MAX] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[PERF_COUNT_HW_CPU_CYCLES]		= ARMV6MPCORE_PERFCTR_CPU_CYCLES,
 	[PERF_COUNT_HW_INSTRUCTIONS]		= ARMV6MPCORE_PERFCTR_INSTR_EXEC,
 	[PERF_COUNT_HW_CACHE_REFERENCES]	= HW_OP_UNSUPPORTED,
@@ -268,16 +281,22 @@ static const unsigned armv6mpcore_perf_map[PERF_COUNT_HW_MAX] = {
 	[PERF_COUNT_HW_BRANCH_MISSES]		= ARMV6MPCORE_PERFCTR_BR_MISPREDICT,
 	[PERF_COUNT_HW_BUS_CYCLES]		= HW_OP_UNSUPPORTED,
 =======
+=======
+>>>>>>> v3.18
 	PERF_MAP_ALL_UNSUPPORTED,
 	[PERF_COUNT_HW_CPU_CYCLES]		= ARMV6MPCORE_PERFCTR_CPU_CYCLES,
 	[PERF_COUNT_HW_INSTRUCTIONS]		= ARMV6MPCORE_PERFCTR_INSTR_EXEC,
 	[PERF_COUNT_HW_BRANCH_INSTRUCTIONS]	= ARMV6MPCORE_PERFCTR_BR_EXEC,
 	[PERF_COUNT_HW_BRANCH_MISSES]		= ARMV6MPCORE_PERFCTR_BR_MISPREDICT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[PERF_COUNT_HW_STALLED_CYCLES_FRONTEND]	= ARMV6MPCORE_PERFCTR_IBUF_STALL,
 	[PERF_COUNT_HW_STALLED_CYCLES_BACKEND]	= ARMV6MPCORE_PERFCTR_LSU_FULL_STALL,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned armv6mpcore_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 					[PERF_COUNT_HW_CACHE_OP_MAX]
@@ -391,6 +410,8 @@ static unsigned armv6mpcore_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 		},
 	},
 =======
+=======
+>>>>>>> v3.18
 static const unsigned armv6mpcore_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 					[PERF_COUNT_HW_CACHE_OP_MAX]
 					[PERF_COUNT_HW_CACHE_RESULT_MAX] = {
@@ -414,6 +435,9 @@ static const unsigned armv6mpcore_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 
 	[C(ITLB)][C(OP_READ)][C(RESULT_MISS)]	= ARMV6MPCORE_PERFCTR_ITLB_MISS,
 	[C(ITLB)][C(OP_WRITE)][C(RESULT_MISS)]	= ARMV6MPCORE_PERFCTR_ITLB_MISS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -727,9 +751,14 @@ static int armv6_map_event(struct perf_event *event)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int armv6pmu_init(struct arm_pmu *cpu_pmu)
 {
 	cpu_pmu->name		= "v6";
+=======
+static void armv6pmu_init(struct arm_pmu *cpu_pmu)
+{
+>>>>>>> v3.18
 =======
 static void armv6pmu_init(struct arm_pmu *cpu_pmu)
 {
@@ -746,8 +775,11 @@ static void armv6pmu_init(struct arm_pmu *cpu_pmu)
 	cpu_pmu->num_events	= 3;
 	cpu_pmu->max_period	= (1LLU << 32) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 }
 
 static int armv6_1136_pmu_init(struct arm_pmu *cpu_pmu)
@@ -768,6 +800,9 @@ static int armv6_1176_pmu_init(struct arm_pmu *cpu_pmu)
 {
 	armv6pmu_init(cpu_pmu);
 	cpu_pmu->name		= "armv6_1176";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -789,7 +824,11 @@ static int armv6mpcore_map_event(struct perf_event *event)
 static int armv6mpcore_pmu_init(struct arm_pmu *cpu_pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_pmu->name		= "v6mpcore";
+=======
+	cpu_pmu->name		= "armv6_11mpcore";
+>>>>>>> v3.18
 =======
 	cpu_pmu->name		= "armv6_11mpcore";
 >>>>>>> v3.18
@@ -809,8 +848,11 @@ static int armv6mpcore_pmu_init(struct arm_pmu *cpu_pmu)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int armv6pmu_init(struct arm_pmu *cpu_pmu)
 =======
+=======
+>>>>>>> v3.18
 static int armv6_1136_pmu_init(struct arm_pmu *cpu_pmu)
 {
 	return -ENODEV;
@@ -822,6 +864,9 @@ static int armv6_1156_pmu_init(struct arm_pmu *cpu_pmu)
 }
 
 static int armv6_1176_pmu_init(struct arm_pmu *cpu_pmu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return -ENODEV;

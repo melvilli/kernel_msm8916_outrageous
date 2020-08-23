@@ -38,7 +38,10 @@ struct early_node_data {
 	unsigned long pernode_addr;
 	unsigned long pernode_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long num_physpages;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_ZONE_DMA
@@ -597,7 +600,11 @@ void __init find_memory(void)
  * local_per_cpu_offset
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit *per_cpu_init(void)
+=======
+void *per_cpu_init(void)
+>>>>>>> v3.18
 =======
 void *per_cpu_init(void)
 >>>>>>> v3.18
@@ -616,6 +623,7 @@ void *per_cpu_init(void)
 #endif /* CONFIG_SMP */
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * show_mem - give short summary of memory stats
  *
@@ -682,6 +690,8 @@ void show_mem(unsigned int filter)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * call_pernode_memory - use SRAT to call callback functions with node info
  * @start: physical start of range
  * @len: length of range
@@ -743,7 +753,10 @@ static __init int count_node_pages(unsigned long start, unsigned long len, int n
 	unsigned long end = start + len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mem_data[node].num_physpages += len >> PAGE_SHIFT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_ZONE_DMA
@@ -792,7 +805,10 @@ void __init paging_init(void)
 
 	for_each_online_node(node) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		num_physpages += mem_data[node].num_physpages;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		pfn_offset = mem_data[node].min_pfn;

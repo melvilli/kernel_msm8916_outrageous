@@ -164,7 +164,10 @@ RPS might be beneficial if the rps_cpus for each queue are the ones that
 share the same memory domain as the interrupting CPU for that queue.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ==== RPS Flow Limit
 
 RPS scales kernel receive processing across CPUs without introducing
@@ -223,6 +226,9 @@ the flow limit threshold (50%) + the flow history length (256).
 Setting net.core.netdev_max_backlog to either 1000 or 10000
 performed well in experiments.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 RFS: Receive Flow Steering
@@ -433,7 +439,11 @@ RPS and RFS were introduced in kernel 2.6.35. XPS was incorporated into
 
 Accelerated RFS was introduced in 2.6.35. Original patches were
 <<<<<<< HEAD
+<<<<<<< HEAD
 submitted by Ben Hutchings (bhutchings@solarflare.com)
+=======
+submitted by Ben Hutchings (bwh@kernel.org)
+>>>>>>> v3.18
 =======
 submitted by Ben Hutchings (bwh@kernel.org)
 >>>>>>> v3.18

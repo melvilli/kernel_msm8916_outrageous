@@ -137,9 +137,15 @@ of_get_gpio_regulator_config(struct device *dev, struct device_node *np)
 {
 	struct gpio_regulator_config *config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct property *prop;
 	const char *regtype;
 	int proplen, gpio, i;
+=======
+	const char *regtype;
+	int proplen, gpio, i;
+	int ret;
+>>>>>>> v3.18
 =======
 	const char *regtype;
 	int proplen, gpio, i;
@@ -178,7 +184,10 @@ of_get_gpio_regulator_config(struct device *dev, struct device_node *np)
 		return ERR_PTR(-ENOMEM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	proplen = of_property_count_u32_elems(np, "gpios-states");
 	/* optional property */
 	if (proplen < 0)
@@ -189,6 +198,9 @@ of_get_gpio_regulator_config(struct device *dev, struct device_node *np)
 		proplen = 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < config->nr_gpios; i++) {
 		gpio = of_get_named_gpio(np, "gpios", i);
@@ -196,12 +208,15 @@ of_get_gpio_regulator_config(struct device *dev, struct device_node *np)
 			break;
 		config->gpios[i].gpio = gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	/* Fetch states. */
 	prop = of_find_property(np, "states", NULL);
 	if (!prop) {
 =======
+=======
+>>>>>>> v3.18
 		if (proplen > 0) {
 			of_property_read_u32_index(np, "gpios-states", i, &ret);
 			if (ret)
@@ -212,14 +227,20 @@ of_get_gpio_regulator_config(struct device *dev, struct device_node *np)
 	/* Fetch states. */
 	proplen = of_property_count_u32_elems(np, "states");
 	if (proplen < 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(dev, "No 'states' property found\n");
 		return ERR_PTR(-EINVAL);
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	proplen = prop->length / sizeof(int);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	config->states = devm_kzalloc(dev,
@@ -230,6 +251,7 @@ of_get_gpio_regulator_config(struct device *dev, struct device_node *np)
 		return ERR_PTR(-ENOMEM);
 
 	for (i = 0; i < proplen / 2; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		config->states[i].value =
 			be32_to_cpup((int *)prop->value + (i * 2));
@@ -245,6 +267,8 @@ of_get_gpio_regulator_config(struct device *dev, struct device_node *np)
 	else if (!strncmp("current", regtype, 7))
 		config->type = REGULATOR_CURRENT;
 =======
+=======
+>>>>>>> v3.18
 		of_property_read_u32_index(np, "states", i * 2,
 					   &config->states[i].value);
 		of_property_read_u32_index(np, "states", i * 2 + 1,
@@ -263,6 +287,9 @@ of_get_gpio_regulator_config(struct device *dev, struct device_node *np)
 			dev_warn(dev, "Unknown regulator-type '%s'\n",
 				 regtype);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return config;
@@ -276,7 +303,11 @@ static struct regulator_ops gpio_regulator_current_ops = {
 static int gpio_regulator_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gpio_regulator_config *config = pdev->dev.platform_data;
+=======
+	struct gpio_regulator_config *config = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct gpio_regulator_config *config = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -294,10 +325,15 @@ static int gpio_regulator_probe(struct platform_device *pdev)
 	drvdata = devm_kzalloc(&pdev->dev, sizeof(struct gpio_regulator_data),
 			       GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (drvdata == NULL) {
 		dev_err(&pdev->dev, "Failed to allocate device data\n");
 		return -ENOMEM;
 	}
+=======
+	if (drvdata == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (drvdata == NULL)
 		return -ENOMEM;
@@ -349,7 +385,10 @@ static int gpio_regulator_probe(struct platform_device *pdev)
 		ret = -EINVAL;
 		goto err_memgpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

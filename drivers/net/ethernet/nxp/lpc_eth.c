@@ -20,7 +20,10 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -1225,6 +1228,12 @@ static int lpc_eth_open(struct net_device *ndev)
 	__lpc_eth_clock_enable(pldat, true);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Suspended PHY makes LPC ethernet core block, so resume now */
+	phy_resume(pldat->phy_dev);
+
+>>>>>>> v3.18
 =======
 	/* Suspended PHY makes LPC ethernet core block, so resume now */
 	phy_resume(pldat->phy_dev);
@@ -1372,7 +1381,11 @@ static int lpc_eth_drv_probe(struct platform_device *pdev)
 
 	/* Map IO space */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pldat->net_base = ioremap(res->start, res->end - res->start + 1);
+=======
+	pldat->net_base = ioremap(res->start, resource_size(res));
+>>>>>>> v3.18
 =======
 	pldat->net_base = ioremap(res->start, resource_size(res));
 >>>>>>> v3.18
@@ -1389,9 +1402,12 @@ static int lpc_eth_drv_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Fill in the fields of the device structure with ethernet values. */
 	ether_setup(ndev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Setup driver functions */
@@ -1416,13 +1432,19 @@ static int lpc_eth_drv_probe(struct platform_device *pdev)
 
 	if (pldat->dma_buff_base_v == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pldat->pdev->dev.coherent_dma_mask = 0xFFFFFFFF;
 		pldat->pdev->dev.dma_mask = &pldat->pdev->dev.coherent_dma_mask;
 =======
+=======
+>>>>>>> v3.18
 		ret = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
 		if (ret)
 			goto err_out_free_irq;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pldat->dma_buff_size = PAGE_ALIGN(pldat->dma_buff_size);
 
@@ -1440,10 +1462,15 @@ static int lpc_eth_drv_probe(struct platform_device *pdev)
 	pldat->dma_buff_base_p = dma_handle;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev_dbg(ndev, "IO address start     :0x%08x\n",
 			res->start);
 	netdev_dbg(ndev, "IO address size      :%d\n",
 			res->end - res->start + 1);
+=======
+	netdev_dbg(ndev, "IO address space     :%pR\n", res);
+	netdev_dbg(ndev, "IO address size      :%d\n", resource_size(res));
+>>>>>>> v3.18
 =======
 	netdev_dbg(ndev, "IO address space     :%pR\n", res);
 	netdev_dbg(ndev, "IO address size      :%d\n", resource_size(res));
@@ -1512,7 +1539,10 @@ static int lpc_eth_drv_probe(struct platform_device *pdev)
 
 err_out_unregister_netdev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unregister_netdev(ndev);
@@ -1543,7 +1573,10 @@ static int lpc_eth_drv_remove(struct platform_device *pdev)
 
 	unregister_netdev(ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

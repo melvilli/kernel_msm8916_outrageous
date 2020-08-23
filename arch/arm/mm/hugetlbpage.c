@@ -57,10 +57,13 @@ int pmd_huge(pmd_t pmd)
 	return pmd_val(pmd) && !(pmd_val(pmd) & PMD_TABLE_BIT);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int pmd_huge_support(void)
 {
 	return 1;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

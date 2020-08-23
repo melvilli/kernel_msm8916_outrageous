@@ -25,6 +25,10 @@
 #define __CPU_COOLING_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -41,7 +45,10 @@ cpufreq_cooling_register(const struct cpumask *clip_cpus);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * of_cpufreq_cooling_register - create cpufreq cooling device based on DT.
  * @np: a valid struct device_node to the cooling device device tree node.
  * @clip_cpus: cpumask of cpus where the frequency constraints will happen
@@ -60,6 +67,9 @@ of_cpufreq_cooling_register(struct device_node *np,
 #endif
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * cpufreq_cooling_unregister - function to remove cpufreq cooling device.
  * @cdev: thermal cooling device pointer.
@@ -74,13 +84,19 @@ cpufreq_cooling_register(const struct cpumask *clip_cpus)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct thermal_cooling_device *
 of_cpufreq_cooling_register(struct device_node *np,
 			    const struct cpumask *clip_cpus)
 {
 	return NULL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline
 void cpufreq_cooling_unregister(struct thermal_cooling_device *cdev)

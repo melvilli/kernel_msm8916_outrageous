@@ -12,7 +12,11 @@
 #include "lib.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ERROR_RETRY_DELAY_MS	5
+=======
+#define ERROR_RETRY_DELAY_MS	20
+>>>>>>> v3.18
 =======
 #define ERROR_RETRY_DELAY_MS	20
 >>>>>>> v3.18
@@ -25,6 +29,12 @@
  * @buffer: input/output data
  * @length: length of @buffer
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @flags: use %FW_FIXED_GENERATION and add the generation value to attempt the
+ *         request only in that generation; use %FW_QUIET to suppress error
+ *         messages
+>>>>>>> v3.18
 =======
  * @flags: use %FW_FIXED_GENERATION and add the generation value to attempt the
  *         request only in that generation; use %FW_QUIET to suppress error
@@ -38,7 +48,12 @@
  */
 int snd_fw_transaction(struct fw_unit *unit, int tcode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       u64 offset, void *buffer, size_t length)
+=======
+		       u64 offset, void *buffer, size_t length,
+		       unsigned int flags)
+>>>>>>> v3.18
 =======
 		       u64 offset, void *buffer, size_t length,
 		       unsigned int flags)
@@ -48,16 +63,22 @@ int snd_fw_transaction(struct fw_unit *unit, int tcode,
 	int generation, rcode, tries = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (;;) {
 		generation = device->generation;
 		smp_rmb(); /* node_id vs. generation */
 =======
+=======
+>>>>>>> v3.18
 	generation = flags & FW_GENERATION_MASK;
 	for (;;) {
 		if (!(flags & FW_FIXED_GENERATION)) {
 			generation = device->generation;
 			smp_rmb(); /* node_id vs. generation */
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rcode = fw_run_transaction(device->card, tcode,
 					   device->node_id, generation,
@@ -68,10 +89,13 @@ int snd_fw_transaction(struct fw_unit *unit, int tcode,
 			return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rcode_is_permanent_error(rcode) || ++tries >= 3) {
 			dev_err(&unit->device, "transaction failed: %s\n",
 				fw_rcode_string(rcode));
 =======
+=======
+>>>>>>> v3.18
 		if (rcode == RCODE_GENERATION && (flags & FW_FIXED_GENERATION))
 			return -EAGAIN;
 
@@ -80,6 +104,9 @@ int snd_fw_transaction(struct fw_unit *unit, int tcode,
 				dev_err(&unit->device,
 					"transaction failed: %s\n",
 					fw_rcode_string(rcode));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EIO;
 		}

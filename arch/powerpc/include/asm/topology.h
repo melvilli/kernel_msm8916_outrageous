@@ -10,6 +10,7 @@ struct device_node;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Before going off node we want the VM to try and reclaim from the local
  * node. It does this if the remote distance is larger than RECLAIM_DISTANCE.
  * With the default REMOTE_DISTANCE of 20 and the default RECLAIM_DISTANCE of
@@ -20,11 +21,16 @@ struct device_node;
  * If zone_reclaim_mode is enabled, a RECLAIM_DISTANCE of 10 will mean that
  * all zones on all nodes will be eligible for zone_reclaim().
 >>>>>>> v3.18
+=======
+ * If zone_reclaim_mode is enabled, a RECLAIM_DISTANCE of 10 will mean that
+ * all zones on all nodes will be eligible for zone_reclaim().
+>>>>>>> v3.18
  */
 #define RECLAIM_DISTANCE 10
 
 #include <asm/mmzone.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline int cpu_to_node(int cpu)
 {
@@ -39,6 +45,8 @@ static inline int cpu_to_node(int cpu)
 	return (nid < 0) ? 0 : nid;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define parent_node(node)	(node)
@@ -108,7 +116,10 @@ static inline int prrn_is_enabled(void)
 #ifdef CONFIG_SMP
 #include <asm/cputable.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smt_capable()		(cpu_has_feature(CPU_FTR_SMT))
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -116,6 +127,10 @@ static inline int prrn_is_enabled(void)
 #include <asm/smp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define topology_physical_package_id(cpu)	(cpu_to_chip_id(cpu))
+>>>>>>> v3.18
 =======
 #define topology_physical_package_id(cpu)	(cpu_to_chip_id(cpu))
 >>>>>>> v3.18

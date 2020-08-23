@@ -18,10 +18,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -45,6 +48,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -165,6 +172,10 @@ static const struct cb_pcidda_board cb_pcidda_boards[] = {
 
 struct cb_pcidda_private {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long daqio;
+>>>>>>> v3.18
 =======
 	unsigned long daqio;
 >>>>>>> v3.18
@@ -179,6 +190,10 @@ struct cb_pcidda_private {
 static unsigned int cb_pcidda_serial_in(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct cb_pcidda_private *devpriv = dev->private;
+>>>>>>> v3.18
 =======
 	struct cb_pcidda_private *devpriv = dev->private;
 >>>>>>> v3.18
@@ -189,7 +204,11 @@ static unsigned int cb_pcidda_serial_in(struct comedi_device *dev)
 	for (i = 1; i <= value_width; i++) {
 		/*  read bits most significant bit first */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (inw_p(dev->iobase + DACALIBRATION1) & SERIAL_OUT_BIT)
+=======
+		if (inw_p(devpriv->daqio + DACALIBRATION1) & SERIAL_OUT_BIT)
+>>>>>>> v3.18
 =======
 		if (inw_p(devpriv->daqio + DACALIBRATION1) & SERIAL_OUT_BIT)
 >>>>>>> v3.18
@@ -213,7 +232,11 @@ static void cb_pcidda_serial_out(struct comedi_device *dev, unsigned int value,
 		else
 			devpriv->dac_cal1_bits &= ~SERIAL_IN_BIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outw_p(devpriv->dac_cal1_bits, dev->iobase + DACALIBRATION1);
+=======
+		outw_p(devpriv->dac_cal1_bits, devpriv->daqio + DACALIBRATION1);
+>>>>>>> v3.18
 =======
 		outw_p(devpriv->dac_cal1_bits, devpriv->daqio + DACALIBRATION1);
 >>>>>>> v3.18
@@ -225,6 +248,10 @@ static unsigned int cb_pcidda_read_eeprom(struct comedi_device *dev,
 					  unsigned int address)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct cb_pcidda_private *devpriv = dev->private;
+>>>>>>> v3.18
 =======
 	struct cb_pcidda_private *devpriv = dev->private;
 >>>>>>> v3.18
@@ -244,7 +271,11 @@ static unsigned int cb_pcidda_read_eeprom(struct comedi_device *dev,
 	for (i = 0; i < max_num_caldacs; i++)
 		cal2_bits |= DESELECT_CALDAC_BIT(i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outw_p(cal2_bits, dev->iobase + DACALIBRATION2);
+=======
+	outw_p(cal2_bits, devpriv->daqio + DACALIBRATION2);
+>>>>>>> v3.18
 =======
 	outw_p(cal2_bits, devpriv->daqio + DACALIBRATION2);
 >>>>>>> v3.18
@@ -259,7 +290,11 @@ static unsigned int cb_pcidda_read_eeprom(struct comedi_device *dev,
 	/*  deactivate eeprom */
 	cal2_bits &= ~SELECT_EEPROM_BIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outw_p(cal2_bits, dev->iobase + DACALIBRATION2);
+=======
+	outw_p(cal2_bits, devpriv->daqio + DACALIBRATION2);
+>>>>>>> v3.18
 =======
 	outw_p(cal2_bits, devpriv->daqio + DACALIBRATION2);
 >>>>>>> v3.18
@@ -273,6 +308,10 @@ static void cb_pcidda_write_caldac(struct comedi_device *dev,
 				   unsigned int value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct cb_pcidda_private *devpriv = dev->private;
+>>>>>>> v3.18
 =======
 	struct cb_pcidda_private *devpriv = dev->private;
 >>>>>>> v3.18
@@ -299,15 +338,21 @@ static void cb_pcidda_write_caldac(struct comedi_device *dev,
 	/*  activate the caldac we want */
 	cal2_bits &= ~DESELECT_CALDAC_BIT(caldac);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outw_p(cal2_bits, dev->iobase + DACALIBRATION2);
 	/*  deactivate caldac */
 	cal2_bits |= DESELECT_CALDAC_BIT(caldac);
 	outw_p(cal2_bits, dev->iobase + DACALIBRATION2);
 =======
+=======
+>>>>>>> v3.18
 	outw_p(cal2_bits, devpriv->daqio + DACALIBRATION2);
 	/*  deactivate caldac */
 	cal2_bits |= DESELECT_CALDAC_BIT(caldac);
 	outw_p(cal2_bits, devpriv->daqio + DACALIBRATION2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -374,9 +419,15 @@ static int cb_pcidda_ao_insn_write(struct comedi_device *dev,
 		ctrl |= CB_DDA_DA_CTRL_UNIP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outw(ctrl, dev->iobase + CB_DDA_DA_CTRL_REG);
 
 	outw(data[0], dev->iobase + CB_DDA_DA_DATA_REG(channel));
+=======
+	outw(ctrl, devpriv->daqio + CB_DDA_DA_CTRL_REG);
+
+	outw(data[0], devpriv->daqio + CB_DDA_DA_DATA_REG(channel));
+>>>>>>> v3.18
 =======
 	outw(ctrl, devpriv->daqio + CB_DDA_DA_CTRL_REG);
 
@@ -394,7 +445,10 @@ static int cb_pcidda_auto_attach(struct comedi_device *dev,
 	struct cb_pcidda_private *devpriv;
 	struct comedi_subdevice *s;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long iobase_8255;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
@@ -408,10 +462,16 @@ static int cb_pcidda_auto_attach(struct comedi_device *dev,
 	dev->board_name = thisboard->name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -422,8 +482,13 @@ static int cb_pcidda_auto_attach(struct comedi_device *dev,
 	if (ret)
 		return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->iobase = pci_resource_start(pcidev, 3);
 	iobase_8255 = pci_resource_start(pcidev, 2);
+=======
+	dev->iobase = pci_resource_start(pcidev, 2);
+	devpriv->daqio = pci_resource_start(pcidev, 3);
+>>>>>>> v3.18
 =======
 	dev->iobase = pci_resource_start(pcidev, 2);
 	devpriv->daqio = pci_resource_start(pcidev, 3);
@@ -446,7 +511,11 @@ static int cb_pcidda_auto_attach(struct comedi_device *dev,
 	for (i = 0; i < 2; i++) {
 		s = &dev->subdevices[1 + i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = subdev_8255_init(dev, s, NULL, iobase_8255 + (i * 4));
+=======
+		ret = subdev_8255_init(dev, s, NULL, i * I8255_SIZE);
+>>>>>>> v3.18
 =======
 		ret = subdev_8255_init(dev, s, NULL, i * I8255_SIZE);
 >>>>>>> v3.18
@@ -462,6 +531,7 @@ static int cb_pcidda_auto_attach(struct comedi_device *dev,
 	for (i = 0; i < thisboard->ao_chans; i++)
 		cb_pcidda_calibrate(dev, i, devpriv->ao_range[i]);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_info(dev->class_dev, "%s attached\n", dev->board_name);
 
@@ -480,12 +550,21 @@ static void cb_pcidda_detach(struct comedi_device *dev)
 }
 
 >>>>>>> v3.18
+=======
+	return 0;
+}
+
+>>>>>>> v3.18
 static struct comedi_driver cb_pcidda_driver = {
 	.driver_name	= "cb_pcidda",
 	.module		= THIS_MODULE,
 	.auto_attach	= cb_pcidda_auto_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= cb_pcidda_detach,
+=======
+	.detach		= comedi_pci_detach,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_pci_detach,
 >>>>>>> v3.18
@@ -499,7 +578,11 @@ static int cb_pcidda_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cb_pcidda_pci_table) = {
+=======
+static const struct pci_device_id cb_pcidda_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id cb_pcidda_pci_table[] = {
 >>>>>>> v3.18

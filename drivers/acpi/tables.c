@@ -24,6 +24,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "ACPI: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "ACPI: " fmt
 
@@ -39,8 +44,11 @@
 #include <linux/bootmem.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREFIX			"ACPI: "
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ACPI_MAX_TABLES		128
@@ -53,13 +61,19 @@ static struct acpi_table_desc initial_tables[ACPI_MAX_TABLES] __initdata;
 static int acpi_apic_instance __initdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Disable table checksum verification for the early stage due to the size
  * limitation of the current x86 early mapping implementation.
  */
 static bool acpi_verify_table_checksum __initdata = false;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 {
@@ -73,10 +87,16 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			struct acpi_madt_local_apic *p =
 			    (struct acpi_madt_local_apic *)header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO PREFIX
 			       "LAPIC (acpi_id[0x%02x] lapic_id[0x%02x] %s)\n",
 			       p->processor_id, p->id,
 			       (p->lapic_flags & ACPI_MADT_ENABLED) ? "enabled" : "disabled");
+=======
+			pr_info("LAPIC (acpi_id[0x%02x] lapic_id[0x%02x] %s)\n",
+				p->processor_id, p->id,
+				(p->lapic_flags & ACPI_MADT_ENABLED) ? "enabled" : "disabled");
+>>>>>>> v3.18
 =======
 			pr_info("LAPIC (acpi_id[0x%02x] lapic_id[0x%02x] %s)\n",
 				p->processor_id, p->id,
@@ -90,11 +110,17 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			struct acpi_madt_local_x2apic *p =
 			    (struct acpi_madt_local_x2apic *)header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO PREFIX
 			       "X2APIC (apic_id[0x%02x] uid[0x%02x] %s)\n",
 			       p->local_apic_id, p->uid,
 			       (p->lapic_flags & ACPI_MADT_ENABLED) ?
 			       "enabled" : "disabled");
+=======
+			pr_info("X2APIC (apic_id[0x%02x] uid[0x%02x] %s)\n",
+				p->local_apic_id, p->uid,
+				(p->lapic_flags & ACPI_MADT_ENABLED) ? "enabled" : "disabled");
+>>>>>>> v3.18
 =======
 			pr_info("X2APIC (apic_id[0x%02x] uid[0x%02x] %s)\n",
 				p->local_apic_id, p->uid,
@@ -108,9 +134,14 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			struct acpi_madt_io_apic *p =
 			    (struct acpi_madt_io_apic *)header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO PREFIX
 			       "IOAPIC (id[0x%02x] address[0x%08x] gsi_base[%d])\n",
 			       p->id, p->address, p->global_irq_base);
+=======
+			pr_info("IOAPIC (id[0x%02x] address[0x%08x] gsi_base[%d])\n",
+				p->id, p->address, p->global_irq_base);
+>>>>>>> v3.18
 =======
 			pr_info("IOAPIC (id[0x%02x] address[0x%08x] gsi_base[%d])\n",
 				p->id, p->address, p->global_irq_base);
@@ -122,6 +153,7 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 		{
 			struct acpi_madt_interrupt_override *p =
 			    (struct acpi_madt_interrupt_override *)header;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			printk(KERN_INFO PREFIX
 			       "INT_SRC_OVR (bus %d bus_irq %d global_irq %d %s %s)\n",
@@ -136,6 +168,8 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 					~(ACPI_MADT_POLARITY_MASK | ACPI_MADT_TRIGGER_MASK));
 
 =======
+=======
+>>>>>>> v3.18
 			pr_info("INT_SRC_OVR (bus %d bus_irq %d global_irq %d %s %s)\n",
 				p->bus, p->source_irq, p->global_irq,
 				mps_inti_flags_polarity[p->inti_flags & ACPI_MADT_POLARITY_MASK],
@@ -145,6 +179,9 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 				pr_info("INT_SRC_OVR unexpected reserved flags: 0x%x\n",
 					p->inti_flags  &
 					~(ACPI_MADT_POLARITY_MASK | ACPI_MADT_TRIGGER_MASK));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -154,16 +191,22 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			struct acpi_madt_nmi_source *p =
 			    (struct acpi_madt_nmi_source *)header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO PREFIX
 			       "NMI_SRC (%s %s global_irq %d)\n",
 			       mps_inti_flags_polarity[p->inti_flags & ACPI_MADT_POLARITY_MASK],
 			       mps_inti_flags_trigger[(p->inti_flags & ACPI_MADT_TRIGGER_MASK) >> 2],
 			       p->global_irq);
 =======
+=======
+>>>>>>> v3.18
 			pr_info("NMI_SRC (%s %s global_irq %d)\n",
 				mps_inti_flags_polarity[p->inti_flags & ACPI_MADT_POLARITY_MASK],
 				mps_inti_flags_trigger[(p->inti_flags & ACPI_MADT_TRIGGER_MASK) >> 2],
 				p->global_irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -173,6 +216,7 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			struct acpi_madt_local_apic_nmi *p =
 			    (struct acpi_madt_local_apic_nmi *)header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO PREFIX
 			       "LAPIC_NMI (acpi_id[0x%02x] %s %s lint[0x%x])\n",
 			       p->processor_id,
@@ -180,11 +224,16 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			       mps_inti_flags_trigger[(p->inti_flags & ACPI_MADT_TRIGGER_MASK) >> 2],
 			       p->lint);
 =======
+=======
+>>>>>>> v3.18
 			pr_info("LAPIC_NMI (acpi_id[0x%02x] %s %s lint[0x%x])\n",
 				p->processor_id,
 				mps_inti_flags_polarity[p->inti_flags & ACPI_MADT_POLARITY_MASK	],
 				mps_inti_flags_trigger[(p->inti_flags & ACPI_MADT_TRIGGER_MASK) >> 2],
 				p->lint);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -199,6 +248,7 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			trigger = (p->inti_flags & ACPI_MADT_TRIGGER_MASK) >> 2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO PREFIX
 			       "X2APIC_NMI (uid[0x%02x] %s %s lint[0x%x])\n",
 			       p->uid,
@@ -206,11 +256,16 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			       mps_inti_flags_trigger[trigger],
 			       p->lint);
 =======
+=======
+>>>>>>> v3.18
 			pr_info("X2APIC_NMI (uid[0x%02x] %s %s lint[0x%x])\n",
 				p->uid,
 				mps_inti_flags_polarity[polarity],
 				mps_inti_flags_trigger[trigger],
 				p->lint);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -220,9 +275,14 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			struct acpi_madt_local_apic_override *p =
 			    (struct acpi_madt_local_apic_override *)header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO PREFIX
 			       "LAPIC_ADDR_OVR (address[%p])\n",
 			       (void *)(unsigned long)p->address);
+=======
+			pr_info("LAPIC_ADDR_OVR (address[%p])\n",
+				(void *)(unsigned long)p->address);
+>>>>>>> v3.18
 =======
 			pr_info("LAPIC_ADDR_OVR (address[%p])\n",
 				(void *)(unsigned long)p->address);
@@ -235,10 +295,16 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			struct acpi_madt_io_sapic *p =
 			    (struct acpi_madt_io_sapic *)header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO PREFIX
 			       "IOSAPIC (id[0x%x] address[%p] gsi_base[%d])\n",
 			       p->id, (void *)(unsigned long)p->address,
 			       p->global_irq_base);
+=======
+			pr_info("IOSAPIC (id[0x%x] address[%p] gsi_base[%d])\n",
+				p->id, (void *)(unsigned long)p->address,
+				p->global_irq_base);
+>>>>>>> v3.18
 =======
 			pr_info("IOSAPIC (id[0x%x] address[%p] gsi_base[%d])\n",
 				p->id, (void *)(unsigned long)p->address,
@@ -252,10 +318,16 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			struct acpi_madt_local_sapic *p =
 			    (struct acpi_madt_local_sapic *)header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO PREFIX
 			       "LSAPIC (acpi_id[0x%02x] lsapic_id[0x%02x] lsapic_eid[0x%02x] %s)\n",
 			       p->processor_id, p->id, p->eid,
 			       (p->lapic_flags & ACPI_MADT_ENABLED) ? "enabled" : "disabled");
+=======
+			pr_info("LSAPIC (acpi_id[0x%02x] lsapic_id[0x%02x] lsapic_eid[0x%02x] %s)\n",
+				p->processor_id, p->id, p->eid,
+				(p->lapic_flags & ACPI_MADT_ENABLED) ? "enabled" : "disabled");
+>>>>>>> v3.18
 =======
 			pr_info("LSAPIC (acpi_id[0x%02x] lsapic_id[0x%02x] lsapic_eid[0x%02x] %s)\n",
 				p->processor_id, p->id, p->eid,
@@ -269,6 +341,7 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			struct acpi_madt_interrupt_source *p =
 			    (struct acpi_madt_interrupt_source *)header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO PREFIX
 			       "PLAT_INT_SRC (%s %s type[0x%x] id[0x%04x] eid[0x%x] iosapic_vector[0x%x] global_irq[0x%x]\n",
 			       mps_inti_flags_polarity[p->inti_flags & ACPI_MADT_POLARITY_MASK],
@@ -276,20 +349,30 @@ void acpi_table_print_madt_entry(struct acpi_subtable_header *header)
 			       p->type, p->id, p->eid, p->io_sapic_vector,
 			       p->global_irq);
 =======
+=======
+>>>>>>> v3.18
 			pr_info("PLAT_INT_SRC (%s %s type[0x%x] id[0x%04x] eid[0x%x] iosapic_vector[0x%x] global_irq[0x%x]\n",
 				mps_inti_flags_polarity[p->inti_flags & ACPI_MADT_POLARITY_MASK],
 				mps_inti_flags_trigger[(p->inti_flags & ACPI_MADT_TRIGGER_MASK) >> 2],
 				p->type, p->id, p->eid, p->io_sapic_vector,
 				p->global_irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING PREFIX
 		       "Found unsupported MADT entry (type = 0x%x)\n",
 		       header->type);
+=======
+		pr_warn("Found unsupported MADT entry (type = 0x%x)\n",
+			header->type);
+>>>>>>> v3.18
 =======
 		pr_warn("Found unsupported MADT entry (type = 0x%x)\n",
 			header->type);
@@ -325,7 +408,11 @@ acpi_table_parse_entries(char *id,
 
 	if (!table_header) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING PREFIX "%4.4s not present\n", id);
+=======
+		pr_warn("%4.4s not present\n", id);
+>>>>>>> v3.18
 =======
 		pr_warn("%4.4s not present\n", id);
 >>>>>>> v3.18
@@ -352,7 +439,11 @@ acpi_table_parse_entries(char *id,
 		 */
 		if (entry->length == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_err(PREFIX "[%4.4s:0x%02x] Invalid zero length\n", id, entry_id);
+=======
+			pr_err("[%4.4s:0x%02x] Invalid zero length\n", id, entry_id);
+>>>>>>> v3.18
 =======
 			pr_err("[%4.4s:0x%02x] Invalid zero length\n", id, entry_id);
 >>>>>>> v3.18
@@ -364,8 +455,13 @@ acpi_table_parse_entries(char *id,
 	}
 	if (max_entries && count > max_entries) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING PREFIX "[%4.4s:0x%02x] ignored %i entries of "
 		       "%i found\n", id, entry_id, count - max_entries, count);
+=======
+		pr_warn("[%4.4s:0x%02x] ignored %i entries of %i found\n",
+			id, entry_id, count - max_entries, count);
+>>>>>>> v3.18
 =======
 		pr_warn("[%4.4s:0x%02x] ignored %i entries of %i found\n",
 			id, entry_id, count - max_entries, count);
@@ -391,7 +487,10 @@ acpi_table_parse_madt(enum acpi_madt_type id,
 /**
  * acpi_table_parse - find table with @id, run @handler on it
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @id: table id to find
@@ -399,7 +498,13 @@ acpi_table_parse_madt(enum acpi_madt_type id,
  *
  * Scan the ACPI System Descriptor Table (STD) for a table matching @id,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * run @handler on it.  Return 0 if table found, return on if not.
+=======
+ * run @handler on it.
+ *
+ * Return 0 if table found, -errno if not.
+>>>>>>> v3.18
 =======
  * run @handler on it.
  *
@@ -415,7 +520,11 @@ int __init acpi_table_parse(char *id, acpi_tbl_table_handler handler)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!handler)
+=======
+	if (!id || !handler)
+>>>>>>> v3.18
 =======
 	if (!id || !handler)
 >>>>>>> v3.18
@@ -432,7 +541,11 @@ int __init acpi_table_parse(char *id, acpi_tbl_table_handler handler)
 		return 0;
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 1;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -451,6 +564,7 @@ static void __init check_multiple_madt(void)
 	acpi_get_table_with_size(ACPI_SIG_MADT, 2, &table, &tbl_size);
 	if (table) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING PREFIX
 		       "BIOS bug: multiple APIC/MADT found,"
 		       " using %d\n", acpi_apic_instance);
@@ -459,11 +573,16 @@ static void __init check_multiple_madt(void)
 		       "notify linux-acpi@vger.kernel.org\n",
 		       acpi_apic_instance ? 0 : 2);
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("BIOS bug: multiple APIC/MADT found, using %d\n",
 			acpi_apic_instance);
 		pr_warn("If \"acpi_apic_instance=%d\" works better, "
 			"notify linux-acpi@vger.kernel.org\n",
 			acpi_apic_instance ? 0 : 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		early_acpi_os_unmap_memory(table, tbl_size);
 
@@ -487,10 +606,13 @@ int __init acpi_table_init(void)
 	acpi_status status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_initialize_tables(initial_tables, ACPI_MAX_TABLES, 0);
 	if (ACPI_FAILURE(status))
 		return 1;
 =======
+=======
+>>>>>>> v3.18
 	if (acpi_verify_table_checksum) {
 		pr_info("Early table checksum verification enabled\n");
 		acpi_gbl_verify_table_checksum = TRUE;
@@ -502,6 +624,9 @@ int __init acpi_table_init(void)
 	status = acpi_initialize_tables(initial_tables, ACPI_MAX_TABLES, 0);
 	if (ACPI_FAILURE(status))
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	check_multiple_madt();
@@ -514,15 +639,21 @@ static int __init acpi_parse_apic_instance(char *str)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_apic_instance = simple_strtoul(str, NULL, 0);
 
 	printk(KERN_NOTICE PREFIX "Shall use APIC/MADT table %d\n",
 	       acpi_apic_instance);
 =======
+=======
+>>>>>>> v3.18
 	if (kstrtoint(str, 0, &acpi_apic_instance))
 		return -EINVAL;
 
 	pr_notice("Shall use APIC/MADT table %d\n", acpi_apic_instance);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -530,7 +661,10 @@ static int __init acpi_parse_apic_instance(char *str)
 
 early_param("acpi_apic_instance", acpi_parse_apic_instance);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int __init acpi_force_table_verification_setup(char *s)
 {
@@ -540,4 +674,7 @@ static int __init acpi_force_table_verification_setup(char *s)
 }
 
 early_param("acpi_force_table_verification", acpi_force_table_verification_setup);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

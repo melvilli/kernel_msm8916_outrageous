@@ -23,7 +23,10 @@ extern void s3c2410_map_io(void);
 extern void s3c2410_init_uarts(struct s3c2410_uartcfg *cfg, int no);
 extern void s3c2410_init_clocks(int xtal);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void s3c2410_restart(enum reboot_mode mode, const char *cmd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void s3c2410_init_irq(void);
@@ -42,7 +45,10 @@ extern void s3c2412_init_uarts(struct s3c2410_uartcfg *cfg, int no);
 extern void s3c2412_init_clocks(int xtal);
 extern  int s3c2412_baseclk_add(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void s3c2412_restart(enum reboot_mode mode, const char *cmd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void s3c2412_init_irq(void);
@@ -60,7 +66,10 @@ extern void s3c2416_init_uarts(struct s3c2410_uartcfg *cfg, int no);
 extern void s3c2416_init_clocks(int xtal);
 extern  int s3c2416_baseclk_add(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void s3c2416_restart(enum reboot_mode mode, const char *cmd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void s3c2416_init_irq(void);
@@ -77,10 +86,14 @@ extern struct syscore_ops s3c2416_irq_syscore_ops;
 extern void s3c244x_map_io(void);
 extern void s3c244x_init_uarts(struct s3c2410_uartcfg *cfg, int no);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void s3c244x_init_clocks(int xtal);
 extern void s3c244x_restart(enum reboot_mode mode, const char *cmd);
 #else
 #define s3c244x_init_clocks NULL
+=======
+#else
+>>>>>>> v3.18
 =======
 #else
 >>>>>>> v3.18
@@ -91,6 +104,10 @@ extern void s3c244x_restart(enum reboot_mode mode, const char *cmd);
 extern  int s3c2440_init(void);
 extern void s3c2440_map_io(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void s3c2440_init_clocks(int xtal);
+>>>>>>> v3.18
 =======
 extern void s3c2440_init_clocks(int xtal);
 >>>>>>> v3.18
@@ -104,6 +121,10 @@ extern void s3c2440_init_irq(void);
 extern  int s3c2442_init(void);
 extern void s3c2442_map_io(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void s3c2442_init_clocks(int xtal);
+>>>>>>> v3.18
 =======
 extern void s3c2442_init_clocks(int xtal);
 >>>>>>> v3.18
@@ -120,7 +141,10 @@ extern void s3c2443_init_uarts(struct s3c2410_uartcfg *cfg, int no);
 extern void s3c2443_init_clocks(int xtal);
 extern  int s3c2443_baseclk_add(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void s3c2443_restart(enum reboot_mode mode, const char *cmd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void s3c2443_init_irq(void);
@@ -134,7 +158,10 @@ extern void s3c2443_init_irq(void);
 extern struct syscore_ops s3c24xx_irq_syscore_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern struct platform_device s3c2410_device_dma;
 extern struct platform_device s3c2412_device_dma;
 extern struct platform_device s3c2440_device_dma;
@@ -157,5 +184,8 @@ void __init s3c2443_common_clk_init(struct device_node *np, unsigned long xti_f,
 				    void __iomem *reg_base);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ARCH_ARM_MACH_S3C24XX_COMMON_H */

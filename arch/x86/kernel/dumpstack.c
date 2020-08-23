@@ -26,7 +26,11 @@ int kstack_depth_to_print = 3 * STACKSLOTS_PER_LINE;
 static int die_counter;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void printk_address(unsigned long address, int reliable)
+=======
+static void printk_stack_address(unsigned long address, int reliable)
+>>>>>>> v3.18
 =======
 static void printk_stack_address(unsigned long address, int reliable)
 >>>>>>> v3.18
@@ -36,12 +40,18 @@ static void printk_stack_address(unsigned long address, int reliable)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void printk_address(unsigned long address)
 {
 	pr_cont(" [<%p>] %pS\n", (void *)address, (void *)address);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_FUNCTION_GRAPH_TRACER
 static void
@@ -164,7 +174,11 @@ static void print_trace_address(void *data, unsigned long addr, int reliable)
 	touch_nmi_watchdog();
 	printk(data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk_address(addr, reliable);
+=======
+	printk_stack_address(addr, reliable);
+>>>>>>> v3.18
 =======
 	printk_stack_address(addr, reliable);
 >>>>>>> v3.18
@@ -212,7 +226,11 @@ static int die_owner = -1;
 static unsigned int die_nest_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned __kprobes long oops_begin(void)
+=======
+unsigned long oops_begin(void)
+>>>>>>> v3.18
 =======
 unsigned long oops_begin(void)
 >>>>>>> v3.18
@@ -239,8 +257,14 @@ unsigned long oops_begin(void)
 }
 EXPORT_SYMBOL_GPL(oops_begin);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void __kprobes oops_end(unsigned long flags, struct pt_regs *regs, int signr)
+=======
+NOKPROBE_SYMBOL(oops_begin);
+
+void oops_end(unsigned long flags, struct pt_regs *regs, int signr)
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(oops_begin);
 
@@ -269,8 +293,14 @@ void oops_end(unsigned long flags, struct pt_regs *regs, int signr)
 	do_exit(signr);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int __kprobes __die(const char *str, struct pt_regs *regs, long err)
+=======
+NOKPROBE_SYMBOL(oops_end);
+
+int __die(const char *str, struct pt_regs *regs, long err)
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(oops_end);
 
@@ -314,7 +344,11 @@ int __die(const char *str, struct pt_regs *regs, long err)
 	/* Executive summary in case the oops scrolled away */
 	printk(KERN_ALERT "RIP ");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk_address(regs->ip, 1);
+=======
+	printk_address(regs->ip);
+>>>>>>> v3.18
 =======
 	printk_address(regs->ip);
 >>>>>>> v3.18
@@ -323,6 +357,10 @@ int __die(const char *str, struct pt_regs *regs, long err)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(__die);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(__die);
 >>>>>>> v3.18

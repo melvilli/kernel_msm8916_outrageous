@@ -33,6 +33,11 @@ struct vnic_enet_config {
 	u32 intr_timer_usec;
 	u16 loop_tag;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 vf_rq_count;
+	u16 num_arfs;
+>>>>>>> v3.18
 =======
 	u16 vf_rq_count;
 	u16 num_arfs;

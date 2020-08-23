@@ -114,8 +114,13 @@ static u32 read_wb_reg(int n)
 	GEN_READ_WB_REG_CASES(ARM_OP2_WCR, val);
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("attempt to read from unknown breakpoint "
 				"register %d\n", n);
+=======
+		pr_warn("attempt to read from unknown breakpoint register %d\n",
+			n);
+>>>>>>> v3.18
 =======
 		pr_warn("attempt to read from unknown breakpoint register %d\n",
 			n);
@@ -134,8 +139,13 @@ static void write_wb_reg(int n, u32 val)
 	GEN_WRITE_WB_REG_CASES(ARM_OP2_WCR, val);
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("attempt to write to unknown breakpoint "
 				"register %d\n", n);
+=======
+		pr_warn("attempt to write to unknown breakpoint register %d\n",
+			n);
+>>>>>>> v3.18
 =======
 		pr_warn("attempt to write to unknown breakpoint register %d\n",
 			n);
@@ -238,6 +248,7 @@ static int get_num_brps(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Determine if halting mode is enabled */
 static int halting_mode_enabled(void)
 {
@@ -249,6 +260,8 @@ static int halting_mode_enabled(void)
 	return !!(dscr & ARM_DSCR_HDBGEN);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -317,7 +330,11 @@ int hw_breakpoint_slots(int type)
 		return get_num_wrps();
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("unknown slot type: %d\n", type);
+=======
+		pr_warn("unknown slot type: %d\n", type);
+>>>>>>> v3.18
 =======
 		pr_warn("unknown slot type: %d\n", type);
 >>>>>>> v3.18
@@ -394,7 +411,11 @@ int arch_install_hw_breakpoint(struct perf_event *bp)
 
 	if (i == max_slots) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("Can't find any breakpoint slot\n");
+=======
+		pr_warn("Can't find any breakpoint slot\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Can't find any breakpoint slot\n");
 >>>>>>> v3.18
@@ -450,7 +471,11 @@ void arch_uninstall_hw_breakpoint(struct perf_event *bp)
 
 	if (i == max_slots) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("Can't find any breakpoint slot\n");
+=======
+		pr_warn("Can't find any breakpoint slot\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Can't find any breakpoint slot\n");
 >>>>>>> v3.18
@@ -931,8 +956,13 @@ static int debug_reg_trap(struct pt_regs *regs, unsigned int instr)
 	int cpu = smp_processor_id();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_warning("Debug register access (0x%x) caused undefined instruction on CPU %d\n",
 		   instr, cpu);
+=======
+	pr_warn("Debug register access (0x%x) caused undefined instruction on CPU %d\n",
+		instr, cpu);
+>>>>>>> v3.18
 =======
 	pr_warn("Debug register access (0x%x) caused undefined instruction on CPU %d\n",
 		instr, cpu);
@@ -974,6 +1004,7 @@ static void reset_ctrl_regs(void *unused)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Bail out without clearing the breakpoint registers if halting
 	 * debug mode or monitor debug mode is enabled. Checking for monitor
 	 * debug mode here ensures we don't clear the breakpoint registers
@@ -985,6 +1016,8 @@ static void reset_ctrl_regs(void *unused)
 		return;
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * v7 debug contains save and restore registers so that debug state
@@ -1077,7 +1110,11 @@ out_mdbgen:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit dbg_reset_notify(struct notifier_block *self,
+=======
+static int dbg_reset_notify(struct notifier_block *self,
+>>>>>>> v3.18
 =======
 static int dbg_reset_notify(struct notifier_block *self,
 >>>>>>> v3.18
@@ -1090,7 +1127,11 @@ static int dbg_reset_notify(struct notifier_block *self,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata dbg_reset_nb = {
+=======
+static struct notifier_block dbg_reset_nb = {
+>>>>>>> v3.18
 =======
 static struct notifier_block dbg_reset_nb = {
 >>>>>>> v3.18
@@ -1131,6 +1172,7 @@ static int __init arch_hw_breakpoint_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Scorpion CPUs (at least those in APQ8060) seem to set DBGPRSR.SPD
 	 * whenever a WFI is issued, even if the core is not powered down, in
@@ -1147,6 +1189,8 @@ static int __init arch_hw_breakpoint_init(void)
 		return 0;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	has_ossr = core_has_os_save_restore();

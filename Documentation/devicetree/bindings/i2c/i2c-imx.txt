@@ -2,12 +2,18 @@
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : Should be "fsl,<chip>-i2c"
 =======
+=======
+>>>>>>> v3.18
 - compatible :
   - "fsl,imx1-i2c" for I2C compatible with the one integrated on i.MX1 SoC
   - "fsl,imx21-i2c" for I2C compatible with the one integrated on i.MX21 SoC
   - "fsl,vf610-i2c" for I2C compatible with the one integrated on Vybrid vf610 SoC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - reg : Should contain I2C/HS-I2C registers location and length
 - interrupts : Should contain I2C/HS-I2C interrupt

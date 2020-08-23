@@ -24,10 +24,13 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -37,7 +40,10 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -47,14 +53,20 @@
 #include <linux/io.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_device.h>
 #include <linux/of_platform.h>
 #include <linux/of_i2c.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_address.h>
 #include <linux/of_device.h>
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <sysdev/fsl_soc.h>
 #include <asm/cpm.h>
@@ -134,8 +146,13 @@ struct cpm_i2c {
 	u_char *txbuf[CPM_MAXBD];
 	u_char *rxbuf[CPM_MAXBD];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_addr_t txdma[CPM_MAXBD];
 	dma_addr_t rxdma[CPM_MAXBD];
+=======
+	u32 txdma[CPM_MAXBD];
+	u32 rxdma[CPM_MAXBD];
+>>>>>>> v3.18
 =======
 	u32 txdma[CPM_MAXBD];
 	u32 rxdma[CPM_MAXBD];
@@ -357,7 +374,10 @@ static int cpm_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 	rptr = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If there was a collision in the last i2c transaction,
 	 * Set I2COM_MASTER as it was cleared during collision.
@@ -366,6 +386,9 @@ static int cpm_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 		out_8(&cpm->i2c_reg->i2com, I2COM_MASTER);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (tptr < num) {
 		pmsg = &msgs[tptr];
@@ -470,7 +493,11 @@ static int cpm_i2c_setup(struct cpm_i2c *cpm)
 	init_waitqueue_head(&cpm->i2c_wait);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpm->irq = of_irq_to_resource(ofdev->dev.of_node, 0, NULL);
+=======
+	cpm->irq = irq_of_parse_and_map(ofdev->dev.of_node, 0);
+>>>>>>> v3.18
 =======
 	cpm->irq = irq_of_parse_and_map(ofdev->dev.of_node, 0);
 >>>>>>> v3.18
@@ -680,7 +707,11 @@ static int cpm_i2c_probe(struct platform_device *ofdev)
 	cpm->ofdev = ofdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, cpm);
+=======
+	platform_set_drvdata(ofdev, cpm);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, cpm);
 >>>>>>> v3.18
@@ -711,11 +742,14 @@ static int cpm_i2c_probe(struct platform_device *ofdev)
 		cpm->adap.name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * register OF I2C devices
 	 */
 	of_i2c_register_devices(&cpm->adap);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -730,7 +764,11 @@ out_free:
 static int cpm_i2c_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpm_i2c *cpm = dev_get_drvdata(&ofdev->dev);
+=======
+	struct cpm_i2c *cpm = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct cpm_i2c *cpm = platform_get_drvdata(ofdev);
 >>>>>>> v3.18

@@ -235,6 +235,7 @@ struct kvm_vm_data {
 #define KVM_REQ_RESUME		33
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define KVM_HPAGE_GFN_SHIFT(x)	0
 #define KVM_NR_PAGE_SIZES	1
 #define KVM_PAGES_PER_HPAGE(x)	1
@@ -242,6 +243,8 @@ struct kvm_vm_data {
 struct kvm;
 struct kvm_vcpu;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct kvm_mmio_req {
@@ -484,7 +487,11 @@ struct kvm_arch {
 	struct list_head assigned_dev_head;
 	struct iommu_domain *iommu_domain;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int iommu_flags;
+=======
+	bool iommu_noncoherent;
+>>>>>>> v3.18
 =======
 	bool iommu_noncoherent;
 >>>>>>> v3.18
@@ -607,7 +614,10 @@ struct kvm *kvm_arch_alloc_vm(void);
 void kvm_arch_free_vm(struct kvm *kvm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void kvm_arch_sync_events(struct kvm *kvm) {}
 static inline void kvm_arch_vcpu_put(struct kvm_vcpu *vcpu) {}
 static inline void kvm_arch_sched_in(struct kvm_vcpu *vcpu) {}
@@ -620,6 +630,9 @@ static inline void kvm_arch_commit_memory_region(struct kvm *kvm,
 		enum kvm_mr_change change) {}
 static inline void kvm_arch_hardware_unsetup(void) {}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASSEMBLY__*/
 

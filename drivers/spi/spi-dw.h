@@ -4,6 +4,10 @@
 #include <linux/io.h>
 #include <linux/scatterlist.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio.h>
 >>>>>>> v3.18
@@ -78,11 +82,17 @@
 #define SPI_INT_MSTI			(1 << 5)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Bit fields in DMACR */
 #define SPI_DMA_RDMAE			(1 << 0)
 #define SPI_DMA_TDMAE			(1 << 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* TX RX interrupt level threshold, max can be 256 */
 #define SPI_INT_THRESHOLD		32
@@ -104,7 +114,10 @@ struct dw_spi {
 	struct spi_master	*master;
 	struct spi_device	*cur_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device		*parent_dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	enum dw_ssi_type	type;
@@ -113,7 +126,10 @@ struct dw_spi {
 	void __iomem		*regs;
 	unsigned long		paddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			iolen;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int			irq;
@@ -124,6 +140,7 @@ struct dw_spi {
 	u16			num_cs;		/* supported slave numbers */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Driver message queue */
 	struct workqueue_struct	*workqueue;
 	struct work_struct	pump_messages;
@@ -132,6 +149,8 @@ struct dw_spi {
 	int			busy;
 	int			run;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Message Transfer pump */
@@ -156,7 +175,10 @@ struct dw_spi {
 	u8			max_bits_per_word;	/* maxim is 16b */
 	u32			dma_width;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			cs_change;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	irqreturn_t		(*transfer_handler)(struct dw_spi *dws);
@@ -174,7 +196,10 @@ struct dw_spi {
 	struct dw_spi_dma_ops	*dma_ops;
 	void			*dma_priv; /* platform relate info */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev		*dmac;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -216,6 +241,7 @@ static inline void spi_set_clk(struct dw_spi *dws, u16 div)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void spi_chip_sel(struct dw_spi *dws, u16 cs)
 {
 	if (cs > dws->num_cs)
@@ -226,6 +252,8 @@ static inline void spi_chip_sel(struct dw_spi *dws, u16 cs)
 
 	dw_writel(dws, DW_SPI_SER, 1 << cs);
 =======
+=======
+>>>>>>> v3.18
 static inline void spi_chip_sel(struct dw_spi *dws, struct spi_device *spi,
 		int active)
 {
@@ -240,6 +268,9 @@ static inline void spi_chip_sel(struct dw_spi *dws, struct spi_device *spi,
 
 	if (active)
 		dw_writel(dws, DW_SPI_SER, 1 << cs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -266,24 +297,34 @@ static inline void spi_umask_intr(struct dw_spi *dws, u32 mask)
  * has such a structure claiming its working mode (PIO/DMA etc),
  * which can be save in the "controller_data" member of the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct spi_device
  */
 struct dw_spi_chip {
 	u8 poll_mode;	/* 0 for contoller polling mode */
 	u8 type;	/* SPI/SSP/Micrwire */
 =======
+=======
+>>>>>>> v3.18
  * struct spi_device.
  */
 struct dw_spi_chip {
 	u8 poll_mode;	/* 1 for controller polling mode */
 	u8 type;	/* SPI/SSP/MicroWire */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 enable_dma;
 	void (*cs_control)(u32 command);
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int dw_spi_add_host(struct dw_spi *dws);
+=======
+extern int dw_spi_add_host(struct device *dev, struct dw_spi *dws);
+>>>>>>> v3.18
 =======
 extern int dw_spi_add_host(struct device *dev, struct dw_spi *dws);
 >>>>>>> v3.18

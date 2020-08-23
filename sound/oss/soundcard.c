@@ -155,7 +155,10 @@ static ssize_t sound_read(struct file *file, char __user *buf, size_t count, lof
 	mutex_lock(&soundcard_mutex);
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("sound_read(dev=%d, count=%d)\n", dev, count));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (dev & 0x0f) {
@@ -184,7 +187,10 @@ static ssize_t sound_write(struct file *file, const char __user *buf, size_t cou
 	
 	mutex_lock(&soundcard_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("sound_write(dev=%d, count=%d)\n", dev, count));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (dev & 0x0f) {
@@ -213,7 +219,10 @@ static int sound_open(struct inode *inode, struct file *file)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("sound_open(dev=%d)\n", dev));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((dev >= SND_NDEVS) || (dev < 0)) {
@@ -267,7 +276,10 @@ static int sound_release(struct inode *inode, struct file *file)
 
 	mutex_lock(&soundcard_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("sound_release(dev=%d)\n", dev));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (dev & 0x0f) {
@@ -364,7 +376,10 @@ static long sound_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 				return -EFAULT;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("sound_ioctl(dev=%d, cmd=0x%x, arg=0x%x)\n", dev, cmd, arg));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (cmd == OSS_GETVERSION)
@@ -425,7 +440,10 @@ static unsigned int sound_poll(struct file *file, poll_table * wait)
 	int dev = iminor(inode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("sound_poll(dev=%d)\n", dev));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (dev & 0x0f) {

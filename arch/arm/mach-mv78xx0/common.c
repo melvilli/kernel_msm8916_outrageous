@@ -16,6 +16,10 @@
 #include <linux/clk-provider.h>
 #include <linux/ethtool.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/hardware/cache-feroceon-l2.h>
+>>>>>>> v3.18
 =======
 #include <asm/hardware/cache-feroceon-l2.h>
 >>>>>>> v3.18
@@ -24,7 +28,10 @@
 #include <mach/mv78xx0.h>
 #include <mach/bridge-regs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/cache-feroceon-l2.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_data/usb-ehci-orion.h>
@@ -345,17 +352,23 @@ void __init mv78xx0_init_early(void)
 		mvebu_mbus_init("marvell,mv78xx0-mbus",
 				BRIDGE_WINS_CPU0_BASE, BRIDGE_WINS_SZ,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				DDR_WINDOW_CPU0_BASE, DDR_WINDOW_CPU_SZ, 0);
 	else
 		mvebu_mbus_init("marvell,mv78xx0-mbus",
 				BRIDGE_WINS_CPU1_BASE, BRIDGE_WINS_SZ,
 				DDR_WINDOW_CPU1_BASE, DDR_WINDOW_CPU_SZ, 0);
 =======
+=======
+>>>>>>> v3.18
 				DDR_WINDOW_CPU0_BASE, DDR_WINDOW_CPU_SZ);
 	else
 		mvebu_mbus_init("marvell,mv78xx0-mbus",
 				BRIDGE_WINS_CPU1_BASE, BRIDGE_WINS_SZ,
 				DDR_WINDOW_CPU1_BASE, DDR_WINDOW_CPU_SZ);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

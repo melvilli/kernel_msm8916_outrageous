@@ -192,7 +192,11 @@ int __init udbg_adb_init(int force_btext)
 	 * bext output set for now
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (np = NULL; (np = of_find_node_by_name(np, "keyboard")) != NULL;) {
+=======
+	for_each_node_by_name(np, "keyboard") {
+>>>>>>> v3.18
 =======
 	for_each_node_by_name(np, "keyboard") {
 >>>>>>> v3.18

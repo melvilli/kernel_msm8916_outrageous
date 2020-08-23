@@ -925,7 +925,11 @@ static int __init con3215_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cdev = ccw_device_probe_console(&raw3215_ccw_driver);
+=======
+	cdev = ccw_device_create_console(&raw3215_ccw_driver);
+>>>>>>> v3.18
 =======
 	cdev = ccw_device_create_console(&raw3215_ccw_driver);
 >>>>>>> v3.18
@@ -939,13 +943,19 @@ static int __init con3215_init(void)
 
 	raw->flags |= RAW3215_FIXED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ccw_device_enable_console(cdev)) {
 		ccw_device_destroy_console(cdev);
 		raw3215_free_info(raw);
 		raw3215[0] = NULL;
 		return -ENODEV;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Request the console irq */

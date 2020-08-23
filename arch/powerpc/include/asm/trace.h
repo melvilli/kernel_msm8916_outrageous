@@ -100,7 +100,10 @@ TRACE_EVENT_FN(hcall_exit,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_POWERNV
 extern void opal_tracepoint_regfunc(void);
 extern void opal_tracepoint_unregfunc(void);
@@ -146,6 +149,9 @@ TRACE_EVENT_FN(opal_exit,
 );
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _TRACE_POWERPC_H */
 

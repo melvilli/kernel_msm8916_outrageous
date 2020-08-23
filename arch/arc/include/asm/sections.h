@@ -13,7 +13,10 @@
 
 extern char __arc_dccm_base[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern char __dtb_start[];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

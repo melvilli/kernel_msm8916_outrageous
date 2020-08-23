@@ -236,7 +236,11 @@ static void atl1_check_options(struct atl1_adapter *adapter)
  * atl1_pci_tbl - PCI Device ID Table
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(atl1_pci_tbl) = {
+=======
+static const struct pci_device_id atl1_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id atl1_pci_tbl[] = {
 >>>>>>> v3.18
@@ -915,7 +919,10 @@ static s32 atl1_get_speed_and_duplex(struct atl1_hw *hw, u16 *speed, u16 *duplex
 			dev_dbg(&pdev->dev, "error getting speed\n");
 		return ATLX_ERR_PHY_SPEED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1686,6 +1693,7 @@ static void atl1_inc_smb(struct atl1_adapter *adapter)
 	struct stats_msg_block *smb = adapter->smb.smb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Fill out the OS statistics structure */
 	adapter->soft_stats.rx_packets += smb->rx_ok;
 	adapter->soft_stats.tx_packets += smb->tx_ok;
@@ -1700,6 +1708,8 @@ static void atl1_inc_smb(struct atl1_adapter *adapter)
 		smb->rx_len_err + smb->rx_sz_ov + smb->rx_rxf_ov +
 		smb->rx_rrd_ov + smb->rx_align_err);
 =======
+=======
+>>>>>>> v3.18
 	u64 new_rx_errors = smb->rx_frag +
 			    smb->rx_fcs_err +
 			    smb->rx_len_err +
@@ -1725,14 +1735,20 @@ static void atl1_inc_smb(struct atl1_adapter *adapter)
 
 	/* Rx Errors */
 	adapter->soft_stats.rx_errors += new_rx_errors;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	adapter->soft_stats.rx_fifo_errors += smb->rx_rxf_ov;
 	adapter->soft_stats.rx_length_errors += smb->rx_len_err;
 	adapter->soft_stats.rx_crc_errors += smb->rx_fcs_err;
 	adapter->soft_stats.rx_frame_errors += smb->rx_align_err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter->soft_stats.rx_missed_errors += (smb->rx_rrd_ov +
 		smb->rx_rxf_ov);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1742,8 +1758,12 @@ static void atl1_inc_smb(struct atl1_adapter *adapter)
 
 	/* Tx Errors */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter->soft_stats.tx_errors += (smb->tx_late_col +
 		smb->tx_abort_col + smb->tx_underrun + smb->tx_trunc);
+=======
+	adapter->soft_stats.tx_errors += new_tx_errors;
+>>>>>>> v3.18
 =======
 	adapter->soft_stats.tx_errors += new_tx_errors;
 >>>>>>> v3.18
@@ -1761,8 +1781,11 @@ static void atl1_inc_smb(struct atl1_adapter *adapter)
 	adapter->soft_stats.tx_pause += smb->tx_pause;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev->stats.rx_packets = adapter->soft_stats.rx_packets;
 	netdev->stats.tx_packets = adapter->soft_stats.tx_packets;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	netdev->stats.rx_bytes = adapter->soft_stats.rx_bytes;
@@ -1771,8 +1794,11 @@ static void atl1_inc_smb(struct atl1_adapter *adapter)
 	netdev->stats.collisions = adapter->soft_stats.collisions;
 	netdev->stats.rx_errors = adapter->soft_stats.rx_errors;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev->stats.rx_over_errors =
 		adapter->soft_stats.rx_missed_errors;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	netdev->stats.rx_length_errors =
@@ -1782,8 +1808,12 @@ static void atl1_inc_smb(struct atl1_adapter *adapter)
 		adapter->soft_stats.rx_frame_errors;
 	netdev->stats.rx_fifo_errors = adapter->soft_stats.rx_fifo_errors;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev->stats.rx_missed_errors =
 		adapter->soft_stats.rx_missed_errors;
+=======
+	netdev->stats.rx_dropped = adapter->soft_stats.rx_rrd_ov;
+>>>>>>> v3.18
 =======
 	netdev->stats.rx_dropped = adapter->soft_stats.rx_rrd_ov;
 >>>>>>> v3.18
@@ -1796,6 +1826,12 @@ static void atl1_inc_smb(struct atl1_adapter *adapter)
 	netdev->stats.tx_carrier_errors =
 		adapter->soft_stats.tx_carrier_errors;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	netdev->stats.rx_packets = adapter->soft_stats.rx_packets;
+	netdev->stats.tx_packets = adapter->soft_stats.tx_packets;
+>>>>>>> v3.18
 =======
 
 	netdev->stats.rx_packets = adapter->soft_stats.rx_packets;
@@ -1931,7 +1967,11 @@ static u16 atl1_alloc_rx_buffers(struct atl1_adapter *adapter)
 		if (unlikely(!skb)) {
 			/* Better luck next round */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			adapter->netdev->stats.rx_dropped++;
+=======
+			adapter->soft_stats.rx_dropped++;
+>>>>>>> v3.18
 =======
 			adapter->soft_stats.rx_dropped++;
 >>>>>>> v3.18
@@ -2174,6 +2214,7 @@ static u16 atl1_tpd_avail(struct atl1_tpd_ring *tpd_ring)
 
 static int atl1_tso(struct atl1_adapter *adapter, struct sk_buff *skb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tx_packet_desc *ptpd)
 {
 	u8 hdr_len, ip_off;
@@ -2187,6 +2228,8 @@ static int atl1_tso(struct atl1_adapter *adapter, struct sk_buff *skb,
 				return -1;
 		}
 =======
+=======
+>>>>>>> v3.18
 		    struct tx_packet_desc *ptpd)
 {
 	u8 hdr_len, ip_off;
@@ -2198,6 +2241,9 @@ static int atl1_tso(struct atl1_adapter *adapter, struct sk_buff *skb,
 		err = skb_cow_head(skb, 0);
 		if (err < 0)
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (skb->protocol == htons(ETH_P_IP)) {
@@ -2245,7 +2291,11 @@ static int atl1_tso(struct atl1_adapter *adapter, struct sk_buff *skb,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return false;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -3203,7 +3253,12 @@ static void atl1_remove(struct pci_dev *pdev)
 	 * address, we need to save the permanent one.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(adapter->hw.mac_addr, adapter->hw.perm_mac_addr, ETH_ALEN)) {
+=======
+	if (!ether_addr_equal_unaligned(adapter->hw.mac_addr,
+					adapter->hw.perm_mac_addr)) {
+>>>>>>> v3.18
 =======
 	if (!ether_addr_equal_unaligned(adapter->hw.mac_addr,
 					adapter->hw.perm_mac_addr)) {
@@ -3231,6 +3286,7 @@ static struct pci_driver atl1_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * atl1_exit_module - Driver Exit Cleanup Routine
  *
@@ -3256,6 +3312,8 @@ static int __init atl1_init_module(void)
 module_init(atl1_init_module);
 module_exit(atl1_exit_module);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct atl1_stats {
@@ -3365,8 +3423,13 @@ static int atl1_get_settings(struct net_device *netdev,
 			ecmd->duplex = DUPLEX_HALF;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(ecmd, -1);
 		ecmd->duplex = -1;
+=======
+		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
+		ecmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 =======
 		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
 		ecmd->duplex = DUPLEX_UNKNOWN;
@@ -3799,6 +3862,11 @@ static const struct ethtool_ops atl1_ethtool_ops = {
 	.get_sset_count		= atl1_get_sset_count,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+module_pci_driver(atl1_driver);
+>>>>>>> v3.18
 =======
 
 module_pci_driver(atl1_driver);

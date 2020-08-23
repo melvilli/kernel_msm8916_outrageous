@@ -45,6 +45,7 @@
 #include <xen/grant_table.h>
 #include <xen/xenbus.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct xen_netbk;
 
@@ -86,6 +87,8 @@ struct xenvif {
 	 */
 	RING_IDX rx_req_cons_peek;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/debugfs.h>
 
 typedef unsigned int pending_ring_idx_t;
@@ -230,6 +233,9 @@ struct xenvif_queue { /* Per-queue data for xenvif */
 	 * the maximum number is the same as the ring size.
 	 */
 	struct xenvif_rx_meta meta[XEN_NETIF_RX_RING_SIZE];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Transmit shaping: allow 'credit_bytes' every 'credit_usec'. */
@@ -240,6 +246,7 @@ struct xenvif_queue { /* Per-queue data for xenvif */
 	u64 credit_window_start;
 
 	/* Statistics */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long rx_gso_checksum_fixup;
 
@@ -252,6 +259,8 @@ struct xenvif_queue { /* Per-queue data for xenvif */
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct xenvif_stats stats;
 };
 
@@ -309,6 +318,9 @@ struct xenvif_rx_cb {
 
 #define XENVIF_RX_CB(skb) ((struct xenvif_rx_cb *)(skb)->cb)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct xenbus_device *xenvif_to_xenbus_device(struct xenvif *vif)
 {
@@ -316,15 +328,19 @@ static inline struct xenbus_device *xenvif_to_xenbus_device(struct xenvif *vif)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XEN_NETIF_TX_RING_SIZE __CONST_RING_SIZE(xen_netif_tx, PAGE_SIZE)
 #define XEN_NETIF_RX_RING_SIZE __CONST_RING_SIZE(xen_netif_rx, PAGE_SIZE)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct xenvif *xenvif_alloc(struct device *parent,
 			    domid_t domid,
 			    unsigned int handle);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int xenvif_connect(struct xenvif *vif, unsigned long tx_ring_ref,
 		   unsigned long rx_ring_ref, unsigned int evtchn);
@@ -368,6 +384,8 @@ void xen_netbk_queue_tx_skb(struct xenvif *vif, struct sk_buff *skb);
 /* Notify xenvif that ring now has space to send an skb to the frontend */
 void xenvif_notify_tx_completion(struct xenvif *vif);
 =======
+=======
+>>>>>>> v3.18
 int xenvif_init_queue(struct xenvif_queue *queue);
 void xenvif_deinit_queue(struct xenvif_queue *queue);
 
@@ -393,15 +411,21 @@ int xenvif_map_frontend_rings(struct xenvif_queue *queue,
 
 /* Check for SKBs from frontend and schedule backend processing */
 void xenvif_napi_schedule_or_enable_events(struct xenvif_queue *queue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Prevent the device from generating any further traffic. */
 void xenvif_carrier_off(struct xenvif *vif);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Returns number of ring slots required to send an skb to the frontend */
 unsigned int xen_netbk_count_skb_slots(struct xenvif *vif, struct sk_buff *skb);
 =======
+=======
+>>>>>>> v3.18
 int xenvif_tx_action(struct xenvif_queue *queue, int budget);
 
 int xenvif_kthread_guest_rx(void *data);
@@ -448,6 +472,9 @@ extern struct dentry *xen_netback_dbg_root;
 void xenvif_skb_zerocopy_prepare(struct xenvif_queue *queue,
 				 struct sk_buff *skb);
 void xenvif_skb_zerocopy_complete(struct xenvif_queue *queue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __XEN_NETBACK__COMMON_H__ */

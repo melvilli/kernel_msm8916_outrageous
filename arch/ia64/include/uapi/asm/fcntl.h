@@ -9,6 +9,10 @@
 		(personality(current->personality) != PER_LINUX32)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/personality.h>
+>>>>>>> v3.18
 =======
 #include <linux/personality.h>
 >>>>>>> v3.18

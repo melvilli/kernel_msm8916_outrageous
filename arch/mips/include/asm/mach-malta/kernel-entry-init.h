@@ -6,6 +6,10 @@
  * Chris Dearman (chris@mips.com)
  * Copyright (C) 2007 Mips Technologies, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Imagination Technologies Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Imagination Technologies Ltd.
 >>>>>>> v3.18
@@ -14,11 +18,14 @@
 #define __ASM_MACH_MIPS_KERNEL_ENTRY_INIT_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro	kernel_entry_setup
 #ifdef CONFIG_MIPS_MT_SMTC
 	mfc0	t0, CP0_CONFIG
 	bgez	t0, 9f
 =======
+=======
+>>>>>>> v3.18
 #include <asm/regdef.h>
 #include <asm/mipsregs.h>
 
@@ -107,6 +114,9 @@
 
 	mfc0    t1, CP0_CONFIG
 	bgez    t1, 9f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mfc0	t0, CP0_CONFIG, 1
 	bgez	t0, 9f
@@ -114,14 +124,20 @@
 	bgez	t0, 9f
 	mfc0	t0, CP0_CONFIG, 3
 <<<<<<< HEAD
+<<<<<<< HEAD
 	and	t0, 1<<2
 	bnez	t0, 0f
 =======
+=======
+>>>>>>> v3.18
 	sll     t0, t0, 6   /* SC bit */
 	bgez    t0, 9f
 
 	platform_eva_init
 	b       0f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 9:
 	/* Assume we came from YAMON... */
@@ -129,7 +145,11 @@
 	lw	v0, (v0)
 	move	a0, zero
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PTR_LA	a1, nonmt_processor
+=======
+	PTR_LA  a1, nonsc_processor
+>>>>>>> v3.18
 =======
 	PTR_LA  a1, nonsc_processor
 >>>>>>> v3.18
@@ -142,6 +162,7 @@
 
 1:	b	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	__INITDATA
 nonmt_processor:
@@ -150,6 +171,8 @@ nonmt_processor:
 0:
 #endif
 =======
+=======
+>>>>>>> v3.18
 	nop
 	__INITDATA
 nonsc_processor:
@@ -157,6 +180,9 @@ nonsc_processor:
 	__FINIT
 #endif /* CONFIG_EVA */
 0:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.endm
 
@@ -165,12 +191,18 @@ nonsc_processor:
  */
 	.macro	smp_slave_setup
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EVA
 	sync
 	ehb
 	platform_eva_init
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.endm
 

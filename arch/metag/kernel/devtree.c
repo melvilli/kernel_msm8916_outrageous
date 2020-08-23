@@ -35,7 +35,10 @@ void * __init early_init_dt_alloc_memory_arch(u64 size, u64 align)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const void * __init arch_get_next_mach(const char *const **match)
 {
 	static const struct machine_desc *mdesc = __arch_info_begin;
@@ -49,6 +52,9 @@ static const void * __init arch_get_next_mach(const char *const **match)
 	return m;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * setup_machine_fdt - Machine setup when an dtb was passed to the kernel
@@ -57,6 +63,7 @@ static const void * __init arch_get_next_mach(const char *const **match)
  * If a dtb was passed to the kernel, then use it to choose the correct
  * machine_desc and to setup the system.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct machine_desc * __init setup_machine_fdt(void *dt)
 {
@@ -129,6 +136,8 @@ void __init copy_fdt(void)
 		initial_boot_params = alloc;
 	}
 =======
+=======
+>>>>>>> v3.18
 const struct machine_desc * __init setup_machine_fdt(void *dt)
 {
 	const struct machine_desc *mdesc;
@@ -143,5 +152,8 @@ const struct machine_desc * __init setup_machine_fdt(void *dt)
 	pr_info("Machine name: %s\n", mdesc->name);
 
 	return mdesc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

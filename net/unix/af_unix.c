@@ -81,6 +81,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -320,6 +325,7 @@ found:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Support code for asymmetrically connected dgram sockets
  *
  * If a datagram socket is connected to a socket not itself connected
@@ -434,6 +440,8 @@ static int unix_dgram_peer_wake_me(struct sock *sk, struct sock *other)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline int unix_writable(struct sock *sk)
 {
 	return (atomic_read(&sk->sk_wmem_alloc) << 2) <= sk->sk_sndbuf;
@@ -486,7 +494,11 @@ static void unix_sock_destructor(struct sock *sk)
 	WARN_ON(sk->sk_socket);
 	if (!sock_flag(sk, SOCK_DEAD)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN(1, "Attempt to release alive unix socket: %p\n", sk);
+=======
+		pr_info("Attempt to release alive unix socket: %p\n", sk);
+>>>>>>> v3.18
 =======
 		pr_info("Attempt to release alive unix socket: %p\n", sk);
 >>>>>>> v3.18
@@ -502,7 +514,11 @@ static void unix_sock_destructor(struct sock *sk)
 	local_bh_enable();
 #ifdef UNIX_REFCNT_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "UNIX %p is destroyed, %ld are still alive.\n", sk,
+=======
+	pr_debug("UNIX %p is destroyed, %ld are still alive.\n", sk,
+>>>>>>> v3.18
 =======
 	pr_debug("UNIX %p is destroyed, %ld are still alive.\n", sk,
 >>>>>>> v3.18
@@ -547,8 +563,11 @@ static void unix_release_sock(struct sock *sk, int embrion)
 			sk_wake_async(skpair, SOCK_WAKE_WAITD, POLL_HUP);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		unix_dgram_peer_wake_disconnect(sk, skpair);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		sock_put(skpair); /* It may now die */
@@ -785,7 +804,10 @@ static struct sock *unix_create1(struct net *net, struct socket *sock)
 	mutex_init(&u->readlock); /* single task reading lock */
 	init_waitqueue_head(&u->peer_wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_waitqueue_func_entry(&u->peer_wake, unix_dgram_peer_wake_relay);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unix_insert_socket(unix_sockets_unbound(sk), sk);
@@ -1001,7 +1023,10 @@ static int unix_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 	struct unix_address *addr;
 	struct hlist_head *list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct path path = { NULL, NULL };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1020,6 +1045,7 @@ static int unix_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 	addr_len = err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sun_path[0]) {
 		umode_t mode = S_IFSOCK |
 		       (SOCK_INODE(sock)->i_mode & ~current_umask());
@@ -1034,6 +1060,11 @@ static int unix_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 	err = mutex_lock_interruptible(&u->readlock);
 	if (err)
 		goto out_put;
+=======
+	err = mutex_lock_interruptible(&u->readlock);
+	if (err)
+		goto out;
+>>>>>>> v3.18
 =======
 	err = mutex_lock_interruptible(&u->readlock);
 	if (err)
@@ -1056,7 +1087,10 @@ static int unix_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 
 	if (sun_path[0]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		struct path path;
 		umode_t mode = S_IFSOCK |
 		       (SOCK_INODE(sock)->i_mode & ~current_umask());
@@ -1067,6 +1101,9 @@ static int unix_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 			unix_release_addr(addr);
 			goto out_up;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		addr->hash = UNIX_HASH_SIZE;
 		hash = path.dentry->d_inode->i_ino & (UNIX_HASH_SIZE-1);
@@ -1095,9 +1132,12 @@ out_unlock:
 out_up:
 	mutex_unlock(&u->readlock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_put:
 	if (err)
 		path_put(&path);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out:
@@ -1186,8 +1226,11 @@ restart:
 		struct sock *old_peer = unix_peer(sk);
 		unix_peer(sk) = other;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unix_dgram_peer_wake_disconnect_wakeup(sk, old_peer);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		unix_state_double_unlock(sk, other);
@@ -1388,7 +1431,11 @@ restart:
 	spin_unlock(&other->sk_receive_queue.lock);
 	unix_state_unlock(other);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	other->sk_data_ready(other, 0);
+=======
+	other->sk_data_ready(other);
+>>>>>>> v3.18
 =======
 	other->sk_data_ready(other);
 >>>>>>> v3.18
@@ -1527,7 +1574,11 @@ static void unix_detach_fds(struct scm_cookie *scm, struct sk_buff *skb)
 
 	for (i = scm->fp->count-1; i >= 0; i--)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unix_notinflight(scm->fp->user, scm->fp->fp[i]);
+=======
+		unix_notinflight(scm->fp->fp[i]);
+>>>>>>> v3.18
 =======
 		unix_notinflight(scm->fp->fp[i]);
 >>>>>>> v3.18
@@ -1548,6 +1599,7 @@ static void unix_destruct_scm(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * The "user->unix_inflight" variable is protected by the garbage
  * collection lock, and we just read it locklessly here. If you go
@@ -1565,6 +1617,8 @@ static inline bool too_many_unix_fds(struct task_struct *p)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define MAX_RECURSION_LEVEL 4
 
 static int unix_attach_fds(struct scm_cookie *scm, struct sk_buff *skb)
@@ -1574,9 +1628,12 @@ static int unix_attach_fds(struct scm_cookie *scm, struct sk_buff *skb)
 	int unix_sock_count = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (too_many_unix_fds(current))
 		return -ETOOMANYREFS;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = scm->fp->count - 1; i >= 0; i--) {
@@ -1601,13 +1658,19 @@ static int unix_attach_fds(struct scm_cookie *scm, struct sk_buff *skb)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = scm->fp->count - 1; i >= 0; i--)
 		unix_inflight(scm->fp->user, scm->fp->fp[i]);
 =======
+=======
+>>>>>>> v3.18
 	if (unix_sock_count) {
 		for (i = scm->fp->count - 1; i >= 0; i--)
 			unix_inflight(scm->fp->fp[i]);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return max_level;
 }
@@ -1657,7 +1720,11 @@ static int unix_dgram_sendmsg(struct kiocb *kiocb, struct socket *sock,
 	struct net *net = sock_net(sk);
 	struct unix_sock *u = unix_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_un *sunaddr = msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_un *, sunaddr, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_un *, sunaddr, msg->msg_name);
 >>>>>>> v3.18
@@ -1671,7 +1738,10 @@ static int unix_dgram_sendmsg(struct kiocb *kiocb, struct socket *sock,
 	int max_level;
 	int data_len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int sk_locked;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1708,6 +1778,7 @@ static int unix_dgram_sendmsg(struct kiocb *kiocb, struct socket *sock,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len > SKB_MAX_ALLOC)
 		data_len = min_t(size_t,
 				 len - SKB_MAX_ALLOC,
@@ -1716,6 +1787,8 @@ static int unix_dgram_sendmsg(struct kiocb *kiocb, struct socket *sock,
 	skb = sock_alloc_send_pskb(sk, len - data_len, data_len,
 				   msg->msg_flags & MSG_DONTWAIT, &err);
 =======
+=======
+>>>>>>> v3.18
 	if (len > SKB_MAX_ALLOC) {
 		data_len = min_t(size_t,
 				 len - SKB_MAX_ALLOC,
@@ -1728,6 +1801,9 @@ static int unix_dgram_sendmsg(struct kiocb *kiocb, struct socket *sock,
 	skb = sock_alloc_send_pskb(sk, len - data_len, data_len,
 				   msg->msg_flags & MSG_DONTWAIT, &err,
 				   PAGE_ALLOC_COSTLY_ORDER);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (skb == NULL)
 		goto out;
@@ -1766,9 +1842,13 @@ restart:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk_locked = 0;
 	unix_state_lock(other);
 restart_locked:
+=======
+	unix_state_lock(other);
+>>>>>>> v3.18
 =======
 	unix_state_lock(other);
 >>>>>>> v3.18
@@ -1777,7 +1857,11 @@ restart_locked:
 		goto out_unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(sock_flag(other, SOCK_DEAD))) {
+=======
+	if (sock_flag(other, SOCK_DEAD)) {
+>>>>>>> v3.18
 =======
 	if (sock_flag(other, SOCK_DEAD)) {
 >>>>>>> v3.18
@@ -1789,6 +1873,7 @@ restart_locked:
 		sock_put(other);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!sk_locked)
 			unix_state_lock(sk);
 
@@ -1798,10 +1883,15 @@ restart_locked:
 			unix_dgram_peer_wake_disconnect_wakeup(sk, other);
 
 =======
+=======
+>>>>>>> v3.18
 		err = 0;
 		unix_state_lock(sk);
 		if (unix_peer(sk) == other) {
 			unix_peer(sk) = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			unix_state_unlock(sk);
 
@@ -1828,6 +1918,7 @@ restart_locked:
 			goto out_unlock;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* other == sk && unix_peer(other) != sk if
 	 * - unix_peer(sk) == NULL, destination address bound to sk
@@ -1866,6 +1957,8 @@ restart_locked:
 	if (unlikely(sk_locked))
 		unix_state_unlock(sk);
 =======
+=======
+>>>>>>> v3.18
 	if (unix_peer(other) != sk && unix_recvq_full(other)) {
 		if (!timeo) {
 			err = -EAGAIN;
@@ -1880,6 +1973,9 @@ restart_locked:
 
 		goto restart;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (sock_flag(other, SOCK_RCVTSTAMP))
@@ -1890,7 +1986,11 @@ restart_locked:
 		unix_sk(other)->recursion_level = max_level;
 	unix_state_unlock(other);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	other->sk_data_ready(other, len);
+=======
+	other->sk_data_ready(other);
+>>>>>>> v3.18
 =======
 	other->sk_data_ready(other);
 >>>>>>> v3.18
@@ -1900,8 +2000,11 @@ restart_locked:
 
 out_unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sk_locked)
 		unix_state_unlock(sk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unix_state_unlock(other);
@@ -1915,11 +2018,17 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* We use paged skbs for stream sockets, and limit occupancy to 32768
  * bytes, and a minimun of a full page.
  */
 #define UNIX_SKB_FRAGS_SZ (PAGE_SIZE << get_order(32768))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int unix_stream_sendmsg(struct kiocb *kiocb, struct socket *sock,
@@ -1935,6 +2044,10 @@ static int unix_stream_sendmsg(struct kiocb *kiocb, struct socket *sock,
 	bool fds_sent = false;
 	int max_level;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int data_len;
+>>>>>>> v3.18
 =======
 	int data_len;
 >>>>>>> v3.18
@@ -1964,6 +2077,7 @@ static int unix_stream_sendmsg(struct kiocb *kiocb, struct socket *sock,
 		goto pipe_err;
 
 	while (sent < len) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/*
 		 *	Optimisation for the fact that under 0.01% of X
@@ -2000,6 +2114,8 @@ static int unix_stream_sendmsg(struct kiocb *kiocb, struct socket *sock,
 
 
 =======
+=======
+>>>>>>> v3.18
 		size = len - sent;
 
 		/* Keep two messages in the pipe so it schedules better */
@@ -2018,6 +2134,9 @@ static int unix_stream_sendmsg(struct kiocb *kiocb, struct socket *sock,
 		if (!skb)
 			goto out_err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Only send the fds in the first buffer */
 		err = unix_scm_to_skb(siocb->scm, skb, !fds_sent);
@@ -2029,13 +2148,19 @@ static int unix_stream_sendmsg(struct kiocb *kiocb, struct socket *sock,
 		fds_sent = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = memcpy_fromiovec(skb_put(skb, size), msg->msg_iov, size);
 =======
+=======
+>>>>>>> v3.18
 		skb_put(skb, size - data_len);
 		skb->data_len = data_len;
 		skb->len = size;
 		err = skb_copy_datagram_from_iovec(skb, 0, msg->msg_iov,
 						   sent, size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err) {
 			kfree_skb(skb);
@@ -2054,7 +2179,11 @@ static int unix_stream_sendmsg(struct kiocb *kiocb, struct socket *sock,
 			unix_sk(other)->recursion_level = max_level;
 		unix_state_unlock(other);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		other->sk_data_ready(other, size);
+=======
+		other->sk_data_ready(other);
+>>>>>>> v3.18
 =======
 		other->sk_data_ready(other);
 >>>>>>> v3.18
@@ -2245,10 +2374,13 @@ static long unix_stream_data_wait(struct sock *sk, long timeo,
 		timeo = freezable_schedule_timeout(timeo);
 		unix_state_lock(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (sock_flag(sk, SOCK_DEAD))
 			break;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		clear_bit(SOCK_ASYNC_WAITDATA, &sk->sk_socket->flags);
@@ -2260,12 +2392,18 @@ static long unix_stream_data_wait(struct sock *sk, long timeo,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned int unix_skb_len(const struct sk_buff *skb)
 {
 	return skb->len - UNIXCB(skb).consumed;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int unix_stream_recvmsg(struct kiocb *iocb, struct socket *sock,
 			       struct msghdr *msg, size_t size,
@@ -2276,7 +2414,11 @@ static int unix_stream_recvmsg(struct kiocb *iocb, struct socket *sock,
 	struct sock *sk = sock->sk;
 	struct unix_sock *u = unix_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_un *sunaddr = msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_un *, sunaddr, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_un *, sunaddr, msg->msg_name);
 >>>>>>> v3.18
@@ -2309,8 +2451,11 @@ static int unix_stream_recvmsg(struct kiocb *iocb, struct socket *sock,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&u->readlock);
 =======
+=======
+>>>>>>> v3.18
 	err = mutex_lock_interruptible(&u->readlock);
 	if (unlikely(err)) {
 		/* recvmsg() in non blocking mode is supposed to return -EAGAIN
@@ -2319,6 +2464,9 @@ static int unix_stream_recvmsg(struct kiocb *iocb, struct socket *sock,
 		err = noblock ? -EAGAIN : -ERESTARTSYS;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	do {
@@ -2327,10 +2475,13 @@ static int unix_stream_recvmsg(struct kiocb *iocb, struct socket *sock,
 
 		unix_state_lock(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sock_flag(sk, SOCK_DEAD)) {
 			err = -ECONNRESET;
 			goto unlock;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		last = skb = skb_peek(&sk->sk_receive_queue);
@@ -2359,7 +2510,12 @@ again:
 			timeo = unix_stream_data_wait(sk, timeo, last);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (signal_pending(current)) {
+=======
+			if (signal_pending(current)
+			    ||  mutex_lock_interruptible(&u->readlock)) {
+>>>>>>> v3.18
 =======
 			if (signal_pending(current)
 			    ||  mutex_lock_interruptible(&u->readlock)) {
@@ -2369,7 +2525,10 @@ again:
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mutex_lock(&u->readlock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			continue;
@@ -2380,8 +2539,13 @@ again:
 
 		skip = sk_peek_offset(sk, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (skip >= skb->len) {
 			skip -= skb->len;
+=======
+		while (skip >= unix_skb_len(skb)) {
+			skip -= unix_skb_len(skb);
+>>>>>>> v3.18
 =======
 		while (skip >= unix_skb_len(skb)) {
 			skip -= unix_skb_len(skb);
@@ -2413,8 +2577,14 @@ again:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chunk = min_t(unsigned int, skb->len - skip, size);
 		if (memcpy_toiovec(msg->msg_iov, skb->data + skip, chunk)) {
+=======
+		chunk = min_t(unsigned int, unix_skb_len(skb) - skip, size);
+		if (skb_copy_datagram_iovec(skb, UNIXCB(skb).consumed + skip,
+					    msg->msg_iov, chunk)) {
+>>>>>>> v3.18
 =======
 		chunk = min_t(unsigned int, unix_skb_len(skb) - skip, size);
 		if (skb_copy_datagram_iovec(skb, UNIXCB(skb).consumed + skip,
@@ -2430,7 +2600,11 @@ again:
 		/* Mark read part of skb as used */
 		if (!(flags & MSG_PEEK)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			skb_pull(skb, chunk);
+=======
+			UNIXCB(skb).consumed += chunk;
+>>>>>>> v3.18
 =======
 			UNIXCB(skb).consumed += chunk;
 >>>>>>> v3.18
@@ -2441,7 +2615,11 @@ again:
 				unix_detach_fds(siocb->scm, skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (skb->len)
+=======
+			if (unix_skb_len(skb))
+>>>>>>> v3.18
 =======
 			if (unix_skb_len(skb))
 >>>>>>> v3.18
@@ -2459,6 +2637,7 @@ again:
 				siocb->scm->fp = scm_fp_dup(UNIXCB(skb).fp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (skip) {
 				sk_peek_offset_fwd(sk, chunk);
 				skip -= chunk;
@@ -2473,6 +2652,10 @@ again:
 			if (skb)
 				goto again;
 			unix_state_unlock(sk);
+=======
+			sk_peek_offset_fwd(sk, chunk);
+
+>>>>>>> v3.18
 =======
 			sk_peek_offset_fwd(sk, chunk);
 
@@ -2546,7 +2729,11 @@ long unix_inq_len(struct sock *sk)
 	    sk->sk_type == SOCK_SEQPACKET) {
 		skb_queue_walk(&sk->sk_receive_queue, skb)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			amount += skb->len;
+=======
+			amount += unix_skb_len(skb);
+>>>>>>> v3.18
 =======
 			amount += unix_skb_len(skb);
 >>>>>>> v3.18
@@ -2665,6 +2852,7 @@ static unsigned int unix_dgram_poll(struct file *file, struct socket *sock,
 
 	writable = unix_writable(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (writable) {
 		unix_state_lock(sk);
 
@@ -2676,6 +2864,8 @@ static unsigned int unix_dgram_poll(struct file *file, struct socket *sock,
 
 		unix_state_unlock(sk);
 =======
+=======
+>>>>>>> v3.18
 	other = unix_peer_get(sk);
 	if (other) {
 		if (unix_peer(other) != sk) {
@@ -2684,6 +2874,9 @@ static unsigned int unix_dgram_poll(struct file *file, struct socket *sock,
 				writable = 0;
 		}
 		sock_put(other);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2886,8 +3079,12 @@ static int __init af_unix_init(void)
 	rc = proto_register(&unix_proto, 1);
 	if (rc != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_CRIT "%s: Cannot create unix_sock SLAB cache!\n",
 		       __func__);
+=======
+		pr_crit("%s: Cannot create unix_sock SLAB cache!\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_crit("%s: Cannot create unix_sock SLAB cache!\n", __func__);
 >>>>>>> v3.18

@@ -102,12 +102,18 @@ struct brcmf_event;
 	BRCMF_ENUM_DEF(DCS_REQUEST, 73) \
 	BRCMF_ENUM_DEF(FIFO_CREDIT_MAP, 74) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BRCMF_ENUM_DEF(ACTION_FRAME_RX, 75)
 =======
+=======
+>>>>>>> v3.18
 	BRCMF_ENUM_DEF(ACTION_FRAME_RX, 75) \
 	BRCMF_ENUM_DEF(TDLS_PEER_EVENT, 92) \
 	BRCMF_ENUM_DEF(BCMC_CREDIT_SUPPORT, 127) \
 	BRCMF_ENUM_DEF(PSTA_PRIMARY_INTF_IND, 128)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define BRCMF_ENUM_DEF(id, val) \
@@ -121,6 +127,11 @@ enum brcmf_fweh_event_code {
 #undef BRCMF_ENUM_DEF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BRCMF_EVENTING_MASK_LEN		DIV_ROUND_UP(BRCMF_E_LAST, 8)
+
+>>>>>>> v3.18
 =======
 #define BRCMF_EVENTING_MASK_LEN		DIV_ROUND_UP(BRCMF_E_LAST, 8)
 
@@ -131,7 +142,10 @@ enum brcmf_fweh_event_code {
 #define BRCMF_EVENT_MSG_GROUP		0x04
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* status field values in struct brcmf_event_msg */
 #define BRCMF_E_STATUS_SUCCESS			0
 #define BRCMF_E_STATUS_FAIL			1
@@ -184,6 +198,9 @@ enum brcmf_fweh_event_code {
 #define BRCMF_E_IF_ROLE_P2P_GO			3
 #define BRCMF_E_IF_ROLE_P2P_CLIENT		4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * definitions for event packet validation.
@@ -224,7 +241,10 @@ struct brcmf_event_msg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct brcmf_if_event {
 	u8 ifidx;
 	u8 action;
@@ -233,6 +253,9 @@ struct brcmf_if_event {
 	u8 role;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef int (*brcmf_fweh_handler_t)(struct brcmf_if *ifp,
 				    const struct brcmf_event_msg *evtmsg,

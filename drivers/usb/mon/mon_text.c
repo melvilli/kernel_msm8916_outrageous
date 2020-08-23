@@ -348,7 +348,11 @@ static int mon_text_open(struct inode *inode, struct file *file)
 	rp->r.rnf_complete = mon_text_complete;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snprintf(rp->slab_name, SLAB_NAME_SZ, "mon_text_%pK", rp);
+=======
+	snprintf(rp->slab_name, SLAB_NAME_SZ, "mon_text_%p", rp);
+>>>>>>> v3.18
 =======
 	snprintf(rp->slab_name, SLAB_NAME_SZ, "mon_text_%p", rp);
 >>>>>>> v3.18

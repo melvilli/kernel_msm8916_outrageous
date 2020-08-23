@@ -77,7 +77,11 @@ static int lpc32xx_read_raw(struct iio_dev *indio_dev,
 	if (mask == IIO_CHAN_INFO_RAW) {
 		mutex_lock(&indio_dev->mlock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_prepare_enable(info->clk);
+=======
+		clk_enable(info->clk);
+>>>>>>> v3.18
 =======
 		clk_enable(info->clk);
 >>>>>>> v3.18
@@ -89,7 +93,11 @@ static int lpc32xx_read_raw(struct iio_dev *indio_dev,
 			LPC32XX_ADC_CTRL(info->adc_base));
 		wait_for_completion(&info->completion); /* set by ISR */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_disable_unprepare(info->clk);
+=======
+		clk_disable(info->clk);
+>>>>>>> v3.18
 =======
 		clk_disable(info->clk);
 >>>>>>> v3.18
@@ -146,6 +154,7 @@ static int lpc32xx_adc_probe(struct platform_device *pdev)
 	if (!res) {
 		dev_err(&pdev->dev, "failed to get platform I/O memory\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = -EBUSY;
 		goto errout1;
 	}
@@ -184,6 +193,8 @@ static int lpc32xx_adc_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed requesting interrupt\n");
 		goto errout4;
 =======
+=======
+>>>>>>> v3.18
 		return -EBUSY;
 	}
 
@@ -217,6 +228,9 @@ static int lpc32xx_adc_probe(struct platform_device *pdev)
 	if (retval < 0) {
 		dev_err(&pdev->dev, "failed requesting interrupt\n");
 		return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -232,9 +246,15 @@ static int lpc32xx_adc_probe(struct platform_device *pdev)
 	iodev->num_channels = ARRAY_SIZE(lpc32xx_adc_iio_channels);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = iio_device_register(iodev);
 	if (retval)
 		goto errout5;
+=======
+	retval = devm_iio_device_register(&pdev->dev, iodev);
+	if (retval)
+		return retval;
+>>>>>>> v3.18
 =======
 	retval = devm_iio_device_register(&pdev->dev, iodev);
 	if (retval)
@@ -244,6 +264,7 @@ static int lpc32xx_adc_probe(struct platform_device *pdev)
 	dev_info(&pdev->dev, "LPC32XX ADC driver loaded, IRQ %d\n", irq);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 errout5:
@@ -274,6 +295,8 @@ static int lpc32xx_adc_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_OF
@@ -287,7 +310,10 @@ MODULE_DEVICE_TABLE(of, lpc32xx_adc_match);
 static struct platform_driver lpc32xx_adc_driver = {
 	.probe		= lpc32xx_adc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= lpc32xx_adc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

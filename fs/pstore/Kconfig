@@ -2,6 +2,11 @@ config PSTORE
 	bool "Persistent store support"
 	default n
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ZLIB_DEFLATE
+	select ZLIB_INFLATE
+>>>>>>> v3.18
 =======
 	select ZLIB_DEFLATE
 	select ZLIB_INFLATE
@@ -25,6 +30,7 @@ config PSTORE_CONSOLE
 	  messages, even if no oops or panic happened.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PSTORE_PMSG
 	bool "Log user space messages"
 	depends on PSTORE
@@ -35,6 +41,8 @@ config PSTORE_PMSG
 
 	  If unsure, say N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config PSTORE_FTRACE

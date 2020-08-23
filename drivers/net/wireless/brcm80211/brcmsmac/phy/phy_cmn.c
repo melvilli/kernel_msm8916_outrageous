@@ -129,7 +129,11 @@ static const u8 ofdm_rate_lookup[] = {
 void wlc_phyreg_enter(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -139,7 +143,11 @@ void wlc_phyreg_enter(struct brcms_phy_pub *pih)
 void wlc_phyreg_exit(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -149,7 +157,11 @@ void wlc_phyreg_exit(struct brcms_phy_pub *pih)
 void wlc_radioreg_enter(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -161,7 +173,11 @@ void wlc_radioreg_enter(struct brcms_phy_pub *pih)
 void wlc_radioreg_exit(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -603,7 +619,11 @@ err:
 void wlc_phy_detach(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -634,7 +654,11 @@ wlc_phy_get_phyversion(struct brcms_phy_pub *pih, u16 *phytype, u16 *phyrev,
 		       u16 *radioid, u16 *radiover)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -649,7 +673,11 @@ wlc_phy_get_phyversion(struct brcms_phy_pub *pih, u16 *phytype, u16 *phyrev,
 bool wlc_phy_get_encore(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -659,7 +687,11 @@ bool wlc_phy_get_encore(struct brcms_phy_pub *pih)
 u32 wlc_phy_get_coreflags(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -669,7 +701,11 @@ u32 wlc_phy_get_coreflags(struct brcms_phy_pub *pih)
 void wlc_phy_anacore(struct brcms_phy_pub *pih, bool on)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -710,7 +746,11 @@ void wlc_phy_anacore(struct brcms_phy_pub *pih, bool on)
 u32 wlc_phy_clk_bwbits(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -739,7 +779,11 @@ u32 wlc_phy_clk_bwbits(struct brcms_phy_pub *pih)
 void wlc_phy_por_inform(struct brcms_phy_pub *ppi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -750,7 +794,11 @@ void wlc_phy_por_inform(struct brcms_phy_pub *ppi)
 void wlc_phy_edcrs_lock(struct brcms_phy_pub *pih, bool lock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -766,7 +814,11 @@ void wlc_phy_edcrs_lock(struct brcms_phy_pub *pih, bool lock)
 void wlc_phy_initcal_enable(struct brcms_phy_pub *pih, bool initcal)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -777,7 +829,11 @@ void wlc_phy_initcal_enable(struct brcms_phy_pub *pih, bool initcal)
 void wlc_phy_hw_clk_state_upd(struct brcms_phy_pub *pih, bool newstate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -791,7 +847,11 @@ void wlc_phy_hw_clk_state_upd(struct brcms_phy_pub *pih, bool newstate)
 void wlc_phy_hw_state_upd(struct brcms_phy_pub *pih, bool newstate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -807,7 +867,11 @@ void wlc_phy_init(struct brcms_phy_pub *pih, u16 chanspec)
 	u32 mc;
 	void (*phy_init)(struct brcms_phy *) = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -863,7 +927,11 @@ void wlc_phy_init(struct brcms_phy_pub *pih, u16 chanspec)
 void wlc_phy_cal_init(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -885,7 +953,11 @@ void wlc_phy_cal_init(struct brcms_phy_pub *pih)
 int wlc_phy_down(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1143,7 +1215,11 @@ void wlc_phy_do_dummy_tx(struct brcms_phy *pi, bool ofdm, bool pa_on)
 void wlc_phy_hold_upd(struct brcms_phy_pub *pih, u32 id, bool set)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1159,7 +1235,11 @@ void wlc_phy_hold_upd(struct brcms_phy_pub *pih, u32 id, bool set)
 void wlc_phy_mute_upd(struct brcms_phy_pub *pih, bool mute, u32 flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1177,7 +1257,11 @@ void wlc_phy_mute_upd(struct brcms_phy_pub *pih, bool mute, u32 flags)
 void wlc_phy_clear_tssi(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1200,7 +1284,11 @@ static bool wlc_phy_cal_txpower_recalc_sw(struct brcms_phy *pi)
 void wlc_phy_switch_radio(struct brcms_phy_pub *pih, bool on)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1238,7 +1326,11 @@ void wlc_phy_switch_radio(struct brcms_phy_pub *pih, bool on)
 u16 wlc_phy_bw_state_get(struct brcms_phy_pub *ppi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1249,7 +1341,11 @@ u16 wlc_phy_bw_state_get(struct brcms_phy_pub *ppi)
 void wlc_phy_bw_state_set(struct brcms_phy_pub *ppi, u16 bw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1260,7 +1356,11 @@ void wlc_phy_bw_state_set(struct brcms_phy_pub *ppi, u16 bw)
 void wlc_phy_chanspec_radio_set(struct brcms_phy_pub *ppi, u16 newch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1271,7 +1371,11 @@ void wlc_phy_chanspec_radio_set(struct brcms_phy_pub *ppi, u16 newch)
 u16 wlc_phy_chanspec_get(struct brcms_phy_pub *ppi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1282,7 +1386,11 @@ u16 wlc_phy_chanspec_get(struct brcms_phy_pub *ppi)
 void wlc_phy_chanspec_set(struct brcms_phy_pub *ppi, u16 chanspec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1335,7 +1443,11 @@ void wlc_phy_chanspec_ch14_widefilter_set(struct brcms_phy_pub *ppi,
 					  bool wide_filter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1359,7 +1471,11 @@ wlc_phy_chanspec_band_validch(struct brcms_phy_pub *ppi, uint band,
 			      struct brcms_chanvec *channels)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1384,7 +1500,11 @@ wlc_phy_chanspec_band_validch(struct brcms_phy_pub *ppi, uint band,
 u16 wlc_phy_chanspec_band_firstch(struct brcms_phy_pub *ppi, uint band)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1432,7 +1552,11 @@ u16 wlc_phy_chanspec_band_firstch(struct brcms_phy_pub *ppi, uint band)
 int wlc_phy_txpower_get(struct brcms_phy_pub *ppi, uint *qdbm, bool *override)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1448,7 +1572,11 @@ void wlc_phy_txpower_target_set(struct brcms_phy_pub *ppi,
 {
 	bool mac_enabled = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1500,7 +1628,11 @@ void wlc_phy_txpower_target_set(struct brcms_phy_pub *ppi,
 int wlc_phy_txpower_set(struct brcms_phy_pub *ppi, uint qdbm, bool override)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1540,7 +1672,11 @@ wlc_phy_txpower_sromlimit(struct brcms_phy_pub *ppi, uint channel, u8 *min_pwr,
 			  u8 *max_pwr, int txp_rate_idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1593,7 +1729,11 @@ wlc_phy_txpower_sromlimit_max_get(struct brcms_phy_pub *ppi, uint chan,
 				  u8 *max_txpwr, u8 *min_txpwr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1634,7 +1774,11 @@ wlc_phy_txpower_boardlimit_band(struct brcms_phy_pub *ppi, uint bandunit,
 u8 wlc_phy_txpower_get_target_min(struct brcms_phy_pub *ppi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1645,7 +1789,11 @@ u8 wlc_phy_txpower_get_target_min(struct brcms_phy_pub *ppi)
 u8 wlc_phy_txpower_get_target_max(struct brcms_phy_pub *ppi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1687,11 +1835,15 @@ wlc_user_txpwr_antport_to_rfport(struct brcms_phy *pi, uint chan, u32 band,
 				 u8 rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s8 offset = 0;
 
 	if (!pi->user_txpwr_at_rfport)
 		return offset;
 	return offset;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1969,7 +2121,11 @@ wlc_phy_txpower_reg_limit_calc(struct brcms_phy *pi, struct txpwr_limits *txpwr,
 void wlc_phy_txpwr_percent_set(struct brcms_phy_pub *ppi, u8 txpwr_percent)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1980,7 +2136,11 @@ void wlc_phy_txpwr_percent_set(struct brcms_phy_pub *ppi, u8 txpwr_percent)
 void wlc_phy_machwcap_set(struct brcms_phy_pub *ppi, u32 machwcap)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -1991,7 +2151,11 @@ void wlc_phy_machwcap_set(struct brcms_phy_pub *ppi, u32 machwcap)
 void wlc_phy_runbist_config(struct brcms_phy_pub *ppi, bool start_end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2026,7 +2190,11 @@ wlc_phy_txpower_limit_set(struct brcms_phy_pub *ppi, struct txpwr_limits *txpwr,
 			  u16 chanspec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2054,7 +2222,11 @@ wlc_phy_txpower_limit_set(struct brcms_phy_pub *ppi, struct txpwr_limits *txpwr,
 void wlc_phy_ofdm_rateset_war(struct brcms_phy_pub *pih, bool war)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2065,7 +2237,11 @@ void wlc_phy_ofdm_rateset_war(struct brcms_phy_pub *pih, bool war)
 void wlc_phy_bf_preempt_enable(struct brcms_phy_pub *pih, bool bf_preempt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2126,7 +2302,11 @@ void wlc_phy_txpower_update_shm(struct brcms_phy *pi)
 bool wlc_phy_txpower_hw_ctrl_get(struct brcms_phy_pub *ppi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2140,7 +2320,11 @@ bool wlc_phy_txpower_hw_ctrl_get(struct brcms_phy_pub *ppi)
 void wlc_phy_txpower_hw_ctrl_set(struct brcms_phy_pub *ppi, bool hwpwrctrl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2227,7 +2411,11 @@ wlc_phy_txpower_get_current(struct brcms_phy_pub *ppi, struct tx_power *power,
 			    uint channel)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2329,7 +2517,11 @@ wlc_phy_txpower_get_current(struct brcms_phy_pub *ppi, struct tx_power *power,
 void wlc_phy_antsel_type_set(struct brcms_phy_pub *ppi, u8 antsel_type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2340,7 +2532,11 @@ void wlc_phy_antsel_type_set(struct brcms_phy_pub *ppi, u8 antsel_type)
 bool wlc_phy_test_ison(struct brcms_phy_pub *ppi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2351,7 +2547,11 @@ bool wlc_phy_test_ison(struct brcms_phy_pub *ppi)
 void wlc_phy_ant_rxdiv_set(struct brcms_phy_pub *ppi, u8 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2488,7 +2688,11 @@ static s8 wlc_phy_noise_read_shmem(struct brcms_phy *pi)
 void wlc_phy_noise_sample_intr(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2548,7 +2752,11 @@ static void
 wlc_phy_noise_sample_request(struct brcms_phy_pub *pih, u8 reason, u8 ch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2744,7 +2952,11 @@ int wlc_phy_rssi_compute(struct brcms_phy_pub *pih,
 	int rssi = rxh->PhyRxStatus_1 & PRXS1_JSSI_MASK;
 	uint radioid = pih->radioid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2808,7 +3020,11 @@ void wlc_phy_set_deaf(struct brcms_phy_pub *ppi, bool user_flag)
 void wlc_phy_watchdog(struct brcms_phy_pub *pih)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2872,7 +3088,11 @@ void wlc_phy_watchdog(struct brcms_phy_pub *pih)
 void wlc_phy_BSSinit(struct brcms_phy_pub *pih, bool bonlyap, int rssi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -2936,7 +3156,11 @@ void wlc_phy_cal_perical(struct brcms_phy_pub *pih, u8 reason)
 	s16 delta_temp = 0;
 	bool do_periodic_cal = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -3033,7 +3257,11 @@ u8 wlc_phy_nbits(s32 value)
 void wlc_phy_stf_chain_init(struct brcms_phy_pub *pih, u8 txchain, u8 rxchain)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -3048,7 +3276,11 @@ void wlc_phy_stf_chain_init(struct brcms_phy_pub *pih, u8 txchain, u8 rxchain)
 void wlc_phy_stf_chain_set(struct brcms_phy_pub *pih, u8 txchain, u8 rxchain)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -3064,7 +3296,11 @@ void wlc_phy_stf_chain_set(struct brcms_phy_pub *pih, u8 txchain, u8 rxchain)
 void wlc_phy_stf_chain_get(struct brcms_phy_pub *pih, u8 *txchain, u8 *rxchain)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -3078,7 +3314,11 @@ u8 wlc_phy_stf_chain_active_get(struct brcms_phy_pub *pih)
 	s16 nphy_currtemp;
 	u8 active_bitmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -3112,7 +3352,11 @@ u8 wlc_phy_stf_chain_active_get(struct brcms_phy_pub *pih)
 s8 wlc_phy_stf_ssmode_get(struct brcms_phy_pub *pih, u16 chanspec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) pih;
+=======
+	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(pih, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -3193,7 +3437,11 @@ s8 wlc_phy_upd_rssi_offset(struct brcms_phy *pi, s8 rssi, u16 chanspec)
 bool wlc_phy_txpower_ipa_ison(struct brcms_phy_pub *ppi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18

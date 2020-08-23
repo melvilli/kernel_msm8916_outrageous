@@ -111,11 +111,14 @@
  *	@ TESTCASE_START
  *	bl	__kprobes_test_case_start
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	@ start of inline data...
  *	.ascii "mov r0, r7"	@ text title for test case
  *	.byte	0
  *	.align	2
 =======
+=======
+>>>>>>> v3.18
  *	.pushsection .rodata
  *	"10:
  *	.ascii "mov r0, r7"	@ text title for test case
@@ -123,6 +126,9 @@
  *	.popsection
  *	@ start of inline data...
  *	.word	10b		@ pointer to title in .rodata section
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  *	@ TEST_ARG_REG
@@ -212,11 +218,14 @@
 #include <linux/slab.h>
 #include <linux/kprobes.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/opcodes.h>
 
 #include "kprobes.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/errno.h>
 #include <linux/stddef.h>
 #include <linux/bug.h>
@@ -225,6 +234,9 @@
 #include "kprobes.h"
 #include "probes-arm.h"
 #include "probes-thumb.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "kprobes-test.h"
 
@@ -243,6 +255,10 @@ static int post_handler_called;
 static int jprobe_func_called;
 static int kretprobe_handler_called;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int tests_failed;
+>>>>>>> v3.18
 =======
 static int tests_failed;
 >>>>>>> v3.18
@@ -483,7 +499,10 @@ static int run_api_tests(long (*func)(long, long))
 	pr_info("    jprobe\n");
 	ret = test_jprobe(func);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_THUMB2_KERNEL) && !defined(MODULE)
 	if (ret == -EINVAL) {
 		pr_err("FAIL: Known longtime bug with jprobe on Thumb kernels\n");
@@ -491,6 +510,9 @@ static int run_api_tests(long (*func)(long, long))
 		ret = 0;
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;
@@ -995,7 +1017,11 @@ void __naked __kprobes_test_case_start(void)
 		"stmdb	sp!, {r4-r11}				\n\t"
 		"sub	sp, sp, #"__stringify(TEST_MEMORY_SIZE)"\n\t"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"bic	r0, lr, #1  @ r0 = inline title string	\n\t"
+=======
+		"bic	r0, lr, #1  @ r0 = inline data		\n\t"
+>>>>>>> v3.18
 =======
 		"bic	r0, lr, #1  @ r0 = inline data		\n\t"
 >>>>>>> v3.18
@@ -1369,7 +1395,12 @@ static unsigned long next_instruction(unsigned long pc)
 {
 #ifdef CONFIG_THUMB2_KERNEL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((pc & 1) && !is_wide_instruction(*(u16 *)(pc - 1)))
+=======
+	if ((pc & 1) &&
+	    !is_wide_instruction(__mem_to_opcode_thumb16(*(u16 *)(pc - 1))))
+>>>>>>> v3.18
 =======
 	if ((pc & 1) &&
 	    !is_wide_instruction(__mem_to_opcode_thumb16(*(u16 *)(pc - 1))))
@@ -1381,7 +1412,11 @@ static unsigned long next_instruction(unsigned long pc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static uintptr_t __used kprobes_test_case_start(const char *title, void *stack)
+=======
+static uintptr_t __used kprobes_test_case_start(const char **title, void *stack)
+>>>>>>> v3.18
 =======
 static uintptr_t __used kprobes_test_case_start(const char **title, void *stack)
 >>>>>>> v3.18
@@ -1391,9 +1426,14 @@ static uintptr_t __used kprobes_test_case_start(const char **title, void *stack)
 	unsigned long test_code;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	args = (struct test_arg *)PTR_ALIGN(title + strlen(title) + 1, 4);
 
 	current_title = title;
+=======
+	current_title = *title++;
+	args = (struct test_arg *)title;
+>>>>>>> v3.18
 =======
 	current_title = *title++;
 	args = (struct test_arg *)title;
@@ -1428,6 +1468,7 @@ static uintptr_t __used kprobes_test_case_start(const char **title, void *stack)
 	if (test_case_is_thumb) {
 		u16 *p = (u16 *)(test_code & ~1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		current_instruction = p[0];
 		if (is_wide_instruction(current_instruction)) {
 			current_instruction <<= 16;
@@ -1436,6 +1477,8 @@ static uintptr_t __used kprobes_test_case_start(const char **title, void *stack)
 	} else {
 		current_instruction = *(u32 *)test_code;
 =======
+=======
+>>>>>>> v3.18
 		current_instruction = __mem_to_opcode_thumb16(p[0]);
 		if (is_wide_instruction(current_instruction)) {
 			u16 instr2 = __mem_to_opcode_thumb16(p[1]);
@@ -1443,6 +1486,9 @@ static uintptr_t __used kprobes_test_case_start(const char **title, void *stack)
 		}
 	} else {
 		current_instruction = __mem_to_opcode_arm(*(u32 *)test_code);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1672,7 +1718,11 @@ static int __init run_all_tests(void)
 
 	pr_info("ARM instruction simulation\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = run_test_cases(kprobe_arm_test_cases, kprobe_decode_arm_table);
+=======
+	ret = run_test_cases(kprobe_arm_test_cases, probes_decode_arm_table);
+>>>>>>> v3.18
 =======
 	ret = run_test_cases(kprobe_arm_test_cases, probes_decode_arm_table);
 >>>>>>> v3.18
@@ -1699,7 +1749,11 @@ static int __init run_all_tests(void)
 	pr_info("16-bit Thumb instruction simulation\n");
 	ret = run_test_cases(kprobe_thumb16_test_cases,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				kprobe_decode_thumb16_table);
+=======
+				probes_decode_thumb16_table);
+>>>>>>> v3.18
 =======
 				probes_decode_thumb16_table);
 >>>>>>> v3.18
@@ -1709,7 +1763,11 @@ static int __init run_all_tests(void)
 	pr_info("32-bit Thumb instruction simulation\n");
 	ret = run_test_cases(kprobe_thumb32_test_cases,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				kprobe_decode_thumb32_table);
+=======
+				probes_decode_thumb32_table);
+>>>>>>> v3.18
 =======
 				probes_decode_thumb32_table);
 >>>>>>> v3.18
@@ -1743,6 +1801,11 @@ static int __init run_all_tests(void)
 out:
 	if (ret == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ret = tests_failed;
+	if (ret == 0)
+>>>>>>> v3.18
 =======
 		ret = tests_failed;
 	if (ret == 0)

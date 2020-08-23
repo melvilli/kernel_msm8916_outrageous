@@ -22,7 +22,10 @@
  * remain compatible.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GCOV_COUNTERS		5
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define GCOV_DATA_MAGIC		((unsigned int) 0x67636461)
@@ -37,6 +40,7 @@ typedef long gcov_type;
 typedef long long gcov_type;
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * struct gcov_fn_info - profiling meta data per function
@@ -93,6 +97,8 @@ struct gcov_info {
 	struct gcov_ctr_info		counts[0];
 };
 =======
+=======
+>>>>>>> v3.18
 /* Opaque gcov_info. The gcov structures can change as for example in gcc 4.7 so
  * we cannot use full definition here and they need to be placed in gcc specific
  * implementation of gcov. This also means no direct access to the members in
@@ -105,6 +111,9 @@ unsigned int gcov_info_version(struct gcov_info *info);
 struct gcov_info *gcov_info_next(struct gcov_info *info);
 void gcov_info_link(struct gcov_info *info);
 void gcov_info_unlink(struct gcov_info *prev, struct gcov_info *info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Base interface. */

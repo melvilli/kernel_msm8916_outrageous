@@ -23,6 +23,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -34,12 +35,17 @@
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
  * Please send any bug reports or fixes you make to the
  * email address(es):
  *    lksctp developers <linux-sctp@vger.kernel.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Written or modified by:
@@ -53,9 +59,12 @@
  *    Ryan Layer	    <rmlayer@us.ibm.com>
  *    Kevin Gao             <kevin.gao@intel.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -75,6 +84,10 @@
 
 /* Forward declarations for internal functions. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void sctp_select_active_and_retran_path(struct sctp_association *asoc);
+>>>>>>> v3.18
 =======
 static void sctp_select_active_and_retran_path(struct sctp_association *asoc);
 >>>>>>> v3.18
@@ -103,10 +116,16 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	/* Discarding const is appropriate here.  */
 	asoc->ep = (struct sctp_endpoint *)ep;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sctp_endpoint_hold(asoc->ep);
 
 	/* Hold the sock.  */
 	asoc->base.sk = (struct sock *)sk;
+=======
+	asoc->base.sk = (struct sock *)sk;
+
+	sctp_endpoint_hold(asoc->ep);
+>>>>>>> v3.18
 =======
 	asoc->base.sk = (struct sock *)sk;
 
@@ -120,7 +139,10 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	/* Initialize the object handling fields.  */
 	atomic_set(&asoc->base.refcnt, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc->base.dead = false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -128,6 +150,7 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	sctp_bind_addr_init(&asoc->base.bind_addr, ep->base.bind_addr.port);
 
 	asoc->state = SCTP_STATE_CLOSED;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* Set these values from the socket values, a conversion between
@@ -137,6 +160,9 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	asoc->cookie_life.tv_usec = (sp->assocparams.sasoc_cookie_life % 1000)
 					* 1000;
 	asoc->frag_point = 0;
+=======
+	asoc->cookie_life = ms_to_ktime(sp->assocparams.sasoc_cookie_life);
+>>>>>>> v3.18
 =======
 	asoc->cookie_life = ms_to_ktime(sp->assocparams.sasoc_cookie_life);
 >>>>>>> v3.18
@@ -153,8 +179,11 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	asoc->rto_min = msecs_to_jiffies(sp->rtoinfo.srto_min);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc->overall_error_count = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Initialize the association's heartbeat interval based on the
@@ -178,7 +207,11 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	asoc->param_flags = sp->param_flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Initialize the maximum mumber of new data packets that can be sent
+=======
+	/* Initialize the maximum number of new data packets that can be sent
+>>>>>>> v3.18
 =======
 	/* Initialize the maximum number of new data packets that can be sent
 >>>>>>> v3.18
@@ -188,12 +221,18 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 
 	/* initialize association timers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_NONE] = 0;
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_T1_COOKIE] = asoc->rto_initial;
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_T1_INIT] = asoc->rto_initial;
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_T2_SHUTDOWN] = asoc->rto_initial;
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_T3_RTX] = 0;
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_T4_RTO] = 0;
+=======
+	asoc->timeouts[SCTP_EVENT_TIMEOUT_T1_COOKIE] = asoc->rto_initial;
+	asoc->timeouts[SCTP_EVENT_TIMEOUT_T1_INIT] = asoc->rto_initial;
+	asoc->timeouts[SCTP_EVENT_TIMEOUT_T2_SHUTDOWN] = asoc->rto_initial;
+>>>>>>> v3.18
 =======
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_T1_COOKIE] = asoc->rto_initial;
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_T1_INIT] = asoc->rto_initial;
@@ -208,10 +247,15 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 		= 5 * asoc->rto_max;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_HEARTBEAT] = 0;
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_SACK] = asoc->sackdelay;
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE] =
 		min_t(unsigned long, sp->autoclose, net->sctp.max_autoclose) * HZ;
+=======
+	asoc->timeouts[SCTP_EVENT_TIMEOUT_SACK] = asoc->sackdelay;
+	asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE] = sp->autoclose * HZ;
+>>>>>>> v3.18
 =======
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_SACK] = asoc->sackdelay;
 	asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE] = sp->autoclose * HZ;
@@ -234,11 +278,14 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 		 msecs_to_jiffies(sp->initmsg.sinit_max_init_timeo);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Allocate storage for the ssnmap after the inbound and outbound
 	 * streams have been negotiated during Init.
 	 */
 	asoc->ssnmap = NULL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Set the local window size for receive.
@@ -254,6 +301,7 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	asoc->a_rwnd = asoc->rwnd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc->rwnd_over = 0;
 	asoc->rwnd_press = 0;
 
@@ -268,6 +316,11 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	asoc->peer.rwnd = SCTP_DEFAULT_MAXWINDOW;
 
 >>>>>>> v3.18
+=======
+	/* Use my own max window until I learn something better.  */
+	asoc->peer.rwnd = SCTP_DEFAULT_MAXWINDOW;
+
+>>>>>>> v3.18
 	/* Initialize the receive memory counter */
 	atomic_set(&asoc->rmem_alloc, 0);
 
@@ -275,10 +328,13 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 
 	asoc->c.my_vtag = sctp_generate_tag(ep);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc->peer.i.init_tag = 0;     /* INIT needs a vtag of 0. */
 	asoc->c.peer_vtag = 0;
 	asoc->c.my_ttag   = 0;
 	asoc->c.peer_ttag = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	asoc->c.my_port = ep->base.bind_addr.port;
@@ -292,7 +348,10 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	asoc->highest_sacked = asoc->ctsn_ack_point;
 	asoc->last_cwr_tsn = asoc->ctsn_ack_point;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc->unack_data = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -314,7 +373,10 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	/* Make an empty list of remote transport addresses.  */
 	INIT_LIST_HEAD(&asoc->peer.transport_addr_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc->peer.transport_count = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -331,13 +393,17 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	 */
 	asoc->peer.sack_needed = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc->peer.sack_cnt = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	asoc->peer.sack_generation = 1;
 
 	/* Assume that the peer will tell us if he recognizes ASCONF
 	 * as part of INIT exchange.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * The sctp_addip_noauth option is there for backward compatibilty
 	 * and will revert old behavior.
@@ -349,11 +415,16 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	asoc->src_out_of_asoc_ok = 0;
 	asoc->new_transport = NULL;
 =======
+=======
+>>>>>>> v3.18
 	 * The sctp_addip_noauth option is there for backward compatibility
 	 * and will revert old behavior.
 	 */
 	if (net->sctp.addip_noauth)
 		asoc->peer.asconf_capable = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Create an input queue.  */
@@ -367,12 +438,15 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 		goto fail_init;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(&asoc->peer.tsn_map, 0, sizeof(struct sctp_tsnmap));
 
 	asoc->need_ecne = 0;
 
 	asoc->assoc_id = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Assume that peer would support both address types unless we are
@@ -384,8 +458,11 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	INIT_LIST_HEAD(&asoc->asocs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc->autoclose = sp->autoclose;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	asoc->default_stream = sp->default_stream;
@@ -396,9 +473,12 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 	asoc->default_rcv_context = sp->default_rcv_context;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* SCTP_GET_ASSOC_STATS COUNTERS */
 	memset(&asoc->stats, 0, sizeof(struct sctp_priv_assoc_stats));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* AUTH related initializations */
@@ -409,9 +489,13 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 
 	asoc->active_key_id = ep->active_key_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc->asoc_shared_key = NULL;
 
 	asoc->default_hmac_id = 0;
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -433,8 +517,13 @@ static struct sctp_association *sctp_association_init(struct sctp_association *a
 
 fail_init:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sctp_endpoint_put(asoc->ep);
 	sock_put(asoc->base.sk);
+=======
+	sock_put(asoc->base.sk);
+	sctp_endpoint_put(asoc->ep);
+>>>>>>> v3.18
 =======
 	sock_put(asoc->base.sk);
 	sctp_endpoint_put(asoc->ep);
@@ -451,7 +540,11 @@ struct sctp_association *sctp_association_new(const struct sctp_endpoint *ep,
 	struct sctp_association *asoc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc = t_new(struct sctp_association, gfp);
+=======
+	asoc = kzalloc(sizeof(*asoc), gfp);
+>>>>>>> v3.18
 =======
 	asoc = kzalloc(sizeof(*asoc), gfp);
 >>>>>>> v3.18
@@ -463,7 +556,12 @@ struct sctp_association *sctp_association_new(const struct sctp_endpoint *ep,
 
 	SCTP_DBG_OBJCNT_INC(assoc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("Created asoc %p\n", asoc);
+=======
+
+	pr_debug("Created asoc %p\n", asoc);
+>>>>>>> v3.18
 =======
 
 	pr_debug("Created asoc %p\n", asoc);
@@ -566,12 +664,18 @@ void sctp_association_free(struct sctp_association *asoc)
 static void sctp_association_destroy(struct sctp_association *asoc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_ASSERT(asoc->base.dead, "Assoc is not dead", return);
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(!asoc->base.dead)) {
 		WARN(1, "Attempt to destroy undead association %p!\n", asoc);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sctp_endpoint_put(asoc->ep);
@@ -654,11 +758,16 @@ void sctp_assoc_rm_peer(struct sctp_association *asoc,
 	struct sctp_transport	*transport;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK_IPADDR("sctp_assoc_rm_peer:association %p addr: ",
 				 " port: %d\n",
 				 asoc,
 				 (&peer->ipaddr),
 				 ntohs(peer->ipaddr.v4.sin_port));
+=======
+	pr_debug("%s: association:%p addr:%pISpc\n",
+		 __func__, asoc, &peer->ipaddr.sa);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: association:%p addr:%pISpc\n",
 		 __func__, asoc, &peer->ipaddr.sa);
@@ -730,7 +839,11 @@ void sctp_assoc_rm_peer(struct sctp_association *asoc,
 		/* Start a T3 timer here in case it wasn't running so
 		 * that these migrated packets have a chance to get
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * retrnasmitted.
+=======
+		 * retransmitted.
+>>>>>>> v3.18
 =======
 		 * retransmitted.
 >>>>>>> v3.18
@@ -763,12 +876,17 @@ struct sctp_transport *sctp_assoc_add_peer(struct sctp_association *asoc,
 	port = ntohs(addr->v4.sin_port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK_IPADDR("sctp_assoc_add_peer:association %p addr: ",
 				 " port: %d state:%d\n",
 				 asoc,
 				 addr,
 				 port,
 				 peer_state);
+=======
+	pr_debug("%s: association:%p addr:%pISpc state:%d\n", __func__,
+		 asoc, &addr->sa, peer_state);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: association:%p addr:%pISpc state:%d\n", __func__,
 		 asoc, &addr->sa, peer_state);
@@ -806,7 +924,11 @@ struct sctp_transport *sctp_assoc_add_peer(struct sctp_association *asoc,
 	peer->pathmaxrxt = asoc->pathmaxrxt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* And the partial failure retrnas threshold */
+=======
+	/* And the partial failure retrans threshold */
+>>>>>>> v3.18
 =======
 	/* And the partial failure retrans threshold */
 >>>>>>> v3.18
@@ -844,8 +966,14 @@ struct sctp_transport *sctp_assoc_add_peer(struct sctp_association *asoc,
 		asoc->pathmtu = peer->pathmtu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("sctp_assoc_add_peer:association %p PMTU set to "
 			  "%d\n", asoc, asoc->pathmtu);
+=======
+	pr_debug("%s: association:%p PMTU set to %d\n", __func__, asoc,
+		 asoc->pathmtu);
+
+>>>>>>> v3.18
 =======
 	pr_debug("%s: association:%p PMTU set to %d\n", __func__, asoc,
 		 asoc->pathmtu);
@@ -969,9 +1097,12 @@ void sctp_assoc_control_transport(struct sctp_association *asoc,
 				  sctp_sn_error_t error)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sctp_transport *t = NULL;
 	struct sctp_transport *first;
 	struct sctp_transport *second;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct sctp_ulpevent *event;
@@ -993,7 +1124,11 @@ void sctp_assoc_control_transport(struct sctp_association *asoc,
 			spc_state = SCTP_ADDR_AVAILABLE;
 		/* Don't inform ULP about transition from PF to
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * active state and set cwnd to 1, see SCTP
+=======
+		 * active state and set cwnd to 1 MTU, see SCTP
+>>>>>>> v3.18
 =======
 		 * active state and set cwnd to 1 MTU, see SCTP
 >>>>>>> v3.18
@@ -1002,7 +1137,11 @@ void sctp_assoc_control_transport(struct sctp_association *asoc,
 		if (transport->state == SCTP_PF) {
 			ulp_notify = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			transport->cwnd = 1;
+=======
+			transport->cwnd = asoc->pathmtu;
+>>>>>>> v3.18
 =======
 			transport->cwnd = asoc->pathmtu;
 >>>>>>> v3.18
@@ -1021,6 +1160,10 @@ void sctp_assoc_control_transport(struct sctp_association *asoc,
 			dst_release(transport->dst);
 			transport->dst = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			ulp_notify = false;
+>>>>>>> v3.18
 =======
 			ulp_notify = false;
 >>>>>>> v3.18
@@ -1039,8 +1182,13 @@ void sctp_assoc_control_transport(struct sctp_association *asoc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Generate and send a SCTP_PEER_ADDR_CHANGE notification to the
 	 * user.
+=======
+	/* Generate and send a SCTP_PEER_ADDR_CHANGE notification
+	 * to the user.
+>>>>>>> v3.18
 =======
 	/* Generate and send a SCTP_PEER_ADDR_CHANGE notification
 	 * to the user.
@@ -1051,6 +1199,10 @@ void sctp_assoc_control_transport(struct sctp_association *asoc,
 		memcpy(&addr, &transport->ipaddr,
 		       transport->af_specific->sockaddr_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1061,6 +1213,7 @@ void sctp_assoc_control_transport(struct sctp_association *asoc,
 	}
 
 	/* Select new active and retran paths. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* Look for the two most recently used active transports.
@@ -1114,6 +1267,9 @@ void sctp_assoc_control_transport(struct sctp_association *asoc,
 	/* Set the active and retran transports.  */
 	asoc->peer.active_path = first;
 	asoc->peer.retran_path = second;
+=======
+	sctp_select_active_and_retran_path(asoc);
+>>>>>>> v3.18
 =======
 	sctp_select_active_and_retran_path(asoc);
 >>>>>>> v3.18
@@ -1173,7 +1329,12 @@ int sctp_cmp_addr_exact(const union sctp_addr *ss1,
 struct sctp_chunk *sctp_get_ecne_prepend(struct sctp_association *asoc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sctp_chunk *chunk;
+=======
+	if (!asoc->need_ecne)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!asoc->need_ecne)
 		return NULL;
@@ -1183,12 +1344,16 @@ struct sctp_chunk *sctp_get_ecne_prepend(struct sctp_association *asoc)
 	 * Not being able to allocate a chunk here is not deadly.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (asoc->need_ecne)
 		chunk = sctp_make_ecne(asoc, asoc->last_ecne_tsn);
 	else
 		chunk = NULL;
 
 	return chunk;
+=======
+	return sctp_make_ecne(asoc, asoc->last_ecne_tsn);
+>>>>>>> v3.18
 =======
 	return sctp_make_ecne(asoc, asoc->last_ecne_tsn);
 >>>>>>> v3.18
@@ -1324,7 +1489,11 @@ static void sctp_assoc_bh_rcv(struct work_struct *work)
 
 		if (chunk->transport)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			chunk->transport->last_time_heard = jiffies;
+=======
+			chunk->transport->last_time_heard = ktime_get();
+>>>>>>> v3.18
 =======
 			chunk->transport->last_time_heard = ktime_get();
 >>>>>>> v3.18
@@ -1458,7 +1627,11 @@ void sctp_assoc_update(struct sctp_association *asoc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* SCTP-AUTH: Save the peer parameters from the new assocaitions
+=======
+	/* SCTP-AUTH: Save the peer parameters from the new associations
+>>>>>>> v3.18
 =======
 	/* SCTP-AUTH: Save the peer parameters from the new associations
 >>>>>>> v3.18
@@ -1477,6 +1650,10 @@ void sctp_assoc_update(struct sctp_association *asoc,
 	new->peer.peer_hmacs = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sctp_auth_key_put(asoc->asoc_shared_key);
+>>>>>>> v3.18
 =======
 	sctp_auth_key_put(asoc->asoc_shared_key);
 >>>>>>> v3.18
@@ -1513,15 +1690,21 @@ void sctp_assoc_update(struct sctp_association *asoc,
  */
 static const u8 sctp_trans_state_to_prio_map[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[SCTP_ACTIVE]   = 3,    /* best case */
 	[SCTP_UNKNOWN]  = 2,
 	[SCTP_PF]       = 1,
 	[SCTP_INACTIVE] = 0,    /* worst case */
 =======
+=======
+>>>>>>> v3.18
 	[SCTP_ACTIVE]	= 3,	/* best case */
 	[SCTP_UNKNOWN]	= 2,
 	[SCTP_PF]	= 1,
 	[SCTP_INACTIVE] = 0,	/* worst case */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1531,6 +1714,7 @@ static u8 sctp_trans_score(const struct sctp_transport *trans)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sctp_transport *sctp_trans_elect_best(struct sctp_transport *curr,
                                                     struct sctp_transport *best)
 {
@@ -1539,6 +1723,8 @@ static struct sctp_transport *sctp_trans_elect_best(struct sctp_transport *curr,
 
 	return sctp_trans_score(curr) > sctp_trans_score(best) ? curr : best;
 =======
+=======
+>>>>>>> v3.18
 static struct sctp_transport *sctp_trans_elect_tie(struct sctp_transport *trans1,
 						   struct sctp_transport *trans2)
 {
@@ -1574,6 +1760,9 @@ static struct sctp_transport *sctp_trans_elect_best(struct sctp_transport *curr,
 		return sctp_trans_elect_tie(curr, best);
 	else
 		return best;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1610,6 +1799,7 @@ void sctp_assoc_update_retran_path(struct sctp_association *asoc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (trans_next != NULL)
 		asoc->peer.retran_path = trans_next;
 
@@ -1620,6 +1810,8 @@ void sctp_assoc_update_retran_path(struct sctp_association *asoc)
 				 (&asoc->peer.retran_path->ipaddr),
 				 ntohs(asoc->peer.retran_path->ipaddr.v4.sin_port));
 =======
+=======
+>>>>>>> v3.18
 	asoc->peer.retran_path = trans_next;
 
 	pr_debug("%s: association:%p updated new path to addr:%pISpc\n",
@@ -1691,6 +1883,9 @@ static void sctp_select_active_and_retran_path(struct sctp_association *asoc)
 	/* Set the active and retran transports. */
 	asoc->peer.active_path = trans_pri;
 	asoc->peer.retran_path = trans_sec;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1740,6 +1935,7 @@ void sctp_assoc_sync_pmtu(struct sock *sk, struct sctp_association *asoc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: asoc:%p, pmtu:%d, frag_point:%d\n",
 			  __func__, asoc, asoc->pathmtu, asoc->frag_point);
 }
@@ -1747,12 +1943,17 @@ void sctp_assoc_sync_pmtu(struct sock *sk, struct sctp_association *asoc)
 /* Should we send a SACK to update our peer? */
 static inline int sctp_peer_needs_update(struct sctp_association *asoc)
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("%s: asoc:%p, pmtu:%d, frag_point:%d\n", __func__, asoc,
 		 asoc->pathmtu, asoc->frag_point);
 }
 
 /* Should we send a SACK to update our peer? */
 static inline bool sctp_peer_needs_update(struct sctp_association *asoc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct net *net = sock_net(asoc->base.sk);
@@ -1766,7 +1967,11 @@ static inline bool sctp_peer_needs_update(struct sctp_association *asoc)
 			   (asoc->base.sk->sk_rcvbuf >> net->sctp.rwnd_upd_shift),
 			   asoc->pathmtu)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 1;
+=======
+			return true;
+>>>>>>> v3.18
 =======
 			return true;
 >>>>>>> v3.18
@@ -1775,7 +1980,11 @@ static inline bool sctp_peer_needs_update(struct sctp_association *asoc)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return false;
+>>>>>>> v3.18
 =======
 	return false;
 >>>>>>> v3.18
@@ -1810,9 +2019,15 @@ void sctp_assoc_rwnd_increase(struct sctp_association *asoc, unsigned int len)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: asoc %p rwnd increased by %d to (%u, %u) "
 			  "- %u\n", __func__, asoc, len, asoc->rwnd,
 			  asoc->rwnd_over, asoc->a_rwnd);
+=======
+	pr_debug("%s: asoc:%p rwnd increased by %d to (%u, %u) - %u\n",
+		 __func__, asoc, len, asoc->rwnd, asoc->rwnd_over,
+		 asoc->a_rwnd);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: asoc:%p rwnd increased by %d to (%u, %u) - %u\n",
 		 __func__, asoc, len, asoc->rwnd, asoc->rwnd_over,
@@ -1827,15 +2042,21 @@ void sctp_assoc_rwnd_increase(struct sctp_association *asoc, unsigned int len)
 	if (sctp_peer_needs_update(asoc)) {
 		asoc->a_rwnd = asoc->rwnd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK("%s: Sending window update SACK- asoc: %p "
 				  "rwnd: %u a_rwnd: %u\n", __func__,
 				  asoc, asoc->rwnd, asoc->a_rwnd);
 =======
+=======
+>>>>>>> v3.18
 
 		pr_debug("%s: sending window update SACK- asoc:%p rwnd:%u "
 			 "a_rwnd:%u\n", __func__, asoc, asoc->rwnd,
 			 asoc->a_rwnd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sack = sctp_make_sack(asoc);
 		if (!sack)
@@ -1859,13 +2080,19 @@ void sctp_assoc_rwnd_decrease(struct sctp_association *asoc, unsigned int len)
 	int over = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_ASSERT(asoc->rwnd, "rwnd zero", return);
 	SCTP_ASSERT(!asoc->rwnd_over, "rwnd_over not zero", return);
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(!asoc->rwnd || asoc->rwnd_over))
 		pr_debug("%s: association:%p has asoc->rwnd:%u, "
 			 "asoc->rwnd_over:%u!\n", __func__, asoc,
 			 asoc->rwnd, asoc->rwnd_over);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (asoc->ep->rcvbuf_policy)
@@ -1876,7 +2103,11 @@ void sctp_assoc_rwnd_decrease(struct sctp_association *asoc, unsigned int len)
 	/* If we've reached or overflowed our receive buffer, announce
 	 * a 0 rwnd if rwnd would still be positive.  Store the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * the pottential pressure overflow so that the window can be restored
+=======
+	 * the potential pressure overflow so that the window can be restored
+>>>>>>> v3.18
 =======
 	 * the potential pressure overflow so that the window can be restored
 >>>>>>> v3.18
@@ -1896,14 +2127,20 @@ void sctp_assoc_rwnd_decrease(struct sctp_association *asoc, unsigned int len)
 		asoc->rwnd = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: asoc %p rwnd decreased by %d to (%u, %u, %u)\n",
 			  __func__, asoc, len, asoc->rwnd,
 			  asoc->rwnd_over, asoc->rwnd_press);
 =======
+=======
+>>>>>>> v3.18
 
 	pr_debug("%s: asoc:%p rwnd decreased by %d to (%u, %u, %u)\n",
 		 __func__, asoc, len, asoc->rwnd, asoc->rwnd_over,
 		 asoc->rwnd_press);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1961,7 +2198,11 @@ int sctp_assoc_lookup_laddr(struct sctp_association *asoc,
 int sctp_assoc_set_id(struct sctp_association *asoc, gfp_t gfp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool preload = gfp & __GFP_WAIT;
+=======
+	bool preload = !!(gfp & __GFP_WAIT);
+>>>>>>> v3.18
 =======
 	bool preload = !!(gfp & __GFP_WAIT);
 >>>>>>> v3.18

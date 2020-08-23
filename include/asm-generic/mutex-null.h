@@ -12,7 +12,11 @@
 
 #define __mutex_fastpath_lock(count, fail_fn)		fail_fn(count)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __mutex_fastpath_lock_retval(count, fail_fn)	fail_fn(count)
+=======
+#define __mutex_fastpath_lock_retval(count)		(-1)
+>>>>>>> v3.18
 =======
 #define __mutex_fastpath_lock_retval(count)		(-1)
 >>>>>>> v3.18

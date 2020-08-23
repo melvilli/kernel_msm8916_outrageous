@@ -36,12 +36,18 @@ ENTRY(v7wbi_flush_user_tlb_range)
 	vma_vm_mm r3, r2			@ get vma->vm_mm
 	mmid	r3, r3				@ get vm_mm->context.id
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
 	mov	r0, r0, lsr #PAGE_SHIFT		@ align address
 	mov	r1, r1, lsr #PAGE_SHIFT
 #ifdef CONFIG_ARCH_MSM8X60
 	mov	r0, r0, lsl #PAGE_SHIFT
 #else
+=======
+	dsb	ish
+	mov	r0, r0, lsr #PAGE_SHIFT		@ align address
+	mov	r1, r1, lsr #PAGE_SHIFT
+>>>>>>> v3.18
 =======
 	dsb	ish
 	mov	r0, r0, lsr #PAGE_SHIFT		@ align address
@@ -54,10 +60,16 @@ ENTRY(v7wbi_flush_user_tlb_range)
 #endif
 	orr	r0, r3, r0, lsl #PAGE_SHIFT	@ Create initial MVA
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 	mov	r1, r1, lsl #PAGE_SHIFT
 1:
 #if defined(CONFIG_ARM_ERRATA_720789) || defined(CONFIG_ARCH_MSM8X60)
+=======
+	mov	r1, r1, lsl #PAGE_SHIFT
+1:
+#ifdef CONFIG_ARM_ERRATA_720789
+>>>>>>> v3.18
 =======
 	mov	r1, r1, lsl #PAGE_SHIFT
 1:
@@ -73,8 +85,13 @@ ENTRY(v7wbi_flush_user_tlb_range)
 	cmp	r0, r1
 	blo	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
 	mov	pc, lr
+=======
+	dsb	ish
+	ret	lr
+>>>>>>> v3.18
 =======
 	dsb	ish
 	ret	lr
@@ -91,7 +108,11 @@ ENDPROC(v7wbi_flush_user_tlb_range)
  */
 ENTRY(v7wbi_flush_kern_tlb_range)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
+=======
+	dsb	ish
+>>>>>>> v3.18
 =======
 	dsb	ish
 >>>>>>> v3.18
@@ -101,7 +122,11 @@ ENTRY(v7wbi_flush_kern_tlb_range)
 	mov	r1, r1, lsl #PAGE_SHIFT
 1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_ARM_ERRATA_720789) || defined(CONFIG_ARCH_MSM8X60)
+=======
+#ifdef CONFIG_ARM_ERRATA_720789
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_ARM_ERRATA_720789
 >>>>>>> v3.18
@@ -114,9 +139,15 @@ ENTRY(v7wbi_flush_kern_tlb_range)
 	cmp	r0, r1
 	blo	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
 	isb
 	mov	pc, lr
+=======
+	dsb	ish
+	isb
+	ret	lr
+>>>>>>> v3.18
 =======
 	dsb	ish
 	isb

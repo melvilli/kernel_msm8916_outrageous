@@ -3,8 +3,13 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 1. Device Subdirectories
 ------------------------
+=======
+1. RapidIO Device Subdirectories
+--------------------------------
+>>>>>>> v3.18
 =======
 1. RapidIO Device Subdirectories
 --------------------------------
@@ -31,8 +36,13 @@ NOTE: An enumerating or discovering endpoint does not create a sysfs entry for
 itself, this is why an endpoint with destID=1 is not shown in the list.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 2. Attributes Common for All Devices
 ------------------------------------
+=======
+2. Attributes Common for All RapidIO Devices
+--------------------------------------------
+>>>>>>> v3.18
 =======
 2. Attributes Common for All RapidIO Devices
 --------------------------------------------
@@ -51,6 +61,10 @@ device_rev - returns the device revision level
    lprev   - returns name of previous device (switch) on the path to the device
              that that owns this attribute
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  modalias - returns the device modalias
+>>>>>>> v3.18
 =======
   modalias - returns the device modalias
 >>>>>>> v3.18
@@ -66,8 +80,13 @@ and provides an access to the RapidIO device registers using standard file read
 and write operations.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 3. Endpoint Device Attributes
 -----------------------------
+=======
+3. RapidIO Endpoint Device Attributes
+-------------------------------------
+>>>>>>> v3.18
 =======
 3. RapidIO Endpoint Device Attributes
 -------------------------------------
@@ -79,8 +98,13 @@ drivers will add their device-specific sysfs attributes but such attributes are
 outside the scope of this document.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 4. Switch Device Attributes
 ---------------------------
+=======
+4. RapidIO Switch Device Attributes
+-----------------------------------
+>>>>>>> v3.18
 =======
 4. RapidIO Switch Device Attributes
 -----------------------------------
@@ -130,7 +154,10 @@ attribute:
 	 To initiate RapidIO enumeration/discovery on all available mports
 	 a user must write '-1' (or RIO_MPORT_ANY) into this attribute file.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 
 6. RapidIO Bus Controllers/Ports
@@ -181,4 +208,7 @@ drwxr-xr-x 2 root root    0 Feb 11 15:11 power
 lrwxrwxrwx 1 root root    0 Feb 11 15:04 subsystem -> ../../../../../../class/rapidio_port
 -r--r--r-- 1 root root 4096 Feb 11 15:11 sys_size
 -rw-r--r-- 1 root root 4096 Feb 11 15:04 uevent
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

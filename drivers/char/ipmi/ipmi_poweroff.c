@@ -660,7 +660,11 @@ static struct ipmi_smi_watcher smi_watcher = {
 #include <linux/sysctl.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table ipmi_table[] = {
+=======
+static struct ctl_table ipmi_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table ipmi_table[] = {
 >>>>>>> v3.18
@@ -673,7 +677,11 @@ static struct ctl_table ipmi_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table ipmi_dir_table[] = {
+=======
+static struct ctl_table ipmi_dir_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table ipmi_dir_table[] = {
 >>>>>>> v3.18
@@ -684,7 +692,11 @@ static struct ctl_table ipmi_dir_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table ipmi_root_table[] = {
+=======
+static struct ctl_table ipmi_root_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table ipmi_root_table[] = {
 >>>>>>> v3.18

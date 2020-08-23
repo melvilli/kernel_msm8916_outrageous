@@ -17,7 +17,11 @@ obj- := $(platform-)
 obj-y += kernel/
 obj-y += mm/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y += math-emu/
+=======
+obj-y += net/
+>>>>>>> v3.18
 =======
 obj-y += net/
 >>>>>>> v3.18

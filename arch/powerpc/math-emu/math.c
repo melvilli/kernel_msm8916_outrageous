@@ -8,6 +8,10 @@
 #include <asm/uaccess.h>
 #include <asm/reg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/switch_to.h>
+>>>>>>> v3.18
 =======
 #include <asm/switch_to.h>
 >>>>>>> v3.18
@@ -18,7 +22,10 @@
 #define FLOATFUNC(x)	extern int x(void *, void *, void *, void *)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* The instructions list which may be not implemented by a hardware FPU */
 FLOATFUNC(fre);
 FLOATFUNC(frsqrtes);
@@ -33,6 +40,9 @@ FLOATFUNC(mtfsfi);
 						 void *op4) { }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 FLOATFUNC(fadd);
 FLOATFUNC(fadds);
@@ -64,8 +74,11 @@ FLOATFUNC(mffs);
 FLOATFUNC(mtfsb0);
 FLOATFUNC(mtfsb1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 FLOATFUNC(mtfsf);
 FLOATFUNC(mtfsfi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -86,8 +99,11 @@ FLOATFUNC(fres);
 FLOATFUNC(frsqrte);
 FLOATFUNC(fsel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 FLOATFUNC(fsqrt);
 FLOATFUNC(fsqrts);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -125,6 +141,10 @@ FLOATFUNC(fsqrts);
 #define FRES		0x018		/*   24 */
 #define FMULS		0x019		/*   25 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FRSQRTES	0x01a		/*   26 */
+>>>>>>> v3.18
 =======
 #define FRSQRTES	0x01a		/*   26 */
 >>>>>>> v3.18
@@ -141,6 +161,10 @@ FLOATFUNC(fsqrts);
 #define FSQRT		0x016		/*   22 */
 #define FSEL		0x017		/*   23 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FRE		0x018		/*   24 */
+>>>>>>> v3.18
 =======
 #define FRE		0x018		/*   24 */
 >>>>>>> v3.18
@@ -186,7 +210,10 @@ FLOATFUNC(fsqrts);
 #define XFLB	10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MATH_EMULATION
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int
@@ -247,7 +274,10 @@ record_exception(struct pt_regs *regs, int eflag)
 	return (fpscr & FPSCR_FEX) ? 1 : 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_MATH_EMULATION */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -260,6 +290,7 @@ do_mathemu(struct pt_regs *regs)
 	u32 insn = 0;
 	int idx = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MATH_EMULATION
 	int (*func)(void *, void *, void *, void *);
 	int type = 0;
@@ -270,10 +301,16 @@ do_mathemu(struct pt_regs *regs)
 	int type = 0;
 	int eflag, trap;
 >>>>>>> v3.18
+=======
+	int (*func)(void *, void *, void *, void *);
+	int type = 0;
+	int eflag, trap;
+>>>>>>> v3.18
 
 	if (get_user(insn, (u32 *)pc))
 		return -EFAULT;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef CONFIG_MATH_EMULATION
 	switch (insn >> 26) {
@@ -318,6 +355,8 @@ do_mathemu(struct pt_regs *regs)
 #else /* CONFIG_MATH_EMULATION */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	switch (insn >> 26) {
 	case LFS:	func = lfs;	type = D;	break;
 	case LFSU:	func = lfs;	type = DU;	break;
@@ -350,14 +389,20 @@ do_mathemu(struct pt_regs *regs)
 		case FSUBS:	func = fsubs;	type = AB;	break;
 		case FADDS:	func = fadds;	type = AB;	break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case FSQRTS:	func = fsqrts;	type = AB;	break;
 		case FRES:	func = fres;	type = AB;	break;
 		case FMULS:	func = fmuls;	type = AC;	break;
 =======
+=======
+>>>>>>> v3.18
 		case FSQRTS:	func = fsqrts;	type = XB;	break;
 		case FRES:	func = fres;	type = XB;	break;
 		case FMULS:	func = fmuls;	type = AC;	break;
 		case FRSQRTES:	func = frsqrtes;type = XB;	break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case FMSUBS:	func = fmsubs;	type = ABC;	break;
 		case FMADDS:	func = fmadds;	type = ABC;	break;
@@ -375,16 +420,22 @@ do_mathemu(struct pt_regs *regs)
 			case FSUB:	func = fsub;	type = AB;	break;
 			case FADD:	func = fadd;	type = AB;	break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case FSQRT:	func = fsqrt;	type = AB;	break;
 			case FSEL:	func = fsel;	type = ABC;	break;
 			case FMUL:	func = fmul;	type = AC;	break;
 			case FRSQRTE:	func = frsqrte;	type = AB;	break;
 =======
+=======
+>>>>>>> v3.18
 			case FSQRT:	func = fsqrt;	type = XB;	break;
 			case FRE:	func = fre;	type = XB;	break;
 			case FSEL:	func = fsel;	type = ABC;	break;
 			case FMUL:	func = fmul;	type = AC;	break;
 			case FRSQRTE:	func = frsqrte;	type = XB;	break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			case FMSUB:	func = fmsub;	type = ABC;	break;
 			case FMADD:	func = fmadd;	type = ABC;	break;
@@ -476,6 +527,7 @@ do_mathemu(struct pt_regs *regs)
 		idx = (insn >> 16) & 0x1f;
 		op0 = (void *)&current->thread.TS_FPR((insn >> 21) & 0x1f);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!idx) {
 			if (((insn >> 1) & 0x3ff) == STFIWX)
 				op1 = (void *)(regs->gpr[(insn >> 11) & 0x1f]);
@@ -489,18 +541,28 @@ do_mathemu(struct pt_regs *regs)
 		op1 = (void *)((idx ? regs->gpr[idx] : 0)
 				+ regs->gpr[(insn >> 11) & 0x1f]);
 >>>>>>> v3.18
+=======
+		op1 = (void *)((idx ? regs->gpr[idx] : 0)
+				+ regs->gpr[(insn >> 11) & 0x1f]);
+>>>>>>> v3.18
 		break;
 
 	case XEU:
 		idx = (insn >> 16) & 0x1f;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		op0 = (void *)&current->thread.TS_FPR((insn >> 21) & 0x1f);
 		op1 = (void *)((idx ? regs->gpr[idx] : 0)
 =======
+=======
+>>>>>>> v3.18
 		if (!idx)
 			goto illegal;
 		op0 = (void *)&current->thread.TS_FPR((insn >> 21) & 0x1f);
 		op1 = (void *)(regs->gpr[idx]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				+ regs->gpr[(insn >> 11) & 0x1f]);
 		break;
@@ -537,7 +599,10 @@ do_mathemu(struct pt_regs *regs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If we support a HW FPU, we need to ensure the FP state
 	 * is flushed into the thread_struct before attempting
@@ -545,6 +610,9 @@ do_mathemu(struct pt_regs *regs)
 	 */
 	flush_fp_to_thread(current);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	eflag = func(op0, op1, op2, op3);
 
@@ -567,7 +635,10 @@ do_mathemu(struct pt_regs *regs)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_MATH_EMULATION */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

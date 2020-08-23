@@ -1138,16 +1138,22 @@ static void sbp2_init_workarounds(struct sbp2_target *tgt, u32 model,
 
 static struct scsi_host_template scsi_driver_template;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sbp2_remove(struct device *dev);
 
 static int sbp2_probe(struct device *dev)
 {
 	struct fw_unit *unit = fw_unit(dev);
 =======
+=======
+>>>>>>> v3.18
 static void sbp2_remove(struct fw_unit *unit);
 
 static int sbp2_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct fw_device *device = fw_parent_device(unit);
 	struct sbp2_target *tgt;
@@ -1213,7 +1219,11 @@ static int sbp2_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
 
  fail_remove:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sbp2_remove(dev);
+=======
+	sbp2_remove(unit);
+>>>>>>> v3.18
 =======
 	sbp2_remove(unit);
 >>>>>>> v3.18
@@ -1243,9 +1253,14 @@ static void sbp2_update(struct fw_unit *unit)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sbp2_remove(struct device *dev)
 {
 	struct fw_unit *unit = fw_unit(dev);
+=======
+static void sbp2_remove(struct fw_unit *unit)
+{
+>>>>>>> v3.18
 =======
 static void sbp2_remove(struct fw_unit *unit)
 {
@@ -1287,10 +1302,16 @@ static void sbp2_remove(struct fw_unit *unit)
 	}
 	scsi_remove_host(shost);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_notice(dev, "released target %d:0:0\n", shost->host_no);
 
 	scsi_host_put(shost);
 	return 0;
+=======
+	dev_notice(&unit->device, "released target %d:0:0\n", shost->host_no);
+
+	scsi_host_put(shost);
+>>>>>>> v3.18
 =======
 	dev_notice(&unit->device, "released target %d:0:0\n", shost->host_no);
 
@@ -1317,15 +1338,21 @@ static struct fw_driver sbp2_driver = {
 		.name   = KBUILD_MODNAME,
 		.bus    = &fw_bus_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.probe  = sbp2_probe,
 		.remove = sbp2_remove,
 	},
 	.update   = sbp2_update,
 =======
+=======
+>>>>>>> v3.18
 	},
 	.probe    = sbp2_probe,
 	.update   = sbp2_update,
 	.remove   = sbp2_remove,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.id_table = sbp2_id_table,
 };

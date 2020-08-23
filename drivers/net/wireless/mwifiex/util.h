@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: utility functions
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -25,10 +29,13 @@
 #define _MWIFIEX_UTIL_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct mwifiex_rxinfo *MWIFIEX_SKB_RXCB(struct sk_buff *skb)
 {
 	return (struct mwifiex_rxinfo *)(skb->cb + sizeof(dma_addr_t));
 =======
+=======
+>>>>>>> v3.18
 struct mwifiex_dma_mapping {
 	dma_addr_t addr;
 	size_t len;
@@ -48,11 +55,15 @@ static inline struct mwifiex_rxinfo *MWIFIEX_SKB_RXCB(struct sk_buff *skb)
 
 	BUILD_BUG_ON(sizeof(struct mwifiex_cb) > sizeof(skb->cb));
 	return &cb->rx_info;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline struct mwifiex_txinfo *MWIFIEX_SKB_TXCB(struct sk_buff *skb)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return (struct mwifiex_txinfo *)(skb->cb + sizeof(dma_addr_t));
 }
@@ -62,6 +73,8 @@ static inline void MWIFIEX_SKB_PACB(struct sk_buff *skb, dma_addr_t *buf_pa)
 	memcpy(buf_pa, skb->cb, sizeof(dma_addr_t));
 }
 =======
+=======
+>>>>>>> v3.18
 	struct mwifiex_cb *cb = (struct mwifiex_cb *)skb->cb;
 
 	return &cb->tx_info;
@@ -92,5 +105,8 @@ static inline dma_addr_t MWIFIEX_SKB_DMA_ADDR(struct sk_buff *skb)
 	return mapping.addr;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !_MWIFIEX_UTIL_H_ */

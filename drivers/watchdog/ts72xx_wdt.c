@@ -62,7 +62,11 @@ struct ts72xx_wdt {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct platform_device *ts72xx_wdt_pdev;
+=======
+static struct platform_device *ts72xx_wdt_pdev;
+>>>>>>> v3.18
 =======
 static struct platform_device *ts72xx_wdt_pdev;
 >>>>>>> v3.18
@@ -197,7 +201,11 @@ static int ts72xx_wdt_open(struct inode *inode, struct file *file)
 			"failed to convert timeout (%d) to register value\n",
 			timeout);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return regval;
+>>>>>>> v3.18
 =======
 		return regval;
 >>>>>>> v3.18
@@ -314,7 +322,12 @@ static long ts72xx_wdt_ioctl(struct file *file, unsigned int cmd,
 	switch (cmd) {
 	case WDIOC_GETSUPPORT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = copy_to_user(argp, &winfo, sizeof(winfo));
+=======
+		if (copy_to_user(argp, &winfo, sizeof(winfo)))
+			error = -EFAULT;
+>>>>>>> v3.18
 =======
 		if (copy_to_user(argp, &winfo, sizeof(winfo)))
 			error = -EFAULT;
@@ -334,10 +347,16 @@ static long ts72xx_wdt_ioctl(struct file *file, unsigned int cmd,
 		int options;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (get_user(options, p)) {
 			error = -EFAULT;
 			break;
 		}
+=======
+		error = get_user(options, p);
+		if (error)
+			break;
+>>>>>>> v3.18
 =======
 		error = get_user(options, p);
 		if (error)
@@ -361,6 +380,7 @@ static long ts72xx_wdt_ioctl(struct file *file, unsigned int cmd,
 	case WDIOC_SETTIMEOUT: {
 		int new_timeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (get_user(new_timeout, p)) {
 			error = -EFAULT;
@@ -380,6 +400,8 @@ static long ts72xx_wdt_ioctl(struct file *file, unsigned int cmd,
 			break;
 
 =======
+=======
+>>>>>>> v3.18
 		int regval;
 
 		error = get_user(new_timeout, p);
@@ -395,14 +417,21 @@ static long ts72xx_wdt_ioctl(struct file *file, unsigned int cmd,
 		wdt->regval = regval;
 		ts72xx_wdt_start(wdt);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*FALLTHROUGH*/
 	}
 
 	case WDIOC_GETTIMEOUT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (put_user(regval_to_timeout(wdt->regval), p))
 			error = -EFAULT;
+=======
+		error = put_user(regval_to_timeout(wdt->regval), p);
+>>>>>>> v3.18
 =======
 		error = put_user(regval_to_timeout(wdt->regval), p);
 >>>>>>> v3.18
@@ -438,6 +467,7 @@ static int ts72xx_wdt_probe(struct platform_device *pdev)
 	struct resource *r1, *r2;
 	int error = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	wdt = kzalloc(sizeof(struct ts72xx_wdt), GFP_KERNEL);
 	if (!wdt) {
@@ -487,6 +517,8 @@ static int ts72xx_wdt_probe(struct platform_device *pdev)
 		goto fail_free_feed;
 	}
 =======
+=======
+>>>>>>> v3.18
 	wdt = devm_kzalloc(&pdev->dev, sizeof(struct ts72xx_wdt), GFP_KERNEL);
 	if (!wdt)
 		return -ENOMEM;
@@ -500,6 +532,9 @@ static int ts72xx_wdt_probe(struct platform_device *pdev)
 	wdt->feed_reg = devm_ioremap_resource(&pdev->dev, r2);
 	if (IS_ERR(wdt->feed_reg))
 		return PTR_ERR(wdt->feed_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	platform_set_drvdata(pdev, wdt);
@@ -514,7 +549,11 @@ static int ts72xx_wdt_probe(struct platform_device *pdev)
 	if (error) {
 		dev_err(&pdev->dev, "failed to register miscdev\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail_unmap_feed;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -523,6 +562,7 @@ static int ts72xx_wdt_probe(struct platform_device *pdev)
 	dev_info(&pdev->dev, "TS-72xx Watchdog driver\n");
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 fail_unmap_feed:
@@ -539,10 +579,13 @@ fail:
 	return error;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int ts72xx_wdt_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ts72xx_wdt *wdt = platform_get_drvdata(pdev);
 	struct resource *res;
@@ -561,6 +604,9 @@ static int ts72xx_wdt_remove(struct platform_device *pdev)
 
 	kfree(wdt);
 	return error;
+=======
+	return misc_deregister(&ts72xx_wdt_miscdev);
+>>>>>>> v3.18
 =======
 	return misc_deregister(&ts72xx_wdt_miscdev);
 >>>>>>> v3.18

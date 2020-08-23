@@ -32,9 +32,12 @@
  */
 #define __NR_compat_restart_syscall	0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __NR_compat_exit		1
 #define __NR_compat_read		3
 #define __NR_compat_write		4
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define __NR_compat_sigreturn		119

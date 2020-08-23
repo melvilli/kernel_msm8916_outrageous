@@ -139,6 +139,11 @@ int hv_init(void)
 	memset(hv_context.synic_message_page, 0,
 	       sizeof(void *) * NR_CPUS);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(hv_context.post_msg_page, 0,
+	       sizeof(void *) * NR_CPUS);
+>>>>>>> v3.18
 =======
 	memset(hv_context.post_msg_page, 0,
 	       sizeof(void *) * NR_CPUS);
@@ -160,7 +165,11 @@ int hv_init(void)
 	rdmsrl(HV_X64_MSR_HYPERCALL, hypercall_msr.as_uint64);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	virtaddr = __vmalloc(PAGE_SIZE, GFP_KERNEL, PAGE_KERNEL_RX);
+=======
+	virtaddr = __vmalloc(PAGE_SIZE, GFP_KERNEL, PAGE_KERNEL_EXEC);
+>>>>>>> v3.18
 =======
 	virtaddr = __vmalloc(PAGE_SIZE, GFP_KERNEL, PAGE_KERNEL_EXEC);
 >>>>>>> v3.18
@@ -203,7 +212,11 @@ cleanup:
  * This routine is called normally during driver unloading or exiting.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void hv_cleanup(bool crash)
+=======
+void hv_cleanup(void)
+>>>>>>> v3.18
 =======
 void hv_cleanup(void)
 >>>>>>> v3.18
@@ -217,8 +230,12 @@ void hv_cleanup(void)
 		hypercall_msr.as_uint64 = 0;
 		wrmsrl(HV_X64_MSR_HYPERCALL, hypercall_msr.as_uint64);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!crash)
 			vfree(hv_context.hypercall_page);
+=======
+		vfree(hv_context.hypercall_page);
+>>>>>>> v3.18
 =======
 		vfree(hv_context.hypercall_page);
 >>>>>>> v3.18
@@ -236,6 +253,7 @@ int hv_post_message(union hv_connection_id connection_id,
 		  void *payload, size_t payload_size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct aligned_input {
 		u64 alignment8;
 		struct hv_input_post_message msg;
@@ -249,10 +267,16 @@ int hv_post_message(union hv_connection_id connection_id,
 	struct hv_input_post_message *aligned_msg;
 	u16 status;
 >>>>>>> v3.18
+=======
+
+	struct hv_input_post_message *aligned_msg;
+	u16 status;
+>>>>>>> v3.18
 
 	if (payload_size > HV_MESSAGE_PAYLOAD_BYTE_COUNT)
 		return -EMSGSIZE;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	addr = (unsigned long)kmalloc(sizeof(struct aligned_input), GFP_ATOMIC);
 	if (!addr)
@@ -263,11 +287,16 @@ int hv_post_message(union hv_connection_id connection_id,
 
 	aligned_msg->connectionid = connection_id;
 =======
+=======
+>>>>>>> v3.18
 	aligned_msg = (struct hv_input_post_message *)
 			hv_context.post_msg_page[get_cpu()];
 
 	aligned_msg->connectionid = connection_id;
 	aligned_msg->reserved = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	aligned_msg->message_type = message_type;
 	aligned_msg->payload_size = payload_size;
@@ -277,8 +306,12 @@ int hv_post_message(union hv_connection_id connection_id,
 		& 0xFFFF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree((void *)addr);
 
+=======
+	put_cpu();
+>>>>>>> v3.18
 =======
 	put_cpu();
 >>>>>>> v3.18
@@ -302,7 +335,10 @@ u16 hv_signal_event(void *con_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int hv_synic_alloc(void)
 {
@@ -366,6 +402,9 @@ void hv_synic_free(void)
 		hv_synic_free_cpu(cpu);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * hv_synic_init - Initialize the Synthethic Interrupt Controller.
@@ -392,6 +431,7 @@ void hv_synic_init(void *arg)
 	rdmsrl(HV_X64_MSR_SVERSION, version);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hv_context.event_dpc[cpu] = kmalloc(sizeof(struct tasklet_struct),
 					    GFP_ATOMIC);
 	if (hv_context.event_dpc[cpu] == NULL) {
@@ -416,6 +456,8 @@ void hv_synic_init(void *arg)
 		goto cleanup;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Setup the Synic's message page */
@@ -460,6 +502,7 @@ void hv_synic_init(void *arg)
 	rdmsrl(HV_X64_MSR_VP_INDEX, vp_index);
 	hv_context.vp_index[cpu] = (u32)vp_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
 
 cleanup:
@@ -468,6 +511,10 @@ cleanup:
 
 	if (hv_context.synic_message_page[cpu])
 		free_page((unsigned long)hv_context.synic_message_page[cpu]);
+=======
+
+	INIT_LIST_HEAD(&hv_context.percpu_list[cpu]);
+>>>>>>> v3.18
 =======
 
 	INIT_LIST_HEAD(&hv_context.percpu_list[cpu]);

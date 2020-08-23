@@ -1,14 +1,20 @@
 VERSION = 3
 <<<<<<< HEAD
+<<<<<<< HEAD
 PATCHLEVEL = 10
 SUBLEVEL = 108
 EXTRAVERSION =
 NAME = END-OF-LIFE
 =======
+=======
+>>>>>>> v3.18
 PATCHLEVEL = 18
 SUBLEVEL = 0
 EXTRAVERSION =
 NAME = Diseased Newt
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # *DOCUMENTATION*
@@ -18,11 +24,17 @@ NAME = Diseased Newt
 # expect to learn how to build the kernel reading this file.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Do not:
 # o  use make's built-in rules and variables
 #    (this increases performance and avoids hard-to-debug behaviour);
 # o  print "Entering directory ...";
 MAKEFLAGS += -rR --no-print-directory
+=======
+# Do not use make's built-in rules and variables
+# (this increases performance and avoids hard-to-debug behaviour);
+MAKEFLAGS += -rR
+>>>>>>> v3.18
 =======
 # Do not use make's built-in rules and variables
 # (this increases performance and avoids hard-to-debug behaviour);
@@ -36,6 +48,12 @@ LC_NUMERIC=C
 export LC_COLLATE LC_NUMERIC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# Avoid interference with shell env settings
+unexport GREP_OPTIONS
+
+>>>>>>> v3.18
 =======
 # Avoid interference with shell env settings
 unexport GREP_OPTIONS
@@ -58,7 +76,10 @@ unexport GREP_OPTIONS
 # prepare rule.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # Beautify output
 # ---------------------------------------------------------------------------
 #
@@ -82,6 +103,9 @@ unexport GREP_OPTIONS
 # If KBUILD_VERBOSE equals 0 then the above command will be hidden.
 # If KBUILD_VERBOSE equals 1 then the above command is displayed.
 #
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # To put more focus on warnings, be less verbose as default
 # Use 'make V=1' to see the full commands
@@ -93,6 +117,7 @@ ifndef KBUILD_VERBOSE
   KBUILD_VERBOSE = 0
 endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # Call a source code checker (by default, "sparse") as part of the
 # C compilation.
@@ -122,6 +147,8 @@ ifeq ("$(origin M)", "command line")
   KBUILD_EXTMOD := $(M)
 endif
 =======
+=======
+>>>>>>> v3.18
 ifeq ($(KBUILD_VERBOSE),1)
   quiet =
   Q =
@@ -144,6 +171,9 @@ endif
 endif
 
 export quiet Q KBUILD_VERBOSE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # kbuild supports saving output files in a separate directory.
@@ -162,7 +192,10 @@ export quiet Q KBUILD_VERBOSE
 # variable.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # KBUILD_SRC is set on invocation of make in OBJ directory
@@ -176,10 +209,13 @@ ifeq ("$(origin O)", "command line")
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifeq ("$(origin W)", "command line")
   export KBUILD_ENABLE_EXTRA_GCC_CHECKS := $(W)
 endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # That's our default target when none is given on the command line
@@ -194,14 +230,20 @@ ifneq ($(KBUILD_OUTPUT),)
 # check that the output directory actually exists
 saved-output := $(KBUILD_OUTPUT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 KBUILD_OUTPUT := $(shell cd $(KBUILD_OUTPUT) && /bin/pwd)
 $(if $(KBUILD_OUTPUT),, \
      $(error output directory "$(saved-output)" does not exist))
 =======
+=======
+>>>>>>> v3.18
 KBUILD_OUTPUT := $(shell mkdir -p $(KBUILD_OUTPUT) && cd $(KBUILD_OUTPUT) \
 								&& /bin/pwd)
 $(if $(KBUILD_OUTPUT),, \
      $(error failed to create output directory "$(saved-output)"))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 PHONY += $(MAKECMDGOALS) sub-make
@@ -211,10 +253,15 @@ $(filter-out _all sub-make $(CURDIR)/Makefile, $(MAKECMDGOALS)) _all: sub-make
 
 sub-make: FORCE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(if $(KBUILD_VERBOSE:1=),@)$(MAKE) -C $(KBUILD_OUTPUT) \
 	KBUILD_SRC=$(CURDIR) \
 	KBUILD_EXTMOD="$(KBUILD_EXTMOD)" -f $(CURDIR)/Makefile \
 	$(filter-out _all sub-make,$(MAKECMDGOALS))
+=======
+	$(Q)$(MAKE) -C $(KBUILD_OUTPUT) KBUILD_SRC=$(CURDIR) \
+	-f $(CURDIR)/Makefile $(filter-out _all sub-make,$(MAKECMDGOALS))
+>>>>>>> v3.18
 =======
 	$(Q)$(MAKE) -C $(KBUILD_OUTPUT) KBUILD_SRC=$(CURDIR) \
 	-f $(CURDIR)/Makefile $(filter-out _all sub-make,$(MAKECMDGOALS))
@@ -229,7 +276,10 @@ endif # ifeq ($(KBUILD_SRC),)
 ifeq ($(skip-makefile),)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # Do not print "Entering directory ...",
 # but we want to display it when entering to the output directory
 # so that IDEs/editors are able to understand relative filenames.
@@ -263,6 +313,9 @@ ifeq ("$(origin M)", "command line")
   KBUILD_EXTMOD := $(M)
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # If building an external module we do not care about the all: rule
 # but instead _all depend on modules
@@ -274,9 +327,12 @@ _all: modules
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 srctree		:= $(if $(KBUILD_SRC),$(KBUILD_SRC),$(CURDIR))
 objtree		:= $(CURDIR)
 =======
+=======
+>>>>>>> v3.18
 ifeq ($(KBUILD_SRC),)
         # building in the source tree
         srctree := .
@@ -289,6 +345,9 @@ else
         endif
 endif
 objtree		:= .
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 src		:= $(srctree)
 obj		:= $(objtree)
@@ -302,7 +361,11 @@ export srctree objtree VPATH
 # first, and if a usermode build is happening, the "ARCH=um" on the command
 # line overrides the setting of ARCH below.  If a native build is happening,
 <<<<<<< HEAD
+<<<<<<< HEAD
 # then ARCH is assigned, getting whatever value it gets normally, and 
+=======
+# then ARCH is assigned, getting whatever value it gets normally, and
+>>>>>>> v3.18
 =======
 # then ARCH is assigned, getting whatever value it gets normally, and
 >>>>>>> v3.18
@@ -388,12 +451,18 @@ HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-p
 HOSTCXXFLAGS = -O2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ifeq ($(shell $(HOSTCC) -v 2>&1 | grep -c "clang version"), 1)
 HOSTCFLAGS  += -Wno-unused-value -Wno-unused-parameter \
 		-Wno-missing-field-initializers -fno-delete-null-pointer-checks
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # Decide whether to build built-in, modular, or both.
 # Normally, just do built-in.
@@ -402,15 +471,21 @@ KBUILD_MODULES :=
 KBUILD_BUILTIN := 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #	If we have only "make modules", don't compile built-in objects.
 #	When we're building modules with modversions, we need to consider
 #	the built-in objects during the descend as well, in order to
 #	make sure the checksums are up to date before we record them.
 =======
+=======
+>>>>>>> v3.18
 # If we have only "make modules", don't compile built-in objects.
 # When we're building modules with modversions, we need to consider
 # the built-in objects during the descend as well, in order to
 # make sure the checksums are up to date before we record them.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ifeq ($(MAKECMDGOALS),modules)
@@ -418,9 +493,15 @@ ifeq ($(MAKECMDGOALS),modules)
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #	If we have "make <whatever> modules", compile modules
 #	in addition to whatever we do anyway.
 #	Just "make" or "make all" shall build modules as well
+=======
+# If we have "make <whatever> modules", compile modules
+# in addition to whatever we do anyway.
+# Just "make" or "make all" shall build modules as well
+>>>>>>> v3.18
 =======
 # If we have "make <whatever> modules", compile modules
 # in addition to whatever we do anyway.
@@ -438,6 +519,7 @@ endif
 export KBUILD_MODULES KBUILD_BUILTIN
 export KBUILD_CHECKSRC KBUILD_SRC KBUILD_EXTMOD
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # Beautify output
 # ---------------------------------------------------------------------------
@@ -481,6 +563,8 @@ export quiet Q KBUILD_VERBOSE
 
 
 =======
+=======
+>>>>>>> v3.18
 ifneq ($(CC),)
 ifeq ($(shell $(CC) -v 2>&1 | grep -c "clang version"), 1)
 COMPILER := clang
@@ -490,6 +574,9 @@ endif
 export COMPILER
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # Look for make include files relative to root of kernel src
 MAKEFLAGS += --include-dir=$(srctree)
@@ -500,10 +587,16 @@ include $(srctree)/scripts/Kbuild.include
 
 # Make variables (CC, etc...)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
 REAL_CC		= $(CROSS_COMPILE)gcc
+=======
+AS		= $(CROSS_COMPILE)as
+LD		= $(CROSS_COMPILE)ld
+CC		= $(CROSS_COMPILE)gcc
+>>>>>>> v3.18
 =======
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
@@ -521,12 +614,18 @@ INSTALLKERNEL  := installkernel
 DEPMOD		= /sbin/depmod
 PERL		= perl
 <<<<<<< HEAD
+<<<<<<< HEAD
 CHECK		= sparse
 
 # Use the wrapper for the compiler.  This wrapper scans for new
 # warnings and causes the build to stop upon encountering them.
 CC		= $(srctree)/scripts/gcc-wrapper.py $(REAL_CC)
 
+=======
+PYTHON		= python
+CHECK		= sparse
+
+>>>>>>> v3.18
 =======
 PYTHON		= python
 CHECK		= sparse
@@ -547,7 +646,10 @@ USERINCLUDE    := \
 		-I$(srctree)/arch/$(hdr-arch)/include/uapi \
 		-Iarch/$(hdr-arch)/include/generated/uapi \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		-I$(srctree)/drivers/soc/qcom \
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		-I$(srctree)/include/uapi \
@@ -570,7 +672,10 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   -fno-delete-null-pointer-checks \
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		   -std=gnu89
@@ -590,7 +695,11 @@ export VERSION PATCHLEVEL SUBLEVEL KERNELRELEASE KERNELVERSION
 export ARCH SRCARCH CONFIG_SHELL HOSTCC HOSTCFLAGS CROSS_COMPILE AS LD CC
 export CPP AR NM STRIP OBJCOPY OBJDUMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 export MAKE AWK GENKSYMS INSTALLKERNEL PERL UTS_MACHINE
+=======
+export MAKE AWK GENKSYMS INSTALLKERNEL PERL PYTHON UTS_MACHINE
+>>>>>>> v3.18
 =======
 export MAKE AWK GENKSYMS INSTALLKERNEL PERL PYTHON UTS_MACHINE
 >>>>>>> v3.18
@@ -611,8 +720,14 @@ export MODVERDIR := $(if $(KBUILD_EXTMOD),$(firstword $(KBUILD_EXTMOD))/).tmp_ve
 # Files to ignore in find ... statements
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 RCS_FIND_IGNORE := \( -name SCCS -o -name BitKeeper -o -name .svn -o -name CVS \
 		   -o -name .pc -o -name .hg -o -name .git \) -prune -o
+=======
+export RCS_FIND_IGNORE := \( -name SCCS -o -name BitKeeper -o -name .svn -o    \
+			  -name CVS -o -name .pc -o -name .hg -o -name .git \) \
+			  -prune -o
+>>>>>>> v3.18
 =======
 export RCS_FIND_IGNORE := \( -name SCCS -o -name BitKeeper -o -name .svn -o    \
 			  -name CVS -o -name .pc -o -name .hg -o -name .git \) \
@@ -692,9 +807,12 @@ ifeq ($(mixed-targets),1)
 # Handle them one by one.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 %:: FORCE
 	$(Q)$(MAKE) -C $(srctree) KBUILD_SRC= $@
 =======
+=======
+>>>>>>> v3.18
 PHONY += $(MAKECMDGOALS) __build_one_by_one
 
 $(filter-out __build_one_by_one, $(MAKECMDGOALS)): __build_one_by_one
@@ -705,6 +823,9 @@ __build_one_by_one:
 	for i in $(MAKECMDGOALS); do \
 		$(MAKE) -f $(srctree)/Makefile $$i; \
 	done
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 else
@@ -721,11 +842,17 @@ export KBUILD_DEFCONFIG KBUILD_KCONFIG
 
 config: scripts_basic outputmakefile FORCE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(Q)mkdir -p include/linux include/config
 	$(Q)$(MAKE) $(build)=scripts/kconfig $@
 
 %config: scripts_basic outputmakefile FORCE
 	$(Q)mkdir -p include/linux include/config
+=======
+	$(Q)$(MAKE) $(build)=scripts/kconfig $@
+
+%config: scripts_basic outputmakefile FORCE
+>>>>>>> v3.18
 =======
 	$(Q)$(MAKE) $(build)=scripts/kconfig $@
 
@@ -801,24 +928,35 @@ endif # $(dot-config)
 all: vmlinux
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 KBUILD_CFLAGS	+= $(call cc-disable-warning,maybe-uninitialized,)
 
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os
 =======
+=======
+>>>>>>> v3.18
 include $(srctree)/arch/$(SRCARCH)/Makefile
 
 KBUILD_CFLAGS	+= $(call cc-option,-fno-delete-null-pointer-checks,)
 
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os $(call cc-disable-warning,maybe-uninitialized,)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 else
 KBUILD_CFLAGS	+= -O2
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 include $(srctree)/arch/$(SRCARCH)/Makefile
+=======
+# Tell gcc to never replace conditional load with a non-conditional one
+KBUILD_CFLAGS	+= $(call cc-option,--param=allow-store-data-races=0)
+>>>>>>> v3.18
 =======
 # Tell gcc to never replace conditional load with a non-conditional one
 KBUILD_CFLAGS	+= $(call cc-option,--param=allow-store-data-races=0)
@@ -840,7 +978,10 @@ endif
 
 # Handle stack protector mode.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #
 # Since kbuild can potentially perform two passes (first with the old
 # .config values and then with updated .config values), we cannot error out
@@ -857,6 +998,9 @@ endif
 # to let the build fail with bad compiler flags so that we can't produce a
 # kernel when there is a CONFIG and compiler mismatch.
 #
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ifdef CONFIG_CC_STACKPROTECTOR_REGULAR
   stackp-flag := -fstack-protector
@@ -879,10 +1023,13 @@ endif
 KBUILD_CFLAGS += $(stackp-flag)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # This warning generated too much noise in a regular build.
 # Use make W=1 to enable this warning (see scripts/Makefile.build)
 KBUILD_CFLAGS += $(call cc-disable-warning, unused-but-set-variable)
 =======
+=======
+>>>>>>> v3.18
 ifeq ($(COMPILER),clang)
 KBUILD_CPPFLAGS += $(call cc-option,-Qunused-arguments,)
 KBUILD_CPPFLAGS += $(call cc-option,-Wno-unknown-warning-option,)
@@ -902,6 +1049,9 @@ else
 # Use make W=1 to enable this warning (see scripts/Makefile.build)
 KBUILD_CFLAGS += $(call cc-disable-warning, unused-but-set-variable)
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ifdef CONFIG_FRAME_POINTER
@@ -921,9 +1071,12 @@ KBUILD_CFLAGS   += $(call cc-option, -fno-var-tracking-assignments)
 
 ifdef CONFIG_DEBUG_INFO
 <<<<<<< HEAD
+<<<<<<< HEAD
 KBUILD_CFLAGS	+= -g
 KBUILD_AFLAGS	+= -gdwarf-2
 =======
+=======
+>>>>>>> v3.18
 ifdef CONFIG_DEBUG_INFO_SPLIT
 KBUILD_CFLAGS   += $(call cc-option, -gsplit-dwarf, -g)
 else
@@ -933,6 +1086,9 @@ KBUILD_AFLAGS	+= -Wa,-gdwarf-2
 endif
 ifdef CONFIG_DEBUG_INFO_DWARF4
 KBUILD_CFLAGS	+= $(call cc-option, -gdwarf-4,)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif
 
@@ -977,7 +1133,10 @@ KBUILD_CFLAGS	+= $(call cc-option,-fno-strict-overflow)
 KBUILD_CFLAGS   += $(call cc-option,-fconserve-stack)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # disallow errors like 'EXPORT_GPL(foo);' with missing header
 KBUILD_CFLAGS   += $(call cc-option,-Werror=implicit-int)
 
@@ -987,6 +1146,9 @@ KBUILD_CFLAGS   += $(call cc-option,-Werror=strict-prototypes)
 # Prohibit date/time macros, which would make the build non-deterministic
 KBUILD_CFLAGS   += $(call cc-option,-Werror=date-time)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # use the deterministic mode of AR if available
 KBUILD_ARFLAGS := $(call ar-option,D)
@@ -997,6 +1159,11 @@ ifeq ($(shell $(CONFIG_SHELL) $(srctree)/scripts/gcc-goto.sh $(CC)), y)
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+include $(srctree)/scripts/Makefile.extrawarn
+
+>>>>>>> v3.18
 =======
 include $(srctree)/scripts/Makefile.extrawarn
 
@@ -1017,9 +1184,12 @@ LDFLAGS_vmlinux	+= $(call ld-option, -X,)
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 LDFLAGS_vmlinux += $(call ld-option, --fix-cortex-a53-843419)
 LDFLAGS_MODULE += $(call ld-option, --fix-cortex-a53-843419)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # Default kernel image to build when no specific target is given.
@@ -1036,7 +1206,10 @@ export	INSTALL_PATH ?= /boot
 
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # INSTALL_DTBS_PATH specifies a prefix for relocations required by build roots.
 # Like INSTALL_MOD_PATH, it isn't defined in the Makefile, but can be passed as
 # an argument if needed. Otherwise it defaults to the kernel install path
@@ -1044,6 +1217,9 @@ export	INSTALL_PATH ?= /boot
 export INSTALL_DTBS_PATH ?= $(INSTALL_PATH)/dtbs/$(KERNELRELEASE)
 
 #
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # INSTALL_MOD_PATH specifies a prefix to MODLIB for module directory
 # relocations required by build roots.  This is not defined in the
@@ -1055,15 +1231,21 @@ export MODLIB
 
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 #  INSTALL_MOD_STRIP, if defined, will cause modules to be
 #  stripped after they are installed.  If INSTALL_MOD_STRIP is '1', then
 #  the default option --strip-debug will be used.  Otherwise,
 #  INSTALL_MOD_STRIP value will be used as the options to the strip command.
 =======
+=======
+>>>>>>> v3.18
 # INSTALL_MOD_STRIP, if defined, will cause modules to be
 # stripped after they are installed.  If INSTALL_MOD_STRIP is '1', then
 # the default option --strip-debug will be used.  Otherwise,
 # INSTALL_MOD_STRIP value will be used as the options to the strip command.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ifdef INSTALL_MOD_STRIP
@@ -1078,7 +1260,10 @@ endif # INSTALL_MOD_STRIP
 export mod_strip_cmd
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # CONFIG_MODULE_COMPRESS, if defined, will cause module to be compressed
 # after they are installed in agreement with CONFIG_MODULE_COMPRESS_GZIP
 # or CONFIG_MODULE_COMPRESS_XZ.
@@ -1106,6 +1291,9 @@ INITRD_COMPRESS-$(CONFIG_RD_LZ4)   := lz4
 # do not export INITRD_COMPRESS, since we didn't actually
 # choose a sane default compression above.
 # export INITRD_COMPRESS := $(INITRD_COMPRESS-y)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ifdef CONFIG_MODULE_SIG_ALL
@@ -1128,9 +1316,13 @@ vmlinux-dirs	:= $(patsubst %/,%,$(filter %/, $(init-y) $(init-m) \
 
 vmlinux-alldirs	:= $(sort $(vmlinux-dirs) $(patsubst %/,%,$(filter %/, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     $(init-n) $(init-) \
 		     $(core-n) $(core-) $(drivers-n) $(drivers-) \
 		     $(net-n)  $(net-)  $(libs-n)    $(libs-))))
+=======
+		     $(init-) $(core-) $(drivers-) $(net-) $(libs-))))
+>>>>>>> v3.18
 =======
 		     $(init-) $(core-) $(drivers-) $(net-) $(libs-))))
 >>>>>>> v3.18
@@ -1172,7 +1364,11 @@ endif
 	+$(call if_changed,link-vmlinux)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # The actual objects are generated when descending, 
+=======
+# The actual objects are generated when descending,
+>>>>>>> v3.18
 =======
 # The actual objects are generated when descending,
 >>>>>>> v3.18
@@ -1190,11 +1386,14 @@ $(vmlinux-dirs): prepare scripts
 	$(Q)$(MAKE) $(build)=$@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Store (new) KERNELRELASE string in include/config/kernel.release
 include/config/kernel.release: include/config/auto.conf FORCE
 	$(Q)rm -f $@
 	$(Q)echo "$(KERNELVERSION)$$($(CONFIG_SHELL) $(srctree)/scripts/setlocalversion $(srctree))" > $@
 =======
+=======
+>>>>>>> v3.18
 define filechk_kernel.release
 	echo "$(KERNELVERSION)$$($(CONFIG_SHELL) $(srctree)/scripts/setlocalversion $(srctree))"
 endef
@@ -1202,6 +1401,9 @@ endef
 # Store (new) KERNELRELEASE string in include/config/kernel.release
 include/config/kernel.release: include/config/auto.conf FORCE
 	$(call filechk,kernel.release)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -1333,7 +1535,10 @@ headers_check: headers_install
 
 # ---------------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # Kernel selftest
 
 PHONY += kselftest
@@ -1341,6 +1546,9 @@ kselftest:
 	$(Q)$(MAKE) -C tools/testing/selftests run_tests
 
 # ---------------------------------------------------------------------------
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # Modules
 
@@ -1351,17 +1559,23 @@ ifdef CONFIG_MODULES
 all: modules
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #	Build modules
 #
 #	A module can be listed more than once in obj-m resulting in
 #	duplicate lines in modules.order files.  Those are removed
 #	using awk while concatenating to the final file.
 =======
+=======
+>>>>>>> v3.18
 # Build modules
 #
 # A module can be listed more than once in obj-m resulting in
 # duplicate lines in modules.order files.  Those are removed
 # using awk while concatenating to the final file.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 PHONY += modules
@@ -1392,15 +1606,21 @@ _modinst_:
 	@rm -f $(MODLIB)/source
 	@mkdir -p $(MODLIB)/kernel
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@ln -s $(srctree) $(MODLIB)/source
 	@if [ ! $(objtree) -ef  $(MODLIB)/build ]; then \
 		rm -f $(MODLIB)/build ; \
 		ln -s $(objtree) $(MODLIB)/build ; \
 =======
+=======
+>>>>>>> v3.18
 	@ln -s `cd $(srctree) && /bin/pwd` $(MODLIB)/source
 	@if [ ! $(objtree) -ef  $(MODLIB)/build ]; then \
 		rm -f $(MODLIB)/build ; \
 		ln -s $(CURDIR) $(MODLIB)/build ; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fi
 	@cp -f $(objtree)/modules.order $(MODLIB)/
@@ -1449,7 +1669,11 @@ CLEAN_DIRS  += $(MODVERDIR)
 # Directories & files removed with 'make mrproper'
 MRPROPER_DIRS  += include/config usr/include include/generated          \
 <<<<<<< HEAD
+<<<<<<< HEAD
                   arch/*/include/generated
+=======
+		  arch/*/include/generated .tmp_objdiff
+>>>>>>> v3.18
 =======
 		  arch/*/include/generated .tmp_objdiff
 >>>>>>> v3.18
@@ -1458,7 +1682,11 @@ MRPROPER_FILES += .config .config.old .version .old_version $(version_h) \
 		  signing_key.priv signing_key.x509 x509.genkey		\
 		  extra_certificates signing_key.x509.keyid		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  signing_key.x509.signer
+=======
+		  signing_key.x509.signer include/linux/version.h
+>>>>>>> v3.18
 =======
 		  signing_key.x509.signer include/linux/version.h
 >>>>>>> v3.18
@@ -1501,8 +1729,12 @@ distclean: mrproper
 		\( -name '*.orig' -o -name '*.rej' -o -name '*~' \
 		-o -name '*.bak' -o -name '#*#' -o -name '.*.orig' \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		-o -name '.*.rej' \
 		-o -name '*%' -o -name '.*.cmd' -o -name 'core' \) \
+=======
+		-o -name '.*.rej' -o -name '*%'  -o -name 'core' \) \
+>>>>>>> v3.18
 =======
 		-o -name '.*.rej' -o -name '*%'  -o -name 'core' \) \
 >>>>>>> v3.18
@@ -1513,7 +1745,11 @@ distclean: mrproper
 # ---------------------------------------------------------------------------
 # rpm target kept for backward compatibility
 <<<<<<< HEAD
+<<<<<<< HEAD
 package-dir	:= $(srctree)/scripts/package
+=======
+package-dir	:= scripts/package
+>>>>>>> v3.18
 =======
 package-dir	:= scripts/package
 >>>>>>> v3.18
@@ -1561,8 +1797,14 @@ help:
 	@echo  '  cscope	  - Generate cscope index'
 	@echo  '  gtags           - Generate GNU GLOBAL index'
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@echo  '  kernelrelease	  - Output the release version string'
 	@echo  '  kernelversion	  - Output the version stored in Makefile'
+=======
+	@echo  '  kernelrelease	  - Output the release version string (use with make -s)'
+	@echo  '  kernelversion	  - Output the version stored in Makefile (use with make -s)'
+	@echo  '  image_name	  - Output the image name (use with make -s)'
+>>>>>>> v3.18
 =======
 	@echo  '  kernelrelease	  - Output the release version string (use with make -s)'
 	@echo  '  kernelversion	  - Output the version stored in Makefile (use with make -s)'
@@ -1582,12 +1824,18 @@ help:
 	@$(MAKE) -f $(srctree)/scripts/Makefile.help checker-help
 	@echo  ''
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	@echo  'Kernel selftest'
 	@echo  '  kselftest       - Build and run kernel selftest (run as root)'
 	@echo  '                    Build, install, and boot kernel before'
 	@echo  '                    running kselftest on it'
 	@echo  ''
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	@echo  'Kernel packaging:'
 	@$(MAKE) $(build)=$(package-dir) help
@@ -1731,6 +1979,10 @@ clean: $(clean-dirs)
 		\( -name '*.[oas]' -o -name '*.ko' -o -name '.*.cmd' \
 		-o -name '*.ko.*' \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		-o -name '*.dwo'  \
+>>>>>>> v3.18
 =======
 		-o -name '*.dwo'  \
 >>>>>>> v3.18
@@ -1775,7 +2027,11 @@ endif #ifeq ($(config-targets),1)
 endif #ifeq ($(mixed-targets),1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 PHONY += checkstack kernelrelease kernelversion
+=======
+PHONY += checkstack kernelrelease kernelversion image_name
+>>>>>>> v3.18
 =======
 PHONY += checkstack kernelrelease kernelversion image_name
 >>>>>>> v3.18
@@ -1800,6 +2056,12 @@ kernelversion:
 	@echo $(KERNELVERSION)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+image_name:
+	@echo $(KBUILD_IMAGE)
+
+>>>>>>> v3.18
 =======
 image_name:
 	@echo $(KBUILD_IMAGE)
@@ -1854,6 +2116,11 @@ endif
 	$(Q)$(MAKE) KBUILD_MODULES=$(if $(CONFIG_MODULES),1) \
 	$(build)=$(build-dir)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# Make sure the latest headers are built for Documentation
+Documentation/: headers_install
+>>>>>>> v3.18
 =======
 # Make sure the latest headers are built for Documentation
 Documentation/: headers_install
@@ -1869,7 +2136,11 @@ Documentation/: headers_install
 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.modpost
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # FIXME Should go into a make.lib or something 
+=======
+# FIXME Should go into a make.lib or something
+>>>>>>> v3.18
 =======
 # FIXME Should go into a make.lib or something
 >>>>>>> v3.18
@@ -1905,7 +2176,11 @@ endif
 # Usage:
 # $(Q)$(MAKE) $(clean)=dir
 <<<<<<< HEAD
+<<<<<<< HEAD
 clean := -f $(if $(KBUILD_SRC),$(srctree)/)scripts/Makefile.clean obj
+=======
+clean := -f $(srctree)/scripts/Makefile.clean obj
+>>>>>>> v3.18
 =======
 clean := -f $(srctree)/scripts/Makefile.clean obj
 >>>>>>> v3.18

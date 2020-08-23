@@ -54,6 +54,10 @@
 #include <linux/slab.h>
 #include <linux/ratelimit.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/nodemask.h>
+>>>>>>> v3.18
 =======
 #include <linux/nodemask.h>
 >>>>>>> v3.18
@@ -65,6 +69,12 @@
 #include "bitmap.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_to_group(cpu) cpu_to_node(cpu)
+#define ANY_GROUP NUMA_NO_NODE
+
+>>>>>>> v3.18
 =======
 #define cpu_to_group(cpu) cpu_to_node(cpu)
 #define ANY_GROUP NUMA_NO_NODE
@@ -75,6 +85,10 @@ module_param(devices_handle_discard_safely, bool, 0644);
 MODULE_PARM_DESC(devices_handle_discard_safely,
 		 "Set to Y if all devices in each array reliably return zeroes on reads from discarded regions");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct workqueue_struct *raid5_wq;
+>>>>>>> v3.18
 =======
 static struct workqueue_struct *raid5_wq;
 >>>>>>> v3.18
@@ -91,6 +105,10 @@ static struct workqueue_struct *raid5_wq;
 #define NR_HASH			(PAGE_SIZE / sizeof(struct hlist_head))
 #define HASH_MASK		(NR_HASH - 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MAX_STRIPE_BATCH	8
+>>>>>>> v3.18
 =======
 #define MAX_STRIPE_BATCH	8
 >>>>>>> v3.18
@@ -102,7 +120,10 @@ static inline struct hlist_head *stripe_hash(struct r5conf *conf, sector_t sect)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int stripe_hash_locks_hash(sector_t sect)
 {
 	return (sect >> STRIPE_SHIFT) & STRIPE_HASH_LOCKS_MASK;
@@ -139,6 +160,9 @@ static inline void unlock_all_device_hash_locks_irq(struct r5conf *conf)
 	local_irq_enable();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* bio's attached to a stripe+device for I/O are linked together in bi_sector
  * order without overlap.  There may be several bio's per stripe+device, and
@@ -153,7 +177,11 @@ static inline struct bio *r5_next_bio(struct bio *bio, sector_t sector)
 {
 	int sectors = bio_sectors(bio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bio->bi_sector + sectors < sector + STRIPE_SECTORS)
+=======
+	if (bio->bi_iter.bi_sector + sectors < sector + STRIPE_SECTORS)
+>>>>>>> v3.18
 =======
 	if (bio->bi_iter.bi_sector + sectors < sector + STRIPE_SECTORS)
 >>>>>>> v3.18
@@ -249,7 +277,11 @@ static void return_io(struct bio *return_bi)
 		return_bi = bi->bi_next;
 		bi->bi_next = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bi->bi_size = 0;
+=======
+		bi->bi_iter.bi_size = 0;
+>>>>>>> v3.18
 =======
 		bi->bi_iter.bi_size = 0;
 >>>>>>> v3.18
@@ -270,8 +302,11 @@ static int stripe_operations_active(struct stripe_head *sh)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void do_release_stripe(struct r5conf *conf, struct stripe_head *sh)
 =======
+=======
+>>>>>>> v3.18
 static void raid5_wakeup_stripe_thread(struct stripe_head *sh)
 {
 	struct r5conf *conf = sh->raid_conf;
@@ -317,6 +352,9 @@ static void raid5_wakeup_stripe_thread(struct stripe_head *sh)
 
 static void do_release_stripe(struct r5conf *conf, struct stripe_head *sh,
 			      struct list_head *temp_inactive_list)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	BUG_ON(!list_empty(&sh->lru));
@@ -324,16 +362,22 @@ static void do_release_stripe(struct r5conf *conf, struct stripe_head *sh,
 	if (test_bit(STRIPE_HANDLE, &sh->state)) {
 		if (test_bit(STRIPE_DELAYED, &sh->state) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    !test_bit(STRIPE_PREREAD_ACTIVE, &sh->state))
 			list_add_tail(&sh->lru, &conf->delayed_list);
 		else if (test_bit(STRIPE_BIT_DELAY, &sh->state) &&
 =======
+=======
+>>>>>>> v3.18
 		    !test_bit(STRIPE_PREREAD_ACTIVE, &sh->state)) {
 			list_add_tail(&sh->lru, &conf->delayed_list);
 			if (atomic_read(&conf->preread_active_stripes)
 			    < IO_THRESHOLD)
 				md_wakeup_thread(conf->mddev->thread);
 		} else if (test_bit(STRIPE_BIT_DELAY, &sh->state) &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			   sh->bm_seq - conf->seq_write > 0)
 			list_add_tail(&sh->lru, &conf->bitmap_list);
@@ -341,14 +385,20 @@ static void do_release_stripe(struct r5conf *conf, struct stripe_head *sh,
 			clear_bit(STRIPE_DELAYED, &sh->state);
 			clear_bit(STRIPE_BIT_DELAY, &sh->state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_add_tail(&sh->lru, &conf->handle_list);
 =======
+=======
+>>>>>>> v3.18
 			if (conf->worker_cnt_per_group == 0) {
 				list_add_tail(&sh->lru, &conf->handle_list);
 			} else {
 				raid5_wakeup_stripe_thread(sh);
 				return;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		md_wakeup_thread(conf->mddev->thread);
@@ -359,6 +409,7 @@ static void do_release_stripe(struct r5conf *conf, struct stripe_head *sh,
 			    < IO_THRESHOLD)
 				md_wakeup_thread(conf->mddev->thread);
 		atomic_dec(&conf->active_stripes);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!test_bit(STRIPE_EXPANDING, &sh->state)) {
 			list_add_tail(&sh->lru, &conf->inactive_list);
@@ -374,6 +425,8 @@ static void __release_stripe(struct r5conf *conf, struct stripe_head *sh)
 	if (atomic_dec_and_test(&sh->count))
 		do_release_stripe(conf, sh);
 =======
+=======
+>>>>>>> v3.18
 		if (!test_bit(STRIPE_EXPANDING, &sh->state))
 			list_add_tail(&sh->lru, temp_inactive_list);
 	}
@@ -462,6 +515,9 @@ static int release_stripe_list(struct r5conf *conf,
 	}
 
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -470,12 +526,15 @@ static void release_stripe(struct stripe_head *sh)
 	struct r5conf *conf = sh->raid_conf;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	local_irq_save(flags);
 	if (atomic_dec_and_lock(&sh->count, &conf->device_lock)) {
 		do_release_stripe(conf, sh);
 		spin_unlock(&conf->device_lock);
 =======
+=======
+>>>>>>> v3.18
 	struct list_head list;
 	int hash;
 	bool wakeup;
@@ -501,6 +560,9 @@ slow_path:
 		do_release_stripe(conf, sh, &list);
 		spin_unlock(&conf->device_lock);
 		release_inactive_stripe_list(conf, &list, hash);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	local_irq_restore(flags);
@@ -525,9 +587,14 @@ static inline void insert_hash(struct r5conf *conf, struct stripe_head *sh)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* find an idle stripe, make sure it is unhashed, and return it. */
 static struct stripe_head *get_free_stripe(struct r5conf *conf)
+=======
+/* find an idle stripe, make sure it is unhashed, and return it. */
+static struct stripe_head *get_free_stripe(struct r5conf *conf, int hash)
+>>>>>>> v3.18
 =======
 /* find an idle stripe, make sure it is unhashed, and return it. */
 static struct stripe_head *get_free_stripe(struct r5conf *conf, int hash)
@@ -537,9 +604,15 @@ static struct stripe_head *get_free_stripe(struct r5conf *conf, int hash)
 	struct list_head *first;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (list_empty(&conf->inactive_list))
 		goto out;
 	first = conf->inactive_list.next;
+=======
+	if (list_empty(conf->inactive_list + hash))
+		goto out;
+	first = (conf->inactive_list + hash)->next;
+>>>>>>> v3.18
 =======
 	if (list_empty(conf->inactive_list + hash))
 		goto out;
@@ -550,6 +623,12 @@ static struct stripe_head *get_free_stripe(struct r5conf *conf, int hash)
 	remove_hash(sh);
 	atomic_inc(&conf->active_stripes);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUG_ON(hash != sh->hash_lock_index);
+	if (list_empty(conf->inactive_list + hash))
+		atomic_inc(&conf->empty_inactive_list_nr);
+>>>>>>> v3.18
 =======
 	BUG_ON(hash != sh->hash_lock_index);
 	if (list_empty(conf->inactive_list + hash))
@@ -567,6 +646,10 @@ static void shrink_buffers(struct stripe_head *sh)
 
 	for (i = 0; i < num ; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		WARN_ON(sh->dev[i].page != sh->dev[i].orig_page);
+>>>>>>> v3.18
 =======
 		WARN_ON(sh->dev[i].page != sh->dev[i].orig_page);
 >>>>>>> v3.18
@@ -591,6 +674,10 @@ static int grow_buffers(struct stripe_head *sh)
 		}
 		sh->dev[i].page = page;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		sh->dev[i].orig_page = page;
+>>>>>>> v3.18
 =======
 		sh->dev[i].orig_page = page;
 >>>>>>> v3.18
@@ -606,7 +693,11 @@ static void init_stripe(struct stripe_head *sh, sector_t sector, int previous)
 {
 	struct r5conf *conf = sh->raid_conf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+	int i, seq;
+>>>>>>> v3.18
 =======
 	int i, seq;
 >>>>>>> v3.18
@@ -617,10 +708,16 @@ static void init_stripe(struct stripe_head *sh, sector_t sector, int previous)
 
 	pr_debug("init_stripe called, stripe %llu\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(unsigned long long)sh->sector);
 
 	remove_hash(sh);
 
+=======
+		(unsigned long long)sector);
+retry:
+	seq = read_seqcount_begin(&conf->gen_lock);
+>>>>>>> v3.18
 =======
 		(unsigned long long)sector);
 retry:
@@ -633,7 +730,10 @@ retry:
 	sh->state = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = sh->disks; i--; ) {
@@ -651,12 +751,18 @@ retry:
 		raid5_build_block(sh, i, previous);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	insert_hash(conf, sh);
 =======
+=======
+>>>>>>> v3.18
 	if (read_seqcount_retry(&conf->gen_lock, seq))
 		goto retry;
 	insert_hash(conf, sh);
 	sh->cpu = smp_processor_id();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -761,21 +867,28 @@ get_active_stripe(struct r5conf *conf, sector_t sector,
 {
 	struct stripe_head *sh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pr_debug("get_stripe, sector %llu\n", (unsigned long long)sector);
 
 	spin_lock_irq(&conf->device_lock);
 =======
+=======
+>>>>>>> v3.18
 	int hash = stripe_hash_locks_hash(sector);
 
 	pr_debug("get_stripe, sector %llu\n", (unsigned long long)sector);
 
 	spin_lock_irq(conf->hash_locks + hash);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	do {
 		wait_event_lock_irq(conf->wait_for_stripe,
 				    conf->quiesce == 0 || noquiesce,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				    conf->device_lock);
 		sh = __find_stripe(conf, sector, conf->generation - previous);
@@ -783,16 +896,22 @@ get_active_stripe(struct r5conf *conf, sector_t sector,
 			if (!conf->inactive_blocked)
 				sh = get_free_stripe(conf);
 =======
+=======
+>>>>>>> v3.18
 				    *(conf->hash_locks + hash));
 		sh = __find_stripe(conf, sector, conf->generation - previous);
 		if (!sh) {
 			if (!conf->inactive_blocked)
 				sh = get_free_stripe(conf, hash);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (noblock && sh == NULL)
 				break;
 			if (!sh) {
 				conf->inactive_blocked = 1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 				wait_event_lock_irq(conf->wait_for_stripe,
 						    !list_empty(&conf->inactive_list) &&
@@ -824,6 +943,8 @@ get_active_stripe(struct r5conf *conf, sector_t sector,
 
 	spin_unlock_irq(&conf->device_lock);
 =======
+=======
+>>>>>>> v3.18
 				wait_event_lock_irq(
 					conf->wait_for_stripe,
 					!list_empty(conf->inactive_list + hash) &&
@@ -855,6 +976,9 @@ get_active_stripe(struct r5conf *conf, sector_t sector,
 	} while (sh == NULL);
 
 	spin_unlock_irq(conf->hash_locks + hash);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return sh;
 }
@@ -1006,6 +1130,7 @@ static void ops_run_io(struct stripe_head *sh, struct stripe_head_state *s)
 			atomic_inc(&sh->count);
 			if (use_new_offset(conf, sh))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				bi->bi_sector = (sh->sector
 						 + rdev->new_data_offset);
 			else
@@ -1019,6 +1144,8 @@ static void ops_run_io(struct stripe_head *sh, struct stripe_head_state *s)
 			bi->bi_io_vec[0].bv_offset = 0;
 			bi->bi_size = STRIPE_SIZE;
 =======
+=======
+>>>>>>> v3.18
 				bi->bi_iter.bi_sector = (sh->sector
 						 + rdev->new_data_offset);
 			else
@@ -1034,6 +1161,9 @@ static void ops_run_io(struct stripe_head *sh, struct stripe_head_state *s)
 			bi->bi_io_vec[0].bv_len = STRIPE_SIZE;
 			bi->bi_io_vec[0].bv_offset = 0;
 			bi->bi_iter.bi_size = STRIPE_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * If this is discard request, set bi_vcnt 0. We don't
@@ -1071,6 +1201,7 @@ static void ops_run_io(struct stripe_head *sh, struct stripe_head_state *s)
 			atomic_inc(&sh->count);
 			if (use_new_offset(conf, sh))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rbi->bi_sector = (sh->sector
 						  + rrdev->new_data_offset);
 			else
@@ -1081,6 +1212,8 @@ static void ops_run_io(struct stripe_head *sh, struct stripe_head_state *s)
 			rbi->bi_io_vec[0].bv_offset = 0;
 			rbi->bi_size = STRIPE_SIZE;
 =======
+=======
+>>>>>>> v3.18
 				rbi->bi_iter.bi_sector = (sh->sector
 						  + rrdev->new_data_offset);
 			else
@@ -1093,6 +1226,9 @@ static void ops_run_io(struct stripe_head *sh, struct stripe_head_state *s)
 			rbi->bi_io_vec[0].bv_len = STRIPE_SIZE;
 			rbi->bi_io_vec[0].bv_offset = 0;
 			rbi->bi_iter.bi_size = STRIPE_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * If this is discard request, set bi_vcnt 0. We don't
@@ -1119,6 +1255,7 @@ static void ops_run_io(struct stripe_head *sh, struct stripe_head_state *s)
 
 static struct dma_async_tx_descriptor *
 <<<<<<< HEAD
+<<<<<<< HEAD
 async_copy_data(int frombio, struct bio *bio, struct page *page,
 	sector_t sector, struct dma_async_tx_descriptor *tx)
 {
@@ -1126,6 +1263,8 @@ async_copy_data(int frombio, struct bio *bio, struct page *page,
 	struct page *bio_page;
 	int i;
 =======
+=======
+>>>>>>> v3.18
 async_copy_data(int frombio, struct bio *bio, struct page **page,
 	sector_t sector, struct dma_async_tx_descriptor *tx,
 	struct stripe_head *sh)
@@ -1133,21 +1272,30 @@ async_copy_data(int frombio, struct bio *bio, struct page **page,
 	struct bio_vec bvl;
 	struct bvec_iter iter;
 	struct page *bio_page;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int page_offset;
 	struct async_submit_ctl submit;
 	enum async_tx_flags flags = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bio->bi_sector >= sector)
 		page_offset = (signed)(bio->bi_sector - sector) * 512;
 	else
 		page_offset = (signed)(sector - bio->bi_sector) * -512;
 =======
+=======
+>>>>>>> v3.18
 	if (bio->bi_iter.bi_sector >= sector)
 		page_offset = (signed)(bio->bi_iter.bi_sector - sector) * 512;
 	else
 		page_offset = (signed)(sector - bio->bi_iter.bi_sector) * -512;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (frombio)
@@ -1155,8 +1303,13 @@ async_copy_data(int frombio, struct bio *bio, struct page **page,
 	init_async_submit(&submit, flags, tx, NULL, NULL, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio_for_each_segment(bvl, bio, i) {
 		int len = bvl->bv_len;
+=======
+	bio_for_each_segment(bvl, bio, iter) {
+		int len = bvl.bv_len;
+>>>>>>> v3.18
 =======
 	bio_for_each_segment(bvl, bio, iter) {
 		int len = bvl.bv_len;
@@ -1177,6 +1330,7 @@ async_copy_data(int frombio, struct bio *bio, struct page **page,
 
 		if (clen > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			b_offset += bvl->bv_offset;
 			bio_page = bvl->bv_page;
 			if (frombio)
@@ -1185,6 +1339,8 @@ async_copy_data(int frombio, struct bio *bio, struct page **page,
 			else
 				tx = async_memcpy(bio_page, page, b_offset,
 =======
+=======
+>>>>>>> v3.18
 			b_offset += bvl.bv_offset;
 			bio_page = bvl.bv_page;
 			if (frombio) {
@@ -1197,6 +1353,9 @@ async_copy_data(int frombio, struct bio *bio, struct page **page,
 						  b_offset, clen, &submit);
 			} else
 				tx = async_memcpy(bio_page, *page, b_offset,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						  page_offset, clen, &submit);
 		}
@@ -1236,7 +1395,11 @@ static void ops_complete_biofill(void *stripe_head_ref)
 			rbi = dev->read;
 			dev->read = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			while (rbi && rbi->bi_sector <
+=======
+			while (rbi && rbi->bi_iter.bi_sector <
+>>>>>>> v3.18
 =======
 			while (rbi && rbi->bi_iter.bi_sector <
 >>>>>>> v3.18
@@ -1276,15 +1439,21 @@ static void ops_run_biofill(struct stripe_head *sh)
 			dev->toread = NULL;
 			spin_unlock_irq(&sh->stripe_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			while (rbi && rbi->bi_sector <
 				dev->sector + STRIPE_SECTORS) {
 				tx = async_copy_data(0, rbi, dev->page,
 					dev->sector, tx);
 =======
+=======
+>>>>>>> v3.18
 			while (rbi && rbi->bi_iter.bi_sector <
 				dev->sector + STRIPE_SECTORS) {
 				tx = async_copy_data(0, rbi, &dev->page,
 					dev->sector, tx, sh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				rbi = r5_next_bio(rbi, dev->sector);
 			}
@@ -1564,7 +1733,10 @@ ops_run_compute6_2(struct stripe_head *sh, struct raid5_percpu *percpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void ops_complete_prexor(void *stripe_head_ref)
@@ -1627,8 +1799,14 @@ ops_run_biodrain(struct stripe_head *sh, struct dma_async_tx_descriptor *tx)
 			wbi = dev->written = chosen;
 			spin_unlock_irq(&sh->stripe_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			while (wbi && wbi->bi_sector <
+=======
+			WARN_ON(dev->page != dev->orig_page);
+
+			while (wbi && wbi->bi_iter.bi_sector <
+>>>>>>> v3.18
 =======
 			WARN_ON(dev->page != dev->orig_page);
 
@@ -1642,10 +1820,13 @@ ops_run_biodrain(struct stripe_head *sh, struct dma_async_tx_descriptor *tx)
 				if (wbi->bi_rw & REQ_DISCARD)
 					set_bit(R5_Discard, &dev->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				else
 					tx = async_copy_data(1, wbi, dev->page,
 						dev->sector, tx);
 =======
+=======
+>>>>>>> v3.18
 				else {
 					tx = async_copy_data(1, wbi, &dev->page,
 						dev->sector, tx, sh);
@@ -1655,6 +1836,9 @@ ops_run_biodrain(struct stripe_head *sh, struct dma_async_tx_descriptor *tx)
 						clear_bit(R5_OVERWRITE, &dev->flags);
 					}
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				wbi = r5_next_bio(wbi, dev->sector);
 			}
@@ -1687,7 +1871,11 @@ static void ops_complete_reconstruct(void *stripe_head_ref)
 
 		if (dev->written || i == pd_idx || i == qd_idx) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!discard)
+=======
+			if (!discard && !test_bit(R5_SkipCopy, &dev->flags))
+>>>>>>> v3.18
 =======
 			if (!discard && !test_bit(R5_SkipCopy, &dev->flags))
 >>>>>>> v3.18
@@ -1942,7 +2130,11 @@ static void raid_run_ops(struct stripe_head *sh, unsigned long ops_request)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int grow_one_stripe(struct r5conf *conf)
+=======
+static int grow_one_stripe(struct r5conf *conf, int hash)
+>>>>>>> v3.18
 =======
 static int grow_one_stripe(struct r5conf *conf, int hash)
 >>>>>>> v3.18
@@ -1962,6 +2154,10 @@ static int grow_one_stripe(struct r5conf *conf, int hash)
 		return 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sh->hash_lock_index = hash;
+>>>>>>> v3.18
 =======
 	sh->hash_lock_index = hash;
 >>>>>>> v3.18
@@ -1978,6 +2174,10 @@ static int grow_stripes(struct r5conf *conf, int num)
 	struct kmem_cache *sc;
 	int devs = max(conf->raid_disks, conf->previous_raid_disks);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int hash;
+>>>>>>> v3.18
 =======
 	int hash;
 >>>>>>> v3.18
@@ -1999,10 +2199,13 @@ static int grow_stripes(struct r5conf *conf, int num)
 	conf->slab_cache = sc;
 	conf->pool_size = devs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (num--)
 		if (!grow_one_stripe(conf))
 			return 1;
 =======
+=======
+>>>>>>> v3.18
 	hash = conf->max_nr_stripes % NR_STRIPE_HASH_LOCKS;
 	while (num--) {
 		if (!grow_one_stripe(conf, hash))
@@ -2010,6 +2213,9 @@ static int grow_stripes(struct r5conf *conf, int num)
 		conf->max_nr_stripes++;
 		hash = (hash + 1) % NR_STRIPE_HASH_LOCKS;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2069,6 +2275,10 @@ static int resize_stripes(struct r5conf *conf, int newsize)
 	struct kmem_cache *sc;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int hash, cnt;
+>>>>>>> v3.18
 =======
 	int hash, cnt;
 >>>>>>> v3.18
@@ -2112,6 +2322,7 @@ static int resize_stripes(struct r5conf *conf, int newsize)
 	 * stripes and copying them over
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(nsh, &newstripes, lru) {
 		spin_lock_irq(&conf->device_lock);
 		wait_event_lock_irq(conf->wait_for_stripe,
@@ -2126,6 +2337,8 @@ static int resize_stripes(struct r5conf *conf, int newsize)
 			nsh->dev[i].page = NULL;
 		kmem_cache_free(conf->slab_cache, osh);
 =======
+=======
+>>>>>>> v3.18
 	hash = 0;
 	cnt = 0;
 	list_for_each_entry(nsh, &newstripes, lru) {
@@ -2151,6 +2364,9 @@ static int resize_stripes(struct r5conf *conf, int newsize)
 			hash++;
 			cnt = 0;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	kmem_cache_destroy(conf->slab_cache);
@@ -2198,6 +2414,10 @@ static int resize_stripes(struct r5conf *conf, int newsize)
 				struct page *p = alloc_page(GFP_NOIO);
 				nsh->dev[i].page = p;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				nsh->dev[i].orig_page = p;
+>>>>>>> v3.18
 =======
 				nsh->dev[i].orig_page = p;
 >>>>>>> v3.18
@@ -2210,6 +2430,7 @@ static int resize_stripes(struct r5conf *conf, int newsize)
 
 	conf->slab_cache = sc;
 	conf->active_name = 1-conf->active_name;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!err)
 		conf->pool_size = newsize;
@@ -2224,6 +2445,8 @@ static int drop_one_stripe(struct r5conf *conf)
 	sh = get_free_stripe(conf);
 	spin_unlock_irq(&conf->device_lock);
 =======
+=======
+>>>>>>> v3.18
 	conf->pool_size = newsize;
 	return err;
 }
@@ -2235,6 +2458,9 @@ static int drop_one_stripe(struct r5conf *conf, int hash)
 	spin_lock_irq(conf->hash_locks + hash);
 	sh = get_free_stripe(conf, hash);
 	spin_unlock_irq(conf->hash_locks + hash);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!sh)
 		return 0;
@@ -2248,13 +2474,19 @@ static int drop_one_stripe(struct r5conf *conf, int hash)
 static void shrink_stripes(struct r5conf *conf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (drop_one_stripe(conf))
 		;
 =======
+=======
+>>>>>>> v3.18
 	int hash;
 	for (hash = 0; hash < NR_STRIPE_HASH_LOCKS; hash++)
 		while (drop_one_stripe(conf, hash))
 			;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (conf->slab_cache)
@@ -2361,6 +2593,12 @@ static void raid5_end_read_request(struct bio * bi, int error)
 		else
 			retry = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (set_bad && test_bit(In_sync, &rdev->flags)
+		    && !test_bit(R5_ReadNoMerge, &sh->dev[i].flags))
+			retry = 1;
+>>>>>>> v3.18
 =======
 		if (set_bad && test_bit(In_sync, &rdev->flags)
 		    && !test_bit(R5_ReadNoMerge, &sh->dev[i].flags))
@@ -2462,7 +2700,11 @@ static void raid5_end_write_request(struct bio *bi, int error)
 
 static sector_t compute_blocknr(struct stripe_head *sh, int i, int previous);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2472,6 +2714,7 @@ static void raid5_build_block(struct stripe_head *sh, int i, int previous)
 
 	bio_init(&dev->req);
 	dev->req.bi_io_vec = &dev->vec;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev->req.bi_vcnt++;
 	dev->req.bi_max_vecs++;
@@ -2485,6 +2728,8 @@ static void raid5_build_block(struct stripe_head *sh, int i, int previous)
 	dev->rreq.bi_private = sh;
 	dev->rvec.bv_page = dev->page;
 =======
+=======
+>>>>>>> v3.18
 	dev->req.bi_max_vecs = 1;
 	dev->req.bi_private = sh;
 
@@ -2492,6 +2737,9 @@ static void raid5_build_block(struct stripe_head *sh, int i, int previous)
 	dev->rreq.bi_io_vec = &dev->rvec;
 	dev->rreq.bi_max_vecs = 1;
 	dev->rreq.bi_private = sh;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev->flags = 0;
@@ -2730,7 +2978,10 @@ static sector_t raid5_compute_sector(struct r5conf *conf, sector_t r_sector,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static sector_t compute_blocknr(struct stripe_head *sh, int i, int previous)
@@ -2751,7 +3002,10 @@ static sector_t compute_blocknr(struct stripe_head *sh, int i, int previous)
 	struct stripe_head sh2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	chunk_offset = sector_div(new_sector, sectors_per_chunk);
@@ -2858,7 +3112,10 @@ static sector_t compute_blocknr(struct stripe_head *sh, int i, int previous)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void
@@ -2962,7 +3219,11 @@ static int add_stripe_bio(struct stripe_head *sh, struct bio *bi, int dd_idx, in
 
 	pr_debug("adding bi b#%llu to stripe s#%llu\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(unsigned long long)bi->bi_sector,
+=======
+		(unsigned long long)bi->bi_iter.bi_sector,
+>>>>>>> v3.18
 =======
 		(unsigned long long)bi->bi_iter.bi_sector,
 >>>>>>> v3.18
@@ -2984,6 +3245,7 @@ static int add_stripe_bio(struct stripe_head *sh, struct bio *bi, int dd_idx, in
 	} else
 		bip = &sh->dev[dd_idx].toread;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (*bip && (*bip)->bi_sector < bi->bi_sector) {
 		if (bio_end_sector(*bip) > bi->bi_sector)
 			goto overlap;
@@ -2991,12 +3253,17 @@ static int add_stripe_bio(struct stripe_head *sh, struct bio *bi, int dd_idx, in
 	}
 	if (*bip && (*bip)->bi_sector < bio_end_sector(bi))
 =======
+=======
+>>>>>>> v3.18
 	while (*bip && (*bip)->bi_iter.bi_sector < bi->bi_iter.bi_sector) {
 		if (bio_end_sector(*bip) > bi->bi_iter.bi_sector)
 			goto overlap;
 		bip = & (*bip)->bi_next;
 	}
 	if (*bip && (*bip)->bi_iter.bi_sector < bio_end_sector(bi))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto overlap;
 
@@ -3012,7 +3279,11 @@ static int add_stripe_bio(struct stripe_head *sh, struct bio *bi, int dd_idx, in
 		for (bi=sh->dev[dd_idx].towrite;
 		     sector < sh->dev[dd_idx].sector + STRIPE_SECTORS &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     bi && bi->bi_sector <= sector;
+=======
+			     bi && bi->bi_iter.bi_sector <= sector;
+>>>>>>> v3.18
 =======
 			     bi && bi->bi_iter.bi_sector <= sector;
 >>>>>>> v3.18
@@ -3026,7 +3297,11 @@ static int add_stripe_bio(struct stripe_head *sh, struct bio *bi, int dd_idx, in
 
 	pr_debug("added bi b#%llu to stripe s#%llu, disk %d.\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(unsigned long long)(*bip)->bi_sector,
+=======
+		(unsigned long long)(*bip)->bi_iter.bi_sector,
+>>>>>>> v3.18
 =======
 		(unsigned long long)(*bip)->bi_iter.bi_sector,
 >>>>>>> v3.18
@@ -3105,7 +3380,11 @@ handle_failed_stripe(struct r5conf *conf, struct stripe_head *sh,
 			wake_up(&conf->wait_for_overlap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (bi && bi->bi_sector <
+=======
+		while (bi && bi->bi_iter.bi_sector <
+>>>>>>> v3.18
 =======
 		while (bi && bi->bi_iter.bi_sector <
 >>>>>>> v3.18
@@ -3127,9 +3406,12 @@ handle_failed_stripe(struct r5conf *conf, struct stripe_head *sh,
 		bi = sh->dev[i].written;
 		sh->dev[i].written = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bi) bitmap_end = 1;
 		while (bi && bi->bi_sector <
 =======
+=======
+>>>>>>> v3.18
 		if (test_and_clear_bit(R5_SkipCopy, &sh->dev[i].flags)) {
 			WARN_ON(test_bit(R5_UPTODATE, &sh->dev[i].flags));
 			sh->dev[i].page = sh->dev[i].orig_page;
@@ -3137,6 +3419,9 @@ handle_failed_stripe(struct r5conf *conf, struct stripe_head *sh,
 
 		if (bi) bitmap_end = 1;
 		while (bi && bi->bi_iter.bi_sector <
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       sh->dev[i].sector + STRIPE_SECTORS) {
 			struct bio *bi2 = r5_next_bio(bi, sh->dev[i].sector);
@@ -3162,7 +3447,11 @@ handle_failed_stripe(struct r5conf *conf, struct stripe_head *sh,
 			if (test_and_clear_bit(R5_Overlap, &sh->dev[i].flags))
 				wake_up(&conf->wait_for_overlap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			while (bi && bi->bi_sector <
+=======
+			while (bi && bi->bi_iter.bi_sector <
+>>>>>>> v3.18
 =======
 			while (bi && bi->bi_iter.bi_sector <
 >>>>>>> v3.18
@@ -3277,15 +3566,21 @@ static int fetch_block(struct stripe_head *sh, struct stripe_head_state *s,
 	     (s->failed >= 2 && fdev[1]->toread) ||
 	     (sh->raid_conf->level <= 5 && s->failed && fdev[0]->towrite &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      !test_bit(R5_OVERWRITE, &fdev[0]->flags)) ||
 	     ((sh->raid_conf->level == 6 || sh->sector >= sh->raid_conf->mddev->recovery_cp)
 	      && s->failed && s->to_write))) {
 =======
+=======
+>>>>>>> v3.18
 	      (!test_bit(R5_Insync, &dev->flags) || test_bit(STRIPE_PREREAD_ACTIVE, &sh->state)) &&
 	      !test_bit(R5_OVERWRITE, &fdev[0]->flags)) ||
 	     (sh->raid_conf->level == 6 && s->failed && s->to_write &&
 	      s->to_write - s->non_overwrite < sh->raid_conf->raid_disks - 2 &&
 	      (!test_bit(R5_Insync, &dev->flags) || test_bit(STRIPE_PREREAD_ACTIVE, &sh->state))))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* we would like to get this block, possibly by computing it,
 		 * otherwise read it if the backing disk is insync
@@ -3373,7 +3668,10 @@ static void handle_stripe_fill(struct stripe_head *sh,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* handle_stripe_clean_event
@@ -3394,7 +3692,12 @@ static void handle_stripe_clean_event(struct r5conf *conf,
 			if (!test_bit(R5_LOCKED, &dev->flags) &&
 			    (test_bit(R5_UPTODATE, &dev->flags) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     test_bit(R5_Discard, &dev->flags))) {
+=======
+			     test_bit(R5_Discard, &dev->flags) ||
+			     test_bit(R5_SkipCopy, &dev->flags))) {
+>>>>>>> v3.18
 =======
 			     test_bit(R5_Discard, &dev->flags) ||
 			     test_bit(R5_SkipCopy, &dev->flags))) {
@@ -3405,10 +3708,13 @@ static void handle_stripe_clean_event(struct r5conf *conf,
 				if (test_and_clear_bit(R5_Discard, &dev->flags))
 					clear_bit(R5_UPTODATE, &dev->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				wbi = dev->written;
 				dev->written = NULL;
 				while (wbi && wbi->bi_sector <
 =======
+=======
+>>>>>>> v3.18
 				if (test_and_clear_bit(R5_SkipCopy, &dev->flags)) {
 					WARN_ON(test_bit(R5_UPTODATE, &dev->flags));
 					dev->page = dev->orig_page;
@@ -3416,6 +3722,9 @@ static void handle_stripe_clean_event(struct r5conf *conf,
 				wbi = dev->written;
 				dev->written = NULL;
 				while (wbi && wbi->bi_iter.bi_sector <
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					dev->sector + STRIPE_SECTORS) {
 					wbi2 = r5_next_bio(wbi, dev->sector);
@@ -3433,6 +3742,11 @@ static void handle_stripe_clean_event(struct r5conf *conf,
 			} else if (test_bit(R5_Discard, &dev->flags))
 				discard_pending = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			WARN_ON(test_bit(R5_SkipCopy, &dev->flags));
+			WARN_ON(dev->page != dev->orig_page);
+>>>>>>> v3.18
 =======
 			WARN_ON(test_bit(R5_SkipCopy, &dev->flags));
 			WARN_ON(dev->page != dev->orig_page);
@@ -3484,8 +3798,12 @@ static void handle_stripe_dirtying(struct r5conf *conf,
 	 */
 	if (conf->max_degraded == 2 ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (recovery_cp < MaxSector && sh->sector >= recovery_cp &&
 	     s->failed == 0)) {
+=======
+	    (recovery_cp < MaxSector && sh->sector >= recovery_cp)) {
+>>>>>>> v3.18
 =======
 	    (recovery_cp < MaxSector && sh->sector >= recovery_cp)) {
 >>>>>>> v3.18
@@ -3514,7 +3832,12 @@ static void handle_stripe_dirtying(struct r5conf *conf,
 		    !(test_bit(R5_UPTODATE, &dev->flags) ||
 		    test_bit(R5_Wantcompute, &dev->flags))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (test_bit(R5_Insync, &dev->flags)) rcw++;
+=======
+			if (test_bit(R5_Insync, &dev->flags))
+				rcw++;
+>>>>>>> v3.18
 =======
 			if (test_bit(R5_Insync, &dev->flags))
 				rcw++;
@@ -3540,15 +3863,21 @@ static void handle_stripe_dirtying(struct r5conf *conf,
 			    test_bit(R5_Wantcompute, &dev->flags)) &&
 			    test_bit(R5_Insync, &dev->flags)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (
 				  test_bit(STRIPE_PREREAD_ACTIVE, &sh->state)) {
 					pr_debug("Read_old block "
 						 "%d for r-m-w\n", i);
 =======
+=======
+>>>>>>> v3.18
 				if (test_bit(STRIPE_PREREAD_ACTIVE,
 					     &sh->state)) {
 					pr_debug("Read_old block %d for r-m-w\n",
 						 i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					set_bit(R5_LOCKED, &dev->flags);
 					set_bit(R5_Wantread, &dev->flags);
@@ -3573,10 +3902,16 @@ static void handle_stripe_dirtying(struct r5conf *conf,
 			      test_bit(R5_Wantcompute, &dev->flags))) {
 				rcw++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (!test_bit(R5_Insync, &dev->flags))
 					continue; /* it's a failed drive */
 				if (
 				  test_bit(STRIPE_PREREAD_ACTIVE, &sh->state)) {
+=======
+				if (test_bit(R5_Insync, &dev->flags) &&
+				    test_bit(STRIPE_PREREAD_ACTIVE,
+					     &sh->state)) {
+>>>>>>> v3.18
 =======
 				if (test_bit(R5_Insync, &dev->flags) &&
 				    test_bit(STRIPE_PREREAD_ACTIVE,
@@ -3703,7 +4038,10 @@ static void handle_parity_checks5(struct r5conf *conf, struct stripe_head *sh,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void handle_parity_checks6(struct r5conf *conf, struct stripe_head *sh,
@@ -4341,7 +4679,10 @@ static void handle_stripe(struct stripe_head *sh)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Finish reconstruct operations initiated by the expansion process */
@@ -4467,6 +4808,10 @@ static void raid5_activate_delayed(struct r5conf *conf)
 				atomic_inc(&conf->preread_active_stripes);
 			list_add_tail(&sh->lru, &conf->hold_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			raid5_wakeup_stripe_thread(sh);
+>>>>>>> v3.18
 =======
 			raid5_wakeup_stripe_thread(sh);
 >>>>>>> v3.18
@@ -4475,7 +4820,12 @@ static void raid5_activate_delayed(struct r5conf *conf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void activate_bit_delay(struct r5conf *conf)
+=======
+static void activate_bit_delay(struct r5conf *conf,
+	struct list_head *temp_inactive_list)
+>>>>>>> v3.18
 =======
 static void activate_bit_delay(struct r5conf *conf,
 	struct list_head *temp_inactive_list)
@@ -4488,15 +4838,21 @@ static void activate_bit_delay(struct r5conf *conf,
 	while (!list_empty(&head)) {
 		struct stripe_head *sh = list_entry(head.next, struct stripe_head, lru);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_del_init(&sh->lru);
 		atomic_inc(&sh->count);
 		__release_stripe(conf, sh);
 =======
+=======
+>>>>>>> v3.18
 		int hash;
 		list_del_init(&sh->lru);
 		atomic_inc(&sh->count);
 		hash = sh->hash_lock_index;
 		__release_stripe(conf, sh, &temp_inactive_list[hash]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -4514,7 +4870,11 @@ int md_raid5_congested(struct mddev *mddev, int bits)
 	if (conf->quiesce)
 		return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (list_empty_careful(&conf->inactive_list))
+=======
+	if (atomic_read(&conf->empty_inactive_list_nr))
+>>>>>>> v3.18
 =======
 	if (atomic_read(&conf->empty_inactive_list_nr))
 >>>>>>> v3.18
@@ -4559,10 +4919,16 @@ static int raid5_mergeable_bvec(struct request_queue *q,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int in_chunk_boundary(struct mddev *mddev, struct bio *bio)
 {
 	sector_t sector = bio->bi_sector + get_start_sect(bio->bi_bdev);
+=======
+static int in_chunk_boundary(struct mddev *mddev, struct bio *bio)
+{
+	sector_t sector = bio->bi_iter.bi_sector + get_start_sect(bio->bi_bdev);
+>>>>>>> v3.18
 =======
 static int in_chunk_boundary(struct mddev *mddev, struct bio *bio)
 {
@@ -4595,7 +4961,10 @@ static void add_bio_to_retry(struct bio *bi,struct r5conf *conf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct bio *remove_bio_from_retry(struct r5conf *conf)
@@ -4622,7 +4991,10 @@ static struct bio *remove_bio_from_retry(struct r5conf *conf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -4658,7 +5030,10 @@ static void raid5_align_endio(struct bio *bi, int error)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pr_debug("raid5_align_endio : io error...handing IO for a retry\n");
@@ -4686,7 +5061,10 @@ static int bio_fits_rdev(struct bio *bi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int chunk_aligned_read(struct mddev *mddev, struct bio * raid_bio)
@@ -4717,9 +5095,15 @@ static int chunk_aligned_read(struct mddev *mddev, struct bio * raid_bio)
 	 *	compute position
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	align_bi->bi_sector =  raid5_compute_sector(conf, raid_bio->bi_sector,
 						    0,
 						    &dd_idx, NULL);
+=======
+	align_bi->bi_iter.bi_sector =
+		raid5_compute_sector(conf, raid_bio->bi_iter.bi_sector,
+				     0, &dd_idx, NULL);
+>>>>>>> v3.18
 =======
 	align_bi->bi_iter.bi_sector =
 		raid5_compute_sector(conf, raid_bio->bi_iter.bi_sector,
@@ -4747,16 +5131,22 @@ static int chunk_aligned_read(struct mddev *mddev, struct bio * raid_bio)
 		raid_bio->bi_next = (void*)rdev;
 		align_bi->bi_bdev =  rdev->bdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		align_bi->bi_flags &= ~(1 << BIO_SEG_VALID);
 
 		if (!bio_fits_rdev(align_bi) ||
 		    is_badblock(rdev, align_bi->bi_sector, bio_sectors(align_bi),
 =======
+=======
+>>>>>>> v3.18
 		__clear_bit(BIO_SEG_VALID, &align_bi->bi_flags);
 
 		if (!bio_fits_rdev(align_bi) ||
 		    is_badblock(rdev, align_bi->bi_iter.bi_sector,
 				bio_sectors(align_bi),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				&first_bad, &bad_sectors)) {
 			/* too big in some way, or has a known bad block */
@@ -4767,7 +5157,11 @@ static int chunk_aligned_read(struct mddev *mddev, struct bio * raid_bio)
 
 		/* No reshape active, so we can trust rdev->data_offset */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		align_bi->bi_sector += rdev->data_offset;
+=======
+		align_bi->bi_iter.bi_sector += rdev->data_offset;
+>>>>>>> v3.18
 =======
 		align_bi->bi_iter.bi_sector += rdev->data_offset;
 >>>>>>> v3.18
@@ -4783,7 +5177,11 @@ static int chunk_aligned_read(struct mddev *mddev, struct bio * raid_bio)
 			trace_block_bio_remap(bdev_get_queue(align_bi->bi_bdev),
 					      align_bi, disk_devt(mddev->gendisk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      raid_bio->bi_sector);
+=======
+					      raid_bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 =======
 					      raid_bio->bi_iter.bi_sector);
 >>>>>>> v3.18
@@ -4807,6 +5205,7 @@ static int chunk_aligned_read(struct mddev *mddev, struct bio * raid_bio)
  * handle_list.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct stripe_head *__get_priority_stripe(struct r5conf *conf)
 {
 	struct stripe_head *sh;
@@ -4820,6 +5219,8 @@ static struct stripe_head *__get_priority_stripe(struct r5conf *conf)
 	if (!list_empty(&conf->handle_list)) {
 		sh = list_entry(conf->handle_list.next, typeof(*sh), lru);
 =======
+=======
+>>>>>>> v3.18
 static struct stripe_head *__get_priority_stripe(struct r5conf *conf, int group)
 {
 	struct stripe_head *sh = NULL, *tmp;
@@ -4849,6 +5250,9 @@ static struct stripe_head *__get_priority_stripe(struct r5conf *conf, int group)
 
 	if (!list_empty(handle_list)) {
 		sh = list_entry(handle_list->next, typeof(*sh), lru);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (list_empty(&conf->hold_list))
@@ -4868,6 +5272,7 @@ static struct stripe_head *__get_priority_stripe(struct r5conf *conf, int group)
 		     conf->bypass_count > conf->bypass_threshold) ||
 		    atomic_read(&conf->pending_full_writes) == 0)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sh = list_entry(conf->hold_list.next,
 				typeof(*sh), lru);
 		conf->bypass_count -= conf->bypass_threshold;
@@ -4880,6 +5285,8 @@ static struct stripe_head *__get_priority_stripe(struct r5conf *conf, int group)
 	atomic_inc(&sh->count);
 	BUG_ON(atomic_read(&sh->count) != 1);
 =======
+=======
+>>>>>>> v3.18
 
 		list_for_each_entry(tmp, &conf->hold_list,  lru) {
 			if (conf->worker_cnt_per_group == 0 ||
@@ -4908,6 +5315,9 @@ static struct stripe_head *__get_priority_stripe(struct r5conf *conf, int group)
 	}
 	list_del_init(&sh->lru);
 	BUG_ON(atomic_inc_return(&sh->count) != 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return sh;
 }
@@ -4916,6 +5326,10 @@ struct raid5_plug_cb {
 	struct blk_plug_cb	cb;
 	struct list_head	list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head	temp_inactive_list[NR_STRIPE_HASH_LOCKS];
+>>>>>>> v3.18
 =======
 	struct list_head	temp_inactive_list[NR_STRIPE_HASH_LOCKS];
 >>>>>>> v3.18
@@ -4930,6 +5344,10 @@ static void raid5_unplug(struct blk_plug_cb *blk_cb, bool from_schedule)
 	struct r5conf *conf = mddev->private;
 	int cnt = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int hash;
+>>>>>>> v3.18
 =======
 	int hash;
 >>>>>>> v3.18
@@ -4947,20 +5365,31 @@ static void raid5_unplug(struct blk_plug_cb *blk_cb, bool from_schedule)
 			smp_mb__before_atomic();
 			clear_bit(STRIPE_ON_UNPLUG_LIST, &sh->state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__release_stripe(conf, sh);
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * STRIPE_ON_RELEASE_LIST could be set here. In that
 			 * case, the count is always > 1 here
 			 */
 			hash = sh->hash_lock_index;
 			__release_stripe(conf, sh, &cb->temp_inactive_list[hash]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			cnt++;
 		}
 		spin_unlock_irq(&conf->device_lock);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	release_inactive_stripe_list(conf, cb->temp_inactive_list,
+				     NR_STRIPE_HASH_LOCKS);
+>>>>>>> v3.18
 =======
 	release_inactive_stripe_list(conf, cb->temp_inactive_list,
 				     NR_STRIPE_HASH_LOCKS);
@@ -4986,15 +5415,21 @@ static void release_stripe_plug(struct mddev *mddev,
 	cb = container_of(blk_cb, struct raid5_plug_cb, cb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cb->list.next == NULL)
 		INIT_LIST_HEAD(&cb->list);
 =======
+=======
+>>>>>>> v3.18
 	if (cb->list.next == NULL) {
 		int i;
 		INIT_LIST_HEAD(&cb->list);
 		for (i = 0; i < NR_STRIPE_HASH_LOCKS; i++)
 			INIT_LIST_HEAD(cb->temp_inactive_list + i);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!test_and_set_bit(STRIPE_ON_UNPLUG_LIST, &sh->state))
@@ -5016,8 +5451,13 @@ static void make_discard_request(struct mddev *mddev, struct bio *bi)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	logical_sector = bi->bi_sector & ~((sector_t)STRIPE_SECTORS-1);
 	last_sector = bi->bi_sector + (bi->bi_size>>9);
+=======
+	logical_sector = bi->bi_iter.bi_sector & ~((sector_t)STRIPE_SECTORS-1);
+	last_sector = bi->bi_iter.bi_sector + (bi->bi_iter.bi_size>>9);
+>>>>>>> v3.18
 =======
 	logical_sector = bi->bi_iter.bi_sector & ~((sector_t)STRIPE_SECTORS-1);
 	last_sector = bi->bi_iter.bi_sector + (bi->bi_iter.bi_size>>9);
@@ -5108,6 +5548,11 @@ static void make_request(struct mddev *mddev, struct bio * bi)
 	const int rw = bio_data_dir(bi);
 	int remaining;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DEFINE_WAIT(w);
+	bool do_prepare;
+>>>>>>> v3.18
 =======
 	DEFINE_WAIT(w);
 	bool do_prepare;
@@ -5131,7 +5576,11 @@ static void make_request(struct mddev *mddev, struct bio * bi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	logical_sector = bi->bi_sector & ~((sector_t)STRIPE_SECTORS-1);
+=======
+	logical_sector = bi->bi_iter.bi_sector & ~((sector_t)STRIPE_SECTORS-1);
+>>>>>>> v3.18
 =======
 	logical_sector = bi->bi_iter.bi_sector & ~((sector_t)STRIPE_SECTORS-1);
 >>>>>>> v3.18
@@ -5139,6 +5588,7 @@ static void make_request(struct mddev *mddev, struct bio * bi)
 	bi->bi_next = NULL;
 	bi->bi_phys_segments = 1;	/* over-loaded to count active stripes */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (;logical_sector < last_sector; logical_sector += STRIPE_SECTORS) {
 		DEFINE_WAIT(w);
@@ -5148,6 +5598,8 @@ static void make_request(struct mddev *mddev, struct bio * bi)
 		previous = 0;
 		prepare_to_wait(&conf->wait_for_overlap, &w, TASK_UNINTERRUPTIBLE);
 =======
+=======
+>>>>>>> v3.18
 	prepare_to_wait(&conf->wait_for_overlap, &w, TASK_UNINTERRUPTIBLE);
 	for (;logical_sector < last_sector; logical_sector += STRIPE_SECTORS) {
 		int previous;
@@ -5160,6 +5612,9 @@ static void make_request(struct mddev *mddev, struct bio * bi)
 		if (do_prepare)
 			prepare_to_wait(&conf->wait_for_overlap, &w,
 				TASK_UNINTERRUPTIBLE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (unlikely(conf->reshape_progress != MaxSector)) {
 			/* spinlock is needed as reshape_progress may be
@@ -5182,6 +5637,10 @@ static void make_request(struct mddev *mddev, struct bio * bi)
 					spin_unlock_irq(&conf->device_lock);
 					schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					do_prepare = true;
+>>>>>>> v3.18
 =======
 					do_prepare = true;
 >>>>>>> v3.18
@@ -5196,7 +5655,11 @@ static void make_request(struct mddev *mddev, struct bio * bi)
 						  &dd_idx, NULL);
 		pr_debug("raid456: make_request, sector %llu logical %llu\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(unsigned long long)new_sector, 
+=======
+			(unsigned long long)new_sector,
+>>>>>>> v3.18
 =======
 			(unsigned long long)new_sector,
 >>>>>>> v3.18
@@ -5226,10 +5689,13 @@ static void make_request(struct mddev *mddev, struct bio * bi)
 					release_stripe(sh);
 					schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 					goto retry;
 				}
 			}
 =======
+=======
+>>>>>>> v3.18
 					do_prepare = true;
 					goto retry;
 				}
@@ -5241,6 +5707,9 @@ static void make_request(struct mddev *mddev, struct bio * bi)
 				release_stripe(sh);
 				goto retry;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (rw == WRITE &&
@@ -5256,13 +5725,19 @@ static void make_request(struct mddev *mddev, struct bio * bi)
 						&w, TASK_INTERRUPTIBLE);
 				if (logical_sector >= mddev->suspend_lo &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    logical_sector < mddev->suspend_hi)
 					schedule();
 =======
+=======
+>>>>>>> v3.18
 				    logical_sector < mddev->suspend_hi) {
 					schedule();
 					do_prepare = true;
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				goto retry;
 			}
@@ -5277,9 +5752,15 @@ static void make_request(struct mddev *mddev, struct bio * bi)
 				release_stripe(sh);
 				schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto retry;
 			}
 			finish_wait(&conf->wait_for_overlap, &w);
+=======
+				do_prepare = true;
+				goto retry;
+			}
+>>>>>>> v3.18
 =======
 				do_prepare = true;
 				goto retry;
@@ -5295,15 +5776,21 @@ static void make_request(struct mddev *mddev, struct bio * bi)
 			/* cannot get stripe for read-ahead, just give-up */
 			clear_bit(BIO_UPTODATE, &bi->bi_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			finish_wait(&conf->wait_for_overlap, &w);
 			break;
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 			break;
 		}
 	}
 	finish_wait(&conf->wait_for_overlap, &w);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	remaining = raid5_dec_bi_active_stripes(bi);
@@ -5441,12 +5928,18 @@ static sector_t reshape_request(struct mddev *mddev, sector_t sector_nr, int *sk
 		/* Cannot proceed until we've updated the superblock... */
 		wait_event(conf->wait_for_overlap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   atomic_read(&conf->reshape_stripes)==0);
 =======
+=======
+>>>>>>> v3.18
 			   atomic_read(&conf->reshape_stripes)==0
 			   || test_bit(MD_RECOVERY_INTR, &mddev->recovery));
 		if (atomic_read(&conf->reshape_stripes) != 0)
 			return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mddev->reshape_position = conf->reshape_progress;
 		mddev->curr_resync_completed = sector_nr;
@@ -5455,7 +5948,13 @@ static sector_t reshape_request(struct mddev *mddev, sector_t sector_nr, int *sk
 		md_wakeup_thread(mddev->thread);
 		wait_event(mddev->sb_wait, mddev->flags == 0 ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   kthread_should_stop());
+=======
+			   test_bit(MD_RECOVERY_INTR, &mddev->recovery));
+		if (test_bit(MD_RECOVERY_INTR, &mddev->recovery))
+			return 0;
+>>>>>>> v3.18
 =======
 			   test_bit(MD_RECOVERY_INTR, &mddev->recovery));
 		if (test_bit(MD_RECOVERY_INTR, &mddev->recovery))
@@ -5544,12 +6043,18 @@ static sector_t reshape_request(struct mddev *mddev, sector_t sector_nr, int *sk
 		/* Cannot proceed until we've updated the superblock... */
 		wait_event(conf->wait_for_overlap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   atomic_read(&conf->reshape_stripes) == 0);
 =======
+=======
+>>>>>>> v3.18
 			   atomic_read(&conf->reshape_stripes) == 0
 			   || test_bit(MD_RECOVERY_INTR, &mddev->recovery));
 		if (atomic_read(&conf->reshape_stripes) != 0)
 			goto ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mddev->reshape_position = conf->reshape_progress;
 		mddev->curr_resync_completed = sector_nr;
@@ -5559,7 +6064,13 @@ static sector_t reshape_request(struct mddev *mddev, sector_t sector_nr, int *sk
 		wait_event(mddev->sb_wait,
 			   !test_bit(MD_CHANGE_DEVS, &mddev->flags)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   || kthread_should_stop());
+=======
+			   || test_bit(MD_RECOVERY_INTR, &mddev->recovery));
+		if (test_bit(MD_RECOVERY_INTR, &mddev->recovery))
+			goto ret;
+>>>>>>> v3.18
 =======
 			   || test_bit(MD_RECOVERY_INTR, &mddev->recovery));
 		if (test_bit(MD_RECOVERY_INTR, &mddev->recovery))
@@ -5572,6 +6083,10 @@ static sector_t reshape_request(struct mddev *mddev, sector_t sector_nr, int *sk
 		sysfs_notify(&mddev->kobj, NULL, "sync_completed");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ret:
+>>>>>>> v3.18
 =======
 ret:
 >>>>>>> v3.18
@@ -5660,8 +6175,13 @@ static inline sector_t sync_request(struct mddev *mddev, sector_t sector_nr, int
 
 	set_bit(STRIPE_SYNC_REQUESTED, &sh->state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	handle_stripe(sh);
+=======
+	set_bit(STRIPE_HANDLE, &sh->state);
+
+>>>>>>> v3.18
 =======
 	set_bit(STRIPE_HANDLE, &sh->state);
 
@@ -5691,7 +6211,12 @@ static int  retry_aligned_read(struct r5conf *conf, struct bio *raid_bio)
 	int handled = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	logical_sector = raid_bio->bi_sector & ~((sector_t)STRIPE_SECTORS-1);
+=======
+	logical_sector = raid_bio->bi_iter.bi_sector &
+		~((sector_t)STRIPE_SECTORS-1);
+>>>>>>> v3.18
 =======
 	logical_sector = raid_bio->bi_iter.bi_sector &
 		~((sector_t)STRIPE_SECTORS-1);
@@ -5710,7 +6235,11 @@ static int  retry_aligned_read(struct r5conf *conf, struct bio *raid_bio)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sh = get_active_stripe(conf, sector, 0, 1, 0);
+=======
+		sh = get_active_stripe(conf, sector, 0, 1, 1);
+>>>>>>> v3.18
 =======
 		sh = get_active_stripe(conf, sector, 0, 1, 1);
 >>>>>>> v3.18
@@ -5746,6 +6275,7 @@ static int  retry_aligned_read(struct r5conf *conf, struct bio *raid_bio)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_STRIPE_BATCH 8
 static int handle_active_stripes(struct r5conf *conf)
 {
@@ -5761,6 +6291,8 @@ static int handle_active_stripes(struct r5conf *conf)
 	spin_unlock_irq(&conf->device_lock);
 
 =======
+=======
+>>>>>>> v3.18
 static int handle_active_stripes(struct r5conf *conf, int group,
 				 struct r5worker *worker,
 				 struct list_head *temp_inactive_list)
@@ -5791,6 +6323,9 @@ static int handle_active_stripes(struct r5conf *conf, int group,
 		return 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < batch_size; i++)
 		handle_stripe(batch[i]);
@@ -5799,12 +6334,15 @@ static int handle_active_stripes(struct r5conf *conf, int group,
 
 	spin_lock_irq(&conf->device_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < batch_size; i++)
 		__release_stripe(conf, batch[i]);
 	return batch_size;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < batch_size; i++) {
 		hash = batch[i]->hash_lock_index;
 		__release_stripe(conf, batch[i], &temp_inactive_list[hash]);
@@ -5846,6 +6384,9 @@ static void raid5_do_work(struct work_struct *work)
 	pr_debug("--- raid5worker inactive\n");
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This is our raid5 kernel thread.
@@ -5871,7 +6412,13 @@ static void raid5d(struct md_thread *thread)
 	while (1) {
 		struct bio *bio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int batch_size;
+=======
+		int batch_size, released;
+
+		released = release_stripe_list(conf, conf->temp_inactive_list);
+>>>>>>> v3.18
 =======
 		int batch_size, released;
 
@@ -5887,7 +6434,11 @@ static void raid5d(struct md_thread *thread)
 			spin_lock_irq(&conf->device_lock);
 			conf->seq_write = conf->seq_flush;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			activate_bit_delay(conf);
+=======
+			activate_bit_delay(conf, conf->temp_inactive_list);
+>>>>>>> v3.18
 =======
 			activate_bit_delay(conf, conf->temp_inactive_list);
 >>>>>>> v3.18
@@ -5905,8 +6456,14 @@ static void raid5d(struct md_thread *thread)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		batch_size = handle_active_stripes(conf);
 		if (!batch_size)
+=======
+		batch_size = handle_active_stripes(conf, ANY_GROUP, NULL,
+						   conf->temp_inactive_list);
+		if (!batch_size && !released)
+>>>>>>> v3.18
 =======
 		batch_size = handle_active_stripes(conf, ANY_GROUP, NULL,
 						   conf->temp_inactive_list);
@@ -5947,6 +6504,7 @@ raid5_set_cache_size(struct mddev *mddev, int size)
 	struct r5conf *conf = mddev->private;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (size <= 16 || size > 32768)
 		return -EINVAL;
@@ -5956,6 +6514,8 @@ raid5_set_cache_size(struct mddev *mddev, int size)
 		else
 			break;
 =======
+=======
+>>>>>>> v3.18
 	int hash;
 
 	if (size <= 16 || size > 32768)
@@ -5969,23 +6529,32 @@ raid5_set_cache_size(struct mddev *mddev, int size)
 		hash--;
 		if (hash < 0)
 			hash = NR_STRIPE_HASH_LOCKS - 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	err = md_allow_write(mddev);
 	if (err)
 		return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (size > conf->max_nr_stripes) {
 		if (grow_one_stripe(conf))
 			conf->max_nr_stripes++;
 		else break;
 =======
+=======
+>>>>>>> v3.18
 	hash = conf->max_nr_stripes % NR_STRIPE_HASH_LOCKS;
 	while (size > conf->max_nr_stripes) {
 		if (grow_one_stripe(conf, hash))
 			conf->max_nr_stripes++;
 		else break;
 		hash = (hash + 1) % NR_STRIPE_HASH_LOCKS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -6005,7 +6574,11 @@ raid5_store_stripe_cache_size(struct mddev *mddev, const char *page, size_t len)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(page, 10, &new))
+=======
+	if (kstrtoul(page, 10, &new))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(page, 10, &new))
 >>>>>>> v3.18
@@ -6042,7 +6615,11 @@ raid5_store_preread_threshold(struct mddev *mddev, const char *page, size_t len)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(page, 10, &new))
+=======
+	if (kstrtoul(page, 10, &new))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(page, 10, &new))
 >>>>>>> v3.18
@@ -6061,7 +6638,10 @@ raid5_preread_bypass_threshold = __ATTR(preread_bypass_threshold,
 
 static ssize_t
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 raid5_show_skip_copy(struct mddev *mddev, char *page)
 {
 	struct r5conf *conf = mddev->private;
@@ -6105,6 +6685,9 @@ raid5_skip_copy = __ATTR(skip_copy, S_IRUGO | S_IWUSR,
 					raid5_store_skip_copy);
 
 static ssize_t
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 stripe_cache_active_show(struct mddev *mddev, char *page)
 {
@@ -6119,7 +6702,10 @@ static struct md_sysfs_entry
 raid5_stripecache_active = __ATTR_RO(stripe_cache_active);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t
 raid5_show_group_thread_cnt(struct mddev *mddev, char *page)
 {
@@ -6187,12 +6773,20 @@ raid5_group_thread_cnt = __ATTR(group_thread_cnt, S_IRUGO | S_IWUSR,
 				raid5_show_group_thread_cnt,
 				raid5_store_group_thread_cnt);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct attribute *raid5_attrs[] =  {
 	&raid5_stripecache_size.attr,
 	&raid5_stripecache_active.attr,
 	&raid5_preread_bypass_threshold.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&raid5_group_thread_cnt.attr,
+	&raid5_skip_copy.attr,
+>>>>>>> v3.18
 =======
 	&raid5_group_thread_cnt.attr,
 	&raid5_skip_copy.attr,
@@ -6205,7 +6799,10 @@ static struct attribute_group raid5_attrs_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int alloc_thread_groups(struct r5conf *conf, int cnt,
 			       int *group_cnt,
 			       int *worker_cnt_per_group,
@@ -6261,6 +6858,9 @@ static void free_thread_groups(struct r5conf *conf)
 	conf->worker_groups = NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static sector_t
 raid5_size(struct mddev *mddev, sector_t sectors, int raid_disks)
@@ -6323,6 +6923,10 @@ static void raid5_free_percpu(struct r5conf *conf)
 static void free_conf(struct r5conf *conf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	free_thread_groups(conf);
+>>>>>>> v3.18
 =======
 	free_thread_groups(conf);
 >>>>>>> v3.18
@@ -6400,6 +7004,12 @@ static struct r5conf *setup_conf(struct mddev *mddev)
 	struct disk_info *disk;
 	char pers_name[6];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int i;
+	int group_cnt, worker_cnt_per_group;
+	struct r5worker_group *new_group;
+>>>>>>> v3.18
 =======
 	int i;
 	int group_cnt, worker_cnt_per_group;
@@ -6439,8 +7049,11 @@ static struct r5conf *setup_conf(struct mddev *mddev)
 	if (conf == NULL)
 		goto abort;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&conf->device_lock);
 =======
+=======
+>>>>>>> v3.18
 	/* Don't enable multi-threading by default*/
 	if (!alloc_thread_groups(conf, 0, &group_cnt, &worker_cnt_per_group,
 				 &new_group)) {
@@ -6451,6 +7064,9 @@ static struct r5conf *setup_conf(struct mddev *mddev)
 		goto abort;
 	spin_lock_init(&conf->device_lock);
 	seqcount_init(&conf->gen_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	init_waitqueue_head(&conf->wait_for_stripe);
 	init_waitqueue_head(&conf->wait_for_overlap);
@@ -6459,7 +7075,11 @@ static struct r5conf *setup_conf(struct mddev *mddev)
 	INIT_LIST_HEAD(&conf->delayed_list);
 	INIT_LIST_HEAD(&conf->bitmap_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&conf->inactive_list);
+=======
+	init_llist_head(&conf->released_stripes);
+>>>>>>> v3.18
 =======
 	init_llist_head(&conf->released_stripes);
 >>>>>>> v3.18
@@ -6488,7 +7108,10 @@ static struct r5conf *setup_conf(struct mddev *mddev)
 		goto abort;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* We init hash_locks[0] separately to that it can be used
 	 * as the reference lock in the spin_lock_nest_lock() call
 	 * in lock_all_device_hash_locks_irq in order to convince
@@ -6504,6 +7127,9 @@ static struct r5conf *setup_conf(struct mddev *mddev)
 	for (i = 0; i < NR_STRIPE_HASH_LOCKS; i++)
 		INIT_LIST_HEAD(conf->temp_inactive_list + i);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	conf->level = mddev->new_level;
 	if (raid5_alloc_percpu(conf) != 0)
@@ -6546,7 +7172,10 @@ static struct r5conf *setup_conf(struct mddev *mddev)
 		conf->max_degraded = 1;
 	conf->algorithm = mddev->new_layout;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	conf->max_nr_stripes = NR_STRIPES;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	conf->reshape_progress = mddev->reshape_position;
@@ -6558,7 +7187,12 @@ static struct r5conf *setup_conf(struct mddev *mddev)
 	memory = conf->max_nr_stripes * (sizeof(struct stripe_head) +
 		 max_disks * ((sizeof(struct bio) + PAGE_SIZE))) / 1024;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (grow_stripes(conf, conf->max_nr_stripes)) {
+=======
+	atomic_set(&conf->empty_inactive_list_nr, NR_STRIPE_HASH_LOCKS);
+	if (grow_stripes(conf, NR_STRIPES)) {
+>>>>>>> v3.18
 =======
 	atomic_set(&conf->empty_inactive_list_nr, NR_STRIPE_HASH_LOCKS);
 	if (grow_stripes(conf, NR_STRIPES)) {
@@ -6591,7 +7225,10 @@ static struct r5conf *setup_conf(struct mddev *mddev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int only_parity(int raid_disk, int algo, int raid_disks, int max_degraded)
@@ -6607,7 +7244,11 @@ static int only_parity(int raid_disk, int algo, int raid_disks, int max_degraded
 		break;
 	case ALGORITHM_PARITY_0_6:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (raid_disk == 0 || 
+=======
+		if (raid_disk == 0 ||
+>>>>>>> v3.18
 =======
 		if (raid_disk == 0 ||
 >>>>>>> v3.18
@@ -6865,7 +7506,10 @@ static int run(struct mddev *mddev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Ok, everything is just fine now */
@@ -6901,6 +7545,10 @@ static int run(struct mddev *mddev)
 		blk_queue_io_opt(mddev->queue, chunk_size *
 				 (conf->raid_disks - conf->max_degraded));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mddev->queue->limits.raid_partial_stripes_expensive = 1;
+>>>>>>> v3.18
 =======
 		mddev->queue->limits.raid_partial_stripes_expensive = 1;
 >>>>>>> v3.18
@@ -6916,6 +7564,7 @@ static int run(struct mddev *mddev)
 		mddev->queue->limits.discard_alignment = stripe;
 		mddev->queue->limits.discard_granularity = stripe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/*
 		 * We use 16-bit counter of active stripes in bi_phys_segments
@@ -6925,6 +7574,8 @@ static int run(struct mddev *mddev)
 		blk_queue_max_discard_sectors(mddev->queue,
 					      0xfffe * STRIPE_SECTORS);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -6970,8 +7621,13 @@ static int run(struct mddev *mddev)
 
 		if (discard_supported &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    mddev->queue->limits.max_discard_sectors >= (stripe >> 9) &&
 		    mddev->queue->limits.discard_granularity >= stripe)
+=======
+		   mddev->queue->limits.max_discard_sectors >= stripe &&
+		   mddev->queue->limits.discard_granularity >= stripe)
+>>>>>>> v3.18
 =======
 		   mddev->queue->limits.max_discard_sectors >= stripe &&
 		   mddev->queue->limits.discard_granularity >= stripe)
@@ -7276,7 +7932,11 @@ static int check_reshape(struct mddev *mddev)
 	if (has_failed(conf))
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mddev->delta_disks < 0) {
+=======
+	if (mddev->delta_disks < 0 && mddev->reshape_position == MaxSector) {
+>>>>>>> v3.18
 =======
 	if (mddev->delta_disks < 0 && mddev->reshape_position == MaxSector) {
 >>>>>>> v3.18
@@ -7341,6 +8001,10 @@ static int raid5_start_reshape(struct mddev *mddev)
 	atomic_set(&conf->reshape_stripes, 0);
 	spin_lock_irq(&conf->device_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	write_seqcount_begin(&conf->gen_lock);
+>>>>>>> v3.18
 =======
 	write_seqcount_begin(&conf->gen_lock);
 >>>>>>> v3.18
@@ -7361,9 +8025,12 @@ static int raid5_start_reshape(struct mddev *mddev)
 		conf->reshape_progress = 0;
 	conf->reshape_safe = conf->reshape_progress;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irq(&conf->device_lock);
 
 =======
+=======
+>>>>>>> v3.18
 	write_seqcount_end(&conf->gen_lock);
 	spin_unlock_irq(&conf->device_lock);
 
@@ -7374,6 +8041,9 @@ static int raid5_start_reshape(struct mddev *mddev)
 	mddev_suspend(mddev);
 	mddev_resume(mddev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Add some new drives, as many as will fit.
 	 * We know there are enough to make the newly sized array work.
@@ -7424,6 +8094,7 @@ static int raid5_start_reshape(struct mddev *mddev)
 		mddev->recovery = 0;
 		spin_lock_irq(&conf->device_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mddev->raid_disks = conf->raid_disks = conf->previous_raid_disks;
 		rdev_for_each(rdev, mddev)
 			rdev->new_data_offset = rdev->data_offset;
@@ -7431,6 +8102,8 @@ static int raid5_start_reshape(struct mddev *mddev)
 		conf->reshape_progress = MaxSector;
 		mddev->reshape_position = MaxSector;
 =======
+=======
+>>>>>>> v3.18
 		write_seqcount_begin(&conf->gen_lock);
 		mddev->raid_disks = conf->raid_disks = conf->previous_raid_disks;
 		mddev->new_chunk_sectors =
@@ -7443,6 +8116,9 @@ static int raid5_start_reshape(struct mddev *mddev)
 		conf->reshape_progress = MaxSector;
 		mddev->reshape_position = MaxSector;
 		write_seqcount_end(&conf->gen_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_unlock_irq(&conf->device_lock);
 		return -EAGAIN;
@@ -7532,7 +8208,11 @@ static void raid5_quiesce(struct mddev *mddev, int state)
 
 	case 1: /* stop all writes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_irq(&conf->device_lock);
+=======
+		lock_all_device_hash_locks_irq(conf);
+>>>>>>> v3.18
 =======
 		lock_all_device_hash_locks_irq(conf);
 >>>>>>> v3.18
@@ -7541,6 +8221,7 @@ static void raid5_quiesce(struct mddev *mddev, int state)
 		 */
 		conf->quiesce = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wait_event_lock_irq(conf->wait_for_stripe,
 				    atomic_read(&conf->active_stripes) == 0 &&
 				    atomic_read(&conf->active_aligned_reads) == 0,
@@ -7548,6 +8229,8 @@ static void raid5_quiesce(struct mddev *mddev, int state)
 		conf->quiesce = 1;
 		spin_unlock_irq(&conf->device_lock);
 =======
+=======
+>>>>>>> v3.18
 		wait_event_cmd(conf->wait_for_stripe,
 				    atomic_read(&conf->active_stripes) == 0 &&
 				    atomic_read(&conf->active_aligned_reads) == 0,
@@ -7555,6 +8238,9 @@ static void raid5_quiesce(struct mddev *mddev, int state)
 				    lock_all_device_hash_locks_irq(conf));
 		conf->quiesce = 1;
 		unlock_all_device_hash_locks_irq(conf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* allow reshape to continue */
 		wake_up(&conf->wait_for_overlap);
@@ -7562,24 +8248,33 @@ static void raid5_quiesce(struct mddev *mddev, int state)
 
 	case 0: /* re-enable writes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_irq(&conf->device_lock);
 		conf->quiesce = 0;
 		wake_up(&conf->wait_for_stripe);
 		wake_up(&conf->wait_for_overlap);
 		spin_unlock_irq(&conf->device_lock);
 =======
+=======
+>>>>>>> v3.18
 		lock_all_device_hash_locks_irq(conf);
 		conf->quiesce = 0;
 		wake_up(&conf->wait_for_stripe);
 		wake_up(&conf->wait_for_overlap);
 		unlock_all_device_hash_locks_irq(conf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void *raid45_takeover_raid0(struct mddev *mddev, int level)
@@ -7609,7 +8304,10 @@ static void *raid45_takeover_raid0(struct mddev *mddev, int level)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void *raid5_takeover_raid1(struct mddev *mddev)
@@ -7673,7 +8371,10 @@ static void *raid5_takeover_raid6(struct mddev *mddev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int raid5_check_reshape(struct mddev *mddev)
@@ -7825,7 +8526,10 @@ static void *raid6_takeover(struct mddev *mddev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct md_personality raid6_personality =
@@ -7899,11 +8603,17 @@ static struct md_personality raid4_personality =
 static int __init raid5_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	raid5_wq = alloc_workqueue("raid5wq",
 		WQ_UNBOUND|WQ_MEM_RECLAIM|WQ_CPU_INTENSIVE|WQ_SYSFS, 0);
 	if (!raid5_wq)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	register_md_personality(&raid6_personality);
 	register_md_personality(&raid5_personality);
@@ -7917,6 +8627,10 @@ static void raid5_exit(void)
 	unregister_md_personality(&raid5_personality);
 	unregister_md_personality(&raid4_personality);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	destroy_workqueue(raid5_wq);
+>>>>>>> v3.18
 =======
 	destroy_workqueue(raid5_wq);
 >>>>>>> v3.18

@@ -40,8 +40,13 @@
 #include <linux/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NES_ABI_USERSPACE_VER 1
 #define NES_ABI_KERNEL_VER    1
+=======
+#define NES_ABI_USERSPACE_VER 2
+#define NES_ABI_KERNEL_VER    2
+>>>>>>> v3.18
 =======
 #define NES_ABI_USERSPACE_VER 2
 #define NES_ABI_KERNEL_VER    2
@@ -84,6 +89,10 @@ struct nes_create_cq_req {
 struct nes_create_qp_req {
 	__u64 user_wqe_buffers;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__u64 user_qp_buffer;
+>>>>>>> v3.18
 =======
 	__u64 user_qp_buffer;
 >>>>>>> v3.18

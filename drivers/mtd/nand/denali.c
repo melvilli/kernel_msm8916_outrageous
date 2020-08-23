@@ -30,7 +30,12 @@
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* We define a module parameter that allows the user to override
+=======
+/*
+ * We define a module parameter that allows the user to override
+>>>>>>> v3.18
 =======
 /*
  * We define a module parameter that allows the user to override
@@ -42,6 +47,7 @@ MODULE_LICENSE("GPL");
 static int onfi_timing_mode = NAND_DEFAULT_TIMINGS;
 module_param(onfi_timing_mode, int, S_IRUGO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_PARM_DESC(onfi_timing_mode, "Overrides default ONFI setting."
 			" -1 indicates use default timings");
 
@@ -50,6 +56,8 @@ MODULE_PARM_DESC(onfi_timing_mode, "Overrides default ONFI setting."
 /* We define a macro here that combines all interrupts this driver uses into
  * a single constant value, for convenience. */
 =======
+=======
+>>>>>>> v3.18
 MODULE_PARM_DESC(onfi_timing_mode,
 	   "Overrides default ONFI setting. -1 indicates use default timings");
 
@@ -59,6 +67,9 @@ MODULE_PARM_DESC(onfi_timing_mode,
  * We define a macro here that combines all interrupts this driver uses into
  * a single constant value, for convenience.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DENALI_IRQ_ALL	(INTR_STATUS__DMA_CMD_COMP | \
 			INTR_STATUS__ECC_TRANSACTION_DONE | \
@@ -72,18 +83,25 @@ MODULE_PARM_DESC(onfi_timing_mode,
 			INTR_STATUS__ERASE_COMP)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* indicates whether or not the internal value for the flash bank is
  * valid or not */
 =======
+=======
+>>>>>>> v3.18
 /*
  * indicates whether or not the internal value for the flash bank is
  * valid or not
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CHIP_SELECT_INVALID	-1
 
 #define SUPPORT_8BITECC		1
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* This macro divides two integers and rounds fractional values up
  * to the nearest integer value. */
@@ -91,6 +109,8 @@ MODULE_PARM_DESC(onfi_timing_mode,
 
 /* this macro allows us to convert from an MTD structure to our own
 =======
+=======
+>>>>>>> v3.18
 /*
  * This macro divides two integers and rounds fractional values up
  * to the nearest integer value.
@@ -99,11 +119,15 @@ MODULE_PARM_DESC(onfi_timing_mode,
 
 /*
  * this macro allows us to convert from an MTD structure to our own
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * device context (denali) structure.
  */
 #define mtd_to_denali(m) container_of(m, struct denali_nand_info, mtd)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* These constants are defined by the driver to enable common driver
  * configuration options. */
@@ -111,6 +135,8 @@ MODULE_PARM_DESC(onfi_timing_mode,
 #define MAIN_ACCESS		0x42
 #define MAIN_SPARE_ACCESS	0x43
 =======
+=======
+>>>>>>> v3.18
 /*
  * These constants are defined by the driver to enable common driver
  * configuration options.
@@ -119,6 +145,9 @@ MODULE_PARM_DESC(onfi_timing_mode,
 #define MAIN_ACCESS		0x42
 #define MAIN_SPARE_ACCESS	0x43
 #define PIPELINE_ACCESS		0x2000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DENALI_READ	0
@@ -130,13 +159,19 @@ MODULE_PARM_DESC(onfi_timing_mode,
 #define STATUS_CYCLE	2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* this is a helper macro that allows us to
  * format the bank into the proper bits for the controller */
 =======
+=======
+>>>>>>> v3.18
 /*
  * this is a helper macro that allows us to
  * format the bank into the proper bits for the controller
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BANK(x) ((x) << 24)
 
@@ -149,6 +184,7 @@ static void denali_irq_enable(struct denali_nand_info *denali,
 static uint32_t read_interrupt_status(struct denali_nand_info *denali);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Certain operations for the denali NAND controller use
  * an indexed mode to read/write data. The operation is
  * performed by writing the address value of the command
@@ -156,12 +192,17 @@ static uint32_t read_interrupt_status(struct denali_nand_info *denali);
  * abstracts this common operation.
 */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Certain operations for the denali NAND controller use an indexed mode to
  * read/write data. The operation is performed by writing the address value
  * of the command to the device memory followed by the data. This function
  * abstracts this common operation.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void index_addr(struct denali_nand_info *denali,
 				uint32_t address, uint32_t data)
@@ -179,13 +220,19 @@ static void index_addr_read_data(struct denali_nand_info *denali,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* We need to buffer some data for some of the NAND core routines.
  * The operations manage buffering that data. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * We need to buffer some data for some of the NAND core routines.
  * The operations manage buffering that data.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void reset_buf(struct denali_nand_info *denali)
 {
@@ -195,7 +242,10 @@ static void reset_buf(struct denali_nand_info *denali)
 static void write_byte_to_buf(struct denali_nand_info *denali, uint8_t byte)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(denali->buf.tail >= sizeof(denali->buf.buf));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	denali->buf.buf[denali->buf.tail++] = byte;
@@ -205,7 +255,11 @@ static void write_byte_to_buf(struct denali_nand_info *denali, uint8_t byte)
 static void read_status(struct denali_nand_info *denali)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t cmd = 0x0;
+=======
+	uint32_t cmd;
+>>>>>>> v3.18
 =======
 	uint32_t cmd;
 >>>>>>> v3.18
@@ -224,9 +278,14 @@ static void read_status(struct denali_nand_info *denali)
 static void reset_bank(struct denali_nand_info *denali)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t irq_status = 0;
 	uint32_t irq_mask = INTR_STATUS__RST_COMP |
 			    INTR_STATUS__TIME_OUT;
+=======
+	uint32_t irq_status;
+	uint32_t irq_mask = INTR_STATUS__RST_COMP | INTR_STATUS__TIME_OUT;
+>>>>>>> v3.18
 =======
 	uint32_t irq_status;
 	uint32_t irq_mask = INTR_STATUS__RST_COMP | INTR_STATUS__TIME_OUT;
@@ -246,6 +305,7 @@ static void reset_bank(struct denali_nand_info *denali)
 static uint16_t denali_nand_reset(struct denali_nand_info *denali)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t i;
 
 	dev_dbg(denali->dev, "%s, Line %d, Function: %s\n",
@@ -260,6 +320,8 @@ static uint16_t denali_nand_reset(struct denali_nand_info *denali)
 		while (!(ioread32(denali->flash_reg +
 				INTR_STATUS(i)) &
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	dev_dbg(denali->dev, "%s, Line %d, Function: %s\n",
@@ -272,6 +334,9 @@ static uint16_t denali_nand_reset(struct denali_nand_info *denali)
 	for (i = 0; i < denali->max_banks; i++) {
 		iowrite32(1 << i, denali->flash_reg + DEVICE_RESET);
 		while (!(ioread32(denali->flash_reg + INTR_STATUS(i)) &
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			(INTR_STATUS__RST_COMP | INTR_STATUS__TIME_OUT)))
 			cpu_relax();
@@ -284,7 +349,11 @@ static uint16_t denali_nand_reset(struct denali_nand_info *denali)
 	for (i = 0; i < denali->max_banks; i++)
 		iowrite32(INTR_STATUS__RST_COMP | INTR_STATUS__TIME_OUT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			denali->flash_reg + INTR_STATUS(i));
+=======
+			  denali->flash_reg + INTR_STATUS(i));
+>>>>>>> v3.18
 =======
 			  denali->flash_reg + INTR_STATUS(i));
 >>>>>>> v3.18
@@ -293,7 +362,12 @@ static uint16_t denali_nand_reset(struct denali_nand_info *denali)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* this routine calculates the ONFI timing values for a given mode and
+=======
+/*
+ * this routine calculates the ONFI timing values for a given mode and
+>>>>>>> v3.18
 =======
 /*
  * this routine calculates the ONFI timing values for a given mode and
@@ -326,7 +400,11 @@ static void nand_onfi_timing_set(struct denali_nand_info *denali,
 
 	dev_dbg(denali->dev, "%s, Line %d, Function: %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       __FILE__, __LINE__, __func__);
+=======
+		__FILE__, __LINE__, __func__);
+>>>>>>> v3.18
 =======
 		__FILE__, __LINE__, __func__);
 >>>>>>> v3.18
@@ -350,9 +428,14 @@ static void nand_onfi_timing_set(struct denali_nand_info *denali,
 		data_invalid_rloh = (en_lo + en_hi) * CLK_X + Trloh[mode];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		data_invalid =
 		    data_invalid_rhoh <
 		    data_invalid_rloh ? data_invalid_rhoh : data_invalid_rloh;
+=======
+		data_invalid = data_invalid_rhoh < data_invalid_rloh ?
+					data_invalid_rhoh : data_invalid_rloh;
+>>>>>>> v3.18
 =======
 		data_invalid = data_invalid_rhoh < data_invalid_rloh ?
 					data_invalid_rhoh : data_invalid_rloh;
@@ -367,6 +450,7 @@ static void nand_onfi_timing_set(struct denali_nand_info *denali,
 	acc_clks = CEIL_DIV(Trea[mode], CLK_X);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (((acc_clks * CLK_X) - Trea[mode]) < 3)
 		acc_clks++;
 
@@ -374,12 +458,17 @@ static void nand_onfi_timing_set(struct denali_nand_info *denali,
 		dev_warn(denali->dev, "%s, Line %d: Warning!\n",
 			__FILE__, __LINE__);
 =======
+=======
+>>>>>>> v3.18
 	while (acc_clks * CLK_X - Trea[mode] < 3)
 		acc_clks++;
 
 	if (data_invalid - acc_clks * CLK_X < 2)
 		dev_warn(denali->dev, "%s, Line %d: Warning!\n",
 			 __FILE__, __LINE__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	addr_2_data = CEIL_DIV(Tadl[mode], CLK_X);
@@ -394,7 +483,11 @@ static void nand_onfi_timing_set(struct denali_nand_info *denali,
 
 	if (Tcea[mode]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (((cs_cnt * CLK_X) + Trea[mode]) < Tcea[mode])
+=======
+		while (cs_cnt * CLK_X + Trea[mode] < Tcea[mode])
+>>>>>>> v3.18
 =======
 		while (cs_cnt * CLK_X + Trea[mode] < Tcea[mode])
 >>>>>>> v3.18
@@ -408,8 +501,13 @@ static void nand_onfi_timing_set(struct denali_nand_info *denali,
 
 	/* Sighting 3462430: Temporary hack for MT29F128G08CJABAWP:B */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((ioread32(denali->flash_reg + MANUFACTURER_ID) == 0) &&
 		(ioread32(denali->flash_reg + DEVICE_ID) == 0x88))
+=======
+	if (ioread32(denali->flash_reg + MANUFACTURER_ID) == 0 &&
+		ioread32(denali->flash_reg + DEVICE_ID) == 0x88)
+>>>>>>> v3.18
 =======
 	if (ioread32(denali->flash_reg + MANUFACTURER_ID) == 0 &&
 		ioread32(denali->flash_reg + DEVICE_ID) == 0x88)
@@ -431,15 +529,21 @@ static uint16_t get_onfi_nand_para(struct denali_nand_info *denali)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we needn't to do a reset here because driver has already
 	 * reset all the banks before
 	 * */
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * we needn't to do a reset here because driver has already
 	 * reset all the banks before
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(ioread32(denali->flash_reg + ONFI_TIMING_MODE) &
 		ONFI_TIMING_MODE__VALUE))
@@ -454,13 +558,19 @@ static uint16_t get_onfi_nand_para(struct denali_nand_info *denali)
 	nand_onfi_timing_set(denali, i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* By now, all the ONFI devices we know support the page cache */
 	/* rw feature. So here we enable the pipeline_rw_ahead feature */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * By now, all the ONFI devices we know support the page cache
 	 * rw feature. So here we enable the pipeline_rw_ahead feature
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* iowrite32(1, denali->flash_reg + CACHE_WRITE_ENABLE); */
 	/* iowrite32(1, denali->flash_reg + CACHE_READ_ENABLE);  */
@@ -488,13 +598,19 @@ static void get_toshiba_nand_para(struct denali_nand_info *denali)
 	uint32_t tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Workaround to fix a controller bug which reports a wrong */
 	/* spare area size for some kind of Toshiba NAND device */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Workaround to fix a controller bug which reports a wrong
 	 * spare area size for some kind of Toshiba NAND device
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((ioread32(denali->flash_reg + DEVICE_MAIN_AREA_SIZE) == 4096) &&
 		(ioread32(denali->flash_reg + DEVICE_SPARE_AREA_SIZE) == 64)) {
@@ -540,6 +656,7 @@ static void get_hynix_nand_para(struct denali_nand_info *denali,
 	default:
 		dev_warn(denali->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"Spectra: Unknown Hynix NAND (Device ID: 0x%x)."
 			"Will use default parameter values instead.\n",
 			device_id);
@@ -548,6 +665,8 @@ static void get_hynix_nand_para(struct denali_nand_info *denali,
 
 /* determines how many NAND chips are connected to the controller. Note for
 =======
+=======
+>>>>>>> v3.18
 			 "Spectra: Unknown Hynix NAND (Device ID: 0x%x).\n"
 			 "Will use default parameter values instead.\n",
 			 device_id);
@@ -556,6 +675,9 @@ static void get_hynix_nand_para(struct denali_nand_info *denali,
 
 /*
  * determines how many NAND chips are connected to the controller. Note for
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Intel CE4100 devices we don't support more than one device.
  */
@@ -567,10 +689,16 @@ static void find_valid_banks(struct denali_nand_info *denali)
 	denali->total_used_banks = 1;
 	for (i = 0; i < denali->max_banks; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		index_addr(denali, (uint32_t)(MODE_11 | (i << 24) | 0), 0x90);
 		index_addr(denali, (uint32_t)(MODE_11 | (i << 24) | 1), 0);
 		index_addr_read_data(denali,
 				(uint32_t)(MODE_11 | (i << 24) | 2), &id[i]);
+=======
+		index_addr(denali, MODE_11 | (i << 24) | 0, 0x90);
+		index_addr(denali, MODE_11 | (i << 24) | 1, 0);
+		index_addr_read_data(denali, MODE_11 | (i << 24) | 2, &id[i]);
+>>>>>>> v3.18
 =======
 		index_addr(denali, MODE_11 | (i << 24) | 0, 0x90);
 		index_addr(denali, MODE_11 | (i << 24) | 1, 0);
@@ -593,7 +721,12 @@ static void find_valid_banks(struct denali_nand_info *denali)
 
 	if (denali->platform == INTEL_CE4100) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Platform limitations of the CE4100 device limit
+=======
+		/*
+		 * Platform limitations of the CE4100 device limit
+>>>>>>> v3.18
 =======
 		/*
 		 * Platform limitations of the CE4100 device limit
@@ -604,8 +737,12 @@ static void find_valid_banks(struct denali_nand_info *denali)
 		if (denali->total_used_banks != 1) {
 			dev_err(denali->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					"Sorry, Intel CE4100 only supports "
 					"a single NAND device.\n");
+=======
+				"Sorry, Intel CE4100 only supports a single NAND device.\n");
+>>>>>>> v3.18
 =======
 				"Sorry, Intel CE4100 only supports a single NAND device.\n");
 >>>>>>> v3.18
@@ -630,7 +767,12 @@ static void detect_max_banks(struct denali_nand_info *denali)
 static void detect_partition_feature(struct denali_nand_info *denali)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* For MRST platform, denali->fwblks represent the
+=======
+	/*
+	 * For MRST platform, denali->fwblks represent the
+>>>>>>> v3.18
 =======
 	/*
 	 * For MRST platform, denali->fwblks represent the
@@ -640,7 +782,11 @@ static void detect_partition_feature(struct denali_nand_info *denali)
 	 * permission to access it. So let driver know how many
 	 * blocks it can't touch.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * */
+=======
+	 */
+>>>>>>> v3.18
 =======
 	 */
 >>>>>>> v3.18
@@ -655,23 +801,30 @@ static void detect_partition_feature(struct denali_nand_info *denali)
 			    (ioread32(denali->flash_reg + MIN_BLK_ADDR(1)) &
 			    MIN_BLK_ADDR__VALUE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
 			denali->fwblks = SPECTRA_START_BLOCK;
 	} else
 		denali->fwblks = SPECTRA_START_BLOCK;
 =======
+=======
+>>>>>>> v3.18
 		} else {
 			denali->fwblks = SPECTRA_START_BLOCK;
 		}
 	} else {
 		denali->fwblks = SPECTRA_START_BLOCK;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static uint16_t denali_nand_timing_set(struct denali_nand_info *denali)
 {
 	uint16_t status = PASS;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	uint32_t id_bytes[5], addr;
 	uint8_t i, maf_id, device_id;
@@ -690,6 +843,8 @@ static uint16_t denali_nand_timing_set(struct denali_nand_info *denali)
 	index_addr(denali, (uint32_t)addr | 1, 0);
 	for (i = 0; i < 5; i++)
 =======
+=======
+>>>>>>> v3.18
 	uint32_t id_bytes[8], addr;
 	uint8_t maf_id, device_id;
 	int i;
@@ -706,6 +861,9 @@ static uint16_t denali_nand_timing_set(struct denali_nand_info *denali)
 	index_addr(denali, addr | 0, 0x90);
 	index_addr(denali, addr | 1, 0);
 	for (i = 0; i < 8; i++)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		index_addr_read_data(denali, addr | 2, &id_bytes[i]);
 	maf_id = id_bytes[0];
@@ -725,7 +883,11 @@ static uint16_t denali_nand_timing_set(struct denali_nand_info *denali)
 
 	dev_info(denali->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"Dump timing register values:"
+=======
+			"Dump timing register values:\n"
+>>>>>>> v3.18
 =======
 			"Dump timing register values:\n"
 >>>>>>> v3.18
@@ -746,7 +908,12 @@ static uint16_t denali_nand_timing_set(struct denali_nand_info *denali)
 	detect_partition_feature(denali);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If the user specified to override the default timings
+=======
+	/*
+	 * If the user specified to override the default timings
+>>>>>>> v3.18
 =======
 	/*
 	 * If the user specified to override the default timings
@@ -764,7 +931,11 @@ static void denali_set_intr_modes(struct denali_nand_info *denali,
 {
 	dev_dbg(denali->dev, "%s, Line %d, Function: %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       __FILE__, __LINE__, __func__);
+=======
+		__FILE__, __LINE__, __func__);
+>>>>>>> v3.18
 =======
 		__FILE__, __LINE__, __func__);
 >>>>>>> v3.18
@@ -776,7 +947,12 @@ static void denali_set_intr_modes(struct denali_nand_info *denali,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* validation function to verify that the controlling software is making
+=======
+/*
+ * validation function to verify that the controlling software is making
+>>>>>>> v3.18
 =======
 /*
  * validation function to verify that the controlling software is making
@@ -786,7 +962,11 @@ static void denali_set_intr_modes(struct denali_nand_info *denali,
 static inline bool is_flash_bank_valid(int flash_bank)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (flash_bank >= 0 && flash_bank < 4);
+=======
+	return flash_bank >= 0 && flash_bank < 4;
+>>>>>>> v3.18
 =======
 	return flash_bank >= 0 && flash_bank < 4;
 >>>>>>> v3.18
@@ -795,7 +975,11 @@ static inline bool is_flash_bank_valid(int flash_bank)
 static void denali_irq_init(struct denali_nand_info *denali)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t int_mask = 0;
+=======
+	uint32_t int_mask;
+>>>>>>> v3.18
 =======
 	uint32_t int_mask;
 >>>>>>> v3.18
@@ -829,7 +1013,12 @@ static void denali_irq_enable(struct denali_nand_info *denali,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This function only returns when an interrupt that this driver cares about
+=======
+/*
+ * This function only returns when an interrupt that this driver cares about
+>>>>>>> v3.18
 =======
 /*
  * This function only returns when an interrupt that this driver cares about
@@ -846,7 +1035,11 @@ static inline void clear_interrupt(struct denali_nand_info *denali,
 							uint32_t irq_mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t intr_status_reg = 0;
+=======
+	uint32_t intr_status_reg;
+>>>>>>> v3.18
 =======
 	uint32_t intr_status_reg;
 >>>>>>> v3.18
@@ -859,7 +1052,12 @@ static inline void clear_interrupt(struct denali_nand_info *denali,
 static void clear_interrupts(struct denali_nand_info *denali)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t status = 0x0;
+=======
+	uint32_t status;
+
+>>>>>>> v3.18
 =======
 	uint32_t status;
 
@@ -876,7 +1074,11 @@ static void clear_interrupts(struct denali_nand_info *denali)
 static uint32_t read_interrupt_status(struct denali_nand_info *denali)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t intr_status_reg = 0;
+=======
+	uint32_t intr_status_reg;
+>>>>>>> v3.18
 =======
 	uint32_t intr_status_reg;
 >>>>>>> v3.18
@@ -887,9 +1089,15 @@ static uint32_t read_interrupt_status(struct denali_nand_info *denali)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This is the interrupt service routine. It handles all interrupts
  * sent to this device. Note that on CE4100, this is a shared
  * interrupt.
+=======
+/*
+ * This is the interrupt service routine. It handles all interrupts
+ * sent to this device. Note that on CE4100, this is a shared interrupt.
+>>>>>>> v3.18
 =======
 /*
  * This is the interrupt service routine. It handles all interrupts
@@ -900,7 +1108,11 @@ static irqreturn_t denali_isr(int irq, void *dev_id)
 {
 	struct denali_nand_info *denali = dev_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t irq_status = 0x0;
+=======
+	uint32_t irq_status;
+>>>>>>> v3.18
 =======
 	uint32_t irq_status;
 >>>>>>> v3.18
@@ -909,6 +1121,7 @@ static irqreturn_t denali_isr(int irq, void *dev_id)
 	spin_lock(&denali->irq_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* check to see if a valid NAND chip has
 	 * been selected.
 	 */
@@ -916,12 +1129,17 @@ static irqreturn_t denali_isr(int irq, void *dev_id)
 		/* check to see if controller generated
 		 * the interrupt, since this is a shared interrupt */
 =======
+=======
+>>>>>>> v3.18
 	/* check to see if a valid NAND chip has been selected. */
 	if (is_flash_bank_valid(denali->flash_bank)) {
 		/*
 		 * check to see if controller generated the interrupt,
 		 * since this is a shared interrupt
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		irq_status = denali_irq_detected(denali);
 		if (irq_status != 0) {
@@ -929,13 +1147,19 @@ static irqreturn_t denali_isr(int irq, void *dev_id)
 			/* first acknowledge it */
 			clear_interrupt(denali, irq_status);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* store the status in the device context for someone
 			   to read */
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * store the status in the device context for someone
 			 * to read
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			denali->irq_status |= irq_status;
 			/* notify anyone who cares that it happened */
@@ -952,9 +1176,14 @@ static irqreturn_t denali_isr(int irq, void *dev_id)
 static uint32_t wait_for_irq(struct denali_nand_info *denali, uint32_t irq_mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long comp_res = 0;
 	uint32_t intr_status = 0;
 	bool retry = false;
+=======
+	unsigned long comp_res;
+	uint32_t intr_status;
+>>>>>>> v3.18
 =======
 	unsigned long comp_res;
 	uint32_t intr_status;
@@ -973,6 +1202,7 @@ static uint32_t wait_for_irq(struct denali_nand_info *denali, uint32_t irq_mask)
 			/* our interrupt was detected */
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else {
 			/* these are not the interrupts you are looking for -
 			 * need to wait again */
@@ -980,6 +1210,8 @@ static uint32_t wait_for_irq(struct denali_nand_info *denali, uint32_t irq_mask)
 			retry = true;
 		}
 =======
+=======
+>>>>>>> v3.18
 		}
 
 		/*
@@ -987,6 +1219,9 @@ static uint32_t wait_for_irq(struct denali_nand_info *denali, uint32_t irq_mask)
 		 * need to wait again
 		 */
 		spin_unlock_irq(&denali->irq_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while (comp_res != 0);
 
@@ -1001,6 +1236,7 @@ static uint32_t wait_for_irq(struct denali_nand_info *denali, uint32_t irq_mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This helper function setups the registers for ECC and whether or not
  * the spare area will be transferred. */
 static void setup_ecc_for_xfer(struct denali_nand_info *denali, bool ecc_en,
@@ -1008,6 +1244,8 @@ static void setup_ecc_for_xfer(struct denali_nand_info *denali, bool ecc_en,
 {
 	int ecc_en_flag = 0, transfer_spare_flag = 0;
 =======
+=======
+>>>>>>> v3.18
 /*
  * This helper function setups the registers for ECC and whether or not
  * the spare area will be transferred.
@@ -1016,6 +1254,9 @@ static void setup_ecc_for_xfer(struct denali_nand_info *denali, bool ecc_en,
 				bool transfer_spare)
 {
 	int ecc_en_flag, transfer_spare_flag;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set ECC, transfer spare bits if needed */
@@ -1024,6 +1265,7 @@ static void setup_ecc_for_xfer(struct denali_nand_info *denali, bool ecc_en,
 
 	/* Enable spare area/ECC per user's request. */
 	iowrite32(ecc_en_flag, denali->flash_reg + ECC_ENABLE);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	iowrite32(transfer_spare_flag,
 			denali->flash_reg + TRANSFER_SPARE_REG);
@@ -1042,6 +1284,8 @@ static int denali_send_pipeline_cmd(struct denali_nand_info *denali,
 	uint32_t addr = 0x0, cmd = 0x0, page_count = 1, irq_status = 0,
 		 irq_mask = 0;
 =======
+=======
+>>>>>>> v3.18
 	iowrite32(transfer_spare_flag, denali->flash_reg + TRANSFER_SPARE_REG);
 }
 
@@ -1056,6 +1300,9 @@ static int denali_send_pipeline_cmd(struct denali_nand_info *denali,
 	int status = PASS;
 	uint32_t page_count = 1;
 	uint32_t addr, cmd, irq_status, irq_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (op == DENALI_READ)
@@ -1068,7 +1315,10 @@ static int denali_send_pipeline_cmd(struct denali_nand_info *denali,
 	setup_ecc_for_xfer(denali, ecc_en, transfer_spare);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* clear interrupts */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clear_interrupts(denali);
@@ -1082,7 +1332,11 @@ static int denali_send_pipeline_cmd(struct denali_nand_info *denali,
 		/* read spare area */
 		cmd = MODE_10 | addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		index_addr(denali, (uint32_t)cmd, access_type);
+=======
+		index_addr(denali, cmd, access_type);
+>>>>>>> v3.18
 =======
 		index_addr(denali, cmd, access_type);
 >>>>>>> v3.18
@@ -1093,24 +1347,31 @@ static int denali_send_pipeline_cmd(struct denali_nand_info *denali,
 		/* setup page read request for access type */
 		cmd = MODE_10 | addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		index_addr(denali, (uint32_t)cmd, access_type);
 
 		/* page 33 of the NAND controller spec indicates we should not
 		   use the pipeline commands in Spare area only mode. So we
 		   don't.
 =======
+=======
+>>>>>>> v3.18
 		index_addr(denali, cmd, access_type);
 
 		/*
 		 * page 33 of the NAND controller spec indicates we should not
 		 * use the pipeline commands in Spare area only mode.
 		 * So we don't.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		if (access_type == SPARE_ACCESS) {
 			cmd = MODE_01 | addr;
 			iowrite32(cmd, denali->flash_mem);
 		} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			index_addr(denali, (uint32_t)cmd,
 					0x2000 | op | page_count);
@@ -1120,6 +1381,8 @@ static int denali_send_pipeline_cmd(struct denali_nand_info *denali,
 			 * mask is identical for each
 			 * bank. */
 =======
+=======
+>>>>>>> v3.18
 			index_addr(denali, cmd,
 					PIPELINE_ACCESS | op | page_count);
 
@@ -1128,15 +1391,23 @@ static int denali_send_pipeline_cmd(struct denali_nand_info *denali,
 			 * can always use status0 bit as the
 			 * mask is identical for each bank.
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			irq_status = wait_for_irq(denali, irq_mask);
 
 			if (irq_status == 0) {
 				dev_err(denali->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						"cmd, page, addr on timeout "
 						"(0x%x, 0x%x, 0x%x)\n",
 						cmd, denali->page, addr);
+=======
+					"cmd, page, addr on timeout (0x%x, 0x%x, 0x%x)\n",
+					cmd, denali->page, addr);
+>>>>>>> v3.18
 =======
 					"cmd, page, addr on timeout (0x%x, 0x%x, 0x%x)\n",
 					cmd, denali->page, addr);
@@ -1154,6 +1425,7 @@ static int denali_send_pipeline_cmd(struct denali_nand_info *denali,
 /* helper function that simply writes a buffer to the flash */
 static int write_data_to_flash_mem(struct denali_nand_info *denali,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							const uint8_t *buf,
 							int len)
 {
@@ -1162,6 +1434,8 @@ static int write_data_to_flash_mem(struct denali_nand_info *denali,
 	/* verify that the len is a multiple of 4. see comment in
 	 * read_data_from_flash_mem() */
 =======
+=======
+>>>>>>> v3.18
 				   const uint8_t *buf, int len)
 {
 	uint32_t *buf32;
@@ -1171,6 +1445,9 @@ static int write_data_to_flash_mem(struct denali_nand_info *denali,
 	 * verify that the len is a multiple of 4.
 	 * see comment in read_data_from_flash_mem()
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BUG_ON((len % 4) != 0);
 
@@ -1179,7 +1456,11 @@ static int write_data_to_flash_mem(struct denali_nand_info *denali,
 	for (i = 0; i < len / 4; i++)
 		iowrite32(*buf32++, denali->flash_mem + 0x10);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return i*4; /* intent is to return the number of bytes read */
+=======
+	return i * 4; /* intent is to return the number of bytes read */
+>>>>>>> v3.18
 =======
 	return i * 4; /* intent is to return the number of bytes read */
 >>>>>>> v3.18
@@ -1187,6 +1468,7 @@ static int write_data_to_flash_mem(struct denali_nand_info *denali,
 
 /* helper function that simply reads a buffer from the flash */
 static int read_data_from_flash_mem(struct denali_nand_info *denali,
+<<<<<<< HEAD
 <<<<<<< HEAD
 								uint8_t *buf,
 								int len)
@@ -1202,6 +1484,8 @@ static int read_data_from_flash_mem(struct denali_nand_info *denali,
 	 */
 
 =======
+=======
+>>>>>>> v3.18
 				    uint8_t *buf, int len)
 {
 	uint32_t *buf32;
@@ -1213,6 +1497,9 @@ static int read_data_from_flash_mem(struct denali_nand_info *denali,
 	 * This assumption is based on the fact that this function is designed
 	 * to be used to read flash pages, which are typically multiples of 4.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BUG_ON((len % 4) != 0);
 
@@ -1221,7 +1508,11 @@ static int read_data_from_flash_mem(struct denali_nand_info *denali,
 	for (i = 0; i < len / 4; i++)
 		*buf32++ = ioread32(denali->flash_mem + 0x10);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return i*4; /* intent is to return the number of bytes read */
+=======
+	return i * 4; /* intent is to return the number of bytes read */
+>>>>>>> v3.18
 =======
 	return i * 4; /* intent is to return the number of bytes read */
 >>>>>>> v3.18
@@ -1232,7 +1523,11 @@ static int write_oob_data(struct mtd_info *mtd, uint8_t *buf, int page)
 {
 	struct denali_nand_info *denali = mtd_to_denali(mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t irq_status = 0;
+=======
+	uint32_t irq_status;
+>>>>>>> v3.18
 =======
 	uint32_t irq_status;
 >>>>>>> v3.18
@@ -1265,8 +1560,13 @@ static void read_oob_data(struct mtd_info *mtd, uint8_t *buf, int page)
 {
 	struct denali_nand_info *denali = mtd_to_denali(mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t irq_mask = INTR_STATUS__LOAD_COMP,
 			 irq_status = 0, addr = 0x0, cmd = 0x0;
+=======
+	uint32_t irq_mask = INTR_STATUS__LOAD_COMP;
+	uint32_t irq_status, addr, cmd;
+>>>>>>> v3.18
 =======
 	uint32_t irq_mask = INTR_STATUS__LOAD_COMP;
 	uint32_t irq_status, addr, cmd;
@@ -1279,15 +1579,21 @@ static void read_oob_data(struct mtd_info *mtd, uint8_t *buf, int page)
 		read_data_from_flash_mem(denali, buf, mtd->oobsize);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* wait for command to be accepted
 		 * can always use status0 bit as the mask is identical for each
 		 * bank. */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * wait for command to be accepted
 		 * can always use status0 bit as the
 		 * mask is identical for each bank.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		irq_status = wait_for_irq(denali, irq_mask);
 
@@ -1296,7 +1602,12 @@ static void read_oob_data(struct mtd_info *mtd, uint8_t *buf, int page)
 					denali->page);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* We set the device back to MAIN_ACCESS here as I observed
+=======
+		/*
+		 * We set the device back to MAIN_ACCESS here as I observed
+>>>>>>> v3.18
 =======
 		/*
 		 * We set the device back to MAIN_ACCESS here as I observed
@@ -1309,6 +1620,7 @@ static void read_oob_data(struct mtd_info *mtd, uint8_t *buf, int page)
 		addr = BANK(denali->flash_bank) | denali->page;
 		cmd = MODE_10 | addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		index_addr(denali, (uint32_t)cmd, MAIN_ACCESS);
 	}
 }
@@ -1320,6 +1632,8 @@ bool is_erased(uint8_t *buf, int len)
 {
 	int i = 0;
 =======
+=======
+>>>>>>> v3.18
 		index_addr(denali, cmd, MAIN_ACCESS);
 	}
 }
@@ -1332,6 +1646,9 @@ static bool is_erased(uint8_t *buf, int len)
 {
 	int i;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < len; i++)
 		if (buf[i] != 0xFF)
@@ -1356,9 +1673,14 @@ static bool handle_ecc(struct denali_nand_info *denali, uint8_t *buf,
 	if (irq_status & INTR_STATUS__ECC_ERR) {
 		/* read the ECC errors. we'll ignore them for now */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uint32_t err_address = 0, err_correction_info = 0;
 		uint32_t err_byte = 0, err_sector = 0, err_device = 0;
 		uint32_t err_correction_value = 0;
+=======
+		uint32_t err_address, err_correction_info, err_byte,
+			 err_sector, err_device, err_correction_value;
+>>>>>>> v3.18
 =======
 		uint32_t err_address, err_correction_info, err_byte,
 			 err_sector, err_device, err_correction_value;
@@ -1379,7 +1701,12 @@ static bool handle_ecc(struct denali_nand_info *denali, uint8_t *buf,
 
 			if (ECC_ERROR_CORRECTABLE(err_correction_info)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/* If err_byte is larger than ECC_SECTOR_SIZE,
+=======
+				/*
+				 * If err_byte is larger than ECC_SECTOR_SIZE,
+>>>>>>> v3.18
 =======
 				/*
 				 * If err_byte is larger than ECC_SECTOR_SIZE,
@@ -1390,14 +1717,20 @@ static bool handle_ecc(struct denali_nand_info *denali, uint8_t *buf,
 				 * bits are happened in if there are more
 				 * than one NAND connected.
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 * */
 				if (err_byte < ECC_SECTOR_SIZE) {
 					int offset;
 =======
+=======
+>>>>>>> v3.18
 				 */
 				if (err_byte < ECC_SECTOR_SIZE) {
 					int offset;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					offset = (err_sector *
 							ECC_SECTOR_SIZE +
@@ -1411,6 +1744,7 @@ static bool handle_ecc(struct denali_nand_info *denali, uint8_t *buf,
 				}
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/* if the error is not correctable, need to
 				 * look at the page to see if it is an erased
 				 * page. if so, then it's not a real ECC error
@@ -1423,6 +1757,8 @@ static bool handle_ecc(struct denali_nand_info *denali, uint8_t *buf,
 		 * for a while for this interrupt
 		 * */
 =======
+=======
+>>>>>>> v3.18
 				/*
 				 * if the error is not correctable, need to
 				 * look at the page to see if it is an erased
@@ -1436,6 +1772,9 @@ static bool handle_ecc(struct denali_nand_info *denali, uint8_t *buf,
 		 * a ECC_TRANSACTION_DONE interrupt, so here just wait
 		 * for a while for this interrupt
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		while (!(read_interrupt_status(denali) &
 				INTR_STATUS__ECC_TRANSACTION_DONE))
@@ -1451,12 +1790,16 @@ static bool handle_ecc(struct denali_nand_info *denali, uint8_t *buf,
 static void denali_enable_dma(struct denali_nand_info *denali, bool en)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t reg_val = 0x0;
 
 	if (en)
 		reg_val = DMA_ENABLE__FLAG;
 
 	iowrite32(reg_val, denali->flash_reg + DMA_ENABLE);
+=======
+	iowrite32(en ? DMA_ENABLE__FLAG : 0, denali->flash_reg + DMA_ENABLE);
+>>>>>>> v3.18
 =======
 	iowrite32(en ? DMA_ENABLE__FLAG : 0, denali->flash_reg + DMA_ENABLE);
 >>>>>>> v3.18
@@ -1467,9 +1810,15 @@ static void denali_enable_dma(struct denali_nand_info *denali, bool en)
 static void denali_setup_dma(struct denali_nand_info *denali, int op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t mode = 0x0;
 	const int page_count = 1;
 	dma_addr_t addr = denali->buf.dma_buf;
+=======
+	uint32_t mode;
+	const int page_count = 1;
+	uint32_t addr = denali->buf.dma_buf;
+>>>>>>> v3.18
 =======
 	uint32_t mode;
 	const int page_count = 1;
@@ -1485,6 +1834,7 @@ static void denali_setup_dma(struct denali_nand_info *denali, int op)
 
 	/* 2. set memory high address bits 23:8 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	index_addr(denali, mode | ((uint16_t)(addr >> 16) << 8), 0x2200);
 
 	/* 3. set memory low address bits 23:8 */
@@ -1497,6 +1847,8 @@ static void denali_setup_dma(struct denali_nand_info *denali, int op)
 /* writes a page. user specifies type, and this function handles the
  * configuration details. */
 =======
+=======
+>>>>>>> v3.18
 	index_addr(denali, mode | ((addr >> 16) << 8), 0x2200);
 
 	/* 3. set memory low address bits 23:8 */
@@ -1510,11 +1862,15 @@ static void denali_setup_dma(struct denali_nand_info *denali, int op)
  * writes a page. user specifies type, and this function handles the
  * configuration details.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int write_page(struct mtd_info *mtd, struct nand_chip *chip,
 			const uint8_t *buf, bool raw_xfer)
 {
 	struct denali_nand_info *denali = mtd_to_denali(mtd);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	dma_addr_t addr = denali->buf.dma_buf;
@@ -1527,6 +1883,8 @@ static int write_page(struct mtd_info *mtd, struct nand_chip *chip,
 	/* if it is a raw xfer, we want to disable ecc, and send
 	 * the spare area.
 =======
+=======
+>>>>>>> v3.18
 	dma_addr_t addr = denali->buf.dma_buf;
 	size_t size = denali->mtd.writesize + denali->mtd.oobsize;
 	uint32_t irq_status;
@@ -1535,6 +1893,9 @@ static int write_page(struct mtd_info *mtd, struct nand_chip *chip,
 
 	/*
 	 * if it is a raw xfer, we want to disable ecc and send the spare area.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * !raw_xfer - enable ecc
 	 * raw_xfer - transfer spare
@@ -1563,12 +1924,18 @@ static int write_page(struct mtd_info *mtd, struct nand_chip *chip,
 
 	if (irq_status == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(denali->dev,
 				"timeout on write_page (type = %d)\n",
 				raw_xfer);
 		denali->status =
 			(irq_status & INTR_STATUS__PROGRAM_FAIL) ?
 			NAND_STATUS_FAIL : PASS;
+=======
+		dev_err(denali->dev, "timeout on write_page (type = %d)\n",
+			raw_xfer);
+		denali->status = NAND_STATUS_FAIL;
+>>>>>>> v3.18
 =======
 		dev_err(denali->dev, "timeout on write_page (type = %d)\n",
 			raw_xfer);
@@ -1585,6 +1952,7 @@ static int write_page(struct mtd_info *mtd, struct nand_chip *chip,
 /* NAND core entry points */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* this is the callback that the NAND core calls to write a page. Since
  * writing a page with ECC or without is similar, all the work is done
  * by write_page above.
@@ -1599,6 +1967,8 @@ static int denali_write_page(struct mtd_info *mtd, struct nand_chip *chip,
 
 /* This is the callback that the NAND core calls to write a page without ECC.
 =======
+=======
+>>>>>>> v3.18
 /*
  * this is the callback that the NAND core calls to write a page. Since
  * writing a page with ECC or without is similar, all the work is done
@@ -1616,6 +1986,9 @@ static int denali_write_page(struct mtd_info *mtd, struct nand_chip *chip,
 
 /*
  * This is the callback that the NAND core calls to write a page without ECC.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * raw access is similar to ECC page writes, so all the work is done in the
  * write_page() function above.
@@ -1624,13 +1997,19 @@ static int denali_write_page_raw(struct mtd_info *mtd, struct nand_chip *chip,
 					const uint8_t *buf, int oob_required)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* for raw page writes, we want to disable ECC and simply write
 	   whatever data is in the buffer. */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * for raw page writes, we want to disable ECC and simply write
 	 * whatever data is in the buffer.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return write_page(mtd, chip, buf, true);
 }
@@ -1659,7 +2038,11 @@ static int denali_read_page(struct mtd_info *mtd, struct nand_chip *chip,
 	size_t size = denali->mtd.writesize + denali->mtd.oobsize;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t irq_status = 0;
+=======
+	uint32_t irq_status;
+>>>>>>> v3.18
 =======
 	uint32_t irq_status;
 >>>>>>> v3.18
@@ -1669,9 +2052,15 @@ static int denali_read_page(struct mtd_info *mtd, struct nand_chip *chip,
 
 	if (page != denali->page) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(denali->dev, "IN %s: page %d is not"
 				" equal to denali->page %d, investigate!!",
 				__func__, page, denali->page);
+=======
+		dev_err(denali->dev,
+			"IN %s: page %d is not equal to denali->page %d",
+			__func__, page, denali->page);
+>>>>>>> v3.18
 =======
 		dev_err(denali->dev,
 			"IN %s: page %d is not equal to denali->page %d",
@@ -1717,6 +2106,7 @@ static int denali_read_page_raw(struct mtd_info *mtd, struct nand_chip *chip,
 {
 	struct denali_nand_info *denali = mtd_to_denali(mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dma_addr_t addr = denali->buf.dma_buf;
 	size_t size = denali->mtd.writesize + denali->mtd.oobsize;
@@ -1729,6 +2119,8 @@ static int denali_read_page_raw(struct mtd_info *mtd, struct nand_chip *chip,
 				" equal to denali->page %d, investigate!!",
 				__func__, page, denali->page);
 =======
+=======
+>>>>>>> v3.18
 	dma_addr_t addr = denali->buf.dma_buf;
 	size_t size = denali->mtd.writesize + denali->mtd.oobsize;
 	uint32_t irq_mask = INTR_STATUS__DMA_CMD_COMP;
@@ -1737,6 +2129,9 @@ static int denali_read_page_raw(struct mtd_info *mtd, struct nand_chip *chip,
 		dev_err(denali->dev,
 			"IN %s: page %d is not equal to denali->page %d",
 			__func__, page, denali->page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		BUG();
 	}
@@ -1751,7 +2146,11 @@ static int denali_read_page_raw(struct mtd_info *mtd, struct nand_chip *chip,
 
 	/* wait for operation to complete */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_status = wait_for_irq(denali, irq_mask);
+=======
+	wait_for_irq(denali, irq_mask);
+>>>>>>> v3.18
 =======
 	wait_for_irq(denali, irq_mask);
 >>>>>>> v3.18
@@ -1791,6 +2190,10 @@ static int denali_waitfunc(struct mtd_info *mtd, struct nand_chip *chip)
 	struct denali_nand_info *denali = mtd_to_denali(mtd);
 	int status = denali->status;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1800,6 +2203,7 @@ static int denali_waitfunc(struct mtd_info *mtd, struct nand_chip *chip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void denali_erase(struct mtd_info *mtd, int page)
 {
 	struct denali_nand_info *denali = mtd_to_denali(mtd);
@@ -1808,19 +2212,28 @@ static void denali_erase(struct mtd_info *mtd, int page)
 
 	/* clear interrupts */
 =======
+=======
+>>>>>>> v3.18
 static int denali_erase(struct mtd_info *mtd, int page)
 {
 	struct denali_nand_info *denali = mtd_to_denali(mtd);
 
 	uint32_t cmd, irq_status;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clear_interrupts(denali);
 
 	/* setup page read request for access type */
 	cmd = MODE_10 | BANK(denali->flash_bank) | page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	index_addr(denali, (uint32_t)cmd, 0x1);
+=======
+	index_addr(denali, cmd, 0x1);
+>>>>>>> v3.18
 =======
 	index_addr(denali, cmd, 0x1);
 >>>>>>> v3.18
@@ -1830,8 +2243,12 @@ static int denali_erase(struct mtd_info *mtd, int page)
 					INTR_STATUS__ERASE_FAIL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	denali->status = (irq_status & INTR_STATUS__ERASE_FAIL) ?
 						NAND_STATUS_FAIL : PASS;
+=======
+	return irq_status & INTR_STATUS__ERASE_FAIL ? NAND_STATUS_FAIL : PASS;
+>>>>>>> v3.18
 =======
 	return irq_status & INTR_STATUS__ERASE_FAIL ? NAND_STATUS_FAIL : PASS;
 >>>>>>> v3.18
@@ -1854,6 +2271,7 @@ static void denali_cmdfunc(struct mtd_info *mtd, unsigned int cmd, int col,
 	case NAND_CMD_PARAM:
 		reset_buf(denali);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*sometimes ManufactureId read from register is not right
 		 * e.g. some of Micron MT29F32G08QAA MLC NAND chips
 		 * So here we send READID cmd to NAND insteand
@@ -1866,6 +2284,8 @@ static void denali_cmdfunc(struct mtd_info *mtd, unsigned int cmd, int col,
 						(uint32_t)addr | 2,
 						&id);
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * sometimes ManufactureId read from register is not right
 		 * e.g. some of Micron MT29F32G08QAA MLC NAND chips
@@ -1876,6 +2296,9 @@ static void denali_cmdfunc(struct mtd_info *mtd, unsigned int cmd, int col,
 		index_addr(denali, addr | 1, 0);
 		for (i = 0; i < 8; i++) {
 			index_addr_read_data(denali, addr | 2, &id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			write_byte_to_buf(denali, id);
 		}
@@ -1902,8 +2325,13 @@ static int denali_ecc_calculate(struct mtd_info *mtd, const uint8_t *data,
 {
 	struct denali_nand_info *denali = mtd_to_denali(mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_err(denali->dev,
 			"denali_ecc_calculate called unexpectedly\n");
+=======
+
+	dev_err(denali->dev, "denali_ecc_calculate called unexpectedly\n");
+>>>>>>> v3.18
 =======
 
 	dev_err(denali->dev, "denali_ecc_calculate called unexpectedly\n");
@@ -1917,8 +2345,13 @@ static int denali_ecc_correct(struct mtd_info *mtd, uint8_t *data,
 {
 	struct denali_nand_info *denali = mtd_to_denali(mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_err(denali->dev,
 			"denali_ecc_correct called unexpectedly\n");
+=======
+
+	dev_err(denali->dev, "denali_ecc_correct called unexpectedly\n");
+>>>>>>> v3.18
 =======
 
 	dev_err(denali->dev, "denali_ecc_correct called unexpectedly\n");
@@ -1931,8 +2364,13 @@ static void denali_ecc_hwctl(struct mtd_info *mtd, int mode)
 {
 	struct denali_nand_info *denali = mtd_to_denali(mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_err(denali->dev,
 			"denali_ecc_hwctl called unexpectedly\n");
+=======
+
+	dev_err(denali->dev, "denali_ecc_hwctl called unexpectedly\n");
+>>>>>>> v3.18
 =======
 
 	dev_err(denali->dev, "denali_ecc_hwctl called unexpectedly\n");
@@ -1945,18 +2383,24 @@ static void denali_ecc_hwctl(struct mtd_info *mtd, int mode)
 static void denali_hw_init(struct denali_nand_info *denali)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* tell driver how many bit controller will skip before
 	 * writing ECC code in OOB, this register may be already
 	 * set by firmware. So we read this value out.
 	 * if this value is 0, just let it be.
 	 * */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * tell driver how many bit controller will skip before
 	 * writing ECC code in OOB, this register may be already
 	 * set by firmware. So we read this value out.
 	 * if this value is 0, just let it be.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	denali->bbtskipbytes = ioread32(denali->flash_reg +
 						SPARE_AREA_SKIP_BYTES);
@@ -1976,16 +2420,22 @@ static void denali_hw_init(struct denali_nand_info *denali)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Althogh controller spec said SLC ECC is forceb to be 4bit,
  * but denali controller in MRST only support 15bit and 8bit ECC
  * correction
  * */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Althogh controller spec said SLC ECC is forceb to be 4bit,
  * but denali controller in MRST only support 15bit and 8bit ECC
  * correction
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ECC_8BITS	14
 static struct nand_ecclayout nand_8bit_oob = {
@@ -2022,7 +2472,11 @@ static struct nand_bbt_descr bbt_mirror_descr = {
 
 /* initialize driver data structures */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void denali_drv_init(struct denali_nand_info *denali)
+=======
+static void denali_drv_init(struct denali_nand_info *denali)
+>>>>>>> v3.18
 =======
 static void denali_drv_init(struct denali_nand_info *denali)
 >>>>>>> v3.18
@@ -2030,6 +2484,7 @@ static void denali_drv_init(struct denali_nand_info *denali)
 	denali->idx = 0;
 
 	/* setup interrupt handler */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* the completion object will be used to notify
 	 * the callee that the interrupt is done */
@@ -2039,6 +2494,8 @@ static void denali_drv_init(struct denali_nand_info *denali)
 	 * with any element that might be access shared
 	 * data (interrupt status) */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * the completion object will be used to notify
 	 * the callee that the interrupt is done
@@ -2049,6 +2506,9 @@ static void denali_drv_init(struct denali_nand_info *denali)
 	 * the spinlock will be used to synchronize the ISR with any
 	 * element that might be access shared data (interrupt status)
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_init(&denali->irq_lock);
 
@@ -2065,7 +2525,12 @@ int denali_init(struct denali_nand_info *denali)
 
 	if (denali->platform == INTEL_CE4100) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Due to a silicon limitation, we can only support
+=======
+		/*
+		 * Due to a silicon limitation, we can only support
+>>>>>>> v3.18
 =======
 		/*
 		 * Due to a silicon limitation, we can only support
@@ -2078,6 +2543,7 @@ int denali_init(struct denali_nand_info *denali)
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Is 32-bit DMA supported? */
 	ret = dma_set_mask(denali->dev, DMA_BIT_MASK(32));
@@ -2094,25 +2560,36 @@ int denali_init(struct denali_nand_info *denali)
 		return -EIO;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* allocate a temporary buffer for nand_scan_ident() */
 	denali->buf.buf = devm_kzalloc(denali->dev, PAGE_SIZE,
 					GFP_DMA | GFP_KERNEL);
 	if (!denali->buf.buf)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	denali->mtd.dev.parent = denali->dev;
 	denali_hw_init(denali);
 	denali_drv_init(denali);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* denali_isr register is done after all the hardware
 	 * initilization is finished*/
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * denali_isr register is done after all the hardware
 	 * initilization is finished
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (request_irq(denali->irq, denali_isr, IRQF_SHARED,
 			DENALI_NAND_NAME, denali)) {
@@ -2133,21 +2610,28 @@ int denali_init(struct denali_nand_info *denali)
 	denali->nand.waitfunc = denali_waitfunc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* scan for NAND devices attached to the controller
 	 * this is the first stage in a two step process to register
 	 * with the nand subsystem */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * scan for NAND devices attached to the controller
 	 * this is the first stage in a two step process to register
 	 * with the nand subsystem
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (nand_scan_ident(&denali->mtd, denali->max_banks, NULL)) {
 		ret = -ENXIO;
 		goto failed_req_irq;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* MTD supported page sizes vary by kernel. We validate our
 	 * kernel supports the device here.
@@ -2163,6 +2647,8 @@ int denali_init(struct denali_nand_info *denali)
 	 * so we should tell it the real pagesize
 	 * and anything necessery
 =======
+=======
+>>>>>>> v3.18
 	/* allocate the right size buffer now */
 	devm_kfree(denali->dev, denali->buf.buf);
 	denali->buf.buf = devm_kzalloc(denali->dev,
@@ -2193,6 +2679,9 @@ int denali_init(struct denali_nand_info *denali)
 	 * support for multi nand
 	 * MTD known nothing about multi nand, so we should tell it
 	 * the real pagesize and anything necessery
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	denali->devnum = ioread32(denali->flash_reg + DEVICES_CONNECTED);
@@ -2210,15 +2699,21 @@ int denali_init(struct denali_nand_info *denali)
 	denali->bbtskipbytes *= denali->devnum;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* second stage of the NAND scan
 	 * this stage requires information regarding ECC and
 	 * bad block management. */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * second stage of the NAND scan
 	 * this stage requires information regarding ECC and
 	 * bad block management.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Bad block management */
@@ -2231,18 +2726,24 @@ int denali_init(struct denali_nand_info *denali)
 	denali->nand.ecc.mode = NAND_ECC_HW_SYNDROME;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Denali Controller only support 15bit and 8bit ECC in MRST,
 	 * so just let controller do 15bit ECC for MLC and 8bit ECC for
 	 * SLC if possible.
 	 * */
 	if (denali->nand.cellinfo & 0xc &&
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Denali Controller only support 15bit and 8bit ECC in MRST,
 	 * so just let controller do 15bit ECC for MLC and 8bit ECC for
 	 * SLC if possible.
 	 * */
 	if (!nand_is_slc(&denali->nand) &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			(denali->mtd.oobsize > (denali->bbtskipbytes +
 			ECC_15BITS * (denali->mtd.writesize /
@@ -2256,8 +2757,12 @@ int denali_init(struct denali_nand_info *denali)
 			ECC_8BITS * (denali->mtd.writesize /
 			ECC_SECTOR_SIZE))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Your NAND chip OOB is not large enough to \
 				contain 8bit ECC correction codes");
+=======
+		pr_err("Your NAND chip OOB is not large enough to contain 8bit ECC correction codes");
+>>>>>>> v3.18
 =======
 		pr_err("Your NAND chip OOB is not large enough to contain 8bit ECC correction codes");
 >>>>>>> v3.18
@@ -2280,6 +2785,7 @@ int denali_init(struct denali_nand_info *denali)
 		denali->bbtskipbytes;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Let driver know the total blocks number and
 	 * how many blocks contained by each nand chip.
 	 * blksperchip will help driver to know how many
@@ -2293,6 +2799,8 @@ int denali_init(struct denali_nand_info *denali)
 	 * the NAND core will assert. However, we don't need them, so we'll stub
 	 * them out. */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Let driver know the total blocks number and how many blocks
 	 * contained by each nand chip. blksperchip will help driver to
@@ -2306,6 +2814,9 @@ int denali_init(struct denali_nand_info *denali)
 	 * the NAND core will assert. However, we don't need them, so we'll stub
 	 * them out.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	denali->nand.ecc.calculate = denali_ecc_calculate;
 	denali->nand.ecc.correct = denali_ecc_correct;
@@ -2320,7 +2831,11 @@ int denali_init(struct denali_nand_info *denali)
 	denali->nand.ecc.read_oob = denali_read_oob;
 	denali->nand.ecc.write_oob = denali_write_oob;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	denali->nand.erase_cmd = denali_erase;
+=======
+	denali->nand.erase = denali_erase;
+>>>>>>> v3.18
 =======
 	denali->nand.erase = denali_erase;
 >>>>>>> v3.18
@@ -2350,8 +2865,14 @@ void denali_remove(struct denali_nand_info *denali)
 {
 	denali_irq_cleanup(denali->irq, denali);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_unmap_single(denali->dev, denali->buf.dma_buf, DENALI_BUF_SIZE,
 			DMA_BIDIRECTIONAL);
+=======
+	dma_unmap_single(denali->dev, denali->buf.dma_buf,
+			 denali->mtd.writesize + denali->mtd.oobsize,
+			 DMA_BIDIRECTIONAL);
+>>>>>>> v3.18
 =======
 	dma_unmap_single(denali->dev, denali->buf.dma_buf,
 			 denali->mtd.writesize + denali->mtd.oobsize,

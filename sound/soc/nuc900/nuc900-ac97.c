@@ -29,6 +29,10 @@
 static DEFINE_MUTEX(ac97_mutex);
 struct nuc900_audio *nuc900_ac97_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(nuc900_ac97_data);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(nuc900_ac97_data);
 >>>>>>> v3.18
@@ -202,7 +206,11 @@ static void nuc900_ac97_cold_reset(struct snd_ac97 *ac97)
 
 /* AC97 controller operations */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_ac97_bus_ops soc_ac97_ops = {
+=======
+static struct snd_ac97_bus_ops nuc900_ac97_ops = {
+>>>>>>> v3.18
 =======
 static struct snd_ac97_bus_ops nuc900_ac97_ops = {
 >>>>>>> v3.18
@@ -211,8 +219,12 @@ static struct snd_ac97_bus_ops nuc900_ac97_ops = {
 	.reset		= nuc900_ac97_cold_reset,
 	.warm_reset	= nuc900_ac97_warm_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 EXPORT_SYMBOL_GPL(soc_ac97_ops);
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -339,7 +351,12 @@ static int nuc900_ac97_drvprobe(struct platform_device *pdev)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nuc900_audio = kzalloc(sizeof(struct nuc900_audio), GFP_KERNEL);
+=======
+	nuc900_audio = devm_kzalloc(&pdev->dev, sizeof(struct nuc900_audio),
+				    GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	nuc900_audio = devm_kzalloc(&pdev->dev, sizeof(struct nuc900_audio),
 				    GFP_KERNEL);
@@ -350,6 +367,7 @@ static int nuc900_ac97_drvprobe(struct platform_device *pdev)
 	spin_lock_init(&nuc900_audio->lock);
 
 	nuc900_audio->res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!nuc900_audio->res) {
 		ret = -ENODEV;
@@ -374,6 +392,8 @@ static int nuc900_ac97_drvprobe(struct platform_device *pdev)
 		ret = PTR_ERR(nuc900_audio->clk);
 		goto out2;
 =======
+=======
+>>>>>>> v3.18
 	nuc900_audio->mmio = devm_ioremap_resource(&pdev->dev,
 						   nuc900_audio->res);
 	if (IS_ERR(nuc900_audio->mmio))
@@ -383,6 +403,9 @@ static int nuc900_ac97_drvprobe(struct platform_device *pdev)
 	if (IS_ERR(nuc900_audio->clk)) {
 		ret = PTR_ERR(nuc900_audio->clk);
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -390,7 +413,11 @@ static int nuc900_ac97_drvprobe(struct platform_device *pdev)
 	if (!nuc900_audio->irq_num) {
 		ret = -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out3;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -399,11 +426,14 @@ static int nuc900_ac97_drvprobe(struct platform_device *pdev)
 	nuc900_ac97_data = nuc900_audio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_register_component(&pdev->dev, &nuc900_ac97_component,
 					 &nuc900_ac97_dai, 1);
 	if (ret)
 		goto out3;
 =======
+=======
+>>>>>>> v3.18
 	ret = snd_soc_set_ac97_ops(&nuc900_ac97_ops);
 	if (ret)
 		goto out;
@@ -412,6 +442,9 @@ static int nuc900_ac97_drvprobe(struct platform_device *pdev)
 					 &nuc900_ac97_dai, 1);
 	if (ret)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* enbale ac97 multifunction pin */
@@ -419,6 +452,7 @@ static int nuc900_ac97_drvprobe(struct platform_device *pdev)
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 out3:
 	clk_put(nuc900_audio->clk);
@@ -433,6 +467,10 @@ out0:
 out:
 	snd_soc_set_ac97_ops(NULL);
 >>>>>>> v3.18
+=======
+out:
+	snd_soc_set_ac97_ops(NULL);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -441,6 +479,7 @@ static int nuc900_ac97_drvremove(struct platform_device *pdev)
 	snd_soc_unregister_component(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(nuc900_ac97_data->clk);
 	iounmap(nuc900_ac97_data->mmio);
 	release_mem_region(nuc900_ac97_data->res->start,
@@ -448,6 +487,10 @@ static int nuc900_ac97_drvremove(struct platform_device *pdev)
 
 	kfree(nuc900_ac97_data);
 	nuc900_ac97_data = NULL;
+=======
+	nuc900_ac97_data = NULL;
+	snd_soc_set_ac97_ops(NULL);
+>>>>>>> v3.18
 =======
 	nuc900_ac97_data = NULL;
 	snd_soc_set_ac97_ops(NULL);

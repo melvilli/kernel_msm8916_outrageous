@@ -412,7 +412,11 @@ static int bfin_sir_startup(struct bfin_sir_port *port, struct net_device *dev)
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(port->irq, bfin_sir_rx_int, IRQF_DISABLED, "BFIN_SIR_RX", dev)) {
+=======
+	if (request_irq(port->irq, bfin_sir_rx_int, 0, "BFIN_SIR_RX", dev)) {
+>>>>>>> v3.18
 =======
 	if (request_irq(port->irq, bfin_sir_rx_int, 0, "BFIN_SIR_RX", dev)) {
 >>>>>>> v3.18
@@ -421,7 +425,11 @@ static int bfin_sir_startup(struct bfin_sir_port *port, struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(port->irq+1, bfin_sir_tx_int, IRQF_DISABLED, "BFIN_SIR_TX", dev)) {
+=======
+	if (request_irq(port->irq+1, bfin_sir_tx_int, 0, "BFIN_SIR_TX", dev)) {
+>>>>>>> v3.18
 =======
 	if (request_irq(port->irq+1, bfin_sir_tx_int, 0, "BFIN_SIR_TX", dev)) {
 >>>>>>> v3.18
@@ -803,7 +811,10 @@ static int bfin_sir_remove(struct platform_device *pdev)
 	free_netdev(dev);
 	kfree(sir_port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

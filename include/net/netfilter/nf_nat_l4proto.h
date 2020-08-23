@@ -43,16 +43,22 @@ struct nf_nat_l4proto {
 
 /* Protocol registration. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int nf_nat_l4proto_register(u8 l3proto, const struct nf_nat_l4proto *l4proto);
 extern void nf_nat_l4proto_unregister(u8 l3proto, const struct nf_nat_l4proto *l4proto);
 
 extern const struct nf_nat_l4proto *__nf_nat_l4proto_find(u8 l3proto, u8 l4proto);
 =======
+=======
+>>>>>>> v3.18
 int nf_nat_l4proto_register(u8 l3proto, const struct nf_nat_l4proto *l4proto);
 void nf_nat_l4proto_unregister(u8 l3proto,
 			       const struct nf_nat_l4proto *l4proto);
 
 const struct nf_nat_l4proto *__nf_nat_l4proto_find(u8 l3proto, u8 l4proto);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Built-in protocols. */
@@ -62,6 +68,7 @@ extern const struct nf_nat_l4proto nf_nat_l4proto_icmp;
 extern const struct nf_nat_l4proto nf_nat_l4proto_icmpv6;
 extern const struct nf_nat_l4proto nf_nat_l4proto_unknown;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern bool nf_nat_l4proto_in_range(const struct nf_conntrack_tuple *tuple,
 				    enum nf_nat_manip_type maniptype,
@@ -78,6 +85,8 @@ extern void nf_nat_l4proto_unique_tuple(const struct nf_nat_l3proto *l3proto,
 extern int nf_nat_l4proto_nlattr_to_range(struct nlattr *tb[],
 					  struct nf_nat_range *range);
 =======
+=======
+>>>>>>> v3.18
 bool nf_nat_l4proto_in_range(const struct nf_conntrack_tuple *tuple,
 			     enum nf_nat_manip_type maniptype,
 			     const union nf_conntrack_man_proto *min,
@@ -91,6 +100,9 @@ void nf_nat_l4proto_unique_tuple(const struct nf_nat_l3proto *l3proto,
 
 int nf_nat_l4proto_nlattr_to_range(struct nlattr *tb[],
 				   struct nf_nat_range *range);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /*_NF_NAT_L4PROTO_H*/

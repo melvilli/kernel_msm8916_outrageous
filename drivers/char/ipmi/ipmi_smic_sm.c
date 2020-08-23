@@ -81,7 +81,11 @@ enum smic_states {
 
 /* Timeouts in microseconds. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SMIC_RETRY_TIMEOUT 2000000
+=======
+#define SMIC_RETRY_TIMEOUT (2*USEC_PER_SEC)
+>>>>>>> v3.18
 =======
 #define SMIC_RETRY_TIMEOUT (2*USEC_PER_SEC)
 >>>>>>> v3.18

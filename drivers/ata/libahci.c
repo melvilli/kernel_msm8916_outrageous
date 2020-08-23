@@ -36,7 +36,10 @@
 #include <linux/gfp.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -73,7 +76,10 @@ static ssize_t ahci_transmit_led_message(struct ata_port *ap, u32 state,
 static int ahci_scr_read(struct ata_link *link, unsigned int sc_reg, u32 *val);
 static int ahci_scr_write(struct ata_link *link, unsigned int sc_reg, u32 val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int ahci_qc_issue(struct ata_queued_cmd *qc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static bool ahci_qc_fill_rtf(struct ata_queued_cmd *qc);
@@ -96,7 +102,10 @@ static int ahci_hardreset(struct ata_link *link, unsigned int *class,
 			  unsigned long deadline);
 static void ahci_postreset(struct ata_link *link, unsigned int *class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ahci_error_handler(struct ata_port *ap);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void ahci_post_internal_cmd(struct ata_queued_cmd *qc);
@@ -183,6 +192,10 @@ struct ata_port_operations ahci_ops = {
 	.sw_activity_show	= ahci_activity_show,
 	.sw_activity_store	= ahci_activity_store,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.transmit_led_message	= ahci_transmit_led_message,
+>>>>>>> v3.18
 =======
 	.transmit_led_message	= ahci_transmit_led_message,
 >>>>>>> v3.18
@@ -202,9 +215,15 @@ struct ata_port_operations ahci_pmp_retry_srst_ops = {
 EXPORT_SYMBOL_GPL(ahci_pmp_retry_srst_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ahci_em_messages = 1;
 EXPORT_SYMBOL_GPL(ahci_em_messages);
 module_param(ahci_em_messages, int, 0444);
+=======
+static bool ahci_em_messages __read_mostly = true;
+EXPORT_SYMBOL_GPL(ahci_em_messages);
+module_param(ahci_em_messages, bool, 0444);
+>>>>>>> v3.18
 =======
 static bool ahci_em_messages __read_mostly = true;
 EXPORT_SYMBOL_GPL(ahci_em_messages);
@@ -215,7 +234,12 @@ MODULE_PARM_DESC(ahci_em_messages,
 	"AHCI Enclosure Management Message control (0 = off, 1 = on)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int devslp_idle_timeout = 1000;	/* device sleep idle timeout in ms */
+=======
+/* device sleep idle timeout in ms */
+static int devslp_idle_timeout __read_mostly = 1000;
+>>>>>>> v3.18
 =======
 /* device sleep idle timeout in ms */
 static int devslp_idle_timeout __read_mostly = 1000;
@@ -408,8 +432,11 @@ static ssize_t ahci_show_em_supported(struct device *dev,
  *	@dev: target AHCI device
  *	@hpriv: host private area to store config values
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	@force_port_map: force port map to a specified value
  *	@mask_port_map: mask out particular bits from port map
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -421,6 +448,7 @@ static ssize_t ahci_show_em_supported(struct device *dev,
  *	If inconsistent, config values are fixed up by this function.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	LOCKING:
  *	None.
  */
@@ -429,6 +457,8 @@ void ahci_save_initial_config(struct device *dev,
 			      unsigned int force_port_map,
 			      unsigned int mask_port_map)
 =======
+=======
+>>>>>>> v3.18
  *	If it is not set already this function sets hpriv->start_engine to
  *	ahci_start_engine.
  *
@@ -436,6 +466,9 @@ void ahci_save_initial_config(struct device *dev,
  *	None.
  */
 void ahci_save_initial_config(struct device *dev, struct ahci_host_priv *hpriv)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	void __iomem *mmio = hpriv->mmio;
@@ -487,7 +520,10 @@ void ahci_save_initial_config(struct device *dev, struct ahci_host_priv *hpriv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if ((cap2 & HOST_CAP2_SDS) && (hpriv->flags & AHCI_HFLAG_NO_DEVSLP)) {
 		dev_info(dev,
 			 "controller can't do DEVSLP, turning off\n");
@@ -495,12 +531,16 @@ void ahci_save_initial_config(struct device *dev, struct ahci_host_priv *hpriv)
 		cap2 &= ~HOST_CAP2_SADM;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(cap & HOST_CAP_FBS) && (hpriv->flags & AHCI_HFLAG_YES_FBS)) {
 		dev_info(dev, "controller can do FBS, turning on CAP_FBS\n");
 		cap |= HOST_CAP_FBS;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (force_port_map && port_map != force_port_map) {
 		dev_info(dev, "forcing port_map 0x%x -> 0x%x\n",
@@ -514,6 +554,8 @@ void ahci_save_initial_config(struct device *dev, struct ahci_host_priv *hpriv)
 			port_map & mask_port_map);
 		port_map &= mask_port_map;
 =======
+=======
+>>>>>>> v3.18
 	if ((cap & HOST_CAP_FBS) && (hpriv->flags & AHCI_HFLAG_NO_FBS)) {
 		dev_info(dev, "controller can't do FBS, turning off CAP_FBS\n");
 		cap &= ~HOST_CAP_FBS;
@@ -530,6 +572,9 @@ void ahci_save_initial_config(struct device *dev, struct ahci_host_priv *hpriv)
 			port_map,
 			port_map & hpriv->mask_port_map);
 		port_map &= hpriv->mask_port_map;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -553,8 +598,13 @@ void ahci_save_initial_config(struct device *dev, struct ahci_host_priv *hpriv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* fabricate port_map from cap.nr_ports for < AHCI 1.3 */
 	if (!port_map && vers < 0x10300) {
+=======
+	/* fabricate port_map from cap.nr_ports */
+	if (!port_map) {
+>>>>>>> v3.18
 =======
 	/* fabricate port_map from cap.nr_ports */
 	if (!port_map) {
@@ -571,6 +621,12 @@ void ahci_save_initial_config(struct device *dev, struct ahci_host_priv *hpriv)
 	hpriv->cap2 = cap2;
 	hpriv->port_map = port_map;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	if (!hpriv->start_engine)
+		hpriv->start_engine = ahci_start_engine;
+>>>>>>> v3.18
 =======
 
 	if (!hpriv->start_engine)
@@ -680,7 +736,11 @@ int ahci_stop_engine(struct ata_port *ap)
 EXPORT_SYMBOL_GPL(ahci_stop_engine);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ahci_start_fis_rx(struct ata_port *ap)
+=======
+void ahci_start_fis_rx(struct ata_port *ap)
+>>>>>>> v3.18
 =======
 void ahci_start_fis_rx(struct ata_port *ap)
 >>>>>>> v3.18
@@ -710,6 +770,10 @@ void ahci_start_fis_rx(struct ata_port *ap)
 	readl(port_mmio + PORT_CMD);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(ahci_start_fis_rx);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(ahci_start_fis_rx);
 >>>>>>> v3.18
@@ -851,7 +915,11 @@ static void ahci_start_port(struct ata_port *ap)
 	/* enable DMA */
 	if (!(hpriv->flags & AHCI_HFLAG_DELAY_ENGINE))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ahci_start_engine(ap);
+=======
+		hpriv->start_engine(ap);
+>>>>>>> v3.18
 =======
 		hpriv->start_engine(ap);
 >>>>>>> v3.18
@@ -864,12 +932,15 @@ static void ahci_start_port(struct ata_port *ap)
 			/* EM Transmit bit maybe busy during init */
 			for (i = 0; i < EM_MAX_RETRY; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rc = ahci_transmit_led_message(ap,
 							       emp->led_state,
 							       4);
 				if (rc == -EBUSY)
 					ata_msleep(ap, 1);
 =======
+=======
+>>>>>>> v3.18
 				rc = ap->ops->transmit_led_message(ap,
 							       emp->led_state,
 							       4);
@@ -883,6 +954,9 @@ static void ahci_start_port(struct ata_port *ap)
 				 */
 				if (rc == -EBUSY)
 					msleep(1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				else
 					break;
@@ -1021,7 +1095,11 @@ static void ahci_sw_activity_blink(unsigned long arg)
 	}
 	spin_unlock_irqrestore(ap->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ahci_transmit_led_message(ap, led_message, 4);
+=======
+	ap->ops->transmit_led_message(ap, led_message, 4);
+>>>>>>> v3.18
 =======
 	ap->ops->transmit_led_message(ap, led_message, 4);
 >>>>>>> v3.18
@@ -1133,7 +1211,11 @@ static ssize_t ahci_led_store(struct ata_port *ap, const char *buf,
 				size_t size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int state;
+=======
+	unsigned int state;
+>>>>>>> v3.18
 =======
 	unsigned int state;
 >>>>>>> v3.18
@@ -1142,7 +1224,12 @@ static ssize_t ahci_led_store(struct ata_port *ap, const char *buf,
 	struct ahci_em_priv *emp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state = simple_strtoul(buf, NULL, 0);
+=======
+	if (kstrtouint(buf, 0, &state) < 0)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (kstrtouint(buf, 0, &state) < 0)
 		return -EINVAL;
@@ -1163,7 +1250,11 @@ static ssize_t ahci_led_store(struct ata_port *ap, const char *buf,
 		state &= ~EM_MSG_LED_VALUE_ACTIVITY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ahci_transmit_led_message(ap, state, size);
+=======
+	return ap->ops->transmit_led_message(ap, state, size);
+>>>>>>> v3.18
 =======
 	return ap->ops->transmit_led_message(ap, state, size);
 >>>>>>> v3.18
@@ -1186,7 +1277,11 @@ static ssize_t ahci_activity_store(struct ata_device *dev, enum sw_activity val)
 		port_led_state &= EM_MSG_LED_VALUE_OFF;
 		port_led_state |= (ap->port_no | (link->pmp << 8));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ahci_transmit_led_message(ap, port_led_state, 4);
+=======
+		ap->ops->transmit_led_message(ap, port_led_state, 4);
+>>>>>>> v3.18
 =======
 		ap->ops->transmit_led_message(ap, port_led_state, 4);
 >>>>>>> v3.18
@@ -1198,7 +1293,11 @@ static ssize_t ahci_activity_store(struct ata_device *dev, enum sw_activity val)
 			port_led_state |= (ap->port_no | (link->pmp << 8));
 			port_led_state |= EM_MSG_LED_VALUE_ON; /* check this */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ahci_transmit_led_message(ap, port_led_state, 4);
+=======
+			ap->ops->transmit_led_message(ap, port_led_state, 4);
+>>>>>>> v3.18
 =======
 			ap->ops->transmit_led_message(ap, port_led_state, 4);
 >>>>>>> v3.18
@@ -1356,7 +1455,11 @@ int ahci_kick_engine(struct ata_port *ap)
 	/* restart engine */
  out_restart:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ahci_start_engine(ap);
+=======
+	hpriv->start_engine(ap);
+>>>>>>> v3.18
 =======
 	hpriv->start_engine(ap);
 >>>>>>> v3.18
@@ -1379,6 +1482,7 @@ static int ahci_exec_polled_cmd(struct ata_port *ap, int pmp,
 	ahci_fill_cmd_slot(pp, 0, cmd_fis_len | flags | (pmp << 12));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* set port value for softreset of Port Multiplier */
 	if (pp->fbs_enabled && pp->fbs_last_dev != pmp) {
 		tmp = readl(port_mmio + PORT_FBS);
@@ -1388,6 +1492,8 @@ static int ahci_exec_polled_cmd(struct ata_port *ap, int pmp,
 		pp->fbs_last_dev = pmp;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* issue & wait */
@@ -1525,8 +1631,13 @@ static int ahci_bad_pmp_check_ready(struct ata_link *link)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ahci_pmp_retry_softreset(struct ata_link *link, unsigned int *class,
 				unsigned long deadline)
+=======
+static int ahci_pmp_retry_softreset(struct ata_link *link, unsigned int *class,
+				    unsigned long deadline)
+>>>>>>> v3.18
 =======
 static int ahci_pmp_retry_softreset(struct ata_link *link, unsigned int *class,
 				    unsigned long deadline)
@@ -1569,6 +1680,10 @@ static int ahci_hardreset(struct ata_link *link, unsigned int *class,
 	struct ata_port *ap = link->ap;
 	struct ahci_port_priv *pp = ap->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ahci_host_priv *hpriv = ap->host->private_data;
+>>>>>>> v3.18
 =======
 	struct ahci_host_priv *hpriv = ap->host->private_data;
 >>>>>>> v3.18
@@ -1584,7 +1699,11 @@ static int ahci_hardreset(struct ata_link *link, unsigned int *class,
 	/* clear D2H reception area to properly wait for D2H FIS */
 	ata_tf_init(link->device, &tf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tf.command = 0x80;
+=======
+	tf.command = ATA_BUSY;
+>>>>>>> v3.18
 =======
 	tf.command = ATA_BUSY;
 >>>>>>> v3.18
@@ -1594,7 +1713,11 @@ static int ahci_hardreset(struct ata_link *link, unsigned int *class,
 				 ahci_check_ready);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ahci_start_engine(ap);
+=======
+	hpriv->start_engine(ap);
+>>>>>>> v3.18
 =======
 	hpriv->start_engine(ap);
 >>>>>>> v3.18
@@ -1784,7 +1907,11 @@ static void ahci_error_intr(struct ata_port *ap, u32 irq_stat)
 
 	if (irq_stat & PORT_IRQ_UNK_FIS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 *unk = (u32 *)(pp->rx_fis + RX_FIS_UNK);
+=======
+		u32 *unk = pp->rx_fis + RX_FIS_UNK;
+>>>>>>> v3.18
 =======
 		u32 *unk = pp->rx_fis + RX_FIS_UNK;
 >>>>>>> v3.18
@@ -1852,7 +1979,12 @@ static void ahci_handle_port_interrupt(struct ata_port *ap,
 		status &= ~PORT_IRQ_BAD_PMP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sata_lpm_ignore_phy_events(&ap->link)) {
+=======
+	/* if LPM is enabled, PHYRDY doesn't mean anything */
+	if (ap->link.lpm_policy > ATA_LPM_MAX_POWER) {
+>>>>>>> v3.18
 =======
 	/* if LPM is enabled, PHYRDY doesn't mean anything */
 	if (ap->link.lpm_policy > ATA_LPM_MAX_POWER) {
@@ -1927,7 +2059,11 @@ static void ahci_handle_port_interrupt(struct ata_port *ap,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ahci_port_intr(struct ata_port *ap)
+=======
+static void ahci_port_intr(struct ata_port *ap)
+>>>>>>> v3.18
 =======
 static void ahci_port_intr(struct ata_port *ap)
 >>>>>>> v3.18
@@ -1942,7 +2078,11 @@ static void ahci_port_intr(struct ata_port *ap)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t ahci_thread_fn(int irq, void *dev_instance)
+=======
+static irqreturn_t ahci_port_thread_fn(int irq, void *dev_instance)
+>>>>>>> v3.18
 =======
 static irqreturn_t ahci_port_thread_fn(int irq, void *dev_instance)
 >>>>>>> v3.18
@@ -1950,6 +2090,7 @@ static irqreturn_t ahci_port_thread_fn(int irq, void *dev_instance)
 	struct ata_port *ap = dev_instance;
 	struct ahci_port_priv *pp = ap->private_data;
 	void __iomem *port_mmio = ahci_port_base(ap);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 	u32 status;
@@ -1960,11 +2101,16 @@ static irqreturn_t ahci_port_thread_fn(int irq, void *dev_instance)
 		pp->intr_status = 0;
 	spin_unlock_irqrestore(&ap->host->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	u32 status;
 
 	status = atomic_xchg(&pp->intr_status, 0);
 	if (!status)
 		return IRQ_NONE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_bh(ap->lock);
@@ -1974,20 +2120,27 @@ static irqreturn_t ahci_port_thread_fn(int irq, void *dev_instance)
 	return IRQ_HANDLED;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(ahci_thread_fn);
 
 void ahci_hw_port_interrupt(struct ata_port *ap)
 {
 =======
+=======
+>>>>>>> v3.18
 
 static irqreturn_t ahci_multi_irqs_intr(int irq, void *dev_instance)
 {
 	struct ata_port *ap = dev_instance;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void __iomem *port_mmio = ahci_port_base(ap);
 	struct ahci_port_priv *pp = ap->private_data;
 	u32 status;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = readl(port_mmio + PORT_IRQ_STAT);
 	writel(status, port_mmio + PORT_IRQ_STAT);
@@ -2045,12 +2198,17 @@ irqreturn_t ahci_hw_interrupt(int irq, void *dev_instance)
 
 	spin_unlock(&host->lock);
 =======
+=======
+>>>>>>> v3.18
 	VPRINTK("ENTER\n");
 
 	status = readl(port_mmio + PORT_IRQ_STAT);
 	writel(status, port_mmio + PORT_IRQ_STAT);
 
 	atomic_or(status, &pp->intr_status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	VPRINTK("EXIT\n");
@@ -2058,9 +2216,14 @@ irqreturn_t ahci_hw_interrupt(int irq, void *dev_instance)
 	return IRQ_WAKE_THREAD;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(ahci_hw_interrupt);
 
 irqreturn_t ahci_interrupt(int irq, void *dev_instance)
+=======
+
+static irqreturn_t ahci_single_irq_intr(int irq, void *dev_instance)
+>>>>>>> v3.18
 =======
 
 static irqreturn_t ahci_single_irq_intr(int irq, void *dev_instance)
@@ -2124,9 +2287,14 @@ static irqreturn_t ahci_single_irq_intr(int irq, void *dev_instance)
 	return IRQ_RETVAL(handled);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(ahci_interrupt);
 
 static unsigned int ahci_qc_issue(struct ata_queued_cmd *qc)
+=======
+
+unsigned int ahci_qc_issue(struct ata_queued_cmd *qc)
+>>>>>>> v3.18
 =======
 
 unsigned int ahci_qc_issue(struct ata_queued_cmd *qc)
@@ -2160,6 +2328,10 @@ unsigned int ahci_qc_issue(struct ata_queued_cmd *qc)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(ahci_qc_issue);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(ahci_qc_issue);
 >>>>>>> v3.18
@@ -2214,6 +2386,7 @@ static void ahci_thaw(struct ata_port *ap)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ahci_error_handler(struct ata_port *ap)
 {
 	if (!(ap->pflags & ATA_PFLAG_FROZEN)) {
@@ -2221,6 +2394,8 @@ static void ahci_error_handler(struct ata_port *ap)
 		ahci_stop_engine(ap);
 		ahci_start_engine(ap);
 =======
+=======
+>>>>>>> v3.18
 void ahci_error_handler(struct ata_port *ap)
 {
 	struct ahci_host_priv *hpriv = ap->host->private_data;
@@ -2229,6 +2404,9 @@ void ahci_error_handler(struct ata_port *ap)
 		/* restart engine */
 		ahci_stop_engine(ap);
 		hpriv->start_engine(ap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2238,6 +2416,10 @@ void ahci_error_handler(struct ata_port *ap)
 		ahci_stop_engine(ap);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(ahci_error_handler);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(ahci_error_handler);
 >>>>>>> v3.18
@@ -2254,6 +2436,10 @@ static void ahci_post_internal_cmd(struct ata_queued_cmd *qc)
 static void ahci_set_aggressive_devslp(struct ata_port *ap, bool sleep)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ahci_host_priv *hpriv = ap->host->private_data;
+>>>>>>> v3.18
 =======
 	struct ahci_host_priv *hpriv = ap->host->private_data;
 >>>>>>> v3.18
@@ -2321,7 +2507,11 @@ static void ahci_set_aggressive_devslp(struct ata_port *ap, bool sleep)
 	writel(devslp, port_mmio + PORT_DEVSLP);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ahci_start_engine(ap);
+=======
+	hpriv->start_engine(ap);
+>>>>>>> v3.18
 =======
 	hpriv->start_engine(ap);
 >>>>>>> v3.18
@@ -2337,6 +2527,10 @@ static void ahci_set_aggressive_devslp(struct ata_port *ap, bool sleep)
 static void ahci_enable_fbs(struct ata_port *ap)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ahci_host_priv *hpriv = ap->host->private_data;
+>>>>>>> v3.18
 =======
 	struct ahci_host_priv *hpriv = ap->host->private_data;
 >>>>>>> v3.18
@@ -2369,7 +2563,11 @@ static void ahci_enable_fbs(struct ata_port *ap)
 		dev_err(ap->host->dev, "Failed to enable FBS\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ahci_start_engine(ap);
+=======
+	hpriv->start_engine(ap);
+>>>>>>> v3.18
 =======
 	hpriv->start_engine(ap);
 >>>>>>> v3.18
@@ -2378,6 +2576,10 @@ static void ahci_enable_fbs(struct ata_port *ap)
 static void ahci_disable_fbs(struct ata_port *ap)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ahci_host_priv *hpriv = ap->host->private_data;
+>>>>>>> v3.18
 =======
 	struct ahci_host_priv *hpriv = ap->host->private_data;
 >>>>>>> v3.18
@@ -2409,7 +2611,11 @@ static void ahci_disable_fbs(struct ata_port *ap)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ahci_start_engine(ap);
+=======
+	hpriv->start_engine(ap);
+>>>>>>> v3.18
 =======
 	hpriv->start_engine(ap);
 >>>>>>> v3.18
@@ -2506,7 +2712,10 @@ static int ahci_port_start(struct ata_port *ap)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ap->host->n_ports > 1) {
 		pp->irq_desc = devm_kzalloc(dev, 8, GFP_KERNEL);
 		if (!pp->irq_desc) {
@@ -2517,6 +2726,9 @@ static int ahci_port_start(struct ata_port *ap)
 			 "%s%d", dev_driver_string(dev), ap->port_no);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* check FBS capability */
 	if ((hpriv->cap & HOST_CAP_FBS) && sata_pmp_supported(ap)) {
@@ -2702,7 +2914,10 @@ void ahci_set_em_messages(struct ahci_host_priv *hpriv,
 EXPORT_SYMBOL_GPL(ahci_set_em_messages);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ahci_host_activate_multi_irqs(struct ata_host *host, int irq,
 					 struct scsi_host_template *sht)
 {
@@ -2778,6 +2993,9 @@ int ahci_host_activate(struct ata_host *host, int irq,
 }
 EXPORT_SYMBOL_GPL(ahci_host_activate);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_AUTHOR("Jeff Garzik");
 MODULE_DESCRIPTION("Common AHCI SATA low-level routines");

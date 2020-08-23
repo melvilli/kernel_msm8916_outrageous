@@ -25,6 +25,10 @@ obj-$(CONFIG_BRCMFMAC) += brcmfmac.o
 brcmfmac-objs += \
 		wl_cfg80211.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		chip.o \
+>>>>>>> v3.18
 =======
 		chip.o \
 >>>>>>> v3.18
@@ -32,6 +36,7 @@ brcmfmac-objs += \
 		fweh.o \
 		fwsignal.o \
 		p2p.o \
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dhd_cdc.o \
 		dhd_common.o \
@@ -45,6 +50,8 @@ brcmfmac-$(CONFIG_BRCMFMAC_SDIO) += \
 brcmfmac-$(CONFIG_BRCMFMAC_USB) += \
 		usb.o
 =======
+=======
+>>>>>>> v3.18
 		proto.o \
 		dhd_common.o \
 		dhd_linux.o \
@@ -65,12 +72,20 @@ brcmfmac-$(CONFIG_BRCMFMAC_USB) += \
 		usb.o
 brcmfmac-$(CONFIG_BRCMFMAC_PCIE) += \
 		pcie.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 brcmfmac-$(CONFIG_BRCMDBG) += \
 		dhd_dbg.o
 brcmfmac-$(CONFIG_BRCM_TRACING) += \
 		tracepoint.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+brcmfmac-$(CONFIG_OF) += \
+		of.o
+>>>>>>> v3.18
 =======
 brcmfmac-$(CONFIG_OF) += \
 		of.o

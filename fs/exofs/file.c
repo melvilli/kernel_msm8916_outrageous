@@ -3,7 +3,11 @@
  * Avishay Traeger (avishay@gmail.com)
  * Copyright (C) 2008, 2009
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Boaz Harrosh <bharrosh@panasas.com>
+=======
+ * Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  * Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18
@@ -72,15 +76,21 @@ static int exofs_flush(struct file *file, fl_owner_t id)
 const struct file_operations exofs_file_operations = {
 	.llseek		= generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.write		= do_sync_write,
 	.aio_read	= generic_file_aio_read,
 	.aio_write	= generic_file_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.read		= new_sync_read,
 	.write		= new_sync_write,
 	.read_iter	= generic_file_read_iter,
 	.write_iter	= generic_file_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.mmap		= generic_file_mmap,
 	.open		= generic_file_open,
@@ -89,7 +99,11 @@ const struct file_operations exofs_file_operations = {
 	.flush		= exofs_flush,
 	.splice_read	= generic_file_splice_read,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.splice_write	= generic_file_splice_write,
+=======
+	.splice_write	= iter_file_splice_write,
+>>>>>>> v3.18
 =======
 	.splice_write	= iter_file_splice_write,
 >>>>>>> v3.18

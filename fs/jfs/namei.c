@@ -1177,7 +1177,11 @@ static int jfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 					IWRITE_UNLOCK(new_ip);
 				jfs_error(new_ip->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  "jfs_rename: new_ip->i_nlink != 0");
+=======
+					  "new_ip->i_nlink != 0\n");
+>>>>>>> v3.18
 =======
 					  "new_ip->i_nlink != 0\n");
 >>>>>>> v3.18
@@ -1529,6 +1533,10 @@ const struct inode_operations jfs_dir_inode_operations = {
 #ifdef CONFIG_JFS_POSIX_ACL
 	.get_acl	= jfs_get_acl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_acl	= jfs_set_acl,
+>>>>>>> v3.18
 =======
 	.set_acl	= jfs_set_acl,
 >>>>>>> v3.18
@@ -1538,7 +1546,11 @@ const struct inode_operations jfs_dir_inode_operations = {
 const struct file_operations jfs_dir_operations = {
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= jfs_readdir,
+=======
+	.iterate	= jfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= jfs_readdir,
 >>>>>>> v3.18
@@ -1551,8 +1563,12 @@ const struct file_operations jfs_dir_operations = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int jfs_ci_hash(const struct dentry *dir, const struct inode *inode,
 		struct qstr *this)
+=======
+static int jfs_ci_hash(const struct dentry *dir, struct qstr *this)
+>>>>>>> v3.18
 =======
 static int jfs_ci_hash(const struct dentry *dir, struct qstr *this)
 >>>>>>> v3.18
@@ -1569,9 +1585,13 @@ static int jfs_ci_hash(const struct dentry *dir, struct qstr *this)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int jfs_ci_compare(const struct dentry *parent,
 		const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
+=======
+static int jfs_ci_compare(const struct dentry *parent, const struct dentry *dentry,
+>>>>>>> v3.18
 =======
 static int jfs_ci_compare(const struct dentry *parent, const struct dentry *dentry,
 >>>>>>> v3.18

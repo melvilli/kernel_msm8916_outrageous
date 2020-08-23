@@ -146,7 +146,10 @@
 #define ULPI_INT_SESS_END			(1 << 3)
 #define ULPI_INT_IDGRD				(1 << 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ULPI_INT_DP				(1 << 7)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

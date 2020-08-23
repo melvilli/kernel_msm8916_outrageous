@@ -38,7 +38,11 @@
 
 struct mtd_partition {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name;			/* identifier string */
+=======
+	const char *name;		/* identifier string */
+>>>>>>> v3.18
 =======
 	const char *name;		/* identifier string */
 >>>>>>> v3.18
@@ -69,8 +73,11 @@ struct mtd_part_parser_data {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void part_fill_badblockstats(struct mtd_info *mtd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -86,17 +93,23 @@ struct mtd_part_parser {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int register_mtd_parser(struct mtd_part_parser *parser);
 extern int deregister_mtd_parser(struct mtd_part_parser *parser);
 
 int mtd_is_partition(const struct mtd_info *mtd);
 int mtd_add_partition(struct mtd_info *master, char *name,
 =======
+=======
+>>>>>>> v3.18
 extern void register_mtd_parser(struct mtd_part_parser *parser);
 extern void deregister_mtd_parser(struct mtd_part_parser *parser);
 
 int mtd_is_partition(const struct mtd_info *mtd);
 int mtd_add_partition(struct mtd_info *master, const char *name,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		      long long offset, long long length);
 int mtd_del_partition(struct mtd_info *master, int partno);

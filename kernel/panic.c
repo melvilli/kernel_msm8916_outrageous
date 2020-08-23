@@ -16,6 +16,10 @@
 #include <linux/module.h>
 #include <linux/random.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ftrace.h>
+>>>>>>> v3.18
 =======
 #include <linux/ftrace.h>
 >>>>>>> v3.18
@@ -27,10 +31,13 @@
 #include <linux/init.h>
 #include <linux/nmi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/console.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/exception.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -38,9 +45,12 @@
 #define PANIC_BLINK_SPD 18
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Machine specific panic information string */
 char *mach_panic_string;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int panic_on_oops = CONFIG_PANIC_ON_OOPS_VALUE;
@@ -49,10 +59,15 @@ static int pause_on_oops;
 static int pause_on_oops_flag;
 static DEFINE_SPINLOCK(pause_on_oops_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifndef CONFIG_PANIC_TIMEOUT
 #define CONFIG_PANIC_TIMEOUT 0
 #endif
+=======
+static bool crash_kexec_post_notifiers;
+
+>>>>>>> v3.18
 =======
 static bool crash_kexec_post_notifiers;
 
@@ -99,7 +114,10 @@ void panic(const char *fmt, ...)
 	int state = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_kernel_panic(0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -129,7 +147,11 @@ void panic(const char *fmt, ...)
 	vsnprintf(buf, sizeof(buf), fmt, args);
 	va_end(args);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_EMERG "Kernel panic - not syncing: %s\n",buf);
+=======
+	pr_emerg("Kernel panic - not syncing: %s\n", buf);
+>>>>>>> v3.18
 =======
 	pr_emerg("Kernel panic - not syncing: %s\n", buf);
 >>>>>>> v3.18
@@ -145,15 +167,21 @@ void panic(const char *fmt, ...)
 	 * If we have crashed and we have a crash kernel loaded let it handle
 	 * everything else.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Do we want to call this before we try to display a message?
 	 */
 	crash_kexec(NULL);
 =======
+=======
+>>>>>>> v3.18
 	 * If we want to run this after calling panic_notifiers, pass
 	 * the "crash_kexec_post_notifiers" option to the kernel.
 	 */
 	if (!crash_kexec_post_notifiers)
 		crash_kexec(NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -164,6 +192,7 @@ void panic(const char *fmt, ...)
 	smp_send_stop();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kmsg_dump(KMSG_DUMP_PANIC);
 
 	atomic_notifier_call_chain(&panic_notifier_list, 0, buf);
@@ -173,6 +202,8 @@ void panic(const char *fmt, ...)
 	console_flush_on_panic();
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Run any panic handlers, including those that might need to
 	 * add information to the kmsg dump output.
@@ -192,6 +223,9 @@ void panic(const char *fmt, ...)
 
 	bust_spinlocks(0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!panic_blink)
 		panic_blink = no_blink;
@@ -202,7 +236,11 @@ void panic(const char *fmt, ...)
 		 * We can't use the "normal" timers since we just panicked.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_EMERG "Rebooting in %d seconds..", panic_timeout);
+=======
+		pr_emerg("Rebooting in %d seconds..", panic_timeout);
+>>>>>>> v3.18
 =======
 		pr_emerg("Rebooting in %d seconds..", panic_timeout);
 >>>>>>> v3.18
@@ -217,9 +255,12 @@ void panic(const char *fmt, ...)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	trace_kernel_panic_late(0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (panic_timeout != 0) {
@@ -236,7 +277,11 @@ void panic(const char *fmt, ...)
 		/* Make sure the user can actually press Stop-A (L1-A) */
 		stop_a_enabled = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_EMERG "Press Stop-A (L1-A) to return to the boot prom\n");
+=======
+		pr_emerg("Press Stop-A (L1-A) to return to the boot prom\n");
+>>>>>>> v3.18
 =======
 		pr_emerg("Press Stop-A (L1-A) to return to the boot prom\n");
 >>>>>>> v3.18
@@ -251,6 +296,10 @@ void panic(const char *fmt, ...)
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pr_emerg("---[ end Kernel panic - not syncing: %s\n", buf);
+>>>>>>> v3.18
 =======
 	pr_emerg("---[ end Kernel panic - not syncing: %s\n", buf);
 >>>>>>> v3.18
@@ -278,7 +327,11 @@ static const struct tnt tnts[] = {
 	{ TAINT_PROPRIETARY_MODULE,	'P', 'G' },
 	{ TAINT_FORCED_MODULE,		'F', ' ' },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ TAINT_UNSAFE_SMP,		'S', ' ' },
+=======
+	{ TAINT_CPU_OUT_OF_SPEC,	'S', ' ' },
+>>>>>>> v3.18
 =======
 	{ TAINT_CPU_OUT_OF_SPEC,	'S', ' ' },
 >>>>>>> v3.18
@@ -293,6 +346,11 @@ static const struct tnt tnts[] = {
 	{ TAINT_FIRMWARE_WORKAROUND,	'I', ' ' },
 	{ TAINT_OOT_MODULE,		'O', ' ' },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ TAINT_UNSIGNED_MODULE,	'E', ' ' },
+	{ TAINT_SOFTLOCKUP,		'L', ' ' },
+>>>>>>> v3.18
 =======
 	{ TAINT_UNSIGNED_MODULE,	'E', ' ' },
 	{ TAINT_SOFTLOCKUP,		'L', ' ' },
@@ -316,6 +374,11 @@ static const struct tnt tnts[] = {
  *  'I' - Working around severe firmware bug.
  *  'O' - Out-of-tree module has been loaded.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *  'E' - Unsigned module has been loaded.
+ *  'L' - A soft lockup has previously occurred.
+>>>>>>> v3.18
 =======
  *  'E' - Unsigned module has been loaded.
  *  'L' - A soft lockup has previously occurred.
@@ -326,7 +389,11 @@ static const struct tnt tnts[] = {
 const char *print_tainted(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static char buf[ARRAY_SIZE(tnts) + sizeof("Tainted: ") + 1];
+=======
+	static char buf[ARRAY_SIZE(tnts) + sizeof("Tainted: ")];
+>>>>>>> v3.18
 =======
 	static char buf[ARRAY_SIZE(tnts) + sizeof("Tainted: ")];
 >>>>>>> v3.18
@@ -371,8 +438,12 @@ void add_taint(unsigned flag, enum lockdep_ok lockdep_ok)
 {
 	if (lockdep_ok == LOCKDEP_NOW_UNRELIABLE && __debug_locks_off())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "Disabling lock debugging due to kernel taint\n");
+=======
+		pr_warn("Disabling lock debugging due to kernel taint\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Disabling lock debugging due to kernel taint\n");
 >>>>>>> v3.18
@@ -459,7 +530,10 @@ void oops_enter(void)
 	/* can't trust the integrity of the kernel anymore: */
 	debug_locks_off();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oops_printk_start();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	do_oops_enter_exit();
@@ -485,6 +559,7 @@ void print_oops_end_marker(void)
 {
 	init_oops_id();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (mach_panic_string)
 		printk(KERN_WARNING "Board Information: %s\n",
@@ -492,6 +567,9 @@ void print_oops_end_marker(void)
 
 	printk(KERN_WARNING "---[ end trace %016llx ]---\n",
 		(unsigned long long)oops_id);
+=======
+	pr_warn("---[ end trace %016llx ]---\n", (unsigned long long)oops_id);
+>>>>>>> v3.18
 =======
 	pr_warn("---[ end trace %016llx ]---\n", (unsigned long long)oops_id);
 >>>>>>> v3.18
@@ -518,14 +596,20 @@ static void warn_slowpath_common(const char *file, int line, void *caller,
 				 unsigned taint, struct slowpath_args *args)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING "------------[ cut here ]------------\n");
 	printk(KERN_WARNING "WARNING: at %s:%d %pS()\n", file, line, caller);
 =======
+=======
+>>>>>>> v3.18
 	disable_trace_on_warning();
 
 	pr_warn("------------[ cut here ]------------\n");
 	pr_warn("WARNING: CPU: %d PID: %d at %s:%d %pS()\n",
 		raw_smp_processor_id(), current->pid, file, line, caller);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (args)
@@ -578,7 +662,11 @@ EXPORT_SYMBOL(warn_slowpath_null);
  * gcc detects corruption of the on-stack canary value
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __stack_chk_fail(void)
+=======
+__visible void __stack_chk_fail(void)
+>>>>>>> v3.18
 =======
 __visible void __stack_chk_fail(void)
 >>>>>>> v3.18
@@ -594,7 +682,10 @@ core_param(panic, panic_timeout, int, 0644);
 core_param(pause_on_oops, pause_on_oops, int, 0644);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init setup_crash_kexec_post_notifiers(char *s)
 {
 	crash_kexec_post_notifiers = true;
@@ -602,6 +693,9 @@ static int __init setup_crash_kexec_post_notifiers(char *s)
 }
 early_param("crash_kexec_post_notifiers", setup_crash_kexec_post_notifiers);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init oops_setup(char *s)
 {

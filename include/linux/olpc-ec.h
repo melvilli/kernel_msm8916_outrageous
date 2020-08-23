@@ -7,6 +7,10 @@
 #define EC_WAKE_UP_WLAN			0x24
 #define EC_WLAN_LEAVE_RESET		0x25
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EC_DCON_POWER_MODE		0x26
+>>>>>>> v3.18
 =======
 #define EC_DCON_POWER_MODE		0x26
 >>>>>>> v3.18

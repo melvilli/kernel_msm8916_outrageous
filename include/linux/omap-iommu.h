@@ -11,6 +11,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _INTEL_IOMMU_H_
 #define _INTEL_IOMMU_H_
 
@@ -46,6 +47,10 @@ extern void
 omap_iommu_vfree(struct iommu_domain *domain, struct device *dev,
 				const u32 da);
 extern void *omap_da_to_va(struct device *dev, u32 da);
+=======
+#ifndef _OMAP_IOMMU_H_
+#define _OMAP_IOMMU_H_
+>>>>>>> v3.18
 =======
 #ifndef _OMAP_IOMMU_H_
 #define _OMAP_IOMMU_H_

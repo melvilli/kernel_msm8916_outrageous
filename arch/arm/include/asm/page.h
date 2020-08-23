@@ -161,11 +161,14 @@ extern int pfn_valid(unsigned long);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MEMORY_HOTPLUG_SPARSE
 extern int _early_pfn_valid(unsigned long);
 #define early_pfn_valid(pfn) (_early_pfn_valid(pfn))
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/memory.h>

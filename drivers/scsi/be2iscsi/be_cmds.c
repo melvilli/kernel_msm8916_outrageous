@@ -1,6 +1,10 @@
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2005 - 2013 Emulex
+=======
+ * Copyright (C) 2005 - 2014 Emulex
+>>>>>>> v3.18
 =======
  * Copyright (C) 2005 - 2014 Emulex
 >>>>>>> v3.18
@@ -22,9 +26,15 @@
 #include <scsi/iscsi_proto.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "be.h"
 #include "be_mgmt.h"
 #include "be_main.h"
+=======
+#include "be_main.h"
+#include "be.h"
+#include "be_mgmt.h"
+>>>>>>> v3.18
 =======
 #include "be_main.h"
 #include "be.h"
@@ -149,7 +159,11 @@ unsigned int alloc_mcc_tag(struct beiscsi_hba *phba)
  * @tag: Tag for the MBX Command
  * @wrb: the WRB used for the MBX Command
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @cmd_hdr: IOCTL Hdr for the MBX Cmd
+=======
+ * @mbx_cmd_mem: ptr to memory allocated for MBX Cmd
+>>>>>>> v3.18
 =======
  * @mbx_cmd_mem: ptr to memory allocated for MBX Cmd
 >>>>>>> v3.18
@@ -163,7 +177,11 @@ unsigned int alloc_mcc_tag(struct beiscsi_hba *phba)
 int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 		uint32_t tag, struct be_mcc_wrb **wrb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		void *cmd_hdr)
+=======
+		struct be_dma_mem *mbx_cmd_mem)
+>>>>>>> v3.18
 =======
 		struct be_dma_mem *mbx_cmd_mem)
 >>>>>>> v3.18
@@ -173,6 +191,7 @@ int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 	uint16_t status = 0, addl_status = 0, wrb_num = 0;
 	struct be_mcc_wrb *temp_wrb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct be_cmd_req_hdr *ioctl_hdr;
 	struct be_cmd_resp_hdr *ioctl_resp_hdr;
 	struct be_queue_info *mccq = &phba->ctrl.mcc_obj.q;
@@ -180,6 +199,8 @@ int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 	if (beiscsi_error(phba))
 		return -EIO;
 =======
+=======
+>>>>>>> v3.18
 	struct be_cmd_req_hdr *mbx_hdr;
 	struct be_cmd_resp_hdr *mbx_resp_hdr;
 	struct be_queue_info *mccq = &phba->ctrl.mcc_obj.q;
@@ -193,6 +214,9 @@ int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 	spin_lock(&phba->ctrl.mbox_lock);
 	phba->ctrl.ptag_state[tag].tag_state = MCC_TAG_STATE_RUNNING;
 	spin_unlock(&phba->ctrl.mbox_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* wait for the mccq completion */
@@ -204,7 +228,10 @@ int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 
 	if (rc <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		struct be_dma_mem *tag_mem;
 		/* Set MBX Tag state to timeout */
 		spin_lock(&phba->ctrl.mbox_lock);
@@ -220,17 +247,23 @@ int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 		} else
 			tag_mem->size = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		beiscsi_log(phba, KERN_ERR,
 			    BEISCSI_LOG_INIT | BEISCSI_LOG_EH |
 			    BEISCSI_LOG_CONFIG,
 			    "BC_%d : MBX Cmd Completion timed out\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = -EAGAIN;
 		goto release_mcc_tag;
 	} else
 		rc = 0;
 =======
+=======
+>>>>>>> v3.18
 		return -EBUSY;
 	} else {
 		rc = 0;
@@ -239,6 +272,9 @@ int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 		phba->ctrl.ptag_state[tag].tag_state = MCC_TAG_STATE_COMPLETED;
 		spin_unlock(&phba->ctrl.mbox_lock);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mcc_tag_response = phba->ctrl.mcc_numtag[tag];
@@ -247,8 +283,13 @@ int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 			CQE_STATUS_ADDL_SHIFT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd_hdr) {
 		ioctl_hdr = (struct be_cmd_req_hdr *)cmd_hdr;
+=======
+	if (mbx_cmd_mem) {
+		mbx_hdr = (struct be_cmd_req_hdr *)mbx_cmd_mem->va;
+>>>>>>> v3.18
 =======
 	if (mbx_cmd_mem) {
 		mbx_hdr = (struct be_cmd_req_hdr *)mbx_cmd_mem->va;
@@ -258,7 +299,11 @@ int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 			   CQE_STATUS_WRB_SHIFT;
 		temp_wrb = (struct be_mcc_wrb *)queue_get_wrb(mccq, wrb_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ioctl_hdr = embedded_payload(temp_wrb);
+=======
+		mbx_hdr = embedded_payload(temp_wrb);
+>>>>>>> v3.18
 =======
 		mbx_hdr = embedded_payload(temp_wrb);
 >>>>>>> v3.18
@@ -269,7 +314,11 @@ int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 
 	if (status || addl_status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		beiscsi_log(phba, KERN_ERR,
+=======
+		beiscsi_log(phba, KERN_WARNING,
+>>>>>>> v3.18
 =======
 		beiscsi_log(phba, KERN_WARNING,
 >>>>>>> v3.18
@@ -278,6 +327,7 @@ int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 			    "BC_%d : MBX Cmd Failed for "
 			    "Subsys : %d Opcode : %d with "
 			    "Status : %d and Extd_Status : %d\n",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			    ioctl_hdr->subsystem,
 			    ioctl_hdr->opcode,
@@ -290,6 +340,8 @@ int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 		}
 		rc = -EAGAIN;
 =======
+=======
+>>>>>>> v3.18
 			    mbx_hdr->subsystem,
 			    mbx_hdr->opcode,
 			    status, addl_status);
@@ -308,6 +360,9 @@ int beiscsi_mccq_compl(struct beiscsi_hba *phba,
 			goto release_mcc_tag;
 		}
 		rc = -EIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -339,7 +394,10 @@ bool is_link_state_evt(u32 trailer)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool is_iscsi_evt(u32 trailer)
 {
 	return ((trailer >> ASYNC_TRAILER_EVENT_CODE_SHIFT) &
@@ -353,6 +411,9 @@ static int iscsi_evt_type(u32 trailer)
 		 ASYNC_TRAILER_EVENT_TYPE_MASK;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool be_mcc_compl_is_new(struct be_mcc_compl *compl)
 {
@@ -419,6 +480,10 @@ int be_mcc_compl_process_isr(struct be_ctrl_info *ctrl,
 				    struct be_mcc_compl *compl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct beiscsi_hba *phba = pci_get_drvdata(ctrl->pdev);
+>>>>>>> v3.18
 =======
 	struct beiscsi_hba *phba = pci_get_drvdata(ctrl->pdev);
 >>>>>>> v3.18
@@ -442,8 +507,11 @@ int be_mcc_compl_process_isr(struct be_ctrl_info *ctrl,
 	ctrl->mcc_numtag[tag] |= (extd_status & 0x000000FF) << 8;
 	ctrl->mcc_numtag[tag] |= (compl_status & 0x000000FF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wake_up_interruptible(&ctrl->mcc_wait[tag]);
 =======
+=======
+>>>>>>> v3.18
 
 	if (ctrl->ptag_state[tag].tag_state == MCC_TAG_STATE_RUNNING) {
 		wake_up_interruptible(&ctrl->mcc_wait[tag]);
@@ -470,6 +538,9 @@ int be_mcc_compl_process_isr(struct be_ctrl_info *ctrl,
 		free_mcc_tag(ctrl, tag);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -487,9 +558,12 @@ static struct be_mcc_compl *be_mcc_compl_get(struct beiscsi_hba *phba)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void be2iscsi_fail_session(struct iscsi_cls_session *cls_session)
 {
 =======
+=======
+>>>>>>> v3.18
 /**
  * be2iscsi_fail_session(): Closing session with appropriate error
  * @cls_session: ptr to session
@@ -507,6 +581,9 @@ void be2iscsi_fail_session(struct iscsi_cls_session *cls_session)
 	else
 		iscsi_err_flag = ISCSI_ERR_CONN_FAILED;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iscsi_session_failure(cls_session->dd_data, ISCSI_ERR_CONN_FAILED);
 }
@@ -530,7 +607,11 @@ void beiscsi_async_link_state_process(struct beiscsi_hba *phba,
 		    ((evt->port_link_status & ASYNC_EVENT_LOGICAL) &&
 		     (evt->port_fault == BEISCSI_PHY_LINK_FAULT_NONE))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phba->state = BE_ADAPTER_UP;
+=======
+		phba->state = BE_ADAPTER_LINK_UP | BE_ADAPTER_CHECK_BOOT;
+>>>>>>> v3.18
 =======
 		phba->state = BE_ADAPTER_LINK_UP | BE_ADAPTER_CHECK_BOOT;
 >>>>>>> v3.18
@@ -542,6 +623,7 @@ void beiscsi_async_link_state_process(struct beiscsi_hba *phba,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void beiscsi_cq_notify(struct beiscsi_hba *phba, u16 qid, bool arm,
 		       u16 num_popped)
@@ -555,6 +637,8 @@ static void beiscsi_cq_notify(struct beiscsi_hba *phba, u16 qid, bool arm,
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int beiscsi_process_mcc(struct beiscsi_hba *phba)
@@ -572,8 +656,11 @@ int beiscsi_process_mcc(struct beiscsi_hba *phba)
 				beiscsi_async_link_state_process(phba,
 				   (struct be_async_event_link_state *) compl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			else
 =======
+=======
+>>>>>>> v3.18
 			else if (is_iscsi_evt(compl->flags)) {
 				switch (iscsi_evt_type(compl->flags)) {
 				case ASYNC_EVENT_NEW_ISCSI_TGT_DISC:
@@ -596,6 +683,9 @@ int beiscsi_process_mcc(struct beiscsi_hba *phba)
 						    compl->flags);
 				}
 			} else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				beiscsi_log(phba, KERN_ERR,
 					    BEISCSI_LOG_CONFIG |
@@ -613,7 +703,11 @@ int beiscsi_process_mcc(struct beiscsi_hba *phba)
 
 	if (num)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		beiscsi_cq_notify(phba, phba->ctrl.mcc_obj.cq.id, true, num);
+=======
+		hwi_ring_cq_db(phba, phba->ctrl.mcc_obj.cq.id, num, 1, 0);
+>>>>>>> v3.18
 =======
 		hwi_ring_cq_db(phba, phba->ctrl.mcc_obj.cq.id, num, 1, 0);
 >>>>>>> v3.18
@@ -689,6 +783,7 @@ int be_mcc_notify_wait(struct beiscsi_hba *phba)
 static int be_mbox_db_ready_wait(struct be_ctrl_info *ctrl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *db = ctrl->db + MPU_MAILBOX_DB_OFFSET;
 	struct beiscsi_hba *phba = pci_get_drvdata(ctrl->pdev);
 	uint32_t wait = 0;
@@ -717,6 +812,8 @@ static int be_mbox_db_ready_wait(struct be_ctrl_info *ctrl)
 	} while (true);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 #define BEISCSI_MBX_RDY_BIT_TIMEOUT	4000	/* 4sec */
 	void __iomem *db = ctrl->db + MPU_MAILBOX_DB_OFFSET;
 	struct beiscsi_hba *phba = pci_get_drvdata(ctrl->pdev);
@@ -758,6 +855,9 @@ static int be_mbox_db_ready_wait(struct be_ctrl_info *ctrl)
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -946,7 +1046,11 @@ struct be_mcc_wrb *wrb_from_mccq(struct beiscsi_hba *phba)
 	struct be_mcc_wrb *wrb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(atomic_read(&mccq->used) >= mccq->len);
+=======
+	WARN_ON(atomic_read(&mccq->used) >= mccq->len);
+>>>>>>> v3.18
 =======
 	WARN_ON(atomic_read(&mccq->used) >= mccq->len);
 >>>>>>> v3.18
@@ -1260,11 +1364,14 @@ int beiscsi_cmd_q_destroy(struct be_ctrl_info *ctrl, struct be_queue_info *q,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int be_cmd_create_default_pdu_queue(struct be_ctrl_info *ctrl,
 				    struct be_queue_info *cq,
 				    struct be_queue_info *dq, int length,
 				    int entry_size)
 =======
+=======
+>>>>>>> v3.18
 /**
  * be_cmd_create_default_pdu_queue()- Create DEFQ for the adapter
  * @ctrl: ptr to ctrl_info
@@ -1288,6 +1395,9 @@ int be_cmd_create_default_pdu_queue(struct be_ctrl_info *ctrl,
 				    struct be_queue_info *dq, int length,
 				    int entry_size, uint8_t is_header,
 				    uint8_t ulp_num)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct be_mcc_wrb *wrb = wrb_from_mbox(&ctrl->mbox_mem);
@@ -1307,12 +1417,18 @@ int be_cmd_create_default_pdu_queue(struct be_ctrl_info *ctrl,
 
 	req->num_pages = PAGES_4K_SPANNED(q_mem->va, q_mem->size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (phba->fw_config.dual_ulp_aware) {
 		req->ulp_num = ulp_num;
 		req->dua_feature |= (1 << BEISCSI_DUAL_ULP_AWARE_BIT);
 		req->dua_feature |= (1 << BEISCSI_BIND_Q_TO_ULP_BIT);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (is_chip_be2_be3r(phba)) {
@@ -1352,6 +1468,10 @@ int be_cmd_create_default_pdu_queue(struct be_ctrl_info *ctrl,
 	status = be_mbox_notify(ctrl);
 	if (!status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct be_ring *defq_ring;
+>>>>>>> v3.18
 =======
 		struct be_ring *defq_ring;
 >>>>>>> v3.18
@@ -1360,7 +1480,10 @@ int be_cmd_create_default_pdu_queue(struct be_ctrl_info *ctrl,
 		dq->id = le16_to_cpu(resp->id);
 		dq->created = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (is_header)
 			defq_ring = &phba->phwi_ctrlr->default_pdu_hdr[ulp_num];
 		else
@@ -1376,6 +1499,9 @@ int be_cmd_create_default_pdu_queue(struct be_ctrl_info *ctrl,
 			defq_ring->ulp_num = resp->ulp_num;
 			defq_ring->doorbell_offset = resp->doorbell_offset;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	spin_unlock(&ctrl->mbox_lock);
@@ -1384,9 +1510,12 @@ int be_cmd_create_default_pdu_queue(struct be_ctrl_info *ctrl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int be_cmd_wrbq_create(struct be_ctrl_info *ctrl, struct be_dma_mem *q_mem,
 		       struct be_queue_info *wrbq)
 =======
+=======
+>>>>>>> v3.18
 /**
  * be_cmd_wrbq_create()- Create WRBQ
  * @ctrl: ptr to ctrl_info
@@ -1403,12 +1532,19 @@ int be_cmd_wrbq_create(struct be_ctrl_info *ctrl,
 			struct be_queue_info *wrbq,
 			struct hwi_wrb_context *pwrb_context,
 			uint8_t ulp_num)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct be_mcc_wrb *wrb = wrb_from_mbox(&ctrl->mbox_mem);
 	struct be_wrbq_create_req *req = embedded_payload(wrb);
 	struct be_wrbq_create_resp *resp = embedded_payload(wrb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct beiscsi_hba *phba = pci_get_drvdata(ctrl->pdev);
+>>>>>>> v3.18
 =======
 	struct beiscsi_hba *phba = pci_get_drvdata(ctrl->pdev);
 >>>>>>> v3.18
@@ -1423,7 +1559,10 @@ int be_cmd_wrbq_create(struct be_ctrl_info *ctrl,
 		OPCODE_COMMON_ISCSI_WRBQ_CREATE, sizeof(*req));
 	req->num_pages = PAGES_4K_SPANNED(q_mem->va, q_mem->size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (phba->fw_config.dual_ulp_aware) {
 		req->ulp_num = ulp_num;
@@ -1431,6 +1570,9 @@ int be_cmd_wrbq_create(struct be_ctrl_info *ctrl,
 		req->dua_feature |= (1 << BEISCSI_BIND_Q_TO_ULP_BIT);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	be_cmd_page_addrs_prepare(req->pages, ARRAY_SIZE(req->pages), q_mem);
 
@@ -1439,7 +1581,10 @@ int be_cmd_wrbq_create(struct be_ctrl_info *ctrl,
 		wrbq->id = le16_to_cpu(resp->cid);
 		wrbq->created = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		pwrb_context->cid = wrbq->id;
 		if (!phba->fw_config.dual_ulp_aware) {
@@ -1449,6 +1594,9 @@ int be_cmd_wrbq_create(struct be_ctrl_info *ctrl,
 			pwrb_context->ulp_num = resp->ulp_num;
 			pwrb_context->doorbell_offset = resp->doorbell_offset;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	spin_unlock(&ctrl->mbox_lock);
@@ -1456,7 +1604,10 @@ int be_cmd_wrbq_create(struct be_ctrl_info *ctrl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int be_cmd_iscsi_post_template_hdr(struct be_ctrl_info *ctrl,
 				    struct be_dma_mem *q_mem)
 {
@@ -1502,6 +1653,9 @@ int be_cmd_iscsi_remove_template_hdr(struct be_ctrl_info *ctrl)
 	return status;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int be_cmd_iscsi_post_sgl_pages(struct be_ctrl_info *ctrl,
 				struct be_dma_mem *q_mem,

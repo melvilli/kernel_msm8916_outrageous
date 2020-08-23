@@ -87,7 +87,10 @@ int ocfs2_reserve_clusters(struct ocfs2_super *osb,
 			   struct ocfs2_alloc_context **ac);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ocfs2_alloc_dinode_update_counts(struct inode *inode,
 			 handle_t *handle,
 			 struct buffer_head *di_bh,
@@ -104,6 +107,9 @@ int ocfs2_block_group_set_bits(handle_t *handle,
 			 unsigned int bit_off,
 			 unsigned int num_bits);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ocfs2_claim_metadata(handle_t *handle,
 			 struct ocfs2_alloc_context *ac,

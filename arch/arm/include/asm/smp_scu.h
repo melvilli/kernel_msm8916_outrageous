@@ -12,7 +12,11 @@
 static inline bool scu_a9_has_base(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return read_cpuid_part_number() == ARM_CPU_PART_CORTEX_A9;
+=======
+	return read_cpuid_part() == ARM_CPU_PART_CORTEX_A9;
+>>>>>>> v3.18
 =======
 	return read_cpuid_part() == ARM_CPU_PART_CORTEX_A9;
 >>>>>>> v3.18
@@ -28,11 +32,14 @@ static inline unsigned long scu_a9_get_base(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int scu_get_core_count(void __iomem *);
 int scu_power_mode(void __iomem *, unsigned int);
 
 #ifdef CONFIG_SMP
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_ARM_SCU
 unsigned int scu_get_core_count(void __iomem *);
 int scu_power_mode(void __iomem *, unsigned int);
@@ -48,6 +55,9 @@ static inline int scu_power_mode(void __iomem *scu_base, unsigned int mode)
 #endif
 
 #if defined(CONFIG_SMP) && defined(CONFIG_HAVE_ARM_SCU)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void scu_enable(void __iomem *scu_base);
 #else

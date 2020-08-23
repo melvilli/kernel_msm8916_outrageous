@@ -26,11 +26,15 @@
 @
 ENTRY(do_vfp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PREEMPT_COUNT
 	ldr	r4, [r10, #TI_PREEMPT]	@ get preempt count
 	add	r11, r4, #1		@ increment it
 	str	r11, [r10, #TI_PREEMPT]
 #endif
+=======
+	inc_preempt_count r10, r4
+>>>>>>> v3.18
 =======
 	inc_preempt_count r10, r4
 >>>>>>> v3.18
@@ -42,6 +46,7 @@ ENDPROC(do_vfp)
 
 ENTRY(vfp_null_entry)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PREEMPT_COUNT
 	get_thread_info	r10
 	ldr	r4, [r10, #TI_PREEMPT]	@ get preempt count
@@ -49,6 +54,10 @@ ENTRY(vfp_null_entry)
 	str	r11, [r10, #TI_PREEMPT]
 #endif
 	mov	pc, lr
+=======
+	dec_preempt_count_ti r10, r4
+	ret	lr
+>>>>>>> v3.18
 =======
 	dec_preempt_count_ti r10, r4
 	ret	lr
@@ -65,6 +74,7 @@ ENDPROC(vfp_null_entry)
 	__INIT
 ENTRY(vfp_testing_entry)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PREEMPT_COUNT
 	get_thread_info	r10
 	ldr	r4, [r10, #TI_PREEMPT]	@ get preempt count
@@ -75,10 +85,15 @@ ENTRY(vfp_testing_entry)
 	str	r0, [r0]		@ set to non-zero value
 	mov	pc, r9			@ we have handled the fault
 =======
+=======
+>>>>>>> v3.18
 	dec_preempt_count_ti r10, r4
 	ldr	r0, VFP_arch_address
 	str	r0, [r0]		@ set to non-zero value
 	ret	r9			@ we have handled the fault
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENDPROC(vfp_testing_entry)
 

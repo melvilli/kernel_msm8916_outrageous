@@ -17,6 +17,7 @@
 #define __LINUX_USB_GADGET_MSM72K_UDC_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USB_AHBBURST         (MSM_USB_BASE + 0x0090)
 #define USB_AHBMODE          (MSM_USB_BASE + 0x0098)
 #define USB_GENCONFIG        (MSM_USB_BASE + 0x009C)
@@ -32,6 +33,8 @@
 #define USB_USBCMD           (MSM_USB_BASE + 0x0140)
 #define USB_USBSTS           (MSM_USB_BASE + 0x0144)
 =======
+=======
+>>>>>>> v3.18
 /* USB phy selector - in TCSR address range */
 #define USB2_PHY_SEL         0xfd4ab000
 
@@ -40,6 +43,9 @@
 #define USB_CAPLENGTH        (MSM_USB_BASE + 0x0100) /* 8 bit */
 
 #define USB_USBCMD           (MSM_USB_BASE + 0x0140)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define USB_PORTSC           (MSM_USB_BASE + 0x0184)
 #define USB_OTGSC            (MSM_USB_BASE + 0x01A4)
@@ -47,6 +53,7 @@
 #define USB_PHY_CTRL         (MSM_USB_BASE + 0x0240)
 #define USB_PHY_CTRL2        (MSM_USB_BASE + 0x0278)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define USBCMD_RESET		2
 #define USBCMD_SESS_VLD_CTRL	BIT(25)
@@ -81,6 +88,8 @@
 #define PORTSC_CSC              (1 << 1)
 #define PORTSC_CCS              (1 << 0)
 =======
+=======
+>>>>>>> v3.18
 #define USBCMD_RESET   2
 #define USB_USBINTR          (MSM_USB_BASE + 0x0148)
 
@@ -88,6 +97,9 @@
 #define PORTSC_PTS_MASK        (3 << 30)
 #define PORTSC_PTS_ULPI        (2 << 30)
 #define PORTSC_PTS_SERIAL      (3 << 30)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define USB_ULPI_VIEWPORT    (MSM_USB_BASE + 0x0170)
@@ -95,7 +107,10 @@
 #define ULPI_WRITE            (1 << 29)
 #define ULPI_READ             (0 << 29)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ULPI_SYNC_STATE       (1 << 27)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ULPI_ADDR(n)          (((n) & 255) << 16)
@@ -103,15 +118,19 @@
 #define ULPI_DATA_READ(n)     (((n) >> 8) & 255)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GENCONFIG_BAM_DISABLE (1 << 13)
 #define GENCONFIG_TXFIFO_IDLE_FORCE_DISABLE (1 << 4)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* synopsys 28nm phy registers */
 #define ULPI_PWR_CLK_MNG_REG	0x88
 #define OTG_COMP_DISABLE	BIT(0)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* ulpi manual dp registers */
 #define ULPI_MISC_A			0x96
@@ -139,6 +158,8 @@
 #define OTGSC_INTR_MASK		(0x7f << 24)
 #define OTGSC_HADP		(1 << 6)
 =======
+=======
+>>>>>>> v3.18
 #define ASYNC_INTR_CTRL         (1 << 29) /* Enable async interrupt */
 #define ULPI_STP_CTRL           (1 << 30) /* Block communication with PHY */
 #define PHY_RETEN               (1 << 1) /* PHY retention enable/disable */
@@ -146,6 +167,9 @@
 
 /* OTG definitions */
 #define OTGSC_INTSTS_MASK	(0x7f << 16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define OTGSC_ID		(1 << 8)
 #define OTGSC_BSV		(1 << 11)
@@ -153,6 +177,7 @@
 #define OTGSC_BSVIS		(1 << 19)
 #define OTGSC_IDIE		(1 << 24)
 #define OTGSC_BSVIE		(1 << 27)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define OTGSC_DPIE		(1 << 30)
 #define OTGSC_DPIS		(1 << 22)
@@ -190,6 +215,8 @@
 #define USB_PHY_IDDIG_RISE_MASK BIT(0)
 #define USB_PHY_IDDIG_FALL_MASK BIT(1)
 #define USB_PHY_ID_MASK (USB_PHY_IDDIG_RISE_MASK | USB_PHY_IDDIG_FALL_MASK)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -35,9 +35,13 @@
  *
  *     You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  *     along with this program; if not, write to the Free Software
  *     Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *     MA 02111-1307 USA
+=======
+ *     along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *     along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -567,8 +571,13 @@ static int smsc_ircc_open(unsigned int fir_base, unsigned int sir_base, u8 dma, 
 
 	self->rx_buff.head =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_alloc_coherent(NULL, self->rx_buff.truesize,
 				   &self->rx_buff_dma, GFP_KERNEL | __GFP_ZERO);
+=======
+		dma_zalloc_coherent(NULL, self->rx_buff.truesize,
+				    &self->rx_buff_dma, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		dma_zalloc_coherent(NULL, self->rx_buff.truesize,
 				    &self->rx_buff_dma, GFP_KERNEL);
@@ -578,8 +587,13 @@ static int smsc_ircc_open(unsigned int fir_base, unsigned int sir_base, u8 dma, 
 
 	self->tx_buff.head =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_alloc_coherent(NULL, self->tx_buff.truesize,
 				   &self->tx_buff_dma, GFP_KERNEL | __GFP_ZERO);
+=======
+		dma_zalloc_coherent(NULL, self->tx_buff.truesize,
+				    &self->tx_buff_dma, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		dma_zalloc_coherent(NULL, self->tx_buff.truesize,
 				    &self->tx_buff_dma, GFP_KERNEL);

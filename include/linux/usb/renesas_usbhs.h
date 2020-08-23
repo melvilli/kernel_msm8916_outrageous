@@ -154,6 +154,12 @@ struct renesas_usbhs_driver_param {
 	int pio_dma_border; /* default is 64byte */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 type;
+	u32 enable_gpio;
+
+>>>>>>> v3.18
 =======
 	u32 type;
 	u32 enable_gpio;
@@ -167,6 +173,12 @@ struct renesas_usbhs_driver_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USBHS_TYPE_R8A7790 1
+#define USBHS_TYPE_R8A7791 2
+
+>>>>>>> v3.18
 =======
 #define USBHS_TYPE_R8A7790 1
 #define USBHS_TYPE_R8A7791 2

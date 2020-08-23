@@ -20,6 +20,10 @@
 #include <linux/errno.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/moduleparam.h>
+>>>>>>> v3.18
 =======
 #include <linux/moduleparam.h>
 >>>>>>> v3.18
@@ -88,7 +92,10 @@ bool parameq(const char *a, const char *b)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void param_check_unsafe(const struct kernel_param *kp)
 {
 	if (kp->flags & KERNEL_PARAM_FL_UNSAFE) {
@@ -98,6 +105,9 @@ static void param_check_unsafe(const struct kernel_param *kp)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int parse_one(char *param,
 		     char *val,
@@ -120,8 +130,13 @@ static int parse_one(char *param,
 				return 0;
 			/* No one handled NULL, so do it here. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!val && params[i].ops->set != param_set_bool
 			    && params[i].ops->set != param_set_bint)
+=======
+			if (!val &&
+			    !(params[i].ops->flags & KERNEL_PARAM_OPS_FL_NOARG))
+>>>>>>> v3.18
 =======
 			if (!val &&
 			    !(params[i].ops->flags & KERNEL_PARAM_OPS_FL_NOARG))
@@ -131,6 +146,10 @@ static int parse_one(char *param,
 				params[i].ops->set);
 			mutex_lock(&param_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			param_check_unsafe(&params[i]);
+>>>>>>> v3.18
 =======
 			param_check_unsafe(&params[i]);
 >>>>>>> v3.18
@@ -203,6 +222,7 @@ static char *next_arg(char *args, char **param, char **val)
 
 /* Args looks like "foo=bar,bar2 baz=fuz wiz". */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int parse_args(const char *doing,
 	       char *args,
 	       const struct kernel_param *params,
@@ -211,6 +231,8 @@ int parse_args(const char *doing,
 	       s16 max_level,
 	       int (*unknown)(char *param, char *val, const char *doing))
 =======
+=======
+>>>>>>> v3.18
 char *parse_args(const char *doing,
 		 char *args,
 		 const struct kernel_param *params,
@@ -218,6 +240,9 @@ char *parse_args(const char *doing,
 		 s16 min_level,
 		 s16 max_level,
 		 int (*unknown)(char *param, char *val, const char *doing))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	char *param, *val;
@@ -234,6 +259,12 @@ char *parse_args(const char *doing,
 
 		args = next_arg(args, &param, &val);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* Stop at -- */
+		if (!val && strcmp(param, "--") == 0)
+			return args;
+>>>>>>> v3.18
 =======
 		/* Stop at -- */
 		if (!val && strcmp(param, "--") == 0)
@@ -250,17 +281,23 @@ char *parse_args(const char *doing,
 		case -ENOENT:
 			pr_err("%s: Unknown parameter `%s'\n", doing, param);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return ret;
 		case -ENOSPC:
 			pr_err("%s: `%s' too large for parameter `%s'\n",
 			       doing, val ?: "", param);
 			return ret;
 =======
+=======
+>>>>>>> v3.18
 			return ERR_PTR(ret);
 		case -ENOSPC:
 			pr_err("%s: `%s' too large for parameter `%s'\n",
 			       doing, val ?: "", param);
 			return ERR_PTR(ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case 0:
 			break;
@@ -268,7 +305,11 @@ char *parse_args(const char *doing,
 			pr_err("%s: `%s' invalid for parameter `%s'\n",
 			       doing, val ?: "", param);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return ret;
+=======
+			return ERR_PTR(ret);
+>>>>>>> v3.18
 =======
 			return ERR_PTR(ret);
 >>>>>>> v3.18
@@ -276,6 +317,7 @@ char *parse_args(const char *doing,
 	}
 
 	/* All parsed OK. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 }
@@ -297,6 +339,8 @@ char *parse_args(const char *doing,
 	{								\
 		return sprintf(buffer, format, *((type *)kp->arg));	\
 =======
+=======
+>>>>>>> v3.18
 	return NULL;
 }
 
@@ -310,6 +354,9 @@ char *parse_args(const char *doing,
 	{								\
 		return scnprintf(buffer, PAGE_SIZE, format,		\
 				*((type *)kp->arg));			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}								\
 	struct kernel_param_ops param_ops_##name = {			\
@@ -322,6 +369,7 @@ char *parse_args(const char *doing,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 STANDARD_PARAM_DEF(byte, unsigned char, "%c", unsigned long, strict_strtoul);
 STANDARD_PARAM_DEF(short, short, "%hi", long, strict_strtol);
 STANDARD_PARAM_DEF(ushort, unsigned short, "%hu", unsigned long, strict_strtoul);
@@ -330,6 +378,8 @@ STANDARD_PARAM_DEF(uint, unsigned int, "%u", unsigned long, strict_strtoul);
 STANDARD_PARAM_DEF(long, long, "%li", long, strict_strtol);
 STANDARD_PARAM_DEF(ulong, unsigned long, "%lu", unsigned long, strict_strtoul);
 =======
+=======
+>>>>>>> v3.18
 STANDARD_PARAM_DEF(byte, unsigned char, "%hhu", kstrtou8);
 STANDARD_PARAM_DEF(short, short, "%hi", kstrtos16);
 STANDARD_PARAM_DEF(ushort, unsigned short, "%hu", kstrtou16);
@@ -338,6 +388,9 @@ STANDARD_PARAM_DEF(uint, unsigned int, "%u", kstrtouint);
 STANDARD_PARAM_DEF(long, long, "%li", kstrtol);
 STANDARD_PARAM_DEF(ulong, unsigned long, "%lu", kstrtoul);
 STANDARD_PARAM_DEF(ullong, unsigned long long, "%llu", kstrtoull);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int param_set_charp(const char *val, const struct kernel_param *kp)
@@ -366,7 +419,11 @@ EXPORT_SYMBOL(param_set_charp);
 int param_get_charp(char *buffer, const struct kernel_param *kp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sprintf(buffer, "%s", *((char **)kp->arg));
+=======
+	return scnprintf(buffer, PAGE_SIZE, "%s", *((char **)kp->arg));
+>>>>>>> v3.18
 =======
 	return scnprintf(buffer, PAGE_SIZE, "%s", *((char **)kp->arg));
 >>>>>>> v3.18
@@ -405,6 +462,10 @@ EXPORT_SYMBOL(param_get_bool);
 
 struct kernel_param_ops param_ops_bool = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags = KERNEL_PARAM_OPS_FL_NOARG,
+>>>>>>> v3.18
 =======
 	.flags = KERNEL_PARAM_OPS_FL_NOARG,
 >>>>>>> v3.18
@@ -459,6 +520,10 @@ EXPORT_SYMBOL(param_set_bint);
 
 struct kernel_param_ops param_ops_bint = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags = KERNEL_PARAM_OPS_FL_NOARG,
+>>>>>>> v3.18
 =======
 	.flags = KERNEL_PARAM_OPS_FL_NOARG,
 >>>>>>> v3.18
@@ -596,8 +661,11 @@ EXPORT_SYMBOL(param_ops_string);
 #define to_module_kobject(n) container_of(n, struct module_kobject, kobj)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct kernel_param __start___param[], __stop___param[];
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct param_attribute
@@ -648,6 +716,10 @@ static ssize_t param_attr_store(struct module_attribute *mattr,
 
 	mutex_lock(&param_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	param_check_unsafe(attribute->param);
+>>>>>>> v3.18
 =======
 	param_check_unsafe(attribute->param);
 >>>>>>> v3.18
@@ -863,7 +935,11 @@ static struct module_kobject * __init locate_module_kobject(const char *name)
 
 static void __init kernel_add_sysfs_param(const char *name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  struct kernel_param *kparam,
+=======
+					  const struct kernel_param *kparam,
+>>>>>>> v3.18
 =======
 					  const struct kernel_param *kparam,
 >>>>>>> v3.18
@@ -891,7 +967,11 @@ static void __init kernel_add_sysfs_param(const char *name,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * param_sysfs_builtin - add contents in /sys/parameters for built-in modules
+=======
+ * param_sysfs_builtin - add sysfs parameters for built-in modules
+>>>>>>> v3.18
 =======
  * param_sysfs_builtin - add sysfs parameters for built-in modules
 >>>>>>> v3.18
@@ -906,7 +986,11 @@ static void __init kernel_add_sysfs_param(const char *name,
 static void __init param_sysfs_builtin(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kernel_param *kp;
+=======
+	const struct kernel_param *kp;
+>>>>>>> v3.18
 =======
 	const struct kernel_param *kp;
 >>>>>>> v3.18
@@ -939,7 +1023,11 @@ ssize_t __modver_version_show(struct module_attribute *mattr,
 		container_of(mattr, struct module_version_attribute, mattr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sprintf(buf, "%s\n", vattr->version);
+=======
+	return scnprintf(buf, PAGE_SIZE, "%s\n", vattr->version);
+>>>>>>> v3.18
 =======
 	return scnprintf(buf, PAGE_SIZE, "%s\n", vattr->version);
 >>>>>>> v3.18
@@ -1028,8 +1116,11 @@ struct kset *module_kset;
 int module_sysfs_initialized;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct kobj_type module_ktype = {
 =======
+=======
+>>>>>>> v3.18
 static void module_kobj_release(struct kobject *kobj)
 {
 	struct module_kobject *mk = to_module_kobject(kobj);
@@ -1038,6 +1129,9 @@ static void module_kobj_release(struct kobject *kobj)
 
 struct kobj_type module_ktype = {
 	.release   =	module_kobj_release,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.sysfs_ops =	&module_sysfs_ops,
 };

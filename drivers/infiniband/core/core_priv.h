@@ -50,6 +50,11 @@ int  ib_cache_setup(void);
 void ib_cache_cleanup(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int ib_resolve_eth_l2_attrs(struct ib_qp *qp,
+			    struct ib_qp_attr *qp_attr, int *qp_attr_mask);
+>>>>>>> v3.18
 =======
 int ib_resolve_eth_l2_attrs(struct ib_qp *qp,
 			    struct ib_qp_attr *qp_attr, int *qp_attr_mask);

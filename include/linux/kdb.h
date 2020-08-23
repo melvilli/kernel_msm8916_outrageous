@@ -110,6 +110,10 @@ typedef enum {
 				 * regs probably valid */
 	KDB_REASON_SSTEP,	/* Single Step trap. - regs valid */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	KDB_REASON_SYSTEM_NMI,	/* In NMI due to SYSTEM cmd; regs valid */
+>>>>>>> v3.18
 =======
 	KDB_REASON_SYSTEM_NMI,	/* In NMI due to SYSTEM cmd; regs valid */
 >>>>>>> v3.18

@@ -1,5 +1,6 @@
 CC		= $(CROSS_COMPILE)gcc
 <<<<<<< HEAD
+<<<<<<< HEAD
 BUILD_OUTPUT	:= $(CURDIR)
 PREFIX		:= /usr
 DESTDIR		:=
@@ -9,10 +10,15 @@ ifeq ("$(origin O)", "command line")
 endif
 
 =======
+=======
+>>>>>>> v3.18
 BUILD_OUTPUT	:= $(PWD)
 PREFIX		:= /usr
 DESTDIR		:=
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 turbostat : turbostat.c
 CFLAGS +=	-Wall

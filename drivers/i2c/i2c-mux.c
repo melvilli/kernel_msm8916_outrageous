@@ -26,7 +26,10 @@
 #include <linux/i2c-mux.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -144,6 +147,11 @@ struct i2c_adapter *i2c_add_mux_adapter(struct i2c_adapter *parent,
 	priv->adap.algo_data = priv;
 	priv->adap.dev.parent = &parent->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->adap.retries = parent->retries;
+	priv->adap.timeout = parent->timeout;
+>>>>>>> v3.18
 =======
 	priv->adap.retries = parent->retries;
 	priv->adap.timeout = parent->timeout;
@@ -194,8 +202,11 @@ struct i2c_adapter *i2c_add_mux_adapter(struct i2c_adapter *parent,
 		 i2c_adapter_id(&priv->adap));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_i2c_register_devices(&priv->adap);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return &priv->adap;

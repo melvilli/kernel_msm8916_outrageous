@@ -60,7 +60,11 @@ struct intel_sdvo_caps {
 	unsigned int pad:1;
 	u16 output_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -99,7 +103,11 @@ struct intel_sdvo_dtd {
 		u8 reserved;
 	} part2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -108,7 +116,11 @@ struct intel_sdvo_pixel_clock_range {
 	u16 min;	/**< pixel clock, in 10kHz units */
 	u16 max;	/**< pixel clock, in 10kHz units */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -121,7 +133,11 @@ struct intel_sdvo_preferred_input_timing_args {
 	u8	scaled:1;
 	u8	pad:6;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -179,7 +195,11 @@ struct intel_sdvo_get_trained_inputs_response {
 	unsigned int input1_trained:1;
 	unsigned int pad:6;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -240,7 +260,11 @@ struct intel_sdvo_get_interrupt_event_source_response {
 	unsigned int hdmi_audio_encrypt_change:1;
 	unsigned int pad:6;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -257,7 +281,11 @@ struct intel_sdvo_set_target_input_args {
 	unsigned int target_1:1;
 	unsigned int pad:7;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -399,7 +427,11 @@ struct intel_sdvo_tv_format {
 	unsigned int hdtv_std_eia_7702a_480p_60:1;
 	unsigned int pad:3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -434,7 +466,11 @@ struct intel_sdvo_sdtv_resolution_request {
 	unsigned int secam_60:1;
 	unsigned int pad:5;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -463,7 +499,11 @@ struct intel_sdvo_sdtv_resolution_reply {
 	unsigned int res_1280x1024:1;
 	unsigned int pad:5;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -504,7 +544,11 @@ struct intel_sdvo_hdtv_resolution_request {
 	unsigned int hdtv_std_eia_7702a_480p_60:1;
 	unsigned int pad:6;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -562,7 +606,11 @@ struct intel_sdvo_hdtv_resolution_reply {
 	unsigned int res_1280x768:1;
 	unsigned int pad5:7;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -606,7 +654,11 @@ struct sdvo_panel_power_sequencing {
 	unsigned int t4_high:2;
 	unsigned int pad:6;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -616,7 +668,11 @@ struct sdvo_max_backlight_reply {
 	u8 max_value;
 	u8 default_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -630,7 +686,11 @@ struct sdvo_get_ambient_light_reply {
 	u16 trip_high;
 	u16 value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -641,7 +701,11 @@ struct sdvo_set_ambient_light_reply {
 	unsigned int enable:1;
 	unsigned int pad:7;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -673,7 +737,11 @@ struct intel_sdvo_enhancements_reply {
 	unsigned int tv_chroma_filter:1;
 	unsigned int tv_luma_filter:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -699,7 +767,11 @@ struct intel_sdvo_enhancement_limits_reply {
 	u16 max_value;
 	u16 default_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -744,7 +816,11 @@ struct intel_sdvo_enhancement_limits_reply {
 struct intel_sdvo_enhancements_arg {
 	u16 value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -804,7 +880,11 @@ struct intel_sdvo_encode {
 	u8 dvi_rev;
 	u8 hdmi_rev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18

@@ -19,18 +19,27 @@
 #include <linux/dma-mapping.h>
 #include <linux/spi/spi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/edma.h>
 #include <linux/platform_data/gpio-davinci.h>
 #include <linux/platform_data/keyscan-davinci.h>
 #include <linux/platform_data/spi-davinci.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/mach/map.h>
 
 #include <mach/cputype.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/edma.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <mach/psc.h>
@@ -40,9 +49,12 @@
 #include <mach/serial.h>
 #include <mach/common.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/keyscan-davinci.h>
 #include <linux/platform_data/spi-davinci.h>
 #include <mach/gpio-davinci.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -469,8 +481,13 @@ static struct clk_lookup dm365_clks[] = {
 	CLK("vpss", "slave", &vpss_slave_clk),
 	CLK(NULL, "arm", &arm_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLK(NULL, "uart0", &uart0_clk),
 	CLK(NULL, "uart1", &uart1_clk),
+=======
+	CLK("serial8250.0", NULL, &uart0_clk),
+	CLK("serial8250.1", NULL, &uart1_clk),
+>>>>>>> v3.18
 =======
 	CLK("serial8250.0", NULL, &uart0_clk),
 	CLK("serial8250.1", NULL, &uart1_clk),
@@ -492,16 +509,22 @@ static struct clk_lookup dm365_clks[] = {
 	CLK(NULL, "timer0", &timer0_clk),
 	CLK(NULL, "timer1", &timer1_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLK("watchdog", NULL, &timer2_clk),
 	CLK(NULL, "timer3", &timer3_clk),
 	CLK(NULL, "usb", &usb_clk),
 	CLK("davinci_emac.1", NULL, &emac_clk),
 =======
+=======
+>>>>>>> v3.18
 	CLK("davinci-wdt", NULL, &timer2_clk),
 	CLK(NULL, "timer3", &timer3_clk),
 	CLK(NULL, "usb", &usb_clk),
 	CLK("davinci_emac.1", NULL, &emac_clk),
 	CLK("davinci_mdio.0", "fck", &emac_clk),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CLK("davinci_voicecodec", NULL, &voicecodec_clk),
 	CLK("davinci-mcbsp", NULL, &asp0_clk),
@@ -724,7 +747,10 @@ void __init dm365_init_spi0(unsigned chipselect_mask,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct resource dm365_gpio_resources[] = {
 	{	/* registers */
 		.start	= DAVINCI_GPIO_BASE,
@@ -750,6 +776,9 @@ int __init dm365_gpio_register(void)
 				     &dm365_gpio_platform_data);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct emac_platform_data dm365_emac_pdata = {
 	.ctrl_reg_offset	= DM365_EMAC_CNTRL_OFFSET,
@@ -881,6 +910,7 @@ static u8 dm365_default_priorities[DAVINCI_N_AINTC_IRQ] = {
 
 /* Four Transfer Controllers on DM365 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const s8
 dm365_queue_tc_mapping[][2] = {
 	/* {event queue no, TC no} */
@@ -895,6 +925,9 @@ static const s8
 =======
 static s8
 >>>>>>> v3.18
+=======
+static s8
+>>>>>>> v3.18
 dm365_queue_priority_mapping[][2] = {
 	/* {event queue no, Priority} */
 	{0, 7},
@@ -906,12 +939,15 @@ dm365_queue_priority_mapping[][2] = {
 
 static struct edma_soc_info edma_cc0_info = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.n_channel		= 64,
 	.n_region		= 4,
 	.n_slot			= 256,
 	.n_tc			= 4,
 	.n_cc			= 1,
 	.queue_tc_mapping	= dm365_queue_tc_mapping,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.queue_priority_mapping	= dm365_queue_priority_mapping,
@@ -977,6 +1013,10 @@ static struct platform_device dm365_edma_device = {
 static struct resource dm365_asp_resources[] = {
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.name	= "mpu",
+>>>>>>> v3.18
 =======
 		.name	= "mpu",
 >>>>>>> v3.18
@@ -1107,7 +1147,11 @@ static struct davinci_timer_info dm365_timer_info = {
 #define DM365_UART1_BASE	(IO_PHYS + 0x106000)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct plat_serial8250_port dm365_serial_platform_data[] = {
+=======
+static struct plat_serial8250_port dm365_serial0_platform_data[] = {
+>>>>>>> v3.18
 =======
 static struct plat_serial8250_port dm365_serial0_platform_data[] = {
 >>>>>>> v3.18
@@ -1121,12 +1165,18 @@ static struct plat_serial8250_port dm365_serial0_platform_data[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.flags	= 0,
 	}
 };
 static struct plat_serial8250_port dm365_serial1_platform_data[] = {
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mapbase	= DM365_UART1_BASE,
 		.irq		= IRQ_UARTINT1,
@@ -1136,6 +1186,7 @@ static struct plat_serial8250_port dm365_serial1_platform_data[] = {
 		.regshift	= 2,
 	},
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.flags		= 0
 	},
@@ -1148,6 +1199,8 @@ static struct platform_device dm365_serial_device = {
 		.platform_data	= dm365_serial_platform_data,
 	},
 =======
+=======
+>>>>>>> v3.18
 		.flags	= 0,
 	}
 };
@@ -1169,6 +1222,9 @@ struct platform_device dm365_serial_device[] = {
 	},
 	{
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1190,12 +1246,15 @@ static struct davinci_soc_info davinci_soc_info_dm365 = {
 	.intc_irq_num		= DAVINCI_N_AINTC_IRQ,
 	.timer_info		= &dm365_timer_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.gpio_type		= GPIO_TYPE_DAVINCI,
 	.gpio_base		= DAVINCI_GPIO_BASE,
 	.gpio_num		= 104,
 	.gpio_irq		= IRQ_DM365_GPIO0,
 	.gpio_unbanked		= 8,	/* really 16 ... skip muxed GPIOs */
 	.serial_dev		= &dm365_serial_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.emac_pdata		= &dm365_emac_pdata,
@@ -1454,7 +1513,11 @@ static struct platform_device dm365_vpbe_display = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct venc_platform_data dm365_venc_pdata = {
+=======
+static struct venc_platform_data dm365_venc_pdata = {
+>>>>>>> v3.18
 =======
 static struct venc_platform_data dm365_venc_pdata = {
 >>>>>>> v3.18
@@ -1508,6 +1571,11 @@ int __init dm365_init_video(struct vpfe_config *vpfe_cfg,
 static int __init dm365_init_devices(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret = 0;
+
+>>>>>>> v3.18
 =======
 	int ret = 0;
 
@@ -1521,17 +1589,23 @@ static int __init dm365_init_devices(void)
 	platform_device_register(&dm365_mdio_device);
 	platform_device_register(&dm365_emac_device);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_add_alias(NULL, dev_name(&dm365_mdio_device.dev),
 		      NULL, &dm365_emac_device.dev);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 
 	ret = davinci_init_wdt();
 	if (ret)
 		pr_warn("%s: watchdog init failed: %d\n", __func__, ret);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 postcore_initcall(dm365_init_devices);

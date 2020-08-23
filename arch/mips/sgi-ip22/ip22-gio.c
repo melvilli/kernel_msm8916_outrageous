@@ -20,6 +20,12 @@ static struct {
 	{ .name = "SGI Impact", .id = 0x10 },
 	{ .name = "Phobos G160", .id = 0x35 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .name = "Phobos G130", .id = 0x36 },
+	{ .name = "Phobos G100", .id = 0x37 },
+	{ .name = "Set Engineering GFE", .id = 0x38 },
+>>>>>>> v3.18
 =======
 	{ .name = "Phobos G130", .id = 0x36 },
 	{ .name = "Phobos G100", .id = 0x37 },
@@ -31,9 +37,12 @@ static struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device gio_bus = {
 	.init_name = "gio",
 =======
+=======
+>>>>>>> v3.18
 static void gio_bus_release(struct device *dev)
 {
 	kfree(dev);
@@ -42,6 +51,9 @@ static void gio_bus_release(struct device *dev)
 static struct device gio_bus = {
 	.init_name = "gio",
 	.release = &gio_bus_release,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -311,8 +323,11 @@ static int ip22_gio_id(unsigned long addr, u32 *res)
 		 */
 		ptr8 = (void *)CKSEG1ADDR(addr + 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		get_dbe(tmp8, ptr8);
 =======
+=======
+>>>>>>> v3.18
 		if (get_dbe(tmp8, ptr8)) {
 			/*
 			 * 32bit access worked, but 8bit doesn't
@@ -323,6 +338,9 @@ static int ip22_gio_id(unsigned long addr, u32 *res)
 			*res = tmp32;
 			return 1;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ptr16 = (void *)CKSEG1ADDR(addr + 2);
 		get_dbe(tmp16, ptr16);
@@ -355,7 +373,11 @@ static int ip22_is_gr2(unsigned long addr)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ip22_check_gio(int slotno, unsigned long addr)
+=======
+static void ip22_check_gio(int slotno, unsigned long addr, int irq)
+>>>>>>> v3.18
 =======
 static void ip22_check_gio(int slotno, unsigned long addr, int irq)
 >>>>>>> v3.18
@@ -373,9 +395,15 @@ static void ip22_check_gio(int slotno, unsigned long addr, int irq)
 		if (!ip22_gio_id(addr, &tmp)) {
 			/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * no GIO signature at start address of slot, but
 			 * Newport doesn't have one, so let's check usea
 			 * status register
+=======
+			 * no GIO signature at start address of slot
+			 * since Newport doesn't have one, we check if
+			 * user status register is readable
+>>>>>>> v3.18
 =======
 			 * no GIO signature at start address of slot
 			 * since Newport doesn't have one, we check if
@@ -410,6 +438,10 @@ static void ip22_check_gio(int slotno, unsigned long addr, int irq)
 		gio_dev->resource.end = addr + 0x3fffff;
 		gio_dev->resource.flags = IORESOURCE_MEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		gio_dev->irq = irq;
+>>>>>>> v3.18
 =======
 		gio_dev->irq = irq;
 >>>>>>> v3.18
@@ -445,13 +477,19 @@ int __init ip22_gio_init(void)
 
 	ret = device_register(&gio_bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (ret) {
 		put_device(&gio_bus);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = bus_register(&gio_bus_type);
@@ -459,6 +497,7 @@ int __init ip22_gio_init(void)
 		request_resource(&iomem_resource, &gio_bus_resource);
 		printk(KERN_INFO "GIO: Probing bus...\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ip22_is_fullhouse() ||
 		    !get_dbe(pbdma, (unsigned int *)&hpc3c1->pbdma[1])) {
@@ -471,6 +510,8 @@ int __init ip22_gio_init(void)
 			ip22_check_gio(1, GIO_SLOT_EXP0_BASE);
 			ip22_check_gio(2, GIO_SLOT_EXP1_BASE);
 =======
+=======
+>>>>>>> v3.18
 		if (ip22_is_fullhouse()) {
 			/* Indigo2 */
 			ip22_check_gio(0, GIO_SLOT_GFX_BASE, SGI_GIO_1_IRQ);
@@ -482,6 +523,9 @@ int __init ip22_gio_init(void)
 					       SGI_GIO_0_IRQ);
 			ip22_check_gio(1, GIO_SLOT_EXP0_BASE, SGI_GIOEXP0_IRQ);
 			ip22_check_gio(2, GIO_SLOT_EXP1_BASE, SGI_GIOEXP1_IRQ);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else

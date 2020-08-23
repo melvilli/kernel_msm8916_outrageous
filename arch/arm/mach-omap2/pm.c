@@ -33,6 +33,10 @@
 #include "twl-common.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SUSPEND
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_SUSPEND
 >>>>>>> v3.18
@@ -41,7 +45,12 @@
  * suspend work
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int (*omap_pm_suspend)(void);
+=======
+static int (*omap_pm_suspend)(void);
+#endif
+>>>>>>> v3.18
 =======
 static int (*omap_pm_suspend)(void);
 #endif
@@ -141,7 +150,11 @@ static int __init omap2_set_init_voltage(char *vdd_name, char *clk_name,
 	struct voltagedomain *voltdm;
 	struct clk *clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct opp *opp;
+=======
+	struct dev_pm_opp *opp;
+>>>>>>> v3.18
 =======
 	struct dev_pm_opp *opp;
 >>>>>>> v3.18
@@ -257,7 +270,10 @@ static const struct platform_suspend_ops omap_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * omap_common_suspend_init - Set common suspend routines for OMAP SoCs
  * @pm_suspend: function pointer to SoC specific suspend function
@@ -267,6 +283,9 @@ void omap_common_suspend_init(void *pm_suspend)
 	omap_pm_suspend = pm_suspend;
 	suspend_set_ops(&omap_pm_ops);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_SUSPEND */
 
@@ -292,14 +311,20 @@ static void __init omap4_init_voltages(void)
 static inline void omap_init_cpufreq(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct platform_device_info devinfo = { .name = "omap-cpufreq", };
 =======
+=======
+>>>>>>> v3.18
 	struct platform_device_info devinfo = { };
 
 	if (!of_have_populated_dt())
 		devinfo.name = "omap-cpufreq";
 	else
 		devinfo.name = "cpufreq-dt";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register_full(&devinfo);
 }
@@ -316,6 +341,7 @@ omap_postcore_initcall(omap2_common_pm_init);
 
 int __init omap2_common_pm_late_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * In the case of DT, the PMIC and SR initialization will be done using
@@ -343,6 +369,8 @@ int __init omap2_common_pm_late_init(void)
 	suspend_set_ops(&omap_pm_ops);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	if (of_have_populated_dt()) {
 		omap3_twl_init();
 		omap4_twl_init();
@@ -361,6 +389,9 @@ int __init omap2_common_pm_late_init(void)
 
 	/* cpufreq dummy device instantiation */
 	omap_init_cpufreq();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

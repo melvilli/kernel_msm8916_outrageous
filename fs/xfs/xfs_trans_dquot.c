@@ -18,6 +18,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_log.h"
 #include "xfs_trans.h"
 #include "xfs_sb.h"
@@ -35,6 +36,8 @@
 #include "xfs_buf_item.h"
 #include "xfs_trans_priv.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_shared.h"
 #include "xfs_format.h"
 #include "xfs_log_format.h"
@@ -47,6 +50,9 @@
 #include "xfs_trans.h"
 #include "xfs_trans_priv.h"
 #include "xfs_quota.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_qm.h"
 
@@ -119,8 +125,11 @@ xfs_trans_dup_dqinfo(
 
 	xfs_trans_alloc_dqinfo(ntp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oqa = otp->t_dqinfo->dqa_usrdquots;
 	nqa = ntp->t_dqinfo->dqa_usrdquots;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -132,7 +141,13 @@ xfs_trans_dup_dqinfo(
 		ntp->t_flags |= XFS_TRANS_DQ_DIRTY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (j = 0; j < 2; j++) {
+=======
+	for (j = 0; j < XFS_QM_TRANS_DQTYPES; j++) {
+		oqa = otp->t_dqinfo->dqs[j];
+		nqa = ntp->t_dqinfo->dqs[j];
+>>>>>>> v3.18
 =======
 	for (j = 0; j < XFS_QM_TRANS_DQTYPES; j++) {
 		oqa = otp->t_dqinfo->dqs[j];
@@ -163,8 +178,11 @@ xfs_trans_dup_dqinfo(
 
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		oqa = otp->t_dqinfo->dqa_grpdquots;
 		nqa = ntp->t_dqinfo->dqa_grpdquots;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -185,8 +203,12 @@ xfs_trans_mod_dquot_byino(
 	if (!XFS_IS_QUOTA_RUNNING(mp) ||
 	    !XFS_IS_QUOTA_ON(mp) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    ip->i_ino == mp->m_sb.sb_uquotino ||
 	    ip->i_ino == mp->m_sb.sb_gquotino)
+=======
+	    xfs_is_quota_inode(&mp->m_sb, ip->i_ino))
+>>>>>>> v3.18
 =======
 	    xfs_is_quota_inode(&mp->m_sb, ip->i_ino))
 >>>>>>> v3.18
@@ -197,6 +219,7 @@ xfs_trans_mod_dquot_byino(
 
 	if (XFS_IS_UQUOTA_ON(mp) && ip->i_udquot)
 		(void) xfs_trans_mod_dquot(tp, ip->i_udquot, field, delta);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (XFS_IS_OQUOTA_ON(mp) && ip->i_gdquot)
 		(void) xfs_trans_mod_dquot(tp, ip->i_gdquot, field, delta);
@@ -213,6 +236,8 @@ xfs_trans_get_dqtrx(
 	qa = XFS_QM_ISUDQ(dqp) ?
 		tp->t_dqinfo->dqa_usrdquots : tp->t_dqinfo->dqa_grpdquots;
 =======
+=======
+>>>>>>> v3.18
 	if (XFS_IS_GQUOTA_ON(mp) && ip->i_gdquot)
 		(void) xfs_trans_mod_dquot(tp, ip->i_gdquot, field, delta);
 	if (XFS_IS_PQUOTA_ON(mp) && ip->i_pdquot)
@@ -235,6 +260,9 @@ xfs_trans_get_dqtrx(
 		qa = tp->t_dqinfo->dqs[XFS_QM_TRANS_PRJ];
 	else
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < XFS_QM_TRANS_MAXDQS; i++) {
@@ -349,16 +377,22 @@ xfs_trans_mod_dquot(
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Given an array of dqtrx structures, lock all the dquots associated
  * and join them to the transaction, provided they have been modified.
  * We know that the highest number of dquots (of one type - usr OR grp),
  * involved in a transaction is 2 and that both usr and grp combined - 3.
  * So, we don't attempt to make this very generic.
 =======
+=======
+>>>>>>> v3.18
  * Given an array of dqtrx structures, lock all the dquots associated and join
  * them to the transaction, provided they have been modified.  We know that the
  * highest number of dquots of one type - usr, grp and prj - involved in a
  * transaction is 3 so we don't need to make this very generic.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 STATIC void
@@ -403,6 +437,7 @@ xfs_trans_apply_dquot_deltas(
 
 	ASSERT(tp->t_dqinfo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qa = tp->t_dqinfo->dqa_usrdquots;
 	for (j = 0; j < 2; j++) {
 		if (qa[0].qt_dquot == NULL) {
@@ -410,10 +445,15 @@ xfs_trans_apply_dquot_deltas(
 			continue;
 		}
 =======
+=======
+>>>>>>> v3.18
 	for (j = 0; j < XFS_QM_TRANS_DQTYPES; j++) {
 		qa = tp->t_dqinfo->dqs[j];
 		if (qa[0].qt_dquot == NULL)
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -566,10 +606,13 @@ xfs_trans_apply_dquot_deltas(
 				be64_to_cpu(dqp->q_core.d_rtbcount));
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Do the group quotas next
 		 */
 		qa = tp->t_dqinfo->dqa_grpdquots;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -595,9 +638,15 @@ xfs_trans_unreserve_and_mod_dquots(
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qa = tp->t_dqinfo->dqa_usrdquots;
 
 	for (j = 0; j < 2; j++) {
+=======
+	for (j = 0; j < XFS_QM_TRANS_DQTYPES; j++) {
+		qa = tp->t_dqinfo->dqs[j];
+
+>>>>>>> v3.18
 =======
 	for (j = 0; j < XFS_QM_TRANS_DQTYPES; j++) {
 		qa = tp->t_dqinfo->dqs[j];
@@ -645,7 +694,10 @@ xfs_trans_unreserve_and_mod_dquots(
 
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qa = tp->t_dqinfo->dqa_grpdquots;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -723,8 +775,13 @@ xfs_trans_dqresv(
 	    dqp->q_core.d_id &&
 	    ((XFS_IS_UQUOTA_ENFORCED(dqp->q_mount) && XFS_QM_ISUDQ(dqp)) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     (XFS_IS_OQUOTA_ENFORCED(dqp->q_mount) &&
 	      (XFS_QM_ISPDQ(dqp) || XFS_QM_ISGDQ(dqp))))) {
+=======
+	     (XFS_IS_GQUOTA_ENFORCED(dqp->q_mount) && XFS_QM_ISGDQ(dqp)) ||
+	     (XFS_IS_PQUOTA_ENFORCED(dqp->q_mount) && XFS_QM_ISPDQ(dqp)))) {
+>>>>>>> v3.18
 =======
 	     (XFS_IS_GQUOTA_ENFORCED(dqp->q_mount) && XFS_QM_ISGDQ(dqp)) ||
 	     (XFS_IS_PQUOTA_ENFORCED(dqp->q_mount) && XFS_QM_ISPDQ(dqp)))) {
@@ -817,8 +874,13 @@ error_return:
 	xfs_dqunlock(dqp);
 	if (flags & XFS_QMOPT_ENOSPC)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ENOSPC;
 	return EDQUOT;
+=======
+		return -ENOSPC;
+	return -EDQUOT;
+>>>>>>> v3.18
 =======
 		return -ENOSPC;
 	return -EDQUOT;
@@ -829,8 +891,13 @@ error_return:
 /*
  * Given dquot(s), make disk block and/or inode reservations against them.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The fact that this does the reservation against both the usr and
  * grp/prj quotas is important, because this follows a both-or-nothing
+=======
+ * The fact that this does the reservation against user, group and
+ * project quotas is important, because this follows a all-or-nothing
+>>>>>>> v3.18
 =======
  * The fact that this does the reservation against user, group and
  * project quotas is important, because this follows a all-or-nothing
@@ -846,6 +913,7 @@ error_return:
 int
 xfs_trans_reserve_quota_bydquots(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_trans_t	*tp,
 	xfs_mount_t	*mp,
 	xfs_dquot_t	*udqp,
@@ -856,6 +924,8 @@ xfs_trans_reserve_quota_bydquots(
 {
 	int		resvd = 0, error;
 =======
+=======
+>>>>>>> v3.18
 	struct xfs_trans	*tp,
 	struct xfs_mount	*mp,
 	struct xfs_dquot	*udqp,
@@ -866,6 +936,9 @@ xfs_trans_reserve_quota_bydquots(
 	uint			flags)
 {
 	int		error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!XFS_IS_QUOTA_RUNNING(mp) || !XFS_IS_QUOTA_ON(mp))
@@ -882,13 +955,17 @@ xfs_trans_reserve_quota_bydquots(
 		if (error)
 			return error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		resvd = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
 
 	if (gdqp) {
 		error = xfs_trans_dqresv(tp, mp, gdqp, nblks, ninos, flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (error) {
 			/*
@@ -902,6 +979,8 @@ xfs_trans_reserve_quota_bydquots(
 			return error;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (error)
 			goto unwind_usr;
 	}
@@ -910,6 +989,9 @@ xfs_trans_reserve_quota_bydquots(
 		error = xfs_trans_dqresv(tp, mp, pdqp, nblks, ninos, flags);
 		if (error)
 			goto unwind_grp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -918,7 +1000,10 @@ xfs_trans_reserve_quota_bydquots(
 	 */
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 unwind_grp:
 	flags |= XFS_QMOPT_FORCE_RES;
@@ -929,6 +1014,9 @@ unwind_usr:
 	if (udqp)
 		xfs_trans_dqresv(tp, mp, udqp, -nblks, -ninos, flags);
 	return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -954,8 +1042,12 @@ xfs_trans_reserve_quota_nblks(
 		flags |= XFS_QMOPT_ENOSPC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ASSERT(ip->i_ino != mp->m_sb.sb_uquotino);
 	ASSERT(ip->i_ino != mp->m_sb.sb_gquotino);
+=======
+	ASSERT(!xfs_is_quota_inode(&mp->m_sb, ip->i_ino));
+>>>>>>> v3.18
 =======
 	ASSERT(!xfs_is_quota_inode(&mp->m_sb, ip->i_ino));
 >>>>>>> v3.18
@@ -972,6 +1064,10 @@ xfs_trans_reserve_quota_nblks(
 	return xfs_trans_reserve_quota_bydquots(tp, mp,
 						ip->i_udquot, ip->i_gdquot,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+						ip->i_pdquot,
+>>>>>>> v3.18
 =======
 						ip->i_pdquot,
 >>>>>>> v3.18

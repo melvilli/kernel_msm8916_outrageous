@@ -74,7 +74,11 @@ The main requirements are:
 Design
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The new API shares a number of concepts with with the PCM API for flow
+=======
+The new API shares a number of concepts with the PCM API for flow
+>>>>>>> v3.18
 =======
 The new API shares a number of concepts with the PCM API for flow
 >>>>>>> v3.18
@@ -135,7 +139,11 @@ The timestamp becomes a multiple field structure. It lists the number
 of bytes transferred, the number of samples processed and the number
 of samples rendered/grabbed. All these values can be used to determine
 <<<<<<< HEAD
+<<<<<<< HEAD
 the avarage bitrate, figure out if the ring buffer needs to be
+=======
+the average bitrate, figure out if the ring buffer needs to be
+>>>>>>> v3.18
 =======
 the average bitrate, figure out if the ring buffer needs to be
 >>>>>>> v3.18
@@ -185,11 +193,14 @@ EOF is reached and now DSP can start skipping padding delay. Also next write
 data would belong to next track
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - set_next_track_param
 This routine is called to send to DSP codec specific data of subsequent track
 in gapless before first write.
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 Sequence flow for gapless would be:
@@ -204,7 +215,10 @@ Sequence flow for gapless would be:
 - Set metadata of the next track
 - then call partial_drain to flush most of buffer in DSP
 <<<<<<< HEAD
+<<<<<<< HEAD
 - set codec specific data of subsequent track
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 - Fill data of the next track
@@ -238,6 +252,7 @@ Not supported:
 
 - Audio policy/resource management. This API does not provide any
 <<<<<<< HEAD
+<<<<<<< HEAD
   hooks to query the utilization of the audio DSP, nor any premption
   mechanisms.
 
@@ -245,12 +260,17 @@ Not supported:
   in nature and data written/read doesn't translate directly to
   rendered output in time, this does not deal with underrun/overun and
 =======
+=======
+>>>>>>> v3.18
   hooks to query the utilization of the audio DSP, nor any preemption
   mechanisms.
 
 - No notion of underrun/overrun. Since the bytes written are compressed
   in nature and data written/read doesn't translate directly to
   rendered output in time, this does not deal with underrun/overrun and
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   maybe dealt in user-library
 

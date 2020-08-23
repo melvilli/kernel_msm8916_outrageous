@@ -64,6 +64,7 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Returns a list which contains the migrate types on to which
  * an allocation falls back when the free list for the migrate
@@ -82,6 +83,11 @@ bool is_cma_pageblock(struct page *page);
 #  define is_migrate_cma(migratetype) unlikely((migratetype) == MIGRATE_CMA)
 #else
 >>>>>>> v3.18
+=======
+#ifdef CONFIG_CMA
+#  define is_migrate_cma(migratetype) unlikely((migratetype) == MIGRATE_CMA)
+#else
+>>>>>>> v3.18
 #  define is_migrate_cma(migratetype) false
 #endif
 
@@ -92,10 +98,13 @@ bool is_cma_pageblock(struct page *page);
 extern int page_group_by_mobility_disabled;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int get_pageblock_migratetype(struct page *page)
 {
 	return get_pageblock_flags_group(page, PB_migrate, PB_migrate_end);
 =======
+=======
+>>>>>>> v3.18
 #define NR_MIGRATETYPE_BITS (PB_migrate_end - PB_migrate + 1)
 #define MIGRATETYPE_MASK ((1UL << NR_MIGRATETYPE_BITS) - 1)
 
@@ -108,6 +117,9 @@ static inline int get_pfnblock_migratetype(struct page *page, unsigned long pfn)
 	BUILD_BUG_ON(PB_migrate_end - PB_migrate != 2);
 	return get_pfnblock_flags_mask(page, pfn, PB_migrate_end,
 					MIGRATETYPE_MASK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -137,6 +149,10 @@ enum zone_stat_item {
 	/* First 128 byte cacheline (assuming 64 bit words) */
 	NR_FREE_PAGES,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NR_ALLOC_BATCH,
+>>>>>>> v3.18
 =======
 	NR_ALLOC_BATCH,
 >>>>>>> v3.18
@@ -169,6 +185,10 @@ enum zone_stat_item {
 	NR_DIRTIED,		/* page dirtyings since bootup */
 	NR_WRITTEN,		/* page writings since bootup */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NR_PAGES_SCANNED,	/* pages scanned since last reclaim */
+>>>>>>> v3.18
 =======
 	NR_PAGES_SCANNED,	/* pages scanned since last reclaim */
 >>>>>>> v3.18
@@ -181,15 +201,21 @@ enum zone_stat_item {
 	NUMA_OTHER,		/* allocation from other node */
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NR_ANON_TRANSPARENT_HUGEPAGES,
 	NR_FREE_CMA_PAGES,
 	NR_SWAPCACHE,
 =======
+=======
+>>>>>>> v3.18
 	WORKINGSET_REFAULT,
 	WORKINGSET_ACTIVATE,
 	WORKINGSET_NODERECLAIM,
 	NR_ANON_TRANSPARENT_HUGEPAGES,
 	NR_FREE_CMA_PAGES,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NR_VM_ZONE_STAT_ITEMS };
 
@@ -360,7 +386,11 @@ enum zone_type {
 
 struct zone {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Fields commonly accessed by the page allocator */
+=======
+	/* Read-mostly fields */
+>>>>>>> v3.18
 =======
 	/* Read-mostly fields */
 >>>>>>> v3.18
@@ -369,6 +399,7 @@ struct zone {
 	unsigned long watermark[NR_WMARK];
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * When free pages are below this point, additional steps are taken
 	 * when reading the number of free pages to avoid per-cpu counter
@@ -379,6 +410,8 @@ struct zone {
 	/*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	 * We don't know if the memory that we're going to allocate will be freeable
 	 * or/and it will be released eventually, so to avoid totally wasting several
 	 * GB of ram we must reserve some of the lower zone memory (otherwise we risk
@@ -386,6 +419,7 @@ struct zone {
 	 * on the higher zones). This array is recalculated at runtime if the
 	 * sysctl_lowmem_reserve_ratio sysctl changes.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long		lowmem_reserve[MAX_NR_ZONES];
 
@@ -435,6 +469,8 @@ struct zone {
 #endif
 	struct free_area	free_area[MAX_ORDER];
 =======
+=======
+>>>>>>> v3.18
 	long lowmem_reserve[MAX_NR_ZONES];
 
 #ifdef CONFIG_NUMA
@@ -455,6 +491,9 @@ struct zone {
 	 * considered dirtyable memory.
 	 */
 	unsigned long		dirty_balance_reserve;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef CONFIG_SPARSEMEM
@@ -465,6 +504,7 @@ struct zone {
 	unsigned long		*pageblock_flags;
 #endif /* CONFIG_SPARSEMEM */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_COMPACTION
 	/*
@@ -532,6 +572,8 @@ struct zone {
 	 */
 	struct pglist_data	*zone_pgdat;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NUMA
 	/*
 	 * zone reclaim becomes active if more unmapped pages exist.
@@ -540,6 +582,9 @@ struct zone {
 	unsigned long		min_slab_pages;
 #endif /* CONFIG_NUMA */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* zone_start_pfn == zone_start_paddr >> PAGE_SHIFT */
 	unsigned long		zone_start_pfn;
@@ -577,9 +622,14 @@ struct zone {
 	 *
 	 * Write access to present_pages at runtime should be protected by
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * lock_memory_hotplug()/unlock_memory_hotplug().  Any reader who can't
 	 * tolerant drift of present_pages should hold memory hotplug lock to
 	 * get a stable value.
+=======
+	 * mem_hotplug_begin/end(). Any reader who can't tolerant drift of
+	 * present_pages should get_online_mems() to get a stable value.
+>>>>>>> v3.18
 =======
 	 * mem_hotplug_begin/end(). Any reader who can't tolerant drift of
 	 * present_pages should get_online_mems() to get a stable value.
@@ -591,6 +641,7 @@ struct zone {
 	 * adjust_managed_page_count() should be used instead of directly
 	 * touching zone->managed_pages and totalram_pages.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long		spanned_pages;
 	unsigned long		present_pages;
@@ -604,6 +655,8 @@ struct zone {
 
 typedef enum {
 =======
+=======
+>>>>>>> v3.18
 	unsigned long		managed_pages;
 	unsigned long		spanned_pages;
 	unsigned long		present_pages;
@@ -716,6 +769,9 @@ typedef enum {
 } ____cacheline_internodealigned_in_smp;
 
 enum zone_flags {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ZONE_RECLAIM_LOCKED,		/* prevents concurrent reclaim */
 	ZONE_OOM_LOCKED,		/* zone is in OOM killer zonelist */
@@ -723,7 +779,11 @@ enum zone_flags {
 					 * a congested BDI
 					 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ZONE_TAIL_LRU_DIRTY,		/* reclaim scanning has recently found
+=======
+	ZONE_DIRTY,			/* reclaim scanning has recently found
+>>>>>>> v3.18
 =======
 	ZONE_DIRTY,			/* reclaim scanning has recently found
 >>>>>>> v3.18
@@ -733,6 +793,7 @@ enum zone_flags {
 	ZONE_WRITEBACK,			/* reclaim scanning has recently found
 					 * many pages under writeback
 					 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 } zone_flags_t;
 
@@ -779,6 +840,10 @@ static inline int zone_is_oom_locked(const struct zone *zone)
 	ZONE_FAIR_DEPLETED,		/* fair zone policy batch depleted */
 };
 >>>>>>> v3.18
+=======
+	ZONE_FAIR_DEPLETED,		/* fair zone policy batch depleted */
+};
+>>>>>>> v3.18
 
 static inline unsigned long zone_end_pfn(const struct zone *zone)
 {
@@ -815,15 +880,21 @@ static inline bool zone_is_empty(struct zone *zone)
 /*
  * The NUMA zonelists are doubled because we need zonelists that restrict the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * allocations to a single node for GFP_THISNODE.
  *
  * [0]	: Zonelist with fallback
  * [1]	: No fallback (GFP_THISNODE)
 =======
+=======
+>>>>>>> v3.18
  * allocations to a single node for __GFP_THISNODE.
  *
  * [0]	: Zonelist with fallback
  * [1]	: No fallback (__GFP_THISNODE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MAX_ZONELISTS 2
@@ -977,12 +1048,18 @@ typedef struct pglist_data {
 	 * guarantee that any pfn_valid() stays that way.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Nests above zone->lock and zone->size_seqlock.
 =======
+=======
+>>>>>>> v3.18
 	 * pgdat_resize_lock() and pgdat_resize_unlock() are provided to
 	 * manipulate node_size_lock without checking for CONFIG_MEMORY_HOTPLUG.
 	 *
 	 * Nests above zone->lock and zone->span_seqlock
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	spinlock_t node_size_lock;
@@ -992,6 +1069,7 @@ typedef struct pglist_data {
 	unsigned long node_spanned_pages; /* total size of physical page
 					     range, including holes */
 	int node_id;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	nodemask_t reclaim_nodes;	/* Nodes allowed to reclaim from */
 	wait_queue_head_t kswapd_wait;
@@ -1005,6 +1083,8 @@ typedef struct pglist_data {
 	 * migration rate limiting data.
 	 */
 =======
+=======
+>>>>>>> v3.18
 	wait_queue_head_t kswapd_wait;
 	wait_queue_head_t pfmemalloc_wait;
 	struct task_struct *kswapd;	/* Protected by
@@ -1013,6 +1093,9 @@ typedef struct pglist_data {
 	enum zone_type classzone_idx;
 #ifdef CONFIG_NUMA_BALANCING
 	/* Lock serializing the migrate rate limiting window */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spinlock_t numabalancing_migrate_lock;
 
@@ -1052,15 +1135,21 @@ extern struct mutex zonelists_mutex;
 void build_all_zonelists(pg_data_t *pgdat, struct zone *zone);
 void wakeup_kswapd(struct zone *zone, int order, enum zone_type classzone_idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool zone_watermark_ok(struct zone *z, int order, unsigned long mark,
 		int classzone_idx, int alloc_flags);
 bool zone_watermark_ok_safe(struct zone *z, int order, unsigned long mark,
 		int classzone_idx, int alloc_flags);
 =======
+=======
+>>>>>>> v3.18
 bool zone_watermark_ok(struct zone *z, unsigned int order,
 		unsigned long mark, int classzone_idx, int alloc_flags);
 bool zone_watermark_ok_safe(struct zone *z, unsigned int order,
 		unsigned long mark, int classzone_idx, int alloc_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum memmap_context {
 	MEMMAP_EARLY,
@@ -1114,6 +1203,11 @@ static inline int zone_movable_is_highmem(void)
 #if defined(CONFIG_HIGHMEM) && defined(CONFIG_HAVE_MEMBLOCK_NODE_MAP)
 	return movable_zone == ZONE_HIGHMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#elif defined(CONFIG_HIGHMEM)
+	return (ZONE_MOVABLE - 1) == ZONE_HIGHMEM;
+>>>>>>> v3.18
 =======
 #elif defined(CONFIG_HIGHMEM)
 	return (ZONE_MOVABLE - 1) == ZONE_HIGHMEM;
@@ -1134,11 +1228,14 @@ static inline int is_highmem_idx(enum zone_type idx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int is_normal_idx(enum zone_type idx)
 {
 	return (idx == ZONE_NORMAL);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -1159,6 +1256,7 @@ static inline int is_highmem(struct zone *zone)
 #endif
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline int is_normal(struct zone *zone)
 {
@@ -1183,6 +1281,8 @@ static inline int is_dma(struct zone *zone)
 #endif
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* These two functions are used to setup the per zone pages min values */
@@ -1408,11 +1508,17 @@ struct mem_section {
 	unsigned long pad;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * WARNING: mem_section must be a power-of-2 in size for the
 	 * calculation and use of SECTION_ROOT_MASK to make sense.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1516,10 +1622,14 @@ static inline int pfn_present(unsigned long pfn)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef early_pfn_valid
 #define early_pfn_valid(pfn)	pfn_valid(pfn)
 #endif
 
+=======
+#define early_pfn_valid(pfn)	pfn_valid(pfn)
+>>>>>>> v3.18
 =======
 #define early_pfn_valid(pfn)	pfn_valid(pfn)
 >>>>>>> v3.18

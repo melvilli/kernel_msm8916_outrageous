@@ -19,7 +19,11 @@
 #include "util.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *get_ipc(ctl_table *table)
+=======
+static void *get_ipc(struct ctl_table *table)
+>>>>>>> v3.18
 =======
 static void *get_ipc(struct ctl_table *table)
 >>>>>>> v3.18
@@ -32,7 +36,11 @@ static void *get_ipc(struct ctl_table *table)
 
 #ifdef CONFIG_PROC_SYSCTL
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_ipc_dointvec(ctl_table *table, int write,
+=======
+static int proc_ipc_dointvec(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int proc_ipc_dointvec(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -47,7 +55,11 @@ static int proc_ipc_dointvec(struct ctl_table *table, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_ipc_dointvec_minmax(ctl_table *table, int write,
+=======
+static int proc_ipc_dointvec_minmax(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int proc_ipc_dointvec_minmax(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -62,7 +74,11 @@ static int proc_ipc_dointvec_minmax(struct ctl_table *table, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_ipc_dointvec_minmax_orphans(ctl_table *table, int write,
+=======
+static int proc_ipc_dointvec_minmax_orphans(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int proc_ipc_dointvec_minmax_orphans(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -79,7 +95,11 @@ static int proc_ipc_dointvec_minmax_orphans(struct ctl_table *table, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_ipc_callback_dointvec_minmax(ctl_table *table, int write,
+=======
+static int proc_ipc_callback_dointvec_minmax(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int proc_ipc_callback_dointvec_minmax(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -106,7 +126,11 @@ static int proc_ipc_callback_dointvec_minmax(struct ctl_table *table, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_ipc_doulongvec_minmax(ctl_table *table, int write,
+=======
+static int proc_ipc_doulongvec_minmax(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int proc_ipc_doulongvec_minmax(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -144,7 +168,11 @@ static void ipc_auto_callback(int val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_ipcauto_dointvec_minmax(ctl_table *table, int write,
+=======
+static int proc_ipcauto_dointvec_minmax(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int proc_ipcauto_dointvec_minmax(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -192,7 +220,11 @@ static struct ctl_table ipc_kern_table[] = {
 		.procname	= "shmmax",
 		.data		= &init_ipc_ns.shm_ctlmax,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= sizeof (init_ipc_ns.shm_ctlmax),
+=======
+		.maxlen		= sizeof(init_ipc_ns.shm_ctlmax),
+>>>>>>> v3.18
 =======
 		.maxlen		= sizeof(init_ipc_ns.shm_ctlmax),
 >>>>>>> v3.18
@@ -203,7 +235,11 @@ static struct ctl_table ipc_kern_table[] = {
 		.procname	= "shmall",
 		.data		= &init_ipc_ns.shm_ctlall,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= sizeof (init_ipc_ns.shm_ctlall),
+=======
+		.maxlen		= sizeof(init_ipc_ns.shm_ctlall),
+>>>>>>> v3.18
 =======
 		.maxlen		= sizeof(init_ipc_ns.shm_ctlall),
 >>>>>>> v3.18
@@ -214,7 +250,11 @@ static struct ctl_table ipc_kern_table[] = {
 		.procname	= "shmmni",
 		.data		= &init_ipc_ns.shm_ctlmni,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= sizeof (init_ipc_ns.shm_ctlmni),
+=======
+		.maxlen		= sizeof(init_ipc_ns.shm_ctlmni),
+>>>>>>> v3.18
 =======
 		.maxlen		= sizeof(init_ipc_ns.shm_ctlmni),
 >>>>>>> v3.18
@@ -234,7 +274,11 @@ static struct ctl_table ipc_kern_table[] = {
 		.procname	= "msgmax",
 		.data		= &init_ipc_ns.msg_ctlmax,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= sizeof (init_ipc_ns.msg_ctlmax),
+=======
+		.maxlen		= sizeof(init_ipc_ns.msg_ctlmax),
+>>>>>>> v3.18
 =======
 		.maxlen		= sizeof(init_ipc_ns.msg_ctlmax),
 >>>>>>> v3.18
@@ -247,7 +291,11 @@ static struct ctl_table ipc_kern_table[] = {
 		.procname	= "msgmni",
 		.data		= &init_ipc_ns.msg_ctlmni,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= sizeof (init_ipc_ns.msg_ctlmni),
+=======
+		.maxlen		= sizeof(init_ipc_ns.msg_ctlmni),
+>>>>>>> v3.18
 =======
 		.maxlen		= sizeof(init_ipc_ns.msg_ctlmni),
 >>>>>>> v3.18
@@ -260,7 +308,11 @@ static struct ctl_table ipc_kern_table[] = {
 		.procname	=  "msgmnb",
 		.data		= &init_ipc_ns.msg_ctlmnb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= sizeof (init_ipc_ns.msg_ctlmnb),
+=======
+		.maxlen		= sizeof(init_ipc_ns.msg_ctlmnb),
+>>>>>>> v3.18
 =======
 		.maxlen		= sizeof(init_ipc_ns.msg_ctlmnb),
 >>>>>>> v3.18
@@ -273,7 +325,11 @@ static struct ctl_table ipc_kern_table[] = {
 		.procname	= "sem",
 		.data		= &init_ipc_ns.sem_ctls,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= 4*sizeof (int),
+=======
+		.maxlen		= 4*sizeof(int),
+>>>>>>> v3.18
 =======
 		.maxlen		= 4*sizeof(int),
 >>>>>>> v3.18
@@ -337,7 +393,11 @@ static int __init ipc_sysctl_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __initcall(ipc_sysctl_init);
+=======
+device_initcall(ipc_sysctl_init);
+>>>>>>> v3.18
 =======
 device_initcall(ipc_sysctl_init);
 >>>>>>> v3.18

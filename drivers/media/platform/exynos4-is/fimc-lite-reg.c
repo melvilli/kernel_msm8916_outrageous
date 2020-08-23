@@ -3,7 +3,11 @@
  *
  * Copyright (C) 2012 Samsung Electronics Co., Ltd.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Sylwester Nawrocki <s.nawrocki@samsung.com>
+=======
+ * Author: Sylwester Nawrocki <s.nawrocki@samsung.com>
+>>>>>>> v3.18
 =======
  * Author: Sylwester Nawrocki <s.nawrocki@samsung.com>
 >>>>>>> v3.18
@@ -14,14 +18,20 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/delay.h>
 #include <media/s5p_fimc.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bitops.h>
 #include <linux/delay.h>
 #include <linux/io.h>
 #include <media/exynos-fimc.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "fimc-lite-reg.h"
@@ -80,7 +90,12 @@ void flite_hw_set_interrupt_mask(struct fimc_lite *dev)
 		intsrc = FLITE_REG_CIGCTRL_IRQ_OVFEN |
 			 FLITE_REG_CIGCTRL_IRQ_LASTEN |
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 FLITE_REG_CIGCTRL_IRQ_STARTEN;
+=======
+			 FLITE_REG_CIGCTRL_IRQ_STARTEN |
+			 FLITE_REG_CIGCTRL_IRQ_ENDEN;
+>>>>>>> v3.18
 =======
 			 FLITE_REG_CIGCTRL_IRQ_STARTEN |
 			 FLITE_REG_CIGCTRL_IRQ_ENDEN;
@@ -148,7 +163,11 @@ void flite_hw_set_source_format(struct fimc_lite *dev, struct flite_frame *f)
 	u32 cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (--i >= 0) {
+=======
+	while (--i) {
+>>>>>>> v3.18
 =======
 	while (--i) {
 >>>>>>> v3.18
@@ -158,7 +177,11 @@ void flite_hw_set_source_format(struct fimc_lite *dev, struct flite_frame *f)
 
 	if (i == 0 && src_pixfmt_map[i][0] != pixelcode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		v4l2_err(&dev->vfd,
+=======
+		v4l2_err(&dev->ve.vdev,
+>>>>>>> v3.18
 =======
 		v4l2_err(&dev->ve.vdev,
 >>>>>>> v3.18
@@ -240,7 +263,10 @@ void flite_hw_set_camera_bus(struct fimc_lite *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void flite_hw_set_pack12(struct fimc_lite *dev, int on)
 {
 	u32 cfg = readl(dev->regs + FLITE_REG_CIODMAFMT);
@@ -253,6 +279,9 @@ static void flite_hw_set_pack12(struct fimc_lite *dev, int on)
 	writel(cfg, dev->regs + FLITE_REG_CIODMAFMT);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void flite_hw_set_out_order(struct fimc_lite *dev, struct flite_frame *f)
 {
@@ -266,7 +295,11 @@ static void flite_hw_set_out_order(struct fimc_lite *dev, struct flite_frame *f)
 	int i = ARRAY_SIZE(pixcode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (--i >= 0)
+=======
+	while (--i)
+>>>>>>> v3.18
 =======
 	while (--i)
 >>>>>>> v3.18
@@ -294,7 +327,10 @@ void flite_hw_set_dma_window(struct fimc_lite *dev, struct flite_frame *f)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void flite_hw_set_dma_buffer(struct fimc_lite *dev, struct flite_buffer *buf)
 {
 	unsigned int index;
@@ -327,6 +363,9 @@ void flite_hw_mask_dma_buffer(struct fimc_lite *dev, u32 index)
 	writel(cfg, dev->regs + FLITE_REG_CIFCNTSEQ);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Enable/disable output DMA, set output pixel size and offsets (composition) */
 void flite_hw_set_output_dma(struct fimc_lite *dev, struct flite_frame *f,
@@ -346,6 +385,10 @@ void flite_hw_set_output_dma(struct fimc_lite *dev, struct flite_frame *f,
 	flite_hw_set_out_order(dev, f);
 	flite_hw_set_dma_window(dev, f);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	flite_hw_set_pack12(dev, 0);
+>>>>>>> v3.18
 =======
 	flite_hw_set_pack12(dev, 0);
 >>>>>>> v3.18

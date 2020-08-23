@@ -399,7 +399,12 @@ static int o2cb_cluster_disconnect(struct ocfs2_cluster_connection *conn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int o2cb_cluster_this_node(unsigned int *node)
+=======
+static int o2cb_cluster_this_node(struct ocfs2_cluster_connection *conn,
+				  unsigned int *node)
+>>>>>>> v3.18
 =======
 static int o2cb_cluster_this_node(struct ocfs2_cluster_connection *conn,
 				  unsigned int *node)

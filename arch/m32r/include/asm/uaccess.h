@@ -216,8 +216,13 @@ extern int fixup_exception(struct pt_regs *regs);
 ({									\
 	long __gu_err = 0;						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long __gu_val = 0;					\
 	might_sleep();							\
+=======
+	unsigned long __gu_val;						\
+	might_fault();							\
+>>>>>>> v3.18
 =======
 	unsigned long __gu_val;						\
 	might_fault();							\
@@ -233,7 +238,11 @@ extern int fixup_exception(struct pt_regs *regs);
 	unsigned long __gu_val = 0;					\
 	const __typeof__(*(ptr)) __user *__gu_addr = (ptr);		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();							\
+=======
+	might_fault();							\
+>>>>>>> v3.18
 =======
 	might_fault();							\
 >>>>>>> v3.18
@@ -305,7 +314,11 @@ do {									\
 ({									\
 	long __pu_err;							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();							\
+=======
+	might_fault();							\
+>>>>>>> v3.18
 =======
 	might_fault();							\
 >>>>>>> v3.18
@@ -319,7 +332,11 @@ do {									\
 	long __pu_err = -EFAULT;					\
 	__typeof__(*(ptr)) __user *__pu_addr = (ptr);			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();							\
+=======
+	might_fault();							\
+>>>>>>> v3.18
 =======
 	might_fault();							\
 >>>>>>> v3.18
@@ -615,7 +632,11 @@ unsigned long __generic_copy_from_user(void *, const void __user *, unsigned lon
 #define copy_to_user(to,from,n)				\
 ({							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();					\
+=======
+	might_fault();					\
+>>>>>>> v3.18
 =======
 	might_fault();					\
 >>>>>>> v3.18
@@ -660,7 +681,11 @@ unsigned long __generic_copy_from_user(void *, const void __user *, unsigned lon
 #define copy_from_user(to,from,n)			\
 ({							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();					\
+=======
+	might_fault();					\
+>>>>>>> v3.18
 =======
 	might_fault();					\
 >>>>>>> v3.18

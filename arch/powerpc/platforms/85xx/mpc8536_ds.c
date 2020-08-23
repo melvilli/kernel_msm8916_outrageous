@@ -77,6 +77,10 @@ define_machine(mpc8536_ds) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18

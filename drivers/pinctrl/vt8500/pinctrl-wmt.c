@@ -132,9 +132,15 @@ static int wmt_set_pinmux(struct wmt_pinctrl_data *data, unsigned func,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wmt_pmx_enable(struct pinctrl_dev *pctldev,
 			  unsigned func_selector,
 			  unsigned group_selector)
+=======
+static int wmt_pmx_set_mux(struct pinctrl_dev *pctldev,
+			   unsigned func_selector,
+			   unsigned group_selector)
+>>>>>>> v3.18
 =======
 static int wmt_pmx_set_mux(struct pinctrl_dev *pctldev,
 			   unsigned func_selector,
@@ -148,6 +154,7 @@ static int wmt_pmx_set_mux(struct pinctrl_dev *pctldev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void wmt_pmx_disable(struct pinctrl_dev *pctldev,
 			    unsigned func_selector,
 			    unsigned group_selector)
@@ -159,6 +166,8 @@ static void wmt_pmx_disable(struct pinctrl_dev *pctldev,
 	wmt_set_pinmux(data, WMT_FSEL_GPIO_IN, pinnum);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void wmt_pmx_gpio_disable_free(struct pinctrl_dev *pctldev,
@@ -189,8 +198,12 @@ static struct pinmux_ops wmt_pinmux_ops = {
 	.get_function_name = wmt_pmx_get_function_name,
 	.get_function_groups = wmt_pmx_get_function_groups,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable = wmt_pmx_enable,
 	.disable = wmt_pmx_disable,
+=======
+	.set_mux = wmt_pmx_set_mux,
+>>>>>>> v3.18
 =======
 	.set_mux = wmt_pmx_set_mux,
 >>>>>>> v3.18
@@ -451,23 +464,33 @@ static int wmt_pinconf_get(struct pinctrl_dev *pctldev, unsigned pin,
 
 static int wmt_pinconf_set(struct pinctrl_dev *pctldev, unsigned pin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   unsigned long config)
 {
 	struct wmt_pinctrl_data *data = pinctrl_dev_get_drvdata(pctldev);
 	enum pin_config_param param = pinconf_to_config_param(config);
 	u16 arg = pinconf_to_config_argument(config);
 =======
+=======
+>>>>>>> v3.18
 			   unsigned long *configs, unsigned num_configs)
 {
 	struct wmt_pinctrl_data *data = pinctrl_dev_get_drvdata(pctldev);
 	enum pin_config_param param;
 	u16 arg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 bank = WMT_BANK_FROM_PIN(pin);
 	u32 bit = WMT_BIT_FROM_PIN(pin);
 	u32 reg_pull_en = data->banks[bank].reg_pull_en;
 	u32 reg_pull_cfg = data->banks[bank].reg_pull_cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -478,6 +501,7 @@ static int wmt_pinconf_set(struct pinctrl_dev *pctldev, unsigned pin,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((param == PIN_CONFIG_BIAS_PULL_DOWN) ||
 	    (param == PIN_CONFIG_BIAS_PULL_UP)) {
@@ -502,6 +526,8 @@ static int wmt_pinconf_set(struct pinctrl_dev *pctldev, unsigned pin,
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < num_configs; i++) {
 		param = pinconf_to_config_param(configs[i]);
 		arg = pinconf_to_config_argument(configs[i]);
@@ -529,6 +555,9 @@ static int wmt_pinconf_set(struct pinctrl_dev *pctldev, unsigned pin,
 			return -EINVAL;
 		}
 	} /* for each config */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -573,6 +602,7 @@ static int wmt_gpio_get_direction(struct gpio_chip *chip, unsigned offset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wmt_gpio_direction_input(struct gpio_chip *chip, unsigned offset)
 {
 	return pinctrl_gpio_direction_input(chip->base + offset);
@@ -584,6 +614,8 @@ static int wmt_gpio_direction_output(struct gpio_chip *chip, unsigned offset,
 	return pinctrl_gpio_direction_output(chip->base + offset);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int wmt_gpio_get_value(struct gpio_chip *chip, unsigned offset)
@@ -621,7 +653,10 @@ static void wmt_gpio_set_value(struct gpio_chip *chip, unsigned offset,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int wmt_gpio_direction_input(struct gpio_chip *chip, unsigned offset)
 {
 	return pinctrl_gpio_direction_input(chip->base + offset);
@@ -634,6 +669,9 @@ static int wmt_gpio_direction_output(struct gpio_chip *chip, unsigned offset,
 	return pinctrl_gpio_direction_output(chip->base + offset);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct gpio_chip wmt_gpio_chip = {
 	.label = "gpio-wmt",
@@ -646,7 +684,11 @@ static struct gpio_chip wmt_gpio_chip = {
 	.get = wmt_gpio_get_value,
 	.set = wmt_gpio_set_value,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.can_sleep = 0,
+=======
+	.can_sleep = false,
+>>>>>>> v3.18
 =======
 	.can_sleep = false,
 >>>>>>> v3.18
@@ -660,11 +702,17 @@ int wmt_pinctrl_probe(struct platform_device *pdev,
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->base = devm_request_and_ioremap(&pdev->dev, res);
 	if (!data->base) {
 		dev_err(&pdev->dev, "failed to map memory resource\n");
 		return -EBUSY;
 	}
+=======
+	data->base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(data->base))
+		return PTR_ERR(data->base);
+>>>>>>> v3.18
 =======
 	data->base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(data->base))
@@ -706,8 +754,12 @@ int wmt_pinctrl_probe(struct platform_device *pdev,
 
 fail_range:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpiochip_remove(&data->gpio_chip))
 		dev_err(&pdev->dev, "failed to remove gpio chip\n");
+=======
+	gpiochip_remove(&data->gpio_chip);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&data->gpio_chip);
 >>>>>>> v3.18
@@ -720,12 +772,17 @@ int wmt_pinctrl_remove(struct platform_device *pdev)
 {
 	struct wmt_pinctrl_data *data = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	err = gpiochip_remove(&data->gpio_chip);
 	if (err)
 		dev_err(&pdev->dev, "failed to remove gpio chip\n");
 
+=======
+
+	gpiochip_remove(&data->gpio_chip);
+>>>>>>> v3.18
 =======
 
 	gpiochip_remove(&data->gpio_chip);

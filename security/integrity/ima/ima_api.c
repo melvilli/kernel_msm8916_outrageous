@@ -19,10 +19,13 @@
 #include <linux/xattr.h>
 #include <linux/evm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ima.h"
 
 static const char *IMA_TEMPLATE_NAME = "ima";
 =======
+=======
+>>>>>>> v3.18
 #include <crypto/hash_info.h>
 #include "ima.h"
 
@@ -76,6 +79,9 @@ out:
 	*entry = NULL;
 	return result;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -95,6 +101,7 @@ out:
  * Returns 0 on success, error code otherwise
  */
 int ima_store_template(struct ima_template_entry *entry,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		       int violation, struct inode *inode)
 {
@@ -119,6 +126,8 @@ int ima_store_template(struct ima_template_entry *entry,
 	}
 	result = ima_add_template_entry(entry, violation, op, inode);
 =======
+=======
+>>>>>>> v3.18
 		       int violation, struct inode *inode,
 		       const unsigned char *filename)
 {
@@ -148,6 +157,9 @@ int ima_store_template(struct ima_template_entry *entry,
 		memcpy(entry->digest, hash.hdr.digest, hash.hdr.length);
 	}
 	result = ima_add_template_entry(entry, violation, op, inode, filename);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return result;
 }
@@ -160,16 +172,22 @@ int ima_store_template(struct ima_template_entry *entry,
  * value is invalidated.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ima_add_violation(struct inode *inode, const unsigned char *filename,
 		       const char *op, const char *cause)
 {
 	struct ima_template_entry *entry;
 =======
+=======
+>>>>>>> v3.18
 void ima_add_violation(struct file *file, const unsigned char *filename,
 		       const char *op, const char *cause)
 {
 	struct ima_template_entry *entry;
 	struct inode *inode = file_inode(file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int violation = 1;
 	int result;
@@ -177,6 +195,7 @@ void ima_add_violation(struct file *file, const unsigned char *filename,
 	/* can overflow, only indicator */
 	atomic_long_inc(&ima_htable.violations);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	entry = kmalloc(sizeof(*entry), GFP_KERNEL);
 	if (!entry) {
@@ -189,6 +208,8 @@ void ima_add_violation(struct file *file, const unsigned char *filename,
 	if (result < 0)
 		kfree(entry);
 =======
+=======
+>>>>>>> v3.18
 	result = ima_alloc_init_template(NULL, file, filename,
 					 NULL, 0, &entry);
 	if (result < 0) {
@@ -198,6 +219,9 @@ void ima_add_violation(struct file *file, const unsigned char *filename,
 	result = ima_store_template(entry, violation, inode, filename);
 	if (result < 0)
 		ima_free_template_entry(entry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_out:
 	integrity_audit_msg(AUDIT_INTEGRITY_PCR, inode, filename,
@@ -212,15 +236,21 @@ err_out:
  *
  * The policy is defined in terms of keypairs:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 		subj=, obj=, type=, func=, mask=, fsmagic=
  *	subj,obj, and type: are LSM specific.
  * 	func: FILE_CHECK | BPRM_CHECK | MMAP_CHECK | MODULE_CHECK
  * 	mask: contains the permission mask
 =======
+=======
+>>>>>>> v3.18
  *		subj=, obj=, type=, func=, mask=, fsmagic=
  *	subj,obj, and type: are LSM specific.
  *	func: FILE_CHECK | BPRM_CHECK | MMAP_CHECK | MODULE_CHECK
  *	mask: contains the permission mask
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	fsmagic: hex value
  *
@@ -238,11 +268,14 @@ int ima_get_action(struct inode *inode, int mask, int function)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ima_must_measure(struct inode *inode, int mask, int function)
 {
 	return ima_match_policy(inode, function, mask, IMA_MEASURE);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -257,12 +290,15 @@ int ima_must_measure(struct inode *inode, int mask, int function)
  */
 int ima_collect_measurement(struct integrity_iint_cache *iint,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    struct file *file)
 {
 	struct inode *inode = file_inode(file);
 	const char *filename = file->f_dentry->d_name.name;
 	int result = 0;
 =======
+=======
+>>>>>>> v3.18
 			    struct file *file,
 			    struct evm_ima_xattr_data **xattr_value,
 			    int *xattr_len)
@@ -278,11 +314,15 @@ int ima_collect_measurement(struct integrity_iint_cache *iint,
 
 	if (xattr_value)
 		*xattr_len = ima_read_xattr(file->f_dentry, xattr_value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!(iint->flags & IMA_COLLECTED)) {
 		u64 i_version = file_inode(file)->i_version;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		iint->ima_xattr.type = IMA_XATTR_DIGEST;
 		result = ima_calc_file_hash(file, iint->ima_xattr.digest);
@@ -295,6 +335,8 @@ int ima_collect_measurement(struct integrity_iint_cache *iint,
 		integrity_audit_msg(AUDIT_INTEGRITY_DATA, inode,
 				    filename, "collect_data", "failed",
 =======
+=======
+>>>>>>> v3.18
 		if (file->f_flags & O_DIRECT) {
 			audit_cause = "failed(directio)";
 			result = -EACCES;
@@ -325,6 +367,9 @@ out:
 	if (result)
 		integrity_audit_msg(AUDIT_INTEGRITY_DATA, inode,
 				    filename, "collect_data", audit_cause,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				    result, 0);
 	return result;
@@ -339,7 +384,11 @@ out:
  * We only get here if the inode has not already been measured,
  * but the measurement could already exist:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	- multiple copies of the same file on either the same or
+=======
+ *	- multiple copies of the same file on either the same or
+>>>>>>> v3.18
 =======
  *	- multiple copies of the same file on either the same or
 >>>>>>> v3.18
@@ -351,17 +400,23 @@ out:
  */
 void ima_store_measurement(struct integrity_iint_cache *iint,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   struct file *file, const unsigned char *filename)
 {
 	const char *op = "add_template_measure";
 	const char *audit_cause = "ENOMEM";
 =======
+=======
+>>>>>>> v3.18
 			   struct file *file, const unsigned char *filename,
 			   struct evm_ima_xattr_data *xattr_value,
 			   int xattr_len)
 {
 	static const char op[] = "add_template_measure";
 	static const char audit_cause[] = "ENOMEM";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int result = -ENOMEM;
 	struct inode *inode = file_inode(file);
@@ -372,8 +427,14 @@ void ima_store_measurement(struct integrity_iint_cache *iint,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	entry = kmalloc(sizeof(*entry), GFP_KERNEL);
 	if (!entry) {
+=======
+	result = ima_alloc_init_template(iint, file, filename,
+					 xattr_value, xattr_len, &entry);
+	if (result < 0) {
+>>>>>>> v3.18
 =======
 	result = ima_alloc_init_template(iint, file, filename,
 					 xattr_value, xattr_len, &entry);
@@ -383,6 +444,7 @@ void ima_store_measurement(struct integrity_iint_cache *iint,
 				    op, audit_cause, result, 0);
 		return;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memset(&entry->template, 0, sizeof(entry->template));
 	memcpy(entry->template.digest, iint->ima_xattr.digest, IMA_DIGEST_SIZE);
@@ -396,12 +458,17 @@ void ima_store_measurement(struct integrity_iint_cache *iint,
 	if (result < 0)
 		kfree(entry);
 =======
+=======
+>>>>>>> v3.18
 
 	result = ima_store_template(entry, violation, inode, filename);
 	if (!result || result == -EEXIST)
 		iint->flags |= IMA_MEASURED;
 	if (result < 0)
 		ima_free_template_entry(entry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -410,7 +477,13 @@ void ima_audit_measurement(struct integrity_iint_cache *iint,
 {
 	struct audit_buffer *ab;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char hash[(IMA_DIGEST_SIZE * 2) + 1];
+=======
+	char hash[(iint->ima_hash->length * 2) + 1];
+	const char *algo_name = hash_algo_name[iint->ima_hash->algo];
+	char algo_hash[sizeof(hash) + strlen(algo_name) + 2];
+>>>>>>> v3.18
 =======
 	char hash[(iint->ima_hash->length * 2) + 1];
 	const char *algo_name = hash_algo_name[iint->ima_hash->algo];
@@ -422,8 +495,13 @@ void ima_audit_measurement(struct integrity_iint_cache *iint,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < IMA_DIGEST_SIZE; i++)
 		hex_byte_pack(hash + (i * 2), iint->ima_xattr.digest[i]);
+=======
+	for (i = 0; i < iint->ima_hash->length; i++)
+		hex_byte_pack(hash + (i * 2), iint->ima_hash->digest[i]);
+>>>>>>> v3.18
 =======
 	for (i = 0; i < iint->ima_hash->length; i++)
 		hex_byte_pack(hash + (i * 2), iint->ima_hash->digest[i]);
@@ -439,7 +517,12 @@ void ima_audit_measurement(struct integrity_iint_cache *iint,
 	audit_log_untrustedstring(ab, filename);
 	audit_log_format(ab, " hash=");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_log_untrustedstring(ab, hash);
+=======
+	snprintf(algo_hash, sizeof(algo_hash), "%s:%s", algo_name, hash);
+	audit_log_untrustedstring(ab, algo_hash);
+>>>>>>> v3.18
 =======
 	snprintf(algo_hash, sizeof(algo_hash), "%s:%s", algo_name, hash);
 	audit_log_untrustedstring(ab, algo_hash);
@@ -456,10 +539,16 @@ const char *ima_d_path(struct path *path, char **pathbuf)
 	char *pathname = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We will allow 11 spaces for ' (deleted)' to be appended */
 	*pathbuf = kmalloc(PATH_MAX + 11, GFP_KERNEL);
 	if (*pathbuf) {
 		pathname = d_path(path, *pathbuf, PATH_MAX + 11);
+=======
+	*pathbuf = kmalloc(PATH_MAX, GFP_KERNEL);
+	if (*pathbuf) {
+		pathname = d_absolute_path(path, *pathbuf, PATH_MAX);
+>>>>>>> v3.18
 =======
 	*pathbuf = kmalloc(PATH_MAX, GFP_KERNEL);
 	if (*pathbuf) {
@@ -472,7 +561,11 @@ const char *ima_d_path(struct path *path, char **pathbuf)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pathname;
+=======
+	return pathname ?: (const char *)path->dentry->d_name.name;
+>>>>>>> v3.18
 =======
 	return pathname ?: (const char *)path->dentry->d_name.name;
 >>>>>>> v3.18

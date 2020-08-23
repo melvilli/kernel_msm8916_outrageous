@@ -193,11 +193,14 @@ ltq_wdt_probe(struct platform_device *pdev)
 	struct clk *clk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res) {
 		dev_err(&pdev->dev, "cannot obtain I/O memory region");
 		return -ENOENT;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ltq_wdt_membase = devm_ioremap_resource(&pdev->dev, res);
@@ -253,6 +256,9 @@ MODULE_AUTHOR("John Crispin <blogic@openwrt.org>");
 MODULE_DESCRIPTION("Lantiq SoC Watchdog");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

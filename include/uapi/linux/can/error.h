@@ -8,11 +8,14 @@
  * All rights reserved.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 #ifndef CAN_ERROR_H
 #define CAN_ERROR_H
 =======
+=======
+>>>>>>> v3.18
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -49,6 +52,9 @@
 
 #ifndef _UAPI_CAN_ERROR_H
 #define _UAPI_CAN_ERROR_H
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define CAN_ERR_DLC 8 /* dlc for error message frames */
@@ -128,7 +134,11 @@
 /* controller specific additional information / data[5..7] */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CAN_ERROR_H */
+=======
+#endif /* _UAPI_CAN_ERROR_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI_CAN_ERROR_H */
 >>>>>>> v3.18

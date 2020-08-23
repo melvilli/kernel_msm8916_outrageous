@@ -22,6 +22,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "X25: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "X25: " fmt
 
@@ -115,7 +120,11 @@ int x25_parse_facilities(struct sk_buff *skb, struct x25_facilities *facilities,
 				break;
 			default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_DEBUG "X.25: unknown facility "
+=======
+				pr_debug("unknown facility "
+>>>>>>> v3.18
 =======
 				pr_debug("unknown facility "
 >>>>>>> v3.18
@@ -142,7 +151,11 @@ int x25_parse_facilities(struct sk_buff *skb, struct x25_facilities *facilities,
 				break;
 			default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_DEBUG "X.25: unknown facility "
+=======
+				pr_debug("unknown facility "
+>>>>>>> v3.18
 =======
 				pr_debug("unknown facility "
 >>>>>>> v3.18
@@ -157,7 +170,11 @@ int x25_parse_facilities(struct sk_buff *skb, struct x25_facilities *facilities,
 			if (len < 4)
 				return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "X.25: unknown facility %02X, "
+=======
+			pr_debug("unknown facility %02X, "
+>>>>>>> v3.18
 =======
 			pr_debug("unknown facility %02X, "
 >>>>>>> v3.18
@@ -174,6 +191,11 @@ int x25_parse_facilities(struct sk_buff *skb, struct x25_facilities *facilities,
 				if (p[1] > X25_MAX_DTE_FACIL_LEN || p[1] <= 1)
 					return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				if (p[2] > X25_MAX_AE_LEN)
+					return -1;
+>>>>>>> v3.18
 =======
 				if (p[2] > X25_MAX_AE_LEN)
 					return -1;
@@ -186,6 +208,11 @@ int x25_parse_facilities(struct sk_buff *skb, struct x25_facilities *facilities,
 				if (p[1] > X25_MAX_DTE_FACIL_LEN || p[1] <= 1)
 					return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				if (p[2] > X25_MAX_AE_LEN)
+					return -1;
+>>>>>>> v3.18
 =======
 				if (p[2] > X25_MAX_AE_LEN)
 					return -1;
@@ -196,7 +223,11 @@ int x25_parse_facilities(struct sk_buff *skb, struct x25_facilities *facilities,
 				break;
 			default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_DEBUG "X.25: unknown facility %02X,"
+=======
+				pr_debug("unknown facility %02X,"
+>>>>>>> v3.18
 =======
 				pr_debug("unknown facility %02X,"
 >>>>>>> v3.18
@@ -303,7 +334,10 @@ int x25_negotiate_facilities(struct sk_buff *skb, struct sock *sk,
 	memset(&theirs, 0, sizeof(theirs));
 	memcpy(new, ours, sizeof(*new));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(dte, 0, sizeof(*dte));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -373,7 +407,11 @@ void x25_limit_facilities(struct x25_facilities *facilities,
 	if (!nb->extended) {
 		if (facilities->winsize_in  > 7) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "X.25: incoming winsize limited to 7\n");
+=======
+			pr_debug("incoming winsize limited to 7\n");
+>>>>>>> v3.18
 =======
 			pr_debug("incoming winsize limited to 7\n");
 >>>>>>> v3.18
@@ -382,7 +420,11 @@ void x25_limit_facilities(struct x25_facilities *facilities,
 		if (facilities->winsize_out > 7) {
 			facilities->winsize_out = 7;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk( KERN_DEBUG "X.25: outgoing winsize limited to 7\n");
+=======
+			pr_debug("outgoing winsize limited to 7\n");
+>>>>>>> v3.18
 =======
 			pr_debug("outgoing winsize limited to 7\n");
 >>>>>>> v3.18

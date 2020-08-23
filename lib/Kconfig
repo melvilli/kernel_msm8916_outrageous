@@ -23,6 +23,12 @@ config GENERIC_STRNLEN_USER
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config GENERIC_NET_UTILS
+	bool
+
+>>>>>>> v3.18
 =======
 config GENERIC_NET_UTILS
 	bool
@@ -52,13 +58,19 @@ config PERCPU_RWSEM
 	boolean
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ARCH_USE_CMPXCHG_LOCKREF
 	bool
 
 config ARCH_HAS_FAST_MULTIPLIER
 	bool
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CRC_CCITT
 	tristate "CRC-CCITT functions"
@@ -79,6 +91,11 @@ config CRC16
 config CRC_T10DIF
 	tristate "CRC calculation for the T10 Data Integrity Field"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select CRYPTO
+	select CRYPTO_CRCT10DIF
+>>>>>>> v3.18
 =======
 	select CRYPTO
 	select CRYPTO_CRCT10DIF
@@ -195,7 +212,10 @@ config AUDIT_GENERIC
 	default y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config AUDIT_ARCH_COMPAT_GENERIC
 	bool
 	default n
@@ -212,6 +232,9 @@ config RANDOM32_SELFTEST
 	  This option enables the 32 bit PRNG library functions to perform a
 	  self test on initialization.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #
 # compression support is select'ed if needed
@@ -229,7 +252,10 @@ config LZO_DECOMPRESS
 	tristate
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config LZ4_COMPRESS
 	tristate
 
@@ -239,6 +265,9 @@ config LZ4HC_COMPRESS
 config LZ4_DECOMPRESS
 	tristate
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "lib/xz/Kconfig"
 
@@ -265,11 +294,17 @@ config DECOMPRESS_LZO
 	tristate
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config DECOMPRESS_LZ4
 	select LZ4_DECOMPRESS
 	tristate
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #
 # Generic allocator support is selected if needed
@@ -353,7 +388,10 @@ config BTREE
 	boolean
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config INTERVAL_TREE
 	boolean
 	help
@@ -382,6 +420,9 @@ config ASSOCIATIVE_ARRAY
 
 	  for more information.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HAS_IOMEM
 	boolean
@@ -421,7 +462,10 @@ config DQL
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config GLOB
 	bool
 #	This actually supports modular compilation, but the module overhead
@@ -455,6 +499,9 @@ config GLOB_SELFTEST
 	  module load) by a small amount, so you're welcome to play with
 	  it, but you probably don't need it.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #
 # Netlink attribute parsing support is select'ed if needed
@@ -512,7 +559,12 @@ config MPILIB
 config SIGNATURE
 	tristate
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on KEYS && CRYPTO
+=======
+	depends on KEYS
+	select CRYPTO
+>>>>>>> v3.18
 =======
 	depends on KEYS
 	select CRYPTO
@@ -538,6 +590,7 @@ config UCS2_STRING
         tristate
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config QMI_ENCDEC
 	bool "QMI Encode/Decode Library"
 	help
@@ -554,6 +607,8 @@ config QMI_ENCDEC_DEBUG
 	  library. This will log the information regarding the element
 	  and message being encoded & decoded.
 =======
+=======
+>>>>>>> v3.18
 source "lib/fonts/Kconfig"
 
 #
@@ -562,6 +617,9 @@ source "lib/fonts/Kconfig"
 
 config ARCH_HAS_SG_CHAIN
 	def_bool n
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endmenu

@@ -23,16 +23,22 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sh_intc.h>
 #include <mach/intc.h>
 #include <mach/irqs.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include "intc.h"
 #include "irqs.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum {

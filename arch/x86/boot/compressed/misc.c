@@ -11,6 +11,10 @@
 
 #include "misc.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../string.h"
+>>>>>>> v3.18
 =======
 #include "../string.h"
 >>>>>>> v3.18
@@ -102,9 +106,12 @@
 #define STATIC		static
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef memset
 #undef memcpy
 =======
+=======
+>>>>>>> v3.18
 #undef memcpy
 
 /*
@@ -113,6 +120,9 @@
  * the time we define memset macro, it is too late.
  */
 #undef memset
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define memzero(s, n)	memset((s), 0, (n))
 
@@ -125,6 +135,7 @@ static void error(char *m);
 struct boot_params *real_mode;		/* Pointer to real-mode data */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *memset(void *s, int c, size_t n);
 void *memcpy(void *dest, const void *src, size_t n);
 
@@ -136,6 +147,10 @@ void *memcpy(void *dest, const void *src, size_t n);
 
 static memptr free_mem_ptr;
 static memptr free_mem_end_ptr;
+=======
+memptr free_mem_ptr;
+memptr free_mem_end_ptr;
+>>>>>>> v3.18
 =======
 memptr free_mem_ptr;
 memptr free_mem_end_ptr;
@@ -166,11 +181,17 @@ static int lines, cols;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KERNEL_LZ4
 #include "../../../../lib/decompress_unlz4.c"
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void scroll(void)
 {
@@ -246,6 +267,7 @@ void __putstr(const char *s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *memset(void *s, int c, size_t n)
 {
 	int i;
@@ -287,6 +309,8 @@ void *memcpy(void *dest, const void *src, size_t n)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void error(char *x)
 {
 	error_putstr("\n\n");
@@ -298,7 +322,10 @@ static void error(char *x)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if CONFIG_X86_NEED_RELOCS
 static void handle_relocations(void *output, unsigned long output_len)
 {
@@ -372,6 +399,9 @@ static inline void handle_relocations(void *output, unsigned long output_len)
 { }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void parse_elf(void *output)
 {
@@ -425,17 +455,23 @@ static void parse_elf(void *output)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void decompress_kernel(void *rmode, memptr heap,
 				  unsigned char *input_data,
 				  unsigned long input_len,
 				  unsigned char *output)
 =======
+=======
+>>>>>>> v3.18
 asmlinkage __visible void *decompress_kernel(void *rmode, memptr heap,
 				  unsigned char *input_data,
 				  unsigned long input_len,
 				  unsigned char *output,
 				  unsigned long output_len,
 				  unsigned long run_size)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	real_mode = rmode;
@@ -460,7 +496,10 @@ asmlinkage __visible void *decompress_kernel(void *rmode, memptr heap,
 	free_mem_end_ptr = heap + BOOT_HEAP_SIZE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The memory hole needed for the kernel is the larger of either
 	 * the entire decompressed kernel plus relocation table, or the
@@ -471,6 +510,9 @@ asmlinkage __visible void *decompress_kernel(void *rmode, memptr heap,
 							      : run_size);
 
 	/* Validate memory location choices. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((unsigned long)output & (MIN_KERNEL_ALIGN - 1))
 		error("Destination address inappropriately aligned");
@@ -490,8 +532,14 @@ asmlinkage __visible void *decompress_kernel(void *rmode, memptr heap,
 	decompress(input_data, input_len, NULL, NULL, output, NULL, error);
 	parse_elf(output);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_putstr("done.\nBooting the kernel.\n");
 	return;
+=======
+	handle_relocations(output, output_len);
+	debug_putstr("done.\nBooting the kernel.\n");
+	return output;
+>>>>>>> v3.18
 =======
 	handle_relocations(output, output_len);
 	debug_putstr("done.\nBooting the kernel.\n");

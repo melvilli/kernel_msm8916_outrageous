@@ -10,6 +10,10 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/clock/exynos5440.h>
+>>>>>>> v3.18
 =======
 #include <dt-bindings/clock/exynos5440.h>
 >>>>>>> v3.18
@@ -27,6 +31,7 @@
 #define MISC_DOUT1		0x558
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Let each supported clock get a unique id. This id is used to lookup the clock
  * for device tree based platforms.
@@ -43,11 +48,14 @@ enum exynos5440_clks {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* parent clock name list */
 PNAME(mout_armclk_p)	= { "cplla", "cpllb" };
 PNAME(mout_spi_p)	= { "div125", "div200" };
 
 /* fixed rate clocks generated outside the soc */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct samsung_fixed_rate_clock exynos5440_fixed_rate_ext_clks[] __initdata = {
 	FRATE(none, "xtal", NULL, CLK_IS_ROOT, 0),
@@ -74,6 +82,8 @@ struct samsung_mux_clock exynos5440_mux_clks[] __initdata = {
 	MUX(none, "mout_spi", mout_spi_p, MISC_DOUT1, 5, 1),
 	MUX_A(arm_clk, "arm_clk", mout_armclk_p,
 =======
+=======
+>>>>>>> v3.18
 static struct samsung_fixed_rate_clock exynos5440_fixed_rate_ext_clks[] __initdata = {
 	FRATE(0, "xtal", NULL, CLK_IS_ROOT, 0),
 };
@@ -98,11 +108,15 @@ static struct samsung_fixed_factor_clock exynos5440_fixed_factor_clks[] __initda
 static struct samsung_mux_clock exynos5440_mux_clks[] __initdata = {
 	MUX(0, "mout_spi", mout_spi_p, MISC_DOUT1, 5, 1),
 	MUX_A(CLK_ARM_CLK, "arm_clk", mout_armclk_p,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			CPU_CLK_STATUS, 0, 1, "armclk"),
 };
 
 /* divider clocks */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct samsung_div_clock exynos5440_div_clks[] __initdata = {
 	DIV(spi_baud, "div_spi", "mout_spi", MISC_DOUT1, 3, 2),
@@ -134,6 +148,8 @@ struct samsung_gate_clock exynos5440_gate_clks[] __initdata = {
 
 static __initdata struct of_device_id ext_clk_match[] = {
 =======
+=======
+>>>>>>> v3.18
 static struct samsung_div_clock exynos5440_div_clks[] __initdata = {
 	DIV(CLK_SPI_BAUD, "div_spi", "mout_spi", MISC_DOUT1, 3, 2),
 };
@@ -163,6 +179,9 @@ static struct samsung_gate_clock exynos5440_gate_clks[] __initdata = {
 };
 
 static const struct of_device_id ext_clk_match[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "samsung,clock-xtal", .data = (void *)0, },
 	{},
@@ -170,14 +189,20 @@ static const struct of_device_id ext_clk_match[] __initconst = {
 
 /* register exynos5440 clocks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init exynos5440_clk_init(struct device_node *np)
 {
 	void __iomem *reg_base;
 =======
+=======
+>>>>>>> v3.18
 static void __init exynos5440_clk_init(struct device_node *np)
 {
 	void __iomem *reg_base;
 	struct samsung_clk_provider *ctx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	reg_base = of_iomap(np, 0);
@@ -188,20 +213,27 @@ static void __init exynos5440_clk_init(struct device_node *np)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	samsung_clk_init(np, reg_base, nr_clks, NULL, 0, NULL, 0);
 	samsung_clk_of_register_fixed_ext(exynos5440_fixed_rate_ext_clks,
 =======
+=======
+>>>>>>> v3.18
 	ctx = samsung_clk_init(np, reg_base, CLK_NR_CLKS);
 	if (!ctx)
 		panic("%s: unable to allocate context.\n", __func__);
 
 	samsung_clk_of_register_fixed_ext(ctx, exynos5440_fixed_rate_ext_clks,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ARRAY_SIZE(exynos5440_fixed_rate_ext_clks), ext_clk_match);
 
 	samsung_clk_register_pll2550x("cplla", "xtal", reg_base + 0x1c, 0x10);
 	samsung_clk_register_pll2550x("cpllb", "xtal", reg_base + 0x20, 0x10);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	samsung_clk_register_fixed_rate(exynos5440_fixed_rate_clks,
 			ARRAY_SIZE(exynos5440_fixed_rate_clks));
@@ -216,6 +248,8 @@ static void __init exynos5440_clk_init(struct device_node *np)
 
 	pr_info("Exynos5440: arm_clk = %ldHz\n", _get_rate("armclk"));
 =======
+=======
+>>>>>>> v3.18
 	samsung_clk_register_fixed_rate(ctx, exynos5440_fixed_rate_clks,
 			ARRAY_SIZE(exynos5440_fixed_rate_clks));
 	samsung_clk_register_fixed_factor(ctx, exynos5440_fixed_factor_clks,
@@ -230,6 +264,9 @@ static void __init exynos5440_clk_init(struct device_node *np)
 	samsung_clk_of_add_provider(np, ctx);
 
 	pr_info("Exynos5440: arm_clk = %ldHz\n", _get_rate("arm_clk"));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_info("exynos5440 clock initialization complete\n");
 }

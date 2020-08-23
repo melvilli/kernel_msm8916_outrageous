@@ -1,7 +1,11 @@
 [config]
 command = record
 <<<<<<< HEAD
+<<<<<<< HEAD
 args    = -g -- kill >/dev/null 2>&1
+=======
+args    = -g kill >/dev/null 2>&1
+>>>>>>> v3.18
 =======
 args    = -g kill >/dev/null 2>&1
 >>>>>>> v3.18

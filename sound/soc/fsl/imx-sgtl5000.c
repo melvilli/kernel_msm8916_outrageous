@@ -14,7 +14,11 @@
 #include <linux/of.h>
 #include <linux/of_platform.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+#include <linux/i2c.h>
+>>>>>>> v3.18
 =======
 #include <linux/i2c.h>
 >>>>>>> v3.18
@@ -38,8 +42,12 @@ struct imx_sgtl5000_data {
 static int imx_sgtl5000_dai_init(struct snd_soc_pcm_runtime *rtd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct imx_sgtl5000_data *data = container_of(rtd->card,
 					struct imx_sgtl5000_data, card);
+=======
+	struct imx_sgtl5000_data *data = snd_soc_card_get_drvdata(rtd->card);
+>>>>>>> v3.18
 =======
 	struct imx_sgtl5000_data *data = snd_soc_card_get_drvdata(rtd->card);
 >>>>>>> v3.18
@@ -71,7 +79,11 @@ static int imx_sgtl5000_probe(struct platform_device *pdev)
 	struct platform_device *ssi_pdev;
 	struct i2c_client *codec_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct imx_sgtl5000_data *data;
+=======
+	struct imx_sgtl5000_data *data = NULL;
+>>>>>>> v3.18
 =======
 	struct imx_sgtl5000_data *data = NULL;
 >>>>>>> v3.18
@@ -126,7 +138,11 @@ static int imx_sgtl5000_probe(struct platform_device *pdev)
 	if (!ssi_pdev) {
 		dev_err(&pdev->dev, "failed to find SSI platform device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EINVAL;
+=======
+		ret = -EPROBE_DEFER;
+>>>>>>> v3.18
 =======
 		ret = -EPROBE_DEFER;
 >>>>>>> v3.18
@@ -136,7 +152,11 @@ static int imx_sgtl5000_probe(struct platform_device *pdev)
 	if (!codec_dev) {
 		dev_err(&pdev->dev, "failed to find codec platform device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return -EPROBE_DEFER;
+>>>>>>> v3.18
 =======
 		return -EPROBE_DEFER;
 >>>>>>> v3.18
@@ -150,6 +170,7 @@ static int imx_sgtl5000_probe(struct platform_device *pdev)
 
 	data->codec_clk = clk_get(&codec_dev->dev, NULL);
 	if (IS_ERR(data->codec_clk)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* assuming clock enabled by default */
 		data->codec_clk = NULL;
@@ -166,12 +187,17 @@ static int imx_sgtl5000_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		ret = PTR_ERR(data->codec_clk);
 		goto fail;
 	}
 
 	data->clk_frequency = clk_get_rate(data->codec_clk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data->dai.name = "HiFi";
 	data->dai.stream_name = "HiFi";
@@ -179,7 +205,11 @@ static int imx_sgtl5000_probe(struct platform_device *pdev)
 	data->dai.codec_of_node = codec_np;
 	data->dai.cpu_of_node = ssi_np;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->dai.platform_name = "imx-pcm-audio";
+=======
+	data->dai.platform_of_node = ssi_np;
+>>>>>>> v3.18
 =======
 	data->dai.platform_of_node = ssi_np;
 >>>>>>> v3.18
@@ -191,15 +221,21 @@ static int imx_sgtl5000_probe(struct platform_device *pdev)
 	ret = snd_soc_of_parse_card_name(&data->card, "model");
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto clk_fail;
 	ret = snd_soc_of_parse_audio_routing(&data->card, "audio-routing");
 	if (ret)
 		goto clk_fail;
 =======
+=======
+>>>>>>> v3.18
 		goto fail;
 	ret = snd_soc_of_parse_audio_routing(&data->card, "audio-routing");
 	if (ret)
 		goto fail;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data->card.num_links = 1;
 	data->card.owner = THIS_MODULE;
@@ -207,6 +243,7 @@ static int imx_sgtl5000_probe(struct platform_device *pdev)
 	data->card.dapm_widgets = imx_sgtl5000_dapm_widgets;
 	data->card.num_dapm_widgets = ARRAY_SIZE(imx_sgtl5000_dapm_widgets);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = snd_soc_register_card(&data->card);
 	if (ret) {
@@ -219,6 +256,8 @@ clk_fail:
 	clk_put(data->codec_clk);
 fail:
 =======
+=======
+>>>>>>> v3.18
 	platform_set_drvdata(pdev, &data->card);
 	snd_soc_card_set_drvdata(&data->card, data);
 
@@ -236,6 +275,9 @@ fail:
 fail:
 	if (data && !IS_ERR(data->codec_clk))
 		clk_put(data->codec_clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ssi_np)
 		of_node_put(ssi_np);
@@ -248,6 +290,7 @@ fail:
 static int imx_sgtl5000_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct imx_sgtl5000_data *data = platform_get_drvdata(pdev);
 
 	if (data->codec_clk) {
@@ -256,10 +299,15 @@ static int imx_sgtl5000_remove(struct platform_device *pdev)
 	}
 	snd_soc_unregister_card(&data->card);
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_card *card = platform_get_drvdata(pdev);
 	struct imx_sgtl5000_data *data = snd_soc_card_get_drvdata(card);
 
 	clk_put(data->codec_clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -276,6 +324,10 @@ static struct platform_driver imx_sgtl5000_driver = {
 		.name = "imx-sgtl5000",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm = &snd_soc_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm = &snd_soc_pm_ops,
 >>>>>>> v3.18

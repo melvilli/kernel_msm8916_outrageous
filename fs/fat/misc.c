@@ -31,7 +31,11 @@ void __fat_fs_error(struct super_block *sb, int report, const char *fmt, ...)
 		vaf.fmt = fmt;
 		vaf.va = &args;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "FAT-fs (%s): error, %pV\n", sb->s_id, &vaf);
+=======
+		fat_msg(sb, KERN_ERR, "error, %pV", &vaf);
+>>>>>>> v3.18
 =======
 		fat_msg(sb, KERN_ERR, "error, %pV", &vaf);
 >>>>>>> v3.18
@@ -43,8 +47,12 @@ void __fat_fs_error(struct super_block *sb, int report, const char *fmt, ...)
 	else if (opts->errors == FAT_ERRORS_RO && !(sb->s_flags & MS_RDONLY)) {
 		sb->s_flags |= MS_RDONLY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "FAT-fs (%s): Filesystem has been "
 				"set read-only\n", sb->s_id);
+=======
+		fat_msg(sb, KERN_ERR, "Filesystem has been set read-only");
+>>>>>>> v3.18
 =======
 		fat_msg(sb, KERN_ERR, "Filesystem has been set read-only");
 >>>>>>> v3.18
@@ -65,11 +73,15 @@ void fat_msg(struct super_block *sb, const char *level, const char *fmt, ...)
 	vaf.fmt = fmt;
 	vaf.va = &args;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strncmp(level, KERN_ERR, sizeof(KERN_ERR)))
 		printk_ratelimited("%sFAT-fs (%s): %pV\n", level,
 				   sb->s_id, &vaf);
 	else
 		printk("%sFAT-fs (%s): %pV\n", level, sb->s_id, &vaf);
+=======
+	printk("%sFAT-fs (%s): %pV\n", level, sb->s_id, &vaf);
+>>>>>>> v3.18
 =======
 	printk("%sFAT-fs (%s): %pV\n", level, sb->s_id, &vaf);
 >>>>>>> v3.18
@@ -182,8 +194,11 @@ int fat_chain_add(struct inode *inode, int new_dclus, int nr_cluster)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct timezone sys_tz;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -294,7 +309,11 @@ int fat_sync_bhs(struct buffer_head **bhs, int nr_bhs)
 
 	for (i = 0; i < nr_bhs; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		write_dirty_buffer(bhs[i], WRITE_SYNC);
+=======
+		write_dirty_buffer(bhs[i], WRITE);
+>>>>>>> v3.18
 =======
 		write_dirty_buffer(bhs[i], WRITE);
 >>>>>>> v3.18

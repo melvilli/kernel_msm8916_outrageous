@@ -18,6 +18,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "mvebu-coherency: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "mvebu-coherency: " fmt
 
@@ -29,6 +34,7 @@
 #include <linux/smp.h>
 #include <linux/dma-mapping.h>
 #include <linux/platform_device.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <asm/smp_plat.h>
 #include "armada-370-xp.h"
@@ -42,6 +48,8 @@
  */
 static void __iomem *coherency_base = ARMADA_370_XP_REGS_VIRT_BASE + 0x20200;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/mbus.h>
 #include <linux/clk.h>
@@ -55,6 +63,9 @@ static void __iomem *coherency_base = ARMADA_370_XP_REGS_VIRT_BASE + 0x20200;
 
 unsigned long coherency_phys_base;
 void __iomem *coherency_base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __iomem *coherency_cpu_base;
 
@@ -63,6 +74,7 @@ static void __iomem *coherency_cpu_base;
 
 #define IO_SYNC_BARRIER_CTL_OFFSET		   0x0
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct of_device_id of_coherency_table[] = {
 	{.compatible = "marvell,coherency-fabric"},
@@ -94,6 +106,8 @@ int set_cpu_coherent(unsigned int hw_cpu_id, int smp_group_id)
 
 	return ll_set_cpu_coherent(coherency_base, hw_cpu_id);
 =======
+=======
+>>>>>>> v3.18
 enum {
 	COHERENCY_FABRIC_TYPE_NONE,
 	COHERENCY_FABRIC_TYPE_ARMADA_370_XP,
@@ -269,18 +283,27 @@ static void __init armada_375_coherency_init_wa(void)
 	writel(0x0, xor_base + XOR_INIT_VALUE_HIGH);
 
 	coherency_wa_enabled = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void mvebu_hwcc_sync_io_barrier(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (coherency_wa_enabled) {
 		mvebu_hwcc_armada375_sync_io_barrier_wa();
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel(0x1, coherency_cpu_base + IO_SYNC_BARRIER_CTL_OFFSET);
 	while (readl(coherency_cpu_base + IO_SYNC_BARRIER_CTL_OFFSET) & 0x1);
@@ -329,8 +352,13 @@ static struct dma_map_ops mvebu_hwcc_dma_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mvebu_hwcc_platform_notifier(struct notifier_block *nb,
 				       unsigned long event, void *__dev)
+=======
+static int mvebu_hwcc_notifier(struct notifier_block *nb,
+			       unsigned long event, void *__dev)
+>>>>>>> v3.18
 =======
 static int mvebu_hwcc_notifier(struct notifier_block *nb,
 			       unsigned long event, void *__dev)
@@ -345,6 +373,7 @@ static int mvebu_hwcc_notifier(struct notifier_block *nb,
 	return NOTIFY_OK;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct notifier_block mvebu_hwcc_platform_nb = {
 	.notifier_call = mvebu_hwcc_platform_notifier,
@@ -363,6 +392,8 @@ int coherency_available(void)
 {
 	return coherency_enabled;
 =======
+=======
+>>>>>>> v3.18
 static struct notifier_block mvebu_hwcc_nb = {
 	.notifier_call = mvebu_hwcc_notifier,
 };
@@ -460,11 +491,15 @@ static int coherency_type(void)
 int coherency_available(void)
 {
 	return coherency_type() != COHERENCY_FABRIC_TYPE_NONE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int __init coherency_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device_node *np;
 
@@ -505,6 +540,8 @@ int __init coherency_init(void)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	int type = coherency_type();
 	struct device_node *np;
 
@@ -555,4 +592,7 @@ static int __init coherency_pci_init(void)
 
 arch_initcall(coherency_pci_init);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -42,8 +42,11 @@ struct thread_info {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x10000000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if defined(CONFIG_4KSTACKS)

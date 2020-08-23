@@ -24,12 +24,18 @@
 #define TEGRA_IRAM_RESET_HANDLER_SIZE	SZ_1K
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * This area is used for LPx resume vector, only while LPx power state is
  * active. At other times, the AVP may use this area for arbitrary purposes
  */
 #define TEGRA_IRAM_LPx_RESUME_AREA	(TEGRA_IRAM_BASE + SZ_4K)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

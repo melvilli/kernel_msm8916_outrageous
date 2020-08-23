@@ -26,9 +26,12 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __fix_to_virt(x)	(FIXADDR_TOP - ((x) << PAGE_SHIFT))
 #define __virt_to_fix(x)	((FIXADDR_TOP - ((x)&PAGE_MASK)) >> PAGE_SHIFT)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -82,6 +85,7 @@ enum fixed_addresses {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __set_fixmap(enum fixed_addresses idx,
 			 unsigned long phys, pgprot_t flags);
 
@@ -92,11 +96,14 @@ extern void __set_fixmap(enum fixed_addresses idx,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define __FIXADDR_SIZE	(__end_of_permanent_fixed_addresses << PAGE_SHIFT)
 #define __FIXADDR_BOOT_SIZE	(__end_of_fixed_addresses << PAGE_SHIFT)
 #define FIXADDR_START		(FIXADDR_TOP + PAGE_SIZE - __FIXADDR_SIZE)
 #define FIXADDR_BOOT_START	(FIXADDR_TOP + PAGE_SIZE - __FIXADDR_BOOT_SIZE)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void __this_fixmap_does_not_exist(void);
 
@@ -127,6 +134,9 @@ static inline unsigned long virt_to_fix(const unsigned long vaddr)
 	BUG_ON(vaddr >= FIXADDR_TOP || vaddr < FIXADDR_START);
 	return __virt_to_fix(vaddr);
 }
+=======
+#include <asm-generic/fixmap.h>
+>>>>>>> v3.18
 =======
 #include <asm-generic/fixmap.h>
 >>>>>>> v3.18

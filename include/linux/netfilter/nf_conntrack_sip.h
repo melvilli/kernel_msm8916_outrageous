@@ -108,6 +108,7 @@ enum sdp_header_types {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int (*nf_nat_sip_hook)(struct sk_buff *skb,
 				       unsigned int protoff,
 				       unsigned int dataoff,
@@ -188,6 +189,8 @@ extern int ct_sip_get_sdp_header(const struct nf_conn *ct, const char *dptr,
 				 enum sdp_header_types term,
 				 unsigned int *matchoff, unsigned int *matchlen);
 =======
+=======
+>>>>>>> v3.18
 struct nf_nat_sip_hooks {
 	unsigned int (*msg)(struct sk_buff *skb,
 			    unsigned int protoff,
@@ -275,6 +278,9 @@ int ct_sip_get_sdp_header(const struct nf_conn *ct, const char *dptr,
 			  enum sdp_header_types type,
 			  enum sdp_header_types term,
 			  unsigned int *matchoff, unsigned int *matchlen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __KERNEL__ */

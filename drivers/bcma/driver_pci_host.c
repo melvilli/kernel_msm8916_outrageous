@@ -582,6 +582,10 @@ int bcma_core_pci_plat_dev_init(struct pci_dev *dev)
 {
 	struct bcma_drv_pci_host *pc_host;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int readrq;
+>>>>>>> v3.18
 =======
 	int readrq;
 >>>>>>> v3.18
@@ -600,12 +604,18 @@ int bcma_core_pci_plat_dev_init(struct pci_dev *dev)
 	pci_write_config_byte(dev, PCI_INTERRUPT_LINE, dev->irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	readrq = pcie_get_readrq(dev);
 	if (readrq > 128) {
 		pr_info("change PCIe max read request size from %i to 128\n", readrq);
 		pcie_set_readrq(dev, 128);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

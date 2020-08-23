@@ -28,6 +28,10 @@
 #include <linux/interrupt.h>
 #include <linux/in.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/inet.h>
+>>>>>>> v3.18
 =======
 #include <linux/inet.h>
 >>>>>>> v3.18
@@ -82,7 +86,10 @@ static unsigned int ip_vs_conn_rnd __read_mostly;
 #define CT_LOCKARRAY_MASK  (CT_LOCKARRAY_SIZE-1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* We need an addrstrlen that works with or without v6 */
 #ifdef CONFIG_IP_VS_IPV6
 #define IP_VS_ADDRSTRLEN INET6_ADDRSTRLEN
@@ -90,6 +97,9 @@ static unsigned int ip_vs_conn_rnd __read_mostly;
 #define IP_VS_ADDRSTRLEN (8+1)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ip_vs_aligned_lock
 {
@@ -503,14 +513,20 @@ static inline void ip_vs_bind_xmit(struct ip_vs_conn *cp)
 
 	case IP_VS_CONN_F_TUNNEL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cp->packet_xmit = ip_vs_tunnel_xmit;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IP_VS_IPV6
 		if (cp->daf == AF_INET6)
 			cp->packet_xmit = ip_vs_tunnel_xmit_v6;
 		else
 #endif
 			cp->packet_xmit = ip_vs_tunnel_xmit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -538,12 +554,18 @@ static inline void ip_vs_bind_xmit_v6(struct ip_vs_conn *cp)
 
 	case IP_VS_CONN_F_TUNNEL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cp->packet_xmit = ip_vs_tunnel_xmit_v6;
 =======
+=======
+>>>>>>> v3.18
 		if (cp->daf == AF_INET6)
 			cp->packet_xmit = ip_vs_tunnel_xmit_v6;
 		else
 			cp->packet_xmit = ip_vs_tunnel_xmit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -611,7 +633,11 @@ ip_vs_bind_dest(struct ip_vs_conn *cp, struct ip_vs_dest *dest)
 		      IP_VS_DBG_ADDR(cp->af, &cp->caddr), ntohs(cp->cport),
 		      IP_VS_DBG_ADDR(cp->af, &cp->vaddr), ntohs(cp->vport),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      IP_VS_DBG_ADDR(cp->af, &cp->daddr), ntohs(cp->dport),
+=======
+		      IP_VS_DBG_ADDR(cp->daf, &cp->daddr), ntohs(cp->dport),
+>>>>>>> v3.18
 =======
 		      IP_VS_DBG_ADDR(cp->daf, &cp->daddr), ntohs(cp->dport),
 >>>>>>> v3.18
@@ -651,8 +677,11 @@ void ip_vs_try_bind_dest(struct ip_vs_conn *cp)
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dest = ip_vs_find_dest(ip_vs_conn_net(cp), cp->af, &cp->daddr,
 =======
+=======
+>>>>>>> v3.18
 
 	/* This function is only invoked by the synchronization code. We do
 	 * not currently support heterogeneous pools with synchronization,
@@ -660,6 +689,9 @@ void ip_vs_try_bind_dest(struct ip_vs_conn *cp)
 	 * dest_af
 	 */
 	dest = ip_vs_find_dest(ip_vs_conn_net(cp), cp->af, cp->af, &cp->daddr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			       cp->dport, &cp->vaddr, cp->vport,
 			       cp->protocol, cp->fwmark, cp->flags);
@@ -716,7 +748,11 @@ static inline void ip_vs_unbind_dest(struct ip_vs_conn *cp)
 		      IP_VS_DBG_ADDR(cp->af, &cp->caddr), ntohs(cp->cport),
 		      IP_VS_DBG_ADDR(cp->af, &cp->vaddr), ntohs(cp->vport),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      IP_VS_DBG_ADDR(cp->af, &cp->daddr), ntohs(cp->dport),
+=======
+		      IP_VS_DBG_ADDR(cp->daf, &cp->daddr), ntohs(cp->dport),
+>>>>>>> v3.18
 =======
 		      IP_VS_DBG_ADDR(cp->daf, &cp->daddr), ntohs(cp->dport),
 >>>>>>> v3.18
@@ -789,7 +825,11 @@ int ip_vs_check_template(struct ip_vs_conn *ct)
 			      IP_VS_DBG_ADDR(ct->af, &ct->vaddr),
 			      ntohs(ct->vport),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      IP_VS_DBG_ADDR(ct->af, &ct->daddr),
+=======
+			      IP_VS_DBG_ADDR(ct->daf, &ct->daddr),
+>>>>>>> v3.18
 =======
 			      IP_VS_DBG_ADDR(ct->daf, &ct->daddr),
 >>>>>>> v3.18
@@ -901,7 +941,11 @@ void ip_vs_conn_expire_now(struct ip_vs_conn *cp)
  */
 struct ip_vs_conn *
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip_vs_conn_new(const struct ip_vs_conn_param *p,
+=======
+ip_vs_conn_new(const struct ip_vs_conn_param *p, int dest_af,
+>>>>>>> v3.18
 =======
 ip_vs_conn_new(const struct ip_vs_conn_param *p, int dest_af,
 >>>>>>> v3.18
@@ -924,6 +968,7 @@ ip_vs_conn_new(const struct ip_vs_conn_param *p, int dest_af,
 	ip_vs_conn_net_set(cp, p->net);
 	cp->af		   = p->af;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cp->protocol	   = p->protocol;
 	ip_vs_addr_set(p->af, &cp->caddr, p->caddr);
 	cp->cport	   = p->cport;
@@ -933,6 +978,8 @@ ip_vs_conn_new(const struct ip_vs_conn_param *p, int dest_af,
 	ip_vs_addr_set(p->protocol == IPPROTO_IP ? AF_UNSPEC : p->af,
 		       &cp->daddr, daddr);
 =======
+=======
+>>>>>>> v3.18
 	cp->daf		   = dest_af;
 	cp->protocol	   = p->protocol;
 	ip_vs_addr_set(p->af, &cp->caddr, p->caddr);
@@ -942,6 +989,9 @@ ip_vs_conn_new(const struct ip_vs_conn_param *p, int dest_af,
 		       &cp->vaddr, p->vaddr);
 	cp->vport	   = p->vport;
 	ip_vs_addr_set(cp->daf, &cp->daddr, daddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cp->dport          = dport;
 	cp->flags	   = flags;
@@ -1043,8 +1093,12 @@ static void *ip_vs_conn_array(struct seq_file *seq, loff_t pos)
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcu_read_unlock();
 		rcu_read_lock();
+=======
+		cond_resched_rcu();
+>>>>>>> v3.18
 =======
 		cond_resched_rcu();
 >>>>>>> v3.18
@@ -1087,8 +1141,12 @@ static void *ip_vs_conn_seq_next(struct seq_file *seq, void *v, loff_t *pos)
 			return cp;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcu_read_unlock();
 		rcu_read_lock();
+=======
+		cond_resched_rcu();
+>>>>>>> v3.18
 =======
 		cond_resched_rcu();
 >>>>>>> v3.18
@@ -1115,6 +1173,10 @@ static int ip_vs_conn_seq_show(struct seq_file *seq, void *v)
 		char pe_data[IP_VS_PENAME_MAXLEN + IP_VS_PEDATA_MAXLEN + 3];
 		size_t len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		char dbuf[IP_VS_ADDRSTRLEN];
+>>>>>>> v3.18
 =======
 		char dbuf[IP_VS_ADDRSTRLEN];
 >>>>>>> v3.18
@@ -1133,6 +1195,7 @@ static int ip_vs_conn_seq_show(struct seq_file *seq, void *v)
 
 #ifdef CONFIG_IP_VS_IPV6
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cp->af == AF_INET6)
 			seq_printf(seq, "%-3s %pI6 %04X %pI6 %04X "
 				"%pI6 %04X %-11s %7lu%s\n",
@@ -1141,6 +1204,8 @@ static int ip_vs_conn_seq_show(struct seq_file *seq, void *v)
 				&cp->vaddr.in6, ntohs(cp->vport),
 				&cp->daddr.in6, ntohs(cp->dport),
 =======
+=======
+>>>>>>> v3.18
 		if (cp->daf == AF_INET6)
 			snprintf(dbuf, sizeof(dbuf), "%pI6", &cp->daddr.in6);
 		else
@@ -1156,6 +1221,9 @@ static int ip_vs_conn_seq_show(struct seq_file *seq, void *v)
 				&cp->caddr.in6, ntohs(cp->cport),
 				&cp->vaddr.in6, ntohs(cp->vport),
 				dbuf, ntohs(cp->dport),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ip_vs_state_name(cp->protocol, cp->state),
 				(cp->timer.expires-jiffies)/HZ, pe_data);
@@ -1164,17 +1232,23 @@ static int ip_vs_conn_seq_show(struct seq_file *seq, void *v)
 			seq_printf(seq,
 				"%-3s %08X %04X %08X %04X"
 <<<<<<< HEAD
+<<<<<<< HEAD
 				" %08X %04X %-11s %7lu%s\n",
 				ip_vs_proto_name(cp->protocol),
 				ntohl(cp->caddr.ip), ntohs(cp->cport),
 				ntohl(cp->vaddr.ip), ntohs(cp->vport),
 				ntohl(cp->daddr.ip), ntohs(cp->dport),
 =======
+=======
+>>>>>>> v3.18
 				" %s %04X %-11s %7lu%s\n",
 				ip_vs_proto_name(cp->protocol),
 				ntohl(cp->caddr.ip), ntohs(cp->cport),
 				ntohl(cp->vaddr.ip), ntohs(cp->vport),
 				dbuf, ntohs(cp->dport),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ip_vs_state_name(cp->protocol, cp->state),
 				(cp->timer.expires-jiffies)/HZ, pe_data);
@@ -1214,6 +1288,10 @@ static const char *ip_vs_origin_name(unsigned int flags)
 static int ip_vs_conn_sync_seq_show(struct seq_file *seq, void *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char dbuf[IP_VS_ADDRSTRLEN];
+>>>>>>> v3.18
 =======
 	char dbuf[IP_VS_ADDRSTRLEN];
 >>>>>>> v3.18
@@ -1230,6 +1308,7 @@ static int ip_vs_conn_sync_seq_show(struct seq_file *seq, void *v)
 
 #ifdef CONFIG_IP_VS_IPV6
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cp->af == AF_INET6)
 			seq_printf(seq, "%-3s %pI6 %04X %pI6 %04X %pI6 %04X %-11s %-6s %7lu\n",
 				ip_vs_proto_name(cp->protocol),
@@ -1237,6 +1316,8 @@ static int ip_vs_conn_sync_seq_show(struct seq_file *seq, void *v)
 				&cp->vaddr.in6, ntohs(cp->vport),
 				&cp->daddr.in6, ntohs(cp->dport),
 =======
+=======
+>>>>>>> v3.18
 		if (cp->daf == AF_INET6)
 			snprintf(dbuf, sizeof(dbuf), "%pI6", &cp->daddr.in6);
 		else
@@ -1252,6 +1333,9 @@ static int ip_vs_conn_sync_seq_show(struct seq_file *seq, void *v)
 				&cp->caddr.in6, ntohs(cp->cport),
 				&cp->vaddr.in6, ntohs(cp->vport),
 				dbuf, ntohs(cp->dport),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ip_vs_state_name(cp->protocol, cp->state),
 				ip_vs_origin_name(cp->flags),
@@ -1261,17 +1345,23 @@ static int ip_vs_conn_sync_seq_show(struct seq_file *seq, void *v)
 			seq_printf(seq,
 				"%-3s %08X %04X %08X %04X "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"%08X %04X %-11s %-6s %7lu\n",
 				ip_vs_proto_name(cp->protocol),
 				ntohl(cp->caddr.ip), ntohs(cp->cport),
 				ntohl(cp->vaddr.ip), ntohs(cp->vport),
 				ntohl(cp->daddr.ip), ntohs(cp->dport),
 =======
+=======
+>>>>>>> v3.18
 				"%s %04X %-11s %-6s %7lu\n",
 				ip_vs_proto_name(cp->protocol),
 				ntohl(cp->caddr.ip), ntohs(cp->cport),
 				ntohl(cp->vaddr.ip), ntohs(cp->vport),
 				dbuf, ntohs(cp->dport),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ip_vs_state_name(cp->protocol, cp->state),
 				ip_vs_origin_name(cp->flags),
@@ -1342,6 +1432,10 @@ void ip_vs_random_dropentry(struct net *net)
 	struct ip_vs_conn *cp, *cp_c;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rcu_read_lock();
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 >>>>>>> v3.18
@@ -1350,12 +1444,16 @@ void ip_vs_random_dropentry(struct net *net)
 	 */
 	for (idx = 0; idx < (ip_vs_conn_tab_size>>5); idx++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned int hash = net_random() & ip_vs_conn_tab_mask;
 
 		/*
 		 *  Lock is actually needed in this loop.
 		 */
 		rcu_read_lock();
+=======
+		unsigned int hash = prandom_u32() & ip_vs_conn_tab_mask;
+>>>>>>> v3.18
 =======
 		unsigned int hash = prandom_u32() & ip_vs_conn_tab_mask;
 >>>>>>> v3.18
@@ -1381,7 +1479,10 @@ void ip_vs_random_dropentry(struct net *net)
 					continue;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			} else if (cp->protocol == IPPROTO_SCTP) {
 				switch (cp->state) {
 				case IP_VS_SCTP_S_INIT1:
@@ -1394,6 +1495,9 @@ void ip_vs_random_dropentry(struct net *net)
 				default:
 					continue;
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			} else {
 				if (!todrop_entry(cp))
@@ -1411,8 +1515,14 @@ void ip_vs_random_dropentry(struct net *net)
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcu_read_unlock();
 	}
+=======
+		cond_resched_rcu();
+	}
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 		cond_resched_rcu();
 	}
@@ -1432,11 +1542,16 @@ static void ip_vs_conn_flush(struct net *net)
 
 flush_again:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (idx = 0; idx < ip_vs_conn_tab_size; idx++) {
 		/*
 		 *  Lock is actually needed in this loop.
 		 */
 		rcu_read_lock();
+=======
+	rcu_read_lock();
+	for (idx = 0; idx < ip_vs_conn_tab_size; idx++) {
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 	for (idx = 0; idx < ip_vs_conn_tab_size; idx++) {
@@ -1456,8 +1571,14 @@ flush_again:
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcu_read_unlock();
 	}
+=======
+		cond_resched_rcu();
+	}
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 		cond_resched_rcu();
 	}

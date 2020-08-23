@@ -51,7 +51,10 @@ struct platform_device *__init imx_add_fec(
 		const struct fec_platform_data *pdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/can/platform/flexcan.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct imx_flexcan_data {
@@ -62,8 +65,12 @@ struct imx_flexcan_data {
 };
 struct platform_device *__init imx_add_flexcan(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const struct imx_flexcan_data *data,
 		const struct flexcan_platform_data *pdata);
+=======
+		const struct imx_flexcan_data *data);
+>>>>>>> v3.18
 =======
 		const struct imx_flexcan_data *data);
 >>>>>>> v3.18
@@ -186,6 +193,7 @@ struct platform_device *__init imx_add_imx_uart_1irq(
 		const struct imxuart_platform_data *pdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/usb-imx_udc.h>
 struct imx_imx_udc_data {
 	resource_size_t iobase;
@@ -202,6 +210,8 @@ struct platform_device *__init imx_add_imx_udc(
 		const struct imx_imx_udc_data *data,
 		const struct imxusb_platform_data *pdata);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_data/video-mx3fb.h>
@@ -221,6 +231,7 @@ struct platform_device *__init imx_add_mx3_sdc_fb(
 		struct mx3fb_platform_data *pdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/camera-mx1.h>
 struct imx_mx1_camera_data {
 	resource_size_t iobase;
@@ -231,6 +242,8 @@ struct platform_device *__init imx_add_mx1_camera(
 		const struct imx_mx1_camera_data *data,
 		const struct mx1_camera_pdata *pdata);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_data/camera-mx2.h>
@@ -306,6 +319,7 @@ struct platform_device *__init imx_add_pata_imx(
 		const struct imx_pata_imx_data *data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct imx_mxc_pwm_data {
 	int id;
 	resource_size_t iobase;
@@ -315,6 +329,8 @@ struct imx_mxc_pwm_data {
 struct platform_device *__init imx_add_mxc_pwm(
 		const struct imx_mxc_pwm_data *data);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* mxc_rtc */

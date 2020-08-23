@@ -61,6 +61,10 @@ static void wd_block_output(struct net_device *dev, int count,
 static int wd_close(struct net_device *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static u32 wd_msg_enable;
+>>>>>>> v3.18
 =======
 static u32 wd_msg_enable;
 >>>>>>> v3.18
@@ -175,6 +179,10 @@ static int __init wd_probe1(struct net_device *dev, int ioaddr)
 	const char *model_name;
 	static unsigned version_printed;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ei_device *ei_local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct ei_device *ei_local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -189,7 +197,12 @@ static int __init wd_probe1(struct net_device *dev, int ioaddr)
 	/* Check for semi-valid mem_start/end values if supplied. */
 	if ((dev->mem_start % 0x2000) || (dev->mem_end % 0x2000)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "wd.c: user supplied mem_start or mem_end not on 8kB boundary - ignored.\n");
+=======
+		netdev_warn(dev,
+			    "wd.c: user supplied mem_start or mem_end not on 8kB boundary - ignored.\n");
+>>>>>>> v3.18
 =======
 		netdev_warn(dev,
 			    "wd.c: user supplied mem_start or mem_end not on 8kB boundary - ignored.\n");
@@ -199,8 +212,13 @@ static int __init wd_probe1(struct net_device *dev, int ioaddr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_debug  &&  version_printed++ == 0)
 		printk(version);
+=======
+	if ((wd_msg_enable & NETIF_MSG_DRV) && (version_printed++ == 0))
+		netdev_info(dev, version);
+>>>>>>> v3.18
 =======
 	if ((wd_msg_enable & NETIF_MSG_DRV) && (version_printed++ == 0))
 		netdev_info(dev, version);
@@ -210,8 +228,12 @@ static int __init wd_probe1(struct net_device *dev, int ioaddr)
 		dev->dev_addr[i] = inb(ioaddr + 8 + i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s: WD80x3 at %#3x, %pM",
 	       dev->name, ioaddr, dev->dev_addr);
+=======
+	netdev_info(dev, "WD80x3 at %#3x, %pM", ioaddr, dev->dev_addr);
+>>>>>>> v3.18
 =======
 	netdev_info(dev, "WD80x3 at %#3x, %pM", ioaddr, dev->dev_addr);
 >>>>>>> v3.18
@@ -267,8 +289,14 @@ static int __init wd_probe1(struct net_device *dev, int ioaddr)
 #ifndef final_version
 		if ( !ancient && (inb(ioaddr+1) & 0x01) != (word16 & 0x01))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("\nWD80?3: Bus width conflict, %d (probe) != %d (reg report).",
 				   word16 ? 16 : 8, (inb(ioaddr+1) & 0x01) ? 16 : 8);
+=======
+			pr_cont("\nWD80?3: Bus width conflict, %d (probe) != %d (reg report).",
+				word16 ? 16 : 8,
+				(inb(ioaddr+1) & 0x01) ? 16 : 8);
+>>>>>>> v3.18
 =======
 			pr_cont("\nWD80?3: Bus width conflict, %d (probe) != %d (reg report).",
 				word16 ? 16 : 8,
@@ -288,7 +316,11 @@ static int __init wd_probe1(struct net_device *dev, int ioaddr)
 			/* Future plan: this could check a few likely locations first. */
 			dev->mem_start = 0xd0000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(" assigning address %#lx", dev->mem_start);
+=======
+			pr_cont(" assigning address %#lx", dev->mem_start);
+>>>>>>> v3.18
 =======
 			pr_cont(" assigning address %#lx", dev->mem_start);
 >>>>>>> v3.18
@@ -330,8 +362,13 @@ static int __init wd_probe1(struct net_device *dev, int ioaddr)
 			outb_p(0x00, nic_addr+EN0_IMR);	/* Mask all intrs. again. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ei_debug > 2)
 				printk(" autoirq is %d", dev->irq);
+=======
+			if (netif_msg_drv(ei_local))
+				pr_cont(" autoirq is %d", dev->irq);
+>>>>>>> v3.18
 =======
 			if (netif_msg_drv(ei_local))
 				pr_cont(" autoirq is %d", dev->irq);
@@ -348,7 +385,11 @@ static int __init wd_probe1(struct net_device *dev, int ioaddr)
 	i = request_irq(dev->irq, ei_interrupt, 0, DRV_NAME, dev);
 	if (i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk (" unable to get IRQ %d.\n", dev->irq);
+=======
+		pr_cont(" unable to get IRQ %d.\n", dev->irq);
+>>>>>>> v3.18
 =======
 		pr_cont(" unable to get IRQ %d.\n", dev->irq);
 >>>>>>> v3.18
@@ -380,8 +421,13 @@ static int __init wd_probe1(struct net_device *dev, int ioaddr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(" %s, IRQ %d, shared memory at %#lx-%#lx.\n",
 		   model_name, dev->irq, dev->mem_start, dev->mem_end-1);
+=======
+	pr_cont(" %s, IRQ %d, shared memory at %#lx-%#lx.\n",
+		model_name, dev->irq, dev->mem_start, dev->mem_end-1);
+>>>>>>> v3.18
 =======
 	pr_cont(" %s, IRQ %d, shared memory at %#lx-%#lx.\n",
 		model_name, dev->irq, dev->mem_start, dev->mem_end-1);
@@ -395,6 +441,10 @@ static int __init wd_probe1(struct net_device *dev, int ioaddr)
 	dev->netdev_ops = &wd_netdev_ops;
 	NS8390_init(dev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ei_local->msg_enable = wd_msg_enable;
+>>>>>>> v3.18
 =======
 	ei_local->msg_enable = wd_msg_enable;
 >>>>>>> v3.18
@@ -436,15 +486,21 @@ wd_reset_8390(struct net_device *dev)
 {
 	int wd_cmd_port = dev->base_addr - WD_NIC_OFFSET; /* WD_CMDREG */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	outb(WD_RESET, wd_cmd_port);
 	if (ei_debug > 1) printk("resetting the WD80x3 t=%lu...", jiffies);
 =======
+=======
+>>>>>>> v3.18
 	struct ei_device *ei_local = netdev_priv(dev);
 
 	outb(WD_RESET, wd_cmd_port);
 	netif_dbg(ei_local, hw, dev, "resetting the WD80x3 t=%lu...\n",
 		  jiffies);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ei_status.txing = 0;
 
@@ -454,7 +510,11 @@ wd_reset_8390(struct net_device *dev)
 		outb(NIC16 | ((dev->mem_start>>19) & 0x1f), wd_cmd_port+WD_CMDREG5);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_debug > 1) printk("reset done\n");
+=======
+	netif_dbg(ei_local, hw, dev, "reset done\n");
+>>>>>>> v3.18
 =======
 	netif_dbg(ei_local, hw, dev, "reset done\n");
 >>>>>>> v3.18
@@ -537,9 +597,15 @@ wd_close(struct net_device *dev)
 {
 	int wd_cmdreg = dev->base_addr - WD_NIC_OFFSET; /* WD_CMDREG */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (ei_debug > 1)
 		printk("%s: Shutting down ethercard.\n", dev->name);
+=======
+	struct ei_device *ei_local = netdev_priv(dev);
+
+	netif_dbg(ei_local, ifdown, dev, "Shutting down ethercard.\n");
+>>>>>>> v3.18
 =======
 	struct ei_device *ei_local = netdev_priv(dev);
 
@@ -571,6 +637,10 @@ module_param_array(irq, int, NULL, 0);
 module_param_array(mem, int, NULL, 0);
 module_param_array(mem_end, int, NULL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+module_param_named(msg_enable, wd_msg_enable, uint, (S_IRUSR|S_IRGRP|S_IROTH));
+>>>>>>> v3.18
 =======
 module_param_named(msg_enable, wd_msg_enable, uint, (S_IRUSR|S_IRGRP|S_IROTH));
 >>>>>>> v3.18
@@ -579,6 +649,10 @@ MODULE_PARM_DESC(irq, "IRQ number(s) (ignored for PureData boards)");
 MODULE_PARM_DESC(mem, "memory base address(es)(ignored for PureData boards)");
 MODULE_PARM_DESC(mem_end, "memory end address(es)");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_PARM_DESC(msg_enable, "Debug message level (see linux/netdevice.h for bitmap)");
+>>>>>>> v3.18
 =======
 MODULE_PARM_DESC(msg_enable, "Debug message level (see linux/netdevice.h for bitmap)");
 >>>>>>> v3.18

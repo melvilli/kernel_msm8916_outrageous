@@ -112,6 +112,10 @@ void flush_icache_range(unsigned long start, unsigned long end)
 			     (end + linesz - 1) & ~(linesz - 1));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(flush_icache_range);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(flush_icache_range);
 >>>>>>> v3.18

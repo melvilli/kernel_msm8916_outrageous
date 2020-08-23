@@ -16,6 +16,11 @@
 #include <linux/i2c.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_device.h>
@@ -59,7 +64,10 @@ static int da9055_i2c_remove(struct i2c_client *i2c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * DO NOT change the device Ids. The naming is intentionally specific as both
  * the PMIC and CODEC parts of this chip are instantiated separately as I2C
@@ -67,19 +75,28 @@ static int da9055_i2c_remove(struct i2c_client *i2c)
  * purposes separate). As a result there are specific DA9055 ids for PMIC
  * and CODEC, which must be different to operate together.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct i2c_device_id da9055_i2c_id[] = {
 	{"da9055-pmic", 0},
 	{ }
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 MODULE_DEVICE_TABLE(i2c, da9055_i2c_id);
 
 static const struct of_device_id da9055_of_match[] = {
 	{ .compatible = "dlg,da9055-pmic", },
 	{ }
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct i2c_driver da9055_i2c_driver = {
@@ -88,8 +105,14 @@ static struct i2c_driver da9055_i2c_driver = {
 	.id_table = da9055_i2c_id,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name = "da9055",
 		.owner = THIS_MODULE,
+=======
+		.name = "da9055-pmic",
+		.owner = THIS_MODULE,
+		.of_match_table = of_match_ptr(da9055_of_match),
+>>>>>>> v3.18
 =======
 		.name = "da9055-pmic",
 		.owner = THIS_MODULE,

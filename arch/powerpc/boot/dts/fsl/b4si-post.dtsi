@@ -159,7 +159,11 @@
 
 	corenet-cf@18000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "fsl,b4-corenet-cf";
+=======
+		compatible = "fsl,corenet2-cf", "fsl,corenet-cf";
+>>>>>>> v3.18
 =======
 		compatible = "fsl,corenet2-cf", "fsl,corenet-cf";
 >>>>>>> v3.18
@@ -173,6 +177,10 @@
 		compatible =  "fsl,pamu-v1.0", "fsl,pamu";
 		reg = <0x20000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		fsl,portid-mapping = <0x8000>;
+>>>>>>> v3.18
 =======
 		fsl,portid-mapping = <0x8000>;
 >>>>>>> v3.18
@@ -213,7 +221,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "qoriq-mpic.dtsi"
+=======
+/include/ "qoriq-mpic4.3.dtsi"
+>>>>>>> v3.18
 =======
 /include/ "qoriq-mpic4.3.dtsi"
 >>>>>>> v3.18
@@ -236,7 +248,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "qoriq-dma-0.dtsi"
+=======
+/include/ "elo3-dma-0.dtsi"
+>>>>>>> v3.18
 =======
 /include/ "elo3-dma-0.dtsi"
 >>>>>>> v3.18
@@ -246,7 +262,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "qoriq-dma-1.dtsi"
+=======
+/include/ "elo3-dma-1.dtsi"
+>>>>>>> v3.18
 =======
 /include/ "elo3-dma-1.dtsi"
 >>>>>>> v3.18

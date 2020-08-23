@@ -40,7 +40,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -392,6 +395,10 @@ static int synusb_probe(struct usb_interface *intf,
 		__set_bit(REL_X, input_dev->relbit);
 		__set_bit(REL_Y, input_dev->relbit);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__set_bit(INPUT_PROP_POINTING_STICK, input_dev->propbit);
+>>>>>>> v3.18
 =======
 		__set_bit(INPUT_PROP_POINTING_STICK, input_dev->propbit);
 >>>>>>> v3.18
@@ -410,12 +417,18 @@ static int synusb_probe(struct usb_interface *intf,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (synusb->flags & SYNUSB_TOUCHSCREEN)
 		__set_bit(INPUT_PROP_DIRECT, input_dev->propbit);
 	else
 		__set_bit(INPUT_PROP_POINTER, input_dev->propbit);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__set_bit(BTN_LEFT, input_dev->keybit);
 	__set_bit(BTN_RIGHT, input_dev->keybit);

@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/pcmad.c
     Hardware driver for Winsystems PCM-A/D12 and PCM-A/D16
 
@@ -49,6 +50,8 @@ Configuration options:
 
 #define PCMAD_SIZE		4
 =======
+=======
+>>>>>>> v3.18
  * pcmad.c
  * Hardware driver for Winsystems PCM-A/D12 and PCM-A/D16
  *
@@ -90,6 +93,9 @@ Configuration options:
 
 #include <linux/module.h>
 #include "../comedidev.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PCMAD_STATUS		0
@@ -99,6 +105,7 @@ Configuration options:
 
 struct pcmad_board_struct {
 	const char *name;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int n_ai_bits;
 };
@@ -155,6 +162,8 @@ static int pcmad_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 
 	ret = comedi_request_region(dev, it->options[0], PCMAD_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ai_maxdata;
 };
 
@@ -224,6 +233,9 @@ static int pcmad_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	int ret;
 
 	ret = comedi_request_region(dev, it->options[0], 0x04);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
@@ -232,6 +244,7 @@ static int pcmad_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
@@ -247,6 +260,8 @@ static int pcmad_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	s->maxdata = (1 << board->n_ai_bits) - 1;
 	s->range_table = &range_unknown;
 =======
+=======
+>>>>>>> v3.18
 	s = &dev->subdevices[0];
 	s->type		= COMEDI_SUBD_AI;
 	if (it->options[1]) {
@@ -262,11 +277,15 @@ static int pcmad_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	s->maxdata	= board->ai_maxdata;
 	s->range_table	= it->options[2] ? &range_bipolar10 : &range_unipolar5;
 	s->insn_read	= pcmad_ai_insn_read;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct pcmad_board_struct pcmad_boards[] = {
 	{
@@ -277,6 +296,8 @@ static const struct pcmad_board_struct pcmad_boards[] = {
 		.n_ai_bits	= 16,
 	},
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct comedi_driver pcmad_driver = {

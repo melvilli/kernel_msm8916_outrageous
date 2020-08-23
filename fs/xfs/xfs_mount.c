@@ -18,6 +18,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_bit.h"
 #include "xfs_log.h"
@@ -35,6 +36,8 @@
 #include "xfs_inode.h"
 #include "xfs_btree.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_shared.h"
 #include "xfs_format.h"
 #include "xfs_log_format.h"
@@ -47,11 +50,15 @@
 #include "xfs_da_format.h"
 #include "xfs_inode.h"
 #include "xfs_dir2.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_ialloc.h"
 #include "xfs_alloc.h"
 #include "xfs_rtalloc.h"
 #include "xfs_bmap.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "xfs_error.h"
 #include "xfs_quota.h"
@@ -62,6 +69,8 @@
 #include "xfs_cksum.h"
 #include "xfs_buf_item.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_trans.h"
 #include "xfs_trans_priv.h"
 #include "xfs_log.h"
@@ -72,6 +81,9 @@
 #include "xfs_icache.h"
 #include "xfs_dinode.h"
 #include "xfs_sysfs.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -87,6 +99,7 @@ STATIC void	xfs_icsb_disable_counter(xfs_mount_t *, xfs_sb_field_t);
 #define xfs_icsb_balance_counter_locked(mp, a, b)	do { } while (0)
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct {
 	short offset;
@@ -153,6 +166,8 @@ static const struct {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static DEFINE_MUTEX(xfs_uuid_table_mutex);
 static int xfs_uuid_table_size;
 static uuid_t *xfs_uuid_table;
@@ -174,7 +189,11 @@ xfs_uuid_mount(
 	if (uuid_is_nil(uuid)) {
 		xfs_warn(mp, "Filesystem has nil UUID - can't mount");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EINVAL);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -206,7 +225,11 @@ xfs_uuid_mount(
 	mutex_unlock(&xfs_uuid_table_mutex);
 	xfs_warn(mp, "Filesystem has duplicate UUID %pU - can't mount", uuid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return XFS_ERROR(EINVAL);
+=======
+	return -EINVAL;
+>>>>>>> v3.18
 =======
 	return -EINVAL;
 >>>>>>> v3.18
@@ -236,6 +259,7 @@ xfs_uuid_unmount(
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Reference counting access wrappers to the perag structures.
@@ -297,6 +321,8 @@ xfs_perag_put(struct xfs_perag *pag)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 STATIC void
 __xfs_free_perag(
 	struct rcu_head	*head)
@@ -339,6 +365,7 @@ xfs_sb_validate_fsb_count(
 	ASSERT(PAGE_SHIFT >= sbp->sb_blocklog);
 	ASSERT(sbp->sb_blocklog >= BBSHIFT);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if XFS_BIG_BLKNOS     /* Limited by ULONG_MAX of page cache index */
 	if (nblocks >> (PAGE_CACHE_SHIFT - sbp->sb_blocklog) > ULONG_MAX)
@@ -522,6 +549,11 @@ xfs_mount_validate_sb(
 	if (nblocks >> (PAGE_CACHE_SHIFT - sbp->sb_blocklog) > ULONG_MAX)
 		return -EFBIG;
 >>>>>>> v3.18
+=======
+	/* Limited by ULONG_MAX of page cache index */
+	if (nblocks >> (PAGE_CACHE_SHIFT - sbp->sb_blocklog) > ULONG_MAX)
+		return -EFBIG;
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -593,9 +625,15 @@ xfs_initialize_perag(
 
 	if (mp->m_flags & XFS_MOUNT_32BITINODES)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		index = xfs_set_inode32(mp);
 	else
 		index = xfs_set_inode64(mp);
+=======
+		index = xfs_set_inode32(mp, agcount);
+	else
+		index = xfs_set_inode64(mp, agcount);
+>>>>>>> v3.18
 =======
 		index = xfs_set_inode32(mp, agcount);
 	else
@@ -615,6 +653,7 @@ out_unwind:
 	return error;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void
 xfs_sb_from_disk(
@@ -847,6 +886,8 @@ static const struct xfs_buf_ops xfs_sb_quiet_buf_ops = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * xfs_readsb
  *
@@ -854,7 +895,13 @@ static const struct xfs_buf_ops xfs_sb_quiet_buf_ops = {
  */
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 xfs_readsb(xfs_mount_t *mp, int flags)
+=======
+xfs_readsb(
+	struct xfs_mount *mp,
+	int		flags)
+>>>>>>> v3.18
 =======
 xfs_readsb(
 	struct xfs_mount *mp,
@@ -867,6 +914,10 @@ xfs_readsb(
 	int		error;
 	int		loud = !(flags & XFS_MFSI_QUIET);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct xfs_buf_ops *buf_ops;
+>>>>>>> v3.18
 =======
 	const struct xfs_buf_ops *buf_ops;
 >>>>>>> v3.18
@@ -876,7 +927,10 @@ xfs_readsb(
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * For the initial read, we must guess at the sector
 	 * size based on the block device.  It's enough to
 	 * get the sb_sectsize out of the superblock and
@@ -887,11 +941,15 @@ xfs_readsb(
 	buf_ops = NULL;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Allocate a (locked) buffer to hold the superblock.
 	 * This will be kept around at all times to optimize
 	 * access to the superblock.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sector_size = xfs_getsize_buftarg(mp->m_ddev_targp);
 
@@ -911,6 +969,8 @@ reread:
 			xfs_warn(mp, "SB validate failed with error %d.", error);
 		goto release_buf;
 =======
+=======
+>>>>>>> v3.18
 reread:
 	error = xfs_buf_read_uncached(mp->m_ddev_targp, XFS_SB_DADDR,
 				   BTOBB(sector_size), 0, &bp, buf_ops);
@@ -921,6 +981,9 @@ reread:
 		if (error == -EFSBADCRC)
 			error = -EFSCORRUPTED;
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -928,8 +991,11 @@ reread:
 	 * Initialize the mount structure from the superblock.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_sb_from_disk(&mp->m_sb, XFS_BUF_TO_SBP(bp));
 =======
+=======
+>>>>>>> v3.18
 	xfs_sb_from_disk(sbp, XFS_BUF_TO_SBP(bp));
 
 	/*
@@ -942,6 +1008,9 @@ reread:
 		error = -EINVAL;
 		goto release_buf;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -951,6 +1020,7 @@ reread:
 		if (loud)
 			xfs_warn(mp, "device supports %u byte sectors (not %u)",
 				sector_size, sbp->sb_sectsize);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		error = ENOSYS;
 		goto release_buf;
@@ -964,6 +1034,8 @@ reread:
 		xfs_buf_relse(bp);
 		sector_size = sbp->sb_sectsize;
 =======
+=======
+>>>>>>> v3.18
 		error = -ENOSYS;
 		goto release_buf;
 	}
@@ -976,6 +1048,9 @@ reread:
 		xfs_buf_relse(bp);
 		sector_size = sbp->sb_sectsize;
 		buf_ops = loud ? &xfs_sb_buf_ops : &xfs_sb_quiet_buf_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto reread;
 	}
@@ -995,6 +1070,7 @@ release_buf:
 	return error;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*
@@ -1099,6 +1175,8 @@ xfs_initialize_perag_data(xfs_mount_t *mp, xfs_agnumber_t agcount)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Update alignment values based on mount options and sb values
  */
@@ -1115,6 +1193,7 @@ xfs_update_alignment(xfs_mount_t *mp)
 		if ((BBTOB(mp->m_dalign) & mp->m_blockmask) ||
 		    (BBTOB(mp->m_swidth) & mp->m_blockmask)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (mp->m_flags & XFS_MOUNT_RETERR) {
 				xfs_warn(mp, "alignment check failed: "
 					 "(sunit/swidth vs. blocksize)");
@@ -1122,10 +1201,15 @@ xfs_update_alignment(xfs_mount_t *mp)
 			}
 			mp->m_dalign = mp->m_swidth = 0;
 =======
+=======
+>>>>>>> v3.18
 			xfs_warn(mp,
 		"alignment check failed: sunit/swidth vs. blocksize(%d)",
 				sbp->sb_blocksize);
 			return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			/*
@@ -1133,6 +1217,7 @@ xfs_update_alignment(xfs_mount_t *mp)
 			 */
 			mp->m_dalign = XFS_BB_TO_FSBT(mp, mp->m_dalign);
 			if (mp->m_dalign && (sbp->sb_agblocks % mp->m_dalign)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				if (mp->m_flags & XFS_MOUNT_RETERR) {
 					xfs_warn(mp, "alignment check failed: "
@@ -1159,6 +1244,8 @@ xfs_update_alignment(xfs_mount_t *mp)
 				}
 				mp->m_swidth = 0;
 =======
+=======
+>>>>>>> v3.18
 				xfs_warn(mp,
 			"alignment check failed: sunit/swidth vs. agsize(%d)",
 					 sbp->sb_agblocks);
@@ -1170,6 +1257,9 @@ xfs_update_alignment(xfs_mount_t *mp)
 			"alignment check failed: sunit(%d) less than bsize(%d)",
 					 mp->m_dalign, sbp->sb_blocksize);
 				return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -1188,11 +1278,17 @@ xfs_update_alignment(xfs_mount_t *mp)
 				mp->m_update_flags |= XFS_SB_WIDTH;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		} else {
 			xfs_warn(mp,
 	"cannot change alignment: superblock does not support data alignment");
 			return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else if ((mp->m_flags & XFS_MOUNT_NOALIGN) != XFS_MOUNT_NOALIGN &&
@@ -1310,6 +1406,7 @@ xfs_set_inoalignment(xfs_mount_t *mp)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Check that the data (and log if separate) are an ok size.
  */
 STATIC int
@@ -1318,6 +1415,8 @@ xfs_check_sizes(xfs_mount_t *mp)
 	xfs_buf_t	*bp;
 	xfs_daddr_t	d;
 =======
+=======
+>>>>>>> v3.18
  * Check that the data (and log if separate) is an ok size.
  */
 STATIC int
@@ -1327,11 +1426,15 @@ xfs_check_sizes(
 	struct xfs_buf	*bp;
 	xfs_daddr_t	d;
 	int		error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	d = (xfs_daddr_t)XFS_FSB_TO_BB(mp, mp->m_sb.sb_dblocks);
 	if (XFS_BB_TO_FSB(mp, d) != mp->m_sb.sb_dblocks) {
 		xfs_warn(mp, "filesystem size mismatch detected");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return XFS_ERROR(EFBIG);
 	}
@@ -1360,6 +1463,8 @@ xfs_check_sizes(
 		xfs_buf_relse(bp);
 	}
 =======
+=======
+>>>>>>> v3.18
 		return -EFBIG;
 	}
 	error = xfs_buf_read_uncached(mp->m_ddev_targp,
@@ -1387,6 +1492,9 @@ xfs_check_sizes(
 		return error;
 	}
 	xfs_buf_relse(bp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1422,8 +1530,12 @@ xfs_mount_reset_sbqflags(
 
 	tp = xfs_trans_alloc(mp, XFS_TRANS_QM_SBCHANGE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_trans_reserve(tp, 0, XFS_QM_SBCHANGE_LOG_RES(mp),
 				  0, 0, XFS_DEFAULT_LOG_COUNT);
+=======
+	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_qm_sbchange, 0, 0);
+>>>>>>> v3.18
 =======
 	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_qm_sbchange, 0, 0);
 >>>>>>> v3.18
@@ -1477,7 +1589,11 @@ xfs_mountfs(
 	int		error = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_mount_common(mp, sbp);
+=======
+	xfs_sb_mount_common(mp, sbp);
+>>>>>>> v3.18
 =======
 	xfs_sb_mount_common(mp, sbp);
 >>>>>>> v3.18
@@ -1524,13 +1640,19 @@ xfs_mountfs(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* always use v2 inodes by default now */
 	if (!(mp->m_sb.sb_versionnum & XFS_SB_VERSION_NLINKBIT)) {
 		mp->m_sb.sb_versionnum |= XFS_SB_VERSION_NLINKBIT;
 		mp->m_update_flags |= XFS_SB_VERSIONNUM;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Check if sb_agblocks is aligned at stripe boundary
@@ -1550,11 +1672,14 @@ xfs_mountfs(
 	xfs_set_maxicount(mp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_uuid_mount(mp);
 	if (error)
 		goto out;
 
 =======
+=======
+>>>>>>> v3.18
 	error = xfs_sysfs_init(&mp->m_kobj, &xfs_mp_ktype, NULL, mp->m_fsname);
 	if (error)
 		goto out;
@@ -1563,6 +1688,9 @@ xfs_mountfs(
 	if (error)
 		goto out_remove_sysfs;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Set the minimum read and write sizes
@@ -1577,9 +1705,12 @@ xfs_mountfs(
 	 * This may still be overridden by the file system
 	 * block size if it is larger than the chosen cluster size.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 */
 	mp->m_inode_cluster_size = XFS_INODE_BIG_CLUSTER_SIZE;
 =======
+=======
+>>>>>>> v3.18
 	 *
 	 * For v5 filesystems, scale the cluster size with the inode size to
 	 * keep a constant ratio of inode per cluster buffer, but only if mkfs
@@ -1594,6 +1725,9 @@ xfs_mountfs(
 		if (mp->m_sb.sb_inoalignmt >= XFS_B_TO_FSBT(mp, new_size))
 			mp->m_inode_cluster_size = new_size;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1603,7 +1737,11 @@ xfs_mountfs(
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Check that the data (and log if separate) are an ok size.
+=======
+	 * Check that the data (and log if separate) is an ok size.
+>>>>>>> v3.18
 =======
 	 * Check that the data (and log if separate) is an ok size.
 >>>>>>> v3.18
@@ -1630,6 +1768,7 @@ xfs_mountfs(
 	mp->m_dmevmask = 0;	/* not persistent; set after each mount */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_dir_mount(mp);
 
 	/*
@@ -1637,11 +1776,16 @@ xfs_mountfs(
 	 */
 	mp->m_attr_magicpct = (mp->m_sb.sb_blocksize * 37) / 100;
 =======
+=======
+>>>>>>> v3.18
 	error = xfs_da_mount(mp);
 	if (error) {
 		xfs_warn(mp, "Failed dir/attr init: %d", error);
 		goto out_remove_uuid;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1658,7 +1802,11 @@ xfs_mountfs(
 	if (error) {
 		xfs_warn(mp, "Failed per-ag init: %d", error);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_remove_uuid;
+=======
+		goto out_free_dir;
+>>>>>>> v3.18
 =======
 		goto out_free_dir;
 >>>>>>> v3.18
@@ -1668,7 +1816,11 @@ xfs_mountfs(
 		xfs_warn(mp, "no log defined");
 		XFS_ERROR_REPORT("xfs_mountfs", XFS_ERRLEVEL_LOW, mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = XFS_ERROR(EFSCORRUPTED);
+=======
+		error = -EFSCORRUPTED;
+>>>>>>> v3.18
 =======
 		error = -EFSCORRUPTED;
 >>>>>>> v3.18
@@ -1711,7 +1863,11 @@ xfs_mountfs(
 		error = xfs_initialize_perag_data(mp, sbp->sb_agcount);
 		if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out_fail_wait;
+=======
+			goto out_log_dealloc;
+>>>>>>> v3.18
 =======
 			goto out_log_dealloc;
 >>>>>>> v3.18
@@ -1736,7 +1892,11 @@ xfs_mountfs(
 		XFS_ERROR_REPORT("xfs_mountfs_int(2)", XFS_ERRLEVEL_LOW,
 				 mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = XFS_ERROR(EFSCORRUPTED);
+=======
+		error = -EFSCORRUPTED;
+>>>>>>> v3.18
 =======
 		error = -EFSCORRUPTED;
 >>>>>>> v3.18
@@ -1791,7 +1951,11 @@ xfs_mountfs(
 			error = xfs_mount_reset_sbqflags(mp);
 			if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return error;
+=======
+				goto out_rtunmount;
+>>>>>>> v3.18
 =======
 				goto out_rtunmount;
 >>>>>>> v3.18
@@ -1853,15 +2017,21 @@ xfs_mountfs(
  out_free_perag:
 	xfs_free_perag(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
  out_remove_uuid:
 	xfs_uuid_unmount(mp);
 =======
+=======
+>>>>>>> v3.18
  out_free_dir:
 	xfs_da_unmount(mp);
  out_remove_uuid:
 	xfs_uuid_unmount(mp);
  out_remove_sysfs:
 	xfs_sysfs_del(&mp->m_kobj);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  out:
 	return error;
@@ -1939,6 +2109,10 @@ xfs_unmountfs(
 
 	xfs_log_unmount(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xfs_da_unmount(mp);
+>>>>>>> v3.18
 =======
 	xfs_da_unmount(mp);
 >>>>>>> v3.18
@@ -1949,6 +2123,11 @@ xfs_unmountfs(
 #endif
 	xfs_free_perag(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	xfs_sysfs_del(&mp->m_kobj);
+>>>>>>> v3.18
 =======
 
 	xfs_sysfs_del(&mp->m_kobj);
@@ -1991,8 +2170,12 @@ xfs_log_sbcount(xfs_mount_t *mp)
 
 	tp = _xfs_trans_alloc(mp, XFS_TRANS_SB_COUNT, KM_SLEEP);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_trans_reserve(tp, 0, XFS_SB_LOG_RES(mp), 0, 0,
 				  XFS_DEFAULT_LOG_COUNT);
+=======
+	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_sb, 0, 0);
+>>>>>>> v3.18
 =======
 	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_sb, 0, 0);
 >>>>>>> v3.18
@@ -2008,6 +2191,7 @@ xfs_log_sbcount(xfs_mount_t *mp)
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xfs_mod_sb() can be used to copy arbitrary changes to the
  * in-core superblock into the superblock buffer to be logged.
@@ -2055,6 +2239,9 @@ xfs_mod_sb(xfs_trans_t *tp, __int64_t fields)
 =======
  * xfs_mod_incore_sb_unlocked() is a utility routine commonly used to apply
 >>>>>>> v3.18
+=======
+ * xfs_mod_incore_sb_unlocked() is a utility routine commonly used to apply
+>>>>>>> v3.18
  * a delta to a specified field in the in-core superblock.  Simply
  * switch on the field indicated and apply the delta to that field.
  * Fields are not allowed to dip below zero, so if the delta would
@@ -2086,7 +2273,11 @@ xfs_mod_incore_sb_unlocked(
 		if (lcounter < 0) {
 			ASSERT(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -2099,7 +2290,11 @@ xfs_mod_incore_sb_unlocked(
 		if (lcounter < 0) {
 			ASSERT(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -2133,7 +2328,11 @@ xfs_mod_incore_sb_unlocked(
 			 */
 			if (!rsvd)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return XFS_ERROR(ENOSPC);
+=======
+				return -ENOSPC;
+>>>>>>> v3.18
 =======
 				return -ENOSPC;
 >>>>>>> v3.18
@@ -2148,7 +2347,11 @@ xfs_mod_incore_sb_unlocked(
 				"Consider increasing reserve pool size.",
 				mp->m_fsname);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(ENOSPC);
+=======
+			return -ENOSPC;
+>>>>>>> v3.18
 =======
 			return -ENOSPC;
 >>>>>>> v3.18
@@ -2161,7 +2364,11 @@ xfs_mod_incore_sb_unlocked(
 		lcounter += delta;
 		if (lcounter < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(ENOSPC);
+=======
+			return -ENOSPC;
+>>>>>>> v3.18
 =======
 			return -ENOSPC;
 >>>>>>> v3.18
@@ -2174,7 +2381,11 @@ xfs_mod_incore_sb_unlocked(
 		if (lcounter < 0) {
 			ASSERT(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -2187,7 +2398,11 @@ xfs_mod_incore_sb_unlocked(
 		if (scounter < 0) {
 			ASSERT(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -2200,7 +2415,11 @@ xfs_mod_incore_sb_unlocked(
 		if (scounter < 0) {
 			ASSERT(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -2213,7 +2432,11 @@ xfs_mod_incore_sb_unlocked(
 		if (scounter < 0) {
 			ASSERT(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -2226,7 +2449,11 @@ xfs_mod_incore_sb_unlocked(
 		if (scounter < 0) {
 			ASSERT(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -2239,7 +2466,11 @@ xfs_mod_incore_sb_unlocked(
 		if (lcounter < 0) {
 			ASSERT(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -2252,7 +2483,11 @@ xfs_mod_incore_sb_unlocked(
 		if (lcounter < 0) {
 			ASSERT(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -2265,7 +2500,11 @@ xfs_mod_incore_sb_unlocked(
 		if (scounter < 0) {
 			ASSERT(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -2275,7 +2514,11 @@ xfs_mod_incore_sb_unlocked(
 	default:
 		ASSERT(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EINVAL);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -2418,8 +2661,12 @@ xfs_mount_log_sb(
 
 	tp = xfs_trans_alloc(mp, XFS_TRANS_SB_UNIT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_trans_reserve(tp, 0, XFS_SB_LOG_RES(mp), 0, 0,
 				  XFS_DEFAULT_LOG_COUNT);
+=======
+	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_sb, 0, 0);
+>>>>>>> v3.18
 =======
 	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_sb, 0, 0);
 >>>>>>> v3.18
@@ -2447,7 +2694,11 @@ xfs_dev_is_read_only(
 		xfs_notice(mp, "%s required on read-only device.", message);
 		xfs_notice(mp, "write access unavailable, cannot proceed.");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return EROFS;
+=======
+		return -EROFS;
+>>>>>>> v3.18
 =======
 		return -EROFS;
 >>>>>>> v3.18
@@ -2585,12 +2836,15 @@ xfs_icsb_init_counters(
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HOTPLUG_CPU
 	mp->m_icsb_notifier.notifier_call = xfs_icsb_cpu_notify;
 	mp->m_icsb_notifier.priority = 0;
 	register_hotcpu_notifier(&mp->m_icsb_notifier);
 #endif /* CONFIG_HOTPLUG_CPU */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for_each_online_cpu(i) {
@@ -2606,7 +2860,10 @@ xfs_icsb_init_counters(
 	 */
 	mp->m_icsb_counters = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_HOTPLUG_CPU
 	mp->m_icsb_notifier.notifier_call = xfs_icsb_cpu_notify;
@@ -2614,6 +2871,9 @@ xfs_icsb_init_counters(
 	register_hotcpu_notifier(&mp->m_icsb_notifier);
 #endif /* CONFIG_HOTPLUG_CPU */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -3006,7 +3266,11 @@ slow_path:
 	 * we are done.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret != ENOSPC)
+=======
+	if (ret != -ENOSPC)
+>>>>>>> v3.18
 =======
 	if (ret != -ENOSPC)
 >>>>>>> v3.18

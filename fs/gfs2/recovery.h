@@ -24,9 +24,15 @@ extern int gfs2_replay_read_block(struct gfs2_jdesc *jd, unsigned int blk,
 			   struct buffer_head **bh);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int gfs2_revoke_add(struct gfs2_sbd *sdp, u64 blkno, unsigned int where);
 extern int gfs2_revoke_check(struct gfs2_sbd *sdp, u64 blkno, unsigned int where);
 extern void gfs2_revoke_clean(struct gfs2_sbd *sdp);
+=======
+extern int gfs2_revoke_add(struct gfs2_jdesc *jd, u64 blkno, unsigned int where);
+extern int gfs2_revoke_check(struct gfs2_jdesc *jd, u64 blkno, unsigned int where);
+extern void gfs2_revoke_clean(struct gfs2_jdesc *jd);
+>>>>>>> v3.18
 =======
 extern int gfs2_revoke_add(struct gfs2_jdesc *jd, u64 blkno, unsigned int where);
 extern int gfs2_revoke_check(struct gfs2_jdesc *jd, u64 blkno, unsigned int where);

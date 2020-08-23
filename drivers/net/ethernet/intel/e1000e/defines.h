@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -27,6 +28,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel PRO/1000 Linux driver
  * Copyright(c) 1999 - 2014 Intel Corporation.
  *
@@ -47,6 +50,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _E1000_DEFINES_H_
@@ -59,15 +65,21 @@
 /* Definitions for power management and wakeup registers */
 /* Wake Up Control */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define E1000_WUC_APME       0x00000001 /* APM Enable */
 #define E1000_WUC_PME_EN     0x00000002 /* PME Enable */
 #define E1000_WUC_PHY_WAKE   0x00000100 /* if PHY supports wakeup */
 =======
+=======
+>>>>>>> v3.18
 #define E1000_WUC_APME		0x00000001	/* APM Enable */
 #define E1000_WUC_PME_EN	0x00000002	/* PME Enable */
 #define E1000_WUC_PME_STATUS	0x00000004	/* PME Status */
 #define E1000_WUC_APMPME	0x00000008	/* Assert PME on APM Wakeup */
 #define E1000_WUC_PHY_WAKE	0x00000100	/* if PHY supports wakeup */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Wake Up Filter Control */
@@ -379,6 +391,10 @@
 
 #define MAX_JUMBO_FRAME_SIZE    0x3F00
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define E1000_TX_PTR_GAP		0x1F
+>>>>>>> v3.18
 =======
 #define E1000_TX_PTR_GAP		0x1F
 >>>>>>> v3.18

@@ -5,7 +5,10 @@ conmakehash
 kallsyms
 pnmtologo
 <<<<<<< HEAD
+<<<<<<< HEAD
 bin2c
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 unifdef

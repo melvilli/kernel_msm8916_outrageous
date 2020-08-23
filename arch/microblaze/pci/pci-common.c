@@ -30,6 +30,10 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -51,6 +55,7 @@ static int global_phb_number;		/* Global phb counter */
 resource_size_t isa_mem_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dma_map_ops *pci_dma_ops = &dma_direct_ops;
 
 unsigned long isa_io_base;
@@ -69,6 +74,11 @@ struct dma_map_ops *get_pci_dma_ops(void)
 }
 EXPORT_SYMBOL(get_pci_dma_ops);
 
+=======
+unsigned long isa_io_base;
+static int pci_bus_count;
+
+>>>>>>> v3.18
 =======
 unsigned long isa_io_base;
 static int pci_bus_count;
@@ -178,6 +188,7 @@ struct pci_controller *pci_find_hose_for_OF_device(struct device_node *node)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pci_show_devspec(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
@@ -200,12 +211,15 @@ int pcibios_add_platform_entries(struct pci_dev *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void pcibios_set_master(struct pci_dev *dev)
 {
 	/* No special bus mastering setup handling */
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Reads the interrupt pin to determine if interrupt is use by card.
  * If the interrupt is used, then gets the interrupt line from the
@@ -277,6 +291,8 @@ int pci_read_irq_line(struct pci_dev *pci_dev)
 EXPORT_SYMBOL(pci_read_irq_line);
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Platform support for /proc/bus/pci/X/Y mmap()s,
@@ -674,6 +690,7 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 				  struct device_node *dev, int primary)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *ranges;
 	int rlen;
 	int pna = of_n_addr_cells(dev);
@@ -684,16 +701,22 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 	unsigned long long isa_mb = 0;
 	struct resource *res;
 =======
+=======
+>>>>>>> v3.18
 	int memno = 0, isa_hole = -1;
 	unsigned long long isa_mb = 0;
 	struct resource *res;
 	struct of_pci_range range;
 	struct of_pci_range_parser parser;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pr_info("PCI host bridge %s %s ranges:\n",
 	       dev->full_name, primary ? "(primary)" : "");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Get ranges property */
 	ranges = of_get_property(dev, "ranges", &rlen);
@@ -716,6 +739,8 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 
 		ranges += np;
 =======
+=======
+>>>>>>> v3.18
 	/* Check for ranges property */
 	if (of_pci_range_parser_init(&parser, dev))
 		return;
@@ -727,6 +752,9 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 				range.pci_space, range.pci_addr);
 		pr_debug("cpu_addr:0x%016llx size:0x%016llx\n",
 					range.cpu_addr, range.size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* If we failed translation or got a zero-sized region
@@ -734,6 +762,7 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 		 * such as power3 which look like some kind of attempt
 		 * at exposing the VGA memory hole)
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (cpu_addr == OF_BAD_ADDR || size == 0)
 			continue;
@@ -758,6 +787,8 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			pr_info("  IO 0x%016llx..0x%016llx -> 0x%016llx\n",
 			       cpu_addr, cpu_addr + size - 1, pci_addr);
 =======
+=======
+>>>>>>> v3.18
 		if (range.cpu_addr == OF_BAD_ADDR || range.size == 0)
 			continue;
 
@@ -768,6 +799,9 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			pr_info("  IO 0x%016llx..0x%016llx -> 0x%016llx\n",
 				range.cpu_addr, range.cpu_addr + range.size - 1,
 				range.pci_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* We support only one IO range */
@@ -777,18 +811,24 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			}
 			/* On 32 bits, limit I/O space to 16MB */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (size > 0x01000000)
 				size = 0x01000000;
 
 			/* 32 bits needs to map IOs here */
 			hose->io_base_virt = ioremap(cpu_addr, size);
 =======
+=======
+>>>>>>> v3.18
 			if (range.size > 0x01000000)
 				range.size = 0x01000000;
 
 			/* 32 bits needs to map IOs here */
 			hose->io_base_virt = ioremap(range.cpu_addr,
 						range.size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* Expect trouble if pci_addr is not 0 */
@@ -798,6 +838,7 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			/* pci_io_size and io_base_phys always represent IO
 			 * space starting at 0 so we factor in pci_addr
 			 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			hose->pci_io_size = pci_addr + size;
 			hose->io_base_phys = cpu_addr - pci_addr;
@@ -813,6 +854,8 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			       cpu_addr, cpu_addr + size - 1, pci_addr,
 			       (pci_space & 0x40000000) ? "Prefetch" : "");
 =======
+=======
+>>>>>>> v3.18
 			hose->pci_io_size = range.pci_addr + range.size;
 			hose->io_base_phys = range.cpu_addr - range.pci_addr;
 
@@ -827,6 +870,9 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 				range.pci_addr,
 				(range.pci_space & 0x40000000) ?
 				"Prefetch" : "");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* We support only 3 memory ranges */
@@ -836,6 +882,7 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			}
 			/* Handles ISA memory hole space here */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (pci_addr == 0) {
 				isa_mb = cpu_addr;
 				isa_hole = memno;
@@ -844,6 +891,8 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 				hose->isa_mem_phys = cpu_addr;
 				hose->isa_mem_size = size;
 =======
+=======
+>>>>>>> v3.18
 			if (range.pci_addr == 0) {
 				isa_mb = range.cpu_addr;
 				isa_hole = memno;
@@ -851,6 +900,9 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 					isa_mem_base = range.cpu_addr;
 				hose->isa_mem_phys = range.cpu_addr;
 				hose->isa_mem_size = range.size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 
@@ -860,12 +912,15 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			 */
 			if (memno == 0 ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    (isa_hole >= 0 && pci_addr != 0 &&
 			     hose->pci_mem_offset == isa_mb))
 				hose->pci_mem_offset = cpu_addr - pci_addr;
 			else if (pci_addr != 0 &&
 				 hose->pci_mem_offset != cpu_addr - pci_addr) {
 =======
+=======
+>>>>>>> v3.18
 			    (isa_hole >= 0 && range.pci_addr != 0 &&
 			     hose->pci_mem_offset == isa_mb))
 				hose->pci_mem_offset = range.cpu_addr -
@@ -873,6 +928,9 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			else if (range.pci_addr != 0 &&
 				 hose->pci_mem_offset != range.cpu_addr -
 							range.pci_addr) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				pr_info(" \\--> Skipped (offset mismatch) !\n");
 				continue;
@@ -881,10 +939,13 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			/* Build resource */
 			res = &hose->mem_resources[memno++];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			res->flags = IORESOURCE_MEM;
 			if (pci_space & 0x40000000)
 				res->flags |= IORESOURCE_PREFETCH;
 			res->start = cpu_addr;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			break;
@@ -892,15 +953,21 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 		if (res != NULL) {
 			res->name = dev->full_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			res->end = res->start + size - 1;
 			res->parent = NULL;
 			res->sibling = NULL;
 			res->child = NULL;
 =======
+=======
+>>>>>>> v3.18
 			res->flags = range.flags;
 			res->start = range.cpu_addr;
 			res->end = range.cpu_addr + range.size - 1;
 			res->parent = res->child = res->sibling = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1093,12 +1160,17 @@ void pcibios_setup_bus_devices(struct pci_bus *bus)
 		set_dev_node(&dev->dev, pcibus_to_node(dev->bus));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Hook up default DMA ops */
 		set_dma_ops(&dev->dev, pci_dma_ops);
 		dev->dev.archdata.dma_data = (void *)PCI_DRAM_OFFSET;
 
 		/* Read default IRQs and fixup if necessary */
 		pci_read_irq_line(dev);
+=======
+		/* Read default IRQs and fixup if necessary */
+		dev->irq = of_irq_parse_and_map_pci(dev, 0, 0);
+>>>>>>> v3.18
 =======
 		/* Read default IRQs and fixup if necessary */
 		dev->irq = of_irq_parse_and_map_pci(dev, 0, 0);
@@ -1506,11 +1578,14 @@ void pcibios_finish_adding_to_bus(struct pci_bus *bus)
 EXPORT_SYMBOL_GPL(pcibios_finish_adding_to_bus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pcibios_enable_device(struct pci_dev *dev, int mask)
 {
 	return pci_enable_resources(dev, mask);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void pcibios_setup_phb_resources(struct pci_controller *hose,

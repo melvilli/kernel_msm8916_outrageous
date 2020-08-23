@@ -686,7 +686,11 @@ do {									\
 	      {									\
 		r = 0;								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (X##_s)							\
+=======
+		if (!X##_s)							\
+>>>>>>> v3.18
 =======
 		if (!X##_s)							\
 >>>>>>> v3.18
@@ -748,6 +752,10 @@ do {									\
 	else									\
 	  {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	    int _lz0, _lz1;							\
+>>>>>>> v3.18
 =======
 	    int _lz0, _lz1;							\
 >>>>>>> v3.18
@@ -757,13 +765,19 @@ do {									\
 	      _FP_FRAC_SRS_##wc(X, _FP_FRACBITS_##fs - 1 - X##_e,		\
 				_FP_WFRACBITS_##fs);				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    _FP_ROUND(wc, X);							\
 =======
+=======
+>>>>>>> v3.18
 	    _FP_FRAC_CLZ_##wc(_lz0, X);						\
 	    _FP_ROUND(wc, X);							\
 	    _FP_FRAC_CLZ_##wc(_lz1, X);						\
 	    if (_lz1 < _lz0)							\
 	      X##_e++; /* For overflow detection.  */				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    _FP_FRAC_SRL_##wc(X, _FP_WORKBITS);					\
 	    _FP_FRAC_ASSEMBLE_##wc(r, X, rsize);				\
@@ -779,7 +793,11 @@ do {									\
 	      {									\
 		r = 0;								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (X##_s)							\
+=======
+		if (!X##_s)							\
+>>>>>>> v3.18
 =======
 		if (!X##_s)							\
 >>>>>>> v3.18

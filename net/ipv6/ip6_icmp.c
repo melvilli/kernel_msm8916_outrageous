@@ -14,7 +14,11 @@ int inet6_register_icmp_sender(ip6_icmp_send_t *fn)
 {
 	return (cmpxchg((ip6_icmp_send_t **)&ip6_icmp_send, NULL, fn) == NULL) ?
 <<<<<<< HEAD
+<<<<<<< HEAD
 	        0 : -EBUSY;
+=======
+		0 : -EBUSY;
+>>>>>>> v3.18
 =======
 		0 : -EBUSY;
 >>>>>>> v3.18

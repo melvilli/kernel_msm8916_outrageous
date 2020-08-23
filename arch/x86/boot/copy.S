@@ -15,7 +15,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.code16gcc
+=======
+	.code16
+>>>>>>> v3.18
 =======
 	.code16
 >>>>>>> v3.18
@@ -35,7 +39,11 @@ GLOBAL(memcpy)
 	popw	%di
 	popw	%si
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret
+=======
+	retl
+>>>>>>> v3.18
 =======
 	retl
 >>>>>>> v3.18
@@ -54,7 +62,11 @@ GLOBAL(memset)
 	rep; stosb
 	popw	%di
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret
+=======
+	retl
+>>>>>>> v3.18
 =======
 	retl
 >>>>>>> v3.18
@@ -65,9 +77,15 @@ GLOBAL(copy_from_fs)
 	pushw	%fs
 	popw	%ds
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call	memcpy
 	popw	%ds
 	ret
+=======
+	calll	memcpy
+	popw	%ds
+	retl
+>>>>>>> v3.18
 =======
 	calll	memcpy
 	popw	%ds
@@ -80,9 +98,15 @@ GLOBAL(copy_to_fs)
 	pushw	%fs
 	popw	%es
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call	memcpy
 	popw	%es
 	ret
+=======
+	calll	memcpy
+	popw	%es
+	retl
+>>>>>>> v3.18
 =======
 	calll	memcpy
 	popw	%es
@@ -96,9 +120,15 @@ GLOBAL(copy_from_gs)
 	pushw	%gs
 	popw	%ds
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call	memcpy
 	popw	%ds
 	ret
+=======
+	calll	memcpy
+	popw	%ds
+	retl
+>>>>>>> v3.18
 =======
 	calll	memcpy
 	popw	%ds
@@ -111,9 +141,15 @@ GLOBAL(copy_to_gs)
 	pushw	%gs
 	popw	%es
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call	memcpy
 	popw	%es
 	ret
+=======
+	calll	memcpy
+	popw	%es
+	retl
+>>>>>>> v3.18
 =======
 	calll	memcpy
 	popw	%es

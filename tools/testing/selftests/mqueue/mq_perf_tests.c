@@ -297,9 +297,15 @@ static inline void open_queue(struct mq_attr *attr)
 	printf("\t\tmq_flags:\t\t\t%s\n", result.mq_flags & O_NONBLOCK ?
 	       "O_NONBLOCK" : "(null)");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("\t\tmq_maxmsg:\t\t\t%d\n", result.mq_maxmsg);
 	printf("\t\tmq_msgsize:\t\t\t%d\n", result.mq_msgsize);
 	printf("\t\tmq_curmsgs:\t\t\t%d\n", result.mq_curmsgs);
+=======
+	printf("\t\tmq_maxmsg:\t\t\t%lu\n", result.mq_maxmsg);
+	printf("\t\tmq_msgsize:\t\t\t%lu\n", result.mq_msgsize);
+	printf("\t\tmq_curmsgs:\t\t\t%lu\n", result.mq_curmsgs);
+>>>>>>> v3.18
 =======
 	printf("\t\tmq_maxmsg:\t\t\t%lu\n", result.mq_maxmsg);
 	printf("\t\tmq_msgsize:\t\t\t%lu\n", result.mq_msgsize);
@@ -447,7 +453,11 @@ void *perf_test_thread(void *arg)
 
 	printf("\t\tMax priorities:\t\t\t%d\n", mq_prio_max);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("\t\tClock resolution:\t\t%d nsec%s\n", res.tv_nsec,
+=======
+	printf("\t\tClock resolution:\t\t%lu nsec%s\n", res.tv_nsec,
+>>>>>>> v3.18
 =======
 	printf("\t\tClock resolution:\t\t%lu nsec%s\n", res.tv_nsec,
 >>>>>>> v3.18
@@ -465,6 +475,7 @@ void *perf_test_thread(void *arg)
 	for (i = 0; i < TEST1_LOOPS; i++)
 		do_send_recv();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("\t\tSend msg:\t\t\t%d.%ds total time\n",
 	       send_total.tv_sec, send_total.tv_nsec);
 	nsec = ((unsigned long long)send_total.tv_sec * 1000000000 +
@@ -480,6 +491,8 @@ void *perf_test_thread(void *arg)
 	for (cur_test = test2; cur_test->desc != NULL; cur_test++) {
 		printf(cur_test->desc);
 =======
+=======
+>>>>>>> v3.18
 	printf("\t\tSend msg:\t\t\t%ld.%lus total time\n",
 	       send_total.tv_sec, send_total.tv_nsec);
 	nsec = ((unsigned long long)send_total.tv_sec * 1000000000 +
@@ -494,6 +507,9 @@ void *perf_test_thread(void *arg)
 
 	for (cur_test = test2; cur_test->desc != NULL; cur_test++) {
 		printf("%s:\n", cur_test->desc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printf("\t\t(%d iterations)\n", TEST2_LOOPS);
 		prio_out = 0;
@@ -521,6 +537,7 @@ void *perf_test_thread(void *arg)
 		}
 		printf("done.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printf("\t\tSend msg:\t\t\t%d.%ds total time\n",
 		       send_total.tv_sec, send_total.tv_nsec);
 		nsec = ((unsigned long long)send_total.tv_sec * 1000000000 +
@@ -532,6 +549,8 @@ void *perf_test_thread(void *arg)
 			recv_total.tv_nsec) / TEST2_LOOPS;
 		printf("\t\t\t\t\t\t%d nsec/msg\n", nsec);
 =======
+=======
+>>>>>>> v3.18
 		printf("\t\tSend msg:\t\t\t%ld.%lus total time\n",
 		       send_total.tv_sec, send_total.tv_nsec);
 		nsec = ((unsigned long long)send_total.tv_sec * 1000000000 +
@@ -542,6 +561,9 @@ void *perf_test_thread(void *arg)
 		nsec = ((unsigned long long)recv_total.tv_sec * 1000000000 +
 			recv_total.tv_nsec) / TEST2_LOOPS;
 		printf("\t\t\t\t\t\t%lld nsec/msg\n", nsec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printf("\t\tDraining queue...");
 		fflush(stdout);
@@ -694,13 +716,19 @@ int main(int argc, char *argv[])
 	printf("\nInitial system state:\n");
 	printf("\tUsing queue path:\t\t\t%s\n", queue_path);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("\tRLIMIT_MSGQUEUE(soft):\t\t\t%d\n", saved_limits.rlim_cur);
 	printf("\tRLIMIT_MSGQUEUE(hard):\t\t\t%d\n", saved_limits.rlim_max);
 =======
+=======
+>>>>>>> v3.18
 	printf("\tRLIMIT_MSGQUEUE(soft):\t\t\t%ld\n",
 		(long) saved_limits.rlim_cur);
 	printf("\tRLIMIT_MSGQUEUE(hard):\t\t\t%ld\n",
 		(long) saved_limits.rlim_max);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printf("\tMaximum Message Size:\t\t\t%d\n", saved_max_msgsize);
 	printf("\tMaximum Queue Size:\t\t\t%d\n", saved_max_msgs);
@@ -715,15 +743,21 @@ int main(int argc, char *argv[])
 		printf("\tRLIMIT_MSGQUEUE(hard):\t\t\t(unlimited)\n");
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printf("\tRLIMIT_MSGQUEUE(soft):\t\t\t%d\n",
 		       cur_limits.rlim_cur);
 		printf("\tRLIMIT_MSGQUEUE(hard):\t\t\t%d\n",
 		       cur_limits.rlim_max);
 =======
+=======
+>>>>>>> v3.18
 		printf("\tRLIMIT_MSGQUEUE(soft):\t\t\t%ld\n",
 		       (long) cur_limits.rlim_cur);
 		printf("\tRLIMIT_MSGQUEUE(hard):\t\t\t%ld\n",
 		       (long) cur_limits.rlim_max);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	printf("\tMaximum Message Size:\t\t\t%d\n", cur_max_msgsize);

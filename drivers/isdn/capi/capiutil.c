@@ -23,6 +23,7 @@
 /* from CAPI2.0 DDK AVM Berlin GmbH */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_ISDN_DRV_AVMB1_VERBOSE_REASON
 char *capi_info2str(u16 reason)
 {
@@ -224,6 +225,8 @@ char *capi_info2str(u16 reason)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 typedef struct {
 	int typ;
 	size_t off;
@@ -408,10 +411,16 @@ static unsigned command_2_index(unsigned c, unsigned sc)
 	if (c & 0x80)
 		c = 0x9 + (c & 0x0f);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (c <= 0x0f);
 	else if (c == 0x41)
 		c = 0x9 + 0x1;
 	else if (c == 0xff)
+=======
+	else if (c == 0x41)
+		c = 0x9 + 0x1;
+	if (c > 0x18)
+>>>>>>> v3.18
 =======
 	else if (c == 0x41)
 		c = 0x9 + 0x1;
@@ -422,7 +431,10 @@ static unsigned command_2_index(unsigned c, unsigned sc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * capi_cmd2par() - find parameter string for CAPI 2.0 command/subcommand
  * @cmd:	command number
@@ -436,6 +448,9 @@ static unsigned char *capi_cmd2par(u8 cmd, u8 subcmd)
 	return cpars[command_2_index(cmd, subcmd)];
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*-------------------------------------------------------*/
 #define TYP (cdef[cmsg->par[cmsg->p]].typ)
@@ -530,7 +545,13 @@ unsigned capi_cmsg2message(_cmsg *cmsg, u8 *msg)
 	cmsg->l = 8;
 	cmsg->p = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmsg->par = cpars[command_2_index(cmsg->Command, cmsg->Subcommand)];
+=======
+	cmsg->par = capi_cmd2par(cmsg->Command, cmsg->Subcommand);
+	if (!cmsg->par)
+		return 1;	/* invalid command/subcommand */
+>>>>>>> v3.18
 =======
 	cmsg->par = capi_cmd2par(cmsg->Command, cmsg->Subcommand);
 	if (!cmsg->par)
@@ -609,7 +630,13 @@ unsigned capi_message2cmsg(_cmsg *cmsg, u8 *msg)
 	byteTRcpy(cmsg->m + 4, &cmsg->Command);
 	byteTRcpy(cmsg->m + 5, &cmsg->Subcommand);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmsg->par = cpars[command_2_index(cmsg->Command, cmsg->Subcommand)];
+=======
+	cmsg->par = capi_cmd2par(cmsg->Command, cmsg->Subcommand);
+	if (!cmsg->par)
+		return 1;	/* invalid command/subcommand */
+>>>>>>> v3.18
 =======
 	cmsg->par = capi_cmd2par(cmsg->Command, cmsg->Subcommand);
 	if (!cmsg->par)
@@ -710,7 +737,11 @@ static char *mnames[] =
  * @subcmd:	subcommand number
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Return value: static string, NULL if command/subcommand unknown
+=======
+ * Return value: static string
+>>>>>>> v3.18
 =======
  * Return value: static string
 >>>>>>> v3.18
@@ -719,14 +750,20 @@ static char *mnames[] =
 char *capi_cmd2str(u8 cmd, u8 subcmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mnames[command_2_index(cmd, subcmd)];
 =======
+=======
+>>>>>>> v3.18
 	char *result;
 
 	result = mnames[command_2_index(cmd, subcmd)];
 	if (result == NULL)
 		result = "INVALID_COMMAND";
 	return result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -878,6 +915,12 @@ static _cdebbuf *printstruct(_cdebbuf *cdb, u8 *m)
 static _cdebbuf *protocol_message_2_pars(_cdebbuf *cdb, _cmsg *cmsg, int level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!cmsg->par)
+		return NULL;	/* invalid command/subcommand */
+
+>>>>>>> v3.18
 =======
 	if (!cmsg->par)
 		return NULL;	/* invalid command/subcommand */
@@ -1018,15 +1061,21 @@ _cdebbuf *capi_message2str(u8 *msg)
 	byteTRcpy(cmsg->m + 4, &cmsg->Command);
 	byteTRcpy(cmsg->m + 5, &cmsg->Subcommand);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmsg->par = cpars[command_2_index(cmsg->Command, cmsg->Subcommand)];
 
 	cdb = bufprint(cdb, "%-26s ID=%03d #0x%04x LEN=%04d\n",
 		       mnames[command_2_index(cmsg->Command, cmsg->Subcommand)],
 =======
+=======
+>>>>>>> v3.18
 	cmsg->par = capi_cmd2par(cmsg->Command, cmsg->Subcommand);
 
 	cdb = bufprint(cdb, "%-26s ID=%03d #0x%04x LEN=%04d\n",
 		       capi_cmd2str(cmsg->Command, cmsg->Subcommand),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       ((unsigned short *) msg)[1],
 		       ((unsigned short *) msg)[3],
@@ -1062,7 +1111,11 @@ _cdebbuf *capi_cmsg2str(_cmsg *cmsg)
 	cmsg->p = 0;
 	cdb = bufprint(cdb, "%s ID=%03d #0x%04x LEN=%04d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       mnames[command_2_index(cmsg->Command, cmsg->Subcommand)],
+=======
+		       capi_cmd2str(cmsg->Command, cmsg->Subcommand),
+>>>>>>> v3.18
 =======
 		       capi_cmd2str(cmsg->Command, cmsg->Subcommand),
 >>>>>>> v3.18
@@ -1141,6 +1194,9 @@ EXPORT_SYMBOL(capi_cmd2str);
 EXPORT_SYMBOL(capi_cmsg2str);
 EXPORT_SYMBOL(capi_message2str);
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(capi_info2str);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

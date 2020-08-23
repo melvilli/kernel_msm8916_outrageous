@@ -40,12 +40,18 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Reserved space for low level debug virtual addresses within
  * 0xf6200000..0xf6201000
  */
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Internal Memory Controller (PXA27x and later)
  */

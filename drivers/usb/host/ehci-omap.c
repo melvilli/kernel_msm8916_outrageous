@@ -101,17 +101,23 @@ static int ehci_hcd_omap_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usbhs_omap_platform_data *pdata = dev->platform_data;
 	struct resource	*res;
 	struct usb_hcd	*hcd;
 	void __iomem *regs;
 	int ret = -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	struct usbhs_omap_platform_data *pdata = dev_get_platdata(dev);
 	struct resource	*res;
 	struct usb_hcd	*hcd;
 	void __iomem *regs;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int irq;
 	int i;
@@ -128,7 +134,11 @@ static int ehci_hcd_omap_probe(struct platform_device *pdev)
 	/* For DT boot, get platform data from parent. i.e. usbhshost */
 	if (dev->of_node) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pdata = dev->parent->platform_data;
+=======
+		pdata = dev_get_platdata(dev->parent);
+>>>>>>> v3.18
 =======
 		pdata = dev_get_platdata(dev->parent);
 >>>>>>> v3.18
@@ -157,17 +167,23 @@ static int ehci_hcd_omap_probe(struct platform_device *pdev)
 	 * Once we have dma capability bindings this can go away.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev->dma_mask)
 		dev->dma_mask = &dev->coherent_dma_mask;
 	if (!dev->coherent_dma_mask)
 		dev->coherent_dma_mask = DMA_BIT_MASK(32);
 
 =======
+=======
+>>>>>>> v3.18
 	ret = dma_coerce_mask_and_coherent(dev, DMA_BIT_MASK(32));
 	if (ret)
 		return ret;
 
 	ret = -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hcd = usb_create_hcd(&ehci_omap_hc_driver, dev,
 			dev_name(dev));
@@ -236,6 +252,10 @@ static int ehci_hcd_omap_probe(struct platform_device *pdev)
 		goto err_pm_runtime;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -303,6 +323,7 @@ static int ehci_hcd_omap_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ehci_hcd_omap_shutdown(struct platform_device *pdev)
 {
 	struct usb_hcd *hcd = dev_get_drvdata(&pdev->dev);
@@ -311,6 +332,8 @@ static void ehci_hcd_omap_shutdown(struct platform_device *pdev)
 		hcd->driver->shutdown(hcd);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct of_device_id omap_ehci_dt_ids[] = {
@@ -324,7 +347,11 @@ static struct platform_driver ehci_hcd_omap_driver = {
 	.probe			= ehci_hcd_omap_probe,
 	.remove			= ehci_hcd_omap_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shutdown		= ehci_hcd_omap_shutdown,
+=======
+	.shutdown		= usb_hcd_platform_shutdown,
+>>>>>>> v3.18
 =======
 	.shutdown		= usb_hcd_platform_shutdown,
 >>>>>>> v3.18
@@ -333,7 +360,11 @@ static struct platform_driver ehci_hcd_omap_driver = {
 	.driver = {
 		.name		= hcd_name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(omap_ehci_dt_ids),
+=======
+		.of_match_table = omap_ehci_dt_ids,
+>>>>>>> v3.18
 =======
 		.of_match_table = omap_ehci_dt_ids,
 >>>>>>> v3.18

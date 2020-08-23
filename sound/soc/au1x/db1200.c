@@ -74,6 +74,10 @@ static struct snd_soc_dai_link db1300_ac97_dai = {
 static struct snd_soc_card db1300_ac97_machine = {
 	.name		= "DB1300_AC97",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.owner		= THIS_MODULE,
+>>>>>>> v3.18
 =======
 	.owner		= THIS_MODULE,
 >>>>>>> v3.18
@@ -84,6 +88,10 @@ static struct snd_soc_card db1300_ac97_machine = {
 static struct snd_soc_card db1550_ac97_machine = {
 	.name		= "DB1550_AC97",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.owner		= THIS_MODULE,
+>>>>>>> v3.18
 =======
 	.owner		= THIS_MODULE,
 >>>>>>> v3.18
@@ -154,6 +162,10 @@ static struct snd_soc_dai_link db1300_i2s_dai = {
 static struct snd_soc_card db1300_i2s_machine = {
 	.name		= "DB1300_I2S",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.owner		= THIS_MODULE,
+>>>>>>> v3.18
 =======
 	.owner		= THIS_MODULE,
 >>>>>>> v3.18
@@ -174,6 +186,10 @@ static struct snd_soc_dai_link db1550_i2s_dai = {
 static struct snd_soc_card db1550_i2s_machine = {
 	.name		= "DB1550_I2S",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.owner		= THIS_MODULE,
+>>>>>>> v3.18
 =======
 	.owner		= THIS_MODULE,
 >>>>>>> v3.18

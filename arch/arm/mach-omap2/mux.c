@@ -71,9 +71,15 @@ u16 omap_mux_read(struct omap_mux_partition *partition, u16 reg)
 {
 	if (partition->flags & OMAP_MUX_REG_8BIT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return __raw_readb(partition->base + reg);
 	else
 		return __raw_readw(partition->base + reg);
+=======
+		return readb_relaxed(partition->base + reg);
+	else
+		return readw_relaxed(partition->base + reg);
+>>>>>>> v3.18
 =======
 		return readb_relaxed(partition->base + reg);
 	else
@@ -86,9 +92,15 @@ void omap_mux_write(struct omap_mux_partition *partition, u16 val,
 {
 	if (partition->flags & OMAP_MUX_REG_8BIT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__raw_writeb(val, partition->base + reg);
 	else
 		__raw_writew(val, partition->base + reg);
+=======
+		writeb_relaxed(val, partition->base + reg);
+	else
+		writew_relaxed(val, partition->base + reg);
+>>>>>>> v3.18
 =======
 		writeb_relaxed(val, partition->base + reg);
 	else
@@ -694,22 +706,29 @@ static ssize_t omap_mux_dbg_signal_write(struct file *file,
 					 size_t count, loff_t *ppos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char buf[OMAP_MUX_MAX_ARG_CHAR];
 	struct seq_file *seqf;
 	struct omap_mux *m;
 	unsigned long val;
 	int buf_size, ret;
 =======
+=======
+>>>>>>> v3.18
 	struct seq_file *seqf;
 	struct omap_mux *m;
 	u16 val;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct omap_mux_partition *partition;
 
 	if (count > OMAP_MUX_MAX_ARG_CHAR)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memset(buf, 0, sizeof(buf));
 	buf_size = min(count, sizeof(buf) - 1);
@@ -725,10 +744,15 @@ static ssize_t omap_mux_dbg_signal_write(struct file *file,
 		return -EINVAL;
 
 =======
+=======
+>>>>>>> v3.18
 	ret = kstrtou16_from_user(user_buf, count, 0x10, &val);
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	seqf = file->private_data;
 	m = seqf->private;
@@ -738,7 +762,11 @@ static ssize_t omap_mux_dbg_signal_write(struct file *file,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap_mux_write(partition, (u16)val, m->reg_offset);
+=======
+	omap_mux_write(partition, val, m->reg_offset);
+>>>>>>> v3.18
 =======
 	omap_mux_write(partition, val, m->reg_offset);
 >>>>>>> v3.18
@@ -844,13 +872,19 @@ int __init omap_mux_late_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	omap_mux_dbg_init();
 
 	/* see pinctrl-single-omap for the wake-up interrupt handling */
 	if (of_have_populated_dt())
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = request_irq(omap_prcm_event_to_irq("io"),
 		omap_hwmod_mux_handle_irq, IRQF_SHARED | IRQF_NO_SUSPEND,
@@ -858,9 +892,13 @@ int __init omap_mux_late_init(void)
 
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("mux: Failed to setup hwmod io irq %d\n", ret);
 
 	omap_mux_dbg_init();
+=======
+		pr_warn("mux: Failed to setup hwmod io irq %d\n", ret);
+>>>>>>> v3.18
 =======
 		pr_warn("mux: Failed to setup hwmod io irq %d\n", ret);
 >>>>>>> v3.18
@@ -957,7 +995,11 @@ static void __init omap_mux_set_cmdline_signals(void)
 	while ((token = strsep(&next_opt, ",")) != NULL) {
 		char *keyval, *name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long val;
+=======
+		u16 val;
+>>>>>>> v3.18
 =======
 		u16 val;
 >>>>>>> v3.18
@@ -968,7 +1010,11 @@ static void __init omap_mux_set_cmdline_signals(void)
 			int res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			res = strict_strtoul(keyval, 0x10, &val);
+=======
+			res = kstrtou16(keyval, 0x10, &val);
+>>>>>>> v3.18
 =======
 			res = kstrtou16(keyval, 0x10, &val);
 >>>>>>> v3.18

@@ -28,6 +28,7 @@
 
 #include <drm/drmP.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "i915_drv.h"
 #include <drm/i915_drm.h>
 #include "i915_trace.h"
@@ -54,6 +55,8 @@ i915_gem_evict_something(struct drm_device *dev, int min_size,
 
 	trace_i915_gem_evict(dev, min_size, alignment, mappable);
 =======
+=======
+>>>>>>> v3.18
 #include <drm/i915_drm.h>
 
 #include "i915_drv.h"
@@ -104,6 +107,9 @@ i915_gem_evict_something(struct drm_device *dev, struct i915_address_space *vm,
 	int pass = 0;
 
 	trace_i915_gem_evict(dev, min_size, alignment, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -131,6 +137,7 @@ i915_gem_evict_something(struct drm_device *dev, struct i915_address_space *vm,
 
 	INIT_LIST_HEAD(&unwind_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mappable)
 		drm_mm_init_scan_with_range(&dev_priv->mm.gtt_space,
 					    min_size, alignment, cache_level,
@@ -152,6 +159,8 @@ i915_gem_evict_something(struct drm_device *dev, struct i915_address_space *vm,
 	list_for_each_entry(obj, &dev_priv->mm.active_list, mm_list) {
 		if (mark_free(obj, &unwind_list))
 =======
+=======
+>>>>>>> v3.18
 	if (start != 0 || end != vm->total) {
 		drm_mm_init_scan_with_range(&vm->mm, min_size,
 					    alignment, cache_level,
@@ -172,6 +181,9 @@ search_again:
 	/* Now merge in the soon-to-be-expired objects... */
 	list_for_each_entry(vma, &vm->active_list, mm_list) {
 		if (mark_free(vma, &unwind_list))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto found;
 	}
@@ -179,6 +191,7 @@ search_again:
 none:
 	/* Nothing found, clean up and bail out! */
 	while (!list_empty(&unwind_list)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		obj = list_first_entry(&unwind_list,
 				       struct drm_i915_gem_object,
@@ -195,6 +208,8 @@ none:
 	 */
 	return -ENOSPC;
 =======
+=======
+>>>>>>> v3.18
 		vma = list_first_entry(&unwind_list,
 				       struct i915_vma,
 				       exec_list);
@@ -225,6 +240,9 @@ none:
 	 * acquire our locks and unpin the old scanouts.
 	 */
 	return intel_has_pending_fb_unpin(dev) ? -EAGAIN : -ENOSPC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 found:
@@ -233,6 +251,7 @@ found:
 	 * temporary list. */
 	INIT_LIST_HEAD(&eviction_list);
 	while (!list_empty(&unwind_list)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		obj = list_first_entry(&unwind_list,
 				       struct drm_i915_gem_object,
@@ -244,6 +263,8 @@ found:
 		}
 		list_del_init(&obj->exec_list);
 =======
+=======
+>>>>>>> v3.18
 		vma = list_first_entry(&unwind_list,
 				       struct i915_vma,
 				       exec_list);
@@ -253,11 +274,15 @@ found:
 			continue;
 		}
 		list_del_init(&vma->exec_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* Unbinding will emit any required flushes */
 	while (!list_empty(&eviction_list)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		obj = list_first_entry(&eviction_list,
 				       struct drm_i915_gem_object,
@@ -268,6 +293,8 @@ found:
 		list_del_init(&obj->exec_list);
 		drm_gem_object_unreference(&obj->base);
 =======
+=======
+>>>>>>> v3.18
 		struct drm_gem_object *obj;
 		vma = list_first_entry(&eviction_list,
 				       struct i915_vma,
@@ -279,12 +306,16 @@ found:
 			ret = i915_vma_unbind(vma);
 
 		drm_gem_object_unreference(obj);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int
 i915_gem_evict_everything(struct drm_device *dev)
@@ -297,6 +328,8 @@ i915_gem_evict_everything(struct drm_device *dev)
 	lists_empty = (list_empty(&dev_priv->mm.inactive_list) &&
 		       list_empty(&dev_priv->mm.active_list));
 =======
+=======
+>>>>>>> v3.18
 /**
  * i915_gem_evict_vm - Evict all idle vmas from a vm
  *
@@ -357,6 +390,9 @@ i915_gem_evict_everything(struct drm_device *dev)
 			lists_empty = false;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (lists_empty)
 		return -ENOSPC;
@@ -375,10 +411,15 @@ i915_gem_evict_everything(struct drm_device *dev)
 
 	/* Having flushed everything, unbind() should never raise an error */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_safe(obj, next,
 				 &dev_priv->mm.inactive_list, mm_list)
 		if (obj->pin_count == 0)
 			WARN_ON(i915_gem_object_unbind(obj));
+=======
+	list_for_each_entry_safe(vm, v, &dev_priv->vm_list, global_link)
+		WARN_ON(i915_gem_evict_vm(vm, false));
+>>>>>>> v3.18
 =======
 	list_for_each_entry_safe(vm, v, &dev_priv->vm_list, global_link)
 		WARN_ON(i915_gem_evict_vm(vm, false));

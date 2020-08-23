@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2010 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2013 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2013 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -285,7 +289,11 @@ lpfc_ct_free_iocb(struct lpfc_hba *phba, struct lpfc_iocbq *ctiocb)
 		lpfc_mbuf_free(phba, buf_ptr->virt, buf_ptr->phys);
 		kfree(buf_ptr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctiocb->context1 = NULL;
+=======
+		ctiocb->context3 = NULL;
+>>>>>>> v3.18
 =======
 		ctiocb->context3 = NULL;
 >>>>>>> v3.18
@@ -904,7 +912,11 @@ lpfc_cmpl_ct(struct lpfc_hba *phba, struct lpfc_iocbq *cmdiocb,
 	if (irsp->ulpStatus) {
 		lpfc_printf_vlog(vport, KERN_ERR, LOG_DISCOVERY,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 "0268 NS cmd %x Error (%d %d)\n",
+=======
+				 "0268 NS cmd x%x Error (x%x x%x)\n",
+>>>>>>> v3.18
 =======
 				 "0268 NS cmd x%x Error (x%x x%x)\n",
 >>>>>>> v3.18
@@ -1452,7 +1464,11 @@ lpfc_fdmi_cmd(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp, int cmdcode)
 			ae = (ATTRIBUTE_ENTRY *) ((uint8_t *) rh + size);
 			ae->ad.bits.AttrType = be16_to_cpu(MANUFACTURER);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			strcpy(ae->un.Manufacturer, "Emulex Corporation");
+=======
+			strncpy(ae->un.Manufacturer, "Emulex Corporation", 64);
+>>>>>>> v3.18
 =======
 			strncpy(ae->un.Manufacturer, "Emulex Corporation", 64);
 >>>>>>> v3.18
@@ -1466,7 +1482,11 @@ lpfc_fdmi_cmd(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp, int cmdcode)
 			ae = (ATTRIBUTE_ENTRY *) ((uint8_t *) rh + size);
 			ae->ad.bits.AttrType = be16_to_cpu(SERIAL_NUMBER);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			strcpy(ae->un.SerialNumber, phba->SerialNumber);
+=======
+			strncpy(ae->un.SerialNumber, phba->SerialNumber, 64);
+>>>>>>> v3.18
 =======
 			strncpy(ae->un.SerialNumber, phba->SerialNumber, 64);
 >>>>>>> v3.18
@@ -1480,7 +1500,11 @@ lpfc_fdmi_cmd(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp, int cmdcode)
 			ae = (ATTRIBUTE_ENTRY *) ((uint8_t *) rh + size);
 			ae->ad.bits.AttrType = be16_to_cpu(MODEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			strcpy(ae->un.Model, phba->ModelName);
+=======
+			strncpy(ae->un.Model, phba->ModelName, 256);
+>>>>>>> v3.18
 =======
 			strncpy(ae->un.Model, phba->ModelName, 256);
 >>>>>>> v3.18
@@ -1494,7 +1518,11 @@ lpfc_fdmi_cmd(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp, int cmdcode)
 			ae = (ATTRIBUTE_ENTRY *) ((uint8_t *) rh + size);
 			ae->ad.bits.AttrType = be16_to_cpu(MODEL_DESCRIPTION);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			strcpy(ae->un.ModelDescription, phba->ModelDesc);
+=======
+			strncpy(ae->un.ModelDescription, phba->ModelDesc, 256);
+>>>>>>> v3.18
 =======
 			strncpy(ae->un.ModelDescription, phba->ModelDesc, 256);
 >>>>>>> v3.18
@@ -1529,7 +1557,12 @@ lpfc_fdmi_cmd(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp, int cmdcode)
 			ae = (ATTRIBUTE_ENTRY *) ((uint8_t *) rh + size);
 			ae->ad.bits.AttrType = be16_to_cpu(DRIVER_VERSION);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			strcpy(ae->un.DriverVersion, lpfc_release_version);
+=======
+			strncpy(ae->un.DriverVersion,
+				lpfc_release_version, 256);
+>>>>>>> v3.18
 =======
 			strncpy(ae->un.DriverVersion,
 				lpfc_release_version, 256);
@@ -1544,7 +1577,12 @@ lpfc_fdmi_cmd(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp, int cmdcode)
 			ae = (ATTRIBUTE_ENTRY *) ((uint8_t *) rh + size);
 			ae->ad.bits.AttrType = be16_to_cpu(OPTION_ROM_VERSION);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			strcpy(ae->un.OptionROMVersion, phba->OptionROMVersion);
+=======
+			strncpy(ae->un.OptionROMVersion,
+				phba->OptionROMVersion, 256);
+>>>>>>> v3.18
 =======
 			strncpy(ae->un.OptionROMVersion,
 				phba->OptionROMVersion, 256);

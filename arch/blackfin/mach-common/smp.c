@@ -47,6 +47,7 @@ unsigned long blackfin_iflush_l1_entry[NR_CPUS];
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct blackfin_initial_pda __cpuinitdata initial_pda_coreb;
 
 enum ipi_message_type {
@@ -55,6 +56,8 @@ enum ipi_message_type {
 	BFIN_IPI_CALL_FUNC,
 	BFIN_IPI_CALL_FUNC_SINGLE,
 =======
+=======
+>>>>>>> v3.18
 struct blackfin_initial_pda initial_pda_coreb;
 
 enum ipi_message_type {
@@ -62,6 +65,9 @@ enum ipi_message_type {
 	BFIN_IPI_TIMER,
 	BFIN_IPI_RESCHEDULE,
 	BFIN_IPI_CALL_FUNC,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BFIN_IPI_CPU_STOP,
 };
@@ -83,8 +89,13 @@ static DEFINE_SPINLOCK(stop_lock);
 /* Simple FIFO buffer, overflow leads to panic */
 struct ipi_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long count;
 	unsigned long bits;
+=======
+	atomic_t count;
+	atomic_t bits;
+>>>>>>> v3.18
 =======
 	atomic_t count;
 	atomic_t bits;
@@ -161,9 +172,15 @@ static irqreturn_t ipi_handler_int1(int irq, void *dev_instance)
 	platform_clear_ipi(cpu, IRQ_SUPPLE_1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bfin_ipi_data = &__get_cpu_var(bfin_ipi);
 	smp_mb();
 	while ((pending = xchg(&bfin_ipi_data->bits, 0)) != 0) {
+=======
+	smp_rmb();
+	bfin_ipi_data = this_cpu_ptr(&bfin_ipi);
+	while ((pending = atomic_xchg(&bfin_ipi_data->bits, 0)) != 0) {
+>>>>>>> v3.18
 =======
 	smp_rmb();
 	bfin_ipi_data = this_cpu_ptr(&bfin_ipi);
@@ -183,6 +200,7 @@ static irqreturn_t ipi_handler_int1(int irq, void *dev_instance)
 				generic_smp_call_function_interrupt();
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			case BFIN_IPI_CALL_FUNC_SINGLE:
 				generic_smp_call_function_single_interrupt();
@@ -197,6 +215,8 @@ static irqreturn_t ipi_handler_int1(int irq, void *dev_instance)
 		smp_mb();
 	}
 =======
+=======
+>>>>>>> v3.18
 			case BFIN_IPI_CPU_STOP:
 				ipi_cpu_stop(cpu);
 				break;
@@ -208,6 +228,9 @@ static irqreturn_t ipi_handler_int1(int irq, void *dev_instance)
 
 	}
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return IRQ_HANDLED;
 }
@@ -219,8 +242,13 @@ static void bfin_ipi_init(void)
 	for_each_possible_cpu(cpu) {
 		bfin_ipi_data = &per_cpu(bfin_ipi, cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bfin_ipi_data->bits = 0;
 		bfin_ipi_data->count = 0;
+=======
+		atomic_set(&bfin_ipi_data->bits, 0);
+		atomic_set(&bfin_ipi_data->count, 0);
+>>>>>>> v3.18
 =======
 		atomic_set(&bfin_ipi_data->bits, 0);
 		atomic_set(&bfin_ipi_data->count, 0);
@@ -236,6 +264,7 @@ void send_ipi(const struct cpumask *cpumask, enum ipi_message_type msg)
 
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smp_mb();
 	for_each_cpu(cpu, cpumask) {
 		bfin_ipi_data = &per_cpu(bfin_ipi, cpu);
@@ -247,6 +276,8 @@ void send_ipi(const struct cpumask *cpumask, enum ipi_message_type msg)
 
 	local_irq_restore(flags);
 =======
+=======
+>>>>>>> v3.18
 	for_each_cpu(cpu, cpumask) {
 		bfin_ipi_data = &per_cpu(bfin_ipi, cpu);
 		atomic_set_mask((1 << msg), &bfin_ipi_data->bits);
@@ -256,13 +287,20 @@ void send_ipi(const struct cpumask *cpumask, enum ipi_message_type msg)
 	smp_wmb();
 	for_each_cpu(cpu, cpumask)
 		platform_send_ipi_cpu(cpu, IRQ_SUPPLE_1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void arch_send_call_function_single_ipi(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	send_ipi(cpumask_of(cpu), BFIN_IPI_CALL_FUNC_SINGLE);
+=======
+	send_ipi(cpumask_of(cpu), BFIN_IPI_CALL_FUNC);
+>>>>>>> v3.18
 =======
 	send_ipi(cpumask_of(cpu), BFIN_IPI_CALL_FUNC);
 >>>>>>> v3.18
@@ -306,7 +344,11 @@ void smp_send_stop(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *idle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 int __cpu_up(unsigned int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -323,7 +365,11 @@ int __cpu_up(unsigned int cpu, struct task_struct *idle)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit setup_secondary(unsigned int cpu)
+=======
+static void setup_secondary(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void setup_secondary(unsigned int cpu)
 >>>>>>> v3.18
@@ -345,7 +391,11 @@ static void setup_secondary(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit secondary_start_kernel(void)
+=======
+void secondary_start_kernel(void)
+>>>>>>> v3.18
 =======
 void secondary_start_kernel(void)
 >>>>>>> v3.18
@@ -388,7 +438,10 @@ void secondary_start_kernel(void)
 
 	platform_secondary_init(cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* setup local core timer */
@@ -407,6 +460,11 @@ void secondary_start_kernel(void)
 	calibrate_delay();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* We are done with local CPU inits, unblock the boot CPU. */
+	set_cpu_online(cpu, true);
+>>>>>>> v3.18
 =======
 	/* We are done with local CPU inits, unblock the boot CPU. */
 	set_cpu_online(cpu, true);
@@ -481,7 +539,11 @@ EXPORT_SYMBOL(resync_core_dcache);
 
 #ifdef CONFIG_HOTPLUG_CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuexit __cpu_disable(void)
+=======
+int __cpu_disable(void)
+>>>>>>> v3.18
 =======
 int __cpu_disable(void)
 >>>>>>> v3.18
@@ -498,7 +560,11 @@ int __cpu_disable(void)
 static DECLARE_COMPLETION(cpu_killed);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuexit __cpu_die(unsigned int cpu)
+=======
+int __cpu_die(unsigned int cpu)
+>>>>>>> v3.18
 =======
 int __cpu_die(unsigned int cpu)
 >>>>>>> v3.18

@@ -41,13 +41,19 @@
 /* MAS registers bit definitions */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAS0_TLBSEL(x)		(((x) << 28) & 0x30000000)
 =======
+=======
+>>>>>>> v3.18
 #define MAS0_TLBSEL_MASK	0x30000000
 #define MAS0_TLBSEL_SHIFT	28
 #define MAS0_TLBSEL(x)		(((x) << MAS0_TLBSEL_SHIFT) & MAS0_TLBSEL_MASK)
 #define MAS0_GET_TLBSEL(mas0)	(((mas0) & MAS0_TLBSEL_MASK) >> \
 			MAS0_TLBSEL_SHIFT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MAS0_ESEL_MASK		0x0FFF0000
 #define MAS0_ESEL_SHIFT		16
@@ -67,6 +73,10 @@
 #define MAS1_TSIZE_SHIFT	7
 #define MAS1_TSIZE(x)		(((x) << MAS1_TSIZE_SHIFT) & MAS1_TSIZE_MASK)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MAS1_GET_TSIZE(mas1)	(((mas1) & MAS1_TSIZE_MASK) >> MAS1_TSIZE_SHIFT)
+>>>>>>> v3.18
 =======
 #define MAS1_GET_TSIZE(mas1)	(((mas1) & MAS1_TSIZE_MASK) >> MAS1_TSIZE_SHIFT)
 >>>>>>> v3.18
@@ -99,6 +109,10 @@
 #define MAS3_SPSIZE_SHIFT	1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MAS4_TLBSEL_MASK	MAS0_TLBSEL_MASK
+>>>>>>> v3.18
 =======
 #define MAS4_TLBSEL_MASK	MAS0_TLBSEL_MASK
 >>>>>>> v3.18
@@ -240,10 +254,13 @@ typedef struct {
 	unsigned int	active;
 	unsigned long	vdso_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_ICSWX
 	struct spinlock *cop_lockp;	/* guard cop related stuff */
 	unsigned long acop;		/* mask of enabled coprocessor types */
 #endif /* CONFIG_PPC_ICSWX */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC_MM_SLICES
@@ -306,9 +323,12 @@ extern int mmu_linear_psize;
 extern int mmu_vmemmap_psize;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC64
 extern unsigned long linear_map_top;
 =======
+=======
+>>>>>>> v3.18
 struct tlb_core_data {
 	/*
 	 * Per-core spinlock for e6500 TLB handlers (no tlbsrx.)
@@ -327,6 +347,9 @@ extern int book3e_htw_mode;
 #define PPC_HTW_NONE	0
 #define PPC_HTW_IBM	1
 #define PPC_HTW_E6500	2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

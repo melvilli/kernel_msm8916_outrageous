@@ -67,7 +67,10 @@ EXPORT_SYMBOL(empty_zero_page);
 EXPORT_SYMBOL(native_load_gs_index);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PREEMPT
 EXPORT_SYMBOL(___preempt_schedule);
@@ -75,4 +78,7 @@ EXPORT_SYMBOL(___preempt_schedule);
 EXPORT_SYMBOL(___preempt_schedule_context);
 #endif
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

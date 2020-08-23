@@ -153,7 +153,11 @@ struct sta2x11_vip {
 	int overflow;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *iomem;	/* I/O Memory */
+=======
+	void __iomem *iomem;	/* I/O Memory */
+>>>>>>> v3.18
 =======
 	void __iomem *iomem;	/* I/O Memory */
 >>>>>>> v3.18
@@ -332,7 +336,11 @@ static void buffer_queue(struct vb2_buffer *vb)
 	spin_unlock(&vip->lock);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int buffer_finish(struct vb2_buffer *vb)
+=======
+static void buffer_finish(struct vb2_buffer *vb)
+>>>>>>> v3.18
 =======
 static void buffer_finish(struct vb2_buffer *vb)
 >>>>>>> v3.18
@@ -346,9 +354,14 @@ static void buffer_finish(struct vb2_buffer *vb)
 	spin_unlock(&vip->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vip_active_buf_next(vip);
 
 	return 0;
+=======
+	if (vb2_is_streaming(vb->vb2_queue))
+		vip_active_buf_next(vip);
+>>>>>>> v3.18
 =======
 	if (vb2_is_streaming(vb->vb2_queue))
 		vip_active_buf_next(vip);
@@ -372,7 +385,11 @@ static int start_streaming(struct vb2_queue *vq, unsigned int count)
 
 /* abort streaming and wait for last buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int stop_streaming(struct vb2_queue *vq)
+=======
+static void stop_streaming(struct vb2_queue *vq)
+>>>>>>> v3.18
 =======
 static void stop_streaming(struct vb2_queue *vq)
 >>>>>>> v3.18
@@ -393,7 +410,10 @@ static void stop_streaming(struct vb2_queue *vq)
 	}
 	spin_unlock(&vip->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -467,7 +487,11 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id std)
 
 	if (V4L2_STD_ALL == std) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		v4l2_subdev_call(vip->decoder, core, s_std, std);
+=======
+		v4l2_subdev_call(vip->decoder, video, s_std, std);
+>>>>>>> v3.18
 =======
 		v4l2_subdev_call(vip->decoder, video, s_std, std);
 >>>>>>> v3.18
@@ -494,7 +518,11 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id std)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return v4l2_subdev_call(vip->decoder, core, s_std, std);
+=======
+	return v4l2_subdev_call(vip->decoder, video, s_std, std);
+>>>>>>> v3.18
 =======
 	return v4l2_subdev_call(vip->decoder, video, s_std, std);
 >>>>>>> v3.18
@@ -671,7 +699,10 @@ static int vidioc_try_fmt_vid_cap(struct file *file, void *priv,
 	f->fmt.pix.sizeimage = f->fmt.pix.width * 2 * f->fmt.pix.height;
 	f->fmt.pix.colorspace = V4L2_COLORSPACE_SMPTE170M;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f->fmt.pix.priv = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1079,7 +1110,12 @@ static int sta2x11_vip_init_one(struct pci_dev *pdev,
 	if (ret)
 		goto free_mem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v4l2_device_register(&pdev->dev, &vip->v4l2_dev))
+=======
+	ret = v4l2_device_register(&pdev->dev, &vip->v4l2_dev);
+	if (ret)
+>>>>>>> v3.18
 =======
 	ret = v4l2_device_register(&pdev->dev, &vip->v4l2_dev);
 	if (ret)
@@ -1131,7 +1167,10 @@ static int sta2x11_vip_init_one(struct pci_dev *pdev,
 	vip->video_dev->v4l2_dev = &vip->v4l2_dev;
 	vip->video_dev->queue = &vip->vb_vidq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vip->video_dev->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	video_set_drvdata(vip->video_dev, vip);
@@ -1342,7 +1381,11 @@ static int sta2x11_vip_resume(struct pci_dev *pdev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(sta2x11_vip_pci_tbl) = {
+=======
+static const struct pci_device_id sta2x11_vip_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id sta2x11_vip_pci_tbl[] = {
 >>>>>>> v3.18

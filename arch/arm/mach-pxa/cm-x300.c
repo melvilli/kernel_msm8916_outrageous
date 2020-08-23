@@ -30,7 +30,11 @@
 
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/pca953x.h>
 >>>>>>> v3.18
@@ -315,6 +319,10 @@ static struct platform_pwm_backlight_data cm_x300_backlight_data = {
 	.dft_brightness	= 100,
 	.pwm_period_ns	= 10000,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio	= -1,
 >>>>>>> v3.18
@@ -845,8 +853,12 @@ static void __init cm_x300_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init cm_x300_fixup(struct tag *tags, char **cmdline,
 				 struct meminfo *mi)
+=======
+static void __init cm_x300_fixup(struct tag *tags, char **cmdline)
+>>>>>>> v3.18
 =======
 static void __init cm_x300_fixup(struct tag *tags, char **cmdline)
 >>>>>>> v3.18

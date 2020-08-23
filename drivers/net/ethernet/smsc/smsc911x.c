@@ -15,8 +15,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -50,7 +54,10 @@
 #include <linux/netdevice.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gpio.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/regulator/consumer.h>
@@ -449,7 +456,12 @@ static int smsc911x_request_resources(struct platform_device *pdev)
 	pdata->clk = clk_get(&pdev->dev, NULL);
 	if (IS_ERR(pdata->clk))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netdev_warn(ndev, "couldn't get clock %li\n", PTR_ERR(pdata->clk));
+=======
+		dev_dbg(&pdev->dev, "couldn't get clock %li\n",
+			PTR_ERR(pdata->clk));
+>>>>>>> v3.18
 =======
 		dev_dbg(&pdev->dev, "couldn't get clock %li\n",
 			PTR_ERR(pdata->clk));
@@ -995,7 +1007,11 @@ static void smsc911x_phy_adjust_link(struct net_device *dev)
 				/* Restore original GPIO configuration */
 				pdata->gpio_setting = pdata->gpio_orig_setting;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				smsc911x_reg_write(pdata, SMSC_GPIO_CFG,
+=======
+				smsc911x_reg_write(pdata, GPIO_CFG,
+>>>>>>> v3.18
 =======
 				smsc911x_reg_write(pdata, GPIO_CFG,
 >>>>>>> v3.18
@@ -1007,7 +1023,11 @@ static void smsc911x_phy_adjust_link(struct net_device *dev)
 			 * usage is 10/100 indicator */
 			pdata->gpio_setting = smsc911x_reg_read(pdata,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				SMSC_GPIO_CFG);
+=======
+				GPIO_CFG);
+>>>>>>> v3.18
 =======
 				GPIO_CFG);
 >>>>>>> v3.18
@@ -1022,7 +1042,11 @@ static void smsc911x_phy_adjust_link(struct net_device *dev)
 							| GPIO_CFG_GPIODIR0_
 							| GPIO_CFG_GPIOD0_);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				smsc911x_reg_write(pdata, SMSC_GPIO_CFG,
+=======
+				smsc911x_reg_write(pdata, GPIO_CFG,
+>>>>>>> v3.18
 =======
 				smsc911x_reg_write(pdata, GPIO_CFG,
 >>>>>>> v3.18
@@ -1368,7 +1392,10 @@ static void smsc911x_rx_multicast_update_workaround(struct smsc911x_data *pdata)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int smsc911x_phy_general_power_up(struct smsc911x_data *pdata)
 {
 	int rc = 0;
@@ -1405,6 +1432,9 @@ static int smsc911x_phy_general_power_up(struct smsc911x_data *pdata)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int smsc911x_phy_disable_energy_detect(struct smsc911x_data *pdata)
 {
@@ -1421,12 +1451,17 @@ static int smsc911x_phy_disable_energy_detect(struct smsc911x_data *pdata)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * If energy is detected the PHY is already awake so is not necessary
 	 * to disable the energy detect power-down mode.
 	 */
 	if ((rc & MII_LAN83C185_EDPWRDOWN) &&
 	    !(rc & MII_LAN83C185_ENERGYON)) {
+=======
+	/* Only disable if energy detect mode is already enabled */
+	if (rc & MII_LAN83C185_EDPWRDOWN) {
+>>>>>>> v3.18
 =======
 	/* Only disable if energy detect mode is already enabled */
 	if (rc & MII_LAN83C185_EDPWRDOWN) {
@@ -1440,8 +1475,13 @@ static int smsc911x_phy_disable_energy_detect(struct smsc911x_data *pdata)
 			return rc;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		mdelay(1);
+=======
+		/* Allow PHY to wakeup */
+		mdelay(2);
+>>>>>>> v3.18
 =======
 		/* Allow PHY to wakeup */
 		mdelay(2);
@@ -1468,7 +1508,10 @@ static int smsc911x_phy_enable_energy_detect(struct smsc911x_data *pdata)
 	/* Only enable if energy detect mode is already disabled */
 	if (!(rc & MII_LAN83C185_EDPWRDOWN)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mdelay(100);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Enable energy detect mode for this SMSC Transceivers */
@@ -1480,8 +1523,11 @@ static int smsc911x_phy_enable_energy_detect(struct smsc911x_data *pdata)
 			return rc;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		mdelay(1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1496,7 +1542,10 @@ static int smsc911x_soft_reset(struct smsc911x_data *pdata)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Make sure to power-up the PHY chip before doing a reset, otherwise
 	 * the reset fails.
 	 */
@@ -1507,6 +1556,9 @@ static int smsc911x_soft_reset(struct smsc911x_data *pdata)
 	}
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * LAN9210/LAN9211/LAN9220/LAN9221 chips have an internal PHY that
 	 * are initialized in a Energy Detect Power-Down mode that prevents
@@ -1608,7 +1660,11 @@ static int smsc911x_open(struct net_device *dev)
 			  "Timed out waiting for EEPROM busy bit to clear");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smsc911x_reg_write(pdata, SMSC_GPIO_CFG, 0x70070000);
+=======
+	smsc911x_reg_write(pdata, GPIO_CFG, 0x70070000);
+>>>>>>> v3.18
 =======
 	smsc911x_reg_write(pdata, GPIO_CFG, 0x70070000);
 >>>>>>> v3.18
@@ -1771,7 +1827,11 @@ static int smsc911x_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	freespace -= (skb->len + 32);
 	skb_tx_timestamp(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -2060,9 +2120,15 @@ smsc911x_ethtool_getregs(struct net_device *dev, struct ethtool_regs *regs,
 static void smsc911x_eeprom_enable_access(struct smsc911x_data *pdata)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int temp = smsc911x_reg_read(pdata, SMSC_GPIO_CFG);
 	temp &= ~GPIO_CFG_EEPR_EN_;
 	smsc911x_reg_write(pdata, SMSC_GPIO_CFG, temp);
+=======
+	unsigned int temp = smsc911x_reg_read(pdata, GPIO_CFG);
+	temp &= ~GPIO_CFG_EEPR_EN_;
+	smsc911x_reg_write(pdata, GPIO_CFG, temp);
+>>>>>>> v3.18
 =======
 	unsigned int temp = smsc911x_reg_read(pdata, GPIO_CFG);
 	temp &= ~GPIO_CFG_EEPR_EN_;
@@ -2275,7 +2341,11 @@ static int smsc911x_init(struct net_device *dev)
 
 	if (to == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Device not READY in 100ms aborting\n");
+=======
+		netdev_err(dev, "Device not READY in 100ms aborting\n");
+>>>>>>> v3.18
 =======
 		netdev_err(dev, "Device not READY in 100ms aborting\n");
 >>>>>>> v3.18
@@ -2367,7 +2437,10 @@ static int smsc911x_init(struct net_device *dev)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ether_setup(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev->flags |= IFF_MULTICAST;
@@ -2394,6 +2467,7 @@ static int smsc911x_drv_remove(struct platform_device *pdev)
 	SMSC_TRACE(pdata, ifdown, "Stopping driver");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->config.has_reset_gpio) {
 		gpio_set_value_cansleep(pdata->config.reset_gpio, 0);
 		gpio_free(pdata->config.reset_gpio);
@@ -2402,13 +2476,18 @@ static int smsc911x_drv_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	phy_disconnect(pdata->phy_dev);
 	pdata->phy_dev = NULL;
 	mdiobus_unregister(pdata->mii_bus);
 	mdiobus_free(pdata->mii_bus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unregister_netdev(dev);
@@ -2502,7 +2581,11 @@ static int smsc911x_drv_probe(struct platform_device *pdev)
 	struct net_device *dev;
 	struct smsc911x_data *pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct smsc911x_platform_config *config = pdev->dev.platform_data;
+=======
+	struct smsc911x_platform_config *config = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct smsc911x_platform_config *config = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -2512,8 +2595,11 @@ static int smsc911x_drv_probe(struct platform_device *pdev)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("Driver version %s\n", SMSC_DRV_VERSION);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM,
@@ -2606,10 +2692,16 @@ static int smsc911x_drv_probe(struct platform_device *pdev)
 	smsc911x_disable_irq_chip(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = request_any_context_irq(dev->irq, smsc911x_irqhandler,
 					 irq_flags | IRQF_SHARED, dev->name,
 					 dev);
 	if (retval < 0) {
+=======
+	retval = request_irq(dev->irq, smsc911x_irqhandler,
+			     irq_flags | IRQF_SHARED, dev->name, dev);
+	if (retval) {
+>>>>>>> v3.18
 =======
 	retval = request_irq(dev->irq, smsc911x_irqhandler,
 			     irq_flags | IRQF_SHARED, dev->name, dev);
@@ -2621,6 +2713,11 @@ static int smsc911x_drv_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	netif_carrier_off(dev);
+
+>>>>>>> v3.18
 =======
 	netif_carrier_off(dev);
 
@@ -2649,7 +2746,11 @@ static int smsc911x_drv_probe(struct platform_device *pdev)
 			   "MAC Address is specified by configuration");
 	} else if (is_valid_ether_addr(pdata->config.mac)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(dev->dev_addr, pdata->config.mac, 6);
+=======
+		memcpy(dev->dev_addr, pdata->config.mac, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		memcpy(dev->dev_addr, pdata->config.mac, ETH_ALEN);
 >>>>>>> v3.18
@@ -2689,7 +2790,10 @@ out_enable_resources_fail:
 	smsc911x_free_resources(pdev);
 out_request_resources_fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(pdata->ioaddr);
@@ -2718,10 +2822,13 @@ static int smsc911x_suspend(struct device *dev)
 		PMT_CTRL_ED_EN_ | PMT_CTRL_PME_EN_);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Drive the GPIO Ethernet_Reset Line low to Suspend */
 	if (pdata->config.has_reset_gpio)
 		gpio_set_value_cansleep(pdata->config.reset_gpio, 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -2734,10 +2841,13 @@ static int smsc911x_resume(struct device *dev)
 	unsigned int to = 100;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->config.has_reset_gpio)
 		gpio_set_value_cansleep(pdata->config.reset_gpio, 1);
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Note 3.11 from the datasheet:

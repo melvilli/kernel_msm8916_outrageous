@@ -74,7 +74,11 @@ void smt_init_evc(struct s_smc *smc)
 	struct s_srf_evc	*evc ;
 	const struct evc_init 	*init ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			i ;
+=======
+	unsigned int		i ;
+>>>>>>> v3.18
 =======
 	unsigned int		i ;
 >>>>>>> v3.18
@@ -89,7 +93,11 @@ void smt_init_evc(struct s_smc *smc)
 	init = evc_inits ;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0 ; (unsigned) i < MAX_INIT_EVC ; i++) {
+=======
+	for (i = 0 ; i < MAX_INIT_EVC ; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0 ; i < MAX_INIT_EVC ; i++) {
 >>>>>>> v3.18
@@ -107,7 +115,11 @@ void smt_init_evc(struct s_smc *smc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((unsigned) (evc - smc->evcs) > MAX_EVCS) {
+=======
+	if ((unsigned int) (evc - smc->evcs) > MAX_EVCS) {
+>>>>>>> v3.18
 =======
 	if ((unsigned int) (evc - smc->evcs) > MAX_EVCS) {
 >>>>>>> v3.18
@@ -152,7 +164,11 @@ void smt_init_evc(struct s_smc *smc)
 	}
 #ifdef	DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0, evc = smc->evcs ; (unsigned) i < MAX_EVCS ; i++, evc++) {
+=======
+	for (i = 0, evc = smc->evcs ; i < MAX_EVCS ; i++, evc++) {
+>>>>>>> v3.18
 =======
 	for (i = 0, evc = smc->evcs ; i < MAX_EVCS ; i++, evc++) {
 >>>>>>> v3.18
@@ -177,15 +193,21 @@ void smt_init_evc(struct s_smc *smc)
 static struct s_srf_evc *smt_get_evc(struct s_smc *smc, int code, int index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			i ;
 	struct s_srf_evc	*evc ;
 
 	for (i = 0, evc = smc->evcs ; (unsigned) i < MAX_EVCS ; i++, evc++) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		i ;
 	struct s_srf_evc	*evc ;
 
 	for (i = 0, evc = smc->evcs ; i < MAX_EVCS ; i++, evc++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (evc->evc_code == code && evc->evc_index == index)
 			return evc;
@@ -359,9 +381,15 @@ static void clear_all_rep(struct s_smc *smc)
 {
 	struct s_srf_evc	*evc ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			i ;
 
 	for (i = 0, evc = smc->evcs ; (unsigned) i < MAX_EVCS ; i++, evc++) {
+=======
+	unsigned int		i ;
+
+	for (i = 0, evc = smc->evcs ; i < MAX_EVCS ; i++, evc++) {
+>>>>>>> v3.18
 =======
 	unsigned int		i ;
 
@@ -378,15 +406,21 @@ static void clear_reported(struct s_smc *smc)
 {
 	struct s_srf_evc	*evc ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			i ;
 
 	smc->srf.any_report = FALSE ;
 	for (i = 0, evc = smc->evcs ; (unsigned) i < MAX_EVCS ; i++, evc++) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		i ;
 
 	smc->srf.any_report = FALSE ;
 	for (i = 0, evc = smc->evcs ; i < MAX_EVCS ; i++, evc++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (SMT_IS_CONDITION(evc->evc_code)) {
 			if (*evc->evc_cond_state == FALSE)
@@ -412,7 +446,11 @@ static void smt_send_srf(struct s_smc *smc)
 	SK_LOC_DECL(struct s_pcon,pcon) ;
 	SMbuf			*mb ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			i ;
+=======
+	unsigned int		i ;
+>>>>>>> v3.18
 =======
 	unsigned int		i ;
 >>>>>>> v3.18
@@ -446,7 +484,11 @@ static void smt_send_srf(struct s_smc *smc)
 	smt_add_para(smc,&pcon,(u_short) SMT_P1034,0,0) ;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0, evc = smc->evcs ; (unsigned) i < MAX_EVCS ; i++, evc++) {
+=======
+	for (i = 0, evc = smc->evcs ; i < MAX_EVCS ; i++, evc++) {
+>>>>>>> v3.18
 =======
 	for (i = 0, evc = smc->evcs ; i < MAX_EVCS ; i++, evc++) {
 >>>>>>> v3.18

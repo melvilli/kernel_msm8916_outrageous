@@ -45,6 +45,7 @@ static void mlx4_en_cq_event(struct mlx4_cq *cq, enum mlx4_event event)
 
 int mlx4_en_create_cq(struct mlx4_en_priv *priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      struct mlx4_en_cq *cq,
 		      int entries, int ring, enum cq_type mode)
 {
@@ -52,6 +53,8 @@ int mlx4_en_create_cq(struct mlx4_en_priv *priv,
 	int err;
 
 =======
+=======
+>>>>>>> v3.18
 		      struct mlx4_en_cq **pcq,
 		      int entries, int ring, enum cq_type mode,
 		      int node)
@@ -69,6 +72,9 @@ int mlx4_en_create_cq(struct mlx4_en_priv *priv,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cq->size = entries;
 	cq->buf_size = cq->size * mdev->dev->caps.cqe_size;
@@ -76,6 +82,7 @@ int mlx4_en_create_cq(struct mlx4_en_priv *priv,
 	cq->ring = ring;
 	cq->is_tx = mode;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = mlx4_alloc_hwq_res(mdev->dev, &cq->wqres,
 				cq->buf_size, 2 * PAGE_SIZE);
@@ -89,6 +96,8 @@ int mlx4_en_create_cq(struct mlx4_en_priv *priv,
 		cq->buf = (struct mlx4_cqe *) cq->wqres.buf.direct.buf;
 
 =======
+=======
+>>>>>>> v3.18
 	/* Allocate HW buffers on provided NUMA node.
 	 * dev->numa_node is used in mtt range allocation flow.
 	 */
@@ -113,6 +122,9 @@ err_res:
 err_cq:
 	kfree(cq);
 	*pcq = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -149,15 +161,21 @@ int mlx4_en_activate_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq *cq,
 					cq->vector = (cq->ring + 1 + priv->port)
 					    % mdev->dev->caps.num_comp_vectors;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					mlx4_warn(mdev, "Failed Assigning an EQ to "
 						  "%s ,Falling back to legacy EQ's\n",
 						  name);
 				}
 =======
+=======
+>>>>>>> v3.18
 					mlx4_warn(mdev, "Failed assigning an EQ to %s, falling back to legacy EQ's\n",
 						  name);
 				}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		} else {
@@ -165,11 +183,17 @@ int mlx4_en_activate_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq *cq,
 				mdev->dev->caps.num_comp_vectors;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		cq->irq_desc =
 			irq_to_desc(mlx4_eq_get_irq(mdev->dev,
 						    cq->vector));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/* For TX we use the same irq per
@@ -178,7 +202,11 @@ int mlx4_en_activate_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq *cq,
 
 		cq_idx = cq_idx % priv->rx_ring_num;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rx_cq = &priv->rx_cq[cq_idx];
+=======
+		rx_cq = priv->rx_cq[cq_idx];
+>>>>>>> v3.18
 =======
 		rx_cq = priv->rx_cq[cq_idx];
 >>>>>>> v3.18
@@ -187,7 +215,11 @@ int mlx4_en_activate_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq *cq,
 
 	if (!cq->is_tx)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cq->size = priv->rx_ring[cq->ring].actual_size;
+=======
+		cq->size = priv->rx_ring[cq->ring]->actual_size;
+>>>>>>> v3.18
 =======
 		cq->size = priv->rx_ring[cq->ring]->actual_size;
 >>>>>>> v3.18
@@ -205,6 +237,7 @@ int mlx4_en_activate_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq *cq,
 	cq->mcq.comp  = cq->is_tx ? mlx4_en_tx_irq : mlx4_en_rx_irq;
 	cq->mcq.event = mlx4_en_cq_event;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!cq->is_tx) {
 		netif_napi_add(cq->dev, &cq->napi, mlx4_en_poll_rx_cq, 64);
@@ -226,6 +259,8 @@ void mlx4_en_destroy_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq *cq)
 	cq->buf_size = 0;
 	cq->buf = NULL;
 =======
+=======
+>>>>>>> v3.18
 	if (cq->is_tx) {
 		netif_napi_add(cq->dev, &cq->napi, mlx4_en_poll_tx_cq,
 			       NAPI_POLL_WEIGHT);
@@ -261,17 +296,23 @@ void mlx4_en_destroy_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq **pcq)
 	cq->buf = NULL;
 	kfree(cq);
 	*pcq = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void mlx4_en_deactivate_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq *cq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cq->is_tx) {
 		napi_disable(&cq->napi);
 		netif_napi_del(&cq->napi);
 	}
 =======
+=======
+>>>>>>> v3.18
 	napi_disable(&cq->napi);
 	if (!cq->is_tx) {
 		napi_hash_del(&cq->napi);
@@ -279,6 +320,9 @@ void mlx4_en_deactivate_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq *cq)
 		irq_set_affinity_hint(cq->mcq.irq, NULL);
 	}
 	netif_napi_del(&cq->napi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mlx4_cq_free(priv->mdev->dev, &cq->mcq);

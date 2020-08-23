@@ -55,7 +55,10 @@ wanting to see the full source for this module can find it at
 http://lwn.net/Articles/22359/).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Deprecated create_proc_entry
 
 Note that the above article uses create_proc_entry which was removed in
@@ -65,6 +68,9 @@ kernel 3.10. Current versions require the following update
 -	if (entry)
 -		entry->proc_fops = &ct_file_ops;
 +	entry = proc_create("sequence", 0, NULL, &ct_file_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The iterator interface
@@ -239,7 +245,10 @@ private field of the seq_file structure; that value can then be retrieved
 by the iterator functions.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 There is also a wrapper function to seq_open() called seq_open_private(). It
 kmallocs a zero filled block of memory and stores a pointer to it in the
 private field of the seq_file structure, returning 0 on success. The
@@ -273,6 +282,9 @@ memory block, allowing further initialisation e.g.:
 A corresponding close function, seq_release_private() is available which
 frees the memory allocated in the corresponding open.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 The other operations of interest - read(), llseek(), and release() - are
 all implemented by the seq_file code itself. So a virtual file's

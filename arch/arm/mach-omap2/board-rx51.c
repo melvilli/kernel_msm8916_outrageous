@@ -3,6 +3,11 @@
  *
  * Copyright (C) 2007, 2008 Nokia
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2012 Ivaylo Dimitrov <freemangordon@abv.bg>
+ * Copyright (C) 2013 Pali Rohár <pali.rohar@gmail.com>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012 Ivaylo Dimitrov <freemangordon@abv.bg>
  * Copyright (C) 2013 Pali Rohár <pali.rohar@gmail.com>
@@ -37,7 +42,13 @@
 #include "gpmc.h"
 #include "pm.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "sdram-nokia.h"
+=======
+#include "soc.h"
+#include "sdram-nokia.h"
+#include "omap-secure.h"
+>>>>>>> v3.18
 =======
 #include "soc.h"
 #include "sdram-nokia.h"
@@ -97,7 +108,11 @@ static struct omap_board_mux board_mux[] __initdata = {
 static struct omap_musb_board_data musb_board_data = {
 	.interface_type		= MUSB_INTERFACE_ULPI,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mode			= MUSB_PERIPHERAL,
+=======
+	.mode			= MUSB_OTG,
+>>>>>>> v3.18
 =======
 	.mode			= MUSB_OTG,
 >>>>>>> v3.18
@@ -119,7 +134,10 @@ static void __init rx51_init(void)
 	rx51_peripherals_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (omap_type() == OMAP2_DEVICE_TYPE_SEC) {
 #ifdef CONFIG_ARM_ERRATA_430973
 		pr_info("RX-51: Enabling ARM errata 430973 workaround\n");
@@ -128,6 +146,9 @@ static void __init rx51_init(void)
 #endif
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Ensure SDRC pins are mux'd for self-refresh */
 	omap_mux_init_signal("sdrc_cke0", OMAP_PIN_OUTPUT);
@@ -149,7 +170,10 @@ MACHINE_START(NOKIA_RX51, "Nokia RX-51 board")
 	.init_early	= omap3430_init_early,
 	.init_irq	= omap3_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= rx51_init,

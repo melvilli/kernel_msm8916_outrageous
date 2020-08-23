@@ -75,6 +75,7 @@ KBUILD_CFLAGS	+= -ffixed-fcc3 -ffixed-cc3 -ffixed-gr15 -ffixed-icc2
 KBUILD_AFLAGS	+= -mno-fdpic
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # make sure the .S files get compiled with debug info
 # and disable optimisations that are unhelpful whilst debugging
 ifdef CONFIG_DEBUG_INFO
@@ -82,6 +83,8 @@ ifdef CONFIG_DEBUG_INFO
 KBUILD_AFLAGS	+= -Wa,--gdwarf2
 endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 head-y		:= arch/frv/kernel/head.o

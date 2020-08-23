@@ -54,7 +54,10 @@ Description:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 What:		/sys/block/<disk>/integrity/device_is_integrity_capable
 Date:		July 2014
 Contact:	Martin K. Petersen <martin.petersen@oracle.com>
@@ -63,6 +66,9 @@ Description:
 		integrity metadata. Set if the device is T10 PI-capable.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 What:		/sys/block/<disk>/integrity/write_generate
 Date:		June 2008

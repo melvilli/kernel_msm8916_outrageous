@@ -58,6 +58,7 @@ int clk_is_sysclk_mainosc(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * System reset via the watchdog timer
  */
 static void lpc32xx_watchdog_reset(void)
@@ -72,6 +73,8 @@ static void lpc32xx_watchdog_reset(void)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Detects and returns IRAM size for the device variation
@@ -103,6 +106,10 @@ u32 lpc32xx_return_iram_size(void)
 	return iram_size;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(lpc32xx_return_iram_size);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(lpc32xx_return_iram_size);
 >>>>>>> v3.18
@@ -217,6 +224,7 @@ void __init lpc32xx_map_io(void)
 void lpc23xx_restart(enum reboot_mode mode, const char *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (mode) {
 	case REBOOT_SOFT:
 	case REBOOT_HARD:
@@ -228,6 +236,8 @@ void lpc23xx_restart(enum reboot_mode mode, const char *cmd)
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* Make sure WDT clocks are enabled */
 	__raw_writel(LPC32XX_CLKPWR_PWMCLK_WDOG_EN,
 		LPC32XX_CLKPWR_TIMER_CLK_CTRL);
@@ -235,6 +245,9 @@ void lpc23xx_restart(enum reboot_mode mode, const char *cmd)
 	/* Instant assert of RESETOUT_N with pulse length 1mS */
 	__raw_writel(13000, io_p2v(LPC32XX_WDTIM_BASE + 0x18));
 	__raw_writel(0x70, io_p2v(LPC32XX_WDTIM_BASE + 0xC));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Wait for watchdog to reset system */

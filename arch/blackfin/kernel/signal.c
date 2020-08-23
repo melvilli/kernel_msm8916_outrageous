@@ -136,6 +136,7 @@ static inline int rt_setup_sigcontext(struct sigcontext *sc, struct pt_regs *reg
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void *get_sigframe(struct k_sigaction *ka, struct pt_regs *regs,
 				 size_t frame_size)
 {
@@ -150,19 +151,28 @@ static inline void *get_sigframe(struct k_sigaction *ka, struct pt_regs *regs,
 			usp = current->sas_ss_sp + current->sas_ss_size;
 	}
 =======
+=======
+>>>>>>> v3.18
 static inline void *get_sigframe(struct ksignal *ksig,
 				 size_t frame_size)
 {
 	unsigned long usp = sigsp(rdusp(), ksig);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (void *)((usp - frame_size) & -8UL);
 }
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t * info,
 	       sigset_t * set, struct pt_regs *regs)
+=======
+setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -170,6 +180,7 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 	struct rt_sigframe *frame;
 	int err = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	frame = get_sigframe(ka, regs, sizeof(*frame));
 
@@ -183,6 +194,8 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 	err |= __put_user(&frame->uc, &frame->puc);
 	err |= copy_siginfo_to_user(&frame->info, info);
 =======
+=======
+>>>>>>> v3.18
 	frame = get_sigframe(ksig, sizeof(*frame));
 
 	err |= __put_user((current_thread_info()->exec_domain
@@ -194,6 +207,9 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 	err |= __put_user(&frame->info, &frame->pinfo);
 	err |= __put_user(&frame->uc, &frame->puc);
 	err |= copy_siginfo_to_user(&frame->info, &ksig->info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Create the ucontext.  */
@@ -210,7 +226,11 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 	if (current->personality & FDPIC_FUNCPTRS) {
 		struct fdpic_func_descriptor __user *funcptr =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(struct fdpic_func_descriptor *) ka->sa.sa_handler;
+=======
+			(struct fdpic_func_descriptor *) ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 =======
 			(struct fdpic_func_descriptor *) ksig->ka.sa.sa_handler;
 >>>>>>> v3.18
@@ -223,7 +243,11 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 		regs->p3 = p3;
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		regs->pc = (unsigned long)ka->sa.sa_handler;
+=======
+		regs->pc = (unsigned long)ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 =======
 		regs->pc = (unsigned long)ksig->ka.sa.sa_handler;
 >>>>>>> v3.18
@@ -272,6 +296,7 @@ handle_restart(struct pt_regs *regs, struct k_sigaction *ka, int has_handler)
  */
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 handle_signal(int sig, siginfo_t *info, struct k_sigaction *ka,
 	      struct pt_regs *regs)
 {
@@ -287,6 +312,8 @@ handle_signal(int sig, siginfo_t *info, struct k_sigaction *ka,
 		signal_delivered(sig, info, ka, regs,
 				test_thread_flag(TIF_SINGLESTEP));
 =======
+=======
+>>>>>>> v3.18
 handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 {
 	int ret;
@@ -300,6 +327,9 @@ handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	ret = setup_rt_frame(ksig, sigmask_to_save(), regs);
 
 	signal_setup_done(ret, ksig, test_thread_flag(TIF_SINGLESTEP));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -315,6 +345,7 @@ handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 asmlinkage void do_signal(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	siginfo_t info;
 	int signr;
 	struct k_sigaction ka;
@@ -326,6 +357,8 @@ asmlinkage void do_signal(struct pt_regs *regs)
 		/* Whee!  Actually deliver the signal.  */
 		handle_signal(signr, &info, &ka, regs);
 =======
+=======
+>>>>>>> v3.18
 	struct ksignal ksig;
 
 	current->thread.esp0 = (unsigned long)regs;
@@ -333,6 +366,9 @@ asmlinkage void do_signal(struct pt_regs *regs)
 	if (get_signal(&ksig)) {
 		/* Whee!  Actually deliver the signal.  */
 		handle_signal(&ksig, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}

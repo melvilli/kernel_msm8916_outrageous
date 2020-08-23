@@ -32,11 +32,17 @@ struct palmas_gpio {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct palmas_device_data {
 	int ngpio;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct palmas_gpio *to_palmas_gpio(struct gpio_chip *chip)
 {
@@ -50,11 +56,14 @@ static int palmas_gpio_get(struct gpio_chip *gc, unsigned offset)
 	unsigned int val;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = palmas_read(palmas, PALMAS_GPIO_BASE, PALMAS_GPIO_DATA_IN, &val);
 	if (ret < 0) {
 		dev_err(gc->dev, "GPIO_DATA_IN read failed, err = %d\n", ret);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int reg;
 	int gpio16 = (offset/8);
 
@@ -75,6 +84,9 @@ static int palmas_gpio_get(struct gpio_chip *gc, unsigned offset)
 	ret = palmas_read(palmas, PALMAS_GPIO_BASE, reg, &val);
 	if (ret < 0) {
 		dev_err(gc->dev, "Reg 0x%02x read failed, %d\n", reg, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}
@@ -88,6 +100,7 @@ static void palmas_gpio_set(struct gpio_chip *gc, unsigned offset,
 	struct palmas *palmas = pg->palmas;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (value)
 		ret = palmas_write(palmas, PALMAS_GPIO_BASE,
@@ -100,6 +113,8 @@ static void palmas_gpio_set(struct gpio_chip *gc, unsigned offset,
 			(value) ? "GPIO_SET_DATA_OUT" : "GPIO_CLEAR_DATA_OUT",
 			ret);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int reg;
 	int gpio16 = (offset/8);
 
@@ -114,6 +129,9 @@ static void palmas_gpio_set(struct gpio_chip *gc, unsigned offset,
 	ret = palmas_write(palmas, PALMAS_GPIO_BASE, reg, BIT(offset));
 	if (ret < 0)
 		dev_err(gc->dev, "Reg 0x%02x write failed, %d\n", reg, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -124,27 +142,39 @@ static int palmas_gpio_output(struct gpio_chip *gc, unsigned offset,
 	struct palmas *palmas = pg->palmas;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned int reg;
 	int gpio16 = (offset/8);
 
 	offset %= 8;
 	reg = (gpio16) ? PALMAS_GPIO_DATA_DIR2 : PALMAS_GPIO_DATA_DIR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Set the initial value */
 	palmas_gpio_set(gc, offset, value);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = palmas_update_bits(palmas, PALMAS_GPIO_BASE,
 		PALMAS_GPIO_DATA_DIR, BIT(offset), BIT(offset));
 	if (ret < 0)
 		dev_err(gc->dev, "GPIO_DATA_DIR write failed, err = %d\n", ret);
 =======
+=======
+>>>>>>> v3.18
 	ret = palmas_update_bits(palmas, PALMAS_GPIO_BASE, reg,
 				BIT(offset), BIT(offset));
 	if (ret < 0)
 		dev_err(gc->dev, "Reg 0x%02x update failed, %d\n", reg, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -155,12 +185,15 @@ static int palmas_gpio_input(struct gpio_chip *gc, unsigned offset)
 	struct palmas *palmas = pg->palmas;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = palmas_update_bits(palmas, PALMAS_GPIO_BASE,
 		PALMAS_GPIO_DATA_DIR, BIT(offset), 0);
 	if (ret < 0)
 		dev_err(gc->dev, "GPIO_DATA_DIR write failed, err = %d\n", ret);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int reg;
 	int gpio16 = (offset/8);
 
@@ -170,6 +203,9 @@ static int palmas_gpio_input(struct gpio_chip *gc, unsigned offset)
 	ret = palmas_update_bits(palmas, PALMAS_GPIO_BASE, reg, BIT(offset), 0);
 	if (ret < 0)
 		dev_err(gc->dev, "Reg 0x%02x update failed, %d\n", reg, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -183,7 +219,10 @@ static int palmas_gpio_to_irq(struct gpio_chip *gc, unsigned offset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct palmas_device_data palmas_dev_data = {
 	.ngpio = 8,
 };
@@ -201,6 +240,9 @@ static const struct of_device_id of_palmas_gpio_match[] = {
 };
 MODULE_DEVICE_TABLE(of, of_palmas_gpio_match);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int palmas_gpio_probe(struct platform_device *pdev)
 {
@@ -208,6 +250,7 @@ static int palmas_gpio_probe(struct platform_device *pdev)
 	struct palmas_platform_data *palmas_pdata;
 	struct palmas_gpio *palmas_gpio;
 	int ret;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	palmas_gpio = devm_kzalloc(&pdev->dev,
@@ -217,6 +260,8 @@ static int palmas_gpio_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	const struct of_device_id *match;
 	const struct palmas_device_data *dev_data;
 
@@ -229,14 +274,22 @@ static int palmas_gpio_probe(struct platform_device *pdev)
 				sizeof(*palmas_gpio), GFP_KERNEL);
 	if (!palmas_gpio)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	palmas_gpio->palmas = palmas;
 	palmas_gpio->gpio_chip.owner = THIS_MODULE;
 	palmas_gpio->gpio_chip.label = dev_name(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	palmas_gpio->gpio_chip.ngpio = 8;
 	palmas_gpio->gpio_chip.can_sleep = 1;
+=======
+	palmas_gpio->gpio_chip.ngpio = dev_data->ngpio;
+	palmas_gpio->gpio_chip.can_sleep = true;
+>>>>>>> v3.18
 =======
 	palmas_gpio->gpio_chip.ngpio = dev_data->ngpio;
 	palmas_gpio->gpio_chip.can_sleep = true;
@@ -249,7 +302,11 @@ static int palmas_gpio_probe(struct platform_device *pdev)
 	palmas_gpio->gpio_chip.dev = &pdev->dev;
 #ifdef CONFIG_OF_GPIO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	palmas_gpio->gpio_chip.of_node = palmas->dev->of_node;
+=======
+	palmas_gpio->gpio_chip.of_node = pdev->dev.of_node;
+>>>>>>> v3.18
 =======
 	palmas_gpio->gpio_chip.of_node = pdev->dev.of_node;
 >>>>>>> v3.18
@@ -275,7 +332,12 @@ static int palmas_gpio_remove(struct platform_device *pdev)
 	struct palmas_gpio *palmas_gpio = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_remove(&palmas_gpio->gpio_chip);
+=======
+	gpiochip_remove(&palmas_gpio->gpio_chip);
+	return 0;
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&palmas_gpio->gpio_chip);
 	return 0;
@@ -286,6 +348,10 @@ static struct platform_driver palmas_gpio_driver = {
 	.driver.name	= "palmas-gpio",
 	.driver.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.driver.of_match_table = of_palmas_gpio_match,
+>>>>>>> v3.18
 =======
 	.driver.of_match_table = of_palmas_gpio_match,
 >>>>>>> v3.18

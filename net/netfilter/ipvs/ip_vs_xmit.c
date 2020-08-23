@@ -39,6 +39,10 @@
 #include <net/ipv6.h>
 #include <net/ip6_route.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/ip_tunnels.h>
+>>>>>>> v3.18
 =======
 #include <net/ip_tunnels.h>
 >>>>>>> v3.18
@@ -134,6 +138,10 @@ static struct rtable *do_output_route4(struct net *net, __be32 daddr,
 	memset(&fl4, 0, sizeof(fl4));
 	fl4.daddr = daddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fl4.saddr = (rt_mode & IP_VS_RT_MODE_CONNECT) ? *saddr : 0;
+>>>>>>> v3.18
 =======
 	fl4.saddr = (rt_mode & IP_VS_RT_MODE_CONNECT) ? *saddr : 0;
 >>>>>>> v3.18
@@ -164,6 +172,7 @@ retry:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Get route to destination or remote server */
 static int
 __ip_vs_get_out_rt(struct sk_buff *skb, struct ip_vs_dest *dest,
@@ -177,6 +186,8 @@ __ip_vs_get_out_rt(struct sk_buff *skb, struct ip_vs_dest *dest,
 	struct iphdr *iph;
 	__be16 df;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IP_VS_IPV6
 static inline int __ip_vs_is_local_route6(struct rt6_info *rt)
 {
@@ -284,6 +295,9 @@ __ip_vs_get_out_rt(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 	struct net *net = dev_net(skb_dst(skb)->dev);
 	struct ip_vs_dest_dst *dest_dst;
 	struct rtable *rt;			/* Route to the other host */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int mtu;
 	int local, noref = 1;
@@ -335,6 +349,7 @@ __ip_vs_get_out_rt(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 
 	local = (rt->rt_flags & RTCF_LOCAL) ? 1 : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!((local ? IP_VS_RT_MODE_LOCAL : IP_VS_RT_MODE_NON_LOCAL) &
 	      rt_mode)) {
 		IP_VS_DBG_RL("Stopping traffic to %s address, dest: %pI4\n",
@@ -360,6 +375,8 @@ __ip_vs_get_out_rt(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 			goto err_put;
 		}
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(crosses_local_route_boundary(skb_af, skb, rt_mode,
 						  local))) {
 		IP_VS_DBG_RL("We are crossing local and non-local addresses"
@@ -368,6 +385,9 @@ __ip_vs_get_out_rt(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 	}
 
 	if (unlikely(local)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* skb to local stack, preserve old route */
 		if (!noref)
@@ -378,10 +398,14 @@ __ip_vs_get_out_rt(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 	if (likely(!(rt_mode & IP_VS_RT_MODE_TUNNEL))) {
 		mtu = dst_mtu(&rt->dst);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		df = iph->frag_off & htons(IP_DF);
 	} else {
 		struct sock *sk = skb->sk;
 
+=======
+	} else {
+>>>>>>> v3.18
 =======
 	} else {
 >>>>>>> v3.18
@@ -390,6 +414,7 @@ __ip_vs_get_out_rt(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 			IP_VS_DBG_RL("%s(): mtu less than 68\n", __func__);
 			goto err_put;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ort = skb_rtable(skb);
 		if (!skb->dev && sk && sk->sk_state != TCP_TIME_WAIT)
@@ -405,11 +430,16 @@ __ip_vs_get_out_rt(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 		goto err_put;
 	}
 =======
+=======
+>>>>>>> v3.18
 		maybe_update_pmtu(skb_af, skb, mtu);
 	}
 
 	if (!ensure_mtu_is_adequate(skb_af, rt_mode, ipvsh, skb, mtu))
 		goto err_put;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	skb_dst_drop(skb);
@@ -435,12 +465,15 @@ err_unreach:
 
 #ifdef CONFIG_IP_VS_IPV6
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static inline int __ip_vs_is_local_route6(struct rt6_info *rt)
 {
 	return rt->dst.dev && rt->dst.dev->flags & IFF_LOOPBACK;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct dst_entry *
@@ -482,7 +515,11 @@ out_err:
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 __ip_vs_get_out_rt_v6(struct sk_buff *skb, struct ip_vs_dest *dest,
+=======
+__ip_vs_get_out_rt_v6(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
+>>>>>>> v3.18
 =======
 __ip_vs_get_out_rt_v6(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 >>>>>>> v3.18
@@ -493,7 +530,10 @@ __ip_vs_get_out_rt_v6(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 	struct ip_vs_dest_dst *dest_dst;
 	struct rt6_info *rt;			/* Route to the other host */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rt6_info *ort;			/* Original route */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dst_entry *dst;
@@ -543,6 +583,7 @@ __ip_vs_get_out_rt_v6(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 
 	local = __ip_vs_is_local_route6(rt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!((local ? IP_VS_RT_MODE_LOCAL : IP_VS_RT_MODE_NON_LOCAL) &
 	      rt_mode)) {
 		IP_VS_DBG_RL("Stopping traffic to %s address, dest: %pI6c\n",
@@ -570,6 +611,8 @@ __ip_vs_get_out_rt_v6(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 			goto err_put;
 		}
 =======
+=======
+>>>>>>> v3.18
 
 	if (unlikely(crosses_local_route_boundary(skb_af, skb, rt_mode,
 						  local))) {
@@ -579,6 +622,9 @@ __ip_vs_get_out_rt_v6(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 	}
 
 	if (unlikely(local)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* skb to local stack, preserve old route */
 		if (!noref)
@@ -591,8 +637,11 @@ __ip_vs_get_out_rt_v6(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 		mtu = dst_mtu(&rt->dst);
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sock *sk = skb->sk;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		mtu = dst_mtu(&rt->dst) - sizeof(struct ipv6hdr);
@@ -601,6 +650,7 @@ __ip_vs_get_out_rt_v6(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 				     IPV6_MIN_MTU);
 			goto err_put;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ort = (struct rt6_info *) skb_dst(skb);
 		if (!skb->dev && sk && sk->sk_state != TCP_TIME_WAIT)
@@ -617,11 +667,16 @@ __ip_vs_get_out_rt_v6(int skb_af, struct sk_buff *skb, struct ip_vs_dest *dest,
 		goto err_put;
 	}
 =======
+=======
+>>>>>>> v3.18
 		maybe_update_pmtu(skb_af, skb, mtu);
 	}
 
 	if (!ensure_mtu_is_adequate(skb_af, rt_mode, ipvsh, skb, mtu))
 		goto err_put;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	skb_dst_drop(skb);
@@ -729,8 +784,13 @@ ip_vs_bypass_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__ip_vs_get_out_rt(skb, NULL, iph->daddr, IP_VS_RT_MODE_NON_LOCAL,
 			       NULL) < 0)
+=======
+	if (__ip_vs_get_out_rt(cp->af, skb, NULL, iph->daddr,
+			       IP_VS_RT_MODE_NON_LOCAL, NULL, ipvsh) < 0)
+>>>>>>> v3.18
 =======
 	if (__ip_vs_get_out_rt(cp->af, skb, NULL, iph->daddr,
 			       IP_VS_RT_MODE_NON_LOCAL, NULL, ipvsh) < 0)
@@ -741,7 +801,11 @@ ip_vs_bypass_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	/* Another hack: avoid icmp_send in ip_fragment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->local_df = 1;
+=======
+	skb->ignore_df = 1;
+>>>>>>> v3.18
 =======
 	skb->ignore_df = 1;
 >>>>>>> v3.18
@@ -768,7 +832,11 @@ ip_vs_bypass_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__ip_vs_get_out_rt_v6(skb, NULL, &ipvsh->daddr.in6, NULL,
+=======
+	if (__ip_vs_get_out_rt_v6(cp->af, skb, NULL, &ipvsh->daddr.in6, NULL,
+>>>>>>> v3.18
 =======
 	if (__ip_vs_get_out_rt_v6(cp->af, skb, NULL, &ipvsh->daddr.in6, NULL,
 >>>>>>> v3.18
@@ -777,7 +845,11 @@ ip_vs_bypass_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	/* Another hack: avoid icmp_send in ip_fragment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->local_df = 1;
+=======
+	skb->ignore_df = 1;
+>>>>>>> v3.18
 =======
 	skb->ignore_df = 1;
 >>>>>>> v3.18
@@ -823,15 +895,21 @@ ip_vs_nat_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	was_input = rt_is_input_route(skb_rtable(skb));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local = __ip_vs_get_out_rt(skb, cp->dest, cp->daddr.ip,
 				   IP_VS_RT_MODE_LOCAL |
 				   IP_VS_RT_MODE_NON_LOCAL |
 				   IP_VS_RT_MODE_RDR, NULL);
 =======
+=======
+>>>>>>> v3.18
 	local = __ip_vs_get_out_rt(cp->af, skb, cp->dest, cp->daddr.ip,
 				   IP_VS_RT_MODE_LOCAL |
 				   IP_VS_RT_MODE_NON_LOCAL |
 				   IP_VS_RT_MODE_RDR, NULL, ipvsh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (local < 0)
 		goto tx_error;
@@ -882,7 +960,11 @@ ip_vs_nat_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	/* Another hack: avoid icmp_send in ip_fragment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->local_df = 1;
+=======
+	skb->ignore_df = 1;
+>>>>>>> v3.18
 =======
 	skb->ignore_df = 1;
 >>>>>>> v3.18
@@ -922,8 +1004,13 @@ ip_vs_nat_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local = __ip_vs_get_out_rt_v6(skb, cp->dest, &cp->daddr.in6, NULL,
 				      ipvsh, 0,
+=======
+	local = __ip_vs_get_out_rt_v6(cp->af, skb, cp->dest, &cp->daddr.in6,
+				      NULL, ipvsh, 0,
+>>>>>>> v3.18
 =======
 	local = __ip_vs_get_out_rt_v6(cp->af, skb, cp->dest, &cp->daddr.in6,
 				      NULL, ipvsh, 0,
@@ -981,7 +1068,11 @@ ip_vs_nat_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	/* Another hack: avoid icmp_send in ip_fragment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->local_df = 1;
+=======
+	skb->ignore_df = 1;
+>>>>>>> v3.18
 =======
 	skb->ignore_df = 1;
 >>>>>>> v3.18
@@ -1001,7 +1092,10 @@ tx_error:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* When forwarding a packet, we must ensure that we've got enough headroom
  * for the encapsulation packet in the skb.  This also gives us an
  * opportunity to figure out what the payload_len, dsfield, ttl, and df
@@ -1079,6 +1173,9 @@ static inline int __tun_gso_type_mask(int encaps_af, int orig_af)
 	 */
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1109,15 +1206,21 @@ ip_vs_tunnel_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 	__be32 saddr;				/* Source for tunnel */
 	struct net_device *tdev;		/* Device to other host */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iphdr  *old_iph = ip_hdr(skb);
 	u8     tos = old_iph->tos;
 	__be16 df;
 =======
+=======
+>>>>>>> v3.18
 	__u8 next_protocol = 0;
 	__u8 dsfield = 0;
 	__u8 ttl = 0;
 	__be16 df = 0;
 	__be16 *dfp = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct iphdr  *iph;			/* Our new IP header */
 	unsigned int max_headroom;		/* The extra header space needed */
@@ -1127,17 +1230,23 @@ ip_vs_tunnel_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local = __ip_vs_get_out_rt(skb, cp->dest, cp->daddr.ip,
 				   IP_VS_RT_MODE_LOCAL |
 				   IP_VS_RT_MODE_NON_LOCAL |
 				   IP_VS_RT_MODE_CONNECT |
 				   IP_VS_RT_MODE_TUNNEL, &saddr);
 =======
+=======
+>>>>>>> v3.18
 	local = __ip_vs_get_out_rt(cp->af, skb, cp->dest, cp->daddr.ip,
 				   IP_VS_RT_MODE_LOCAL |
 				   IP_VS_RT_MODE_NON_LOCAL |
 				   IP_VS_RT_MODE_CONNECT |
 				   IP_VS_RT_MODE_TUNNEL, &saddr, ipvsh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (local < 0)
 		goto tx_error;
@@ -1150,9 +1259,12 @@ ip_vs_tunnel_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 	tdev = rt->dst.dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Copy DF, reset fragment offset and MF */
 	df = sysctl_pmtu_disc(ipvs) ? old_iph->frag_off & htons(IP_DF) : 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1160,6 +1272,7 @@ ip_vs_tunnel_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 	 */
 	max_headroom = LL_RESERVED_SPACE(tdev) + sizeof(struct iphdr);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (skb_headroom(skb) < max_headroom || skb_cloned(skb)) {
 		struct sk_buff *new_skb =
@@ -1178,6 +1291,8 @@ ip_vs_tunnel_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 	ip_send_check(old_iph);
 
 =======
+=======
+>>>>>>> v3.18
 	/* We only care about the df field if sysctl_pmtu_disc(ipvs) is set */
 	dfp = sysctl_pmtu_disc(ipvs) ? &df : NULL;
 	skb = ip_vs_prepare_tunneled_skb(skb, cp->af, max_headroom,
@@ -1193,6 +1308,9 @@ ip_vs_tunnel_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	skb->transport_header = skb->network_header;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	skb_push(skb, sizeof(struct iphdr));
 	skb_reset_network_header(skb);
@@ -1206,6 +1324,7 @@ ip_vs_tunnel_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 	iph->ihl		=	sizeof(struct iphdr)>>2;
 	iph->frag_off		=	df;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iph->protocol		=	IPPROTO_IPIP;
 	iph->tos		=	tos;
 	iph->daddr		=	cp->daddr.ip;
@@ -1216,6 +1335,8 @@ ip_vs_tunnel_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 	/* Another hack: avoid icmp_send in ip_fragment */
 	skb->local_df = 1;
 =======
+=======
+>>>>>>> v3.18
 	iph->protocol		=	next_protocol;
 	iph->tos		=	dsfield;
 	iph->daddr		=	cp->daddr.ip;
@@ -1225,6 +1346,9 @@ ip_vs_tunnel_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	/* Another hack: avoid icmp_send in ip_fragment */
 	skb->ignore_df = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = ip_vs_tunnel_xmit_prepare(skb, cp);
@@ -1240,7 +1364,12 @@ ip_vs_tunnel_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 
   tx_error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree_skb(skb);
+=======
+	if (!IS_ERR(skb))
+		kfree_skb(skb);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(skb))
 		kfree_skb(skb);
@@ -1259,12 +1388,18 @@ ip_vs_tunnel_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 	struct in6_addr saddr;		/* Source for tunnel */
 	struct net_device *tdev;	/* Device to other host */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ipv6hdr  *old_iph = ipv6_hdr(skb);
 =======
+=======
+>>>>>>> v3.18
 	__u8 next_protocol = 0;
 	__u32 payload_len = 0;
 	__u8 dsfield = 0;
 	__u8 ttl = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct ipv6hdr  *iph;		/* Our new IP header */
 	unsigned int max_headroom;	/* The extra header space needed */
@@ -1274,7 +1409,11 @@ ip_vs_tunnel_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local = __ip_vs_get_out_rt_v6(skb, cp->dest, &cp->daddr.in6,
+=======
+	local = __ip_vs_get_out_rt_v6(cp->af, skb, cp->dest, &cp->daddr.in6,
+>>>>>>> v3.18
 =======
 	local = __ip_vs_get_out_rt_v6(cp->af, skb, cp->dest, &cp->daddr.in6,
 >>>>>>> v3.18
@@ -1298,6 +1437,7 @@ ip_vs_tunnel_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 	max_headroom = LL_RESERVED_SPACE(tdev) + sizeof(struct ipv6hdr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb_headroom(skb) < max_headroom || skb_cloned(skb)) {
 		struct sk_buff *new_skb =
 			skb_realloc_headroom(skb, max_headroom);
@@ -1309,6 +1449,8 @@ ip_vs_tunnel_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 		old_iph = ipv6_hdr(skb);
 	}
 =======
+=======
+>>>>>>> v3.18
 	skb = ip_vs_prepare_tunneled_skb(skb, cp->af, max_headroom,
 					 &next_protocol, &payload_len,
 					 &dsfield, &ttl, NULL);
@@ -1319,6 +1461,9 @@ ip_vs_tunnel_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 		skb, false, __tun_gso_type_mask(AF_INET6, cp->af));
 	if (IS_ERR(skb))
 		goto tx_error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	skb->transport_header = skb->network_header;
@@ -1333,6 +1478,7 @@ ip_vs_tunnel_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 	iph			=	ipv6_hdr(skb);
 	iph->version		=	6;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iph->nexthdr		=	IPPROTO_IPV6;
 	iph->payload_len	=	old_iph->payload_len;
 	be16_add_cpu(&iph->payload_len, sizeof(*old_iph));
@@ -1345,6 +1491,8 @@ ip_vs_tunnel_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 	/* Another hack: avoid icmp_send in ip_fragment */
 	skb->local_df = 1;
 =======
+=======
+>>>>>>> v3.18
 	iph->nexthdr		=	next_protocol;
 	iph->payload_len	=	htons(payload_len);
 	memset(&iph->flow_lbl, 0, sizeof(iph->flow_lbl));
@@ -1355,6 +1503,9 @@ ip_vs_tunnel_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	/* Another hack: avoid icmp_send in ip_fragment */
 	skb->ignore_df = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = ip_vs_tunnel_xmit_prepare(skb, cp);
@@ -1370,7 +1521,12 @@ ip_vs_tunnel_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 tx_error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree_skb(skb);
+=======
+	if (!IS_ERR(skb))
+		kfree_skb(skb);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(skb))
 		kfree_skb(skb);
@@ -1396,15 +1552,21 @@ ip_vs_dr_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local = __ip_vs_get_out_rt(skb, cp->dest, cp->daddr.ip,
 				   IP_VS_RT_MODE_LOCAL |
 				   IP_VS_RT_MODE_NON_LOCAL |
 				   IP_VS_RT_MODE_KNOWN_NH, NULL);
 =======
+=======
+>>>>>>> v3.18
 	local = __ip_vs_get_out_rt(cp->af, skb, cp->dest, cp->daddr.ip,
 				   IP_VS_RT_MODE_LOCAL |
 				   IP_VS_RT_MODE_NON_LOCAL |
 				   IP_VS_RT_MODE_KNOWN_NH, NULL, ipvsh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (local < 0)
 		goto tx_error;
@@ -1417,7 +1579,11 @@ ip_vs_dr_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	/* Another hack: avoid icmp_send in ip_fragment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->local_df = 1;
+=======
+	skb->ignore_df = 1;
+>>>>>>> v3.18
 =======
 	skb->ignore_df = 1;
 >>>>>>> v3.18
@@ -1446,8 +1612,13 @@ ip_vs_dr_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local = __ip_vs_get_out_rt_v6(skb, cp->dest, &cp->daddr.in6, NULL,
 				      ipvsh, 0,
+=======
+	local = __ip_vs_get_out_rt_v6(cp->af, skb, cp->dest, &cp->daddr.in6,
+				      NULL, ipvsh, 0,
+>>>>>>> v3.18
 =======
 	local = __ip_vs_get_out_rt_v6(cp->af, skb, cp->dest, &cp->daddr.in6,
 				      NULL, ipvsh, 0,
@@ -1463,7 +1634,11 @@ ip_vs_dr_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	/* Another hack: avoid icmp_send in ip_fragment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->local_df = 1;
+=======
+	skb->ignore_df = 1;
+>>>>>>> v3.18
 =======
 	skb->ignore_df = 1;
 >>>>>>> v3.18
@@ -1523,7 +1698,12 @@ ip_vs_icmp_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 		  IP_VS_RT_MODE_RDR : IP_VS_RT_MODE_NON_LOCAL;
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local = __ip_vs_get_out_rt(skb, cp->dest, cp->daddr.ip, rt_mode, NULL);
+=======
+	local = __ip_vs_get_out_rt(cp->af, skb, cp->dest, cp->daddr.ip, rt_mode,
+				   NULL, iph);
+>>>>>>> v3.18
 =======
 	local = __ip_vs_get_out_rt(cp->af, skb, cp->dest, cp->daddr.ip, rt_mode,
 				   NULL, iph);
@@ -1569,7 +1749,11 @@ ip_vs_icmp_xmit(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	/* Another hack: avoid icmp_send in ip_fragment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->local_df = 1;
+=======
+	skb->ignore_df = 1;
+>>>>>>> v3.18
 =======
 	skb->ignore_df = 1;
 >>>>>>> v3.18
@@ -1623,8 +1807,13 @@ ip_vs_icmp_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 		  IP_VS_RT_MODE_RDR : IP_VS_RT_MODE_NON_LOCAL;
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local = __ip_vs_get_out_rt_v6(skb, cp->dest, &cp->daddr.in6, NULL,
 				      ipvsh, 0, rt_mode);
+=======
+	local = __ip_vs_get_out_rt_v6(cp->af, skb, cp->dest, &cp->daddr.in6,
+				      NULL, ipvsh, 0, rt_mode);
+>>>>>>> v3.18
 =======
 	local = __ip_vs_get_out_rt_v6(cp->af, skb, cp->dest, &cp->daddr.in6,
 				      NULL, ipvsh, 0, rt_mode);
@@ -1670,7 +1859,11 @@ ip_vs_icmp_xmit_v6(struct sk_buff *skb, struct ip_vs_conn *cp,
 
 	/* Another hack: avoid icmp_send in ip_fragment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->local_df = 1;
+=======
+	skb->ignore_df = 1;
+>>>>>>> v3.18
 =======
 	skb->ignore_df = 1;
 >>>>>>> v3.18

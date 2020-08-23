@@ -472,7 +472,11 @@ module_param_array(rts_frm_len, uint, NULL, 0);
  * This table lists all the devices that this driver supports.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(s2io_tbl) = {
+=======
+static const struct pci_device_id s2io_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id s2io_tbl[] = {
 >>>>>>> v3.18
@@ -539,6 +543,7 @@ static inline void s2io_start_all_tx_queue(struct s2io_nic *sp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void s2io_start_tx_queue(struct s2io_nic *sp, int fifo_no)
 {
 	if (!sp->config.multiq)
@@ -548,6 +553,8 @@ static inline void s2io_start_tx_queue(struct s2io_nic *sp, int fifo_no)
 	netif_tx_start_all_queues(sp->dev);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void s2io_wake_all_tx_queue(struct s2io_nic *sp)
@@ -2922,6 +2929,12 @@ static int rx_intr_handler(struct ring_info *ring_data, int budget)
 	struct RxD3 *rxdp3;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (budget <= 0)
+		return napi_pkts;
+
+>>>>>>> v3.18
 =======
 	if (budget <= 0)
 		return napi_pkts;
@@ -3806,14 +3819,20 @@ static int s2io_enable_msi_x(struct s2io_nic *nic)
 	readq(&bar0->rx_mat);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = pci_enable_msix(nic->pdev, nic->entries, nic->num_entries);
 	/* We fail init if error or we get less vectors than min required */
 	if (ret) {
 =======
+=======
+>>>>>>> v3.18
 	ret = pci_enable_msix_range(nic->pdev, nic->entries,
 				    nic->num_entries, nic->num_entries);
 	/* We fail init if error or we get less vectors than min required */
 	if (ret < 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		DBG_PRINT(ERR_DBG, "Enabling MSI-X failed\n");
 		kfree(nic->entries);
@@ -4066,7 +4085,11 @@ static netdev_tx_t s2io_xmit(struct sk_buff *skb, struct net_device *dev)
 		DBG_PRINT(TX_DBG, "%s: Card going down for reset\n",
 			  dev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 		dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -4143,7 +4166,11 @@ static netdev_tx_t s2io_xmit(struct sk_buff *skb, struct net_device *dev)
 		DBG_PRINT(TX_DBG, "Error in xmit, No free TXDs.\n");
 		s2io_stop_tx_queue(sp, fifo->fifo_no);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 		dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -4269,7 +4296,11 @@ pci_map_failed:
 	s2io_stop_tx_queue(sp, fifo->fifo_no);
 	swstats->mem_freed += skb->truesize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -5398,8 +5429,13 @@ static int s2io_ethtool_gset(struct net_device *dev, struct ethtool_cmd *info)
 		info->duplex = DUPLEX_FULL;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(info, -1);
 		info->duplex = -1;
+=======
+		ethtool_cmd_speed_set(info, SPEED_UNKNOWN);
+		info->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 =======
 		ethtool_cmd_speed_set(info, SPEED_UNKNOWN);
 		info->duplex = DUPLEX_UNKNOWN;
@@ -7953,7 +7989,11 @@ s2io_init_nic(struct pci_dev *pdev, const struct pci_device_id *pre)
 	/*  Driver entry points */
 	dev->netdev_ops = &s2io_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &netdev_ethtool_ops);
+=======
+	dev->ethtool_ops = &netdev_ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &netdev_ethtool_ops;
 >>>>>>> v3.18
@@ -8227,7 +8267,10 @@ mem_alloc_failed:
 	pci_disable_device(pdev);
 	pci_release_regions(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(dev);
@@ -8266,7 +8309,10 @@ static void s2io_rem_nic(struct pci_dev *pdev)
 	iounmap(sp->bar1);
 	pci_release_regions(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(dev);

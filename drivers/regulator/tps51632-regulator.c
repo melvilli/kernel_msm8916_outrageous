@@ -71,23 +71,34 @@
 #define TPS51632_POWER_STATE_SINGLE_PHASE_DCM	0x2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TPS51632_MIN_VOLATGE			500000
 #define TPS51632_MAX_VOLATGE			1520000
 #define TPS51632_VOLATGE_STEP_10mV		10000
 #define TPS51632_VOLATGE_STEP_20mV		20000
 =======
+=======
+>>>>>>> v3.18
 #define TPS51632_MIN_VOLTAGE			500000
 #define TPS51632_MAX_VOLTAGE			1520000
 #define TPS51632_VOLTAGE_STEP_10mV		10000
 #define TPS51632_VOLTAGE_STEP_20mV		20000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TPS51632_MAX_VSEL			0x7F
 #define TPS51632_MIN_VSEL			0x19
 #define TPS51632_DEFAULT_RAMP_DELAY		6000
 #define TPS51632_VOLT_VSEL(uV)					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(DIV_ROUND_UP(uV - TPS51632_MIN_VOLATGE,	\
 			TPS51632_VOLATGE_STEP_10mV) +		\
+=======
+		(DIV_ROUND_UP(uV - TPS51632_MIN_VOLTAGE,	\
+			TPS51632_VOLTAGE_STEP_10mV) +		\
+>>>>>>> v3.18
 =======
 		(DIV_ROUND_UP(uV - TPS51632_MIN_VOLTAGE,	\
 			TPS51632_VOLTAGE_STEP_10mV) +		\
@@ -240,10 +251,15 @@ static struct tps51632_regulator_platform_data *
 
 	pdata = devm_kzalloc(dev, sizeof(*pdata), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdata) {
 		dev_err(dev, "Memory alloc failed for platform data\n");
 		return NULL;
 	}
+=======
+	if (!pdata)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!pdata)
 		return NULL;
@@ -261,9 +277,15 @@ static struct tps51632_regulator_platform_data *
 
 	pdata->base_voltage_uV = pdata->reg_init_data->constraints.min_uV ? :
 <<<<<<< HEAD
+<<<<<<< HEAD
 					TPS51632_MIN_VOLATGE;
 	pdata->max_voltage_uV = pdata->reg_init_data->constraints.max_uV ? :
 					TPS51632_MAX_VOLATGE;
+=======
+					TPS51632_MIN_VOLTAGE;
+	pdata->max_voltage_uV = pdata->reg_init_data->constraints.max_uV ? :
+					TPS51632_MAX_VOLTAGE;
+>>>>>>> v3.18
 =======
 					TPS51632_MIN_VOLTAGE;
 	pdata->max_voltage_uV = pdata->reg_init_data->constraints.max_uV ? :
@@ -299,7 +321,11 @@ static int tps51632_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = client->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -312,8 +338,13 @@ static int tps51632_probe(struct i2c_client *client,
 
 	if (pdata->enable_pwm_dvfs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((pdata->base_voltage_uV < TPS51632_MIN_VOLATGE) ||
 		    (pdata->base_voltage_uV > TPS51632_MAX_VOLATGE)) {
+=======
+		if ((pdata->base_voltage_uV < TPS51632_MIN_VOLTAGE) ||
+		    (pdata->base_voltage_uV > TPS51632_MAX_VOLTAGE)) {
+>>>>>>> v3.18
 =======
 		if ((pdata->base_voltage_uV < TPS51632_MIN_VOLTAGE) ||
 		    (pdata->base_voltage_uV > TPS51632_MAX_VOLTAGE)) {
@@ -324,8 +355,13 @@ static int tps51632_probe(struct i2c_client *client,
 
 		if ((pdata->max_voltage_uV) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    ((pdata->max_voltage_uV < TPS51632_MIN_VOLATGE) ||
 		     (pdata->max_voltage_uV > TPS51632_MAX_VOLATGE))) {
+=======
+		    ((pdata->max_voltage_uV < TPS51632_MIN_VOLTAGE) ||
+		     (pdata->max_voltage_uV > TPS51632_MAX_VOLTAGE))) {
+>>>>>>> v3.18
 =======
 		    ((pdata->max_voltage_uV < TPS51632_MIN_VOLTAGE) ||
 		     (pdata->max_voltage_uV > TPS51632_MAX_VOLTAGE))) {
@@ -336,6 +372,7 @@ static int tps51632_probe(struct i2c_client *client,
 	}
 
 	tps = devm_kzalloc(&client->dev, sizeof(*tps), GFP_KERNEL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!tps) {
 		dev_err(&client->dev, "Memory allocation failed\n");
@@ -349,6 +386,8 @@ static int tps51632_probe(struct i2c_client *client,
 	tps->desc.min_uV = TPS51632_MIN_VOLATGE;
 	tps->desc.uV_step = TPS51632_VOLATGE_STEP_10mV;
 =======
+=======
+>>>>>>> v3.18
 	if (!tps)
 		return -ENOMEM;
 
@@ -358,6 +397,9 @@ static int tps51632_probe(struct i2c_client *client,
 	tps->desc.ramp_delay = TPS51632_DEFAULT_RAMP_DELAY;
 	tps->desc.min_uV = TPS51632_MIN_VOLTAGE;
 	tps->desc.uV_step = TPS51632_VOLTAGE_STEP_10mV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tps->desc.linear_min_sel = TPS51632_MIN_VSEL;
 	tps->desc.n_voltages = TPS51632_MAX_VSEL + 1;
@@ -393,7 +435,11 @@ static int tps51632_probe(struct i2c_client *client,
 	config.of_node = client->dev.of_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev = regulator_register(&tps->desc, &config);
+=======
+	rdev = devm_regulator_register(&client->dev, &tps->desc, &config);
+>>>>>>> v3.18
 =======
 	rdev = devm_regulator_register(&client->dev, &tps->desc, &config);
 >>>>>>> v3.18
@@ -407,6 +453,7 @@ static int tps51632_probe(struct i2c_client *client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tps51632_remove(struct i2c_client *client)
 {
 	struct tps51632_chip *tps = i2c_get_clientdata(client);
@@ -415,6 +462,8 @@ static int tps51632_remove(struct i2c_client *client)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct i2c_device_id tps51632_id[] = {
@@ -432,7 +481,10 @@ static struct i2c_driver tps51632_i2c_driver = {
 	},
 	.probe = tps51632_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = tps51632_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = tps51632_id,

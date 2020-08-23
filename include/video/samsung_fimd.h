@@ -20,6 +20,10 @@
 
 #define VIDCON0					0x00
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define VIDCON0_DSI_EN				(1 << 30)
+>>>>>>> v3.18
 =======
 #define VIDCON0_DSI_EN				(1 << 30)
 >>>>>>> v3.18
@@ -112,7 +116,11 @@
 #define VIDCON2_YUVORDCrCb			(1 << 7)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* PRTCON (S3C6410, S5PC100)
+=======
+/* PRTCON (S3C6410)
+>>>>>>> v3.18
 =======
 /* PRTCON (S3C6410)
 >>>>>>> v3.18
@@ -364,7 +372,11 @@
 
 #define VIDINTCON1				0x134
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VIDINTCON1_INT_I180			(1 << 2)
+=======
+#define VIDINTCON1_INT_I80			(1 << 2)
+>>>>>>> v3.18
 =======
 #define VIDINTCON1_INT_I80			(1 << 2)
 >>>>>>> v3.18

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -78,8 +82,11 @@ acpi_ds_init_callbacks(struct acpi_walk_state *walk_state, u32 pass_number)
 
 	switch (pass_number) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 1:
 =======
+=======
+>>>>>>> v3.18
 	case 0:
 
 		/* Parse only - caller will setup callbacks */
@@ -94,6 +101,9 @@ acpi_ds_init_callbacks(struct acpi_walk_state *walk_state, u32 pass_number)
 
 		/* Load pass 1 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		walk_state->parse_flags = ACPI_PARSE_LOAD_PASS1 |
 		    ACPI_PARSE_DELETE_TREE;
@@ -103,6 +113,12 @@ acpi_ds_init_callbacks(struct acpi_walk_state *walk_state, u32 pass_number)
 
 	case 2:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		/* Load pass 2 */
+
+>>>>>>> v3.18
 =======
 
 		/* Load pass 2 */
@@ -116,6 +132,12 @@ acpi_ds_init_callbacks(struct acpi_walk_state *walk_state, u32 pass_number)
 
 	case 3:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		/* Execution pass */
+
+>>>>>>> v3.18
 =======
 
 		/* Execution pass */
@@ -131,6 +153,10 @@ acpi_ds_init_callbacks(struct acpi_walk_state *walk_state, u32 pass_number)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -199,7 +225,10 @@ acpi_ds_load1_begin_op(struct acpi_walk_state * walk_state,
 	switch (walk_state->opcode) {
 	case AML_SCOPE_OP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -219,8 +248,13 @@ acpi_ds_load1_begin_op(struct acpi_walk_state * walk_state,
 			 * insert the name into the namespace.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			acpi_dm_add_to_external_list(op, path, ACPI_TYPE_DEVICE,
 						     0);
+=======
+			acpi_dm_add_op_to_external_list(op, path,
+							ACPI_TYPE_DEVICE, 0, 0);
+>>>>>>> v3.18
 =======
 			acpi_dm_add_op_to_external_list(op, path,
 							ACPI_TYPE_DEVICE, 0, 0);
@@ -256,7 +290,10 @@ acpi_ds_load1_begin_op(struct acpi_walk_state * walk_state,
 		case ACPI_TYPE_STRING:
 		case ACPI_TYPE_BUFFER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -281,7 +318,10 @@ acpi_ds_load1_begin_op(struct acpi_walk_state * walk_state,
 
 		case ACPI_TYPE_METHOD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*

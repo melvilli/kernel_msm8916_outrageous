@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -109,11 +119,14 @@ enum iwl_proto_offloads {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IWL_PROTO_OFFLOAD_NUM_IPV6_ADDRS	2
 
 /**
  * struct iwl_proto_offload_cmd - ARP/NS offload configuration
 =======
+=======
+>>>>>>> v3.18
 #define IWL_PROTO_OFFLOAD_NUM_IPV6_ADDRS_V1	2
 #define IWL_PROTO_OFFLOAD_NUM_IPV6_ADDRS_V2	6
 #define IWL_PROTO_OFFLOAD_NUM_IPV6_ADDRS_V3L	12
@@ -125,11 +138,15 @@ enum iwl_proto_offloads {
 
 /**
  * struct iwl_proto_offload_cmd_common - ARP/NS offload common part
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @enabled: enable flags
  * @remote_ipv4_addr: remote address to answer to (or zero if all)
  * @host_ipv4_addr: our IPv4 address to respond to queries for
  * @arp_mac_addr: our MAC address for ARP responses
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @remote_ipv6_addr: remote address to answer to (or zero if all)
  * @solicited_node_ipv6_addr: broken -- solicited node address exists
@@ -143,10 +160,16 @@ struct iwl_proto_offload_cmd {
  */
 struct iwl_proto_offload_cmd_common {
 >>>>>>> v3.18
+=======
+ * @reserved: unused
+ */
+struct iwl_proto_offload_cmd_common {
+>>>>>>> v3.18
 	__le32 enabled;
 	__be32 remote_ipv4_addr;
 	__be32 host_ipv4_addr;
 	u8 arp_mac_addr[ETH_ALEN];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__le16 reserved1;
 
@@ -154,6 +177,8 @@ struct iwl_proto_offload_cmd_common {
 	u8 solicited_node_ipv6_addr[16];
 	u8 target_ipv6_addr[IWL_PROTO_OFFLOAD_NUM_IPV6_ADDRS][16];
 =======
+=======
+>>>>>>> v3.18
 	__le16 reserved;
 } __packed;
 
@@ -171,13 +196,19 @@ struct iwl_proto_offload_cmd_v1 {
 	u8 remote_ipv6_addr[16];
 	u8 solicited_node_ipv6_addr[16];
 	u8 target_ipv6_addr[IWL_PROTO_OFFLOAD_NUM_IPV6_ADDRS_V1][16];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 ndp_mac_addr[ETH_ALEN];
 	__le16 reserved2;
 } __packed; /* PROT_OFFLOAD_CONFIG_CMD_DB_S_VER_1 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct iwl_proto_offload_cmd_v2 - ARP/NS offload configuration
  * @common: common/IPv4 configuration
@@ -234,6 +265,9 @@ struct iwl_proto_offload_cmd_v3_large {
 	struct iwl_targ_addr targ_addrs[IWL_PROTO_OFFLOAD_NUM_IPV6_ADDRS_V3L];
 	struct iwl_ns_config ns_config[IWL_PROTO_OFFLOAD_NUM_NS_CONFIG_V3L];
 } __packed; /* PROT_OFFLOAD_CONFIG_CMD_DB_S_VER_3 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -270,12 +304,15 @@ enum iwl_wowlan_wakeup_filters {
 	IWL_WOWLAN_WAKEUP_REMOTE_LINK_LOSS		= BIT(9),
 	IWL_WOWLAN_WAKEUP_REMOTE_SIGNATURE_TABLE	= BIT(10),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* BIT(11) reserved */
 	IWL_WOWLAN_WAKEUP_REMOTE_WAKEUP_PACKET		= BIT(12),
 }; /* WOWLAN_WAKEUP_FILTER_API_E_VER_4 */
 
 struct iwl_wowlan_config_cmd {
 =======
+=======
+>>>>>>> v3.18
 	IWL_WOWLAN_WAKEUP_REMOTE_TCP_EXTERNAL		= BIT(11),
 	IWL_WOWLAN_WAKEUP_REMOTE_WAKEUP_PACKET		= BIT(12),
 	IWL_WOWLAN_WAKEUP_IOAC_MAGIC_PACKET		= BIT(13),
@@ -285,6 +322,9 @@ struct iwl_wowlan_config_cmd {
 }; /* WOWLAN_WAKEUP_FILTER_API_E_VER_4 */
 
 struct iwl_wowlan_config_cmd_v2 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__le32 wakeup_filter;
 	__le16 non_qos_seq;
@@ -294,13 +334,19 @@ struct iwl_wowlan_config_cmd_v2 {
 } __packed; /* WOWLAN_CONFIG_API_S_VER_2 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct iwl_wowlan_config_cmd_v3 {
 	struct iwl_wowlan_config_cmd_v2 common;
 	u8 offloading_tid;
 	u8 reserved[3];
 } __packed; /* WOWLAN_CONFIG_API_S_VER_3 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * WOWLAN_TSC_RSC_PARAMS
@@ -395,8 +441,11 @@ enum iwl_wowlan_wakeup_reason {
 }; /* WOWLAN_WAKE_UP_REASON_API_E_VER_2 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iwl_wowlan_status {
 =======
+=======
+>>>>>>> v3.18
 struct iwl_wowlan_gtk_status {
 	u8 key_index;
 	u8 reserved[3];
@@ -407,6 +456,9 @@ struct iwl_wowlan_gtk_status {
 
 struct iwl_wowlan_status {
 	struct iwl_wowlan_gtk_status gtk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__le64 replay_ctr;
 	__le16 pattern_number;
@@ -414,7 +466,10 @@ struct iwl_wowlan_status {
 	__le16 qos_seq_ctr[8];
 	__le32 wakeup_reasons;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 rekey_status;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__le32 num_of_gtk_rekeys;
@@ -424,7 +479,11 @@ struct iwl_wowlan_status {
 	__le32 wake_packet_bufsize;
 	u8 wake_packet[]; /* can be truncated from _length to _bufsize */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __packed; /* WOWLAN_STATUSES_API_S_VER_4 */
+=======
+} __packed; /* WOWLAN_STATUSES_API_S_VER_6 */
+>>>>>>> v3.18
 =======
 } __packed; /* WOWLAN_STATUSES_API_S_VER_6 */
 >>>>>>> v3.18

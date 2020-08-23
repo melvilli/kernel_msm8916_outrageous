@@ -28,6 +28,10 @@ typedef struct
 {
 	unsigned int	fpc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int	pad;
+>>>>>>> v3.18
 =======
 	unsigned int	pad;
 >>>>>>> v3.18
@@ -54,7 +58,10 @@ typedef struct
 } _sigregs32;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef struct
 {
 	__u32 gprs_high[__NUM_GPRS];
@@ -63,6 +70,9 @@ typedef struct
 	__u8 __reserved[128];
 } _sigregs_ext32;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define _SIGCONTEXT_NSIG32	64
 #define _SIGCONTEXT_NSIG_BPW32	32
@@ -84,12 +94,18 @@ struct ucontext32 {
 	compat_stack_t		uc_stack;
 	_sigregs32		uc_mcontext;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	compat_sigset_t		uc_sigmask;	/* mask last for extensibility */
 =======
+=======
+>>>>>>> v3.18
 	compat_sigset_t		uc_sigmask;
 	/* Allow for uc_sigmask growth.  Glibc uses a 1024-bit sigset_t.  */
 	unsigned char		__unused[128 - sizeof(compat_sigset_t)];
 	_sigregs_ext32		uc_mcontext_ext;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -97,6 +113,7 @@ struct stat64_emu31;
 struct mmap_arg_struct_emu31;
 struct fadvise64_64_args;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 long sys32_chown16(const char __user * filename, u16 user, u16 group);
 long sys32_lchown16(const char __user * filename, u16 user, u16 group);
@@ -141,6 +158,8 @@ long sys32_write(unsigned int fd, const char __user * buf, size_t count);
 long sys32_fadvise64(int fd, loff_t offset, size_t len, int advise);
 long sys32_fadvise64_64(struct fadvise64_64_args __user *args);
 =======
+=======
+>>>>>>> v3.18
 long compat_sys_s390_chown16(const char __user *filename, u16 user, u16 group);
 long compat_sys_s390_lchown16(const char __user *filename, u16 user, u16 group);
 long compat_sys_s390_fchown16(unsigned int fd, u16 user, u16 group);
@@ -180,5 +199,8 @@ long compat_sys_s390_fallocate(int fd, int mode, u32 offhigh, u32 offlow, u32 le
 long compat_sys_sigreturn(void);
 long compat_sys_rt_sigreturn(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_S390X_S390_H */

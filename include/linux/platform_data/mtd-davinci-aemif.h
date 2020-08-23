@@ -11,6 +11,11 @@
 #define _MACH_DAVINCI_AEMIF_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_device.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/platform_device.h>
 
@@ -37,8 +42,12 @@ struct davinci_aemif_timing {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int davinci_aemif_setup_timing(struct davinci_aemif_timing *t,
 					void __iomem *base, unsigned cs);
+=======
+int davinci_aemif_setup(struct platform_device *pdev);
+>>>>>>> v3.18
 =======
 int davinci_aemif_setup(struct platform_device *pdev);
 >>>>>>> v3.18

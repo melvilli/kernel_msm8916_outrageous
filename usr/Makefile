@@ -7,6 +7,7 @@ PHONY += klibcdirs
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Gzip
 suffix_$(CONFIG_INITRAMFS_COMPRESSION_GZIP)   = .gz
 
@@ -22,6 +23,8 @@ suffix_$(CONFIG_INITRAMFS_COMPRESSION_XZ)     = .xz
 # Lzo
 suffix_$(CONFIG_INITRAMFS_COMPRESSION_LZO)   = .lzo
 =======
+=======
+>>>>>>> v3.18
 # Bzip2
 suffix_$(CONFIG_RD_BZIP2)  = .bz2
 
@@ -39,6 +42,9 @@ suffix_$(CONFIG_RD_LZ4)    = .lz4
 
 # Gzip
 suffix_$(CONFIG_RD_GZIP)   = .gz
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 AFLAGS_initramfs_data.o += -DINITRAMFS_IMAGE="usr/initramfs_data.cpio$(suffix_y)"
@@ -74,12 +80,18 @@ quiet_cmd_initfs = GEN     $@
       cmd_initfs = $(initramfs) -o $@ $(ramfs-args) $(ramfs-input)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 targets := initramfs_data.cpio.gz initramfs_data.cpio.bz2 initramfs_data.cpio.lzma initramfs_data.cpio.xz initramfs_data.cpio.lzo initramfs_data.cpio
 =======
+=======
+>>>>>>> v3.18
 targets := initramfs_data.cpio.gz initramfs_data.cpio.bz2 \
 	initramfs_data.cpio.lzma initramfs_data.cpio.xz \
 	initramfs_data.cpio.lzo initramfs_data.cpio.lz4 \
 	initramfs_data.cpio
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # do not try to update files included in initramfs
 $(deps_initramfs): ;
@@ -94,6 +106,9 @@ $(obj)/initramfs_data.cpio$(suffix_y): $(obj)/gen_init_cpio $(deps_initramfs) kl
 	$(Q)$(initramfs) -l $(ramfs-input) > $(obj)/.initramfs_data.cpio.d
 	$(call if_changed,initfs)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

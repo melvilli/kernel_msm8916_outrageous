@@ -121,7 +121,11 @@
 
 /* Sharp */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LH28F640BF	0x00b0
+=======
+#define LH28F640BF	0x00B0
+>>>>>>> v3.18
 =======
 #define LH28F640BF	0x00B0
 >>>>>>> v3.18
@@ -1304,6 +1308,7 @@ static const struct amd_flash_info jedec_table[] = {
 		.dev_id		= LH28F640BF,
 		.name		= "LH28F640BF",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.devtypes	= CFI_DEVICETYPE_X8,
 		.uaddr		= MTD_UADDR_UNNECESSARY,
 		.dev_size	= SIZE_4MiB,
@@ -1312,6 +1317,8 @@ static const struct amd_flash_info jedec_table[] = {
 		.regions	= {
 			ERASEINFO(0x40000,16),
 =======
+=======
+>>>>>>> v3.18
 		.devtypes	= CFI_DEVICETYPE_X16,
 		.uaddr		= MTD_UADDR_UNNECESSARY,
 		.dev_size	= SIZE_8MiB,
@@ -1320,6 +1327,9 @@ static const struct amd_flash_info jedec_table[] = {
 		.regions	= {
 			ERASEINFO(0x10000, 127),
 			ERASEINFO(0x02000, 8),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}, {

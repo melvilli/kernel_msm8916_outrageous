@@ -896,6 +896,7 @@ static int r128_cce_dispatch_write_span(struct drm_device *dev,
 		return -EMSGSIZE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(&x, depth->x, sizeof(x)))
 		return -EFAULT;
 	if (DRM_COPY_FROM_USER(&y, depth->y, sizeof(y)))
@@ -922,6 +923,8 @@ static int r128_cce_dispatch_write_span(struct drm_device *dev,
 			kfree(mask);
 			return -EFAULT;
 =======
+=======
+>>>>>>> v3.18
 	if (copy_from_user(&x, depth->x, sizeof(x)))
 		return -EFAULT;
 	if (copy_from_user(&y, depth->y, sizeof(y)))
@@ -938,6 +941,9 @@ static int r128_cce_dispatch_write_span(struct drm_device *dev,
 		if (IS_ERR(mask)) {
 			kfree(buffer);
 			return PTR_ERR(mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1019,7 +1025,11 @@ static int r128_cce_dispatch_write_pixels(struct drm_device *dev,
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(x, depth->x, xbuf_size)) {
+=======
+	if (copy_from_user(x, depth->x, xbuf_size)) {
+>>>>>>> v3.18
 =======
 	if (copy_from_user(x, depth->x, xbuf_size)) {
 >>>>>>> v3.18
@@ -1028,7 +1038,11 @@ static int r128_cce_dispatch_write_pixels(struct drm_device *dev,
 		return -EFAULT;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(y, depth->y, xbuf_size)) {
+=======
+	if (copy_from_user(y, depth->y, xbuf_size)) {
+>>>>>>> v3.18
 =======
 	if (copy_from_user(y, depth->y, xbuf_size)) {
 >>>>>>> v3.18
@@ -1038,6 +1052,7 @@ static int r128_cce_dispatch_write_pixels(struct drm_device *dev,
 	}
 
 	buffer_size = depth->n * sizeof(u32);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	buffer = kmalloc(buffer_size, GFP_KERNEL);
 	if (buffer == NULL) {
@@ -1051,16 +1066,22 @@ static int r128_cce_dispatch_write_pixels(struct drm_device *dev,
 		kfree(buffer);
 		return -EFAULT;
 =======
+=======
+>>>>>>> v3.18
 	buffer = memdup_user(depth->buffer, buffer_size);
 	if (IS_ERR(buffer)) {
 		kfree(x);
 		kfree(y);
 		return PTR_ERR(buffer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (depth->mask) {
 		mask_size = depth->n * sizeof(u8);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		mask = kmalloc(mask_size, GFP_KERNEL);
 		if (mask == NULL) {
@@ -1076,12 +1097,17 @@ static int r128_cce_dispatch_write_pixels(struct drm_device *dev,
 			kfree(mask);
 			return -EFAULT;
 =======
+=======
+>>>>>>> v3.18
 		mask = memdup_user(depth->mask, mask_size);
 		if (IS_ERR(mask)) {
 			kfree(x);
 			kfree(y);
 			kfree(buffer);
 			return PTR_ERR(mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1152,9 +1178,15 @@ static int r128_cce_dispatch_read_span(struct drm_device *dev,
 		return -EMSGSIZE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(&x, depth->x, sizeof(x)))
 		return -EFAULT;
 	if (DRM_COPY_FROM_USER(&y, depth->y, sizeof(y)))
+=======
+	if (copy_from_user(&x, depth->x, sizeof(x)))
+		return -EFAULT;
+	if (copy_from_user(&y, depth->y, sizeof(y)))
+>>>>>>> v3.18
 =======
 	if (copy_from_user(&x, depth->x, sizeof(x)))
 		return -EFAULT;
@@ -1213,7 +1245,11 @@ static int r128_cce_dispatch_read_pixels(struct drm_device *dev,
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(x, depth->x, xbuf_size)) {
+=======
+	if (copy_from_user(x, depth->x, xbuf_size)) {
+>>>>>>> v3.18
 =======
 	if (copy_from_user(x, depth->x, xbuf_size)) {
 >>>>>>> v3.18
@@ -1222,7 +1258,11 @@ static int r128_cce_dispatch_read_pixels(struct drm_device *dev,
 		return -EFAULT;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(y, depth->y, ybuf_size)) {
+=======
+	if (copy_from_user(y, depth->y, ybuf_size)) {
+>>>>>>> v3.18
 =======
 	if (copy_from_user(y, depth->y, ybuf_size)) {
 >>>>>>> v3.18
@@ -1583,7 +1623,11 @@ static int r128_cce_stipple(struct drm_device *dev, void *data, struct drm_file 
 	DEV_INIT_TEST_WITH_RETURN(dev_priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(&mask, stipple->mask, 32 * sizeof(u32)))
+=======
+	if (copy_from_user(&mask, stipple->mask, 32 * sizeof(u32)))
+>>>>>>> v3.18
 =======
 	if (copy_from_user(&mask, stipple->mask, 32 * sizeof(u32)))
 >>>>>>> v3.18
@@ -1679,7 +1723,11 @@ static int r128_getparam(struct drm_device *dev, void *data, struct drm_file *fi
 	switch (param->param) {
 	case R128_PARAM_IRQ_NR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		value = drm_dev_to_irq(dev);
+=======
+		value = dev->pdev->irq;
+>>>>>>> v3.18
 =======
 		value = dev->pdev->irq;
 >>>>>>> v3.18
@@ -1689,7 +1737,11 @@ static int r128_getparam(struct drm_device *dev, void *data, struct drm_file *fi
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_TO_USER(param->value, &value, sizeof(int))) {
+=======
+	if (copy_to_user(param->value, &value, sizeof(int))) {
+>>>>>>> v3.18
 =======
 	if (copy_to_user(param->value, &value, sizeof(int))) {
 >>>>>>> v3.18
@@ -1714,7 +1766,11 @@ void r128_driver_lastclose(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drm_ioctl_desc r128_ioctls[] = {
+=======
+const struct drm_ioctl_desc r128_ioctls[] = {
+>>>>>>> v3.18
 =======
 const struct drm_ioctl_desc r128_ioctls[] = {
 >>>>>>> v3.18
@@ -1738,7 +1794,11 @@ const struct drm_ioctl_desc r128_ioctls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int r128_max_ioctl = DRM_ARRAY_SIZE(r128_ioctls);
+=======
+int r128_max_ioctl = ARRAY_SIZE(r128_ioctls);
+>>>>>>> v3.18
 =======
 int r128_max_ioctl = ARRAY_SIZE(r128_ioctls);
 >>>>>>> v3.18

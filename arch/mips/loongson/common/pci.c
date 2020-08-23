@@ -12,6 +12,10 @@
 #include <pci.h>
 #include <loongson.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <boot_param.h>
+>>>>>>> v3.18
 =======
 #include <boot_param.h>
 >>>>>>> v3.18
@@ -87,12 +91,18 @@ static int __init pcibios_init(void)
 
 	loongson_pci_controller.io_map_base = mips_io_port_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_LEFI_FIRMWARE_INTERFACE
 	loongson_pci_mem_resource.start = loongson_sysconf.pci_mem_start_addr;
 	loongson_pci_mem_resource.end = loongson_sysconf.pci_mem_end_addr;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	register_pci_controller(&loongson_pci_controller);
 

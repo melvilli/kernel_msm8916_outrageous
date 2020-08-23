@@ -277,7 +277,11 @@ void prom_soc_init(struct ralink_soc_info *soc_info)
 		soc_info->compatible = "ralink,rt5350-soc";
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		panic("rt305x: unknown SoC, n0:%08x n1:%08x\n", n0, n1);
+=======
+		panic("rt305x: unknown SoC, n0:%08x n1:%08x", n0, n1);
+>>>>>>> v3.18
 =======
 		panic("rt305x: unknown SoC, n0:%08x n1:%08x", n0, n1);
 >>>>>>> v3.18

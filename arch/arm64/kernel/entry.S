@@ -26,7 +26,10 @@
 #include <asm/errno.h>
 #include <asm/esr.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/ptrace.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/thread_info.h>
@@ -34,7 +37,10 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Context tracking subsystem.  Used to instrument transitions
  * between user and kernel mode.
  */
@@ -61,6 +67,9 @@
 	.endm
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Bad Abort numbers
  *-----------------
@@ -124,6 +133,7 @@
 	ldp	x21, x22, [sp, #S_PC]		// load ELR, SPSR
 	.if	\el == 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldr	x23, [sp, #S_SP]		// load return stack pointer
 	msr	sp_el0, x23
 #ifdef CONFIG_ARM64_ERRATUM_845719
@@ -138,10 +148,15 @@
 	.endif
 1:	.if	\ret
 =======
+=======
+>>>>>>> v3.18
 	ct_user_enter
 	ldr	x23, [sp, #S_SP]		// load return stack pointer
 	.endif
 	.if	\ret
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ldr	x1, [sp, #S_X1]			// preserve x0 (syscall return)
 	add	sp, sp, S_X2
@@ -192,12 +207,16 @@ tsk	.req	x28		// current thread_info
  */
 	.macro	irq_handler
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 	ldr	x1, =handle_arch_irq
 	ldr	x1, [x1]
 #else
 	ldr	x1, handle_arch_irq
 #endif
+=======
+	ldr	x1, handle_arch_irq
+>>>>>>> v3.18
 =======
 	ldr	x1, handle_arch_irq
 >>>>>>> v3.18
@@ -357,7 +376,10 @@ el1_dbg:
 	mov	x2, sp				// struct pt_regs
 	bl	do_debug_exception
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enable_dbg
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kernel_exit 1
@@ -415,7 +437,10 @@ el0_sync:
 	cmp	x24, #ESR_EL1_EC_SVC64		// SVC in 64-bit state
 	b.eq	el0_svc
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adr	lr, ret_to_user
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cmp	x24, #ESR_EL1_EC_DABT_EL0	// data abort in EL0
@@ -447,7 +472,10 @@ el0_sync_compat:
 	cmp	x24, #ESR_EL1_EC_SVC32		// SVC in 32-bit state
 	b.eq	el0_svc_compat
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adr	lr, ret_to_user
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cmp	x24, #ESR_EL1_EC_DABT_EL0	// data abort in EL0
@@ -493,6 +521,7 @@ el0_da:
 	 * Data abort handling
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mrs	x0, far_el1
 	bic	x0, x0, #(0xff << 56)
 	// enable interrupts before calling the main handler
@@ -500,6 +529,8 @@ el0_da:
 	mov	x1, x25
 	mov	x2, sp
 =======
+=======
+>>>>>>> v3.18
 	mrs	x26, far_el1
 	// enable interrupts before calling the main handler
 	enable_dbg_and_irq
@@ -508,6 +539,9 @@ el0_da:
 	mov	x1, x25
 	mov	x2, sp
 	adr	lr, ret_to_user
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b	do_mem_abort
 el0_ia:
@@ -515,12 +549,15 @@ el0_ia:
 	 * Instruction abort handling
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mrs	x0, far_el1
 	// enable interrupts before calling the main handler
 	enable_dbg_and_irq
 	orr	x1, x25, #1 << 24		// use reserved ISS bit for instruction aborts
 	mov	x2, sp
 =======
+=======
+>>>>>>> v3.18
 	mrs	x26, far_el1
 	// enable interrupts before calling the main handler
 	enable_dbg_and_irq
@@ -529,6 +566,9 @@ el0_ia:
 	orr	x1, x25, #1 << 24		// use reserved ISS bit for instruction aborts
 	mov	x2, sp
 	adr	lr, ret_to_user
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b	do_mem_abort
 el0_fpsimd_acc:
@@ -537,13 +577,19 @@ el0_fpsimd_acc:
 	 */
 	enable_dbg
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	x0, x25
 	mov	x1, sp
 =======
+=======
+>>>>>>> v3.18
 	ct_user_exit
 	mov	x0, x25
 	mov	x1, sp
 	adr	lr, ret_to_user
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b	do_fpsimd_acc
 el0_fpsimd_exc:
@@ -552,13 +598,19 @@ el0_fpsimd_exc:
 	 */
 	enable_dbg
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	x0, x25
 	mov	x1, sp
 =======
+=======
+>>>>>>> v3.18
 	ct_user_exit
 	mov	x0, x25
 	mov	x1, sp
 	adr	lr, ret_to_user
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b	do_fpsimd_exc
 el0_sp_pc:
@@ -566,12 +618,15 @@ el0_sp_pc:
 	 * Stack or PC alignment exception handling
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mrs	x0, far_el1
 	// enable interrupts before calling the main handler
 	enable_dbg_and_irq
 	mov	x1, x25
 	mov	x2, sp
 =======
+=======
+>>>>>>> v3.18
 	mrs	x26, far_el1
 	// enable interrupts before calling the main handler
 	enable_dbg_and_irq
@@ -579,6 +634,9 @@ el0_sp_pc:
 	mov	x1, x25
 	mov	x2, sp
 	adr	lr, ret_to_user
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b	do_sp_pc_abort
 el0_undef:
@@ -588,7 +646,13 @@ el0_undef:
 	// enable interrupts before calling the main handler
 	enable_dbg_and_irq
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	x0, sp
+=======
+	ct_user_exit
+	mov	x0, sp
+	adr	lr, ret_to_user
+>>>>>>> v3.18
 =======
 	ct_user_exit
 	mov	x0, sp
@@ -606,6 +670,7 @@ el0_dbg:
 	bl	do_debug_exception
 	enable_dbg
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	ret_to_user
 el0_inv:
 	enable_dbg
@@ -614,6 +679,8 @@ el0_inv:
 	mrs	x2, esr_el1
 	b	bad_el0_sync
 =======
+=======
+>>>>>>> v3.18
 	ct_user_exit
 	b	ret_to_user
 el0_inv:
@@ -624,6 +691,9 @@ el0_inv:
 	mrs	x2, esr_el1
 	adr	lr, ret_to_user
 	b	bad_mode
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENDPROC(el0_sync)
 
@@ -637,6 +707,10 @@ el0_irq_naked:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ct_user_exit
+>>>>>>> v3.18
 =======
 	ct_user_exit
 >>>>>>> v3.18
@@ -698,7 +772,11 @@ fast_work_pending:
 work_pending:
 	tbnz	x1, #TIF_NEED_RESCHED, work_resched
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* TIF_SIGPENDING or TIF_NOTIFY_RESUME case */
+=======
+	/* TIF_SIGPENDING, TIF_NOTIFY_RESUME or TIF_FOREIGN_FPSTATE case */
+>>>>>>> v3.18
 =======
 	/* TIF_SIGPENDING, TIF_NOTIFY_RESUME or TIF_FOREIGN_FPSTATE case */
 >>>>>>> v3.18
@@ -749,6 +827,10 @@ el0_svc_naked:					// compat entry point
 	stp	x0, scno, [sp, #S_ORIG_X0]	// save the original x0 and syscall number
 	enable_dbg_and_irq
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ct_user_exit 1
+>>>>>>> v3.18
 =======
 	ct_user_exit 1
 >>>>>>> v3.18
@@ -775,10 +857,13 @@ __sys_trace:
 	bl	syscall_trace_enter
 	adr	lr, __sys_trace_return		// return address
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmp	w0, #RET_SKIP_SYSCALL_TRACE	// skip syscall and tracing?
 	b.eq	ret_to_user
 	cmp	w0, #RET_SKIP_SYSCALL		// skip syscall?
 	b.eq	__sys_trace_return_skipped
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	uxtw	scno, w0			// syscall number (possibly new)
@@ -795,7 +880,10 @@ __sys_trace:
 __sys_trace_return:
 	str	x0, [sp]			// save returned x0
 <<<<<<< HEAD
+<<<<<<< HEAD
 __sys_trace_return_skipped:			// x0 already in regs[0]
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mov	x0, sp
@@ -811,10 +899,13 @@ ENTRY(sys_rt_sigreturn_wrapper)
 ENDPROC(sys_rt_sigreturn_wrapper)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 .data
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ENTRY(handle_arch_irq)

@@ -51,7 +51,11 @@ int cachefiles_daemon_bind(struct cachefiles_cache *cache, char *args)
 
 	if (*args) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kerror("'bind' command doesn't take an argument");
+=======
+		pr_err("'bind' command doesn't take an argument\n");
+>>>>>>> v3.18
 =======
 		pr_err("'bind' command doesn't take an argument\n");
 >>>>>>> v3.18
@@ -60,7 +64,11 @@ int cachefiles_daemon_bind(struct cachefiles_cache *cache, char *args)
 
 	if (!cache->rootdirname) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kerror("No cache directory specified");
+=======
+		pr_err("No cache directory specified\n");
+>>>>>>> v3.18
 =======
 		pr_err("No cache directory specified\n");
 >>>>>>> v3.18
@@ -70,7 +78,11 @@ int cachefiles_daemon_bind(struct cachefiles_cache *cache, char *args)
 	/* don't permit already bound caches to be re-bound */
 	if (test_bit(CACHEFILES_READY, &cache->flags)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kerror("Cache already bound");
+=======
+		pr_err("Cache already bound\n");
+>>>>>>> v3.18
 =======
 		pr_err("Cache already bound\n");
 >>>>>>> v3.18
@@ -137,7 +149,10 @@ static int cachefiles_daemon_add_cache(struct cachefiles_cache *cache)
 	ret = -EOPNOTSUPP;
 	if (!root->d_inode ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !root->d_inode->i_op ||
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	    !root->d_inode->i_op->lookup ||
@@ -245,9 +260,13 @@ static int cachefiles_daemon_add_cache(struct cachefiles_cache *cache)
 	dput(root);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "CacheFiles:"
 	       " File cache on %s registered\n",
 	       cache->cache.identifier);
+=======
+	pr_info("File cache on %s registered\n", cache->cache.identifier);
+>>>>>>> v3.18
 =======
 	pr_info("File cache on %s registered\n", cache->cache.identifier);
 >>>>>>> v3.18
@@ -271,7 +290,11 @@ error_open_root:
 error_root_object:
 	cachefiles_end_secure(cache, saved_cred);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kerror("Failed to register: %d", ret);
+=======
+	pr_err("Failed to register: %d\n", ret);
+>>>>>>> v3.18
 =======
 	pr_err("Failed to register: %d\n", ret);
 >>>>>>> v3.18
@@ -287,9 +310,14 @@ void cachefiles_daemon_unbind(struct cachefiles_cache *cache)
 
 	if (test_bit(CACHEFILES_READY, &cache->flags)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "CacheFiles:"
 		       " File cache on %s unregistering\n",
 		       cache->cache.identifier);
+=======
+		pr_info("File cache on %s unregistering\n",
+			cache->cache.identifier);
+>>>>>>> v3.18
 =======
 		pr_info("File cache on %s unregistering\n",
 			cache->cache.identifier);

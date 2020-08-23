@@ -2,13 +2,19 @@ Device-Tree bindings for drm hdmi driver
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: value should be "samsung,exynos5-hdmi".
 =======
+=======
+>>>>>>> v3.18
 - compatible: value should be one among the following:
 	1) "samsung,exynos5-hdmi" <DEPRECATED>
 	2) "samsung,exynos4210-hdmi"
 	3) "samsung,exynos4212-hdmi"
 	4) "samsung,exynos5420-hdmi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - reg: physical base address of the hdmi and length of memory mapped
 	region.
@@ -17,10 +23,13 @@ Required properties:
 	a) phandle of the gpio controller node.
 	b) pin number within the gpio controller.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c) pin function mode.
 	d) optional flags and pull up/down.
 	e) drive strength.
 =======
+=======
+>>>>>>> v3.18
 	c) optional flags and pull up/down.
 - clocks: list of clock IDs from SoC clock driver.
 	a) hdmi: Gate of HDMI IP bus clock.
@@ -38,17 +47,23 @@ Required properties:
 - ddc: phandle to the hdmi ddc node
 - phy: phandle to the hdmi phy node
 - samsung,syscon-phandle: phandle for system controller node for PMU.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
 
 	hdmi {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "samsung,exynos5-hdmi";
 		reg = <0x14530000 0x100000>;
 		interrupts = <0 95 0>;
 		hpd-gpio = <&gpx3 7 0xf 1 3>;
 =======
+=======
+>>>>>>> v3.18
 		compatible = "samsung,exynos4212-hdmi";
 		reg = <0x14530000 0x100000>;
 		interrupts = <0 95 0>;
@@ -56,5 +71,8 @@ Example:
 		ddc = <&hdmi_ddc_node>;
 		phy = <&hdmi_phy_node>;
 		samsung,syscon-phandle = <&pmu_system_controller>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};

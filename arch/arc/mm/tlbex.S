@@ -40,7 +40,11 @@
 #include <linux/linkage.h>
 #include <asm/entry.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/tlb.h>
+=======
+#include <asm/mmu.h>
+>>>>>>> v3.18
 =======
 #include <asm/mmu.h>
 >>>>>>> v3.18
@@ -48,6 +52,7 @@
 #include <asm/arcregs.h>
 #include <asm/cache.h>
 #include <asm/processor.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if (CONFIG_ARC_MMU_VER == 1)
 #include <asm/tlb-mmu1.h>
@@ -61,6 +66,8 @@
 ARCFP_DATA ex_saved_reg1
 	.align 1 << L1_CACHE_SHIFT	; IMP: Must be Cache Line aligned
 =======
+=======
+>>>>>>> v3.18
 #include <asm/tlb-mmu1.h>
 
 ;-----------------------------------------------------------------
@@ -91,6 +98,9 @@ ARCFP_DATA ex_saved_reg1
 ; scratch memory to save [r0-r3] used to code TLB refill Handler
 ARCFP_DATA ex_saved_reg1
 	.align 1 << L1_CACHE_SHIFT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.type   ex_saved_reg1, @object
 #ifdef CONFIG_SMP
@@ -104,7 +114,10 @@ ex_saved_reg1:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 .macro TLBMISS_FREEUP_REGS
 #ifdef CONFIG_SMP
 	sr  r0, [ARC_REG_SCRATCH_DATA0]	; freeup r0 to code with
@@ -143,6 +156,9 @@ ex_saved_reg1:
 #endif
 .endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ;============================================================================
 ;  Troubleshooting Stuff
@@ -154,6 +170,7 @@ ex_saved_reg1:
 ; In bizzare scenrios SW and HW ASID can get out-of-sync which is trouble.
 ; So we try to detect this in TLB Mis shandler
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 .macro DBG_ASID_MISMATCH
@@ -174,6 +191,8 @@ ex_saved_reg1:
 	lr  r0, [erstatus]
 	bbit0 r0, STATUS_U_BIT, 5f
 =======
+=======
+>>>>>>> v3.18
 .macro tlb_paranoid_check_asm
 
 #ifdef CONFIG_ARC_DBG_TLB_PARANOIA
@@ -193,6 +212,9 @@ ex_saved_reg1:
 	; Error if H/w and S/w ASID don't match, but NOT if in kernel mode
 	lr  r2, [erstatus]
 	bbit0 r2, STATUS_U_BIT, 5f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	; We sure are in troubled waters, Flag the error, but to do so
@@ -201,15 +223,21 @@ ex_saved_reg1:
 
 	; Call printk to shoutout aloud
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov r0, 1
 	j print_asid_mismatch
 
 5:   ; ASIDs match so proceed normally
 =======
+=======
+>>>>>>> v3.18
 	mov r2, 1
 	j print_asid_mismatch
 
 5:	; ASIDs match so proceed normally
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nop
 
@@ -255,9 +283,15 @@ ex_saved_reg1:
 	and.f 0, r0, _PAGE_PRESENT
 	bz   1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld   r2, [num_pte_not_present]
 	add  r2, r2, 1
 	st   r2, [num_pte_not_present]
+=======
+	ld   r3, [num_pte_not_present]
+	add  r3, r3, 1
+	st   r3, [num_pte_not_present]
+>>>>>>> v3.18
 =======
 	ld   r3, [num_pte_not_present]
 	add  r3, r3, 1
@@ -275,6 +309,7 @@ ex_saved_reg1:
 
 .macro CONV_PTE_TO_TLB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	and r3, r0, PTE_BITS_IN_PD1 ; Extract permission flags+PFN from PTE
 	sr  r3, [ARC_REG_TLBPD1]    ; these go in PD1
 
@@ -283,6 +318,8 @@ ex_saved_reg1:
 	lsr r2, r2                  ; shift PTE flags to match layout in PD0
 #endif
 =======
+=======
+>>>>>>> v3.18
 	and    r3, r0, PTE_BITS_RWX	;       r w x
 	lsl    r2, r3, 3		; r w x 0 0 0 (GLOBAL, kernel only)
 	and.f  0,  r0, _PAGE_GLOBAL
@@ -294,6 +331,9 @@ ex_saved_reg1:
 	sr  r3, [ARC_REG_TLBPD1]    	; these go in PD1
 
 	and r2, r0, PTE_BITS_IN_PD0 ; Extract other PTE flags: (V)alid, (G)lb
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	lr  r3,[ARC_REG_TLBPD0]     ; MMU prepares PD0 with vaddr and asid
@@ -318,6 +358,7 @@ ex_saved_reg1:
 #endif
 .endm
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ;-----------------------------------------------------------------
 ; ARC700 Exception Handling doesn't auto-switch stack and it only provides
@@ -383,6 +424,8 @@ ex_saved_reg1:
 .endm
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 ARCFP_CODE	;Fast Path Code, candidate for ICCM
 
@@ -391,7 +434,11 @@ ARCFP_CODE	;Fast Path Code, candidate for ICCM
 ;-----------------------------------------------------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_ENTRY EV_TLBMissI
+=======
+ENTRY(EV_TLBMissI)
+>>>>>>> v3.18
 =======
 ENTRY(EV_TLBMissI)
 >>>>>>> v3.18
@@ -406,7 +453,11 @@ ENTRY(EV_TLBMissI)
 
 	;----------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 	; Get the PTE corresponding to V-addr accessed
+=======
+	; Get the PTE corresponding to V-addr accessed, r2 is setup with EFA
+>>>>>>> v3.18
 =======
 	; Get the PTE corresponding to V-addr accessed, r2 is setup with EFA
 >>>>>>> v3.18
@@ -416,8 +467,13 @@ ENTRY(EV_TLBMissI)
 	; VERIFY_PTE: Check if PTE permissions approp for executing code
 	cmp_s   r2, VMALLOC_START
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov.lo  r2, (_PAGE_PRESENT | _PAGE_U_READ | _PAGE_U_EXECUTE)
 	mov.hs  r2, (_PAGE_PRESENT | _PAGE_K_READ | _PAGE_K_EXECUTE)
+=======
+	mov_s   r2, (_PAGE_PRESENT | _PAGE_EXECUTE)
+	or.hs   r2, r2, _PAGE_GLOBAL
+>>>>>>> v3.18
 =======
 	mov_s   r2, (_PAGE_PRESENT | _PAGE_EXECUTE)
 	or.hs   r2, r2, _PAGE_GLOBAL
@@ -429,8 +485,13 @@ ENTRY(EV_TLBMissI)
 
 	; Let Linux VM know that the page was accessed
 <<<<<<< HEAD
+<<<<<<< HEAD
 	or      r0, r0, (_PAGE_PRESENT | _PAGE_ACCESSED)  ; set Accessed Bit
 	st_s    r0, [r1]                                  ; Write back PTE
+=======
+	or      r0, r0, _PAGE_ACCESSED  ; set Accessed Bit
+	st_s    r0, [r1]                ; Write back PTE
+>>>>>>> v3.18
 =======
 	or      r0, r0, _PAGE_ACCESSED  ; set Accessed Bit
 	st_s    r0, [r1]                ; Write back PTE
@@ -442,7 +503,11 @@ ENTRY(EV_TLBMissI)
 	rtie
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_EXIT EV_TLBMissI
+=======
+END(EV_TLBMissI)
+>>>>>>> v3.18
 =======
 END(EV_TLBMissI)
 >>>>>>> v3.18
@@ -452,7 +517,11 @@ END(EV_TLBMissI)
 ;-----------------------------------------------------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_ENTRY EV_TLBMissD
+=======
+ENTRY(EV_TLBMissD)
+>>>>>>> v3.18
 =======
 ENTRY(EV_TLBMissD)
 >>>>>>> v3.18
@@ -468,7 +537,11 @@ ENTRY(EV_TLBMissD)
 	;----------------------------------------------------------------
 	; Get the PTE corresponding to V-addr accessed
 <<<<<<< HEAD
+<<<<<<< HEAD
 	; If PTE exists, it will setup, r0 = PTE, r1 = Ptr to PTE
+=======
+	; If PTE exists, it will setup, r0 = PTE, r1 = Ptr to PTE, r2 = EFA
+>>>>>>> v3.18
 =======
 	; If PTE exists, it will setup, r0 = PTE, r1 = Ptr to PTE, r2 = EFA
 >>>>>>> v3.18
@@ -477,6 +550,7 @@ ENTRY(EV_TLBMissD)
 	;----------------------------------------------------------------
 	; VERIFY_PTE: Chk if PTE permissions approp for data access (R/W/R+W)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mov_s   r2, 0
 	lr      r3, [ecr]
@@ -499,6 +573,8 @@ ENTRY(EV_TLBMissD)
 	asl.hi  r2, r2, 3               ; make _PAGE_xx flags as _PAGE_K_xx
 	or      r2, r2, _PAGE_PRESENT   ; Common flag for K/U mode
 =======
+=======
+>>>>>>> v3.18
 	cmp_s	r2, VMALLOC_START
 	mov_s   r2, _PAGE_PRESENT	; common bit for K/U PTE
 	or.hs	r2, r2, _PAGE_GLOBAL	; kernel PTE only
@@ -514,6 +590,9 @@ ENTRY(EV_TLBMissD)
 	btst_s  r3, ECR_C_BIT_DTLB_ST_MISS	; Write Access
 	or.nz   r2, r2, _PAGE_WRITE     	; chk for Write flag in PTE
 	; Above laddering takes care of XCHG access (both R and W)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	; By now, r2 setup with all the Flags we need to check in PTE
@@ -524,7 +603,11 @@ ENTRY(EV_TLBMissD)
 	; UPDATE_PTE: Let Linux VM know that page was accessed/dirty
 	lr      r3, [ecr]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	or      r0, r0, (_PAGE_PRESENT | _PAGE_ACCESSED) ; Accessed bit always
+=======
+	or      r0, r0, _PAGE_ACCESSED        ; Accessed bit always
+>>>>>>> v3.18
 =======
 	or      r0, r0, _PAGE_ACCESSED        ; Accessed bit always
 >>>>>>> v3.18
@@ -554,6 +637,7 @@ do_slow_path_pf:
 	; Slow path TLB Miss handled as a regular ARC Exception
 	; (stack switching / save the complete reg-file).
 <<<<<<< HEAD
+<<<<<<< HEAD
 	; That requires freeing up r9
 	EXCPN_PROLOG_FREEUP_REG r9
 
@@ -577,11 +661,16 @@ do_slow_path_pf:
 	mov.z  r1, 0
 	mov.nz r1, 1
 =======
+=======
+>>>>>>> v3.18
 	EXCEPTION_PROLOGUE
 
 	; ------- setup args for Linux Page fault Hanlder ---------
 	mov_s r1, sp
 	lr    r0, [efa]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	; We don't want exceptions to be disabled while the fault is handled.
@@ -594,9 +683,13 @@ do_slow_path_pf:
 	b   ret_from_exception
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_EXIT EV_TLBMissD
 
 ARC_ENTRY EV_TLBMissB   ; Bogus entry to measure sz of DTLBMiss hdlr
+=======
+END(EV_TLBMissD)
+>>>>>>> v3.18
 =======
 END(EV_TLBMissD)
 >>>>>>> v3.18

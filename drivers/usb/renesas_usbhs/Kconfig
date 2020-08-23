@@ -6,6 +6,10 @@ config USB_RENESAS_USBHS
 	tristate 'Renesas USBHS controller'
 	depends on USB_GADGET
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on ARCH_SHMOBILE || SUPERH || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on ARCH_SHMOBILE || SUPERH || COMPILE_TEST
 >>>>>>> v3.18

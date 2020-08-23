@@ -5,10 +5,15 @@ Required properties:
 - reg: address and length of the register set for the device.
 - interrupts: interrupt for the device
 <<<<<<< HEAD
+<<<<<<< HEAD
 - phy: A phandle to a phy node defining the PHY address (as the reg
   property, a single integer).
 - phy-mode: The interface between the SoC and the PHY (a string that
   of_get_phy_mode() can understand)
+=======
+- phy: See ethernet.txt file in the same directory.
+- phy-mode: See ethernet.txt file in the same directory
+>>>>>>> v3.18
 =======
 - phy: See ethernet.txt file in the same directory.
 - phy-mode: See ethernet.txt file in the same directory

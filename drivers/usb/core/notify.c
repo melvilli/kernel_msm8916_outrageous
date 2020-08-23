@@ -59,12 +59,15 @@ void usb_notify_remove_device(struct usb_device *udev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void usb_notify_config_device(struct usb_device *udev)
 {
 	blocking_notifier_call_chain(&usb_notifier_list,
 			USB_DEVICE_CONFIG, udev);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void usb_notify_add_bus(struct usb_bus *ubus)

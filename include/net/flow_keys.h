@@ -2,7 +2,10 @@
 #define _NET_FLOW_KEYS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* struct flow_keys:
  *	@src: source ip address in case of IPv4
  *	      For IPv6 it contains 32bit hash of src address
@@ -16,6 +19,9 @@
  *	@ip_proto: Transport header protocol (eg. TCP/UDP)
  * All the members, except thoff, are in network byte order.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct flow_keys {
 	/* (src,dst) must be grouped, in the same way than in IP header */
@@ -27,11 +33,14 @@ struct flow_keys {
 	};
 	u16 thoff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 ip_proto;
 };
 
 extern bool skb_flow_dissect(const struct sk_buff *skb, struct flow_keys *flow);
 =======
+=======
+>>>>>>> v3.18
 	u16 n_proto;
 	u8 ip_proto;
 };
@@ -51,5 +60,8 @@ static inline __be32 skb_flow_get_ports(const struct sk_buff *skb, int thoff, u8
 u32 flow_hash_from_keys(struct flow_keys *keys);
 unsigned int flow_get_hlen(const unsigned char *data, unsigned int max_len,
 			   __be16 protocol);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

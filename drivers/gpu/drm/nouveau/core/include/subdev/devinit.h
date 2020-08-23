@@ -9,6 +9,11 @@ struct nouveau_devinit {
 	bool post;
 	void (*meminit)(struct nouveau_devinit *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int  (*pll_set)(struct nouveau_devinit *, u32 type, u32 freq);
+	u32  (*mmio)(struct nouveau_devinit *, u32 addr);
+>>>>>>> v3.18
 =======
 	int  (*pll_set)(struct nouveau_devinit *, u32 type, u32 freq);
 	u32  (*mmio)(struct nouveau_devinit *, u32 addr);
@@ -21,6 +26,7 @@ nouveau_devinit(void *obj)
 	return (void *)nv_device(obj)->subdev[NVDEV_SUBDEV_DEVINIT];
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define nouveau_devinit_create(p,e,o,d)                                        \
 	nouveau_devinit_create_((p), (e), (o), sizeof(**d), (void **)d)
@@ -43,6 +49,8 @@ void nv04_devinit_dtor(struct nouveau_object *);
 int  nv04_devinit_init(struct nouveau_object *);
 int  nv04_devinit_fini(struct nouveau_object *, bool);
 =======
+=======
+>>>>>>> v3.18
 extern struct nouveau_oclass *nv04_devinit_oclass;
 extern struct nouveau_oclass *nv05_devinit_oclass;
 extern struct nouveau_oclass *nv10_devinit_oclass;
@@ -55,6 +63,9 @@ extern struct nouveau_oclass *nva3_devinit_oclass;
 extern struct nouveau_oclass *nvaf_devinit_oclass;
 extern struct nouveau_oclass *nvc0_devinit_oclass;
 extern struct nouveau_oclass *gm107_devinit_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

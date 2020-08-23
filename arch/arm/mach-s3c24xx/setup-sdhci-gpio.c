@@ -21,6 +21,10 @@
 
 #include <mach/regs-gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18

@@ -77,9 +77,12 @@ static inline void delayed_insw(unsigned int addr, void *buf, int len)
 #define ISP1362_REG_WRITE_OFFSET	0x80
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef ISP1362_DEBUG
 typedef const unsigned int isp1362_reg_t;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define REG_WIDTH_16			0x000
@@ -88,6 +91,12 @@ typedef const unsigned int isp1362_reg_t;
 #define REG_NO_MASK			0x0ff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef ISP1362_DEBUG
+typedef const unsigned int isp1362_reg_t;
+
+>>>>>>> v3.18
 =======
 #ifdef ISP1362_DEBUG
 typedef const unsigned int isp1362_reg_t;
@@ -101,9 +110,12 @@ typedef const unsigned int isp1362_reg_t;
 #define ISP1362_REG_NO(r)		((r) & REG_NO_MASK)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _BUG_ON(x)	BUG_ON(x)
 #define _WARN_ON(x)	WARN_ON(x)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ISP1362_REG(name, addr, width, rw) \
@@ -115,8 +127,11 @@ static isp1362_reg_t ISP1362_REG_##name = ((addr) | (width) | (rw))
 typedef const unsigned char isp1362_reg_t;
 #define ISP1362_REG_NO(r)		(r)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _BUG_ON(x)			do {} while (0)
 #define _WARN_ON(x)			do {} while (0)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -501,7 +516,11 @@ struct isp1362_hcd {
 	struct isp1362_platform_data *board;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct proc_dir_entry	*pde;
+=======
+	struct dentry		*debug_file;
+>>>>>>> v3.18
 =======
 	struct dentry		*debug_file;
 >>>>>>> v3.18
@@ -607,7 +626,10 @@ static inline struct usb_hcd *isp1362_hcd_to_hcd(struct isp1362_hcd *isp1362_hcd
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef ISP1362_DEBUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DBG(level, fmt...) \
@@ -615,6 +637,7 @@ static inline struct usb_hcd *isp1362_hcd_to_hcd(struct isp1362_hcd *isp1362_hcd
 		if (dbg_level > level) \
 			pr_debug(fmt); \
 	} while (0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define _DBG(level, fmt...)	\
 	do { \
@@ -625,6 +648,8 @@ static inline struct usb_hcd *isp1362_hcd_to_hcd(struct isp1362_hcd *isp1362_hcd
 #define DBG(fmt...)		do {} while (0)
 #define _DBG DBG
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -671,9 +696,13 @@ static inline struct usb_hcd *isp1362_hcd_to_hcd(struct isp1362_hcd *isp1362_hcd
 static void isp1362_write_addr(struct isp1362_hcd *isp1362_hcd, isp1362_reg_t reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*_BUG_ON((reg & ISP1362_REG_WRITE_OFFSET) && !(reg & REG_ACCESS_W));*/
 	REG_ACCESS_TEST(reg);
 	_BUG_ON(!irqs_disabled());
+=======
+	REG_ACCESS_TEST(reg);
+>>>>>>> v3.18
 =======
 	REG_ACCESS_TEST(reg);
 >>>>>>> v3.18
@@ -686,7 +715,10 @@ static void isp1362_write_addr(struct isp1362_hcd *isp1362_hcd, isp1362_reg_t re
 static void isp1362_write_data16(struct isp1362_hcd *isp1362_hcd, u16 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_BUG_ON(!irqs_disabled());
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	DUMMY_DELAY_ACCESS;
@@ -698,7 +730,10 @@ static u16 isp1362_read_data16(struct isp1362_hcd *isp1362_hcd)
 	u16 val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_BUG_ON(!irqs_disabled());
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	DUMMY_DELAY_ACCESS;
@@ -710,7 +745,10 @@ static u16 isp1362_read_data16(struct isp1362_hcd *isp1362_hcd)
 static void isp1362_write_data32(struct isp1362_hcd *isp1362_hcd, u32 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_BUG_ON(!irqs_disabled());
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if USE_32BIT
@@ -729,7 +767,10 @@ static u32 isp1362_read_data32(struct isp1362_hcd *isp1362_hcd)
 	u32 val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_BUG_ON(!irqs_disabled());
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if USE_32BIT
@@ -755,8 +796,11 @@ static void isp1362_read_fifo(struct isp1362_hcd *isp1362_hcd, void *buf, u16 le
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_BUG_ON(!irqs_disabled());
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	RDBG("%s: Reading %d byte from fifo to mem @ %p\n", __func__, len, buf);
@@ -805,8 +849,11 @@ static void isp1362_write_fifo(struct isp1362_hcd *isp1362_hcd, void *buf, u16 l
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_BUG_ON(!irqs_disabled());
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	RDBG("%s: Writing %d byte to fifo from memory @%p\n", __func__, len, buf);
@@ -902,7 +949,10 @@ static void isp1362_write_fifo(struct isp1362_hcd *isp1362_hcd, void *buf, u16 l
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef ISP1362_DEBUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define isp1362_show_reg(d, r) {								\
@@ -914,9 +964,12 @@ static void isp1362_write_fifo(struct isp1362_hcd *isp1362_hcd, void *buf, u16 l
 			ISP1362_REG_NO(ISP1362_REG_##r), isp1362_read_reg16(d, r));	\
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define isp1362_show_reg(d, r)	do {} while (0)
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -977,10 +1030,13 @@ static void __attribute__((__unused__)) isp1362_show_regs(struct isp1362_hcd *is
 static void isp1362_write_diraddr(struct isp1362_hcd *isp1362_hcd, u16 offset, u16 len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_BUG_ON(offset & 1);
 	_BUG_ON(offset >= ISP1362_BUF_SIZE);
 	_BUG_ON(len > ISP1362_BUF_SIZE);
 	_BUG_ON(offset + len > ISP1362_BUF_SIZE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	len = (len + 1) & ~1;
@@ -993,8 +1049,11 @@ static void isp1362_write_diraddr(struct isp1362_hcd *isp1362_hcd, u16 offset, u
 static void isp1362_read_buffer(struct isp1362_hcd *isp1362_hcd, void *buf, u16 offset, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_BUG_ON(offset & 1);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	isp1362_write_diraddr(isp1362_hcd, offset, len);
@@ -1004,7 +1063,10 @@ static void isp1362_read_buffer(struct isp1362_hcd *isp1362_hcd, void *buf, u16 
 
 	isp1362_write_reg16(isp1362_hcd, HCuPINT, HCuPINT_EOT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_WARN_ON((isp1362_read_reg16(isp1362_hcd, HCuPINT) & HCuPINT_EOT));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1012,9 +1074,13 @@ static void isp1362_read_buffer(struct isp1362_hcd *isp1362_hcd, void *buf, u16 
 
 	isp1362_read_fifo(isp1362_hcd, buf, len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_WARN_ON(!(isp1362_read_reg16(isp1362_hcd, HCuPINT) & HCuPINT_EOT));
 	isp1362_write_reg16(isp1362_hcd, HCuPINT, HCuPINT_EOT);
 	_WARN_ON((isp1362_read_reg16(isp1362_hcd, HCuPINT) & HCuPINT_EOT));
+=======
+	isp1362_write_reg16(isp1362_hcd, HCuPINT, HCuPINT_EOT);
+>>>>>>> v3.18
 =======
 	isp1362_write_reg16(isp1362_hcd, HCuPINT, HCuPINT_EOT);
 >>>>>>> v3.18
@@ -1023,8 +1089,11 @@ static void isp1362_read_buffer(struct isp1362_hcd *isp1362_hcd, void *buf, u16 
 static void isp1362_write_buffer(struct isp1362_hcd *isp1362_hcd, void *buf, u16 offset, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_BUG_ON(offset & 1);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	isp1362_write_diraddr(isp1362_hcd, offset, len);
@@ -1034,7 +1103,10 @@ static void isp1362_write_buffer(struct isp1362_hcd *isp1362_hcd, void *buf, u16
 
 	isp1362_write_reg16(isp1362_hcd, HCuPINT, HCuPINT_EOT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_WARN_ON((isp1362_read_reg16(isp1362_hcd, HCuPINT) & HCuPINT_EOT));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1042,9 +1114,13 @@ static void isp1362_write_buffer(struct isp1362_hcd *isp1362_hcd, void *buf, u16
 	isp1362_write_fifo(isp1362_hcd, buf, len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_WARN_ON(!(isp1362_read_reg16(isp1362_hcd, HCuPINT) & HCuPINT_EOT));
 	isp1362_write_reg16(isp1362_hcd, HCuPINT, HCuPINT_EOT);
 	_WARN_ON((isp1362_read_reg16(isp1362_hcd, HCuPINT) & HCuPINT_EOT));
+=======
+	isp1362_write_reg16(isp1362_hcd, HCuPINT, HCuPINT_EOT);
+>>>>>>> v3.18
 =======
 	isp1362_write_reg16(isp1362_hcd, HCuPINT, HCuPINT_EOT);
 >>>>>>> v3.18
@@ -1079,7 +1155,11 @@ static void __attribute__((unused)) dump_data(char *buf, int len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(ISP1362_DEBUG) && defined(PTD_TRACE)
+=======
+#if defined(PTD_TRACE)
+>>>>>>> v3.18
 =======
 #if defined(PTD_TRACE)
 >>>>>>> v3.18

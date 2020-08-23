@@ -7,8 +7,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CAN_LED_H
 #define CAN_LED_H
+=======
+#ifndef _CAN_LED_H
+#define _CAN_LED_H
+>>>>>>> v3.18
 =======
 #ifndef _CAN_LED_H
 #define _CAN_LED_H
@@ -54,7 +59,11 @@ static inline void can_led_notifier_exit(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif /* !_CAN_LED_H */
+>>>>>>> v3.18
 =======
 #endif /* !_CAN_LED_H */
 >>>>>>> v3.18

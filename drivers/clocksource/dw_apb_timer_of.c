@@ -21,6 +21,7 @@
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/mach/time.h>
 #include <linux/sched_clock.h>
@@ -29,6 +30,8 @@ static void timer_get_base_and_rate(struct device_node *np,
 				    void __iomem **base, u32 *rate)
 {
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/sched_clock.h>
 
@@ -38,12 +41,16 @@ static void __init timer_get_base_and_rate(struct device_node *np,
 	struct clk *timer_clk;
 	struct clk *pclk;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*base = of_iomap(np, 0);
 
 	if (!*base)
 		panic("Unable to map regs for %s", np->name);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (of_property_read_u32(np, "clock-freq", rate) &&
 		of_property_read_u32(np, "clock-frequency", rate))
@@ -52,6 +59,8 @@ static void __init timer_get_base_and_rate(struct device_node *np,
 
 static void add_clockevent(struct device_node *event_timer)
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Not all implementations use a periphal clock, so don't panic
 	 * if it's not present
@@ -78,6 +87,9 @@ try_clock_freq:
 }
 
 static void __init add_clockevent(struct device_node *event_timer)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	void __iomem *iobase;
@@ -99,12 +111,18 @@ static void __init add_clockevent(struct device_node *event_timer)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void add_clocksource(struct device_node *source_timer)
 =======
+=======
+>>>>>>> v3.18
 static void __iomem *sched_io_base;
 static u32 sched_rate;
 
 static void __init add_clocksource(struct device_node *source_timer)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	void __iomem *iobase;
@@ -120,12 +138,15 @@ static void __init add_clocksource(struct device_node *source_timer)
 	dw_apb_clocksource_start(cs);
 	dw_apb_clocksource_register(cs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static void __iomem *sched_io_base;
 
 static u32 read_sched_clock(void)
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Fallback to use the clocksource as sched_clock if no separate
@@ -137,6 +158,9 @@ static u32 read_sched_clock(void)
 }
 
 static u64 notrace read_sched_clock(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return ~__raw_readl(sched_io_base);
@@ -144,6 +168,7 @@ static u64 notrace read_sched_clock(void)
 
 static const struct of_device_id sptimer_ids[] __initconst = {
 	{ .compatible = "picochip,pc3x2-rtc" },
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ .compatible = "snps,dw-apb-timer-sp" },
 	{ /* Sentinel */ },
@@ -189,6 +214,8 @@ void __init dw_apb_timer_init(void)
 	init_sched_clock();
 }
 =======
+=======
+>>>>>>> v3.18
 	{ /* Sentinel */ },
 };
 
@@ -229,4 +256,7 @@ CLOCKSOURCE_OF_DECLARE(pc3x2_timer, "picochip,pc3x2-timer", dw_apb_timer_init);
 CLOCKSOURCE_OF_DECLARE(apb_timer_osc, "snps,dw-apb-timer-osc", dw_apb_timer_init);
 CLOCKSOURCE_OF_DECLARE(apb_timer_sp, "snps,dw-apb-timer-sp", dw_apb_timer_init);
 CLOCKSOURCE_OF_DECLARE(apb_timer, "snps,dw-apb-timer", dw_apb_timer_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

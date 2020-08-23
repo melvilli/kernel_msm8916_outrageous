@@ -20,6 +20,7 @@
  * Purpose: Provide functions to setup NIC operation mode
  * Functions:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      s_vSafeResetTx - Rest Tx
  *      CARDvSetRSPINF - Set RSPINF
  *      vUpdateIFS - Update slotTime,SIFS,DIFS, and EIFS
@@ -39,6 +40,8 @@
  *      CARDbSetWEPMode - Set NIC Wep mode
  *      CARDbSetTxPower - Set NIC tx power
 =======
+=======
+>>>>>>> v3.18
  *      vnt_set_rspinf - Set RSPINF
  *      vnt_update_ifs - Update slotTime,SIFS,DIFS, and EIFS
  *      vnt_update_top_rates - Update BasicTopRate
@@ -51,13 +54,20 @@
  *      vnt_update_next_tbtt - Sync. NIC Beacon time
  *      vnt_radio_power_off - Turn Off NIC Radio Power
  *      vnt_radio_power_on - Turn On NIC Radio Power
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Revision History:
  *      06-10-2003 Bryan YC Fan:  Re-write codes to support VT3253 spec.
  *      08-26-2003 Kyle Hsu:      Modify the definition type of dwIoBase.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      09-01-2003 Bryan YC Fan:  Add vUpdateIFS().
+=======
+ *      09-01-2003 Bryan YC Fan:  Add vnt_update_ifs().
+>>>>>>> v3.18
 =======
  *      09-01-2003 Bryan YC Fan:  Add vnt_update_ifs().
 >>>>>>> v3.18
@@ -66,7 +76,10 @@
 
 #include "device.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "tmacro.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "card.h"
@@ -76,6 +89,7 @@
 #include "rf.h"
 #include "power.h"
 #include "key.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "rc4.h"
 #include "country.h"
@@ -92,6 +106,8 @@ static int          msglevel                =MSG_LEVEL_INFO;
 const u16 cwRXBCNTSFOff[MAX_RATE] =
 {192, 96, 34, 17, 34, 23, 17, 11, 8, 5, 4, 3};
 =======
+=======
+>>>>>>> v3.18
 #include "usbpipe.h"
 
 /* const u16 cwRXBCNTSFOff[MAX_RATE] =
@@ -100,6 +116,9 @@ const u16 cwRXBCNTSFOff[MAX_RATE] =
 static const u16 cwRXBCNTSFOff[MAX_RATE] = {
 	192, 96, 34, 17, 34, 23, 17, 11, 8, 5, 4, 3
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -108,6 +127,7 @@ static const u16 cwRXBCNTSFOff[MAX_RATE] = {
  * Parameters:
  *  In:
  *      pDevice             - The adapter to be set
+<<<<<<< HEAD
 <<<<<<< HEAD
  *      uConnectionChannel  - Channel to be set
  *  Out:
@@ -156,6 +176,8 @@ void CARDbSetMediaChannel(struct vnt_private *pDevice, u32 uConnectionChannel)
     }
     ControlvWriteByte(pDevice,MESSAGE_REQUEST_MACREG,MAC_REG_CHANNEL,(u8)(uConnectionChannel|0x80));
 =======
+=======
+>>>>>>> v3.18
  *      connection_channel  - Channel to be set
  *  Out:
  *      none
@@ -177,6 +199,9 @@ void vnt_set_channel(struct vnt_private *priv, u32 connection_channel)
 
 	vnt_control_out_u8(priv, MESSAGE_REQUEST_MACREG, MAC_REG_CHANNEL,
 		(u8)(connection_channel|0x80));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -186,8 +211,13 @@ void vnt_set_channel(struct vnt_private *priv, u32 connection_channel)
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice             - The adapter to be set
  *      wRateIdx            - Receiving data rate
+=======
+ *      priv		- The adapter to be set
+ *      rate_idx	- Receiving data rate
+>>>>>>> v3.18
 =======
  *      priv		- The adapter to be set
  *      rate_idx	- Receiving data rate
@@ -199,6 +229,7 @@ void vnt_set_channel(struct vnt_private *priv, u32 connection_channel)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 swGetCCKControlRate(struct vnt_private *pDevice, u16 wRateIdx)
 {
 	u16 ui = wRateIdx;
@@ -206,12 +237,17 @@ static u16 swGetCCKControlRate(struct vnt_private *pDevice, u16 wRateIdx)
 	while (ui > RATE_1M) {
 		if (pDevice->wBasicRate & (1 << ui))
 =======
+=======
+>>>>>>> v3.18
 static u16 vnt_get_cck_rate(struct vnt_private *priv, u16 rate_idx)
 {
 	u16 ui = rate_idx;
 
 	while (ui > RATE_1M) {
 		if (priv->basic_rates & (1 << ui))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return ui;
 		ui--;
@@ -226,8 +262,13 @@ static u16 vnt_get_cck_rate(struct vnt_private *priv, u16 rate_idx)
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice             - The adapter to be set
  *      wRateIdx            - Receiving data rate
+=======
+ *      priv		- The adapter to be set
+ *      rate_idx	- Receiving data rate
+>>>>>>> v3.18
 =======
  *      priv		- The adapter to be set
  *      rate_idx	- Receiving data rate
@@ -238,6 +279,7 @@ static u16 vnt_get_cck_rate(struct vnt_private *priv, u16 rate_idx)
  * Return Value: response Control frame rate
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u16 swGetOFDMControlRate(struct vnt_private *pDevice, u16 wRateIdx)
 {
@@ -259,6 +301,8 @@ static u16 swGetOFDMControlRate(struct vnt_private *pDevice, u16 wRateIdx)
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO
 				"swGetOFDMControlRate: %d\n", ui);
 =======
+=======
+>>>>>>> v3.18
 static u16 vnt_get_ofdm_rate(struct vnt_private *priv, u16 rate_idx)
 {
 	u16 ui = rate_idx;
@@ -278,6 +322,9 @@ static u16 vnt_get_ofdm_rate(struct vnt_private *priv, u16 rate_idx)
 		if (priv->basic_rates & (1 << ui)) {
 			dev_dbg(&priv->usb->dev, "%s rate: %d\n",
 							__func__, ui);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return ui;
 		}
@@ -285,7 +332,11 @@ static u16 vnt_get_ofdm_rate(struct vnt_private *priv, u16 rate_idx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO"swGetOFDMControlRate: 6M\n");
+=======
+	dev_dbg(&priv->usb->dev, "%s basic rate: 24M\n", __func__);
+>>>>>>> v3.18
 =======
 	dev_dbg(&priv->usb->dev, "%s basic rate: 24M\n", __func__);
 >>>>>>> v3.18
@@ -298,6 +349,7 @@ static u16 vnt_get_ofdm_rate(struct vnt_private *priv, u16 rate_idx)
  *
  * Parameters:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  In:
  *      wRate           - Tx Rate
  *      byPktType       - Tx Packet type
@@ -305,17 +357,23 @@ static u16 vnt_get_ofdm_rate(struct vnt_private *priv, u16 rate_idx)
  *      pbyTxRate       - pointer to RSPINF TxRate field
  *      pbyRsvTime      - pointer to RSPINF RsvTime field
 =======
+=======
+>>>>>>> v3.18
  * In:
  *	rate	- Tx Rate
  *	bb_type	- Tx Packet type
  * Out:
  *	tx_rate	- pointer to RSPINF TxRate field
  *	rsv_time- pointer to RSPINF RsvTime field
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void
 CARDvCalculateOFDMRParameter (
@@ -416,6 +474,8 @@ CARDvCalculateOFDMRParameter (
         break;
     }
 =======
+=======
+>>>>>>> v3.18
 static void vnt_calculate_ofdm_rate(u16 rate, u8 bb_type,
 					u8 *tx_rate, u8 *rsv_time)
 {
@@ -495,6 +555,9 @@ static void vnt_calculate_ofdm_rate(u16 rate, u8 bb_type,
 		}
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -510,6 +573,7 @@ static void vnt_calculate_ofdm_rate(u16 rate, u8 bb_type,
  * Return Value: None.
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void CARDvSetRSPINF(struct vnt_private *pDevice, u8 byBBType)
 {
@@ -648,6 +712,8 @@ void CARDvSetRSPINF(struct vnt_private *pDevice, u8 byBBType)
                         &abyData[0]);
 
 =======
+=======
+>>>>>>> v3.18
 
 void vnt_set_rspinf(struct vnt_private *priv, u8 bb_type)
 {
@@ -728,6 +794,9 @@ void vnt_set_rspinf(struct vnt_private *priv, u8 bb_type)
 
 	vnt_control_out(priv, MESSAGE_TYPE_WRITE,
 		MAC_REG_RSPINF_B_1, MESSAGE_REQUEST_MACREG, 34, &data[0]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -737,9 +806,15 @@ void vnt_set_rspinf(struct vnt_private *priv, u8 bb_type)
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice             - The adapter to be set
  *  Out:
  *      none
+=======
+ *	priv - The adapter to be set
+ * Out:
+ *	none
+>>>>>>> v3.18
 =======
  *	priv - The adapter to be set
  * Out:
@@ -749,6 +824,7 @@ void vnt_set_rspinf(struct vnt_private *priv, u8 bb_type)
  * Return Value: None.
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void vUpdateIFS(struct vnt_private *pDevice)
 {
@@ -906,6 +982,8 @@ u8 CARDbyGetPktType(struct vnt_private *pDevice)
         return PK_TYPE_11GB;
     }
 =======
+=======
+>>>>>>> v3.18
 void vnt_update_ifs(struct vnt_private *priv)
 {
 	u8 max_min = 0;
@@ -1040,6 +1118,9 @@ u8 vnt_get_pkt_type(struct vnt_private *priv)
 	else if (vnt_ofdm_min_rate(priv))
 		return PK_TYPE_11GA;
 	return PK_TYPE_11GB;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1050,9 +1131,15 @@ u8 vnt_get_pkt_type(struct vnt_private *priv)
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice         - The adapter to be sync.
  *      qwTSF1          - Rx BCN's TSF
  *      qwTSF2          - Local TSF
+=======
+ *      rx_rate	- rx rate.
+ *      tsf1	- Rx BCN's TSF
+ *      tsf2	- Local TSF
+>>>>>>> v3.18
 =======
  *      rx_rate	- rx rate.
  *      tsf1	- Rx BCN's TSF
@@ -1064,6 +1151,7 @@ u8 vnt_get_pkt_type(struct vnt_private *priv)
  * Return Value: TSF Offset value
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 u64 CARDqGetTSFOffset(u8 byRxRate, u64 qwTSF1, u64 qwTSF2)
 {
@@ -1078,6 +1166,8 @@ u64 CARDqGetTSFOffset(u8 byRxRate, u64 qwTSF1, u64 qwTSF2)
 
 	return qwTSFOffset;
 =======
+=======
+>>>>>>> v3.18
 u64 vnt_get_tsf_offset(u8 rx_rate, u64 tsf1, u64 tsf2)
 {
 	u64 tsf_offset = 0;
@@ -1090,6 +1180,9 @@ u64 vnt_get_tsf_offset(u8 rx_rate, u64 tsf1, u64 tsf2)
 	tsf_offset = tsf1 - tsf2;
 
 	return tsf_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1100,9 +1193,15 @@ u64 vnt_get_tsf_offset(u8 rx_rate, u64 tsf1, u64 tsf2)
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice         - The adapter to be sync.
  *      qwBSSTimestamp  - Rx BCN's TSF
  *      qwLocalTSF      - Local TSF
+=======
+ *      priv		- The adapter to be sync.
+ *      time_stamp	- Rx BCN's TSF
+ *      local_tsf	- Local TSF
+>>>>>>> v3.18
 =======
  *      priv		- The adapter to be sync.
  *      time_stamp	- Rx BCN's TSF
@@ -1114,6 +1213,7 @@ u64 vnt_get_tsf_offset(u8 rx_rate, u64 tsf1, u64 tsf2)
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void CARDvAdjustTSF(struct vnt_private *pDevice, u8 byRxRate,
 		u64 qwBSSTimestamp, u64 qwLocalTSF)
@@ -1143,6 +1243,8 @@ void CARDvAdjustTSF(struct vnt_private *pDevice, u8 byRxRate,
                         );
 
 =======
+=======
+>>>>>>> v3.18
 void vnt_adjust_tsf(struct vnt_private *priv, u8 rx_rate,
 		u64 time_stamp, u64 local_tsf)
 {
@@ -1162,6 +1264,9 @@ void vnt_adjust_tsf(struct vnt_private *priv, u8 rx_rate,
 
 	vnt_control_out(priv, MESSAGE_TYPE_SET_TSFTBTT,
 		MESSAGE_REQUEST_TSF, 0, 8, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 /*
@@ -1171,9 +1276,15 @@ void vnt_adjust_tsf(struct vnt_private *priv, u8 rx_rate,
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice         - The adapter to be read
  *  Out:
  *      qwCurrTSF       - Current TSF counter
+=======
+ *	priv		- The adapter to be read
+ *  Out:
+ *	current_tsf	- Current TSF counter
+>>>>>>> v3.18
 =======
  *	priv		- The adapter to be read
  *  Out:
@@ -1184,15 +1295,21 @@ void vnt_adjust_tsf(struct vnt_private *priv, u8 rx_rate,
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool CARDbGetCurrentTSF(struct vnt_private *pDevice, u64 *pqwCurrTSF)
 {
 
 	*pqwCurrTSF = pDevice->qwCurrTSF;
 =======
+=======
+>>>>>>> v3.18
 bool vnt_get_current_tsf(struct vnt_private *priv, u64 *current_tsf)
 {
 
 	*current_tsf = priv->current_tsf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return true;
@@ -1205,7 +1322,11 @@ bool vnt_get_current_tsf(struct vnt_private *priv, u64 *current_tsf)
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice         - The adapter to be read
+=======
+ *      priv	- The adapter to be read
+>>>>>>> v3.18
 =======
  *      priv	- The adapter to be read
 >>>>>>> v3.18
@@ -1214,6 +1335,7 @@ bool vnt_get_current_tsf(struct vnt_private *priv, u64 *current_tsf)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool CARDbClearCurrentTSF(struct vnt_private *pDevice)
 {
 
@@ -1221,12 +1343,17 @@ bool CARDbClearCurrentTSF(struct vnt_private *pDevice)
 
 	pDevice->qwCurrTSF = 0;
 =======
+=======
+>>>>>>> v3.18
 bool vnt_clear_current_tsf(struct vnt_private *priv)
 {
 
 	vnt_mac_reg_bits_on(priv, MAC_REG_TFTCTL, TFTCTL_TSFCNTRST);
 
 	priv->current_tsf = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return true;
@@ -1239,20 +1366,27 @@ bool vnt_clear_current_tsf(struct vnt_private *priv)
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      qwTSF           - Current TSF counter
  *      wbeaconInterval - Beacon Interval
  *  Out:
  *      qwCurrTSF       - Current TSF counter
 =======
+=======
+>>>>>>> v3.18
  *      tsf		- Current TSF counter
  *      beacon_interval - Beacon Interval
  *  Out:
  *      tsf		- Current TSF counter
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Return Value: TSF value of next Beacon
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 u64 CARDqGetNextTBTT(u64 qwTSF, u16 wBeaconInterval)
 {
@@ -1279,6 +1413,8 @@ u64 CARDqGetNextTBTT(u64 qwTSF, u16 wBeaconInterval)
 
     return (qwTSF);
 =======
+=======
+>>>>>>> v3.18
 u64 vnt_get_next_tbtt(u64 tsf, u16 beacon_interval)
 {
 	u32 beacon_int;
@@ -1295,6 +1431,9 @@ u64 vnt_get_next_tbtt(u64 tsf, u16 beacon_interval)
 	}
 
 	return tsf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1306,7 +1445,11 @@ u64 vnt_get_next_tbtt(u64 tsf, u16 beacon_interval)
  *  In:
  *      dwIoBase        - IO Base
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      wBeaconInterval - Beacon Interval
+=======
+ *	beacon_interval - Beacon Interval
+>>>>>>> v3.18
 =======
  *	beacon_interval - Beacon Interval
 >>>>>>> v3.18
@@ -1316,6 +1459,7 @@ u64 vnt_get_next_tbtt(u64 tsf, u16 beacon_interval)
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void CARDvSetFirstNextTBTT(struct vnt_private *pDevice, u16 wBeaconInterval)
 {
@@ -1346,6 +1490,8 @@ void CARDvSetFirstNextTBTT(struct vnt_private *pDevice, u16 wBeaconInterval)
 
     return;
 =======
+=======
+>>>>>>> v3.18
 void vnt_reset_next_tbtt(struct vnt_private *priv, u16 beacon_interval)
 {
 	u64 next_tbtt = 0;
@@ -1366,6 +1512,9 @@ void vnt_reset_next_tbtt(struct vnt_private *priv, u16 beacon_interval)
 
 	vnt_control_out(priv, MESSAGE_TYPE_SET_TSFTBTT,
 		MESSAGE_REQUEST_TBTT, 0, 8, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1376,9 +1525,15 @@ void vnt_reset_next_tbtt(struct vnt_private *priv, u16 beacon_interval)
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice         - The adapter to be set
  *      qwTSF           - Current TSF counter
  *      wBeaconInterval - Beacon Interval
+=======
+ *	priv		- The adapter to be set
+ *      tsf		- Current TSF counter
+ *      beacon_interval - Beacon Interval
+>>>>>>> v3.18
 =======
  *	priv		- The adapter to be set
  *      tsf		- Current TSF counter
@@ -1390,6 +1545,7 @@ void vnt_reset_next_tbtt(struct vnt_private *priv, u16 beacon_interval)
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void CARDvUpdateNextTBTT(struct vnt_private *pDevice, u64 qwTSF,
 			u16 wBeaconInterval)
@@ -1422,6 +1578,8 @@ void CARDvUpdateNextTBTT(struct vnt_private *pDevice, u64 qwTSF,
 
     return;
 =======
+=======
+>>>>>>> v3.18
 void vnt_update_next_tbtt(struct vnt_private *priv, u64 tsf,
 			u16 beacon_interval)
 {
@@ -1442,6 +1600,9 @@ void vnt_update_next_tbtt(struct vnt_private *priv, u64 tsf,
 			MESSAGE_REQUEST_TBTT, 0, 8, data);
 
 	dev_dbg(&priv->usb->dev, "%s TBTT: %8llx\n", __func__, tsf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1451,7 +1612,11 @@ void vnt_update_next_tbtt(struct vnt_private *priv, u64 tsf,
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice         - The adapter to be turned off
+=======
+ *      priv         - The adapter to be turned off
+>>>>>>> v3.18
 =======
  *      priv         - The adapter to be turned off
 >>>>>>> v3.18
@@ -1461,6 +1626,7 @@ void vnt_update_next_tbtt(struct vnt_private *priv, u64 tsf,
  * Return Value: true if success; otherwise false
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int CARDbRadioPowerOff(struct vnt_private *pDevice)
 {
@@ -1488,6 +1654,8 @@ int CARDbRadioPowerOff(struct vnt_private *pDevice)
 
     return bResult;
 =======
+=======
+>>>>>>> v3.18
 int vnt_radio_power_off(struct vnt_private *priv)
 {
 	int ret = true;
@@ -1511,6 +1679,9 @@ int vnt_radio_power_off(struct vnt_private *priv)
 	vnt_mac_reg_bits_on(priv, MAC_REG_GPIOCTL1, GPIO3_INTMD);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1520,7 +1691,11 @@ int vnt_radio_power_off(struct vnt_private *priv)
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      pDevice         - The adapter to be turned on
+=======
+ *      priv         - The adapter to be turned on
+>>>>>>> v3.18
 =======
  *      priv         - The adapter to be turned on
 >>>>>>> v3.18
@@ -1530,6 +1705,7 @@ int vnt_radio_power_off(struct vnt_private *priv)
  * Return Value: true if success; otherwise false
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int CARDbRadioPowerOn(struct vnt_private *pDevice)
 {
@@ -1605,6 +1781,8 @@ void CARDvSetBSSMode(struct vnt_private *pDevice)
         pDevice->abyBBVGA[3] = 0x0;
     }
 =======
+=======
+>>>>>>> v3.18
 int vnt_radio_power_on(struct vnt_private *priv)
 {
 	int ret = true;
@@ -1672,5 +1850,8 @@ void vnt_set_bss_mode(struct vnt_private *priv)
 	}
 
 	vnt_set_vga_gain_offset(priv, priv->bb_vga[0]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

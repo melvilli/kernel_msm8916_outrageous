@@ -23,7 +23,11 @@
 #define CL_EXPIRE    		0x01
 #define CL_SLAVE     		0x02
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CL_COPY_ALL 		0x04
+=======
+#define CL_COPY_UNBINDABLE	0x04
+>>>>>>> v3.18
 =======
 #define CL_COPY_UNBINDABLE	0x04
 >>>>>>> v3.18
@@ -32,6 +36,12 @@
 #define CL_SHARED_TO_SLAVE	0x20
 #define CL_UNPRIVILEGED		0x40
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CL_COPY_MNT_NS_FILE	0x80
+
+#define CL_COPY_ALL		(CL_COPY_UNBINDABLE | CL_COPY_MNT_NS_FILE)
+>>>>>>> v3.18
 =======
 #define CL_COPY_MNT_NS_FILE	0x80
 
@@ -47,10 +57,16 @@ static inline void set_mnt_shared(struct mount *mnt)
 void change_mnt_propagation(struct mount *, int);
 int propagate_mnt(struct mount *, struct mountpoint *, struct mount *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct list_head *);
 int propagate_umount(struct list_head *);
 int propagate_mount_busy(struct mount *, int);
 void propagate_remount(struct mount *);
+=======
+		struct hlist_head *);
+int propagate_umount(struct hlist_head *);
+int propagate_mount_busy(struct mount *, int);
+>>>>>>> v3.18
 =======
 		struct hlist_head *);
 int propagate_umount(struct hlist_head *);

@@ -64,7 +64,10 @@ extern void __chk_io_ptr(const volatile void __iomem *);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Clang compiler defines __GNUC__. So we will overwrite implementations
  * coming from above header files here
  */
@@ -72,6 +75,9 @@ extern void __chk_io_ptr(const volatile void __iomem *);
 #include <linux/compiler-clang.h>
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Generic compiler-dependent macros required for kernel
@@ -142,7 +148,11 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
 #define if(cond, ...) __trace_if( (cond , ## __VA_ARGS__) )
 #define __trace_if(cond) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__builtin_constant_p(!!(cond)) ? !!(cond) :			\
+=======
+	if (__builtin_constant_p((cond)) ? !!(cond) :			\
+>>>>>>> v3.18
 =======
 	if (__builtin_constant_p((cond)) ? !!(cond) :			\
 >>>>>>> v3.18
@@ -331,10 +341,13 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
 #ifndef __compiletime_error
 # define __compiletime_error(message)
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define __compiletime_error_fallback(condition) \
 	do { ((void)sizeof(char[1 - 2 * condition])); } while (0)
 #else
 =======
+=======
+>>>>>>> v3.18
 /*
  * Sparse complains of variable sized arrays due to the temporary variable in
  * __compiletime_assert. Unfortunately we can't just expand it out to make
@@ -347,6 +360,9 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
 # endif
 #endif
 #ifndef __compiletime_error_fallback
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define __compiletime_error_fallback(condition) do { } while (0)
 #endif
@@ -397,13 +413,19 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
 #ifdef CONFIG_KPROBES
 # define __kprobes	__attribute__((__section__(".kprobes.text")))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 # define __kprobes
 =======
+=======
+>>>>>>> v3.18
 # define nokprobe_inline	__always_inline
 #else
 # define __kprobes
 # define nokprobe_inline	inline
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #endif /* __LINUX_COMPILER_H */

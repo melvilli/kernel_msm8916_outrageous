@@ -23,7 +23,11 @@
 #define DISTRIBUTION_MAX_SIZE     8192
 #define DISTRIBUTION_MAX_INDEX    (ilog2(DISTRIBUTION_MAX_SIZE) + 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void profile_size_distrib(unsigned stat[], unsigned val)
+=======
+static inline void fwtty_profile_data(unsigned stat[], unsigned val)
+>>>>>>> v3.18
 =======
 static inline void fwtty_profile_data(unsigned stat[], unsigned val)
 >>>>>>> v3.18
@@ -34,7 +38,11 @@ static inline void fwtty_profile_data(unsigned stat[], unsigned val)
 #else
 #define DISTRIBUTION_MAX_INDEX    0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define profile_size_distrib(st, n)
+=======
+#define fwtty_profile_data(st, n)
+>>>>>>> v3.18
 =======
 #define fwtty_profile_data(st, n)
 >>>>>>> v3.18
@@ -100,6 +108,10 @@ struct fwtty_peer {
 
 	spinlock_t		lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	work_func_t		workfn;
+>>>>>>> v3.18
 =======
 	work_func_t		workfn;
 >>>>>>> v3.18
@@ -179,7 +191,10 @@ struct stats {
 	unsigned	lost;
 	unsigned	throttled;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned	watermark;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned	reads[DISTRIBUTION_MAX_INDEX + 1];
@@ -199,12 +214,15 @@ struct fwconsole_ops {
 #define FWCON_NOTIFY_DETACH		2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct buffered_rx {
 	struct list_head	list;
 	size_t			n;
 	unsigned char		data[0];
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -242,11 +260,14 @@ struct buffered_rx {
  *         prevented with the IN_TX flag. Scheduled under lock to
  *         limit scheduling when fifo has just been drained.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @push: work responsible for pushing buffered rx to the ldisc.
  *	  rx can become buffered if the tty buffer is filled before the
  *	  ldisc throttles the sender.
  * @buf_list: list of buffered rx yet to be sent to ldisc
  * @buffered: byte count of buffered rx
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @tx_fifo: fifo used to store & block-up writes for dma to remote
@@ -289,9 +310,12 @@ struct fwtty_port {
 	unsigned		   mctrl;
 	struct delayed_work	   drain;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct	   push;
 	struct list_head	   buf_list;
 	int			   buffered;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dma_fifo		   tx_fifo;
@@ -316,7 +340,10 @@ struct fwtty_port {
 #define IN_TX                      0
 #define STOP_TX                    1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BUFFERING_RX		   2
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -335,8 +362,13 @@ struct fwtty_port {
 
 /* Ports are allocated in blocks of num_ports for each fw_card */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_CARD_PORTS           32	/* max # of ports per card */
 #define MAX_TOTAL_PORTS          64	/* max # of ports total    */
+=======
+#define MAX_CARD_PORTS           CONFIG_FWTTY_MAX_CARD_PORTS
+#define MAX_TOTAL_PORTS          CONFIG_FWTTY_MAX_TOTAL_PORTS
+>>>>>>> v3.18
 =======
 #define MAX_CARD_PORTS           CONFIG_FWTTY_MAX_CARD_PORTS
 #define MAX_TOTAL_PORTS          CONFIG_FWTTY_MAX_TOTAL_PORTS
@@ -389,8 +421,11 @@ static const char loop_dev_name[] = "fwloop";
 extern struct tty_driver *fwtty_driver;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define driver_err(s, v...)	pr_err(KBUILD_MODNAME ": " s, ##v)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct fwtty_port *fwtty_port_get(unsigned index);

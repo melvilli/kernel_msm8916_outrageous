@@ -203,12 +203,18 @@ struct detailed_timing {
 #define DRM_EDID_FEATURE_PM_STANDBY       (1 << 7)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DRM_EDID_HDMI_DC_48               (1 << 6)
 #define DRM_EDID_HDMI_DC_36               (1 << 5)
 #define DRM_EDID_HDMI_DC_30               (1 << 4)
 #define DRM_EDID_HDMI_DC_Y444             (1 << 3)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct edid {
 	u8 header[8];
@@ -265,15 +271,21 @@ struct drm_connector;
 struct drm_display_mode;
 struct hdmi_avi_infoframe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void drm_edid_to_eld(struct drm_connector *connector, struct edid *edid);
 int drm_edid_to_sad(struct edid *edid, struct cea_sad **sads);
 =======
+=======
+>>>>>>> v3.18
 struct hdmi_vendor_infoframe;
 
 void drm_edid_to_eld(struct drm_connector *connector, struct edid *edid);
 int drm_edid_to_sad(struct edid *edid, struct cea_sad **sads);
 int drm_edid_to_speaker_allocation(struct edid *edid, u8 **sadb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int drm_av_sync_delay(struct drm_connector *connector,
 		      struct drm_display_mode *mode);
@@ -285,6 +297,12 @@ int
 drm_hdmi_avi_infoframe_from_display_mode(struct hdmi_avi_infoframe *frame,
 					 const struct drm_display_mode *mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int
+drm_hdmi_vendor_infoframe_from_display_mode(struct hdmi_vendor_infoframe *frame,
+					    const struct drm_display_mode *mode);
+>>>>>>> v3.18
 =======
 int
 drm_hdmi_vendor_infoframe_from_display_mode(struct hdmi_vendor_infoframe *frame,

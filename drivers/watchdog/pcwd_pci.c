@@ -41,7 +41,11 @@
 #include <linux/kernel.h>	/* For printk/panic/... */
 #include <linux/delay.h>	/* For mdelay function */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>	/* For MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR) */
+=======
+#include <linux/miscdevice.h>	/* For struct miscdevice */
+>>>>>>> v3.18
 =======
 #include <linux/miscdevice.h>	/* For struct miscdevice */
 >>>>>>> v3.18
@@ -806,7 +810,11 @@ static void pcipcwd_card_exit(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pcipcwd_pci_tbl) = {
+=======
+static const struct pci_device_id pcipcwd_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pcipcwd_pci_tbl[] = {
 >>>>>>> v3.18
@@ -829,7 +837,10 @@ MODULE_AUTHOR("Wim Van Sebroeck <wim@iguana.be>");
 MODULE_DESCRIPTION("Berkshire PCI-PC Watchdog driver");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
 MODULE_ALIAS_MISCDEV(TEMP_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

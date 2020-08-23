@@ -9,17 +9,23 @@ Required properties:
 - reg: Address and length of the register set for the device
 - interrupts: Should contain macb interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
 - phy-mode: String, operation mode of the PHY interface.
   Supported values are: "mii", "rmii", "gmii", "rgmii".
 
 Optional properties:
 - local-mac-address: 6 bytes, mac address
 =======
+=======
+>>>>>>> v3.18
 - phy-mode: See ethernet.txt file in the same directory.
 - clock-names: Tuple listing input clock names.
 	Required elements: 'pclk', 'hclk'
 	Optional elements: 'tx_clk'
 - clocks: Phandles to input clocks.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Examples:
@@ -31,6 +37,11 @@ Examples:
 		phy-mode = "rmii";
 		local-mac-address = [3a 0e 03 04 05 06];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clock-names = "pclk", "hclk", "tx_clk";
+		clocks = <&clkc 30>, <&clkc 30>, <&clkc 13>;
+>>>>>>> v3.18
 =======
 		clock-names = "pclk", "hclk", "tx_clk";
 		clocks = <&clkc 30>, <&clkc 30>, <&clkc 13>;

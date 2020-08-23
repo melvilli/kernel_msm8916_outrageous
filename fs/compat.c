@@ -73,8 +73,13 @@ int compat_printk(const char *fmt, ...)
  * of sys_utimes.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_utime(const char __user *filename,
 				 struct compat_utimbuf __user *t)
+=======
+COMPAT_SYSCALL_DEFINE2(utime, const char __user *, filename,
+		       struct compat_utimbuf __user *, t)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(utime, const char __user *, filename,
 		       struct compat_utimbuf __user *, t)
@@ -93,7 +98,11 @@ COMPAT_SYSCALL_DEFINE2(utime, const char __user *, filename,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_utimensat(unsigned int dfd, const char __user *filename, struct compat_timespec __user *t, int flags)
+=======
+COMPAT_SYSCALL_DEFINE4(utimensat, unsigned int, dfd, const char __user *, filename, struct compat_timespec __user *, t, int, flags)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE4(utimensat, unsigned int, dfd, const char __user *, filename, struct compat_timespec __user *, t, int, flags)
 >>>>>>> v3.18
@@ -102,8 +111,13 @@ COMPAT_SYSCALL_DEFINE4(utimensat, unsigned int, dfd, const char __user *, filena
 
 	if  (t) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (get_compat_timespec(&tv[0], &t[0]) ||
 		    get_compat_timespec(&tv[1], &t[1]))
+=======
+		if (compat_get_timespec(&tv[0], &t[0]) ||
+		    compat_get_timespec(&tv[1], &t[1]))
+>>>>>>> v3.18
 =======
 		if (compat_get_timespec(&tv[0], &t[0]) ||
 		    compat_get_timespec(&tv[1], &t[1]))
@@ -117,7 +131,11 @@ COMPAT_SYSCALL_DEFINE4(utimensat, unsigned int, dfd, const char __user *, filena
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_futimesat(unsigned int dfd, const char __user *filename, struct compat_timeval __user *t)
+=======
+COMPAT_SYSCALL_DEFINE3(futimesat, unsigned int, dfd, const char __user *, filename, struct compat_timeval __user *, t)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE3(futimesat, unsigned int, dfd, const char __user *, filename, struct compat_timeval __user *, t)
 >>>>>>> v3.18
@@ -140,7 +158,11 @@ COMPAT_SYSCALL_DEFINE3(futimesat, unsigned int, dfd, const char __user *, filena
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_utimes(const char __user *filename, struct compat_timeval __user *t)
+=======
+COMPAT_SYSCALL_DEFINE2(utimes, const char __user *, filename, struct compat_timeval __user *, t)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(utimes, const char __user *, filename, struct compat_timeval __user *, t)
 >>>>>>> v3.18
@@ -182,8 +204,13 @@ static int cp_compat_stat(struct kstat *stat, struct compat_stat __user *ubuf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_newstat(const char __user * filename,
 		struct compat_stat __user *statbuf)
+=======
+COMPAT_SYSCALL_DEFINE2(newstat, const char __user *, filename,
+		       struct compat_stat __user *, statbuf)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(newstat, const char __user *, filename,
 		       struct compat_stat __user *, statbuf)
@@ -199,8 +226,13 @@ COMPAT_SYSCALL_DEFINE2(newstat, const char __user *, filename,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_newlstat(const char __user * filename,
 		struct compat_stat __user *statbuf)
+=======
+COMPAT_SYSCALL_DEFINE2(newlstat, const char __user *, filename,
+		       struct compat_stat __user *, statbuf)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(newlstat, const char __user *, filename,
 		       struct compat_stat __user *, statbuf)
@@ -217,9 +249,15 @@ COMPAT_SYSCALL_DEFINE2(newlstat, const char __user *, filename,
 
 #ifndef __ARCH_WANT_STAT64
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_newfstatat(unsigned int dfd,
 		const char __user *filename,
 		struct compat_stat __user *statbuf, int flag)
+=======
+COMPAT_SYSCALL_DEFINE4(newfstatat, unsigned int, dfd,
+		       const char __user *, filename,
+		       struct compat_stat __user *, statbuf, int, flag)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE4(newfstatat, unsigned int, dfd,
 		       const char __user *, filename,
@@ -237,8 +275,13 @@ COMPAT_SYSCALL_DEFINE4(newfstatat, unsigned int, dfd,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_newfstat(unsigned int fd,
 		struct compat_stat __user * statbuf)
+=======
+COMPAT_SYSCALL_DEFINE2(newfstat, unsigned int, fd,
+		       struct compat_stat __user *, statbuf)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(newfstat, unsigned int, fd,
 		       struct compat_stat __user *, statbuf)
@@ -291,7 +334,11 @@ static int put_compat_statfs(struct compat_statfs __user *ubuf, struct kstatfs *
  * should be checked against those from time to time
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_statfs(const char __user *pathname, struct compat_statfs __user *buf)
+=======
+COMPAT_SYSCALL_DEFINE2(statfs, const char __user *, pathname, struct compat_statfs __user *, buf)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(statfs, const char __user *, pathname, struct compat_statfs __user *, buf)
 >>>>>>> v3.18
@@ -304,7 +351,11 @@ COMPAT_SYSCALL_DEFINE2(statfs, const char __user *, pathname, struct compat_stat
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_fstatfs(unsigned int fd, struct compat_statfs __user *buf)
+=======
+COMPAT_SYSCALL_DEFINE2(fstatfs, unsigned int, fd, struct compat_statfs __user *, buf)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(fstatfs, unsigned int, fd, struct compat_statfs __user *, buf)
 >>>>>>> v3.18
@@ -350,7 +401,11 @@ static int put_compat_statfs64(struct compat_statfs64 __user *ubuf, struct kstat
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_statfs64(const char __user *pathname, compat_size_t sz, struct compat_statfs64 __user *buf)
+=======
+COMPAT_SYSCALL_DEFINE3(statfs64, const char __user *, pathname, compat_size_t, sz, struct compat_statfs64 __user *, buf)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE3(statfs64, const char __user *, pathname, compat_size_t, sz, struct compat_statfs64 __user *, buf)
 >>>>>>> v3.18
@@ -368,7 +423,11 @@ COMPAT_SYSCALL_DEFINE3(statfs64, const char __user *, pathname, compat_size_t, s
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_fstatfs64(unsigned int fd, compat_size_t sz, struct compat_statfs64 __user *buf)
+=======
+COMPAT_SYSCALL_DEFINE3(fstatfs64, unsigned int, fd, compat_size_t, sz, struct compat_statfs64 __user *, buf)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE3(fstatfs64, unsigned int, fd, compat_size_t, sz, struct compat_statfs64 __user *, buf)
 >>>>>>> v3.18
@@ -391,7 +450,11 @@ COMPAT_SYSCALL_DEFINE3(fstatfs64, unsigned int, fd, compat_size_t, sz, struct co
  * than the various conversion hacks.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_ustat(unsigned dev, struct compat_ustat __user *u)
+=======
+COMPAT_SYSCALL_DEFINE2(ustat, unsigned, dev, struct compat_ustat __user *, u)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE2(ustat, unsigned, dev, struct compat_ustat __user *, u)
 >>>>>>> v3.18
@@ -463,9 +526,12 @@ static int put_compat_flock64(struct flock *kfl, struct compat_flock64 __user *u
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_fcntl64(unsigned int fd, unsigned int cmd,
 		unsigned long arg)
 =======
+=======
+>>>>>>> v3.18
 static unsigned int
 convert_fcntl_cmd(unsigned int cmd)
 {
@@ -483,12 +549,19 @@ convert_fcntl_cmd(unsigned int cmd)
 
 COMPAT_SYSCALL_DEFINE3(fcntl64, unsigned int, fd, unsigned int, cmd,
 		       compat_ulong_t, arg)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	mm_segment_t old_fs;
 	struct flock f;
 	long ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int conv_cmd;
+>>>>>>> v3.18
 =======
 	unsigned int conv_cmd;
 >>>>>>> v3.18
@@ -529,6 +602,12 @@ COMPAT_SYSCALL_DEFINE3(fcntl64, unsigned int, fd, unsigned int, cmd,
 	case F_SETLK64:
 	case F_SETLKW64:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case F_OFD_GETLK:
+	case F_OFD_SETLK:
+	case F_OFD_SETLKW:
+>>>>>>> v3.18
 =======
 	case F_OFD_GETLK:
 	case F_OFD_SETLK:
@@ -540,16 +619,22 @@ COMPAT_SYSCALL_DEFINE3(fcntl64, unsigned int, fd, unsigned int, cmd,
 		old_fs = get_fs();
 		set_fs(KERNEL_DS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = sys_fcntl(fd, (cmd == F_GETLK64) ? F_GETLK :
 				((cmd == F_SETLK64) ? F_SETLK : F_SETLKW),
 				(unsigned long)&f);
 		set_fs(old_fs);
 		if (cmd == F_GETLK64 && ret == 0) {
 =======
+=======
+>>>>>>> v3.18
 		conv_cmd = convert_fcntl_cmd(cmd);
 		ret = sys_fcntl(fd, conv_cmd, (unsigned long)&f);
 		set_fs(old_fs);
 		if ((conv_cmd == F_GETLK || conv_cmd == F_OFD_GETLK) && ret == 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* need to return lock information - see above for commentary */
 			if (f.l_start > COMPAT_LOFF_T_MAX)
@@ -569,6 +654,7 @@ COMPAT_SYSCALL_DEFINE3(fcntl64, unsigned int, fd, unsigned int, cmd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_fcntl(unsigned int fd, unsigned int cmd,
 		unsigned long arg)
 {
@@ -580,6 +666,8 @@ asmlinkage long compat_sys_fcntl(unsigned int fd, unsigned int cmd,
 asmlinkage long
 compat_sys_io_setup(unsigned nr_reqs, u32 __user *ctx32p)
 =======
+=======
+>>>>>>> v3.18
 COMPAT_SYSCALL_DEFINE3(fcntl, unsigned int, fd, unsigned int, cmd,
 		       compat_ulong_t, arg)
 {
@@ -596,6 +684,9 @@ COMPAT_SYSCALL_DEFINE3(fcntl, unsigned int, fd, unsigned int, cmd,
 }
 
 COMPAT_SYSCALL_DEFINE2(io_setup, unsigned, nr_reqs, u32 __user *, ctx32p)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	long ret;
@@ -615,6 +706,7 @@ COMPAT_SYSCALL_DEFINE2(io_setup, unsigned, nr_reqs, u32 __user *, ctx32p)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 asmlinkage long
 compat_sys_io_getevents(aio_context_t ctx_id,
@@ -643,6 +735,8 @@ compat_sys_io_getevents(aio_context_t ctx_id,
 out:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 COMPAT_SYSCALL_DEFINE5(io_getevents, compat_aio_context_t, ctx_id,
 		       compat_long_t, min_nr,
 		       compat_long_t, nr,
@@ -661,6 +755,9 @@ COMPAT_SYSCALL_DEFINE5(io_getevents, compat_aio_context_t, ctx_id,
 			return -EFAULT;
 	} 
 	return sys_io_getevents(ctx_id, min_nr, nr, events, ut);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -758,8 +855,13 @@ copy_iocb(long nr, u32 __user *ptr32, struct iocb __user * __user *ptr64)
 #define MAX_AIO_SUBMITS 	(PAGE_SIZE/sizeof(struct iocb *))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long
 compat_sys_io_submit(aio_context_t ctx_id, int nr, u32 __user *iocb)
+=======
+COMPAT_SYSCALL_DEFINE3(io_submit, compat_aio_context_t, ctx_id,
+		       int, nr, u32 __user *, iocb)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE3(io_submit, compat_aio_context_t, ctx_id,
 		       int, nr, u32 __user *, iocb)
@@ -916,20 +1018,27 @@ static int do_nfs4_super_data_conv(void *raw_data)
 #define NFS4_NAME	"nfs4"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_mount(const char __user * dev_name,
 				 const char __user * dir_name,
 				 const char __user * type, unsigned long flags,
 				 const void __user * data)
 =======
+=======
+>>>>>>> v3.18
 COMPAT_SYSCALL_DEFINE5(mount, const char __user *, dev_name,
 		       const char __user *, dir_name,
 		       const char __user *, type, compat_ulong_t, flags,
 		       const void __user *, data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	char *kernel_type;
 	unsigned long data_page;
 	char *kernel_dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct filename *dir;
 	int retval;
@@ -951,6 +1060,8 @@ COMPAT_SYSCALL_DEFINE5(mount, const char __user *, dev_name,
 	if (retval < 0)
 		goto out3;
 =======
+=======
+>>>>>>> v3.18
 	int retval;
 
 	kernel_type = copy_mount_string(type);
@@ -966,6 +1077,9 @@ COMPAT_SYSCALL_DEFINE5(mount, const char __user *, dev_name,
 	retval = copy_mount_options(data, &data_page);
 	if (retval < 0)
 		goto out2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	retval = -EINVAL;
@@ -975,6 +1089,7 @@ COMPAT_SYSCALL_DEFINE5(mount, const char __user *, dev_name,
 			do_ncp_super_data_conv((void *)data_page);
 		} else if (!strcmp(kernel_type, NFS4_NAME)) {
 			if (do_nfs4_super_data_conv((void *) data_page))
+<<<<<<< HEAD
 <<<<<<< HEAD
 				goto out4;
 		}
@@ -990,6 +1105,8 @@ COMPAT_SYSCALL_DEFINE5(mount, const char __user *, dev_name,
  out2:
 	putname(dir);
 =======
+=======
+>>>>>>> v3.18
 				goto out3;
 		}
 	}
@@ -1001,6 +1118,9 @@ COMPAT_SYSCALL_DEFINE5(mount, const char __user *, dev_name,
 	free_page(data_page);
  out2:
 	kfree(kernel_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  out1:
 	kfree(kernel_type);
@@ -1054,8 +1174,13 @@ efault:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_old_readdir(unsigned int fd,
 	struct compat_old_linux_dirent __user *dirent, unsigned int count)
+=======
+COMPAT_SYSCALL_DEFINE3(old_readdir, unsigned int, fd,
+		struct compat_old_linux_dirent __user *, dirent, unsigned int, count)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE3(old_readdir, unsigned int, fd,
 		struct compat_old_linux_dirent __user *, dirent, unsigned int, count)
@@ -1138,8 +1263,13 @@ efault:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_getdents(unsigned int fd,
 		struct compat_linux_dirent __user *dirent, unsigned int count)
+=======
+COMPAT_SYSCALL_DEFINE3(getdents, unsigned int, fd,
+		struct compat_linux_dirent __user *, dirent, unsigned int, count)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE3(getdents, unsigned int, fd,
 		struct compat_linux_dirent __user *, dirent, unsigned int, count)
@@ -1228,8 +1358,13 @@ efault:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_getdents64(unsigned int fd,
 		struct linux_dirent64 __user * dirent, unsigned int count)
+=======
+COMPAT_SYSCALL_DEFINE3(getdents64, unsigned int, fd,
+		struct linux_dirent64 __user *, dirent, unsigned int, count)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE3(getdents64, unsigned int, fd,
 		struct linux_dirent64 __user *, dirent, unsigned int, count)
@@ -1487,9 +1622,15 @@ out_nofds:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_select(int n, compat_ulong_t __user *inp,
 	compat_ulong_t __user *outp, compat_ulong_t __user *exp,
 	struct compat_timeval __user *tvp)
+=======
+COMPAT_SYSCALL_DEFINE5(select, int, n, compat_ulong_t __user *, inp,
+	compat_ulong_t __user *, outp, compat_ulong_t __user *, exp,
+	struct compat_timeval __user *, tvp)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE5(select, int, n, compat_ulong_t __user *, inp,
 	compat_ulong_t __user *, outp, compat_ulong_t __user *, exp,
@@ -1526,7 +1667,11 @@ struct compat_sel_arg_struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_old_select(struct compat_sel_arg_struct __user *arg)
+=======
+COMPAT_SYSCALL_DEFINE1(old_select, struct compat_sel_arg_struct __user *, arg)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE1(old_select, struct compat_sel_arg_struct __user *, arg)
 >>>>>>> v3.18
@@ -1591,9 +1736,15 @@ static long do_compat_pselect(int n, compat_ulong_t __user *inp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_pselect6(int n, compat_ulong_t __user *inp,
 	compat_ulong_t __user *outp, compat_ulong_t __user *exp,
 	struct compat_timespec __user *tsp, void __user *sig)
+=======
+COMPAT_SYSCALL_DEFINE6(pselect6, int, n, compat_ulong_t __user *, inp,
+	compat_ulong_t __user *, outp, compat_ulong_t __user *, exp,
+	struct compat_timespec __user *, tsp, void __user *, sig)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE6(pselect6, int, n, compat_ulong_t __user *, inp,
 	compat_ulong_t __user *, outp, compat_ulong_t __user *, exp,
@@ -1616,9 +1767,15 @@ COMPAT_SYSCALL_DEFINE6(pselect6, int, n, compat_ulong_t __user *, inp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_ppoll(struct pollfd __user *ufds,
 	unsigned int nfds, struct compat_timespec __user *tsp,
 	const compat_sigset_t __user *sigmask, compat_size_t sigsetsize)
+=======
+COMPAT_SYSCALL_DEFINE5(ppoll, struct pollfd __user *, ufds,
+	unsigned int,  nfds, struct compat_timespec __user *, tsp,
+	const compat_sigset_t __user *, sigmask, compat_size_t, sigsetsize)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE5(ppoll, struct pollfd __user *, ufds,
 	unsigned int,  nfds, struct compat_timespec __user *, tsp,

@@ -1,7 +1,11 @@
 /*
  * Copyright (C) from 2011
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Boaz Harrosh <bharrosh@panasas.com>
+=======
+ * Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  * Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18
@@ -36,6 +40,7 @@
 /* #define ORE_DBGMSG2 ORE_DBGMSG */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Calculate the component order in a stripe. eg the logical data unit
  * address within the stripe of @dev given the @par_dev of this stripe.
  */
@@ -56,6 +61,8 @@ static inline unsigned _dev_order(unsigned devs_in_group, unsigned mirrors_p1,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* ios_raid.c stuff needed by ios.c */
 int _ore_post_alloc_raid_stuff(struct ore_io_state *ios);
 void _ore_free_raid_stuff(struct ore_io_state *ios);
@@ -64,7 +71,12 @@ void _ore_add_sg_seg(struct ore_per_dev_state *per_dev, unsigned cur_len,
 		 bool not_last);
 int _ore_add_parity_unit(struct ore_io_state *ios, struct ore_striping_info *si,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     struct ore_per_dev_state *per_dev, unsigned cur_len);
+=======
+		     struct ore_per_dev_state *per_dev, unsigned cur_len,
+		     bool do_xor);
+>>>>>>> v3.18
 =======
 		     struct ore_per_dev_state *per_dev, unsigned cur_len,
 		     bool do_xor);

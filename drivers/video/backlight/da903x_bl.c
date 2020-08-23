@@ -110,7 +110,11 @@ static const struct backlight_ops da903x_backlight_ops = {
 static int da903x_backlight_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct da9034_backlight_pdata *pdata = pdev->dev.platform_data;
+=======
+	struct da9034_backlight_pdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct da9034_backlight_pdata *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -149,8 +153,14 @@ static int da903x_backlight_probe(struct platform_device *pdev)
 	props.type = BACKLIGHT_RAW;
 	props.max_brightness = max_brightness;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl = backlight_device_register(pdev->name, data->da903x_dev, data,
 				       &da903x_backlight_ops, &props);
+=======
+	bl = devm_backlight_device_register(&pdev->dev, pdev->name,
+					data->da903x_dev, data,
+					&da903x_backlight_ops, &props);
+>>>>>>> v3.18
 =======
 	bl = devm_backlight_device_register(&pdev->dev, pdev->name,
 					data->da903x_dev, data,
@@ -169,6 +179,7 @@ static int da903x_backlight_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int da903x_backlight_remove(struct platform_device *pdev)
 {
 	struct backlight_device *bl = platform_get_drvdata(pdev);
@@ -185,11 +196,16 @@ static struct platform_driver da903x_backlight_driver = {
 	.probe		= da903x_backlight_probe,
 	.remove		= da903x_backlight_remove,
 =======
+=======
+>>>>>>> v3.18
 static struct platform_driver da903x_backlight_driver = {
 	.driver		= {
 		.name	= "da903x-backlight",
 	},
 	.probe		= da903x_backlight_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

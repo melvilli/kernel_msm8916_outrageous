@@ -82,12 +82,18 @@
 #define SO_SELECT_ERR_QUEUE	45
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SO_BUSY_POLL		46
 
 #define SO_MAX_PACING_RATE	47
 
 #define SO_BPF_EXTENSIONS	48
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _UAPI_ASM_SOCKET_H */

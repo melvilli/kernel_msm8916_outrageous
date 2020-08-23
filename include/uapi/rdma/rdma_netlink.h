@@ -5,8 +5,11 @@
 
 enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RDMA_NL_RDMA_CM = 1
 =======
+=======
+>>>>>>> v3.18
 	RDMA_NL_RDMA_CM = 1,
 	RDMA_NL_NES,
 	RDMA_NL_C4IW,
@@ -17,6 +20,9 @@ enum {
 	RDMA_NL_GROUP_CM = 1,
 	RDMA_NL_GROUP_IWPM,
 	RDMA_NL_NUM_GROUPS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -36,7 +42,10 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* iwarp port mapper op-codes */
 enum {
 	RDMA_NL_IWPM_REG_PID = 0,
@@ -49,6 +58,9 @@ enum {
 	RDMA_NL_IWPM_NUM_OPS
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rdma_cm_id_stats {
 	__u32	qp_num;
@@ -62,7 +74,10 @@ struct rdma_cm_id_stats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum {
 	IWPM_NLA_REG_PID_UNSPEC = 0,
 	IWPM_NLA_REG_PID_SEQ,
@@ -136,6 +151,9 @@ enum {
 	IWPM_NLA_ERR_MAX
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UAPI_RDMA_NETLINK_H */

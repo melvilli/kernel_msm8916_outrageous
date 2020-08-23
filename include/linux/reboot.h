@@ -18,7 +18,10 @@ enum reboot_mode {
 	REBOOT_GPIO,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern enum reboot_mode reboot_mode;
 
 enum reboot_type {
@@ -36,12 +39,21 @@ extern int reboot_default;
 extern int reboot_cpu;
 extern int reboot_force;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int register_reboot_notifier(struct notifier_block *);
 extern int unregister_reboot_notifier(struct notifier_block *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int register_restart_handler(struct notifier_block *);
+extern int unregister_restart_handler(struct notifier_block *);
+extern void do_kernel_restart(char *cmd);
+>>>>>>> v3.18
 =======
 extern int register_restart_handler(struct notifier_block *);
 extern int unregister_restart_handler(struct notifier_block *);
@@ -53,6 +65,10 @@ extern void do_kernel_restart(char *cmd);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void migrate_to_reboot_cpu(void);
+>>>>>>> v3.18
 =======
 extern void migrate_to_reboot_cpu(void);
 >>>>>>> v3.18
@@ -65,7 +81,11 @@ struct pt_regs;
 extern void machine_crash_shutdown(struct pt_regs *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18

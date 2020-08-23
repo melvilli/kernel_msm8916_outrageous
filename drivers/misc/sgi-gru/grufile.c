@@ -7,7 +7,11 @@
  * This also incudes the driver initialization code.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (c) 2008 Silicon Graphics, Inc.  All Rights Reserved.
+=======
+ *  Copyright (c) 2008-2014 Silicon Graphics, Inc.  All Rights Reserved.
+>>>>>>> v3.18
 =======
  *  Copyright (c) 2008-2014 Silicon Graphics, Inc.  All Rights Reserved.
 >>>>>>> v3.18
@@ -63,12 +67,18 @@ static int max_user_cbrs, max_user_dsr_bytes;
 static struct miscdevice gru_miscdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int gru_supported(void)
 {
 	return is_uv_system() &&
 		(uv_hub_info->hub_revision < UV3_HUB_REVISION_BASE);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -531,7 +541,11 @@ static int __init gru_init(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!is_uv_system() || (is_uvx_hub() && !is_uv2_hub()))
+=======
+	if (!gru_supported())
+>>>>>>> v3.18
 =======
 	if (!gru_supported())
 >>>>>>> v3.18
@@ -590,7 +604,11 @@ exit0:
 static void __exit gru_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!is_uv_system())
+=======
+	if (!gru_supported())
+>>>>>>> v3.18
 =======
 	if (!gru_supported())
 >>>>>>> v3.18

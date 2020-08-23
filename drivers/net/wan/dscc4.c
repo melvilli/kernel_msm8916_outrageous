@@ -700,8 +700,11 @@ static void dscc4_free1(struct pci_dev *pdev)
 		unregister_hdlc_device(dscc4_to_dev(root + i));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < dev_per_card; i++)
@@ -2045,7 +2048,11 @@ __setup("dscc4.setup=", dscc4_setup);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(dscc4_pci_tbl) = {
+=======
+static const struct pci_device_id dscc4_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id dscc4_pci_tbl[] = {
 >>>>>>> v3.18

@@ -17,8 +17,11 @@
 #include <net/netlabel.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EBITMAP_UNIT_NUMS	((32 - sizeof(void *) - sizeof(u32))	\
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_64BIT
 #define	EBITMAP_NODE_SIZE	64
 #else
@@ -26,6 +29,9 @@
 #endif
 
 #define EBITMAP_UNIT_NUMS	((EBITMAP_NODE_SIZE-sizeof(void *)-sizeof(u32))\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					/ sizeof(unsigned long))
 #define EBITMAP_UNIT_SIZE	BITS_PER_LONG
@@ -128,7 +134,11 @@ static inline void ebitmap_node_clr_bit(struct ebitmap_node *n,
 int ebitmap_cmp(struct ebitmap *e1, struct ebitmap *e2);
 int ebitmap_cpy(struct ebitmap *dst, struct ebitmap *src);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ebitmap_contains(struct ebitmap *e1, struct ebitmap *e2);
+=======
+int ebitmap_contains(struct ebitmap *e1, struct ebitmap *e2, u32 last_e2bit);
+>>>>>>> v3.18
 =======
 int ebitmap_contains(struct ebitmap *e1, struct ebitmap *e2, u32 last_e2bit);
 >>>>>>> v3.18
@@ -141,6 +151,7 @@ int ebitmap_write(struct ebitmap *e, void *fp);
 #ifdef CONFIG_NETLABEL
 int ebitmap_netlbl_export(struct ebitmap *ebmap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct netlbl_lsm_secattr_catmap **catmap);
 int ebitmap_netlbl_import(struct ebitmap *ebmap,
 			  struct netlbl_lsm_secattr_catmap *catmap);
@@ -148,19 +159,28 @@ int ebitmap_netlbl_import(struct ebitmap *ebmap,
 static inline int ebitmap_netlbl_export(struct ebitmap *ebmap,
 				struct netlbl_lsm_secattr_catmap **catmap)
 =======
+=======
+>>>>>>> v3.18
 			  struct netlbl_lsm_catmap **catmap);
 int ebitmap_netlbl_import(struct ebitmap *ebmap,
 			  struct netlbl_lsm_catmap *catmap);
 #else
 static inline int ebitmap_netlbl_export(struct ebitmap *ebmap,
 					struct netlbl_lsm_catmap **catmap)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return -ENOMEM;
 }
 static inline int ebitmap_netlbl_import(struct ebitmap *ebmap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct netlbl_lsm_secattr_catmap *catmap)
+=======
+					struct netlbl_lsm_catmap *catmap)
+>>>>>>> v3.18
 =======
 					struct netlbl_lsm_catmap *catmap)
 >>>>>>> v3.18

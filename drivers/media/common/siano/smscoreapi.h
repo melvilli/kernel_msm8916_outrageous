@@ -956,7 +956,11 @@ struct sms_rx_stats {
 	s32 SNR;		/* dB */
 	u32 ber;		/* Post Viterbi ber [1E-5] */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ber_error_count;	/* Number of erronous SYNC bits. */
+=======
+	u32 ber_error_count;	/* Number of erroneous SYNC bits. */
+>>>>>>> v3.18
 =======
 	u32 ber_error_count;	/* Number of erroneous SYNC bits. */
 >>>>>>> v3.18
@@ -986,7 +990,11 @@ struct sms_rx_stats_ex {
 	s32 SNR;		/* dB */
 	u32 ber;		/* Post Viterbi ber [1E-5] */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ber_error_count;	/* Number of erronous SYNC bits. */
+=======
+	u32 ber_error_count;	/* Number of erroneous SYNC bits. */
+>>>>>>> v3.18
 =======
 	u32 ber_error_count;	/* Number of erroneous SYNC bits. */
 >>>>>>> v3.18

@@ -24,6 +24,10 @@
 #include <linux/netlink.h>
 #include <linux/openvswitch.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/reciprocal_div.h>
+>>>>>>> v3.18
 =======
 #include <linux/reciprocal_div.h>
 >>>>>>> v3.18
@@ -39,11 +43,17 @@ struct vport_parms;
 /* The following definitions are for users of the vport subsytem: */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct vport_net {
 	struct vport __rcu *gre_vport;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ovs_vport_init(void);
 void ovs_vport_exit(void);
@@ -59,11 +69,17 @@ int ovs_vport_set_options(struct vport *, struct nlattr *options);
 int ovs_vport_get_options(const struct vport *, struct sk_buff *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ovs_vport_set_upcall_portids(struct vport *, struct nlattr *pids);
 int ovs_vport_get_upcall_portids(const struct vport *, struct sk_buff *);
 u32 ovs_vport_find_upcall_portid(const struct vport *, struct sk_buff *);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ovs_vport_send(struct vport *, struct sk_buff *);
 
@@ -71,11 +87,14 @@ int ovs_vport_send(struct vport *, struct sk_buff *);
 
 struct vport_err_stats {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 rx_dropped;
 	u64 rx_errors;
 	u64 tx_dropped;
 	u64 tx_errors;
 =======
+=======
+>>>>>>> v3.18
 	atomic_long_t rx_dropped;
 	atomic_long_t rx_errors;
 	atomic_long_t tx_dropped;
@@ -95,6 +114,9 @@ struct vport_portids {
 	struct rcu_head rcu;
 	u32 n_ids;
 	u32 ids[];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -103,8 +125,12 @@ struct vport_portids {
  * @rcu: RCU callback head for deferred destruction.
  * @dp: Datapath to which this port belongs.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @upcall_portid: The Netlink port to use for packets received on this port that
  * miss the flow table.
+=======
+ * @upcall_portids: RCU protected 'struct vport_portids'.
+>>>>>>> v3.18
 =======
  * @upcall_portids: RCU protected 'struct vport_portids'.
 >>>>>>> v3.18
@@ -114,7 +140,10 @@ struct vport_portids {
  * @ops: Class structure.
  * @percpu_stats: Points to per-CPU statistics used and maintained by vport
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @stats_lock: Protects @err_stats;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @err_stats: Points to error statistics used and maintained by vport
@@ -123,7 +152,11 @@ struct vport {
 	struct rcu_head rcu;
 	struct datapath	*dp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 upcall_portid;
+=======
+	struct vport_portids __rcu *upcall_portids;
+>>>>>>> v3.18
 =======
 	struct vport_portids __rcu *upcall_portids;
 >>>>>>> v3.18
@@ -134,9 +167,14 @@ struct vport {
 	const struct vport_ops *ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pcpu_tstats __percpu *percpu_stats;
 
 	spinlock_t stats_lock;
+=======
+	struct pcpu_sw_netstats __percpu *percpu_stats;
+
+>>>>>>> v3.18
 =======
 	struct pcpu_sw_netstats __percpu *percpu_stats;
 
@@ -163,7 +201,11 @@ struct vport_parms {
 	struct datapath *dp;
 	u16 port_no;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 upcall_portid;
+=======
+	struct nlattr *upcall_portids;
+>>>>>>> v3.18
 =======
 	struct nlattr *upcall_portids;
 >>>>>>> v3.18
@@ -184,9 +226,14 @@ struct vport_parms {
  * have any configuration.
  * @get_name: Get the device's name.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @get_config: Get the device's configuration.
  * May be null if the device does not have an ifindex.
  * @send: Send a packet on the device.  Returns the length of the packet sent.
+=======
+ * @send: Send a packet on the device.  Returns the length of the packet sent,
+ * zero for dropped packets or negative for error.
+>>>>>>> v3.18
 =======
  * @send: Send a packet on the device.  Returns the length of the packet sent,
  * zero for dropped packets or negative for error.
@@ -205,7 +252,10 @@ struct vport_ops {
 	/* Called with rcu_read_lock or ovs_mutex. */
 	const char *(*get_name)(const struct vport *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*get_config)(const struct vport *, void *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -223,6 +273,10 @@ struct vport *ovs_vport_alloc(int priv_size, const struct vport_ops *,
 			      const struct vport_parms *);
 void ovs_vport_free(struct vport *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void ovs_vport_deferred_free(struct vport *vport);
+>>>>>>> v3.18
 =======
 void ovs_vport_deferred_free(struct vport *vport);
 >>>>>>> v3.18
@@ -241,7 +295,11 @@ void ovs_vport_deferred_free(struct vport *vport);
 static inline void *vport_priv(const struct vport *vport)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (u8 *)vport + ALIGN(sizeof(struct vport), VPORT_ALIGN);
+=======
+	return (u8 *)(uintptr_t)vport + ALIGN(sizeof(struct vport), VPORT_ALIGN);
+>>>>>>> v3.18
 =======
 	return (u8 *)(uintptr_t)vport + ALIGN(sizeof(struct vport), VPORT_ALIGN);
 >>>>>>> v3.18
@@ -258,6 +316,7 @@ static inline void *vport_priv(const struct vport *vport)
  * private data area.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct vport *vport_from_priv(const void *priv)
 {
 	return (struct vport *)(priv - ALIGN(sizeof(struct vport), VPORT_ALIGN));
@@ -266,6 +325,8 @@ static inline struct vport *vport_from_priv(const void *priv)
 void ovs_vport_receive(struct vport *, struct sk_buff *);
 void ovs_vport_record_error(struct vport *, enum vport_err_type err_type);
 =======
+=======
+>>>>>>> v3.18
 static inline struct vport *vport_from_priv(void *priv)
 {
 	return (struct vport *)((u8 *)priv - ALIGN(sizeof(struct vport), VPORT_ALIGN));
@@ -273,6 +334,9 @@ static inline struct vport *vport_from_priv(void *priv)
 
 void ovs_vport_receive(struct vport *, struct sk_buff *,
 		       struct ovs_tunnel_info *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* List of statically compiled vport implementations.  Don't forget to also
@@ -280,7 +344,10 @@ void ovs_vport_receive(struct vport *, struct sk_buff *,
 extern const struct vport_ops ovs_netdev_vport_ops;
 extern const struct vport_ops ovs_internal_vport_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern const struct vport_ops ovs_gre_vport_ops;
 extern const struct vport_ops ovs_vxlan_vport_ops;
 extern const struct vport_ops ovs_geneve_vport_ops;
@@ -291,6 +358,9 @@ static inline void ovs_skb_postpush_rcsum(struct sk_buff *skb,
 	if (skb->ip_summed == CHECKSUM_COMPLETE)
 		skb->csum = csum_add(skb->csum, csum_partial(start, len, 0));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* vport.h */

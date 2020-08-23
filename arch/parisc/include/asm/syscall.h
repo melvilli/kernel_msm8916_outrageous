@@ -4,6 +4,11 @@
 #define _ASM_PARISC_SYSCALL_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/linux/audit.h>
+#include <linux/compat.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/audit.h>
 #include <linux/compat.h>
@@ -43,7 +48,10 @@ static inline void syscall_get_arguments(struct task_struct *tsk,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int syscall_get_arch(void)
 {
 	int arch = AUDIT_ARCH_PARISC;
@@ -53,5 +61,8 @@ static inline int syscall_get_arch(void)
 #endif
 	return arch;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /*_ASM_PARISC_SYSCALL_H_*/

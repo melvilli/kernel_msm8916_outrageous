@@ -5,7 +5,10 @@
 #include <asm-generic/hugetlb.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define hugepages_supported() cpu_has_pse
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

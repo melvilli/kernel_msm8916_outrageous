@@ -2,6 +2,7 @@
 #define	_LINUX_SLAB_DEF_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Definitions unique to the original Linux SLAB allocator.
  *
@@ -23,6 +24,8 @@
 struct kmem_cache {
 /* 1) Cache tunables. Protected by cache_chain_mutex */
 =======
+=======
+>>>>>>> v3.18
 #include <linux/reciprocal_div.h>
 
 /*
@@ -33,6 +36,9 @@ struct kmem_cache {
 	struct array_cache __percpu *cpu_cache;
 
 /* 1) Cache tunables. Protected by slab_mutex */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int batchcount;
 	unsigned int limit;
@@ -40,7 +46,11 @@ struct kmem_cache {
 
 	unsigned int size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reciprocal_buffer_size;
+=======
+	struct reciprocal_value reciprocal_buffer_size;
+>>>>>>> v3.18
 =======
 	struct reciprocal_value reciprocal_buffer_size;
 >>>>>>> v3.18
@@ -59,8 +69,13 @@ struct kmem_cache {
 	size_t colour;			/* cache colouring range */
 	unsigned int colour_off;	/* colour offset */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kmem_cache *slabp_cache;
 	unsigned int slab_size;
+=======
+	struct kmem_cache *freelist_cache;
+	unsigned int freelist_size;
+>>>>>>> v3.18
 =======
 	struct kmem_cache *freelist_cache;
 	unsigned int freelist_size;
@@ -105,6 +120,7 @@ struct kmem_cache {
 	struct memcg_cache_params *memcg_params;
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* 6) per-cpu/per-node data, touched during every alloc/free */
 	/*
@@ -217,6 +233,11 @@ static __always_inline void *kmalloc_node(size_t size, gfp_t flags, int node)
 
 #endif	/* CONFIG_NUMA */
 
+=======
+	struct kmem_cache_node *node[MAX_NUMNODES];
+};
+
+>>>>>>> v3.18
 =======
 	struct kmem_cache_node *node[MAX_NUMNODES];
 };

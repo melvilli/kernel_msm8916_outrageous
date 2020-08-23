@@ -7,7 +7,11 @@
  *  Added initrd & change_root: Werner Almesberger & Hans Lermen, Feb '96
  *  Moan early if gcc is old, avoiding bogus kernels - Paul Gortmaker, May '96
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Simplified starting of init:  Michael A. Griffith <grif@acm.org> 
+=======
+ *  Simplified starting of init:  Michael A. Griffith <grif@acm.org>
+>>>>>>> v3.18
 =======
  *  Simplified starting of init:  Michael A. Griffith <grif@acm.org>
 >>>>>>> v3.18
@@ -80,7 +84,13 @@
 #include <linux/elevator.h>
 #include <linux/sched_clock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/random.h>
+=======
+#include <linux/context_tracking.h>
+#include <linux/random.h>
+#include <linux/list.h>
+>>>>>>> v3.18
 =======
 #include <linux/context_tracking.h>
 #include <linux/random.h>
@@ -102,8 +112,11 @@ static int kernel_init(void *);
 extern void init_IRQ(void);
 extern void fork_init(unsigned long);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void mca_init(void);
 extern void sbus_init(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void radix_tree_init(void);
@@ -112,10 +125,13 @@ static inline void mark_rodata_ro(void) { }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_TC
 extern void tc_init(void);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -140,7 +156,10 @@ extern void time_init(void);
 /* Default late time init is NULL. archs can override this later. */
 void (*__initdata late_time_init)(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void softirq_init(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -151,6 +170,11 @@ char *saved_command_line;
 /* Command line for parameter parsing */
 static char *static_command_line;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Command line for per-initcall parameter parsing */
+static char *initcall_command_line;
+>>>>>>> v3.18
 =======
 /* Command line for per-initcall parameter parsing */
 static char *initcall_command_line;
@@ -161,7 +185,10 @@ static char *ramdisk_execute_command;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Used to generate warnings if static_key manipulation functions are used
  * before jump_label_init is called.
  */
@@ -169,6 +196,9 @@ bool static_key_initialized __read_mostly;
 EXPORT_SYMBOL_GPL(static_key_initialized);
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * If set, this is an indication to the drivers that reset the underlying
  * device before going ahead with the initialization otherwise driver might
@@ -190,8 +220,13 @@ static int __init set_reset_devices(char *str)
 __setup("reset_devices", set_reset_devices);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char * argv_init[MAX_INIT_ARGS+2] = { "init", NULL, };
 const char * envp_init[MAX_INIT_ENVS+2] = { "HOME=/", "TERM=linux", NULL, };
+=======
+static const char *argv_init[MAX_INIT_ARGS+2] = { "init", NULL, };
+const char *envp_init[MAX_INIT_ENVS+2] = { "HOME=/", "TERM=linux", NULL, };
+>>>>>>> v3.18
 =======
 static const char *argv_init[MAX_INIT_ARGS+2] = { "init", NULL, };
 const char *envp_init[MAX_INIT_ENVS+2] = { "HOME=/", "TERM=linux", NULL, };
@@ -235,7 +270,10 @@ static int __init obsolete_checksetup(char *line)
  */
 unsigned long loops_per_jiffy = (1<<12);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(loops_per_jiffy);
@@ -243,7 +281,11 @@ EXPORT_SYMBOL(loops_per_jiffy);
 static int __init debug_kernel(char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	console_loglevel = 10;
+=======
+	console_loglevel = CONSOLE_LOGLEVEL_DEBUG;
+>>>>>>> v3.18
 =======
 	console_loglevel = CONSOLE_LOGLEVEL_DEBUG;
 >>>>>>> v3.18
@@ -253,7 +295,11 @@ static int __init debug_kernel(char *str)
 static int __init quiet_kernel(char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	console_loglevel = 4;
+=======
+	console_loglevel = CONSOLE_LOGLEVEL_QUIET;
+>>>>>>> v3.18
 =======
 	console_loglevel = CONSOLE_LOGLEVEL_QUIET;
 >>>>>>> v3.18
@@ -300,7 +346,10 @@ static int __init repair_env_string(char *param, char *val, const char *unused)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Anything after -- gets handed straight to init. */
 static int __init set_init_arg(char *param, char *val, const char *unused)
 {
@@ -322,6 +371,9 @@ static int __init set_init_arg(char *param, char *val, const char *unused)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Unknown boot options get handed to init, unless they look like
@@ -348,7 +400,11 @@ static int __init unknown_bootoption(char *param, char *val, const char *unused)
 		for (i = 0; envp_init[i]; i++) {
 			if (i == MAX_INIT_ENVS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				panic_later = "Too many boot env vars at `%s'";
+=======
+				panic_later = "env";
+>>>>>>> v3.18
 =======
 				panic_later = "env";
 >>>>>>> v3.18
@@ -364,7 +420,11 @@ static int __init unknown_bootoption(char *param, char *val, const char *unused)
 		for (i = 0; argv_init[i]; i++) {
 			if (i == MAX_INIT_ARGS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				panic_later = "Too many boot init vars at `%s'";
+=======
+				panic_later = "init";
+>>>>>>> v3.18
 =======
 				panic_later = "init";
 >>>>>>> v3.18
@@ -429,11 +489,14 @@ static inline void smp_prepare_cpus(unsigned int maxcpus) { }
 static void __init setup_command_line(char *command_line)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	saved_command_line = alloc_bootmem(strlen (boot_command_line)+1);
 	static_command_line = alloc_bootmem(strlen (command_line)+1);
 	strcpy (saved_command_line, boot_command_line);
 	strcpy (static_command_line, command_line);
 =======
+=======
+>>>>>>> v3.18
 	saved_command_line =
 		memblock_virt_alloc(strlen(boot_command_line) + 1, 0);
 	initcall_command_line =
@@ -441,6 +504,9 @@ static void __init setup_command_line(char *command_line)
 	static_command_line = memblock_virt_alloc(strlen(command_line) + 1, 0);
 	strcpy(saved_command_line, boot_command_line);
 	strcpy(static_command_line, command_line);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -459,7 +525,10 @@ static noinline void __init_refok rest_init(void)
 {
 	int pid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct sched_param param = { .sched_priority = 1 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -470,7 +539,11 @@ static noinline void __init_refok rest_init(void)
 	 * we schedule it before we create kthreadd, will OOPS.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kernel_thread(kernel_init, NULL, CLONE_FS | CLONE_SIGHAND);
+=======
+	kernel_thread(kernel_init, NULL, CLONE_FS);
+>>>>>>> v3.18
 =======
 	kernel_thread(kernel_init, NULL, CLONE_FS);
 >>>>>>> v3.18
@@ -480,7 +553,10 @@ static noinline void __init_refok rest_init(void)
 	kthreadd_task = find_task_by_pid_ns(pid, &init_pid_ns);
 	rcu_read_unlock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sched_setscheduler_nocheck(kthreadd_task, SCHED_FIFO, &param);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	complete(&kthreadd_done);
@@ -522,8 +598,13 @@ void __init parse_early_options(char *cmdline)
 void __init parse_early_param(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static __initdata int done = 0;
 	static __initdata char tmp_cmdline[COMMAND_LINE_SIZE];
+=======
+	static int done __initdata;
+	static char tmp_cmdline[COMMAND_LINE_SIZE] __initdata;
+>>>>>>> v3.18
 =======
 	static int done __initdata;
 	static char tmp_cmdline[COMMAND_LINE_SIZE] __initdata;
@@ -576,6 +657,7 @@ static void __init mm_init(void)
 	kmem_cache_init();
 	percpu_init_late();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgtable_cache_init();
 	vmalloc_init();
 }
@@ -585,6 +667,8 @@ asmlinkage void __init start_kernel(void)
 	char * command_line;
 	extern const struct kernel_param __start___param[], __stop___param[];
 =======
+=======
+>>>>>>> v3.18
 	pgtable_init();
 	vmalloc_init();
 }
@@ -593,6 +677,9 @@ asmlinkage __visible void __init start_kernel(void)
 {
 	char *command_line;
 	char *after_dashes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -601,10 +688,13 @@ asmlinkage __visible void __init start_kernel(void)
 	 */
 	lockdep_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smp_setup_processor_id();
 	debug_objects_early_init();
 
 =======
+=======
+>>>>>>> v3.18
 	set_task_stack_end_magic(&init_task);
 	smp_setup_processor_id();
 	debug_objects_early_init();
@@ -614,6 +704,9 @@ asmlinkage __visible void __init start_kernel(void)
 	 */
 	boot_init_stack_canary();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cgroup_init_early();
 
@@ -629,11 +722,14 @@ asmlinkage __visible void __init start_kernel(void)
 	pr_notice("%s", linux_banner);
 	setup_arch(&command_line);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Set up the the initial canary ASAP:
 	 */
 	boot_init_stack_canary();
 	mm_init_owner(&init_mm, &init_task);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mm_init_cpumask(&init_mm);
@@ -648,10 +744,13 @@ asmlinkage __visible void __init start_kernel(void)
 	pr_notice("Kernel command line: %s\n", boot_command_line);
 	parse_early_param();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	parse_args("Booting kernel", static_command_line, __start___param,
 		   __stop___param - __start___param,
 		   -1, -1, &unknown_bootoption);
 =======
+=======
+>>>>>>> v3.18
 	after_dashes = parse_args("Booting kernel",
 				  static_command_line, __start___param,
 				  __stop___param - __start___param,
@@ -659,6 +758,9 @@ asmlinkage __visible void __init start_kernel(void)
 	if (!IS_ERR_OR_NULL(after_dashes))
 		parse_args("Setting init args", after_dashes, NULL, 0, -1, -1,
 			   set_init_arg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	jump_label_init();
@@ -686,18 +788,24 @@ asmlinkage __visible void __init start_kernel(void)
 	 */
 	preempt_disable();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN(!irqs_disabled(), "Interrupts were enabled *very* early, fixing it\n"))
 		local_irq_disable();
 	idr_init_cache();
 	rcu_init();
 	tick_nohz_init();
 =======
+=======
+>>>>>>> v3.18
 	if (WARN(!irqs_disabled(),
 		 "Interrupts were enabled *very* early, fixing it\n"))
 		local_irq_disable();
 	idr_init_cache();
 	rcu_init();
 	context_tracking_init();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	radix_tree_init();
 	/* init some links before init_ISA_irqs() */
@@ -705,6 +813,10 @@ asmlinkage __visible void __init start_kernel(void)
 	init_IRQ();
 	tick_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rcu_init_nohz();
+>>>>>>> v3.18
 =======
 	rcu_init_nohz();
 >>>>>>> v3.18
@@ -714,8 +826,13 @@ asmlinkage __visible void __init start_kernel(void)
 	timekeeping_init();
 	time_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	perf_event_init();
 	sched_clock_postinit();
+=======
+	sched_clock_postinit();
+	perf_event_init();
+>>>>>>> v3.18
 =======
 	sched_clock_postinit();
 	perf_event_init();
@@ -736,7 +853,12 @@ asmlinkage __visible void __init start_kernel(void)
 	console_init();
 	if (panic_later)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		panic(panic_later, panic_param);
+=======
+		panic("Too many boot %s vars at `%s'", panic_later,
+		      panic_param);
+>>>>>>> v3.18
 =======
 		panic("Too many boot %s vars at `%s'", panic_later,
 		      panic_param);
@@ -772,6 +894,10 @@ asmlinkage __visible void __init start_kernel(void)
 	pidmap_init();
 	anon_vma_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	acpi_early_init();
+>>>>>>> v3.18
 =======
 	acpi_early_init();
 >>>>>>> v3.18
@@ -796,9 +922,13 @@ asmlinkage __visible void __init start_kernel(void)
 	/* rootfs populating might need page-writeback */
 	page_writeback_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PROC_FS
 	proc_root_init();
 #endif
+=======
+	proc_root_init();
+>>>>>>> v3.18
 =======
 	proc_root_init();
 >>>>>>> v3.18
@@ -810,7 +940,10 @@ asmlinkage __visible void __init start_kernel(void)
 	check_bugs();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_early_init(); /* before LAPIC and SMP init */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sfi_init_late();
@@ -841,8 +974,11 @@ bool initcall_debug;
 core_param(initcall_debug, initcall_debug, bool, 0644);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char msgbuf[64];
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KALLSYMS
 struct blacklist_entry {
 	struct list_head next;
@@ -906,6 +1042,9 @@ static bool __init_or_module initcall_blacklisted(initcall_t fn)
 }
 #endif
 __setup("initcall_blacklist=", initcall_blacklist);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __init_or_module do_one_initcall_debug(initcall_t fn)
@@ -915,7 +1054,11 @@ static int __init_or_module do_one_initcall_debug(initcall_t fn)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("calling  %pF @ %i\n", fn, task_pid_nr(current));
+=======
+	printk(KERN_DEBUG "calling  %pF @ %i\n", fn, task_pid_nr(current));
+>>>>>>> v3.18
 =======
 	printk(KERN_DEBUG "calling  %pF @ %i\n", fn, task_pid_nr(current));
 >>>>>>> v3.18
@@ -925,7 +1068,11 @@ static int __init_or_module do_one_initcall_debug(initcall_t fn)
 	delta = ktime_sub(rettime, calltime);
 	duration = (unsigned long long) ktime_to_ns(delta) >> 10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("initcall %pF returned %d after %lld usecs\n",
+=======
+	printk(KERN_DEBUG "initcall %pF returned %d after %lld usecs\n",
+>>>>>>> v3.18
 =======
 	printk(KERN_DEBUG "initcall %pF returned %d after %lld usecs\n",
 >>>>>>> v3.18
@@ -939,11 +1086,17 @@ int __init_or_module do_one_initcall(initcall_t fn)
 	int count = preempt_count();
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	char msgbuf[64];
 
 	if (initcall_blacklisted(fn))
 		return -EPERM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (initcall_debug)
@@ -956,7 +1109,11 @@ int __init_or_module do_one_initcall(initcall_t fn)
 	if (preempt_count() != count) {
 		sprintf(msgbuf, "preemption imbalance ");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		preempt_count() = count;
+=======
+		preempt_count_set(count);
+>>>>>>> v3.18
 =======
 		preempt_count_set(count);
 >>>>>>> v3.18
@@ -1009,6 +1166,7 @@ static char *initcall_level_names[] __initdata = {
 static void __init do_initcall_level(int level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern const struct kernel_param __start___param[], __stop___param[];
 	initcall_t *fn;
 
@@ -1016,11 +1174,16 @@ static void __init do_initcall_level(int level)
 	parse_args(initcall_level_names[level],
 		   static_command_line, __start___param,
 =======
+=======
+>>>>>>> v3.18
 	initcall_t *fn;
 
 	strcpy(initcall_command_line, saved_command_line);
 	parse_args(initcall_level_names[level],
 		   initcall_command_line, __start___param,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		   __stop___param - __start___param,
 		   level, level,
@@ -1081,7 +1244,11 @@ static int run_init_process(const char *init_filename)
 {
 	argv_init[0] = init_filename;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return do_execve(init_filename,
+=======
+	return do_execve(getname_kernel(init_filename),
+>>>>>>> v3.18
 =======
 	return do_execve(getname_kernel(init_filename),
 >>>>>>> v3.18
@@ -1090,7 +1257,10 @@ static int run_init_process(const char *init_filename)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int try_to_run_init_process(const char *init_filename)
 {
 	int ret;
@@ -1105,12 +1275,20 @@ static int try_to_run_init_process(const char *init_filename)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static noinline void __init kernel_init_freeable(void);
 
 static int __ref kernel_init(void *unused)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+
+>>>>>>> v3.18
 =======
 	int ret;
 
@@ -1127,15 +1305,21 @@ static int __ref kernel_init(void *unused)
 
 	if (ramdisk_execute_command) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!run_init_process(ramdisk_execute_command))
 			return 0;
 		pr_err("Failed to execute %s\n", ramdisk_execute_command);
 =======
+=======
+>>>>>>> v3.18
 		ret = run_init_process(ramdisk_execute_command);
 		if (!ret)
 			return 0;
 		pr_err("Failed to execute %s (error %d)\n",
 		       ramdisk_execute_command, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1146,6 +1330,7 @@ static int __ref kernel_init(void *unused)
 	 * trying to recover a really broken machine.
 	 */
 	if (execute_command) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!run_init_process(execute_command))
 			return 0;
@@ -1160,6 +1345,8 @@ static int __ref kernel_init(void *unused)
 
 	panic("No init found.  Try passing init= option to kernel. "
 =======
+=======
+>>>>>>> v3.18
 		ret = run_init_process(execute_command);
 		if (!ret)
 			return 0;
@@ -1173,6 +1360,9 @@ static int __ref kernel_init(void *unused)
 		return 0;
 
 	panic("No working init found.  Try passing init= option to kernel. "
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      "See Linux Documentation/init.txt for guidance.");
 }

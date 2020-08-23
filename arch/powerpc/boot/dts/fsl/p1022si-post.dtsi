@@ -41,7 +41,12 @@
 	 */
 	compatible = "fsl,p1022-elbc", "fsl,elbc";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	interrupts = <19 2 0 0>;
+=======
+	interrupts = <19 2 0 0>,
+		     <16 2 0 0>;
+>>>>>>> v3.18
 =======
 	interrupts = <19 2 0 0>,
 		     <16 2 0 0>;

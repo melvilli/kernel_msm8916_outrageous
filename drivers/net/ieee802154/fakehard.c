@@ -64,17 +64,23 @@ static struct wpan_phy *fake_get_phy(const struct net_device *dev)
  * Return the ID of the PAN from the PIB.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 fake_get_pan_id(const struct net_device *dev)
 {
 	BUG_ON(dev->type != ARPHRD_IEEE802154);
 
 	return 0xeba1;
 =======
+=======
+>>>>>>> v3.18
 static __le16 fake_get_pan_id(const struct net_device *dev)
 {
 	BUG_ON(dev->type != ARPHRD_IEEE802154);
 
 	return cpu_to_le16(0xeba1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -87,17 +93,23 @@ static __le16 fake_get_pan_id(const struct net_device *dev)
  * then this should return 0xFFFF to indicate a lack of association.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 fake_get_short_addr(const struct net_device *dev)
 {
 	BUG_ON(dev->type != ARPHRD_IEEE802154);
 
 	return 0x1;
 =======
+=======
+>>>>>>> v3.18
 static __le16 fake_get_short_addr(const struct net_device *dev)
 {
 	BUG_ON(dev->type != ARPHRD_IEEE802154);
 
 	return cpu_to_le16(0x1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -166,7 +178,11 @@ static int fake_assoc_req(struct net_device *dev,
  */
 static int fake_assoc_resp(struct net_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct ieee802154_addr *addr, u16 short_addr, u8 status)
+=======
+		struct ieee802154_addr *addr, __le16 short_addr, u8 status)
+>>>>>>> v3.18
 =======
 		struct ieee802154_addr *addr, __le16 short_addr, u8 status)
 >>>>>>> v3.18
@@ -212,15 +228,21 @@ static int fake_disassoc_req(struct net_device *dev,
  * document, with 7.3.8 describing coordinator realignment.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fake_start_req(struct net_device *dev, struct ieee802154_addr *addr,
 				u8 channel, u8 page,
 				u8 bcn_ord, u8 sf_ord, u8 pan_coord, u8 blx,
 				u8 coord_realign)
 =======
+=======
+>>>>>>> v3.18
 static int fake_start_req(struct net_device *dev,
 			  struct ieee802154_addr *addr, u8 channel, u8 page,
 			  u8 bcn_ord, u8 sf_ord, u8 pan_coord, u8 blx,
 			  u8 coord_realign)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct wpan_phy *phy = fake_to_phy(dev);
@@ -309,8 +331,13 @@ static int ieee802154_fake_ioctl(struct net_device *dev, struct ifreq *ifr,
 	case SIOCGIFADDR:
 		/* FIXME: fixed here, get from device IRL */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pan_id = fake_get_pan_id(dev);
 		short_addr = fake_get_short_addr(dev);
+=======
+		pan_id = le16_to_cpu(fake_get_pan_id(dev));
+		short_addr = le16_to_cpu(fake_get_short_addr(dev));
+>>>>>>> v3.18
 =======
 		pan_id = le16_to_cpu(fake_get_pan_id(dev));
 		short_addr = le16_to_cpu(fake_get_short_addr(dev));
@@ -376,7 +403,12 @@ static int ieee802154fake_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(struct fakehard_priv), "hardwpan%d", ieee802154_fake_setup);
+=======
+	dev = alloc_netdev(sizeof(struct fakehard_priv), "hardwpan%d",
+			   NET_NAME_UNKNOWN, ieee802154_fake_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(sizeof(struct fakehard_priv), "hardwpan%d",
 			   NET_NAME_UNKNOWN, ieee802154_fake_setup);

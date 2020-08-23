@@ -147,10 +147,13 @@ LWN.net:
 		http://lwn.net/Articles/driver-porting/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 KernelTrap:
 	Occasional Linux kernel articles and developer interviews
 	http://kerneltrap.org/
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 KernelNewbies:

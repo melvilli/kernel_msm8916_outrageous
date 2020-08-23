@@ -23,7 +23,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/tty.h>
@@ -158,8 +161,14 @@ static void st_reg_complete(struct st_data_s *st_gdata, char err)
 			pr_info("protocol %d's cb sent %d\n", i, err);
 			if (err) { /* cleanup registered protocol */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				st_gdata->protos_registered--;
 				st_gdata->is_registered[i] = false;
+=======
+				st_gdata->is_registered[i] = false;
+				if (st_gdata->protos_registered)
+					st_gdata->protos_registered--;
+>>>>>>> v3.18
 =======
 				st_gdata->is_registered[i] = false;
 				if (st_gdata->protos_registered)
@@ -572,7 +581,13 @@ long st_register(struct st_proto_s *new_proto)
 			    (test_bit(ST_REG_PENDING, &st_gdata->st_state))) {
 				pr_err(" KIM failure complete callback ");
 <<<<<<< HEAD
+<<<<<<< HEAD
 				st_reg_complete(st_gdata, err);
+=======
+				spin_lock_irqsave(&st_gdata->lock, flags);
+				st_reg_complete(st_gdata, err);
+				spin_unlock_irqrestore(&st_gdata->lock, flags);
+>>>>>>> v3.18
 =======
 				spin_lock_irqsave(&st_gdata->lock, flags);
 				st_reg_complete(st_gdata, err);
@@ -654,6 +669,7 @@ long st_unregister(struct st_proto_s *proto)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st_gdata->protos_registered--;
 	remove_channel_from_table(st_gdata, proto);
 	spin_unlock_irqrestore(&st_gdata->lock, flags);
@@ -663,12 +679,17 @@ long st_unregister(struct st_proto_s *proto)
 		st_gdata->protos_registered = ST_EMPTY;
 
 =======
+=======
+>>>>>>> v3.18
 	if (st_gdata->protos_registered)
 		st_gdata->protos_registered--;
 
 	remove_channel_from_table(st_gdata, proto);
 	spin_unlock_irqrestore(&st_gdata->lock, flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((st_gdata->protos_registered == ST_EMPTY) &&
 	    (!test_bit(ST_REG_PENDING, &st_gdata->st_state))) {
@@ -835,7 +856,11 @@ static void st_tty_flush_buffer(struct tty_struct *tty)
 	st_gdata->tx_skb = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty->ops->flush_buffer(tty);
+=======
+	tty_driver_flush_buffer(tty);
+>>>>>>> v3.18
 =======
 	tty_driver_flush_buffer(tty);
 >>>>>>> v3.18

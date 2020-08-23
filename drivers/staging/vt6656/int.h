@@ -33,6 +33,7 @@
 #include "device.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct tagSINTData {
 	u8 byTSR0;
 	u8 byPkt0;
@@ -60,6 +61,8 @@ SINTData, *PSINTData;
 void INTvWorkItem(struct vnt_private *);
 void INTnsProcessData(struct vnt_private *);
 =======
+=======
+>>>>>>> v3.18
 struct vnt_interrupt_data {
 	u8 tsr0;
 	u8 pkt0;
@@ -85,6 +88,9 @@ struct vnt_interrupt_data {
 
 void vnt_int_start_interrupt(struct vnt_private *);
 void vnt_int_process_data(struct vnt_private *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __INT_H__ */

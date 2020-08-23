@@ -23,8 +23,11 @@
 #include <sound/pcm_params.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/dma.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_data/asoc-s3c.h>
@@ -44,6 +47,10 @@ enum samsung_dai_type {
 struct samsung_i2s_dai_data {
 	int dai_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 quirks;
+>>>>>>> v3.18
 =======
 	u32 quirks;
 >>>>>>> v3.18
@@ -77,6 +84,11 @@ struct i2s_dai {
 #define DAI_MANAGER	(1 << 1) /* Dai is the manager */
 	unsigned mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* CDCLK pin direction: 0  - input, 1 - output */
+	unsigned int cdclk_out:1;
+>>>>>>> v3.18
 =======
 	/* CDCLK pin direction: 0  - input, 1 - output */
 	unsigned int cdclk_out:1;
@@ -211,8 +223,11 @@ static inline bool is_manager(struct i2s_dai *i2s)
 static inline unsigned get_rfs(struct i2s_dai *i2s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rfs = (readl(i2s->addr + I2SMOD) >> 3) & 0x3;
 =======
+=======
+>>>>>>> v3.18
 	u32 rfs;
 
 	if (i2s->quirks & QUIRK_SUPPORTS_TDM)
@@ -220,6 +235,9 @@ static inline unsigned get_rfs(struct i2s_dai *i2s)
 	else
 		rfs = (readl(i2s->addr + I2SMOD) >> MOD_RCLK_SHIFT);
 	rfs &= MOD_RCLK_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (rfs) {
@@ -234,6 +252,7 @@ static inline unsigned get_rfs(struct i2s_dai *i2s)
 static inline void set_rfs(struct i2s_dai *i2s, unsigned rfs)
 {
 	u32 mod = readl(i2s->addr + I2SMOD);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	mod &= ~MOD_RCLK_MASK;
@@ -251,6 +270,8 @@ static inline void set_rfs(struct i2s_dai *i2s, unsigned rfs)
 	default:
 		mod |= MOD_RCLK_256FS;
 =======
+=======
+>>>>>>> v3.18
 	int rfs_shift;
 
 	if (i2s->quirks & QUIRK_SUPPORTS_TDM)
@@ -271,6 +292,9 @@ static inline void set_rfs(struct i2s_dai *i2s, unsigned rfs)
 		break;
 	default:
 		mod |= (MOD_RCLK_256FS << rfs_shift);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -282,10 +306,13 @@ static inline void set_rfs(struct i2s_dai *i2s, unsigned rfs)
 static inline unsigned get_bfs(struct i2s_dai *i2s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 bfs = (readl(i2s->addr + I2SMOD) >> 1) & 0x3;
 
 	switch (bfs) {
 =======
+=======
+>>>>>>> v3.18
 	u32 bfs;
 
 	if (i2s->quirks & QUIRK_SUPPORTS_TDM) {
@@ -302,6 +329,9 @@ static inline unsigned get_bfs(struct i2s_dai *i2s)
 	case 6: return 128;
 	case 5: return 96;
 	case 4: return 64;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 3: return 24;
 	case 2: return 16;
@@ -314,6 +344,7 @@ static inline unsigned get_bfs(struct i2s_dai *i2s)
 static inline void set_bfs(struct i2s_dai *i2s, unsigned bfs)
 {
 	u32 mod = readl(i2s->addr + I2SMOD);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	mod &= ~MOD_BCLK_MASK;
@@ -331,6 +362,8 @@ static inline void set_bfs(struct i2s_dai *i2s, unsigned bfs)
 	case 16:
 		mod |= MOD_BCLK_16FS;
 =======
+=======
+>>>>>>> v3.18
 	int bfs_shift;
 	int tdm = i2s->quirks & QUIRK_SUPPORTS_TDM;
 
@@ -375,6 +408,9 @@ static inline void set_bfs(struct i2s_dai *i2s, unsigned bfs)
 		break;
 	case 256:
 		mod |= (EXYNOS5420_MOD_BCLK_256FS << bfs_shift);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -511,11 +547,17 @@ static int i2s_set_sysclk(struct snd_soc_dai *dai,
 
 	switch (clk_id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case SAMSUNG_I2S_OPCLK:
 		mod &= ~MOD_OPCLK_MASK;
 		mod |= dir;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case SAMSUNG_I2S_CDCLK:
 		/* Shouldn't matter in GATING(CLOCK_IN) mode */
@@ -523,7 +565,11 @@ static int i2s_set_sysclk(struct snd_soc_dai *dai,
 			rfs = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((rfs && other->rfs && (other->rfs != rfs)) ||
+=======
+		if ((rfs && other && other->rfs && (other->rfs != rfs)) ||
+>>>>>>> v3.18
 =======
 		if ((rfs && other && other->rfs && (other->rfs != rfs)) ||
 >>>>>>> v3.18
@@ -555,7 +601,11 @@ static int i2s_set_sysclk(struct snd_soc_dai *dai,
 
 		if (!any_active(i2s)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (i2s->op_clk) {
+=======
+			if (i2s->op_clk && !IS_ERR(i2s->op_clk)) {
+>>>>>>> v3.18
 =======
 			if (i2s->op_clk && !IS_ERR(i2s->op_clk)) {
 >>>>>>> v3.18
@@ -577,11 +627,17 @@ static int i2s_set_sysclk(struct snd_soc_dai *dai,
 				i2s->op_clk = clk_get(&i2s->pdev->dev,
 						"i2s_opclk0");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			if (WARN_ON(IS_ERR(i2s->op_clk)))
 				return PTR_ERR(i2s->op_clk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			clk_prepare_enable(i2s->op_clk);
 			i2s->rclk_srcrate = clk_get_rate(i2s->op_clk);
@@ -625,6 +681,7 @@ static int i2s_set_fmt(struct snd_soc_dai *dai,
 	struct i2s_dai *i2s = to_info(dai);
 	u32 mod = readl(i2s->addr + I2SMOD);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 tmp = 0;
 
 	/* Format is priority */
@@ -640,6 +697,8 @@ static int i2s_set_fmt(struct snd_soc_dai *dai,
 	case SND_SOC_DAIFMT_I2S:
 		tmp |= MOD_SDF_IIS;
 =======
+=======
+>>>>>>> v3.18
 	int lrp_shift, sdf_shift, sdf_mask, lrp_rlow;
 	u32 tmp = 0;
 
@@ -666,6 +725,9 @@ static int i2s_set_fmt(struct snd_soc_dai *dai,
 		break;
 	case SND_SOC_DAIFMT_I2S:
 		tmp |= (MOD_SDF_IIS << sdf_shift);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -682,15 +744,21 @@ static int i2s_set_fmt(struct snd_soc_dai *dai,
 		break;
 	case SND_SOC_DAIFMT_NB_IF:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (tmp & MOD_LR_RLOW)
 			tmp &= ~MOD_LR_RLOW;
 		else
 			tmp |= MOD_LR_RLOW;
 =======
+=======
+>>>>>>> v3.18
 		if (tmp & lrp_rlow)
 			tmp &= ~lrp_rlow;
 		else
 			tmp |= lrp_rlow;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -714,16 +782,22 @@ static int i2s_set_fmt(struct snd_soc_dai *dai,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (any_active(i2s) &&
 			((mod & (MOD_SDF_MASK | MOD_LR_RLOW
 				| MOD_SLAVE)) != tmp)) {
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Don't change the I2S mode if any controller is active on this
 	 * channel.
 	 */
 	if (any_active(i2s) &&
 		((mod & (sdf_mask | lrp_rlow | MOD_SLAVE)) != tmp)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(&i2s->pdev->dev,
 				"%s:%d Other DAI busy\n", __func__, __LINE__);
@@ -731,7 +805,11 @@ static int i2s_set_fmt(struct snd_soc_dai *dai,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mod &= ~(MOD_SDF_MASK | MOD_LR_RLOW | MOD_SLAVE);
+=======
+	mod &= ~(sdf_mask | lrp_rlow | MOD_SLAVE);
+>>>>>>> v3.18
 =======
 	mod &= ~(sdf_mask | lrp_rlow | MOD_SLAVE);
 >>>>>>> v3.18
@@ -784,8 +862,13 @@ static int i2s_hw_params(struct snd_pcm_substream *substream,
 		mod &= ~MOD_BLC_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S8:
+=======
+	switch (params_width(params)) {
+	case 8:
+>>>>>>> v3.18
 =======
 	switch (params_width(params)) {
 	case 8:
@@ -798,7 +881,11 @@ static int i2s_hw_params(struct snd_pcm_substream *substream,
 			mod |= MOD_BLC_8BIT;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SNDRV_PCM_FORMAT_S16_LE:
+=======
+	case 16:
+>>>>>>> v3.18
 =======
 	case 16:
 >>>>>>> v3.18
@@ -810,7 +897,11 @@ static int i2s_hw_params(struct snd_pcm_substream *substream,
 			mod |= MOD_BLC_16BIT;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SNDRV_PCM_FORMAT_S24_LE:
+=======
+	case 24:
+>>>>>>> v3.18
 =======
 	case 24:
 >>>>>>> v3.18
@@ -829,12 +920,16 @@ static int i2s_hw_params(struct snd_pcm_substream *substream,
 	writel(mod, i2s->addr + I2SMOD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK)
 		snd_soc_dai_set_dma_data(dai, substream,
 			(void *)&i2s->dma_playback);
 	else
 		snd_soc_dai_set_dma_data(dai, substream,
 			(void *)&i2s->dma_capture);
+=======
+	samsung_asoc_init_dma_data(dai, &i2s->dma_playback, &i2s->dma_capture);
+>>>>>>> v3.18
 =======
 	samsung_asoc_init_dma_data(dai, &i2s->dma_playback, &i2s->dma_capture);
 >>>>>>> v3.18
@@ -862,9 +957,12 @@ static int i2s_startup(struct snd_pcm_substream *substream,
 		i2s->mode |= DAI_MANAGER;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Enforce set_sysclk in Master mode */
 	i2s->rclk_srcrate = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!any_active(i2s) && (i2s->quirks & QUIRK_NEED_RSTCLR))
@@ -873,6 +971,12 @@ static int i2s_startup(struct snd_pcm_substream *substream,
 	spin_unlock_irqrestore(&lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!is_opened(other) && i2s->cdclk_out)
+		i2s_set_sysclk(dai, SAMSUNG_I2S_CDCLK,
+				0, SND_SOC_CLOCK_OUT);
+>>>>>>> v3.18
 =======
 	if (!is_opened(other) && i2s->cdclk_out)
 		i2s_set_sysclk(dai, SAMSUNG_I2S_CDCLK,
@@ -894,10 +998,13 @@ static void i2s_shutdown(struct snd_pcm_substream *substream,
 	i2s->mode &= ~DAI_MANAGER;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_opened(other))
 		other->mode |= DAI_MANAGER;
 
 =======
+=======
+>>>>>>> v3.18
 	if (is_opened(other)) {
 		other->mode |= DAI_MANAGER;
 	} else {
@@ -906,6 +1013,9 @@ static void i2s_shutdown(struct snd_pcm_substream *substream,
 		if (other)
 			other->cdclk_out = i2s->cdclk_out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Reset any constraint on RFS and BFS */
 	i2s->rfs = 0;
@@ -962,6 +1072,7 @@ static int config_setup(struct i2s_dai *i2s)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Don't bother RFS, BFS & PSR in Slave mode */
 	if (is_slave(i2s))
 		return 0;
@@ -970,6 +1081,8 @@ static int config_setup(struct i2s_dai *i2s)
 	set_rfs(i2s, rfs);
 
 =======
+=======
+>>>>>>> v3.18
 	set_bfs(i2s, bfs);
 	set_rfs(i2s, rfs);
 
@@ -977,6 +1090,9 @@ static int config_setup(struct i2s_dai *i2s)
 	if (is_slave(i2s))
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(i2s->quirks & QUIRK_NO_MUXPSR)) {
 		psr = i2s->rclk_srcrate / i2s->frmclk / rfs;
@@ -1110,14 +1226,20 @@ static int samsung_i2s_dai_probe(struct snd_soc_dai *dai)
 	struct i2s_dai *other = i2s->pri_dai ? : i2s->sec_dai;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (other && other->clk) /* If this is probe on secondary */
 		goto probe_exit;
 =======
+=======
+>>>>>>> v3.18
 	if (other && other->clk) { /* If this is probe on secondary */
 		samsung_asoc_init_dma_data(dai, &other->sec_dai->dma_playback,
 					   NULL);
 		goto probe_exit;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	i2s->addr = ioremap(i2s->base, 0x100);
@@ -1135,6 +1257,11 @@ static int samsung_i2s_dai_probe(struct snd_soc_dai *dai)
 	clk_prepare_enable(i2s->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	samsung_asoc_init_dma_data(dai, &i2s->dma_playback, &i2s->dma_capture);
+
+>>>>>>> v3.18
 =======
 	samsung_asoc_init_dma_data(dai, &i2s->dma_playback, &i2s->dma_capture);
 
@@ -1156,6 +1283,10 @@ probe_exit:
 	i2s->rfs = 0;
 	i2s->bfs = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	i2s->rclk_srcrate = 0;
+>>>>>>> v3.18
 =======
 	i2s->rclk_srcrate = 0;
 >>>>>>> v3.18
@@ -1234,7 +1365,11 @@ static struct i2s_dai *i2s_alloc_dai(struct platform_device *pdev, bool sec)
 	i2s->i2s_dai_drv.suspend = i2s_suspend;
 	i2s->i2s_dai_drv.resume = i2s_resume;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2s->i2s_dai_drv.playback.channels_min = 2;
+=======
+	i2s->i2s_dai_drv.playback.channels_min = 1;
+>>>>>>> v3.18
 =======
 	i2s->i2s_dai_drv.playback.channels_min = 1;
 >>>>>>> v3.18
@@ -1251,15 +1386,21 @@ static struct i2s_dai *i2s_alloc_dai(struct platform_device *pdev, bool sec)
 	} else {	/* Create a new platform_device for Secondary */
 		i2s->pdev = platform_device_alloc("samsung-i2s-sec", -1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (IS_ERR(i2s->pdev))
 			return NULL;
 
 =======
+=======
+>>>>>>> v3.18
 		if (!i2s->pdev)
 			return NULL;
 
 		i2s->pdev->dev.parent = &pdev->dev;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		platform_set_drvdata(i2s->pdev, i2s);
 		ret = platform_device_add(i2s->pdev);
@@ -1270,6 +1411,7 @@ static struct i2s_dai *i2s_alloc_dai(struct platform_device *pdev, bool sec)
 	return i2s;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_OF
 static int samsung_i2s_parse_dt_gpio(struct i2s_dai *i2s)
@@ -1332,6 +1474,8 @@ static inline int samsung_i2s_get_driver_data(struct platform_device *pdev)
 #endif
 		return platform_get_device_id(pdev)->driver_data;
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id exynos_i2s_match[];
 
 static inline const struct samsung_i2s_dai_data *samsung_i2s_get_driver_data(
@@ -1346,6 +1490,9 @@ static inline const struct samsung_i2s_dai_data *samsung_i2s_get_driver_data(
 #endif
 		return (struct samsung_i2s_dai_data *)
 				platform_get_device_id(pdev)->driver_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1378,6 +1525,7 @@ static int samsung_i2s_probe(struct platform_device *pdev)
 	u32 regs_base, quirks = 0, idma_addr = 0;
 	struct device_node *np = pdev->dev.of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum samsung_dai_type samsung_dai_type;
 	int ret = 0;
 
@@ -1386,6 +1534,8 @@ static int samsung_i2s_probe(struct platform_device *pdev)
 
 	if (samsung_dai_type == TYPE_SEC) {
 =======
+=======
+>>>>>>> v3.18
 	const struct samsung_i2s_dai_data *i2s_dai_data;
 	int ret = 0;
 
@@ -1393,6 +1543,9 @@ static int samsung_i2s_probe(struct platform_device *pdev)
 	i2s_dai_data = samsung_i2s_get_driver_data(pdev);
 
 	if (i2s_dai_data->dai_type == TYPE_SEC) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sec_dai = dev_get_drvdata(&pdev->dev);
 		if (!sec_dai) {
@@ -1400,15 +1553,21 @@ static int samsung_i2s_probe(struct platform_device *pdev)
 			return -EFAULT;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_soc_register_component(&sec_dai->pdev->dev,
 					   &samsung_i2s_component,
 					   &sec_dai->i2s_dai_drv, 1);
 		asoc_dma_platform_register(&pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 		devm_snd_soc_register_component(&sec_dai->pdev->dev,
 						&samsung_i2s_component,
 						&sec_dai->i2s_dai_drv, 1);
 		samsung_asoc_dma_platform_register(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	}
@@ -1450,6 +1609,7 @@ static int samsung_i2s_probe(struct platform_device *pdev)
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (of_find_property(np, "samsung,supports-6ch", NULL))
 			quirks |= QUIRK_PRI_6CHAN;
 
@@ -1459,6 +1619,9 @@ static int samsung_i2s_probe(struct platform_device *pdev)
 		if (of_find_property(np, "samsung,supports-rstclr", NULL))
 			quirks |= QUIRK_NEED_RSTCLR;
 
+=======
+		quirks = i2s_dai_data->quirks;
+>>>>>>> v3.18
 =======
 		quirks = i2s_dai_data->quirks;
 >>>>>>> v3.18
@@ -1488,11 +1651,15 @@ static int samsung_i2s_probe(struct platform_device *pdev)
 	pri_dai->dma_playback.dma_addr = regs_base + I2STXD;
 	pri_dai->dma_capture.dma_addr = regs_base + I2SRXD;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pri_dai->dma_playback.client =
 		(struct s3c2410_dma_client *)&pri_dai->dma_playback;
 	pri_dai->dma_playback.ch_name = "tx";
 	pri_dai->dma_capture.client =
 		(struct s3c2410_dma_client *)&pri_dai->dma_capture;
+=======
+	pri_dai->dma_playback.ch_name = "tx";
+>>>>>>> v3.18
 =======
 	pri_dai->dma_playback.ch_name = "tx";
 >>>>>>> v3.18
@@ -1514,8 +1681,11 @@ static int samsung_i2s_probe(struct platform_device *pdev)
 		}
 		sec_dai->dma_playback.dma_addr = regs_base + I2STXDS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sec_dai->dma_playback.client =
 			(struct s3c2410_dma_client *)&sec_dai->dma_playback;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		sec_dai->dma_playback.ch_name = "tx-sec";
@@ -1534,6 +1704,7 @@ static int samsung_i2s_probe(struct platform_device *pdev)
 		pri_dai->sec_dai = sec_dai;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (np) {
 		if (samsung_i2s_parse_dt_gpio(pri_dai)) {
@@ -1560,6 +1731,8 @@ static int samsung_i2s_probe(struct platform_device *pdev)
 err:
 	release_mem_region(regs_base, resource_size(res));
 =======
+=======
+>>>>>>> v3.18
 	if (i2s_pdata && i2s_pdata->cfg_gpio && i2s_pdata->cfg_gpio(pdev)) {
 		dev_err(&pdev->dev, "Unable to configure gpio\n");
 		ret = -EINVAL;
@@ -1578,6 +1751,9 @@ err:
 err:
 	if (res)
 		release_mem_region(regs_base, resource_size(res));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1588,7 +1764,10 @@ static int samsung_i2s_remove(struct platform_device *pdev)
 	struct i2s_dai *i2s, *other;
 	struct resource *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s3c_audio_pdata *i2s_pdata = pdev->dev.platform_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1596,9 +1775,12 @@ static int samsung_i2s_remove(struct platform_device *pdev)
 	other = i2s->pri_dai ? : i2s->sec_dai;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!i2s_pdata->cfg_gpio && pdev->dev.of_node)
 		samsung_i2s_dt_gpio_free(i2s->pri_dai);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (other) {
@@ -1615,6 +1797,7 @@ static int samsung_i2s_remove(struct platform_device *pdev)
 	i2s->sec_dai = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asoc_dma_platform_unregister(&pdev->dev);
 	snd_soc_unregister_component(&pdev->dev);
 
@@ -1629,6 +1812,8 @@ static struct platform_device_id samsung_i2s_driver_ids[] = {
 		.name           = "samsung-i2s-sec",
 		.driver_data	= TYPE_SEC,
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1663,6 +1848,9 @@ static struct platform_device_id samsung_i2s_driver_ids[] = {
 	}, {
 		.name           = "samsung-i2s-sec",
 		.driver_data    = (kernel_ulong_t)&samsung_dai_type_sec,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{},
@@ -1670,6 +1858,7 @@ static struct platform_device_id samsung_i2s_driver_ids[] = {
 MODULE_DEVICE_TABLE(platform, samsung_i2s_driver_ids);
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct samsung_i2s_dai_data samsung_i2s_dai_data_array[] = {
 	[TYPE_PRI] = { TYPE_PRI },
@@ -1680,6 +1869,8 @@ static const struct of_device_id exynos_i2s_match[] = {
 	{ .compatible = "samsung,i2s-v5",
 	  .data = &samsung_i2s_dai_data_array[TYPE_PRI],
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id exynos_i2s_match[] = {
 	{
 		.compatible = "samsung,s3c6410-i2s",
@@ -1690,6 +1881,9 @@ static const struct of_device_id exynos_i2s_match[] = {
 	}, {
 		.compatible = "samsung,exynos5420-i2s",
 		.data = &i2sv6_dai_type,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{},

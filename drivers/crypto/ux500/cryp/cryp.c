@@ -292,7 +292,11 @@ void cryp_save_device_context(struct cryp_device_data *device_data,
 {
 	enum cryp_algo_mode algomode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cryp_register *src_reg = device_data->base;
+=======
+	struct cryp_register __iomem *src_reg = device_data->base;
+>>>>>>> v3.18
 =======
 	struct cryp_register __iomem *src_reg = device_data->base;
 >>>>>>> v3.18
@@ -354,7 +358,11 @@ void cryp_restore_device_context(struct cryp_device_data *device_data,
 				 struct cryp_device_context *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cryp_register *reg = device_data->base;
+=======
+	struct cryp_register __iomem *reg = device_data->base;
+>>>>>>> v3.18
 =======
 	struct cryp_register __iomem *reg = device_data->base;
 >>>>>>> v3.18

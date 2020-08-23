@@ -73,6 +73,10 @@ int rtc_set_time(struct rtc_device *rtc, struct rtc_time *tm)
 		err = -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pm_stay_awake(rtc->dev.parent);
+>>>>>>> v3.18
 =======
 	pm_stay_awake(rtc->dev.parent);
 >>>>>>> v3.18
@@ -114,16 +118,22 @@ int rtc_set_mmss(struct rtc_device *rtc, unsigned long secs)
 						&new);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	else
 		err = -EINVAL;
 
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		err = -EINVAL;
 	}
 
 	pm_stay_awake(rtc->dev.parent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&rtc->ops_lock);
 	/* A timer might have just expired */
@@ -303,7 +313,12 @@ int __rtc_read_alarm(struct rtc_device *rtc, struct rtc_wkalrm *alarm)
 		do {
 			alarm->time.tm_year++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} while (rtc_valid_tm(&alarm->time) != 0);
+=======
+		} while (!is_leap_year(alarm->time.tm_year + 1900)
+			&& rtc_valid_tm(&alarm->time) != 0);
+>>>>>>> v3.18
 =======
 		} while (!is_leap_year(alarm->time.tm_year + 1900)
 			&& rtc_valid_tm(&alarm->time) != 0);
@@ -316,8 +331,11 @@ int __rtc_read_alarm(struct rtc_device *rtc, struct rtc_wkalrm *alarm)
 
 done:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	err = rtc_valid_tm(&alarm->time);
 
 	if (err) {
@@ -328,6 +346,9 @@ done:
 	}
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -367,6 +388,11 @@ static int __rtc_set_alarm(struct rtc_device *rtc, struct rtc_wkalrm *alarm)
 	/* Make sure we're not setting alarms in the past */
 	err = __rtc_read_time(rtc, &tm);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (err)
+		return err;
+>>>>>>> v3.18
 =======
 	if (err)
 		return err;
@@ -403,6 +429,7 @@ int rtc_set_alarm(struct rtc_device *rtc, struct rtc_wkalrm *alarm)
 	if (err)
 		return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rtc->aie_timer.enabled) {
 		rtc_timer_remove(rtc, &rtc->aie_timer);
 	}
@@ -412,6 +439,8 @@ int rtc_set_alarm(struct rtc_device *rtc, struct rtc_wkalrm *alarm)
 		err = rtc_timer_enqueue(rtc, &rtc->aie_timer);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (rtc->aie_timer.enabled)
 		rtc_timer_remove(rtc, &rtc->aie_timer);
 
@@ -420,6 +449,9 @@ int rtc_set_alarm(struct rtc_device *rtc, struct rtc_wkalrm *alarm)
 	if (alarm->enabled)
 		err = rtc_timer_enqueue(rtc, &rtc->aie_timer);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&rtc->ops_lock);
 	return err;
@@ -629,6 +661,12 @@ void rtc_update_irq(struct rtc_device *rtc,
 		unsigned long num, unsigned long events)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (unlikely(IS_ERR_OR_NULL(rtc)))
+		return;
+
+>>>>>>> v3.18
 =======
 	if (unlikely(IS_ERR_OR_NULL(rtc)))
 		return;
@@ -751,9 +789,15 @@ retry:
 	if (rtc->irq_task != NULL && task == NULL)
 		err = -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rtc->irq_task != task)
 		err = -EACCES;
 	if (!err) {
+=======
+	else if (rtc->irq_task != task)
+		err = -EACCES;
+	else {
+>>>>>>> v3.18
 =======
 	else if (rtc->irq_task != task)
 		err = -EACCES;
@@ -793,9 +837,15 @@ retry:
 	if (rtc->irq_task != NULL && task == NULL)
 		err = -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rtc->irq_task != task)
 		err = -EACCES;
 	if (!err) {
+=======
+	else if (rtc->irq_task != task)
+		err = -EACCES;
+	else {
+>>>>>>> v3.18
 =======
 	else if (rtc->irq_task != task)
 		err = -EACCES;
@@ -828,6 +878,7 @@ EXPORT_SYMBOL_GPL(rtc_irq_set_freq);
 static int rtc_timer_enqueue(struct rtc_device *rtc, struct rtc_timer *timer)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timerqueue_node *next = timerqueue_getnext(&rtc->timerqueue);
 	struct rtc_time tm;
 	ktime_t now;
@@ -850,20 +901,31 @@ static int rtc_timer_enqueue(struct rtc_device *rtc, struct rtc_timer *timer)
 	timerqueue_add(&rtc->timerqueue, &timer->node);
 	if (&timer->node == timerqueue_getnext(&rtc->timerqueue)) {
 >>>>>>> v3.18
+=======
+	timer->enabled = 1;
+	timerqueue_add(&rtc->timerqueue, &timer->node);
+	if (&timer->node == timerqueue_getnext(&rtc->timerqueue)) {
+>>>>>>> v3.18
 		struct rtc_wkalrm alarm;
 		int err;
 		alarm.time = rtc_ktime_to_tm(timer->node.expires);
 		alarm.enabled = 1;
 		err = __rtc_set_alarm(rtc, &alarm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (err == -ETIME)
 			schedule_work(&rtc->irqwork);
 		else if (err) {
 =======
+=======
+>>>>>>> v3.18
 		if (err == -ETIME) {
 			pm_stay_awake(rtc->dev.parent);
 			schedule_work(&rtc->irqwork);
 		} else if (err) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			timerqueue_del(&rtc->timerqueue, &timer->node);
 			timer->enabled = 0;
@@ -910,13 +972,19 @@ static void rtc_timer_remove(struct rtc_device *rtc, struct rtc_timer *timer)
 		alarm.enabled = 1;
 		err = __rtc_set_alarm(rtc, &alarm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (err == -ETIME)
 			schedule_work(&rtc->irqwork);
 =======
+=======
+>>>>>>> v3.18
 		if (err == -ETIME) {
 			pm_stay_awake(rtc->dev.parent);
 			schedule_work(&rtc->irqwork);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -944,7 +1012,10 @@ void rtc_timer_do_work(struct work_struct *work)
 	mutex_lock(&rtc->ops_lock);
 again:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_relax(rtc->dev.parent);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__rtc_read_time(rtc, &tm);
@@ -982,6 +1053,10 @@ again:
 		rtc_alarm_disable(rtc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pm_relax(rtc->dev.parent);
+>>>>>>> v3.18
 =======
 	pm_relax(rtc->dev.parent);
 >>>>>>> v3.18
@@ -997,7 +1072,11 @@ again:
  * Kernel interface to initializing an rtc_timer.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtc_timer_init(struct rtc_timer *timer, void (*f)(void* p), void* data)
+=======
+void rtc_timer_init(struct rtc_timer *timer, void (*f)(void *p), void *data)
+>>>>>>> v3.18
 =======
 void rtc_timer_init(struct rtc_timer *timer, void (*f)(void *p), void *data)
 >>>>>>> v3.18
@@ -1017,7 +1096,11 @@ void rtc_timer_init(struct rtc_timer *timer, void (*f)(void *p), void *data)
  * Kernel interface to set an rtc_timer
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rtc_timer_start(struct rtc_device *rtc, struct rtc_timer* timer,
+=======
+int rtc_timer_start(struct rtc_device *rtc, struct rtc_timer *timer,
+>>>>>>> v3.18
 =======
 int rtc_timer_start(struct rtc_device *rtc, struct rtc_timer *timer,
 >>>>>>> v3.18
@@ -1044,7 +1127,11 @@ int rtc_timer_start(struct rtc_device *rtc, struct rtc_timer *timer,
  * Kernel interface to cancel an rtc_timer
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rtc_timer_cancel(struct rtc_device *rtc, struct rtc_timer* timer)
+=======
+int rtc_timer_cancel(struct rtc_device *rtc, struct rtc_timer *timer)
+>>>>>>> v3.18
 =======
 int rtc_timer_cancel(struct rtc_device *rtc, struct rtc_timer *timer)
 >>>>>>> v3.18

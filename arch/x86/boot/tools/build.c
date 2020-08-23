@@ -6,6 +6,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This file builds a disk-image from two different files:
  *
  * - setup: 8086 machine code, sets up system parm
@@ -15,6 +16,8 @@
  * just writes the result to stdout, removing headers and padding to
  * the right amount. It also writes some system data to stderr.
 =======
+=======
+>>>>>>> v3.18
  * This file builds a disk-image from three different files:
  *
  * - setup: 8086 machine code, sets up system parm
@@ -24,6 +27,9 @@
  * It does some checking that all files are of the correct type, and writes
  * the result to the specified destination, removing headers and padding to
  * the right amount. It also writes some system data to stdout.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -65,7 +71,12 @@ int is_big_kernel;
 #define PECOFF_RELOC_RESERVE 0x20
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long efi_stub_entry;
+=======
+unsigned long efi32_stub_entry;
+unsigned long efi64_stub_entry;
+>>>>>>> v3.18
 =======
 unsigned long efi32_stub_entry;
 unsigned long efi64_stub_entry;
@@ -154,7 +165,11 @@ static void die(const char * str, ...)
 static void usage(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	die("Usage: build setup system [zoffset.h] [> image]");
+=======
+	die("Usage: build setup system zoffset.h image");
+>>>>>>> v3.18
 =======
 	die("Usage: build setup system zoffset.h image");
 >>>>>>> v3.18
@@ -258,7 +273,10 @@ static void update_pecoff_bss(unsigned int file_sz, unsigned int init_sz)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int reserve_pecoff_reloc_section(int c)
 {
 	/* Reserve 0x20 bytes for .reloc section */
@@ -307,6 +325,9 @@ static inline int reserve_pecoff_reloc_section(int c)
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_EFI_STUB */
 
@@ -334,6 +355,10 @@ static void parse_zoffset(char *fname)
 	if (ferror(file))
 		die("read-error on `zoffset.h'");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fclose(file);
+>>>>>>> v3.18
 =======
 	fclose(file);
 >>>>>>> v3.18
@@ -343,7 +368,12 @@ static void parse_zoffset(char *fname)
 
 	while (p && *p) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PARSE_ZOFS(p, efi_stub_entry);
+=======
+		PARSE_ZOFS(p, efi32_stub_entry);
+		PARSE_ZOFS(p, efi64_stub_entry);
+>>>>>>> v3.18
 =======
 		PARSE_ZOFS(p, efi32_stub_entry);
 		PARSE_ZOFS(p, efi64_stub_entry);
@@ -359,6 +389,7 @@ static void parse_zoffset(char *fname)
 
 int main(int argc, char ** argv)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int i, sz, setup_sectors;
 	int c;
@@ -387,6 +418,8 @@ int main(int argc, char ** argv)
 	else if (argc != 3)
 		usage();
 =======
+=======
+>>>>>>> v3.18
 	unsigned int i, sz, setup_sectors, init_sz;
 	int c;
 	u32 sys_size;
@@ -405,6 +438,9 @@ int main(int argc, char ** argv)
 	dest = fopen(argv[4], "w");
 	if (!dest)
 		die("Unable to write `%s': %m", argv[4]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Copy the setup code */
@@ -421,11 +457,15 @@ int main(int argc, char ** argv)
 	fclose(file);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_EFI_STUB
 	/* Reserve 0x20 bytes for .reloc section */
 	memset(buf+c, 0, PECOFF_RELOC_RESERVE);
 	c += PECOFF_RELOC_RESERVE;
 #endif
+=======
+	c += reserve_pecoff_reloc_section(c);
+>>>>>>> v3.18
 =======
 	c += reserve_pecoff_reloc_section(c);
 >>>>>>> v3.18
@@ -438,9 +478,13 @@ int main(int argc, char ** argv)
 	memset(buf+c, 0, i-c);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_EFI_STUB
 	update_pecoff_setup_and_reloc(i);
 #endif
+=======
+	update_pecoff_setup_and_reloc(i);
+>>>>>>> v3.18
 =======
 	update_pecoff_setup_and_reloc(i);
 >>>>>>> v3.18
@@ -449,7 +493,11 @@ int main(int argc, char ** argv)
 	put_unaligned_le16(DEFAULT_ROOT_DEV, &buf[508]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fprintf(stderr, "Setup is %d bytes (padded to %d bytes).\n", c, i);
+=======
+	printf("Setup is %d bytes (padded to %d bytes).\n", c, i);
+>>>>>>> v3.18
 =======
 	printf("Setup is %d bytes (padded to %d bytes).\n", c, i);
 >>>>>>> v3.18
@@ -462,7 +510,11 @@ int main(int argc, char ** argv)
 		die("Unable to stat `%s': %m", argv[2]);
 	sz = sb.st_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fprintf (stderr, "System is %d kB\n", (sz+1023)/1024);
+=======
+	printf("System is %d kB\n", (sz+1023)/1024);
+>>>>>>> v3.18
 =======
 	printf("System is %d kB\n", (sz+1023)/1024);
 >>>>>>> v3.18
@@ -477,13 +529,17 @@ int main(int argc, char ** argv)
 	put_unaligned_le32(sys_size, &buf[0x1f4]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_EFI_STUB
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	update_pecoff_text(setup_sectors * 512, i + (sys_size * 16));
 	init_sz = get_unaligned_le32(&buf[0x260]);
 	update_pecoff_bss(i + (sys_size * 16), init_sz);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_X86_64 /* Yes, this is really how we defined it :( */
 	efi_stub_entry -= 0x200;
@@ -494,17 +550,26 @@ int main(int argc, char ** argv)
 	crc = partial_crc32(buf, i, crc);
 	if (fwrite(buf, 1, i, stdout) != i)
 =======
+=======
+>>>>>>> v3.18
 	efi_stub_entry_update();
 
 	crc = partial_crc32(buf, i, crc);
 	if (fwrite(buf, 1, i, dest) != i)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		die("Writing setup failed");
 
 	/* Copy the kernel code */
 	crc = partial_crc32(kernel, sz, crc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fwrite(kernel, 1, sz, stdout) != sz)
+=======
+	if (fwrite(kernel, 1, sz, dest) != sz)
+>>>>>>> v3.18
 =======
 	if (fwrite(kernel, 1, sz, dest) != sz)
 >>>>>>> v3.18
@@ -514,7 +579,11 @@ int main(int argc, char ** argv)
 	while (sz++ < (sys_size*16) - 4) {
 		crc = partial_crc32_one('\0', crc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fwrite("\0", 1, 1, stdout) != 1)
+=======
+		if (fwrite("\0", 1, 1, dest) != 1)
+>>>>>>> v3.18
 =======
 		if (fwrite("\0", 1, 1, dest) != 1)
 >>>>>>> v3.18
@@ -523,12 +592,15 @@ int main(int argc, char ** argv)
 
 	/* Write the CRC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fprintf(stderr, "CRC %x\n", crc);
 	put_unaligned_le32(crc, buf);
 	if (fwrite(buf, 1, 4, stdout) != 4)
 		die("Writing CRC failed");
 
 =======
+=======
+>>>>>>> v3.18
 	printf("CRC %x\n", crc);
 	put_unaligned_le32(crc, buf);
 	if (fwrite(buf, 1, 4, dest) != 4)
@@ -538,6 +610,9 @@ int main(int argc, char ** argv)
 	if (fclose(dest))
 		die("Writing image failed");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	close(fd);
 

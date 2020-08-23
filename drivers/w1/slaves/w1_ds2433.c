@@ -30,6 +30,10 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Ben Gardner <bgardner@wabtec.com>");
 MODULE_DESCRIPTION("w1 family 23 driver for DS2433, 4kb EEPROM");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("w1-family-" __stringify(W1_EEPROM_DS2433));
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("w1-family-" __stringify(W1_EEPROM_DS2433));
 >>>>>>> v3.18
@@ -97,9 +101,15 @@ static int w1_f23_refresh_block(struct w1_slave *sl, struct w1_f23_data *data,
 #endif	/* CONFIG_W1_SLAVE_DS2433_CRC */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f23_read_bin(struct file *filp, struct kobject *kobj,
 			       struct bin_attribute *bin_attr,
 			       char *buf, loff_t off, size_t count)
+=======
+static ssize_t eeprom_read(struct file *filp, struct kobject *kobj,
+			   struct bin_attribute *bin_attr, char *buf,
+			   loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t eeprom_read(struct file *filp, struct kobject *kobj,
 			   struct bin_attribute *bin_attr, char *buf,
@@ -217,9 +227,15 @@ static int w1_f23_write(struct w1_slave *sl, int addr, int len, const u8 *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f23_write_bin(struct file *filp, struct kobject *kobj,
 				struct bin_attribute *bin_attr,
 				char *buf, loff_t off, size_t count)
+=======
+static ssize_t eeprom_write(struct file *filp, struct kobject *kobj,
+			    struct bin_attribute *bin_attr, char *buf,
+			    loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t eeprom_write(struct file *filp, struct kobject *kobj,
 			    struct bin_attribute *bin_attr, char *buf,
@@ -273,6 +289,7 @@ out_up:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct bin_attribute w1_f23_bin_attr = {
 	.attr = {
 		.name = "eeprom",
@@ -282,6 +299,8 @@ static struct bin_attribute w1_f23_bin_attr = {
 	.read = w1_f23_read_bin,
 	.write = w1_f23_write_bin,
 =======
+=======
+>>>>>>> v3.18
 static BIN_ATTR_RW(eeprom, W1_EEPROM_SIZE);
 
 static struct bin_attribute *w1_f23_bin_attributes[] = {
@@ -296,13 +315,19 @@ static const struct attribute_group w1_f23_group = {
 static const struct attribute_group *w1_f23_groups[] = {
 	&w1_f23_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static int w1_f23_add_slave(struct w1_slave *sl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_W1_SLAVE_DS2433_CRC
@@ -314,6 +339,7 @@ static int w1_f23_add_slave(struct w1_slave *sl)
 	sl->family_data = data;
 
 #endif	/* CONFIG_W1_SLAVE_DS2433_CRC */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	err = sysfs_create_bin_file(&sl->dev.kobj, &w1_f23_bin_attr);
@@ -327,6 +353,9 @@ static int w1_f23_add_slave(struct w1_slave *sl)
 =======
 	return 0;
 >>>>>>> v3.18
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static void w1_f23_remove_slave(struct w1_slave *sl)
@@ -336,7 +365,10 @@ static void w1_f23_remove_slave(struct w1_slave *sl)
 	sl->family_data = NULL;
 #endif	/* CONFIG_W1_SLAVE_DS2433_CRC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_remove_bin_file(&sl->dev.kobj, &w1_f23_bin_attr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -345,6 +377,10 @@ static struct w1_family_ops w1_f23_fops = {
 	.add_slave      = w1_f23_add_slave,
 	.remove_slave   = w1_f23_remove_slave,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.groups		= w1_f23_groups,
+>>>>>>> v3.18
 =======
 	.groups		= w1_f23_groups,
 >>>>>>> v3.18

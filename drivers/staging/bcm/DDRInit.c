@@ -4,6 +4,7 @@
 
 #define DDR_DUMP_INTERNAL_DEVICE_MEMORY 0xBFC02B00
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MIPS_CLOCK_REG 	0x0f000820
 
     //DDR INIT-133Mhz
@@ -530,6 +531,8 @@ static struct bcm_ddr_setting asT3LP_DDRSetting80MHz[]= {//	# DPLL Clock Setting
 								{0x0F0070C8,0x00000104},
 								{0x0F007018,0x01010000}
 =======
+=======
+>>>>>>> v3.18
 #define MIPS_CLOCK_REG 0x0f000820
 
 /* DDR INIT-133Mhz */
@@ -1064,6 +1067,7 @@ static struct bcm_ddr_setting asT3LP_DDRSetting80MHz[] = {
 	{0x0f007098, 0x00000000},
 	{0x0F0070C8, 0x00000104},
 	{0x0F007018, 0x01010000}
+<<<<<<< HEAD
 >>>>>>> v3.18
 };
 
@@ -1308,6 +1312,13 @@ static struct bcm_ddr_setting asT3LPB_DDRSetting80MHz[]= {//	# DPLL Clock Settin
 								{0x0F0070C8,0x00000104},
 								{0x0F007018,0x01010000}
 =======
+=======
+};
+
+
+
+
+>>>>>>> v3.18
 /* T3 LP-B (UMA-B) */
 
 #define T3LPB_SKIP_CLOCK_PROGRAM_DUMP_160MHZ 7  /* index for 0x0F007000 */
@@ -1551,12 +1562,16 @@ static struct bcm_ddr_setting asT3LPB_DDRSetting80MHz[] = {
 	{0x0f007098, 0x00000000},
 	{0x0F0070C8, 0x00000104},
 	{0x0F007018, 0x01010000}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 
 int ddr_init(struct bcm_mini_adapter *Adapter)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct bcm_ddr_setting *psDDRSetting=NULL;
 	ULONG RegCount=0;
@@ -1597,6 +1612,8 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 			    return -EINVAL;
         }
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_ddr_setting *psDDRSetting = NULL;
 	ULONG RegCount = 0;
 	UINT value = 0;
@@ -1629,6 +1646,9 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 		default:
 			return -EINVAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		break;
@@ -1636,6 +1656,7 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 	case BCS220_2:
 	case BCS220_2BC:
 	case BCS250_BC:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case BCS220_3 :
 		/* Set bit 2 and bit 6 to 1 for BBIC 2mA drive
@@ -1701,6 +1722,8 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 				}
 			}
 =======
+=======
+>>>>>>> v3.18
 	case BCS220_3:
 		/* Set bit 2 and bit 6 to 1 for BBIC 2mA drive
 		 * (please check current value and additionally set these bits)
@@ -1761,6 +1784,9 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 			else
 				uiClockSetting = 0x03F137DB;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -1769,6 +1795,7 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 	case 0xbece0121:
 	case 0xbece0130:
 	case 0xbece0300:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		BCM_DEBUG_PRINT(Adapter,DBG_TYPE_INITEXIT, DRV_ENTRY, DBG_LVL_ALL, "DDR Setting: %x\n", Adapter->DDRSetting);
 	    switch (Adapter->DDRSetting)
@@ -1833,6 +1860,8 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 		    default:
 			    return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, DRV_ENTRY, DBG_LVL_ALL,
 			"DDR Setting: %x\n", Adapter->DDRSetting);
 		switch (Adapter->DDRSetting) {
@@ -1888,6 +1917,9 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 			break;
 		default:
 			return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -1897,6 +1929,7 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	value=0;
 	BCM_DEBUG_PRINT(Adapter,DBG_TYPE_INITEXIT, DRV_ENTRY, DBG_LVL_ALL, "Register Count is =%lu\n", RegCount);
@@ -1914,6 +1947,8 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 		if(STATUS_SUCCESS != retval) {
 			BCM_DEBUG_PRINT(Adapter,DBG_TYPE_PRINTK, 0, 0,"%s:%d\n", __FUNCTION__, __LINE__);
 =======
+=======
+>>>>>>> v3.18
 	value = 0;
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, DRV_ENTRY, DBG_LVL_ALL,
 			"Register Count is =%lu\n", RegCount);
@@ -1928,6 +1963,9 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 		if (STATUS_SUCCESS != retval) {
 			BCM_DEBUG_PRINT(Adapter, DBG_TYPE_PRINTK, 0, 0,
 					"%s:%d\n", __func__, __LINE__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -1936,6 +1974,7 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 		psDDRSetting++;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if(Adapter->chip_id >= 0xbece3300  )
 	{
@@ -1969,6 +2008,8 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 			if(retval < 0) {
 				BCM_DEBUG_PRINT(Adapter,CMHOST, RDM, DBG_LVL_ALL, "%s:%d RDM failed\n", __FUNCTION__, __LINE__);
 =======
+=======
+>>>>>>> v3.18
 	if (Adapter->chip_id >= 0xbece3300) {
 
 		mdelay(3);
@@ -2018,6 +2059,9 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 						"%s:%d RDM failed\n",
 						__func__,
 						__LINE__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return retval;
 			}
@@ -2027,6 +2071,7 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 		/* DC/DC standby change...
 		 * This is to be done only for Hybrid PMU mode.
 		 * with the current h/w there is no way to detect this.
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 * and since we dont have internal PMU lets do it under UMA-B chip id.
 	     * we will change this when we will have internal PMU.
@@ -2100,6 +2145,8 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 			if(retval < 0) {
 				BCM_DEBUG_PRINT(Adapter,CMHOST, RDM, DBG_LVL_ALL, "%s:%d RDM failed\n", __FUNCTION__, __LINE__);
 =======
+=======
+>>>>>>> v3.18
 		 * and since we dont have internal PMU lets do it under
 		 * UMA-B chip id. we will change this when we will have
 		 * internal PMU.
@@ -2229,6 +2276,9 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 						"%s:%d RDM failed\n",
 						__func__,
 						__LINE__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return retval;
 			}
@@ -2241,6 +2291,7 @@ int ddr_init(struct bcm_mini_adapter *Adapter)
 
 int download_ddr_settings(struct bcm_mini_adapter *Adapter)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct bcm_ddr_setting *psDDRSetting=NULL;
 	ULONG RegCount=0;
@@ -2277,6 +2328,8 @@ int download_ddr_settings(struct bcm_mini_adapter *Adapter)
 			    return -EINVAL;
         }
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_ddr_setting *psDDRSetting = NULL;
 	ULONG RegCount = 0;
 	unsigned long ul_ddr_setting_load_addr =
@@ -2310,6 +2363,9 @@ int download_ddr_settings(struct bcm_mini_adapter *Adapter)
 		default:
 			return -EINVAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -2317,6 +2373,7 @@ int download_ddr_settings(struct bcm_mini_adapter *Adapter)
 	case BCS220_2:
 	case BCS220_2BC:
 	case BCS250_BC:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case BCS220_3 :
 	    switch (Adapter->DDRSetting)
@@ -2404,6 +2461,8 @@ int download_ddr_settings(struct bcm_mini_adapter *Adapter)
 		      }
 		      break;
 =======
+=======
+>>>>>>> v3.18
 	case BCS220_3:
 		switch (Adapter->DDRSetting) {
 		case DDR_80_MHZ:
@@ -2486,11 +2545,15 @@ int download_ddr_settings(struct bcm_mini_adapter *Adapter)
 		break;
 		}
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	     }
 	default:
 		return -EINVAL;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//total number of Register that has to be dumped
 	value =RegCount  ;
@@ -2543,6 +2606,8 @@ int download_ddr_settings(struct bcm_mini_adapter *Adapter)
 		}
 		ul_ddr_setting_load_addr+=sizeof(ULONG);
 =======
+=======
+>>>>>>> v3.18
 	/* total number of Register that has to be dumped */
 	value = RegCount;
 	retval = wrmalt(Adapter, ul_ddr_setting_load_addr, &value,
@@ -2590,6 +2655,9 @@ int download_ddr_settings(struct bcm_mini_adapter *Adapter)
 			}
 		}
 		ul_ddr_setting_load_addr += sizeof(ULONG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		RegCount--;
 		psDDRSetting++;
@@ -2597,7 +2665,10 @@ int download_ddr_settings(struct bcm_mini_adapter *Adapter)
 	return retval;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

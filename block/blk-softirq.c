@@ -24,7 +24,11 @@ static void blk_done_softirq(struct softirq_action *h)
 
 	local_irq_disable();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_list = &__get_cpu_var(blk_cpu_done);
+=======
+	cpu_list = this_cpu_ptr(&blk_cpu_done);
+>>>>>>> v3.18
 =======
 	cpu_list = this_cpu_ptr(&blk_cpu_done);
 >>>>>>> v3.18
@@ -35,8 +39,13 @@ static void blk_done_softirq(struct softirq_action *h)
 		struct request *rq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rq = list_entry(local_list.next, struct request, csd.list);
 		list_del_init(&rq->csd.list);
+=======
+		rq = list_entry(local_list.next, struct request, ipi_list);
+		list_del_init(&rq->ipi_list);
+>>>>>>> v3.18
 =======
 		rq = list_entry(local_list.next, struct request, ipi_list);
 		list_del_init(&rq->ipi_list);
@@ -54,15 +63,21 @@ static void trigger_softirq(void *data)
 
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list = &__get_cpu_var(blk_cpu_done);
 	list_add_tail(&rq->csd.list, list);
 
 	if (list->next == &rq->csd.list)
 =======
+=======
+>>>>>>> v3.18
 	list = this_cpu_ptr(&blk_cpu_done);
 	list_add_tail(&rq->ipi_list, list);
 
 	if (list->next == &rq->ipi_list)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		raise_softirq_irqoff(BLOCK_SOFTIRQ);
 
@@ -82,7 +97,11 @@ static int raise_blk_irq(int cpu, struct request *rq)
 		data->flags = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__smp_call_function_single(cpu, data, 0);
+=======
+		smp_call_function_single_async(cpu, data);
+>>>>>>> v3.18
 =======
 		smp_call_function_single_async(cpu, data);
 >>>>>>> v3.18
@@ -99,8 +118,13 @@ static int raise_blk_irq(int cpu, struct request *rq)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit blk_cpu_notify(struct notifier_block *self,
 				    unsigned long action, void *hcpu)
+=======
+static int blk_cpu_notify(struct notifier_block *self, unsigned long action,
+			  void *hcpu)
+>>>>>>> v3.18
 =======
 static int blk_cpu_notify(struct notifier_block *self, unsigned long action,
 			  void *hcpu)
@@ -116,7 +140,11 @@ static int blk_cpu_notify(struct notifier_block *self, unsigned long action,
 		local_irq_disable();
 		list_splice_init(&per_cpu(blk_cpu_done, cpu),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 &__get_cpu_var(blk_cpu_done));
+=======
+				 this_cpu_ptr(&blk_cpu_done));
+>>>>>>> v3.18
 =======
 				 this_cpu_ptr(&blk_cpu_done));
 >>>>>>> v3.18
@@ -128,7 +156,11 @@ static int blk_cpu_notify(struct notifier_block *self, unsigned long action,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata blk_cpu_notifier = {
+=======
+static struct notifier_block blk_cpu_notifier = {
+>>>>>>> v3.18
 =======
 static struct notifier_block blk_cpu_notifier = {
 >>>>>>> v3.18
@@ -169,8 +201,13 @@ void __blk_complete_request(struct request *req)
 		struct list_head *list;
 do_local:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list = &__get_cpu_var(blk_cpu_done);
 		list_add_tail(&req->csd.list, list);
+=======
+		list = this_cpu_ptr(&blk_cpu_done);
+		list_add_tail(&req->ipi_list, list);
+>>>>>>> v3.18
 =======
 		list = this_cpu_ptr(&blk_cpu_done);
 		list_add_tail(&req->ipi_list, list);
@@ -183,7 +220,11 @@ do_local:
 		 * hasn't run yet.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (list->next == &req->csd.list)
+=======
+		if (list->next == &req->ipi_list)
+>>>>>>> v3.18
 =======
 		if (list->next == &req->ipi_list)
 >>>>>>> v3.18

@@ -1012,7 +1012,11 @@ static struct resource wm831x_wdt_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell wm8310_devs[] = {
+=======
+static const struct mfd_cell wm8310_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell wm8310_devs[] = {
 >>>>>>> v3.18
@@ -1170,7 +1174,11 @@ static const struct mfd_cell wm8310_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell wm8311_devs[] = {
+=======
+static const struct mfd_cell wm8311_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell wm8311_devs[] = {
 >>>>>>> v3.18
@@ -1304,7 +1312,11 @@ static const struct mfd_cell wm8311_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell wm8312_devs[] = {
+=======
+static const struct mfd_cell wm8312_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell wm8312_devs[] = {
 >>>>>>> v3.18
@@ -1462,7 +1474,11 @@ static const struct mfd_cell wm8312_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell wm8320_devs[] = {
+=======
+static const struct mfd_cell wm8320_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell wm8320_devs[] = {
 >>>>>>> v3.18
@@ -1595,7 +1611,11 @@ static const struct mfd_cell wm8320_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell touch_devs[] = {
+=======
+static const struct mfd_cell touch_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell touch_devs[] = {
 >>>>>>> v3.18
@@ -1607,7 +1627,11 @@ static const struct mfd_cell touch_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell rtc_devs[] = {
+=======
+static const struct mfd_cell rtc_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell rtc_devs[] = {
 >>>>>>> v3.18
@@ -1619,7 +1643,11 @@ static const struct mfd_cell rtc_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell backlight_devs[] = {
+=======
+static const struct mfd_cell backlight_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell backlight_devs[] = {
 >>>>>>> v3.18
@@ -1647,7 +1675,11 @@ EXPORT_SYMBOL_GPL(wm831x_regmap_config);
 int wm831x_device_init(struct wm831x *wm831x, unsigned long id, int irq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm831x_pdata *pdata = wm831x->dev->platform_data;
+=======
+	struct wm831x_pdata *pdata = dev_get_platdata(wm831x->dev);
+>>>>>>> v3.18
 =======
 	struct wm831x_pdata *pdata = dev_get_platdata(wm831x->dev);
 >>>>>>> v3.18

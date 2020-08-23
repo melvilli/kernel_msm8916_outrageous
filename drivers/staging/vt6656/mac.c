@@ -31,6 +31,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "tmacro.h"
 #include "tether.h"
 #include "desc.h"
@@ -46,6 +47,11 @@ static int          msglevel                =MSG_LEVEL_INFO;
 #include "mac.h"
 #include "usbpipe.h"
 >>>>>>> v3.18
+=======
+#include "desc.h"
+#include "mac.h"
+#include "usbpipe.h"
+>>>>>>> v3.18
 
 /*
  * Description:
@@ -54,8 +60,12 @@ static int          msglevel                =MSG_LEVEL_INFO;
  * Parameters:
  *  In:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      uByteidx    - Index of Mask
  *      byData      - Mask Value to write
+=======
+ *	mc_filter (mac filter)
+>>>>>>> v3.18
 =======
  *	mc_filter (mac filter)
 >>>>>>> v3.18
@@ -65,6 +75,7 @@ static int          msglevel                =MSG_LEVEL_INFO;
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void MACvWriteMultiAddr(struct vnt_private *pDevice, u32 uByteIdx, u8 byData)
 {
@@ -78,12 +89,17 @@ void MACvWriteMultiAddr(struct vnt_private *pDevice, u32 uByteIdx, u8 byData)
                         1,
                         &byData1);
 =======
+=======
+>>>>>>> v3.18
 void vnt_mac_set_filter(struct vnt_private *priv, u64 mc_filter)
 {
 	__le64 le_mc = cpu_to_le64(mc_filter);
 
 	vnt_control_out(priv, MESSAGE_TYPE_WRITE, MAC_REG_MAR0,
 		MESSAGE_REQUEST_MACREG, sizeof(le_mc), (u8 *)&le_mc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -98,6 +114,7 @@ void vnt_mac_set_filter(struct vnt_private *priv, u64 mc_filter)
  *
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void MACbShutdown(struct vnt_private *pDevice)
 {
@@ -125,6 +142,8 @@ void MACvSetBBType(struct vnt_private *pDevice, u8 byType)
                         pbyData
                         );
 =======
+=======
+>>>>>>> v3.18
 void vnt_mac_shutdown(struct vnt_private *priv)
 {
 	vnt_control_out(priv, MESSAGE_TYPE_MACSHUTDOWN, 0, 0, 0, NULL);
@@ -139,6 +158,9 @@ void vnt_mac_set_bb_type(struct vnt_private *priv, u8 type)
 
 	vnt_control_out(priv, MESSAGE_TYPE_WRITE_MASK, MAC_REG_ENCFG0,
 		MESSAGE_REQUEST_MACREG,	ARRAY_SIZE(data), data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -156,6 +178,7 @@ void vnt_mac_set_bb_type(struct vnt_private *priv, u8 type)
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void MACvDisableKeyEntry(struct vnt_private *pDevice, u32 uEntryIdx)
 {
@@ -180,10 +203,15 @@ void MACvDisableKeyEntry(struct vnt_private *pDevice, u32 uEntryIdx)
                         &byData
                         );
 =======
+=======
+>>>>>>> v3.18
 void vnt_mac_disable_keyentry(struct vnt_private *priv, u8 entry_idx)
 {
 	vnt_control_out(priv, MESSAGE_TYPE_CLRKEYENTRY, 0, 0,
 		sizeof(entry_idx), &entry_idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -201,6 +229,7 @@ void vnt_mac_disable_keyentry(struct vnt_private *priv, u8 entry_idx)
  * Return Value: none
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void MACvSetKeyEntry(struct vnt_private *pDevice, u16 wKeyCtl, u32 uEntryIdx,
 	u32 uKeyIdx, u8 *pbyAddr, u32 *pdwKey)
@@ -430,6 +459,8 @@ void MACvWriteBeaconInterval(struct vnt_private *pDevice, u16 wInterval)
 			pbyData
 			);
 =======
+=======
+>>>>>>> v3.18
 void vnt_mac_set_keyentry(struct vnt_private *priv, u16 key_ctl, u32 entry_idx,
 	u32 key_idx, u8 *addr, u8 *key)
 {
@@ -557,5 +588,8 @@ void vnt_mac_set_led(struct vnt_private *priv, u8 state, u8 led)
 
 	vnt_control_out(priv, MESSAGE_TYPE_WRITE_MASK, MAC_REG_PAPEDELAY,
 			MESSAGE_REQUEST_MACREG, ARRAY_SIZE(data), data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

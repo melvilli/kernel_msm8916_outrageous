@@ -26,8 +26,12 @@
 #include <linux/kernel.h>		/* For printk/panic/... */
 #include <linux/fs.h>			/* For file operations */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>		/* For MODULE_ALIAS_MISCDEV
 							(WATCHDOG_MINOR) */
+=======
+#include <linux/miscdevice.h>		/* For struct miscdevice */
+>>>>>>> v3.18
 =======
 #include <linux/miscdevice.h>		/* For struct miscdevice */
 >>>>>>> v3.18
@@ -37,6 +41,10 @@
 #include <linux/spinlock.h>		/* For spin_lock/spin_unlock/... */
 #include <linux/uaccess.h>		/* For copy_to_user/put_user/... */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/io.h>			/* For devm_ioremap_nocache */
+>>>>>>> v3.18
 =======
 #include <linux/io.h>			/* For devm_ioremap_nocache */
 >>>>>>> v3.18
@@ -246,7 +254,11 @@ static long rc32434_wdt_ioctl(struct file *file, unsigned int cmd,
 		/* Fall through */
 	case WDIOC_GETTIMEOUT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return copy_to_user(argp, &timeout, sizeof(int)) ? -EFAULT : 0;
+=======
+		return copy_to_user(argp, &timeout, sizeof(int));
+>>>>>>> v3.18
 =======
 		return copy_to_user(argp, &timeout, sizeof(int));
 >>>>>>> v3.18
@@ -284,7 +296,11 @@ static int rc32434_wdt_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wdt_reg = ioremap_nocache(r->start, resource_size(r));
+=======
+	wdt_reg = devm_ioremap_nocache(&pdev->dev, r->start, resource_size(r));
+>>>>>>> v3.18
 =======
 	wdt_reg = devm_ioremap_nocache(&pdev->dev, r->start, resource_size(r));
 >>>>>>> v3.18
@@ -310,7 +326,11 @@ static int rc32434_wdt_probe(struct platform_device *pdev)
 	if (ret < 0) {
 		pr_err("failed to register watchdog device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto unmap;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -321,10 +341,13 @@ static int rc32434_wdt_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 unmap:
 	iounmap(wdt_reg);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -333,7 +356,10 @@ static int rc32434_wdt_remove(struct platform_device *pdev)
 {
 	misc_deregister(&rc32434_wdt_miscdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(wdt_reg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -360,6 +386,9 @@ MODULE_AUTHOR("Ondrej Zajicek <santiago@crfreenet.org>,"
 MODULE_DESCRIPTION("Driver for the IDT RC32434 SoC watchdog");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

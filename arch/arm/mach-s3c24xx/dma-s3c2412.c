@@ -17,6 +17,10 @@
 #include <linux/device.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -28,7 +32,10 @@
 #include <plat/cpu.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <mach/regs-gpio.h>
@@ -43,7 +50,10 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "xdreq0",
 		.channels	= MAP(S3C2412_DMAREQSEL_XDREQ0),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_XDREQ0),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -51,13 +61,17 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "xdreq1",
 		.channels	= MAP(S3C2412_DMAREQSEL_XDREQ1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_XDREQ1),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
 	[DMACH_SDI] = {
 		.name		= "sdi",
 		.channels	= MAP(S3C2412_DMAREQSEL_SDI),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_SDI),
 	},
@@ -71,6 +85,8 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.channels	= MAP(S3C2412_DMAREQSEL_SPI1TX),
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_SPI1RX),
 =======
+=======
+>>>>>>> v3.18
 	},
 	[DMACH_SPI0_RX] = {
 		.name		= "spi0-rx",
@@ -87,13 +103,19 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 	[DMACH_SPI1_TX] = {
 		.name		= "spi1-tx",
 		.channels	= MAP(S3C2412_DMAREQSEL_SPI1TX),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	[DMACH_UART0] = {
 		.name		= "uart0",
 		.channels	= MAP(S3C2412_DMAREQSEL_UART0_0),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_UART0_0),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -101,7 +123,10 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "uart1",
 		.channels	= MAP(S3C2412_DMAREQSEL_UART1_0),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_UART1_0),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -109,7 +134,10 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "uart2",
 		.channels	= MAP(S3C2412_DMAREQSEL_UART2_0),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_UART2_0),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -117,7 +145,10 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "uart0",
 		.channels	= MAP(S3C2412_DMAREQSEL_UART0_1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_UART0_1),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -125,7 +156,10 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "uart1",
 		.channels	= MAP(S3C2412_DMAREQSEL_UART1_1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_UART1_1),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -133,7 +167,10 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "uart2",
 		.channels	= MAP(S3C2412_DMAREQSEL_UART2_1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_UART2_1),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -141,7 +178,10 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "timer",
 		.channels	= MAP(S3C2412_DMAREQSEL_TIMER),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_TIMER),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -149,7 +189,10 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "i2s-sdi",
 		.channels	= MAP(S3C2412_DMAREQSEL_I2SRX),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_I2SRX),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -157,7 +200,10 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "i2s-sdo",
 		.channels	= MAP(S3C2412_DMAREQSEL_I2STX),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_I2STX),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -165,7 +211,10 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "usb-ep1",
 		.channels	= MAP(S3C2412_DMAREQSEL_USBEP1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_USBEP1),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -173,7 +222,10 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "usb-ep2",
 		.channels	= MAP(S3C2412_DMAREQSEL_USBEP2),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_USBEP2),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -181,13 +233,17 @@ static struct s3c24xx_dma_map __initdata s3c2412_dma_mappings[] = {
 		.name		= "usb-ep3",
 		.channels	= MAP(S3C2412_DMAREQSEL_USBEP3),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_USBEP3),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
 	[DMACH_USB_EP4] = {
 		.name		= "usb-ep4",
 		.channels	= MAP(S3C2412_DMAREQSEL_USBEP4),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.channels_rx	= MAP(S3C2412_DMAREQSEL_USBEP4),
 	},
@@ -215,6 +271,8 @@ static void s3c2412_dma_select(struct s3c2410_dma_chan *chan,
 {
 	s3c2412_dma_direction(chan, map, chan->source);
 =======
+=======
+>>>>>>> v3.18
 	},
 };
 
@@ -224,13 +282,19 @@ static void s3c2412_dma_select(struct s3c2410_dma_chan *chan,
 	unsigned long chsel = map->channels[0] & (~DMA_CH_VALID);
 	writel(chsel | S3C2412_DMAREQSEL_HW,
 	       chan->regs + S3C2412_DMA_DMAREQSEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct s3c24xx_dma_selection __initdata s3c2412_dma_sel = {
 	.select		= s3c2412_dma_select,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.direction	= s3c2412_dma_direction,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.dcon_mask	= 0,

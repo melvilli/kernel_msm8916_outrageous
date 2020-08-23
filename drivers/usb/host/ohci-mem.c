@@ -29,6 +29,10 @@ static void ohci_hcd_init (struct ohci_hcd *ohci)
 	spin_lock_init (&ohci->lock);
 	INIT_LIST_HEAD (&ohci->pending);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&ohci->eds_in_use);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&ohci->eds_in_use);
 >>>>>>> v3.18

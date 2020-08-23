@@ -5,7 +5,11 @@
  * Kyosti Malkki <kmalkki@cc.hut.fi>
  * Copyright (C) 2004 Hong-Gunn Chew <hglinux@gunnet.org> and
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Jean Delvare <khali@linux-fr.org>
+=======
+ * Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -119,7 +123,12 @@ static inline u8 FAN_TO_REG(long rpm, int div)
 /* Each client has this additional data */
 struct gl518_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+	const struct attribute_group *groups[3];
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 	const struct attribute_group *groups[3];
@@ -146,6 +155,7 @@ struct gl518_data {
 	u8 beep_enable;		/* Boolean */
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int gl518_probe(struct i2c_client *client,
 		       const struct i2c_device_id *id);
@@ -175,6 +185,8 @@ static struct i2c_driver gl518_driver = {
 	.address_list	= normal_i2c,
 };
 =======
+=======
+>>>>>>> v3.18
 /*
  * Registers 0x07 to 0x0c are word-sized, others are byte-sized
  * GL518 uses a high-byte first convention, which is exactly opposite to
@@ -267,6 +279,9 @@ static struct gl518_data *gl518_update_device(struct device *dev)
 
 	return data;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -333,8 +348,13 @@ static ssize_t set_##suffix(struct device *dev,				\
 			    const char *buf, size_t count)		\
 {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);			\
 	struct gl518_data *data = i2c_get_clientdata(client);		\
+=======
+	struct gl518_data *data = dev_get_drvdata(dev);			\
+	struct i2c_client *client = data->client;			\
+>>>>>>> v3.18
 =======
 	struct gl518_data *data = dev_get_drvdata(dev);			\
 	struct i2c_client *client = data->client;			\
@@ -357,8 +377,13 @@ static ssize_t set_##suffix(struct device *dev,				\
 			    const char *buf, size_t count)		\
 {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);			\
 	struct gl518_data *data = i2c_get_clientdata(client);		\
+=======
+	struct gl518_data *data = dev_get_drvdata(dev);			\
+	struct i2c_client *client = data->client;			\
+>>>>>>> v3.18
 =======
 	struct gl518_data *data = dev_get_drvdata(dev);			\
 	struct i2c_client *client = data->client;			\
@@ -401,8 +426,13 @@ static ssize_t set_fan_min(struct device *dev, struct device_attribute *attr,
 			   const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl518_data *data = i2c_get_clientdata(client);
+=======
+	struct gl518_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct gl518_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -439,8 +469,13 @@ static ssize_t set_fan_div(struct device *dev, struct device_attribute *attr,
 			   const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl518_data *data = i2c_get_clientdata(client);
+=======
+	struct gl518_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct gl518_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -545,8 +580,13 @@ static ssize_t set_beep(struct device *dev, struct device_attribute *attr,
 			const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct gl518_data *data = i2c_get_clientdata(client);
+=======
+	struct gl518_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct gl518_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -669,6 +709,7 @@ static int gl518_detect(struct i2c_client *client, struct i2c_board_info *info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int gl518_probe(struct i2c_client *client,
 		       const struct i2c_device_id *id)
 {
@@ -717,6 +758,8 @@ exit_remove_files:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Called when we have found a new GL518SM.
  * Note that we preserve D4:NoFan2 and D2:beep_enable.
@@ -737,6 +780,7 @@ static void gl518_init_client(struct i2c_client *client)
 	gl518_write_value(client, GL518_REG_CONF, 0x40 | regvalue);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int gl518_remove(struct i2c_client *client)
 {
@@ -843,6 +887,8 @@ static struct gl518_data *gl518_update_device(struct device *dev)
 	return data;
 }
 =======
+=======
+>>>>>>> v3.18
 static int gl518_probe(struct i2c_client *client,
 		       const struct i2c_device_id *id)
 {
@@ -890,6 +936,9 @@ static struct i2c_driver gl518_driver = {
 	.detect		= gl518_detect,
 	.address_list	= normal_i2c,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 module_i2c_driver(gl518_driver);

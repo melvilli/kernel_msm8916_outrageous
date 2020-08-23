@@ -9,6 +9,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/cpu.h>
+>>>>>>> v3.18
 =======
 #include <linux/cpu.h>
 >>>>>>> v3.18

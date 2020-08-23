@@ -1,7 +1,11 @@
 /*
  * QLogic Fibre Channel HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2013 QLogic Corporation
+=======
+ * Copyright (c)  2003-2014 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2014 QLogic Corporation
 >>>>>>> v3.18
@@ -40,6 +44,10 @@
 #include "qla_bsg.h"
 #include "qla_nx.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "qla_nx2.h"
+>>>>>>> v3.18
 =======
 #include "qla_nx2.h"
 >>>>>>> v3.18
@@ -199,12 +207,18 @@
 					     * second
 					     */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* ISP2031: Values for laser on/off */
 #define PORT_0_2031	0x00201340
 #define PORT_1_2031	0x00201350
 #define LASER_ON_2031	0x01800100
 #define LASER_OFF_2031	0x01800180
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -277,6 +291,10 @@
 #define REQUEST_ENTRY_CNT_2200		2048	/* Number of request entries. */
 #define REQUEST_ENTRY_CNT_24XX		2048	/* Number of request entries. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define REQUEST_ENTRY_CNT_83XX		8192	/* Number of request entries. */
+>>>>>>> v3.18
 =======
 #define REQUEST_ENTRY_CNT_83XX		8192	/* Number of request entries. */
 >>>>>>> v3.18
@@ -340,17 +358,23 @@ struct srb_iocb {
 			 * for control_flags field in qla_fw.h.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			uint32_t flags;
 			uint32_t lun;
 			uint32_t data;
 			struct completion comp;
 			uint32_t comp_status;
 =======
+=======
+>>>>>>> v3.18
 			uint64_t lun;
 			uint32_t flags;
 			uint32_t data;
 			struct completion comp;
 			__le16 comp_status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} tmf;
 		struct {
@@ -367,6 +391,7 @@ struct srb_iocb {
 			dma_addr_t req_dma_handle;
 			dma_addr_t rsp_dma_handle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			uint32_t adapter_id;
 			uint32_t adapter_id_hi;
 			uint32_t req_func_type;
@@ -378,6 +403,8 @@ struct srb_iocb {
 			struct completion fxiocb_comp;
 			uint32_t reserved_0;
 =======
+=======
+>>>>>>> v3.18
 			__le32 adapter_id;
 			__le32 adapter_id_hi;
 			__le16 req_func_type;
@@ -388,13 +415,20 @@ struct srb_iocb {
 			__le16 fw_flags;
 			struct completion fxiocb_comp;
 			__le32 reserved_0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			uint8_t reserved_1;
 		} fxiocb;
 		struct {
 			uint32_t cmd_hndl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			uint32_t comp_status;
+=======
+			__le16 comp_status;
+>>>>>>> v3.18
 =======
 			__le16 comp_status;
 >>>>>>> v3.18
@@ -688,6 +722,10 @@ struct device_reg_fx00 {
 	uint32_t initval7;		/* CC */
 	uint32_t fwheartbeat;		/* D0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t pseudoaen;		/* D4 */
+>>>>>>> v3.18
 =======
 	uint32_t pseudoaen;		/* D4 */
 >>>>>>> v3.18
@@ -702,7 +740,11 @@ typedef union {
 		struct device_reg_82xx isp82;
 		struct device_reg_fx00 ispfx00;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } device_reg_t;
+=======
+} __iomem device_reg_t;
+>>>>>>> v3.18
 =======
 } __iomem device_reg_t;
 >>>>>>> v3.18
@@ -855,6 +897,10 @@ struct mbx_cmd_32 {
 #define MBA_INIT_REQUIRED	0x8061	/* Initialization required */
 #define MBA_SHUTDOWN_REQUESTED	0x8062	/* Shutdown Requested */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MBA_DPORT_DIAGNOSTICS	0x8080	/* D-port Diagnostics */
+>>>>>>> v3.18
 =======
 #define MBA_DPORT_DIAGNOSTICS	0x8080	/* D-port Diagnostics */
 >>>>>>> v3.18
@@ -863,7 +909,12 @@ struct mbx_cmd_32 {
 					   Notification */
 #define MBA_FW_POLL_STATE	0x8600  /* Firmware in poll diagnostic state */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#define MBA_FW_RESET_FCT	0x8502	/* Firmware reset factory defaults */
+#define MBA_FW_INIT_INPROGRESS	0x8500	/* Firmware boot in progress */
+>>>>>>> v3.18
 =======
 #define MBA_FW_RESET_FCT	0x8502	/* Firmware reset factory defaults */
 #define MBA_FW_INIT_INPROGRESS	0x8500	/* Firmware boot in progress */
@@ -922,7 +973,10 @@ struct mbx_cmd_32 {
 #define MBC_LOAD_RAM			1	/* Load RAM. */
 #define MBC_EXECUTE_FIRMWARE		2	/* Execute firmware. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MBC_WRITE_RAM_WORD		4	/* Write RAM word. */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MBC_READ_RAM_WORD		5	/* Read RAM word. */
@@ -1000,6 +1054,12 @@ struct mbx_cmd_32 {
  * ISP24xx mailbox commands
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MBC_WRITE_SERDES		0x3	/* Write serdes word. */
+#define MBC_READ_SERDES			0x4	/* Read serdes word. */
+#define MBC_LOAD_DUMP_MPI_RAM		0x5	/* Load/Dump MPI RAM. */
+>>>>>>> v3.18
 =======
 #define MBC_WRITE_SERDES		0x3	/* Write serdes word. */
 #define MBC_READ_SERDES			0x4	/* Read serdes word. */
@@ -1015,6 +1075,10 @@ struct mbx_cmd_32 {
 #define MBC_READ_SFP			0x31	/* Read SFP Data. */
 #define MBC_SET_TIMEOUT_PARAMS		0x32	/* Set FW timeouts. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MBC_DPORT_DIAGNOSTICS		0x47	/* D-Port Diagnostics */
+>>>>>>> v3.18
 =======
 #define MBC_DPORT_DIAGNOSTICS		0x47	/* D-Port Diagnostics */
 >>>>>>> v3.18
@@ -1036,7 +1100,10 @@ struct mbx_cmd_32 {
 #define MBC_WRITE_MPI_REGISTER		0x01    /* Write MPI Register. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * ISP8044 mailbox commands
  */
@@ -1044,6 +1111,9 @@ struct mbx_cmd_32 {
 #define HCS_WRITE_SERDES		0x3
 #define HCS_READ_SERDES			0x4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Firmware return data sizes */
 #define FCAL_MAP_SIZE	128
@@ -1083,6 +1153,10 @@ struct mbx_cmd_32 {
 #define	MBX_0		BIT_0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RNID_TYPE_SET_VERSION	0x9
+>>>>>>> v3.18
 =======
 #define RNID_TYPE_SET_VERSION	0x9
 >>>>>>> v3.18
@@ -1282,6 +1356,7 @@ typedef struct {
 } init_cb_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct init_cb_fx {
 	uint16_t	version;
@@ -1308,6 +1383,8 @@ struct init_cb_fx {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Get Link Status mailbox command return buffer.
  */
@@ -1326,8 +1403,14 @@ struct link_statistics {
 	uint32_t tx_frames;
 	uint32_t rx_frames;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t dumped_frames;
 	uint32_t unused2[2];
+=======
+	uint32_t discarded_frames;
+	uint32_t dropped_frames;
+	uint32_t unused2[1];
+>>>>>>> v3.18
 =======
 	uint32_t discarded_frames;
 	uint32_t dropped_frames;
@@ -1738,11 +1821,14 @@ typedef struct {
 #define PO_MODE_DIF_REPLACE	3
 #define PO_MODE_DIF_TCP_CKSUM	6
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PO_ENABLE_DIF_BUNDLING	BIT_8
 #define PO_ENABLE_INCR_GUARD_SEED	BIT_3
 #define PO_DISABLE_INCR_REF_TAG	BIT_5
 #define PO_DISABLE_GUARD_CHECK	BIT_4
 =======
+=======
+>>>>>>> v3.18
 #define PO_ENABLE_INCR_GUARD_SEED	BIT_3
 #define PO_DISABLE_GUARD_CHECK	BIT_4
 #define PO_DISABLE_INCR_REF_TAG	BIT_5
@@ -1757,12 +1843,16 @@ typedef struct {
 #define PO_DIS_APP_TAG_VALD	BIT_14 /* disable REF Tag validation */
 #define PO_DIS_REF_TAG_VALD	BIT_15
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * ISP queue - 64-Bit addressing, continuation crc entry structure definition.
  */
 struct crc_context {
 	uint32_t handle;		/* System handle. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	uint32_t ref_tag;
 	uint16_t app_tag;
@@ -1775,6 +1865,8 @@ struct crc_context {
 					 * only) */
 	uint32_t byte_count;		/* Total byte count/ total data
 =======
+=======
+>>>>>>> v3.18
 	__le32 ref_tag;
 	__le16 app_tag;
 	uint8_t ref_tag_mask[4];	/* Validation/Replacement Mask*/
@@ -1785,6 +1877,9 @@ struct crc_context {
 	uint16_t runt_blk_guard;	/* Guard value for runt block (tape
 					 * only) */
 	__le32 byte_count;		/* Total byte count/ total data
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 * transfer count */
 	union {
@@ -1800,15 +1895,21 @@ struct crc_context {
 		} nobundling;
 		struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			uint32_t	dif_byte_count;	/* Total DIF byte
 							 * count */
 			uint16_t	reserved_1;
 			uint16_t	dseg_count;	/* Data segment count */
 =======
+=======
+>>>>>>> v3.18
 			__le32	dif_byte_count;	/* Total DIF byte
 							 * count */
 			uint16_t	reserved_1;
 			__le16	dseg_count;	/* Data segment count */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			uint32_t	reserved_2;
 			uint32_t	data_address[2];
@@ -1901,6 +2002,11 @@ typedef struct {
 #define CS_PORT_BUSY		0x2B	/* Port Busy */
 #define CS_COMPLETE_CHKCOND	0x30	/* Error? */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CS_IOCB_ERROR		0x31	/* Generic error for IOCB request
+					   failure */
+>>>>>>> v3.18
 =======
 #define CS_IOCB_ERROR		0x31	/* Generic error for IOCB request
 					   failure */
@@ -2155,6 +2261,11 @@ typedef struct fc_port {
 
 	uint16_t port_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	unsigned long retry_delay_timestamp;
+>>>>>>> v3.18
 =======
 
 	unsigned long retry_delay_timestamp;
@@ -2200,11 +2311,14 @@ static const char * const port_state_str[] = {
 #define CT_REJECT_RESPONSE	0x8001
 #define CT_ACCEPT_RESPONSE	0x8002
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CT_REASON_INVALID_COMMAND_CODE	0x01
 #define CT_REASON_CANNOT_PERFORM	0x09
 #define CT_REASON_COMMAND_UNSUPPORTED	0x0b
 #define CT_EXPL_ALREADY_REGISTERED	0x10
 =======
+=======
+>>>>>>> v3.18
 #define CT_REASON_INVALID_COMMAND_CODE		0x01
 #define CT_REASON_CANNOT_PERFORM		0x09
 #define CT_REASON_COMMAND_UNSUPPORTED		0x0b
@@ -2220,6 +2334,9 @@ static const char * const port_state_str[] = {
 #define CT_EXPL_PORT_NOT_REGISTERED		0x21
 #define CT_EXPL_MULTIPLE_PORT_ATTR		0x22
 #define CT_EXPL_INVALID_PORT_BLOCK_LENGTH	0x23
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define NS_N_PORT_TYPE	0x01
@@ -2278,6 +2395,7 @@ static const char * const port_state_str[] = {
  */
 #define FDMI_HBA_ATTR_COUNT			9
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FDMI_HBA_NODE_NAME			1
 #define FDMI_HBA_MANUFACTURER			2
 #define FDMI_HBA_SERIAL_NUMBER			3
@@ -2290,6 +2408,8 @@ static const char * const port_state_str[] = {
 #define FDMI_HBA_OS_NAME_AND_VERSION		0xa
 #define FDMI_HBA_MAXIMUM_CT_PAYLOAD_LENGTH	0xb
 =======
+=======
+>>>>>>> v3.18
 #define FDMIV2_HBA_ATTR_COUNT			17
 #define FDMI_HBA_NODE_NAME			0x1
 #define FDMI_HBA_MANUFACTURER			0x2
@@ -2308,6 +2428,9 @@ static const char * const port_state_str[] = {
 #define FDMI_HBA_FABRIC_NAME			0xf
 #define FDMI_HBA_BOOT_BIOS_NAME			0x10
 #define FDMI_HBA_TYPE_VENDOR_IDENTIFIER		0xe0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct ct_fdmi_hba_attr {
@@ -2315,6 +2438,7 @@ struct ct_fdmi_hba_attr {
 	uint16_t len;
 	union {
 		uint8_t node_name[WWN_SIZE];
+<<<<<<< HEAD
 <<<<<<< HEAD
 		uint8_t manufacturer[32];
 		uint8_t serial_num[8];
@@ -2327,6 +2451,8 @@ struct ct_fdmi_hba_attr {
 		uint8_t os_version[128];
 		uint8_t max_ct_len[4];
 =======
+=======
+>>>>>>> v3.18
 		uint8_t manufacturer[64];
 		uint8_t serial_num[32];
 		uint8_t model[16];
@@ -2337,6 +2463,9 @@ struct ct_fdmi_hba_attr {
 		uint8_t fw_version[32];
 		uint8_t os_version[128];
 		uint32_t max_ct_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} a;
 };
@@ -2347,7 +2476,10 @@ struct ct_fdmi_hba_attributes {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ct_fdmiv2_hba_attr {
 	uint16_t type;
 	uint16_t len;
@@ -2377,11 +2509,15 @@ struct ct_fdmiv2_hba_attributes {
 	struct ct_fdmiv2_hba_attr entry[FDMIV2_HBA_ATTR_COUNT];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Port attribute types.
  */
 #define FDMI_PORT_ATTR_COUNT		6
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define FDMI_PORT_FC4_TYPES		1
 #define FDMI_PORT_SUPPORT_SPEED		2
@@ -2390,6 +2526,8 @@ struct ct_fdmiv2_hba_attributes {
 #define FDMI_PORT_OS_DEVICE_NAME	5
 #define FDMI_PORT_HOST_NAME		6
 =======
+=======
+>>>>>>> v3.18
 #define FDMIV2_PORT_ATTR_COUNT		16
 #define FDMI_PORT_FC4_TYPES		0x1
 #define FDMI_PORT_SUPPORT_SPEED		0x2
@@ -2407,6 +2545,9 @@ struct ct_fdmiv2_hba_attributes {
 #define FDMI_PORT_STATE			0x101
 #define FDMI_PORT_COUNT			0x102
 #define FDMI_PORT_ID			0x103
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define FDMI_PORT_SPEED_1GB		0x1
@@ -2416,10 +2557,13 @@ struct ct_fdmiv2_hba_attributes {
 #define FDMI_PORT_SPEED_8GB		0x10
 #define FDMI_PORT_SPEED_16GB		0x20
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FDMI_PORT_SPEED_UNKNOWN		0x8000
 
 struct ct_fdmi_port_attr {
 =======
+=======
+>>>>>>> v3.18
 #define FDMI_PORT_SPEED_32GB		0x40
 #define FDMI_PORT_SPEED_UNKNOWN		0x8000
 
@@ -2428,6 +2572,9 @@ struct ct_fdmi_port_attr {
 #define FC_CLASS_2_3	0x0C
 
 struct ct_fdmiv2_port_attr {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint16_t type;
 	uint16_t len;
@@ -2439,7 +2586,10 @@ struct ct_fdmiv2_port_attr {
 		uint8_t os_dev_name[32];
 		uint8_t host_name[32];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		uint8_t node_name[WWN_SIZE];
 		uint8_t port_name[WWN_SIZE];
 		uint8_t port_sym_name[128];
@@ -2450,6 +2600,9 @@ struct ct_fdmiv2_port_attr {
 		uint32_t port_state;
 		uint32_t num_ports;
 		uint32_t port_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} a;
 };
@@ -2458,7 +2611,10 @@ struct ct_fdmiv2_port_attr {
  * Port Attribute Block.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ct_fdmiv2_port_attributes {
 	uint32_t count;
 	struct ct_fdmiv2_port_attr entry[FDMIV2_PORT_ATTR_COUNT];
@@ -2477,6 +2633,9 @@ struct ct_fdmi_port_attr {
 	} a;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ct_fdmi_port_attributes {
 	uint32_t count;
@@ -2578,7 +2737,10 @@ struct ct_sns_req {
 		struct {
 			uint8_t hba_identifier[8];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			uint32_t entry_count;
 			uint8_t port_name[8];
 			struct ct_fdmiv2_hba_attributes attrs;
@@ -2586,6 +2748,9 @@ struct ct_sns_req {
 
 		struct {
 			uint8_t hba_identifier[8];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			struct ct_fdmi_hba_attributes attrs;
 		} rhat;
@@ -2598,12 +2763,18 @@ struct ct_sns_req {
 		struct {
 			uint8_t port_name[8];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			struct ct_fdmiv2_port_attributes attrs;
 		} rpa2;
 
 		struct {
 			uint8_t port_name[8];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} dhba;
 
@@ -2832,7 +3003,11 @@ struct isp_operations {
 
 	char * (*pci_info_str) (struct scsi_qla_host *, char *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char * (*fw_version_str) (struct scsi_qla_host *, char *);
+=======
+	char * (*fw_version_str)(struct scsi_qla_host *, char *, size_t);
+>>>>>>> v3.18
 =======
 	char * (*fw_version_str)(struct scsi_qla_host *, char *, size_t);
 >>>>>>> v3.18
@@ -2843,8 +3018,13 @@ struct isp_operations {
 
 	int (*abort_command) (srb_t *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*target_reset) (struct fc_port *, unsigned int, int);
 	int (*lun_reset) (struct fc_port *, unsigned int, int);
+=======
+	int (*target_reset) (struct fc_port *, uint64_t, int);
+	int (*lun_reset) (struct fc_port *, uint64_t, int);
+>>>>>>> v3.18
 =======
 	int (*target_reset) (struct fc_port *, uint64_t, int);
 	int (*lun_reset) (struct fc_port *, uint64_t, int);
@@ -2978,7 +3158,10 @@ struct qla_statistics {
 	uint64_t input_bytes;
 	uint64_t output_bytes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	uint64_t input_requests;
 	uint64_t output_requests;
 	uint32_t control_requests;
@@ -2987,6 +3170,9 @@ struct qla_statistics {
 	uint32_t stat_max_pend_cmds;
 	uint32_t stat_max_qfull_cmds_alloc;
 	uint32_t stat_max_qfull_cmds_dropped;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -3002,10 +3188,16 @@ struct bidi_statistics {
 #define QLA_MAX_QUEUES 256
 #define ISP_QUE_REG(ha, id) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	((ha->mqenable || IS_QLA83XX(ha)) ? \
 	((device_reg_t __iomem *)(ha->mqiobase) +\
 	(QLA_QUE_PAGE * id)) :\
 	((device_reg_t __iomem *)(ha->iobase)))
+=======
+	((ha->mqenable || IS_QLA83XX(ha) || IS_QLA27XX(ha)) ? \
+	 ((void __iomem *)ha->mqiobase + (QLA_QUE_PAGE * id)) :\
+	 ((void __iomem *)ha->iobase))
+>>>>>>> v3.18
 =======
 	((ha->mqenable || IS_QLA83XX(ha) || IS_QLA27XX(ha)) ? \
 	 ((void __iomem *)ha->mqiobase + (QLA_QUE_PAGE * id)) :\
@@ -3027,6 +3219,10 @@ struct rsp_que {
 	uint16_t  ring_index;
 	uint16_t  out_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint16_t  *in_ptr;		/* queue shadow in index */
+>>>>>>> v3.18
 =======
 	uint16_t  *in_ptr;		/* queue shadow in index */
 >>>>>>> v3.18
@@ -3057,6 +3253,10 @@ struct req_que {
 	uint16_t  ring_index;
 	uint16_t  in_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint16_t  *out_ptr;		/* queue shadow out index */
+>>>>>>> v3.18
 =======
 	uint16_t  *out_ptr;		/* queue shadow out index */
 >>>>>>> v3.18
@@ -3072,7 +3272,10 @@ struct req_que {
 	uint32_t current_outstanding_cmd;
 	uint16_t num_outstanding_cmds;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	MAX_Q_DEPTH		32
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int max_q_depth;
@@ -3091,7 +3294,10 @@ struct qlfc_fw {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct scsi_qlt_host {
 	void *target_lport_ptr;
 	struct mutex tgt_mutex;
@@ -3099,6 +3305,9 @@ struct scsi_qlt_host {
 	struct qla_tgt *qla_tgt;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qlt_hw_data {
 	/* Protected by hw lock */
@@ -3116,9 +3325,13 @@ struct qlt_hw_data {
 	uint32_t __iomem *atio_q_out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *target_lport_ptr;
 	struct qla_tgt_func_tmpl *tgt_ops;
 	struct qla_tgt *qla_tgt;
+=======
+	struct qla_tgt_func_tmpl *tgt_ops;
+>>>>>>> v3.18
 =======
 	struct qla_tgt_func_tmpl *tgt_ops;
 >>>>>>> v3.18
@@ -3127,8 +3340,11 @@ struct qlt_hw_data {
 
 	struct qla_tgt_vp_map *tgt_vp_map;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex tgt_mutex;
 	struct mutex tgt_host_action_mutex;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3142,9 +3358,12 @@ struct qlt_hw_data {
 
 	uint8_t tgt_node_name[WWN_SIZE];
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 
 	struct list_head q_full_list;
 	uint32_t num_pend_cmds;
@@ -3161,6 +3380,9 @@ struct qlt_hw_data {
 
 #define LEAK_EXCHG_THRESH_HOLD_PERCENT 75	/* 75 percent */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Qlogic host adapter specific data structure.
@@ -3192,7 +3414,10 @@ struct qla_hw_data {
 
 		uint32_t	chip_reset_done		:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uint32_t	port0			:1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		uint32_t	running_gold_fw		:1;
@@ -3213,7 +3438,12 @@ struct qla_hw_data {
 		uint32_t        mr_reset_hdlr_active:1;
 		uint32_t        mr_intr_valid:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* 34 bits */
+=======
+		uint32_t	fawwpn_enabled:1;
+		/* 35 bits */
+>>>>>>> v3.18
 =======
 		uint32_t	fawwpn_enabled:1;
 		/* 35 bits */
@@ -3231,7 +3461,11 @@ struct qla_hw_data {
 	int		bars;
 	int		mem_only;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_reg_t __iomem *iobase;           /* Base I/O address */
+=======
+	device_reg_t *iobase;           /* Base I/O address */
+>>>>>>> v3.18
 =======
 	device_reg_t *iobase;           /* Base I/O address */
 >>>>>>> v3.18
@@ -3254,8 +3488,13 @@ struct qla_hw_data {
 
 	/* Multi queue data structs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_reg_t __iomem *mqiobase;
 	device_reg_t __iomem *msixbase;
+=======
+	device_reg_t *mqiobase;
+	device_reg_t *msixbase;
+>>>>>>> v3.18
 =======
 	device_reg_t *mqiobase;
 	device_reg_t *msixbase;
@@ -3296,6 +3535,10 @@ struct qla_hw_data {
 #define PORT_SPEED_8GB  0x04
 #define PORT_SPEED_16GB 0x05
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PORT_SPEED_32GB 0x06
+>>>>>>> v3.18
 =======
 #define PORT_SPEED_32GB 0x06
 >>>>>>> v3.18
@@ -3323,6 +3566,12 @@ struct qla_hw_data {
 #define PCI_DEVICE_ID_QLOGIC_ISP8031	0x8031
 #define PCI_DEVICE_ID_QLOGIC_ISP2031	0x2031
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_DEVICE_ID_QLOGIC_ISP2071	0x2071
+#define PCI_DEVICE_ID_QLOGIC_ISP2271	0x2271
+
+>>>>>>> v3.18
 =======
 #define PCI_DEVICE_ID_QLOGIC_ISP2071	0x2071
 #define PCI_DEVICE_ID_QLOGIC_ISP2271	0x2271
@@ -3348,12 +3597,18 @@ struct qla_hw_data {
 #define DT_ISP8031			BIT_16
 #define DT_ISPFX00			BIT_17
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DT_ISP_LAST			(DT_ISPFX00 << 1)
 =======
+=======
+>>>>>>> v3.18
 #define DT_ISP8044			BIT_18
 #define DT_ISP2071			BIT_19
 #define DT_ISP2271			BIT_20
 #define DT_ISP_LAST			(DT_ISP2271 << 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DT_T10_PI                       BIT_25
@@ -3381,16 +3636,22 @@ struct qla_hw_data {
 #define IS_QLA81XX(ha)	(IS_QLA8001(ha))
 #define IS_QLA82XX(ha)	(DT_MASK(ha) & DT_ISP8021)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IS_QLA2031(ha)	(DT_MASK(ha) & DT_ISP2031)
 #define IS_QLA8031(ha)	(DT_MASK(ha) & DT_ISP8031)
 #define IS_QLAFX00(ha)	(DT_MASK(ha) & DT_ISPFX00)
 =======
+=======
+>>>>>>> v3.18
 #define IS_QLA8044(ha)  (DT_MASK(ha) & DT_ISP8044)
 #define IS_QLA2031(ha)	(DT_MASK(ha) & DT_ISP2031)
 #define IS_QLA8031(ha)	(DT_MASK(ha) & DT_ISP8031)
 #define IS_QLAFX00(ha)	(DT_MASK(ha) & DT_ISPFX00)
 #define IS_QLA2071(ha)	(DT_MASK(ha) & DT_ISP2071)
 #define IS_QLA2271(ha)	(DT_MASK(ha) & DT_ISP2271)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define IS_QLA23XX(ha)  (IS_QLA2300(ha) || IS_QLA2312(ha) || IS_QLA2322(ha) || \
@@ -3400,6 +3661,7 @@ struct qla_hw_data {
 #define IS_QLA25XX(ha)  (IS_QLA2532(ha))
 #define IS_QLA83XX(ha)	(IS_QLA2031(ha) || IS_QLA8031(ha))
 #define IS_QLA84XX(ha)  (IS_QLA8432(ha))
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IS_QLA24XX_TYPE(ha)     (IS_QLA24XX(ha) || IS_QLA54XX(ha) || \
 				IS_QLA84XX(ha))
@@ -3413,6 +3675,8 @@ struct qla_hw_data {
 #define IS_FAC_REQUIRED(ha)	(IS_QLA81XX(ha) || IS_QLA83XX(ha))
 #define IS_NOCACHE_VPD_TYPE(ha)	(IS_QLA81XX(ha) || IS_QLA83XX(ha))
 =======
+=======
+>>>>>>> v3.18
 #define IS_QLA27XX(ha)  (IS_QLA2071(ha) || IS_QLA2271(ha))
 #define IS_QLA24XX_TYPE(ha)     (IS_QLA24XX(ha) || IS_QLA54XX(ha) || \
 				IS_QLA84XX(ha))
@@ -3429,6 +3693,9 @@ struct qla_hw_data {
 				IS_QLA27XX(ha))
 #define IS_NOCACHE_VPD_TYPE(ha)	(IS_QLA81XX(ha) || IS_QLA83XX(ha) || \
 				IS_QLA27XX(ha))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IS_ALOGIO_CAPABLE(ha)	(IS_QLA23XX(ha) || IS_FWI2_CAPABLE(ha))
 
@@ -3440,7 +3707,12 @@ struct qla_hw_data {
 #define HAS_EXTENDED_IDS(ha)    ((ha)->device_type & DT_EXTENDED_IDS)
 #define IS_CT6_SUPPORTED(ha)	((ha)->device_type & DT_CT6_SUPPORTED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IS_MQUE_CAPABLE(ha)	((ha)->mqenable || IS_QLA83XX(ha))
+=======
+#define IS_MQUE_CAPABLE(ha)	((ha)->mqenable || IS_QLA83XX(ha) || \
+				IS_QLA27XX(ha))
+>>>>>>> v3.18
 =======
 #define IS_MQUE_CAPABLE(ha)	((ha)->mqenable || IS_QLA83XX(ha) || \
 				IS_QLA27XX(ha))
@@ -3458,6 +3730,11 @@ struct qla_hw_data {
 #define IS_ATIO_MSIX_CAPABLE(ha) (IS_QLA83XX(ha))
 #define IS_TGT_MODE_CAPABLE(ha)	(ha->tgt.atio_q_length)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IS_SHADOW_REG_CAPABLE(ha)  (IS_QLA27XX(ha))
+#define IS_DPORT_CAPABLE(ha)  (IS_QLA83XX(ha) || IS_QLA27XX(ha))
+>>>>>>> v3.18
 =======
 #define IS_SHADOW_REG_CAPABLE(ha)  (IS_QLA27XX(ha))
 #define IS_DPORT_CAPABLE(ha)  (IS_QLA83XX(ha) || IS_QLA27XX(ha))
@@ -3575,6 +3852,12 @@ struct qla_hw_data {
 	uint16_t	fw_iocb_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t	fw_shared_ram_start;
+	uint32_t	fw_shared_ram_end;
+
+>>>>>>> v3.18
 =======
 	uint32_t	fw_shared_ram_start;
 	uint32_t	fw_shared_ram_end;
@@ -3589,6 +3872,12 @@ struct qla_hw_data {
 	uint8_t		phy_version[3];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Firmware dump template */
+	void		*fw_dump_template;
+	uint32_t	fw_dump_template_len;
+>>>>>>> v3.18
 =======
 	/* Firmware dump template */
 	void		*fw_dump_template;
@@ -3599,8 +3888,11 @@ struct qla_hw_data {
 	uint32_t	fw_dump_len;
 	int		fw_dumped;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		fw_dump_reading;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long	fw_dump_cap_flags;
 #define RISC_PAUSE_CMPL		0
 #define DMA_SHUTDOWN_CMPL	1
@@ -3610,6 +3902,9 @@ struct qla_hw_data {
 #define RISC_EXT_MEM_DUMP_CMPL	5
 	int		fw_dump_reading;
 	int		prev_minidump_failed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dma_addr_t	eft_dma;
 	void		*eft;
@@ -3649,6 +3944,10 @@ struct qla_hw_data {
 	uint32_t	optrom_region_start;
 	uint32_t	optrom_region_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex	optrom_mutex;
+>>>>>>> v3.18
 =======
 	struct mutex	optrom_mutex;
 >>>>>>> v3.18
@@ -3672,6 +3971,10 @@ struct qla_hw_data {
 
 	uint32_t	fdt_wrt_disable;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t	fdt_wrt_enable;
+>>>>>>> v3.18
 =======
 	uint32_t	fdt_wrt_enable;
 >>>>>>> v3.18
@@ -3680,6 +3983,10 @@ struct qla_hw_data {
 	uint32_t	fdt_unprotect_sec_cmd;
 	uint32_t	fdt_protect_sec_cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t	fdt_wrt_sts_reg_cmd;
+>>>>>>> v3.18
 =======
 	uint32_t	fdt_wrt_sts_reg_cmd;
 >>>>>>> v3.18
@@ -3770,6 +4077,10 @@ struct qla_hw_data {
 	/* QLA83XX IDC specific fields */
 	uint32_t	idc_audit_ts;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t	idc_extend_tmo;
+>>>>>>> v3.18
 =======
 	uint32_t	idc_extend_tmo;
 >>>>>>> v3.18
@@ -3782,6 +4093,7 @@ struct qla_hw_data {
 	struct work_struct nic_core_reset;
 	struct work_struct idc_state_handler;
 	struct work_struct nic_core_unrecoverable;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define HOST_QUEUE_RAMPDOWN_INTERVAL           (60 * HZ)
@@ -3797,6 +4109,8 @@ struct qla_hw_data {
 #define THERMAL_SUPPORT_I2C BIT_0
 #define THERMAL_SUPPORT_ISP BIT_1
 =======
+=======
+>>>>>>> v3.18
 	struct work_struct board_disable;
 
 	struct mr_data_fx00 mr;
@@ -3804,6 +4118,9 @@ struct qla_hw_data {
 
 	struct qlt_hw_data tgt;
 	int	allow_cna_fw_dump;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -3866,12 +4183,15 @@ typedef struct scsi_qla_host {
 #define ISP_QUIESCE_NEEDED	20	/* Driver need some quiescence */
 #define SCR_PENDING		21	/* SCR in target mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HOST_RAMP_DOWN_QUEUE_DEPTH     22
 #define HOST_RAMP_UP_QUEUE_DEPTH       23
 #define PORT_UPDATE_NEEDED	24
 #define FX00_RESET_RECOVERY	25
 #define FX00_TARGET_SCAN	26
 =======
+=======
+>>>>>>> v3.18
 #define PORT_UPDATE_NEEDED	22
 #define FX00_RESET_RECOVERY	23
 #define FX00_TARGET_SCAN	24
@@ -3882,6 +4202,9 @@ typedef struct scsi_qla_host {
 #define PFLG_DISCONNECTED	0	/* PCI device removed */
 #define PFLG_DRIVER_REMOVING	1	/* PCI driver .remove */
 #define PFLG_DRIVER_PROBING	2	/* PCI driver .probe */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	uint32_t	device_flags;
@@ -3922,7 +4245,11 @@ typedef struct scsi_qla_host {
 	uint8_t		fcoe_vn_port_mac[6];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t   	vp_abort_cnt;
+=======
+	uint32_t	vp_abort_cnt;
+>>>>>>> v3.18
 =======
 	uint32_t	vp_abort_cnt;
 >>>>>>> v3.18
@@ -3951,6 +4278,10 @@ typedef struct scsi_qla_host {
 #define VP_ERR_ADAP_NORESOURCES	5
 	struct qla_hw_data *hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct scsi_qlt_host vha_tgt;
+>>>>>>> v3.18
 =======
 	struct scsi_qlt_host vha_tgt;
 >>>>>>> v3.18
@@ -3963,6 +4294,10 @@ typedef struct scsi_qla_host {
 
 	atomic_t	vref_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct qla8044_reset_template reset_tmplt;
+>>>>>>> v3.18
 =======
 	struct qla8044_reset_template reset_tmplt;
 >>>>>>> v3.18

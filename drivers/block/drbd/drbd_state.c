@@ -28,6 +28,7 @@
 #include <linux/drbd_limits.h>
 #include "drbd_int.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "drbd_req.h"
 
 /* in drbd_main.c */
@@ -36,12 +37,17 @@ extern void tl_abort_disk_io(struct drbd_conf *mdev);
 struct after_state_chg_work {
 	struct drbd_work w;
 =======
+=======
+>>>>>>> v3.18
 #include "drbd_protocol.h"
 #include "drbd_req.h"
 
 struct after_state_chg_work {
 	struct drbd_work w;
 	struct drbd_device *device;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	union drbd_state os;
 	union drbd_state ns;
@@ -60,6 +66,7 @@ enum sanitize_state_warnings {
 
 static int w_after_state_ch(struct drbd_work *w, int unused);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void after_state_ch(struct drbd_conf *mdev, union drbd_state os,
 			   union drbd_state ns, enum chg_state_flags flags);
 static enum drbd_state_rv is_valid_state(struct drbd_conf *, union drbd_state);
@@ -68,6 +75,8 @@ static enum drbd_state_rv is_valid_transition(union drbd_state os, union drbd_st
 static union drbd_state sanitize_state(struct drbd_conf *mdev, union drbd_state ns,
 				       enum sanitize_state_warnings *warn);
 =======
+=======
+>>>>>>> v3.18
 static void after_state_ch(struct drbd_device *device, union drbd_state os,
 			   union drbd_state ns, enum chg_state_flags flags);
 static enum drbd_state_rv is_valid_state(struct drbd_device *, union drbd_state);
@@ -75,6 +84,9 @@ static enum drbd_state_rv is_valid_soft_transition(union drbd_state, union drbd_
 static enum drbd_state_rv is_valid_transition(union drbd_state os, union drbd_state ns);
 static union drbd_state sanitize_state(struct drbd_device *device, union drbd_state os,
 				       union drbd_state ns, enum sanitize_state_warnings *warn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline bool is_susp(union drbd_state s)
@@ -83,9 +95,15 @@ static inline bool is_susp(union drbd_state s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool conn_all_vols_unconf(struct drbd_tconn *tconn)
 {
 	struct drbd_conf *mdev;
+=======
+bool conn_all_vols_unconf(struct drbd_connection *connection)
+{
+	struct drbd_peer_device *peer_device;
+>>>>>>> v3.18
 =======
 bool conn_all_vols_unconf(struct drbd_connection *connection)
 {
@@ -96,16 +114,22 @@ bool conn_all_vols_unconf(struct drbd_connection *connection)
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idr_for_each_entry(&tconn->volumes, mdev, vnr) {
 		if (mdev->state.disk != D_DISKLESS ||
 		    mdev->state.conn != C_STANDALONE ||
 		    mdev->state.role != R_SECONDARY) {
 =======
+=======
+>>>>>>> v3.18
 	idr_for_each_entry(&connection->peer_devices, peer_device, vnr) {
 		struct drbd_device *device = peer_device->device;
 		if (device->state.disk != D_DISKLESS ||
 		    device->state.conn != C_STANDALONE ||
 		    device->state.role != R_SECONDARY) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			rv = false;
 			break;
@@ -136,6 +160,7 @@ static enum drbd_role min_role(enum drbd_role role1, enum drbd_role role2)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum drbd_role conn_highest_role(struct drbd_tconn *tconn)
 {
 	enum drbd_role role = R_UNKNOWN;
@@ -146,6 +171,8 @@ enum drbd_role conn_highest_role(struct drbd_tconn *tconn)
 	idr_for_each_entry(&tconn->volumes, mdev, vnr)
 		role = max_role(role, mdev->state.role);
 =======
+=======
+>>>>>>> v3.18
 enum drbd_role conn_highest_role(struct drbd_connection *connection)
 {
 	enum drbd_role role = R_UNKNOWN;
@@ -157,12 +184,16 @@ enum drbd_role conn_highest_role(struct drbd_connection *connection)
 		struct drbd_device *device = peer_device->device;
 		role = max_role(role, device->state.role);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rcu_read_unlock();
 
 	return role;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum drbd_role conn_highest_peer(struct drbd_tconn *tconn)
 {
@@ -174,6 +205,8 @@ enum drbd_role conn_highest_peer(struct drbd_tconn *tconn)
 	idr_for_each_entry(&tconn->volumes, mdev, vnr)
 		peer = max_role(peer, mdev->state.peer);
 =======
+=======
+>>>>>>> v3.18
 enum drbd_role conn_highest_peer(struct drbd_connection *connection)
 {
 	enum drbd_role peer = R_UNKNOWN;
@@ -185,12 +218,16 @@ enum drbd_role conn_highest_peer(struct drbd_connection *connection)
 		struct drbd_device *device = peer_device->device;
 		peer = max_role(peer, device->state.peer);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rcu_read_unlock();
 
 	return peer;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum drbd_disk_state conn_highest_disk(struct drbd_tconn *tconn)
 {
@@ -244,6 +281,8 @@ enum drbd_conns conn_lowest_conn(struct drbd_tconn *tconn)
 	idr_for_each_entry(&tconn->volumes, mdev, vnr)
 		conn = min_t(enum drbd_conns, conn, mdev->state.conn);
 =======
+=======
+>>>>>>> v3.18
 enum drbd_disk_state conn_highest_disk(struct drbd_connection *connection)
 {
 	enum drbd_disk_state disk_state = D_DISKLESS;
@@ -303,6 +342,9 @@ enum drbd_conns conn_lowest_conn(struct drbd_connection *connection)
 		struct drbd_device *device = peer_device->device;
 		conn = min_t(enum drbd_conns, conn, device->state.conn);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rcu_read_unlock();
 
@@ -310,9 +352,15 @@ enum drbd_conns conn_lowest_conn(struct drbd_connection *connection)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool no_peer_wf_report_params(struct drbd_tconn *tconn)
 {
 	struct drbd_conf *mdev;
+=======
+static bool no_peer_wf_report_params(struct drbd_connection *connection)
+{
+	struct drbd_peer_device *peer_device;
+>>>>>>> v3.18
 =======
 static bool no_peer_wf_report_params(struct drbd_connection *connection)
 {
@@ -323,8 +371,13 @@ static bool no_peer_wf_report_params(struct drbd_connection *connection)
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idr_for_each_entry(&tconn->volumes, mdev, vnr)
 		if (mdev->state.conn == C_WF_REPORT_PARAMS) {
+=======
+	idr_for_each_entry(&connection->peer_devices, peer_device, vnr)
+		if (peer_device->device->state.conn == C_WF_REPORT_PARAMS) {
+>>>>>>> v3.18
 =======
 	idr_for_each_entry(&connection->peer_devices, peer_device, vnr)
 		if (peer_device->device->state.conn == C_WF_REPORT_PARAMS) {
@@ -341,17 +394,23 @@ static bool no_peer_wf_report_params(struct drbd_connection *connection)
 /**
  * cl_wide_st_chg() - true if the state change is a cluster wide one
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
  * @os:		old (current) state.
  * @ns:		new (wanted) state.
  */
 static int cl_wide_st_chg(struct drbd_conf *mdev,
 =======
+=======
+>>>>>>> v3.18
  * @device:	DRBD device.
  * @os:		old (current) state.
  * @ns:		new (wanted) state.
  */
 static int cl_wide_st_chg(struct drbd_device *device,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  union drbd_state os, union drbd_state ns)
 {
@@ -375,7 +434,11 @@ apply_mask_val(union drbd_state os, union drbd_state mask, union drbd_state val)
 
 enum drbd_state_rv
 <<<<<<< HEAD
+<<<<<<< HEAD
 drbd_change_state(struct drbd_conf *mdev, enum chg_state_flags f,
+=======
+drbd_change_state(struct drbd_device *device, enum chg_state_flags f,
+>>>>>>> v3.18
 =======
 drbd_change_state(struct drbd_device *device, enum chg_state_flags f,
 >>>>>>> v3.18
@@ -386,15 +449,21 @@ drbd_change_state(struct drbd_device *device, enum chg_state_flags f,
 	enum drbd_state_rv rv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&mdev->tconn->req_lock, flags);
 	ns = apply_mask_val(drbd_read_state(mdev), mask, val);
 	rv = _drbd_set_state(mdev, ns, f, NULL);
 	spin_unlock_irqrestore(&mdev->tconn->req_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&device->resource->req_lock, flags);
 	ns = apply_mask_val(drbd_read_state(device), mask, val);
 	rv = _drbd_set_state(device, ns, f, NULL);
 	spin_unlock_irqrestore(&device->resource->req_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rv;
@@ -402,6 +471,7 @@ drbd_change_state(struct drbd_device *device, enum chg_state_flags f,
 
 /**
  * drbd_force_state() - Impose a change which happens outside our control on our state
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @mdev:	DRBD device.
  * @mask:	mask of state bits to change.
@@ -416,6 +486,8 @@ void drbd_force_state(struct drbd_conf *mdev,
 static enum drbd_state_rv
 _req_st_cond(struct drbd_conf *mdev, union drbd_state mask,
 =======
+=======
+>>>>>>> v3.18
  * @device:	DRBD device.
  * @mask:	mask of state bits to change.
  * @val:	value of new state bits.
@@ -428,6 +500,9 @@ void drbd_force_state(struct drbd_device *device,
 
 static enum drbd_state_rv
 _req_st_cond(struct drbd_device *device, union drbd_state mask,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	     union drbd_state val)
 {
@@ -435,6 +510,7 @@ _req_st_cond(struct drbd_device *device, union drbd_state mask,
 	unsigned long flags;
 	enum drbd_state_rv rv;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (test_and_clear_bit(CL_ST_CHG_SUCCESS, &mdev->flags))
 		return SS_CW_SUCCESS;
@@ -446,6 +522,8 @@ _req_st_cond(struct drbd_device *device, union drbd_state mask,
 	os = drbd_read_state(mdev);
 	ns = sanitize_state(mdev, apply_mask_val(os, mask, val), NULL);
 =======
+=======
+>>>>>>> v3.18
 	if (test_and_clear_bit(CL_ST_CHG_SUCCESS, &device->flags))
 		return SS_CW_SUCCESS;
 
@@ -455,11 +533,15 @@ _req_st_cond(struct drbd_device *device, union drbd_state mask,
 	spin_lock_irqsave(&device->resource->req_lock, flags);
 	os = drbd_read_state(device);
 	ns = sanitize_state(device, os, apply_mask_val(os, mask, val), NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rv = is_valid_transition(os, ns);
 	if (rv >= SS_SUCCESS)
 		rv = SS_UNKNOWN_ERROR;  /* cont waiting, otherwise fail. */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!cl_wide_st_chg(mdev, os, ns))
 		rv = SS_CW_NO_NEED;
@@ -468,19 +550,28 @@ _req_st_cond(struct drbd_device *device, union drbd_state mask,
 		if (rv >= SS_SUCCESS) {
 			rv = is_valid_soft_transition(os, ns, mdev->tconn);
 =======
+=======
+>>>>>>> v3.18
 	if (!cl_wide_st_chg(device, os, ns))
 		rv = SS_CW_NO_NEED;
 	if (rv == SS_UNKNOWN_ERROR) {
 		rv = is_valid_state(device, ns);
 		if (rv >= SS_SUCCESS) {
 			rv = is_valid_soft_transition(os, ns, first_peer_device(device)->connection);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (rv >= SS_SUCCESS)
 				rv = SS_UNKNOWN_ERROR; /* cont waiting, otherwise fail. */
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&mdev->tconn->req_lock, flags);
+=======
+	spin_unlock_irqrestore(&device->resource->req_lock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&device->resource->req_lock, flags);
 >>>>>>> v3.18
@@ -491,7 +582,11 @@ _req_st_cond(struct drbd_device *device, union drbd_state mask,
 /**
  * drbd_req_state() - Perform an eventually cluster wide state change
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -504,7 +599,11 @@ _req_st_cond(struct drbd_device *device, union drbd_state mask,
  */
 static enum drbd_state_rv
 <<<<<<< HEAD
+<<<<<<< HEAD
 drbd_req_state(struct drbd_conf *mdev, union drbd_state mask,
+=======
+drbd_req_state(struct drbd_device *device, union drbd_state mask,
+>>>>>>> v3.18
 =======
 drbd_req_state(struct drbd_device *device, union drbd_state mask,
 >>>>>>> v3.18
@@ -518,6 +617,7 @@ drbd_req_state(struct drbd_device *device, union drbd_state mask,
 	init_completion(&done);
 
 	if (f & CS_SERIALIZE)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		mutex_lock(mdev->state_mutex);
 
@@ -569,6 +669,8 @@ drbd_req_state(struct drbd_device *device, union drbd_state mask,
 	if (f & CS_WAIT_COMPLETE && rv == SS_SUCCESS) {
 		D_ASSERT(current != mdev->tconn->worker.task);
 =======
+=======
+>>>>>>> v3.18
 		mutex_lock(device->state_mutex);
 
 	spin_lock_irqsave(&device->resource->req_lock, flags);
@@ -618,6 +720,9 @@ drbd_req_state(struct drbd_device *device, union drbd_state mask,
 
 	if (f & CS_WAIT_COMPLETE && rv == SS_SUCCESS) {
 		D_ASSERT(device, current != first_peer_device(device)->connection->worker.task);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		wait_for_completion(&done);
 	}
@@ -625,7 +730,11 @@ drbd_req_state(struct drbd_device *device, union drbd_state mask,
 abort:
 	if (f & CS_SERIALIZE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(mdev->state_mutex);
+=======
+		mutex_unlock(device->state_mutex);
+>>>>>>> v3.18
 =======
 		mutex_unlock(device->state_mutex);
 >>>>>>> v3.18
@@ -636,7 +745,11 @@ abort:
 /**
  * _drbd_request_state() - Request a state change (with flags)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -649,7 +762,11 @@ abort:
  */
 enum drbd_state_rv
 <<<<<<< HEAD
+<<<<<<< HEAD
 _drbd_request_state(struct drbd_conf *mdev, union drbd_state mask,
+=======
+_drbd_request_state(struct drbd_device *device, union drbd_state mask,
+>>>>>>> v3.18
 =======
 _drbd_request_state(struct drbd_device *device, union drbd_state mask,
 >>>>>>> v3.18
@@ -658,8 +775,13 @@ _drbd_request_state(struct drbd_device *device, union drbd_state mask,
 	enum drbd_state_rv rv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_event(mdev->state_wait,
 		   (rv = drbd_req_state(mdev, mask, val, f)) != SS_IN_TRANSIENT_STATE);
+=======
+	wait_event(device->state_wait,
+		   (rv = drbd_req_state(device, mask, val, f)) != SS_IN_TRANSIENT_STATE);
+>>>>>>> v3.18
 =======
 	wait_event(device->state_wait,
 		   (rv = drbd_req_state(device, mask, val, f)) != SS_IN_TRANSIENT_STATE);
@@ -669,9 +791,15 @@ _drbd_request_state(struct drbd_device *device, union drbd_state mask,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void print_st(struct drbd_conf *mdev, char *name, union drbd_state ns)
 {
 	dev_err(DEV, " %s = { cs:%s ro:%s/%s ds:%s/%s %c%c%c%c%c%c }\n",
+=======
+static void print_st(struct drbd_device *device, const char *name, union drbd_state ns)
+{
+	drbd_err(device, " %s = { cs:%s ro:%s/%s ds:%s/%s %c%c%c%c%c%c }\n",
+>>>>>>> v3.18
 =======
 static void print_st(struct drbd_device *device, const char *name, union drbd_state ns)
 {
@@ -693,7 +821,11 @@ static void print_st(struct drbd_device *device, const char *name, union drbd_st
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void print_st_err(struct drbd_conf *mdev, union drbd_state os,
+=======
+void print_st_err(struct drbd_device *device, union drbd_state os,
+>>>>>>> v3.18
 =======
 void print_st_err(struct drbd_device *device, union drbd_state os,
 >>>>>>> v3.18
@@ -702,9 +834,15 @@ void print_st_err(struct drbd_device *device, union drbd_state os,
 	if (err == SS_IN_TRANSIENT_STATE)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_err(DEV, "State change failed: %s\n", drbd_set_st_err_str(err));
 	print_st(mdev, " state", os);
 	print_st(mdev, "wanted", ns);
+=======
+	drbd_err(device, "State change failed: %s\n", drbd_set_st_err_str(err));
+	print_st(device, " state", os);
+	print_st(device, "wanted", ns);
+>>>>>>> v3.18
 =======
 	drbd_err(device, "State change failed: %s\n", drbd_set_st_err_str(err));
 	print_st(device, " state", os);
@@ -744,7 +882,11 @@ static long print_state_change(char *pb, union drbd_state os, union drbd_state n
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void drbd_pr_state_change(struct drbd_conf *mdev, union drbd_state os, union drbd_state ns,
+=======
+static void drbd_pr_state_change(struct drbd_device *device, union drbd_state os, union drbd_state ns,
+>>>>>>> v3.18
 =======
 static void drbd_pr_state_change(struct drbd_device *device, union drbd_state os, union drbd_state ns,
 >>>>>>> v3.18
@@ -770,15 +912,21 @@ static void drbd_pr_state_change(struct drbd_device *device, union drbd_state os
 
 	if (pbp != pb)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(DEV, "%s\n", pb);
 }
 
 static void conn_pr_state_change(struct drbd_tconn *tconn, union drbd_state os, union drbd_state ns,
 =======
+=======
+>>>>>>> v3.18
 		drbd_info(device, "%s\n", pb);
 }
 
 static void conn_pr_state_change(struct drbd_connection *connection, union drbd_state os, union drbd_state ns,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 enum chg_state_flags flags)
 {
@@ -794,7 +942,11 @@ static void conn_pr_state_change(struct drbd_connection *connection, union drbd_
 
 	if (pbp != pb)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		conn_info(tconn, "%s\n", pb);
+=======
+		drbd_info(connection, "%s\n", pb);
+>>>>>>> v3.18
 =======
 		drbd_info(connection, "%s\n", pb);
 >>>>>>> v3.18
@@ -804,17 +956,23 @@ static void conn_pr_state_change(struct drbd_connection *connection, union drbd_
 /**
  * is_valid_state() - Returns an SS_ error code if ns is not valid
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
  * @ns:		State to consider.
  */
 static enum drbd_state_rv
 is_valid_state(struct drbd_conf *mdev, union drbd_state ns)
 =======
+=======
+>>>>>>> v3.18
  * @device:	DRBD device.
  * @ns:		State to consider.
  */
 static enum drbd_state_rv
 is_valid_state(struct drbd_device *device, union drbd_state ns)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* See drbd_state_sw_errors in drbd_strings.c */
@@ -826,6 +984,7 @@ is_valid_state(struct drbd_device *device, union drbd_state ns)
 	rcu_read_lock();
 	fp = FP_DONT_CARE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_ldev(mdev)) {
 		fp = rcu_dereference(mdev->ldev->disk_conf)->fencing;
 		put_ldev(mdev);
@@ -833,19 +992,28 @@ is_valid_state(struct drbd_device *device, union drbd_state ns)
 
 	nc = rcu_dereference(mdev->tconn->net_conf);
 =======
+=======
+>>>>>>> v3.18
 	if (get_ldev(device)) {
 		fp = rcu_dereference(device->ldev->disk_conf)->fencing;
 		put_ldev(device);
 	}
 
 	nc = rcu_dereference(first_peer_device(device)->connection->net_conf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (nc) {
 		if (!nc->two_primaries && ns.role == R_PRIMARY) {
 			if (ns.peer == R_PRIMARY)
 				rv = SS_TWO_PRIMARIES;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			else if (conn_highest_peer(mdev->tconn) == R_PRIMARY)
+=======
+			else if (conn_highest_peer(first_peer_device(device)->connection) == R_PRIMARY)
+>>>>>>> v3.18
 =======
 			else if (conn_highest_peer(first_peer_device(device)->connection) == R_PRIMARY)
 >>>>>>> v3.18
@@ -856,7 +1024,11 @@ is_valid_state(struct drbd_device *device, union drbd_state ns)
 	if (rv <= 0)
 		/* already found a reason to abort */;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (ns.role == R_SECONDARY && mdev->open_cnt)
+=======
+	else if (ns.role == R_SECONDARY && device->open_cnt)
+>>>>>>> v3.18
 =======
 	else if (ns.role == R_SECONDARY && device->open_cnt)
 >>>>>>> v3.18
@@ -894,7 +1066,11 @@ is_valid_state(struct drbd_device *device, union drbd_state ns)
 
 	else if ((ns.conn == C_VERIFY_S || ns.conn == C_VERIFY_T) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  mdev->tconn->agreed_pro_version < 88)
+=======
+		  first_peer_device(device)->connection->agreed_pro_version < 88)
+>>>>>>> v3.18
 =======
 		  first_peer_device(device)->connection->agreed_pro_version < 88)
 >>>>>>> v3.18
@@ -920,7 +1096,11 @@ is_valid_state(struct drbd_device *device, union drbd_state ns)
  * This function limits state transitions that may be declined by DRBD. I.e.
  * user requests (aka soft transitions).
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -929,7 +1109,11 @@ is_valid_state(struct drbd_device *device, union drbd_state ns)
  */
 static enum drbd_state_rv
 <<<<<<< HEAD
+<<<<<<< HEAD
 is_valid_soft_transition(union drbd_state os, union drbd_state ns, struct drbd_tconn *tconn)
+=======
+is_valid_soft_transition(union drbd_state os, union drbd_state ns, struct drbd_connection *connection)
+>>>>>>> v3.18
 =======
 is_valid_soft_transition(union drbd_state os, union drbd_state ns, struct drbd_connection *connection)
 >>>>>>> v3.18
@@ -961,7 +1145,11 @@ is_valid_soft_transition(union drbd_state os, union drbd_state ns, struct drbd_c
 	/* While establishing a connection only allow cstate to change.
 	   Delay/refuse role changes, detach attach etc... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(STATE_SENT, &tconn->flags) &&
+=======
+	if (test_bit(STATE_SENT, &connection->flags) &&
+>>>>>>> v3.18
 =======
 	if (test_bit(STATE_SENT, &connection->flags) &&
 >>>>>>> v3.18
@@ -1046,7 +1234,11 @@ is_valid_transition(union drbd_state os, union drbd_state ns)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void print_sanitize_warnings(struct drbd_conf *mdev, enum sanitize_state_warnings warn)
+=======
+static void print_sanitize_warnings(struct drbd_device *device, enum sanitize_state_warnings warn)
+>>>>>>> v3.18
 =======
 static void print_sanitize_warnings(struct drbd_device *device, enum sanitize_state_warnings warn)
 >>>>>>> v3.18
@@ -1062,7 +1254,11 @@ static void print_sanitize_warnings(struct drbd_device *device, enum sanitize_st
 
 	if (warn != NO_WARNING)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_warn(DEV, "%s\n", msg_table[warn]);
+=======
+		drbd_warn(device, "%s\n", msg_table[warn]);
+>>>>>>> v3.18
 =======
 		drbd_warn(device, "%s\n", msg_table[warn]);
 >>>>>>> v3.18
@@ -1071,7 +1267,11 @@ static void print_sanitize_warnings(struct drbd_device *device, enum sanitize_st
 /**
  * sanitize_state() - Resolves implicitly necessary additional changes to a state transition
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -1083,8 +1283,13 @@ static void print_sanitize_warnings(struct drbd_device *device, enum sanitize_st
  * to D_UNKNOWN. This rule and many more along those lines are in this function.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static union drbd_state sanitize_state(struct drbd_conf *mdev, union drbd_state ns,
 				       enum sanitize_state_warnings *warn)
+=======
+static union drbd_state sanitize_state(struct drbd_device *device, union drbd_state os,
+				       union drbd_state ns, enum sanitize_state_warnings *warn)
+>>>>>>> v3.18
 =======
 static union drbd_state sanitize_state(struct drbd_device *device, union drbd_state os,
 				       union drbd_state ns, enum sanitize_state_warnings *warn)
@@ -1098,17 +1303,23 @@ static union drbd_state sanitize_state(struct drbd_device *device, union drbd_st
 
 	fp = FP_DONT_CARE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_ldev(mdev)) {
 		rcu_read_lock();
 		fp = rcu_dereference(mdev->ldev->disk_conf)->fencing;
 		rcu_read_unlock();
 		put_ldev(mdev);
 =======
+=======
+>>>>>>> v3.18
 	if (get_ldev(device)) {
 		rcu_read_lock();
 		fp = rcu_dereference(device->ldev->disk_conf)->fencing;
 		rcu_read_unlock();
 		put_ldev(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1136,15 +1347,21 @@ static union drbd_state sanitize_state(struct drbd_device *device, union drbd_st
 	/* Connection breaks down before we finished "Negotiating" */
 	if (ns.conn < C_CONNECTED && ns.disk == D_NEGOTIATING &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    get_ldev_if_state(mdev, D_NEGOTIATING)) {
 		if (mdev->ed_uuid == mdev->ldev->md.uuid[UI_CURRENT]) {
 			ns.disk = mdev->new_state_tmp.disk;
 			ns.pdsk = mdev->new_state_tmp.pdsk;
 =======
+=======
+>>>>>>> v3.18
 	    get_ldev_if_state(device, D_NEGOTIATING)) {
 		if (device->ed_uuid == device->ldev->md.uuid[UI_CURRENT]) {
 			ns.disk = device->new_state_tmp.disk;
 			ns.pdsk = device->new_state_tmp.pdsk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			if (warn)
@@ -1153,7 +1370,11 @@ static union drbd_state sanitize_state(struct drbd_device *device, union drbd_st
 			ns.pdsk = D_UNKNOWN;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_ldev(mdev);
+=======
+		put_ldev(device);
+>>>>>>> v3.18
 =======
 		put_ldev(device);
 >>>>>>> v3.18
@@ -1249,12 +1470,15 @@ static union drbd_state sanitize_state(struct drbd_device *device, union drbd_st
 
 	if (fp == FP_STONITH &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (ns.role == R_PRIMARY && ns.conn < C_CONNECTED && ns.pdsk > D_OUTDATED))
 		ns.susp_fen = 1; /* Suspend IO while fence-peer handler runs (peer lost) */
 
 	if (mdev->tconn->res_opts.on_no_data == OND_SUSPEND_IO &&
 	    (ns.role == R_PRIMARY && ns.disk < D_UP_TO_DATE && ns.pdsk < D_UP_TO_DATE))
 =======
+=======
+>>>>>>> v3.18
 	    (ns.role == R_PRIMARY && ns.conn < C_CONNECTED && ns.pdsk > D_OUTDATED) &&
 	    !(os.role == R_PRIMARY && os.conn < C_CONNECTED && os.pdsk > D_OUTDATED))
 		ns.susp_fen = 1; /* Suspend IO while fence-peer handler runs (peer lost) */
@@ -1262,6 +1486,9 @@ static union drbd_state sanitize_state(struct drbd_device *device, union drbd_st
 	if (device->resource->res_opts.on_no_data == OND_SUSPEND_IO &&
 	    (ns.role == R_PRIMARY && ns.disk < D_UP_TO_DATE && ns.pdsk < D_UP_TO_DATE) &&
 	    !(os.role == R_PRIMARY && os.disk < D_UP_TO_DATE && os.pdsk < D_UP_TO_DATE))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ns.susp_nod = 1; /* Suspend IO while no data available (no accessible data available) */
 
@@ -1281,6 +1508,7 @@ static union drbd_state sanitize_state(struct drbd_device *device, union drbd_st
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drbd_resume_al(struct drbd_conf *mdev)
 {
 	if (test_and_clear_bit(AL_SUSPENDED, &mdev->flags))
@@ -1295,6 +1523,8 @@ static void set_ov_position(struct drbd_conf *mdev, enum drbd_conns cs)
 	mdev->rs_total = drbd_bm_bits(mdev);
 	mdev->ov_position = 0;
 =======
+=======
+>>>>>>> v3.18
 void drbd_resume_al(struct drbd_device *device)
 {
 	if (test_and_clear_bit(AL_SUSPENDED, &device->flags))
@@ -1308,6 +1538,9 @@ static void set_ov_position(struct drbd_device *device, enum drbd_conns cs)
 		device->ov_start_sector = 0;
 	device->rs_total = drbd_bm_bits(device);
 	device->ov_position = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cs == C_VERIFY_T) {
 		/* starting online verify from an arbitrary position
@@ -1315,6 +1548,7 @@ static void set_ov_position(struct drbd_device *device, enum drbd_conns cs)
 		 * on C_VERIFY_T, we initialize ov_left and friends
 		 * implicitly in receive_DataRequest once the
 		 * first P_OV_REQUEST is received */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		mdev->ov_start_sector = ~(sector_t)0;
 	} else {
@@ -1329,6 +1563,8 @@ static void set_ov_position(struct drbd_device *device, enum drbd_conns cs)
 	}
 	mdev->ov_left = mdev->rs_total;
 =======
+=======
+>>>>>>> v3.18
 		device->ov_start_sector = ~(sector_t)0;
 	} else {
 		unsigned long bit = BM_SECT_TO_BIT(device->ov_start_sector);
@@ -1341,13 +1577,20 @@ static void set_ov_position(struct drbd_device *device, enum drbd_conns cs)
 		device->ov_position = device->ov_start_sector;
 	}
 	device->ov_left = device->rs_total;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * __drbd_set_state() - Set a new DRBD state
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -1359,20 +1602,27 @@ static void set_ov_position(struct drbd_device *device, enum drbd_conns cs)
  */
 enum drbd_state_rv
 <<<<<<< HEAD
+<<<<<<< HEAD
 __drbd_set_state(struct drbd_conf *mdev, union drbd_state ns,
 	         enum chg_state_flags flags, struct completion *done)
 {
 =======
+=======
+>>>>>>> v3.18
 __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 	         enum chg_state_flags flags, struct completion *done)
 {
 	struct drbd_peer_device *peer_device = first_peer_device(device);
 	struct drbd_connection *connection = peer_device ? peer_device->connection : NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	union drbd_state os;
 	enum drbd_state_rv rv = SS_SUCCESS;
 	enum sanitize_state_warnings ssw;
 	struct after_state_chg_work *ascw;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool did_remote, should_do_remote;
 
@@ -1380,10 +1630,15 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 
 	ns = sanitize_state(mdev, ns, &ssw);
 =======
+=======
+>>>>>>> v3.18
 
 	os = drbd_read_state(device);
 
 	ns = sanitize_state(device, os, ns, &ssw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ns.i == os.i)
 		return SS_NOTHING_TO_DO;
@@ -1397,7 +1652,11 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 		/* See drbd_state_sw_errors in drbd_strings.c */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rv = is_valid_state(mdev, ns);
+=======
+		rv = is_valid_state(device, ns);
+>>>>>>> v3.18
 =======
 		rv = is_valid_state(device, ns);
 >>>>>>> v3.18
@@ -1406,20 +1665,27 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 			   this happen...*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (is_valid_state(mdev, os) == rv)
 				rv = is_valid_soft_transition(os, ns, mdev->tconn);
 		} else
 			rv = is_valid_soft_transition(os, ns, mdev->tconn);
 =======
+=======
+>>>>>>> v3.18
 			if (is_valid_state(device, os) == rv)
 				rv = is_valid_soft_transition(os, ns, connection);
 		} else
 			rv = is_valid_soft_transition(os, ns, connection);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (rv < SS_SUCCESS) {
 		if (flags & CS_VERBOSE)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			print_st_err(mdev, os, ns, rv);
 		return rv;
@@ -1429,6 +1695,8 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 
 	drbd_pr_state_change(mdev, os, ns, flags);
 =======
+=======
+>>>>>>> v3.18
 			print_st_err(device, os, ns, rv);
 		return rv;
 	}
@@ -1436,6 +1704,9 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 	print_sanitize_warnings(device, ssw);
 
 	drbd_pr_state_change(device, os, ns, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Display changes to the susp* flags that where caused by the call to
@@ -1443,7 +1714,12 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 	   _conn_request_state() */
 	if (!(flags & CS_DC_SUSP))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		conn_pr_state_change(mdev->tconn, os, ns, (flags & ~CS_DC_MASK) | CS_DC_SUSP);
+=======
+		conn_pr_state_change(connection, os, ns,
+				     (flags & ~CS_DC_MASK) | CS_DC_SUSP);
+>>>>>>> v3.18
 =======
 		conn_pr_state_change(connection, os, ns,
 				     (flags & ~CS_DC_MASK) | CS_DC_SUSP);
@@ -1455,6 +1731,7 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 	 * after_state_ch works run, where we put_ldev again. */
 	if ((os.disk != D_FAILED && ns.disk == D_FAILED) ||
 	    (os.disk != D_DISKLESS && ns.disk == D_DISKLESS))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		atomic_inc(&mdev->local_cnt);
 
@@ -1481,6 +1758,8 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 	wake_up(&mdev->state_wait);
 	wake_up(&mdev->tconn->ping_wait);
 =======
+=======
+>>>>>>> v3.18
 		atomic_inc(&device->local_cnt);
 
 	if (!is_sync_state(os.conn) && is_sync_state(ns.conn))
@@ -1512,6 +1791,9 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 	wake_up(&device->misc_wait);
 	wake_up(&device->state_wait);
 	wake_up(&connection->ping_wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Aborted verify run, or we reached the stop sector.
@@ -1519,22 +1801,29 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 	if ((os.conn == C_VERIFY_S || os.conn == C_VERIFY_T) &&
 	    ns.conn <= C_CONNECTED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mdev->ov_start_sector =
 			BM_BIT_TO_SECT(drbd_bm_bits(mdev) - mdev->ov_left);
 		if (mdev->ov_left)
 			dev_info(DEV, "Online Verify reached sector %llu\n",
 				(unsigned long long)mdev->ov_start_sector);
 =======
+=======
+>>>>>>> v3.18
 		device->ov_start_sector =
 			BM_BIT_TO_SECT(drbd_bm_bits(device) - device->ov_left);
 		if (device->ov_left)
 			drbd_info(device, "Online Verify reached sector %llu\n",
 				(unsigned long long)device->ov_start_sector);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if ((os.conn == C_PAUSED_SYNC_T || os.conn == C_PAUSED_SYNC_S) &&
 	    (ns.conn == C_SYNC_TARGET  || ns.conn == C_SYNC_SOURCE)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_info(DEV, "Syncer continues.\n");
 		mdev->rs_paused += (long)jiffies
@@ -1542,19 +1831,29 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 		if (ns.conn == C_SYNC_TARGET)
 			mod_timer(&mdev->resync_timer, jiffies);
 =======
+=======
+>>>>>>> v3.18
 		drbd_info(device, "Syncer continues.\n");
 		device->rs_paused += (long)jiffies
 				  -(long)device->rs_mark_time[device->rs_last_mark];
 		if (ns.conn == C_SYNC_TARGET)
 			mod_timer(&device->resync_timer, jiffies);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if ((os.conn == C_SYNC_TARGET  || os.conn == C_SYNC_SOURCE) &&
 	    (ns.conn == C_PAUSED_SYNC_T || ns.conn == C_PAUSED_SYNC_S)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(DEV, "Resync suspended\n");
 		mdev->rs_mark_time[mdev->rs_last_mark] = jiffies;
+=======
+		drbd_info(device, "Resync suspended\n");
+		device->rs_mark_time[device->rs_last_mark] = jiffies;
+>>>>>>> v3.18
 =======
 		drbd_info(device, "Resync suspended\n");
 		device->rs_mark_time[device->rs_last_mark] = jiffies;
@@ -1566,6 +1865,7 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 		unsigned long now = jiffies;
 		int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		set_ov_position(mdev, ns.conn);
 		mdev->rs_start = now;
@@ -1591,6 +1891,8 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 	if (get_ldev(mdev)) {
 		u32 mdf = mdev->ldev->md.flags & ~(MDF_CONSISTENT|MDF_PRIMARY_IND|
 =======
+=======
+>>>>>>> v3.18
 		set_ov_position(device, ns.conn);
 		device->rs_start = now;
 		device->rs_last_events = 0;
@@ -1614,11 +1916,15 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 
 	if (get_ldev(device)) {
 		u32 mdf = device->ldev->md.flags & ~(MDF_CONSISTENT|MDF_PRIMARY_IND|
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						 MDF_CONNECTED_IND|MDF_WAS_UP_TO_DATE|
 						 MDF_PEER_OUT_DATED|MDF_CRASHED_PRIMARY);
 
 		mdf &= ~MDF_AL_CLEAN;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (test_bit(CRASHED_PRIMARY, &mdev->flags))
 			mdf |= MDF_CRASHED_PRIMARY;
@@ -1641,6 +1947,8 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 			drbd_set_ed_uuid(mdev, mdev->ldev->md.uuid[UI_CURRENT]);
 		put_ldev(mdev);
 =======
+=======
+>>>>>>> v3.18
 		if (test_bit(CRASHED_PRIMARY, &device->flags))
 			mdf |= MDF_CRASHED_PRIMARY;
 		if (device->state.role == R_PRIMARY ||
@@ -1661,12 +1969,16 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 		if (os.disk < D_CONSISTENT && ns.disk >= D_CONSISTENT)
 			drbd_set_ed_uuid(device, device->ldev->md.uuid[UI_CURRENT]);
 		put_ldev(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* Peer was forced D_UP_TO_DATE & R_PRIMARY, consider to resync */
 	if (os.disk == D_INCONSISTENT && os.pdsk == D_INCONSISTENT &&
 	    os.peer == R_SECONDARY && ns.peer == R_PRIMARY)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		set_bit(CONSIDER_RESYNC, &mdev->flags);
 
@@ -1678,6 +1990,8 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 	if (os.conn != C_STANDALONE && ns.conn == C_STANDALONE)
 		drbd_thread_stop_nowait(&mdev->tconn->receiver);
 =======
+=======
+>>>>>>> v3.18
 		set_bit(CONSIDER_RESYNC, &device->flags);
 
 	/* Receiver should clean up itself */
@@ -1687,11 +2001,15 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 	/* Now the receiver finished cleaning up itself, it should die */
 	if (os.conn != C_STANDALONE && ns.conn == C_STANDALONE)
 		drbd_thread_stop_nowait(&connection->receiver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Upon network failure, we need to restart the receiver. */
 	if (os.conn > C_WF_CONNECTION &&
 	    ns.conn <= C_TEAR_DOWN && ns.conn >= C_TIMEOUT)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		drbd_thread_restart_nowait(&mdev->tconn->receiver);
 
@@ -1699,6 +2017,8 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 	if (os.conn < C_CONNECTED && ns.conn >= C_CONNECTED)
 		drbd_resume_al(mdev);
 =======
+=======
+>>>>>>> v3.18
 		drbd_thread_restart_nowait(&connection->receiver);
 
 	/* Resume AL writing if we get a connection */
@@ -1706,6 +2026,9 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 		drbd_resume_al(device);
 		connection->connect_cnt++;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* remember last attach time so request_timer_fn() won't
@@ -1714,7 +2037,11 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 	if ((os.disk == D_ATTACHING || os.disk == D_NEGOTIATING) &&
 	    ns.disk > D_NEGOTIATING)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mdev->last_reattach_jif = jiffies;
+=======
+		device->last_reattach_jif = jiffies;
+>>>>>>> v3.18
 =======
 		device->last_reattach_jif = jiffies;
 >>>>>>> v3.18
@@ -1726,18 +2053,24 @@ __drbd_set_state(struct drbd_device *device, union drbd_state ns,
 		ascw->flags = flags;
 		ascw->w.cb = w_after_state_ch;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ascw->w.mdev = mdev;
 		ascw->done = done;
 		drbd_queue_work(&mdev->tconn->sender_work, &ascw->w);
 	} else {
 		dev_err(DEV, "Could not kmalloc an ascw\n");
 =======
+=======
+>>>>>>> v3.18
 		ascw->device = device;
 		ascw->done = done;
 		drbd_queue_work(&connection->sender_work,
 				&ascw->w);
 	} else {
 		drbd_err(device, "Could not kmalloc an ascw\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1749,6 +2082,7 @@ static int w_after_state_ch(struct drbd_work *w, int unused)
 	struct after_state_chg_work *ascw =
 		container_of(w, struct after_state_chg_work, w);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drbd_conf *mdev = w->mdev;
 
 	after_state_ch(mdev, ascw->os, ascw->ns, ascw->flags);
@@ -1757,17 +2091,23 @@ static int w_after_state_ch(struct drbd_work *w, int unused)
 		complete(ascw->done);
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct drbd_device *device = ascw->device;
 
 	after_state_ch(device, ascw->os, ascw->ns, ascw->flags);
 	if (ascw->flags & CS_WAIT_COMPLETE)
 		complete(ascw->done);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(ascw);
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void abw_start_sync(struct drbd_conf *mdev, int rv)
 {
@@ -1784,6 +2124,8 @@ static void abw_start_sync(struct drbd_conf *mdev, int rv)
 	case C_STARTING_SYNC_S:
 		drbd_start_resync(mdev, C_SYNC_SOURCE);
 =======
+=======
+>>>>>>> v3.18
 static void abw_start_sync(struct drbd_device *device, int rv)
 {
 	if (rv) {
@@ -1798,14 +2140,22 @@ static void abw_start_sync(struct drbd_device *device, int rv)
 		break;
 	case C_STARTING_SYNC_S:
 		drbd_start_resync(device, C_SYNC_SOURCE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drbd_bitmap_io_from_worker(struct drbd_conf *mdev,
 		int (*io_fn)(struct drbd_conf *),
+=======
+int drbd_bitmap_io_from_worker(struct drbd_device *device,
+		int (*io_fn)(struct drbd_device *),
+>>>>>>> v3.18
 =======
 int drbd_bitmap_io_from_worker(struct drbd_device *device,
 		int (*io_fn)(struct drbd_device *),
@@ -1814,6 +2164,7 @@ int drbd_bitmap_io_from_worker(struct drbd_device *device,
 {
 	int rv;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	D_ASSERT(current == mdev->tconn->worker.task);
 
@@ -1826,6 +2177,8 @@ int drbd_bitmap_io_from_worker(struct drbd_device *device,
 
 	drbd_resume_io(mdev);
 =======
+=======
+>>>>>>> v3.18
 	D_ASSERT(device, current == first_peer_device(device)->connection->worker.task);
 
 	/* open coded non-blocking drbd_suspend_io(device); */
@@ -1836,6 +2189,9 @@ int drbd_bitmap_io_from_worker(struct drbd_device *device,
 	drbd_bm_unlock(device);
 
 	drbd_resume_io(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rv;
@@ -1844,7 +2200,11 @@ int drbd_bitmap_io_from_worker(struct drbd_device *device,
 /**
  * after_state_ch() - Perform after state change actions that may sleep
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mdev:	DRBD device.
+=======
+ * @device:	DRBD device.
+>>>>>>> v3.18
 =======
  * @device:	DRBD device.
 >>>>>>> v3.18
@@ -1853,16 +2213,22 @@ int drbd_bitmap_io_from_worker(struct drbd_device *device,
  * @flags:	Flags
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void after_state_ch(struct drbd_conf *mdev, union drbd_state os,
 			   union drbd_state ns, enum chg_state_flags flags)
 {
 =======
+=======
+>>>>>>> v3.18
 static void after_state_ch(struct drbd_device *device, union drbd_state os,
 			   union drbd_state ns, enum chg_state_flags flags)
 {
 	struct drbd_resource *resource = device->resource;
 	struct drbd_peer_device *peer_device = first_peer_device(device);
 	struct drbd_connection *connection = peer_device ? peer_device->connection : NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct sib_info sib;
 
@@ -1870,6 +2236,7 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	sib.os = os;
 	sib.ns = ns;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (os.conn != C_CONNECTED && ns.conn == C_CONNECTED) {
 		clear_bit(CRASHED_PRIMARY, &mdev->flags);
@@ -1884,6 +2251,8 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	    (ns.role == R_PRIMARY && ns.disk < D_UP_TO_DATE && ns.pdsk < D_UP_TO_DATE))
 		drbd_khelper(mdev, "pri-on-incon-degr");
 =======
+=======
+>>>>>>> v3.18
 	if ((os.disk != D_UP_TO_DATE || os.pdsk != D_UP_TO_DATE)
 	&&  (ns.disk == D_UP_TO_DATE && ns.pdsk == D_UP_TO_DATE)) {
 		clear_bit(CRASHED_PRIMARY, &device->flags);
@@ -1897,12 +2266,16 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	if (!(os.role == R_PRIMARY && os.disk < D_UP_TO_DATE && os.pdsk < D_UP_TO_DATE) &&
 	    (ns.role == R_PRIMARY && ns.disk < D_UP_TO_DATE && ns.pdsk < D_UP_TO_DATE))
 		drbd_khelper(device, "pri-on-incon-degr");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Here we have the actions that are performed after a
 	   state change. This function might sleep */
 
 	if (ns.susp_nod) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		struct drbd_tconn *tconn = mdev->tconn;
 		enum drbd_req_event what = NOTHING;
@@ -1919,6 +2292,8 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 			_tl_restart(tconn, what);
 			_conn_request_state(tconn,
 =======
+=======
+>>>>>>> v3.18
 		enum drbd_req_event what = NOTHING;
 
 		spin_lock_irq(&device->resource->req_lock);
@@ -1932,11 +2307,15 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 		if (resource->susp_nod && what != NOTHING) {
 			_tl_restart(connection, what);
 			_conn_request_state(connection,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					    (union drbd_state) { { .susp_nod = 1 } },
 					    (union drbd_state) { { .susp_nod = 0 } },
 					    CS_VERBOSE);
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		spin_unlock_irq(&tconn->req_lock);
 	}
@@ -1957,6 +2336,8 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 			_tl_restart(tconn, RESEND);
 			_conn_request_state(tconn,
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock_irq(&device->resource->req_lock);
 	}
 
@@ -1973,13 +2354,20 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 			rcu_read_unlock();
 			_tl_restart(connection, RESEND);
 			_conn_request_state(connection,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					    (union drbd_state) { { .susp_fen = 1 } },
 					    (union drbd_state) { { .susp_fen = 0 } },
 					    CS_VERBOSE);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_irq(&tconn->req_lock);
+=======
+		spin_unlock_irq(&device->resource->req_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock_irq(&device->resource->req_lock);
 >>>>>>> v3.18
@@ -1992,9 +2380,15 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	if ((os.conn != C_SYNC_SOURCE && os.conn != C_PAUSED_SYNC_S) &&
 	    (ns.conn == C_SYNC_SOURCE || ns.conn == C_PAUSED_SYNC_S) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    mdev->tconn->agreed_pro_version >= 96 && get_ldev(mdev)) {
 		drbd_gen_and_send_sync_uuid(mdev);
 		put_ldev(mdev);
+=======
+	    connection->agreed_pro_version >= 96 && get_ldev(device)) {
+		drbd_gen_and_send_sync_uuid(peer_device);
+		put_ldev(device);
+>>>>>>> v3.18
 =======
 	    connection->agreed_pro_version >= 96 && get_ldev(device)) {
 		drbd_gen_and_send_sync_uuid(peer_device);
@@ -2008,6 +2402,7 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 		/* we probably will start a resync soon.
 		 * make sure those things are properly reset. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mdev->rs_total = 0;
 		mdev->rs_failed = 0;
 		atomic_set(&mdev->rs_pending_cnt, 0);
@@ -2016,6 +2411,8 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 		drbd_send_uuids(mdev);
 		drbd_send_state(mdev, ns);
 =======
+=======
+>>>>>>> v3.18
 		device->rs_total = 0;
 		device->rs_failed = 0;
 		atomic_set(&device->rs_pending_cnt, 0);
@@ -2023,6 +2420,9 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 
 		drbd_send_uuids(peer_device);
 		drbd_send_state(peer_device, ns);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	/* No point in queuing send_bitmap if we don't have a connection
@@ -2030,8 +2430,13 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	 * at the time this work was queued. */
 	if (os.conn != C_WF_BITMAP_S && ns.conn == C_WF_BITMAP_S &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    mdev->state.conn == C_WF_BITMAP_S)
 		drbd_queue_bitmap_io(mdev, &drbd_send_bitmap, NULL,
+=======
+	    device->state.conn == C_WF_BITMAP_S)
+		drbd_queue_bitmap_io(device, &drbd_send_bitmap, NULL,
+>>>>>>> v3.18
 =======
 	    device->state.conn == C_WF_BITMAP_S)
 		drbd_queue_bitmap_io(device, &drbd_send_bitmap, NULL,
@@ -2046,6 +2451,7 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	&&  (ns.pdsk < D_INCONSISTENT ||
 	     ns.pdsk == D_UNKNOWN ||
 	     ns.pdsk == D_OUTDATED)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (get_ldev(mdev)) {
 			if ((ns.role == R_PRIMARY || ns.peer == R_PRIMARY) &&
@@ -2067,6 +2473,8 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 			drbd_uuid_new_current(mdev);
 			drbd_send_uuids(mdev);
 =======
+=======
+>>>>>>> v3.18
 		if (get_ldev(device)) {
 			if ((ns.role == R_PRIMARY || ns.peer == R_PRIMARY) &&
 			    device->ldev->md.uuid[UI_BITMAP] == 0 && ns.disk >= D_UP_TO_DATE) {
@@ -2086,6 +2494,9 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 		    device->ldev->md.uuid[UI_BITMAP] == 0 && ns.disk >= D_UP_TO_DATE) {
 			drbd_uuid_new_current(device);
 			drbd_send_uuids(peer_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		/* D_DISKLESS Peer becomes secondary */
@@ -2094,9 +2505,15 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 			 * No harm done if the bitmap still changes,
 			 * redirtied pages will follow later. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			drbd_bitmap_io_from_worker(mdev, &drbd_bm_write,
 				"demote diskless peer", BM_LOCKED_SET_ALLOWED);
 		put_ldev(mdev);
+=======
+			drbd_bitmap_io_from_worker(device, &drbd_bm_write,
+				"demote diskless peer", BM_LOCKED_SET_ALLOWED);
+		put_ldev(device);
+>>>>>>> v3.18
 =======
 			drbd_bitmap_io_from_worker(device, &drbd_bm_write,
 				"demote diskless peer", BM_LOCKED_SET_ALLOWED);
@@ -2109,6 +2526,7 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	 * if there is a resync going on still */
 	if (os.role == R_PRIMARY && ns.role == R_SECONDARY &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mdev->state.conn <= C_CONNECTED && get_ldev(mdev)) {
 		/* No changes to the bitmap expected this time, so assert that,
 		 * even though no harm was done if it did change. */
@@ -2116,12 +2534,17 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 				"demote", BM_LOCKED_TEST_ALLOWED);
 		put_ldev(mdev);
 =======
+=======
+>>>>>>> v3.18
 		device->state.conn <= C_CONNECTED && get_ldev(device)) {
 		/* No changes to the bitmap expected this time, so assert that,
 		 * even though no harm was done if it did change. */
 		drbd_bitmap_io_from_worker(device, &drbd_bm_write,
 				"demote", BM_LOCKED_TEST_ALLOWED);
 		put_ldev(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2129,9 +2552,15 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	if (ns.conn >= C_CONNECTED &&
 	    os.disk == D_ATTACHING && ns.disk == D_NEGOTIATING) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drbd_send_sizes(mdev, 0, 0);  /* to start sync... */
 		drbd_send_uuids(mdev);
 		drbd_send_state(mdev, ns);
+=======
+		drbd_send_sizes(peer_device, 0, 0);  /* to start sync... */
+		drbd_send_uuids(peer_device);
+		drbd_send_state(peer_device, ns);
+>>>>>>> v3.18
 =======
 		drbd_send_sizes(peer_device, 0, 0);  /* to start sync... */
 		drbd_send_uuids(peer_device);
@@ -2144,7 +2573,11 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	     ((os.aftr_isp != ns.aftr_isp) ||
 	      (os.user_isp != ns.user_isp)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drbd_send_state(mdev, ns);
+=======
+		drbd_send_state(peer_device, ns);
+>>>>>>> v3.18
 =======
 		drbd_send_state(peer_device, ns);
 >>>>>>> v3.18
@@ -2153,7 +2586,11 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	if ((!os.aftr_isp && !os.peer_isp && !os.user_isp) &&
 	    (ns.aftr_isp || ns.peer_isp || ns.user_isp))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		suspend_other_sg(mdev);
+=======
+		suspend_other_sg(device);
+>>>>>>> v3.18
 =======
 		suspend_other_sg(device);
 >>>>>>> v3.18
@@ -2162,15 +2599,21 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	   changes (ISP bits) while we were in WFReportParams. */
 	if (os.conn == C_WF_REPORT_PARAMS && ns.conn >= C_CONNECTED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drbd_send_state(mdev, ns);
 
 	if (os.conn != C_AHEAD && ns.conn == C_AHEAD)
 		drbd_send_state(mdev, ns);
 =======
+=======
+>>>>>>> v3.18
 		drbd_send_state(peer_device, ns);
 
 	if (os.conn != C_AHEAD && ns.conn == C_AHEAD)
 		drbd_send_state(peer_device, ns);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* We are in the progress to start a full sync... */
@@ -2178,7 +2621,11 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	    (os.conn != C_STARTING_SYNC_S && ns.conn == C_STARTING_SYNC_S))
 		/* no other bitmap changes expected during this phase */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drbd_queue_bitmap_io(mdev,
+=======
+		drbd_queue_bitmap_io(device,
+>>>>>>> v3.18
 =======
 		drbd_queue_bitmap_io(device,
 >>>>>>> v3.18
@@ -2195,6 +2642,7 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 		 * But is is still not save to dreference ldev here, since
 		 * we might come from an failed Attach before ldev was set. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mdev->ldev) {
 			rcu_read_lock();
 			eh = rcu_dereference(mdev->ldev->disk_conf)->on_io_error;
@@ -2205,6 +2653,8 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 			if (was_io_error && eh == EP_CALL_HELPER)
 				drbd_khelper(mdev, "local-io-error");
 =======
+=======
+>>>>>>> v3.18
 		if (device->ldev) {
 			rcu_read_lock();
 			eh = rcu_dereference(device->ldev->disk_conf)->on_io_error;
@@ -2214,6 +2664,9 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 
 			if (was_io_error && eh == EP_CALL_HELPER)
 				drbd_khelper(device, "local-io-error");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* Immediately allow completion of all application IO,
@@ -2230,8 +2683,13 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 			 * or even worse, silent data corruption.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (test_and_clear_bit(FORCE_DETACH, &mdev->flags))
 				tl_abort_disk_io(mdev);
+=======
+			if (test_and_clear_bit(FORCE_DETACH, &device->flags))
+				tl_abort_disk_io(device);
+>>>>>>> v3.18
 =======
 			if (test_and_clear_bit(FORCE_DETACH, &device->flags))
 				tl_abort_disk_io(device);
@@ -2240,6 +2698,7 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 			/* current state still has to be D_FAILED,
 			 * there is only one way out: to D_DISKLESS,
 			 * and that may only happen after our put_ldev below. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (mdev->state.disk != D_FAILED)
 				dev_err(DEV,
@@ -2251,6 +2710,8 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 
 			drbd_rs_cancel_all(mdev);
 =======
+=======
+>>>>>>> v3.18
 			if (device->state.disk != D_FAILED)
 				drbd_err(device,
 					"ASSERT FAILED: disk is %s during detach\n",
@@ -2260,11 +2721,15 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 				drbd_send_state(peer_device, ns);
 
 			drbd_rs_cancel_all(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* In case we want to get something to stable storage still,
 			 * this may be the last chance.
 			 * Following put_ldev may transition to D_DISKLESS. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			drbd_md_sync(mdev);
 		}
@@ -2288,6 +2753,8 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 		 * this may finally trigger drbd_ldev_destroy. */
 		put_ldev(mdev);
 =======
+=======
+>>>>>>> v3.18
 			drbd_md_sync(device);
 		}
 		put_ldev(device);
@@ -2309,11 +2776,15 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 		/* corresponding get_ldev in __drbd_set_state
 		 * this may finally trigger drbd_ldev_destroy. */
 		put_ldev(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* Notify peer that I had a local IO error, and did not detached.. */
 	if (os.disk == D_UP_TO_DATE && ns.disk == D_INCONSISTENT && ns.conn >= C_CONNECTED)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		drbd_send_state(mdev, ns);
 
@@ -2323,6 +2794,8 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 		if (ns.conn == C_CONNECTED)
 			resync_after_online_grow(mdev);
 =======
+=======
+>>>>>>> v3.18
 		drbd_send_state(peer_device, ns);
 
 	/* Disks got bigger while they were detached */
@@ -2330,6 +2803,9 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	    test_and_clear_bit(RESYNC_AFTER_NEG, &device->flags)) {
 		if (ns.conn == C_CONNECTED)
 			resync_after_online_grow(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2338,7 +2814,11 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	    (os.peer_isp && !ns.peer_isp) ||
 	    (os.user_isp && !ns.user_isp))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		resume_next_sg(mdev);
+=======
+		resume_next_sg(device);
+>>>>>>> v3.18
 =======
 		resume_next_sg(device);
 >>>>>>> v3.18
@@ -2347,7 +2827,11 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	 * it should (at least for non-empty resyncs) already know itself. */
 	if (os.disk < D_UP_TO_DATE && os.conn >= C_SYNC_SOURCE && ns.conn == C_CONNECTED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drbd_send_state(mdev, ns);
+=======
+		drbd_send_state(peer_device, ns);
+>>>>>>> v3.18
 =======
 		drbd_send_state(peer_device, ns);
 >>>>>>> v3.18
@@ -2357,8 +2841,13 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	 * verify to interrupt/stop early.  Send the new state. */
 	if (os.conn == C_VERIFY_S && ns.conn == C_CONNECTED
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&& verify_can_do_stop_sector(mdev))
 		drbd_send_state(mdev, ns);
+=======
+	&& verify_can_do_stop_sector(device))
+		drbd_send_state(peer_device, ns);
+>>>>>>> v3.18
 =======
 	&& verify_can_do_stop_sector(device))
 		drbd_send_state(peer_device, ns);
@@ -2372,15 +2861,21 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	 * No harm done if some bits change during this phase.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (os.conn > C_CONNECTED && ns.conn <= C_CONNECTED && get_ldev(mdev)) {
 		drbd_queue_bitmap_io(mdev, &drbd_bm_write_copy_pages, NULL,
 			"write from resync_finished", BM_LOCKED_CHANGE_ALLOWED);
 		put_ldev(mdev);
 =======
+=======
+>>>>>>> v3.18
 	if (os.conn > C_CONNECTED && ns.conn <= C_CONNECTED && get_ldev(device)) {
 		drbd_queue_bitmap_io(device, &drbd_bm_write_copy_pages, NULL,
 			"write from resync_finished", BM_LOCKED_CHANGE_ALLOWED);
 		put_ldev(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2389,15 +2884,21 @@ static void after_state_ch(struct drbd_device *device, union drbd_state os,
 	    ns.role == R_SECONDARY) {
 		if (os.aftr_isp != ns.aftr_isp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			resume_next_sg(mdev);
 	}
 
 	drbd_md_sync(mdev);
 =======
+=======
+>>>>>>> v3.18
 			resume_next_sg(device);
 	}
 
 	drbd_md_sync(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2406,8 +2907,14 @@ struct after_conn_state_chg_work {
 	enum drbd_conns oc;
 	union drbd_state ns_min;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union drbd_state ns_max; /* new, max state, over all mdevs */
 	enum chg_state_flags flags;
+=======
+	union drbd_state ns_max; /* new, max state, over all devices */
+	enum chg_state_flags flags;
+	struct drbd_connection *connection;
+>>>>>>> v3.18
 =======
 	union drbd_state ns_max; /* new, max state, over all devices */
 	enum chg_state_flags flags;
@@ -2420,15 +2927,21 @@ static int w_after_conn_state_ch(struct drbd_work *w, int unused)
 	struct after_conn_state_chg_work *acscw =
 		container_of(w, struct after_conn_state_chg_work, w);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drbd_tconn *tconn = w->tconn;
 	enum drbd_conns oc = acscw->oc;
 	union drbd_state ns_max = acscw->ns_max;
 	struct drbd_conf *mdev;
 =======
+=======
+>>>>>>> v3.18
 	struct drbd_connection *connection = acscw->connection;
 	enum drbd_conns oc = acscw->oc;
 	union drbd_state ns_max = acscw->ns_max;
 	struct drbd_peer_device *peer_device;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int vnr;
 
@@ -2437,7 +2950,11 @@ static int w_after_conn_state_ch(struct drbd_work *w, int unused)
 	/* Upon network configuration, we need to start the receiver */
 	if (oc == C_STANDALONE && ns_max.conn == C_UNCONNECTED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drbd_thread_start(&tconn->receiver);
+=======
+		drbd_thread_start(&connection->receiver);
+>>>>>>> v3.18
 =======
 		drbd_thread_start(&connection->receiver);
 >>>>>>> v3.18
@@ -2445,6 +2962,7 @@ static int w_after_conn_state_ch(struct drbd_work *w, int unused)
 	if (oc == C_DISCONNECTING && ns_max.conn == C_STANDALONE) {
 		struct net_conf *old_conf;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		mutex_lock(&tconn->conf_update);
 		old_conf = tconn->net_conf;
@@ -2454,6 +2972,8 @@ static int w_after_conn_state_ch(struct drbd_work *w, int unused)
 		conn_free_crypto(tconn);
 		mutex_unlock(&tconn->conf_update);
 =======
+=======
+>>>>>>> v3.18
 		mutex_lock(&connection->resource->conf_update);
 		old_conf = connection->net_conf;
 		connection->my_addr_len = 0;
@@ -2461,6 +2981,9 @@ static int w_after_conn_state_ch(struct drbd_work *w, int unused)
 		RCU_INIT_POINTER(connection->net_conf, NULL);
 		conn_free_crypto(connection);
 		mutex_unlock(&connection->resource->conf_update);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		synchronize_rcu();
@@ -2471,6 +2994,7 @@ static int w_after_conn_state_ch(struct drbd_work *w, int unused)
 		/* case1: The outdate peer handler is successful: */
 		if (ns_max.pdsk <= D_OUTDATED) {
 			rcu_read_lock();
+<<<<<<< HEAD
 <<<<<<< HEAD
 			idr_for_each_entry(&tconn->volumes, mdev, vnr) {
 				if (test_bit(NEW_CUR_UUID, &mdev->flags)) {
@@ -2492,6 +3016,8 @@ static int w_after_conn_state_ch(struct drbd_work *w, int unused)
 
 	conn_md_sync(tconn);
 =======
+=======
+>>>>>>> v3.18
 			idr_for_each_entry(&connection->peer_devices, peer_device, vnr) {
 				struct drbd_device *device = peer_device->device;
 				if (test_bit(NEW_CUR_UUID, &device->flags)) {
@@ -2512,28 +3038,41 @@ static int w_after_conn_state_ch(struct drbd_work *w, int unused)
 	kref_put(&connection->kref, drbd_destroy_connection);
 
 	conn_md_sync(connection);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void conn_old_common_state(struct drbd_tconn *tconn, union drbd_state *pcs, enum chg_state_flags *pf)
 {
 	enum chg_state_flags flags = ~0;
 	struct drbd_conf *mdev;
 =======
+=======
+>>>>>>> v3.18
 static void conn_old_common_state(struct drbd_connection *connection, union drbd_state *pcs, enum chg_state_flags *pf)
 {
 	enum chg_state_flags flags = ~0;
 	struct drbd_peer_device *peer_device;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int vnr, first_vol = 1;
 	union drbd_dev_state os, cs = {
 		{ .role = R_SECONDARY,
 		  .peer = R_UNKNOWN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  .conn = tconn->cstate,
+=======
+		  .conn = connection->cstate,
+>>>>>>> v3.18
 =======
 		  .conn = connection->cstate,
 >>>>>>> v3.18
@@ -2543,8 +3082,14 @@ static void conn_old_common_state(struct drbd_connection *connection, union drbd
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idr_for_each_entry(&tconn->volumes, mdev, vnr) {
 		os = mdev->state;
+=======
+	idr_for_each_entry(&connection->peer_devices, peer_device, vnr) {
+		struct drbd_device *device = peer_device->device;
+		os = device->state;
+>>>>>>> v3.18
 =======
 	idr_for_each_entry(&connection->peer_devices, peer_device, vnr) {
 		struct drbd_device *device = peer_device->device;
@@ -2581,7 +3126,11 @@ static void conn_old_common_state(struct drbd_connection *connection, union drbd
 
 static enum drbd_state_rv
 <<<<<<< HEAD
+<<<<<<< HEAD
 conn_is_valid_transition(struct drbd_tconn *tconn, union drbd_state mask, union drbd_state val,
+=======
+conn_is_valid_transition(struct drbd_connection *connection, union drbd_state mask, union drbd_state val,
+>>>>>>> v3.18
 =======
 conn_is_valid_transition(struct drbd_connection *connection, union drbd_state mask, union drbd_state val,
 >>>>>>> v3.18
@@ -2589,6 +3138,7 @@ conn_is_valid_transition(struct drbd_connection *connection, union drbd_state ma
 {
 	enum drbd_state_rv rv = SS_SUCCESS;
 	union drbd_state ns, os;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct drbd_conf *mdev;
 	int vnr;
@@ -2598,6 +3148,8 @@ conn_is_valid_transition(struct drbd_connection *connection, union drbd_state ma
 		os = drbd_read_state(mdev);
 		ns = sanitize_state(mdev, apply_mask_val(os, mask, val), NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct drbd_peer_device *peer_device;
 	int vnr;
 
@@ -2606,6 +3158,9 @@ conn_is_valid_transition(struct drbd_connection *connection, union drbd_state ma
 		struct drbd_device *device = peer_device->device;
 		os = drbd_read_state(device);
 		ns = sanitize_state(device, os, apply_mask_val(os, mask, val), NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (flags & CS_IGN_OUTD_FAIL && ns.disk == D_OUTDATED && os.disk < D_OUTDATED)
@@ -2615,6 +3170,7 @@ conn_is_valid_transition(struct drbd_connection *connection, union drbd_state ma
 			continue;
 
 		rv = is_valid_transition(os, ns);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (rv < SS_SUCCESS)
 			break;
@@ -2641,6 +3197,8 @@ conn_is_valid_transition(struct drbd_connection *connection, union drbd_state ma
 void
 conn_set_state(struct drbd_tconn *tconn, union drbd_state mask, union drbd_state val,
 =======
+=======
+>>>>>>> v3.18
 
 		if (rv >= SS_SUCCESS && !(flags & CS_HARD)) {
 			rv = is_valid_state(device, ns);
@@ -2664,6 +3222,9 @@ conn_set_state(struct drbd_tconn *tconn, union drbd_state mask, union drbd_state
 
 static void
 conn_set_state(struct drbd_connection *connection, union drbd_state mask, union drbd_state val,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	       union drbd_state *pns_min, union drbd_state *pns_max, enum chg_state_flags flags)
 {
@@ -2676,7 +3237,11 @@ conn_set_state(struct drbd_connection *connection, union drbd_state mask, union 
 		  .pdsk = D_MASK
 		} };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drbd_conf *mdev;
+=======
+	struct drbd_peer_device *peer_device;
+>>>>>>> v3.18
 =======
 	struct drbd_peer_device *peer_device;
 >>>>>>> v3.18
@@ -2687,6 +3252,7 @@ conn_set_state(struct drbd_connection *connection, union drbd_state mask, union 
 		/* remember last connect time so request_timer_fn() won't
 		 * kill newly established sessions while we are still trying to thaw
 		 * previously frozen IO */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (tconn->cstate != C_WF_REPORT_PARAMS && val.conn == C_WF_REPORT_PARAMS)
 			tconn->last_reconnect_jif = jiffies;
@@ -2701,6 +3267,8 @@ conn_set_state(struct drbd_connection *connection, union drbd_state mask, union 
 		ns = apply_mask_val(os, mask, val);
 		ns = sanitize_state(mdev, ns, NULL);
 =======
+=======
+>>>>>>> v3.18
 		if (connection->cstate != C_WF_REPORT_PARAMS && val.conn == C_WF_REPORT_PARAMS)
 			connection->last_reconnect_jif = jiffies;
 
@@ -2714,11 +3282,15 @@ conn_set_state(struct drbd_connection *connection, union drbd_state mask, union 
 		os = drbd_read_state(device);
 		ns = apply_mask_val(os, mask, val);
 		ns = sanitize_state(device, os, ns, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (flags & CS_IGN_OUTD_FAIL && ns.disk == D_OUTDATED && os.disk < D_OUTDATED)
 			ns.disk = os.disk;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rv = __drbd_set_state(mdev, ns, flags, NULL);
 		if (rv < SS_SUCCESS)
@@ -2726,11 +3298,16 @@ conn_set_state(struct drbd_connection *connection, union drbd_state mask, union 
 
 		ns.i = mdev->state.i;
 =======
+=======
+>>>>>>> v3.18
 		rv = __drbd_set_state(device, ns, flags, NULL);
 		if (rv < SS_SUCCESS)
 			BUG();
 
 		ns.i = device->state.i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ns_max.role = max_role(ns.role, ns_max.role);
 		ns_max.peer = max_role(ns.peer, ns_max.peer);
@@ -2757,9 +3334,15 @@ conn_set_state(struct drbd_connection *connection, union drbd_state mask, union 
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ns_min.susp = ns_max.susp = tconn->susp;
 	ns_min.susp_nod = ns_max.susp_nod = tconn->susp_nod;
 	ns_min.susp_fen = ns_max.susp_fen = tconn->susp_fen;
+=======
+	ns_min.susp = ns_max.susp = connection->resource->susp;
+	ns_min.susp_nod = ns_max.susp_nod = connection->resource->susp_nod;
+	ns_min.susp_fen = ns_max.susp_fen = connection->resource->susp_fen;
+>>>>>>> v3.18
 =======
 	ns_min.susp = ns_max.susp = connection->resource->susp;
 	ns_min.susp_nod = ns_max.susp_nod = connection->resource->susp_nod;
@@ -2771,6 +3354,7 @@ conn_set_state(struct drbd_connection *connection, union drbd_state mask, union 
 }
 
 static enum drbd_state_rv
+<<<<<<< HEAD
 <<<<<<< HEAD
 _conn_rq_cond(struct drbd_tconn *tconn, union drbd_state mask, union drbd_state val)
 {
@@ -2792,6 +3376,8 @@ _conn_rq_cond(struct drbd_tconn *tconn, union drbd_state mask, union drbd_state 
 enum drbd_state_rv
 _conn_request_state(struct drbd_tconn *tconn, union drbd_state mask, union drbd_state val,
 =======
+=======
+>>>>>>> v3.18
 _conn_rq_cond(struct drbd_connection *connection, union drbd_state mask, union drbd_state val)
 {
 	enum drbd_state_rv err, rv = SS_UNKNOWN_ERROR; /* continue waiting */;
@@ -2811,13 +3397,20 @@ _conn_rq_cond(struct drbd_connection *connection, union drbd_state mask, union d
 
 enum drbd_state_rv
 _conn_request_state(struct drbd_connection *connection, union drbd_state mask, union drbd_state val,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    enum chg_state_flags flags)
 {
 	enum drbd_state_rv rv = SS_SUCCESS;
 	struct after_conn_state_chg_work *acscw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum drbd_conns oc = tconn->cstate;
+=======
+	enum drbd_conns oc = connection->cstate;
+>>>>>>> v3.18
 =======
 	enum drbd_conns oc = connection->cstate;
 >>>>>>> v3.18
@@ -2831,7 +3424,11 @@ _conn_request_state(struct drbd_connection *connection, union drbd_state mask, u
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rv = conn_is_valid_transition(tconn, mask, val, flags);
+=======
+	rv = conn_is_valid_transition(connection, mask, val, flags);
+>>>>>>> v3.18
 =======
 	rv = conn_is_valid_transition(connection, mask, val, flags);
 >>>>>>> v3.18
@@ -2845,6 +3442,7 @@ _conn_request_state(struct drbd_connection *connection, union drbd_state mask, u
 		 * Need to give up the spinlock, grab the mutex,
 		 * then send the state change request, ... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_irq(&tconn->req_lock);
 		mutex_lock(&tconn->cstate_mutex);
 		have_mutex = true;
@@ -2854,6 +3452,8 @@ _conn_request_state(struct drbd_connection *connection, union drbd_state mask, u
 			/* sending failed. */
 			clear_bit(CONN_WD_ST_CHG_REQ, &tconn->flags);
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock_irq(&connection->resource->req_lock);
 		mutex_lock(&connection->cstate_mutex);
 		have_mutex = true;
@@ -2862,6 +3462,9 @@ _conn_request_state(struct drbd_connection *connection, union drbd_state mask, u
 		if (conn_send_state_req(connection, mask, val)) {
 			/* sending failed. */
 			clear_bit(CONN_WD_ST_CHG_REQ, &connection->flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			rv = SS_CW_FAILED_BY_PEER;
 			/* need to re-aquire the spin lock, though */
@@ -2870,7 +3473,11 @@ _conn_request_state(struct drbd_connection *connection, union drbd_state mask, u
 
 		if (val.conn == C_DISCONNECTING)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			set_bit(DISCONNECT_SENT, &tconn->flags);
+=======
+			set_bit(DISCONNECT_SENT, &connection->flags);
+>>>>>>> v3.18
 =======
 			set_bit(DISCONNECT_SENT, &connection->flags);
 >>>>>>> v3.18
@@ -2879,32 +3486,44 @@ _conn_request_state(struct drbd_connection *connection, union drbd_state mask, u
 		 * If _conn_rq_cond() returned >= SS_SUCCESS, we must call
 		 * conn_set_state() within the same spinlock. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_irq(&tconn->req_lock);
 		wait_event_lock_irq(tconn->ping_wait,
 				(rv = _conn_rq_cond(tconn, mask, val)),
 				tconn->req_lock);
 		clear_bit(CONN_WD_ST_CHG_REQ, &tconn->flags);
 =======
+=======
+>>>>>>> v3.18
 		spin_lock_irq(&connection->resource->req_lock);
 		wait_event_lock_irq(connection->ping_wait,
 				(rv = _conn_rq_cond(connection, mask, val)),
 				connection->resource->req_lock);
 		clear_bit(CONN_WD_ST_CHG_REQ, &connection->flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rv < SS_SUCCESS)
 			goto abort;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	conn_old_common_state(tconn, &os, &flags);
 	flags |= CS_DC_SUSP;
 	conn_set_state(tconn, mask, val, &ns_min, &ns_max, flags);
 	conn_pr_state_change(tconn, os, ns_max, flags);
 =======
+=======
+>>>>>>> v3.18
 	conn_old_common_state(connection, &os, &flags);
 	flags |= CS_DC_SUSP;
 	conn_set_state(connection, mask, val, &ns_min, &ns_max, flags);
 	conn_pr_state_change(connection, os, ns_max, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	acscw = kmalloc(sizeof(*acscw), GFP_ATOMIC);
@@ -2915,17 +3534,23 @@ _conn_request_state(struct drbd_connection *connection, union drbd_state mask, u
 		acscw->flags = flags;
 		acscw->w.cb = w_after_conn_state_ch;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kref_get(&tconn->kref);
 		acscw->w.tconn = tconn;
 		drbd_queue_work(&tconn->sender_work, &acscw->w);
 	} else {
 		conn_err(tconn, "Could not kmalloc an acscw\n");
 =======
+=======
+>>>>>>> v3.18
 		kref_get(&connection->kref);
 		acscw->connection = connection;
 		drbd_queue_work(&connection->sender_work, &acscw->w);
 	} else {
 		drbd_err(connection, "Could not kmalloc an acscw\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2933,6 +3558,7 @@ _conn_request_state(struct drbd_connection *connection, union drbd_state mask, u
 	if (have_mutex) {
 		/* mutex_unlock() "... must not be used in interrupt context.",
 		 * so give up the spinlock, then re-aquire it */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		spin_unlock_irq(&tconn->req_lock);
  abort_unlocked:
@@ -2944,6 +3570,8 @@ _conn_request_state(struct drbd_connection *connection, union drbd_state mask, u
 		conn_err(tconn, " mask = 0x%x val = 0x%x\n", mask.i, val.i);
 		conn_err(tconn, " old_conn:%s wanted_conn:%s\n", drbd_conn_str(oc), drbd_conn_str(val.conn));
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock_irq(&connection->resource->req_lock);
  abort_unlocked:
 		mutex_unlock(&connection->cstate_mutex);
@@ -2953,6 +3581,9 @@ _conn_request_state(struct drbd_connection *connection, union drbd_state mask, u
 		drbd_err(connection, "State change failed: %s\n", drbd_set_st_err_str(rv));
 		drbd_err(connection, " mask = 0x%x val = 0x%x\n", mask.i, val.i);
 		drbd_err(connection, " old_conn:%s wanted_conn:%s\n", drbd_conn_str(oc), drbd_conn_str(val.conn));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return rv;
@@ -2960,7 +3591,11 @@ _conn_request_state(struct drbd_connection *connection, union drbd_state mask, u
 
 enum drbd_state_rv
 <<<<<<< HEAD
+<<<<<<< HEAD
 conn_request_state(struct drbd_tconn *tconn, union drbd_state mask, union drbd_state val,
+=======
+conn_request_state(struct drbd_connection *connection, union drbd_state mask, union drbd_state val,
+>>>>>>> v3.18
 =======
 conn_request_state(struct drbd_connection *connection, union drbd_state mask, union drbd_state val,
 >>>>>>> v3.18
@@ -2969,9 +3604,15 @@ conn_request_state(struct drbd_connection *connection, union drbd_state mask, un
 	enum drbd_state_rv rv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&tconn->req_lock);
 	rv = _conn_request_state(tconn, mask, val, flags);
 	spin_unlock_irq(&tconn->req_lock);
+=======
+	spin_lock_irq(&connection->resource->req_lock);
+	rv = _conn_request_state(connection, mask, val, flags);
+	spin_unlock_irq(&connection->resource->req_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_irq(&connection->resource->req_lock);
 	rv = _conn_request_state(connection, mask, val, flags);

@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "drbd_wrappers.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>

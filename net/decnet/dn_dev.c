@@ -42,6 +42,10 @@
 #include <linux/notifier.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/jiffies.h>
+>>>>>>> v3.18
 =======
 #include <linux/jiffies.h>
 >>>>>>> v3.18
@@ -163,17 +167,23 @@ static int min_priority[1];
 static int max_priority[] = { 127 }; /* From DECnet spec */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dn_forwarding_proc(ctl_table *, int,
 			void __user *, size_t *, loff_t *);
 static struct dn_dev_sysctl_table {
 	struct ctl_table_header *sysctl_header;
 	ctl_table dn_dev_vars[5];
 =======
+=======
+>>>>>>> v3.18
 static int dn_forwarding_proc(struct ctl_table *, int,
 			void __user *, size_t *, loff_t *);
 static struct dn_dev_sysctl_table {
 	struct ctl_table_header *sysctl_header;
 	struct ctl_table dn_dev_vars[5];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } dn_dev_sysctl = {
 	NULL,
@@ -255,7 +265,11 @@ static void dn_dev_sysctl_unregister(struct dn_dev_parms *parms)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dn_forwarding_proc(ctl_table *table, int write,
+=======
+static int dn_forwarding_proc(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int dn_forwarding_proc(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -578,6 +592,10 @@ static const struct nla_policy dn_ifa_policy[IFA_MAX+1] = {
 	[IFA_LABEL]		= { .type = NLA_STRING,
 				    .len = IFNAMSIZ - 1 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[IFA_FLAGS]		= { .type = NLA_U32 },
+>>>>>>> v3.18
 =======
 	[IFA_FLAGS]		= { .type = NLA_U32 },
 >>>>>>> v3.18
@@ -669,7 +687,12 @@ static int dn_nl_newaddr(struct sk_buff *skb, struct nlmsghdr *nlh)
 	ifa->ifa_local = nla_get_le16(tb[IFA_LOCAL]);
 	ifa->ifa_address = nla_get_le16(tb[IFA_ADDRESS]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ifa->ifa_flags = ifm->ifa_flags;
+=======
+	ifa->ifa_flags = tb[IFA_FLAGS] ? nla_get_u32(tb[IFA_FLAGS]) :
+					 ifm->ifa_flags;
+>>>>>>> v3.18
 =======
 	ifa->ifa_flags = tb[IFA_FLAGS] ? nla_get_u32(tb[IFA_FLAGS]) :
 					 ifm->ifa_flags;
@@ -695,7 +718,12 @@ static inline size_t dn_ifaddr_nlmsg_size(void)
 	       + nla_total_size(IFNAMSIZ) /* IFA_LABEL */
 	       + nla_total_size(2) /* IFA_ADDRESS */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       + nla_total_size(2); /* IFA_LOCAL */
+=======
+	       + nla_total_size(2) /* IFA_LOCAL */
+	       + nla_total_size(4); /* IFA_FLAGS */
+>>>>>>> v3.18
 =======
 	       + nla_total_size(2) /* IFA_LOCAL */
 	       + nla_total_size(4); /* IFA_FLAGS */
@@ -708,6 +736,10 @@ static int dn_nl_fill_ifaddr(struct sk_buff *skb, struct dn_ifaddr *ifa,
 	struct ifaddrmsg *ifm;
 	struct nlmsghdr *nlh;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 ifa_flags = ifa->ifa_flags | IFA_F_PERMANENT;
+>>>>>>> v3.18
 =======
 	u32 ifa_flags = ifa->ifa_flags | IFA_F_PERMANENT;
 >>>>>>> v3.18
@@ -720,7 +752,11 @@ static int dn_nl_fill_ifaddr(struct sk_buff *skb, struct dn_ifaddr *ifa,
 	ifm->ifa_family = AF_DECnet;
 	ifm->ifa_prefixlen = 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ifm->ifa_flags = ifa->ifa_flags | IFA_F_PERMANENT;
+=======
+	ifm->ifa_flags = ifa_flags;
+>>>>>>> v3.18
 =======
 	ifm->ifa_flags = ifa_flags;
 >>>>>>> v3.18
@@ -733,7 +769,12 @@ static int dn_nl_fill_ifaddr(struct sk_buff *skb, struct dn_ifaddr *ifa,
 	     nla_put_le16(skb, IFA_LOCAL, ifa->ifa_local)) ||
 	    (ifa->ifa_label[0] &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     nla_put_string(skb, IFA_LABEL, ifa->ifa_label)))
+=======
+	     nla_put_string(skb, IFA_LABEL, ifa->ifa_label)) ||
+	     nla_put_u32(skb, IFA_FLAGS, ifa_flags))
+>>>>>>> v3.18
 =======
 	     nla_put_string(skb, IFA_LABEL, ifa->ifa_label)) ||
 	     nla_put_u32(skb, IFA_FLAGS, ifa_flags))
@@ -914,7 +955,11 @@ static int dn_am_i_a_router(struct dn_neigh *dn, struct dn_dev *dn_db, struct dn
 {
 	/* First check time since device went up */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((jiffies - dn_db->uptime) < DRDELAY)
+=======
+	if (time_before(jiffies, dn_db->uptime + DRDELAY))
+>>>>>>> v3.18
 =======
 	if (time_before(jiffies, dn_db->uptime + DRDELAY))
 >>>>>>> v3.18

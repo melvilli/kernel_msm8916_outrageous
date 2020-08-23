@@ -3,7 +3,11 @@
  * Simple Disk Sleep Monitor
  *  by Bartek Kania
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Licenced under the GPL
+=======
+ * Licensed under the GPL
+>>>>>>> v3.18
 =======
  * Licensed under the GPL
 >>>>>>> v3.18

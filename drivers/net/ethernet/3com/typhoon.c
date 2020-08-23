@@ -204,7 +204,11 @@ static struct typhoon_card_info typhoon_card_info[] = {
  * bits 12-16 indicate card type: (0) client and (1) server
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(typhoon_pci_tbl) = {
+=======
+static const struct pci_device_id typhoon_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id typhoon_pci_tbl[] = {
 >>>>>>> v3.18
@@ -2440,7 +2444,11 @@ typhoon_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	dev->watchdog_timeo	= TX_TIMEOUT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &typhoon_ethtool_ops);
+=======
+	dev->ethtool_ops = &typhoon_ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &typhoon_ethtool_ops;
 >>>>>>> v3.18
@@ -2534,7 +2542,10 @@ typhoon_remove_one(struct pci_dev *pdev)
 	pci_clear_mwi(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(dev);

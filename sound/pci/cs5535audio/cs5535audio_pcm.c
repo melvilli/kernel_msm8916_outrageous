@@ -318,7 +318,11 @@ static int snd_cs5535audio_trigger(struct snd_pcm_substream *substream, int cmd)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unhandled trigger\n");
+=======
+		dev_err(cs5535au->card->dev, "unhandled trigger\n");
+>>>>>>> v3.18
 =======
 		dev_err(cs5535au->card->dev, "unhandled trigger\n");
 >>>>>>> v3.18
@@ -340,7 +344,11 @@ static snd_pcm_uframes_t snd_cs5535audio_pcm_pointer(struct snd_pcm_substream
 	curdma = dma->ops->read_dma_pntr(cs5535au);
 	if (curdma < dma->buf_addr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "curdma=%x < %x bufaddr.\n",
+=======
+		dev_err(cs5535au->card->dev, "curdma=%x < %x bufaddr.\n",
+>>>>>>> v3.18
 =======
 		dev_err(cs5535au->card->dev, "curdma=%x < %x bufaddr.\n",
 >>>>>>> v3.18
@@ -350,7 +358,11 @@ static snd_pcm_uframes_t snd_cs5535audio_pcm_pointer(struct snd_pcm_substream
 	curdma -= dma->buf_addr;
 	if (curdma >= dma->buf_bytes) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "diff=%x >= %x buf_bytes.\n",
+=======
+		dev_err(cs5535au->card->dev, "diff=%x >= %x buf_bytes.\n",
+>>>>>>> v3.18
 =======
 		dev_err(cs5535au->card->dev, "diff=%x >= %x buf_bytes.\n",
 >>>>>>> v3.18

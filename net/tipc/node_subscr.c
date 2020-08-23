@@ -43,7 +43,11 @@
  */
 void tipc_nodesub_subscribe(struct tipc_node_subscr *node_sub, u32 addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       void *usr_handle, net_ev_handler handle_down)
+=======
+			    void *usr_handle, net_ev_handler handle_down)
+>>>>>>> v3.18
 =======
 			    void *usr_handle, net_ev_handler handle_down)
 >>>>>>> v3.18
@@ -86,6 +90,7 @@ void tipc_nodesub_unsubscribe(struct tipc_node_subscr *node_sub)
  * Note: node is locked by caller
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tipc_nodesub_notify(struct tipc_node *node)
 {
 	struct tipc_node_subscr *ns;
@@ -96,6 +101,8 @@ void tipc_nodesub_notify(struct tipc_node *node)
 				      (unsigned long)ns->usr_handle);
 			ns->handle_node_down = NULL;
 =======
+=======
+>>>>>>> v3.18
 void tipc_nodesub_notify(struct list_head *nsub_list)
 {
 	struct tipc_node_subscr *ns, *safe;
@@ -106,6 +113,9 @@ void tipc_nodesub_notify(struct list_head *nsub_list)
 		if (handle_node_down) {
 			ns->handle_node_down = NULL;
 			handle_node_down(ns->usr_handle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}

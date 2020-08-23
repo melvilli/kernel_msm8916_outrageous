@@ -344,7 +344,11 @@ static void __init do_boot_cpu(int phys_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu_id, struct task_struct *tidle)
+=======
+int __cpu_up(unsigned int cpu_id, struct task_struct *tidle)
+>>>>>>> v3.18
 =======
 int __cpu_up(unsigned int cpu_id, struct task_struct *tidle)
 >>>>>>> v3.18

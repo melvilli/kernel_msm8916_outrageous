@@ -11,6 +11,10 @@
 
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk-provider.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk-provider.h>
 >>>>>>> v3.18
@@ -23,6 +27,10 @@
 #include <media/v4l2-device.h>
 #include <media/v4l2-subdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/exynos-fimc.h>
+>>>>>>> v3.18
 =======
 #include <media/exynos-fimc.h>
 >>>>>>> v3.18
@@ -39,8 +47,14 @@
 #define PINCTRL_STATE_IDLE	"idle"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FIMC_MAX_SENSORS	8
 #define FIMC_MAX_CAMCLKS	2
+=======
+#define FIMC_MAX_SENSORS	4
+#define FIMC_MAX_CAMCLKS	2
+#define DEFAULT_SENSOR_CLK_FREQ	24000000U
+>>>>>>> v3.18
 =======
 #define FIMC_MAX_SENSORS	4
 #define FIMC_MAX_CAMCLKS	2
@@ -55,7 +69,10 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum fimc_subdev_index {
 	IDX_SENSOR,
 	IDX_CSIS,
@@ -79,6 +96,9 @@ struct fimc_pipeline {
 
 #define to_fimc_pipeline(_ep) container_of(_ep, struct fimc_pipeline, ep)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct fimc_csis_info {
 	struct v4l2_subdev *sd;
@@ -95,6 +115,10 @@ struct fimc_camclk_info {
  * struct fimc_sensor_info - image data source subdev information
  * @pdata: sensor's atrributes passed as media device's platform data
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @asd: asynchronous subdev registration data structure
+>>>>>>> v3.18
 =======
  * @asd: asynchronous subdev registration data structure
 >>>>>>> v3.18
@@ -106,6 +130,10 @@ struct fimc_camclk_info {
 struct fimc_sensor_info {
 	struct fimc_source_info pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_async_subdev asd;
+>>>>>>> v3.18
 =======
 	struct v4l2_async_subdev asd;
 >>>>>>> v3.18
@@ -114,13 +142,19 @@ struct fimc_sensor_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct cam_clk {
 	struct clk_hw hw;
 	struct fimc_md *fmd;
 };
 #define to_cam_clk(_hw) container_of(_hw, struct cam_clk, hw)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct fimc_md - fimc media device information
@@ -139,6 +173,10 @@ struct cam_clk {
  * @state_default: pinctrl default state handle
  * @state_idle: pinctrl idle state handle
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @cam_clk_provider: CAMCLK clock provider structure
+>>>>>>> v3.18
 =======
  * @cam_clk_provider: CAMCLK clock provider structure
 >>>>>>> v3.18
@@ -160,6 +198,10 @@ struct fimc_md {
 	struct v4l2_device v4l2_dev;
 	struct platform_device *pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -168,6 +210,7 @@ struct fimc_md {
 		struct pinctrl_state *state_default;
 		struct pinctrl_state *state_idle;
 	} pinctl;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool user_subdev_api;
 	spinlock_t slock;
@@ -181,6 +224,8 @@ struct fimc_md {
 
 #define subdev_has_devnode(__sd) (__sd->flags & V4L2_SUBDEV_FL_HAS_DEVNODE)
 =======
+=======
+>>>>>>> v3.18
 
 	struct cam_clk_provider {
 		struct clk *clks[FIMC_MAX_CAMCLKS];
@@ -197,6 +242,9 @@ struct fimc_md {
 	spinlock_t slock;
 	struct list_head pipelines;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline
@@ -212,6 +260,7 @@ static inline struct fimc_md *entity_to_fimc_mdev(struct media_entity *me)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void fimc_md_graph_lock(struct fimc_dev *fimc)
 {
 	mutex_lock(&fimc->vid_cap.vfd.entity.parent->graph_mutex);
@@ -221,6 +270,8 @@ static inline void fimc_md_graph_unlock(struct fimc_dev *fimc)
 {
 	mutex_unlock(&fimc->vid_cap.vfd.entity.parent->graph_mutex);
 =======
+=======
+>>>>>>> v3.18
 static inline struct fimc_md *notifier_to_fimc_md(struct v4l2_async_notifier *n)
 {
 	return container_of(n, struct fimc_md, subdev_notifier);
@@ -234,6 +285,9 @@ static inline void fimc_md_graph_lock(struct exynos_video_entity *ve)
 static inline void fimc_md_graph_unlock(struct exynos_video_entity *ve)
 {
 	mutex_unlock(&ve->vdev.entity.parent->graph_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -250,7 +304,10 @@ static inline bool fimc_md_is_isp_available(struct device_node *node)
 #endif /* CONFIG_OF */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct v4l2_subdev *__fimc_md_get_subdev(
 				struct exynos_media_pipeline *ep,
 				unsigned int index)
@@ -263,5 +320,8 @@ static inline struct v4l2_subdev *__fimc_md_get_subdev(
 		return p->subdevs[index];
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

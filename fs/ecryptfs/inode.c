@@ -54,9 +54,13 @@ static void unlock_dir(struct dentry *dir)
 static int ecryptfs_inode_test(struct inode *inode, void *lower_inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ecryptfs_inode_to_lower(inode) == (struct inode *)lower_inode)
 		return 1;
 	return 0;
+=======
+	return ecryptfs_inode_to_lower(inode) == lower_inode;
+>>>>>>> v3.18
 =======
 	return ecryptfs_inode_to_lower(inode) == lower_inode;
 >>>>>>> v3.18
@@ -158,7 +162,11 @@ static int ecryptfs_do_unlink(struct inode *dir, struct dentry *dentry,
 	dget(lower_dentry);
 	lower_dir_dentry = lock_parent(lower_dentry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = vfs_unlink(lower_dir_inode, lower_dentry);
+=======
+	rc = vfs_unlink(lower_dir_inode, lower_dentry, NULL);
+>>>>>>> v3.18
 =======
 	rc = vfs_unlink(lower_dir_inode, lower_dentry, NULL);
 >>>>>>> v3.18
@@ -201,12 +209,15 @@ ecryptfs_do_create(struct inode *directory_inode,
 	lower_dentry = ecryptfs_dentry_to_lower(ecryptfs_dentry);
 	lower_dir_dentry = lock_parent(lower_dentry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(lower_dir_dentry)) {
 		ecryptfs_printk(KERN_ERR, "Error locking directory of "
 				"dentry\n");
 		inode = ERR_CAST(lower_dir_dentry);
 		goto out;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rc = vfs_create(lower_dir_dentry->d_inode, lower_dentry, mode, true);
@@ -220,7 +231,11 @@ ecryptfs_do_create(struct inode *directory_inode,
 				     directory_inode->i_sb);
 	if (IS_ERR(inode)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vfs_unlink(lower_dir_dentry->d_inode, lower_dentry);
+=======
+		vfs_unlink(lower_dir_dentry->d_inode, lower_dentry, NULL);
+>>>>>>> v3.18
 =======
 		vfs_unlink(lower_dir_dentry->d_inode, lower_dentry, NULL);
 >>>>>>> v3.18
@@ -231,7 +246,10 @@ ecryptfs_do_create(struct inode *directory_inode,
 out_lock:
 	unlock_dir(lower_dir_dentry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return inode;
@@ -269,8 +287,13 @@ int ecryptfs_initialize_file(struct dentry *ecryptfs_dentry,
 		printk(KERN_ERR "%s: Error attempting to initialize "
 			"the lower file for the dentry with name "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"[%s]; rc = [%d]\n", __func__,
 			ecryptfs_dentry->d_name.name, rc);
+=======
+			"[%pd]; rc = [%d]\n", __func__,
+			ecryptfs_dentry, rc);
+>>>>>>> v3.18
 =======
 			"[%pd]; rc = [%d]\n", __func__,
 			ecryptfs_dentry, rc);
@@ -337,8 +360,13 @@ static int ecryptfs_i_size_read(struct dentry *dentry, struct inode *inode)
 		printk(KERN_ERR "%s: Error attempting to initialize "
 			"the lower file for the dentry with name "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"[%s]; rc = [%d]\n", __func__,
 			dentry->d_name.name, rc);
+=======
+			"[%pd]; rc = [%d]\n", __func__,
+			dentry, rc);
+>>>>>>> v3.18
 =======
 			"[%pd]; rc = [%d]\n", __func__,
 			dentry, rc);
@@ -387,17 +415,23 @@ static int ecryptfs_lookup_interpose(struct dentry *dentry,
 	lower_mnt = mntget(ecryptfs_dentry_to_lower_mnt(dentry->d_parent));
 	fsstack_copy_attr_atime(dir_inode, lower_dentry->d_parent->d_inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!lower_dentry->d_count);
 
 	ecryptfs_set_dentry_private(dentry, dentry_info);
 	ecryptfs_set_dentry_lower(dentry, lower_dentry);
 	ecryptfs_set_dentry_lower_mnt(dentry, lower_mnt);
 =======
+=======
+>>>>>>> v3.18
 	BUG_ON(!d_count(lower_dentry));
 
 	ecryptfs_set_dentry_private(dentry, dentry_info);
 	dentry_info->lower_path.mnt = lower_mnt;
 	dentry_info->lower_path.dentry = lower_dentry;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!lower_dentry->d_inode) {
@@ -455,8 +489,13 @@ static struct dentry *ecryptfs_lookup(struct inode *ecryptfs_dir_inode,
 		rc = PTR_ERR(lower_dentry);
 		ecryptfs_printk(KERN_DEBUG, "%s: lookup_one_len() returned "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"[%d] on lower_dentry = [%s]\n", __func__, rc,
 				ecryptfs_dentry->d_name.name);
+=======
+				"[%d] on lower_dentry = [%pd]\n", __func__, rc,
+				ecryptfs_dentry);
+>>>>>>> v3.18
 =======
 				"[%d] on lower_dentry = [%pd]\n", __func__, rc,
 				ecryptfs_dentry);
@@ -517,7 +556,11 @@ static int ecryptfs_link(struct dentry *old_dentry, struct inode *dir,
 	lower_dir_dentry = lock_parent(lower_new_dentry);
 	rc = vfs_link(lower_old_dentry, lower_dir_dentry->d_inode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      lower_new_dentry);
+=======
+		      lower_new_dentry, NULL);
+>>>>>>> v3.18
 =======
 		      lower_new_dentry, NULL);
 >>>>>>> v3.18
@@ -686,7 +729,12 @@ ecryptfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	}
 	rc = vfs_rename(lower_old_dir_dentry->d_inode, lower_old_dentry,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			lower_new_dir_dentry->d_inode, lower_new_dentry);
+=======
+			lower_new_dir_dentry->d_inode, lower_new_dentry,
+			NULL, 0);
+>>>>>>> v3.18
 =======
 			lower_new_dir_dentry->d_inode, lower_new_dentry,
 			NULL, 0);
@@ -709,27 +757,38 @@ out_lock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ecryptfs_readlink_lower(struct dentry *dentry, char **buf,
 				   size_t *bufsiz)
 {
 	struct dentry *lower_dentry = ecryptfs_dentry_to_lower(dentry);
 	char *lower_buf;
 =======
+=======
+>>>>>>> v3.18
 static char *ecryptfs_readlink_lower(struct dentry *dentry, size_t *bufsiz)
 {
 	struct dentry *lower_dentry = ecryptfs_dentry_to_lower(dentry);
 	char *lower_buf;
 	char *buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mm_segment_t old_fs;
 	int rc;
 
 	lower_buf = kmalloc(PATH_MAX, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!lower_buf) {
 		rc = -ENOMEM;
 		goto out;
 	}
+=======
+	if (!lower_buf)
+		return ERR_PTR(-ENOMEM);
+>>>>>>> v3.18
 =======
 	if (!lower_buf)
 		return ERR_PTR(-ENOMEM);
@@ -743,22 +802,29 @@ static char *ecryptfs_readlink_lower(struct dentry *dentry, size_t *bufsiz)
 	if (rc < 0)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = ecryptfs_decode_and_decrypt_filename(buf, bufsiz, dentry,
 						  lower_buf, rc);
 out:
 	kfree(lower_buf);
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	rc = ecryptfs_decode_and_decrypt_filename(&buf, bufsiz, dentry->d_sb,
 						  lower_buf, rc);
 out:
 	kfree(lower_buf);
 	return rc ? ERR_PTR(rc) : buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void *ecryptfs_follow_link(struct dentry *dentry, struct nameidata *nd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char *buf;
 	size_t len = PATH_MAX;
@@ -766,6 +832,11 @@ static void *ecryptfs_follow_link(struct dentry *dentry, struct nameidata *nd)
 
 	rc = ecryptfs_readlink_lower(dentry, &buf, &len);
 	if (rc)
+=======
+	size_t len;
+	char *buf = ecryptfs_readlink_lower(dentry, &len);
+	if (IS_ERR(buf))
+>>>>>>> v3.18
 =======
 	size_t len;
 	char *buf = ecryptfs_readlink_lower(dentry, &len);
@@ -781,6 +852,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 ecryptfs_put_link(struct dentry *dentry, struct nameidata *nd, void *ptr)
 {
@@ -791,6 +863,8 @@ ecryptfs_put_link(struct dentry *dentry, struct nameidata *nd, void *ptr)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -972,7 +1046,11 @@ int ecryptfs_truncate(struct dentry *dentry, loff_t new_length)
 
 		mutex_lock(&lower_dentry->d_inode->i_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = notify_change(lower_dentry, &lower_ia);
+=======
+		rc = notify_change(lower_dentry, &lower_ia, NULL);
+>>>>>>> v3.18
 =======
 		rc = notify_change(lower_dentry, &lower_ia, NULL);
 >>>>>>> v3.18
@@ -1077,7 +1155,11 @@ static int ecryptfs_setattr(struct dentry *dentry, struct iattr *ia)
 
 	mutex_lock(&lower_dentry->d_inode->i_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = notify_change(lower_dentry, &lower_ia);
+=======
+	rc = notify_change(lower_dentry, &lower_ia, NULL);
+>>>>>>> v3.18
 =======
 	rc = notify_change(lower_dentry, &lower_ia, NULL);
 >>>>>>> v3.18
@@ -1101,17 +1183,23 @@ static int ecryptfs_getattr_link(struct vfsmount *mnt, struct dentry *dentry,
 		size_t targetsiz;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = ecryptfs_readlink_lower(dentry, &target, &targetsiz);
 		if (!rc) {
 			kfree(target);
 			stat->size = targetsiz;
 =======
+=======
+>>>>>>> v3.18
 		target = ecryptfs_readlink_lower(dentry, &targetsiz);
 		if (!IS_ERR(target)) {
 			kfree(target);
 			stat->size = targetsiz;
 		} else {
 			rc = PTR_ERR(target);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1219,7 +1307,11 @@ const struct inode_operations ecryptfs_symlink_iops = {
 	.readlink = generic_readlink,
 	.follow_link = ecryptfs_follow_link,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.put_link = ecryptfs_put_link,
+=======
+	.put_link = kfree_put_link,
+>>>>>>> v3.18
 =======
 	.put_link = kfree_put_link,
 >>>>>>> v3.18

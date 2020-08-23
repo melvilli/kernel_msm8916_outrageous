@@ -33,7 +33,11 @@ struct vpfe_device;
  */
 struct vpfe_video_operations {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int(*queue) (struct vpfe_device *vpfe_dev, unsigned long addr);
+=======
+	int (*queue)(struct vpfe_device *vpfe_dev, unsigned long addr);
+>>>>>>> v3.18
 =======
 	int (*queue)(struct vpfe_device *vpfe_dev, unsigned long addr);
 >>>>>>> v3.18
@@ -107,8 +111,11 @@ struct vpfe_video_device {
 	 */
 	enum v4l2_memory			memory;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Used to keep track of state of the priority */
 	struct v4l2_prio_state			prio;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* number of open instances of the channel */

@@ -1,11 +1,14 @@
 # ALSA PCI drivers
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SND_TEA575X
 	tristate
 	depends on SND_FM801_TEA575X_BOOL || SND_ES1968_RADIO || RADIO_SF16FMR2 || RADIO_MAXIRADIO || RADIO_SHARK
 	default SND_FM801 || SND_ES1968 || RADIO_SF16FMR2 || RADIO_MAXIRADIO || RADIO_SHARK
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 menuconfig SND_PCI
@@ -266,6 +269,10 @@ config SND_CS46XX
 	select SND_RAWMIDI
 	select SND_AC97_CODEC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select FW_LOADER
+>>>>>>> v3.18
 =======
 	select FW_LOADER
 >>>>>>> v3.18
@@ -288,7 +295,11 @@ config SND_CS46XX_NEW_DSP
 config SND_CS5530
 	tristate "CS5530 Audio"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ISA_DMA_API
+=======
+	depends on ISA_DMA_API && (X86_32 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on ISA_DMA_API && (X86_32 || COMPILE_TEST)
 >>>>>>> v3.18
@@ -302,6 +313,10 @@ config SND_CS5530
 config SND_CS5535AUDIO
 	tristate "CS5535/CS5536 Audio"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on X86_32 || MIPS || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on X86_32 || MIPS || COMPILE_TEST
 >>>>>>> v3.18
@@ -565,13 +580,19 @@ config SND_ES1968_RADIO
 	bool "Enable TEA5757 radio tuner support for es1968"
 	depends on SND_ES1968
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIDEO_V4L2=y || VIDEO_V4L2=SND_ES1968
 =======
+=======
+>>>>>>> v3.18
 	depends on MEDIA_RADIO_SUPPORT
 	depends on VIDEO_V4L2=y || VIDEO_V4L2=SND_ES1968
 	select RADIO_ADAPTERS
 	select RADIO_TEA575X
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Say Y here to include support for TEA5757 radio tuner integrated on
@@ -593,12 +614,18 @@ config SND_FM801_TEA575X_BOOL
 	bool "ForteMedia FM801 + TEA5757 tuner"
 	depends on SND_FM801
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIDEO_V4L2=y || VIDEO_V4L2=SND_FM801
 =======
+=======
+>>>>>>> v3.18
 	depends on MEDIA_RADIO_SUPPORT
 	depends on VIDEO_V4L2=y || VIDEO_V4L2=SND_FM801
 	select RADIO_ADAPTERS
 	select RADIO_TEA575X
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Say Y here to include support for soundcards based on the ForteMedia
@@ -606,8 +633,11 @@ config SND_FM801_TEA575X_BOOL
 	  SF64-PCR) into the snd-fm801 driver.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "sound/pci/hda/Kconfig"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SND_HDSP
@@ -827,7 +857,11 @@ config SND_RME9652
 config SND_SIS7019
 	tristate "SiS 7019 Audio Accelerator"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86 && !X86_64
+=======
+	depends on X86_32
+>>>>>>> v3.18
 =======
 	depends on X86_32
 >>>>>>> v3.18
@@ -924,6 +958,11 @@ config SND_YMFPCI
 
 endif	# SND_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+source "sound/pci/hda/Kconfig"
+>>>>>>> v3.18
 =======
 
 source "sound/pci/hda/Kconfig"

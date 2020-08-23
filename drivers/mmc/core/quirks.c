@@ -14,6 +14,10 @@
 #include <linux/export.h>
 #include <linux/mmc/card.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mmc/sdio_ids.h>
+>>>>>>> v3.18
 =======
 #include <linux/mmc/sdio_ids.h>
 >>>>>>> v3.18
@@ -34,6 +38,7 @@
 #define SDIO_DEVICE_ID_STE_CW1200	0x2280
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef SDIO_VENDOR_ID_MSM
 #define SDIO_VENDOR_ID_MSM		0x0070
@@ -65,6 +70,10 @@
 #ifndef SDIO_DEVICE_ID_MARVELL_8797_F0
 #define SDIO_DEVICE_ID_MARVELL_8797_F0	0x9128
 >>>>>>> v3.18
+=======
+#ifndef SDIO_DEVICE_ID_MARVELL_8797_F0
+#define SDIO_DEVICE_ID_MARVELL_8797_F0	0x9128
+>>>>>>> v3.18
 #endif
 
 /*
@@ -87,6 +96,7 @@ static const struct mmc_fixup mmc_fixup_methods[] = {
 		   remove_quirk, MMC_QUIRK_BROKEN_CLK_GATING),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SDIO_FIXUP(SDIO_VENDOR_ID_MSM, SDIO_DEVICE_ID_MSM_WCN1314,
 		   remove_quirk, MMC_QUIRK_BROKEN_CLK_GATING),
 
@@ -104,6 +114,8 @@ static const struct mmc_fixup mmc_fixup_methods[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	SDIO_FIXUP(SDIO_VENDOR_ID_TI, SDIO_DEVICE_ID_TI_WL1271,
 		   add_quirk, MMC_QUIRK_NONSTD_FUNC_IF),
 
@@ -114,6 +126,12 @@ static const struct mmc_fixup mmc_fixup_methods[] = {
 		   add_quirk, MMC_QUIRK_BROKEN_BYTE_MODE_512),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SDIO_FIXUP(SDIO_VENDOR_ID_MARVELL, SDIO_DEVICE_ID_MARVELL_8797_F0,
+		   add_quirk, MMC_QUIRK_BROKEN_IRQ_POLLING),
+
+>>>>>>> v3.18
 =======
 	SDIO_FIXUP(SDIO_VENDOR_ID_MARVELL, SDIO_DEVICE_ID_MARVELL_8797_F0,
 		   add_quirk, MMC_QUIRK_BROKEN_IRQ_POLLING),
@@ -140,8 +158,11 @@ void mmc_fixup_device(struct mmc_card *card, const struct mmc_fixup *table)
 		     !strncmp(f->name, card->cid.prod_name,
 			      sizeof(card->cid.prod_name))) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (f->ext_csd_rev == EXT_CSD_REV_ANY ||
 		     f->ext_csd_rev == card->ext_csd.rev) &&
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		    (f->cis_vendor == card->cis.vendor ||
@@ -150,7 +171,11 @@ void mmc_fixup_device(struct mmc_card *card, const struct mmc_fixup *table)
 		     f->cis_device == (u16) SDIO_ANY_ID) &&
 		    rev >= f->rev_start && rev <= f->rev_end) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_dbg(&card->dev, "calling %pF\n", f->vendor_fixup);
+=======
+			dev_dbg(&card->dev, "calling %pf\n", f->vendor_fixup);
+>>>>>>> v3.18
 =======
 			dev_dbg(&card->dev, "calling %pf\n", f->vendor_fixup);
 >>>>>>> v3.18

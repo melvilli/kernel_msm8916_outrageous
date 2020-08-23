@@ -2,6 +2,10 @@ config VIDEO_DT3155
 	tristate "DT3155 frame grabber, Video4Linux interface"
 	depends on PCI && VIDEO_DEV && VIDEO_V4L2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 >>>>>>> v3.18

@@ -11,7 +11,11 @@ Construction Parameters
     <data_block_size> <hash_block_size>
     <num_data_blocks> <hash_start_block>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <algorithm> <digest> <salt> <mode>
+=======
+    <algorithm> <digest> <salt>
+>>>>>>> v3.18
 =======
     <algorithm> <digest> <salt>
 >>>>>>> v3.18
@@ -67,6 +71,7 @@ Construction Parameters
     The hexadecimal encoding of the salt value.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <mode>
     Optional. The mode of operation.
 
@@ -77,6 +82,8 @@ Construction Parameters
       notify user space.
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 Theory of operation

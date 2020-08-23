@@ -22,7 +22,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/clock.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <subdev/bios.h>
@@ -32,7 +35,11 @@
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 getMNP_single(struct nouveau_clock *clock, struct nvbios_pll *info, int clk,
+=======
+getMNP_single(struct nouveau_subdev *subdev, struct nvbios_pll *info, int clk,
+>>>>>>> v3.18
 =======
 getMNP_single(struct nouveau_subdev *subdev, struct nvbios_pll *info, int clk,
 >>>>>>> v3.18
@@ -47,7 +54,11 @@ getMNP_single(struct nouveau_subdev *subdev, struct nvbios_pll *info, int clk,
 	 * returns calculated clock
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cv = nouveau_bios(clock)->version.chip;
+=======
+	struct nouveau_bios *bios = nouveau_bios(subdev);
+>>>>>>> v3.18
 =======
 	struct nouveau_bios *bios = nouveau_bios(subdev);
 >>>>>>> v3.18
@@ -67,6 +78,7 @@ getMNP_single(struct nouveau_subdev *subdev, struct nvbios_pll *info, int clk,
 	/* this division verified for nv20, nv18, nv28 (Haiku), and nv34 */
 	/* possibly correlated with introduction of 27MHz crystal */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cv < 0x17 || cv == 0x1a || cv == 0x20) {
 		if (clk > 250000)
 			maxM = 6;
@@ -80,6 +92,8 @@ getMNP_single(struct nouveau_subdev *subdev, struct nvbios_pll *info, int clk,
 		if (clk > 340000)
 			maxM = 2;
 =======
+=======
+>>>>>>> v3.18
 	if (bios->version.major < 0x60) {
 		int cv = bios->version.chip;
 		if (cv < 0x17 || cv == 0x1a || cv == 0x20) {
@@ -95,6 +109,9 @@ getMNP_single(struct nouveau_subdev *subdev, struct nvbios_pll *info, int clk,
 			if (clk > 340000)
 				maxM = 2;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -154,7 +171,11 @@ getMNP_single(struct nouveau_subdev *subdev, struct nvbios_pll *info, int clk,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 getMNP_double(struct nouveau_clock *clock, struct nvbios_pll *info, int clk,
+=======
+getMNP_double(struct nouveau_subdev *subdev, struct nvbios_pll *info, int clk,
+>>>>>>> v3.18
 =======
 getMNP_double(struct nouveau_subdev *subdev, struct nvbios_pll *info, int clk,
 >>>>>>> v3.18
@@ -169,7 +190,11 @@ getMNP_double(struct nouveau_subdev *subdev, struct nvbios_pll *info, int clk,
 	 * returns calculated clock
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int chip_version = nouveau_bios(clock)->version.chip;
+=======
+	int chip_version = nouveau_bios(subdev)->version.chip;
+>>>>>>> v3.18
 =======
 	int chip_version = nouveau_bios(subdev)->version.chip;
 >>>>>>> v3.18
@@ -261,7 +286,11 @@ getMNP_double(struct nouveau_subdev *subdev, struct nvbios_pll *info, int clk,
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nv04_pll_calc(struct nouveau_clock *clk, struct nvbios_pll *info, u32 freq,
+=======
+nv04_pll_calc(struct nouveau_subdev *subdev, struct nvbios_pll *info, u32 freq,
+>>>>>>> v3.18
 =======
 nv04_pll_calc(struct nouveau_subdev *subdev, struct nvbios_pll *info, u32 freq,
 >>>>>>> v3.18
@@ -269,6 +298,7 @@ nv04_pll_calc(struct nouveau_subdev *subdev, struct nvbios_pll *info, u32 freq,
 {
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!info->vco2.max_freq) {
 		ret = getMNP_single(clk, info, freq, N1, M1, P);
@@ -281,6 +311,8 @@ nv04_pll_calc(struct nouveau_subdev *subdev, struct nvbios_pll *info, u32 freq,
 	if (!ret)
 		nv_error(clk, "unable to compute acceptable pll values\n");
 =======
+=======
+>>>>>>> v3.18
 	if (!info->vco2.max_freq || !N2) {
 		ret = getMNP_single(subdev, info, freq, N1, M1, P);
 		if (N2) {
@@ -293,6 +325,9 @@ nv04_pll_calc(struct nouveau_subdev *subdev, struct nvbios_pll *info, u32 freq,
 
 	if (!ret)
 		nv_error(subdev, "unable to compute acceptable pll values\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }

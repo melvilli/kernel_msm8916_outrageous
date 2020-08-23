@@ -30,13 +30,17 @@
 #include <linux/serial_sci.h>
 #include <linux/sh_dma.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sh_intc.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/sh_timer.h>
 #include <linux/pm_domain.h>
 #include <linux/dma-mapping.h>
 #include <linux/platform_data/sh_ipmmu.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <mach/dma-register.h>
 #include <mach/hardware.h>
@@ -46,13 +50,19 @@
 =======
 
 >>>>>>> v3.18
+=======
+
+>>>>>>> v3.18
 #include <asm/mach/map.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "common.h"
 #include "dma-register.h"
 #include "intc.h"
@@ -60,6 +70,9 @@
 #include "pm-rmobile.h"
 #include "sh7372.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct map_desc sh7372_io_desc[] __initdata = {
 	/* create a 1:1 entity map for 0xe6xxxxxx
@@ -104,6 +117,7 @@ void __init sh7372_pinmux_init(void)
 	platform_device_register(&sh7372_pfc_device);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* SCIFA0 */
 static struct plat_sci_port scif0_platform_data = {
@@ -263,6 +277,8 @@ static struct resource cmt2_resources[] = {
 static struct platform_device cmt2_device = {
 	.name		= "sh_cmt",
 =======
+=======
+>>>>>>> v3.18
 /* SCIF */
 #define SH7372_SCIF(scif_type, index, baseaddr, irq)		\
 static struct plat_sci_port scif##index##_platform_data = {	\
@@ -306,6 +322,9 @@ static struct resource cmt2_resources[] = {
 
 static struct platform_device cmt2_device = {
 	.name		= "sh-cmt-32-fast",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.id		= 2,
 	.dev = {
@@ -316,6 +335,7 @@ static struct platform_device cmt2_device = {
 };
 
 /* TMU */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct sh_timer_config tmu00_platform_data = {
 	.name = "TMU00",
@@ -376,6 +396,8 @@ static struct platform_device tmu01_device = {
 	.resource	= tmu01_resources,
 	.num_resources	= ARRAY_SIZE(tmu01_resources),
 =======
+=======
+>>>>>>> v3.18
 static struct sh_timer_config tmu0_platform_data = {
 	.channels_mask = 7,
 };
@@ -395,6 +417,9 @@ static struct platform_device tmu0_device = {
 	},
 	.resource	= tmu0_resources,
 	.num_resources	= ARRAY_SIZE(tmu0_resources),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1141,8 +1166,12 @@ static struct platform_device *sh7372_early_devices[] __initdata = {
 	&scif6_device,
 	&cmt2_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&tmu00_device,
 	&tmu01_device,
+=======
+	&tmu0_device,
+>>>>>>> v3.18
 =======
 	&tmu0_device,
 >>>>>>> v3.18
@@ -1170,7 +1199,11 @@ static struct platform_device *sh7372_late_devices[] __initdata = {
 void __init sh7372_add_standard_devices(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pm_domain_device domain_devices[] = {
+=======
+	static struct pm_domain_device domain_devices[] __initdata = {
+>>>>>>> v3.18
 =======
 	static struct pm_domain_device domain_devices[] __initdata = {
 >>>>>>> v3.18
@@ -1197,8 +1230,12 @@ void __init sh7372_add_standard_devices(void)
 		{ "A4R", &veu3_device, },
 		{ "A4R", &jpu_device, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{ "A4R", &tmu00_device, },
 		{ "A4R", &tmu01_device, },
+=======
+		{ "A4R", &tmu0_device, },
+>>>>>>> v3.18
 =======
 		{ "A4R", &tmu0_device, },
 >>>>>>> v3.18
@@ -1236,6 +1273,7 @@ void __init sh7372_add_early_devices(void)
 void __init sh7372_add_early_devices_dt(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	shmobile_setup_delay(800, 1, 3); /* Cortex-A8 @ 800MHz */
 
 	early_platform_add_devices(sh7372_early_devices,
@@ -1250,11 +1288,16 @@ static const struct of_dev_auxdata sh7372_auxdata_lookup[] __initconst = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	shmobile_init_delay();
 
 	sh7372_add_early_devices();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init sh7372_add_standard_devices_dt(void)
 {
@@ -1265,8 +1308,12 @@ void __init sh7372_add_standard_devices_dt(void)
 			    ARRAY_SIZE(sh7372_early_devices));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_platform_populate(NULL, of_default_bus_match_table,
 			     sh7372_auxdata_lookup, NULL);
+=======
+	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
+>>>>>>> v3.18
 =======
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
 >>>>>>> v3.18
@@ -1281,7 +1328,10 @@ DT_MACHINE_START(SH7372_DT, "Generic SH7372 (Flattened Device Tree)")
 	.map_io		= sh7372_map_io,
 	.init_early	= sh7372_add_early_devices_dt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.nr_irqs	= NR_IRQS_LEGACY,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_irq	= sh7372_init_irq,

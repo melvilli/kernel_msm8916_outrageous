@@ -48,6 +48,7 @@
 #include <linux/export.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MM_UNUSED_TARGET 4
 
 static struct drm_mm_node *drm_mm_kmalloc(struct drm_mm *mm, int atomic)
@@ -103,6 +104,8 @@ int drm_mm_pre_get(struct drm_mm *mm)
 }
 EXPORT_SYMBOL(drm_mm_pre_get);
 =======
+=======
+>>>>>>> v3.18
 /**
  * DOC: Overview
  *
@@ -158,13 +161,21 @@ static struct drm_mm_node *drm_mm_search_free_in_range_generic(const struct drm_
 						unsigned long start,
 						unsigned long end,
 						enum drm_mm_search_flags flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void drm_mm_insert_helper(struct drm_mm_node *hole_node,
 				 struct drm_mm_node *node,
 				 unsigned long size, unsigned alignment,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 unsigned long color)
+=======
+				 unsigned long color,
+				 enum drm_mm_allocator_flags flags)
+>>>>>>> v3.18
 =======
 				 unsigned long color,
 				 enum drm_mm_allocator_flags flags)
@@ -182,6 +193,7 @@ static void drm_mm_insert_helper(struct drm_mm_node *hole_node,
 		mm->color_adjust(hole_node, color, &adj_start, &adj_end);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (alignment) {
 		unsigned tmp = adj_start % alignment;
 		if (tmp)
@@ -189,6 +201,8 @@ static void drm_mm_insert_helper(struct drm_mm_node *hole_node,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (flags & DRM_MM_CREATE_TOP)
 		adj_start = adj_end - size;
 
@@ -205,6 +219,9 @@ static void drm_mm_insert_helper(struct drm_mm_node *hole_node,
 	BUG_ON(adj_start < hole_start);
 	BUG_ON(adj_end > hole_end);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (adj_start == hole_start) {
 		hole_node->hole_follows = 0;
@@ -230,6 +247,7 @@ static void drm_mm_insert_helper(struct drm_mm_node *hole_node,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drm_mm_node *drm_mm_create_block(struct drm_mm *mm,
 					unsigned long start,
 					unsigned long size,
@@ -251,6 +269,8 @@ struct drm_mm_node *drm_mm_create_block(struct drm_mm *mm,
 		node->start = start;
 		node->size = size;
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_mm_reserve_node - insert an pre-initialized node
  * @mm: drm_mm allocator to insert @node into
@@ -279,6 +299,9 @@ int drm_mm_reserve_node(struct drm_mm *mm, struct drm_mm_node *node)
 		if (hole_start > node->start || hole_end < end)
 			continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		node->mm = mm;
 		node->allocated = 1;
@@ -287,7 +310,11 @@ int drm_mm_reserve_node(struct drm_mm *mm, struct drm_mm_node *node)
 		list_add(&node->node_list, &hole->node_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (start == hole_start) {
+=======
+		if (node->start == hole_start) {
+>>>>>>> v3.18
 =======
 		if (node->start == hole_start) {
 >>>>>>> v3.18
@@ -301,6 +328,7 @@ int drm_mm_reserve_node(struct drm_mm *mm, struct drm_mm_node *node)
 			node->hole_follows = 1;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return node;
 	}
@@ -337,6 +365,8 @@ int drm_mm_insert_node_generic(struct drm_mm *mm, struct drm_mm_node *node,
 			       unsigned long size, unsigned alignment,
 			       unsigned long color)
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -364,11 +394,15 @@ int drm_mm_insert_node_generic(struct drm_mm *mm, struct drm_mm_node *node,
 			       unsigned long color,
 			       enum drm_mm_search_flags sflags,
 			       enum drm_mm_allocator_flags aflags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drm_mm_node *hole_node;
 
 	hole_node = drm_mm_search_free_generic(mm, size, alignment,
+<<<<<<< HEAD
 <<<<<<< HEAD
 					       color, 0);
 	if (!hole_node)
@@ -376,16 +410,22 @@ int drm_mm_insert_node_generic(struct drm_mm *mm, struct drm_mm_node *node,
 
 	drm_mm_insert_helper(hole_node, node, size, alignment, color);
 =======
+=======
+>>>>>>> v3.18
 					       color, sflags);
 	if (!hole_node)
 		return -ENOSPC;
 
 	drm_mm_insert_helper(hole_node, node, size, alignment, color, aflags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL(drm_mm_insert_node_generic);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int drm_mm_insert_node(struct drm_mm *mm, struct drm_mm_node *node,
 		       unsigned long size, unsigned alignment)
@@ -396,12 +436,19 @@ EXPORT_SYMBOL(drm_mm_insert_node);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void drm_mm_insert_helper_range(struct drm_mm_node *hole_node,
 				       struct drm_mm_node *node,
 				       unsigned long size, unsigned alignment,
 				       unsigned long color,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       unsigned long start, unsigned long end)
+=======
+				       unsigned long start, unsigned long end,
+				       enum drm_mm_allocator_flags flags)
+>>>>>>> v3.18
 =======
 				       unsigned long start, unsigned long end,
 				       enum drm_mm_allocator_flags flags)
@@ -421,6 +468,12 @@ static void drm_mm_insert_helper_range(struct drm_mm_node *hole_node,
 		adj_end = end;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (flags & DRM_MM_CREATE_TOP)
+		adj_start = adj_end - size;
+
+>>>>>>> v3.18
 =======
 	if (flags & DRM_MM_CREATE_TOP)
 		adj_start = adj_end - size;
@@ -432,15 +485,21 @@ static void drm_mm_insert_helper_range(struct drm_mm_node *hole_node,
 	if (alignment) {
 		unsigned tmp = adj_start % alignment;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (tmp)
 			adj_start += alignment - tmp;
 =======
+=======
+>>>>>>> v3.18
 		if (tmp) {
 			if (flags & DRM_MM_CREATE_TOP)
 				adj_start -= tmp;
 			else
 				adj_start += alignment - tmp;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -459,6 +518,11 @@ static void drm_mm_insert_helper_range(struct drm_mm_node *hole_node,
 	list_add(&node->node_list, &hole_node->node_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUG_ON(node->start < start);
+	BUG_ON(node->start < adj_start);
+>>>>>>> v3.18
 =======
 	BUG_ON(node->start < start);
 	BUG_ON(node->start < adj_start);
@@ -473,6 +537,7 @@ static void drm_mm_insert_helper_range(struct drm_mm_node *hole_node,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct drm_mm_node *drm_mm_get_block_range_generic(struct drm_mm_node *hole_node,
 						unsigned long size,
@@ -504,6 +569,8 @@ int drm_mm_insert_node_in_range_generic(struct drm_mm *mm, struct drm_mm_node *n
 					unsigned long size, unsigned alignment, unsigned long color,
 					unsigned long start, unsigned long end)
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_mm_insert_node_in_range_generic - ranged search for space and insert @node
  * @mm: drm_mm to allocate from
@@ -527,6 +594,9 @@ int drm_mm_insert_node_in_range_generic(struct drm_mm *mm, struct drm_mm_node *n
 					unsigned long start, unsigned long end,
 					enum drm_mm_search_flags sflags,
 					enum drm_mm_allocator_flags aflags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drm_mm_node *hole_node;
@@ -534,7 +604,11 @@ int drm_mm_insert_node_in_range_generic(struct drm_mm *mm, struct drm_mm_node *n
 	hole_node = drm_mm_search_free_in_range_generic(mm,
 							size, alignment, color,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							start, end, 0);
+=======
+							start, end, sflags);
+>>>>>>> v3.18
 =======
 							start, end, sflags);
 >>>>>>> v3.18
@@ -544,7 +618,11 @@ int drm_mm_insert_node_in_range_generic(struct drm_mm *mm, struct drm_mm_node *n
 	drm_mm_insert_helper_range(hole_node, node,
 				   size, alignment, color,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   start, end);
+=======
+				   start, end, aflags);
+>>>>>>> v3.18
 =======
 				   start, end, aflags);
 >>>>>>> v3.18
@@ -552,6 +630,7 @@ int drm_mm_insert_node_in_range_generic(struct drm_mm *mm, struct drm_mm_node *n
 }
 EXPORT_SYMBOL(drm_mm_insert_node_in_range_generic);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int drm_mm_insert_node_in_range(struct drm_mm *mm, struct drm_mm_node *node,
 				unsigned long size, unsigned alignment,
@@ -564,6 +643,8 @@ EXPORT_SYMBOL(drm_mm_insert_node_in_range);
 /**
  * Remove a memory node from the allocator.
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_mm_remove_node - Remove a memory node from the allocator.
  * @node: drm_mm_node to remove
@@ -571,6 +652,9 @@ EXPORT_SYMBOL(drm_mm_insert_node_in_range);
  * This just removes a node from its drm_mm allocator. The node does not need to
  * be cleared again before it can be re-inserted into this or any other drm_mm
  * allocator. It is a bug to call this function on a un-allocated node.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void drm_mm_remove_node(struct drm_mm_node *node)
@@ -579,6 +663,12 @@ void drm_mm_remove_node(struct drm_mm_node *node)
 	struct drm_mm_node *prev_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (WARN_ON(!node->allocated))
+		return;
+
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!node->allocated))
 		return;
@@ -611,6 +701,7 @@ void drm_mm_remove_node(struct drm_mm_node *node)
 EXPORT_SYMBOL(drm_mm_remove_node);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Remove a memory node from the allocator and free the allocated struct
  * drm_mm_node. Only to be used on a struct drm_mm_node obtained by one of the
@@ -635,6 +726,8 @@ EXPORT_SYMBOL(drm_mm_put_block);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int check_free_hole(unsigned long start, unsigned long end,
 			   unsigned long size, unsigned alignment)
 {
@@ -651,17 +744,23 @@ static int check_free_hole(unsigned long start, unsigned long end,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drm_mm_node *drm_mm_search_free_generic(const struct drm_mm *mm,
 					       unsigned long size,
 					       unsigned alignment,
 					       unsigned long color,
 					       bool best_match)
 =======
+=======
+>>>>>>> v3.18
 static struct drm_mm_node *drm_mm_search_free_generic(const struct drm_mm *mm,
 						      unsigned long size,
 						      unsigned alignment,
 						      unsigned long color,
 						      enum drm_mm_search_flags flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drm_mm_node *entry;
@@ -676,12 +775,18 @@ static struct drm_mm_node *drm_mm_search_free_generic(const struct drm_mm *mm,
 	best_size = ~0UL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_mm_for_each_hole(entry, mm, adj_start, adj_end) {
 =======
+=======
+>>>>>>> v3.18
 	__drm_mm_for_each_hole(entry, mm, adj_start, adj_end,
 			       flags & DRM_MM_SEARCH_BELOW) {
 		unsigned long hole_size = adj_end - adj_start;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (mm->color_adjust) {
 			mm->color_adjust(entry, color, &adj_start, &adj_end);
@@ -693,6 +798,7 @@ static struct drm_mm_node *drm_mm_search_free_generic(const struct drm_mm *mm,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!best_match)
 			return entry;
 
@@ -700,12 +806,17 @@ static struct drm_mm_node *drm_mm_search_free_generic(const struct drm_mm *mm,
 			best = entry;
 			best_size = entry->size;
 =======
+=======
+>>>>>>> v3.18
 		if (!(flags & DRM_MM_SEARCH_BEST))
 			return entry;
 
 		if (hole_size < best_size) {
 			best = entry;
 			best_size = hole_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -713,9 +824,14 @@ static struct drm_mm_node *drm_mm_search_free_generic(const struct drm_mm *mm,
 	return best;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(drm_mm_search_free_generic);
 
 struct drm_mm_node *drm_mm_search_free_in_range_generic(const struct drm_mm *mm,
+=======
+
+static struct drm_mm_node *drm_mm_search_free_in_range_generic(const struct drm_mm *mm,
+>>>>>>> v3.18
 =======
 
 static struct drm_mm_node *drm_mm_search_free_in_range_generic(const struct drm_mm *mm,
@@ -726,7 +842,11 @@ static struct drm_mm_node *drm_mm_search_free_in_range_generic(const struct drm_
 							unsigned long start,
 							unsigned long end,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							bool best_match)
+=======
+							enum drm_mm_search_flags flags)
+>>>>>>> v3.18
 =======
 							enum drm_mm_search_flags flags)
 >>>>>>> v3.18
@@ -743,12 +863,18 @@ static struct drm_mm_node *drm_mm_search_free_in_range_generic(const struct drm_
 	best_size = ~0UL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_mm_for_each_hole(entry, mm, adj_start, adj_end) {
 =======
+=======
+>>>>>>> v3.18
 	__drm_mm_for_each_hole(entry, mm, adj_start, adj_end,
 			       flags & DRM_MM_SEARCH_BELOW) {
 		unsigned long hole_size = adj_end - adj_start;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (adj_start < start)
 			adj_start = start;
@@ -765,6 +891,7 @@ static struct drm_mm_node *drm_mm_search_free_in_range_generic(const struct drm_
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!best_match)
 			return entry;
 
@@ -772,12 +899,17 @@ static struct drm_mm_node *drm_mm_search_free_in_range_generic(const struct drm_
 			best = entry;
 			best_size = entry->size;
 =======
+=======
+>>>>>>> v3.18
 		if (!(flags & DRM_MM_SEARCH_BEST))
 			return entry;
 
 		if (hole_size < best_size) {
 			best = entry;
 			best_size = hole_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -785,11 +917,14 @@ static struct drm_mm_node *drm_mm_search_free_in_range_generic(const struct drm_
 	return best;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(drm_mm_search_free_in_range_generic);
 
 /**
  * Moves an allocation. To be used with embedded struct drm_mm_node.
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * drm_mm_replace_node - move an allocation from @old to @new
@@ -799,6 +934,9 @@ EXPORT_SYMBOL(drm_mm_search_free_in_range_generic);
  * This is useful for when drivers embed the drm_mm_node structure and hence
  * can't move allocations by reassigning pointers. It's a combination of remove
  * and insert with the guarantee that the allocation start will match.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void drm_mm_replace_node(struct drm_mm_node *old, struct drm_mm_node *new)
@@ -818,6 +956,7 @@ EXPORT_SYMBOL(drm_mm_replace_node);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Initializa lru scanning.
  *
  * This simply sets up the scanning routines with the parameters for the desired
@@ -825,6 +964,8 @@ EXPORT_SYMBOL(drm_mm_replace_node);
  *
  * Warning: As long as the scan list is non-empty, no other operations than
 =======
+=======
+>>>>>>> v3.18
  * DOC: lru scan roaster
  *
  * Very often GPUs need to have continuous allocations for a given object. When
@@ -865,6 +1006,9 @@ EXPORT_SYMBOL(drm_mm_replace_node);
  *
  * Warning:
  * As long as the scan list is non-empty, no other operations than
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * adding/removing nodes to/from the scan list are allowed.
  */
@@ -886,6 +1030,7 @@ EXPORT_SYMBOL(drm_mm_init_scan);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Initializa lru scanning.
  *
  * This simply sets up the scanning routines with the parameters for the desired
@@ -893,6 +1038,8 @@ EXPORT_SYMBOL(drm_mm_init_scan);
  *
  * Warning: As long as the scan list is non-empty, no other operations than
 =======
+=======
+>>>>>>> v3.18
  * drm_mm_init_scan - initialize range-restricted lru scanning
  * @mm: drm_mm to scan
  * @size: size of the allocation
@@ -907,6 +1054,9 @@ EXPORT_SYMBOL(drm_mm_init_scan);
  *
  * Warning:
  * As long as the scan list is non-empty, no other operations than
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * adding/removing nodes to/from the scan list are allowed.
  */
@@ -932,6 +1082,7 @@ EXPORT_SYMBOL(drm_mm_init_scan_with_range);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Add a node to the scan list that might be freed to make space for the desired
  * hole.
  *
@@ -939,6 +1090,8 @@ EXPORT_SYMBOL(drm_mm_init_scan_with_range);
  */
 int drm_mm_scan_add_block(struct drm_mm_node *node)
 =======
+=======
+>>>>>>> v3.18
  * drm_mm_scan_add_block - add a node to the scan list
  * @node: drm_mm_node to add
  *
@@ -949,6 +1102,9 @@ int drm_mm_scan_add_block(struct drm_mm_node *node)
  * True if a hole has been found, false otherwise.
  */
 bool drm_mm_scan_add_block(struct drm_mm_node *node)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drm_mm *mm = node->mm;
@@ -990,22 +1146,33 @@ bool drm_mm_scan_add_block(struct drm_mm_node *node)
 		mm->scan_hit_start = hole_start;
 		mm->scan_hit_end = hole_end;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 1;
 	}
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		return true;
 	}
 
 	return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(drm_mm_scan_add_block);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Remove a node from the scan list.
+=======
+ * drm_mm_scan_remove_block - remove a node from the scan list
+ * @node: drm_mm_node to remove
+>>>>>>> v3.18
 =======
  * drm_mm_scan_remove_block - remove a node from the scan list
  * @node: drm_mm_node to remove
@@ -1017,6 +1184,7 @@ EXPORT_SYMBOL(drm_mm_scan_add_block);
  *
  * When the scan list is empty, the selected memory nodes can be freed. An
 <<<<<<< HEAD
+<<<<<<< HEAD
  * immediately following drm_mm_search_free with best_match = 0 will then return
  * the just freed block (because its at the top of the free_stack list).
  *
@@ -1025,6 +1193,8 @@ EXPORT_SYMBOL(drm_mm_scan_add_block);
  */
 int drm_mm_scan_remove_block(struct drm_mm_node *node)
 =======
+=======
+>>>>>>> v3.18
  * immediately following drm_mm_search_free with !DRM_MM_SEARCH_BEST will then
  * return the just freed block (because its at the top of the free_stack list).
  *
@@ -1033,6 +1203,9 @@ int drm_mm_scan_remove_block(struct drm_mm_node *node)
  * return false when no hole has been found.
  */
 bool drm_mm_scan_remove_block(struct drm_mm_node *node)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drm_mm *mm = node->mm;
@@ -1055,8 +1228,11 @@ bool drm_mm_scan_remove_block(struct drm_mm_node *node)
 EXPORT_SYMBOL(drm_mm_scan_remove_block);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_mm_clean(struct drm_mm * mm)
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_mm_clean - checks whether an allocator is clean
  * @mm: drm_mm allocator to check
@@ -1066,6 +1242,9 @@ int drm_mm_clean(struct drm_mm * mm)
  * allocated in it.
  */
 bool drm_mm_clean(struct drm_mm * mm)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct list_head *head = &mm->head_node.node_list;
@@ -1075,6 +1254,7 @@ bool drm_mm_clean(struct drm_mm * mm)
 EXPORT_SYMBOL(drm_mm_clean);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_mm_init(struct drm_mm * mm, unsigned long start, unsigned long size)
 {
 	INIT_LIST_HEAD(&mm->hole_stack);
@@ -1083,6 +1263,8 @@ int drm_mm_init(struct drm_mm * mm, unsigned long start, unsigned long size)
 	mm->scanned_blocks = 0;
 	spin_lock_init(&mm->unused_lock);
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_mm_init - initialize a drm-mm allocator
  * @mm: the drm_mm structure to initialize
@@ -1095,6 +1277,9 @@ void drm_mm_init(struct drm_mm * mm, unsigned long start, unsigned long size)
 {
 	INIT_LIST_HEAD(&mm->hole_stack);
 	mm->scanned_blocks = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Clever trick to avoid a special case in the free hole tracking. */
@@ -1110,6 +1295,7 @@ void drm_mm_init(struct drm_mm * mm, unsigned long start, unsigned long size)
 	list_add_tail(&mm->head_node.hole_stack, &mm->hole_stack);
 
 	mm->color_adjust = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	return 0;
@@ -1138,6 +1324,8 @@ void drm_mm_takedown(struct drm_mm * mm)
 EXPORT_SYMBOL(drm_mm_takedown);
 
 =======
+=======
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(drm_mm_init);
 
@@ -1178,11 +1366,15 @@ static unsigned long drm_mm_debug_hole(struct drm_mm_node *entry,
  * @mm: drm_mm allocator to dump
  * @prefix: prefix to use for dumping to dmesg
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void drm_mm_debug_table(struct drm_mm *mm, const char *prefix)
 {
 	struct drm_mm_node *entry;
 	unsigned long total_used = 0, total_free = 0, total = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long hole_start, hole_end, hole_size;
 
@@ -1198,12 +1390,17 @@ void drm_mm_debug_table(struct drm_mm *mm, const char *prefix)
 
 	total_free += drm_mm_debug_hole(&mm->head_node, prefix);
 >>>>>>> v3.18
+=======
+
+	total_free += drm_mm_debug_hole(&mm->head_node, prefix);
+>>>>>>> v3.18
 
 	drm_mm_for_each_node(entry, mm) {
 		printk(KERN_DEBUG "%s 0x%08lx-0x%08lx: %8lu: used\n",
 			prefix, entry->start, entry->start + entry->size,
 			entry->size);
 		total_used += entry->size;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (entry->hole_follows) {
@@ -1215,6 +1412,9 @@ void drm_mm_debug_table(struct drm_mm *mm, const char *prefix)
 				hole_size);
 			total_free += hole_size;
 		}
+=======
+		total_free += drm_mm_debug_hole(entry, prefix);
+>>>>>>> v3.18
 =======
 		total_free += drm_mm_debug_hole(entry, prefix);
 >>>>>>> v3.18
@@ -1244,12 +1444,18 @@ static unsigned long drm_mm_dump_hole(struct seq_file *m, struct drm_mm_node *en
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_mm_dump_table - dump allocator state to a seq_file
  * @m: seq_file to dump to
  * @mm: drm_mm allocator to dump
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int drm_mm_dump_table(struct seq_file *m, struct drm_mm *mm)
 {

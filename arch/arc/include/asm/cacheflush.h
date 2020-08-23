@@ -82,7 +82,10 @@ void flush_anon_page(struct vm_area_struct *vma,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * A new pagecache page has PG_arch_1 clear - thus dcache dirty by default
  * This works around some PIO based drivers which don't call flush_dcache_page
  * to record that they dirtied the dcache
@@ -90,6 +93,9 @@ void flush_anon_page(struct vm_area_struct *vma,
 #define PG_dc_clean	PG_arch_1
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Simple wrapper over config option
  * Bootup code ensures that hardware matches kernel configuration
@@ -97,11 +103,15 @@ void flush_anon_page(struct vm_area_struct *vma,
 static inline int cache_is_vipt_aliasing(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARC_CACHE_VIPT_ALIASING
 	return 1;
 #else
 	return 0;
 #endif
+=======
+	return IS_ENABLED(CONFIG_ARC_CACHE_VIPT_ALIASING);
+>>>>>>> v3.18
 =======
 	return IS_ENABLED(CONFIG_ARC_CACHE_VIPT_ALIASING);
 >>>>>>> v3.18

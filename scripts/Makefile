@@ -14,7 +14,10 @@ hostprogs-$(CONFIG_KALLSYMS)     += kallsyms
 hostprogs-$(CONFIG_LOGO)         += pnmtologo
 hostprogs-$(CONFIG_VT)           += conmakehash
 <<<<<<< HEAD
+<<<<<<< HEAD
 hostprogs-$(CONFIG_IKCONFIG)     += bin2c
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 hostprogs-$(BUILD_C_RECORDMCOUNT) += recordmcount
@@ -31,15 +34,21 @@ hostprogs-y += unifdef docproc
 
 # These targets are used internally to avoid "is up to date" messages
 <<<<<<< HEAD
+<<<<<<< HEAD
 PHONY += build_unifdef
 build_unifdef: scripts/unifdef FORCE
 	@:
 build_docproc: scripts/docproc FORCE
 =======
+=======
+>>>>>>> v3.18
 PHONY += build_unifdef build_docproc
 build_unifdef: $(obj)/unifdef
 	@:
 build_docproc: $(obj)/docproc
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	@:
 
@@ -50,7 +59,11 @@ subdir-$(CONFIG_DTC)         += dtc
 
 # Let clean descend into subdirs
 <<<<<<< HEAD
+<<<<<<< HEAD
 subdir-	+= basic kconfig package selinux
+=======
+subdir-	+= basic kconfig package
+>>>>>>> v3.18
 =======
 subdir-	+= basic kconfig package
 >>>>>>> v3.18

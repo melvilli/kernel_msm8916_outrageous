@@ -1,12 +1,18 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* bnx2i_sysfs.c: Broadcom NetXtreme II iSCSI driver.
  *
  * Copyright (c) 2004 - 2012 Broadcom Corporation
 =======
+=======
+>>>>>>> v3.18
 /* bnx2i_sysfs.c: QLogic NetXtreme II iSCSI driver.
  *
  * Copyright (c) 2004 - 2013 Broadcom Corporation
  * Copyright (c) 2014, QLogic Corporation
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -15,7 +21,12 @@
  *
  * Written by: Anil Veerabhadrappa (anilgv@broadcom.com)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eddie Wai (eddie.wai@broadcom.com)
+=======
+ * Previously Maintained by: Eddie Wai (eddie.wai@broadcom.com)
+ * Maintained by: QLogic-Storage-Upstream@qlogic.com
+>>>>>>> v3.18
 =======
  * Previously Maintained by: Eddie Wai (eddie.wai@broadcom.com)
  * Maintained by: QLogic-Storage-Upstream@qlogic.com

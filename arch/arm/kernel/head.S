@@ -53,7 +53,12 @@
 
 	.macro	pgtbl, rd, phys
 <<<<<<< HEAD
+<<<<<<< HEAD
 	add	\rd, \phys, #TEXT_OFFSET - PG_DIR_SIZE
+=======
+	add	\rd, \phys, #TEXT_OFFSET
+	sub	\rd, \rd, #PG_DIR_SIZE
+>>>>>>> v3.18
 =======
 	add	\rd, \phys, #TEXT_OFFSET
 	sub	\rd, \rd, #PG_DIR_SIZE
@@ -83,6 +88,10 @@
 	__HEAD
 ENTRY(stext)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ ARM_BE8(setend	be )			@ ensure we are in BE8 mode
+>>>>>>> v3.18
 =======
  ARM_BE8(setend	be )			@ ensure we are in BE8 mode
 >>>>>>> v3.18
@@ -110,7 +119,11 @@ ENTRY(stext)
 	cmp	r3, #5				@ long-descriptor translation table format?
  THUMB( it	lo )				@ force fixup-able long branch encoding
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blo	__error_p			@ only classic page table format
+=======
+	blo	__error_lpae			@ only classic page table format
+>>>>>>> v3.18
 =======
 	blo	__error_lpae			@ only classic page table format
 >>>>>>> v3.18
@@ -152,7 +165,11 @@ ENTRY(stext)
  ARM(	add	pc, r10, #PROCINFO_INITFUNC	)
  THUMB(	add	r12, r10, #PROCINFO_INITFUNC	)
 <<<<<<< HEAD
+<<<<<<< HEAD
  THUMB(	mov	pc, r12				)
+=======
+ THUMB(	ret	r12				)
+>>>>>>> v3.18
 =======
  THUMB(	ret	r12				)
 >>>>>>> v3.18
@@ -174,7 +191,11 @@ ENDPROC(stext)
  * Returns:
  *  r0, r3, r5-r7 corrupted
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  r4 = physical page table address
+=======
+ *  r4 = page table (see ARCH_PGD_SHIFT in asm/memory.h)
+>>>>>>> v3.18
 =======
  *  r4 = page table (see ARCH_PGD_SHIFT in asm/memory.h)
 >>>>>>> v3.18
@@ -353,8 +374,14 @@ __create_page_tables:
 #ifdef CONFIG_ARM_LPAE
 	sub	r4, r4, #0x1000		@ point to the PGD table
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 	mov	pc, lr
+=======
+	mov	r4, r4, lsr #ARCH_PGD_SHIFT
+#endif
+	ret	lr
+>>>>>>> v3.18
 =======
 	mov	r4, r4, lsr #ARCH_PGD_SHIFT
 #endif
@@ -370,7 +397,11 @@ __turn_mmu_on_loc:
 
 #if defined(CONFIG_SMP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
+=======
+	.text
+>>>>>>> v3.18
 =======
 	.text
 >>>>>>> v3.18
@@ -383,6 +414,12 @@ ENTRY(secondary_startup)
 	 * as it has already been validated by the primary processor.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+ ARM_BE8(setend	be)				@ ensure we are in BE8 mode
+
+>>>>>>> v3.18
 =======
 
  ARM_BE8(setend	be)				@ ensure we are in BE8 mode
@@ -415,7 +452,11 @@ ENTRY(secondary_startup)
 						  @ (return control reg)
  THUMB(	add	r12, r10, #PROCINFO_INITFUNC	)
 <<<<<<< HEAD
+<<<<<<< HEAD
  THUMB(	mov	pc, r12				)
+=======
+ THUMB(	ret	r12				)
+>>>>>>> v3.18
 =======
  THUMB(	ret	r12				)
 >>>>>>> v3.18
@@ -450,7 +491,11 @@ __secondary_data:
  *  r1  = machine ID
  *  r2  = atags or dtb pointer
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  r4  = page table pointer
+=======
+ *  r4  = page table (see ARCH_PGD_SHIFT in asm/memory.h)
+>>>>>>> v3.18
 =======
  *  r4  = page table (see ARCH_PGD_SHIFT in asm/memory.h)
 >>>>>>> v3.18
@@ -473,10 +518,14 @@ __enable_mmu:
 	bic	r0, r0, #CR_I
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARM_LPAE
 	mov	r5, #0
 	mcrr	p15, 0, r4, r5, c2		@ load TTBR0
 #else
+=======
+#ifndef CONFIG_ARM_LPAE
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_ARM_LPAE
 >>>>>>> v3.18
@@ -514,6 +563,7 @@ ENTRY(__turn_mmu_on)
 	instr_sync
 	mov	r3, r3
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_MSM_KRAIT
 	movw	r3, 0xff0d
 	movt	r3, 0xffff
@@ -531,6 +581,10 @@ ENTRY(__turn_mmu_on)
 	mov	r3, r13
 	ret	r3
 >>>>>>> v3.18
+=======
+	mov	r3, r13
+	ret	r3
+>>>>>>> v3.18
 __turn_mmu_on_end:
 ENDPROC(__turn_mmu_on)
 	.popsection
@@ -538,7 +592,11 @@ ENDPROC(__turn_mmu_on)
 
 #ifdef CONFIG_SMP_ON_UP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__INIT
+=======
+	__HEAD
+>>>>>>> v3.18
 =======
 	__HEAD
 >>>>>>> v3.18
@@ -554,7 +612,11 @@ __fixup_smp:
 	orr	r4, r4, #0x00000020	@ val 0x4100b020
 	teq	r3, r4			@ ARM 11MPCore?
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveq	pc, lr			@ yes, assume SMP
+=======
+	reteq	lr			@ yes, assume SMP
+>>>>>>> v3.18
 =======
 	reteq	lr			@ yes, assume SMP
 >>>>>>> v3.18
@@ -563,8 +625,11 @@ __fixup_smp:
 	and	r0, r0, #0xc0000000	@ multiprocessing extensions and
 	teq	r0, #0x80000000		@ not part of a uniprocessor system?
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveq	pc, lr			@ yes, assume SMP
 =======
+=======
+>>>>>>> v3.18
 	bne    __fixup_smp_on_up	@ no, assume UP
 
 	@ Core indicates it is SMP. Check for Aegis SOC where a single
@@ -586,6 +651,9 @@ ARM_BE8(rev	r0, r0)			@ byteswap if big endian
 	and	r0, r0, #0x3		@ number of CPUs
 	teq	r0, #0x0		@ is 1?
 	retne	lr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 __fixup_smp_on_up:
@@ -614,7 +682,11 @@ smp_on_up:
 __do_fixup_smp_on_up:
 	cmp	r4, r5
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movhs	pc, lr
+=======
+	reths	lr
+>>>>>>> v3.18
 =======
 	reths	lr
 >>>>>>> v3.18
@@ -640,7 +712,10 @@ ENTRY(fixup_smp)
 ENDPROC(fixup_smp)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef __ARMEB__
 #define LOW_OFFSET	0x4
 #define HIGH_OFFSET	0x0
@@ -649,6 +724,9 @@ ENDPROC(fixup_smp)
 #define HIGH_OFFSET	0x4
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_ARM_PATCH_PHYS_VIRT
 
@@ -661,6 +739,7 @@ ENDPROC(fixup_smp)
 __fixup_pv_table:
 	adr	r0, 1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldmia	r0, {r3-r5, r7}
 	sub	r3, r0, r3	@ PHYS_OFFSET - PAGE_OFFSET
 	add	r4, r4, r3	@ adjust table start address
@@ -668,6 +747,8 @@ __fixup_pv_table:
 	add	r7, r7, r3	@ adjust __pv_phys_offset address
 	str	r8, [r7]	@ save computed PHYS_OFFSET to __pv_phys_offset
 =======
+=======
+>>>>>>> v3.18
 	ldmia	r0, {r3-r7}
 	mvn	ip, #0
 	subs	r3, r0, r3	@ PHYS_OFFSET - PAGE_OFFSET
@@ -678,13 +759,20 @@ __fixup_pv_table:
 	mov	r0, r8, lsr #12	@ convert to PFN
 	str	r0, [r6]	@ save computed PHYS_OFFSET to __pv_phys_pfn_offset
 	strcc	ip, [r7, #HIGH_OFFSET]	@ save to __pv_offset high bits
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mov	r6, r3, lsr #24	@ constant for add/sub instructions
 	teq	r3, r6, lsl #24 @ must be 16MiB aligned
 THUMB(	it	ne		@ cross section branch )
 	bne	__error
 <<<<<<< HEAD
+<<<<<<< HEAD
 	str	r6, [r7, #4]	@ save to __pv_offset
+=======
+	str	r3, [r7, #LOW_OFFSET]	@ save to __pv_offset low bits
+>>>>>>> v3.18
 =======
 	str	r3, [r7, #LOW_OFFSET]	@ save to __pv_offset low bits
 >>>>>>> v3.18
@@ -696,12 +784,15 @@ ENDPROC(__fixup_pv_table)
 	.long	__pv_table_begin
 	.long	__pv_table_end
 <<<<<<< HEAD
+<<<<<<< HEAD
 2:	.long	__pv_phys_offset
 
 	.text
 __fixup_a_pv_table:
 #ifdef CONFIG_THUMB2_KERNEL
 =======
+=======
+>>>>>>> v3.18
 2:	.long	__pv_phys_pfn_offset
 	.long	__pv_offset
 
@@ -716,6 +807,9 @@ __fixup_a_pv_table:
 	cmn	r0, #1
 #ifdef CONFIG_THUMB2_KERNEL
 	moveq	r0, #0x200000	@ set bit 21, mov to mvn instruction
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lsls	r6, #24
 	beq	2f
@@ -731,10 +825,13 @@ __fixup_a_pv_table:
 1:	add     r7, r3
 	ldrh	ip, [r7, #2]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	and	ip, 0x8f00
 	orr	ip, r6	@ mask in offset bits 31-24
 	strh	ip, [r7, #2]
 =======
+=======
+>>>>>>> v3.18
 ARM_BE8(rev16	ip, ip)
 	tst	ip, #0x4000
 	and	ip, #0x8f00
@@ -749,6 +846,9 @@ ARM_BE8(rev16	ip, ip)
 	orr	ip, ip, r0, lsr #16
 ARM_BE8(rev16	ip, ip)
 	strh	ip, [r7]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 2:	cmp	r4, r5
 	ldrcc	r7, [r4], #4	@ use branch for delay slot
@@ -756,11 +856,14 @@ ARM_BE8(rev16	ip, ip)
 	bx	lr
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	2f
 1:	ldr	ip, [r7, r3]
 	bic	ip, ip, #0x000000ff
 	orr	ip, ip, r6	@ mask in offset bits 31-24
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_ENDIAN_BE8
 	moveq	r0, #0x00004000	@ set bit 22, mov to mvn instruction
 #else
@@ -782,11 +885,15 @@ ARM_BE8(rev16	ip, ip)
 	biceq	ip, ip, #0x400000	@ clear bit 22
 	orreq	ip, ip, r0	@ mask in offset bits 7-0
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	str	ip, [r7, r3]
 2:	cmp	r4, r5
 	ldrcc	r7, [r4], #4	@ use branch for delay slot
 	bcc	1b
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mov	pc, lr
 #endif
@@ -800,6 +907,8 @@ ENTRY(fixup_pv_table)
 	add	r5, r0, r1		@ r1 = table size
 	ldr	r6, [r2, #4]		@ get __pv_offset
 =======
+=======
+>>>>>>> v3.18
 	ret	lr
 #endif
 ENDPROC(__fixup_a_pv_table)
@@ -812,11 +921,15 @@ ENTRY(fixup_pv_table)
 	mov	r3, #0			@ no offset
 	mov	r4, r0			@ r0 = table start
 	add	r5, r0, r1		@ r1 = table size
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bl	__fixup_a_pv_table
 	ldmfd	sp!, {r4 - r7, pc}
 ENDPROC(fixup_pv_table)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.align
 2:	.long	__pv_phys_offset
@@ -830,6 +943,8 @@ __pv_phys_offset:
 __pv_offset:
 	.long	0
 =======
+=======
+>>>>>>> v3.18
 	.data
 	.globl	__pv_phys_pfn_offset
 	.type	__pv_phys_pfn_offset, %object
@@ -842,6 +957,9 @@ __pv_phys_pfn_offset:
 __pv_offset:
 	.quad	0
 	.size	__pv_offset, . -__pv_offset
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

@@ -753,7 +753,11 @@ static int dn_to_neigh_output(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dn_output(struct sk_buff *skb)
+=======
+static int dn_output(struct sock *sk, struct sk_buff *skb)
+>>>>>>> v3.18
 =======
 static int dn_output(struct sock *sk, struct sk_buff *skb)
 >>>>>>> v3.18
@@ -843,7 +847,10 @@ drop:
  * called.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int dn_rt_bug_sk(struct sock *sk, struct sk_buff *skb)
 {
 	struct dn_skb_cb *cb = DN_SKB_CB(skb);
@@ -856,6 +863,9 @@ static int dn_rt_bug_sk(struct sock *sk, struct sk_buff *skb)
 	return NET_RX_DROP;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int dn_rt_bug(struct sk_buff *skb)
 {
@@ -1050,6 +1060,7 @@ source_ok:
 		fld.daddr = fld.saddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dev_out)
 			dev_put(dev_out);
 		err = -EINVAL;
@@ -1058,10 +1069,15 @@ source_ok:
 			goto out;
 		err = -EADDRNOTAVAIL;
 =======
+=======
+>>>>>>> v3.18
 		err = -EADDRNOTAVAIL;
 		if (dev_out)
 			dev_put(dev_out);
 		dev_out = init_net.loopback_dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_hold(dev_out);
 		if (!fld.daddr) {
@@ -1136,8 +1152,11 @@ source_ok:
 			goto out;
 		dn_db = rcu_dereference_raw(dev_out->dn_ptr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!dn_db)
 			goto e_inval;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Possible improvement - check all devices for local addr */
@@ -1182,8 +1201,11 @@ select_source:
 		dev_out = init_net.loopback_dev;
 		dev_hold(dev_out);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!dev_out->dn_ptr)
 			goto e_inval;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		fld.flowidn_oif = dev_out->ifindex;
@@ -1328,8 +1350,11 @@ int dn_route_output_sock(struct dst_entry __rcu **pprt, struct flowidn *fl, stru
 	err = __dn_route_output_key(pprt, fl, flags & MSG_TRYHARD);
 	if (err == 0 && fl->flowidn_proto) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(flags & MSG_DONTWAIT))
 			fl->flowidn_flags |= FLOWI_FLAG_CAN_SLEEP;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		*pprt = xfrm_lookup(&init_net, *pprt,
@@ -1508,7 +1533,11 @@ make_route:
 	rt->n = neigh;
 	rt->dst.lastuse = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rt->dst.output = dn_rt_bug;
+=======
+	rt->dst.output = dn_rt_bug_sk;
+>>>>>>> v3.18
 =======
 	rt->dst.output = dn_rt_bug_sk;
 >>>>>>> v3.18
@@ -1715,12 +1744,17 @@ static int dn_cache_getroute(struct sk_buff *in_skb, struct nlmsghdr *nlh)
 	if (fld.flowidn_iif) {
 		struct net_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((dev = dev_get_by_index(&init_net, fld.flowidn_iif)) == NULL) {
 			kfree_skb(skb);
 			return -ENODEV;
 		}
 		if (!dev->dn_ptr) {
 			dev_put(dev);
+=======
+		dev = __dev_get_by_index(&init_net, fld.flowidn_iif);
+		if (!dev || !dev->dn_ptr) {
+>>>>>>> v3.18
 =======
 		dev = __dev_get_by_index(&init_net, fld.flowidn_iif);
 		if (!dev || !dev->dn_ptr) {
@@ -1747,8 +1781,11 @@ static int dn_cache_getroute(struct sk_buff *in_skb, struct nlmsghdr *nlh)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb->dev)
 		dev_put(skb->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	skb->dev = NULL;

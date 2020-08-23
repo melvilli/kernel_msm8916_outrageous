@@ -101,7 +101,10 @@ static void rs_poll(unsigned long priv)
 	struct tty_port *port = (struct tty_port *)priv;
 	int i = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rd = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char c;
@@ -110,9 +113,13 @@ static void rs_poll(unsigned long priv)
 
 	while (simc_poll(0)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rd = simc_read(0, &c, 1);
 		if (rd <= 0)
 			break;
+=======
+		simc_read(0, &c, 1);
+>>>>>>> v3.18
 =======
 		simc_read(0, &c, 1);
 >>>>>>> v3.18
@@ -123,8 +130,14 @@ static void rs_poll(unsigned long priv)
 	if (i)
 		tty_flip_buffer_push(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rd)
 		mod_timer(&serial_timer, jiffies + SERIAL_TIMER_VALUE);
+=======
+
+
+	mod_timer(&serial_timer, jiffies + SERIAL_TIMER_VALUE);
+>>>>>>> v3.18
 =======
 
 

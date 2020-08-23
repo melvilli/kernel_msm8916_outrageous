@@ -21,12 +21,18 @@
 #include <linux/mtd/partitions.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool node_has_compatible(struct device_node *pp)
 {
 	return of_get_property(pp, "compatible", NULL);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int parse_ofpart_partitions(struct mtd_info *master,
 				   struct mtd_partition **pparts,
@@ -47,11 +53,14 @@ static int parse_ofpart_partitions(struct mtd_info *master,
 
 	/* First count the subnodes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pp = NULL;
 	nr_parts = 0;
 	while ((pp = of_get_next_child(node, pp)))
 		nr_parts++;
 =======
+=======
+>>>>>>> v3.18
 	nr_parts = 0;
 	for_each_child_of_node(node,  pp) {
 		if (node_has_compatible(pp))
@@ -59,6 +68,9 @@ static int parse_ofpart_partitions(struct mtd_info *master,
 
 		nr_parts++;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (nr_parts == 0)
@@ -69,9 +81,14 @@ static int parse_ofpart_partitions(struct mtd_info *master,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pp = NULL;
 	i = 0;
 	while ((pp = of_get_next_child(node, pp))) {
+=======
+	i = 0;
+	for_each_child_of_node(node,  pp) {
+>>>>>>> v3.18
 =======
 	i = 0;
 	for_each_child_of_node(node,  pp) {
@@ -81,6 +98,12 @@ static int parse_ofpart_partitions(struct mtd_info *master,
 		int a_cells, s_cells;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (node_has_compatible(pp))
+			continue;
+
+>>>>>>> v3.18
 =======
 		if (node_has_compatible(pp))
 			continue;
@@ -101,7 +124,11 @@ static int parse_ofpart_partitions(struct mtd_info *master,
 		if (!partname)
 			partname = of_get_property(pp, "name", &len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(*pparts)[i].name = (char *)partname;
+=======
+		(*pparts)[i].name = partname;
+>>>>>>> v3.18
 =======
 		(*pparts)[i].name = partname;
 >>>>>>> v3.18
@@ -176,7 +203,11 @@ static int parse_ofoldpart_partitions(struct mtd_info *master,
 			int len = strlen(names) + 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(*pparts)[i].name = (char *)names;
+=======
+			(*pparts)[i].name = names;
+>>>>>>> v3.18
 =======
 			(*pparts)[i].name = names;
 >>>>>>> v3.18
@@ -201,6 +232,7 @@ static struct mtd_part_parser ofoldpart_parser = {
 static int __init ofpart_parser_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
 	rc = register_mtd_parser(&ofpart_parser);
 	if (rc)
@@ -213,6 +245,11 @@ static int __init ofpart_parser_init(void)
 	deregister_mtd_parser(&ofoldpart_parser);
 out:
 	return rc;
+=======
+	register_mtd_parser(&ofpart_parser);
+	register_mtd_parser(&ofoldpart_parser);
+	return 0;
+>>>>>>> v3.18
 =======
 	register_mtd_parser(&ofpart_parser);
 	register_mtd_parser(&ofoldpart_parser);

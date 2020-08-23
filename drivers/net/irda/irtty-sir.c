@@ -124,7 +124,11 @@ static int irtty_change_speed(struct sir_dev *dev, unsigned speed)
 	tty = priv->tty;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	down_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 =======
 	down_write(&tty->termios_rwsem);
 >>>>>>> v3.18
@@ -135,7 +139,11 @@ static int irtty_change_speed(struct sir_dev *dev, unsigned speed)
 		tty->ops->set_termios(tty, &old_termios);
 	priv->io.speed = speed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	up_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 =======
 	up_write(&tty->termios_rwsem);
 >>>>>>> v3.18
@@ -289,7 +297,11 @@ static inline void irtty_stop_receiver(struct tty_struct *tty, int stop)
 	int cflag;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&tty->termios_mutex);
+=======
+	down_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 =======
 	down_write(&tty->termios_rwsem);
 >>>>>>> v3.18
@@ -305,7 +317,11 @@ static inline void irtty_stop_receiver(struct tty_struct *tty, int stop)
 	if (tty->ops->set_termios)
 		tty->ops->set_termios(tty, &old_termios);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&tty->termios_mutex);
+=======
+	up_write(&tty->termios_rwsem);
+>>>>>>> v3.18
 =======
 	up_write(&tty->termios_rwsem);
 >>>>>>> v3.18
@@ -447,7 +463,10 @@ static int irtty_open(struct tty_struct *tty)
 	/* Module stuff handled via irda_ldisc.owner - Jean II */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* First make sure we're not already connected. */
 	if (tty->disc_data != NULL) {
 		priv = tty->disc_data;
@@ -458,6 +477,9 @@ static int irtty_open(struct tty_struct *tty)
 		tty->disc_data = NULL;		/* ### */
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* stop the underlying  driver */
 	irtty_stop_receiver(tty, TRUE);
@@ -542,7 +564,10 @@ static void irtty_close(struct tty_struct *tty)
 
 	/* Stop tty */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irtty_stop_receiver(tty, TRUE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clear_bit(TTY_DO_WRITE_WAKEUP, &tty->flags);

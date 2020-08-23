@@ -2,7 +2,11 @@
 #define _QIB_KERNEL_H
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012 Intel Corporation.  All rights reserved.
+=======
+ * Copyright (c) 2012, 2013 Intel Corporation.  All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2012, 2013 Intel Corporation.  All rights reserved.
 >>>>>>> v3.18
@@ -56,6 +60,10 @@
 #include <linux/kref.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kthread.h>
+>>>>>>> v3.18
 =======
 #include <linux/kthread.h>
 >>>>>>> v3.18
@@ -97,7 +105,10 @@ struct qlogic_ib_stats {
 extern struct qlogic_ib_stats qib_stats;
 extern const struct pci_error_handlers qib_pci_err_handler;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct pci_driver qib_driver;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -126,12 +137,18 @@ struct qib_eep_log_mask {
  * Below contains all data related to a single context (formerly called port).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_DEBUG_FS
 struct qib_opcode_stats_perctx;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qib_ctxtdata {
 	void **rcvegrbuf;
@@ -174,6 +191,11 @@ struct qib_ctxtdata {
 	/* instead of calculating it */
 	unsigned ctxt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* local node of context */
+	int node_id;
+>>>>>>> v3.18
 =======
 	/* local node of context */
 	int node_id;
@@ -247,7 +269,10 @@ struct qib_ctxtdata {
 	/* ctxt rcvhdrq head offset */
 	u32 head;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 pkt_count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* lookaside fields */
@@ -256,11 +281,17 @@ struct qib_ctxtdata {
 	/* QPs waiting for context processing */
 	struct list_head qp_wait_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 	/* verbs stats per CTX */
 	struct qib_opcode_stats_perctx *opstats;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -463,10 +494,13 @@ struct qib_verbs_txreq {
 
 #define MAX_NAME_SIZE 64
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct qib_msix_entry {
 	struct msix_entry msix;
 	void *arg;
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_INFINIBAND_QIB_DCA
 struct qib_irq_notify;
@@ -480,6 +514,9 @@ struct qib_msix_entry {
 	int rcv;
 	struct qib_irq_notify *notifier;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char name[MAX_NAME_SIZE];
 	cpumask_var_t mask;
@@ -606,6 +643,10 @@ struct qib_pportdata {
 	spinlock_t            sdma_lock ____cacheline_aligned_in_smp;
 	struct list_head      sdma_activelist;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head      sdma_userpending;
+>>>>>>> v3.18
 =======
 	struct list_head      sdma_userpending;
 >>>>>>> v3.18
@@ -615,6 +656,10 @@ struct qib_pportdata {
 	u16                   sdma_descq_head;
 	u8                    sdma_generation;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8                    sdma_intrequest;
+>>>>>>> v3.18
 =======
 	u8                    sdma_intrequest;
 >>>>>>> v3.18
@@ -887,6 +932,12 @@ struct qib_devdata {
 	void (*f_writescratch)(struct qib_devdata *, u32);
 	int (*f_tempsense_rd)(struct qib_devdata *, int regnum);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_INFINIBAND_QIB_DCA
+	int (*f_notify_dca)(struct qib_devdata *, unsigned long event);
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_INFINIBAND_QIB_DCA
 	int (*f_notify_dca)(struct qib_devdata *, unsigned long event);
@@ -908,13 +959,19 @@ struct qib_devdata {
 	u32 lastctxt_piobuf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* saturating counter of (non-port-specific) device interrupts */
 	u32 int_counter;
 =======
+=======
+>>>>>>> v3.18
 	/* reset value */
 	u64 z_int_counter;
 	/* percpu intcounter */
 	u64 __percpu *int_counter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* pio bufs allocated per ctxt */
@@ -1127,13 +1184,19 @@ struct qib_devdata {
 	struct mutex eep_lock;
 	uint64_t traffic_wds;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* active time is kept in seconds, but logged in hours */
 	atomic_t active_time;
 	/* Below are nominal shadow of EEPROM, new since last EEPROM update */
 	uint8_t eep_st_errs[QIB_EEP_LOG_CNT];
 	uint8_t eep_st_new_errs[QIB_EEP_LOG_CNT];
 	uint16_t eep_hrs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * masks for which bits of errs, hwerrs that cause
@@ -1150,11 +1213,17 @@ struct qib_devdata {
 	/* high volume overflow errors defered to tasklet */
 	struct tasklet_struct error_tasklet;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* per device cq worker */
 	struct kthread_worker *worker;
 
 	int assigned_node_id; /* NUMA node closest to HCA */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1236,8 +1305,13 @@ int qib_setup_eagerbufs(struct qib_ctxtdata *);
 void qib_set_ctxtcnt(struct qib_devdata *);
 int qib_create_ctxts(struct qib_devdata *dd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct qib_ctxtdata *qib_create_ctxtdata(struct qib_pportdata *, u32);
 void qib_init_pportdata(struct qib_pportdata *, struct qib_devdata *, u8, u8);
+=======
+struct qib_ctxtdata *qib_create_ctxtdata(struct qib_pportdata *, u32, int);
+int qib_init_pportdata(struct qib_pportdata *, struct qib_devdata *, u8, u8);
+>>>>>>> v3.18
 =======
 struct qib_ctxtdata *qib_create_ctxtdata(struct qib_pportdata *, u32, int);
 int qib_init_pportdata(struct qib_pportdata *, struct qib_devdata *, u8, u8);
@@ -1365,7 +1439,12 @@ int qib_twsi_blk_wr(struct qib_devdata *dd, int dev, int addr,
 		    const void *buffer, int len);
 void qib_get_eeprom_info(struct qib_devdata *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define qib_inc_eeprom_err(dd, eidx, incr)
+=======
+int qib_update_eeprom_log(struct qib_devdata *dd);
+void qib_inc_eeprom_err(struct qib_devdata *dd, u32 eidx, u32 incr);
+>>>>>>> v3.18
 =======
 int qib_update_eeprom_log(struct qib_devdata *dd);
 void qib_inc_eeprom_err(struct qib_devdata *dd, u32 eidx, u32 incr);
@@ -1389,6 +1468,11 @@ void qib_teardown_sdma(struct qib_pportdata *);
 void __qib_sdma_intr(struct qib_pportdata *);
 void qib_sdma_intr(struct qib_pportdata *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void qib_user_sdma_send_desc(struct qib_pportdata *dd,
+			struct list_head *pktlist);
+>>>>>>> v3.18
 =======
 void qib_user_sdma_send_desc(struct qib_pportdata *dd,
 			struct list_head *pktlist);
@@ -1416,7 +1500,11 @@ static inline int __qib_sdma_running(struct qib_pportdata *ppd)
 }
 int qib_sdma_running(struct qib_pportdata *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+void dump_sdma_state(struct qib_pportdata *ppd);
+>>>>>>> v3.18
 =======
 void dump_sdma_state(struct qib_pportdata *ppd);
 >>>>>>> v3.18
@@ -1518,11 +1606,17 @@ void qib_nomsix(struct qib_devdata *);
 void qib_pcie_getcmd(struct qib_devdata *, u16 *, u8 *, u8 *);
 void qib_pcie_reenable(struct qib_devdata *, u16, u8, u8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* interrupts for device */
 u64 qib_int_counter(struct qib_devdata *);
 /* interrupt for all devices */
 u64 qib_sps_ints(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1552,6 +1646,10 @@ extern unsigned qib_sdma_fetch_arb;
 extern unsigned qib_compat_ddr_negotiate;
 extern int qib_special_trigger;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern unsigned qib_numa_aware;
+>>>>>>> v3.18
 =======
 extern unsigned qib_numa_aware;
 >>>>>>> v3.18
@@ -1599,6 +1697,10 @@ extern struct mutex qib_mutex;
 		qib_get_unit_name((dd)->unit), (dd)->unit, (port), \
 		##__VA_ARGS__)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

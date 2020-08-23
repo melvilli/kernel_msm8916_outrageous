@@ -25,7 +25,11 @@
 #define cpu_has_vtag_icache		0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !defined(BCMCPU_RUNTIME_DETECT) && (defined(CONFIG_BCM63XX_CPU_6348) || defined(CONFIG_BCM63XX_CPU_6345) || defined(CONFIG_BCM63XX_CPU_6338))
+=======
+#if !defined(CONFIG_SYS_HAS_CPU_BMIPS4350)
+>>>>>>> v3.18
 =======
 #if !defined(CONFIG_SYS_HAS_CPU_BMIPS4350)
 >>>>>>> v3.18

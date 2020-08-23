@@ -46,6 +46,7 @@ static unsigned long i915_stolen_to_physical(struct drm_device *dev)
 {
 	struct drm_i915_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev *pdev = dev_priv->bridge_dev;
 	u32 base;
 
@@ -82,6 +83,8 @@ static unsigned long i915_stolen_to_physical(struct drm_device *dev)
 		base -= dev_priv->mm.gtt->stolen_size;
 	} else {
 =======
+=======
+>>>>>>> v3.18
 	struct resource *r;
 	u32 base;
 
@@ -103,12 +106,16 @@ static unsigned long i915_stolen_to_physical(struct drm_device *dev)
 		base &= ~((1<<20) - 1);
 	} else { /* GEN2 */
 #if 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Stolen is immediately above Top of Memory */
 		base = max_low_pfn_mapped << PAGE_SHIFT;
 #endif
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return base;
 }
@@ -147,6 +154,8 @@ static int i915_setup_compression(struct drm_device *dev, int size)
 		I915_WRITE(FBC_CFB_BASE,
 			   dev_priv->mm.stolen_base + compressed_fb->start);
 =======
+=======
+>>>>>>> v3.18
 	if (base == 0)
 		return 0;
 
@@ -299,14 +308,21 @@ static int i915_setup_compression(struct drm_device *dev, int size, int fb_cpp)
 
 		I915_WRITE(FBC_CFB_BASE,
 			   dev_priv->mm.stolen_base + dev_priv->fbc.compressed_fb.start);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		I915_WRITE(FBC_LL_BASE,
 			   dev_priv->mm.stolen_base + compressed_llb->start);
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->compressed_fb = compressed_fb;
 	dev_priv->cfb_size = size;
+=======
+	dev_priv->fbc.size = size / dev_priv->fbc.threshold;
+>>>>>>> v3.18
 =======
 	dev_priv->fbc.size = size / dev_priv->fbc.threshold;
 >>>>>>> v3.18
@@ -317,6 +333,7 @@ static int i915_setup_compression(struct drm_device *dev, int size, int fb_cpp)
 	return 0;
 
 err_fb:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	drm_mm_put_block(compressed_fb);
 err:
@@ -332,6 +349,8 @@ int i915_gem_stolen_setup_compression(struct drm_device *dev, int size)
 
 	if (size < dev_priv->cfb_size)
 =======
+=======
+>>>>>>> v3.18
 	kfree(compressed_llb);
 	drm_mm_remove_node(&dev_priv->fbc.compressed_fb);
 err_llb:
@@ -347,6 +366,9 @@ int i915_gem_stolen_setup_compression(struct drm_device *dev, int size, int fb_c
 		return -ENODEV;
 
 	if (size < dev_priv->fbc.size)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -354,7 +376,11 @@ int i915_gem_stolen_setup_compression(struct drm_device *dev, int size, int fb_c
 	i915_gem_stolen_cleanup_compression(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return i915_setup_compression(dev, size);
+=======
+	return i915_setup_compression(dev, size, fb_cpp);
+>>>>>>> v3.18
 =======
 	return i915_setup_compression(dev, size, fb_cpp);
 >>>>>>> v3.18
@@ -364,6 +390,7 @@ void i915_gem_stolen_cleanup_compression(struct drm_device *dev)
 {
 	struct drm_i915_private *dev_priv = dev->dev_private;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dev_priv->cfb_size == 0)
 		return;
@@ -376,6 +403,8 @@ void i915_gem_stolen_cleanup_compression(struct drm_device *dev)
 
 	dev_priv->cfb_size = 0;
 =======
+=======
+>>>>>>> v3.18
 	if (dev_priv->fbc.size == 0)
 		return;
 
@@ -387,6 +416,9 @@ void i915_gem_stolen_cleanup_compression(struct drm_device *dev)
 	}
 
 	dev_priv->fbc.size = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -395,6 +427,12 @@ void i915_gem_cleanup_stolen(struct drm_device *dev)
 	struct drm_i915_private *dev_priv = dev->dev_private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!drm_mm_initialized(&dev_priv->mm.stolen))
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!drm_mm_initialized(&dev_priv->mm.stolen))
 		return;
@@ -408,7 +446,10 @@ int i915_gem_init_stolen(struct drm_device *dev)
 {
 	struct drm_i915_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32 tmp;
 	int bios_reserved = 0;
 
@@ -421,6 +462,9 @@ int i915_gem_init_stolen(struct drm_device *dev)
 
 	if (dev_priv->gtt.stolen_size == 0)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_priv->mm.stolen_base = i915_stolen_to_physical(dev);
@@ -431,9 +475,12 @@ int i915_gem_init_stolen(struct drm_device *dev)
 		      dev_priv->gtt.stolen_size, dev_priv->mm.stolen_base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Basic memrange allocator for stolen space */
 	drm_mm_init(&dev_priv->mm.stolen, 0, dev_priv->gtt.stolen_size);
 =======
+=======
+>>>>>>> v3.18
 	if (INTEL_INFO(dev)->gen >= 8) {
 		tmp = I915_READ(GEN7_BIOS_RESERVED);
 		tmp >>= GEN8_BIOS_RESERVED_SHIFT;
@@ -451,6 +498,9 @@ int i915_gem_init_stolen(struct drm_device *dev)
 	/* Basic memrange allocator for stolen space */
 	drm_mm_init(&dev_priv->mm.stolen, 0, dev_priv->gtt.stolen_size -
 		    bios_reserved);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -505,10 +555,13 @@ static void i915_gem_object_put_pages_stolen(struct drm_i915_gem_object *obj)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct drm_i915_gem_object_ops i915_gem_object_stolen_ops = {
 	.get_pages = i915_gem_object_get_pages_stolen,
 	.put_pages = i915_gem_object_put_pages_stolen,
 =======
+=======
+>>>>>>> v3.18
 
 static void
 i915_gem_object_release_stolen(struct drm_i915_gem_object *obj)
@@ -523,6 +576,9 @@ static const struct drm_i915_gem_object_ops i915_gem_object_stolen_ops = {
 	.get_pages = i915_gem_object_get_pages_stolen,
 	.put_pages = i915_gem_object_put_pages_stolen,
 	.release = i915_gem_object_release_stolen,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -537,9 +593,13 @@ _i915_gem_object_create_stolen(struct drm_device *dev,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (drm_gem_private_object_init(dev, &obj->base, stolen->size))
 		goto cleanup;
 
+=======
+	drm_gem_private_object_init(dev, &obj->base, stolen->size);
+>>>>>>> v3.18
 =======
 	drm_gem_private_object_init(dev, &obj->base, stolen->size);
 >>>>>>> v3.18
@@ -552,6 +612,7 @@ _i915_gem_object_create_stolen(struct drm_device *dev,
 
 	obj->has_dma_mapping = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	obj->pages_pin_count = 1;
 	obj->stolen = stolen;
 
@@ -559,11 +620,16 @@ _i915_gem_object_create_stolen(struct drm_device *dev,
 	obj->base.read_domains = I915_GEM_DOMAIN_GTT;
 	obj->cache_level = I915_CACHE_NONE;
 =======
+=======
+>>>>>>> v3.18
 	i915_gem_object_pin_pages(obj);
 	obj->stolen = stolen;
 
 	obj->base.read_domains = I915_GEM_DOMAIN_CPU | I915_GEM_DOMAIN_GTT;
 	obj->cache_level = HAS_LLC(dev) ? I915_CACHE_LLC : I915_CACHE_NONE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return obj;
@@ -580,8 +646,14 @@ i915_gem_object_create_stolen(struct drm_device *dev, u32 size)
 	struct drm_i915_gem_object *obj;
 	struct drm_mm_node *stolen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (dev_priv->mm.stolen_base == 0)
+=======
+	int ret;
+
+	if (!drm_mm_initialized(&dev_priv->mm.stolen))
+>>>>>>> v3.18
 =======
 	int ret;
 
@@ -594,6 +666,7 @@ i915_gem_object_create_stolen(struct drm_device *dev, u32 size)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stolen = drm_mm_search_free(&dev_priv->mm.stolen, size, 4096, 0);
 	if (stolen)
 		stolen = drm_mm_get_block(stolen, size, 4096);
@@ -601,6 +674,8 @@ i915_gem_object_create_stolen(struct drm_device *dev, u32 size)
 		return NULL;
 
 =======
+=======
+>>>>>>> v3.18
 	stolen = kzalloc(sizeof(*stolen), GFP_KERNEL);
 	if (!stolen)
 		return NULL;
@@ -612,13 +687,21 @@ i915_gem_object_create_stolen(struct drm_device *dev, u32 size)
 		return NULL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	obj = _i915_gem_object_create_stolen(dev, stolen);
 	if (obj)
 		return obj;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_mm_put_block(stolen);
+=======
+	drm_mm_remove_node(stolen);
+	kfree(stolen);
+>>>>>>> v3.18
 =======
 	drm_mm_remove_node(stolen);
 	kfree(stolen);
@@ -634,11 +717,14 @@ i915_gem_object_create_stolen_for_preallocated(struct drm_device *dev,
 {
 	struct drm_i915_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_i915_gem_object *obj;
 	struct drm_mm_node *stolen;
 
 	if (dev_priv->mm.stolen_base == 0)
 =======
+=======
+>>>>>>> v3.18
 	struct i915_address_space *ggtt = &dev_priv->gtt.base;
 	struct drm_i915_gem_object *obj;
 	struct drm_mm_node *stolen;
@@ -646,6 +732,9 @@ i915_gem_object_create_stolen_for_preallocated(struct drm_device *dev,
 	int ret;
 
 	if (!drm_mm_initialized(&dev_priv->mm.stolen))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 
@@ -655,7 +744,10 @@ i915_gem_object_create_stolen_for_preallocated(struct drm_device *dev,
 	/* KISS and expect everything to be page-aligned */
 	BUG_ON(stolen_offset & 4095);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(gtt_offset & 4095);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	BUG_ON(size & 4095);
@@ -664,12 +756,15 @@ i915_gem_object_create_stolen_for_preallocated(struct drm_device *dev,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stolen = drm_mm_create_block(&dev_priv->mm.stolen,
 				     stolen_offset, size,
 				     false);
 	if (stolen == NULL) {
 		DRM_DEBUG_KMS("failed to allocate stolen space\n");
 =======
+=======
+>>>>>>> v3.18
 	stolen = kzalloc(sizeof(*stolen), GFP_KERNEL);
 	if (!stolen)
 		return NULL;
@@ -680,6 +775,9 @@ i915_gem_object_create_stolen_for_preallocated(struct drm_device *dev,
 	if (ret) {
 		DRM_DEBUG_KMS("failed to allocate stolen space\n");
 		kfree(stolen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 	}
@@ -688,11 +786,14 @@ i915_gem_object_create_stolen_for_preallocated(struct drm_device *dev,
 	if (obj == NULL) {
 		DRM_DEBUG_KMS("failed to allocate stolen object\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drm_mm_put_block(stolen);
 		return NULL;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		drm_mm_remove_node(stolen);
 		kfree(stolen);
 		return NULL;
@@ -708,12 +809,16 @@ i915_gem_object_create_stolen_for_preallocated(struct drm_device *dev,
 		goto err_out;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* To simplify the initialisation sequence between KMS and GTT,
 	 * we allow construction of the stolen object prior to
 	 * setting up the GTT space. The actual reservation will occur
 	 * later.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (drm_mm_initialized(&dev_priv->mm.gtt_space)) {
 		obj->gtt_space = drm_mm_create_block(&dev_priv->mm.gtt_space,
@@ -744,6 +849,8 @@ i915_gem_object_release_stolen(struct drm_i915_gem_object *obj)
 		obj->stolen = NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	vma->node.start = gtt_offset;
 	vma->node.size = size;
 	if (drm_mm_initialized(&ggtt->mm)) {
@@ -769,5 +876,8 @@ err_out:
 	kfree(stolen);
 	drm_gem_object_unreference(&obj->base);
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

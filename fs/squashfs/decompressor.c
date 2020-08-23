@@ -31,6 +31,10 @@
 #include "decompressor.h"
 #include "squashfs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "page_actor.h"
+>>>>>>> v3.18
 =======
 #include "page_actor.h"
 >>>>>>> v3.18
@@ -42,7 +46,11 @@
 
 static const struct squashfs_decompressor squashfs_lzma_unsupported_comp_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NULL, NULL, NULL, LZMA_COMPRESSION, "lzma", 0
+=======
+	NULL, NULL, NULL, NULL, LZMA_COMPRESSION, "lzma", 0
+>>>>>>> v3.18
 =======
 	NULL, NULL, NULL, NULL, LZMA_COMPRESSION, "lzma", 0
 >>>>>>> v3.18
@@ -51,7 +59,11 @@ static const struct squashfs_decompressor squashfs_lzma_unsupported_comp_ops = {
 #ifndef CONFIG_SQUASHFS_LZO
 static const struct squashfs_decompressor squashfs_lzo_comp_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NULL, NULL, NULL, LZO_COMPRESSION, "lzo", 0
+=======
+	NULL, NULL, NULL, NULL, LZO_COMPRESSION, "lzo", 0
+>>>>>>> v3.18
 =======
 	NULL, NULL, NULL, NULL, LZO_COMPRESSION, "lzo", 0
 >>>>>>> v3.18
@@ -61,7 +73,11 @@ static const struct squashfs_decompressor squashfs_lzo_comp_ops = {
 #ifndef CONFIG_SQUASHFS_XZ
 static const struct squashfs_decompressor squashfs_xz_comp_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NULL, NULL, NULL, XZ_COMPRESSION, "xz", 0
+=======
+	NULL, NULL, NULL, NULL, XZ_COMPRESSION, "xz", 0
+>>>>>>> v3.18
 =======
 	NULL, NULL, NULL, NULL, XZ_COMPRESSION, "xz", 0
 >>>>>>> v3.18
@@ -71,7 +87,11 @@ static const struct squashfs_decompressor squashfs_xz_comp_ops = {
 #ifndef CONFIG_SQUASHFS_ZLIB
 static const struct squashfs_decompressor squashfs_zlib_comp_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NULL, NULL, NULL, ZLIB_COMPRESSION, "zlib", 0
+=======
+	NULL, NULL, NULL, NULL, ZLIB_COMPRESSION, "zlib", 0
+>>>>>>> v3.18
 =======
 	NULL, NULL, NULL, NULL, ZLIB_COMPRESSION, "zlib", 0
 >>>>>>> v3.18
@@ -80,7 +100,11 @@ static const struct squashfs_decompressor squashfs_zlib_comp_ops = {
 
 static const struct squashfs_decompressor squashfs_unknown_comp_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NULL, NULL, NULL, 0, "unknown", 0
+=======
+	NULL, NULL, NULL, NULL, 0, "unknown", 0
+>>>>>>> v3.18
 =======
 	NULL, NULL, NULL, NULL, 0, "unknown", 0
 >>>>>>> v3.18
@@ -108,16 +132,22 @@ const struct squashfs_decompressor *squashfs_lookup_decompressor(int id)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *squashfs_decompressor_init(struct super_block *sb, unsigned short flags)
 {
 	struct squashfs_sb_info *msblk = sb->s_fs_info;
 	void *strm, *buffer = NULL;
 =======
+=======
+>>>>>>> v3.18
 static void *get_comp_opts(struct super_block *sb, unsigned short flags)
 {
 	struct squashfs_sb_info *msblk = sb->s_fs_info;
 	void *buffer = NULL, *comp_opts;
 	struct squashfs_page_actor *actor = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int length = 0;
 
@@ -126,6 +156,7 @@ static void *get_comp_opts(struct super_block *sb, unsigned short flags)
 	 */
 	if (SQUASHFS_COMP_OPTS(flags)) {
 		buffer = kmalloc(PAGE_CACHE_SIZE, GFP_KERNEL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (buffer == NULL)
 			return ERR_PTR(-ENOMEM);
@@ -147,6 +178,8 @@ finished:
 
 	return strm;
 =======
+=======
+>>>>>>> v3.18
 		if (buffer == NULL) {
 			comp_opts = ERR_PTR(-ENOMEM);
 			goto out;
@@ -189,5 +222,8 @@ void *squashfs_decompressor_setup(struct super_block *sb, unsigned short flags)
 		kfree(comp_opts);
 
 	return stream;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -3,6 +3,10 @@ obj-$(CONFIG_USB_GSPCA_BENQ)     += gspca_benq.o
 obj-$(CONFIG_USB_GSPCA_CONEX)    += gspca_conex.o
 obj-$(CONFIG_USB_GSPCA_CPIA1)    += gspca_cpia1.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_USB_GSPCA_DTCS033)  += gspca_dtcs033.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_USB_GSPCA_DTCS033)  += gspca_dtcs033.o
 >>>>>>> v3.18
@@ -39,6 +43,10 @@ obj-$(CONFIG_USB_GSPCA_SQ930X)   += gspca_sq930x.o
 obj-$(CONFIG_USB_GSPCA_SUNPLUS)  += gspca_sunplus.o
 obj-$(CONFIG_USB_GSPCA_STK014)   += gspca_stk014.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_USB_GSPCA_STK1135)  += gspca_stk1135.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_USB_GSPCA_STK1135)  += gspca_stk1135.o
 >>>>>>> v3.18
@@ -56,6 +64,10 @@ gspca_benq-objs     := benq.o
 gspca_conex-objs    := conex.o
 gspca_cpia1-objs    := cpia1.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+gspca_dtcs033-objs  := dtcs033.o
+>>>>>>> v3.18
 =======
 gspca_dtcs033-objs  := dtcs033.o
 >>>>>>> v3.18
@@ -91,6 +103,10 @@ gspca_sq905c-objs   := sq905c.o
 gspca_sq930x-objs   := sq930x.o
 gspca_stk014-objs   := stk014.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+gspca_stk1135-objs  := stk1135.o
+>>>>>>> v3.18
 =======
 gspca_stk1135-objs  := stk1135.o
 >>>>>>> v3.18

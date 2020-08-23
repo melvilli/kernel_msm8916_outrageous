@@ -15,6 +15,11 @@
 const char hex_asc[] = "0123456789abcdef";
 EXPORT_SYMBOL(hex_asc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+const char hex_asc_upper[] = "0123456789ABCDEF";
+EXPORT_SYMBOL(hex_asc_upper);
+>>>>>>> v3.18
 =======
 const char hex_asc_upper[] = "0123456789ABCDEF";
 EXPORT_SYMBOL(hex_asc_upper);
@@ -63,7 +68,10 @@ EXPORT_SYMBOL(hex2bin);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * bin2hex - convert binary data to an ascii hexadecimal string
  * @dst: ascii hexadecimal result
  * @src: binary data
@@ -80,6 +88,9 @@ char *bin2hex(char *dst, const void *src, size_t count)
 EXPORT_SYMBOL(bin2hex);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * hex_dump_to_buffer - convert a blob of data to "hex ASCII" in memory
  * @buf: data blob to dump

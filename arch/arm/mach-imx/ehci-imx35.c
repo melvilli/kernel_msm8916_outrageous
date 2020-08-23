@@ -18,6 +18,10 @@
 #include <linux/platform_data/usb-ehci-mxc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 =======
 #include "ehci.h"
 >>>>>>> v3.18

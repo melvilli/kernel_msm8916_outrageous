@@ -269,7 +269,11 @@ static int
 simeth_device_event(struct notifier_block *this,unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18

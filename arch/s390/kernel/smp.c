@@ -46,6 +46,10 @@
 #include <asm/os_info.h>
 #include <asm/sigp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/idle.h>
+>>>>>>> v3.18
 =======
 #include <asm/idle.h>
 >>>>>>> v3.18
@@ -54,7 +58,10 @@
 enum {
 	ec_schedule = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ec_call_function,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ec_call_function_single,
@@ -68,7 +75,11 @@ enum {
 
 struct pcpu {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu cpu;
+=======
+	struct cpu *cpu;
+>>>>>>> v3.18
 =======
 	struct cpu *cpu;
 >>>>>>> v3.18
@@ -95,6 +106,7 @@ DEFINE_MUTEX(smp_cpu_state_mutex);
  * Signal processor helper functions.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __pcpu_sigp(u16 addr, u8 order, u32 parm, u32 *status)
 {
 	register unsigned int reg1 asm ("1") = parm;
@@ -111,6 +123,10 @@ static inline int __pcpu_sigp(u16 addr, u8 order, u32 parm, u32 *status)
 }
 
 static inline int __pcpu_sigp_relax(u16 addr, u8 order, u32 parm, u32 *status)
+=======
+static inline int __pcpu_sigp_relax(u16 addr, u8 order, unsigned long parm,
+				    u32 *status)
+>>>>>>> v3.18
 =======
 static inline int __pcpu_sigp_relax(u16 addr, u8 order, unsigned long parm,
 				    u32 *status)
@@ -177,6 +193,7 @@ static void pcpu_ec_call(struct pcpu *pcpu, int ec_bit)
 	int order;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(ec_bit, &pcpu->ec_mask);
 	order = pcpu_running(pcpu) ?
 		SIGP_EXTERNAL_CALL : SIGP_EMERGENCY_SIGNAL;
@@ -185,6 +202,8 @@ static void pcpu_ec_call(struct pcpu *pcpu, int ec_bit)
 
 static int __cpuinit pcpu_alloc_lowcore(struct pcpu *pcpu, int cpu)
 =======
+=======
+>>>>>>> v3.18
 	if (test_and_set_bit(ec_bit, &pcpu->ec_mask))
 		return;
 	order = pcpu_running(pcpu) ? SIGP_EXTERNAL_CALL : SIGP_EMERGENCY_SIGNAL;
@@ -192,6 +211,9 @@ static int __cpuinit pcpu_alloc_lowcore(struct pcpu *pcpu, int cpu)
 }
 
 static int pcpu_alloc_lowcore(struct pcpu *pcpu, int cpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct _lowcore *lc;
@@ -213,6 +235,10 @@ static int pcpu_alloc_lowcore(struct pcpu *pcpu, int cpu)
 		- STACK_FRAME_OVERHEAD - sizeof(struct pt_regs);
 	lc->cpu_nr = cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lc->spinlock_lockval = arch_spin_lockval(cpu);
+>>>>>>> v3.18
 =======
 	lc->spinlock_lockval = arch_spin_lockval(cpu);
 >>>>>>> v3.18
@@ -224,6 +250,12 @@ static int pcpu_alloc_lowcore(struct pcpu *pcpu, int cpu)
 	}
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (MACHINE_HAS_VX)
+		lc->vector_save_area_addr =
+			(unsigned long) &lc->vector_save_area;
+>>>>>>> v3.18
 =======
 	if (MACHINE_HAS_VX)
 		lc->vector_save_area_addr =
@@ -274,15 +306,21 @@ static void pcpu_prepare_secondary(struct pcpu *pcpu, int cpu)
 	struct _lowcore *lc = pcpu->lowcore;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_inc(&init_mm.context.attach_count);
 	lc->cpu_nr = cpu;
 =======
+=======
+>>>>>>> v3.18
 	if (MACHINE_HAS_TLB_LC)
 		cpumask_set_cpu(cpu, &init_mm.context.cpu_attach_mask);
 	cpumask_set_cpu(cpu, mm_cpumask(&init_mm));
 	atomic_inc(&init_mm.context.attach_count);
 	lc->cpu_nr = cpu;
 	lc->spinlock_lockval = arch_spin_lockval(cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lc->percpu_offset = __per_cpu_offset[cpu];
 	lc->kernel_asce = S390_lowcore.kernel_asce;
@@ -330,7 +368,11 @@ static void pcpu_delegate(struct pcpu *pcpu, void (*func)(void *),
 	unsigned long source_cpu = stap();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__load_psw_mask(psw_kernel_bits);
+=======
+	__load_psw_mask(PSW_KERNEL_BITS);
+>>>>>>> v3.18
 =======
 	__load_psw_mask(PSW_KERNEL_BITS);
 >>>>>>> v3.18
@@ -394,12 +436,15 @@ int smp_vcpu_scheduled(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void smp_yield(void)
 {
 	if (MACHINE_HAS_DIAG44)
 		asm volatile("diag 0,0,0x44");
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void smp_yield_cpu(int cpu)
@@ -416,7 +461,11 @@ void smp_yield_cpu(int cpu)
  * opportunity to complete outstanding interrupts.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void smp_emergency_stop(cpumask_t *cpumask)
+=======
+static void smp_emergency_stop(cpumask_t *cpumask)
+>>>>>>> v3.18
 =======
 static void smp_emergency_stop(cpumask_t *cpumask)
 >>>>>>> v3.18
@@ -453,7 +502,11 @@ void smp_send_stop(void)
 
 	/* Disable all interrupts/machine checks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__load_psw_mask(psw_kernel_bits | PSW_MASK_DAT);
+=======
+	__load_psw_mask(PSW_KERNEL_BITS | PSW_MASK_DAT);
+>>>>>>> v3.18
 =======
 	__load_psw_mask(PSW_KERNEL_BITS | PSW_MASK_DAT);
 >>>>>>> v3.18
@@ -477,6 +530,7 @@ void smp_send_stop(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Stop the current cpu.
  */
 void smp_stop_cpu(void)
@@ -486,6 +540,8 @@ void smp_stop_cpu(void)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * This is the main routine where commands issued by other
@@ -502,8 +558,11 @@ static void smp_handle_ext_call(void)
 	if (test_bit(ec_schedule, &bits))
 		scheduler_ipi();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(ec_call_function, &bits))
 		generic_smp_call_function_interrupt();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (test_bit(ec_call_function_single, &bits))
@@ -523,7 +582,11 @@ void arch_send_call_function_ipi_mask(const struct cpumask *mask)
 
 	for_each_cpu(cpu, mask)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pcpu_ec_call(pcpu_devices + cpu, ec_call_function);
+=======
+		pcpu_ec_call(pcpu_devices + cpu, ec_call_function_single);
+>>>>>>> v3.18
 =======
 		pcpu_ec_call(pcpu_devices + cpu, ec_call_function_single);
 >>>>>>> v3.18
@@ -605,10 +668,14 @@ void smp_ctl_clear_bit(int cr, int bit)
 EXPORT_SYMBOL(smp_ctl_clear_bit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_ZFCPDUMP) || defined(CONFIG_CRASH_DUMP)
 
 struct save_area *zfcpdump_save_areas[NR_CPUS + 1];
 EXPORT_SYMBOL_GPL(zfcpdump_save_areas);
+=======
+#ifdef CONFIG_CRASH_DUMP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_CRASH_DUMP
 >>>>>>> v3.18
@@ -617,7 +684,12 @@ static void __init smp_get_save_area(int cpu, u16 address)
 {
 	void *lc = pcpu_devices[0].lowcore;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct save_area *save_area;
+=======
+	struct save_area_ext *sa_ext;
+	unsigned long vx_sa;
+>>>>>>> v3.18
 =======
 	struct save_area_ext *sa_ext;
 	unsigned long vx_sa;
@@ -628,6 +700,7 @@ static void __init smp_get_save_area(int cpu, u16 address)
 	if (!OLDMEM_BASE && (address == boot_cpu_address ||
 			     ipl_info.type != IPL_TYPE_FCP_DUMP))
 		return;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cpu >= NR_CPUS) {
 		pr_warning("CPU %i exceeds the maximum %i and is excluded "
@@ -650,6 +723,8 @@ static void __init smp_get_save_area(int cpu, u16 address)
 	__pcpu_sigp_relax(address, SIGP_STOP_AND_STORE_STATUS, 0, NULL);
 	memcpy_real(save_area, lc + SAVE_AREA_BASE, sizeof(*save_area));
 =======
+=======
+>>>>>>> v3.18
 	sa_ext = dump_save_area_create(cpu);
 	if (!sa_ext)
 		panic("could not allocate memory for save area\n");
@@ -673,12 +748,19 @@ static void __init smp_get_save_area(int cpu, u16 address)
 	__pcpu_sigp_relax(address, SIGP_STORE_ADDITIONAL_STATUS, vx_sa, NULL);
 	memcpy(sa_ext->vx_regs, (void *) vx_sa, sizeof(sa_ext->vx_regs));
 	free_page(vx_sa);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int smp_store_status(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long vx_sa;
+>>>>>>> v3.18
 =======
 	unsigned long vx_sa;
 >>>>>>> v3.18
@@ -689,6 +771,7 @@ int smp_store_status(int cpu)
 			      0, NULL) != SIGP_CC_ORDER_CODE_ACCEPTED)
 		return -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
@@ -698,6 +781,8 @@ static inline void smp_get_save_area(int cpu, u16 address) { }
 
 #endif /* CONFIG_ZFCPDUMP || CONFIG_CRASH_DUMP */
 =======
+=======
+>>>>>>> v3.18
 	if (!MACHINE_HAS_VX)
 		return 0;
 	vx_sa = __pa(pcpu->lowcore->vector_save_area_addr);
@@ -711,6 +796,9 @@ static inline void smp_get_save_area(int cpu, u16 address) { }
 static inline void smp_get_save_area(int cpu, u16 address) { }
 
 #endif /* CONFIG_CRASH_DUMP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void smp_cpu_set_polarization(int cpu, int val)
@@ -745,10 +833,16 @@ static struct sclp_cpu_info *smp_get_cpu_info(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit smp_add_present_cpu(int cpu);
 
 static int __cpuinit __smp_rescan_cpus(struct sclp_cpu_info *info,
 				       int sysfs_add)
+=======
+static int smp_add_present_cpu(int cpu);
+
+static int __smp_rescan_cpus(struct sclp_cpu_info *info, int sysfs_add)
+>>>>>>> v3.18
 =======
 static int smp_add_present_cpu(int cpu);
 
@@ -820,7 +914,11 @@ static void __init smp_detect_cpus(void)
  *	Activate a secondary processor.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit smp_start_secondary(void *cpuvoid)
+=======
+static void smp_start_secondary(void *cpuvoid)
+>>>>>>> v3.18
 =======
 static void smp_start_secondary(void *cpuvoid)
 >>>>>>> v3.18
@@ -833,17 +931,23 @@ static void smp_start_secondary(void *cpuvoid)
 	restore_access_regs(S390_lowcore.access_regs_save_area);
 	__ctl_load(S390_lowcore.cregs_save_area, 0, 15);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__load_psw_mask(psw_kernel_bits | PSW_MASK_DAT);
 	cpu_init();
 	preempt_disable();
 	init_cpu_timer();
 	init_cpu_vtimer();
 =======
+=======
+>>>>>>> v3.18
 	__load_psw_mask(PSW_KERNEL_BITS | PSW_MASK_DAT);
 	cpu_init();
 	preempt_disable();
 	init_cpu_timer();
 	vtime_init();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pfault_init();
 	notify_cpu_starting(smp_processor_id());
@@ -855,7 +959,11 @@ static void smp_start_secondary(void *cpuvoid)
 
 /* Upping and downing of CPUs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *tidle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *tidle)
+>>>>>>> v3.18
 =======
 int __cpu_up(unsigned int cpu, struct task_struct *tidle)
 >>>>>>> v3.18
@@ -882,6 +990,7 @@ int __cpu_up(unsigned int cpu, struct task_struct *tidle)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init setup_possible_cpus(char *s)
 {
 	int max, cpu;
@@ -895,6 +1004,8 @@ static int __init setup_possible_cpus(char *s)
 }
 early_param("possible_cpus", setup_possible_cpus);
 =======
+=======
+>>>>>>> v3.18
 static unsigned int setup_possible_cpus __initdata;
 
 static int __init _setup_possible_cpus(char *s)
@@ -903,6 +1014,9 @@ static int __init _setup_possible_cpus(char *s)
 	return 0;
 }
 early_param("possible_cpus", _setup_possible_cpus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_HOTPLUG_CPU
@@ -923,6 +1037,10 @@ int __cpu_disable(void)
 	cregs[14] &= ~0x1f000000UL;	/* disable most machine checks */
 	__ctl_load(cregs, 0, 15);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clear_cpu_flag(CIF_NOHZ_DELAY);
+>>>>>>> v3.18
 =======
 	clear_cpu_flag(CIF_NOHZ_DELAY);
 >>>>>>> v3.18
@@ -940,6 +1058,12 @@ void __cpu_die(unsigned int cpu)
 	pcpu_free_lowcore(pcpu);
 	atomic_dec(&init_mm.context.attach_count);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpumask_clear_cpu(cpu, mm_cpumask(&init_mm));
+	if (MACHINE_HAS_TLB_LC)
+		cpumask_clear_cpu(cpu, &init_mm.context.cpu_attach_mask);
+>>>>>>> v3.18
 =======
 	cpumask_clear_cpu(cpu, mm_cpumask(&init_mm));
 	if (MACHINE_HAS_TLB_LC)
@@ -957,6 +1081,7 @@ void __noreturn cpu_die(void)
 #endif /* CONFIG_HOTPLUG_CPU */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init smp_prepare_cpus(unsigned int max_cpus)
 {
 	/* request the 0x1201 emergency signal external interrupt */
@@ -965,6 +1090,8 @@ void __init smp_prepare_cpus(unsigned int max_cpus)
 	/* request the 0x1202 external call external interrupt */
 	if (register_external_interrupt(0x1202, do_ext_call_interrupt) != 0)
 =======
+=======
+>>>>>>> v3.18
 void __init smp_fill_possible_mask(void)
 {
 	unsigned int possible, sclp, cpu;
@@ -983,6 +1110,9 @@ void __init smp_prepare_cpus(unsigned int max_cpus)
 		panic("Couldn't request external interrupt 0x1201");
 	/* request the 0x1202 external call external interrupt */
 	if (register_external_irq(EXT_IRQ_EXTERNAL_CALL, do_ext_call_interrupt))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		panic("Couldn't request external interrupt 0x1202");
 	smp_detect_cpus();
@@ -1014,6 +1144,10 @@ void __init smp_setup_processor_id(void)
 {
 	S390_lowcore.cpu_nr = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	S390_lowcore.spinlock_lockval = arch_spin_lockval(0);
+>>>>>>> v3.18
 =======
 	S390_lowcore.spinlock_lockval = arch_spin_lockval(0);
 >>>>>>> v3.18
@@ -1115,6 +1249,7 @@ static struct attribute_group cpu_common_attr_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_idle_count(struct device *dev,
 				struct device_attribute *attr, char *buf)
 {
@@ -1153,6 +1288,8 @@ static DEVICE_ATTR(idle_time_us, 0444, show_idle_time, NULL);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct attribute *cpu_online_attrs[] = {
 	&dev_attr_idle_count.attr,
 	&dev_attr_idle_time_us.attr,
@@ -1164,17 +1301,23 @@ static struct attribute_group cpu_online_attr_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit smp_cpu_notify(struct notifier_block *self,
 				    unsigned long action, void *hcpu)
 {
 	unsigned int cpu = (unsigned int)(long)hcpu;
 	struct cpu *c = &pcpu_devices[cpu].cpu;
 =======
+=======
+>>>>>>> v3.18
 static int smp_cpu_notify(struct notifier_block *self, unsigned long action,
 			  void *hcpu)
 {
 	unsigned int cpu = (unsigned int)(long)hcpu;
 	struct cpu *c = pcpu_devices[cpu].cpu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct device *s = &c->dev;
 	int err = 0;
@@ -1191,6 +1334,7 @@ static int smp_cpu_notify(struct notifier_block *self, unsigned long action,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit smp_add_present_cpu(int cpu)
 {
 	struct cpu *c = &pcpu_devices[cpu].cpu;
@@ -1198,6 +1342,8 @@ static int __cpuinit smp_add_present_cpu(int cpu)
 	int rc;
 
 =======
+=======
+>>>>>>> v3.18
 static int smp_add_present_cpu(int cpu)
 {
 	struct device *s;
@@ -1209,6 +1355,9 @@ static int smp_add_present_cpu(int cpu)
 		return -ENOMEM;
 	pcpu_devices[cpu].cpu = c;
 	s = &c->dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	c->hotpluggable = 1;
 	rc = register_cpu(c, cpu);
@@ -1277,9 +1426,14 @@ static DEVICE_ATTR(rescan, 0200, NULL, rescan_store);
 static int __init s390_smp_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cpu, rc;
 
 	hotcpu_notifier(smp_cpu_notify, 0);
+=======
+	int cpu, rc = 0;
+
+>>>>>>> v3.18
 =======
 	int cpu, rc = 0;
 
@@ -1290,6 +1444,7 @@ static int __init s390_smp_init(void)
 		return rc;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_present_cpu(cpu) {
 		rc = smp_add_present_cpu(cpu);
 		if (rc)
@@ -1297,6 +1452,8 @@ static int __init s390_smp_init(void)
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	cpu_notifier_register_begin();
 	for_each_present_cpu(cpu) {
 		rc = smp_add_present_cpu(cpu);
@@ -1309,6 +1466,9 @@ static int __init s390_smp_init(void)
 out:
 	cpu_notifier_register_done();
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 subsys_initcall(s390_smp_init);

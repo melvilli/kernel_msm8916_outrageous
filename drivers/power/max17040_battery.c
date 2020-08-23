@@ -278,7 +278,12 @@ static SIMPLE_DEV_PM_OPS(max17040_pm_ops, max17040_suspend, max17040_resume);
 
 static const struct i2c_device_id max17040_id[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "max17040", 0 },
+=======
+	{ "max17040" },
+	{ "max77836-battery" },
+>>>>>>> v3.18
 =======
 	{ "max17040" },
 	{ "max77836-battery" },

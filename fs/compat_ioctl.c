@@ -60,7 +60,11 @@
 
 #include <net/bluetooth/bluetooth.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/bluetooth/hci.h>
+=======
+#include <net/bluetooth/hci_sock.h>
+>>>>>>> v3.18
 =======
 #include <net/bluetooth/hci_sock.h>
 >>>>>>> v3.18
@@ -71,7 +75,10 @@
 
 #ifdef CONFIG_BLOCK
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/loop.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/cdrom.h>
@@ -689,7 +696,12 @@ static int do_i2c_rdwr_ioctl(unsigned int fd, unsigned int cmd,
 	struct i2c_msg32		__user *umsgs;
 	compat_caddr_t			datap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int				nmsgs, i;
+=======
+	u32				nmsgs;
+	int				i;
+>>>>>>> v3.18
 =======
 	u32				nmsgs;
 	int				i;
@@ -883,9 +895,12 @@ COMPATIBLE_IOCTL(TIOCSPTLCK)
 COMPATIBLE_IOCTL(TIOCSERGETLSR)
 COMPATIBLE_IOCTL(TIOCSIG)
 <<<<<<< HEAD
+<<<<<<< HEAD
 COMPATIBLE_IOCTL(TIOCPMGET)
 COMPATIBLE_IOCTL(TIOCPMPUT)
 COMPATIBLE_IOCTL(TIOCPMACT)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef TIOCSRS485
@@ -973,8 +988,11 @@ COMPATIBLE_IOCTL(MTIOCTOP)
 COMPATIBLE_IOCTL(FIOQSIZE)
 #ifdef CONFIG_BLOCK
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* loop */
 IGNORE_IOCTL(LOOP_CLR_FD)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* md calls this on random blockdevs */
@@ -1562,14 +1580,20 @@ static int compat_ioctl_check_table(unsigned int xcmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_ioctl(unsigned int fd, unsigned int cmd,
 				unsigned long arg)
 {
 =======
+=======
+>>>>>>> v3.18
 COMPAT_SYSCALL_DEFINE3(ioctl, unsigned int, fd, unsigned int, cmd,
 		       compat_ulong_t, arg32)
 {
 	unsigned long arg = arg32;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct fd f = fdget(fd);
 	int error = -EBADF;
@@ -1615,7 +1639,11 @@ COMPAT_SYSCALL_DEFINE3(ioctl, unsigned int, fd, unsigned int, cmd,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (f.file->f_op && f.file->f_op->compat_ioctl) {
+=======
+		if (f.file->f_op->compat_ioctl) {
+>>>>>>> v3.18
 =======
 		if (f.file->f_op->compat_ioctl) {
 >>>>>>> v3.18
@@ -1625,7 +1653,11 @@ COMPAT_SYSCALL_DEFINE3(ioctl, unsigned int, fd, unsigned int, cmd,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!f.file->f_op || !f.file->f_op->unlocked_ioctl)
+=======
+		if (!f.file->f_op->unlocked_ioctl)
+>>>>>>> v3.18
 =======
 		if (!f.file->f_op->unlocked_ioctl)
 >>>>>>> v3.18

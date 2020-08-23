@@ -5,7 +5,10 @@
 menuconfig UWB
 	tristate "Ultra Wideband devices"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default n

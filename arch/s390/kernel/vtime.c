@@ -7,8 +7,11 @@
 
 #include <linux/kernel_stat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/notifier.h>
 #include <linux/kprobes.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/export.h>
@@ -16,6 +19,7 @@
 #include <linux/timex.h>
 #include <linux/types.h>
 #include <linux/time.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/cpu.h>
 #include <linux/smp.h>
@@ -31,6 +35,8 @@ static void virt_timer_expire(void);
 DEFINE_PER_CPU(struct s390_idle_data, s390_idle);
 
 =======
+=======
+>>>>>>> v3.18
 
 #include <asm/cputime.h>
 #include <asm/vtimer.h>
@@ -38,6 +44,9 @@ DEFINE_PER_CPU(struct s390_idle_data, s390_idle);
 
 static void virt_timer_expire(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static LIST_HEAD(virt_timer_list);
 static DEFINE_SPINLOCK(virt_timer_lock);
@@ -88,13 +97,19 @@ static int do_account_vtime(struct task_struct *tsk, int hardirq_offset)
 	asm volatile(
 		"	stpt	%0\n"	/* Store current cpu timer value */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	stck	%1"	/* Store current tod clock value */
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_MARCH_Z9_109_FEATURES
 		"	stckf	%1"	/* Store current tod clock value */
 #else
 		"	stck	%1"	/* Store current tod clock value */
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		: "=m" (S390_lowcore.last_update_timer),
 		  "=m" (S390_lowcore.last_update_clock));
@@ -173,6 +188,7 @@ __attribute__((alias("vtime_account_irq_enter")));
 EXPORT_SYMBOL_GPL(vtime_account_system);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __kprobes vtime_stop_cpu(void)
 {
 	struct s390_idle_data *idle = &__get_cpu_var(s390_idle);
@@ -216,6 +232,8 @@ cputime64_t s390_get_idle_time(int cpu)
 	return idle_enter ? ((idle_exit ?: now) - idle_enter) : 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -396,7 +414,11 @@ EXPORT_SYMBOL(del_virt_timer);
  * Start the virtual CPU timer on the current CPU.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit init_cpu_vtimer(void)
+=======
+void vtime_init(void)
+>>>>>>> v3.18
 =======
 void vtime_init(void)
 >>>>>>> v3.18
@@ -404,6 +426,7 @@ void vtime_init(void)
 	/* set initial cpu timer */
 	set_vtimer(VTIMER_MAX_SLICE);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int __cpuinit s390_nohz_notify(struct notifier_block *self,
@@ -428,5 +451,7 @@ void __init vtime_init(void)
 	init_cpu_vtimer();
 	cpu_notifier(s390_nohz_notify, 0);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

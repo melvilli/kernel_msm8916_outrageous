@@ -4,7 +4,11 @@
  * This file contains the Storage Engine <-> FILEIO transport specific functions
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (c) Copyright 2005-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2005-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2005-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -262,7 +266,10 @@ static void fd_free_device(struct se_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int fd_do_prot_rw(struct se_cmd *cmd, struct fd_prot *fd_prot,
 			 int is_write)
 {
@@ -329,6 +336,9 @@ static int fd_do_prot_rw(struct se_cmd *cmd, struct fd_prot *fd_prot,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int fd_do_rw(struct se_cmd *cmd, struct scatterlist *sgl,
 		u32 sgl_nents, int is_write)
@@ -423,7 +433,11 @@ fd_execute_sync_cache(struct se_cmd *cmd)
 		start = cmd->t_task_lba * dev->dev_attrib.block_size;
 		if (cmd->data_length)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			end = start + cmd->data_length;
+=======
+			end = start + cmd->data_length - 1;
+>>>>>>> v3.18
 =======
 			end = start + cmd->data_length - 1;
 >>>>>>> v3.18
@@ -625,6 +639,7 @@ fd_execute_unmap(struct se_cmd *cmd)
 
 static sense_reason_t
 <<<<<<< HEAD
+<<<<<<< HEAD
 fd_execute_rw(struct se_cmd *cmd)
 {
 	struct scatterlist *sgl = cmd->t_data_sg;
@@ -643,6 +658,8 @@ fd_execute_rw(struct se_cmd *cmd)
 		return TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
 	}
 =======
+=======
+>>>>>>> v3.18
 fd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 	      enum dma_data_direction data_direction)
 {
@@ -651,6 +668,9 @@ fd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 	sense_reason_t rc;
 	int ret = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Call vectorized fileio functions to map struct scatterlist
@@ -658,12 +678,15 @@ fd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 	 */
 	if (data_direction == DMA_FROM_DEVICE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = fd_do_rw(cmd, sgl, sgl_nents, 0);
 	} else {
 		ret = fd_do_rw(cmd, sgl, sgl_nents, 1);
 		/*
 		 * Perform implict vfs_fsync_range() for fd_do_writev() ops
 =======
+=======
+>>>>>>> v3.18
 		memset(&fd_prot, 0, sizeof(struct fd_prot));
 
 		if (cmd->prot_type) {
@@ -709,6 +732,9 @@ fd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 		ret = fd_do_rw(cmd, sgl, sgl_nents, 1);
 		/*
 		 * Perform implicit vfs_fsync_range() for fd_do_writev() ops
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * for SCSI WRITEs with Forced Unit Access (FUA) set.
 		 * Allow this to happen independent of WCE=0 setting.
@@ -720,6 +746,7 @@ fd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 			loff_t start = cmd->t_task_lba *
 				dev->dev_attrib.block_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			loff_t end = start + cmd->data_length;
 
 			vfs_fsync_range(fd_dev->fd_file, start, end, 1);
@@ -729,6 +756,8 @@ fd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 	if (ret < 0)
 		return TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
 =======
+=======
+>>>>>>> v3.18
 			loff_t end;
 
 			if (cmd->data_length)
@@ -751,6 +780,9 @@ fd_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 		vfree(fd_prot.prot_buf);
 		return TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret)
@@ -806,15 +838,21 @@ static ssize_t fd_set_configfs_dev_params(struct se_device *dev,
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = strict_strtoull(arg_p, 0, &fd_dev->fd_dev_size);
 			kfree(arg_p);
 			if (ret < 0) {
 				pr_err("strict_strtoull() failed for"
 =======
+=======
+>>>>>>> v3.18
 			ret = kstrtoull(arg_p, 0, &fd_dev->fd_dev_size);
 			kfree(arg_p);
 			if (ret < 0) {
 				pr_err("kstrtoull() failed for"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						" fd_dev_size=\n");
 				goto out;
@@ -825,7 +863,13 @@ static ssize_t fd_set_configfs_dev_params(struct se_device *dev,
 			break;
 		case Opt_fd_buffered_io:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			match_int(args, &arg);
+=======
+			ret = match_int(args, &arg);
+			if (ret)
+				goto out;
+>>>>>>> v3.18
 =======
 			ret = match_int(args, &arg);
 			if (ret)
@@ -886,7 +930,10 @@ static sector_t fd_get_blocks(struct se_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int fd_init_prot(struct se_device *dev)
 {
 	struct fd_dev *fd_dev = FD_DEV(dev);
@@ -983,6 +1030,9 @@ static void fd_free_prot(struct se_device *dev)
 	fd_dev->fd_prot_file = NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct sbc_ops fd_sbc_ops = {
 	.execute_rw		= fd_execute_rw,
@@ -1015,6 +1065,12 @@ static struct se_subsystem_api fileio_template = {
 	.get_device_type	= sbc_get_device_type,
 	.get_blocks		= fd_get_blocks,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.init_prot		= fd_init_prot,
+	.format_prot		= fd_format_prot,
+	.free_prot		= fd_free_prot,
+>>>>>>> v3.18
 =======
 	.init_prot		= fd_init_prot,
 	.format_prot		= fd_format_prot,

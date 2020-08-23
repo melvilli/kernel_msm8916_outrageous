@@ -181,7 +181,11 @@ static acpi_status pnpacpi_allocated_resource(struct acpi_resource *res,
 	struct acpi_resource_dma *dma;
 	struct acpi_resource_vendor_typed *vendor_typed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource r;
+=======
+	struct resource r = {0};
+>>>>>>> v3.18
 =======
 	struct resource r = {0};
 >>>>>>> v3.18

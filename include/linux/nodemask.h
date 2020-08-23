@@ -99,9 +99,12 @@ typedef struct { DECLARE_BITMAP(bits, MAX_NUMNODES); } nodemask_t;
 extern nodemask_t _unused_nodemask_arg_;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define node_set(node, dst) __node_set((node), &(dst))
 static inline void __node_set(int node, volatile nodemask_t *dstp)
 =======
+=======
+>>>>>>> v3.18
 /*
  * The inline keyword gives the compiler room to decide to inline, or
  * not inline a function as it sees best.  However, as these functions
@@ -113,6 +116,9 @@ static inline void __node_set(int node, volatile nodemask_t *dstp)
  */
 #define node_set(node, dst) __node_set((node), &(dst))
 static __always_inline void __node_set(int node, volatile nodemask_t *dstp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	set_bit(node, dstp->bits);
@@ -436,8 +442,11 @@ static inline int num_node_state(enum node_states state)
 
 #define first_online_node	first_node(node_states[N_ONLINE])
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define next_online_node(nid)	next_node((nid), node_states[N_ONLINE])
 =======
+=======
+>>>>>>> v3.18
 #define first_memory_node	first_node(node_states[N_MEMORY])
 static inline int next_online_node(int nid)
 {
@@ -447,6 +456,9 @@ static inline int next_memory_node(int nid)
 {
 	return next_node(nid, node_states[N_MEMORY]);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int nr_node_ids;
@@ -489,6 +501,10 @@ static inline int num_node_state(enum node_states state)
 
 #define first_online_node	0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define first_memory_node	0
+>>>>>>> v3.18
 =======
 #define first_memory_node	0
 >>>>>>> v3.18

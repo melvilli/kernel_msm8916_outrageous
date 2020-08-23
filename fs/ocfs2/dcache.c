@@ -38,7 +38,10 @@
 #include "file.h"
 #include "inode.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "super.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "ocfs2_trace.h"
@@ -74,14 +77,20 @@ static int ocfs2_dentry_revalidate(struct dentry *dentry, unsigned int flags)
 	if (inode == NULL) {
 		unsigned long gen = (unsigned long) dentry->d_fsdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long pgen =
 			OCFS2_I(dentry->d_parent->d_inode)->ip_dir_lock_gen;
 
 =======
+=======
+>>>>>>> v3.18
 		unsigned long pgen;
 		spin_lock(&dentry->d_lock);
 		pgen = OCFS2_I(dentry->d_parent->d_inode)->ip_dir_lock_gen;
 		spin_unlock(&dentry->d_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		trace_ocfs2_dentry_revalidate_negative(dentry->d_name.len,
 						       dentry->d_name.name,
@@ -183,7 +192,11 @@ struct dentry *ocfs2_find_local_alias(struct inode *inode,
 
 	spin_lock(&inode->i_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hlist_for_each_entry(dentry, &inode->i_dentry, d_u.d_alias) {
+=======
+	hlist_for_each_entry(dentry, &inode->i_dentry, d_alias) {
+>>>>>>> v3.18
 =======
 	hlist_for_each_entry(dentry, &inode->i_dentry, d_alias) {
 >>>>>>> v3.18
@@ -360,6 +373,7 @@ out_attach:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_SPINLOCK(dentry_list_lock);
 
 /* We limit the number of dentry locks to drop in one go. We have
@@ -408,6 +422,8 @@ void ocfs2_drop_all_dl_inodes(struct ocfs2_super *osb)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * ocfs2_dentry_iput() and friends.
  *
@@ -433,6 +449,7 @@ static void ocfs2_drop_dentry_lock(struct ocfs2_super *osb,
 				   struct ocfs2_dentry_lock *dl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ocfs2_simple_drop_lockres(osb, &dl->dl_lockres);
 	ocfs2_lock_res_free(&dl->dl_lockres);
 
@@ -446,10 +463,15 @@ static void ocfs2_drop_dentry_lock(struct ocfs2_super *osb,
 	osb->dentry_lock_list = dl;
 	spin_unlock(&dentry_list_lock);
 =======
+=======
+>>>>>>> v3.18
 	iput(dl->dl_inode);
 	ocfs2_simple_drop_lockres(osb, &dl->dl_lockres);
 	ocfs2_lock_res_free(&dl->dl_lockres);
 	kfree(dl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -457,7 +479,11 @@ void ocfs2_dentry_lock_put(struct ocfs2_super *osb,
 			   struct ocfs2_dentry_lock *dl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int unlock;
+=======
+	int unlock = 0;
+>>>>>>> v3.18
 =======
 	int unlock = 0;
 >>>>>>> v3.18

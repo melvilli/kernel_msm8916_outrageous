@@ -55,6 +55,10 @@ extern int __cifs_readpages_from_fscache(struct inode *,
 					 struct list_head *,
 					 unsigned *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void __cifs_fscache_readpages_cancel(struct inode *, struct list_head *);
+>>>>>>> v3.18
 =======
 extern void __cifs_fscache_readpages_cancel(struct inode *, struct list_head *);
 >>>>>>> v3.18
@@ -96,7 +100,10 @@ static inline void cifs_readpage_to_fscache(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void cifs_fscache_readpages_cancel(struct inode *inode,
 						 struct list_head *pages)
 {
@@ -104,6 +111,9 @@ static inline void cifs_fscache_readpages_cancel(struct inode *inode,
 		return __cifs_fscache_readpages_cancel(inode, pages);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* CONFIG_CIFS_FSCACHE */
 static inline int cifs_fscache_register(void) { return 0; }
@@ -146,12 +156,18 @@ static inline void cifs_readpage_to_fscache(struct inode *inode,
 			struct page *page) {}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void cifs_fscache_readpages_cancel(struct inode *inode,
 						 struct list_head *pages)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_CIFS_FSCACHE */
 

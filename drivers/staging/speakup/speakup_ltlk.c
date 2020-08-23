@@ -51,6 +51,7 @@ static struct var_t vars[] = {
  */
 static struct kobj_attribute caps_start_attribute =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ATTR(caps_start, USER_RW, spk_var_show, spk_var_store);
 static struct kobj_attribute caps_stop_attribute =
 	__ATTR(caps_stop, USER_RW, spk_var_show, spk_var_store);
@@ -80,6 +81,8 @@ static struct kobj_attribute jiffy_delta_attribute =
 static struct kobj_attribute trigger_time_attribute =
 	__ATTR(trigger_time, ROOT_W, spk_var_show, spk_var_store);
 =======
+=======
+>>>>>>> v3.18
 	__ATTR(caps_start, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
 static struct kobj_attribute caps_stop_attribute =
 	__ATTR(caps_stop, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
@@ -108,6 +111,9 @@ static struct kobj_attribute jiffy_delta_attribute =
 	__ATTR(jiffy_delta, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
 static struct kobj_attribute trigger_time_attribute =
 	__ATTR(trigger_time, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -173,6 +179,10 @@ static void synth_interrogate(struct spk_synth *synth)
 	unsigned char *t, i;
 	unsigned char buf[50], rom_v[20];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

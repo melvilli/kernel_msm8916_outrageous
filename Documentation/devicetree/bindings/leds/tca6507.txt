@@ -3,7 +3,10 @@ LEDs connected to tca6507
 Required properties:
 - compatible : should be : "ti,tca6507".
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - #address-cells: must be 1
 - #size-cells: must be 0
 - reg: typically 0x45.
@@ -11,6 +14,9 @@ Required properties:
 Optional properties:
 - gpio-controller: allows lines to be used as output-only GPIOs.
 - #gpio-cells: if present, must not be 0.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Each led is represented as a sub-node of the ti,tca6507 device.
@@ -21,6 +27,10 @@ LED sub-node properties:
 - linux,default-trigger : (optional)
    see Documentation/devicetree/bindings/leds/common.txt
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- compatible: either "led" (the default) or "gpio".
+>>>>>>> v3.18
 =======
 - compatible: either "led" (the default) or "gpio".
 >>>>>>> v3.18
@@ -34,6 +44,12 @@ tca6507@45 {
 	reg = <0x45>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gpio-controller;
+	#gpio-cells = <2>;
+
+>>>>>>> v3.18
 =======
 	gpio-controller;
 	#gpio-cells = <2>;
@@ -50,12 +66,18 @@ tca6507@45 {
 		linux,default-trigger = "default-on";
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	wifi-reset@6 {
 		reg = <0x6>;
 		compatible = "gpio";
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

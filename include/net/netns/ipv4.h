@@ -16,7 +16,10 @@ struct hlist_head;
 struct fib_table;
 struct sock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct local_ports {
 	seqlock_t	lock;
 	int		range[2];
@@ -26,6 +29,9 @@ struct ping_group_range {
 	seqlock_t	lock;
 	kgid_t		range[2];
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct netns_ipv4 {
@@ -56,7 +62,10 @@ struct netns_ipv4 {
 	struct tcpm_hash_bucket	*tcp_metrics_hash;
 	unsigned int		tcp_metrics_hash_log;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sock  * __percpu	*tcp_sk;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct netns_frags	frags;
@@ -79,19 +88,26 @@ struct netns_ipv4 {
 	int sysctl_icmp_errors_use_inbound_ifaddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int sysctl_tcp_ecn;
 =======
+=======
+>>>>>>> v3.18
 	struct local_ports ip_local_ports;
 
 	int sysctl_tcp_ecn;
 	int sysctl_ip_no_pmtu_disc;
 	int sysctl_ip_fwd_use_pmtu;
 	int sysctl_ip_nonlocal_bind;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int sysctl_fwmark_reflect;
 	int sysctl_tcp_fwmark_accept;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kgid_t sysctl_ping_group_range[2];
 	long sysctl_tcp_mem[3];
@@ -99,6 +115,8 @@ struct netns_ipv4 {
 	atomic_t dev_addr_genid;
 
 =======
+=======
+>>>>>>> v3.18
 	struct ping_group_range ping_group_range;
 
 	atomic_t dev_addr_genid;
@@ -107,6 +125,9 @@ struct netns_ipv4 {
 	unsigned long *sysctl_local_reserved_ports;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_IP_MROUTE
 #ifndef CONFIG_IP_MROUTE_MULTIPLE_TABLES
@@ -117,6 +138,10 @@ struct netns_ipv4 {
 #endif
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_t	rt_genid;
+>>>>>>> v3.18
 =======
 	atomic_t	rt_genid;
 >>>>>>> v3.18

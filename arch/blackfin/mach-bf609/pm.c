@@ -211,7 +211,11 @@ void bf609_cpu_pm_enter(suspend_state_t state)
 #ifdef CONFIG_PM_BFIN_WAKE_PB15
 	wakeup |= PB15WE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 # if CONFIG_PM_BFIN_WAKE_PA15_POL
+=======
+# if CONFIG_PM_BFIN_WAKE_PB15_POL
+>>>>>>> v3.18
 =======
 # if CONFIG_PM_BFIN_WAKE_PB15_POL
 >>>>>>> v3.18
@@ -296,7 +300,11 @@ static struct bfin_cpu_pm_fns bf609_cpu_pm = {
 static int smc_pm_syscore_suspend(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bf609_nor_flash_exit();
+=======
+	bf609_nor_flash_exit(NULL);
+>>>>>>> v3.18
 =======
 	bf609_nor_flash_exit(NULL);
 >>>>>>> v3.18
@@ -306,7 +314,11 @@ static int smc_pm_syscore_suspend(void)
 static void smc_pm_syscore_resume(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bf609_nor_flash_init();
+=======
+	bf609_nor_flash_init(NULL);
+>>>>>>> v3.18
 =======
 	bf609_nor_flash_init(NULL);
 >>>>>>> v3.18

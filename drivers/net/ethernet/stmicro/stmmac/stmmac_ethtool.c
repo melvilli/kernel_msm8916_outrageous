@@ -176,7 +176,11 @@ static const struct stmmac_stats stmmac_mmc[] = {
 	STMMAC_MMC_STAT(mmc_rx_broadcastframe_g),
 	STMMAC_MMC_STAT(mmc_rx_multicastframe_g),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	STMMAC_MMC_STAT(mmc_rx_crc_errror),
+=======
+	STMMAC_MMC_STAT(mmc_rx_crc_error),
+>>>>>>> v3.18
 =======
 	STMMAC_MMC_STAT(mmc_rx_crc_error),
 >>>>>>> v3.18
@@ -266,17 +270,23 @@ static int stmmac_ethtool_getsettings(struct net_device *dev,
 
 		/* Get and convert ADV/LP_ADV from the HW AN registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (priv->hw->mac->get_adv)
 			priv->hw->mac->get_adv(priv->ioaddr, &adv);
 		else
 			return -EOPNOTSUPP;	/* should never happen indeed */
 
 =======
+=======
+>>>>>>> v3.18
 		if (!priv->hw->mac->get_adv)
 			return -EOPNOTSUPP;	/* should never happen indeed */
 
 		priv->hw->mac->get_adv(priv->hw, &adv);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Encoding of PSE bits is defined in 802.3z, 37.2.1.4 */
 
@@ -335,9 +345,13 @@ static int stmmac_ethtool_getsettings(struct net_device *dev,
 	}
 	cmd->transceiver = XCVR_INTERNAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&priv->lock);
 	rc = phy_ethtool_gset(phy, cmd);
 	spin_unlock_irq(&priv->lock);
+=======
+	rc = phy_ethtool_gset(phy, cmd);
+>>>>>>> v3.18
 =======
 	rc = phy_ethtool_gset(phy, cmd);
 >>>>>>> v3.18
@@ -359,8 +373,12 @@ static int stmmac_ethtool_setsettings(struct net_device *dev,
 			return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cmd->autoneg == AUTONEG_ENABLE) {
 			mask &= (ADVERTISED_1000baseT_Half |
+=======
+		mask &= (ADVERTISED_1000baseT_Half |
+>>>>>>> v3.18
 =======
 		mask &= (ADVERTISED_1000baseT_Half |
 >>>>>>> v3.18
@@ -371,16 +389,22 @@ static int stmmac_ethtool_setsettings(struct net_device *dev,
 			ADVERTISED_10baseT_Full);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_lock(&priv->lock);
 			if (priv->hw->mac->ctrl_ane)
 				priv->hw->mac->ctrl_ane(priv->ioaddr, 1);
 			spin_unlock(&priv->lock);
 		}
 =======
+=======
+>>>>>>> v3.18
 		spin_lock(&priv->lock);
 		if (priv->hw->mac->ctrl_ane)
 			priv->hw->mac->ctrl_ane(priv->hw, 1);
 		spin_unlock(&priv->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		return 0;
@@ -459,8 +483,11 @@ stmmac_get_pauseparam(struct net_device *netdev,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&priv->lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pause->rx_pause = 0;
@@ -473,7 +500,10 @@ stmmac_get_pauseparam(struct net_device *netdev,
 		pause->tx_pause = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&priv->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -491,8 +521,11 @@ stmmac_set_pauseparam(struct net_device *netdev,
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&priv->lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (pause->rx_pause)
@@ -508,9 +541,14 @@ stmmac_set_pauseparam(struct net_device *netdev,
 			ret = phy_start_aneg(phy);
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->hw->mac->flow_ctrl(priv->ioaddr, phy->duplex,
 					 priv->flow_ctrl, priv->pause);
 	spin_unlock(&priv->lock);
+=======
+		priv->hw->mac->flow_ctrl(priv->hw, phy->duplex,
+					 priv->flow_ctrl, priv->pause);
+>>>>>>> v3.18
 =======
 		priv->hw->mac->flow_ctrl(priv->hw, phy->duplex,
 					 priv->flow_ctrl, priv->pause);
@@ -773,6 +811,7 @@ static int stmmac_get_ts_info(struct net_device *dev,
 	struct stmmac_priv *priv = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((priv->dma_cap.time_stamp || priv->dma_cap.atime_stamp)) {
 
 		info->so_timestamping = SOF_TIMESTAMPING_TX_SOFTWARE |
@@ -781,10 +820,15 @@ static int stmmac_get_ts_info(struct net_device *dev,
 					SOF_TIMESTAMPING_RX_HARDWARE |
 					SOF_TIMESTAMPING_SOFTWARE |
 =======
+=======
+>>>>>>> v3.18
 	if ((priv->hwts_tx_en) && (priv->hwts_rx_en)) {
 
 		info->so_timestamping = SOF_TIMESTAMPING_TX_HARDWARE |
 					SOF_TIMESTAMPING_RX_HARDWARE |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					SOF_TIMESTAMPING_RAW_HARDWARE;
 
@@ -836,7 +880,11 @@ static const struct ethtool_ops stmmac_ethtool_ops = {
 void stmmac_set_ethtool_ops(struct net_device *netdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &stmmac_ethtool_ops);
+=======
+	netdev->ethtool_ops = &stmmac_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &stmmac_ethtool_ops;
 >>>>>>> v3.18

@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (C) 2007-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
 =======
 /* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
 >>>>>>> v3.18
@@ -17,9 +21,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -28,6 +36,7 @@
 #ifndef _NET_BATMAN_ADV_PACKET_H_
 #define _NET_BATMAN_ADV_PACKET_H_
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum batadv_packettype {
 	BATADV_IV_OGM		= 0x01,
@@ -41,6 +50,8 @@ enum batadv_packettype {
 	BATADV_UNICAST_4ADDR	= 0x09,
 	BATADV_CODED		= 0x0a,
 =======
+=======
+>>>>>>> v3.18
 /**
  * enum batadv_packettype - types for batman-adv encapsulated packets
  * @BATADV_IV_OGM: originator messages for B.A.T.M.A.N. IV
@@ -69,6 +80,9 @@ enum batadv_packettype {
 	BATADV_UNICAST_TVLV     = 0x44,
 #define BATADV_UNICAST_MAX     0x7f
 	/* 0x80 - 0xff: reserved */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -88,6 +102,7 @@ enum batadv_subtype {
 
 /* this file is included by batctl which needs these defines */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BATADV_COMPAT_VERSION 14
 
 enum batadv_iv_flags {
@@ -96,6 +111,8 @@ enum batadv_iv_flags {
 	BATADV_VIS_SERVER	   = BIT(5),
 	BATADV_DIRECTLINK	   = BIT(6),
 =======
+=======
+>>>>>>> v3.18
 #define BATADV_COMPAT_VERSION 15
 
 /**
@@ -111,6 +128,9 @@ enum batadv_iv_flags {
 	BATADV_NOT_BEST_NEXT_HOP   = BIT(0),
 	BATADV_PRIMARIES_FIRST_HOP = BIT(1),
 	BATADV_DIRECTLINK          = BIT(2),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -123,6 +143,7 @@ enum batadv_icmp_packettype {
 	BATADV_PARAMETER_PROBLEM       = 12,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* vis defines */
 enum batadv_vis_packettype {
@@ -153,6 +174,8 @@ enum batadv_tt_query_flags {
  * Flags from BIT(0) to BIT(7) are sent on the wire, while flags from BIT(8) to
  * BIT(15) are used for local computation only
 =======
+=======
+>>>>>>> v3.18
 /**
  * enum batadv_mcast_flags - flags for multicast capabilities and settings
  * @BATADV_MCAST_WANT_ALL_UNSNOOPABLES: we want all packets destined for
@@ -207,11 +230,15 @@ enum batadv_tt_data_flags {
  * Bits from 4 to 7 - a subset of remote flags - are ensured to be in sync with
  * the other nodes in the network. To achieve this goal these flags are included
  * in the TT CRC computation.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 enum batadv_tt_client_flags {
 	BATADV_TT_CLIENT_DEL     = BIT(0),
 	BATADV_TT_CLIENT_ROAM    = BIT(1),
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BATADV_TT_CLIENT_WIFI    = BIT(2),
 	BATADV_TT_CLIENT_TEMP	 = BIT(3),
@@ -219,6 +246,8 @@ enum batadv_tt_client_flags {
 	BATADV_TT_CLIENT_NEW     = BIT(9),
 	BATADV_TT_CLIENT_PENDING = BIT(10),
 =======
+=======
+>>>>>>> v3.18
 	BATADV_TT_CLIENT_WIFI    = BIT(4),
 	BATADV_TT_CLIENT_ISOLA	 = BIT(5),
 	BATADV_TT_CLIENT_NOPURGE = BIT(8),
@@ -233,6 +262,9 @@ enum batadv_tt_client_flags {
  */
 enum batadv_vlan_flags {
 	BATADV_VLAN_HAS_TAG	= BIT(15),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -245,7 +277,10 @@ enum batadv_bla_claimframe {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * enum batadv_tvlv_type - tvlv type definitions
  * @BATADV_TVLV_GW: gateway tvlv
@@ -265,6 +300,9 @@ enum batadv_tvlv_type {
 };
 
 #pragma pack(2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* the destination hardware field in the ARP frame is used to
  * transport the claim type and the group id
@@ -274,6 +312,7 @@ struct batadv_bla_claim_dst {
 	uint8_t type;		/* bla_claimframe */
 	__be16 group;		/* group id */
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct batadv_header {
@@ -309,6 +348,8 @@ struct batadv_icmp_packet {
 	uint8_t  uid;
 	uint8_t  reserved;
 =======
+=======
+>>>>>>> v3.18
 #pragma pack()
 
 /**
@@ -385,11 +426,15 @@ struct batadv_icmp_packet {
 	uint8_t  uid;
 	uint8_t  reserved;
 	__be16   seqno;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 #define BATADV_RR_LEN 16
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* icmp_packet_rr must start with all fields from imcp_packet
  * as this is assumed by code that handles ICMP packets
@@ -406,6 +451,8 @@ struct batadv_icmp_packet_rr {
 };
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * batadv_icmp_packet_rr - ICMP RouteRecord packet
  * @packet_type: batman-adv packet type, part of the general header
@@ -434,6 +481,9 @@ struct batadv_icmp_packet_rr {
 
 #define BATADV_ICMP_MAX_PACKET_SIZE	sizeof(struct batadv_icmp_packet_rr)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* All packet headers in front of an ethernet header have to be completely
  * divisible by 2 but not by 4 to make the payload after the ethernet
@@ -448,9 +498,12 @@ struct batadv_icmp_packet_rr {
 #pragma pack(2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct batadv_unicast_packet {
 	struct batadv_header header;
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct batadv_unicast_packet - unicast packet for network payload
  * @packet_type: batman-adv packet type, part of the general header
@@ -463,6 +516,9 @@ struct batadv_unicast_packet {
 	uint8_t  packet_type;
 	uint8_t  version;
 	uint8_t  ttl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint8_t  ttvn; /* destination translation table version number */
 	uint8_t  dest[ETH_ALEN];
@@ -488,6 +544,7 @@ struct batadv_unicast_4addr_packet {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct batadv_unicast_frag_packet {
 	struct batadv_header header;
 	uint8_t  ttvn; /* destination translation table version number */
@@ -501,6 +558,8 @@ struct batadv_unicast_frag_packet {
 struct batadv_bcast_packet {
 	struct batadv_header header;
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct batadv_frag_packet - fragmented packet
  * @packet_type: batman-adv packet type, part of the general header
@@ -545,6 +604,9 @@ struct batadv_bcast_packet {
 	uint8_t  packet_type;
 	uint8_t  version;  /* batman version field */
 	uint8_t  ttl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint8_t  reserved;
 	__be32   seqno;
@@ -554,6 +616,7 @@ struct batadv_bcast_packet {
 	 */
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #pragma pack()
 
@@ -609,11 +672,16 @@ struct batadv_tt_change {
  * struct batadv_coded_packet - network coded packet
  * @header: common batman packet header and ttl of first included packet
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct batadv_coded_packet - network coded packet
  * @packet_type: batman-adv packet type, part of the general header
  * @version: batman-adv protocol version, part of the genereal header
  * @ttl: time to live for this packet, part of the genereal header
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @reserved: Align following fields to 2-byte boundaries
  * @first_source: original source of first included packet
@@ -630,7 +698,13 @@ struct batadv_tt_change {
  */
 struct batadv_coded_packet {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct batadv_header header;
+=======
+	uint8_t  packet_type;
+	uint8_t  version;  /* batman version field */
+	uint8_t  ttl;
+>>>>>>> v3.18
 =======
 	uint8_t  packet_type;
 	uint8_t  version;  /* batman version field */
@@ -651,7 +725,10 @@ struct batadv_coded_packet {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #pragma pack()
 
 /**
@@ -760,5 +837,8 @@ struct batadv_tvlv_mcast_data {
 	uint8_t reserved[3];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _NET_BATMAN_ADV_PACKET_H_ */

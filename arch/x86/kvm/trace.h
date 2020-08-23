@@ -92,11 +92,14 @@ TRACE_EVENT(kvm_hv_hypercall,
  * Tracepoint for PIO.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 TRACE_EVENT(kvm_pio,
 	TP_PROTO(unsigned int rw, unsigned int port, unsigned int size,
 		 unsigned int count),
 	TP_ARGS(rw, port, size, count),
 =======
+=======
+>>>>>>> v3.18
 
 #define KVM_PIO_IN   0
 #define KVM_PIO_OUT  1
@@ -105,6 +108,9 @@ TRACE_EVENT(kvm_pio,
 	TP_PROTO(unsigned int rw, unsigned int port, unsigned int size,
 		 unsigned int count, void *data),
 	TP_ARGS(rw, port, size, count, data),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TP_STRUCT__entry(
@@ -113,6 +119,10 @@ TRACE_EVENT(kvm_pio,
 		__field(	unsigned int, 	size		)
 		__field(	unsigned int,	count		)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__field(	unsigned int,	val		)
+>>>>>>> v3.18
 =======
 		__field(	unsigned int,	val		)
 >>>>>>> v3.18
@@ -124,12 +134,15 @@ TRACE_EVENT(kvm_pio,
 		__entry->size		= size;
 		__entry->count		= count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	),
 
 	TP_printk("pio_%s at 0x%x size %d count %d",
 		  __entry->rw ? "write" : "read",
 		  __entry->port, __entry->size, __entry->count)
 =======
+=======
+>>>>>>> v3.18
 		if (size == 1)
 			__entry->val	= *(unsigned char *)data;
 		else if (size == 2)
@@ -142,6 +155,9 @@ TRACE_EVENT(kvm_pio,
 		  __entry->rw ? "write" : "read",
 		  __entry->port, __entry->size, __entry->count, __entry->val,
 		  __entry->count > 1 ? "(...)" : "")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -434,8 +450,13 @@ TRACE_EVENT(kvm_apic_ipi,
 
 TRACE_EVENT(kvm_apic_accept_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    TP_PROTO(__u32 apicid, __u16 dm, __u8 tm, __u8 vec, bool coalesced),
 	    TP_ARGS(apicid, dm, tm, vec, coalesced),
+=======
+	    TP_PROTO(__u32 apicid, __u16 dm, __u8 tm, __u8 vec),
+	    TP_ARGS(apicid, dm, tm, vec),
+>>>>>>> v3.18
 =======
 	    TP_PROTO(__u32 apicid, __u16 dm, __u8 tm, __u8 vec),
 	    TP_ARGS(apicid, dm, tm, vec),
@@ -447,7 +468,10 @@ TRACE_EVENT(kvm_apic_accept_irq,
 		__field(	__u8,		tm		)
 		__field(	__u8,		vec		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(	bool,		coalesced	)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	),
@@ -458,6 +482,7 @@ TRACE_EVENT(kvm_apic_accept_irq,
 		__entry->tm		= tm;
 		__entry->vec		= vec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__entry->coalesced	= coalesced;
 	),
 
@@ -467,12 +492,17 @@ TRACE_EVENT(kvm_apic_accept_irq,
 		  __entry->tm ? "level" : "edge",
 		  __entry->coalesced ? " (coalesced)" : "")
 =======
+=======
+>>>>>>> v3.18
 	),
 
 	TP_printk("apicid %x vec %u (%s|%s)",
 		  __entry->apicid, __entry->vec,
 		  __print_symbolic((__entry->dm >> 8 & 0x7), kvm_deliver_mode),
 		  __entry->tm ? "level" : "edge")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -757,15 +787,21 @@ TRACE_EVENT(kvm_emulate_insn,
 
 	TP_fast_assign(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__entry->rip = vcpu->arch.emulate_ctxt.fetch.start;
 		__entry->csbase = kvm_x86_ops->get_segment_base(vcpu, VCPU_SREG_CS);
 		__entry->len = vcpu->arch.emulate_ctxt._eip
 			       - vcpu->arch.emulate_ctxt.fetch.start;
 =======
+=======
+>>>>>>> v3.18
 		__entry->csbase = kvm_x86_ops->get_segment_base(vcpu, VCPU_SREG_CS);
 		__entry->len = vcpu->arch.emulate_ctxt.fetch.ptr
 			       - vcpu->arch.emulate_ctxt.fetch.data;
 		__entry->rip = vcpu->arch.emulate_ctxt._eip - __entry->len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memcpy(__entry->insn,
 		       vcpu->arch.emulate_ctxt.fetch.data,
@@ -811,7 +847,10 @@ TRACE_EVENT(
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(kvm_write_tsc_offset,
 	TP_PROTO(unsigned int vcpu_id, __u64 previous_tsc_offset,
 		 __u64 next_tsc_offset),
@@ -833,6 +872,9 @@ TRACE_EVENT(kvm_write_tsc_offset,
 		  __entry->previous_tsc_offset, __entry->next_tsc_offset)
 );
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_X86_64
 
@@ -896,7 +938,10 @@ TRACE_EVENT(kvm_track_tsc,
 #endif /* CONFIG_X86_64 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(kvm_ple_window,
 	TP_PROTO(bool grow, unsigned int vcpu_id, int new, int old),
 	TP_ARGS(grow, vcpu_id, new, old),
@@ -927,6 +972,9 @@ TRACE_EVENT(kvm_ple_window,
 #define trace_kvm_ple_window_shrink(vcpu_id, new, old) \
 	trace_kvm_ple_window(false, vcpu_id, new, old)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _TRACE_KVM_H */
 

@@ -36,7 +36,10 @@
 #include <media/v4l2-common.h>
 #include <media/v4l2-ioctl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -357,6 +360,10 @@ int cx231xx_afe_update_power_control(struct cx231xx *dev,
 	case CX231XX_BOARD_CNXT_VIDEO_GRABBER:
 	case CX231XX_BOARD_HAUPPAUGE_EXETER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx:
+>>>>>>> v3.18
 =======
 	case CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx:
 >>>>>>> v3.18
@@ -1269,10 +1276,14 @@ int cx231xx_set_agc_analog_digital_mux_select(struct cx231xx *dev,
 				   analog_or_digital);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status < 0)
 		return status;
 
 	return 0;
+=======
+	return status;
+>>>>>>> v3.18
 =======
 	return status;
 >>>>>>> v3.18
@@ -1610,7 +1621,11 @@ void cx231xx_set_DIF_bandpass(struct cx231xx *dev, u32 if_freq,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cx231xx_info("Enter IF=%zd\n",
+=======
+	cx231xx_info("Enter IF=%zu\n",
+>>>>>>> v3.18
 =======
 	cx231xx_info("Enter IF=%zu\n",
 >>>>>>> v3.18
@@ -2242,7 +2257,11 @@ int cx231xx_set_power_mode(struct cx231xx *dev, enum AV_MODE mode)
 		return status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = le32_to_cpu(*((u32 *) value));
+=======
+	tmp = le32_to_cpu(*((__le32 *) value));
+>>>>>>> v3.18
 =======
 	tmp = le32_to_cpu(*((__le32 *) value));
 >>>>>>> v3.18
@@ -2467,7 +2486,11 @@ int cx231xx_power_suspend(struct cx231xx *dev)
 		return status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = le32_to_cpu(*((u32 *) value));
+=======
+	tmp = le32_to_cpu(*((__le32 *) value));
+>>>>>>> v3.18
 =======
 	tmp = le32_to_cpu(*((__le32 *) value));
 >>>>>>> v3.18
@@ -2499,7 +2522,11 @@ int cx231xx_start_stream(struct cx231xx *dev, u32 ep_mask)
 		return status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = le32_to_cpu(*((u32 *) value));
+=======
+	tmp = le32_to_cpu(*((__le32 *) value));
+>>>>>>> v3.18
 =======
 	tmp = le32_to_cpu(*((__le32 *) value));
 >>>>>>> v3.18
@@ -2528,7 +2555,11 @@ int cx231xx_stop_stream(struct cx231xx *dev, u32 ep_mask)
 		return status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = le32_to_cpu(*((u32 *) value));
+=======
+	tmp = le32_to_cpu(*((__le32 *) value));
+>>>>>>> v3.18
 =======
 	tmp = le32_to_cpu(*((__le32 *) value));
 >>>>>>> v3.18
@@ -2679,7 +2710,11 @@ static int cx231xx_set_gpio_bit(struct cx231xx *dev, u32 gpio_bit, u32 gpio_val)
 	int status = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_val = cpu_to_le32(gpio_val);
+=======
+	gpio_val = (__force u32)cpu_to_le32(gpio_val);
+>>>>>>> v3.18
 =======
 	gpio_val = (__force u32)cpu_to_le32(gpio_val);
 >>>>>>> v3.18
@@ -2691,7 +2726,11 @@ static int cx231xx_set_gpio_bit(struct cx231xx *dev, u32 gpio_bit, u32 gpio_val)
 static int cx231xx_get_gpio_bit(struct cx231xx *dev, u32 gpio_bit, u32 *gpio_val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 tmp;
+=======
+	__le32 tmp;
+>>>>>>> v3.18
 =======
 	__le32 tmp;
 >>>>>>> v3.18

@@ -1404,7 +1404,11 @@ static void amb_free_rx_skb (struct atm_vcc * atm_vcc, struct sk_buff * skb) {
   
   skb->data = skb->head;
 <<<<<<< HEAD
+<<<<<<< HEAD
   skb->tail = skb->head;
+=======
+  skb_reset_tail_pointer(skb);
+>>>>>>> v3.18
 =======
   skb_reset_tail_pointer(skb);
 >>>>>>> v3.18
@@ -1930,7 +1934,11 @@ static int ucode_init(loader_block *lb, amb_dev *dev)
   unsigned long start_address;
   const struct ihex_binrec *rec;
 <<<<<<< HEAD
+<<<<<<< HEAD
   const char *errmsg = 0;
+=======
+  const char *errmsg = NULL;
+>>>>>>> v3.18
 =======
   const char *errmsg = NULL;
 >>>>>>> v3.18

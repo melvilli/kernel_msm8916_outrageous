@@ -32,9 +32,12 @@ struct alias_prop {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct mutex of_aliases_mutex;
 extern struct list_head aliases_lookup;
 =======
+=======
+>>>>>>> v3.18
 extern struct mutex of_mutex;
 extern struct list_head aliases_lookup;
 extern struct kset *of_kset;
@@ -94,5 +97,8 @@ extern void __of_detach_node_sysfs(struct device_node *np);
 #define for_each_transaction_entry_reverse(_oft, _te) \
 	list_for_each_entry_reverse(_te, &(_oft)->te_list, node)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_OF_PRIVATE_H */

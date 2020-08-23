@@ -33,7 +33,10 @@
 #include <linux/videodev2.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -289,6 +292,7 @@ static int saa7185_s_routing(struct v4l2_subdev *sd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int saa7185_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -300,6 +304,11 @@ static int saa7185_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ide
 
 static const struct v4l2_subdev_core_ops saa7185_core_ops = {
 	.g_chip_ident = saa7185_g_chip_ident,
+=======
+/* ----------------------------------------------------------------------- */
+
+static const struct v4l2_subdev_core_ops saa7185_core_ops = {
+>>>>>>> v3.18
 =======
 /* ----------------------------------------------------------------------- */
 
@@ -336,7 +345,11 @@ static int saa7185_probe(struct i2c_client *client,
 			client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	encoder = kzalloc(sizeof(struct saa7185), GFP_KERNEL);
+=======
+	encoder = devm_kzalloc(&client->dev, sizeof(*encoder), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	encoder = devm_kzalloc(&client->dev, sizeof(*encoder), GFP_KERNEL);
 >>>>>>> v3.18
@@ -366,7 +379,10 @@ static int saa7185_remove(struct i2c_client *client)
 	/* SW: output off is active */
 	saa7185_write(sd, 0x61, (encoder->reg[0x61]) | 0x40);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(encoder);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

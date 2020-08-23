@@ -409,6 +409,10 @@ static struct fcoe_interface *fcoe_interface_create(struct net_device *netdev,
 
 	ctlr = fcoe_ctlr_device_priv(ctlr_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ctlr->cdev = ctlr_dev;
+>>>>>>> v3.18
 =======
 	ctlr->cdev = ctlr_dev;
 >>>>>>> v3.18
@@ -779,7 +783,10 @@ static void fcoe_fdmi_info(struct fc_lport *lport, struct net_device *netdev)
 	struct net_device *realdev;
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct netdev_fcoe_hbainfo fdmi;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -796,10 +803,13 @@ static void fcoe_fdmi_info(struct fc_lport *lport, struct net_device *netdev)
 
 	if (realdev->netdev_ops->ndo_fcoe_get_hbainfo) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(&fdmi, 0, sizeof(fdmi));
 		rc = realdev->netdev_ops->ndo_fcoe_get_hbainfo(realdev,
 							       &fdmi);
 =======
+=======
+>>>>>>> v3.18
 		struct netdev_fcoe_hbainfo *fdmi;
 		fdmi = kzalloc(sizeof(*fdmi), GFP_KERNEL);
 		if (!fdmi)
@@ -807,6 +817,9 @@ static void fcoe_fdmi_info(struct fc_lport *lport, struct net_device *netdev)
 
 		rc = realdev->netdev_ops->ndo_fcoe_get_hbainfo(realdev,
 							       fdmi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rc) {
 			printk(KERN_INFO "fcoe: Failed to retrieve FDMI "
@@ -817,6 +830,7 @@ static void fcoe_fdmi_info(struct fc_lport *lport, struct net_device *netdev)
 		snprintf(fc_host_serial_number(lport->host),
 			 FC_SERIAL_NUMBER_SIZE,
 			 "%s",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			 fdmi.serial_number);
 		snprintf(fc_host_manufacturer(lport->host),
@@ -851,6 +865,8 @@ static void fcoe_fdmi_info(struct fc_lport *lport, struct net_device *netdev)
 		/* Enable FDMI lport states */
 		lport->fdmi_enabled = 1;
 =======
+=======
+>>>>>>> v3.18
 			 fdmi->serial_number);
 		snprintf(fc_host_manufacturer(lport->host),
 			 FC_SERIAL_NUMBER_SIZE,
@@ -884,6 +900,9 @@ static void fcoe_fdmi_info(struct fc_lport *lport, struct net_device *netdev)
 		/* Enable FDMI lport states */
 		lport->fdmi_enabled = 1;
 		kfree(fdmi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		lport->fdmi_enabled = 0;
@@ -1490,7 +1509,11 @@ static int fcoe_rcv(struct sk_buff *skb, struct net_device *netdev,
 	lport = ctlr->lp;
 	if (unlikely(!lport)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		FCOE_NETDEV_DBG(netdev, "Cannot find hba structure");
+=======
+		FCOE_NETDEV_DBG(netdev, "Cannot find hba structure\n");
+>>>>>>> v3.18
 =======
 		FCOE_NETDEV_DBG(netdev, "Cannot find hba structure\n");
 >>>>>>> v3.18
@@ -1500,8 +1523,13 @@ static int fcoe_rcv(struct sk_buff *skb, struct net_device *netdev,
 		goto err2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	FCOE_NETDEV_DBG(netdev, "skb_info: len:%d data_len:%d head:%p "
 			"data:%p tail:%p end:%p sum:%d dev:%s",
+=======
+	FCOE_NETDEV_DBG(netdev,
+			"skb_info: len:%d data_len:%d head:%p data:%p tail:%p end:%p sum:%d dev:%s\n",
+>>>>>>> v3.18
 =======
 	FCOE_NETDEV_DBG(netdev,
 			"skb_info: len:%d data_len:%d head:%p data:%p tail:%p end:%p sum:%d dev:%s\n",
@@ -1511,11 +1539,14 @@ static int fcoe_rcv(struct sk_buff *skb, struct net_device *netdev,
 			skb->csum, skb->dev ? skb->dev->name : "<NULL>");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eh = eth_hdr(skb);
 
 	if (is_fip_mode(ctlr) &&
 	    compare_ether_addr(eh->h_source, ctlr->dest_addr)) {
 =======
+=======
+>>>>>>> v3.18
 
 	skb = skb_share_check(skb, GFP_ATOMIC);
 
@@ -1526,6 +1557,9 @@ static int fcoe_rcv(struct sk_buff *skb, struct net_device *netdev,
 
 	if (is_fip_mode(ctlr) &&
 	    !ether_addr_equal(eh->h_source, ctlr->dest_addr)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		FCOE_NETDEV_DBG(netdev, "wrong source mac address:%pM\n",
 				eh->h_source);
@@ -1612,7 +1646,11 @@ static int fcoe_rcv(struct sk_buff *skb, struct net_device *netdev,
 	spin_unlock(&fps->fcoe_rx_list.lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return NET_RX_SUCCESS;
+>>>>>>> v3.18
 =======
 	return NET_RX_SUCCESS;
 >>>>>>> v3.18
@@ -1622,7 +1660,11 @@ err:
 err2:
 	kfree_skb(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -1;
+=======
+	return NET_RX_DROP;
+>>>>>>> v3.18
 =======
 	return NET_RX_DROP;
 >>>>>>> v3.18
@@ -1868,7 +1910,11 @@ static void fcoe_recv_frame(struct sk_buff *skb)
 	if (unlikely(!lport)) {
 		if (skb->destructor != fcoe_percpu_flush_done)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			FCOE_NETDEV_DBG(skb->dev, "NULL lport in skb");
+=======
+			FCOE_NETDEV_DBG(skb->dev, "NULL lport in skb\n");
+>>>>>>> v3.18
 =======
 			FCOE_NETDEV_DBG(skb->dev, "NULL lport in skb\n");
 >>>>>>> v3.18
@@ -1877,8 +1923,13 @@ static void fcoe_recv_frame(struct sk_buff *skb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	FCOE_NETDEV_DBG(skb->dev, "skb_info: len:%d data_len:%d "
 			"head:%p data:%p tail:%p end:%p sum:%d dev:%s",
+=======
+	FCOE_NETDEV_DBG(skb->dev,
+			"skb_info: len:%d data_len:%d head:%p data:%p tail:%p end:%p sum:%d dev:%s\n",
+>>>>>>> v3.18
 =======
 	FCOE_NETDEV_DBG(skb->dev,
 			"skb_info: len:%d data_len:%d head:%p data:%p tail:%p end:%p sum:%d dev:%s\n",
@@ -1954,7 +2005,11 @@ static int fcoe_percpu_receive_thread(void *arg)
 	skb_queue_head_init(&tmp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_user_nice(current, -20);
+=======
+	set_user_nice(current, MIN_NICE);
+>>>>>>> v3.18
 =======
 	set_user_nice(current, MIN_NICE);
 >>>>>>> v3.18
@@ -1970,7 +2025,10 @@ retry:
 			spin_unlock_bh(&p->fcoe_rx_list.lock);
 			schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			goto retry;
@@ -2078,7 +2136,11 @@ static int fcoe_device_notification(struct notifier_block *notifier,
 	struct fcoe_ctlr_device *cdev;
 	struct fc_lport *lport = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *netdev = ptr;
+=======
+	struct net_device *netdev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *netdev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -2726,6 +2788,11 @@ static int __init fcoe_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpu_notifier_register_begin();
+
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 
@@ -2735,17 +2802,23 @@ static int __init fcoe_init(void)
 
 	/* Initialize per CPU interrupt thread */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = register_hotcpu_notifier(&fcoe_cpu_notifier);
 	if (rc)
 		goto out_free;
 
 =======
+=======
+>>>>>>> v3.18
 	rc = __register_hotcpu_notifier(&fcoe_cpu_notifier);
 	if (rc)
 		goto out_free;
 
 	cpu_notifier_register_done();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Setup link change notification */
 	fcoe_dev_setup();
@@ -2762,6 +2835,12 @@ out_free:
 		fcoe_percpu_thread_destroy(cpu);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	cpu_notifier_register_done();
+
+>>>>>>> v3.18
 =======
 
 	cpu_notifier_register_done();
@@ -2800,7 +2879,11 @@ static void __exit fcoe_exit(void)
 	rtnl_unlock();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_hotcpu_notifier(&fcoe_cpu_notifier);
+=======
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 >>>>>>> v3.18
@@ -2809,11 +2892,17 @@ static void __exit fcoe_exit(void)
 		fcoe_percpu_thread_destroy(cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	__unregister_hotcpu_notifier(&fcoe_cpu_notifier);
 
 	cpu_notifier_register_done();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&fcoe_config_mutex);
 

@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -34,6 +37,7 @@
 #define __RTL8723E_PWRSEQ_H__
 
 #include "pwrseqcmd.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
 	Check document WM-20110607-Paul-RTL8188E_Power_Architecture-R02.vsd
@@ -328,6 +332,8 @@ extern struct wlan_pwr_cfg rtl8188e_leave_lps_flow
 #define Rtl8188E_NIC_LPS_ENTER_FLOW	rtl8188e_enter_lps_flow
 #define Rtl8188E_NIC_LPS_LEAVE_FLOW	rtl8188e_leave_lps_flow
 =======
+=======
+>>>>>>> v3.18
 /* Check document WM-20110607-Paul-RTL8188EE_Power_Architecture-R02.vsd
  *	There are 6 HW Power States:
  *	0: POFF--Power Off
@@ -608,6 +614,9 @@ extern struct wlan_pwr_cfg rtl8188ee_leave_lps_flow
 #define RTL8188EE_NIC_PDN_FLOW		rtl8188ee_hwpdn_flow
 #define RTL8188EE_NIC_LPS_ENTER_FLOW	rtl8188ee_enter_lps_flow
 #define RTL8188EE_NIC_LPS_LEAVE_FLOW	rtl8188ee_leave_lps_flow
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

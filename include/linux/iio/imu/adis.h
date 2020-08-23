@@ -158,7 +158,11 @@ int adis_single_conversion(struct iio_dev *indio_dev,
 	int *val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ADIS_VOLTAGE_CHAN(addr, si, chan, name, bits) { \
+=======
+#define ADIS_VOLTAGE_CHAN(addr, si, chan, name, info_all, bits) { \
+>>>>>>> v3.18
 =======
 #define ADIS_VOLTAGE_CHAN(addr, si, chan, name, info_all, bits) { \
 >>>>>>> v3.18
@@ -169,6 +173,10 @@ int adis_single_conversion(struct iio_dev *indio_dev,
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) | \
 		BIT(IIO_CHAN_INFO_SCALE), \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.info_mask_shared_by_all = info_all, \
+>>>>>>> v3.18
 =======
 	.info_mask_shared_by_all = info_all, \
 >>>>>>> v3.18
@@ -182,6 +190,7 @@ int adis_single_conversion(struct iio_dev *indio_dev,
 	}, \
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define ADIS_SUPPLY_CHAN(addr, si, bits) \
 	ADIS_VOLTAGE_CHAN(addr, si, 0, "supply", bits)
@@ -191,6 +200,8 @@ int adis_single_conversion(struct iio_dev *indio_dev,
 
 #define ADIS_TEMP_CHAN(addr, si, bits) { \
 =======
+=======
+>>>>>>> v3.18
 #define ADIS_SUPPLY_CHAN(addr, si, info_all, bits) \
 	ADIS_VOLTAGE_CHAN(addr, si, 0, "supply", info_all, bits)
 
@@ -198,6 +209,9 @@ int adis_single_conversion(struct iio_dev *indio_dev,
 	ADIS_VOLTAGE_CHAN(addr, si, 1, NULL, info_all, bits)
 
 #define ADIS_TEMP_CHAN(addr, si, info_all, bits) { \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.type = IIO_TEMP, \
 	.indexed = 1, \
@@ -206,6 +220,10 @@ int adis_single_conversion(struct iio_dev *indio_dev,
 		BIT(IIO_CHAN_INFO_SCALE) | \
 		BIT(IIO_CHAN_INFO_OFFSET), \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.info_mask_shared_by_all = info_all, \
+>>>>>>> v3.18
 =======
 	.info_mask_shared_by_all = info_all, \
 >>>>>>> v3.18
@@ -220,7 +238,11 @@ int adis_single_conversion(struct iio_dev *indio_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ADIS_MOD_CHAN(_type, mod, addr, si, info_sep, bits) { \
+=======
+#define ADIS_MOD_CHAN(_type, mod, addr, si, info_sep, info_all, bits) { \
+>>>>>>> v3.18
 =======
 #define ADIS_MOD_CHAN(_type, mod, addr, si, info_sep, info_all, bits) { \
 >>>>>>> v3.18
@@ -231,6 +253,10 @@ int adis_single_conversion(struct iio_dev *indio_dev,
 		 info_sep, \
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE), \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.info_mask_shared_by_all = info_all, \
+>>>>>>> v3.18
 =======
 	.info_mask_shared_by_all = info_all, \
 >>>>>>> v3.18
@@ -245,6 +271,7 @@ int adis_single_conversion(struct iio_dev *indio_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ADIS_ACCEL_CHAN(mod, addr, si, info_sep, bits) \
 	ADIS_MOD_CHAN(IIO_ACCEL, mod, addr, si, info_sep, bits)
 
@@ -257,6 +284,8 @@ int adis_single_conversion(struct iio_dev *indio_dev,
 #define ADIS_ROT_CHAN(mod, addr, si, info_sep, bits) \
 	ADIS_MOD_CHAN(IIO_ROT, mod, addr, si, info_sep, bits)
 =======
+=======
+>>>>>>> v3.18
 #define ADIS_ACCEL_CHAN(mod, addr, si, info_sep, info_all, bits) \
 	ADIS_MOD_CHAN(IIO_ACCEL, mod, addr, si, info_sep, info_all, bits)
 
@@ -268,6 +297,9 @@ int adis_single_conversion(struct iio_dev *indio_dev,
 
 #define ADIS_ROT_CHAN(mod, addr, si, info_sep, info_all, bits) \
 	ADIS_MOD_CHAN(IIO_ROT, mod, addr, si, info_sep, info_all, bits)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_IIO_ADIS_LIB_BUFFER

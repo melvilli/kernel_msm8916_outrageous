@@ -18,6 +18,10 @@
 #include <linux/phy.h>
 #include <linux/mdio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -50,7 +54,11 @@ struct tgec_mdio_controller {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Wait untill the MDIO bus is free
+=======
+ * Wait until the MDIO bus is free
+>>>>>>> v3.18
 =======
  * Wait until the MDIO bus is free
 >>>>>>> v3.18
@@ -170,7 +178,13 @@ static int xgmac_mdio_read(struct mii_bus *bus, int phy_id, int regnum)
 	/* Return all Fs if nothing was there */
 	if (in_be32(&regs->mdio_stat) & MDIO_STAT_RD_ER) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&bus->dev, "MDIO read error\n");
+=======
+		dev_err(&bus->dev,
+			"Error while reading PHY%d reg at %d.%hhu\n",
+			phy_id, dev_addr, regnum);
+>>>>>>> v3.18
 =======
 		dev_err(&bus->dev,
 			"Error while reading PHY%d reg at %d.%hhu\n",
@@ -242,7 +256,11 @@ static int xgmac_mdio_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, bus);
+=======
+	platform_set_drvdata(pdev, bus);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, bus);
 >>>>>>> v3.18
@@ -261,7 +279,11 @@ err_ioremap:
 static int xgmac_mdio_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mii_bus *bus = dev_get_drvdata(&pdev->dev);
+=======
+	struct mii_bus *bus = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct mii_bus *bus = platform_get_drvdata(pdev);
 >>>>>>> v3.18

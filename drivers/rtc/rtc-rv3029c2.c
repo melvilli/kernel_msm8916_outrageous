@@ -396,13 +396,19 @@ static int rv3029c2_probe(struct i2c_client *client,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	rc = rv3029c2_i2c_get_sr(client, buf);
 	if (rc < 0) {
 		dev_err(&client->dev, "reading status failed\n");
 		return rc;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtc = devm_rtc_device_register(&client->dev, client->name,
 					&rv3029c2_rtc_ops, THIS_MODULE);
@@ -412,6 +418,7 @@ static int rv3029c2_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, rtc);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = rv3029c2_i2c_get_sr(client, buf);
 	if (rc < 0) {
@@ -426,6 +433,8 @@ static int rv3029c2_remove(struct i2c_client *client)
 {
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -435,7 +444,10 @@ static struct i2c_driver rv3029c2_driver = {
 	},
 	.probe = rv3029c2_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = rv3029c2_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = rv3029c2_id,

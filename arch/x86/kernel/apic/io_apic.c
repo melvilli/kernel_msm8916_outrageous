@@ -32,6 +32,10 @@
 #include <linux/module.h>
 #include <linux/syscore_ops.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irqdomain.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqdomain.h>
 >>>>>>> v3.18
@@ -42,9 +46,12 @@
 #include <linux/jiffies.h>	/* time_after() */
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ACPI
 #include <acpi/acpi_bus.h>
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/bootmem.h>
@@ -73,7 +80,10 @@
 #define __apicdebuginit(type) static type __init
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	for_each_ioapic(idx)		\
 	for ((idx) = 0; (idx) < nr_ioapics; (idx)++)
 #define	for_each_ioapic_reverse(idx)	\
@@ -84,6 +94,9 @@
 	for_each_ioapic((idx))		\
 		for_each_pin((idx), (pin))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define for_each_irq_pin(entry, head) \
 	for (entry = head; entry; entry = entry->next)
@@ -97,7 +110,10 @@ int sis_apic_bug = -1;
 static DEFINE_RAW_SPINLOCK(ioapic_lock);
 static DEFINE_RAW_SPINLOCK(vector_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_MUTEX(ioapic_mutex);
 static unsigned int ioapic_dynirq_base;
 static int ioapic_initialized;
@@ -109,6 +125,9 @@ struct mp_pin_info {
 	int set;
 	u32 count;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct ioapic {
@@ -125,7 +144,13 @@ static struct ioapic {
 	/* IO APIC gsi routing info */
 	struct mp_ioapic_gsi  gsi_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECLARE_BITMAP(pin_programmed, MP_MAX_IOAPIC_PIN + 1);
+=======
+	struct ioapic_domain_cfg irqdomain_cfg;
+	struct irq_domain *irqdomain;
+	struct mp_pin_info *pin_info;
+>>>>>>> v3.18
 =======
 	struct ioapic_domain_cfg irqdomain_cfg;
 	struct irq_domain *irqdomain;
@@ -151,7 +176,10 @@ struct mp_ioapic_gsi *mp_ioapic_gsi_routing(int ioapic_idx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int mp_ioapic_pin_count(int ioapic)
 {
 	struct mp_ioapic_gsi *gsi_cfg = mp_ioapic_gsi_routing(ioapic);
@@ -187,6 +215,9 @@ static inline struct irq_domain *mp_ioapic_irqdomain(int ioapic)
 	return ioapics[ioapic].irqdomain;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int nr_ioapics;
 
@@ -200,9 +231,12 @@ struct mpc_intsrc mp_irqs[MAX_IRQ_SOURCES];
 int mp_irq_entries;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* GSI interrupts */
 static int nr_irqs_gsi = NR_IRQS_LEGACY;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_EISA
@@ -234,8 +268,12 @@ static int __init parse_noapic(char *str)
 early_param("noapic", parse_noapic);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int io_apic_setup_irq_pin(unsigned int irq, int node,
 				 struct io_apic_irq_attr *attr);
+=======
+static struct irq_cfg *alloc_irq_and_cfg_at(unsigned int at, int node);
+>>>>>>> v3.18
 =======
 static struct irq_cfg *alloc_irq_and_cfg_at(unsigned int at, int node);
 >>>>>>> v3.18
@@ -271,6 +309,7 @@ static struct irq_pin_list *alloc_irq_pin_list(int node)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* irq_cfg is indexed by the sum of all RTEs in all I/O APICs. */
 static struct irq_cfg irq_cfgx[NR_IRQS_LEGACY];
@@ -285,6 +324,8 @@ int __init arch_early_irq_init(void)
 
 	for (i = 0; i < nr_ioapics; i++) {
 =======
+=======
+>>>>>>> v3.18
 int __init arch_early_irq_init(void)
 {
 	struct irq_cfg *cfg;
@@ -294,6 +335,9 @@ int __init arch_early_irq_init(void)
 		io_apic_irqs = ~0UL;
 
 	for_each_ioapic(i) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ioapics[i].saved_registers =
 			kzalloc(sizeof(struct IO_APIC_route_entry) *
@@ -302,6 +346,7 @@ int __init arch_early_irq_init(void)
 			pr_err("IOAPIC %d: suspend/resume impossible!\n", i);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cfg = irq_cfgx;
 	count = ARRAY_SIZE(irq_cfgx);
@@ -323,6 +368,8 @@ int __init arch_early_irq_init(void)
 			cpumask_setall(cfg[i].domain);
 		}
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * For legacy IRQ's, start with assigning irq0 to irq15 to
 	 * IRQ0_VECTOR to IRQ15_VECTOR for all cpu's.
@@ -331,6 +378,9 @@ int __init arch_early_irq_init(void)
 		cfg = alloc_irq_and_cfg_at(i, node);
 		cfg->vector = IRQ0_VECTOR + i;
 		cpumask_setall(cfg->domain);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -338,7 +388,11 @@ int __init arch_early_irq_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct irq_cfg *irq_cfg(unsigned int irq)
+=======
+static inline struct irq_cfg *irq_cfg(unsigned int irq)
+>>>>>>> v3.18
 =======
 static inline struct irq_cfg *irq_cfg(unsigned int irq)
 >>>>>>> v3.18
@@ -384,7 +438,11 @@ static struct irq_cfg *alloc_irq_and_cfg_at(unsigned int at, int node)
 		if (res != -EEXIST)
 			return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cfg = irq_get_chip_data(at);
+=======
+		cfg = irq_cfg(at);
+>>>>>>> v3.18
 =======
 		cfg = irq_cfg(at);
 >>>>>>> v3.18
@@ -401,6 +459,7 @@ static struct irq_cfg *alloc_irq_and_cfg_at(unsigned int at, int node)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int alloc_irqs_from(unsigned int from, unsigned int count, int node)
 {
 	return irq_alloc_descs_from(from, count, node);
@@ -413,6 +472,8 @@ static void free_irq_at(unsigned int at, struct irq_cfg *cfg)
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct io_apic {
@@ -563,7 +624,10 @@ static int __add_pin_to_irq_node(struct irq_cfg *cfg, int node, int apic, int pi
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __remove_pin_from_irq(struct irq_cfg *cfg, int apic, int pin)
 {
 	struct irq_pin_list **last, *entry;
@@ -579,6 +643,9 @@ static void __remove_pin_from_irq(struct irq_cfg *cfg, int apic, int pin)
 		}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void add_pin_to_irq_node(struct irq_cfg *cfg, int node, int apic, int pin)
 {
@@ -783,9 +850,14 @@ static void clear_IO_APIC (void)
 	int apic, pin;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (apic = 0; apic < nr_ioapics; apic++)
 		for (pin = 0; pin < ioapics[apic].nr_registers; pin++)
 			clear_IO_APIC_pin(apic, pin);
+=======
+	for_each_ioapic_pin(apic, pin)
+		clear_IO_APIC_pin(apic, pin);
+>>>>>>> v3.18
 =======
 	for_each_ioapic_pin(apic, pin)
 		clear_IO_APIC_pin(apic, pin);
@@ -839,7 +911,11 @@ int save_ioapic_entries(void)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (apic = 0; apic < nr_ioapics; apic++) {
+=======
+	for_each_ioapic(apic) {
+>>>>>>> v3.18
 =======
 	for_each_ioapic(apic) {
 >>>>>>> v3.18
@@ -849,7 +925,11 @@ int save_ioapic_entries(void)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (pin = 0; pin < ioapics[apic].nr_registers; pin++)
+=======
+		for_each_pin(apic, pin)
+>>>>>>> v3.18
 =======
 		for_each_pin(apic, pin)
 >>>>>>> v3.18
@@ -868,17 +948,23 @@ void mask_ioapic_entries(void)
 	int apic, pin;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (apic = 0; apic < nr_ioapics; apic++) {
 		if (!ioapics[apic].saved_registers)
 			continue;
 
 		for (pin = 0; pin < ioapics[apic].nr_registers; pin++) {
 =======
+=======
+>>>>>>> v3.18
 	for_each_ioapic(apic) {
 		if (!ioapics[apic].saved_registers)
 			continue;
 
 		for_each_pin(apic, pin) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			struct IO_APIC_route_entry entry;
 
@@ -899,17 +985,23 @@ int restore_ioapic_entries(void)
 	int apic, pin;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (apic = 0; apic < nr_ioapics; apic++) {
 		if (!ioapics[apic].saved_registers)
 			continue;
 
 		for (pin = 0; pin < ioapics[apic].nr_registers; pin++)
 =======
+=======
+>>>>>>> v3.18
 	for_each_ioapic(apic) {
 		if (!ioapics[apic].saved_registers)
 			continue;
 
 		for_each_pin(apic, pin)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ioapic_write_entry(apic, pin,
 					   ioapics[apic].saved_registers[pin]);
@@ -970,7 +1062,11 @@ static int __init find_isa_irq_apic(int irq, int type)
 		int ioapic_idx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (ioapic_idx = 0; ioapic_idx < nr_ioapics; ioapic_idx++)
+=======
+		for_each_ioapic(ioapic_idx)
+>>>>>>> v3.18
 =======
 		for_each_ioapic(ioapic_idx)
 >>>>>>> v3.18
@@ -988,7 +1084,11 @@ static int __init find_isa_irq_apic(int irq, int type)
 static int EISA_ELCR(unsigned int irq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (irq < legacy_pic->nr_legacy_irqs) {
+=======
+	if (irq < nr_legacy_irqs()) {
+>>>>>>> v3.18
 =======
 	if (irq < nr_legacy_irqs()) {
 >>>>>>> v3.18
@@ -1132,6 +1232,7 @@ static int irq_trigger(int idx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pin_2_irq(int idx, int apic, int pin)
 {
 	int irq;
@@ -1156,6 +1257,8 @@ static int pin_2_irq(int idx, int apic, int pin)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 static int alloc_irq_from_domain(struct irq_domain *domain, u32 gsi, int pin)
 {
 	int irq = -1;
@@ -1256,6 +1359,9 @@ static int pin_2_irq(int idx, int ioapic, int pin, unsigned int flags)
 	if (mp_irqs[idx].dstirq != pin)
 		pr_err("broken BIOS or MPTABLE parser, ayiee!!\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_X86_32
 	/*
@@ -1268,16 +1374,22 @@ static int pin_2_irq(int idx, int ioapic, int pin, unsigned int flags)
 						"disabling PIRQ%d\n", pin-16);
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				irq = pirq_entries[pin-16];
 				apic_printk(APIC_VERBOSE, KERN_DEBUG
 						"using PIRQ%d -> IRQ %d\n",
 						pin-16, irq);
 =======
+=======
+>>>>>>> v3.18
 				int irq = pirq_entries[pin-16];
 				apic_printk(APIC_VERBOSE, KERN_DEBUG
 						"using PIRQ%d -> IRQ %d\n",
 						pin-16, irq);
 				return irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -1285,8 +1397,11 @@ static int pin_2_irq(int idx, int ioapic, int pin, unsigned int flags)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return irq;
 =======
+=======
+>>>>>>> v3.18
 	return  mp_map_pin_to_irq(gsi, idx, ioapic, pin, flags);
 }
 
@@ -1329,6 +1444,9 @@ void mp_unmap_irq(int irq)
 			irq_dispose_mapping(irq);
 	}
 	mutex_unlock(&ioapic_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1340,7 +1458,11 @@ int IO_APIC_get_PCI_irq_vector(int bus, int slot, int pin,
 				struct io_apic_irq_attr *irq_attr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ioapic_idx, i, best_guess = -1;
+=======
+	int irq, i, best_ioapic = -1, best_idx = -1;
+>>>>>>> v3.18
 =======
 	int irq, i, best_ioapic = -1, best_idx = -1;
 >>>>>>> v3.18
@@ -1353,6 +1475,7 @@ int IO_APIC_get_PCI_irq_vector(int bus, int slot, int pin,
 			    "PCI BIOS passed nonexistent PCI bus %d!\n", bus);
 		return -1;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < mp_irq_entries; i++) {
 		int lbus = mp_irqs[i].srcbus;
@@ -1393,6 +1516,8 @@ int IO_APIC_get_PCI_irq_vector(int bus, int slot, int pin,
 	}
 	return best_guess;
 =======
+=======
+>>>>>>> v3.18
 
 	for (i = 0; i < mp_irq_entries; i++) {
 		int lbus = mp_irqs[i].srcbus;
@@ -1443,6 +1568,9 @@ out:
 				     irq_trigger(best_idx),
 				     irq_polarity(best_idx));
 	return irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(IO_APIC_get_PCI_irq_vector);
@@ -1530,14 +1658,20 @@ next:
 			goto next;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for_each_cpu_and(new_cpu, tmp_mask, cpu_online_mask)
 			if (per_cpu(vector_irq, new_cpu)[vector] != -1)
 				goto next;
 =======
+=======
+>>>>>>> v3.18
 		for_each_cpu_and(new_cpu, tmp_mask, cpu_online_mask) {
 			if (per_cpu(vector_irq, new_cpu)[vector] > VECTOR_UNDEFINED)
 				goto next;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Found one! */
 		current_vector = vector;
@@ -1578,7 +1712,11 @@ static void __clear_irq_vector(int irq, struct irq_cfg *cfg)
 	vector = cfg->vector;
 	for_each_cpu_and(cpu, cfg->domain, cpu_online_mask)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		per_cpu(vector_irq, cpu)[vector] = -1;
+=======
+		per_cpu(vector_irq, cpu)[vector] = VECTOR_UNDEFINED;
+>>>>>>> v3.18
 =======
 		per_cpu(vector_irq, cpu)[vector] = VECTOR_UNDEFINED;
 >>>>>>> v3.18
@@ -1590,16 +1728,22 @@ static void __clear_irq_vector(int irq, struct irq_cfg *cfg)
 		return;
 	for_each_cpu_and(cpu, cfg->old_domain, cpu_online_mask) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (vector = FIRST_EXTERNAL_VECTOR; vector < NR_VECTORS;
 								vector++) {
 			if (per_cpu(vector_irq, cpu)[vector] != irq)
 				continue;
 			per_cpu(vector_irq, cpu)[vector] = -1;
 =======
+=======
+>>>>>>> v3.18
 		for (vector = FIRST_EXTERNAL_VECTOR; vector < NR_VECTORS; vector++) {
 			if (per_cpu(vector_irq, cpu)[vector] != irq)
 				continue;
 			per_cpu(vector_irq, cpu)[vector] = VECTOR_UNDEFINED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -1622,7 +1766,11 @@ void __setup_vector_irq(int cpu)
 	/* Mark the inuse vectors */
 	for_each_active_irq(irq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cfg = irq_get_chip_data(irq);
+=======
+		cfg = irq_cfg(irq);
+>>>>>>> v3.18
 =======
 		cfg = irq_cfg(irq);
 >>>>>>> v3.18
@@ -1638,7 +1786,11 @@ void __setup_vector_irq(int cpu)
 	for (vector = 0; vector < NR_VECTORS; ++vector) {
 		irq = per_cpu(vector_irq, cpu)[vector];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (irq < 0)
+=======
+		if (irq <= VECTOR_UNDEFINED)
+>>>>>>> v3.18
 =======
 		if (irq <= VECTOR_UNDEFINED)
 >>>>>>> v3.18
@@ -1647,7 +1799,11 @@ void __setup_vector_irq(int cpu)
 		cfg = irq_cfg(irq);
 		if (!cpumask_test_cpu(cpu, cfg->domain))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			per_cpu(vector_irq, cpu)[vector] = -1;
+=======
+			per_cpu(vector_irq, cpu)[vector] = VECTOR_UNDEFINED;
+>>>>>>> v3.18
 =======
 			per_cpu(vector_irq, cpu)[vector] = VECTOR_UNDEFINED;
 >>>>>>> v3.18
@@ -1663,6 +1819,7 @@ static inline int IO_APIC_irq_trigger(int irq)
 	int apic, idx, pin;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (apic = 0; apic < nr_ioapics; apic++) {
 		for (pin = 0; pin < ioapics[apic].nr_registers; pin++) {
 			idx = find_irq_entry(apic, pin, mp_INT);
@@ -1670,10 +1827,15 @@ static inline int IO_APIC_irq_trigger(int irq)
 				return irq_trigger(idx);
 		}
 =======
+=======
+>>>>>>> v3.18
 	for_each_ioapic_pin(apic, pin) {
 		idx = find_irq_entry(apic, pin, mp_INT);
 		if ((idx != -1) && (irq == pin_2_irq(idx, apic, pin, 0)))
 			return irq_trigger(idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	/*
@@ -1773,7 +1935,11 @@ static void setup_ioapic_irq(unsigned int irq, struct irq_cfg *cfg,
 
 	ioapic_register_intr(irq, cfg, attr->trigger);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (irq < legacy_pic->nr_legacy_irqs)
+=======
+	if (irq < nr_legacy_irqs())
+>>>>>>> v3.18
 =======
 	if (irq < nr_legacy_irqs())
 >>>>>>> v3.18
@@ -1782,6 +1948,7 @@ static void setup_ioapic_irq(unsigned int irq, struct irq_cfg *cfg,
 	ioapic_write_entry(attr->ioapic, attr->ioapic_pin, entry);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool __init io_apic_pin_not_connected(int idx, int ioapic_idx, int pin)
 {
@@ -1867,6 +2034,8 @@ void setup_IO_APIC_irq_extra(u32 gsi)
 
 	io_apic_setup_irq_pin_once(irq, node, &attr);
 =======
+=======
+>>>>>>> v3.18
 static void __init setup_IO_APIC_irqs(void)
 {
 	unsigned int ioapic, pin;
@@ -1884,6 +2053,9 @@ static void __init setup_IO_APIC_irqs(void)
 			pin_2_irq(idx, ioapic, pin,
 				  ioapic ? 0 : IOAPIC_MAP_ALLOC);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1983,12 +2155,18 @@ void intel_ir_io_apic_print_entries(unsigned int apic,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void ioapic_zap_locks(void)
 {
 	raw_spin_lock_init(&ioapic_lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __apicdebuginit(void) print_IO_APIC(int ioapic_idx)
 {
@@ -2056,7 +2234,11 @@ __apicdebuginit(void) print_IO_APICs(void)
 
 	printk(KERN_DEBUG "number of MP IRQ sources: %d.\n", mp_irq_entries);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (ioapic_idx = 0; ioapic_idx < nr_ioapics; ioapic_idx++)
+=======
+	for_each_ioapic(ioapic_idx)
+>>>>>>> v3.18
 =======
 	for_each_ioapic(ioapic_idx)
 >>>>>>> v3.18
@@ -2071,7 +2253,11 @@ __apicdebuginit(void) print_IO_APICs(void)
 	printk(KERN_INFO "testing the IO APIC.......................\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (ioapic_idx = 0; ioapic_idx < nr_ioapics; ioapic_idx++)
+=======
+	for_each_ioapic(ioapic_idx)
+>>>>>>> v3.18
 =======
 	for_each_ioapic(ioapic_idx)
 >>>>>>> v3.18
@@ -2086,7 +2272,11 @@ __apicdebuginit(void) print_IO_APICs(void)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cfg = irq_get_chip_data(irq);
+=======
+		cfg = irq_cfg(irq);
+>>>>>>> v3.18
 =======
 		cfg = irq_cfg(irq);
 >>>>>>> v3.18
@@ -2240,7 +2430,11 @@ __apicdebuginit(void) print_PIC(void)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!legacy_pic->nr_legacy_irqs)
+=======
+	if (!nr_legacy_irqs())
+>>>>>>> v3.18
 =======
 	if (!nr_legacy_irqs())
 >>>>>>> v3.18
@@ -2314,6 +2508,7 @@ void __init enable_IO_APIC(void)
 {
 	int i8259_apic, i8259_pin;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int apic;
 
 	if (!legacy_pic->nr_legacy_irqs)
@@ -2335,6 +2530,8 @@ void __init enable_IO_APIC(void)
 				goto found_i8259;
 			}
 =======
+=======
+>>>>>>> v3.18
 	int apic, pin;
 
 	if (!nr_legacy_irqs())
@@ -2351,6 +2548,9 @@ void __init enable_IO_APIC(void)
 			ioapic_i8259.apic = apic;
 			ioapic_i8259.pin  = pin;
 			goto found_i8259;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -2424,7 +2624,11 @@ void disable_IO_APIC(void)
 	clear_IO_APIC();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!legacy_pic->nr_legacy_irqs)
+=======
+	if (!nr_legacy_irqs())
+>>>>>>> v3.18
 =======
 	if (!nr_legacy_irqs())
 >>>>>>> v3.18
@@ -2459,7 +2663,11 @@ void __init setup_ioapic_ids_from_mpc_nocheck(void)
 	 * Set the IOAPIC ID to the value stored in the MPC table.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (ioapic_idx = 0; ioapic_idx < nr_ioapics; ioapic_idx++) {
+=======
+	for_each_ioapic(ioapic_idx) {
+>>>>>>> v3.18
 =======
 	for_each_ioapic(ioapic_idx) {
 >>>>>>> v3.18
@@ -2636,7 +2844,11 @@ static unsigned int startup_ioapic_irq(struct irq_data *data)
 
 	raw_spin_lock_irqsave(&ioapic_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (irq < legacy_pic->nr_legacy_irqs) {
+=======
+	if (irq < nr_legacy_irqs()) {
+>>>>>>> v3.18
 =======
 	if (irq < nr_legacy_irqs()) {
 >>>>>>> v3.18
@@ -2691,7 +2903,11 @@ void send_cleanup_vector(struct irq_cfg *cfg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void smp_irq_move_cleanup_interrupt(void)
+=======
+asmlinkage __visible void smp_irq_move_cleanup_interrupt(void)
+>>>>>>> v3.18
 =======
 asmlinkage __visible void smp_irq_move_cleanup_interrupt(void)
 >>>>>>> v3.18
@@ -2705,7 +2921,11 @@ asmlinkage __visible void smp_irq_move_cleanup_interrupt(void)
 	me = smp_processor_id();
 	for (vector = FIRST_EXTERNAL_VECTOR; vector < NR_VECTORS; vector++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned int irq;
+=======
+		int irq;
+>>>>>>> v3.18
 =======
 		int irq;
 >>>>>>> v3.18
@@ -2715,7 +2935,11 @@ asmlinkage __visible void smp_irq_move_cleanup_interrupt(void)
 		irq = __this_cpu_read(vector_irq[vector]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (irq == -1)
+=======
+		if (irq <= VECTOR_UNDEFINED)
+>>>>>>> v3.18
 =======
 		if (irq <= VECTOR_UNDEFINED)
 >>>>>>> v3.18
@@ -2754,7 +2978,11 @@ asmlinkage __visible void smp_irq_move_cleanup_interrupt(void)
 			goto unlock;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__this_cpu_write(vector_irq[vector], -1);
+=======
+		__this_cpu_write(vector_irq[vector], VECTOR_UNDEFINED);
+>>>>>>> v3.18
 =======
 		__this_cpu_write(vector_irq[vector], VECTOR_UNDEFINED);
 >>>>>>> v3.18
@@ -2786,7 +3014,11 @@ static void irq_complete_move(struct irq_cfg *cfg)
 void irq_force_complete_move(int irq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct irq_cfg *cfg = irq_get_chip_data(irq);
+=======
+	struct irq_cfg *cfg = irq_cfg(irq);
+>>>>>>> v3.18
 =======
 	struct irq_cfg *cfg = irq_cfg(irq);
 >>>>>>> v3.18
@@ -2834,7 +3066,11 @@ int __ioapic_set_affinity(struct irq_data *data, const struct cpumask *mask,
 
 	if (!config_enabled(CONFIG_SMP))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -1;
+=======
+		return -EPERM;
+>>>>>>> v3.18
 =======
 		return -EPERM;
 >>>>>>> v3.18
@@ -2869,7 +3105,11 @@ int native_ioapic_set_affinity(struct irq_data *data,
 
 	if (!config_enabled(CONFIG_SMP))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -1;
+=======
+		return -EPERM;
+>>>>>>> v3.18
 =======
 		return -EPERM;
 >>>>>>> v3.18
@@ -3052,6 +3292,10 @@ static struct irq_chip ioapic_chip __read_mostly = {
 	.irq_set_affinity	= native_ioapic_set_affinity,
 	.irq_retrigger		= ioapic_retrigger_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags			= IRQCHIP_SKIP_SET_WAKE,
+>>>>>>> v3.18
 =======
 	.flags			= IRQCHIP_SKIP_SET_WAKE,
 >>>>>>> v3.18
@@ -3062,6 +3306,7 @@ static inline void init_IO_APIC_traps(void)
 	struct irq_cfg *cfg;
 	unsigned int irq;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * NOTE! The local APIC isn't very good at handling
@@ -3080,6 +3325,10 @@ static inline void init_IO_APIC_traps(void)
 	for_each_active_irq(irq) {
 		cfg = irq_cfg(irq);
 >>>>>>> v3.18
+=======
+	for_each_active_irq(irq) {
+		cfg = irq_cfg(irq);
+>>>>>>> v3.18
 		if (IO_APIC_IRQ(irq) && cfg && !cfg->vector) {
 			/*
 			 * Hmm.. We don't have an entry for this,
@@ -3087,7 +3336,11 @@ static inline void init_IO_APIC_traps(void)
 			 * interrupt if we can..
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (irq < legacy_pic->nr_legacy_irqs)
+=======
+			if (irq < nr_legacy_irqs())
+>>>>>>> v3.18
 =======
 			if (irq < nr_legacy_irqs())
 >>>>>>> v3.18
@@ -3207,8 +3460,11 @@ static int __init disable_timer_pin_setup(char *arg)
 early_param("disable_timer_pin_1", disable_timer_pin_setup);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int timer_through_8259 __initdata;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -3222,7 +3478,11 @@ int timer_through_8259 __initdata;
 static inline void __init check_timer(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct irq_cfg *cfg = irq_get_chip_data(0);
+=======
+	struct irq_cfg *cfg = irq_cfg(0);
+>>>>>>> v3.18
 =======
 	struct irq_cfg *cfg = irq_cfg(0);
 >>>>>>> v3.18
@@ -3320,7 +3580,10 @@ static inline void __init check_timer(void)
 		if (timer_irq_works()) {
 			apic_printk(APIC_QUIET, KERN_INFO "....... works.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			timer_through_8259 = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			goto out;
@@ -3395,9 +3658,12 @@ out:
 #define PIC_IRQS	(1UL << PIC_CASCADE_IR)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init setup_IO_APIC(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static int mp_irqdomain_create(int ioapic)
 {
 	size_t size;
@@ -3436,22 +3702,31 @@ static int mp_irqdomain_create(int ioapic)
 void __init setup_IO_APIC(void)
 {
 	int ioapic;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * calling enable_IO_APIC() is moved to setup_local_APIC for BP
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	io_apic_irqs = legacy_pic->nr_legacy_irqs ? ~PIC_IRQS : ~0UL;
 
 	apic_printk(APIC_VERBOSE, "ENABLING IO-APIC IRQs\n");
 =======
+=======
+>>>>>>> v3.18
 	io_apic_irqs = nr_legacy_irqs() ? ~PIC_IRQS : ~0UL;
 
 	apic_printk(APIC_VERBOSE, "ENABLING IO-APIC IRQs\n");
 	for_each_ioapic(ioapic)
 		BUG_ON(mp_irqdomain_create(ioapic));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
          * Set up IO-APIC IRQ routing.
@@ -3462,13 +3737,19 @@ void __init setup_IO_APIC(void)
 	setup_IO_APIC_irqs();
 	init_IO_APIC_traps();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (legacy_pic->nr_legacy_irqs)
 		check_timer();
 =======
+=======
+>>>>>>> v3.18
 	if (nr_legacy_irqs())
 		check_timer();
 
 	ioapic_initialized = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3505,7 +3786,11 @@ static void ioapic_resume(void)
 	int ioapic_idx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (ioapic_idx = nr_ioapics - 1; ioapic_idx >= 0; ioapic_idx--)
+=======
+	for_each_ioapic_reverse(ioapic_idx)
+>>>>>>> v3.18
 =======
 	for_each_ioapic_reverse(ioapic_idx)
 >>>>>>> v3.18
@@ -3529,6 +3814,7 @@ static int __init ioapic_init_ops(void)
 device_initcall(ioapic_init_ops);
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Dynamic irq allocate and deallocation
  */
@@ -3623,6 +3909,8 @@ void destroy_irqs(unsigned int irq, unsigned int count)
 	for (i = 0; i < count; i++)
 		destroy_irq(irq + i);
 =======
+=======
+>>>>>>> v3.18
  * Dynamic irq allocate and deallocation. Should be replaced by irq domains!
  */
 int arch_setup_hwirq(unsigned int irq, int node)
@@ -3656,6 +3944,9 @@ void arch_teardown_hwirq(unsigned int irq)
 	__clear_irq_vector(irq, cfg);
 	raw_spin_unlock_irqrestore(&vector_lock, flags);
 	free_irq_cfg(irq, cfg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3725,15 +4016,21 @@ msi_set_affinity(struct irq_data *data, const struct cpumask *mask, bool force)
 	struct msi_msg msg;
 	unsigned int dest;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (__ioapic_set_affinity(data, mask, &dest))
 		return -1;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = __ioapic_set_affinity(data, mask, &dest);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	__get_cached_msi_msg(data->msi_desc, &msg);
@@ -3760,6 +4057,10 @@ static struct irq_chip msi_chip = {
 	.irq_set_affinity	= msi_set_affinity,
 	.irq_retrigger		= ioapic_retrigger_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags			= IRQCHIP_SKIP_SET_WAKE,
+>>>>>>> v3.18
 =======
 	.flags			= IRQCHIP_SKIP_SET_WAKE,
 >>>>>>> v3.18
@@ -3787,7 +4088,11 @@ int setup_msi_irq(struct pci_dev *dev, struct msi_desc *msidesc,
 		write_msi_msg(irq, &msg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_remapped_irq(irq, irq_get_chip_data(irq), chip);
+=======
+	setup_remapped_irq(irq, irq_cfg(irq), chip);
+>>>>>>> v3.18
 =======
 	setup_remapped_irq(irq, irq_cfg(irq), chip);
 >>>>>>> v3.18
@@ -3802,8 +4107,13 @@ int setup_msi_irq(struct pci_dev *dev, struct msi_desc *msidesc,
 int native_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int irq, irq_want;
 	struct msi_desc *msidesc;
+=======
+	struct msi_desc *msidesc;
+	unsigned int irq;
+>>>>>>> v3.18
 =======
 	struct msi_desc *msidesc;
 	unsigned int irq;
@@ -3815,6 +4125,7 @@ int native_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
 		return 1;
 
 	node = dev_to_node(&dev->dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	irq_want = nr_irqs_gsi;
 	list_for_each_entry(msidesc, &dev->msi_list, list) {
@@ -3834,6 +4145,8 @@ error:
 	destroy_irq(irq);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 	list_for_each_entry(msidesc, &dev->msi_list, list) {
 		irq = irq_alloc_hwirq(node);
@@ -3848,13 +4161,20 @@ error:
 
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void native_teardown_msi_irq(unsigned int irq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	destroy_irq(irq);
+=======
+	irq_free_hwirq(irq);
+>>>>>>> v3.18
 =======
 	irq_free_hwirq(irq);
 >>>>>>> v3.18
@@ -3869,15 +4189,21 @@ dmar_msi_set_affinity(struct irq_data *data, const struct cpumask *mask,
 	unsigned int dest, irq = data->irq;
 	struct msi_msg msg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (__ioapic_set_affinity(data, mask, &dest))
 		return -1;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = __ioapic_set_affinity(data, mask, &dest);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dmar_msi_read(irq, &msg);
@@ -3901,6 +4227,10 @@ static struct irq_chip dmar_msi_type = {
 	.irq_set_affinity	= dmar_msi_set_affinity,
 	.irq_retrigger		= ioapic_retrigger_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags			= IRQCHIP_SKIP_SET_WAKE,
+>>>>>>> v3.18
 =======
 	.flags			= IRQCHIP_SKIP_SET_WAKE,
 >>>>>>> v3.18
@@ -3930,15 +4260,21 @@ static int hpet_msi_set_affinity(struct irq_data *data,
 	struct msi_msg msg;
 	unsigned int dest;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (__ioapic_set_affinity(data, mask, &dest))
 		return -1;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = __ioapic_set_affinity(data, mask, &dest);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hpet_msi_read(data->handler_data, &msg);
@@ -3961,6 +4297,10 @@ static struct irq_chip hpet_msi_type = {
 	.irq_set_affinity = hpet_msi_set_affinity,
 	.irq_retrigger = ioapic_retrigger_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags = IRQCHIP_SKIP_SET_WAKE,
+>>>>>>> v3.18
 =======
 	.flags = IRQCHIP_SKIP_SET_WAKE,
 >>>>>>> v3.18
@@ -3979,7 +4319,11 @@ int default_setup_hpet_msi(unsigned int irq, unsigned int id)
 	hpet_msi_write(irq_get_handler_data(irq), &msg);
 	irq_set_status_flags(irq, IRQ_MOVE_PCNTXT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_remapped_irq(irq, irq_get_chip_data(irq), chip);
+=======
+	setup_remapped_irq(irq, irq_cfg(irq), chip);
+>>>>>>> v3.18
 =======
 	setup_remapped_irq(irq, irq_cfg(irq), chip);
 >>>>>>> v3.18
@@ -4015,15 +4359,21 @@ ht_set_affinity(struct irq_data *data, const struct cpumask *mask, bool force)
 	struct irq_cfg *cfg = data->chip_data;
 	unsigned int dest;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (__ioapic_set_affinity(data, mask, &dest))
 		return -1;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = __ioapic_set_affinity(data, mask, &dest);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	target_ht_irq(data->irq, dest, cfg->vector);
@@ -4038,6 +4388,10 @@ static struct irq_chip ht_irq_chip = {
 	.irq_set_affinity	= ht_set_affinity,
 	.irq_retrigger		= ioapic_retrigger_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags			= IRQCHIP_SKIP_SET_WAKE,
+>>>>>>> v3.18
 =======
 	.flags			= IRQCHIP_SKIP_SET_WAKE,
 >>>>>>> v3.18
@@ -4104,6 +4458,7 @@ io_apic_setup_irq_pin(unsigned int irq, int node, struct io_apic_irq_attr *attr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int io_apic_setup_irq_pin_once(unsigned int irq, int node,
 			       struct io_apic_irq_attr *attr)
 {
@@ -4124,6 +4479,8 @@ int io_apic_setup_irq_pin_once(unsigned int irq, int node,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int __init io_apic_get_redir_entries(int ioapic)
 {
 	union IO_APIC_reg_01	reg_01;
@@ -4141,6 +4498,7 @@ static int __init io_apic_get_redir_entries(int ioapic)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init probe_nr_irqs_gsi(void)
 {
 	int nr;
@@ -4156,6 +4514,8 @@ int get_nr_irqs_gsi(void)
 {
 	return nr_irqs_gsi;
 =======
+=======
+>>>>>>> v3.18
 unsigned int arch_dynirq_lower_bound(unsigned int from)
 {
 	/*
@@ -4163,6 +4523,9 @@ unsigned int arch_dynirq_lower_bound(unsigned int from)
 	 * gsi_top if ioapic_dynirq_base hasn't been initialized yet.
 	 */
 	return ioapic_initialized ? ioapic_dynirq_base : gsi_top;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4174,7 +4537,11 @@ int __init arch_probe_nr_irqs(void)
 		nr_irqs = NR_VECTORS * nr_cpu_ids;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nr = nr_irqs_gsi + 8 * nr_cpu_ids;
+=======
+	nr = (gsi_top + nr_legacy_irqs()) + 8 * nr_cpu_ids;
+>>>>>>> v3.18
 =======
 	nr = (gsi_top + nr_legacy_irqs()) + 8 * nr_cpu_ids;
 >>>>>>> v3.18
@@ -4183,7 +4550,11 @@ int __init arch_probe_nr_irqs(void)
 	 * for MSI and HT dyn irq
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nr += nr_irqs_gsi * 16;
+=======
+	nr += gsi_top * 16;
+>>>>>>> v3.18
 =======
 	nr += gsi_top * 16;
 >>>>>>> v3.18
@@ -4191,6 +4562,7 @@ int __init arch_probe_nr_irqs(void)
 	if (nr < nr_irqs)
 		nr_irqs = nr;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return NR_IRQS_LEGACY;
 }
@@ -4209,6 +4581,9 @@ int io_apic_set_pci_routing(struct device *dev, int irq,
 	node = dev ? dev_to_node(dev) : cpu_to_node(0);
 
 	return io_apic_setup_irq_pin_once(irq, node, irq_attr);
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -4306,9 +4681,14 @@ static u8 __init io_apic_unique_id(u8 id)
 
 	bitmap_zero(used, 256);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < nr_ioapics; i++) {
 		__set_bit(mpc_ioapic_id(i), used);
 	}
+=======
+	for_each_ioapic(i)
+		__set_bit(mpc_ioapic_id(i), used);
+>>>>>>> v3.18
 =======
 	for_each_ioapic(i)
 		__set_bit(mpc_ioapic_id(i), used);
@@ -4371,6 +4751,7 @@ void __init setup_ioapic_dest(void)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (ioapic = 0; ioapic < nr_ioapics; ioapic++)
 	for (pin = 0; pin < ioapics[ioapic].nr_registers; pin++) {
 		irq_entry = find_irq_entry(ioapic, pin, mp_INT);
@@ -4380,6 +4761,8 @@ void __init setup_ioapic_dest(void)
 
 		if ((ioapic > 0) && (irq > 16))
 =======
+=======
+>>>>>>> v3.18
 	for_each_ioapic_pin(ioapic, pin) {
 		irq_entry = find_irq_entry(ioapic, pin, mp_INT);
 		if (irq_entry == -1)
@@ -4387,6 +4770,9 @@ void __init setup_ioapic_dest(void)
 
 		irq = pin_2_irq(irq_entry, ioapic, pin, 0);
 		if (irq < 0 || !mp_init_irq_at_boot(ioapic, irq))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 
@@ -4411,7 +4797,11 @@ void __init setup_ioapic_dest(void)
 static struct resource *ioapic_resources;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct resource * __init ioapic_setup_resources(int nr_ioapics)
+=======
+static struct resource * __init ioapic_setup_resources(void)
+>>>>>>> v3.18
 =======
 static struct resource * __init ioapic_setup_resources(void)
 >>>>>>> v3.18
@@ -4419,6 +4809,7 @@ static struct resource * __init ioapic_setup_resources(void)
 	unsigned long n;
 	struct resource *res;
 	char *mem;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 
@@ -4428,6 +4819,8 @@ static struct resource * __init ioapic_setup_resources(void)
 	n = IOAPIC_RESOURCE_NAME_SIZE + sizeof(struct resource);
 	n *= nr_ioapics;
 =======
+=======
+>>>>>>> v3.18
 	int i, num = 0;
 
 	for_each_ioapic(i)
@@ -4437,11 +4830,15 @@ static struct resource * __init ioapic_setup_resources(void)
 
 	n = IOAPIC_RESOURCE_NAME_SIZE + sizeof(struct resource);
 	n *= num;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mem = alloc_bootmem(n);
 	res = (void *)mem;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mem += sizeof(struct resource) * nr_ioapics;
 
@@ -4451,6 +4848,8 @@ static struct resource * __init ioapic_setup_resources(void)
 		snprintf(mem, IOAPIC_RESOURCE_NAME_SIZE, "IOAPIC %u", i);
 		mem += IOAPIC_RESOURCE_NAME_SIZE;
 =======
+=======
+>>>>>>> v3.18
 	mem += sizeof(struct resource) * num;
 
 	num = 0;
@@ -4460,6 +4859,9 @@ static struct resource * __init ioapic_setup_resources(void)
 		snprintf(mem, IOAPIC_RESOURCE_NAME_SIZE, "IOAPIC %u", i);
 		mem += IOAPIC_RESOURCE_NAME_SIZE;
 		num++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4475,8 +4877,13 @@ void __init native_io_apic_init_mappings(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioapic_res = ioapic_setup_resources(nr_ioapics);
 	for (i = 0; i < nr_ioapics; i++) {
+=======
+	ioapic_res = ioapic_setup_resources();
+	for_each_ioapic(i) {
+>>>>>>> v3.18
 =======
 	ioapic_res = ioapic_setup_resources();
 	for_each_ioapic(i) {
@@ -4512,8 +4919,11 @@ fake_ioapic_page:
 		ioapic_res++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	probe_nr_irqs_gsi();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -4531,7 +4941,11 @@ void __init ioapic_insert_resources(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < nr_ioapics; i++) {
+=======
+	for_each_ioapic(i) {
+>>>>>>> v3.18
 =======
 	for_each_ioapic(i) {
 >>>>>>> v3.18
@@ -4543,7 +4957,11 @@ void __init ioapic_insert_resources(void)
 int mp_find_ioapic(u32 gsi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i = 0;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -4553,10 +4971,16 @@ int mp_find_ioapic(u32 gsi)
 
 	/* Find the IOAPIC that manages this GSI. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < nr_ioapics; i++) {
 		struct mp_ioapic_gsi *gsi_cfg = mp_ioapic_gsi_routing(i);
 		if ((gsi >= gsi_cfg->gsi_base)
 		    && (gsi <= gsi_cfg->gsi_end))
+=======
+	for_each_ioapic(i) {
+		struct mp_ioapic_gsi *gsi_cfg = mp_ioapic_gsi_routing(i);
+		if (gsi >= gsi_cfg->gsi_base && gsi <= gsi_cfg->gsi_end)
+>>>>>>> v3.18
 =======
 	for_each_ioapic(i) {
 		struct mp_ioapic_gsi *gsi_cfg = mp_ioapic_gsi_routing(i);
@@ -4574,7 +4998,11 @@ int mp_find_ioapic_pin(int ioapic, u32 gsi)
 	struct mp_ioapic_gsi *gsi_cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON(ioapic == -1))
+=======
+	if (WARN_ON(ioapic < 0))
+>>>>>>> v3.18
 =======
 	if (WARN_ON(ioapic < 0))
 >>>>>>> v3.18
@@ -4621,7 +5049,12 @@ static __init int bad_ioapic_register(int idx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init mp_register_ioapic(int id, u32 address, u32 gsi_base)
+=======
+void __init mp_register_ioapic(int id, u32 address, u32 gsi_base,
+			       struct ioapic_domain_cfg *cfg)
+>>>>>>> v3.18
 =======
 void __init mp_register_ioapic(int id, u32 address, u32 gsi_base,
 			       struct ioapic_domain_cfg *cfg)
@@ -4640,6 +5073,11 @@ void __init mp_register_ioapic(int id, u32 address, u32 gsi_base,
 	ioapics[idx].mp_config.flags = MPC_APIC_USABLE;
 	ioapics[idx].mp_config.apicaddr = address;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ioapics[idx].irqdomain = NULL;
+	ioapics[idx].irqdomain_cfg = *cfg;
+>>>>>>> v3.18
 =======
 	ioapics[idx].irqdomain = NULL;
 	ioapics[idx].irqdomain_cfg = *cfg;
@@ -4681,7 +5119,10 @@ void __init mp_register_ioapic(int id, u32 address, u32 gsi_base,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int mp_irqdomain_map(struct irq_domain *domain, unsigned int virq,
 		     irq_hw_number_t hwirq)
 {
@@ -4773,6 +5214,9 @@ bool mp_should_keep_irq(struct device *dev)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Enable IOAPIC early just for system timer */
 void __init pre_init_apic_IRQ0(void)

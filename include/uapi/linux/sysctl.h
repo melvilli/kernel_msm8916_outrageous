@@ -154,7 +154,10 @@ enum
 	KERN_NMI_WATCHDOG=75, /* int: enable/disable nmi watchdog */
 	KERN_PANIC_ON_NMI=76, /* int: whether we will panic on an unrecovered */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	KERN_COLD_BOOT = 78, /* int: identify if system cold booted */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -573,6 +576,10 @@ enum {
 	NET_IPV6_PROXY_NDP=23,
 	NET_IPV6_ACCEPT_SOURCE_ROUTE=25,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NET_IPV6_ACCEPT_RA_FROM_LOCAL=26,
+>>>>>>> v3.18
 =======
 	NET_IPV6_ACCEPT_RA_FROM_LOCAL=26,
 >>>>>>> v3.18

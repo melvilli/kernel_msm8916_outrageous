@@ -232,14 +232,20 @@ struct sec4_sg_entry {
 #define LDST_SRCDST_WORD_PKHA_N_SZ	(0x12 << LDST_SRCDST_SHIFT)
 #define LDST_SRCDST_WORD_PKHA_E_SZ	(0x13 << LDST_SRCDST_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LDST_SRCDST_WORD_DESCBUF	(0x40 << LDST_SRCDST_SHIFT)
 =======
+=======
+>>>>>>> v3.18
 #define LDST_SRCDST_WORD_CLASS_CTX	(0x20 << LDST_SRCDST_SHIFT)
 #define LDST_SRCDST_WORD_DESCBUF	(0x40 << LDST_SRCDST_SHIFT)
 #define LDST_SRCDST_WORD_DESCBUF_JOB	(0x41 << LDST_SRCDST_SHIFT)
 #define LDST_SRCDST_WORD_DESCBUF_SHARED	(0x42 << LDST_SRCDST_SHIFT)
 #define LDST_SRCDST_WORD_DESCBUF_JOB_WE	(0x45 << LDST_SRCDST_SHIFT)
 #define LDST_SRCDST_WORD_DESCBUF_SHARED_WE (0x46 << LDST_SRCDST_SHIFT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define LDST_SRCDST_WORD_INFO_FIFO	(0x7a << LDST_SRCDST_SHIFT)
 
@@ -326,7 +332,10 @@ struct sec4_sg_entry {
 #define FIFOST_CONT_SHIFT	23
 #define FIFOST_CONT_MASK	(1 << FIFOST_CONT_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FIFOST_CONT_MASK	(1 << FIFOST_CONT_SHIFT)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -379,6 +388,10 @@ struct sec4_sg_entry {
 #define FIFOLD_TYPE_LASTBOTH	(0x06 << FIFOLD_TYPE_SHIFT)
 #define FIFOLD_TYPE_LASTBOTHFL	(0x07 << FIFOLD_TYPE_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FIFOLD_TYPE_NOINFOFIFO	(0x0F << FIFOLD_TYPE_SHIFT)
+>>>>>>> v3.18
 =======
 #define FIFOLD_TYPE_NOINFOFIFO	(0x0F << FIFOLD_TYPE_SHIFT)
 >>>>>>> v3.18
@@ -1166,9 +1179,12 @@ struct sec4_sg_entry {
 /* randomizer AAI set */
 #define OP_ALG_AAI_RNG		(0x00 << OP_ALG_AAI_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OP_ALG_AAI_RNG_NOZERO	(0x10 << OP_ALG_AAI_SHIFT)
 #define OP_ALG_AAI_RNG_ODD	(0x20 << OP_ALG_AAI_SHIFT)
 =======
+=======
+>>>>>>> v3.18
 #define OP_ALG_AAI_RNG_NZB	(0x10 << OP_ALG_AAI_SHIFT)
 #define OP_ALG_AAI_RNG_OBP	(0x20 << OP_ALG_AAI_SHIFT)
 
@@ -1178,6 +1194,9 @@ struct sec4_sg_entry {
 #define OP_ALG_AAI_RNG4_PS	(0x40 << OP_ALG_AAI_SHIFT)
 #define OP_ALG_AAI_RNG4_AI	(0x80 << OP_ALG_AAI_SHIFT)
 #define OP_ALG_AAI_RNG4_SK	(0x100 << OP_ALG_AAI_SHIFT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* hmac/smac AAI set */
@@ -1201,12 +1220,15 @@ struct sec4_sg_entry {
 #define OP_ALG_AAI_EDGE		(0x20 << OP_ALG_AAI_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* RNG4 set */
 #define OP_ALG_RNG4_SHIFT	4
 #define OP_ALG_RNG4_MASK	(0x1f3 << OP_ALG_RNG4_SHIFT)
 
 #define OP_ALG_RNG4_SK		(0x100 << OP_ALG_RNG4_SHIFT)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define OP_ALG_AS_SHIFT		2
@@ -1326,15 +1348,21 @@ struct sec4_sg_entry {
 
 /* Appends to a previous pointer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SQOUT_PRE	0x00800000
 
 /* Restore sequence with pointer/length */
 #define SQOUT_RTO	0x00200000
 =======
+=======
+>>>>>>> v3.18
 #define SQOUT_PRE	SQIN_PRE
 
 /* Restore sequence with pointer/length */
 #define SQOUT_RTO	 SQIN_RTO
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Use extended length following pointer */
@@ -1398,6 +1426,10 @@ struct sec4_sg_entry {
 #define MOVE_DEST_CLASS1INFIFO	(0x08 << MOVE_DEST_SHIFT)
 #define MOVE_DEST_CLASS2INFIFO	(0x09 << MOVE_DEST_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MOVE_DEST_INFIFO_NOINFO (0x0a << MOVE_DEST_SHIFT)
+>>>>>>> v3.18
 =======
 #define MOVE_DEST_INFIFO_NOINFO (0x0a << MOVE_DEST_SHIFT)
 >>>>>>> v3.18
@@ -1454,6 +1486,10 @@ struct sec4_sg_entry {
 #define MATH_SRC0_REG3		(0x03 << MATH_SRC0_SHIFT)
 #define MATH_SRC0_IMM		(0x04 << MATH_SRC0_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MATH_SRC0_DPOVRD	(0x07 << MATH_SRC0_SHIFT)
+>>>>>>> v3.18
 =======
 #define MATH_SRC0_DPOVRD	(0x07 << MATH_SRC0_SHIFT)
 >>>>>>> v3.18
@@ -1472,6 +1508,10 @@ struct sec4_sg_entry {
 #define MATH_SRC1_REG3		(0x03 << MATH_SRC1_SHIFT)
 #define MATH_SRC1_IMM		(0x04 << MATH_SRC1_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MATH_SRC1_DPOVRD	(0x07 << MATH_SRC0_SHIFT)
+>>>>>>> v3.18
 =======
 #define MATH_SRC1_DPOVRD	(0x07 << MATH_SRC0_SHIFT)
 >>>>>>> v3.18
@@ -1651,7 +1691,10 @@ struct sec4_sg_entry {
 #define NFIFOENTRY_PLEN_MASK	(0xFF << NFIFOENTRY_PLEN_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Append Load Immediate Command */
 #define FD_CMD_APPEND_LOAD_IMMEDIATE			0x80000000
 
@@ -1661,5 +1704,8 @@ struct sec4_sg_entry {
 /* Frame Descriptor Command for Replacement Job Descriptor */
 #define FD_CMD_REPLACE_JOB_DESC				0x20000000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* DESC_H */

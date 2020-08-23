@@ -27,10 +27,13 @@
 
 	clocks {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ckih1 {
 			clock-frequency = <0>;
 		};
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		osc {
@@ -42,9 +45,15 @@
 &fec {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_fec_2>;
 	phy-mode = "mii";
 	phy-reset-gpios = <&gpio3 0 0>;
+=======
+	pinctrl-0 = <&pinctrl_fec>;
+	phy-mode = "mii";
+	phy-reset-gpios = <&gpio3 0 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_fec>;
 	phy-mode = "mii";
@@ -55,10 +64,13 @@
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 &uart3 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart3_2>;
 =======
+=======
+>>>>>>> v3.18
 &iomuxc {
 	imx51-apf51 {
 		pinctrl_fec: fecgrp {
@@ -103,6 +115,9 @@
 &uart3 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart3>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = "okay";
 };

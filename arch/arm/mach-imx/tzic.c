@@ -18,6 +18,10 @@
 #include <linux/irqdomain.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -130,7 +134,11 @@ static __init void tzic_init_gc(int idx, unsigned int irq_start)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void __exception_irq_entry tzic_handle_irq(struct pt_regs *regs)
+=======
+static void __exception_irq_entry tzic_handle_irq(struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 static void __exception_irq_entry tzic_handle_irq(struct pt_regs *regs)
 >>>>>>> v3.18
@@ -149,8 +157,12 @@ static void __exception_irq_entry tzic_handle_irq(struct pt_regs *regs)
 				handled = 1;
 				irqofs = fls(stat) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				handle_IRQ(irq_find_mapping(domain,
 						irqofs + i * 32), regs);
+=======
+				handle_domain_irq(domain, irqofs + i * 32, regs);
+>>>>>>> v3.18
 =======
 				handle_domain_irq(domain, irqofs + i * 32, regs);
 >>>>>>> v3.18
@@ -166,7 +178,11 @@ static void __exception_irq_entry tzic_handle_irq(struct pt_regs *regs)
  * to the kernel for each interrupt source.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init tzic_init_irq(void __iomem *irqbase)
+=======
+void __init tzic_init_irq(void)
+>>>>>>> v3.18
 =======
 void __init tzic_init_irq(void)
 >>>>>>> v3.18
@@ -176,12 +192,18 @@ void __init tzic_init_irq(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tzic_base = irqbase;
 =======
+=======
+>>>>>>> v3.18
 	np = of_find_compatible_node(NULL, NULL, "fsl,tzic");
 	tzic_base = of_iomap(np, 0);
 	WARN_ON(!tzic_base);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* put the TZIC into the reset value with
 	 * all interrupts disabled
@@ -205,7 +227,10 @@ void __init tzic_init_irq(void)
 	WARN_ON(irq_base < 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np = of_find_compatible_node(NULL, NULL, "fsl,tzic");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	domain = irq_domain_add_legacy(np, TZIC_NUM_IRQS, irq_base, 0,
@@ -216,6 +241,11 @@ void __init tzic_init_irq(void)
 		tzic_init_gc(i, irq_base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	set_handle_irq(tzic_handle_irq);
+
+>>>>>>> v3.18
 =======
 	set_handle_irq(tzic_handle_irq);
 

@@ -16,6 +16,11 @@
 
 #include <linux/mpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <keys/asymmetric-type.h>
+#include <crypto/hash_info.h>
+>>>>>>> v3.18
 =======
 #include <keys/asymmetric-type.h>
 #include <crypto/hash_info.h>
@@ -27,6 +32,7 @@ enum pkey_algo {
 	PKEY_ALGO__LAST
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern const char *const pkey_algo[PKEY_ALGO__LAST];
 
@@ -44,11 +50,16 @@ enum pkey_hash_algo {
 
 extern const char *const pkey_hash_algo[PKEY_HASH__LAST];
 =======
+=======
+>>>>>>> v3.18
 extern const char *const pkey_algo_name[PKEY_ALGO__LAST];
 extern const struct public_key_algorithm *pkey_algo[PKEY_ALGO__LAST];
 
 /* asymmetric key implementation supports only up to SHA224 */
 #define PKEY_HASH__LAST		(HASH_ALGO_SHA224 + 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum pkey_id_type {
@@ -58,7 +69,11 @@ enum pkey_id_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const char *const pkey_id_type[PKEY_ID_TYPE__LAST];
+=======
+extern const char *const pkey_id_type_name[PKEY_ID_TYPE__LAST];
+>>>>>>> v3.18
 =======
 extern const char *const pkey_id_type_name[PKEY_ID_TYPE__LAST];
 >>>>>>> v3.18
@@ -77,6 +92,10 @@ struct public_key {
 #define PKEY_CAN_SIGN		0x04
 #define PKEY_CAN_VERIFY		0x08
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum pkey_algo pkey_algo : 8;
+>>>>>>> v3.18
 =======
 	enum pkey_algo pkey_algo : 8;
 >>>>>>> v3.18
@@ -110,7 +129,12 @@ struct public_key_signature {
 	u8 digest_size;			/* Number of bytes in digest */
 	u8 nr_mpi;			/* Occupancy of mpi[] */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum pkey_hash_algo pkey_hash_algo : 8;
+=======
+	enum pkey_algo pkey_algo : 8;
+	enum hash_algo pkey_hash_algo : 8;
+>>>>>>> v3.18
 =======
 	enum pkey_algo pkey_algo : 8;
 	enum hash_algo pkey_hash_algo : 8;
@@ -132,11 +156,17 @@ extern int verify_signature(const struct key *key,
 			    const struct public_key_signature *sig);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct asymmetric_key_id;
 extern struct key *x509_request_asymmetric_key(struct key *keyring,
 					       const struct asymmetric_key_id *kid,
 					       bool partial);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_PUBLIC_KEY_H */

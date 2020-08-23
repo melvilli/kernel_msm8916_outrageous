@@ -319,7 +319,11 @@ void rtl92de_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 		u8 e_aci = *val;
 		rtl92d_dm_init_edca_turbo(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rtlpci->acm_method != eAcmWay2_SW)
+=======
+		if (rtlpci->acm_method != EACMWAY2_SW)
+>>>>>>> v3.18
 =======
 		if (rtlpci->acm_method != EACMWAY2_SW)
 >>>>>>> v3.18
@@ -990,9 +994,15 @@ int rtl92de_hw_init(struct ieee80211_hw *hw)
 	rtl_set_bbreg(hw, RFPGA0_ANALOGPARAMETER4, 0x00f00000, 0);
 	rtlphy->rfreg_chnlval[0] = rtl_get_rfreg(hw, (enum radio_path)0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			RF_CHNLBW, BRFREGOFFSETMASK);
 	rtlphy->rfreg_chnlval[1] = rtl_get_rfreg(hw, (enum radio_path)1,
 			RF_CHNLBW, BRFREGOFFSETMASK);
+=======
+			RF_CHNLBW, RFREG_OFFSET_MASK);
+	rtlphy->rfreg_chnlval[1] = rtl_get_rfreg(hw, (enum radio_path)1,
+			RF_CHNLBW, RFREG_OFFSET_MASK);
+>>>>>>> v3.18
 =======
 			RF_CHNLBW, RFREG_OFFSET_MASK);
 	rtlphy->rfreg_chnlval[1] = rtl_get_rfreg(hw, (enum radio_path)1,
@@ -1046,7 +1056,11 @@ int rtl92de_hw_init(struct ieee80211_hw *hw)
 				tmp_rega = rtl_get_rfreg(hw,
 						  (enum radio_path)RF90_PATH_A,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  0x2a, BMASKDWORD);
+=======
+						  0x2a, MASKDWORD);
+>>>>>>> v3.18
 =======
 						  0x2a, MASKDWORD);
 >>>>>>> v3.18
@@ -1143,7 +1157,11 @@ static int _rtl92de_set_media_status(struct ieee80211_hw *hw,
 	rtl_write_byte(rtlpriv, REG_CR + 2, bt_msr);
 	rtlpriv->cfg->ops->led_control(hw, ledaction);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((bt_msr & 0xfc) == MSR_AP)
+=======
+	if ((bt_msr & MSR_MASK) == MSR_AP)
+>>>>>>> v3.18
 =======
 	if ((bt_msr & MSR_MASK) == MSR_AP)
 >>>>>>> v3.18
@@ -1157,12 +1175,15 @@ void rtl92de_set_check_bssid(struct ieee80211_hw *hw, bool check_bssid)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
 	u32 reg_rcr = rtlpci->receive_config;
 
 	if (rtlpriv->psc.rfpwr_state != ERFON)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	u32 reg_rcr;
 
 	if (rtlpriv->psc.rfpwr_state != ERFON)
@@ -1170,6 +1191,9 @@ void rtl92de_set_check_bssid(struct ieee80211_hw *hw, bool check_bssid)
 
 	rtlpriv->cfg->ops->get_hw_reg(hw, HW_VAR_RCR, (u8 *)(&reg_rcr));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (check_bssid) {
 		reg_rcr |= (RCR_CBSSID_DATA | RCR_CBSSID_BCN);
@@ -1223,6 +1247,7 @@ void rtl92d_linked_set_reg(struct ieee80211_hw *hw)
 void rtl92de_set_qos(struct ieee80211_hw *hw, int aci)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	rtl92d_dm_init_edca_turbo(hw);
 	return;
@@ -1242,6 +1267,9 @@ void rtl92de_set_qos(struct ieee80211_hw *hw, int aci)
 		RT_ASSERT(false, "invalid aci: %d !\n", aci);
 		break;
 	}
+=======
+	rtl92d_dm_init_edca_turbo(hw);
+>>>>>>> v3.18
 =======
 	rtl92d_dm_init_edca_turbo(hw);
 >>>>>>> v3.18
@@ -1383,7 +1411,11 @@ void rtl92de_card_disable(struct ieee80211_hw *hw)
 	/* 0x88c[23:20] = 0xf. */
 	rtl_set_bbreg(hw, RFPGA0_ANALOGPARAMETER4, 0x00f00000, 0xf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl_set_rfreg(hw, RF90_PATH_A, 0x00, BRFREGOFFSETMASK, 0x00);
+=======
+	rtl_set_rfreg(hw, RF90_PATH_A, 0x00, RFREG_OFFSET_MASK, 0x00);
+>>>>>>> v3.18
 =======
 	rtl_set_rfreg(hw, RF90_PATH_A, 0x00, RFREG_OFFSET_MASK, 0x00);
 >>>>>>> v3.18
@@ -1393,7 +1425,11 @@ void rtl92de_card_disable(struct ieee80211_hw *hw)
 
 	/* Close antenna 0,0xc04,0xd04 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl_set_bbreg(hw, ROFDM0_TRXPATHENABLE, BMASKBYTE0, 0);
+=======
+	rtl_set_bbreg(hw, ROFDM0_TRXPATHENABLE, MASKBYTE0, 0);
+>>>>>>> v3.18
 =======
 	rtl_set_bbreg(hw, ROFDM0_TRXPATHENABLE, MASKBYTE0, 0);
 >>>>>>> v3.18

@@ -12,7 +12,13 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "armada-xp-mv78260.dtsi"
+=======
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+#include "armada-xp-mv78260.dtsi"
+>>>>>>> v3.18
 =======
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
@@ -29,6 +35,7 @@
 
 	memory {
 		device_type = "memory";
+<<<<<<< HEAD
 <<<<<<< HEAD
 		reg = <0 0x00000000 0 0xC0000000>; /* 3 GB */
 	};
@@ -50,6 +57,8 @@
 			serial@12100 {
 				clock-frequency = <250000000>;
 =======
+=======
+>>>>>>> v3.18
 		reg = <0 0x00000000 0 0x40000000>; /* 1 GB soldered on */
 	};
 
@@ -100,6 +109,9 @@
 				status = "okay";
 			};
 			serial@12100 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "okay";
 			};
@@ -117,7 +129,11 @@
 				red_led {
 					label = "red_led";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					gpios = <&gpio1 17 1>;
+=======
+					gpios = <&gpio1 17 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 					gpios = <&gpio1 17 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -127,7 +143,11 @@
 				yellow_led {
 					label = "yellow_led";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					gpios = <&gpio1 19 1>;
+=======
+					gpios = <&gpio1 19 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 					gpios = <&gpio1 19 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -137,9 +157,14 @@
 				green_led {
 					label = "green_led";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					gpios = <&gpio1 21 1>;
 					default-state = "off";
 					linux,default-trigger = "heartbeat";
+=======
+					gpios = <&gpio1 21 GPIO_ACTIVE_LOW>;
+					default-state = "keep";
+>>>>>>> v3.18
 =======
 					gpios = <&gpio1 21 GPIO_ACTIVE_LOW>;
 					default-state = "keep";
@@ -155,8 +180,13 @@
 				button@1 {
 					label = "Init Button";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					linux,code = <116>;
 					gpios = <&gpio1 28 0>;
+=======
+					linux,code = <KEY_POWER>;
+					gpios = <&gpio1 28 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 					linux,code = <KEY_POWER>;
 					gpios = <&gpio1 28 GPIO_ACTIVE_HIGH>;
@@ -220,6 +250,7 @@
 				status = "okay";
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 			usb@50000 {
 				status = "okay";
 			};
@@ -264,6 +295,8 @@
 					status = "okay";
 				};
 =======
+=======
+>>>>>>> v3.18
 
 			/* Front side USB 0 */
 			usb@50000 {
@@ -273,6 +306,9 @@
 			/* Front side USB 1 */
 			usb@51000 {
 				status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 		};

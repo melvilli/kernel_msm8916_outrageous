@@ -9,7 +9,10 @@ Required SoC Specific Properties:
     - samsung,s3c2443-spi: for s3c2443, s3c2416 and s3c2450 platforms
     - samsung,s3c6410-spi: for s3c6410 platforms
 <<<<<<< HEAD
+<<<<<<< HEAD
     - samsung,s5p6440-spi: for s5p6440 and s5p6450 platforms
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     - samsung,s5pv210-spi: for s5pv210 and s5pc110 platforms
@@ -22,6 +25,7 @@ Required SoC Specific Properties:
   depends on the interrupt controller.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 [PRELIMINARY: the dma channel allocation will change once there are
 official DMA bindings]
 
@@ -31,11 +35,16 @@ official DMA bindings]
 - rx-dma-channel: The dma channel specifier for rx operations. The format of
   the dma specifier depends on the dma controller.
 =======
+=======
+>>>>>>> v3.18
 - dmas : Two or more DMA channel specifiers following the convention outlined
   in bindings/dma/dma.txt
 
 - dma-names: Names for the dma channels. There must be at least one channel
   named "tx" for transmit and named "rx" for receive.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Required Board Specific Properties:
@@ -54,6 +63,11 @@ Optional Board Specific Properties:
   not specified, the default number of chip select lines is set to 1.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- cs-gpios: should specify GPIOs used for chipselects (see spi-bus.txt)
+
+>>>>>>> v3.18
 =======
 - cs-gpios: should specify GPIOs used for chipselects (see spi-bus.txt)
 
@@ -64,10 +78,13 @@ SPI Controller specific data in SPI slave nodes:
   by the spi controller.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   - cs-gpio: A gpio specifier that specifies the gpio line used as
     the slave select line by the spi controller. The format of the gpio
     specifier depends on the gpio controller.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
   - samsung,spi-feedback-delay: The sampling phase shift to be applied on the
@@ -94,14 +111,20 @@ Example:
 		reg = <0x12d20000 0x100>;
 		interrupts = <0 66 0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tx-dma-channel = <&pdma0 5>;
 		rx-dma-channel = <&pdma0 4>;
 =======
+=======
+>>>>>>> v3.18
 		dmas = <&pdma0 5
 			&pdma0 4>;
 		dma-names = "tx", "rx";
 		#address-cells = <1>;
 		#size-cells = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -113,6 +136,10 @@ Example:
 		pinctrl-names = "default";
 		pinctrl-0 = <&spi0_bus>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		cs-gpios = <&gpa2 5 0>;
+>>>>>>> v3.18
 =======
 		cs-gpios = <&gpa2 5 0>;
 >>>>>>> v3.18
@@ -126,7 +153,10 @@ Example:
 
 			controller-data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cs-gpio = <&gpa2 5 1 0 3>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				samsung,spi-feedback-delay = <0>;

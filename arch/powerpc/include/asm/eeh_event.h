@@ -32,7 +32,13 @@ struct eeh_event {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int eeh_send_failure_event(struct eeh_pe *pe);
+=======
+int eeh_event_init(void);
+int eeh_send_failure_event(struct eeh_pe *pe);
+void eeh_remove_event(struct eeh_pe *pe, bool force);
+>>>>>>> v3.18
 =======
 int eeh_event_init(void);
 int eeh_send_failure_event(struct eeh_pe *pe);

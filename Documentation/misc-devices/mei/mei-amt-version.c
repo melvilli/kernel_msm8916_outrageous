@@ -116,8 +116,11 @@ static bool mei_init(struct mei *me, const uuid_le *guid,
 	struct mei_connect_client_data data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mei_deinit(me);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	me->verbose = verbose;

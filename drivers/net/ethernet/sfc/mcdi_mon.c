@@ -1,7 +1,12 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2011 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2011-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2011-2013 Solarflare Communications Inc.
@@ -27,8 +32,11 @@ enum efx_hwmon_type {
 	EFX_HWMON_TEMP,         /* temperature */
 	EFX_HWMON_COOL,         /* cooling device, probably a heatsink */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EFX_HWMON_IN            /* input voltage */
 =======
+=======
+>>>>>>> v3.18
 	EFX_HWMON_IN,		/* voltage */
 	EFX_HWMON_CURR,		/* current */
 	EFX_HWMON_POWER,	/* power */
@@ -41,6 +49,9 @@ static const char *const efx_hwmon_unit[EFX_HWMON_TYPES_COUNT] = {
 	[EFX_HWMON_IN]    = " mV",
 	[EFX_HWMON_CURR]  = " mA",
 	[EFX_HWMON_POWER] = " W",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -48,6 +59,7 @@ static const struct {
 	const char *label;
 	enum efx_hwmon_type hwmon_type;
 	int port;
+<<<<<<< HEAD
 <<<<<<< HEAD
 } efx_mcdi_sensor_type[MC_CMD_SENSOR_ENTRY_MAXNUM] = {
 #define SENSOR(name, label, hwmon_type, port)			\
@@ -68,6 +80,8 @@ static const struct {
 	SENSOR(IN_1V2A,		   "1.2V analogue supply", EFX_HWMON_IN,   -1),
 	SENSOR(IN_VREF,		   "ref. voltage",	   EFX_HWMON_IN,   -1),
 =======
+=======
+>>>>>>> v3.18
 } efx_mcdi_sensor_type[] = {
 #define SENSOR(name, label, hwmon_type, port)				\
 	[MC_CMD_SENSOR_##name] = { label, EFX_HWMON_ ## hwmon_type, port }
@@ -121,6 +135,9 @@ static const struct {
 	SENSOR(VDD08D_VSS08D_CSR,	"0.9V die (int. ADC)",	    IN,    -1),
 	SENSOR(VDD08D_VSS08D_CSR_EXTADC, "0.9V die (ext. ADC)",	    IN,    -1),
 	SENSOR(HOTPOINT_TEMP,  "Controller board temp. (hotpoint)", TEMP,  -1),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef SENSOR
 };
@@ -131,6 +148,10 @@ static const char *const sensor_status_names[] = {
 	[MC_CMD_SENSOR_STATE_FATAL] = "Fatal",
 	[MC_CMD_SENSOR_STATE_BROKEN] = "Device failure",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[MC_CMD_SENSOR_STATE_NO_READING] = "No reading",
+>>>>>>> v3.18
 =======
 	[MC_CMD_SENSOR_STATE_NO_READING] = "No reading",
 >>>>>>> v3.18
@@ -140,7 +161,12 @@ void efx_mcdi_sensor_event(struct efx_nic *efx, efx_qword_t *ev)
 {
 	unsigned int type, state, value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *name = NULL, *state_txt;
+=======
+	enum efx_hwmon_type hwmon_type = EFX_HWMON_UNKNOWN;
+	const char *name = NULL, *state_txt, *unit;
+>>>>>>> v3.18
 =======
 	enum efx_hwmon_type hwmon_type = EFX_HWMON_UNKNOWN;
 	const char *name = NULL, *state_txt, *unit;
@@ -153,24 +179,33 @@ void efx_mcdi_sensor_event(struct efx_nic *efx, efx_qword_t *ev)
 	/* Deal gracefully with the board having more drivers than we
 	 * know about, but do not expect new sensor states. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (type < ARRAY_SIZE(efx_mcdi_sensor_type))
 		name = efx_mcdi_sensor_type[type].label;
 =======
+=======
+>>>>>>> v3.18
 	if (type < ARRAY_SIZE(efx_mcdi_sensor_type)) {
 		name = efx_mcdi_sensor_type[type].label;
 		hwmon_type = efx_mcdi_sensor_type[type].hwmon_type;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!name)
 		name = "No sensor name available";
 	EFX_BUG_ON_PARANOID(state >= ARRAY_SIZE(sensor_status_names));
 	state_txt = sensor_status_names[state];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	netif_err(efx, hw, efx->net_dev,
 		  "Sensor %d (%s) reports condition '%s' for raw value %d\n",
 		  type, name, state_txt, value);
 =======
+=======
+>>>>>>> v3.18
 	EFX_BUG_ON_PARANOID(hwmon_type >= EFX_HWMON_TYPES_COUNT);
 	unit = efx_hwmon_unit[hwmon_type];
 	if (!unit)
@@ -179,6 +214,9 @@ void efx_mcdi_sensor_event(struct efx_nic *efx, efx_qword_t *ev)
 	netif_err(efx, hw, efx->net_dev,
 		  "Sensor %d (%s) reports condition '%s' for value %d%s\n",
 		  type, name, state_txt, value, unit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -189,6 +227,10 @@ struct efx_mcdi_mon_attribute {
 	unsigned int index;
 	unsigned int type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum efx_hwmon_type hwmon_type;
+>>>>>>> v3.18
 =======
 	enum efx_hwmon_type hwmon_type;
 >>>>>>> v3.18
@@ -200,6 +242,7 @@ static int efx_mcdi_mon_update(struct efx_nic *efx)
 {
 	struct efx_mcdi_mon *hwmon = efx_mcdi_mon(efx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 inbuf[MC_CMD_READ_SENSORS_IN_LEN];
 	int rc;
 
@@ -208,12 +251,17 @@ static int efx_mcdi_mon_update(struct efx_nic *efx)
 	MCDI_SET_DWORD(inbuf, READ_SENSORS_IN_DMA_ADDR_HI,
 		       (u64)hwmon->dma_buf.dma_addr >> 32);
 =======
+=======
+>>>>>>> v3.18
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_READ_SENSORS_EXT_IN_LEN);
 	int rc;
 
 	MCDI_SET_QWORD(inbuf, READ_SENSORS_EXT_IN_DMA_ADDR,
 		       hwmon->dma_buf.dma_addr);
 	MCDI_SET_DWORD(inbuf, READ_SENSORS_EXT_IN_LENGTH, hwmon->dma_buf.len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rc = efx_mcdi_rpc(efx, MC_CMD_READ_SENSORS,
@@ -223,6 +271,7 @@ static int efx_mcdi_mon_update(struct efx_nic *efx)
 	return rc;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t efx_mcdi_mon_show_name(struct device *dev,
 				      struct device_attribute *attr,
@@ -236,10 +285,15 @@ static int efx_mcdi_mon_get_entry(struct device *dev, unsigned int index,
 {
 	struct efx_nic *efx = dev_get_drvdata(dev);
 =======
+=======
+>>>>>>> v3.18
 static int efx_mcdi_mon_get_entry(struct device *dev, unsigned int index,
 				  efx_dword_t *entry)
 {
 	struct efx_nic *efx = dev_get_drvdata(dev->parent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct efx_mcdi_mon *hwmon = efx_mcdi_mon(efx);
 	int rc;
@@ -270,7 +324,11 @@ static ssize_t efx_mcdi_mon_show_value(struct device *dev,
 		container_of(attr, struct efx_mcdi_mon_attribute, dev_attr);
 	efx_dword_t entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int value;
+=======
+	unsigned int value, state;
+>>>>>>> v3.18
 =======
 	unsigned int value, state;
 >>>>>>> v3.18
@@ -281,12 +339,15 @@ static ssize_t efx_mcdi_mon_show_value(struct device *dev,
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	value = EFX_DWORD_FIELD(entry, MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_VALUE);
 
 	/* Convert temperature from degrees to milli-degrees Celsius */
 	if (efx_mcdi_sensor_type[mon_attr->type].hwmon_type == EFX_HWMON_TEMP)
 		value *= 1000;
 =======
+=======
+>>>>>>> v3.18
 	state = EFX_DWORD_FIELD(entry, MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_STATE);
 	if (state == MC_CMD_SENSOR_STATE_NO_READING)
 		return -EBUSY;
@@ -306,6 +367,9 @@ static ssize_t efx_mcdi_mon_show_value(struct device *dev,
 		/* No conversion needed */
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return sprintf(buf, "%u\n", value);
@@ -322,10 +386,13 @@ static ssize_t efx_mcdi_mon_show_limit(struct device *dev,
 	value = mon_attr->limit_value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Convert temperature from degrees to milli-degrees Celsius */
 	if (efx_mcdi_sensor_type[mon_attr->type].hwmon_type == EFX_HWMON_TEMP)
 		value *= 1000;
 =======
+=======
+>>>>>>> v3.18
 	switch (mon_attr->hwmon_type) {
 	case EFX_HWMON_TEMP:
 		/* Convert temperature from degrees to milli-degrees Celsius */
@@ -339,6 +406,9 @@ static ssize_t efx_mcdi_mon_show_limit(struct device *dev,
 		/* No conversion needed */
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return sprintf(buf, "%u\n", value);
@@ -373,7 +443,11 @@ static ssize_t efx_mcdi_mon_show_label(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -386,7 +460,10 @@ efx_mcdi_mon_add_attr(struct efx_nic *efx, const char *name,
 	struct efx_mcdi_mon *hwmon = efx_mcdi_mon(efx);
 	struct efx_mcdi_mon_attribute *attr = &hwmon->attrs[hwmon->n_attrs];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -394,17 +471,24 @@ efx_mcdi_mon_add_attr(struct efx_nic *efx, const char *name,
 	attr->index = index;
 	attr->type = type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (type < ARRAY_SIZE(efx_mcdi_sensor_type))
 		attr->hwmon_type = efx_mcdi_sensor_type[type].hwmon_type;
 	else
 		attr->hwmon_type = EFX_HWMON_UNKNOWN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	attr->limit_value = limit_value;
 	sysfs_attr_init(&attr->dev_attr.attr);
 	attr->dev_attr.attr.name = attr->name;
 	attr->dev_attr.attr.mode = S_IRUGO;
 	attr->dev_attr.show = reader;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = device_create_file(&efx->pci_dev->dev, &attr->dev_attr);
 	if (rc == 0)
@@ -413,10 +497,14 @@ efx_mcdi_mon_add_attr(struct efx_nic *efx, const char *name,
 =======
 	hwmon->group.attrs[hwmon->n_attrs++] = &attr->dev_attr.attr;
 >>>>>>> v3.18
+=======
+	hwmon->group.attrs[hwmon->n_attrs++] = &attr->dev_attr.attr;
+>>>>>>> v3.18
 }
 
 int efx_mcdi_mon_probe(struct efx_nic *efx)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct efx_mcdi_mon *hwmon = efx_mcdi_mon(efx);
 	unsigned int n_attrs, n_temp = 0, n_cool = 0, n_in = 0;
@@ -449,6 +537,8 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 	rc = efx_nic_alloc_buffer(efx, &hwmon->dma_buf,
 				  4 * MC_CMD_SENSOR_ENTRY_MAXNUM);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int n_temp = 0, n_cool = 0, n_in = 0, n_curr = 0, n_power = 0;
 	struct efx_mcdi_mon *hwmon = efx_mcdi_mon(efx);
 	MCDI_DECLARE_BUF(inbuf, MC_CMD_SENSOR_INFO_EXT_IN_LEN);
@@ -486,6 +576,9 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 		efx, &hwmon->dma_buf,
 		n_sensors * MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_LEN,
 		GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc)
 		return rc;
@@ -495,21 +588,28 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 
 	/* Allocate space for the maximum possible number of
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * attributes for this set of sensors: name of the driver plus
 	 * value, min, max, crit, alarm and label for each sensor.
 	 */
 	n_attrs = 1 + 6 * hweight32(mask);
 =======
+=======
+>>>>>>> v3.18
 	 * attributes for this set of sensors:
 	 * value, min, max, crit, alarm and label for each sensor.
 	 */
 	n_attrs = 6 * n_sensors;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hwmon->attrs = kcalloc(n_attrs, sizeof(*hwmon->attrs), GFP_KERNEL);
 	if (!hwmon->attrs) {
 		rc = -ENOMEM;
 		goto fail;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	hwmon->device = hwmon_device_register(&efx->pci_dev->dev);
@@ -524,6 +624,8 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 
 	for (i = 0, type = -1; ; i++) {
 =======
+=======
+>>>>>>> v3.18
 	hwmon->group.attrs = kcalloc(n_attrs + 1, sizeof(struct attribute *),
 				     GFP_KERNEL);
 	if (!hwmon->group.attrs) {
@@ -533,12 +635,16 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 
 	for (i = 0, j = -1, type = -1; ; i++) {
 		enum efx_hwmon_type hwmon_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		const char *hwmon_prefix;
 		unsigned hwmon_index;
 		u16 min1, max1, min2, max2;
 
 		/* Find next sensor type or exit if there is none */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		type++;
 		while (!(mask & (1 << type))) {
@@ -555,6 +661,8 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 
 		switch (efx_mcdi_sensor_type[type].hwmon_type) {
 =======
+=======
+>>>>>>> v3.18
 		do {
 			type++;
 
@@ -605,6 +713,9 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 		}
 
 		switch (hwmon_type) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case EFX_HWMON_TEMP:
 			hwmon_prefix = "temp";
@@ -623,6 +734,7 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 			hwmon_index = n_in++; /* 0-based */
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 
 		min1 = MCDI_ARRAY_FIELD(outbuf, SENSOR_ENTRY,
@@ -634,6 +746,8 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 		max2 = MCDI_ARRAY_FIELD(outbuf, SENSOR_ENTRY,
 					SENSOR_INFO_ENTRY, i, MAX2);
 =======
+=======
+>>>>>>> v3.18
 		case EFX_HWMON_CURR:
 			hwmon_prefix = "curr";
 			hwmon_index = ++n_curr; /* 1-based */
@@ -652,11 +766,15 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 					SENSOR_INFO_ENTRY, j, MIN2);
 		max2 = MCDI_ARRAY_FIELD(outbuf, SENSOR_ENTRY,
 					SENSOR_INFO_ENTRY, j, MAX2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (min1 != max1) {
 			snprintf(name, sizeof(name), "%s%u_input",
 				 hwmon_prefix, hwmon_index);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			rc = efx_mcdi_mon_add_attr(
 				efx, name, efx_mcdi_mon_show_value, i, type, 0);
@@ -679,6 +797,8 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 			if (rc)
 				goto fail;
 =======
+=======
+>>>>>>> v3.18
 			efx_mcdi_mon_add_attr(
 				efx, name, efx_mcdi_mon_show_value, i, type, 0);
 
@@ -695,6 +815,9 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 			efx_mcdi_mon_add_attr(
 				efx, name, efx_mcdi_mon_show_limit,
 				i, type, max1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (min2 != max2) {
@@ -703,6 +826,7 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 				 */
 				snprintf(name, sizeof(name), "%s%u_crit",
 					 hwmon_prefix, hwmon_index);
+<<<<<<< HEAD
 <<<<<<< HEAD
 				rc = efx_mcdi_mon_add_attr(
 					efx, name, efx_mcdi_mon_show_limit,
@@ -714,11 +838,17 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 					efx, name, efx_mcdi_mon_show_limit,
 					i, type, max2);
 >>>>>>> v3.18
+=======
+				efx_mcdi_mon_add_attr(
+					efx, name, efx_mcdi_mon_show_limit,
+					i, type, max2);
+>>>>>>> v3.18
 			}
 		}
 
 		snprintf(name, sizeof(name), "%s%u_alarm",
 			 hwmon_prefix, hwmon_index);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rc = efx_mcdi_mon_add_attr(
 			efx, name, efx_mcdi_mon_show_alarm, i, type, 0);
@@ -736,6 +866,8 @@ int efx_mcdi_mon_probe(struct efx_nic *efx)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		efx_mcdi_mon_add_attr(
 			efx, name, efx_mcdi_mon_show_alarm, i, type, 0);
 
@@ -760,6 +892,9 @@ hwmon_register:
 
 	return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 fail:
 	efx_mcdi_mon_remove(efx);
@@ -768,6 +903,7 @@ fail:
 
 void efx_mcdi_mon_remove(struct efx_nic *efx)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct siena_nic_data *nic_data = efx->nic_data;
 	struct efx_mcdi_mon *hwmon = &nic_data->hwmon;
@@ -780,12 +916,17 @@ void efx_mcdi_mon_remove(struct efx_nic *efx)
 	if (hwmon->device)
 		hwmon_device_unregister(hwmon->device);
 =======
+=======
+>>>>>>> v3.18
 	struct efx_mcdi_mon *hwmon = efx_mcdi_mon(efx);
 
 	if (hwmon->device)
 		hwmon_device_unregister(hwmon->device);
 	kfree(hwmon->attrs);
 	kfree(hwmon->group.attrs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	efx_nic_free_buffer(efx, &hwmon->dma_buf);
 }

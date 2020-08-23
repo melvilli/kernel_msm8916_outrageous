@@ -238,12 +238,18 @@ static void pnx8xxx_rx_chars(struct pnx8xxx_port *sport)
 			 ISTAT_TO_SM(serial_in(sport, PNX8XXX_ISTAT));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_flip_buffer_push(&sport->port.state->port);
 =======
+=======
+>>>>>>> v3.18
 
 	spin_unlock(&sport->port.lock);
 	tty_flip_buffer_push(&sport->port.state->port);
 	spin_lock(&sport->port.lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -482,7 +488,11 @@ pnx8xxx_set_termios(struct uart_port *port, struct ktermios *termios,
 			FIFO_TO_SM(PNX8XXX_UART_FIFO_RXFE) |
 			FIFO_TO_SM(PNX8XXX_UART_FIFO_RXPAR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -813,8 +823,11 @@ static int pnx8xxx_serial_remove(struct platform_device *pdev)
 	struct pnx8xxx_port *sport = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sport)

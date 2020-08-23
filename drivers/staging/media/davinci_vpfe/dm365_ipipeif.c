@@ -197,6 +197,10 @@ static int ipipeif_hw_setup(struct v4l2_subdev *sd)
 	int pack_mode;
 	int source1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int tmp;
+>>>>>>> v3.18
 =======
 	int tmp;
 >>>>>>> v3.18
@@ -211,8 +215,13 @@ static int ipipeif_hw_setup(struct v4l2_subdev *sd)
 
 	/* Combine all the fields to make CFG1 register of IPIPEIF */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = get_oneshot_mode(ipipeif->input);
 	if (val < 0) {
+=======
+	tmp = val = get_oneshot_mode(ipipeif->input);
+	if (tmp < 0) {
+>>>>>>> v3.18
 =======
 	tmp = val = get_oneshot_mode(ipipeif->input);
 	if (tmp < 0) {
@@ -957,15 +966,21 @@ void vpfe_ipipeif_unregister_entities(struct vpfe_ipipeif_device *ipipeif)
 	vpfe_video_unregister(&ipipeif->video_in);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* cleanup entity */
 	media_entity_cleanup(&ipipeif->subdev.entity);
 	/* unregister subdev */
 	v4l2_device_unregister_subdev(&ipipeif->subdev);
 =======
+=======
+>>>>>>> v3.18
 	/* unregister subdev */
 	v4l2_device_unregister_subdev(&ipipeif->subdev);
 	/* cleanup entity */
 	media_entity_cleanup(&ipipeif->subdev.entity);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

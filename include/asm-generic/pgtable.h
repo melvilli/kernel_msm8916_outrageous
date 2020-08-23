@@ -174,18 +174,24 @@ extern void pmdp_splitting_flush(struct vm_area_struct *vma,
 
 #ifndef __HAVE_ARCH_PGTABLE_DEPOSIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void pgtable_trans_huge_deposit(struct mm_struct *mm, pgtable_t pgtable);
 #endif
 
 #ifndef __HAVE_ARCH_PGTABLE_WITHDRAW
 extern pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm);
 =======
+=======
+>>>>>>> v3.18
 extern void pgtable_trans_huge_deposit(struct mm_struct *mm, pmd_t *pmdp,
 				       pgtable_t pgtable);
 #endif
 
 #ifndef __HAVE_ARCH_PGTABLE_WITHDRAW
 extern pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -202,7 +208,10 @@ static inline int pte_same(pte_t pte_a, pte_t pte_b)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef __HAVE_ARCH_PTE_UNUSED
 /*
  * Some architectures provide facilities to virtualization guests
@@ -216,6 +225,9 @@ static inline int pte_unused(pte_t pte)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __HAVE_ARCH_PMD_SAME
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
@@ -233,10 +245,13 @@ static inline int pmd_same(pmd_t pmd_a, pmd_t pmd_b)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __HAVE_ARCH_PAGE_TEST_AND_CLEAR_YOUNG
 #define page_test_and_clear_young(pfn) (0)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef __HAVE_ARCH_PGD_OFFSET_GATE
@@ -252,11 +267,17 @@ static inline int pmd_same(pmd_t pmd_a, pmd_t pmd_b)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef pte_present_nonuma
 #define pte_present_nonuma(pte) pte_present(pte)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef flush_tlb_fix_spurious_fault
 #define flush_tlb_fix_spurious_fault(vma, address) flush_tlb_page(vma, address)
@@ -271,7 +292,10 @@ static inline int pmd_same(pmd_t pmd_a, pmd_t pmd_b)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef pgprot_device
 #define pgprot_device pgprot_noncached
 #endif
@@ -290,6 +314,9 @@ static inline pgprot_t pgprot_modify(pgprot_t oldprot, pgprot_t newprot)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * When walking page tables, get the address of the next boundary,
@@ -453,7 +480,10 @@ static inline void ptep_modify_prot_commit(struct mm_struct *mm,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_HAVE_ARCH_SOFT_DIRTY
 static inline int pte_soft_dirty(pte_t pte)
 {
@@ -506,6 +536,9 @@ static inline int pte_file_soft_dirty(pte_t pte)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __HAVE_PFNMAP_TRACKING
 /*
@@ -621,7 +654,10 @@ static inline pmd_t pmd_read_atomic(pmd_t *pmdp)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef pmd_move_must_withdraw
 static inline int pmd_move_must_withdraw(spinlock_t *new_pmd_ptl,
 					 spinlock_t *old_pmd_ptl)
@@ -634,6 +670,9 @@ static inline int pmd_move_must_withdraw(spinlock_t *new_pmd_ptl,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This function is meant to be used by sites walking pagetables with
@@ -709,18 +748,24 @@ static inline int pmd_trans_unstable(pmd_t *pmd)
 
 #ifdef CONFIG_NUMA_BALANCING
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_USES_NUMA_PROT_NONE
 /*
  * _PAGE_NUMA works identical to _PAGE_PROTNONE (it's actually the
  * same bit too). It's set only when _PAGE_PRESET is not set and it's
  * never set if _PAGE_PRESENT is set.
 =======
+=======
+>>>>>>> v3.18
 /*
  * _PAGE_NUMA distinguishes between an unmapped page table entry, an entry that
  * is protected for PROT_NONE and a NUMA hinting fault entry. If the
  * architecture defines __PAGE_PROTNONE then it should take that into account
  * but those that do not can rely on the fact that the NUMA hinting scanner
  * skips inaccessible VMAs.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * pte/pmd_present() returns true if pte/pmd_numa returns true. Page
@@ -731,8 +776,12 @@ static inline int pmd_trans_unstable(pmd_t *pmd)
 static inline int pte_numa(pte_t pte)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (pte_flags(pte) &
 		(_PAGE_NUMA|_PAGE_PRESENT)) == _PAGE_NUMA;
+=======
+	return ptenuma_flags(pte) == _PAGE_NUMA;
+>>>>>>> v3.18
 =======
 	return ptenuma_flags(pte) == _PAGE_NUMA;
 >>>>>>> v3.18
@@ -743,8 +792,12 @@ static inline int pte_numa(pte_t pte)
 static inline int pmd_numa(pmd_t pmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (pmd_flags(pmd) &
 		(_PAGE_NUMA|_PAGE_PRESENT)) == _PAGE_NUMA;
+=======
+	return pmdnuma_flags(pmd) == _PAGE_NUMA;
+>>>>>>> v3.18
 =======
 	return pmdnuma_flags(pmd) == _PAGE_NUMA;
 >>>>>>> v3.18
@@ -788,6 +841,11 @@ static inline pte_t pte_mknuma(pte_t pte)
 	pteval_t val = pte_val(pte);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	VM_BUG_ON(!(val & _PAGE_PRESENT));
+
+>>>>>>> v3.18
 =======
 	VM_BUG_ON(!(val & _PAGE_PRESENT));
 
@@ -800,7 +858,10 @@ static inline pte_t pte_mknuma(pte_t pte)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef ptep_set_numa
 static inline void ptep_set_numa(struct mm_struct *mm, unsigned long addr,
 				 pte_t *ptep)
@@ -813,6 +874,9 @@ static inline void ptep_set_numa(struct mm_struct *mm, unsigned long addr,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef pmd_mknuma
 static inline pmd_t pmd_mknuma(pmd_t pmd)
@@ -826,6 +890,7 @@ static inline pmd_t pmd_mknuma(pmd_t pmd)
 }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 extern int pte_numa(pte_t pte);
 extern int pmd_numa(pmd_t pmd);
@@ -835,6 +900,8 @@ extern pte_t pte_mknuma(pte_t pte);
 extern pmd_t pmd_mknuma(pmd_t pmd);
 #endif /* CONFIG_ARCH_USES_NUMA_PROT_NONE */
 =======
+=======
+>>>>>>> v3.18
 
 #ifndef pmdp_set_numa
 static inline void pmdp_set_numa(struct mm_struct *mm, unsigned long addr,
@@ -847,6 +914,9 @@ static inline void pmdp_set_numa(struct mm_struct *mm, unsigned long addr,
 	return;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int pmd_numa(pmd_t pmd)
@@ -875,7 +945,10 @@ static inline pte_t pte_mknuma(pte_t pte)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void ptep_set_numa(struct mm_struct *mm, unsigned long addr,
 				 pte_t *ptep)
 {
@@ -883,19 +956,28 @@ static inline void ptep_set_numa(struct mm_struct *mm, unsigned long addr,
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline pmd_t pmd_mknuma(pmd_t pmd)
 {
 	return pmd;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline void pmdp_set_numa(struct mm_struct *mm, unsigned long addr,
 				 pmd_t *pmdp)
 {
 	return ;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_NUMA_BALANCING */
 

@@ -82,12 +82,18 @@ static const char netdev_features_strings[NETDEV_FEATURE_COUNT][ETH_GSTRING_LEN]
 	[NETIF_F_FSO_BIT] =              "tx-fcoe-segmentation",
 	[NETIF_F_GSO_GRE_BIT] =		 "tx-gre-segmentation",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[NETIF_F_GSO_UDP_TUNNEL_BIT] =	 "tx-udp_tnl-segmentation",
 =======
+=======
+>>>>>>> v3.18
 	[NETIF_F_GSO_IPIP_BIT] =	 "tx-ipip-segmentation",
 	[NETIF_F_GSO_SIT_BIT] =		 "tx-sit-segmentation",
 	[NETIF_F_GSO_UDP_TUNNEL_BIT] =	 "tx-udp_tnl-segmentation",
 	[NETIF_F_GSO_MPLS_BIT] =	 "tx-mpls-segmentation",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	[NETIF_F_FCOE_CRC_BIT] =         "tx-checksum-fcoe-crc",
@@ -101,6 +107,11 @@ static const char netdev_features_strings[NETDEV_FEATURE_COUNT][ETH_GSTRING_LEN]
 	[NETIF_F_RXFCS_BIT] =            "rx-fcs",
 	[NETIF_F_RXALL_BIT] =            "rx-all",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[NETIF_F_HW_L2FW_DOFFLOAD_BIT] = "l2-fwd-offload",
+	[NETIF_F_BUSY_POLL_BIT] =        "busy-poll",
+>>>>>>> v3.18
 =======
 	[NETIF_F_HW_L2FW_DOFFLOAD_BIT] = "l2-fwd-offload",
 	[NETIF_F_BUSY_POLL_BIT] =        "busy-poll",
@@ -291,12 +302,15 @@ static u32 __ethtool_get_flags(struct net_device *dev)
 	u32 flags = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->features & NETIF_F_LRO)	     flags |= ETH_FLAG_LRO;
 	if (dev->features & NETIF_F_HW_VLAN_CTAG_RX) flags |= ETH_FLAG_RXVLAN;
 	if (dev->features & NETIF_F_HW_VLAN_CTAG_TX) flags |= ETH_FLAG_TXVLAN;
 	if (dev->features & NETIF_F_NTUPLE)	     flags |= ETH_FLAG_NTUPLE;
 	if (dev->features & NETIF_F_RXHASH)	     flags |= ETH_FLAG_RXHASH;
 =======
+=======
+>>>>>>> v3.18
 	if (dev->features & NETIF_F_LRO)
 		flags |= ETH_FLAG_LRO;
 	if (dev->features & NETIF_F_HW_VLAN_CTAG_RX)
@@ -307,6 +321,9 @@ static u32 __ethtool_get_flags(struct net_device *dev)
 		flags |= ETH_FLAG_NTUPLE;
 	if (dev->features & NETIF_F_RXHASH)
 		flags |= ETH_FLAG_RXHASH;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return flags;
@@ -320,12 +337,15 @@ static int __ethtool_set_flags(struct net_device *dev, u32 data)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data & ETH_FLAG_LRO)	features |= NETIF_F_LRO;
 	if (data & ETH_FLAG_RXVLAN)	features |= NETIF_F_HW_VLAN_CTAG_RX;
 	if (data & ETH_FLAG_TXVLAN)	features |= NETIF_F_HW_VLAN_CTAG_TX;
 	if (data & ETH_FLAG_NTUPLE)	features |= NETIF_F_NTUPLE;
 	if (data & ETH_FLAG_RXHASH)	features |= NETIF_F_RXHASH;
 =======
+=======
+>>>>>>> v3.18
 	if (data & ETH_FLAG_LRO)
 		features |= NETIF_F_LRO;
 	if (data & ETH_FLAG_RXVLAN)
@@ -336,6 +356,9 @@ static int __ethtool_set_flags(struct net_device *dev, u32 data)
 		features |= NETIF_F_NTUPLE;
 	if (data & ETH_FLAG_RXHASH)
 		features |= NETIF_F_RXHASH;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* allow changing only bits set in hw_features */
@@ -581,7 +604,10 @@ err_out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ethtool_copy_validate_indir(u32 *indir, void __user *useraddr,
 					struct ethtool_rxnfc *rx_rings,
 					u32 size)
@@ -599,6 +625,9 @@ static int ethtool_copy_validate_indir(u32 *indir, void __user *useraddr,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static noinline_for_stack int ethtool_get_rxfh_indir(struct net_device *dev,
 						     void __user *useraddr)
@@ -609,7 +638,11 @@ static noinline_for_stack int ethtool_get_rxfh_indir(struct net_device *dev,
 
 	if (!dev->ethtool_ops->get_rxfh_indir_size ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !dev->ethtool_ops->get_rxfh_indir)
+=======
+	    !dev->ethtool_ops->get_rxfh)
+>>>>>>> v3.18
 =======
 	    !dev->ethtool_ops->get_rxfh)
 >>>>>>> v3.18
@@ -639,7 +672,11 @@ static noinline_for_stack int ethtool_get_rxfh_indir(struct net_device *dev,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = dev->ethtool_ops->get_rxfh_indir(dev, indir);
+=======
+	ret = dev->ethtool_ops->get_rxfh(dev, indir, NULL);
+>>>>>>> v3.18
 =======
 	ret = dev->ethtool_ops->get_rxfh(dev, indir, NULL);
 >>>>>>> v3.18
@@ -665,8 +702,14 @@ static noinline_for_stack int ethtool_set_rxfh_indir(struct net_device *dev,
 	const struct ethtool_ops *ops = dev->ethtool_ops;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!ops->get_rxfh_indir_size || !ops->set_rxfh_indir ||
+=======
+	u32 ringidx_offset = offsetof(struct ethtool_rxfh_indir, ring_index[0]);
+
+	if (!ops->get_rxfh_indir_size || !ops->set_rxfh ||
+>>>>>>> v3.18
 =======
 	u32 ringidx_offset = offsetof(struct ethtool_rxfh_indir, ring_index[0]);
 
@@ -701,6 +744,7 @@ static noinline_for_stack int ethtool_set_rxfh_indir(struct net_device *dev,
 			indir[i] = ethtool_rxfh_indir_default(i, rx_rings.data);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (copy_from_user(indir,
 				  useraddr +
 				  offsetof(struct ethtool_rxfh_indir,
@@ -724,6 +768,8 @@ static noinline_for_stack int ethtool_set_rxfh_indir(struct net_device *dev,
 out:
 	kfree(indir);
 =======
+=======
+>>>>>>> v3.18
 		ret = ethtool_copy_validate_indir(indir,
 						  useraddr + ringidx_offset,
 						  &rx_rings,
@@ -902,6 +948,9 @@ static noinline_for_stack int ethtool_set_rxfh(struct net_device *dev,
 
 out:
 	kfree(rss_config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -965,7 +1014,11 @@ static int ethtool_reset(struct net_device *dev, char __user *useraddr)
 static int ethtool_get_wol(struct net_device *dev, char __user *useraddr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ethtool_wolinfo wol;
+=======
+	struct ethtool_wolinfo wol = { .cmd = ETHTOOL_GWOL };
+>>>>>>> v3.18
 =======
 	struct ethtool_wolinfo wol = { .cmd = ETHTOOL_GWOL };
 >>>>>>> v3.18
@@ -974,8 +1027,11 @@ static int ethtool_get_wol(struct net_device *dev, char __user *useraddr)
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(&wol, 0, sizeof(struct ethtool_wolinfo));
 	wol.cmd = ETHTOOL_GWOL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev->ethtool_ops->get_wol(dev, &wol);
@@ -1110,7 +1166,12 @@ static int ethtool_get_eeprom(struct net_device *dev, void __user *useraddr)
 	const struct ethtool_ops *ops = dev->ethtool_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ops->get_eeprom || !ops->get_eeprom_len)
+=======
+	if (!ops->get_eeprom || !ops->get_eeprom_len ||
+	    !ops->get_eeprom_len(dev))
+>>>>>>> v3.18
 =======
 	if (!ops->get_eeprom || !ops->get_eeprom_len ||
 	    !ops->get_eeprom_len(dev))
@@ -1131,7 +1192,12 @@ static int ethtool_set_eeprom(struct net_device *dev, void __user *useraddr)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ops->set_eeprom || !ops->get_eeprom_len)
+=======
+	if (!ops->set_eeprom || !ops->get_eeprom_len ||
+	    !ops->get_eeprom_len(dev))
+>>>>>>> v3.18
 =======
 	if (!ops->set_eeprom || !ops->get_eeprom_len ||
 	    !ops->get_eeprom_len(dev))
@@ -1339,7 +1405,11 @@ static int ethtool_get_strings(struct net_device *dev, void __user *useraddr)
 	gstrings.len = ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = kcalloc(gstrings.len, ETH_GSTRING_LEN, GFP_USER);
+=======
+	data = kmalloc(gstrings.len * ETH_GSTRING_LEN, GFP_USER);
+>>>>>>> v3.18
 =======
 	data = kmalloc(gstrings.len * ETH_GSTRING_LEN, GFP_USER);
 >>>>>>> v3.18
@@ -1596,11 +1666,14 @@ static int ethtool_get_dump_data(struct net_device *dev,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len = (tmp.len > dump.len) ? dump.len : tmp.len;
 	if (!len)
 		return -EFAULT;
 
 =======
+=======
+>>>>>>> v3.18
 	len = min(tmp.len, dump.len);
 	if (!len)
 		return -EFAULT;
@@ -1614,6 +1687,9 @@ static int ethtool_get_dump_data(struct net_device *dev,
 	 * driver does not need to check the length and bother with partial
 	 * dumping.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data = vzalloc(tmp.len);
 	if (!data)
@@ -1623,7 +1699,10 @@ static int ethtool_get_dump_data(struct net_device *dev,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* There are two sane possibilities:
 	 * 1. The driver's .get_dump_data() does not touch dump.len.
 	 * 2. Or it may set dump.len to how much it really writes, which
@@ -1634,6 +1713,9 @@ static int ethtool_get_dump_data(struct net_device *dev,
 	WARN_ON(dump.len != len && dump.len != tmp.len);
 	dump.len = len;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (copy_to_user(useraddr, &dump, sizeof(dump))) {
 		ret = -EFAULT;
@@ -1719,8 +1801,11 @@ static int ethtool_get_module_eeprom(struct net_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* The main entry point in this file.  Called from net/core/dev.c */
 =======
+=======
+>>>>>>> v3.18
 static int ethtool_tunable_valid(const struct ethtool_tunable *tuna)
 {
 	switch (tuna->id) {
@@ -1797,6 +1882,9 @@ out:
 }
 
 /* The main entry point in this file.  Called from net/core/dev_ioctl.c */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int dev_ethtool(struct net *net, struct ifreq *ifr)
@@ -1842,6 +1930,10 @@ int dev_ethtool(struct net *net, struct ifreq *ifr)
 	case ETHTOOL_GRXCLSRLALL:
 	case ETHTOOL_GRXFHINDIR:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ETHTOOL_GRSSH:
+>>>>>>> v3.18
 =======
 	case ETHTOOL_GRSSH:
 >>>>>>> v3.18
@@ -1850,6 +1942,10 @@ int dev_ethtool(struct net *net, struct ifreq *ifr)
 	case ETHTOOL_GET_TS_INFO:
 	case ETHTOOL_GEEE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ETHTOOL_GTUNABLE:
+>>>>>>> v3.18
 =======
 	case ETHTOOL_GTUNABLE:
 >>>>>>> v3.18
@@ -1987,13 +2083,19 @@ int dev_ethtool(struct net *net, struct ifreq *ifr)
 		rc = ethtool_set_rxfh_indir(dev, useraddr);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case ETHTOOL_GRSSH:
 		rc = ethtool_get_rxfh(dev, useraddr);
 		break;
 	case ETHTOOL_SRSSH:
 		rc = ethtool_set_rxfh(dev, useraddr);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case ETHTOOL_GFEATURES:
 		rc = ethtool_get_features(dev, useraddr);
@@ -2044,13 +2146,19 @@ int dev_ethtool(struct net *net, struct ifreq *ifr)
 		rc = ethtool_get_module_eeprom(dev, useraddr);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case ETHTOOL_GTUNABLE:
 		rc = ethtool_get_tunable(dev, useraddr);
 		break;
 	case ETHTOOL_STUNABLE:
 		rc = ethtool_set_tunable(dev, useraddr);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		rc = -EOPNOTSUPP;

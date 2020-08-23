@@ -27,6 +27,7 @@
 #include <drm/drm.h>
 #include <drm/gma_drm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "psb_drv.h"
 
 int psb_gem_init_object(struct drm_gem_object *obj)
@@ -39,14 +40,23 @@ int psb_gem_init_object(struct drm_gem_object *obj)
 #include "psb_drv.h"
 
 >>>>>>> v3.18
+=======
+#include <drm/drm_vma_manager.h>
+#include "psb_drv.h"
+
+>>>>>>> v3.18
 void psb_gem_free_object(struct drm_gem_object *obj)
 {
 	struct gtt_range *gtt = container_of(obj, struct gtt_range, gem);
 
 	/* Remove the list map if one is present */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (obj->map_list.map)
 		drm_gem_free_mmap_offset(obj);
+=======
+	drm_gem_free_mmap_offset(obj);
+>>>>>>> v3.18
 =======
 	drm_gem_free_mmap_offset(obj);
 >>>>>>> v3.18
@@ -78,9 +88,12 @@ int psb_gem_dumb_map_gtt(struct drm_file *file, struct drm_device *dev,
 	struct drm_gem_object *obj;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(dev->driver->driver_features & DRIVER_GEM))
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&dev->struct_mutex);
@@ -95,6 +108,7 @@ int psb_gem_dumb_map_gtt(struct drm_file *file, struct drm_device *dev,
 
 	/* Make it mmapable */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!obj->map_list.map) {
 		ret = drm_gem_create_mmap_offset(obj);
 		if (ret)
@@ -103,10 +117,15 @@ int psb_gem_dumb_map_gtt(struct drm_file *file, struct drm_device *dev,
 	/* GEM should really work out the hash offsets for us */
 	*offset = (u64)obj->map_list.hash.key << PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 	ret = drm_gem_create_mmap_offset(obj);
 	if (ret)
 		goto out;
 	*offset = drm_vma_node_offset_addr(&obj->vma_node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	drm_gem_object_unreference(obj);
@@ -127,8 +146,13 @@ unlock:
  *	for the various methods that do/will create GEM objects for things
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int psb_gem_create(struct drm_file *file,
 	struct drm_device *dev, uint64_t size, uint32_t *handlep)
+=======
+int psb_gem_create(struct drm_file *file, struct drm_device *dev, u64 size,
+		   u32 *handlep, int stolen, u32 align)
+>>>>>>> v3.18
 =======
 int psb_gem_create(struct drm_file *file, struct drm_device *dev, u64 size,
 		   u32 *handlep, int stolen, u32 align)
@@ -143,7 +167,11 @@ int psb_gem_create(struct drm_file *file, struct drm_device *dev, u64 size,
 	/* Allocate our object - for now a direct gtt range which is not
 	   stolen memory backed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = psb_gtt_alloc_range(dev, size, "gem", 0);
+=======
+	r = psb_gtt_alloc_range(dev, size, "gem", 0, PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	r = psb_gtt_alloc_range(dev, size, "gem", 0, PAGE_SIZE);
 >>>>>>> v3.18
@@ -191,6 +219,7 @@ int psb_gem_dumb_create(struct drm_file *file, struct drm_device *dev,
 	args->pitch = ALIGN(args->width * ((args->bpp + 7) / 8), 64);
 	args->size = args->pitch * args->height;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return psb_gem_create(file, dev, args->size, &args->handle);
 }
 
@@ -209,6 +238,10 @@ int psb_gem_dumb_destroy(struct drm_file *file, struct drm_device *dev,
 {
 	/* No special work needed, drop the reference and see what falls out */
 	return drm_gem_handle_delete(file, handle);
+=======
+	return psb_gem_create(file, dev, args->size, &args->handle, 0,
+			      PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	return psb_gem_create(file, dev, args->size, &args->handle, 0,
 			      PAGE_SIZE);
@@ -289,6 +322,7 @@ fail:
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int psb_gem_create_stolen(struct drm_file *file, struct drm_device *dev,
 						int size, u32 *handle)
@@ -332,5 +366,7 @@ int psb_gem_mmap_ioctl(struct drm_device *dev, void *data,
 						args->handle, &args->offset);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

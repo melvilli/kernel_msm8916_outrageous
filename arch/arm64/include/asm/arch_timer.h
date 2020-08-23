@@ -27,8 +27,11 @@
 #include <clocksource/arm_arch_timer.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void arch_timer_reg_write_cp15(int access, int reg, u32 val)
 =======
+=======
+>>>>>>> v3.18
 /*
  * These register accessors are marked inline so the compiler can
  * nicely work out which register we want, and chuck away the rest of
@@ -36,6 +39,9 @@ static inline void arch_timer_reg_write_cp15(int access, int reg, u32 val)
  */
 static __always_inline
 void arch_timer_reg_write_cp15(int access, enum arch_timer_reg reg, u32 val)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (access == ARCH_TIMER_PHYS_ACCESS) {
@@ -47,8 +53,11 @@ void arch_timer_reg_write_cp15(int access, enum arch_timer_reg reg, u32 val)
 			asm volatile("msr cntp_tval_el0, %0" : : "r" (val));
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:
 			BUILD_BUG();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -61,11 +70,15 @@ void arch_timer_reg_write_cp15(int access, enum arch_timer_reg reg, u32 val)
 			asm volatile("msr cntv_tval_el0, %0" : : "r" (val));
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:
 			BUILD_BUG();
 		}
 	} else {
 		BUILD_BUG();
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -75,7 +88,12 @@ void arch_timer_reg_write_cp15(int access, enum arch_timer_reg reg, u32 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 arch_timer_reg_read_cp15(int access, int reg)
+=======
+static __always_inline
+u32 arch_timer_reg_read_cp15(int access, enum arch_timer_reg reg)
+>>>>>>> v3.18
 =======
 static __always_inline
 u32 arch_timer_reg_read_cp15(int access, enum arch_timer_reg reg)
@@ -92,8 +110,11 @@ u32 arch_timer_reg_read_cp15(int access, enum arch_timer_reg reg)
 			asm volatile("mrs %0, cntp_tval_el0" : "=r" (val));
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:
 			BUILD_BUG();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -106,11 +127,15 @@ u32 arch_timer_reg_read_cp15(int access, enum arch_timer_reg reg)
 			asm volatile("mrs %0, cntv_tval_el0" : "=r" (val));
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:
 			BUILD_BUG();
 		}
 	} else {
 		BUILD_BUG();
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -139,6 +164,7 @@ static inline void arch_timer_set_cntkctl(u32 cntkctl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void arch_timer_evtstrm_enable(int divider)
 {
 	u32 cntkctl = arch_timer_get_cntkctl();
@@ -157,6 +183,9 @@ static inline u64 arch_counter_get_cntvct_cp15(void)
 =======
 static inline u64 arch_counter_get_cntvct(void)
 >>>>>>> v3.18
+=======
+static inline u64 arch_counter_get_cntvct(void)
+>>>>>>> v3.18
 {
 	u64 cval;
 
@@ -166,6 +195,7 @@ static inline u64 arch_counter_get_cntvct(void)
 	return cval;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline u64 arch_counter_get_cntpct_cp15(void)
 {
@@ -177,6 +207,8 @@ static inline u64 arch_counter_get_cntpct_cp15(void)
 	return cval;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int arch_timer_arch_init(void)

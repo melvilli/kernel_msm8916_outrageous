@@ -17,7 +17,11 @@
 
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/atomic.h>
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -54,8 +58,13 @@ static inline void set_bit(unsigned nr, volatile unsigned long *addr)
  *
  * clear_bit() may not contain a memory barrier, so if it is used for
 <<<<<<< HEAD
+<<<<<<< HEAD
  * locking purposes, you should call smp_mb__before_clear_bit() and/or
  * smp_mb__after_clear_bit() to ensure changes are visible on other cpus.
+=======
+ * locking purposes, you should call smp_mb__before_atomic() and/or
+ * smp_mb__after_atomic() to ensure changes are visible on other cpus.
+>>>>>>> v3.18
 =======
  * locking purposes, you should call smp_mb__before_atomic() and/or
  * smp_mb__after_atomic() to ensure changes are visible on other cpus.
@@ -131,10 +140,13 @@ static inline int test_and_change_bit(unsigned nr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* See discussion at smp_mb__before_atomic_dec() in <asm/atomic_32.h>. */
 #define smp_mb__before_clear_bit()	smp_mb()
 #define smp_mb__after_clear_bit()	do {} while (0)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm-generic/bitops/ext2-atomic.h>

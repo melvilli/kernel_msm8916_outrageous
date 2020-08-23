@@ -30,7 +30,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pagemap.h>
@@ -1400,8 +1403,13 @@ int agp3_generic_configure(void)
 	current_size = A_SIZE_16(agp_bridge->current_size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
 						    AGP_APERTURE_BAR);

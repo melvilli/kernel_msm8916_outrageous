@@ -44,10 +44,14 @@
 #endif /* S5P_MFC_DEBUG_REGWRITE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define READL(offset)		readl(dev->regs_base + (offset))
 #define WRITEL(data, offset)	writel((data), dev->regs_base + (offset))
 #define OFFSETA(x)		(((x) - dev->port_a) >> S5P_FIMV_MEM_OFFSET)
 #define OFFSETB(x)		(((x) - dev->port_b) >> S5P_FIMV_MEM_OFFSET)
+=======
+#define IS_MFCV6_V2(dev) (!IS_MFCV7_PLUS(dev) && dev->fw_ver == MFC_FW_V2)
+>>>>>>> v3.18
 =======
 #define IS_MFCV6_V2(dev) (!IS_MFCV7_PLUS(dev) && dev->fw_ver == MFC_FW_V2)
 >>>>>>> v3.18
@@ -82,10 +86,13 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 		mfc_debug(2, "Totals bufs: %d\n", ctx->total_dpb_count);
 	} else if (ctx->type == MFCINST_ENCODER) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctx->tmv_buffer_size = S5P_FIMV_NUM_TMV_BUFFERS_V6 *
 			ALIGN(S5P_FIMV_TMV_BUFFER_SIZE_V6(mb_width, mb_height),
 			S5P_FIMV_TMV_BUFFER_ALIGN_V6);
 =======
+=======
+>>>>>>> v3.18
 		if (IS_MFCV8(dev))
 			ctx->tmv_buffer_size = S5P_FIMV_NUM_TMV_BUFFERS_V6 *
 			ALIGN(S5P_FIMV_TMV_BUFFER_SIZE_V8(mb_width, mb_height),
@@ -95,6 +102,9 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 			ALIGN(S5P_FIMV_TMV_BUFFER_SIZE_V6(mb_width, mb_height),
 			S5P_FIMV_TMV_BUFFER_ALIGN_V6);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ctx->luma_dpb_size = ALIGN((mb_width * mb_height) *
 				S5P_FIMV_LUMA_MB_TO_PIXEL_V6,
@@ -103,6 +113,7 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 				S5P_FIMV_CHROMA_MB_TO_PIXEL_V6,
 				S5P_FIMV_CHROMA_DPB_BUFFER_ALIGN_V6);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctx->me_buffer_size = ALIGN(S5P_FIMV_ME_BUFFER_SIZE_V6(
 					ctx->img_width, ctx->img_height,
 					mb_width, mb_height),
@@ -110,6 +121,8 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 
 		mfc_debug(2, "recon luma size: %d chroma size: %d\n",
 =======
+=======
+>>>>>>> v3.18
 		if (IS_MFCV8(dev))
 			ctx->me_buffer_size = ALIGN(S5P_FIMV_ME_BUFFER_SIZE_V8(
 						ctx->img_width, ctx->img_height,
@@ -122,6 +135,9 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 						S5P_FIMV_ME_BUFFER_ALIGN_V6);
 
 		mfc_debug(2, "recon luma size: %zu chroma size: %zu\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  ctx->luma_dpb_size, ctx->chroma_dpb_size);
 	} else {
@@ -133,9 +149,12 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 	case S5P_MFC_CODEC_H264_DEC:
 	case S5P_MFC_CODEC_H264_MVC_DEC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctx->scratch_buf_size =
 			S5P_FIMV_SCRATCH_BUF_SIZE_H264_DEC_V6(
 =======
+=======
+>>>>>>> v3.18
 		if (IS_MFCV8(dev))
 			ctx->scratch_buf_size =
 				S5P_FIMV_SCRATCH_BUF_SIZE_H264_DEC_V8(
@@ -144,6 +163,9 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 		else
 			ctx->scratch_buf_size =
 				S5P_FIMV_SCRATCH_BUF_SIZE_H264_DEC_V6(
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					mb_width,
 					mb_height);
@@ -155,11 +177,14 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 		break;
 	case S5P_MFC_CODEC_MPEG4_DEC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctx->scratch_buf_size =
 			S5P_FIMV_SCRATCH_BUF_SIZE_MPEG4_DEC_V6(
 					mb_width,
 					mb_height);
 =======
+=======
+>>>>>>> v3.18
 		if (IS_MFCV7_PLUS(dev)) {
 			ctx->scratch_buf_size =
 				S5P_FIMV_SCRATCH_BUF_SIZE_MPEG4_DEC_V7(
@@ -172,6 +197,9 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 						mb_height);
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ctx->scratch_buf_size = ALIGN(ctx->scratch_buf_size,
 				S5P_FIMV_SCRATCH_BUFFER_ALIGN_V6);
@@ -202,11 +230,14 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 		break;
 	case S5P_MFC_CODEC_VP8_DEC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctx->scratch_buf_size =
 			S5P_FIMV_SCRATCH_BUF_SIZE_VP8_DEC_V6(
 					mb_width,
 					mb_height);
 =======
+=======
+>>>>>>> v3.18
 		if (IS_MFCV8(dev))
 			ctx->scratch_buf_size =
 				S5P_FIMV_SCRATCH_BUF_SIZE_VP8_DEC_V8(
@@ -217,6 +248,9 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 				S5P_FIMV_SCRATCH_BUF_SIZE_VP8_DEC_V6(
 						mb_width,
 						mb_height);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ctx->scratch_buf_size = ALIGN(ctx->scratch_buf_size,
 				S5P_FIMV_SCRATCH_BUFFER_ALIGN_V6);
@@ -224,11 +258,14 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 		break;
 	case S5P_MFC_CODEC_H264_ENC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctx->scratch_buf_size =
 			S5P_FIMV_SCRATCH_BUF_SIZE_H264_ENC_V6(
 					mb_width,
 					mb_height);
 =======
+=======
+>>>>>>> v3.18
 		if (IS_MFCV8(dev))
 			ctx->scratch_buf_size =
 				S5P_FIMV_SCRATCH_BUF_SIZE_H264_ENC_V8(
@@ -239,6 +276,9 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 				S5P_FIMV_SCRATCH_BUF_SIZE_H264_ENC_V6(
 						mb_width,
 						mb_height);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ctx->scratch_buf_size = ALIGN(ctx->scratch_buf_size,
 				S5P_FIMV_SCRATCH_BUFFER_ALIGN_V6);
@@ -263,7 +303,10 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 		ctx->bank2.size = 0;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case S5P_MFC_CODEC_VP8_ENC:
 		if (IS_MFCV8(dev))
 			ctx->scratch_buf_size =
@@ -283,6 +326,9 @@ static int s5p_mfc_alloc_codec_buffers_v6(struct s5p_mfc_ctx *ctx)
 			ctx->chroma_dpb_size + ctx->me_buffer_size));
 		ctx->bank2.size = 0;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
@@ -334,6 +380,10 @@ static int s5p_mfc_alloc_instance_buffer_v6(struct s5p_mfc_ctx *ctx)
 	case S5P_MFC_CODEC_MPEG4_ENC:
 	case S5P_MFC_CODEC_H263_ENC:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case S5P_MFC_CODEC_VP8_ENC:
+>>>>>>> v3.18
 =======
 	case S5P_MFC_CODEC_VP8_ENC:
 >>>>>>> v3.18
@@ -419,13 +469,19 @@ static void s5p_mfc_dec_calc_dpb_size_v6(struct s5p_mfc_ctx *ctx)
 	ctx->luma_size = calc_plane(ctx->img_width, ctx->img_height);
 	ctx->chroma_size = calc_plane(ctx->img_width, (ctx->img_height >> 1));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (IS_MFCV8(ctx->dev)) {
 		/* MFCv8 needs additional 64 bytes for luma,chroma dpb*/
 		ctx->luma_size += S5P_FIMV_D_ALIGN_PLANE_SIZE_V8;
 		ctx->chroma_size += S5P_FIMV_D_ALIGN_PLANE_SIZE_V8;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ctx->codec_mode == S5P_MFC_CODEC_H264_DEC ||
 			ctx->codec_mode == S5P_MFC_CODEC_H264_MVC_DEC) {
@@ -448,13 +504,19 @@ static void s5p_mfc_enc_calc_src_size_v6(struct s5p_mfc_ctx *ctx)
 	ctx->luma_size = ALIGN((mb_width * mb_height) * 256, 256);
 	ctx->chroma_size = ALIGN((mb_width * mb_height) * 128, 256);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* MFCv7 needs pad bytes for Luma and Chroma */
 	if (IS_MFCV7_PLUS(ctx->dev)) {
 		ctx->luma_size += MFC_LUMA_PAD_BYTES_V7;
 		ctx->chroma_size += MFC_CHROMA_PAD_BYTES_V7;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -465,6 +527,10 @@ static int s5p_mfc_set_dec_stream_buffer_v6(struct s5p_mfc_ctx *ctx,
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 >>>>>>> v3.18
@@ -475,15 +541,21 @@ static int s5p_mfc_set_dec_stream_buffer_v6(struct s5p_mfc_ctx *ctx,
 		"buf_size: 0x%08x (%d)\n",
 		ctx->inst_no, buf_addr, strm_size, strm_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(strm_size, S5P_FIMV_D_STREAM_DATA_SIZE_V6);
 	WRITEL(buf_addr, S5P_FIMV_D_CPB_BUFFER_ADDR_V6);
 	WRITEL(buf_size->cpb, S5P_FIMV_D_CPB_BUFFER_SIZE_V6);
 	WRITEL(start_num_byte, S5P_FIMV_D_CPB_BUFFER_OFFSET_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(strm_size, mfc_regs->d_stream_data_size);
 	writel(buf_addr, mfc_regs->d_cpb_buffer_addr);
 	writel(buf_size->cpb, mfc_regs->d_cpb_buffer_size);
 	writel(start_num_byte, mfc_regs->d_cpb_buffer_offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mfc_debug_leave();
@@ -497,6 +569,10 @@ static int s5p_mfc_set_dec_frame_buffer_v6(struct s5p_mfc_ctx *ctx)
 	unsigned int frame_size_ch, frame_size_mv;
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 >>>>>>> v3.18
@@ -512,6 +588,7 @@ static int s5p_mfc_set_dec_frame_buffer_v6(struct s5p_mfc_ctx *ctx)
 	mfc_debug(2, "Setting display delay to %d\n", ctx->display_delay);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(ctx->total_dpb_count, S5P_FIMV_D_NUM_DPB_V6);
 	WRITEL(ctx->luma_size, S5P_FIMV_D_LUMA_DPB_SIZE_V6);
 	WRITEL(ctx->chroma_size, S5P_FIMV_D_CHROMA_DPB_SIZE_V6);
@@ -519,6 +596,8 @@ static int s5p_mfc_set_dec_frame_buffer_v6(struct s5p_mfc_ctx *ctx)
 	WRITEL(buf_addr1, S5P_FIMV_D_SCRATCH_BUFFER_ADDR_V6);
 	WRITEL(ctx->scratch_buf_size, S5P_FIMV_D_SCRATCH_BUFFER_SIZE_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(ctx->total_dpb_count, mfc_regs->d_num_dpb);
 	writel(ctx->luma_size, mfc_regs->d_first_plane_dpb_size);
 	writel(ctx->chroma_size, mfc_regs->d_second_plane_dpb_size);
@@ -533,6 +612,9 @@ static int s5p_mfc_set_dec_frame_buffer_v6(struct s5p_mfc_ctx *ctx)
 			mfc_regs->d_second_plane_dpb_stride_size);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	buf_addr1 += ctx->scratch_buf_size;
 	buf_size1 -= ctx->scratch_buf_size;
@@ -540,8 +622,13 @@ static int s5p_mfc_set_dec_frame_buffer_v6(struct s5p_mfc_ctx *ctx)
 	if (ctx->codec_mode == S5P_FIMV_CODEC_H264_DEC ||
 			ctx->codec_mode == S5P_FIMV_CODEC_H264_MVC_DEC){
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(ctx->mv_size, S5P_FIMV_D_MV_BUFFER_SIZE_V6);
 		WRITEL(ctx->mv_count, S5P_FIMV_D_NUM_MV_V6);
+=======
+		writel(ctx->mv_size, mfc_regs->d_mv_buffer_size);
+		writel(ctx->mv_count, mfc_regs->d_num_mv);
+>>>>>>> v3.18
 =======
 		writel(ctx->mv_size, mfc_regs->d_mv_buffer_size);
 		writel(ctx->mv_count, mfc_regs->d_num_mv);
@@ -557,6 +644,7 @@ static int s5p_mfc_set_dec_frame_buffer_v6(struct s5p_mfc_ctx *ctx)
 	for (i = 0; i < ctx->total_dpb_count; i++) {
 		/* Bank2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mfc_debug(2, "Luma %d: %x\n", i,
 					ctx->dst_bufs[i].cookie.raw.luma);
 		WRITEL(ctx->dst_bufs[i].cookie.raw.luma,
@@ -566,6 +654,8 @@ static int s5p_mfc_set_dec_frame_buffer_v6(struct s5p_mfc_ctx *ctx)
 		WRITEL(ctx->dst_bufs[i].cookie.raw.chroma,
 				S5P_FIMV_D_CHROMA_DPB_V6 + i * 4);
 =======
+=======
+>>>>>>> v3.18
 		mfc_debug(2, "Luma %d: %zx\n", i,
 					ctx->dst_bufs[i].cookie.raw.luma);
 		writel(ctx->dst_bufs[i].cookie.raw.luma,
@@ -574,6 +664,9 @@ static int s5p_mfc_set_dec_frame_buffer_v6(struct s5p_mfc_ctx *ctx)
 					ctx->dst_bufs[i].cookie.raw.chroma);
 		writel(ctx->dst_bufs[i].cookie.raw.chroma,
 				mfc_regs->d_second_plane_dpb + i * 4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (ctx->codec_mode == S5P_MFC_CODEC_H264_DEC ||
@@ -586,9 +679,15 @@ static int s5p_mfc_set_dec_frame_buffer_v6(struct s5p_mfc_ctx *ctx)
 			buf_size1 -= align_gap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mfc_debug(2, "\tBuf1: %x, size: %d\n",
 					buf_addr1, buf_size1);
 			WRITEL(buf_addr1, S5P_FIMV_D_MV_BUFFER_V6 + i * 4);
+=======
+			mfc_debug(2, "\tBuf1: %zx, size: %d\n",
+					buf_addr1, buf_size1);
+			writel(buf_addr1, mfc_regs->d_mv_buffer + i * 4);
+>>>>>>> v3.18
 =======
 			mfc_debug(2, "\tBuf1: %zx, size: %d\n",
 					buf_addr1, buf_size1);
@@ -600,7 +699,11 @@ static int s5p_mfc_set_dec_frame_buffer_v6(struct s5p_mfc_ctx *ctx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfc_debug(2, "Buf1: %u, buf_size1: %d (frames %d)\n",
+=======
+	mfc_debug(2, "Buf1: %zu, buf_size1: %d (frames %d)\n",
+>>>>>>> v3.18
 =======
 	mfc_debug(2, "Buf1: %zu, buf_size1: %d (frames %d)\n",
 >>>>>>> v3.18
@@ -611,8 +714,13 @@ static int s5p_mfc_set_dec_frame_buffer_v6(struct s5p_mfc_ctx *ctx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(ctx->inst_no, S5P_FIMV_INSTANCE_ID_V6);
 	s5p_mfc_hw_call(dev->mfc_cmds, cmd_host2risc, dev,
+=======
+	writel(ctx->inst_no, mfc_regs->instance_id);
+	s5p_mfc_hw_call_void(dev->mfc_cmds, cmd_host2risc, dev,
+>>>>>>> v3.18
 =======
 	writel(ctx->inst_no, mfc_regs->instance_id);
 	s5p_mfc_hw_call_void(dev->mfc_cmds, cmd_host2risc, dev,
@@ -629,14 +737,20 @@ static int s5p_mfc_set_enc_stream_buffer_v6(struct s5p_mfc_ctx *ctx,
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	WRITEL(addr, S5P_FIMV_E_STREAM_BUFFER_ADDR_V6); /* 16B align */
 	WRITEL(size, S5P_FIMV_E_STREAM_BUFFER_SIZE_V6);
 =======
+=======
+>>>>>>> v3.18
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 
 	writel(addr, mfc_regs->e_stream_buffer_addr); /* 16B align */
 	writel(size, mfc_regs->e_stream_buffer_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mfc_debug(2, "stream buf addr: 0x%08lx, size: 0x%d\n",
@@ -650,14 +764,20 @@ static void s5p_mfc_set_enc_frame_buffer_v6(struct s5p_mfc_ctx *ctx,
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	WRITEL(y_addr, S5P_FIMV_E_SOURCE_LUMA_ADDR_V6); /* 256B align */
 	WRITEL(c_addr, S5P_FIMV_E_SOURCE_CHROMA_ADDR_V6);
 =======
+=======
+>>>>>>> v3.18
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 
 	writel(y_addr, mfc_regs->e_source_first_plane_addr);
 	writel(c_addr, mfc_regs->e_source_second_plane_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mfc_debug(2, "enc src y buf addr: 0x%08lx\n", y_addr);
@@ -669,6 +789,7 @@ static void s5p_mfc_get_enc_frame_buffer_v6(struct s5p_mfc_ctx *ctx,
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long enc_recon_y_addr, enc_recon_c_addr;
 
 	*y_addr = READL(S5P_FIMV_E_ENCODED_SOURCE_LUMA_ADDR_V6);
@@ -677,6 +798,8 @@ static void s5p_mfc_get_enc_frame_buffer_v6(struct s5p_mfc_ctx *ctx,
 	enc_recon_y_addr = READL(S5P_FIMV_E_RECON_LUMA_DPB_ADDR_V6);
 	enc_recon_c_addr = READL(S5P_FIMV_E_RECON_CHROMA_DPB_ADDR_V6);
 =======
+=======
+>>>>>>> v3.18
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 	unsigned long enc_recon_y_addr, enc_recon_c_addr;
 
@@ -685,6 +808,9 @@ static void s5p_mfc_get_enc_frame_buffer_v6(struct s5p_mfc_ctx *ctx,
 
 	enc_recon_y_addr = readl(mfc_regs->e_recon_luma_dpb_addr);
 	enc_recon_c_addr = readl(mfc_regs->e_recon_chroma_dpb_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mfc_debug(2, "recon y addr: 0x%08lx\n", enc_recon_y_addr);
@@ -696,6 +822,10 @@ static int s5p_mfc_set_enc_ref_buffer_v6(struct s5p_mfc_ctx *ctx)
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 >>>>>>> v3.18
@@ -711,23 +841,30 @@ static int s5p_mfc_set_enc_ref_buffer_v6(struct s5p_mfc_ctx *ctx)
 
 	for (i = 0; i < ctx->pb_count; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(buf_addr1, S5P_FIMV_E_LUMA_DPB_V6 + (4 * i));
 		buf_addr1 += ctx->luma_dpb_size;
 		WRITEL(buf_addr1, S5P_FIMV_E_CHROMA_DPB_V6 + (4 * i));
 		buf_addr1 += ctx->chroma_dpb_size;
 		WRITEL(buf_addr1, S5P_FIMV_E_ME_BUFFER_V6 + (4 * i));
 =======
+=======
+>>>>>>> v3.18
 		writel(buf_addr1, mfc_regs->e_luma_dpb + (4 * i));
 		buf_addr1 += ctx->luma_dpb_size;
 		writel(buf_addr1, mfc_regs->e_chroma_dpb + (4 * i));
 		buf_addr1 += ctx->chroma_dpb_size;
 		writel(buf_addr1, mfc_regs->e_me_buffer + (4 * i));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		buf_addr1 += ctx->me_buffer_size;
 		buf_size1 -= (ctx->luma_dpb_size + ctx->chroma_dpb_size +
 			ctx->me_buffer_size);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	WRITEL(buf_addr1, S5P_FIMV_E_SCRATCH_BUFFER_ADDR_V6);
 	WRITEL(ctx->scratch_buf_size, S5P_FIMV_E_SCRATCH_BUFFER_SIZE_V6);
@@ -742,6 +879,8 @@ static int s5p_mfc_set_enc_ref_buffer_v6(struct s5p_mfc_ctx *ctx)
 
 	mfc_debug(2, "Buf1: %u, buf_size1: %d (ref frames %d)\n",
 =======
+=======
+>>>>>>> v3.18
 	writel(buf_addr1, mfc_regs->e_scratch_buffer_addr);
 	writel(ctx->scratch_buf_size, mfc_regs->e_scratch_buffer_size);
 	buf_addr1 += ctx->scratch_buf_size;
@@ -754,6 +893,9 @@ static int s5p_mfc_set_enc_ref_buffer_v6(struct s5p_mfc_ctx *ctx)
 	buf_size1 -= ctx->tmv_buffer_size;
 
 	mfc_debug(2, "Buf1: %zu, buf_size1: %d (ref frames %d)\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			buf_addr1, buf_size1, ctx->pb_count);
 	if (buf_size1 < 0) {
@@ -762,8 +904,13 @@ static int s5p_mfc_set_enc_ref_buffer_v6(struct s5p_mfc_ctx *ctx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(ctx->inst_no, S5P_FIMV_INSTANCE_ID_V6);
 	s5p_mfc_hw_call(dev->mfc_cmds, cmd_host2risc, dev,
+=======
+	writel(ctx->inst_no, mfc_regs->instance_id);
+	s5p_mfc_hw_call_void(dev->mfc_cmds, cmd_host2risc, dev,
+>>>>>>> v3.18
 =======
 	writel(ctx->inst_no, mfc_regs->instance_id);
 	s5p_mfc_hw_call_void(dev->mfc_cmds, cmd_host2risc, dev,
@@ -779,6 +926,7 @@ static int s5p_mfc_set_slice_mode(struct s5p_mfc_ctx *ctx)
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* multi-slice control */
 	/* multi-slice MB number or bit size */
@@ -792,6 +940,8 @@ static int s5p_mfc_set_slice_mode(struct s5p_mfc_ctx *ctx)
 		WRITEL(0x0, S5P_FIMV_E_MSLICE_SIZE_MB_V6);
 		WRITEL(0x0, S5P_FIMV_E_MSLICE_SIZE_BITS_V6);
 =======
+=======
+>>>>>>> v3.18
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 
 	/* multi-slice control */
@@ -805,6 +955,9 @@ static int s5p_mfc_set_slice_mode(struct s5p_mfc_ctx *ctx)
 	} else {
 		writel(0x0, mfc_regs->e_mslice_size_mb);
 		writel(0x0, mfc_regs->e_mslice_size_bits);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -815,6 +968,10 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 >>>>>>> v3.18
@@ -824,6 +981,7 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	mfc_debug_enter();
 
 	/* width */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	WRITEL(ctx->img_width, S5P_FIMV_E_FRAME_WIDTH_V6); /* 16 align */
 	/* height */
@@ -836,6 +994,8 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	/* cropped offset */
 	WRITEL(0x0, S5P_FIMV_E_FRAME_CROP_OFFSET_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(ctx->img_width, mfc_regs->e_frame_width); /* 16 align */
 	/* height */
 	writel(ctx->img_height, mfc_regs->e_frame_height); /* 16 align */
@@ -846,13 +1006,20 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	writel(ctx->img_height, mfc_regs->e_cropped_frame_height);
 	/* cropped offset */
 	writel(0x0, mfc_regs->e_frame_crop_offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* pictype : IDR period */
 	reg = 0;
 	reg |= p->gop_size & 0xFFFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_GOP_CONFIG_V6);
+=======
+	writel(reg, mfc_regs->e_gop_config);
+>>>>>>> v3.18
 =======
 	writel(reg, mfc_regs->e_gop_config);
 >>>>>>> v3.18
@@ -864,6 +1031,7 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	if (p->slice_mode == V4L2_MPEG_VIDEO_MULTI_SICE_MODE_MAX_MB) {
 		reg |= (0x1 << 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(reg, S5P_FIMV_E_ENC_OPTIONS_V6);
 		ctx->slice_size.mb = p->slice_mb;
 	} else if (p->slice_mode == V4L2_MPEG_VIDEO_MULTI_SICE_MODE_MAX_BYTES) {
@@ -874,6 +1042,8 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 		reg &= ~(0x1 << 3);
 		WRITEL(reg, S5P_FIMV_E_ENC_OPTIONS_V6);
 =======
+=======
+>>>>>>> v3.18
 		writel(reg, mfc_regs->e_enc_options);
 		ctx->slice_size.mb = p->slice_mb;
 	} else if (p->slice_mode == V4L2_MPEG_VIDEO_MULTI_SICE_MODE_MAX_BYTES) {
@@ -883,6 +1053,9 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	} else {
 		reg &= ~(0x1 << 3);
 		writel(reg, mfc_regs->e_enc_options);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -890,8 +1063,13 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 
 	/* cyclic intra refresh */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(p->intra_refresh_mb, S5P_FIMV_E_IR_SIZE_V6);
 	reg = READL(S5P_FIMV_E_ENC_OPTIONS_V6);
+=======
+	writel(p->intra_refresh_mb, mfc_regs->e_ir_size);
+	reg = readl(mfc_regs->e_enc_options);
+>>>>>>> v3.18
 =======
 	writel(p->intra_refresh_mb, mfc_regs->e_ir_size);
 	reg = readl(mfc_regs->e_enc_options);
@@ -901,6 +1079,7 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	else
 		reg |= (0x1 << 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_ENC_OPTIONS_V6);
 
 	/* 'NON_REFERENCE_STORE_ENABLE' for debugging */
@@ -908,17 +1087,23 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	reg &= ~(0x1 << 9);
 	WRITEL(reg, S5P_FIMV_E_ENC_OPTIONS_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(reg, mfc_regs->e_enc_options);
 
 	/* 'NON_REFERENCE_STORE_ENABLE' for debugging */
 	reg = readl(mfc_regs->e_enc_options);
 	reg &= ~(0x1 << 9);
 	writel(reg, mfc_regs->e_enc_options);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* memory structure cur. frame */
 	if (ctx->src_fmt->fourcc == V4L2_PIX_FMT_NV12M) {
 		/* 0: Linear, 1: 2D tiled*/
+<<<<<<< HEAD
 <<<<<<< HEAD
 		reg = READL(S5P_FIMV_E_ENC_OPTIONS_V6);
 		reg &= ~(0x1 << 7);
@@ -940,6 +1125,8 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 		/* 0: NV12(CbCr), 1: NV21(CrCb) */
 		WRITEL(0x0, S5P_FIMV_PIXEL_FORMAT_V6);
 =======
+=======
+>>>>>>> v3.18
 		reg = readl(mfc_regs->e_enc_options);
 		reg &= ~(0x1 << 7);
 		writel(reg, mfc_regs->e_enc_options);
@@ -959,11 +1146,15 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 		writel(reg, mfc_regs->e_enc_options);
 		/* 0: NV12(CbCr), 1: NV21(CrCb) */
 		writel(0x0, mfc_regs->pixel_format);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* memory structure recon. frame */
 	/* 0: Linear, 1: 2D tiled */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	reg = READL(S5P_FIMV_E_ENC_OPTIONS_V6);
 	reg |= (0x1 << 8);
@@ -972,12 +1163,17 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	/* padding control & value */
 	WRITEL(0x0, S5P_FIMV_E_PADDING_CTRL_V6);
 =======
+=======
+>>>>>>> v3.18
 	reg = readl(mfc_regs->e_enc_options);
 	reg |= (0x1 << 8);
 	writel(reg, mfc_regs->e_enc_options);
 
 	/* padding control & value */
 	writel(0x0, mfc_regs->e_padding_ctrl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (p->pad) {
 		reg = 0;
@@ -990,7 +1186,11 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 		/** y value */
 		reg |= p->pad_luma & 0xFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(reg, S5P_FIMV_E_PADDING_CTRL_V6);
+=======
+		writel(reg, mfc_regs->e_padding_ctrl);
+>>>>>>> v3.18
 =======
 		writel(reg, mfc_regs->e_padding_ctrl);
 >>>>>>> v3.18
@@ -1001,6 +1201,7 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	/* frame-level rate control */
 	reg |= ((p->rc_frame & 0x1) << 9);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_RC_CONFIG_V6);
 
 	/* bit rate */
@@ -1010,6 +1211,8 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	else
 		WRITEL(1, S5P_FIMV_E_RC_BIT_RATE_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(reg, mfc_regs->e_rc_config);
 
 	/* bit rate */
@@ -1018,11 +1221,15 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 			mfc_regs->e_rc_bit_rate);
 	else
 		writel(1, mfc_regs->e_rc_bit_rate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* reaction coefficient */
 	if (p->rc_frame) {
 		if (p->rc_reaction_coeff < TIGHT_CBR_MAX) /* tight CBR */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			WRITEL(1, S5P_FIMV_E_RC_RPARAM_V6);
 		else					  /* loose CBR */
@@ -1032,6 +1239,8 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	/* seq header ctrl */
 	reg = READL(S5P_FIMV_E_ENC_OPTIONS_V6);
 =======
+=======
+>>>>>>> v3.18
 			writel(1, mfc_regs->e_rc_mode);
 		else					  /* loose CBR */
 			writel(2, mfc_regs->e_rc_mode);
@@ -1039,6 +1248,9 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 
 	/* seq header ctrl */
 	reg = readl(mfc_regs->e_enc_options);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reg &= ~(0x1 << 2);
 	reg |= ((p->seq_hdr_mode & 0x1) << 2);
@@ -1046,6 +1258,7 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	/* frame skip mode */
 	reg &= ~(0x3);
 	reg |= (p->frame_skip_mode & 0x3);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_ENC_OPTIONS_V6);
 
@@ -1078,6 +1291,8 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 	WRITEL(0x0, S5P_FIMV_E_METADATA_BUFFER_ADDR_V6);
 	WRITEL(0x0, S5P_FIMV_E_METADATA_BUFFER_SIZE_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(reg, mfc_regs->e_enc_options);
 
 	/* 'DROP_CONTROL_ENABLE', disable */
@@ -1104,6 +1319,9 @@ static int s5p_mfc_set_enc_params(struct s5p_mfc_ctx *ctx)
 
 	writel(0x0, mfc_regs->e_metadata_buffer_addr);
 	writel(0x0, mfc_regs->e_metadata_buffer_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mfc_debug_leave();
@@ -1115,6 +1333,10 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 >>>>>>> v3.18
@@ -1129,15 +1351,21 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 
 	/* pictype : number of B */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg = READL(S5P_FIMV_E_GOP_CONFIG_V6);
 	reg &= ~(0x3 << 16);
 	reg |= ((p->num_b_frame & 0x3) << 16);
 	WRITEL(reg, S5P_FIMV_E_GOP_CONFIG_V6);
 =======
+=======
+>>>>>>> v3.18
 	reg = readl(mfc_regs->e_gop_config);
 	reg &= ~(0x3 << 16);
 	reg |= ((p->num_b_frame & 0x3) << 16);
 	writel(reg, mfc_regs->e_gop_config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* profile & level */
@@ -1146,6 +1374,7 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	reg |= ((p_h264->level & 0xFF) << 8);
 	/** profile - 0 ~ 3 */
 	reg |= p_h264->profile & 0x3F;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_PICTURE_PROFILE_V6);
 
@@ -1160,6 +1389,8 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	reg |= p_h264->rc_frame_qp & 0x3F;
 	WRITEL(reg, S5P_FIMV_E_RC_CONFIG_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(reg, mfc_regs->e_picture_profile);
 
 	/* rate control config. */
@@ -1173,6 +1404,9 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	reg &= ~(0x3F);
 	reg |= p_h264->rc_frame_qp & 0x3F;
 	writel(reg, mfc_regs->e_rc_config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* max & min value of QP */
@@ -1182,15 +1416,21 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	/** min QP */
 	reg |= p_h264->rc_min_qp & 0x3F;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_RC_QP_BOUND_V6);
 
 	/* other QPs */
 	WRITEL(0x0, S5P_FIMV_E_FIXED_PICTURE_QP_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(reg, mfc_regs->e_rc_qp_bound);
 
 	/* other QPs */
 	writel(0x0, mfc_regs->e_fixed_picture_qp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!p->rc_frame && !p->rc_mb) {
 		reg = 0;
@@ -1198,7 +1438,11 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 		reg |= ((p_h264->rc_p_frame_qp & 0x3F) << 8);
 		reg |= p_h264->rc_frame_qp & 0x3F;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(reg, S5P_FIMV_E_FIXED_PICTURE_QP_V6);
+=======
+		writel(reg, mfc_regs->e_fixed_picture_qp);
+>>>>>>> v3.18
 =======
 		writel(reg, mfc_regs->e_fixed_picture_qp);
 >>>>>>> v3.18
@@ -1210,7 +1454,11 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 		reg |= ((p->rc_framerate_num & 0xFFFF) << 16);
 		reg |= p->rc_framerate_denom & 0xFFFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(reg, S5P_FIMV_E_RC_FRAME_RATE_V6);
+=======
+		writel(reg, mfc_regs->e_rc_frame_rate);
+>>>>>>> v3.18
 =======
 		writel(reg, mfc_regs->e_rc_frame_rate);
 >>>>>>> v3.18
@@ -1220,23 +1468,30 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	if (p->frame_skip_mode ==
 			V4L2_MPEG_MFC51_VIDEO_FRAME_SKIP_MODE_BUF_LIMIT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(p_h264->cpb_size & 0xFFFF,
 				S5P_FIMV_E_VBV_BUFFER_SIZE_V6);
 
 		if (p->rc_frame)
 			WRITEL(p->vbv_delay, S5P_FIMV_E_VBV_INIT_DELAY_V6);
 =======
+=======
+>>>>>>> v3.18
 		writel(p_h264->cpb_size & 0xFFFF,
 				mfc_regs->e_vbv_buffer_size);
 
 		if (p->rc_frame)
 			writel(p->vbv_delay, mfc_regs->e_vbv_init_delay);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* interlace */
 	reg = 0;
 	reg |= ((p_h264->interlace & 0x1) << 3);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_H264_OPTIONS_V6);
 
@@ -1255,6 +1510,8 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	reg |= ((p_h264->loop_filter_mode & 0x3) << 1);
 	WRITEL(reg, S5P_FIMV_E_H264_OPTIONS_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(reg, mfc_regs->e_h264_options);
 
 	/* height */
@@ -1271,6 +1528,9 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	reg &= ~(0x3 << 1);
 	reg |= ((p_h264->loop_filter_mode & 0x3) << 1);
 	writel(reg, mfc_regs->e_h264_options);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* loopfilter alpha offset */
@@ -1282,7 +1542,11 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 		reg |= (p_h264->loop_filter_alpha & 0xF);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_H264_LF_ALPHA_OFFSET_V6);
+=======
+	writel(reg, mfc_regs->e_h264_lf_alpha_offset);
+>>>>>>> v3.18
 =======
 	writel(reg, mfc_regs->e_h264_lf_alpha_offset);
 >>>>>>> v3.18
@@ -1295,6 +1559,7 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 		reg = 0x00;
 		reg |= (p_h264->loop_filter_beta & 0xF);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_H264_LF_BETA_OFFSET_V6);
 
@@ -1319,6 +1584,8 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	/* macroblock adaptive scaling features */
 	WRITEL(0x0, S5P_FIMV_E_MB_RC_CONFIG_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(reg, mfc_regs->e_h264_lf_beta_offset);
 
 	/* entropy coding mode */
@@ -1341,6 +1608,9 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 
 	/* macroblock adaptive scaling features */
 	writel(0x0, mfc_regs->e_mb_rc_config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (p->rc_mb) {
 		reg = 0;
@@ -1352,6 +1622,7 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 		reg |= ((p_h264->rc_mb_static & 0x1) << 1);
 		/** high activity region */
 		reg |= p_h264->rc_mb_activity & 0x1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		WRITEL(reg, S5P_FIMV_E_MB_RC_CONFIG_V6);
 	}
@@ -1365,6 +1636,8 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	WRITEL(0x0, S5P_FIMV_E_ASPECT_RATIO_V6);
 	WRITEL(0x0, S5P_FIMV_E_EXTENDED_SAR_V6);
 =======
+=======
+>>>>>>> v3.18
 		writel(reg, mfc_regs->e_mb_rc_config);
 	}
 
@@ -1376,13 +1649,20 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 
 	writel(0x0, mfc_regs->e_aspect_ratio);
 	writel(0x0, mfc_regs->e_extended_sar);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (p_h264->vui_sar) {
 		/* aspect ration IDC */
 		reg = 0;
 		reg |= p_h264->vui_sar_idc & 0xFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(reg, S5P_FIMV_E_ASPECT_RATIO_V6);
+=======
+		writel(reg, mfc_regs->e_aspect_ratio);
+>>>>>>> v3.18
 =======
 		writel(reg, mfc_regs->e_aspect_ratio);
 >>>>>>> v3.18
@@ -1392,7 +1672,11 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 			reg |= (p_h264->vui_ext_sar_width & 0xFFFF) << 16;
 			reg |= p_h264->vui_ext_sar_height & 0xFFFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			WRITEL(reg, S5P_FIMV_E_EXTENDED_SAR_V6);
+=======
+			writel(reg, mfc_regs->e_extended_sar);
+>>>>>>> v3.18
 =======
 			writel(reg, mfc_regs->e_extended_sar);
 >>>>>>> v3.18
@@ -1401,6 +1685,7 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 
 	/* intra picture period for H.264 open GOP */
 	/* control */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	reg = READL(S5P_FIMV_E_H264_OPTIONS_V6);
 	reg &= ~(0x1 << 4);
@@ -1436,6 +1721,8 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	reg |= ((p_h264->open_gop & 0x1) << 8);
 	WRITEL(reg, S5P_FIMV_E_H264_OPTIONS_V6);
 =======
+=======
+>>>>>>> v3.18
 	readl(mfc_regs->e_h264_options);
 	reg &= ~(0x1 << 4);
 	reg |= ((p_h264->open_gop & 0x1) << 4);
@@ -1470,11 +1757,15 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	reg &= ~(0x1 << 8);
 	reg |= ((p_h264->open_gop & 0x1) << 8);
 	writel(reg, mfc_regs->e_h264_options);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reg = 0;
 	if (p_h264->hier_qp && p_h264->hier_qp_layer) {
 		reg |= (p_h264->hier_qp_type & 0x1) << 0x3;
 		reg |= p_h264->hier_qp_layer & 0x7;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		WRITEL(reg, S5P_FIMV_E_H264_NUM_T_LAYER_V6);
 		/* QP value for each layer */
@@ -1492,6 +1783,8 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	reg |= ((p_h264->sei_frame_packing & 0x1) << 25);
 	WRITEL(reg, S5P_FIMV_E_H264_OPTIONS_V6);
 =======
+=======
+>>>>>>> v3.18
 		writel(reg, mfc_regs->e_h264_num_t_layer);
 		/* QP value for each layer */
 		for (i = 0; i < p_h264->hier_qp_layer &&
@@ -1509,6 +1802,9 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	reg &= ~(0x1 << 25);
 	reg |= ((p_h264->sei_frame_packing & 0x1) << 25);
 	writel(reg, mfc_regs->e_h264_options);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (p_h264->sei_frame_packing) {
 		reg = 0;
@@ -1517,7 +1813,11 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 		/** arrangement type */
 		reg |= p_h264->sei_fp_arrangement_type & 0x3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(reg, S5P_FIMV_E_H264_FRAME_PACKING_SEI_INFO_V6);
+=======
+		writel(reg, mfc_regs->e_h264_frame_packing_sei_info);
+>>>>>>> v3.18
 =======
 		writel(reg, mfc_regs->e_h264_frame_packing_sei_info);
 >>>>>>> v3.18
@@ -1530,9 +1830,15 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 				p_h264->fmo_slice_grp = 4;
 			for (i = 0; i < (p_h264->fmo_slice_grp & 0xF); i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				WRITEL(p_h264->fmo_run_len[i] - 1,
 				S5P_FIMV_E_H264_FMO_RUN_LENGTH_MINUS1_0_V6 +
 				i * 4);
+=======
+				writel(p_h264->fmo_run_len[i] - 1,
+					mfc_regs->e_h264_fmo_run_length_minus1_0
+					+ i * 4);
+>>>>>>> v3.18
 =======
 				writel(p_h264->fmo_run_len[i] - 1,
 					mfc_regs->e_h264_fmo_run_length_minus1_0
@@ -1548,17 +1854,23 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 			if (p_h264->fmo_slice_grp > 2)
 				p_h264->fmo_slice_grp = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			WRITEL(p_h264->fmo_chg_dir & 0x1,
 				S5P_FIMV_E_H264_FMO_SLICE_GRP_CHANGE_DIR_V6);
 			/* the valid range is 0 ~ number of macroblocks -1 */
 			WRITEL(p_h264->fmo_chg_rate,
 				S5P_FIMV_E_H264_FMO_SLICE_GRP_CHANGE_RATE_MINUS1_V6);
 =======
+=======
+>>>>>>> v3.18
 			writel(p_h264->fmo_chg_dir & 0x1,
 				mfc_regs->e_h264_fmo_slice_grp_change_dir);
 			/* the valid range is 0 ~ number of macroblocks -1 */
 			writel(p_h264->fmo_chg_rate,
 			mfc_regs->e_h264_fmo_slice_grp_change_rate_minus1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		default:
@@ -1570,6 +1882,7 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(p_h264->fmo_map_type,
 				S5P_FIMV_E_H264_FMO_SLICE_GRP_MAP_TYPE_V6);
 		WRITEL(p_h264->fmo_slice_grp - 1,
@@ -1577,12 +1890,17 @@ static int s5p_mfc_set_enc_params_h264(struct s5p_mfc_ctx *ctx)
 	} else {
 		WRITEL(0, S5P_FIMV_E_H264_FMO_NUM_SLICE_GRP_MINUS1_V6);
 =======
+=======
+>>>>>>> v3.18
 		writel(p_h264->fmo_map_type,
 				mfc_regs->e_h264_fmo_slice_grp_map_type);
 		writel(p_h264->fmo_slice_grp - 1,
 				mfc_regs->e_h264_fmo_num_slice_grp_minus1);
 	} else {
 		writel(0, mfc_regs->e_h264_fmo_num_slice_grp_minus1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1595,6 +1913,10 @@ static int s5p_mfc_set_enc_params_mpeg4(struct s5p_mfc_ctx *ctx)
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 >>>>>>> v3.18
@@ -1608,15 +1930,21 @@ static int s5p_mfc_set_enc_params_mpeg4(struct s5p_mfc_ctx *ctx)
 
 	/* pictype : number of B */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg = READL(S5P_FIMV_E_GOP_CONFIG_V6);
 	reg &= ~(0x3 << 16);
 	reg |= ((p->num_b_frame & 0x3) << 16);
 	WRITEL(reg, S5P_FIMV_E_GOP_CONFIG_V6);
 =======
+=======
+>>>>>>> v3.18
 	reg = readl(mfc_regs->e_gop_config);
 	reg &= ~(0x3 << 16);
 	reg |= ((p->num_b_frame & 0x3) << 16);
 	writel(reg, mfc_regs->e_gop_config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* profile & level */
@@ -1625,6 +1953,7 @@ static int s5p_mfc_set_enc_params_mpeg4(struct s5p_mfc_ctx *ctx)
 	reg |= ((p_mpeg4->level & 0xFF) << 8);
 	/** profile - 0 ~ 1 */
 	reg |= p_mpeg4->profile & 0x3F;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_PICTURE_PROFILE_V6);
 
@@ -1639,6 +1968,8 @@ static int s5p_mfc_set_enc_params_mpeg4(struct s5p_mfc_ctx *ctx)
 	reg |= p_mpeg4->rc_frame_qp & 0x3F;
 	WRITEL(reg, S5P_FIMV_E_RC_CONFIG_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(reg, mfc_regs->e_picture_profile);
 
 	/* rate control config. */
@@ -1652,6 +1983,9 @@ static int s5p_mfc_set_enc_params_mpeg4(struct s5p_mfc_ctx *ctx)
 	reg &= ~(0x3F);
 	reg |= p_mpeg4->rc_frame_qp & 0x3F;
 	writel(reg, mfc_regs->e_rc_config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* max & min value of QP */
@@ -1661,15 +1995,21 @@ static int s5p_mfc_set_enc_params_mpeg4(struct s5p_mfc_ctx *ctx)
 	/** min QP */
 	reg |= p_mpeg4->rc_min_qp & 0x3F;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_RC_QP_BOUND_V6);
 
 	/* other QPs */
 	WRITEL(0x0, S5P_FIMV_E_FIXED_PICTURE_QP_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(reg, mfc_regs->e_rc_qp_bound);
 
 	/* other QPs */
 	writel(0x0, mfc_regs->e_fixed_picture_qp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!p->rc_frame && !p->rc_mb) {
 		reg = 0;
@@ -1677,7 +2017,11 @@ static int s5p_mfc_set_enc_params_mpeg4(struct s5p_mfc_ctx *ctx)
 		reg |= ((p_mpeg4->rc_p_frame_qp & 0x3F) << 8);
 		reg |= p_mpeg4->rc_frame_qp & 0x3F;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(reg, S5P_FIMV_E_FIXED_PICTURE_QP_V6);
+=======
+		writel(reg, mfc_regs->e_fixed_picture_qp);
+>>>>>>> v3.18
 =======
 		writel(reg, mfc_regs->e_fixed_picture_qp);
 >>>>>>> v3.18
@@ -1689,7 +2033,11 @@ static int s5p_mfc_set_enc_params_mpeg4(struct s5p_mfc_ctx *ctx)
 		reg |= ((p->rc_framerate_num & 0xFFFF) << 16);
 		reg |= p->rc_framerate_denom & 0xFFFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(reg, S5P_FIMV_E_RC_FRAME_RATE_V6);
+=======
+		writel(reg, mfc_regs->e_rc_frame_rate);
+>>>>>>> v3.18
 =======
 		writel(reg, mfc_regs->e_rc_frame_rate);
 >>>>>>> v3.18
@@ -1698,6 +2046,7 @@ static int s5p_mfc_set_enc_params_mpeg4(struct s5p_mfc_ctx *ctx)
 	/* vbv buffer size */
 	if (p->frame_skip_mode ==
 			V4L2_MPEG_MFC51_VIDEO_FRAME_SKIP_MODE_BUF_LIMIT) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		WRITEL(p->vbv_size & 0xFFFF, S5P_FIMV_E_VBV_BUFFER_SIZE_V6);
 
@@ -1709,6 +2058,8 @@ static int s5p_mfc_set_enc_params_mpeg4(struct s5p_mfc_ctx *ctx)
 	WRITEL(0x0, S5P_FIMV_E_MPEG4_OPTIONS_V6);
 	WRITEL(0x0, S5P_FIMV_E_MPEG4_HEC_PERIOD_V6);
 =======
+=======
+>>>>>>> v3.18
 		writel(p->vbv_size & 0xFFFF, mfc_regs->e_vbv_buffer_size);
 
 		if (p->rc_frame)
@@ -1718,6 +2069,9 @@ static int s5p_mfc_set_enc_params_mpeg4(struct s5p_mfc_ctx *ctx)
 	/* Disable HEC */
 	writel(0x0, mfc_regs->e_mpeg4_options);
 	writel(0x0, mfc_regs->e_mpeg4_hec_period);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mfc_debug_leave();
@@ -1729,6 +2083,10 @@ static int s5p_mfc_set_enc_params_h263(struct s5p_mfc_ctx *ctx)
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 >>>>>>> v3.18
@@ -1745,6 +2103,7 @@ static int s5p_mfc_set_enc_params_h263(struct s5p_mfc_ctx *ctx)
 	/** profile */
 	reg |= (0x1 << 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_PICTURE_PROFILE_V6);
 
 	/* rate control config. */
@@ -1758,6 +2117,8 @@ static int s5p_mfc_set_enc_params_h263(struct s5p_mfc_ctx *ctx)
 	reg |= p_h263->rc_frame_qp & 0x3F;
 	WRITEL(reg, S5P_FIMV_E_RC_CONFIG_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(reg, mfc_regs->e_picture_profile);
 
 	/* rate control config. */
@@ -1771,6 +2132,9 @@ static int s5p_mfc_set_enc_params_h263(struct s5p_mfc_ctx *ctx)
 	reg &= ~(0x3F);
 	reg |= p_h263->rc_frame_qp & 0x3F;
 	writel(reg, mfc_regs->e_rc_config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* max & min value of QP */
@@ -1780,15 +2144,21 @@ static int s5p_mfc_set_enc_params_h263(struct s5p_mfc_ctx *ctx)
 	/** min QP */
 	reg |= p_h263->rc_min_qp & 0x3F;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_E_RC_QP_BOUND_V6);
 
 	/* other QPs */
 	WRITEL(0x0, S5P_FIMV_E_FIXED_PICTURE_QP_V6);
 =======
+=======
+>>>>>>> v3.18
 	writel(reg, mfc_regs->e_rc_qp_bound);
 
 	/* other QPs */
 	writel(0x0, mfc_regs->e_fixed_picture_qp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!p->rc_frame && !p->rc_mb) {
 		reg = 0;
@@ -1796,7 +2166,11 @@ static int s5p_mfc_set_enc_params_h263(struct s5p_mfc_ctx *ctx)
 		reg |= ((p_h263->rc_p_frame_qp & 0x3F) << 8);
 		reg |= p_h263->rc_frame_qp & 0x3F;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(reg, S5P_FIMV_E_FIXED_PICTURE_QP_V6);
+=======
+		writel(reg, mfc_regs->e_fixed_picture_qp);
+>>>>>>> v3.18
 =======
 		writel(reg, mfc_regs->e_fixed_picture_qp);
 >>>>>>> v3.18
@@ -1808,7 +2182,11 @@ static int s5p_mfc_set_enc_params_h263(struct s5p_mfc_ctx *ctx)
 		reg |= ((p->rc_framerate_num & 0xFFFF) << 16);
 		reg |= p->rc_framerate_denom & 0xFFFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(reg, S5P_FIMV_E_RC_FRAME_RATE_V6);
+=======
+		writel(reg, mfc_regs->e_rc_frame_rate);
+>>>>>>> v3.18
 =======
 		writel(reg, mfc_regs->e_rc_frame_rate);
 >>>>>>> v3.18
@@ -1818,15 +2196,21 @@ static int s5p_mfc_set_enc_params_h263(struct s5p_mfc_ctx *ctx)
 	if (p->frame_skip_mode ==
 			V4L2_MPEG_MFC51_VIDEO_FRAME_SKIP_MODE_BUF_LIMIT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(p->vbv_size & 0xFFFF, S5P_FIMV_E_VBV_BUFFER_SIZE_V6);
 
 		if (p->rc_frame)
 			WRITEL(p->vbv_delay, S5P_FIMV_E_VBV_INIT_DELAY_V6);
 =======
+=======
+>>>>>>> v3.18
 		writel(p->vbv_size & 0xFFFF, mfc_regs->e_vbv_buffer_size);
 
 		if (p->rc_frame)
 			writel(p->vbv_delay, mfc_regs->e_vbv_init_delay);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1836,7 +2220,10 @@ static int s5p_mfc_set_enc_params_h263(struct s5p_mfc_ctx *ctx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int s5p_mfc_set_enc_params_vp8(struct s5p_mfc_ctx *ctx)
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
@@ -1930,12 +2317,19 @@ static int s5p_mfc_set_enc_params_vp8(struct s5p_mfc_ctx *ctx)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Initialize decoding */
 static int s5p_mfc_init_decode_v6(struct s5p_mfc_ctx *ctx)
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 >>>>>>> v3.18
@@ -1947,9 +2341,15 @@ static int s5p_mfc_init_decode_v6(struct s5p_mfc_ctx *ctx)
 			S5P_FIMV_CH_SEQ_HEADER_V6);
 	mfc_debug(2, "BUFs: %08x %08x %08x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  READL(S5P_FIMV_D_CPB_BUFFER_ADDR_V6),
 		  READL(S5P_FIMV_D_CPB_BUFFER_ADDR_V6),
 		  READL(S5P_FIMV_D_CPB_BUFFER_ADDR_V6));
+=======
+		  readl(mfc_regs->d_cpb_buffer_addr),
+		  readl(mfc_regs->d_cpb_buffer_addr),
+		  readl(mfc_regs->d_cpb_buffer_addr));
+>>>>>>> v3.18
 =======
 		  readl(mfc_regs->d_cpb_buffer_addr),
 		  readl(mfc_regs->d_cpb_buffer_addr),
@@ -1966,9 +2366,12 @@ static int s5p_mfc_init_decode_v6(struct s5p_mfc_ctx *ctx)
 	if (ctx->display_delay >= 0) {
 		reg |= (0x1 << S5P_FIMV_D_OPT_DDELAY_EN_SHIFT_V6);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(ctx->display_delay, S5P_FIMV_D_DISPLAY_DELAY_V6);
 	}
 =======
+=======
+>>>>>>> v3.18
 		writel(ctx->display_delay, mfc_regs->d_display_delay);
 	}
 
@@ -1977,6 +2380,9 @@ static int s5p_mfc_init_decode_v6(struct s5p_mfc_ctx *ctx)
 		reg = 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Setup loop filter, for decoding this is only valid for MPEG4 */
 	if (ctx->codec_mode == S5P_MFC_CODEC_MPEG4_DEC) {
@@ -1988,6 +2394,7 @@ static int s5p_mfc_init_decode_v6(struct s5p_mfc_ctx *ctx)
 	if (ctx->dst_fmt->fourcc == V4L2_PIX_FMT_NV12MT_16X16)
 		reg |= (0x1 << S5P_FIMV_D_OPT_TILE_MODE_SHIFT_V6);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	WRITEL(reg, S5P_FIMV_D_DEC_OPTIONS_V6);
 
@@ -2003,6 +2410,8 @@ static int s5p_mfc_init_decode_v6(struct s5p_mfc_ctx *ctx)
 	WRITEL(ctx->inst_no, S5P_FIMV_INSTANCE_ID_V6);
 	s5p_mfc_hw_call(dev->mfc_cmds, cmd_host2risc, dev,
 =======
+=======
+>>>>>>> v3.18
 	if (IS_MFCV7_PLUS(dev) || IS_MFCV6_V2(dev))
 		writel(reg, mfc_regs->d_init_buffer_options);
 	else
@@ -2020,6 +2429,9 @@ static int s5p_mfc_init_decode_v6(struct s5p_mfc_ctx *ctx)
 
 	writel(ctx->inst_no, mfc_regs->instance_id);
 	s5p_mfc_hw_call_void(dev->mfc_cmds, cmd_host2risc, dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			S5P_FIMV_CH_SEQ_HEADER_V6, NULL);
 
@@ -2031,6 +2443,10 @@ static inline void s5p_mfc_set_flush(struct s5p_mfc_ctx *ctx, int flush)
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 >>>>>>> v3.18
@@ -2039,8 +2455,13 @@ static inline void s5p_mfc_set_flush(struct s5p_mfc_ctx *ctx, int flush)
 		dev->curr_ctx = ctx->num;
 		s5p_mfc_clean_ctx_int_flags(ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WRITEL(ctx->inst_no, S5P_FIMV_INSTANCE_ID_V6);
 		s5p_mfc_hw_call(dev->mfc_cmds, cmd_host2risc, dev,
+=======
+		writel(ctx->inst_no, mfc_regs->instance_id);
+		s5p_mfc_hw_call_void(dev->mfc_cmds, cmd_host2risc, dev,
+>>>>>>> v3.18
 =======
 		writel(ctx->inst_no, mfc_regs->instance_id);
 		s5p_mfc_hw_call_void(dev->mfc_cmds, cmd_host2risc, dev,
@@ -2055,23 +2476,30 @@ static int s5p_mfc_decode_one_frame_v6(struct s5p_mfc_ctx *ctx,
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	WRITEL(ctx->dec_dst_flag, S5P_FIMV_D_AVAILABLE_DPB_FLAG_LOWER_V6);
 	WRITEL(ctx->slice_interface & 0x1, S5P_FIMV_D_SLICE_IF_ENABLE_V6);
 
 	WRITEL(ctx->inst_no, S5P_FIMV_INSTANCE_ID_V6);
 =======
+=======
+>>>>>>> v3.18
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 
 	writel(ctx->dec_dst_flag, mfc_regs->d_available_dpb_flag_lower);
 	writel(ctx->slice_interface & 0x1, mfc_regs->d_slice_if_enable);
 
 	writel(ctx->inst_no, mfc_regs->instance_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Issue different commands to instance basing on whether it
 	 * is the last frame or not. */
 	switch (last_frame) {
 	case 0:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		s5p_mfc_hw_call(dev->mfc_cmds, cmd_host2risc, dev,
 				S5P_FIMV_CH_FRAME_START_V6, NULL);
@@ -2079,11 +2507,16 @@ static int s5p_mfc_decode_one_frame_v6(struct s5p_mfc_ctx *ctx,
 	case 1:
 		s5p_mfc_hw_call(dev->mfc_cmds, cmd_host2risc, dev,
 =======
+=======
+>>>>>>> v3.18
 		s5p_mfc_hw_call_void(dev->mfc_cmds, cmd_host2risc, dev,
 				S5P_FIMV_CH_FRAME_START_V6, NULL);
 		break;
 	case 1:
 		s5p_mfc_hw_call_void(dev->mfc_cmds, cmd_host2risc, dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				S5P_FIMV_CH_LAST_FRAME_V6, NULL);
 		break;
@@ -2100,6 +2533,10 @@ static int s5p_mfc_init_encode_v6(struct s5p_mfc_ctx *ctx)
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 >>>>>>> v3.18
@@ -2111,6 +2548,11 @@ static int s5p_mfc_init_encode_v6(struct s5p_mfc_ctx *ctx)
 	else if (ctx->codec_mode == S5P_MFC_CODEC_H263_ENC)
 		s5p_mfc_set_enc_params_h263(ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else if (ctx->codec_mode == S5P_MFC_CODEC_VP8_ENC)
+		s5p_mfc_set_enc_params_vp8(ctx);
+>>>>>>> v3.18
 =======
 	else if (ctx->codec_mode == S5P_MFC_CODEC_VP8_ENC)
 		s5p_mfc_set_enc_params_vp8(ctx);
@@ -2122,9 +2564,12 @@ static int s5p_mfc_init_encode_v6(struct s5p_mfc_ctx *ctx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(ctx->inst_no, S5P_FIMV_INSTANCE_ID_V6);
 	s5p_mfc_hw_call(dev->mfc_cmds, cmd_host2risc, dev,
 =======
+=======
+>>>>>>> v3.18
 	/* Set stride lengths for v7 & above */
 	if (IS_MFCV7_PLUS(dev)) {
 		writel(ctx->img_width, mfc_regs->e_source_first_plane_stride);
@@ -2133,6 +2578,9 @@ static int s5p_mfc_init_encode_v6(struct s5p_mfc_ctx *ctx)
 
 	writel(ctx->inst_no, mfc_regs->instance_id);
 	s5p_mfc_hw_call_void(dev->mfc_cmds, cmd_host2risc, dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			S5P_FIMV_CH_SEQ_HEADER_V6, NULL);
 
@@ -2143,6 +2591,10 @@ static int s5p_mfc_h264_set_aso_slice_order_v6(struct s5p_mfc_ctx *ctx)
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 >>>>>>> v3.18
@@ -2152,14 +2604,20 @@ static int s5p_mfc_h264_set_aso_slice_order_v6(struct s5p_mfc_ctx *ctx)
 
 	if (p_h264->aso) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < 8; i++)
 			WRITEL(p_h264->aso_slice_order[i],
 				S5P_FIMV_E_H264_ASO_SLICE_ORDER_0_V6 + i * 4);
 =======
+=======
+>>>>>>> v3.18
 		for (i = 0; i < ARRAY_SIZE(p_h264->aso_slice_order); i++) {
 			writel(p_h264->aso_slice_order[i],
 				mfc_regs->e_h264_aso_slice_order_0 + i * 4);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -2170,6 +2628,10 @@ static int s5p_mfc_encode_one_frame_v6(struct s5p_mfc_ctx *ctx)
 {
 	struct s5p_mfc_dev *dev = ctx->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 >>>>>>> v3.18
@@ -2184,8 +2646,13 @@ static int s5p_mfc_encode_one_frame_v6(struct s5p_mfc_ctx *ctx)
 	s5p_mfc_set_slice_mode(ctx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WRITEL(ctx->inst_no, S5P_FIMV_INSTANCE_ID_V6);
 	s5p_mfc_hw_call(dev->mfc_cmds, cmd_host2risc, dev,
+=======
+	writel(ctx->inst_no, mfc_regs->instance_id);
+	s5p_mfc_hw_call_void(dev->mfc_cmds, cmd_host2risc, dev,
+>>>>>>> v3.18
 =======
 	writel(ctx->inst_no, mfc_regs->instance_id);
 	s5p_mfc_hw_call_void(dev->mfc_cmds, cmd_host2risc, dev,
@@ -2564,8 +3031,14 @@ static void s5p_mfc_cleanup_queue_v6(struct list_head *lh, struct vb2_queue *vq)
 static void s5p_mfc_clear_int_flags_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfc_write(dev, 0, S5P_FIMV_RISC2HOST_CMD_V6);
 	mfc_write(dev, 0, S5P_FIMV_RISC2HOST_INT_V6);
+=======
+	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
+	writel(0, mfc_regs->risc2host_command);
+	writel(0, mfc_regs->risc2host_int);
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs = dev->mfc_regs;
 	writel(0, mfc_regs->risc2host_command);
@@ -2577,10 +3050,15 @@ static void s5p_mfc_write_info_v6(struct s5p_mfc_ctx *ctx, unsigned int data,
 		unsigned int ofs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s5p_mfc_dev *dev = ctx->dev;
 
 	s5p_mfc_clock_on();
 	WRITEL(data, ofs);
+=======
+	s5p_mfc_clock_on();
+	writel(data, (volatile void __iomem *)((unsigned long)ofs));
+>>>>>>> v3.18
 =======
 	s5p_mfc_clock_on();
 	writel(data, (volatile void __iomem *)((unsigned long)ofs));
@@ -2592,16 +3070,22 @@ static unsigned int
 s5p_mfc_read_info_v6(struct s5p_mfc_ctx *ctx, unsigned int ofs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s5p_mfc_dev *dev = ctx->dev;
 	int ret;
 
 	s5p_mfc_clock_on();
 	ret = READL(ofs);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	s5p_mfc_clock_on();
 	ret = readl((volatile void __iomem *)((unsigned long)ofs));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s5p_mfc_clock_off();
 
@@ -2611,7 +3095,11 @@ s5p_mfc_read_info_v6(struct s5p_mfc_ctx *ctx, unsigned int ofs)
 static int s5p_mfc_get_dspl_y_adr_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_D_DISPLAY_LUMA_ADDR_V6);
+=======
+	return readl(dev->mfc_regs->d_display_first_plane_addr);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->d_display_first_plane_addr);
 >>>>>>> v3.18
@@ -2620,7 +3108,11 @@ static int s5p_mfc_get_dspl_y_adr_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_dec_y_adr_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_D_DECODED_LUMA_ADDR_V6);
+=======
+	return readl(dev->mfc_regs->d_decoded_first_plane_addr);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->d_decoded_first_plane_addr);
 >>>>>>> v3.18
@@ -2629,7 +3121,11 @@ static int s5p_mfc_get_dec_y_adr_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_dspl_status_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_D_DISPLAY_STATUS_V6);
+=======
+	return readl(dev->mfc_regs->d_display_status);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->d_display_status);
 >>>>>>> v3.18
@@ -2638,7 +3134,11 @@ static int s5p_mfc_get_dspl_status_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_dec_status_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_D_DECODED_STATUS_V6);
+=======
+	return readl(dev->mfc_regs->d_decoded_status);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->d_decoded_status);
 >>>>>>> v3.18
@@ -2647,7 +3147,11 @@ static int s5p_mfc_get_dec_status_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_dec_frame_type_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_D_DECODED_FRAME_TYPE_V6) &
+=======
+	return readl(dev->mfc_regs->d_decoded_frame_type) &
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->d_decoded_frame_type) &
 >>>>>>> v3.18
@@ -2657,7 +3161,12 @@ static int s5p_mfc_get_dec_frame_type_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_disp_frame_type_v6(struct s5p_mfc_ctx *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(ctx->dev, S5P_FIMV_D_DISPLAY_FRAME_TYPE_V6) &
+=======
+	struct s5p_mfc_dev *dev = ctx->dev;
+	return readl(dev->mfc_regs->d_display_frame_type) &
+>>>>>>> v3.18
 =======
 	struct s5p_mfc_dev *dev = ctx->dev;
 	return readl(dev->mfc_regs->d_display_frame_type) &
@@ -2668,7 +3177,11 @@ static int s5p_mfc_get_disp_frame_type_v6(struct s5p_mfc_ctx *ctx)
 static int s5p_mfc_get_consumed_stream_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_D_DECODED_NAL_SIZE_V6);
+=======
+	return readl(dev->mfc_regs->d_decoded_nal_size);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->d_decoded_nal_size);
 >>>>>>> v3.18
@@ -2677,7 +3190,11 @@ static int s5p_mfc_get_consumed_stream_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_int_reason_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_RISC2HOST_CMD_V6) &
+=======
+	return readl(dev->mfc_regs->risc2host_command) &
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->risc2host_command) &
 >>>>>>> v3.18
@@ -2687,7 +3204,11 @@ static int s5p_mfc_get_int_reason_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_int_err_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_ERROR_CODE_V6);
+=======
+	return readl(dev->mfc_regs->error_code);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->error_code);
 >>>>>>> v3.18
@@ -2706,7 +3227,11 @@ static int s5p_mfc_err_dspl_v6(unsigned int err)
 static int s5p_mfc_get_img_width_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_D_DISPLAY_FRAME_WIDTH_V6);
+=======
+	return readl(dev->mfc_regs->d_display_frame_width);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->d_display_frame_width);
 >>>>>>> v3.18
@@ -2715,7 +3240,11 @@ static int s5p_mfc_get_img_width_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_img_height_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_D_DISPLAY_FRAME_HEIGHT_V6);
+=======
+	return readl(dev->mfc_regs->d_display_frame_height);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->d_display_frame_height);
 >>>>>>> v3.18
@@ -2724,7 +3253,11 @@ static int s5p_mfc_get_img_height_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_dpb_count_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_D_MIN_NUM_DPB_V6);
+=======
+	return readl(dev->mfc_regs->d_min_num_dpb);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->d_min_num_dpb);
 >>>>>>> v3.18
@@ -2733,7 +3266,11 @@ static int s5p_mfc_get_dpb_count_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_mv_count_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_D_MIN_NUM_MV_V6);
+=======
+	return readl(dev->mfc_regs->d_min_num_mv);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->d_min_num_mv);
 >>>>>>> v3.18
@@ -2742,7 +3279,11 @@ static int s5p_mfc_get_mv_count_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_inst_no_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_RET_INSTANCE_ID_V6);
+=======
+	return readl(dev->mfc_regs->ret_instance_id);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->ret_instance_id);
 >>>>>>> v3.18
@@ -2751,7 +3292,11 @@ static int s5p_mfc_get_inst_no_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_enc_dpb_count_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_E_NUM_DPB_V6);
+=======
+	return readl(dev->mfc_regs->e_num_dpb);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->e_num_dpb);
 >>>>>>> v3.18
@@ -2760,7 +3305,11 @@ static int s5p_mfc_get_enc_dpb_count_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_enc_strm_size_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_E_STREAM_SIZE_V6);
+=======
+	return readl(dev->mfc_regs->e_stream_size);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->e_stream_size);
 >>>>>>> v3.18
@@ -2769,7 +3318,11 @@ static int s5p_mfc_get_enc_strm_size_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_enc_slice_type_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_E_SLICE_TYPE_V6);
+=======
+	return readl(dev->mfc_regs->e_slice_type);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->e_slice_type);
 >>>>>>> v3.18
@@ -2778,7 +3331,11 @@ static int s5p_mfc_get_enc_slice_type_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_enc_pic_count_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_E_PICTURE_COUNT_V6);
+=======
+	return readl(dev->mfc_regs->e_picture_count);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->e_picture_count);
 >>>>>>> v3.18
@@ -2787,7 +3344,12 @@ static int s5p_mfc_get_enc_pic_count_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_sei_avail_status_v6(struct s5p_mfc_ctx *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(ctx->dev, S5P_FIMV_D_FRAME_PACK_SEI_AVAIL_V6);
+=======
+	struct s5p_mfc_dev *dev = ctx->dev;
+	return readl(dev->mfc_regs->d_frame_pack_sei_avail);
+>>>>>>> v3.18
 =======
 	struct s5p_mfc_dev *dev = ctx->dev;
 	return readl(dev->mfc_regs->d_frame_pack_sei_avail);
@@ -2797,7 +3359,11 @@ static int s5p_mfc_get_sei_avail_status_v6(struct s5p_mfc_ctx *ctx)
 static int s5p_mfc_get_mvc_num_views_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_D_MVC_NUM_VIEWS_V6);
+=======
+	return readl(dev->mfc_regs->d_mvc_num_views);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->d_mvc_num_views);
 >>>>>>> v3.18
@@ -2806,7 +3372,11 @@ static int s5p_mfc_get_mvc_num_views_v6(struct s5p_mfc_dev *dev)
 static int s5p_mfc_get_mvc_view_id_v6(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfc_read(dev, S5P_FIMV_D_MVC_VIEW_ID_V6);
+=======
+	return readl(dev->mfc_regs->d_mvc_view_id);
+>>>>>>> v3.18
 =======
 	return readl(dev->mfc_regs->d_mvc_view_id);
 >>>>>>> v3.18
@@ -2815,7 +3385,12 @@ static int s5p_mfc_get_mvc_view_id_v6(struct s5p_mfc_dev *dev)
 static unsigned int s5p_mfc_get_pic_type_top_v6(struct s5p_mfc_ctx *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return s5p_mfc_read_info_v6(ctx, PIC_TIME_TOP_V6);
+=======
+	return s5p_mfc_read_info_v6(ctx,
+		(__force unsigned long) ctx->dev->mfc_regs->d_ret_picture_tag_top);
+>>>>>>> v3.18
 =======
 	return s5p_mfc_read_info_v6(ctx,
 		(__force unsigned long) ctx->dev->mfc_regs->d_ret_picture_tag_top);
@@ -2825,7 +3400,12 @@ static unsigned int s5p_mfc_get_pic_type_top_v6(struct s5p_mfc_ctx *ctx)
 static unsigned int s5p_mfc_get_pic_type_bot_v6(struct s5p_mfc_ctx *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return s5p_mfc_read_info_v6(ctx, PIC_TIME_BOT_V6);
+=======
+	return s5p_mfc_read_info_v6(ctx,
+		(__force unsigned long) ctx->dev->mfc_regs->d_ret_picture_tag_bot);
+>>>>>>> v3.18
 =======
 	return s5p_mfc_read_info_v6(ctx,
 		(__force unsigned long) ctx->dev->mfc_regs->d_ret_picture_tag_bot);
@@ -2835,7 +3415,12 @@ static unsigned int s5p_mfc_get_pic_type_bot_v6(struct s5p_mfc_ctx *ctx)
 static unsigned int s5p_mfc_get_crop_info_h_v6(struct s5p_mfc_ctx *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return s5p_mfc_read_info_v6(ctx, CROP_INFO_H_V6);
+=======
+	return s5p_mfc_read_info_v6(ctx,
+		(__force unsigned long) ctx->dev->mfc_regs->d_display_crop_info1);
+>>>>>>> v3.18
 =======
 	return s5p_mfc_read_info_v6(ctx,
 		(__force unsigned long) ctx->dev->mfc_regs->d_display_crop_info1);
@@ -2845,8 +3430,11 @@ static unsigned int s5p_mfc_get_crop_info_h_v6(struct s5p_mfc_ctx *ctx)
 static unsigned int s5p_mfc_get_crop_info_v_v6(struct s5p_mfc_ctx *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return s5p_mfc_read_info_v6(ctx, CROP_INFO_V_V6);
 =======
+=======
+>>>>>>> v3.18
 	return s5p_mfc_read_info_v6(ctx,
 		(__force unsigned long) ctx->dev->mfc_regs->d_display_crop_info2);
 }
@@ -3085,6 +3673,9 @@ done:
 	return &mfc_regs;
 #undef S5P_MFC_REG_ADDR
 #undef R
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

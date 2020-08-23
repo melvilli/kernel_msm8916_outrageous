@@ -475,7 +475,10 @@ static void cryp_dma_setup_channel(struct cryp_device_data *device_data,
 				   struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct dma_slave_config mem2cryp = {
 		.direction = DMA_MEM_TO_DEV,
 		.dst_addr = device_data->phybase + CRYP_DMA_TX_FIFO,
@@ -489,6 +492,9 @@ static void cryp_dma_setup_channel(struct cryp_device_data *device_data,
 		.src_maxburst = 4,
         };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dma_cap_zero(device_data->dma.mask);
 	dma_cap_set(DMA_SLAVE, device_data->dma.mask);
@@ -506,6 +512,12 @@ static void cryp_dma_setup_channel(struct cryp_device_data *device_data,
 				    device_data->dma.cfg_cryp2mem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dmaengine_slave_config(device_data->dma.chan_mem2cryp, &mem2cryp);
+	dmaengine_slave_config(device_data->dma.chan_cryp2mem, &cryp2mem);
+
+>>>>>>> v3.18
 =======
 	dmaengine_slave_config(device_data->dma.chan_mem2cryp, &mem2cryp);
 	dmaengine_slave_config(device_data->dma.chan_cryp2mem, &cryp2mem);
@@ -559,15 +571,21 @@ static int cryp_set_dma_transfer(struct cryp_ctx *ctx,
 			"(TO_DEVICE)", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		desc = channel->device->device_prep_slave_sg(channel,
 					     ctx->device->dma.sg_src,
 					     ctx->device->dma.sg_src_len,
 					     direction, DMA_CTRL_ACK, NULL);
 =======
+=======
+>>>>>>> v3.18
 		desc = dmaengine_prep_slave_sg(channel,
 				ctx->device->dma.sg_src,
 				ctx->device->dma.sg_src_len,
 				direction, DMA_CTRL_ACK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -590,6 +608,7 @@ static int cryp_set_dma_transfer(struct cryp_ctx *ctx,
 			"(FROM_DEVICE)", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		desc = channel->device->device_prep_slave_sg(channel,
 					     ctx->device->dma.sg_dst,
 					     ctx->device->dma.sg_dst_len,
@@ -597,12 +616,17 @@ static int cryp_set_dma_transfer(struct cryp_ctx *ctx,
 					     DMA_CTRL_ACK |
 					     DMA_PREP_INTERRUPT, NULL);
 =======
+=======
+>>>>>>> v3.18
 		desc = dmaengine_prep_slave_sg(channel,
 				ctx->device->dma.sg_dst,
 				ctx->device->dma.sg_dst_len,
 				direction,
 				DMA_CTRL_ACK |
 				DMA_PREP_INTERRUPT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		desc->callback = cryp_dma_out_callback;
@@ -616,7 +640,11 @@ static int cryp_set_dma_transfer(struct cryp_ctx *ctx,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cookie = desc->tx_submit(desc);
+=======
+	cookie = dmaengine_submit(desc);
+>>>>>>> v3.18
 =======
 	cookie = dmaengine_submit(desc);
 >>>>>>> v3.18
@@ -633,7 +661,11 @@ static void cryp_dma_done(struct cryp_ctx *ctx)
 
 	chan = ctx->device->dma.chan_mem2cryp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chan->device->device_control(chan, DMA_TERMINATE_ALL, 0);
+=======
+	dmaengine_device_control(chan, DMA_TERMINATE_ALL, 0);
+>>>>>>> v3.18
 =======
 	dmaengine_device_control(chan, DMA_TERMINATE_ALL, 0);
 >>>>>>> v3.18
@@ -642,7 +674,11 @@ static void cryp_dma_done(struct cryp_ctx *ctx)
 
 	chan = ctx->device->dma.chan_cryp2mem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chan->device->device_control(chan, DMA_TERMINATE_ALL, 0);
+=======
+	dmaengine_device_control(chan, DMA_TERMINATE_ALL, 0);
+>>>>>>> v3.18
 =======
 	dmaengine_device_control(chan, DMA_TERMINATE_ALL, 0);
 >>>>>>> v3.18
@@ -1481,6 +1517,10 @@ static int ux500_cryp_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_data->phybase = res->start;
+>>>>>>> v3.18
 =======
 	device_data->phybase = res->start;
 >>>>>>> v3.18
@@ -1512,20 +1552,30 @@ static int ux500_cryp_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = clk_prepare(device_data->clk);
 	if (ret) {
 		dev_err(dev, "[%s]: clk_prepare() failed!", __func__);
 		goto out_clk;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Enable device power (and clock) */
 	ret = cryp_enable_power(device_data->dev, device_data, false);
 	if (ret) {
 		dev_err(dev, "[%s]: cryp_enable_power() failed!", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_clk;
+=======
+		goto out_clk_unprepare;
+>>>>>>> v3.18
 =======
 		goto out_clk_unprepare;
 >>>>>>> v3.18
@@ -1585,6 +1635,11 @@ static int ux500_cryp_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev_info(dev, "successfully registered\n");
+
+>>>>>>> v3.18
 =======
 	dev_info(dev, "successfully registered\n");
 
@@ -1595,6 +1650,12 @@ out_power:
 	cryp_disable_power(device_data->dev, device_data, false);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out_clk_unprepare:
+	clk_unprepare(device_data->clk);
+
+>>>>>>> v3.18
 =======
 out_clk_unprepare:
 	clk_unprepare(device_data->clk);
@@ -1671,6 +1732,10 @@ static int ux500_cryp_remove(struct platform_device *pdev)
 			__func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clk_unprepare(device_data->clk);
+>>>>>>> v3.18
 =======
 	clk_unprepare(device_data->clk);
 >>>>>>> v3.18
@@ -1682,7 +1747,11 @@ static int ux500_cryp_remove(struct platform_device *pdev)
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (res)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		release_mem_region(res->start, res->end - res->start + 1);
+=======
+		release_mem_region(res->start, resource_size(res));
+>>>>>>> v3.18
 =======
 		release_mem_region(res->start, resource_size(res));
 >>>>>>> v3.18
@@ -1829,12 +1898,18 @@ static int ux500_cryp_resume(struct device *dev)
 static SIMPLE_DEV_PM_OPS(ux500_cryp_pm, ux500_cryp_suspend, ux500_cryp_resume);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id ux500_cryp_match[] = {
         { .compatible = "stericsson,ux500-cryp" },
         { },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver cryp_driver = {
 	.probe  = ux500_cryp_probe,
@@ -1844,6 +1919,10 @@ static struct platform_driver cryp_driver = {
 		.owner = THIS_MODULE,
 		.name  = "cryp1",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = ux500_cryp_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = ux500_cryp_match,
 >>>>>>> v3.18
@@ -1874,8 +1953,13 @@ module_param(cryp_mode, int, 0);
 
 MODULE_DESCRIPTION("Driver for ST-Ericsson UX500 CRYP crypto engine.");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("aes-all");
 MODULE_ALIAS_CRYPTO("des-all");
+=======
+MODULE_ALIAS("aes-all");
+MODULE_ALIAS("des-all");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("aes-all");
 MODULE_ALIAS("des-all");

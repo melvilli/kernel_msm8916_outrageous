@@ -61,7 +61,11 @@ radeon-y := radeon_drv.o
 # add UMS driver
 radeon-$(CONFIG_DRM_RADEON_UMS)+= radeon_cp.o radeon_state.o radeon_mem.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_irq.o r300_cmdbuf.o r600_cp.o r600_blit.o
+=======
+	radeon_irq.o r300_cmdbuf.o r600_cp.o r600_blit.o drm_buffer.o
+>>>>>>> v3.18
 =======
 	radeon_irq.o r300_cmdbuf.o r600_cp.o r600_blit.o drm_buffer.o
 >>>>>>> v3.18
@@ -77,12 +81,15 @@ radeon-y += radeon_device.o radeon_asic.o radeon_kms.o \
 	rs400.o rs600.o rs690.o rv515.o r520.o r600.o rv770.o radeon_test.o \
 	r200.o radeon_legacy_tv.o r600_cs.o r600_blit_shaders.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r600_blit_kms.o radeon_pm.o atombios_dp.o r600_audio.o r600_hdmi.o \
 	evergreen.o evergreen_cs.o evergreen_blit_shaders.o evergreen_blit_kms.o \
 	evergreen_hdmi.o radeon_trace_points.o ni.o cayman_blit_shaders.o \
 	atombios_encoders.o radeon_semaphore.o radeon_sa.o atombios_i2c.o si.o \
 	si_blit_shaders.o radeon_prime.o radeon_uvd.o
 =======
+=======
+>>>>>>> v3.18
 	radeon_pm.o atombios_dp.o r600_hdmi.o dce3_1_afmt.o \
 	evergreen.o evergreen_cs.o evergreen_blit_shaders.o \
 	evergreen_hdmi.o radeon_trace_points.o ni.o cayman_blit_shaders.o \
@@ -115,6 +122,9 @@ radeon-y += \
 	radeon_vce.o \
 	vce_v1_0.o \
 	vce_v2_0.o \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 radeon-$(CONFIG_COMPAT) += radeon_ioc32.o

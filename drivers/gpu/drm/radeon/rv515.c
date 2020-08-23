@@ -125,7 +125,11 @@ void rv515_ring_start(struct radeon_device *rdev, struct radeon_ring *ring)
 	radeon_ring_write(ring, PACKET0(0x20C8, 0));
 	radeon_ring_write(ring, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_ring_unlock_commit(rdev, ring);
+=======
+	radeon_ring_unlock_commit(rdev, ring, false);
+>>>>>>> v3.18
 =======
 	radeon_ring_unlock_commit(rdev, ring, false);
 >>>>>>> v3.18
@@ -214,12 +218,15 @@ static void rv515_mc_init(struct radeon_device *rdev)
 uint32_t rv515_mc_rreg(struct radeon_device *rdev, uint32_t reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t r;
 
 	WREG32(MC_IND_INDEX, 0x7f0000 | (reg & 0xffff));
 	r = RREG32(MC_IND_DATA);
 	WREG32(MC_IND_INDEX, 0);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 	uint32_t r;
 
@@ -229,6 +236,9 @@ uint32_t rv515_mc_rreg(struct radeon_device *rdev, uint32_t reg)
 	WREG32(MC_IND_INDEX, 0);
 	spin_unlock_irqrestore(&rdev->mc_idx_lock, flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return r;
 }
@@ -236,10 +246,13 @@ uint32_t rv515_mc_rreg(struct radeon_device *rdev, uint32_t reg)
 void rv515_mc_wreg(struct radeon_device *rdev, uint32_t reg, uint32_t v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WREG32(MC_IND_INDEX, 0xff0000 | ((reg) & 0xffff));
 	WREG32(MC_IND_DATA, (v));
 	WREG32(MC_IND_INDEX, 0);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&rdev->mc_idx_lock, flags);
@@ -247,6 +260,9 @@ void rv515_mc_wreg(struct radeon_device *rdev, uint32_t reg, uint32_t v)
 	WREG32(MC_IND_DATA, (v));
 	WREG32(MC_IND_INDEX, 0);
 	spin_unlock_irqrestore(&rdev->mc_idx_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -425,8 +441,14 @@ void rv515_mc_resume(struct radeon_device *rdev, struct rv515_mc_save *save)
 		if (save->crtc_enabled[i]) {
 			tmp = RREG32(AVIVO_D1MODE_MASTER_UPDATE_MODE + crtc_offsets[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((tmp & 0x3) != 0) {
 				tmp &= ~0x3;
+=======
+			if ((tmp & 0x7) != 3) {
+				tmp &= ~0x7;
+				tmp |= 0x3;
+>>>>>>> v3.18
 =======
 			if ((tmp & 0x7) != 3) {
 				tmp &= ~0x7;
@@ -621,6 +643,10 @@ int rv515_resume(struct radeon_device *rdev)
 int rv515_suspend(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	radeon_pm_suspend(rdev);
+>>>>>>> v3.18
 =======
 	radeon_pm_suspend(rdev);
 >>>>>>> v3.18
@@ -641,6 +667,10 @@ void rv515_set_safe_registers(struct radeon_device *rdev)
 void rv515_fini(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	radeon_pm_fini(rdev);
+>>>>>>> v3.18
 =======
 	radeon_pm_fini(rdev);
 >>>>>>> v3.18
@@ -718,6 +748,12 @@ int rv515_init(struct radeon_device *rdev)
 	rv515_set_safe_registers(rdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Initialize power management */
+	radeon_pm_init(rdev);
+
+>>>>>>> v3.18
 =======
 	/* Initialize power management */
 	radeon_pm_init(rdev);
@@ -984,8 +1020,14 @@ struct rv515_watermark {
 
 static void rv515_crtc_bandwidth_compute(struct radeon_device *rdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct radeon_crtc *crtc,
 				  struct rv515_watermark *wm)
+=======
+					 struct radeon_crtc *crtc,
+					 struct rv515_watermark *wm,
+					 bool low)
+>>>>>>> v3.18
 =======
 					 struct radeon_crtc *crtc,
 					 struct rv515_watermark *wm,
@@ -997,6 +1039,11 @@ static void rv515_crtc_bandwidth_compute(struct radeon_device *rdev,
 	fixed20_12 pclk, request_fifo_depth, tolerable_latency, estimated_width;
 	fixed20_12 consumption_time, line_time, chunk_time, read_delay_latency;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fixed20_12 sclk;
+	u32 selected_sclk;
+>>>>>>> v3.18
 =======
 	fixed20_12 sclk;
 	u32 selected_sclk;
@@ -1009,7 +1056,10 @@ static void rv515_crtc_bandwidth_compute(struct radeon_device *rdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* rv6xx, rv7xx */
 	if ((rdev->family >= CHIP_RV610) &&
 	    (rdev->pm.pm_method == PM_METHOD_DPM) && rdev->pm.dpm_enabled)
@@ -1022,6 +1072,9 @@ static void rv515_crtc_bandwidth_compute(struct radeon_device *rdev,
 	sclk.full = dfixed_const(selected_sclk);
 	sclk.full = dfixed_div(sclk, a);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (crtc->vsc.full > dfixed_const(2))
 		wm->num_line_pair.full = dfixed_const(2);
@@ -1089,7 +1142,11 @@ static void rv515_crtc_bandwidth_compute(struct radeon_device *rdev,
 	 */
 	a.full = dfixed_const(600 * 1000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chunk_time.full = dfixed_div(a, rdev->pm.sclk);
+=======
+	chunk_time.full = dfixed_div(a, sclk);
+>>>>>>> v3.18
 =======
 	chunk_time.full = dfixed_div(a, sclk);
 >>>>>>> v3.18
@@ -1153,6 +1210,7 @@ static void rv515_crtc_bandwidth_compute(struct radeon_device *rdev,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void rv515_bandwidth_avivo_update(struct radeon_device *rdev)
 {
@@ -1301,6 +1359,8 @@ void rv515_bandwidth_avivo_update(struct radeon_device *rdev)
 	WREG32(D2MODE_PRIORITY_A_CNT, d2mode_priority_a_cnt);
 	WREG32(D2MODE_PRIORITY_B_CNT, d2mode_priority_a_cnt);
 =======
+=======
+>>>>>>> v3.18
 static void rv515_compute_mode_priority(struct radeon_device *rdev,
 					struct rv515_watermark *wm0,
 					struct rv515_watermark *wm1,
@@ -1464,6 +1524,9 @@ void rv515_bandwidth_avivo_update(struct radeon_device *rdev)
 	WREG32(D1MODE_PRIORITY_B_CNT, d1mode_priority_b_cnt);
 	WREG32(D2MODE_PRIORITY_A_CNT, d2mode_priority_a_cnt);
 	WREG32(D2MODE_PRIORITY_B_CNT, d2mode_priority_b_cnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1474,6 +1537,12 @@ void rv515_bandwidth_update(struct radeon_device *rdev)
 	struct drm_display_mode *mode1 = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!rdev->mode_info.mode_config_initialized)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!rdev->mode_info.mode_config_initialized)
 		return;

@@ -1239,7 +1239,11 @@ int __init init_module(void)
 {
  	dev_ni65 = ni65_probe(-1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(dev_ni65);
+=======
+	return PTR_ERR_OR_ZERO(dev_ni65);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(dev_ni65);
 >>>>>>> v3.18

@@ -32,6 +32,7 @@ TRACE_EVENT(kvm_ppc_instr,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_BOOK3S
 #define kvm_trace_symbol_exit \
 	{0x100, "SYSTEM_RESET"}, \
@@ -154,6 +155,8 @@ TRACE_EVENT(kvm_unmap_hva,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 TRACE_EVENT(kvm_stlb_inval,
 	TP_PROTO(unsigned int stlb_index),
 	TP_ARGS(stlb_index),
@@ -239,6 +242,7 @@ TRACE_EVENT(kvm_check_requests,
 		__entry->cpu_nr, __entry->requests)
 );
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*************************************************************************
@@ -549,6 +553,8 @@ TRACE_EVENT(kvm_booke_queue_irqprio,
 
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _TRACE_KVM_H */

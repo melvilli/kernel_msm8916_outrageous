@@ -8,7 +8,10 @@ CFLAGS_REMOVE_timer.o = -pg
 CFLAGS_REMOVE_intc.o = -pg
 CFLAGS_REMOVE_early_printk.o = -pg
 <<<<<<< HEAD
+<<<<<<< HEAD
 CFLAGS_REMOVE_selfmod.o = -pg
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CFLAGS_REMOVE_heartbeat.o = -pg
@@ -21,7 +24,11 @@ extra-y := head.o vmlinux.lds
 obj-y += dma.o exceptions.o \
 	hw_exception_handler.o intc.o irq.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	process.o prom.o prom_parse.o ptrace.o \
+=======
+	platform.o process.o prom.o prom_parse.o ptrace.o \
+>>>>>>> v3.18
 =======
 	platform.o process.o prom.o prom_parse.o ptrace.o \
 >>>>>>> v3.18
@@ -31,7 +38,10 @@ obj-y += cpu/
 
 obj-$(CONFIG_EARLY_PRINTK)	+= early_printk.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SELFMOD)		+= selfmod.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_HEART_BEAT)	+= heartbeat.o

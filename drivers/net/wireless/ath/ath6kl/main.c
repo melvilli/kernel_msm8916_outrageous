@@ -30,6 +30,12 @@ struct ath6kl_sta *ath6kl_find_sta(struct ath6kl_vif *vif, u8 *node_addr)
 	u8 i, max_conn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (is_zero_ether_addr(node_addr))
+		return NULL;
+
+>>>>>>> v3.18
 =======
 	if (is_zero_ether_addr(node_addr))
 		return NULL;
@@ -229,7 +235,11 @@ int ath6kl_diag_write32(struct ath6kl *ar, u32 address, __le32 value)
 
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath6kl_err("failed to write 0x%x during diagnose window to 0x%d\n",
+=======
+		ath6kl_err("failed to write 0x%x during diagnose window to 0x%x\n",
+>>>>>>> v3.18
 =======
 		ath6kl_err("failed to write 0x%x during diagnose window to 0x%x\n",
 >>>>>>> v3.18
@@ -579,7 +589,10 @@ void ath6kl_scan_complete_evt(struct ath6kl_vif *vif, int status)
 static int ath6kl_commit_ch_switch(struct ath6kl_vif *vif, u16 channel)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ath6kl *ar = vif->ar;
@@ -611,7 +624,10 @@ static int ath6kl_commit_ch_switch(struct ath6kl_vif *vif, u16 channel)
 static void ath6kl_check_ch_switch(struct ath6kl *ar, u16 channel)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ath6kl_vif *vif;
@@ -706,9 +722,15 @@ void ath6kl_tkip_micerr_event(struct ath6kl_vif *vif, u8 keyid, bool ismcast)
 					     NL80211_KEYTYPE_PAIRWISE, keyid,
 					     tsc, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		ath6kl_cfg80211_tkip_micerr_event(vif, keyid, ismcast);
 
+=======
+	} else {
+		ath6kl_cfg80211_tkip_micerr_event(vif, keyid, ismcast);
+	}
+>>>>>>> v3.18
 =======
 	} else {
 		ath6kl_cfg80211_tkip_micerr_event(vif, keyid, ismcast);
@@ -724,6 +746,10 @@ static void ath6kl_update_target_stats(struct ath6kl_vif *vif, u8 *ptr, u32 len)
 	struct target_stats *stats = &vif->target_stats;
 	struct tkip_ccmp_stats *ccmp_stats;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	s32 rate;
+>>>>>>> v3.18
 =======
 	s32 rate;
 >>>>>>> v3.18
@@ -757,8 +783,14 @@ static void ath6kl_update_target_stats(struct ath6kl_vif *vif, u8 *ptr, u32 len)
 	stats->tx_rts_fail_cnt +=
 		le32_to_cpu(tgt_stats->stats.tx.rts_fail_cnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stats->tx_ucast_rate =
 	    ath6kl_wmi_get_rate(a_sle32_to_cpu(tgt_stats->stats.tx.ucast_rate));
+=======
+
+	rate = a_sle32_to_cpu(tgt_stats->stats.tx.ucast_rate);
+	stats->tx_ucast_rate = ath6kl_wmi_get_rate(ar->wmi, rate);
+>>>>>>> v3.18
 =======
 
 	rate = a_sle32_to_cpu(tgt_stats->stats.tx.ucast_rate);
@@ -781,8 +813,14 @@ static void ath6kl_update_target_stats(struct ath6kl_vif *vif, u8 *ptr, u32 len)
 	stats->rx_decrypt_err += le32_to_cpu(tgt_stats->stats.rx.decrypt_err);
 	stats->rx_dupl_frame += le32_to_cpu(tgt_stats->stats.rx.dupl_frame);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stats->rx_ucast_rate =
 	    ath6kl_wmi_get_rate(a_sle32_to_cpu(tgt_stats->stats.rx.ucast_rate));
+=======
+
+	rate = a_sle32_to_cpu(tgt_stats->stats.rx.ucast_rate);
+	stats->rx_ucast_rate = ath6kl_wmi_get_rate(ar->wmi, rate);
+>>>>>>> v3.18
 =======
 
 	rate = a_sle32_to_cpu(tgt_stats->stats.rx.ucast_rate);
@@ -1129,8 +1167,14 @@ static int ath6kl_open(struct net_device *dev)
 		netif_carrier_on(dev);
 		netif_wake_queue(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		netif_carrier_off(dev);
+=======
+	} else {
+		netif_carrier_off(dev);
+	}
+>>>>>>> v3.18
 =======
 	} else {
 		netif_carrier_off(dev);
@@ -1188,7 +1232,10 @@ static int ath6kl_set_features(struct net_device *dev,
 			return err;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1337,6 +1384,11 @@ static const struct net_device_ops ath6kl_netdev_ops = {
 void init_netdev(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ath6kl *ar = ath6kl_priv(dev);
+
+>>>>>>> v3.18
 =======
 	struct ath6kl *ar = ath6kl_priv(dev);
 
@@ -1353,7 +1405,13 @@ void init_netdev(struct net_device *dev)
 					ATH6KL_HTC_ALIGN_BYTES, 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->hw_features |= NETIF_F_IP_CSUM | NETIF_F_RXCSUM;
+=======
+	if (!test_bit(ATH6KL_FW_CAPABILITY_NO_IP_CHECKSUM,
+		      ar->fw_capabilities))
+		dev->hw_features |= NETIF_F_IP_CSUM | NETIF_F_RXCSUM;
+>>>>>>> v3.18
 =======
 	if (!test_bit(ATH6KL_FW_CAPABILITY_NO_IP_CHECKSUM,
 		      ar->fw_capabilities))

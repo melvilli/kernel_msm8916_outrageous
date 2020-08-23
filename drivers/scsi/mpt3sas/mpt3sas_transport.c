@@ -3,7 +3,11 @@
  *
  * This code is based on drivers/scsi/mpt3sas/mpt3sas_transport.c
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012  LSI Corporation
+=======
+ * Copyright (C) 2012-2014  LSI Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2014  LSI Corporation
 >>>>>>> v3.18
@@ -1008,16 +1012,22 @@ mpt3sas_transport_update_links(struct MPT3SAS_ADAPTER *ioc,
 		_transport_add_phy_to_an_existing_port(ioc, sas_node,
 		    mpt3sas_phy, mpt3sas_phy->remote_identify.sas_address);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		memset(&mpt3sas_phy->remote_identify, 0 , sizeof(struct
 		    sas_identify));
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		memset(&mpt3sas_phy->remote_identify, 0 , sizeof(struct
 		    sas_identify));
 		_transport_del_phy_from_an_existing_port(ioc, sas_node,
 		    mpt3sas_phy);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (mpt3sas_phy->phy)
@@ -1895,7 +1905,11 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 	Mpi2SmpPassthroughRequest_t *mpi_request;
 	Mpi2SmpPassthroughReply_t *mpi_reply;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc, i;
+=======
+	int rc;
+>>>>>>> v3.18
 =======
 	int rc;
 >>>>>>> v3.18
@@ -1913,7 +1927,12 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 	u16 wait_state_count;
 	struct request *rsp = req->next_rq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bvec = NULL;
+=======
+	struct bio_vec bvec;
+	struct bvec_iter iter;
+>>>>>>> v3.18
 =======
 	struct bio_vec bvec;
 	struct bvec_iter iter;
@@ -1945,7 +1964,11 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 
 	/* Check if the request is split across multiple segments */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (req->bio->bi_vcnt > 1) {
+=======
+	if (bio_multiple_segments(req->bio)) {
+>>>>>>> v3.18
 =======
 	if (bio_multiple_segments(req->bio)) {
 >>>>>>> v3.18
@@ -1962,17 +1985,23 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio_for_each_segment(bvec, req->bio, i) {
 			memcpy(pci_addr_out + offset,
 			    page_address(bvec->bv_page) + bvec->bv_offset,
 			    bvec->bv_len);
 			offset += bvec->bv_len;
 =======
+=======
+>>>>>>> v3.18
 		bio_for_each_segment(bvec, req->bio, iter) {
 			memcpy(pci_addr_out + offset,
 			    page_address(bvec.bv_page) + bvec.bv_offset,
 			    bvec.bv_len);
 			offset += bvec.bv_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else {
@@ -1989,7 +2018,11 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 	/* Check if the response needs to be populated across
 	 * multiple segments */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rsp->bio->bi_vcnt > 1) {
+=======
+	if (bio_multiple_segments(rsp->bio)) {
+>>>>>>> v3.18
 =======
 	if (bio_multiple_segments(rsp->bio)) {
 >>>>>>> v3.18
@@ -2054,7 +2087,11 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 	psge = &mpi_request->SGL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (req->bio->bi_vcnt > 1)
+=======
+	if (bio_multiple_segments(req->bio))
+>>>>>>> v3.18
 =======
 	if (bio_multiple_segments(req->bio))
 >>>>>>> v3.18
@@ -2103,6 +2140,7 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 		/* check if the resp needs to be copied from the allocated
 		 * pci mem */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rsp->bio->bi_vcnt > 1) {
 			u32 offset = 0;
 			u32 bytes_to_copy =
@@ -2121,6 +2159,8 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 				}
 				offset += bvec->bv_len;
 =======
+=======
+>>>>>>> v3.18
 		if (bio_multiple_segments(rsp->bio)) {
 			u32 offset = 0;
 			u32 bytes_to_copy =
@@ -2138,6 +2178,9 @@ _transport_smp_handler(struct Scsi_Host *shost, struct sas_rphy *rphy,
 					bytes_to_copy -= bvec.bv_len;
 				}
 				offset += bvec.bv_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}

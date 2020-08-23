@@ -92,8 +92,13 @@ static int ab3100_set_register_interruptible(struct ab3100 *ab3100,
 	} else if (err != 2) {
 		dev_err(ab3100->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"write error (write register) "
 			"%d bytes transferred (expected 2)\n",
+=======
+			"write error (write register)\n"
+			"  %d bytes transferred (expected 2)\n",
+>>>>>>> v3.18
 =======
 			"write error (write register)\n"
 			"  %d bytes transferred (expected 2)\n",
@@ -141,8 +146,13 @@ static int ab3100_set_test_register_interruptible(struct ab3100 *ab3100,
 	} else if (err != 2) {
 		dev_err(ab3100->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"write error (write test register) "
 			"%d bytes transferred (expected 2)\n",
+=======
+			"write error (write test register)\n"
+			"  %d bytes transferred (expected 2)\n",
+>>>>>>> v3.18
 =======
 			"write error (write test register)\n"
 			"  %d bytes transferred (expected 2)\n",
@@ -182,8 +192,13 @@ static int ab3100_get_register_interruptible(struct ab3100 *ab3100,
 	} else if (err != 1) {
 		dev_err(ab3100->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"write error (send register address) "
 			"%d bytes transferred (expected 1)\n",
+=======
+			"write error (send register address)\n"
+			"  %d bytes transferred (expected 1)\n",
+>>>>>>> v3.18
 =======
 			"write error (send register address)\n"
 			"  %d bytes transferred (expected 1)\n",
@@ -205,8 +220,13 @@ static int ab3100_get_register_interruptible(struct ab3100 *ab3100,
 	} else if (err != 1) {
 		dev_err(ab3100->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"write error (read register) "
 			"%d bytes transferred (expected 1)\n",
+=======
+			"write error (read register)\n"
+			"  %d bytes transferred (expected 1)\n",
+>>>>>>> v3.18
 =======
 			"write error (read register)\n"
 			"  %d bytes transferred (expected 1)\n",
@@ -258,8 +278,13 @@ static int ab3100_get_register_page_interruptible(struct ab3100 *ab3100,
 	} else if (err != 1) {
 		dev_err(ab3100->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"write error (send first register address) "
 			"%d bytes transferred (expected 1)\n",
+=======
+			"write error (send first register address)\n"
+			"  %d bytes transferred (expected 1)\n",
+>>>>>>> v3.18
 =======
 			"write error (send first register address)\n"
 			"  %d bytes transferred (expected 1)\n",
@@ -278,8 +303,13 @@ static int ab3100_get_register_page_interruptible(struct ab3100 *ab3100,
 	} else if (err != numregs) {
 		dev_err(ab3100->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"write error (read register page) "
 			"%d bytes transferred (expected %d)\n",
+=======
+			"write error (read register page)\n"
+			"  %d bytes transferred (expected %d)\n",
+>>>>>>> v3.18
 =======
 			"write error (read register page)\n"
 			"  %d bytes transferred (expected %d)\n",
@@ -326,8 +356,13 @@ static int ab3100_mask_and_set_register_interruptible(struct ab3100 *ab3100,
 	} else if (err != 1) {
 		dev_err(ab3100->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"write error (maskset send address) "
 			"%d bytes transferred (expected 1)\n",
+=======
+			"write error (maskset send address)\n"
+			"  %d bytes transferred (expected 1)\n",
+>>>>>>> v3.18
 =======
 			"write error (maskset send address)\n"
 			"  %d bytes transferred (expected 1)\n",
@@ -346,8 +381,13 @@ static int ab3100_mask_and_set_register_interruptible(struct ab3100 *ab3100,
 	} else if (err != 1) {
 		dev_err(ab3100->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"write error (maskset read register) "
 			"%d bytes transferred (expected 1)\n",
+=======
+			"write error (maskset read register)\n"
+			"  %d bytes transferred (expected 1)\n",
+>>>>>>> v3.18
 =======
 			"write error (maskset read register)\n"
 			"  %d bytes transferred (expected 1)\n",
@@ -371,8 +411,13 @@ static int ab3100_mask_and_set_register_interruptible(struct ab3100 *ab3100,
 	} else if (err != 2) {
 		dev_err(ab3100->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"write error (write register) "
 			"%d bytes transferred (expected 2)\n",
+=======
+			"write error (write register)\n"
+			"  %d bytes transferred (expected 2)\n",
+>>>>>>> v3.18
 =======
 			"write error (write register)\n"
 			"  %d bytes transferred (expected 2)\n",
@@ -417,7 +462,11 @@ int ab3100_event_unregister(struct ab3100 *ab3100,
 			    struct notifier_block *nb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   return blocking_notifier_chain_unregister(&ab3100->event_subscribers,
+=======
+	return blocking_notifier_chain_unregister(&ab3100->event_subscribers,
+>>>>>>> v3.18
 =======
 	return blocking_notifier_chain_unregister(&ab3100->event_subscribers,
 >>>>>>> v3.18
@@ -505,7 +554,11 @@ static int ab3100_registers_print(struct seq_file *s, void *p)
 	u8 reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(s, "AB3100 registers:\n");
+=======
+	seq_puts(s, "AB3100 registers:\n");
+>>>>>>> v3.18
 =======
 	seq_puts(s, "AB3100 registers:\n");
 >>>>>>> v3.18
@@ -545,7 +598,11 @@ static ssize_t ab3100_get_set_reg(struct file *file,
 	ssize_t buf_size;
 	int regp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long user_reg;
+=======
+	u8 user_reg;
+>>>>>>> v3.18
 =======
 	u8 user_reg;
 >>>>>>> v3.18
@@ -572,7 +629,11 @@ static ssize_t ab3100_get_set_reg(struct file *file,
 	 * Advance pointer to end of string then terminate
 	 * the register string. This is needed to satisfy
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * the strict_strtoul() function.
+=======
+	 * the kstrtou8() function.
+>>>>>>> v3.18
 =======
 	 * the kstrtou8() function.
 >>>>>>> v3.18
@@ -581,6 +642,7 @@ static ssize_t ab3100_get_set_reg(struct file *file,
 		i++;
 	buf[i] = '\0';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = strict_strtoul(&buf[regp], 16, &user_reg);
 	if (err)
@@ -592,10 +654,16 @@ static ssize_t ab3100_get_set_reg(struct file *file,
 	if (err)
 		return err;
 >>>>>>> v3.18
+=======
+	err = kstrtou8(&buf[regp], 16, &user_reg);
+	if (err)
+		return err;
+>>>>>>> v3.18
 
 	/* Either we read or we write a register here */
 	if (!priv->mode) {
 		/* Reading */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		u8 reg = (u8) user_reg;
 		u8 regvalue;
@@ -611,6 +679,8 @@ static ssize_t ab3100_get_set_reg(struct file *file,
 		u8 reg = (u8) user_reg;
 		u8 value;
 =======
+=======
+>>>>>>> v3.18
 		u8 regvalue;
 
 		ab3100_get_register_interruptible(ab3100, user_reg, &regvalue);
@@ -621,6 +691,9 @@ static ssize_t ab3100_get_set_reg(struct file *file,
 	} else {
 		int valp;
 		u8 user_value;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		u8 regvalue;
 
@@ -638,6 +711,7 @@ static ssize_t ab3100_get_set_reg(struct file *file,
 		buf[i] = '\0';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = strict_strtoul(&buf[valp], 16, &user_value);
 		if (err)
 			return err;
@@ -653,6 +727,8 @@ static ssize_t ab3100_get_set_reg(struct file *file,
 			 "after readback: 0x%02x\n",
 			 reg, value, regvalue);
 =======
+=======
+>>>>>>> v3.18
 		err = kstrtou8(&buf[valp], 16, &user_value);
 		if (err)
 			return err;
@@ -664,6 +740,9 @@ static ssize_t ab3100_get_set_reg(struct file *file,
 			 "debug write reg[0x%02x]\n"
 			 "  with 0x%02x, after readback: 0x%02x\n",
 			 user_reg, user_value, regvalue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return buf_size;
@@ -822,8 +901,12 @@ static int ab3100_setup(struct ab3100 *ab3100)
 	if (ab3100->chip_id == 0xc4) {
 		dev_warn(ab3100->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "AB3100 P1E variant detected, "
 			 "forcing chip to 32KHz\n");
+=======
+			 "AB3100 P1E variant detected forcing chip to 32KHz\n");
+>>>>>>> v3.18
 =======
 			 "AB3100 P1E variant detected forcing chip to 32KHz\n");
 >>>>>>> v3.18
@@ -961,7 +1044,11 @@ static int ab3100_probe(struct i2c_client *client,
 	struct ab3100 *ab3100;
 	struct ab3100_platform_data *ab3100_plf_data =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		client->dev.platform_data;
+=======
+		dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 		dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -989,8 +1076,12 @@ static int ab3100_probe(struct i2c_client *client,
 	if (err) {
 		dev_err(&client->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"could not communicate with the AB3100 analog "
 			"baseband chip\n");
+=======
+			"failed to communicate with AB3100 chip\n");
+>>>>>>> v3.18
 =======
 			"failed to communicate with AB3100 chip\n");
 >>>>>>> v3.18
@@ -1017,8 +1108,13 @@ static int ab3100_probe(struct i2c_client *client,
 		dev_err(&client->dev, "unknown analog baseband chip id: 0x%x\n",
 			ab3100->chip_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev, "accepting it anyway. Please update "
 			"the driver.\n");
+=======
+		dev_err(&client->dev,
+			"accepting it anyway. Please update the driver.\n");
+>>>>>>> v3.18
 =======
 		dev_err(&client->dev,
 			"accepting it anyway. Please update the driver.\n");

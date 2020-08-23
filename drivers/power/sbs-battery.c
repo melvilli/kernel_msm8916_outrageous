@@ -49,12 +49,18 @@ enum {
 	REG_DESIGN_CAPACITY,
 	REG_DESIGN_CAPACITY_CHARGE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REG_DESIGN_VOLTAGE,
 =======
+=======
+>>>>>>> v3.18
 	REG_DESIGN_VOLTAGE_MIN,
 	REG_DESIGN_VOLTAGE_MAX,
 	REG_MANUFACTURER,
 	REG_MODEL_NAME,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -76,6 +82,10 @@ enum sbs_battery_mode {
 #define BATTERY_FULL_DISCHARGED		0x10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* min_value and max_value are only valid for numerical data */
+>>>>>>> v3.18
 =======
 /* min_value and max_value are only valid for numerical data */
 >>>>>>> v3.18
@@ -123,11 +133,14 @@ static const struct chip_data {
 	[REG_DESIGN_CAPACITY_CHARGE] =
 		SBS_DATA(POWER_SUPPLY_PROP_CHARGE_FULL_DESIGN, 0x18, 0, 65535),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[REG_DESIGN_VOLTAGE] =
 		SBS_DATA(POWER_SUPPLY_PROP_VOLTAGE_MAX_DESIGN, 0x19, 0, 65535),
 	[REG_SERIAL_NUMBER] =
 		SBS_DATA(POWER_SUPPLY_PROP_SERIAL_NUMBER, 0x1C, 0, 65535),
 =======
+=======
+>>>>>>> v3.18
 	[REG_DESIGN_VOLTAGE_MIN] =
 		SBS_DATA(POWER_SUPPLY_PROP_VOLTAGE_MIN_DESIGN, 0x19, 0, 65535),
 	[REG_DESIGN_VOLTAGE_MAX] =
@@ -139,6 +152,9 @@ static const struct chip_data {
 		SBS_DATA(POWER_SUPPLY_PROP_MANUFACTURER, 0x20, 0, 65535),
 	[REG_MODEL_NAME] =
 		SBS_DATA(POWER_SUPPLY_PROP_MODEL_NAME, 0x21, 0, 65535)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -156,6 +172,10 @@ static enum power_supply_property sbs_properties[] = {
 	POWER_SUPPLY_PROP_TIME_TO_FULL_AVG,
 	POWER_SUPPLY_PROP_SERIAL_NUMBER,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	POWER_SUPPLY_PROP_VOLTAGE_MIN_DESIGN,
+>>>>>>> v3.18
 =======
 	POWER_SUPPLY_PROP_VOLTAGE_MIN_DESIGN,
 >>>>>>> v3.18
@@ -167,6 +187,12 @@ static enum power_supply_property sbs_properties[] = {
 	POWER_SUPPLY_PROP_CHARGE_FULL,
 	POWER_SUPPLY_PROP_CHARGE_FULL_DESIGN,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Properties of type `const char *' */
+	POWER_SUPPLY_PROP_MANUFACTURER,
+	POWER_SUPPLY_PROP_MODEL_NAME
+>>>>>>> v3.18
 =======
 	/* Properties of type `const char *' */
 	POWER_SUPPLY_PROP_MANUFACTURER,
@@ -189,6 +215,12 @@ struct sbs_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static char model_name[I2C_SMBUS_BLOCK_MAX + 1];
+static char manufacturer[I2C_SMBUS_BLOCK_MAX + 1];
+
+>>>>>>> v3.18
 =======
 static char model_name[I2C_SMBUS_BLOCK_MAX + 1];
 static char manufacturer[I2C_SMBUS_BLOCK_MAX + 1];
@@ -221,7 +253,10 @@ static int sbs_read_word_data(struct i2c_client *client, u8 address)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int sbs_read_string_data(struct i2c_client *client, u8 address,
 				char *values)
 {
@@ -290,6 +325,9 @@ static int sbs_read_string_data(struct i2c_client *client, u8 address,
 	return le16_to_cpu(ret);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sbs_write_word_data(struct i2c_client *client, u8 address,
 	u16 value)
@@ -431,7 +469,10 @@ static int sbs_get_battery_property(struct i2c_client *client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int sbs_get_battery_string_property(struct i2c_client *client,
 	int reg_offset, enum power_supply_property psp, char *val)
 {
@@ -445,6 +486,9 @@ static int sbs_get_battery_string_property(struct i2c_client *client,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void  sbs_unit_adjustment(struct i2c_client *client,
 	enum power_supply_property psp, union power_supply_propval *val)
@@ -465,6 +509,10 @@ static void  sbs_unit_adjustment(struct i2c_client *client,
 
 	case POWER_SUPPLY_PROP_VOLTAGE_NOW:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case POWER_SUPPLY_PROP_VOLTAGE_MIN_DESIGN:
+>>>>>>> v3.18
 =======
 	case POWER_SUPPLY_PROP_VOLTAGE_MIN_DESIGN:
 >>>>>>> v3.18
@@ -630,6 +678,10 @@ static int sbs_get_property(struct power_supply *psy,
 	case POWER_SUPPLY_PROP_TIME_TO_EMPTY_AVG:
 	case POWER_SUPPLY_PROP_TIME_TO_FULL_AVG:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case POWER_SUPPLY_PROP_VOLTAGE_MIN_DESIGN:
+>>>>>>> v3.18
 =======
 	case POWER_SUPPLY_PROP_VOLTAGE_MIN_DESIGN:
 >>>>>>> v3.18
@@ -642,7 +694,10 @@ static int sbs_get_property(struct power_supply *psy,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case POWER_SUPPLY_PROP_MODEL_NAME:
 		ret = sbs_get_property_index(client, psp);
 		if (ret < 0)
@@ -663,6 +718,9 @@ static int sbs_get_property(struct power_supply *psy,
 		val->strval = manufacturer;
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		dev_err(&client->dev,
@@ -864,6 +922,10 @@ static int sbs_probe(struct i2c_client *client,
 	chip->power_supply.num_properties = ARRAY_SIZE(sbs_properties);
 	chip->power_supply.get_property = sbs_get_property;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	chip->power_supply.of_node = client->dev.of_node;
+>>>>>>> v3.18
 =======
 	chip->power_supply.of_node = client->dev.of_node;
 >>>>>>> v3.18

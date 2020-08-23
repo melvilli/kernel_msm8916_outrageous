@@ -47,7 +47,10 @@ MODULE_AUTHOR("Miloslav Trmac <mitr@volny.cz>");
 MODULE_DESCRIPTION("Wistron laptop button driver");
 MODULE_LICENSE("GPL v2");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_VERSION("0.3");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -282,7 +285,10 @@ static struct key_entry keymap_fs_amilo_pro_v3505[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct key_entry keymap_fs_amilo_pro_v8210[] __initdata = {
 	{ KE_KEY,       0x01, {KEY_HELP} },          /* Fn+F1 */
 	{ KE_KEY,       0x06, {KEY_DISPLAYTOGGLE} }, /* Fn+F4 */
@@ -293,6 +299,9 @@ static struct key_entry keymap_fs_amilo_pro_v8210[] __initdata = {
 	{ KE_END,       FE_WIFI_LED }
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct key_entry keymap_fujitsu_n3510[] __initdata = {
 	{ KE_KEY, 0x11, {KEY_PROG1} },
@@ -580,7 +589,11 @@ static struct key_entry keymap_wistron_md96500[] __initdata = {
 	{ KE_WIFI, 0x30 },
 	{ KE_BLUETOOTH, 0x44 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ KE_END, FE_UNTESTED }
+=======
+	{ KE_END, 0 }
+>>>>>>> v3.18
 =======
 	{ KE_END, 0 }
 >>>>>>> v3.18
@@ -656,7 +669,11 @@ static struct key_entry keymap_prestigio[] __initdata = {
  * with force=1) and the output of dmidecode to $MODULE_AUTHOR.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct dmi_system_id __initconst dmi_ids[] = {
+=======
+static const struct dmi_system_id dmi_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct dmi_system_id dmi_ids[] __initconst = {
 >>>>>>> v3.18
@@ -680,7 +697,10 @@ static const struct dmi_system_id dmi_ids[] __initconst = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Fujitsu-Siemens Amilo Pro Edition V8210 */
 		.callback = dmi_matched,
 		.matches = {
@@ -690,6 +710,9 @@ static const struct dmi_system_id dmi_ids[] __initconst = {
 		.driver_data = keymap_fs_amilo_pro_v8210
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Fujitsu-Siemens Amilo M7400 */
 		.callback = dmi_matched,
@@ -1009,6 +1032,10 @@ static const struct dmi_system_id dmi_ids[] __initconst = {
 	{ NULL, }
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DEVICE_TABLE(dmi, dmi_ids);
+>>>>>>> v3.18
 =======
 MODULE_DEVICE_TABLE(dmi, dmi_ids);
 >>>>>>> v3.18

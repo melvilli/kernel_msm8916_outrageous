@@ -71,22 +71,29 @@
 
 /* Utility macros */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SKIP_TO_NEXT_CPU(reg_entry)			\
 ({							\
 	while (reg_entry->reg_id != REG_ID("CPUEND"))	\
 		reg_entry++;				\
 	reg_entry++;					\
 =======
+=======
+>>>>>>> v3.18
 #define SKIP_TO_NEXT_CPU(reg_entry)					\
 ({									\
 	while (be64_to_cpu(reg_entry->reg_id) != REG_ID("CPUEND"))	\
 		reg_entry++;						\
 	reg_entry++;							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 })
 
 /* Kernel Dump section info */
 struct fadump_section {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32	request_flag;
 	u16	source_data_type;
@@ -96,6 +103,8 @@ struct fadump_section {
 	u64	bytes_dumped;
 	u64	destination_address;
 =======
+=======
+>>>>>>> v3.18
 	__be32	request_flag;
 	__be16	source_data_type;
 	__be16	error_flags;
@@ -103,11 +112,15 @@ struct fadump_section {
 	__be64	source_len;
 	__be64	bytes_dumped;
 	__be64	destination_address;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* ibm,configure-kernel-dump header. */
 struct fadump_section_header {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32	dump_format_version;
 	u16	dump_num_sections;
@@ -123,6 +136,8 @@ struct fadump_section_header {
 	/* Maximum time allowed to prevent an automatic dump-reboot. */
 	u32	max_time_auto;
 =======
+=======
+>>>>>>> v3.18
 	__be32	dump_format_version;
 	__be16	dump_num_sections;
 	__be16	dump_status_flag;
@@ -136,6 +151,9 @@ struct fadump_section_header {
 
 	/* Maximum time allowed to prevent an automatic dump-reboot. */
 	__be32	max_time_auto;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -209,9 +227,15 @@ static inline u64 str_to_u64(const char *str)
 /* Register save area header. */
 struct fadump_reg_save_area_header {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64		magic_number;
 	u32		version;
 	u32		num_cpu_offset;
+=======
+	__be64		magic_number;
+	__be32		version;
+	__be32		num_cpu_offset;
+>>>>>>> v3.18
 =======
 	__be64		magic_number;
 	__be32		version;
@@ -222,8 +246,13 @@ struct fadump_reg_save_area_header {
 /* Register entry. */
 struct fadump_reg_entry {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64		reg_id;
 	u64		reg_value;
+=======
+	__be64		reg_id;
+	__be64		reg_value;
+>>>>>>> v3.18
 =======
 	__be64		reg_id;
 	__be64		reg_value;
@@ -256,7 +285,10 @@ extern void crash_fadump(struct pt_regs *, const char *);
 extern void fadump_cleanup(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void vmcore_cleanup(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else	/* CONFIG_FA_DUMP */

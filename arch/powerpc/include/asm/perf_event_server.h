@@ -13,7 +13,13 @@
 #include <asm/hw_irq.h>
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <uapi/asm/perf_event.h>
+
+/* Update perf_event_print_debug() if this changes */
+>>>>>>> v3.18
 =======
 #include <uapi/asm/perf_event.h>
 
@@ -24,6 +30,11 @@
 #define MAX_LIMITED_HWCOUNTERS	2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct perf_event;
+
+>>>>>>> v3.18
 =======
 struct perf_event;
 
@@ -40,7 +51,12 @@ struct power_pmu {
 	unsigned long	test_adder;
 	int		(*compute_mmcr)(u64 events[], int n_ev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				unsigned int hwc[], unsigned long mmcr[]);
+=======
+				unsigned int hwc[], unsigned long mmcr[],
+				struct perf_event *pevents[]);
+>>>>>>> v3.18
 =======
 				unsigned int hwc[], unsigned long mmcr[],
 				struct perf_event *pevents[]);
@@ -153,7 +169,11 @@ extern ssize_t power_events_sysfs_show(struct device *dev,
 
 #define	EVENT_ATTR(_name, _id, _suffix)					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PMU_EVENT_ATTR(_name, EVENT_VAR(_id, _suffix), PME_PM_##_id,	\
+=======
+	PMU_EVENT_ATTR(_name, EVENT_VAR(_id, _suffix), PME_##_id,	\
+>>>>>>> v3.18
 =======
 	PMU_EVENT_ATTR(_name, EVENT_VAR(_id, _suffix), PME_##_id,	\
 >>>>>>> v3.18
@@ -163,7 +183,11 @@ extern ssize_t power_events_sysfs_show(struct device *dev,
 #define	GENERIC_EVENT_PTR(_id)		EVENT_PTR(_id, _g)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	POWER_EVENT_ATTR(_name, _id)	EVENT_ATTR(PM_##_name, _id, _p)
+=======
+#define	POWER_EVENT_ATTR(_name, _id)	EVENT_ATTR(_name, _id, _p)
+>>>>>>> v3.18
 =======
 #define	POWER_EVENT_ATTR(_name, _id)	EVENT_ATTR(_name, _id, _p)
 >>>>>>> v3.18

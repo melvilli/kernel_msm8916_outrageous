@@ -34,6 +34,12 @@ typedef struct {
 	unsigned int irq_threshold_count;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_HYPERV) || defined(CONFIG_XEN)
+	unsigned int irq_hv_callback_count;
+#endif
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_HYPERV) || defined(CONFIG_XEN)
 	unsigned int irq_hv_callback_count;
@@ -44,9 +50,12 @@ typedef struct {
 DECLARE_PER_CPU_SHARED_ALIGNED(irq_cpustat_t, irq_stat);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* We can have at most NR_VECTORS irqs routed to a cpu at a time */
 #define MAX_HARDIRQS_PER_CPU NR_VECTORS
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define __ARCH_IRQ_STAT

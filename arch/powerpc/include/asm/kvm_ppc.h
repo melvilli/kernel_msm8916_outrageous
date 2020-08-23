@@ -39,11 +39,14 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum emulation_result {
 	EMULATE_DONE,         /* no further processing */
 	EMULATE_DO_MMIO,      /* kvm_run filled with MMIO request */
 	EMULATE_DO_DCR,       /* kvm_run filled with DCR request */
 =======
+=======
+>>>>>>> v3.18
 /*
  * KVMPPC_INST_SW_BREAKPOINT is debug Instruction
  * for supporting software breakpoint.
@@ -53,6 +56,9 @@ enum emulation_result {
 enum emulation_result {
 	EMULATE_DONE,         /* no further processing */
 	EMULATE_DO_MMIO,      /* kvm_run filled with MMIO request */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	EMULATE_FAIL,         /* can't emulate this instruction */
 	EMULATE_AGAIN,        /* something went wrong. go again */
@@ -60,7 +66,10 @@ enum emulation_result {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum instruction_type {
 	INST_GENERIC,
 	INST_SC,		/* system call */
@@ -76,6 +85,9 @@ enum xlate_readwrite {
 	XLATE_WRITE		/* check for write permissions */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int kvmppc_vcpu_run(struct kvm_run *kvm_run, struct kvm_vcpu *vcpu);
 extern int __kvmppc_vcpu_run(struct kvm_run *kvm_run, struct kvm_vcpu *vcpu);
@@ -84,6 +96,7 @@ extern void kvmppc_handler_highmem(void);
 extern void kvmppc_dump_vcpu(struct kvm_vcpu *vcpu);
 extern int kvmppc_handle_load(struct kvm_run *run, struct kvm_vcpu *vcpu,
                               unsigned int rt, unsigned int bytes,
+<<<<<<< HEAD
 <<<<<<< HEAD
                               int is_bigendian);
 extern int kvmppc_handle_loads(struct kvm_run *run, struct kvm_vcpu *vcpu,
@@ -99,6 +112,8 @@ extern void kvmppc_emulate_dec(struct kvm_vcpu *vcpu);
 extern u32 kvmppc_get_dec(struct kvm_vcpu *vcpu, u64 tb);
 extern void kvmppc_decrementer_func(unsigned long data);
 =======
+=======
+>>>>>>> v3.18
 			      int is_default_endian);
 extern int kvmppc_handle_loads(struct kvm_run *run, struct kvm_vcpu *vcpu,
                                unsigned int rt, unsigned int bytes,
@@ -121,6 +136,9 @@ extern int kvmppc_emulate_mmio(struct kvm_run *run, struct kvm_vcpu *vcpu);
 extern void kvmppc_emulate_dec(struct kvm_vcpu *vcpu);
 extern u32 kvmppc_get_dec(struct kvm_vcpu *vcpu, u64 tb);
 extern void kvmppc_decrementer_func(struct kvm_vcpu *vcpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int kvmppc_sanity_check(struct kvm_vcpu *vcpu);
 extern int kvmppc_subarch_vcpu_init(struct kvm_vcpu *vcpu);
@@ -141,6 +159,12 @@ extern gpa_t kvmppc_mmu_xlate(struct kvm_vcpu *vcpu, unsigned int gtlb_index,
 extern void kvmppc_mmu_dtlb_miss(struct kvm_vcpu *vcpu);
 extern void kvmppc_mmu_itlb_miss(struct kvm_vcpu *vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int kvmppc_xlate(struct kvm_vcpu *vcpu, ulong eaddr,
+			enum xlate_instdata xlid, enum xlate_readwrite xlrw,
+			struct kvmppc_pte *pte);
+>>>>>>> v3.18
 =======
 extern int kvmppc_xlate(struct kvm_vcpu *vcpu, ulong eaddr,
 			enum xlate_instdata xlid, enum xlate_readwrite xlrw,
@@ -167,6 +191,7 @@ extern void kvmppc_core_queue_external(struct kvm_vcpu *vcpu,
                                        struct kvm_interrupt *irq);
 extern void kvmppc_core_dequeue_external(struct kvm_vcpu *vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void kvmppc_core_flush_tlb(struct kvm_vcpu *vcpu);
 
 extern int kvmppc_core_emulate_op(struct kvm_run *run, struct kvm_vcpu *vcpu,
@@ -176,6 +201,8 @@ extern int kvmppc_core_emulate_mtspr(struct kvm_vcpu *vcpu, int sprn,
 extern int kvmppc_core_emulate_mfspr(struct kvm_vcpu *vcpu, int sprn,
 				     ulong *val);
 =======
+=======
+>>>>>>> v3.18
 extern void kvmppc_core_queue_dtlb_miss(struct kvm_vcpu *vcpu, ulong dear_flags,
 					ulong esr_flags);
 extern void kvmppc_core_queue_data_storage(struct kvm_vcpu *vcpu,
@@ -185,6 +212,9 @@ extern void kvmppc_core_queue_itlb_miss(struct kvm_vcpu *vcpu);
 extern void kvmppc_core_queue_inst_storage(struct kvm_vcpu *vcpu,
 					   ulong esr_flags);
 extern void kvmppc_core_flush_tlb(struct kvm_vcpu *vcpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int kvmppc_core_check_requests(struct kvm_vcpu *vcpu);
 
@@ -209,6 +239,7 @@ extern long kvm_vm_ioctl_create_spapr_tce(struct kvm *kvm,
 extern long kvmppc_h_put_tce(struct kvm_vcpu *vcpu, unsigned long liobn,
 			     unsigned long ioba, unsigned long tce);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern long kvm_vm_ioctl_allocate_rma(struct kvm *kvm,
 				struct kvm_allocate_rma *rma);
 extern struct kvmppc_linear_info *kvm_alloc_rma(void);
@@ -221,6 +252,8 @@ extern void kvmppc_core_free_memslot(struct kvm_memory_slot *free,
 				     struct kvm_memory_slot *dont);
 extern int kvmppc_core_create_memslot(struct kvm_memory_slot *slot,
 =======
+=======
+>>>>>>> v3.18
 extern long kvmppc_h_get_tce(struct kvm_vcpu *vcpu, unsigned long liobn,
 			     unsigned long ioba);
 extern struct kvm_rma_info *kvm_alloc_rma(void);
@@ -234,6 +267,9 @@ extern void kvmppc_core_free_memslot(struct kvm *kvm,
 				     struct kvm_memory_slot *dont);
 extern int kvmppc_core_create_memslot(struct kvm *kvm,
 				      struct kvm_memory_slot *slot,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				      unsigned long npages);
 extern int kvmppc_core_prepare_memory_region(struct kvm *kvm,
@@ -267,7 +303,10 @@ extern int kvmppc_xics_int_on(struct kvm *kvm, u32 irq);
 extern int kvmppc_xics_int_off(struct kvm *kvm, u32 irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void kvmppc_core_dequeue_debug(struct kvm_vcpu *vcpu);
 void kvmppc_core_queue_debug(struct kvm_vcpu *vcpu);
 
@@ -360,6 +399,9 @@ static inline bool is_kvmppc_hv_enabled(struct kvm *kvm)
 	return kvm->arch.kvm_ops == kvmppc_hv_ops;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Cuts out inst bits with ordering according to spec.
@@ -395,6 +437,7 @@ static inline u32 kvmppc_set_field(u64 inst, int msb, int lsb, int value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 union kvmppc_one_reg {
 	u32	wval;
 	u64	dval;
@@ -406,6 +449,8 @@ union kvmppc_one_reg {
 	}	vpaval;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define one_reg_size(id)	\
@@ -433,15 +478,21 @@ union kvmppc_one_reg {
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_core_get_sregs(struct kvm_vcpu *vcpu, struct kvm_sregs *sregs);
 int kvmppc_core_set_sregs(struct kvm_vcpu *vcpu, struct kvm_sregs *sregs);
 
 void kvmppc_get_sregs_ivor(struct kvm_vcpu *vcpu, struct kvm_sregs *sregs);
 =======
+=======
+>>>>>>> v3.18
 int kvmppc_core_get_sregs(struct kvm_vcpu *vcpu, struct kvm_sregs *sregs);
 int kvmppc_core_set_sregs(struct kvm_vcpu *vcpu, struct kvm_sregs *sregs);
 
 int kvmppc_get_sregs_ivor(struct kvm_vcpu *vcpu, struct kvm_sregs *sregs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int kvmppc_set_sregs_ivor(struct kvm_vcpu *vcpu, struct kvm_sregs *sregs);
 
@@ -455,7 +506,12 @@ void kvmppc_set_pid(struct kvm_vcpu *vcpu, u32 pid);
 struct openpic;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_KVM_BOOK3S_64_HV
+=======
+#ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
+extern void kvm_cma_reserve(void) __init;
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
 extern void kvm_cma_reserve(void) __init;
@@ -468,15 +524,21 @@ static inline void kvmppc_set_xics_phys(int cpu, unsigned long addr)
 static inline u32 kvmppc_get_xics_latch(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 xirr = get_paca()->kvm_hstate.saved_xirr;
 
 	get_paca()->kvm_hstate.saved_xirr = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	u32 xirr;
 
 	xirr = get_paca()->kvm_hstate.saved_xirr;
 	get_paca()->kvm_hstate.saved_xirr = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return xirr;
 }
@@ -487,6 +549,7 @@ static inline void kvmppc_set_host_ipi(int cpu, u8 host_ipi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void kvmppc_fast_vcpu_kick(struct kvm_vcpu *vcpu);
 extern void kvm_linear_init(void);
 
@@ -496,6 +559,8 @@ static inline void kvmppc_set_xics_phys(int cpu, unsigned long addr)
 
 static inline void kvm_linear_init(void)
 =======
+=======
+>>>>>>> v3.18
 static inline void kvmppc_fast_vcpu_kick(struct kvm_vcpu *vcpu)
 {
 	vcpu->kvm->arch.kvm_ops->fast_vcpu_kick(vcpu);
@@ -510,6 +575,9 @@ static inline void __init kvm_cma_reserve(void)
 {}
 
 static inline void kvmppc_set_xics_phys(int cpu, unsigned long addr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {}
 
@@ -526,6 +594,12 @@ static inline void kvmppc_fast_vcpu_kick(struct kvm_vcpu *vcpu)
 	kvm_vcpu_kick(vcpu);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+static inline bool kvm_hv_mode_active(void)		{ return false; }
+
+>>>>>>> v3.18
 =======
 
 static inline bool kvm_hv_mode_active(void)		{ return false; }
@@ -561,7 +635,10 @@ static inline int kvmppc_xics_hcall(struct kvm_vcpu *vcpu, u32 cmd)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long kvmppc_get_epr(struct kvm_vcpu *vcpu)
 {
 #ifdef CONFIG_KVM_BOOKE_HV
@@ -573,6 +650,9 @@ static inline unsigned long kvmppc_get_epr(struct kvm_vcpu *vcpu)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void kvmppc_set_epr(struct kvm_vcpu *vcpu, u32 epr)
 {
@@ -638,12 +718,15 @@ static inline void kvmppc_mmu_flush_icache(pfn_t pfn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Please call after prepare_to_enter. This function puts the lazy ee state
    back to normal mode, without actually enabling interrupts. */
 static inline void kvmppc_lazy_ee_enable(void)
 {
 #ifdef CONFIG_PPC64
 =======
+=======
+>>>>>>> v3.18
 /*
  * Shared struct helpers. The shared struct can be little or big endian,
  * depending on the guest endianness. So expose helpers to all of them.
@@ -767,6 +850,9 @@ static inline void kvmppc_fix_ee_before_entry(void)
 	 */
 	WARN_ON(local_paca->irq_happened != PACA_IRQ_HARD_DIS);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Only need to enable IRQs by hard enabling them after this */
 	local_paca->irq_happened = 0;
@@ -790,7 +876,11 @@ static inline ulong kvmppc_get_ea_indexed(struct kvm_vcpu *vcpu, int ra, int rb)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(vcpu->arch.shared->msr & msr_64bit))
+=======
+	if (!(kvmppc_get_msr(vcpu) & msr_64bit))
+>>>>>>> v3.18
 =======
 	if (!(kvmppc_get_msr(vcpu) & msr_64bit))
 >>>>>>> v3.18

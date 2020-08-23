@@ -11,12 +11,18 @@ struct nouveau_client {
 	u32 debug;
 	struct nouveau_vm *vm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool super;
 	void *data;
 
 	int (*ntfy)(const void *, u32, const void *, u32);
 	struct nvkm_client_notify *notify[16];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -52,12 +58,18 @@ int  nouveau_client_fini(struct nouveau_client *, bool suspend);
 const char *nouveau_client_name(void *obj);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int nvkm_client_notify_new(struct nouveau_object *, struct nvkm_event *,
 			   void *data, u32 size);
 int nvkm_client_notify_del(struct nouveau_client *, int index);
 int nvkm_client_notify_get(struct nouveau_client *, int index);
 int nvkm_client_notify_put(struct nouveau_client *, int index);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

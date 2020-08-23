@@ -176,6 +176,10 @@ static const struct ac97_codec_id snd_ac97_codec_ids[] = {
 { 0x54524108, 0xffffffff, "TR28028",		patch_tritech_tr28028,	NULL }, // added by xin jin [07/09/99]
 { 0x54524123, 0xffffffff, "TR28602",		NULL,		NULL }, // only guess --jk [TR28023 = eMicro EM28023 (new CT1297)]
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+{ 0x54584e03, 0xffffffff, "TLV320AIC27",	NULL,		NULL },
+>>>>>>> v3.18
 =======
 { 0x54584e03, 0xffffffff, "TLV320AIC27",	NULL,		NULL },
 >>>>>>> v3.18
@@ -218,13 +222,19 @@ static void update_power_regs(struct snd_ac97 *ac97);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ac97_err(ac97, fmt, args...)	\
 	dev_err((ac97)->bus->card->dev, fmt, ##args)
 #define ac97_warn(ac97, fmt, args...)	\
 	dev_warn((ac97)->bus->card->dev, fmt, ##args)
 #define ac97_dbg(ac97, fmt, args...)	\
 	dev_dbg((ac97)->bus->card->dev, fmt, ##args)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1310,7 +1320,11 @@ static int snd_ac97_cmix_new_stereo(struct snd_card *card, const char *pfx,
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[44];
+=======
+	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
+>>>>>>> v3.18
 =======
 	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
 >>>>>>> v3.18
@@ -1690,7 +1704,11 @@ static int snd_ac97_modem_build(struct snd_card *card, struct snd_ac97 * ac97)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "AC97_GPIO_CFG = %x\n",
+=======
+	ac97_dbg(ac97, "AC97_GPIO_CFG = %x\n",
+>>>>>>> v3.18
 =======
 	ac97_dbg(ac97, "AC97_GPIO_CFG = %x\n",
 >>>>>>> v3.18
@@ -1984,7 +2002,11 @@ static int snd_ac97_dev_register(struct snd_device *device)
 		     snd_ac97_get_short_name(ac97));
 	if ((err = device_register(&ac97->dev)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Can't register ac97 bus\n");
+=======
+		ac97_err(ac97, "Can't register ac97 bus\n");
+>>>>>>> v3.18
 =======
 		ac97_err(ac97, "Can't register ac97 bus\n");
 >>>>>>> v3.18
@@ -2114,7 +2136,12 @@ int snd_ac97_mixer(struct snd_ac97_bus *bus, struct snd_ac97_template *template,
 		}
 		if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_WARNING "AC'97 %d does not respond - RESET\n", ac97->num);
+=======
+			ac97_warn(ac97, "AC'97 %d does not respond - RESET\n",
+				 ac97->num);
+>>>>>>> v3.18
 =======
 			ac97_warn(ac97, "AC'97 %d does not respond - RESET\n",
 				 ac97->num);
@@ -2128,7 +2155,13 @@ int snd_ac97_mixer(struct snd_ac97_bus *bus, struct snd_ac97_template *template,
 	if (! (ac97->scaps & AC97_SCAP_DETECT_BY_VENDOR) &&
 	    (ac97->id == 0x00000000 || ac97->id == 0xffffffff)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "AC'97 %d access is not valid [0x%x], removing mixer.\n", ac97->num, ac97->id);
+=======
+		ac97_err(ac97,
+			 "AC'97 %d access is not valid [0x%x], removing mixer.\n",
+			 ac97->num, ac97->id);
+>>>>>>> v3.18
 =======
 		ac97_err(ac97,
 			 "AC'97 %d access is not valid [0x%x], removing mixer.\n",
@@ -2167,7 +2200,13 @@ int snd_ac97_mixer(struct snd_ac97_bus *bus, struct snd_ac97_template *template,
 	if (!ac97_is_audio(ac97) && !ac97_is_modem(ac97)) {
 		if (!(ac97->scaps & (AC97_SCAP_SKIP_AUDIO|AC97_SCAP_SKIP_MODEM)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "AC'97 %d access error (not audio or modem codec)\n", ac97->num);
+=======
+			ac97_err(ac97,
+				 "AC'97 %d access error (not audio or modem codec)\n",
+				 ac97->num);
+>>>>>>> v3.18
 =======
 			ac97_err(ac97,
 				 "AC'97 %d access error (not audio or modem codec)\n",
@@ -2198,7 +2237,12 @@ int snd_ac97_mixer(struct snd_ac97_bus *bus, struct snd_ac97_template *template,
 			schedule_timeout_uninterruptible(1);
 		} while (time_after_eq(end_time, jiffies));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_WARNING "AC'97 %d analog subsections not ready\n", ac97->num);
+=======
+		ac97_warn(ac97,
+			  "AC'97 %d analog subsections not ready\n", ac97->num);
+>>>>>>> v3.18
 =======
 		ac97_warn(ac97,
 			  "AC'97 %d analog subsections not ready\n", ac97->num);
@@ -2235,12 +2279,18 @@ int snd_ac97_mixer(struct snd_ac97_bus *bus, struct snd_ac97_template *template,
 			schedule_timeout_uninterruptible(1);
 		} while (time_after_eq(end_time, jiffies));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_WARNING "MC'97 %d converters and GPIO not ready (0x%x)\n", ac97->num, snd_ac97_read(ac97, AC97_EXTENDED_MSTATUS));
 =======
+=======
+>>>>>>> v3.18
 		ac97_warn(ac97,
 			  "MC'97 %d converters and GPIO not ready (0x%x)\n",
 			  ac97->num,
 			  snd_ac97_read(ac97, AC97_EXTENDED_MSTATUS));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	
@@ -2777,7 +2827,11 @@ static int tune_ad_sharing(struct snd_ac97 *ac97)
 	unsigned short scfg;
 	if ((ac97->id & 0xffffff00) != 0x41445300) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ac97_quirk AD_SHARING is only for AD codecs\n");
+=======
+		ac97_err(ac97, "ac97_quirk AD_SHARING is only for AD codecs\n");
+>>>>>>> v3.18
 =======
 		ac97_err(ac97, "ac97_quirk AD_SHARING is only for AD codecs\n");
 >>>>>>> v3.18
@@ -2797,7 +2851,12 @@ static int tune_alc_jack(struct snd_ac97 *ac97)
 {
 	if ((ac97->id & 0xffffff00) != 0x414c4700) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ac97_quirk ALC_JACK is only for Realtek codecs\n");
+=======
+		ac97_err(ac97,
+			 "ac97_quirk ALC_JACK is only for Realtek codecs\n");
+>>>>>>> v3.18
 =======
 		ac97_err(ac97,
 			 "ac97_quirk ALC_JACK is only for Realtek codecs\n");
@@ -2962,7 +3021,12 @@ int snd_ac97_tune_hardware(struct snd_ac97 *ac97, struct ac97_quirk *quirk, cons
 		result = apply_quirk_str(ac97, override);
 		if (result < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "applying quirk type %s failed (%d)\n", override, result);
+=======
+			ac97_err(ac97, "applying quirk type %s failed (%d)\n",
+				 override, result);
+>>>>>>> v3.18
 =======
 			ac97_err(ac97, "applying quirk type %s failed (%d)\n",
 				 override, result);
@@ -2981,11 +3045,14 @@ int snd_ac97_tune_hardware(struct snd_ac97 *ac97, struct ac97_quirk *quirk, cons
 			if (quirk->codec_id && quirk->codec_id != ac97->id)
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd("ac97 quirk for %s (%04x:%04x)\n", quirk->name, ac97->subsystem_vendor, ac97->subsystem_device);
 			result = apply_quirk(ac97, quirk->type);
 			if (result < 0)
 				snd_printk(KERN_ERR "applying quirk type %d for %s failed (%d)\n", quirk->type, quirk->name, result);
 =======
+=======
+>>>>>>> v3.18
 			ac97_dbg(ac97, "ac97 quirk for %s (%04x:%04x)\n",
 				 quirk->name, ac97->subsystem_vendor,
 				 ac97->subsystem_device);
@@ -2994,6 +3061,9 @@ int snd_ac97_tune_hardware(struct snd_ac97 *ac97, struct ac97_quirk *quirk, cons
 				ac97_err(ac97,
 					 "applying quirk type %d for %s failed (%d)\n",
 					 quirk->type, quirk->name, result);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return result;
 		}

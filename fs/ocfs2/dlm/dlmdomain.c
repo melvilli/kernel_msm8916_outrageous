@@ -44,8 +44,11 @@
 #include "dlmdebug.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dlmver.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MLOG_MASK_PREFIX (ML_DLM|ML_DLM_DOMAIN)
@@ -197,7 +200,11 @@ struct dlm_lock_resource * __dlm_lookup_lockres_full(struct dlm_ctxt *dlm,
 {
 	struct hlist_head *bucket;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hlist_node *list;
+=======
+	struct dlm_lock_resource *res;
+>>>>>>> v3.18
 =======
 	struct dlm_lock_resource *res;
 >>>>>>> v3.18
@@ -209,9 +216,13 @@ struct dlm_lock_resource * __dlm_lookup_lockres_full(struct dlm_ctxt *dlm,
 	bucket = dlm_lockres_hash(dlm, hash);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hlist_for_each(list, bucket) {
 		struct dlm_lock_resource *res = hlist_entry(list,
 			struct dlm_lock_resource, hash_node);
+=======
+	hlist_for_each_entry(res, bucket, hash_node) {
+>>>>>>> v3.18
 =======
 	hlist_for_each_entry(res, bucket, hash_node) {
 >>>>>>> v3.18
@@ -274,8 +285,12 @@ struct dlm_lock_resource * dlm_lookup_lockres(struct dlm_ctxt *dlm,
 static struct dlm_ctxt * __dlm_lookup_domain_full(const char *domain, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dlm_ctxt *tmp = NULL;
 	struct list_head *iter;
+=======
+	struct dlm_ctxt *tmp;
+>>>>>>> v3.18
 =======
 	struct dlm_ctxt *tmp;
 >>>>>>> v3.18
@@ -284,6 +299,7 @@ static struct dlm_ctxt * __dlm_lookup_domain_full(const char *domain, int len)
 
 	/* tmp->name here is always NULL terminated,
 	 * but domain may not be! */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each(iter, &dlm_domains) {
 		tmp = list_entry (iter, struct dlm_ctxt, list);
@@ -295,6 +311,8 @@ static struct dlm_ctxt * __dlm_lookup_domain_full(const char *domain, int len)
 
 	return tmp;
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry(tmp, &dlm_domains, list) {
 		if (strlen(tmp->name) == len &&
 		    memcmp(tmp->name, domain, len)==0)
@@ -302,6 +320,9 @@ static struct dlm_ctxt * __dlm_lookup_domain_full(const char *domain, int len)
 	}
 
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -392,6 +413,7 @@ static void __dlm_get(struct dlm_ctxt *dlm)
 struct dlm_ctxt *dlm_grab(struct dlm_ctxt *dlm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *iter;
 	struct dlm_ctxt *target = NULL;
 
@@ -407,6 +429,8 @@ struct dlm_ctxt *dlm_grab(struct dlm_ctxt *dlm)
 
 		target = NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct dlm_ctxt *target;
 	struct dlm_ctxt *ret = NULL;
 
@@ -418,13 +442,20 @@ struct dlm_ctxt *dlm_grab(struct dlm_ctxt *dlm)
 			ret = target;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	spin_unlock(&dlm_domain_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return target;
+=======
+	return ret;
+>>>>>>> v3.18
 =======
 	return ret;
 >>>>>>> v3.18
@@ -893,7 +924,11 @@ static int dlm_query_join_handler(struct o2net_msg *msg, u32 len, void *data,
 	 * to catch up.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!o2hb_check_node_heartbeating(query->node_idx)) {
+=======
+	if (!o2hb_check_node_heartbeating_no_sem(query->node_idx)) {
+>>>>>>> v3.18
 =======
 	if (!o2hb_check_node_heartbeating_no_sem(query->node_idx)) {
 >>>>>>> v3.18
@@ -1017,7 +1052,10 @@ static int dlm_assert_joined_handler(struct o2net_msg *msg, u32 len, void *data,
 		 * leftover join state. */
 		BUG_ON(dlm->joining_node != assert->node_idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (dlm->reco.state & DLM_RECO_STATE_ACTIVE) {
 			mlog(0, "dlm recovery is ongoing, disallow join\n");
@@ -1026,6 +1064,9 @@ static int dlm_assert_joined_handler(struct o2net_msg *msg, u32 len, void *data,
 			return -EAGAIN;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		set_bit(assert->node_idx, dlm->domain_map);
 		clear_bit(assert->node_idx, dlm->exit_domain_map);
@@ -1192,7 +1233,10 @@ static int dlm_query_region_handler(struct o2net_msg *msg, u32 len,
 	char *local = NULL;
 	int status = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int locked = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1204,10 +1248,15 @@ static int dlm_query_region_handler(struct o2net_msg *msg, u32 len,
 	/* buffer used in dlm_mast_regions() */
 	local = kmalloc(sizeof(qr->qr_regions), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!local) {
 		status = -ENOMEM;
 		goto bail;
 	}
+=======
+	if (!local)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!local)
 		return -ENOMEM;
@@ -1221,23 +1270,33 @@ static int dlm_query_region_handler(struct o2net_msg *msg, u32 len,
 		mlog(ML_ERROR, "Node %d queried hb regions on domain %s "
 		     "before join domain\n", qr->qr_node, qr->qr_domain);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto bail;
 	}
 
 	spin_lock(&dlm->spinlock);
 	locked = 1;
 =======
+=======
+>>>>>>> v3.18
 		goto out_domain_lock;
 	}
 
 	spin_lock(&dlm->spinlock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dlm->joining_node != qr->qr_node) {
 		mlog(ML_ERROR, "Node %d queried hb regions on domain %s "
 		     "but joining node is %d\n", qr->qr_node, qr->qr_domain,
 		     dlm->joining_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto bail;
+=======
+		goto out_dlm_lock;
+>>>>>>> v3.18
 =======
 		goto out_dlm_lock;
 >>>>>>> v3.18
@@ -1251,7 +1310,11 @@ static int dlm_query_region_handler(struct o2net_msg *msg, u32 len,
 		     qr->qr_domain, dlm->dlm_locking_proto.pv_major,
 		     dlm->dlm_locking_proto.pv_minor);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto bail;
+=======
+		goto out_dlm_lock;
+>>>>>>> v3.18
 =======
 		goto out_dlm_lock;
 >>>>>>> v3.18
@@ -1260,14 +1323,20 @@ static int dlm_query_region_handler(struct o2net_msg *msg, u32 len,
 	status = dlm_match_regions(dlm, qr, local, sizeof(qr->qr_regions));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bail:
 	if (locked)
 		spin_unlock(&dlm->spinlock);
 =======
+=======
+>>>>>>> v3.18
 out_dlm_lock:
 	spin_unlock(&dlm->spinlock);
 
 out_domain_lock:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&dlm_domain_lock);
 
@@ -1619,6 +1688,10 @@ static int dlm_send_one_join_assert(struct dlm_ctxt *dlm,
 {
 	int status;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -1634,7 +1707,11 @@ static int dlm_send_one_join_assert(struct dlm_ctxt *dlm,
 	status = o2net_send_message(DLM_ASSERT_JOINED_MSG, DLM_MOD_KEY,
 				    &assert_msg, sizeof(assert_msg), node,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    NULL);
+=======
+				    &ret);
+>>>>>>> v3.18
 =======
 				    &ret);
 >>>>>>> v3.18
@@ -1643,6 +1720,11 @@ static int dlm_send_one_join_assert(struct dlm_ctxt *dlm,
 		     "node %u\n", status, DLM_ASSERT_JOINED_MSG, DLM_MOD_KEY,
 		     node);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else
+		status = ret;
+>>>>>>> v3.18
 =======
 	else
 		status = ret;
@@ -1989,17 +2071,25 @@ static int dlm_join_domain(struct dlm_ctxt *dlm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = dlm_debug_init(dlm);
 =======
 	status = dlm_launch_thread(dlm);
 >>>>>>> v3.18
+=======
+	status = dlm_launch_thread(dlm);
+>>>>>>> v3.18
 	if (status < 0) {
 		mlog_errno(status);
 		goto bail;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = dlm_launch_thread(dlm);
+=======
+	status = dlm_launch_recovery_thread(dlm);
+>>>>>>> v3.18
 =======
 	status = dlm_launch_recovery_thread(dlm);
 >>>>>>> v3.18
@@ -2009,7 +2099,11 @@ static int dlm_join_domain(struct dlm_ctxt *dlm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = dlm_launch_recovery_thread(dlm);
+=======
+	status = dlm_debug_init(dlm);
+>>>>>>> v3.18
 =======
 	status = dlm_debug_init(dlm);
 >>>>>>> v3.18
@@ -2039,6 +2133,7 @@ static int dlm_join_domain(struct dlm_ctxt *dlm)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (total_backoff >
 			    msecs_to_jiffies(DLM_JOIN_TIMEOUT_MSECS)) {
 				status = -ERESTARTSYS;
@@ -2046,11 +2141,16 @@ static int dlm_join_domain(struct dlm_ctxt *dlm)
 				     "%s after %u msecs\n", dlm->name,
 				     jiffies_to_msecs(total_backoff));
 =======
+=======
+>>>>>>> v3.18
 			if (total_backoff > DLM_JOIN_TIMEOUT_MSECS) {
 				status = -ERESTARTSYS;
 				mlog(ML_NOTICE, "Timed out joining dlm domain "
 				     "%s after %u msecs\n", dlm->name,
 				     total_backoff);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				goto bail;
 			}
@@ -2100,7 +2200,12 @@ static struct dlm_ctxt *dlm_alloc_ctxt(const char *domain,
 	dlm = kzalloc(sizeof(*dlm), GFP_KERNEL);
 	if (!dlm) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlog_errno(-ENOMEM);
+=======
+		ret = -ENOMEM;
+		mlog_errno(ret);
+>>>>>>> v3.18
 =======
 		ret = -ENOMEM;
 		mlog_errno(ret);
@@ -2111,9 +2216,14 @@ static struct dlm_ctxt *dlm_alloc_ctxt(const char *domain,
 	dlm->name = kstrdup(domain, GFP_KERNEL);
 	if (dlm->name == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlog_errno(-ENOMEM);
 		kfree(dlm);
 		dlm = NULL;
+=======
+		ret = -ENOMEM;
+		mlog_errno(ret);
+>>>>>>> v3.18
 =======
 		ret = -ENOMEM;
 		mlog_errno(ret);
@@ -2124,10 +2234,15 @@ static struct dlm_ctxt *dlm_alloc_ctxt(const char *domain,
 	dlm->lockres_hash = (struct hlist_head **)dlm_alloc_pagevec(DLM_HASH_PAGES);
 	if (!dlm->lockres_hash) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlog_errno(-ENOMEM);
 		kfree(dlm->name);
 		kfree(dlm);
 		dlm = NULL;
+=======
+		ret = -ENOMEM;
+		mlog_errno(ret);
+>>>>>>> v3.18
 =======
 		ret = -ENOMEM;
 		mlog_errno(ret);
@@ -2142,11 +2257,16 @@ static struct dlm_ctxt *dlm_alloc_ctxt(const char *domain,
 				dlm_alloc_pagevec(DLM_HASH_PAGES);
 	if (!dlm->master_hash) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlog_errno(-ENOMEM);
 		dlm_free_pagevec((void **)dlm->lockres_hash, DLM_HASH_PAGES);
 		kfree(dlm->name);
 		kfree(dlm);
 		dlm = NULL;
+=======
+		ret = -ENOMEM;
+		mlog_errno(ret);
+>>>>>>> v3.18
 =======
 		ret = -ENOMEM;
 		mlog_errno(ret);
@@ -2162,6 +2282,7 @@ static struct dlm_ctxt *dlm_alloc_ctxt(const char *domain,
 
 	ret = dlm_create_debugfs_subroot(dlm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0) {
 		dlm_free_pagevec((void **)dlm->master_hash, DLM_HASH_PAGES);
 		dlm_free_pagevec((void **)dlm->lockres_hash, DLM_HASH_PAGES);
@@ -2170,6 +2291,10 @@ static struct dlm_ctxt *dlm_alloc_ctxt(const char *domain,
 		dlm = NULL;
 		goto leave;
 	}
+=======
+	if (ret < 0)
+		goto leave;
+>>>>>>> v3.18
 =======
 	if (ret < 0)
 		goto leave;
@@ -2183,7 +2308,10 @@ static struct dlm_ctxt *dlm_alloc_ctxt(const char *domain,
 	INIT_LIST_HEAD(&dlm->dirty_list);
 	INIT_LIST_HEAD(&dlm->reco.resources);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&dlm->reco.received);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&dlm->reco.node_data);
@@ -2239,7 +2367,10 @@ static struct dlm_ctxt *dlm_alloc_ctxt(const char *domain,
 
 leave:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ret < 0 && dlm) {
 		if (dlm->master_hash)
 			dlm_free_pagevec((void **)dlm->master_hash,
@@ -2253,6 +2384,9 @@ leave:
 		kfree(dlm);
 		dlm = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return dlm;
 }
@@ -2462,6 +2596,7 @@ void dlm_fire_domain_eviction_callbacks(struct dlm_ctxt *dlm,
 					int node_num)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *iter;
 	struct dlm_eviction_cb *cb;
 
@@ -2470,10 +2605,15 @@ void dlm_fire_domain_eviction_callbacks(struct dlm_ctxt *dlm,
 		cb = list_entry(iter, struct dlm_eviction_cb, ec_item);
 
 =======
+=======
+>>>>>>> v3.18
 	struct dlm_eviction_cb *cb;
 
 	down_read(&dlm_callback_sem);
 	list_for_each_entry(cb, &dlm->dlm_eviction_callbacks, ec_item) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cb->ec_func(node_num, cb->ec_data);
 	}
@@ -2512,8 +2652,11 @@ static int __init dlm_init(void)
 	int status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dlm_print_version();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	status = dlm_init_mle_cache();
@@ -2566,6 +2709,10 @@ static void __exit dlm_exit (void)
 MODULE_AUTHOR("Oracle");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DESCRIPTION("OCFS2 Distributed Lock Management");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("OCFS2 Distributed Lock Management");
 >>>>>>> v3.18

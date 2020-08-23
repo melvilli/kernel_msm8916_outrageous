@@ -40,6 +40,10 @@
 bool rpaphp_debug;
 LIST_HEAD(rpaphp_slot_head);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rpaphp_slot_head);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rpaphp_slot_head);
 >>>>>>> v3.18
@@ -93,7 +97,11 @@ static int set_attention_status(struct hotplug_slot *hotplug_slot, u8 value)
  * @value: pointer to store status
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_power_status(struct hotplug_slot *hotplug_slot, u8 * value)
+=======
+static int get_power_status(struct hotplug_slot *hotplug_slot, u8 *value)
+>>>>>>> v3.18
 =======
 static int get_power_status(struct hotplug_slot *hotplug_slot, u8 *value)
 >>>>>>> v3.18
@@ -113,7 +121,11 @@ static int get_power_status(struct hotplug_slot *hotplug_slot, u8 *value)
  * @value: pointer to store status
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_attention_status(struct hotplug_slot *hotplug_slot, u8 * value)
+=======
+static int get_attention_status(struct hotplug_slot *hotplug_slot, u8 *value)
+>>>>>>> v3.18
 =======
 static int get_attention_status(struct hotplug_slot *hotplug_slot, u8 *value)
 >>>>>>> v3.18
@@ -124,7 +136,11 @@ static int get_attention_status(struct hotplug_slot *hotplug_slot, u8 *value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_adapter_status(struct hotplug_slot *hotplug_slot, u8 * value)
+=======
+static int get_adapter_status(struct hotplug_slot *hotplug_slot, u8 *value)
+>>>>>>> v3.18
 =======
 static int get_adapter_status(struct hotplug_slot *hotplug_slot, u8 *value)
 >>>>>>> v3.18
@@ -240,6 +256,7 @@ int rpaphp_get_drc_props(struct device_node *dn, int *drc_index,
 
 	/* Iterate through parent properties, looking for my-drc-index */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < indexes[0]; i++) {
 		if ((unsigned int) indexes[i + 1] == *my_index) {
 			if (drc_name)
@@ -251,6 +268,8 @@ int rpaphp_get_drc_props(struct device_node *dn, int *drc_index,
 			if (drc_power_domain)
 				*drc_power_domain = domains[i+1];
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < be32_to_cpu(indexes[0]); i++) {
 		if ((unsigned int) indexes[i + 1] == *my_index) {
 			if (drc_name)
@@ -261,6 +280,9 @@ int rpaphp_get_drc_props(struct device_node *dn, int *drc_index,
 				*drc_index = be32_to_cpu(*my_index);
 			if (drc_power_domain)
 				*drc_power_domain = be32_to_cpu(domains[i+1]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 0;
 		}
@@ -271,6 +293,10 @@ int rpaphp_get_drc_props(struct device_node *dn, int *drc_index,
 	return -EINVAL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rpaphp_get_drc_props);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rpaphp_get_drc_props);
 >>>>>>> v3.18
@@ -323,7 +349,11 @@ static int is_php_dn(struct device_node *dn, const int **indexes,
  * @dn: device node of slot
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This subroutine will register a hotplugable slot with the
+=======
+ * This subroutine will register a hotpluggable slot with the
+>>>>>>> v3.18
 =======
  * This subroutine will register a hotpluggable slot with the
 >>>>>>> v3.18
@@ -359,25 +389,37 @@ int rpaphp_add_slot(struct device_node *dn)
 	name = (char *) &names[1];
 	type = (char *) &types[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < indexes[0]; i++) {
 
 		slot = alloc_slot_struct(dn, indexes[i + 1], name, power_domains[i + 1]);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < be32_to_cpu(indexes[0]); i++) {
 		int index;
 
 		index = be32_to_cpu(indexes[i + 1]);
 		slot = alloc_slot_struct(dn, index, name,
 					 be32_to_cpu(power_domains[i + 1]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!slot)
 			return -ENOMEM;
 
 		slot->type = simple_strtoul(type, NULL, 10);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				
 		dbg("Found drc-index:0x%x drc-name:%s drc-type:%s\n",
 				indexes[i + 1], name, type);
+=======
+
+		dbg("Found drc-index:0x%x drc-name:%s drc-type:%s\n",
+				index, name, type);
+>>>>>>> v3.18
 =======
 
 		dbg("Found drc-index:0x%x drc-name:%s drc-type:%s\n",
@@ -400,6 +442,10 @@ int rpaphp_add_slot(struct device_node *dn)
 	return retval;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rpaphp_add_slot);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rpaphp_add_slot);
 >>>>>>> v3.18
@@ -413,7 +459,11 @@ static void __exit cleanup_slots(void)
 	 * Unregister all of our slots with the pci_hotplug subsystem,
 	 * and free up all memory that we had allocated.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * memory will be freed in release_slot callback. 
+=======
+	 * memory will be freed in release_slot callback.
+>>>>>>> v3.18
 =======
 	 * memory will be freed in release_slot callback.
 >>>>>>> v3.18
@@ -430,17 +480,23 @@ static void __exit cleanup_slots(void)
 static int __init rpaphp_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device_node *dn = NULL;
 
 	info(DRIVER_DESC " version: " DRIVER_VERSION "\n");
 
 	while ((dn = of_find_node_by_name(dn, "pci")))
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *dn;
 
 	info(DRIVER_DESC " version: " DRIVER_VERSION "\n");
 
 	for_each_node_by_name(dn, "pci")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rpaphp_add_slot(dn);
 
@@ -467,7 +523,13 @@ static int enable_slot(struct hotplug_slot *hotplug_slot)
 
 	if (state == PRESENT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pcibios_add_pci_devices(slot->bus);
+=======
+		pci_lock_rescan_remove();
+		pcibios_add_pci_devices(slot->bus);
+		pci_unlock_rescan_remove();
+>>>>>>> v3.18
 =======
 		pci_lock_rescan_remove();
 		pcibios_add_pci_devices(slot->bus);
@@ -493,7 +555,13 @@ static int disable_slot(struct hotplug_slot *hotplug_slot)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcibios_remove_pci_devices(slot->bus);
+=======
+	pci_lock_rescan_remove();
+	pcibios_remove_pci_devices(slot->bus);
+	pci_unlock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 	pcibios_remove_pci_devices(slot->bus);
@@ -517,9 +585,12 @@ struct hotplug_slot_ops rpaphp_hotplug_slot_ops = {
 module_init(rpaphp_init);
 module_exit(rpaphp_exit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL_GPL(rpaphp_add_slot);
 EXPORT_SYMBOL_GPL(rpaphp_slot_head);
 EXPORT_SYMBOL_GPL(rpaphp_get_drc_props);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

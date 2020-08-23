@@ -16,10 +16,13 @@ config ETRAX_SERIAL_PORTS
        default 5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ETRAX_DDR
        bool
        default y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ETRAX_DDR2_MRS

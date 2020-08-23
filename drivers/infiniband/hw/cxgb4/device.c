@@ -34,6 +34,10 @@
 #include <linux/debugfs.h>
 #include <linux/vmalloc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/math64.h>
+>>>>>>> v3.18
 =======
 #include <linux/math64.h>
 >>>>>>> v3.18
@@ -60,7 +64,10 @@ MODULE_PARM_DESC(allow_db_coalescing_on_t5,
 		 "Allow DB Coalescing on T5 (default = 0)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int c4iw_wr_log = 0;
 module_param(c4iw_wr_log, int, 0444);
 MODULE_PARM_DESC(c4iw_wr_log, "Enables logging of work request timing data.");
@@ -70,6 +77,9 @@ module_param(c4iw_wr_log_size_order, int, 0444);
 MODULE_PARM_DESC(c4iw_wr_log_size_order,
 		 "Number of entries (log2) in the work request timing log.");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct uld_ctx {
 	struct list_head entry;
@@ -81,11 +91,17 @@ static LIST_HEAD(uld_ctx_list);
 static DEFINE_MUTEX(dev_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DB_FC_RESUME_SIZE 64
 #define DB_FC_RESUME_DELAY 1
 #define DB_FC_DRAIN_THRESH 0
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct dentry *c4iw_debugfs_root;
 
@@ -97,7 +113,10 @@ struct c4iw_debugfs_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* registered cxgb4 netlink callbacks */
 static struct ibnl_client_cbs c4iw_nl_cb_table[] = {
 	[RDMA_NL_IWPM_REG_PID] = {.dump = iwpm_register_pid_cb},
@@ -108,6 +127,9 @@ static struct ibnl_client_cbs c4iw_nl_cb_table[] = {
 	[RDMA_NL_IWPM_MAPINFO_NUM] = {.dump = iwpm_ack_mapping_info_cb}
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int count_idrs(int id, void *p, void *data)
 {
@@ -126,7 +148,10 @@ static ssize_t debugfs_read(struct file *file, char __user *buf, size_t count,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void c4iw_log_wr_stats(struct t4_wq *wq, struct t4_cqe *cqe)
 {
 	struct wr_log_entry le;
@@ -238,6 +263,9 @@ static const struct file_operations wr_log_debugfs_fops = {
 	.write   = wr_log_clear,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int dump_qp(int id, void *p, void *data)
 {
@@ -254,6 +282,7 @@ static int dump_qp(int id, void *p, void *data)
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (qp->ep)
 		cc = snprintf(qpd->buf + qpd->pos, space,
 			     "qp sq id %u rq id %u state %u onchip %u "
@@ -267,6 +296,8 @@ static int dump_qp(int id, void *p, void *data)
 			     ntohs(qp->ep->com.remote_addr.sin_port));
 	else
 =======
+=======
+>>>>>>> v3.18
 	if (qp->ep) {
 		if (qp->ep->com.local_addr.ss_family == AF_INET) {
 			struct sockaddr_in *lsin = (struct sockaddr_in *)
@@ -318,6 +349,9 @@ static int dump_qp(int id, void *p, void *data)
 				      ntohs(mapped_rsin6->sin6_port));
 		}
 	} else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cc = snprintf(qpd->buf + qpd->pos, space,
 			     "qp sq id %u rq id %u state %u onchip %u\n",
@@ -393,6 +427,11 @@ static int dump_stag(int id, void *p, void *data)
 	int space;
 	int cc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct fw_ri_tpte tpte;
+	int ret;
+>>>>>>> v3.18
 =======
 	struct fw_ri_tpte tpte;
 	int ret;
@@ -403,8 +442,11 @@ static int dump_stag(int id, void *p, void *data)
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cc = snprintf(stagd->buf + stagd->pos, space, "0x%x\n", id<<8);
 =======
+=======
+>>>>>>> v3.18
 	ret = cxgb4_read_tpte(stagd->devp->rdev.lldi.ports[0], (u32)id<<8,
 			      (__be32 *)&tpte);
 	if (ret) {
@@ -424,6 +466,9 @@ static int dump_stag(int id, void *p, void *data)
 		      G_FW_RI_TPTE_PS(ntohl(tpte.locread_to_qpid)),
 		      ((u64)ntohl(tpte.len_hi) << 32) | ntohl(tpte.len_lo),
 		      ((u64)ntohl(tpte.va_hi) << 32) | ntohl(tpte.va_lo_fbo));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cc < space)
 		stagd->pos += cc;
@@ -438,7 +483,11 @@ static int stag_release(struct inode *inode, struct file *file)
 		return 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(stagd->buf);
+=======
+	vfree(stagd->buf);
+>>>>>>> v3.18
 =======
 	vfree(stagd->buf);
 >>>>>>> v3.18
@@ -465,8 +514,13 @@ static int stag_open(struct inode *inode, struct file *file)
 	spin_unlock_irq(&stagd->devp->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stagd->bufsize = count * sizeof("0x12345678\n");
 	stagd->buf = kmalloc(stagd->bufsize, GFP_KERNEL);
+=======
+	stagd->bufsize = count * 256;
+	stagd->buf = vmalloc(stagd->bufsize);
+>>>>>>> v3.18
 =======
 	stagd->bufsize = count * 256;
 	stagd->buf = vmalloc(stagd->bufsize);
@@ -498,7 +552,11 @@ static const struct file_operations stag_debugfs_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char *db_state_str[] = {"NORMAL", "FLOW_CONTROL", "RECOVERY"};
+=======
+static char *db_state_str[] = {"NORMAL", "FLOW_CONTROL", "RECOVERY", "STOPPED"};
+>>>>>>> v3.18
 =======
 static char *db_state_str[] = {"NORMAL", "FLOW_CONTROL", "RECOVERY", "STOPPED"};
 >>>>>>> v3.18
@@ -531,14 +589,20 @@ static int stats_show(struct seq_file *seq, void *v)
 	seq_printf(seq, " DB EMPTY: %10llu\n", dev->rdev.stats.db_empty);
 	seq_printf(seq, "  DB DROP: %10llu\n", dev->rdev.stats.db_drop);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(seq, " DB State: %s Transitions %llu\n",
 		   db_state_str[dev->db_state],
 		   dev->rdev.stats.db_state_transitions);
 =======
+=======
+>>>>>>> v3.18
 	seq_printf(seq, " DB State: %s Transitions %llu FC Interruptions %llu\n",
 		   db_state_str[dev->db_state],
 		   dev->rdev.stats.db_state_transitions,
 		   dev->rdev.stats.db_fc_interruptions);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	seq_printf(seq, "TCAM_FULL: %10llu\n", dev->rdev.stats.tcam_full);
 	seq_printf(seq, "ACT_OFLD_CONN_FAILS: %10llu\n",
@@ -546,6 +610,10 @@ static int stats_show(struct seq_file *seq, void *v)
 	seq_printf(seq, "PAS_OFLD_CONN_FAILS: %10llu\n",
 		   dev->rdev.stats.pas_ofld_conn_fails);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	seq_printf(seq, "AVAILABLE IRD: %10u\n", dev->avail_ird);
+>>>>>>> v3.18
 =======
 	seq_printf(seq, "AVAILABLE IRD: %10u\n", dev->avail_ird);
 >>>>>>> v3.18
@@ -607,6 +675,7 @@ static int dump_ep(int id, void *p, void *data)
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cc = snprintf(epd->buf + epd->pos, space,
 			"ep %p cm_id %p qp %p state %d flags 0x%lx history 0x%lx "
 			"hwtid %d atid %d %pI4:%d <-> %pI4:%d\n",
@@ -617,6 +686,8 @@ static int dump_ep(int id, void *p, void *data)
 			&ep->com.remote_addr.sin_addr.s_addr,
 			ntohs(ep->com.remote_addr.sin_port));
 =======
+=======
+>>>>>>> v3.18
 	if (ep->com.local_addr.ss_family == AF_INET) {
 		struct sockaddr_in *lsin = (struct sockaddr_in *)
 			&ep->com.local_addr;
@@ -660,6 +731,9 @@ static int dump_ep(int id, void *p, void *data)
 			      &rsin6->sin6_addr, ntohs(rsin6->sin6_port),
 			      ntohs(mapped_rsin6->sin6_port));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cc < space)
 		epd->pos += cc;
@@ -678,6 +752,7 @@ static int dump_listen_ep(int id, void *p, void *data)
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cc = snprintf(epd->buf + epd->pos, space,
 			"ep %p cm_id %p state %d flags 0x%lx stid %d backlog %d "
 			"%pI4:%d\n", ep, ep->com.cm_id, (int)ep->com.state,
@@ -685,6 +760,8 @@ static int dump_listen_ep(int id, void *p, void *data)
 			&ep->com.local_addr.sin_addr.s_addr,
 			ntohs(ep->com.local_addr.sin_port));
 =======
+=======
+>>>>>>> v3.18
 	if (ep->com.local_addr.ss_family == AF_INET) {
 		struct sockaddr_in *lsin = (struct sockaddr_in *)
 			&ep->com.local_addr;
@@ -712,6 +789,9 @@ static int dump_listen_ep(int id, void *p, void *data)
 			      &lsin6->sin6_addr, ntohs(lsin6->sin6_port),
 			      ntohs(mapped_lsin6->sin6_port));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cc < space)
 		epd->pos += cc;
@@ -806,13 +886,19 @@ static int setup_debugfs(struct c4iw_dev *devp)
 		de->d_inode->i_size = 4096;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (c4iw_wr_log) {
 		de = debugfs_create_file("wr_log", S_IWUSR, devp->debugfs_root,
 					 (void *)devp, &wr_log_debugfs_fops);
 		if (de && de->d_inode)
 			de->d_inode->i_size = 4096;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -881,15 +967,21 @@ static int c4iw_rdev_open(struct c4iw_rdev *rdev)
 	     rdev->lldi.vr->cq.start,
 	     rdev->lldi.vr->cq.size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PDBG("udb len 0x%x udb base %p db_reg %p gts_reg %p qpshift %lu "
 	     "qpmask 0x%x cqshift %lu cqmask 0x%x\n",
 	     (unsigned)pci_resource_len(rdev->lldi.pdev, 2),
 	     (void *)(unsigned long)pci_resource_start(rdev->lldi.pdev, 2),
 =======
+=======
+>>>>>>> v3.18
 	PDBG("udb len 0x%x udb base %llx db_reg %p gts_reg %p qpshift %lu "
 	     "qpmask 0x%x cqshift %lu cqmask 0x%x\n",
 	     (unsigned)pci_resource_len(rdev->lldi.pdev, 2),
 	     (u64)pci_resource_start(rdev->lldi.pdev, 2),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	     rdev->lldi.db_reg,
 	     rdev->lldi.gts_reg,
@@ -929,7 +1021,10 @@ static int c4iw_rdev_open(struct c4iw_rdev *rdev)
 		goto err4;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	rdev->status_page = (struct t4_dev_status_page *)
 			    __get_free_page(GFP_KERNEL);
 	if (!rdev->status_page) {
@@ -950,6 +1045,9 @@ static int c4iw_rdev_open(struct c4iw_rdev *rdev)
 
 	rdev->status_page->db_off = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 err4:
@@ -965,6 +1063,11 @@ err1:
 static void c4iw_rdev_close(struct c4iw_rdev *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(rdev->wr_log);
+	free_page((unsigned long)rdev->status_page);
+>>>>>>> v3.18
 =======
 	kfree(rdev->wr_log);
 	free_page((unsigned long)rdev->status_page);
@@ -984,12 +1087,18 @@ static void c4iw_dealloc(struct uld_ctx *ctx)
 	idr_destroy(&ctx->dev->stid_idr);
 	idr_destroy(&ctx->dev->atid_idr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(ctx->dev->rdev.oc_mw_kva);
 =======
+=======
+>>>>>>> v3.18
 	if (ctx->dev->rdev.bar2_kva)
 		iounmap(ctx->dev->rdev.bar2_kva);
 	if (ctx->dev->rdev.oc_mw_kva)
 		iounmap(ctx->dev->rdev.oc_mw_kva);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ib_dealloc_device(&ctx->dev->ibdev);
 	ctx->dev = NULL;
@@ -1024,6 +1133,7 @@ static struct c4iw_dev *c4iw_alloc(const struct cxgb4_lld_info *infop)
 			pci_name(infop->pdev));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!is_t4(infop->adapter_type)) {
 		if (!allow_db_fc_on_t5) {
 			db_fc_threshold = 100000;
@@ -1038,6 +1148,8 @@ static struct c4iw_dev *c4iw_alloc(const struct cxgb4_lld_info *infop)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	devp = (struct c4iw_dev *)ib_alloc_device(sizeof(*devp));
 	if (!devp) {
 		printk(KERN_ERR MOD "Cannot allocate ib device\n");
@@ -1046,12 +1158,15 @@ static struct c4iw_dev *c4iw_alloc(const struct cxgb4_lld_info *infop)
 	devp->rdev.lldi = *infop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devp->rdev.oc_mw_pa = pci_resource_start(devp->rdev.lldi.pdev, 2) +
 		(pci_resource_len(devp->rdev.lldi.pdev, 2) -
 		 roundup_pow_of_two(devp->rdev.lldi.vr->ocq.size));
 	devp->rdev.oc_mw_kva = ioremap_wc(devp->rdev.oc_mw_pa,
 					       devp->rdev.lldi.vr->ocq.size);
 =======
+=======
+>>>>>>> v3.18
 	/* init various hw-queue params based on lld info */
 	PDBG("%s: Ing. padding boundary is %d, egrsstatuspagesize = %d\n",
 	     __func__, devp->rdev.lldi.sge_ingpadboundary,
@@ -1100,6 +1215,9 @@ static struct c4iw_dev *c4iw_alloc(const struct cxgb4_lld_info *infop)
 			return ERR_PTR(-EINVAL);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	PDBG(KERN_INFO MOD "ocq memory: "
@@ -1124,6 +1242,11 @@ static struct c4iw_dev *c4iw_alloc(const struct cxgb4_lld_info *infop)
 	mutex_init(&devp->rdev.stats.lock);
 	mutex_init(&devp->db_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&devp->db_fc_list);
+	devp->avail_ird = devp->rdev.lldi.max_ird_adapter;
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&devp->db_fc_list);
 	devp->avail_ird = devp->rdev.lldi.max_ird_adapter;
@@ -1136,6 +1259,11 @@ static struct c4iw_dev *c4iw_alloc(const struct cxgb4_lld_info *infop)
 		setup_debugfs(devp);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> v3.18
 =======
 
 
@@ -1282,12 +1410,15 @@ static int c4iw_uld_rx_handler(void *handle, const __be64 *rsp,
 
 	opcode = *(u8 *)rsp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c4iw_handlers[opcode])
 		c4iw_handlers[opcode](dev, skb);
 	else
 		pr_info("%s no handler opcode 0x%x...\n", __func__,
 		       opcode);
 =======
+=======
+>>>>>>> v3.18
 	if (c4iw_handlers[opcode]) {
 		c4iw_handlers[opcode](dev, skb);
 	} else {
@@ -1295,6 +1426,9 @@ static int c4iw_uld_rx_handler(void *handle, const __be64 *rsp,
 		       opcode);
 		kfree_skb(skb);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1372,6 +1506,7 @@ static int disable_qp_db(int id, void *p, void *data)
 static void stop_queues(struct uld_ctx *ctx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&ctx->dev->lock);
 	if (ctx->dev->db_state == NORMAL) {
 		ctx->dev->rdev.stats.db_state_transitions++;
@@ -1380,6 +1515,8 @@ static void stop_queues(struct uld_ctx *ctx)
 	}
 	spin_unlock_irq(&ctx->dev->lock);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&ctx->dev->lock, flags);
@@ -1390,6 +1527,9 @@ static void stop_queues(struct uld_ctx *ctx)
 	else
 		ctx->dev->rdev.status_page->db_off = 1;
 	spin_unlock_irqrestore(&ctx->dev->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1402,6 +1542,7 @@ static int enable_qp_db(int id, void *p, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void resume_queues(struct uld_ctx *ctx)
 {
 	spin_lock_irq(&ctx->dev->lock);
@@ -1412,6 +1553,8 @@ static void resume_queues(struct uld_ctx *ctx)
 		idr_for_each(&ctx->dev->qpidr, enable_qp_db, NULL);
 	}
 =======
+=======
+>>>>>>> v3.18
 static void resume_rc_qp(struct c4iw_qp *qp)
 {
 	spin_lock(&qp->lock);
@@ -1478,6 +1621,9 @@ static void resume_queues(struct uld_ctx *ctx)
 out:
 	if (ctx->dev->db_state != NORMAL)
 		ctx->dev->rdev.stats.db_fc_interruptions++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irq(&ctx->dev->lock);
 }
@@ -1505,6 +1651,7 @@ static int count_qps(int id, void *p, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void deref_qps(struct qp_list qp_list)
 {
 	int idx;
@@ -1512,12 +1659,17 @@ static void deref_qps(struct qp_list qp_list)
 	for (idx = 0; idx < qp_list.idx; idx++)
 		c4iw_qp_rem_ref(&qp_list.qps[idx]->ibqp);
 =======
+=======
+>>>>>>> v3.18
 static void deref_qps(struct qp_list *qp_list)
 {
 	int idx;
 
 	for (idx = 0; idx < qp_list->idx; idx++)
 		c4iw_qp_rem_ref(&qp_list->qps[idx]->ibqp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1530,6 +1682,11 @@ static void recover_lost_dbs(struct uld_ctx *ctx, struct qp_list *qp_list)
 		struct c4iw_qp *qp = qp_list->qps[idx];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		spin_lock_irq(&qp->rhp->lock);
+		spin_lock(&qp->lock);
+>>>>>>> v3.18
 =======
 		spin_lock_irq(&qp->rhp->lock);
 		spin_lock(&qp->lock);
@@ -1540,6 +1697,7 @@ static void recover_lost_dbs(struct uld_ctx *ctx, struct qp_list *qp_list)
 					  t4_sq_wq_size(&qp->wq));
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR MOD "%s: Fatal error - "
 			       "DB overflow recovery failed - "
 			       "error syncing SQ qid %u\n",
@@ -1547,6 +1705,8 @@ static void recover_lost_dbs(struct uld_ctx *ctx, struct qp_list *qp_list)
 			return;
 		}
 =======
+=======
+>>>>>>> v3.18
 			pr_err(KERN_ERR MOD "%s: Fatal error - "
 			       "DB overflow recovery failed - "
 			       "error syncing SQ qid %u\n",
@@ -1556,6 +1716,9 @@ static void recover_lost_dbs(struct uld_ctx *ctx, struct qp_list *qp_list)
 			return;
 		}
 		qp->wq.sq.wq_pidx_inc = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ret = cxgb4_sync_txq_pidx(qp->rhp->rdev.lldi.ports[0],
@@ -1565,6 +1728,7 @@ static void recover_lost_dbs(struct uld_ctx *ctx, struct qp_list *qp_list)
 
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR MOD "%s: Fatal error - "
 			       "DB overflow recovery failed - "
 			       "error syncing RQ qid %u\n",
@@ -1572,6 +1736,8 @@ static void recover_lost_dbs(struct uld_ctx *ctx, struct qp_list *qp_list)
 			return;
 		}
 =======
+=======
+>>>>>>> v3.18
 			pr_err(KERN_ERR MOD "%s: Fatal error - "
 			       "DB overflow recovery failed - "
 			       "error syncing RQ qid %u\n",
@@ -1583,6 +1749,9 @@ static void recover_lost_dbs(struct uld_ctx *ctx, struct qp_list *qp_list)
 		qp->wq.rq.wq_pidx_inc = 0;
 		spin_unlock(&qp->lock);
 		spin_unlock_irq(&qp->rhp->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Wait for the dbfifo to drain */
@@ -1600,6 +1769,7 @@ static void recover_queues(struct uld_ctx *ctx)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* lock out kernel db ringers */
 	mutex_lock(&ctx->dev->db_mutex);
 
@@ -1612,10 +1782,13 @@ static void recover_queues(struct uld_ctx *ctx)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* slow everybody down */
 	set_current_state(TASK_UNINTERRUPTIBLE);
 	schedule_timeout(usecs_to_jiffies(1000));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Wait for the dbfifo to completely drain. */
 	while (cxgb4_dbfifo_count(ctx->dev->rdev.lldi.ports[0], 1) > 0) {
@@ -1625,13 +1798,19 @@ static void recover_queues(struct uld_ctx *ctx)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* flush the SGE contexts */
 	ret = cxgb4_flush_eq_cache(ctx->dev->rdev.lldi.ports[0]);
 	if (ret) {
 		printk(KERN_ERR MOD "%s: Fatal error - DB overflow recovery failed\n",
 		       pci_name(ctx->lldi.pdev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -1640,6 +1819,11 @@ static void recover_queues(struct uld_ctx *ctx)
 	/* Count active queues so we can build a list of queues to recover */
 	spin_lock_irq(&ctx->dev->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	WARN_ON(ctx->dev->db_state != STOPPED);
+	ctx->dev->db_state = RECOVERY;
+>>>>>>> v3.18
 =======
 	WARN_ON(ctx->dev->db_state != STOPPED);
 	ctx->dev->db_state = RECOVERY;
@@ -1652,7 +1836,11 @@ static void recover_queues(struct uld_ctx *ctx)
 		       pci_name(ctx->lldi.pdev));
 		spin_unlock_irq(&ctx->dev->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -1668,6 +1856,7 @@ static void recover_queues(struct uld_ctx *ctx)
 	recover_lost_dbs(ctx, &qp_list);
 
 	/* we're almost done!  deref the qps and clean up */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	deref_qps(qp_list);
 	kfree(qp_list.qps);
@@ -1693,6 +1882,8 @@ out:
 	/* start up kernel db ringers again */
 	mutex_unlock(&ctx->dev->db_mutex);
 =======
+=======
+>>>>>>> v3.18
 	deref_qps(&qp_list);
 	kfree(qp_list.qps);
 
@@ -1700,6 +1891,9 @@ out:
 	WARN_ON(ctx->dev->db_state != RECOVERY);
 	ctx->dev->db_state = STOPPED;
 	spin_unlock_irq(&ctx->dev->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1711,9 +1905,13 @@ static int c4iw_uld_control(void *handle, enum cxgb4_control control, ...)
 	case CXGB4_CONTROL_DB_FULL:
 		stop_queues(ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock(&ctx->dev->rdev.stats.lock);
 		ctx->dev->rdev.stats.db_full++;
 		mutex_unlock(&ctx->dev->rdev.stats.lock);
+=======
+		ctx->dev->rdev.stats.db_full++;
+>>>>>>> v3.18
 =======
 		ctx->dev->rdev.stats.db_full++;
 >>>>>>> v3.18
@@ -1760,7 +1958,10 @@ static int __init c4iw_init_module(void)
 		       "could not create debugfs entry, continuing\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ibnl_add_client(RDMA_NL_C4IW, RDMA_NL_IWPM_NUM_OPS,
 			    c4iw_nl_cb_table))
 		pr_err("%s[%u]: Failed to add netlink callback\n"
@@ -1775,6 +1976,9 @@ static int __init c4iw_init_module(void)
 		return err;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cxgb4_register_uld(CXGB4_ULD_RDMA, &c4iw_uld_info);
 
@@ -1794,6 +1998,11 @@ static void __exit c4iw_exit_module(void)
 	mutex_unlock(&dev_mutex);
 	cxgb4_unregister_uld(CXGB4_ULD_RDMA);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	iwpm_exit(RDMA_NL_C4IW);
+	ibnl_remove_client(RDMA_NL_C4IW);
+>>>>>>> v3.18
 =======
 	iwpm_exit(RDMA_NL_C4IW);
 	ibnl_remove_client(RDMA_NL_C4IW);

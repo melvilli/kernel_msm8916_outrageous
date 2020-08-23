@@ -2,7 +2,11 @@
 obj-$(CONFIG_HAVE_CLK)		+= clk-devres.o
 obj-$(CONFIG_CLKDEV_LOOKUP)	+= clkdev.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_OF)		+= clk.o
+=======
+obj-$(CONFIG_COMMON_CLK)	+= clk.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_COMMON_CLK)	+= clk.o
 >>>>>>> v3.18
@@ -12,6 +16,7 @@ obj-$(CONFIG_COMMON_CLK)	+= clk-fixed-rate.o
 obj-$(CONFIG_COMMON_CLK)	+= clk-gate.o
 obj-$(CONFIG_COMMON_CLK)	+= clk-mux.o
 obj-$(CONFIG_COMMON_CLK)	+= clk-composite.o
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 # SoCs specific
@@ -46,6 +51,8 @@ obj-$(CONFIG_COMMON_CLK_MAX77686) += clk-max77686.o
 obj-$(CONFIG_COMMON_CLK_SI5351) += clk-si5351.o
 obj-$(CONFIG_CLK_TWL6040)	+= clk-twl6040.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_COMMON_CLK)	+= clk-fractional-divider.o
 obj-$(CONFIG_COMMON_CLK)	+= clk-gpio-gate.o
 ifeq ($(CONFIG_OF), y)
@@ -106,4 +113,7 @@ obj-$(CONFIG_ARCH_U8500)		+= ux500/
 obj-$(CONFIG_COMMON_CLK_VERSATILE)	+= versatile/
 obj-$(CONFIG_X86)			+= x86/
 obj-$(CONFIG_ARCH_ZYNQ)			+= zynq/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -18,7 +18,10 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/crypto.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/i387.h>
@@ -164,7 +167,10 @@ void __exit crypto_fpu_exit(void)
 	crypto_unregister_template(&crypto_fpu_tmpl);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 MODULE_ALIAS_CRYPTO("fpu");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

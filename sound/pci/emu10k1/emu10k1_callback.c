@@ -106,7 +106,11 @@ snd_emu10k1_synth_get_voice(struct snd_emu10k1 *hw)
 			if ((ch = vp->ch) < 0) {
 				/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_WARNING
+=======
+				dev_warn(emu->card->dev,
+>>>>>>> v3.18
 =======
 				dev_warn(emu->card->dev,
 >>>>>>> v3.18
@@ -342,7 +346,11 @@ start_voice(struct snd_emux_voice *vp)
 	emem->map_locked++;
 	if (snd_emu10k1_memblk_map(hw, emem) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* printk(KERN_ERR "emu: cannot map!\n"); */
+=======
+		/* dev_err(hw->card->devK, "emu: cannot map!\n"); */
+>>>>>>> v3.18
 =======
 		/* dev_err(hw->card->devK, "emu: cannot map!\n"); */
 >>>>>>> v3.18
@@ -424,7 +432,11 @@ start_voice(struct snd_emux_voice *vp)
 
 	/* invalidate maps */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	temp = (hw->silent_page.addr << hw->address_mode) | (hw->address_mode ? MAP_PTI_MASK1 : MAP_PTI_MASK0);
+=======
+	temp = (hw->silent_page.addr << 1) | MAP_PTI_MASK;
+>>>>>>> v3.18
 =======
 	temp = (hw->silent_page.addr << 1) | MAP_PTI_MASK;
 >>>>>>> v3.18
@@ -449,7 +461,11 @@ start_voice(struct snd_emux_voice *vp)
 
 		/* invalidate maps */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		temp = ((unsigned int)hw->silent_page.addr << hw_address_mode) | (hw->address_mode ? MAP_PTI_MASK1 : MAP_PTI_MASK0);
+=======
+		temp = ((unsigned int)hw->silent_page.addr << 1) | MAP_PTI_MASK;
+>>>>>>> v3.18
 =======
 		temp = ((unsigned int)hw->silent_page.addr << 1) | MAP_PTI_MASK;
 >>>>>>> v3.18

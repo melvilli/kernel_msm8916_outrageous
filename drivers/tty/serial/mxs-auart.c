@@ -33,7 +33,10 @@
 #include <linux/delay.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/of_device.h>
@@ -44,6 +47,10 @@
 
 #define MXS_AUART_PORTS 5
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MXS_AUART_FIFO_SIZE		16
+>>>>>>> v3.18
 =======
 #define MXS_AUART_FIFO_SIZE		16
 >>>>>>> v3.18
@@ -142,15 +149,21 @@ struct mxs_auart_port {
 	struct uart_port port;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MXS_AUART_DMA_CONFIG	0x1
 #define MXS_AUART_DMA_ENABLED	0x2
 #define MXS_AUART_DMA_TX_SYNC	2  /* bit 2 */
 #define MXS_AUART_DMA_RX_READY	3  /* bit 3 */
 =======
+=======
+>>>>>>> v3.18
 #define MXS_AUART_DMA_ENABLED	0x2
 #define MXS_AUART_DMA_TX_SYNC	2  /* bit 2 */
 #define MXS_AUART_DMA_RX_READY	3  /* bit 3 */
 #define MXS_AUART_RTSCTS	4  /* bit 4 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long flags;
 	unsigned int ctrl;
@@ -423,7 +436,11 @@ static void mxs_auart_set_mctrl(struct uart_port *u, unsigned mctrl)
 	ctrl &= ~(AUART_CTRL2_RTSEN | AUART_CTRL2_RTS);
 	if (mctrl & TIOCM_RTS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (tty_port_cts_enabled(&u->state->port))
+=======
+		if (uart_cts_enabled(u))
+>>>>>>> v3.18
 =======
 		if (uart_cts_enabled(u))
 >>>>>>> v3.18
@@ -568,6 +585,12 @@ static int mxs_auart_dma_init(struct mxs_auart_port *s)
 	dev_dbg(s->dev, "enabled the DMA support.");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* The DMA buffer is now the FIFO the TTY subsystem can use */
+	s->port.fifosize = UART_XMIT_SIZE;
+
+>>>>>>> v3.18
 =======
 	/* The DMA buffer is now the FIFO the TTY subsystem can use */
 	s->port.fifosize = UART_XMIT_SIZE;
@@ -626,7 +649,11 @@ static void mxs_auart_settermios(struct uart_port *u,
 	if (termios->c_iflag & INPCK)
 		u->read_status_mask |= AUART_STAT_PERR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -669,7 +696,12 @@ static void mxs_auart_settermios(struct uart_port *u,
 		 * in mx28.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (is_imx28_auart(s) && (s->flags & MXS_AUART_DMA_CONFIG)) {
+=======
+		if (is_imx28_auart(s)
+				&& test_bit(MXS_AUART_RTSCTS, &s->flags)) {
+>>>>>>> v3.18
 =======
 		if (is_imx28_auart(s)
 				&& test_bit(MXS_AUART_RTSCTS, &s->flags)) {
@@ -764,16 +796,22 @@ static void mxs_auart_reset(struct uart_port *u)
 static int mxs_auart_startup(struct uart_port *u)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mxs_auart_port *s = to_auart_port(u);
 
 	clk_prepare_enable(s->clk);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	struct mxs_auart_port *s = to_auart_port(u);
 
 	ret = clk_prepare_enable(s->clk);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	writel(AUART_CTRL0_CLKGATE, u->membase + AUART_CTRL0_CLR);
@@ -784,6 +822,12 @@ static int mxs_auart_startup(struct uart_port *u)
 			u->membase + AUART_INTR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Reset FIFO size (it could have changed if DMA was enabled) */
+	u->fifosize = MXS_AUART_FIFO_SIZE;
+
+>>>>>>> v3.18
 =======
 	/* Reset FIFO size (it could have changed if DMA was enabled) */
 	u->fifosize = MXS_AUART_FIFO_SIZE;
@@ -854,11 +898,14 @@ static void mxs_auart_break_ctl(struct uart_port *u, int ctl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mxs_auart_enable_ms(struct uart_port *port)
 {
 	/* just empty */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct uart_ops mxs_auart_ops = {
@@ -867,7 +914,10 @@ static struct uart_ops mxs_auart_ops = {
 	.stop_tx	= mxs_auart_stop_tx,
 	.stop_rx	= mxs_auart_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms      = mxs_auart_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl      = mxs_auart_break_ctl,
@@ -1005,7 +1055,13 @@ auart_console_setup(struct console *co, char *options)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_prepare_enable(s->clk);
+=======
+	ret = clk_prepare_enable(s->clk);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = clk_prepare_enable(s->clk);
 	if (ret)
@@ -1069,7 +1125,12 @@ static int serial_mxs_probe_dt(struct mxs_auart_port *s,
 	s->port.line = ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->flags |= MXS_AUART_DMA_CONFIG;
+=======
+	if (of_get_property(np, "fsl,uart-has-rtscts", NULL))
+		set_bit(MXS_AUART_RTSCTS, &s->flags);
+>>>>>>> v3.18
 =======
 	if (of_get_property(np, "fsl,uart-has-rtscts", NULL))
 		set_bit(MXS_AUART_RTSCTS, &s->flags);
@@ -1087,7 +1148,10 @@ static int mxs_auart_probe(struct platform_device *pdev)
 	int ret = 0;
 	struct resource *r;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pinctrl *pinctrl;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1104,12 +1168,15 @@ static int mxs_auart_probe(struct platform_device *pdev)
 		goto out_free;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
 	if (IS_ERR(pinctrl)) {
 		ret = PTR_ERR(pinctrl);
 		goto out_free;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (of_id) {
@@ -1134,7 +1201,11 @@ static int mxs_auart_probe(struct platform_device *pdev)
 	s->port.ops = &mxs_auart_ops;
 	s->port.iotype = UPIO_MEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->port.fifosize = 16;
+=======
+	s->port.fifosize = MXS_AUART_FIFO_SIZE;
+>>>>>>> v3.18
 =======
 	s->port.fifosize = MXS_AUART_FIFO_SIZE;
 >>>>>>> v3.18

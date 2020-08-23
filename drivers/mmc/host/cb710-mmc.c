@@ -668,12 +668,15 @@ static int cb710_mmc_suspend(struct platform_device *pdev, pm_message_t state)
 {
 	struct cb710_slot *slot = cb710_pdev_to_slot(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mmc_host *mmc = cb710_slot_to_mmc(slot);
 	int err;
 
 	err = mmc_suspend_host(mmc);
 	if (err)
 		return err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -685,11 +688,17 @@ static int cb710_mmc_resume(struct platform_device *pdev)
 {
 	struct cb710_slot *slot = cb710_pdev_to_slot(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mmc_host *mmc = cb710_slot_to_mmc(slot);
 
 	cb710_mmc_enable_irq(slot, 0, ~0);
 
 	return mmc_resume_host(mmc);
+=======
+
+	cb710_mmc_enable_irq(slot, 0, ~0);
+	return 0;
+>>>>>>> v3.18
 =======
 
 	cb710_mmc_enable_irq(slot, 0, ~0);
@@ -713,7 +722,11 @@ static int cb710_mmc_init(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, mmc);
+=======
+	platform_set_drvdata(pdev, mmc);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, mmc);
 >>>>>>> v3.18

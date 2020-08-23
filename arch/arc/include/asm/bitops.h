@@ -14,8 +14,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef __ASSEMBLY__
@@ -23,6 +26,10 @@
 #include <linux/types.h>
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -504,10 +511,13 @@ static inline __attribute__ ((const)) int __ffs(unsigned long word)
 #define ffz(x)	__ffs(~(x))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* TODO does this affect uni-processor code */
 #define smp_mb__before_clear_bit()  barrier()
 #define smp_mb__after_clear_bit()   barrier()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm-generic/bitops/hweight.h>
@@ -522,8 +532,11 @@ static inline __attribute__ ((const)) int __ffs(unsigned long word)
 #endif /* !__ASSEMBLY__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

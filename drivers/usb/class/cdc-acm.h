@@ -96,6 +96,10 @@ struct acm {
 	struct acm_rb read_buffers[ACM_NR];
 	int rx_buflimit;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int rx_endpoint;
+>>>>>>> v3.18
 =======
 	int rx_endpoint;
 >>>>>>> v3.18
@@ -110,6 +114,12 @@ struct acm {
 	unsigned int ctrlin;				/* input control lines (DCD, DSR, RI, break, overruns) */
 	unsigned int ctrlout;				/* output control lines (DTR, RTS) */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct async_icount iocount;			/* counters for control line changes */
+	struct async_icount oldcount;			/* for comparison of counter */
+	wait_queue_head_t wioctl;			/* for ioctl */
+>>>>>>> v3.18
 =======
 	struct async_icount iocount;			/* counters for control line changes */
 	struct async_icount oldcount;			/* for comparison of counter */
@@ -128,6 +138,10 @@ struct acm {
 	u8 bInterval;
 	struct usb_anchor delayed;			/* writes queued for a device about to be woken */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long quirks;
+>>>>>>> v3.18
 =======
 	unsigned long quirks;
 >>>>>>> v3.18
@@ -137,6 +151,7 @@ struct acm {
 
 /* constants describing various quirks and errors */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NO_UNION_NORMAL			1
 #define SINGLE_RX_URB			2
 #define NO_CAP_LINE			4
@@ -144,6 +159,8 @@ struct acm {
 #define NO_DATA_INTERFACE		16
 #define IGNORE_DEVICE			32
 =======
+=======
+>>>>>>> v3.18
 #define NO_UNION_NORMAL			BIT(0)
 #define SINGLE_RX_URB			BIT(1)
 #define NO_CAP_LINE			BIT(2)
@@ -151,4 +168,7 @@ struct acm {
 #define NO_DATA_INTERFACE		BIT(4)
 #define IGNORE_DEVICE			BIT(5)
 #define QUIRK_CONTROL_LINE_STATE	BIT(6)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

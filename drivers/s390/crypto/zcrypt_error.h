@@ -107,6 +107,7 @@ static inline int convert_error(struct zcrypt_device *zdev,
 		/*
 		 * To sent a message of the wrong type is a bug in the
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * device driver. Warn about it, disable the device
 		 * and then repeat the request.
 		 */
@@ -117,6 +118,8 @@ static inline int convert_error(struct zcrypt_device *zdev,
 			       zdev->ap_dev->qid,
 			       zdev->online, ehdr->reply_code);
 =======
+=======
+>>>>>>> v3.18
 		 * device driver. Send error msg, disable the device
 		 * and then repeat the request.
 		 */
@@ -126,6 +129,9 @@ static inline int convert_error(struct zcrypt_device *zdev,
 		       zdev->ap_dev->qid);
 		ZCRYPT_DBF_DEV(DBF_ERR, zdev, "dev%04xo%drc%d",
 			zdev->ap_dev->qid, zdev->online, ehdr->reply_code);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EAGAIN;
 	case REP82_ERROR_TRANSPORT_FAIL:
@@ -134,6 +140,7 @@ static inline int convert_error(struct zcrypt_device *zdev,
 		/* If a card fails disable it and repeat the request. */
 		atomic_set(&zcrypt_rescan_req, 1);
 		zdev->online = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ZCRYPT_DBF_DEV(DBF_ERR, zdev, "dev%04xo%drc%d",
 			       zdev->ap_dev->qid,
@@ -145,6 +152,8 @@ static inline int convert_error(struct zcrypt_device *zdev,
 			       zdev->ap_dev->qid,
 			       zdev->online, ehdr->reply_code);
 =======
+=======
+>>>>>>> v3.18
 		pr_err("Cryptographic device %x failed and was set offline\n",
 		       zdev->ap_dev->qid);
 		ZCRYPT_DBF_DEV(DBF_ERR, zdev, "dev%04xo%drc%d",
@@ -156,6 +165,9 @@ static inline int convert_error(struct zcrypt_device *zdev,
 		       zdev->ap_dev->qid);
 		ZCRYPT_DBF_DEV(DBF_ERR, zdev, "dev%04xo%drc%d",
 			zdev->ap_dev->qid, zdev->online, ehdr->reply_code);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EAGAIN;	/* repeat the request on a different device. */
 	}

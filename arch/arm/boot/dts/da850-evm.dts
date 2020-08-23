@@ -9,7 +9,11 @@
  */
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "da850.dtsi"
+=======
+#include "da850.dtsi"
+>>>>>>> v3.18
 =======
 #include "da850.dtsi"
 >>>>>>> v3.18
@@ -22,7 +26,10 @@
 		pmx_core: pinmux@1c14120 {
 			status = "okay";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			mcasp0_pins: pinmux_mcasp0_pins {
 				pinctrl-single,bits = <
@@ -35,6 +42,9 @@
 					0x04 0x00011000 0x000ff000
 				>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		serial0: serial@1c42000 {
@@ -59,7 +69,10 @@
 				reg = <0x48>;
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			tlv320aic3106: tlv320aic3106@18 {
 				#sound-dai-cells = <0>;
 				compatible = "ti,tlv320aic3106";
@@ -74,6 +87,9 @@
 				DVDD-supply = <&vbat>;
 			};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		wdt: wdt@1c21000 {
@@ -96,7 +112,10 @@
 				compatible = "m25p64";
 				spi-max-frequency = <30000000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				m25p,fast-read;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				reg = <0>;
@@ -131,7 +150,10 @@
 			};
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		mdio: mdio@1e24000 {
 			status = "okay";
 			pinctrl-names = "default";
@@ -146,6 +168,9 @@
 		gpio: gpio@1e26000 {
 			status = "okay";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 	nand_cs3@62000000 {
@@ -161,7 +186,10 @@
 		regulator-boot-on;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	sound {
 		compatible = "simple-audio-card";
@@ -189,6 +217,9 @@
 			system-clock-frequency = <24576000>;
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -244,7 +275,10 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &mcasp0 {
 	#sound-dai-cells = <0>;
@@ -264,4 +298,7 @@
 	tx-num-evt = <32>;
 	rx-num-evt = <32>;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -11,6 +11,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/slab.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
@@ -22,16 +23,22 @@
 #include <linux/of_device.h>
 #include <linux/of_gpio.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/of_device.h>
 #include <linux/platform_device.h>
 #include <linux/mfd/core.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "mc13xxx.h"
 
 #define MC13XXX_IRQSTAT0	0
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MC13XXX_IRQSTAT0_ADCDONEI	(1 << 0)
 #define MC13XXX_IRQSTAT0_ADCBISDONEI	(1 << 1)
@@ -124,6 +131,11 @@
 #define MC13XXX_IRQSTAT1	3
 #define MC13XXX_IRQMASK1	4
 >>>>>>> v3.18
+=======
+#define MC13XXX_IRQMASK0	1
+#define MC13XXX_IRQSTAT1	3
+#define MC13XXX_IRQMASK1	4
+>>>>>>> v3.18
 
 #define MC13XXX_REVISION	7
 #define MC13XXX_REVISION_REVMETAL	(0x07 <<  0)
@@ -139,6 +151,12 @@
 #define MC34708_REVISION_FAB		(0x07 <<  9)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MC13XXX_PWRCTRL		15
+#define MC13XXX_PWRCTRL_WDIRESET	(1 << 12)
+
+>>>>>>> v3.18
 =======
 #define MC13XXX_PWRCTRL		15
 #define MC13XXX_PWRCTRL_WDIRESET	(1 << 12)
@@ -179,11 +197,14 @@ int mc13xxx_reg_read(struct mc13xxx *mc13xxx, unsigned int offset, u32 *val)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!mutex_is_locked(&mc13xxx->lock));
 
 	if (offset > MC13XXX_NUMREGS)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = regmap_read(mc13xxx->regmap, offset, val);
@@ -196,11 +217,17 @@ EXPORT_SYMBOL(mc13xxx_reg_read);
 int mc13xxx_reg_write(struct mc13xxx *mc13xxx, unsigned int offset, u32 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!mutex_is_locked(&mc13xxx->lock));
 
 	dev_vdbg(mc13xxx->dev, "[0x%02x] <- 0x%06x\n", offset, val);
 
 	if (offset > MC13XXX_NUMREGS || val > 0xffffff)
+=======
+	dev_vdbg(mc13xxx->dev, "[0x%02x] <- 0x%06x\n", offset, val);
+
+	if (val >= BIT(24))
+>>>>>>> v3.18
 =======
 	dev_vdbg(mc13xxx->dev, "[0x%02x] <- 0x%06x\n", offset, val);
 
@@ -216,7 +243,10 @@ int mc13xxx_reg_rmw(struct mc13xxx *mc13xxx, unsigned int offset,
 		u32 mask, u32 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!mutex_is_locked(&mc13xxx->lock));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	BUG_ON(val & ~mask);
@@ -229,6 +259,7 @@ EXPORT_SYMBOL(mc13xxx_reg_rmw);
 
 int mc13xxx_irq_mask(struct mc13xxx *mc13xxx, int irq)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 	unsigned int offmask = irq < 24 ? MC13XXX_IRQMASK0 : MC13XXX_IRQMASK1;
@@ -248,17 +279,23 @@ int mc13xxx_irq_mask(struct mc13xxx *mc13xxx, int irq)
 
 	return mc13xxx_reg_write(mc13xxx, offmask, mask | irqbit);
 =======
+=======
+>>>>>>> v3.18
 	int virq = regmap_irq_get_virq(mc13xxx->irq_data, irq);
 
 	disable_irq_nosync(virq);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(mc13xxx_irq_mask);
 
 int mc13xxx_irq_unmask(struct mc13xxx *mc13xxx, int irq)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 	unsigned int offmask = irq < 24 ? MC13XXX_IRQMASK0 : MC13XXX_IRQMASK1;
@@ -278,11 +315,16 @@ int mc13xxx_irq_unmask(struct mc13xxx *mc13xxx, int irq)
 
 	return mc13xxx_reg_write(mc13xxx, offmask, mask & ~irqbit);
 =======
+=======
+>>>>>>> v3.18
 	int virq = regmap_irq_get_virq(mc13xxx->irq_data, irq);
 
 	enable_irq(virq);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(mc13xxx_irq_unmask);
@@ -296,7 +338,11 @@ int mc13xxx_irq_status(struct mc13xxx *mc13xxx, int irq,
 	u32 irqbit = 1 << (irq < 24 ? irq : irq - 24);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (irq < 0 || irq >= MC13XXX_NUM_IRQ)
+=======
+	if (irq < 0 || irq >= ARRAY_SIZE(mc13xxx->irqs))
+>>>>>>> v3.18
 =======
 	if (irq < 0 || irq >= ARRAY_SIZE(mc13xxx->irqs))
 >>>>>>> v3.18
@@ -326,6 +372,7 @@ int mc13xxx_irq_status(struct mc13xxx *mc13xxx, int irq,
 }
 EXPORT_SYMBOL(mc13xxx_irq_status);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int mc13xxx_irq_ack(struct mc13xxx *mc13xxx, int irq)
 {
@@ -375,6 +422,8 @@ int mc13xxx_irq_request(struct mc13xxx *mc13xxx, int irq,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 int mc13xxx_irq_request(struct mc13xxx *mc13xxx, int irq,
 		irq_handler_t handler, const char *name, void *dev)
 {
@@ -382,12 +431,16 @@ int mc13xxx_irq_request(struct mc13xxx *mc13xxx, int irq,
 
 	return devm_request_threaded_irq(mc13xxx->dev, virq, NULL, handler,
 					 0, name, dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(mc13xxx_irq_request);
 
 int mc13xxx_irq_free(struct mc13xxx *mc13xxx, int irq, void *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 	BUG_ON(!mutex_is_locked(&mc13xxx->lock));
@@ -407,11 +460,17 @@ int mc13xxx_irq_free(struct mc13xxx *mc13xxx, int irq, void *dev)
 
 	devm_free_irq(mc13xxx->dev, virq, dev);
 >>>>>>> v3.18
+=======
+	int virq = regmap_irq_get_virq(mc13xxx->irq_data, irq);
+
+	devm_free_irq(mc13xxx->dev, virq, dev);
+>>>>>>> v3.18
 
 	return 0;
 }
 EXPORT_SYMBOL(mc13xxx_irq_free);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline irqreturn_t mc13xxx_irqhandler(struct mc13xxx *mc13xxx, int irq)
 {
@@ -486,6 +545,8 @@ static irqreturn_t mc13xxx_irq_thread(int irq, void *data)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define maskval(reg, mask)	(((reg) & (mask)) >> __ffs(mask))
 static void mc13xxx_print_revision(struct mc13xxx *mc13xxx, u32 revision)
 {
@@ -555,8 +616,11 @@ static irqreturn_t mc13xxx_handler_adcdone(int irq, void *data)
 	struct mc13xxx_adcdone_data *adcdone_data = data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mc13xxx_irq_ack(adcdone_data->mc13xxx, irq);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	complete_all(&adcdone_data->done);
@@ -627,7 +691,10 @@ int mc13xxx_adc_do_conversion(struct mc13xxx *mc13xxx, unsigned int mode,
 	mc13xxx_irq_request(mc13xxx, MC13XXX_IRQ_ADCDONE,
 			mc13xxx_handler_adcdone, __func__, &adcdone_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mc13xxx_irq_ack(mc13xxx, MC13XXX_IRQ_ADCDONE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -685,7 +752,12 @@ static int mc13xxx_add_subdevice_pdata(struct mc13xxx *mc13xxx,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mfd_add_devices(mc13xxx->dev, -1, &cell, 1, NULL, 0, NULL);
+=======
+	return mfd_add_devices(mc13xxx->dev, -1, &cell, 1, NULL, 0,
+			       regmap_irq_get_domain(mc13xxx->irq_data));
+>>>>>>> v3.18
 =======
 	return mfd_add_devices(mc13xxx->dev, -1, &cell, 1, NULL, 0,
 			       regmap_irq_get_domain(mc13xxx->irq_data));
@@ -727,6 +799,7 @@ static inline int mc13xxx_probe_flags_dt(struct mc13xxx *mc13xxx)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mc13xxx_common_init(struct mc13xxx *mc13xxx,
 		struct mc13xxx_platform_data *pdata, int irq)
 {
@@ -764,6 +837,8 @@ err_revision:
 
 	mc13xxx_unlock(mc13xxx);
 =======
+=======
+>>>>>>> v3.18
 int mc13xxx_common_init(struct device *dev)
 {
 	struct mc13xxx_platform_data *pdata = dev_get_platdata(dev);
@@ -806,11 +881,15 @@ int mc13xxx_common_init(struct device *dev)
 		return ret;
 
 	mutex_init(&mc13xxx->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (mc13xxx_probe_flags_dt(mc13xxx) < 0 && pdata)
 		mc13xxx->flags = pdata->flags;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (mc13xxx->flags & MC13XXX_USE_ADC)
 		mc13xxx_add_subdevice(mc13xxx, "%s-adc");
@@ -828,6 +907,8 @@ int mc13xxx_common_init(struct device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (pdata) {
 		mc13xxx_add_subdevice_pdata(mc13xxx, "%s-regulator",
 			&pdata->regulators, sizeof(pdata->regulators));
@@ -836,22 +917,31 @@ int mc13xxx_common_init(struct device *dev)
 		mc13xxx_add_subdevice_pdata(mc13xxx, "%s-pwrbutton",
 				pdata->buttons, sizeof(*pdata->buttons));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (mc13xxx->flags & MC13XXX_USE_CODEC)
 			mc13xxx_add_subdevice_pdata(mc13xxx, "%s-codec",
 				pdata->codec, sizeof(*pdata->codec));
 		if (mc13xxx->flags & MC13XXX_USE_TOUCHSCREEN)
 			mc13xxx_add_subdevice_pdata(mc13xxx, "%s-ts",
 				&pdata->touch, sizeof(pdata->touch));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		mc13xxx_add_subdevice(mc13xxx, "%s-regulator");
 		mc13xxx_add_subdevice(mc13xxx, "%s-led");
 		mc13xxx_add_subdevice(mc13xxx, "%s-pwrbutton");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		if (mc13xxx->flags & MC13XXX_USE_CODEC)
 			mc13xxx_add_subdevice(mc13xxx, "%s-codec");
 		if (mc13xxx->flags & MC13XXX_USE_TOUCHSCREEN)
@@ -864,11 +954,15 @@ int mc13xxx_common_init(struct device *dev)
 	if (mc13xxx->flags & MC13XXX_USE_RTC)
 		mc13xxx_add_subdevice(mc13xxx, "%s-rtc");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL_GPL(mc13xxx_common_init);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void mc13xxx_common_cleanup(struct mc13xxx *mc13xxx)
 {
@@ -878,6 +972,8 @@ void mc13xxx_common_cleanup(struct mc13xxx *mc13xxx)
 }
 EXPORT_SYMBOL_GPL(mc13xxx_common_cleanup);
 =======
+=======
+>>>>>>> v3.18
 int mc13xxx_common_exit(struct device *dev)
 {
 	struct mc13xxx *mc13xxx = dev_get_drvdata(dev);
@@ -889,6 +985,9 @@ int mc13xxx_common_exit(struct device *dev)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(mc13xxx_common_exit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_DESCRIPTION("Core driver for Freescale MC13XXX PMIC");

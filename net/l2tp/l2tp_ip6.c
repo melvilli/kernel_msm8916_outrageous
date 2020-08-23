@@ -64,7 +64,11 @@ static struct sock *__l2tp_ip6_bind_lookup(struct net *net,
 
 	sk_for_each_bound(sk, &l2tp_ip6_bind_table) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct in6_addr *addr = inet6_rcv_saddr(sk);
+=======
+		const struct in6_addr *addr = inet6_rcv_saddr(sk);
+>>>>>>> v3.18
 =======
 		const struct in6_addr *addr = inet6_rcv_saddr(sk);
 >>>>>>> v3.18
@@ -140,18 +144,24 @@ static int l2tp_ip6_recv(struct sk_buff *skb)
 	int length;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pskb_may_pull(skb, 4))
 		goto discard;
 
 	/* Point to L2TP header */
 	optr = ptr = skb->data;
 =======
+=======
+>>>>>>> v3.18
 	/* Point to L2TP header */
 	optr = ptr = skb->data;
 
 	if (!pskb_may_pull(skb, 4))
 		goto discard;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	session_id = ntohl(*((__be32 *) ptr));
 	ptr += 4;
@@ -181,9 +191,12 @@ static int l2tp_ip6_recv(struct sk_buff *skb)
 			goto discard;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Point to L2TP header */
 		optr = ptr = skb->data;
 		ptr += 4;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		pr_debug("%s: ip recv\n", tunnel->name);
@@ -283,6 +296,11 @@ static int l2tp_ip6_bind(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!sock_flag(sk, SOCK_ZAPPED))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (!sock_flag(sk, SOCK_ZAPPED))
 		return -EINVAL;
@@ -313,9 +331,12 @@ static int l2tp_ip6_bind(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 
 	err = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!sock_flag(sk, SOCK_ZAPPED))
 		goto out_unlock;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sk->sk_state != TCP_CLOSE)
@@ -359,7 +380,11 @@ static int l2tp_ip6_bind(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 
 	inet->inet_rcv_saddr = inet->inet_saddr = v4addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np->rcv_saddr = addr->l2tp_addr;
+=======
+	sk->sk_v6_rcv_saddr = addr->l2tp_addr;
+>>>>>>> v3.18
 =======
 	sk->sk_v6_rcv_saddr = addr->l2tp_addr;
 >>>>>>> v3.18
@@ -403,6 +428,12 @@ static int l2tp_ip6_connect(struct sock *sk, struct sockaddr *uaddr,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (usin->sin6_family != AF_INET6)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (usin->sin6_family != AF_INET6)
 		return -EINVAL;
@@ -459,6 +490,7 @@ static int l2tp_ip6_getname(struct socket *sock, struct sockaddr *uaddr,
 			return -ENOTCONN;
 		lsa->l2tp_conn_id = lsk->peer_conn_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lsa->l2tp_addr = np->daddr;
 		if (np->sndflow)
 			lsa->l2tp_flowinfo = np->flow_label;
@@ -468,6 +500,8 @@ static int l2tp_ip6_getname(struct socket *sock, struct sockaddr *uaddr,
 		else
 			lsa->l2tp_addr = np->rcv_saddr;
 =======
+=======
+>>>>>>> v3.18
 		lsa->l2tp_addr = sk->sk_v6_daddr;
 		if (np->sndflow)
 			lsa->l2tp_flowinfo = np->flow_label;
@@ -476,6 +510,9 @@ static int l2tp_ip6_getname(struct socket *sock, struct sockaddr *uaddr,
 			lsa->l2tp_addr = np->saddr;
 		else
 			lsa->l2tp_addr = sk->sk_v6_rcv_saddr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		lsa->l2tp_conn_id = lsk->conn_id;
@@ -530,11 +567,17 @@ static int l2tp_ip6_sendmsg(struct kiocb *iocb, struct sock *sk,
 {
 	struct ipv6_txoptions opt_space;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_l2tpip6 *lsa =
 		(struct sockaddr_l2tpip6 *) msg->msg_name;
 	struct in6_addr *daddr, *final_p, final;
 	struct ipv6_pinfo *np = inet6_sk(sk);
 	struct ipv6_txoptions *opt_to_free = NULL;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_l2tpip6 *, lsa, msg->msg_name);
+	struct in6_addr *daddr, *final_p, final;
+	struct ipv6_pinfo *np = inet6_sk(sk);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_l2tpip6 *, lsa, msg->msg_name);
 	struct in6_addr *daddr, *final_p, final;
@@ -584,7 +627,10 @@ static int l2tp_ip6_sendmsg(struct kiocb *iocb, struct sock *sk,
 				if (flowlabel == NULL)
 					return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				daddr = &flowlabel->dst;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			}
@@ -596,8 +642,13 @@ static int l2tp_ip6_sendmsg(struct kiocb *iocb, struct sock *sk,
 		 */
 		if (sk->sk_state == TCP_ESTABLISHED &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    ipv6_addr_equal(daddr, &np->daddr))
 			daddr = &np->daddr;
+=======
+		    ipv6_addr_equal(daddr, &sk->sk_v6_daddr))
+			daddr = &sk->sk_v6_daddr;
+>>>>>>> v3.18
 =======
 		    ipv6_addr_equal(daddr, &sk->sk_v6_daddr))
 			daddr = &sk->sk_v6_daddr;
@@ -612,7 +663,11 @@ static int l2tp_ip6_sendmsg(struct kiocb *iocb, struct sock *sk,
 			return -EDESTADDRREQ;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		daddr = &np->daddr;
+=======
+		daddr = &sk->sk_v6_daddr;
+>>>>>>> v3.18
 =======
 		daddr = &sk->sk_v6_daddr;
 >>>>>>> v3.18
@@ -643,10 +698,15 @@ static int l2tp_ip6_sendmsg(struct kiocb *iocb, struct sock *sk,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!opt) {
 		opt = txopt_get(np);
 		opt_to_free = opt;
 	}
+=======
+	if (opt == NULL)
+		opt = np->opt;
+>>>>>>> v3.18
 =======
 	if (opt == NULL)
 		opt = np->opt;
@@ -673,7 +733,11 @@ static int l2tp_ip6_sendmsg(struct kiocb *iocb, struct sock *sk,
 	security_sk_classify_flow(sk, flowi6_to_flowi(&fl6));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dst = ip6_dst_lookup_flow(sk, &fl6, final_p, true);
+=======
+	dst = ip6_dst_lookup_flow(sk, &fl6, final_p);
+>>>>>>> v3.18
 =======
 	dst = ip6_dst_lookup_flow(sk, &fl6, final_p);
 >>>>>>> v3.18
@@ -683,6 +747,7 @@ static int l2tp_ip6_sendmsg(struct kiocb *iocb, struct sock *sk,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hlimit < 0) {
 		if (ipv6_addr_is_multicast(&fl6.daddr))
 			hlimit = np->mcast_hops;
@@ -691,6 +756,10 @@ static int l2tp_ip6_sendmsg(struct kiocb *iocb, struct sock *sk,
 		if (hlimit < 0)
 			hlimit = ip6_dst_hoplimit(dst);
 	}
+=======
+	if (hlimit < 0)
+		hlimit = ip6_sk_dst_hoplimit(np, &fl6, dst);
+>>>>>>> v3.18
 =======
 	if (hlimit < 0)
 		hlimit = ip6_sk_dst_hoplimit(np, &fl6, dst);
@@ -721,7 +790,10 @@ done:
 out:
 	fl6_sock_release(flowlabel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	txopt_put(opt_to_free);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -741,7 +813,11 @@ static int l2tp_ip6_recvmsg(struct kiocb *iocb, struct sock *sk,
 {
 	struct ipv6_pinfo *np = inet6_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_l2tpip6 *lsa = (struct sockaddr_l2tpip6 *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_l2tpip6 *, lsa, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_l2tpip6 *, lsa, msg->msg_name);
 >>>>>>> v3.18
@@ -784,7 +860,11 @@ static int l2tp_ip6_recvmsg(struct kiocb *iocb, struct sock *sk,
 		lsa->l2tp_conn_id = 0;
 		if (ipv6_addr_type(&lsa->l2tp_addr) & IPV6_ADDR_LINKLOCAL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			lsa->l2tp_scope_id = IP6CB(skb)->iif;
+=======
+			lsa->l2tp_scope_id = inet6_iif(skb);
+>>>>>>> v3.18
 =======
 			lsa->l2tp_scope_id = inet6_iif(skb);
 >>>>>>> v3.18
@@ -810,7 +890,11 @@ static struct proto l2tp_ip6_prot = {
 	.connect	   = l2tp_ip6_connect,
 	.disconnect	   = l2tp_ip6_disconnect,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl		   = l2tp_ioctl,
+=======
+	.ioctl		   = udp_ioctl,
+>>>>>>> v3.18
 =======
 	.ioctl		   = udp_ioctl,
 >>>>>>> v3.18
@@ -860,7 +944,10 @@ static struct inet_protosw l2tp_ip6_protosw = {
 	.prot		= &l2tp_ip6_prot,
 	.ops		= &l2tp_ip6_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.no_check	= 0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

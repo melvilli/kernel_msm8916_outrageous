@@ -220,7 +220,11 @@ configure_resizer_out_params(struct vpfe_resizer_device *resizer, int index,
  * @index: index RSZ_A-resizer-A RSZ_B-resizer-B.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -315,7 +319,11 @@ resizer_calculate_sdram_offsets(struct vpfe_resizer_device *resizer, int index)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int resizer_configure_output_win(struct vpfe_resizer_device *resizer)
+=======
+static int resizer_configure_output_win(struct vpfe_resizer_device *resizer)
+>>>>>>> v3.18
 =======
 static int resizer_configure_output_win(struct vpfe_resizer_device *resizer)
 >>>>>>> v3.18
@@ -1786,10 +1794,13 @@ void vpfe_resizer_unregister_entities(struct vpfe_resizer_device *vpfe_rsz)
 	vpfe_video_unregister(&vpfe_rsz->resizer_b.video_out);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* cleanup entity */
 	media_entity_cleanup(&vpfe_rsz->crop_resizer.subdev.entity);
 	media_entity_cleanup(&vpfe_rsz->resizer_a.subdev.entity);
 	media_entity_cleanup(&vpfe_rsz->resizer_b.subdev.entity);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* unregister subdev */
@@ -1797,11 +1808,17 @@ void vpfe_resizer_unregister_entities(struct vpfe_resizer_device *vpfe_rsz)
 	v4l2_device_unregister_subdev(&vpfe_rsz->resizer_a.subdev);
 	v4l2_device_unregister_subdev(&vpfe_rsz->resizer_b.subdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* cleanup entity */
 	media_entity_cleanup(&vpfe_rsz->crop_resizer.subdev.entity);
 	media_entity_cleanup(&vpfe_rsz->resizer_a.subdev.entity);
 	media_entity_cleanup(&vpfe_rsz->resizer_b.subdev.entity);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1884,6 +1901,7 @@ out_create_link:
 out_video_out2_register:
 	vpfe_video_unregister(&resizer->resizer_a.video_out);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	media_entity_cleanup(&resizer->crop_resizer.subdev.entity);
 	media_entity_cleanup(&resizer->resizer_a.subdev.entity);
 	media_entity_cleanup(&resizer->resizer_b.subdev.entity);
@@ -1891,12 +1909,17 @@ out_video_out2_register:
 	v4l2_device_unregister_subdev(&resizer->resizer_a.subdev);
 	v4l2_device_unregister_subdev(&resizer->resizer_b.subdev);
 =======
+=======
+>>>>>>> v3.18
 	v4l2_device_unregister_subdev(&resizer->crop_resizer.subdev);
 	v4l2_device_unregister_subdev(&resizer->resizer_a.subdev);
 	v4l2_device_unregister_subdev(&resizer->resizer_b.subdev);
 	media_entity_cleanup(&resizer->crop_resizer.subdev.entity);
 	media_entity_cleanup(&resizer->resizer_a.subdev.entity);
 	media_entity_cleanup(&resizer->resizer_b.subdev.entity);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }

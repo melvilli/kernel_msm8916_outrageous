@@ -8,7 +8,11 @@
 #include <linux/clk.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/dw_dmac.h>
+=======
+#include <linux/platform_data/dma-dw.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/dma-dw.h>
 >>>>>>> v3.18
@@ -1065,7 +1069,13 @@ struct platform_device *__init at32_add_device_usart(unsigned int id)
 void __init at32_setup_serial_console(unsigned int usart_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atmel_default_console_device = at32_usarts[usart_id];
+=======
+#ifdef CONFIG_SERIAL_ATMEL
+	atmel_default_console_device = at32_usarts[usart_id];
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_SERIAL_ATMEL
 	atmel_default_console_device = at32_usarts[usart_id];
@@ -1365,15 +1375,21 @@ at32_add_device_mci(unsigned int id, struct mci_platform_data *data)
 
 	slave->sdata.dma_dev = &dw_dmac0_device.dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	slave->sdata.cfg_hi = (DWC_CFGH_SRC_PER(0)
 				| DWC_CFGH_DST_PER(1));
 	slave->sdata.cfg_lo &= ~(DWC_CFGL_HS_DST_POL
 				| DWC_CFGL_HS_SRC_POL);
 =======
+=======
+>>>>>>> v3.18
 	slave->sdata.src_id = 0;
 	slave->sdata.dst_id = 1;
 	slave->sdata.src_master = 1;
 	slave->sdata.dst_master = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data->dma_slave = slave;
@@ -1455,7 +1471,11 @@ fail:
  * -------------------------------------------------------------------- */
 #if defined(CONFIG_CPU_AT32AP7000) || defined(CONFIG_CPU_AT32AP7002)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info atmel_lcdfb0_data;
+=======
+static struct atmel_lcdfb_pdata atmel_lcdfb0_data;
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata atmel_lcdfb0_data;
 >>>>>>> v3.18
@@ -1487,7 +1507,11 @@ static struct clk atmel_lcdfb0_pixclk = {
 
 struct platform_device *__init
 <<<<<<< HEAD
+<<<<<<< HEAD
 at32_add_device_lcdc(unsigned int id, struct atmel_lcdfb_info *data,
+=======
+at32_add_device_lcdc(unsigned int id, struct atmel_lcdfb_pdata *data,
+>>>>>>> v3.18
 =======
 at32_add_device_lcdc(unsigned int id, struct atmel_lcdfb_pdata *data,
 >>>>>>> v3.18
@@ -1496,7 +1520,11 @@ at32_add_device_lcdc(unsigned int id, struct atmel_lcdfb_pdata *data,
 {
 	struct platform_device *pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct atmel_lcdfb_info *info;
+=======
+	struct atmel_lcdfb_pdata *info;
+>>>>>>> v3.18
 =======
 	struct atmel_lcdfb_pdata *info;
 >>>>>>> v3.18
@@ -1557,7 +1585,11 @@ at32_add_device_lcdc(unsigned int id, struct atmel_lcdfb_pdata *data,
 
 	info = pdev->dev.platform_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(info, data, sizeof(struct atmel_lcdfb_info));
+=======
+	memcpy(info, data, sizeof(struct atmel_lcdfb_pdata));
+>>>>>>> v3.18
 =======
 	memcpy(info, data, sizeof(struct atmel_lcdfb_pdata));
 >>>>>>> v3.18
@@ -1585,7 +1617,11 @@ static struct resource atmel_pwm0_resource[] __initdata = {
 };
 static struct clk atmel_pwm0_mck = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "pwm_clk",
+=======
+	.name		= "at91sam9rl-pwm",
+>>>>>>> v3.18
 =======
 	.name		= "at91sam9rl-pwm",
 >>>>>>> v3.18
@@ -1604,7 +1640,11 @@ struct platform_device *__init at32_add_device_pwm(u32 mask)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev = platform_device_alloc("atmel_pwm", 0);
+=======
+	pdev = platform_device_alloc("at91sam9rl-pwm", 0);
+>>>>>>> v3.18
 =======
 	pdev = platform_device_alloc("at91sam9rl-pwm", 0);
 >>>>>>> v3.18
@@ -1616,9 +1656,12 @@ struct platform_device *__init at32_add_device_pwm(u32 mask)
 		goto out_free_pdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (platform_device_add_data(pdev, &mask, sizeof(mask)))
 		goto out_free_pdev;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pin_mask = 0;
@@ -2026,6 +2069,12 @@ at32_add_device_nand(unsigned int id, struct atmel_nand_data *data)
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* For at32ap7000, we use the reset workaround for nand driver */
+	data->need_reset_workaround = true;
+
+>>>>>>> v3.18
 =======
 	/* For at32ap7000, we use the reset workaround for nand driver */
 	data->need_reset_workaround = true;
@@ -2101,8 +2150,12 @@ at32_add_device_ac97c(unsigned int id, struct ac97c_platform_data *data,
 	if (flags & AC97C_CAPTURE) {
 		rx_dws->dma_dev = &dw_dmac0_device.dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rx_dws->cfg_hi = DWC_CFGH_SRC_PER(3);
 		rx_dws->cfg_lo &= ~(DWC_CFGL_HS_DST_POL | DWC_CFGL_HS_SRC_POL);
+=======
+		rx_dws->src_id = 3;
+>>>>>>> v3.18
 =======
 		rx_dws->src_id = 3;
 >>>>>>> v3.18
@@ -2114,8 +2167,12 @@ at32_add_device_ac97c(unsigned int id, struct ac97c_platform_data *data,
 	if (flags & AC97C_PLAYBACK) {
 		tx_dws->dma_dev = &dw_dmac0_device.dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tx_dws->cfg_hi = DWC_CFGH_DST_PER(4);
 		tx_dws->cfg_lo &= ~(DWC_CFGL_HS_DST_POL | DWC_CFGL_HS_SRC_POL);
+=======
+		tx_dws->dst_id = 4;
+>>>>>>> v3.18
 =======
 		tx_dws->dst_id = 4;
 >>>>>>> v3.18
@@ -2191,8 +2248,12 @@ at32_add_device_abdac(unsigned int id, struct atmel_abdac_pdata *data)
 
 	dws->dma_dev = &dw_dmac0_device.dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dws->cfg_hi = DWC_CFGH_DST_PER(2);
 	dws->cfg_lo &= ~(DWC_CFGL_HS_DST_POL | DWC_CFGL_HS_SRC_POL);
+=======
+	dws->dst_id = 2;
+>>>>>>> v3.18
 =======
 	dws->dst_id = 2;
 >>>>>>> v3.18

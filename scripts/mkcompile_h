@@ -69,7 +69,11 @@ UTS_TRUNCATE="cut -b -$UTS_LEN"
 ( echo /\* This file is auto generated, version $VERSION \*/
   if [ -n "$CONFIG_FLAGS" ] ; then echo "/* $CONFIG_FLAGS */"; fi
 <<<<<<< HEAD
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -81,7 +85,11 @@ UTS_TRUNCATE="cut -b -$UTS_LEN"
   echo \#define LINUX_COMPILE_HOST \"`echo $LINUX_COMPILE_HOST | $UTS_TRUNCATE`\"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   echo \#define LINUX_COMPILER \"`$CC -v 2>&1 | tail -n 1`\"
+=======
+  echo \#define LINUX_COMPILER \"`$CC -v 2>&1 | grep ' version '`\"
+>>>>>>> v3.18
 =======
   echo \#define LINUX_COMPILER \"`$CC -v 2>&1 | grep ' version '`\"
 >>>>>>> v3.18
@@ -93,7 +101,11 @@ UTS_TRUNCATE="cut -b -$UTS_LEN"
 # We don't consider the file changed if only the date/time changed.
 # A kernel config change will increase the generation number, thus
 <<<<<<< HEAD
+<<<<<<< HEAD
 # causing compile.h to be updated (including date/time) due to the 
+=======
+# causing compile.h to be updated (including date/time) due to the
+>>>>>>> v3.18
 =======
 # causing compile.h to be updated (including date/time) due to the
 >>>>>>> v3.18

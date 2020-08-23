@@ -119,8 +119,13 @@ enum kcs_states {
 
 /* Timeouts in microseconds. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IBF_RETRY_TIMEOUT 5000000
 #define OBF_RETRY_TIMEOUT 5000000
+=======
+#define IBF_RETRY_TIMEOUT (5*USEC_PER_SEC)
+#define OBF_RETRY_TIMEOUT (5*USEC_PER_SEC)
+>>>>>>> v3.18
 =======
 #define IBF_RETRY_TIMEOUT (5*USEC_PER_SEC)
 #define OBF_RETRY_TIMEOUT (5*USEC_PER_SEC)

@@ -10,6 +10,7 @@ menuconfig SND_ARM
 	  "ALSA for SoC audio support" section.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SND_PXA2XX_LIB
 	tristate
 	select SND_AC97_CODEC if SND_PXA2XX_LIB_AC97
@@ -18,6 +19,8 @@ config SND_PXA2XX_LIB
 config SND_PXA2XX_LIB_AC97
 	bool
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 if SND_ARM
@@ -33,7 +36,10 @@ config SND_PXA2XX_PCM
 	select SND_PCM
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SND_PXA2XX_LIB
 	tristate
 	select SND_AC97_CODEC if SND_PXA2XX_LIB_AC97
@@ -41,6 +47,9 @@ config SND_PXA2XX_LIB
 config SND_PXA2XX_LIB_AC97
 	bool
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SND_PXA2XX_AC97
 	tristate "AC97 driver for the Intel PXA2xx chip"

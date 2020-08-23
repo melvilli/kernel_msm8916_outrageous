@@ -25,6 +25,11 @@
 #include <linux/kexec.h>
 #include <linux/sizes.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+#include <linux/dma-contiguous.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 #include <linux/dma-contiguous.h>
@@ -288,7 +293,11 @@ static unsigned long __init init_initrd(void)
  * if needed.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SGI_IP27
+=======
+#if defined(CONFIG_SGI_IP27) || (defined(CONFIG_CPU_LOONGSON3) && defined(CONFIG_NUMA))
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_SGI_IP27) || (defined(CONFIG_CPU_LOONGSON3) && defined(CONFIG_NUMA))
 >>>>>>> v3.18
@@ -310,6 +319,7 @@ static void __init bootmem_init(void)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Init any data related to initrd. It's a nop if INITRD is
 	 * not selected. Once that done we can determine the low bound
 	 * of usable memory.
@@ -317,6 +327,8 @@ static void __init bootmem_init(void)
 	reserved_end = max(init_initrd(),
 			   (unsigned long) PFN_UP(__pa_symbol(&_end)));
 =======
+=======
+>>>>>>> v3.18
 	 * Sanity check any INITRD first. We don't take it into account
 	 * for bootmem setup initially, rely on the end-of-kernel-code
 	 * as our memory range starting point. Once bootmem is inited we
@@ -324,6 +336,9 @@ static void __init bootmem_init(void)
 	 */
 	init_initrd();
 	reserved_end = (unsigned long) PFN_UP(__pa_symbol(&_end));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -382,7 +397,10 @@ static void __init bootmem_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_BLK_DEV_INITRD
 	/*
 	 * mapstart should be after initrd_end
@@ -391,6 +409,9 @@ static void __init bootmem_init(void)
 		mapstart = max(mapstart, (unsigned long)PFN_UP(__pa(initrd_end)));
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Initialize the boot-time allocator with low memory only.
@@ -498,6 +519,10 @@ static void __init bootmem_init(void)
  *  o sparse_init()
  *  o paging_init()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *  o dma_continguous_reserve()
+>>>>>>> v3.18
 =======
  *  o dma_continguous_reserve()
 >>>>>>> v3.18
@@ -508,7 +533,11 @@ static void __init bootmem_init(void)
  *	 This was rather impractical because it meant plat_mem_setup had to
  * get away without any kind of memory allocator.  To keep old code from
 <<<<<<< HEAD
+<<<<<<< HEAD
  * breaking plat_setup was just renamed to plat_setup and a second platform
+=======
+ * breaking plat_setup was just renamed to plat_mem_setup and a second platform
+>>>>>>> v3.18
 =======
  * breaking plat_setup was just renamed to plat_mem_setup and a second platform
 >>>>>>> v3.18
@@ -520,7 +549,11 @@ static int usermem __initdata;
 static int __init early_parse_mem(char *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long start, size;
+=======
+	phys_t start, size;
+>>>>>>> v3.18
 =======
 	phys_t start, size;
 >>>>>>> v3.18
@@ -595,9 +628,12 @@ static void __init arch_mem_addpart(phys_t mem, phys_t end, int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init arch_mem_init(char **cmdline_p)
 {
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KEXEC
 static inline unsigned long long get_total_mem(void)
 {
@@ -647,6 +683,9 @@ static void __init request_crashkernel(struct resource *res)
 static void __init arch_mem_init(char **cmdline_p)
 {
 	struct memblock_region *reg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	extern void plat_mem_setup(void);
 
@@ -703,6 +742,11 @@ static void __init arch_mem_init(char **cmdline_p)
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	mips_parse_crashkernel();
+>>>>>>> v3.18
 =======
 
 	mips_parse_crashkernel();
@@ -717,6 +761,7 @@ static void __init arch_mem_init(char **cmdline_p)
 	sparse_init();
 	plat_swiotlb_setup();
 	paging_init();
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -767,6 +812,8 @@ static void __init request_crashkernel(struct resource *res)
 #endif /* !defined(CONFIG_KEXEC)  */
 
 =======
+=======
+>>>>>>> v3.18
 
 	dma_contiguous_reserve(PFN_PHYS(max_low_pfn));
 	/* Tell bootmem about cma reserved memblock section */
@@ -775,6 +822,9 @@ static void __init request_crashkernel(struct resource *res)
 			reserve_bootmem(reg->base, reg->size, BOOTMEM_DEFAULT);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init resource_init(void)
 {
@@ -789,11 +839,14 @@ static void __init resource_init(void)
 	data_resource.end = __pa_symbol(&_edata) - 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Request address space for all standard RAM.
 	 */
 	mips_parse_crashkernel();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < boot_mem_map.nr_map; i++) {
@@ -837,7 +890,10 @@ static void __init resource_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 static void __init prefill_possible_map(void)
 {
@@ -857,6 +913,9 @@ static void __init prefill_possible_map(void)
 static inline void prefill_possible_map(void) {}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init setup_arch(char **cmdline_p)
 {
@@ -882,6 +941,10 @@ void __init setup_arch(char **cmdline_p)
 	resource_init();
 	plat_smp_setup();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefill_possible_map();
+>>>>>>> v3.18
 =======
 	prefill_possible_map();
 >>>>>>> v3.18

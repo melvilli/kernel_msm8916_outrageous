@@ -7,11 +7,15 @@
 #include <asm/siginfo.h>			/* TRAP_TRACE, ... */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_32
 #define dotraplinkage
 #else
 #define dotraplinkage asmlinkage
 #endif
+=======
+#define dotraplinkage __visible
+>>>>>>> v3.18
 =======
 #define dotraplinkage __visible
 >>>>>>> v3.18
@@ -46,7 +50,10 @@ asmlinkage void machine_check(void);
 asmlinkage void simd_coprocessor_error(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRACING
 asmlinkage void trace_page_fault(void);
 #define trace_stack_segment stack_segment
@@ -65,6 +72,9 @@ asmlinkage void trace_page_fault(void);
 #define trace_async_page_fault async_page_fault
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 dotraplinkage void do_divide_error(struct pt_regs *, long);
 dotraplinkage void do_debug(struct pt_regs *, long);
@@ -81,11 +91,14 @@ dotraplinkage void do_stack_segment(struct pt_regs *, long);
 #ifdef CONFIG_X86_64
 dotraplinkage void do_double_fault(struct pt_regs *, long);
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage __kprobes struct pt_regs *sync_regs(struct pt_regs *);
 #endif
 dotraplinkage void do_general_protection(struct pt_regs *, long);
 dotraplinkage void do_page_fault(struct pt_regs *, unsigned long);
 =======
+=======
+>>>>>>> v3.18
 asmlinkage struct pt_regs *sync_regs(struct pt_regs *);
 #endif
 dotraplinkage void do_general_protection(struct pt_regs *, long);
@@ -98,6 +111,9 @@ static inline void trace_do_page_fault(struct pt_regs *regs, unsigned long error
 	do_page_fault(regs, error);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 dotraplinkage void do_spurious_interrupt_bug(struct pt_regs *, long);
 dotraplinkage void do_coprocessor_error(struct pt_regs *, long);
@@ -123,7 +139,10 @@ static inline int get_si_code(unsigned long condition)
 extern int panic_on_unrecovered_nmi;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void math_error(struct pt_regs *, int, int);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void math_emulate(struct math_emu_info *);

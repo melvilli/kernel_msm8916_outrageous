@@ -227,8 +227,11 @@ int sb_dsp_reset(sb_devc * devc)
 	int loopc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("Entered sb_dsp_reset()\n"));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (devc->model == MDL_ESS) return ess_dsp_reset (devc);
@@ -250,8 +253,11 @@ int sb_dsp_reset(sb_devc * devc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("sb_dsp_reset() OK\n"));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 1;

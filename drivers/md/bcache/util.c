@@ -169,11 +169,14 @@ int bch_parse_uuid(const char *s, char *uuid)
 void bch_time_stats_update(struct time_stats *stats, uint64_t start_time)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint64_t now		= local_clock();
 	uint64_t duration	= time_after64(now, start_time)
 		? now - start_time : 0;
 	uint64_t last		= time_after64(now, stats->last)
 =======
+=======
+>>>>>>> v3.18
 	uint64_t now, duration, last;
 
 	spin_lock(&stats->lock);
@@ -182,6 +185,9 @@ void bch_time_stats_update(struct time_stats *stats, uint64_t start_time)
 	duration	= time_after64(now, start_time)
 		? now - start_time : 0;
 	last		= time_after64(now, stats->last)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		? now - stats->last : 0;
 
@@ -200,6 +206,11 @@ void bch_time_stats_update(struct time_stats *stats, uint64_t start_time)
 
 	stats->last = now ?: 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	spin_unlock(&stats->lock);
+>>>>>>> v3.18
 =======
 
 	spin_unlock(&stats->lock);
@@ -220,8 +231,11 @@ uint64_t bch_next_delay(struct bch_ratelimit *d, uint64_t done)
 	uint64_t now = local_clock();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	d->next += div_u64(done, d->rate);
 =======
+=======
+>>>>>>> v3.18
 	d->next += div_u64(done * NSEC_PER_SEC, d->rate);
 
 	if (time_before64(now + NSEC_PER_SEC, d->next))
@@ -229,6 +243,9 @@ uint64_t bch_next_delay(struct bch_ratelimit *d, uint64_t done)
 
 	if (time_after64(now - NSEC_PER_SEC * 2, d->next))
 		d->next = now - NSEC_PER_SEC * 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return time_after64(d->next, now)
@@ -239,15 +256,21 @@ uint64_t bch_next_delay(struct bch_ratelimit *d, uint64_t done)
 void bch_bio_map(struct bio *bio, void *base)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t size = bio->bi_size;
 	struct bio_vec *bv = bio->bi_io_vec;
 
 	BUG_ON(!bio->bi_size);
 =======
+=======
+>>>>>>> v3.18
 	size_t size = bio->bi_iter.bi_size;
 	struct bio_vec *bv = bio->bi_io_vec;
 
 	BUG_ON(!bio->bi_iter.bi_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BUG_ON(bio->bi_vcnt);
 
@@ -271,6 +294,7 @@ start:		bv->bv_len	= min_t(size_t, PAGE_SIZE - bv->bv_offset,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bch_bio_alloc_pages(struct bio *bio, gfp_t gfp)
 {
 	int i;
@@ -288,6 +312,8 @@ int bch_bio_alloc_pages(struct bio *bio, gfp_t gfp)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

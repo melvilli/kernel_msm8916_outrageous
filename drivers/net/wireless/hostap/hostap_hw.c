@@ -837,6 +837,7 @@ static int hfa384x_get_rid(struct net_device *dev, u16 rid, void *buf, int len,
 
 	res = hfa384x_setup_bap(dev, BAP0, rid, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (res)
 		goto unlock;
 
@@ -847,10 +848,15 @@ static int hfa384x_get_rid(struct net_device *dev, u16 rid, void *buf, int len,
 	if (!res)
 		res = hfa384x_from_bap(dev, BAP0, &rec, sizeof(rec));
 >>>>>>> v3.18
+=======
+	if (!res)
+		res = hfa384x_from_bap(dev, BAP0, &rec, sizeof(rec));
+>>>>>>> v3.18
 
 	if (le16_to_cpu(rec.len) == 0) {
 		/* RID not available */
 		res = -ENODATA;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto unlock;
 	}
@@ -858,10 +864,15 @@ static int hfa384x_get_rid(struct net_device *dev, u16 rid, void *buf, int len,
 	rlen = (le16_to_cpu(rec.len) - 1) * 2;
 	if (exact_len && rlen != len) {
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	rlen = (le16_to_cpu(rec.len) - 1) * 2;
 	if (!res && exact_len && rlen != len) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printk(KERN_DEBUG "%s: hfa384x_get_rid - RID len mismatch: "
 		       "rid=0x%04x, len=%d (expected %d)\n",
@@ -870,9 +881,15 @@ static int hfa384x_get_rid(struct net_device *dev, u16 rid, void *buf, int len,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = hfa384x_from_bap(dev, BAP0, buf, len);
 
 unlock:
+=======
+	if (!res)
+		res = hfa384x_from_bap(dev, BAP0, buf, len);
+
+>>>>>>> v3.18
 =======
 	if (!res)
 		res = hfa384x_from_bap(dev, BAP0, buf, len);
@@ -1449,7 +1466,11 @@ static int prism2_hw_init2(struct net_device *dev, int initial)
 		list_for_each(ptr, &local->hostap_interfaces) {
 			iface = list_entry(ptr, struct hostap_interface, list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(iface->dev->dev_addr, dev->dev_addr, ETH_ALEN);
+=======
+			eth_hw_addr_inherit(iface->dev, dev);
+>>>>>>> v3.18
 =======
 			eth_hw_addr_inherit(iface->dev, dev);
 >>>>>>> v3.18
@@ -2203,7 +2224,11 @@ static void hostap_tx_callback(local_info_t *local,
 
 	/* Make sure that frame was from us. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(txdesc->addr2, local->dev->dev_addr, ETH_ALEN)) {
+=======
+	if (!ether_addr_equal(txdesc->addr2, local->dev->dev_addr)) {
+>>>>>>> v3.18
 =======
 	if (!ether_addr_equal(txdesc->addr2, local->dev->dev_addr)) {
 >>>>>>> v3.18

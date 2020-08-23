@@ -448,7 +448,10 @@ struct bio_vec {
  */
 struct bio {
 <<<<<<< HEAD
+<<<<<<< HEAD
        sector_t            bi_sector;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
        struct bio          *bi_next;    /* request queue link */
@@ -458,7 +461,11 @@ struct bio {
 
        unsigned int	bi_vcnt;     /* how may bio_vec's */
 <<<<<<< HEAD
+<<<<<<< HEAD
        unsigned int	bi_idx;		/* current index into bio_vec array */
+=======
+       struct bvec_iter	bi_iter;	/* current index into bio_vec array */
+>>>>>>> v3.18
 =======
        struct bvec_iter	bi_iter;	/* current index into bio_vec array */
 >>>>>>> v3.18
@@ -488,7 +495,11 @@ With this multipage bio design:
   by using rq_for_each_segment.  This handles the fact that a request
   has multiple bios, each of which can have multiple segments.
 <<<<<<< HEAD
+<<<<<<< HEAD
 - Drivers which can't process a large bio in one shot can use the bi_idx
+=======
+- Drivers which can't process a large bio in one shot can use the bi_iter
+>>>>>>> v3.18
 =======
 - Drivers which can't process a large bio in one shot can use the bi_iter
 >>>>>>> v3.18
@@ -601,7 +612,11 @@ nr_sectors and current_nr_sectors fields (based on the corresponding
 hard_xxx values and the number of bytes transferred) and updates it on
 every transfer that invokes end_that_request_first. It does the same for the
 <<<<<<< HEAD
+<<<<<<< HEAD
 buffer, bio, bio->bi_idx fields too.
+=======
+buffer, bio, bio->bi_iter fields too.
+>>>>>>> v3.18
 =======
 buffer, bio, bio->bi_iter fields too.
 >>>>>>> v3.18

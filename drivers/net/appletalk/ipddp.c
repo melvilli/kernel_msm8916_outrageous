@@ -75,7 +75,11 @@ static struct net_device * __init ipddp_init(void)
 		return ERR_PTR(-ENOMEM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->priv_flags &= ~IFF_XMIT_DST_RELEASE;
+=======
+	netif_keep_dst(dev);
+>>>>>>> v3.18
 =======
 	netif_keep_dst(dev);
 >>>>>>> v3.18

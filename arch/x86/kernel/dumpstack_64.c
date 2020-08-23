@@ -104,7 +104,10 @@ in_irq_stack(unsigned long *stack, unsigned long *irq_stack,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const unsigned long irq_stack_size =
 	(IRQ_STACK_SIZE - 64) / sizeof(unsigned long);
 
@@ -143,6 +146,9 @@ analyze_stack(int cpu, struct task_struct *task, unsigned long *stack,
 	return STACK_IS_UNKNOWN;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * x86-64 can have up to three kernel stacks:
@@ -157,6 +163,7 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 {
 	const unsigned cpu = get_cpu();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *irq_stack_end =
 		(unsigned long *)per_cpu(irq_stack_ptr, cpu);
 	unsigned used = 0;
@@ -164,12 +171,17 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 	int graph = 0;
 	unsigned long dummy;
 =======
+=======
+>>>>>>> v3.18
 	struct thread_info *tinfo;
 	unsigned long *irq_stack = (unsigned long *)per_cpu(irq_stack_ptr, cpu);
 	unsigned long dummy;
 	unsigned used = 0;
 	int graph = 0;
 	int done = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!task)
@@ -193,6 +205,7 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 	 */
 	tinfo = task_thread_info(task);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (;;) {
 		char *id;
 		unsigned long *estack_end;
@@ -201,6 +214,8 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 
 		if (estack_end) {
 =======
+=======
+>>>>>>> v3.18
 	while (!done) {
 		unsigned long *stack_end;
 		enum stack_type stype;
@@ -220,13 +235,20 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 
 		case STACK_IS_EXCEPTION:
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ops->stack(data, id) < 0)
 				break;
 
 			bp = ops->walk_stack(tinfo, stack, bp, ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					     data, estack_end, &graph);
+=======
+					     data, stack_end, &graph);
+>>>>>>> v3.18
 =======
 					     data, stack_end, &graph);
 >>>>>>> v3.18
@@ -236,6 +258,7 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 			 * second-to-last pointer (index -2 to end) in the
 			 * exception stack:
 			 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			stack = (unsigned long *) estack_end[-2];
 			continue;
@@ -263,6 +286,8 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 		}
 		break;
 =======
+=======
+>>>>>>> v3.18
 			stack = (unsigned long *) stack_end[-2];
 			done = 0;
 			break;
@@ -288,6 +313,9 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 			ops->stack(data, "UNK");
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

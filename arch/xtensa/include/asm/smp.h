@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * include/asm-xtensa/smp.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * This file is subject to the terms and conditions of the GNU General Public
@@ -9,7 +12,11 @@
  * for more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2001 - 2005 Tensilica Inc.
+=======
+ * Copyright (C) 2001 - 2013 Tensilica Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2001 - 2013 Tensilica Inc.
 >>>>>>> v3.18
@@ -18,6 +25,7 @@
 #ifndef _XTENSA_SMP_H
 #define _XTENSA_SMP_H
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct xtensa_cpuinfo boot_cpu_data;
 
@@ -32,6 +40,8 @@ struct xtensa_cpuinfo {
 
 #define cpu_logical_map(cpu)	(cpu)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 
 #define raw_smp_processor_id()	(current_thread_info()->cpu)
@@ -62,6 +72,9 @@ void cpu_restart(void);
 #endif /* CONFIG_HOTPLUG_CPU */
 
 #endif /* CONFIG_SMP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif	/* _XTENSA_SMP_H */

@@ -53,15 +53,21 @@ ENTRY(__kvm_tlb_flush_vmid_ipa)
 	add	r0, r0, #KVM_VTTBR
 	ldrd	r2, r3, [r0]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mcrr	p15, 6, r2, r3, c2	@ Write VTTBR
 	isb
 	mcr     p15, 0, r0, c8, c3, 0	@ TLBIALLIS (rt ignored)
 	dsb
 =======
+=======
+>>>>>>> v3.18
 	mcrr	p15, 6, rr_lo_hi(r2, r3), c2	@ Write VTTBR
 	isb
 	mcr     p15, 0, r0, c8, c3, 0	@ TLBIALLIS (rt ignored)
 	dsb	ish
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	isb
 	mov	r2, #0
@@ -87,7 +93,11 @@ ENTRY(__kvm_flush_vm_context)
 	/* Invalidate instruction caches Inner Shareable (ICIALLUIS) */
 	mcr     p15, 0, r0, c7, c1, 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
+=======
+	dsb	ish
+>>>>>>> v3.18
 =======
 	dsb	ish
 >>>>>>> v3.18
@@ -147,7 +157,11 @@ ENTRY(__kvm_vcpu_run)
 	add	r1, r1, #KVM_VTTBR
 	ldrd	r2, r3, [r1]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mcrr	p15, 6, r2, r3, c2	@ Write VTTBR
+=======
+	mcrr	p15, 6, rr_lo_hi(r2, r3), c2	@ Write VTTBR
+>>>>>>> v3.18
 =======
 	mcrr	p15, 6, rr_lo_hi(r2, r3), c2	@ Write VTTBR
 >>>>>>> v3.18
@@ -175,10 +189,13 @@ __kvm_vcpu_return:
 	set_hstr vmexit
 	set_hdcr vmexit
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_hcptr vmexit, (HCPTR_TTA | HCPTR_TCP(10) | HCPTR_TCP(11)), after_vfp_restore
 
 #ifdef CONFIG_VFPv3
 =======
+=======
+>>>>>>> v3.18
 	set_hcptr vmexit, (HCPTR_TTA | HCPTR_TCP(10) | HCPTR_TCP(11))
 
 #ifdef CONFIG_VFPv3
@@ -186,6 +203,9 @@ __kvm_vcpu_return:
 	tst	r2, #(HCPTR_TCP(10) | HCPTR_TCP(11))
 	bne	after_vfp_restore
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	@ Switch VFP/NEON hardware state to the host's
 	add	r7, vcpu, #VCPU_VFP_GUEST
@@ -199,8 +219,11 @@ after_vfp_restore:
 	pop	{r2}
 	VFPFMXR FPEXC, r2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 after_vfp_restore:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -226,9 +249,12 @@ after_vfp_restore:
 	restore_host_regs
 	clrex				@ Clear exclusive monitor
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	r0, r1			@ Return the return code
 	mov	r1, #0			@ Clear upper bits in return value
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_CPU_ENDIAN_BE8
 	mov	r0, r1			@ Return the return code
 	mov	r1, #0			@ Clear upper bits in return value
@@ -236,6 +262,9 @@ after_vfp_restore:
 	@ r1 already has return code
 	mov	r0, #0			@ Clear upper bits in return value
 #endif /* CONFIG_CPU_ENDIAN_BE8 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bx	lr			@ return to IOCTL
 
@@ -504,7 +533,11 @@ switch_to_guest_vfp:
 
 	@ NEON/VFP used.  Turn on VFP access.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_hcptr vmtrap, (HCPTR_TCP(10) | HCPTR_TCP(11))
+=======
+	set_hcptr vmexit, (HCPTR_TCP(10) | HCPTR_TCP(11))
+>>>>>>> v3.18
 =======
 	set_hcptr vmexit, (HCPTR_TCP(10) | HCPTR_TCP(11))
 >>>>>>> v3.18
@@ -542,6 +575,7 @@ __kvm_hyp_code_end:
 
 und_die_str:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ascii	"unexpected undefined exception in Hyp mode at: %#08x"
 pabt_die_str:
 	.ascii	"unexpected prefetch abort in Hyp mode at: %#08x"
@@ -550,6 +584,8 @@ dabt_die_str:
 svc_die_str:
 	.ascii	"unexpected HVC/SVC trap in Hyp mode at: %#08x"
 =======
+=======
+>>>>>>> v3.18
 	.ascii	"unexpected undefined exception in Hyp mode at: %#08x\n"
 pabt_die_str:
 	.ascii	"unexpected prefetch abort in Hyp mode at: %#08x\n"
@@ -557,4 +593,7 @@ dabt_die_str:
 	.ascii	"unexpected data abort in Hyp mode at: %#08x\n"
 svc_die_str:
 	.ascii	"unexpected HVC/SVC trap in Hyp mode at: %#08x\n"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

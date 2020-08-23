@@ -60,6 +60,10 @@ static int xfs_stat_proc_show(struct seq_file *m, void *v)
 		{ "bmbt2",		XFSSTAT_END_BMBT_V2		},
 		{ "ibt2",		XFSSTAT_END_IBT_V2		},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		{ "fibt2",		XFSSTAT_END_FIBT_V2		},
+>>>>>>> v3.18
 =======
 		{ "fibt2",		XFSSTAT_END_FIBT_V2		},
 >>>>>>> v3.18

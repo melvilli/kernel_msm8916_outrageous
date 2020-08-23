@@ -25,7 +25,10 @@
 #include <core/client.h>
 #include <core/os.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <core/engctx.h>
@@ -38,6 +41,7 @@
 #include <engine/fifo.h>
 #include <engine/mpeg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <engine/graph/nv40.h>
 
 struct nv31_mpeg_priv {
@@ -48,6 +52,9 @@ struct nv31_mpeg_priv {
 struct nv31_mpeg_chan {
 	struct nouveau_object base;
 };
+=======
+#include <engine/mpeg/nv31.h>
+>>>>>>> v3.18
 =======
 #include <engine/mpeg/nv31.h>
 >>>>>>> v3.18
@@ -97,7 +104,11 @@ nv31_mpeg_mthd_dma(struct nouveau_object *object, u32 mthd, void *arg, u32 len)
 	if (mthd == 0x0190) {
 		/* DMA_CMD */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_mask(priv, 0x00b300, 0x00030000, (dma0 & 0x00030000));
+=======
+		nv_mask(priv, 0x00b300, 0x00010000, (dma0 & 0x00030000) ? 0x00010000 : 0);
+>>>>>>> v3.18
 =======
 		nv_mask(priv, 0x00b300, 0x00010000, (dma0 & 0x00030000) ? 0x00010000 : 0);
 >>>>>>> v3.18
@@ -107,7 +118,11 @@ nv31_mpeg_mthd_dma(struct nouveau_object *object, u32 mthd, void *arg, u32 len)
 	if (mthd == 0x01a0) {
 		/* DMA_DATA */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_mask(priv, 0x00b300, 0x000c0000, (dma0 & 0x00030000) << 2);
+=======
+		nv_mask(priv, 0x00b300, 0x00020000, (dma0 & 0x00030000) ? 0x00020000 : 0);
+>>>>>>> v3.18
 =======
 		nv_mask(priv, 0x00b300, 0x00020000, (dma0 & 0x00030000) ? 0x00020000 : 0);
 >>>>>>> v3.18
@@ -116,7 +131,11 @@ nv31_mpeg_mthd_dma(struct nouveau_object *object, u32 mthd, void *arg, u32 len)
 	} else {
 		/* DMA_IMAGE, VRAM only */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dma0 & 0x000c0000)
+=======
+		if (dma0 & 0x00030000)
+>>>>>>> v3.18
 =======
 		if (dma0 & 0x00030000)
 >>>>>>> v3.18
@@ -130,7 +149,11 @@ nv31_mpeg_mthd_dma(struct nouveau_object *object, u32 mthd, void *arg, u32 len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct nouveau_ofuncs
+=======
+struct nouveau_ofuncs
+>>>>>>> v3.18
 =======
 struct nouveau_ofuncs
 >>>>>>> v3.18
@@ -170,11 +193,17 @@ nv31_mpeg_context_ctor(struct nouveau_object *parent,
 	struct nv31_mpeg_priv *priv = (void *)engine;
 	struct nv31_mpeg_chan *chan;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	if (!atomic_add_unless(&priv->refcount, 1, 1))
 		return -EBUSY;
 
+=======
+	unsigned long flags;
+	int ret;
+
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 	int ret;
@@ -186,7 +215,10 @@ nv31_mpeg_context_ctor(struct nouveau_object *parent,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&nv_engine(priv)->lock, flags);
 	if (priv->chan) {
 		spin_unlock_irqrestore(&nv_engine(priv)->lock, flags);
@@ -196,6 +228,9 @@ nv31_mpeg_context_ctor(struct nouveau_object *parent,
 	}
 	priv->chan = chan;
 	spin_unlock_irqrestore(&nv_engine(priv)->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -206,12 +241,15 @@ nv31_mpeg_context_dtor(struct nouveau_object *object)
 	struct nv31_mpeg_priv *priv = (void *)object->engine;
 	struct nv31_mpeg_chan *chan = (void *)object;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_dec(&priv->refcount);
 	nouveau_object_destroy(&chan->base);
 }
 
 static struct nouveau_oclass
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&nv_engine(priv)->lock, flags);
@@ -221,6 +259,9 @@ static struct nouveau_oclass
 }
 
 struct nouveau_oclass
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nv31_mpeg_cclass = {
 	.handle = NV_ENGCTX(MPEG, 0x31),
@@ -251,6 +292,7 @@ void
 nv31_mpeg_intr(struct nouveau_subdev *subdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_fifo *pfifo = nouveau_fifo(subdev);
 	struct nouveau_engine *engine = nv_engine(subdev);
 	struct nouveau_object *engctx;
@@ -258,10 +300,15 @@ nv31_mpeg_intr(struct nouveau_subdev *subdev)
 	struct nv31_mpeg_priv *priv = (void *)subdev;
 	u32 inst = nv_rd32(priv, 0x00b318) & 0x000fffff;
 =======
+=======
+>>>>>>> v3.18
 	struct nv31_mpeg_priv *priv = (void *)subdev;
 	struct nouveau_fifo *pfifo = nouveau_fifo(subdev);
 	struct nouveau_handle *handle;
 	struct nouveau_object *engctx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 stat = nv_rd32(priv, 0x00b100);
 	u32 type = nv_rd32(priv, 0x00b230);
@@ -269,15 +316,21 @@ nv31_mpeg_intr(struct nouveau_subdev *subdev)
 	u32 data = nv_rd32(priv, 0x00b238);
 	u32 show = stat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int chid;
 
 	engctx = nouveau_engctx_get(engine, inst);
 	chid   = pfifo->chid(pfifo, engctx);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&nv_engine(priv)->lock, flags);
 	engctx = nv_object(priv->chan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (stat & 0x01000000) {
@@ -288,7 +341,11 @@ nv31_mpeg_intr(struct nouveau_subdev *subdev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (type == 0x00000010) {
+=======
+		if (type == 0x00000010 && engctx) {
+>>>>>>> v3.18
 =======
 		if (type == 0x00000010 && engctx) {
 >>>>>>> v3.18
@@ -304,6 +361,7 @@ nv31_mpeg_intr(struct nouveau_subdev *subdev)
 
 	if (show) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_error(priv,
 			 "ch %d [0x%08x %s] 0x%08x 0x%08x 0x%08x 0x%08x\n",
 			 chid, inst << 4, nouveau_client_name(engctx), stat,
@@ -312,12 +370,17 @@ nv31_mpeg_intr(struct nouveau_subdev *subdev)
 
 	nouveau_engctx_put(engctx);
 =======
+=======
+>>>>>>> v3.18
 		nv_error(priv, "ch %d [%s] 0x%08x 0x%08x 0x%08x 0x%08x\n",
 			 pfifo->chid(pfifo, engctx),
 			 nouveau_client_name(engctx), stat, type, mthd, data);
 	}
 
 	spin_unlock_irqrestore(&nv_engine(priv)->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -346,8 +409,13 @@ int
 nv31_mpeg_init(struct nouveau_object *object)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_engine *engine = nv_engine(object->engine);
 	struct nv31_mpeg_priv *priv = (void *)engine;
+=======
+	struct nouveau_engine *engine = nv_engine(object);
+	struct nv31_mpeg_priv *priv = (void *)object;
+>>>>>>> v3.18
 =======
 	struct nouveau_engine *engine = nv_engine(object);
 	struct nv31_mpeg_priv *priv = (void *)object;
@@ -370,7 +438,11 @@ nv31_mpeg_init(struct nouveau_object *object)
 	nv_wr32(priv, 0x00b32c, 0x00000000);
 	nv_wr32(priv, 0x00b314, 0x00000100);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_wr32(priv, 0x00b220, nv44_graph_class(priv) ? 0x00000044 : 0x00000031);
+=======
+	nv_wr32(priv, 0x00b220, 0x00000031);
+>>>>>>> v3.18
 =======
 	nv_wr32(priv, 0x00b220, 0x00000031);
 >>>>>>> v3.18

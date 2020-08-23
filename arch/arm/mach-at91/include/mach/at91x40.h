@@ -56,6 +56,11 @@
 #define	AT91_PS_CR_CPU	(1 << 0)	/* CPU clock disable bit */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AT91X40_MASTER_CLOCK	40000000
+
+>>>>>>> v3.18
 =======
 #define AT91X40_MASTER_CLOCK	40000000
 

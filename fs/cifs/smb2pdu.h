@@ -2,7 +2,11 @@
  *   fs/cifs/smb2pdu.h
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Copyright (c) International Business Machines  Corp., 2009, 2010
+=======
+ *   Copyright (c) International Business Machines  Corp., 2009, 2013
+>>>>>>> v3.18
 =======
  *   Copyright (c) International Business Machines  Corp., 2009, 2013
 >>>>>>> v3.18
@@ -127,7 +131,10 @@ struct smb2_pdu {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct smb2_transform_hdr {
 	__be32 smb2_buf_length;	/* big endian on wire */
 				/* length is only two or three bytes - with
@@ -145,6 +152,9 @@ struct smb2_transform_hdr {
 /* Encryption Algorithms */
 #define SMB2_ENCRYPTION_AES128_CCM	__constant_cpu_to_le16(0x0001)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *	SMB2 flag definitions
@@ -175,10 +185,13 @@ struct smb2_err_rsp {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SMB2_CLIENT_GUID_SIZE 16
 
 extern __u8 cifs_client_guid[SMB2_CLIENT_GUID_SIZE];
 =======
+=======
+>>>>>>> v3.18
 struct smb2_symlink_err_rsp {
 	__le32 SymLinkLength;
 	__le32 SymLinkErrorTag;
@@ -194,6 +207,9 @@ struct smb2_symlink_err_rsp {
 } __packed;
 
 #define SMB2_CLIENT_GUID_SIZE 16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct smb2_negotiate_req {
@@ -213,6 +229,10 @@ struct smb2_negotiate_req {
 #define SMB21_PROT_ID 0x0210
 #define SMB30_PROT_ID 0x0300
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SMB302_PROT_ID 0x0302
+>>>>>>> v3.18
 =======
 #define SMB302_PROT_ID 0x0302
 >>>>>>> v3.18
@@ -269,6 +289,10 @@ struct smb2_sess_setup_req {
 #define SMB2_SESSION_FLAG_IS_GUEST	0x0001
 #define SMB2_SESSION_FLAG_IS_NULL	0x0002
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SMB2_SESSION_FLAG_ENCRYPT_DATA	0x0004
+>>>>>>> v3.18
 =======
 #define SMB2_SESSION_FLAG_ENCRYPT_DATA	0x0004
 >>>>>>> v3.18
@@ -334,11 +358,14 @@ struct smb2_tree_connect_rsp {
 #define SHI1005_FLAGS_ACCESS_BASED_DIRECTORY_ENUM	0x00000800
 #define SHI1005_FLAGS_FORCE_LEVELII_OPLOCK		0x00001000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SHI1005_FLAGS_ENABLE_HASH			0x00002000
 
 /* Possible share capabilities */
 #define SMB2_SHARE_CAP_DFS	cpu_to_le32(0x00000008)
 =======
+=======
+>>>>>>> v3.18
 #define SHI1005_FLAGS_ENABLE_HASH_V1			0x00002000
 #define SHI1005_FLAGS_ENABLE_HASH_V2			0x00004000
 #define SHI1005_FLAGS_ENCRYPT_DATA			0x00008000
@@ -350,6 +377,9 @@ struct smb2_tree_connect_rsp {
 #define SMB2_SHARE_CAP_SCALEOUT	cpu_to_le32(0x00000020) /* 3.0 */
 #define SMB2_SHARE_CAP_CLUSTER	cpu_to_le32(0x00000040) /* 3.0 */
 #define SMB2_SHARE_CAP_ASYMMETRIC cpu_to_le32(0x00000080) /* 3.02 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct smb2_tree_disconnect_req {
@@ -379,6 +409,11 @@ struct smb2_tree_disconnect_rsp {
 #define FILE_ATTRIBUTE_NOT_CONTENT_INDEXED	0x00002000
 #define FILE_ATTRIBUTE_ENCRYPTED		0x00004000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FILE_ATTRIBUTE_INTEGRITY_STREAM		0x00008000
+#define FILE_ATTRIBUTE_NO_SCRUB_DATA		0x00020000
+>>>>>>> v3.18
 =======
 #define FILE_ATTRIBUTE_INTEGRITY_STREAM		0x00008000
 #define FILE_ATTRIBUTE_NO_SCRUB_DATA		0x00020000
@@ -467,7 +502,11 @@ struct smb2_tree_disconnect_rsp {
 #define SMB2_CREATE_DURABLE_HANDLE_REQUEST	"DHnQ"
 #define SMB2_CREATE_DURABLE_HANDLE_RECONNECT	"DHnC"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SMB2_CREATE_ALLOCATION_SIZE		"AlSi"
+=======
+#define SMB2_CREATE_ALLOCATION_SIZE		"AISi"
+>>>>>>> v3.18
 =======
 #define SMB2_CREATE_ALLOCATION_SIZE		"AISi"
 >>>>>>> v3.18
@@ -476,11 +515,17 @@ struct smb2_tree_disconnect_rsp {
 #define SMB2_CREATE_QUERY_ON_DISK_ID		"QFid"
 #define SMB2_CREATE_REQUEST_LEASE		"RqLs"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SMB2_CREATE_DURABLE_HANDLE_REQUEST_V2	"DH2Q"
 #define SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2	"DH2C"
 #define SMB2_CREATE_APP_INSTANCE_ID	0x45BCA66AEFA7F74A9008FA462E144D74
 #define SVHDX_OPEN_DEVICE_CONTEXT	0x83CE6F1AD851E0986E34401CC9BCFCE9
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct smb2_create_req {
@@ -501,7 +546,11 @@ struct smb2_create_req {
 	__le32 CreateContextsOffset;
 	__le32 CreateContextsLength;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8   Buffer[8];
+=======
+	__u8   Buffer[0];
+>>>>>>> v3.18
 =======
 	__u8   Buffer[0];
 >>>>>>> v3.18
@@ -539,11 +588,17 @@ struct create_context {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SMB2_LEASE_READ_CACHING_HE	0x01
 #define SMB2_LEASE_HANDLE_CACHING_HE	0x02
 #define SMB2_LEASE_WRITE_CACHING_HE	0x04
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SMB2_LEASE_NONE			__constant_cpu_to_le32(0x00)
 #define SMB2_LEASE_READ_CACHING		__constant_cpu_to_le32(0x01)
@@ -563,7 +618,10 @@ struct lease_context {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct lease_context_v2 {
 	__le64 LeaseKeyLow;
 	__le64 LeaseKeyHigh;
@@ -576,6 +634,9 @@ struct lease_context_v2 {
 	__le16 Reserved;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct create_lease {
 	struct create_context ccontext;
@@ -584,7 +645,10 @@ struct create_lease {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct create_lease_v2 {
 	struct create_context ccontext;
 	__u8   Name[8];
@@ -702,6 +766,9 @@ struct smb2_ioctl_rsp {
 	/* char * buffer[] */
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Currently defined values for close flags */
 #define SMB2_CLOSE_FLAG_POSTQUERY_ATTRIB	cpu_to_le16(0x0001)
@@ -744,7 +811,10 @@ struct smb2_flush_rsp {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* For read request Flags field below, following flag is defined for SMB3.02 */
 #define SMB2_READFLAG_READ_UNBUFFERED	0x01
 
@@ -753,13 +823,20 @@ struct smb2_flush_rsp {
 #define SMB2_CHANNEL_RDMA_V1		0x00000001 /* SMB3 or later */
 #define SMB2_CHANNEL_RDMA_V1_INVALIDATE 0x00000001 /* SMB3.02 or later */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct smb2_read_req {
 	struct smb2_hdr hdr;
 	__le16 StructureSize; /* Must be 49 */
 	__u8   Padding; /* offset from start of SMB2 header to place read */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8   Reserved;
+=======
+	__u8   Flags; /* MBZ unless SMB3.02 or later */
+>>>>>>> v3.18
 =======
 	__u8   Flags; /* MBZ unless SMB3.02 or later */
 >>>>>>> v3.18
@@ -769,7 +846,11 @@ struct smb2_read_req {
 	__u64  VolatileFileId; /* opaque endianness */
 	__le32 MinimumCount;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 Channel; /* Reserved MBZ */
+=======
+	__le32 Channel; /* MBZ except for SMB3 or later */
+>>>>>>> v3.18
 =======
 	__le32 Channel; /* MBZ except for SMB3 or later */
 >>>>>>> v3.18
@@ -791,8 +872,14 @@ struct smb2_read_rsp {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* For write request Flags field below the following flag is defined: */
 #define SMB2_WRITEFLAG_WRITE_THROUGH 0x00000001
+=======
+/* For write request Flags field below the following flags are defined: */
+#define SMB2_WRITEFLAG_WRITE_THROUGH	0x00000001	/* SMB2.1 or later */
+#define SMB2_WRITEFLAG_WRITE_UNBUFFERED	0x00000002	/* SMB3.02 or later */
+>>>>>>> v3.18
 =======
 /* For write request Flags field below the following flags are defined: */
 #define SMB2_WRITEFLAG_WRITE_THROUGH	0x00000001	/* SMB2.1 or later */
@@ -987,7 +1074,11 @@ struct smb2_lease_ack {
 /* File System Information Classes */
 #define FS_VOLUME_INFORMATION		1 /* Query */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FS_LABEL_INFORMATION		2 /* Set */
+=======
+#define FS_LABEL_INFORMATION		2 /* Local only */
+>>>>>>> v3.18
 =======
 #define FS_LABEL_INFORMATION		2 /* Local only */
 >>>>>>> v3.18
@@ -998,7 +1089,13 @@ struct smb2_lease_ack {
 #define FS_FULL_SIZE_INFORMATION	7 /* Query */
 #define FS_OBJECT_ID_INFORMATION	8 /* Query, Set */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FS_DRIVER_PATH_INFORMATION	9 /* Query */
+=======
+#define FS_DRIVER_PATH_INFORMATION	9 /* Local only */
+#define FS_VOLUME_FLAGS_INFORMATION	10 /* Local only */
+#define FS_SECTOR_SIZE_INFORMATION	11 /* SMB3 or later. Query */
+>>>>>>> v3.18
 =======
 #define FS_DRIVER_PATH_INFORMATION	9 /* Local only */
 #define FS_VOLUME_FLAGS_INFORMATION	10 /* Local only */
@@ -1014,7 +1111,10 @@ struct smb2_fs_full_size_info {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SSINFO_FLAGS_ALIGNED_DEVICE		0x00000001
 #define SSINFO_FLAGS_PARTITION_ALIGNED_ON_DEVICE 0x00000002
 #define SSINFO_FLAGS_NO_SEEK_PENALTY		0x00000004
@@ -1031,6 +1131,9 @@ struct smb3_fs_ss_info {
 	__le32 ByteOffsetForPartitionAlignment;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* partial list of QUERY INFO levels */
 #define FILE_DIRECTORY_INFORMATION	1

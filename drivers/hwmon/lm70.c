@@ -48,7 +48,11 @@
 
 struct lm70 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct spi_device *spi;
+>>>>>>> v3.18
 =======
 	struct spi_device *spi;
 >>>>>>> v3.18
@@ -61,17 +65,23 @@ static ssize_t lm70_sense_temp(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_device *spi = to_spi_device(dev);
 	int status, val = 0;
 	u8 rxbuf[2];
 	s16 raw = 0;
 	struct lm70 *p_lm70 = spi_get_drvdata(spi);
 =======
+=======
+>>>>>>> v3.18
 	struct lm70 *p_lm70 = dev_get_drvdata(dev);
 	struct spi_device *spi = p_lm70->spi;
 	int status, val = 0;
 	u8 rxbuf[2];
 	s16 raw = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (mutex_lock_interruptible(&p_lm70->lock))
@@ -134,6 +144,7 @@ out:
 static DEVICE_ATTR(temp1_input, S_IRUGO, lm70_sense_temp, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t lm70_show_name(struct device *dev, struct device_attribute
 			      *devattr, char *buf)
 {
@@ -142,12 +153,17 @@ static ssize_t lm70_show_name(struct device *dev, struct device_attribute
 
 static DEVICE_ATTR(name, S_IRUGO, lm70_show_name, NULL);
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *lm70_attrs[] = {
 	&dev_attr_temp1_input.attr,
 	NULL
 };
 
 ATTRIBUTE_GROUPS(lm70);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*----------------------------------------------------------------------*/
@@ -156,8 +172,13 @@ static int lm70_probe(struct spi_device *spi)
 {
 	int chip = spi_get_device_id(spi)->driver_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lm70 *p_lm70;
 	int status;
+=======
+	struct device *hwmon_dev;
+	struct lm70 *p_lm70;
+>>>>>>> v3.18
 =======
 	struct device *hwmon_dev;
 	struct lm70 *p_lm70;
@@ -175,6 +196,7 @@ static int lm70_probe(struct spi_device *spi)
 
 	mutex_init(&p_lm70->lock);
 	p_lm70->chip = chip;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	spi_set_drvdata(spi, p_lm70);
@@ -219,6 +241,8 @@ static int lm70_remove(struct spi_device *spi)
 
 
 =======
+=======
+>>>>>>> v3.18
 	p_lm70->spi = spi;
 
 	hwmon_dev = devm_hwmon_device_register_with_groups(&spi->dev,
@@ -227,6 +251,9 @@ static int lm70_remove(struct spi_device *spi)
 	return PTR_ERR_OR_ZERO(hwmon_dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct spi_device_id lm70_ids[] = {
 	{ "lm70",   LM70_CHIP_LM70 },
@@ -245,7 +272,10 @@ static struct spi_driver lm70_driver = {
 	.id_table = lm70_ids,
 	.probe	= lm70_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= lm70_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

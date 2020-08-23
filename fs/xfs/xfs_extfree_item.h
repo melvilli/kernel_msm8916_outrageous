@@ -19,6 +19,7 @@
 #define	__XFS_EXTFREE_ITEM_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct xfs_mount;
 struct kmem_zone;
 
@@ -107,11 +108,16 @@ typedef struct xfs_efd_log_format_64 {
 #ifdef __KERNEL__
 
 =======
+=======
+>>>>>>> v3.18
 /* kernel only EFI/EFD definitions */
 
 struct xfs_mount;
 struct kmem_zone;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Max number of extents in fast allocation path.
@@ -169,8 +175,11 @@ int			xfs_efi_copy_format(xfs_log_iovec_t *buf,
 void			xfs_efi_item_free(xfs_efi_log_item_t *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* __KERNEL__ */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif	/* __XFS_EXTFREE_ITEM_H__ */

@@ -7,7 +7,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/blackfin.h>
@@ -46,7 +49,10 @@ bfin_cache_init(struct cplb_entry *cplb_tbl, unsigned long cplb_addr,
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_L1_PARITY_CHECK
 	u32 ctrl;
 
@@ -57,6 +63,9 @@ bfin_cache_init(struct cplb_entry *cplb_tbl, unsigned long cplb_addr,
 		SSYNC();
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < MAX_CPLBS; i++) {
@@ -69,7 +78,11 @@ bfin_cache_init(struct cplb_entry *cplb_tbl, unsigned long cplb_addr,
 
 #ifdef CONFIG_BFIN_ICACHE
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit bfin_icache_init(struct cplb_entry *icplb_tbl)
+=======
+void bfin_icache_init(struct cplb_entry *icplb_tbl)
+>>>>>>> v3.18
 =======
 void bfin_icache_init(struct cplb_entry *icplb_tbl)
 >>>>>>> v3.18
@@ -81,7 +94,11 @@ void bfin_icache_init(struct cplb_entry *icplb_tbl)
 
 #ifdef CONFIG_BFIN_DCACHE
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit bfin_dcache_init(struct cplb_entry *dcplb_tbl)
+=======
+void bfin_dcache_init(struct cplb_entry *dcplb_tbl)
+>>>>>>> v3.18
 =======
 void bfin_dcache_init(struct cplb_entry *dcplb_tbl)
 >>>>>>> v3.18

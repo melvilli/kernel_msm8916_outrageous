@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -22,6 +25,7 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
@@ -33,6 +37,8 @@
 ieee754dp ieee754dp_div(ieee754dp x, ieee754dp y)
 {
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
@@ -44,6 +50,9 @@ union ieee754dp ieee754dp_div(union ieee754dp x, union ieee754dp y)
 	int re;
 	u64 bm;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	COMPXDP;
 	COMPYDP;
@@ -52,7 +61,11 @@ union ieee754dp ieee754dp_div(union ieee754dp x, union ieee754dp y)
 	EXPLODEYDP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLEARCX;
+=======
+	ieee754_clearcx();
+>>>>>>> v3.18
 =======
 	ieee754_clearcx();
 >>>>>>> v3.18
@@ -73,8 +86,13 @@ union ieee754dp ieee754dp_div(union ieee754dp x, union ieee754dp y)
 	case CLPAIR(IEEE754_CLASS_SNAN, IEEE754_CLASS_DNORM):
 	case CLPAIR(IEEE754_CLASS_SNAN, IEEE754_CLASS_INF):
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754dp_nanxcpt(ieee754dp_indef(), "div", x, y);
+=======
+		ieee754_setcx(IEEE754_INVALID_OPERATION);
+		return ieee754dp_nanxcpt(ieee754dp_indef());
+>>>>>>> v3.18
 =======
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754dp_nanxcpt(ieee754dp_indef());
@@ -95,6 +113,7 @@ union ieee754dp ieee754dp_div(union ieee754dp x, union ieee754dp y)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Infinity handling
 		 */
 
@@ -102,12 +121,17 @@ union ieee754dp ieee754dp_div(union ieee754dp x, union ieee754dp y)
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754dp_xcpt(ieee754dp_indef(), "div", x, y);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Infinity handling
 	 */
 	case CLPAIR(IEEE754_CLASS_INF, IEEE754_CLASS_INF):
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754dp_indef();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case CLPAIR(IEEE754_CLASS_NORM, IEEE754_CLASS_INF):
@@ -121,6 +145,7 @@ union ieee754dp ieee754dp_div(union ieee754dp x, union ieee754dp y)
 		return ieee754dp_inf(xs ^ ys);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Zero handling
 		 */
 
@@ -133,6 +158,8 @@ union ieee754dp ieee754dp_div(union ieee754dp x, union ieee754dp y)
 		SETCX(IEEE754_ZERO_DIVIDE);
 		return ieee754dp_xcpt(ieee754dp_inf(xs ^ ys), "div", x, y);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Zero handling
 	 */
@@ -144,6 +171,9 @@ union ieee754dp ieee754dp_div(union ieee754dp x, union ieee754dp y)
 	case CLPAIR(IEEE754_CLASS_DNORM, IEEE754_CLASS_ZERO):
 		ieee754_setcx(IEEE754_ZERO_DIVIDE);
 		return ieee754dp_inf(xs ^ ys);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case CLPAIR(IEEE754_CLASS_ZERO, IEEE754_CLASS_NORM):
@@ -171,6 +201,7 @@ union ieee754dp ieee754dp_div(union ieee754dp x, union ieee754dp y)
 	xm <<= 3;
 	ym <<= 3;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{
 		/* now the dirty work */
@@ -204,6 +235,8 @@ union ieee754dp ieee754dp_div(union ieee754dp x, union ieee754dp y)
 		DPNORMRET2(xs == ys ? 0 : 1, re, rm, "div", x, y);
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* now the dirty work */
 
 	rm = 0;
@@ -234,5 +267,8 @@ union ieee754dp ieee754dp_div(union ieee754dp x, union ieee754dp y)
 	}
 
 	return ieee754dp_format(xs == ys ? 0 : 1, re, rm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -2,7 +2,10 @@
 #define _SPARC64_TLBFLUSH_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mm.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/mmu_context.h>
@@ -19,9 +22,15 @@ struct tlb_batch {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void flush_tsb_kernel_range(unsigned long start, unsigned long end);
 extern void flush_tsb_user(struct tlb_batch *tb);
 extern void flush_tsb_user_page(struct mm_struct *mm, unsigned long vaddr);
+=======
+void flush_tsb_kernel_range(unsigned long start, unsigned long end);
+void flush_tsb_user(struct tlb_batch *tb);
+void flush_tsb_user_page(struct mm_struct *mm, unsigned long vaddr);
+>>>>>>> v3.18
 =======
 void flush_tsb_kernel_range(unsigned long start, unsigned long end);
 void flush_tsb_user(struct tlb_batch *tb);
@@ -49,6 +58,7 @@ void flush_tlb_kernel_range(unsigned long start, unsigned long end);
 #define __HAVE_ARCH_ENTER_LAZY_MMU_MODE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void flush_tlb_pending(void);
 extern void arch_enter_lazy_mmu_mode(void);
 extern void arch_leave_lazy_mmu_mode(void);
@@ -59,6 +69,8 @@ extern void __flush_tlb_all(void);
 extern void __flush_tlb_page(unsigned long context, unsigned long vaddr);
 extern void __flush_tlb_kernel_range(unsigned long start, unsigned long end);
 =======
+=======
+>>>>>>> v3.18
 void flush_tlb_pending(void);
 void arch_enter_lazy_mmu_mode(void);
 void arch_leave_lazy_mmu_mode(void);
@@ -68,6 +80,9 @@ void arch_leave_lazy_mmu_mode(void);
 void __flush_tlb_all(void);
 void __flush_tlb_page(unsigned long context, unsigned long vaddr);
 void __flush_tlb_kernel_range(unsigned long start, unsigned long end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef CONFIG_SMP
@@ -80,8 +95,13 @@ static inline void global_flush_tlb_page(struct mm_struct *mm, unsigned long vad
 #else /* CONFIG_SMP */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void smp_flush_tlb_kernel_range(unsigned long start, unsigned long end);
 extern void smp_flush_tlb_page(struct mm_struct *mm, unsigned long vaddr);
+=======
+void smp_flush_tlb_kernel_range(unsigned long start, unsigned long end);
+void smp_flush_tlb_page(struct mm_struct *mm, unsigned long vaddr);
+>>>>>>> v3.18
 =======
 void smp_flush_tlb_kernel_range(unsigned long start, unsigned long end);
 void smp_flush_tlb_page(struct mm_struct *mm, unsigned long vaddr);

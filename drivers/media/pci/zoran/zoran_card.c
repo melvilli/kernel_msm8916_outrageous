@@ -1051,7 +1051,11 @@ static int zr36057_init (struct zoran *zr)
 	 */
 	memcpy(zr->video_dev, &zoran_template, sizeof(zoran_template));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zr->video_dev->parent = &zr->pci_dev->dev;
+=======
+	zr->video_dev->v4l2_dev = &zr->v4l2_dev;
+>>>>>>> v3.18
 =======
 	zr->video_dev->v4l2_dev = &zr->v4l2_dev;
 >>>>>>> v3.18
@@ -1298,7 +1302,11 @@ static int zoran_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	result = request_irq(zr->pci_dev->irq, zoran_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     IRQF_SHARED | IRQF_DISABLED, ZR_DEVNAME(zr), zr);
+=======
+			     IRQF_SHARED, ZR_DEVNAME(zr), zr);
+>>>>>>> v3.18
 =======
 			     IRQF_SHARED, ZR_DEVNAME(zr), zr);
 >>>>>>> v3.18

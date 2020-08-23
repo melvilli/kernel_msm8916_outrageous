@@ -14,13 +14,19 @@
 #include <linux/list.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/atomic.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/atomic.h>
 #ifdef CONFIG_RWSEM_SPIN_ON_OWNER
 #include <linux/osq_lock.h>
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct rw_semaphore;
@@ -31,10 +37,13 @@ struct rw_semaphore;
 /* All arch specific implementations share the same struct */
 struct rw_semaphore {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long			count;
 	raw_spinlock_t		wait_lock;
 	struct list_head	wait_list;
 =======
+=======
+>>>>>>> v3.18
 	long count;
 	struct list_head wait_list;
 	raw_spinlock_t wait_lock;
@@ -46,6 +55,9 @@ struct rw_semaphore {
 	 */
 	struct task_struct *owner;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 	struct lockdep_map	dep_map;
@@ -77,11 +89,14 @@ static inline int rwsem_is_locked(struct rw_semaphore *sem)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __RWSEM_INITIALIZER(name)			\
 	{ RWSEM_UNLOCKED_VALUE,				\
 	  __RAW_SPIN_LOCK_UNLOCKED(name.wait_lock),	\
 	  LIST_HEAD_INIT((name).wait_list)		\
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RWSEM_SPIN_ON_OWNER
 #define __RWSEM_OPT_INIT(lockname) , .osq = OSQ_LOCK_UNLOCKED, .owner = NULL
 #else
@@ -93,6 +108,9 @@ static inline int rwsem_is_locked(struct rw_semaphore *sem)
 	  .wait_list = LIST_HEAD_INIT((name).wait_list),	\
 	  .wait_lock = __RAW_SPIN_LOCK_UNLOCKED(name.wait_lock)	\
 	  __RWSEM_OPT_INIT(name)				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  __RWSEM_DEP_MAP_INIT(name) }
 
@@ -111,7 +129,10 @@ do {								\
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * This is the same regardless of which rwsem implementation that is being used.
  * It is just a heuristic meant to be called by somebody alreadying holding the
  * rwsem to see if somebody from an incompatible type is wanting access to the
@@ -123,6 +144,9 @@ static inline int rwsem_is_contended(struct rw_semaphore *sem)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * lock for reading
  */
@@ -171,7 +195,11 @@ extern void downgrade_write(struct rw_semaphore *sem);
  * the explicit definition of lock class keys and the use of
  * lockdep_set_class() at lock initialization time.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * See Documentation/lockdep-design.txt for more details.)
+=======
+ * See Documentation/locking/lockdep-design.txt for more details.)
+>>>>>>> v3.18
 =======
  * See Documentation/locking/lockdep-design.txt for more details.)
 >>>>>>> v3.18

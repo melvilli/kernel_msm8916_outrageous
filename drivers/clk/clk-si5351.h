@@ -82,6 +82,10 @@
 #define SI5351_CLK3_0_DISABLE_STATE		24
 #define SI5351_CLK7_4_DISABLE_STATE		25
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  SI5351_CLK_DISABLE_STATE_MASK		3
+>>>>>>> v3.18
 =======
 #define  SI5351_CLK_DISABLE_STATE_MASK		3
 >>>>>>> v3.18
@@ -157,7 +161,10 @@
 #define  SI5351_MULTISYNTH_ENABLE		(1<<4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * enum si5351_variant - SiLabs Si5351 chip variant
  * @SI5351_VARIANT_A: Si5351A (8 output clocks, XTAL input)
@@ -172,5 +179,8 @@ enum si5351_variant {
 	SI5351_VARIANT_C = 4,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

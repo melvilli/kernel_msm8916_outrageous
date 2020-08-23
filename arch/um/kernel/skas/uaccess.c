@@ -255,7 +255,11 @@ int strnlen_user(const void __user *str, int len)
 	if (n == 0)
 		return count + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -EFAULT;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

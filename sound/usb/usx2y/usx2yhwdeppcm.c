@@ -359,7 +359,11 @@ static int snd_usX2Y_usbpcm_hw_free(struct snd_pcm_substream *substream)
 	struct snd_usX2Y_substream *subs = runtime->private_data,
 		*cap_subs2 = subs->usX2Y->subs[SNDRV_PCM_STREAM_CAPTURE + 2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&subs->usX2Y->prepare_mutex);
+=======
+	mutex_lock(&subs->usX2Y->pcm_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&subs->usX2Y->pcm_mutex);
 >>>>>>> v3.18
@@ -392,7 +396,11 @@ static int snd_usX2Y_usbpcm_hw_free(struct snd_pcm_substream *substream)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&subs->usX2Y->prepare_mutex);
+=======
+	mutex_unlock(&subs->usX2Y->pcm_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&subs->usX2Y->pcm_mutex);
 >>>>>>> v3.18
@@ -502,7 +510,11 @@ static int snd_usX2Y_usbpcm_prepare(struct snd_pcm_substream *substream)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&usX2Y->prepare_mutex);
+=======
+	mutex_lock(&usX2Y->pcm_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&usX2Y->pcm_mutex);
 >>>>>>> v3.18
@@ -547,7 +559,11 @@ static int snd_usX2Y_usbpcm_prepare(struct snd_pcm_substream *substream)
 
  up_prepare_mutex:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&usX2Y->prepare_mutex);
+=======
+	mutex_unlock(&usX2Y->pcm_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&usX2Y->pcm_mutex);
 >>>>>>> v3.18
@@ -617,6 +633,7 @@ static struct snd_pcm_ops snd_usX2Y_usbpcm_ops =
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int usX2Y_pcms_lock_check(struct snd_card *card)
 {
 	struct list_head *list;
@@ -671,6 +688,8 @@ static int snd_usX2Y_hwdep_pcm_open(struct snd_hwdep *hw, struct file *file)
 		usX2Y(card)->chip_status |= USX2Y_STAT_CHIP_MMAP_PCM_URBS;
 	usX2Y_pcms_unlock(card);
 =======
+=======
+>>>>>>> v3.18
 static int usX2Y_pcms_busy_check(struct snd_card *card)
 {
 	struct usX2Ydev	*dev = usX2Y(card);
@@ -695,6 +714,9 @@ static int snd_usX2Y_hwdep_pcm_open(struct snd_hwdep *hw, struct file *file)
 	if (!err)
 		usX2Y(card)->chip_status |= USX2Y_STAT_CHIP_MMAP_PCM_URBS;
 	mutex_unlock(&usX2Y(card)->pcm_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -704,11 +726,14 @@ static int snd_usX2Y_hwdep_pcm_release(struct snd_hwdep *hw, struct file *file)
 {
 	struct snd_card *card = hw->card;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = usX2Y_pcms_lock_check(card);
 	if (0 == err)
 		usX2Y(hw->card)->chip_status &= ~USX2Y_STAT_CHIP_MMAP_PCM_URBS;
 	usX2Y_pcms_unlock(card);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	mutex_lock(&usX2Y(card)->pcm_mutex);
@@ -716,6 +741,9 @@ static int snd_usX2Y_hwdep_pcm_release(struct snd_hwdep *hw, struct file *file)
 	if (!err)
 		usX2Y(hw->card)->chip_status &= ~USX2Y_STAT_CHIP_MMAP_PCM_URBS;
 	mutex_unlock(&usX2Y(card)->pcm_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }

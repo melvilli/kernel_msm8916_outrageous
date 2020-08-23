@@ -9,7 +9,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
+=======
+#include "skeleton.dtsi"
+#include <dt-bindings/interrupt-controller/irq.h>
+>>>>>>> v3.18
 =======
 #include "skeleton.dtsi"
 #include <dt-bindings/interrupt-controller/irq.h>
@@ -20,7 +25,10 @@
 	interrupt-parent = <&gic>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	aliases {
 		gpio0 = &gpio0;
 		gpio1 = &gpio1;
@@ -29,6 +37,9 @@
 		gpio4 = &gpio4;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpus {
 		#address-cells = <1>;
@@ -39,6 +50,10 @@
 			compatible = "arm,cortex-a9";
 			reg = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clock-frequency = <533000000>;
+>>>>>>> v3.18
 =======
 			clock-frequency = <533000000>;
 >>>>>>> v3.18
@@ -48,6 +63,10 @@
 			compatible = "arm,cortex-a9";
 			reg = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clock-frequency = <533000000>;
+>>>>>>> v3.18
 =======
 			clock-frequency = <533000000>;
 >>>>>>> v3.18
@@ -63,11 +82,14 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sti@e0180000 {
 		compatible = "renesas,em-sti";
 		reg = <0xe0180000 0x54>;
 		interrupts = <0 125 0>;
 =======
+=======
+>>>>>>> v3.18
 	pmu {
 		compatible = "arm,cortex-a9-pmu";
 		interrupts = <0 120 IRQ_TYPE_LEVEL_HIGH>,
@@ -154,6 +176,9 @@
 		interrupts = <0 125 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&sti_sclk>;
 		clock-names = "sclk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -161,7 +186,13 @@
 		compatible = "renesas,em-uart";
 		reg = <0xe1020000 0x38>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 8 0>;
+=======
+		interrupts = <0 8 IRQ_TYPE_LEVEL_HIGH>;
+		clocks = <&usia_u0_sclk>;
+		clock-names = "sclk";
+>>>>>>> v3.18
 =======
 		interrupts = <0 8 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&usia_u0_sclk>;
@@ -173,7 +204,13 @@
 		compatible = "renesas,em-uart";
 		reg = <0xe1030000 0x38>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 9 0>;
+=======
+		interrupts = <0 9 IRQ_TYPE_LEVEL_HIGH>;
+		clocks = <&usib_u1_sclk>;
+		clock-names = "sclk";
+>>>>>>> v3.18
 =======
 		interrupts = <0 9 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&usib_u1_sclk>;
@@ -185,7 +222,13 @@
 		compatible = "renesas,em-uart";
 		reg = <0xe1040000 0x38>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 10 0>;
+=======
+		interrupts = <0 10 IRQ_TYPE_LEVEL_HIGH>;
+		clocks = <&usib_u2_sclk>;
+		clock-names = "sclk";
+>>>>>>> v3.18
 =======
 		interrupts = <0 10 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&usib_u2_sclk>;
@@ -197,8 +240,11 @@
 		compatible = "renesas,em-uart";
 		reg = <0xe1050000 0x38>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 11 0>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <0 11 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&usib_u3_sclk>;
 		clock-names = "sclk";
@@ -258,6 +304,9 @@
 		ngpios = <31>;
 		interrupt-controller;
 		#interrupt-cells = <2>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

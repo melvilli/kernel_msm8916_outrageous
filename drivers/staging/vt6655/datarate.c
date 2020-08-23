@@ -48,6 +48,7 @@
 /*---------------------  Static Classes  ----------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned short TxRate_iwconfig; //2008-5-8 <add> by chester
 /*---------------------  Static Variables  --------------------------*/
 //static int          msglevel                =MSG_LEVEL_DEBUG;
@@ -55,11 +56,16 @@ static int msglevel = MSG_LEVEL_INFO;
 const unsigned char acbyIERate[MAX_RATE] =
 {0x02, 0x04, 0x0B, 0x16, 0x0C, 0x12, 0x18, 0x24, 0x30, 0x48, 0x60, 0x6C};
 =======
+=======
+>>>>>>> v3.18
 extern unsigned short TxRate_iwconfig; /* 2008-5-8 <add> by chester */
 /*---------------------  Static Variables  --------------------------*/
 static const unsigned char acbyIERate[MAX_RATE] = {
 0x02, 0x04, 0x0B, 0x16, 0x0C, 0x12, 0x18, 0x24, 0x30, 0x48, 0x60, 0x6C
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define AUTORATE_TXOK_CNT       0x0400
@@ -80,7 +86,11 @@ s_vResetCounter(
 	unsigned char ii;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// clear statistic counter for auto_rate
+=======
+	/* clear statistic counter for auto_rate */
+>>>>>>> v3.18
 =======
 	/* clear statistic counter for auto_rate */
 >>>>>>> v3.18
@@ -116,8 +126,13 @@ DATARATEbyGetRateIdx(
 	unsigned char ii;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//Erase basicRate flag.
 	byRate = byRate & 0x7F;//0111 1111
+=======
+	/* Erase basicRate flag. */
+	byRate = byRate & 0x7F;/* 0111 1111 */
+>>>>>>> v3.18
 =======
 	/* Erase basicRate flag. */
 	byRate = byRate & 0x7F;/* 0111 1111 */
@@ -170,8 +185,13 @@ wGetRateIdx(
 	unsigned short ii;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//Erase basicRate flag.
 	byRate = byRate & 0x7F;//0111 1111
+=======
+	/* Erase basicRate flag. */
+	byRate = byRate & 0x7F;/* 0111 1111 */
+>>>>>>> v3.18
 =======
 	/* Erase basicRate flag. */
 	byRate = byRate & 0x7F;/* 0111 1111 */
@@ -182,6 +202,10 @@ wGetRateIdx(
 			return ii;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -221,7 +245,11 @@ RATEvParseMaxRate(
 )
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice  pDevice = (PSDevice) pDeviceHandler;
+=======
+	struct vnt_private *pDevice = pDeviceHandler;
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = pDeviceHandler;
 >>>>>>> v3.18
@@ -238,7 +266,11 @@ RATEvParseMaxRate(
 	uRateLen = pItemRates->len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "ParseMaxRate Len: %d\n", uRateLen);
+=======
+	pr_debug("ParseMaxRate Len: %d\n", uRateLen);
+>>>>>>> v3.18
 =======
 	pr_debug("ParseMaxRate Len: %d\n", uRateLen);
 >>>>>>> v3.18
@@ -253,17 +285,23 @@ RATEvParseMaxRate(
 	for (ii = 0; ii < uRateLen; ii++) {
 		byRate = (unsigned char)(pItemRates->abyRates[ii]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (WLAN_MGMT_IS_BASICRATE(byRate) &&
 		    (bUpdateBasicRate == true))  {
 			// Add to basic rate set, update pDevice->byTopCCKBasicRate and pDevice->byTopOFDMBasicRate
 			CARDbAddBasicRate((void *)pDevice, wGetRateIdx(byRate));
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "ParseMaxRate AddBasicRate: %d\n", wGetRateIdx(byRate));
 =======
+=======
+>>>>>>> v3.18
 		if (WLAN_MGMT_IS_BASICRATE(byRate) && bUpdateBasicRate)  {
 			/* Add to basic rate set, update pDevice->byTopCCKBasicRate and pDevice->byTopOFDMBasicRate */
 			CARDbAddBasicRate((void *)pDevice, wGetRateIdx(byRate));
 			pr_debug("ParseMaxRate AddBasicRate: %d\n",
 				 wGetRateIdx(byRate));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		byRate = (unsigned char)(pItemRates->abyRates[ii]&0x7F);
@@ -283,18 +321,24 @@ RATEvParseMaxRate(
 		for (ii = 0; ii < uExtRateLen; ii++) {
 			byRate = (unsigned char)(pItemExtRates->abyRates[ii]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// select highest basic rate
 			if (WLAN_MGMT_IS_BASICRATE(pItemExtRates->abyRates[ii])) {
 				// Add to basic rate set, update pDevice->byTopCCKBasicRate and pDevice->byTopOFDMBasicRate
 				CARDbAddBasicRate((void *)pDevice, wGetRateIdx(byRate));
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "ParseMaxRate AddBasicRate: %d\n", wGetRateIdx(byRate));
 =======
+=======
+>>>>>>> v3.18
 			/* select highest basic rate */
 			if (WLAN_MGMT_IS_BASICRATE(pItemExtRates->abyRates[ii])) {
 				/* Add to basic rate set, update pDevice->byTopCCKBasicRate and pDevice->byTopOFDMBasicRate */
 				CARDbAddBasicRate((void *)pDevice, wGetRateIdx(byRate));
 				pr_debug("ParseMaxRate AddBasicRate: %d\n",
 					 wGetRateIdx(byRate));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			byRate = (unsigned char)(pItemExtRates->abyRates[ii]&0x7F);
@@ -304,6 +348,7 @@ RATEvParseMaxRate(
 				byHighSuppRate = byRate;
 			*pwSuppRate |= (1<<wGetRateIdx(byRate));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			//DBG_PRN_GRP09(("ParseMaxRate : HighSuppRate: %d, %X\n", wGetRateIdx(byRate), byRate));
 		}
 	} //if (pItemExtRates != NULL)
@@ -312,11 +357,16 @@ RATEvParseMaxRate(
 		pDevice->byPacketType = PK_TYPE_11GA;
 	}
 =======
+=======
+>>>>>>> v3.18
 		}
 	}
 
 	if ((pDevice->byPacketType == PK_TYPE_11GB) && CARDbIsOFDMinBasicRate((void *)pDevice))
 		pDevice->byPacketType = PK_TYPE_11GA;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*pbyTopCCKRate = pDevice->byTopCCKBasicRate;
@@ -330,7 +380,11 @@ RATEvParseMaxRate(
 		CARDvSetRSPINF((void *)pDevice, pDevice->eCurrentPHYType);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Exit ParseMaxRate\n");
+=======
+	pr_debug("Exit ParseMaxRate\n");
+>>>>>>> v3.18
 =======
 	pr_debug("Exit ParseMaxRate\n");
 >>>>>>> v3.18
@@ -361,10 +415,16 @@ RATEvTxRateFallBack(
 )
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice        pDevice = (PSDevice) pDeviceHandler;
 	unsigned short wIdxDownRate = 0;
 	unsigned int ii;
 //unsigned long dwRateTable[MAX_RATE]  = {1,   2,   5,   11,  6,    9,    12,   18,  24,  36,  48,  54};
+=======
+	struct vnt_private *pDevice = pDeviceHandler;
+	unsigned short wIdxDownRate = 0;
+	unsigned int ii;
+>>>>>>> v3.18
 =======
 	struct vnt_private *pDevice = pDeviceHandler;
 	unsigned short wIdxDownRate = 0;
@@ -377,10 +437,16 @@ RATEvTxRateFallBack(
 	unsigned long dwTxDiff = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pDevice->pMgmt->eScanState != WMAC_NO_SCANNING) {
 		// Don't do Fallback when scanning Channel
 		return;
 	}
+=======
+	if (pDevice->pMgmt->eScanState != WMAC_NO_SCANNING)
+		/* Don't do Fallback when scanning Channel */
+		return;
+>>>>>>> v3.18
 =======
 	if (pDevice->pMgmt->eScanState != WMAC_NO_SCANNING)
 		/* Don't do Fallback when scanning Channel */
@@ -399,6 +465,7 @@ RATEvTxRateFallBack(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (psNodeDBTable->uTimeCount >= AUTORATE_TIMEOUT) {
 		psNodeDBTable->uTimeCount = 0;
 	}
@@ -409,6 +476,8 @@ RATEvTxRateFallBack(
 				wIdxUpRate = (unsigned short) ii;
 			}
 =======
+=======
+>>>>>>> v3.18
 	if (psNodeDBTable->uTimeCount >= AUTORATE_TIMEOUT)
 		psNodeDBTable->uTimeCount = 0;
 
@@ -417,6 +486,9 @@ RATEvTxRateFallBack(
 			if (bAutoRate[ii])
 				wIdxUpRate = (unsigned short) ii;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			bAutoRate[ii] = false;
@@ -428,6 +500,7 @@ RATEvTxRateFallBack(
 		    (psNodeDBTable->uTxFail[ii] != 0)) {
 			dwThroughputTbl[ii] *= psNodeDBTable->uTxOk[ii];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ii < RATE_11M) {
 				psNodeDBTable->uTxFail[ii] *= 4;
 			}
@@ -436,11 +509,16 @@ RATEvTxRateFallBack(
 //        DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Rate %d,Ok: %d, Fail:%d, Throughput:%d\n",
 //                       ii, psNodeDBTable->uTxOk[ii], psNodeDBTable->uTxFail[ii], dwThroughputTbl[ii]);
 =======
+=======
+>>>>>>> v3.18
 			if (ii < RATE_11M)
 				psNodeDBTable->uTxFail[ii] *= 4;
 
 			dwThroughputTbl[ii] /= (psNodeDBTable->uTxOk[ii] + psNodeDBTable->uTxFail[ii]);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	dwThroughput = dwThroughputTbl[psNodeDBTable->wTxDataRate];
@@ -449,8 +527,12 @@ RATEvTxRateFallBack(
 	for (ii = psNodeDBTable->wTxDataRate; ii > 0;) {
 		ii--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((dwThroughputTbl[ii] > dwThroughput) &&
 		    (bAutoRate[ii] == true)) {
+=======
+		if ((dwThroughputTbl[ii] > dwThroughput) && bAutoRate[ii]) {
+>>>>>>> v3.18
 =======
 		if ((dwThroughputTbl[ii] > dwThroughput) && bAutoRate[ii]) {
 >>>>>>> v3.18
@@ -465,6 +547,7 @@ RATEvTxRateFallBack(
 			psNodeDBTable->wTxDataRate = wIdxUpRate;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else { // adhoc, if uTxOk =0 & uTxFail = 0
 		if (psNodeDBTable->uTxFail[MAX_RATE] == 0)
 			psNodeDBTable->wTxDataRate = wIdxUpRate;
@@ -476,6 +559,8 @@ RATEvTxRateFallBack(
 
 	return;
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		/* adhoc, if uTxOk =0 & uTxFail = 0 */
 		if (psNodeDBTable->uTxFail[MAX_RATE] == 0)
@@ -485,6 +570,9 @@ RATEvTxRateFallBack(
 	/* 2008-5-8 <add> by chester */
 	TxRate_iwconfig = psNodeDBTable->wTxDataRate;
 	s_vResetCounter(psNodeDBTable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

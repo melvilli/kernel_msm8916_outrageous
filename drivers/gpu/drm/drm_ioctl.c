@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * \file drm_ioctl.c
  * IOCTL processing for DRM
@@ -9,6 +10,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Created: Fri Jan  8 09:01:26 1999 by faith@valinux.com
  *
@@ -17,6 +20,12 @@
  * All Rights Reserved.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Author Rickard E. (Rik) Faith <faith@valinux.com>
+ * Author Gareth Hughes <gareth@valinux.com>
+ *
+>>>>>>> v3.18
 =======
  * Author Rickard E. (Rik) Faith <faith@valinux.com>
  * Author Gareth Hughes <gareth@valinux.com>
@@ -45,10 +54,13 @@
 #include <drm/drmP.h>
 #include <drm/drm_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/pci.h>
 #include <linux/export.h>
 =======
+=======
+>>>>>>> v3.18
 #include "drm_legacy.h"
 #include "drm_internal.h"
 
@@ -60,6 +72,9 @@
 
 static int drm_version(struct drm_device *dev, void *data,
 		       struct drm_file *file_priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -74,7 +89,11 @@ static int drm_version(struct drm_device *dev, void *data,
  * Copies the bus id from drm_device::unique into user space.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_getunique(struct drm_device *dev, void *data,
+=======
+static int drm_getunique(struct drm_device *dev, void *data,
+>>>>>>> v3.18
 =======
 static int drm_getunique(struct drm_device *dev, void *data,
 >>>>>>> v3.18
@@ -97,6 +116,7 @@ drm_unset_busid(struct drm_device *dev,
 		struct drm_master *master)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(dev->devname);
 	dev->devname = NULL;
 
@@ -104,6 +124,11 @@ drm_unset_busid(struct drm_device *dev,
 	master->unique = NULL;
 	master->unique_len = 0;
 	master->unique_size = 0;
+=======
+	kfree(master->unique);
+	master->unique = NULL;
+	master->unique_len = 0;
+>>>>>>> v3.18
 =======
 	kfree(master->unique);
 	master->unique = NULL;
@@ -124,14 +149,20 @@ drm_unset_busid(struct drm_device *dev,
  * it matches the device this DRM is attached to (EINVAL otherwise).  Deprecated
  * in interface version 1.1 and will return EBUSY when setversion has requested
 <<<<<<< HEAD
+<<<<<<< HEAD
  * version 1.1 or greater.
  */
 int drm_setunique(struct drm_device *dev, void *data,
 =======
+=======
+>>>>>>> v3.18
  * version 1.1 or greater. Also note that KMS is all version 1.1 and later and
  * UMS was only ever supported on pci devices.
  */
 static int drm_setunique(struct drm_device *dev, void *data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  struct drm_file *file_priv)
 {
@@ -146,11 +177,14 @@ static int drm_setunique(struct drm_device *dev, void *data,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev->driver->bus->set_unique)
 		return -EINVAL;
 
 	ret = dev->driver->bus->set_unique(dev, master, u);
 =======
+=======
+>>>>>>> v3.18
 	if (drm_core_check_feature(dev, DRIVER_MODESET))
 		return 0;
 
@@ -158,6 +192,9 @@ static int drm_setunique(struct drm_device *dev, void *data,
 		return -EINVAL;
 
 	ret = drm_pci_set_unique(dev, master, u);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		goto err;
@@ -178,6 +215,7 @@ static int drm_set_busid(struct drm_device *dev, struct drm_file *file_priv)
 		drm_unset_busid(dev, master);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = dev->driver->bus->set_busid(dev, master);
 	if (ret)
 		goto err;
@@ -186,6 +224,8 @@ err:
 	drm_unset_busid(dev, master);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (dev->driver->set_busid) {
 		ret = dev->driver->set_busid(dev, master);
 		if (ret) {
@@ -205,6 +245,9 @@ err:
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -222,7 +265,11 @@ err:
  * into userspace
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_getmap(struct drm_device *dev, void *data,
+=======
+static int drm_getmap(struct drm_device *dev, void *data,
+>>>>>>> v3.18
 =======
 static int drm_getmap(struct drm_device *dev, void *data,
 >>>>>>> v3.18
@@ -258,8 +305,11 @@ static int drm_getmap(struct drm_device *dev, void *data,
 	map->flags = r_list->map->flags;
 	map->handle = (void *)(unsigned long) r_list->user_token;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	map->mtrr = r_list->map->mtrr;
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_X86
 	/*
@@ -271,6 +321,9 @@ static int drm_getmap(struct drm_device *dev, void *data,
 	map->mtrr = -1;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&dev->struct_mutex);
 
@@ -290,6 +343,7 @@ static int drm_getmap(struct drm_device *dev, void *data,
  * Searches for the client with the specified index and copies its information
  * into userspace
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int drm_getclient(struct drm_device *dev, void *data,
 		  struct drm_file *file_priv)
@@ -319,6 +373,8 @@ int drm_getclient(struct drm_device *dev, void *data,
 
 	return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 static int drm_getclient(struct drm_device *dev, void *data,
 		  struct drm_file *file_priv)
 {
@@ -347,6 +403,9 @@ static int drm_getclient(struct drm_device *dev, void *data,
 	} else {
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -360,6 +419,7 @@ static int drm_getclient(struct drm_device *dev, void *data,
  *
  * \return zero on success or a negative number on failure.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int drm_getstats(struct drm_device *dev, void *data,
 		 struct drm_file *file_priv)
@@ -381,6 +441,8 @@ int drm_getstats(struct drm_device *dev, void *data,
 	stats->count = dev->counters;
 
 =======
+=======
+>>>>>>> v3.18
 static int drm_getstats(struct drm_device *dev, void *data,
 		 struct drm_file *file_priv)
 {
@@ -389,6 +451,9 @@ static int drm_getstats(struct drm_device *dev, void *data,
 	/* Clear stats to prevent userspace from eating its stack garbage. */
 	memset(stats, 0, sizeof(*stats));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -397,7 +462,11 @@ static int drm_getstats(struct drm_device *dev, void *data,
  * Get device/driver capabilities
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_getcap(struct drm_device *dev, void *data, struct drm_file *file_priv)
+=======
+static int drm_getcap(struct drm_device *dev, void *data, struct drm_file *file_priv)
+>>>>>>> v3.18
 =======
 static int drm_getcap(struct drm_device *dev, void *data, struct drm_file *file_priv)
 >>>>>>> v3.18
@@ -427,10 +496,13 @@ static int drm_getcap(struct drm_device *dev, void *data, struct drm_file *file_
 		req->value = drm_timestamp_monotonic;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default:
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	case DRM_CAP_ASYNC_PAGE_FLIP:
 		req->value = dev->mode_config.async_page_flip;
 		break;
@@ -475,6 +547,9 @@ drm_setclientcap(struct drm_device *dev, void *data, struct drm_file *file_priv)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -491,7 +566,11 @@ drm_setclientcap(struct drm_device *dev, void *data, struct drm_file *file_priv)
  * Sets the requested interface version
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_setversion(struct drm_device *dev, void *data, struct drm_file *file_priv)
+=======
+static int drm_setversion(struct drm_device *dev, void *data, struct drm_file *file_priv)
+>>>>>>> v3.18
 =======
 static int drm_setversion(struct drm_device *dev, void *data, struct drm_file *file_priv)
 >>>>>>> v3.18
@@ -527,9 +606,12 @@ static int drm_setversion(struct drm_device *dev, void *data, struct drm_file *f
 			goto done;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (dev->driver->set_version)
 			dev->driver->set_version(dev, sv);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -552,7 +634,10 @@ int drm_noop(struct drm_device *dev, void *data,
 }
 EXPORT_SYMBOL(drm_noop);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * Copy and IOCTL return string to user space
@@ -908,4 +993,7 @@ bool drm_ioctl_flags(unsigned int nr, unsigned int *flags)
 	return false;
 }
 EXPORT_SYMBOL(drm_ioctl_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

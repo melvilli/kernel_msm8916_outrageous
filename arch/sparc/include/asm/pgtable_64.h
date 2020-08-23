@@ -21,8 +21,11 @@
 #include <asm/processor.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm-generic/pgtable-nopud.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* The kernel image occupies 0x4000000 to 0x6000000 (4MB --> 96MB).
@@ -46,6 +49,7 @@
 #define HI_OBP_ADDRESS		_AC(0x0000000100000000,UL)
 #define VMALLOC_START		_AC(0x0000000100000000,UL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VMALLOC_END		_AC(0x0000010000000000,UL)
 #define VMEMMAP_BASE		_AC(0x0000010000000000,UL)
 
@@ -53,10 +57,14 @@
 =======
 #define VMEMMAP_BASE		VMALLOC_END
 >>>>>>> v3.18
+=======
+#define VMEMMAP_BASE		VMALLOC_END
+>>>>>>> v3.18
 
 /* PMD_SHIFT determines the size of the area a second-level page
  * table can map
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define PMD_SHIFT	(PAGE_SHIFT + (PAGE_SHIFT-4))
 #define PMD_SIZE	(_AC(1,UL) << PMD_SHIFT)
@@ -71,6 +79,8 @@
 
 #if (PGDIR_SHIFT + PGDIR_BITS) != 44
 =======
+=======
+>>>>>>> v3.18
 #define PMD_SHIFT	(PAGE_SHIFT + (PAGE_SHIFT-3))
 #define PMD_SIZE	(_AC(1,UL) << PMD_SHIFT)
 #define PMD_MASK	(~(PMD_SIZE-1))
@@ -95,6 +105,9 @@
 #endif
 
 #if (PGDIR_SHIFT + PGDIR_BITS) != 53
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #error Page table parameters do not cover virtual address space properly.
 #endif
@@ -103,6 +116,7 @@
 #error PMD_SHIFT must equal HPAGE_SHIFT for transparent huge pages.
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* PMDs point to PTE tables which are 4K aligned.  */
 #define PMD_PADDR	_AC(0xfffffffe,UL)
@@ -135,6 +149,8 @@
 #define PTRS_PER_PTE	(1UL << (PAGE_SHIFT-4))
 #define PTRS_PER_PMD	(1UL << PMD_BITS)
 =======
+=======
+>>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
 extern unsigned long VMALLOC_END;
@@ -149,6 +165,9 @@ bool kern_addr_valid(unsigned long addr);
 #define PTRS_PER_PTE	(1UL << (PAGE_SHIFT-3))
 #define PTRS_PER_PMD	(1UL << PMD_BITS)
 #define PTRS_PER_PUD	(1UL << PUD_BITS)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PTRS_PER_PGD	(1UL << PGDIR_BITS)
 
@@ -156,10 +175,13 @@ bool kern_addr_valid(unsigned long addr);
 #define FIRST_USER_ADDRESS	0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pte_ERROR(e)	__builtin_trap()
 #define pmd_ERROR(e)	__builtin_trap()
 #define pgd_ERROR(e)	__builtin_trap()
 =======
+=======
+>>>>>>> v3.18
 #define pmd_ERROR(e)							\
 	pr_err("%s:%d: bad pmd %p(%016lx) seen at (%pS)\n",		\
 	       __FILE__, __LINE__, &(e), pmd_val(e), __builtin_return_address(0))
@@ -169,6 +191,9 @@ bool kern_addr_valid(unsigned long addr);
 #define pgd_ERROR(e)							\
 	pr_err("%s:%d: bad pgd %p(%016lx) seen at (%pS)\n",		\
 	       __FILE__, __LINE__, &(e), pgd_val(e), __builtin_return_address(0))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* !(__ASSEMBLY__) */
@@ -178,6 +203,11 @@ bool kern_addr_valid(unsigned long addr);
 #define _PAGE_R	  	  _AC(0x8000000000000000,UL) /* Keep ref bit uptodate*/
 #define _PAGE_SPECIAL     _AC(0x0200000000000000,UL) /* Special page         */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define _PAGE_PMD_HUGE    _AC(0x0100000000000000,UL) /* Huge page            */
+#define _PAGE_PUD_HUGE    _PAGE_PMD_HUGE
+>>>>>>> v3.18
 =======
 #define _PAGE_PMD_HUGE    _AC(0x0100000000000000,UL) /* Huge page            */
 #define _PAGE_PUD_HUGE    _PAGE_PMD_HUGE
@@ -196,6 +226,10 @@ bool kern_addr_valid(unsigned long addr);
 #define _PAGE_SOFT2_4U	  _AC(0x07FC000000000000,UL) /* Software bits, set 2 */
 #define _PAGE_SPECIAL_4U  _AC(0x0200000000000000,UL) /* Special page         */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define _PAGE_PMD_HUGE_4U _AC(0x0100000000000000,UL) /* Huge page            */
+>>>>>>> v3.18
 =======
 #define _PAGE_PMD_HUGE_4U _AC(0x0100000000000000,UL) /* Huge page            */
 >>>>>>> v3.18
@@ -230,6 +264,10 @@ bool kern_addr_valid(unsigned long addr);
 #define _PAGE_WRITE_4V	  _AC(0x0400000000000000,UL) /* Writable SW Bit      */
 #define _PAGE_SPECIAL_4V  _AC(0x0200000000000000,UL) /* Special page         */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define _PAGE_PMD_HUGE_4V _AC(0x0100000000000000,UL) /* Huge page            */
+>>>>>>> v3.18
 =======
 #define _PAGE_PMD_HUGE_4V _AC(0x0100000000000000,UL) /* Huge page            */
 >>>>>>> v3.18
@@ -259,11 +297,17 @@ bool kern_addr_valid(unsigned long addr);
 #define _PAGE_SZBITS_4V	_PAGE_SZ8K_4V
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if REAL_HPAGE_SHIFT != 22
 #error REAL_HPAGE_SHIFT and _PAGE_SZHUGE_foo must match up
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define _PAGE_SZHUGE_4U	_PAGE_SZ4MB_4U
 #define _PAGE_SZHUGE_4V	_PAGE_SZ4MB_4V
@@ -290,9 +334,15 @@ bool kern_addr_valid(unsigned long addr);
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern pte_t mk_pte_io(unsigned long, pgprot_t, int, unsigned long);
 
 extern unsigned long pte_sz_bits(unsigned long size);
+=======
+pte_t mk_pte_io(unsigned long, pgprot_t, int, unsigned long);
+
+unsigned long pte_sz_bits(unsigned long size);
+>>>>>>> v3.18
 =======
 pte_t mk_pte_io(unsigned long, pgprot_t, int, unsigned long);
 
@@ -331,6 +381,7 @@ static inline pte_t pfn_pte(unsigned long pfn, pgprot_t prot)
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern pmd_t pfn_pmd(unsigned long page_nr, pgprot_t pgprot);
 #define mk_pmd(page, pgprot)	pfn_pmd(page_to_pfn(page), (pgprot))
 
@@ -342,6 +393,8 @@ static inline pmd_t pmd_mkhuge(pmd_t pmd)
 	return pmd;
 }
 =======
+=======
+>>>>>>> v3.18
 static inline pmd_t pfn_pmd(unsigned long page_nr, pgprot_t pgprot)
 {
 	pte_t pte = pfn_pte(page_nr, pgprot);
@@ -349,6 +402,9 @@ static inline pmd_t pfn_pmd(unsigned long page_nr, pgprot_t pgprot)
 	return __pmd(pte_val(pte));
 }
 #define mk_pmd(page, pgprot)	pfn_pmd(page_to_pfn(page), (pgprot))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -379,8 +435,13 @@ static inline pte_t pte_modify(pte_t pte, pgprot_t prot)
 	unsigned long mask, tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* SUN4U: 0x600307ffffffecb8 (negated == 0x9ffcf80000001347)
 	 * SUN4V: 0x30ffffffffffee17 (negated == 0xcf000000000011e8)
+=======
+	/* SUN4U: 0x630107ffffffec38 (negated == 0x9cfef800000013c7)
+	 * SUN4V: 0x33ffffffffffee07 (negated == 0xcc000000000011f8)
+>>>>>>> v3.18
 =======
 	/* SUN4U: 0x630107ffffffec38 (negated == 0x9cfef800000013c7)
 	 * SUN4V: 0x33ffffffffffee07 (negated == 0xcc000000000011f8)
@@ -415,24 +476,33 @@ static inline pte_t pte_modify(pte_t pte, pgprot_t prot)
 	: "=r" (mask), "=r" (tmp)
 	: "i" (_PAGE_PADDR_4U | _PAGE_MODIFIED_4U | _PAGE_ACCESSED_4U |
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       _PAGE_CP_4U | _PAGE_CV_4U | _PAGE_E_4U | _PAGE_PRESENT_4U |
 	       _PAGE_SPECIAL),
 	  "i" (_PAGE_PADDR_4V | _PAGE_MODIFIED_4V | _PAGE_ACCESSED_4V |
 	       _PAGE_CP_4V | _PAGE_CV_4V | _PAGE_E_4V | _PAGE_PRESENT_4V |
 	       _PAGE_SPECIAL));
 =======
+=======
+>>>>>>> v3.18
 	       _PAGE_CP_4U | _PAGE_CV_4U | _PAGE_E_4U |
 	       _PAGE_SPECIAL | _PAGE_PMD_HUGE | _PAGE_SZALL_4U),
 	  "i" (_PAGE_PADDR_4V | _PAGE_MODIFIED_4V | _PAGE_ACCESSED_4V |
 	       _PAGE_CP_4V | _PAGE_CV_4V | _PAGE_E_4V |
 	       _PAGE_SPECIAL | _PAGE_PMD_HUGE | _PAGE_SZALL_4V));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return __pte((pte_val(pte) & mask) | (pgprot_val(prot) & ~mask));
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 static inline pmd_t pmd_modify(pmd_t pmd, pgprot_t newprot)
 {
@@ -444,6 +514,9 @@ static inline pmd_t pmd_modify(pmd_t pmd, pgprot_t newprot)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline pte_t pgoff_to_pte(unsigned long off)
 {
@@ -486,7 +559,11 @@ static inline pgprot_t pgprot_noncached(pgprot_t prot)
 #define pgprot_noncached pgprot_noncached
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HUGETLB_PAGE
+=======
+#if defined(CONFIG_HUGETLB_PAGE) || defined(CONFIG_TRANSPARENT_HUGEPAGE)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_HUGETLB_PAGE) || defined(CONFIG_TRANSPARENT_HUGEPAGE)
 >>>>>>> v3.18
@@ -508,7 +585,10 @@ static inline pte_t pte_mkhuge(pte_t pte)
 	return __pte(pte_val(pte) | mask);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 static inline pmd_t pmd_mkhuge(pmd_t pmd)
 {
@@ -520,6 +600,9 @@ static inline pmd_t pmd_mkhuge(pmd_t pmd)
 	return __pmd(pte_val(pte));
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -773,6 +856,7 @@ static inline unsigned long pte_special(pte_t pte)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int pmd_large(pmd_t pmd)
 {
 	return (pmd_val(pmd) & (PMD_ISHUGE | PMD_HUGE_PRESENT)) ==
@@ -807,6 +891,8 @@ static inline int pmd_trans_huge(pmd_t pmd)
 {
 	return pmd_val(pmd) & PMD_ISHUGE;
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long pmd_large(pmd_t pmd)
 {
 	pte_t pte = __pte(pmd_val(pmd));
@@ -848,6 +934,9 @@ static inline unsigned long pmd_trans_splitting(pmd_t pmd)
 	pte_t pte = __pte(pmd_val(pmd));
 
 	return pmd_trans_huge(pmd) && pte_special(pte);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -856,61 +945,86 @@ static inline unsigned long pmd_trans_splitting(pmd_t pmd)
 static inline pmd_t pmd_mkold(pmd_t pmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmd_val(pmd) &= ~PMD_HUGE_ACCESSED;
 	return pmd;
 =======
+=======
+>>>>>>> v3.18
 	pte_t pte = __pte(pmd_val(pmd));
 
 	pte = pte_mkold(pte);
 
 	return __pmd(pte_val(pte));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline pmd_t pmd_wrprotect(pmd_t pmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmd_val(pmd) &= ~PMD_HUGE_WRITE;
 	return pmd;
 =======
+=======
+>>>>>>> v3.18
 	pte_t pte = __pte(pmd_val(pmd));
 
 	pte = pte_wrprotect(pte);
 
 	return __pmd(pte_val(pte));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline pmd_t pmd_mkdirty(pmd_t pmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmd_val(pmd) |= PMD_HUGE_DIRTY;
 	return pmd;
 =======
+=======
+>>>>>>> v3.18
 	pte_t pte = __pte(pmd_val(pmd));
 
 	pte = pte_mkdirty(pte);
 
 	return __pmd(pte_val(pte));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline pmd_t pmd_mkyoung(pmd_t pmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmd_val(pmd) |= PMD_HUGE_ACCESSED;
 	return pmd;
 =======
+=======
+>>>>>>> v3.18
 	pte_t pte = __pte(pmd_val(pmd));
 
 	pte = pte_mkyoung(pte);
 
 	return __pmd(pte_val(pte));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline pmd_t pmd_mkwrite(pmd_t pmd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pmd_val(pmd) |= PMD_HUGE_WRITE;
 	return pmd;
@@ -921,16 +1035,22 @@ static inline pmd_t pmd_mknotpresent(pmd_t pmd)
 	pmd_val(pmd) &= ~PMD_HUGE_PRESENT;
 	return pmd;
 =======
+=======
+>>>>>>> v3.18
 	pte_t pte = __pte(pmd_val(pmd));
 
 	pte = pte_mkwrite(pte);
 
 	return __pmd(pte_val(pte));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline pmd_t pmd_mksplitting(pmd_t pmd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pmd_val(pmd) |= PMD_HUGE_SPLITTING;
 	return pmd;
@@ -938,6 +1058,8 @@ static inline pmd_t pmd_mksplitting(pmd_t pmd)
 
 extern pgprot_t pmd_pgprot(pmd_t entry);
 =======
+=======
+>>>>>>> v3.18
 	pte_t pte = __pte(pmd_val(pmd));
 
 	pte = pte_mkspecial(pte);
@@ -951,13 +1073,20 @@ static inline pgprot_t pmd_pgprot(pmd_t entry)
 
 	return __pgprot(val);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 static inline int pmd_present(pmd_t pmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pmd_val(pmd) != 0U;
+=======
+	return pmd_val(pmd) != 0UL;
+>>>>>>> v3.18
 =======
 	return pmd_val(pmd) != 0UL;
 >>>>>>> v3.18
@@ -966,10 +1095,13 @@ static inline int pmd_present(pmd_t pmd)
 #define pmd_none(pmd)			(!pmd_val(pmd))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 extern void set_pmd_at(struct mm_struct *mm, unsigned long addr,
 		       pmd_t *pmdp, pmd_t pmd);
 =======
+=======
+>>>>>>> v3.18
 /* pmd_bad() is only called on non-trans-huge PMDs.  Our encoding is
  * very simple, it's just the physical address.  PTE tables are of
  * size PAGE_SIZE so make sure the sub-PAGE_SIZE bits are clear and
@@ -989,6 +1121,9 @@ extern void set_pmd_at(struct mm_struct *mm, unsigned long addr,
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 void set_pmd_at(struct mm_struct *mm, unsigned long addr,
 		pmd_t *pmdp, pmd_t pmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline void set_pmd_at(struct mm_struct *mm, unsigned long addr,
@@ -1001,7 +1136,11 @@ static inline void set_pmd_at(struct mm_struct *mm, unsigned long addr,
 static inline void pmd_set(struct mm_struct *mm, pmd_t *pmdp, pte_t *ptep)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long val = __pa((unsigned long) (ptep)) >> PMD_PADDR_SHIFT;
+=======
+	unsigned long val = __pa((unsigned long) (ptep));
+>>>>>>> v3.18
 =======
 	unsigned long val = __pa((unsigned long) (ptep));
 >>>>>>> v3.18
@@ -1010,6 +1149,7 @@ static inline void pmd_set(struct mm_struct *mm, pmd_t *pmdp, pte_t *ptep)
 }
 
 #define pud_set(pudp, pmdp)	\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	(pud_val(*(pudp)) = (__pa((unsigned long) (pmdp)) >> PGD_PADDR_SHIFT))
 static inline unsigned long __pmd_page(pmd_t pmd)
@@ -1033,6 +1173,8 @@ static inline unsigned long __pmd_page(pmd_t pmd)
 #define pud_present(pud)		(pud_val(pud) != 0U)
 #define pud_clear(pudp)			(pud_val(*(pudp)) = 0U)
 =======
+=======
+>>>>>>> v3.18
 	(pud_val(*(pudp)) = (__pa((unsigned long) (pmdp))))
 static inline unsigned long __pmd_page(pmd_t pmd)
 {
@@ -1068,12 +1210,21 @@ static inline unsigned long pud_pfn(pud_t pud)
 
 	return pte_pfn(pte);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Same in both SUN4V and SUN4U.  */
 #define pte_none(pte) 			(!pte_val(pte))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pgd_set(pgdp, pudp)	\
+	(pgd_val(*(pgdp)) = (__pa((unsigned long) (pudp))))
+
+>>>>>>> v3.18
 =======
 #define pgd_set(pgdp, pudp)	\
 	(pgd_val(*(pgdp)) = (__pa((unsigned long) (pudp))))
@@ -1087,12 +1238,18 @@ static inline unsigned long pud_pfn(pud_t pud)
 #define pgd_offset_k(address) pgd_offset(&init_mm, address)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Find an entry in the third-level page table.. */
 #define pud_index(address)	(((address) >> PUD_SHIFT) & (PTRS_PER_PUD - 1))
 #define pud_offset(pgdp, address)	\
 	((pud_t *) pgd_page_vaddr(*(pgdp)) + pud_index(address))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Find an entry in the second-level page table.. */
 #define pmd_offset(pudp, address)	\
@@ -1109,8 +1266,13 @@ static inline unsigned long pud_pfn(pud_t pud)
 
 /* Actual page table PTE updates.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void tlb_batch_add(struct mm_struct *mm, unsigned long vaddr,
 			  pte_t *ptep, pte_t orig, int fullmm);
+=======
+void tlb_batch_add(struct mm_struct *mm, unsigned long vaddr,
+		   pte_t *ptep, pte_t orig, int fullmm);
+>>>>>>> v3.18
 =======
 void tlb_batch_add(struct mm_struct *mm, unsigned long vaddr,
 		   pte_t *ptep, pte_t orig, int fullmm);
@@ -1123,7 +1285,11 @@ static inline pmd_t pmdp_get_and_clear(struct mm_struct *mm,
 {
 	pmd_t pmd = *pmdp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_pmd_at(mm, addr, pmdp, __pmd(0U));
+=======
+	set_pmd_at(mm, addr, pmdp, __pmd(0UL));
+>>>>>>> v3.18
 =======
 	set_pmd_at(mm, addr, pmdp, __pmd(0UL));
 >>>>>>> v3.18
@@ -1175,6 +1341,7 @@ static inline void __set_pte_at(struct mm_struct *mm, unsigned long addr,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern pgd_t swapper_pg_dir[2048];
 extern pmd_t swapper_low_pmd_dir[2048];
 
@@ -1196,6 +1363,8 @@ extern void pgtable_trans_huge_deposit(struct mm_struct *mm, pgtable_t pgtable);
 #define __HAVE_ARCH_PGTABLE_WITHDRAW
 extern pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm);
 =======
+=======
+>>>>>>> v3.18
 extern pgd_t swapper_pg_dir[PTRS_PER_PGD];
 
 void paging_init(void);
@@ -1220,6 +1389,9 @@ void pgtable_trans_huge_deposit(struct mm_struct *mm, pmd_t *pmdp,
 
 #define __HAVE_ARCH_PGTABLE_WITHDRAW
 pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -1236,6 +1408,7 @@ pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp);
 #define __swp_entry_to_pte(x)		((pte_t) { (x).val })
 
 /* File offset in PTE support. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern unsigned long pte_file(pte_t);
 #define pte_to_pgoff(pte)	(pte_val(pte) >> PAGE_SHIFT)
@@ -1256,12 +1429,17 @@ static inline bool kern_addr_valid(unsigned long addr)
 
 extern int page_in_phys_avail(unsigned long paddr);
 =======
+=======
+>>>>>>> v3.18
 unsigned long pte_file(pte_t);
 #define pte_to_pgoff(pte)	(pte_val(pte) >> PAGE_SHIFT)
 pte_t pgoff_to_pte(unsigned long);
 #define PTE_FILE_MAX_BITS	(64UL - PAGE_SHIFT - 1UL)
 
 int page_in_phys_avail(unsigned long paddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1273,8 +1451,13 @@ int page_in_phys_avail(unsigned long paddr);
 #define GET_PFN(pfn)			(pfn & 0x0fffffffffffffffUL)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int remap_pfn_range(struct vm_area_struct *, unsigned long, unsigned long,
 			   unsigned long, pgprot_t);
+=======
+int remap_pfn_range(struct vm_area_struct *, unsigned long, unsigned long,
+		    unsigned long, pgprot_t);
+>>>>>>> v3.18
 =======
 int remap_pfn_range(struct vm_area_struct *, unsigned long, unsigned long,
 		    unsigned long, pgprot_t);
@@ -1307,6 +1490,7 @@ static inline int io_remap_pfn_range(struct vm_area_struct *vma,
  * the largest alignment possible such that larget PTEs can be used.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long get_fb_unmapped_area(struct file *filp, unsigned long,
 					  unsigned long, unsigned long,
 					  unsigned long);
@@ -1322,6 +1506,8 @@ extern unsigned long cmdline_memory_size;
 
 extern asmlinkage void do_sparc64_fault(struct pt_regs *regs);
 =======
+=======
+>>>>>>> v3.18
 unsigned long get_fb_unmapped_area(struct file *filp, unsigned long,
 				   unsigned long, unsigned long,
 				   unsigned long);
@@ -1336,6 +1522,9 @@ void sun4v_patch_tlb_handlers(void);
 extern unsigned long cmdline_memory_size;
 
 asmlinkage void do_sparc64_fault(struct pt_regs *regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* !(__ASSEMBLY__) */

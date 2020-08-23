@@ -34,6 +34,7 @@ BEGIN {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /^[ \t]*#/ {
 	# Ignore
 }
@@ -46,18 +47,27 @@ BEGIN {
 =======
 function parse_country_head() {
 >>>>>>> v3.18
+=======
+function parse_country_head() {
+>>>>>>> v3.18
 	country=$2
 	sub(/:/, "", country)
 	printf "static const struct ieee80211_regdomain regdom_%s = {\n", country
 	printf "\t.alpha2 = \"%s\",\n", country
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if ($NF ~ /DFS-ETSI/)
 		printf "\t.dfs_region = NL80211_DFS_ETSI,\n"
 	else if ($NF ~ /DFS-FCC/)
 		printf "\t.dfs_region = NL80211_DFS_FCC,\n"
 	else if ($NF ~ /DFS-JP/)
 		printf "\t.dfs_region = NL80211_DFS_JP,\n"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printf "\t.reg_rules = {\n"
 	active = 1
@@ -65,18 +75,25 @@ function parse_country_head() {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 active && /^[ \t]*\(/ {
 =======
+=======
+>>>>>>> v3.18
 function parse_reg_rule()
 {
 	flag_starts_at = 7
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	start = $1
 	sub(/\(/, "", start)
 	end = $3
 	bw = $5
 	sub(/\),/, "", bw)
+<<<<<<< HEAD
 <<<<<<< HEAD
 	gain = $6
 	sub(/\(/, "", gain)
@@ -104,6 +121,8 @@ function parse_reg_rule()
 	flagstr = ""
 	for (i=8; i<=NF; i++)
 =======
+=======
+>>>>>>> v3.18
 	gain = 0
 	power = $6
 	# power might be in mW...
@@ -132,6 +151,9 @@ function parse_reg_rule()
 	sub(/\),/, "", dfs_cac)
 	flagstr = ""
 	for (i=flag_starts_at; i<=NF; i++)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		flagstr = flagstr $i
 	split(flagstr, flagarray, ",")
@@ -153,6 +175,7 @@ function parse_reg_rule()
 			flags = flags "\n\t\t\tNL80211_RRF_PTMP_ONLY | "
 		} else if (flagarray[arg] == "PASSIVE-SCAN") {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			flags = flags "\n\t\t\tNL80211_RRF_PASSIVE_SCAN | "
 		} else if (flagarray[arg] == "NO-IBSS") {
 			flags = flags "\n\t\t\tNL80211_RRF_NO_IBSS | "
@@ -165,6 +188,8 @@ function parse_reg_rule()
 
 active && /^[ \t]*$/ {
 =======
+=======
+>>>>>>> v3.18
 			flags = flags "\n\t\t\tNL80211_RRF_NO_IR | "
 		} else if (flagarray[arg] == "NO-IBSS") {
 			flags = flags "\n\t\t\tNL80211_RRF_NO_IR | "
@@ -182,6 +207,9 @@ active && /^[ \t]*$/ {
 
 function print_tail_country()
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	active = 0
 	printf "\t},\n"
@@ -191,8 +219,11 @@ function print_tail_country()
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 END {
 =======
+=======
+>>>>>>> v3.18
 /^[ \t]*#/ {
 	# Ignore
 }
@@ -216,6 +247,9 @@ active && /^[ \t]*$/ {
 END {
 	if (active)
 		print_tail_country()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	print regdb "};"
 	print ""

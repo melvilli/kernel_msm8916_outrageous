@@ -55,7 +55,10 @@
 #include <linux/namei.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/migrate.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -85,7 +88,11 @@ static int read_block(struct inode *inode, void *addr, unsigned int block,
 	dlen = le32_to_cpu(dn->ch.len) - UBIFS_DATA_NODE_SZ;
 	out_len = UBIFS_BLOCK_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = ubifs_decompress(c, &(dn->data), dlen, addr, &out_len,
+=======
+	err = ubifs_decompress(&dn->data, dlen, addr, &out_len,
+>>>>>>> v3.18
 =======
 	err = ubifs_decompress(&dn->data, dlen, addr, &out_len,
 >>>>>>> v3.18
@@ -105,7 +112,11 @@ static int read_block(struct inode *inode, void *addr, unsigned int block,
 
 dump:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("bad data node (block %u, inode %lu)", c->vi.ubi_num,
+=======
+	ubifs_err("bad data node (block %u, inode %lu)",
+>>>>>>> v3.18
 =======
 	ubifs_err("bad data node (block %u, inode %lu)",
 >>>>>>> v3.18
@@ -174,8 +185,11 @@ static int do_readpage(struct page *page)
 	}
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int ubi_num = UBIFS_UNKNOWN_DEV_NUM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (err == -ENOENT) {
@@ -185,11 +199,16 @@ static int do_readpage(struct page *page)
 			goto out_free;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((struct ubifs_info *)(inode->i_sb->s_fs_info))
 			ubi_num = ((struct ubifs_info *)
 					(inode->i_sb->s_fs_info))->vi.ubi_num;
 		ubifs_err("cannot read page %lu of inode %lu, error %d",
 			  ubi_num, page->index, inode->i_ino, err);
+=======
+		ubifs_err("cannot read page %lu of inode %lu, error %d",
+			  page->index, inode->i_ino, err);
+>>>>>>> v3.18
 =======
 		ubifs_err("cannot read page %lu of inode %lu, error %d",
 			  page->index, inode->i_ino, err);
@@ -675,8 +694,12 @@ static int populate_page(struct ubifs_info *c, struct page *page,
 			dlen = le32_to_cpu(dn->ch.len) - UBIFS_DATA_NODE_SZ;
 			out_len = UBIFS_BLOCK_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = ubifs_decompress(c, &dn->data, dlen, addr,
 					       &out_len,
+=======
+			err = ubifs_decompress(&dn->data, dlen, addr, &out_len,
+>>>>>>> v3.18
 =======
 			err = ubifs_decompress(&dn->data, dlen, addr, &out_len,
 >>>>>>> v3.18
@@ -728,7 +751,11 @@ out_err:
 	flush_dcache_page(page);
 	kunmap(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("bad data node (block %u, inode %lu)", c->vi.ubi_num,
+=======
+	ubifs_err("bad data node (block %u, inode %lu)",
+>>>>>>> v3.18
 =======
 	ubifs_err("bad data node (block %u, inode %lu)",
 >>>>>>> v3.18
@@ -836,8 +863,12 @@ out_free:
 
 out_warn:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_warn("ignoring error %d and skipping bulk-read", c->vi.ubi_num,
 			err);
+=======
+	ubifs_warn("ignoring error %d and skipping bulk-read", err);
+>>>>>>> v3.18
 =======
 	ubifs_warn("ignoring error %d and skipping bulk-read", err);
 >>>>>>> v3.18
@@ -943,8 +974,14 @@ static int do_writepage(struct page *page, int len)
 
 #ifdef UBIFS_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&ui->ui_lock);
 	ubifs_assert(page->index <= ui->synced_i_size << PAGE_CACHE_SIZE);
+=======
+	struct ubifs_inode *ui = ubifs_inode(inode);
+	spin_lock(&ui->ui_lock);
+	ubifs_assert(page->index <= ui->synced_i_size >> PAGE_CACHE_SHIFT);
+>>>>>>> v3.18
 =======
 	struct ubifs_inode *ui = ubifs_inode(inode);
 	spin_lock(&ui->ui_lock);
@@ -975,7 +1012,11 @@ static int do_writepage(struct page *page, int len)
 		SetPageError(page);
 		ubifs_err("cannot write page %lu of inode %lu, error %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  c->vi.ubi_num, page->index, inode->i_ino, err);
+=======
+			  page->index, inode->i_ino, err);
+>>>>>>> v3.18
 =======
 			  page->index, inode->i_ino, err);
 >>>>>>> v3.18
@@ -1327,7 +1368,12 @@ int ubifs_setattr(struct dentry *dentry, struct iattr *attr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ubifs_invalidatepage(struct page *page, unsigned long offset)
+=======
+static void ubifs_invalidatepage(struct page *page, unsigned int offset,
+				 unsigned int length)
+>>>>>>> v3.18
 =======
 static void ubifs_invalidatepage(struct page *page, unsigned int offset,
 				 unsigned int length)
@@ -1338,7 +1384,11 @@ static void ubifs_invalidatepage(struct page *page, unsigned int offset,
 
 	ubifs_assert(PagePrivate(page));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (offset)
+=======
+	if (offset || length < PAGE_CACHE_SIZE)
+>>>>>>> v3.18
 =======
 	if (offset || length < PAGE_CACHE_SIZE)
 >>>>>>> v3.18
@@ -1421,7 +1471,10 @@ static inline int mctime_update_needed(const struct inode *inode,
 /**
  * update_ctime - update mtime and ctime of an inode.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @c: UBIFS file-system description object
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @inode: inode to update
@@ -1431,16 +1484,22 @@ static inline int mctime_update_needed(const struct inode *inode,
  * case of failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int update_mctime(struct ubifs_info *c, struct inode *inode)
 {
 	struct timespec now = ubifs_current_time(inode);
 	struct ubifs_inode *ui = ubifs_inode(inode);
 =======
+=======
+>>>>>>> v3.18
 static int update_mctime(struct inode *inode)
 {
 	struct timespec now = ubifs_current_time(inode);
 	struct ubifs_inode *ui = ubifs_inode(inode);
 	struct ubifs_info *c = inode->i_sb->s_fs_info;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (mctime_update_needed(inode, &now)) {
@@ -1465,6 +1524,7 @@ static int update_mctime(struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t ubifs_aio_write(struct kiocb *iocb, const struct iovec *iov,
 			       unsigned long nr_segs, loff_t pos)
 {
@@ -1478,6 +1538,8 @@ static ssize_t ubifs_aio_write(struct kiocb *iocb, const struct iovec *iov,
 
 	return generic_file_aio_write(iocb, iov, nr_segs, pos);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t ubifs_write_iter(struct kiocb *iocb, struct iov_iter *from)
 {
 	int err = update_mctime(file_inode(iocb->ki_filp));
@@ -1485,6 +1547,9 @@ static ssize_t ubifs_write_iter(struct kiocb *iocb, struct iov_iter *from)
 		return err;
 
 	return generic_file_write_iter(iocb, from);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1501,6 +1566,7 @@ static int ubifs_set_page_dirty(struct page *page)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIGRATION
 static int ubifs_migrate_page(struct address_space *mapping,
@@ -1522,6 +1588,8 @@ static int ubifs_migrate_page(struct address_space *mapping,
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ubifs_releasepage(struct page *page, gfp_t unused_gfp_flags)
@@ -1591,7 +1659,11 @@ static int ubifs_vm_page_mkwrite(struct vm_area_struct *vma,
 		if (err == -ENOSPC)
 			ubifs_warn("out of space for mmapped file (inode number %lu)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					c->vi.ubi_num, inode->i_ino);
+=======
+				   inode->i_ino);
+>>>>>>> v3.18
 =======
 				   inode->i_ino);
 >>>>>>> v3.18
@@ -1643,6 +1715,10 @@ out_unlock:
 static const struct vm_operations_struct ubifs_file_vm_ops = {
 	.fault        = filemap_fault,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.map_pages = filemap_map_pages,
+>>>>>>> v3.18
 =======
 	.map_pages = filemap_map_pages,
 >>>>>>> v3.18
@@ -1669,9 +1745,12 @@ const struct address_space_operations ubifs_file_address_operations = {
 	.invalidatepage = ubifs_invalidatepage,
 	.set_page_dirty = ubifs_set_page_dirty,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIGRATION
 	.migratepage	= ubifs_migrate_page,
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.releasepage    = ubifs_releasepage,
@@ -1696,22 +1775,32 @@ const struct inode_operations ubifs_symlink_inode_operations = {
 const struct file_operations ubifs_file_operations = {
 	.llseek         = generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read           = do_sync_read,
 	.write          = do_sync_write,
 	.aio_read       = generic_file_aio_read,
 	.aio_write      = ubifs_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.read           = new_sync_read,
 	.write          = new_sync_write,
 	.read_iter      = generic_file_read_iter,
 	.write_iter     = ubifs_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.mmap           = ubifs_file_mmap,
 	.fsync          = ubifs_fsync,
 	.unlocked_ioctl = ubifs_ioctl,
 	.splice_read	= generic_file_splice_read,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.splice_write	= generic_file_splice_write,
+=======
+	.splice_write	= iter_file_splice_write,
+>>>>>>> v3.18
 =======
 	.splice_write	= iter_file_splice_write,
 >>>>>>> v3.18

@@ -68,7 +68,12 @@ static inline unsigned int shash_align_buffer_size(unsigned len,
 						   unsigned long mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return len + (mask & ~(__alignof__(u8 __attribute__ ((aligned))) - 1));
+=======
+	typedef u8 __attribute__ ((aligned)) u8_aligned;
+	return len + (mask & ~(__alignof__(u8_aligned) - 1));
+>>>>>>> v3.18
 =======
 	typedef u8 __attribute__ ((aligned)) u8_aligned;
 	return len + (mask & ~(__alignof__(u8_aligned) - 1));
@@ -359,10 +364,16 @@ int crypto_init_shash_ops_async(struct crypto_tfm *tfm)
 	crt->finup = shash_async_finup;
 	crt->digest = shash_async_digest;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crt->setkey = shash_async_setkey;
 
 	crt->has_setkey = alg->setkey != shash_no_setkey;
 
+=======
+
+	if (alg->setkey)
+		crt->setkey = shash_async_setkey;
+>>>>>>> v3.18
 =======
 
 	if (alg->setkey)

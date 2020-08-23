@@ -76,8 +76,12 @@ static void nlm_usb_intr_en(int node, int port)
 	val = nlm_read_usb_reg(port_addr, USB_INT_EN);
 	val = USB_CTRL_INTERRUPT_EN  | USB_OHCI_INTERRUPT_EN |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		USB_OHCI_INTERRUPT1_EN | USB_CTRL_INTERRUPT_EN	|
 		USB_OHCI_INTERRUPT_EN | USB_OHCI_INTERRUPT2_EN;
+=======
+		USB_OHCI_INTERRUPT1_EN | USB_OHCI_INTERRUPT2_EN;
+>>>>>>> v3.18
 =======
 		USB_OHCI_INTERRUPT1_EN | USB_OHCI_INTERRUPT2_EN;
 >>>>>>> v3.18
@@ -105,6 +109,12 @@ static void nlm_usb_hw_reset(int node, int port)
 static int __init nlm_platform_usb_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (cpu_is_xlpii())
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (cpu_is_xlpii())
 		return 0;
@@ -130,7 +140,11 @@ static void nlm_usb_fixup_final(struct pci_dev *dev)
 {
 	dev->dev.dma_mask		= &xlp_usb_dmamask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->dev.coherent_dma_mask	= DMA_BIT_MASK(64);
+=======
+	dev->dev.coherent_dma_mask	= DMA_BIT_MASK(32);
+>>>>>>> v3.18
 =======
 	dev->dev.coherent_dma_mask	= DMA_BIT_MASK(32);
 >>>>>>> v3.18

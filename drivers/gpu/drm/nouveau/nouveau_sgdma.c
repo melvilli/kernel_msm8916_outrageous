@@ -2,8 +2,11 @@
 #include <linux/slab.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/fb.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "nouveau_drm.h"
@@ -35,6 +38,7 @@ nv04_sgdma_bind(struct ttm_tt *ttm, struct ttm_mem_reg *mem)
 	struct nouveau_sgdma_be *nvbe = (struct nouveau_sgdma_be *)ttm;
 	struct nouveau_mem *node = mem->mm_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 size = mem->num_pages << 12;
 
 	if (ttm->sg) {
@@ -46,6 +50,8 @@ nv04_sgdma_bind(struct ttm_tt *ttm, struct ttm_mem_reg *mem)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (ttm->sg) {
 		node->sg    = ttm->sg;
@@ -57,6 +63,9 @@ nv04_sgdma_bind(struct ttm_tt *ttm, struct ttm_mem_reg *mem)
 	node->size = (mem->num_pages << PAGE_SHIFT) >> 12;
 
 	nouveau_vm_map(&node->vma[0], node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nvbe->node = node;
 	return 0;
@@ -85,10 +94,13 @@ nv50_sgdma_bind(struct ttm_tt *ttm, struct ttm_mem_reg *mem)
 	/* noop: bound in move_notify() */
 	if (ttm->sg) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		node->sg = ttm->sg;
 	} else
 		node->pages = nvbe->ttm.dma_address;
 =======
+=======
+>>>>>>> v3.18
 		node->sg    = ttm->sg;
 		node->pages = NULL;
 	} else {
@@ -96,6 +108,9 @@ nv50_sgdma_bind(struct ttm_tt *ttm, struct ttm_mem_reg *mem)
 		node->pages = nvbe->ttm.dma_address;
 	}
 	node->size = (mem->num_pages << PAGE_SHIFT) >> 12;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -127,7 +142,11 @@ nouveau_sgdma_create_ttm(struct ttm_bo_device *bdev,
 
 	nvbe->dev = drm->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_device(drm->device)->card_type < NV_50)
+=======
+	if (drm->device.info.family < NV_DEVICE_INFO_V0_TESLA)
+>>>>>>> v3.18
 =======
 	if (drm->device.info.family < NV_DEVICE_INFO_V0_TESLA)
 >>>>>>> v3.18
@@ -136,10 +155,15 @@ nouveau_sgdma_create_ttm(struct ttm_bo_device *bdev,
 		nvbe->ttm.ttm.func = &nv50_sgdma_backend;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ttm_dma_tt_init(&nvbe->ttm, bdev, size, page_flags, dummy_read_page)) {
 		kfree(nvbe);
 		return NULL;
 	}
+=======
+	if (ttm_dma_tt_init(&nvbe->ttm, bdev, size, page_flags, dummy_read_page))
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (ttm_dma_tt_init(&nvbe->ttm, bdev, size, page_flags, dummy_read_page))
 		return NULL;

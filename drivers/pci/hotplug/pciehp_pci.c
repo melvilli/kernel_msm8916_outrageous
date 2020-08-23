@@ -40,6 +40,7 @@ int pciehp_configure_device(struct slot *p_slot)
 	struct pci_dev *bridge = p_slot->ctrl->pcie->port;
 	struct pci_bus *parent = bridge->subordinate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int num;
 	struct controller *ctrl = p_slot->ctrl;
 
@@ -51,6 +52,8 @@ int pciehp_configure_device(struct slot *p_slot)
 		pci_dev_put(dev);
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int num, ret = 0;
 	struct controller *ctrl = p_slot->ctrl;
 
@@ -63,12 +66,16 @@ int pciehp_configure_device(struct slot *p_slot)
 		pci_dev_put(dev);
 		ret = -EEXIST;
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	num = pci_scan_slot(parent, PCI_DEVFN(0, 0));
 	if (num == 0) {
 		ctrl_err(ctrl, "No new device found\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -ENODEV;
 	}
@@ -91,6 +98,8 @@ int pciehp_configure_device(struct slot *p_slot)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		ret = -ENODEV;
 		goto out;
 	}
@@ -106,13 +115,20 @@ int pciehp_configure_device(struct slot *p_slot)
  out:
 	pci_unlock_rescan_remove();
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int pciehp_unconfigure_device(struct slot *p_slot)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, rc = 0;
+=======
+	int rc = 0;
+>>>>>>> v3.18
 =======
 	int rc = 0;
 >>>>>>> v3.18
@@ -126,9 +142,15 @@ int pciehp_unconfigure_device(struct slot *p_slot)
 	ctrl_dbg(ctrl, "%s: domain:bus:dev = %04x:%02x:00\n",
 		 __func__, pci_domain_nr(parent), parent->number);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = pciehp_get_adapter_status(p_slot, &presence);
 	if (ret)
 		presence = 0;
+=======
+	pciehp_get_adapter_status(p_slot, &presence);
+
+	pci_lock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pciehp_get_adapter_status(p_slot, &presence);
 
@@ -170,6 +192,10 @@ int pciehp_unconfigure_device(struct slot *p_slot)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_unlock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pci_unlock_rescan_remove();
 >>>>>>> v3.18

@@ -99,7 +99,11 @@ extern struct proc_dir_entry *proc_irda;
 #endif /* CONFIG_PROC_FS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct irlan_cb *irlan_open(__u32 saddr, __u32 daddr);
+=======
+static struct irlan_cb __init *irlan_open(__u32 saddr, __u32 daddr);
+>>>>>>> v3.18
 =======
 static struct irlan_cb __init *irlan_open(__u32 saddr, __u32 daddr);
 >>>>>>> v3.18
@@ -201,7 +205,11 @@ static void __exit irlan_cleanup(void)
  *    network device if this instance is ment for a particular client/provider
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct irlan_cb *irlan_open(__u32 saddr, __u32 daddr)
+=======
+static struct irlan_cb __init *irlan_open(__u32 saddr, __u32 daddr)
+>>>>>>> v3.18
 =======
 static struct irlan_cb __init *irlan_open(__u32 saddr, __u32 daddr)
 >>>>>>> v3.18
@@ -1033,7 +1041,10 @@ static int __irlan_insert_param(struct sk_buff *skb, char *param, int type,
 		IRDA_DEBUG(2, "%s(), Unknown parameter type!\n", __func__ );
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

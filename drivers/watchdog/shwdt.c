@@ -27,7 +27,10 @@
 #include <linux/types.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/watchdog.h>
@@ -235,10 +238,13 @@ static int sh_wdt_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (unlikely(!res))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	wdt = devm_kzalloc(&pdev->dev, sizeof(struct sh_wdt), GFP_KERNEL);
@@ -248,7 +254,11 @@ static int sh_wdt_probe(struct platform_device *pdev)
 	wdt->dev = &pdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wdt->clk = clk_get(&pdev->dev, NULL);
+=======
+	wdt->clk = devm_clk_get(&pdev->dev, NULL);
+>>>>>>> v3.18
 =======
 	wdt->clk = devm_clk_get(&pdev->dev, NULL);
 >>>>>>> v3.18
@@ -261,16 +271,22 @@ static int sh_wdt_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wdt->base = devm_ioremap_resource(wdt->dev, res);
 	if (IS_ERR(wdt->base)) {
 		rc = PTR_ERR(wdt->base);
 		goto err;
 	}
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	wdt->base = devm_ioremap_resource(wdt->dev, res);
 	if (IS_ERR(wdt->base))
 		return PTR_ERR(wdt->base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	watchdog_set_nowayout(&sh_wdt_dev, nowayout);
@@ -295,7 +311,11 @@ static int sh_wdt_probe(struct platform_device *pdev)
 	if (unlikely(rc)) {
 		dev_err(&pdev->dev, "Can't register watchdog (err=%d)\n", rc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err;
+=======
+		return rc;
+>>>>>>> v3.18
 =======
 		return rc;
 >>>>>>> v3.18
@@ -307,8 +327,11 @@ static int sh_wdt_probe(struct platform_device *pdev)
 	wdt->timer.expires	= next_ping_period(clock_division_ratio);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, wdt);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_info(&pdev->dev, "initialized.\n");
@@ -317,6 +340,7 @@ static int sh_wdt_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err:
 	clk_put(wdt->clk);
@@ -324,10 +348,13 @@ err:
 	return rc;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int sh_wdt_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sh_wdt *wdt = platform_get_drvdata(pdev);
 
@@ -337,6 +364,11 @@ static int sh_wdt_remove(struct platform_device *pdev)
 
 	pm_runtime_disable(&pdev->dev);
 	clk_put(wdt->clk);
+=======
+	watchdog_unregister_device(&sh_wdt_dev);
+
+	pm_runtime_disable(&pdev->dev);
+>>>>>>> v3.18
 =======
 	watchdog_unregister_device(&sh_wdt_dev);
 
@@ -387,7 +419,10 @@ MODULE_DESCRIPTION("SuperH watchdog driver");
 MODULE_LICENSE("GPL");
 MODULE_ALIAS("platform:" DRV_NAME);
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

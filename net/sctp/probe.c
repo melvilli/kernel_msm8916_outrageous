@@ -39,6 +39,10 @@
 #include <net/sctp/sm.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_SOFTDEP("pre: sctp");
+>>>>>>> v3.18
 =======
 MODULE_SOFTDEP("pre: sctp");
 >>>>>>> v3.18
@@ -51,11 +55,17 @@ MODULE_PARM_DESC(port, "Port to match (0=all)");
 module_param(port, int, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned int fwmark __read_mostly = 0;
 MODULE_PARM_DESC(fwmark, "skb mark to match (0=no mark)");
 module_param(fwmark, uint, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int bufsize __read_mostly = 64 * 1024;
 MODULE_PARM_DESC(bufsize, "Log buffer size (default 64k)");
@@ -141,6 +151,11 @@ static sctp_disposition_t jsctp_sf_eat_sack(struct net *net,
 					    sctp_cmd_seq_t *commands)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct sctp_chunk *chunk = arg;
+	struct sk_buff *skb = chunk->skb;
+>>>>>>> v3.18
 =======
 	struct sctp_chunk *chunk = arg;
 	struct sk_buff *skb = chunk->skb;
@@ -152,15 +167,21 @@ static sctp_disposition_t jsctp_sf_eat_sack(struct net *net,
 	sp = asoc->peer.primary_path;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((full || sp->cwnd != lcwnd) &&
 	    (!port || asoc->peer.port == port ||
 	     ep->base.bind_addr.port == port)) {
 =======
+=======
+>>>>>>> v3.18
 	if (((port == 0 && fwmark == 0) ||
 	     asoc->peer.port == port ||
 	     ep->base.bind_addr.port == port ||
 	     (fwmark > 0 && skb->mark == fwmark)) &&
 	    (full || sp->cwnd != lcwnd)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lcwnd = sp->cwnd;
 
@@ -180,6 +201,7 @@ static sctp_disposition_t jsctp_sf_eat_sack(struct net *net,
 				printl("*");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (sp->ipaddr.sa.sa_family == AF_INET)
 				printl("%pI4 ", &sp->ipaddr.v4.sin_addr);
 			else
@@ -187,6 +209,10 @@ static sctp_disposition_t jsctp_sf_eat_sack(struct net *net,
 
 			printl("%2u %8u %8u %8u %8u %8u ",
 			       sp->state, sp->cwnd, sp->ssthresh,
+=======
+			printl("%pISc %2u %8u %8u %8u %8u %8u ",
+			       &sp->ipaddr, sp->state, sp->cwnd, sp->ssthresh,
+>>>>>>> v3.18
 =======
 			printl("%pISc %2u %8u %8u %8u %8u %8u ",
 			       &sp->ipaddr, sp->state, sp->cwnd, sp->ssthresh,
@@ -209,7 +235,10 @@ static struct jprobe sctp_recv_probe = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static __init int sctp_setup_jprobe(void)
 {
 	int ret = register_jprobe(&sctp_recv_probe);
@@ -224,6 +253,9 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __init int sctpprobe_init(void)
 {
@@ -246,6 +278,7 @@ static __init int sctpprobe_init(void)
 		goto free_kfifo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = register_jprobe(&sctp_recv_probe);
 	if (ret)
 		goto remove_proc;
@@ -253,12 +286,17 @@ static __init int sctpprobe_init(void)
 	pr_info("probe registered (port=%d)\n", port);
 
 =======
+=======
+>>>>>>> v3.18
 	ret = sctp_setup_jprobe();
 	if (ret)
 		goto remove_proc;
 
 	pr_info("probe registered (port=%d/fwmark=%u) bufsize=%u\n",
 		port, fwmark, bufsize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 

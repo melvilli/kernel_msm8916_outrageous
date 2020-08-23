@@ -75,8 +75,11 @@ int ubi_check_volume(struct ubi_device *ubi, int vol_id)
 		int size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cond_resched();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (i == vol->used_ebs - 1)
@@ -117,8 +120,12 @@ void ubi_update_reserved(struct ubi_device *ubi)
 	ubi->rsvd_pebs += need;
 	ubi->beb_rsvd_pebs += need;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubi_msg(ubi->ubi_num,
 		"reserved more %d PEBs for bad PEB handling", need);
+=======
+	ubi_msg("reserved more %d PEBs for bad PEB handling", need);
+>>>>>>> v3.18
 =======
 	ubi_msg("reserved more %d PEBs for bad PEB handling", need);
 >>>>>>> v3.18
@@ -139,10 +146,14 @@ void ubi_calculate_reserved(struct ubi_device *ubi)
 	if (ubi->beb_rsvd_level < 0) {
 		ubi->beb_rsvd_level = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubi_warn(ubi->ubi_num,
 			 "number of bad PEBs (%d) is above the expected limit "
 			 "(%d), not reserving any PEBs for bad PEB handling, "
 			 "will use available PEBs (if any)",
+=======
+		ubi_warn("number of bad PEBs (%d) is above the expected limit (%d), not reserving any PEBs for bad PEB handling, will use available PEBs (if any)",
+>>>>>>> v3.18
 =======
 		ubi_warn("number of bad PEBs (%d) is above the expected limit (%d), not reserving any PEBs for bad PEB handling, will use available PEBs (if any)",
 >>>>>>> v3.18

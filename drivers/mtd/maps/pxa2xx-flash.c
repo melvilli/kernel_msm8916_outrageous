@@ -14,7 +14,10 @@
 #include <linux/slab.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -53,7 +56,11 @@ static const char * const probes[] = { "RedBoot", "cmdlinepart", NULL };
 static int pxa2xx_flash_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct flash_platform_data *flash = pdev->dev.platform_data;
+=======
+	struct flash_platform_data *flash = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct flash_platform_data *flash = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -69,7 +76,11 @@ static int pxa2xx_flash_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->map.name = (char *) flash->name;
+=======
+	info->map.name = flash->name;
+>>>>>>> v3.18
 =======
 	info->map.name = flash->name;
 >>>>>>> v3.18
@@ -119,8 +130,11 @@ static int pxa2xx_flash_remove(struct platform_device *dev)
 	struct pxa2xx_flash_info *info = platform_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mtd_device_unregister(info->mtd);

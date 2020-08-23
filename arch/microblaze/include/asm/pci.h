@@ -45,6 +45,7 @@ struct pci_dev;
 #define pcibios_assign_all_busses()	0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void pcibios_penalize_isa_irq(int irq, int active)
 {
 	/* We don't do dynamic PCI IRQ allocation */
@@ -58,6 +59,8 @@ extern struct dma_map_ops *get_pci_dma_ops(void);
 #define get_pci_dma_ops()	NULL
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PCI
@@ -131,8 +134,11 @@ extern void of_scan_bus(struct device_node *node, struct pci_bus *bus);
 extern void of_rescan_bus(struct device_node *node, struct pci_bus *bus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int pci_read_irq_line(struct pci_dev *dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int pci_bus_find_capability(struct pci_bus *bus,

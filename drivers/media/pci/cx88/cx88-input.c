@@ -131,8 +131,11 @@ static void cx88_ir_handle_key(struct cx88_IR *ir)
 		data = (data << 4) | ((gpio_key & 0xf0) >> 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc_keydown(ir->dev, data, 0);
 =======
+=======
+>>>>>>> v3.18
 		rc_keydown(ir->dev, RC_TYPE_UNKNOWN, data, 0);
 
 	} else if (ir->core->boardnr == CX88_BOARD_PROLINK_PLAYTVPVR ||
@@ -150,13 +153,20 @@ static void cx88_ir_handle_key(struct cx88_IR *ir)
 			rc_keydown_notimeout(ir->dev, RC_TYPE_NEC, scancode, 0);
 		else
 			rc_keyup(ir->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	} else if (ir->mask_keydown) {
 		/* bit set on keydown */
 		if (gpio & ir->mask_keydown)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc_keydown_notimeout(ir->dev, data, 0);
+=======
+			rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
+>>>>>>> v3.18
 =======
 			rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
 >>>>>>> v3.18
@@ -167,7 +177,11 @@ static void cx88_ir_handle_key(struct cx88_IR *ir)
 		/* bit cleared on keydown */
 		if (0 == (gpio & ir->mask_keyup))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc_keydown_notimeout(ir->dev, data, 0);
+=======
+			rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
+>>>>>>> v3.18
 =======
 			rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
 >>>>>>> v3.18
@@ -177,7 +191,11 @@ static void cx88_ir_handle_key(struct cx88_IR *ir)
 	} else {
 		/* can't distinguish keydown/up :-/ */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc_keydown_notimeout(ir->dev, data, 0);
+=======
+		rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
+>>>>>>> v3.18
 =======
 		rc_keydown_notimeout(ir->dev, RC_TYPE_UNKNOWN, data, 0);
 >>>>>>> v3.18
@@ -362,6 +380,10 @@ int cx88_ir_init(struct cx88_core *core, struct pci_dev *pci)
 		 */
 		ir_codes = RC_MAP_PIXELVIEW_MK12;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rc_type = RC_BIT_NEC;
+>>>>>>> v3.18
 =======
 		rc_type = RC_BIT_NEC;
 >>>>>>> v3.18
@@ -453,7 +475,10 @@ int cx88_ir_init(struct cx88_core *core, struct pci_dev *pci)
 	case CX88_BOARD_TWINHAN_VP1027_DVBS:
 		ir_codes         = RC_MAP_TWINHAN_VP1027_DVBS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc_type          = RC_BIT_NEC;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ir->sampling     = 0xff00; /* address */
@@ -502,7 +527,11 @@ int cx88_ir_init(struct cx88_core *core, struct pci_dev *pci)
 	dev->open = cx88_ir_open;
 	dev->close = cx88_ir_close;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->scanmask = hardware_mask;
+=======
+	dev->scancode_mask = hardware_mask;
+>>>>>>> v3.18
 =======
 	dev->scancode_mask = hardware_mask;
 >>>>>>> v3.18
@@ -513,7 +542,11 @@ int cx88_ir_init(struct cx88_core *core, struct pci_dev *pci)
 	} else {
 		dev->driver_type = RC_DRIVER_SCANCODE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->allowed_protos = rc_type;
+=======
+		dev->allowed_protocols = rc_type;
+>>>>>>> v3.18
 =======
 		dev->allowed_protocols = rc_type;
 >>>>>>> v3.18
@@ -587,7 +620,12 @@ void cx88_ir_irq(struct cx88_core *core)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_key_pvr2000(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw)
+=======
+static int get_key_pvr2000(struct IR_i2c *ir, enum rc_type *protocol,
+			   u32 *scancode, u8 *toggle)
+>>>>>>> v3.18
 =======
 static int get_key_pvr2000(struct IR_i2c *ir, enum rc_type *protocol,
 			   u32 *scancode, u8 *toggle)
@@ -616,8 +654,14 @@ static int get_key_pvr2000(struct IR_i2c *ir, enum rc_type *protocol,
 		   code & 0xff, flags & 0xff);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ir_key = code & 0xff;
 	*ir_raw = code;
+=======
+	*protocol = RC_TYPE_UNKNOWN;
+	*scancode = code & 0xff;
+	*toggle = 0;
+>>>>>>> v3.18
 =======
 	*protocol = RC_TYPE_UNKNOWN;
 	*scancode = code & 0xff;

@@ -57,9 +57,15 @@ static void xonar_ext_power_gpio_changed(struct oxygen *chip)
 		data->has_power = has_power;
 		if (has_power) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_NOTICE "power restored\n");
 		} else {
 			snd_printk(KERN_CRIT
+=======
+			dev_notice(chip->card->dev, "power restored\n");
+		} else {
+			dev_crit(chip->card->dev,
+>>>>>>> v3.18
 =======
 			dev_notice(chip->card->dev, "power restored\n");
 		} else {

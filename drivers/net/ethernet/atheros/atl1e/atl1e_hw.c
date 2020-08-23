@@ -619,7 +619,10 @@ int atl1e_get_speed_and_duplex(struct atl1e_hw *hw, u16 *speed, u16 *duplex)
 	default:
 		return AT_ERR_PHY_SPEED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

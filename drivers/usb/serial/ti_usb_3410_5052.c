@@ -22,7 +22,10 @@
 #include <linux/errno.h>
 #include <linux/firmware.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -49,8 +52,11 @@
 #define TI_FIRMWARE_BUF_SIZE	16284
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TI_WRITE_BUF_SIZE	1024
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define TI_TRANSFER_TIMEOUT	2
@@ -78,7 +84,10 @@ struct ti_port {
 	unsigned int		tp_uart_base_addr;
 	int			tp_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_head_t	tp_write_wait;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ti_device	*tp_tdev;
@@ -87,7 +96,10 @@ struct ti_port {
 	int			tp_read_urb_state;
 	int			tp_write_urb_in_use;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kfifo		write_fifo;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -158,6 +170,7 @@ static int ti_download_firmware(struct ti_device *tdev);
 /* module parameters */
 static int closing_wait = TI_DEFAULT_CLOSING_WAIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ushort vendor_3410[TI_EXTRA_VID_PID_COUNT];
 static unsigned int vendor_3410_count;
 static ushort product_3410[TI_EXTRA_VID_PID_COUNT];
@@ -172,6 +185,11 @@ static unsigned int product_5052_count;
 /* TI_EXTRA_VID_PID_COUNT user defined entries plus 1 terminating */
 /* null entry */
 static struct usb_device_id ti_id_table_3410[16+TI_EXTRA_VID_PID_COUNT+1] = {
+=======
+
+/* supported devices */
+static const struct usb_device_id ti_id_table_3410[] = {
+>>>>>>> v3.18
 =======
 
 /* supported devices */
@@ -194,28 +212,40 @@ static const struct usb_device_id ti_id_table_3410[] = {
 	{ USB_DEVICE(ABBOTT_VENDOR_ID, ABBOTT_STRIP_PORT_ID) },
 	{ USB_DEVICE(TI_VENDOR_ID, FRI2_PRODUCT_ID) },
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static struct usb_device_id ti_id_table_5052[5+TI_EXTRA_VID_PID_COUNT+1] = {
 =======
+=======
+>>>>>>> v3.18
 	{ }	/* terminator */
 };
 
 static const struct usb_device_id ti_id_table_5052[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ USB_DEVICE(TI_VENDOR_ID, TI_5052_BOOT_PRODUCT_ID) },
 	{ USB_DEVICE(TI_VENDOR_ID, TI_5152_BOOT_PRODUCT_ID) },
 	{ USB_DEVICE(TI_VENDOR_ID, TI_5052_EEPROM_PRODUCT_ID) },
 	{ USB_DEVICE(TI_VENDOR_ID, TI_5052_FIRMWARE_PRODUCT_ID) },
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static struct usb_device_id ti_id_table_combined[20+2*TI_EXTRA_VID_PID_COUNT+1] = {
 =======
+=======
+>>>>>>> v3.18
 	{ }	/* terminator */
 };
 
 static const struct usb_device_id ti_id_table_combined[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ USB_DEVICE(TI_VENDOR_ID, TI_3410_PRODUCT_ID) },
 	{ USB_DEVICE(TI_VENDOR_ID, TI_3410_EZ430_ID) },
@@ -238,7 +268,11 @@ static const struct usb_device_id ti_id_table_combined[] = {
 	{ USB_DEVICE(ABBOTT_VENDOR_ID, ABBOTT_STRIP_PORT_ID) },
 	{ USB_DEVICE(TI_VENDOR_ID, FRI2_PRODUCT_ID) },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ }
+=======
+	{ }	/* terminator */
+>>>>>>> v3.18
 =======
 	{ }	/* terminator */
 >>>>>>> v3.18
@@ -331,6 +365,7 @@ MODULE_PARM_DESC(closing_wait,
     "Maximum wait for data to drain in close, in .01 secs, default is 4000");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param_array(vendor_3410, ushort, &vendor_3410_count, S_IRUGO);
 MODULE_PARM_DESC(vendor_3410,
 		"Vendor ids for 3410 based devices, 1-5 short integers");
@@ -387,12 +422,17 @@ module_exit(ti_exit);
 
 
 =======
+=======
+>>>>>>> v3.18
 MODULE_DEVICE_TABLE(usb, ti_id_table_combined);
 
 module_usb_serial_driver(serial_drivers, ti_id_table_combined);
 
 /* Functions */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ti_startup(struct usb_serial *serial)
 {
@@ -402,7 +442,11 @@ static int ti_startup(struct usb_serial *serial)
 
 	dev_dbg(&dev->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"%s - product 0x%4X, num configurations %d, configuration value %d",
+=======
+		"%s - product 0x%4X, num configurations %d, configuration value %d\n",
+>>>>>>> v3.18
 =======
 		"%s - product 0x%4X, num configurations %d, configuration value %d\n",
 >>>>>>> v3.18
@@ -413,10 +457,16 @@ static int ti_startup(struct usb_serial *serial)
 	/* create device structure */
 	tdev = kzalloc(sizeof(struct ti_device), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tdev == NULL) {
 		dev_err(&dev->dev, "%s - out of memory\n", __func__);
 		return -ENOMEM;
 	}
+=======
+	if (!tdev)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	if (!tdev)
 		return -ENOMEM;
@@ -457,6 +507,7 @@ static int ti_startup(struct usb_serial *serial)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (serial->num_bulk_in < serial->num_ports ||
 			serial->num_bulk_out < serial->num_ports) {
 		dev_err(&serial->interface->dev, "missing endpoints\n");
@@ -464,6 +515,8 @@ static int ti_startup(struct usb_serial *serial)
 		goto free_tdev;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -497,11 +550,14 @@ static int ti_port_probe(struct usb_serial_port *port)
 		tport->tp_uart_base_addr = TI_UART2_BASE_ADDR;
 	port->port.closing_wait = msecs_to_jiffies(10 * closing_wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_waitqueue_head(&tport->tp_write_wait);
 	if (kfifo_alloc(&tport->write_fifo, TI_WRITE_BUF_SIZE, GFP_KERNEL)) {
 		kfree(tport);
 		return -ENOMEM;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tport->tp_port = port;
@@ -511,6 +567,11 @@ static int ti_port_probe(struct usb_serial_port *port)
 	usb_set_serial_port_data(port, tport);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	port->port.drain_delay = 3;
+
+>>>>>>> v3.18
 =======
 	port->port.drain_delay = 3;
 
@@ -524,7 +585,10 @@ static int ti_port_remove(struct usb_serial_port *port)
 
 	tport = usb_get_serial_port_data(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfifo_free(&tport->write_fifo);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(tport);
@@ -555,7 +619,11 @@ static int ti_open(struct tty_struct *tty, struct usb_serial_port *port)
 		return -ERESTARTSYS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port_number = port->number - port->serial->minor;
+=======
+	port_number = port->port_number;
+>>>>>>> v3.18
 =======
 	port_number = port->port_number;
 >>>>>>> v3.18
@@ -664,8 +732,11 @@ static int ti_open(struct tty_struct *tty, struct usb_serial_port *port)
 	++tdev->td_open_port_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port->port.drain_delay = 3;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	goto release_lock;
@@ -701,15 +772,21 @@ static void ti_close(struct usb_serial_port *port)
 	tport->tp_write_urb_in_use = 0;
 	spin_lock_irqsave(&tport->tp_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfifo_reset_out(&tport->write_fifo);
 	spin_unlock_irqrestore(&tport->tp_lock, flags);
 
 	port_number = port->number - port->serial->minor;
 =======
+=======
+>>>>>>> v3.18
 	kfifo_reset_out(&port->write_fifo);
 	spin_unlock_irqrestore(&tport->tp_lock, flags);
 
 	port_number = port->port_number;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(&port->dev, "%s - sending TI_CLOSE_PORT\n", __func__);
@@ -747,7 +824,11 @@ static int ti_write(struct tty_struct *tty, struct usb_serial_port *port,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	count = kfifo_in_locked(&tport->write_fifo, data, count,
+=======
+	count = kfifo_in_locked(&port->write_fifo, data, count,
+>>>>>>> v3.18
 =======
 	count = kfifo_in_locked(&port->write_fifo, data, count,
 >>>>>>> v3.18
@@ -770,7 +851,11 @@ static int ti_write_room(struct tty_struct *tty)
 
 	spin_lock_irqsave(&tport->tp_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	room = kfifo_avail(&tport->write_fifo);
+=======
+	room = kfifo_avail(&port->write_fifo);
+>>>>>>> v3.18
 =======
 	room = kfifo_avail(&port->write_fifo);
 >>>>>>> v3.18
@@ -793,7 +878,11 @@ static int ti_chars_in_buffer(struct tty_struct *tty)
 
 	spin_lock_irqsave(&tport->tp_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chars = kfifo_len(&tport->write_fifo);
+=======
+	chars = kfifo_len(&port->write_fifo);
+>>>>>>> v3.18
 =======
 	chars = kfifo_len(&port->write_fifo);
 >>>>>>> v3.18
@@ -854,8 +943,11 @@ static int ti_ioctl(struct tty_struct *tty,
 	struct ti_port *tport = usb_get_serial_port_data(port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s - cmd = 0x%04X\n", __func__, cmd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (tport == NULL)
@@ -884,7 +976,11 @@ static void ti_set_termios(struct tty_struct *tty,
 	int baud;
 	int status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int port_number = port->number - port->serial->minor;
+=======
+	int port_number = port->port_number;
+>>>>>>> v3.18
 =======
 	int port_number = port->port_number;
 >>>>>>> v3.18
@@ -902,10 +998,15 @@ static void ti_set_termios(struct tty_struct *tty,
 
 	config = kmalloc(sizeof(*config), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!config) {
 		dev_err(&port->dev, "%s - out of memory\n", __func__);
 		return;
 	}
+=======
+	if (!config)
+		return;
+>>>>>>> v3.18
 =======
 	if (!config)
 		return;
@@ -962,7 +1063,10 @@ static void ti_set_termios(struct tty_struct *tty,
 		config->wFlags |= TI_UART_ENABLE_CTS_OUT;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tty->hw_stopped = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ti_restart_read(tport, tty);
@@ -995,7 +1099,11 @@ static void ti_set_termios(struct tty_struct *tty,
 
 	dev_dbg(&port->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"%s - BaudRate=%d, wBaudRate=%d, wFlags=0x%04X, bDataBits=%d, bParity=%d, bStopBits=%d, cXon=%d, cXoff=%d, bUartMode=%d",
+=======
+		"%s - BaudRate=%d, wBaudRate=%d, wFlags=0x%04X, bDataBits=%d, bParity=%d, bStopBits=%d, cXon=%d, cXoff=%d, bUartMode=%d\n",
+>>>>>>> v3.18
 =======
 		"%s - BaudRate=%d, wBaudRate=%d, wFlags=0x%04X, bDataBits=%d, bParity=%d, bStopBits=%d, cXon=%d, cXoff=%d, bUartMode=%d\n",
 >>>>>>> v3.18
@@ -1213,7 +1321,10 @@ static void ti_bulk_in_callback(struct urb *urb)
 		dev_dbg(dev, "%s - urb shutting down, %d\n", __func__, status);
 		tport->tp_tdev->td_urb_error = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wake_up_interruptible(&tport->tp_write_wait);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return;
@@ -1222,7 +1333,10 @@ static void ti_bulk_in_callback(struct urb *urb)
 			__func__, status);
 		tport->tp_tdev->td_urb_error = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wake_up_interruptible(&tport->tp_write_wait);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1281,7 +1395,10 @@ static void ti_bulk_out_callback(struct urb *urb)
 		dev_dbg(&port->dev, "%s - urb shutting down, %d\n", __func__, status);
 		tport->tp_tdev->td_urb_error = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wake_up_interruptible(&tport->tp_write_wait);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return;
@@ -1290,7 +1407,10 @@ static void ti_bulk_out_callback(struct urb *urb)
 			__func__, status);
 		tport->tp_tdev->td_urb_error = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wake_up_interruptible(&tport->tp_write_wait);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1332,7 +1452,11 @@ static void ti_send(struct ti_port *tport)
 		goto unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	count = kfifo_out(&tport->write_fifo,
+=======
+	count = kfifo_out(&port->write_fifo,
+>>>>>>> v3.18
 =======
 	count = kfifo_out(&port->write_fifo,
 >>>>>>> v3.18
@@ -1371,7 +1495,10 @@ static void ti_send(struct ti_port *tport)
 	tty_port_tty_wakeup(&port->port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wake_up_interruptible(&tport->tp_write_wait);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return;
@@ -1405,7 +1532,11 @@ static int ti_get_lsr(struct ti_port *tport, u8 *lsr)
 	struct ti_device *tdev = tport->tp_tdev;
 	struct usb_serial_port *port = tport->tp_port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int port_number = port->number - port->serial->minor;
+=======
+	int port_number = port->port_number;
+>>>>>>> v3.18
 =======
 	int port_number = port->port_number;
 >>>>>>> v3.18
@@ -1414,10 +1545,15 @@ static int ti_get_lsr(struct ti_port *tport, u8 *lsr)
 	size = sizeof(struct ti_port_status);
 	data = kmalloc(size, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!data) {
 		dev_err(&port->dev, "%s - out of memory\n", __func__);
 		return -ENOMEM;
 	}
+=======
+	if (!data)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!data)
 		return -ENOMEM;
@@ -1460,15 +1596,21 @@ static int ti_get_serial_info(struct ti_port *tport,
 
 	ret_serial.type = PORT_16550A;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret_serial.line = port->serial->minor;
 	ret_serial.port = port->number - port->serial->minor;
 	ret_serial.flags = tport->tp_flags;
 	ret_serial.xmit_fifo_size = TI_WRITE_BUF_SIZE;
 =======
+=======
+>>>>>>> v3.18
 	ret_serial.line = port->minor;
 	ret_serial.port = port->port_number;
 	ret_serial.flags = tport->tp_flags;
 	ret_serial.xmit_fifo_size = kfifo_size(&port->write_fifo);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret_serial.baud_base = tport->tp_tdev->td_is_3410 ? 921600 : 460800;
 	ret_serial.closing_wait = cwait;
@@ -1529,12 +1671,17 @@ static void ti_handle_new_msr(struct ti_port *tport, __u8 msr)
 	tty = tty_port_tty_get(&tport->tp_port->port);
 	if (tty && C_CRTSCTS(tty)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (msr & TI_MSR_CTS) {
 			tty->hw_stopped = 0;
 			tty_wakeup(tty);
 		} else {
 			tty->hw_stopped = 1;
 		}
+=======
+		if (msr & TI_MSR_CTS)
+			tty_wakeup(tty);
+>>>>>>> v3.18
 =======
 		if (msr & TI_MSR_CTS)
 			tty_wakeup(tty);
@@ -1634,10 +1781,15 @@ static int ti_write_byte(struct usb_serial_port *port,
 	size = sizeof(struct ti_write_data_bytes) + 2;
 	data = kmalloc(size, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!data) {
 		dev_err(&port->dev, "%s - out of memory\n", __func__);
 		return -ENOMEM;
 	}
+=======
+	if (!data)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!data)
 		return -ENOMEM;
@@ -1758,7 +1910,10 @@ static int ti_download_firmware(struct ti_device *tdev)
 		kfree(buffer);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&dev->dev, "%s ENOMEM\n", __func__);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		status = -ENOMEM;

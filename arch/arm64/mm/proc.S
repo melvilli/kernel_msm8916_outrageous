@@ -77,7 +77,10 @@ ENTRY(cpu_reset)
 ENDPROC(cpu_reset)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ENTRY(cpu_soft_restart)
 	/* Save address of cpu_reset() and reset address */
 	mov	x19, x0
@@ -93,6 +96,9 @@ ENTRY(cpu_soft_restart)
 	ret	x19
 ENDPROC(cpu_soft_restart)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *	cpu_do_idle()
@@ -257,6 +263,7 @@ ENDPROC(__cpu_setup)
 	.type	crval, #object
 crval:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_ARM64_ICACHE_DISABLE
 #define CR_IBIT		0
@@ -272,6 +279,10 @@ crval:
 
 	.word	0x000802c2	// clear
 	.word	0x0405c039 | CR_IBIT | CR_CBIT	// set
+=======
+	.word	0x000802e2			// clear
+	.word	0x0405d11d			// set
+>>>>>>> v3.18
 =======
 	.word	0x000802e2			// clear
 	.word	0x0405d11d			// set

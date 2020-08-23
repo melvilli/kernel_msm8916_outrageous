@@ -115,8 +115,11 @@ good_area:
 		if (fault & VM_FAULT_OOM)
 			goto out_of_memory;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (fault & VM_FAULT_SIGSEGV)
 			goto bad_area;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		else if (fault & VM_FAULT_SIGBUS)

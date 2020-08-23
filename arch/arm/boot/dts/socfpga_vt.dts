@@ -17,7 +17,11 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "socfpga.dtsi"
+=======
+#include "socfpga.dtsi"
+>>>>>>> v3.18
 =======
 #include "socfpga.dtsi"
 >>>>>>> v3.18
@@ -46,7 +50,10 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		dwmmc0@ff704000 {
 			num-slots = <1>;
 			broken-cd;
@@ -60,6 +67,9 @@
 			status = "okay";
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		timer0@ffc08000 {
 			clock-frequency = <7000000>;
@@ -91,10 +101,16 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &gmac0 {
 	status = "okay";
 	phy-mode = "gmii";
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

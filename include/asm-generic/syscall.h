@@ -148,7 +148,11 @@ void syscall_set_arguments(struct task_struct *task, struct pt_regs *regs,
  * Returns the AUDIT_ARCH_* based on the system call convention in use.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * It's only valid to call this when @task is stopped on entry to a system
+=======
+ * It's only valid to call this when current is stopped on entry to a system
+>>>>>>> v3.18
 =======
  * It's only valid to call this when current is stopped on entry to a system
 >>>>>>> v3.18

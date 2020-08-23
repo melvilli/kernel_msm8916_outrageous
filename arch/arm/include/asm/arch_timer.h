@@ -18,8 +18,13 @@ int arch_timer_arch_init(void);
  * the code. At least it does so with a recent GCC (4.6.3).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void arch_timer_reg_write_cp15(const int access, const int reg,
 					  u32 val)
+=======
+static __always_inline
+void arch_timer_reg_write_cp15(int access, enum arch_timer_reg reg, u32 val)
+>>>>>>> v3.18
 =======
 static __always_inline
 void arch_timer_reg_write_cp15(int access, enum arch_timer_reg reg, u32 val)
@@ -35,9 +40,13 @@ void arch_timer_reg_write_cp15(int access, enum arch_timer_reg reg, u32 val)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	if (access == ARCH_TIMER_VIRT_ACCESS) {
+=======
+	} else if (access == ARCH_TIMER_VIRT_ACCESS) {
+>>>>>>> v3.18
 =======
 	} else if (access == ARCH_TIMER_VIRT_ACCESS) {
 >>>>>>> v3.18
@@ -55,7 +64,12 @@ void arch_timer_reg_write_cp15(int access, enum arch_timer_reg reg, u32 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 arch_timer_reg_read_cp15(const int access, const int reg)
+=======
+static __always_inline
+u32 arch_timer_reg_read_cp15(int access, enum arch_timer_reg reg)
+>>>>>>> v3.18
 =======
 static __always_inline
 u32 arch_timer_reg_read_cp15(int access, enum arch_timer_reg reg)
@@ -73,9 +87,13 @@ u32 arch_timer_reg_read_cp15(int access, enum arch_timer_reg reg)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	if (access == ARCH_TIMER_VIRT_ACCESS) {
+=======
+	} else if (access == ARCH_TIMER_VIRT_ACCESS) {
+>>>>>>> v3.18
 =======
 	} else if (access == ARCH_TIMER_VIRT_ACCESS) {
 >>>>>>> v3.18
@@ -100,6 +118,7 @@ static inline u32 arch_timer_get_cntfrq(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u64 arch_counter_get_cntpct_cp15(void)
 {
 	u64 cval;
@@ -110,6 +129,9 @@ static inline u64 arch_counter_get_cntpct_cp15(void)
 }
 
 static notrace inline u64 arch_counter_get_cntvct_cp15(void)
+=======
+static inline u64 arch_counter_get_cntvct(void)
+>>>>>>> v3.18
 =======
 static inline u64 arch_counter_get_cntvct(void)
 >>>>>>> v3.18
@@ -134,6 +156,7 @@ static inline void arch_timer_set_cntkctl(u32 cntkctl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void arch_timer_evtstrm_enable(int divider)
 {
 	u32 cntkctl = arch_timer_get_cntkctl();
@@ -145,6 +168,8 @@ static inline void arch_timer_evtstrm_enable(int divider)
 	elf_hwcap |= HWCAP_EVTSTRM;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

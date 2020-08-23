@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -104,8 +108,13 @@ acpi_tb_find_table(char *signature,
 
 			status =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    acpi_tb_verify_table(&acpi_gbl_root_table_list.
 						 tables[i]);
+=======
+			    acpi_tb_validate_table(&acpi_gbl_root_table_list.
+						   tables[i]);
+>>>>>>> v3.18
 =======
 			    acpi_tb_validate_table(&acpi_gbl_root_table_list.
 						   tables[i]);

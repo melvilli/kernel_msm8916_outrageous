@@ -213,7 +213,11 @@ static void wm8350_pga_work(struct work_struct *work)
 	struct snd_soc_dapm_context *dapm =
 	    container_of(work, struct snd_soc_dapm_context, delayed_work.work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = dapm->codec;
+=======
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(dapm);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(dapm);
 >>>>>>> v3.18
@@ -279,7 +283,11 @@ static int pga_event(struct snd_soc_dapm_widget *w,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG();
+=======
+		WARN(1, "Invalid shift %d\n", w->shift);
+>>>>>>> v3.18
 =======
 		WARN(1, "Invalid shift %d\n", w->shift);
 >>>>>>> v3.18
@@ -311,7 +319,11 @@ static int wm8350_put_volsw_2r_vu(struct snd_kcontrol *kcontrol,
 				  struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -358,7 +370,11 @@ static int wm8350_get_volsw_2r(struct snd_kcontrol *kcontrol,
 			       struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -935,6 +951,7 @@ static int wm8350_pcm_hw_params(struct snd_pcm_substream *substream,
 
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -946,6 +963,8 @@ static int wm8350_pcm_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -956,6 +975,9 @@ static int wm8350_pcm_hw_params(struct snd_pcm_substream *substream,
 		iface |= 0x2 << 10;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		iface |= 0x3 << 10;
 		break;
@@ -1331,7 +1353,12 @@ static irqreturn_t wm8350_hpl_jack_handler(int irq, void *data)
 		pm_wakeup_event(wm8350->dev, 250);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_delayed_work(&priv->hpl.work, msecs_to_jiffies(200));
+=======
+	queue_delayed_work(system_power_efficient_wq,
+			   &priv->hpl.work, msecs_to_jiffies(200));
+>>>>>>> v3.18
 =======
 	queue_delayed_work(system_power_efficient_wq,
 			   &priv->hpl.work, msecs_to_jiffies(200));
@@ -1353,7 +1380,12 @@ static irqreturn_t wm8350_hpr_jack_handler(int irq, void *data)
 		pm_wakeup_event(wm8350->dev, 250);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_delayed_work(&priv->hpr.work, msecs_to_jiffies(200));
+=======
+	queue_delayed_work(system_power_efficient_wq,
+			   &priv->hpr.work, msecs_to_jiffies(200));
+>>>>>>> v3.18
 =======
 	queue_delayed_work(system_power_efficient_wq,
 			   &priv->hpr.work, msecs_to_jiffies(200));
@@ -1379,7 +1411,10 @@ int wm8350_hp_jack_detect(struct snd_soc_codec *codec, enum wm8350_jack which,
 	struct wm8350_data *priv = snd_soc_codec_get_drvdata(codec);
 	struct wm8350 *wm8350 = priv->wm8350;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ena;
@@ -1389,7 +1424,10 @@ int wm8350_hp_jack_detect(struct snd_soc_codec *codec, enum wm8350_jack which,
 		priv->hpl.jack = jack;
 		priv->hpl.report = report;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq = WM8350_IRQ_CODEC_JCK_DET_L;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ena = WM8350_JDL_ENA;
@@ -1399,7 +1437,10 @@ int wm8350_hp_jack_detect(struct snd_soc_codec *codec, enum wm8350_jack which,
 		priv->hpr.jack = jack;
 		priv->hpr.report = report;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq = WM8350_IRQ_CODEC_JCK_DET_R;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ena = WM8350_JDR_ENA;
@@ -1552,10 +1593,13 @@ static  int wm8350_codec_probe(struct snd_soc_codec *codec)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->control_data = wm8350->regmap;
 
 	snd_soc_codec_set_cache_io(codec, 8, 16, SND_SOC_REGMAP);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Put the codec into reset if it wasn't already */
@@ -1660,7 +1704,10 @@ static int  wm8350_codec_remove(struct snd_soc_codec *codec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct regmap *wm8350_get_regmap(struct device *dev)
 {
 	struct wm8350 *wm8350 = dev_get_platdata(dev);
@@ -1668,6 +1715,9 @@ static struct regmap *wm8350_get_regmap(struct device *dev)
 	return wm8350->regmap;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct snd_soc_codec_driver soc_codec_dev_wm8350 = {
 	.probe =	wm8350_codec_probe,
@@ -1675,6 +1725,10 @@ static struct snd_soc_codec_driver soc_codec_dev_wm8350 = {
 	.suspend = 	wm8350_suspend,
 	.resume =	wm8350_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_regmap =	wm8350_get_regmap,
+>>>>>>> v3.18
 =======
 	.get_regmap =	wm8350_get_regmap,
 >>>>>>> v3.18

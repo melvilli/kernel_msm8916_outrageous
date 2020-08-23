@@ -352,7 +352,13 @@ static void cm109_urb_irq_callback(struct urb *urb)
 		if (status == -ESHUTDOWN)
 			return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->intf->dev, "%s: urb status %d\n", __func__, status);
+=======
+		dev_err_ratelimited(&dev->intf->dev, "%s: urb status %d\n",
+				    __func__, status);
+		goto out;
+>>>>>>> v3.18
 =======
 		dev_err_ratelimited(&dev->intf->dev, "%s: urb status %d\n",
 				    __func__, status);
@@ -425,15 +431,21 @@ static void cm109_urb_ctl_callback(struct urb *urb)
 	     dev->ctl_data->byte[3]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status)
 		dev_err(&dev->intf->dev, "%s: urb status %d\n", __func__, status);
 =======
+=======
+>>>>>>> v3.18
 	if (status) {
 		if (status == -ESHUTDOWN)
 			return;
 		dev_err_ratelimited(&dev->intf->dev, "%s: urb status %d\n",
 				    __func__, status);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock(&dev->ctl_submit_lock);
@@ -443,7 +455,11 @@ static void cm109_urb_ctl_callback(struct urb *urb)
 	if (likely(!dev->shutdown)) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dev->buzzer_pending) {
+=======
+		if (dev->buzzer_pending || status) {
+>>>>>>> v3.18
 =======
 		if (dev->buzzer_pending || status) {
 >>>>>>> v3.18
@@ -689,10 +705,13 @@ static int cm109_usb_probe(struct usb_interface *intf,
 
 	interface = intf->cur_altsetting;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (interface->desc.bNumEndpoints < 1)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	endpoint = &interface->endpoint[0].desc;

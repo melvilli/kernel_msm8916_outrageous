@@ -112,7 +112,11 @@ static inline int slob_page_free(struct page *sp)
 static void set_slob_page_free(struct page *sp, struct list_head *list)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add(&sp->list, list);
+=======
+	list_add(&sp->lru, list);
+>>>>>>> v3.18
 =======
 	list_add(&sp->lru, list);
 >>>>>>> v3.18
@@ -122,7 +126,11 @@ static void set_slob_page_free(struct page *sp, struct list_head *list)
 static inline void clear_slob_page_free(struct page *sp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_del(&sp->list);
+=======
+	list_del(&sp->lru);
+>>>>>>> v3.18
 =======
 	list_del(&sp->lru);
 >>>>>>> v3.18
@@ -131,7 +139,11 @@ static inline void clear_slob_page_free(struct page *sp)
 
 #define SLOB_UNIT sizeof(slob_t)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SLOB_UNITS(size) (((size) + SLOB_UNIT - 1)/SLOB_UNIT)
+=======
+#define SLOB_UNITS(size) DIV_ROUND_UP(size, SLOB_UNIT)
+>>>>>>> v3.18
 =======
 #define SLOB_UNITS(size) DIV_ROUND_UP(size, SLOB_UNIT)
 >>>>>>> v3.18
@@ -295,7 +307,11 @@ static void *slob_alloc(size_t size, gfp_t gfp, int align, int node)
 	spin_lock_irqsave(&slob_lock, flags);
 	/* Iterate through each partially free page, try to find room */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(sp, slob_list, list) {
+=======
+	list_for_each_entry(sp, slob_list, lru) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(sp, slob_list, lru) {
 >>>>>>> v3.18
@@ -313,7 +329,11 @@ static void *slob_alloc(size_t size, gfp_t gfp, int align, int node)
 
 		/* Attempt to alloc */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prev = sp->list.prev;
+=======
+		prev = sp->lru.prev;
+>>>>>>> v3.18
 =======
 		prev = sp->lru.prev;
 >>>>>>> v3.18
@@ -343,7 +363,11 @@ static void *slob_alloc(size_t size, gfp_t gfp, int align, int node)
 		sp->units = SLOB_UNITS(PAGE_SIZE);
 		sp->freelist = b;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_LIST_HEAD(&sp->list);
+=======
+		INIT_LIST_HEAD(&sp->lru);
+>>>>>>> v3.18
 =======
 		INIT_LIST_HEAD(&sp->lru);
 >>>>>>> v3.18
@@ -487,6 +511,7 @@ __do_kmalloc_node(size_t size, gfp_t gfp, int node, unsigned long caller)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *__kmalloc_node(size_t size, gfp_t gfp, int node)
 {
 	return __do_kmalloc_node(size, gfp, node, _RET_IP_);
@@ -495,12 +520,17 @@ EXPORT_SYMBOL(__kmalloc_node);
 
 #ifdef CONFIG_TRACING
 =======
+=======
+>>>>>>> v3.18
 void *__kmalloc(size_t size, gfp_t gfp)
 {
 	return __do_kmalloc_node(size, gfp, NUMA_NO_NODE, _RET_IP_);
 }
 EXPORT_SYMBOL(__kmalloc);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void *__kmalloc_track_caller(size_t size, gfp_t gfp, unsigned long caller)
 {
@@ -515,7 +545,10 @@ void *__kmalloc_node_track_caller(size_t size, gfp_t gfp,
 }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -571,7 +604,11 @@ int __kmem_cache_create(struct kmem_cache *c, unsigned long flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *kmem_cache_alloc_node(struct kmem_cache *c, gfp_t flags, int node)
+=======
+void *slob_alloc_node(struct kmem_cache *c, gfp_t flags, int node)
+>>>>>>> v3.18
 =======
 void *slob_alloc_node(struct kmem_cache *c, gfp_t flags, int node)
 >>>>>>> v3.18
@@ -595,7 +632,11 @@ void *slob_alloc_node(struct kmem_cache *c, gfp_t flags, int node)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c->ctor)
+=======
+	if (b && c->ctor)
+>>>>>>> v3.18
 =======
 	if (b && c->ctor)
 >>>>>>> v3.18
@@ -605,8 +646,11 @@ void *slob_alloc_node(struct kmem_cache *c, gfp_t flags, int node)
 	return b;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(kmem_cache_alloc_node);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(slob_alloc_node);
 
 void *kmem_cache_alloc(struct kmem_cache *cachep, gfp_t flags)
@@ -628,6 +672,9 @@ void *kmem_cache_alloc_node(struct kmem_cache *cachep, gfp_t gfp, int node)
 }
 EXPORT_SYMBOL(kmem_cache_alloc_node);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void __kmem_cache_free(void *b, int size)
@@ -669,16 +716,22 @@ int __kmem_cache_shutdown(struct kmem_cache *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kmem_cache_shrink(struct kmem_cache *d)
 {
 	return 0;
 }
 EXPORT_SYMBOL(kmem_cache_shrink);
 =======
+=======
+>>>>>>> v3.18
 int __kmem_cache_shrink(struct kmem_cache *d)
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct kmem_cache kmem_cache_boot = {

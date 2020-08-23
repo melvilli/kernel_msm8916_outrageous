@@ -38,8 +38,11 @@
 #include <linux/acpi.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -376,7 +379,10 @@ static struct acpi_prt_entry *acpi_pci_irq_lookup(struct pci_dev *dev, int pin)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_ISA) || IS_ENABLED(CONFIG_EISA)
 static int acpi_isa_register_gsi(struct pci_dev *dev)
 {
@@ -401,6 +407,9 @@ static inline int acpi_isa_register_gsi(struct pci_dev *dev)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int acpi_pci_irq_enable(struct pci_dev *dev)
 {
@@ -449,6 +458,7 @@ int acpi_pci_irq_enable(struct pci_dev *dev)
 	 */
 	if (gsi < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 dev_gsi;
 		/* Interrupt Line values above 0xF are forbidden */
 		if (dev->irq > 0 && (dev->irq <= 0xF) &&
@@ -462,6 +472,11 @@ int acpi_pci_irq_enable(struct pci_dev *dev)
 			dev_warn(&dev->dev, "PCI INT %c: no GSI\n",
 				 pin_name(pin));
 		}
+=======
+		if (acpi_isa_register_gsi(dev))
+			dev_warn(&dev->dev, "PCI INT %c: no GSI\n",
+				 pin_name(pin));
+>>>>>>> v3.18
 =======
 		if (acpi_isa_register_gsi(dev))
 			dev_warn(&dev->dev, "PCI INT %c: no GSI\n",
@@ -506,7 +521,10 @@ void acpi_pci_irq_disable(struct pci_dev *dev)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Keep IOAPIC pin configuration when suspending */
 	if (dev->dev.power.is_prepared)
 		return;
@@ -515,6 +533,9 @@ void acpi_pci_irq_disable(struct pci_dev *dev)
 		return;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	entry = acpi_pci_irq_lookup(dev, pin);
 	if (!entry)
@@ -534,7 +555,12 @@ void acpi_pci_irq_disable(struct pci_dev *dev)
 
 	dev_dbg(&dev->dev, "PCI INT %c disabled\n", pin_name(pin));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_unregister_gsi(gsi);
+=======
+	if (gsi >= 0 && dev->irq > 0)
+		acpi_unregister_gsi(gsi);
+>>>>>>> v3.18
 =======
 	if (gsi >= 0 && dev->irq > 0)
 		acpi_unregister_gsi(gsi);

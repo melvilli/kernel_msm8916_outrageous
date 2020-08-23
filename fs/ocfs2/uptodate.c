@@ -68,7 +68,11 @@ struct ocfs2_meta_cache_item {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct kmem_cache *ocfs2_uptodate_cachep = NULL;
+=======
+static struct kmem_cache *ocfs2_uptodate_cachep;
+>>>>>>> v3.18
 =======
 static struct kmem_cache *ocfs2_uptodate_cachep;
 >>>>>>> v3.18

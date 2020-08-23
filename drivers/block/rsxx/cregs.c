@@ -432,7 +432,10 @@ static int __issue_creg_rw(struct rsxx_cardinfo *card,
 
 	if (completion.st) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		* This read is needed to verify that there has not been any
 		* extreme errors that might have occurred, i.e. EEH. The
@@ -442,6 +445,9 @@ static int __issue_creg_rw(struct rsxx_cardinfo *card,
 		*/
 		ioread32(card->regmap + SCRATCH);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_warn(CARD_TO_DEV(card),
 			"creg command failed(%d x%08x)\n",
@@ -740,12 +746,18 @@ int rsxx_creg_setup(struct rsxx_cardinfo *card)
 	card->creg_ctrl.active_cmd = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	card->creg_ctrl.creg_wq =
 			create_singlethread_workqueue(DRIVER_NAME"_creg");
 	if (!card->creg_ctrl.creg_wq)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_WORK(&card->creg_ctrl.done_work, creg_cmd_done);
 	mutex_init(&card->creg_ctrl.reset_lock);

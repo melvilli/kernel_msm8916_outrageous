@@ -15,8 +15,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -29,6 +33,11 @@
 #include <linux/crc32.h>
 #include <linux/usb/usbnet.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/linux/mdio.h>
+#include <linux/mdio.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/mdio.h>
 #include <linux/mdio.h>
@@ -88,7 +97,10 @@
 	#define AX_MEDIUM_GIGAMODE	0x01
 	#define AX_MEDIUM_FULL_DUPLEX	0x02
 <<<<<<< HEAD
+<<<<<<< HEAD
 	#define AX_MEDIUM_ALWAYS_ONE	0x04
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	#define AX_MEDIUM_EN_125MHZ	0x08
@@ -185,15 +197,21 @@
 	#define GMII_PHY_PGSEL_EXT	0x0007
 	#define GMII_PHY_PGSEL_PAGE0	0x0000
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct ax88179_data {
 =======
+=======
+>>>>>>> v3.18
 	#define GMII_PHY_PGSEL_PAGE3	0x0003
 	#define GMII_PHY_PGSEL_PAGE5	0x0005
 
 struct ax88179_data {
 	u8  eee_enabled;
 	u8  eee_active;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 rxctl;
 	u16 reserved;
@@ -397,7 +415,10 @@ static void ax88179_mdio_write(struct net_device *netdev, int phy_id, int loc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int ax88179_phy_mmd_indirect(struct usbnet *dev, u16 prtad,
 					   u16 devad)
 {
@@ -452,6 +473,9 @@ ax88179_phy_write_mmd_indirect(struct usbnet *dev, u16 prtad, u16 devad,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ax88179_suspend(struct usb_interface *intf, pm_message_t message)
 {
@@ -653,7 +677,10 @@ static int ax88179_set_settings(struct net_device *net, struct ethtool_cmd *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 ax88179_ethtool_get_eee(struct usbnet *dev, struct ethtool_eee *data)
 {
@@ -833,6 +860,9 @@ static int ax88179_set_eee(struct net_device *net, struct ethtool_eee *edata)
 
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ax88179_ioctl(struct net_device *net, struct ifreq *rq, int cmd)
@@ -852,6 +882,11 @@ static const struct ethtool_ops ax88179_ethtool_ops = {
 	.get_settings		= ax88179_get_settings,
 	.set_settings		= ax88179_set_settings,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_eee		= ax88179_get_eee,
+	.set_eee		= ax88179_set_eee,
+>>>>>>> v3.18
 =======
 	.get_eee		= ax88179_get_eee,
 	.set_eee		= ax88179_set_eee,
@@ -954,6 +989,12 @@ static int ax88179_change_mtu(struct net_device *net, int new_mtu)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* max qlen depend on hard_mtu and rx_urb_size */
+	usbnet_update_max_qlen(dev);
+
+>>>>>>> v3.18
 =======
 	/* max qlen depend on hard_mtu and rx_urb_size */
 	usbnet_update_max_qlen(dev);
@@ -1256,6 +1297,10 @@ static int ax88179_bind(struct usbnet *dev, struct usb_interface *intf)
 	u8 *tmp;
 	struct ax88179_data *ax179_data = (struct ax88179_data *)dev->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ethtool_eee eee_data;
+>>>>>>> v3.18
 =======
 	struct ethtool_eee eee_data;
 >>>>>>> v3.18
@@ -1335,8 +1380,13 @@ static int ax88179_bind(struct usbnet *dev, struct usb_interface *intf)
 	/* Configure default medium type => giga */
 	*tmp16 = AX_MEDIUM_RECEIVE_EN | AX_MEDIUM_TXFLOW_CTRLEN |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 AX_MEDIUM_RXFLOW_CTRLEN | AX_MEDIUM_ALWAYS_ONE |
 		 AX_MEDIUM_FULL_DUPLEX | AX_MEDIUM_GIGAMODE;
+=======
+		 AX_MEDIUM_RXFLOW_CTRLEN | AX_MEDIUM_FULL_DUPLEX |
+		 AX_MEDIUM_GIGAMODE;
+>>>>>>> v3.18
 =======
 		 AX_MEDIUM_RXFLOW_CTRLEN | AX_MEDIUM_FULL_DUPLEX |
 		 AX_MEDIUM_GIGAMODE;
@@ -1347,7 +1397,10 @@ static int ax88179_bind(struct usbnet *dev, struct usb_interface *intf)
 	ax88179_led_setting(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ax179_data->eee_enabled = 0;
 	ax179_data->eee_active = 0;
 
@@ -1357,6 +1410,9 @@ static int ax88179_bind(struct usbnet *dev, struct usb_interface *intf)
 	eee_data.advertised = 0;
 	ax88179_ethtool_set_eee(dev, &eee_data);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Restart autoneg */
 	mii_nway_restart(&dev->mii);
@@ -1468,7 +1524,10 @@ ax88179_tx_fixup(struct usbnet *dev, struct sk_buff *skb, gfp_t flags)
 	int mss = skb_shinfo(skb)->gso_size;
 	int headroom;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int tailroom;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1477,6 +1536,7 @@ ax88179_tx_fixup(struct usbnet *dev, struct sk_buff *skb, gfp_t flags)
 	if (((skb->len + 8) % frame_size) == 0)
 		tx_hdr2 |= 0x80008000;	/* Enable padding */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	headroom = skb_headroom(skb);
 	tailroom = skb_tailroom(skb);
@@ -1497,12 +1557,17 @@ ax88179_tx_fixup(struct usbnet *dev, struct sk_buff *skb, gfp_t flags)
 		if (!skb)
 			return NULL;
 =======
+=======
+>>>>>>> v3.18
 	headroom = skb_headroom(skb) - 8;
 
 	if ((skb_header_cloned(skb) || headroom < 0) &&
 	    pskb_expand_head(skb, headroom < 0 ? 8 : 0, 0, GFP_ATOMIC)) {
 		dev_kfree_skb_any(skb);
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1541,7 +1606,11 @@ static int ax88179_link_reset(struct usbnet *dev)
 
 	mode = AX_MEDIUM_RECEIVE_EN | AX_MEDIUM_TXFLOW_CTRLEN |
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       AX_MEDIUM_RXFLOW_CTRLEN | AX_MEDIUM_ALWAYS_ONE;
+=======
+	       AX_MEDIUM_RXFLOW_CTRLEN;
+>>>>>>> v3.18
 =======
 	       AX_MEDIUM_RXFLOW_CTRLEN;
 >>>>>>> v3.18
@@ -1587,6 +1656,11 @@ static int ax88179_link_reset(struct usbnet *dev)
 			  2, 2, &mode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ax179_data->eee_enabled = ax88179_chk_eee(dev);
+
+>>>>>>> v3.18
 =======
 	ax179_data->eee_enabled = ax88179_chk_eee(dev);
 
@@ -1602,6 +1676,11 @@ static int ax88179_reset(struct usbnet *dev)
 	u16 *tmp16;
 	u8 *tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ax88179_data *ax179_data = (struct ax88179_data *)dev->data;
+	struct ethtool_eee eee_data;
+>>>>>>> v3.18
 =======
 	struct ax88179_data *ax179_data = (struct ax88179_data *)dev->data;
 	struct ethtool_eee eee_data;
@@ -1669,8 +1748,13 @@ static int ax88179_reset(struct usbnet *dev)
 	/* Configure default medium type => giga */
 	*tmp16 = AX_MEDIUM_RECEIVE_EN | AX_MEDIUM_TXFLOW_CTRLEN |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 AX_MEDIUM_RXFLOW_CTRLEN | AX_MEDIUM_ALWAYS_ONE |
 		 AX_MEDIUM_FULL_DUPLEX | AX_MEDIUM_GIGAMODE;
+=======
+		 AX_MEDIUM_RXFLOW_CTRLEN | AX_MEDIUM_FULL_DUPLEX |
+		 AX_MEDIUM_GIGAMODE;
+>>>>>>> v3.18
 =======
 		 AX_MEDIUM_RXFLOW_CTRLEN | AX_MEDIUM_FULL_DUPLEX |
 		 AX_MEDIUM_GIGAMODE;
@@ -1681,7 +1765,10 @@ static int ax88179_reset(struct usbnet *dev)
 	ax88179_led_setting(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ax179_data->eee_enabled = 0;
 	ax179_data->eee_active = 0;
 
@@ -1691,6 +1778,9 @@ static int ax88179_reset(struct usbnet *dev)
 	eee_data.advertised = 0;
 	ax88179_ethtool_set_eee(dev, &eee_data);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Restart autoneg */
 	mii_nway_restart(&dev->mii);
@@ -1715,7 +1805,11 @@ static int ax88179_stop(struct usbnet *dev)
 
 static const struct driver_info ax88179_info = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.description = "ASIX AX88179 USB 3.0 Gigibit Ethernet",
+=======
+	.description = "ASIX AX88179 USB 3.0 Gigabit Ethernet",
+>>>>>>> v3.18
 =======
 	.description = "ASIX AX88179 USB 3.0 Gigabit Ethernet",
 >>>>>>> v3.18
@@ -1732,8 +1826,11 @@ static const struct driver_info ax88179_info = {
 
 static const struct driver_info ax88178a_info = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.description = "ASIX AX88178A USB 2.0 Gigibit Ethernet",
 =======
+=======
+>>>>>>> v3.18
 	.description = "ASIX AX88178A USB 2.0 Gigabit Ethernet",
 	.bind = ax88179_bind,
 	.unbind = ax88179_unbind,
@@ -1748,6 +1845,9 @@ static const struct driver_info ax88178a_info = {
 
 static const struct driver_info dlink_dub1312_info = {
 	.description = "D-Link DUB-1312 USB 3.0 to Gigabit Ethernet Adapter",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.bind = ax88179_bind,
 	.unbind = ax88179_unbind,
@@ -1774,7 +1874,10 @@ static const struct driver_info sitecom_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct driver_info samsung_info = {
 	.description = "Samsung USB Ethernet Adapter",
 	.bind = ax88179_bind,
@@ -1801,6 +1904,9 @@ static const struct driver_info lenovo_info = {
 	.tx_fixup = ax88179_tx_fixup,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct usb_device_id products[] = {
 {
@@ -1813,10 +1919,13 @@ static const struct usb_device_id products[] = {
 	.driver_info = (unsigned long)&ax88178a_info,
 }, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Sitecom USB 3.0 to Gigabit Adapter */
 	USB_DEVICE(0x0df6, 0x0072),
 	.driver_info = (unsigned long) &sitecom_info,
 =======
+=======
+>>>>>>> v3.18
 	/* D-Link DUB-1312 USB 3.0 to Gigabit Ethernet Adapter */
 	USB_DEVICE(0x2001, 0x4a00),
 	.driver_info = (unsigned long)&dlink_dub1312_info,
@@ -1832,6 +1941,9 @@ static const struct usb_device_id products[] = {
 	/* Lenovo OneLinkDock Gigabit LAN */
 	USB_DEVICE(0x17ef, 0x304b),
 	.driver_info = (unsigned long)&lenovo_info,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 },
 	{ },
@@ -1845,6 +1957,10 @@ static struct usb_driver ax88179_178a_driver = {
 	.suspend =	ax88179_suspend,
 	.resume =	ax88179_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.reset_resume =	ax88179_resume,
+>>>>>>> v3.18
 =======
 	.reset_resume =	ax88179_resume,
 >>>>>>> v3.18

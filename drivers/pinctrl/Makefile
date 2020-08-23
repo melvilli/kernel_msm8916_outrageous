@@ -3,7 +3,11 @@
 ccflags-$(CONFIG_DEBUG_PINCTRL)	+= -DDEBUG
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_PINCTRL)		+= core.o
+=======
+obj-$(CONFIG_PINCTRL)		+= core.o pinctrl-utils.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_PINCTRL)		+= core.o pinctrl-utils.o
 >>>>>>> v3.18
@@ -13,6 +17,7 @@ ifeq ($(CONFIG_OF),y)
 obj-$(CONFIG_PINCTRL)		+= devicetree.o
 endif
 obj-$(CONFIG_GENERIC_PINCONF)	+= pinconf-generic.o
+<<<<<<< HEAD
 <<<<<<< HEAD
 obj-$(CONFIG_PINCTRL_ABX500)	+= pinctrl-abx500.o
 obj-$(CONFIG_PINCTRL_AB8500)	+= pinctrl-ab8500.o
@@ -40,6 +45,8 @@ obj-$(CONFIG_PINCTRL_SINGLE)	+= pinctrl-single.o
 obj-$(CONFIG_PINCTRL_SIRF)	+= pinctrl-sirf.o
 obj-$(CONFIG_PINCTRL_SUNXI)	+= pinctrl-sunxi.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_PINCTRL_ADI2)	+= pinctrl-adi2.o
 obj-$(CONFIG_PINCTRL_AS3722)	+= pinctrl-as3722.o
 obj-$(CONFIG_PINCTRL_BF54x)	+= pinctrl-adi2-bf54x.o
@@ -53,11 +60,15 @@ obj-$(CONFIG_PINCTRL_PALMAS)	+= pinctrl-palmas.o
 obj-$(CONFIG_PINCTRL_ROCKCHIP)	+= pinctrl-rockchip.o
 obj-$(CONFIG_PINCTRL_SINGLE)	+= pinctrl-single.o
 obj-$(CONFIG_PINCTRL_SIRF)	+= sirf/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_PINCTRL_TEGRA)	+= pinctrl-tegra.o
 obj-$(CONFIG_PINCTRL_TEGRA20)	+= pinctrl-tegra20.o
 obj-$(CONFIG_PINCTRL_TEGRA30)	+= pinctrl-tegra30.o
 obj-$(CONFIG_PINCTRL_TEGRA114)	+= pinctrl-tegra114.o
+<<<<<<< HEAD
 <<<<<<< HEAD
 obj-$(CONFIG_PINCTRL_U300)	+= pinctrl-u300.o
 obj-$(CONFIG_PINCTRL_COH901)	+= pinctrl-coh901.o
@@ -73,6 +84,8 @@ obj-$(CONFIG_ARCH_SHMOBILE)	+= sh-pfc/
 obj-$(CONFIG_SUPERH)		+= sh-pfc/
 obj-$(CONFIG_PLAT_SPEAR)	+= spear/
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_PINCTRL_TEGRA124)	+= pinctrl-tegra124.o
 obj-$(CONFIG_PINCTRL_TEGRA_XUSB)	+= pinctrl-tegra-xusb.o
 obj-$(CONFIG_PINCTRL_TZ1090)	+= pinctrl-tz1090.o
@@ -93,5 +106,8 @@ obj-$(CONFIG_PINCTRL_SAMSUNG)	+= samsung/
 obj-$(CONFIG_PINCTRL_SH_PFC)	+= sh-pfc/
 obj-$(CONFIG_PLAT_SPEAR)	+= spear/
 obj-$(CONFIG_ARCH_SUNXI)	+= sunxi/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_ARCH_VT8500)	+= vt8500/

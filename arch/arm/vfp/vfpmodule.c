@@ -21,8 +21,11 @@
 #include <linux/uaccess.h>
 #include <linux/user.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/export.h>
@@ -90,7 +93,10 @@ static void vfp_force_reload(unsigned int cpu, struct thread_info *thread)
 #ifdef CONFIG_SMP
 	thread->vfpstate.hard.cpu = NR_CPUS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vfp_current_hw_state[cpu] = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -98,11 +104,14 @@ static void vfp_force_reload(unsigned int cpu, struct thread_info *thread)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Used for reporting emulation statistics via /proc
  */
 static atomic64_t vfp_bounce_count = ATOMIC64_INIT(0);
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Per-thread VFP initialization.
@@ -356,7 +365,10 @@ void VFP_bounce(u32 trigger, u32 fpexc, struct pt_regs *regs)
 
 	pr_debug("VFP: bounce: trigger %08x fpexc %08x\n", trigger, fpexc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic64_inc(&vfp_bounce_count);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -468,7 +480,11 @@ static void vfp_enable(void *unused)
 
 #ifdef CONFIG_CPU_PM
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vfp_pm_suspend(void)
+=======
+static int vfp_pm_suspend(void)
+>>>>>>> v3.18
 =======
 static int vfp_pm_suspend(void)
 >>>>>>> v3.18
@@ -498,7 +514,11 @@ static int vfp_pm_suspend(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void vfp_pm_resume(void)
+=======
+static void vfp_pm_resume(void)
+>>>>>>> v3.18
 =======
 static void vfp_pm_resume(void)
 >>>>>>> v3.18
@@ -658,7 +678,10 @@ int vfp_restore_user_hwstate(struct user_vfp __user *ufp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * VFP hardware can lose all context when a CPU goes offline.
  * As we will be running in SMP mode with CPU hotplug, we will save the
@@ -700,6 +723,9 @@ void vfp_kmode_exception(void)
 		pr_crit("BUG: FP instruction issued in kernel mode with FP unit disabled\n");
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_KERNEL_MODE_NEON
 
@@ -749,6 +775,7 @@ EXPORT_SYMBOL(kernel_neon_end);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * VFP hardware can lose all context when a CPU goes offline.
  * As we will be running in SMP mode with CPU hotplug, we will save the
  * hardware state at every thread switch.  We clear our held state when
@@ -790,6 +817,8 @@ static const struct file_operations vfp_bounce_fops = {
 #endif
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * VFP support code initialisation.
@@ -867,8 +896,12 @@ static int __init vfp_init(void)
 #endif
 #ifdef CONFIG_VFPv3
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((fmrx(MVFR1) & 0xf0000000) == 0x10000000 ||
 			    (read_cpuid_id() & 0xff00fc00) == 0x51000400)
+=======
+			if ((fmrx(MVFR1) & 0xf0000000) == 0x10000000)
+>>>>>>> v3.18
 =======
 			if ((fmrx(MVFR1) & 0xf0000000) == 0x10000000)
 >>>>>>> v3.18
@@ -876,6 +909,7 @@ static int __init vfp_init(void)
 #endif
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	return 0;
@@ -894,11 +928,16 @@ static int __init vfp_rootfs_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 core_initcall(vfp_init);
 <<<<<<< HEAD
+<<<<<<< HEAD
 rootfs_initcall(vfp_rootfs_init);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

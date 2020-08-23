@@ -19,7 +19,11 @@
  *
  * TODO:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * -- Add true modem contol line query capability.  Currently we track the
+=======
+ * -- Add true modem control line query capability.  Currently we track the
+>>>>>>> v3.18
 =======
  * -- Add true modem control line query capability.  Currently we track the
 >>>>>>> v3.18
@@ -30,7 +34,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>

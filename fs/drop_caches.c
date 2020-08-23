@@ -45,6 +45,10 @@ static void drop_slab(void)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nodes_setall(shrink.nodes_to_scan);
+>>>>>>> v3.18
 =======
 	nodes_setall(shrink.nodes_to_scan);
 >>>>>>> v3.18
@@ -54,7 +58,11 @@ static void drop_slab(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drop_caches_sysctl_handler(ctl_table *table, int write,
+=======
+int drop_caches_sysctl_handler(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 int drop_caches_sysctl_handler(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -67,11 +75,14 @@ int drop_caches_sysctl_handler(struct ctl_table *table, int write,
 		return ret;
 	if (write) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sysctl_drop_caches & 1)
 			iterate_supers(drop_pagecache_sb, NULL);
 		if (sysctl_drop_caches & 2)
 			drop_slab();
 =======
+=======
+>>>>>>> v3.18
 		static int stfu;
 
 		if (sysctl_drop_caches & 1) {
@@ -88,6 +99,9 @@ int drop_caches_sysctl_handler(struct ctl_table *table, int write,
 				sysctl_drop_caches);
 		}
 		stfu |= sysctl_drop_caches & 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;

@@ -184,7 +184,11 @@ static inline struct pin_desc *pin_desc_get(struct pinctrl_dev *pctldev,
 
 int pinctrl_register_map(struct pinctrl_map const *maps, unsigned num_maps,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 bool dup);
+=======
+			 bool dup, bool locked);
+>>>>>>> v3.18
 =======
 			 bool dup, bool locked);
 >>>>>>> v3.18

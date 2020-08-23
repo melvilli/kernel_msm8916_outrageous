@@ -28,6 +28,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define to_clk_gate(_hw) container_of(_hw, struct clk_gate, hw)
 
 static int clk_gate2_enable(struct clk_hw *hw)
@@ -39,6 +40,8 @@ static int clk_gate2_enable(struct clk_hw *hw)
 	if (gate->lock)
 		spin_lock_irqsave(gate->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 struct clk_gate2 {
 	struct clk_hw hw;
 	void __iomem	*reg;
@@ -60,6 +63,9 @@ static int clk_gate2_enable(struct clk_hw *hw)
 
 	if (gate->share_count && (*gate->share_count)++ > 0)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	reg = readl(gate->reg);
@@ -67,8 +73,13 @@ static int clk_gate2_enable(struct clk_hw *hw)
 	writel(reg, gate->reg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gate->lock)
 		spin_unlock_irqrestore(gate->lock, flags);
+=======
+out:
+	spin_unlock_irqrestore(gate->lock, flags);
+>>>>>>> v3.18
 =======
 out:
 	spin_unlock_irqrestore(gate->lock, flags);
@@ -80,6 +91,7 @@ out:
 static void clk_gate2_disable(struct clk_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clk_gate *gate = to_clk_gate(hw);
 	u32 reg;
 	unsigned long flags = 0;
@@ -87,6 +99,8 @@ static void clk_gate2_disable(struct clk_hw *hw)
 	if (gate->lock)
 		spin_lock_irqsave(gate->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct clk_gate2 *gate = to_clk_gate2(hw);
 	u32 reg;
 	unsigned long flags = 0;
@@ -99,12 +113,16 @@ static void clk_gate2_disable(struct clk_hw *hw)
 		else if (--(*gate->share_count) > 0)
 			goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	reg = readl(gate->reg);
 	reg &= ~(3 << gate->bit_idx);
 	writel(reg, gate->reg);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (gate->lock)
 		spin_unlock_irqrestore(gate->lock, flags);
@@ -119,6 +137,8 @@ static int clk_gate2_is_enabled(struct clk_hw *hw)
 
 	if (((reg >> gate->bit_idx) & 3) == 3)
 =======
+=======
+>>>>>>> v3.18
 out:
 	spin_unlock_irqrestore(gate->lock, flags);
 }
@@ -128,6 +148,9 @@ static int clk_gate2_reg_is_enabled(void __iomem *reg, u8 bit_idx)
 	u32 val = readl(reg);
 
 	if (((val >> bit_idx) & 1) == 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 
@@ -135,7 +158,10 @@ static int clk_gate2_reg_is_enabled(void __iomem *reg, u8 bit_idx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int clk_gate2_is_enabled(struct clk_hw *hw)
 {
 	struct clk_gate2 *gate = to_clk_gate2(hw);
@@ -146,6 +172,9 @@ static int clk_gate2_is_enabled(struct clk_hw *hw)
 		return clk_gate2_reg_is_enabled(gate->reg, gate->bit_idx);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct clk_ops clk_gate2_ops = {
 	.enable = clk_gate2_enable,
@@ -156,6 +185,7 @@ static struct clk_ops clk_gate2_ops = {
 struct clk *clk_register_gate2(struct device *dev, const char *name,
 		const char *parent_name, unsigned long flags,
 		void __iomem *reg, u8 bit_idx,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		u8 clk_gate2_flags, spinlock_t *lock)
 {
@@ -169,6 +199,8 @@ struct clk *clk_register_gate2(struct device *dev, const char *name,
 
 	/* struct clk_gate assignments */
 =======
+=======
+>>>>>>> v3.18
 		u8 clk_gate2_flags, spinlock_t *lock,
 		unsigned int *share_count)
 {
@@ -181,12 +213,19 @@ struct clk *clk_register_gate2(struct device *dev, const char *name,
 		return ERR_PTR(-ENOMEM);
 
 	/* struct clk_gate2 assignments */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gate->reg = reg;
 	gate->bit_idx = bit_idx;
 	gate->flags = clk_gate2_flags;
 	gate->lock = lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gate->share_count = share_count;
+>>>>>>> v3.18
 =======
 	gate->share_count = share_count;
 >>>>>>> v3.18

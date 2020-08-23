@@ -18,6 +18,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_log.h"
 #include "xfs_trans.h"
 #include "xfs_sb.h"
@@ -34,6 +35,8 @@
 #include "xfs_attr.h"
 #include "xfs_buf_item.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_format.h"
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
@@ -44,6 +47,9 @@
 #include "xfs_inode.h"
 #include "xfs_error.h"
 #include "xfs_trans.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_qm.h"
 
@@ -126,24 +132,36 @@ xfs_qm_newmount(
 	if (((uquotaondisk && !XFS_IS_UQUOTA_ON(mp)) ||
 	    (!uquotaondisk &&  XFS_IS_UQUOTA_ON(mp)) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     (pquotaondisk && !XFS_IS_PQUOTA_ON(mp)) ||
 	    (!pquotaondisk &&  XFS_IS_PQUOTA_ON(mp)) ||
 	     (gquotaondisk && !XFS_IS_GQUOTA_ON(mp)) ||
 	    (!gquotaondisk &&  XFS_IS_OQUOTA_ON(mp)))  &&
 =======
+=======
+>>>>>>> v3.18
 	     (gquotaondisk && !XFS_IS_GQUOTA_ON(mp)) ||
 	    (!gquotaondisk &&  XFS_IS_GQUOTA_ON(mp)) ||
 	     (pquotaondisk && !XFS_IS_PQUOTA_ON(mp)) ||
 	    (!pquotaondisk &&  XFS_IS_PQUOTA_ON(mp)))  &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    xfs_dev_is_read_only(mp, "changing quota state")) {
 		xfs_warn(mp, "please mount with%s%s%s%s.",
 			(!quotaondisk ? "out quota" : ""),
 			(uquotaondisk ? " usrquota" : ""),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(pquotaondisk ? " prjquota" : ""),
 			(gquotaondisk ? " grpquota" : ""));
 		return XFS_ERROR(EPERM);
+=======
+			(gquotaondisk ? " grpquota" : ""),
+			(pquotaondisk ? " prjquota" : ""));
+		return -EPERM;
+>>>>>>> v3.18
 =======
 			(gquotaondisk ? " grpquota" : ""),
 			(pquotaondisk ? " prjquota" : ""));

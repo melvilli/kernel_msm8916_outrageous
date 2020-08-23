@@ -151,11 +151,17 @@
 /* Reserved 0x04-0x09 */
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TBID_SIGNUM_SWS     0x0A /* KICK received with SigMask != 0 */
 #define TBID_SIGNUM_SWK     0x0B /* KICK received with SigMask == 0 */
 /* Reserved 0x0C-0x0F */
 #define TBID_SIGNUM_TRT     0x10 /* Timer trigger */
 #define TBID_SIGNUM_LWK     0x11 /* Low level kick (handler provided by TBI) */
+=======
+/* Reserved 0x0A-0x0F */
+#define TBID_SIGNUM_TRT     0x10 /* Timer trigger */
+#define TBID_SIGNUM_LWK     0x11 /* Low level kick */
+>>>>>>> v3.18
 =======
 /* Reserved 0x0A-0x0F */
 #define TBID_SIGNUM_TRT     0x10 /* Timer trigger */
@@ -190,8 +196,12 @@
 #define TBI_TRIG_BIT(SigNum)                                      (\
     ((SigNum) >= TBID_SIGNUM_TRT) ? 1<<((SigNum)-TBID_SIGNUM_TRT) :\
 <<<<<<< HEAD
+<<<<<<< HEAD
     ( ((SigNum) == TBID_SIGNUM_SWS) ||                             \
       ((SigNum) == TBID_SIGNUM_SWK)    ) ?                         \
+=======
+    ((SigNum) == TBID_SIGNUM_LWK) ?                                \
+>>>>>>> v3.18
 =======
     ((SigNum) == TBID_SIGNUM_LWK) ?                                \
 >>>>>>> v3.18
@@ -698,10 +708,15 @@ typedef union _tbires_tag_ {
           code that called the handler.
           
 <<<<<<< HEAD
+<<<<<<< HEAD
    InstOrSWSId is defined firstly as 'Inst' if the SigNum is TBID_SIGNUM_SWx
           and hold the actual SWITCH instruction detected, secondly if SigNum
           is TBID_SIGNUM_SWS the 'SWSId' is defined to hold the Id of the
           software signal detected, in other cases the value of this
+=======
+   Inst is defined as 'Inst' if the SigNum is TBID_SIGNUM_SWx and holds the
+          actual SWITCH instruction detected, in other cases the value of this
+>>>>>>> v3.18
 =======
    Inst is defined as 'Inst' if the SigNum is TBID_SIGNUM_SWx and holds the
           actual SWITCH instruction detected, in other cases the value of this
@@ -725,7 +740,11 @@ typedef union _tbires_tag_ {
  */
 typedef TBIRES (*PTBIAPIFN)( TBIRES State, int SigNum,
 <<<<<<< HEAD
+<<<<<<< HEAD
                              int Triggers, int InstOrSWSId,
+=======
+                             int Triggers, int Inst,
+>>>>>>> v3.18
 =======
                              int Triggers, int Inst,
 >>>>>>> v3.18
@@ -777,7 +796,11 @@ typedef volatile struct _tbi_tag_ {
 /* This handler should be used for TBID_SIGNUM_DFR */
 extern TBIRES __TBIHandleDFR ( TBIRES State, int SigNum,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                int Triggers, int InstOrSWSId,
+=======
+                               int Triggers, int Inst,
+>>>>>>> v3.18
 =======
                                int Triggers, int Inst,
 >>>>>>> v3.18

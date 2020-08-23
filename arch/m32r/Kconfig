@@ -16,6 +16,10 @@ config M32R
 	select ARCH_USES_GETTIMEOFFSET
 	select MODULES_USE_ELF_RELA
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_DEBUG_STACKOVERFLOW
+>>>>>>> v3.18
 =======
 	select HAVE_DEBUG_STACKOVERFLOW
 >>>>>>> v3.18
@@ -281,6 +285,7 @@ config SMP
 	---help---
 	  This enables support for systems with more than one CPU. If you have
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  a system with only one CPU, like most personal computers, say N. If
 	  you have a system with more than one CPU, say Y.
 
@@ -289,6 +294,8 @@ config SMP
 	  you say Y here, the kernel will run on many, but not all,
 	  singleprocessor machines. On a singleprocessor machine, the kernel
 =======
+=======
+>>>>>>> v3.18
 	  a system with only one CPU, say N. If you have a system with more
 	  than one CPU, say Y.
 
@@ -296,6 +303,9 @@ config SMP
 	  machines, but will use only one CPU of a multiprocessor machine. If
 	  you say Y here, the kernel will run on many, but not all,
 	  uniprocessor machines. On a uniprocessor machine, the kernel
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  will run faster if you say N here.
 

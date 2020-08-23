@@ -34,6 +34,10 @@ extern int spinning_secondaries;
 
 extern void cpu_die(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int cpu_to_chip_id(int cpu);
+>>>>>>> v3.18
 =======
 extern int cpu_to_chip_id(int cpu);
 >>>>>>> v3.18
@@ -72,6 +76,7 @@ void generic_set_cpu_dead(unsigned int cpu);
 void generic_set_cpu_up(unsigned int cpu);
 int generic_check_cpu_restart(unsigned int cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern void inhibit_secondary_onlining(void);
 extern void uninhibit_secondary_onlining(void);
@@ -80,6 +85,8 @@ extern void uninhibit_secondary_onlining(void);
 static inline void inhibit_secondary_onlining(void) {}
 static inline void uninhibit_secondary_onlining(void) {}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -127,7 +134,11 @@ extern int cpu_to_core_id(int cpu);
 #define PPC_MSG_CALL_FUNCTION   0
 #define PPC_MSG_RESCHEDULE      1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PPC_MSG_CALL_FUNC_SINGLE	2
+=======
+#define PPC_MSG_TICK_BROADCAST	2
+>>>>>>> v3.18
 =======
 #define PPC_MSG_TICK_BROADCAST	2
 >>>>>>> v3.18
@@ -198,6 +209,11 @@ extern int smp_mpic_probe(void);
 extern void smp_mpic_setup_cpu(int cpu);
 extern int smp_generic_kick_cpu(int nr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int smp_generic_cpu_bootable(unsigned int nr);
+
+>>>>>>> v3.18
 =======
 extern int smp_generic_cpu_bootable(unsigned int nr);
 

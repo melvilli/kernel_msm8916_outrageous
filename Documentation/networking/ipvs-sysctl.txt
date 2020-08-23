@@ -182,7 +182,10 @@ snat_reroute - BOOLEAN
 	to disable snat_reroute and avoid the recalculation.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 sync_persist_mode - INTEGER
 	default 0
 
@@ -196,6 +199,9 @@ sync_persist_mode - INTEGER
 	sloppy_sctp flags on backup servers. For non-persistent services
 	such optimization is not applied, mode 0 is assumed.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 sync_version - INTEGER
 	default 1

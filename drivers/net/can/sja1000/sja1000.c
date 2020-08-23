@@ -107,8 +107,12 @@ static int sja1000_probe_chip(struct net_device *dev)
 
 	if (priv->reg_base && sja1000_is_absent(priv)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "%s: probing @0x%lX failed\n",
 		       DRV_NAME, dev->base_addr);
+=======
+		netdev_err(dev, "probing failed\n");
+>>>>>>> v3.18
 =======
 		netdev_err(dev, "probing failed\n");
 >>>>>>> v3.18
@@ -147,6 +151,10 @@ static void set_normal_mode(struct net_device *dev)
 	struct sja1000_priv *priv = netdev_priv(dev);
 	unsigned char status = priv->read_reg(priv, SJA1000_MOD);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 mod_reg_val = 0x00;
+>>>>>>> v3.18
 =======
 	u8 mod_reg_val = 0x00;
 >>>>>>> v3.18
@@ -168,14 +176,20 @@ static void set_normal_mode(struct net_device *dev)
 		/* set chip to normal mode */
 		if (priv->can.ctrlmode & CAN_CTRLMODE_LISTENONLY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			priv->write_reg(priv, SJA1000_MOD, MOD_LOM);
 		else
 			priv->write_reg(priv, SJA1000_MOD, 0x00);
 =======
+=======
+>>>>>>> v3.18
 			mod_reg_val |= MOD_LOM;
 		if (priv->can.ctrlmode & CAN_CTRLMODE_PRESUME_ACK)
 			mod_reg_val |= MOD_STM;
 		priv->write_reg(priv, SJA1000_MOD, mod_reg_val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		udelay(10);
@@ -187,7 +201,10 @@ static void set_normal_mode(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * initialize SJA1000 chip:
  *   - reset chip
@@ -217,6 +234,9 @@ static void chipset_init(struct net_device *dev)
 	priv->write_reg(priv, SJA1000_OCR, priv->ocr | OCR_MODE_NORMAL);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void sja1000_start(struct net_device *dev)
 {
@@ -227,11 +247,17 @@ static void sja1000_start(struct net_device *dev)
 		set_reset_mode(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Initialize chip if uninitialized at this stage */
 	if (!(priv->read_reg(priv, SJA1000_CDR) & CDR_PELICAN))
 		chipset_init(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Clear error counters and error code capture */
 	priv->write_reg(priv, SJA1000_TXERR, 0x0);
@@ -239,12 +265,15 @@ static void sja1000_start(struct net_device *dev)
 	priv->read_reg(priv, SJA1000_ECC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* clear interrupt flags */
 	priv->read_reg(priv, SJA1000_IR);
 
 	/* clear interrupt flags */
 	priv->read_reg(priv, SJA1000_IR);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* leave reset mode */
@@ -300,6 +329,7 @@ static int sja1000_get_berr_counter(const struct net_device *dev,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * initialize SJA1000 chip:
  *   - reset chip
  *   - set output mode
@@ -331,6 +361,8 @@ static void chipset_init(struct net_device *dev)
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * transmit a CAN message
  * message layout in the sk_buff should be like this:
  * xx xx xx xx	 ff	 ll   00 11 22 33 44 55 66 77
@@ -346,6 +378,10 @@ static netdev_tx_t sja1000_start_xmit(struct sk_buff *skb,
 	canid_t id;
 	uint8_t dreg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 cmd_reg_val = 0x00;
+>>>>>>> v3.18
 =======
 	u8 cmd_reg_val = 0x00;
 >>>>>>> v3.18
@@ -384,10 +420,13 @@ static netdev_tx_t sja1000_start_xmit(struct sk_buff *skb,
 
 	if (priv->can.ctrlmode & CAN_CTRLMODE_ONE_SHOT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sja1000_write_cmdreg(priv, CMD_TR | CMD_AT);
 	else
 		sja1000_write_cmdreg(priv, CMD_TR);
 =======
+=======
+>>>>>>> v3.18
 		cmd_reg_val |= CMD_AT;
 
 	if (priv->can.ctrlmode & CAN_CTRLMODE_LOOPBACK)
@@ -396,6 +435,9 @@ static netdev_tx_t sja1000_start_xmit(struct sk_buff *skb,
 		cmd_reg_val |= CMD_TR;
 
 	sja1000_write_cmdreg(priv, cmd_reg_val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return NETDEV_TX_OK;
@@ -705,16 +747,22 @@ struct net_device *alloc_sja1000dev(int sizeof_priv)
 	priv->can.do_set_mode = sja1000_set_mode;
 	priv->can.do_get_berr_counter = sja1000_get_berr_counter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->can.ctrlmode_supported = CAN_CTRLMODE_3_SAMPLES |
 		CAN_CTRLMODE_BERR_REPORTING | CAN_CTRLMODE_LISTENONLY |
 		CAN_CTRLMODE_ONE_SHOT;
 =======
+=======
+>>>>>>> v3.18
 	priv->can.ctrlmode_supported = CAN_CTRLMODE_LOOPBACK |
 				       CAN_CTRLMODE_LISTENONLY |
 				       CAN_CTRLMODE_3_SAMPLES |
 				       CAN_CTRLMODE_ONE_SHOT |
 				       CAN_CTRLMODE_BERR_REPORTING |
 				       CAN_CTRLMODE_PRESUME_ACK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_init(&priv->cmdreg_lock);
@@ -734,14 +782,20 @@ EXPORT_SYMBOL_GPL(free_sja1000dev);
 
 static const struct net_device_ops sja1000_netdev_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
        .ndo_open               = sja1000_open,
        .ndo_stop               = sja1000_close,
        .ndo_start_xmit         = sja1000_start_xmit,
 =======
+=======
+>>>>>>> v3.18
 	.ndo_open	= sja1000_open,
 	.ndo_stop	= sja1000_close,
 	.ndo_start_xmit	= sja1000_start_xmit,
 	.ndo_change_mtu	= can_change_mtu,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

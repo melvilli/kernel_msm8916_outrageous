@@ -8,10 +8,13 @@
 # Configuration options for the EXYNOS4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 if ARCH_EXYNOS
 
 menu "SAMSUNG EXYNOS SoCs Support"
 =======
+=======
+>>>>>>> v3.18
 menuconfig ARCH_EXYNOS
 	bool "Samsung EXYNOS" if ARCH_MULTI_V7
 	select ARCH_HAS_BANDGAP
@@ -39,11 +42,15 @@ config ARCH_EXYNOS3
 	select ARM_CPU_SUSPEND if PM
 	help
 	  Samsung EXYNOS3 (Crotex-A7) SoC based systems
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ARCH_EXYNOS4
 	bool "SAMSUNG EXYNOS4"
 	default y
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select HAVE_ARM_SCU if SMP
 	select HAVE_SMP
@@ -61,6 +68,8 @@ config ARCH_EXYNOS5
 comment "EXYNOS SoCs"
 
 =======
+=======
+>>>>>>> v3.18
 	select ARM_CPU_SUSPEND if PM_SLEEP
 	select CLKSRC_SAMSUNG_PWM if CPU_EXYNOS4210
 	select CPU_EXYNOS4210
@@ -83,11 +92,15 @@ config SOC_EXYNOS3250
 	default y
 	depends on ARCH_EXYNOS3
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CPU_EXYNOS4210
 	bool "SAMSUNG EXYNOS4210"
 	default y
 	depends on ARCH_EXYNOS4
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select ARM_CPU_SUSPEND if PM
 	select PM_GENERIC_DOMAINS
@@ -98,11 +111,14 @@ config CPU_EXYNOS4210
 	  Enable EXYNOS4210 CPU support
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 config SOC_EXYNOS4212
 	bool "SAMSUNG EXYNOS4212"
 	default y
 	depends on ARCH_EXYNOS4
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select S5P_PM if PM
 	select S5P_SLEEP if PM
@@ -111,15 +127,20 @@ config SOC_EXYNOS4212
 	  Enable EXYNOS4212 SoC support
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 config SOC_EXYNOS4412
 	bool "SAMSUNG EXYNOS4412"
 	default y
 	depends on ARCH_EXYNOS4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SAMSUNG_DMADEV
 	help
 	  Enable EXYNOS4412 SoC support
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -127,6 +148,7 @@ config SOC_EXYNOS5250
 	bool "SAMSUNG EXYNOS5250"
 	default y
 	depends on ARCH_EXYNOS5
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select PM_GENERIC_DOMAINS if PM
 	select S5P_PM if PM
@@ -136,6 +158,8 @@ config SOC_EXYNOS5250
 	help
 	  Enable EXYNOS5250 SoC support
 =======
+=======
+>>>>>>> v3.18
 
 config SOC_EXYNOS5260
 	bool "SAMSUNG EXYNOS5260"
@@ -151,6 +175,9 @@ config SOC_EXYNOS5420
 	bool "SAMSUNG EXYNOS5420"
 	default y
 	depends on ARCH_EXYNOS5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SOC_EXYNOS5440
@@ -158,22 +185,29 @@ config SOC_EXYNOS5440
 	default y
 	depends on ARCH_EXYNOS5
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAS_OPP
 	select ARM_ARCH_TIMER
 	select AUTO_ZRELADDR
 	select PINCTRL
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_DMA_ADDR_T_64BIT if ARM_LPAE
 	select HAVE_ARM_ARCH_TIMER
 	select AUTO_ZRELADDR
 	select MIGHT_HAVE_PCI
 	select PCI_DOMAINS if PCI
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select PINCTRL_EXYNOS5440
 	select PM_OPP
 	help
 	  Enable EXYNOS5440 SoC support
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config EXYNOS_ATAGS
 	bool "ATAGS based boot for EXYNOS (deprecated)"
@@ -544,6 +578,8 @@ endif
 
 endmenu
 =======
+=======
+>>>>>>> v3.18
 config SOC_EXYNOS5800
 	bool "SAMSUNG EXYNOS5800"
 	default y
@@ -557,6 +593,9 @@ config EXYNOS5420_MCPM
 	help
 	  This is needed to provide CPU and cluster power management
 	  on Exynos5420 implementing big.LITTLE.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif

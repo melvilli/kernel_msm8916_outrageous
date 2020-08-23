@@ -34,6 +34,7 @@
 /*
  * To make EFI call EFI runtime service in physical addressing mode we need
 <<<<<<< HEAD
+<<<<<<< HEAD
  * prolog/epilog before/after the invocation to claim the EFI runtime service
  * handler exclusively and to duplicate a memory mapping in low memory space,
  * say 0 - 3G.
@@ -45,6 +46,8 @@ void efi_call_phys_prelog(void)
 	struct desc_ptr gdt_descr;
 
 =======
+=======
+>>>>>>> v3.18
  * prolog/epilog before/after the invocation to disable interrupt, to
  * claim EFI runtime service handler exclusively and to duplicate a memory in
  * low memory space say 0 - 3G.
@@ -75,6 +78,9 @@ void __init efi_call_phys_prolog(void)
 
 	local_irq_save(efi_rt_eflags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	load_cr3(initial_page_table);
 	__flush_tlb_all();
@@ -85,7 +91,11 @@ void __init efi_call_phys_prolog(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void efi_call_phys_epilog(void)
+=======
+void __init efi_call_phys_epilog(void)
+>>>>>>> v3.18
 =======
 void __init efi_call_phys_epilog(void)
 >>>>>>> v3.18
@@ -99,7 +109,10 @@ void __init efi_call_phys_epilog(void)
 	load_cr3(swapper_pg_dir);
 	__flush_tlb_all();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	local_irq_restore(efi_rt_eflags);
 }
@@ -108,5 +121,8 @@ void __init efi_runtime_mkexec(void)
 {
 	if (__supported_pte_mask & _PAGE_NX)
 		runtime_code_page_mkexec();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

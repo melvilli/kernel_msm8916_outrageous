@@ -23,8 +23,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program;  if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+=======
+ * along with this program;  if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program;  if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -116,7 +120,11 @@ struct netlbl_audit {
 	u32 secid;
 	kuid_t loginuid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 sessionid;
+=======
+	unsigned int sessionid;
+>>>>>>> v3.18
 =======
 	unsigned int sessionid;
 >>>>>>> v3.18
@@ -149,7 +157,11 @@ struct netlbl_lsm_cache {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct netlbl_lsm_secattr_catmap - NetLabel LSM secattr category bitmap
+=======
+ * struct netlbl_lsm_catmap - NetLabel LSM secattr category bitmap
+>>>>>>> v3.18
 =======
  * struct netlbl_lsm_catmap - NetLabel LSM secattr category bitmap
 >>>>>>> v3.18
@@ -176,15 +188,21 @@ struct netlbl_lsm_cache {
 					 NETLBL_CATMAP_MAPCNT)
 #define NETLBL_CATMAP_BIT               (NETLBL_CATMAP_MAPTYPE)0x01
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct netlbl_lsm_secattr_catmap {
 	u32 startbit;
 	NETLBL_CATMAP_MAPTYPE bitmap[NETLBL_CATMAP_MAPCNT];
 	struct netlbl_lsm_secattr_catmap *next;
 =======
+=======
+>>>>>>> v3.18
 struct netlbl_lsm_catmap {
 	u32 startbit;
 	NETLBL_CATMAP_MAPTYPE bitmap[NETLBL_CATMAP_MAPCNT];
 	struct netlbl_lsm_catmap *next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -230,7 +248,11 @@ struct netlbl_lsm_secattr {
 	struct {
 		struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct netlbl_lsm_secattr_catmap *cat;
+=======
+			struct netlbl_lsm_catmap *cat;
+>>>>>>> v3.18
 =======
 			struct netlbl_lsm_catmap *cat;
 >>>>>>> v3.18
@@ -283,7 +305,11 @@ static inline void netlbl_secattr_cache_free(struct netlbl_lsm_cache *cache)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * netlbl_secattr_catmap_alloc - Allocate a LSM secattr catmap
+=======
+ * netlbl_catmap_alloc - Allocate a LSM secattr catmap
+>>>>>>> v3.18
 =======
  * netlbl_catmap_alloc - Allocate a LSM secattr catmap
 >>>>>>> v3.18
@@ -295,6 +321,7 @@ static inline void netlbl_secattr_cache_free(struct netlbl_lsm_cache *cache)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct netlbl_lsm_secattr_catmap *netlbl_secattr_catmap_alloc(
 	                                                           gfp_t flags)
 {
@@ -304,6 +331,8 @@ static inline struct netlbl_lsm_secattr_catmap *netlbl_secattr_catmap_alloc(
 /**
  * netlbl_secattr_catmap_free - Free a LSM secattr catmap
 =======
+=======
+>>>>>>> v3.18
 static inline struct netlbl_lsm_catmap *netlbl_catmap_alloc(gfp_t flags)
 {
 	return kzalloc(sizeof(struct netlbl_lsm_catmap), flags);
@@ -311,6 +340,9 @@ static inline struct netlbl_lsm_catmap *netlbl_catmap_alloc(gfp_t flags)
 
 /**
  * netlbl_catmap_free - Free a LSM secattr catmap
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @catmap: the category bitmap
  *
@@ -318,6 +350,7 @@ static inline struct netlbl_lsm_catmap *netlbl_catmap_alloc(gfp_t flags)
  * Free a LSM secattr catmap.
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void netlbl_secattr_catmap_free(
 	                              struct netlbl_lsm_secattr_catmap *catmap)
@@ -330,6 +363,8 @@ static inline void netlbl_secattr_catmap_free(
 		kfree(iter);
 	} while (catmap);
 =======
+=======
+>>>>>>> v3.18
 static inline void netlbl_catmap_free(struct netlbl_lsm_catmap *catmap)
 {
 	struct netlbl_lsm_catmap *iter;
@@ -339,6 +374,9 @@ static inline void netlbl_catmap_free(struct netlbl_lsm_catmap *catmap)
 		catmap = catmap->next;
 		kfree(iter);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -372,7 +410,11 @@ static inline void netlbl_secattr_destroy(struct netlbl_lsm_secattr *secattr)
 		netlbl_secattr_cache_free(secattr->cache);
 	if (secattr->flags & NETLBL_SECATTR_MLS_CAT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netlbl_secattr_catmap_free(secattr->attr.mls.cat);
+=======
+		netlbl_catmap_free(secattr->attr.mls.cat);
+>>>>>>> v3.18
 =======
 		netlbl_catmap_free(secattr->attr.mls.cat);
 >>>>>>> v3.18
@@ -445,6 +487,7 @@ int netlbl_cfg_cipsov4_map_add(u32 doi,
  * LSM security attribute operations
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int netlbl_secattr_catmap_walk(struct netlbl_lsm_secattr_catmap *catmap,
 			       u32 offset);
 int netlbl_secattr_catmap_walk_rng(struct netlbl_lsm_secattr_catmap *catmap,
@@ -457,6 +500,8 @@ int netlbl_secattr_catmap_setrng(struct netlbl_lsm_secattr_catmap *catmap,
 				 u32 end,
 				 gfp_t flags);
 =======
+=======
+>>>>>>> v3.18
 int netlbl_catmap_walk(struct netlbl_lsm_catmap *catmap, u32 offset);
 int netlbl_catmap_walkrng(struct netlbl_lsm_catmap *catmap, u32 offset);
 int netlbl_catmap_getlong(struct netlbl_lsm_catmap *catmap,
@@ -473,6 +518,9 @@ int netlbl_catmap_setlong(struct netlbl_lsm_catmap **catmap,
 			  u32 offset,
 			  unsigned long bitmap,
 			  gfp_t flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -566,6 +614,7 @@ static inline int netlbl_cfg_cipsov4_map_add(u32 doi,
 	return -ENOSYS;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int netlbl_secattr_catmap_walk(
 	                              struct netlbl_lsm_secattr_catmap *catmap,
 				      u32 offset)
@@ -591,6 +640,8 @@ static inline int netlbl_secattr_catmap_setrng(
 				      u32 end,
 				      gfp_t flags)
 =======
+=======
+>>>>>>> v3.18
 static inline int netlbl_catmap_walk(struct netlbl_lsm_catmap *catmap,
 				     u32 offset)
 {
@@ -624,6 +675,9 @@ static inline int netlbl_catmap_setlong(struct netlbl_lsm_catmap **catmap,
 					u32 offset,
 					unsigned long bitmap,
 					gfp_t flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return 0;

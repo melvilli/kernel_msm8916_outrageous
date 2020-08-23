@@ -88,12 +88,15 @@ void
 i915_gem_detect_bit_6_swizzle(struct drm_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_i915_private_t *dev_priv = dev->dev_private;
 	uint32_t swizzle_x = I915_BIT_6_SWIZZLE_UNKNOWN;
 	uint32_t swizzle_y = I915_BIT_6_SWIZZLE_UNKNOWN;
 
 	if (IS_VALLEYVIEW(dev)) {
 =======
+=======
+>>>>>>> v3.18
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	uint32_t swizzle_x = I915_BIT_6_SWIZZLE_UNKNOWN;
 	uint32_t swizzle_y = I915_BIT_6_SWIZZLE_UNKNOWN;
@@ -106,6 +109,9 @@ i915_gem_detect_bit_6_swizzle(struct drm_device *dev)
 		 *
 		 * VLV and CHV don't have GPU swizzling.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		swizzle_x = I915_BIT_6_SWIZZLE_NONE;
 		swizzle_y = I915_BIT_6_SWIZZLE_NONE;
@@ -284,30 +290,42 @@ i915_gem_object_fence_ok(struct drm_i915_gem_object *obj, int tiling_mode)
 
 	if (INTEL_INFO(obj->base.dev)->gen == 3) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (obj->gtt_offset & ~I915_FENCE_START_MASK)
 			return false;
 	} else {
 		if (obj->gtt_offset & ~I830_FENCE_START_MASK)
 =======
+=======
+>>>>>>> v3.18
 		if (i915_gem_obj_ggtt_offset(obj) & ~I915_FENCE_START_MASK)
 			return false;
 	} else {
 		if (i915_gem_obj_ggtt_offset(obj) & ~I830_FENCE_START_MASK)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return false;
 	}
 
 	size = i915_gem_get_gtt_size(obj->base.dev, obj->base.size, tiling_mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (obj->gtt_space->size != size)
 		return false;
 
 	if (obj->gtt_offset & (size - 1))
 =======
+=======
+>>>>>>> v3.18
 	if (i915_gem_obj_ggtt_size(obj) != size)
 		return false;
 
 	if (i915_gem_obj_ggtt_offset(obj) & (size - 1))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return false;
 
@@ -324,7 +342,11 @@ i915_gem_set_tiling(struct drm_device *dev, void *data,
 {
 	struct drm_i915_gem_set_tiling *args = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_i915_private_t *dev_priv = dev->dev_private;
+=======
+	struct drm_i915_private *dev_priv = dev->dev_private;
+>>>>>>> v3.18
 =======
 	struct drm_i915_private *dev_priv = dev->dev_private;
 >>>>>>> v3.18
@@ -342,7 +364,11 @@ i915_gem_set_tiling(struct drm_device *dev, void *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (obj->pin_count) {
+=======
+	if (i915_gem_obj_is_pinned(obj) || obj->framebuffer_references) {
+>>>>>>> v3.18
 =======
 	if (i915_gem_obj_is_pinned(obj) || obj->framebuffer_references) {
 >>>>>>> v3.18
@@ -395,6 +421,7 @@ i915_gem_set_tiling(struct drm_device *dev, void *data,
 		 * whilst executing a fenced command for an untiled object.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		obj->map_and_fenceable =
 			obj->gtt_space == NULL ||
@@ -415,6 +442,8 @@ i915_gem_set_tiling(struct drm_device *dev, void *data,
 			obj->fence_dirty =
 				obj->fenced_gpu_access ||
 =======
+=======
+>>>>>>> v3.18
 		if (obj->map_and_fenceable &&
 		    !i915_gem_object_fence_ok(obj, args->tiling_mode))
 			ret = i915_gem_object_ggtt_unbind(obj);
@@ -422,6 +451,9 @@ i915_gem_set_tiling(struct drm_device *dev, void *data,
 		if (ret == 0) {
 			obj->fence_dirty =
 				obj->last_fenced_seqno ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				obj->fence_reg != I915_FENCE_REG_NONE;
 
@@ -440,7 +472,11 @@ i915_gem_set_tiling(struct drm_device *dev, void *data,
 	if (i915_gem_object_needs_bit17_swizzle(obj)) {
 		if (obj->bit_17 == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			obj->bit_17 = kmalloc(BITS_TO_LONGS(obj->base.size >> PAGE_SHIFT) *
+=======
+			obj->bit_17 = kcalloc(BITS_TO_LONGS(obj->base.size >> PAGE_SHIFT),
+>>>>>>> v3.18
 =======
 			obj->bit_17 = kcalloc(BITS_TO_LONGS(obj->base.size >> PAGE_SHIFT),
 >>>>>>> v3.18
@@ -466,7 +502,11 @@ i915_gem_get_tiling(struct drm_device *dev, void *data,
 {
 	struct drm_i915_gem_get_tiling *args = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_i915_private_t *dev_priv = dev->dev_private;
+=======
+	struct drm_i915_private *dev_priv = dev->dev_private;
+>>>>>>> v3.18
 =======
 	struct drm_i915_private *dev_priv = dev->dev_private;
 >>>>>>> v3.18
@@ -559,8 +599,13 @@ i915_gem_object_save_bit_17_swizzle(struct drm_i915_gem_object *obj)
 
 	if (obj->bit_17 == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		obj->bit_17 = kmalloc(BITS_TO_LONGS(page_count) *
 					   sizeof(long), GFP_KERNEL);
+=======
+		obj->bit_17 = kcalloc(BITS_TO_LONGS(page_count),
+				      sizeof(long), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		obj->bit_17 = kcalloc(BITS_TO_LONGS(page_count),
 				      sizeof(long), GFP_KERNEL);

@@ -209,6 +209,7 @@ static int
 acpi_cpufreq_target (
 	struct cpufreq_policy   *policy,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int target_freq,
 	unsigned int relation)
 {
@@ -246,11 +247,16 @@ acpi_cpufreq_verify (
 
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned int index)
 {
 	return processor_set_freq(acpi_io_data[policy->cpu], policy, index);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 acpi_cpufreq_cpu_init (
@@ -294,7 +300,11 @@ acpi_cpufreq_cpu_init (
 
 	/* alloc freq_table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->freq_table = kmalloc(sizeof(*data->freq_table) *
+=======
+	data->freq_table = kzalloc(sizeof(*data->freq_table) *
+>>>>>>> v3.18
 =======
 	data->freq_table = kzalloc(sizeof(*data->freq_table) *
 >>>>>>> v3.18
@@ -315,7 +325,10 @@ acpi_cpufreq_cpu_init (
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	policy->cur = processor_get_freq(data, policy->cpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -323,7 +336,10 @@ acpi_cpufreq_cpu_init (
 	for (i = 0; i <= data->acpi_data.state_count; i++)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		data->freq_table[i].driver_data = i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (i < data->acpi_data.state_count) {
@@ -335,7 +351,11 @@ acpi_cpufreq_cpu_init (
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = cpufreq_frequency_table_cpuinfo(policy, data->freq_table);
+=======
+	result = cpufreq_table_validate_and_show(policy, data->freq_table);
+>>>>>>> v3.18
 =======
 	result = cpufreq_table_validate_and_show(policy, data->freq_table);
 >>>>>>> v3.18
@@ -360,8 +380,11 @@ acpi_cpufreq_cpu_init (
 			(u32) data->acpi_data.states[i].control);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_frequency_table_get_attr(data->freq_table, policy->cpu);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* the first call to ->target() should result in us actually
@@ -392,7 +415,10 @@ acpi_cpufreq_cpu_exit (
 
 	if (data) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpufreq_frequency_table_put_attr(policy->cpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		acpi_io_data[policy->cpu] = NULL;
@@ -405,6 +431,7 @@ acpi_cpufreq_cpu_exit (
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct freq_attr* acpi_cpufreq_attr[] = {
 	&cpufreq_freq_attr_scaling_available_freqs,
@@ -420,12 +447,21 @@ static struct cpufreq_driver acpi_cpufreq_driver = {
 	.verify 	= cpufreq_generic_frequency_table_verify,
 	.target_index	= acpi_cpufreq_target,
 >>>>>>> v3.18
+=======
+static struct cpufreq_driver acpi_cpufreq_driver = {
+	.verify 	= cpufreq_generic_frequency_table_verify,
+	.target_index	= acpi_cpufreq_target,
+>>>>>>> v3.18
 	.get 		= acpi_cpufreq_get,
 	.init		= acpi_cpufreq_cpu_init,
 	.exit		= acpi_cpufreq_cpu_exit,
 	.name		= "acpi-cpufreq",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.attr           = acpi_cpufreq_attr,
+=======
+	.attr		= cpufreq_generic_attr,
+>>>>>>> v3.18
 =======
 	.attr		= cpufreq_generic_attr,
 >>>>>>> v3.18

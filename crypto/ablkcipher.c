@@ -17,9 +17,13 @@
 #include <linux/cpumask.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
+=======
+#include <linux/kernel.h>
+>>>>>>> v3.18
 =======
 #include <linux/kernel.h>
 >>>>>>> v3.18
@@ -35,8 +39,11 @@
 #include "internal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *skcipher_default_geniv __read_mostly;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct ablkcipher_buffer {
@@ -387,7 +394,10 @@ static int crypto_init_ablkcipher_ops(struct crypto_tfm *tfm, u32 type,
 	crt->base = __crypto_ablkcipher_cast(tfm);
 	crt->ivsize = alg->ivsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crt->has_setkey = alg->max_keysize;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -472,7 +482,10 @@ static int crypto_init_givcipher_ops(struct crypto_tfm *tfm, u32 type,
 	crt->base = __crypto_ablkcipher_cast(tfm);
 	crt->ivsize = alg->ivsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crt->has_setkey = alg->max_keysize;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -543,8 +556,12 @@ const char *crypto_default_geniv(const struct crypto_alg *alg)
 		return "chainiv";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return alg->cra_flags & CRYPTO_ALG_ASYNC ?
 	       "eseqiv" : skcipher_default_geniv;
+=======
+	return "eseqiv";
+>>>>>>> v3.18
 =======
 	return "eseqiv";
 >>>>>>> v3.18
@@ -720,7 +737,11 @@ err:
 		if (err != -EAGAIN)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fatal_signal_pending(current)) {
+=======
+		if (signal_pending(current)) {
+>>>>>>> v3.18
 =======
 		if (signal_pending(current)) {
 >>>>>>> v3.18
@@ -732,6 +753,7 @@ err:
 	return ERR_PTR(err);
 }
 EXPORT_SYMBOL_GPL(crypto_alloc_ablkcipher);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int __init skcipher_module_init(void)
@@ -747,5 +769,7 @@ static void skcipher_module_exit(void)
 
 module_init(skcipher_module_init);
 module_exit(skcipher_module_exit);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

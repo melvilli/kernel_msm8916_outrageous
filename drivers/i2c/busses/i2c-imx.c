@@ -12,11 +12,14 @@
  *	GNU General Public License for more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	You should have received a copy of the GNU General Public License
  *	along with this program; if not, write to the Free Software
  *	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307,
  *	USA.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Author:
@@ -34,6 +37,11 @@
  *	Copyright (C) 2008 Darius Augulis <darius.augulis at teltonika.lt>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *	Copyright 2013 Freescale Semiconductor, Inc.
+ *
+>>>>>>> v3.18
 =======
  *	Copyright 2013 Freescale Semiconductor, Inc.
  *
@@ -59,8 +67,11 @@
 #include <linux/of.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_data/i2c-imx.h>
@@ -75,6 +86,7 @@
 #define IMX_I2C_BIT_RATE	100000	/* 100kHz */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* IMX I2C registers */
 #define IMX_I2C_IADR	0x00	/* i2c slave address */
 #define IMX_I2C_IFDR	0x04	/* i2c frequency divider */
@@ -82,6 +94,8 @@
 #define IMX_I2C_I2SR	0x0C	/* i2c status */
 #define IMX_I2C_I2DR	0x10	/* i2c transfer data */
 =======
+=======
+>>>>>>> v3.18
 /* IMX I2C registers:
  * the I2C register offset is different between SoCs,
  * to provid support for all these chips, split the
@@ -98,6 +112,9 @@
 
 #define IMX_I2C_REGSHIFT	2
 #define VF610_I2C_REGSHIFT	0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Bits of IMX I2C registers */
@@ -116,7 +133,10 @@
 #define I2CR_IEN	0x80
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* register bits different operating codes definition:
  * 1) I2SR: Interrupt flags clear operation differ between SoCs:
  * - write zero to clear(w0c) INT flag on i.MX,
@@ -130,6 +150,9 @@
 #define I2CR_IEN_OPCODE_0	0x0
 #define I2CR_IEN_OPCODE_1	I2CR_IEN
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /** Variables ******************************************************************
 *******************************************************************************/
@@ -143,15 +166,21 @@
  * Duplicated divider values removed from list
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static u16 __initdata i2c_clk_div[50][2] = {
 =======
+=======
+>>>>>>> v3.18
 struct imx_i2c_clk_pair {
 	u16	div;
 	u16	val;
 };
 
 static struct imx_i2c_clk_pair imx_i2c_clk_div[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 22,	0x20 }, { 24,	0x21 }, { 26,	0x22 }, { 28,	0x23 },
 	{ 30,	0x00 },	{ 32,	0x24 }, { 36,	0x25 }, { 40,	0x26 },
@@ -169,10 +198,13 @@ static struct imx_i2c_clk_pair imx_i2c_clk_div[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum imx_i2c_type {
 	IMX1_I2C,
 	IMX21_I2C,
 =======
+=======
+>>>>>>> v3.18
 /* Vybrid VF610 clock divider, register value pairs */
 static struct imx_i2c_clk_pair vf610_i2c_clk_div[] = {
 	{ 20,   0x00 }, { 22,   0x01 }, { 24,   0x02 }, { 26,   0x03 },
@@ -205,6 +237,9 @@ struct imx_i2c_hwdata {
 	unsigned		ndivs;
 	unsigned		i2sr_clr_opcode;
 	unsigned		i2cr_ien_opcode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -218,8 +253,11 @@ struct imx_i2c_struct {
 	int			stopped;
 	unsigned int		ifdr; /* IMX_I2C_IFDR */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum imx_i2c_type	devtype;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		cur_clk;
 	unsigned int		bitrate;
 	const struct imx_i2c_hwdata	*hwdata;
@@ -253,6 +291,9 @@ static struct imx_i2c_hwdata vf610_i2c_hwdata = {
 	.i2sr_clr_opcode	= I2SR_CLR_OPCODE_W1C,
 	.i2cr_ien_opcode	= I2CR_IEN_OPCODE_0,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -260,15 +301,21 @@ static struct platform_device_id imx_i2c_devtype[] = {
 	{
 		.name = "imx1-i2c",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.driver_data = IMX1_I2C,
 	}, {
 		.name = "imx21-i2c",
 		.driver_data = IMX21_I2C,
 =======
+=======
+>>>>>>> v3.18
 		.driver_data = (kernel_ulong_t)&imx1_i2c_hwdata,
 	}, {
 		.name = "imx21-i2c",
 		.driver_data = (kernel_ulong_t)&imx21_i2c_hwdata,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}, {
 		/* sentinel */
@@ -277,6 +324,7 @@ static struct platform_device_id imx_i2c_devtype[] = {
 MODULE_DEVICE_TABLE(platform, imx_i2c_devtype);
 
 static const struct of_device_id i2c_imx_dt_ids[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ .compatible = "fsl,imx1-i2c", .data = &imx_i2c_devtype[IMX1_I2C], },
 	{ .compatible = "fsl,imx21-i2c", .data = &imx_i2c_devtype[IMX21_I2C], },
@@ -287,6 +335,8 @@ static inline int is_imx1_i2c(struct imx_i2c_struct *i2c_imx)
 {
 	return i2c_imx->devtype == IMX1_I2C;
 =======
+=======
+>>>>>>> v3.18
 	{ .compatible = "fsl,imx1-i2c", .data = &imx1_i2c_hwdata, },
 	{ .compatible = "fsl,imx21-i2c", .data = &imx21_i2c_hwdata, },
 	{ .compatible = "fsl,vf610-i2c", .data = &vf610_i2c_hwdata, },
@@ -309,6 +359,9 @@ static inline unsigned char imx_i2c_read_reg(struct imx_i2c_struct *i2c_imx,
 		unsigned int reg)
 {
 	return readb(i2c_imx->base + (reg << i2c_imx->hwdata->regshift));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -324,8 +377,11 @@ static int i2c_imx_bus_busy(struct imx_i2c_struct *i2c_imx, int for_busy)
 
 	while (1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		temp = readb(i2c_imx->base + IMX_I2C_I2SR);
 =======
+=======
+>>>>>>> v3.18
 		temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2SR);
 
 		/* check for arbitration lost */
@@ -335,6 +391,9 @@ static int i2c_imx_bus_busy(struct imx_i2c_struct *i2c_imx, int for_busy)
 			return -EAGAIN;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (for_busy && (temp & I2SR_IBB))
 			break;
@@ -367,7 +426,11 @@ static int i2c_imx_trx_complete(struct imx_i2c_struct *i2c_imx)
 static int i2c_imx_acked(struct imx_i2c_struct *i2c_imx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (readb(i2c_imx->base + IMX_I2C_I2SR) & I2SR_RXAK) {
+=======
+	if (imx_i2c_read_reg(i2c_imx, IMX_I2C_I2SR) & I2SR_RXAK) {
+>>>>>>> v3.18
 =======
 	if (imx_i2c_read_reg(i2c_imx, IMX_I2C_I2SR) & I2SR_RXAK) {
 >>>>>>> v3.18
@@ -380,7 +443,10 @@ static int i2c_imx_acked(struct imx_i2c_struct *i2c_imx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void i2c_imx_set_clk(struct imx_i2c_struct *i2c_imx)
 {
 	struct imx_i2c_clk_pair *i2c_clk_div = i2c_imx->hwdata->clk_div;
@@ -423,6 +489,9 @@ static void i2c_imx_set_clk(struct imx_i2c_struct *i2c_imx)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int i2c_imx_start(struct imx_i2c_struct *i2c_imx)
 {
@@ -432,12 +501,15 @@ static int i2c_imx_start(struct imx_i2c_struct *i2c_imx)
 	dev_dbg(&i2c_imx->adapter.dev, "<%s>\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_prepare_enable(i2c_imx->clk);
 	writeb(i2c_imx->ifdr, i2c_imx->base + IMX_I2C_IFDR);
 	/* Enable I2C controller */
 	writeb(0, i2c_imx->base + IMX_I2C_I2SR);
 	writeb(I2CR_IEN, i2c_imx->base + IMX_I2C_I2CR);
 =======
+=======
+>>>>>>> v3.18
 	i2c_imx_set_clk(i2c_imx);
 
 	result = clk_prepare_enable(i2c_imx->clk);
@@ -447,6 +519,9 @@ static int i2c_imx_start(struct imx_i2c_struct *i2c_imx)
 	/* Enable I2C controller */
 	imx_i2c_write_reg(i2c_imx->hwdata->i2sr_clr_opcode, i2c_imx, IMX_I2C_I2SR);
 	imx_i2c_write_reg(i2c_imx->hwdata->i2cr_ien_opcode, i2c_imx, IMX_I2C_I2CR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Wait controller to be stable */
@@ -454,9 +529,15 @@ static int i2c_imx_start(struct imx_i2c_struct *i2c_imx)
 
 	/* Start I2C transaction */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	temp = readb(i2c_imx->base + IMX_I2C_I2CR);
 	temp |= I2CR_MSTA;
 	writeb(temp, i2c_imx->base + IMX_I2C_I2CR);
+=======
+	temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2CR);
+	temp |= I2CR_MSTA;
+	imx_i2c_write_reg(temp, i2c_imx, IMX_I2C_I2CR);
+>>>>>>> v3.18
 =======
 	temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2CR);
 	temp |= I2CR_MSTA;
@@ -469,7 +550,11 @@ static int i2c_imx_start(struct imx_i2c_struct *i2c_imx)
 
 	temp |= I2CR_IIEN | I2CR_MTX | I2CR_TXAK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writeb(temp, i2c_imx->base + IMX_I2C_I2CR);
+=======
+	imx_i2c_write_reg(temp, i2c_imx, IMX_I2C_I2CR);
+>>>>>>> v3.18
 =======
 	imx_i2c_write_reg(temp, i2c_imx, IMX_I2C_I2CR);
 >>>>>>> v3.18
@@ -484,9 +569,15 @@ static void i2c_imx_stop(struct imx_i2c_struct *i2c_imx)
 		/* Stop I2C transaction */
 		dev_dbg(&i2c_imx->adapter.dev, "<%s>\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		temp = readb(i2c_imx->base + IMX_I2C_I2CR);
 		temp &= ~(I2CR_MSTA | I2CR_MTX);
 		writeb(temp, i2c_imx->base + IMX_I2C_I2CR);
+=======
+		temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2CR);
+		temp &= ~(I2CR_MSTA | I2CR_MTX);
+		imx_i2c_write_reg(temp, i2c_imx, IMX_I2C_I2CR);
+>>>>>>> v3.18
 =======
 		temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2CR);
 		temp &= ~(I2CR_MSTA | I2CR_MTX);
@@ -507,6 +598,7 @@ static void i2c_imx_stop(struct imx_i2c_struct *i2c_imx)
 	}
 
 	/* Disable I2C controller */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	writeb(0, i2c_imx->base + IMX_I2C_I2CR);
 	clk_disable_unprepare(i2c_imx->clk);
@@ -551,11 +643,16 @@ static void __init i2c_imx_set_clk(struct imx_i2c_struct *i2c_imx,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	temp = i2c_imx->hwdata->i2cr_ien_opcode ^ I2CR_IEN,
 	imx_i2c_write_reg(temp, i2c_imx, IMX_I2C_I2CR);
 	clk_disable_unprepare(i2c_imx->clk);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static irqreturn_t i2c_imx_isr(int irq, void *dev_id)
 {
@@ -563,7 +660,11 @@ static irqreturn_t i2c_imx_isr(int irq, void *dev_id)
 	unsigned int temp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	temp = readb(i2c_imx->base + IMX_I2C_I2SR);
+=======
+	temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2SR);
+>>>>>>> v3.18
 =======
 	temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2SR);
 >>>>>>> v3.18
@@ -572,7 +673,12 @@ static irqreturn_t i2c_imx_isr(int irq, void *dev_id)
 		i2c_imx->i2csr = temp;
 		temp &= ~I2SR_IIF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		writeb(temp, i2c_imx->base + IMX_I2C_I2SR);
+=======
+		temp |= (i2c_imx->hwdata->i2sr_clr_opcode & I2SR_IIF);
+		imx_i2c_write_reg(temp, i2c_imx, IMX_I2C_I2SR);
+>>>>>>> v3.18
 =======
 		temp |= (i2c_imx->hwdata->i2sr_clr_opcode & I2SR_IIF);
 		imx_i2c_write_reg(temp, i2c_imx, IMX_I2C_I2SR);
@@ -593,7 +699,11 @@ static int i2c_imx_write(struct imx_i2c_struct *i2c_imx, struct i2c_msg *msgs)
 
 	/* write slave address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writeb(msgs->addr << 1, i2c_imx->base + IMX_I2C_I2DR);
+=======
+	imx_i2c_write_reg(msgs->addr << 1, i2c_imx, IMX_I2C_I2DR);
+>>>>>>> v3.18
 =======
 	imx_i2c_write_reg(msgs->addr << 1, i2c_imx, IMX_I2C_I2DR);
 >>>>>>> v3.18
@@ -611,7 +721,11 @@ static int i2c_imx_write(struct imx_i2c_struct *i2c_imx, struct i2c_msg *msgs)
 			"<%s> write byte: B%d=0x%X\n",
 			__func__, i, msgs->buf[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		writeb(msgs->buf[i], i2c_imx->base + IMX_I2C_I2DR);
+=======
+		imx_i2c_write_reg(msgs->buf[i], i2c_imx, IMX_I2C_I2DR);
+>>>>>>> v3.18
 =======
 		imx_i2c_write_reg(msgs->buf[i], i2c_imx, IMX_I2C_I2DR);
 >>>>>>> v3.18
@@ -626,16 +740,22 @@ static int i2c_imx_write(struct imx_i2c_struct *i2c_imx, struct i2c_msg *msgs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int i2c_imx_read(struct imx_i2c_struct *i2c_imx, struct i2c_msg *msgs)
 {
 	int i, result;
 	unsigned int temp;
 =======
+=======
+>>>>>>> v3.18
 static int i2c_imx_read(struct imx_i2c_struct *i2c_imx, struct i2c_msg *msgs, bool is_lastmsg)
 {
 	int i, result;
 	unsigned int temp;
 	int block_data = msgs->flags & I2C_M_RECV_LEN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(&i2c_imx->adapter.dev,
@@ -644,7 +764,11 @@ static int i2c_imx_read(struct imx_i2c_struct *i2c_imx, struct i2c_msg *msgs, bo
 
 	/* write slave address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writeb((msgs->addr << 1) | 0x01, i2c_imx->base + IMX_I2C_I2DR);
+=======
+	imx_i2c_write_reg((msgs->addr << 1) | 0x01, i2c_imx, IMX_I2C_I2DR);
+>>>>>>> v3.18
 =======
 	imx_i2c_write_reg((msgs->addr << 1) | 0x01, i2c_imx, IMX_I2C_I2DR);
 >>>>>>> v3.18
@@ -659,6 +783,7 @@ static int i2c_imx_read(struct imx_i2c_struct *i2c_imx, struct i2c_msg *msgs, bo
 
 	/* setup bus to read data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	temp = readb(i2c_imx->base + IMX_I2C_I2CR);
 	temp &= ~I2CR_MTX;
 	if (msgs->len - 1)
@@ -666,6 +791,8 @@ static int i2c_imx_read(struct imx_i2c_struct *i2c_imx, struct i2c_msg *msgs, bo
 	writeb(temp, i2c_imx->base + IMX_I2C_I2CR);
 	readb(i2c_imx->base + IMX_I2C_I2DR); /* dummy read */
 =======
+=======
+>>>>>>> v3.18
 	temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2CR);
 	temp &= ~I2CR_MTX;
 
@@ -677,12 +804,16 @@ static int i2c_imx_read(struct imx_i2c_struct *i2c_imx, struct i2c_msg *msgs, bo
 		temp &= ~I2CR_TXAK;
 	imx_i2c_write_reg(temp, i2c_imx, IMX_I2C_I2CR);
 	imx_i2c_read_reg(i2c_imx, IMX_I2C_I2DR); /* dummy read */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(&i2c_imx->adapter.dev, "<%s> read data\n", __func__);
 
 	/* read data */
 	for (i = 0; i < msgs->len; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		result = i2c_imx_trx_complete(i2c_imx);
 		if (result)
@@ -706,6 +837,8 @@ static int i2c_imx_read(struct imx_i2c_struct *i2c_imx, struct i2c_msg *msgs, bo
 		}
 		msgs->buf[i] = readb(i2c_imx->base + IMX_I2C_I2DR);
 =======
+=======
+>>>>>>> v3.18
 		u8 len = 0;
 		result = i2c_imx_trx_complete(i2c_imx);
 		if (result)
@@ -760,6 +893,9 @@ static int i2c_imx_read(struct imx_i2c_struct *i2c_imx, struct i2c_msg *msgs, bo
 			msgs->buf[0] = len;
 		else
 			msgs->buf[i] =  imx_i2c_read_reg(i2c_imx, IMX_I2C_I2DR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_dbg(&i2c_imx->adapter.dev,
 			"<%s> read byte: B%d=0x%X\n",
@@ -774,6 +910,10 @@ static int i2c_imx_xfer(struct i2c_adapter *adapter,
 	unsigned int i, temp;
 	int result;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool is_lastmsg = false;
+>>>>>>> v3.18
 =======
 	bool is_lastmsg = false;
 >>>>>>> v3.18
@@ -789,6 +929,7 @@ static int i2c_imx_xfer(struct i2c_adapter *adapter,
 	/* read/write data */
 	for (i = 0; i < num; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (i) {
 			dev_dbg(&i2c_imx->adapter.dev,
 				"<%s> repeated start\n", __func__);
@@ -796,6 +937,8 @@ static int i2c_imx_xfer(struct i2c_adapter *adapter,
 			temp |= I2CR_RSTA;
 			writeb(temp, i2c_imx->base + IMX_I2C_I2CR);
 =======
+=======
+>>>>>>> v3.18
 		if (i == num - 1)
 			is_lastmsg = true;
 
@@ -805,6 +948,9 @@ static int i2c_imx_xfer(struct i2c_adapter *adapter,
 			temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2CR);
 			temp |= I2CR_RSTA;
 			imx_i2c_write_reg(temp, i2c_imx, IMX_I2C_I2CR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			result =  i2c_imx_bus_busy(i2c_imx, 1);
 			if (result)
@@ -815,7 +961,11 @@ static int i2c_imx_xfer(struct i2c_adapter *adapter,
 		/* write/read data */
 #ifdef CONFIG_I2C_DEBUG_BUS
 <<<<<<< HEAD
+<<<<<<< HEAD
 		temp = readb(i2c_imx->base + IMX_I2C_I2CR);
+=======
+		temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2CR);
+>>>>>>> v3.18
 =======
 		temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2CR);
 >>>>>>> v3.18
@@ -825,7 +975,11 @@ static int i2c_imx_xfer(struct i2c_adapter *adapter,
 			(temp & I2CR_MSTA ? 1 : 0), (temp & I2CR_MTX ? 1 : 0),
 			(temp & I2CR_TXAK ? 1 : 0), (temp & I2CR_RSTA ? 1 : 0));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		temp = readb(i2c_imx->base + IMX_I2C_I2SR);
+=======
+		temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2SR);
+>>>>>>> v3.18
 =======
 		temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2SR);
 >>>>>>> v3.18
@@ -839,7 +993,11 @@ static int i2c_imx_xfer(struct i2c_adapter *adapter,
 #endif
 		if (msgs[i].flags & I2C_M_RD)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			result = i2c_imx_read(i2c_imx, &msgs[i]);
+=======
+			result = i2c_imx_read(i2c_imx, &msgs[i], is_lastmsg);
+>>>>>>> v3.18
 =======
 			result = i2c_imx_read(i2c_imx, &msgs[i], is_lastmsg);
 >>>>>>> v3.18
@@ -862,7 +1020,12 @@ fail0:
 static u32 i2c_imx_func(struct i2c_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return I2C_FUNC_I2C | I2C_FUNC_SMBUS_EMUL;
+=======
+	return I2C_FUNC_I2C | I2C_FUNC_SMBUS_EMUL
+		| I2C_FUNC_SMBUS_READ_BLOCK_DATA;
+>>>>>>> v3.18
 =======
 	return I2C_FUNC_I2C | I2C_FUNC_SMBUS_EMUL
 		| I2C_FUNC_SMBUS_READ_BLOCK_DATA;
@@ -875,7 +1038,11 @@ static struct i2c_algorithm i2c_imx_algo = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init i2c_imx_probe(struct platform_device *pdev)
+=======
+static int i2c_imx_probe(struct platform_device *pdev)
+>>>>>>> v3.18
 =======
 static int i2c_imx_probe(struct platform_device *pdev)
 >>>>>>> v3.18
@@ -884,6 +1051,7 @@ static int i2c_imx_probe(struct platform_device *pdev)
 							   &pdev->dev);
 	struct imx_i2c_struct *i2c_imx;
 	struct resource *res;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct imxi2c_platform_data *pdata = pdev->dev.platform_data;
 	struct pinctrl *pinctrl;
@@ -905,6 +1073,8 @@ static int i2c_imx_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct imxi2c_platform_data *pdata = dev_get_platdata(&pdev->dev);
 	void __iomem *base;
 	int irq, ret;
@@ -918,6 +1088,9 @@ static int i2c_imx_probe(struct platform_device *pdev)
 	}
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(base))
@@ -925,6 +1098,7 @@ static int i2c_imx_probe(struct platform_device *pdev)
 
 	i2c_imx = devm_kzalloc(&pdev->dev, sizeof(struct imx_i2c_struct),
 				GFP_KERNEL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!i2c_imx) {
 		dev_err(&pdev->dev, "can't allocate interface\n");
@@ -935,6 +1109,8 @@ static int i2c_imx_probe(struct platform_device *pdev)
 		pdev->id_entry = of_id->data;
 	i2c_imx->devtype = pdev->id_entry->driver_data;
 =======
+=======
+>>>>>>> v3.18
 	if (!i2c_imx)
 		return -ENOMEM;
 
@@ -943,6 +1119,9 @@ static int i2c_imx_probe(struct platform_device *pdev)
 	else
 		i2c_imx->hwdata = (struct imx_i2c_hwdata *)
 				platform_get_device_id(pdev)->driver_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Setup i2c_imx driver structure */
@@ -955,12 +1134,15 @@ static int i2c_imx_probe(struct platform_device *pdev)
 	i2c_imx->base			= base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
 	if (IS_ERR(pinctrl)) {
 		dev_err(&pdev->dev, "can't get/select pinctrl\n");
 		return PTR_ERR(pinctrl);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Get I2C clock */
@@ -971,12 +1153,18 @@ static int i2c_imx_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = clk_prepare_enable(i2c_imx->clk);
 	if (ret) {
 		dev_err(&pdev->dev, "can't enable I2C clock\n");
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Request IRQ */
 	ret = devm_request_irq(&pdev->dev, irq, i2c_imx_isr, 0,
@@ -984,7 +1172,11 @@ static int i2c_imx_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "can't claim irq %d\n", irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ret;
+=======
+		goto clk_disable;
+>>>>>>> v3.18
 =======
 		goto clk_disable;
 >>>>>>> v3.18
@@ -998,6 +1190,7 @@ static int i2c_imx_probe(struct platform_device *pdev)
 
 	/* Set up clock divider */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bitrate = IMX_I2C_BIT_RATE;
 	ret = of_property_read_u32(pdev->dev.of_node,
 				   "clock-frequency", &bitrate);
@@ -1009,6 +1202,8 @@ static int i2c_imx_probe(struct platform_device *pdev)
 	writeb(0, i2c_imx->base + IMX_I2C_I2CR);
 	writeb(0, i2c_imx->base + IMX_I2C_I2SR);
 =======
+=======
+>>>>>>> v3.18
 	i2c_imx->bitrate = IMX_I2C_BIT_RATE;
 	ret = of_property_read_u32(pdev->dev.of_node,
 				   "clock-frequency", &i2c_imx->bitrate);
@@ -1019,12 +1214,16 @@ static int i2c_imx_probe(struct platform_device *pdev)
 	imx_i2c_write_reg(i2c_imx->hwdata->i2cr_ien_opcode ^ I2CR_IEN,
 			i2c_imx, IMX_I2C_I2CR);
 	imx_i2c_write_reg(i2c_imx->hwdata->i2sr_clr_opcode, i2c_imx, IMX_I2C_I2SR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Add I2C adapter */
 	ret = i2c_add_numbered_adapter(&i2c_imx->adapter);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "registration failed\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return ret;
 	}
@@ -1040,6 +1239,8 @@ static int i2c_imx_probe(struct platform_device *pdev)
 	dev_dbg(&i2c_imx->adapter.dev, "allocated %d bytes at 0x%x\n",
 		resource_size(res), res->start);
 =======
+=======
+>>>>>>> v3.18
 		goto clk_disable;
 	}
 
@@ -1049,6 +1250,9 @@ static int i2c_imx_probe(struct platform_device *pdev)
 
 	dev_dbg(&i2c_imx->adapter.dev, "claimed irq %d\n", irq);
 	dev_dbg(&i2c_imx->adapter.dev, "device resources: %pR\n", res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_dbg(&i2c_imx->adapter.dev, "adapter name: \"%s\"\n",
 		i2c_imx->adapter.name);
@@ -1056,10 +1260,13 @@ static int i2c_imx_probe(struct platform_device *pdev)
 
 	return 0;   /* Return OK */
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static int __exit i2c_imx_remove(struct platform_device *pdev)
 =======
+=======
+>>>>>>> v3.18
 
 clk_disable:
 	clk_disable_unprepare(i2c_imx->clk);
@@ -1067,6 +1274,9 @@ clk_disable:
 }
 
 static int i2c_imx_remove(struct platform_device *pdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct imx_i2c_struct *i2c_imx = platform_get_drvdata(pdev);
@@ -1077,15 +1287,21 @@ static int i2c_imx_remove(struct platform_device *pdev)
 
 	/* setup chip registers to defaults */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writeb(0, i2c_imx->base + IMX_I2C_IADR);
 	writeb(0, i2c_imx->base + IMX_I2C_IFDR);
 	writeb(0, i2c_imx->base + IMX_I2C_I2CR);
 	writeb(0, i2c_imx->base + IMX_I2C_I2SR);
 =======
+=======
+>>>>>>> v3.18
 	imx_i2c_write_reg(0, i2c_imx, IMX_I2C_IADR);
 	imx_i2c_write_reg(0, i2c_imx, IMX_I2C_IFDR);
 	imx_i2c_write_reg(0, i2c_imx, IMX_I2C_I2CR);
 	imx_i2c_write_reg(0, i2c_imx, IMX_I2C_I2SR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1093,7 +1309,12 @@ static int i2c_imx_remove(struct platform_device *pdev)
 
 static struct platform_driver i2c_imx_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= __exit_p(i2c_imx_remove),
+=======
+	.probe = i2c_imx_probe,
+	.remove = i2c_imx_remove,
+>>>>>>> v3.18
 =======
 	.probe = i2c_imx_probe,
 	.remove = i2c_imx_remove,
@@ -1109,7 +1330,11 @@ static struct platform_driver i2c_imx_driver = {
 static int __init i2c_adap_imx_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return platform_driver_probe(&i2c_imx_driver, i2c_imx_probe);
+=======
+	return platform_driver_register(&i2c_imx_driver);
+>>>>>>> v3.18
 =======
 	return platform_driver_register(&i2c_imx_driver);
 >>>>>>> v3.18

@@ -136,7 +136,11 @@ static DEFINE_RWLOCK(qdisc_mod_lock);
 static struct Qdisc_ops *qdisc_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Register/uregister queueing discipline */
+=======
+/* Register/unregister queueing discipline */
+>>>>>>> v3.18
 =======
 /* Register/unregister queueing discipline */
 >>>>>>> v3.18
@@ -205,7 +209,10 @@ int unregister_qdisc(struct Qdisc_ops *qops)
 EXPORT_SYMBOL(unregister_qdisc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Get default qdisc if not otherwise specified */
 void qdisc_get_default(char *name, size_t len)
 {
@@ -258,6 +265,9 @@ int qdisc_set_default(const char *name)
 	return ops ? 0 : -ENOENT;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* We know handle. Find qdisc among all qdisc's attached to device
    (root qdisc, all its children, children of children etc.)
@@ -279,12 +289,15 @@ static struct Qdisc *qdisc_match_from_root(struct Qdisc *root, u32 handle)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void qdisc_list_add(struct Qdisc *q)
 {
 	if ((q->parent != TC_H_ROOT) && !(q->flags & TCQ_F_INGRESS))
 		list_add_tail(&q->list, &qdisc_dev(q)->qdisc->list);
 }
 =======
+=======
+>>>>>>> v3.18
 void qdisc_list_add(struct Qdisc *q)
 {
 	if ((q->parent != TC_H_ROOT) && !(q->flags & TCQ_F_INGRESS)) {
@@ -295,6 +308,9 @@ void qdisc_list_add(struct Qdisc *q)
 	}
 }
 EXPORT_SYMBOL(qdisc_list_add);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void qdisc_list_del(struct Qdisc *q)
@@ -579,7 +595,11 @@ out:
 EXPORT_SYMBOL(__qdisc_calculate_pkt_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qdisc_warn_nonwc(char *txt, struct Qdisc *qdisc)
+=======
+void qdisc_warn_nonwc(const char *txt, struct Qdisc *qdisc)
+>>>>>>> v3.18
 =======
 void qdisc_warn_nonwc(const char *txt, struct Qdisc *qdisc)
 >>>>>>> v3.18
@@ -598,13 +618,19 @@ static enum hrtimer_restart qdisc_watchdog(struct hrtimer *timer)
 						 timer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qdisc_unthrottled(wd->qdisc);
 	__netif_schedule(qdisc_root(wd->qdisc));
 =======
+=======
+>>>>>>> v3.18
 	rcu_read_lock();
 	qdisc_unthrottled(wd->qdisc);
 	__netif_schedule(qdisc_root(wd->qdisc));
 	rcu_read_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return HRTIMER_NORESTART;
@@ -613,7 +639,11 @@ static enum hrtimer_restart qdisc_watchdog(struct hrtimer *timer)
 void qdisc_watchdog_init(struct qdisc_watchdog *wd, struct Qdisc *qdisc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hrtimer_init(&wd->timer, CLOCK_MONOTONIC, HRTIMER_MODE_ABS);
+=======
+	hrtimer_init(&wd->timer, CLOCK_MONOTONIC, HRTIMER_MODE_ABS_PINNED);
+>>>>>>> v3.18
 =======
 	hrtimer_init(&wd->timer, CLOCK_MONOTONIC, HRTIMER_MODE_ABS_PINNED);
 >>>>>>> v3.18
@@ -623,7 +653,11 @@ void qdisc_watchdog_init(struct qdisc_watchdog *wd, struct Qdisc *qdisc)
 EXPORT_SYMBOL(qdisc_watchdog_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qdisc_watchdog_schedule_ns(struct qdisc_watchdog *wd, u64 expires)
+=======
+void qdisc_watchdog_schedule_ns(struct qdisc_watchdog *wd, u64 expires, bool throttle)
+>>>>>>> v3.18
 =======
 void qdisc_watchdog_schedule_ns(struct qdisc_watchdog *wd, u64 expires, bool throttle)
 >>>>>>> v3.18
@@ -633,18 +667,24 @@ void qdisc_watchdog_schedule_ns(struct qdisc_watchdog *wd, u64 expires, bool thr
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qdisc_throttled(wd->qdisc);
 
 	hrtimer_start(&wd->timer,
 		      ns_to_ktime(expires),
 		      HRTIMER_MODE_ABS);
 =======
+=======
+>>>>>>> v3.18
 	if (throttle)
 		qdisc_throttled(wd->qdisc);
 
 	hrtimer_start(&wd->timer,
 		      ns_to_ktime(expires),
 		      HRTIMER_MODE_ABS_PINNED);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(qdisc_watchdog_schedule_ns);
@@ -786,15 +826,21 @@ void qdisc_tree_decrease_qlen(struct Qdisc *sch, unsigned int n)
 	unsigned long cl;
 	u32 parentid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (n == 0)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	int drops;
 
 	if (n == 0)
 		return;
 	drops = max_t(int, n, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while ((parentid = sch->parent)) {
 		if (TC_H_MAJ(parentid) == TC_H_MAJ(TC_H_INGRESS))
@@ -813,6 +859,10 @@ void qdisc_tree_decrease_qlen(struct Qdisc *sch, unsigned int n)
 		}
 		sch->q.qlen -= n;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__qdisc_qstats_drop(sch, drops);
+>>>>>>> v3.18
 =======
 		__qdisc_qstats_drop(sch, drops);
 >>>>>>> v3.18
@@ -865,13 +915,19 @@ static int qdisc_graft(struct net_device *dev, struct Qdisc *parent,
 			dev_deactivate(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (new && new->ops->attach)
 			goto skip;
 =======
+=======
+>>>>>>> v3.18
 		if (new && new->ops->attach) {
 			new->ops->attach(new);
 			num_q = 0;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		for (i = 0; i < num_q; i++) {
@@ -889,7 +945,10 @@ static int qdisc_graft(struct net_device *dev, struct Qdisc *parent,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 skip:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (!ingress) {
@@ -899,9 +958,12 @@ skip:
 				atomic_inc(&new->refcnt);
 			dev->qdisc = new ? : &noop_qdisc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			if (new && new->ops->attach)
 				new->ops->attach(new);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		} else {
@@ -1010,7 +1072,10 @@ qdisc_create(struct net_device *dev, struct netdev_queue *dev_queue,
 
 	if (!ops->init || (err = ops->init(sch, tca[TCA_OPTIONS])) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (qdisc_is_percpu_stats(sch)) {
 			sch->cpu_bstats =
 				netdev_alloc_pcpu_stats(struct gnet_stats_basic_cpu);
@@ -1022,6 +1087,9 @@ qdisc_create(struct net_device *dev, struct netdev_queue *dev_queue,
 				goto err_out4;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (tca[TCA_STAB]) {
 			stab = qdisc_get_stab(tca[TCA_STAB]);
@@ -1046,14 +1114,20 @@ qdisc_create(struct net_device *dev, struct netdev_queue *dev_queue,
 				root_lock = qdisc_lock(sch);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = gen_new_estimator(&sch->bstats, &sch->rate_est,
 						root_lock, tca[TCA_RATE]);
 =======
+=======
+>>>>>>> v3.18
 			err = gen_new_estimator(&sch->bstats,
 						sch->cpu_bstats,
 						&sch->rate_est,
 						root_lock,
 						tca[TCA_RATE]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (err)
 				goto err_out4;
@@ -1074,6 +1148,11 @@ err_out:
 
 err_out4:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	free_percpu(sch->cpu_bstats);
+	free_percpu(sch->cpu_qstats);
+>>>>>>> v3.18
 =======
 	free_percpu(sch->cpu_bstats);
 	free_percpu(sch->cpu_qstats);
@@ -1117,15 +1196,21 @@ static int qdisc_change(struct Qdisc *sch, struct nlattr **tca)
 		if (sch->flags & TCQ_F_MQROOT)
 			goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gen_replace_estimator(&sch->bstats, &sch->rate_est,
 					    qdisc_root_sleeping_lock(sch),
 					    tca[TCA_RATE]);
 =======
+=======
+>>>>>>> v3.18
 		gen_replace_estimator(&sch->bstats,
 				      sch->cpu_bstats,
 				      &sch->rate_est,
 				      qdisc_root_sleeping_lock(sch),
 				      tca[TCA_RATE]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 out:
@@ -1187,7 +1272,12 @@ static int tc_get_qdisc(struct sk_buff *skb, struct nlmsghdr *n)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((n->nlmsg_type != RTM_GETQDISC) && !netlink_capable(skb, CAP_NET_ADMIN))
+=======
+	if ((n->nlmsg_type != RTM_GETQDISC) &&
+	    !netlink_ns_capable(skb, net->user_ns, CAP_NET_ADMIN))
+>>>>>>> v3.18
 =======
 	if ((n->nlmsg_type != RTM_GETQDISC) &&
 	    !netlink_ns_capable(skb, net->user_ns, CAP_NET_ADMIN))
@@ -1246,6 +1336,7 @@ static int tc_get_qdisc(struct sk_buff *skb, struct nlmsghdr *n)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * enable/disable flow on qdisc.
  */
 int
@@ -1280,6 +1371,8 @@ EXPORT_SYMBOL(tc_qdisc_flow_control);
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Create/change qdisc.
  */
 
@@ -1294,7 +1387,11 @@ static int tc_modify_qdisc(struct sk_buff *skb, struct nlmsghdr *n)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netlink_capable(skb, CAP_NET_ADMIN))
+=======
+	if (!netlink_ns_capable(skb, net->user_ns, CAP_NET_ADMIN))
+>>>>>>> v3.18
 =======
 	if (!netlink_ns_capable(skb, net->user_ns, CAP_NET_ADMIN))
 >>>>>>> v3.18
@@ -1445,6 +1542,11 @@ static int tc_fill_qdisc(struct sk_buff *skb, struct Qdisc *q, u32 clid,
 			 u32 portid, u32 seq, u16 flags, int event)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct gnet_stats_basic_cpu __percpu *cpu_bstats = NULL;
+	struct gnet_stats_queue __percpu *cpu_qstats = NULL;
+>>>>>>> v3.18
 =======
 	struct gnet_stats_basic_cpu __percpu *cpu_bstats = NULL;
 	struct gnet_stats_queue __percpu *cpu_qstats = NULL;
@@ -1455,7 +1557,13 @@ static int tc_fill_qdisc(struct sk_buff *skb, struct Qdisc *q, u32 clid,
 	struct gnet_dump d;
 	struct qdisc_size_table *stab;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	__u32 qlen;
+
+	cond_resched();
+>>>>>>> v3.18
 =======
 	__u32 qlen;
 
@@ -1477,7 +1585,11 @@ static int tc_fill_qdisc(struct sk_buff *skb, struct Qdisc *q, u32 clid,
 	if (q->ops->dump && q->ops->dump(q, skb) < 0)
 		goto nla_put_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->qstats.qlen = q->q.qlen;
+=======
+	qlen = q->q.qlen;
+>>>>>>> v3.18
 =======
 	qlen = q->q.qlen;
 >>>>>>> v3.18
@@ -1494,10 +1606,13 @@ static int tc_fill_qdisc(struct sk_buff *skb, struct Qdisc *q, u32 clid,
 		goto nla_put_failure;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gnet_stats_copy_basic(&d, &q->bstats) < 0 ||
 	    gnet_stats_copy_rate_est(&d, &q->bstats, &q->rate_est) < 0 ||
 	    gnet_stats_copy_queue(&d, &q->qstats) < 0)
 =======
+=======
+>>>>>>> v3.18
 	if (qdisc_is_percpu_stats(q)) {
 		cpu_bstats = q->cpu_bstats;
 		cpu_qstats = q->cpu_qstats;
@@ -1506,6 +1621,9 @@ static int tc_fill_qdisc(struct sk_buff *skb, struct Qdisc *q, u32 clid,
 	if (gnet_stats_copy_basic(&d, cpu_bstats, &q->bstats) < 0 ||
 	    gnet_stats_copy_rate_est(&d, &q->bstats, &q->rate_est) < 0 ||
 	    gnet_stats_copy_queue(&d, cpu_qstats, &q->qstats, qlen) < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto nla_put_failure;
 
@@ -1608,9 +1726,15 @@ static int tc_dump_qdisc(struct sk_buff *skb, struct netlink_callback *cb)
 	s_q_idx = q_idx = cb->args[1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_lock();
 	idx = 0;
 	for_each_netdev_rcu(net, dev) {
+=======
+	idx = 0;
+	ASSERT_RTNL();
+	for_each_netdev(net, dev) {
+>>>>>>> v3.18
 =======
 	idx = 0;
 	ASSERT_RTNL();
@@ -1639,8 +1763,11 @@ cont:
 
 done:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_unlock();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cb->args[0] = idx;
@@ -1673,7 +1800,12 @@ static int tc_ctl_tclass(struct sk_buff *skb, struct nlmsghdr *n)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((n->nlmsg_type != RTM_GETTCLASS) && !netlink_capable(skb, CAP_NET_ADMIN))
+=======
+	if ((n->nlmsg_type != RTM_GETTCLASS) &&
+	    !netlink_ns_capable(skb, net->user_ns, CAP_NET_ADMIN))
+>>>>>>> v3.18
 =======
 	if ((n->nlmsg_type != RTM_GETTCLASS) &&
 	    !netlink_ns_capable(skb, net->user_ns, CAP_NET_ADMIN))
@@ -1805,6 +1937,10 @@ static int tc_fill_tclass(struct sk_buff *skb, struct Qdisc *q,
 	const struct Qdisc_class_ops *cl_ops = q->ops->cl_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cond_resched();
+>>>>>>> v3.18
 =======
 	cond_resched();
 >>>>>>> v3.18
@@ -1970,7 +2106,11 @@ int tc_classify_compat(struct sk_buff *skb, const struct tcf_proto *tp,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (; tp; tp = tp->next) {
+=======
+	for (; tp; tp = rcu_dereference_bh(tp->next)) {
+>>>>>>> v3.18
 =======
 	for (; tp; tp = rcu_dereference_bh(tp->next)) {
 >>>>>>> v3.18
@@ -2026,6 +2166,7 @@ void tcf_destroy(struct tcf_proto *tp)
 	tp->ops->destroy(tp);
 	module_put(tp->ops->owner);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(tp);
 }
 
@@ -2036,6 +2177,8 @@ void tcf_destroy_chain(struct tcf_proto **fl)
 	while ((tp = *fl) != NULL) {
 		*fl = tp->next;
 =======
+=======
+>>>>>>> v3.18
 	kfree_rcu(tp, rcu);
 }
 
@@ -2045,6 +2188,9 @@ void tcf_destroy_chain(struct tcf_proto __rcu **fl)
 
 	while ((tp = rtnl_dereference(*fl)) != NULL) {
 		RCU_INIT_POINTER(*fl, tp->next);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tcf_destroy(tp);
 	}
@@ -2121,6 +2267,10 @@ static int __init pktsched_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	register_qdisc(&pfifo_fast_ops);
+>>>>>>> v3.18
 =======
 	register_qdisc(&pfifo_fast_ops);
 >>>>>>> v3.18

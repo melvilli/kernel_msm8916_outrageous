@@ -135,7 +135,10 @@
  * passed. The object describes which property should be set, and to which value
  * it should be set.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * Block devices on UBI volumes
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -146,6 +149,9 @@
  *
  * Conversely, to remove a block device the %UBI_IOCVOLRMBLK should be used,
  * which takes no arguments.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -187,12 +193,18 @@
 #define UBI_VOL_IOC_MAGIC 'O'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Start UBI volume update */
 =======
+=======
+>>>>>>> v3.18
 /* Start UBI volume update
  * Note: This actually takes a pointer (__s64*), but we can't change
  *       that without breaking the ABI on 32bit systems
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define UBI_IOCVOLUP _IOW(UBI_VOL_IOC_MAGIC, 0, __s64)
 /* LEB erasure command, used for debugging, disabled by default */
@@ -209,11 +221,17 @@
 #define UBI_IOCSETVOLPROP _IOW(UBI_VOL_IOC_MAGIC, 6, \
 			       struct ubi_set_vol_prop_req)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Create a R/O block device on top of an UBI volume */
 #define UBI_IOCVOLCRBLK _IOW(UBI_VOL_IOC_MAGIC, 7, struct ubi_blkcreate_req)
 /* Remove the R/O block device */
 #define UBI_IOCVOLRMBLK _IO(UBI_VOL_IOC_MAGIC, 8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Maximum MTD device name length supported by UBI */
@@ -445,7 +463,10 @@ struct ubi_set_vol_prop_req {
 }  __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct ubi_blkcreate_req - a data structure used in block creation requests.
  * @padding: reserved for future, not used, has to be zeroed
@@ -454,5 +475,8 @@ struct ubi_blkcreate_req {
 	__s8  padding[128];
 }  __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __UBI_USER_H__ */

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*======================================================================
 
     A PCMCIA ethernet driver for the 3com 3c589 card.
@@ -20,6 +21,8 @@
 
 ======================================================================*/
 =======
+=======
+>>>>>>> v3.18
 /* ======================================================================
  *
  * A PCMCIA ethernet driver for the 3com 3c589 card.
@@ -41,6 +44,9 @@
  *
  * ======================================================================
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -50,7 +56,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -70,6 +79,11 @@
 #include <linux/bitops.h>
 #include <linux/jiffies.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/uaccess.h>
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 #include <linux/io.h>
@@ -81,6 +95,7 @@
 #include <pcmcia/ds.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
 #include <asm/io.h>
 
@@ -88,12 +103,17 @@
    constants if they are used several times.  You'll need the manual
    if you want to understand driver details. */
 =======
+=======
+>>>>>>> v3.18
 
 /* To minimize the size of the driver source I only define operating
  * constants if they are used several times. You'll need the manual
  * if you want to understand driver details.
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Offsets from base I/O address. */
 #define EL3_DATA	0x00
@@ -108,7 +128,13 @@
 
 /* The top five bits written to EL3_CMD are a command, the lower
 <<<<<<< HEAD
+<<<<<<< HEAD
    11 bits are the parameter, if applicable. */
+=======
+ * 11 bits are the parameter, if applicable.
+ */
+
+>>>>>>> v3.18
 =======
  * 11 bits are the parameter, if applicable.
  */
@@ -239,6 +265,7 @@ static const struct net_device_ops el3_netdev_ops = {
 static int tc589_probe(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     struct el3_private *lp;
     struct net_device *dev;
 
@@ -266,6 +293,8 @@ static int tc589_probe(struct pcmcia_device *link)
 
     return tc589_config(link);
 =======
+=======
+>>>>>>> v3.18
 	struct el3_private *lp;
 	struct net_device *dev;
 
@@ -292,11 +321,15 @@ static int tc589_probe(struct pcmcia_device *link)
 	dev->ethtool_ops = &netdev_ethtool_ops;
 
 	return tc589_config(link);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void tc589_detach(struct pcmcia_device *link)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     struct net_device *dev = link->priv;
 
@@ -308,6 +341,8 @@ static void tc589_detach(struct pcmcia_device *link)
 
     free_netdev(dev);
 =======
+=======
+>>>>>>> v3.18
 	struct net_device *dev = link->priv;
 
 	dev_dbg(&link->dev, "3c589_detach\n");
@@ -317,11 +352,15 @@ static void tc589_detach(struct pcmcia_device *link)
 	tc589_release(link);
 
 	free_netdev(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } /* tc589_detach */
 
 static int tc589_config(struct pcmcia_device *link)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     struct net_device *dev = link->priv;
     __be16 *phys_addr;
@@ -413,6 +452,8 @@ failed:
     tc589_release(link);
     return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	struct net_device *dev = link->priv;
 	__be16 *phys_addr;
 	int ret, i, j, multi = 0, fifo;
@@ -506,6 +547,9 @@ failed:
 failed:
 	tc589_release(link);
 	return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } /* tc589_config */
 
@@ -538,6 +582,7 @@ static int tc589_resume(struct pcmcia_device *link)
 
 /*====================================================================*/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
   Use this for commands that may take time to finish
@@ -593,6 +638,8 @@ static void tc589_set_xcvr(struct net_device *dev, int if_port)
     else
 	lp->media_status = ((dev->if_port == 0) ? 0x4010 : 0x8800);
 =======
+=======
+>>>>>>> v3.18
 /* Use this for commands that may take time to finish */
 
 static void tc589_wait_for_completion(struct net_device *dev, int cmd)
@@ -653,11 +700,15 @@ static void tc589_set_xcvr(struct net_device *dev, int if_port)
 		lp->media_status = ((dev->if_port == 0) ? 0x8000 : 0x4000);
 	else
 		lp->media_status = ((dev->if_port == 0) ? 0x4010 : 0x8800);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void dump_status(struct net_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     unsigned int ioaddr = dev->base_addr;
     EL3WINDOW(1);
@@ -670,6 +721,8 @@ static void dump_status(struct net_device *dev)
 		inw(ioaddr+0x0a));
     EL3WINDOW(1);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ioaddr = dev->base_addr;
 	EL3WINDOW(1);
 	netdev_info(dev, "  irq status %04x, rx status %04x, tx status %02x  tx free %04x\n",
@@ -680,12 +733,16 @@ static void dump_status(struct net_device *dev)
 			inw(ioaddr+0x04), inw(ioaddr+0x06), inw(ioaddr+0x08),
 			inw(ioaddr+0x0a));
 	EL3WINDOW(1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /* Reset and restore all of the 3c589 registers. */
 static void tc589_reset(struct net_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     unsigned int ioaddr = dev->base_addr;
     int i;
@@ -723,6 +780,8 @@ static void tc589_reset(struct net_device *dev)
 	 ioaddr + EL3_CMD);
     outw(SetIntrEnb | IntLatch | TxAvailable | RxComplete | StatsFull
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ioaddr = dev->base_addr;
 	int i;
 
@@ -758,6 +817,9 @@ static void tc589_reset(struct net_device *dev)
 	outw(AckIntr | IntLatch | TxAvailable | RxEarly | IntReq,
 	 ioaddr + EL3_CMD);
 	outw(SetIntrEnb | IntLatch | TxAvailable | RxComplete | StatsFull
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 | AdapterFailure, ioaddr + EL3_CMD);
 }
@@ -778,6 +840,7 @@ static const struct ethtool_ops netdev_ethtool_ops = {
 static int el3_config(struct net_device *dev, struct ifmap *map)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     if ((map->port != (u_char)(-1)) && (map->port != dev->if_port)) {
 	if (map->port <= 3) {
 	    dev->if_port = map->port;
@@ -788,6 +851,8 @@ static int el3_config(struct net_device *dev, struct ifmap *map)
     }
     return 0;
 =======
+=======
+>>>>>>> v3.18
 	if ((map->port != (u_char)(-1)) && (map->port != dev->if_port)) {
 		if (map->port <= 3) {
 			dev->if_port = map->port;
@@ -798,11 +863,15 @@ static int el3_config(struct net_device *dev, struct ifmap *map)
 		}
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int el3_open(struct net_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     struct el3_private *lp = netdev_priv(dev);
     struct pcmcia_device *link = lp->p_dev;
@@ -825,6 +894,8 @@ static int el3_open(struct net_device *dev)
 
     return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct el3_private *lp = netdev_priv(dev);
 	struct pcmcia_device *link = lp->p_dev;
 
@@ -845,11 +916,15 @@ static int el3_open(struct net_device *dev)
 	  dev->name, inw(dev->base_addr + EL3_STATUS));
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void el3_tx_timeout(struct net_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     unsigned int ioaddr = dev->base_addr;
 
@@ -862,6 +937,8 @@ static void el3_tx_timeout(struct net_device *dev)
     outw(TxEnable, ioaddr + EL3_CMD);
     netif_wake_queue(dev);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ioaddr = dev->base_addr;
 
 	netdev_warn(dev, "Transmit timed out!\n");
@@ -872,11 +949,15 @@ static void el3_tx_timeout(struct net_device *dev)
 	tc589_wait_for_completion(dev, TxReset);
 	outw(TxEnable, ioaddr + EL3_CMD);
 	netif_wake_queue(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void pop_tx_status(struct net_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     unsigned int ioaddr = dev->base_addr;
     int i;
@@ -896,6 +977,8 @@ static void pop_tx_status(struct net_device *dev)
 	outb(0x00, ioaddr + TX_STATUS); /* Pop the status stack. */
     }
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ioaddr = dev->base_addr;
 	int i;
 
@@ -914,12 +997,16 @@ static void pop_tx_status(struct net_device *dev)
 		}
 		outb(0x00, ioaddr + TX_STATUS); /* Pop the status stack. */
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static netdev_tx_t el3_start_xmit(struct sk_buff *skb,
 					struct net_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     unsigned int ioaddr = dev->base_addr;
     struct el3_private *priv = netdev_priv(dev);
@@ -950,6 +1037,8 @@ static netdev_tx_t el3_start_xmit(struct sk_buff *skb,
 
     return NETDEV_TX_OK;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ioaddr = dev->base_addr;
 	struct el3_private *priv = netdev_priv(dev);
 	unsigned long flags;
@@ -978,12 +1067,16 @@ static netdev_tx_t el3_start_xmit(struct sk_buff *skb,
 	dev_kfree_skb(skb);
 
 	return NETDEV_TX_OK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /* The EL3 interrupt handler. */
 static irqreturn_t el3_interrupt(int irq, void *dev_id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     struct net_device *dev = (struct net_device *) dev_id;
     struct el3_private *lp = netdev_priv(dev);
@@ -1061,6 +1154,8 @@ static irqreturn_t el3_interrupt(int irq, void *dev_id)
 	       inw(ioaddr + EL3_STATUS));
     return IRQ_RETVAL(handled);
 =======
+=======
+>>>>>>> v3.18
 	struct net_device *dev = (struct net_device *) dev_id;
 	struct el3_private *lp = netdev_priv(dev);
 	unsigned int ioaddr;
@@ -1137,11 +1232,15 @@ static irqreturn_t el3_interrupt(int irq, void *dev_id)
 	netdev_dbg(dev, "exiting interrupt, status %4.4x.\n",
 			inw(ioaddr + EL3_STATUS));
 	return IRQ_RETVAL(handled);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void media_check(unsigned long arg)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     struct net_device *dev = (struct net_device *)(arg);
     struct el3_private *lp = netdev_priv(dev);
@@ -1222,6 +1321,8 @@ reschedule:
     lp->media.expires = jiffies + HZ;
     add_timer(&lp->media);
 =======
+=======
+>>>>>>> v3.18
 	struct net_device *dev = (struct net_device *)(arg);
 	struct el3_private *lp = netdev_priv(dev);
 	unsigned int ioaddr = dev->base_addr;
@@ -1305,11 +1406,15 @@ reschedule:
 reschedule:
 	lp->media.expires = jiffies + HZ;
 	add_timer(&lp->media);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct net_device_stats *el3_get_stats(struct net_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     struct el3_private *lp = netdev_priv(dev);
     unsigned long flags;
@@ -1356,6 +1461,8 @@ static void update_stats(struct net_device *dev)
     EL3WINDOW(1);
     outw(StatsEnable, ioaddr + EL3_CMD);
 =======
+=======
+>>>>>>> v3.18
 	struct el3_private *lp = netdev_priv(dev);
 	unsigned long flags;
 	struct pcmcia_device *link = lp->p_dev;
@@ -1405,11 +1512,15 @@ static void update_stats(struct net_device *dev)
 	/* Back to window 1, and turn statistics back on. */
 	EL3WINDOW(1);
 	outw(StatsEnable, ioaddr + EL3_CMD);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int el3_rx(struct net_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     unsigned int ioaddr = dev->base_addr;
     int worklimit = 32;
@@ -1460,6 +1571,8 @@ static int el3_rx(struct net_device *dev)
 	netdev_warn(dev, "too much work in el3_rx!\n");
     return 0;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ioaddr = dev->base_addr;
 	int worklimit = 32;
 	short rx_status;
@@ -1520,11 +1633,15 @@ static int el3_rx(struct net_device *dev)
 	if (worklimit == 0)
 		netdev_warn(dev, "too much work in el3_rx!\n");
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void set_rx_mode(struct net_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     unsigned int ioaddr = dev->base_addr;
     u16 opts = SetRxFilter | RxStation | RxBroadcast;
@@ -1535,6 +1652,8 @@ static void set_rx_mode(struct net_device *dev)
 	opts |= RxMulticast;
     outw(opts, ioaddr + EL3_CMD);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ioaddr = dev->base_addr;
 	u16 opts = SetRxFilter | RxStation | RxBroadcast;
 
@@ -1543,6 +1662,9 @@ static void set_rx_mode(struct net_device *dev)
 	else if (!netdev_mc_empty(dev) || (dev->flags & IFF_ALLMULTI))
 		opts |= RxMulticast;
 	outw(opts, ioaddr + EL3_CMD);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1558,6 +1680,7 @@ static void set_multicast_list(struct net_device *dev)
 
 static int el3_close(struct net_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     struct el3_private *lp = netdev_priv(dev);
     struct pcmcia_device *link = lp->p_dev;
@@ -1598,6 +1721,8 @@ static int el3_close(struct net_device *dev)
 
     return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct el3_private *lp = netdev_priv(dev);
 	struct pcmcia_device *link = lp->p_dev;
 	unsigned int ioaddr = dev->base_addr;
@@ -1636,6 +1761,9 @@ static int el3_close(struct net_device *dev)
 	del_timer_sync(&lp->media);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

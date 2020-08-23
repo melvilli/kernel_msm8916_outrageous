@@ -87,6 +87,7 @@ configure the cropping targets before to the composing targets.</para>
 
 <para>The range of coordinates of the top left corner, width and height of
 <<<<<<< HEAD
+<<<<<<< HEAD
 areas that can be sampled is given by the <constant> V4L2_SEL_TGT_CROP_BOUNDS
 </constant> target. It is recommended for the driver developers to put the
 top/left corner at position <constant> (0,0) </constant>.  The rectangle's
@@ -102,6 +103,8 @@ requested size and/or position according to hardware limitations.</para>
 <para>Each capture device has a default source rectangle, given by the
 <constant> V4L2_SEL_TGT_CROP_DEFAULT </constant> target. This rectangle shall
 =======
+=======
+>>>>>>> v3.18
 areas that can be sampled is given by the <constant>V4L2_SEL_TGT_CROP_BOUNDS</constant>
 target. It is recommended for the driver developers to put the
 top/left corner at position <constant>(0,0)</constant>.  The rectangle's
@@ -116,12 +119,16 @@ limitations.</para>
 
 <para>Each capture device has a default source rectangle, given by the
 <constant>V4L2_SEL_TGT_CROP_DEFAULT</constant> target. This rectangle shall
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 over what the driver writer considers the complete picture.  Drivers shall set
 the active crop rectangle to the default when the driver is first loaded, but
 not later.</para>
 
 <para>The composing targets refer to a memory buffer. The limits of composing
+<<<<<<< HEAD
 <<<<<<< HEAD
 coordinates are obtained using <constant> V4L2_SEL_TGT_COMPOSE_BOUNDS
 </constant>.  All coordinates are expressed in pixels. The rectangle's top/left
@@ -132,6 +139,8 @@ height are equal to the image size set by <constant> VIDIOC_S_FMT </constant>.
 <para>The part of a buffer into which the image is inserted by the hardware is
 controlled by the <constant> V4L2_SEL_TGT_COMPOSE </constant> target.
 =======
+=======
+>>>>>>> v3.18
 coordinates are obtained using <constant>V4L2_SEL_TGT_COMPOSE_BOUNDS</constant>.
 All coordinates are expressed in pixels. The rectangle's top/left
 corner must be located at position <constant>(0,0)</constant>. The width and
@@ -140,12 +149,16 @@ height are equal to the image size set by <constant>VIDIOC_S_FMT</constant>.
 
 <para>The part of a buffer into which the image is inserted by the hardware is
 controlled by the <constant>V4L2_SEL_TGT_COMPOSE</constant> target.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 The rectangle's coordinates are also expressed in the same coordinate system as
 the bounds rectangle. The composing rectangle must lie completely inside bounds
 rectangle. The driver must adjust the composing rectangle to fit to the
 bounding limits. Moreover, the driver can perform other adjustments according
 to hardware limitations. The application can control rounding behaviour using
+<<<<<<< HEAD
 <<<<<<< HEAD
 <link linkend="v4l2-selection-flags"> constraint flags </link>.</para>
 
@@ -157,6 +170,8 @@ bounding rectangle.</para>
 <constant> V4L2_SEL_TGT_COMPOSE_PADDED </constant>. It contains all pixels
 defined using <constant> V4L2_SEL_TGT_COMPOSE </constant> plus all
 =======
+=======
+>>>>>>> v3.18
 <link linkend="v4l2-selection-flags"> constraint flags</link>.</para>
 
 <para>For capture devices the default composing rectangle is queried using
@@ -166,6 +181,9 @@ bounding rectangle.</para>
 <para>The part of a buffer that is modified by the hardware is given by
 <constant>V4L2_SEL_TGT_COMPOSE_PADDED</constant>. It contains all pixels
 defined using <constant>V4L2_SEL_TGT_COMPOSE</constant> plus all
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 padding data modified by hardware during insertion process. All pixels outside
 this rectangle <emphasis>must not</emphasis> be changed by the hardware. The
@@ -181,7 +199,11 @@ where the rubbish pixels are located and remove them if needed.</para>
 
 <para>For output devices targets and ioctls are used similarly to the video
 <<<<<<< HEAD
+<<<<<<< HEAD
 capture case. The <emphasis> composing </emphasis> rectangle refers to the
+=======
+capture case. The <emphasis>composing</emphasis> rectangle refers to the
+>>>>>>> v3.18
 =======
 capture case. The <emphasis>composing</emphasis> rectangle refers to the
 >>>>>>> v3.18
@@ -192,6 +214,7 @@ the cropping targets.</para>
 <para>The cropping targets refer to the memory buffer that contains an image to
 be inserted into a video signal or graphical screen. The limits of cropping
 <<<<<<< HEAD
+<<<<<<< HEAD
 coordinates are obtained using <constant> V4L2_SEL_TGT_CROP_BOUNDS </constant>.
 All coordinates are expressed in pixels. The top/left corner is always point
 <constant> (0,0) </constant>.  The width and height is equal to the image size
@@ -201,6 +224,8 @@ specified using <constant> VIDIOC_S_FMT </constant> ioctl.</para>
 the area from which image date are processed by the hardware, is given by the
 <constant> V4L2_SEL_TGT_CROP </constant>. Its coordinates are expressed
 =======
+=======
+>>>>>>> v3.18
 coordinates are obtained using <constant>V4L2_SEL_TGT_CROP_BOUNDS</constant>.
 All coordinates are expressed in pixels. The top/left corner is always point
 <constant>(0,0)</constant>.  The width and height is equal to the image size
@@ -209,6 +234,9 @@ specified using <constant>VIDIOC_S_FMT</constant> ioctl.</para>
 <para>The top left corner, width and height of the source rectangle, that is
 the area from which image date are processed by the hardware, is given by the
 <constant>V4L2_SEL_TGT_CROP</constant>. Its coordinates are expressed
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 in in the same coordinate system as the bounds rectangle. The active cropping
 area must lie completely inside the crop boundaries and the driver may further
@@ -216,6 +244,7 @@ adjust the requested size and/or position according to hardware
 limitations.</para>
 
 <para>For output devices the default cropping rectangle is queried using
+<<<<<<< HEAD
 <<<<<<< HEAD
 <constant> V4L2_SEL_TGT_CROP_DEFAULT </constant>. It is usually equal to the
 bounding rectangle.</para>
@@ -234,6 +263,8 @@ the driver writer considers the complete picture. It is recommended for the
 driver developers to put the top/left corner at position <constant> (0,0)
 </constant>. Drivers shall set the active composing rectangle to the default
 =======
+=======
+>>>>>>> v3.18
 <constant>V4L2_SEL_TGT_CROP_DEFAULT</constant>. It is usually equal to the
 bounding rectangle.</para>
 
@@ -249,6 +280,9 @@ perform other adjustments according to hardware limitations.</para>
 the driver writer considers the complete picture. It is recommended for the
 driver developers to put the top/left corner at position <constant>(0,0)</constant>.
 Drivers shall set the active composing rectangle to the default
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 one when the driver is first loaded.</para>
 
@@ -257,9 +291,15 @@ an image from memory buffers.  It includes borders around an image. However,
 such a padded area is driver-dependent feature not covered by this document.
 Driver developers are encouraged to keep padded rectangle equal to active one.
 <<<<<<< HEAD
+<<<<<<< HEAD
 The padded target is accessed by the <constant> V4L2_SEL_TGT_COMPOSE_PADDED
 </constant> identifier.  It must contain all pixels from the <constant>
 V4L2_SEL_TGT_COMPOSE </constant> target.</para>
+=======
+The padded target is accessed by the <constant>V4L2_SEL_TGT_COMPOSE_PADDED</constant>
+identifier.  It must contain all pixels from the <constant>V4L2_SEL_TGT_COMPOSE</constant>
+target.</para>
+>>>>>>> v3.18
 =======
 The padded target is accessed by the <constant>V4L2_SEL_TGT_COMPOSE_PADDED</constant>
 identifier.  It must contain all pixels from the <constant>V4L2_SEL_TGT_COMPOSE</constant>
@@ -274,8 +314,13 @@ target.</para>
 
 <para>An application can detect if scaling is performed by comparing the width
 <<<<<<< HEAD
+<<<<<<< HEAD
 and the height of rectangles obtained using <constant> V4L2_SEL_TGT_CROP
 </constant> and <constant> V4L2_SEL_TGT_COMPOSE </constant> targets. If
+=======
+and the height of rectangles obtained using <constant>V4L2_SEL_TGT_CROP</constant>
+and <constant>V4L2_SEL_TGT_COMPOSE</constant> targets. If
+>>>>>>> v3.18
 =======
 and the height of rectangles obtained using <constant>V4L2_SEL_TGT_CROP</constant>
 and <constant>V4L2_SEL_TGT_COMPOSE</constant> targets. If
@@ -293,7 +338,11 @@ the scaling ratios using these values.</para>
 
 <para>The selection API was introduced to cope with deficiencies of previous
 <<<<<<< HEAD
+<<<<<<< HEAD
 <link linkend="crop"> API </link>, that was designed to control simple capture
+=======
+<link linkend="crop"> API</link>, that was designed to control simple capture
+>>>>>>> v3.18
 =======
 <link linkend="crop"> API</link>, that was designed to control simple capture
 >>>>>>> v3.18
@@ -309,7 +358,11 @@ one is achieved by setting the field
 &v4l2-pix-format;<structfield>::bytesperline</structfield>.  Introducing an image offsets
 could be done by modifying field &v4l2-buffer;<structfield>::m_userptr</structfield>
 <<<<<<< HEAD
+<<<<<<< HEAD
 before calling <constant> VIDIOC_QBUF </constant>. Those
+=======
+before calling <constant>VIDIOC_QBUF</constant>. Those
+>>>>>>> v3.18
 =======
 before calling <constant>VIDIOC_QBUF</constant>. Those
 >>>>>>> v3.18
@@ -322,7 +375,11 @@ have no reserved fields. Therefore there is no way to extend their functionality
 The new &v4l2-selection; provides a lot of place for future
 extensions.  Driver developers are encouraged to implement only selection API.
 <<<<<<< HEAD
+<<<<<<< HEAD
 The former cropping API would be simulated using the new one. </para>
+=======
+The former cropping API would be simulated using the new one.</para>
+>>>>>>> v3.18
 =======
 The former cropping API would be simulated using the new one.</para>
 >>>>>>> v3.18
@@ -335,9 +392,15 @@ The former cropping API would be simulated using the new one.</para>
 	<title>Resetting the cropping parameters</title>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<para>(A video capture device is assumed; change <constant>
 V4L2_BUF_TYPE_VIDEO_CAPTURE </constant> for other devices; change target to
 <constant> V4L2_SEL_TGT_COMPOSE_* </constant> family to configure composing
+=======
+	<para>(A video capture device is assumed; change
+<constant>V4L2_BUF_TYPE_VIDEO_CAPTURE</constant> for other devices; change target to
+<constant>V4L2_SEL_TGT_COMPOSE_*</constant> family to configure composing
+>>>>>>> v3.18
 =======
 	<para>(A video capture device is assumed; change
 <constant>V4L2_BUF_TYPE_VIDEO_CAPTURE</constant> for other devices; change target to
@@ -395,8 +458,13 @@ area)</para>
       <example>
 	<title>Querying for scaling factors</title>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<para>A video output device is assumed; change <constant>
 V4L2_BUF_TYPE_VIDEO_OUTPUT </constant> for other devices</para>
+=======
+	<para>A video output device is assumed; change
+<constant>V4L2_BUF_TYPE_VIDEO_OUTPUT</constant> for other devices</para>
+>>>>>>> v3.18
 =======
 	<para>A video output device is assumed; change
 <constant>V4L2_BUF_TYPE_VIDEO_OUTPUT</constant> for other devices</para>

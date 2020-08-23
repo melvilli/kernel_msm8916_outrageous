@@ -7,6 +7,7 @@
 ** License.  See the file COPYING in the main directory of this archive
 ** for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 **
 ** Created 09/29/92 by Greg Harp
 **
@@ -22,11 +23,14 @@
 **   Backwards compatibility with bootinfo interface version 1.0
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 */
 
 #ifndef _M68K_BOOTINFO_H
 #define _M68K_BOOTINFO_H
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     /*
@@ -379,6 +383,8 @@ struct compat_bootinfo {
 #endif /* BOOTINFO_COMPAT_1_0 */
 
 =======
+=======
+>>>>>>> v3.18
 #include <uapi/asm/bootinfo.h>
 
 
@@ -392,6 +398,9 @@ static inline void save_bootinfo(const struct bi_record *bi) {}
 
 #endif /* __ASSEMBLY__ */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _M68K_BOOTINFO_H */

@@ -63,7 +63,10 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Hugetlb definitions.
  */
 #define HPAGE_SHIFT		PMD_SHIFT
@@ -72,6 +75,9 @@
 #define HUGETLB_PAGE_ORDER	(HPAGE_SHIFT - PAGE_SHIFT)
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * "Linux" PTE definitions for LPAE.
  *
@@ -91,16 +97,22 @@
 #define L_PTE_RDONLY		(_AT(pteval_t, 1) << 58)	/* READ ONLY */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PMD_SECT_VALID		(_AT(pmdval_t, 1) << 0)
 #define PMD_SECT_DIRTY		(_AT(pmdval_t, 1) << 55)
 #define PMD_SECT_SPLITTING	(_AT(pmdval_t, 1) << 56)
 #define PMD_SECT_NONE		(_AT(pmdval_t, 1) << 57)
 =======
+=======
+>>>>>>> v3.18
 #define L_PMD_SECT_VALID	(_AT(pmdval_t, 1) << 0)
 #define L_PMD_SECT_DIRTY	(_AT(pmdval_t, 1) << 55)
 #define L_PMD_SECT_SPLITTING	(_AT(pmdval_t, 1) << 56)
 #define L_PMD_SECT_NONE		(_AT(pmdval_t, 1) << 57)
 #define L_PMD_SECT_RDONLY	(_AT(pteval_t, 1) << 58)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -132,6 +144,7 @@
  * 2nd stage PTE definitions for LPAE.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define L_PTE_S2_MT_UNCACHED	 (_AT(pteval_t, 0x5) << 2) /* MemAttr[3:0] */
 #define L_PTE_S2_MT_WRITETHROUGH (_AT(pteval_t, 0xa) << 2) /* MemAttr[3:0] */
 #define L_PTE_S2_MT_WRITEBACK	 (_AT(pteval_t, 0xf) << 2) /* MemAttr[3:0] */
@@ -140,6 +153,8 @@
 
 #define L_PMD_S2_RDWR		 (_AT(pmdval_t, 3) << 6)   /* HAP[2:1] */
 =======
+=======
+>>>>>>> v3.18
 #define L_PTE_S2_MT_UNCACHED		(_AT(pteval_t, 0x0) << 2) /* strongly ordered */
 #define L_PTE_S2_MT_WRITETHROUGH	(_AT(pteval_t, 0xa) << 2) /* normal inner write-through */
 #define L_PTE_S2_MT_WRITEBACK		(_AT(pteval_t, 0xf) << 2) /* normal inner write-back */
@@ -150,6 +165,9 @@
 #define L_PTE_S2_RDWR			(_AT(pteval_t, 3) << 6)   /* HAP[2:1] */
 
 #define L_PMD_S2_RDWR			(_AT(pmdval_t, 3) << 6)   /* HAP[2:1] */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -226,6 +244,7 @@ static inline pmd_t *pmd_offset(pud_t *pud, unsigned long addr)
 #define set_pte_ext(ptep,pte,ext) cpu_set_pte_ext(ptep,__pte(pte_val(pte)|(ext)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pmd_young(pmd)		(pmd_val(pmd) & PMD_SECT_AF)
 
 #define __HAVE_ARCH_PMD_WRITE
@@ -235,6 +254,8 @@ static inline pmd_t *pmd_offset(pud_t *pud, unsigned long addr)
 #define pmd_trans_huge(pmd)	(pmd_val(pmd) && !(pmd_val(pmd) & PMD_TABLE_BIT))
 #define pmd_trans_splitting(pmd) (pmd_val(pmd) & PMD_SECT_SPLITTING)
 =======
+=======
+>>>>>>> v3.18
 #define pte_huge(pte)		(pte_val(pte) && !(pte_val(pte) & PTE_TABLE_BIT))
 #define pte_mkhuge(pte)		(__pte(pte_val(pte) & ~PTE_TABLE_BIT))
 
@@ -269,6 +290,9 @@ static inline pte_t pte_mkspecial(pte_t pte)
 void pmdp_splitting_flush(struct vm_area_struct *vma, unsigned long address,
 			  pmd_t *pmdp);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -276,17 +300,23 @@ void pmdp_splitting_flush(struct vm_area_struct *vma, unsigned long address,
 static inline pmd_t pmd_##fn(pmd_t pmd) { pmd_val(pmd) op; return pmd; }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 PMD_BIT_FUNC(wrprotect,	|= PMD_SECT_RDONLY);
 PMD_BIT_FUNC(mkold,	&= ~PMD_SECT_AF);
 PMD_BIT_FUNC(mksplitting, |= PMD_SECT_SPLITTING);
 PMD_BIT_FUNC(mkwrite,   &= ~PMD_SECT_RDONLY);
 PMD_BIT_FUNC(mkdirty,   |= PMD_SECT_DIRTY);
 =======
+=======
+>>>>>>> v3.18
 PMD_BIT_FUNC(wrprotect,	|= L_PMD_SECT_RDONLY);
 PMD_BIT_FUNC(mkold,	&= ~PMD_SECT_AF);
 PMD_BIT_FUNC(mksplitting, |= L_PMD_SECT_SPLITTING);
 PMD_BIT_FUNC(mkwrite,   &= ~L_PMD_SECT_RDONLY);
 PMD_BIT_FUNC(mkdirty,   |= L_PMD_SECT_DIRTY);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 PMD_BIT_FUNC(mkyoung,   |= PMD_SECT_AF);
 
@@ -302,8 +332,13 @@ PMD_BIT_FUNC(mkyoung,   |= PMD_SECT_AF);
 static inline pmd_t pmd_modify(pmd_t pmd, pgprot_t newprot)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const pmdval_t mask = PMD_SECT_USER | PMD_SECT_XN | PMD_SECT_RDONLY |
 				PMD_SECT_VALID | PMD_SECT_NONE;
+=======
+	const pmdval_t mask = PMD_SECT_USER | PMD_SECT_XN | L_PMD_SECT_RDONLY |
+				L_PMD_SECT_VALID | L_PMD_SECT_NONE;
+>>>>>>> v3.18
 =======
 	const pmdval_t mask = PMD_SECT_USER | PMD_SECT_XN | L_PMD_SECT_RDONLY |
 				L_PMD_SECT_VALID | L_PMD_SECT_NONE;
@@ -319,9 +354,12 @@ static inline void set_pmd_at(struct mm_struct *mm, unsigned long addr,
 
 	/* create a faulting entry if PROT_NONE protected */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pmd_val(pmd) & PMD_SECT_NONE)
 		pmd_val(pmd) &= ~PMD_SECT_VALID;
 =======
+=======
+>>>>>>> v3.18
 	if (pmd_val(pmd) & L_PMD_SECT_NONE)
 		pmd_val(pmd) &= ~L_PMD_SECT_VALID;
 
@@ -329,6 +367,9 @@ static inline void set_pmd_at(struct mm_struct *mm, unsigned long addr,
 		pmd_val(pmd) &= ~PMD_SECT_AP2;
 	else
 		pmd_val(pmd) |= PMD_SECT_AP2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*pmdp = __pmd(pmd_val(pmd) | PMD_SECT_nG);

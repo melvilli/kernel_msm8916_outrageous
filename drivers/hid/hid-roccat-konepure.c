@@ -16,6 +16,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 >>>>>>> v3.18
@@ -27,6 +31,7 @@
 #include <linux/hid-roccat.h>
 #include "hid-ids.h"
 #include "hid-roccat-common.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "hid-roccat-konepure.h"
 
@@ -153,6 +158,8 @@ static int konepure_init_konepure_device_struct(struct usb_device *usb_dev,
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 
 enum {
 	KONEPURE_MOUSE_REPORT_NUMBER_BUTTON = 3,
@@ -203,6 +210,9 @@ static const struct attribute_group *konepure_groups[] = {
 	&konepure_group,
 	NULL,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int konepure_init_specials(struct hid_device *hdev)
@@ -210,7 +220,11 @@ static int konepure_init_specials(struct hid_device *hdev)
 	struct usb_interface *intf = to_usb_interface(hdev->dev.parent);
 	struct usb_device *usb_dev = interface_to_usbdev(intf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct konepure_device *konepure;
+=======
+	struct roccat_common2_device *konepure;
+>>>>>>> v3.18
 =======
 	struct roccat_common2_device *konepure;
 >>>>>>> v3.18
@@ -230,9 +244,15 @@ static int konepure_init_specials(struct hid_device *hdev)
 	hid_set_drvdata(hdev, konepure);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = konepure_init_konepure_device_struct(usb_dev, konepure);
 	if (retval) {
 		hid_err(hdev, "couldn't init struct konepure_device\n");
+=======
+	retval = roccat_common2_device_init_struct(usb_dev, konepure);
+	if (retval) {
+		hid_err(hdev, "couldn't init KonePure device\n");
+>>>>>>> v3.18
 =======
 	retval = roccat_common2_device_init_struct(usb_dev, konepure);
 	if (retval) {
@@ -260,7 +280,11 @@ static void konepure_remove_specials(struct hid_device *hdev)
 {
 	struct usb_interface *intf = to_usb_interface(hdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct konepure_device *konepure;
+=======
+	struct roccat_common2_device *konepure;
+>>>>>>> v3.18
 =======
 	struct roccat_common2_device *konepure;
 >>>>>>> v3.18
@@ -317,7 +341,11 @@ static int konepure_raw_event(struct hid_device *hdev,
 {
 	struct usb_interface *intf = to_usb_interface(hdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct konepure_device *konepure = hid_get_drvdata(hdev);
+=======
+	struct roccat_common2_device *konepure = hid_get_drvdata(hdev);
+>>>>>>> v3.18
 =======
 	struct roccat_common2_device *konepure = hid_get_drvdata(hdev);
 >>>>>>> v3.18
@@ -359,7 +387,11 @@ static int __init konepure_init(void)
 	if (IS_ERR(konepure_class))
 		return PTR_ERR(konepure_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	konepure_class->dev_bin_attrs = konepure_bin_attributes;
+=======
+	konepure_class->dev_groups = konepure_groups;
+>>>>>>> v3.18
 =======
 	konepure_class->dev_groups = konepure_groups;
 >>>>>>> v3.18

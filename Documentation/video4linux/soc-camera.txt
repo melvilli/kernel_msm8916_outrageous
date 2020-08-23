@@ -117,7 +117,11 @@ much as possible by modifying scaling factors. If the sensor window cannot be
 preserved precisely, it may be changed too.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 In soc-camera there are two locations, where scaling and cropping can taks
+=======
+In soc-camera there are two locations, where scaling and cropping can take
+>>>>>>> v3.18
 =======
 In soc-camera there are two locations, where scaling and cropping can take
 >>>>>>> v3.18

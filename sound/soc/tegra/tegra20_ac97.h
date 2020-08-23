@@ -91,7 +91,10 @@ struct tegra20_ac97 {
 	int reset_gpio;
 	int sync_gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tegra_asoc_utils_data util_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

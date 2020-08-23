@@ -17,6 +17,10 @@
 #include <linux/scatterlist.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dmaengine.h>
+>>>>>>> v3.18
 =======
 #include <linux/dmaengine.h>
 >>>>>>> v3.18
@@ -45,11 +49,14 @@ static const struct snd_pcm_hardware txx9aclc_pcm_hardware = {
 			    SNDRV_PCM_INFO_BATCH |
 			    SNDRV_PCM_INFO_PAUSE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __BIG_ENDIAN
 	.formats	  = SNDRV_PCM_FMTBIT_S16_BE,
 #else
 	.formats	  = SNDRV_PCM_FMTBIT_S16_LE,
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.period_bytes_min = 1024,
@@ -123,8 +130,13 @@ static void txx9aclc_dma_complete(void *arg)
 	if (dmadata->frag_count >= 0) {
 		dmadata->dmacount--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG_ON(dmadata->dmacount < 0);
 		tasklet_schedule(&dmadata->tasklet);
+=======
+		if (!WARN_ON(dmadata->dmacount < 0))
+			tasklet_schedule(&dmadata->tasklet);
+>>>>>>> v3.18
 =======
 		if (!WARN_ON(dmadata->dmacount < 0))
 			tasklet_schedule(&dmadata->tasklet);
@@ -155,7 +167,11 @@ txx9aclc_dma_submit(struct txx9aclc_dmadata *dmadata, dma_addr_t buf_dma_addr)
 	desc->callback = txx9aclc_dma_complete;
 	desc->callback_param = dmadata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	desc->tx_submit(desc);
+=======
+	dmaengine_submit(desc);
+>>>>>>> v3.18
 =======
 	dmaengine_submit(desc);
 >>>>>>> v3.18
@@ -182,7 +198,11 @@ static void txx9aclc_dma_tasklet(unsigned long data)
 
 		spin_unlock_irqrestore(&dmadata->dma_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chan->device->device_control(chan, DMA_TERMINATE_ALL, 0);
+=======
+		dmaengine_terminate_all(chan);
+>>>>>>> v3.18
 =======
 		dmaengine_terminate_all(chan);
 >>>>>>> v3.18
@@ -195,7 +215,11 @@ static void txx9aclc_dma_tasklet(unsigned long data)
 		}
 		dmadata->dmacount = NR_DMA_CHAIN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chan->device->device_issue_pending(chan);
+=======
+		dma_async_issue_pending(chan);
+>>>>>>> v3.18
 =======
 		dma_async_issue_pending(chan);
 >>>>>>> v3.18
@@ -206,12 +230,18 @@ static void txx9aclc_dma_tasklet(unsigned long data)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(dmadata->dmacount >= NR_DMA_CHAIN);
 =======
+=======
+>>>>>>> v3.18
 	if (WARN_ON(dmadata->dmacount >= NR_DMA_CHAIN)) {
 		spin_unlock_irqrestore(&dmadata->dma_lock, flags);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (dmadata->dmacount < NR_DMA_CHAIN) {
 		dmadata->dmacount++;
@@ -222,7 +252,11 @@ static void txx9aclc_dma_tasklet(unsigned long data)
 		if (!desc)
 			return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chan->device->device_issue_pending(chan);
+=======
+		dma_async_issue_pending(chan);
+>>>>>>> v3.18
 =======
 		dma_async_issue_pending(chan);
 >>>>>>> v3.18
@@ -304,7 +338,11 @@ static int txx9aclc_pcm_close(struct snd_pcm_substream *substream)
 
 	dmadata->frag_count = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chan->device->device_control(chan, DMA_TERMINATE_ALL, 0);
+=======
+	dmaengine_terminate_all(chan);
+>>>>>>> v3.18
 =======
 	dmaengine_terminate_all(chan);
 >>>>>>> v3.18
@@ -440,8 +478,12 @@ static int txx9aclc_pcm_remove(struct snd_soc_platform *platform)
 		if (chan) {
 			dmadata->frag_count = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			chan->device->device_control(chan,
 						     DMA_TERMINATE_ALL, 0);
+=======
+			dmaengine_terminate_all(chan);
+>>>>>>> v3.18
 =======
 			dmaengine_terminate_all(chan);
 >>>>>>> v3.18

@@ -23,8 +23,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/mc.h>
 =======
+=======
+>>>>>>> v3.18
 #include "priv.h"
 #include <core/option.h>
 
@@ -44,12 +47,16 @@ nouveau_mc_intr_mask(struct nouveau_mc *pmc)
 		intr = 0x00000000;
 	return intr;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static irqreturn_t
 nouveau_mc_intr(int irq, void *arg)
 {
 	struct nouveau_mc *pmc = arg;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct nouveau_mc_intr *map = pmc->intr_map;
 	struct nouveau_subdev *unit;
@@ -72,6 +79,8 @@ nouveau_mc_intr(int irq, void *arg)
 
 	return stat ? IRQ_HANDLED : IRQ_NONE;
 =======
+=======
+>>>>>>> v3.18
 	const struct nouveau_mc_oclass *oclass = (void *)nv_object(pmc)->oclass;
 	const struct nouveau_mc_intr *map = oclass->intr;
 	struct nouveau_subdev *unit;
@@ -101,6 +110,9 @@ nouveau_mc_intr(int irq, void *arg)
 
 	nv_wr32(pmc, 0x000140, 0x00000001);
 	return intr ? IRQ_HANDLED : IRQ_NONE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -129,7 +141,13 @@ _nouveau_mc_dtor(struct nouveau_object *object)
 	struct nouveau_device *device = nv_device(object);
 	struct nouveau_mc *pmc = (void *)object;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(device->pdev->irq, pmc);
+=======
+	free_irq(pmc->irq, pmc);
+	if (pmc->use_msi)
+		pci_disable_msi(device->pdev);
+>>>>>>> v3.18
 =======
 	free_irq(pmc->irq, pmc);
 	if (pmc->use_msi)
@@ -141,10 +159,16 @@ _nouveau_mc_dtor(struct nouveau_object *object)
 int
 nouveau_mc_create_(struct nouveau_object *parent, struct nouveau_object *engine,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   struct nouveau_oclass *oclass,
 		   const struct nouveau_mc_intr *intr_map,
 		   int length, void **pobject)
 {
+=======
+		   struct nouveau_oclass *bclass, int length, void **pobject)
+{
+	const struct nouveau_mc_oclass *oclass = (void *)bclass;
+>>>>>>> v3.18
 =======
 		   struct nouveau_oclass *bclass, int length, void **pobject)
 {
@@ -155,7 +179,11 @@ nouveau_mc_create_(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nouveau_subdev_create_(parent, engine, oclass, 0, "PMC",
+=======
+	ret = nouveau_subdev_create_(parent, engine, bclass, 0, "PMC",
+>>>>>>> v3.18
 =======
 	ret = nouveau_subdev_create_(parent, engine, bclass, 0, "PMC",
 >>>>>>> v3.18
@@ -165,11 +193,14 @@ nouveau_mc_create_(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmc->intr_map = intr_map;
 
 	ret = request_irq(device->pdev->irq, nouveau_mc_intr,
 			  IRQF_SHARED, "nouveau", pmc);
 =======
+=======
+>>>>>>> v3.18
 	pmc->unk260 = nouveau_mc_unk260;
 
 	if (nv_device_is_pci(device))
@@ -210,6 +241,9 @@ nouveau_mc_create_(struct nouveau_object *parent, struct nouveau_object *engine,
 	ret = request_irq(pmc->irq, nouveau_mc_intr, IRQF_SHARED, "nouveau",
 			  pmc);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;

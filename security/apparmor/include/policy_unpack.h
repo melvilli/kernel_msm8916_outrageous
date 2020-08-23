@@ -16,8 +16,11 @@
 #define __POLICY_INTERFACE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct aa_profile *aa_unpack(void *udata, size_t size, const char **ns);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/list.h>
 
 struct aa_load_ent {
@@ -38,6 +41,9 @@ struct aa_load_ent *aa_load_ent_alloc(void);
 #define PACKED_MODE_UNCONFINED	3
 
 int aa_unpack(void *udata, size_t size, struct list_head *lh, const char **ns);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __POLICY_INTERFACE_H */

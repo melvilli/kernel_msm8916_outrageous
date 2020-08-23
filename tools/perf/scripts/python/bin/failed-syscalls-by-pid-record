@@ -1,6 +1,11 @@
 #!/bin/bash
 <<<<<<< HEAD
+<<<<<<< HEAD
 perf record -e raw_syscalls:sys_exit $@
+=======
+(perf record -e raw_syscalls:sys_exit $@ || \
+ perf record -e syscalls:sys_exit $@) 2> /dev/null
+>>>>>>> v3.18
 =======
 (perf record -e raw_syscalls:sys_exit $@ || \
  perf record -e syscalls:sys_exit $@) 2> /dev/null

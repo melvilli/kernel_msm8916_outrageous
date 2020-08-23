@@ -9,6 +9,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef _IIO_SIMPLE_DUMMY_H_
+#define _IIO_SIMPLE_DUMMY_H_
+>>>>>>> v3.18
 =======
 #ifndef _IIO_SIMPLE_DUMMY_H_
 #define _IIO_SIMPLE_DUMMY_H_
@@ -51,6 +56,7 @@ struct iio_dev;
 
 int iio_simple_dummy_read_event_config(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       u64 event_code);
 
 int iio_simple_dummy_write_event_config(struct iio_dev *indio_dev,
@@ -65,6 +71,8 @@ int iio_simple_dummy_write_event_value(struct iio_dev *indio_dev,
 				       u64 event_code,
 				       int val);
 =======
+=======
+>>>>>>> v3.18
 				       const struct iio_chan_spec *chan,
 				       enum iio_event_type type,
 				       enum iio_event_direction dir);
@@ -88,6 +96,9 @@ int iio_simple_dummy_write_event_value(struct iio_dev *indio_dev,
 				       enum iio_event_direction dir,
 				       enum iio_event_info info, int val,
 				       int val2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int iio_simple_dummy_events_register(struct iio_dev *indio_dev);
@@ -139,7 +150,13 @@ static inline
 void iio_simple_dummy_unconfigure_buffer(struct iio_dev *indio_dev)
 {};
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_IIO_SIMPLE_DUMMY_BUFFER */
+=======
+
+#endif /* CONFIG_IIO_SIMPLE_DUMMY_BUFFER */
+#endif /* _IIO_SIMPLE_DUMMY_H_ */
+>>>>>>> v3.18
 =======
 
 #endif /* CONFIG_IIO_SIMPLE_DUMMY_BUFFER */

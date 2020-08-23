@@ -12,6 +12,7 @@ menuconfig POWER_AVS
 	  Say Y here to enable Adaptive Voltage Scaling class support.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config POWER_AVS_MSM
 	bool "Enable Adaptive Voltage Scaling (AVS) for QCOM chipsets"
 	default n
@@ -21,6 +22,8 @@ config POWER_AVS_MSM
 	  fine tune the voltages based on the feedback from the ring
 	  oscillators.
 =======
+=======
+>>>>>>> v3.18
 config ROCKCHIP_IODOMAIN
         tristate "Rockchip IO domain support"
         depends on ARCH_ROCKCHIP && OF
@@ -28,4 +31,7 @@ config ROCKCHIP_IODOMAIN
           Say y here to enable support io domains on Rockchip SoCs. It is
           necessary for the io domain setting of the SoC to match the
           voltage supplied by the regulators.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -6,8 +6,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COMPONENT "zPCI"
 #define pr_fmt(fmt) COMPONENT ": " fmt
+=======
+#define KMSG_COMPONENT "zpci"
+#define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
+>>>>>>> v3.18
 =======
 #define KMSG_COMPONENT "zpci"
 #define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
@@ -17,6 +22,7 @@
 #include <linux/stat.h>
 #include <linux/pci.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t show_fid(struct device *dev, struct device_attribute *attr,
 			char *buf)
@@ -91,6 +97,8 @@ void zpci_sysfs_remove_device(struct device *dev)
 		device_remove_file(dev, zpci_dev_attrs[i]);
 }
 =======
+=======
+>>>>>>> v3.18
 #define zpci_attr(name, fmt, member)					\
 static ssize_t name##_show(struct device *dev,				\
 			   struct device_attribute *attr, char *buf)	\
@@ -187,4 +195,7 @@ const struct attribute_group *zpci_attr_groups[] = {
 	&pfip_attr_group,
 	NULL,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

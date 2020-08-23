@@ -9,6 +9,11 @@
 #define __ASM_MACH_IP22_CPU_FEATURE_OVERRIDES_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/cpu.h>
 
@@ -43,11 +48,17 @@
 #define cpu_has_64bits		1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define cpu_has_mips_2		1
 #define cpu_has_mips_3		1
 #define cpu_has_mips_5		0
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define cpu_has_mips32r1	0
 #define cpu_has_mips32r2	0

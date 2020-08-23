@@ -43,7 +43,11 @@ static int sm_block_markbad(struct mtd_info *mtd, loff_t ofs)
 	struct mtd_oob_ops ops;
 	struct sm_oob oob;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, error = 0;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -66,16 +70,22 @@ static int sm_block_markbad(struct mtd_info *mtd, loff_t ofs)
 			"sm_common: can't mark sector at %i as bad\n",
 								(int)ofs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -EIO;
 	} else
 		mtd->ecc_stats.badblocks++;
 
 	return error;
 =======
+=======
+>>>>>>> v3.18
 		return -EIO;
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

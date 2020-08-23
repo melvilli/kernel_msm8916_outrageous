@@ -68,7 +68,11 @@ static void wl1271_stop_ba_event(struct wl1271 *wl, struct wl12xx_vif *wlvif)
 		struct wl1271_link *lnk;
 		for_each_set_bit(hlid, wlvif->ap.sta_hlid_map,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 WL12XX_MAX_LINKS) {
+=======
+				 wl->num_links) {
+>>>>>>> v3.18
 =======
 				 wl->num_links) {
 >>>>>>> v3.18
@@ -163,12 +167,18 @@ EXPORT_SYMBOL_GPL(wlcore_event_channel_switch);
 void wlcore_event_dummy_packet(struct wl1271 *wl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (wl->plt) {
 		wl1271_info("Got DUMMY_PACKET event in PLT mode.  FW bug, ignoring.");
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wl1271_debug(DEBUG_EVENT, "DUMMY_PACKET_ID_EVENT_ID");
 	wl1271_tx_dummy_packet(wl);
@@ -185,7 +195,11 @@ static void wlcore_disconnect_sta(struct wl1271 *wl, unsigned long sta_bitmap)
 	int h;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_set_bit(h, &sta_bitmap, WL12XX_MAX_LINKS) {
+=======
+	for_each_set_bit(h, &sta_bitmap, wl->num_links) {
+>>>>>>> v3.18
 =======
 	for_each_set_bit(h, &sta_bitmap, wl->num_links) {
 >>>>>>> v3.18
@@ -283,6 +297,10 @@ int wl1271_event_unmask(struct wl1271 *wl)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wl1271_debug(DEBUG_EVENT, "unmasking event_mask 0x%x", wl->event_mask);
+>>>>>>> v3.18
 =======
 	wl1271_debug(DEBUG_EVENT, "unmasking event_mask 0x%x", wl->event_mask);
 >>>>>>> v3.18

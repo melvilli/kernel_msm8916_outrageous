@@ -23,6 +23,10 @@
 
 #include <linux/bitops.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bug.h>
+>>>>>>> v3.18
 =======
 #include <linux/bug.h>
 >>>>>>> v3.18
@@ -57,7 +61,11 @@ int hdmi_avi_infoframe_init(struct hdmi_avi_infoframe *frame)
 	frame->type = HDMI_INFOFRAME_TYPE_AVI;
 	frame->version = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame->length = 13;
+=======
+	frame->length = HDMI_AVI_INFOFRAME_SIZE;
+>>>>>>> v3.18
 =======
 	frame->length = HDMI_AVI_INFOFRAME_SIZE;
 >>>>>>> v3.18
@@ -92,7 +100,11 @@ ssize_t hdmi_avi_infoframe_pack(struct hdmi_avi_infoframe *frame, void *buffer,
 		return -ENOSPC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(buffer, 0, length);
+=======
+	memset(buffer, 0, size);
+>>>>>>> v3.18
 =======
 	memset(buffer, 0, size);
 >>>>>>> v3.18
@@ -108,6 +120,7 @@ ssize_t hdmi_avi_infoframe_pack(struct hdmi_avi_infoframe *frame, void *buffer,
 	ptr[0] = ((frame->colorspace & 0x3) << 5) | (frame->scan_mode & 0x3);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (frame->active_info_valid)
 		ptr[0] |= BIT(4);
 
@@ -116,6 +129,8 @@ ssize_t hdmi_avi_infoframe_pack(struct hdmi_avi_infoframe *frame, void *buffer,
 
 	if (frame->vertical_bar_valid)
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Data byte 1, bit 4 has to be set if we provide the active format
 	 * aspect ratio
@@ -128,6 +143,9 @@ ssize_t hdmi_avi_infoframe_pack(struct hdmi_avi_infoframe *frame, void *buffer,
 		ptr[0] |= BIT(3);
 
 	if (frame->left_bar || frame->right_bar)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ptr[0] |= BIT(2);
 
@@ -179,7 +197,11 @@ int hdmi_spd_infoframe_init(struct hdmi_spd_infoframe *frame,
 	frame->type = HDMI_INFOFRAME_TYPE_SPD;
 	frame->version = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame->length = 25;
+=======
+	frame->length = HDMI_SPD_INFOFRAME_SIZE;
+>>>>>>> v3.18
 =======
 	frame->length = HDMI_SPD_INFOFRAME_SIZE;
 >>>>>>> v3.18
@@ -217,7 +239,11 @@ ssize_t hdmi_spd_infoframe_pack(struct hdmi_spd_infoframe *frame, void *buffer,
 		return -ENOSPC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(buffer, 0, length);
+=======
+	memset(buffer, 0, size);
+>>>>>>> v3.18
 =======
 	memset(buffer, 0, size);
 >>>>>>> v3.18
@@ -254,7 +280,11 @@ int hdmi_audio_infoframe_init(struct hdmi_audio_infoframe *frame)
 	frame->type = HDMI_INFOFRAME_TYPE_AUDIO;
 	frame->version = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame->length = 10;
+=======
+	frame->length = HDMI_AUDIO_INFOFRAME_SIZE;
+>>>>>>> v3.18
 =======
 	frame->length = HDMI_AUDIO_INFOFRAME_SIZE;
 >>>>>>> v3.18
@@ -290,7 +320,11 @@ ssize_t hdmi_audio_infoframe_pack(struct hdmi_audio_infoframe *frame,
 		return -ENOSPC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(buffer, 0, length);
+=======
+	memset(buffer, 0, size);
+>>>>>>> v3.18
 =======
 	memset(buffer, 0, size);
 >>>>>>> v3.18
@@ -326,10 +360,13 @@ EXPORT_SYMBOL(hdmi_audio_infoframe_pack);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * hdmi_vendor_infoframe_pack() - write a HDMI vendor infoframe to binary
  *                                buffer
  * @frame: HDMI vendor infoframe
 =======
+=======
+>>>>>>> v3.18
  * hdmi_vendor_infoframe_init() - initialize an HDMI vendor infoframe
  * @frame: HDMI vendor infoframe
  *
@@ -357,6 +394,9 @@ EXPORT_SYMBOL(hdmi_vendor_infoframe_init);
 /**
  * hdmi_vendor_infoframe_pack() - write a HDMI vendor infoframe to binary buffer
  * @frame: HDMI infoframe
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @buffer: destination buffer
  * @size: size of buffer
@@ -371,7 +411,11 @@ EXPORT_SYMBOL(hdmi_vendor_infoframe_init);
  */
 ssize_t hdmi_vendor_infoframe_pack(struct hdmi_vendor_infoframe *frame,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   void *buffer, size_t size)
+=======
+				 void *buffer, size_t size)
+>>>>>>> v3.18
 =======
 				 void *buffer, size_t size)
 >>>>>>> v3.18
@@ -380,7 +424,10 @@ ssize_t hdmi_vendor_infoframe_pack(struct hdmi_vendor_infoframe *frame,
 	size_t length;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* empty info frame */
 	if (frame->vic == 0 && frame->s3d_struct == HDMI_3D_STRUCTURE_INVALID)
 		return -EINVAL;
@@ -395,6 +442,9 @@ ssize_t hdmi_vendor_infoframe_pack(struct hdmi_vendor_infoframe *frame,
 	else
 		frame->length = 5;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	length = HDMI_INFOFRAME_HEADER_SIZE + frame->length;
 
@@ -402,7 +452,11 @@ ssize_t hdmi_vendor_infoframe_pack(struct hdmi_vendor_infoframe *frame,
 		return -ENOSPC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(buffer, 0, length);
+=======
+	memset(buffer, 0, size);
+>>>>>>> v3.18
 =======
 	memset(buffer, 0, size);
 >>>>>>> v3.18
@@ -413,8 +467,11 @@ ssize_t hdmi_vendor_infoframe_pack(struct hdmi_vendor_infoframe *frame,
 	ptr[3] = 0; /* checksum */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&ptr[HDMI_INFOFRAME_HEADER_SIZE], frame->data, frame->length);
 =======
+=======
+>>>>>>> v3.18
 	/* HDMI OUI */
 	ptr[4] = 0x03;
 	ptr[5] = 0x0c;
@@ -429,6 +486,9 @@ ssize_t hdmi_vendor_infoframe_pack(struct hdmi_vendor_infoframe *frame,
 		if (frame->s3d_struct >= HDMI_3D_STRUCTURE_SIDE_BY_SIDE_HALF)
 			ptr[9] = (frame->s3d_ext_data & 0xf) << 4;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hdmi_infoframe_checksum(buffer, length);
@@ -437,7 +497,10 @@ ssize_t hdmi_vendor_infoframe_pack(struct hdmi_vendor_infoframe *frame,
 }
 EXPORT_SYMBOL(hdmi_vendor_infoframe_pack);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * hdmi_vendor_any_infoframe_pack() - write a vendor infoframe to binary buffer
@@ -494,4 +557,7 @@ hdmi_infoframe_pack(union hdmi_infoframe *frame, void *buffer, size_t size)
 	return length;
 }
 EXPORT_SYMBOL(hdmi_infoframe_pack);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -5,6 +5,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -14,7 +18,10 @@
 #include <linux/errno.h>
 #include <linux/major.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/miscdevice.h>
@@ -152,10 +159,14 @@ static long d7s_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	case D7SIOCTM:
 		/* toggle device mode-- flip display orientation */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (regs & D7S_FLIP)
 			regs &= ~D7S_FLIP;
 		else
 			regs |= D7S_FLIP;
+=======
+		regs ^= D7S_FLIP;
+>>>>>>> v3.18
 =======
 		regs ^= D7S_FLIP;
 >>>>>>> v3.18
@@ -193,7 +204,11 @@ static int d7s_probe(struct platform_device *op)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = kzalloc(sizeof(*p), GFP_KERNEL);
+=======
+	p = devm_kzalloc(&op->dev, sizeof(*p), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	p = devm_kzalloc(&op->dev, sizeof(*p), GFP_KERNEL);
 >>>>>>> v3.18
@@ -248,7 +263,10 @@ out_iounmap:
 
 out_free:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(p);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	goto out;
@@ -271,7 +289,10 @@ static int d7s_remove(struct platform_device *op)
 	misc_deregister(&d7s_miscdev);
 	of_iounmap(&op->resource[0], p->regs, sizeof(u8));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(p);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

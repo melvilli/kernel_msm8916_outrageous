@@ -43,7 +43,10 @@ struct westwood {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* TCP Westwood functions and constants */
@@ -157,7 +160,10 @@ static inline void update_rtt_min(struct westwood *w)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -215,7 +221,10 @@ static inline u32 westwood_acked_count(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -229,10 +238,13 @@ static u32 tcp_westwood_bw_rttmin(const struct sock *sk)
 	const struct tcp_sock *tp = tcp_sk(sk);
 	const struct westwood *w = inet_csk_ca(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return max_t(u32, (w->bw_est * w->rtt_min) / tp->mss_cache, 2);
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	return max_t(u32, (w->bw_est * w->rtt_min) / tp->mss_cache, 2);
 }
@@ -252,6 +264,9 @@ static void tcp_westwood_ack(struct sock *sk, u32 ack_flags)
 	westwood_fast_bw(sk);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void tcp_westwood_event(struct sock *sk, enum tcp_ca_event event)
 {
@@ -259,6 +274,7 @@ static void tcp_westwood_event(struct sock *sk, enum tcp_ca_event event)
 	struct westwood *w = inet_csk_ca(sk);
 
 	switch (event) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case CA_EVENT_FAST_ACK:
 		westwood_fast_bw(sk);
@@ -273,11 +289,17 @@ static void tcp_westwood_event(struct sock *sk, enum tcp_ca_event event)
 		tp->snd_cwnd = tp->snd_ssthresh = tcp_westwood_bw_rttmin(sk);
 		break;
 >>>>>>> v3.18
+=======
+	case CA_EVENT_COMPLETE_CWR:
+		tp->snd_cwnd = tp->snd_ssthresh = tcp_westwood_bw_rttmin(sk);
+		break;
+>>>>>>> v3.18
 	case CA_EVENT_LOSS:
 		tp->snd_ssthresh = tcp_westwood_bw_rttmin(sk);
 		/* Update RTT_min when next ack arrives */
 		w->reset_rtt_min = 1;
 		break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	case CA_EVENT_SLOW_ACK:
@@ -288,6 +310,8 @@ static void tcp_westwood_event(struct sock *sk, enum tcp_ca_event event)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	default:
 		/* don't care */
 		break;
@@ -295,7 +319,10 @@ static void tcp_westwood_event(struct sock *sk, enum tcp_ca_event event)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Extract info for Tcp socket info provided via netlink. */
@@ -304,6 +331,10 @@ static void tcp_westwood_info(struct sock *sk, u32 ext,
 {
 	const struct westwood *ca = inet_csk_ca(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -319,7 +350,10 @@ static void tcp_westwood_info(struct sock *sk, u32 ext,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct tcp_congestion_ops tcp_westwood __read_mostly = {
@@ -327,8 +361,13 @@ static struct tcp_congestion_ops tcp_westwood __read_mostly = {
 	.ssthresh	= tcp_reno_ssthresh,
 	.cong_avoid	= tcp_reno_cong_avoid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.min_cwnd	= tcp_westwood_bw_rttmin,
 	.cwnd_event	= tcp_westwood_event,
+=======
+	.cwnd_event	= tcp_westwood_event,
+	.in_ack_event	= tcp_westwood_ack,
+>>>>>>> v3.18
 =======
 	.cwnd_event	= tcp_westwood_event,
 	.in_ack_event	= tcp_westwood_ack,

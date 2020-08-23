@@ -14,18 +14,24 @@
 #include "util/run-command.h"
 #include "util/parse-events.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <lk/debugfs.h>
 #include <pthread.h>
 
 const char perf_usage_string[] =
 	"perf [--version] [--help] COMMAND [ARGS]";
 =======
+=======
+>>>>>>> v3.18
 #include "util/debug.h"
 #include <api/fs/debugfs.h>
 #include <pthread.h>
 
 const char perf_usage_string[] =
 	"perf [--version] [--help] [OPTIONS] COMMAND [ARGS]";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 const char perf_more_info_string[] =
@@ -53,7 +59,10 @@ static struct cmd_struct commands[] = {
 	{ "bench",	cmd_bench,	0 },
 	{ "stat",	cmd_stat,	0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "periodic",   cmd_periodic,   0 },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ "timechart",	cmd_timechart,	0 },
@@ -63,7 +72,11 @@ static struct cmd_struct commands[] = {
 	{ "script",	cmd_script,	0 },
 	{ "sched",	cmd_sched,	0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIBELF_SUPPORT
+=======
+#ifdef HAVE_LIBELF_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_LIBELF_SUPPORT
 >>>>>>> v3.18
@@ -74,7 +87,11 @@ static struct cmd_struct commands[] = {
 	{ "kvm",	cmd_kvm,	0 },
 	{ "test",	cmd_test,	0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIBAUDIT_SUPPORT
+=======
+#ifdef HAVE_LIBAUDIT_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_LIBAUDIT_SUPPORT
 >>>>>>> v3.18
@@ -234,7 +251,10 @@ static int handle_options(const char ***argv, int *argc, int *envchanged)
 			}
 			exit(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		} else if (!strcmp(cmd, "--debug")) {
 			if (*argc < 2) {
 				fprintf(stderr, "No variable specified for --debug.\n");
@@ -245,6 +265,9 @@ static int handle_options(const char ***argv, int *argc, int *envchanged)
 
 			(*argv)++;
 			(*argc)--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			fprintf(stderr, "Unknown option: %s\n", cmd);
@@ -337,6 +360,10 @@ static int run_builtin(struct cmd_struct *p, int argc, const char **argv)
 	struct stat st;
 	const char *prefix;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+>>>>>>> v3.18
 =======
 	char sbuf[STRERR_BUFSIZE];
 >>>>>>> v3.18
@@ -371,7 +398,12 @@ static int run_builtin(struct cmd_struct *p, int argc, const char **argv)
 	/* Check for ENOSPC and EIO errors.. */
 	if (fflush(stdout)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fprintf(stderr, "write failure on standard output: %s", strerror(errno));
+=======
+		fprintf(stderr, "write failure on standard output: %s",
+			strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 		fprintf(stderr, "write failure on standard output: %s",
 			strerror_r(errno, sbuf, sizeof(sbuf)));
@@ -384,7 +416,12 @@ static int run_builtin(struct cmd_struct *p, int argc, const char **argv)
 	}
 	if (fclose(stdout)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fprintf(stderr, "close failed on standard output: %s", strerror(errno));
+=======
+		fprintf(stderr, "close failed on standard output: %s",
+			strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 		fprintf(stderr, "close failed on standard output: %s",
 			strerror_r(errno, sbuf, sizeof(sbuf)));
@@ -504,14 +541,20 @@ int main(int argc, const char **argv)
 {
 	const char *cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	page_size = sysconf(_SC_PAGE_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	char sbuf[STRERR_BUFSIZE];
 
 	/* The page_size is placed in util object. */
 	page_size = sysconf(_SC_PAGE_SIZE);
 	cacheline_size = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cmd = perf_extract_argv0_path(argv[0]);
@@ -537,8 +580,11 @@ int main(int argc, const char **argv)
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	if (!prefixcmp(cmd, "trace")) {
 #ifdef HAVE_LIBAUDIT_SUPPORT
 		set_buildid_dir();
@@ -551,6 +597,9 @@ int main(int argc, const char **argv)
 		goto out;
 #endif
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Look for flags.. */
 	argv++;
@@ -609,7 +658,11 @@ int main(int argc, const char **argv)
 
 	fprintf(stderr, "Failed to run command '%s': %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cmd, strerror(errno));
+=======
+		cmd, strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 		cmd, strerror_r(errno, sbuf, sizeof(sbuf)));
 >>>>>>> v3.18

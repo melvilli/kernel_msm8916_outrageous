@@ -11,7 +11,10 @@ struct linear_conf
 	struct rcu_head		rcu;
 	sector_t		array_sectors;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			raid_disks; /* a copy of mddev->raid_disks */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dev_info		disks[0];

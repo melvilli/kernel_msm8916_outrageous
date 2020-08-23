@@ -59,7 +59,12 @@ int arch_update_cpu_topology(void);
  * If the distance between nodes in a system is larger than RECLAIM_DISTANCE
  * (in whatever arch specific measurement units returned by node_distance())
 <<<<<<< HEAD
+<<<<<<< HEAD
  * then switch on zone reclaim on boot.
+=======
+ * and zone_reclaim_mode is enabled then the VM will only call zone_reclaim()
+ * on nodes within this distance.
+>>>>>>> v3.18
 =======
  * and zone_reclaim_mode is enabled then the VM will only call zone_reclaim()
  * on nodes within this distance.
@@ -71,6 +76,7 @@ int arch_update_cpu_topology(void);
 #define PENALTY_FOR_NODE_WITH_CPUS	(1)
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Below are the 3 major initializers used in building sched_domains:
@@ -183,6 +189,8 @@ int arch_update_cpu_topology(void);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_USE_PERCPU_NUMA_NODE_ID
 DECLARE_PER_CPU(int, numa_node);
 
@@ -191,7 +199,11 @@ DECLARE_PER_CPU(int, numa_node);
 static inline int numa_node_id(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __this_cpu_read(numa_node);
+=======
+	return raw_cpu_read(numa_node);
+>>>>>>> v3.18
 =======
 	return raw_cpu_read(numa_node);
 >>>>>>> v3.18
@@ -240,6 +252,10 @@ static inline int numa_node_id(void)
  */
 DECLARE_PER_CPU(int, _numa_mem_);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int _node_numa_mem_[MAX_NUMNODES];
+>>>>>>> v3.18
 =======
 extern int _node_numa_mem_[MAX_NUMNODES];
 >>>>>>> v3.18
@@ -249,7 +265,10 @@ static inline void set_numa_mem(int node)
 {
 	this_cpu_write(_numa_mem_, node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	_node_numa_mem_[numa_node_id()] = node;
 }
 #endif
@@ -258,6 +277,9 @@ static inline void set_numa_mem(int node)
 static inline int node_to_mem_node(int node)
 {
 	return _node_numa_mem_[node];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
@@ -267,7 +289,11 @@ static inline int node_to_mem_node(int node)
 static inline int numa_mem_id(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __this_cpu_read(_numa_mem_);
+=======
+	return raw_cpu_read(_numa_mem_);
+>>>>>>> v3.18
 =======
 	return raw_cpu_read(_numa_mem_);
 >>>>>>> v3.18
@@ -286,6 +312,10 @@ static inline void set_cpu_numa_mem(int cpu, int node)
 {
 	per_cpu(_numa_mem_, cpu) = node;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	_node_numa_mem_[cpu_to_node(cpu)] = node;
+>>>>>>> v3.18
 =======
 	_node_numa_mem_[cpu_to_node(cpu)] = node;
 >>>>>>> v3.18
@@ -303,7 +333,10 @@ static inline int numa_mem_id(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef node_to_mem_node
 static inline int node_to_mem_node(int node)
 {
@@ -311,6 +344,9 @@ static inline int node_to_mem_node(int node)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef cpu_to_mem
 static inline int cpu_to_mem(int cpu)
@@ -335,7 +371,10 @@ static inline int cpu_to_mem(int cpu)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SCHED_SMT
 static inline const struct cpumask *cpu_smt_mask(int cpu)
 {
@@ -349,5 +388,8 @@ static inline const struct cpumask *cpu_cpu_mask(int cpu)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_TOPOLOGY_H */

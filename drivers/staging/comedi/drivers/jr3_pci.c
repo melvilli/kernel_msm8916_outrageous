@@ -15,11 +15,14 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -47,15 +50,21 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
 #include <linux/delay.h>
 #include <linux/ctype.h>
 #include <linux/firmware.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/pci.h>
 #include <linux/delay.h>
 #include <linux/ctype.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/jiffies.h>
 #include <linux/slab.h>
@@ -66,6 +75,7 @@
 #include "jr3_pci.h"
 
 #define PCI_VENDOR_ID_JR3 0x1762
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define PCI_DEVICE_ID_JR3_1_CHANNEL 0x3111
 #define PCI_DEVICE_ID_JR3_1_CHANNEL_NEW 0x1111
@@ -81,6 +91,8 @@ struct jr3_pci_dev_private {
 
 struct poll_delay_t {
 =======
+=======
+>>>>>>> v3.18
 
 enum jr3_pci_boardid {
 	BOARD_JR3_1,
@@ -121,18 +133,27 @@ struct jr3_pci_transform {
 };
 
 struct jr3_pci_poll_delay {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int min;
 	int max;
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct jr3_pci_dev_private {
 	struct jr3_t __iomem *iobase;
 	struct timer_list timer;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct jr3_pci_subdev_private {
 	struct jr3_channel __iomem *channel;
@@ -146,7 +167,10 @@ struct jr3_pci_subdev_private {
 		state_jr3_done
 	} state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int channel_no;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int serial_no;
@@ -161,6 +185,7 @@ struct jr3_pci_subdev_private {
 	int retries;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Hotplug firmware loading stuff */
 static int comedi_load_firmware(struct comedi_device *dev, const char *name,
@@ -201,6 +226,11 @@ static struct jr3_pci_poll_delay poll_delay_min_max(int min, int max)
 {
 	struct jr3_pci_poll_delay result;
 >>>>>>> v3.18
+=======
+static struct jr3_pci_poll_delay poll_delay_min_max(int min, int max)
+{
+	struct jr3_pci_poll_delay result;
+>>>>>>> v3.18
 
 	result.min = min;
 	result.max = max;
@@ -213,6 +243,7 @@ static int is_complete(struct jr3_channel __iomem *channel)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct transform_t {
 	struct {
 		u16 link_type;
@@ -222,6 +253,10 @@ struct transform_t {
 
 static void set_transforms(struct jr3_channel __iomem *channel,
 			   struct transform_t transf, short num)
+=======
+static void set_transforms(struct jr3_channel __iomem *channel,
+			   struct jr3_pci_transform transf, short num)
+>>>>>>> v3.18
 =======
 static void set_transforms(struct jr3_channel __iomem *channel,
 			   struct jr3_pci_transform transf, short num)
@@ -284,6 +319,10 @@ static struct six_axis_t get_min_full_scales(struct jr3_channel __iomem
 {
 	struct six_axis_t result;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -301,6 +340,10 @@ static struct six_axis_t get_max_full_scales(struct jr3_channel __iomem
 {
 	struct six_axis_t result;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -313,6 +356,7 @@ static struct six_axis_t get_max_full_scales(struct jr3_channel __iomem
 	return result;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int jr3_pci_ai_insn_read(struct comedi_device *dev,
 				struct comedi_subdevice *s,
@@ -403,6 +447,8 @@ static int jr3_pci_ai_insn_read(struct comedi_device *dev,
 	}
 	return result;
 =======
+=======
+>>>>>>> v3.18
 static unsigned int jr3_pci_ai_read_chan(struct comedi_device *dev,
 					 struct comedi_subdevice *s,
 					 unsigned int chan)
@@ -481,11 +527,15 @@ static int jr3_pci_ai_insn_read(struct comedi_device *dev,
 		data[i] = jr3_pci_ai_read_chan(dev, s, chan);
 
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int jr3_pci_open(struct comedi_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 	struct jr3_pci_dev_private *devpriv = dev->private;
@@ -500,6 +550,8 @@ static int jr3_pci_open(struct comedi_device *dev)
 				p->serial_no, p->channel_no);
 		}
 =======
+=======
+>>>>>>> v3.18
 	struct jr3_pci_subdev_private *spriv;
 	struct comedi_subdevice *s;
 	int i;
@@ -511,6 +563,9 @@ static int jr3_pci_open(struct comedi_device *dev)
 		if (spriv)
 			dev_dbg(dev->class_dev, "serial: %p %d (%d)\n",
 				spriv, spriv->serial_no, s->index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -521,6 +576,11 @@ static int read_idm_word(const u8 *data, size_t size, int *pos,
 {
 	int result = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int value;
+
+>>>>>>> v3.18
 =======
 	int value;
 
@@ -533,7 +593,10 @@ static int read_idm_word(const u8 *data, size_t size, int *pos,
 		*val = 0;
 		for (; *pos < size; (*pos)++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int value;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			value = hex_to_bin(data[*pos]);
@@ -549,22 +612,29 @@ static int read_idm_word(const u8 *data, size_t size, int *pos,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int jr3_download_firmware(struct comedi_device *dev, const u8 *data,
 				 size_t size)
 {
 =======
+=======
+>>>>>>> v3.18
 static int jr3_check_firmware(struct comedi_device *dev,
 			      const u8 *data, size_t size)
 {
 	int more = 1;
 	int pos = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * IDM file format is:
 	 *   { count, address, data <count> } *
 	 *   ffff
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int result, more, pos, OK;
 
@@ -584,6 +654,8 @@ static int jr3_check_firmware(struct comedi_device *dev,
 		while (more && count > 0) {
 			unsigned int dummy;
 =======
+=======
+>>>>>>> v3.18
 	while (more) {
 		unsigned int count = 0;
 		unsigned int addr = 0;
@@ -596,12 +668,16 @@ static int jr3_check_firmware(struct comedi_device *dev,
 		while (more && count > 0) {
 			unsigned int dummy = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			more = more && read_idm_word(data, size, &pos, &dummy);
 			count--;
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!OK) {
 		result = -ENODATA;
@@ -830,6 +906,8 @@ static struct poll_delay_t jr3_pci_poll_subdevice(struct comedi_subdevice *s)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	return -ENODATA;
 }
 
@@ -1048,6 +1126,9 @@ static struct jr3_pci_poll_delay jr3_pci_poll_subdevice(struct comedi_subdevice 
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return result;
 }
@@ -1055,15 +1136,21 @@ static struct jr3_pci_poll_delay jr3_pci_poll_subdevice(struct comedi_subdevice 
 static void jr3_pci_poll_dev(unsigned long data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 	struct comedi_device *dev = (struct comedi_device *)data;
 	struct jr3_pci_dev_private *devpriv = dev->private;
 =======
+=======
+>>>>>>> v3.18
 	struct comedi_device *dev = (struct comedi_device *)data;
 	struct jr3_pci_dev_private *devpriv = dev->private;
 	struct jr3_pci_subdev_private *spriv;
 	struct comedi_subdevice *s;
 	unsigned long flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long now;
 	int delay;
@@ -1072,6 +1159,7 @@ static void jr3_pci_poll_dev(unsigned long data)
 	spin_lock_irqsave(&dev->spinlock, flags);
 	delay = 1000;
 	now = jiffies;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*  Poll all channels that are ready to be polled */
 	for (i = 0; i < devpriv->n_channels; i++) {
@@ -1086,6 +1174,8 @@ static void jr3_pci_poll_dev(unsigned long data)
 			subdevpriv->next_time_max =
 				jiffies + msecs_to_jiffies(sub_delay.max);
 =======
+=======
+>>>>>>> v3.18
 
 	/* Poll all channels that are ready to be polled */
 	for (i = 0; i < dev->n_subdevices; i++) {
@@ -1102,6 +1192,9 @@ static void jr3_pci_poll_dev(unsigned long data)
 			spriv->next_time_max = jiffies +
 					       msecs_to_jiffies(sub_delay.max);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (sub_delay.max && sub_delay.max < delay)
 				/*
@@ -1118,6 +1211,7 @@ static void jr3_pci_poll_dev(unsigned long data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int jr3_pci_auto_attach(struct comedi_device *dev,
 					 unsigned long context_unused)
 {
@@ -1126,6 +1220,8 @@ static int jr3_pci_auto_attach(struct comedi_device *dev,
 	int i;
 	struct jr3_pci_dev_private *devpriv;
 =======
+=======
+>>>>>>> v3.18
 static struct jr3_pci_subdev_private *
 jr3_pci_alloc_spriv(struct comedi_device *dev, struct comedi_subdevice *s)
 {
@@ -1178,6 +1274,9 @@ static int jr3_pci_auto_attach(struct comedi_device *dev,
 	struct comedi_subdevice *s;
 	int ret;
 	int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (sizeof(struct jr3_channel) != 0xc00) {
@@ -1187,6 +1286,7 @@ static int jr3_pci_auto_attach(struct comedi_device *dev,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
@@ -1219,6 +1319,8 @@ static int jr3_pci_auto_attach(struct comedi_device *dev,
 	if (result)
 		return result;
 =======
+=======
+>>>>>>> v3.18
 	if (context < ARRAY_SIZE(jr3_pci_boards))
 		board = &jr3_pci_boards[context];
 	if (!board)
@@ -1235,12 +1337,16 @@ static int jr3_pci_auto_attach(struct comedi_device *dev,
 	ret = comedi_pci_enable(dev);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	devpriv->iobase = pci_ioremap_bar(pcidev, 0);
 	if (!devpriv->iobase)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	result = comedi_alloc_subdevices(dev, devpriv->n_channels);
 	if (result)
@@ -1296,6 +1402,8 @@ static int jr3_pci_auto_attach(struct comedi_device *dev,
 			dev->subdevices[i].maxdata = 0;
 			dev->subdevices[i].maxdata_list = p->maxdata_list;
 =======
+=======
+>>>>>>> v3.18
 	ret = comedi_alloc_subdevices(dev, board->n_subdevs);
 	if (ret)
 		return ret;
@@ -1313,6 +1421,9 @@ static int jr3_pci_auto_attach(struct comedi_device *dev,
 			/* Channel specific range and maxdata */
 			s->range_table_list	= spriv->range_table_list;
 			s->maxdata_list		= spriv->maxdata_list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1321,18 +1432,24 @@ static int jr3_pci_auto_attach(struct comedi_device *dev,
 	writel(0, &devpriv->iobase->channel[0].reset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = comedi_load_firmware(dev, "jr3pci.idm", jr3_download_firmware);
 	dev_dbg(dev->class_dev, "Firmare load %d\n", result);
 
 	if (result < 0)
 		return result;
 =======
+=======
+>>>>>>> v3.18
 	ret = comedi_load_firmware(dev, &comedi_to_pci_dev(dev)->dev,
 				   "comedi/jr3pci.idm",
 				   jr3_download_firmware, 0);
 	dev_dbg(dev->class_dev, "Firmare load %d\n", ret);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * TODO: use firmware to load preferred offset tables. Suggested
@@ -1340,8 +1457,14 @@ static int jr3_pci_auto_attach(struct comedi_device *dev,
 	 *     model serial Fx Fy Fz Mx My Mz\n
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *     comedi_load_firmware(dev, "jr3_offsets_table",
 	 *                          jr3_download_firmware);
+=======
+	 *     comedi_load_firmware(dev, &comedi_to_pci_dev(dev)->dev,
+	 *                          "comedi/jr3_offsets_table",
+	 *                          jr3_download_firmware, 1);
+>>>>>>> v3.18
 =======
 	 *     comedi_load_firmware(dev, &comedi_to_pci_dev(dev)->dev,
 	 *                          "comedi/jr3_offsets_table",
@@ -1362,18 +1485,24 @@ static int jr3_pci_auto_attach(struct comedi_device *dev,
 
 	/*  Start card timer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < devpriv->n_channels; i++) {
 		struct jr3_pci_subdev_private *p = dev->subdevices[i].private;
 
 		p->next_time_min = jiffies + msecs_to_jiffies(500);
 		p->next_time_max = jiffies + msecs_to_jiffies(2000);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < dev->n_subdevices; i++) {
 		s = &dev->subdevices[i];
 		spriv = s->private;
 
 		spriv->next_time_min = jiffies + msecs_to_jiffies(500);
 		spriv->next_time_max = jiffies + msecs_to_jiffies(2000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1383,7 +1512,11 @@ static int jr3_pci_auto_attach(struct comedi_device *dev,
 	add_timer(&devpriv->timer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return result;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1392,7 +1525,10 @@ static int jr3_pci_auto_attach(struct comedi_device *dev,
 static void jr3_pci_detach(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct jr3_pci_dev_private *devpriv = dev->private;
@@ -1401,10 +1537,13 @@ static void jr3_pci_detach(struct comedi_device *dev)
 		del_timer_sync(&devpriv->timer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dev->subdevices) {
 			for (i = 0; i < devpriv->n_channels; i++)
 				kfree(dev->subdevices[i].private);
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (devpriv->iobase)
@@ -1427,6 +1566,7 @@ static int jr3_pci_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(jr3_pci_pci_table) = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_JR3, PCI_DEVICE_ID_JR3_1_CHANNEL) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_JR3, PCI_DEVICE_ID_JR3_1_CHANNEL_NEW) },
@@ -1434,12 +1574,17 @@ static DEFINE_PCI_DEVICE_TABLE(jr3_pci_pci_table) = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_JR3, PCI_DEVICE_ID_JR3_3_CHANNEL) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_JR3, PCI_DEVICE_ID_JR3_4_CHANNEL) },
 =======
+=======
+>>>>>>> v3.18
 static const struct pci_device_id jr3_pci_pci_table[] = {
 	{ PCI_VDEVICE(JR3, 0x1111), BOARD_JR3_1 },
 	{ PCI_VDEVICE(JR3, 0x3111), BOARD_JR3_1 },
 	{ PCI_VDEVICE(JR3, 0x3112), BOARD_JR3_2 },
 	{ PCI_VDEVICE(JR3, 0x3113), BOARD_JR3_3 },
 	{ PCI_VDEVICE(JR3, 0x3114), BOARD_JR3_4 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0 }
 };

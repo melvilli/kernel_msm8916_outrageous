@@ -42,7 +42,11 @@ const struct file_operations autofs4_root_operations = {
 	.release	= dcache_dir_close,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= dcache_readdir,
+=======
+	.iterate	= dcache_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= dcache_readdir,
 >>>>>>> v3.18
@@ -58,7 +62,11 @@ const struct file_operations autofs4_dir_operations = {
 	.release	= dcache_dir_close,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= dcache_readdir,
+=======
+	.iterate	= dcache_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= dcache_readdir,
 >>>>>>> v3.18
@@ -175,13 +183,19 @@ static struct dentry *autofs4_lookup_active(struct dentry *dentry)
 	struct list_head *p, *head;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&sbi->lookup_lock);
 	head = &sbi->active_list;
 =======
+=======
+>>>>>>> v3.18
 	head = &sbi->active_list;
 	if (list_empty(head))
 		return NULL;
 	spin_lock(&sbi->lookup_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_for_each(p, head) {
 		struct autofs_info *ino;
@@ -195,7 +209,11 @@ static struct dentry *autofs4_lookup_active(struct dentry *dentry)
 
 		/* Already gone? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (active->d_count == 0)
+=======
+		if ((int) d_count(active) <= 0)
+>>>>>>> v3.18
 =======
 		if ((int) d_count(active) <= 0)
 >>>>>>> v3.18
@@ -228,7 +246,12 @@ next:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dentry *autofs4_lookup_expiring(struct dentry *dentry)
+=======
+static struct dentry *autofs4_lookup_expiring(struct dentry *dentry,
+					      bool rcu_walk)
+>>>>>>> v3.18
 =======
 static struct dentry *autofs4_lookup_expiring(struct dentry *dentry,
 					      bool rcu_walk)
@@ -243,13 +266,19 @@ static struct dentry *autofs4_lookup_expiring(struct dentry *dentry,
 	struct list_head *p, *head;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&sbi->lookup_lock);
 	head = &sbi->expiring_list;
 =======
+=======
+>>>>>>> v3.18
 	head = &sbi->expiring_list;
 	if (list_empty(head))
 		return NULL;
 	spin_lock(&sbi->lookup_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_for_each(p, head) {
 		struct autofs_info *ino;
@@ -257,12 +286,18 @@ static struct dentry *autofs4_lookup_expiring(struct dentry *dentry,
 		struct qstr *qstr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (rcu_walk) {
 			spin_unlock(&sbi->lookup_lock);
 			return ERR_PTR(-ECHILD);
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ino = list_entry(p, struct autofs_info, expiring);
 		expiring = ino->dentry;
@@ -270,7 +305,11 @@ static struct dentry *autofs4_lookup_expiring(struct dentry *dentry,
 		spin_lock(&expiring->d_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Bad luck, we've already been dentry_iput */
+=======
+		/* We've already been dentry_iput or unlinked */
+>>>>>>> v3.18
 =======
 		/* We've already been dentry_iput or unlinked */
 >>>>>>> v3.18
@@ -304,7 +343,11 @@ next:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int autofs4_mount_wait(struct dentry *dentry)
+=======
+static int autofs4_mount_wait(struct dentry *dentry, bool rcu_walk)
+>>>>>>> v3.18
 =======
 static int autofs4_mount_wait(struct dentry *dentry, bool rcu_walk)
 >>>>>>> v3.18
@@ -315,6 +358,11 @@ static int autofs4_mount_wait(struct dentry *dentry, bool rcu_walk)
 
 	if (ino->flags & AUTOFS_INF_PENDING) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (rcu_walk)
+			return -ECHILD;
+>>>>>>> v3.18
 =======
 		if (rcu_walk)
 			return -ECHILD;
@@ -329,6 +377,7 @@ static int autofs4_mount_wait(struct dentry *dentry, bool rcu_walk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_expire_wait(struct dentry *dentry)
 {
 	struct dentry *expiring;
@@ -337,6 +386,8 @@ static int do_expire_wait(struct dentry *dentry)
 	if (!expiring)
 		return autofs4_expire_wait(dentry);
 =======
+=======
+>>>>>>> v3.18
 static int do_expire_wait(struct dentry *dentry, bool rcu_walk)
 {
 	struct dentry *expiring;
@@ -346,6 +397,9 @@ static int do_expire_wait(struct dentry *dentry, bool rcu_walk)
 		return PTR_ERR(expiring);
 	if (!expiring)
 		return autofs4_expire_wait(dentry, rcu_walk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else {
 		/*
@@ -354,7 +408,11 @@ static int do_expire_wait(struct dentry *dentry, bool rcu_walk)
 		 * so it must have been successful, just wait for it.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		autofs4_expire_wait(expiring);
+=======
+		autofs4_expire_wait(expiring, 0);
+>>>>>>> v3.18
 =======
 		autofs4_expire_wait(expiring, 0);
 >>>>>>> v3.18
@@ -410,7 +468,11 @@ static struct vfsmount *autofs4_d_automount(struct path *path)
 	 * the mount.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = do_expire_wait(dentry);
+=======
+	status = do_expire_wait(dentry, 0);
+>>>>>>> v3.18
 =======
 	status = do_expire_wait(dentry, 0);
 >>>>>>> v3.18
@@ -422,7 +484,11 @@ static struct vfsmount *autofs4_d_automount(struct path *path)
 	if (ino->flags & AUTOFS_INF_PENDING) {
 		spin_unlock(&sbi->fs_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = autofs4_mount_wait(dentry);
+=======
+		status = autofs4_mount_wait(dentry, 0);
+>>>>>>> v3.18
 =======
 		status = autofs4_mount_wait(dentry, 0);
 >>>>>>> v3.18
@@ -450,7 +516,11 @@ static struct vfsmount *autofs4_d_automount(struct path *path)
 		 * mount never trigger mounts themselves (they have an autofs
 		 * trigger mount mounted on them). But v4 pseudo direct mounts
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * do need the leaves to to trigger mounts. In this case we
+=======
+		 * do need the leaves to trigger mounts. In this case we
+>>>>>>> v3.18
 =======
 		 * do need the leaves to trigger mounts. In this case we
 >>>>>>> v3.18
@@ -471,7 +541,11 @@ static struct vfsmount *autofs4_d_automount(struct path *path)
 		ino->flags |= AUTOFS_INF_PENDING;
 		spin_unlock(&sbi->fs_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = autofs4_mount_wait(dentry);
+=======
+		status = autofs4_mount_wait(dentry, 0);
+>>>>>>> v3.18
 =======
 		status = autofs4_mount_wait(dentry, 0);
 >>>>>>> v3.18
@@ -504,8 +578,11 @@ static int autofs4_d_manage(struct dentry *dentry, bool rcu_walk)
 	/* The daemon never waits. */
 	if (autofs4_oz_mode(sbi)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rcu_walk)
 			return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (!d_mountpoint(dentry))
@@ -513,6 +590,7 @@ static int autofs4_d_manage(struct dentry *dentry, bool rcu_walk)
 		return 0;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* We need to sleep, so we need pathwalk to be in ref-mode */
 	if (rcu_walk)
@@ -525,17 +603,25 @@ static int autofs4_d_manage(struct dentry *dentry, bool rcu_walk)
 	if (do_expire_wait(dentry, rcu_walk) == -ECHILD)
 		return -ECHILD;
 >>>>>>> v3.18
+=======
+	/* Wait for pending expires */
+	if (do_expire_wait(dentry, rcu_walk) == -ECHILD)
+		return -ECHILD;
+>>>>>>> v3.18
 
 	/*
 	 * This dentry may be under construction so wait on mount
 	 * completion.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = autofs4_mount_wait(dentry);
 	if (status)
 		return status;
 
 =======
+=======
+>>>>>>> v3.18
 	status = autofs4_mount_wait(dentry, rcu_walk);
 	if (status)
 		return status;
@@ -563,6 +649,9 @@ static int autofs4_d_manage(struct dentry *dentry, bool rcu_walk)
 		return 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock(&sbi->fs_lock);
 	/*
@@ -682,7 +771,11 @@ static int autofs4_dir_symlink(struct inode *dir,
 	atomic_inc(&ino->count);
 	p_ino = autofs4_dentry_ino(dentry->d_parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (p_ino && dentry->d_parent != dentry)
+=======
+	if (p_ino && !IS_ROOT(dentry))
+>>>>>>> v3.18
 =======
 	if (p_ino && !IS_ROOT(dentry))
 >>>>>>> v3.18
@@ -721,7 +814,11 @@ static int autofs4_dir_unlink(struct inode *dir, struct dentry *dentry)
 	if (atomic_dec_and_test(&ino->count)) {
 		p_ino = autofs4_dentry_ino(dentry->d_parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (p_ino && dentry->d_parent != dentry)
+=======
+		if (p_ino && !IS_ROOT(dentry))
+>>>>>>> v3.18
 =======
 		if (p_ino && !IS_ROOT(dentry))
 >>>>>>> v3.18
@@ -787,7 +884,11 @@ static void autofs_clear_leaf_automount_flags(struct dentry *dentry)
 	if (IS_ROOT(parent->d_parent))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	d_child = &dentry->d_child;
+=======
+	d_child = &dentry->d_u.d_child;
+>>>>>>> v3.18
 =======
 	d_child = &dentry->d_u.d_child;
 >>>>>>> v3.18
@@ -868,7 +969,11 @@ static int autofs4_dir_mkdir(struct inode *dir, struct dentry *dentry, umode_t m
 	atomic_inc(&ino->count);
 	p_ino = autofs4_dentry_ino(dentry->d_parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (p_ino && dentry->d_parent != dentry)
+=======
+	if (p_ino && !IS_ROOT(dentry))
+>>>>>>> v3.18
 =======
 	if (p_ino && !IS_ROOT(dentry))
 >>>>>>> v3.18

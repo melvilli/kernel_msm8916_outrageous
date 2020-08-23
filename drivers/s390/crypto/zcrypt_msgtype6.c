@@ -26,6 +26,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KMSG_COMPONENT "zcrypt"
+#define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
+
+>>>>>>> v3.18
 =======
 #define KMSG_COMPONENT "zcrypt"
 #define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
@@ -57,6 +63,10 @@ struct response_type {
 #define PCIXCC_RESPONSE_TYPE_ICA  0
 #define PCIXCC_RESPONSE_TYPE_XCRB 1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCIXCC_RESPONSE_TYPE_EP11 2
+>>>>>>> v3.18
 =======
 #define PCIXCC_RESPONSE_TYPE_EP11 2
 >>>>>>> v3.18
@@ -318,11 +328,14 @@ static int XCRB_msg_to_type6CPRB_msgX(struct zcrypt_device *zdev,
 
 	int rcblen = CEIL4(xcRB->request_control_blk_length);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int replylen;
 	char *req_data = ap_msg->message + sizeof(struct type6_hdr) + rcblen;
 	char *function_code;
 
 =======
+=======
+>>>>>>> v3.18
 	int replylen, req_sumlen, resp_sumlen;
 	char *req_data = ap_msg->message + sizeof(struct type6_hdr) + rcblen;
 	char *function_code;
@@ -331,6 +344,9 @@ static int XCRB_msg_to_type6CPRB_msgX(struct zcrypt_device *zdev,
 			xcRB->request_control_blk_length)
 		return -EINVAL; /* overflow after alignment*/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* length checks */
 	ap_msg->length = sizeof(struct type6_hdr) +
@@ -339,7 +355,10 @@ static int XCRB_msg_to_type6CPRB_msgX(struct zcrypt_device *zdev,
 	if (ap_msg->length > MSGTYPE06_MAX_MSG_SIZE)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Overflow check
 	   sum must be greater (or equal) than the largest operand */
@@ -356,6 +375,9 @@ static int XCRB_msg_to_type6CPRB_msgX(struct zcrypt_device *zdev,
 			xcRB->reply_control_blk_length)
 		return -EINVAL; /* overflow after alignment*/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	replylen = sizeof(struct type86_fmt2_msg) +
 		CEIL4(xcRB->reply_control_blk_length) +
@@ -364,7 +386,10 @@ static int XCRB_msg_to_type6CPRB_msgX(struct zcrypt_device *zdev,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Overflow check
 	   sum must be greater (or equal) than the largest operand */
 	resp_sumlen = CEIL4(xcRB->reply_control_blk_length) +
@@ -375,6 +400,9 @@ static int XCRB_msg_to_type6CPRB_msgX(struct zcrypt_device *zdev,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* prepare type6 header */
 	msg->hdr = static_type6_hdrX;
@@ -412,7 +440,10 @@ static int XCRB_msg_to_type6CPRB_msgX(struct zcrypt_device *zdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int xcrb_msg_to_type6_ep11cprb_msgx(struct zcrypt_device *zdev,
 				       struct ap_message *ap_msg,
 				       struct ep11_urb *xcRB)
@@ -504,6 +535,9 @@ static int xcrb_msg_to_type6_ep11cprb_msgx(struct zcrypt_device *zdev,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * Copy results from a type 86 ICA reply message back to user space.
@@ -525,13 +559,19 @@ struct type86x_reply {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct type86_ep11_reply {
 	struct type86_hdr hdr;
 	struct type86_fmt2_ext fmt2;
 	struct ep11_cprb cprbx;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int convert_type86_ica(struct zcrypt_device *zdev,
 			  struct ap_message *reply,
@@ -597,12 +637,18 @@ static int convert_type86_ica(struct zcrypt_device *zdev,
 			return -EINVAL;
 		zdev->online = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		pr_err("Cryptographic device %x failed and was set offline\n",
 		       zdev->ap_dev->qid);
 		ZCRYPT_DBF_DEV(DBF_ERR, zdev, "dev%04xo%drc%d",
 			       zdev->ap_dev->qid, zdev->online,
 			       msg->hdr.reply_code);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EAGAIN;	/* repeat the request on a different device. */
 	}
@@ -668,7 +714,10 @@ static int convert_type86_xcrb(struct zcrypt_device *zdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * Copy results from a type 86 EP11 XCRB reply message back to user space.
  *
@@ -696,6 +745,9 @@ static int convert_type86_ep11_xcrb(struct zcrypt_device *zdev,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int convert_type86_rng(struct zcrypt_device *zdev,
 			  struct ap_message *reply,
@@ -746,11 +798,17 @@ static int convert_response_ica(struct zcrypt_device *zdev,
 	default: /* Unknown response type, this should NEVER EVER happen */
 		zdev->online = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		pr_err("Cryptographic device %x failed and was set offline\n",
 		       zdev->ap_dev->qid);
 		ZCRYPT_DBF_DEV(DBF_ERR, zdev, "dev%04xo%dfail",
 			       zdev->ap_dev->qid, zdev->online);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EAGAIN;	/* repeat the request on a different device. */
 	}
@@ -781,18 +839,27 @@ static int convert_response_xcrb(struct zcrypt_device *zdev,
 		xcRB->status = 0x0008044DL; /* HDD_InvalidParm */
 		zdev->online = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		pr_err("Cryptographic device %x failed and was set offline\n",
 		       zdev->ap_dev->qid);
 		ZCRYPT_DBF_DEV(DBF_ERR, zdev, "dev%04xo%dfail",
 			       zdev->ap_dev->qid, zdev->online);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EAGAIN;	/* repeat the request on a different device. */
 	}
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int convert_response_ep11_xcrb(struct zcrypt_device *zdev,
 	struct ap_message *reply, struct ep11_urb *xcRB)
 {
@@ -819,6 +886,9 @@ static int convert_response_ep11_xcrb(struct zcrypt_device *zdev,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int convert_response_rng(struct zcrypt_device *zdev,
 				 struct ap_message *reply,
@@ -840,11 +910,17 @@ static int convert_response_rng(struct zcrypt_device *zdev,
 	default: /* Unknown response type, this should NEVER EVER happen */
 		zdev->online = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		pr_err("Cryptographic device %x failed and was set offline\n",
 		       zdev->ap_dev->qid);
 		ZCRYPT_DBF_DEV(DBF_ERR, zdev, "dev%04xo%dfail",
 			       zdev->ap_dev->qid, zdev->online);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EAGAIN;	/* repeat the request on a different device. */
 	}
@@ -902,7 +978,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * This function is called from the AP bus code after a crypto request
  * "msg" has finished with the reply message "reply".
@@ -948,6 +1027,9 @@ out:
 	complete(&(resp_type->work));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static atomic_t zcrypt_step = ATOMIC_INIT(0);
 
@@ -1075,7 +1157,10 @@ out_free:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * The request distributor calls this function if it picked the CEX4P
  * device to handle a send_ep11_cprb request.
  * @zdev: pointer to zcrypt_device structure that identifies the
@@ -1116,6 +1201,9 @@ out_free:
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * The request distributor calls this function if it picked the PCIXCC/CEX2C
  * device to generate random data.
@@ -1175,7 +1263,10 @@ static struct zcrypt_ops zcrypt_msgtype6_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct zcrypt_ops zcrypt_msgtype6_ep11_ops = {
 	.owner = THIS_MODULE,
 	.variant = MSGTYPE06_VARIANT_EP11,
@@ -1184,12 +1275,19 @@ static struct zcrypt_ops zcrypt_msgtype6_ep11_ops = {
 	.send_ep11_cprb = zcrypt_msgtype6_send_ep11_cprb,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int __init zcrypt_msgtype6_init(void)
 {
 	zcrypt_msgtype_register(&zcrypt_msgtype6_norng_ops);
 	zcrypt_msgtype_register(&zcrypt_msgtype6_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	zcrypt_msgtype_register(&zcrypt_msgtype6_ep11_ops);
+>>>>>>> v3.18
 =======
 	zcrypt_msgtype_register(&zcrypt_msgtype6_ep11_ops);
 >>>>>>> v3.18
@@ -1201,6 +1299,10 @@ void __exit zcrypt_msgtype6_exit(void)
 	zcrypt_msgtype_unregister(&zcrypt_msgtype6_norng_ops);
 	zcrypt_msgtype_unregister(&zcrypt_msgtype6_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	zcrypt_msgtype_unregister(&zcrypt_msgtype6_ep11_ops);
+>>>>>>> v3.18
 =======
 	zcrypt_msgtype_unregister(&zcrypt_msgtype6_ep11_ops);
 >>>>>>> v3.18

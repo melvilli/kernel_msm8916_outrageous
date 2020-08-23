@@ -169,7 +169,10 @@ static inline void outsl(unsigned int port, const void *addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define inb_p(port)             inb(port)
 #define inw_p(port)             inw(port)
 #define inl_p(port)             inl(port)
@@ -177,6 +180,9 @@ static inline void outsl(unsigned int port, const void *addr,
 #define outw_p(val, port)       outw((val), (port))
 #define outl_p(val, port)       outl((val), (port))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Convert a physical pointer to a virtual kernel pointer for /dev/mem

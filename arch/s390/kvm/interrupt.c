@@ -2,7 +2,11 @@
  * handling kvm guest interrupts
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright IBM Corp. 2008
+=======
+ * Copyright IBM Corp. 2008,2014
+>>>>>>> v3.18
 =======
  * Copyright IBM Corp. 2008,2014
 >>>>>>> v3.18
@@ -18,6 +22,10 @@
 #include <linux/kvm_host.h>
 #include <linux/hrtimer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mmu_context.h>
+>>>>>>> v3.18
 =======
 #include <linux/mmu_context.h>
 >>>>>>> v3.18
@@ -34,6 +42,12 @@
 #define IOINT_CSSID_MASK 0x03fc0000
 #define IOINT_AI_MASK 0x04000000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PFAULT_INIT 0x0600
+
+static int __must_check deliver_ckc_interrupt(struct kvm_vcpu *vcpu);
+>>>>>>> v3.18
 =======
 #define PFAULT_INIT 0x0600
 
@@ -46,7 +60,11 @@ static int is_ioint(u64 type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int psw_extint_disabled(struct kvm_vcpu *vcpu)
+=======
+int psw_extint_disabled(struct kvm_vcpu *vcpu)
+>>>>>>> v3.18
 =======
 int psw_extint_disabled(struct kvm_vcpu *vcpu)
 >>>>>>> v3.18
@@ -74,7 +92,10 @@ static int psw_interrupts_disabled(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ckc_interrupts_enabled(struct kvm_vcpu *vcpu)
 {
 	if (psw_extint_disabled(vcpu) ||
@@ -86,6 +107,9 @@ static int ckc_interrupts_enabled(struct kvm_vcpu *vcpu)
 	return 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u64 int_word_to_isc_bits(u32 int_word)
 {
@@ -95,7 +119,11 @@ static u64 int_word_to_isc_bits(u32 int_word)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __interrupt_is_deliverable(struct kvm_vcpu *vcpu,
+=======
+static int __must_check __interrupt_is_deliverable(struct kvm_vcpu *vcpu,
+>>>>>>> v3.18
 =======
 static int __must_check __interrupt_is_deliverable(struct kvm_vcpu *vcpu,
 >>>>>>> v3.18
@@ -115,6 +143,7 @@ static int __must_check __interrupt_is_deliverable(struct kvm_vcpu *vcpu,
 			return 1;
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case KVM_S390_INT_SERVICE:
 		if (psw_extint_disabled(vcpu))
 			return 0;
@@ -122,6 +151,8 @@ static int __must_check __interrupt_is_deliverable(struct kvm_vcpu *vcpu,
 			return 1;
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	case KVM_S390_INT_CLOCK_COMP:
 		return ckc_interrupts_enabled(vcpu);
 	case KVM_S390_INT_CPU_TIMER:
@@ -133,6 +164,9 @@ static int __must_check __interrupt_is_deliverable(struct kvm_vcpu *vcpu,
 	case KVM_S390_INT_SERVICE:
 	case KVM_S390_INT_PFAULT_INIT:
 	case KVM_S390_INT_PFAULT_DONE:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case KVM_S390_INT_VIRTIO:
 		if (psw_extint_disabled(vcpu))
@@ -169,7 +203,10 @@ static int __must_check __interrupt_is_deliverable(struct kvm_vcpu *vcpu,
 static void __set_cpu_idle(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(vcpu->vcpu_id > KVM_MAX_VCPUS - 1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	atomic_set_mask(CPUSTAT_WAIT, &vcpu->arch.sie_block->cpuflags);
@@ -179,7 +216,10 @@ static void __set_cpu_idle(struct kvm_vcpu *vcpu)
 static void __unset_cpu_idle(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(vcpu->vcpu_id > KVM_MAX_VCPUS - 1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	atomic_clear_mask(CPUSTAT_WAIT, &vcpu->arch.sie_block->cpuflags);
@@ -189,12 +229,15 @@ static void __unset_cpu_idle(struct kvm_vcpu *vcpu)
 static void __reset_intercept_indicators(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_clear_mask(CPUSTAT_ECALL_PEND |
 		CPUSTAT_IO_INT | CPUSTAT_EXT_INT | CPUSTAT_STOP_INT,
 		&vcpu->arch.sie_block->cpuflags);
 	vcpu->arch.sie_block->lctl = 0x0000;
 	vcpu->arch.sie_block->ictl &= ~ICTL_LPSW;
 =======
+=======
+>>>>>>> v3.18
 	atomic_clear_mask(CPUSTAT_IO_INT | CPUSTAT_EXT_INT | CPUSTAT_STOP_INT,
 			  &vcpu->arch.sie_block->cpuflags);
 	vcpu->arch.sie_block->lctl = 0x0000;
@@ -208,6 +251,9 @@ static void __reset_intercept_indicators(struct kvm_vcpu *vcpu)
 
 	if (vcpu->arch.local_int.action_bits & ACTION_STOP_ON_STOP)
 		atomic_set_mask(CPUSTAT_STOP_INT, &vcpu->arch.sie_block->cpuflags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -224,13 +270,19 @@ static void __set_intercept_indicator(struct kvm_vcpu *vcpu,
 	case KVM_S390_INT_EMERGENCY:
 	case KVM_S390_INT_SERVICE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case KVM_S390_INT_VIRTIO:
 =======
+=======
+>>>>>>> v3.18
 	case KVM_S390_INT_PFAULT_INIT:
 	case KVM_S390_INT_PFAULT_DONE:
 	case KVM_S390_INT_VIRTIO:
 	case KVM_S390_INT_CLOCK_COMP:
 	case KVM_S390_INT_CPU_TIMER:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (psw_extint_disabled(vcpu))
 			__set_cpuflag(vcpu, CPUSTAT_EXT_INT);
@@ -258,8 +310,11 @@ static void __set_intercept_indicator(struct kvm_vcpu *vcpu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 =======
+=======
+>>>>>>> v3.18
 static u16 get_ilc(struct kvm_vcpu *vcpu)
 {
 	const unsigned short table[] = { 2, 4, 4, 6 };
@@ -362,6 +417,9 @@ static int __must_check __deliver_prog_irq(struct kvm_vcpu *vcpu,
 }
 
 static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				   struct kvm_s390_interrupt_info *inti)
 {
@@ -375,6 +433,7 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		trace_kvm_s390_deliver_interrupt(vcpu->vcpu_id, inti->type,
 						 inti->emerg.code, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc  = put_guest(vcpu, 0x1201, (u16 __user *)__LC_EXT_INT_CODE);
 		rc |= put_guest(vcpu, inti->emerg.code,
 				(u16 __user *)__LC_EXT_CPU_ADDR);
@@ -383,6 +442,8 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		rc |= copy_from_guest(vcpu, &vcpu->arch.sie_block->gpsw,
 				      __LC_EXT_NEW_PSW, sizeof(psw_t));
 =======
+=======
+>>>>>>> v3.18
 		rc  = put_guest_lc(vcpu, 0x1201, (u16 *)__LC_EXT_INT_CODE);
 		rc |= put_guest_lc(vcpu, inti->emerg.code,
 				   (u16 *)__LC_EXT_CPU_ADDR);
@@ -390,6 +451,9 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 				     &vcpu->arch.sie_block->gpsw, sizeof(psw_t));
 		rc |= read_guest_lc(vcpu, __LC_EXT_NEW_PSW,
 				    &vcpu->arch.sie_block->gpsw, sizeof(psw_t));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case KVM_S390_INT_EXTERNAL_CALL:
@@ -397,6 +461,7 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		vcpu->stat.deliver_external_call++;
 		trace_kvm_s390_deliver_interrupt(vcpu->vcpu_id, inti->type,
 						 inti->extcall.code, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rc  = put_guest(vcpu, 0x1202, (u16 __user *)__LC_EXT_INT_CODE);
 		rc |= put_guest(vcpu, inti->extcall.code,
@@ -406,6 +471,8 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		rc |= copy_from_guest(vcpu, &vcpu->arch.sie_block->gpsw,
 				      __LC_EXT_NEW_PSW, sizeof(psw_t));
 =======
+=======
+>>>>>>> v3.18
 		rc  = put_guest_lc(vcpu, 0x1202, (u16 *)__LC_EXT_INT_CODE);
 		rc |= put_guest_lc(vcpu, inti->extcall.code,
 				   (u16 *)__LC_EXT_CPU_ADDR);
@@ -433,6 +500,9 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 				    &vcpu->arch.sie_block->gpsw, sizeof(psw_t));
 		rc |= put_guest_lc(vcpu, inti->ext.ext_params,
 				   (u32 *)__LC_EXT_PARAMS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case KVM_S390_INT_SERVICE:
@@ -442,6 +512,7 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		trace_kvm_s390_deliver_interrupt(vcpu->vcpu_id, inti->type,
 						 inti->ext.ext_params, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc  = put_guest(vcpu, 0x2401, (u16 __user *)__LC_EXT_INT_CODE);
 		rc |= copy_to_guest(vcpu, __LC_EXT_OLD_PSW,
 				    &vcpu->arch.sie_block->gpsw, sizeof(psw_t));
@@ -450,6 +521,8 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		rc |= put_guest(vcpu, inti->ext.ext_params,
 				(u32 __user *)__LC_EXT_PARAMS);
 =======
+=======
+>>>>>>> v3.18
 		rc  = put_guest_lc(vcpu, 0x2401, (u16 *)__LC_EXT_INT_CODE);
 		rc |= write_guest_lc(vcpu, __LC_EXT_OLD_PSW,
 				     &vcpu->arch.sie_block->gpsw,
@@ -484,6 +557,9 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 				    &vcpu->arch.sie_block->gpsw, sizeof(psw_t));
 		rc |= put_guest_lc(vcpu, inti->ext.ext_params2,
 				   (u64 *)__LC_EXT_PARAMS2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case KVM_S390_INT_VIRTIO:
@@ -493,6 +569,7 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		trace_kvm_s390_deliver_interrupt(vcpu->vcpu_id, inti->type,
 						 inti->ext.ext_params,
 						 inti->ext.ext_params2);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rc  = put_guest(vcpu, 0x2603, (u16 __user *)__LC_EXT_INT_CODE);
 		rc |= put_guest(vcpu, 0x0d00, (u16 __user *)__LC_EXT_CPU_ADDR);
@@ -505,6 +582,8 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		rc |= put_guest(vcpu, inti->ext.ext_params2,
 				(u64 __user *)__LC_EXT_PARAMS2);
 =======
+=======
+>>>>>>> v3.18
 		rc  = put_guest_lc(vcpu, 0x2603, (u16 *)__LC_EXT_INT_CODE);
 		rc |= put_guest_lc(vcpu, 0x0d00, (u16 *)__LC_EXT_CPU_ADDR);
 		rc |= write_guest_lc(vcpu, __LC_EXT_OLD_PSW,
@@ -516,6 +595,9 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 				   (u32 *)__LC_EXT_PARAMS);
 		rc |= put_guest_lc(vcpu, inti->ext.ext_params2,
 				   (u64 *)__LC_EXT_PARAMS2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case KVM_S390_SIGP_STOP:
@@ -541,6 +623,7 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		trace_kvm_s390_deliver_interrupt(vcpu->vcpu_id, inti->type,
 						 0, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc  = copy_to_guest(vcpu,
 				    offsetof(struct _lowcore, restart_old_psw),
 				    &vcpu->arch.sie_block->gpsw, sizeof(psw_t));
@@ -549,12 +632,17 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 				      sizeof(psw_t));
 		atomic_clear_mask(CPUSTAT_STOPPED, &vcpu->arch.sie_block->cpuflags);
 =======
+=======
+>>>>>>> v3.18
 		rc  = write_guest_lc(vcpu,
 				     offsetof(struct _lowcore, restart_old_psw),
 				     &vcpu->arch.sie_block->gpsw, sizeof(psw_t));
 		rc |= read_guest_lc(vcpu, offsetof(struct _lowcore, restart_psw),
 				    &vcpu->arch.sie_block->gpsw,
 				    sizeof(psw_t));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case KVM_S390_PROGRAM_INT:
@@ -565,6 +653,7 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		trace_kvm_s390_deliver_interrupt(vcpu->vcpu_id, inti->type,
 						 inti->pgm.code, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc  = put_guest(vcpu, inti->pgm.code, (u16 __user *)__LC_PGM_INT_CODE);
 		rc |= put_guest(vcpu, table[vcpu->arch.sie_block->ipa >> 14],
 				(u16 __user *)__LC_PGM_ILC);
@@ -572,6 +661,9 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 				    &vcpu->arch.sie_block->gpsw, sizeof(psw_t));
 		rc |= copy_from_guest(vcpu, &vcpu->arch.sie_block->gpsw,
 				      __LC_PGM_NEW_PSW, sizeof(psw_t));
+=======
+		rc = __deliver_prog_irq(vcpu, &inti->pgm);
+>>>>>>> v3.18
 =======
 		rc = __deliver_prog_irq(vcpu, &inti->pgm);
 >>>>>>> v3.18
@@ -586,18 +678,24 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		rc  = kvm_s390_vcpu_store_status(vcpu,
 						 KVM_S390_STORE_STATUS_PREFIXED);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc |= put_guest(vcpu, inti->mchk.mcic, (u64 __user *) __LC_MCCK_CODE);
 		rc |= copy_to_guest(vcpu, __LC_MCK_OLD_PSW,
 				    &vcpu->arch.sie_block->gpsw, sizeof(psw_t));
 		rc |= copy_from_guest(vcpu, &vcpu->arch.sie_block->gpsw,
 				      __LC_MCK_NEW_PSW, sizeof(psw_t));
 =======
+=======
+>>>>>>> v3.18
 		rc |= put_guest_lc(vcpu, inti->mchk.mcic, (u64 *)__LC_MCCK_CODE);
 		rc |= write_guest_lc(vcpu, __LC_MCK_OLD_PSW,
 				     &vcpu->arch.sie_block->gpsw,
 				     sizeof(psw_t));
 		rc |= read_guest_lc(vcpu, __LC_MCK_NEW_PSW,
 				    &vcpu->arch.sie_block->gpsw, sizeof(psw_t));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -612,6 +710,7 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		trace_kvm_s390_deliver_interrupt(vcpu->vcpu_id, inti->type,
 						 param0, param1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc  = put_guest(vcpu, inti->io.subchannel_id,
 				(u16 __user *) __LC_SUBCHANNEL_ID);
 		rc |= put_guest(vcpu, inti->io.subchannel_nr,
@@ -625,6 +724,8 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		rc |= copy_from_guest(vcpu, &vcpu->arch.sie_block->gpsw,
 				      __LC_IO_NEW_PSW, sizeof(psw_t));
 =======
+=======
+>>>>>>> v3.18
 		rc  = put_guest_lc(vcpu, inti->io.subchannel_id,
 				   (u16 *)__LC_SUBCHANNEL_ID);
 		rc |= put_guest_lc(vcpu, inti->io.subchannel_nr,
@@ -639,12 +740,16 @@ static int __must_check __do_deliver_interrupt(struct kvm_vcpu *vcpu,
 		rc |= read_guest_lc(vcpu, __LC_IO_NEW_PSW,
 				    &vcpu->arch.sie_block->gpsw,
 				    sizeof(psw_t));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
 	default:
 		BUG();
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (rc) {
 		printk("kvm: The guest lowcore is not mapped during interrupt "
@@ -676,6 +781,8 @@ static int __try_deliver_ckc_interrupt(struct kvm_vcpu *vcpu)
 
 static int kvm_cpu_has_interrupt(struct kvm_vcpu *vcpu)
 =======
+=======
+>>>>>>> v3.18
 
 	return rc;
 }
@@ -708,6 +815,9 @@ int kvm_s390_si_ext_call_pending(struct kvm_vcpu *vcpu)
 }
 
 int kvm_cpu_has_interrupt(struct kvm_vcpu *vcpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kvm_s390_local_interrupt *li = &vcpu->arch.local_int;
@@ -717,7 +827,11 @@ int kvm_cpu_has_interrupt(struct kvm_vcpu *vcpu)
 
 	if (atomic_read(&li->active)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&li->lock);
+=======
+		spin_lock(&li->lock);
+>>>>>>> v3.18
 =======
 		spin_lock(&li->lock);
 >>>>>>> v3.18
@@ -727,7 +841,11 @@ int kvm_cpu_has_interrupt(struct kvm_vcpu *vcpu)
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&li->lock);
+=======
+		spin_unlock(&li->lock);
+>>>>>>> v3.18
 =======
 		spin_unlock(&li->lock);
 >>>>>>> v3.18
@@ -744,6 +862,7 @@ int kvm_cpu_has_interrupt(struct kvm_vcpu *vcpu)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((!rc) && (vcpu->arch.sie_block->ckc <
 		get_tod_clock() + vcpu->arch.sie_block->epoch)) {
 		if ((!psw_extint_disabled(vcpu)) &&
@@ -751,11 +870,16 @@ int kvm_cpu_has_interrupt(struct kvm_vcpu *vcpu)
 			rc = 1;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!rc && kvm_cpu_has_pending_timer(vcpu))
 		rc = 1;
 
 	if (!rc && kvm_s390_si_ext_call_pending(vcpu))
 		rc = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rc;
@@ -764,20 +888,27 @@ int kvm_cpu_has_interrupt(struct kvm_vcpu *vcpu)
 int kvm_cpu_has_pending_timer(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!(vcpu->arch.sie_block->ckc <
 	      get_tod_clock_fast() + vcpu->arch.sie_block->epoch))
 		return 0;
 	if (!ckc_interrupts_enabled(vcpu))
 		return 0;
 	return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int kvm_s390_handle_wait(struct kvm_vcpu *vcpu)
 {
 	u64 now, sltime;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DECLARE_WAITQUEUE(wait, current);
 
@@ -799,6 +930,8 @@ int kvm_s390_handle_wait(struct kvm_vcpu *vcpu)
 	if (psw_extint_disabled(vcpu) ||
 	    (!(vcpu->arch.sie_block->gcr[0] & 0x800ul))) {
 =======
+=======
+>>>>>>> v3.18
 
 	vcpu->stat.exit_wait_state++;
 
@@ -813,11 +946,15 @@ int kvm_s390_handle_wait(struct kvm_vcpu *vcpu)
 
 	__set_cpu_idle(vcpu);
 	if (!ckc_interrupts_enabled(vcpu)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		VCPU_EVENT(vcpu, 3, "%s", "enabled wait w/o timer");
 		goto no_timer;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	now = get_tod_clock() + vcpu->arch.sie_block->epoch;
 	if (vcpu->arch.sie_block->ckc < now) {
@@ -850,6 +987,8 @@ no_timer:
 	spin_unlock_bh(&vcpu->arch.local_int.lock);
 	spin_unlock(&vcpu->arch.local_int.float_int->lock);
 =======
+=======
+>>>>>>> v3.18
 	now = get_tod_clock_fast() + vcpu->arch.sie_block->epoch;
 	sltime = tod_to_ns(vcpu->arch.sie_block->ckc - now);
 	hrtimer_start(&vcpu->arch.ckc_timer, ktime_set (0, sltime) , HRTIMER_MODE_REL);
@@ -860,11 +999,15 @@ no_timer:
 	__unset_cpu_idle(vcpu);
 	vcpu->srcu_idx = srcu_read_lock(&vcpu->kvm->srcu);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hrtimer_try_to_cancel(&vcpu->arch.ckc_timer);
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void kvm_s390_tasklet(unsigned long parm)
 {
@@ -882,6 +1025,8 @@ void kvm_s390_tasklet(unsigned long parm)
  * we schedule a tasklet to do the real work.
  */
 =======
+=======
+>>>>>>> v3.18
 void kvm_s390_vcpu_wakeup(struct kvm_vcpu *vcpu)
 {
 	if (waitqueue_active(&vcpu->wq)) {
@@ -895,6 +1040,9 @@ void kvm_s390_vcpu_wakeup(struct kvm_vcpu *vcpu)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum hrtimer_restart kvm_s390_idle_wakeup(struct hrtimer *timer)
 {
@@ -902,7 +1050,11 @@ enum hrtimer_restart kvm_s390_idle_wakeup(struct hrtimer *timer)
 
 	vcpu = container_of(timer, struct kvm_vcpu, arch.ckc_timer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tasklet_schedule(&vcpu->arch.tasklet);
+=======
+	kvm_s390_vcpu_wakeup(vcpu);
+>>>>>>> v3.18
 =======
 	kvm_s390_vcpu_wakeup(vcpu);
 >>>>>>> v3.18
@@ -910,6 +1062,7 @@ enum hrtimer_restart kvm_s390_idle_wakeup(struct hrtimer *timer)
 	return HRTIMER_NORESTART;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void kvm_s390_deliver_pending_interrupts(struct kvm_vcpu *vcpu)
 {
@@ -970,6 +1123,8 @@ void kvm_s390_deliver_pending_interrupts(struct kvm_vcpu *vcpu)
 
 void kvm_s390_deliver_pending_machine_checks(struct kvm_vcpu *vcpu)
 =======
+=======
+>>>>>>> v3.18
 void kvm_s390_clear_local_irqs(struct kvm_vcpu *vcpu)
 {
 	struct kvm_s390_local_interrupt *li = &vcpu->arch.local_int;
@@ -990,6 +1145,9 @@ void kvm_s390_clear_local_irqs(struct kvm_vcpu *vcpu)
 }
 
 int __must_check kvm_s390_deliver_pending_interrupts(struct kvm_vcpu *vcpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kvm_s390_local_interrupt *li = &vcpu->arch.local_int;
@@ -997,6 +1155,10 @@ int __must_check kvm_s390_deliver_pending_interrupts(struct kvm_vcpu *vcpu)
 	struct kvm_s390_interrupt_info  *n, *inti = NULL;
 	int deliver;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int rc = 0;
+>>>>>>> v3.18
 =======
 	int rc = 0;
 >>>>>>> v3.18
@@ -1006,10 +1168,16 @@ int __must_check kvm_s390_deliver_pending_interrupts(struct kvm_vcpu *vcpu)
 		do {
 			deliver = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_lock_bh(&li->lock);
 			list_for_each_entry_safe(inti, n, &li->list, list) {
 				if ((inti->type == KVM_S390_MCHK) &&
 				    __interrupt_is_deliverable(vcpu, inti)) {
+=======
+			spin_lock(&li->lock);
+			list_for_each_entry_safe(inti, n, &li->list, list) {
+				if (__interrupt_is_deliverable(vcpu, inti)) {
+>>>>>>> v3.18
 =======
 			spin_lock(&li->lock);
 			list_for_each_entry_safe(inti, n, &li->list, list) {
@@ -1024,6 +1192,7 @@ int __must_check kvm_s390_deliver_pending_interrupts(struct kvm_vcpu *vcpu)
 			if (list_empty(&li->list))
 				atomic_set(&li->active, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_unlock_bh(&li->lock);
 			if (deliver) {
 				__do_deliver_interrupt(vcpu, inti);
@@ -1034,6 +1203,8 @@ int __must_check kvm_s390_deliver_pending_interrupts(struct kvm_vcpu *vcpu)
 
 	if (atomic_read(&fi->active)) {
 =======
+=======
+>>>>>>> v3.18
 			spin_unlock(&li->lock);
 			if (deliver) {
 				rc = __do_deliver_interrupt(vcpu, inti);
@@ -1046,15 +1217,24 @@ int __must_check kvm_s390_deliver_pending_interrupts(struct kvm_vcpu *vcpu)
 		rc = deliver_ckc_interrupt(vcpu);
 
 	if (!rc && atomic_read(&fi->active)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		do {
 			deliver = 0;
 			spin_lock(&fi->lock);
 			list_for_each_entry_safe(inti, n, &fi->list, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if ((inti->type == KVM_S390_MCHK) &&
 				    __interrupt_is_deliverable(vcpu, inti)) {
 					list_del(&inti->list);
+=======
+				if (__interrupt_is_deliverable(vcpu, inti)) {
+					list_del(&inti->list);
+					fi->irq_count--;
+>>>>>>> v3.18
 =======
 				if (__interrupt_is_deliverable(vcpu, inti)) {
 					list_del(&inti->list);
@@ -1070,12 +1250,15 @@ int __must_check kvm_s390_deliver_pending_interrupts(struct kvm_vcpu *vcpu)
 			spin_unlock(&fi->lock);
 			if (deliver) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				__do_deliver_interrupt(vcpu, inti);
 				kfree(inti);
 			}
 		} while (deliver);
 	}
 =======
+=======
+>>>>>>> v3.18
 				rc = __do_deliver_interrupt(vcpu, inti);
 				kfree(inti);
 			}
@@ -1083,6 +1266,9 @@ int __must_check kvm_s390_deliver_pending_interrupts(struct kvm_vcpu *vcpu)
 	}
 
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1101,12 +1287,15 @@ int kvm_s390_inject_program_int(struct kvm_vcpu *vcpu, u16 code)
 	VCPU_EVENT(vcpu, 3, "inject: program check %d (from kernel)", code);
 	trace_kvm_s390_inject_vcpu(vcpu->vcpu_id, inti->type, code, 0, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&li->lock);
 	list_add(&inti->list, &li->list);
 	atomic_set(&li->active, 1);
 	BUG_ON(waitqueue_active(&li->wq));
 	spin_unlock_bh(&li->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&li->lock);
 	list_add(&inti->list, &li->list);
 	atomic_set(&li->active, 1);
@@ -1137,6 +1326,9 @@ int kvm_s390_inject_prog_irq(struct kvm_vcpu *vcpu,
 	atomic_set(&li->active, 1);
 	BUG_ON(waitqueue_active(li->wq));
 	spin_unlock(&li->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1171,13 +1363,19 @@ struct kvm_s390_interrupt_info *kvm_s390_get_io_int(struct kvm *kvm,
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inti)
 		list_del_init(&inti->list);
 =======
+=======
+>>>>>>> v3.18
 	if (inti) {
 		list_del_init(&inti->list);
 		fi->irq_count--;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (list_empty(&fi->list))
 		atomic_set(&fi->active, 0);
@@ -1187,6 +1385,7 @@ struct kvm_s390_interrupt_info *kvm_s390_get_io_int(struct kvm *kvm,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_s390_inject_vm(struct kvm *kvm,
 		       struct kvm_s390_interrupt *s390int)
 {
@@ -1195,6 +1394,8 @@ int kvm_s390_inject_vm(struct kvm *kvm,
 	struct kvm_s390_interrupt_info *inti, *iter;
 	int sigcpu;
 =======
+=======
+>>>>>>> v3.18
 static int __inject_vm(struct kvm *kvm, struct kvm_s390_interrupt_info *inti)
 {
 	struct kvm_s390_local_interrupt *li;
@@ -1253,6 +1454,9 @@ int kvm_s390_inject_vm(struct kvm *kvm,
 		       struct kvm_s390_interrupt *s390int)
 {
 	struct kvm_s390_interrupt_info *inti;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	inti = kzalloc(sizeof(*inti), GFP_KERNEL);
@@ -1260,23 +1464,30 @@ int kvm_s390_inject_vm(struct kvm *kvm,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (s390int->type) {
 	case KVM_S390_INT_VIRTIO:
 		VM_EVENT(kvm, 5, "inject: virtio parm:%x,parm64:%llx",
 			 s390int->parm, s390int->parm64);
 		inti->type = s390int->type;
 =======
+=======
+>>>>>>> v3.18
 	inti->type = s390int->type;
 	switch (inti->type) {
 	case KVM_S390_INT_VIRTIO:
 		VM_EVENT(kvm, 5, "inject: virtio parm:%x,parm64:%llx",
 			 s390int->parm, s390int->parm64);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		inti->ext.ext_params = s390int->parm;
 		inti->ext.ext_params2 = s390int->parm64;
 		break;
 	case KVM_S390_INT_SERVICE:
 		VM_EVENT(kvm, 5, "inject: sclp parm:%x", s390int->parm);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		inti->type = s390int->type;
 		inti->ext.ext_params = s390int->parm;
@@ -1292,6 +1503,8 @@ int kvm_s390_inject_vm(struct kvm *kvm,
 			 s390int->parm64);
 		inti->type = s390int->type;
 =======
+=======
+>>>>>>> v3.18
 		inti->ext.ext_params = s390int->parm;
 		break;
 	case KVM_S390_INT_PFAULT_DONE:
@@ -1301,13 +1514,20 @@ int kvm_s390_inject_vm(struct kvm *kvm,
 	case KVM_S390_MCHK:
 		VM_EVENT(kvm, 5, "inject: machine check parm64:%llx",
 			 s390int->parm64);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		inti->mchk.cr14 = s390int->parm; /* upper bits are not used */
 		inti->mchk.mcic = s390int->parm64;
 		break;
 	case KVM_S390_INT_IO_MIN...KVM_S390_INT_IO_MAX:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (s390int->type & IOINT_AI_MASK)
+=======
+		if (inti->type & IOINT_AI_MASK)
+>>>>>>> v3.18
 =======
 		if (inti->type & IOINT_AI_MASK)
 >>>>>>> v3.18
@@ -1318,7 +1538,10 @@ int kvm_s390_inject_vm(struct kvm *kvm,
 				 s390int->type & IOINT_SSID_MASK,
 				 s390int->type & IOINT_SCHID_MASK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inti->type = s390int->type;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		inti->io.subchannel_id = s390int->parm >> 16;
@@ -1333,6 +1556,7 @@ int kvm_s390_inject_vm(struct kvm *kvm,
 	trace_kvm_s390_inject_vm(s390int->type, s390int->parm, s390int->parm64,
 				 2);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&kvm->lock);
 	fi = &kvm->arch.float_int;
@@ -1372,6 +1596,8 @@ int kvm_s390_inject_vm(struct kvm *kvm,
 	mutex_unlock(&kvm->lock);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	return __inject_vm(kvm, inti);
 }
 
@@ -1379,6 +1605,9 @@ void kvm_s390_reinject_io_int(struct kvm *kvm,
 			      struct kvm_s390_interrupt_info *inti)
 {
 	__inject_vm(kvm, inti);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1412,6 +1641,11 @@ int kvm_s390_inject_vcpu(struct kvm_vcpu *vcpu,
 	case KVM_S390_SIGP_STOP:
 	case KVM_S390_RESTART:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case KVM_S390_INT_CLOCK_COMP:
+	case KVM_S390_INT_CPU_TIMER:
+>>>>>>> v3.18
 =======
 	case KVM_S390_INT_CLOCK_COMP:
 	case KVM_S390_INT_CPU_TIMER:
@@ -1445,11 +1679,17 @@ int kvm_s390_inject_vcpu(struct kvm_vcpu *vcpu,
 		inti->mchk.mcic = s390int->parm64;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case KVM_S390_INT_PFAULT_INIT:
 		inti->type = s390int->type;
 		inti->ext.ext_params2 = s390int->parm64;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case KVM_S390_INT_VIRTIO:
 	case KVM_S390_INT_SERVICE:
@@ -1462,9 +1702,14 @@ int kvm_s390_inject_vcpu(struct kvm_vcpu *vcpu,
 				   s390int->parm64, 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&vcpu->kvm->lock);
 	li = &vcpu->arch.local_int;
 	spin_lock_bh(&li->lock);
+=======
+	li = &vcpu->arch.local_int;
+	spin_lock(&li->lock);
+>>>>>>> v3.18
 =======
 	li = &vcpu->arch.local_int;
 	spin_lock(&li->lock);
@@ -1478,6 +1723,7 @@ int kvm_s390_inject_vcpu(struct kvm_vcpu *vcpu,
 		li->action_bits |= ACTION_STOP_ON_STOP;
 	atomic_set_mask(CPUSTAT_EXT_INT, li->cpuflags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (waitqueue_active(&li->wq))
 		wake_up_interruptible(&vcpu->arch.local_int.wq);
 	spin_unlock_bh(&li->lock);
@@ -1485,6 +1731,8 @@ int kvm_s390_inject_vcpu(struct kvm_vcpu *vcpu,
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock(&li->lock);
 	kvm_s390_vcpu_wakeup(vcpu);
 	return 0;
@@ -2007,4 +2255,7 @@ int kvm_set_msi(struct kvm_kernel_irq_routing_entry *e, struct kvm *kvm,
 {
 	return -EINVAL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

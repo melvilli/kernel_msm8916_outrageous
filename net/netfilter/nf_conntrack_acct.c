@@ -40,7 +40,12 @@ unsigned int
 seq_print_acct(struct seq_file *s, const struct nf_conn *ct, int dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nf_conn_counter *acct;
+=======
+	struct nf_conn_acct *acct;
+	struct nf_conn_counter *counter;
+>>>>>>> v3.18
 =======
 	struct nf_conn_acct *acct;
 	struct nf_conn_counter *counter;
@@ -51,22 +56,33 @@ seq_print_acct(struct seq_file *s, const struct nf_conn *ct, int dir)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return seq_printf(s, "packets=%llu bytes=%llu ",
 			  (unsigned long long)atomic64_read(&acct[dir].packets),
 			  (unsigned long long)atomic64_read(&acct[dir].bytes));
 =======
+=======
+>>>>>>> v3.18
 	counter = acct->counter;
 	return seq_printf(s, "packets=%llu bytes=%llu ",
 			  (unsigned long long)atomic64_read(&counter[dir].packets),
 			  (unsigned long long)atomic64_read(&counter[dir].bytes));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 EXPORT_SYMBOL_GPL(seq_print_acct);
 
 static struct nf_ct_ext_type acct_extend __read_mostly = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.len	= sizeof(struct nf_conn_counter[IP_CT_DIR_MAX]),
 	.align	= __alignof__(struct nf_conn_counter[IP_CT_DIR_MAX]),
+=======
+	.len	= sizeof(struct nf_conn_acct),
+	.align	= __alignof__(struct nf_conn_acct),
+>>>>>>> v3.18
 =======
 	.len	= sizeof(struct nf_conn_acct),
 	.align	= __alignof__(struct nf_conn_acct),

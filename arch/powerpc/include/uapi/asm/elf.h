@@ -108,11 +108,17 @@ typedef elf_gregset_t32 compat_elf_gregset_t;
 # define ELF_NVSRHALFREG 32	/* Half the vsx registers */
 # define ELF_GREG_TYPE	elf_greg_t64
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # define ELF_ARCH	EM_PPC64
 # define ELF_CLASS	ELFCLASS64
 typedef elf_greg_t64 elf_greg_t;
 typedef elf_gregset_t64 elf_gregset_t;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 # define ELF_NEVRREG	34	/* includes acc (as 2) */
@@ -120,6 +126,7 @@ typedef elf_gregset_t64 elf_gregset_t;
 # define ELF_GREG_TYPE	elf_greg_t32
 # define ELF_ARCH	EM_PPC
 # define ELF_CLASS	ELFCLASS32
+<<<<<<< HEAD
 <<<<<<< HEAD
 # define ELF_DATA	ELFDATA2MSB
 #endif /* __powerpc64__ */
@@ -136,6 +143,8 @@ typedef elf_gregset_t64 elf_gregset_t;
   typedef elf_gregset_t32 elf_gregset_t;
 #endif /* ELF_ARCH */
 =======
+=======
+>>>>>>> v3.18
 typedef elf_greg_t32 elf_greg_t;
 typedef elf_gregset_t32 elf_gregset_t;
 #endif /* __powerpc64__ */
@@ -145,6 +154,9 @@ typedef elf_gregset_t32 elf_gregset_t;
 #else
 #define ELF_DATA	ELFDATA2LSB
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Floating point registers */
@@ -312,10 +324,13 @@ do {									\
 #define R_PPC64_DTPREL16_HIGHEST 105 /* half16	(sym+add)@dtprel@highest */
 #define R_PPC64_DTPREL16_HIGHESTA 106 /* half16	(sym+add)@dtprel@highesta */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Keep this the last entry.  */
 #define R_PPC64_NUM		107
 =======
+=======
+>>>>>>> v3.18
 #define R_PPC64_TLSGD		107
 #define R_PPC64_TLSLD		108
 #define R_PPC64_TOCSAVE		109
@@ -327,6 +342,9 @@ do {									\
 
 /* Keep this the last entry.  */
 #define R_PPC64_NUM		253
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* There's actually a third entry here, but it's unused */

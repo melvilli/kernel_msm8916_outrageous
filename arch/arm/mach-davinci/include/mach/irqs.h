@@ -402,6 +402,7 @@
 #define DA850_N_CP_INTC_IRQ		101
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* TNETV107X specific interrupts */
 #define IRQ_TNETV107X_TDM1_TXDMA		0
@@ -499,6 +500,8 @@
 
 #define TNETV107X_N_CP_INTC_IRQ			96
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* da850 currently has the most gpio pins (144) */

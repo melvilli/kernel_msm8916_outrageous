@@ -53,16 +53,22 @@ int vmw_dmabuf_to_placement(struct vmw_private *dev_priv,
 			    bool interruptible)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_master *vmaster = dev_priv->active_master;
 	struct ttm_buffer_object *bo = &buf->base;
 	int ret;
 
 	ret = ttm_write_lock(&vmaster->lock, interruptible);
 =======
+=======
+>>>>>>> v3.18
 	struct ttm_buffer_object *bo = &buf->base;
 	int ret;
 
 	ret = ttm_write_lock(&dev_priv->reservation_sem, interruptible);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(ret != 0))
 		return ret;
@@ -70,7 +76,11 @@ int vmw_dmabuf_to_placement(struct vmw_private *dev_priv,
 	vmw_execbuf_release_pinned_bo(dev_priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_bo_reserve(bo, interruptible, false, false, 0);
+=======
+	ret = ttm_bo_reserve(bo, interruptible, false, false, NULL);
+>>>>>>> v3.18
 =======
 	ret = ttm_bo_reserve(bo, interruptible, false, false, NULL);
 >>>>>>> v3.18
@@ -83,7 +93,11 @@ int vmw_dmabuf_to_placement(struct vmw_private *dev_priv,
 
 err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_write_unlock(&vmaster->lock);
+=======
+	ttm_write_unlock(&dev_priv->reservation_sem);
+>>>>>>> v3.18
 =======
 	ttm_write_unlock(&dev_priv->reservation_sem);
 >>>>>>> v3.18
@@ -111,7 +125,10 @@ int vmw_dmabuf_to_vram_or_gmr(struct vmw_private *dev_priv,
 			      bool pin, bool interruptible)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_master *vmaster = dev_priv->active_master;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ttm_buffer_object *bo = &buf->base;
@@ -119,7 +136,11 @@ int vmw_dmabuf_to_vram_or_gmr(struct vmw_private *dev_priv,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_write_lock(&vmaster->lock, interruptible);
+=======
+	ret = ttm_write_lock(&dev_priv->reservation_sem, interruptible);
+>>>>>>> v3.18
 =======
 	ret = ttm_write_lock(&dev_priv->reservation_sem, interruptible);
 >>>>>>> v3.18
@@ -130,7 +151,11 @@ int vmw_dmabuf_to_vram_or_gmr(struct vmw_private *dev_priv,
 		vmw_execbuf_release_pinned_bo(dev_priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_bo_reserve(bo, interruptible, false, false, 0);
+=======
+	ret = ttm_bo_reserve(bo, interruptible, false, false, NULL);
+>>>>>>> v3.18
 =======
 	ret = ttm_bo_reserve(bo, interruptible, false, false, NULL);
 >>>>>>> v3.18
@@ -170,7 +195,11 @@ err_unreserve:
 	ttm_bo_unreserve(bo);
 err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_write_unlock(&vmaster->lock);
+=======
+	ttm_write_unlock(&dev_priv->reservation_sem);
+>>>>>>> v3.18
 =======
 	ttm_write_unlock(&dev_priv->reservation_sem);
 >>>>>>> v3.18
@@ -229,6 +258,7 @@ int vmw_dmabuf_to_start_of_vram(struct vmw_private *dev_priv,
 				bool pin, bool interruptible)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_master *vmaster = dev_priv->active_master;
 	struct ttm_buffer_object *bo = &buf->base;
 	struct ttm_placement placement;
@@ -242,6 +272,8 @@ int vmw_dmabuf_to_start_of_vram(struct vmw_private *dev_priv,
 
 	ret = ttm_write_lock(&vmaster->lock, interruptible);
 =======
+=======
+>>>>>>> v3.18
 	struct ttm_buffer_object *bo = &buf->base;
 	struct ttm_placement placement;
 	struct ttm_place place;
@@ -259,6 +291,9 @@ int vmw_dmabuf_to_start_of_vram(struct vmw_private *dev_priv,
 	placement.busy_placement = &place;
 
 	ret = ttm_write_lock(&dev_priv->reservation_sem, interruptible);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(ret != 0))
 		return ret;
@@ -266,7 +301,11 @@ int vmw_dmabuf_to_start_of_vram(struct vmw_private *dev_priv,
 	if (pin)
 		vmw_execbuf_release_pinned_bo(dev_priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_bo_reserve(bo, interruptible, false, false, 0);
+=======
+	ret = ttm_bo_reserve(bo, interruptible, false, false, NULL);
+>>>>>>> v3.18
 =======
 	ret = ttm_bo_reserve(bo, interruptible, false, false, NULL);
 >>>>>>> v3.18
@@ -287,7 +326,11 @@ int vmw_dmabuf_to_start_of_vram(struct vmw_private *dev_priv,
 	ttm_bo_unreserve(bo);
 err_unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_write_unlock(&vmaster->lock);
+=======
+	ttm_write_unlock(&dev_priv->reservation_sem);
+>>>>>>> v3.18
 =======
 	ttm_write_unlock(&dev_priv->reservation_sem);
 >>>>>>> v3.18
@@ -349,8 +392,12 @@ void vmw_bo_get_guest_ptr(const struct ttm_buffer_object *bo,
  * vmw_bo_pin - Pin or unpin a buffer object without moving it.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @bo: The buffer object. Must be reserved, and present either in VRAM
  * or GMR memory.
+=======
+ * @bo: The buffer object. Must be reserved.
+>>>>>>> v3.18
 =======
  * @bo: The buffer object. Must be reserved.
 >>>>>>> v3.18
@@ -360,7 +407,11 @@ void vmw_bo_get_guest_ptr(const struct ttm_buffer_object *bo,
 void vmw_bo_pin(struct ttm_buffer_object *bo, bool pin)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t pl_flags;
+=======
+	struct ttm_place pl;
+>>>>>>> v3.18
 =======
 	struct ttm_place pl;
 >>>>>>> v3.18
@@ -368,6 +419,7 @@ void vmw_bo_pin(struct ttm_buffer_object *bo, bool pin)
 	uint32_t old_mem_type = bo->mem.mem_type;
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BUG_ON(!ttm_bo_is_reserved(bo));
 	BUG_ON(old_mem_type != TTM_PL_VRAM &&
@@ -381,6 +433,8 @@ void vmw_bo_pin(struct ttm_buffer_object *bo, bool pin)
 	placement.num_placement = 1;
 	placement.placement = &pl_flags;
 =======
+=======
+>>>>>>> v3.18
 	lockdep_assert_held(&bo->resv->lock.base);
 
 	pl.fpfn = 0;
@@ -393,6 +447,9 @@ void vmw_bo_pin(struct ttm_buffer_object *bo, bool pin)
 	memset(&placement, 0, sizeof(placement));
 	placement.num_placement = 1;
 	placement.placement = &pl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = ttm_bo_validate(bo, &placement, false, true);

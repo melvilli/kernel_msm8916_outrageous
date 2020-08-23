@@ -22,6 +22,10 @@
 #include <linux/init.h>
 #include <linux/bootmem.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -125,7 +129,10 @@ resource_size_t pcibios_window_alignment(struct pci_bus *bus,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void pcibios_reset_secondary_bus(struct pci_dev *dev)
 {
 	if (ppc_md.pcibios_reset_secondary_bus) {
@@ -136,6 +143,9 @@ void pcibios_reset_secondary_bus(struct pci_dev *dev)
 	pci_reset_secondary_bus(dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static resource_size_t pcibios_io_size(const struct pci_controller *hose)
 {
@@ -219,6 +229,7 @@ struct pci_controller* pci_find_hose_for_OF_device(struct device_node* node)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pci_show_devspec(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
@@ -241,6 +252,8 @@ int pcibios_add_platform_entries(struct pci_dev *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Reads the interrupt pin to determine if interrupt is use by card.
  * If the interrupt is used, then gets the interrupt line from the
@@ -249,7 +262,11 @@ int pcibios_add_platform_entries(struct pci_dev *pdev)
 static int pci_read_irq_line(struct pci_dev *pci_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_irq oirq;
+=======
+	struct of_phandle_args oirq;
+>>>>>>> v3.18
 =======
 	struct of_phandle_args oirq;
 >>>>>>> v3.18
@@ -262,7 +279,11 @@ static int pci_read_irq_line(struct pci_dev *pci_dev)
 #endif
 	/* Try to get a mapping from the device-tree */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (of_irq_map_pci(pci_dev, &oirq)) {
+=======
+	if (of_irq_parse_pci(pci_dev, &oirq)) {
+>>>>>>> v3.18
 =======
 	if (of_irq_parse_pci(pci_dev, &oirq)) {
 >>>>>>> v3.18
@@ -292,16 +313,22 @@ static int pci_read_irq_line(struct pci_dev *pci_dev)
 	} else {
 		pr_debug(" Got one, spec %d cells (0x%08x 0x%08x...) on %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 oirq.size, oirq.specifier[0], oirq.specifier[1],
 			 of_node_full_name(oirq.controller));
 
 		virq = irq_create_of_mapping(oirq.controller, oirq.specifier,
 					     oirq.size);
 =======
+=======
+>>>>>>> v3.18
 			 oirq.args_count, oirq.args[0], oirq.args[1],
 			 of_node_full_name(oirq.np));
 
 		virq = irq_create_of_mapping(&oirq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if(virq == NO_IRQ) {
@@ -342,7 +369,11 @@ static struct resource *__pci_mmap_make_offset(struct pci_dev *dev,
 	int i, res_bit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hose == 0)
+=======
+	if (hose == NULL)
+>>>>>>> v3.18
 =======
 	if (hose == NULL)
 >>>>>>> v3.18
@@ -707,6 +738,7 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 				  struct device_node *dev, int primary)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *ranges;
 	int rlen;
 	int pna = of_n_addr_cells(dev);
@@ -716,15 +748,21 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 	unsigned long long pci_addr, cpu_addr, pci_next, cpu_next, size;
 	struct resource *res;
 =======
+=======
+>>>>>>> v3.18
 	int memno = 0;
 	struct resource *res;
 	struct of_pci_range range;
 	struct of_pci_range_parser parser;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	printk(KERN_INFO "PCI host bridge %s %s ranges:\n",
 	       dev->full_name, primary ? "(primary)" : "");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Get ranges property */
 	ranges = of_get_property(dev, "ranges", &rlen);
@@ -741,18 +779,24 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 		ranges += np;
 
 =======
+=======
+>>>>>>> v3.18
 	/* Check for ranges property */
 	if (of_pci_range_parser_init(&parser, dev))
 		return;
 
 	/* Parse it */
 	for_each_of_pci_range(&parser, &range) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* If we failed translation or got a zero-sized region
 		 * (some FW try to feed us with non sensical zero sized regions
 		 * such as power3 which look like some kind of attempt at exposing
 		 * the VGA memory hole)
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (cpu_addr == OF_BAD_ADDR || size == 0)
 			continue;
@@ -778,6 +822,8 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			       "  IO 0x%016llx..0x%016llx -> 0x%016llx\n",
 			       cpu_addr, cpu_addr + size - 1, pci_addr);
 =======
+=======
+>>>>>>> v3.18
 		if (range.cpu_addr == OF_BAD_ADDR || range.size == 0)
 			continue;
 
@@ -789,6 +835,9 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			       "  IO 0x%016llx..0x%016llx -> 0x%016llx\n",
 			       range.cpu_addr, range.cpu_addr + range.size - 1,
 			       range.pci_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* We support only one IO range */
@@ -800,18 +849,24 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 #ifdef CONFIG_PPC32
 			/* On 32 bits, limit I/O space to 16MB */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (size > 0x01000000)
 				size = 0x01000000;
 
 			/* 32 bits needs to map IOs here */
 			hose->io_base_virt = ioremap(cpu_addr, size);
 =======
+=======
+>>>>>>> v3.18
 			if (range.size > 0x01000000)
 				range.size = 0x01000000;
 
 			/* 32 bits needs to map IOs here */
 			hose->io_base_virt = ioremap(range.cpu_addr,
 						range.size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* Expect trouble if pci_addr is not 0 */
@@ -822,6 +877,7 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			/* pci_io_size and io_base_phys always represent IO
 			 * space starting at 0 so we factor in pci_addr
 			 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			hose->pci_io_size = pci_addr + size;
 			hose->io_base_phys = cpu_addr - pci_addr;
@@ -838,6 +894,8 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			       cpu_addr, cpu_addr + size - 1, pci_addr,
 			       (pci_space & 0x40000000) ? "Prefetch" : "");
 =======
+=======
+>>>>>>> v3.18
 			hose->pci_io_size = range.pci_addr + range.size;
 			hose->io_base_phys = range.cpu_addr - range.pci_addr;
 
@@ -852,6 +910,9 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			       range.pci_addr,
 			       (range.pci_space & 0x40000000) ?
 			       "Prefetch" : "");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/* We support only 3 memory ranges */
@@ -861,6 +922,7 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 				continue;
 			}
 			/* Handles ISA memory hole space here */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (pci_addr == 0) {
 				if (primary || isa_mem_base == 0)
@@ -877,6 +939,8 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 				res->flags |= IORESOURCE_PREFETCH;
 			res->start = cpu_addr;
 =======
+=======
+>>>>>>> v3.18
 			if (range.pci_addr == 0) {
 				if (primary || isa_mem_base == 0)
 					isa_mem_base = range.cpu_addr;
@@ -888,21 +952,30 @@ void pci_process_bridge_OF_ranges(struct pci_controller *hose,
 			hose->mem_offset[memno] = range.cpu_addr -
 							range.pci_addr;
 			res = &hose->mem_resources[memno++];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
 		if (res != NULL) {
 			res->name = dev->full_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			res->end = res->start + size - 1;
 			res->parent = NULL;
 			res->sibling = NULL;
 			res->child = NULL;
 =======
+=======
+>>>>>>> v3.18
 			res->flags = range.flags;
 			res->start = range.cpu_addr;
 			res->end = range.cpu_addr + range.size - 1;
 			res->parent = res->child = res->sibling = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -953,7 +1026,11 @@ static void pcibios_fixup_resources(struct pci_dev *dev)
 		 * since in that case, we don't want to re-assign anything
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pcibios_resource_to_bus(dev, &reg, res);
+=======
+		pcibios_resource_to_bus(dev->bus, &reg, res);
+>>>>>>> v3.18
 =======
 		pcibios_resource_to_bus(dev->bus, &reg, res);
 >>>>>>> v3.18
@@ -1008,7 +1085,11 @@ static int pcibios_uninitialized_bridge_resource(struct pci_bus *bus,
 	/* Job is a bit different between memory and IO */
 	if (res->flags & IORESOURCE_MEM) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pcibios_resource_to_bus(dev, &region, res);
+=======
+		pcibios_resource_to_bus(dev->bus, &region, res);
+>>>>>>> v3.18
 =======
 		pcibios_resource_to_bus(dev->bus, &region, res);
 >>>>>>> v3.18
@@ -1180,8 +1261,12 @@ void pcibios_fixup_bus(struct pci_bus *bus)
 	 * the OF device-tree.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bus->self != NULL)
 		pci_read_bridge_bases(bus);
+=======
+	pci_read_bridge_bases(bus);
+>>>>>>> v3.18
 =======
 	pci_read_bridge_bases(bus);
 >>>>>>> v3.18
@@ -1310,7 +1395,11 @@ static int reparent_resources(struct resource *parent,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pcibios_allocate_bus_resources(struct pci_bus *bus)
+=======
+static void pcibios_allocate_bus_resources(struct pci_bus *bus)
+>>>>>>> v3.18
 =======
 static void pcibios_allocate_bus_resources(struct pci_bus *bus)
 >>>>>>> v3.18
@@ -1595,6 +1684,11 @@ void pcibios_finish_adding_to_bus(struct pci_bus *bus)
 	pcibios_allocate_bus_resources(bus);
 	pcibios_claim_one_bus(bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!pci_has_flag(PCI_PROBE_ONLY))
+		pci_assign_unassigned_bus_resources(bus);
+>>>>>>> v3.18
 =======
 	if (!pci_has_flag(PCI_PROBE_ONLY))
 		pci_assign_unassigned_bus_resources(bus);
@@ -1714,7 +1808,11 @@ fake_pci_bus(struct pci_controller *hose, int busnr)
 	static struct pci_bus bus;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hose == 0) {
+=======
+	if (hose == NULL) {
+>>>>>>> v3.18
 =======
 	if (hose == NULL) {
 >>>>>>> v3.18
@@ -1742,7 +1840,10 @@ EARLY_PCI_OP(write, word, u16)
 EARLY_PCI_OP(write, dword, u32)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int pci_bus_find_capability (struct pci_bus *bus, unsigned int devfn, int cap);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int early_find_capability(struct pci_controller *hose, int bus, int devfn,
@@ -1817,12 +1918,17 @@ void pcibios_scan_phb(struct pci_controller *hose)
 	if (bus && !pci_has_flag(PCI_PROBE_ONLY)) {
 		struct pci_bus *child;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_for_each_entry(child, &bus->children, node) {
 			struct pci_dev *self = child->self;
 			if (!self)
 				continue;
 			pcie_bus_configure_settings(child, self->pcie_mpss);
 		}
+=======
+		list_for_each_entry(child, &bus->children, node)
+			pcie_bus_configure_settings(child);
+>>>>>>> v3.18
 =======
 		list_for_each_entry(child, &bus->children, node)
 			pcie_bus_configure_settings(child);

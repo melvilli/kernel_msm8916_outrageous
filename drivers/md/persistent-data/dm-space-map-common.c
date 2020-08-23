@@ -297,6 +297,7 @@ int sm_ll_lookup_bitmap(struct ll_disk *ll, dm_block_t b, uint32_t *result)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sm_ll_lookup(struct ll_disk *ll, dm_block_t b, uint32_t *result)
 {
 	__le32 le_rc;
@@ -308,11 +309,16 @@ int sm_ll_lookup(struct ll_disk *ll, dm_block_t b, uint32_t *result)
 	if (*result != 3)
 		return r;
 =======
+=======
+>>>>>>> v3.18
 static int sm_ll_lookup_big_ref_count(struct ll_disk *ll, dm_block_t b,
 				      uint32_t *result)
 {
 	__le32 le_rc;
 	int r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	r = dm_btree_lookup(&ll->ref_count_info, ll->ref_count_root, &b, &le_rc);
@@ -325,7 +331,10 @@ static int sm_ll_lookup_big_ref_count(struct ll_disk *ll, dm_block_t b,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int sm_ll_lookup(struct ll_disk *ll, dm_block_t b, uint32_t *result)
 {
 	int r = sm_ll_lookup_bitmap(ll, b, result);
@@ -339,6 +348,9 @@ int sm_ll_lookup(struct ll_disk *ll, dm_block_t b, uint32_t *result)
 	return sm_ll_lookup_big_ref_count(ll, b, result);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int sm_ll_find_free_block(struct ll_disk *ll, dm_block_t begin,
 			  dm_block_t end, dm_block_t *result)
@@ -401,18 +413,24 @@ int sm_ll_find_free_block(struct ll_disk *ll, dm_block_t begin,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sm_ll_insert(struct ll_disk *ll, dm_block_t b,
 		 uint32_t ref_count, enum allocation_event *ev)
 {
 	int r;
 	uint32_t bit, old;
 =======
+=======
+>>>>>>> v3.18
 static int sm_ll_mutate(struct ll_disk *ll, dm_block_t b,
 			int (*mutator)(void *context, uint32_t old, uint32_t *new),
 			void *context, enum allocation_event *ev)
 {
 	int r;
 	uint32_t bit, old, ref_count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct dm_block *nb;
 	dm_block_t index = b;
@@ -437,7 +455,10 @@ static int sm_ll_mutate(struct ll_disk *ll, dm_block_t b,
 	old = sm_lookup_bitmap(bm_le, bit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (old > 2) {
 		r = sm_ll_lookup_big_ref_count(ll, b, &old);
 		if (r < 0) {
@@ -452,6 +473,9 @@ static int sm_ll_mutate(struct ll_disk *ll, dm_block_t b,
 		return r;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ref_count <= 2) {
 		sm_set_bitmap(bm_le, bit, ref_count);
@@ -503,6 +527,7 @@ static int sm_ll_mutate(struct ll_disk *ll, dm_block_t b,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sm_ll_inc(struct ll_disk *ll, dm_block_t b, enum allocation_event *ev)
 {
 	int r;
@@ -529,6 +554,8 @@ int sm_ll_dec(struct ll_disk *ll, dm_block_t b, enum allocation_event *ev)
 
 	return sm_ll_insert(ll, b, rc - 1, ev);
 =======
+=======
+>>>>>>> v3.18
 static int set_ref_count(void *context, uint32_t old, uint32_t *new)
 {
 	*new = *((uint32_t *) context);
@@ -566,6 +593,9 @@ static int dec_ref_count(void *context, uint32_t old, uint32_t *new)
 int sm_ll_dec(struct ll_disk *ll, dm_block_t b, enum allocation_event *ev)
 {
 	return sm_ll_mutate(ll, b, dec_ref_count, NULL, ev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

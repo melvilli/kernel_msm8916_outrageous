@@ -2591,7 +2591,11 @@ struct saa7134_board saa7134_boards[] = {
 	},
 	[SAA7134_BOARD_AVERMEDIA_AVERTVHD_A180] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Michael Krufky <mkrufky@m1k.net>
+=======
+		/* Michael Krufky <mkrufky@linuxtv.org>
+>>>>>>> v3.18
 =======
 		/* Michael Krufky <mkrufky@linuxtv.org>
 >>>>>>> v3.18
@@ -5832,7 +5836,10 @@ struct saa7134_board saa7134_boards[] = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[SAA7134_BOARD_WIS_VOYAGER] = {
 		.name           = "WIS Voyager or compatible",
 		.audio_clock    = 0x00200000,
@@ -5856,6 +5863,9 @@ struct saa7134_board saa7134_boards[] = {
 		.amux = LINE1,
 		} },
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 };
@@ -7111,13 +7121,19 @@ struct pci_device_id saa7134_pci_tbl[] = {
 		.driver_data  = SAA7134_BOARD_AVERMEDIA_A706,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.vendor       = PCI_VENDOR_ID_PHILIPS,
 		.device       = PCI_DEVICE_ID_PHILIPS_SAA7133,
 		.subvendor    = 0x1905, /* WIS */
 		.subdevice    = 0x7007,
 		.driver_data  = SAA7134_BOARD_WIS_VOYAGER,
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* --- boards without eeprom + subsystem ID --- */
 		.vendor       = PCI_VENDOR_ID_PHILIPS,

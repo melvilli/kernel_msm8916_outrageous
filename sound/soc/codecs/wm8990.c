@@ -18,6 +18,10 @@
 #include <linux/pm.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
 /* codec private data */
 struct wm8990_priv {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum snd_soc_control_type control_type;
+=======
+	struct regmap *regmap;
+>>>>>>> v3.18
 =======
 	struct regmap *regmap;
 >>>>>>> v3.18
@@ -44,8 +52,12 @@ struct wm8990_priv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wm8990_volatile_register(struct snd_soc_codec *codec,
 				    unsigned int reg)
+=======
+static bool wm8990_volatile_register(struct device *dev, unsigned int reg)
+>>>>>>> v3.18
 =======
 static bool wm8990_volatile_register(struct device *dev, unsigned int reg)
 >>>>>>> v3.18
@@ -58,6 +70,7 @@ static bool wm8990_volatile_register(struct device *dev, unsigned int reg)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const u16 wm8990_reg[] = {
 	0x8990,     /* R0  - Reset */
@@ -125,6 +138,8 @@ static const u16 wm8990_reg[] = {
 	0x0026,     /* R62 - PLL3 */
 	0x0000,	    /* R63 - Driver internal */
 =======
+=======
+>>>>>>> v3.18
 static const struct reg_default wm8990_reg_defaults[] = {
 	{  1, 0x0000 },     /* R1  - Power Management (1) */
 	{  2, 0x6000 },     /* R2  - Power Management (2) */
@@ -188,6 +203,9 @@ static const struct reg_default wm8990_reg_defaults[] = {
 	{ 60, 0x0008 },     /* R60 - PLL1 */
 	{ 61, 0x0031 },     /* R61 - PLL2 */
 	{ 62, 0x0026 },     /* R62 - PLL3 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -213,7 +231,11 @@ static int wm899x_outpga_put_volsw_vu(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -234,6 +256,7 @@ static int wm899x_outpga_put_volsw_vu(struct snd_kcontrol *kcontrol,
 
 #define SOC_WM899X_OUTPGA_SINGLE_R_TLV(xname, reg, shift, max, invert,\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 tlv_array) {\
 	.iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = (xname), \
 	.access = SNDRV_CTL_ELEM_ACCESS_TLV_READ |\
@@ -247,11 +270,17 @@ static int wm899x_outpga_put_volsw_vu(struct snd_kcontrol *kcontrol,
 	SOC_SINGLE_EXT_TLV(xname, reg, shift, max, invert, \
 		snd_soc_get_volsw, wm899x_outpga_put_volsw_vu, tlv_array)
 >>>>>>> v3.18
+=======
+	tlv_array) \
+	SOC_SINGLE_EXT_TLV(xname, reg, shift, max, invert, \
+		snd_soc_get_volsw, wm899x_outpga_put_volsw_vu, tlv_array)
+>>>>>>> v3.18
 
 
 static const char *wm8990_digital_sidetone[] =
 	{"None", "Left ADC", "Right ADC", "Reserved"};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct soc_enum wm8990_left_digital_sidetone_enum =
 SOC_ENUM_SINGLE(WM8990_DIGITAL_SIDE_TONE,
@@ -265,6 +294,8 @@ SOC_ENUM_SINGLE(WM8990_DIGITAL_SIDE_TONE,
 	WM8990_ADC_TO_DACR_MASK,
 	wm8990_digital_sidetone);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(wm8990_left_digital_sidetone_enum,
 			    WM8990_DIGITAL_SIDE_TONE,
 			    WM8990_ADC_TO_DACL_SHIFT,
@@ -274,11 +305,15 @@ static SOC_ENUM_SINGLE_DECL(wm8990_right_digital_sidetone_enum,
 			    WM8990_DIGITAL_SIDE_TONE,
 			    WM8990_ADC_TO_DACR_SHIFT,
 			    wm8990_digital_sidetone);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char *wm8990_adcmode[] =
 	{"Hi-fi mode", "Voice mode 1", "Voice mode 2", "Voice mode 3"};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct soc_enum wm8990_right_adcmode_enum =
 SOC_ENUM_SINGLE(WM8990_ADC_CTRL,
@@ -286,10 +321,15 @@ SOC_ENUM_SINGLE(WM8990_ADC_CTRL,
 	WM8990_ADC_HPF_CUT_MASK,
 	wm8990_adcmode);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(wm8990_right_adcmode_enum,
 			    WM8990_ADC_CTRL,
 			    WM8990_ADC_HPF_CUT_SHIFT,
 			    wm8990_adcmode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new wm8990_snd_controls[] = {
@@ -489,6 +529,7 @@ SOC_SINGLE("RIN34 Mute Switch", WM8990_RIGHT_LINE_INPUT_3_4_VOLUME,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int inmixer_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
@@ -515,6 +556,8 @@ static int inmixer_event(struct snd_soc_dapm_widget *w,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int outmixer_event(struct snd_soc_dapm_widget *w,
@@ -619,9 +662,15 @@ static const char *wm8990_ainlmux[] =
 	{"INMIXL Mix", "RXVOICE Mix", "DIFFINL Mix"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum wm8990_ainlmux_enum =
 SOC_ENUM_SINGLE(WM8990_INPUT_MIXER1, WM8990_AINLMODE_SHIFT,
 	ARRAY_SIZE(wm8990_ainlmux), wm8990_ainlmux);
+=======
+static SOC_ENUM_SINGLE_DECL(wm8990_ainlmux_enum,
+			    WM8990_INPUT_MIXER1, WM8990_AINLMODE_SHIFT,
+			    wm8990_ainlmux);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(wm8990_ainlmux_enum,
 			    WM8990_INPUT_MIXER1, WM8990_AINLMODE_SHIFT,
@@ -638,9 +687,15 @@ static const char *wm8990_ainrmux[] =
 	{"INMIXR Mix", "RXVOICE Mix", "DIFFINR Mix"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum wm8990_ainrmux_enum =
 SOC_ENUM_SINGLE(WM8990_INPUT_MIXER1, WM8990_AINRMODE_SHIFT,
 	ARRAY_SIZE(wm8990_ainrmux), wm8990_ainrmux);
+=======
+static SOC_ENUM_SINGLE_DECL(wm8990_ainrmux_enum,
+			    WM8990_INPUT_MIXER1, WM8990_AINRMODE_SHIFT,
+			    wm8990_ainrmux);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(wm8990_ainrmux_enum,
 			    WM8990_INPUT_MIXER1, WM8990_AINRMODE_SHIFT,
@@ -784,12 +839,18 @@ SND_SOC_DAPM_INPUT("RIN2"),
 SND_SOC_DAPM_INPUT("Internal ADC Source"),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 SND_SOC_DAPM_SUPPLY("INL", WM8990_POWER_MANAGEMENT_2, WM8990_AINL_ENA_BIT, 0,
 		    NULL, 0),
 SND_SOC_DAPM_SUPPLY("INR", WM8990_POWER_MANAGEMENT_2, WM8990_AINR_ENA_BIT, 0,
 		    NULL, 0),
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* DACs */
 SND_SOC_DAPM_ADC("Left ADC", "Left Capture", WM8990_POWER_MANAGEMENT_2,
@@ -813,6 +874,7 @@ SND_SOC_DAPM_MIXER("RIN34 PGA", WM8990_POWER_MANAGEMENT_2, WM8990_RIN34_ENA_BIT,
 
 /* INMIXL */
 <<<<<<< HEAD
+<<<<<<< HEAD
 SND_SOC_DAPM_MIXER_E("INMIXL", WM8990_INTDRIVBITS, WM8990_INMIXL_PWR_BIT, 0,
 	&wm8990_dapm_inmixl_controls[0],
 	ARRAY_SIZE(wm8990_dapm_inmixl_controls),
@@ -834,6 +896,8 @@ SND_SOC_DAPM_MUX_E("AINRMUX", WM8990_INTDRIVBITS, WM8990_AINRMUX_PWR_BIT, 0,
 	&wm8990_dapm_ainrmux_controls, inmixer_event,
 	SND_SOC_DAPM_POST_PMU | SND_SOC_DAPM_POST_PMD),
 =======
+=======
+>>>>>>> v3.18
 SND_SOC_DAPM_MIXER("INMIXL", SND_SOC_NOPM, 0, 0,
 	&wm8990_dapm_inmixl_controls[0],
 	ARRAY_SIZE(wm8990_dapm_inmixl_controls)),
@@ -848,6 +912,9 @@ SND_SOC_DAPM_MIXER("INMIXR", SND_SOC_NOPM, 0, 0,
 
 /* AINRMUX */
 SND_SOC_DAPM_MUX("AINRMUX", SND_SOC_NOPM, 0, 0, &wm8990_dapm_ainrmux_controls),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Output Side */
@@ -940,7 +1007,11 @@ SND_SOC_DAPM_OUTPUT("Internal DAC Sink"),
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct snd_soc_dapm_route audio_map[] = {
+=======
+static const struct snd_soc_dapm_route wm8990_dapm_routes[] = {
+>>>>>>> v3.18
 =======
 static const struct snd_soc_dapm_route wm8990_dapm_routes[] = {
 >>>>>>> v3.18
@@ -953,12 +1024,18 @@ static const struct snd_soc_dapm_route wm8990_dapm_routes[] = {
 	{"Right ADC", NULL, "Internal ADC Source"},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{"AINLMUX", NULL, "INL"},
 	{"INMIXL", NULL, "INL"},
 	{"AINRMUX", NULL, "INR"},
 	{"INMIXR", NULL, "INR"},
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Input Side */
 	/* LIN12 PGA */
@@ -1077,6 +1154,7 @@ static const struct snd_soc_dapm_route wm8990_dapm_routes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wm8990_add_widgets(struct snd_soc_codec *codec)
 {
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
@@ -1089,6 +1167,8 @@ static int wm8990_add_widgets(struct snd_soc_codec *codec)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* PLL divisors */
@@ -1280,6 +1360,7 @@ static int wm8990_hw_params(struct snd_pcm_substream *substream,
 	audio1 &= ~WM8990_AIF_WL_MASK;
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -1291,6 +1372,8 @@ static int wm8990_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -1301,6 +1384,9 @@ static int wm8990_hw_params(struct snd_pcm_substream *substream,
 		audio1 |= WM8990_AIF_WL_24BITS;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		audio1 |= WM8990_AIF_WL_32BITS;
 		break;
@@ -1329,6 +1415,10 @@ static int wm8990_set_bias_level(struct snd_soc_codec *codec,
 	enum snd_soc_bias_level level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct wm8990_priv *wm8990 = snd_soc_codec_get_drvdata(codec);
+>>>>>>> v3.18
 =======
 	struct wm8990_priv *wm8990 = snd_soc_codec_get_drvdata(codec);
 >>>>>>> v3.18
@@ -1347,7 +1437,11 @@ static int wm8990_set_bias_level(struct snd_soc_codec *codec,
 	case SND_SOC_BIAS_STANDBY:
 		if (codec->dapm.bias_level == SND_SOC_BIAS_OFF) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = snd_soc_cache_sync(codec);
+=======
+			ret = regcache_sync(wm8990->regmap);
+>>>>>>> v3.18
 =======
 			ret = regcache_sync(wm8990->regmap);
 >>>>>>> v3.18
@@ -1449,7 +1543,11 @@ static int wm8990_set_bias_level(struct snd_soc_codec *codec,
 		snd_soc_write(codec, WM8990_ANTIPOP2, 0x0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		codec->cache_sync = 1;
+=======
+		regcache_mark_dirty(wm8990->regmap);
+>>>>>>> v3.18
 =======
 		regcache_mark_dirty(wm8990->regmap);
 >>>>>>> v3.18
@@ -1520,6 +1618,7 @@ static int wm8990_resume(struct snd_soc_codec *codec)
 static int wm8990_probe(struct snd_soc_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	ret = snd_soc_codec_set_cache_io(codec, 8, 16, SND_SOC_I2C);
@@ -1528,6 +1627,8 @@ static int wm8990_probe(struct snd_soc_codec *codec)
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	wm8990_reset(codec);
@@ -1548,10 +1649,13 @@ static int wm8990_probe(struct snd_soc_codec *codec)
 	snd_soc_write(codec, WM8990_RIGHT_OUTPUT_VOLUME, 0x50 | (1<<8));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_add_codec_controls(codec, wm8990_snd_controls,
 				ARRAY_SIZE(wm8990_snd_controls));
 	wm8990_add_widgets(codec);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1571,6 +1675,7 @@ static struct snd_soc_codec_driver soc_codec_dev_wm8990 = {
 	.resume =	wm8990_resume,
 	.set_bias_level = wm8990_set_bias_level,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.reg_cache_size = ARRAY_SIZE(wm8990_reg),
 	.reg_word_size = sizeof(u16),
 	.reg_cache_default = wm8990_reg,
@@ -1579,6 +1684,8 @@ static struct snd_soc_codec_driver soc_codec_dev_wm8990 = {
 
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
 =======
+=======
+>>>>>>> v3.18
 	.controls =	wm8990_snd_controls,
 	.num_controls = ARRAY_SIZE(wm8990_snd_controls),
 	.dapm_widgets = wm8990_dapm_widgets,
@@ -1598,6 +1705,9 @@ static const struct regmap_config wm8990_regmap = {
 	.cache_type = REGCACHE_RBTREE,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int wm8990_i2c_probe(struct i2c_client *i2c,
 			    const struct i2c_device_id *id)
@@ -1641,6 +1751,7 @@ static struct i2c_driver wm8990_i2c_driver = {
 	.id_table = wm8990_i2c_id,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 static int __init wm8990_modinit(void)
@@ -1664,6 +1775,10 @@ static void __exit wm8990_exit(void)
 #endif
 }
 module_exit(wm8990_exit);
+=======
+
+module_i2c_driver(wm8990_i2c_driver);
+>>>>>>> v3.18
 =======
 
 module_i2c_driver(wm8990_i2c_driver);

@@ -4,6 +4,10 @@
  *
  * Copyright 2007	Johannes Berg <johannes@sipsolutions.net>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright 2013-2014  Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright 2013-2014  Intel Mobile Communications GmbH
 >>>>>>> v3.18
@@ -22,7 +26,10 @@
 #define DEBUGFS_FORMAT_BUFFER_SIZE 100
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define TX_LATENCY_BIN_DELIMTER_C ','
 #define TX_LATENCY_BIN_DELIMTER_S ","
 #define TX_LATENCY_BINS_DISABLED "enable(bins disabled)\n"
@@ -189,6 +196,9 @@ static const struct file_operations stats_tx_latency_ops = {
 	.llseek = generic_file_llseek,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int mac80211_format_buffer(char __user *userbuf, size_t count,
 				  loff_t *ppos, char *fmt, ...)
@@ -277,6 +287,7 @@ static ssize_t hwflags_read(struct file *file, char __user *user_buf,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sf += snprintf(buf, mxln - sf, "0x%x\n", local->hw.flags);
 	if (local->hw.flags & IEEE80211_HW_HAS_RATE_CONTROL)
 		sf += snprintf(buf + sf, mxln - sf, "HAS_RATE_CONTROL\n");
@@ -326,6 +337,8 @@ static ssize_t hwflags_read(struct file *file, char __user *user_buf,
 	if (local->hw.flags & IEEE80211_HW_TX_AMPDU_SETUP_IN_HW)
 		sf += snprintf(buf + sf, mxln - sf, "TX_AMPDU_SETUP_IN_HW\n");
 =======
+=======
+>>>>>>> v3.18
 	sf += scnprintf(buf, mxln - sf, "0x%x\n", local->hw.flags);
 	if (local->hw.flags & IEEE80211_HW_HAS_RATE_CONTROL)
 		sf += scnprintf(buf + sf, mxln - sf, "HAS_RATE_CONTROL\n");
@@ -372,6 +385,9 @@ static ssize_t hwflags_read(struct file *file, char __user *user_buf,
 		sf += scnprintf(buf + sf, mxln - sf, "AP_LINK_PS\n");
 	if (local->hw.flags & IEEE80211_HW_TX_AMPDU_SETUP_IN_HW)
 		sf += scnprintf(buf + sf, mxln - sf, "TX_AMPDU_SETUP_IN_HW\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rv = simple_read_from_buffer(user_buf, count, ppos, buf, strlen(buf));
@@ -535,6 +551,11 @@ void debugfs_hw_add(struct ieee80211_local *local)
 	DEBUGFS_DEVSTATS_ADD(dot11FCSErrorCount);
 	DEBUGFS_DEVSTATS_ADD(dot11RTSSuccessCount);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	DEBUGFS_DEVSTATS_ADD(tx_latency);
+>>>>>>> v3.18
 =======
 
 	DEBUGFS_DEVSTATS_ADD(tx_latency);

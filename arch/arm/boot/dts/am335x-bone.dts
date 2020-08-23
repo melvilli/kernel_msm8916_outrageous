@@ -8,7 +8,12 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "am33xx.dtsi"
+=======
+#include "am33xx.dtsi"
+#include "am335x-bone-common.dtsi"
+>>>>>>> v3.18
 =======
 #include "am33xx.dtsi"
 #include "am335x-bone-common.dtsi"
@@ -17,6 +22,7 @@
 / {
 	model = "TI AM335x BeagleBone";
 	compatible = "ti,am335x-bone", "ti,am33xx";
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	cpus {
@@ -142,6 +148,8 @@
 &cpsw_emac1 {
 	phy_id = <&davinci_mdio>, <1>;
 =======
+=======
+>>>>>>> v3.18
 };
 
 &ldo3_reg {
@@ -160,5 +168,8 @@
 
 &aes {
 	status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

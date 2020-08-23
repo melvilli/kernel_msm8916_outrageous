@@ -38,6 +38,7 @@ void generic_fillattr(struct inode *inode, struct kstat *stat)
 EXPORT_SYMBOL(generic_fillattr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vfs_getattr(struct path *path, struct kstat *stat)
 {
 	struct inode *inode = path->dentry->d_inode;
@@ -47,6 +48,8 @@ int vfs_getattr(struct path *path, struct kstat *stat)
 	if (retval)
 		return retval;
 =======
+=======
+>>>>>>> v3.18
 /**
  * vfs_getattr_nosec - getattr without security checks
  * @path: file to get attributes from
@@ -62,6 +65,9 @@ int vfs_getattr(struct path *path, struct kstat *stat)
 int vfs_getattr_nosec(struct path *path, struct kstat *stat)
 {
 	struct inode *inode = path->dentry->d_inode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (inode->i_op->getattr)
@@ -72,7 +78,10 @@ int vfs_getattr_nosec(struct path *path, struct kstat *stat)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(vfs_getattr_nosec);
 
 int vfs_getattr(struct path *path, struct kstat *stat)
@@ -85,6 +94,9 @@ int vfs_getattr(struct path *path, struct kstat *stat)
 	return vfs_getattr_nosec(path, stat);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(vfs_getattr);
 

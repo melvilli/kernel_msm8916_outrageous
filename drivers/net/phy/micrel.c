@@ -26,6 +26,11 @@
 #include <linux/phy.h>
 #include <linux/micrel_phy.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/clk.h>
@@ -59,7 +64,10 @@
 #define KSZ8051_RMII_50MHZ_CLK			(1 << 7)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Write/read to/from extended registers */
 #define MII_KSZPHY_EXTREG                       0x0b
 #define KSZPHY_EXTREG_WRITE                     0x8000
@@ -74,22 +82,31 @@
 
 #define PS_TO_REG				200
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ksz_config_flags(struct phy_device *phydev)
 {
 	int regval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (phydev->dev_flags & MICREL_PHY_50MHZ_CLK) {
 		regval = phy_read(phydev, MII_KSZPHY_CTRL);
 		regval |= KSZ8051_RMII_50MHZ_CLK;
 =======
+=======
+>>>>>>> v3.18
 	if (phydev->dev_flags & (MICREL_PHY_50MHZ_CLK | MICREL_PHY_25MHZ_CLK)) {
 		regval = phy_read(phydev, MII_KSZPHY_CTRL);
 		if (phydev->dev_flags & MICREL_PHY_50MHZ_CLK)
 			regval |= KSZ8051_RMII_50MHZ_CLK;
 		else
 			regval &= ~KSZ8051_RMII_50MHZ_CLK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return phy_write(phydev, MII_KSZPHY_CTRL, regval);
 	}
@@ -97,7 +114,10 @@ static int ksz_config_flags(struct phy_device *phydev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int kszphy_extended_write(struct phy_device *phydev,
 				u32 regnum, u16 val)
 {
@@ -112,6 +132,9 @@ static int kszphy_extended_read(struct phy_device *phydev,
 	return phy_read(phydev, MII_KSZPHY_EXTREG_READ);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int kszphy_ack_interrupt(struct phy_device *phydev)
 {
@@ -168,7 +191,10 @@ static int ks8737_config_intr(struct phy_device *phydev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int kszphy_setup_led(struct phy_device *phydev,
 			    unsigned int reg, unsigned int shift)
 {
@@ -195,12 +221,16 @@ static int kszphy_setup_led(struct phy_device *phydev,
 	return rc < 0 ? rc : 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int kszphy_config_init(struct phy_device *phydev)
 {
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ksz8021_config_init(struct phy_device *phydev)
 {
@@ -209,6 +239,8 @@ static int ksz8021_config_init(struct phy_device *phydev)
 	phy_write(phydev, MII_KSZPHY_OMSO, val);
 	rc = ksz_config_flags(phydev);
 =======
+=======
+>>>>>>> v3.18
 static int kszphy_config_init_led8041(struct phy_device *phydev)
 {
 	/* single led control, register 0x1e bits 15..14 */
@@ -228,6 +260,9 @@ static int ksz8021_config_init(struct phy_device *phydev)
 	if (rc < 0)
 		return rc;
 	rc = phy_write(phydev, MII_KSZPHY_OMSO, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc < 0 ? rc : 0;
 }
@@ -237,22 +272,31 @@ static int ks8051_config_init(struct phy_device *phydev)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	rc = kszphy_setup_led(phydev, 0x1f, 4);
 	if (rc)
 		dev_err(&phydev->dev, "failed to set led mode\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = ksz_config_flags(phydev);
 	return rc < 0 ? rc : 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define KSZ8873MLL_GLOBAL_CONTROL_4	0x06
 #define KSZ8873MLL_GLOBAL_CONTROL_4_DUPLEX	(1 << 6)
 #define KSZ8873MLL_GLOBAL_CONTROL_4_SPEED	(1 << 4)
 int ksz8873mll_read_status(struct phy_device *phydev)
 =======
+=======
+>>>>>>> v3.18
 static int ksz9021_load_values_from_of(struct phy_device *phydev,
 				       struct device_node *of_node, u16 reg,
 				       char *field1, char *field2,
@@ -433,6 +477,9 @@ static int ksz9031_config_init(struct phy_device *phydev)
 #define KSZ8873MLL_GLOBAL_CONTROL_4_DUPLEX	(1 << 6)
 #define KSZ8873MLL_GLOBAL_CONTROL_4_SPEED	(1 << 4)
 static int ksz8873mll_read_status(struct phy_device *phydev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int regval;
@@ -464,7 +511,10 @@ static int ksz8873mll_config_aneg(struct phy_device *phydev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This routine returns -1 as an indication to the caller that the
  * Micrel ksz9021 10/100/1000 PHY does not support standard IEEE
  * MMD extended PHY registers.
@@ -506,6 +556,9 @@ static int ksz8021_probe(struct phy_device *phydev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct phy_driver ksphy_driver[] = {
 {
@@ -520,6 +573,11 @@ static struct phy_driver ksphy_driver[] = {
 	.ack_interrupt	= kszphy_ack_interrupt,
 	.config_intr	= ks8737_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suspend	= genphy_suspend,
+	.resume		= genphy_resume,
+>>>>>>> v3.18
 =======
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,
@@ -533,6 +591,10 @@ static struct phy_driver ksphy_driver[] = {
 			   SUPPORTED_Asym_Pause),
 	.flags		= PHY_HAS_MAGICANEG | PHY_HAS_INTERRUPT,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.probe		= ksz8021_probe,
+>>>>>>> v3.18
 =======
 	.probe		= ksz8021_probe,
 >>>>>>> v3.18
@@ -542,6 +604,11 @@ static struct phy_driver ksphy_driver[] = {
 	.ack_interrupt	= kszphy_ack_interrupt,
 	.config_intr	= kszphy_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suspend	= genphy_suspend,
+	.resume		= genphy_resume,
+>>>>>>> v3.18
 =======
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,
@@ -555,6 +622,10 @@ static struct phy_driver ksphy_driver[] = {
 			   SUPPORTED_Asym_Pause),
 	.flags		= PHY_HAS_MAGICANEG | PHY_HAS_INTERRUPT,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.probe		= ksz8021_probe,
+>>>>>>> v3.18
 =======
 	.probe		= ksz8021_probe,
 >>>>>>> v3.18
@@ -564,6 +635,11 @@ static struct phy_driver ksphy_driver[] = {
 	.ack_interrupt	= kszphy_ack_interrupt,
 	.config_intr	= kszphy_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suspend	= genphy_suspend,
+	.resume		= genphy_resume,
+>>>>>>> v3.18
 =======
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,
@@ -577,7 +653,11 @@ static struct phy_driver ksphy_driver[] = {
 				| SUPPORTED_Asym_Pause),
 	.flags		= PHY_HAS_MAGICANEG | PHY_HAS_INTERRUPT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.config_init	= kszphy_config_init,
+=======
+	.config_init	= kszphy_config_init_led8041,
+>>>>>>> v3.18
 =======
 	.config_init	= kszphy_config_init_led8041,
 >>>>>>> v3.18
@@ -586,7 +666,10 @@ static struct phy_driver ksphy_driver[] = {
 	.ack_interrupt	= kszphy_ack_interrupt,
 	.config_intr	= kszphy_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,
 	.driver		= { .owner = THIS_MODULE,},
@@ -604,6 +687,9 @@ static struct phy_driver ksphy_driver[] = {
 	.config_intr	= kszphy_config_intr,
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.driver		= { .owner = THIS_MODULE,},
 }, {
@@ -619,6 +705,11 @@ static struct phy_driver ksphy_driver[] = {
 	.ack_interrupt	= kszphy_ack_interrupt,
 	.config_intr	= kszphy_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suspend	= genphy_suspend,
+	.resume		= genphy_resume,
+>>>>>>> v3.18
 =======
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,
@@ -631,7 +722,11 @@ static struct phy_driver ksphy_driver[] = {
 	.features	= (PHY_BASIC_FEATURES | SUPPORTED_Pause),
 	.flags		= PHY_HAS_MAGICANEG | PHY_HAS_INTERRUPT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.config_init	= kszphy_config_init,
+=======
+	.config_init	= kszphy_config_init_led8041,
+>>>>>>> v3.18
 =======
 	.config_init	= kszphy_config_init_led8041,
 >>>>>>> v3.18
@@ -640,6 +735,11 @@ static struct phy_driver ksphy_driver[] = {
 	.ack_interrupt	= kszphy_ack_interrupt,
 	.config_intr	= kszphy_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suspend	= genphy_suspend,
+	.resume		= genphy_resume,
+>>>>>>> v3.18
 =======
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,
@@ -657,6 +757,11 @@ static struct phy_driver ksphy_driver[] = {
 	.ack_interrupt	= kszphy_ack_interrupt,
 	.config_intr	= kszphy_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suspend	= genphy_suspend,
+	.resume		= genphy_resume,
+>>>>>>> v3.18
 =======
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,
@@ -674,6 +779,11 @@ static struct phy_driver ksphy_driver[] = {
 	.ack_interrupt	= kszphy_ack_interrupt,
 	.config_intr	= kszphy_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suspend	= genphy_suspend,
+	.resume		= genphy_resume,
+>>>>>>> v3.18
 =======
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,
@@ -686,7 +796,11 @@ static struct phy_driver ksphy_driver[] = {
 	.features	= (PHY_GBIT_FEATURES | SUPPORTED_Pause),
 	.flags		= PHY_HAS_MAGICANEG | PHY_HAS_INTERRUPT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.config_init	= kszphy_config_init,
+=======
+	.config_init	= ksz9021_config_init,
+>>>>>>> v3.18
 =======
 	.config_init	= ksz9021_config_init,
 >>>>>>> v3.18
@@ -695,17 +809,24 @@ static struct phy_driver ksphy_driver[] = {
 	.ack_interrupt	= kszphy_ack_interrupt,
 	.config_intr	= ksz9021_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,
 	.read_mmd_indirect = ksz9021_rd_mmd_phyreg,
 	.write_mmd_indirect = ksz9021_wr_mmd_phyreg,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.driver		= { .owner = THIS_MODULE, },
 }, {
 	.phy_id		= PHY_ID_KSZ9031,
 	.phy_id_mask	= 0x00fffff0,
 	.name		= "Micrel KSZ9031 Gigabit PHY",
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.features	= (PHY_GBIT_FEATURES | SUPPORTED_Pause
 				| SUPPORTED_Asym_Pause),
@@ -716,11 +837,21 @@ static struct phy_driver ksphy_driver[] = {
 	.flags		= PHY_HAS_MAGICANEG | PHY_HAS_INTERRUPT,
 	.config_init	= ksz9031_config_init,
 >>>>>>> v3.18
+=======
+	.features	= (PHY_GBIT_FEATURES | SUPPORTED_Pause),
+	.flags		= PHY_HAS_MAGICANEG | PHY_HAS_INTERRUPT,
+	.config_init	= ksz9031_config_init,
+>>>>>>> v3.18
 	.config_aneg	= genphy_config_aneg,
 	.read_status	= genphy_read_status,
 	.ack_interrupt	= kszphy_ack_interrupt,
 	.config_intr	= ksz9021_config_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suspend	= genphy_suspend,
+	.resume		= genphy_resume,
+>>>>>>> v3.18
 =======
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,
@@ -736,6 +867,11 @@ static struct phy_driver ksphy_driver[] = {
 	.config_aneg	= ksz8873mll_config_aneg,
 	.read_status	= ksz8873mll_read_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suspend	= genphy_suspend,
+	.resume		= genphy_resume,
+>>>>>>> v3.18
 =======
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,
@@ -751,6 +887,11 @@ static struct phy_driver ksphy_driver[] = {
 	.config_aneg	= genphy_config_aneg,
 	.read_status	= genphy_read_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.suspend	= genphy_suspend,
+	.resume		= genphy_resume,
+>>>>>>> v3.18
 =======
 	.suspend	= genphy_suspend,
 	.resume		= genphy_resume,

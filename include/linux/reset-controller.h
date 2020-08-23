@@ -22,6 +22,10 @@ struct reset_control_ops {
 struct module;
 struct device_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct of_phandle_args;
+>>>>>>> v3.18
 =======
 struct of_phandle_args;
 >>>>>>> v3.18

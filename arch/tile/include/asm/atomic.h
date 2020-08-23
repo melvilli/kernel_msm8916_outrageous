@@ -115,7 +115,10 @@ static inline int atomic_read(const atomic_t *v)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * atomic_xchg - atomically exchange contents of memory with a new value
  * @v: pointer of type atomic_t
  * @i: integer value to store in memory
@@ -142,6 +145,9 @@ static inline int atomic_cmpxchg(atomic_t *v, int o, int n)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * atomic_add_negative - add and test if negative
  * @v: pointer of type atomic_t
@@ -163,7 +169,10 @@ static inline int atomic_cmpxchg(atomic_t *v, int o, int n)
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * atomic64_xchg - atomically exchange contents of memory with a new value
  * @v: pointer of type atomic64_t
@@ -191,6 +200,9 @@ static inline long long atomic64_cmpxchg(atomic64_t *v, long long o,
 	return cmpxchg64(&v->counter, o, n);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline long long atomic64_dec_if_positive(atomic64_t *v)
 {

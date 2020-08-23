@@ -1,5 +1,6 @@
 /******************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
 
      (c) Copyright 2008, RealTEK Technologies Inc. All Rights Reserved.
 
@@ -48,6 +49,8 @@ SendTxCommandPacket(
 {
 	rt_status	rtStatus = RT_STATUS_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
  *
  *  (c) Copyright 2008, RealTEK Technologies Inc. All Rights Reserved.
  *
@@ -77,11 +80,15 @@ SendTxCommandPacket(
 
 rt_status SendTxCommandPacket(struct net_device *dev, void *pData, u32 DataLen)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct r8192_priv   *priv = ieee80211_priv(dev);
 	struct sk_buff	    *skb;
 	cb_desc		    *tcb_desc;
 	unsigned char	    *ptr_buf;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//bool	bLastInitPacket = false;
 
@@ -92,6 +99,8 @@ rt_status SendTxCommandPacket(struct net_device *dev, void *pData, u32 DataLen)
 	memcpy((unsigned char *)(skb->cb),&dev,sizeof(dev));
 	tcb_desc = (cb_desc*)(skb->cb + MAX_DEV_ADDR_SIZE);
 =======
+=======
+>>>>>>> v3.18
 
 	/* Get TCB and local buffer from common pool.
 	   (It is shared by CmdQ, MgntQ, and USB coalesce DataQ) */
@@ -100,12 +109,16 @@ rt_status SendTxCommandPacket(struct net_device *dev, void *pData, u32 DataLen)
 		return RT_STATUS_FAILURE;
 	memcpy((unsigned char *)(skb->cb), &dev, sizeof(dev));
 	tcb_desc = (cb_desc *)(skb->cb + MAX_DEV_ADDR_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tcb_desc->queue_index = TXCMD_QUEUE;
 	tcb_desc->bCmdOrInit = DESC_PACKET_TYPE_NORMAL;
 	tcb_desc->bLastIniPkt = 0;
 	skb_reserve(skb, USB_HWDESC_HEADER_LEN);
 	ptr_buf = skb_put(skb, DataLen);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memcpy(ptr_buf,pData,DataLen);
 	tcb_desc->txbuf_size= (u16)DataLen;
@@ -229,6 +242,8 @@ rt_status SendTxCommandPacket(struct net_device *dev, void *pData, u32 DataLen)
 
 /*-----------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 	memcpy(ptr_buf, pData, DataLen);
 	tcb_desc->txbuf_size = (u16)DataLen;
 
@@ -245,14 +260,22 @@ rt_status SendTxCommandPacket(struct net_device *dev, void *pData, u32 DataLen)
 }
 
 /*-----------------------------------------------------------------------------
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Function:    cmpk_counttxstatistic()
  *
  * Overview:
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Input:       PADAPTER	pAdapter		-	.
  *				CMPK_TXFB_T *psTx_FB	-	.
+=======
+ * Input:       PADAPTER	pAdapter
+ *              CMPK_TXFB_T	*psTx_FB
+>>>>>>> v3.18
 =======
  * Input:       PADAPTER	pAdapter
  *              CMPK_TXFB_T	*psTx_FB
@@ -264,6 +287,7 @@ rt_status SendTxCommandPacket(struct net_device *dev, void *pData, u32 DataLen)
  *
  * Revised History:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  When		Who		Remark
  *  05/12/2008	amy	Create Version 0 porting from windows code.
  *
@@ -273,17 +297,23 @@ cmpk_count_txstatistic(
 	struct net_device *dev,
 	cmpk_txfb_t	*pstx_fb)
 =======
+=======
+>>>>>>> v3.18
  *  When		Who	Remark
  *  05/12/2008		amy	Create Version 0 porting from windows code.
  *
  *---------------------------------------------------------------------------*/
 static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct r8192_priv *priv = ieee80211_priv(dev);
 #ifdef ENABLE_PS
 	RT_RF_POWER_STATE	rtState;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pAdapter->HalFunc.GetHwRegHandler(pAdapter, HW_VAR_RF_STATE, (pu1Byte)(&rtState));
 
@@ -306,6 +336,8 @@ static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
 	if (pstx_fb->tok)
 	{
 =======
+=======
+>>>>>>> v3.18
 	pAdapter->HalFunc.GetHwRegHandler(pAdapter, HW_VAR_RF_STATE,
 					  (pu1Byte)(&rtState));
 
@@ -324,6 +356,9 @@ static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
 	   broadcast or uni or multicast. So the relative statistics
 	   must be collected in tx feedback info. */
 	if (pstx_fb->tok) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		priv->stats.txfeedbackok++;
 		priv->stats.txoktotal++;
@@ -331,6 +366,7 @@ static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
 		priv->stats.txokinperiod++;
 
 		/* We can not make sure broadcast/multicast or unicast mode. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (pstx_fb->pkt_type == PACKET_MULTICAST)
 		{
@@ -351,6 +387,8 @@ static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
 	else
 	{
 =======
+=======
+>>>>>>> v3.18
 		if (pstx_fb->pkt_type == PACKET_MULTICAST) {
 			priv->stats.txmulticast++;
 			priv->stats.txbytesmulticast += pstx_fb->pkt_length;
@@ -362,6 +400,9 @@ static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
 			priv->stats.txbytesunicast += pstx_fb->pkt_length;
 		}
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		priv->stats.txfeedbackfail++;
 		priv->stats.txerrtotal++;
@@ -369,6 +410,7 @@ static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
 
 		/* We can not make sure broadcast/multicast or unicast mode. */
 		if (pstx_fb->pkt_type == PACKET_MULTICAST)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		{
 			priv->stats.txerrmulticast++;
@@ -382,11 +424,16 @@ static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
 			priv->stats.txerrunicast++;
 		}
 =======
+=======
+>>>>>>> v3.18
 			priv->stats.txerrmulticast++;
 		else if (pstx_fb->pkt_type == PACKET_BROADCAST)
 			priv->stats.txerrbroadcast++;
 		else
 			priv->stats.txerrunicast++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -394,7 +441,11 @@ static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
 	priv->stats.txfeedbackretry += pstx_fb->retry_cnt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 }	/* cmpk_CountTxStatistic */
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -406,6 +457,7 @@ static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
  *
  * Overview:	The function is responsible for extract the message inside TX
 <<<<<<< HEAD
+<<<<<<< HEAD
  *				feedbck message from firmware. It will contain dedicated info in
  *				ws-06-0063-rtl8190-command-packet-specification. Please
  *				refer to chapter "TX Feedback Element". We have to read 20 bytes
@@ -414,6 +466,8 @@ static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
  * Input:       struct net_device *    dev
  *				u8	*	pmsg		-	Msg Ptr of the command packet.
 =======
+=======
+>>>>>>> v3.18
  *		feedbck message from firmware. It will contain dedicated info in
  *		ws-06-0063-rtl8190-command-packet-specification.
  *		Please refer to chapter "TX Feedback Element".
@@ -421,6 +475,9 @@ static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
  *
  * Input:       struct net_device	*dev
  *              u8			*pmsg	- Msg Ptr of the command packet.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Output:      NONE
@@ -428,6 +485,7 @@ static void cmpk_count_txstatistic(struct net_device *dev, cmpk_txfb_t *pstx_fb)
  * Return:      NONE
  *
  * Revised History:
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  When		Who		Remark
  *  05/08/2008	amy		Create Version 0 porting from windows code.
@@ -447,6 +505,8 @@ cmpk_handle_tx_feedback(
 	//cmpk_Display_Message(CMPK_RX_TX_FB_SIZE, pMsg);
 
 =======
+=======
+>>>>>>> v3.18
  *  When		Who	Remark
  *  05/08/2008		amy	Create Version 0 porting from windows code.
  *
@@ -458,11 +518,15 @@ static void cmpk_handle_tx_feedback(struct net_device *dev, u8 *pmsg)
 
 	priv->stats.txfeedback++;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* 1. Extract TX feedback info from RFD to temp structure buffer. */
 	/* It seems that FW use big endian(MIPS) and DRV use little endian in
 	   windows OS. So we have to read the content byte by byte or transfer
 	   endian type before copy the message copy. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* 2007/07/05 MH Use pointer to transfer structure memory. */
 	//memcpy((UINT8 *)&rx_tx_fb, pMsg, sizeof(CMPK_TXFB_T));
@@ -505,6 +569,8 @@ cmdpkt_beacontimerinterrupt_819xusb(
 
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* Use pointer to transfer structure memory. */
 	memcpy((u8 *)&rx_tx_fb, pmsg, sizeof(cmpk_txfb_t));
 	/* 2. Use tx feedback info to count TX statistics. */
@@ -534,6 +600,9 @@ static void cmdpkt_beacontimerinterrupt_819xusb(struct net_device *dev)
 
 		rtl819xusb_beacon_tx(dev, tx_rate); /* HW Beacon */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 }
@@ -546,6 +615,7 @@ static void cmdpkt_beacontimerinterrupt_819xusb(struct net_device *dev)
  *
  * Overview:    The function is responsible for extract the message from
 <<<<<<< HEAD
+<<<<<<< HEAD
  *				firmware. It will contain dedicated info in
  *				ws-07-0063-v06-rtl819x-command-packet-specification-070315.doc.
  *				Please refer to chapter "Interrupt Status Element".
@@ -553,12 +623,17 @@ static void cmdpkt_beacontimerinterrupt_819xusb(struct net_device *dev)
  * Input:       struct net_device *dev,
  *			u8*	pmsg		-	Message Pointer of the command packet.
 =======
+=======
+>>>>>>> v3.18
  *		firmware. It will contain dedicated info in
  *		ws-07-0063-v06-rtl819x-command-packet-specification-070315.doc.
  *		Please refer to chapter "Interrupt Status Element".
  *
  * Input:       struct net_device *dev
  *              u8 *pmsg		- Message Pointer of the command packet.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Output:      NONE
@@ -566,6 +641,7 @@ static void cmdpkt_beacontimerinterrupt_819xusb(struct net_device *dev)
  * Return:      NONE
  *
  * Revised History:
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  When			Who			Remark
  *  05/12/2008	amy		Add this for rtl8192 porting from windows code.
@@ -576,11 +652,16 @@ cmpk_handle_interrupt_status(
 	struct net_device *dev,
 	u8*	pmsg)
 =======
+=======
+>>>>>>> v3.18
  *  When		Who	Remark
  *  05/12/2008		amy	Add this for rtl8192 porting from windows code.
  *
  *---------------------------------------------------------------------------*/
 static void cmpk_handle_interrupt_status(struct net_device *dev, u8 *pmsg)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	cmpk_intr_sta_t		rx_intr_status;	/* */
@@ -589,15 +670,19 @@ static void cmpk_handle_interrupt_status(struct net_device *dev, u8 *pmsg)
 	DMESG("---> cmpk_Handle_Interrupt_Status()\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* 0. Display received message. */
 	//cmpk_Display_Message(CMPK_RX_BEACON_STATE_SIZE, pMsg);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* 1. Extract TX feedback info from RFD to temp structure buffer. */
 	/* It seems that FW use big endian(MIPS) and DRV use little endian in
 	   windows OS. So we have to read the content byte by byte or transfer
 	   endian type before copy the message copy. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//rx_bcn_state.Element_ID	= pMsg[0];
 	//rx_bcn_state.Length		= pMsg[1];
@@ -608,11 +693,16 @@ static void cmpk_handle_interrupt_status(struct net_device *dev, u8 *pmsg)
 	rx_intr_status.length = pmsg[1];
 	if (rx_intr_status.length != (sizeof(cmpk_intr_sta_t) - 2)) {
 >>>>>>> v3.18
+=======
+	rx_intr_status.length = pmsg[1];
+	if (rx_intr_status.length != (sizeof(cmpk_intr_sta_t) - 2)) {
+>>>>>>> v3.18
 		DMESG("cmpk_Handle_Interrupt_Status: wrong length!\n");
 		return;
 	}
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Statistics of beacon for ad-hoc mode.
 	if(	priv->ieee80211->iw_mode == IW_MODE_ADHOC)
@@ -631,6 +721,8 @@ static void cmpk_handle_interrupt_status(struct net_device *dev, u8 *pmsg)
 		else if (rx_intr_status.interrupt_status & ISR_TxBcnErr)
 		{
 =======
+=======
+>>>>>>> v3.18
 	/* Statistics of beacon for ad-hoc mode. */
 	if (priv->ieee80211->iw_mode == IW_MODE_ADHOC) {
 		/* 2 maybe need endian transform? */
@@ -643,12 +735,16 @@ static void cmpk_handle_interrupt_status(struct net_device *dev, u8 *pmsg)
 			priv->ieee80211->bibsscoordinator = true;
 			priv->stats.txbeaconokint++;
 		} else if (rx_intr_status.interrupt_status & ISR_TxBcnErr) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			priv->ieee80211->bibsscoordinator = false;
 			priv->stats.txbeaconerr++;
 		}
 
 		if (rx_intr_status.interrupt_status & ISR_BcnTimerIntr)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		{
 			cmdpkt_beacontimerinterrupt_819xusb(dev);
@@ -658,18 +754,27 @@ static void cmpk_handle_interrupt_status(struct net_device *dev, u8 *pmsg)
 
 	 // Other informations in interrupt status we need?
 =======
+=======
+>>>>>>> v3.18
 			cmdpkt_beacontimerinterrupt_819xusb(dev);
 
 	}
 
 	/* Other informations in interrupt status we need? */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 	DMESG("<---- cmpk_handle_interrupt_status()\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 }	/* cmpk_handle_interrupt_status */
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -680,17 +785,23 @@ static void cmpk_handle_interrupt_status(struct net_device *dev, u8 *pmsg)
  *
  * Overview:    The function is responsible for extract the message from
 <<<<<<< HEAD
+<<<<<<< HEAD
  *				firmware. It will contain dedicated info in
  *				ws-06-0063-rtl8190-command-packet-specification. Please
  *				refer to chapter "Beacon State Element".
  *
  * Input:       u8 *  pmsg	-	Message Pointer of the command packet.
 =======
+=======
+>>>>>>> v3.18
  *		firmware. It will contain dedicated info in
  *		ws-06-0063-rtl8190-command-packet-specification. Please
  *		refer to chapter "Beacon State Element".
  *
  * Input:       u8    *pmsg	-	Message Pointer of the command packet.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Output:      NONE
@@ -698,6 +809,7 @@ static void cmpk_handle_interrupt_status(struct net_device *dev, u8 *pmsg)
  * Return:      NONE
  *
  * Revised History:
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  When		Who		Remark
  *  05/12/2008	amy		Create Version 0 porting from windows code.
@@ -713,6 +825,8 @@ cmpk_handle_query_config_rx(
 	/* 0. Display received message. */
 	//cmpk_Display_Message(CMPK_RX_BEACON_STATE_SIZE, pMsg);
 =======
+=======
+>>>>>>> v3.18
  *  When		Who	Remark
  *  05/12/2008		amy	Create Version 0 porting from windows code.
  *
@@ -721,12 +835,16 @@ static void cmpk_handle_query_config_rx(struct net_device *dev, u8 *pmsg)
 {
 	cmpk_query_cfg_t	rx_query_cfg;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* 1. Extract TX feedback info from RFD to temp structure buffer. */
 	/* It seems that FW use big endian(MIPS) and DRV use little endian in
 	   windows OS. So we have to read the content byte by byte or transfer
 	   endian type before copy the message copy. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//rx_query_cfg.Element_ID	= pMsg[0];
 	//rx_query_cfg.Length		= pMsg[1];
@@ -742,6 +860,8 @@ static void cmpk_handle_query_config_rx(struct net_device *dev, u8 *pmsg)
 
 }	/* cmpk_Handle_Query_Config_Rx */
 =======
+=======
+>>>>>>> v3.18
 	rx_query_cfg.cfg_action		= (pmsg[4] & 0x80000000) >> 31;
 	rx_query_cfg.cfg_type		= (pmsg[4] & 0x60) >> 5;
 	rx_query_cfg.cfg_size		= (pmsg[4] & 0x18) >> 3;
@@ -753,6 +873,9 @@ static void cmpk_handle_query_config_rx(struct net_device *dev, u8 *pmsg)
 					  (pmsg[14] <<  8) | (pmsg[15] <<  0);
 
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -760,6 +883,7 @@ static void cmpk_handle_query_config_rx(struct net_device *dev, u8 *pmsg)
  * Function:	cmpk_count_tx_status()
  *
  * Overview:	Count aggregated tx status from firmwar of one type rx command
+<<<<<<< HEAD
 <<<<<<< HEAD
  *				packet element id = RX_TX_STATUS.
  *
@@ -777,6 +901,8 @@ static void cmpk_handle_query_config_rx(struct net_device *dev, u8 *pmsg)
 static	void	cmpk_count_tx_status(	struct net_device *dev,
 									cmpk_tx_status_t	*pstx_status)
 =======
+=======
+>>>>>>> v3.18
  *		packet element id = RX_TX_STATUS.
  *
  * Input:	NONE
@@ -792,6 +918,9 @@ static	void	cmpk_count_tx_status(	struct net_device *dev,
  *---------------------------------------------------------------------------*/
 static void cmpk_count_tx_status(struct net_device *dev,
 				 cmpk_tx_status_t *pstx_status)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct r8192_priv *priv = ieee80211_priv(dev);
@@ -800,6 +929,7 @@ static void cmpk_count_tx_status(struct net_device *dev,
 
 	RT_RF_POWER_STATE	rtstate;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pAdapter->HalFunc.GetHwRegHandler(pAdapter, HW_VAR_RF_STATE, (pu1Byte)(&rtState));
 
@@ -811,6 +941,8 @@ static void cmpk_count_tx_status(struct net_device *dev,
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 	pAdapter->HalFunc.GetHwRegHandler(pAdapter, HW_VAR_RF_STATE,
 					  (pu1Byte)(&rtState));
 
@@ -819,6 +951,9 @@ static void cmpk_count_tx_status(struct net_device *dev,
 	   hw switch is being changed. */
 	if (rtState == eRfOff)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -828,6 +963,7 @@ static void cmpk_count_tx_status(struct net_device *dev,
 	priv->stats.txfeedbackfail	+= pstx_status->txfail;
 	priv->stats.txerrtotal		+= pstx_status->txfail;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	priv->stats.txretrycount		+= pstx_status->txretry;
 	priv->stats.txfeedbackretry	+= pstx_status->txretry;
@@ -839,12 +975,17 @@ static void cmpk_count_tx_status(struct net_device *dev,
 	priv->stats.txmulticast	+= pstx_status->txmcok;
 	priv->stats.txbroadcast	+= pstx_status->txbcok;
 =======
+=======
+>>>>>>> v3.18
 	priv->stats.txretrycount	+= pstx_status->txretry;
 	priv->stats.txfeedbackretry	+= pstx_status->txretry;
 
 
 	priv->stats.txmulticast		+= pstx_status->txmcok;
 	priv->stats.txbroadcast		+= pstx_status->txbcok;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	priv->stats.txunicast		+= pstx_status->txucok;
 
@@ -855,15 +996,21 @@ static void cmpk_count_tx_status(struct net_device *dev,
 	priv->stats.txbytesmulticast	+= pstx_status->txmclength;
 	priv->stats.txbytesbroadcast	+= pstx_status->txbclength;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->stats.txbytesunicast		+= pstx_status->txuclength;
 
 	priv->stats.last_packet_rate		= pstx_status->rate;
 }	/* cmpk_CountTxStatus */
 =======
+=======
+>>>>>>> v3.18
 	priv->stats.txbytesunicast	+= pstx_status->txuclength;
 
 	priv->stats.last_packet_rate	= pstx_status->rate;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -873,7 +1020,11 @@ static void cmpk_count_tx_status(struct net_device *dev,
  *
  * Overview:	Firmware add a new tx feedback status to reduce rx command
 <<<<<<< HEAD
+<<<<<<< HEAD
  *				packet buffer operation load.
+=======
+ *		packet buffer operation load.
+>>>>>>> v3.18
 =======
  *		packet buffer operation load.
 >>>>>>> v3.18
@@ -885,6 +1036,7 @@ static void cmpk_count_tx_status(struct net_device *dev,
  * Return:		NONE
  *
  * Revised History:
+<<<<<<< HEAD
 <<<<<<< HEAD
  *	When		Who		Remark
  *	05/12/2008	amy		Create Version 0 porting from windows code.
@@ -903,6 +1055,8 @@ cmpk_handle_tx_status(
 
 }	/* cmpk_Handle_Tx_Status */
 =======
+=======
+>>>>>>> v3.18
  *	When		Who	Remark
  *	05/12/2008	amy	Create Version 0 porting from windows code.
  *
@@ -916,6 +1070,9 @@ static void cmpk_handle_tx_status(struct net_device *dev, u8 *pmsg)
 	cmpk_count_tx_status(dev, &rx_tx_sts);
 
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -932,6 +1089,7 @@ static void cmpk_handle_tx_status(struct net_device *dev, u8 *pmsg)
  *
  * Revised History:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	When		Who		Remark
  *	05/12/2008	amy		Create Version 0 porting from windows code.
  *
@@ -947,6 +1105,8 @@ cmpk_handle_tx_rate_history(
 	u16				length = sizeof(cmpk_tx_rahis_t);
 	u32				*ptemp;
 =======
+=======
+>>>>>>> v3.18
  *	When		Who	Remark
  *	05/12/2008	amy	Create Version 0 porting from windows code.
  *
@@ -957,11 +1117,15 @@ static void cmpk_handle_tx_rate_history(struct net_device *dev, u8 *pmsg)
 	u8		i, j;
 	u16		length = sizeof(cmpk_tx_rahis_t);
 	u32		*ptemp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct r8192_priv *priv = ieee80211_priv(dev);
 
 
 #ifdef ENABLE_PS
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pAdapter->HalFunc.GetHwRegHandler(pAdapter, HW_VAR_RF_STATE, (pu1Byte)(&rtState));
 
@@ -973,6 +1137,8 @@ static void cmpk_handle_tx_rate_history(struct net_device *dev, u8 *pmsg)
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 	pAdapter->HalFunc.GetHwRegHandler(pAdapter, HW_VAR_RF_STATE,
 					  (pu1Byte)(&rtState));
 
@@ -981,11 +1147,15 @@ static void cmpk_handle_tx_rate_history(struct net_device *dev, u8 *pmsg)
 	   hw switch is being changed. */
 	if (rtState == eRfOff)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 	ptemp = (u32 *)pmsg;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//
 	// Do endian transfer to word alignment(16 bits) for windows system.
@@ -999,6 +1169,8 @@ static void cmpk_handle_tx_rate_history(struct net_device *dev, u8 *pmsg)
 		temp2 = ptemp[i]>>16;
 		ptemp[i] = (temp1<<16)|temp2;
 =======
+=======
+>>>>>>> v3.18
 	/* Do endian transfer to word alignment(16 bits) for windows system.
 	   You must do different endian transfer for linux and MAC OS */
 	for (i = 0; i < (length/4); i++) {
@@ -1007,11 +1179,15 @@ static void cmpk_handle_tx_rate_history(struct net_device *dev, u8 *pmsg)
 		temp1 = ptemp[i] & 0x0000FFFF;
 		temp2 = ptemp[i] >> 16;
 		ptemp[i] = (temp1 << 16) | temp2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	ptxrate = (cmpk_tx_rahis_t *)pmsg;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ptxrate == NULL )
 	{
@@ -1027,6 +1203,8 @@ static void cmpk_handle_tx_rate_history(struct net_device *dev, u8 *pmsg)
 		// Collect OFDM rate packet num
 		if (i< 8)
 =======
+=======
+>>>>>>> v3.18
 	if (ptxrate == NULL)
 		return;
 
@@ -1037,6 +1215,9 @@ static void cmpk_handle_tx_rate_history(struct net_device *dev, u8 *pmsg)
 
 		/* Collect OFDM rate packet num */
 		if (i < 8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			priv->stats.txrate.ofdm[i] += ptxrate->ofdm[i];
 
@@ -1045,7 +1226,11 @@ static void cmpk_handle_tx_rate_history(struct net_device *dev, u8 *pmsg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 }	/* cmpk_Handle_Tx_Rate_History */
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -1056,15 +1241,21 @@ static void cmpk_handle_tx_rate_history(struct net_device *dev, u8 *pmsg)
  *
  * Overview:    In the function, we will capture different RX command packet
 <<<<<<< HEAD
+<<<<<<< HEAD
  *				info. Every RX command packet element has different message
  *				length and meaning in content. We only support three type of RX
  *				command packet now. Please refer to document
  *				ws-06-0063-rtl8190-command-packet-specification.
 =======
+=======
+>>>>>>> v3.18
  *		info. Every RX command packet element has different message
  *		length and meaning in content. We only support three type of RX
  *		command packet now. Please refer to document
  *		ws-06-0063-rtl8190-command-packet-specification.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Input:       NONE
@@ -1074,6 +1265,7 @@ static void cmpk_handle_tx_rate_history(struct net_device *dev, u8 *pmsg)
  * Return:      NONE
  *
  * Revised History:
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  When		Who		Remark
  *  05/06/2008	amy		Create Version 0 porting from windows code.
@@ -1086,6 +1278,8 @@ cmpk_message_handle_rx(
 {
 //	u32			debug_level = DBG_LOUD;
 =======
+=======
+>>>>>>> v3.18
  *  When		Who	Remark
  *  05/06/2008		amy	Create Version 0 porting from windows code.
  *
@@ -1093,12 +1287,16 @@ cmpk_message_handle_rx(
 u32 cmpk_message_handle_rx(struct net_device *dev,
 			   struct ieee80211_rx_stats *pstats)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			total_length;
 	u8			cmd_length, exe_cnt = 0;
 	u8			element_id;
 	u8			*pcmd_buff;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* 0. Check inpt arguments. If is is a command queue message or pointer is
 	      null. */
@@ -1110,10 +1308,15 @@ u32 cmpk_message_handle_rx(struct net_device *dev,
 		return 0;	/* This is not a command packet. */
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* 0. Check inpt arguments. If is is a command queue message or
 	   pointer is null. */
 	if (pstats == NULL)
 		return 0;	/* This is not a command packet. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* 1. Read received command packet message length from RFD. */
@@ -1124,6 +1327,7 @@ u32 cmpk_message_handle_rx(struct net_device *dev,
 
 	/* 3. Read command packet element id and length. */
 	element_id = pcmd_buff[0];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*RT_TRACE(COMP_SEND, DebugLevel,
 			("\n\r[CMPK]-->element ID=%d Len=%d", element_id, total_length));*/
@@ -1190,6 +1394,8 @@ u32 cmpk_message_handle_rx(struct net_device *dev,
 
 }	/* CMPK_Message_Handle_Rx */
 =======
+=======
+>>>>>>> v3.18
 
 	/* 4. Check every received command packet content according to different
 	      element type. Because FW may aggregate RX command packet to
@@ -1245,4 +1451,7 @@ u32 cmpk_message_handle_rx(struct net_device *dev,
 	return	1;	/* This is a command packet. */
 
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

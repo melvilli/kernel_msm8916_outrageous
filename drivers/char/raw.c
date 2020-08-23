@@ -285,15 +285,21 @@ static long raw_ctl_compat_ioctl(struct file *file, unsigned int cmd,
 
 static const struct file_operations raw_fops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.aio_read	= generic_file_aio_read,
 	.write		= do_sync_write,
 	.aio_write	= blkdev_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.read		= new_sync_read,
 	.read_iter	= blkdev_read_iter,
 	.write		= new_sync_write,
 	.write_iter	= blkdev_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.fsync		= blkdev_fsync,
 	.open		= raw_open,

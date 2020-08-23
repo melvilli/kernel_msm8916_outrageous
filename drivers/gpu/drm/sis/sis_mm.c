@@ -110,7 +110,12 @@ static int sis_drm_alloc(struct drm_device *dev, struct drm_file *file,
 		retval = drm_mm_insert_node(&dev_priv->agp_mm,
 					    &item->mm_node,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    mem->size, 0);
+=======
+					    mem->size, 0,
+					    DRM_MM_SEARCH_DEFAULT);
+>>>>>>> v3.18
 =======
 					    mem->size, 0,
 					    DRM_MM_SEARCH_DEFAULT);
@@ -127,7 +132,12 @@ static int sis_drm_alloc(struct drm_device *dev, struct drm_file *file,
 		retval = drm_mm_insert_node(&dev_priv->vram_mm,
 					    &item->mm_node,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    mem->size, 0);
+=======
+					    mem->size, 0,
+					    DRM_MM_SEARCH_DEFAULT);
+>>>>>>> v3.18
 =======
 					    mem->size, 0,
 					    DRM_MM_SEARCH_DEFAULT);
@@ -275,7 +285,11 @@ int sis_idle(struct drm_device *dev)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	end = jiffies + (DRM_HZ * 3);
+=======
+	end = jiffies + (HZ * 3);
+>>>>>>> v3.18
 =======
 	end = jiffies + (HZ * 3);
 >>>>>>> v3.18
@@ -332,7 +346,11 @@ void sis_reclaim_buffers_locked(struct drm_device *dev,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_idlelock_take(&file->master->lock);
+=======
+	drm_legacy_idlelock_take(&file->master->lock);
+>>>>>>> v3.18
 =======
 	drm_legacy_idlelock_take(&file->master->lock);
 >>>>>>> v3.18
@@ -341,7 +359,11 @@ void sis_reclaim_buffers_locked(struct drm_device *dev,
 	if (list_empty(&file_priv->obj_list)) {
 		mutex_unlock(&dev->struct_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drm_idlelock_release(&file->master->lock);
+=======
+		drm_legacy_idlelock_release(&file->master->lock);
+>>>>>>> v3.18
 =======
 		drm_legacy_idlelock_release(&file->master->lock);
 >>>>>>> v3.18
@@ -366,7 +388,11 @@ void sis_reclaim_buffers_locked(struct drm_device *dev,
 	mutex_unlock(&dev->struct_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_idlelock_release(&file->master->lock);
+=======
+	drm_legacy_idlelock_release(&file->master->lock);
+>>>>>>> v3.18
 =======
 	drm_legacy_idlelock_release(&file->master->lock);
 >>>>>>> v3.18
@@ -375,7 +401,11 @@ void sis_reclaim_buffers_locked(struct drm_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drm_ioctl_desc sis_ioctls[] = {
+=======
+const struct drm_ioctl_desc sis_ioctls[] = {
+>>>>>>> v3.18
 =======
 const struct drm_ioctl_desc sis_ioctls[] = {
 >>>>>>> v3.18
@@ -388,7 +418,11 @@ const struct drm_ioctl_desc sis_ioctls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sis_max_ioctl = DRM_ARRAY_SIZE(sis_ioctls);
+=======
+int sis_max_ioctl = ARRAY_SIZE(sis_ioctls);
+>>>>>>> v3.18
 =======
 int sis_max_ioctl = ARRAY_SIZE(sis_ioctls);
 >>>>>>> v3.18

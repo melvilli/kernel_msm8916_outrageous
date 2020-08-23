@@ -45,7 +45,11 @@ u32 r128_get_vblank_counter(struct drm_device *dev, int crtc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t r128_driver_irq_handler(DRM_IRQ_ARGS)
+=======
+irqreturn_t r128_driver_irq_handler(int irq, void *arg)
+>>>>>>> v3.18
 =======
 irqreturn_t r128_driver_irq_handler(int irq, void *arg)
 >>>>>>> v3.18

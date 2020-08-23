@@ -2,10 +2,13 @@
 #define __DRM_GEM_CMA_HELPER_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drm_gem_cma_object {
 	struct drm_gem_object base;
 	dma_addr_t paddr;
 =======
+=======
+>>>>>>> v3.18
 #include <drm/drmP.h>
 #include <drm/drm_gem.h>
 
@@ -15,6 +18,9 @@ struct drm_gem_cma_object {
 	struct sg_table *sgt;
 
 	/* For objects with DMA memory allocated by GEM CMA */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void *vaddr;
 };
@@ -40,6 +46,7 @@ int drm_gem_cma_dumb_map_offset(struct drm_file *file_priv,
 int drm_gem_cma_mmap(struct file *filp, struct vm_area_struct *vma);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * destroy memory region allocated.
  *	- a gem handle and physical memory region pointed by a gem object
@@ -48,6 +55,8 @@ int drm_gem_cma_mmap(struct file *filp, struct vm_area_struct *vma);
 int drm_gem_cma_dumb_destroy(struct drm_file *file_priv,
 		struct drm_device *drm, unsigned int handle);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* allocate physical memory. */
@@ -61,7 +70,10 @@ void drm_gem_cma_describe(struct drm_gem_cma_object *obj, struct seq_file *m);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct sg_table *drm_gem_cma_prime_get_sg_table(struct drm_gem_object *obj);
 struct drm_gem_object *
 drm_gem_cma_prime_import_sg_table(struct drm_device *dev,
@@ -72,5 +84,8 @@ int drm_gem_cma_prime_mmap(struct drm_gem_object *obj,
 void *drm_gem_cma_prime_vmap(struct drm_gem_object *obj);
 void drm_gem_cma_prime_vunmap(struct drm_gem_object *obj, void *vaddr);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __DRM_GEM_CMA_HELPER_H__ */

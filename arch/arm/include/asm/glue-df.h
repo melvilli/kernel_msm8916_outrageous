@@ -32,6 +32,7 @@
 #undef MULTI_DABORT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_CPU_ARM710)
 # ifdef CPU_DABORT_HANDLER
 #  define MULTI_DABORT 1
@@ -40,6 +41,8 @@
 # endif
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_CPU_ABRT_EV4
@@ -99,7 +102,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_ABRT_NOMMU
 # ifdef CPU_DABORT_HANDLER
 #  define MULTI_DABORT 1
@@ -108,6 +114,9 @@
 # endif
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef CPU_DABORT_HANDLER
 #error Unknown data abort handler type

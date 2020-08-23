@@ -26,6 +26,11 @@
 #include <linux/msi.h>
 #include <linux/irqreturn.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/rwsem.h>
+#include <linux/rcupdate.h>
+>>>>>>> v3.18
 =======
 #include <linux/rwsem.h>
 #include <linux/rcupdate.h>
@@ -39,7 +44,10 @@ struct acpi_dmar_header;
 
 struct intel_iommu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 struct dmar_dev_scope {
 	struct device __rcu *dev;
@@ -47,6 +55,9 @@ struct dmar_dev_scope {
 	u8 devfn;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_DMAR_TABLE
 extern struct acpi_table_header *dmar_tbl;
@@ -55,7 +66,11 @@ struct dmar_drhd_unit {
 	struct  acpi_dmar_header *hdr;	/* ACPI header		*/
 	u64	reg_base_addr;		/* register base address*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct	pci_dev **devices; 	/* target device array	*/
+=======
+	struct	dmar_dev_scope *devices;/* target device array	*/
+>>>>>>> v3.18
 =======
 	struct	dmar_dev_scope *devices;/* target device array	*/
 >>>>>>> v3.18
@@ -66,6 +81,7 @@ struct dmar_drhd_unit {
 	struct intel_iommu *iommu;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct list_head dmar_drhd_units;
 
@@ -84,6 +100,8 @@ extern int dmar_table_init(void);
 extern int dmar_dev_scope_init(void);
 
 =======
+=======
+>>>>>>> v3.18
 struct dmar_pci_path {
 	u8 bus;
 	u8 device;
@@ -145,11 +163,15 @@ extern int dmar_insert_dev_scope(struct dmar_pci_notify_info *info,
 extern int dmar_remove_dev_scope(struct dmar_pci_notify_info *info,
 				 u16 segment, struct dmar_dev_scope *devices,
 				 int count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Intel IOMMU detection */
 extern int detect_intel_iommu(void);
 extern int enable_drhd_fault_handling(void);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int parse_ioapics_under_ir(void);
 extern int alloc_iommu(struct dmar_drhd_unit *);
@@ -169,6 +191,8 @@ static inline int enable_drhd_fault_handling(void)
 }
 #endif /* !CONFIG_DMAR_TABLE */
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_INTEL_IOMMU
 extern int iommu_detected, no_iommu;
 extern int intel_iommu_init(void);
@@ -192,6 +216,9 @@ static inline int dmar_iommu_notify_scope_dev(struct dmar_pci_notify_info *info)
 #endif /* CONFIG_INTEL_IOMMU */
 
 #endif /* CONFIG_DMAR_TABLE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct irte {
@@ -241,6 +268,7 @@ extern irqreturn_t dmar_fault(int irq, void *dev_id);
 extern int arch_setup_dmar_msi(unsigned int irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_INTEL_IOMMU
 extern int iommu_detected, no_iommu;
 extern struct list_head dmar_rmrr_units;
@@ -286,6 +314,8 @@ static inline int dmar_parse_rmrr_atsr_dev(void)
 }
 #endif /* CONFIG_INTEL_IOMMU */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __DMAR_H__ */

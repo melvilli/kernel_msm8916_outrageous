@@ -18,6 +18,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -118,6 +122,7 @@ static int uhci_hcd_grlib_probe(struct platform_device *op)
 	hcd->rsrc_len = resource_size(&res);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!request_mem_region(hcd->rsrc_start, hcd->rsrc_len, hcd_name)) {
 		printk(KERN_ERR "%s: request_mem_region failed\n", __FILE__);
 		rv = -EBUSY;
@@ -126,10 +131,13 @@ static int uhci_hcd_grlib_probe(struct platform_device *op)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	irq = irq_of_parse_and_map(dn, 0);
 	if (irq == NO_IRQ) {
 		printk(KERN_ERR "%s: irq_of_parse_and_map failed\n", __FILE__);
 		rv = -EBUSY;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_irq;
 	}
@@ -140,6 +148,8 @@ static int uhci_hcd_grlib_probe(struct platform_device *op)
 		rv = -ENOMEM;
 		goto err_ioremap;
 =======
+=======
+>>>>>>> v3.18
 		goto err_usb;
 	}
 
@@ -147,6 +157,9 @@ static int uhci_hcd_grlib_probe(struct platform_device *op)
 	if (IS_ERR(hcd->regs)) {
 		rv = PTR_ERR(hcd->regs);
 		goto err_irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -156,6 +169,7 @@ static int uhci_hcd_grlib_probe(struct platform_device *op)
 
 	rv = usb_add_hcd(hcd, irq, 0);
 	if (rv)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_uhci;
 
@@ -169,6 +183,8 @@ err_irq:
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
 err_rmr:
 =======
+=======
+>>>>>>> v3.18
 		goto err_irq;
 
 	device_wakeup_enable(hcd->self.controller);
@@ -177,6 +193,9 @@ err_rmr:
 err_irq:
 	irq_dispose_mapping(irq);
 err_usb:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	usb_put_hcd(hcd);
 
@@ -186,9 +205,13 @@ err_usb:
 static int uhci_hcd_grlib_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_hcd *hcd = dev_get_drvdata(&op->dev);
 
 	dev_set_drvdata(&op->dev, NULL);
+=======
+	struct usb_hcd *hcd = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct usb_hcd *hcd = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -198,10 +221,14 @@ static int uhci_hcd_grlib_remove(struct platform_device *op)
 	usb_remove_hcd(hcd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(hcd->regs);
 	irq_dispose_mapping(hcd->irq);
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
 
+=======
+	irq_dispose_mapping(hcd->irq);
+>>>>>>> v3.18
 =======
 	irq_dispose_mapping(hcd->irq);
 >>>>>>> v3.18
@@ -220,7 +247,11 @@ static int uhci_hcd_grlib_remove(struct platform_device *op)
 static void uhci_hcd_grlib_shutdown(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_hcd *hcd = dev_get_drvdata(&op->dev);
+=======
+	struct usb_hcd *hcd = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct usb_hcd *hcd = platform_get_drvdata(op);
 >>>>>>> v3.18

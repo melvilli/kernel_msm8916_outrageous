@@ -29,6 +29,10 @@
 #include <linux/ctype.h>
 #include <linux/genhd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <trace/events/power.h>
+>>>>>>> v3.18
 =======
 #include <trace/events/power.h>
 >>>>>>> v3.18
@@ -39,6 +43,7 @@
 static int nocompress;
 static int noresume;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int resume_wait;
 static int resume_delay;
 static char resume_file[256] = CONFIG_PM_STD_PARTITION;
@@ -46,6 +51,8 @@ dev_t swsusp_resume_device;
 sector_t swsusp_resume_block;
 int in_suspend __nosavedata;
 =======
+=======
+>>>>>>> v3.18
 static int nohibernate;
 static int resume_wait;
 static unsigned int resume_delay;
@@ -53,6 +60,9 @@ static char resume_file[256] = CONFIG_PM_STD_PARTITION;
 dev_t swsusp_resume_device;
 sector_t swsusp_resume_block;
 __visible int in_suspend __nosavedata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum {
@@ -76,12 +86,18 @@ bool freezer_test_done;
 static const struct platform_hibernation_ops *hibernation_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool hibernation_available(void)
 {
 	return (nohibernate == 0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * hibernation_set_ops - Set the global hibernate operations.
@@ -105,6 +121,10 @@ void hibernation_set_ops(const struct platform_hibernation_ops *ops)
 	unlock_system_sleep();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(hibernation_set_ops);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(hibernation_set_ops);
 >>>>>>> v3.18
@@ -254,6 +274,7 @@ void swsusp_show_speed(struct timeval *start, struct timeval *stop,
 			unsigned nr_pages, char *msg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s64 elapsed_centisecs64;
 	int centisecs;
 	int k;
@@ -261,6 +282,8 @@ void swsusp_show_speed(struct timeval *start, struct timeval *stop,
 
 	elapsed_centisecs64 = timeval_to_ns(stop) - timeval_to_ns(start);
 =======
+=======
+>>>>>>> v3.18
 	u64 elapsed_centisecs64;
 	unsigned int centisecs;
 	unsigned int k;
@@ -271,6 +294,9 @@ void swsusp_show_speed(struct timeval *start, struct timeval *stop,
 	 * If "(s64)elapsed_centisecs64 < 0", it will print long elapsed time,
 	 * it is obvious enough for what went wrong.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	do_div(elapsed_centisecs64, NSEC_PER_SEC / 100);
 	centisecs = elapsed_centisecs64;
@@ -279,7 +305,11 @@ void swsusp_show_speed(struct timeval *start, struct timeval *stop,
 	k = nr_pages * (PAGE_SIZE / 1024);
 	kps = (k * 100) / centisecs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "PM: %s %d kbytes in %d.%02d seconds (%d.%02d MB/s)\n",
+=======
+	printk(KERN_INFO "PM: %s %u kbytes in %u.%02u seconds (%u.%02u MB/s)\n",
+>>>>>>> v3.18
 =======
 	printk(KERN_INFO "PM: %s %u kbytes in %u.%02u seconds (%u.%02u MB/s)\n",
 >>>>>>> v3.18
@@ -331,7 +361,13 @@ static int create_image(int platform_mode)
 	in_suspend = 1;
 	save_processor_state();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = swsusp_arch_suspend();
+=======
+	trace_suspend_resume(TPS("machine_suspend"), PM_EVENT_HIBERNATE, true);
+	error = swsusp_arch_suspend();
+	trace_suspend_resume(TPS("machine_suspend"), PM_EVENT_HIBERNATE, false);
+>>>>>>> v3.18
 =======
 	trace_suspend_resume(TPS("machine_suspend"), PM_EVENT_HIBERNATE, true);
 	error = swsusp_arch_suspend();
@@ -343,15 +379,21 @@ static int create_image(int platform_mode)
 	/* Restore control flow magically appears here */
 	restore_processor_state();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!in_suspend) {
 		events_check_enabled = false;
 		platform_leave(platform_mode);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!in_suspend)
 		events_check_enabled = false;
 
 	platform_leave(platform_mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  Power_up:
@@ -414,7 +456,10 @@ int hibernation_snapshot(int platform_mode)
 
 	suspend_console();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ftrace_stop();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pm_restrict_gfp_mask();
@@ -443,7 +488,10 @@ int hibernation_snapshot(int platform_mode)
 		pm_restore_gfp_mask();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ftrace_start();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	resume_console();
@@ -549,7 +597,10 @@ int hibernation_restore(int platform_mode)
 	pm_prepare_console();
 	suspend_console();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ftrace_stop();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pm_restrict_gfp_mask();
@@ -566,7 +617,10 @@ int hibernation_restore(int platform_mode)
 	dpm_resume_end(PMSG_RECOVER);
 	pm_restore_gfp_mask();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ftrace_start();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	resume_console();
@@ -596,7 +650,10 @@ int hibernation_platform_enter(void)
 	entering_platform_hibernation = true;
 	suspend_console();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ftrace_stop();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	error = dpm_suspend_start(PMSG_HIBERNATE);
@@ -643,7 +700,10 @@ int hibernation_platform_enter(void)
 	entering_platform_hibernation = false;
 	dpm_resume_end(PMSG_RESTORE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ftrace_start();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	resume_console();
@@ -675,7 +735,12 @@ static void power_down(void)
 		hibernation_platform_enter();
 	case HIBERNATION_SHUTDOWN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kernel_power_off();
+=======
+		if (pm_power_off)
+			kernel_power_off();
+>>>>>>> v3.18
 =======
 		if (pm_power_off)
 			kernel_power_off();
@@ -708,7 +773,12 @@ static void power_down(void)
 	 */
 	printk(KERN_CRIT "PM: Please power down manually\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while(1);
+=======
+	while (1)
+		cpu_relax();
+>>>>>>> v3.18
 =======
 	while (1)
 		cpu_relax();
@@ -723,12 +793,18 @@ int hibernate(void)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!hibernation_available()) {
 		pr_debug("PM: Hibernation not available.\n");
 		return -EPERM;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lock_system_sleep();
 	/* The snapshot device should not be opened while we're running */
@@ -743,11 +819,14 @@ int hibernate(void)
 		goto Exit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Allocate memory management structures */
 	error = create_basic_memory_bitmaps();
 	if (error)
 		goto Exit;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	printk(KERN_INFO "PM: Syncing filesystems ... ");
@@ -757,12 +836,15 @@ int hibernate(void)
 	error = freeze_processes();
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto Free_bitmaps;
 
 	error = hibernation_snapshot(hibernation_mode == HIBERNATION_PLATFORM);
 	if (error || freezer_test_done)
 		goto Thaw;
 =======
+=======
+>>>>>>> v3.18
 		goto Exit;
 
 	lock_device_hotplug();
@@ -774,6 +856,9 @@ int hibernate(void)
 	error = hibernation_snapshot(hibernation_mode == HIBERNATION_PLATFORM);
 	if (error || freezer_test_done)
 		goto Free_bitmaps;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (in_suspend) {
@@ -798,21 +883,30 @@ int hibernate(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  Thaw:
 =======
+=======
+>>>>>>> v3.18
  Free_bitmaps:
 	free_basic_memory_bitmaps();
  Thaw:
 	unlock_device_hotplug();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	thaw_processes();
 
 	/* Don't bother checking whether freezer_test_done is true */
 	freezer_test_done = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
  Free_bitmaps:
 	free_basic_memory_bitmaps();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  Exit:
@@ -849,7 +943,11 @@ static int software_resume(void)
 	 * If the user said "noresume".. bail out early.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (noresume)
+=======
+	if (noresume || !hibernation_available())
+>>>>>>> v3.18
 =======
 	if (noresume || !hibernation_available())
 >>>>>>> v3.18
@@ -936,6 +1034,7 @@ static int software_resume(void)
 	error = pm_notifier_call_chain(PM_RESTORE_PREPARE);
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto close_finish;
 
 	error = create_basic_memory_bitmaps();
@@ -952,6 +1051,8 @@ static int software_resume(void)
 	pr_debug("PM: Loading hibernation image.\n");
 
 =======
+=======
+>>>>>>> v3.18
 		goto Close_Finish;
 
 	pr_debug("PM: Preparing processes for restore.\n");
@@ -966,6 +1067,9 @@ static int software_resume(void)
 	if (error)
 		goto Thaw;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	error = swsusp_read(&flags);
 	swsusp_close(FMODE_READ);
@@ -975,14 +1079,20 @@ static int software_resume(void)
 	printk(KERN_ERR "PM: Failed to load hibernation image, recovering.\n");
 	swsusp_free();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	thaw_processes();
  Done:
 	free_basic_memory_bitmaps();
 =======
+=======
+>>>>>>> v3.18
 	free_basic_memory_bitmaps();
  Thaw:
 	unlock_device_hotplug();
 	thaw_processes();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  Finish:
 	pm_notifier_call_chain(PM_POST_RESTORE);
@@ -994,7 +1104,11 @@ static int software_resume(void)
 	pr_debug("PM: Hibernation image not present or could not be loaded.\n");
 	return error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 close_finish:
+=======
+ Close_Finish:
+>>>>>>> v3.18
 =======
  Close_Finish:
 >>>>>>> v3.18
@@ -1003,7 +1117,11 @@ close_finish:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 late_initcall(software_resume);
+=======
+late_initcall_sync(software_resume);
+>>>>>>> v3.18
 =======
 late_initcall_sync(software_resume);
 >>>>>>> v3.18
@@ -1051,6 +1169,12 @@ static ssize_t disk_show(struct kobject *kobj, struct kobj_attribute *attr,
 	char *start = buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!hibernation_available())
+		return sprintf(buf, "[disabled]\n");
+
+>>>>>>> v3.18
 =======
 	if (!hibernation_available())
 		return sprintf(buf, "[disabled]\n");
@@ -1091,6 +1215,12 @@ static ssize_t disk_store(struct kobject *kobj, struct kobj_attribute *attr,
 	int mode = HIBERNATION_INVALID;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!hibernation_available())
+		return -EPERM;
+
+>>>>>>> v3.18
 =======
 	if (!hibernation_available())
 		return -EPERM;
@@ -1145,6 +1275,7 @@ static ssize_t resume_store(struct kobject *kobj, struct kobj_attribute *attr,
 			    const char *buf, size_t n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int maj, min;
 	dev_t res;
 	int ret = -EINVAL;
@@ -1156,6 +1287,8 @@ static ssize_t resume_store(struct kobject *kobj, struct kobj_attribute *attr,
 	if (maj != MAJOR(res) || min != MINOR(res))
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	dev_t res;
 	int len = n;
 	char *name;
@@ -1170,6 +1303,9 @@ static ssize_t resume_store(struct kobject *kobj, struct kobj_attribute *attr,
 	kfree(name);
 	if (!res)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	lock_system_sleep();
@@ -1179,9 +1315,13 @@ static ssize_t resume_store(struct kobject *kobj, struct kobj_attribute *attr,
 	noresume = 0;
 	software_resume();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = n;
  out:
 	return ret;
+=======
+	return n;
+>>>>>>> v3.18
 =======
 	return n;
 >>>>>>> v3.18
@@ -1283,11 +1423,17 @@ static int __init hibernate_setup(char *str)
 	else if (!strncmp(str, "nocompress", 10))
 		nocompress = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	else if (!strncmp(str, "no", 2)) {
 		noresume = 1;
 		nohibernate = 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 1;
 }
@@ -1307,11 +1453,14 @@ static int __init resumewait_setup(char *str)
 static int __init resumedelay_setup(char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	resume_delay = simple_strtoul(str, NULL, 0);
 	return 1;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	int rc = kstrtouint(str, 0, &resume_delay);
 
 	if (rc)
@@ -1331,6 +1480,9 @@ static int __init kaslr_nohibernate_setup(char *str)
 	return nohibernate_setup(str);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __setup("noresume", noresume_setup);
 __setup("resume_offset=", resume_offset_setup);
@@ -1339,6 +1491,11 @@ __setup("hibernate=", hibernate_setup);
 __setup("resumewait", resumewait_setup);
 __setup("resumedelay=", resumedelay_setup);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+__setup("nohibernate", nohibernate_setup);
+__setup("kaslr", kaslr_nohibernate_setup);
+>>>>>>> v3.18
 =======
 __setup("nohibernate", nohibernate_setup);
 __setup("kaslr", kaslr_nohibernate_setup);

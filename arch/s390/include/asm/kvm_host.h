@@ -14,12 +14,15 @@
 #ifndef ASM_KVM_HOST_H
 #define ASM_KVM_HOST_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/hrtimer.h>
 #include <linux/interrupt.h>
 #include <linux/kvm_host.h>
 #include <asm/debug.h>
 #include <asm/cpu.h>
 =======
+=======
+>>>>>>> v3.18
 
 #include <linux/types.h>
 #include <linux/hrtimer.h>
@@ -30,15 +33,21 @@
 #include <asm/debug.h>
 #include <asm/cpu.h>
 #include <asm/isc.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define KVM_MAX_VCPUS 64
 #define KVM_USER_MEM_SLOTS 32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct sca_entry {
 	atomic_t scn;
 =======
+=======
+>>>>>>> v3.18
 /*
  * These seem to be used for allocating ->chip in the routing table,
  * which we don't use. 4096 is an out-of-thin-air value. If we need
@@ -51,6 +60,9 @@ struct sca_entry {
 
 struct sca_entry {
 	atomic_t ctrl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u32	reserved;
 	__u64	sda;
@@ -58,10 +70,13 @@ struct sca_entry {
 } __attribute__((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct sca_block {
 	__u64	ipte_control;
 =======
+=======
+>>>>>>> v3.18
 union ipte_control {
 	unsigned long val;
 	struct {
@@ -73,6 +88,9 @@ union ipte_control {
 
 struct sca_block {
 	union ipte_control ipte_control;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u64	reserved[5];
 	__u64	mcn;
@@ -81,6 +99,7 @@ struct sca_block {
 } __attribute__((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define KVM_NR_PAGE_SIZES 2
 #define KVM_HPAGE_GFN_SHIFT(x) (((x) - 1) * 8)
 #define KVM_HPAGE_SHIFT(x) (PAGE_SHIFT + KVM_HPAGE_GFN_SHIFT(x))
@@ -88,6 +107,8 @@ struct sca_block {
 #define KVM_HPAGE_MASK(x)	(~(KVM_HPAGE_SIZE(x) - 1))
 #define KVM_PAGES_PER_HPAGE(x)	(KVM_HPAGE_SIZE(x) / PAGE_SIZE)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define CPUSTAT_STOPPED    0x80000000
@@ -107,7 +128,13 @@ struct sca_block {
 #define CPUSTAT_MCDS       0x00000100
 #define CPUSTAT_SM         0x00000080
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CPUSTAT_G          0x00000008
+=======
+#define CPUSTAT_IBS        0x00000040
+#define CPUSTAT_G          0x00000008
+#define CPUSTAT_GED        0x00000004
+>>>>>>> v3.18
 =======
 #define CPUSTAT_IBS        0x00000040
 #define CPUSTAT_G          0x00000008
@@ -119,9 +146,12 @@ struct sca_block {
 struct kvm_s390_sie_block {
 	atomic_t cpuflags;		/* 0x0000 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32	prefix;			/* 0x0004 */
 	__u8	reserved8[32];		/* 0x0008 */
 =======
+=======
+>>>>>>> v3.18
 	__u32 : 1;			/* 0x0004 */
 	__u32 prefix : 18;
 	__u32 : 13;
@@ -132,6 +162,9 @@ struct kvm_s390_sie_block {
 #define PROG_BLOCK_SIE 0x00000001
 	atomic_t prog20;		/* 0x0020 */
 	__u8	reserved24[4];		/* 0x0024 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u64	cputm;			/* 0x0028 */
 	__u64	ckc;			/* 0x0030 */
@@ -140,6 +173,7 @@ struct kvm_s390_sie_block {
 #define LCTL_CR0	0x8000
 #define LCTL_CR6	0x0200
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LCTL_CR14	0x0002
 	__u16   lctl;			/* 0x0044 */
 	__s16	icpua;			/* 0x0046 */
@@ -147,6 +181,8 @@ struct kvm_s390_sie_block {
 	__u32	ictl;			/* 0x0048 */
 	__u32	eca;			/* 0x004c */
 =======
+=======
+>>>>>>> v3.18
 #define LCTL_CR9	0x0040
 #define LCTL_CR10	0x0020
 #define LCTL_CR11	0x0010
@@ -168,6 +204,9 @@ struct kvm_s390_sie_block {
 #define ICPT_OPEREXC	0x2C
 #define ICPT_PARTEXEC	0x38
 #define ICPT_IOINST	0x40
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u8	icptcode;		/* 0x0050 */
 	__u8	reserved51;		/* 0x0051 */
@@ -179,7 +218,12 @@ struct kvm_s390_sie_block {
 	__u8	reserved60;		/* 0x0060 */
 	__u8	ecb;			/* 0x0061 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8	reserved62[2];		/* 0x0062 */
+=======
+	__u8    ecb2;                   /* 0x0062 */
+	__u8    reserved63[1];          /* 0x0063 */
+>>>>>>> v3.18
 =======
 	__u8    ecb2;                   /* 0x0062 */
 	__u8    reserved63[1];          /* 0x0063 */
@@ -192,10 +236,13 @@ struct kvm_s390_sie_block {
 	__u64	gg14;			/* 0x00a0 */
 	__u64	gg15;			/* 0x00a8 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8	reservedb0[30];		/* 0x00b0 */
 	__u16   iprcc;			/* 0x00ce */
 	__u8	reservedd0[48];		/* 0x00d0 */
 =======
+=======
+>>>>>>> v3.18
 	__u8	reservedb0[20];		/* 0x00b0 */
 	__u16	extcpuaddr;		/* 0x00c4 */
 	__u16	eic;			/* 0x00c6 */
@@ -216,16 +263,22 @@ struct kvm_s390_sie_block {
 	__u8	reservedf0[12];		/* 0x00f0 */
 #define CRYCB_FORMAT1 0x00000001
 	__u32	crycbd;			/* 0x00fc */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u64	gcr[16];		/* 0x0100 */
 	__u64	gbea;			/* 0x0180 */
 	__u8	reserved188[24];	/* 0x0188 */
 	__u32	fac;			/* 0x01a0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8	reserved1a4[92];	/* 0x01a4 */
 } __attribute__((packed));
 
 =======
+=======
+>>>>>>> v3.18
 	__u8	reserved1a4[20];	/* 0x01a4 */
 	__u64	cbrlo;			/* 0x01b8 */
 	__u8	reserved1c0[30];	/* 0x01c0 */
@@ -246,6 +299,9 @@ struct sie_page {
 	__u8 reserved700[2304];		/* 0x0700 */
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct kvm_vcpu_stat {
 	u32 exit_userspace;
@@ -256,14 +312,20 @@ struct kvm_vcpu_stat {
 	u32 exit_validity;
 	u32 exit_instruction;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 instruction_lctl;
 	u32 instruction_lctlg;
 =======
+=======
+>>>>>>> v3.18
 	u32 halt_wakeup;
 	u32 instruction_lctl;
 	u32 instruction_lctlg;
 	u32 instruction_stctl;
 	u32 instruction_stctg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 exit_program_interruption;
 	u32 exit_instr_and_program;
@@ -278,6 +340,10 @@ struct kvm_vcpu_stat {
 	u32 deliver_io_int;
 	u32 exit_wait_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 instruction_pfmf;
+>>>>>>> v3.18
 =======
 	u32 instruction_pfmf;
 >>>>>>> v3.18
@@ -287,6 +353,10 @@ struct kvm_vcpu_stat {
 	u32 instruction_stap;
 	u32 instruction_storage_key;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 instruction_ipte_interlock;
+>>>>>>> v3.18
 =======
 	u32 instruction_ipte_interlock;
 >>>>>>> v3.18
@@ -296,6 +366,10 @@ struct kvm_vcpu_stat {
 	u32 instruction_stfl;
 	u32 instruction_tprot;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 instruction_essa;
+>>>>>>> v3.18
 =======
 	u32 instruction_essa;
 >>>>>>> v3.18
@@ -312,6 +386,7 @@ struct kvm_vcpu_stat {
 	u32 diagnose_9c;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct kvm_s390_io_info {
 	__u16        subchannel_id;            /* 0x0b8 */
@@ -354,6 +429,8 @@ struct kvm_s390_mchk_info {
 	__u64 mcic;
 };
 =======
+=======
+>>>>>>> v3.18
 #define PGM_OPERATION			0x01
 #define PGM_PRIVILEGED_OP		0x02
 #define PGM_EXECUTE			0x03
@@ -406,6 +483,9 @@ struct kvm_s390_mchk_info {
 #define PGM_MONITOR			0x40
 #define PGM_PER				0x80
 #define PGM_CRYPTO_OPERATION		0x119
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct kvm_s390_interrupt_info {
@@ -426,7 +506,10 @@ struct kvm_s390_interrupt_info {
 #define ACTION_STORE_ON_STOP		(1<<0)
 #define ACTION_STOP_ON_STOP		(1<<1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACTION_RELOADVCPU_ON_STOP	(1<<2)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -436,8 +519,12 @@ struct kvm_s390_local_interrupt {
 	atomic_t active;
 	struct kvm_s390_float_interrupt *float_int;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int timer_due; /* event indicator for waitqueue below */
 	wait_queue_head_t wq;
+=======
+	wait_queue_head_t *wq;
+>>>>>>> v3.18
 =======
 	wait_queue_head_t *wq;
 >>>>>>> v3.18
@@ -451,12 +538,15 @@ struct kvm_s390_float_interrupt {
 	atomic_t active;
 	int next_rr_cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long idle_mask[(KVM_MAX_VCPUS + sizeof(long) - 1)
 				/ sizeof(long)];
 	struct kvm_s390_local_interrupt *local_int[KVM_MAX_VCPUS];
 };
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long idle_mask[BITS_TO_LONGS(KVM_MAX_VCPUS)];
 	unsigned int irq_count;
 };
@@ -500,6 +590,9 @@ struct kvm_guestdbg_info_arch {
 	int nr_hw_wp;
 	unsigned long last_bp;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct kvm_vcpu_arch {
@@ -510,7 +603,11 @@ struct kvm_vcpu_arch {
 	struct kvm_s390_local_interrupt local_int;
 	struct hrtimer    ckc_timer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tasklet_struct tasklet;
+=======
+	struct kvm_s390_pgm_info pgm;
+>>>>>>> v3.18
 =======
 	struct kvm_s390_pgm_info pgm;
 >>>>>>> v3.18
@@ -520,12 +617,18 @@ struct kvm_vcpu_arch {
 	};
 	struct gmap *gmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct kvm_guestdbg_info_arch guestdbg;
 #define KVM_S390_PFAULT_TOKEN_INVALID	(-1UL)
 	unsigned long pfault_token;
 	unsigned long pfault_select;
 	unsigned long pfault_compare;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -537,7 +640,10 @@ struct kvm_arch_memory_slot {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct s390_map_info {
 	struct list_head list;
 	__u64 guest_addr;
@@ -568,11 +674,15 @@ struct kvm_s390_crypto_cb {
 	__u8    reserved00[128];                /* 0x0000 */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct kvm_arch{
 	struct sca_block *sca;
 	debug_info_t *dbf;
 	struct kvm_s390_float_interrupt float_int;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct gmap *gmap;
 	int css_support;
@@ -580,6 +690,8 @@ struct kvm_arch{
 
 extern int sie64a(struct kvm_s390_sie_block *, u64 *);
 =======
+=======
+>>>>>>> v3.18
 	struct kvm_device *flic;
 	struct gmap *gmap;
 	int css_support;
@@ -632,5 +744,8 @@ static inline void kvm_arch_flush_shadow_all(struct kvm *kvm) {}
 static inline void kvm_arch_flush_shadow_memslot(struct kvm *kvm,
 		struct kvm_memory_slot *slot) {}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

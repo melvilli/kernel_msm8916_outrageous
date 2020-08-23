@@ -9,6 +9,10 @@
  * Copyright (C) 1999 Silicon Graphics, Inc.
  * Copyright (C) 2007  Maciej W. Rozycki
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Imagination Technologies Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Imagination Technologies Ltd.
 >>>>>>> v3.18
@@ -60,6 +64,7 @@
 
 #define ADDC(sum,reg)						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ADD	sum, reg;					\
 	sltu	v1, sum, reg;					\
 	ADD	sum, v1;					\
@@ -69,6 +74,8 @@
 	sltu	v1, sum, reg;					\
 	addu	sum, v1;					\
 =======
+=======
+>>>>>>> v3.18
 	.set	push;						\
 	.set	noat;						\
 	ADD	sum, reg;					\
@@ -83,6 +90,9 @@
 	sltu	v1, sum, reg;					\
 	addu	sum, v1;					\
 	.set	pop
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define CSUM_BIGCHUNK1(src, offset, sum, _t0, _t1, _t2, _t3)	\
@@ -292,16 +302,22 @@ LEAF(csum_partial)
 
 	/* odd buffer alignment? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_MIPSR2
 	wsbh	v1, sum
 	movn	sum, v1, t7
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_CPU_MIPSR2) || defined(CONFIG_CPU_LOONGSON3)
 	.set	push
 	.set	arch=mips32r2
 	wsbh	v1, sum
 	movn	sum, v1, t7
 	.set	pop
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 	beqz	t7, 1f			/* odd buffer alignment? */
@@ -327,7 +343,11 @@ LEAF(csum_partial)
  *
  *	csum_partial_copy_nocheck(src, dst, len, sum)
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	__csum_partial_copy_user(src, dst, len, sum, errp)
+=======
+ *	__csum_partial_copy_kernel(src, dst, len, sum, errp)
+>>>>>>> v3.18
 =======
  *	__csum_partial_copy_kernel(src, dst, len, sum, errp)
 >>>>>>> v3.18
@@ -362,6 +382,7 @@ LEAF(csum_partial)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXC(inst_reg,addr,handler)		\
 9:	inst_reg, addr;				\
 	.section __ex_table,"a";		\
@@ -377,6 +398,8 @@ LEAF(csum_partial)
 #define STORER sdr
 #define STORE  sd
 =======
+=======
+>>>>>>> v3.18
 /* Instruction type */
 #define LD_INSN 1
 #define ST_INSN 2
@@ -429,6 +452,9 @@ LEAF(csum_partial)
 #define STOREL(reg, addr, handler)	EXC(sdl, ST_INSN, reg, addr, handler)
 #define STORER(reg, addr, handler)	EXC(sdr, ST_INSN, reg, addr, handler)
 #define STORE(reg, addr, handler)	EXC(sd, ST_INSN, reg, addr, handler)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ADD    daddu
 #define SUB    dsubu
@@ -442,6 +468,7 @@ LEAF(csum_partial)
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LOAD   lw
 #define LOADL  lwl
 #define LOADR  lwr
@@ -449,6 +476,8 @@ LEAF(csum_partial)
 #define STORER swr
 #define STORE  sw
 =======
+=======
+>>>>>>> v3.18
 #define LOADK	lw /* No exception */
 #define LOAD(reg, addr, handler)	EXC(lw, LD_INSN, reg, addr, handler)
 #define LOADBU(reg, addr, handler)	EXC(lbu, LD_INSN, reg, addr, handler)
@@ -458,6 +487,9 @@ LEAF(csum_partial)
 #define STOREL(reg, addr, handler)	EXC(swl, ST_INSN, reg, addr, handler)
 #define STORER(reg, addr, handler)	EXC(swr, ST_INSN, reg, addr, handler)
 #define STORE(reg, addr, handler)	EXC(sw, ST_INSN, reg, addr, handler)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ADD    addu
 #define SUB    subu
@@ -498,15 +530,21 @@ LEAF(csum_partial)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 LEAF(__csum_partial_copy_user)
 	PTR_ADDU	AT, src, len	/* See (1) above. */
 =======
+=======
+>>>>>>> v3.18
 	.macro __BUILD_CSUM_PARTIAL_COPY_USER mode, from, to, __nocheck
 
 	PTR_ADDU	AT, src, len	/* See (1) above. */
 	/* initialize __nocheck if this the first time we execute this
 	 * macro
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_64BIT
 	move	errptr, a4
@@ -514,7 +552,13 @@ LEAF(__csum_partial_copy_user)
 	lw	errptr, 16(sp)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 FEXPORT(csum_partial_copy_nocheck)
+=======
+	.if \__nocheck == 1
+	FEXPORT(csum_partial_copy_nocheck)
+	.endif
+>>>>>>> v3.18
 =======
 	.if \__nocheck == 1
 	FEXPORT(csum_partial_copy_nocheck)
@@ -536,6 +580,7 @@ FEXPORT(csum_partial_copy_nocheck)
 	sltu	t2, len, NBYTES
 	and	t1, dst, ADDRMASK
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bnez	t2, .Lcopy_bytes_checklen
 	 and	t0, src, ADDRMASK
 	andi	odd, dst, 0x1			/* odd buffer? */
@@ -543,17 +588,23 @@ FEXPORT(csum_partial_copy_nocheck)
 	 nop
 	bnez	t0, .Lsrc_unaligned_dst_aligned
 =======
+=======
+>>>>>>> v3.18
 	bnez	t2, .Lcopy_bytes_checklen\@
 	 and	t0, src, ADDRMASK
 	andi	odd, dst, 0x1			/* odd buffer? */
 	bnez	t1, .Ldst_unaligned\@
 	 nop
 	bnez	t0, .Lsrc_unaligned_dst_aligned\@
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * use delay slot for fall-through
 	 * src and dst are aligned; need to compute rem
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 .Lboth_aligned:
 	 SRL	t0, len, LOG_NBYTES+3	 # +3 for 8 units/iter
@@ -563,10 +614,16 @@ FEXPORT(csum_partial_copy_nocheck)
 	 SRL	t0, len, LOG_NBYTES+3	 # +3 for 8 units/iter
 	beqz	t0, .Lcleanup_both_aligned\@ # len < 8*NBYTES
 >>>>>>> v3.18
+=======
+.Lboth_aligned\@:
+	 SRL	t0, len, LOG_NBYTES+3	 # +3 for 8 units/iter
+	beqz	t0, .Lcleanup_both_aligned\@ # len < 8*NBYTES
+>>>>>>> v3.18
 	 nop
 	SUB	len, 8*NBYTES		# subtract here for bgez loop
 	.align	4
 1:
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXC(	LOAD	t0, UNIT(0)(src),	.Ll_exc)
 EXC(	LOAD	t1, UNIT(1)(src),	.Ll_exc_copy)
@@ -594,6 +651,8 @@ EXC(	STORE	t6, UNIT(6)(dst),	.Ls_exc)
 	ADDC(sum, t6)
 EXC(	STORE	t7, UNIT(7)(dst),	.Ls_exc)
 =======
+=======
+>>>>>>> v3.18
 	LOAD(t0, UNIT(0)(src), .Ll_exc\@)
 	LOAD(t1, UNIT(1)(src), .Ll_exc_copy\@)
 	LOAD(t2, UNIT(2)(src), .Ll_exc_copy\@)
@@ -619,6 +678,9 @@ EXC(	STORE	t7, UNIT(7)(dst),	.Ls_exc)
 	STORE(t6, UNIT(6)(dst),	.Ls_exc\@)
 	ADDC(sum, t6)
 	STORE(t7, UNIT(7)(dst),	.Ls_exc\@)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ADDC(sum, t7)
 	.set	reorder				/* DADDI_WAR */
@@ -631,22 +693,29 @@ EXC(	STORE	t7, UNIT(7)(dst),	.Ls_exc)
 	 * len == the number of bytes left to copy < 8*NBYTES
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lcleanup_both_aligned:
 #define rem t7
 	beqz	len, .Ldone
 	 sltu	t0, len, 4*NBYTES
 	bnez	t0, .Lless_than_4units
 =======
+=======
+>>>>>>> v3.18
 .Lcleanup_both_aligned\@:
 #define rem t7
 	beqz	len, .Ldone\@
 	 sltu	t0, len, 4*NBYTES
 	bnez	t0, .Lless_than_4units\@
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 and	rem, len, (NBYTES-1)	# rem = len % NBYTES
 	/*
 	 * len >= 4*NBYTES
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXC(	LOAD	t0, UNIT(0)(src),	.Ll_exc)
 EXC(	LOAD	t1, UNIT(1)(src),	.Ll_exc_copy)
@@ -678,6 +747,8 @@ EXC(	LOAD	t0, 0(src),		.Ll_exc)
 	SUB	len, len, NBYTES
 EXC(	STORE	t0, 0(dst),		.Ls_exc)
 =======
+=======
+>>>>>>> v3.18
 	LOAD(t0, UNIT(0)(src), .Ll_exc\@)
 	LOAD(t1, UNIT(1)(src), .Ll_exc_copy\@)
 	LOAD(t2, UNIT(2)(src), .Ll_exc_copy\@)
@@ -707,6 +778,9 @@ EXC(	STORE	t0, 0(dst),		.Ls_exc)
 	ADD	src, src, NBYTES
 	SUB	len, len, NBYTES
 	STORE(t0, 0(dst), .Ls_exc\@)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ADDC(sum, t0)
 	.set	reorder				/* DADDI_WAR */
@@ -727,6 +801,7 @@ EXC(	STORE	t0, 0(dst),		.Ls_exc)
 	 */
 #define bits t2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beqz	len, .Ldone
 	 ADD	t1, dst, len	# t1 is just past last byte of dst
 	li	bits, 8*NBYTES
@@ -742,6 +817,8 @@ EXC(	STREST	t0, -1(t1),		.Ls_exc)
 	.set noreorder
 .Ldst_unaligned:
 =======
+=======
+>>>>>>> v3.18
 	beqz	len, .Ldone\@
 	 ADD	t1, dst, len	# t1 is just past last byte of dst
 	li	bits, 8*NBYTES
@@ -756,6 +833,9 @@ EXC(	STREST	t0, -1(t1),		.Ls_exc)
 	b	.Ldone\@
 	.set noreorder
 .Ldst_unaligned\@:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * dst is unaligned
@@ -768,6 +848,7 @@ EXC(	STREST	t0, -1(t1),		.Ls_exc)
 	 */
 #define match rem
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXC(	LDFIRST t3, FIRST(0)(src),	.Ll_exc)
 	ADD	t2, zero, NBYTES
 EXC(	LDREST	t3, REST(0)(src),	.Ll_exc_copy)
@@ -775,17 +856,23 @@ EXC(	LDREST	t3, REST(0)(src),	.Ll_exc_copy)
 	xor	match, t0, t1
 EXC(	STFIRST t3, FIRST(0)(dst),	.Ls_exc)
 =======
+=======
+>>>>>>> v3.18
 	LDFIRST(t3, FIRST(0)(src), .Ll_exc\@)
 	ADD	t2, zero, NBYTES
 	LDREST(t3, REST(0)(src), .Ll_exc_copy\@)
 	SUB	t2, t2, t1	# t2 = number of bytes copied
 	xor	match, t0, t1
 	STFIRST(t3, FIRST(0)(dst), .Ls_exc\@)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SLL	t4, t1, 3		# t4 = number of bits to discard
 	SHIFT_DISCARD t3, t3, t4
 	/* no SHIFT_DISCARD_REVERT to handle odd buffer properly */
 	ADDC(sum, t3)
+<<<<<<< HEAD
 <<<<<<< HEAD
 	beq	len, t2, .Ldone
 	 SUB	len, len, t2
@@ -797,6 +884,8 @@ EXC(	STFIRST t3, FIRST(0)(dst),	.Ls_exc)
 	SRL	t0, len, LOG_NBYTES+2	 # +2 for 4 units/iter
 	beqz	t0, .Lcleanup_src_unaligned
 =======
+=======
+>>>>>>> v3.18
 	beq	len, t2, .Ldone\@
 	 SUB	len, len, t2
 	ADD	dst, dst, t2
@@ -806,6 +895,9 @@ EXC(	STFIRST t3, FIRST(0)(dst),	.Ls_exc)
 .Lsrc_unaligned_dst_aligned\@:
 	SRL	t0, len, LOG_NBYTES+2	 # +2 for 4 units/iter
 	beqz	t0, .Lcleanup_src_unaligned\@
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 and	rem, len, (4*NBYTES-1)	 # rem = len % 4*NBYTES
 1:
@@ -815,6 +907,7 @@ EXC(	STFIRST t3, FIRST(0)(dst),	.Ls_exc)
  * It's OK to load FIRST(N+1) before REST(N) because the two addresses
  * are to the same unit (unless src is aligned, but it's not).
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXC(	LDFIRST t0, FIRST(0)(src),	.Ll_exc)
 EXC(	LDFIRST t1, FIRST(1)(src),	.Ll_exc_copy)
@@ -826,6 +919,8 @@ EXC(	LDFIRST t3, FIRST(3)(src),	.Ll_exc_copy)
 EXC(	LDREST	t2, REST(2)(src),	.Ll_exc_copy)
 EXC(	LDREST	t3, REST(3)(src),	.Ll_exc_copy)
 =======
+=======
+>>>>>>> v3.18
 	LDFIRST(t0, FIRST(0)(src), .Ll_exc\@)
 	LDFIRST(t1, FIRST(1)(src), .Ll_exc_copy\@)
 	SUB	len, len, 4*NBYTES
@@ -835,11 +930,15 @@ EXC(	LDREST	t3, REST(3)(src),	.Ll_exc_copy)
 	LDFIRST(t3, FIRST(3)(src), .Ll_exc_copy\@)
 	LDREST(t2, REST(2)(src), .Ll_exc_copy\@)
 	LDREST(t3, REST(3)(src), .Ll_exc_copy\@)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ADD	src, src, 4*NBYTES
 #ifdef CONFIG_CPU_SB1
 	nop				# improves slotting
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXC(	STORE	t0, UNIT(0)(dst),	.Ls_exc)
 	ADDC(sum, t0)
@@ -849,6 +948,8 @@ EXC(	STORE	t2, UNIT(2)(dst),	.Ls_exc)
 	ADDC(sum, t2)
 EXC(	STORE	t3, UNIT(3)(dst),	.Ls_exc)
 =======
+=======
+>>>>>>> v3.18
 	STORE(t0, UNIT(0)(dst),	.Ls_exc\@)
 	ADDC(sum, t0)
 	STORE(t1, UNIT(1)(dst),	.Ls_exc\@)
@@ -856,6 +957,9 @@ EXC(	STORE	t3, UNIT(3)(dst),	.Ls_exc)
 	STORE(t2, UNIT(2)(dst),	.Ls_exc\@)
 	ADDC(sum, t2)
 	STORE(t3, UNIT(3)(dst),	.Ls_exc\@)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ADDC(sum, t3)
 	.set	reorder				/* DADDI_WAR */
@@ -863,6 +967,7 @@ EXC(	STORE	t3, UNIT(3)(dst),	.Ls_exc)
 	bne	len, rem, 1b
 	.set	noreorder
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 .Lcleanup_src_unaligned:
 	beqz	len, .Ldone
@@ -876,6 +981,8 @@ EXC(	LDREST	t0, REST(0)(src),	.Ll_exc_copy)
 	SUB	len, len, NBYTES
 EXC(	STORE	t0, 0(dst),		.Ls_exc)
 =======
+=======
+>>>>>>> v3.18
 .Lcleanup_src_unaligned\@:
 	beqz	len, .Ldone\@
 	 and	rem, len, NBYTES-1  # rem = len % NBYTES
@@ -887,6 +994,9 @@ EXC(	STORE	t0, 0(dst),		.Ls_exc)
 	ADD	src, src, NBYTES
 	SUB	len, len, NBYTES
 	STORE(t0, 0(dst), .Ls_exc\@)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ADDC(sum, t0)
 	.set	reorder				/* DADDI_WAR */
@@ -895,15 +1005,21 @@ EXC(	STORE	t0, 0(dst),		.Ls_exc)
 	.set	noreorder
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lcopy_bytes_checklen:
 	beqz	len, .Ldone
 	 nop
 .Lcopy_bytes:
 =======
+=======
+>>>>>>> v3.18
 .Lcopy_bytes_checklen\@:
 	beqz	len, .Ldone\@
 	 nop
 .Lcopy_bytes\@:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* 0 < len < NBYTES  */
 #ifdef CONFIG_CPU_LITTLE_ENDIAN
@@ -918,6 +1034,7 @@ EXC(	STORE	t0, 0(dst),		.Ls_exc)
 /* use .Ll_exc_copy here to return correct sum on fault */
 #define COPY_BYTE(N)			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXC(	lbu	t0, N(src), .Ll_exc_copy);	\
 	SUB	len, len, 1;		\
 EXC(	sb	t0, N(dst), .Ls_exc);	\
@@ -925,12 +1042,17 @@ EXC(	sb	t0, N(dst), .Ls_exc);	\
 	addu	t3, SHIFT_INC;		\
 	beqz	len, .Lcopy_bytes_done; \
 =======
+=======
+>>>>>>> v3.18
 	LOADBU(t0, N(src), .Ll_exc_copy\@);	\
 	SUB	len, len, 1;		\
 	STOREB(t0, N(dst), .Ls_exc\@);	\
 	SLLV	t0, t0, t3;		\
 	addu	t3, SHIFT_INC;		\
 	beqz	len, .Lcopy_bytes_done\@; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 or	t2, t0
 
@@ -943,6 +1065,7 @@ EXC(	sb	t0, N(dst), .Ls_exc);	\
 	COPY_BYTE(5)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXC(	lbu	t0, NBYTES-2(src), .Ll_exc_copy)
 	SUB	len, len, 1
 EXC(	sb	t0, NBYTES-2(dst), .Ls_exc)
@@ -953,6 +1076,8 @@ EXC(	sb	t0, NBYTES-2(dst), .Ls_exc)
 .Ldone:
 	/* fold checksum */
 =======
+=======
+>>>>>>> v3.18
 	LOADBU(t0, NBYTES-2(src), .Ll_exc_copy\@)
 	SUB	len, len, 1
 	STOREB(t0, NBYTES-2(dst), .Ls_exc\@)
@@ -964,6 +1089,9 @@ EXC(	sb	t0, NBYTES-2(dst), .Ls_exc)
 	/* fold checksum */
 	.set	push
 	.set	noat
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef USE_DOUBLE
 	dsll32	v1, sum, 0
@@ -974,16 +1102,22 @@ EXC(	sb	t0, NBYTES-2(dst), .Ls_exc)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_MIPSR2
 	wsbh	v1, sum
 	movn	sum, v1, odd
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_CPU_MIPSR2) || defined(CONFIG_CPU_LOONGSON3)
 	.set	push
 	.set	arch=mips32r2
 	wsbh	v1, sum
 	movn	sum, v1, odd
 	.set	pop
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 	beqz	odd, 1f			/* odd buffer alignment? */
@@ -997,6 +1131,10 @@ EXC(	sb	t0, NBYTES-2(dst), .Ls_exc)
 1:
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set	pop
+>>>>>>> v3.18
 =======
 	.set	pop
 >>>>>>> v3.18
@@ -1006,7 +1144,11 @@ EXC(	sb	t0, NBYTES-2(dst), .Ls_exc)
 	.set noreorder
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Ll_exc_copy:
+=======
+.Ll_exc_copy\@:
+>>>>>>> v3.18
 =======
 .Ll_exc_copy\@:
 >>>>>>> v3.18
@@ -1021,17 +1163,23 @@ EXC(	sb	t0, NBYTES-2(dst), .Ls_exc)
 	 * Assumes src < THREAD_BUADDR($28)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LOAD	t0, TI_TASK($28)
 	 li	t2, SHIFT_START
 	LOAD	t0, THREAD_BUADDR(t0)
 1:
 EXC(	lbu	t1, 0(src),	.Ll_exc)
 =======
+=======
+>>>>>>> v3.18
 	LOADK	t0, TI_TASK($28)
 	 li	t2, SHIFT_START
 	LOADK	t0, THREAD_BUADDR(t0)
 1:
 	LOADBU(t1, 0(src), .Ll_exc\@)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ADD	src, src, 1
 	sb	t1, 0(dst)	# can't fault -- we're copy_from_user
@@ -1043,15 +1191,21 @@ EXC(	lbu	t1, 0(src),	.Ll_exc)
 	bne	src, t0, 1b
 	.set	noreorder
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Ll_exc:
 	LOAD	t0, TI_TASK($28)
 	 nop
 	LOAD	t0, THREAD_BUADDR(t0)	# t0 is just past last good address
 =======
+=======
+>>>>>>> v3.18
 .Ll_exc\@:
 	LOADK	t0, TI_TASK($28)
 	 nop
 	LOADK	t0, THREAD_BUADDR(t0)	# t0 is just past last good address
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 nop
 	SUB	len, AT, t0		# len number of uncopied bytes
@@ -1069,7 +1223,11 @@ EXC(	lbu	t1, 0(src),	.Ll_exc)
 	.set	reorder				/* DADDI_WAR */
 	SUB	src, len, 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beqz	len, .Ldone
+=======
+	beqz	len, .Ldone\@
+>>>>>>> v3.18
 =======
 	beqz	len, .Ldone\@
 >>>>>>> v3.18
@@ -1088,15 +1246,21 @@ EXC(	lbu	t1, 0(src),	.Ll_exc)
 #endif
 	li	v1, -EFAULT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.Ldone
 	 sw	v1, (errptr)
 
 .Ls_exc:
 =======
+=======
+>>>>>>> v3.18
 	b	.Ldone\@
 	 sw	v1, (errptr)
 
 .Ls_exc\@:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	li	v0, -1 /* invalid checksum */
 	li	v1, -EFAULT
@@ -1104,8 +1268,11 @@ EXC(	lbu	t1, 0(src),	.Ll_exc)
 	 sw	v1, (errptr)
 	.set	pop
 <<<<<<< HEAD
+<<<<<<< HEAD
 	END(__csum_partial_copy_user)
 =======
+=======
+>>>>>>> v3.18
 	.endm
 
 LEAF(__csum_partial_copy_kernel)
@@ -1125,4 +1292,7 @@ LEAF(__csum_partial_copy_from_user)
 __BUILD_CSUM_PARTIAL_COPY_USER EVA_MODE USEROP KERNELOP 0
 END(__csum_partial_copy_from_user)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

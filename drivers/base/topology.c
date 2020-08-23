@@ -24,7 +24,10 @@
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mm.h>
@@ -65,6 +68,7 @@ static ssize_t show_cpumap(int type, const struct cpumask *mask, char *buf)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef arch_provides_topology_pointers
 #define define_siblings_show_map(name)					\
 static ssize_t show_##name(struct device *dev,				\
@@ -86,6 +90,8 @@ static ssize_t show_##name##_list(struct device *dev,			\
 #else
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define define_siblings_show_map(name)					\
 static ssize_t show_##name(struct device *dev,				\
 			   struct device_attribute *attr, char *buf)	\
@@ -101,7 +107,10 @@ static ssize_t show_##name##_list(struct device *dev,			\
 	return show_cpumap(1, topology_##name(dev->id), buf);		\
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -152,7 +161,11 @@ static struct attribute_group topology_attr_group = {
 
 /* Add/Remove cpu_topology interface for CPU device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit topology_add_dev(unsigned int cpu)
+=======
+static int topology_add_dev(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static int topology_add_dev(unsigned int cpu)
 >>>>>>> v3.18
@@ -163,7 +176,11 @@ static int topology_add_dev(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit topology_remove_dev(unsigned int cpu)
+=======
+static void topology_remove_dev(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void topology_remove_dev(unsigned int cpu)
 >>>>>>> v3.18
@@ -174,8 +191,13 @@ static void topology_remove_dev(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit topology_cpu_callback(struct notifier_block *nfb,
 					   unsigned long action, void *hcpu)
+=======
+static int topology_cpu_callback(struct notifier_block *nfb,
+				 unsigned long action, void *hcpu)
+>>>>>>> v3.18
 =======
 static int topology_cpu_callback(struct notifier_block *nfb,
 				 unsigned long action, void *hcpu)
@@ -200,7 +222,11 @@ static int topology_cpu_callback(struct notifier_block *nfb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit topology_sysfs_init(void)
+=======
+static int topology_sysfs_init(void)
+>>>>>>> v3.18
 =======
 static int topology_sysfs_init(void)
 >>>>>>> v3.18

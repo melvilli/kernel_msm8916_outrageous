@@ -35,7 +35,10 @@
 	{(unsigned long)__GFP_THISNODE,		"GFP_THISNODE"},	\
 	{(unsigned long)__GFP_RECLAIMABLE,	"GFP_RECLAIMABLE"},	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{(unsigned long)__GFP_KMEMCG,		"GFP_KMEMCG"},		\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{(unsigned long)__GFP_MOVABLE,		"GFP_MOVABLE"},		\

@@ -12,7 +12,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NR_syscalls			312 /* length of syscall table */
+=======
+#define NR_syscalls			318 /* length of syscall table */
+>>>>>>> v3.18
 =======
 #define NR_syscalls			318 /* length of syscall table */
 >>>>>>> v3.18

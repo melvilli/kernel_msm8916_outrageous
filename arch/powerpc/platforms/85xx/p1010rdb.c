@@ -67,6 +67,11 @@ static int __init p1010_rdb_probe(void)
 	if (of_flat_dt_is_compatible(root, "fsl,P1010RDB"))
 		return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (of_flat_dt_is_compatible(root, "fsl,P1010RDB-PB"))
+		return 1;
+>>>>>>> v3.18
 =======
 	if (of_flat_dt_is_compatible(root, "fsl,P1010RDB-PB"))
 		return 1;
@@ -82,6 +87,10 @@ define_machine(p1010_rdb) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18

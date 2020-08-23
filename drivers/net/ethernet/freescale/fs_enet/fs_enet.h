@@ -85,6 +85,12 @@ struct fs_ops {
 	void (*napi_enable_rx)(struct net_device *dev);
 	void (*napi_disable_rx)(struct net_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*napi_clear_tx_event)(struct net_device *dev);
+	void (*napi_enable_tx)(struct net_device *dev);
+	void (*napi_disable_tx)(struct net_device *dev);
+>>>>>>> v3.18
 =======
 	void (*napi_clear_tx_event)(struct net_device *dev);
 	void (*napi_enable_tx)(struct net_device *dev);
@@ -126,6 +132,10 @@ struct phy_info {
 struct fs_enet_private {
 	struct napi_struct napi;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct napi_struct napi_tx;
+>>>>>>> v3.18
 =======
 	struct napi_struct napi_tx;
 >>>>>>> v3.18
@@ -160,6 +170,10 @@ struct fs_enet_private {
 	/* event masks */
 	u32 ev_napi_rx;		/* mask of NAPI rx events */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 ev_napi_tx;		/* mask of NAPI rx events */
+>>>>>>> v3.18
 =======
 	u32 ev_napi_tx;		/* mask of NAPI rx events */
 >>>>>>> v3.18
@@ -206,8 +220,13 @@ void fs_cleanup_bds(struct net_device *dev);
 #define DRV_MODULE_NAME		"fs_enet"
 #define PFX DRV_MODULE_NAME	": "
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_MODULE_VERSION	"1.0"
 #define DRV_MODULE_RELDATE	"Aug 8, 2005"
+=======
+#define DRV_MODULE_VERSION	"1.1"
+#define DRV_MODULE_RELDATE	"Sep 22, 2014"
+>>>>>>> v3.18
 =======
 #define DRV_MODULE_VERSION	"1.1"
 #define DRV_MODULE_RELDATE	"Sep 22, 2014"

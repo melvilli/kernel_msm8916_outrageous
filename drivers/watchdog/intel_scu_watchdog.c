@@ -49,7 +49,11 @@
 #include <asm/intel_scu_ipc.h>
 #include <asm/apb_timer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mrst.h>
+=======
+#include <asm/intel-mid.h>
+>>>>>>> v3.18
 =======
 #include <asm/intel-mid.h>
 >>>>>>> v3.18
@@ -216,7 +220,10 @@ static int intel_scu_set_heartbeat(u32 t)
 	int			 retry_count;
 	u32			 soft_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			 hw_pre_value;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32			 hw_value;
@@ -281,8 +288,12 @@ static int intel_scu_set_heartbeat(u32 t)
 
 		/* read count value before starting timer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hw_pre_value = ioread32(watchdog_device.timer_load_count_addr);
 		hw_pre_value = hw_pre_value & 0xFFFF0000;
+=======
+		ioread32(watchdog_device.timer_load_count_addr);
+>>>>>>> v3.18
 =======
 		ioread32(watchdog_device.timer_load_count_addr);
 >>>>>>> v3.18
@@ -457,7 +468,11 @@ static int __init intel_scu_watchdog_init(void)
 	 * If it isn't an intel MID device then it doesn't have this watchdog
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mrst_identify_cpu())
+=======
+	if (!intel_mid_identify_cpu())
+>>>>>>> v3.18
 =======
 	if (!intel_mid_identify_cpu())
 >>>>>>> v3.18
@@ -580,7 +595,10 @@ MODULE_AUTHOR("Intel Corporation");
 MODULE_DESCRIPTION("Intel SCU Watchdog Device Driver");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_VERSION(WDT_VER);

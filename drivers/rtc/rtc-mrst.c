@@ -39,8 +39,13 @@
 #include <asm-generic/rtc.h>
 #include <asm/intel_scu_ipc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mrst.h>
 #include <asm/mrst-vrtc.h>
+=======
+#include <asm/intel-mid.h>
+#include <asm/intel_mid_vrtc.h>
+>>>>>>> v3.18
 =======
 #include <asm/intel-mid.h>
 #include <asm/intel_mid_vrtc.h>
@@ -386,7 +391,10 @@ cleanup1:
 	rtc_device_unregister(mrst_rtc.rtc);
 cleanup0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mrst_rtc.dev = NULL;
@@ -421,7 +429,10 @@ static void rtc_mrst_do_remove(struct device *dev)
 
 	mrst->dev = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

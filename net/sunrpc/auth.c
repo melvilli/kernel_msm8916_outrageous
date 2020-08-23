@@ -49,7 +49,11 @@ static int param_set_hashtbl_sz(const char *val, const struct kernel_param *kp)
 	if (!val)
 		goto out_inval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(val, 0, &num);
+=======
+	ret = kstrtoul(val, 0, &num);
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(val, 0, &num);
 >>>>>>> v3.18
@@ -85,11 +89,17 @@ module_param_named(auth_hashtable_size, auth_hashbits, hashtbl_sz, 0644);
 MODULE_PARM_DESC(auth_hashtable_size, "RPC credential cache hashtable size");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned long auth_max_cred_cachesize = ULONG_MAX;
 module_param(auth_max_cred_cachesize, ulong, 0644);
 MODULE_PARM_DESC(auth_max_cred_cachesize, "RPC credential maximum total cache size");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u32
 pseudoflavor_to_flavor(u32 flavor) {
@@ -262,17 +272,23 @@ EXPORT_SYMBOL_GPL(rpcauth_list_flavors);
 
 struct rpc_auth *
 <<<<<<< HEAD
+<<<<<<< HEAD
 rpcauth_create(rpc_authflavor_t pseudoflavor, struct rpc_clnt *clnt)
 {
 	struct rpc_auth		*auth;
 	const struct rpc_authops *ops;
 	u32			flavor = pseudoflavor_to_flavor(pseudoflavor);
 =======
+=======
+>>>>>>> v3.18
 rpcauth_create(struct rpc_auth_create_args *args, struct rpc_clnt *clnt)
 {
 	struct rpc_auth		*auth;
 	const struct rpc_authops *ops;
 	u32			flavor = pseudoflavor_to_flavor(args->pseudoflavor);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	auth = ERR_PTR(-EINVAL);
@@ -289,7 +305,11 @@ rpcauth_create(struct rpc_auth_create_args *args, struct rpc_clnt *clnt)
 	}
 	spin_unlock(&rpc_authflavor_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	auth = ops->create(clnt, pseudoflavor);
+=======
+	auth = ops->create(args, clnt);
+>>>>>>> v3.18
 =======
 	auth = ops->create(args, clnt);
 >>>>>>> v3.18
@@ -367,7 +387,10 @@ EXPORT_SYMBOL_GPL(rpcauth_init_credcache);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Setup a credential key lifetime timeout notification
  */
 int
@@ -398,6 +421,9 @@ rpcauth_stringify_acceptor(struct rpc_cred *cred)
 EXPORT_SYMBOL_GPL(rpcauth_stringify_acceptor);
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Destroy a list of credentials
  */
@@ -470,7 +496,11 @@ EXPORT_SYMBOL_GPL(rpcauth_destroy_credcache);
  * Remove stale credentials. Avoid sleeping inside the loop.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
+=======
+static long
+>>>>>>> v3.18
 =======
 static long
 >>>>>>> v3.18
@@ -480,6 +510,10 @@ rpcauth_prune_expired(struct list_head *free, int nr_to_scan)
 	struct rpc_cred *cred, *next;
 	unsigned long expired = jiffies - RPC_AUTH_EXPIRY_MORATORIUM;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	long freed = 0;
+>>>>>>> v3.18
 =======
 	long freed = 0;
 >>>>>>> v3.18
@@ -495,16 +529,22 @@ rpcauth_prune_expired(struct list_head *free, int nr_to_scan)
 		if (time_in_range(cred->cr_expire, expired, jiffies) &&
 		    test_bit(RPCAUTH_CRED_HASHED, &cred->cr_flags) != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;
 
 		list_del_init(&cred->cr_lru);
 		number_cred_unused--;
 =======
+=======
+>>>>>>> v3.18
 			break;
 
 		list_del_init(&cred->cr_lru);
 		number_cred_unused--;
 		freed++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (atomic_read(&cred->cr_count) != 0)
 			continue;
@@ -518,6 +558,7 @@ rpcauth_prune_expired(struct list_head *free, int nr_to_scan)
 		}
 		spin_unlock(cache_lock);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return (number_cred_unused / 100) * sysctl_vfs_cache_pressure;
 }
@@ -543,6 +584,8 @@ rpcauth_cache_shrinker(struct shrinker *shrink, struct shrink_control *sc)
 	rpcauth_destroy_credlist(&free);
 	return res;
 =======
+=======
+>>>>>>> v3.18
 	return freed;
 }
 
@@ -597,6 +640,9 @@ rpcauth_cache_enforce_limit(void)
 	if (diff < nr_to_scan)
 		nr_to_scan = diff;
 	rpcauth_cache_do_shrink(nr_to_scan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -620,13 +666,19 @@ rpcauth_lookup_credcache(struct rpc_auth *auth, struct auth_cred * acred,
 		if (!entry->cr_ops->crmatch(acred, entry, flags))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (flags & RPCAUTH_LOOKUP_RCU) {
 			if (test_bit(RPCAUTH_CRED_HASHED, &entry->cr_flags) &&
 			    !test_bit(RPCAUTH_CRED_NEW, &entry->cr_flags))
 				cred = entry;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_lock(&cache->lock);
 		if (test_bit(RPCAUTH_CRED_HASHED, &entry->cr_flags) == 0) {
@@ -643,6 +695,12 @@ rpcauth_lookup_credcache(struct rpc_auth *auth, struct auth_cred * acred,
 		goto found;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (flags & RPCAUTH_LOOKUP_RCU)
+		return ERR_PTR(-ECHILD);
+
+>>>>>>> v3.18
 =======
 	if (flags & RPCAUTH_LOOKUP_RCU)
 		return ERR_PTR(-ECHILD);
@@ -669,6 +727,10 @@ rpcauth_lookup_credcache(struct rpc_auth *auth, struct auth_cred * acred,
 		list_add_tail(&new->cr_lru, &free);
 	spin_unlock(&cache->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rpcauth_cache_enforce_limit();
+>>>>>>> v3.18
 =======
 	rpcauth_cache_enforce_limit();
 >>>>>>> v3.18
@@ -702,6 +764,7 @@ rpcauth_lookupcred(struct rpc_auth *auth, int flags)
 	acred.uid = cred->fsuid;
 	acred.gid = cred->fsgid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acred.group_info = get_group_info(((struct cred *)cred)->group_info);
 
 	ret = auth->au_ops->lookup_cred(auth, &acred, flags);
@@ -709,11 +772,16 @@ rpcauth_lookupcred(struct rpc_auth *auth, int flags)
 	return ret;
 }
 =======
+=======
+>>>>>>> v3.18
 	acred.group_info = cred->group_info;
 	ret = auth->au_ops->lookup_cred(auth, &acred, flags);
 	return ret;
 }
 EXPORT_SYMBOL_GPL(rpcauth_lookupcred);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void
@@ -941,7 +1009,12 @@ rpcauth_uptodatecred(struct rpc_task *task)
 
 static struct shrinker rpc_cred_shrinker = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shrink = rpcauth_cache_shrinker,
+=======
+	.count_objects = rpcauth_cache_shrink_count,
+	.scan_objects = rpcauth_cache_shrink_scan,
+>>>>>>> v3.18
 =======
 	.count_objects = rpcauth_cache_shrink_count,
 	.scan_objects = rpcauth_cache_shrink_scan,

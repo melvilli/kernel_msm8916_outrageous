@@ -10,6 +10,11 @@
 #include <linux/kobject.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/memory.h>
+#include <linux/notifier.h>
+>>>>>>> v3.18
 =======
 #include <linux/memory.h>
 #include <linux/notifier.h>
@@ -75,6 +80,7 @@ void __init mminit_verify_pageflags_layout(void)
 
 	shift = 8 * sizeof(unsigned long);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	width = shift - SECTIONS_WIDTH - NODES_WIDTH - ZONES_WIDTH - LAST_NID_SHIFT;
 	mminit_dprintk(MMINIT_TRACE, "pageflags_layout_widths",
 		"Section %d Node %d Zone %d Lastnid %d Flags %d\n",
@@ -96,6 +102,8 @@ void __init mminit_verify_pageflags_layout(void)
 		(unsigned long)ZONES_PGSHIFT,
 		(unsigned long)LAST_NID_PGSHIFT);
 =======
+=======
+>>>>>>> v3.18
 	width = shift - SECTIONS_WIDTH - NODES_WIDTH - ZONES_WIDTH - LAST_CPUPID_SHIFT;
 	mminit_dprintk(MMINIT_TRACE, "pageflags_layout_widths",
 		"Section %d Node %d Zone %d Lastcpupid %d Flags %d\n",
@@ -116,6 +124,9 @@ void __init mminit_verify_pageflags_layout(void)
 		(unsigned long)NODES_PGSHIFT,
 		(unsigned long)ZONES_PGSHIFT,
 		(unsigned long)LAST_CPUPID_PGSHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mminit_dprintk(MMINIT_TRACE, "pageflags_layout_nodezoneid",
 		"Node/Zone ID: %lu -> %lu\n",
@@ -129,9 +140,15 @@ void __init mminit_verify_pageflags_layout(void)
 		"Node not in page flags");
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LAST_NID_NOT_IN_PAGE_FLAGS
 	mminit_dprintk(MMINIT_TRACE, "pageflags_layout_nodeflags",
 		"Last nid not in page flags");
+=======
+#ifdef LAST_CPUPID_NOT_IN_PAGE_FLAGS
+	mminit_dprintk(MMINIT_TRACE, "pageflags_layout_nodeflags",
+		"Last cpupid not in page flags");
+>>>>>>> v3.18
 =======
 #ifdef LAST_CPUPID_NOT_IN_PAGE_FLAGS
 	mminit_dprintk(MMINIT_TRACE, "pageflags_layout_nodeflags",
@@ -182,7 +199,10 @@ struct kobject *mm_kobj;
 EXPORT_SYMBOL_GPL(mm_kobj);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 s32 vm_committed_as_batch = 32;
 
@@ -228,6 +248,9 @@ __initcall(mm_compute_batch_init);
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init mm_sysfs_init(void)
 {
@@ -238,8 +261,12 @@ static int __init mm_sysfs_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 __initcall(mm_sysfs_init);
+=======
+postcore_initcall(mm_sysfs_init);
+>>>>>>> v3.18
 =======
 postcore_initcall(mm_sysfs_init);
 >>>>>>> v3.18

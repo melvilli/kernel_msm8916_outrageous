@@ -21,7 +21,11 @@ static struct s5p_mfc_hw_cmds *s5p_mfc_cmds;
 void s5p_mfc_init_hw_cmds(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_MFCV6(dev))
+=======
+	if (IS_MFCV6_PLUS(dev))
+>>>>>>> v3.18
 =======
 	if (IS_MFCV6_PLUS(dev))
 >>>>>>> v3.18

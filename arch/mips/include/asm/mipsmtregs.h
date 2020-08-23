@@ -37,6 +37,11 @@
 #define read_c0_tcbind()		__read_32bit_c0_register($2, 2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define write_c0_tchalt(val)		__write_32bit_c0_register($2, 4, val)
+
+>>>>>>> v3.18
 =======
 #define write_c0_tchalt(val)		__write_32bit_c0_register($2, 4, val)
 
@@ -182,7 +187,10 @@
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned core_nvpes(void)
 {
 	unsigned conf0;
@@ -194,6 +202,9 @@ static inline unsigned core_nvpes(void)
 	return ((conf0 & MVPCONF0_PVPE) >> MVPCONF0_PVPE_SHIFT) + 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned int dvpe(void)
 {

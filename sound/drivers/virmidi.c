@@ -91,8 +91,13 @@ static int snd_virmidi_probe(struct platform_device *devptr)
 	int dev = devptr->id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct snd_card_virmidi), &card);
+=======
+	err = snd_card_new(&devptr->dev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct snd_card_virmidi), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&devptr->dev, index[dev], id[dev], THIS_MODULE,
 			   sizeof(struct snd_card_virmidi), &card);
@@ -124,8 +129,11 @@ static int snd_virmidi_probe(struct platform_device *devptr)
 	sprintf(card->longname, "Virtual MIDI Card %i", dev + 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &devptr->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((err = snd_card_register(card)) == 0) {
@@ -141,7 +149,10 @@ static int snd_virmidi_remove(struct platform_device *devptr)
 {
 	snd_card_free(platform_get_drvdata(devptr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

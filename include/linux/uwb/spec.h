@@ -33,6 +33,10 @@
 #include <linux/types.h>
 #include <linux/bitmap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+>>>>>>> v3.18
 =======
 #include <linux/if_ether.h>
 >>>>>>> v3.18
@@ -135,7 +139,11 @@ enum { UWB_DRP_BACKOFF_WIN_MAX = 16 };
  */
 struct uwb_mac_addr {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 data[6];
+=======
+	u8 data[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	u8 data[ETH_ALEN];
 >>>>>>> v3.18
@@ -577,7 +585,11 @@ struct uwb_rc_evt_confirm {
 struct uwb_rc_evt_dev_addr_mgmt {
 	struct uwb_rceb rceb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 baAddr[6];
+=======
+	u8 baAddr[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	u8 baAddr[ETH_ALEN];
 >>>>>>> v3.18

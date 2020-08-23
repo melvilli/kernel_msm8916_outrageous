@@ -251,7 +251,11 @@ void rpc_destroy_wait_queue(struct rpc_wait_queue *queue)
 EXPORT_SYMBOL_GPL(rpc_destroy_wait_queue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rpc_wait_bit_killable(void *word)
+=======
+static int rpc_wait_bit_killable(struct wait_bit_key *key)
+>>>>>>> v3.18
 =======
 static int rpc_wait_bit_killable(struct wait_bit_key *key)
 >>>>>>> v3.18
@@ -263,7 +267,11 @@ static int rpc_wait_bit_killable(struct wait_bit_key *key)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef RPC_DEBUG
+=======
+#if defined(RPC_DEBUG) || defined(RPC_TRACEPOINTS)
+>>>>>>> v3.18
 =======
 #if defined(RPC_DEBUG) || defined(RPC_TRACEPOINTS)
 >>>>>>> v3.18
@@ -318,7 +326,11 @@ static int rpc_complete_task(struct rpc_task *task)
  * rpc_complete_task().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __rpc_wait_for_completion_task(struct rpc_task *task, int (*action)(void *))
+=======
+int __rpc_wait_for_completion_task(struct rpc_task *task, wait_bit_action_f *action)
+>>>>>>> v3.18
 =======
 int __rpc_wait_for_completion_task(struct rpc_task *task, wait_bit_action_f *action)
 >>>>>>> v3.18
@@ -459,6 +471,7 @@ static void rpc_wake_up_task_queue_locked(struct rpc_wait_queue *queue, struct r
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Tests whether rpc queue is empty
  */
 int rpc_queue_empty(struct rpc_wait_queue *queue)
@@ -473,6 +486,8 @@ int rpc_queue_empty(struct rpc_wait_queue *queue)
 EXPORT_SYMBOL_GPL(rpc_queue_empty);
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Wake up a task on a specific queue
@@ -667,7 +682,12 @@ static void __rpc_queue_timer_fn(unsigned long ptr)
 static void __rpc_atrun(struct rpc_task *task)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	task->tk_status = 0;
+=======
+	if (task->tk_status == -ETIMEDOUT)
+		task->tk_status = 0;
+>>>>>>> v3.18
 =======
 	if (task->tk_status == -ETIMEDOUT)
 		task->tk_status = 0;
@@ -825,7 +845,10 @@ static void __rpc_execute(struct rpc_task *task)
 			rpc_exit(task, -ERESTARTSYS);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rpc_set_running(task);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		dprintk("RPC: %5u sync task resuming\n", task->tk_pid);
@@ -849,15 +872,21 @@ static void __rpc_execute(struct rpc_task *task)
 void rpc_execute(struct rpc_task *task)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rpc_set_active(task);
 	rpc_make_runnable(task);
 	if (!RPC_IS_ASYNC(task))
 =======
+=======
+>>>>>>> v3.18
 	bool is_async = RPC_IS_ASYNC(task);
 
 	rpc_set_active(task);
 	rpc_make_runnable(task);
 	if (!is_async)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__rpc_execute(task);
 }
@@ -865,9 +894,13 @@ void rpc_execute(struct rpc_task *task)
 static void rpc_async_schedule(struct work_struct *work)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	current->flags |= PF_FSTRANS;
 	__rpc_execute(container_of(work, struct rpc_task, u.tk_work));
 	current->flags &= ~PF_FSTRANS;
+=======
+	__rpc_execute(container_of(work, struct rpc_task, u.tk_work));
+>>>>>>> v3.18
 =======
 	__rpc_execute(container_of(work, struct rpc_task, u.tk_work));
 >>>>>>> v3.18
@@ -880,7 +913,12 @@ static void rpc_async_schedule(struct work_struct *work)
  *
  * To prevent rpciod from hanging, this allocator never sleeps,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returning NULL if the request cannot be serviced immediately.
+=======
+ * returning NULL and suppressing warning if the request cannot be serviced
+ * immediately.
+>>>>>>> v3.18
 =======
  * returning NULL and suppressing warning if the request cannot be serviced
  * immediately.
@@ -898,7 +936,11 @@ void *rpc_malloc(struct rpc_task *task, size_t size)
 {
 	struct rpc_buffer *buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gfp_t gfp = GFP_NOWAIT;
+=======
+	gfp_t gfp = GFP_NOWAIT | __GFP_NOWARN;
+>>>>>>> v3.18
 =======
 	gfp_t gfp = GFP_NOWAIT | __GFP_NOWARN;
 >>>>>>> v3.18

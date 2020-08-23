@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -59,7 +63,12 @@ extern u8 acpi_gbl_default_address_spaces[];
 /* Local prototypes */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void acpi_ev_orphan_ec_reg_method(void);
+=======
+static void
+acpi_ev_orphan_ec_reg_method(struct acpi_namespace_node *ec_device_node);
+>>>>>>> v3.18
 =======
 static void
 acpi_ev_orphan_ec_reg_method(struct acpi_namespace_node *ec_device_node);
@@ -227,6 +236,7 @@ acpi_ev_address_space_dispatch(union acpi_operand_object *region_obj,
 			region_obj->region.flags |= AOPOBJ_SETUP_COMPLETE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (region_obj2->extra.region_context) {
 
 				/* The handler for this region was already installed */
@@ -238,11 +248,16 @@ acpi_ev_address_space_dispatch(union acpi_operand_object *region_obj,
 				 * this particular region
 				 */
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * Save the returned context for use in all accesses to
 			 * the handler for this particular region
 			 */
 			if (!(region_obj2->extra.region_context)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				region_obj2->extra.region_context =
 				    region_context;
@@ -294,7 +309,11 @@ acpi_ev_address_space_dispatch(union acpi_operand_object *region_obj,
 			  "Handler %p (@%p) Address %8.8X%8.8X [%s]\n",
 			  &region_obj->region.handler->address_space, handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  ACPI_FORMAT_UINT64(address),
+=======
+			  ACPI_FORMAT_NATIVE_UINT(address),
+>>>>>>> v3.18
 =======
 			  ACPI_FORMAT_NATIVE_UINT(address),
 >>>>>>> v3.18
@@ -355,6 +374,10 @@ acpi_ev_detach_region(union acpi_operand_object *region_obj,
 	union acpi_operand_object *handler_obj;
 	union acpi_operand_object *obj_desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	union acpi_operand_object *start_desc;
+>>>>>>> v3.18
 =======
 	union acpi_operand_object *start_desc;
 >>>>>>> v3.18
@@ -386,6 +409,10 @@ acpi_ev_detach_region(union acpi_operand_object *region_obj,
 
 	obj_desc = handler_obj->address_space.region_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	start_desc = obj_desc;
+>>>>>>> v3.18
 =======
 	start_desc = obj_desc;
 >>>>>>> v3.18
@@ -446,7 +473,10 @@ acpi_ev_detach_region(union acpi_operand_object *region_obj,
 						 context, region_context);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				/*
 				 * region_context should have been released by the deactivate
 				 * operation. We don't need access to it anymore here.
@@ -455,6 +485,9 @@ acpi_ev_detach_region(union acpi_operand_object *region_obj,
 					*region_context = NULL;
 				}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				/* Init routine may fail, Just ignore errors */
 
@@ -490,7 +523,10 @@ acpi_ev_detach_region(union acpi_operand_object *region_obj,
 		last_obj_ptr = &obj_desc->region.next;
 		obj_desc = obj_desc->region.next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* Prevent infinite loop if list is corrupted */
 
@@ -500,6 +536,9 @@ acpi_ev_detach_region(union acpi_operand_object *region_obj,
 				    region_obj));
 			return_VOID;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -600,7 +639,11 @@ acpi_ev_execute_reg_method(union acpi_operand_object *region_obj, u32 function)
 
 	info->prefix_node = region_obj2->extra.method_REG;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->pathname = NULL;
+=======
+	info->relative_pathname = NULL;
+>>>>>>> v3.18
 =======
 	info->relative_pathname = NULL;
 >>>>>>> v3.18
@@ -641,15 +684,21 @@ acpi_ev_execute_reg_method(union acpi_operand_object *region_obj, u32 function)
 	acpi_ut_remove_reference(args[1]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup2:
 	acpi_ut_remove_reference(args[0]);
 
       cleanup1:
 =======
+=======
+>>>>>>> v3.18
 cleanup2:
 	acpi_ut_remove_reference(args[0]);
 
 cleanup1:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ACPI_FREE(info);
 	return_ACPI_STATUS(status);
@@ -691,7 +740,11 @@ acpi_ev_execute_reg_methods(struct acpi_namespace_node *node,
 
 	if (space_id == ACPI_ADR_SPACE_EC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_ev_orphan_ec_reg_method();
+=======
+		acpi_ev_orphan_ec_reg_method(node);
+>>>>>>> v3.18
 =======
 		acpi_ev_orphan_ec_reg_method(node);
 >>>>>>> v3.18
@@ -764,7 +817,11 @@ acpi_ev_reg_run(acpi_handle obj_handle,
  * FUNCTION:    acpi_ev_orphan_ec_reg_method
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PARAMETERS:  None
+=======
+ * PARAMETERS:  ec_device_node      - Namespace node for an EC device
+>>>>>>> v3.18
 =======
  * PARAMETERS:  ec_device_node      - Namespace node for an EC device
 >>>>>>> v3.18
@@ -779,6 +836,7 @@ acpi_ev_reg_run(acpi_handle obj_handle,
  *              detected by providing a _REG method object underneath the
  *              Embedded Controller device."
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  *              To quickly access the EC device, we use the EC_ID that appears
  *              within the ECDT. Otherwise, we would need to perform a time-
@@ -812,6 +870,8 @@ static void acpi_ev_orphan_ec_reg_method(void)
 
 	if (!(*table->id)) {
 =======
+=======
+>>>>>>> v3.18
  *              To quickly access the EC device, we use the ec_device_node used
  *              during EC handler installation. Otherwise, we would need to
  *              perform a time consuming namespace walk, executing _HID
@@ -833,6 +893,9 @@ acpi_ev_orphan_ec_reg_method(struct acpi_namespace_node *ec_device_node)
 	ACPI_FUNCTION_TRACE(ev_orphan_ec_reg_method);
 
 	if (!ec_device_node) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return_VOID;
 	}
@@ -841,6 +904,7 @@ acpi_ev_orphan_ec_reg_method(struct acpi_namespace_node *ec_device_node)
 
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Get a handle to the EC device referenced in the ECDT */
 
@@ -859,11 +923,16 @@ acpi_ev_orphan_ec_reg_method(struct acpi_namespace_node *ec_device_node)
 	if (ACPI_FAILURE(status)) {
 		goto exit;
 =======
+=======
+>>>>>>> v3.18
 	/* Get a handle to a _REG method immediately under the EC device */
 
 	status = acpi_get_handle(ec_device_node, METHOD_NAME__REG, &reg_method);
 	if (ACPI_FAILURE(status)) {
 		goto exit;	/* There is no _REG method present */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -873,7 +942,11 @@ acpi_ev_orphan_ec_reg_method(struct acpi_namespace_node *ec_device_node)
 	 * will already have been executed. Note, this allows for Regions
 	 * with other space IDs to be present; but the code below will then
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * execute the _REG method with the EC space ID argument.
+=======
+	 * execute the _REG method with the embedded_control space_ID argument.
+>>>>>>> v3.18
 =======
 	 * execute the _REG method with the embedded_control space_ID argument.
 >>>>>>> v3.18
@@ -884,6 +957,7 @@ acpi_ev_orphan_ec_reg_method(struct acpi_namespace_node *ec_device_node)
 		    (next_node->object) &&
 		    (next_node->object->region.space_id == ACPI_ADR_SPACE_EC)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto exit;	/* Do not execute _REG */
 		}
 		next_node = acpi_ns_get_next_node(ec_device_node, next_node);
@@ -891,6 +965,8 @@ acpi_ev_orphan_ec_reg_method(struct acpi_namespace_node *ec_device_node)
 
 	/* Evaluate the _REG(EC,Connect) method */
 =======
+=======
+>>>>>>> v3.18
 			goto exit;	/* Do not execute the _REG */
 		}
 
@@ -898,6 +974,9 @@ acpi_ev_orphan_ec_reg_method(struct acpi_namespace_node *ec_device_node)
 	}
 
 	/* Evaluate the _REG(embedded_control,Connect) method */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	args.count = 2;
@@ -910,7 +989,11 @@ acpi_ev_orphan_ec_reg_method(struct acpi_namespace_node *ec_device_node)
 	status = acpi_evaluate_object(reg_method, NULL, &args, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18

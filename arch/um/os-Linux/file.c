@@ -238,13 +238,19 @@ void os_close_file(int fd)
 	close(fd);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int os_fsync_file(int fd)
 {
 	if (fsync(fd) < 0)
 	    return -errno;
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int os_seek_file(int fd, unsigned long long offset)
@@ -276,7 +282,10 @@ int os_write_file(int fd, const void *buf, int len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int os_sync_file(int fd)
 {
 	int n = fsync(fd);
@@ -286,6 +295,9 @@ int os_sync_file(int fd)
 	return n;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int os_file_size(const char *file, unsigned long long *size_out)
 {

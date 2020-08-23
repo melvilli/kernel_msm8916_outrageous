@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -66,7 +70,11 @@ acpi_ns_exec_module_code(union acpi_operand_object *method_obj,
  * PARAMETERS:  info            - Evaluation info block, contains:
  *                  prefix_node     - Prefix or Method/Object Node to execute
 <<<<<<< HEAD
+<<<<<<< HEAD
  *                  pathname        - Name of method to execute, If NULL, the
+=======
+ *                  relative_path   - Name of method to execute, If NULL, the
+>>>>>>> v3.18
 =======
  *                  relative_path   - Name of method to execute, If NULL, the
 >>>>>>> v3.18
@@ -91,10 +99,16 @@ acpi_ns_exec_module_code(union acpi_operand_object *method_obj,
  ******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_ns_evaluate(struct acpi_evaluate_info * info)
 {
 	acpi_status status;
 	struct acpi_namespace_node *node;
+=======
+acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
+{
+	acpi_status status;
+>>>>>>> v3.18
 =======
 acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 {
@@ -107,6 +121,7 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 		return_ACPI_STATUS(AE_BAD_PARAMETER);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Initialize the return value to an invalid object */
 
@@ -126,6 +141,8 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 					  ACPI_NS_NO_UPSEARCH,
 					  &info->resolved_node);
 =======
+=======
+>>>>>>> v3.18
 	if (!info->node) {
 		/*
 		 * Get the actual namespace node for the target object if we
@@ -138,6 +155,9 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 		status =
 		    acpi_ns_get_node(info->prefix_node, info->relative_pathname,
 				     ACPI_NS_NO_UPSEARCH, &info->node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ACPI_FAILURE(status)) {
 			return_ACPI_STATUS(status);
@@ -145,6 +165,7 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 	}
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * For a method alias, we must grab the actual method node so that proper
 	 * scoping context will be established before execution.
@@ -172,6 +193,8 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 		/*
 		 * 1) Object is a control method - execute it
 =======
+=======
+>>>>>>> v3.18
 	 * For a method alias, we must grab the actual method node so that
 	 * proper scoping context will be established before execution.
 	 */
@@ -271,11 +294,15 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 	case ACPI_TYPE_METHOD:
 		/*
 		 * 2) Object is a control method - execute it
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 
 		/* Verify that there is a method object associated with this node */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		info->obj_desc =
 		    acpi_ns_get_attached_object(info->resolved_node);
@@ -303,6 +330,8 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 		ACPI_DEBUG_PRINT((ACPI_DB_EXEC,
 				  "Method at AML address %p Length %X\n",
 =======
+=======
+>>>>>>> v3.18
 		if (!info->obj_desc) {
 			ACPI_ERROR((AE_INFO,
 				    "%s: Method has no attached sub-object",
@@ -314,6 +343,9 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 		ACPI_DEBUG_PRINT((ACPI_DB_EXEC,
 				  "**** Execute method [%s] at AML address %p length %X\n",
 				  info->full_pathname,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  info->obj_desc->method.aml_start + 1,
 				  info->obj_desc->method.aml_length - 1));
@@ -329,6 +361,7 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 		acpi_ex_enter_interpreter();
 		status = acpi_ps_execute_method(info);
 		acpi_ex_exit_interpreter();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else {
 		/*
@@ -361,6 +394,8 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 		 * a field that must be read, etc.) -- we can't just grab the object
 		 * out of the node.
 =======
+=======
+>>>>>>> v3.18
 		break;
 
 	default:
@@ -372,13 +407,20 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 		 * Some objects require additional resolution steps (e.g., the Node
 		 * may be a field that must be read, etc.) -- we can't just grab
 		 * the object out of the node.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 *
 		 * Use resolve_node_to_value() to get the associated value.
 		 *
 		 * NOTE: we can get away with passing in NULL for a walk state because
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * resolved_node is guaranteed to not be a reference to either a method
+=======
+		 * the Node is guaranteed to not be a reference to either a method
+>>>>>>> v3.18
 =======
 		 * the Node is guaranteed to not be a reference to either a method
 >>>>>>> v3.18
@@ -386,6 +428,7 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 		 * from a running method.)
 		 *
 		 * Even though we do not directly invoke the interpreter for object
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 * resolution, we must lock it because we could access an opregion.
 		 * The opregion access code assumes that the interpreter is locked.
@@ -424,6 +467,8 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 	(void)acpi_ns_check_predefined_names(node, info->param_count,
 		status, &info->return_object);
 =======
+=======
+>>>>>>> v3.18
 		 * resolution, we must lock it because we could access an op_region.
 		 * The op_region access code assumes that the interpreter is locked.
 		 */
@@ -459,6 +504,9 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 	 */
 	(void)acpi_ns_check_return_value(info->node, info, info->param_count,
 					 status, &info->return_object);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Check if there is a return value that must be dealt with */
@@ -480,6 +528,7 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 	ACPI_DEBUG_PRINT((ACPI_DB_NAMES,
 			  "*** Completed evaluation of object %s ***\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  info->pathname));
 
 	/*
@@ -487,6 +536,8 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info)
 	 * just return
 	 */
 =======
+=======
+>>>>>>> v3.18
 			  info->relative_pathname));
 
 cleanup:
@@ -496,6 +547,9 @@ cleanup:
 	 */
 	ACPI_FREE(info->full_pathname);
 	info->full_pathname = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return_ACPI_STATUS(status);
 }
@@ -663,7 +717,11 @@ acpi_ns_exec_module_code(union acpi_operand_object *method_obj,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18

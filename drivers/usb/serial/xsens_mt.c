@@ -10,7 +10,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/tty.h>
@@ -46,6 +49,7 @@ static const struct usb_device_id id_table[] = {
 MODULE_DEVICE_TABLE(usb, id_table);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int has_required_endpoints(const struct usb_host_interface *interface)
 {
 	__u8 i;
@@ -69,6 +73,8 @@ static int xsens_mt_probe(struct usb_serial *serial,
 		return -ENODEV;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static int xsens_mt_probe(struct usb_serial *serial,
 					const struct usb_device_id *id)
 {
@@ -76,6 +82,9 @@ static int xsens_mt_probe(struct usb_serial *serial,
 		return 0;
 
 	return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -97,6 +106,11 @@ static struct usb_serial_driver * const serial_drivers[] = {
 module_usb_serial_driver(serial_drivers, id_table);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_AUTHOR("Frans Klaver <frans.klaver@xsens.com>");
+MODULE_DESCRIPTION("USB-serial driver for Xsens motion trackers");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Frans Klaver <frans.klaver@xsens.com>");
 MODULE_DESCRIPTION("USB-serial driver for Xsens motion trackers");

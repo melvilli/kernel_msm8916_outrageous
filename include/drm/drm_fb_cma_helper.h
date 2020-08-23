@@ -25,7 +25,10 @@ struct drm_gem_cma_object *drm_fb_cma_get_gem_obj(struct drm_framebuffer *fb,
 
 #ifdef CONFIG_DEBUG_FS
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drm_fb_cma_describe(struct drm_framebuffer *fb, struct seq_file *m);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int drm_fb_cma_debugfs_show(struct seq_file *m, void *arg);

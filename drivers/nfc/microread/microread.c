@@ -14,17 +14,23 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the
  * Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 =======
+=======
+>>>>>>> v3.18
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/delay.h>
@@ -563,7 +569,11 @@ exit:
 
 	if (r)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Failed to handle discovered target err=%d", r);
+=======
+		pr_err("Failed to handle discovered target err=%d\n", r);
+>>>>>>> v3.18
 =======
 		pr_err("Failed to handle discovered target err=%d\n", r);
 >>>>>>> v3.18
@@ -671,7 +681,11 @@ int microread_probe(void *phy_id, struct nfc_phy_ops *phy_ops, char *llc_name,
 	struct microread_info *info;
 	unsigned long quirks = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 protocols, se;
+=======
+	u32 protocols;
+>>>>>>> v3.18
 =======
 	u32 protocols;
 >>>>>>> v3.18
@@ -681,7 +695,10 @@ int microread_probe(void *phy_id, struct nfc_phy_ops *phy_ops, char *llc_name,
 	info = kzalloc(sizeof(struct microread_info), GFP_KERNEL);
 	if (!info) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Cannot allocate memory for microread_info.\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		r = -ENOMEM;
@@ -706,10 +723,15 @@ int microread_probe(void *phy_id, struct nfc_phy_ops *phy_ops, char *llc_name,
 		    NFC_PROTO_NFC_DEP_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	se = NFC_SE_UICC | NFC_SE_EMBEDDED;
 
 	info->hdev = nfc_hci_allocate_device(&microread_hci_ops, &init_data,
 					     quirks, protocols, se, llc_name,
+=======
+	info->hdev = nfc_hci_allocate_device(&microread_hci_ops, &init_data,
+					     quirks, protocols, llc_name,
+>>>>>>> v3.18
 =======
 	info->hdev = nfc_hci_allocate_device(&microread_hci_ops, &init_data,
 					     quirks, protocols, llc_name,
@@ -721,7 +743,11 @@ int microread_probe(void *phy_id, struct nfc_phy_ops *phy_ops, char *llc_name,
 					     phy_payload);
 	if (!info->hdev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Cannot allocate nfc hdev.\n");
+=======
+		pr_err("Cannot allocate nfc hdev\n");
+>>>>>>> v3.18
 =======
 		pr_err("Cannot allocate nfc hdev\n");
 >>>>>>> v3.18

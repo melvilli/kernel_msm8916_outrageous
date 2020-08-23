@@ -133,10 +133,16 @@ static int ds1390_probe(struct spi_device *spi)
 
 	chip = devm_kzalloc(&spi->dev, sizeof(*chip), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!chip) {
 		dev_err(&spi->dev, "unable to allocate device memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!chip)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	if (!chip)
 		return -ENOMEM;
@@ -161,11 +167,14 @@ static int ds1390_probe(struct spi_device *spi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ds1390_remove(struct spi_device *spi)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct spi_driver ds1390_driver = {
@@ -175,7 +184,10 @@ static struct spi_driver ds1390_driver = {
 	},
 	.probe	= ds1390_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = ds1390_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

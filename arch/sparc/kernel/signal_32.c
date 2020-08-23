@@ -29,6 +29,10 @@
 
 #include "sigutil.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 =======
 #include "kernel.h"
 >>>>>>> v3.18
@@ -346,7 +350,11 @@ static int setup_rt_frame(struct ksignal *ksig, struct pt_regs *regs,
 
 	if (psr & PSR_EF) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__siginfo_fpu_t *fp = tail;
+=======
+		__siginfo_fpu_t __user *fp = tail;
+>>>>>>> v3.18
 =======
 		__siginfo_fpu_t __user *fp = tail;
 >>>>>>> v3.18
@@ -358,7 +366,11 @@ static int setup_rt_frame(struct ksignal *ksig, struct pt_regs *regs,
 	}
 	if (wsaved) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__siginfo_rwin_t *rwp = tail;
+=======
+		__siginfo_rwin_t __user *rwp = tail;
+>>>>>>> v3.18
 =======
 		__siginfo_rwin_t __user *rwp = tail;
 >>>>>>> v3.18
@@ -530,9 +542,15 @@ void do_notify_resume(struct pt_regs *regs, unsigned long orig_i0,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage int
 do_sys_sigstack(struct sigstack __user *ssptr, struct sigstack __user *ossptr,
 		unsigned long sp)
+=======
+asmlinkage int do_sys_sigstack(struct sigstack __user *ssptr,
+                               struct sigstack __user *ossptr,
+                               unsigned long sp)
+>>>>>>> v3.18
 =======
 asmlinkage int do_sys_sigstack(struct sigstack __user *ssptr,
                                struct sigstack __user *ossptr,

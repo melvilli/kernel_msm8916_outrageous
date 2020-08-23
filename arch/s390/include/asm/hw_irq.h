@@ -5,6 +5,7 @@
 #include <linux/pci.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct msi_desc *irq_get_msi_desc(unsigned int irq)
 {
 	return __irq_get_msi_desc(irq);
@@ -19,6 +20,11 @@ static inline int irq_set_msi_desc(unsigned int irq, struct msi_desc *msi)
 	msi->irq = irq;
 	return 0;
 }
+=======
+void __init init_airq_interrupts(void);
+void __init init_cio_interrupts(void);
+void __init init_ext_interrupts(void);
+>>>>>>> v3.18
 =======
 void __init init_airq_interrupts(void);
 void __init init_cio_interrupts(void);

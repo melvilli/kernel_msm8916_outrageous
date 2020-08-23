@@ -10,7 +10,10 @@
 #include <linux/fcntl.h>
 #include <linux/poll.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mutex.h>

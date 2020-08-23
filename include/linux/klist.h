@@ -45,7 +45,11 @@ struct klist_node {
 extern void klist_add_tail(struct klist_node *n, struct klist *k);
 extern void klist_add_head(struct klist_node *n, struct klist *k);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void klist_add_after(struct klist_node *n, struct klist_node *pos);
+=======
+extern void klist_add_behind(struct klist_node *n, struct klist_node *pos);
+>>>>>>> v3.18
 =======
 extern void klist_add_behind(struct klist_node *n, struct klist_node *pos);
 >>>>>>> v3.18

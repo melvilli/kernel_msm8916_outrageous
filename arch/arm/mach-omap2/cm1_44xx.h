@@ -26,6 +26,11 @@
 #define __ARCH_ARM_MACH_OMAP2_CM1_44XX_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "cm_44xx_54xx.h"
+
+>>>>>>> v3.18
 =======
 #include "cm_44xx_54xx.h"
 
@@ -223,11 +228,14 @@
 #define OMAP4430_CM1_ABE_WDT3_CLKCTRL			OMAP44XX_CM1_REGADDR(OMAP4430_CM1_ABE_INST, 0x0088)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Function prototypes */
 extern u32 omap4_cm1_read_inst_reg(s16 inst, u16 idx);
 extern void omap4_cm1_write_inst_reg(u32 val, s16 inst, u16 idx);
 extern u32 omap4_cm1_rmw_inst_reg_bits(u32 mask, u32 bits, s16 inst, s16 idx);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

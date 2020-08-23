@@ -8,8 +8,13 @@
 #include <linux/usb/otg.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ci13xxx;
 struct ci13xxx_platform_data {
+=======
+struct ci_hdrc;
+struct ci_hdrc_platform_data {
+>>>>>>> v3.18
 =======
 struct ci_hdrc;
 struct ci_hdrc_platform_data {
@@ -19,6 +24,7 @@ struct ci_hdrc_platform_data {
 	uintptr_t	 capoffset;
 	unsigned	 power_budget;
 	struct usb_phy	*phy;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long	 flags;
 	unsigned int	nz_itc;
@@ -39,6 +45,8 @@ struct ci_hdrc_platform_data {
 #define CI13XXX_CONTROLLER_UDC_STARTED_EVENT	6
 	void	(*notify_event) (struct ci13xxx *ci, unsigned event);
 =======
+=======
+>>>>>>> v3.18
 	enum usb_phy_interface phy_mode;
 	unsigned long	 flags;
 #define CI_HDRC_REGS_SHARED		BIT(0)
@@ -57,12 +65,16 @@ struct ci_hdrc_platform_data {
 	void	(*notify_event) (struct ci_hdrc *ci, unsigned event);
 	struct regulator	*reg_vbus;
 	bool			tpl_support;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* Default offset of capability registers */
 #define DEF_CAPOFFSET		0x100
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Add ci13xxx device */
 struct platform_device *ci13xxx_add_device(struct device *dev,
@@ -71,12 +83,17 @@ struct platform_device *ci13xxx_add_device(struct device *dev,
 /* Remove ci13xxx device */
 void ci13xxx_remove_device(struct platform_device *pdev);
 =======
+=======
+>>>>>>> v3.18
 /* Add ci hdrc device */
 struct platform_device *ci_hdrc_add_device(struct device *dev,
 			struct resource *res, int nres,
 			struct ci_hdrc_platform_data *platdata);
 /* Remove ci hdrc device */
 void ci_hdrc_remove_device(struct platform_device *pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

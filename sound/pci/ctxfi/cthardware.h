@@ -21,6 +21,10 @@
 #include <linux/types.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/core.h>
+>>>>>>> v3.18
 =======
 #include <sound/core.h>
 >>>>>>> v3.18
@@ -189,14 +193,20 @@ struct hw {
 
 	struct pci_dev *pci;	/* the pci kernel structure of this card */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq;
 	unsigned long io_base;
 	unsigned long mem_base;
 =======
+=======
+>>>>>>> v3.18
 	struct snd_card *card;	/* pointer to this card */
 	int irq;
 	unsigned long io_base;
 	void __iomem *mem_base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	enum CHIPTYP chip_type;

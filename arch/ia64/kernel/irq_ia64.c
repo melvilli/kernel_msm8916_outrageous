@@ -94,6 +94,7 @@ static int irq_status[NR_IRQS] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int check_irq_used(int irq)
 {
 	if (irq_status[irq] == IRQ_USED)
@@ -102,6 +103,8 @@ int check_irq_used(int irq)
 	return -1;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int find_unassigned_irq(void)
@@ -342,7 +345,11 @@ static irqreturn_t smp_irq_move_cleanup_interrupt(int irq, void *dev_id)
 		struct irq_desc *desc;
 		struct irq_cfg *cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq = __get_cpu_var(vector_irq)[vector];
+=======
+		irq = __this_cpu_read(vector_irq[vector]);
+>>>>>>> v3.18
 =======
 		irq = __this_cpu_read(vector_irq[vector]);
 >>>>>>> v3.18
@@ -360,7 +367,11 @@ static irqreturn_t smp_irq_move_cleanup_interrupt(int irq, void *dev_id)
 
 		spin_lock_irqsave(&vector_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__get_cpu_var(vector_irq)[vector] = -1;
+=======
+		__this_cpu_write(vector_irq[vector], -1);
+>>>>>>> v3.18
 =======
 		__this_cpu_write(vector_irq[vector], -1);
 >>>>>>> v3.18
@@ -376,7 +387,10 @@ static irqreturn_t smp_irq_move_cleanup_interrupt(int irq, void *dev_id)
 static struct irqaction irq_move_irqaction = {
 	.handler =	smp_irq_move_cleanup_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags =	IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.name =		"irq_move"
@@ -406,8 +420,12 @@ void destroy_and_reserve_irq(unsigned int irq)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dynamic_irq_cleanup(irq);
 
+=======
+	irq_init_desc(irq);
+>>>>>>> v3.18
 =======
 	irq_init_desc(irq);
 >>>>>>> v3.18
@@ -444,7 +462,11 @@ int create_irq(void)
 	spin_unlock_irqrestore(&vector_lock, flags);
 	if (irq >= 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dynamic_irq_init(irq);
+=======
+		irq_init_desc(irq);
+>>>>>>> v3.18
 =======
 		irq_init_desc(irq);
 >>>>>>> v3.18
@@ -454,7 +476,11 @@ int create_irq(void)
 void destroy_irq(unsigned int irq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dynamic_irq_cleanup(irq);
+=======
+	irq_init_desc(irq);
+>>>>>>> v3.18
 =======
 	irq_init_desc(irq);
 >>>>>>> v3.18
@@ -516,6 +542,7 @@ ia64_handle_irq (ia64_vector vector, struct pt_regs *regs)
 	while (vector != IA64_SPURIOUS_INT_VECTOR) {
 		int irq = local_vector_to_irq(vector);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct irq_desc *desc = irq_to_desc(irq);
 
 		if (unlikely(IS_LOCAL_TLB_FLUSH(vector))) {
@@ -525,6 +552,8 @@ ia64_handle_irq (ia64_vector vector, struct pt_regs *regs)
 			scheduler_ipi();
 			kstat_incr_irqs_this_cpu(irq, desc);
 =======
+=======
+>>>>>>> v3.18
 
 		if (unlikely(IS_LOCAL_TLB_FLUSH(vector))) {
 			smp_local_flush_tlb();
@@ -532,6 +561,9 @@ ia64_handle_irq (ia64_vector vector, struct pt_regs *regs)
 		} else if (unlikely(IS_RESCHEDULE(vector))) {
 			scheduler_ipi();
 			kstat_incr_irq_this_cpu(irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			ia64_setreg(_IA64_REG_CR_TPR, vector);
@@ -586,6 +618,7 @@ void ia64_process_pending_intr(void)
 	while (vector != IA64_SPURIOUS_INT_VECTOR) {
 		int irq = local_vector_to_irq(vector);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct irq_desc *desc = irq_to_desc(irq);
 
 		if (unlikely(IS_LOCAL_TLB_FLUSH(vector))) {
@@ -594,12 +627,17 @@ void ia64_process_pending_intr(void)
 		} else if (unlikely(IS_RESCHEDULE(vector))) {
 			kstat_incr_irqs_this_cpu(irq, desc);
 =======
+=======
+>>>>>>> v3.18
 
 		if (unlikely(IS_LOCAL_TLB_FLUSH(vector))) {
 			smp_local_flush_tlb();
 			kstat_incr_irq_this_cpu(irq);
 		} else if (unlikely(IS_RESCHEDULE(vector))) {
 			kstat_incr_irq_this_cpu(irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			struct pt_regs *old_regs = set_irq_regs(NULL);
@@ -648,7 +686,10 @@ static irqreturn_t dummy_handler (int irq, void *dev_id)
 static struct irqaction ipi_irqaction = {
 	.handler =	handle_IPI,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags =	IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.name =		"IPI"
@@ -660,7 +701,10 @@ static struct irqaction ipi_irqaction = {
 static struct irqaction resched_irqaction = {
 	.handler =	dummy_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags =	IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.name =		"resched"
@@ -669,7 +713,10 @@ static struct irqaction resched_irqaction = {
 static struct irqaction tlb_irqaction = {
 	.handler =	dummy_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags =	IRQF_DISABLED,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.name =		"tlb_flush"

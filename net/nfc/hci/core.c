@@ -13,9 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the
  * Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -232,7 +236,11 @@ int nfc_hci_target_discovered(struct nfc_hci_dev *hdev, u8 gate)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		targets->sens_res = be16_to_cpu(*(u16 *)atqa_skb->data);
+=======
+		targets->sens_res = be16_to_cpu(*(__be16 *)atqa_skb->data);
+>>>>>>> v3.18
 =======
 		targets->sens_res = be16_to_cpu(*(__be16 *)atqa_skb->data);
 >>>>>>> v3.18
@@ -346,11 +354,16 @@ exit:
 
 exit_noskb:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (r) {
 		/* TODO: There was an error dispatching the event,
 		 * how to propagate up to nfc core?
 		 */
 	}
+=======
+	if (r)
+		nfc_hci_driver_failure(hdev, r);
+>>>>>>> v3.18
 =======
 	if (r)
 		nfc_hci_driver_failure(hdev, r);
@@ -399,6 +412,7 @@ static int hci_dev_session_init(struct nfc_hci_dev *hdev)
 		goto disconnect_all;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb->len && skb->len == strlen(hdev->init_data.session_id))
 		if (memcmp(hdev->init_data.session_id, skb->data,
 			   skb->len) == 0) {
@@ -428,6 +442,8 @@ static int hci_dev_session_init(struct nfc_hci_dev *hdev)
 			      hdev->init_data.session_id,
 			      strlen(hdev->init_data.session_id));
 =======
+=======
+>>>>>>> v3.18
 	if (skb->len && skb->len == strlen(hdev->init_data.session_id) &&
 		(memcmp(hdev->init_data.session_id, skb->data,
 			   skb->len) == 0) && hdev->ops->load_session) {
@@ -453,6 +469,9 @@ static int hci_dev_session_init(struct nfc_hci_dev *hdev)
 				hdev->init_data.session_id,
 				strlen(hdev->init_data.session_id));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (r == 0)
 		goto exit;
@@ -603,14 +622,20 @@ static void hci_stop_poll(struct nfc_dev *nfc_dev)
 	struct nfc_hci_dev *hdev = nfc_get_drvdata(nfc_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nfc_hci_send_event(hdev, NFC_HCI_RF_READER_A_GATE,
 			   NFC_HCI_EVT_END_OPERATION, NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (hdev->ops->stop_poll)
 		hdev->ops->stop_poll(hdev);
 	else
 		nfc_hci_send_event(hdev, NFC_HCI_RF_READER_A_GATE,
 				   NFC_HCI_EVT_END_OPERATION, NULL, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -620,17 +645,23 @@ static int hci_dep_link_up(struct nfc_dev *nfc_dev, struct nfc_target *target,
 	struct nfc_hci_dev *hdev = nfc_get_drvdata(nfc_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hdev->ops->dep_link_up)
 		return hdev->ops->dep_link_up(hdev, target, comm_mode,
 						gb, gb_len);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!hdev->ops->dep_link_up)
 		return 0;
 
 	return hdev->ops->dep_link_up(hdev, target, comm_mode,
 				      gb, gb_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -639,15 +670,21 @@ static int hci_dep_link_down(struct nfc_dev *nfc_dev)
 	struct nfc_hci_dev *hdev = nfc_get_drvdata(nfc_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hdev->ops->dep_link_down)
 		return hdev->ops->dep_link_down(hdev);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!hdev->ops->dep_link_down)
 		return 0;
 
 	return hdev->ops->dep_link_down(hdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -738,6 +775,7 @@ static int hci_tm_send(struct nfc_dev *nfc_dev, struct sk_buff *skb)
 	struct nfc_hci_dev *hdev = nfc_get_drvdata(nfc_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hdev->ops->tm_send)
 		return hdev->ops->tm_send(hdev, skb);
 
@@ -745,12 +783,17 @@ static int hci_tm_send(struct nfc_dev *nfc_dev, struct sk_buff *skb)
 
 	return -ENOTSUPP;
 =======
+=======
+>>>>>>> v3.18
 	if (!hdev->ops->tm_send) {
 		kfree_skb(skb);
 		return -ENOTSUPP;
 	}
 
 	return hdev->ops->tm_send(hdev, skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -760,9 +803,12 @@ static int hci_check_presence(struct nfc_dev *nfc_dev,
 	struct nfc_hci_dev *hdev = nfc_get_drvdata(nfc_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hdev->ops->check_presence)
 		return hdev->ops->check_presence(hdev, target);
 =======
+=======
+>>>>>>> v3.18
 	if (!hdev->ops->check_presence)
 		return 0;
 
@@ -795,6 +841,9 @@ static int hci_disable_se(struct nfc_dev *nfc_dev, u32 se_idx)
 
 	if (hdev->ops->disable_se)
 		return hdev->ops->disable_se(hdev, se_idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -888,7 +937,10 @@ static void nfc_hci_recv_from_llc(struct nfc_hci_dev *hdev, struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int hci_fw_download(struct nfc_dev *nfc_dev, const char *firmware_name)
 {
 	struct nfc_hci_dev *hdev = nfc_get_drvdata(nfc_dev);
@@ -899,6 +951,9 @@ static int hci_fw_download(struct nfc_dev *nfc_dev, const char *firmware_name)
 	return hdev->ops->fw_download(hdev, firmware_name);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct nfc_ops hci_nfc_ops = {
 	.dev_up = hci_dev_up,
@@ -913,11 +968,17 @@ static struct nfc_ops hci_nfc_ops = {
 	.tm_send = hci_tm_send,
 	.check_presence = hci_check_presence,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.fw_download = hci_fw_download,
 	.discover_se = hci_discover_se,
 	.enable_se = hci_enable_se,
 	.disable_se = hci_disable_se,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -926,7 +987,10 @@ struct nfc_hci_dev *nfc_hci_allocate_device(struct nfc_hci_ops *ops,
 					    unsigned long quirks,
 					    u32 protocols,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    u32 supported_se,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					    const char *llc_name,
@@ -955,7 +1019,11 @@ struct nfc_hci_dev *nfc_hci_allocate_device(struct nfc_hci_ops *ops,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hdev->ndev = nfc_allocate_device(&hci_nfc_ops, protocols, supported_se,
+=======
+	hdev->ndev = nfc_allocate_device(&hci_nfc_ops, protocols,
+>>>>>>> v3.18
 =======
 	hdev->ndev = nfc_allocate_device(&hci_nfc_ops, protocols,
 >>>>>>> v3.18

@@ -2,6 +2,7 @@
  * s2mps11.c
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012 Samsung Electronics Co., Ltd
  *              http://www.samsung.com
  *
@@ -10,6 +11,8 @@
  *  Free Software Foundation;  either version 2 of the  License, or (at your
  *  option) any later version.
 =======
+=======
+>>>>>>> v3.18
  * Copyright (c) 2012-2014 Samsung Electronics Co., Ltd
  *              http://www.samsung.com
  *
@@ -22,19 +25,26 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  */
 
 #include <linux/bug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/delay.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/err.h>
 #include <linux/gpio.h>
 #include <linux/slab.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/regulator/driver.h>
@@ -46,6 +56,8 @@ struct s2mps11_info {
 	struct regulator_dev *rdev[S2MPS11_REGULATOR_MAX];
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/regmap.h>
 #include <linux/platform_device.h>
@@ -60,6 +72,9 @@ struct s2mps11_info {
 
 struct s2mps11_info {
 	unsigned int rdev_num;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ramp_delay2;
 	int ramp_delay34;
@@ -69,11 +84,14 @@ struct s2mps11_info {
 	int ramp_delay9;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool buck6_ramp;
 	bool buck2_ramp;
 	bool buck3_ramp;
 	bool buck4_ramp;
 =======
+=======
+>>>>>>> v3.18
 	enum sec_device_type dev_type;
 
 	/*
@@ -84,6 +102,9 @@ struct s2mps11_info {
 
 	/* Array of size rdev_num with GPIO-s for external sleep control */
 	int *ext_control_gpio;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -92,7 +113,11 @@ static int get_ramp_delay(int ramp_delay)
 	unsigned char cnt = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ramp_delay /= 6;
+=======
+	ramp_delay /= 6250;
+>>>>>>> v3.18
 =======
 	ramp_delay /= 6250;
 >>>>>>> v3.18
@@ -104,10 +129,13 @@ static int get_ramp_delay(int ramp_delay)
 		cnt++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return cnt;
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (cnt > 3)
 		cnt = 3;
@@ -274,6 +302,9 @@ ramp_disable:
 				  1 << enable_shift, 0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct regulator_ops s2mps11_ldo_ops = {
 	.list_voltage		= regulator_list_voltage_linear,
@@ -295,6 +326,7 @@ static struct regulator_ops s2mps11_buck_ops = {
 	.get_voltage_sel	= regulator_get_voltage_sel_regmap,
 	.set_voltage_sel	= regulator_set_voltage_sel_regmap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.set_voltage_time_sel	= regulator_set_voltage_time_sel,
 };
 
@@ -314,11 +346,16 @@ static struct regulator_ops s2mps11_buck_ops = {
 }
 #define regulator_desc_ldo2(num)	{		\
 =======
+=======
+>>>>>>> v3.18
 	.set_voltage_time_sel	= s2mps11_regulator_set_voltage_time_sel,
 	.set_ramp_delay		= s2mps11_set_ramp_delay,
 };
 
 #define regulator_desc_s2mps11_ldo(num, step) {		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.name		= "LDO"#num,			\
 	.id		= S2MPS11_LDO##num,		\
@@ -326,8 +363,13 @@ static struct regulator_ops s2mps11_buck_ops = {
 	.type		= REGULATOR_VOLTAGE,		\
 	.owner		= THIS_MODULE,			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.min_uV		= S2MPS11_LDO_MIN,		\
 	.uV_step	= S2MPS11_LDO_STEP2,		\
+=======
+	.min_uV		= MIN_800_MV,			\
+	.uV_step	= step,				\
+>>>>>>> v3.18
 =======
 	.min_uV		= MIN_800_MV,			\
 	.uV_step	= step,				\
@@ -340,7 +382,11 @@ static struct regulator_ops s2mps11_buck_ops = {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define regulator_desc_buck1_4(num)	{			\
+=======
+#define regulator_desc_s2mps11_buck1_4(num) {			\
+>>>>>>> v3.18
 =======
 #define regulator_desc_s2mps11_buck1_4(num) {			\
 >>>>>>> v3.18
@@ -350,14 +396,20 @@ static struct regulator_ops s2mps11_buck_ops = {
 	.type		= REGULATOR_VOLTAGE,			\
 	.owner		= THIS_MODULE,				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.min_uV		= S2MPS11_BUCK_MIN1,			\
 	.uV_step	= S2MPS11_BUCK_STEP1,			\
 	.n_voltages	= S2MPS11_BUCK_N_VOLTAGES,		\
 =======
+=======
+>>>>>>> v3.18
 	.min_uV		= MIN_600_MV,				\
 	.uV_step	= STEP_6_25_MV,				\
 	.n_voltages	= S2MPS11_BUCK_N_VOLTAGES,		\
 	.ramp_delay	= S2MPS11_RAMP_DELAY,			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.vsel_reg	= S2MPS11_REG_B1CTRL2 + (num - 1) * 2,	\
 	.vsel_mask	= S2MPS11_BUCK_VSEL_MASK,		\
@@ -366,7 +418,11 @@ static struct regulator_ops s2mps11_buck_ops = {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define regulator_desc_buck5	{				\
+=======
+#define regulator_desc_s2mps11_buck5 {				\
+>>>>>>> v3.18
 =======
 #define regulator_desc_s2mps11_buck5 {				\
 >>>>>>> v3.18
@@ -376,14 +432,20 @@ static struct regulator_ops s2mps11_buck_ops = {
 	.type		= REGULATOR_VOLTAGE,			\
 	.owner		= THIS_MODULE,				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.min_uV		= S2MPS11_BUCK_MIN1,			\
 	.uV_step	= S2MPS11_BUCK_STEP1,			\
 	.n_voltages	= S2MPS11_BUCK_N_VOLTAGES,		\
 =======
+=======
+>>>>>>> v3.18
 	.min_uV		= MIN_600_MV,				\
 	.uV_step	= STEP_6_25_MV,				\
 	.n_voltages	= S2MPS11_BUCK_N_VOLTAGES,		\
 	.ramp_delay	= S2MPS11_RAMP_DELAY,			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.vsel_reg	= S2MPS11_REG_B5CTRL2,			\
 	.vsel_mask	= S2MPS11_BUCK_VSEL_MASK,		\
@@ -392,7 +454,11 @@ static struct regulator_ops s2mps11_buck_ops = {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define regulator_desc_buck6_8(num)	{			\
+=======
+#define regulator_desc_s2mps11_buck6_10(num, min, step) {	\
+>>>>>>> v3.18
 =======
 #define regulator_desc_s2mps11_buck6_10(num, min, step) {	\
 >>>>>>> v3.18
@@ -402,14 +468,20 @@ static struct regulator_ops s2mps11_buck_ops = {
 	.type		= REGULATOR_VOLTAGE,			\
 	.owner		= THIS_MODULE,				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.min_uV		= S2MPS11_BUCK_MIN1,			\
 	.uV_step	= S2MPS11_BUCK_STEP1,			\
 	.n_voltages	= S2MPS11_BUCK_N_VOLTAGES,		\
 =======
+=======
+>>>>>>> v3.18
 	.min_uV		= min,					\
 	.uV_step	= step,					\
 	.n_voltages	= S2MPS11_BUCK_N_VOLTAGES,		\
 	.ramp_delay	= S2MPS11_RAMP_DELAY,			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.vsel_reg	= S2MPS11_REG_B6CTRL2 + (num - 6) * 2,	\
 	.vsel_mask	= S2MPS11_BUCK_VSEL_MASK,		\
@@ -417,6 +489,7 @@ static struct regulator_ops s2mps11_buck_ops = {
 	.enable_mask	= S2MPS11_ENABLE_MASK			\
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define regulator_desc_buck9	{				\
 	.name		= "BUCK9",				\
@@ -498,6 +571,8 @@ static struct regulator_desc regulators[] = {
 	regulator_desc_buck9,
 	regulator_desc_buck10,
 =======
+=======
+>>>>>>> v3.18
 static const struct regulator_desc s2mps11_regulators[] = {
 	regulator_desc_s2mps11_ldo(1, STEP_25_MV),
 	regulator_desc_s2mps11_ldo(2, STEP_50_MV),
@@ -988,12 +1063,16 @@ static const struct regulator_desc s2mpu02_regulators[] = {
 	regulator_desc_s2mpu02_buck5(5),
 	regulator_desc_s2mpu02_buck6(6),
 	regulator_desc_s2mpu02_buck7(7),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static int s2mps11_pmic_probe(struct platform_device *pdev)
 {
 	struct sec_pmic_dev *iodev = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sec_platform_data *pdata = dev_get_platdata(iodev->dev);
 	struct regulator_config config = { };
@@ -1006,12 +1085,17 @@ static int s2mps11_pmic_probe(struct platform_device *pdev)
 		return -ENODEV;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct sec_platform_data *pdata = NULL;
 	struct of_regulator_match *rdata = NULL;
 	struct regulator_config config = { };
 	struct s2mps11_info *s2mps11;
 	int i, ret = 0;
 	const struct regulator_desc *regulators;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s2mps11 = devm_kzalloc(&pdev->dev, sizeof(struct s2mps11_info),
@@ -1019,6 +1103,7 @@ static int s2mps11_pmic_probe(struct platform_device *pdev)
 	if (!s2mps11)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_set_drvdata(pdev, s2mps11);
 
@@ -1074,6 +1159,8 @@ err:
 	for (i = 0; i < S2MPS11_REGULATOR_MAX; i++)
 		regulator_unregister(s2mps11->rdev[i]);
 =======
+=======
+>>>>>>> v3.18
 	s2mps11->dev_type = platform_get_device_id(pdev)->driver_data;
 	switch (s2mps11->dev_type) {
 	case S2MPS11X:
@@ -1170,11 +1257,15 @@ common_reg:
 
 out:
 	kfree(rdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int s2mps11_pmic_remove(struct platform_device *pdev)
 {
@@ -1190,10 +1281,15 @@ static int s2mps11_pmic_remove(struct platform_device *pdev)
 static const struct platform_device_id s2mps11_pmic_id[] = {
 	{ "s2mps11-pmic", 0},
 =======
+=======
+>>>>>>> v3.18
 static const struct platform_device_id s2mps11_pmic_id[] = {
 	{ "s2mps11-pmic", S2MPS11X},
 	{ "s2mps14-pmic", S2MPS14X},
 	{ "s2mpu02-pmic", S2MPU02},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ },
 };
@@ -1206,7 +1302,10 @@ static struct platform_driver s2mps11_pmic_driver = {
 	},
 	.probe = s2mps11_pmic_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = s2mps11_pmic_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = s2mps11_pmic_id,
@@ -1227,7 +1326,11 @@ module_exit(s2mps11_pmic_exit);
 /* Module information */
 MODULE_AUTHOR("Sangbeom Kim <sbkim73@samsung.com>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("SAMSUNG S2MPS11 Regulator Driver");
+=======
+MODULE_DESCRIPTION("SAMSUNG S2MPS11/S2MPS14/S2MPU02 Regulator Driver");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("SAMSUNG S2MPS11/S2MPS14/S2MPU02 Regulator Driver");
 >>>>>>> v3.18

@@ -2,7 +2,11 @@
 
   Intel 82599 Virtual Function driver
 <<<<<<< HEAD
+<<<<<<< HEAD
   Copyright(c) 1999 - 2012 Intel Corporation.
+=======
+  Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
   Copyright(c) 1999 - 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -54,7 +58,10 @@ struct ixgbe_mac_operations {
 	s32 (*clear_hw_cntrs)(struct ixgbe_hw *);
 	enum ixgbe_media_type (*get_media_type)(struct ixgbe_hw *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 (*get_supported_physical_layer)(struct ixgbe_hw *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s32 (*get_mac_addr)(struct ixgbe_hw *, u8 *);
@@ -180,7 +187,10 @@ struct ixgbevf_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IXGBE_FAILED_READ_REG 0xffffffffU
 
 #define IXGBE_REMOVED(a) unlikely(!(a))
@@ -212,6 +222,9 @@ static inline u32 ixgbe_read_reg_array(struct ixgbe_hw *hw, u32 reg,
 }
 #define IXGBE_READ_REG_ARRAY(h, r, o) ixgbe_read_reg_array(h, r, o)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ixgbevf_rlpml_set_vf(struct ixgbe_hw *hw, u16 max_size);
 int ixgbevf_negotiate_api_version(struct ixgbe_hw *hw, int api);

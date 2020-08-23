@@ -45,11 +45,17 @@ extern int remove_proc_subtree(const char *, struct proc_dir_entry *);
 #else /* CONFIG_PROC_FS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void proc_root_init(void)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void proc_flush_task(struct task_struct *task)
 {
@@ -78,6 +84,11 @@ static inline int remove_proc_subtree(const char *name, struct proc_dir_entry *p
 #endif /* CONFIG_PROC_FS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct net;
+
+>>>>>>> v3.18
 =======
 struct net;
 

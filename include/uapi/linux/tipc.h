@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * include/linux/tipc.h: Include file for TIPC socket interface
+=======
+ * include/uapi/linux/tipc.h: Header for TIPC socket interface
+>>>>>>> v3.18
 =======
  * include/uapi/linux/tipc.h: Header for TIPC socket interface
 >>>>>>> v3.18
@@ -43,6 +47,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sockios.h>
+>>>>>>> v3.18
 =======
 #include <linux/sockios.h>
 >>>>>>> v3.18
@@ -96,6 +104,10 @@ static inline unsigned int tipc_node(__u32 addr)
 #define TIPC_CFG_SRV		0	/* configuration service name type */
 #define TIPC_TOP_SRV		1	/* topology service name type */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TIPC_LINK_STATE		2	/* link state name type */
+>>>>>>> v3.18
 =======
 #define TIPC_LINK_STATE		2	/* link state name type */
 >>>>>>> v3.18
@@ -219,7 +231,10 @@ struct sockaddr_tipc {
 #define TIPC_SOCK_RECVQ_DEPTH	132	/* Default: none (read only) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Maximum sizes of TIPC bearer-related names (including terminating NULL)
  * The string formatting for each name element is:
@@ -241,5 +256,8 @@ struct tipc_sioc_ln_req {
 	__u32 bearer_id;
 	char linkname[TIPC_MAX_LINK_NAME];
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

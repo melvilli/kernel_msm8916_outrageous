@@ -13,12 +13,15 @@
 #include <linux/ceph/pagelist.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 
  * Maximum object name size 
  * (must be at least as big as RBD_MAX_MD_NAME_LEN -- currently 100) 
  */
 #define MAX_OBJ_NAME_SIZE 100
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct ceph_msg;
@@ -53,7 +56,11 @@ struct ceph_osd {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CEPH_OSD_MAX_OP	2
+=======
+#define CEPH_OSD_MAX_OP	3
+>>>>>>> v3.18
 =======
 #define CEPH_OSD_MAX_OP	3
 >>>>>>> v3.18
@@ -90,6 +97,10 @@ struct ceph_osd_data {
 struct ceph_osd_req_op {
 	u16 op;           /* CEPH_OSD_OP_* */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 flags;        /* CEPH_OSD_OP_FLAG_* */
+>>>>>>> v3.18
 =======
 	u32 flags;        /* CEPH_OSD_OP_FLAG_* */
 >>>>>>> v3.18
@@ -120,11 +131,17 @@ struct ceph_osd_req_op {
 			__u8 flag;
 		} watch;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		struct {
 			u64 expected_object_size;
 			u64 expected_write_size;
 		} alloc_hint;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };
@@ -137,7 +154,11 @@ struct ceph_osd_request {
 	struct list_head r_osd_item;
 	struct list_head r_linger_item;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head r_linger_osd;
+=======
+	struct list_head r_linger_osd_item;
+>>>>>>> v3.18
 =======
 	struct list_head r_linger_osd_item;
 >>>>>>> v3.18
@@ -182,6 +203,7 @@ struct ceph_osd_request {
 	void *r_priv;			      /* ditto */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char              r_oid[MAX_OBJ_NAME_SIZE];          /* object name */
 	int               r_oid_len;
 	u64               r_snapid;
@@ -192,6 +214,8 @@ struct ceph_osd_request {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct ceph_object_locator r_base_oloc;
 	struct ceph_object_id r_base_oid;
 	struct ceph_object_locator r_target_oloc;
@@ -207,6 +231,9 @@ struct ceph_request_redirect {
 	struct ceph_object_locator oloc;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ceph_osd_event {
 	u64 cookie;
@@ -334,11 +361,17 @@ extern void osd_req_op_watch_init(struct ceph_osd_request *osd_req,
 					unsigned int which, u16 opcode,
 					u64 cookie, u64 version, int flag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern void osd_req_op_alloc_hint_init(struct ceph_osd_request *osd_req,
 				       unsigned int which,
 				       u64 expected_object_size,
 				       u64 expected_write_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct ceph_osd_request *ceph_osdc_alloc_request(struct ceph_osd_client *osdc,
@@ -364,6 +397,7 @@ extern struct ceph_osd_request *ceph_osdc_new_request(struct ceph_osd_client *,
 extern void ceph_osdc_set_request_linger(struct ceph_osd_client *osdc,
 					 struct ceph_osd_request *req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ceph_osdc_unregister_linger_request(struct ceph_osd_client *osdc,
 						struct ceph_osd_request *req);
 
@@ -381,11 +415,20 @@ static inline void ceph_osdc_put_request(struct ceph_osd_request *req)
 extern void ceph_osdc_get_request(struct ceph_osd_request *req);
 extern void ceph_osdc_put_request(struct ceph_osd_request *req);
 >>>>>>> v3.18
+=======
+
+extern void ceph_osdc_get_request(struct ceph_osd_request *req);
+extern void ceph_osdc_put_request(struct ceph_osd_request *req);
+>>>>>>> v3.18
 
 extern int ceph_osdc_start_request(struct ceph_osd_client *osdc,
 				   struct ceph_osd_request *req,
 				   bool nofail);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void ceph_osdc_cancel_request(struct ceph_osd_request *req);
+>>>>>>> v3.18
 =======
 extern void ceph_osdc_cancel_request(struct ceph_osd_request *req);
 >>>>>>> v3.18

@@ -23,7 +23,11 @@ ENTRY(strrchr)
 		bne	1b
 		mov	r0, r3
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18

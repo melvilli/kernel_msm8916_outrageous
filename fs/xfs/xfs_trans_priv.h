@@ -26,6 +26,11 @@ struct xfs_ail;
 struct xfs_log_vec;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+void	xfs_trans_init(struct xfs_mount *);
+>>>>>>> v3.18
 =======
 
 void	xfs_trans_init(struct xfs_mount *);
@@ -89,7 +94,10 @@ void	xfs_trans_ail_update_bulk(struct xfs_ail *ailp,
 				struct xfs_log_item **log_items, int nr_items,
 				xfs_lsn_t lsn) __releases(ailp->xa_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Return a pointer to the first item in the AIL.  If the AIL is empty, then
  * return NULL.
@@ -102,6 +110,9 @@ xfs_ail_min(
 					li_ail);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void
 xfs_trans_ail_update(
@@ -140,8 +151,12 @@ struct xfs_log_item *	xfs_trans_ail_cursor_last(struct xfs_ail *ailp,
 struct xfs_log_item *	xfs_trans_ail_cursor_next(struct xfs_ail *ailp,
 					struct xfs_ail_cursor *cur);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void			xfs_trans_ail_cursor_done(struct xfs_ail *ailp,
 					struct xfs_ail_cursor *cur);
+=======
+void			xfs_trans_ail_cursor_done(struct xfs_ail_cursor *cur);
+>>>>>>> v3.18
 =======
 void			xfs_trans_ail_cursor_done(struct xfs_ail_cursor *cur);
 >>>>>>> v3.18

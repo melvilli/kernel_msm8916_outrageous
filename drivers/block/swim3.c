@@ -31,6 +31,10 @@
 #include <linux/module.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/wait.h>
+>>>>>>> v3.18
 =======
 #include <linux/wait.h>
 >>>>>>> v3.18
@@ -346,7 +350,11 @@ static void start_request(struct floppy_state *fs)
 			  req->rq_disk->disk_name, req->cmd,
 			  (long)blk_rq_pos(req), blk_rq_sectors(req),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  req->buffer);
+=======
+			  bio_data(req->bio));
+>>>>>>> v3.18
 =======
 			  bio_data(req->bio));
 >>>>>>> v3.18
@@ -487,17 +495,23 @@ static inline void setup_transfer(struct floppy_state *fs)
 		init_dma(cp, OUTPUT_MORE, write_preamble, sizeof(write_preamble));
 		++cp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		init_dma(cp, OUTPUT_MORE, req->buffer, 512);
 		++cp;
 		init_dma(cp, OUTPUT_LAST, write_postamble, sizeof(write_postamble));
 	} else {
 		init_dma(cp, INPUT_LAST, req->buffer, n * 512);
 =======
+=======
+>>>>>>> v3.18
 		init_dma(cp, OUTPUT_MORE, bio_data(req->bio), 512);
 		++cp;
 		init_dma(cp, OUTPUT_LAST, write_postamble, sizeof(write_postamble));
 	} else {
 		init_dma(cp, INPUT_LAST, bio_data(req->bio), n * 512);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	++cp;
@@ -857,6 +871,7 @@ static int grab_drive(struct floppy_state *fs, enum swim_state state,
 	if (fs->state != idle && fs->state != available) {
 		++fs->wanted;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (fs->state != available) {
 			spin_unlock_irqrestore(&swim3_lock, flags);
 			if (interruptible && signal_pending(current)) {
@@ -866,6 +881,8 @@ static int grab_drive(struct floppy_state *fs, enum swim_state state,
 			interruptible_sleep_on(&fs->wait);
 			spin_lock_irqsave(&swim3_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 		/* this will enable irqs in order to sleep */
 		if (!interruptible)
 			wait_event_lock_irq(fs->wait,
@@ -877,6 +894,9 @@ static int grab_drive(struct floppy_state *fs, enum swim_state state,
 			--fs->wanted;
 			spin_unlock_irqrestore(&swim3_lock, flags);
 			return -EINTR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		--fs->wanted;

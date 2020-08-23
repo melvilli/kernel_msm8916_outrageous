@@ -621,7 +621,11 @@ __initcall(nw_hw_init);
  */
 static void __init
 <<<<<<< HEAD
+<<<<<<< HEAD
 fixup_netwinder(struct tag *tags, char **cmdline, struct meminfo *mi)
+=======
+fixup_netwinder(struct tag *tags, char **cmdline)
+>>>>>>> v3.18
 =======
 fixup_netwinder(struct tag *tags, char **cmdline)
 >>>>>>> v3.18
@@ -697,7 +701,11 @@ static void netwinder_led_set(struct led_classdev *cdev,
 	u32 reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&nw_gpio_lock, flags);
+=======
+	raw_spin_lock_irqsave(&nw_gpio_lock, flags);
+>>>>>>> v3.18
 =======
 	raw_spin_lock_irqsave(&nw_gpio_lock, flags);
 >>>>>>> v3.18
@@ -708,7 +716,11 @@ static void netwinder_led_set(struct led_classdev *cdev,
 		reg |= led->mask;
 	nw_gpio_modify_op(led->mask, reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&nw_gpio_lock, flags);
+=======
+	raw_spin_unlock_irqrestore(&nw_gpio_lock, flags);
+>>>>>>> v3.18
 =======
 	raw_spin_unlock_irqrestore(&nw_gpio_lock, flags);
 >>>>>>> v3.18
@@ -722,9 +734,15 @@ static enum led_brightness netwinder_led_get(struct led_classdev *cdev)
 	u32 reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&nw_gpio_lock, flags);
 	reg = nw_gpio_read();
 	spin_unlock_irqrestore(&nw_gpio_lock, flags);
+=======
+	raw_spin_lock_irqsave(&nw_gpio_lock, flags);
+	reg = nw_gpio_read();
+	raw_spin_unlock_irqrestore(&nw_gpio_lock, flags);
+>>>>>>> v3.18
 =======
 	raw_spin_lock_irqsave(&nw_gpio_lock, flags);
 	reg = nw_gpio_read();

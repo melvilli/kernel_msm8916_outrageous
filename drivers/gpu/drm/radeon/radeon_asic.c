@@ -127,13 +127,19 @@ static void radeon_register_accessor_init(struct radeon_device *rdev)
 		rdev->mc_wreg = &rs780_mc_wreg;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rdev->family >= CHIP_R600) {
 =======
+=======
+>>>>>>> v3.18
 
 	if (rdev->family >= CHIP_BONAIRE) {
 		rdev->pciep_rreg = &cik_pciep_rreg;
 		rdev->pciep_wreg = &cik_pciep_wreg;
 	} else if (rdev->family >= CHIP_R600) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rdev->pciep_rreg = &r600_pciep_rreg;
 		rdev->pciep_wreg = &r600_pciep_wreg;
@@ -177,7 +183,10 @@ void radeon_agp_disable(struct radeon_device *rdev)
  * ASIC
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static struct radeon_asic_ring r100_gfx_ring = {
 	.ib_execute = &r100_ring_ib_execute,
@@ -193,6 +202,9 @@ static struct radeon_asic_ring r100_gfx_ring = {
 	.set_wptr = &r100_gfx_set_wptr,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct radeon_asic r100_asic = {
 	.init = &r100_init,
@@ -202,7 +214,11 @@ static struct radeon_asic r100_asic = {
 	.vga_set_state = &r100_vga_set_state,
 	.asic_reset = &r100_asic_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = NULL,
+=======
+	.mmio_hdp_flush = NULL,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = NULL,
 >>>>>>> v3.18
@@ -214,6 +230,7 @@ static struct radeon_asic r100_asic = {
 	},
 	.ring = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r100_ring_ib_execute,
 			.emit_fence = &r100_fence_ring_emit,
@@ -224,6 +241,9 @@ static struct radeon_asic r100_asic = {
 			.ib_test = &r100_ib_test,
 			.is_lockup = &r100_gpu_is_lockup,
 		}
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &r100_gfx_ring
+>>>>>>> v3.18
 =======
 		[RADEON_RING_TYPE_GFX_INDEX] = &r100_gfx_ring
 >>>>>>> v3.18
@@ -273,9 +293,14 @@ static struct radeon_asic r100_asic = {
 	},
 	.pflip = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pre_page_flip = &r100_pre_page_flip,
 		.page_flip = &r100_page_flip,
 		.post_page_flip = &r100_post_page_flip,
+=======
+		.page_flip = &r100_page_flip,
+		.page_flip_pending = &r100_page_flip_pending,
+>>>>>>> v3.18
 =======
 		.page_flip = &r100_page_flip,
 		.page_flip_pending = &r100_page_flip_pending,
@@ -291,7 +316,11 @@ static struct radeon_asic r200_asic = {
 	.vga_set_state = &r100_vga_set_state,
 	.asic_reset = &r100_asic_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = NULL,
+=======
+	.mmio_hdp_flush = NULL,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = NULL,
 >>>>>>> v3.18
@@ -303,6 +332,7 @@ static struct radeon_asic r200_asic = {
 	},
 	.ring = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r100_ring_ib_execute,
 			.emit_fence = &r100_fence_ring_emit,
@@ -313,6 +343,9 @@ static struct radeon_asic r200_asic = {
 			.ib_test = &r100_ib_test,
 			.is_lockup = &r100_gpu_is_lockup,
 		}
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &r100_gfx_ring
+>>>>>>> v3.18
 =======
 		[RADEON_RING_TYPE_GFX_INDEX] = &r100_gfx_ring
 >>>>>>> v3.18
@@ -362,6 +395,7 @@ static struct radeon_asic r200_asic = {
 	},
 	.pflip = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pre_page_flip = &r100_pre_page_flip,
 		.page_flip = &r100_page_flip,
 		.post_page_flip = &r100_post_page_flip,
@@ -369,6 +403,8 @@ static struct radeon_asic r200_asic = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 		.page_flip = &r100_page_flip,
 		.page_flip_pending = &r100_page_flip_pending,
 	},
@@ -388,6 +424,9 @@ static struct radeon_asic_ring r300_gfx_ring = {
 	.set_wptr = &r100_gfx_set_wptr,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct radeon_asic r300_asic = {
 	.init = &r300_init,
@@ -397,7 +436,11 @@ static struct radeon_asic r300_asic = {
 	.vga_set_state = &r100_vga_set_state,
 	.asic_reset = &r300_asic_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = NULL,
+=======
+	.mmio_hdp_flush = NULL,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = NULL,
 >>>>>>> v3.18
@@ -409,6 +452,7 @@ static struct radeon_asic r300_asic = {
 	},
 	.ring = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r100_ring_ib_execute,
 			.emit_fence = &r300_fence_ring_emit,
@@ -419,6 +463,9 @@ static struct radeon_asic r300_asic = {
 			.ib_test = &r100_ib_test,
 			.is_lockup = &r100_gpu_is_lockup,
 		}
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
+>>>>>>> v3.18
 =======
 		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
 >>>>>>> v3.18
@@ -468,9 +515,14 @@ static struct radeon_asic r300_asic = {
 	},
 	.pflip = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pre_page_flip = &r100_pre_page_flip,
 		.page_flip = &r100_page_flip,
 		.post_page_flip = &r100_post_page_flip,
+=======
+		.page_flip = &r100_page_flip,
+		.page_flip_pending = &r100_page_flip_pending,
+>>>>>>> v3.18
 =======
 		.page_flip = &r100_page_flip,
 		.page_flip_pending = &r100_page_flip_pending,
@@ -486,7 +538,11 @@ static struct radeon_asic r300_asic_pcie = {
 	.vga_set_state = &r100_vga_set_state,
 	.asic_reset = &r300_asic_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = NULL,
+=======
+	.mmio_hdp_flush = NULL,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = NULL,
 >>>>>>> v3.18
@@ -498,6 +554,7 @@ static struct radeon_asic r300_asic_pcie = {
 	},
 	.ring = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r100_ring_ib_execute,
 			.emit_fence = &r300_fence_ring_emit,
@@ -508,6 +565,9 @@ static struct radeon_asic r300_asic_pcie = {
 			.ib_test = &r100_ib_test,
 			.is_lockup = &r100_gpu_is_lockup,
 		}
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
+>>>>>>> v3.18
 =======
 		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
 >>>>>>> v3.18
@@ -557,9 +617,14 @@ static struct radeon_asic r300_asic_pcie = {
 	},
 	.pflip = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pre_page_flip = &r100_pre_page_flip,
 		.page_flip = &r100_page_flip,
 		.post_page_flip = &r100_post_page_flip,
+=======
+		.page_flip = &r100_page_flip,
+		.page_flip_pending = &r100_page_flip_pending,
+>>>>>>> v3.18
 =======
 		.page_flip = &r100_page_flip,
 		.page_flip_pending = &r100_page_flip_pending,
@@ -575,7 +640,11 @@ static struct radeon_asic r420_asic = {
 	.vga_set_state = &r100_vga_set_state,
 	.asic_reset = &r300_asic_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = NULL,
+=======
+	.mmio_hdp_flush = NULL,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = NULL,
 >>>>>>> v3.18
@@ -587,6 +656,7 @@ static struct radeon_asic r420_asic = {
 	},
 	.ring = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r100_ring_ib_execute,
 			.emit_fence = &r300_fence_ring_emit,
@@ -597,6 +667,9 @@ static struct radeon_asic r420_asic = {
 			.ib_test = &r100_ib_test,
 			.is_lockup = &r100_gpu_is_lockup,
 		}
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
+>>>>>>> v3.18
 =======
 		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
 >>>>>>> v3.18
@@ -646,9 +719,14 @@ static struct radeon_asic r420_asic = {
 	},
 	.pflip = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pre_page_flip = &r100_pre_page_flip,
 		.page_flip = &r100_page_flip,
 		.post_page_flip = &r100_post_page_flip,
+=======
+		.page_flip = &r100_page_flip,
+		.page_flip_pending = &r100_page_flip_pending,
+>>>>>>> v3.18
 =======
 		.page_flip = &r100_page_flip,
 		.page_flip_pending = &r100_page_flip_pending,
@@ -664,7 +742,11 @@ static struct radeon_asic rs400_asic = {
 	.vga_set_state = &r100_vga_set_state,
 	.asic_reset = &r300_asic_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = NULL,
+=======
+	.mmio_hdp_flush = NULL,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = NULL,
 >>>>>>> v3.18
@@ -676,6 +758,7 @@ static struct radeon_asic rs400_asic = {
 	},
 	.ring = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r100_ring_ib_execute,
 			.emit_fence = &r300_fence_ring_emit,
@@ -686,6 +769,9 @@ static struct radeon_asic rs400_asic = {
 			.ib_test = &r100_ib_test,
 			.is_lockup = &r100_gpu_is_lockup,
 		}
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
+>>>>>>> v3.18
 =======
 		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
 >>>>>>> v3.18
@@ -735,9 +821,14 @@ static struct radeon_asic rs400_asic = {
 	},
 	.pflip = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pre_page_flip = &r100_pre_page_flip,
 		.page_flip = &r100_page_flip,
 		.post_page_flip = &r100_post_page_flip,
+=======
+		.page_flip = &r100_page_flip,
+		.page_flip_pending = &r100_page_flip_pending,
+>>>>>>> v3.18
 =======
 		.page_flip = &r100_page_flip,
 		.page_flip_pending = &r100_page_flip_pending,
@@ -753,7 +844,11 @@ static struct radeon_asic rs600_asic = {
 	.vga_set_state = &r100_vga_set_state,
 	.asic_reset = &rs600_asic_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = NULL,
+=======
+	.mmio_hdp_flush = NULL,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = NULL,
 >>>>>>> v3.18
@@ -765,6 +860,7 @@ static struct radeon_asic rs600_asic = {
 	},
 	.ring = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r100_ring_ib_execute,
 			.emit_fence = &r300_fence_ring_emit,
@@ -775,6 +871,9 @@ static struct radeon_asic rs600_asic = {
 			.ib_test = &r100_ib_test,
 			.is_lockup = &r100_gpu_is_lockup,
 		}
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
+>>>>>>> v3.18
 =======
 		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
 >>>>>>> v3.18
@@ -826,9 +925,14 @@ static struct radeon_asic rs600_asic = {
 	},
 	.pflip = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pre_page_flip = &rs600_pre_page_flip,
 		.page_flip = &rs600_page_flip,
 		.post_page_flip = &rs600_post_page_flip,
+=======
+		.page_flip = &rs600_page_flip,
+		.page_flip_pending = &rs600_page_flip_pending,
+>>>>>>> v3.18
 =======
 		.page_flip = &rs600_page_flip,
 		.page_flip_pending = &rs600_page_flip_pending,
@@ -844,7 +948,11 @@ static struct radeon_asic rs690_asic = {
 	.vga_set_state = &r100_vga_set_state,
 	.asic_reset = &rs600_asic_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = NULL,
+=======
+	.mmio_hdp_flush = NULL,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = NULL,
 >>>>>>> v3.18
@@ -856,6 +964,7 @@ static struct radeon_asic rs690_asic = {
 	},
 	.ring = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r100_ring_ib_execute,
 			.emit_fence = &r300_fence_ring_emit,
@@ -866,6 +975,9 @@ static struct radeon_asic rs690_asic = {
 			.ib_test = &r100_ib_test,
 			.is_lockup = &r100_gpu_is_lockup,
 		}
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
+>>>>>>> v3.18
 =======
 		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
 >>>>>>> v3.18
@@ -917,9 +1029,14 @@ static struct radeon_asic rs690_asic = {
 	},
 	.pflip = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pre_page_flip = &rs600_pre_page_flip,
 		.page_flip = &rs600_page_flip,
 		.post_page_flip = &rs600_post_page_flip,
+=======
+		.page_flip = &rs600_page_flip,
+		.page_flip_pending = &rs600_page_flip_pending,
+>>>>>>> v3.18
 =======
 		.page_flip = &rs600_page_flip,
 		.page_flip_pending = &rs600_page_flip_pending,
@@ -935,7 +1052,11 @@ static struct radeon_asic rv515_asic = {
 	.vga_set_state = &r100_vga_set_state,
 	.asic_reset = &rs600_asic_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = NULL,
+=======
+	.mmio_hdp_flush = NULL,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = NULL,
 >>>>>>> v3.18
@@ -947,6 +1068,7 @@ static struct radeon_asic rv515_asic = {
 	},
 	.ring = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r100_ring_ib_execute,
 			.emit_fence = &r300_fence_ring_emit,
@@ -957,6 +1079,9 @@ static struct radeon_asic rv515_asic = {
 			.ib_test = &r100_ib_test,
 			.is_lockup = &r100_gpu_is_lockup,
 		}
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
+>>>>>>> v3.18
 =======
 		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
 >>>>>>> v3.18
@@ -1006,9 +1131,14 @@ static struct radeon_asic rv515_asic = {
 	},
 	.pflip = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pre_page_flip = &rs600_pre_page_flip,
 		.page_flip = &rs600_page_flip,
 		.post_page_flip = &rs600_post_page_flip,
+=======
+		.page_flip = &rs600_page_flip,
+		.page_flip_pending = &rs600_page_flip_pending,
+>>>>>>> v3.18
 =======
 		.page_flip = &rs600_page_flip,
 		.page_flip_pending = &rs600_page_flip_pending,
@@ -1024,7 +1154,11 @@ static struct radeon_asic r520_asic = {
 	.vga_set_state = &r100_vga_set_state,
 	.asic_reset = &rs600_asic_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = NULL,
+=======
+	.mmio_hdp_flush = NULL,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = NULL,
 >>>>>>> v3.18
@@ -1036,6 +1170,7 @@ static struct radeon_asic r520_asic = {
 	},
 	.ring = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r100_ring_ib_execute,
 			.emit_fence = &r300_fence_ring_emit,
@@ -1046,6 +1181,9 @@ static struct radeon_asic r520_asic = {
 			.ib_test = &r100_ib_test,
 			.is_lockup = &r100_gpu_is_lockup,
 		}
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
+>>>>>>> v3.18
 =======
 		[RADEON_RING_TYPE_GFX_INDEX] = &r300_gfx_ring
 >>>>>>> v3.18
@@ -1095,6 +1233,7 @@ static struct radeon_asic r520_asic = {
 	},
 	.pflip = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pre_page_flip = &rs600_pre_page_flip,
 		.page_flip = &rs600_page_flip,
 		.post_page_flip = &rs600_post_page_flip,
@@ -1102,6 +1241,8 @@ static struct radeon_asic r520_asic = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 		.page_flip = &rs600_page_flip,
 		.page_flip_pending = &rs600_page_flip_pending,
 	},
@@ -1133,6 +1274,9 @@ static struct radeon_asic_ring r600_dma_ring = {
 	.set_wptr = &r600_dma_set_wptr,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct radeon_asic r600_asic = {
 	.init = &r600_init,
@@ -1142,7 +1286,11 @@ static struct radeon_asic r600_asic = {
 	.vga_set_state = &r600_vga_set_state,
 	.asic_reset = &r600_asic_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = r600_ioctl_wait_idle,
+=======
+	.mmio_hdp_flush = r600_mmio_hdp_flush,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = r600_mmio_hdp_flush,
 >>>>>>> v3.18
@@ -1155,6 +1303,7 @@ static struct radeon_asic r600_asic = {
 		.set_page = &rs600_gart_set_page,
 	},
 	.ring = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r600_ring_ib_execute,
@@ -1175,6 +1324,8 @@ static struct radeon_asic r600_asic = {
 			.is_lockup = &r600_dma_is_lockup,
 		}
 =======
+=======
+>>>>>>> v3.18
 		[RADEON_RING_TYPE_GFX_INDEX] = &r600_gfx_ring,
 		[R600_RING_TYPE_DMA_INDEX] = &r600_dma_ring,
 	},
@@ -1263,6 +1414,9 @@ static struct radeon_asic rv6xx_asic = {
 		[RADEON_RING_TYPE_GFX_INDEX] = &r600_gfx_ring,
 		[R600_RING_TYPE_DMA_INDEX] = &r600_dma_ring,
 		[R600_RING_TYPE_UVD_INDEX] = &rv6xx_uvd_ring,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.irq = {
@@ -1280,17 +1434,23 @@ static struct radeon_asic rv6xx_asic = {
 	},
 	.copy = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.blit = &r600_copy_blit,
 		.blit_ring_index = RADEON_RING_TYPE_GFX_INDEX,
 		.dma = &r600_copy_dma,
 		.dma_ring_index = R600_RING_TYPE_DMA_INDEX,
 		.copy = &r600_copy_blit,
 =======
+=======
+>>>>>>> v3.18
 		.blit = &r600_copy_cpdma,
 		.blit_ring_index = RADEON_RING_TYPE_GFX_INDEX,
 		.dma = &r600_copy_dma,
 		.dma_ring_index = R600_RING_TYPE_DMA_INDEX,
 		.copy = &r600_copy_cpdma,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.copy_ring_index = RADEON_RING_TYPE_GFX_INDEX,
 	},
@@ -1318,12 +1478,15 @@ static struct radeon_asic rv6xx_asic = {
 		.set_pcie_lanes = &r600_set_pcie_lanes,
 		.set_clock_gating = NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.pflip = {
 		.pre_page_flip = &rs600_pre_page_flip,
 		.page_flip = &rs600_page_flip,
 		.post_page_flip = &rs600_post_page_flip,
 =======
+=======
+>>>>>>> v3.18
 		.get_temperature = &rv6xx_get_temp,
 		.set_uvd_clocks = &r600_set_uvd_clocks,
 	},
@@ -1347,6 +1510,9 @@ static struct radeon_asic rv6xx_asic = {
 	.pflip = {
 		.page_flip = &rs600_page_flip,
 		.page_flip_pending = &rs600_page_flip_pending,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -1359,7 +1525,11 @@ static struct radeon_asic rs780_asic = {
 	.vga_set_state = &r600_vga_set_state,
 	.asic_reset = &r600_asic_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = r600_ioctl_wait_idle,
+=======
+	.mmio_hdp_flush = r600_mmio_hdp_flush,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = r600_mmio_hdp_flush,
 >>>>>>> v3.18
@@ -1372,6 +1542,7 @@ static struct radeon_asic rs780_asic = {
 		.set_page = &rs600_gart_set_page,
 	},
 	.ring = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r600_ring_ib_execute,
@@ -1396,6 +1567,11 @@ static struct radeon_asic rs780_asic = {
 		[R600_RING_TYPE_DMA_INDEX] = &r600_dma_ring,
 		[R600_RING_TYPE_UVD_INDEX] = &rv6xx_uvd_ring,
 >>>>>>> v3.18
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &r600_gfx_ring,
+		[R600_RING_TYPE_DMA_INDEX] = &r600_dma_ring,
+		[R600_RING_TYPE_UVD_INDEX] = &rv6xx_uvd_ring,
+>>>>>>> v3.18
 	},
 	.irq = {
 		.set = &r600_irq_set,
@@ -1412,17 +1588,23 @@ static struct radeon_asic rs780_asic = {
 	},
 	.copy = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.blit = &r600_copy_blit,
 		.blit_ring_index = RADEON_RING_TYPE_GFX_INDEX,
 		.dma = &r600_copy_dma,
 		.dma_ring_index = R600_RING_TYPE_DMA_INDEX,
 		.copy = &r600_copy_blit,
 =======
+=======
+>>>>>>> v3.18
 		.blit = &r600_copy_cpdma,
 		.blit_ring_index = RADEON_RING_TYPE_GFX_INDEX,
 		.dma = &r600_copy_dma,
 		.dma_ring_index = R600_RING_TYPE_DMA_INDEX,
 		.copy = &r600_copy_cpdma,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.copy_ring_index = RADEON_RING_TYPE_GFX_INDEX,
 	},
@@ -1450,6 +1632,7 @@ static struct radeon_asic rs780_asic = {
 		.set_pcie_lanes = NULL,
 		.set_clock_gating = NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.pflip = {
 		.pre_page_flip = &rs600_pre_page_flip,
@@ -1459,6 +1642,8 @@ static struct radeon_asic rs780_asic = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 		.get_temperature = &rv6xx_get_temp,
 		.set_uvd_clocks = &r600_set_uvd_clocks,
 	},
@@ -1498,6 +1683,9 @@ static struct radeon_asic_ring rv770_uvd_ring = {
 	.set_wptr = &uvd_v1_0_set_wptr,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct radeon_asic rv770_asic = {
 	.init = &rv770_init,
@@ -1507,7 +1695,11 @@ static struct radeon_asic rv770_asic = {
 	.asic_reset = &r600_asic_reset,
 	.vga_set_state = &r600_vga_set_state,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = r600_ioctl_wait_idle,
+=======
+	.mmio_hdp_flush = r600_mmio_hdp_flush,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = r600_mmio_hdp_flush,
 >>>>>>> v3.18
@@ -1520,6 +1712,7 @@ static struct radeon_asic rv770_asic = {
 		.set_page = &rs600_gart_set_page,
 	},
 	.ring = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &r600_ring_ib_execute,
@@ -1553,6 +1746,11 @@ static struct radeon_asic rv770_asic = {
 		[R600_RING_TYPE_DMA_INDEX] = &r600_dma_ring,
 		[R600_RING_TYPE_UVD_INDEX] = &rv770_uvd_ring,
 >>>>>>> v3.18
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &r600_gfx_ring,
+		[R600_RING_TYPE_DMA_INDEX] = &r600_dma_ring,
+		[R600_RING_TYPE_UVD_INDEX] = &rv770_uvd_ring,
+>>>>>>> v3.18
 	},
 	.irq = {
 		.set = &r600_irq_set,
@@ -1566,15 +1764,21 @@ static struct radeon_asic rv770_asic = {
 		.get_backlight_level = &atombios_get_backlight_level,
 		.hdmi_enable = &r600_hdmi_enable,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.hdmi_setmode = &r600_hdmi_setmode,
 	},
 	.copy = {
 		.blit = &r600_copy_blit,
 =======
+=======
+>>>>>>> v3.18
 		.hdmi_setmode = &dce3_1_hdmi_setmode,
 	},
 	.copy = {
 		.blit = &r600_copy_cpdma,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.blit_ring_index = RADEON_RING_TYPE_GFX_INDEX,
 		.dma = &rv770_copy_dma,
@@ -1607,6 +1811,7 @@ static struct radeon_asic rv770_asic = {
 		.set_clock_gating = &radeon_atom_set_clock_gating,
 		.set_uvd_clocks = &rv770_set_uvd_clocks,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.pflip = {
 		.pre_page_flip = &rs600_pre_page_flip,
@@ -1616,6 +1821,8 @@ static struct radeon_asic rv770_asic = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 		.get_temperature = &rv770_get_temp,
 	},
 	.dpm = {
@@ -1668,6 +1875,9 @@ static struct radeon_asic_ring evergreen_dma_ring = {
 	.set_wptr = &r600_dma_set_wptr,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct radeon_asic evergreen_asic = {
 	.init = &evergreen_init,
@@ -1677,7 +1887,11 @@ static struct radeon_asic evergreen_asic = {
 	.asic_reset = &evergreen_asic_reset,
 	.vga_set_state = &r600_vga_set_state,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = r600_ioctl_wait_idle,
+=======
+	.mmio_hdp_flush = r600_mmio_hdp_flush,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = r600_mmio_hdp_flush,
 >>>>>>> v3.18
@@ -1690,6 +1904,7 @@ static struct radeon_asic evergreen_asic = {
 		.set_page = &rs600_gart_set_page,
 	},
 	.ring = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &evergreen_ring_ib_execute,
@@ -1723,6 +1938,11 @@ static struct radeon_asic evergreen_asic = {
 		[R600_RING_TYPE_DMA_INDEX] = &evergreen_dma_ring,
 		[R600_RING_TYPE_UVD_INDEX] = &rv770_uvd_ring,
 >>>>>>> v3.18
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &evergreen_gfx_ring,
+		[R600_RING_TYPE_DMA_INDEX] = &evergreen_dma_ring,
+		[R600_RING_TYPE_UVD_INDEX] = &rv770_uvd_ring,
+>>>>>>> v3.18
 	},
 	.irq = {
 		.set = &evergreen_irq_set,
@@ -1739,7 +1959,11 @@ static struct radeon_asic evergreen_asic = {
 	},
 	.copy = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.blit = &r600_copy_blit,
+=======
+		.blit = &r600_copy_cpdma,
+>>>>>>> v3.18
 =======
 		.blit = &r600_copy_cpdma,
 >>>>>>> v3.18
@@ -1774,12 +1998,15 @@ static struct radeon_asic evergreen_asic = {
 		.set_clock_gating = NULL,
 		.set_uvd_clocks = &evergreen_set_uvd_clocks,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.pflip = {
 		.pre_page_flip = &evergreen_pre_page_flip,
 		.page_flip = &evergreen_page_flip,
 		.post_page_flip = &evergreen_post_page_flip,
 =======
+=======
+>>>>>>> v3.18
 		.get_temperature = &evergreen_get_temp,
 	},
 	.dpm = {
@@ -1803,6 +2030,9 @@ static struct radeon_asic evergreen_asic = {
 	.pflip = {
 		.page_flip = &evergreen_page_flip,
 		.page_flip_pending = &evergreen_page_flip_pending,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -1815,7 +2045,11 @@ static struct radeon_asic sumo_asic = {
 	.asic_reset = &evergreen_asic_reset,
 	.vga_set_state = &r600_vga_set_state,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = r600_ioctl_wait_idle,
+=======
+	.mmio_hdp_flush = r600_mmio_hdp_flush,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = r600_mmio_hdp_flush,
 >>>>>>> v3.18
@@ -1828,6 +2062,7 @@ static struct radeon_asic sumo_asic = {
 		.set_page = &rs600_gart_set_page,
 	},
 	.ring = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &evergreen_ring_ib_execute,
@@ -1861,6 +2096,11 @@ static struct radeon_asic sumo_asic = {
 		[R600_RING_TYPE_DMA_INDEX] = &evergreen_dma_ring,
 		[R600_RING_TYPE_UVD_INDEX] = &rv770_uvd_ring,
 >>>>>>> v3.18
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &evergreen_gfx_ring,
+		[R600_RING_TYPE_DMA_INDEX] = &evergreen_dma_ring,
+		[R600_RING_TYPE_UVD_INDEX] = &rv770_uvd_ring,
+>>>>>>> v3.18
 	},
 	.irq = {
 		.set = &evergreen_irq_set,
@@ -1877,7 +2117,11 @@ static struct radeon_asic sumo_asic = {
 	},
 	.copy = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.blit = &r600_copy_blit,
+=======
+		.blit = &r600_copy_cpdma,
+>>>>>>> v3.18
 =======
 		.blit = &r600_copy_cpdma,
 >>>>>>> v3.18
@@ -1912,12 +2156,15 @@ static struct radeon_asic sumo_asic = {
 		.set_clock_gating = NULL,
 		.set_uvd_clocks = &sumo_set_uvd_clocks,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.pflip = {
 		.pre_page_flip = &evergreen_pre_page_flip,
 		.page_flip = &evergreen_page_flip,
 		.post_page_flip = &evergreen_post_page_flip,
 =======
+=======
+>>>>>>> v3.18
 		.get_temperature = &sumo_get_temp,
 	},
 	.dpm = {
@@ -1940,6 +2187,9 @@ static struct radeon_asic sumo_asic = {
 	.pflip = {
 		.page_flip = &evergreen_page_flip,
 		.page_flip_pending = &evergreen_page_flip_pending,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -1952,7 +2202,11 @@ static struct radeon_asic btc_asic = {
 	.asic_reset = &evergreen_asic_reset,
 	.vga_set_state = &r600_vga_set_state,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = r600_ioctl_wait_idle,
+=======
+	.mmio_hdp_flush = r600_mmio_hdp_flush,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = r600_mmio_hdp_flush,
 >>>>>>> v3.18
@@ -1965,6 +2219,7 @@ static struct radeon_asic btc_asic = {
 		.set_page = &rs600_gart_set_page,
 	},
 	.ring = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		[RADEON_RING_TYPE_GFX_INDEX] = {
 			.ib_execute = &evergreen_ring_ib_execute,
@@ -1998,6 +2253,11 @@ static struct radeon_asic btc_asic = {
 		[R600_RING_TYPE_DMA_INDEX] = &evergreen_dma_ring,
 		[R600_RING_TYPE_UVD_INDEX] = &rv770_uvd_ring,
 >>>>>>> v3.18
+=======
+		[RADEON_RING_TYPE_GFX_INDEX] = &evergreen_gfx_ring,
+		[R600_RING_TYPE_DMA_INDEX] = &evergreen_dma_ring,
+		[R600_RING_TYPE_UVD_INDEX] = &rv770_uvd_ring,
+>>>>>>> v3.18
 	},
 	.irq = {
 		.set = &evergreen_irq_set,
@@ -2014,7 +2274,11 @@ static struct radeon_asic btc_asic = {
 	},
 	.copy = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.blit = &r600_copy_blit,
+=======
+		.blit = &r600_copy_cpdma,
+>>>>>>> v3.18
 =======
 		.blit = &r600_copy_cpdma,
 >>>>>>> v3.18
@@ -2049,6 +2313,7 @@ static struct radeon_asic btc_asic = {
 		.set_clock_gating = NULL,
 		.set_uvd_clocks = &evergreen_set_uvd_clocks,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.pflip = {
 		.pre_page_flip = &evergreen_pre_page_flip,
@@ -2058,6 +2323,8 @@ static struct radeon_asic btc_asic = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 		.get_temperature = &evergreen_get_temp,
 	},
 	.dpm = {
@@ -2127,6 +2394,9 @@ static struct radeon_asic_ring cayman_uvd_ring = {
 	.set_wptr = &uvd_v1_0_set_wptr,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct radeon_asic cayman_asic = {
 	.init = &cayman_init,
@@ -2136,7 +2406,11 @@ static struct radeon_asic cayman_asic = {
 	.asic_reset = &cayman_asic_reset,
 	.vga_set_state = &r600_vga_set_state,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = r600_ioctl_wait_idle,
+=======
+	.mmio_hdp_flush = r600_mmio_hdp_flush,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = r600_mmio_hdp_flush,
 >>>>>>> v3.18
@@ -2151,6 +2425,7 @@ static struct radeon_asic cayman_asic = {
 	.vm = {
 		.init = &cayman_vm_init,
 		.fini = &cayman_vm_fini,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.pt_ring_index = R600_RING_TYPE_DMA_INDEX,
 		.set_page = &cayman_vm_set_page,
@@ -2221,6 +2496,8 @@ static struct radeon_asic cayman_asic = {
 			.is_lockup = &radeon_ring_test_lockup,
 		}
 =======
+=======
+>>>>>>> v3.18
 		.copy_pages = &cayman_dma_vm_copy_pages,
 		.write_pages = &cayman_dma_vm_write_pages,
 		.set_pages = &cayman_dma_vm_set_pages,
@@ -2233,6 +2510,9 @@ static struct radeon_asic cayman_asic = {
 		[R600_RING_TYPE_DMA_INDEX] = &cayman_dma_ring,
 		[CAYMAN_RING_TYPE_DMA1_INDEX] = &cayman_dma_ring,
 		[R600_RING_TYPE_UVD_INDEX] = &cayman_uvd_ring,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.irq = {
@@ -2250,7 +2530,11 @@ static struct radeon_asic cayman_asic = {
 	},
 	.copy = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.blit = &r600_copy_blit,
+=======
+		.blit = &r600_copy_cpdma,
+>>>>>>> v3.18
 =======
 		.blit = &r600_copy_cpdma,
 >>>>>>> v3.18
@@ -2285,12 +2569,15 @@ static struct radeon_asic cayman_asic = {
 		.set_clock_gating = NULL,
 		.set_uvd_clocks = &evergreen_set_uvd_clocks,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.pflip = {
 		.pre_page_flip = &evergreen_pre_page_flip,
 		.page_flip = &evergreen_page_flip,
 		.post_page_flip = &evergreen_post_page_flip,
 =======
+=======
+>>>>>>> v3.18
 		.get_temperature = &evergreen_get_temp,
 	},
 	.dpm = {
@@ -2314,6 +2601,9 @@ static struct radeon_asic cayman_asic = {
 	.pflip = {
 		.page_flip = &evergreen_page_flip,
 		.page_flip_pending = &evergreen_page_flip_pending,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -2326,7 +2616,11 @@ static struct radeon_asic trinity_asic = {
 	.asic_reset = &cayman_asic_reset,
 	.vga_set_state = &r600_vga_set_state,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = r600_ioctl_wait_idle,
+=======
+	.mmio_hdp_flush = r600_mmio_hdp_flush,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = r600_mmio_hdp_flush,
 >>>>>>> v3.18
@@ -2341,6 +2635,7 @@ static struct radeon_asic trinity_asic = {
 	.vm = {
 		.init = &cayman_vm_init,
 		.fini = &cayman_vm_fini,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.pt_ring_index = R600_RING_TYPE_DMA_INDEX,
 		.set_page = &cayman_vm_set_page,
@@ -2411,6 +2706,8 @@ static struct radeon_asic trinity_asic = {
 			.is_lockup = &radeon_ring_test_lockup,
 		}
 =======
+=======
+>>>>>>> v3.18
 		.copy_pages = &cayman_dma_vm_copy_pages,
 		.write_pages = &cayman_dma_vm_write_pages,
 		.set_pages = &cayman_dma_vm_set_pages,
@@ -2423,6 +2720,9 @@ static struct radeon_asic trinity_asic = {
 		[R600_RING_TYPE_DMA_INDEX] = &cayman_dma_ring,
 		[CAYMAN_RING_TYPE_DMA1_INDEX] = &cayman_dma_ring,
 		[R600_RING_TYPE_UVD_INDEX] = &cayman_uvd_ring,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.irq = {
@@ -2436,15 +2736,21 @@ static struct radeon_asic trinity_asic = {
 		.set_backlight_level = &atombios_set_backlight_level,
 		.get_backlight_level = &atombios_get_backlight_level,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.copy = {
 		.blit = &r600_copy_blit,
 =======
+=======
+>>>>>>> v3.18
 		.hdmi_enable = &evergreen_hdmi_enable,
 		.hdmi_setmode = &evergreen_hdmi_setmode,
 	},
 	.copy = {
 		.blit = &r600_copy_cpdma,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.blit_ring_index = RADEON_RING_TYPE_GFX_INDEX,
 		.dma = &evergreen_copy_dma,
@@ -2477,6 +2783,7 @@ static struct radeon_asic trinity_asic = {
 		.set_clock_gating = NULL,
 		.set_uvd_clocks = &sumo_set_uvd_clocks,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.pflip = {
 		.pre_page_flip = &evergreen_pre_page_flip,
@@ -2486,6 +2793,8 @@ static struct radeon_asic trinity_asic = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 		.get_temperature = &tn_get_temp,
 	},
 	.dpm = {
@@ -2542,6 +2851,9 @@ static struct radeon_asic_ring si_dma_ring = {
 	.set_wptr = &cayman_dma_set_wptr,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct radeon_asic si_asic = {
 	.init = &si_init,
@@ -2551,7 +2863,11 @@ static struct radeon_asic si_asic = {
 	.asic_reset = &si_asic_reset,
 	.vga_set_state = &r600_vga_set_state,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ioctl_wait_idle = r600_ioctl_wait_idle,
+=======
+	.mmio_hdp_flush = r600_mmio_hdp_flush,
+>>>>>>> v3.18
 =======
 	.mmio_hdp_flush = r600_mmio_hdp_flush,
 >>>>>>> v3.18
@@ -2566,6 +2882,7 @@ static struct radeon_asic si_asic = {
 	.vm = {
 		.init = &si_vm_init,
 		.fini = &si_vm_fini,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.pt_ring_index = R600_RING_TYPE_DMA_INDEX,
 		.set_page = &si_vm_set_page,
@@ -2636,6 +2953,8 @@ static struct radeon_asic si_asic = {
 			.is_lockup = &radeon_ring_test_lockup,
 		}
 =======
+=======
+>>>>>>> v3.18
 		.copy_pages = &si_dma_vm_copy_pages,
 		.write_pages = &si_dma_vm_write_pages,
 		.set_pages = &si_dma_vm_set_pages,
@@ -2648,6 +2967,9 @@ static struct radeon_asic si_asic = {
 		[R600_RING_TYPE_DMA_INDEX] = &si_dma_ring,
 		[CAYMAN_RING_TYPE_DMA1_INDEX] = &si_dma_ring,
 		[R600_RING_TYPE_UVD_INDEX] = &cayman_uvd_ring,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.irq = {
@@ -2661,15 +2983,21 @@ static struct radeon_asic si_asic = {
 		.set_backlight_level = &atombios_set_backlight_level,
 		.get_backlight_level = &atombios_get_backlight_level,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.copy = {
 		.blit = NULL,
 =======
+=======
+>>>>>>> v3.18
 		.hdmi_enable = &evergreen_hdmi_enable,
 		.hdmi_setmode = &evergreen_hdmi_setmode,
 	},
 	.copy = {
 		.blit = &r600_copy_cpdma,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.blit_ring_index = RADEON_RING_TYPE_GFX_INDEX,
 		.dma = &si_copy_dma,
@@ -2702,12 +3030,15 @@ static struct radeon_asic si_asic = {
 		.set_clock_gating = NULL,
 		.set_uvd_clocks = &si_set_uvd_clocks,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.pflip = {
 		.pre_page_flip = &evergreen_pre_page_flip,
 		.page_flip = &evergreen_page_flip,
 		.post_page_flip = &evergreen_post_page_flip,
 =======
+=======
+>>>>>>> v3.18
 		.get_temperature = &si_get_temp,
 	},
 	.dpm = {
@@ -3003,6 +3334,9 @@ static struct radeon_asic kv_asic = {
 	.pflip = {
 		.page_flip = &evergreen_page_flip,
 		.page_flip_pending = &evergreen_page_flip_pending,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -3088,6 +3422,11 @@ int radeon_asic_init(struct radeon_device *rdev)
 		break;
 	case CHIP_R600:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rdev->asic = &r600_asic;
+		break;
+>>>>>>> v3.18
 =======
 		rdev->asic = &r600_asic;
 		break;
@@ -3098,6 +3437,7 @@ int radeon_asic_init(struct radeon_device *rdev)
 	case CHIP_RV635:
 	case CHIP_RV670:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rdev->asic = &r600_asic;
 		if (rdev->family == CHIP_R600)
 			rdev->has_uvd = false;
@@ -3107,13 +3447,20 @@ int radeon_asic_init(struct radeon_device *rdev)
 		rdev->asic = &rv6xx_asic;
 		rdev->has_uvd = true;
 >>>>>>> v3.18
+=======
+		rdev->asic = &rv6xx_asic;
+		rdev->has_uvd = true;
+>>>>>>> v3.18
 		break;
 	case CHIP_RS780:
 	case CHIP_RS880:
 		rdev->asic = &rs780_asic;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rdev->has_uvd = true;
 =======
+=======
+>>>>>>> v3.18
 		/* 760G/780V/880V don't have UVD */
 		if ((rdev->pdev->device == 0x9616)||
 		    (rdev->pdev->device == 0x9611)||
@@ -3123,6 +3470,9 @@ int radeon_asic_init(struct radeon_device *rdev)
 			rdev->has_uvd = false;
 		else
 			rdev->has_uvd = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case CHIP_RV770:
@@ -3192,7 +3542,10 @@ int radeon_asic_init(struct radeon_device *rdev)
 		else
 			rdev->has_uvd = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		switch (rdev->family) {
 		case CHIP_TAHITI:
 			rdev->cg_flags =
@@ -3397,6 +3750,9 @@ int radeon_asic_init(struct radeon_device *rdev)
 				RADEON_PG_SUPPORT_SAMU;*/
 		}
 		rdev->has_uvd = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:

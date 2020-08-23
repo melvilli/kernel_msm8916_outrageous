@@ -11,7 +11,11 @@ struct mnt_namespace {
 	u64			seq;	/* Sequence number to prevent loops */
 	wait_queue_head_t poll;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int event;
+=======
+	u64 event;
+>>>>>>> v3.18
 =======
 	u64 event;
 >>>>>>> v3.18
@@ -24,8 +28,14 @@ struct mnt_pcp {
 
 struct mountpoint {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head m_hash;
 	struct dentry *m_dentry;
+=======
+	struct hlist_node m_hash;
+	struct dentry *m_dentry;
+	struct hlist_head m_list;
+>>>>>>> v3.18
 =======
 	struct hlist_node m_hash;
 	struct dentry *m_dentry;
@@ -36,11 +46,14 @@ struct mountpoint {
 
 struct mount {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head mnt_hash;
 	struct mount *mnt_parent;
 	struct dentry *mnt_mountpoint;
 	struct vfsmount mnt;
 =======
+=======
+>>>>>>> v3.18
 	struct hlist_node mnt_hash;
 	struct mount *mnt_parent;
 	struct dentry *mnt_mountpoint;
@@ -49,6 +62,9 @@ struct mount {
 		struct rcu_head mnt_rcu;
 		struct llist_node mnt_llist;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SMP
 	struct mnt_pcp __percpu *mnt_pcp;
@@ -69,6 +85,10 @@ struct mount {
 	struct mnt_namespace *mnt_ns;	/* containing namespace */
 	struct mountpoint *mnt_mp;	/* where is it mounted */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct hlist_node mnt_mp_list;	/* list mounts with the same mountpoint */
+>>>>>>> v3.18
 =======
 	struct hlist_node mnt_mp_list;	/* list mounts with the same mountpoint */
 >>>>>>> v3.18
@@ -80,8 +100,13 @@ struct mount {
 	int mnt_group_id;		/* peer group identifier */
 	int mnt_expiry_mark;		/* true if marked for expiry */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int mnt_pinned;
 	int mnt_ghosts;
+=======
+	struct hlist_head mnt_pins;
+	struct path mnt_ex_mountpoint;
+>>>>>>> v3.18
 =======
 	struct hlist_head mnt_pins;
 	struct path mnt_ex_mountpoint;
@@ -107,8 +132,11 @@ static inline int is_mounted(struct vfsmount *mnt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct mount *__lookup_mnt(struct vfsmount *, struct dentry *, int);
 =======
+=======
+>>>>>>> v3.18
 extern struct mount *__lookup_mnt(struct vfsmount *, struct dentry *);
 extern struct mount *__lookup_mnt_last(struct vfsmount *, struct dentry *);
 
@@ -122,6 +150,9 @@ static inline void detach_mounts(struct dentry *dentry)
 		return;
 	__detach_mounts(dentry);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void get_mnt_ns(struct mnt_namespace *ns)
@@ -130,7 +161,10 @@ static inline void get_mnt_ns(struct mnt_namespace *ns)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern seqlock_t mount_lock;
 
 static inline void lock_mount_hash(void)
@@ -143,6 +177,9 @@ static inline void unlock_mount_hash(void)
 	write_sequnlock(&mount_lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct proc_mounts {
 	struct seq_file m;
@@ -150,6 +187,12 @@ struct proc_mounts {
 	struct path root;
 	int (*show)(struct seq_file *, struct vfsmount *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void *cached_mount;
+	u64 cached_event;
+	loff_t cached_index;
+>>>>>>> v3.18
 =======
 	void *cached_mount;
 	u64 cached_event;
@@ -161,7 +204,10 @@ struct proc_mounts {
 
 extern const struct seq_operations mounts_op;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 extern bool __is_local_mountpoint(struct dentry *dentry);
 static inline bool is_local_mountpoint(struct dentry *dentry)
@@ -171,4 +217,7 @@ static inline bool is_local_mountpoint(struct dentry *dentry)
 
 	return __is_local_mountpoint(dentry);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -29,6 +29,10 @@
 #define TWL4030_BCIVAC		0x0a
 #define TWL4030_BCIVBUS		0x0c
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TWL4030_BCIMFSTS3	0x0F
+>>>>>>> v3.18
 =======
 #define TWL4030_BCIMFSTS3	0x0F
 >>>>>>> v3.18
@@ -37,6 +41,11 @@
 #define TWL4030_BB_CFG		0x12
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TWL4030_BCIMFSTS1	0x01
+
+>>>>>>> v3.18
 =======
 #define TWL4030_BCIMFSTS1	0x01
 
@@ -62,6 +71,12 @@
 #define TWL4030_BBISEL_1000uA	0x03
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TWL4030_BATSTSPCHG	BIT(2)
+#define TWL4030_BATSTSMCHG	BIT(6)
+
+>>>>>>> v3.18
 =======
 #define TWL4030_BATSTSPCHG	BIT(2)
 #define TWL4030_BATSTSMCHG	BIT(6)
@@ -161,7 +176,10 @@ static int twl4030bci_read_adc_val(u8 reg)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Check if Battery Pack was present
  */
 static int twl4030_is_battery_present(struct twl4030_bci *bci)
@@ -191,6 +209,9 @@ static int twl4030_is_battery_present(struct twl4030_bci *bci)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Check if VBUS power is present
  */
@@ -237,14 +258,20 @@ static int twl4030_charger_enable_usb(struct twl4030_bci *bci, bool enable)
 		/* Need to keep regulator on */
 		if (!bci->usb_enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			regulator_enable(bci->usb_reg);
 =======
+=======
+>>>>>>> v3.18
 			ret = regulator_enable(bci->usb_reg);
 			if (ret) {
 				dev_err(bci->dev,
 					"Failed to enable regulator\n");
 				return ret;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			bci->usb_enabled = 1;
 		}
@@ -547,11 +574,14 @@ static enum power_supply_property twl4030_charger_props[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init twl4030_bci_probe(struct platform_device *pdev)
 {
 	struct twl4030_bci *bci;
 	struct twl4030_bci_platform_data *pdata = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct twl4030_bci_platform_data *
 twl4030_bci_parse_dt(struct device *dev)
@@ -584,6 +614,9 @@ static int __init twl4030_bci_probe(struct platform_device *pdev)
 {
 	struct twl4030_bci *bci;
 	const struct twl4030_bci_platform_data *pdata = pdev->dev.platform_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 	u32 reg;
@@ -593,6 +626,12 @@ static int __init twl4030_bci_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!pdata)
+		pdata = twl4030_bci_parse_dt(&pdev->dev);
+
+>>>>>>> v3.18
 =======
 	if (!pdata)
 		pdata = twl4030_bci_parse_dt(&pdev->dev);
@@ -603,9 +642,12 @@ static int __init twl4030_bci_probe(struct platform_device *pdev)
 	bci->irq_bci = platform_get_irq(pdev, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, bci);
 
 =======
+=======
+>>>>>>> v3.18
 	/* Only proceed further *IF* battery is physically present */
 	ret = twl4030_is_battery_present(bci);
 	if  (ret) {
@@ -614,6 +656,9 @@ static int __init twl4030_bci_probe(struct platform_device *pdev)
 	}
 
 	platform_set_drvdata(pdev, bci);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bci->ac.name = "twl4030_ac";
 	bci->ac.type = POWER_SUPPLY_TYPE_MAINS;
@@ -685,14 +730,20 @@ static int __init twl4030_bci_probe(struct platform_device *pdev)
 	twl4030_charger_enable_ac(true);
 	twl4030_charger_enable_usb(bci, true);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	twl4030_charger_enable_backup(pdata->bb_uvolt,
 				      pdata->bb_uamp);
 =======
+=======
+>>>>>>> v3.18
 	if (pdata)
 		twl4030_charger_enable_backup(pdata->bb_uvolt,
 					      pdata->bb_uamp);
 	else
 		twl4030_charger_enable_backup(0, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -711,7 +762,11 @@ fail_register_usb:
 	power_supply_unregister(&bci->ac);
 fail_register_ac:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+fail_no_battery:
+>>>>>>> v3.18
 =======
 fail_no_battery:
 >>>>>>> v3.18
@@ -743,7 +798,10 @@ static int __exit twl4030_bci_remove(struct platform_device *pdev)
 	power_supply_unregister(&bci->usb);
 	power_supply_unregister(&bci->ac);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(bci);
@@ -752,19 +810,29 @@ static int __exit twl4030_bci_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id twl_bci_of_match[] = {
 	{.compatible = "ti,twl4030-bci", },
 	{ }
 };
 MODULE_DEVICE_TABLE(of, twl_bci_of_match);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver twl4030_bci_driver = {
 	.driver	= {
 		.name	= "twl4030_bci",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(twl_bci_of_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(twl_bci_of_match),
 >>>>>>> v3.18

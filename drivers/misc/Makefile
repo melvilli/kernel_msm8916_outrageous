@@ -8,7 +8,10 @@ obj-$(CONFIG_AD525X_DPOT_I2C)	+= ad525x_dpot-i2c.o
 obj-$(CONFIG_AD525X_DPOT_SPI)	+= ad525x_dpot-spi.o
 obj-$(CONFIG_INTEL_MID_PTI)	+= pti.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ATMEL_PWM)		+= atmel_pwm.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_ATMEL_SSC)		+= atmel-ssc.o
@@ -34,6 +37,7 @@ obj-$(CONFIG_CS5535_MFGPT)	+= cs5535-mfgpt.o
 obj-$(CONFIG_HP_ILO)		+= hpilo.o
 obj-$(CONFIG_APDS9802ALS)	+= apds9802als.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_APDS9930)		+= apds993x.o
 obj-$(CONFIG_ISL29003)		+= isl29003.o
 obj-$(CONFIG_ISL29020)		+= isl29020.o
@@ -43,6 +47,13 @@ obj-$(CONFIG_EP93XX_PWM)	+= ep93xx_pwm.o
 obj-$(CONFIG_DS1682)		+= ds1682.o
 obj-$(CONFIG_TI_DAC7512)	+= ti_dac7512.o
 obj-$(CONFIG_UID_STAT)		+= uid_stat.o
+=======
+obj-$(CONFIG_ISL29003)		+= isl29003.o
+obj-$(CONFIG_ISL29020)		+= isl29020.o
+obj-$(CONFIG_SENSORS_TSL2550)	+= tsl2550.o
+obj-$(CONFIG_DS1682)		+= ds1682.o
+obj-$(CONFIG_TI_DAC7512)	+= ti_dac7512.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_ISL29003)		+= isl29003.o
 obj-$(CONFIG_ISL29020)		+= isl29020.o
@@ -68,6 +79,7 @@ obj-$(CONFIG_VMWARE_VMCI)	+= vmw_vmci/
 obj-$(CONFIG_LATTICE_ECP3_CONFIG)	+= lattice-ecp3-config.o
 obj-$(CONFIG_SRAM)		+= sram.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_TSIF) += msm_tsif.o
 obj-$(CONFIG_HAPTIC_ISA1200)		+= isa1200.o
 obj-$(CONFIG_QSEECOM) += qseecom.o
@@ -82,9 +94,14 @@ obj-y				+= qcom/
 obj-$(CONFIG_UID_CPUTIME) 	+= uid_cputime.o
 obj-$(CONFIG_FORCE_FAST_CHARGE) += fastchg.o
 =======
+=======
+>>>>>>> v3.18
 obj-y				+= mic/
 obj-$(CONFIG_GENWQE)		+= genwqe/
 obj-$(CONFIG_ECHO)		+= echo/
 obj-$(CONFIG_VEXPRESS_SYSCFG)	+= vexpress-syscfg.o
 obj-$(CONFIG_CXL_BASE)		+= cxl/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

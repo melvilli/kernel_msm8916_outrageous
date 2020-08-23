@@ -9,7 +9,10 @@ hpet_example.c
 hrtimers.txt
 	- subsystem for high-resolution kernel timers
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Makefile
 	- Build and link hpet_example
 NO_HZ.txt
@@ -18,6 +21,9 @@ timekeeping.txt
 	- Clock sources, clock events, sched_clock() and delay timer notes
 timers-howto.txt
 	- how to insert delays in the kernel the right (tm) way.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 timer_stats.txt
 	- timer usage statistics

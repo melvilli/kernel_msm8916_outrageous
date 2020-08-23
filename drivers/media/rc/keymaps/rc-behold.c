@@ -3,7 +3,11 @@
  * keymap imported from ir-keymaps.c
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2010 by Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (c) 2010 by Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (c) 2010 by Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -35,8 +39,13 @@ static struct rc_map_table behold[] = {
 	 *  TV/FM          POWER  *
 	 *                        */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x6b861c, KEY_TUNER },	/* XXX KEY_TV / KEY_RADIO */
 	{ 0x6b8612, KEY_POWER },
+=======
+	{ 0x866b1c, KEY_TUNER },	/* XXX KEY_TV / KEY_RADIO */
+	{ 0x866b12, KEY_POWER },
+>>>>>>> v3.18
 =======
 	{ 0x866b1c, KEY_TUNER },	/* XXX KEY_TV / KEY_RADIO */
 	{ 0x866b12, KEY_POWER },
@@ -52,6 +61,7 @@ static struct rc_map_table behold[] = {
 	 *   7       8       9    *
 	 *                        */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x6b8601, KEY_1 },
 	{ 0x6b8602, KEY_2 },
 	{ 0x6b8603, KEY_3 },
@@ -62,6 +72,8 @@ static struct rc_map_table behold[] = {
 	{ 0x6b8608, KEY_8 },
 	{ 0x6b8609, KEY_9 },
 =======
+=======
+>>>>>>> v3.18
 	{ 0x866b01, KEY_1 },
 	{ 0x866b02, KEY_2 },
 	{ 0x866b03, KEY_3 },
@@ -71,15 +83,24 @@ static struct rc_map_table behold[] = {
 	{ 0x866b07, KEY_7 },
 	{ 0x866b08, KEY_8 },
 	{ 0x866b09, KEY_9 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*  0x0a    0x00    0x17  *
 	 * RECALL    0      MODE  *
 	 *                        */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x6b860a, KEY_AGAIN },
 	{ 0x6b8600, KEY_0 },
 	{ 0x6b8617, KEY_MODE },
+=======
+	{ 0x866b0a, KEY_AGAIN },
+	{ 0x866b00, KEY_0 },
+	{ 0x866b17, KEY_MODE },
+>>>>>>> v3.18
 =======
 	{ 0x866b0a, KEY_AGAIN },
 	{ 0x866b00, KEY_0 },
@@ -90,8 +111,13 @@ static struct rc_map_table behold[] = {
 	 * ASPECT      FULLSCREEN *
 	 *                        */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x6b8614, KEY_SCREEN },
 	{ 0x6b8610, KEY_ZOOM },
+=======
+	{ 0x866b14, KEY_SCREEN },
+	{ 0x866b10, KEY_ZOOM },
+>>>>>>> v3.18
 =======
 	{ 0x866b14, KEY_SCREEN },
 	{ 0x866b10, KEY_ZOOM },
@@ -107,25 +133,36 @@ static struct rc_map_table behold[] = {
 	 *         Down           *
 	 *                        */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x6b860b, KEY_CHANNELUP },
 	{ 0x6b8618, KEY_VOLUMEDOWN },
 	{ 0x6b8616, KEY_OK },		/* XXX KEY_ENTER */
 	{ 0x6b860c, KEY_VOLUMEUP },
 	{ 0x6b8615, KEY_CHANNELDOWN },
 =======
+=======
+>>>>>>> v3.18
 	{ 0x866b0b, KEY_CHANNELUP },
 	{ 0x866b18, KEY_VOLUMEDOWN },
 	{ 0x866b16, KEY_OK },		/* XXX KEY_ENTER */
 	{ 0x866b0c, KEY_VOLUMEUP },
 	{ 0x866b15, KEY_CHANNELDOWN },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*  0x11            0x0d  *
 	 *  MUTE            INFO  *
 	 *                        */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x6b8611, KEY_MUTE },
 	{ 0x6b860d, KEY_INFO },
+=======
+	{ 0x866b11, KEY_MUTE },
+	{ 0x866b0d, KEY_INFO },
+>>>>>>> v3.18
 =======
 	{ 0x866b11, KEY_MUTE },
 	{ 0x866b0d, KEY_INFO },
@@ -139,6 +176,7 @@ static struct rc_map_table behold[] = {
 	 *           RED   YELLOW *
 	 *                        */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x6b860f, KEY_RECORD },
 	{ 0x6b861b, KEY_PLAYPAUSE },
 	{ 0x6b861a, KEY_STOP },
@@ -146,12 +184,17 @@ static struct rc_map_table behold[] = {
 	{ 0x6b861f, KEY_RED },	/*XXX KEY_AUDIO	*/
 	{ 0x6b861e, KEY_VIDEO },
 =======
+=======
+>>>>>>> v3.18
 	{ 0x866b0f, KEY_RECORD },
 	{ 0x866b1b, KEY_PLAYPAUSE },
 	{ 0x866b1a, KEY_STOP },
 	{ 0x866b0e, KEY_TEXT },
 	{ 0x866b1f, KEY_RED },	/*XXX KEY_AUDIO	*/
 	{ 0x866b1e, KEY_VIDEO },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*  0x1d   0x13     0x19  *
@@ -159,9 +202,15 @@ static struct rc_map_table behold[] = {
 	 *         GREEN    BLUE  *
 	 *                        */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x6b861d, KEY_SLEEP },
 	{ 0x6b8613, KEY_GREEN },
 	{ 0x6b8619, KEY_BLUE },	/* XXX KEY_SAT	*/
+=======
+	{ 0x866b1d, KEY_SLEEP },
+	{ 0x866b13, KEY_GREEN },
+	{ 0x866b19, KEY_BLUE },	/* XXX KEY_SAT	*/
+>>>>>>> v3.18
 =======
 	{ 0x866b1d, KEY_SLEEP },
 	{ 0x866b13, KEY_GREEN },
@@ -172,8 +221,13 @@ static struct rc_map_table behold[] = {
 	 * FREEZE        SNAPSHOT *
 	 *                        */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x6b8658, KEY_SLOW },
 	{ 0x6b865c, KEY_CAMERA },
+=======
+	{ 0x866b58, KEY_SLOW },
+	{ 0x866b5c, KEY_CAMERA },
+>>>>>>> v3.18
 =======
 	{ 0x866b58, KEY_SLOW },
 	{ 0x866b5c, KEY_CAMERA },
@@ -205,7 +259,11 @@ module_exit(exit_rc_map_behold)
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

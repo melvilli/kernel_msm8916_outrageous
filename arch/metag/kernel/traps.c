@@ -34,6 +34,10 @@
 #include <asm/traps.h>
 #include <asm/hwthread.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18
@@ -92,8 +96,13 @@ const char *trap_name(int trapno)
 static DEFINE_SPINLOCK(die_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void die(const char *str, struct pt_regs *regs, long err,
 	 unsigned long addr)
+=======
+void __noreturn die(const char *str, struct pt_regs *regs,
+		    long err, unsigned long addr)
+>>>>>>> v3.18
 =======
 void __noreturn die(const char *str, struct pt_regs *regs,
 		    long err, unsigned long addr)
@@ -821,7 +830,11 @@ static void set_trigger_mask(unsigned int mask)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit per_cpu_trap_init(unsigned long cpu)
+=======
+void per_cpu_trap_init(unsigned long cpu)
+>>>>>>> v3.18
 =======
 void per_cpu_trap_init(unsigned long cpu)
 >>>>>>> v3.18
@@ -832,8 +845,12 @@ void per_cpu_trap_init(unsigned long cpu)
 	set_trigger_mask(TBI_INTS_INIT(thread) | /* interrupts */
 			 TBI_TRIG_BIT(TBID_SIGNUM_LWK) | /* low level kick */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 TBI_TRIG_BIT(TBID_SIGNUM_SW1) |
 			 TBI_TRIG_BIT(TBID_SIGNUM_SWS));
+=======
+			 TBI_TRIG_BIT(TBID_SIGNUM_SW1));
+>>>>>>> v3.18
 =======
 			 TBI_TRIG_BIT(TBID_SIGNUM_SW1));
 >>>>>>> v3.18
@@ -859,7 +876,11 @@ void __init trap_init(void)
 	_pTBI->fnSigs[TBID_SIGNUM_SW2] = switchx_handler;
 	_pTBI->fnSigs[TBID_SIGNUM_SW3] = switchx_handler;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_pTBI->fnSigs[TBID_SIGNUM_SWK] = kick_handler;
+=======
+	_pTBI->fnSigs[TBID_SIGNUM_LWK] = kick_handler;
+>>>>>>> v3.18
 =======
 	_pTBI->fnSigs[TBID_SIGNUM_LWK] = kick_handler;
 >>>>>>> v3.18

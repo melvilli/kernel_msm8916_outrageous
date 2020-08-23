@@ -3,7 +3,11 @@
  * (DB-MV784MP-GP)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2013 Marvell
+=======
+ * Copyright (C) 2013-2014 Marvell
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013-2014 Marvell
 >>>>>>> v3.18
@@ -16,11 +20,14 @@
  * License version 2.  This program is licensed "as is" without any
  * warranty of any kind, whether express or implied.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 /dts-v1/;
 /include/ "armada-xp-mv78460.dtsi"
 =======
+=======
+>>>>>>> v3.18
  *
  * Note: this Device Tree assumes that the bootloader has remapped the
  * internal registers to 0xf1000000 (instead of the default
@@ -34,6 +41,9 @@
 
 /dts-v1/;
 #include "armada-xp-mv78460.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
@@ -51,23 +61,30 @@
                  * of memory available can be changed by the
                  * bootloader according the size of the module
 <<<<<<< HEAD
+<<<<<<< HEAD
                  * actually plugged. Only 7GB are usable because
                  * addresses from 0xC0000000 to 0xffffffff are used by
                  * the internal registers of the SoC.
 		 */
 		reg = <0x00000000 0x00000000 0x00000000 0xC0000000>,
 =======
+=======
+>>>>>>> v3.18
                  * actually plugged. However, memory between
                  * 0xF0000000 to 0xFFFFFFFF cannot be used, as it is
                  * the address range used for I/O (internal registers,
                  * MBus windows).
 		 */
 		reg = <0x00000000 0x00000000 0x00000000 0xf0000000>,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		      <0x00000001 0x00000000 0x00000001 0x00000000>;
 	};
 
 	soc {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ranges = <0          0 0xd0000000 0x100000  /* Internal registers 1MiB */
 			  0xe0000000 0 0xe0000000 0x8100000 /* PCIe */
@@ -89,6 +106,8 @@
 			serial@12300 {
 				clock-frequency = <250000000>;
 =======
+=======
+>>>>>>> v3.18
 		ranges = <MBUS_ID(0xf0, 0x01) 0 0 0xf1000000 0x100000
 			  MBUS_ID(0x01, 0x1d) 0 0 0xfff00000 0x100000
 			  MBUS_ID(0x01, 0x2f) 0 0 0xf0000000 0x1000000>;
@@ -153,6 +172,9 @@
 				status = "okay";
 			};
 			serial@12300 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "okay";
 			};
@@ -184,7 +206,11 @@
 				status = "okay";
 				phy = <&phy0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				phy-mode = "rgmii-id";
+=======
+				phy-mode = "qsgmii";
+>>>>>>> v3.18
 =======
 				phy-mode = "qsgmii";
 >>>>>>> v3.18
@@ -193,7 +219,11 @@
 				status = "okay";
 				phy = <&phy1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				phy-mode = "rgmii-id";
+=======
+				phy-mode = "qsgmii";
+>>>>>>> v3.18
 =======
 				phy-mode = "qsgmii";
 >>>>>>> v3.18
@@ -202,7 +232,11 @@
 				status = "okay";
 				phy = <&phy2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				phy-mode = "rgmii-id";
+=======
+				phy-mode = "qsgmii";
+>>>>>>> v3.18
 =======
 				phy-mode = "qsgmii";
 >>>>>>> v3.18
@@ -211,8 +245,11 @@
 				status = "okay";
 				phy = <&phy3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				phy-mode = "rgmii-id";
 =======
+=======
+>>>>>>> v3.18
 				phy-mode = "qsgmii";
 			};
 
@@ -224,6 +261,9 @@
 			/* Back-side USB slot */
 			usb@51000 {
 				status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -239,6 +279,7 @@
 				};
 			};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			devbus-bootcs@10400 {
 				status = "okay";
@@ -289,12 +330,17 @@
 					status = "okay";
 				};
 =======
+=======
+>>>>>>> v3.18
 			nand@d0000 {
 				status = "okay";
 				num-cs = <1>;
 				marvell,nand-keep-config;
 				marvell,nand-enable-arbiter;
 				nand-on-flash-bbt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 		};

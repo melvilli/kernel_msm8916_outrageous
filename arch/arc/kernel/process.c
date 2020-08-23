@@ -56,10 +56,15 @@ asmlinkage void ret_from_fork(void);
  * |    unused      |
  * |                |
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ------------------  <==== top of Stack (thread.ksp)
  * |   UNUSED 1 word|
  * ------------------
  * |     r25        |
+=======
+ * ------------------
+ * |     r25        |   <==== top of Stack (thread.ksp)
+>>>>>>> v3.18
 =======
  * ------------------
  * |     r25        |   <==== top of Stack (thread.ksp)
@@ -82,12 +87,18 @@ asmlinkage void ret_from_fork(void);
  * |     r0         |
  * ------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
  * |   UNUSED 1 word|
 =======
+=======
+>>>>>>> v3.18
  * |      SP        |
  * |    orig_r0     |
  * |    event/ECR   |
  * |    user_r25    |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * ------------------  <===== END of PAGE
  */
@@ -163,7 +174,10 @@ int copy_thread(unsigned long clone_flags,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Do necessary setup to start up a new user task
  */
 void start_thread(struct pt_regs * regs, unsigned long pc, unsigned long usp)
@@ -187,6 +201,9 @@ void start_thread(struct pt_regs * regs, unsigned long pc, unsigned long usp)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Some archs flush debug and FPU info here
  */

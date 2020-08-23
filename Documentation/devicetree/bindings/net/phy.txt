@@ -3,7 +3,10 @@ PHY nodes
 Required properties:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  - device_type : Should be "ethernet-phy"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  - interrupts : <a b> where a is the interrupt number and b is a
@@ -15,8 +18,11 @@ Required properties:
    services interrupts for this device.
  - reg : The ID number for the phy, usually a small integer
 <<<<<<< HEAD
+<<<<<<< HEAD
  - linux,phandle :  phandle for this node; likely referenced by an
    ethernet controller node.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -29,7 +35,10 @@ Optional Properties:
   assume clause 22. The compatible list may also contain other
   elements.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - max-speed: Maximum PHY supported speed (10, 100, 1000...)
 
   If the phy's identifier is known then the list may contain an entry
@@ -39,11 +48,15 @@ Optional Properties:
      BBBB - The value of the 16 bit Phy Identifier 2 register as
             4 hex digits. This is the chip vendor OUI bits 19:24,
             followed by 10 bits of a vendor specific ID.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
 
 ethernet-phy@0 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	compatible = "ethernet-phy-ieee802.3-c22";
 	linux,phandle = <2452000>;
@@ -52,9 +65,14 @@ ethernet-phy@0 {
 	reg = <0>;
 	device_type = "ethernet-phy";
 =======
+=======
+>>>>>>> v3.18
 	compatible = "ethernet-phy-id0141.0e90", "ethernet-phy-ieee802.3-c22";
 	interrupt-parent = <40000>;
 	interrupts = <35 1>;
 	reg = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

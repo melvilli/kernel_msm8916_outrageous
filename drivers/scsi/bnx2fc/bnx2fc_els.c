@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * bnx2fc_els.c: Broadcom NetXtreme II Linux FCoE offload driver.
+=======
+ * bnx2fc_els.c: QLogic NetXtreme II Linux FCoE offload driver.
+>>>>>>> v3.18
 =======
  * bnx2fc_els.c: QLogic NetXtreme II Linux FCoE offload driver.
 >>>>>>> v3.18
@@ -9,6 +13,10 @@
  *
  * Copyright (c) 2008 - 2013 Broadcom Corporation
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2014, QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c) 2014, QLogic Corporation
 >>>>>>> v3.18
@@ -488,9 +496,13 @@ void bnx2fc_rec_compl(struct bnx2fc_els_cb_arg *cb_arg)
 			/* Post a new IO req with the same sc_cmd */
 			BNX2FC_IO_DBG(rec_req, "Post IO request again\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_unlock_bh(&tgt->tgt_lock);
 			rc = bnx2fc_post_io_req(tgt, new_io_req);
 			spin_lock_bh(&tgt->tgt_lock);
+=======
+			rc = bnx2fc_post_io_req(tgt, new_io_req);
+>>>>>>> v3.18
 =======
 			rc = bnx2fc_post_io_req(tgt, new_io_req);
 >>>>>>> v3.18

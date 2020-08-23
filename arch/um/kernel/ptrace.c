@@ -164,10 +164,16 @@ static void send_sigtrap(struct task_struct *tsk, struct uml_pt_regs *regs,
  * PT_PTRACED vs TIF_SYSCALL_TRACE for syscall tracing check
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int syscall_trace_enter(struct pt_regs *regs)
 {
 	audit_syscall_entry(HOST_AUDIT_ARCH,
 			    UPT_SYSCALL_NR(&regs->regs),
+=======
+void syscall_trace_enter(struct pt_regs *regs)
+{
+	audit_syscall_entry(UPT_SYSCALL_NR(&regs->regs),
+>>>>>>> v3.18
 =======
 void syscall_trace_enter(struct pt_regs *regs)
 {
@@ -180,9 +186,15 @@ void syscall_trace_enter(struct pt_regs *regs)
 
 	if (!test_thread_flag(TIF_SYSCALL_TRACE))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 
 	return tracehook_report_syscall_entry(regs);
+=======
+		return;
+
+	tracehook_report_syscall_entry(regs);
+>>>>>>> v3.18
 =======
 		return;
 

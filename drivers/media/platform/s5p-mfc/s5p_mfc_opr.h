@@ -18,7 +18,10 @@
 #include "s5p_mfc_common.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct s5p_mfc_regs {
 
 	/* codec common registers */
@@ -272,6 +275,9 @@ struct s5p_mfc_regs {
 	volatile void __iomem *e_vp8_hierarchical_qp_layer2;/* v7 and v8 */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct s5p_mfc_hw_ops {
 	int (*alloc_dec_temp_buffers)(struct s5p_mfc_ctx *ctx);
@@ -337,6 +343,10 @@ struct s5p_mfc_hw_ops {
 
 void s5p_mfc_init_hw_ops(struct s5p_mfc_dev *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void s5p_mfc_init_regs(struct s5p_mfc_dev *dev);
+>>>>>>> v3.18
 =======
 void s5p_mfc_init_regs(struct s5p_mfc_dev *dev);
 >>>>>>> v3.18

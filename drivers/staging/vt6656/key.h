@@ -31,6 +31,7 @@
 #define __KEY_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "tether.h"
 #include "80211mgr.h"
 
@@ -50,11 +51,17 @@
 
 #define MAX_KEY_TABLE       11
 >>>>>>> v3.18
+=======
+#include "device.h"
+
+#define MAX_KEY_TABLE       11
+>>>>>>> v3.18
 
 #define KEY_CTL_WEP         0x00
 #define KEY_CTL_NONE        0x01
 #define KEY_CTL_TKIP        0x02
 #define KEY_CTL_CCMP        0x03
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define KEY_CTL_INVALID     0xFF
 
@@ -116,6 +123,8 @@ int KeybSetAllGroupKey(struct vnt_private *, PSKeyManagement pTable,
 	u32 dwKeyIndex, u32 uKeyLength, u64 *KeyRSC, u8 *pbyKey,
 	u8 byKeyDecMode);
 =======
+=======
+>>>>>>> v3.18
 
 #define VNT_KEY_DEFAULTKEY	0x1
 #define VNT_KEY_GROUP_ADDRESS	0x2
@@ -129,6 +138,9 @@ int vnt_key_init_table(struct vnt_private *);
 
 int vnt_set_keys(struct ieee80211_hw *hw, struct ieee80211_sta *sta,
 	struct ieee80211_vif *vif, struct ieee80211_key_conf *key);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __KEY_H__ */

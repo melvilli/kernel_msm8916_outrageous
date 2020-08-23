@@ -5,7 +5,11 @@
 #include <linux/serial_reg.h>	/* for more serial constants */
 #ifndef __sparc__
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/serial.h>
+=======
+#include <linux/serial.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial.h>
 >>>>>>> v3.18
@@ -41,6 +45,7 @@ struct old_serial_port {
 #define spk_serial_tx_busy() ((inb(speakup_info.port_tts + UART_LSR) & BOTH_EMPTY) != BOTH_EMPTY)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 2.6.22 doesn't have them any more, hardcode it for now (these values should
  * be fine for 99% cases) */
 #ifndef BASE_BAUD
@@ -67,6 +72,8 @@ struct old_serial_port {
 #define IRQF_SHARED SA_SHIRQ
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

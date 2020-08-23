@@ -199,6 +199,7 @@ sysexit_from_sys_call:
 #ifdef CONFIG_AUDITSYSCALL
 	.macro auditsys_entry_common
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movl %esi,%r9d			/* 6th arg: 4th syscall arg */
 	movl %edx,%r8d			/* 5th arg: 3rd syscall arg */
 	/* (already in %ecx)		   4th arg: 2nd syscall arg */
@@ -206,12 +207,17 @@ sysexit_from_sys_call:
 	movl %eax,%esi			/* 2nd arg: syscall number */
 	movl $AUDIT_ARCH_I386,%edi	/* 1st arg: audit arch */
 =======
+=======
+>>>>>>> v3.18
 	movl %esi,%r8d			/* 5th arg: 4th syscall arg */
 	movl %ecx,%r9d			/*swap with edx*/
 	movl %edx,%ecx			/* 4th arg: 3rd syscall arg */
 	movl %r9d,%edx			/* 3rd arg: 2nd syscall arg */
 	movl %ebx,%esi			/* 2nd arg: 1st syscall arg */
 	movl %eax,%edi			/* 1st arg: syscall number */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	call __audit_syscall_entry
 	movl RAX-ARGOFFSET(%rsp),%eax	/* reload syscall number */
@@ -432,7 +438,10 @@ ENTRY(ia32_syscall)
 	CFI_REL_OFFSET	rip,RIP-RIP
 	PARAVIRT_ADJUST_EXCEPTION_FRAME
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ASM_CLAC			/* Do this early to minimize exposure */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SWAPGS
@@ -482,7 +491,11 @@ ia32_badsys:
 	CFI_ENDPROC
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro PTREGSCALL label, func, arg
+=======
+	.macro PTREGSCALL label, func
+>>>>>>> v3.18
 =======
 	.macro PTREGSCALL label, func
 >>>>>>> v3.18

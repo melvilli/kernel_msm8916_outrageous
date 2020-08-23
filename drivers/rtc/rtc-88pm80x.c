@@ -252,7 +252,12 @@ static int pm80x_rtc_probe(struct platform_device *pdev)
 {
 	struct pm80x_chip *chip = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pm80x_platform_data *pm80x_pdata;
+=======
+	struct pm80x_platform_data *pm80x_pdata =
+				dev_get_platdata(pdev->dev.parent);
+>>>>>>> v3.18
 =======
 	struct pm80x_platform_data *pm80x_pdata =
 				dev_get_platdata(pdev->dev.parent);
@@ -264,7 +269,11 @@ static int pm80x_rtc_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -336,8 +345,12 @@ static int pm80x_rtc_probe(struct platform_device *pdev)
 			   PM800_RTC1_USE_XO);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->dev.parent->platform_data) {
 		pm80x_pdata = pdev->dev.parent->platform_data;
+=======
+	if (pm80x_pdata) {
+>>>>>>> v3.18
 =======
 	if (pm80x_pdata) {
 >>>>>>> v3.18
@@ -359,7 +372,10 @@ static int pm80x_rtc_remove(struct platform_device *pdev)
 {
 	struct pm80x_rtc_info *info = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pm80x_free_irq(info->chip, info->irq, info);

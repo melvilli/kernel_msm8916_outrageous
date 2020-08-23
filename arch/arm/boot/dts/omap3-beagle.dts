@@ -8,7 +8,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap34xx.dtsi"
+=======
+#include "omap34xx.dtsi"
+>>>>>>> v3.18
 =======
 #include "omap34xx.dtsi"
 >>>>>>> v3.18
@@ -29,19 +33,29 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	aliases {
 		display0 = &dvi0;
 		display1 = &tv0;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	leds {
 		compatible = "gpio-leds";
 		pmu_stat {
 			label = "beagleboard::pmu_stat";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&twl_gpio 19 0>; /* LEDB */
+=======
+			gpios = <&twl_gpio 19 GPIO_ACTIVE_HIGH>; /* LEDB */
+>>>>>>> v3.18
 =======
 			gpios = <&twl_gpio 19 GPIO_ACTIVE_HIGH>; /* LEDB */
 >>>>>>> v3.18
@@ -50,7 +64,11 @@
 		heartbeat {
 			label = "beagleboard::usr0";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio5 22 0>; /* 150 -> D6 LED */
+=======
+			gpios = <&gpio5 22 GPIO_ACTIVE_HIGH>; /* 150 -> D6 LED */
+>>>>>>> v3.18
 =======
 			gpios = <&gpio5 22 GPIO_ACTIVE_HIGH>; /* 150 -> D6 LED */
 >>>>>>> v3.18
@@ -60,7 +78,11 @@
 		mmc {
 			label = "beagleboard::usr1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio5 21 0>; /* 149 -> D7 LED */
+=======
+			gpios = <&gpio5 21 GPIO_ACTIVE_HIGH>; /* 149 -> D7 LED */
+>>>>>>> v3.18
 =======
 			gpios = <&gpio5 21 GPIO_ACTIVE_HIGH>; /* 149 -> D7 LED */
 >>>>>>> v3.18
@@ -68,6 +90,7 @@
 		};
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* HS USB Port 2 RESET */
 	hsusb2_reset: hsusb2_reset_reg {
@@ -80,6 +103,8 @@
 		enable-active-high;
 	};
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* HS USB Port 2 Power */
@@ -96,10 +121,13 @@
 	hsusb2_phy: hsusb2_phy {
 		compatible = "usb-nop-xceiv";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reset-supply = <&hsusb2_reset>;
 		vcc-supply = <&hsusb2_power>;
 	};
 =======
+=======
+>>>>>>> v3.18
 		reset-gpios = <&gpio5 19 GPIO_ACTIVE_LOW>;	/* gpio_147 */
 		vcc-supply = <&hsusb2_power>;
 	};
@@ -186,12 +214,16 @@
 			0x14 (PIN_INPUT | PIN_OFF_WAKEUPENABLE | MUX_MODE4) /* sys_boot5.gpio_7 */
 		>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 &omap3_pmx_core {
 	pinctrl-names = "default";
 	pinctrl-0 = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 			&hsusbb2_pins
 	>;
@@ -211,6 +243,8 @@
 			0x1ac 0x10b  /* USBB2_ULPITLL_CLK_MUXMODE.usbb1_ulpiphy_dat6 INPUT | PULLDOWN */
 			0x1ae 0x10b  /* USBB2_ULPITLL_CLK_MUXMODE.usbb1_ulpiphy_dat7 INPUT | PULLDOWN */
 =======
+=======
+>>>>>>> v3.18
 			&hsusb2_pins
 	>;
 
@@ -286,6 +320,9 @@
 			OMAP3430_CORE2_IOPAD(0x25f6, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d13.hsusb2_nxt */
 			OMAP3430_CORE2_IOPAD(0x25f8, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d14.hsusb2_data0 */
 			OMAP3430_CORE2_IOPAD(0x25fa, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d15.hsusb2_data1 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		>;
 	};
@@ -299,11 +336,14 @@
 		interrupts = <7>; /* SYS_NIRQ cascaded to intc */
 		interrupt-parent = <&intc>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 };
 
 /include/ "twl4030.dtsi"
 =======
+=======
+>>>>>>> v3.18
 
 		twl_audio: audio {
 			compatible = "ti,twl4030-audio";
@@ -319,6 +359,9 @@
 &i2c3 {
 	clock-frequency = <100000>;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 &mmc1 {
@@ -355,7 +398,10 @@
 	ti,pulldowns = <0x03a1c4>;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &uart3 {
 	pinctrl-names = "default";
@@ -419,4 +465,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

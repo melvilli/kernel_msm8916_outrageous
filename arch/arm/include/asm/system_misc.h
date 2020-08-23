@@ -22,7 +22,10 @@ extern void (*arm_pm_idle)(void);
 
 extern unsigned int user_debug;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern char* (*arch_read_hardware_id)(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

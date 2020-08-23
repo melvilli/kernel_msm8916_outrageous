@@ -21,6 +21,10 @@
 #include <linux/bcd.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -179,6 +183,7 @@ static int m48t35_probe(struct platform_device *pdev)
 	priv->rtc = devm_rtc_device_register(&pdev->dev, "m48t35",
 				  &m48t35_ops, THIS_MODULE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(priv->rtc))
 		return PTR_ERR(priv->rtc);
 
@@ -191,6 +196,9 @@ static int m48t35_remove(struct platform_device *pdev)
 =======
 	return PTR_ERR_OR_ZERO(priv->rtc);
 >>>>>>> v3.18
+=======
+	return PTR_ERR_OR_ZERO(priv->rtc);
+>>>>>>> v3.18
 }
 
 static struct platform_driver m48t35_platform_driver = {
@@ -200,7 +208,10 @@ static struct platform_driver m48t35_platform_driver = {
 	},
 	.probe		= m48t35_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= m48t35_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

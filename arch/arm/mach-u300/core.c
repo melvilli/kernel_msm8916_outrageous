@@ -10,6 +10,7 @@
  */
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/spinlock.h>
 #include <linux/interrupt.h>
@@ -51,6 +52,8 @@
 #include "i2c.h"
 #include "u300-gpio.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pinctrl/machine.h>
 #include <linux/pinctrl/pinconf-generic.h>
 #include <linux/platform_data/clk-u300.h>
@@ -202,6 +205,9 @@
 #define U300_SYSCON_BCR_APP_BOOT_SERV_MASK			(0x0003)
 
 static void __iomem *syscon_base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -236,6 +242,7 @@ static void __init u300_map_io(void)
 	iotable_init(u300_io_desc, ARRAY_SIZE(u300_io_desc));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Declaration of devices found on the U300 board and
@@ -598,6 +605,8 @@ static struct platform_device dma_device = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static unsigned long pin_pullup_conf[] = {
 	PIN_CONF_PACKED(PIN_CONFIG_BIAS_PULL_UP, 1),
 };
@@ -624,6 +633,7 @@ static struct pinctrl_map __initdata u300_pinmux_map[] = {
 				    pin_highz_conf),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Notice that AMBA devices are initialized before platform devices.
@@ -680,6 +690,8 @@ static void __init u300_init_irq(void)
 /*
  * U300 platforms peripheral handling
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct db_chip {
@@ -739,7 +751,11 @@ static void __init u300_init_check_chip(void)
 
 	/* Read out and print chip ID */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = readw(U300_SYSCON_VBASE + U300_SYSCON_CIDR);
+=======
+	val = readw(syscon_base + U300_SYSCON_CIDR);
+>>>>>>> v3.18
 =======
 	val = readw(syscon_base + U300_SYSCON_CIDR);
 >>>>>>> v3.18
@@ -764,6 +780,7 @@ static void __init u300_init_check_chip(void)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Some devices and their resources require reserved physical memory from
@@ -835,6 +852,8 @@ static void __init u300_init_machine(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Forward declare this function from the watchdog */
 void coh901327_watchdog_reset(void);
 
@@ -856,6 +875,7 @@ static void u300_restart(enum reboot_mode mode, const char *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MACHINE_START(U300, "Ericsson AB U335 S335/B335 Prototype Board")
 	/* Maintainer: Linus Walleij <linus.walleij@stericsson.com> */
 	.atag_offset	= 0x100,
@@ -866,6 +886,8 @@ MACHINE_START(U300, "Ericsson AB U335 S335/B335 Prototype Board")
 	.init_machine	= u300_init_machine,
 	.restart	= u300_restart,
 =======
+=======
+>>>>>>> v3.18
 /* These are mostly to get the right device names for the clock lookups */
 static struct of_dev_auxdata u300_auxdata_lookup[] __initdata = {
 	OF_DEV_AUXDATA("stericsson,pinctrl-u300", U300_SYSCON_BASE,
@@ -961,5 +983,8 @@ DT_MACHINE_START(U300_DT, "U300 S335/B335 (Device Tree)")
 	.init_machine	= u300_init_machine_dt,
 	.restart	= u300_restart,
 	.dt_compat      = u300_board_compat,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MACHINE_END

@@ -57,7 +57,11 @@
 #include <linux/module.h>
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -166,7 +170,11 @@ static inline void prefetch_dst(const void *addr)
  * per loop.  This code is derived from glibc. 
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long copy_dstaligned(unsigned long dst,
+=======
+static noinline unsigned long copy_dstaligned(unsigned long dst,
+>>>>>>> v3.18
 =======
 static noinline unsigned long copy_dstaligned(unsigned long dst,
 >>>>>>> v3.18
@@ -285,7 +293,11 @@ handle_store_error:
  * In case of an access fault the faulty address can be read from the per_cpu
  * exception data struct. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long pa_memcpy_internal(void *dstp, const void *srcp,
+=======
+static noinline unsigned long pa_memcpy_internal(void *dstp, const void *srcp,
+>>>>>>> v3.18
 =======
 static noinline unsigned long pa_memcpy_internal(void *dstp, const void *srcp,
 >>>>>>> v3.18
@@ -483,7 +495,11 @@ static unsigned long pa_memcpy(void *dstp, const void *srcp, unsigned long len)
 
 	/* if a load or store fault occured we can get the faulty addr */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	d = &__get_cpu_var(exception_data);
+=======
+	d = this_cpu_ptr(&exception_data);
+>>>>>>> v3.18
 =======
 	d = this_cpu_ptr(&exception_data);
 >>>>>>> v3.18
@@ -541,7 +557,10 @@ EXPORT_SYMBOL(copy_from_user);
 EXPORT_SYMBOL(copy_in_user);
 EXPORT_SYMBOL(memcpy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 long probe_kernel_read(void *dst, const void *src, size_t size)
 {
@@ -555,5 +574,8 @@ long probe_kernel_read(void *dst, const void *src, size_t size)
 	return __probe_kernel_read(dst, src, size);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

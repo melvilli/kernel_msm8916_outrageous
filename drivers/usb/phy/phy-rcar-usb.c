@@ -2,8 +2,14 @@
  * Renesas R-Car USB phy driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012 Renesas Solutions Corp.
  * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
+=======
+ * Copyright (C) 2012-2013 Renesas Solutions Corp.
+ * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
+ * Copyright (C) 2013 Cogent Embedded, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2013 Renesas Solutions Corp.
  * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
@@ -22,6 +28,7 @@
 #include <linux/spinlock.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* USBH common register */
 #define USBPCTRL0	0x0800
@@ -34,6 +41,8 @@
 #define EIIBC2		0x009C
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/usb-rcar-phy.h>
 
 /* REGS block */
@@ -69,6 +78,9 @@
 				/* Function mode: be sure to set to 1	*/
 #define PORT1		(1 << 0) /* Selects port 1 mode:		*/
 				/* 1: function, 0: host			*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* USBPCTRL1 */
 #define PHY_RST		(1 << 2)
@@ -103,13 +115,19 @@ static int rcar_usb_phy_init(struct usb_phy *phy)
 	struct rcar_usb_phy_priv *priv = usb_phy_to_priv(phy);
 	struct device *dev = phy->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *reg0 = priv->reg0;
 	void __iomem *reg1 = priv->reg1;
 =======
+=======
+>>>>>>> v3.18
 	struct rcar_phy_platform_data *pdata = dev_get_platdata(dev);
 	void __iomem *reg0 = priv->reg0;
 	void __iomem *reg1 = priv->reg1;
 	static const u8 ovcn_act[] = { OVC0_ACT, OVC1_ACT, OVC2_ACT };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i;
 	u32 val;
@@ -129,8 +147,11 @@ static int rcar_usb_phy_init(struct usb_phy *phy)
 		iowrite32(PHY_ENB | PLL_ENB, (reg0 + USBPCTRL1));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* (3) USB module status check */
 =======
+=======
+>>>>>>> v3.18
 		/* (3) set USB-PHY in accord with the conditions of usage */
 		if (reg1) {
 			u32 hsqctl1 = pdata->ferrite_bead ? 0x41 : 0;
@@ -141,6 +162,9 @@ static int rcar_usb_phy_init(struct usb_phy *phy)
 		}
 
 		/* (4) USB module status check */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		for (i = 0; i < 1024; i++) {
 			udelay(10);
@@ -154,6 +178,7 @@ static int rcar_usb_phy_init(struct usb_phy *phy)
 			goto phy_init_end;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* (4) USB-PHY reset clear */
 		iowrite32(PHY_ENB | PLL_ENB | PHY_RST, (reg0 + USBPCTRL1));
@@ -174,6 +199,8 @@ static int rcar_usb_phy_init(struct usb_phy *phy)
 		iowrite32(0x00000001, (reg0 + EIIBC2));
 		iowrite32(0x00000001, (reg1 + EIIBC2));
 =======
+=======
+>>>>>>> v3.18
 		/* (5) USB-PHY reset clear */
 		iowrite32(PHY_ENB | PLL_ENB | PHY_RST, (reg0 + USBPCTRL1));
 
@@ -192,6 +219,9 @@ static int rcar_usb_phy_init(struct usb_phy *phy)
 				val |= ovcn_act[i];
 		}
 		iowrite32(val, (reg0 + USBPCTRL0));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -220,10 +250,15 @@ static void rcar_usb_phy_shutdown(struct usb_phy *phy)
 	spin_lock_irqsave(&priv->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->counter-- == 1) { /* last user */
 		iowrite32(0x00000000, (reg0 + USBPCTRL0));
 		iowrite32(0x00000000, (reg0 + USBPCTRL1));
 	}
+=======
+	if (priv->counter-- == 1)	/* last user */
+		iowrite32(0x00000000, (reg0 + USBPCTRL1));
+>>>>>>> v3.18
 =======
 	if (priv->counter-- == 1)	/* last user */
 		iowrite32(0x00000000, (reg0 + USBPCTRL1));
@@ -237,6 +272,7 @@ static int rcar_usb_phy_probe(struct platform_device *pdev)
 	struct rcar_usb_phy_priv *priv;
 	struct resource *res0, *res1;
 	struct device *dev = &pdev->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void __iomem *reg0, *reg1;
 	int ret;
@@ -260,6 +296,8 @@ static int rcar_usb_phy_probe(struct platform_device *pdev)
 		dev_err(dev, "ioremap error\n");
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *reg0, *reg1 = NULL;
 	int ret;
 
@@ -278,6 +316,9 @@ static int rcar_usb_phy_probe(struct platform_device *pdev)
 		reg1 = devm_ioremap_resource(dev, res1);
 		if (IS_ERR(reg1))
 			return PTR_ERR(reg1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

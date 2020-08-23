@@ -40,22 +40,32 @@ Module configuration options
 
  If you use the floppy driver as a module, use the following syntax:
 <<<<<<< HEAD
+<<<<<<< HEAD
 modprobe floppy <options>
 
 Example:
  modprobe floppy omnibook messages
 =======
+=======
+>>>>>>> v3.18
 modprobe floppy floppy="<options>"
 
 Example:
  modprobe floppy floppy="omnibook messages"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  If you need certain options enabled every time you load the floppy driver,
 you can put:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  options floppy omnibook messages
+=======
+ options floppy floppy="omnibook messages"
+>>>>>>> v3.18
 =======
  options floppy floppy="omnibook messages"
 >>>>>>> v3.18

@@ -230,7 +230,11 @@ struct lguest_vq_info {
  * knows which virtqueue we're talking about.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void lg_notify(struct virtqueue *vq)
+=======
+static bool lg_notify(struct virtqueue *vq)
+>>>>>>> v3.18
 =======
 static bool lg_notify(struct virtqueue *vq)
 >>>>>>> v3.18
@@ -243,6 +247,10 @@ static bool lg_notify(struct virtqueue *vq)
 
 	hcall(LHCALL_NOTIFY, lvq->config.pfn << PAGE_SHIFT, 0, 0, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return true;
+>>>>>>> v3.18
 =======
 	return true;
 >>>>>>> v3.18

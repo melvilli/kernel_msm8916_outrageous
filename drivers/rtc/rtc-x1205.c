@@ -5,7 +5,11 @@
  *
  * please send all reports to:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	Karen Spearel <kas111 at gmail dot com>
+=======
+ *	Karen Spearel <kas111 at gmail dot com>
+>>>>>>> v3.18
 =======
  *	Karen Spearel <kas111 at gmail dot com>
 >>>>>>> v3.18
@@ -220,7 +224,12 @@ static int x1205_set_datetime(struct i2c_client *client, struct rtc_time *tm,
 
 	/* this sequence is required to unlock the chip */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((xfer = i2c_master_send(client, wel, 3)) != 3) {
+=======
+	xfer = i2c_master_send(client, wel, 3);
+	if (xfer != 3) {
+>>>>>>> v3.18
 =======
 	xfer = i2c_master_send(client, wel, 3);
 	if (xfer != 3) {
@@ -230,7 +239,12 @@ static int x1205_set_datetime(struct i2c_client *client, struct rtc_time *tm,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((xfer = i2c_master_send(client, rwel, 3)) != 3) {
+=======
+	xfer = i2c_master_send(client, rwel, 3);
+	if (xfer != 3) {
+>>>>>>> v3.18
 =======
 	xfer = i2c_master_send(client, rwel, 3);
 	if (xfer != 3) {
@@ -284,7 +298,12 @@ static int x1205_set_datetime(struct i2c_client *client, struct rtc_time *tm,
 
 	/* disable further writes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((xfer = i2c_master_send(client, diswe, 3)) != 3) {
+=======
+	xfer = i2c_master_send(client, diswe, 3);
+	if (xfer != 3) {
+>>>>>>> v3.18
 =======
 	xfer = i2c_master_send(client, diswe, 3);
 	if (xfer != 3) {
@@ -395,8 +414,12 @@ static int x1205_get_atrim(struct i2c_client *client, int *trim)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct x1205_limit
 {
+=======
+struct x1205_limit {
+>>>>>>> v3.18
 =======
 struct x1205_limit {
 >>>>>>> v3.18
@@ -454,7 +477,12 @@ static int x1205_validate_client(struct i2c_client *client)
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((xfer = i2c_transfer(client->adapter, msgs, 2)) != 2) {
+=======
+		xfer = i2c_transfer(client->adapter, msgs, 2);
+		if (xfer != 2) {
+>>>>>>> v3.18
 =======
 		xfer = i2c_transfer(client->adapter, msgs, 2);
 		if (xfer != 2) {
@@ -496,7 +524,12 @@ static int x1205_validate_client(struct i2c_client *client)
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((xfer = i2c_transfer(client->adapter, msgs, 2)) != 2) {
+=======
+		xfer = i2c_transfer(client->adapter, msgs, 2);
+		if (xfer != 2) {
+>>>>>>> v3.18
 =======
 		xfer = i2c_transfer(client->adapter, msgs, 2);
 		if (xfer != 2) {
@@ -582,17 +615,23 @@ static int x1205_rtc_proc(struct device *dev, struct seq_file *seq)
 	int err, dtrim, atrim;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((err = x1205_get_dtrim(to_i2c_client(dev), &dtrim)) == 0)
 		seq_printf(seq, "digital_trim\t: %d ppm\n", dtrim);
 
 	if ((err = x1205_get_atrim(to_i2c_client(dev), &atrim)) == 0)
 =======
+=======
+>>>>>>> v3.18
 	err = x1205_get_dtrim(to_i2c_client(dev), &dtrim);
 	if (!err)
 		seq_printf(seq, "digital_trim\t: %d ppm\n", dtrim);
 
 	err = x1205_get_atrim(to_i2c_client(dev), &atrim);
 	if (!err)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		seq_printf(seq, "analog_trim\t: %d.%02d pF\n",
 			atrim / 1000, atrim % 1000);
@@ -682,7 +721,12 @@ static int x1205_probe(struct i2c_client *client,
 
 	/* Check for power failures and eventually enable the osc */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((err = x1205_get_status(client, &sr)) == 0) {
+=======
+	err = x1205_get_status(client, &sr);
+	if (!err) {
+>>>>>>> v3.18
 =======
 	err = x1205_get_status(client, &sr);
 	if (!err) {
@@ -695,6 +739,7 @@ static int x1205_probe(struct i2c_client *client,
 			x1205_fix_osc(client);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	else
 		dev_err(&client->dev, "couldn't read status\n");
@@ -703,6 +748,8 @@ static int x1205_probe(struct i2c_client *client,
 	if (err)
 		return err;
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		dev_err(&client->dev, "couldn't read status\n");
 	}
@@ -710,6 +757,9 @@ static int x1205_probe(struct i2c_client *client,
 	err = x1205_sysfs_register(&client->dev);
 	if (err)
 		dev_err(&client->dev, "Unable to create sysfs entries\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

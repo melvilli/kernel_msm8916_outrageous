@@ -55,6 +55,7 @@ END_FTR_SECTION_IFSET(CPU_FTR_REAL_LE)				\
 	mtspr	SPRN_SRR1,r12 ;					\
 	rfid ;		/* return to userspace */		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	. ;						\
 2:	mfspr	r12,SPRN_SRR1 ;					\
 	andi.	r12,r12,MSR_PR ;				\
@@ -63,6 +64,8 @@ END_FTR_SECTION_IFSET(CPU_FTR_REAL_LE)				\
 	mtspr	SPRN_SRR1,r4 ;					\
 	mtspr	SPRN_SDR1,r5 ;					\
 	rfid ;							\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	b	. ;	/* prevent speculative execution */
@@ -125,6 +128,7 @@ BEGIN_FTR_SECTION
 	/* Total loss of HV state is fatal, we could try to use the
 	 * PIR to locate a PACA, then use an emergency stack etc...
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * but for now, let's just stay stuck here
 	 */
 	bgt	cr1,.
@@ -132,6 +136,8 @@ BEGIN_FTR_SECTION
 
 #ifdef CONFIG_KVM_BOOK3S_64_HV
 =======
+=======
+>>>>>>> v3.18
 	 * OPAL v3 based powernv platforms have new idle states
 	 * which fall in this catagory.
 	 */
@@ -139,6 +145,9 @@ BEGIN_FTR_SECTION
 	GET_PACA(r13)
 
 #ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	li	r0,KVM_HWTHREAD_IN_KERNEL
 	stb	r0,HSTATE_HWTHREAD_STATE(r13)
@@ -153,9 +162,12 @@ BEGIN_FTR_SECTION
 
 	beq	cr1,2f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.power7_wakeup_noloss
 2:	b	.power7_wakeup_loss
 =======
+=======
+>>>>>>> v3.18
 	b	power7_wakeup_noloss
 2:	b	power7_wakeup_loss
 
@@ -163,6 +175,9 @@ BEGIN_FTR_SECTION
 8:	GET_PACA(r13)
 	b 	power7_wakeup_tb_loss
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 9:
 END_FTR_SECTION_IFSET(CPU_FTR_HVMODE | CPU_FTR_ARCH_206)
@@ -179,9 +194,12 @@ machine_check_pSeries_1:
 	HMT_MEDIUM_PPR_DISCARD
 	SET_SCRATCH0(r13)		/* save r13 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_PROLOG_0(PACA_EXMC)
 	b	machine_check_pSeries_0
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_P7_NAP
 BEGIN_FTR_SECTION
 	/* Running native on arch 2.06 or later, check if we are
@@ -211,6 +229,9 @@ BEGIN_FTR_SECTION
 FTR_SECTION_ELSE
 	b	machine_check_pSeries_0
 ALT_FTR_SECTION_END_IFSET(CPU_FTR_HVMODE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	. = 0x300
@@ -219,10 +240,13 @@ data_access_pSeries:
 	HMT_MEDIUM_PPR_DISCARD
 	SET_SCRATCH0(r13)
 <<<<<<< HEAD
+<<<<<<< HEAD
 BEGIN_FTR_SECTION
 	b	data_access_check_stab
 data_access_not_stab:
 END_MMU_FTR_SECTION_IFCLR(MMU_FTR_SLB)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	EXCEPTION_PROLOG_PSERIES(PACA_EXGEN, data_access_common, EXC_STD,
@@ -245,15 +269,21 @@ data_access_slb_pSeries:
 	mfspr	r12,SPRN_SRR1
 #ifndef CONFIG_RELOCATABLE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.slb_miss_realmode
 #else
 	/*
 	 * We can't just use a direct branch to .slb_miss_realmode
 =======
+=======
+>>>>>>> v3.18
 	b	slb_miss_realmode
 #else
 	/*
 	 * We can't just use a direct branch to slb_miss_realmode
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * because the distance from here to there depends on where
 	 * the kernel ends up being put.
@@ -261,7 +291,11 @@ data_access_slb_pSeries:
 	mfctr	r11
 	ld	r10,PACAKBASE(r13)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LOAD_HANDLER(r10, .slb_miss_realmode)
+=======
+	LOAD_HANDLER(r10, slb_miss_realmode)
+>>>>>>> v3.18
 =======
 	LOAD_HANDLER(r10, slb_miss_realmode)
 >>>>>>> v3.18
@@ -288,17 +322,23 @@ instruction_access_slb_pSeries:
 	mfspr	r12,SPRN_SRR1
 #ifndef CONFIG_RELOCATABLE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.slb_miss_realmode
 #else
 	mfctr	r11
 	ld	r10,PACAKBASE(r13)
 	LOAD_HANDLER(r10, .slb_miss_realmode)
 =======
+=======
+>>>>>>> v3.18
 	b	slb_miss_realmode
 #else
 	mfctr	r11
 	ld	r10,PACAKBASE(r13)
 	LOAD_HANDLER(r10, slb_miss_realmode)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mtctr	r10
 	bctr
@@ -371,7 +411,11 @@ system_call_pSeries:
 	 */
 	. = 0xe00
 <<<<<<< HEAD
+<<<<<<< HEAD
 hv_exception_trampoline:
+=======
+hv_data_storage_trampoline:
+>>>>>>> v3.18
 =======
 hv_data_storage_trampoline:
 >>>>>>> v3.18
@@ -381,6 +425,10 @@ hv_data_storage_trampoline:
 
 	. = 0xe20
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+hv_instr_storage_trampoline:
+>>>>>>> v3.18
 =======
 hv_instr_storage_trampoline:
 >>>>>>> v3.18
@@ -390,6 +438,10 @@ hv_instr_storage_trampoline:
 
 	. = 0xe40
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+emulation_assist_trampoline:
+>>>>>>> v3.18
 =======
 emulation_assist_trampoline:
 >>>>>>> v3.18
@@ -399,12 +451,15 @@ emulation_assist_trampoline:
 
 	. = 0xe60
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_SCRATCH0(r13)
 	EXCEPTION_PROLOG_0(PACA_EXGEN)
 	b	hmi_exception_hv
 
 	. = 0xe80
 =======
+=======
+>>>>>>> v3.18
 hv_exception_trampoline:
 	SET_SCRATCH0(r13)
 	EXCEPTION_PROLOG_0(PACA_EXGEN)
@@ -412,6 +467,9 @@ hv_exception_trampoline:
 
 	. = 0xe80
 hv_doorbell_trampoline:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SET_SCRATCH0(r13)
 	EXCEPTION_PROLOG_0(PACA_EXGEN)
@@ -423,8 +481,13 @@ hv_doorbell_trampoline:
 	 * trickery is thus necessary
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 performance_monitor_pSeries_1:
 	. = 0xf00
+=======
+	. = 0xf00
+performance_monitor_pseries_trampoline:
+>>>>>>> v3.18
 =======
 	. = 0xf00
 performance_monitor_pseries_trampoline:
@@ -434,8 +497,13 @@ performance_monitor_pseries_trampoline:
 	b	performance_monitor_pSeries
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 altivec_unavailable_pSeries_1:
 	. = 0xf20
+=======
+	. = 0xf20
+altivec_unavailable_pseries_trampoline:
+>>>>>>> v3.18
 =======
 	. = 0xf20
 altivec_unavailable_pseries_trampoline:
@@ -445,8 +513,13 @@ altivec_unavailable_pseries_trampoline:
 	b	altivec_unavailable_pSeries
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 vsx_unavailable_pSeries_1:
 	. = 0xf40
+=======
+	. = 0xf40
+vsx_unavailable_pseries_trampoline:
+>>>>>>> v3.18
 =======
 	. = 0xf40
 vsx_unavailable_pseries_trampoline:
@@ -456,8 +529,13 @@ vsx_unavailable_pseries_trampoline:
 	b	vsx_unavailable_pSeries
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 facility_unavailable_trampoline:
 	. = 0xf60
+=======
+	. = 0xf60
+facility_unavailable_trampoline:
+>>>>>>> v3.18
 =======
 	. = 0xf60
 facility_unavailable_trampoline:
@@ -467,8 +545,13 @@ facility_unavailable_trampoline:
 	b	facility_unavailable_pSeries
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 hv_facility_unavailable_trampoline:
 	. = 0xf80
+=======
+	. = 0xf80
+hv_facility_unavailable_trampoline:
+>>>>>>> v3.18
 =======
 	. = 0xf80
 hv_facility_unavailable_trampoline:
@@ -492,11 +575,15 @@ denorm_exception_hv:
 	mtspr	SPRN_SPRG_HSCRATCH0,r13
 	EXCEPTION_PROLOG_0(PACA_EXGEN)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std	r11,PACA_EXGEN+EX_R11(r13)
 	std	r12,PACA_EXGEN+EX_R12(r13)
 	mfspr	r9,SPRN_SPRG_HSCRATCH0
 	std	r9,PACA_EXGEN+EX_R13(r13)
 	mfcr	r9
+=======
+	EXCEPTION_PROLOG_1(PACA_EXGEN, NOTEST, 0x1500)
+>>>>>>> v3.18
 =======
 	EXCEPTION_PROLOG_1(PACA_EXGEN, NOTEST, 0x1500)
 >>>>>>> v3.18
@@ -510,6 +597,10 @@ denorm_exception_hv:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	KVMTEST(0x1500)
+>>>>>>> v3.18
 =======
 	KVMTEST(0x1500)
 >>>>>>> v3.18
@@ -537,7 +628,10 @@ denorm_exception_hv:
 	.align	7
 	/* moved from 0x200 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 machine_check_pSeries_early:
 BEGIN_FTR_SECTION
 	EXCEPTION_PROLOG_1(PACA_EXMC, NOTEST, 0x200)
@@ -612,6 +706,9 @@ BEGIN_FTR_SECTION
 	b	.	/* prevent speculative execution */
 END_FTR_SECTION_IFSET(CPU_FTR_HVMODE)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 machine_check_pSeries:
 	.globl machine_check_fwnmi
@@ -623,6 +720,7 @@ machine_check_pSeries_0:
 	EXCEPTION_PROLOG_1(PACA_EXMC, KVMTEST, 0x200)
 	EXCEPTION_PROLOG_PSERIES_1(machine_check_common, EXC_STD)
 	KVM_HANDLER_SKIP(PACA_EXMC, EXC_STD, 0x200)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* moved from 0x300 */
@@ -652,6 +750,8 @@ do_stab_bolted_pSeries:
 	std	r10,PACA_EXSLB+EX_R13(r13)
 	EXCEPTION_PROLOG_PSERIES_1(.do_stab_bolted, EXC_STD)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	KVM_HANDLER_SKIP(PACA_EXGEN, EXC_STD, 0x300)
@@ -714,11 +814,17 @@ denorm_done:
 	ld	r9,PACA_EXGEN+EX_R9(r13)
 	RESTORE_PPR_PACA(PACA_EXGEN, r10)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 BEGIN_FTR_SECTION
 	ld	r10,PACA_EXGEN+EX_CFAR(r13)
 	mtspr	SPRN_CFAR,r10
 END_FTR_SECTION_IFSET(CPU_FTR_CFAR)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ld	r10,PACA_EXGEN+EX_R10(r13)
 	ld	r11,PACA_EXGEN+EX_R11(r13)
@@ -737,8 +843,14 @@ END_FTR_SECTION_IFSET(CPU_FTR_CFAR)
 	STD_EXCEPTION_HV_OOL(0xe42, emulation_assist)
 	KVM_HANDLER(PACA_EXGEN, EXC_HV, 0xe42)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	STD_EXCEPTION_HV_OOL(0xe62, hmi_exception) /* need to flush cache ? */
 	KVM_HANDLER(PACA_EXGEN, EXC_HV, 0xe62)
+=======
+	MASKABLE_EXCEPTION_HV_OOL(0xe62, hmi_exception)
+	KVM_HANDLER(PACA_EXGEN, EXC_HV, 0xe62)
+
+>>>>>>> v3.18
 =======
 	MASKABLE_EXCEPTION_HV_OOL(0xe62, hmi_exception)
 	KVM_HANDLER(PACA_EXGEN, EXC_HV, 0xe62)
@@ -765,6 +877,11 @@ END_FTR_SECTION_IFSET(CPU_FTR_CFAR)
  * - If it was a doorbell we return immediately since doorbells are edge
  *   triggered and won't automatically refire.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * - If it was a HMI we return immediately since we handled it in realmode
+ *   and it won't refire.
+>>>>>>> v3.18
 =======
  * - If it was a HMI we return immediately since we handled it in realmode
  *   and it won't refire.
@@ -787,6 +904,11 @@ masked_##_H##interrupt:					\
 1:	cmpwi	r10,PACA_IRQ_DBELL;			\
 	beq	2f;					\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cmpwi	r10,PACA_IRQ_HMI;			\
+	beq	2f;					\
+>>>>>>> v3.18
 =======
 	cmpwi	r10,PACA_IRQ_HMI;			\
 	beq	2f;					\
@@ -881,7 +1003,10 @@ slb_miss_user_pseries:
 #endif /* __DISABLED__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KVM_BOOK3S_64_HANDLER
 kvmppc_skip_interrupt:
 	/*
@@ -908,6 +1033,9 @@ kvmppc_skip_Hinterrupt:
 	b	.
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Code from here down to __end_handlers is invoked from the
@@ -919,6 +1047,7 @@ kvmppc_skip_Hinterrupt:
 
 /*** Common interrupt handlers ***/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	STD_EXCEPTION_COMMON(0x100, system_reset, .system_reset_exception)
 
@@ -977,6 +1106,8 @@ machine_check_common:
 	STD_EXCEPTION_COMMON(0x1600, cbe_maintenance, .cbe_maintenance_exception)
 	STD_EXCEPTION_COMMON(0x1800, cbe_thermal, .cbe_thermal_exception)
 =======
+=======
+>>>>>>> v3.18
 	STD_EXCEPTION_COMMON(0x100, system_reset, system_reset_exception)
 
 	STD_EXCEPTION_COMMON_ASYNC(0x500, hardware_interrupt, do_IRQ)
@@ -1009,6 +1140,9 @@ machine_check_common:
 	STD_EXCEPTION_COMMON(0x1200, cbe_system_error, cbe_system_error_exception)
 	STD_EXCEPTION_COMMON(0x1600, cbe_maintenance, cbe_maintenance_exception)
 	STD_EXCEPTION_COMMON(0x1800, cbe_thermal, cbe_thermal_exception)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_CBE_RAS */
 
@@ -1039,15 +1173,21 @@ data_access_slb_relon_pSeries:
 	mfspr	r12,SPRN_SRR1
 #ifndef CONFIG_RELOCATABLE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.slb_miss_realmode
 #else
 	/*
 	 * We can't just use a direct branch to .slb_miss_realmode
 =======
+=======
+>>>>>>> v3.18
 	b	slb_miss_realmode
 #else
 	/*
 	 * We can't just use a direct branch to slb_miss_realmode
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * because the distance from here to there depends on where
 	 * the kernel ends up being put.
@@ -1055,7 +1195,11 @@ data_access_slb_relon_pSeries:
 	mfctr	r11
 	ld	r10,PACAKBASE(r13)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LOAD_HANDLER(r10, .slb_miss_realmode)
+=======
+	LOAD_HANDLER(r10, slb_miss_realmode)
+>>>>>>> v3.18
 =======
 	LOAD_HANDLER(r10, slb_miss_realmode)
 >>>>>>> v3.18
@@ -1075,17 +1219,23 @@ instruction_access_slb_relon_pSeries:
 	mfspr	r12,SPRN_SRR1
 #ifndef CONFIG_RELOCATABLE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.slb_miss_realmode
 #else
 	mfctr	r11
 	ld	r10,PACAKBASE(r13)
 	LOAD_HANDLER(r10, .slb_miss_realmode)
 =======
+=======
+>>>>>>> v3.18
 	b	slb_miss_realmode
 #else
 	mfctr	r11
 	ld	r10,PACAKBASE(r13)
 	LOAD_HANDLER(r10, slb_miss_realmode)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mtctr	r10
 	bctr
@@ -1127,6 +1277,10 @@ system_call_relon_pSeries:
 
 	. = 0x4e40
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+emulation_assist_relon_trampoline:
+>>>>>>> v3.18
 =======
 emulation_assist_relon_trampoline:
 >>>>>>> v3.18
@@ -1139,6 +1293,10 @@ emulation_assist_relon_trampoline:
 
 	. = 0x4e80
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+h_doorbell_relon_trampoline:
+>>>>>>> v3.18
 =======
 h_doorbell_relon_trampoline:
 >>>>>>> v3.18
@@ -1147,8 +1305,13 @@ h_doorbell_relon_trampoline:
 	b	h_doorbell_relon_hv
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 performance_monitor_relon_pSeries_1:
 	. = 0x4f00
+=======
+	. = 0x4f00
+performance_monitor_relon_pseries_trampoline:
+>>>>>>> v3.18
 =======
 	. = 0x4f00
 performance_monitor_relon_pseries_trampoline:
@@ -1158,8 +1321,13 @@ performance_monitor_relon_pseries_trampoline:
 	b	performance_monitor_relon_pSeries
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 altivec_unavailable_relon_pSeries_1:
 	. = 0x4f20
+=======
+	. = 0x4f20
+altivec_unavailable_relon_pseries_trampoline:
+>>>>>>> v3.18
 =======
 	. = 0x4f20
 altivec_unavailable_relon_pseries_trampoline:
@@ -1169,8 +1337,13 @@ altivec_unavailable_relon_pseries_trampoline:
 	b	altivec_unavailable_relon_pSeries
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 vsx_unavailable_relon_pSeries_1:
 	. = 0x4f40
+=======
+	. = 0x4f40
+vsx_unavailable_relon_pseries_trampoline:
+>>>>>>> v3.18
 =======
 	. = 0x4f40
 vsx_unavailable_relon_pseries_trampoline:
@@ -1180,8 +1353,13 @@ vsx_unavailable_relon_pseries_trampoline:
 	b	vsx_unavailable_relon_pSeries
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 facility_unavailable_relon_trampoline:
 	. = 0x4f60
+=======
+	. = 0x4f60
+facility_unavailable_relon_trampoline:
+>>>>>>> v3.18
 =======
 	. = 0x4f60
 facility_unavailable_relon_trampoline:
@@ -1191,8 +1369,13 @@ facility_unavailable_relon_trampoline:
 	b	facility_unavailable_relon_pSeries
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 hv_facility_unavailable_relon_trampoline:
 	. = 0x4f80
+=======
+	. = 0x4f80
+hv_facility_unavailable_relon_trampoline:
+>>>>>>> v3.18
 =======
 	. = 0x4f80
 hv_facility_unavailable_relon_trampoline:
@@ -1209,12 +1392,18 @@ hv_facility_unavailable_relon_trampoline:
 	STD_RELON_EXCEPTION_PSERIES(0x5700, 0x1700, altivec_assist)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Other future vectors */
 	.align	7
 	.globl	__end_interrupts
 __end_interrupts:
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.align	7
 system_call_entry_direct:
@@ -1228,6 +1417,7 @@ system_call_entry:
 	b	system_call_common
 
 ppc64_runlatch_on_trampoline:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	b	.__ppc64_runlatch_on
 
@@ -1293,6 +1483,9 @@ END_FTR_SECTION_IFSET(CPU_FTR_CFAR)
 =======
 	b	__ppc64_runlatch_on
 >>>>>>> v3.18
+=======
+	b	__ppc64_runlatch_on
+>>>>>>> v3.18
 
 /*
  * Here r13 points to the paca, r9 contains the saved CR,
@@ -1308,7 +1501,11 @@ data_access_common:
 	stw	r10,PACA_EXGEN+EX_DSISR(r13)
 	EXCEPTION_PROLOG_COMMON(0x300, PACA_EXGEN)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DISABLE_INTS
+=======
+	RECONCILE_IRQ_STATE(r10, r11)
+>>>>>>> v3.18
 =======
 	RECONCILE_IRQ_STATE(r10, r11)
 >>>>>>> v3.18
@@ -1317,7 +1514,11 @@ data_access_common:
 	lwz	r4,PACA_EXGEN+EX_DSISR(r13)
 	li	r5,0x300
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.do_hash_page		/* Try to handle as hpte fault */
+=======
+	b	do_hash_page		/* Try to handle as hpte fault */
+>>>>>>> v3.18
 =======
 	b	do_hash_page		/* Try to handle as hpte fault */
 >>>>>>> v3.18
@@ -1331,17 +1532,23 @@ h_data_storage_common:
 	stw     r10,PACA_EXGEN+EX_DSISR(r13)
 	EXCEPTION_PROLOG_COMMON(0xe00, PACA_EXGEN)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl      .save_nvgprs
 	DISABLE_INTS
 	addi    r3,r1,STACK_FRAME_OVERHEAD
 	bl      .unknown_exception
 	b       .ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	bl      save_nvgprs
 	RECONCILE_IRQ_STATE(r10, r11)
 	addi    r3,r1,STACK_FRAME_OVERHEAD
 	bl      unknown_exception
 	b       ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.align	7
@@ -1349,7 +1556,11 @@ h_data_storage_common:
 instruction_access_common:
 	EXCEPTION_PROLOG_COMMON(0x400, PACA_EXGEN)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DISABLE_INTS
+=======
+	RECONCILE_IRQ_STATE(r10, r11)
+>>>>>>> v3.18
 =======
 	RECONCILE_IRQ_STATE(r10, r11)
 >>>>>>> v3.18
@@ -1358,9 +1569,15 @@ instruction_access_common:
 	andis.	r4,r12,0x5820
 	li	r5,0x400
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.do_hash_page		/* Try to handle as hpte fault */
 
 	STD_EXCEPTION_COMMON(0xe20, h_instr_storage, .unknown_exception)
+=======
+	b	do_hash_page		/* Try to handle as hpte fault */
+
+	STD_EXCEPTION_COMMON(0xe20, h_instr_storage, unknown_exception)
+>>>>>>> v3.18
 =======
 	b	do_hash_page		/* Try to handle as hpte fault */
 
@@ -1381,7 +1598,11 @@ slb_miss_user_common:
 	std	r10,PACA_EXGEN+EX_LR(r13)
 	std	r11,PACA_EXGEN+EX_SRR0(r13)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.slb_allocate_user
+=======
+	bl	slb_allocate_user
+>>>>>>> v3.18
 =======
 	bl	slb_allocate_user
 >>>>>>> v3.18
@@ -1427,15 +1648,21 @@ slb_miss_fault:
 unrecov_user_slb:
 	EXCEPTION_PROLOG_COMMON(0x4200, PACA_EXGEN)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DISABLE_INTS
 	bl	.save_nvgprs
 1:	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	.unrecoverable_exception
 =======
+=======
+>>>>>>> v3.18
 	RECONCILE_IRQ_STATE(r10, r11)
 	bl	save_nvgprs
 1:	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	unrecoverable_exception
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b	1b
 
@@ -1443,7 +1670,10 @@ unrecov_user_slb:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Machine check is different because we use a different
 	 * save area: PACA_EXMC instead of PACA_EXGEN.
@@ -1468,6 +1698,9 @@ machine_check_common:
 	bl	machine_check_exception
 	b	ret_from_except
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.align	7
 	.globl alignment_common
@@ -1482,17 +1715,23 @@ alignment_common:
 	std	r3,_DAR(r1)
 	std	r4,_DSISR(r1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.save_nvgprs
 	DISABLE_INTS
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	.alignment_exception
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	bl	save_nvgprs
 	RECONCILE_IRQ_STATE(r10, r11)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	alignment_exception
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.align	7
@@ -1500,17 +1739,23 @@ alignment_common:
 program_check_common:
 	EXCEPTION_PROLOG_COMMON(0x700, PACA_EXGEN)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.save_nvgprs
 	DISABLE_INTS
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	.program_check_exception
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	bl	save_nvgprs
 	RECONCILE_IRQ_STATE(r10, r11)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	program_check_exception
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.align	7
@@ -1519,15 +1764,21 @@ fp_unavailable_common:
 	EXCEPTION_PROLOG_COMMON(0x800, PACA_EXGEN)
 	bne	1f			/* if from user, just load it up */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.save_nvgprs
 	DISABLE_INTS
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	.kernel_fp_unavailable_exception
 =======
+=======
+>>>>>>> v3.18
 	bl	save_nvgprs
 	RECONCILE_IRQ_STATE(r10, r11)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	kernel_fp_unavailable_exception
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BUG_OPCODE
 1:
@@ -1541,6 +1792,7 @@ BEGIN_FTR_SECTION
 END_FTR_SECTION_IFSET(CPU_FTR_TM)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.load_up_fpu
 	b	fast_exception_return
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
@@ -1551,6 +1803,8 @@ END_FTR_SECTION_IFSET(CPU_FTR_TM)
 	bl	.fp_unavailable_tm
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	bl	load_up_fpu
 	b	fast_exception_return
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
@@ -1560,6 +1814,9 @@ END_FTR_SECTION_IFSET(CPU_FTR_TM)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	fp_unavailable_tm
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	.align	7
@@ -1579,6 +1836,7 @@ BEGIN_FTR_SECTION
   END_FTR_SECTION_NESTED(CPU_FTR_TM, CPU_FTR_TM, 69)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.load_up_altivec
 	b	fast_exception_return
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
@@ -1589,6 +1847,8 @@ BEGIN_FTR_SECTION
 	bl	.altivec_unavailable_tm
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	bl	load_up_altivec
 	b	fast_exception_return
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
@@ -1598,11 +1858,15 @@ BEGIN_FTR_SECTION
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	altivec_unavailable_tm
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 1:
 END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bl	.save_nvgprs
 	DISABLE_INTS
@@ -1610,11 +1874,16 @@ END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 	bl	.altivec_unavailable_exception
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	bl	save_nvgprs
 	RECONCILE_IRQ_STATE(r10, r11)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	altivec_unavailable_exception
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.align	7
@@ -1634,6 +1903,7 @@ BEGIN_FTR_SECTION
   END_FTR_SECTION_NESTED(CPU_FTR_TM, CPU_FTR_TM, 69)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.load_up_vsx
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 2:	/* User process was in a transaction */
@@ -1643,6 +1913,8 @@ BEGIN_FTR_SECTION
 	bl	.vsx_unavailable_tm
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	b	load_up_vsx
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 2:	/* User process was in a transaction */
@@ -1651,11 +1923,15 @@ BEGIN_FTR_SECTION
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	vsx_unavailable_tm
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 1:
 END_FTR_SECTION_IFSET(CPU_FTR_VSX)
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bl	.save_nvgprs
 	DISABLE_INTS
@@ -1666,6 +1942,8 @@ END_FTR_SECTION_IFSET(CPU_FTR_VSX)
 	STD_EXCEPTION_COMMON(0xf60, facility_unavailable, .facility_unavailable_exception)
 	STD_EXCEPTION_COMMON(0xf80, hv_facility_unavailable, .facility_unavailable_exception)
 =======
+=======
+>>>>>>> v3.18
 	bl	save_nvgprs
 	RECONCILE_IRQ_STATE(r10, r11)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
@@ -1674,6 +1952,9 @@ END_FTR_SECTION_IFSET(CPU_FTR_VSX)
 
 	STD_EXCEPTION_COMMON(0xf60, facility_unavailable, facility_unavailable_exception)
 	STD_EXCEPTION_COMMON(0xf80, hv_facility_unavailable, facility_unavailable_exception)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.align	7
@@ -1691,6 +1972,7 @@ __end_handlers:
 	STD_RELON_EXCEPTION_HV_OOL(0xf80, hv_facility_unavailable)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * The __end_interrupts marker must be past the out-of-line (OOL)
 	 * handlers, so that they are copied to real address 0x100 when running
@@ -1702,6 +1984,8 @@ __end_handlers:
 	.globl	__end_interrupts
 __end_interrupts:
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if defined(CONFIG_PPC_PSERIES) || defined(CONFIG_PPC_POWERNV)
@@ -1720,12 +2004,15 @@ fwnmi_data_area:
 #endif /* defined(CONFIG_PPC_PSERIES) || defined(CONFIG_PPC_POWERNV) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Space for CPU0's segment table */
 	.balign 4096
 	.globl initial_stab
 initial_stab:
 	.space	4096
 =======
+=======
+>>>>>>> v3.18
 	.globl hmi_exception_early
 hmi_exception_early:
 	EXCEPTION_PROLOG_1(PACA_EXGEN, NOTEST, 0xe60)
@@ -1775,6 +2062,9 @@ hmi_exception_after_realmode:
 	SET_SCRATCH0(r13)
 	EXCEPTION_PROLOG_0(PACA_EXGEN)
 	b	hmi_exception_hv
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PPC_POWERNV
@@ -1796,7 +2086,10 @@ _GLOBAL(opal_mc_secondary_handler)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MACHINE_CHECK_HANDLER_WINDUP			\
 	/* Clear MSR_RI before setting SRR0 and SRR1. */\
 	li	r0,MSR_RI;				\
@@ -1945,6 +2238,9 @@ unrecover_mce:
 1:	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	unrecoverable_exception
 	b	1b
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * r13 points to the PACA, r9 contains the saved CR,
@@ -1955,7 +2251,11 @@ unrecover_mce:
  * We assume we aren't going to take any exceptions during this procedure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(slb_miss_realmode)
+=======
+slb_miss_realmode:
+>>>>>>> v3.18
 =======
 slb_miss_realmode:
 >>>>>>> v3.18
@@ -1968,7 +2268,11 @@ slb_miss_realmode:
 	std	r10,PACA_EXSLB+EX_LR(r13)	/* save LR */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.slb_allocate_realmode
+=======
+	bl	slb_allocate_realmode
+>>>>>>> v3.18
 =======
 	bl	slb_allocate_realmode
 >>>>>>> v3.18
@@ -2011,15 +2315,21 @@ slb_miss_realmode:
 unrecov_slb:
 	EXCEPTION_PROLOG_COMMON(0x4100, PACA_EXSLB)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DISABLE_INTS
 	bl	.save_nvgprs
 1:	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	.unrecoverable_exception
 =======
+=======
+>>>>>>> v3.18
 	RECONCILE_IRQ_STATE(r10, r11)
 	bl	save_nvgprs
 1:	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	unrecoverable_exception
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b	1b
 
@@ -2038,7 +2348,11 @@ power4_fixup_nap:
  */
 	.align	7
 <<<<<<< HEAD
+<<<<<<< HEAD
 _STATIC(do_hash_page)
+=======
+do_hash_page:
+>>>>>>> v3.18
 =======
 do_hash_page:
 >>>>>>> v3.18
@@ -2050,12 +2364,15 @@ do_hash_page:
 	andis.  r0,r4,DSISR_DABRMATCH@h
 	bne-    handle_dabr_fault
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 BEGIN_FTR_SECTION
 	andis.	r0,r4,0x0020		/* Is it a segment table fault? */
 	bne-	do_ste_alloc		/* If so handle it */
 END_MMU_FTR_SECTION_IFCLR(MMU_FTR_SLB)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	CURRENT_THREAD_INFO(r11, r1)
@@ -2082,7 +2399,11 @@ END_MMU_FTR_SECTION_IFCLR(MMU_FTR_SLB)
 	 * at return r3 = 0 for success, 1 for page fault, negative for error
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.hash_page		/* build HPTE if possible */
+=======
+	bl	hash_page		/* build HPTE if possible */
+>>>>>>> v3.18
 =======
 	bl	hash_page		/* build HPTE if possible */
 >>>>>>> v3.18
@@ -2099,6 +2420,7 @@ handle_page_fault:
 11:	ld	r4,_DAR(r1)
 	ld	r5,_DSISR(r1)
 	addi	r3,r1,STACK_FRAME_OVERHEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bl	.do_page_fault
 	cmpdi	r3,0
@@ -2119,6 +2441,8 @@ handle_dabr_fault:
 	bl      .do_break
 12:	b       .ret_from_except_lite
 =======
+=======
+>>>>>>> v3.18
 	bl	do_page_fault
 	cmpdi	r3,0
 	beq+	12f
@@ -2137,12 +2461,16 @@ handle_dabr_fault:
 	addi    r3,r1,STACK_FRAME_OVERHEAD
 	bl      do_break
 12:	b       ret_from_except_lite
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /* We have a page fault that hash_page could handle but HV refused
  * the PTE insertion
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 13:	bl	.save_nvgprs
 	mr	r5,r3
@@ -2151,12 +2479,17 @@ handle_dabr_fault:
 	bl	.low_hash_fault
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 13:	bl	save_nvgprs
 	mr	r5,r3
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	ld	r4,_DAR(r1)
 	bl	low_hash_fault
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -2166,6 +2499,7 @@ handle_dabr_fault:
  * were soft-disabled.  We want to invoke the exception handler for
  * the access, or panic if there isn't a handler.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 77:	bl	.save_nvgprs
 	mr	r4,r3
@@ -2285,6 +2619,8 @@ _GLOBAL(do_stab_bolted)
 	rfid
 	b	.	/* prevent speculative execution */
 =======
+=======
+>>>>>>> v3.18
 77:	bl	save_nvgprs
 	mr	r4,r3
 	addi	r3,r1,STACK_FRAME_OVERHEAD
@@ -2351,4 +2687,7 @@ END_FTR_SECTION_IFSET(CPU_FTR_CFAR)
 1:	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	kernel_bad_stack
 	b	1b
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

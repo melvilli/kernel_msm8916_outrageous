@@ -11,6 +11,10 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/input/input.h>
+>>>>>>> v3.18
 =======
 #include <dt-bindings/input/input.h>
 >>>>>>> v3.18
@@ -24,10 +28,13 @@
 		reg = <0x80000000 0x4000000>;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 &uart1 {
 =======
+=======
+>>>>>>> v3.18
 
 	regulators {
 		compatible = "simple-bus";
@@ -103,6 +110,9 @@
 	pinctrl-0 = <&pinctrl_esdhc1>;
 	cd-gpios = <&gpio2 1 0>;
 	wp-gpios = <&gpio2 0 0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = "okay";
 };
@@ -110,8 +120,11 @@
 &fec {
 	phy-mode = "rmii";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = "okay";
 =======
+=======
+>>>>>>> v3.18
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_fec>;
 	phy-supply = <&reg_fec_3v3>;
@@ -212,6 +225,9 @@
 			>;
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -220,7 +236,10 @@
 	status = "okay";
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &kpp {
 	pinctrl-names = "default";
@@ -270,4 +289,7 @@
 	external-vbus-divider;
 	status = "okay";
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

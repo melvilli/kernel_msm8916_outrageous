@@ -4,9 +4,15 @@ obj-$(CONFIG_DEBUG_FS) += regmap-debugfs.o
 obj-$(CONFIG_REGMAP_I2C) += regmap-i2c.o
 obj-$(CONFIG_REGMAP_SPI) += regmap-spi.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_REGMAP_MMIO) += regmap-mmio.o
 obj-$(CONFIG_REGMAP_IRQ) += regmap-irq.o
 obj-$(CONFIG_REGMAP_SWR) += regmap-swr.o
+=======
+obj-$(CONFIG_REGMAP_SPMI) += regmap-spmi.o
+obj-$(CONFIG_REGMAP_MMIO) += regmap-mmio.o
+obj-$(CONFIG_REGMAP_IRQ) += regmap-irq.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_REGMAP_SPMI) += regmap-spmi.o
 obj-$(CONFIG_REGMAP_MMIO) += regmap-mmio.o

@@ -29,8 +29,11 @@ If both fields are NULL, 'lp5523' is used by default.
 
 LP5523 has the internal program memory for running various LED patterns.
 <<<<<<< HEAD
+<<<<<<< HEAD
 For the details, please refer to 'firmware' section in leds-lp55xx.txt
 =======
+=======
+>>>>>>> v3.18
 There are two ways to run LED patterns.
 
 1) Legacy interface - enginex_mode, enginex_load and enginex_leds
@@ -51,6 +54,9 @@ There are two ways to run LED patterns.
 
 2) Firmware interface - LP55xx common interface
   For the details, please refer to 'firmware' section in leds-lp55xx.txt
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Selftest uses always the current from the platform data.

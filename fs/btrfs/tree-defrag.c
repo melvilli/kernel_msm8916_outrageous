@@ -38,7 +38,10 @@ int btrfs_defrag_leaves(struct btrfs_trans_handle *trans,
 	int wret;
 	int level;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int is_extent = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int next_key_ret = 0;
@@ -54,7 +57,11 @@ int btrfs_defrag_leaves(struct btrfs_trans_handle *trans,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (root->ref_cows == 0 && !is_extent)
+=======
+	if (!test_bit(BTRFS_ROOT_REF_COWS, &root->state))
+>>>>>>> v3.18
 =======
 	if (!test_bit(BTRFS_ROOT_REF_COWS, &root->state))
 >>>>>>> v3.18
@@ -93,7 +100,11 @@ int btrfs_defrag_leaves(struct btrfs_trans_handle *trans,
 	path->keep_locks = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = btrfs_search_forward(root, &key, NULL, path, min_trans);
+=======
+	ret = btrfs_search_forward(root, &key, path, min_trans);
+>>>>>>> v3.18
 =======
 	ret = btrfs_search_forward(root, &key, path, min_trans);
 >>>>>>> v3.18

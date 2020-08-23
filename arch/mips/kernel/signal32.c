@@ -43,9 +43,12 @@ extern asmlinkage int _save_fp_context32(struct sigcontext32 __user *sc);
 extern asmlinkage int _restore_fp_context32(struct sigcontext32 __user *sc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern asmlinkage int fpu_emulator_save_context32(struct sigcontext32 __user *sc);
 extern asmlinkage int fpu_emulator_restore_context32(struct sigcontext32 __user *sc);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -82,7 +85,10 @@ struct rt_sigframe32 {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Thread saved context copy to/from a signal context presumed to be on the
  * user stack, and therefore accessed with appropriate macros from uaccess.h.
  */
@@ -119,6 +125,9 @@ static int copy_fp_from_sigcontext32(struct sigcontext32 __user *sc)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * sigcontext handlers
  */
@@ -128,10 +137,13 @@ static int protected_save_fp_context32(struct sigcontext32 __user *sc)
 	while (1) {
 		lock_fpu_owner();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		own_fpu_inatomic(1);
 		err = save_fp_context32(sc); /* this might fail */
 		unlock_fpu_owner();
 =======
+=======
+>>>>>>> v3.18
 		if (is_fpu_owner()) {
 			err = save_fp_context32(sc);
 			unlock_fpu_owner();
@@ -139,6 +151,9 @@ static int protected_save_fp_context32(struct sigcontext32 __user *sc)
 			unlock_fpu_owner();
 			err = copy_fp_to_sigcontext32(sc);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (likely(!err))
 			break;
@@ -158,10 +173,13 @@ static int protected_restore_fp_context32(struct sigcontext32 __user *sc)
 	while (1) {
 		lock_fpu_owner();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		own_fpu_inatomic(0);
 		err = restore_fp_context32(sc); /* this might fail */
 		unlock_fpu_owner();
 =======
+=======
+>>>>>>> v3.18
 		if (is_fpu_owner()) {
 			err = restore_fp_context32(sc);
 			unlock_fpu_owner();
@@ -169,6 +187,9 @@ static int protected_restore_fp_context32(struct sigcontext32 __user *sc)
 			unlock_fpu_owner();
 			err = copy_fp_from_sigcontext32(sc);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (likely(!err))
 			break;
@@ -431,6 +452,11 @@ int copy_siginfo_to_user32(compat_siginfo_t __user *to, const siginfo_t *from)
 int copy_siginfo_from_user32(siginfo_t *to, compat_siginfo_t __user *from)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(to, 0, sizeof *to);
+
+>>>>>>> v3.18
 =======
 	memset(to, 0, sizeof *to);
 
@@ -515,8 +541,13 @@ badframe:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int setup_frame_32(void *sig_return, struct k_sigaction *ka,
 			  struct pt_regs *regs, int signr, sigset_t *set)
+=======
+static int setup_frame_32(void *sig_return, struct ksignal *ksig,
+			  struct pt_regs *regs, sigset_t *set)
+>>>>>>> v3.18
 =======
 static int setup_frame_32(void *sig_return, struct ksignal *ksig,
 			  struct pt_regs *regs, sigset_t *set)
@@ -526,9 +557,15 @@ static int setup_frame_32(void *sig_return, struct ksignal *ksig,
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame = get_sigframe(ka, regs, sizeof(*frame));
 	if (!access_ok(VERIFY_WRITE, frame, sizeof (*frame)))
 		goto give_sigsegv;
+=======
+	frame = get_sigframe(ksig, regs, sizeof(*frame));
+	if (!access_ok(VERIFY_WRITE, frame, sizeof (*frame)))
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 	frame = get_sigframe(ksig, regs, sizeof(*frame));
 	if (!access_ok(VERIFY_WRITE, frame, sizeof (*frame)))
@@ -540,7 +577,11 @@ static int setup_frame_32(void *sig_return, struct ksignal *ksig,
 
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -556,7 +597,11 @@ static int setup_frame_32(void *sig_return, struct ksignal *ksig,
 	 * struct sigframe.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->regs[ 4] = signr;
+=======
+	regs->regs[ 4] = ksig->sig;
+>>>>>>> v3.18
 =======
 	regs->regs[ 4] = ksig->sig;
 >>>>>>> v3.18
@@ -565,7 +610,11 @@ static int setup_frame_32(void *sig_return, struct ksignal *ksig,
 	regs->regs[29] = (unsigned long) frame;
 	regs->regs[31] = (unsigned long) sig_return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->cp0_epc = regs->regs[25] = (unsigned long) ka->sa.sa_handler;
+=======
+	regs->cp0_epc = regs->regs[25] = (unsigned long) ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 =======
 	regs->cp0_epc = regs->regs[25] = (unsigned long) ksig->ka.sa.sa_handler;
 >>>>>>> v3.18
@@ -575,6 +624,7 @@ static int setup_frame_32(void *sig_return, struct ksignal *ksig,
 	       frame, regs->cp0_epc, regs->regs[31]);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 give_sigsegv:
@@ -586,15 +636,21 @@ static int setup_rt_frame_32(void *sig_return, struct k_sigaction *ka,
 			     struct pt_regs *regs, int signr, sigset_t *set,
 			     siginfo_t *info)
 =======
+=======
+>>>>>>> v3.18
 }
 
 static int setup_rt_frame_32(void *sig_return, struct ksignal *ksig,
 			     struct pt_regs *regs, sigset_t *set)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct rt_sigframe32 __user *frame;
 	int err = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	frame = get_sigframe(ka, regs, sizeof(*frame));
 	if (!access_ok(VERIFY_WRITE, frame, sizeof (*frame)))
@@ -603,12 +659,17 @@ static int setup_rt_frame_32(void *sig_return, struct ksignal *ksig,
 	/* Convert (siginfo_t -> compat_siginfo_t) and copy to user. */
 	err |= copy_siginfo_to_user32(&frame->rs_info, info);
 =======
+=======
+>>>>>>> v3.18
 	frame = get_sigframe(ksig, regs, sizeof(*frame));
 	if (!access_ok(VERIFY_WRITE, frame, sizeof (*frame)))
 		return -EFAULT;
 
 	/* Convert (siginfo_t -> compat_siginfo_t) and copy to user. */
 	err |= copy_siginfo_to_user32(&frame->rs_info, &ksig->info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Create the ucontext.	 */
@@ -620,7 +681,11 @@ static int setup_rt_frame_32(void *sig_return, struct ksignal *ksig,
 
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -636,7 +701,11 @@ static int setup_rt_frame_32(void *sig_return, struct ksignal *ksig,
 	 * the struct rt_sigframe32.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->regs[ 4] = signr;
+=======
+	regs->regs[ 4] = ksig->sig;
+>>>>>>> v3.18
 =======
 	regs->regs[ 4] = ksig->sig;
 >>>>>>> v3.18
@@ -645,7 +714,11 @@ static int setup_rt_frame_32(void *sig_return, struct ksignal *ksig,
 	regs->regs[29] = (unsigned long) frame;
 	regs->regs[31] = (unsigned long) sig_return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->cp0_epc = regs->regs[25] = (unsigned long) ka->sa.sa_handler;
+=======
+	regs->cp0_epc = regs->regs[25] = (unsigned long) ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 =======
 	regs->cp0_epc = regs->regs[25] = (unsigned long) ksig->ka.sa.sa_handler;
 >>>>>>> v3.18
@@ -656,10 +729,13 @@ static int setup_rt_frame_32(void *sig_return, struct ksignal *ksig,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(signr, current);
 	return -EFAULT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -684,8 +760,13 @@ static int signal32_init(void)
 		restore_fp_context32 = _restore_fp_context32;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		save_fp_context32 = fpu_emulator_save_context32;
 		restore_fp_context32 = fpu_emulator_restore_context32;
+=======
+		save_fp_context32 = copy_fp_to_sigcontext32;
+		restore_fp_context32 = copy_fp_from_sigcontext32;
+>>>>>>> v3.18
 =======
 		save_fp_context32 = copy_fp_to_sigcontext32;
 		restore_fp_context32 = copy_fp_from_sigcontext32;

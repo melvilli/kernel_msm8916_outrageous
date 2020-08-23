@@ -128,7 +128,11 @@ static void _rtl92de_query_rxphystatus(struct ieee80211_hw *hw,
 	bool is_cck_rate;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	is_cck_rate = RX_HAL_IS_CCK_RATE(pdesc);
+=======
+	is_cck_rate = RX_HAL_IS_CCK_RATE(pdesc->rxmcs);
+>>>>>>> v3.18
 =======
 	is_cck_rate = RX_HAL_IS_CCK_RATE(pdesc->rxmcs);
 >>>>>>> v3.18
@@ -531,7 +535,10 @@ bool rtl92de_rx_query_desc(struct ieee80211_hw *hw,	struct rtl_stats *stats,
 	/*rx_status->qual = stats->signal; */
 	rx_status->signal = stats->recvsignalpower + 10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*rx_status->noise = -stats->noise; */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return true;
@@ -554,7 +561,11 @@ static void _rtl92de_insert_emcontent(struct rtl_tcb_desc *ptcb_desc,
 void rtl92de_tx_fill_desc(struct ieee80211_hw *hw,
 			  struct ieee80211_hdr *hdr, u8 *pdesc_tx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct ieee80211_tx_info *info,
+=======
+			  u8 *pbd_desc_tx, struct ieee80211_tx_info *info,
+>>>>>>> v3.18
 =======
 			  u8 *pbd_desc_tx, struct ieee80211_tx_info *info,
 >>>>>>> v3.18
@@ -799,7 +810,12 @@ void rtl92de_tx_fill_cmddesc(struct ieee80211_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl92de_set_desc(u8 *pdesc, bool istx, u8 desc_name, u8 *val)
+=======
+void rtl92de_set_desc(struct ieee80211_hw *hw, u8 *pdesc, bool istx,
+		      u8 desc_name, u8 *val)
+>>>>>>> v3.18
 =======
 void rtl92de_set_desc(struct ieee80211_hw *hw, u8 *pdesc, bool istx,
 		      u8 desc_name, u8 *val)

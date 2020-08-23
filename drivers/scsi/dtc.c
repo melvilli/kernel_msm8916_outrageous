@@ -4,8 +4,11 @@
 #define DONT_USE_INTR
 #define UNSAFE			/* Leave interrupts enabled during pseudo-dma I/O */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define xNDEBUG (NDEBUG_INTR+NDEBUG_RESELECTION+\
 		 NDEBUG_SELECTION+NDEBUG_ARBITRATION)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DMA_WORKS_RIGHT
@@ -281,7 +284,11 @@ found:
 		 * reads. So better not enable them until I finger it out. */
 		if (instance->irq != SCSI_IRQ_NONE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (request_irq(instance->irq, dtc_intr, IRQF_DISABLED,
+=======
+			if (request_irq(instance->irq, dtc_intr, 0,
+>>>>>>> v3.18
 =======
 			if (request_irq(instance->irq, dtc_intr, 0,
 >>>>>>> v3.18

@@ -127,6 +127,10 @@ static void snd_cmi8328_cfg_write(u16 port, u8 reg, u8 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM
 >>>>>>> v3.18
@@ -144,6 +148,10 @@ static void snd_cmi8328_cfg_restore(u16 port, u8 cfg[])
 	snd_cmi8328_cfg_write(port, CFG3, cfg[2]);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_PM */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PM */
 >>>>>>> v3.18
@@ -300,8 +308,13 @@ static int snd_cmi8328_probe(struct device *pdev, unsigned int ndev)
 	outb(val, port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[ndev], id[ndev], THIS_MODULE,
 				sizeof(struct snd_cmi8328), &card);
+=======
+	err = snd_card_new(pdev, index[ndev], id[ndev], THIS_MODULE,
+			   sizeof(struct snd_cmi8328), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(pdev, index[ndev], id[ndev], THIS_MODULE,
 			   sizeof(struct snd_cmi8328), &card);
@@ -313,7 +326,10 @@ static int snd_cmi8328_probe(struct device *pdev, unsigned int ndev)
 	cmi->port = port;
 	cmi->wss_cfg = val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, pdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -435,7 +451,10 @@ static int snd_cmi8328_remove(struct device *pdev, unsigned int dev)
 	snd_cmi8328_cfg_write(cmi->port, CFG3, 0);
 	snd_card_free(card);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

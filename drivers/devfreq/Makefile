@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 CFLAGS_devfreq_trace.o		:= -I$(src)
 
 obj-$(CONFIG_PM_DEVFREQ)	+= devfreq.o
@@ -6,10 +7,14 @@ obj-$(CONFIG_PM_DEVFREQ)	+= devfreq_trace.o
 =======
 obj-$(CONFIG_PM_DEVFREQ)	+= devfreq.o
 >>>>>>> v3.18
+=======
+obj-$(CONFIG_PM_DEVFREQ)	+= devfreq.o
+>>>>>>> v3.18
 obj-$(CONFIG_DEVFREQ_GOV_SIMPLE_ONDEMAND)	+= governor_simpleondemand.o
 obj-$(CONFIG_DEVFREQ_GOV_PERFORMANCE)	+= governor_performance.o
 obj-$(CONFIG_DEVFREQ_GOV_POWERSAVE)	+= governor_powersave.o
 obj-$(CONFIG_DEVFREQ_GOV_USERSPACE)	+= governor_userspace.o
+<<<<<<< HEAD
 <<<<<<< HEAD
 obj-$(CONFIG_DEVFREQ_GOV_CPUFREQ)	+= governor_cpufreq.o
 obj-$(CONFIG_DEVFREQ_GOV_MSM_ADRENO_TZ)	+= governor_msm_adreno_tz.o
@@ -29,8 +34,13 @@ obj-$(CONFIG_MSM_DEVFREQ_DEVBW)		+= devfreq_devbw.o
 obj-$(CONFIG_DEVFREQ_SIMPLE_DEV)	+= devfreq_simple_dev.o
 obj-$(CONFIG_DEVFREQ_SPDM) 		+= devfreq_spdm.o devfreq_spdm_debugfs.o
 =======
+=======
+>>>>>>> v3.18
 
 # DEVFREQ Drivers
 obj-$(CONFIG_ARM_EXYNOS4_BUS_DEVFREQ)	+= exynos/
 obj-$(CONFIG_ARM_EXYNOS5_BUS_DEVFREQ)	+= exynos/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

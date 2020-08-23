@@ -45,6 +45,10 @@
 #include "jfs_acl.h"
 #include "jfs_debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "jfs_xattr.h"
+>>>>>>> v3.18
 =======
 #include "jfs_xattr.h"
 >>>>>>> v3.18
@@ -54,7 +58,11 @@ MODULE_AUTHOR("Steve Best/Dave Kleikamp/Barry Arndt, IBM");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct kmem_cache * jfs_inode_cachep;
+=======
+static struct kmem_cache *jfs_inode_cachep;
+>>>>>>> v3.18
 =======
 static struct kmem_cache *jfs_inode_cachep;
 >>>>>>> v3.18
@@ -65,7 +73,11 @@ static struct file_system_type jfs_fs_type;
 
 #define MAX_COMMIT_THREADS 64
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int commit_threads = 0;
+=======
+static int commit_threads;
+>>>>>>> v3.18
 =======
 static int commit_threads;
 >>>>>>> v3.18
@@ -96,8 +108,12 @@ static void jfs_handle_error(struct super_block *sb)
 			sb->s_id);
 	else if (sbi->flag & JFS_ERR_REMOUNT_RO) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_err("ERROR: (device %s): remounting filesystem "
 			"as read-only\n",
+=======
+		jfs_err("ERROR: (device %s): remounting filesystem as read-only\n",
+>>>>>>> v3.18
 =======
 		jfs_err("ERROR: (device %s): remounting filesystem as read-only\n",
 >>>>>>> v3.18
@@ -108,6 +124,7 @@ static void jfs_handle_error(struct super_block *sb)
 	/* nothing is done for continue beyond marking the superblock dirty */
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void jfs_error(struct super_block *sb, const char * function, ...)
 {
@@ -120,6 +137,8 @@ void jfs_error(struct super_block *sb, const char * function, ...)
 
 	pr_err("ERROR: (device %s): %s\n", sb->s_id, error_buf);
 =======
+=======
+>>>>>>> v3.18
 void jfs_error(struct super_block *sb, const char *fmt, ...)
 {
 	struct va_format vaf;
@@ -134,6 +153,9 @@ void jfs_error(struct super_block *sb, const char *fmt, ...)
 	       sb->s_id, __builtin_return_address(0), &vaf);
 
 	va_end(args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	jfs_handle_error(sb);
@@ -302,12 +324,18 @@ static int parse_options(char *options, struct super_block *sb, s64 *newLVSize,
 		{
 			char *resize = args[0].from;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*newLVSize = simple_strtoull(resize, &resize, 0);
 =======
+=======
+>>>>>>> v3.18
 			int rc = kstrtoll(resize, 0, newLVSize);
 
 			if (rc)
 				goto cleanup;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -363,13 +391,19 @@ static int parse_options(char *options, struct super_block *sb, s64 *newLVSize,
 		{
 			char *uid = args[0].from;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			uid_t val = simple_strtoul(uid, &uid, 0);
 =======
+=======
+>>>>>>> v3.18
 			uid_t val;
 			int rc = kstrtouint(uid, 0, &val);
 
 			if (rc)
 				goto cleanup;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sbi->uid = make_kuid(current_user_ns(), val);
 			if (!uid_valid(sbi->uid))
@@ -381,13 +415,19 @@ static int parse_options(char *options, struct super_block *sb, s64 *newLVSize,
 		{
 			char *gid = args[0].from;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gid_t val = simple_strtoul(gid, &gid, 0);
 =======
+=======
+>>>>>>> v3.18
 			gid_t val;
 			int rc = kstrtouint(gid, 0, &val);
 
 			if (rc)
 				goto cleanup;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sbi->gid = make_kgid(current_user_ns(), val);
 			if (!gid_valid(sbi->gid))
@@ -399,12 +439,18 @@ static int parse_options(char *options, struct super_block *sb, s64 *newLVSize,
 		{
 			char *umask = args[0].from;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sbi->umask = simple_strtoul(umask, &umask, 8);
 =======
+=======
+>>>>>>> v3.18
 			int rc = kstrtouint(umask, 8, &sbi->umask);
 
 			if (rc)
 				goto cleanup;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (sbi->umask & ~0777) {
 				pr_err("JFS: Invalid value of umask\n");
@@ -422,6 +468,7 @@ static int parse_options(char *options, struct super_block *sb, s64 *newLVSize,
 			 */
 			sbi->minblks_trim = 64;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (blk_queue_discard(q)) {
 				*flag |= JFS_DISCARD;
 			} else {
@@ -429,10 +476,15 @@ static int parse_options(char *options, struct super_block *sb, s64 *newLVSize,
 					"not supported on device\n");
 			}
 =======
+=======
+>>>>>>> v3.18
 			if (blk_queue_discard(q))
 				*flag |= JFS_DISCARD;
 			else
 				pr_err("JFS: discard option not supported on device\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -446,6 +498,7 @@ static int parse_options(char *options, struct super_block *sb, s64 *newLVSize,
 			struct request_queue *q = bdev_get_queue(sb->s_bdev);
 			char *minblks_trim = args[0].from;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (blk_queue_discard(q)) {
 				*flag |= JFS_DISCARD;
 				sbi->minblks_trim = simple_strtoull(
@@ -455,6 +508,8 @@ static int parse_options(char *options, struct super_block *sb, s64 *newLVSize,
 					"not supported on device\n");
 			}
 =======
+=======
+>>>>>>> v3.18
 			int rc;
 			if (blk_queue_discard(q)) {
 				*flag |= JFS_DISCARD;
@@ -464,14 +519,22 @@ static int parse_options(char *options, struct super_block *sb, s64 *newLVSize,
 					goto cleanup;
 			} else
 				pr_err("JFS: discard option not supported on device\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("jfs: Unrecognized mount option \"%s\" "
 					" or missing value\n", p);
+=======
+			printk("jfs: Unrecognized mount option \"%s\" or missing value\n",
+			       p);
+>>>>>>> v3.18
 =======
 			printk("jfs: Unrecognized mount option \"%s\" or missing value\n",
 			       p);
@@ -501,6 +564,7 @@ static int jfs_remount(struct super_block *sb, int *flags, char *data)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!parse_options(data, sb, &newLVSize, &flag)) {
 		return -EINVAL;
 	}
@@ -510,6 +574,8 @@ static int jfs_remount(struct super_block *sb, int *flags, char *data)
 			pr_err("JFS: resize requires volume" \
 				" to be mounted read-write\n");
 =======
+=======
+>>>>>>> v3.18
 	sync_filesystem(sb);
 	if (!parse_options(data, sb, &newLVSize, &flag))
 		return -EINVAL;
@@ -517,6 +583,9 @@ static int jfs_remount(struct super_block *sb, int *flags, char *data)
 	if (newLVSize) {
 		if (sb->s_flags & MS_RDONLY) {
 			pr_err("JFS: resize requires volume to be mounted read-write\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EROFS;
 		}
@@ -544,9 +613,14 @@ static int jfs_remount(struct super_block *sb, int *flags, char *data)
 	if ((!(sb->s_flags & MS_RDONLY)) && (*flags & MS_RDONLY)) {
 		rc = dquot_suspend(sb, -1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rc < 0) {
 			return rc;
 		}
+=======
+		if (rc < 0)
+			return rc;
+>>>>>>> v3.18
 =======
 		if (rc < 0)
 			return rc;
@@ -584,7 +658,11 @@ static int jfs_fill_super(struct super_block *sb, void *data, int silent)
 		return -EOVERFLOW;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sbi = kzalloc(sizeof (struct jfs_sb_info), GFP_KERNEL);
+=======
+	sbi = kzalloc(sizeof(struct jfs_sb_info), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	sbi = kzalloc(sizeof(struct jfs_sb_info), GFP_KERNEL);
 >>>>>>> v3.18
@@ -625,6 +703,10 @@ static int jfs_fill_super(struct super_block *sb, void *data, int silent)
 	sb->s_op = &jfs_super_operations;
 	sb->s_export_op = &jfs_export_operations;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sb->s_xattr = jfs_xattr_handlers;
+>>>>>>> v3.18
 =======
 	sb->s_xattr = jfs_xattr_handlers;
 >>>>>>> v3.18
@@ -645,7 +727,11 @@ static int jfs_fill_super(struct super_block *sb, void *data, int silent)
 	inode->i_size = sb->s_bdev->bd_inode->i_size;
 	inode->i_mapping->a_ops = &jfs_metapage_aops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	insert_inode_hash(inode);
+=======
+	hlist_add_fake(&inode->i_hash);
+>>>>>>> v3.18
 =======
 	hlist_add_fake(&inode->i_hash);
 >>>>>>> v3.18
@@ -656,9 +742,14 @@ static int jfs_fill_super(struct super_block *sb, void *data, int silent)
 	rc = jfs_mount(sb);
 	if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!silent) {
 			jfs_err("jfs_mount failed w/return code = %d", rc);
 		}
+=======
+		if (!silent)
+			jfs_err("jfs_mount failed w/return code = %d", rc);
+>>>>>>> v3.18
 =======
 		if (!silent)
 			jfs_err("jfs_mount failed w/return code = %d", rc);
@@ -700,7 +791,12 @@ static int jfs_fill_super(struct super_block *sb, void *data, int silent)
 	 * I would use MAX_LFS_FILESIZE, but it's only half as big
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sb->s_maxbytes = min(((u64) PAGE_CACHE_SIZE << 32) - 1, (u64)sb->s_maxbytes);
+=======
+	sb->s_maxbytes = min(((u64) PAGE_CACHE_SIZE << 32) - 1,
+			     (u64)sb->s_maxbytes);
+>>>>>>> v3.18
 =======
 	sb->s_maxbytes = min(((u64) PAGE_CACHE_SIZE << 32) - 1,
 			     (u64)sb->s_maxbytes);
@@ -715,9 +811,14 @@ out_no_root:
 out_no_rw:
 	rc = jfs_umount(sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc) {
 		jfs_err("jfs_umount failed with return code %d", rc);
 	}
+=======
+	if (rc)
+		jfs_err("jfs_umount failed with return code %d", rc);
+>>>>>>> v3.18
 =======
 	if (rc)
 		jfs_err("jfs_umount failed with return code %d", rc);
@@ -747,7 +848,11 @@ static int jfs_freeze(struct super_block *sb)
 		rc = lmLogShutdown(log);
 		if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(sb, "jfs_freeze: lmLogShutdown failed");
+=======
+			jfs_error(sb, "lmLogShutdown failed\n");
+>>>>>>> v3.18
 =======
 			jfs_error(sb, "lmLogShutdown failed\n");
 >>>>>>> v3.18
@@ -780,7 +885,11 @@ static int jfs_unfreeze(struct super_block *sb)
 		rc = updateSuper(sb, FM_MOUNT);
 		if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(sb, "jfs_unfreeze: updateSuper failed");
+=======
+			jfs_error(sb, "updateSuper failed\n");
+>>>>>>> v3.18
 =======
 			jfs_error(sb, "updateSuper failed\n");
 >>>>>>> v3.18
@@ -789,7 +898,11 @@ static int jfs_unfreeze(struct super_block *sb)
 		rc = lmLogInit(log);
 		if (rc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(sb, "jfs_unfreeze: lmLogInit failed");
+=======
+			jfs_error(sb, "lmLogInit failed\n");
+>>>>>>> v3.18
 =======
 			jfs_error(sb, "lmLogInit failed\n");
 >>>>>>> v3.18
@@ -1059,7 +1172,12 @@ static int __init init_jfs_fs(void)
 
 	for (i = 0; i < commit_threads; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfsCommitThread[i] = kthread_run(jfs_lazycommit, NULL, "jfsCommit");
+=======
+		jfsCommitThread[i] = kthread_run(jfs_lazycommit, NULL,
+						 "jfsCommit");
+>>>>>>> v3.18
 =======
 		jfsCommitThread[i] = kthread_run(jfs_lazycommit, NULL,
 						 "jfsCommit");

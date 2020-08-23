@@ -37,7 +37,11 @@ enum {
 #define IEEE802154_ADDR_LEN	8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ieee802154_addr {
+=======
+struct ieee802154_addr_sa {
+>>>>>>> v3.18
 =======
 struct ieee802154_addr_sa {
 >>>>>>> v3.18
@@ -56,7 +60,11 @@ struct ieee802154_addr_sa {
 struct sockaddr_ieee802154 {
 	sa_family_t family; /* AF_IEEE802154 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee802154_addr addr;
+=======
+	struct ieee802154_addr_sa addr;
+>>>>>>> v3.18
 =======
 	struct ieee802154_addr_sa addr;
 >>>>>>> v3.18
@@ -66,8 +74,11 @@ struct sockaddr_ieee802154 {
 #define SOL_IEEE802154	0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WPAN_WANTACK	0
 =======
+=======
+>>>>>>> v3.18
 #define WPAN_WANTACK		0
 #define WPAN_SECURITY		1
 #define WPAN_SECURITY_LEVEL	2
@@ -77,6 +88,9 @@ struct sockaddr_ieee802154 {
 #define WPAN_SECURITY_ON	2
 
 #define WPAN_SECURITY_LEVEL_DEFAULT	(-1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

@@ -25,9 +25,15 @@ struct pci_hostbridge_probe {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 __cpuinitdata fam10h_pci_mmconf_base;
 
 static struct pci_hostbridge_probe pci_probes[] __cpuinitdata = {
+=======
+static u64 fam10h_pci_mmconf_base;
+
+static struct pci_hostbridge_probe pci_probes[] = {
+>>>>>>> v3.18
 =======
 static u64 fam10h_pci_mmconf_base;
 
@@ -38,7 +44,11 @@ static struct pci_hostbridge_probe pci_probes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cmp_range(const void *x1, const void *x2)
+=======
+static int cmp_range(const void *x1, const void *x2)
+>>>>>>> v3.18
 =======
 static int cmp_range(const void *x1, const void *x2)
 >>>>>>> v3.18
@@ -60,7 +70,11 @@ static int cmp_range(const void *x1, const void *x2)
 #define FAM10H_PCI_MMCONF_BASE (0xfcULL<<32)
 #define BASE_VALID(b) ((b) + MMCONF_SIZE <= (0xfdULL<<32) || (b) >= (1ULL<<40))
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit get_fam10h_pci_mmconf_base(void)
+=======
+static void get_fam10h_pci_mmconf_base(void)
+>>>>>>> v3.18
 =======
 static void get_fam10h_pci_mmconf_base(void)
 >>>>>>> v3.18
@@ -181,7 +195,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit fam10h_check_enable_mmcfg(void)
+=======
+void fam10h_check_enable_mmcfg(void)
+>>>>>>> v3.18
 =======
 void fam10h_check_enable_mmcfg(void)
 >>>>>>> v3.18
@@ -249,7 +267,11 @@ static const struct dmi_system_id __initconst mmconf_dmi_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Called from a __cpuinit function, but only on the BSP. */
+=======
+/* Called from a non __init function, but only on the BSP. */
+>>>>>>> v3.18
 =======
 /* Called from a non __init function, but only on the BSP. */
 >>>>>>> v3.18

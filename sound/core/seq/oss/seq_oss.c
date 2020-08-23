@@ -40,12 +40,15 @@ MODULE_ALIAS_SNDRV_MINOR(SNDRV_MINOR_OSS_SEQUENCER);
 MODULE_ALIAS_SNDRV_MINOR(SNDRV_MINOR_OSS_MUSIC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef SNDRV_SEQ_OSS_DEBUG
 module_param(seq_oss_debug, int, 0644);
 MODULE_PARM_DESC(seq_oss_debug, "debug option");
 int seq_oss_debug = 0;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -154,6 +157,11 @@ odev_release(struct inode *inode, struct file *file)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	snd_seq_oss_drain_write(dp);
+
+>>>>>>> v3.18
 =======
 	snd_seq_oss_drain_write(dp);
 
@@ -238,9 +246,14 @@ register_device(void)
 	if ((rc = snd_register_oss_device(SNDRV_OSS_DEVICE_TYPE_SEQUENCER,
 					  NULL, 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  &seq_oss_f_ops, NULL,
 					  SNDRV_SEQ_OSS_DEVNAME)) < 0) {
 		snd_printk(KERN_ERR "can't register device seq\n");
+=======
+					  &seq_oss_f_ops, NULL)) < 0) {
+		pr_err("ALSA: seq_oss: can't register device seq\n");
+>>>>>>> v3.18
 =======
 					  &seq_oss_f_ops, NULL)) < 0) {
 		pr_err("ALSA: seq_oss: can't register device seq\n");
@@ -251,9 +264,14 @@ register_device(void)
 	if ((rc = snd_register_oss_device(SNDRV_OSS_DEVICE_TYPE_MUSIC,
 					  NULL, 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  &seq_oss_f_ops, NULL,
 					  SNDRV_SEQ_OSS_DEVNAME)) < 0) {
 		snd_printk(KERN_ERR "can't register device music\n");
+=======
+					  &seq_oss_f_ops, NULL)) < 0) {
+		pr_err("ALSA: seq_oss: can't register device music\n");
+>>>>>>> v3.18
 =======
 					  &seq_oss_f_ops, NULL)) < 0) {
 		pr_err("ALSA: seq_oss: can't register device music\n");
@@ -263,7 +281,10 @@ register_device(void)
 		return rc;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("device registered\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_unlock(&register_mutex);
@@ -275,16 +296,22 @@ unregister_device(void)
 {
 	mutex_lock(&register_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("device unregistered\n"));
 	if (snd_unregister_oss_device(SNDRV_OSS_DEVICE_TYPE_MUSIC, NULL, 0) < 0)		
 		snd_printk(KERN_ERR "error unregister device music\n");
 	if (snd_unregister_oss_device(SNDRV_OSS_DEVICE_TYPE_SEQUENCER, NULL, 0) < 0)
 		snd_printk(KERN_ERR "error unregister device seq\n");
 =======
+=======
+>>>>>>> v3.18
 	if (snd_unregister_oss_device(SNDRV_OSS_DEVICE_TYPE_MUSIC, NULL, 0) < 0)		
 		pr_err("ALSA: seq_oss: error unregister device music\n");
 	if (snd_unregister_oss_device(SNDRV_OSS_DEVICE_TYPE_SEQUENCER, NULL, 0) < 0)
 		pr_err("ALSA: seq_oss: error unregister device seq\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&register_mutex);
 }

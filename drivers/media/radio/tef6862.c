@@ -26,7 +26,10 @@
 #include <media/v4l2-ioctl.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -35,8 +38,13 @@
 #define FREQ_MUL 16000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TEF6862_LO_FREQ (875 * FREQ_MUL / 10)
 #define TEF6862_HI_FREQ (108 * FREQ_MUL)
+=======
+#define TEF6862_LO_FREQ (875U * FREQ_MUL / 10)
+#define TEF6862_HI_FREQ (108U * FREQ_MUL)
+>>>>>>> v3.18
 =======
 #define TEF6862_LO_FREQ (875U * FREQ_MUL / 10)
 #define TEF6862_HI_FREQ (108U * FREQ_MUL)
@@ -58,6 +66,7 @@
 
 /* Different modes of the MSA register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MODE_BUFFER		0x0
 #define MODE_PRESET		0x1
 #define MODE_SEARCH		0x2
@@ -68,6 +77,8 @@
 #define MODE_END		0x7
 #define MODE_SHIFT		5
 =======
+=======
+>>>>>>> v3.18
 #define MSA_MODE_BUFFER		0x0
 #define MSA_MODE_PRESET		0x1
 #define MSA_MODE_SEARCH		0x2
@@ -77,6 +88,9 @@
 #define MSA_MODE_LOAD		0x6
 #define MSA_MODE_END		0x7
 #define MSA_MODE_SHIFT		5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct tef6862_state {
@@ -126,6 +140,10 @@ static int tef6862_s_frequency(struct v4l2_subdev *sd, const struct v4l2_frequen
 	struct tef6862_state *state = to_state(sd);
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned freq = f->frequency;
+>>>>>>> v3.18
 =======
 	unsigned freq = f->frequency;
 >>>>>>> v3.18
@@ -137,8 +155,14 @@ static int tef6862_s_frequency(struct v4l2_subdev *sd, const struct v4l2_frequen
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pll = 1964 + ((f->frequency - TEF6862_LO_FREQ) * 20) / FREQ_MUL;
 	i2cmsg[0] = (MODE_PRESET << MODE_SHIFT) | WM_SUB_PLLM;
+=======
+	freq = clamp(freq, TEF6862_LO_FREQ, TEF6862_HI_FREQ);
+	pll = 1964 + ((freq - TEF6862_LO_FREQ) * 20) / FREQ_MUL;
+	i2cmsg[0] = (MSA_MODE_PRESET << MSA_MODE_SHIFT) | WM_SUB_PLLM;
+>>>>>>> v3.18
 =======
 	freq = clamp(freq, TEF6862_LO_FREQ, TEF6862_HI_FREQ);
 	pll = 1964 + ((freq - TEF6862_LO_FREQ) * 20) / FREQ_MUL;
@@ -152,7 +176,11 @@ static int tef6862_s_frequency(struct v4l2_subdev *sd, const struct v4l2_frequen
 		return err < 0 ? err : -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state->freq = f->frequency;
+=======
+	state->freq = freq;
+>>>>>>> v3.18
 =======
 	state->freq = freq;
 >>>>>>> v3.18
@@ -171,6 +199,7 @@ static int tef6862_g_frequency(struct v4l2_subdev *sd, struct v4l2_frequency *f)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tef6862_g_chip_ident(struct v4l2_subdev *sd,
 	struct v4l2_dbg_chip_ident *chip)
 {
@@ -181,6 +210,8 @@ static int tef6862_g_chip_ident(struct v4l2_subdev *sd,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct v4l2_subdev_tuner_ops tef6862_tuner_ops = {
 	.g_tuner = tef6862_g_tuner,
 	.s_tuner = tef6862_s_tuner,
@@ -189,12 +220,16 @@ static const struct v4l2_subdev_tuner_ops tef6862_tuner_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct v4l2_subdev_core_ops tef6862_core_ops = {
 	.g_chip_ident = tef6862_g_chip_ident,
 };
 
 static const struct v4l2_subdev_ops tef6862_ops = {
 	.core = &tef6862_core_ops,
+=======
+static const struct v4l2_subdev_ops tef6862_ops = {
+>>>>>>> v3.18
 =======
 static const struct v4l2_subdev_ops tef6862_ops = {
 >>>>>>> v3.18

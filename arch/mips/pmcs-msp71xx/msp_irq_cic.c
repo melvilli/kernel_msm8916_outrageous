@@ -121,10 +121,16 @@ static void msp_cic_irq_ack(struct irq_data *d)
 	*/
 	*CIC_STS_REG = (1 << (d->irq - MSP_CIC_INTBASE));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smtc_im_ack_irq(d->irq);
 }
 
 /*Note: Limiting to VSMP . Not tested in SMTC */
+=======
+}
+
+/* Note: Limiting to VSMP.  */
+>>>>>>> v3.18
 =======
 }
 
@@ -139,17 +145,23 @@ static int msp_cic_irq_set_affinity(struct irq_data *d,
 	unsigned long flags;
 	unsigned int  mtflags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long imask = (1 << (irq - MSP_CIC_INTBASE));
 	volatile u32 *cic_mask = (volatile u32 *)CIC_VPE0_MSK_REG;
 
 	/* timer balancing should be disabled in kernel code */
 	BUG_ON(irq == MSP_INT_VPE0_TIMER || irq == MSP_INT_VPE1_TIMER);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long imask = (1 << (d->irq - MSP_CIC_INTBASE));
 	volatile u32 *cic_mask = (volatile u32 *)CIC_VPE0_MSK_REG;
 
 	/* timer balancing should be disabled in kernel code */
 	BUG_ON(d->irq == MSP_INT_VPE0_TIMER || d->irq == MSP_INT_VPE1_TIMER);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	LOCK_CORE(flags, mtflags);
@@ -198,10 +210,13 @@ void __init msp_cic_irq_init(void)
 		irq_set_chip_and_handler(i, &msp_cic_irq_controller,
 					 handle_level_irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 		/* Mask of CIC interrupt */
 		irq_hwmask[i] = C_IRQ4;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

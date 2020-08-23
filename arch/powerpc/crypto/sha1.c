@@ -155,8 +155,12 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("SHA1 Secure Hash Algorithm");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("sha1");
 MODULE_ALIAS_CRYPTO("sha1-powerpc");
+=======
+MODULE_ALIAS("sha1-powerpc");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("sha1-powerpc");
 >>>>>>> v3.18

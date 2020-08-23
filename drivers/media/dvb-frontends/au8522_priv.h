@@ -38,6 +38,10 @@
 #define AU8522_ANALOG_MODE 0
 #define AU8522_DIGITAL_MODE 1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AU8522_SUSPEND_MODE 2
+>>>>>>> v3.18
 =======
 #define AU8522_SUSPEND_MODE 2
 >>>>>>> v3.18
@@ -352,6 +356,10 @@ int au8522_led_ctrl(struct au8522_state *state, int led);
 #define AU8522_TVDEC_FORMAT_CTRL2_REG062H_STD_AUTODETECT	0x00
 #define AU8522_TVDEC_FORMAT_CTRL2_REG062H_STD_NTSC		0x01
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AU8522_TVDEC_FORMAT_CTRL2_REG062H_STD_PAL_M		0x02
+>>>>>>> v3.18
 =======
 #define AU8522_TVDEC_FORMAT_CTRL2_REG062H_STD_PAL_M		0x02
 >>>>>>> v3.18

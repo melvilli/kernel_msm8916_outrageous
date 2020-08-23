@@ -63,10 +63,15 @@ static int pwmss_probe(struct platform_device *pdev)
 
 	info = devm_kzalloc(&pdev->dev, sizeof(*info), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!info) {
 		dev_err(&pdev->dev, "failed to allocate memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!info)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!info)
 		return -ENOMEM;

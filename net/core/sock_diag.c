@@ -53,14 +53,20 @@ int sock_diag_put_filterinfo(bool may_report_filterinfo, struct sock *sk,
 			     struct sk_buff *skb, int attrtype)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nlattr *attr;
 	struct sk_filter *filter;
 	unsigned int len;
 =======
+=======
+>>>>>>> v3.18
 	struct sock_fprog_kern *fprog;
 	struct sk_filter *filter;
 	struct nlattr *attr;
 	unsigned int flen;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err = 0;
 
@@ -71,12 +77,15 @@ int sock_diag_put_filterinfo(bool may_report_filterinfo, struct sock *sk,
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	filter = rcu_dereference(sk->sk_filter);
 	len = filter ? filter->len * sizeof(struct sock_filter) : 0;
 
 	attr = nla_reserve(skb, attrtype, len);
 =======
+=======
+>>>>>>> v3.18
 	filter = rcu_dereference(sk->sk_filter);
 	if (!filter)
 		goto out;
@@ -85,12 +94,16 @@ int sock_diag_put_filterinfo(bool may_report_filterinfo, struct sock *sk,
 	flen = bpf_classic_proglen(fprog);
 
 	attr = nla_reserve(skb, attrtype, flen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (attr == NULL) {
 		err = -EMSGSIZE;
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (filter) {
 		struct sock_filter *fb = (struct sock_filter *)nla_data(attr);
@@ -100,6 +113,9 @@ int sock_diag_put_filterinfo(bool may_report_filterinfo, struct sock *sk,
 			sk_decode_filter(&filter->insns[i], fb);
 	}
 
+=======
+	memcpy(nla_data(attr), fprog->filter, flen);
+>>>>>>> v3.18
 =======
 	memcpy(nla_data(attr), fprog->filter, flen);
 >>>>>>> v3.18
@@ -158,7 +174,11 @@ void sock_diag_unregister(const struct sock_diag_handler *hnld)
 EXPORT_SYMBOL_GPL(sock_diag_unregister);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __sock_diag_cmd(struct sk_buff *skb, struct nlmsghdr *nlh)
+=======
+static int __sock_diag_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
+>>>>>>> v3.18
 =======
 static int __sock_diag_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 >>>>>>> v3.18
@@ -182,12 +202,17 @@ static int __sock_diag_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 	if (hndl == NULL)
 		err = -ENOENT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (nlh->nlmsg_type == SOCK_DIAG_BY_FAMILY)
 		err = hndl->dump(skb, nlh);
 	else if (nlh->nlmsg_type == SOCK_DESTROY_BACKPORT && hndl->destroy)
 		err = hndl->destroy(skb, nlh);
 	else
 		err = -EOPNOTSUPP;
+=======
+	else
+		err = hndl->dump(skb, nlh);
+>>>>>>> v3.18
 =======
 	else
 		err = hndl->dump(skb, nlh);
@@ -218,8 +243,12 @@ static int sock_diag_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 		return ret;
 	case SOCK_DIAG_BY_FAMILY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SOCK_DESTROY_BACKPORT:
 		return __sock_diag_cmd(skb, nlh);
+=======
+		return __sock_diag_rcv_msg(skb, nlh);
+>>>>>>> v3.18
 =======
 		return __sock_diag_rcv_msg(skb, nlh);
 >>>>>>> v3.18
@@ -238,6 +267,7 @@ static void sock_diag_rcv(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sock_diag_destroy(struct sock *sk, int err)
 {
 	if (!ns_capable(sock_net(sk)->user_ns, CAP_NET_ADMIN))
@@ -250,6 +280,8 @@ int sock_diag_destroy(struct sock *sk, int err)
 }
 EXPORT_SYMBOL_GPL(sock_diag_destroy);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __net_init diag_net_init(struct net *net)

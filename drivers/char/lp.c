@@ -588,6 +588,11 @@ static int lp_do_ioctl(unsigned int minor, unsigned int cmd,
 	switch ( cmd ) {
 		case LPTIME:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (arg > UINT_MAX / HZ)
+				return -EINVAL;
+>>>>>>> v3.18
 =======
 			if (arg > UINT_MAX / HZ)
 				return -EINVAL;
@@ -863,11 +868,15 @@ static int __init lp_setup (char *str)
 		parport_nr[0] = LP_PARPORT_AUTO;
 	} else if (!strcmp(str, "none")) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (parport_ptr < LP_NO)
 			parport_nr[parport_ptr++] = LP_PARPORT_NONE;
 		else
 			printk(KERN_INFO "lp: too many ports, %s ignored.\n",
 			       str);
+=======
+		parport_nr[parport_ptr++] = LP_PARPORT_NONE;
+>>>>>>> v3.18
 =======
 		parport_nr[parport_ptr++] = LP_PARPORT_NONE;
 >>>>>>> v3.18

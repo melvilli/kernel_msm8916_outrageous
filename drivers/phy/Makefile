@@ -3,12 +3,15 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_GENERIC_PHY)	+= phy-core.o
 obj-$(CONFIG_PHY_MSM_SATA)	+= phy-msm-sata.o
 obj-$(CONFIG_SCSI_UFS_QCOM) 	+= phy-qcom-ufs.o
 obj-$(CONFIG_SCSI_UFS_QCOM) 	+= phy-qcom-ufs-qmp-28nm.o
 obj-$(CONFIG_SCSI_UFS_QCOM) 	+= phy-qcom-ufs-qmp-20nm.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_GENERIC_PHY)		+= phy-core.o
 obj-$(CONFIG_PHY_BERLIN_SATA)		+= phy-berlin-sata.o
 obj-$(CONFIG_BCM_KONA_USB2_PHY)		+= phy-bcm-kona-usb2.o
@@ -38,4 +41,7 @@ obj-$(CONFIG_PHY_ST_SPEAR1340_MIPHY)	+= phy-spear1340-miphy.o
 obj-$(CONFIG_PHY_XGENE)			+= phy-xgene.o
 obj-$(CONFIG_PHY_STIH407_USB)		+= phy-stih407-usb.o
 obj-$(CONFIG_PHY_STIH41X_USB)		+= phy-stih41x-usb.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

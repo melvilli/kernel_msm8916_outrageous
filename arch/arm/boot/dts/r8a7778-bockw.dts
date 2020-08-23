@@ -16,7 +16,11 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "r8a7778.dtsi"
+=======
+#include "r8a7778.dtsi"
+>>>>>>> v3.18
 =======
 #include "r8a7778.dtsi"
 >>>>>>> v3.18
@@ -27,7 +31,11 @@
 
 	chosen {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bootargs = "console=ttySC0,115200 ignore_loglevel ip=dhcp root=/dev/nfs";
+=======
+		bootargs = "console=ttySC0,115200 ignore_loglevel ip=dhcp root=/dev/nfs rw";
+>>>>>>> v3.18
 =======
 		bootargs = "console=ttySC0,115200 ignore_loglevel ip=dhcp root=/dev/nfs rw";
 >>>>>>> v3.18

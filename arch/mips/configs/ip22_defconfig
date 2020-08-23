@@ -220,7 +220,10 @@ CONFIG_ATA_OVER_ETH=m
 CONFIG_RAID_ATTRS=m
 CONFIG_SCSI=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_SCSI_TGT=m
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_BLK_DEV_SD=y

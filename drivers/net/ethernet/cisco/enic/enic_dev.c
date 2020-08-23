@@ -30,9 +30,15 @@ int enic_dev_fw_info(struct enic *enic, struct vnic_devcmd_fw_info **fw_info)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_fw_info(enic->vdev, fw_info);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_fw_info(enic->vdev, fw_info);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_fw_info(enic->vdev, fw_info);
@@ -47,9 +53,15 @@ int enic_dev_stats_dump(struct enic *enic, struct vnic_stats **vstats)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_stats_dump(enic->vdev, vstats);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_stats_dump(enic->vdev, vstats);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_stats_dump(enic->vdev, vstats);
@@ -67,9 +79,15 @@ int enic_dev_add_station_addr(struct enic *enic)
 		return -EADDRNOTAVAIL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_add_addr(enic->vdev, enic->netdev->dev_addr);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_add_addr(enic->vdev, enic->netdev->dev_addr);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_add_addr(enic->vdev, enic->netdev->dev_addr);
@@ -87,9 +105,15 @@ int enic_dev_del_station_addr(struct enic *enic)
 		return -EADDRNOTAVAIL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_del_addr(enic->vdev, enic->netdev->dev_addr);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_del_addr(enic->vdev, enic->netdev->dev_addr);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_del_addr(enic->vdev, enic->netdev->dev_addr);
@@ -105,20 +129,27 @@ int enic_dev_packet_filter(struct enic *enic, int directed, int multicast,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_packet_filter(enic->vdev, directed,
 		multicast, broadcast, promisc, allmulti);
 	spin_unlock(&enic->devcmd_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_packet_filter(enic->vdev, directed,
 		multicast, broadcast, promisc, allmulti);
 	spin_unlock_bh(&enic->devcmd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int enic_dev_add_addr(struct enic *enic, u8 *addr)
 {
@@ -128,6 +159,8 @@ int enic_dev_add_addr(struct enic *enic, u8 *addr)
 	err = vnic_dev_add_addr(enic->vdev, addr);
 	spin_unlock(&enic->devcmd_lock);
 =======
+=======
+>>>>>>> v3.18
 int enic_dev_add_addr(struct enic *enic, const u8 *addr)
 {
 	int err;
@@ -135,11 +168,15 @@ int enic_dev_add_addr(struct enic *enic, const u8 *addr)
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_add_addr(enic->vdev, addr);
 	spin_unlock_bh(&enic->devcmd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int enic_dev_del_addr(struct enic *enic, u8 *addr)
 {
@@ -149,6 +186,8 @@ int enic_dev_del_addr(struct enic *enic, u8 *addr)
 	err = vnic_dev_del_addr(enic->vdev, addr);
 	spin_unlock(&enic->devcmd_lock);
 =======
+=======
+>>>>>>> v3.18
 int enic_dev_del_addr(struct enic *enic, const u8 *addr)
 {
 	int err;
@@ -156,6 +195,9 @@ int enic_dev_del_addr(struct enic *enic, const u8 *addr)
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_del_addr(enic->vdev, addr);
 	spin_unlock_bh(&enic->devcmd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
@@ -166,9 +208,15 @@ int enic_dev_notify_unset(struct enic *enic)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_notify_unset(enic->vdev);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_notify_unset(enic->vdev);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_notify_unset(enic->vdev);
@@ -183,9 +231,15 @@ int enic_dev_hang_notify(struct enic *enic)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_hang_notify(enic->vdev);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_hang_notify(enic->vdev);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_hang_notify(enic->vdev);
@@ -200,15 +254,21 @@ int enic_dev_set_ig_vlan_rewrite_mode(struct enic *enic)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_set_ig_vlan_rewrite_mode(enic->vdev,
 		IG_VLAN_REWRITE_MODE_PRIORITY_TAG_DEFAULT_VLAN);
 	spin_unlock(&enic->devcmd_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_set_ig_vlan_rewrite_mode(enic->vdev,
 		IG_VLAN_REWRITE_MODE_PRIORITY_TAG_DEFAULT_VLAN);
 	spin_unlock_bh(&enic->devcmd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
@@ -219,9 +279,15 @@ int enic_dev_enable(struct enic *enic)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_enable_wait(enic->vdev);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_enable_wait(enic->vdev);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_enable_wait(enic->vdev);
@@ -236,9 +302,15 @@ int enic_dev_disable(struct enic *enic)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_disable(enic->vdev);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_disable(enic->vdev);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_disable(enic->vdev);
@@ -253,9 +325,15 @@ int enic_dev_intr_coal_timer_info(struct enic *enic)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_intr_coal_timer_info(enic->vdev);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_intr_coal_timer_info(enic->vdev);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_intr_coal_timer_info(enic->vdev);
@@ -270,9 +348,15 @@ int enic_vnic_dev_deinit(struct enic *enic)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_deinit(enic->vdev);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_deinit(enic->vdev);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_deinit(enic->vdev);
@@ -287,15 +371,21 @@ int enic_dev_init_prov2(struct enic *enic, struct vic_provinfo *vp)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_init_prov2(enic->vdev,
 		(u8 *)vp, vic_provinfo_size(vp));
 	spin_unlock(&enic->devcmd_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_init_prov2(enic->vdev,
 		(u8 *)vp, vic_provinfo_size(vp));
 	spin_unlock_bh(&enic->devcmd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
@@ -306,9 +396,15 @@ int enic_dev_deinit_done(struct enic *enic, int *status)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_deinit_done(enic->vdev, status);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_deinit_done(enic->vdev, status);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_deinit_done(enic->vdev, status);
@@ -325,9 +421,15 @@ int enic_vlan_rx_add_vid(struct net_device *netdev, __be16 proto, u16 vid)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = enic_add_vlan(enic, vid);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = enic_add_vlan(enic, vid);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = enic_add_vlan(enic, vid);
@@ -344,9 +446,15 @@ int enic_vlan_rx_kill_vid(struct net_device *netdev, __be16 proto, u16 vid)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = enic_del_vlan(enic, vid);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = enic_del_vlan(enic, vid);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = enic_del_vlan(enic, vid);
@@ -361,9 +469,15 @@ int enic_dev_enable2(struct enic *enic, int active)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_enable2(enic->vdev, active);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_enable2(enic->vdev, active);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_enable2(enic->vdev, active);
@@ -378,9 +492,15 @@ int enic_dev_enable2_done(struct enic *enic, int *status)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&enic->devcmd_lock);
 	err = vnic_dev_enable2_done(enic->vdev, status);
 	spin_unlock(&enic->devcmd_lock);
+=======
+	spin_lock_bh(&enic->devcmd_lock);
+	err = vnic_dev_enable2_done(enic->vdev, status);
+	spin_unlock_bh(&enic->devcmd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&enic->devcmd_lock);
 	err = vnic_dev_enable2_done(enic->vdev, status);

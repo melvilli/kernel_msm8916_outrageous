@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "kirkwood.dtsi"
 /include/ "kirkwood-6281.dtsi"
+=======
+#include "kirkwood.dtsi"
+#include "kirkwood-6281.dtsi"
+>>>>>>> v3.18
 =======
 #include "kirkwood.dtsi"
 #include "kirkwood-6281.dtsi"
@@ -14,6 +19,7 @@
 		compatible = "gpio-keys";
 		#address-cells = <1>;
 		#size-cells = <0>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		button@1 {
 			label = "Power button";
@@ -30,6 +36,8 @@
 			linux,code = <0x198>;
 			gpios = <&gpio1 16 1>;
 =======
+=======
+>>>>>>> v3.18
 		pinctrl-0 = <&pmx_button_power &pmx_button_unmount
 			     &pmx_button_reset>;
 		pinctrl-names = "default";
@@ -48,6 +56,9 @@
 			label = "Reset button";
 			linux,code = <KEY_RESTART>;
 			gpios = <&gpio1 16 GPIO_ACTIVE_LOW>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -56,13 +67,19 @@
 		/* Fan: ADDA AD045HB-G73 40mm 6000rpm@5v */
 		compatible = "gpio-fan";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpios = <&gpio1 14 1
 			 &gpio1 13 1>;
 =======
+=======
+>>>>>>> v3.18
 		pinctrl-0 = <&pmx_fan_high_speed &pmx_fan_low_speed>;
 		pinctrl-names = "default";
 		gpios = <&gpio1 14 GPIO_ACTIVE_LOW
 			 &gpio1 13 GPIO_ACTIVE_LOW>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio-fan,speed-map = <0    0
 				      3000 1
@@ -71,6 +88,7 @@
 
 	gpio_poweroff {
 		compatible = "gpio-poweroff";
+<<<<<<< HEAD
 <<<<<<< HEAD
 		gpios = <&gpio1 4 0>;
 	};
@@ -94,6 +112,8 @@
 				      &pmx_button_unmount &pmx_button_reset
 				      &pmx_temp_alarm >;
 =======
+=======
+>>>>>>> v3.18
 		pinctrl-0 = <&pmx_power_off>;
 		pinctrl-names = "default";
 		gpios = <&gpio1 4 GPIO_ACTIVE_HIGH>;
@@ -105,6 +125,9 @@
 			pinctrl-0 = <&pmx_power_back_on &pmx_present_sata0
 				     &pmx_present_sata1 &pmx_fan_tacho
 				     &pmx_temp_alarm>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pinctrl-names = "default";
 
@@ -195,6 +218,7 @@
 		};
 		sata@80000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			status = "okay";
 			nr-ports = <2>;
 		};
@@ -235,11 +259,16 @@
 			};
 		};
 =======
+=======
+>>>>>>> v3.18
 			pinctrl-0 = <&pmx_sata0 &pmx_sata1>;
 			pinctrl-names = "default";
 			status = "okay";
 			nr-ports = <2>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -248,6 +277,11 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pinctrl-0 = <&pmx_power_sata0 &pmx_power_sata1>;
+		pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 		pinctrl-0 = <&pmx_power_sata0 &pmx_power_sata1>;
 		pinctrl-names = "default";
@@ -278,7 +312,10 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &nand {
 	status = "okay";
@@ -330,4 +367,7 @@
 		phy-handle = <&ethphy0>;
 	};
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

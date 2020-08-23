@@ -139,7 +139,10 @@ enum {
 	ATA_SHT_USE_CLUSTERING	= 1,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* struct ata_taskfile flags */
 	ATA_TFLAG_LBA48		= (1 << 0), /* enable 48-bit LBA and "HOB" */
 	ATA_TFLAG_ISADDR	= (1 << 1), /* enable r/w to nsect/lba regs */
@@ -156,6 +159,9 @@ enum {
 	ATA_PROT_FLAG_NCQ	= (1 << 2), /* is NCQ */
 	ATA_PROT_FLAG_ATAPI	= (1 << 3), /* is ATAPI */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* struct ata_device stuff */
 	ATA_DFLAG_LBA		= (1 << 0), /* device supports LBA */
@@ -176,6 +182,10 @@ enum {
 	ATA_DFLAG_NO_UNLOAD	= (1 << 17), /* device doesn't support unload */
 	ATA_DFLAG_UNLOCK_HPA	= (1 << 18), /* unlock HPA */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ATA_DFLAG_NCQ_SEND_RECV = (1 << 19), /* device supports NCQ SEND and RECV */
+>>>>>>> v3.18
 =======
 	ATA_DFLAG_NCQ_SEND_RECV = (1 << 19), /* device supports NCQ SEND and RECV */
 >>>>>>> v3.18
@@ -211,7 +221,10 @@ enum {
 	ATA_LFLAG_NO_LPM	= (1 << 8), /* disable LPM on this link */
 	ATA_LFLAG_RST_ONCE	= (1 << 9), /* limit recovery to one reset */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ATA_LFLAG_CHANGED	= (1 << 10), /* LPM state changed on this link */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -235,6 +248,10 @@ enum {
 	ATA_FLAG_AN		= (1 << 18), /* controller supports AN */
 	ATA_FLAG_PMP		= (1 << 19), /* controller supports PMP */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ATA_FLAG_FPDMA_AUX	= (1 << 20), /* controller supports H2DFIS aux field */
+>>>>>>> v3.18
 =======
 	ATA_FLAG_FPDMA_AUX	= (1 << 20), /* controller supports H2DFIS aux field */
 >>>>>>> v3.18
@@ -321,12 +338,15 @@ enum {
 	ATA_TMOUT_PMP_SRST_WAIT	= 5000,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* When the LPM policy is set to ATA_LPM_MAX_POWER, there might
 	 * be a spurious PHY event, so ignore the first PHY event that
 	 * occurs within 10s after the policy change.
 	 */
 	ATA_TMOUT_SPURIOUS_PHY	= 10000,
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* ATA bus states */
@@ -441,9 +461,15 @@ enum {
 	ATA_HORKAGE_MAX_SEC_LBA48 = (1 << 17),	/* Set max sects to 65535 */
 	ATA_HORKAGE_ATAPI_DMADIR = (1 << 18),	/* device requires dmadir */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ATA_HORKAGE_NOLPM	= (1 << 20),	/* don't use LPM */
 	ATA_HORKAGE_WD_BROKEN_LPM = (1 << 21),	/* some WDs have broken LPM */
 	ATA_HORKAGE_NOTRIM = (1 << 24),		/* don't use TRIM */
+=======
+	ATA_HORKAGE_NO_NCQ_TRIM	= (1 << 19),	/* don't use queued TRIM */
+	ATA_HORKAGE_NOLPM	= (1 << 20),	/* don't use LPM */
+	ATA_HORKAGE_WD_BROKEN_LPM = (1 << 21),	/* some WDs have broken LPM */
+>>>>>>> v3.18
 =======
 	ATA_HORKAGE_NO_NCQ_TRIM	= (1 << 19),	/* don't use queued TRIM */
 	ATA_HORKAGE_NOLPM	= (1 << 20),	/* don't use LPM */
@@ -568,7 +594,10 @@ enum sw_activity {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ata_taskfile {
 	unsigned long		flags;		/* ATA_TFLAG_xxx */
 	u8			protocol;	/* ATA_PROT_xxx */
@@ -596,6 +625,9 @@ struct ata_taskfile {
 						/* ATA-8 ACS-3 */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_ATA_SFF
 struct ata_ioports {
@@ -736,7 +768,11 @@ struct ata_device {
 		u16		id[ATA_ID_WORDS]; /* IDENTIFY xxx DEVICE data */
 		u32		gscr[SATA_PMP_GSCR_DWORDS]; /* PMP GSCR block */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} ____cacheline_aligned;
+=======
+	};
+>>>>>>> v3.18
 =======
 	};
 >>>>>>> v3.18
@@ -745,6 +781,12 @@ struct ata_device {
 	u8			devslp_timing[ATA_LOG_DEVSLP_SIZE];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* NCQ send and receive log subcommand support */
+	u8			ncq_send_recv_cmds[ATA_LOG_NCQ_SEND_RECV_SIZE];
+
+>>>>>>> v3.18
 =======
 	/* NCQ send and receive log subcommand support */
 	u8			ncq_send_recv_cmds[ATA_LOG_NCQ_SEND_RECV_SIZE];
@@ -824,8 +866,11 @@ struct ata_link {
 
 	struct ata_device	device[ATA_MAX_DEVICES];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	unsigned long		last_lpm_change; /* when last LPM change happened */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -843,6 +888,10 @@ struct ata_port {
 	unsigned int		pflags; /* ATA_PFLAG_xxx */
 	unsigned int		print_id; /* user visible unique port ID */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int            local_port_no; /* host local port num */
+>>>>>>> v3.18
 =======
 	unsigned int            local_port_no; /* host local port num */
 >>>>>>> v3.18
@@ -897,7 +946,10 @@ struct ata_port {
 
 	pm_message_t		pm_mesg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			*pm_result;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	enum ata_lpm_policy	target_lpm_policy;
@@ -1013,6 +1065,12 @@ struct ata_port_operations {
 	ssize_t (*sw_activity_store)(struct ata_device *dev,
 				     enum sw_activity val);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ssize_t (*transmit_led_message)(struct ata_port *ap, u32 state,
+					ssize_t size);
+
+>>>>>>> v3.18
 =======
 	ssize_t (*transmit_led_message)(struct ata_port *ap, u32 state,
 					ssize_t size);
@@ -1065,7 +1123,10 @@ extern struct ata_port_operations ata_dummy_port_ops;
 extern const struct ata_port_info ata_dummy_port_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * protocol tests
  */
@@ -1129,6 +1190,9 @@ static inline int is_multi_taskfile(struct ata_taskfile *tf)
 	       (tf->command == ATA_CMD_WRITE_MULTI_FUA_EXT);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline const unsigned long *
 sata_ehc_deb_timing(struct ata_eh_context *ehc)
@@ -1198,6 +1262,7 @@ extern bool ata_link_offline(struct ata_link *link);
 extern int ata_host_suspend(struct ata_host *host, pm_message_t mesg);
 extern void ata_host_resume(struct ata_host *host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ata_sas_port_async_suspend(struct ata_port *ap, int *async);
 extern int ata_sas_port_async_resume(struct ata_port *ap, int *async);
 #else
@@ -1209,6 +1274,8 @@ static inline int ata_sas_port_async_resume(struct ata_port *ap, int *async)
 {
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 extern void ata_sas_port_suspend(struct ata_port *ap);
 extern void ata_sas_port_resume(struct ata_port *ap);
 #else
@@ -1217,6 +1284,9 @@ static inline void ata_sas_port_suspend(struct ata_port *ap)
 }
 static inline void ata_sas_port_resume(struct ata_port *ap)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
@@ -1268,7 +1338,10 @@ extern int ata_do_set_mode(struct ata_link *link, struct ata_device **r_failed_d
 extern void ata_scsi_port_error_handler(struct Scsi_Host *host, struct ata_port *ap);
 extern void ata_scsi_cmd_error_handler(struct Scsi_Host *host, struct ata_port *ap, struct list_head *eh_q);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool sata_lpm_ignore_phy_events(struct ata_link *link);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1329,8 +1402,11 @@ int ata_acpi_gtm(struct ata_port *ap, struct ata_acpi_gtm *stm);
 unsigned long ata_acpi_gtm_xfermask(struct ata_device *dev,
 				    const struct ata_acpi_gtm *gtm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_handle ata_ap_acpi_handle(struct ata_port *ap);
 acpi_handle ata_dev_acpi_handle(struct ata_device *dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int ata_acpi_cbl_80wire(struct ata_port *ap, const struct ata_acpi_gtm *gtm);
@@ -1483,6 +1559,7 @@ static inline int sata_srst_pmp(struct ata_link *link)
  */
 __printf(3, 4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ata_port_printk(const struct ata_port *ap, const char *level,
 		    const char *fmt, ...);
 __printf(3, 4)
@@ -1492,6 +1569,8 @@ __printf(3, 4)
 int ata_dev_printk(const struct ata_device *dev, const char *level,
 		   const char *fmt, ...);
 =======
+=======
+>>>>>>> v3.18
 void ata_port_printk(const struct ata_port *ap, const char *level,
 		     const char *fmt, ...);
 __printf(3, 4)
@@ -1500,6 +1579,9 @@ void ata_link_printk(const struct ata_link *link, const char *level,
 __printf(3, 4)
 void ata_dev_printk(const struct ata_device *dev, const char *level,
 		    const char *fmt, ...);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ata_port_err(ap, fmt, ...)				\
@@ -1698,7 +1780,10 @@ static inline int ata_ncq_enabled(struct ata_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool ata_fpdma_dsm_supported(struct ata_device *dev)
 {
 	return (dev->flags & ATA_DFLAG_NCQ_SEND_RECV) &&
@@ -1706,6 +1791,9 @@ static inline bool ata_fpdma_dsm_supported(struct ata_device *dev)
 		 ATA_LOG_NCQ_SEND_RECV_DSM_TRIM);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void ata_qc_set_polling(struct ata_queued_cmd *qc)
 {

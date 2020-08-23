@@ -20,6 +20,10 @@
 #include <sound/jack.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18
@@ -166,8 +170,11 @@ static int smartq_wm8987_init(struct snd_soc_pcm_runtime *rtd)
 
 	/* set endpoints to default off mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dapm_enable_pin(dapm, "Internal Speaker");
 	snd_soc_dapm_enable_pin(dapm, "Internal Mic");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	snd_soc_dapm_disable_pin(dapm, "Headphone Jack");
@@ -191,7 +198,10 @@ static int smartq_wm8987_init(struct snd_soc_pcm_runtime *rtd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int smartq_wm8987_card_remove(struct snd_soc_card *card)
 {
 	snd_soc_jack_free_gpios(&smartq_jack, ARRAY_SIZE(smartq_jack_gpios),
@@ -200,6 +210,9 @@ static int smartq_wm8987_card_remove(struct snd_soc_card *card)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct snd_soc_dai_link smartq_dai[] = {
 	{
@@ -218,6 +231,10 @@ static struct snd_soc_card snd_soc_smartq = {
 	.name = "SmartQ",
 	.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.remove = smartq_wm8987_card_remove,
+>>>>>>> v3.18
 =======
 	.remove = smartq_wm8987_card_remove,
 >>>>>>> v3.18
@@ -283,8 +300,11 @@ static void __exit smartq_exit(void)
 {
 	gpio_free(S3C64XX_GPK(12));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_jack_free_gpios(&smartq_jack, ARRAY_SIZE(smartq_jack_gpios),
 				smartq_jack_gpios);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

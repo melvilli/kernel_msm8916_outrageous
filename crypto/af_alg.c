@@ -77,8 +77,11 @@ int af_alg_register_type(const struct af_alg_type *type)
 
 	type->ops->owner = THIS_MODULE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (type->ops_nokey)
 		type->ops_nokey->owner = THIS_MODULE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	node->type = type;
@@ -131,6 +134,7 @@ int af_alg_release(struct socket *sock)
 EXPORT_SYMBOL_GPL(af_alg_release);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void af_alg_release_parent(struct sock *sk)
 {
 	struct alg_sock *ask = alg_sk(sk);
@@ -153,6 +157,8 @@ EXPORT_SYMBOL_GPL(af_alg_release_parent);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int alg_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 {
 	struct sock *sk = sock->sk;
@@ -161,7 +167,10 @@ static int alg_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 	const struct af_alg_type *type;
 	void *private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -190,10 +199,14 @@ static int alg_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = -EBUSY;
 	lock_sock(sk);
 	if (ask->refcnt | ask->nokey_refcnt)
 		goto unlock;
+=======
+	lock_sock(sk);
+>>>>>>> v3.18
 =======
 	lock_sock(sk);
 >>>>>>> v3.18
@@ -202,9 +215,12 @@ static int alg_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 	swap(ask->private, private);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = 0;
 
 unlock:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	release_sock(sk);
@@ -212,7 +228,11 @@ unlock:
 	alg_do_release(type, private);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -249,6 +269,7 @@ static int alg_setsockopt(struct socket *sock, int level, int optname,
 	struct alg_sock *ask = alg_sk(sk);
 	const struct af_alg_type *type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = -EBUSY;
 
 	lock_sock(sk);
@@ -259,11 +280,16 @@ static int alg_setsockopt(struct socket *sock, int level, int optname,
 
 	err = -ENOPROTOOPT;
 =======
+=======
+>>>>>>> v3.18
 	int err = -ENOPROTOOPT;
 
 	lock_sock(sk);
 	type = ask->type;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (level != SOL_ALG || !type)
 		goto unlock;
@@ -290,7 +316,10 @@ int af_alg_accept(struct sock *sk, struct socket *newsock)
 	const struct af_alg_type *type;
 	struct sock *sk2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int nokey;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int err;
@@ -313,6 +342,7 @@ int af_alg_accept(struct sock *sk, struct socket *newsock)
 
 	err = type->accept(ask->private, sk2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	nokey = err == -ENOKEY;
 	if (nokey && type->accept_nokey)
@@ -330,6 +360,8 @@ int af_alg_accept(struct sock *sk, struct socket *newsock)
 	alg_sk(sk2)->type = type;
 	alg_sk(sk2)->nokey_refcnt = nokey;
 =======
+=======
+>>>>>>> v3.18
 	if (err) {
 		sk_free(sk2);
 		goto unlock;
@@ -340,15 +372,21 @@ int af_alg_accept(struct sock *sk, struct socket *newsock)
 	sock_hold(sk);
 	alg_sk(sk2)->parent = sk;
 	alg_sk(sk2)->type = type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	newsock->ops = type->ops;
 	newsock->state = SS_CONNECTED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nokey)
 		newsock->ops = type->ops_nokey;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = 0;
@@ -527,7 +565,11 @@ int af_alg_wait_for_completion(int err, struct af_alg_completion *completion)
 	case -EBUSY:
 		wait_for_completion(&completion->completion);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(completion->completion);
+=======
+		reinit_completion(&completion->completion);
+>>>>>>> v3.18
 =======
 		reinit_completion(&completion->completion);
 >>>>>>> v3.18
@@ -544,9 +586,12 @@ void af_alg_complete(struct crypto_async_request *req, int err)
 	struct af_alg_completion *completion = req->data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err == -EINPROGRESS)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	completion->err = err;

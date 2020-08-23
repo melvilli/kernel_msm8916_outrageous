@@ -9,13 +9,19 @@
 #include <linux/init.h>
 #include <linux/bootmem.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/bootinfo.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/smp.h>
 #include <asm/bootinfo.h>
 #include <asm/bmips.h>
 #include <asm/smp-ops.h>
 #include <asm/mipsregs.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <bcm63xx_board.h>
 #include <bcm63xx_cpu.h>
@@ -35,7 +41,13 @@ void __init prom_init(void)
 
 	/* disable all hardware blocks clock for now */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (BCMCPU_IS_6328())
+=======
+	if (BCMCPU_IS_3368())
+		mask = CKCTL_3368_ALL_SAFE_EN;
+	else if (BCMCPU_IS_6328())
+>>>>>>> v3.18
 =======
 	if (BCMCPU_IS_3368())
 		mask = CKCTL_3368_ALL_SAFE_EN;
@@ -67,7 +79,10 @@ void __init prom_init(void)
 	/* do low level board init */
 	board_prom_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* set up SMP */
 	if (!register_bmips_smp_ops()) {
@@ -107,6 +122,9 @@ void __init prom_init(void)
 		 * FIXME: we really should have some sort of hazard barrier here
 		 */
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

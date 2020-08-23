@@ -3,6 +3,10 @@
  * Copyright (c) 2006	Jiri Benc <jbenc@suse.cz>
  * Copyright 2007	Johannes Berg <johannes@sipsolutions.net>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright 2013-2014  Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright 2013-2014  Intel Mobile Communications GmbH
 >>>>>>> v3.18
@@ -43,7 +47,10 @@ static const struct file_operations sta_ ##name## _ops = {		\
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define STA_OPS_W(name)							\
 static const struct file_operations sta_ ##name## _ops = {		\
 	.write = sta_##name##_write,					\
@@ -51,6 +58,9 @@ static const struct file_operations sta_ ##name## _ops = {		\
 	.llseek = generic_file_llseek,					\
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define STA_OPS_RW(name)						\
 static const struct file_operations sta_ ##name## _ops = {		\
@@ -85,7 +95,12 @@ static ssize_t sta_flags_read(struct file *file, char __user *userbuf,
 			    TEST(PS_DRIVER), TEST(AUTHORIZED),
 			    TEST(SHORT_PREAMBLE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    TEST(WME), TEST(WDS), TEST(CLEAR_PS_FILT),
+=======
+			    sta->sta.wme ? "WME\n" : "",
+			    TEST(WDS), TEST(CLEAR_PS_FILT),
+>>>>>>> v3.18
 =======
 			    sta->sta.wme ? "WME\n" : "",
 			    TEST(WDS), TEST(CLEAR_PS_FILT),
@@ -137,7 +152,11 @@ static ssize_t sta_connected_time_read(struct file *file, char __user *userbuf,
 	char buf[100];
 	int res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_posix_clock_monotonic_gettime(&uptime);
+=======
+	ktime_get_ts(&uptime);
+>>>>>>> v3.18
 =======
 	ktime_get_ts(&uptime);
 >>>>>>> v3.18
@@ -184,7 +203,11 @@ static ssize_t sta_agg_status_read(struct file *file, char __user *userbuf,
 			sta->ampdu_mlme.dialog_token_allocator + 1);
 	p += scnprintf(p, sizeof(buf) + buf - p,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       "TID\t\tRX active\tDTKN\tSSN\t\tTX\tDTKN\tpending\n");
+=======
+		       "TID\t\tRX\tDTKN\tSSN\t\tTX\tDTKN\tpending\n");
+>>>>>>> v3.18
 =======
 		       "TID\t\tRX\tDTKN\tSSN\t\tTX\tDTKN\tpending\n");
 >>>>>>> v3.18
@@ -216,7 +239,11 @@ static ssize_t sta_agg_status_write(struct file *file, const char __user *userbu
 				    size_t count, loff_t *ppos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char _buf[12], *buf = _buf;
+=======
+	char _buf[12] = {}, *buf = _buf;
+>>>>>>> v3.18
 =======
 	char _buf[12] = {}, *buf = _buf;
 >>>>>>> v3.18
@@ -420,7 +447,10 @@ static ssize_t sta_last_rx_rate_read(struct file *file, char __user *userbuf,
 STA_OPS(last_rx_rate);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 sta_tx_latency_stat_header(struct ieee80211_tx_latency_bin_ranges *tx_latency,
 			   char *buf, int pos, int bufsz)
@@ -546,6 +576,9 @@ static ssize_t sta_tx_latency_stat_reset_write(struct file *file,
 }
 STA_OPS_W(tx_latency_stat_reset);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DEBUGFS_ADD(name) \
 	debugfs_create_file(#name, 0400, \
@@ -601,6 +634,11 @@ void ieee80211_sta_debugfs_add(struct sta_info *sta)
 	DEBUGFS_ADD(current_tx_rate);
 	DEBUGFS_ADD(last_rx_rate);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DEBUGFS_ADD(tx_latency_stat);
+	DEBUGFS_ADD(tx_latency_stat_reset);
+>>>>>>> v3.18
 =======
 	DEBUGFS_ADD(tx_latency_stat);
 	DEBUGFS_ADD(tx_latency_stat_reset);
@@ -618,8 +656,11 @@ void ieee80211_sta_debugfs_add(struct sta_info *sta)
 	DEBUGFS_ADD_COUNTER(tx_retry_failed, tx_retry_failed);
 	DEBUGFS_ADD_COUNTER(tx_retry_count, tx_retry_count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUGFS_ADD_COUNTER(wep_weak_iv_count, wep_weak_iv_count);
 =======
+=======
+>>>>>>> v3.18
 
 	if (sizeof(sta->driver_buffered_tids) == sizeof(u32))
 		debugfs_create_x32("driver_buffered_tids", 0400,
@@ -629,6 +670,9 @@ void ieee80211_sta_debugfs_add(struct sta_info *sta)
 		debugfs_create_x64("driver_buffered_tids", 0400,
 				   sta->debugfs.dir,
 				   (u64 *)&sta->driver_buffered_tids);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	drv_sta_add_debugfs(local, sdata, &sta->sta, sta->debugfs.dir);

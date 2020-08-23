@@ -13,7 +13,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -252,7 +255,12 @@ static void mpc52xx_psc_spi_work(struct work_struct *work)
 
 		m->status = status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		m->complete(m->context);
+=======
+		if (m->complete)
+			m->complete(m->context);
+>>>>>>> v3.18
 =======
 		if (m->complete)
 			m->complete(m->context);
@@ -375,7 +383,11 @@ static int mpc52xx_psc_spi_do_probe(struct device *dev, u32 regaddr,
 				u32 size, unsigned int irq, s16 bus_num)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_spi_platform_data *pdata = dev->platform_data;
+=======
+	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -396,8 +408,13 @@ static int mpc52xx_psc_spi_do_probe(struct device *dev, u32 regaddr,
 	mps->irq = irq;
 	if (pdata == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_warn(dev, "probe called without platform data, no "
 				"cs_control function will be called\n");
+=======
+		dev_warn(dev,
+			 "probe called without platform data, no cs_control function will be called\n");
+>>>>>>> v3.18
 =======
 		dev_warn(dev,
 			 "probe called without platform data, no cs_control function will be called\n");
@@ -499,7 +516,11 @@ static int mpc52xx_psc_spi_of_probe(struct platform_device *op)
 static int mpc52xx_psc_spi_of_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_master *master = spi_master_get(dev_get_drvdata(&op->dev));
+=======
+	struct spi_master *master = spi_master_get(platform_get_drvdata(op));
+>>>>>>> v3.18
 =======
 	struct spi_master *master = spi_master_get(platform_get_drvdata(op));
 >>>>>>> v3.18

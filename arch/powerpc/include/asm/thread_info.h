@@ -83,8 +83,11 @@ static inline struct thread_info *current_thread_info(void)
 #endif /* __ASSEMBLY__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x10000000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -97,8 +100,12 @@ static inline struct thread_info *current_thread_info(void)
 					   TIF_NEED_RESCHED */
 #define TIF_32BIT		4	/* 32 bit binary */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIF_PERFMON_WORK	5	/* work for pfm_handle_work() */
 #define TIF_PERFMON_CTXSW	6	/* perfmon needs ctxsw calls */
+=======
+#define TIF_RESTORE_TM		5	/* need to restore TM FP/VEC/VSX */
+>>>>>>> v3.18
 =======
 #define TIF_RESTORE_TM		5	/* need to restore TM FP/VEC/VSX */
 >>>>>>> v3.18
@@ -115,6 +122,12 @@ static inline struct thread_info *current_thread_info(void)
 						for stack store? */
 #define TIF_MEMDIE		17	/* is terminating due to OOM killer */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_PPC64)
+#define TIF_ELF2ABI		18	/* function descriptors must die! */
+#endif
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_PPC64)
 #define TIF_ELF2ABI		18	/* function descriptors must die! */
@@ -128,8 +141,12 @@ static inline struct thread_info *current_thread_info(void)
 #define _TIF_POLLING_NRFLAG	(1<<TIF_POLLING_NRFLAG)
 #define _TIF_32BIT		(1<<TIF_32BIT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _TIF_PERFMON_WORK	(1<<TIF_PERFMON_WORK)
 #define _TIF_PERFMON_CTXSW	(1<<TIF_PERFMON_CTXSW)
+=======
+#define _TIF_RESTORE_TM		(1<<TIF_RESTORE_TM)
+>>>>>>> v3.18
 =======
 #define _TIF_RESTORE_TM		(1<<TIF_RESTORE_TM)
 >>>>>>> v3.18
@@ -149,7 +166,12 @@ static inline struct thread_info *current_thread_info(void)
 
 #define _TIF_USER_WORK_MASK	(_TIF_SIGPENDING | _TIF_NEED_RESCHED | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 _TIF_NOTIFY_RESUME | _TIF_UPROBE)
+=======
+				 _TIF_NOTIFY_RESUME | _TIF_UPROBE | \
+				 _TIF_RESTORE_TM)
+>>>>>>> v3.18
 =======
 				 _TIF_NOTIFY_RESUME | _TIF_UPROBE | \
 				 _TIF_RESTORE_TM)
@@ -208,13 +230,19 @@ static inline bool test_thread_local_flags(unsigned int flags)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_PPC64)
 #define is_elf2_task() (test_thread_flag(TIF_ELF2ABI))
 #else
 #define is_elf2_task() (0)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* !__ASSEMBLY__ */
 

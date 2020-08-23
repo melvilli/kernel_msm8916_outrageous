@@ -16,7 +16,10 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -30,9 +33,12 @@
 #include "ux500_msp_i2s.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MSP1/3 Tx/Rx usage protection */
 static DEFINE_SPINLOCK(msp_rxtx_lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  /* Protocol desciptors */
@@ -363,6 +369,7 @@ static int configure_multichannel(struct ux500_msp *msp,
 static int enable_msp(struct ux500_msp *msp, struct ux500_msp_config *config)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int status = 0, retval = 0;
 	u32 reg_val_DMACR, reg_val_GCR;
 	unsigned long flags;
@@ -385,6 +392,10 @@ static int enable_msp(struct ux500_msp *msp, struct ux500_msp_config *config)
 	int status = 0;
 	u32 reg_val_DMACR, reg_val_GCR;
 >>>>>>> v3.18
+=======
+	int status = 0;
+	u32 reg_val_DMACR, reg_val_GCR;
+>>>>>>> v3.18
 
 	/* Configure msp with protocol dependent settings */
 	configure_protocol(msp, config);
@@ -399,7 +410,12 @@ static int enable_msp(struct ux500_msp *msp, struct ux500_msp_config *config)
 
 	/* Make sure the correct DMA-directions are configured */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((config->direction & MSP_DIR_RX) && (!msp->dma_cfg_rx)) {
+=======
+	if ((config->direction & MSP_DIR_RX) &&
+			!msp->capture_dma_data.dma_cfg) {
+>>>>>>> v3.18
 =======
 	if ((config->direction & MSP_DIR_RX) &&
 			!msp->capture_dma_data.dma_cfg) {
@@ -409,7 +425,12 @@ static int enable_msp(struct ux500_msp *msp, struct ux500_msp_config *config)
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((config->direction == MSP_DIR_TX) && (!msp->dma_cfg_tx)) {
+=======
+	if ((config->direction == MSP_DIR_TX) &&
+			!msp->playback_dma_data.dma_cfg) {
+>>>>>>> v3.18
 =======
 	if ((config->direction == MSP_DIR_TX) &&
 			!msp->playback_dma_data.dma_cfg) {
@@ -652,8 +673,12 @@ int ux500_msp_i2s_trigger(struct ux500_msp *msp, int cmd, int direction)
 int ux500_msp_i2s_close(struct ux500_msp *msp, unsigned int dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int status = 0, retval = 0;
 	unsigned long flags;
+=======
+	int status = 0;
+>>>>>>> v3.18
 =======
 	int status = 0;
 >>>>>>> v3.18
@@ -669,6 +694,7 @@ int ux500_msp_i2s_close(struct ux500_msp *msp, unsigned int dir)
 			      msp->registers + MSP_GCR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_irqsave(&msp_rxtx_lock, flags);
 		WARN_ON(!msp->pinctrl_rxtx_ref);
 		msp->pinctrl_rxtx_ref--;
@@ -681,6 +707,8 @@ int ux500_msp_i2s_close(struct ux500_msp *msp, unsigned int dir)
 		}
 		spin_unlock_irqrestore(&msp_rxtx_lock, flags);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		writel(0, msp->registers + MSP_GCR);
@@ -706,7 +734,10 @@ int ux500_msp_i2s_close(struct ux500_msp *msp, unsigned int dir)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ux500_msp_i2s_of_init_msp(struct platform_device *pdev,
 				struct ux500_msp *msp,
 				struct msp_i2s_platform_data **platform_data)
@@ -735,6 +766,9 @@ static int ux500_msp_i2s_of_init_msp(struct platform_device *pdev,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ux500_msp_i2s_init_msp(struct platform_device *pdev,
 			struct ux500_msp **msp_p,
@@ -742,9 +776,15 @@ int ux500_msp_i2s_init_msp(struct platform_device *pdev,
 {
 	struct resource *res = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2s_controller *i2s_cont;
 	struct device_node *np = pdev->dev.of_node;
 	struct ux500_msp *msp;
+=======
+	struct device_node *np = pdev->dev.of_node;
+	struct ux500_msp *msp;
+	int ret;
+>>>>>>> v3.18
 =======
 	struct device_node *np = pdev->dev.of_node;
 	struct ux500_msp *msp;
@@ -756,6 +796,7 @@ int ux500_msp_i2s_init_msp(struct platform_device *pdev,
 	if (!msp)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (np) {
 		if (!platform_data) {
@@ -776,6 +817,8 @@ int ux500_msp_i2s_init_msp(struct platform_device *pdev,
 	msp->dma_cfg_rx = platform_data->msp_i2s_dma_rx;
 	msp->dma_cfg_tx = platform_data->msp_i2s_dma_tx;
 =======
+=======
+>>>>>>> v3.18
 	if (!platform_data) {
 		if (np) {
 			ret = ux500_msp_i2s_of_init_msp(pdev, msp,
@@ -791,6 +834,9 @@ int ux500_msp_i2s_init_msp(struct platform_device *pdev,
 	}
 
 	msp->dev = &pdev->dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -801,6 +847,12 @@ int ux500_msp_i2s_init_msp(struct platform_device *pdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	msp->playback_dma_data.tx_rx_addr = res->start + MSP_DR;
+	msp->capture_dma_data.tx_rx_addr = res->start + MSP_DR;
+
+>>>>>>> v3.18
 =======
 	msp->playback_dma_data.tx_rx_addr = res->start + MSP_DR;
 	msp->capture_dma_data.tx_rx_addr = res->start + MSP_DR;
@@ -816,6 +868,7 @@ int ux500_msp_i2s_init_msp(struct platform_device *pdev,
 	msp->msp_state = MSP_STATE_IDLE;
 	msp->loopback_enable = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* I2S-controller is allocated and added in I2S controller class. */
 	i2s_cont = devm_kzalloc(&pdev->dev, sizeof(*i2s_cont), GFP_KERNEL);
@@ -854,6 +907,8 @@ int ux500_msp_i2s_init_msp(struct platform_device *pdev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -862,8 +917,11 @@ void ux500_msp_i2s_cleanup_msp(struct platform_device *pdev,
 {
 	dev_dbg(msp->dev, "%s: Enter (id = %d).\n", __func__, msp->id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	device_unregister(&msp->i2s_cont->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

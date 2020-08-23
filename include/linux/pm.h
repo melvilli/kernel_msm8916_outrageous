@@ -94,6 +94,7 @@ typedef struct pm_message {
  *	This method is executed for all kinds of suspend transitions and is
  *	followed by one of the suspend callbacks: @suspend(), @freeze(), or
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	@poweroff().  The PM core executes subsystem-level @prepare() for all
  *	devices before starting to invoke suspend callbacks for any of them, so
  *	generally devices may be assumed to be functional or to respond to
@@ -102,6 +103,8 @@ typedef struct pm_message {
  *	space at that time and it is NOT valid to request firmware from within
  *	@prepare() (it's too late to do that).  It also is NOT valid to allocate
 =======
+=======
+>>>>>>> v3.18
  *	@poweroff().  If the transition is a suspend to memory or standby (that
  *	is, not related to hibernation), the return value of @prepare() may be
  *	used to indicate to the PM core to leave the device in runtime suspend
@@ -119,6 +122,9 @@ typedef struct pm_message {
  *	may NOT assume anything about the availability of user space at that
  *	time and it is NOT valid to request firmware from within @prepare()
  *	(it's too late to do that).  It also is NOT valid to allocate
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	substantial amounts of memory from @prepare() in the GFP_KERNEL mode.
  *	[To work around these limitations, drivers may register suspend and
@@ -133,8 +139,11 @@ typedef struct pm_message {
  *	suspend earlier).
  *	The PM core executes subsystem-level @complete() after it has executed
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	the appropriate resume callbacks for all devices.
 =======
+=======
+>>>>>>> v3.18
  *	the appropriate resume callbacks for all devices.  If the corresponding
  *	@prepare() at the beginning of the suspend transition returned a
  *	positive number and the device was left in runtime suspend (without
@@ -145,6 +154,9 @@ typedef struct pm_message {
  *	@complete() can check the power.direct_complete flag of the device to
  *	learn whether (unset) or not (set) the previous suspend and resume
  *	callbacks have been executed for it.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * @suspend: Executed before putting the system into a sleep state in which the
@@ -298,9 +310,15 @@ typedef struct pm_message {
  *
  * @runtime_idle: Device appears to be inactive and it might be put into a
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	low-power state if all of the necessary conditions are satisfied.  Check
  *	these conditions and handle the device as appropriate, possibly queueing
  *	a suspend request for it.  The return value is ignored by the PM core.
+=======
+ *	low-power state if all of the necessary conditions are satisfied.
+ *	Check these conditions, and return 0 if it's appropriate to let the PM
+ *	core queue a suspend request for the device.
+>>>>>>> v3.18
 =======
  *	low-power state if all of the necessary conditions are satisfied.
  *	Check these conditions, and return 0 if it's appropriate to let the PM
@@ -351,7 +369,10 @@ struct dev_pm_ops {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 #define SET_LATE_SYSTEM_SLEEP_PM_OPS(suspend_fn, resume_fn) \
 	.suspend_late = suspend_fn, \
@@ -364,6 +385,9 @@ struct dev_pm_ops {
 #define SET_LATE_SYSTEM_SLEEP_PM_OPS(suspend_fn, resume_fn)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PM_RUNTIME
 #define SET_RUNTIME_PM_OPS(suspend_fn, resume_fn, idle_fn) \
@@ -375,7 +399,10 @@ struct dev_pm_ops {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 #define SET_PM_RUNTIME_PM_OPS(suspend_fn, resume_fn, idle_fn) \
 	.runtime_suspend = suspend_fn, \
@@ -385,6 +412,9 @@ struct dev_pm_ops {
 #define SET_PM_RUNTIME_PM_OPS(suspend_fn, resume_fn, idle_fn)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Use this if you want to use the same suspend and resume callbacks for suspend
@@ -398,7 +428,11 @@ const struct dev_pm_ops name = { \
 /*
  * Use this for defining a set of PM operations to be used in all situations
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (sustem suspend, hibernation or runtime PM).
+=======
+ * (system suspend, hibernation or runtime PM).
+>>>>>>> v3.18
 =======
  * (system suspend, hibernation or runtime PM).
 >>>>>>> v3.18
@@ -429,7 +463,11 @@ const struct dev_pm_ops name = { \
  * ON		No transition.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * FREEZE 	System is going to hibernate, call ->prepare() and ->freeze()
+=======
+ * FREEZE	System is going to hibernate, call ->prepare() and ->freeze()
+>>>>>>> v3.18
 =======
  * FREEZE	System is going to hibernate, call ->prepare() and ->freeze()
 >>>>>>> v3.18
@@ -477,7 +515,11 @@ const struct dev_pm_ops name = { \
 #define PM_EVENT_INVALID	(-1)
 #define PM_EVENT_ON		0x0000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PM_EVENT_FREEZE 	0x0001
+=======
+#define PM_EVENT_FREEZE		0x0001
+>>>>>>> v3.18
 =======
 #define PM_EVENT_FREEZE		0x0001
 >>>>>>> v3.18
@@ -600,14 +642,20 @@ struct dev_pm_info {
 	bool			is_prepared:1;	/* Owned by the PM core */
 	bool			is_suspended:1;	/* Ditto */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool			ignore_children:1;
 	bool			early_init:1;	/* Owned by the PM core */
 =======
+=======
+>>>>>>> v3.18
 	bool			is_noirq_suspended:1;
 	bool			is_late_suspended:1;
 	bool			ignore_children:1;
 	bool			early_init:1;	/* Owned by the PM core */
 	bool			direct_complete:1;	/* Owned by the PM core */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spinlock_t		lock;
 #ifdef CONFIG_PM_SLEEP
@@ -648,6 +696,10 @@ struct dev_pm_info {
 #endif
 	struct pm_subsys_data	*subsys_data;  /* Owned by the subsystem. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*set_latency_tolerance)(struct device *, s32);
+>>>>>>> v3.18
 =======
 	void (*set_latency_tolerance)(struct device *, s32);
 >>>>>>> v3.18
@@ -666,6 +718,10 @@ extern int dev_pm_put_subsys_data(struct device *dev);
 struct dev_pm_domain {
 	struct dev_pm_ops	ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*detach)(struct device *dev, bool power_off);
+>>>>>>> v3.18
 =======
 	void (*detach)(struct device *dev, bool power_off);
 >>>>>>> v3.18
@@ -686,17 +742,23 @@ struct dev_pm_domain {
  *
  * ON		Driver starts working again, responding to hardware events
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 		and software requests.  The hardware may have gone through
  * 		a power-off reset, or it may have maintained state from the
  * 		previous suspend() which the driver will rely on while
  * 		resuming.  On most platforms, there are no restrictions on
  * 		availability of resources like clocks during resume().
 =======
+=======
+>>>>>>> v3.18
  *		and software requests.  The hardware may have gone through
  *		a power-off reset, or it may have maintained state from the
  *		previous suspend() which the driver will rely on while
  *		resuming.  On most platforms, there are no restrictions on
  *		availability of resources like clocks during resume().
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Other transitions are triggered by messages sent using suspend().  All
@@ -707,6 +769,7 @@ struct dev_pm_domain {
  * differ according to the message:
  *
  * SUSPEND	Quiesce, enter a low power device state appropriate for
+<<<<<<< HEAD
 <<<<<<< HEAD
  * 		the upcoming system state (such as PCI_D3hot), and enable
  * 		wakeup events as appropriate.
@@ -724,6 +787,8 @@ struct dev_pm_domain {
  * 		of preserving it, to ensure that it's never mistaken for the
  * 		state which that earlier snapshot had set up.
 =======
+=======
+>>>>>>> v3.18
  *		the upcoming system state (such as PCI_D3hot), and enable
  *		wakeup events as appropriate.
  *
@@ -739,6 +804,9 @@ struct dev_pm_domain {
  *		Some drivers will need to reset their hardware state instead
  *		of preserving it, to ensure that it's never mistaken for the
  *		state which that earlier snapshot had set up.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * A minimally power-aware driver treats all messages as SUSPEND, fully
@@ -756,6 +824,11 @@ extern void device_pm_lock(void);
 extern void dpm_resume_start(pm_message_t state);
 extern void dpm_resume_end(pm_message_t state);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void dpm_resume_noirq(pm_message_t state);
+extern void dpm_resume_early(pm_message_t state);
+>>>>>>> v3.18
 =======
 extern void dpm_resume_noirq(pm_message_t state);
 extern void dpm_resume_early(pm_message_t state);
@@ -767,6 +840,11 @@ extern void device_pm_unlock(void);
 extern int dpm_suspend_end(pm_message_t state);
 extern int dpm_suspend_start(pm_message_t state);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int dpm_suspend_noirq(pm_message_t state);
+extern int dpm_suspend_late(pm_message_t state);
+>>>>>>> v3.18
 =======
 extern int dpm_suspend_noirq(pm_message_t state);
 extern int dpm_suspend_late(pm_message_t state);
@@ -827,6 +905,7 @@ static inline void dpm_for_each_dev(void *data, void (*fn)(struct device *, void
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pm_generic_prepare	NULL
 #define pm_generic_suspend	NULL
 #define pm_generic_resume	NULL
@@ -836,6 +915,8 @@ static inline void dpm_for_each_dev(void *data, void (*fn)(struct device *, void
 #define pm_generic_poweroff	NULL
 #define pm_generic_complete	NULL
 =======
+=======
+>>>>>>> v3.18
 #define pm_generic_prepare		NULL
 #define pm_generic_suspend_late		NULL
 #define pm_generic_suspend_noirq	NULL
@@ -856,6 +937,9 @@ static inline void dpm_for_each_dev(void *data, void (*fn)(struct device *, void
 #define pm_generic_poweroff_late	NULL
 #define pm_generic_poweroff		NULL
 #define pm_generic_complete		NULL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !CONFIG_PM_SLEEP */
 

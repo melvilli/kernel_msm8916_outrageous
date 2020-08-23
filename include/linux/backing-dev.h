@@ -29,7 +29,10 @@ struct dentry;
  */
 enum bdi_state {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BDI_wb_alloc,		/* Default embedded wb allocated */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	BDI_async_congested,	/* The async (write) queue is getting full */
@@ -37,7 +40,10 @@ enum bdi_state {
 	BDI_registered,		/* bdi_register() was done */
 	BDI_writeback_running,	/* Writeback is in progress */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BDI_unused,		/* Available bits start here */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -57,7 +63,10 @@ enum bdi_stat_item {
 struct bdi_writeback {
 	struct backing_dev_info *bdi;	/* our parent bdi */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int nr;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -119,7 +128,11 @@ struct backing_dev_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bdi_init(struct backing_dev_info *bdi);
+=======
+int __must_check bdi_init(struct backing_dev_info *bdi);
+>>>>>>> v3.18
 =======
 int __must_check bdi_init(struct backing_dev_info *bdi);
 >>>>>>> v3.18
@@ -131,7 +144,11 @@ int bdi_register(struct backing_dev_info *bdi, struct device *parent,
 int bdi_register_dev(struct backing_dev_info *bdi, dev_t dev);
 void bdi_unregister(struct backing_dev_info *bdi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bdi_setup_and_register(struct backing_dev_info *, char *, unsigned int);
+=======
+int __must_check bdi_setup_and_register(struct backing_dev_info *, char *, unsigned int);
+>>>>>>> v3.18
 =======
 int __must_check bdi_setup_and_register(struct backing_dev_info *, char *, unsigned int);
 >>>>>>> v3.18
@@ -142,7 +159,10 @@ void bdi_writeback_workfn(struct work_struct *work);
 int bdi_has_dirty_io(struct backing_dev_info *bdi);
 void bdi_wakeup_thread_delayed(struct backing_dev_info *bdi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bdi_lock_two(struct bdi_writeback *wb1, struct bdi_writeback *wb2);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

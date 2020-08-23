@@ -20,10 +20,13 @@ obj-$(CONFIG_ARCH_OMAP16XX) += ocpi.o
 obj-$(CONFIG_PM) += pm.o sleep.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # DSP
 obj-$(CONFIG_OMAP_MBOX_FWK)	+= mailbox_mach.o
 mailbox_mach-objs		:= mailbox.o
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 i2c-omap-$(CONFIG_I2C_OMAP)		:= i2c.o

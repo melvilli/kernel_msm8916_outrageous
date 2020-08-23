@@ -9,7 +9,11 @@ TWL6030 USB COMPARATOR
    act as device
  - usb-supply : phandle to the regulator device tree node. It should be vusb
 <<<<<<< HEAD
+<<<<<<< HEAD
    if it is twl6030 or ldousb if it is twl6025 subclass.
+=======
+   if it is twl6030 or ldousb if it is twl6032 subclass.
+>>>>>>> v3.18
 =======
    if it is twl6030 or ldousb if it is twl6032 subclass.
 >>>>>>> v3.18

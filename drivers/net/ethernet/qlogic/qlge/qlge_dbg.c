@@ -725,7 +725,11 @@ static void ql_build_coredump_seg_header(
 	seg_hdr->segNum = seg_number;
 	seg_hdr->segSize = seg_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(seg_hdr->description, desc, (sizeof(seg_hdr->description)) - 1);
+=======
+	memcpy(seg_hdr->description, desc, (sizeof(seg_hdr->description)) - 1);
+>>>>>>> v3.18
 =======
 	memcpy(seg_hdr->description, desc, (sizeof(seg_hdr->description)) - 1);
 >>>>>>> v3.18
@@ -745,8 +749,13 @@ int ql_core_dump(struct ql_adapter *qdev, struct ql_mpi_coredump *mpi_coredump)
 
 	if (!mpi_coredump) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netif_err(qdev, drv, qdev->ndev, "No memory available\n");
 		return -ENOMEM;
+=======
+		netif_err(qdev, drv, qdev->ndev, "No memory allocated\n");
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		netif_err(qdev, drv, qdev->ndev, "No memory allocated\n");
 		return -EINVAL;
@@ -1252,8 +1261,13 @@ static void ql_get_core_dump(struct ql_adapter *qdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ql_gen_reg_dump(struct ql_adapter *qdev,
 			struct ql_reg_dump *mpi_coredump)
+=======
+static void ql_gen_reg_dump(struct ql_adapter *qdev,
+			    struct ql_reg_dump *mpi_coredump)
+>>>>>>> v3.18
 =======
 static void ql_gen_reg_dump(struct ql_adapter *qdev,
 			    struct ql_reg_dump *mpi_coredump)

@@ -146,7 +146,10 @@ ioc4_clock_calibrate(struct ioc4_driver_data *idd)
 	union ioc4_gpcr gpcr;
 	unsigned int state, last_state = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec start_ts, end_ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	uint64_t start, end, period;
@@ -178,15 +181,21 @@ ioc4_clock_calibrate(struct ioc4_driver_data *idd)
 			count++;
 			if (count == IOC4_CALIBRATE_END) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ktime_get_ts(&end_ts);
 				break;
 			} else if (count == IOC4_CALIBRATE_DISCARD)
 				ktime_get_ts(&start_ts);
 =======
+=======
+>>>>>>> v3.18
 				end = ktime_get_ns();
 				break;
 			} else if (count == IOC4_CALIBRATE_DISCARD)
 				start = ktime_get_ns();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		last_state = state;
@@ -203,8 +212,11 @@ ioc4_clock_calibrate(struct ioc4_driver_data *idd)
 	 *    period of an IOC4 INT_OUT count.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	end = end_ts.tv_sec * NSEC_PER_SEC + end_ts.tv_nsec;
 	start = start_ts.tv_sec * NSEC_PER_SEC + start_ts.tv_nsec;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	period = (end - start) /

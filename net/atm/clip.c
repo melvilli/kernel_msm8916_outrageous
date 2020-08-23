@@ -69,7 +69,11 @@ static int to_atmarpd(enum atmarp_ctrl_type type, int itf, __be32 ip)
 	sk = sk_atm(atmarpd);
 	skb_queue_tail(&sk->sk_receive_queue, skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk->sk_data_ready(sk, skb->len);
+=======
+	sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 	sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -389,7 +393,11 @@ static netdev_tx_t clip_start_xmit(struct sk_buff *skb,
 	old = xchg(&entry->vccs->xoff, 1);	/* assume XOFF ... */
 	if (old) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("XOFF->XOFF transition\n");
+=======
+		pr_warn("XOFF->XOFF transition\n");
+>>>>>>> v3.18
 =======
 		pr_warn("XOFF->XOFF transition\n");
 >>>>>>> v3.18
@@ -456,7 +464,11 @@ static int clip_setentry(struct atm_vcc *vcc, __be32 ip)
 
 	if (vcc->push != clip_push) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("non-CLIP VCC\n");
+=======
+		pr_warn("non-CLIP VCC\n");
+>>>>>>> v3.18
 =======
 		pr_warn("non-CLIP VCC\n");
 >>>>>>> v3.18
@@ -514,7 +526,11 @@ static void clip_setup(struct net_device *dev)
 	/* compromise between decent burst-tolerance and protection */
 	/* against memory hogs. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->priv_flags &= ~IFF_XMIT_DST_RELEASE;
+=======
+	netif_keep_dst(dev);
+>>>>>>> v3.18
 =======
 	netif_keep_dst(dev);
 >>>>>>> v3.18
@@ -537,7 +553,12 @@ static int clip_create(int number)
 				number = PRIV(dev)->number + 1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(struct clip_priv), "", clip_setup);
+=======
+	dev = alloc_netdev(sizeof(struct clip_priv), "", NET_NAME_UNKNOWN,
+			   clip_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(sizeof(struct clip_priv), "", NET_NAME_UNKNOWN,
 			   clip_setup);
@@ -561,9 +582,15 @@ static int clip_create(int number)
 
 static int clip_device_event(struct notifier_block *this, unsigned long event,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     void *arg)
 {
 	struct net_device *dev = arg;
+=======
+			     void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 			     void *ptr)
 {
@@ -603,6 +630,10 @@ static int clip_inet_event(struct notifier_block *this, unsigned long event,
 {
 	struct in_device *in_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct netdev_notifier_info info;
+>>>>>>> v3.18
 =======
 	struct netdev_notifier_info info;
 >>>>>>> v3.18
@@ -615,7 +646,12 @@ static int clip_inet_event(struct notifier_block *this, unsigned long event,
 	if (event != NETDEV_UP)
 		return NOTIFY_DONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return clip_device_event(this, NETDEV_CHANGE, in_dev->dev);
+=======
+	netdev_notifier_info_init(&info, in_dev->dev);
+	return clip_device_event(this, NETDEV_CHANGE, &info);
+>>>>>>> v3.18
 =======
 	netdev_notifier_info_init(&info, in_dev->dev);
 	return clip_device_event(this, NETDEV_CHANGE, &info);

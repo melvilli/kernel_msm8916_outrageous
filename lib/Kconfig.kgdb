@@ -65,8 +65,13 @@ config KGDB_LOW_LEVEL_TRAP
        help
          This will add an extra call back to kgdb for the breakpoint
 <<<<<<< HEAD
+<<<<<<< HEAD
          exception handler on which will will allow kgdb to step
          through a notify handler.
+=======
+         exception handler which will allow kgdb to step through a
+         notify handler.
+>>>>>>> v3.18
 =======
          exception handler which will allow kgdb to step through a
          notify handler.

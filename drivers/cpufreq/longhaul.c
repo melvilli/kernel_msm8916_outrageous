@@ -243,7 +243,11 @@ static void do_powersaver(int cx_address, unsigned int mults_index,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void longhaul_setstate(struct cpufreq_policy *policy,
+=======
+static int longhaul_setstate(struct cpufreq_policy *policy,
+>>>>>>> v3.18
 =======
 static int longhaul_setstate(struct cpufreq_policy *policy,
 >>>>>>> v3.18
@@ -263,17 +267,23 @@ static int longhaul_setstate(struct cpufreq_policy *policy,
 	mult = mults[mults_index & 0x1f];
 	if (mult == -1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
 	speed = calc_speed(mult);
 	if ((speed > highest_speed) || (speed < lowest_speed))
 		return;
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 
 	speed = calc_speed(mult);
 	if ((speed > highest_speed) || (speed < lowest_speed))
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Voltage transition before frequency transition? */
 	if (can_scale_voltage && longhaul_index < table_index)
@@ -283,8 +293,11 @@ static int longhaul_setstate(struct cpufreq_policy *policy,
 	freqs.new = speed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_PRECHANGE);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pr_debug("Setting to FSB:%dMHz Mult:%d.%dx (%s)\n",
@@ -402,6 +415,7 @@ retry_loop:
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Report true CPU frequency */
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
 
@@ -409,6 +423,8 @@ retry_loop:
 		printk(KERN_INFO PFX "Warning: Timeout while waiting for "
 				"idle PCI bus.\n");
 =======
+=======
+>>>>>>> v3.18
 
 	if (!bm_timeout) {
 		printk(KERN_INFO PFX "Warning: Timeout while waiting for "
@@ -417,6 +433,9 @@ retry_loop:
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -503,7 +522,11 @@ static int longhaul_get_ranges(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	longhaul_table = kmalloc((numscales + 1) * sizeof(*longhaul_table),
+=======
+	longhaul_table = kzalloc((numscales + 1) * sizeof(*longhaul_table),
+>>>>>>> v3.18
 =======
 	longhaul_table = kzalloc((numscales + 1) * sizeof(*longhaul_table),
 >>>>>>> v3.18
@@ -560,6 +583,10 @@ static int longhaul_get_ranges(void)
 static void longhaul_setup_voltagescaling(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct cpufreq_frequency_table *freq_pos;
+>>>>>>> v3.18
 =======
 	struct cpufreq_frequency_table *freq_pos;
 >>>>>>> v3.18
@@ -642,9 +669,14 @@ static void longhaul_setup_voltagescaling(void)
 	kHz_step = (highest_speed - min_vid_speed) / numvscales;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	j = 0;
 	while (longhaul_table[j].frequency != CPUFREQ_TABLE_END) {
 		speed = longhaul_table[j].frequency;
+=======
+	cpufreq_for_each_entry(freq_pos, longhaul_table) {
+		speed = freq_pos->frequency;
+>>>>>>> v3.18
 =======
 	cpufreq_for_each_entry(freq_pos, longhaul_table) {
 		speed = freq_pos->frequency;
@@ -654,16 +686,22 @@ static void longhaul_setup_voltagescaling(void)
 		else
 			pos = minvid.pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		longhaul_table[j].driver_data |= mV_vrm_table[pos] << 8;
 		vid = vrm_mV_table[mV_vrm_table[pos]];
 		printk(KERN_INFO PFX "f: %d kHz, index: %d, vid: %d mV\n",
 				speed, j, vid.mV);
 		j++;
 =======
+=======
+>>>>>>> v3.18
 		freq_pos->driver_data |= mV_vrm_table[pos] << 8;
 		vid = vrm_mV_table[mV_vrm_table[pos]];
 		printk(KERN_INFO PFX "f: %d kHz, index: %d, vid: %d mV\n",
 			speed, (int)(freq_pos - longhaul_table), vid.mV);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -672,6 +710,7 @@ static void longhaul_setup_voltagescaling(void)
 }
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int longhaul_verify(struct cpufreq_policy *policy)
 {
@@ -698,6 +737,8 @@ static int longhaul_target(struct cpufreq_policy *policy,
 	if (!can_scale_voltage)
 		longhaul_setstate(policy, table_index);
 =======
+=======
+>>>>>>> v3.18
 static int longhaul_target(struct cpufreq_policy *policy,
 			    unsigned int table_index)
 {
@@ -708,6 +749,9 @@ static int longhaul_target(struct cpufreq_policy *policy,
 
 	if (!can_scale_voltage)
 		retval = longhaul_setstate(policy, table_index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else {
 		/* On test system voltage transitions exceeding single
@@ -724,7 +768,11 @@ static int longhaul_target(struct cpufreq_policy *policy,
 			vid = (longhaul_table[i].driver_data >> 8) & 0x1f;
 			if (vid != current_vid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				longhaul_setstate(policy, i);
+=======
+				retval = longhaul_setstate(policy, i);
+>>>>>>> v3.18
 =======
 				retval = longhaul_setstate(policy, i);
 >>>>>>> v3.18
@@ -737,16 +785,22 @@ static int longhaul_target(struct cpufreq_policy *policy,
 				i--;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		longhaul_setstate(policy, table_index);
 	}
 	longhaul_index = table_index;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		retval = longhaul_setstate(policy, table_index);
 	}
 
 	longhaul_index = table_index;
 	return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -992,6 +1046,7 @@ static int longhaul_cpu_init(struct cpufreq_policy *policy)
 
 	policy->cpuinfo.transition_latency = 200000;	/* nsec */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	policy->cur = calc_speed(longhaul_get_cpu_mult());
 
 	ret = cpufreq_frequency_table_cpuinfo(policy, longhaul_table);
@@ -1023,6 +1078,8 @@ static struct cpufreq_driver longhaul_driver = {
 	.name	= "longhaul",
 	.attr	= longhaul_attr,
 =======
+=======
+>>>>>>> v3.18
 
 	return cpufreq_table_validate_and_show(policy, longhaul_table);
 }
@@ -1034,6 +1091,9 @@ static struct cpufreq_driver longhaul_driver = {
 	.init	= longhaul_cpu_init,
 	.name	= "longhaul",
 	.attr	= cpufreq_generic_attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1089,8 +1149,11 @@ static void __exit longhaul_exit(void)
 	for (i = 0; i < numscales; i++) {
 		if (mults[i] == maxmult) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			longhaul_setstate(policy, i);
 =======
+=======
+>>>>>>> v3.18
 			struct cpufreq_freqs freqs;
 
 			freqs.old = policy->cur;
@@ -1100,6 +1163,9 @@ static void __exit longhaul_exit(void)
 			cpufreq_freq_transition_begin(policy, &freqs);
 			longhaul_setstate(policy, i);
 			cpufreq_freq_transition_end(policy, &freqs, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}

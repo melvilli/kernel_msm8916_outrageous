@@ -30,6 +30,11 @@
 #define __V4L2_COMMON__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 
@@ -74,7 +79,10 @@
 #define V4L2_SUBDEV_SEL_FLAG_KEEP_CONFIG V4L2_SEL_FLAG_KEEP_CONFIG
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct v4l2_edid {
 	__u32 pad;
 	__u32 start_block;
@@ -83,5 +91,8 @@ struct v4l2_edid {
 	__u8  *edid;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __V4L2_COMMON__ */

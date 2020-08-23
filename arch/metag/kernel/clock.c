@@ -9,13 +9,19 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/delay.h>
 #include <linux/io.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/delay.h>
 #include <linux/io.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/param.h>
@@ -42,9 +48,12 @@ static unsigned long get_core_freq_default(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * setup_meta_clocks() - Set up the Meta clock.
 =======
+=======
+>>>>>>> v3.18
 static struct clk *clk_core;
 
 /* Clk based get_core_freq callback. */
@@ -102,6 +111,9 @@ void __init init_metag_clocks(void)
 
 /**
  * setup_meta_clocks() - Early set up of the Meta clock.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @desc:	Clock descriptor usually provided by machine description
  *

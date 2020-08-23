@@ -499,16 +499,22 @@ static int uvc_v4l2_open(struct file *file)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_inc_return(&stream->dev->users) == 1) {
 		ret = uvc_status_start(stream->dev);
 		if (ret < 0) {
 			atomic_dec(&stream->dev->users);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&stream->dev->lock);
 	if (stream->dev->users == 0) {
 		ret = uvc_status_start(stream->dev, GFP_KERNEL);
 		if (ret < 0) {
 			mutex_unlock(&stream->dev->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			usb_autopm_put_interface(stream->dev->intf);
 			kfree(handle);
@@ -517,6 +523,12 @@ static int uvc_v4l2_open(struct file *file)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	stream->dev->users++;
+	mutex_unlock(&stream->dev->lock);
+
+>>>>>>> v3.18
 =======
 	stream->dev->users++;
 	mutex_unlock(&stream->dev->lock);
@@ -553,13 +565,19 @@ static int uvc_v4l2_release(struct file *file)
 	file->private_data = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_dec_return(&stream->dev->users) == 0)
 		uvc_status_stop(stream->dev);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&stream->dev->lock);
 	if (--stream->dev->users == 0)
 		uvc_status_stop(stream->dev);
 	mutex_unlock(&stream->dev->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	usb_autopm_put_interface(stream->dev->intf);
@@ -1016,7 +1034,10 @@ static long uvc_v4l2_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case VIDIOC_CREATE_BUFS:
 	{
 		struct v4l2_create_buffers *cb = arg;
@@ -1028,6 +1049,9 @@ static long uvc_v4l2_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		return uvc_create_buffers(&stream->queue, cb);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case VIDIOC_QBUF:
 		if (!uvc_has_privileges(handle))

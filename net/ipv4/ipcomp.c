@@ -24,7 +24,11 @@
 #include <net/sock.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ipcomp4_err(struct sk_buff *skb, u32 info)
+=======
+static int ipcomp4_err(struct sk_buff *skb, u32 info)
+>>>>>>> v3.18
 =======
 static int ipcomp4_err(struct sk_buff *skb, u32 info)
 >>>>>>> v3.18
@@ -39,17 +43,23 @@ static int ipcomp4_err(struct sk_buff *skb, u32 info)
 	case ICMP_DEST_UNREACH:
 		if (icmp_hdr(skb)->code != ICMP_FRAG_NEEDED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return;
 	case ICMP_REDIRECT:
 		break;
 	default:
 		return;
 =======
+=======
+>>>>>>> v3.18
 			return 0;
 	case ICMP_REDIRECT:
 		break;
 	default:
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -57,6 +67,7 @@ static int ipcomp4_err(struct sk_buff *skb, u32 info)
 	x = xfrm_state_lookup(net, skb->mark, (const xfrm_address_t *)&iph->daddr,
 			      spi, IPPROTO_COMP, AF_INET);
 	if (!x)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return;
 
@@ -69,6 +80,8 @@ static int ipcomp4_err(struct sk_buff *skb, u32 info)
 		ipv4_redirect(skb, net, 0, 0, IPPROTO_COMP, 0);
 	xfrm_state_put(x);
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 
 	if (icmp_hdr(skb)->type == ICMP_DEST_UNREACH)
@@ -78,6 +91,9 @@ static int ipcomp4_err(struct sk_buff *skb, u32 info)
 	xfrm_state_put(x);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -175,12 +191,18 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ipcomp4_rcv_cb(struct sk_buff *skb, int err)
 {
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct xfrm_type ipcomp_type = {
 	.description	= "IPCOMP4",
@@ -193,18 +215,24 @@ static const struct xfrm_type ipcomp_type = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct net_protocol ipcomp4_protocol = {
 	.handler	=	xfrm4_rcv,
 	.err_handler	=	ipcomp4_err,
 	.no_policy	=	1,
 	.netns_ok	=	1,
 =======
+=======
+>>>>>>> v3.18
 static struct xfrm4_protocol ipcomp4_protocol = {
 	.handler	=	xfrm4_rcv,
 	.input_handler	=	xfrm_input,
 	.cb_handler	=	ipcomp4_rcv_cb,
 	.err_handler	=	ipcomp4_err,
 	.priority	=	0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -215,7 +243,11 @@ static int __init ipcomp4_init(void)
 		return -EAGAIN;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inet_add_protocol(&ipcomp4_protocol, IPPROTO_COMP) < 0) {
+=======
+	if (xfrm4_protocol_register(&ipcomp4_protocol, IPPROTO_COMP) < 0) {
+>>>>>>> v3.18
 =======
 	if (xfrm4_protocol_register(&ipcomp4_protocol, IPPROTO_COMP) < 0) {
 >>>>>>> v3.18
@@ -229,7 +261,11 @@ static int __init ipcomp4_init(void)
 static void __exit ipcomp4_fini(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inet_del_protocol(&ipcomp4_protocol, IPPROTO_COMP) < 0)
+=======
+	if (xfrm4_protocol_deregister(&ipcomp4_protocol, IPPROTO_COMP) < 0)
+>>>>>>> v3.18
 =======
 	if (xfrm4_protocol_deregister(&ipcomp4_protocol, IPPROTO_COMP) < 0)
 >>>>>>> v3.18

@@ -38,7 +38,11 @@ __mutex_fastpath_lock(atomic_t *count, void (*fail_fn)(atomic_t *))
 
 static inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 __mutex_fastpath_lock_retval(atomic_t *count, int (*fail_fn)(atomic_t *))
+=======
+__mutex_fastpath_lock_retval(atomic_t *count)
+>>>>>>> v3.18
 =======
 __mutex_fastpath_lock_retval(atomic_t *count)
 >>>>>>> v3.18
@@ -56,7 +60,11 @@ __mutex_fastpath_lock_retval(atomic_t *count)
 
 	if (unlikely(!__done || __res != 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__res = fail_fn(count);
+=======
+		__res = -1;
+>>>>>>> v3.18
 =======
 		__res = -1;
 >>>>>>> v3.18

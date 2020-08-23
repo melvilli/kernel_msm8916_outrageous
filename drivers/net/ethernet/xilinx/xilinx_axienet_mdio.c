@@ -20,15 +20,21 @@
 int axienet_mdio_wait_until_ready(struct axienet_local *lp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long end = jiffies + 2;
 	while (!(axienet_ior(lp, XAE_MDIO_MCR_OFFSET) &
 		 XAE_MDIO_MCR_READY_MASK)) {
 		if (end - jiffies <= 0) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned long end = jiffies + 2;
 	while (!(axienet_ior(lp, XAE_MDIO_MCR_OFFSET) &
 		 XAE_MDIO_MCR_READY_MASK)) {
 		if (time_before_eq(end, jiffies)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			WARN_ON(1);
 			return -ETIMEDOUT;
@@ -183,6 +189,10 @@ int axienet_mdio_setup(struct axienet_local *lp, struct device_node *np)
 		       "default %d\n", DEFAULT_CLOCK_DIVISOR);
 		clk_div = DEFAULT_CLOCK_DIVISOR;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		of_node_put(np1);
+>>>>>>> v3.18
 =======
 		of_node_put(np1);
 >>>>>>> v3.18

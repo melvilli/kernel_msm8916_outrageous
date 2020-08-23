@@ -2,6 +2,7 @@
 #define _PERF_UI_PROGRESS_H_ 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <../types.h>
 
 struct ui_progress {
@@ -16,6 +17,8 @@ void ui_progress__init(void);
 void ui_progress__update(u64 curr, u64 total, const char *title);
 void ui_progress__finish(void);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 
 void ui_progress__finish(void);
@@ -34,6 +37,9 @@ struct ui_progress_ops {
 };
 
 extern struct ui_progress_ops *ui_progress__ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

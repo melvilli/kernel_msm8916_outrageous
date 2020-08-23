@@ -61,7 +61,11 @@ int adis_probe_trigger(struct adis *adis, struct iio_dev *indio_dev)
 	ret = iio_trigger_register(adis->trig);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev->trig = iio_trigger_get(adis->trig);
+=======
+	indio_dev->trig = adis->trig;
+>>>>>>> v3.18
 =======
 	indio_dev->trig = adis->trig;
 >>>>>>> v3.18

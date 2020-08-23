@@ -157,7 +157,10 @@
 #define	DM_REG_PMPD_ANAEN_11N				0xEEC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*MAC REG LIST*/
@@ -172,8 +175,14 @@
 #define	DM_REG_TXPAUSE_11N				0x522
 #define	DM_REG_RESP_TX_11N				0x6D8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	DM_REG_ANT_TRAIN_1				0x7b0
 #define	DM_REG_ANT_TRAIN_2				0x7b4
+=======
+#define	DM_REG_ANT_TRAIN_PARA1_11N			0x7b0
+#define	DM_REG_ANT_TRAIN_PARA2_11N			0x7b4
+
+>>>>>>> v3.18
 =======
 #define	DM_REG_ANT_TRAIN_PARA1_11N			0x7b0
 #define	DM_REG_ANT_TRAIN_PARA2_11N			0x7b4
@@ -218,7 +227,11 @@
 #define DM_DIG_BACKOFF_DEFAULT				10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RXPATHSELECTION_SS_TH_LOW			30
+=======
+#define RXPATHSELECTION_SS_TH_W				30
+>>>>>>> v3.18
 =======
 #define RXPATHSELECTION_SS_TH_W				30
 >>>>>>> v3.18
@@ -246,7 +259,11 @@
 #define TX_POWER_NEAR_FIELD_THRESH_LVL2			74
 #define TX_POWER_NEAR_FIELD_THRESH_LVL1			67
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TXPWRTRACK_MAX_IDX				6
+=======
+#define TXPWRTRACK_MAX_IDX				 6
+>>>>>>> v3.18
 =======
 #define TXPWRTRACK_MAX_IDX				 6
 >>>>>>> v3.18
@@ -256,6 +273,10 @@ struct swat_t {
 	u8 try_flag;
 	u8 stop_trying;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -264,16 +285,22 @@ struct swat_t {
 	u8 cur_antenna;
 	u8 pre_antenna;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 enum FAT_STATE {
 	FAT_NORMAL_STATE	= 0,
 =======
+=======
+>>>>>>> v3.18
 
 };
 
 enum FAT_STATE {
 	FAT_NORMAL_STATE = 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	FAT_TRAINING_STATE = 1,
 };
@@ -340,8 +367,14 @@ enum pwr_track_control_method {
 void rtl88e_dm_set_tx_ant_by_tx_info(struct ieee80211_hw *hw,
 				     u8 *pdesc, u32 mac_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl88e_dm_ant_sel_statistics(struct ieee80211_hw *hw, u8 antsel_tr_mux,
 				  u32 mac_id, u32 rx_pwdb_all);
+=======
+void rtl88e_dm_ant_sel_statistics(struct ieee80211_hw *hw,
+				  u8 antsel_tr_mux, u32 mac_id,
+				  u32 rx_pwdb_all);
+>>>>>>> v3.18
 =======
 void rtl88e_dm_ant_sel_statistics(struct ieee80211_hw *hw,
 				  u8 antsel_tr_mux, u32 mac_id,
@@ -356,9 +389,13 @@ void rtl88e_dm_check_txpower_tracking(struct ieee80211_hw *hw);
 void rtl88e_dm_init_rate_adaptive_mask(struct ieee80211_hw *hw);
 void rtl88e_dm_txpower_track_adjust(struct ieee80211_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    u8 type, u8 *pdirection,
 				    u32 *poutwrite_val);
 
+=======
+	u8 type, u8 *pdirection, u32 *poutwrite_val);
+>>>>>>> v3.18
 =======
 	u8 type, u8 *pdirection, u32 *poutwrite_val);
 >>>>>>> v3.18

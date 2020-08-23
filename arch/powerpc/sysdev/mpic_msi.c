@@ -36,7 +36,11 @@ static int mpic_msi_reserve_u3_hwirqs(struct mpic *mpic)
 	struct device_node *np;
 	int flags, index, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_irq oirq;
+=======
+	struct of_phandle_args oirq;
+>>>>>>> v3.18
 =======
 	struct of_phandle_args oirq;
 >>>>>>> v3.18
@@ -68,9 +72,15 @@ static int mpic_msi_reserve_u3_hwirqs(struct mpic *mpic)
 
 		index = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (of_irq_map_one(np, index++, &oirq) == 0) {
 			ops->xlate(mpic->irqhost, NULL, oirq.specifier,
 						oirq.size, &hwirq, &flags);
+=======
+		while (of_irq_parse_one(np, index++, &oirq) == 0) {
+			ops->xlate(mpic->irqhost, NULL, oirq.args,
+						oirq.args_count, &hwirq, &flags);
+>>>>>>> v3.18
 =======
 		while (of_irq_parse_one(np, index++, &oirq) == 0) {
 			ops->xlate(mpic->irqhost, NULL, oirq.args,

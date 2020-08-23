@@ -60,6 +60,12 @@
 #define _LINUX_SFI_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/init.h>
+#include <linux/types.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/init.h>
 #include <linux/types.h>

@@ -88,7 +88,11 @@ int rxrpc_recvmsg(struct kiocb *iocb, struct socket *sock,
 			/* nothing remains on the queue */
 			if (copied &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    (flags & MSG_PEEK || timeo == 0))
+=======
+			    (msg->msg_flags & MSG_PEEK || timeo == 0))
+>>>>>>> v3.18
 =======
 			    (msg->msg_flags & MSG_PEEK || timeo == 0))
 >>>>>>> v3.18
@@ -185,6 +189,7 @@ int rxrpc_recvmsg(struct kiocb *iocb, struct socket *sock,
 			copy = len - copied;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (skb->ip_summed == CHECKSUM_UNNECESSARY) {
 			ret = skb_copy_datagram_iovec(skb, offset,
 						      msg->msg_iov, copy);
@@ -195,6 +200,9 @@ int rxrpc_recvmsg(struct kiocb *iocb, struct socket *sock,
 			if (ret == -EINVAL)
 				goto csum_copy_error;
 		}
+=======
+		ret = skb_copy_datagram_iovec(skb, offset, msg->msg_iov, copy);
+>>>>>>> v3.18
 =======
 		ret = skb_copy_datagram_iovec(skb, offset, msg->msg_iov, copy);
 >>>>>>> v3.18
@@ -357,6 +365,7 @@ copy_error:
 	return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 csum_copy_error:
 	_debug("csum error");
 	release_sock(&rx->sk);
@@ -367,6 +376,8 @@ csum_copy_error:
 	rxrpc_put_call(call);
 	return -EAGAIN;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 wait_interrupted:

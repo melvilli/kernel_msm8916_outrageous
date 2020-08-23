@@ -13,7 +13,11 @@
  *
  * derived in part from w83l785ts.c:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Copyright (c) 2003-2004 Jean Delvare <khali@linux-fr.org>
+=======
+ *	Copyright (c) 2003-2004 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  *	Copyright (c) 2003-2004 Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -212,7 +216,11 @@ struct block1_t {
  */
 struct lm93_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -928,8 +936,13 @@ static void lm93_read_block(struct i2c_client *client, u8 fbn, u8 *values)
 static struct lm93_data *lm93_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1172,8 +1185,13 @@ static ssize_t store_in_min(struct device *dev, struct device_attribute *attr,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1258,8 +1276,13 @@ static ssize_t store_in_max(struct device *dev, struct device_attribute *attr,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1347,8 +1370,13 @@ static ssize_t store_temp_min(struct device *dev, struct device_attribute *attr,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1387,8 +1415,13 @@ static ssize_t store_temp_max(struct device *dev, struct device_attribute *attr,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1428,8 +1461,13 @@ static ssize_t store_temp_auto_base(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1469,8 +1507,13 @@ static ssize_t store_temp_auto_boost(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1513,8 +1556,13 @@ static ssize_t store_temp_auto_boost_hyst(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1569,8 +1617,13 @@ static ssize_t store_temp_auto_offset(struct device *dev,
 	int nr = s_attr->index;
 	int ofs = s_attr->nr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1686,8 +1739,13 @@ static ssize_t store_temp_auto_pwm_min(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1739,8 +1797,13 @@ static ssize_t store_temp_auto_offset_hyst(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1805,8 +1868,13 @@ static ssize_t store_fan_min(struct device *dev, struct device_attribute *attr,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1893,8 +1961,13 @@ static ssize_t store_fan_smart_tach(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1954,8 +2027,13 @@ static ssize_t store_pwm(struct device *dev, struct device_attribute *attr,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2007,8 +2085,13 @@ static ssize_t store_pwm_enable(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2090,8 +2173,13 @@ static ssize_t store_pwm_freq(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2135,8 +2223,13 @@ static ssize_t store_pwm_auto_channels(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2181,8 +2274,13 @@ static ssize_t store_pwm_auto_spinup_min(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2229,8 +2327,13 @@ static ssize_t store_pwm_auto_spinup_time(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2272,8 +2375,13 @@ static ssize_t store_pwm_auto_prochot_ramp(struct device *dev,
 						const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2311,8 +2419,13 @@ static ssize_t store_pwm_auto_vrdhot_ramp(struct device *dev,
 						const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2384,8 +2497,13 @@ static ssize_t store_prochot_max(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2427,8 +2545,13 @@ static ssize_t store_prochot_override(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2475,8 +2598,13 @@ static ssize_t store_prochot_interval(struct device *dev,
 {
 	int nr = (to_sensor_dev_attr(attr))->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2519,8 +2647,13 @@ static ssize_t store_prochot_override_duty_cycle(struct device *dev,
 						const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2557,8 +2690,13 @@ static ssize_t store_prochot_short(struct device *dev,
 					const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm93_data *data = i2c_get_clientdata(client);
+=======
+	struct lm93_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm93_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -2770,9 +2908,13 @@ static struct attribute *lm93_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute_group lm93_attr_grp = {
 	.attrs = lm93_attrs,
 };
+=======
+ATTRIBUTE_GROUPS(lm93);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(lm93);
 >>>>>>> v3.18
@@ -2869,13 +3011,19 @@ static int lm93_probe(struct i2c_client *client,
 		      const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lm93_data *data;
 	int err, func;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct lm93_data *data;
 	struct device *hwmon_dev;
 	int func;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void (*update)(struct lm93_data *, struct i2c_client *);
 
@@ -2883,6 +3031,7 @@ static int lm93_probe(struct i2c_client *client,
 	func = i2c_get_functionality(client->adapter);
 	if (((LM93_SMBUS_FUNC_FULL & func) == LM93_SMBUS_FUNC_FULL) &&
 			(!disable_block)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_dbg(&client->dev, "using SMBus block data transactions\n");
 		update = lm93_update_client_full;
@@ -2906,6 +3055,8 @@ static int lm93_probe(struct i2c_client *client,
 	/* housekeeping */
 	data->valid = 0;
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(dev, "using SMBus block data transactions\n");
 		update = lm93_update_client_full;
 	} else if ((LM93_SMBUS_FUNC_MIN & func) == LM93_SMBUS_FUNC_MIN) {
@@ -2922,6 +3073,9 @@ static int lm93_probe(struct i2c_client *client,
 
 	/* housekeeping */
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data->update = update;
 	mutex_init(&data->update_lock);
@@ -2929,6 +3083,7 @@ static int lm93_probe(struct i2c_client *client,
 	/* initialize the chip */
 	lm93_init_client(client);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = sysfs_create_group(&client->dev.kobj, &lm93_attr_grp);
 	if (err)
@@ -2954,10 +3109,15 @@ static int lm93_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
 							   data,
 							   lm93_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2975,7 +3135,10 @@ static struct i2c_driver lm93_driver = {
 	},
 	.probe		= lm93_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= lm93_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= lm93_id,

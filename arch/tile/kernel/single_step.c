@@ -13,6 +13,7 @@
  *
  * A code-rewriter that enables instruction single-stepping.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Derived from iLib's single-stepping code.
  */
 
@@ -20,10 +21,15 @@
 
 /* These functions are only used on the TILE platform */
 =======
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/smp.h>
 #include <linux/ptrace.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/thread_info.h>
@@ -31,6 +37,7 @@
 #include <linux/mman.h>
 #include <linux/types.h>
 #include <linux/err.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <asm/cacheflush.h>
 #include <asm/unaligned.h>
@@ -56,6 +63,8 @@ __setup("unaligned_printk=", setup_unaligned_printk);
 
 unsigned int unaligned_fixup_count;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/prctl.h>
 #include <asm/cacheflush.h>
 #include <asm/traps.h>
@@ -70,6 +79,9 @@ unsigned int unaligned_fixup_count;
 
 #define signExtend17(val) sign_extend((val), 17)
 #define TILE_X1_MASK (0xffffffffULL << 31)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum mem_op {
@@ -81,6 +93,7 @@ enum mem_op {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline tile_bundle_bits set_BrOff_X1(tile_bundle_bits n, s32 offset)
 {
 	tile_bundle_bits result;
@@ -88,6 +101,8 @@ static inline tile_bundle_bits set_BrOff_X1(tile_bundle_bits n, s32 offset)
 	/* mask out the old offset */
 	tile_bundle_bits mask = create_BrOff_X1(-1);
 =======
+=======
+>>>>>>> v3.18
 static inline tilepro_bundle_bits set_BrOff_X1(tilepro_bundle_bits n,
 	s32 offset)
 {
@@ -95,6 +110,9 @@ static inline tilepro_bundle_bits set_BrOff_X1(tilepro_bundle_bits n,
 
 	/* mask out the old offset */
 	tilepro_bundle_bits mask = create_BrOff_X1(-1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	result = n & (~mask);
 
@@ -105,16 +123,22 @@ static inline tilepro_bundle_bits set_BrOff_X1(tilepro_bundle_bits n,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline tile_bundle_bits move_X1(tile_bundle_bits n, int dest, int src)
 {
 	tile_bundle_bits result;
 	tile_bundle_bits op;
 =======
+=======
+>>>>>>> v3.18
 static inline tilepro_bundle_bits move_X1(tilepro_bundle_bits n, int dest,
 	int src)
 {
 	tilepro_bundle_bits result;
 	tilepro_bundle_bits op;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	result = n & (~TILE_X1_MASK);
@@ -130,7 +154,11 @@ static inline tilepro_bundle_bits move_X1(tilepro_bundle_bits n, int dest,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline tile_bundle_bits nop_X1(tile_bundle_bits n)
+=======
+static inline tilepro_bundle_bits nop_X1(tilepro_bundle_bits n)
+>>>>>>> v3.18
 =======
 static inline tilepro_bundle_bits nop_X1(tilepro_bundle_bits n)
 >>>>>>> v3.18
@@ -139,8 +167,13 @@ static inline tilepro_bundle_bits nop_X1(tilepro_bundle_bits n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline tile_bundle_bits addi_X1(
 	tile_bundle_bits n, int dest, int src, int imm)
+=======
+static inline tilepro_bundle_bits addi_X1(
+	tilepro_bundle_bits n, int dest, int src, int imm)
+>>>>>>> v3.18
 =======
 static inline tilepro_bundle_bits addi_X1(
 	tilepro_bundle_bits n, int dest, int src, int imm)
@@ -159,9 +192,15 @@ static inline tilepro_bundle_bits addi_X1(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static tile_bundle_bits rewrite_load_store_unaligned(
 	struct single_step_state *state,
 	tile_bundle_bits bundle,
+=======
+static tilepro_bundle_bits rewrite_load_store_unaligned(
+	struct single_step_state *state,
+	tilepro_bundle_bits bundle,
+>>>>>>> v3.18
 =======
 static tilepro_bundle_bits rewrite_load_store_unaligned(
 	struct single_step_state *state,
@@ -174,7 +213,10 @@ static tilepro_bundle_bits rewrite_load_store_unaligned(
 	unsigned char __user *addr;
 	int val_reg, addr_reg, err, val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int align_ctl;
 
 	align_ctl = unaligned_fixup;
@@ -186,6 +228,9 @@ static tilepro_bundle_bits rewrite_load_store_unaligned(
 		align_ctl = 0;
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Get address and value registers */
@@ -232,7 +277,11 @@ static tilepro_bundle_bits rewrite_load_store_unaligned(
 	 * actual bad address in an SPR, which it doesn't.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unaligned_fixup == 0) {
+=======
+	if (align_ctl == 0) {
+>>>>>>> v3.18
 =======
 	if (align_ctl == 0) {
 >>>>>>> v3.18
@@ -285,6 +334,7 @@ static tilepro_bundle_bits rewrite_load_store_unaligned(
 	if (err) {
 		siginfo_t info = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.si_signo = SIGSEGV,
 			.si_code = SEGV_MAPERR,
 			.si_addr = addr
@@ -294,6 +344,8 @@ static tilepro_bundle_bits rewrite_load_store_unaligned(
 		force_sig_info(info.si_signo, &info, current);
 		return (tile_bundle_bits) 0;
 =======
+=======
+>>>>>>> v3.18
 			.si_signo = SIGBUS,
 			.si_code = BUS_ADRALN,
 			.si_addr = addr
@@ -302,6 +354,9 @@ static tilepro_bundle_bits rewrite_load_store_unaligned(
 				       (unsigned long)addr, SIGBUS);
 		force_sig_info(info.si_signo, &info, current);
 		return (tilepro_bundle_bits) 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -372,7 +427,11 @@ void single_step_execve(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -395,6 +454,7 @@ void single_step_execve(void)
 void single_step_once(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern tile_bundle_bits __single_step_ill_insn;
 	extern tile_bundle_bits __single_step_j_insn;
 	extern tile_bundle_bits __single_step_addli_insn;
@@ -405,6 +465,8 @@ void single_step_once(struct pt_regs *regs)
 	tile_bundle_bits __user *buffer, *pc;
 	tile_bundle_bits bundle;
 =======
+=======
+>>>>>>> v3.18
 	extern tilepro_bundle_bits __single_step_ill_insn;
 	extern tilepro_bundle_bits __single_step_j_insn;
 	extern tilepro_bundle_bits __single_step_addli_insn;
@@ -414,6 +476,9 @@ void single_step_once(struct pt_regs *regs)
 	int is_single_step = test_ti_thread_flag(info, TIF_SINGLESTEP);
 	tilepro_bundle_bits __user *buffer, *pc;
 	tilepro_bundle_bits bundle;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int temp_reg;
 	int target_reg = TREG_LR;
@@ -421,7 +486,10 @@ void single_step_once(struct pt_regs *regs)
 	enum mem_op mem_op = MEMOP_NONE;
 	int size = 0, sign_ext = 0;  /* happy compiler */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int align_ctl;
 
 	align_ctl = unaligned_fixup;
@@ -433,6 +501,9 @@ void single_step_once(struct pt_regs *regs)
 		align_ctl = 0;
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	asm(
@@ -507,7 +578,11 @@ void single_step_once(struct pt_regs *regs)
 		regs->pc -= 8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pc = (tile_bundle_bits __user *)(regs->pc);
+=======
+	pc = (tilepro_bundle_bits __user *)(regs->pc);
+>>>>>>> v3.18
 =======
 	pc = (tilepro_bundle_bits __user *)(regs->pc);
 >>>>>>> v3.18
@@ -654,7 +729,10 @@ void single_step_once(struct pt_regs *regs)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_WH64()
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* postincrement operations */
@@ -692,7 +770,10 @@ void single_step_once(struct pt_regs *regs)
 			}
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CHIP_HAS_WH64() */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -754,9 +835,15 @@ void single_step_once(struct pt_regs *regs)
 	/*
 	 * Check if we need to rewrite an unaligned load/store.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Returning zero is a special value meaning we need to SIGSEGV.
 	 */
 	if (mem_op != MEMOP_NONE && unaligned_fixup >= 0) {
+=======
+	 * Returning zero is a special value meaning we generated a signal.
+	 */
+	if (mem_op != MEMOP_NONE && align_ctl >= 0) {
+>>>>>>> v3.18
 =======
 	 * Returning zero is a special value meaning we generated a signal.
 	 */
@@ -801,9 +888,15 @@ void single_step_once(struct pt_regs *regs)
 
 		/* End with a jump back to the next instruction */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		delta = ((regs->pc + TILE_BUNDLE_SIZE_IN_BYTES) -
 			(unsigned long)buffer) >>
 			TILE_LOG2_BUNDLE_ALIGNMENT_IN_BYTES;
+=======
+		delta = ((regs->pc + TILEPRO_BUNDLE_SIZE_IN_BYTES) -
+			(unsigned long)buffer) >>
+			TILEPRO_LOG2_BUNDLE_ALIGNMENT_IN_BYTES;
+>>>>>>> v3.18
 =======
 		delta = ((regs->pc + TILEPRO_BUNDLE_SIZE_IN_BYTES) -
 			(unsigned long)buffer) >>
@@ -837,9 +930,12 @@ void single_step_once(struct pt_regs *regs)
 
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/smp.h>
 #include <linux/ptrace.h>
 #include <arch/spr_def.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -874,7 +970,11 @@ static DEFINE_PER_CPU(unsigned long, ss_saved_pc);
 void gx_singlestep_handle(struct pt_regs *regs, int fault_num)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *ss_pc = &__get_cpu_var(ss_saved_pc);
+=======
+	unsigned long *ss_pc = this_cpu_ptr(&ss_saved_pc);
+>>>>>>> v3.18
 =======
 	unsigned long *ss_pc = this_cpu_ptr(&ss_saved_pc);
 >>>>>>> v3.18
@@ -889,15 +989,21 @@ void gx_singlestep_handle(struct pt_regs *regs, int fault_num)
 		   (!(control & SPR_SINGLE_STEP_CONTROL_1__CANCELED_MASK))) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ptrace_notify(SIGTRAP);
 		control |= SPR_SINGLE_STEP_CONTROL_1__CANCELED_MASK;
 		control |= SPR_SINGLE_STEP_CONTROL_1__INHIBIT_MASK;
 		__insn_mtspr(SPR_SINGLE_STEP_CONTROL_K, control);
 =======
+=======
+>>>>>>> v3.18
 		control |= SPR_SINGLE_STEP_CONTROL_1__CANCELED_MASK;
 		control |= SPR_SINGLE_STEP_CONTROL_1__INHIBIT_MASK;
 		__insn_mtspr(SPR_SINGLE_STEP_CONTROL_K, control);
 		send_sigtrap(current, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -911,7 +1017,11 @@ void gx_singlestep_handle(struct pt_regs *regs, int fault_num)
 void single_step_once(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *ss_pc = &__get_cpu_var(ss_saved_pc);
+=======
+	unsigned long *ss_pc = this_cpu_ptr(&ss_saved_pc);
+>>>>>>> v3.18
 =======
 	unsigned long *ss_pc = this_cpu_ptr(&ss_saved_pc);
 >>>>>>> v3.18

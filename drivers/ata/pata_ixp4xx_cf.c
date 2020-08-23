@@ -49,7 +49,11 @@ static unsigned int ixp4xx_mmio_data_xfer(struct ata_device *dev,
 	struct ata_port *ap = dev->link->ap;
 	void __iomem *mmio = ap->ioaddr.data_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ixp4xx_pata_data *data = ap->host->dev->platform_data;
+=======
+	struct ixp4xx_pata_data *data = dev_get_platdata(ap->host->dev);
+>>>>>>> v3.18
 =======
 	struct ixp4xx_pata_data *data = dev_get_platdata(ap->host->dev);
 >>>>>>> v3.18
@@ -148,7 +152,12 @@ static int ixp4xx_pata_probe(struct platform_device *pdev)
 	struct ata_host *host;
 	struct ata_port *ap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ixp4xx_pata_data *data = pdev->dev.platform_data;
+=======
+	struct ixp4xx_pata_data *data = dev_get_platdata(&pdev->dev);
+	int ret;
+>>>>>>> v3.18
 =======
 	struct ixp4xx_pata_data *data = dev_get_platdata(&pdev->dev);
 	int ret;
@@ -167,7 +176,13 @@ static int ixp4xx_pata_probe(struct platform_device *pdev)
 
 	/* acquire resources and fill host */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	ret = dma_set_coherent_mask(&pdev->dev, DMA_BIT_MASK(32));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = dma_set_coherent_mask(&pdev->dev, DMA_BIT_MASK(32));
 	if (ret)

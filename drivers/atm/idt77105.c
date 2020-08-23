@@ -369,9 +369,15 @@ EXPORT_SYMBOL(idt77105_init);
 static void __exit idt77105_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         /* turn off timers */
         del_timer(&stats_timer);
         del_timer(&restart_timer);
+=======
+	/* turn off timers */
+	del_timer_sync(&stats_timer);
+	del_timer_sync(&restart_timer);
+>>>>>>> v3.18
 =======
 	/* turn off timers */
 	del_timer_sync(&stats_timer);

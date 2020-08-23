@@ -3,9 +3,13 @@
  * the iSCSI Target driver.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * \u00a9 Copyright 2007-2011 RisingTide Systems LLC.
  *
  * Licensed to the Linux Foundation under the General Public License (GPL) version 2.
+=======
+ * (c) Copyright 2007-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2007-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -352,7 +356,10 @@ static int iscsit_dataout_check_datasn(
 	unsigned char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dump = 0, recovery = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 data_sn = 0;
@@ -380,7 +387,10 @@ static int iscsit_dataout_check_datasn(
 			" higher than expected 0x%08x.\n", cmd->init_task_tag,
 				be32_to_cpu(hdr->datasn), data_sn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		recovery = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto recover;
@@ -389,7 +399,10 @@ static int iscsit_dataout_check_datasn(
 			" lower than expected 0x%08x, discarding payload.\n",
 			cmd->init_task_tag, be32_to_cpu(hdr->datasn), data_sn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dump = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto dump;
@@ -408,8 +421,12 @@ dump:
 		return DATAOUT_CANNOT_RECOVER;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (recovery || dump) ? DATAOUT_WITHIN_COMMAND_RECOVERY :
 				DATAOUT_NORMAL;
+=======
+	return DATAOUT_WITHIN_COMMAND_RECOVERY;
+>>>>>>> v3.18
 =======
 	return DATAOUT_WITHIN_COMMAND_RECOVERY;
 >>>>>>> v3.18
@@ -777,7 +794,11 @@ static void iscsit_handle_time2retain_timeout(unsigned long data)
 {
 	struct iscsi_session *sess = (struct iscsi_session *) data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iscsi_portal_group *tpg = ISCSI_TPG_S(sess);
+=======
+	struct iscsi_portal_group *tpg = sess->tpg;
+>>>>>>> v3.18
 =======
 	struct iscsi_portal_group *tpg = sess->tpg;
 >>>>>>> v3.18
@@ -809,7 +830,11 @@ static void iscsit_handle_time2retain_timeout(unsigned long data)
 				ISCSI_SESS_ERR_CXN_TIMEOUT;
 		tiqn->sess_err_stats.cxn_timeout_errors++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sess->conn_timeout_errors++;
+=======
+		atomic_long_inc(&sess->conn_timeout_errors);
+>>>>>>> v3.18
 =======
 		atomic_long_inc(&sess->conn_timeout_errors);
 >>>>>>> v3.18
@@ -829,9 +854,15 @@ void iscsit_start_time2retain_handler(struct iscsi_session *sess)
 	 * an ACTIVE (eg: not disabled or shutdown) state.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&ISCSI_TPG_S(sess)->tpg_state_lock);
 	tpg_active = (ISCSI_TPG_S(sess)->tpg_state == TPG_STATE_ACTIVE);
 	spin_unlock(&ISCSI_TPG_S(sess)->tpg_state_lock);
+=======
+	spin_lock(&sess->tpg->tpg_state_lock);
+	tpg_active = (sess->tpg->tpg_state == TPG_STATE_ACTIVE);
+	spin_unlock(&sess->tpg->tpg_state_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&sess->tpg->tpg_state_lock);
 	tpg_active = (sess->tpg->tpg_state == TPG_STATE_ACTIVE);
@@ -863,7 +894,11 @@ void iscsit_start_time2retain_handler(struct iscsi_session *sess)
 int iscsit_stop_time2retain_timer(struct iscsi_session *sess)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iscsi_portal_group *tpg = ISCSI_TPG_S(sess);
+=======
+	struct iscsi_portal_group *tpg = sess->tpg;
+>>>>>>> v3.18
 =======
 	struct iscsi_portal_group *tpg = sess->tpg;
 >>>>>>> v3.18
@@ -902,10 +937,14 @@ void iscsit_connection_reinstatement_rcfr(struct iscsi_conn *conn)
 	spin_unlock_bh(&conn->state_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (conn->tx_thread && conn->tx_thread_active)
 		send_sig(SIGINT, conn->tx_thread, 1);
 	if (conn->rx_thread && conn->rx_thread_active)
 		send_sig(SIGINT, conn->rx_thread, 1);
+=======
+	iscsi_thread_set_force_reinstatement(conn);
+>>>>>>> v3.18
 =======
 	iscsi_thread_set_force_reinstatement(conn);
 >>>>>>> v3.18
@@ -934,15 +973,21 @@ void iscsit_cause_connection_reinstatement(struct iscsi_conn *conn, int sleep)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (conn->tx_thread && conn->tx_thread_active)
 		send_sig(SIGINT, conn->tx_thread, 1);
 	if (conn->rx_thread && conn->rx_thread_active)
 		send_sig(SIGINT, conn->rx_thread, 1);
 =======
+=======
+>>>>>>> v3.18
 	if (iscsi_thread_set_force_reinstatement(conn) < 0) {
 		spin_unlock_bh(&conn->state_lock);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	atomic_set(&conn->connection_reinstatement, 1);

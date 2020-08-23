@@ -6,6 +6,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/list.h>
+>>>>>>> v3.18
 =======
 #include <linux/list.h>
 >>>>>>> v3.18
@@ -52,16 +56,22 @@ DEFINE_EVENT(mm_compaction_isolate_template, mm_compaction_isolate_freepages,
 TRACE_EVENT(mm_compaction_migratepages,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(unsigned long nr_migrated,
 		unsigned long nr_failed),
 
 	TP_ARGS(nr_migrated, nr_failed),
 =======
+=======
+>>>>>>> v3.18
 	TP_PROTO(unsigned long nr_all,
 		int migrate_rc,
 		struct list_head *migratepages),
 
 	TP_ARGS(nr_all, migrate_rc, migratepages),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TP_STRUCT__entry(
@@ -71,8 +81,11 @@ TRACE_EVENT(mm_compaction_migratepages,
 
 	TP_fast_assign(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__entry->nr_migrated = nr_migrated;
 =======
+=======
+>>>>>>> v3.18
 		unsigned long nr_failed = 0;
 		struct list_head *page_lru;
 
@@ -89,6 +102,9 @@ TRACE_EVENT(mm_compaction_migratepages,
 				nr_failed++;
 
 		__entry->nr_migrated = nr_all - nr_failed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__entry->nr_failed = nr_failed;
 	),
@@ -99,7 +115,10 @@ TRACE_EVENT(mm_compaction_migratepages,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(mm_compaction_begin,
 	TP_PROTO(unsigned long zone_start, unsigned long migrate_start,
 		unsigned long free_start, unsigned long zone_end),
@@ -142,6 +161,9 @@ TRACE_EVENT(mm_compaction_end,
 
 	TP_printk("status=%d", __entry->status)
 );
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _TRACE_COMPACTION_H */

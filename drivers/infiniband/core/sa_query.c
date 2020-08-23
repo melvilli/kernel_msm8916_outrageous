@@ -43,7 +43,11 @@
 #include <linux/idr.h>
 #include <linux/workqueue.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <uapi/linux/if_ether.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/if_ether.h>
 >>>>>>> v3.18
@@ -561,7 +565,10 @@ int ib_init_ah_from_path(struct ib_device *device, u8 port_num,
 		ah_attr->grh.traffic_class = rec->traffic_class;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (force_grh) {
 		memcpy(ah_attr->dmac, rec->dmac, ETH_ALEN);
 		ah_attr->vlan_id = rec->vlan_id;
@@ -569,6 +576,9 @@ int ib_init_ah_from_path(struct ib_device *device, u8 port_num,
 		ah_attr->vlan_id = 0xffff;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -626,7 +636,11 @@ static void init_mad(struct ib_sa_mad *mad, struct ib_mad_agent *agent)
 static int send_mad(struct ib_sa_query *query, int timeout_ms, gfp_t gfp_mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool preload = gfp_mask & __GFP_WAIT;
+=======
+	bool preload = !!(gfp_mask & __GFP_WAIT);
+>>>>>>> v3.18
 =======
 	bool preload = !!(gfp_mask & __GFP_WAIT);
 >>>>>>> v3.18
@@ -671,13 +685,19 @@ void ib_sa_unpack_path(void *attribute, struct ib_sa_path_rec *rec)
 EXPORT_SYMBOL(ib_sa_unpack_path);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void ib_sa_pack_path(struct ib_sa_path_rec *rec, void *attribute)
 {
 	ib_pack(path_rec_table, ARRAY_SIZE(path_rec_table), rec, attribute);
 }
 EXPORT_SYMBOL(ib_sa_pack_path);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ib_sa_path_rec_callback(struct ib_sa_query *sa_query,
 				    int status,
@@ -692,6 +712,12 @@ static void ib_sa_path_rec_callback(struct ib_sa_query *sa_query,
 		ib_unpack(path_rec_table, ARRAY_SIZE(path_rec_table),
 			  mad->data, &rec);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rec.vlan_id = 0xffff;
+		memset(rec.dmac, 0, ETH_ALEN);
+		memset(rec.smac, 0, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		rec.vlan_id = 0xffff;
 		memset(rec.dmac, 0, ETH_ALEN);
@@ -1202,7 +1228,11 @@ static void ib_sa_add_one(struct ib_device *device)
 			ib_register_mad_agent(device, i + s, IB_QPT_GSI,
 					      NULL, 0, send_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      recv_handler, sa_dev);
+=======
+					      recv_handler, sa_dev, 0);
+>>>>>>> v3.18
 =======
 					      recv_handler, sa_dev, 0);
 >>>>>>> v3.18

@@ -17,6 +17,10 @@
 #include <linux/module.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -28,6 +32,7 @@
 
 struct lm4857 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *i2c;
 	uint8_t mode;
 };
@@ -35,6 +40,8 @@ struct lm4857 {
 static const uint8_t lm4857_default_regs[] = {
 	0x00, 0x00, 0x00, 0x00,
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *regmap;
 	uint8_t mode;
 };
@@ -44,6 +51,9 @@ static const struct reg_default lm4857_default_regs[] = {
 	{ 0x1, 0x00 },
 	{ 0x2, 0x00 },
 	{ 0x3, 0x00 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -58,6 +68,7 @@ static const struct reg_default lm4857_default_regs[] = {
 #define LM4857_WAKEUP 5
 #define LM4857_EPGAIN 4
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int lm4857_write(struct snd_soc_codec *codec, unsigned int reg,
 		unsigned int value)
@@ -97,10 +108,15 @@ static int lm4857_get_mode(struct snd_kcontrol *kcontrol,
 {
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 =======
+=======
+>>>>>>> v3.18
 static int lm4857_get_mode(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct lm4857 *lm4857 = snd_soc_codec_get_drvdata(codec);
 
@@ -113,7 +129,11 @@ static int lm4857_set_mode(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -124,7 +144,11 @@ static int lm4857_set_mode(struct snd_kcontrol *kcontrol,
 
 	if (codec->dapm.bias_level == SND_SOC_BIAS_ON)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_soc_update_bits(codec, LM4857_CTRL, 0x0F, value + 6);
+=======
+		regmap_update_bits(lm4857->regmap, LM4857_CTRL, 0x0F, value + 6);
+>>>>>>> v3.18
 =======
 		regmap_update_bits(lm4857->regmap, LM4857_CTRL, 0x0F, value + 6);
 >>>>>>> v3.18
@@ -140,16 +164,22 @@ static int lm4857_set_bias_level(struct snd_soc_codec *codec,
 	switch (level) {
 	case SND_SOC_BIAS_ON:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_soc_update_bits(codec, LM4857_CTRL, 0x0F, lm4857->mode + 6);
 		break;
 	case SND_SOC_BIAS_STANDBY:
 		snd_soc_update_bits(codec, LM4857_CTRL, 0x0F, 0);
 =======
+=======
+>>>>>>> v3.18
 		regmap_update_bits(lm4857->regmap, LM4857_CTRL, 0x0F,
 			lm4857->mode + 6);
 		break;
 	case SND_SOC_BIAS_STANDBY:
 		regmap_update_bits(lm4857->regmap, LM4857_CTRL, 0x0F, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -169,8 +199,12 @@ static const char *lm4857_mode[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum lm4857_mode_enum =
 	SOC_ENUM_SINGLE_EXT(ARRAY_SIZE(lm4857_mode), lm4857_mode);
+=======
+static SOC_ENUM_SINGLE_EXT_DECL(lm4857_mode_enum, lm4857_mode);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_EXT_DECL(lm4857_mode_enum, lm4857_mode);
 >>>>>>> v3.18
@@ -215,6 +249,7 @@ static const struct snd_soc_dapm_route lm4857_routes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int lm4857_probe(struct snd_soc_codec *codec)
 {
 	struct lm4857 *lm4857 = snd_soc_codec_get_drvdata(codec);
@@ -252,6 +287,8 @@ static struct snd_soc_codec_driver soc_codec_dev_lm4857 = {
 	.reg_cache_default = lm4857_default_regs,
 	.set_bias_level = lm4857_set_bias_level,
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_codec_driver soc_codec_dev_lm4857 = {
 	.set_bias_level = lm4857_set_bias_level,
 
@@ -272,6 +309,9 @@ static const struct regmap_config lm4857_regmap_config = {
 	.cache_type = REGCACHE_FLAT,
 	.reg_defaults = lm4857_default_regs,
 	.num_reg_defaults = ARRAY_SIZE(lm4857_default_regs),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -280,7 +320,10 @@ static int lm4857_i2c_probe(struct i2c_client *i2c,
 {
 	struct lm4857 *lm4857;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -291,17 +334,23 @@ static int lm4857_i2c_probe(struct i2c_client *i2c,
 	i2c_set_clientdata(i2c, lm4857);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lm4857->i2c = i2c;
 
 	ret = snd_soc_register_codec(&i2c->dev, &soc_codec_dev_lm4857, NULL, 0);
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	lm4857->regmap = devm_regmap_init_i2c(i2c, &lm4857_regmap_config);
 	if (IS_ERR(lm4857->regmap))
 		return PTR_ERR(lm4857->regmap);
 
 	return snd_soc_register_codec(&i2c->dev, &soc_codec_dev_lm4857, NULL, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

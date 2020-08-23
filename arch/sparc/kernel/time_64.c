@@ -660,8 +660,12 @@ static int sparc64_cpufreq_notifier(struct notifier_block *nb, unsigned long val
 	}
 	if ((val == CPUFREQ_PRECHANGE  && freq->old < freq->new) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (val == CPUFREQ_POSTCHANGE && freq->old > freq->new) ||
 	    (val == CPUFREQ_RESUMECHANGE)) {
+=======
+	    (val == CPUFREQ_POSTCHANGE && freq->old > freq->new)) {
+>>>>>>> v3.18
 =======
 	    (val == CPUFREQ_POSTCHANGE && freq->old > freq->new)) {
 >>>>>>> v3.18
@@ -738,7 +742,11 @@ void __irq_entry timer_interrupt(int irq, struct pt_regs *regs)
 
 	local_cpu_data().irq0_irqs++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kstat_incr_irqs_this_cpu(0, irq_to_desc(0));
+=======
+	kstat_incr_irq_this_cpu(0);
+>>>>>>> v3.18
 =======
 	kstat_incr_irq_this_cpu(0);
 >>>>>>> v3.18
@@ -775,7 +783,11 @@ void setup_sparc64_timer(void)
 			     : "r" (pstate));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sevt = &__get_cpu_var(sparc64_events);
+=======
+	sevt = this_cpu_ptr(&sparc64_events);
+>>>>>>> v3.18
 =======
 	sevt = this_cpu_ptr(&sparc64_events);
 >>>>>>> v3.18

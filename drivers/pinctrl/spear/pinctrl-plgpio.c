@@ -12,6 +12,7 @@
 #include <linux/clk.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gpio.h>
 #include <linux/io.h>
 #include <linux/irq.h>
@@ -19,11 +20,16 @@
 #include <linux/irqchip/chained_irq.h>
 #include <linux/module.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/gpio/driver.h>
 #include <linux/io.h>
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/of_platform.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/pinctrl/consumer.h>
 #include <linux/platform_device.h>
@@ -63,7 +69,10 @@ struct plgpio_regs {
  * lock: lock for guarding gpio registers
  * base: base address of plgpio block
 <<<<<<< HEAD
+<<<<<<< HEAD
  * irq_base: irq number of plgpio0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * chip: gpio framework specific chip information structure
@@ -80,8 +89,11 @@ struct plgpio {
 	void __iomem		*base;
 	struct clk		*clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		irq_base;
 	struct irq_domain	*irq_domain;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct gpio_chip	chip;
@@ -295,6 +307,7 @@ disable_clk:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int plgpio_to_irq(struct gpio_chip *chip, unsigned offset)
 {
 	struct plgpio *plgpio = container_of(chip, struct plgpio, chip);
@@ -311,12 +324,17 @@ static void plgpio_irq_disable(struct irq_data *d)
 	struct plgpio *plgpio = irq_data_get_irq_chip_data(d);
 	int offset = d->irq - plgpio->irq_base;
 =======
+=======
+>>>>>>> v3.18
 /* PLGPIO IRQ */
 static void plgpio_irq_disable(struct irq_data *d)
 {
 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
 	struct plgpio *plgpio = container_of(gc, struct plgpio, chip);
 	int offset = d->hwirq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long flags;
 
@@ -335,8 +353,14 @@ static void plgpio_irq_disable(struct irq_data *d)
 static void plgpio_irq_enable(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct plgpio *plgpio = irq_data_get_irq_chip_data(d);
 	int offset = d->irq - plgpio->irq_base;
+=======
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct plgpio *plgpio = container_of(gc, struct plgpio, chip);
+	int offset = d->hwirq;
+>>>>>>> v3.18
 =======
 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
 	struct plgpio *plgpio = container_of(gc, struct plgpio, chip);
@@ -359,8 +383,14 @@ static void plgpio_irq_enable(struct irq_data *d)
 static int plgpio_irq_set_type(struct irq_data *d, unsigned trigger)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct plgpio *plgpio = irq_data_get_irq_chip_data(d);
 	int offset = d->irq - plgpio->irq_base;
+=======
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct plgpio *plgpio = container_of(gc, struct plgpio, chip);
+	int offset = d->hwirq;
+>>>>>>> v3.18
 =======
 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
 	struct plgpio *plgpio = container_of(gc, struct plgpio, chip);
@@ -405,7 +435,12 @@ static struct irq_chip plgpio_irqchip = {
 static void plgpio_irq_handler(unsigned irq, struct irq_desc *desc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct plgpio *plgpio = irq_get_handler_data(irq);
+=======
+	struct gpio_chip *gc = irq_desc_get_handler_data(desc);
+	struct plgpio *plgpio = container_of(gc, struct plgpio, chip);
+>>>>>>> v3.18
 =======
 	struct gpio_chip *gc = irq_desc_get_handler_data(desc);
 	struct plgpio *plgpio = container_of(gc, struct plgpio, chip);
@@ -451,7 +486,12 @@ static void plgpio_irq_handler(unsigned irq, struct irq_desc *desc)
 			/* get correct irq line number */
 			pin = i * MAX_GPIO_PER_REG + pin;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			generic_handle_irq(plgpio_to_irq(&plgpio->chip, pin));
+=======
+			generic_handle_irq(
+				irq_find_mapping(gc->irqdomain, pin));
+>>>>>>> v3.18
 =======
 			generic_handle_irq(
 				irq_find_mapping(gc->irqdomain, pin));
@@ -487,7 +527,11 @@ static int spear310_p2o(int pin)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int spear310_o2p(int offset)
+=======
+static int spear310_o2p(int offset)
+>>>>>>> v3.18
 =======
 static int spear310_o2p(int offset)
 >>>>>>> v3.18
@@ -573,6 +617,7 @@ end:
 static int plgpio_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device_node *np = pdev->dev.of_node;
 	struct plgpio *plgpio;
 	struct resource *res;
@@ -588,6 +633,11 @@ static int plgpio_probe(struct platform_device *pdev)
 	struct resource *res;
 	int ret, irq;
 >>>>>>> v3.18
+=======
+	struct plgpio *plgpio;
+	struct resource *res;
+	int ret, irq;
+>>>>>>> v3.18
 
 	plgpio = devm_kzalloc(&pdev->dev, sizeof(*plgpio), GFP_KERNEL);
 	if (!plgpio) {
@@ -596,6 +646,10 @@ static int plgpio_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 >>>>>>> v3.18
@@ -628,7 +682,10 @@ static int plgpio_probe(struct platform_device *pdev)
 	spin_lock_init(&plgpio->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	plgpio->irq_base = -1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	plgpio->chip.base = -1;
@@ -639,15 +696,21 @@ static int plgpio_probe(struct platform_device *pdev)
 	plgpio->chip.get = plgpio_get_value;
 	plgpio->chip.set = plgpio_set_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	plgpio->chip.to_irq = plgpio_to_irq;
 	plgpio->chip.label = dev_name(&pdev->dev);
 	plgpio->chip.dev = &pdev->dev;
 	plgpio->chip.owner = THIS_MODULE;
 =======
+=======
+>>>>>>> v3.18
 	plgpio->chip.label = dev_name(&pdev->dev);
 	plgpio->chip.dev = &pdev->dev;
 	plgpio->chip.owner = THIS_MODULE;
 	plgpio->chip.of_node = pdev->dev.of_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!IS_ERR(plgpio->clk)) {
@@ -666,6 +729,7 @@ static int plgpio_probe(struct platform_device *pdev)
 
 	irq = platform_get_irq(pdev, 0);
 	if (irq < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_info(&pdev->dev, "irqs not supported\n");
 		return 0;
@@ -697,6 +761,8 @@ static int plgpio_probe(struct platform_device *pdev)
 
 	irq_set_handler_data(irq, plgpio);
 =======
+=======
+>>>>>>> v3.18
 		dev_info(&pdev->dev, "PLGPIO registered without IRQs\n");
 		return 0;
 	}
@@ -716,6 +782,9 @@ static int plgpio_probe(struct platform_device *pdev)
 				     irq,
 				     plgpio_irq_handler);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_info(&pdev->dev, "PLGPIO registered with IRQs\n");
 
@@ -724,8 +793,12 @@ static int plgpio_probe(struct platform_device *pdev)
 remove_gpiochip:
 	dev_info(&pdev->dev, "Remove gpiochip\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpiochip_remove(&plgpio->chip))
 		dev_err(&pdev->dev, "unable to remove gpiochip\n");
+=======
+	gpiochip_remove(&plgpio->chip);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&plgpio->chip);
 >>>>>>> v3.18
@@ -836,7 +909,11 @@ static struct platform_driver plgpio_driver = {
 		.name = "spear-plgpio",
 		.pm = &plgpio_dev_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(plgpio_of_match),
+=======
+		.of_match_table = plgpio_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = plgpio_of_match,
 >>>>>>> v3.18

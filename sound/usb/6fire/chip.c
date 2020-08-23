@@ -31,7 +31,11 @@ MODULE_AUTHOR("Torsten Schenk <torsten.schenk@zoho.com>");
 MODULE_DESCRIPTION("TerraTec DMX 6Fire USB audio driver");
 MODULE_LICENSE("GPL v2");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_SUPPORTED_DEVICE("{{TerraTec, DMX 6Fire USB}}");
+=======
+MODULE_SUPPORTED_DEVICE("{{TerraTec,DMX 6Fire USB}}");
+>>>>>>> v3.18
 =======
 MODULE_SUPPORTED_DEVICE("{{TerraTec,DMX 6Fire USB}}");
 >>>>>>> v3.18
@@ -111,7 +115,11 @@ static int usb6fire_chip_probe(struct usb_interface *intf,
 	if (regidx < 0) {
 		mutex_unlock(&register_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "too many cards registered.\n");
+=======
+		dev_err(&intf->dev, "too many cards registered.\n");
+>>>>>>> v3.18
 =======
 		dev_err(&intf->dev, "too many cards registered.\n");
 >>>>>>> v3.18
@@ -130,6 +138,7 @@ static int usb6fire_chip_probe(struct usb_interface *intf,
 	/* if we are here, card can be registered in alsa. */
 	if (usb_set_interface(device, 0, 0) != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "can't set first interface.\n");
 		return -EIO;
 	}
@@ -138,6 +147,8 @@ static int usb6fire_chip_probe(struct usb_interface *intf,
 	if (ret < 0) {
 		snd_printk(KERN_ERR PREFIX "cannot create alsa card.\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_err(&intf->dev, "can't set first interface.\n");
 		return -EIO;
 	}
@@ -145,6 +156,9 @@ static int usb6fire_chip_probe(struct usb_interface *intf,
 			   THIS_MODULE, sizeof(struct sfire_chip), &card);
 	if (ret < 0) {
 		dev_err(&intf->dev, "cannot create alsa card.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}
@@ -153,7 +167,10 @@ static int usb6fire_chip_probe(struct usb_interface *intf,
 	sprintf(card->longname, "%s at %d:%d", card->shortname,
 			device->bus->busnum, device->devnum);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &intf->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -191,7 +208,11 @@ static int usb6fire_chip_probe(struct usb_interface *intf,
 	ret = snd_card_register(card);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "cannot register card.");
+=======
+		dev_err(&intf->dev, "cannot register card.");
+>>>>>>> v3.18
 =======
 		dev_err(&intf->dev, "cannot register card.");
 >>>>>>> v3.18

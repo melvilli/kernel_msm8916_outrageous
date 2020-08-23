@@ -4,6 +4,10 @@
 #include <linux/xfrm.h>
 #include <linux/socket.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/jhash.h>
+>>>>>>> v3.18
 =======
 #include <linux/jhash.h>
 >>>>>>> v3.18
@@ -33,7 +37,10 @@ static inline unsigned int __xfrm6_daddr_saddr_hash(const xfrm_address_t *daddr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline u32 __bits2mask32(__u8 bits)
 {
 	u32 mask32 = 0xffffffff;
@@ -86,6 +93,9 @@ static inline unsigned int __xfrm6_dpref_spref_hash(const xfrm_address_t *daddr,
 	       __xfrm6_pref_hash(saddr, sbits);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned int __xfrm_dst_hash(const xfrm_address_t *daddr,
 					   const xfrm_address_t *saddr,
@@ -144,7 +154,12 @@ static inline unsigned int __idx_hash(u32 index, unsigned int hmask)
 
 static inline unsigned int __sel_hash(const struct xfrm_selector *sel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      unsigned short family, unsigned int hmask)
+=======
+				      unsigned short family, unsigned int hmask,
+				      u8 dbits, u8 sbits)
+>>>>>>> v3.18
 =======
 				      unsigned short family, unsigned int hmask,
 				      u8 dbits, u8 sbits)
@@ -156,6 +171,7 @@ static inline unsigned int __sel_hash(const struct xfrm_selector *sel,
 
 	switch (family) {
 	case AF_INET:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (sel->prefixlen_d != 32 ||
 		    sel->prefixlen_s != 32)
@@ -171,6 +187,8 @@ static inline unsigned int __sel_hash(const struct xfrm_selector *sel,
 
 		h = __xfrm6_daddr_saddr_hash(daddr, saddr);
 =======
+=======
+>>>>>>> v3.18
 		if (sel->prefixlen_d < dbits ||
 		    sel->prefixlen_s < sbits)
 			return hmask + 1;
@@ -184,6 +202,9 @@ static inline unsigned int __sel_hash(const struct xfrm_selector *sel,
 			return hmask + 1;
 
 		h = __xfrm6_dpref_spref_hash(daddr, saddr, dbits, sbits);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -194,7 +215,13 @@ static inline unsigned int __sel_hash(const struct xfrm_selector *sel,
 static inline unsigned int __addr_hash(const xfrm_address_t *daddr,
 				       const xfrm_address_t *saddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       unsigned short family, unsigned int hmask)
+=======
+				       unsigned short family,
+				       unsigned int hmask,
+				       u8 dbits, u8 sbits)
+>>>>>>> v3.18
 =======
 				       unsigned short family,
 				       unsigned int hmask,
@@ -206,17 +233,23 @@ static inline unsigned int __addr_hash(const xfrm_address_t *daddr,
 	switch (family) {
 	case AF_INET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		h = __xfrm4_daddr_saddr_hash(daddr, saddr);
 		break;
 
 	case AF_INET6:
 		h = __xfrm6_daddr_saddr_hash(daddr, saddr);
 =======
+=======
+>>>>>>> v3.18
 		h = __xfrm4_dpref_spref_hash(daddr, saddr, dbits, sbits);
 		break;
 
 	case AF_INET6:
 		h = __xfrm6_dpref_spref_hash(daddr, saddr, dbits, sbits);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -225,8 +258,13 @@ static inline unsigned int __addr_hash(const xfrm_address_t *daddr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct hlist_head *xfrm_hash_alloc(unsigned int sz);
 extern void xfrm_hash_free(struct hlist_head *n, unsigned int sz);
+=======
+struct hlist_head *xfrm_hash_alloc(unsigned int sz);
+void xfrm_hash_free(struct hlist_head *n, unsigned int sz);
+>>>>>>> v3.18
 =======
 struct hlist_head *xfrm_hash_alloc(unsigned int sz);
 void xfrm_hash_free(struct hlist_head *n, unsigned int sz);

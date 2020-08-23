@@ -26,6 +26,7 @@
 /**
  * struct gpio_extcon_platform_data - A simple GPIO-controlled extcon device.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @name	The name of this GPIO extcon device.
  * @gpio	Corresponding GPIO.
  * @debounce	Debounce time for GPIO IRQ in ms.
@@ -35,6 +36,8 @@
  * @state_off	print_state is overriden with state_on if detached. If Null,
  *		default method of extcon class is used.
 =======
+=======
+>>>>>>> v3.18
  * @name:		The name of this GPIO extcon device.
  * @gpio:		Corresponding GPIO.
  * @gpio_active_low:	Boolean describing whether gpio active state is 1 or 0
@@ -48,6 +51,9 @@
  *			If NUll, default method of extcon class is used.
  * @check_on_resume:	Boolean describing whether to check the state of gpio
  *			while resuming from sleep.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Note that in order for state_on or state_off to be valid, both state_on
@@ -58,6 +64,10 @@ struct gpio_extcon_platform_data {
 	const char *name;
 	unsigned gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool gpio_active_low;
+>>>>>>> v3.18
 =======
 	bool gpio_active_low;
 >>>>>>> v3.18
@@ -68,6 +78,10 @@ struct gpio_extcon_platform_data {
 	const char *state_on;
 	const char *state_off;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool check_on_resume;
+>>>>>>> v3.18
 =======
 	bool check_on_resume;
 >>>>>>> v3.18

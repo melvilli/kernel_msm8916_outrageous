@@ -19,6 +19,7 @@
 #include <linux/interrupt.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LOBYTE(W)	(unsigned char)((W) & 0xFF)
 #define HIBYTE(W)	(unsigned char)(((W) >> 8) & 0xFF)
 #define MAKEWORD(H, L)	(unsigned short)((L) | ((H) << 8))
@@ -46,6 +47,8 @@
 /* structure for the boardtype */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct addi_board {
 	const char *pc_DriverName;	/*  driver name */
 	int i_IorangeBase1;
@@ -59,7 +62,10 @@ struct addi_board {
 	int i_AoMaxdata;	/*  resolution of D/A */
 	const struct comedi_lrange *pr_AiRangelist;	/* rangelist for A/D */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct comedi_lrange *pr_AoRangelist;	/* rangelist for D/A */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -68,11 +74,15 @@ struct addi_board {
 	int i_DoMaxdata;	/*  data to set all channels high */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i_NbrTTLChannel;	/*  Number of TTL channels */
 
 	int i_Dma;		/*  dma present or not */
 	int i_Timer;		/*    timer subdevice present or not */
 	unsigned char b_AvailableConvertUnit;
+=======
+	int i_Timer;		/*    timer subdevice present or not */
+>>>>>>> v3.18
 =======
 	int i_Timer;		/*    timer subdevice present or not */
 >>>>>>> v3.18
@@ -101,12 +111,17 @@ struct addi_board {
 
 	/* Analog Output */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*ao_config)(struct comedi_device *, struct comedi_subdevice *,
 			 struct comedi_insn *, unsigned int *);
 	int (*ao_write)(struct comedi_device *, struct comedi_subdevice *,
 			struct comedi_insn *, unsigned int *);
 	int (*ao_bits)(struct comedi_device *, struct comedi_subdevice *,
 		       struct comedi_insn *, unsigned int *);
+=======
+	int (*ao_write)(struct comedi_device *, struct comedi_subdevice *,
+			struct comedi_insn *, unsigned int *);
+>>>>>>> v3.18
 =======
 	int (*ao_write)(struct comedi_device *, struct comedi_subdevice *,
 			struct comedi_insn *, unsigned int *);
@@ -141,6 +156,7 @@ struct addi_board {
 			  struct comedi_insn *, unsigned int *);
 	int (*timer_bits)(struct comedi_device *, struct comedi_subdevice *,
 			  struct comedi_insn *, unsigned int *);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* TTL IO */
@@ -305,10 +321,16 @@ struct addi_private {
 
 struct addi_private {
 >>>>>>> v3.18
+=======
+};
+
+struct addi_private {
+>>>>>>> v3.18
 	int iobase;
 	int i_IobaseAmcc;	/*  base+size for AMCC chip */
 	int i_IobaseAddon;	/* addon base address */
 	int i_IobaseReserved;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void __iomem *dw_AiBase;
 	unsigned char b_AiContinuous;	/*  we do unlimited AI */
@@ -359,6 +381,8 @@ struct addi_private {
 	unsigned char b_EocEosConversionTimeBase;
 	unsigned char b_SingelDiff;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ui_AiActualScan;	/* how many scans we finished */
 	unsigned int ui_AiNbrofChannels;	/*  how many channels is measured */
 	unsigned int ui_AiChannelList[32];	/*  actual chanlist */
@@ -381,12 +405,16 @@ struct addi_private {
 	unsigned char b_InterruptMode;	/*  eoc eos or dma */
 	unsigned char b_EocEosInterrupt;	/*  Enable disable eoc eos interrupt */
 	unsigned int ui_EocEosConversionTime;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char b_ExttrigEnable;	/* To enable or disable external trigger */
 
 	/* Pointer to the current process */
 	struct task_struct *tsk_Current;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Hardware board infos for 1710 */
 	struct {
@@ -416,6 +444,8 @@ struct addi_private {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Parameters read from EEPROM overriding static board info */
 	struct {
 		int i_NbrAiChannel;	/*  num of A/D chans */
@@ -426,7 +456,10 @@ struct addi_private {
 		int i_NbrDoChannel;	/*  Number of DO channels */
 		int i_DoMaxdata;	/*  data to set all channels high */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int i_Dma;		/*  dma present or not */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		int i_Timer;		/*  timer subdevice present or not */

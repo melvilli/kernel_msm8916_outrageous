@@ -53,7 +53,11 @@ enum { custom_autocontour, custom_contour, custom_noise_reduction,
 	custom_save_user, custom_restore_user, custom_restore_factory };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const char * const pwc_auto_whitebal_qmenu[] = {
+=======
+static const char * const pwc_auto_whitebal_qmenu[] = {
+>>>>>>> v3.18
 =======
 static const char * const pwc_auto_whitebal_qmenu[] = {
 >>>>>>> v3.18

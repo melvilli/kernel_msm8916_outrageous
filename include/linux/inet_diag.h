@@ -4,7 +4,10 @@
 #include <uapi/linux/inet_diag.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct net;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct sock;
@@ -28,10 +31,13 @@ struct inet_diag_handler {
 						  struct inet_diag_msg *r,
 						  void *info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	int			(*destroy)(struct sk_buff *in_skb,
 					   struct inet_diag_req_v2 *req);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__u16                   idiag_type;
@@ -51,10 +57,13 @@ int inet_diag_dump_one_icsk(struct inet_hashinfo *hashinfo,
 		struct inet_diag_req_v2 *req);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct sock *inet_diag_find_one_icsk(struct net *net,
 				     struct inet_hashinfo *hashinfo,
 				     struct inet_diag_req_v2 *req);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int inet_diag_bc_sk(const struct nlattr *_bc, struct sock *sk);

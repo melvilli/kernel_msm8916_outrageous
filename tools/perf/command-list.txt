@@ -16,7 +16,10 @@ perf-list			mainporcelain common
 perf-lock			mainporcelain common
 perf-mem			mainporcelain common
 <<<<<<< HEAD
+<<<<<<< HEAD
 perf-periodic			mainporcelain common
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 perf-probe			mainporcelain full

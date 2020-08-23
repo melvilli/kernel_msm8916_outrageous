@@ -8,6 +8,10 @@ enum ipi_vector {
 	XEN_SPIN_UNLOCK_VECTOR,
 	XEN_IRQ_WORK_VECTOR,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	XEN_NMI_VECTOR,
+>>>>>>> v3.18
 =======
 	XEN_NMI_VECTOR,
 >>>>>>> v3.18

@@ -22,7 +22,11 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/bootinfo.h>
+=======
+#include <asm/bootinfo-atari.h>
+>>>>>>> v3.18
 =======
 #include <asm/bootinfo-atari.h>
 >>>>>>> v3.18

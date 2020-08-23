@@ -21,6 +21,10 @@ obj-$(CONFIG_RC_MAP) += rc-adstech-dvb-t-pci.o \
 			rc-cinergy-1400.o \
 			rc-cinergy.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			rc-delock-61959.o \
+>>>>>>> v3.18
 =======
 			rc-delock-61959.o \
 >>>>>>> v3.18
@@ -32,6 +36,10 @@ obj-$(CONFIG_RC_MAP) += rc-adstech-dvb-t-pci.o \
 			rc-dntv-live-dvb-t.o \
 			rc-dntv-live-dvbt-pro.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			rc-dvbsky.o \
+>>>>>>> v3.18
 =======
 			rc-dvbsky.o \
 >>>>>>> v3.18
@@ -73,7 +81,10 @@ obj-$(CONFIG_RC_MAP) += rc-adstech-dvb-t-pci.o \
 			rc-npgtech.o \
 			rc-pctv-sedna.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc-philips.o \
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			rc-pinnacle-color.o \
@@ -93,7 +104,10 @@ obj-$(CONFIG_RC_MAP) += rc-adstech-dvb-t-pci.o \
 			rc-reddo.o \
 			rc-snapstream-firefly.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc-samsung-necx.o\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			rc-streamzap.o \
@@ -110,7 +124,10 @@ obj-$(CONFIG_RC_MAP) += rc-adstech-dvb-t-pci.o \
 			rc-tt-1500.o \
 			rc-twinhan1027.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc-ue-rf4ce.o \
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			rc-videomate-m1f.o \
@@ -118,7 +135,12 @@ obj-$(CONFIG_RC_MAP) += rc-adstech-dvb-t-pci.o \
 			rc-videomate-tv-pvr.o \
 			rc-winfast.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc-winfast-usbii-deluxe.o
+=======
+			rc-winfast-usbii-deluxe.o \
+			rc-su3000.o
+>>>>>>> v3.18
 =======
 			rc-winfast-usbii-deluxe.o \
 			rc-su3000.o

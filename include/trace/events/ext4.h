@@ -15,7 +15,10 @@ struct ext4_inode_info;
 struct mpage_da_data;
 struct ext4_map_blocks;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ext4_extent;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct extent_status;
@@ -23,7 +26,10 @@ struct extent_status;
 #define EXT4_I(inode) (container_of(inode, struct ext4_inode_info, vfs_inode))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define show_mballoc_flags(flags) __print_flags(flags, "|",	\
 	{ EXT4_MB_HINT_MERGE,		"HINT_MERGE" },		\
 	{ EXT4_MB_HINT_RESERVED,	"HINT_RESV" },		\
@@ -81,6 +87,9 @@ struct extent_status;
 	{ FALLOC_FL_ZERO_RANGE,		"ZERO_RANGE"})
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 TRACE_EVENT(ext4_free_inode,
 	TP_PROTO(struct inode *inode),
@@ -345,7 +354,11 @@ DEFINE_EVENT(ext4__write_end, ext4_da_write_end,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 TRACE_EVENT(ext4_da_writepages,
+=======
+TRACE_EVENT(ext4_writepages,
+>>>>>>> v3.18
 =======
 TRACE_EVENT(ext4_writepages,
 >>>>>>> v3.18
@@ -392,19 +405,26 @@ TRACE_EVENT(ext4_writepages,
 
 TRACE_EVENT(ext4_da_write_pages,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(struct inode *inode, struct mpage_da_data *mpd),
 
 	TP_ARGS(inode, mpd),
 =======
+=======
+>>>>>>> v3.18
 	TP_PROTO(struct inode *inode, pgoff_t first_page,
 		 struct writeback_control *wbc),
 
 	TP_ARGS(inode, first_page, wbc),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TP_STRUCT__entry(
 		__field(	dev_t,	dev			)
 		__field(	ino_t,	ino			)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__field(	__u64,	b_blocknr		)
 		__field(	__u32,	b_size			)
@@ -418,11 +438,17 @@ TRACE_EVENT(ext4_da_write_pages,
 		__field(	 long,	nr_to_write		)
 		__field(	  int,	sync_mode		)
 >>>>>>> v3.18
+=======
+		__field(      pgoff_t,	first_page		)
+		__field(	 long,	nr_to_write		)
+		__field(	  int,	sync_mode		)
+>>>>>>> v3.18
 	),
 
 	TP_fast_assign(
 		__entry->dev		= inode->i_sb->s_dev;
 		__entry->ino		= inode->i_ino;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__entry->b_blocknr	= mpd->b_blocknr;
 		__entry->b_size		= mpd->b_size;
@@ -446,6 +472,8 @@ TRACE_EVENT(ext4_da_write_pages,
 
 TRACE_EVENT(ext4_da_writepages_result,
 =======
+=======
+>>>>>>> v3.18
 		__entry->first_page	= first_page;
 		__entry->nr_to_write	= wbc->nr_to_write;
 		__entry->sync_mode	= wbc->sync_mode;
@@ -486,6 +514,9 @@ TRACE_EVENT(ext4_da_write_pages_extent,
 );
 
 TRACE_EVENT(ext4_writepages_result,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TP_PROTO(struct inode *inode, struct writeback_control *wbc,
 			int ret, int pages_written),
@@ -568,9 +599,15 @@ DEFINE_EVENT(ext4__page_op, ext4_releasepage,
 
 DECLARE_EVENT_CLASS(ext4_invalidatepage_op,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(struct page *page, unsigned long offset),
 
 	TP_ARGS(page, offset),
+=======
+	TP_PROTO(struct page *page, unsigned int offset, unsigned int length),
+
+	TP_ARGS(page, offset, length),
+>>>>>>> v3.18
 =======
 	TP_PROTO(struct page *page, unsigned int offset, unsigned int length),
 
@@ -582,8 +619,13 @@ DECLARE_EVENT_CLASS(ext4_invalidatepage_op,
 		__field(	ino_t,	ino			)
 		__field(	pgoff_t, index			)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(	unsigned long, offset		)
 
+=======
+		__field(	unsigned int, offset		)
+		__field(	unsigned int, length		)
+>>>>>>> v3.18
 =======
 		__field(	unsigned int, offset		)
 		__field(	unsigned int, length		)
@@ -595,6 +637,7 @@ DECLARE_EVENT_CLASS(ext4_invalidatepage_op,
 		__entry->ino	= page->mapping->host->i_ino;
 		__entry->index	= page->index;
 		__entry->offset	= offset;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	),
 
@@ -615,6 +658,8 @@ DEFINE_EVENT(ext4_invalidatepage_op, ext4_journalled_invalidatepage,
 
 	TP_ARGS(page, offset)
 =======
+=======
+>>>>>>> v3.18
 		__entry->length	= length;
 	),
 
@@ -635,6 +680,9 @@ DEFINE_EVENT(ext4_invalidatepage_op, ext4_journalled_invalidatepage,
 	TP_PROTO(struct page *page, unsigned int offset, unsigned int length),
 
 	TP_ARGS(page, offset, length)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -831,15 +879,21 @@ TRACE_EVENT(ext4_request_blocks,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("dev %d,%d ino %lu flags %u len %u lblk %u goal %llu "
 		  "lleft %u lright %u pleft %llu pright %llu ",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino, __entry->flags,
 =======
+=======
+>>>>>>> v3.18
 	TP_printk("dev %d,%d ino %lu flags %s len %u lblk %u goal %llu "
 		  "lleft %u lright %u pleft %llu pright %llu ",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino, show_mballoc_flags(__entry->flags),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  __entry->len, __entry->logical, __entry->goal,
 		  __entry->lleft, __entry->lright, __entry->pleft,
@@ -880,15 +934,21 @@ TRACE_EVENT(ext4_allocate_blocks,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("dev %d,%d ino %lu flags %u len %u block %llu lblk %u "
 		  "goal %llu lleft %u lright %u pleft %llu pright %llu",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino, __entry->flags,
 =======
+=======
+>>>>>>> v3.18
 	TP_printk("dev %d,%d ino %lu flags %s len %u block %llu lblk %u "
 		  "goal %llu lleft %u lright %u pleft %llu pright %llu",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino, show_mballoc_flags(__entry->flags),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  __entry->len, __entry->block, __entry->logical,
 		  __entry->goal,  __entry->lleft, __entry->lright,
@@ -920,17 +980,23 @@ TRACE_EVENT(ext4_free_blocks,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("dev %d,%d ino %lu mode 0%o block %llu count %lu flags %d",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino,
 		  __entry->mode, __entry->block, __entry->count,
 		  __entry->flags)
 =======
+=======
+>>>>>>> v3.18
 	TP_printk("dev %d,%d ino %lu mode 0%o block %llu count %lu flags %s",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino,
 		  __entry->mode, __entry->block, __entry->count,
 		  show_free_flags(__entry->flags))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -1083,7 +1149,11 @@ TRACE_EVENT(ext4_mballoc_alloc,
 
 	TP_printk("dev %d,%d inode %lu orig %u/%d/%u@%u goal %u/%d/%u@%u "
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  "result %u/%d/%u@%u blks %u grps %u cr %u flags 0x%04x "
+=======
+		  "result %u/%d/%u@%u blks %u grps %u cr %u flags %s "
+>>>>>>> v3.18
 =======
 		  "result %u/%d/%u@%u blks %u grps %u cr %u flags %s "
 >>>>>>> v3.18
@@ -1098,7 +1168,11 @@ TRACE_EVENT(ext4_mballoc_alloc,
 		  __entry->result_len, __entry->result_logical,
 		  __entry->found, __entry->groups, __entry->cr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  __entry->flags, __entry->tail,
+=======
+		  show_mballoc_flags(__entry->flags), __entry->tail,
+>>>>>>> v3.18
 =======
 		  show_mballoc_flags(__entry->flags), __entry->tail,
 >>>>>>> v3.18
@@ -1448,7 +1522,11 @@ TRACE_EVENT(ext4_direct_IO_exit,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 TRACE_EVENT(ext4_fallocate_enter,
+=======
+DECLARE_EVENT_CLASS(ext4__fallocate_mode,
+>>>>>>> v3.18
 =======
 DECLARE_EVENT_CLASS(ext4__fallocate_mode,
 >>>>>>> v3.18
@@ -1460,8 +1538,13 @@ DECLARE_EVENT_CLASS(ext4__fallocate_mode,
 		__field(	dev_t,	dev			)
 		__field(	ino_t,	ino			)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(	loff_t,	pos			)
 		__field(	loff_t,	len			)
+=======
+		__field(	loff_t,	offset			)
+		__field(	loff_t, len			)
+>>>>>>> v3.18
 =======
 		__field(	loff_t,	offset			)
 		__field(	loff_t, len			)
@@ -1473,7 +1556,11 @@ DECLARE_EVENT_CLASS(ext4__fallocate_mode,
 		__entry->dev	= inode->i_sb->s_dev;
 		__entry->ino	= inode->i_ino;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__entry->pos	= offset;
+=======
+		__entry->offset	= offset;
+>>>>>>> v3.18
 =======
 		__entry->offset	= offset;
 >>>>>>> v3.18
@@ -1482,11 +1569,14 @@ DECLARE_EVENT_CLASS(ext4__fallocate_mode,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("dev %d,%d ino %lu pos %lld len %lld mode %d",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino, __entry->pos,
 		  __entry->len, __entry->mode)
 =======
+=======
+>>>>>>> v3.18
 	TP_printk("dev %d,%d ino %lu offset %lld len %lld mode %s",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino,
@@ -1513,6 +1603,9 @@ DEFINE_EVENT(ext4__fallocate_mode, ext4_zero_range,
 	TP_PROTO(struct inode *inode, loff_t offset, loff_t len, int mode),
 
 	TP_ARGS(inode, offset, len, mode)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -1546,6 +1639,7 @@ TRACE_EVENT(ext4_fallocate_exit,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 TRACE_EVENT(ext4_punch_hole,
 	TP_PROTO(struct inode *inode, loff_t offset, loff_t len),
 
@@ -1571,6 +1665,8 @@ TRACE_EVENT(ext4_punch_hole,
 		  __entry->offset, __entry->len)
 );
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 TRACE_EVENT(ext4_unlink_enter,
@@ -1658,7 +1754,11 @@ DEFINE_EVENT(ext4__truncate, ext4_truncate_exit,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 'ux' is the uninitialized extent. */
+=======
+/* 'ux' is the unwritten extent. */
+>>>>>>> v3.18
 =======
 /* 'ux' is the unwritten extent. */
 >>>>>>> v3.18
@@ -1698,7 +1798,11 @@ TRACE_EVENT(ext4_ext_convert_to_initialized_enter,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 'ux' is the uninitialized extent.
+=======
+ * 'ux' is the unwritten extent.
+>>>>>>> v3.18
 =======
  * 'ux' is the unwritten extent.
 >>>>>>> v3.18
@@ -1769,15 +1873,21 @@ DECLARE_EVENT_CLASS(ext4__map_blocks_enter,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("dev %d,%d ino %lu lblk %u len %u flags %u",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino,
 		  __entry->lblk, __entry->len, __entry->flags)
 =======
+=======
+>>>>>>> v3.18
 	TP_printk("dev %d,%d ino %lu lblk %u len %u flags %s",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino,
 		  __entry->lblk, __entry->len, show_map_flags(__entry->flags))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -1797,30 +1907,42 @@ DEFINE_EVENT(ext4__map_blocks_enter, ext4_ind_map_blocks_enter,
 
 DECLARE_EVENT_CLASS(ext4__map_blocks_exit,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(struct inode *inode, struct ext4_map_blocks *map, int ret),
 
 	TP_ARGS(inode, map, ret),
 =======
+=======
+>>>>>>> v3.18
 	TP_PROTO(struct inode *inode, unsigned flags, struct ext4_map_blocks *map,
 		 int ret),
 
 	TP_ARGS(inode, flags, map, ret),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TP_STRUCT__entry(
 		__field(	dev_t,		dev		)
 		__field(	ino_t,		ino		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(	ext4_fsblk_t,	pblk		)
 		__field(	ext4_lblk_t,	lblk		)
 		__field(	unsigned int,	len		)
 		__field(	unsigned int,	flags		)
 =======
+=======
+>>>>>>> v3.18
 		__field(	unsigned int,	flags		)
 		__field(	ext4_fsblk_t,	pblk		)
 		__field(	ext4_lblk_t,	lblk		)
 		__field(	unsigned int,	len		)
 		__field(	unsigned int,	mflags		)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__field(	int,		ret		)
 	),
@@ -1828,6 +1950,7 @@ DECLARE_EVENT_CLASS(ext4__map_blocks_exit,
 	TP_fast_assign(
 		__entry->dev    = inode->i_sb->s_dev;
 		__entry->ino    = inode->i_ino;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__entry->pblk	= map->m_pblk;
 		__entry->lblk	= map->m_lblk;
@@ -1854,6 +1977,8 @@ DEFINE_EVENT(ext4__map_blocks_exit, ext4_ind_map_blocks_exit,
 
 	TP_ARGS(inode, map, ret)
 =======
+=======
+>>>>>>> v3.18
 		__entry->flags	= flags;
 		__entry->pblk	= map->m_pblk;
 		__entry->lblk	= map->m_lblk;
@@ -1882,6 +2007,9 @@ DEFINE_EVENT(ext4__map_blocks_exit, ext4_ind_map_blocks_exit,
 		 struct ext4_map_blocks *map, int ret),
 
 	TP_ARGS(inode, flags, map, ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -1932,10 +2060,13 @@ TRACE_EVENT(ext4_load_inode,
 
 TRACE_EVENT(ext4_journal_start,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(struct super_block *sb, int nblocks, unsigned long IP),
 
 	TP_ARGS(sb, nblocks, IP),
 =======
+=======
+>>>>>>> v3.18
 	TP_PROTO(struct super_block *sb, int blocks, int rsv_blocks,
 		 unsigned long IP),
 
@@ -1964,11 +2095,15 @@ TRACE_EVENT(ext4_journal_start_reserved,
 	TP_PROTO(struct super_block *sb, int blocks, unsigned long IP),
 
 	TP_ARGS(sb, blocks, IP),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TP_STRUCT__entry(
 		__field(	dev_t,	dev			)
 		__field(unsigned long,	ip			)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__field(	int,	nblocks			)
 	),
@@ -1983,6 +2118,8 @@ TRACE_EVENT(ext4_journal_start_reserved,
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  __entry->nblocks, (void *)__entry->ip)
 =======
+=======
+>>>>>>> v3.18
 		__field(	  int,	blocks			)
 	),
 
@@ -1995,6 +2132,9 @@ TRACE_EVENT(ext4_journal_start_reserved,
 	TP_printk("dev %d,%d blocks, %d caller %pF",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  __entry->blocks, (void *)__entry->ip)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -2048,7 +2188,11 @@ DEFINE_EVENT(ext4__trim, ext4_trim_all_free,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 TRACE_EVENT(ext4_ext_handle_uninitialized_extents,
+=======
+TRACE_EVENT(ext4_ext_handle_unwritten_extents,
+>>>>>>> v3.18
 =======
 TRACE_EVENT(ext4_ext_handle_unwritten_extents,
 >>>>>>> v3.18
@@ -2080,7 +2224,11 @@ TRACE_EVENT(ext4_ext_handle_unwritten_extents,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("dev %d,%d ino %lu m_lblk %u m_pblk %llu m_len %u flags %x "
+=======
+	TP_printk("dev %d,%d ino %lu m_lblk %u m_pblk %llu m_len %u flags %s "
+>>>>>>> v3.18
 =======
 	TP_printk("dev %d,%d ino %lu m_lblk %u m_pblk %llu m_len %u flags %s "
 >>>>>>> v3.18
@@ -2089,7 +2237,11 @@ TRACE_EVENT(ext4_ext_handle_unwritten_extents,
 		  (unsigned long) __entry->ino,
 		  (unsigned) __entry->lblk, (unsigned long long) __entry->pblk,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  __entry->len, __entry->flags,
+=======
+		  __entry->len, show_map_flags(__entry->flags),
+>>>>>>> v3.18
 =======
 		  __entry->len, show_map_flags(__entry->flags),
 >>>>>>> v3.18
@@ -2121,15 +2273,21 @@ TRACE_EVENT(ext4_get_implied_cluster_alloc_exit,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("dev %d,%d m_lblk %u m_pblk %llu m_len %u m_flags %u ret %d",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  __entry->lblk, (unsigned long long) __entry->pblk,
 		  __entry->len, __entry->flags, __entry->ret)
 =======
+=======
+>>>>>>> v3.18
 	TP_printk("dev %d,%d m_lblk %u m_pblk %llu m_len %u m_flags %s ret %d",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  __entry->lblk, (unsigned long long) __entry->pblk,
 		  __entry->len, show_mflags(__entry->flags), __entry->ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -2285,7 +2443,11 @@ TRACE_EVENT(ext4_remove_blocks,
 	    TP_PROTO(struct inode *inode, struct ext4_extent *ex,
 		ext4_lblk_t from, ext4_fsblk_t to,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ext4_fsblk_t partial_cluster),
+=======
+		long long partial_cluster),
+>>>>>>> v3.18
 =======
 		long long partial_cluster),
 >>>>>>> v3.18
@@ -2298,7 +2460,11 @@ TRACE_EVENT(ext4_remove_blocks,
 		__field(	ext4_lblk_t,	from	)
 		__field(	ext4_lblk_t,	to	)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(	ext4_fsblk_t,	partial	)
+=======
+		__field(	long long,	partial	)
+>>>>>>> v3.18
 =======
 		__field(	long long,	partial	)
 >>>>>>> v3.18
@@ -2320,7 +2486,11 @@ TRACE_EVENT(ext4_remove_blocks,
 
 	TP_printk("dev %d,%d ino %lu extent [%u(%llu), %u]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  "from %u to %u partial_cluster %u",
+=======
+		  "from %u to %u partial_cluster %lld",
+>>>>>>> v3.18
 =======
 		  "from %u to %u partial_cluster %lld",
 >>>>>>> v3.18
@@ -2332,7 +2502,11 @@ TRACE_EVENT(ext4_remove_blocks,
 		  (unsigned) __entry->from,
 		  (unsigned) __entry->to,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  (unsigned) __entry->partial)
+=======
+		  (long long) __entry->partial)
+>>>>>>> v3.18
 =======
 		  (long long) __entry->partial)
 >>>>>>> v3.18
@@ -2341,7 +2515,12 @@ TRACE_EVENT(ext4_remove_blocks,
 TRACE_EVENT(ext4_ext_rm_leaf,
 	TP_PROTO(struct inode *inode, ext4_lblk_t start,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 struct ext4_extent *ex, ext4_fsblk_t partial_cluster),
+=======
+		 struct ext4_extent *ex,
+		 long long partial_cluster),
+>>>>>>> v3.18
 =======
 		 struct ext4_extent *ex,
 		 long long partial_cluster),
@@ -2353,7 +2532,11 @@ TRACE_EVENT(ext4_ext_rm_leaf,
 		__field(	dev_t,		dev	)
 		__field(	ino_t,		ino	)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(	ext4_fsblk_t,	partial	)
+=======
+		__field(	long long,	partial	)
+>>>>>>> v3.18
 =======
 		__field(	long long,	partial	)
 >>>>>>> v3.18
@@ -2375,7 +2558,11 @@ TRACE_EVENT(ext4_ext_rm_leaf,
 
 	TP_printk("dev %d,%d ino %lu start_lblk %u last_extent [%u(%llu), %u]"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  "partial_cluster %u",
+=======
+		  "partial_cluster %lld",
+>>>>>>> v3.18
 =======
 		  "partial_cluster %lld",
 >>>>>>> v3.18
@@ -2386,7 +2573,11 @@ TRACE_EVENT(ext4_ext_rm_leaf,
 		  (unsigned long long) __entry->ee_pblk,
 		  (unsigned short) __entry->ee_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  (unsigned) __entry->partial)
+=======
+		  (long long) __entry->partial)
+>>>>>>> v3.18
 =======
 		  (long long) __entry->partial)
 >>>>>>> v3.18
@@ -2417,14 +2608,20 @@ TRACE_EVENT(ext4_ext_rm_idx,
 
 TRACE_EVENT(ext4_ext_remove_space,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(struct inode *inode, ext4_lblk_t start, int depth),
 
 	TP_ARGS(inode, start, depth),
 =======
+=======
+>>>>>>> v3.18
 	TP_PROTO(struct inode *inode, ext4_lblk_t start,
 		 ext4_lblk_t end, int depth),
 
 	TP_ARGS(inode, start, end, depth),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TP_STRUCT__entry(
@@ -2432,6 +2629,10 @@ TRACE_EVENT(ext4_ext_remove_space,
 		__field(	ino_t,		ino	)
 		__field(	ext4_lblk_t,	start	)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__field(	ext4_lblk_t,	end	)
+>>>>>>> v3.18
 =======
 		__field(	ext4_lblk_t,	end	)
 >>>>>>> v3.18
@@ -2443,6 +2644,7 @@ TRACE_EVENT(ext4_ext_remove_space,
 		__entry->ino	= inode->i_ino;
 		__entry->start	= start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__entry->depth	= depth;
 	),
 
@@ -2451,6 +2653,8 @@ TRACE_EVENT(ext4_ext_remove_space,
 		  (unsigned long) __entry->ino,
 		  (unsigned) __entry->start,
 =======
+=======
+>>>>>>> v3.18
 		__entry->end	= end;
 		__entry->depth	= depth;
 	),
@@ -2460,21 +2664,30 @@ TRACE_EVENT(ext4_ext_remove_space,
 		  (unsigned long) __entry->ino,
 		  (unsigned) __entry->start,
 		  (unsigned) __entry->end,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  __entry->depth)
 );
 
 TRACE_EVENT(ext4_ext_remove_space_done,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(struct inode *inode, ext4_lblk_t start, int depth,
 		ext4_lblk_t partial, __le16 eh_entries),
 
 	TP_ARGS(inode, start, depth, partial, eh_entries),
 =======
+=======
+>>>>>>> v3.18
 	TP_PROTO(struct inode *inode, ext4_lblk_t start, ext4_lblk_t end,
 		 int depth, long long partial, __le16 eh_entries),
 
 	TP_ARGS(inode, start, end, depth, partial, eh_entries),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TP_STRUCT__entry(
@@ -2482,8 +2695,14 @@ TRACE_EVENT(ext4_ext_remove_space_done,
 		__field(	ino_t,		ino		)
 		__field(	ext4_lblk_t,	start		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(	int,		depth		)
 		__field(	ext4_lblk_t,	partial		)
+=======
+		__field(	ext4_lblk_t,	end		)
+		__field(	int,		depth		)
+		__field(	long long,	partial		)
+>>>>>>> v3.18
 =======
 		__field(	ext4_lblk_t,	end		)
 		__field(	int,		depth		)
@@ -2497,6 +2716,10 @@ TRACE_EVENT(ext4_ext_remove_space_done,
 		__entry->ino		= inode->i_ino;
 		__entry->start		= start;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__entry->end		= end;
+>>>>>>> v3.18
 =======
 		__entry->end		= end;
 >>>>>>> v3.18
@@ -2506,7 +2729,11 @@ TRACE_EVENT(ext4_ext_remove_space_done,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("dev %d,%d ino %lu since %u depth %d partial %u "
+=======
+	TP_printk("dev %d,%d ino %lu since %u end %u depth %d partial %lld "
+>>>>>>> v3.18
 =======
 	TP_printk("dev %d,%d ino %lu since %u end %u depth %d partial %lld "
 >>>>>>> v3.18
@@ -2515,6 +2742,7 @@ TRACE_EVENT(ext4_ext_remove_space_done,
 		  (unsigned long) __entry->ino,
 		  (unsigned) __entry->start,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  __entry->depth,
 		  (unsigned) __entry->partial,
 		  (unsigned short) __entry->eh_entries)
@@ -2522,6 +2750,8 @@ TRACE_EVENT(ext4_ext_remove_space_done,
 
 TRACE_EVENT(ext4_es_insert_extent,
 =======
+=======
+>>>>>>> v3.18
 		  (unsigned) __entry->end,
 		  __entry->depth,
 		  (long long) __entry->partial,
@@ -2529,6 +2759,9 @@ TRACE_EVENT(ext4_es_insert_extent,
 );
 
 DECLARE_EVENT_CLASS(ext4__es_extent,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TP_PROTO(struct inode *inode, struct extent_status *es),
 
@@ -2541,7 +2774,11 @@ DECLARE_EVENT_CLASS(ext4__es_extent,
 		__field(	ext4_lblk_t,	len		)
 		__field(	ext4_fsblk_t,	pblk		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(	unsigned long long, status	)
+=======
+		__field(	char, status	)
+>>>>>>> v3.18
 =======
 		__field(	char, status	)
 >>>>>>> v3.18
@@ -2557,12 +2794,15 @@ DECLARE_EVENT_CLASS(ext4__es_extent,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("dev %d,%d ino %lu es [%u/%u) mapped %llu status %llx",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino,
 		  __entry->lblk, __entry->len,
 		  __entry->pblk, __entry->status)
 =======
+=======
+>>>>>>> v3.18
 	TP_printk("dev %d,%d ino %lu es [%u/%u) mapped %llu status %s",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino,
@@ -2580,6 +2820,9 @@ DEFINE_EVENT(ext4__es_extent, ext4_es_cache_extent,
 	TP_PROTO(struct inode *inode, struct extent_status *es),
 
 	TP_ARGS(inode, es)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -2642,7 +2885,11 @@ TRACE_EVENT(ext4_es_find_delayed_extent_range_exit,
 		__field(	ext4_lblk_t,	len		)
 		__field(	ext4_fsblk_t,	pblk		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(	unsigned long long, status	)
+=======
+		__field(	char, status	)
+>>>>>>> v3.18
 =======
 		__field(	char, status	)
 >>>>>>> v3.18
@@ -2658,17 +2905,23 @@ TRACE_EVENT(ext4_es_find_delayed_extent_range_exit,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("dev %d,%d ino %lu es [%u/%u) mapped %llu status %llx",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino,
 		  __entry->lblk, __entry->len,
 		  __entry->pblk, __entry->status)
 =======
+=======
+>>>>>>> v3.18
 	TP_printk("dev %d,%d ino %lu es [%u/%u) mapped %llu status %s",
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  (unsigned long) __entry->ino,
 		  __entry->lblk, __entry->len,
 		  __entry->pblk, show_extent_status(__entry->status))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 
@@ -2707,7 +2960,11 @@ TRACE_EVENT(ext4_es_lookup_extent_exit,
 		__field(	ext4_lblk_t,	len		)
 		__field(	ext4_fsblk_t,	pblk		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(	unsigned long long,	status	)
+=======
+		__field(	char,		status		)
+>>>>>>> v3.18
 =======
 		__field(	char,		status		)
 >>>>>>> v3.18
@@ -2725,7 +2982,11 @@ TRACE_EVENT(ext4_es_lookup_extent_exit,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("dev %d,%d ino %lu found %d [%u/%u) %llu %llx",
+=======
+	TP_printk("dev %d,%d ino %lu found %d [%u/%u) %llu %s",
+>>>>>>> v3.18
 =======
 	TP_printk("dev %d,%d ino %lu found %d [%u/%u) %llu %s",
 >>>>>>> v3.18
@@ -2734,15 +2995,21 @@ TRACE_EVENT(ext4_es_lookup_extent_exit,
 		  __entry->lblk, __entry->len,
 		  __entry->found ? __entry->pblk : 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  __entry->found ? __entry->status : 0)
 );
 
 TRACE_EVENT(ext4_es_shrink_enter,
 =======
+=======
+>>>>>>> v3.18
 		  show_extent_status(__entry->found ? __entry->status : 0))
 );
 
 DECLARE_EVENT_CLASS(ext4__es_shrink_enter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TP_PROTO(struct super_block *sb, int nr_to_scan, int cache_cnt),
 
@@ -2766,6 +3033,7 @@ DECLARE_EVENT_CLASS(ext4__es_shrink_enter,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 TRACE_EVENT(ext4_es_shrink_exit,
 	TP_PROTO(struct super_block *sb, int shrunk_nr, int cache_cnt),
 
@@ -2775,6 +3043,8 @@ TRACE_EVENT(ext4_es_shrink_exit,
 		__field(	dev_t,	dev			)
 		__field(	int,	shrunk_nr		)
 =======
+=======
+>>>>>>> v3.18
 DEFINE_EVENT(ext4__es_shrink_enter, ext4_es_shrink_count,
 	TP_PROTO(struct super_block *sb, int nr_to_scan, int cache_cnt),
 
@@ -2795,12 +3065,16 @@ TRACE_EVENT(ext4_es_shrink_scan_exit,
 	TP_STRUCT__entry(
 		__field(	dev_t,	dev			)
 		__field(	int,	nr_shrunk		)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__field(	int,	cache_cnt		)
 	),
 
 	TP_fast_assign(
 		__entry->dev		= sb->s_dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__entry->shrunk_nr	= shrunk_nr;
 		__entry->cache_cnt	= cache_cnt;
@@ -2810,6 +3084,8 @@ TRACE_EVENT(ext4_es_shrink_scan_exit,
 		  MAJOR(__entry->dev), MINOR(__entry->dev),
 		  __entry->shrunk_nr, __entry->cache_cnt)
 =======
+=======
+>>>>>>> v3.18
 		__entry->nr_shrunk	= nr_shrunk;
 		__entry->cache_cnt	= cache_cnt;
 	),
@@ -2873,6 +3149,9 @@ TRACE_EVENT(ext4_es_shrink,
 		  MAJOR(__entry->dev), MINOR(__entry->dev), __entry->nr_shrunk,
 		  __entry->scan_time, __entry->skip_precached,
 		  __entry->nr_skipped, __entry->retried)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 

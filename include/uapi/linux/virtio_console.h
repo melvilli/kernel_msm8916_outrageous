@@ -39,6 +39,10 @@
 #define VIRTIO_CONSOLE_F_SIZE	0	/* Does host provide console size? */
 #define VIRTIO_CONSOLE_F_MULTIPORT 1	/* Does host provide multiple ports? */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define VIRTIO_CONSOLE_F_EMERG_WRITE 2 /* Does host support emergency write? */
+>>>>>>> v3.18
 =======
 #define VIRTIO_CONSOLE_F_EMERG_WRITE 2 /* Does host support emergency write? */
 >>>>>>> v3.18
@@ -53,6 +57,11 @@ struct virtio_console_config {
 	/* max. number of ports this device can hold */
 	__u32 max_nr_ports;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* emergency write register */
+	__u32 emerg_wr;
+>>>>>>> v3.18
 =======
 	/* emergency write register */
 	__u32 emerg_wr;

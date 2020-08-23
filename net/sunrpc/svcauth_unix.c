@@ -348,7 +348,12 @@ ip_map_cached_get(struct svc_xprt *xprt)
 		ipm = xprt->xpt_auth_cache;
 		if (ipm != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!cache_valid(&ipm->h)) {
+=======
+			sn = net_generic(xprt->xpt_net, sunrpc_net_id);
+			if (cache_is_expired(sn->ip_map_cache, &ipm->h)) {
+>>>>>>> v3.18
 =======
 			sn = net_generic(xprt->xpt_net, sunrpc_net_id);
 			if (cache_is_expired(sn->ip_map_cache, &ipm->h)) {
@@ -359,7 +364,10 @@ ip_map_cached_get(struct svc_xprt *xprt)
 				 * same IP address.
 				 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sn = net_generic(xprt->xpt_net, sunrpc_net_id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				xprt->xpt_auth_cache = NULL;

@@ -144,7 +144,10 @@ fail1:
 fail0:
 	dprintk(MANTIS_ERROR, 1, "ERROR: <%d> exiting", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -165,7 +168,10 @@ void mantis_pci_exit(struct mantis_pci *mantis)
 
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

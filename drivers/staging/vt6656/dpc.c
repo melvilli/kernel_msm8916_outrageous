@@ -26,6 +26,7 @@
  *
  * Functions:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      device_receive_frame - Rcv 802.11 frame function
  *      s_bAPModeRxCtl- AP Rcv frame filer Ctl.
  *      s_bAPModeRxData- AP Rcv data frame handle
@@ -36,11 +37,14 @@
  *      s_vProcessRxMACHeader- Rcv 802.11 and translate to 802.3
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  *
  * Revision History:
  *
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "device.h"
 #include "rxtx.h"
@@ -1433,6 +1437,8 @@ void RXvMngWorkItem(struct vnt_private *pDevice)
 }
 
 =======
+=======
+>>>>>>> v3.18
 #include "dpc.h"
 #include "device.h"
 #include "mac.h"
@@ -1587,4 +1593,7 @@ int vnt_rx_data(struct vnt_private *priv, struct vnt_rcb *ptr_rcb,
 
 	return true;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

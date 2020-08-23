@@ -41,7 +41,11 @@ extern struct gfs2_alloc *gfs2_alloc_get(struct gfs2_inode *ip);
 
 #define GFS2_AF_ORLOV 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int gfs2_inplace_reserve(struct gfs2_inode *ip, u32 requested, u32 flags);
+=======
+extern int gfs2_inplace_reserve(struct gfs2_inode *ip, const struct gfs2_alloc_parms *ap);
+>>>>>>> v3.18
 =======
 extern int gfs2_inplace_reserve(struct gfs2_inode *ip, const struct gfs2_alloc_parms *ap);
 >>>>>>> v3.18
@@ -53,7 +57,11 @@ extern int gfs2_alloc_blocks(struct gfs2_inode *ip, u64 *bn, unsigned int *n,
 extern int gfs2_rs_alloc(struct gfs2_inode *ip);
 extern void gfs2_rs_deltree(struct gfs2_blkreserv *rs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void gfs2_rs_delete(struct gfs2_inode *ip);
+=======
+extern void gfs2_rs_delete(struct gfs2_inode *ip, atomic_t *wcount);
+>>>>>>> v3.18
 =======
 extern void gfs2_rs_delete(struct gfs2_inode *ip, atomic_t *wcount);
 >>>>>>> v3.18
@@ -77,7 +85,11 @@ extern void gfs2_rlist_alloc(struct gfs2_rgrp_list *rlist, unsigned int state);
 extern void gfs2_rlist_free(struct gfs2_rgrp_list *rlist);
 extern u64 gfs2_ri_total(struct gfs2_sbd *sdp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int gfs2_rgrp_dump(struct seq_file *seq, const struct gfs2_glock *gl);
+=======
+extern void gfs2_rgrp_dump(struct seq_file *seq, const struct gfs2_glock *gl);
+>>>>>>> v3.18
 =======
 extern void gfs2_rgrp_dump(struct seq_file *seq, const struct gfs2_glock *gl);
 >>>>>>> v3.18
@@ -93,6 +105,10 @@ static inline bool gfs2_rs_active(struct gfs2_blkreserv *rs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void check_and_update_goal(struct gfs2_inode *ip);
+>>>>>>> v3.18
 =======
 extern void check_and_update_goal(struct gfs2_inode *ip);
 >>>>>>> v3.18

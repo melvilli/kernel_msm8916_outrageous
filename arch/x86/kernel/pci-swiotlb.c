@@ -15,7 +15,11 @@
 int swiotlb __read_mostly;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *x86_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
+=======
+void *x86_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
+>>>>>>> v3.18
 =======
 void *x86_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
 >>>>>>> v3.18
@@ -33,12 +37,15 @@ void *x86_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void x86_swiotlb_free_coherent(struct device *dev, size_t size,
 				      void *vaddr, dma_addr_t dma_addr,
 				      struct dma_attrs *attrs)
 {
 	swiotlb_free_coherent(dev, size, vaddr, dma_addr);
 =======
+=======
+>>>>>>> v3.18
 void x86_swiotlb_free_coherent(struct device *dev, size_t size,
 				      void *vaddr, dma_addr_t dma_addr,
 				      struct dma_attrs *attrs)
@@ -47,6 +54,9 @@ void x86_swiotlb_free_coherent(struct device *dev, size_t size,
 		swiotlb_free_coherent(dev, size, vaddr, dma_addr);
 	else
 		dma_generic_free_coherent(dev, size, vaddr, dma_addr, attrs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

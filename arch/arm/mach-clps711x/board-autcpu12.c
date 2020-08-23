@@ -27,6 +27,11 @@
 #include <linux/ioport.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mtd/physmap.h>
+#include <linux/mtd/plat-ram.h>
+>>>>>>> v3.18
 =======
 #include <linux/mtd/physmap.h>
 #include <linux/mtd/plat-ram.h>
@@ -46,6 +51,7 @@
 
 #include <asm/mach/map.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/autcpu12.h>
 
 #include "common.h"
@@ -57,6 +63,8 @@
 #define AUTCPU12_SMC_SEL_BASE	(AUTCPU12_SMC_BASE + 0x10)
 
 =======
+=======
+>>>>>>> v3.18
 
 #include "common.h"
 #include "devices.h"
@@ -84,20 +92,29 @@
 #define AUTCPU12_CS8900_IRQ	(IRQ_EINT3)
 
 /* NAND flash */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AUTCPU12_MMGPIO_BASE	(CLPS711X_NR_GPIO)
 #define AUTCPU12_SMC_NCE	(AUTCPU12_MMGPIO_BASE + 0) /* Bit 0 */
 #define AUTCPU12_SMC_RDY	CLPS711X_GPIO(1, 2)
 #define AUTCPU12_SMC_ALE	CLPS711X_GPIO(1, 3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AUTCPU12_SMC_CLE	CLPS711X_GPIO(1, 3)
 =======
+=======
+>>>>>>> v3.18
 #define AUTCPU12_SMC_CLE	CLPS711X_GPIO(1, 4)
 
 /* LCD contrast digital potentiometer */
 #define AUTCPU12_DPOT_CS	CLPS711X_GPIO(4, 0)
 #define AUTCPU12_DPOT_CLK	CLPS711X_GPIO(4, 1)
 #define AUTCPU12_DPOT_UD	CLPS711X_GPIO(4, 2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct resource autcpu12_cs8900_resource[] __initdata = {
@@ -105,6 +122,7 @@ static struct resource autcpu12_cs8900_resource[] __initdata = {
 	DEFINE_RES_IRQ(AUTCPU12_CS8900_IRQ),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct resource autcpu12_nvram_resource[] __initdata = {
 	DEFINE_RES_MEM_NAMED(AUTCPU12_PHYS_NVRAM, SZ_128K, "SRAM"),
@@ -117,6 +135,8 @@ static struct platform_device autcpu12_nvram_pdev __initdata = {
 	.num_resources	= ARRAY_SIZE(autcpu12_nvram_resource),
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct resource autcpu12_nand_resource[] __initdata = {
@@ -195,9 +215,12 @@ static struct platform_device autcpu12_mmgpio_pdev __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init autcpu12_init(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static const struct gpio autcpu12_gpios[] __initconst = {
 	{ AUTCPU12_DPOT_CS,	GPIOF_OUT_INIT_HIGH,	"DPOT CS" },
 	{ AUTCPU12_DPOT_CLK,	GPIOF_OUT_INIT_LOW,	"DPOT CLK" },
@@ -287,13 +310,20 @@ static void __init autcpu12_init(void)
 {
 	clps711x_devices_init();
 	platform_device_register(&autcpu12_flash_pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register_simple("video-clps711x", 0, NULL, 0);
 	platform_device_register_simple("cs89x0", 0, autcpu12_cs8900_resource,
 					ARRAY_SIZE(autcpu12_cs8900_resource));
 	platform_device_register(&autcpu12_mmgpio_pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_register(&autcpu12_nvram_pdev);
+=======
+	autcpu12_nvram_init();
+>>>>>>> v3.18
 =======
 	autcpu12_nvram_init();
 >>>>>>> v3.18
@@ -302,10 +332,15 @@ static void __init autcpu12_init(void)
 static void __init autcpu12_init_late(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ENABLED(MTD_NAND_GPIO) && IS_ENABLED(GPIO_GENERIC_PLATFORM)) {
 		/* We are need both drivers to handle NAND */
 		platform_device_register(&autcpu12_nand_pdev);
 	}
+=======
+	gpio_request_array(autcpu12_gpios, ARRAY_SIZE(autcpu12_gpios));
+	platform_device_register(&autcpu12_nand_pdev);
+>>>>>>> v3.18
 =======
 	gpio_request_array(autcpu12_gpios, ARRAY_SIZE(autcpu12_gpios));
 	platform_device_register(&autcpu12_nand_pdev);
@@ -316,7 +351,10 @@ MACHINE_START(AUTCPU12, "autronix autcpu12")
 	/* Maintainer: Thomas Gleixner */
 	.atag_offset	= 0x20000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.nr_irqs	= CLPS711X_NR_IRQS,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.map_io		= clps711x_map_io,
@@ -325,7 +363,10 @@ MACHINE_START(AUTCPU12, "autronix autcpu12")
 	.init_machine	= autcpu12_init,
 	.init_late	= autcpu12_init_late,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= clps711x_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.restart	= clps711x_restart,

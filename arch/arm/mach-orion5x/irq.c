@@ -17,6 +17,11 @@
 #include <plat/orion-gpio.h>
 #include <plat/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/exception.h>
+#include "common.h"
+>>>>>>> v3.18
 =======
 #include <asm/exception.h>
 #include "common.h"
@@ -30,7 +35,10 @@ static int __initdata gpio0_irqs[4] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MULTI_IRQ_HANDLER
 /*
  * Compiling with both non-DT and DT support enabled, will
@@ -54,17 +62,26 @@ __exception_irq_entry orion5x_legacy_handle_irq(struct pt_regs *regs)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init orion5x_init_irq(void)
 {
 	orion_irq_init(0, MAIN_IRQ_MASK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MULTI_IRQ_HANDLER
 	set_handle_irq(orion5x_legacy_handle_irq);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Initialize gpiolib for GPIOs 0-31.

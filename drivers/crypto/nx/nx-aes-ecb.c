@@ -71,11 +71,14 @@ static int ecb_aes_nx_crypt(struct blkcipher_desc *desc,
 	struct nx_crypto_ctx *nx_ctx = crypto_blkcipher_ctx(desc->tfm);
 	struct nx_csbcpb *csbcpb = nx_ctx->csbcpb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
 
 	if (nbytes > nx_ctx->ap->databytelen)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long irq_flags;
 	unsigned int processed = 0, to_process;
 	u32 max_sg_len;
@@ -85,6 +88,9 @@ static int ecb_aes_nx_crypt(struct blkcipher_desc *desc,
 
 	max_sg_len = min_t(u32, nx_driver.of.max_sg_len/sizeof(struct nx_sg),
 			   nx_ctx->ap->sglen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (enc)
@@ -92,6 +98,7 @@ static int ecb_aes_nx_crypt(struct blkcipher_desc *desc,
 	else
 		NX_CPB_FDM(csbcpb) &= ~NX_FDM_ENDE_ENCRYPT;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = nx_build_sg_lists(nx_ctx, desc, dst, src, nbytes, NULL);
 	if (rc)
@@ -112,6 +119,8 @@ static int ecb_aes_nx_crypt(struct blkcipher_desc *desc,
 		     &(nx_ctx->stats->aes_bytes));
 out:
 =======
+=======
+>>>>>>> v3.18
 	do {
 		to_process = min_t(u64, nbytes - processed,
 				   nx_ctx->ap->databytelen);
@@ -143,6 +152,9 @@ out:
 
 out:
 	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }

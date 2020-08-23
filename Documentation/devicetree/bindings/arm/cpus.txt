@@ -153,7 +153,13 @@ nodes to be present and contain the properties described below.
 			    "arm,cortex-a8"
 			    "arm,cortex-a9"
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    "arm,cortex-a15"
+=======
+			    "arm,cortex-a12"
+			    "arm,cortex-a15"
+			    "arm,cortex-a17"
+>>>>>>> v3.18
 =======
 			    "arm,cortex-a12"
 			    "arm,cortex-a15"
@@ -170,6 +176,11 @@ nodes to be present and contain the properties described below.
 			    "arm,cortex-r5"
 			    "arm,cortex-r7"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			    "brcm,brahma-b15"
+			    "cavium,thunder"
+>>>>>>> v3.18
 =======
 			    "brcm,brahma-b15"
 			    "cavium,thunder"
@@ -190,6 +201,7 @@ nodes to be present and contain the properties described below.
 			# On ARM v8 64-bit this property is required and must
 			  be one of:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     "spin-table"
 			     "psci"
 			     "qcom,arm-cortex-acc"
@@ -200,6 +212,8 @@ nodes to be present and contain the properties described below.
 			    "qcom,kpss-acc-v1"
 			    "qcom,kpss-acc-v2"
 =======
+=======
+>>>>>>> v3.18
 			     "psci"
 			     "spin-table"
 			# On ARM 32-bit systems this property is optional and
@@ -214,6 +228,9 @@ nodes to be present and contain the properties described below.
 			    "qcom,kpss-acc-v1"
 			    "qcom,kpss-acc-v2"
 			    "rockchip,rk3066-smp"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	- cpu-release-addr
@@ -235,12 +252,15 @@ nodes to be present and contain the properties described below.
 	- qcom,acc
 		Usage: required for systems that have an "enable-method"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       property value of "qcom,kpss-acc-v1",
 		       "qcom,kpss-acc-v2" or "qcom,arm-cortex-acc"
 		Value type: <phandle>
 		Definition: Specifies the ACC[2] node associated with this CPU.
 
 =======
+=======
+>>>>>>> v3.18
 		       property value of "qcom,kpss-acc-v1" or
 		       "qcom,kpss-acc-v2"
 		Value type: <phandle>
@@ -252,6 +272,9 @@ nodes to be present and contain the properties described below.
 		Definition:
 			# List of phandles to idle state nodes supported
 			  by this cpu [3].
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example 1 (dual-cluster big.LITTLE system 32-bit):
@@ -450,6 +473,11 @@ cpus {
 [1] arm/msm/qcom,saw2.txt
 [2] arm/msm/qcom,kpss-acc.txt
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+[3] ARM Linux kernel documentation - idle states bindings
+    Documentation/devicetree/bindings/arm/idle-states.txt
+>>>>>>> v3.18
 =======
 [3] ARM Linux kernel documentation - idle states bindings
     Documentation/devicetree/bindings/arm/idle-states.txt

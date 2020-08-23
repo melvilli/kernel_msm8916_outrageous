@@ -46,6 +46,7 @@
 
 		i2c0: i2c@FF120000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sda-hold-time = <432>;
 		};
 		i2c1: i2c@FF121000 {
@@ -60,6 +61,8 @@
 		i2c4: i2c@FF124000 {
 			sda-hold-time = <432>;
 =======
+=======
+>>>>>>> v3.18
 			i2c-sda-hold-time-ns = <432>;
 		};
 		i2c1: i2c@FF121000 {
@@ -73,6 +76,9 @@
 		};
 		i2c4: i2c@FF124000 {
 			i2c-sda-hold-time-ns = <432>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -81,7 +87,11 @@
 			power {
 				label = "Power";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpios = <&gpioi 0>;
+=======
+				gpios = <&gpioi 0 0>;
+>>>>>>> v3.18
 =======
 				gpios = <&gpioi 0 0>;
 >>>>>>> v3.18
@@ -90,7 +100,11 @@
 			heartbeat {
 				label = "Heartbeat";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpios = <&gpioi 1>;
+=======
+				gpios = <&gpioi 1 0>;
+>>>>>>> v3.18
 =======
 				gpios = <&gpioi 1 0>;
 >>>>>>> v3.18
@@ -99,7 +113,11 @@
 			led2 {
 				label = "LED2";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpios = <&gpioi 2>;
+=======
+				gpios = <&gpioi 2 0>;
+>>>>>>> v3.18
 =======
 				gpios = <&gpioi 2 0>;
 >>>>>>> v3.18
@@ -108,7 +126,11 @@
 			led3 {
 				label = "LED3";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpios = <&gpioi 3>;
+=======
+				gpios = <&gpioi 3 0>;
+>>>>>>> v3.18
 =======
 				gpios = <&gpioi 3 0>;
 >>>>>>> v3.18
@@ -117,7 +139,11 @@
 			led4 {
 				label = "LED4";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpios = <&gpioi 4>;
+=======
+				gpios = <&gpioi 4 0>;
+>>>>>>> v3.18
 =======
 				gpios = <&gpioi 4 0>;
 >>>>>>> v3.18
@@ -126,7 +152,11 @@
 			led5 {
 				label = "LED5";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpios = <&gpioi 5>;
+=======
+				gpios = <&gpioi 5 0>;
+>>>>>>> v3.18
 =======
 				gpios = <&gpioi 5 0>;
 >>>>>>> v3.18
@@ -135,7 +165,11 @@
 			led6 {
 				label = "LED6";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpios = <&gpioi 6>;
+=======
+				gpios = <&gpioi 6 0>;
+>>>>>>> v3.18
 =======
 				gpios = <&gpioi 6 0>;
 >>>>>>> v3.18
@@ -144,7 +178,11 @@
 			led7 {
 				label = "LED7";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpios = <&gpioi 7>;
+=======
+				gpios = <&gpioi 7 0>;
+>>>>>>> v3.18
 =======
 				gpios = <&gpioi 7 0>;
 >>>>>>> v3.18
@@ -153,7 +191,11 @@
 			led8 {
 				label = "LED8";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpios = <&gpioi 8>;
+=======
+				gpios = <&gpioi 8 0>;
+>>>>>>> v3.18
 =======
 				gpios = <&gpioi 8 0>;
 >>>>>>> v3.18
@@ -162,7 +204,11 @@
 			led9 {
 				label = "LED9";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpios = <&gpioi 9>;
+=======
+				gpios = <&gpioi 9 0>;
+>>>>>>> v3.18
 =======
 				gpios = <&gpioi 9 0>;
 >>>>>>> v3.18
@@ -171,7 +217,11 @@
 			led10 {
 				label = "LED10";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpios = <&gpioi 10>;
+=======
+				gpios = <&gpioi 10 0>;
+>>>>>>> v3.18
 =======
 				gpios = <&gpioi 10 0>;
 >>>>>>> v3.18
@@ -180,7 +230,11 @@
 			led11 {
 				label = "LED11";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpios = <&gpioi 11>;
+=======
+				gpios = <&gpioi 11 0>;
+>>>>>>> v3.18
 =======
 				gpios = <&gpioi 11 0>;
 >>>>>>> v3.18

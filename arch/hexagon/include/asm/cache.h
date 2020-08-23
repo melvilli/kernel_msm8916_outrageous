@@ -29,7 +29,11 @@
 #define ____cacheline_aligned	__aligned(L1_CACHE_BYTES)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* See http://kerneltrap.org/node/15100  */
+=======
+/* See http://lwn.net/Articles/262554/ */
+>>>>>>> v3.18
 =======
 /* See http://lwn.net/Articles/262554/ */
 >>>>>>> v3.18

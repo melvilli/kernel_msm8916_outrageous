@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 AM33XX MUSB GLUE
  - compatible : Should be "ti,musb-am33xx"
  - reg : offset and length of register sets, first usbss, then for musb instances
@@ -34,6 +35,8 @@ usb@47400000  {
 	power = <250>;
 	ti,hwmods = "usb_otg_hs";
 =======
+=======
+>>>>>>> v3.18
   AM33xx MUSB
 ~~~~~~~~~~~~~~~
 - compatible: ti,am33xx-usb
@@ -230,5 +233,8 @@ usb: usb@47400000 {
 		#dma-channels = <30>;
 		#dma-requests = <256>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

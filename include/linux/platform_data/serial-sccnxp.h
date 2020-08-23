@@ -61,7 +61,10 @@
  *
  * static struct sccnxp_pdata sc2892_info = {
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	.frequency	= 3686400,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *	.mctrl_cfg[0]	= MCTRL_SIG(DIR_OP, LINE_OP0),
@@ -82,8 +85,11 @@
 /* SCCNXP platform data structure */
 struct sccnxp_pdata {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Frequency (extrenal clock or crystal) */
 	int			frequency;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Shift for A0 line */

@@ -37,7 +37,12 @@ static inline void force_load(char *p)
  * until the memory controller holds the flushed values.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void finv_buffer_remote(void *buffer, size_t size, int hfh)
+=======
+void __attribute__((optimize("omit-frame-pointer")))
+finv_buffer_remote(void *buffer, size_t size, int hfh)
+>>>>>>> v3.18
 =======
 void __attribute__((optimize("omit-frame-pointer")))
 finv_buffer_remote(void *buffer, size_t size, int hfh)
@@ -153,6 +158,7 @@ finv_buffer_remote(void *buffer, size_t size, int hfh)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Repeat, but with inv's instead of loads, to get rid of the
 	 * data we just loaded into our own cache and the old home L3.
 	 * No need to unroll since inv's don't target a register.
@@ -166,6 +172,8 @@ finv_buffer_remote(void *buffer, size_t size, int hfh)
 
 	/* Wait for the load+inv's (and thus finvs) to have completed. */
 =======
+=======
+>>>>>>> v3.18
 	 * Repeat, but with finv's instead of loads, to get rid of the
 	 * data we just loaded into our own cache and the old home L3.
 	 * No need to unroll since finv's don't target a register.
@@ -181,6 +189,9 @@ finv_buffer_remote(void *buffer, size_t size, int hfh)
 		__insn_finv(p);
 
 	/* Wait for these finv's (and thus the first finvs) to be done. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__insn_mf();
 

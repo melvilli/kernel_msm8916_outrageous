@@ -2618,8 +2618,13 @@ static int hifn_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->desc_virt = pci_alloc_consistent(pdev, sizeof(struct hifn_dma),
 			&dev->desc_dma);
+=======
+	dev->desc_virt = pci_zalloc_consistent(pdev, sizeof(struct hifn_dma),
+					       &dev->desc_dma);
+>>>>>>> v3.18
 =======
 	dev->desc_virt = pci_zalloc_consistent(pdev, sizeof(struct hifn_dma),
 					       &dev->desc_dma);
@@ -2630,7 +2635,10 @@ static int hifn_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		goto err_out_unmap_bars;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(dev->desc_virt, 0, sizeof(struct hifn_dma));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2685,7 +2693,11 @@ err_out_stop_device:
 	hifn_stop_device(dev);
 err_out_free_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(dev->irq, dev->name);
+=======
+	free_irq(dev->irq, dev);
+>>>>>>> v3.18
 =======
 	free_irq(dev->irq, dev);
 >>>>>>> v3.18
@@ -2724,7 +2736,11 @@ static void hifn_remove(struct pci_dev *pdev)
 		hifn_stop_device(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free_irq(dev->irq, dev->name);
+=======
+		free_irq(dev->irq, dev);
+>>>>>>> v3.18
 =======
 		free_irq(dev->irq, dev);
 >>>>>>> v3.18

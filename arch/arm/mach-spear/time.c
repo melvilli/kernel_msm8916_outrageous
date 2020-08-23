@@ -3,7 +3,11 @@
  *
  * Copyright (C) 2010 ST Microelectronics
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Shiraz Hashim<shiraz.hashim@st.com>
+=======
+ * Shiraz Hashim<shiraz.linux.kernel@gmail.com>
+>>>>>>> v3.18
 =======
  * Shiraz Hashim<shiraz.linux.kernel@gmail.com>
 >>>>>>> v3.18
@@ -76,7 +80,11 @@ static int clockevent_next_event(unsigned long evt,
 				 struct clock_event_device *clk_event_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void spear_clocksource_init(void)
+=======
+static void __init spear_clocksource_init(void)
+>>>>>>> v3.18
 =======
 static void __init spear_clocksource_init(void)
 >>>>>>> v3.18
@@ -181,7 +189,11 @@ static irqreturn_t spear_timer_interrupt(int irq, void *dev_id)
 static struct irqaction spear_timer_irq = {
 	.name = "timer",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags = IRQF_DISABLED | IRQF_TIMER,
+=======
+	.flags = IRQF_TIMER,
+>>>>>>> v3.18
 =======
 	.flags = IRQF_TIMER,
 >>>>>>> v3.18

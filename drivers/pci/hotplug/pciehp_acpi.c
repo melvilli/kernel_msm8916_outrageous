@@ -55,7 +55,11 @@ int pciehp_acpi_slot_detection_check(struct pci_dev *dev)
 	if (slot_detection_mode != PCIEHP_DETECT_ACPI)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (acpi_pci_detect_ejectable(DEVICE_ACPI_HANDLE(&dev->dev)))
+=======
+	if (acpi_pci_detect_ejectable(ACPI_HANDLE(&dev->dev)))
+>>>>>>> v3.18
 =======
 	if (acpi_pci_detect_ejectable(ACPI_HANDLE(&dev->dev)))
 >>>>>>> v3.18
@@ -83,7 +87,11 @@ static int __initdata acpi_slot_detected;
 static struct list_head __initdata dummy_slots = LIST_HEAD_INIT(dummy_slots);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Dummy driver for dumplicate name detection */
+=======
+/* Dummy driver for duplicate name detection */
+>>>>>>> v3.18
 =======
 /* Dummy driver for duplicate name detection */
 >>>>>>> v3.18
@@ -105,7 +113,11 @@ static int __init dummy_probe(struct pcie_device *dev)
 	}
 	list_add_tail(&slot->list, &dummy_slots);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handle = DEVICE_ACPI_HANDLE(&pdev->dev);
+=======
+	handle = ACPI_HANDLE(&pdev->dev);
+>>>>>>> v3.18
 =======
 	handle = ACPI_HANDLE(&pdev->dev);
 >>>>>>> v3.18
@@ -116,15 +128,21 @@ static int __init dummy_probe(struct pcie_device *dev)
 
 static struct pcie_port_service_driver __initdata dummy_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
         .name           = "pciehp_dummy",
 	.port_type	= PCIE_ANY_PORT,
 	.service	= PCIE_PORT_SERVICE_HP,
         .probe          = dummy_probe,
 =======
+=======
+>>>>>>> v3.18
 	.name		= "pciehp_dummy",
 	.port_type	= PCIE_ANY_PORT,
 	.service	= PCIE_PORT_SERVICE_HP,
 	.probe		= dummy_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -132,6 +150,10 @@ static int __init select_detection_mode(void)
 {
 	struct dummy_slot *slot, *tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

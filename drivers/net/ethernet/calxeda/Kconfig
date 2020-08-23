@@ -2,6 +2,10 @@ config NET_CALXEDA_XGMAC
 	tristate "Calxeda 1G/10G XGMAC Ethernet driver"
 	depends on HAS_IOMEM && HAS_DMA
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on ARCH_HIGHBANK || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on ARCH_HIGHBANK || COMPILE_TEST
 >>>>>>> v3.18

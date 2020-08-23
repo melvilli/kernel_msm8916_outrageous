@@ -16,9 +16,13 @@
 
 	You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 	along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -44,6 +48,10 @@
 #include <linux/kfifo.h>
 #include <linux/hrtimer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/average.h>
+>>>>>>> v3.18
 =======
 #include <linux/average.h>
 >>>>>>> v3.18
@@ -147,6 +155,7 @@
 				  GET_DURATION(IEEE80211_HEADER + ACK_SIZE, 10) )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Structure for average calculation
  * The avg field contains the actual average value,
@@ -158,6 +167,8 @@ struct avg_val {
 	int avg_weight;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum rt2x00_chip_intf {
@@ -223,6 +234,10 @@ struct channel_info {
 	short default_power1;
 	short default_power2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	short default_power3;
+>>>>>>> v3.18
 =======
 	short default_power3;
 >>>>>>> v3.18
@@ -312,7 +327,11 @@ struct link_ant {
 	 * this value is updated by using the walking average.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct avg_val rssi_ant;
+=======
+	struct ewma rssi_ant;
+>>>>>>> v3.18
 =======
 	struct ewma rssi_ant;
 >>>>>>> v3.18
@@ -345,7 +364,11 @@ struct link {
 	 * Currently active average RSSI value
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct avg_val avg_rssi;
+=======
+	struct ewma avg_rssi;
+>>>>>>> v3.18
 =======
 	struct ewma avg_rssi;
 >>>>>>> v3.18
@@ -672,11 +695,15 @@ struct rt2x00_ops {
 	const unsigned int rf_size;
 	const unsigned int tx_queues;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const unsigned int extra_tx_headroom;
 	const struct data_queue_desc *rx;
 	const struct data_queue_desc *tx;
 	const struct data_queue_desc *bcn;
 	const struct data_queue_desc *atim;
+=======
+	void (*queue_init)(struct data_queue *queue);
+>>>>>>> v3.18
 =======
 	void (*queue_init)(struct data_queue *queue);
 >>>>>>> v3.18
@@ -1039,6 +1066,12 @@ struct rt2x00_dev {
 	struct list_head bar_list;
 	spinlock_t bar_list_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* Extra TX headroom required for alignment purposes. */
+	unsigned int extra_tx_headroom;
+>>>>>>> v3.18
 =======
 
 	/* Extra TX headroom required for alignment purposes. */
@@ -1214,7 +1247,10 @@ static inline bool rt2x00_is_soc(struct rt2x00_dev *rt2x00dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Helpers for capability flags */
 
 static inline bool
@@ -1302,6 +1338,9 @@ rt2x00_has_cap_vco_recalibration(struct rt2x00_dev *rt2x00dev)
 	return rt2x00_has_cap_flag(rt2x00dev, CAPABILITY_VCO_RECALIBRATION);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * rt2x00queue_map_txskb - Map a skb into DMA for TX purposes.
@@ -1498,7 +1537,12 @@ int rt2x00mac_conf_tx(struct ieee80211_hw *hw,
 		      const struct ieee80211_tx_queue_params *params);
 void rt2x00mac_rfkill_poll(struct ieee80211_hw *hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rt2x00mac_flush(struct ieee80211_hw *hw, u32 queues, bool drop);
+=======
+void rt2x00mac_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+		     u32 queues, bool drop);
+>>>>>>> v3.18
 =======
 void rt2x00mac_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 		     u32 queues, bool drop);

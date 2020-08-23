@@ -18,10 +18,13 @@
 # ifndef __ASSEMBLER__
 extern void __iomem *prm_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void omap2_set_globals_prm(void __iomem *prm);
 # endif
 
 =======
+=======
+>>>>>>> v3.18
 extern u16 prm_features;
 extern void omap2_set_globals_prm(void __iomem *prm);
 int of_prcm_init(void);
@@ -34,6 +37,9 @@ int of_prcm_init(void);
  * PRM_HAS_VOLTAGE: has voltage domains
  */
 #define PRM_HAS_IO_WAKEUP	(1 << 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -133,6 +139,10 @@ struct prm_reset_src_map {
  * @was_any_context_lost_old: ptr to the SoC PRM context loss test fn
  * @clear_context_loss_flags_old: ptr to the SoC PRM context loss flag clear fn
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @late_init: ptr to the late init function
+>>>>>>> v3.18
 =======
  * @late_init: ptr to the late init function
 >>>>>>> v3.18
@@ -145,6 +155,10 @@ struct prm_ll_data {
 	bool (*was_any_context_lost_old)(u8 part, s16 inst, u16 idx);
 	void (*clear_context_loss_flags_old)(u8 part, s16 inst, u16 idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*late_init)(void);
+>>>>>>> v3.18
 =======
 	int (*late_init)(void);
 >>>>>>> v3.18

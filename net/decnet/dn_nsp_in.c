@@ -586,7 +586,10 @@ static __inline__ int dn_queue_skb(struct sock *sk, struct sk_buff *skb, int sig
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int skb_len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -604,7 +607,10 @@ static __inline__ int dn_queue_skb(struct sock *sk, struct sk_buff *skb, int sig
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb_len = skb->len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	skb_set_owner_r(skb, sk);
@@ -612,7 +618,11 @@ static __inline__ int dn_queue_skb(struct sock *sk, struct sk_buff *skb, int sig
 
 	if (!sock_flag(sk, SOCK_DEAD))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb_len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18

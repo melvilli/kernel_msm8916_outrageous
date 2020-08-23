@@ -15,6 +15,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
@@ -22,11 +23,17 @@
  *  02110-1301, USA.
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  */
 
 #include "cx23885.h"
 #include "cx23885-av.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "cx23885-video.h"
+>>>>>>> v3.18
 =======
 #include "cx23885-video.h"
 >>>>>>> v3.18
@@ -40,7 +47,10 @@ void cx23885_av_work_handler(struct work_struct *work)
 	v4l2_subdev_call(dev->sd_cx25840, core, interrupt_service_routine,
 			 PCI_MSK_AV_CORE, &handled);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Getting here with the interrupt not handled
 	   then probbaly flatiron does have pending interrupts.
@@ -53,6 +63,9 @@ void cx23885_av_work_handler(struct work_struct *work)
 			cx23885_flatiron_read(dev, 0x23) | 0x80);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cx23885_irq_enable(dev, PCI_MSK_AV_CORE);
 }

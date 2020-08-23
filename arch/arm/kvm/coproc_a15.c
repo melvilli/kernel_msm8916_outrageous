@@ -18,6 +18,7 @@
  */
 #include <linux/kvm_host.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/cputype.h>
 #include <asm/kvm_arm.h>
 #include <asm/kvm_host.h>
@@ -114,12 +115,17 @@ static bool access_l2ectlr(struct kvm_vcpu *vcpu,
 }
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/kvm_coproc.h>
 #include <asm/kvm_emulate.h>
 #include <linux/init.h>
 
 #include "coproc.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * A15-specific CP15 registers.
@@ -130,6 +136,7 @@ static bool access_l2ectlr(struct kvm_vcpu *vcpu,
  *            registers preceding 32-bit ones.
  */
 static const struct coproc_reg a15_regs[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* MPIDR: we use VMPIDR for guest access. */
 	{ CRn( 0), CRm( 0), Op1( 0), Op2( 5), is32,
@@ -159,6 +166,11 @@ static const struct coproc_reg a15_regs[] = {
 	{ CRn( 1), CRm( 0), Op1( 0), Op2( 0), is32,
 			access_sctlr, reset_val, c1_SCTLR, 0x00C50078 },
 >>>>>>> v3.18
+=======
+	/* SCTLR: swapped by interrupt.S. */
+	{ CRn( 1), CRm( 0), Op1( 0), Op2( 0), is32,
+			access_sctlr, reset_val, c1_SCTLR, 0x00C50078 },
+>>>>>>> v3.18
 };
 
 static struct kvm_coproc_target_table a15_target_table = {
@@ -170,12 +182,15 @@ static struct kvm_coproc_target_table a15_target_table = {
 static int __init coproc_a15_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int i;
 
 	for (i = 1; i < ARRAY_SIZE(a15_regs); i++)
 		BUG_ON(cmp_reg(&a15_regs[i-1],
 			       &a15_regs[i]) >= 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kvm_register_target_coproc_table(&a15_target_table);

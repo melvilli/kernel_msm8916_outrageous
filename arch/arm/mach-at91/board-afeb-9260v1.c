@@ -47,6 +47,10 @@
 #include "board.h"
 #include "generic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 =======
 #include "gpio.h"
 >>>>>>> v3.18
@@ -171,6 +175,11 @@ static struct at91_cf_data afeb9260_cf_data = {
 static void __init afeb9260_board_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	at91_register_devices();
+
+>>>>>>> v3.18
 =======
 	at91_register_devices();
 
@@ -220,7 +229,11 @@ static void __init afeb9260_board_init(void)
 MACHINE_START(AFEB9260, "Custom afeb9260 board")
 	/* Maintainer: Sergey Lapin <slapin@ossfans.org> */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= at91_init_time,
 >>>>>>> v3.18

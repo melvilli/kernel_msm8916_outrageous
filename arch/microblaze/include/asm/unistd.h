@@ -20,7 +20,10 @@
 #define __ARCH_WANT_SYS_GETHOSTNAME
 #define __ARCH_WANT_SYS_PAUSE
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __ARCH_WANT_SYS_SGETMASK
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define __ARCH_WANT_SYS_SIGNAL
@@ -42,6 +45,12 @@
 
 #endif /* __ASSEMBLY__ */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define __NR_syscalls         388
+
+>>>>>>> v3.18
 =======
 
 #define __NR_syscalls         388

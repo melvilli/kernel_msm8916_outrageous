@@ -6,6 +6,10 @@
 #include <linux/kern_levels.h>
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/cache.h>
+>>>>>>> v3.18
 =======
 #include <linux/cache.h>
 >>>>>>> v3.18
@@ -14,6 +18,12 @@ extern const char linux_banner[];
 extern const char linux_proc_banner[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern char *log_buf_addr_get(void);
+extern u32 log_buf_len_get(void);
+
+>>>>>>> v3.18
 =======
 extern char *log_buf_addr_get(void);
 extern u32 log_buf_len_get(void);
@@ -34,6 +44,7 @@ static inline int printk_get_level(const char *buffer)
 static inline const char *printk_skip_level(const char *buffer)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (printk_get_level(buffer)) {
 		switch (buffer[1]) {
 		case '0' ... '7':
@@ -45,6 +56,8 @@ static inline const char *printk_skip_level(const char *buffer)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (printk_get_level(buffer))
 		return buffer + 2;
 
@@ -62,6 +75,9 @@ static inline const char *printk_skip_level(const char *buffer)
 #define CONSOLE_LOGLEVEL_DEBUG	10 /* issue debug messages */
 #define CONSOLE_LOGLEVEL_MOTORMOUTH 15	/* You can't shut this one up */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int console_printk[];
 
@@ -73,7 +89,11 @@ extern int console_printk[];
 static inline void console_silent(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	console_loglevel = 0;
+=======
+	console_loglevel = CONSOLE_LOGLEVEL_SILENT;
+>>>>>>> v3.18
 =======
 	console_loglevel = CONSOLE_LOGLEVEL_SILENT;
 >>>>>>> v3.18
@@ -83,7 +103,11 @@ static inline void console_verbose(void)
 {
 	if (console_loglevel)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		console_loglevel = 15;
+=======
+		console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
+>>>>>>> v3.18
 =======
 		console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
 >>>>>>> v3.18
@@ -127,7 +151,10 @@ struct va_format {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * DEPRECATED
  * Add this to a message whenever you want to warn user space about the use
  * of a deprecated aspect of an API so they can stop using it
@@ -135,6 +162,9 @@ struct va_format {
 #define DEPRECATED	"[Deprecated]: "
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Dummy printk for disabled debugging statements to use whilst maintaining
  * gcc's format and side-effect checking.
@@ -165,9 +195,15 @@ int vprintk(const char *fmt, va_list args);
 
 asmlinkage __printf(5, 6) __cold
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage int printk_emit(int facility, int level,
 			   const char *dict, size_t dictlen,
 			   const char *fmt, ...);
+=======
+int printk_emit(int facility, int level,
+		const char *dict, size_t dictlen,
+		const char *fmt, ...);
+>>>>>>> v3.18
 =======
 int printk_emit(int facility, int level,
 		const char *dict, size_t dictlen,
@@ -255,7 +291,11 @@ static inline void show_regs_print_info(const char *log_lvl)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dump_stack(void) __cold;
+=======
+extern asmlinkage void dump_stack(void) __cold;
+>>>>>>> v3.18
 =======
 extern asmlinkage void dump_stack(void) __cold;
 >>>>>>> v3.18
@@ -265,13 +305,19 @@ extern asmlinkage void dump_stack(void) __cold;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * These can be used to print at the various log levels.
  * All of these will print unconditionally, although note that pr_debug()
  * and other debug macros are compiled out unless either DEBUG is defined
  * or CONFIG_DYNAMIC_DEBUG is set.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define pr_emerg(fmt, ...) \
 	printk(KERN_EMERG pr_fmt(fmt), ##__VA_ARGS__)
@@ -301,6 +347,11 @@ extern asmlinkage void dump_stack(void) __cold;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dynamic_debug.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/dynamic_debug.h>
 
@@ -324,6 +375,7 @@ extern asmlinkage void dump_stack(void) __cold;
 
 #ifdef CONFIG_PRINTK
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define printk_once(fmt, ...)			\
 ({						\
 	static bool __print_once;		\
@@ -336,6 +388,8 @@ extern asmlinkage void dump_stack(void) __cold;
 #else
 #define printk_once(fmt, ...)			\
 =======
+=======
+>>>>>>> v3.18
 #define printk_once(fmt, ...)					\
 ({								\
 	static bool __print_once __read_mostly;			\
@@ -358,6 +412,9 @@ extern asmlinkage void dump_stack(void) __cold;
 #define printk_once(fmt, ...)					\
 	no_printk(fmt, ##__VA_ARGS__)
 #define printk_deferred_once(fmt, ...)				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	no_printk(fmt, ##__VA_ARGS__)
 #endif
@@ -441,8 +498,11 @@ extern asmlinkage void dump_stack(void) __cold;
 
 /* If you are writing a driver, please use dev_dbg instead */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(DEBUG)
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_DYNAMIC_DEBUG)
 /* descriptor check is first to prevent flooding with "callbacks suppressed" */
 #define pr_debug_ratelimited(fmt, ...)					\
@@ -456,6 +516,9 @@ do {									\
 		__dynamic_pr_debug(&descriptor, fmt, ##__VA_ARGS__);	\
 } while (0)
 #elif defined(DEBUG)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define pr_debug_ratelimited(fmt, ...)					\
 	printk_ratelimited(KERN_DEBUG pr_fmt(fmt), ##__VA_ARGS__)
@@ -511,6 +574,7 @@ static inline void print_hex_dump_bytes(const char *prefix_str, int prefix_type,
 #endif /* defined(CONFIG_DYNAMIC_DEBUG) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_OOPS_LOG_BUFFER)
 extern void oops_printk_start(void);
 #else
@@ -519,6 +583,8 @@ static inline void oops_printk_start(void)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

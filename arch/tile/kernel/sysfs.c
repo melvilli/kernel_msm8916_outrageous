@@ -158,7 +158,10 @@ hvconfig_bin_read(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t hv_stats_show(struct device *dev,
 			     struct device_attribute *attr,
 			     char *page)
@@ -220,6 +223,9 @@ static struct subsys_interface hv_stats_interface = {
 	.remove_dev		= hv_stats_device_remove,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init create_sysfs_entries(void)
 {
@@ -253,7 +259,10 @@ static int __init create_sysfs_entries(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!err) {
 		/*
 		 * Don't bother adding the hv_stats files on each CPU if
@@ -269,6 +278,9 @@ static int __init create_sysfs_entries(void)
 			err = subsys_interface_register(&hv_stats_interface);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }

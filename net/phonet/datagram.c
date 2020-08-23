@@ -87,7 +87,11 @@ static int pn_sendmsg(struct kiocb *iocb, struct sock *sk,
 			struct msghdr *msg, size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_pn *target;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_pn *, target, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_pn *, target, msg->msg_name);
 >>>>>>> v3.18
@@ -99,7 +103,11 @@ static int pn_sendmsg(struct kiocb *iocb, struct sock *sk,
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (msg->msg_name == NULL)
+=======
+	if (target == NULL)
+>>>>>>> v3.18
 =======
 	if (target == NULL)
 >>>>>>> v3.18
@@ -109,7 +117,10 @@ static int pn_sendmsg(struct kiocb *iocb, struct sock *sk,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	target = (struct sockaddr_pn *)msg->msg_name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (target->spn_family != AF_PHONET)
@@ -172,6 +183,10 @@ static int pn_recvmsg(struct kiocb *iocb, struct sock *sk,
 
 	if (msg->msg_name != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__sockaddr_check_size(sizeof(sa));
+>>>>>>> v3.18
 =======
 		__sockaddr_check_size(sizeof(sa));
 >>>>>>> v3.18

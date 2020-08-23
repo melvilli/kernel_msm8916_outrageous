@@ -7,6 +7,10 @@
 #define _ASM_VGA_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/addrspace.h>
+>>>>>>> v3.18
 =======
 #include <asm/addrspace.h>
 >>>>>>> v3.18
@@ -18,7 +22,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VGA_MAP_MEM(x, s)	(0xb0000000L + (unsigned long)(x))
+=======
+#define VGA_MAP_MEM(x, s)	CKSEG1ADDR(0x10000000L + (unsigned long)(x))
+>>>>>>> v3.18
 =======
 #define VGA_MAP_MEM(x, s)	CKSEG1ADDR(0x10000000L + (unsigned long)(x))
 >>>>>>> v3.18

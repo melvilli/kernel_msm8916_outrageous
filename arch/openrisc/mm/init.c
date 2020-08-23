@@ -203,6 +203,7 @@ void __init paging_init(void)
 /* References to section boundaries */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init free_pages_init(void)
 {
 	int reservedpages, pfn;
@@ -236,17 +237,23 @@ void __init mem_init(void)
 	set_max_mapnr_init();
 
 =======
+=======
+>>>>>>> v3.18
 void __init mem_init(void)
 {
 	BUG_ON(!mem_map);
 
 	max_mapnr = max_low_pfn;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	high_memory = (void *)__va(max_low_pfn * PAGE_SIZE);
 
 	/* clear the zero-page */
 	memset((void *)empty_zero_page, 0, PAGE_SIZE);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	reservedpages = free_pages_init();
 
@@ -262,10 +269,15 @@ void __init mem_init(void)
 	       initsize >> 10, (unsigned long)(0 << (PAGE_SHIFT - 10))
 	    );
 =======
+=======
+>>>>>>> v3.18
 	/* this will put all low memory onto the freelists */
 	free_all_bootmem();
 
 	mem_init_print_info(NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	printk("mem_init_done ...........................................\n");
@@ -277,7 +289,11 @@ void __init mem_init(void)
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, -1, "initrd");
 >>>>>>> v3.18
@@ -287,7 +303,11 @@ void free_initrd_mem(unsigned long start, unsigned long end)
 void free_initmem(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 =======
 	free_initmem_default(-1);
 >>>>>>> v3.18

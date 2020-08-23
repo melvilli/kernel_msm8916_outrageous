@@ -36,6 +36,7 @@
 #define __dma_free_coherent(size, addr)		((void)0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long device_to_mask(struct device *dev)
 {
 	if (dev->dma_mask && *dev->dma_mask)
@@ -48,6 +49,8 @@ extern struct dma_map_ops *dma_ops;
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Available generic sets of operations
  */
@@ -55,6 +58,7 @@ extern struct dma_map_ops dma_direct_ops;
 
 static inline struct dma_map_ops *get_dma_ops(struct device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* We don't handle the NULL dev case for ISA for now. We could
 	 * do it via an out of line call but it is not needed for now. The
@@ -70,6 +74,9 @@ static inline struct dma_map_ops *get_dma_ops(struct device *dev)
 static inline void set_dma_ops(struct device *dev, struct dma_map_ops *ops)
 {
 	dev->archdata.dma_ops = ops;
+=======
+	return &dma_direct_ops;
+>>>>>>> v3.18
 =======
 	return &dma_direct_ops;
 >>>>>>> v3.18

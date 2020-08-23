@@ -33,7 +33,13 @@
 #include <linux/dma-mapping.h>
 #include <linux/dma-contiguous.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <linux/efi.h>
+
+#include <asm/fixmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/efi.h>
 
@@ -46,6 +52,7 @@
 
 #include "mm.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned long phys_initrd_start __initdata = 0;
 static unsigned long phys_initrd_size __initdata = 0;
@@ -63,6 +70,11 @@ phys_addr_t memstart_addr __read_mostly = 0;
 
 #ifdef CONFIG_BLK_DEV_INITRD
 >>>>>>> v3.18
+=======
+phys_addr_t memstart_addr __read_mostly = 0;
+
+#ifdef CONFIG_BLK_DEV_INITRD
+>>>>>>> v3.18
 static int __init early_initrd(char *p)
 {
 	unsigned long start, size;
@@ -73,8 +85,13 @@ static int __init early_initrd(char *p)
 		size = memparse(endp + 1, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phys_initrd_start = start;
 		phys_initrd_size = size;
+=======
+		initrd_start = (unsigned long)__va(start);
+		initrd_end = (unsigned long)__va(start + size);
+>>>>>>> v3.18
 =======
 		initrd_start = (unsigned long)__va(start);
 		initrd_end = (unsigned long)__va(start + size);
@@ -84,7 +101,10 @@ static int __init early_initrd(char *p)
 }
 early_param("initrd", early_initrd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 /*
@@ -97,6 +117,9 @@ static phys_addr_t max_zone_dma_phys(void)
 	phys_addr_t offset = memblock_start_of_DRAM() & GENMASK_ULL(63, 32);
 	return min(offset + (1ULL << 32), memblock_end_of_DRAM());
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void __init zone_sizes_init(unsigned long min, unsigned long max)
@@ -110,9 +133,13 @@ static void __init zone_sizes_init(unsigned long min, unsigned long max)
 	/* 4GB maximum for 32-bit only capable devices */
 	if (IS_ENABLED(CONFIG_ZONE_DMA)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long max_dma_phys =
 			(unsigned long)(dma_to_phys(NULL, DMA_BIT_MASK(32)) + 1);
 		max_dma = max(min, min(max, max_dma_phys >> PAGE_SHIFT));
+=======
+		max_dma = PFN_DOWN(max_zone_dma_phys());
+>>>>>>> v3.18
 =======
 		max_dma = PFN_DOWN(max_zone_dma_phys());
 >>>>>>> v3.18
@@ -172,6 +199,7 @@ void __init arm64_memblock_init(void)
 	phys_addr_t dma_phys_limit = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Register the kernel text, kernel data and initrd with memblock */
 	memblock_reserve(__pa(_text), _end - _text);
 #ifdef CONFIG_BLK_DEV_INITRD
@@ -192,6 +220,8 @@ void __init arm64_memblock_init(void)
 	memblock_reserve(__pa(idmap_pg_dir), IDMAP_DIR_SIZE);
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Register the kernel text, kernel data, initrd, and initial
 	 * pagetables with memblock.
@@ -202,13 +232,20 @@ void __init arm64_memblock_init(void)
 		memblock_reserve(__virt_to_phys(initrd_start), initrd_end - initrd_start);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	early_init_fdt_scan_reserved_mem();
 
 	/* 4GB maximum for 32-bit only capable devices */
 	if (IS_ENABLED(CONFIG_ZONE_DMA))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_phys_limit = dma_to_phys(NULL, DMA_BIT_MASK(32)) + 1;
+=======
+		dma_phys_limit = max_zone_dma_phys();
+>>>>>>> v3.18
 =======
 		dma_phys_limit = max_zone_dma_phys();
 >>>>>>> v3.18
@@ -239,6 +276,7 @@ void __init bootmem_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Poison init memory with an undefined instruction (0x0).
  */
@@ -247,6 +285,8 @@ static inline void poison_init_mem(void *s, size_t count)
 	memset(s, 0, count);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef CONFIG_SPARSEMEM_VMEMMAP
@@ -307,7 +347,11 @@ static void __init free_unused_memmap(void)
 		 * MAX_ORDER_NR_PAGES.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prev_end = ALIGN(__phys_to_pfn(reg->base + reg->size),
+=======
+		prev_end = ALIGN(start + __phys_to_pfn(reg->size),
+>>>>>>> v3.18
 =======
 		prev_end = ALIGN(start + __phys_to_pfn(reg->size),
 >>>>>>> v3.18
@@ -329,9 +373,13 @@ static void __init free_unused_memmap(void)
 void __init mem_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arm64_swiotlb_init();
 
 	max_mapnr   = pfn_to_page(max_pfn + PHYS_PFN_OFFSET) - mem_map;
+=======
+	set_max_mapnr(pfn_to_page(max_pfn) - mem_map);
+>>>>>>> v3.18
 =======
 	set_max_mapnr(pfn_to_page(max_pfn) - mem_map);
 >>>>>>> v3.18
@@ -346,6 +394,7 @@ void __init mem_init(void)
 
 #define MLK(b, t) b, t, ((t) - (b)) >> 10
 #define MLM(b, t) b, t, ((t) - (b)) >> 20
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MLK_ROUNDUP(b, t) b, t, DIV_ROUND_UP(((t) - (b)), SZ_1K)
 
@@ -368,6 +417,8 @@ void __init mem_init(void)
 		  MLM(PAGE_OFFSET, (unsigned long)high_memory),
 
 =======
+=======
+>>>>>>> v3.18
 #define MLG(b, t) b, t, ((t) - (b)) >> 30
 #define MLK_ROUNDUP(b, t) b, t, DIV_ROUND_UP(((t) - (b)), SZ_1K)
 
@@ -395,6 +446,9 @@ void __init mem_init(void)
 		  MLK(FIXADDR_START, FIXADDR_TOP),
 		  MLM(MODULES_VADDR, MODULES_END),
 		  MLM(PAGE_OFFSET, (unsigned long)high_memory),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  MLK_ROUNDUP(__init_begin, __init_end),
 		  MLK_ROUNDUP(_text, _etext),
@@ -425,6 +479,7 @@ void __init mem_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_STRICT_MEMORY_RWX
 void free_initmem(void)
 {
@@ -441,10 +496,15 @@ void free_initmem(void)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 void free_initmem(void)
 {
 	free_initmem_default(0);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_BLK_DEV_INITRD
@@ -455,15 +515,21 @@ void free_initrd_mem(unsigned long start, unsigned long end)
 {
 	if (!keep_initrd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		poison_init_mem((void *)start, PAGE_ALIGN(end) - start);
 		free_reserved_area(start, end, 0, "initrd");
 =======
+=======
+>>>>>>> v3.18
 		if (start == initrd_start)
 			start = round_down(start, PAGE_SIZE);
 		if (end == initrd_end)
 			end = round_up(end, PAGE_SIZE);
 
 		free_reserved_area((void *)start, (void *)end, 0, "initrd");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

@@ -19,6 +19,10 @@
 #include <linux/mtd/partitions.h>
 #include <linux/mtd/mtd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18

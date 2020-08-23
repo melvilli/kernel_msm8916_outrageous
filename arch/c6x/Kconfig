@@ -37,9 +37,12 @@ config GENERIC_BUG
 	def_bool y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config COMMON_CLKDEV
 	def_bool y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config C6X_BIG_KERNEL
@@ -109,10 +112,13 @@ menu "Processor type and features"
 source "arch/c6x/platforms/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config TMS320C6X_CACHES_ON
 	bool "L2 cache support"
 	default y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config KERNEL_RAM_BASE_ADDRESS

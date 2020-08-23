@@ -10,12 +10,15 @@ if SND_FIREWIRE && FIREWIRE
 config SND_FIREWIRE_LIB
 	tristate
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SND_PCM
 
 config SND_FIREWIRE_SPEAKERS
 	tristate "FireWire speakers"
 	select SND_PCM
 =======
+=======
+>>>>>>> v3.18
 	select SND_PCM
 	select SND_RAWMIDI
 
@@ -35,6 +38,9 @@ config SND_DICE
 
 config SND_FIREWIRE_SPEAKERS
 	tristate "FireWire speakers"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select SND_FIREWIRE_LIB
 	help
@@ -47,7 +53,10 @@ config SND_FIREWIRE_SPEAKERS
 config SND_ISIGHT
 	tristate "Apple iSight microphone"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SND_PCM
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select SND_FIREWIRE_LIB
@@ -61,8 +70,11 @@ config SND_ISIGHT
 config SND_SCS1X
 	tristate "Stanton Control System 1 MIDI"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SND_PCM
 	select SND_RAWMIDI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select SND_FIREWIRE_LIB
@@ -75,7 +87,10 @@ config SND_SCS1X
 	  will be called snd-scs1x.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SND_FIREWORKS
 	tristate "Echo Fireworks board module support"
 	select SND_FIREWIRE_LIB
@@ -131,5 +146,8 @@ config SND_BEBOB
           To compile this driver as a module, choose M here: the module
           will be called snd-bebob.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # SND_FIREWIRE

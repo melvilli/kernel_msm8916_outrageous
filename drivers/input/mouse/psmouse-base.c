@@ -36,6 +36,10 @@
 #include "sentelic.h"
 #include "cypress_ps2.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "focaltech.h"
+>>>>>>> v3.18
 =======
 #include "focaltech.h"
 >>>>>>> v3.18
@@ -467,7 +471,10 @@ static int psmouse_poll(struct psmouse *psmouse)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * psmouse_matches_pnp_id - check if psmouse matches one of the passed in ids.
  */
@@ -482,6 +489,9 @@ bool psmouse_matches_pnp_id(struct psmouse *psmouse, const char * const ids[])
 
 	return false;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -692,6 +702,11 @@ static void psmouse_apply_defaults(struct psmouse *psmouse)
 	__set_bit(REL_Y, input_dev->relbit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__set_bit(INPUT_PROP_POINTER, input_dev->propbit);
+
+>>>>>>> v3.18
 =======
 	__set_bit(INPUT_PROP_POINTER, input_dev->propbit);
 
@@ -733,7 +748,10 @@ static int psmouse_extensions(struct psmouse *psmouse,
 	bool synaptics_hardware = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Always check for focaltech, this is safe as it uses pnp-id matching */
 	if (psmouse_do_detect(focaltech_detect, psmouse, set_properties) == 0) {
 		if (!set_properties || focaltech_init(psmouse) == 0) {
@@ -749,6 +767,9 @@ static int psmouse_extensions(struct psmouse *psmouse,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * We always check for lifebook because it does not disturb mouse
@@ -1549,6 +1570,7 @@ static int psmouse_reconnect(struct serio *serio)
 	struct psmouse *psmouse = serio_get_drvdata(serio);
 	struct psmouse *parent = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct serio_driver *drv = serio->drv;
 	unsigned char type;
 	int rc = -1;
@@ -1559,6 +1581,11 @@ static int psmouse_reconnect(struct serio *serio)
 		return -1;
 	}
 
+=======
+	unsigned char type;
+	int rc = -1;
+
+>>>>>>> v3.18
 =======
 	unsigned char type;
 	int rc = -1;

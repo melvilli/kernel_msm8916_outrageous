@@ -2,6 +2,7 @@
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : Should be "fsl,<chip>-sdma"
 - reg : Should contain SDMA registers location and length
 - interrupts : Should contain SDMA interrupt
@@ -9,6 +10,8 @@ Required properties:
   scripts firmware
 
 =======
+=======
+>>>>>>> v3.18
 - compatible : Should be one of
       "fsl,imx25-sdma"
       "fsl,imx31-sdma", "fsl,imx31-to1-sdma", "fsl,imx31-to2-sdma"
@@ -65,6 +68,9 @@ The third cell specifies the transfer priority as below.
 	1	Medium
 	2	Low
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Examples:
 
@@ -73,9 +79,12 @@ sdma@83fb0000 {
 	reg = <0x83fb0000 0x4000>;
 	interrupts = <6>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fsl,sdma-ram-script-name = "sdma-imx51.bin";
 };
 =======
+=======
+>>>>>>> v3.18
 	#dma-cells = <3>;
 	fsl,sdma-ram-script-name = "sdma-imx51.bin";
 };
@@ -95,4 +104,7 @@ ssi2: ssi@70014000 {
 	dma-names = "rx", "tx";
 	fsl,fifo-depth = <15>;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

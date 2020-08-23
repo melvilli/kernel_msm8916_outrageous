@@ -45,6 +45,7 @@
 #define PT_PAGE_TABLE_LEVEL 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PFERR_PRESENT_MASK (1U << 0)
 #define PFERR_WRITE_MASK (1U << 1)
 #define PFERR_USER_MASK (1U << 2)
@@ -56,6 +57,8 @@ void kvm_mmu_set_mmio_spte_mask(u64 mmio_mask);
 int handle_mmio_page_fault_common(struct kvm_vcpu *vcpu, u64 addr, bool direct);
 int kvm_init_shadow_mmu(struct kvm_vcpu *vcpu, struct kvm_mmu *context);
 =======
+=======
+>>>>>>> v3.18
 #define PFERR_PRESENT_BIT 0
 #define PFERR_WRITE_BIT 1
 #define PFERR_USER_BIT 2
@@ -98,6 +101,9 @@ void kvm_init_shadow_ept_mmu(struct kvm_vcpu *vcpu, struct kvm_mmu *context,
 		bool execonly);
 void update_permission_bitmask(struct kvm_vcpu *vcpu, struct kvm_mmu *mmu,
 		bool ept);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline unsigned int kvm_mmu_available_pages(struct kvm *kvm)
@@ -123,7 +129,10 @@ static inline int is_present_gpte(unsigned long pte)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Currently, we have two sorts of write-protection, a) the first one
  * write-protects guest page to sync the guest modification, b) another one is
@@ -157,6 +166,9 @@ static inline int is_present_gpte(unsigned long pte)
  *
  * TODO: introduce APIs to split these two cases.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int is_writable_pte(unsigned long pte)
 {
@@ -173,6 +185,7 @@ static inline bool is_write_protection(struct kvm_vcpu *vcpu)
  * fault with the given access (in ACC_* format)?
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool permission_fault(struct kvm_mmu *mmu, unsigned pte_access,
 				    unsigned pfec)
 {
@@ -180,6 +193,8 @@ static inline bool permission_fault(struct kvm_mmu *mmu, unsigned pte_access,
 }
 
 =======
+=======
+>>>>>>> v3.18
 static inline bool permission_fault(struct kvm_vcpu *vcpu, struct kvm_mmu *mmu,
 				    unsigned pte_access, unsigned pfec)
 {
@@ -207,5 +222,8 @@ static inline bool permission_fault(struct kvm_vcpu *vcpu, struct kvm_mmu *mmu,
 }
 
 void kvm_mmu_invalidate_zap_all_pages(struct kvm *kvm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

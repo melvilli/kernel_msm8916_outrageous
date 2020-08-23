@@ -66,7 +66,10 @@ LEAF(resume)
 
 1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #if defined(CONFIG_CC_STACKPROTECTOR) && !defined(CONFIG_SMP)
 	PTR_LA	t8, __stack_chk_guard
@@ -74,6 +77,9 @@ LEAF(resume)
 	LONG_S	t9, 0(t8)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * The order of restoring the registers takes care of the race
@@ -124,6 +130,12 @@ LEAF(_restore_fp)
 #define FPU_DEFAULT  0x00000000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set push
+	SET_HARDFLOAT
+
+>>>>>>> v3.18
 =======
 	.set push
 	SET_HARDFLOAT
@@ -175,6 +187,11 @@ LEAF(_init_fpu)
 	jr	ra
 	END(_init_fpu)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	.set pop
+>>>>>>> v3.18
 =======
 
 	.set pop

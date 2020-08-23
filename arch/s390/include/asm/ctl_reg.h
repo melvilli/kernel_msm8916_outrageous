@@ -8,6 +8,7 @@
 #define __ASM_CTL_REG_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_64BIT
 
 #define __ctl_load(array, low, high) ({				\
@@ -74,6 +75,8 @@ extern void smp_ctl_clear_bit(int cr, int bit);
 
 #endif /* CONFIG_SMP */
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bug.h>
 
 #ifdef CONFIG_64BIT
@@ -145,6 +148,9 @@ union ctlreg0 {
 # define ctl_set_bit(cr, bit) __ctl_set_bit(cr, bit)
 # define ctl_clear_bit(cr, bit) __ctl_clear_bit(cr, bit)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __ASM_CTL_REG_H */

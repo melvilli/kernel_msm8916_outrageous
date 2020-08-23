@@ -23,8 +23,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/instmem.h>
 =======
+=======
+>>>>>>> v3.18
 #include "priv.h"
 
 /******************************************************************************
@@ -43,6 +46,9 @@ _nouveau_instobj_dtor(struct nouveau_object *object)
 
 	return nouveau_object_destroy(&iobj->base);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int
@@ -67,6 +73,7 @@ nouveau_instobj_create_(struct nouveau_object *parent,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void
 nouveau_instobj_destroy(struct nouveau_instobj *iobj)
@@ -136,6 +143,8 @@ int
 nouveau_instmem_fini(struct nouveau_instmem *imem, bool suspend)
 {
 =======
+=======
+>>>>>>> v3.18
 /******************************************************************************
  * instmem subdev base implementation
  *****************************************************************************/
@@ -156,6 +165,9 @@ int
 _nouveau_instmem_fini(struct nouveau_object *object, bool suspend)
 {
 	struct nouveau_instmem *imem = (void *)object;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nouveau_instobj *iobj;
 	int i, ret = 0;
@@ -188,6 +200,7 @@ _nouveau_instmem_init(struct nouveau_object *object)
 {
 	struct nouveau_instmem *imem = (void *)object;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nouveau_instmem_init(imem);
 }
 
@@ -197,6 +210,8 @@ _nouveau_instmem_fini(struct nouveau_object *object, bool suspend)
 	struct nouveau_instmem *imem = (void *)object;
 	return nouveau_instmem_fini(imem, suspend);
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_instobj *iobj;
 	int ret, i;
 
@@ -238,5 +253,8 @@ nouveau_instmem_create_(struct nouveau_object *parent,
 	INIT_LIST_HEAD(&imem->list);
 	imem->alloc = nouveau_instmem_alloc;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

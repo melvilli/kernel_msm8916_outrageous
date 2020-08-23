@@ -447,6 +447,11 @@
 #define SET_RX_STATUS__DESC_BUFF_ADDR(__pdesc, __val)	\
 	SET_BITS_OFFSET_LE(__pdesc + 24, 0, 32, __val)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GET_RX_STATUS_DESC_BUFF_ADDR(__pdesc)			\
+	SHIFT_AND_MASK_LE(__pdesc + 24, 0, 32)
+>>>>>>> v3.18
 =======
 #define GET_RX_STATUS_DESC_BUFF_ADDR(__pdesc)			\
 	SHIFT_AND_MASK_LE(__pdesc + 24, 0, 32)

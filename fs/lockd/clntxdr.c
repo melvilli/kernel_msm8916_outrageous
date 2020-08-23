@@ -16,6 +16,11 @@
 #include <linux/lockd/lockd.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/linux/nfs2.h>
+
+>>>>>>> v3.18
 =======
 #include <uapi/linux/nfs2.h>
 

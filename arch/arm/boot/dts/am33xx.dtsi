@@ -9,12 +9,18 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
 =======
+=======
+>>>>>>> v3.18
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/pinctrl/am33xx.h>
 
 #include "skeleton.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
@@ -22,6 +28,7 @@
 	interrupt-parent = <&intc>;
 
 	aliases {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		serial0 = &uart1;
 		serial1 = &uart2;
@@ -37,6 +44,8 @@
 		cpu@0 {
 			compatible = "arm,cortex-a8";
 =======
+=======
+>>>>>>> v3.18
 		i2c0 = &i2c0;
 		i2c1 = &i2c1;
 		i2c2 = &i2c2;
@@ -63,6 +72,9 @@
 			compatible = "arm,cortex-a8";
 			device_type = "cpu";
 			reg = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			/*
@@ -79,20 +91,29 @@
 			>;
 			voltage-tolerance = <2>; /* 2 percentage */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			clocks = <&dpll_mpu_ck>;
 			clock-names = "cpu";
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			clock-latency = <300000>; /* From omap-cpufreq driver */
 		};
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * The soc node represents the soc top level view. It is uses for IPs
 =======
+=======
+>>>>>>> v3.18
 	pmu {
 		compatible = "arm,cortex-a8-pmu";
 		interrupts = <3>;
@@ -100,6 +121,9 @@
 
 	/*
 	 * The soc node represents the soc top level view. It is used for IPs
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * that are not memory mapped in the MPU view or for the MPU itself.
 	 */
@@ -123,8 +147,13 @@
 	/*
 	 * XXX: Use a flat representation of the AM33XX interconnect.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * The real AM33XX interconnect network is quite complex.Since
 	 * that will not bring real advantage to represent that in DT
+=======
+	 * The real AM33XX interconnect network is quite complex. Since
+	 * it will not bring real advantage to represent that in DT
+>>>>>>> v3.18
 =======
 	 * The real AM33XX interconnect network is quite complex. Since
 	 * it will not bring real advantage to represent that in DT
@@ -140,6 +169,7 @@
 		ti,hwmods = "l3_main";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		intc: interrupt-controller@48200000 {
 			compatible = "ti,omap2-intc";
 			interrupt-controller;
@@ -149,6 +179,8 @@
 		};
 
 =======
+=======
+>>>>>>> v3.18
 		prcm: prcm@44e00000 {
 			compatible = "ti,am3-prcm";
 			reg = <0x44e00000 0x4000>;
@@ -196,6 +228,9 @@
 			#dma-cells = <1>;
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio0: gpio@44e07000 {
 			compatible = "ti,omap4-gpio";
@@ -204,7 +239,11 @@
 			#gpio-cells = <2>;
 			interrupt-controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			#interrupt-cells = <1>;
+=======
+			#interrupt-cells = <2>;
+>>>>>>> v3.18
 =======
 			#interrupt-cells = <2>;
 >>>>>>> v3.18
@@ -219,7 +258,11 @@
 			#gpio-cells = <2>;
 			interrupt-controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			#interrupt-cells = <1>;
+=======
+			#interrupt-cells = <2>;
+>>>>>>> v3.18
 =======
 			#interrupt-cells = <2>;
 >>>>>>> v3.18
@@ -234,7 +277,11 @@
 			#gpio-cells = <2>;
 			interrupt-controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			#interrupt-cells = <1>;
+=======
+			#interrupt-cells = <2>;
+>>>>>>> v3.18
 =======
 			#interrupt-cells = <2>;
 >>>>>>> v3.18
@@ -249,7 +296,11 @@
 			#gpio-cells = <2>;
 			interrupt-controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			#interrupt-cells = <1>;
+=======
+			#interrupt-cells = <2>;
+>>>>>>> v3.18
 =======
 			#interrupt-cells = <2>;
 >>>>>>> v3.18
@@ -258,7 +309,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uart1: serial@44e09000 {
+=======
+		uart0: serial@44e09000 {
+>>>>>>> v3.18
 =======
 		uart0: serial@44e09000 {
 >>>>>>> v3.18
@@ -271,7 +326,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uart2: serial@48022000 {
+=======
+		uart1: serial@48022000 {
+>>>>>>> v3.18
 =======
 		uart1: serial@48022000 {
 >>>>>>> v3.18
@@ -284,7 +343,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uart3: serial@48024000 {
+=======
+		uart2: serial@48024000 {
+>>>>>>> v3.18
 =======
 		uart2: serial@48024000 {
 >>>>>>> v3.18
@@ -297,7 +360,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uart4: serial@481a6000 {
+=======
+		uart3: serial@481a6000 {
+>>>>>>> v3.18
 =======
 		uart3: serial@481a6000 {
 >>>>>>> v3.18
@@ -310,7 +377,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uart5: serial@481a8000 {
+=======
+		uart4: serial@481a8000 {
+>>>>>>> v3.18
 =======
 		uart4: serial@481a8000 {
 >>>>>>> v3.18
@@ -323,7 +394,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uart6: serial@481aa000 {
+=======
+		uart5: serial@481aa000 {
+>>>>>>> v3.18
 =======
 		uart5: serial@481aa000 {
 >>>>>>> v3.18
@@ -366,7 +441,10 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		mmc1: mmc@48060000 {
 			compatible = "ti,omap4-hsmmc";
 			ti,hwmods = "mmc1";
@@ -412,6 +490,9 @@
 			#hwlock-cells = <1>;
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		wdt2: wdt@44e35000 {
 			compatible = "ti,omap3-wdt";
@@ -439,7 +520,10 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		mailbox: mailbox@480C8000 {
 			compatible = "ti,omap4-mailbox";
 			reg = <0x480C8000 0x200>;
@@ -453,6 +537,9 @@
 			};
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		timer1: timer@44e31000 {
 			compatible = "ti,am335x-timer-1ms";
@@ -509,7 +596,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtc@44e3e000 {
+=======
+		rtc: rtc@44e3e000 {
+>>>>>>> v3.18
 =======
 		rtc: rtc@44e3e000 {
 >>>>>>> v3.18
@@ -529,12 +620,18 @@
 			ti,spi-num-cs = <2>;
 			ti,hwmods = "spi0";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			dmas = <&edma 16
 				&edma 17
 				&edma 18
 				&edma 19>;
 			dma-names = "tx0", "rx0", "tx1", "rx1";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			status = "disabled";
 		};
@@ -547,6 +644,7 @@
 			interrupts = <125>;
 			ti,spi-num-cs = <2>;
 			ti,hwmods = "spi1";
+<<<<<<< HEAD
 <<<<<<< HEAD
 			status = "disabled";
 		};
@@ -567,6 +665,8 @@
 			power = <250>;
 			ti,hwmods = "usb_otg_hs";
 =======
+=======
+>>>>>>> v3.18
 			dmas = <&edma 42
 				&edma 43
 				&edma 44
@@ -791,6 +891,9 @@
 				ti,hwmods = "ehrpwm2";
 				status = "disabled";
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -798,6 +901,11 @@
 			compatible = "ti,cpsw";
 			ti,hwmods = "cpgmac0";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&cpsw_125mhz_gclk>, <&cpsw_cpts_rft_clk>;
+			clock-names = "fck", "cpts";
+>>>>>>> v3.18
 =======
 			clocks = <&cpsw_125mhz_gclk>, <&cpsw_cpts_rft_clk>;
 			clock-names = "fck", "cpts";
@@ -826,6 +934,11 @@
 			interrupts = <40 41 42 43>;
 			ranges;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			syscon = <&cm>;
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			syscon = <&cm>;
 			status = "disabled";
@@ -839,6 +952,10 @@
 				bus_freq = <1000000>;
 				reg = <0x4a101000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				status = "disabled";
+>>>>>>> v3.18
 =======
 				status = "disabled";
 >>>>>>> v3.18
@@ -854,6 +971,7 @@
 				mac-address = [ 00 00 00 00 00 00 ];
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
 
 		ocmcram: ocmcram@40300000 {
@@ -862,6 +980,8 @@
 			ti,hwmods = "ocmcram";
 			ti,no_idle_on_suspend;
 =======
+=======
+>>>>>>> v3.18
 
 			phy_sel: cpsw-phy-sel@44e10650 {
 				compatible = "ti,am3352-cpsw-phy-sel";
@@ -873,6 +993,9 @@
 		ocmcram: ocmcram@40300000 {
 			compatible = "mmio-sram";
 			reg = <0x40300000 0x10000>; /* 64k */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -882,7 +1005,10 @@
 			       0x44d80000 0x2000>;	/* M3 DMEM */
 			ti,hwmods = "wkup_m3";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			ti,no-reset-on-init;
 		};
 
@@ -918,6 +1044,9 @@
 				#io-channel-cells = <1>;
 				compatible = "ti,am3359-adc";
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -925,6 +1054,10 @@
 			compatible = "ti,am3352-gpmc";
 			ti,hwmods = "gpmc";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			ti,no-idle-on-init;
+>>>>>>> v3.18
 =======
 			ti,no-idle-on-init;
 >>>>>>> v3.18
@@ -937,9 +1070,12 @@
 			status = "disabled";
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 };
 =======
+=======
+>>>>>>> v3.18
 
 		sham: sham@53100000 {
 			compatible = "ti,omap4-sham";
@@ -998,4 +1134,7 @@
 };
 
 /include/ "am33xx-clocks.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

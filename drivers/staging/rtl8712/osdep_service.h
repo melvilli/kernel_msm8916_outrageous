@@ -51,6 +51,7 @@ struct	__queue	{
 #define _buffer unsigned char
 #define thread_exit() complete_and_exit(NULL, 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _workitem struct work_struct
 
 #define _init_queue(pqueue)				\
@@ -78,6 +79,8 @@ static inline void list_delete(struct list_head *plist)
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 #define _init_queue(pqueue)				\
 	do {						\
@@ -88,6 +91,9 @@ static inline void list_delete(struct list_head *plist)
 #define LIST_CONTAINOR(ptr, type, member) \
 	((type *)((char *)(ptr)-(SIZE_T)(&((type *)0)->member)))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void _init_timer(struct timer_list *ptimer,
 			       struct  net_device *padapter,
@@ -110,6 +116,7 @@ static inline void _cancel_timer(struct timer_list *ptimer, u8 *bcancelled)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void _init_workitem(_workitem *pwork, void *pfunc, void *cntx)
 {
 	INIT_WORK(pwork, pfunc);
@@ -122,10 +129,13 @@ static inline void _set_workitem(_workitem *pwork)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifndef BIT
 	#define BIT(x)	(1 << (x))
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
 For the following list_xxx operations,
@@ -148,6 +158,8 @@ static inline void list_insert_tail(struct list_head *plist,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline u32 _down_sema(struct semaphore *sema)
 {
 	if (down_interruptible(sema))
@@ -156,6 +168,7 @@ static inline u32 _down_sema(struct semaphore *sema)
 		return _SUCCESS;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void _init_listhead(struct list_head *list)
 {
@@ -168,6 +181,10 @@ static inline u32 _queue_empty(struct  __queue *pqueue)
 }
 
 static inline u32 end_of_queue_search(struct list_head *head, struct list_head *plist)
+=======
+static inline u32 end_of_queue_search(struct list_head *head,
+		struct list_head *plist)
+>>>>>>> v3.18
 =======
 static inline u32 end_of_queue_search(struct list_head *head,
 		struct list_head *plist)
@@ -189,12 +206,16 @@ static inline void sleep_schedulable(int ms)
 	set_current_state(TASK_INTERRUPTIBLE);
 	if (schedule_timeout(delta) != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ;
 }
 
 static inline u8 *_malloc(u32 sz)
 {
 	return	kmalloc(sz, GFP_ATOMIC);
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -206,11 +227,14 @@ static inline unsigned char _cancel_timer_ex(struct timer_list *ptimer)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void thread_enter(void *context)
 {
 	allow_signal(SIGTERM);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void flush_signals_thread(void)
@@ -219,6 +243,7 @@ static inline void flush_signals_thread(void)
 		flush_signals(current);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline u32 _RND8(u32 sz)
 {
@@ -240,6 +265,8 @@ static inline u32 _RND512(u32 sz)
 	return ((sz >> 9) + ((sz & 511) ? 1 : 0)) << 9;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

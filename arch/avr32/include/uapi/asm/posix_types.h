@@ -6,8 +6,13 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_AVR32_POSIX_TYPES_H
 #define __ASM_AVR32_POSIX_TYPES_H
+=======
+#ifndef _UAPI__ASM_AVR32_POSIX_TYPES_H
+#define _UAPI__ASM_AVR32_POSIX_TYPES_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI__ASM_AVR32_POSIX_TYPES_H
 #define _UAPI__ASM_AVR32_POSIX_TYPES_H
@@ -40,7 +45,11 @@ typedef unsigned short  __kernel_old_dev_t;
 #include <asm-generic/posix_types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_AVR32_POSIX_TYPES_H */
+=======
+#endif /* _UAPI__ASM_AVR32_POSIX_TYPES_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI__ASM_AVR32_POSIX_TYPES_H */
 >>>>>>> v3.18

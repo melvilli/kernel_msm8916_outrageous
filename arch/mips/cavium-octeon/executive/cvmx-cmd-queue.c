@@ -48,6 +48,10 @@
  */
 __cvmx_cmd_queue_all_state_t *__cvmx_cmd_queue_state_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(__cvmx_cmd_queue_state_ptr);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(__cvmx_cmd_queue_state_ptr);
 >>>>>>> v3.18

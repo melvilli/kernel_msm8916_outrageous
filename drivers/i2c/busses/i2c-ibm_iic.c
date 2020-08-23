@@ -37,7 +37,10 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -45,8 +48,14 @@
 #include <linux/io.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_platform.h>
 #include <linux/of_i2c.h>
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+#include <linux/of_platform.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -715,7 +724,11 @@ static int iic_probe(struct platform_device *ofdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, dev);
+=======
+	platform_set_drvdata(ofdev, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, dev);
 >>>>>>> v3.18
@@ -773,9 +786,12 @@ static int iic_probe(struct platform_device *ofdev)
 		 dev->fast_mode ? "fast (400 kHz)" : "standard (100 kHz)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Now register all the child nodes */
 	of_i2c_register_devices(adap);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -799,7 +815,11 @@ error_cleanup:
 static int iic_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ibm_iic_private *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct ibm_iic_private *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct ibm_iic_private *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18

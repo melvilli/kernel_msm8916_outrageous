@@ -146,7 +146,11 @@ struct mtdswap_oobdata {
 	__le16 magic;
 	__le32 count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -1292,7 +1296,11 @@ static int mtdswap_show(struct seq_file *s, void *data)
 	seq_printf(s, "total erasures: %lu\n", sum);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(s, "\n");
+=======
+	seq_puts(s, "\n");
+>>>>>>> v3.18
 =======
 	seq_puts(s, "\n");
 >>>>>>> v3.18
@@ -1305,7 +1313,11 @@ static int mtdswap_show(struct seq_file *s, void *data)
 	seq_printf(s, "discarded pages count: %llu\n", d->discard_page_count);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(s, "\n");
+=======
+	seq_puts(s, "\n");
+>>>>>>> v3.18
 =======
 	seq_puts(s, "\n");
 >>>>>>> v3.18
@@ -1438,7 +1450,11 @@ static void mtdswap_add_mtd(struct mtd_blktrans_ops *tr, struct mtd_info *mtd)
 
 	while ((this_opt = strsep(&parts, ",")) != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strict_strtoul(this_opt, 0, &part) < 0)
+=======
+		if (kstrtoul(this_opt, 0, &part) < 0)
+>>>>>>> v3.18
 =======
 		if (kstrtoul(this_opt, 0, &part) < 0)
 >>>>>>> v3.18
@@ -1491,7 +1507,11 @@ static void mtdswap_add_mtd(struct mtd_blktrans_ops *tr, struct mtd_info *mtd)
 
 	eblocks = mtd_div_by_eb(use_size, mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	use_size = eblocks * mtd->erasesize;
+=======
+	use_size = (uint64_t)eblocks * mtd->erasesize;
+>>>>>>> v3.18
 =======
 	use_size = (uint64_t)eblocks * mtd->erasesize;
 >>>>>>> v3.18

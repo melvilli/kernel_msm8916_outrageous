@@ -27,9 +27,13 @@ int nf_register_sockopt(struct nf_sockopt_ops *reg)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mutex_lock_interruptible(&nf_sockopt_mutex) != 0)
 		return -EINTR;
 
+=======
+	mutex_lock(&nf_sockopt_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&nf_sockopt_mutex);
 >>>>>>> v3.18
@@ -70,9 +74,13 @@ static struct nf_sockopt_ops *nf_sockopt_find(struct sock *sk, u_int8_t pf,
 	struct nf_sockopt_ops *ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mutex_lock_interruptible(&nf_sockopt_mutex) != 0)
 		return ERR_PTR(-EINTR);
 
+=======
+	mutex_lock(&nf_sockopt_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&nf_sockopt_mutex);
 >>>>>>> v3.18

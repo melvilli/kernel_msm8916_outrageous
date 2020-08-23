@@ -11,14 +11,20 @@
 #define __QUOTA_DOT_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct gfs2_inode;
 struct gfs2_sbd;
 struct shrink_control;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/list_lru.h>
 
 struct gfs2_inode;
 struct gfs2_sbd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define NO_UID_QUOTA_CHANGE INVALID_UID
@@ -61,14 +67,20 @@ static inline int gfs2_quota_lock_check(struct gfs2_inode *ip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int gfs2_shrink_qd_memory(struct shrinker *shrink,
 				 struct shrink_control *sc);
 extern const struct quotactl_ops gfs2_quotactl_ops;
 =======
+=======
+>>>>>>> v3.18
 extern const struct quotactl_ops gfs2_quotactl_ops;
 extern struct shrinker gfs2_qd_shrinker;
 extern struct list_lru gfs2_qd_lru;
 extern void __init gfs2_quota_hash_init(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __QUOTA_DOT_H__ */

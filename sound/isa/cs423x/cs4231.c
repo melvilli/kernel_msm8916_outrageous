@@ -96,7 +96,11 @@ static int snd_cs4231_probe(struct device *dev, unsigned int n)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = snd_card_create(index[n], id[n], THIS_MODULE, 0, &card);
+=======
+	error = snd_card_new(dev, index[n], id[n], THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 =======
 	error = snd_card_new(dev, index[n], id[n], THIS_MODULE, 0, &card);
 >>>>>>> v3.18
@@ -140,8 +144,11 @@ static int snd_cs4231_probe(struct device *dev, unsigned int n)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	error = snd_card_register(card);
@@ -159,7 +166,10 @@ static int snd_cs4231_remove(struct device *dev, unsigned int n)
 {
 	snd_card_free(dev_get_drvdata(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

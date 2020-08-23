@@ -14,10 +14,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -35,6 +38,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -146,7 +153,11 @@ static struct comedi_driver adl_pci8164_driver = {
 	.module		= THIS_MODULE,
 	.auto_attach	= adl_pci8164_auto_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= comedi_pci_disable,
+=======
+	.detach		= comedi_pci_detach,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_pci_detach,
 >>>>>>> v3.18
@@ -160,7 +171,11 @@ static int adl_pci8164_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(adl_pci8164_pci_table) = {
+=======
+static const struct pci_device_id adl_pci8164_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id adl_pci8164_pci_table[] = {
 >>>>>>> v3.18

@@ -8,7 +8,10 @@
 #include <linux/types.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -637,7 +640,11 @@ static int n2rng_probe(struct platform_device *op)
 
 	n2rng_driver_version();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np = kzalloc(sizeof(*np), GFP_KERNEL);
+=======
+	np = devm_kzalloc(&op->dev, sizeof(*np), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	np = devm_kzalloc(&op->dev, sizeof(*np), GFP_KERNEL);
 >>>>>>> v3.18
@@ -662,7 +669,11 @@ static int n2rng_probe(struct platform_device *op)
 			dev_err(&op->dev, "Cannot register suitable "
 				"HVAPI version.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out_free;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -689,8 +700,14 @@ static int n2rng_probe(struct platform_device *op)
 		 np->hvapi_major, np->hvapi_minor);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np->units = kzalloc(sizeof(struct n2rng_unit) * np->num_units,
 			    GFP_KERNEL);
+=======
+	np->units = devm_kzalloc(&op->dev,
+				 sizeof(struct n2rng_unit) * np->num_units,
+				 GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	np->units = devm_kzalloc(&op->dev,
 				 sizeof(struct n2rng_unit) * np->num_units,
@@ -703,7 +720,11 @@ static int n2rng_probe(struct platform_device *op)
 	err = n2rng_init_control(np);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free_units;
+=======
+		goto out_hvapi_unregister;
+>>>>>>> v3.18
 =======
 		goto out_hvapi_unregister;
 >>>>>>> v3.18
@@ -720,9 +741,15 @@ static int n2rng_probe(struct platform_device *op)
 	err = hwrng_register(&np->hwrng);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free_units;
 
 	dev_set_drvdata(&op->dev, np);
+=======
+		goto out_hvapi_unregister;
+
+	platform_set_drvdata(op, np);
+>>>>>>> v3.18
 =======
 		goto out_hvapi_unregister;
 
@@ -733,6 +760,7 @@ static int n2rng_probe(struct platform_device *op)
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 out_free_units:
 	kfree(np->units);
@@ -748,6 +776,11 @@ out_hvapi_unregister:
 	sun4v_hvapi_unregister(HV_GRP_RNG);
 
 >>>>>>> v3.18
+=======
+out_hvapi_unregister:
+	sun4v_hvapi_unregister(HV_GRP_RNG);
+
+>>>>>>> v3.18
 out:
 	return err;
 }
@@ -755,7 +788,11 @@ out:
 static int n2rng_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct n2rng *np = dev_get_drvdata(&op->dev);
+=======
+	struct n2rng *np = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct n2rng *np = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -769,6 +806,7 @@ static int n2rng_remove(struct platform_device *op)
 	sun4v_hvapi_unregister(HV_GRP_RNG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(np->units);
 	np->units = NULL;
 
@@ -776,6 +814,8 @@ static int n2rng_remove(struct platform_device *op)
 
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

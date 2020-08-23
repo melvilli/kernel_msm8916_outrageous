@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 PROG= acpidump
 SRCS=	acpidump.c
 KERNEL_INCLUDE := ../../../include
@@ -18,6 +19,8 @@ install :
 	install acpidump.8 /usr/share/man/man8
 
 =======
+=======
+>>>>>>> v3.18
 # tools/power/acpi/Makefile - ACPI tool Makefile
 #
 # Copyright (c) 2013, Intel Corporation
@@ -179,4 +182,7 @@ uninstall:
 	- rm -f $(DESTDIR)${mandir}/man8/acpidump.8
 
 .PHONY: all utils install-tools install-man install uninstall clean
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

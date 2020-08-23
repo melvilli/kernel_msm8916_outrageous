@@ -28,7 +28,11 @@ def trace_end():
 def irq__softirq_entry(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vec):
+=======
+	common_callchain, vec):
+>>>>>>> v3.18
 =======
 	common_callchain, vec):
 >>>>>>> v3.18
@@ -43,7 +47,11 @@ def irq__softirq_entry(event_name, context, common_cpu,
 def kmem__kmalloc(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call_site, ptr, bytes_req, bytes_alloc,
+=======
+	common_callchain, call_site, ptr, bytes_req, bytes_alloc,
+>>>>>>> v3.18
 =======
 	common_callchain, call_site, ptr, bytes_req, bytes_alloc,
 >>>>>>> v3.18

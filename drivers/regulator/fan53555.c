@@ -16,13 +16,17 @@
 #include <linux/param.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gpio.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/regulator/driver.h>
 #include <linux/regulator/machine.h>
 #include <linux/regulator/of_regulator.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/of.h>
 #include <linux/of_gpio.h>
@@ -32,10 +36,15 @@
 #include <linux/debugfs.h>
 #include <linux/delay.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_device.h>
 #include <linux/i2c.h>
 #include <linux/slab.h>
 #include <linux/regmap.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/regulator/fan53555.h>
 
@@ -56,6 +65,7 @@
 #define VSEL_MODE		(1 << 6)
 #define VSEL_NSEL_MASK	0x3F
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VSEL_FULL_MASK	0xFF
 /* Chip ID and Verison */
 #define DIE_ID		0x0F	/* ID1 */
@@ -63,6 +73,11 @@
 #define DIE_13_REV	0x0F	/* DIE Revsion ID of 13 option */
 #define DIE_23_REV	0x0C	/* DIE Revision ID of 23 option */
 
+=======
+/* Chip ID and Verison */
+#define DIE_ID		0x0F	/* ID1 */
+#define DIE_REV		0x0F	/* ID2 */
+>>>>>>> v3.18
 =======
 /* Chip ID and Verison */
 #define DIE_ID		0x0F	/* ID1 */
@@ -77,6 +92,7 @@
 #define FAN53555_NVOLTAGES	64	/* Numbers of voltages */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Chip vendor */
 enum {
 	FAN53555 = 0,
@@ -90,12 +106,17 @@ static int vendor_id[] = {
 
 /* FAN53555 chip ID */
 =======
+=======
+>>>>>>> v3.18
 enum fan53555_vendor {
 	FAN53555_VENDOR_FAIRCHILD = 0,
 	FAN53555_VENDOR_SILERGY,
 };
 
 /* IC Type */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	FAN53555_CHIP_ID_00 = 0,
@@ -106,6 +127,7 @@ enum {
 	FAN53555_CHIP_ID_05,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const int slew_rate_plan[] = {
 	64000,
@@ -120,12 +142,17 @@ static const int slew_rate_plan[] = {
 
 struct fan53555_device_info {
 =======
+=======
+>>>>>>> v3.18
 enum {
 	SILERGY_SYR82X = 8,
 };
 
 struct fan53555_device_info {
 	enum fan53555_vendor vendor;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct regmap *regmap;
 	struct device *dev;
@@ -133,8 +160,12 @@ struct fan53555_device_info {
 	struct regulator_dev *rdev;
 	struct regulator_init_data *regulator;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* IC Vendor, Type and Rev */
 	int chip_vendor;
+=======
+	/* IC Type and Rev */
+>>>>>>> v3.18
 =======
 	/* IC Type and Rev */
 >>>>>>> v3.18
@@ -150,6 +181,7 @@ struct fan53555_device_info {
 	unsigned int slew_rate;
 	/* Sleep voltage cache */
 	unsigned int sleep_vol_cache;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int peek_poke_address;
 
@@ -218,6 +250,10 @@ static int fan53555_update_bits(struct fan53555_device_info *di,
 };
 
 >>>>>>> v3.18
+=======
+};
+
+>>>>>>> v3.18
 static int fan53555_set_suspend_voltage(struct regulator_dev *rdev, int uV)
 {
 	struct fan53555_device_info *di = rdev_get_drvdata(rdev);
@@ -228,17 +264,23 @@ static int fan53555_set_suspend_voltage(struct regulator_dev *rdev, int uV)
 	ret = regulator_map_voltage_linear(rdev, uV, uV);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
 	ret = fan53555_update_bits(di, di->sleep_reg,
 					VSEL_NSEL_MASK, ret);
 	if (ret < 0)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	ret = regmap_update_bits(di->regmap, di->sleep_reg,
 					VSEL_NSEL_MASK, ret);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Cache the sleep voltage setting.
 	 * Might not be the real voltage which is rounded */
@@ -254,17 +296,23 @@ static int fan53555_set_mode(struct regulator_dev *rdev, unsigned int mode)
 	switch (mode) {
 	case REGULATOR_MODE_FAST:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fan53555_update_bits(di, di->vol_reg,
 				VSEL_MODE, VSEL_MODE);
 		break;
 	case REGULATOR_MODE_NORMAL:
 		fan53555_update_bits(di, di->vol_reg, VSEL_MODE, 0);
 =======
+=======
+>>>>>>> v3.18
 		regmap_update_bits(di->regmap, di->vol_reg,
 				VSEL_MODE, VSEL_MODE);
 		break;
 	case REGULATOR_MODE_NORMAL:
 		regmap_update_bits(di->regmap, di->vol_reg, VSEL_MODE, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -280,7 +328,11 @@ static unsigned int fan53555_get_mode(struct regulator_dev *rdev)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = fan53555_read(di, di->vol_reg, &val);
+=======
+	ret = regmap_read(di->regmap, di->vol_reg, &val);
+>>>>>>> v3.18
 =======
 	ret = regmap_read(di->regmap, di->vol_reg, &val);
 >>>>>>> v3.18
@@ -292,6 +344,7 @@ static unsigned int fan53555_get_mode(struct regulator_dev *rdev)
 		return REGULATOR_MODE_NORMAL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct regulator_ops fan53555_regulator_ops = {
 	.set_voltage_time_sel = regulator_set_voltage_time_sel,
@@ -310,6 +363,8 @@ static struct regulator_ops fan53555_regulator_ops = {
 static struct regulator_ops fan53555_regulator_disable_suspend_ops = {
 	.set_voltage_time_sel = regulator_set_voltage_time_sel,
 =======
+=======
+>>>>>>> v3.18
 static int slew_rates[] = {
 	64000,
 	32000,
@@ -343,12 +398,19 @@ static int fan53555_set_ramp(struct regulator_dev *rdev, int ramp)
 }
 
 static struct regulator_ops fan53555_regulator_ops = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.set_voltage_sel = regulator_set_voltage_sel_regmap,
 	.get_voltage_sel = regulator_get_voltage_sel_regmap,
 	.map_voltage = regulator_map_voltage_linear,
 	.list_voltage = regulator_list_voltage_linear,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_suspend_voltage = fan53555_set_suspend_voltage,
+>>>>>>> v3.18
 =======
 	.set_suspend_voltage = fan53555_set_suspend_voltage,
 >>>>>>> v3.18
@@ -357,6 +419,7 @@ static struct regulator_ops fan53555_regulator_ops = {
 	.is_enabled = regulator_is_enabled_regmap,
 	.set_mode = fan53555_set_mode,
 	.get_mode = fan53555_get_mode,
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -383,6 +446,8 @@ static u32 fan53555_get_slew_rate_reg_value(struct fan53555_device_info *di,
 
 	return index;
 =======
+=======
+>>>>>>> v3.18
 	.set_ramp_delay = fan53555_set_ramp,
 };
 
@@ -425,6 +490,9 @@ static int fan53555_voltages_setup_silergy(struct fan53555_device_info *di)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -432,6 +500,7 @@ static int fan53555_voltages_setup_silergy(struct fan53555_device_info *di)
  * VOUT = 0.60V + NSELx * 10mV, from 0.60 to 1.23V.
  * For 04 option:
  * VOUT = 0.603V + NSELx * 12.826mV, from 0.603 to 1.411V.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * For 13 option:
  * 13 option, its DIE ID is 0x00 and DIE_REV is 0x0F.
@@ -441,12 +510,18 @@ static int fan53555_voltages_setup_silergy(struct fan53555_device_info *di)
  * VOUT = 0.60V + NSELx * 12.5mV, from 0.60 to 1.3875V.
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * */
 static int fan53555_device_setup(struct fan53555_device_info *di,
 				struct fan53555_platform_data *pdata)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int reg, data, mask;
+=======
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 >>>>>>> v3.18
@@ -465,6 +540,7 @@ static int fan53555_device_setup(struct fan53555_device_info *di,
 		dev_err(di->dev, "Invalid VSEL ID!\n");
 		return -EINVAL;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Init voltage range and step */
 	switch (di->chip_id) {
@@ -507,6 +583,8 @@ static int fan53555_device_setup(struct fan53555_device_info *di,
 	mask = CTL_SLEW_MASK;
 	return fan53555_update_bits(di, reg, mask, data);
 =======
+=======
+>>>>>>> v3.18
 
 	switch (di->vendor) {
 	case FAN53555_VENDOR_FAIRCHILD:
@@ -521,6 +599,9 @@ static int fan53555_device_setup(struct fan53555_device_info *di,
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -530,10 +611,16 @@ static int fan53555_regulator_register(struct fan53555_device_info *di,
 	struct regulator_desc *rdesc = &di->desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (di->disable_suspend)
 		rdesc->ops = &fan53555_regulator_disable_suspend_ops;
 	else
 		rdesc->ops = &fan53555_regulator_ops;
+=======
+	rdesc->name = "fan53555-reg";
+	rdesc->supply_name = "vin";
+	rdesc->ops = &fan53555_regulator_ops;
+>>>>>>> v3.18
 =======
 	rdesc->name = "fan53555-reg";
 	rdesc->supply_name = "vin";
@@ -550,9 +637,14 @@ static int fan53555_regulator_register(struct fan53555_device_info *di,
 	rdesc->owner = THIS_MODULE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	di->rdev = regulator_register(&di->desc, config);
 	return PTR_RET(di->rdev);
 
+=======
+	di->rdev = devm_regulator_register(di->dev, &di->desc, config);
+	return PTR_ERR_OR_ZERO(di->rdev);
+>>>>>>> v3.18
 =======
 	di->rdev = devm_regulator_register(di->dev, &di->desc, config);
 	return PTR_ERR_OR_ZERO(di->rdev);
@@ -564,6 +656,7 @@ static struct regmap_config fan53555_regmap_config = {
 	.val_bits = 8,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int fan53555_parse_backup_reg(struct i2c_client *client, u32 *sleep_sel)
 {
@@ -749,6 +842,8 @@ static struct of_device_id fan53555_match_table[] = {
 };
 MODULE_DEVICE_TABLE(of, fan53555_match_table);
 =======
+=======
+>>>>>>> v3.18
 static struct fan53555_platform_data *fan53555_parse_dt(struct device *dev,
 							struct device_node *np)
 {
@@ -784,11 +879,15 @@ static const struct of_device_id fan53555_dt_ids[] = {
 	{ }
 };
 MODULE_DEVICE_TABLE(of, fan53555_dt_ids);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int fan53555_regulator_probe(struct i2c_client *client,
 				const struct i2c_device_id *id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct fan53555_device_info *di;
 	struct fan53555_platform_data *pdata;
@@ -802,6 +901,8 @@ static int fan53555_regulator_probe(struct i2c_client *client,
 	else
 		pdata = client->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *np = client->dev.of_node;
 	struct fan53555_device_info *di;
 	struct fan53555_platform_data *pdata;
@@ -812,6 +913,9 @@ static int fan53555_regulator_probe(struct i2c_client *client,
 	pdata = dev_get_platdata(&client->dev);
 	if (!pdata)
 		pdata = fan53555_parse_dt(&client->dev, np);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!pdata || !pdata->regulator) {
@@ -822,11 +926,14 @@ static int fan53555_regulator_probe(struct i2c_client *client,
 	di = devm_kzalloc(&client->dev, sizeof(struct fan53555_device_info),
 					GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!di) {
 		dev_err(&client->dev, "Failed to allocate device info data!\n");
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!di)
 		return -ENOMEM;
 
@@ -853,6 +960,9 @@ static int fan53555_regulator_probe(struct i2c_client *client,
 		di->vendor = id->driver_data;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	di->regmap = devm_regmap_init_i2c(client, &fan53555_regmap_config);
 	if (IS_ERR(di->regmap)) {
@@ -860,6 +970,7 @@ static int fan53555_regulator_probe(struct i2c_client *client,
 		return PTR_ERR(di->regmap);
 	}
 	di->dev = &client->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	di->regulator = pdata->regulator;
 	i2c_set_clientdata(client, di);
@@ -886,6 +997,8 @@ static int fan53555_regulator_probe(struct i2c_client *client,
 	dev_info(&client->dev, "%s Option[%d] Rev[%d] Detected!\n",
 				match->name, di->chip_id, di->chip_rev);
 =======
+=======
+>>>>>>> v3.18
 	i2c_set_clientdata(client, di);
 	/* Get chip ID */
 	ret = regmap_read(di->regmap, FAN53555_ID1, &val);
@@ -903,6 +1016,9 @@ static int fan53555_regulator_probe(struct i2c_client *client,
 	di->chip_rev = val & DIE_REV;
 	dev_info(&client->dev, "FAN53555 Option[%d] Rev[%d] Detected!\n",
 				di->chip_id, di->chip_rev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Device init */
 	ret = fan53555_device_setup(di, pdata);
@@ -910,6 +1026,7 @@ static int fan53555_regulator_probe(struct i2c_client *client,
 		dev_err(&client->dev, "Failed to setup device!\n");
 		return ret;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* Set up from device tree */
@@ -920,11 +1037,14 @@ static int fan53555_regulator_probe(struct i2c_client *client,
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Register regulator */
 	config.dev = di->dev;
 	config.init_data = di->regulator;
 	config.regmap = di->regmap;
 	config.driver_data = di;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	config.of_node = client->dev.of_node;
 
@@ -956,16 +1076,22 @@ static int fan53555_regulator_probe(struct i2c_client *client,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	config.of_node = np;
 
 	ret = fan53555_regulator_register(di, &config);
 	if (ret < 0)
 		dev_err(&client->dev, "Failed to register regulator!\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int fan53555_regulator_remove(struct i2c_client *client)
 {
@@ -981,6 +1107,8 @@ static int fan53555_regulator_remove(struct i2c_client *client)
 static const struct i2c_device_id fan53555_id[] = {
 	{"fan53555", -1},
 =======
+=======
+>>>>>>> v3.18
 static const struct i2c_device_id fan53555_id[] = {
 	{
 		.name = "fan53555",
@@ -989,6 +1117,9 @@ static const struct i2c_device_id fan53555_id[] = {
 		.name = "syr82x",
 		.driver_data = FAN53555_VENDOR_SILERGY
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ },
 };
@@ -996,6 +1127,7 @@ static const struct i2c_device_id fan53555_id[] = {
 static struct i2c_driver fan53555_regulator_driver = {
 	.driver = {
 		.name = "fan53555-regulator",
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.owner = THIS_MODULE,
 		.of_match_table = fan53555_match_table,
@@ -1031,6 +1163,8 @@ static void __exit fan53555_regulator_exit(void)
 }
 module_exit(fan53555_regulator_exit);
 =======
+=======
+>>>>>>> v3.18
 		.of_match_table = of_match_ptr(fan53555_dt_ids),
 	},
 	.probe = fan53555_regulator_probe,
@@ -1038,6 +1172,9 @@ module_exit(fan53555_regulator_exit);
 };
 
 module_i2c_driver(fan53555_regulator_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_AUTHOR("Yunfan Zhang <yfzhang@marvell.com>");

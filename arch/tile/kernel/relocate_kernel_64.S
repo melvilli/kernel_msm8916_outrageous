@@ -35,6 +35,10 @@ STD_ENTRY(relocate_new_kernel)
 	/* we now have a stack (whether we need one or not) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef RELOCATE_NEW_KERNEL_VERBOSE
+>>>>>>> v3.18
 =======
 #ifdef RELOCATE_NEW_KERNEL_VERBOSE
 >>>>>>> v3.18
@@ -43,7 +47,10 @@ STD_ENTRY(relocate_new_kernel)
 	shl16insli r40, r40, hw0(hv_console_putc)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef RELOCATE_NEW_KERNEL_VERBOSE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	moveli	r0, 'r'
@@ -86,7 +93,10 @@ STD_ENTRY(relocate_new_kernel)
 	addi	sp, sp, -16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_CBOX_HOME_MAP()
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -127,7 +137,10 @@ STD_ENTRY(relocate_new_kernel)
 
 	jalr	r20
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -190,6 +203,10 @@ STD_ENTRY(relocate_new_kernel)
 	/* we should not get here */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef RELOCATE_NEW_KERNEL_VERBOSE
+>>>>>>> v3.18
 =======
 #ifdef RELOCATE_NEW_KERNEL_VERBOSE
 >>>>>>> v3.18
@@ -198,6 +215,10 @@ STD_ENTRY(relocate_new_kernel)
 	moveli	r0, '\n'
 	jalr	r40
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -259,7 +280,13 @@ STD_ENTRY(relocate_new_kernel)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lerr:	moveli	r0, 'e'
+=======
+.Lerr:
+#ifdef RELOCATE_NEW_KERNEL_VERBOSE
+	moveli	r0, 'e'
+>>>>>>> v3.18
 =======
 .Lerr:
 #ifdef RELOCATE_NEW_KERNEL_VERBOSE
@@ -273,6 +300,10 @@ STD_ENTRY(relocate_new_kernel)
 	moveli	r0, '\n'
 	jalr	r40
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

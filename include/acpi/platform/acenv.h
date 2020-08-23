@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -81,7 +85,10 @@
 #define ACPI_DATA_TABLE_DISASSEMBLY
 #define ACPI_SINGLE_THREADED
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_32BIT_PHYSICAL_ADDRESS
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -95,6 +102,7 @@
 #define ACPI_DBG_TRACK_ALLOCATIONS
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* acpi_names configuration. Single threaded with debugger output enabled. */
 
@@ -112,6 +120,8 @@
 	(defined ACPI_SRC_APP)   || \
 	(defined ACPI_XTRACT_APP)
 =======
+=======
+>>>>>>> v3.18
 /*
  * acpi_bin/acpi_dump/acpi_help/acpi_names/acpi_src/acpi_xtract/Example configuration.
  * All single threaded.
@@ -123,11 +133,15 @@
 	(defined ACPI_SRC_APP)      || \
 	(defined ACPI_XTRACT_APP)   || \
 	(defined ACPI_EXAMPLE_APP)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ACPI_APPLICATION
 #define ACPI_SINGLE_THREADED
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef ACPI_HELP_APP
 #define ACPI_APPLICATION
@@ -136,6 +150,8 @@
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 /* acpi_help configuration. Error messages disabled. */
 
 #ifdef ACPI_HELP_APP
@@ -170,6 +186,9 @@
 #define ACPI_REDUCED_HARDWARE 1
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Linkable ACPICA library */
 
@@ -207,6 +226,12 @@
 #include <acpi/platform/aclinux.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#elif defined(_APPLE) || defined(__APPLE__)
+#include "acmacosx.h"
+
+>>>>>>> v3.18
 =======
 #elif defined(_APPLE) || defined(__APPLE__)
 #include "acmacosx.h"
@@ -246,6 +271,12 @@
 #include "acefi.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#elif defined(_GNU_EFI)
+#include "acefi.h"
+
+>>>>>>> v3.18
 =======
 #elif defined(_GNU_EFI)
 #include "acefi.h"
@@ -462,7 +493,10 @@ typedef char *va_list;
 #endif				/* ACPI_USE_SYSTEM_CLIBRARY */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef ACPI_FILE
 #ifdef ACPI_APPLICATION
 #include <stdio.h>
@@ -476,5 +510,8 @@ typedef char *va_list;
 #endif				/* ACPI_APPLICATION */
 #endif				/* ACPI_FILE */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* __ACENV_H__ */

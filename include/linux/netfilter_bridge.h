@@ -16,7 +16,11 @@ enum nf_br_hook_priorities {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 >>>>>>> v3.18
@@ -29,6 +33,7 @@ enum nf_br_hook_priorities {
 #define BRNF_PPPoE			0x20
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Only used in br_forward.c */
 extern int nf_bridge_copy_header(struct sk_buff *skb);
 static inline int nf_bridge_maybe_copy_header(struct sk_buff *skb)
@@ -39,6 +44,8 @@ static inline int nf_bridge_maybe_copy_header(struct sk_buff *skb)
   	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline unsigned int nf_bridge_encap_header_len(const struct sk_buff *skb)
@@ -54,7 +61,10 @@ static inline unsigned int nf_bridge_encap_header_len(const struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void nf_bridge_update_protocol(struct sk_buff *skb)
 {
 	if (skb->nf_bridge->mask & BRNF_8021Q)
@@ -93,6 +103,9 @@ static inline int nf_bridge_maybe_copy_header(struct sk_buff *skb)
   	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned int nf_bridge_mtu_reduction(const struct sk_buff *skb)
 {
@@ -102,7 +115,11 @@ static inline unsigned int nf_bridge_mtu_reduction(const struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int br_handle_frame_finish(struct sk_buff *skb);
+=======
+int br_handle_frame_finish(struct sk_buff *skb);
+>>>>>>> v3.18
 =======
 int br_handle_frame_finish(struct sk_buff *skb);
 >>>>>>> v3.18

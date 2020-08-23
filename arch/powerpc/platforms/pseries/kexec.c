@@ -18,9 +18,15 @@
 #include <asm/xics.h>
 #include <asm/smp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "pseries.h"
 #include "plpar_wrappers.h"
+=======
+#include <asm/plpar_wrappers.h>
+
+#include "pseries.h"
+>>>>>>> v3.18
 =======
 #include <asm/plpar_wrappers.h>
 

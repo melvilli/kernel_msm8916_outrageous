@@ -117,6 +117,10 @@ struct xc4000_priv {
 
 #define XC4000_DEFAULT_FIRMWARE "dvb-fe-xc4000-1.4.fw"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define XC4000_DEFAULT_FIRMWARE_NEW "dvb-fe-xc4000-1.4.1.fw"
+>>>>>>> v3.18
 =======
 #define XC4000_DEFAULT_FIRMWARE_NEW "dvb-fe-xc4000-1.4.1.fw"
 >>>>>>> v3.18
@@ -573,6 +577,7 @@ static int xc4000_readreg(struct xc4000_priv *priv, u16 reg, u16 *val)
 static void dump_firm_type_and_int_freq(unsigned int type, u16 int_freq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 if (type & BASE)
 		printk(KERN_CONT "BASE ");
 	 if (type & INIT1)
@@ -635,6 +640,8 @@ static void dump_firm_type_and_int_freq(unsigned int type, u16 int_freq)
 		printk(KERN_CONT "SCODE ");
 	 if (type & HAS_IF)
 =======
+=======
+>>>>>>> v3.18
 	if (type & BASE)
 		printk(KERN_CONT "BASE ");
 	if (type & INIT1)
@@ -696,6 +703,9 @@ static void dump_firm_type_and_int_freq(unsigned int type, u16 int_freq)
 	if (type & SCODE)
 		printk(KERN_CONT "SCODE ");
 	if (type & HAS_IF)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printk(KERN_CONT "HAS_IF_%d ", int_freq);
 }
@@ -799,6 +809,7 @@ static int xc4000_fwupload(struct dvb_frontend *fe)
 	const char	      *fname;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (firmware_name[0] != '\0')
 		fname = firmware_name;
 	else
@@ -807,6 +818,8 @@ static int xc4000_fwupload(struct dvb_frontend *fe)
 	dprintk(1, "Reading firmware %s\n", fname);
 	rc = request_firmware(&fw, fname, priv->i2c_props.adap->dev.parent);
 =======
+=======
+>>>>>>> v3.18
 	if (firmware_name[0] != '\0') {
 		fname = firmware_name;
 
@@ -826,6 +839,9 @@ static int xc4000_fwupload(struct dvb_frontend *fe)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc < 0) {
 		if (rc == -ENOENT)
@@ -837,6 +853,11 @@ static int xc4000_fwupload(struct dvb_frontend *fe)
 		return rc;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dprintk(1, "Loading Firmware: %s\n", fname);
+
+>>>>>>> v3.18
 =======
 	dprintk(1, "Loading Firmware: %s\n", fname);
 
@@ -1766,7 +1787,10 @@ struct dvb_frontend *xc4000_attach(struct dvb_frontend *fe,
 	case 0:
 		goto fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case 1:
@@ -1856,6 +1880,11 @@ MODULE_AUTHOR("Steven Toth, Davide Ferri");
 MODULE_DESCRIPTION("Xceive xc4000 silicon tuner driver");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_FIRMWARE(XC4000_DEFAULT_FIRMWARE_NEW);
+MODULE_FIRMWARE(XC4000_DEFAULT_FIRMWARE);
+>>>>>>> v3.18
 =======
 MODULE_FIRMWARE(XC4000_DEFAULT_FIRMWARE_NEW);
 MODULE_FIRMWARE(XC4000_DEFAULT_FIRMWARE);

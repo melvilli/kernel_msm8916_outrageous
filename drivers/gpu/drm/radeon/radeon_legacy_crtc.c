@@ -332,8 +332,11 @@ static void radeon_crtc_dpms(struct drm_crtc *crtc, int mode)
 		}
 		drm_vblank_post_modeset(dev, radeon_crtc->crtc_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Make sure vblank interrupt is still enabled if needed */
 		radeon_irq_set(rdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		radeon_crtc_load_lut(crtc);
@@ -391,7 +394,11 @@ int radeon_crtc_do_set_base(struct drm_crtc *crtc,
 	DRM_DEBUG_KMS("\n");
 	/* no fb bound */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!atomic && !crtc->fb) {
+=======
+	if (!atomic && !crtc->primary->fb) {
+>>>>>>> v3.18
 =======
 	if (!atomic && !crtc->primary->fb) {
 >>>>>>> v3.18
@@ -405,8 +412,13 @@ int radeon_crtc_do_set_base(struct drm_crtc *crtc,
 	}
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		radeon_fb = to_radeon_framebuffer(crtc->fb);
 		target_fb = crtc->fb;
+=======
+		radeon_fb = to_radeon_framebuffer(crtc->primary->fb);
+		target_fb = crtc->primary->fb;
+>>>>>>> v3.18
 =======
 		radeon_fb = to_radeon_framebuffer(crtc->primary->fb);
 		target_fb = crtc->primary->fb;
@@ -459,7 +471,11 @@ retry:
 		 * will end up in same spot.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!atomic && fb && fb != crtc->fb) {
+=======
+		if (!atomic && fb && fb != crtc->primary->fb) {
+>>>>>>> v3.18
 =======
 		if (!atomic && fb && fb != crtc->primary->fb) {
 >>>>>>> v3.18
@@ -574,7 +590,11 @@ retry:
 	WREG32(RADEON_CRTC_PITCH + radeon_crtc->crtc_offset, crtc_pitch);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!atomic && fb && fb != crtc->fb) {
+=======
+	if (!atomic && fb && fb != crtc->primary->fb) {
+>>>>>>> v3.18
 =======
 	if (!atomic && fb && fb != crtc->primary->fb) {
 >>>>>>> v3.18
@@ -622,7 +642,11 @@ static bool radeon_set_crtc_timing(struct drm_crtc *crtc, struct drm_display_mod
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (crtc->fb->bits_per_pixel) {
+=======
+	switch (crtc->primary->fb->bits_per_pixel) {
+>>>>>>> v3.18
 =======
 	switch (crtc->primary->fb->bits_per_pixel) {
 >>>>>>> v3.18
@@ -1111,7 +1135,10 @@ static void radeon_crtc_commit(struct drm_crtc *crtc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void radeon_crtc_disable(struct drm_crtc *crtc)
 {
 	radeon_crtc_dpms(crtc, DRM_MODE_DPMS_OFF);
@@ -1132,6 +1159,9 @@ static void radeon_crtc_disable(struct drm_crtc *crtc)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct drm_crtc_helper_funcs legacy_helper_funcs = {
 	.dpms = radeon_crtc_dpms,
@@ -1143,6 +1173,10 @@ static const struct drm_crtc_helper_funcs legacy_helper_funcs = {
 	.commit = radeon_crtc_commit,
 	.load_lut = radeon_crtc_load_lut,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.disable = radeon_crtc_disable
+>>>>>>> v3.18
 =======
 	.disable = radeon_crtc_disable
 >>>>>>> v3.18

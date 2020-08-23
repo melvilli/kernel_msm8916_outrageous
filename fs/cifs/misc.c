@@ -106,6 +106,10 @@ sesInfoFree(struct cifs_ses *buf_to_free)
 	kfree(buf_to_free->user_name);
 	kfree(buf_to_free->domainName);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(buf_to_free->auth_key.response);
+>>>>>>> v3.18
 =======
 	kfree(buf_to_free->auth_key.response);
 >>>>>>> v3.18
@@ -230,7 +234,10 @@ cifs_small_buf_release(void *buf_to_free)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void
 free_rsp_buf(int resp_buftype, void *rsp)
 {
@@ -240,6 +247,9 @@ free_rsp_buf(int resp_buftype, void *rsp)
 		cifs_buf_release(rsp);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* NB: MID can not be set if treeCon not passed in, in that
    case it is responsbility of caller to set the mid */
@@ -284,8 +294,12 @@ header_assemble(struct smb_hdr *buffer, char smb_command /* command */ ,
 			buffer->Flags  |= SMBFLG_CASELESS;
 		if ((treeCon->ses) && (treeCon->ses->server))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (treeCon->ses->server->sec_mode &
 			  (SECMODE_SIGN_REQUIRED | SECMODE_SIGN_ENABLED))
+=======
+			if (treeCon->ses->server->sign)
+>>>>>>> v3.18
 =======
 			if (treeCon->ses->server->sign)
 >>>>>>> v3.18
@@ -299,7 +313,11 @@ header_assemble(struct smb_hdr *buffer, char smb_command /* command */ ,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 check_smb_hdr(struct smb_hdr *smb, __u16 mid)
+=======
+check_smb_hdr(struct smb_hdr *smb)
+>>>>>>> v3.18
 =======
 check_smb_hdr(struct smb_hdr *smb)
 >>>>>>> v3.18
@@ -312,6 +330,7 @@ check_smb_hdr(struct smb_hdr *smb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Make sure that message ids match */
 	if (mid != smb->Mid) {
 		cifs_dbg(VFS, "Mids do not match. received=%u expected=%u\n",
@@ -319,6 +338,8 @@ check_smb_hdr(struct smb_hdr *smb)
 		return 1;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* if it's a response then accept */
@@ -330,7 +351,12 @@ check_smb_hdr(struct smb_hdr *smb)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cifs_dbg(VFS, "Server sent request, not response. mid=%u\n", smb->Mid);
+=======
+	cifs_dbg(VFS, "Server sent request, not response. mid=%u\n",
+		 get_mid(smb));
+>>>>>>> v3.18
 =======
 	cifs_dbg(VFS, "Server sent request, not response. mid=%u\n",
 		 get_mid(smb));
@@ -343,7 +369,10 @@ checkSMB(char *buf, unsigned int total_read)
 {
 	struct smb_hdr *smb = (struct smb_hdr *)buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16 mid = smb->Mid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__u32 rfclen = be32_to_cpu(smb->smb_buf_length);
@@ -384,7 +413,11 @@ checkSMB(char *buf, unsigned int total_read)
 
 	/* otherwise, there is enough to get to the BCC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (check_smb_hdr(smb, mid))
+=======
+	if (check_smb_hdr(smb))
+>>>>>>> v3.18
 =======
 	if (check_smb_hdr(smb))
 >>>>>>> v3.18
@@ -399,6 +432,10 @@ checkSMB(char *buf, unsigned int total_read)
 
 	if (4 + rfclen != clc_len) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__u16 mid = get_mid(smb);
+>>>>>>> v3.18
 =======
 		__u16 mid = get_mid(smb);
 >>>>>>> v3.18
@@ -410,17 +447,23 @@ checkSMB(char *buf, unsigned int total_read)
 		}
 		cifs_dbg(FYI, "Calculated size %u vs length %u mismatch for mid=%u\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 clc_len, 4 + rfclen, smb->Mid);
 
 		if (4 + rfclen < clc_len) {
 			cifs_dbg(VFS, "RFC1001 size %u smaller than SMB for mid=%u\n",
 				 rfclen, smb->Mid);
 =======
+=======
+>>>>>>> v3.18
 			 clc_len, 4 + rfclen, mid);
 
 		if (4 + rfclen < clc_len) {
 			cifs_dbg(VFS, "RFC1001 size %u smaller than SMB for mid=%u\n",
 				 rfclen, mid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EIO;
 		} else if (rfclen > clc_len + 512) {
@@ -435,7 +478,11 @@ checkSMB(char *buf, unsigned int total_read)
 			 */
 			cifs_dbg(VFS, "RFC1001 size %u more than 512 bytes larger than SMB for mid=%u\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 rfclen, smb->Mid);
+=======
+				 rfclen, mid);
+>>>>>>> v3.18
 =======
 				 rfclen, mid);
 >>>>>>> v3.18
@@ -476,7 +523,11 @@ is_valid_oplock_break(char *buffer, struct TCP_Server_Info *srv)
 		}
 		if (pSMBr->hdr.Status.CifsError) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cifs_dbg(FYI, "notify err 0x%d\n",
+=======
+			cifs_dbg(FYI, "notify err 0x%x\n",
+>>>>>>> v3.18
 =======
 			cifs_dbg(FYI, "notify err 0x%x\n",
 >>>>>>> v3.18
@@ -507,7 +558,11 @@ is_valid_oplock_break(char *buffer, struct TCP_Server_Info *srv)
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cifs_dbg(FYI, "oplock type 0x%d level 0x%d\n",
+=======
+	cifs_dbg(FYI, "oplock type 0x%x level 0x%x\n",
+>>>>>>> v3.18
 =======
 	cifs_dbg(FYI, "oplock type 0x%x level 0x%x\n",
 >>>>>>> v3.18
@@ -536,9 +591,12 @@ is_valid_oplock_break(char *buffer, struct TCP_Server_Info *srv)
 				pCifsInode = CIFS_I(netfile->dentry->d_inode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cifs_set_oplock_level(pCifsInode,
 					pSMB->OplockLevel ? OPLOCK_READ : 0);
 =======
+=======
+>>>>>>> v3.18
 				set_bit(CIFS_INODE_PENDING_OPLOCK_BREAK,
 					&pCifsInode->flags);
 
@@ -555,6 +613,9 @@ is_valid_oplock_break(char *buffer, struct TCP_Server_Info *srv)
 					   CIFS_INODE_DOWNGRADE_OPLOCK_TO_L2,
 					   &pCifsInode->flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				queue_work(cifsiod_wq,
 					   &netfile->oplock_break);
@@ -629,6 +690,7 @@ void cifs_set_oplock_level(struct cifsInodeInfo *cinode, __u32 oplock)
 
 	if (oplock == OPLOCK_EXCLUSIVE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cinode->clientCanCacheAll = true;
 		cinode->clientCanCacheRead = true;
 		cifs_dbg(FYI, "Exclusive Oplock granted on inode %p\n",
@@ -643,6 +705,8 @@ void cifs_set_oplock_level(struct cifsInodeInfo *cinode, __u32 oplock)
 		cinode->clientCanCacheRead = false;
 	}
 =======
+=======
+>>>>>>> v3.18
 		cinode->oplock = CIFS_CACHE_WRITE_FLG | CIFS_CACHE_READ_FLG;
 		cifs_dbg(FYI, "Exclusive Oplock granted on inode %p\n",
 			 &cinode->vfs_inode);
@@ -701,6 +765,9 @@ void cifs_done_oplock_break(struct cifsInodeInfo *cinode)
 {
 	clear_bit(CIFS_INODE_PENDING_OPLOCK_BREAK, &cinode->flags);
 	wake_up_bit(&cinode->flags, CIFS_INODE_PENDING_OPLOCK_BREAK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

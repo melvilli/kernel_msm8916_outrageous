@@ -68,6 +68,11 @@
 #include "dma_v2.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct kmem_cache *ioat3_sed_cache;
+
+>>>>>>> v3.18
 =======
 extern struct kmem_cache *ioat3_sed_cache;
 
@@ -95,6 +100,7 @@ static const u8 pq16_idx_to_field[] = { 1, 4, 1, 2, 3, 4, 5, 6, 7,
 static void ioat3_eh(struct ioat2_dma_chan *ioat);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static dma_addr_t xor_get_src(struct ioat_raw_descriptor *descs[2], int idx)
 {
 	struct ioat_raw_descriptor *raw = descs[xor_idx_to_desc >> idx & 1];
@@ -102,6 +108,8 @@ static dma_addr_t xor_get_src(struct ioat_raw_descriptor *descs[2], int idx)
 	return raw->field[xor_idx_to_field[idx]];
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void xor_set_src(struct ioat_raw_descriptor *descs[2],
@@ -247,7 +255,11 @@ static bool is_bwd_noraid(struct pci_dev *pdev)
 
 static void pq16_set_src(struct ioat_raw_descriptor *desc[3],
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dma_addr_t addr, u32 offset, u8 coef, int idx)
+=======
+			dma_addr_t addr, u32 offset, u8 coef, unsigned idx)
+>>>>>>> v3.18
 =======
 			dma_addr_t addr, u32 offset, u8 coef, unsigned idx)
 >>>>>>> v3.18
@@ -272,7 +284,11 @@ ioat3_alloc_sed(struct ioatdma_device *device, unsigned int hw_pool)
 	gfp_t flags = __GFP_ZERO | GFP_ATOMIC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sed = kmem_cache_alloc(device->sed_pool, flags);
+=======
+	sed = kmem_cache_alloc(ioat3_sed_cache, flags);
+>>>>>>> v3.18
 =======
 	sed = kmem_cache_alloc(ioat3_sed_cache, flags);
 >>>>>>> v3.18
@@ -284,7 +300,11 @@ ioat3_alloc_sed(struct ioatdma_device *device, unsigned int hw_pool)
 				 flags, &sed->dma);
 	if (!sed->hw) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kmem_cache_free(device->sed_pool, sed);
+=======
+		kmem_cache_free(ioat3_sed_cache, sed);
+>>>>>>> v3.18
 =======
 		kmem_cache_free(ioat3_sed_cache, sed);
 >>>>>>> v3.18
@@ -300,6 +320,7 @@ static void ioat3_free_sed(struct ioatdma_device *device, struct ioat_sed_ent *s
 		return;
 
 	dma_pool_free(device->sed_hw_pool[sed->hw_pool], sed->hw, sed->dma);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kmem_cache_free(device->sed_pool, sed);
 }
@@ -471,6 +492,9 @@ static void ioat3_dma_unmap(struct ioat2_dma_chan *ioat,
 =======
 	kmem_cache_free(ioat3_sed_cache, sed);
 >>>>>>> v3.18
+=======
+	kmem_cache_free(ioat3_sed_cache, sed);
+>>>>>>> v3.18
 }
 
 static bool desc_has_ext(struct ioat_ring_ent *desc)
@@ -597,7 +621,11 @@ static void __cleanup(struct ioat2_dma_chan *ioat, dma_addr_t phys_complete)
 		if (tx->cookie) {
 			dma_cookie_complete(tx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ioat3_dma_unmap(ioat, desc, idx + i);
+=======
+			dma_descriptor_unmap(tx);
+>>>>>>> v3.18
 =======
 			dma_descriptor_unmap(tx);
 >>>>>>> v3.18
@@ -834,7 +862,11 @@ ioat3_tx_status(struct dma_chan *c, dma_cookie_t cookie,
 
 	ret = dma_cookie_status(c, cookie, txstate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == DMA_SUCCESS)
+=======
+	if (ret == DMA_COMPLETE)
+>>>>>>> v3.18
 =======
 	if (ret == DMA_COMPLETE)
 >>>>>>> v3.18
@@ -846,6 +878,7 @@ ioat3_tx_status(struct dma_chan *c, dma_cookie_t cookie,
 }
 
 static struct dma_async_tx_descriptor *
+<<<<<<< HEAD
 <<<<<<< HEAD
 ioat3_prep_memset_lock(struct dma_chan *c, dma_addr_t dest, int value,
 		       size_t len, unsigned long flags)
@@ -892,6 +925,8 @@ ioat3_prep_memset_lock(struct dma_chan *c, dma_addr_t dest, int value,
 }
 
 static struct dma_async_tx_descriptor *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 __ioat3_prep_xor_lock(struct dma_chan *c, enum sum_check_flags *result,
@@ -992,7 +1027,11 @@ ioat3_prep_xor(struct dma_chan *chan, dma_addr_t dest, dma_addr_t *src,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dma_async_tx_descriptor *
+=======
+static struct dma_async_tx_descriptor *
+>>>>>>> v3.18
 =======
 static struct dma_async_tx_descriptor *
 >>>>>>> v3.18
@@ -1347,7 +1386,11 @@ ioat3_prep_pq(struct dma_chan *chan, dma_addr_t *dst, dma_addr_t *src,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dma_async_tx_descriptor *
+=======
+static struct dma_async_tx_descriptor *
+>>>>>>> v3.18
 =======
 static struct dma_async_tx_descriptor *
 >>>>>>> v3.18
@@ -1393,7 +1436,11 @@ ioat3_prep_pqxor(struct dma_chan *chan, dma_addr_t dst, dma_addr_t *src,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dma_async_tx_descriptor *
+=======
+static struct dma_async_tx_descriptor *
+>>>>>>> v3.18
 =======
 static struct dma_async_tx_descriptor *
 >>>>>>> v3.18
@@ -1468,7 +1515,11 @@ static int ioat_xor_val_self_test(struct ioatdma_device *device)
 	struct page *xor_val_srcs[IOAT_NUM_SRC_TEST + 1];
 	dma_addr_t dma_srcs[IOAT_NUM_SRC_TEST + 1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_addr_t dma_addr, dest_dma;
+=======
+	dma_addr_t dest_dma;
+>>>>>>> v3.18
 =======
 	dma_addr_t dest_dma;
 >>>>>>> v3.18
@@ -1538,9 +1589,13 @@ static int ioat_xor_val_self_test(struct ioatdma_device *device)
 	tx = dma->device_prep_dma_xor(dma_chan, dest_dma, dma_srcs,
 				      IOAT_NUM_SRC_TEST, PAGE_SIZE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      DMA_PREP_INTERRUPT |
 				      DMA_COMPL_SKIP_SRC_UNMAP |
 				      DMA_COMPL_SKIP_DEST_UNMAP);
+=======
+				      DMA_PREP_INTERRUPT);
+>>>>>>> v3.18
 =======
 				      DMA_PREP_INTERRUPT);
 >>>>>>> v3.18
@@ -1566,7 +1621,11 @@ static int ioat_xor_val_self_test(struct ioatdma_device *device)
 	tmo = wait_for_completion_timeout(&cmp, msecs_to_jiffies(3000));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dma->device_tx_status(dma_chan, cookie, NULL) != DMA_SUCCESS) {
+=======
+	if (dma->device_tx_status(dma_chan, cookie, NULL) != DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 	if (dma->device_tx_status(dma_chan, cookie, NULL) != DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -1609,9 +1668,13 @@ static int ioat_xor_val_self_test(struct ioatdma_device *device)
 	tx = dma->device_prep_dma_xor_val(dma_chan, dma_srcs,
 					  IOAT_NUM_SRC_TEST + 1, PAGE_SIZE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  &xor_val_result, DMA_PREP_INTERRUPT |
 					  DMA_COMPL_SKIP_SRC_UNMAP |
 					  DMA_COMPL_SKIP_DEST_UNMAP);
+=======
+					  &xor_val_result, DMA_PREP_INTERRUPT);
+>>>>>>> v3.18
 =======
 					  &xor_val_result, DMA_PREP_INTERRUPT);
 >>>>>>> v3.18
@@ -1636,7 +1699,11 @@ static int ioat_xor_val_self_test(struct ioatdma_device *device)
 	tmo = wait_for_completion_timeout(&cmp, msecs_to_jiffies(3000));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dma->device_tx_status(dma_chan, cookie, NULL) != DMA_SUCCESS) {
+=======
+	if (dma->device_tx_status(dma_chan, cookie, NULL) != DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 	if (dma->device_tx_status(dma_chan, cookie, NULL) != DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -1654,6 +1721,7 @@ static int ioat_xor_val_self_test(struct ioatdma_device *device)
 		goto free_resources;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* skip memset if the capability is not present */
 	if (!dma_has_cap(DMA_MEMSET, dma_chan->device->cap_mask))
@@ -1707,6 +1775,9 @@ static int ioat_xor_val_self_test(struct ioatdma_device *device)
 =======
 	memset(page_address(dest), 0, PAGE_SIZE);
 >>>>>>> v3.18
+=======
+	memset(page_address(dest), 0, PAGE_SIZE);
+>>>>>>> v3.18
 
 	/* test for non-zero parity sum */
 	op = IOAT_OP_XOR_VAL;
@@ -1718,9 +1789,13 @@ static int ioat_xor_val_self_test(struct ioatdma_device *device)
 	tx = dma->device_prep_dma_xor_val(dma_chan, dma_srcs,
 					  IOAT_NUM_SRC_TEST + 1, PAGE_SIZE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  &xor_val_result, DMA_PREP_INTERRUPT |
 					  DMA_COMPL_SKIP_SRC_UNMAP |
 					  DMA_COMPL_SKIP_DEST_UNMAP);
+=======
+					  &xor_val_result, DMA_PREP_INTERRUPT);
+>>>>>>> v3.18
 =======
 					  &xor_val_result, DMA_PREP_INTERRUPT);
 >>>>>>> v3.18
@@ -1745,7 +1820,11 @@ static int ioat_xor_val_self_test(struct ioatdma_device *device)
 	tmo = wait_for_completion_timeout(&cmp, msecs_to_jiffies(3000));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dma->device_tx_status(dma_chan, cookie, NULL) != DMA_SUCCESS) {
+=======
+	if (dma->device_tx_status(dma_chan, cookie, NULL) != DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 	if (dma->device_tx_status(dma_chan, cookie, NULL) != DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -1775,8 +1854,12 @@ dma_unmap:
 			dma_unmap_page(dev, dma_srcs[i], PAGE_SIZE,
 				       DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (op == IOAT_OP_FILL)
 		dma_unmap_page(dev, dma_addr, PAGE_SIZE, DMA_FROM_DEVICE);
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -1807,6 +1890,7 @@ static int ioat3_dma_self_test(struct ioatdma_device *device)
 static int ioat3_irq_reinit(struct ioatdma_device *device)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int msixcnt = device->common.chancnt;
 	struct pci_dev *pdev = device->pdev;
 	int i;
@@ -1820,6 +1904,8 @@ static int ioat3_irq_reinit(struct ioatdma_device *device)
 		for (i = 0; i < msixcnt; i++) {
 			msix = &device->msix_entries[i];
 =======
+=======
+>>>>>>> v3.18
 	struct pci_dev *pdev = device->pdev;
 	int irq = pdev->irq, i;
 
@@ -1832,6 +1918,9 @@ static int ioat3_irq_reinit(struct ioatdma_device *device)
 			struct msix_entry *msix = &device->msix_entries[i];
 			struct ioat_chan_common *chan;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			chan = ioat_chan_by_index(device, i);
 			devm_free_irq(&pdev->dev, msix->vector, chan);
@@ -1839,6 +1928,7 @@ static int ioat3_irq_reinit(struct ioatdma_device *device)
 
 		pci_disable_msix(pdev);
 		break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	case IOAT_MSIX_SINGLE:
@@ -1869,6 +1959,8 @@ static int ioat3_irq_reinit(struct ioatdma_device *device)
 
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	case IOAT_MSI:
 		pci_disable_msi(pdev);
 		/* fall through */
@@ -1881,6 +1973,9 @@ static int ioat3_irq_reinit(struct ioatdma_device *device)
 	device->irq_mode = IOAT_NOIRQ;
 
 	return ioat_dma_setup_interrupts(device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1925,6 +2020,7 @@ static int ioat3_reset_hw(struct ioat_chan_common *chan)
 
 	err = ioat2_reset_sync(chan, msecs_to_jiffies(200));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err) {
 		dev_err(&pdev->dev, "Failed to reset!\n");
 		return err;
@@ -1934,12 +2030,17 @@ static int ioat3_reset_hw(struct ioat_chan_common *chan)
 		err = ioat3_irq_reinit(device);
 
 =======
+=======
+>>>>>>> v3.18
 	if (!err)
 		err = ioat3_irq_reinit(device);
 
 	if (err)
 		dev_err(&pdev->dev, "Failed to reset: %d\n", err);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -1991,9 +2092,12 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 	dma->device_free_chan_resources = ioat2_free_chan_resources;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_xeon_cb32(pdev))
 		dma->copy_align = 6;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dma_cap_set(DMA_INTERRUPT, dma->cap_mask);
@@ -2002,7 +2106,11 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 	device->cap = readl(device->reg_base + IOAT_DMA_CAP_OFFSET);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_bwd_noraid(pdev))
+=======
+	if (is_xeon_cb32(pdev) || is_bwd_noraid(pdev))
+>>>>>>> v3.18
 =======
 	if (is_xeon_cb32(pdev) || is_bwd_noraid(pdev))
 >>>>>>> v3.18
@@ -2016,7 +2124,10 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 		is_raid_device = true;
 		dma->max_xor = 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma->xor_align = 6;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2038,6 +2149,7 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 		if (device->cap & IOAT_CAP_RAID16SS) {
 			dma_set_maxpq(dma, 16, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dma->pq_align = 0;
 		} else {
 			dma_set_maxpq(dma, 8, 0);
@@ -2045,6 +2157,10 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 				dma->pq_align = 6;
 			else
 				dma->pq_align = 0;
+=======
+		} else {
+			dma_set_maxpq(dma, 8, 0);
+>>>>>>> v3.18
 =======
 		} else {
 			dma_set_maxpq(dma, 8, 0);
@@ -2060,6 +2176,7 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 			if (device->cap & IOAT_CAP_RAID16SS) {
 				dma->max_xor = 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dma->xor_align = 0;
 			} else {
 				dma->max_xor = 8;
@@ -2071,10 +2188,15 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 			} else {
 				dma->max_xor = 8;
 >>>>>>> v3.18
+=======
+			} else {
+				dma->max_xor = 8;
+>>>>>>> v3.18
 			}
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (is_raid_device && (device->cap & IOAT_CAP_FILL_BLOCK)) {
 		dma_cap_set(DMA_MEMSET, dma->cap_mask);
@@ -2084,10 +2206,13 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	dma->device_tx_status = ioat3_tx_status;
 	device->cleanup_fn = ioat3_cleanup_event;
 	device->timer_fn = ioat3_timer_event;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (is_xeon_cb32(pdev)) {
 		dma_cap_clear(DMA_XOR_VAL, dma->cap_mask);
@@ -2099,11 +2224,14 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* starting with CB3.3 super extended descriptors are supported */
 	if (device->cap & IOAT_CAP_RAID16SS) {
 		char pool_name[14];
 		int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* allocate sw descriptor pool for SED */
 		device->sed_pool = kmem_cache_create("ioat_sed",
@@ -2113,10 +2241,13 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		for (i = 0; i < MAX_SED_POOLS; i++) {
 			snprintf(pool_name, 14, "ioat_hw%d_sed", i);
 
 			/* allocate SED DMA pool */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			device->sed_hw_pool[i] = dma_pool_create(pool_name,
 					&pdev->dev,
@@ -2124,11 +2255,16 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 			if (!device->sed_hw_pool[i])
 				goto sed_pool_cleanup;
 =======
+=======
+>>>>>>> v3.18
 			device->sed_hw_pool[i] = dmam_pool_create(pool_name,
 					&pdev->dev,
 					SED_SIZE * (i + 1), 64, 0);
 			if (!device->sed_hw_pool[i])
 				return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		}
@@ -2138,7 +2274,10 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 	if (err)
 		return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioat_set_tcp_copy_break(262144);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2158,6 +2297,7 @@ int ioat3_dma_probe(struct ioatdma_device *device, int dca)
 		device->dca = ioat3_dca_init(pdev, device->reg_base);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 sed_pool_cleanup:
@@ -2183,6 +2323,8 @@ void ioat3_dma_remove(struct ioatdma_device *device)
 			if (device->sed_hw_pool[i])
 				dma_pool_destroy(device->sed_hw_pool[i]);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

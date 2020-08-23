@@ -17,11 +17,17 @@
 #include <linux/perf_event.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <asm/setup.h>
 
 #include "kernel.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum direction {
 	load,    /* ld, ldd, ldh, ldsh */
@@ -170,7 +176,11 @@ unsigned long safe_compute_effective_address(struct pt_regs *regs,
 static void unaligned_panic(char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	panic(str);
+=======
+	panic("%s", str);
+>>>>>>> v3.18
 =======
 	panic("%s", str);
 >>>>>>> v3.18

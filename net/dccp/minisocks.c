@@ -56,6 +56,7 @@ void dccp_time_wait(struct sock *sk, int state, int timeo)
 #if IS_ENABLED(CONFIG_IPV6)
 		if (tw->tw_family == PF_INET6) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			const struct ipv6_pinfo *np = inet6_sk(sk);
 			struct inet6_timewait_sock *tw6;
 
@@ -64,6 +65,11 @@ void dccp_time_wait(struct sock *sk, int state, int timeo)
 			tw6->tw_v6_daddr = np->daddr;
 			tw6->tw_v6_rcv_saddr = np->rcv_saddr;
 			tw->tw_ipv6only = np->ipv6only;
+=======
+			tw->tw_v6_daddr = sk->sk_v6_daddr;
+			tw->tw_v6_rcv_saddr = sk->sk_v6_rcv_saddr;
+			tw->tw_ipv6only = sk->sk_ipv6only;
+>>>>>>> v3.18
 =======
 			tw->tw_v6_daddr = sk->sk_v6_daddr;
 			tw->tw_v6_rcv_saddr = sk->sk_v6_rcv_saddr;
@@ -147,7 +153,10 @@ struct sock *dccp_create_openreq_child(struct sock *sk,
 			 * destructor and make plain sk_free() */
 			newsk->sk_destruct = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bh_unlock_sock(newsk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			sk_free(newsk);
@@ -251,7 +260,11 @@ int dccp_child_process(struct sock *parent, struct sock *child,
 		/* Wakeup parent, send SIGIO */
 		if (state == DCCP_RESPOND && child->sk_state != state)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			parent->sk_data_ready(parent, 0);
+=======
+			parent->sk_data_ready(parent);
+>>>>>>> v3.18
 =======
 			parent->sk_data_ready(parent);
 >>>>>>> v3.18
@@ -284,15 +297,21 @@ int dccp_reqsk_init(struct request_sock *req,
 	struct dccp_request_sock *dreq = dccp_rsk(req);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inet_rsk(req)->rmt_port	  = dccp_hdr(skb)->dccph_sport;
 	inet_rsk(req)->loc_port	  = dccp_hdr(skb)->dccph_dport;
 	inet_rsk(req)->acked	  = 0;
 	dreq->dreq_timestamp_echo = 0;
 =======
+=======
+>>>>>>> v3.18
 	inet_rsk(req)->ir_rmt_port = dccp_hdr(skb)->dccph_sport;
 	inet_rsk(req)->ir_num	   = ntohs(dccp_hdr(skb)->dccph_dport);
 	inet_rsk(req)->acked	   = 0;
 	dreq->dreq_timestamp_echo  = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* inherit feature negotiation options from listening socket */

@@ -18,6 +18,10 @@
  * @types: list of types as strings
  * @args: list of args as strings (args[i] matches types[i])
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @enter_fields: list of fields for syscall_enter trace event
+>>>>>>> v3.18
 =======
  * @enter_fields: list of fields for syscall_enter trace event
 >>>>>>> v3.18

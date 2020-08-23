@@ -43,8 +43,13 @@ static int tda10071_wr_regs(struct tda10071_priv *priv, u8 reg, u8 *val,
 	if (1 + len > sizeof(buf)) {
 		dev_warn(&priv->i2c->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "%s: i2c wr reg=%04x: len=%d is too big!\n",
 			 KBUILD_MODNAME, reg, len);
+=======
+				"%s: i2c wr reg=%04x: len=%d is too big!\n",
+				KBUILD_MODNAME, reg, len);
+>>>>>>> v3.18
 =======
 				"%s: i2c wr reg=%04x: len=%d is too big!\n",
 				KBUILD_MODNAME, reg, len);
@@ -60,8 +65,14 @@ static int tda10071_wr_regs(struct tda10071_priv *priv, u8 reg, u8 *val,
 		ret = 0;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_warn(&priv->i2c->dev, "%s: i2c wr failed=%d reg=%02x " \
 				"len=%d\n", KBUILD_MODNAME, ret, reg, len);
+=======
+		dev_warn(&priv->i2c->dev,
+				"%s: i2c wr failed=%d reg=%02x len=%d\n",
+				KBUILD_MODNAME, ret, reg, len);
+>>>>>>> v3.18
 =======
 		dev_warn(&priv->i2c->dev,
 				"%s: i2c wr failed=%d reg=%02x len=%d\n",
@@ -95,8 +106,13 @@ static int tda10071_rd_regs(struct tda10071_priv *priv, u8 reg, u8 *val,
 	if (len > sizeof(buf)) {
 		dev_warn(&priv->i2c->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "%s: i2c wr reg=%04x: len=%d is too big!\n",
 			 KBUILD_MODNAME, reg, len);
+=======
+				"%s: i2c wr reg=%04x: len=%d is too big!\n",
+				KBUILD_MODNAME, reg, len);
+>>>>>>> v3.18
 =======
 				"%s: i2c wr reg=%04x: len=%d is too big!\n",
 				KBUILD_MODNAME, reg, len);
@@ -110,8 +126,14 @@ static int tda10071_rd_regs(struct tda10071_priv *priv, u8 reg, u8 *val,
 		ret = 0;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_warn(&priv->i2c->dev, "%s: i2c rd failed=%d reg=%02x " \
 				"len=%d\n", KBUILD_MODNAME, ret, reg, len);
+=======
+		dev_warn(&priv->i2c->dev,
+				"%s: i2c rd failed=%d reg=%02x len=%d\n",
+				KBUILD_MODNAME, ret, reg, len);
+>>>>>>> v3.18
 =======
 		dev_warn(&priv->i2c->dev,
 				"%s: i2c rd failed=%d reg=%02x len=%d\n",
@@ -514,10 +536,16 @@ static int tda10071_read_status(struct dvb_frontend *fe, fe_status_t *status)
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tmp & 0x01) /* tuner PLL */
 		*status |= FE_HAS_SIGNAL;
 	if (tmp & 0x02) /* demod PLL */
 		*status |= FE_HAS_CARRIER;
+=======
+	/* 0x39[0] tuner PLL */
+	if (tmp & 0x02) /* demod PLL */
+		*status |= FE_HAS_SIGNAL | FE_HAS_CARRIER;
+>>>>>>> v3.18
 =======
 	/* 0x39[0] tuner PLL */
 	if (tmp & 0x02) /* demod PLL */
@@ -698,17 +726,23 @@ static int tda10071_set_frontend(struct dvb_frontend *fe)
 	fe_modulation_t modulation;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&priv->i2c->dev, "%s: delivery_system=%d modulation=%d " \
 		"frequency=%d symbol_rate=%d inversion=%d pilot=%d " \
 		"rolloff=%d\n", __func__, c->delivery_system, c->modulation,
 		c->frequency, c->symbol_rate, c->inversion, c->pilot,
 		c->rolloff);
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(&priv->i2c->dev,
 			"%s: delivery_system=%d modulation=%d frequency=%d symbol_rate=%d inversion=%d pilot=%d rolloff=%d\n",
 			__func__, c->delivery_system, c->modulation,
 			c->frequency, c->symbol_rate, c->inversion, c->pilot,
 			c->rolloff);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	priv->delivery_system = SYS_UNDEFINED;
@@ -874,15 +908,21 @@ static int tda10071_get_frontend(struct dvb_frontend *fe)
 	switch ((buf[1] >> 0) & 0x01) {
 	case 0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		c->inversion = INVERSION_OFF;
 		break;
 	case 1:
 		c->inversion = INVERSION_ON;
 =======
+=======
+>>>>>>> v3.18
 		c->inversion = INVERSION_ON;
 		break;
 	case 1:
 		c->inversion = INVERSION_OFF;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -903,7 +943,11 @@ static int tda10071_get_frontend(struct dvb_frontend *fe)
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c->symbol_rate = (buf[0] << 16) | (buf[1] << 8) | (buf[2] << 0);
+=======
+	c->symbol_rate = ((buf[0] << 16) | (buf[1] << 8) | (buf[2] << 0)) * 1000;
+>>>>>>> v3.18
 =======
 	c->symbol_rate = ((buf[0] << 16) | (buf[1] << 8) | (buf[2] << 0)) * 1000;
 >>>>>>> v3.18
@@ -981,6 +1025,7 @@ static int tda10071_init(struct dvb_frontend *fe)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* firmware status */
 	ret = tda10071_rd_reg(priv, 0x51, &tmp);
 	if (ret)
@@ -989,6 +1034,10 @@ static int tda10071_init(struct dvb_frontend *fe)
 	if (!tmp) {
 		/* warm state - wake up device from sleep */
 		priv->warm = 1;
+=======
+	if (priv->warm) {
+		/* warm state - wake up device from sleep */
+>>>>>>> v3.18
 =======
 	if (priv->warm) {
 		/* warm state - wake up device from sleep */
@@ -1011,7 +1060,10 @@ static int tda10071_init(struct dvb_frontend *fe)
 	} else {
 		/* cold state - try to download firmware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->warm = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1019,10 +1071,15 @@ static int tda10071_init(struct dvb_frontend *fe)
 		ret = request_firmware(&fw, fw_file, priv->i2c->dev.parent);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(&priv->i2c->dev, "%s: did not find the " \
 					"firmware file. (%s) Please see " \
 					"linux/Documentation/dvb/ for more " \
 					"details on firmware-problems. (%d)\n",
+=======
+			dev_err(&priv->i2c->dev,
+					"%s: did not find the firmware file. (%s) Please see linux/Documentation/dvb/ for more details on firmware-problems. (%d)\n",
+>>>>>>> v3.18
 =======
 			dev_err(&priv->i2c->dev,
 					"%s: did not find the firmware file. (%s) Please see linux/Documentation/dvb/ for more details on firmware-problems. (%d)\n",
@@ -1057,18 +1114,24 @@ static int tda10071_init(struct dvb_frontend *fe)
 			goto error_release_firmware;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(&priv->i2c->dev, "%s: found a '%s' in cold state, " \
 				"will try to load a firmware\n", KBUILD_MODNAME,
 				tda10071_ops.info.name);
 		dev_info(&priv->i2c->dev, "%s: downloading firmware from " \
 				"file '%s'\n", KBUILD_MODNAME, fw_file);
 =======
+=======
+>>>>>>> v3.18
 		dev_info(&priv->i2c->dev,
 				"%s: found a '%s' in cold state, will try to load a firmware\n",
 				KBUILD_MODNAME, tda10071_ops.info.name);
 		dev_info(&priv->i2c->dev,
 				"%s: downloading firmware from file '%s'\n",
 				KBUILD_MODNAME, fw_file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* do not download last byte */
@@ -1084,16 +1147,22 @@ static int tda10071_init(struct dvb_frontend *fe)
 				(u8 *) &fw->data[fw_size - remaining], len);
 			if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_err(&priv->i2c->dev, "%s: firmware " \
 						"download failed=%d\n",
 						KBUILD_MODNAME, ret);
 				if (ret)
 					goto error_release_firmware;
 =======
+=======
+>>>>>>> v3.18
 				dev_err(&priv->i2c->dev,
 						"%s: firmware download failed=%d\n",
 						KBUILD_MODNAME, ret);
 				goto error_release_firmware;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -1122,7 +1191,11 @@ static int tda10071_init(struct dvb_frontend *fe)
 			goto error;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			priv->warm = 1;
+=======
+			priv->warm = true;
+>>>>>>> v3.18
 =======
 			priv->warm = true;
 >>>>>>> v3.18
@@ -1161,12 +1234,18 @@ static int tda10071_init(struct dvb_frontend *fe)
 			goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (priv->cfg.tuner_i2c_addr)
 			tmp = priv->cfg.tuner_i2c_addr;
 		else
 			tmp = 0x14;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cmd.args[0] = CMD_TUNER_INIT;
 		cmd.args[1] = 0x00;
@@ -1174,7 +1253,11 @@ static int tda10071_init(struct dvb_frontend *fe)
 		cmd.args[3] = 0x00;
 		cmd.args[4] = 0x00;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cmd.args[5] = (priv->cfg.tuner_i2c_addr) ? priv->cfg.tuner_i2c_addr : 0x14;
+=======
+		cmd.args[5] = tmp;
+>>>>>>> v3.18
 =======
 		cmd.args[5] = tmp;
 >>>>>>> v3.18
@@ -1318,7 +1401,11 @@ struct dvb_frontend *tda10071_attach(const struct tda10071_config *config,
 	/* make sure demod i2c address is specified */
 	if (!config->demod_i2c_addr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&i2c->dev, "%s: invalid demod i2c address!\n", __func__);
+=======
+		dev_dbg(&i2c->dev, "%s: invalid demod i2c address\n", __func__);
+>>>>>>> v3.18
 =======
 		dev_dbg(&i2c->dev, "%s: invalid demod i2c address\n", __func__);
 >>>>>>> v3.18
@@ -1329,7 +1416,11 @@ struct dvb_frontend *tda10071_attach(const struct tda10071_config *config,
 	/* make sure tuner i2c address is specified */
 	if (!config->tuner_i2c_addr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&i2c->dev, "%s: invalid tuner i2c address!\n", __func__);
+=======
+		dev_dbg(&i2c->dev, "%s: invalid tuner i2c address\n", __func__);
+>>>>>>> v3.18
 =======
 		dev_dbg(&i2c->dev, "%s: invalid tuner i2c address\n", __func__);
 >>>>>>> v3.18

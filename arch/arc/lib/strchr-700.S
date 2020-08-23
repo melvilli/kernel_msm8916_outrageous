@@ -12,9 +12,15 @@
    words branch-free.  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/linkage.h>
 
 ARC_ENTRY strchr
+=======
+#include <linux/linkage.h>
+
+ENTRY(strchr)
+>>>>>>> v3.18
 =======
 #include <linux/linkage.h>
 
@@ -137,7 +143,11 @@ ENTRY(strchr)
 	mov.mi	r0,0
 #endif /* ENDIAN */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_EXIT strchr
+=======
+END(strchr)
+>>>>>>> v3.18
 =======
 END(strchr)
 >>>>>>> v3.18

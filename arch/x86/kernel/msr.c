@@ -47,7 +47,11 @@ static loff_t msr_seek(struct file *file, loff_t offset, int orig)
 {
 	loff_t ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode = file->f_mapping->host;
+=======
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 =======
 	struct inode *inode = file_inode(file);
 >>>>>>> v3.18
@@ -205,7 +209,11 @@ static const struct file_operations msr_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit msr_device_create(int cpu)
+=======
+static int msr_device_create(int cpu)
+>>>>>>> v3.18
 =======
 static int msr_device_create(int cpu)
 >>>>>>> v3.18
@@ -223,8 +231,13 @@ static void msr_device_destroy(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit msr_class_cpu_callback(struct notifier_block *nfb,
 				unsigned long action, void *hcpu)
+=======
+static int msr_class_cpu_callback(struct notifier_block *nfb,
+				  unsigned long action, void *hcpu)
+>>>>>>> v3.18
 =======
 static int msr_class_cpu_callback(struct notifier_block *nfb,
 				  unsigned long action, void *hcpu)
@@ -273,7 +286,12 @@ static int __init msr_init(void)
 	}
 	msr_class->devnode = msr_devnode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_online_cpus();
+=======
+
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 =======
 
 	cpu_notifier_register_begin();
@@ -284,8 +302,13 @@ static int __init msr_init(void)
 			goto out_class;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_hotcpu_notifier(&msr_class_cpu_notifier);
 	put_online_cpus();
+=======
+	__register_hotcpu_notifier(&msr_class_cpu_notifier);
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__register_hotcpu_notifier(&msr_class_cpu_notifier);
 	cpu_notifier_register_done();
@@ -299,7 +322,11 @@ out_class:
 	for_each_online_cpu(i)
 		msr_device_destroy(i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_online_cpus();
+=======
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_done();
 >>>>>>> v3.18
@@ -314,7 +341,12 @@ static void __exit msr_exit(void)
 {
 	int cpu = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_online_cpus();
+=======
+
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 =======
 
 	cpu_notifier_register_begin();
@@ -324,8 +356,13 @@ static void __exit msr_exit(void)
 	class_destroy(msr_class);
 	__unregister_chrdev(MSR_MAJOR, 0, NR_CPUS, "cpu/msr");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_hotcpu_notifier(&msr_class_cpu_notifier);
 	put_online_cpus();
+=======
+	__unregister_hotcpu_notifier(&msr_class_cpu_notifier);
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__unregister_hotcpu_notifier(&msr_class_cpu_notifier);
 	cpu_notifier_register_done();

@@ -46,13 +46,19 @@ char *aa_split_fqname(char *fqname, char **ns_name)
 		if (split) {
 			/* overwrite ':' with \0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*split = 0;
 			name = skip_spaces(split + 1);
 =======
+=======
+>>>>>>> v3.18
 			*split++ = 0;
 			if (strncmp(split, "//", 2) == 0)
 				split += 2;
 			name = skip_spaces(split);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else
 			/* a ns name without a following profile is allowed */
@@ -83,8 +89,14 @@ void aa_info_message(const char *str)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * kvmalloc - do allocation preferring kmalloc but falling back to vmalloc
  * @size: size of allocation
+=======
+ * __aa_kvmalloc - do allocation preferring kmalloc but falling back to vmalloc
+ * @size: how many bytes of memory are required
+ * @flags: the type of memory to allocate (see kmalloc).
+>>>>>>> v3.18
 =======
  * __aa_kvmalloc - do allocation preferring kmalloc but falling back to vmalloc
  * @size: how many bytes of memory are required
@@ -97,7 +109,11 @@ void aa_info_message(const char *str)
  * what can be allocated by kmalloc, in those cases fall back to vmalloc.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *kvmalloc(size_t size)
+=======
+void *__aa_kvmalloc(size_t size, gfp_t flags)
+>>>>>>> v3.18
 =======
 void *__aa_kvmalloc(size_t size, gfp_t flags)
 >>>>>>> v3.18
@@ -109,6 +125,7 @@ void *__aa_kvmalloc(size_t size, gfp_t flags)
 
 	/* do not attempt kmalloc if we need more than 16 pages at once */
 	if (size <= (16*PAGE_SIZE))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		buffer = kmalloc(size, GFP_NOIO | __GFP_NOWARN);
 	if (!buffer) {
@@ -123,6 +140,8 @@ void *__aa_kvmalloc(size_t size, gfp_t flags)
 }
 
 =======
+=======
+>>>>>>> v3.18
 		buffer = kmalloc(size, flags | GFP_NOIO | __GFP_NOWARN);
 	if (!buffer) {
 		if (flags & __GFP_ZERO)
@@ -132,4 +151,7 @@ void *__aa_kvmalloc(size_t size, gfp_t flags)
 	}
 	return buffer;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

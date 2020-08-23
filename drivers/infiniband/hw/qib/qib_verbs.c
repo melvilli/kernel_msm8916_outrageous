@@ -41,7 +41,10 @@
 #include <linux/mm.h>
 #include <linux/random.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/vmalloc.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -650,15 +653,21 @@ void qib_ib_rcv(struct qib_ctxtdata *rcd, void *rhdr, void *data, u32 tlen)
 		goto drop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	opcode = be32_to_cpu(ohdr->bth[0]) >> 24;
 	ibp->opstats[opcode & 0x7f].n_bytes += tlen;
 	ibp->opstats[opcode & 0x7f].n_packets++;
 =======
+=======
+>>>>>>> v3.18
 	opcode = (be32_to_cpu(ohdr->bth[0]) >> 24) & 0x7f;
 #ifdef CONFIG_DEBUG_FS
 	rcd->opstats->stats[opcode].n_bytes += tlen;
 	rcd->opstats->stats[opcode].n_packets++;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Get the destination QP number. */
@@ -673,7 +682,11 @@ void qib_ib_rcv(struct qib_ctxtdata *rcd, void *rhdr, void *data, u32 tlen)
 		if (mcast == NULL)
 			goto drop;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ibp->n_multicast_rcv++;
+=======
+		this_cpu_inc(ibp->pmastats->n_multicast_rcv);
+>>>>>>> v3.18
 =======
 		this_cpu_inc(ibp->pmastats->n_multicast_rcv);
 >>>>>>> v3.18
@@ -693,8 +706,13 @@ void qib_ib_rcv(struct qib_ctxtdata *rcd, void *rhdr, void *data, u32 tlen)
 					wake_up(
 					 &rcd->lookaside_qp->wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					rcd->lookaside_qp = NULL;
 				}
+=======
+				rcd->lookaside_qp = NULL;
+			}
+>>>>>>> v3.18
 =======
 				rcd->lookaside_qp = NULL;
 			}
@@ -709,7 +727,11 @@ void qib_ib_rcv(struct qib_ctxtdata *rcd, void *rhdr, void *data, u32 tlen)
 		} else
 			qp = rcd->lookaside_qp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ibp->n_unicast_rcv++;
+=======
+		this_cpu_inc(ibp->pmastats->n_unicast_rcv);
+>>>>>>> v3.18
 =======
 		this_cpu_inc(ibp->pmastats->n_unicast_rcv);
 >>>>>>> v3.18
@@ -2110,6 +2132,7 @@ int qib_register_ib_device(struct qib_devdata *dd)
 	 */
 	spin_lock_init(&dev->lk_table.lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* insure generation is at least 4 bits see keys.c */
 	if (ib_qib_lkey_table_size > MAX_LKEY_TABLE_BITS) {
 		qib_dev_warn(dd, "lkey bits %u too large, reduced to %u\n",
@@ -2121,10 +2144,15 @@ int qib_register_ib_device(struct qib_devdata *dd)
 	dev->lk_table.table = (struct qib_mregion __rcu **)
 		vmalloc(lk_tab_size);
 =======
+=======
+>>>>>>> v3.18
 	dev->lk_table.max = 1 << ib_qib_lkey_table_size;
 	lk_tab_size = dev->lk_table.max * sizeof(*dev->lk_table.table);
 	dev->lk_table.table = (struct qib_mregion __rcu **)
 		__get_free_pages(GFP_KERNEL, get_order(lk_tab_size));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dev->lk_table.table == NULL) {
 		ret = -ENOMEM;
@@ -2299,7 +2327,11 @@ err_tx:
 				  dev->pio_hdrs, dev->pio_hdrs_phys);
 err_hdrs:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vfree(dev->lk_table.table);
+=======
+	free_pages((unsigned long) dev->lk_table.table, get_order(lk_tab_size));
+>>>>>>> v3.18
 =======
 	free_pages((unsigned long) dev->lk_table.table, get_order(lk_tab_size));
 >>>>>>> v3.18
@@ -2357,7 +2389,12 @@ void qib_unregister_ib_device(struct qib_devdata *dd)
 				  dev->pio_hdrs, dev->pio_hdrs_phys);
 	lk_tab_size = dev->lk_table.max * sizeof(*dev->lk_table.table);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vfree(dev->lk_table.table);
+=======
+	free_pages((unsigned long) dev->lk_table.table,
+		   get_order(lk_tab_size));
+>>>>>>> v3.18
 =======
 	free_pages((unsigned long) dev->lk_table.table,
 		   get_order(lk_tab_size));

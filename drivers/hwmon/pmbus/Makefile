@@ -11,6 +11,10 @@ obj-$(CONFIG_SENSORS_MAX16064)	+= max16064.o
 obj-$(CONFIG_SENSORS_MAX34440)	+= max34440.o
 obj-$(CONFIG_SENSORS_MAX8688)	+= max8688.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SENSORS_TPS40422)	+= tps40422.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SENSORS_TPS40422)	+= tps40422.o
 >>>>>>> v3.18

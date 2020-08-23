@@ -36,7 +36,10 @@
 struct iio_event_interface {
 	wait_queue_head_t	wait;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex		read_lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	DECLARE_KFIFO(det_events, struct iio_event_data, 16);
@@ -45,9 +48,12 @@ struct iio_event_interface {
 	unsigned long		flags;
 	struct attribute_group	group;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct mutex		read_lock;
 };
 
@@ -60,11 +66,15 @@ struct iio_event_interface {
  * Note: The caller must make sure that this function is not running
  * concurrently for the same indio_dev more than once.
  **/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int iio_push_event(struct iio_dev *indio_dev, u64 ev_code, s64 timestamp)
 {
 	struct iio_event_interface *ev_int = indio_dev->event_interface;
 	struct iio_event_data ev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 	int copied;
@@ -76,11 +86,17 @@ int iio_push_event(struct iio_dev *indio_dev, u64 ev_code, s64 timestamp)
 
 	/* Does anyone care? */
 >>>>>>> v3.18
+=======
+	int copied;
+
+	/* Does anyone care? */
+>>>>>>> v3.18
 	if (test_bit(IIO_BUSY_BIT_POS, &ev_int->flags)) {
 
 		ev.id = ev_code;
 		ev.timestamp = timestamp;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		copied = kfifo_put(&ev_int->det_events, &ev);
 		if (copied != 0)
@@ -88,10 +104,15 @@ int iio_push_event(struct iio_dev *indio_dev, u64 ev_code, s64 timestamp)
 	}
 	spin_unlock_irqrestore(&ev_int->wait.lock, flags);
 =======
+=======
+>>>>>>> v3.18
 		copied = kfifo_put(&ev_int->det_events, ev);
 		if (copied != 0)
 			wake_up_poll(&ev_int->wait, POLLIN);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -105,6 +126,7 @@ static unsigned int iio_event_poll(struct file *filep,
 			     struct poll_table_struct *wait)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iio_event_interface *ev_int = filep->private_data;
 	unsigned int events = 0;
 
@@ -115,6 +137,8 @@ static unsigned int iio_event_poll(struct file *filep,
 		events = POLLIN | POLLRDNORM;
 	spin_unlock_irq(&ev_int->wait.lock);
 =======
+=======
+>>>>>>> v3.18
 	struct iio_dev *indio_dev = filep->private_data;
 	struct iio_event_interface *ev_int = indio_dev->event_interface;
 	unsigned int events = 0;
@@ -126,6 +150,9 @@ static unsigned int iio_event_poll(struct file *filep,
 
 	if (!kfifo_is_empty(&ev_int->det_events))
 		events = POLLIN | POLLRDNORM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return events;
@@ -136,6 +163,7 @@ static ssize_t iio_event_chrdev_read(struct file *filep,
 				     size_t count,
 				     loff_t *f_ps)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct iio_event_interface *ev_int = filep->private_data;
 	unsigned int copied;
@@ -167,6 +195,8 @@ error_unlock:
 
 	return ret ? ret : copied;
 =======
+=======
+>>>>>>> v3.18
 	struct iio_dev *indio_dev = filep->private_data;
 	struct iio_event_interface *ev_int = indio_dev->event_interface;
 	unsigned int copied;
@@ -212,11 +242,15 @@ error_unlock:
 	} while (copied == 0);
 
 	return copied;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int iio_event_chrdev_release(struct inode *inode, struct file *filep)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct iio_event_interface *ev_int = filep->private_data;
 
@@ -230,12 +264,17 @@ static int iio_event_chrdev_release(struct inode *inode, struct file *filep)
 	kfifo_reset_out(&ev_int->det_events);
 	spin_unlock_irq(&ev_int->wait.lock);
 =======
+=======
+>>>>>>> v3.18
 	struct iio_dev *indio_dev = filep->private_data;
 	struct iio_event_interface *ev_int = indio_dev->event_interface;
 
 	clear_bit(IIO_BUSY_BIT_POS, &ev_int->flags);
 
 	iio_device_put(indio_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -258,6 +297,7 @@ int iio_event_getfd(struct iio_dev *indio_dev)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irq(&ev_int->wait.lock);
 	if (__test_and_set_bit(IIO_BUSY_BIT_POS, &ev_int->flags)) {
 		spin_unlock_irq(&ev_int->wait.lock);
@@ -272,6 +312,8 @@ int iio_event_getfd(struct iio_dev *indio_dev)
 		spin_unlock_irq(&ev_int->wait.lock);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (test_and_set_bit(IIO_BUSY_BIT_POS, &ev_int->flags))
 		return -EBUSY;
 
@@ -286,6 +328,9 @@ int iio_event_getfd(struct iio_dev *indio_dev)
 		kfifo_reset_out(&ev_int->det_events);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return fd;
 }
@@ -305,7 +350,10 @@ static const char * const iio_ev_dir_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const char * const iio_ev_info_text[] = {
 	[IIO_EV_INFO_ENABLE] = "en",
 	[IIO_EV_INFO_VALUE] = "value",
@@ -328,6 +376,9 @@ static enum iio_event_info iio_ev_attr_info(struct iio_dev_attr *attr)
 	return (attr->address >> 16) & 0xffff;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t iio_ev_state_store(struct device *dev,
 				  struct device_attribute *attr,
@@ -345,8 +396,14 @@ static ssize_t iio_ev_state_store(struct device *dev,
 
 	ret = indio_dev->info->write_event_config(indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  this_attr->address,
 						  val);
+=======
+		this_attr->c, iio_ev_attr_type(this_attr),
+		iio_ev_attr_dir(this_attr), val);
+
+>>>>>>> v3.18
 =======
 		this_attr->c, iio_ev_attr_type(this_attr),
 		iio_ev_attr_dir(this_attr), val);
@@ -362,15 +419,21 @@ static ssize_t iio_ev_state_show(struct device *dev,
 	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int val = indio_dev->info->read_event_config(indio_dev,
 						     this_attr->address);
 
 =======
+=======
+>>>>>>> v3.18
 	int val;
 
 	val = indio_dev->info->read_event_config(indio_dev,
 		this_attr->c, iio_ev_attr_type(this_attr),
 		iio_ev_attr_dir(this_attr));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (val < 0)
 		return val;
@@ -385,6 +448,7 @@ static ssize_t iio_ev_value_show(struct device *dev,
 	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int val, ret;
 
 	ret = indio_dev->info->read_event_value(indio_dev,
@@ -394,6 +458,8 @@ static ssize_t iio_ev_value_show(struct device *dev,
 
 	return sprintf(buf, "%d\n", val);
 =======
+=======
+>>>>>>> v3.18
 	int val, val2, val_arr[2];
 	int ret;
 
@@ -406,6 +472,9 @@ static ssize_t iio_ev_value_show(struct device *dev,
 	val_arr[0] = val;
 	val_arr[1] = val2;
 	return iio_format_value(buf, ret, 2, val_arr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -417,7 +486,11 @@ static ssize_t iio_ev_value_store(struct device *dev,
 	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int val;
+=======
+	int val, val2;
+>>>>>>> v3.18
 =======
 	int val, val2;
 >>>>>>> v3.18
@@ -427,6 +500,7 @@ static ssize_t iio_ev_value_store(struct device *dev,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = kstrtoint(buf, 10, &val);
 	if (ret)
 		return ret;
@@ -434,6 +508,8 @@ static ssize_t iio_ev_value_store(struct device *dev,
 	ret = indio_dev->info->write_event_value(indio_dev, this_attr->address,
 						 val);
 =======
+=======
+>>>>>>> v3.18
 	ret = iio_str_to_fixpoint(buf, 100000, &val, &val2);
 	if (ret)
 		return ret;
@@ -441,6 +517,9 @@ static ssize_t iio_ev_value_store(struct device *dev,
 		this_attr->c, iio_ev_attr_type(this_attr),
 		iio_ev_attr_dir(this_attr), iio_ev_attr_info(this_attr),
 		val, val2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;
@@ -448,6 +527,7 @@ static ssize_t iio_ev_value_store(struct device *dev,
 	return len;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int iio_device_add_event_sysfs(struct iio_dev *indio_dev,
 				      struct iio_chan_spec const *chan)
@@ -532,6 +612,8 @@ static inline void __iio_remove_event_config_attrs(struct iio_dev *indio_dev)
 		kfree(p);
 	}
 =======
+=======
+>>>>>>> v3.18
 static int iio_device_add_event(struct iio_dev *indio_dev,
 	const struct iio_chan_spec *chan, unsigned int spec_index,
 	enum iio_event_type type, enum iio_event_direction dir,
@@ -619,6 +701,9 @@ static int iio_device_add_event_sysfs(struct iio_dev *indio_dev,
 	}
 	ret = attrcount;
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -642,14 +727,20 @@ static bool iio_check_for_dynamic_events(struct iio_dev *indio_dev)
 	int j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (j = 0; j < indio_dev->num_channels; j++)
 		if (indio_dev->channels[j].event_mask != 0)
 			return true;
 =======
+=======
+>>>>>>> v3.18
 	for (j = 0; j < indio_dev->num_channels; j++) {
 		if (indio_dev->channels[j].num_event_specs != 0)
 			return true;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return false;
 }
@@ -675,10 +766,15 @@ int iio_device_register_eventset(struct iio_dev *indio_dev)
 	indio_dev->event_interface =
 		kzalloc(sizeof(struct iio_event_interface), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (indio_dev->event_interface == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	if (indio_dev->event_interface == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (indio_dev->event_interface == NULL)
 		return -ENOMEM;
@@ -727,6 +823,7 @@ int iio_device_register_eventset(struct iio_dev *indio_dev)
 
 error_free_setup_event_lines:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__iio_remove_event_config_attrs(indio_dev);
 	mutex_destroy(&indio_dev->event_interface->read_lock);
 	kfree(indio_dev->event_interface);
@@ -736,6 +833,8 @@ error_ret:
 }
 
 =======
+=======
+>>>>>>> v3.18
 	iio_free_chan_devattr_list(&indio_dev->event_interface->dev_attr_list);
 	kfree(indio_dev->event_interface);
 	return ret;
@@ -755,15 +854,23 @@ void iio_device_wakeup_eventset(struct iio_dev *indio_dev)
 	wake_up(&indio_dev->event_interface->wait);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void iio_device_unregister_eventset(struct iio_dev *indio_dev)
 {
 	if (indio_dev->event_interface == NULL)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__iio_remove_event_config_attrs(indio_dev);
 	kfree(indio_dev->event_interface->group.attrs);
 	mutex_destroy(&indio_dev->event_interface->read_lock);
+=======
+	iio_free_chan_devattr_list(&indio_dev->event_interface->dev_attr_list);
+	kfree(indio_dev->event_interface->group.attrs);
+>>>>>>> v3.18
 =======
 	iio_free_chan_devattr_list(&indio_dev->event_interface->dev_attr_list);
 	kfree(indio_dev->event_interface->group.attrs);

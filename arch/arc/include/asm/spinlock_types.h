@@ -21,9 +21,15 @@ typedef struct {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Unlocked:     0x01_00_00_00
  * Read lock(s): 0x00_FF_00_00 to say 0x01
  * Write lock:   0x0, but only possible if prior value "unlocked" 0x0100_0000
+=======
+ * Unlocked     : 0x0100_0000
+ * Read lock(s) : 0x00FF_FFFF to 0x01  (Multiple Readers decrement it)
+ * Write lock   : 0x0, but only if prior value is "unlocked" 0x0100_0000
+>>>>>>> v3.18
 =======
  * Unlocked     : 0x0100_0000
  * Read lock(s) : 0x00FF_FFFF to 0x01  (Multiple Readers decrement it)

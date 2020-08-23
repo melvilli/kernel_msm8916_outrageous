@@ -48,7 +48,10 @@
 #include <rdma/ib_user_verbs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define INIT_UDATA(udata, ibuf, obuf, ilen, olen)			\
 	do {								\
 		(udata)->inbuf  = (const void __user *) (ibuf);		\
@@ -65,6 +68,9 @@
 		(udata)->outlen = (olen);					\
 	} while (0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Our lifetime rules for these structs are the following:
@@ -89,7 +95,11 @@
 
 struct ib_uverbs_device {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t				refcount;
+=======
+	struct kref				ref;
+>>>>>>> v3.18
 =======
 	struct kref				ref;
 >>>>>>> v3.18
@@ -102,7 +112,10 @@ struct ib_uverbs_device {
 	struct rb_root				xrcd_tree;
 	struct mutex				xrcd_tree_mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kobject				kobj;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -163,6 +176,10 @@ struct ib_uqp_object {
 	struct ib_uevent_object	uevent;
 	struct list_head 	mcast_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ib_uxrcd_object *uxrcd;
+>>>>>>> v3.18
 =======
 	struct ib_uxrcd_object *uxrcd;
 >>>>>>> v3.18
@@ -187,6 +204,10 @@ extern struct idr ib_uverbs_qp_idr;
 extern struct idr ib_uverbs_srq_idr;
 extern struct idr ib_uverbs_xrcd_idr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct idr ib_uverbs_rule_idr;
+>>>>>>> v3.18
 =======
 extern struct idr ib_uverbs_rule_idr;
 >>>>>>> v3.18
@@ -212,7 +233,10 @@ void ib_uverbs_event_handler(struct ib_event_handler *handler,
 void ib_uverbs_dealloc_xrcd(struct ib_uverbs_device *dev, struct ib_xrcd *xrcd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ib_uverbs_flow_spec {
 	union {
 		union {
@@ -229,6 +253,9 @@ struct ib_uverbs_flow_spec {
 	};
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IB_UVERBS_DECLARE_CMD(name)					\
 	ssize_t ib_uverbs_##name(struct ib_uverbs_file *file,		\
@@ -242,6 +269,10 @@ IB_UVERBS_DECLARE_CMD(alloc_pd);
 IB_UVERBS_DECLARE_CMD(dealloc_pd);
 IB_UVERBS_DECLARE_CMD(reg_mr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+IB_UVERBS_DECLARE_CMD(rereg_mr);
+>>>>>>> v3.18
 =======
 IB_UVERBS_DECLARE_CMD(rereg_mr);
 >>>>>>> v3.18
@@ -275,7 +306,10 @@ IB_UVERBS_DECLARE_CMD(open_xrcd);
 IB_UVERBS_DECLARE_CMD(close_xrcd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IB_UVERBS_DECLARE_EX_CMD(name)				\
 	int ib_uverbs_ex_##name(struct ib_uverbs_file *file,	\
 				struct ib_udata *ucore,		\
@@ -284,5 +318,8 @@ IB_UVERBS_DECLARE_CMD(close_xrcd);
 IB_UVERBS_DECLARE_EX_CMD(create_flow);
 IB_UVERBS_DECLARE_EX_CMD(destroy_flow);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* UVERBS_H */

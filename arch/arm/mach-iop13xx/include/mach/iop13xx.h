@@ -4,7 +4,11 @@
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/reboot.h>
+=======
+enum reboot_mode;
+>>>>>>> v3.18
 =======
 enum reboot_mode;
 >>>>>>> v3.18

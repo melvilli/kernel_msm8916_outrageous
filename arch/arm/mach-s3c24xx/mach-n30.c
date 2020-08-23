@@ -25,6 +25,10 @@
 #include <linux/platform_device.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -41,6 +45,10 @@
 #include <mach/regs-gpio.h>
 #include <mach/regs-lcd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18
@@ -51,9 +59,13 @@
 
 #include <linux/platform_data/i2c-s3c2410.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
 
 #include <plat/clock.h>
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -547,7 +559,10 @@ static void __init n30_map_io(void)
 	s3c24xx_init_io(n30_iodesc, ARRAY_SIZE(n30_iodesc));
 	n30_hwinit();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s3c24xx_init_uarts(n30_uartcfgs, ARRAY_SIZE(n30_uartcfgs));
@@ -555,13 +570,19 @@ static void __init n30_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init n30_init_time(void)
 {
 	s3c2410_init_clocks(12000000);
 	samsung_timer_init();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* GPB3 is the line that controls the pull-up for the USB D+ line */
 
@@ -615,16 +636,22 @@ MACHINE_START(N30, "Acer-N30")
 	*/
 	.atag_offset	= 0x100,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= samsung_timer_init,
 	.init_machine	= n30_init,
 	.init_irq	= s3c2410_init_irq,
 	.map_io		= n30_map_io,
 	.restart	= s3c2410_restart,
 =======
+=======
+>>>>>>> v3.18
 	.init_time	= n30_init_time,
 	.init_machine	= n30_init,
 	.init_irq	= s3c2410_init_irq,
 	.map_io		= n30_map_io,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MACHINE_END
 
@@ -633,15 +660,21 @@ MACHINE_START(N35, "Acer-N35")
 	*/
 	.atag_offset	= 0x100,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= samsung_timer_init,
 	.init_machine	= n30_init,
 	.init_irq	= s3c2410_init_irq,
 	.map_io		= n30_map_io,
 	.restart	= s3c2410_restart,
 =======
+=======
+>>>>>>> v3.18
 	.init_time	= n30_init_time,
 	.init_machine	= n30_init,
 	.init_irq	= s3c2410_init_irq,
 	.map_io		= n30_map_io,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MACHINE_END

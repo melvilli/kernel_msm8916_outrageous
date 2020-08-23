@@ -91,7 +91,12 @@ struct pmbus_data {
 	u32 flags;		/* from platform data */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int exponent;		/* linear mode: exponent for output voltages */
+=======
+	int exponent[PMBUS_PAGES];
+				/* linear mode: exponent for output voltages */
+>>>>>>> v3.18
 =======
 	int exponent[PMBUS_PAGES];
 				/* linear mode: exponent for output voltages */
@@ -103,6 +108,10 @@ struct pmbus_data {
 	int num_attributes;
 	struct attribute_group group;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct attribute_group *groups[2];
+>>>>>>> v3.18
 =======
 	const struct attribute_group *groups[2];
 >>>>>>> v3.18
@@ -166,7 +175,11 @@ EXPORT_SYMBOL_GPL(pmbus_write_byte);
 /*
  * _pmbus_write_byte() is similar to pmbus_write_byte(), but checks if
 <<<<<<< HEAD
+<<<<<<< HEAD
  * a device specific mapping funcion exists and calls it if necessary.
+=======
+ * a device specific mapping function exists and calls it if necessary.
+>>>>>>> v3.18
 =======
  * a device specific mapping function exists and calls it if necessary.
 >>>>>>> v3.18
@@ -362,7 +375,11 @@ static struct _pmbus_status {
 static struct pmbus_data *pmbus_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
+=======
+	struct i2c_client *client = to_i2c_client(dev->parent);
+>>>>>>> v3.18
 =======
 	struct i2c_client *client = to_i2c_client(dev->parent);
 >>>>>>> v3.18
@@ -427,7 +444,11 @@ static long pmbus_reg2data_linear(struct pmbus_data *data,
 
 	if (sensor->class == PSC_VOLTAGE_OUT) {	/* LINEAR16 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		exponent = data->exponent;
+=======
+		exponent = data->exponent[sensor->page];
+>>>>>>> v3.18
 =======
 		exponent = data->exponent[sensor->page];
 >>>>>>> v3.18
@@ -537,7 +558,11 @@ static long pmbus_reg2data(struct pmbus_data *data, struct pmbus_sensor *sensor)
 
 static u16 pmbus_data2reg_linear(struct pmbus_data *data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 enum pmbus_sensor_classes class, long val)
+=======
+				 struct pmbus_sensor *sensor, long val)
+>>>>>>> v3.18
 =======
 				 struct pmbus_sensor *sensor, long val)
 >>>>>>> v3.18
@@ -550,7 +575,11 @@ static u16 pmbus_data2reg_linear(struct pmbus_data *data,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (class == PSC_VOLTAGE_OUT) {
+=======
+	if (sensor->class == PSC_VOLTAGE_OUT) {
+>>>>>>> v3.18
 =======
 	if (sensor->class == PSC_VOLTAGE_OUT) {
 >>>>>>> v3.18
@@ -563,15 +592,21 @@ static u16 pmbus_data2reg_linear(struct pmbus_data *data,
 		 * but to adjust the value to it.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (data->exponent < 0)
 			val <<= -data->exponent;
 		else
 			val >>= data->exponent;
 =======
+=======
+>>>>>>> v3.18
 		if (data->exponent[sensor->page] < 0)
 			val <<= -data->exponent[sensor->page];
 		else
 			val >>= data->exponent[sensor->page];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val = DIV_ROUND_CLOSEST(val, 1000);
 		return val & 0xffff;
@@ -584,7 +619,11 @@ static u16 pmbus_data2reg_linear(struct pmbus_data *data,
 
 	/* Power is in uW. Convert to mW before converting. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (class == PSC_POWER)
+=======
+	if (sensor->class == PSC_POWER)
+>>>>>>> v3.18
 =======
 	if (sensor->class == PSC_POWER)
 >>>>>>> v3.18
@@ -595,7 +634,11 @@ static u16 pmbus_data2reg_linear(struct pmbus_data *data,
 	 * before calculating the exponent.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (class == PSC_FAN)
+=======
+	if (sensor->class == PSC_FAN)
+>>>>>>> v3.18
 =======
 	if (sensor->class == PSC_FAN)
 >>>>>>> v3.18
@@ -629,6 +672,7 @@ static u16 pmbus_data2reg_linear(struct pmbus_data *data,
 
 static u16 pmbus_data2reg_direct(struct pmbus_data *data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 enum pmbus_sensor_classes class, long val)
 {
 	long m, b, R;
@@ -640,6 +684,8 @@ static u16 pmbus_data2reg_direct(struct pmbus_data *data,
 	/* Power is in uW. Adjust R and b. */
 	if (class == PSC_POWER) {
 =======
+=======
+>>>>>>> v3.18
 				 struct pmbus_sensor *sensor, long val)
 {
 	long m, b, R;
@@ -650,6 +696,9 @@ static u16 pmbus_data2reg_direct(struct pmbus_data *data,
 
 	/* Power is in uW. Adjust R and b. */
 	if (sensor->class == PSC_POWER) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		R -= 3;
 		b *= 1000;
@@ -657,7 +706,11 @@ static u16 pmbus_data2reg_direct(struct pmbus_data *data,
 
 	/* Calculate Y = (m * X + b) * 10^R */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (class != PSC_FAN) {
+=======
+	if (sensor->class != PSC_FAN) {
+>>>>>>> v3.18
 =======
 	if (sensor->class != PSC_FAN) {
 >>>>>>> v3.18
@@ -680,7 +733,11 @@ static u16 pmbus_data2reg_direct(struct pmbus_data *data,
 
 static u16 pmbus_data2reg_vid(struct pmbus_data *data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      enum pmbus_sensor_classes class, long val)
+=======
+			      struct pmbus_sensor *sensor, long val)
+>>>>>>> v3.18
 =======
 			      struct pmbus_sensor *sensor, long val)
 >>>>>>> v3.18
@@ -691,6 +748,7 @@ static u16 pmbus_data2reg_vid(struct pmbus_data *data,
 }
 
 static u16 pmbus_data2reg(struct pmbus_data *data,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			  enum pmbus_sensor_classes class, long val)
 {
@@ -707,6 +765,8 @@ static u16 pmbus_data2reg(struct pmbus_data *data,
 	default:
 		regval = pmbus_data2reg_linear(data, class, val);
 =======
+=======
+>>>>>>> v3.18
 			  struct pmbus_sensor *sensor, long val)
 {
 	u16 regval;
@@ -721,6 +781,9 @@ static u16 pmbus_data2reg(struct pmbus_data *data,
 	case linear:
 	default:
 		regval = pmbus_data2reg_linear(data, sensor, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -769,7 +832,11 @@ static int pmbus_get_boolean(struct pmbus_data *data, struct pmbus_boolean *b,
 		ret = !!regval;
 	} else if (!s1 || !s2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG();
+=======
+		WARN(1, "Bad boolean descriptor %p: s1=%p, s2=%p\n", b, s1, s2);
+>>>>>>> v3.18
 =======
 		WARN(1, "Bad boolean descriptor %p: s1=%p, s2=%p\n", b, s1, s2);
 >>>>>>> v3.18
@@ -820,7 +887,11 @@ static ssize_t pmbus_set_sensor(struct device *dev,
 				const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
+=======
+	struct i2c_client *client = to_i2c_client(dev->parent);
+>>>>>>> v3.18
 =======
 	struct i2c_client *client = to_i2c_client(dev->parent);
 >>>>>>> v3.18
@@ -836,7 +907,11 @@ static ssize_t pmbus_set_sensor(struct device *dev,
 
 	mutex_lock(&data->update_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regval = pmbus_data2reg(data, sensor->class, val);
+=======
+	regval = pmbus_data2reg(data, sensor, val);
+>>>>>>> v3.18
 =======
 	regval = pmbus_data2reg(data, sensor, val);
 >>>>>>> v3.18
@@ -1737,6 +1812,7 @@ static int pmbus_find_attributes(struct i2c_client *client,
  */
 static int pmbus_identify_common(struct i2c_client *client,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 struct pmbus_data *data)
 {
 	int vout_mode = -1;
@@ -1744,6 +1820,8 @@ static int pmbus_identify_common(struct i2c_client *client,
 	if (pmbus_check_byte_register(client, 0, PMBUS_VOUT_MODE))
 		vout_mode = _pmbus_read_byte_data(client, 0, PMBUS_VOUT_MODE);
 =======
+=======
+>>>>>>> v3.18
 				 struct pmbus_data *data, int page)
 {
 	int vout_mode = -1;
@@ -1751,6 +1829,9 @@ static int pmbus_identify_common(struct i2c_client *client,
 	if (pmbus_check_byte_register(client, page, PMBUS_VOUT_MODE))
 		vout_mode = _pmbus_read_byte_data(client, page,
 						  PMBUS_VOUT_MODE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (vout_mode >= 0 && vout_mode != 0xff) {
 		/*
@@ -1763,7 +1844,11 @@ static int pmbus_identify_common(struct i2c_client *client,
 				return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			data->exponent = ((s8)(vout_mode << 3)) >> 3;
+=======
+			data->exponent[page] = ((s8)(vout_mode << 3)) >> 3;
+>>>>>>> v3.18
 =======
 			data->exponent[page] = ((s8)(vout_mode << 3)) >> 3;
 >>>>>>> v3.18
@@ -1782,7 +1867,11 @@ static int pmbus_identify_common(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmbus_clear_fault_page(client, 0);
+=======
+	pmbus_clear_fault_page(client, page);
+>>>>>>> v3.18
 =======
 	pmbus_clear_fault_page(client, page);
 >>>>>>> v3.18
@@ -1794,7 +1883,11 @@ static int pmbus_init_common(struct i2c_client *client, struct pmbus_data *data,
 {
 	struct device *dev = &client->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	int page, ret;
+>>>>>>> v3.18
 =======
 	int page, ret;
 >>>>>>> v3.18
@@ -1831,17 +1924,23 @@ static int pmbus_init_common(struct i2c_client *client, struct pmbus_data *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = pmbus_identify_common(client, data);
 	if (ret < 0) {
 		dev_err(dev, "Failed to identify chip capabilities\n");
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	for (page = 0; page < info->pages; page++) {
 		ret = pmbus_identify_common(client, data, page);
 		if (ret < 0) {
 			dev_err(dev, "Failed to identify chip capabilities\n");
 			return ret;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -1852,7 +1951,11 @@ int pmbus_do_probe(struct i2c_client *client, const struct i2c_device_id *id,
 {
 	struct device *dev = &client->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pmbus_platform_data *pdata = dev->platform_data;
+=======
+	const struct pmbus_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	const struct pmbus_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -1898,6 +2001,7 @@ int pmbus_do_probe(struct i2c_client *client, const struct i2c_device_id *id,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Register sysfs hooks */
 	ret = sysfs_create_group(&dev->kobj, &data->group);
 	if (ret) {
@@ -1915,6 +2019,8 @@ int pmbus_do_probe(struct i2c_client *client, const struct i2c_device_id *id,
 out_hwmon_device_register:
 	sysfs_remove_group(&dev->kobj, &data->group);
 =======
+=======
+>>>>>>> v3.18
 	data->groups[0] = &data->group;
 	data->hwmon_dev = hwmon_device_register_with_groups(dev, client->name,
 							    data, data->groups);
@@ -1925,6 +2031,9 @@ out_hwmon_device_register:
 	}
 	return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_kfree:
 	kfree(data->group.attrs);
@@ -1937,7 +2046,10 @@ int pmbus_do_remove(struct i2c_client *client)
 	struct pmbus_data *data = i2c_get_clientdata(client);
 	hwmon_device_unregister(data->hwmon_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_remove_group(&client->dev.kobj, &data->group);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(data->group.attrs);

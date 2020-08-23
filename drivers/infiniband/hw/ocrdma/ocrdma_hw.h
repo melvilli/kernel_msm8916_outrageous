@@ -79,12 +79,18 @@ static inline void ocrdma_copy_le32_to_cpu(void *dst, void *src, u32 len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline u64 ocrdma_get_db_addr(struct ocrdma_dev *dev, u32 pdid)
 {
 	return dev->nic_info.unmapped_db + (pdid * dev->nic_info.db_page_size);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ocrdma_init_hw(struct ocrdma_dev *);
 void ocrdma_cleanup_hw(struct ocrdma_dev *);
@@ -95,9 +101,15 @@ void ocrdma_ring_cq_db(struct ocrdma_dev *, u16 cq_id, bool armed,
 
 /* verbs specific mailbox commands */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocrdma_query_config(struct ocrdma_dev *,
 			struct ocrdma_mbx_query_config *config);
 int ocrdma_resolve_dgid(struct ocrdma_dev *, union ib_gid *dgid, u8 *mac_addr);
+=======
+int ocrdma_mbx_get_link_speed(struct ocrdma_dev *dev, u8 *lnk_speed);
+int ocrdma_query_config(struct ocrdma_dev *,
+			struct ocrdma_mbx_query_config *config);
+>>>>>>> v3.18
 =======
 int ocrdma_mbx_get_link_speed(struct ocrdma_dev *dev, u8 *lnk_speed);
 int ocrdma_query_config(struct ocrdma_dev *,
@@ -115,7 +127,11 @@ int ocrdma_reg_mr(struct ocrdma_dev *, struct ocrdma_hw_mr *hwmr,
 			u32 pd_id, int acc);
 int ocrdma_mbx_create_cq(struct ocrdma_dev *, struct ocrdma_cq *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				int entries, int dpp_cq);
+=======
+				int entries, int dpp_cq, u16 pd_id);
+>>>>>>> v3.18
 =======
 				int entries, int dpp_cq, u16 pd_id);
 >>>>>>> v3.18
@@ -126,6 +142,7 @@ int ocrdma_mbx_create_qp(struct ocrdma_qp *, struct ib_qp_init_attr *attrs,
 			 u16 *dpp_credit_lmt);
 int ocrdma_mbx_modify_qp(struct ocrdma_dev *, struct ocrdma_qp *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct ib_qp_attr *attrs, int attr_mask,
 			 enum ib_qp_state old_qps);
 int ocrdma_mbx_query_qp(struct ocrdma_dev *, struct ocrdma_qp *,
@@ -134,11 +151,16 @@ int ocrdma_mbx_destroy_qp(struct ocrdma_dev *, struct ocrdma_qp *);
 
 int ocrdma_mbx_create_srq(struct ocrdma_srq *,
 =======
+=======
+>>>>>>> v3.18
 			 struct ib_qp_attr *attrs, int attr_mask);
 int ocrdma_mbx_query_qp(struct ocrdma_dev *, struct ocrdma_qp *,
 			struct ocrdma_qp_params *param);
 int ocrdma_mbx_destroy_qp(struct ocrdma_dev *, struct ocrdma_qp *);
 int ocrdma_mbx_create_srq(struct ocrdma_dev *, struct ocrdma_srq *,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  struct ib_srq_init_attr *,
 			  struct ocrdma_pd *);
@@ -150,7 +172,11 @@ int ocrdma_alloc_av(struct ocrdma_dev *, struct ocrdma_ah *);
 int ocrdma_free_av(struct ocrdma_dev *, struct ocrdma_ah *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocrdma_qp_state_machine(struct ocrdma_qp *, enum ib_qp_state new_state,
+=======
+int ocrdma_qp_state_change(struct ocrdma_qp *, enum ib_qp_state new_state,
+>>>>>>> v3.18
 =======
 int ocrdma_qp_state_change(struct ocrdma_qp *, enum ib_qp_state new_state,
 >>>>>>> v3.18
@@ -159,12 +185,18 @@ bool ocrdma_is_qp_in_sq_flushlist(struct ocrdma_cq *, struct ocrdma_qp *);
 bool ocrdma_is_qp_in_rq_flushlist(struct ocrdma_cq *, struct ocrdma_qp *);
 void ocrdma_flush_qp(struct ocrdma_qp *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ocrdma_get_irq(struct ocrdma_dev *dev, struct ocrdma_eq *eq);
 
 int ocrdma_mbx_rdma_stats(struct ocrdma_dev *, bool reset);
 char *port_speed_string(struct ocrdma_dev *dev);
 void ocrdma_init_service_level(struct ocrdma_dev *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* __OCRDMA_HW_H__ */

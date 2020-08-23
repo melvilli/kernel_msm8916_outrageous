@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -224,12 +228,18 @@ acpi_ps_build_named_op(struct acpi_walk_state *walk_state,
 	status = walk_state->descending_callback(walk_state, op);
 	if (ACPI_FAILURE(status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ACPI_EXCEPTION((AE_INFO, status, "During name lookup/catalog"));
 =======
+=======
+>>>>>>> v3.18
 		if (status != AE_CTRL_TERMINATE) {
 			ACPI_EXCEPTION((AE_INFO, status,
 					"During name lookup/catalog"));
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return_ACPI_STATUS(status);
 	}
@@ -242,7 +252,11 @@ acpi_ps_build_named_op(struct acpi_walk_state *walk_state,
 	if (ACPI_FAILURE(status)) {
 		if (status == AE_CTRL_PENDING) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return_ACPI_STATUS(AE_CTRL_PARSE_PENDING);
+=======
+			status = AE_CTRL_PARSE_PENDING;
+>>>>>>> v3.18
 =======
 			status = AE_CTRL_PARSE_PENDING;
 >>>>>>> v3.18
@@ -418,6 +432,10 @@ acpi_ps_complete_op(struct acpi_walk_state *walk_state,
 	switch (status) {
 	case AE_OK:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

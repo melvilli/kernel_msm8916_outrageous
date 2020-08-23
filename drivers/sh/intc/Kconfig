@@ -1,21 +1,31 @@
 config SH_INTC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	def_bool y
 	select IRQ_DOMAIN
 
 =======
+=======
+>>>>>>> v3.18
 	bool
 	select IRQ_DOMAIN
 
 if SH_INTC
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 comment "Interrupt controller options"
 
 config INTC_USERIMASK
 	bool "Userspace interrupt masking support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_SHMOBILE || (SUPERH && CPU_SH4A)
+=======
+	depends on (SUPERH && CPU_SH4A) || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on (SUPERH && CPU_SH4A) || COMPILE_TEST
 >>>>>>> v3.18
@@ -50,6 +60,11 @@ config INTC_MAPPING_DEBUG
 
 	  If in doubt, say N.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+endif
+>>>>>>> v3.18
 =======
 
 endif

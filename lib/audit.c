@@ -31,18 +31,30 @@ static unsigned signal_class[] = {
 int audit_classify_arch(int arch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (audit_is_compat(arch))
 		return 1;
 	else
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int audit_classify_syscall(int abi, unsigned syscall)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (audit_is_compat(abi))
+		return audit_classify_compat_syscall(abi, syscall);
+
+>>>>>>> v3.18
 =======
 	if (audit_is_compat(abi))
 		return audit_classify_compat_syscall(abi, syscall);
@@ -71,7 +83,10 @@ int audit_classify_syscall(int abi, unsigned syscall)
 static int __init audit_classes_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_AUDIT_COMPAT_GENERIC
 	audit_register_class(AUDIT_CLASS_WRITE_32, compat_write_class);
 	audit_register_class(AUDIT_CLASS_READ_32, compat_read_class);
@@ -79,6 +94,9 @@ static int __init audit_classes_init(void)
 	audit_register_class(AUDIT_CLASS_CHATTR_32, compat_chattr_class);
 	audit_register_class(AUDIT_CLASS_SIGNAL_32, compat_signal_class);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	audit_register_class(AUDIT_CLASS_WRITE, write_class);
 	audit_register_class(AUDIT_CLASS_READ, read_class);

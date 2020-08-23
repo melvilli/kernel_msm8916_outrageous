@@ -21,7 +21,10 @@
 #include "xfs_dquot_item.h"
 #include "xfs_dquot.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_quota_priv.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -31,7 +34,10 @@ extern struct kmem_zone	*xfs_qm_dqtrxzone;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Number of bmaps that we ask from bmapi when doing a quotacheck.
  * We make this restriction to keep the memory usage to a minimum.
  */
@@ -49,6 +55,9 @@ extern struct kmem_zone	*xfs_qm_dqtrxzone;
 	!dqp->q_core.d_icount)
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This defines the unit of allocation of dquots.
  * Currently, it is just one file system block, and a 4K blk contains 30
@@ -68,6 +77,7 @@ typedef struct xfs_quotainfo {
 	struct radix_tree_root qi_uquota_tree;
 	struct radix_tree_root qi_gquota_tree;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex qi_tree_lock;
 	xfs_inode_t	*qi_uquotaip;	 /* user quota inode */
 	xfs_inode_t	*qi_gquotaip;	 /* group quota inode */
@@ -75,12 +85,17 @@ typedef struct xfs_quotainfo {
 	struct mutex	 qi_lru_lock;
 	int		 qi_lru_count;
 =======
+=======
+>>>>>>> v3.18
 	struct radix_tree_root qi_pquota_tree;
 	struct mutex qi_tree_lock;
 	struct xfs_inode	*qi_uquotaip;	/* user quota inode */
 	struct xfs_inode	*qi_gquotaip;	/* group quota inode */
 	struct xfs_inode	*qi_pquotaip;	/* project quota inode */
 	struct list_lru	 qi_lru;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int		 qi_dquots;
 	time_t		 qi_btimelimit;	 /* limit for blks timer */
@@ -101,6 +116,7 @@ typedef struct xfs_quotainfo {
 	struct shrinker  qi_shrinker;
 } xfs_quotainfo_t;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define XFS_DQUOT_TREE(qi, type) \
 	((type & XFS_DQ_USER) ? \
@@ -127,6 +143,8 @@ typedef struct xfs_dquot_acct {
 	xfs_dqtrx_t	dqa_grpdquots[XFS_QM_TRANS_MAXDQS];
 } xfs_dquot_acct_t;
 =======
+=======
+>>>>>>> v3.18
 static inline struct radix_tree_root *
 xfs_dquot_tree(
 	struct xfs_quotainfo	*qi,
@@ -185,6 +203,9 @@ enum {
 struct xfs_dquot_acct {
 	struct xfs_dqtrx	dqs[XFS_QM_TRANS_DQTYPES][XFS_QM_TRANS_MAXDQS];
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -199,6 +220,7 @@ struct xfs_dquot_acct {
 #define XFS_QM_IWARNLIMIT	5
 #define XFS_QM_RTBWARNLIMIT	5
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void		xfs_qm_destroy_quotainfo(xfs_mount_t *);
 extern int		xfs_qm_quotacheck(xfs_mount_t *);
@@ -218,6 +240,8 @@ extern int		xfs_qm_scall_getqstat(xfs_mount_t *, fs_quota_stat_t *);
 extern int		xfs_qm_scall_quotaon(xfs_mount_t *, uint);
 extern int		xfs_qm_scall_quotaoff(xfs_mount_t *, uint);
 =======
+=======
+>>>>>>> v3.18
 extern void		xfs_qm_destroy_quotainfo(struct xfs_mount *);
 extern int		xfs_qm_write_sb_changes(struct xfs_mount *, __int64_t);
 
@@ -237,6 +261,9 @@ extern int		xfs_qm_scall_getqstatv(struct xfs_mount *,
 					struct fs_quota_statv *);
 extern int		xfs_qm_scall_quotaon(struct xfs_mount *, uint);
 extern int		xfs_qm_scall_quotaoff(struct xfs_mount *, uint);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __XFS_QM_H__ */

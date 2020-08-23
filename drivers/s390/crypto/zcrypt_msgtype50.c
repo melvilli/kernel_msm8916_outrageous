@@ -26,6 +26,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KMSG_COMPONENT "zcrypt"
+#define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
+
+>>>>>>> v3.18
 =======
 #define KMSG_COMPONENT "zcrypt"
 #define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
@@ -339,12 +345,18 @@ static int convert_type80(struct zcrypt_device *zdev,
 		/* The result is too short, the CEX2A card may not do that.. */
 		zdev->online = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		pr_err("Cryptographic device %x failed and was set offline\n",
 		       zdev->ap_dev->qid);
 		ZCRYPT_DBF_DEV(DBF_ERR, zdev, "dev%04xo%drc%d",
 			       zdev->ap_dev->qid, zdev->online, t80h->code);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EAGAIN;	/* repeat the request on a different device. */
 	}
@@ -374,11 +386,17 @@ static int convert_response(struct zcrypt_device *zdev,
 	default: /* Unknown response type, this should NEVER EVER happen */
 		zdev->online = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		pr_err("Cryptographic device %x failed and was set offline\n",
 		       zdev->ap_dev->qid);
 		ZCRYPT_DBF_DEV(DBF_ERR, zdev, "dev%04xo%dfail",
 			       zdev->ap_dev->qid, zdev->online);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EAGAIN;	/* repeat the request on a different device. */
 	}

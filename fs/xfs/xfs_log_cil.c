@@ -18,11 +18,17 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
 #include "xfs_trans_priv.h"
 #include "xfs_log_priv.h"
+=======
+#include "xfs_log_format.h"
+#include "xfs_shared.h"
+#include "xfs_trans_resv.h"
+>>>>>>> v3.18
 =======
 #include "xfs_log_format.h"
 #include "xfs_shared.h"
@@ -36,11 +42,17 @@
 #include "xfs_extent_busy.h"
 #include "xfs_discard.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_trans.h"
 #include "xfs_trans_priv.h"
 #include "xfs_log.h"
 #include "xfs_log_priv.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -90,9 +102,12 @@ xlog_cil_init_post_recovery(
 	log->l_cilp->xc_ctx->ticket = xlog_cil_ticket_alloc(log);
 	log->l_cilp->xc_ctx->sequence = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log->l_cilp->xc_ctx->commit_lsn = xlog_assign_lsn(log->l_curr_cycle,
 								log->l_curr_block);
 =======
+=======
+>>>>>>> v3.18
 }
 
 /*
@@ -140,6 +155,9 @@ xfs_cil_prepare_item(
 	 */
 	if (!lv->lv_item->li_seq)
 		lv->lv_item->li_seq = log->l_cilp->xc_ctx->sequence;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -170,6 +188,7 @@ xfs_cil_prepare_item(
  * directly out of the objects themselves.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct xfs_log_vec *
 xlog_cil_prepare_log_vecs(
 	struct xfs_trans	*tp)
@@ -178,6 +197,8 @@ xlog_cil_prepare_log_vecs(
 	struct xfs_log_vec	*lv = NULL;
 	struct xfs_log_vec	*ret_lv = NULL;
 =======
+=======
+>>>>>>> v3.18
 static void
 xlog_cil_insert_format_items(
 	struct xlog		*log,
@@ -186,12 +207,16 @@ xlog_cil_insert_format_items(
 	int			*diff_iovecs)
 {
 	struct xfs_log_item_desc *lidp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 	/* Bail out if we didn't find a log item.  */
 	if (list_empty(&tp->t_items)) {
 		ASSERT(0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return NULL;
 	}
@@ -203,6 +228,8 @@ xlog_cil_insert_format_items(
 		int	len = 0;
 		uint	niovecs;
 =======
+=======
+>>>>>>> v3.18
 		return;
 	}
 
@@ -214,12 +241,16 @@ xlog_cil_insert_format_items(
 		int	nbytes = 0;
 		int	buf_size;
 		bool	ordered = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Skip items which aren't dirty in this transaction. */
 		if (!(lidp->lid_flags & XFS_LID_DIRTY))
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Skip items that do not have any vectors for writing */
 		niovecs = IOP_SIZE(lidp->lid_item);
@@ -310,6 +341,8 @@ xfs_cil_prepare_item(
 	if (!lv->lv_item->li_seq)
 		lv->lv_item->li_seq = log->l_cilp->xc_ctx->sequence;
 =======
+=======
+>>>>>>> v3.18
 		/* get number of vecs and size of data to be stored */
 		lip->li_ops->iop_size(lip, &niovecs, &nbytes);
 
@@ -394,6 +427,9 @@ insert:
 		ASSERT(lv->lv_buf_len <= nbytes);
 		xfs_cil_prepare_item(log, lv, old_lv, diff_len, diff_iovecs);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -408,6 +444,7 @@ static void
 xlog_cil_insert_items(
 	struct xlog		*log,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct xfs_log_vec	*log_vector,
 	struct xlog_ticket	*ticket)
 {
@@ -415,16 +452,22 @@ xlog_cil_insert_items(
 	struct xfs_cil_ctx	*ctx = cil->xc_ctx;
 	struct xfs_log_vec	*lv;
 =======
+=======
+>>>>>>> v3.18
 	struct xfs_trans	*tp)
 {
 	struct xfs_cil		*cil = log->l_cilp;
 	struct xfs_cil_ctx	*ctx = cil->xc_ctx;
 	struct xfs_log_item_desc *lidp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			len = 0;
 	int			diff_iovecs = 0;
 	int			iclog_space;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ASSERT(log_vector);
 
@@ -458,6 +501,8 @@ xlog_cil_insert_items(
 	ctx->nvecs += diff_iovecs;
 
 =======
+=======
+>>>>>>> v3.18
 	ASSERT(tp);
 
 	/*
@@ -490,6 +535,9 @@ xlog_cil_insert_items(
 	if (!list_empty(&tp->t_busy))
 		list_splice_init(&tp->t_busy, &ctx->busy_extents);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Now transfer enough transaction reservation to the context ticket
@@ -500,10 +548,15 @@ xlog_cil_insert_items(
 	 */
 	if (ctx->ticket->t_curr_res == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* first commit in checkpoint, steal the header reservation */
 		ASSERT(ticket->t_curr_res >= ctx->ticket->t_unit_res + len);
 		ctx->ticket->t_curr_res = ctx->ticket->t_unit_res;
 		ticket->t_curr_res -= ctx->ticket->t_unit_res;
+=======
+		ctx->ticket->t_curr_res = ctx->ticket->t_unit_res;
+		tp->t_ticket->t_curr_res -= ctx->ticket->t_unit_res;
+>>>>>>> v3.18
 =======
 		ctx->ticket->t_curr_res = ctx->ticket->t_unit_res;
 		tp->t_ticket->t_curr_res -= ctx->ticket->t_unit_res;
@@ -522,15 +575,21 @@ xlog_cil_insert_items(
 		ctx->ticket->t_unit_res += hdrs;
 		ctx->ticket->t_curr_res += hdrs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ticket->t_curr_res -= hdrs;
 		ASSERT(ticket->t_curr_res >= len);
 	}
 	ticket->t_curr_res -= len;
 =======
+=======
+>>>>>>> v3.18
 		tp->t_ticket->t_curr_res -= hdrs;
 		ASSERT(tp->t_ticket->t_curr_res >= len);
 	}
 	tp->t_ticket->t_curr_res -= len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ctx->space_used += len;
 
@@ -546,7 +605,10 @@ xlog_cil_free_logvec(
 	for (lv = log_vector; lv; ) {
 		struct xfs_log_vec *next = lv->lv_next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kmem_free(lv->lv_buf);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kmem_free(lv);
@@ -575,10 +637,13 @@ xlog_cil_committed(
 			     (mp->m_flags & XFS_MOUNT_DISCARD) && !abort);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&ctx->cil->xc_cil_lock);
 	list_del(&ctx->committing);
 	spin_unlock(&ctx->cil->xc_cil_lock);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If we are aborting the commit, wake up anyone waiting on the
 	 * committing list.  If we don't, then a shutdown we can leave processes
@@ -590,6 +655,9 @@ xlog_cil_committed(
 		wake_up_all(&ctx->cil->xc_commit_wait);
 	list_del(&ctx->committing);
 	spin_unlock(&ctx->cil->xc_push_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	xlog_cil_free_logvec(ctx->lv_chain);
@@ -629,9 +697,13 @@ xlog_cil_push(
 	struct xlog_in_core	*commit_iclog;
 	struct xlog_ticket	*tic;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			num_lv;
 	int			num_iovecs;
 	int			len;
+=======
+	int			num_iovecs;
+>>>>>>> v3.18
 =======
 	int			num_iovecs;
 >>>>>>> v3.18
@@ -652,7 +724,11 @@ xlog_cil_push(
 	ctx = cil->xc_ctx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&cil->xc_cil_lock);
+=======
+	spin_lock(&cil->xc_push_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&cil->xc_push_lock);
 >>>>>>> v3.18
@@ -667,6 +743,7 @@ xlog_cil_push(
 	if (list_empty(&cil->xc_cil)) {
 		cil->xc_push_seq = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock(&cil->xc_cil_lock);
 		goto out_skip;
 	}
@@ -677,6 +754,8 @@ xlog_cil_push(
 	if (push_seq < cil->xc_ctx->sequence)
 		goto out_skip;
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock(&cil->xc_push_lock);
 		goto out_skip;
 	}
@@ -714,6 +793,9 @@ xlog_cil_push(
 	 */
 	list_add(&ctx->committing, &cil->xc_committing);
 	spin_unlock(&cil->xc_push_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -724,12 +806,18 @@ xlog_cil_push(
 	 */
 	lv = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_lv = 0;
 	num_iovecs = 0;
 	len = 0;
 	while (!list_empty(&cil->xc_cil)) {
 		struct xfs_log_item	*item;
 		int			i;
+=======
+	num_iovecs = 0;
+	while (!list_empty(&cil->xc_cil)) {
+		struct xfs_log_item	*item;
+>>>>>>> v3.18
 =======
 	num_iovecs = 0;
 	while (!list_empty(&cil->xc_cil)) {
@@ -746,11 +834,15 @@ xlog_cil_push(
 		lv = item->li_lv;
 		item->li_lv = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		num_lv++;
 		num_iovecs += lv->lv_niovecs;
 		for (i = 0; i < lv->lv_niovecs; i++)
 			len += lv->lv_iovecp[i].i_len;
+=======
+		num_iovecs += lv->lv_niovecs;
+>>>>>>> v3.18
 =======
 		num_iovecs += lv->lv_niovecs;
 >>>>>>> v3.18
@@ -770,6 +862,7 @@ xlog_cil_push(
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * mirror the new sequence into the cil structure so that we can do
 	 * unlocked checks against the current sequence in log forces without
 	 * risking deferencing a freed context pointer.
@@ -777,6 +870,8 @@ xlog_cil_push(
 	cil->xc_current_sequence = new_ctx->sequence;
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * The switch is now done, so we can drop the context lock and move out
@@ -797,11 +892,14 @@ xlog_cil_push(
 	 * that higher sequences will wait for us to write out a commit record
 	 * before they do.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 */
 	spin_lock(&cil->xc_cil_lock);
 	list_add(&ctx->committing, &cil->xc_committing);
 	spin_unlock(&cil->xc_cil_lock);
 =======
+=======
+>>>>>>> v3.18
 	 *
 	 * xfs_log_force_lsn requires us to mirror the new sequence into the cil
 	 * structure atomically with the addition of this sequence to the
@@ -812,6 +910,9 @@ xlog_cil_push(
 	spin_lock(&cil->xc_push_lock);
 	cil->xc_current_sequence = new_ctx->sequence;
 	spin_unlock(&cil->xc_push_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	up_write(&cil->xc_ctx_lock);
 
@@ -848,12 +949,15 @@ xlog_cil_push(
 	 */
 restart:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&cil->xc_cil_lock);
 	list_for_each_entry(new_ctx, &cil->xc_committing, committing) {
 		/*
 		 * Higher sequences will wait for this one so skip them.
 		 * Don't wait for own own sequence, either.
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&cil->xc_push_lock);
 	list_for_each_entry(new_ctx, &cil->xc_committing, committing) {
 		/*
@@ -869,6 +973,9 @@ restart:
 		/*
 		 * Higher sequences will wait for this one so skip them.
 		 * Don't wait for our own sequence, either.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		if (new_ctx->sequence >= ctx->sequence)
@@ -879,17 +986,23 @@ restart:
 			 * complete, then start again from the beginning.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			xlog_wait(&cil->xc_commit_wait, &cil->xc_cil_lock);
 			goto restart;
 		}
 	}
 	spin_unlock(&cil->xc_cil_lock);
 =======
+=======
+>>>>>>> v3.18
 			xlog_wait(&cil->xc_commit_wait, &cil->xc_push_lock);
 			goto restart;
 		}
 	}
 	spin_unlock(&cil->xc_push_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* xfs_log_done always frees the ticket on error. */
@@ -910,15 +1023,21 @@ restart:
 	 * and wake up anyone who is waiting for the commit to complete.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&cil->xc_cil_lock);
 	ctx->commit_lsn = commit_lsn;
 	wake_up_all(&cil->xc_commit_wait);
 	spin_unlock(&cil->xc_cil_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&cil->xc_push_lock);
 	ctx->commit_lsn = commit_lsn;
 	wake_up_all(&cil->xc_commit_wait);
 	spin_unlock(&cil->xc_push_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* release the hounds! */
@@ -935,7 +1054,11 @@ out_abort_free_ticket:
 out_abort:
 	xlog_cil_committed(ctx, XFS_LI_ABORTED);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return XFS_ERROR(EIO);
+=======
+	return -EIO;
+>>>>>>> v3.18
 =======
 	return -EIO;
 >>>>>>> v3.18
@@ -977,7 +1100,11 @@ xlog_cil_push_background(
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&cil->xc_cil_lock);
+=======
+	spin_lock(&cil->xc_push_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&cil->xc_push_lock);
 >>>>>>> v3.18
@@ -986,6 +1113,7 @@ xlog_cil_push_background(
 		queue_work(log->l_mp->m_cil_workqueue, &cil->xc_push_work);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&cil->xc_cil_lock);
 
 }
@@ -993,6 +1121,8 @@ xlog_cil_push_background(
 static void
 xlog_cil_push_foreground(
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock(&cil->xc_push_lock);
 
 }
@@ -1005,6 +1135,9 @@ xlog_cil_push_foreground(
  */
 static void
 xlog_cil_push_now(
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct xlog	*log,
 	xfs_lsn_t	push_seq)
@@ -1024,9 +1157,15 @@ xlog_cil_push_now(
 	 * there's no work we need to do.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&cil->xc_cil_lock);
 	if (list_empty(&cil->xc_cil) || push_seq <= cil->xc_push_seq) {
 		spin_unlock(&cil->xc_cil_lock);
+=======
+	spin_lock(&cil->xc_push_lock);
+	if (list_empty(&cil->xc_cil) || push_seq <= cil->xc_push_seq) {
+		spin_unlock(&cil->xc_push_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&cil->xc_push_lock);
 	if (list_empty(&cil->xc_cil) || push_seq <= cil->xc_push_seq) {
@@ -1037,11 +1176,14 @@ xlog_cil_push_now(
 
 	cil->xc_push_seq = push_seq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&cil->xc_cil_lock);
 
 	/* do the push now */
 	xlog_cil_push(log);
 =======
+=======
+>>>>>>> v3.18
 	queue_work(log->l_mp->m_cil_workqueue, &cil->xc_push_work);
 	spin_unlock(&cil->xc_push_lock);
 }
@@ -1058,6 +1200,9 @@ xlog_cil_empty(
 		empty = true;
 	spin_unlock(&cil->xc_push_lock);
 	return empty;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1075,7 +1220,11 @@ xlog_cil_empty(
  * allowed again.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
+=======
+void
+>>>>>>> v3.18
 =======
 void
 >>>>>>> v3.18
@@ -1087,8 +1236,13 @@ xfs_log_commit_cil(
 {
 	struct xlog		*log = mp->m_log;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			log_flags = 0;
 	struct xfs_log_vec	*log_vector;
+=======
+	struct xfs_cil		*cil = log->l_cilp;
+	int			log_flags = 0;
+>>>>>>> v3.18
 =======
 	struct xfs_cil		*cil = log->l_cilp;
 	int			log_flags = 0;
@@ -1097,6 +1251,7 @@ xfs_log_commit_cil(
 	if (flags & XFS_TRANS_RELEASE_LOG_RES)
 		log_flags = XFS_LOG_REL_PERM_RESERV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Do all the hard work of formatting items (including memory
@@ -1129,6 +1284,8 @@ xfs_log_commit_cil(
 
 	tp->t_commit_lsn = *commit_lsn;
 =======
+=======
+>>>>>>> v3.18
 	/* lock out background commit */
 	down_read(&cil->xc_ctx_lock);
 
@@ -1142,6 +1299,9 @@ xfs_log_commit_cil(
 	if (commit_lsn)
 		*commit_lsn = tp->t_commit_lsn;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xfs_log_done(mp, tp->t_ticket, NULL, log_flags);
 	xfs_trans_unreserve_and_mod_sb(tp);
@@ -1158,6 +1318,7 @@ xfs_log_commit_cil(
 	 * inodes and EFIs.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_trans_free_items(tp, *commit_lsn, 0);
 
 	xlog_cil_push_background(log);
@@ -1165,11 +1326,16 @@ xfs_log_commit_cil(
 	up_read(&log->l_cilp->xc_ctx_lock);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	xfs_trans_free_items(tp, tp->t_commit_lsn, 0);
 
 	xlog_cil_push_background(log);
 
 	up_read(&cil->xc_ctx_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1200,7 +1366,12 @@ xlog_cil_force_lsn(
 	 * so no need to deal with it here.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xlog_cil_push_foreground(log, sequence);
+=======
+restart:
+	xlog_cil_push_now(log, sequence);
+>>>>>>> v3.18
 =======
 restart:
 	xlog_cil_push_now(log, sequence);
@@ -1213,10 +1384,13 @@ restart:
 	 * on commits for those as well.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 restart:
 	spin_lock(&cil->xc_cil_lock);
 	list_for_each_entry(ctx, &cil->xc_committing, committing) {
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&cil->xc_push_lock);
 	list_for_each_entry(ctx, &cil->xc_committing, committing) {
 		/*
@@ -1226,6 +1400,9 @@ restart:
 		 */
 		if (XLOG_FORCED_SHUTDOWN(log))
 			goto out_shutdown;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ctx->sequence > sequence)
 			continue;
@@ -1235,7 +1412,11 @@ restart:
 			 * complete, then start again from the beginning.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			xlog_wait(&cil->xc_commit_wait, &cil->xc_cil_lock);
+=======
+			xlog_wait(&cil->xc_commit_wait, &cil->xc_push_lock);
+>>>>>>> v3.18
 =======
 			xlog_wait(&cil->xc_commit_wait, &cil->xc_push_lock);
 >>>>>>> v3.18
@@ -1247,9 +1428,12 @@ restart:
 		commit_lsn = ctx->commit_lsn;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&cil->xc_cil_lock);
 	return commit_lsn;
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * The call to xlog_cil_push_now() executes the push in the background.
@@ -1285,6 +1469,9 @@ restart:
 out_shutdown:
 	spin_unlock(&cil->xc_push_lock);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1331,7 +1518,11 @@ xlog_cil_init(
 	cil = kmem_zalloc(sizeof(*cil), KM_SLEEP|KM_MAYFAIL);
 	if (!cil)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ENOMEM;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -1340,7 +1531,11 @@ xlog_cil_init(
 	if (!ctx) {
 		kmem_free(cil);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ENOMEM;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -1351,6 +1546,10 @@ xlog_cil_init(
 	INIT_LIST_HEAD(&cil->xc_committing);
 	spin_lock_init(&cil->xc_cil_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&cil->xc_push_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&cil->xc_push_lock);
 >>>>>>> v3.18

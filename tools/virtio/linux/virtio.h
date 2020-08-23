@@ -46,9 +46,12 @@ struct virtqueue {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MODULE_LICENSE(__MODULE_LICENSE_value) \
 	const char *__MODULE_LICENSE_name = __MODULE_LICENSE_value
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Interfaces exported by virtio_ring. */
@@ -70,7 +73,11 @@ int virtqueue_add_inbuf(struct virtqueue *vq,
 			gfp_t gfp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void virtqueue_kick(struct virtqueue *vq);
+=======
+bool virtqueue_kick(struct virtqueue *vq);
+>>>>>>> v3.18
 =======
 bool virtqueue_kick(struct virtqueue *vq);
 >>>>>>> v3.18
@@ -90,7 +97,11 @@ struct virtqueue *vring_new_virtqueue(unsigned int index,
 				      bool weak_barriers,
 				      void *pages,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      void (*notify)(struct virtqueue *vq),
+=======
+				      bool (*notify)(struct virtqueue *vq),
+>>>>>>> v3.18
 =======
 				      bool (*notify)(struct virtqueue *vq),
 >>>>>>> v3.18

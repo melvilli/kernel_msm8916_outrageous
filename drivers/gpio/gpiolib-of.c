@@ -17,7 +17,11 @@
 #include <linux/module.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gpio.h>
+=======
+#include <linux/gpio/consumer.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio/consumer.h>
 >>>>>>> v3.18
@@ -27,7 +31,12 @@
 #include <linux/pinctrl/pinctrl.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/err.h>
+=======
+
+#include "gpiolib.h"
+>>>>>>> v3.18
 =======
 
 #include "gpiolib.h"
@@ -39,7 +48,11 @@ struct gg_data {
 	struct of_phandle_args gpiospec;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int out_gpio;
+=======
+	struct gpio_desc *out_gpio;
+>>>>>>> v3.18
 =======
 	struct gpio_desc *out_gpio;
 >>>>>>> v3.18
@@ -58,6 +71,7 @@ static int of_gpiochip_find_and_xlate(struct gpio_chip *gc, void *data)
 
 	ret = gc->of_xlate(gc, &gg_data->gpiospec, gg_data->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0) {
 		/* We've found the gpio chip, but the translation failed.
 		 * Return true to stop looking and return the translation
@@ -69,17 +83,26 @@ static int of_gpiochip_find_and_xlate(struct gpio_chip *gc, void *data)
 
 	gg_data->out_gpio = ret + gc->base;
 =======
+=======
+>>>>>>> v3.18
 	if (ret < 0)
 		return false;
 
 	gg_data->out_gpio = gpiochip_get_desc(gc, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return true;
 }
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * of_get_named_gpio_flags() - Get a GPIO number and flags to use with GPIO API
+=======
+ * of_get_named_gpiod_flags() - Get a GPIO descriptor and flags for GPIO API
+>>>>>>> v3.18
 =======
  * of_get_named_gpiod_flags() - Get a GPIO descriptor and flags for GPIO API
 >>>>>>> v3.18
@@ -89,6 +112,7 @@ static int of_gpiochip_find_and_xlate(struct gpio_chip *gc, void *data)
  * @flags:	a flags pointer to fill in
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns GPIO number to use with Linux generic GPIO API, or one of the errno
  * value on the error condition. If @flags is not NULL the function also fills
  * in flags for the GPIO.
@@ -96,24 +120,35 @@ static int of_gpiochip_find_and_xlate(struct gpio_chip *gc, void *data)
 int of_get_named_gpio_flags(struct device_node *np, const char *propname,
 			   int index, enum of_gpio_flags *flags)
 =======
+=======
+>>>>>>> v3.18
  * Returns GPIO descriptor to use with Linux GPIO API, or one of the errno
  * value on the error condition. If @flags is not NULL the function also fills
  * in flags for the GPIO.
  */
 struct gpio_desc *of_get_named_gpiod_flags(struct device_node *np,
 		     const char *propname, int index, enum of_gpio_flags *flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* Return -EPROBE_DEFER to support probe() functions to be called
 	 * later when the GPIO actually becomes available
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gg_data gg_data = { .flags = flags, .out_gpio = -EPROBE_DEFER };
 =======
+=======
+>>>>>>> v3.18
 	struct gg_data gg_data = {
 		.flags = flags,
 		.out_gpio = ERR_PTR(-EPROBE_DEFER)
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -125,8 +160,14 @@ struct gpio_desc *of_get_named_gpiod_flags(struct device_node *np,
 					 &gg_data.gpiospec);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("%s: can't parse gpios property\n", __func__);
 		return ret;
+=======
+		pr_debug("%s: can't parse '%s' property of node '%s[%d]'\n",
+			__func__, propname, np->full_name, index);
+		return ERR_PTR(ret);
+>>>>>>> v3.18
 =======
 		pr_debug("%s: can't parse '%s' property of node '%s[%d]'\n",
 			__func__, propname, np->full_name, index);
@@ -138,12 +179,15 @@ struct gpio_desc *of_get_named_gpiod_flags(struct device_node *np,
 
 	of_node_put(gg_data.gpiospec.np);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR_VALUE(gg_data.out_gpio))
 		pr_debug("%s exited with status %d\n", __func__,
 			 gg_data.out_gpio);
 	return gg_data.out_gpio;
 }
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("%s: parsed '%s' property of node '%s[%d]' - status (%d)\n",
 		 __func__, propname, np->full_name, index,
 		 PTR_ERR_OR_ZERO(gg_data.out_gpio));
@@ -162,6 +206,9 @@ int of_get_named_gpio_flags(struct device_node *np, const char *list_name,
 	else
 		return desc_to_gpio(desc);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(of_get_named_gpio_flags);
 
@@ -267,6 +314,12 @@ static void of_gpiochip_add_pin_range(struct gpio_chip *chip)
 	struct pinctrl_dev *pctldev;
 	int index = 0, ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *name;
+	static const char group_names_propname[] = "gpio-ranges-group-names";
+	struct property *group_names;
+>>>>>>> v3.18
 =======
 	const char *name;
 	static const char group_names_propname[] = "gpio-ranges-group-names";
@@ -277,15 +330,21 @@ static void of_gpiochip_add_pin_range(struct gpio_chip *chip)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (;; index++) {
 		ret = of_parse_phandle_with_args(np, "gpio-ranges",
 				"#gpio-range-cells", index, &pinspec);
 =======
+=======
+>>>>>>> v3.18
 	group_names = of_find_property(np, group_names_propname, NULL);
 
 	for (;; index++) {
 		ret = of_parse_phandle_with_fixed_args(np, "gpio-ranges", 3,
 				index, &pinspec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret)
 			break;
@@ -294,6 +353,7 @@ static void of_gpiochip_add_pin_range(struct gpio_chip *chip)
 		if (!pctldev)
 			break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = gpiochip_add_pin_range(chip,
 					     pinctrl_dev_get_devname(pctldev),
@@ -304,6 +364,8 @@ static void of_gpiochip_add_pin_range(struct gpio_chip *chip)
 		if (ret)
 			break;
 =======
+=======
+>>>>>>> v3.18
 		if (pinspec.args[2]) {
 			if (group_names) {
 				ret = of_property_read_string_index(np,
@@ -354,6 +416,9 @@ static void of_gpiochip_add_pin_range(struct gpio_chip *chip)
 			if (ret)
 				break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -383,9 +448,13 @@ void of_gpiochip_remove(struct gpio_chip *chip)
 {
 	gpiochip_remove_pin_ranges(chip);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (chip->of_node)
 		of_node_put(chip->of_node);
+=======
+	of_node_put(chip->of_node);
+>>>>>>> v3.18
 =======
 	of_node_put(chip->of_node);
 >>>>>>> v3.18

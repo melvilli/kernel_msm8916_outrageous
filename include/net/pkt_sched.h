@@ -51,7 +51,11 @@ typedef long	psched_tdiff_t;
 static inline psched_time_t psched_get_time(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PSCHED_NS2TICKS(ktime_to_ns(ktime_get()));
+=======
+	return PSCHED_NS2TICKS(ktime_get_ns());
+>>>>>>> v3.18
 =======
 	return PSCHED_NS2TICKS(ktime_get_ns());
 >>>>>>> v3.18
@@ -69,8 +73,13 @@ struct qdisc_watchdog {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void qdisc_watchdog_init(struct qdisc_watchdog *wd, struct Qdisc *qdisc);
 extern void qdisc_watchdog_schedule_ns(struct qdisc_watchdog *wd, u64 expires);
+=======
+void qdisc_watchdog_init(struct qdisc_watchdog *wd, struct Qdisc *qdisc);
+void qdisc_watchdog_schedule_ns(struct qdisc_watchdog *wd, u64 expires, bool throttle);
+>>>>>>> v3.18
 =======
 void qdisc_watchdog_init(struct qdisc_watchdog *wd, struct Qdisc *qdisc);
 void qdisc_watchdog_schedule_ns(struct qdisc_watchdog *wd, u64 expires, bool throttle);
@@ -80,21 +89,28 @@ static inline void qdisc_watchdog_schedule(struct qdisc_watchdog *wd,
 					   psched_time_t expires)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qdisc_watchdog_schedule_ns(wd, PSCHED_TICKS2NS(expires));
 }
 
 extern void qdisc_watchdog_cancel(struct qdisc_watchdog *wd);
 =======
+=======
+>>>>>>> v3.18
 	qdisc_watchdog_schedule_ns(wd, PSCHED_TICKS2NS(expires), true);
 }
 
 void qdisc_watchdog_cancel(struct qdisc_watchdog *wd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct Qdisc_ops pfifo_qdisc_ops;
 extern struct Qdisc_ops bfifo_qdisc_ops;
 extern struct Qdisc_ops pfifo_head_drop_qdisc_ops;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int fifo_set_limit(struct Qdisc *q, unsigned int limit);
 extern struct Qdisc *fifo_create_dflt(struct Qdisc *sch, struct Qdisc_ops *ops,
@@ -116,6 +132,8 @@ extern int sch_direct_xmit(struct sk_buff *skb, struct Qdisc *q,
 
 extern void __qdisc_run(struct Qdisc *q);
 =======
+=======
+>>>>>>> v3.18
 int fifo_set_limit(struct Qdisc *q, unsigned int limit);
 struct Qdisc *fifo_create_dflt(struct Qdisc *sch, struct Qdisc_ops *ops,
 			       unsigned int limit);
@@ -139,6 +157,9 @@ int sch_direct_xmit(struct sk_buff *skb, struct Qdisc *q,
 		    spinlock_t *root_lock, bool validate);
 
 void __qdisc_run(struct Qdisc *q);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void qdisc_run(struct Qdisc *q)
@@ -148,6 +169,7 @@ static inline void qdisc_run(struct Qdisc *q)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int tc_classify_compat(struct sk_buff *skb, const struct tcf_proto *tp,
 			      struct tcf_result *res);
 extern int tc_classify(struct sk_buff *skb, const struct tcf_proto *tp,
@@ -155,11 +177,16 @@ extern int tc_classify(struct sk_buff *skb, const struct tcf_proto *tp,
 extern int tc_qdisc_flow_control(struct net_device *dev, u32 tcm_handle,
 				  int flow_enable);
 =======
+=======
+>>>>>>> v3.18
 int tc_classify_compat(struct sk_buff *skb, const struct tcf_proto *tp,
 		       struct tcf_result *res);
 int tc_classify(struct sk_buff *skb, const struct tcf_proto *tp,
 		struct tcf_result *res);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Calculate maximal size of packet seen by hard_start_xmit
    routine of this device.

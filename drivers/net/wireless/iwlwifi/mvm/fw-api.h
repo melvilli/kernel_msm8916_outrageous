@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -81,6 +91,7 @@
 #include "fw-api-power.h"
 #include "fw-api-d3.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "fw-api-bt-coex.h"
 
 /* queue and FIFO numbers by usage */
@@ -93,6 +104,8 @@ enum {
 	IWL_MVM_LAST_AGG_QUEUE = IWL_MVM_NUM_QUEUES - 1,
 	IWL_MVM_CMD_FIFO = 7
 =======
+=======
+>>>>>>> v3.18
 #include "fw-api-coex.h"
 #include "fw-api-scan.h"
 
@@ -109,12 +122,20 @@ enum iwl_mvm_tx_fifo {
 	IWL_MVM_TX_FIFO_VO,
 	IWL_MVM_TX_FIFO_MCAST = 5,
 	IWL_MVM_TX_FIFO_CMD = 7,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 #define IWL_MVM_STATION_COUNT	16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IWL_MVM_TDLS_STA_COUNT	4
+
+>>>>>>> v3.18
 =======
 #define IWL_MVM_TDLS_STA_COUNT	4
 
@@ -130,13 +151,19 @@ enum {
 	PHY_CONTEXT_CMD = 0x8,
 	DBG_CFG = 0x9,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* station table */
 =======
+=======
+>>>>>>> v3.18
 	ANTENNA_COUPLING_NOTIFICATION = 0xa,
 
 	/* station table */
 	ADD_STA_KEY = 0x17,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ADD_STA = 0x18,
 	REMOVE_STA = 0x19,
@@ -147,6 +174,12 @@ enum {
 	MGMT_MCAST_KEY = 0x1f,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* scheduler config */
+	SCD_QUEUE_CFG = 0x1d,
+
+>>>>>>> v3.18
 =======
 	/* scheduler config */
 	SCD_QUEUE_CFG = 0x1d,
@@ -162,6 +195,10 @@ enum {
 	BINDING_CONTEXT_CMD = 0x2b,
 	TIME_QUOTA_CMD = 0x2c,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NON_QOS_TX_COUNTER_CMD = 0x2d,
+>>>>>>> v3.18
 =======
 	NON_QOS_TX_COUNTER_CMD = 0x2d,
 >>>>>>> v3.18
@@ -179,16 +216,22 @@ enum {
 	SCAN_OFFLOAD_REQUEST_CMD = 0x51,
 	SCAN_OFFLOAD_ABORT_CMD = 0x52,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCAN_OFFLOAD_COMPLETE = 0x6D,
 	SCAN_OFFLOAD_UPDATE_PROFILES_CMD = 0x6E,
 	SCAN_OFFLOAD_CONFIG_CMD = 0x6f,
 =======
+=======
+>>>>>>> v3.18
 	HOT_SPOT_CMD = 0x53,
 	SCAN_OFFLOAD_COMPLETE = 0x6D,
 	SCAN_OFFLOAD_UPDATE_PROFILES_CMD = 0x6E,
 	SCAN_OFFLOAD_CONFIG_CMD = 0x6f,
 	MATCH_FOUND_NOTIFICATION = 0xd9,
 	SCAN_ITERATION_COMPLETE = 0xe7,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Phy */
@@ -197,11 +240,14 @@ enum {
 	/* PHY_DB_CMD = 0x6c, */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Power */
 	POWER_TABLE_CMD = 0x77,
 	LTR_CONFIG = 0xee,
 
 =======
+=======
+>>>>>>> v3.18
 	/* Power - legacy power table command */
 	POWER_TABLE_CMD = 0x77,
 	PSM_UAPSD_AP_MISBEHAVING_NOTIFICATION = 0x78,
@@ -210,6 +256,9 @@ enum {
 	/* Thermal Throttling*/
 	REPLY_THERMAL_MNG_BACKOFF = 0x7e,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Scanning */
 	SCAN_REQUEST_CMD = 0x80,
@@ -227,8 +276,14 @@ enum {
 	BEACON_TEMPLATE_CMD = 0x91,
 	TX_ANT_CONFIGURATION_CMD = 0x98,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_CONFIG = 0x9b,
 	STATISTICS_NOTIFICATION = 0x9d,
+=======
+	STATISTICS_NOTIFICATION = 0x9d,
+	EOSP_NOTIFICATION = 0x9e,
+	REDUCE_TX_POWER_CMD = 0x9f,
+>>>>>>> v3.18
 =======
 	STATISTICS_NOTIFICATION = 0x9d,
 	EOSP_NOTIFICATION = 0x9e,
@@ -240,18 +295,29 @@ enum {
 	CARD_STATE_NOTIFICATION = 0xa1,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	MISSED_BEACONS_NOTIFICATION = 0xa2,
 
 	/* Power - new power table command */
 	MAC_PM_POWER_TABLE = 0xa9,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	REPLY_RX_PHY_CMD = 0xc0,
 	REPLY_RX_MPDU_CMD = 0xc1,
 	BA_NOTIF = 0xc5,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	MARKER_CMD = 0xcb,
+
+>>>>>>> v3.18
 =======
 	MARKER_CMD = 0xcb,
 
@@ -261,7 +327,10 @@ enum {
 	BT_COEX_PROT_ENV = 0xcd,
 	BT_PROFILE_NOTIFICATION = 0xce,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	BT_CONFIG = 0x9b,
 	BT_COEX_UPDATE_SW_BOOST = 0x5a,
 	BT_COEX_UPDATE_CORUN_LUT = 0x5b,
@@ -274,12 +343,19 @@ enum {
 	/* DTS measurements */
 	CMD_DTS_MEASUREMENT_TRIGGER = 0xdc,
 	DTS_MEASUREMENT_NOTIFICATION = 0xdd,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	REPLY_DEBUG_CMD = 0xf0,
 	DEBUG_LOG_MSG = 0xf7,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BCAST_FILTER_CMD = 0xcf,
+>>>>>>> v3.18
 =======
 	BCAST_FILTER_CMD = 0xcf,
 >>>>>>> v3.18
@@ -291,6 +367,10 @@ enum {
 	OFFLOADS_QUERY_CMD = 0xd5,
 	REMOTE_WAKE_CONFIG_CMD = 0xd6,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	D0I3_END_CMD = 0xed,
+>>>>>>> v3.18
 =======
 	D0I3_END_CMD = 0xed,
 >>>>>>> v3.18
@@ -331,7 +411,10 @@ struct iwl_tx_ant_cfg_cmd {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct iwl_reduce_tx_power_cmd - TX power reduction command
  * REDUCE_TX_POWER_CMD = 0x9f
@@ -345,6 +428,9 @@ struct iwl_reduce_tx_power_cmd {
 	__le16 pwr_restriction;
 } __packed; /* TX_REDUCED_POWER_API_S_VER_1 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Calibration control struct.
@@ -414,6 +500,7 @@ enum {
 /* Section types for NVM_ACCESS_CMD */
 enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NVM_SECTION_TYPE_HW = 0,
 	NVM_SECTION_TYPE_SW,
 	NVM_SECTION_TYPE_PAPD,
@@ -423,12 +510,17 @@ enum {
 	NVM_SECTION_TYPE_POST_FCS_CALIB,
 	NVM_NUM_OF_SECTIONS,
 =======
+=======
+>>>>>>> v3.18
 	NVM_SECTION_TYPE_SW = 1,
 	NVM_SECTION_TYPE_REGULATORY = 3,
 	NVM_SECTION_TYPE_CALIBRATION = 4,
 	NVM_SECTION_TYPE_PRODUCTION = 5,
 	NVM_SECTION_TYPE_MAC_OVERRIDE = 11,
 	NVM_MAX_NUM_SECTIONS = 12,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -522,7 +614,10 @@ struct mvm_alive_resp {
 } __packed; /* ALIVE_RES_API_S_VER_1 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct mvm_alive_resp_ver2 {
 	__le16 status;
 	__le16 flags;
@@ -552,6 +647,9 @@ struct mvm_alive_resp_ver2 {
 	__le32 dbg_print_buff_addr;
 } __packed; /* ALIVE_RES_API_S_VER_2 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Error response/notification */
 enum {
@@ -644,6 +742,7 @@ enum iwl_time_event_type {
 	TE_WIDI_TX_SYNC,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TE_MAX
 }; /* MAC_EVENT_TYPE_API_E_VER_1 */
 
@@ -656,6 +755,8 @@ enum {
 }; /* MAC_EVENT_DEPENDENCY_POLICY_API_E_VER_2 */
 /*
 =======
+=======
+>>>>>>> v3.18
 	/* Channel Switch NoA */
 	TE_CHANNEL_SWITCH_PERIOD,
 
@@ -712,12 +813,16 @@ enum {
  * @TE_V1_NOTIF_INTERNAL_FRAG_START: internal FW use.
  * @TE_V1_NOTIF_INTERNAL_FRAG_END: internal FW use.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Supported Time event notifications configuration.
  * A notification (both event and fragment) includes a status indicating weather
  * the FW was able to schedule the event or not. For fragment start/end
  * notification the status is always success. There is no start/end fragment
  * notification for monolithic events.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * @TE_NOTIF_NONE: no notifications
@@ -751,6 +856,8 @@ enum {
  * @TE_FRAG_ENDLESS: fragmentation of the time event is allowed, and any number
  *  of fragments are valid.
 =======
+=======
+>>>>>>> v3.18
  */
 enum {
 	TE_V1_NOTIF_NONE = 0,
@@ -774,6 +881,9 @@ enum {
  *  the first 2 fragments are scheduled.
  * @TE_V2_FRAG_ENDLESS: fragmentation of the time event is allowed, and any
  *  number of fragments are valid.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Other than the constant defined above, specifying a fragmentation value 'x'
@@ -781,6 +891,7 @@ enum {
  * scheduled.
  */
 enum {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TE_FRAG_NONE = 0,
 	TE_FRAG_SINGLE = 1,
@@ -798,6 +909,8 @@ enum {
 /**
  * struct iwl_time_event_cmd - configuring Time Events
 =======
+=======
+>>>>>>> v3.18
 	TE_V2_FRAG_NONE = 0,
 	TE_V2_FRAG_SINGLE = 1,
 	TE_V2_FRAG_DUAL = 2,
@@ -863,6 +976,9 @@ enum {
  * struct iwl_time_event_cmd_api - configuring Time Events
  * with struct MAC_TIME_EVENT_DATA_API_S_VER_2 (see also
  * with version 1. determined by IWL_UCODE_TLV_FLAGS)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * ( TIME_EVENT_CMD = 0x29 )
  * @id_and_color: ID and color of the relevant MAC
@@ -876,6 +992,7 @@ enum {
  * @depends_on: the unique ID of the event we depend on (if any)
  * @interval: interval between repetitions, in TU
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @interval_reciprocal: 2^32 / interval
  * @duration: duration of event in TU
  * @repeat: how many repetitions to do, can be TE_REPEAT_ENDLESS
@@ -884,6 +1001,8 @@ enum {
  * @max_frags: maximal number of fragments the Time Event can be divided to
  * @notify: notifications using TE_NOTIF_* (whom to notify when)
 =======
+=======
+>>>>>>> v3.18
  * @duration: duration of event in TU
  * @repeat: how many repetitions to do, can be TE_REPEAT_ENDLESS
  * @max_frags: maximal number of fragments the Time Event can be divided to
@@ -892,6 +1011,9 @@ enum {
  *	using one of TE_INDEPENDENT, TE_DEP_OTHER, TE_DEP_TSF
  *	TE_EVENT_SOCIOPATHIC
  *	using TE_ABSENCE and using TE_NOTIF_*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct iwl_time_event_cmd {
@@ -899,6 +1021,7 @@ struct iwl_time_event_cmd {
 	__le32 id_and_color;
 	__le32 action;
 	__le32 id;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* MAC_TIME_EVENT_DATA_API_S_VER_1 */
 	__le32 apply_time;
@@ -914,6 +1037,8 @@ struct iwl_time_event_cmd {
 	__le32 notify;
 } __packed; /* MAC_TIME_EVENT_CMD_API_S_VER_1 */
 =======
+=======
+>>>>>>> v3.18
 	/* MAC_TIME_EVENT_DATA_API_S_VER_2 */
 	__le32 apply_time;
 	__le32 max_delay;
@@ -924,6 +1049,9 @@ struct iwl_time_event_cmd {
 	u8 max_frags;
 	__le16 policy;
 } __packed; /* MAC_TIME_EVENT_CMD_API_S_VER_2 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1106,8 +1234,11 @@ struct iwl_phy_context_cmd {
 } __packed; /* PHY_CONTEXT_CMD_API_VER_1 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IWL_RX_INFO_PHY_CNT 8
 =======
+=======
+>>>>>>> v3.18
 /*
  * Aux ROC command
  *
@@ -1183,6 +1314,9 @@ struct iwl_hs20_roc_res {
 #define IWL_RX_INFO_ENERGY_ANT_B_POS 8
 #define IWL_RX_INFO_ENERGY_ANT_C_POS 16
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IWL_RX_INFO_AGC_IDX 1
 #define IWL_RX_INFO_RSSI_AB_IDX 2
@@ -1317,6 +1451,10 @@ enum iwl_mvm_rx_status {
 	RX_MPDU_RES_STATUS_SEC_CCM_ENC			= (2 << 8),
 	RX_MPDU_RES_STATUS_SEC_TKIP_ENC			= (3 << 8),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RX_MPDU_RES_STATUS_SEC_EXT_ENC			= (4 << 8),
+>>>>>>> v3.18
 =======
 	RX_MPDU_RES_STATUS_SEC_EXT_ENC			= (4 << 8),
 >>>>>>> v3.18
@@ -1369,7 +1507,10 @@ struct iwl_card_state_notif {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct iwl_missed_beacons_notif - information on missed beacons
  * ( MISSED_BEACONS_NOTIFICATION = 0xa2 )
  * @mac_id: interface ID
@@ -1388,6 +1529,9 @@ struct iwl_missed_beacons_notif {
 } __packed; /* MISSED_BEACON_NTFY_API_S_VER_3 */
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * struct iwl_set_calib_default_cmd - set default value for calibration.
  * ( SET_CALIB_DEFAULT_CMD = 0x8e )
@@ -1403,6 +1547,10 @@ struct iwl_set_calib_default_cmd {
 
 #define MAX_PORT_ID_NUM	2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MAX_MCAST_FILTERING_ADDRESSES 256
+>>>>>>> v3.18
 =======
 #define MAX_MCAST_FILTERING_ADDRESSES 256
 >>>>>>> v3.18
@@ -1431,7 +1579,10 @@ struct iwl_mcast_filter_cmd {
 } __packed; /* MCAST_FILTERING_CMD_API_S_VER_1 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MAX_BCAST_FILTERS 8
 #define MAX_BCAST_FILTER_ATTRS 2
 
@@ -1904,5 +2055,8 @@ struct iwl_scd_txq_cfg_cmd {
 	u8 flags;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __fw_api_h__ */

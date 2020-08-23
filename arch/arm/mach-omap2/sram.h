@@ -75,6 +75,7 @@ static inline void omap_push_sram_idle(void) {}
 #define OMAP2_SRAM_PA		0x40200000
 #define OMAP3_SRAM_PA           0x40200000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OMAP4_ERRATA_I688
 #define OMAP4_SRAM_PA		0x40304000
 #define OMAP4_SRAM_VA		0xfe404000
@@ -82,5 +83,7 @@ static inline void omap_push_sram_idle(void) {}
 #define OMAP4_SRAM_PA		0x40300000
 #endif
 #define AM33XX_SRAM_PA		0x40300000
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -14,10 +14,13 @@
  *
  *  GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -390,6 +393,7 @@ void cx23885_av_clk(struct cx23885_dev *dev, int enable)
 	i2c_xfer(&dev->i2c_bus[2].i2c_adap, &msg, 1);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* ----------------------------------------------------------------------- */
 
@@ -398,5 +402,7 @@ void cx23885_av_clk(struct cx23885_dev *dev, int enable)
  * c-basic-offset: 8
  * End:
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

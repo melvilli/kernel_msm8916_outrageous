@@ -28,6 +28,10 @@
 #include "tracepoint.h"
 #include "fwil.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "proto.h"
+>>>>>>> v3.18
 =======
 #include "proto.h"
 >>>>>>> v3.18
@@ -51,6 +55,7 @@ brcmf_fil_cmd_data(struct brcmf_if *ifp, u32 cmd, void *data, u32 len, bool set)
 		len = min_t(uint, len, BRCMF_DCMD_MAXLEN);
 	if (set)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = brcmf_proto_cdc_set_dcmd(drvr, ifp->ifidx, cmd, data,
 					       len);
 	else
@@ -61,12 +66,21 @@ brcmf_fil_cmd_data(struct brcmf_if *ifp, u32 cmd, void *data, u32 len, bool set)
 	else
 		err = brcmf_proto_query_dcmd(drvr, ifp->ifidx, cmd, data, len);
 >>>>>>> v3.18
+=======
+		err = brcmf_proto_set_dcmd(drvr, ifp->ifidx, cmd, data, len);
+	else
+		err = brcmf_proto_query_dcmd(drvr, ifp->ifidx, cmd, data, len);
+>>>>>>> v3.18
 
 	if (err >= 0)
 		err = 0;
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_err("Failed err=%d\n", err);
+=======
+		brcmf_dbg(FIL, "Failed err=%d\n", err);
+>>>>>>> v3.18
 =======
 		brcmf_dbg(FIL, "Failed err=%d\n", err);
 >>>>>>> v3.18
@@ -84,7 +98,11 @@ brcmf_fil_cmd_data_set(struct brcmf_if *ifp, u32 cmd, void *data, u32 len)
 	brcmf_dbg(FIL, "cmd=%d, len=%d\n", cmd, len);
 	brcmf_dbg_hex_dump(BRCMF_FIL_ON(), data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data");
+=======
+			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data\n");
+>>>>>>> v3.18
 =======
 			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data\n");
 >>>>>>> v3.18
@@ -106,7 +124,11 @@ brcmf_fil_cmd_data_get(struct brcmf_if *ifp, u32 cmd, void *data, u32 len)
 	brcmf_dbg(FIL, "cmd=%d, len=%d\n", cmd, len);
 	brcmf_dbg_hex_dump(BRCMF_FIL_ON(), data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data");
+=======
+			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data\n");
+>>>>>>> v3.18
 =======
 			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data\n");
 >>>>>>> v3.18
@@ -148,7 +170,12 @@ brcmf_fil_cmd_int_get(struct brcmf_if *ifp, u32 cmd, u32 *data)
 
 static u32
 <<<<<<< HEAD
+<<<<<<< HEAD
 brcmf_create_iovar(char *name, char *data, u32 datalen, char *buf, u32 buflen)
+=======
+brcmf_create_iovar(char *name, const char *data, u32 datalen,
+		   char *buf, u32 buflen)
+>>>>>>> v3.18
 =======
 brcmf_create_iovar(char *name, const char *data, u32 datalen,
 		   char *buf, u32 buflen)
@@ -173,7 +200,11 @@ brcmf_create_iovar(char *name, const char *data, u32 datalen,
 
 s32
 <<<<<<< HEAD
+<<<<<<< HEAD
 brcmf_fil_iovar_data_set(struct brcmf_if *ifp, char *name, void *data,
+=======
+brcmf_fil_iovar_data_set(struct brcmf_if *ifp, char *name, const void *data,
+>>>>>>> v3.18
 =======
 brcmf_fil_iovar_data_set(struct brcmf_if *ifp, char *name, const void *data,
 >>>>>>> v3.18
@@ -188,7 +219,11 @@ brcmf_fil_iovar_data_set(struct brcmf_if *ifp, char *name, const void *data,
 	brcmf_dbg(FIL, "name=%s, len=%d\n", name, len);
 	brcmf_dbg_hex_dump(BRCMF_FIL_ON(), data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data");
+=======
+			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data\n");
+>>>>>>> v3.18
 =======
 			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data\n");
 >>>>>>> v3.18
@@ -232,7 +267,11 @@ brcmf_fil_iovar_data_get(struct brcmf_if *ifp, char *name, void *data,
 	brcmf_dbg(FIL, "name=%s, len=%d\n", name, len);
 	brcmf_dbg_hex_dump(BRCMF_FIL_ON(), data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data");
+=======
+			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data\n");
+>>>>>>> v3.18
 =======
 			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data\n");
 >>>>>>> v3.18
@@ -319,7 +358,11 @@ brcmf_fil_bsscfg_data_set(struct brcmf_if *ifp, char *name,
 	brcmf_dbg(FIL, "bssidx=%d, name=%s, len=%d\n", ifp->bssidx, name, len);
 	brcmf_dbg_hex_dump(BRCMF_FIL_ON(), data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data");
+=======
+			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data\n");
+>>>>>>> v3.18
 =======
 			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data\n");
 >>>>>>> v3.18
@@ -362,7 +405,11 @@ brcmf_fil_bsscfg_data_get(struct brcmf_if *ifp, char *name,
 	brcmf_dbg(FIL, "bssidx=%d, name=%s, len=%d\n", ifp->bssidx, name, len);
 	brcmf_dbg_hex_dump(BRCMF_FIL_ON(), data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data");
+=======
+			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data\n");
+>>>>>>> v3.18
 =======
 			   min_t(uint, len, MAX_HEX_DUMP_LEN), "data\n");
 >>>>>>> v3.18

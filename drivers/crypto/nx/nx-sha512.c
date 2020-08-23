@@ -56,6 +56,7 @@ static int nx_sha512_update(struct shash_desc *desc, const u8 *data,
 	struct nx_csbcpb *csbcpb = (struct nx_csbcpb *)nx_ctx->csbcpb;
 	struct nx_sg *in_sg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 to_process, leftover, spbc_bits;
 	int rc = 0;
 
@@ -72,6 +73,8 @@ static int nx_sha512_update(struct shash_desc *desc, const u8 *data,
 	 */
 	if ((u64)len + sctx->count[0] < SHA512_BLOCK_SIZE) {
 =======
+=======
+>>>>>>> v3.18
 	u64 to_process, leftover, total, spbc_bits;
 	u32 max_sg_len;
 	unsigned long irq_flags;
@@ -85,12 +88,16 @@ static int nx_sha512_update(struct shash_desc *desc, const u8 *data,
 	 */
 	total = sctx->count[0] + len;
 	if (total < SHA512_BLOCK_SIZE) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memcpy(sctx->buf + sctx->count[0], data, len);
 		sctx->count[0] += len;
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* to_process: the SHA512_BLOCK_SIZE data chunk to process in this
 	 * update */
@@ -140,6 +147,8 @@ static int nx_sha512_update(struct shash_desc *desc, const u8 *data,
 	NX_CPB_FDM(csbcpb) |= NX_FDM_CONTINUATION;
 out:
 =======
+=======
+>>>>>>> v3.18
 	in_sg = nx_ctx->in_sg;
 	max_sg_len = min_t(u32, nx_driver.of.max_sg_len/sizeof(struct nx_sg),
 			   nx_ctx->ap->sglen);
@@ -209,6 +218,9 @@ out:
 	sctx->count[0] = leftover;
 out:
 	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -220,10 +232,13 @@ static int nx_sha512_final(struct shash_desc *desc, u8 *out)
 	struct nx_csbcpb *csbcpb = (struct nx_csbcpb *)nx_ctx->csbcpb;
 	struct nx_sg *in_sg, *out_sg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 count0;
 	int rc;
 
 =======
+=======
+>>>>>>> v3.18
 	u32 max_sg_len;
 	u64 count0;
 	unsigned long irq_flags;
@@ -233,6 +248,9 @@ static int nx_sha512_final(struct shash_desc *desc, u8 *out)
 
 	max_sg_len = min_t(u32, nx_driver.of.max_sg_len, nx_ctx->ap->sglen);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (NX_CPB_FDM(csbcpb) & NX_FDM_CONTINUATION) {
 		/* we've hit the nx chip previously, now we're finalizing,
@@ -253,9 +271,15 @@ static int nx_sha512_final(struct shash_desc *desc, u8 *out)
 
 	in_sg = nx_build_sg_list(nx_ctx->in_sg, sctx->buf, sctx->count[0],
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 nx_ctx->ap->sglen);
 	out_sg = nx_build_sg_list(nx_ctx->out_sg, out, SHA512_DIGEST_SIZE,
 				  nx_ctx->ap->sglen);
+=======
+				 max_sg_len);
+	out_sg = nx_build_sg_list(nx_ctx->out_sg, out, SHA512_DIGEST_SIZE,
+				  max_sg_len);
+>>>>>>> v3.18
 =======
 				 max_sg_len);
 	out_sg = nx_build_sg_list(nx_ctx->out_sg, out, SHA512_DIGEST_SIZE,
@@ -281,6 +305,10 @@ static int nx_sha512_final(struct shash_desc *desc, u8 *out)
 	memcpy(out, csbcpb->cpb.sha512.message_digest, SHA512_DIGEST_SIZE);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
 >>>>>>> v3.18
@@ -294,6 +322,12 @@ static int nx_sha512_export(struct shash_desc *desc, void *out)
 	struct nx_csbcpb *csbcpb = (struct nx_csbcpb *)nx_ctx->csbcpb;
 	struct sha512_state *octx = out;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long irq_flags;
+
+	spin_lock_irqsave(&nx_ctx->lock, irq_flags);
+>>>>>>> v3.18
 =======
 	unsigned long irq_flags;
 
@@ -331,6 +365,10 @@ static int nx_sha512_export(struct shash_desc *desc, void *out)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
 >>>>>>> v3.18
@@ -344,6 +382,12 @@ static int nx_sha512_import(struct shash_desc *desc, const void *in)
 	struct nx_csbcpb *csbcpb = (struct nx_csbcpb *)nx_ctx->csbcpb;
 	const struct sha512_state *ictx = in;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long irq_flags;
+
+	spin_lock_irqsave(&nx_ctx->lock, irq_flags);
+>>>>>>> v3.18
 =======
 	unsigned long irq_flags;
 
@@ -367,6 +411,10 @@ static int nx_sha512_import(struct shash_desc *desc, const void *in)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
 >>>>>>> v3.18

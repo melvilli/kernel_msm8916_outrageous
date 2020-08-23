@@ -20,7 +20,10 @@ referred to as the  UDP-style API of the Sockets Extensions for SCTP, as
 proposed in IETF Internet-Drafts.    
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 Caveats:  
@@ -37,9 +40,13 @@ For more information, please visit the lksctp project website:
 
 Or contact the lksctp developers through the mailing list:
 <<<<<<< HEAD
+<<<<<<< HEAD
    <lksctp-developers@lists.sourceforge.net> 
 
 
+=======
+   <linux-sctp@vger.kernel.org>
+>>>>>>> v3.18
 =======
    <linux-sctp@vger.kernel.org>
 >>>>>>> v3.18

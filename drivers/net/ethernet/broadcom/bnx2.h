@@ -1,12 +1,18 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* bnx2.h: Broadcom NX2 network driver.
  *
  * Copyright (c) 2004-2011 Broadcom Corporation
 =======
+=======
+>>>>>>> v3.18
 /* bnx2.h: QLogic NX2 network driver.
  *
  * Copyright (c) 2004-2014 Broadcom Corporation
  * Copyright (c) 2014 QLogic Corporation
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -6479,7 +6485,10 @@ struct l2_fhdr {
 #define BCM5708S_TX_ACTL3			0x17
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MII_BNX2_EXT_STATUS			0x11
 #define EXT_STATUS_MDIX				 (1 << 13)
 
@@ -6489,6 +6498,9 @@ struct l2_fhdr {
 #define AUX_CTL_MISC_CTL_AUTOMDIX		  (1 << 9)
 #define AUX_CTL_MISC_CTL_WR			  (1 << 15)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MII_BNX2_DSP_RW_PORT			0x15
 #define MII_BNX2_DSP_ADDRESS			0x17
@@ -6864,6 +6876,10 @@ struct bnx2 {
 #define BNX2_PHY_FLAG_FORCED_DOWN		0x00001000
 #define BNX2_PHY_FLAG_NO_PARALLEL		0x00002000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BNX2_PHY_FLAG_MDIX			0x00004000
+>>>>>>> v3.18
 =======
 #define BNX2_PHY_FLAG_MDIX			0x00004000
 >>>>>>> v3.18
@@ -6914,6 +6930,10 @@ struct bnx2 {
 	u16			fw_wr_seq;
 	u16			fw_drv_pulse_wr_seq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32			fw_last_msg;
+>>>>>>> v3.18
 =======
 	u32			fw_last_msg;
 >>>>>>> v3.18
@@ -7424,11 +7444,17 @@ struct bnx2_rv2p_fw_file {
 #define BNX2_CONDITION_MFW_RUN_NONE		 0x0000e000
 #define BNX2_CONDITION_MFW_RUN_MASK		 0x0000e000
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BNX2_CONDITION_PM_STATE_MASK		 0x00030000
 #define BNX2_CONDITION_PM_STATE_FULL		 0x00030000
 #define BNX2_CONDITION_PM_STATE_PREP		 0x00020000
 #define BNX2_CONDITION_PM_STATE_UNPREP		 0x00010000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define BNX2_BC_STATE_DEBUG_CMD			0x1dc

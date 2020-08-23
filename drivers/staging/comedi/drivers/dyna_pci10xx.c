@@ -12,10 +12,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -41,6 +44,11 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 #include <linux/delay.h>
@@ -53,18 +61,24 @@
 #define READ_TIMEOUT 50
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct comedi_lrange range_pci1050_ai = { 3, {
 							  BIP_RANGE(10),
 							  BIP_RANGE(5),
 							  UNI_RANGE(10)
 							  }
 =======
+=======
+>>>>>>> v3.18
 static const struct comedi_lrange range_pci1050_ai = {
 	3, {
 		BIP_RANGE(10),
 		BIP_RANGE(5),
 		UNI_RANGE(10)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -76,12 +90,15 @@ struct dyna_pci10xx_private {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******************************************************************************/
 /************************** READ WRITE FUNCTIONS ******************************/
 /******************************************************************************/
 
 /* analog input callback */
 =======
+=======
+>>>>>>> v3.18
 static int dyna_pci10xx_ai_eoc(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
 			       struct comedi_insn *insn,
@@ -95,6 +112,9 @@ static int dyna_pci10xx_ai_eoc(struct comedi_device *dev,
 	return -EBUSY;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int dyna_pci10xx_insn_read_ai(struct comedi_device *dev,
 			struct comedi_subdevice *s,
@@ -102,8 +122,14 @@ static int dyna_pci10xx_insn_read_ai(struct comedi_device *dev,
 {
 	struct dyna_pci10xx_private *devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int n, counter;
 	u16 d = 0;
+=======
+	int n;
+	u16 d = 0;
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int n;
 	u16 d = 0;
@@ -123,6 +149,7 @@ static int dyna_pci10xx_insn_read_ai(struct comedi_device *dev,
 		outw_p(0x0000 + range + chan, dev->iobase + 2);
 		udelay(10);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* read data */
 		for (counter = 0; counter < READ_TIMEOUT; counter++) {
 			d = inw_p(dev->iobase);
@@ -137,6 +164,8 @@ static int dyna_pci10xx_insn_read_ai(struct comedi_device *dev,
 		continue;
 conv_finish:
 =======
+=======
+>>>>>>> v3.18
 
 		ret = comedi_timeout(dev, s, insn, dyna_pci10xx_ai_eoc, 0);
 		if (ret)
@@ -144,6 +173,9 @@ conv_finish:
 
 		/* read data */
 		d = inw_p(dev->iobase);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* mask the first 4 bits - EOC bits */
 		d &= 0x0FFF;
@@ -153,7 +185,11 @@ conv_finish:
 
 	/* return the number of samples read/written */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return n;
+=======
+	return ret ? ret : n;
+>>>>>>> v3.18
 =======
 	return ret ? ret : n;
 >>>>>>> v3.18
@@ -203,6 +239,7 @@ static int dyna_pci10xx_di_insn_bits(struct comedi_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* digital output bit interface */
 static int dyna_pci10xx_do_insn_bits(struct comedi_device *dev,
 			      struct comedi_subdevice *s,
@@ -219,6 +256,8 @@ static int dyna_pci10xx_do_insn_bits(struct comedi_device *dev,
 		s->state &= ~data[0];
 		s->state |= (data[0] & data[1]);
 =======
+=======
+>>>>>>> v3.18
 static int dyna_pci10xx_do_insn_bits(struct comedi_device *dev,
 				     struct comedi_subdevice *s,
 				     struct comedi_insn *insn,
@@ -228,12 +267,16 @@ static int dyna_pci10xx_do_insn_bits(struct comedi_device *dev,
 
 	mutex_lock(&devpriv->mutex);
 	if (comedi_dio_update_state(s, data)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		smp_mb();
 		outw_p(s->state, devpriv->BADR3);
 		udelay(10);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * On return, data[1] contains the value of the digital
@@ -242,6 +285,11 @@ static int dyna_pci10xx_do_insn_bits(struct comedi_device *dev,
 	 */
 	data[1] = s->state;
 	mutex_unlock(&devpriv->mutex);
+=======
+	data[1] = s->state;
+	mutex_unlock(&devpriv->mutex);
+
+>>>>>>> v3.18
 =======
 	data[1] = s->state;
 	mutex_unlock(&devpriv->mutex);
@@ -259,10 +307,16 @@ static int dyna_pci10xx_auto_attach(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -323,8 +377,11 @@ static int dyna_pci10xx_auto_attach(struct comedi_device *dev,
 	s->insn_bits = dyna_pci10xx_do_insn_bits;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(dev->class_dev, "%s attached\n", dev->board_name);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -335,9 +392,15 @@ static void dyna_pci10xx_detach(struct comedi_device *dev)
 	struct dyna_pci10xx_private *devpriv = dev->private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (devpriv)
 		mutex_destroy(&devpriv->mutex);
 	comedi_pci_disable(dev);
+=======
+	comedi_pci_detach(dev);
+	if (devpriv)
+		mutex_destroy(&devpriv->mutex);
+>>>>>>> v3.18
 =======
 	comedi_pci_detach(dev);
 	if (devpriv)
@@ -360,7 +423,11 @@ static int dyna_pci10xx_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(dyna_pci10xx_pci_table) = {
+=======
+static const struct pci_device_id dyna_pci10xx_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id dyna_pci10xx_pci_table[] = {
 >>>>>>> v3.18

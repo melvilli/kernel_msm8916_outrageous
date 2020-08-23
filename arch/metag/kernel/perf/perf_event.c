@@ -259,7 +259,11 @@ int metag_pmu_event_set_period(struct perf_event *event,
 static void metag_pmu_start(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -311,7 +315,11 @@ static void metag_pmu_stop(struct perf_event *event, int flags)
 static int metag_pmu_add(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -357,7 +365,11 @@ out:
 static void metag_pmu_del(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -581,6 +593,7 @@ static int _hw_perf_event_init(struct perf_event *event)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Early cores have "limited" counters - they have no overflow
 	 * interrupts - and so are unable to do sampling without extra work
 	 * and timer assistance.
@@ -591,6 +604,8 @@ static int _hw_perf_event_init(struct perf_event *event)
 	}
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * Don't assign an index until the event is placed into the hardware.
@@ -623,7 +638,11 @@ static int _hw_perf_event_init(struct perf_event *event)
 static void metag_pmu_enable_counter(struct hw_perf_event *event, int idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *events = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *events = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *events = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -700,7 +719,11 @@ unlock:
 static void metag_pmu_disable_counter(struct hw_perf_event *event, int idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *events = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *events = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *events = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -752,7 +775,11 @@ out:
 static void metag_pmu_write_counter(int idx, u32 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *events = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *events = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *events = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -789,7 +816,11 @@ static irqreturn_t metag_pmu_counter_overflow(int irq, void *dev)
 {
 	int idx = (int)dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuhw = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuhw = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -845,8 +876,13 @@ static struct metag_pmu _metag_pmu = {
 
 /* PMU CPU hotplug notifier */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit metag_pmu_cpu_notify(struct notifier_block *b,
 		unsigned long action, void *hcpu)
+=======
+static int metag_pmu_cpu_notify(struct notifier_block *b, unsigned long action,
+				void *hcpu)
+>>>>>>> v3.18
 =======
 static int metag_pmu_cpu_notify(struct notifier_block *b, unsigned long action,
 				void *hcpu)
@@ -865,7 +901,11 @@ static int metag_pmu_cpu_notify(struct notifier_block *b, unsigned long action,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata metag_pmu_notifier = {
+=======
+static struct notifier_block metag_pmu_notifier = {
+>>>>>>> v3.18
 =======
 static struct notifier_block metag_pmu_notifier = {
 >>>>>>> v3.18
@@ -907,7 +947,10 @@ static int __init init_hw_perf_events(void)
 			metag_pmu->name, metag_pmu->max_events);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Early cores have "limited" counters - they have no overflow
 	 * interrupts - and so are unable to do sampling without extra work
@@ -917,6 +960,9 @@ static int __init init_hw_perf_events(void)
 		metag_pmu->pmu.capabilities |= PERF_PMU_CAP_NO_INTERRUPT;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Initialise the active events and reservation mutex */
 	atomic_set(&metag_pmu->active_events, 0);
@@ -935,7 +981,11 @@ static int __init init_hw_perf_events(void)
 
 	register_cpu_notifier(&metag_pmu_notifier);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = perf_pmu_register(&pmu, (char *)metag_pmu->name, PERF_TYPE_RAW);
+=======
+	ret = perf_pmu_register(&pmu, metag_pmu->name, PERF_TYPE_RAW);
+>>>>>>> v3.18
 =======
 	ret = perf_pmu_register(&pmu, metag_pmu->name, PERF_TYPE_RAW);
 >>>>>>> v3.18

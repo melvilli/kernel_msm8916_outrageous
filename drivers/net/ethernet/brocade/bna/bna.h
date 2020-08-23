@@ -355,7 +355,10 @@ do {									\
 } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define bna_mcam_mod_free_q(_bna) (&(_bna)->mcam_mod.free_q)
 
 #define bna_mcam_mod_del_q(_bna) (&(_bna)->mcam_mod.del_q)
@@ -364,6 +367,9 @@ do {									\
 
 #define bna_ucam_mod_del_q(_bna) (&(_bna)->ucam_mod.del_q)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*  Inline functions  */
 
@@ -403,12 +409,17 @@ void bna_hw_stats_get(struct bna *bna);
 
 /* APIs for RxF */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct bna_mac *bna_ucam_mod_mac_get(struct bna_ucam_mod *ucam_mod);
 void bna_ucam_mod_mac_put(struct bna_ucam_mod *ucam_mod,
 			  struct bna_mac *mac);
 struct bna_mac *bna_mcam_mod_mac_get(struct bna_mcam_mod *mcam_mod);
 void bna_mcam_mod_mac_put(struct bna_mcam_mod *mcam_mod,
 			  struct bna_mac *mac);
+=======
+struct bna_mac *bna_cam_mod_mac_get(struct list_head *head);
+void bna_cam_mod_mac_put(struct list_head *tail, struct bna_mac *mac);
+>>>>>>> v3.18
 =======
 struct bna_mac *bna_cam_mod_mac_get(struct list_head *head);
 void bna_cam_mod_mac_put(struct list_head *tail, struct bna_mac *mac);
@@ -472,6 +483,11 @@ void bna_bfi_rxf_cfg_rsp(struct bna_rxf *rxf, struct bfi_msgq_mhdr *msghdr);
 void bna_bfi_rxf_mcast_add_rsp(struct bna_rxf *rxf,
 			       struct bfi_msgq_mhdr *msghdr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void bna_bfi_rxf_ucast_set_rsp(struct bna_rxf *rxf,
+			       struct bfi_msgq_mhdr *msghdr);
+>>>>>>> v3.18
 =======
 void bna_bfi_rxf_ucast_set_rsp(struct bna_rxf *rxf,
 			       struct bfi_msgq_mhdr *msghdr);
@@ -513,6 +529,12 @@ bna_rx_ucast_del(struct bna_rx *rx, u8 *ucmac,
 		 void (*cbfn)(struct bnad *, struct bna_rx *));
 enum bna_cb_status
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bna_rx_ucast_listset(struct bna_rx *rx, int count, u8 *uclist,
+		     void (*cbfn)(struct bnad *, struct bna_rx *));
+enum bna_cb_status
+>>>>>>> v3.18
 =======
 bna_rx_ucast_listset(struct bna_rx *rx, int count, u8 *uclist,
 		     void (*cbfn)(struct bnad *, struct bna_rx *));
@@ -524,6 +546,12 @@ enum bna_cb_status
 bna_rx_mcast_listset(struct bna_rx *rx, int count, u8 *mcmac,
 		     void (*cbfn)(struct bnad *, struct bna_rx *));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void
+bna_rx_mcast_delall(struct bna_rx *rx,
+		    void (*cbfn)(struct bnad *, struct bna_rx *));
+>>>>>>> v3.18
 =======
 void
 bna_rx_mcast_delall(struct bna_rx *rx,
@@ -537,6 +565,11 @@ void bna_rx_vlan_add(struct bna_rx *rx, int vlan_id);
 void bna_rx_vlan_del(struct bna_rx *rx, int vlan_id);
 void bna_rx_vlanfilter_enable(struct bna_rx *rx);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void bna_rx_vlan_strip_enable(struct bna_rx *rx);
+void bna_rx_vlan_strip_disable(struct bna_rx *rx);
+>>>>>>> v3.18
 =======
 void bna_rx_vlan_strip_enable(struct bna_rx *rx);
 void bna_rx_vlan_strip_disable(struct bna_rx *rx);

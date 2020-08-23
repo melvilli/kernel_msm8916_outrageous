@@ -247,7 +247,12 @@ static int l2tp_eth_create(struct net *net, u32 tunnel_id, u32 session_id, u32 p
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(*priv), name, l2tp_eth_dev_setup);
+=======
+	dev = alloc_netdev(sizeof(*priv), name, NET_NAME_UNKNOWN,
+			   l2tp_eth_dev_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(sizeof(*priv), name, NET_NAME_UNKNOWN,
 			   l2tp_eth_dev_setup);

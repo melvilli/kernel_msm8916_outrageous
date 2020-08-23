@@ -40,6 +40,11 @@
 #include <linux/rtnetlink.h>
 #include <linux/if_vlan.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/ipv6.h>
+#include <net/addrconf.h>
+>>>>>>> v3.18
 =======
 #include <net/ipv6.h>
 #include <net/addrconf.h>
@@ -52,6 +57,10 @@
 #include <linux/mlx4/driver.h>
 #include <linux/mlx4/cmd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mlx4/qp.h>
+>>>>>>> v3.18
 =======
 #include <linux/mlx4/qp.h>
 >>>>>>> v3.18
@@ -61,15 +70,21 @@
 
 #define DRV_NAME	MLX4_IB_DRV_NAME
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_VERSION	"1.0"
 #define DRV_RELDATE	"April 4, 2008"
 =======
+=======
+>>>>>>> v3.18
 #define DRV_VERSION	"2.2-1"
 #define DRV_RELDATE	"Feb 2014"
 
 #define MLX4_IB_FLOW_MAX_PRIO 0xFFF
 #define MLX4_IB_FLOW_QPN_MASK 0xFFFFFF
 #define MLX4_IB_CARD_REV_A0   0xA0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_AUTHOR("Roland Dreier");
@@ -107,7 +122,10 @@ static void init_query_mad(struct ib_smp *mad)
 static union ib_gid zgid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int check_flow_steering_support(struct mlx4_dev *dev)
 {
 	int eth_num_ports = 0;
@@ -144,6 +162,9 @@ static int num_ib_ports(struct mlx4_dev *dev)
 	return ib_ports;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mlx4_ib_query_device(struct ib_device *ibdev,
 				struct ib_device_attr *props)
@@ -153,6 +174,10 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 	struct ib_smp *out_mad = NULL;
 	int err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int have_ib_ports;
+>>>>>>> v3.18
 =======
 	int have_ib_ports;
 >>>>>>> v3.18
@@ -173,6 +198,11 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 	memset(props, 0, sizeof *props);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	have_ib_ports = num_ib_ports(dev->dev);
+
+>>>>>>> v3.18
 =======
 	have_ib_ports = num_ib_ports(dev->dev);
 
@@ -188,7 +218,11 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 	if (dev->dev->caps.flags & MLX4_DEV_CAP_FLAG_BAD_QKEY_CNTR)
 		props->device_cap_flags |= IB_DEVICE_BAD_QKEY_CNTR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->dev->caps.flags & MLX4_DEV_CAP_FLAG_APM)
+=======
+	if (dev->dev->caps.flags & MLX4_DEV_CAP_FLAG_APM && have_ib_ports)
+>>>>>>> v3.18
 =======
 	if (dev->dev->caps.flags & MLX4_DEV_CAP_FLAG_APM && have_ib_ports)
 >>>>>>> v3.18
@@ -198,7 +232,13 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 	if (dev->dev->caps.flags & MLX4_DEV_CAP_FLAG_IPOIB_CSUM)
 		props->device_cap_flags |= IB_DEVICE_UD_IP_CSUM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->dev->caps.max_gso_sz && dev->dev->caps.flags & MLX4_DEV_CAP_FLAG_BLH)
+=======
+	if (dev->dev->caps.max_gso_sz &&
+	    (dev->dev->rev_id != MLX4_IB_CARD_REV_A0) &&
+	    (dev->dev->caps.flags & MLX4_DEV_CAP_FLAG_BLH))
+>>>>>>> v3.18
 =======
 	if (dev->dev->caps.max_gso_sz &&
 	    (dev->dev->rev_id != MLX4_IB_CARD_REV_A0) &&
@@ -221,6 +261,11 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 		else
 			props->device_cap_flags |= IB_DEVICE_MEM_WINDOW_TYPE_2A;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (dev->steering_support ==  MLX4_STEERING_MODE_DEVICE_MANAGED)
+		props->device_cap_flags |= IB_DEVICE_MANAGED_FLOW_STEERING;
+>>>>>>> v3.18
 =======
 	if (dev->steering_support ==  MLX4_STEERING_MODE_DEVICE_MANAGED)
 		props->device_cap_flags |= IB_DEVICE_MANAGED_FLOW_STEERING;
@@ -236,6 +281,7 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 	props->max_mr_size	   = ~0ull;
 	props->page_size_cap	   = dev->dev->caps.page_size_cap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	props->max_qp		   = dev->dev->caps.num_qps - dev->dev->caps.reserved_qps;
 	props->max_qp_wr	   = dev->dev->caps.max_wqes - MLX4_IB_SQ_MAX_SPARE;
 	props->max_sge		   = min(dev->dev->caps.max_sq_sg,
@@ -244,6 +290,8 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 	props->max_cqe		   = dev->dev->caps.max_cqes;
 	props->max_mr		   = dev->dev->caps.num_mpts - dev->dev->caps.reserved_mrws;
 =======
+=======
+>>>>>>> v3.18
 	props->max_qp		   = dev->dev->quotas.qp;
 	props->max_qp_wr	   = dev->dev->caps.max_wqes - MLX4_IB_SQ_MAX_SPARE;
 	props->max_sge		   = min(dev->dev->caps.max_sq_sg,
@@ -251,13 +299,20 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 	props->max_cq		   = dev->dev->quotas.cq;
 	props->max_cqe		   = dev->dev->caps.max_cqes;
 	props->max_mr		   = dev->dev->quotas.mpt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	props->max_pd		   = dev->dev->caps.num_pds - dev->dev->caps.reserved_pds;
 	props->max_qp_rd_atom	   = dev->dev->caps.max_qp_dest_rdma;
 	props->max_qp_init_rd_atom = dev->dev->caps.max_qp_init_rdma;
 	props->max_res_rd_atom	   = props->max_qp_rd_atom * props->max_qp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	props->max_srq		   = dev->dev->caps.num_srqs - dev->dev->caps.reserved_srqs;
+=======
+	props->max_srq		   = dev->dev->quotas.srq;
+>>>>>>> v3.18
 =======
 	props->max_srq		   = dev->dev->quotas.srq;
 >>>>>>> v3.18
@@ -408,6 +463,7 @@ static int eth_link_query_port(struct ib_device *ibdev, u8 port,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	props->active_width	=  (((u8 *)mailbox->buf)[5] == 0x40) ||
 				   (((u8 *)mailbox->buf)[5] == 0x20 /*56Gb*/) ?
 					   IB_WIDTH_4X : IB_WIDTH_1X;
@@ -415,10 +471,15 @@ static int eth_link_query_port(struct ib_device *ibdev, u8 port,
 					   IB_SPEED_FDR : IB_SPEED_QDR;
 	props->port_cap_flags	= IB_PORT_CM_SUP;
 =======
+=======
+>>>>>>> v3.18
 	props->active_width	=  (((u8 *)mailbox->buf)[5] == 0x40) ?
 						IB_WIDTH_4X : IB_WIDTH_1X;
 	props->active_speed	= IB_SPEED_QDR;
 	props->port_cap_flags	= IB_PORT_CM_SUP | IB_PORT_IP_BASED_GIDS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	props->gid_tbl_len	= mdev->dev->caps.gid_table_len[port];
 	props->max_msg_sz	= mdev->dev->caps.max_msg_sz;
@@ -429,7 +490,11 @@ static int eth_link_query_port(struct ib_device *ibdev, u8 port,
 	props->phys_state	= state_to_phys_state(props->state);
 	props->active_mtu	= IB_MTU_256;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&iboe->lock);
+=======
+	spin_lock_bh(&iboe->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&iboe->lock);
 >>>>>>> v3.18
@@ -445,7 +510,11 @@ static int eth_link_query_port(struct ib_device *ibdev, u8 port,
 	props->phys_state	= state_to_phys_state(props->state);
 out_unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&iboe->lock);
+=======
+	spin_unlock_bh(&iboe->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&iboe->lock);
 >>>>>>> v3.18
@@ -616,7 +685,10 @@ static int mlx4_ib_modify_device(struct ib_device *ibdev, int mask,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(mailbox->buf, 0, 256);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memcpy(mailbox->buf, props->node_desc, 64);
@@ -629,6 +701,7 @@ static int mlx4_ib_modify_device(struct ib_device *ibdev, int mask,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mlx4_SET_PORT(struct mlx4_ib_dev *dev, u8 port, int reset_qkey_viols,
 			 u32 cap_mask)
 {
@@ -636,11 +709,16 @@ static int mlx4_SET_PORT(struct mlx4_ib_dev *dev, u8 port, int reset_qkey_viols,
 	int err;
 	u8 is_eth = dev->dev->caps.port_type[port] == MLX4_PORT_TYPE_ETH;
 =======
+=======
+>>>>>>> v3.18
 static int mlx4_ib_SET_PORT(struct mlx4_ib_dev *dev, u8 port, int reset_qkey_viols,
 			    u32 cap_mask)
 {
 	struct mlx4_cmd_mailbox *mailbox;
 	int err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mailbox = mlx4_alloc_cmd_mailbox(dev->dev);
@@ -648,8 +726,11 @@ static int mlx4_ib_SET_PORT(struct mlx4_ib_dev *dev, u8 port, int reset_qkey_vio
 		return PTR_ERR(mailbox);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(mailbox->buf, 0, 256);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (dev->dev->flags & MLX4_FLAG_OLD_PORT_CMDS) {
@@ -661,8 +742,13 @@ static int mlx4_ib_SET_PORT(struct mlx4_ib_dev *dev, u8 port, int reset_qkey_vio
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = mlx4_cmd(dev->dev, mailbox->dma, port, is_eth, MLX4_CMD_SET_PORT,
 		       MLX4_CMD_TIME_CLASS_B, MLX4_CMD_NATIVE);
+=======
+	err = mlx4_cmd(dev->dev, mailbox->dma, port, 0, MLX4_CMD_SET_PORT,
+		       MLX4_CMD_TIME_CLASS_B, MLX4_CMD_WRAPPED);
+>>>>>>> v3.18
 =======
 	err = mlx4_cmd(dev->dev, mailbox->dma, port, 0, MLX4_CMD_SET_PORT,
 		       MLX4_CMD_TIME_CLASS_B, MLX4_CMD_WRAPPED);
@@ -676,6 +762,11 @@ static int mlx4_ib_modify_port(struct ib_device *ibdev, u8 port, int mask,
 			       struct ib_port_modify *props)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mlx4_ib_dev *mdev = to_mdev(ibdev);
+	u8 is_eth = mdev->dev->caps.port_type[port] == MLX4_PORT_TYPE_ETH;
+>>>>>>> v3.18
 =======
 	struct mlx4_ib_dev *mdev = to_mdev(ibdev);
 	u8 is_eth = mdev->dev->caps.port_type[port] == MLX4_PORT_TYPE_ETH;
@@ -685,8 +776,11 @@ static int mlx4_ib_modify_port(struct ib_device *ibdev, u8 port, int mask,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&to_mdev(ibdev)->cap_mask_mutex);
 =======
+=======
+>>>>>>> v3.18
 	/* return OK if this is RoCE. CM calls ib_modify_port() regardless
 	 * of whether port link layer is ETH or IB. For ETH ports, qkey
 	 * violations and port capabilities are not meaningful.
@@ -695,6 +789,9 @@ static int mlx4_ib_modify_port(struct ib_device *ibdev, u8 port, int mask,
 		return 0;
 
 	mutex_lock(&mdev->cap_mask_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = mlx4_ib_query_port(ibdev, port, &attr);
@@ -705,9 +802,15 @@ static int mlx4_ib_modify_port(struct ib_device *ibdev, u8 port, int mask,
 		~props->clr_port_cap_mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = mlx4_SET_PORT(to_mdev(ibdev), port,
 			    !!(mask & IB_PORT_RESET_QKEY_CNTR),
 			    cap_mask);
+=======
+	err = mlx4_ib_SET_PORT(mdev, port,
+			       !!(mask & IB_PORT_RESET_QKEY_CNTR),
+			       cap_mask);
+>>>>>>> v3.18
 =======
 	err = mlx4_ib_SET_PORT(mdev, port,
 			       !!(mask & IB_PORT_RESET_QKEY_CNTR),
@@ -921,7 +1024,10 @@ int mlx4_ib_add_mc(struct mlx4_ib_dev *mdev, struct mlx4_ib_qp *mqp,
 		   union ib_gid *gid)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 mac[6];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct net_device *ndev;
@@ -930,6 +1036,7 @@ int mlx4_ib_add_mc(struct mlx4_ib_dev *mdev, struct mlx4_ib_qp *mqp,
 	if (!mqp->port)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock(&mdev->iboe.lock);
 	ndev = mdev->iboe.netdevs[mqp->port - 1];
@@ -944,6 +1051,8 @@ int mlx4_ib_add_mc(struct mlx4_ib_dev *mdev, struct mlx4_ib_qp *mqp,
 		ret = 1;
 		rtnl_unlock();
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&mdev->iboe.lock);
 	ndev = mdev->iboe.netdevs[mqp->port - 1];
 	if (ndev)
@@ -952,6 +1061,9 @@ int mlx4_ib_add_mc(struct mlx4_ib_dev *mdev, struct mlx4_ib_qp *mqp,
 
 	if (ndev) {
 		ret = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_put(ndev);
 	}
@@ -966,7 +1078,10 @@ struct mlx4_ib_steering {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int parse_flow_attr(struct mlx4_dev *dev,
 			   u32 qp_num,
 			   union ib_flow_spec *ib_spec,
@@ -1333,6 +1448,9 @@ static int mlx4_ib_destroy_flow(struct ib_flow *flow_id)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mlx4_ib_mcg_attach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 {
@@ -1342,6 +1460,11 @@ static int mlx4_ib_mcg_attach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 	u64 reg_id;
 	struct mlx4_ib_steering *ib_steering = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum mlx4_protocol prot = (gid->raw[1] == 0x0e) ?
+		MLX4_PROT_IB_IPV4 : MLX4_PROT_IB_IPV6;
+>>>>>>> v3.18
 =======
 	enum mlx4_protocol prot = (gid->raw[1] == 0x0e) ?
 		MLX4_PROT_IB_IPV4 : MLX4_PROT_IB_IPV6;
@@ -1358,7 +1481,11 @@ static int mlx4_ib_mcg_attach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 				    !!(mqp->flags &
 				       MLX4_IB_QP_BLOCK_MULTICAST_LOOPBACK),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    MLX4_PROT_IB_IPV6, &reg_id);
+=======
+				    prot, &reg_id);
+>>>>>>> v3.18
 =======
 				    prot, &reg_id);
 >>>>>>> v3.18
@@ -1381,7 +1508,11 @@ static int mlx4_ib_mcg_attach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 err_add:
 	mlx4_multicast_detach(mdev->dev, &mqp->mqp, gid->raw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      MLX4_PROT_IB_IPV6, reg_id);
+=======
+			      prot, reg_id);
+>>>>>>> v3.18
 =======
 			      prot, reg_id);
 >>>>>>> v3.18
@@ -1413,16 +1544,22 @@ static int mlx4_ib_mcg_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 	struct mlx4_ib_dev *mdev = to_mdev(ibqp->device);
 	struct mlx4_ib_qp *mqp = to_mqp(ibqp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 mac[6];
 	struct net_device *ndev;
 	struct mlx4_ib_gid_entry *ge;
 	u64 reg_id = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct net_device *ndev;
 	struct mlx4_ib_gid_entry *ge;
 	u64 reg_id = 0;
 	enum mlx4_protocol prot = (gid->raw[1] == 0x0e) ?
 		MLX4_PROT_IB_IPV4 : MLX4_PROT_IB_IPV6;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (mdev->dev->caps.steering_mode ==
@@ -1447,7 +1584,11 @@ static int mlx4_ib_mcg_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 
 	err = mlx4_multicast_detach(mdev->dev, &mqp->mqp, gid->raw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    MLX4_PROT_IB_IPV6, reg_id);
+=======
+				    prot, reg_id);
+>>>>>>> v3.18
 =======
 				    prot, reg_id);
 >>>>>>> v3.18
@@ -1457,6 +1598,7 @@ static int mlx4_ib_mcg_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 	mutex_lock(&mqp->mutex);
 	ge = find_gid_entry(mqp, gid->raw);
 	if (ge) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		spin_lock(&mdev->iboe.lock);
 		ndev = ge->added ? mdev->iboe.netdevs[ge->port - 1] : NULL;
@@ -1471,6 +1613,8 @@ static int mlx4_ib_mcg_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 			dev_put(ndev);
 		}
 =======
+=======
+>>>>>>> v3.18
 		spin_lock_bh(&mdev->iboe.lock);
 		ndev = ge->added ? mdev->iboe.netdevs[ge->port - 1] : NULL;
 		if (ndev)
@@ -1478,6 +1622,9 @@ static int mlx4_ib_mcg_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 		spin_unlock_bh(&mdev->iboe.lock);
 		if (ndev)
 			dev_put(ndev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		list_del(&ge->list);
 		kfree(ge);
@@ -1575,7 +1722,12 @@ static struct device_attribute *mlx4_class_attributes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mlx4_addrconf_ifid_eui48(u8 *eui, u16 vlan_id, struct net_device *dev)
+=======
+static void mlx4_addrconf_ifid_eui48(u8 *eui, u16 vlan_id,
+				     struct net_device *dev)
+>>>>>>> v3.18
 =======
 static void mlx4_addrconf_ifid_eui48(u8 *eui, u16 vlan_id,
 				     struct net_device *dev)
@@ -1602,6 +1754,12 @@ static void update_gids_task(struct work_struct *work)
 	struct mlx4_dev	*dev = gw->dev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!gw->dev->ib_active)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!gw->dev->ib_active)
 		return;
@@ -1621,6 +1779,7 @@ static void update_gids_task(struct work_struct *work)
 		       MLX4_CMD_WRAPPED);
 	if (err)
 		pr_warn("set port command failed\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 	else {
 		memcpy(gw->dev->iboe.gid_table[gw->port - 1], gw->gids, sizeof gw->gids);
@@ -1778,6 +1937,8 @@ static int mlx4_ib_netdev_event(struct notifier_block *this, unsigned long event
 
 	spin_unlock(&iboe->lock);
 =======
+=======
+>>>>>>> v3.18
 	else
 		mlx4_ib_dispatch_event(gw->dev, gw->port, IB_EVENT_GID_CHANGE);
 
@@ -2247,6 +2408,9 @@ static int mlx4_ib_netdev_event(struct notifier_block *this,
 
 	ibdev = container_of(this, struct mlx4_ib_dev, iboe.nb);
 	mlx4_ib_scan_netdevs(ibdev, dev, event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return NOTIFY_DONE;
@@ -2287,7 +2451,11 @@ static void init_pkeys(struct mlx4_ib_dev *ibdev)
 static void mlx4_ib_alloc_eqs(struct mlx4_dev *dev, struct mlx4_ib_dev *ibdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[32];
+=======
+	char name[80];
+>>>>>>> v3.18
 =======
 	char name[80];
 >>>>>>> v3.18
@@ -2321,8 +2489,13 @@ static void mlx4_ib_alloc_eqs(struct mlx4_dev *dev, struct mlx4_ib_dev *ibdev)
 	mlx4_foreach_port(i, dev, MLX4_PORT_TYPE_IB) {
 		for (j = 0; j < eq_per_port; j++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sprintf(name, "mlx4-ib-%d-%d@%s",
 				i, j, dev->pdev->bus->name);
+=======
+			snprintf(name, sizeof(name), "mlx4-ib-%d-%d@%s",
+				 i, j, dev->pdev->bus->name);
+>>>>>>> v3.18
 =======
 			snprintf(name, sizeof(name), "mlx4-ib-%d-%d@%s",
 				 i, j, dev->pdev->bus->name);
@@ -2377,6 +2550,7 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 	int err;
 	struct mlx4_ib_iboe *iboe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pr_info_once("%s", mlx4_ib_version);
 
@@ -2389,10 +2563,15 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	int ib_num_ports = 0;
 
 	pr_info_once("%s", mlx4_ib_version);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	num_ports = 0;
 	mlx4_foreach_ib_transport_port(i, dev)
@@ -2446,6 +2625,10 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 		(1ull << IB_USER_VERBS_CMD_DEALLOC_PD)		|
 		(1ull << IB_USER_VERBS_CMD_REG_MR)		|
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		(1ull << IB_USER_VERBS_CMD_REREG_MR)		|
+>>>>>>> v3.18
 =======
 		(1ull << IB_USER_VERBS_CMD_REREG_MR)		|
 >>>>>>> v3.18
@@ -2502,6 +2685,10 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 	ibdev->ib_dev.get_dma_mr	= mlx4_ib_get_dma_mr;
 	ibdev->ib_dev.reg_user_mr	= mlx4_ib_reg_user_mr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ibdev->ib_dev.rereg_user_mr	= mlx4_ib_rereg_user_mr;
+>>>>>>> v3.18
 =======
 	ibdev->ib_dev.rereg_user_mr	= mlx4_ib_rereg_user_mr;
 >>>>>>> v3.18
@@ -2540,7 +2727,10 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (check_flow_steering_support(dev)) {
 		ibdev->steering_support = MLX4_STEERING_MODE_DEVICE_MANAGED;
 		ibdev->ib_dev.create_flow	= mlx4_ib_create_flow;
@@ -2551,6 +2741,9 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 			(1ull << IB_USER_VERBS_EX_CMD_DESTROY_FLOW);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mlx4_ib_alloc_eqs(dev, ibdev);
 
@@ -2561,6 +2754,10 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 
 	for (i = 0; i < ibdev->num_ports; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mutex_init(&ibdev->qp1_proxy_lock[i]);
+>>>>>>> v3.18
 =======
 		mutex_init(&ibdev->qp1_proxy_lock[i]);
 >>>>>>> v3.18
@@ -2569,6 +2766,7 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 			err = mlx4_counter_alloc(ibdev->dev, &ibdev->counters[i]);
 			if (err)
 				ibdev->counters[i] = -1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		} else
 				ibdev->counters[i] = -1;
@@ -2580,6 +2778,8 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 	if (ib_register_device(&ibdev->ib_dev, NULL))
 		goto err_counter;
 =======
+=======
+>>>>>>> v3.18
 		} else {
 			ibdev->counters[i] = -1;
 		}
@@ -2624,6 +2824,9 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 
 	if (ib_register_device(&ibdev->ib_dev, NULL))
 		goto err_steer_free_bitmap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (mlx4_ib_mad_init(ibdev))
@@ -2633,12 +2836,15 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 		goto err_mad;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->caps.flags & MLX4_DEV_CAP_FLAG_IBOE && !iboe->nb.notifier_call) {
 		iboe->nb.notifier_call = mlx4_ib_netdev_event;
 		err = register_netdevice_notifier(&iboe->nb);
 		if (err)
 			goto err_sriov;
 =======
+=======
+>>>>>>> v3.18
 	if (dev->caps.flags & MLX4_DEV_CAP_FLAG_IBOE) {
 		if (!iboe->nb.notifier_call) {
 			iboe->nb.notifier_call = mlx4_ib_netdev_event;
@@ -2668,6 +2874,9 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 #endif
 		if (mlx4_ib_init_gid_table(ibdev))
 			goto err_notif;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2695,12 +2904,15 @@ static void *mlx4_ib_add(struct mlx4_dev *dev)
 
 err_notif:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unregister_netdevice_notifier(&ibdev->iboe.nb))
 		pr_warn("failure unregistering notifier\n");
 	flush_workqueue(wq);
 
 err_sriov:
 =======
+=======
+>>>>>>> v3.18
 	if (ibdev->iboe.nb.notifier_call) {
 		if (unregister_netdevice_notifier(&ibdev->iboe.nb))
 			pr_warn("failure unregistering notifier\n");
@@ -2720,6 +2932,9 @@ err_sriov:
 #endif
 	flush_workqueue(wq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mlx4_ib_close_sriov(ibdev);
 
@@ -2730,7 +2945,10 @@ err_reg:
 	ib_unregister_device(&ibdev->ib_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 err_steer_free_bitmap:
 	kfree(ibdev->ib_uc_qpns_bitmap);
 
@@ -2738,6 +2956,9 @@ err_steer_qp_release:
 	if (ibdev->steering_support == MLX4_STEERING_MODE_DEVICE_MANAGED)
 		mlx4_qp_release_range(dev, ibdev->steer_qpn_base,
 				      ibdev->steer_qpn_count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_counter:
 	for (; i; --i)
@@ -2760,7 +2981,10 @@ err_dealloc:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int mlx4_ib_steer_qp_alloc(struct mlx4_ib_dev *dev, int count, int *qpn)
 {
 	int offset;
@@ -2824,6 +3048,9 @@ int mlx4_ib_steer_qp_reg(struct mlx4_ib_dev *mdev, struct mlx4_ib_qp *mqp,
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void mlx4_ib_remove(struct mlx4_dev *dev, void *ibdev_ptr)
 {
@@ -2831,6 +3058,12 @@ static void mlx4_ib_remove(struct mlx4_dev *dev, void *ibdev_ptr)
 	int p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ibdev->ib_active = false;
+	flush_workqueue(wq);
+
+>>>>>>> v3.18
 =======
 	ibdev->ib_active = false;
 	flush_workqueue(wq);
@@ -2845,7 +3078,10 @@ static void mlx4_ib_remove(struct mlx4_dev *dev, void *ibdev_ptr)
 		ibdev->iboe.nb.notifier_call = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (ibdev->steering_support == MLX4_STEERING_MODE_DEVICE_MANAGED) {
 		mlx4_qp_release_range(dev, ibdev->steer_qpn_base,
@@ -2866,6 +3102,9 @@ static void mlx4_ib_remove(struct mlx4_dev *dev, void *ibdev_ptr)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iounmap(ibdev->uar_map);
 	for (p = 0; p < ibdev->num_ports; ++p)
@@ -2888,6 +3127,12 @@ static void do_slave_init(struct mlx4_ib_dev *ibdev, int slave, int do_init)
 	int i;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mlx4_active_ports actv_ports;
+	unsigned int ports;
+	unsigned int first_port;
+>>>>>>> v3.18
 =======
 	struct mlx4_active_ports actv_ports;
 	unsigned int ports;
@@ -2898,13 +3143,19 @@ static void do_slave_init(struct mlx4_ib_dev *ibdev, int slave, int do_init)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dm = kcalloc(dev->caps.num_ports, sizeof *dm, GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 	actv_ports = mlx4_get_active_ports(dev, slave);
 	ports = bitmap_weight(actv_ports.ports, dev->caps.num_ports);
 	first_port = find_first_bit(actv_ports.ports, dev->caps.num_ports);
 
 	dm = kcalloc(ports, sizeof(*dm), GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!dm) {
 		pr_err("failed to allocate memory for tunneling qp update\n");
@@ -2912,7 +3163,11 @@ static void do_slave_init(struct mlx4_ib_dev *ibdev, int slave, int do_init)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < dev->caps.num_ports; i++) {
+=======
+	for (i = 0; i < ports; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < ports; i++) {
 >>>>>>> v3.18
@@ -2928,9 +3183,15 @@ static void do_slave_init(struct mlx4_ib_dev *ibdev, int slave, int do_init)
 	}
 	/* initialize or tear down tunnel QPs for the slave */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < dev->caps.num_ports; i++) {
 		INIT_WORK(&dm[i]->work, mlx4_ib_tunnels_update_work);
 		dm[i]->port = i + 1;
+=======
+	for (i = 0; i < ports; i++) {
+		INIT_WORK(&dm[i]->work, mlx4_ib_tunnels_update_work);
+		dm[i]->port = first_port + i + 1;
+>>>>>>> v3.18
 =======
 	for (i = 0; i < ports; i++) {
 		INIT_WORK(&dm[i]->work, mlx4_ib_tunnels_update_work);

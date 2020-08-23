@@ -16,6 +16,10 @@
 #include "util/debug.h"
 #include "util/build-id.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util/data.h"
+>>>>>>> v3.18
 =======
 #include "util/data.h"
 >>>>>>> v3.18
@@ -26,6 +30,7 @@
 
 struct perf_inject {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct perf_tool tool;
 	bool		 build_ids;
 	bool		 sched_stat;
@@ -35,6 +40,8 @@ struct perf_inject {
 	u64		 bytes_written;
 	struct list_head samples;
 =======
+=======
+>>>>>>> v3.18
 	struct perf_tool	tool;
 	struct perf_session	*session;
 	bool			build_ids;
@@ -43,6 +50,9 @@ struct perf_inject {
 	struct perf_data_file	output;
 	u64			bytes_written;
 	struct list_head	samples;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -53,6 +63,7 @@ struct event_entry {
 };
 
 static int perf_event__repipe_synth(struct perf_tool *tool,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				    union perf_event *event,
 				    struct machine *machine __maybe_unused)
@@ -74,6 +85,8 @@ static int perf_event__repipe_synth(struct perf_tool *tool,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 				    union perf_event *event)
 {
 	struct perf_inject *inject = container_of(tool, struct perf_inject, tool);
@@ -85,6 +98,9 @@ static int perf_event__repipe_synth(struct perf_tool *tool,
 		return -errno;
 
 	inject->bytes_written += size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -94,6 +110,7 @@ static int perf_event__repipe_op2_synth(struct perf_tool *tool,
 					struct perf_session *session
 					__maybe_unused)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return perf_event__repipe_synth(tool, event, NULL);
 }
@@ -121,6 +138,8 @@ static int perf_event__repipe_attr(union perf_event *event,
 
 	return perf_event__repipe_synth(NULL, event, NULL);
 =======
+=======
+>>>>>>> v3.18
 	return perf_event__repipe_synth(tool, event);
 }
 
@@ -140,6 +159,9 @@ static int perf_event__repipe_attr(struct perf_tool *tool,
 		return 0;
 
 	return perf_event__repipe_synth(tool, event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -147,9 +169,15 @@ static int perf_event__repipe(struct perf_tool *tool,
 			      union perf_event *event,
 			      struct perf_sample *sample __maybe_unused,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      struct machine *machine)
 {
 	return perf_event__repipe_synth(tool, event, machine);
+=======
+			      struct machine *machine __maybe_unused)
+{
+	return perf_event__repipe_synth(tool, event);
+>>>>>>> v3.18
 =======
 			      struct machine *machine __maybe_unused)
 {
@@ -170,8 +198,13 @@ static int perf_event__repipe_sample(struct perf_tool *tool,
 				     struct machine *machine)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (evsel->handler.func) {
 		inject_handler f = evsel->handler.func;
+=======
+	if (evsel->handler) {
+		inject_handler f = evsel->handler;
+>>>>>>> v3.18
 =======
 	if (evsel->handler) {
 		inject_handler f = evsel->handler;
@@ -182,7 +215,11 @@ static int perf_event__repipe_sample(struct perf_tool *tool,
 	build_id__mark_dso_hit(tool, event, sample, evsel, machine);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return perf_event__repipe_synth(tool, event, machine);
+=======
+	return perf_event__repipe_synth(tool, event);
+>>>>>>> v3.18
 =======
 	return perf_event__repipe_synth(tool, event);
 >>>>>>> v3.18
@@ -202,7 +239,10 @@ static int perf_event__repipe_mmap(struct perf_tool *tool,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int perf_event__repipe_mmap2(struct perf_tool *tool,
 				   union perf_event *event,
 				   struct perf_sample *sample,
@@ -216,6 +256,9 @@ static int perf_event__repipe_mmap2(struct perf_tool *tool,
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int perf_event__repipe_fork(struct perf_tool *tool,
 				   union perf_event *event,
@@ -231,7 +274,12 @@ static int perf_event__repipe_fork(struct perf_tool *tool,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int perf_event__repipe_tracing_data(union perf_event *event,
+=======
+static int perf_event__repipe_tracing_data(struct perf_tool *tool,
+					   union perf_event *event,
+>>>>>>> v3.18
 =======
 static int perf_event__repipe_tracing_data(struct perf_tool *tool,
 					   union perf_event *event,
@@ -241,8 +289,13 @@ static int perf_event__repipe_tracing_data(struct perf_tool *tool,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	perf_event__repipe_synth(NULL, event, NULL);
 	err = perf_event__process_tracing_data(event, session);
+=======
+	perf_event__repipe_synth(tool, event);
+	err = perf_event__process_tracing_data(tool, event, session);
+>>>>>>> v3.18
 =======
 	perf_event__repipe_synth(tool, event);
 	err = perf_event__process_tracing_data(tool, event, session);
@@ -251,6 +304,7 @@ static int perf_event__repipe_tracing_data(struct perf_tool *tool,
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int dso__read_build_id(struct dso *self)
 {
@@ -261,6 +315,8 @@ static int dso__read_build_id(struct dso *self)
 				    sizeof(self->build_id)) > 0) {
 		self->has_build_id = true;
 =======
+=======
+>>>>>>> v3.18
 static int dso__read_build_id(struct dso *dso)
 {
 	if (dso->has_build_id)
@@ -269,6 +325,9 @@ static int dso__read_build_id(struct dso *dso)
 	if (filename__read_build_id(dso->long_name, dso->build_id,
 				    sizeof(dso->build_id)) > 0) {
 		dso->has_build_id = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	}
@@ -277,7 +336,11 @@ static int dso__read_build_id(struct dso *dso)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dso__inject_build_id(struct dso *self, struct perf_tool *tool,
+=======
+static int dso__inject_build_id(struct dso *dso, struct perf_tool *tool,
+>>>>>>> v3.18
 =======
 static int dso__inject_build_id(struct dso *dso, struct perf_tool *tool,
 >>>>>>> v3.18
@@ -286,6 +349,7 @@ static int dso__inject_build_id(struct dso *dso, struct perf_tool *tool,
 	u16 misc = PERF_RECORD_MISC_USER;
 	int err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dso__read_build_id(self) < 0) {
 		pr_debug("no build_id found for %s\n", self->long_name);
@@ -300,6 +364,8 @@ static int dso__inject_build_id(struct dso *dso, struct perf_tool *tool,
 	if (err) {
 		pr_err("Can't synthesize build_id event for %s\n", self->long_name);
 =======
+=======
+>>>>>>> v3.18
 	if (dso__read_build_id(dso) < 0) {
 		pr_debug("no build_id found for %s\n", dso->long_name);
 		return -1;
@@ -312,6 +378,9 @@ static int dso__inject_build_id(struct dso *dso, struct perf_tool *tool,
 					      machine);
 	if (err) {
 		pr_err("Can't synthesize build_id event for %s\n", dso->long_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -1;
 	}
@@ -332,7 +401,11 @@ static int perf_event__inject_buildid(struct perf_tool *tool,
 	cpumode = event->header.misc & PERF_RECORD_MISC_CPUMODE_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	thread = machine__findnew_thread(machine, event->ip.pid);
+=======
+	thread = machine__findnew_thread(machine, sample->pid, sample->tid);
+>>>>>>> v3.18
 =======
 	thread = machine__findnew_thread(machine, sample->pid, sample->tid);
 >>>>>>> v3.18
@@ -344,7 +417,11 @@ static int perf_event__inject_buildid(struct perf_tool *tool,
 
 	thread__find_addr_map(thread, machine, cpumode, MAP__FUNCTION,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      event->ip.ip, &al);
+=======
+			      sample->ip, &al);
+>>>>>>> v3.18
 =======
 			      sample->ip, &al);
 >>>>>>> v3.18
@@ -360,7 +437,11 @@ static int perf_event__inject_buildid(struct perf_tool *tool,
 				 */
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIBELF_SUPPORT
+=======
+#ifdef HAVE_LIBELF_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_LIBELF_SUPPORT
 >>>>>>> v3.18
@@ -447,7 +528,12 @@ found:
 	sample_sw.time	 = sample->time;
 	perf_event__synthesize_sample(event_sw, evsel->attr.sample_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      &sample_sw, false);
+=======
+				      evsel->attr.read_format, &sample_sw,
+				      false);
+>>>>>>> v3.18
 =======
 				      evsel->attr.read_format, &sample_sw,
 				      false);
@@ -457,8 +543,11 @@ found:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern volatile int session_done;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void sig_handler(int sig __maybe_unused)
@@ -484,8 +573,14 @@ static int perf_evsel__check_stype(struct perf_evsel *evsel,
 static int __cmd_inject(struct perf_inject *inject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct perf_session *session;
 	int ret = -EINVAL;
+=======
+	int ret = -EINVAL;
+	struct perf_session *session = inject->session;
+	struct perf_data_file *file_out = &inject->output;
+>>>>>>> v3.18
 =======
 	int ret = -EINVAL;
 	struct perf_session *session = inject->session;
@@ -497,6 +592,10 @@ static int __cmd_inject(struct perf_inject *inject)
 	if (inject->build_ids || inject->sched_stat) {
 		inject->tool.mmap	  = perf_event__repipe_mmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		inject->tool.mmap2	  = perf_event__repipe_mmap2;
+>>>>>>> v3.18
 =======
 		inject->tool.mmap2	  = perf_event__repipe_mmap2;
 >>>>>>> v3.18
@@ -505,10 +604,13 @@ static int __cmd_inject(struct perf_inject *inject)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	session = perf_session__new(inject->input_name, O_RDONLY, false, true, &inject->tool);
 	if (session == NULL)
 		return -ENOMEM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (inject->build_ids) {
@@ -517,9 +619,15 @@ static int __cmd_inject(struct perf_inject *inject)
 		struct perf_evsel *evsel;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inject->tool.ordered_samples = true;
 
 		list_for_each_entry(evsel, &session->evlist->entries, node) {
+=======
+		inject->tool.ordered_events = true;
+
+		evlist__for_each(session->evlist, evsel) {
+>>>>>>> v3.18
 =======
 		inject->tool.ordered_events = true;
 
@@ -531,6 +639,7 @@ static int __cmd_inject(struct perf_inject *inject)
 				if (perf_evsel__check_stype(evsel, PERF_SAMPLE_TID, "TID"))
 					return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				evsel->handler.func = perf_inject__sched_switch;
 			} else if (!strcmp(name, "sched:sched_process_exit"))
@@ -553,6 +662,8 @@ static int __cmd_inject(struct perf_inject *inject)
 	perf_session__delete(session);
 
 =======
+=======
+>>>>>>> v3.18
 				evsel->handler = perf_inject__sched_switch;
 			} else if (!strcmp(name, "sched:sched_process_exit"))
 				evsel->handler = perf_inject__sched_process_exit;
@@ -574,6 +685,9 @@ static int __cmd_inject(struct perf_inject *inject)
 		perf_session__write_header(session, session->evlist, file_out->fd, true);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -585,6 +699,10 @@ int cmd_inject(int argc, const char **argv, const char *prefix __maybe_unused)
 			.sample		= perf_event__repipe_sample,
 			.mmap		= perf_event__repipe,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			.mmap2		= perf_event__repipe,
+>>>>>>> v3.18
 =======
 			.mmap2		= perf_event__repipe,
 >>>>>>> v3.18
@@ -597,8 +715,13 @@ int cmd_inject(int argc, const char **argv, const char *prefix __maybe_unused)
 			.unthrottle	= perf_event__repipe,
 			.attr		= perf_event__repipe_attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.event_type	= perf_event__repipe_event_type_synth,
 			.tracing_data	= perf_event__repipe_tracing_data_synth,
+=======
+			.tracing_data	= perf_event__repipe_op2_synth,
+			.finished_round	= perf_event__repipe_op2_synth,
+>>>>>>> v3.18
 =======
 			.tracing_data	= perf_event__repipe_op2_synth,
 			.finished_round	= perf_event__repipe_op2_synth,
@@ -608,9 +731,12 @@ int cmd_inject(int argc, const char **argv, const char *prefix __maybe_unused)
 		.input_name  = "-",
 		.samples = LIST_HEAD_INIT(inject.samples),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 	const char *output_name = "-";
 =======
+=======
+>>>>>>> v3.18
 		.output = {
 			.path = "-",
 			.mode = PERF_DATA_MODE_WRITE,
@@ -621,6 +747,9 @@ int cmd_inject(int argc, const char **argv, const char *prefix __maybe_unused)
 	};
 	int ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct option options[] = {
 		OPT_BOOLEAN('b', "build-ids", &inject.build_ids,
@@ -628,7 +757,11 @@ int cmd_inject(int argc, const char **argv, const char *prefix __maybe_unused)
 		OPT_STRING('i', "input", &inject.input_name, "file",
 			   "input file name"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		OPT_STRING('o', "output", &output_name, "file",
+=======
+		OPT_STRING('o', "output", &inject.output.path, "file",
+>>>>>>> v3.18
 =======
 		OPT_STRING('o', "output", &inject.output.path, "file",
 >>>>>>> v3.18
@@ -639,6 +772,11 @@ int cmd_inject(int argc, const char **argv, const char *prefix __maybe_unused)
 		OPT_INCR('v', "verbose", &verbose,
 			 "be more verbose (show build ids, etc)"),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		OPT_STRING(0, "kallsyms", &symbol_conf.kallsyms_name, "file",
+			   "kallsyms pathname"),
+>>>>>>> v3.18
 =======
 		OPT_STRING(0, "kallsyms", &symbol_conf.kallsyms_name, "file",
 			   "kallsyms pathname"),
@@ -659,6 +797,7 @@ int cmd_inject(int argc, const char **argv, const char *prefix __maybe_unused)
 		usage_with_options(inject_usage, options);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strcmp(output_name, "-")) {
 		inject.pipe_output = 1;
 		inject.output = STDOUT_FILENO;
@@ -676,6 +815,8 @@ int cmd_inject(int argc, const char **argv, const char *prefix __maybe_unused)
 
 	return __cmd_inject(&inject);
 =======
+=======
+>>>>>>> v3.18
 	if (perf_data_file__open(&inject.output)) {
 		perror("failed to create output file");
 		return -1;
@@ -694,5 +835,8 @@ int cmd_inject(int argc, const char **argv, const char *prefix __maybe_unused)
 	perf_session__delete(inject.session);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -16,17 +16,23 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irq.h>
 
 struct device;
 
 #ifdef CONFIG_PM
 =======
+=======
+>>>>>>> v3.18
 #include <plat/pm-common.h>
 
 struct device;
 
 #ifdef CONFIG_SAMSUNG_PM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern __init int s3c_pm_init(void);
@@ -62,6 +68,7 @@ extern int (*pm_cpu_sleep)(unsigned long);
 
 extern unsigned long s3c_pm_flags;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern unsigned char pm_uart_udivslot;  /* true to save UART UDIVSLOT */
 
@@ -140,6 +147,8 @@ extern void s3c_pm_dbg(const char *msg, ...);
 #else
 #define S3C_PMDBG(fmt...) printk(KERN_DEBUG fmt)
 =======
+=======
+>>>>>>> v3.18
 /* from sleep.S */
 
 extern int s3c2410_cpu_suspend(unsigned long);
@@ -152,6 +161,9 @@ extern void s3c_cpu_resume(void);
 #define s3c_irq_wake NULL
 #define s3c_irqext_wake NULL
 #define s3c_cpu_resume NULL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -167,6 +179,7 @@ extern void s3c_pm_debug_smdkled(u32 set, u32 clear);
 static inline void s3c_pm_debug_smdkled(u32 set, u32 clear) { }
 #endif /* CONFIG_S3C_PM_DEBUG_LED_SMDK */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* suspend memory checking */
 
@@ -184,6 +197,8 @@ extern void s3c_pm_check_store(void);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * s3c_pm_configure_extint() - ensure pins are correctly set for IRQ
  *
@@ -193,6 +208,10 @@ extern void s3c_pm_check_store(void);
 extern void s3c_pm_configure_extint(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_GPIO_SAMSUNG
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_GPIO_SAMSUNG
 >>>>>>> v3.18
@@ -212,11 +231,17 @@ extern void samsung_pm_restore_gpios(void);
  */
 extern void samsung_pm_save_gpios(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 static inline void samsung_pm_restore_gpios(void) {}
 static inline void samsung_pm_save_gpios(void) {}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern void s3c_pm_save_core(void);

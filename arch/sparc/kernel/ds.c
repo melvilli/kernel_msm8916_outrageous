@@ -529,10 +529,15 @@ static void dr_cpu_mark(struct ds_data *resp, int cpu, int ncpus,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit dr_cpu_configure(struct ds_info *dp,
 				      struct ds_cap_state *cp,
 				      u64 req_num,
 				      cpumask_t *mask)
+=======
+static int dr_cpu_configure(struct ds_info *dp, struct ds_cap_state *cp,
+			    u64 req_num, cpumask_t *mask)
+>>>>>>> v3.18
 =======
 static int dr_cpu_configure(struct ds_info *dp, struct ds_cap_state *cp,
 			    u64 req_num, cpumask_t *mask)
@@ -633,9 +638,14 @@ static int dr_cpu_unconfigure(struct ds_info *dp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit dr_cpu_data(struct ds_info *dp,
 				  struct ds_cap_state *cp,
 				  void *buf, int len)
+=======
+static void dr_cpu_data(struct ds_info *dp, struct ds_cap_state *cp, void *buf,
+			int len)
+>>>>>>> v3.18
 =======
 static void dr_cpu_data(struct ds_info *dp, struct ds_cap_state *cp, void *buf,
 			int len)
@@ -794,7 +804,10 @@ void ldom_set_var(const char *var, const char *value)
 		int msg_len, loops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (strlen(var) + strlen(value) + 2 >
 		    sizeof(pkt) - sizeof(pkt.header)) {
 			printk(KERN_ERR PFX
@@ -805,6 +818,9 @@ void ldom_set_var(const char *var, const char *value)
 			return;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memset(&pkt, 0, sizeof(pkt));
 		pkt.header.data.tag.type = DS_DATA;
@@ -1217,7 +1233,11 @@ static int ds_probe(struct vio_dev *vdev, const struct vio_device_id *id)
 	ds_cfg.rx_irq = vdev->rx_irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp = ldc_alloc(vdev->channel_id, &ds_cfg, dp);
+=======
+	lp = ldc_alloc(vdev->channel_id, &ds_cfg, dp, "DS");
+>>>>>>> v3.18
 =======
 	lp = ldc_alloc(vdev->channel_id, &ds_cfg, dp, "DS");
 >>>>>>> v3.18
@@ -1228,7 +1248,11 @@ static int ds_probe(struct vio_dev *vdev, const struct vio_device_id *id)
 	dp->lp = lp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = ldc_bind(lp, "DS");
+=======
+	err = ldc_bind(lp);
+>>>>>>> v3.18
 =======
 	err = ldc_bind(lp);
 >>>>>>> v3.18

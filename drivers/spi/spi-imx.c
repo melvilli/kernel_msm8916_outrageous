@@ -22,14 +22,20 @@
 #include <linux/completion.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/err.h>
 #include <linux/gpio.h>
 #include <linux/init.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/dmaengine.h>
 #include <linux/dma-mapping.h>
 #include <linux/err.h>
 #include <linux/gpio.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/io.h>
@@ -45,8 +51,13 @@
 #include <linux/of_device.h>
 #include <linux/of_gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
 
+=======
+
+#include <linux/platform_data/dma-imx.h>
+>>>>>>> v3.18
 =======
 
 #include <linux/platform_data/dma-imx.h>
@@ -66,6 +77,12 @@
 #define MXC_INT_TE	(1 << 1) /* Transmit FIFO empty interrupt */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* The maximum  bytes that a sdma BD can transfer.*/
+#define MAX_SDMA_BD_BYTES  (1 << 15)
+#define IMX_DMA_TIMEOUT (msecs_to_jiffies(3000))
+>>>>>>> v3.18
 =======
 /* The maximum  bytes that a sdma BD can transfer.*/
 #define MAX_SDMA_BD_BYTES  (1 << 15)
@@ -116,7 +133,10 @@ struct spi_imx_data {
 	unsigned int txfifo; /* number of words pushed in tx FIFO */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* DMA */
 	unsigned int dma_is_inited;
 	unsigned int dma_finished;
@@ -127,6 +147,9 @@ struct spi_imx_data {
 	struct completion dma_rx_completion;
 	struct completion dma_tx_completion;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct spi_imx_devtype_data *devtype_data;
 	int chipselect[0];
@@ -215,10 +238,13 @@ static unsigned int spi_imx_clkdiv_2(unsigned int fin,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MX51_ECSPI_CTRL		0x08
 #define MX51_ECSPI_CTRL_ENABLE		(1 <<  0)
 #define MX51_ECSPI_CTRL_XCH		(1 <<  2)
 =======
+=======
+>>>>>>> v3.18
 static bool spi_imx_can_dma(struct spi_master *master, struct spi_device *spi,
 			 struct spi_transfer *transfer)
 {
@@ -234,6 +260,9 @@ static bool spi_imx_can_dma(struct spi_master *master, struct spi_device *spi,
 #define MX51_ECSPI_CTRL_ENABLE		(1 <<  0)
 #define MX51_ECSPI_CTRL_XCH		(1 <<  2)
 #define MX51_ECSPI_CTRL_SMC		(1 << 3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MX51_ECSPI_CTRL_MODE_MASK	(0xf << 4)
 #define MX51_ECSPI_CTRL_POSTDIV_OFFSET	8
@@ -253,7 +282,10 @@ static bool spi_imx_can_dma(struct spi_master *master, struct spi_device *spi,
 #define MX51_ECSPI_INT_RREN		(1 <<  3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MX51_ECSPI_DMA      0x14
 #define MX51_ECSPI_DMA_TX_WML_OFFSET	0
 #define MX51_ECSPI_DMA_TX_WML_MASK	0x3F
@@ -266,13 +298,21 @@ static bool spi_imx_can_dma(struct spi_master *master, struct spi_device *spi,
 #define MX51_ECSPI_DMA_RXDEN_OFFSET	23
 #define MX51_ECSPI_DMA_RXTDEN_OFFSET	31
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MX51_ECSPI_STAT		0x18
 #define MX51_ECSPI_STAT_RR		(1 <<  3)
 
 /* MX51 eCSPI */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int mx51_ecspi_clkdiv(unsigned int fin, unsigned int fspi)
+=======
+static unsigned int mx51_ecspi_clkdiv(unsigned int fin, unsigned int fspi,
+				      unsigned int *fres)
+>>>>>>> v3.18
 =======
 static unsigned int mx51_ecspi_clkdiv(unsigned int fin, unsigned int fspi,
 				      unsigned int *fres)
@@ -305,11 +345,17 @@ static unsigned int mx51_ecspi_clkdiv(unsigned int fin, unsigned int fspi,
 	pr_debug("%s: fin: %u, fspi: %u, post: %u, pre: %u\n",
 			__func__, fin, fspi, post, pre);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Resulting frequency for the SCLK line. */
 	*fres = (fin / (pre + 1)) >> post;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (pre << MX51_ECSPI_CTRL_PREDIV_OFFSET) |
 		(post << MX51_ECSPI_CTRL_POSTDIV_OFFSET);
@@ -331,11 +377,14 @@ static void __maybe_unused mx51_ecspi_intctrl(struct spi_imx_data *spi_imx, int 
 static void __maybe_unused mx51_ecspi_trigger(struct spi_imx_data *spi_imx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reg;
 
 	reg = readl(spi_imx->base + MX51_ECSPI_CTRL);
 	reg |= MX51_ECSPI_CTRL_XCH;
 =======
+=======
+>>>>>>> v3.18
 	u32 reg = readl(spi_imx->base + MX51_ECSPI_CTRL);
 
 	if (!spi_imx->usedma)
@@ -344,6 +393,9 @@ static void __maybe_unused mx51_ecspi_trigger(struct spi_imx_data *spi_imx)
 		reg |= MX51_ECSPI_CTRL_SMC;
 	else
 		reg &= ~MX51_ECSPI_CTRL_SMC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel(reg, spi_imx->base + MX51_ECSPI_CTRL);
 }
@@ -352,7 +404,13 @@ static int __maybe_unused mx51_ecspi_config(struct spi_imx_data *spi_imx,
 		struct spi_imx_config *config)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ctrl = MX51_ECSPI_CTRL_ENABLE, cfg = 0;
+=======
+	u32 ctrl = MX51_ECSPI_CTRL_ENABLE, cfg = 0, dma = 0;
+	u32 tx_wml_cfg, rx_wml_cfg, rxt_wml_cfg;
+	u32 clk = config->speed_hz, delay;
+>>>>>>> v3.18
 =======
 	u32 ctrl = MX51_ECSPI_CTRL_ENABLE, cfg = 0, dma = 0;
 	u32 tx_wml_cfg, rx_wml_cfg, rxt_wml_cfg;
@@ -370,7 +428,11 @@ static int __maybe_unused mx51_ecspi_config(struct spi_imx_data *spi_imx,
 
 	/* set clock speed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctrl |= mx51_ecspi_clkdiv(spi_imx->spi_clk, config->speed_hz);
+=======
+	ctrl |= mx51_ecspi_clkdiv(spi_imx->spi_clk, config->speed_hz, &clk);
+>>>>>>> v3.18
 =======
 	ctrl |= mx51_ecspi_clkdiv(spi_imx->spi_clk, config->speed_hz, &clk);
 >>>>>>> v3.18
@@ -396,7 +458,10 @@ static int __maybe_unused mx51_ecspi_config(struct spi_imx_data *spi_imx,
 	writel(cfg, spi_imx->base + MX51_ECSPI_CONFIG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Wait until the changes in the configuration register CONFIGREG
 	 * propagate into the hardware. It takes exactly one tick of the
@@ -438,6 +503,9 @@ static int __maybe_unused mx51_ecspi_config(struct spi_imx_data *spi_imx,
 		writel(dma, spi_imx->base + MX51_ECSPI_DMA);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -762,6 +830,10 @@ static const struct of_device_id spi_imx_dt_ids[] = {
 	{ /* sentinel */ }
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DEVICE_TABLE(of, spi_imx_dt_ids);
+>>>>>>> v3.18
 =======
 MODULE_DEVICE_TABLE(of, spi_imx_dt_ids);
 >>>>>>> v3.18
@@ -844,16 +916,22 @@ static int spi_imx_setupxfer(struct spi_device *spi,
 		spi_imx->rx = spi_imx_buf_rx_u16;
 		spi_imx->tx = spi_imx_buf_tx_u16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (config.bpw <= 32) {
 		spi_imx->rx = spi_imx_buf_rx_u32;
 		spi_imx->tx = spi_imx_buf_tx_u32;
 	} else
 		BUG();
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		spi_imx->rx = spi_imx_buf_rx_u32;
 		spi_imx->tx = spi_imx_buf_tx_u32;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spi_imx->devtype_data->config(spi_imx, &config);
@@ -862,8 +940,11 @@ static int spi_imx_setupxfer(struct spi_device *spi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int spi_imx_transfer(struct spi_device *spi,
 =======
+=======
+>>>>>>> v3.18
 static void spi_imx_sdma_exit(struct spi_imx_data *spi_imx)
 {
 	struct spi_master *master = spi_imx->bitbang.master;
@@ -1044,6 +1125,9 @@ no_dma:
 }
 
 static int spi_imx_pio_transfer(struct spi_device *spi,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				struct spi_transfer *transfer)
 {
@@ -1055,7 +1139,11 @@ static int spi_imx_pio_transfer(struct spi_device *spi,
 	spi_imx->txfifo = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_completion(&spi_imx->xfer_done);
+=======
+	reinit_completion(&spi_imx->xfer_done);
+>>>>>>> v3.18
 =======
 	reinit_completion(&spi_imx->xfer_done);
 >>>>>>> v3.18
@@ -1070,7 +1158,10 @@ static int spi_imx_pio_transfer(struct spi_device *spi,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int spi_imx_transfer(struct spi_device *spi,
 				struct spi_transfer *transfer)
 {
@@ -1089,6 +1180,9 @@ static int spi_imx_transfer(struct spi_device *spi,
 	return spi_imx_pio_transfer(spi, transfer);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int spi_imx_setup(struct spi_device *spi)
 {
@@ -1111,7 +1205,10 @@ static void spi_imx_cleanup(struct spi_device *spi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 spi_imx_prepare_message(struct spi_master *master, struct spi_message *msg)
 {
@@ -1141,6 +1238,9 @@ spi_imx_unprepare_message(struct spi_master *master, struct spi_message *msg)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int spi_imx_probe(struct platform_device *pdev)
 {
@@ -1153,7 +1253,10 @@ static int spi_imx_probe(struct platform_device *pdev)
 	struct spi_imx_data *spi_imx;
 	struct resource *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pinctrl *pinctrl;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i, ret, num_cs;
@@ -1179,6 +1282,10 @@ static int spi_imx_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, master);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(1, 32);
+>>>>>>> v3.18
 =======
 	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(1, 32);
 >>>>>>> v3.18
@@ -1187,7 +1294,11 @@ static int spi_imx_probe(struct platform_device *pdev)
 
 	spi_imx = spi_master_get_devdata(master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_imx->bitbang.master = spi_master_get(master);
+=======
+	spi_imx->bitbang.master = master;
+>>>>>>> v3.18
 =======
 	spi_imx->bitbang.master = master;
 >>>>>>> v3.18
@@ -1202,16 +1313,22 @@ static int spi_imx_probe(struct platform_device *pdev)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = gpio_request(spi_imx->chipselect[i], DRIVER_NAME);
 		if (ret) {
 			dev_err(&pdev->dev, "can't get cs gpios\n");
 			goto out_gpio_free;
 =======
+=======
+>>>>>>> v3.18
 		ret = devm_gpio_request(&pdev->dev, spi_imx->chipselect[i],
 					DRIVER_NAME);
 		if (ret) {
 			dev_err(&pdev->dev, "can't get cs gpios\n");
 			goto out_master_put;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1222,6 +1339,11 @@ static int spi_imx_probe(struct platform_device *pdev)
 	spi_imx->bitbang.master->setup = spi_imx_setup;
 	spi_imx->bitbang.master->cleanup = spi_imx_cleanup;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spi_imx->bitbang.master->prepare_message = spi_imx_prepare_message;
+	spi_imx->bitbang.master->unprepare_message = spi_imx_unprepare_message;
+>>>>>>> v3.18
 =======
 	spi_imx->bitbang.master->prepare_message = spi_imx_prepare_message;
 	spi_imx->bitbang.master->unprepare_message = spi_imx_unprepare_message;
@@ -1234,6 +1356,7 @@ static int spi_imx_probe(struct platform_device *pdev)
 		(struct spi_imx_devtype_data *) pdev->id_entry->driver_data;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!res) {
 		dev_err(&pdev->dev, "can't get platform resource\n");
@@ -1252,15 +1375,21 @@ static int spi_imx_probe(struct platform_device *pdev)
 		ret = -EINVAL;
 		goto out_release_mem;
 =======
+=======
+>>>>>>> v3.18
 	spi_imx->base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(spi_imx->base)) {
 		ret = PTR_ERR(spi_imx->base);
 		goto out_master_put;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	spi_imx->irq = platform_get_irq(pdev, 0);
 	if (spi_imx->irq < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = -EINVAL;
 		goto out_iounmap;
@@ -1277,6 +1406,8 @@ static int spi_imx_probe(struct platform_device *pdev)
 		ret = PTR_ERR(pinctrl);
 		goto out_free_irq;
 =======
+=======
+>>>>>>> v3.18
 		ret = spi_imx->irq;
 		goto out_master_put;
 	}
@@ -1286,6 +1417,9 @@ static int spi_imx_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "can't get irq%d: %d\n", spi_imx->irq, ret);
 		goto out_master_put;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1293,7 +1427,11 @@ static int spi_imx_probe(struct platform_device *pdev)
 	if (IS_ERR(spi_imx->clk_ipg)) {
 		ret = PTR_ERR(spi_imx->clk_ipg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free_irq;
+=======
+		goto out_master_put;
+>>>>>>> v3.18
 =======
 		goto out_master_put;
 >>>>>>> v3.18
@@ -1303,6 +1441,7 @@ static int spi_imx_probe(struct platform_device *pdev)
 	if (IS_ERR(spi_imx->clk_per)) {
 		ret = PTR_ERR(spi_imx->clk_per);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free_irq;
 	}
 
@@ -1311,6 +1450,8 @@ static int spi_imx_probe(struct platform_device *pdev)
 
 	spi_imx->spi_clk = clk_get_rate(spi_imx->clk_per);
 =======
+=======
+>>>>>>> v3.18
 		goto out_master_put;
 	}
 
@@ -1330,6 +1471,9 @@ static int spi_imx_probe(struct platform_device *pdev)
 	if (spi_imx->devtype_data == &imx51_ecspi_devtype_data
 	    && spi_imx_sdma_init(&pdev->dev, spi_imx, master, res))
 		dev_err(&pdev->dev, "dma setup error,use pio instead\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spi_imx->devtype_data->reset(spi_imx);
@@ -1345,6 +1489,7 @@ static int spi_imx_probe(struct platform_device *pdev)
 
 	dev_info(&pdev->dev, "probed\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return ret;
 
@@ -1366,6 +1511,8 @@ out_gpio_free:
 	kfree(master);
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	clk_disable(spi_imx->clk_ipg);
 	clk_disable(spi_imx->clk_per);
 	return ret;
@@ -1377,6 +1524,9 @@ out_put_per:
 out_master_put:
 	spi_master_put(master);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1385,9 +1535,13 @@ static int spi_imx_remove(struct platform_device *pdev)
 {
 	struct spi_master *master = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	struct spi_imx_data *spi_imx = spi_master_get_devdata(master);
 	int i;
+=======
+	struct spi_imx_data *spi_imx = spi_master_get_devdata(master);
+>>>>>>> v3.18
 =======
 	struct spi_imx_data *spi_imx = spi_master_get_devdata(master);
 >>>>>>> v3.18
@@ -1395,6 +1549,7 @@ static int spi_imx_remove(struct platform_device *pdev)
 	spi_bitbang_stop(&spi_imx->bitbang);
 
 	writel(0, spi_imx->base + MXC_CSPICTRL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk_disable_unprepare(spi_imx->clk_per);
 	clk_disable_unprepare(spi_imx->clk_ipg);
@@ -1412,11 +1567,16 @@ static int spi_imx_remove(struct platform_device *pdev)
 	platform_set_drvdata(pdev, NULL);
 
 =======
+=======
+>>>>>>> v3.18
 	clk_unprepare(spi_imx->clk_ipg);
 	clk_unprepare(spi_imx->clk_per);
 	spi_imx_sdma_exit(spi_imx);
 	spi_master_put(master);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

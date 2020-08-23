@@ -13,9 +13,12 @@ extern void ack_bad_irq(unsigned int irq);
 #define ack_bad_irq ack_bad_irq
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Define until common code gets sane defaults */
 #define HARDIRQ_BITS 9
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm-generic/hardirq.h>

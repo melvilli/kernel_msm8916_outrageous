@@ -152,6 +152,11 @@ struct gss_api_mech *gss_mech_get_by_pseudoflavor(u32);
 int gss_mech_list_pseudoflavors(rpc_authflavor_t *, int);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct gss_api_mech * gss_mech_get(struct gss_api_mech *);
+
+>>>>>>> v3.18
 =======
 struct gss_api_mech * gss_mech_get(struct gss_api_mech *);
 

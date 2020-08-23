@@ -24,7 +24,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/dmi.h>
@@ -835,15 +838,21 @@ static ssize_t lis3lv02d_rate_set(struct device *dev,
 	struct lis3lv02d *lis3 = dev_get_drvdata(dev);
 	unsigned long rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 0, &rate))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &rate);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	lis3lv02d_sysfs_poweron(lis3);

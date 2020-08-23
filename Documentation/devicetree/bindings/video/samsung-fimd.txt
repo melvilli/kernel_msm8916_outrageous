@@ -9,9 +9,14 @@ Required properties:
 		"samsung,s3c2443-fimd"; /* for S3C24XX SoCs */
 		"samsung,s3c6400-fimd"; /* for S3C64XX SoCs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"samsung,s5p6440-fimd"; /* for S5P64X0 SoCs */
 		"samsung,s5pc100-fimd"; /* for S5PC100 SoC  */
 		"samsung,s5pv210-fimd"; /* for S5PV210 SoC */
+=======
+		"samsung,s5pv210-fimd"; /* for S5PV210 SoC */
+		"samsung,exynos3250-fimd"; /* for Exynos3250/3472 SoCs */
+>>>>>>> v3.18
 =======
 		"samsung,s5pv210-fimd"; /* for S5PV210 SoC */
 		"samsung,exynos3250-fimd"; /* for Exynos3250/3472 SoCs */
@@ -45,7 +50,10 @@ Required properties:
 Optional Properties:
 - samsung,power-domain: a phandle to FIMD power domain node.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - samsung,invert-vden: video enable signal is inverted
 - samsung,invert-vclk: video clock signal is inverted
 - display-timings: timing settings for FIMD, as described in document [1].
@@ -91,6 +99,9 @@ in [2]. The following are properties specific to those nodes:
 
 [1]: Documentation/devicetree/bindings/video/display-timing.txt
 [2]: Documentation/devicetree/bindings/media/video-interfaces.txt
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:

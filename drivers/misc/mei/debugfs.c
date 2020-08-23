@@ -18,7 +18,10 @@
 #include <linux/device.h>
 #include <linux/debugfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -31,6 +34,7 @@ static ssize_t mei_dbgfs_read_meclients(struct file *fp, char __user *ubuf,
 					size_t cnt, loff_t *ppos)
 {
 	struct mei_device *dev = fp->private_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mei_me_client *cl;
 	const size_t bufsz = 1024;
@@ -66,6 +70,8 @@ static ssize_t mei_dbgfs_read_meclients(struct file *fp, char __user *ubuf,
 			cl->props.max_number_of_connections,
 			cl->props.max_msg_length);
 =======
+=======
+>>>>>>> v3.18
 	struct mei_me_client *me_cl;
 	size_t bufsz = 1;
 	char *buf;
@@ -107,6 +113,9 @@ static ssize_t mei_dbgfs_read_meclients(struct file *fp, char __user *ubuf,
 			me_cl->props.max_number_of_connections,
 			me_cl->props.max_msg_length,
 			me_cl->props.single_recv_buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 out:
@@ -123,7 +132,10 @@ static const struct file_operations mei_dbgfs_fops_meclients = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t mei_dbgfs_read_active(struct file *fp, char __user *ubuf,
 					size_t cnt, loff_t *ppos)
 {
@@ -172,6 +184,9 @@ static const struct file_operations mei_dbgfs_fops_active = {
 	.llseek = generic_file_llseek,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t mei_dbgfs_read_devstate(struct file *fp, char __user *ubuf,
 					size_t cnt, loff_t *ppos)
@@ -186,9 +201,12 @@ static ssize_t mei_dbgfs_read_devstate(struct file *fp, char __user *ubuf,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pos += scnprintf(buf + pos, bufsz - pos, "%s\n",
 			mei_dev_state_str(dev->dev_state));
 =======
+=======
+>>>>>>> v3.18
 	pos += scnprintf(buf + pos, bufsz - pos, "dev: %s\n",
 			mei_dev_state_str(dev->dev_state));
 	pos += scnprintf(buf + pos, bufsz - pos, "hbm: %s\n",
@@ -196,6 +214,9 @@ static ssize_t mei_dbgfs_read_devstate(struct file *fp, char __user *ubuf,
 	pos += scnprintf(buf + pos, bufsz - pos, "pg:  %s, %s\n",
 			mei_pg_is_enabled(dev) ? "ENABLED" : "DISABLED",
 			mei_pg_state_str(mei_pg_state(dev)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = simple_read_from_buffer(ubuf, cnt, ppos, buf, pos);
 	kfree(buf);
@@ -210,7 +231,12 @@ static const struct file_operations mei_dbgfs_fops_devstate = {
 /**
  * mei_dbgfs_deregister - Remove the debugfs files and directories
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mei - pointer to mei device private dat
+=======
+ *
+ * @dev: the mei device structure
+>>>>>>> v3.18
 =======
  *
  * @dev: the mei device structure
@@ -226,21 +252,31 @@ void mei_dbgfs_deregister(struct mei_device *dev)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Add the debugfs files
  *
 =======
+=======
+>>>>>>> v3.18
  * mei_dbgfs_register - Add the debugfs files
  *
  * @dev: the mei device structure
  * @name: the mei device name
  *
  * Return: 0 on success, <0 on failure.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int mei_dbgfs_register(struct mei_device *dev, const char *name)
 {
 	struct dentry *dir, *f;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -252,8 +288,11 @@ int mei_dbgfs_register(struct mei_device *dev, const char *name)
 				dev, &mei_dbgfs_fops_meclients);
 	if (!f) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->pdev->dev, "meclients: registration failed\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev->dev, "meclients: registration failed\n");
 		goto err;
 	}
@@ -261,6 +300,9 @@ int mei_dbgfs_register(struct mei_device *dev, const char *name)
 				dev, &mei_dbgfs_fops_active);
 	if (!f) {
 		dev_err(dev->dev, "meclients: registration failed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err;
 	}
@@ -268,7 +310,11 @@ int mei_dbgfs_register(struct mei_device *dev, const char *name)
 				dev, &mei_dbgfs_fops_devstate);
 	if (!f) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->pdev->dev, "devstate: registration failed\n");
+=======
+		dev_err(dev->dev, "devstate: registration failed\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->dev, "devstate: registration failed\n");
 >>>>>>> v3.18

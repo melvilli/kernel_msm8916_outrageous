@@ -129,7 +129,10 @@ config USB_IDMOUSE
 config USB_FTDI_ELAN
 	tristate "Elan PCMCIA CardBus Adapter USB Client"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default M
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -205,6 +208,7 @@ config USB_TEST
 
 config USB_EHSET_TEST_FIXTURE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "USB EHSET Test Fixture Driver"
 	depends on USB && USB_EHCI_EHSET
 	default n
@@ -219,6 +223,8 @@ config USB_EHSET_TEST_FIXTURE
 	  for more information.
 
 =======
+=======
+>>>>>>> v3.18
         tristate "USB EHSET Test Fixture driver"
         help
 	  Say Y here if you want to support the special test fixture device
@@ -230,6 +236,9 @@ config USB_EHSET_TEST_FIXTURE
 
 	  See <http://www.usb.org/developers/onthego/EHSET_v1.01.pdf> for more
 	  information.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config USB_ISIGHTFW
@@ -265,6 +274,7 @@ config USB_EZUSB_FX2
 config USB_HSIC_USB3503
        tristate "USB3503 HSIC to USB20 Driver"
        depends on I2C
+<<<<<<< HEAD
 <<<<<<< HEAD
        help
          This option enables support for SMSC USB3503 HSIC to USB 2.0 Driver.
@@ -311,6 +321,8 @@ config USB_QCOM_IPC_BRIDGE
 	  layer for IPC router module that enables communication between
 	  APPS processor and MODEM processor.
 =======
+=======
+>>>>>>> v3.18
        select REGMAP_I2C
        help
          This option enables support for SMSC USB3503 HSIC to USB 2.0 Driver.
@@ -321,4 +333,7 @@ config USB_LINK_LAYER_TEST
 	  This driver is for generating specific traffic for Super Speed Link
 	  Layer Test Device. Say Y only when you want to conduct USB Super Speed
 	  Link Layer Test for host controllers.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

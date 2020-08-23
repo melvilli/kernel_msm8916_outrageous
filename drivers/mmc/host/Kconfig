@@ -15,7 +15,10 @@ config MMC_ARMMMCI
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MMC_QCOM_DML
 	tristate "Qualcomm Data Mover for SD Card Controller"
 	depends on MMC_ARMMMCI && QCOM_BAM_DMA
@@ -27,6 +30,9 @@ config MMC_QCOM_DML
 
 	  if unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MMC_PXA
 	tristate "Intel PXA25x/26x/27x Multimedia Card Interface support"
@@ -119,6 +125,7 @@ config MMC_SDHCI_PLTFM
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MMC_SDHCI_MSM
 	tristate "Qualcomm SDHCI Controller Support"
 	depends on ARCH_MSM
@@ -128,6 +135,8 @@ config MMC_SDHCI_MSM
 	  support present in MSM SOCs from Qualcomm. The controller
 	  supports SD/MMC/SDIO devices.
 =======
+=======
+>>>>>>> v3.18
 config MMC_SDHCI_OF_ARASAN
 	tristate "SDHCI OF support for the Arasan SDHCI controllers"
 	depends on MMC_SDHCI_PLTFM
@@ -135,6 +144,9 @@ config MMC_SDHCI_OF_ARASAN
 	help
 	  This selects the Arasan Secure Digital Host Controller Interface
 	  (SDHCI). This hardware is found e.g. in Xilinx' Zynq SoC.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  If you have a controller with this interface, say Y or M here.
@@ -194,7 +206,11 @@ config MMC_SDHCI_ESDHC_IMX
 config MMC_SDHCI_DOVE
 	tristate "SDHCI support on Marvell's Dove SoC"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_DOVE
+=======
+	depends on ARCH_DOVE || MACH_DOVE
+>>>>>>> v3.18
 =======
 	depends on ARCH_DOVE || MACH_DOVE
 >>>>>>> v3.18
@@ -246,8 +262,12 @@ config MMC_SDHCI_PXAV3
 	tristate "Marvell MMP2 SD Host Controller support (PXAV3)"
 	depends on CLKDEV_LOOKUP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MMC_SDHCI
 	select MMC_SDHCI_PLTFM
+=======
+	depends on MMC_SDHCI_PLTFM
+>>>>>>> v3.18
 =======
 	depends on MMC_SDHCI_PLTFM
 >>>>>>> v3.18
@@ -263,8 +283,12 @@ config MMC_SDHCI_PXAV2
 	tristate "Marvell PXA9XX SD Host Controller support (PXAV2)"
 	depends on CLKDEV_LOOKUP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MMC_SDHCI
 	select MMC_SDHCI_PLTFM
+=======
+	depends on MMC_SDHCI_PLTFM
+>>>>>>> v3.18
 =======
 	depends on MMC_SDHCI_PLTFM
 >>>>>>> v3.18
@@ -299,7 +323,10 @@ config MMC_SDHCI_S3C_DMA
 	  YMMV.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MMC_SDHCI_BCM_KONA
 	tristate "SDHCI support on Broadcom KONA platform"
 	depends on ARCH_BCM_MOBILE
@@ -311,6 +338,9 @@ config MMC_SDHCI_BCM_KONA
 
 	  If you have a controller with this interface, say Y or M here.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MMC_SDHCI_BCM2835
 	tristate "SDHCI platform support for the BCM2835 SD/MMC Controller"
@@ -324,11 +354,14 @@ config MMC_SDHCI_BCM2835
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MMC_OMAP
 	tristate "TI OMAP Multimedia Card Interface support"
 	depends on ARCH_OMAP
 	select TPS65010 if MACH_OMAP_H2
 =======
+=======
+>>>>>>> v3.18
 config MMC_MOXART
 	tristate "MOXART SD/MMC Host Controller support"
 	depends on ARCH_MOXART && MMC
@@ -354,6 +387,9 @@ config MMC_OMAP
 	tristate "TI OMAP Multimedia Card Interface support"
 	depends on ARCH_OMAP
 	depends on TPS65010 || !MACH_OMAP_H2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This selects the TI OMAP Multimedia card Interface.
@@ -365,18 +401,24 @@ config MMC_OMAP
 config MMC_OMAP_HS
 	tristate "TI OMAP High Speed Multimedia Card Interface support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SOC_OMAP2430 || ARCH_OMAP3 || ARCH_OMAP4
 	help
 	  This selects the TI OMAP High Speed Multimedia card Interface.
 	  If you have an OMAP2430 or OMAP3 board or OMAP4 board with a
 	  Multimedia Card slot, say Y or M here.
 =======
+=======
+>>>>>>> v3.18
 	depends on HAS_DMA
 	depends on ARCH_OMAP2PLUS || COMPILE_TEST
 	help
 	  This selects the TI OMAP High Speed Multimedia card Interface.
 	  If you have an omap2plus board with a Multimedia Card slot,
 	  say Y or M here.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  If unsure, say N.
@@ -412,7 +454,10 @@ config MMC_ATMELMCI
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MMC_SDHCI_MSM
 	tristate "Qualcomm SDHCI Controller Support"
 	depends on ARCH_QCOM || (ARM && COMPILE_TEST)
@@ -434,6 +479,9 @@ config MMC_MSM
 	  MSM and QSD SOCs from Qualcomm. The controller also has
 	  support for SDIO devices.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MMC_MXC
 	tristate "Freescale i.MX21/27/31 or MPC512x Multimedia Card support"
@@ -514,6 +562,10 @@ config MMC_S3C
 	tristate "Samsung S3C SD/MMC Card Interface support"
 	depends on ARCH_S3C24XX
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on S3C24XX_DMAC
+>>>>>>> v3.18
 =======
 	depends on S3C24XX_DMAC
 >>>>>>> v3.18
@@ -555,6 +607,7 @@ config MMC_S3C_DMA
 	  option is useful.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MMC_S3C_PIODMA
 	bool "Support for both PIO and DMA"
 	help
@@ -564,6 +617,8 @@ config MMC_S3C_PIODMA
 
 	  See notes for the DMA option.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endchoice
@@ -592,7 +647,12 @@ config MMC_TMIO
 config MMC_SDHI
 	tristate "SH-Mobile SDHI SD/SDIO controller support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SUPERH || ARCH_SHMOBILE
+=======
+	depends on SUPERH || ARM
+	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on SUPERH || ARM
 	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
@@ -648,7 +708,12 @@ config SDH_BFIN_MISSING_CMD_PULLUP_WORKAROUND
 config MMC_DW
 	tristate "Synopsys DesignWare Memory Card Interface"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARM
+=======
+	depends on HAS_DMA
+	depends on ARC || ARM || MIPS || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 	depends on ARC || ARM || MIPS || COMPILE_TEST
@@ -690,7 +755,10 @@ config MMC_DW_EXYNOS
 	  for platforms based on Exynos4 and Exynos5 SoC's.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MMC_DW_K3
 	tristate "K3 specific extensions for Synopsys DW Memory Card Interface"
 	depends on MMC_DW
@@ -701,6 +769,9 @@ config MMC_DW_K3
 	  Synopsys DesignWare Memory Card Interface driver. Select this option
 	  for platforms based on Hisilicon K3 SoC's.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MMC_DW_PCI
 	tristate "Synopsys Designware MCI support on PCI bus"
@@ -714,10 +785,13 @@ config MMC_DW_PCI
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MMC_SH_MMCIF
 	tristate "SuperH Internal MMCIF support"
 	depends on MMC_BLOCK && (SUPERH || ARCH_SHMOBILE)
 =======
+=======
+>>>>>>> v3.18
 config MMC_DW_ROCKCHIP
 	tristate "Rockchip specific extensions for Synopsys DW Memory Card Interface"
 	depends on MMC_DW && ARCH_ROCKCHIP
@@ -731,6 +805,9 @@ config MMC_SH_MMCIF
 	tristate "SuperH Internal MMCIF support"
 	depends on MMC_BLOCK && HAS_DMA
 	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This selects the MMC Host Interface controller (MMCIF).
@@ -803,7 +880,10 @@ config MMC_WMT
 	  module will be called wmt-sdmmc.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MMC_USDHI6ROL0
 	tristate "Renesas USDHI6ROL0 SD/SDIO Host Controller support"
 	depends on HAS_DMA
@@ -811,6 +891,9 @@ config MMC_USDHI6ROL0
 	  This selects support for the Renesas USDHI6ROL0 SD/SDIO
 	  Host Controller
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MMC_REALTEK_PCI
 	tristate "Realtek PCI-E SD/MMC Card Interface Driver"
@@ -819,7 +902,10 @@ config MMC_REALTEK_PCI
 	  Say Y here to include driver code to support SD/MMC card interface
 	  of Realtek PCI-E card reader
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config MMC_REALTEK_USB
 	tristate "Realtek USB SD/MMC Card Interface Driver"
@@ -834,4 +920,7 @@ config MMC_SUNXI
 	help
 	  This selects support for the SD/MMC Host Controller on
 	  Allwinner sunxi SoCs.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -39,7 +39,10 @@
 #include "../codecs/cx20442.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Board specific DAPM widgets */
@@ -94,12 +97,15 @@ static const unsigned short ams_delta_audio_mode_pins[] = {
 static unsigned short ams_delta_audio_agc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 					struct snd_ctl_elem_value *ucontrol)
 {
 	struct snd_soc_codec *codec =  snd_kcontrol_chip(kcontrol);
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Used for passing a codec structure pointer
  * from the board initialization code to the tty line discipline.
@@ -111,12 +117,16 @@ static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 {
 	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
 	struct snd_soc_dapm_context *dapm = &card->dapm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct soc_enum *control = (struct soc_enum *)kcontrol->private_value;
 	unsigned short pins;
 	int pin, changed = 0;
 
 	/* Refuse any mode changes if we are not able to control the codec. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!codec->hw_write)
 		return -EUNATCH;
@@ -126,6 +136,8 @@ static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 
 	mutex_lock(&codec->mutex);
 =======
+=======
+>>>>>>> v3.18
 	if (!cx20442_codec->hw_write)
 		return -EUNATCH;
 
@@ -133,6 +145,9 @@ static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 		return -EINVAL;
 
 	snd_soc_dapm_mutex_lock(dapm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Translate selection to bitmap */
@@ -141,6 +156,7 @@ static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 	/* Setup pins after corresponding bits if changed */
 	pin = !!(pins & (1 << AMS_DELTA_MOUTHPIECE));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pin != snd_soc_dapm_get_pin_status(dapm, "Mouthpiece")) {
 		changed = 1;
 		if (pin)
@@ -148,6 +164,8 @@ static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 		else
 			snd_soc_dapm_disable_pin(dapm, "Mouthpiece");
 =======
+=======
+>>>>>>> v3.18
 
 	if (pin != snd_soc_dapm_get_pin_status(dapm, "Mouthpiece")) {
 		changed = 1;
@@ -155,6 +173,9 @@ static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 			snd_soc_dapm_enable_pin_unlocked(dapm, "Mouthpiece");
 		else
 			snd_soc_dapm_disable_pin_unlocked(dapm, "Mouthpiece");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	pin = !!(pins & (1 << AMS_DELTA_EARPIECE));
@@ -162,9 +183,15 @@ static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 		changed = 1;
 		if (pin)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_soc_dapm_enable_pin(dapm, "Earpiece");
 		else
 			snd_soc_dapm_disable_pin(dapm, "Earpiece");
+=======
+			snd_soc_dapm_enable_pin_unlocked(dapm, "Earpiece");
+		else
+			snd_soc_dapm_disable_pin_unlocked(dapm, "Earpiece");
+>>>>>>> v3.18
 =======
 			snd_soc_dapm_enable_pin_unlocked(dapm, "Earpiece");
 		else
@@ -176,9 +203,15 @@ static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 		changed = 1;
 		if (pin)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_soc_dapm_enable_pin(dapm, "Microphone");
 		else
 			snd_soc_dapm_disable_pin(dapm, "Microphone");
+=======
+			snd_soc_dapm_enable_pin_unlocked(dapm, "Microphone");
+		else
+			snd_soc_dapm_disable_pin_unlocked(dapm, "Microphone");
+>>>>>>> v3.18
 =======
 			snd_soc_dapm_enable_pin_unlocked(dapm, "Microphone");
 		else
@@ -190,9 +223,15 @@ static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 		changed = 1;
 		if (pin)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_soc_dapm_enable_pin(dapm, "Speaker");
 		else
 			snd_soc_dapm_disable_pin(dapm, "Speaker");
+=======
+			snd_soc_dapm_enable_pin_unlocked(dapm, "Speaker");
+		else
+			snd_soc_dapm_disable_pin_unlocked(dapm, "Speaker");
+>>>>>>> v3.18
 =======
 			snd_soc_dapm_enable_pin_unlocked(dapm, "Speaker");
 		else
@@ -205,6 +244,7 @@ static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 		changed = 1;
 		if (pin)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_soc_dapm_enable_pin(dapm, "AGCIN");
 		else
 			snd_soc_dapm_disable_pin(dapm, "AGCIN");
@@ -214,6 +254,8 @@ static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 
 	mutex_unlock(&codec->mutex);
 =======
+=======
+>>>>>>> v3.18
 			snd_soc_dapm_enable_pin_unlocked(dapm, "AGCIN");
 		else
 			snd_soc_dapm_disable_pin_unlocked(dapm, "AGCIN");
@@ -223,6 +265,9 @@ static int ams_delta_set_audio_mode(struct snd_kcontrol *kcontrol,
 		snd_soc_dapm_sync_unlocked(dapm);
 
 	snd_soc_dapm_mutex_unlock(dapm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return changed;
@@ -232,8 +277,13 @@ static int ams_delta_get_audio_mode(struct snd_kcontrol *kcontrol,
 					struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec =  snd_kcontrol_chip(kcontrol);
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
+=======
+	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
+	struct snd_soc_dapm_context *dapm = &card->dapm;
+>>>>>>> v3.18
 =======
 	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
 	struct snd_soc_dapm_context *dapm = &card->dapm;
@@ -267,6 +317,7 @@ static int ams_delta_get_audio_mode(struct snd_kcontrol *kcontrol,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ams_delta_audio_enum[] = {
 	SOC_ENUM_SINGLE_EXT(ARRAY_SIZE(ams_delta_audio_mode),
 						ams_delta_audio_mode),
@@ -275,11 +326,16 @@ static const struct soc_enum ams_delta_audio_enum[] = {
 static const struct snd_kcontrol_new ams_delta_audio_controls[] = {
 	SOC_ENUM_EXT("Audio Mode", ams_delta_audio_enum[0],
 =======
+=======
+>>>>>>> v3.18
 static const SOC_ENUM_SINGLE_EXT_DECL(ams_delta_audio_enum,
 				      ams_delta_audio_mode);
 
 static const struct snd_kcontrol_new ams_delta_audio_controls[] = {
 	SOC_ENUM_EXT("Audio Mode", ams_delta_audio_enum,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ams_delta_get_audio_mode, ams_delta_set_audio_mode),
 };
@@ -351,12 +407,15 @@ static void cx81801_timeout(unsigned long data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Used for passing a codec structure pointer
  * from the board initialization code to the tty line discipline.
  */
 static struct snd_soc_codec *cx20442_codec;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Line discipline .open() */
@@ -386,7 +445,11 @@ static void cx81801_close(struct tty_struct *tty)
 {
 	struct snd_soc_codec *codec = tty->disc_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
+=======
+	struct snd_soc_dapm_context *dapm = &codec->component.card->dapm;
+>>>>>>> v3.18
 =======
 	struct snd_soc_dapm_context *dapm = &codec->component.card->dapm;
 >>>>>>> v3.18
@@ -403,6 +466,7 @@ static void cx81801_close(struct tty_struct *tty)
 
 	/* Revert back to default audio input/output constellation */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dapm_disable_pin(dapm, "Mouthpiece");
 	snd_soc_dapm_enable_pin(dapm, "Earpiece");
 	snd_soc_dapm_enable_pin(dapm, "Microphone");
@@ -410,6 +474,8 @@ static void cx81801_close(struct tty_struct *tty)
 	snd_soc_dapm_disable_pin(dapm, "AGCIN");
 	snd_soc_dapm_sync(dapm);
 =======
+=======
+>>>>>>> v3.18
 	snd_soc_dapm_mutex_lock(dapm);
 
 	snd_soc_dapm_disable_pin_unlocked(dapm, "Mouthpiece");
@@ -421,6 +487,9 @@ static void cx81801_close(struct tty_struct *tty)
 	snd_soc_dapm_sync_unlocked(dapm);
 
 	snd_soc_dapm_mutex_unlock(dapm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -572,10 +641,16 @@ static void ams_delta_shutdown(struct snd_pcm_substream *substream)
 static int ams_delta_cx20442_init(struct snd_soc_pcm_runtime *rtd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 	struct snd_soc_dai *codec_dai = rtd->codec_dai;
 	struct snd_soc_card *card = rtd->card;
+=======
+	struct snd_soc_dai *codec_dai = rtd->codec_dai;
+	struct snd_soc_card *card = rtd->card;
+	struct snd_soc_dapm_context *dapm = &card->dapm;
+>>>>>>> v3.18
 =======
 	struct snd_soc_dai *codec_dai = rtd->codec_dai;
 	struct snd_soc_card *card = rtd->card;
@@ -586,7 +661,11 @@ static int ams_delta_cx20442_init(struct snd_soc_pcm_runtime *rtd)
 
 	/* Store a pointer to the codec structure for tty ldisc use */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cx20442_codec = codec;
+=======
+	cx20442_codec = rtd->codec;
+>>>>>>> v3.18
 =======
 	cx20442_codec = rtd->codec;
 >>>>>>> v3.18
@@ -627,6 +706,7 @@ static int ams_delta_cx20442_init(struct snd_soc_pcm_runtime *rtd)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Add board specific DAPM widgets and routes */
 	ret = snd_soc_dapm_new_controls(dapm, ams_delta_dapm_widgets,
 					ARRAY_SIZE(ams_delta_dapm_widgets));
@@ -654,10 +734,15 @@ static int ams_delta_cx20442_init(struct snd_soc_pcm_runtime *rtd)
 	/* Set up initial pin constellation */
 	snd_soc_dapm_disable_pin(dapm, "Mouthpiece");
 >>>>>>> v3.18
+=======
+	/* Set up initial pin constellation */
+	snd_soc_dapm_disable_pin(dapm, "Mouthpiece");
+>>>>>>> v3.18
 	snd_soc_dapm_disable_pin(dapm, "Speaker");
 	snd_soc_dapm_disable_pin(dapm, "AGCIN");
 	snd_soc_dapm_disable_pin(dapm, "AGCOUT");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Add virtual switch */
 	ret = snd_soc_add_codec_controls(codec, ams_delta_audio_controls,
@@ -667,6 +752,8 @@ static int ams_delta_cx20442_init(struct snd_soc_pcm_runtime *rtd)
 				"Failed to register audio mode control, "
 				"will continue without it.\n");
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -675,6 +762,9 @@ static int ams_delta_card_remove(struct snd_soc_card *card)
 	snd_soc_jack_free_gpios(&ams_delta_hook_switch,
 			ARRAY_SIZE(ams_delta_hook_switch_gpios),
 			ams_delta_hook_switch_gpios);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -688,7 +778,11 @@ static struct snd_soc_dai_link ams_delta_dai_link = {
 	.codec_dai_name = "cx20442-voice",
 	.init = ams_delta_cx20442_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.platform_name = "omap-pcm-audio",
+=======
+	.platform_name = "omap-mcbsp.1",
+>>>>>>> v3.18
 =======
 	.platform_name = "omap-mcbsp.1",
 >>>>>>> v3.18
@@ -701,9 +795,12 @@ static struct snd_soc_card ams_delta_audio_card = {
 	.name = "AMS_DELTA",
 	.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dai_link = &ams_delta_dai_link,
 	.num_links = 1,
 =======
+=======
+>>>>>>> v3.18
 	.remove = ams_delta_card_remove,
 	.dai_link = &ams_delta_dai_link,
 	.num_links = 1,
@@ -714,6 +811,9 @@ static struct snd_soc_card ams_delta_audio_card = {
 	.num_dapm_widgets = ARRAY_SIZE(ams_delta_dapm_widgets),
 	.dapm_routes = ams_delta_audio_map,
 	.num_dapm_routes = ARRAY_SIZE(ams_delta_audio_map),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -743,10 +843,13 @@ static int ams_delta_remove(struct platform_device *pdev)
 			"failed to unregister V253 line discipline\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_jack_free_gpios(&ams_delta_hook_switch,
 			ARRAY_SIZE(ams_delta_hook_switch_gpios),
 			ams_delta_hook_switch_gpios);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	snd_soc_unregister_card(card);

@@ -132,7 +132,11 @@ struct afs_volume *afs_volume_lookup(struct afs_mount_params *params)
 	volume->cache = fscache_acquire_cookie(vlocation->cache,
 					       &afs_volume_cache_index_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       volume);
+=======
+					       volume, true);
+>>>>>>> v3.18
 =======
 					       volume, true);
 >>>>>>> v3.18

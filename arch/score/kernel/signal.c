@@ -174,8 +174,13 @@ badframe:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int setup_rt_frame(struct k_sigaction *ka, struct pt_regs *regs,
 		int signr, sigset_t *set, siginfo_t *info)
+=======
+static int setup_rt_frame(struct ksignal *ksig, struct pt_regs *regs,
+			  sigset_t *set)
+>>>>>>> v3.18
 =======
 static int setup_rt_frame(struct ksignal *ksig, struct pt_regs *regs,
 			  sigset_t *set)
@@ -185,9 +190,15 @@ static int setup_rt_frame(struct ksignal *ksig, struct pt_regs *regs,
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame = get_sigframe(ka, regs, sizeof(*frame));
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 		goto give_sigsegv;
+=======
+	frame = get_sigframe(&ksig->ka, regs, sizeof(*frame));
+	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 	frame = get_sigframe(&ksig->ka, regs, sizeof(*frame));
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
@@ -206,7 +217,11 @@ static int setup_rt_frame(struct ksignal *ksig, struct pt_regs *regs,
 	flush_cache_sigtramp((unsigned long) frame->rs_code);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err |= copy_siginfo_to_user(&frame->rs_info, info);
+=======
+	err |= copy_siginfo_to_user(&frame->rs_info, &ksig->info);
+>>>>>>> v3.18
 =======
 	err |= copy_siginfo_to_user(&frame->rs_info, &ksig->info);
 >>>>>>> v3.18
@@ -217,6 +232,7 @@ static int setup_rt_frame(struct ksignal *ksig, struct pt_regs *regs,
 	err |= __copy_to_user(&frame->rs_uc.uc_sigmask, set, sizeof(*set));
 
 	if (err)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto give_sigsegv;
 
@@ -239,6 +255,8 @@ static void handle_signal(unsigned long sig, siginfo_t *info,
 	struct k_sigaction *ka, struct pt_regs *regs)
 {
 =======
+=======
+>>>>>>> v3.18
 		return -EFAULT;
 
 	regs->regs[0] = (unsigned long) frame;
@@ -256,6 +274,9 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 {
 	int ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (regs->is_syscall) {
 		switch (regs->regs[4]) {
@@ -265,7 +286,11 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 			break;
 		case ERESTARTSYS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(ka->sa.sa_flags & SA_RESTART)) {
+=======
+			if (!(ksig->ka.sa.sa_flags & SA_RESTART)) {
+>>>>>>> v3.18
 =======
 			if (!(ksig->ka.sa.sa_flags & SA_RESTART)) {
 >>>>>>> v3.18
@@ -285,10 +310,16 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	 * Set up the stack frame
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (setup_rt_frame(ka, regs, sig, sigmask_to_save(), info) < 0)
 		return;
 
 	signal_delivered(sig, info, ka, regs, 0);
+=======
+	ret = setup_rt_frame(ksig, regs, sigmask_to_save());
+
+	signal_setup_done(ret, ksig, 0);
+>>>>>>> v3.18
 =======
 	ret = setup_rt_frame(ksig, regs, sigmask_to_save());
 
@@ -299,9 +330,13 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 static void do_signal(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct k_sigaction ka;
 	siginfo_t info;
 	int signr;
+=======
+	struct ksignal ksig;
+>>>>>>> v3.18
 =======
 	struct ksignal ksig;
 >>>>>>> v3.18
@@ -315,10 +350,16 @@ static void do_signal(struct pt_regs *regs)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	signr = get_signal_to_deliver(&info, &ka, regs, NULL);
 	if (signr > 0) {
 		/* Actually deliver the signal.  */
 		handle_signal(signr, &info, &ka, regs);
+=======
+	if (get_signal(&ksig)) {
+		/* Actually deliver the signal.  */
+		handle_signal(&ksig, regs);
+>>>>>>> v3.18
 =======
 	if (get_signal(&ksig)) {
 		/* Actually deliver the signal.  */

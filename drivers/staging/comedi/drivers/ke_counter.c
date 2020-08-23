@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/ke_counter.c
     Comedi driver for Kolter-Electronic PCI Counter 1 Card
 
@@ -93,6 +94,8 @@ static int cnt_rinsn(struct comedi_device *dev,
 static int cnt_auto_attach(struct comedi_device *dev,
 				     unsigned long context_unused)
 =======
+=======
+>>>>>>> v3.18
  * ke_counter.c
  * Comedi driver for Kolter-Electronic PCI Counter 1 Card
  *
@@ -263,6 +266,9 @@ static int ke_counter_do_insn_bits(struct comedi_device *dev,
 
 static int ke_counter_auto_attach(struct comedi_device *dev,
 				  unsigned long context_unused)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pci_dev *pcidev = comedi_to_pci_dev(dev);
@@ -275,7 +281,11 @@ static int ke_counter_auto_attach(struct comedi_device *dev,
 	dev->iobase = pci_resource_start(pcidev, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = comedi_alloc_subdevices(dev, 1);
+=======
+	ret = comedi_alloc_subdevices(dev, 2);
+>>>>>>> v3.18
 =======
 	ret = comedi_alloc_subdevices(dev, 2);
 >>>>>>> v3.18
@@ -283,6 +293,7 @@ static int ke_counter_auto_attach(struct comedi_device *dev,
 		return ret;
 
 	s = &dev->subdevices[0];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev->read_subdev = s;
 
@@ -304,6 +315,8 @@ static int ke_counter_auto_attach(struct comedi_device *dev,
 	dev_info(dev->class_dev, "%s: %s attached\n",
 		dev->driver->driver_name, dev->board_name);
 =======
+=======
+>>>>>>> v3.18
 	s->type		= COMEDI_SUBD_COUNTER;
 	s->subdev_flags	= SDF_READABLE;
 	s->n_chan	= 3;
@@ -324,6 +337,9 @@ static int ke_counter_auto_attach(struct comedi_device *dev,
 	outb(KE_OSC_SEL_20MHZ, dev->iobase + KE_OSC_SEL_REG);
 
 	ke_counter_reset(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -333,8 +349,13 @@ static struct comedi_driver ke_counter_driver = {
 	.driver_name	= "ke_counter",
 	.module		= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.auto_attach	= cnt_auto_attach,
 	.detach		= comedi_pci_disable,
+=======
+	.auto_attach	= ke_counter_auto_attach,
+	.detach		= comedi_pci_detach,
+>>>>>>> v3.18
 =======
 	.auto_attach	= ke_counter_auto_attach,
 	.detach		= comedi_pci_detach,
@@ -349,8 +370,13 @@ static int ke_counter_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ke_counter_pci_table) = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_KOLTER, CNT_CARD_DEVICE_ID) },
+=======
+static const struct pci_device_id ke_counter_pci_table[] = {
+	{ PCI_DEVICE(PCI_VENDOR_ID_KOLTER, 0x0014) },
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ke_counter_pci_table[] = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_KOLTER, 0x0014) },
@@ -369,7 +395,11 @@ module_comedi_pci_driver(ke_counter_driver, ke_counter_pci_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("Comedi driver for Kolter Electronic Counter Card");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Comedi driver for Kolter Electronic Counter Card");
 >>>>>>> v3.18

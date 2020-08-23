@@ -63,6 +63,10 @@ static unsigned int card_alloc;
 static void vxpocket_release(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	free_irq(link->irq, link->priv);
+>>>>>>> v3.18
 =======
 	free_irq(link->irq, link->priv);
 >>>>>>> v3.18
@@ -232,12 +236,15 @@ static int vxpocket_config(struct pcmcia_device *link)
 	ret = pcmcia_request_io(link);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto failed;
 
 	ret = pcmcia_request_irq(link, snd_vx_irq_handler);
 	if (ret)
 		goto failed;
 =======
+=======
+>>>>>>> v3.18
 		goto failed_preirq;
 
 	ret = request_threaded_irq(link->irq, snd_vx_irq_handler,
@@ -245,6 +252,9 @@ static int vxpocket_config(struct pcmcia_device *link)
 				   IRQF_SHARED, link->devname, link->priv);
 	if (ret)
 		goto failed_preirq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = pcmcia_enable_device(link);
@@ -253,7 +263,10 @@ static int vxpocket_config(struct pcmcia_device *link)
 
 	chip->dev = &link->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(chip->card, chip->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -264,7 +277,13 @@ static int vxpocket_config(struct pcmcia_device *link)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 failed:
+=======
+ failed:
+	free_irq(link->irq, link->priv);
+failed_preirq:
+>>>>>>> v3.18
 =======
  failed:
 	free_irq(link->irq, link->priv);
@@ -331,7 +350,12 @@ static int vxpocket_probe(struct pcmcia_device *p_dev)
 
 	/* ok, create a card instance */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[i], id[i], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&p_dev->dev, index[i], id[i], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&p_dev->dev, index[i], id[i], THIS_MODULE,
 			   0, &card);

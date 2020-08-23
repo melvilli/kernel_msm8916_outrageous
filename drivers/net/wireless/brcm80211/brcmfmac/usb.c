@@ -22,6 +22,10 @@
 
 #include <brcmu_utils.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <brcm_hw_ids.h>
+>>>>>>> v3.18
 =======
 #include <brcm_hw_ids.h>
 >>>>>>> v3.18
@@ -30,16 +34,22 @@
 #include <dhd_dbg.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "usb_rdl.h"
 #include "usb.h"
 
 #define IOCTL_RESP_TIMEOUT  2000
 =======
+=======
+>>>>>>> v3.18
 #include "firmware.h"
 #include "usb_rdl.h"
 #include "usb.h"
 
 #define IOCTL_RESP_TIMEOUT		2000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define BRCMF_USB_RESET_GETVER_SPINWAIT	100	/* in unit of ms */
@@ -47,6 +57,7 @@
 
 #define BRCMF_POSTBOOT_ID		0xA123  /* ID to detect if dongle
 						   has boot up */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define BRCMF_USB_NRXQ	50
 #define BRCMF_USB_NTXQ	50
@@ -68,6 +79,8 @@
 #define BRCMF_USB_43236_FW_NAME	"brcm/brcmfmac43236b.bin"
 #define BRCMF_USB_43242_FW_NAME	"brcm/brcmfmac43242a.bin"
 =======
+=======
+>>>>>>> v3.18
 #define BRCMF_USB_NRXQ			50
 #define BRCMF_USB_NTXQ			50
 
@@ -79,6 +92,9 @@
 #define BRCMF_USB_43236_FW_NAME		"brcm/brcmfmac43236b.bin"
 #define BRCMF_USB_43242_FW_NAME		"brcm/brcmfmac43242a.bin"
 #define BRCMF_USB_43569_FW_NAME		"brcm/brcmfmac43569.bin"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct brcmf_usb_image {
@@ -88,12 +104,15 @@ struct brcmf_usb_image {
 	int image_len;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct list_head fw_image_list;
 
 struct intr_transfer_buf {
 	u32 notification;
 	u32 reserved;
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -105,7 +124,11 @@ struct brcmf_usbdev_info {
 	struct list_head tx_freeq;
 	struct list_head tx_postq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint rx_pipe, tx_pipe, intr_pipe, rx_pipe2;
+=======
+	uint rx_pipe, tx_pipe;
+>>>>>>> v3.18
 =======
 	uint rx_pipe, tx_pipe;
 >>>>>>> v3.18
@@ -116,6 +139,10 @@ struct brcmf_usbdev_info {
 	int tx_freecount;
 	bool tx_flowblock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t tx_flowblock_lock;
+>>>>>>> v3.18
 =======
 	spinlock_t tx_flowblock_lock;
 >>>>>>> v3.18
@@ -124,7 +151,11 @@ struct brcmf_usbdev_info {
 	struct brcmf_usbreq *rx_reqs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *image;	/* buffer for combine fw and nvram */
+=======
+	const u8 *image;	/* buffer for combine fw and nvram */
+>>>>>>> v3.18
 =======
 	const u8 *image;	/* buffer for combine fw and nvram */
 >>>>>>> v3.18
@@ -143,12 +174,18 @@ struct brcmf_usbdev_info {
 	wait_queue_head_t ioctl_resp_wait;
 	ulong ctl_op;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct urb *bulk_urb; /* used for FW download */
 	struct urb *intr_urb; /* URB for interrupt endpoint */
 	int intr_size;          /* Size of interrupt message */
 	int interval;           /* Interrupt polling interval */
 	struct intr_transfer_buf intr; /* Data buffer for interrupt endpoint */
+=======
+	u8 ifnum;
+
+	struct urb *bulk_urb; /* used for FW download */
+>>>>>>> v3.18
 =======
 	u8 ifnum;
 
@@ -459,6 +496,10 @@ static void brcmf_usb_tx_complete(struct urb *urb)
 	struct brcmf_usbreq *req = (struct brcmf_usbreq *)urb->context;
 	struct brcmf_usbdev_info *devinfo = req->devinfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -471,6 +512,10 @@ static void brcmf_usb_tx_complete(struct urb *urb)
 	req->skb = NULL;
 	brcmf_usb_enq(devinfo, &devinfo->tx_freeq, req, &devinfo->tx_freecount);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_irqsave(&devinfo->tx_flowblock_lock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&devinfo->tx_flowblock_lock, flags);
 >>>>>>> v3.18
@@ -480,6 +525,10 @@ static void brcmf_usb_tx_complete(struct urb *urb)
 		devinfo->tx_flowblock = false;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&devinfo->tx_flowblock_lock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&devinfo->tx_flowblock_lock, flags);
 >>>>>>> v3.18
@@ -491,7 +540,10 @@ static void brcmf_usb_rx_complete(struct urb *urb)
 	struct brcmf_usbdev_info *devinfo = req->devinfo;
 	struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_buff_head skbq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -509,10 +561,15 @@ static void brcmf_usb_rx_complete(struct urb *urb)
 
 	if (devinfo->bus_pub.state == BRCMFMAC_USB_STATE_UP) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb_queue_head_init(&skbq);
 		skb_queue_tail(&skbq, skb);
 		skb_put(skb, urb->actual_length);
 		brcmf_rx_frames(devinfo->dev, &skbq);
+=======
+		skb_put(skb, urb->actual_length);
+		brcmf_rx_frame(devinfo->dev, skb);
+>>>>>>> v3.18
 =======
 		skb_put(skb, urb->actual_length);
 		brcmf_rx_frame(devinfo->dev, skb);
@@ -589,21 +646,28 @@ brcmf_usb_state_change(struct brcmf_usbdev_info *devinfo, int state)
 	if (state == BRCMFMAC_USB_STATE_DOWN) {
 		brcmf_dbg(USB, "DBUS is down\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bcmf_bus->state = BRCMF_BUS_DOWN;
 	} else if (state == BRCMFMAC_USB_STATE_UP) {
 		brcmf_dbg(USB, "DBUS is up\n");
 		bcmf_bus->state = BRCMF_BUS_DATA;
 =======
+=======
+>>>>>>> v3.18
 		brcmf_bus_change_state(bcmf_bus, BRCMF_BUS_DOWN);
 	} else if (state == BRCMFMAC_USB_STATE_UP) {
 		brcmf_dbg(USB, "DBUS is up\n");
 		brcmf_bus_change_state(bcmf_bus, BRCMF_BUS_DATA);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		brcmf_dbg(USB, "DBUS current state=%d\n", state);
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void
 brcmf_usb_intr_complete(struct urb *urb)
@@ -640,12 +704,18 @@ brcmf_usb_intr_complete(struct urb *urb)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int brcmf_usb_tx(struct device *dev, struct sk_buff *skb)
 {
 	struct brcmf_usbdev_info *devinfo = brcmf_usb_get_businfo(dev);
 	struct brcmf_usbreq  *req;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -681,6 +751,10 @@ static int brcmf_usb_tx(struct device *dev, struct sk_buff *skb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_irqsave(&devinfo->tx_flowblock_lock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&devinfo->tx_flowblock_lock, flags);
 >>>>>>> v3.18
@@ -690,15 +764,21 @@ static int brcmf_usb_tx(struct device *dev, struct sk_buff *skb)
 		devinfo->tx_flowblock = true;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 fail:
 	brcmf_txcomplete(dev, skb, false);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&devinfo->tx_flowblock_lock, flags);
 	return 0;
 
 fail:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -708,8 +788,11 @@ static int brcmf_usb_up(struct device *dev)
 {
 	struct brcmf_usbdev_info *devinfo = brcmf_usb_get_businfo(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 ifnum;
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -720,6 +803,7 @@ static int brcmf_usb_up(struct device *dev)
 	/* Success, indicate devinfo is fully up */
 	brcmf_usb_state_change(devinfo, BRCMFMAC_USB_STATE_UP);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (devinfo->intr_urb) {
 		usb_fill_int_urb(devinfo->intr_urb, devinfo->usbdev,
@@ -740,13 +824,18 @@ static int brcmf_usb_up(struct device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (devinfo->ctl_urb) {
 		devinfo->ctl_in_pipe = usb_rcvctrlpipe(devinfo->usbdev, 0);
 		devinfo->ctl_out_pipe = usb_sndctrlpipe(devinfo->usbdev, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ifnum = IFDESC(devinfo->usbdev, CONTROL_IF).bInterfaceNumber;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* CTL Write */
@@ -755,7 +844,11 @@ static int brcmf_usb_up(struct device *dev)
 		devinfo->ctl_write.bRequest = 0;
 		devinfo->ctl_write.wValue = cpu_to_le16(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		devinfo->ctl_write.wIndex = cpu_to_le16p(&ifnum);
+=======
+		devinfo->ctl_write.wIndex = cpu_to_le16(devinfo->ifnum);
+>>>>>>> v3.18
 =======
 		devinfo->ctl_write.wIndex = cpu_to_le16(devinfo->ifnum);
 >>>>>>> v3.18
@@ -766,7 +859,11 @@ static int brcmf_usb_up(struct device *dev)
 		devinfo->ctl_read.bRequest = 1;
 		devinfo->ctl_read.wValue = cpu_to_le16(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		devinfo->ctl_read.wIndex = cpu_to_le16p(&ifnum);
+=======
+		devinfo->ctl_read.wIndex = cpu_to_le16(devinfo->ifnum);
+>>>>>>> v3.18
 =======
 		devinfo->ctl_read.wIndex = cpu_to_le16(devinfo->ifnum);
 >>>>>>> v3.18
@@ -788,8 +885,11 @@ static void brcmf_usb_down(struct device *dev)
 
 	brcmf_usb_state_change(devinfo, BRCMFMAC_USB_STATE_DOWN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (devinfo->intr_urb)
 		usb_kill_urb(devinfo->intr_urb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -814,20 +914,27 @@ brcmf_usb_sync_complete(struct urb *urb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool brcmf_usb_dl_cmd(struct brcmf_usbdev_info *devinfo, u8 cmd,
 			     void *buffer, int buflen)
 {
 	int ret = 0;
 =======
+=======
+>>>>>>> v3.18
 static int brcmf_usb_dl_cmd(struct brcmf_usbdev_info *devinfo, u8 cmd,
 			    void *buffer, int buflen)
 {
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char *tmpbuf;
 	u16 size;
 
 	if ((!devinfo) || (devinfo->ctl_urb == NULL))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return false;
 
@@ -835,11 +942,16 @@ static int brcmf_usb_dl_cmd(struct brcmf_usbdev_info *devinfo, u8 cmd,
 	if (!tmpbuf)
 		return false;
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 
 	tmpbuf = kmalloc(buflen, GFP_ATOMIC);
 	if (!tmpbuf)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	size = buflen;
@@ -862,6 +974,7 @@ static int brcmf_usb_dl_cmd(struct brcmf_usbdev_info *devinfo, u8 cmd,
 	if (ret < 0) {
 		brcmf_err("usb_submit_urb failed %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(tmpbuf);
 		return false;
 	}
@@ -871,6 +984,8 @@ static int brcmf_usb_dl_cmd(struct brcmf_usbdev_info *devinfo, u8 cmd,
 	kfree(tmpbuf);
 
 =======
+=======
+>>>>>>> v3.18
 		goto finalize;
 	}
 
@@ -883,6 +998,9 @@ static int brcmf_usb_dl_cmd(struct brcmf_usbdev_info *devinfo, u8 cmd,
 
 finalize:
 	kfree(tmpbuf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -926,6 +1044,10 @@ brcmf_usb_resetcfg(struct brcmf_usbdev_info *devinfo)
 	struct bootrom_id_le id;
 	u32 loop_cnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18
@@ -938,7 +1060,13 @@ brcmf_usb_resetcfg(struct brcmf_usbdev_info *devinfo)
 		loop_cnt++;
 		id.chip = cpu_to_le32(0xDEAD);       /* Get the ID */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_usb_dl_cmd(devinfo, DL_GETVER, &id, sizeof(id));
+=======
+		err = brcmf_usb_dl_cmd(devinfo, DL_GETVER, &id, sizeof(id));
+		if ((err) && (err != -ETIMEDOUT))
+			return err;
+>>>>>>> v3.18
 =======
 		err = brcmf_usb_dl_cmd(devinfo, DL_GETVER, &id, sizeof(id));
 		if ((err) && (err != -ETIMEDOUT))
@@ -1006,8 +1134,12 @@ brcmf_usb_dl_writeimage(struct brcmf_usbdev_info *devinfo, u8 *fw, int fwlen)
 
 	/* 1) Prepare USB boot loader for runtime image */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	brcmf_usb_dl_cmd(devinfo, DL_START, &state,
 			 sizeof(struct rdl_state_le));
+=======
+	brcmf_usb_dl_cmd(devinfo, DL_START, &state, sizeof(state));
+>>>>>>> v3.18
 =======
 	brcmf_usb_dl_cmd(devinfo, DL_START, &state, sizeof(state));
 >>>>>>> v3.18
@@ -1055,15 +1187,21 @@ brcmf_usb_dl_writeimage(struct brcmf_usbdev_info *devinfo, u8 *fw, int fwlen)
 			sent += sendlen;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!brcmf_usb_dl_cmd(devinfo, DL_GETSTATE, &state,
 				      sizeof(struct rdl_state_le))) {
 			brcmf_err("DL_GETSTATE Failed xxxx\n");
 			err = -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		err = brcmf_usb_dl_cmd(devinfo, DL_GETSTATE, &state,
 				       sizeof(state));
 		if (err) {
 			brcmf_err("DL_GETSTATE Failed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto fail;
 		}
@@ -1121,6 +1259,7 @@ static int brcmf_usb_dlrun(struct brcmf_usbdev_info *devinfo)
 
 	/* Check we are runnable */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	brcmf_usb_dl_cmd(devinfo, DL_GETSTATE, &state,
 		sizeof(struct rdl_state_le));
 
@@ -1129,12 +1268,17 @@ static int brcmf_usb_dlrun(struct brcmf_usbdev_info *devinfo)
 		if (!brcmf_usb_dl_cmd(devinfo, DL_GO, &state,
 			sizeof(struct rdl_state_le)))
 =======
+=======
+>>>>>>> v3.18
 	state.state = 0;
 	brcmf_usb_dl_cmd(devinfo, DL_GETSTATE, &state, sizeof(state));
 
 	/* Start the image */
 	if (state.state == cpu_to_le32(DL_RUNNABLE)) {
 		if (brcmf_usb_dl_cmd(devinfo, DL_GO, &state, sizeof(state)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -ENODEV;
 		if (brcmf_usb_resetcfg(devinfo))
@@ -1152,6 +1296,7 @@ static bool brcmf_usb_chip_support(int chipid, int chiprev)
 {
 	switch(chipid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 43143:
 		return true;
 	case 43235:
@@ -1160,6 +1305,8 @@ static bool brcmf_usb_chip_support(int chipid, int chiprev)
 		return (chiprev == 3);
 	case 43242:
 =======
+=======
+>>>>>>> v3.18
 	case BRCM_CC_43143_CHIP_ID:
 		return true;
 	case BRCM_CC_43235_CHIP_ID:
@@ -1170,6 +1317,9 @@ static bool brcmf_usb_chip_support(int chipid, int chiprev)
 		return true;
 	case BRCM_CC_43566_CHIP_ID:
 	case BRCM_CC_43569_CHIP_ID:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return true;
 	default:
@@ -1204,7 +1354,11 @@ brcmf_usb_fw_download(struct brcmf_usbdev_info *devinfo)
 
 	err = brcmf_usb_dlstart(devinfo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		devinfo->image, devinfo->image_len);
+=======
+		(u8 *)devinfo->image, devinfo->image_len);
+>>>>>>> v3.18
 =======
 		(u8 *)devinfo->image, devinfo->image_len);
 >>>>>>> v3.18
@@ -1223,7 +1377,10 @@ static void brcmf_usb_detach(struct brcmf_usbdev_info *devinfo)
 	brcmf_usb_free_q(&devinfo->tx_freeq, false);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_free_urb(devinfo->intr_urb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	usb_free_urb(devinfo->ctl_urb);
@@ -1269,6 +1426,7 @@ static int check_file(const u8 *headers)
 	return -1;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int brcmf_usb_get_fw(struct brcmf_usbdev_info *devinfo)
 {
@@ -1333,6 +1491,8 @@ static int brcmf_usb_get_fw(struct brcmf_usbdev_info *devinfo)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static const char *brcmf_usb_get_fwname(struct brcmf_usbdev_info *devinfo)
 {
 	switch (devinfo->bus_pub.devid) {
@@ -1350,6 +1510,9 @@ static const char *brcmf_usb_get_fwname(struct brcmf_usbdev_info *devinfo)
 	default:
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1377,6 +1540,10 @@ struct brcmf_usbdev *brcmf_usb_attach(struct brcmf_usbdev_info *devinfo,
 	/* Initialize the spinlocks */
 	spin_lock_init(&devinfo->qlock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&devinfo->tx_flowblock_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&devinfo->tx_flowblock_lock);
 >>>>>>> v3.18
@@ -1399,11 +1566,14 @@ struct brcmf_usbdev *brcmf_usb_attach(struct brcmf_usbdev_info *devinfo,
 	devinfo->tx_freecount = ntxq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devinfo->intr_urb = usb_alloc_urb(0, GFP_ATOMIC);
 	if (!devinfo->intr_urb) {
 		brcmf_err("usb_alloc_urb (intr) failed\n");
 		goto error;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	devinfo->ctl_urb = usb_alloc_urb(0, GFP_ATOMIC);
@@ -1418,6 +1588,7 @@ struct brcmf_usbdev *brcmf_usb_attach(struct brcmf_usbdev_info *devinfo,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!brcmf_usb_dlneeded(devinfo))
 		return &devinfo->bus_pub;
 
@@ -1428,6 +1599,8 @@ struct brcmf_usbdev *brcmf_usb_attach(struct brcmf_usbdev_info *devinfo,
 	if (brcmf_usb_fw_download(devinfo))
 		goto error;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return &devinfo->bus_pub;
@@ -1441,7 +1614,10 @@ error:
 static struct brcmf_bus_ops brcmf_usb_bus_ops = {
 	.txdata = brcmf_usb_tx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init = brcmf_usb_up,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.stop = brcmf_usb_down,
@@ -1450,7 +1626,10 @@ static struct brcmf_bus_ops brcmf_usb_bus_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int brcmf_usb_bus_setup(struct brcmf_usbdev_info *devinfo)
 {
 	int ret;
@@ -1511,14 +1690,22 @@ error:
 	device_release_driver(dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int brcmf_usb_probe_cb(struct brcmf_usbdev_info *devinfo)
 {
 	struct brcmf_bus *bus = NULL;
 	struct brcmf_usbdev *bus_pub = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	struct device *dev = devinfo->dev;
+=======
+	struct device *dev = devinfo->dev;
+	int ret;
+>>>>>>> v3.18
 =======
 	struct device *dev = devinfo->dev;
 	int ret;
@@ -1541,6 +1728,7 @@ static int brcmf_usb_probe_cb(struct brcmf_usbdev_info *devinfo)
 	dev_set_drvdata(dev, bus);
 	bus->ops = &brcmf_usb_bus_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bus->chip = bus_pub->devid;
 	bus->chiprev = bus_pub->chiprev;
 
@@ -1560,6 +1748,8 @@ static int brcmf_usb_probe_cb(struct brcmf_usbdev_info *devinfo)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	bus->proto_type = BRCMF_PROTO_BCDC;
 	bus->always_use_fws_queue = true;
 
@@ -1576,6 +1766,9 @@ static int brcmf_usb_probe_cb(struct brcmf_usbdev_info *devinfo)
 			       brcmf_usb_probe_phase2);
 	return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 fail:
 	/* Release resources in reverse order */
@@ -1600,6 +1793,7 @@ static int
 brcmf_usb_probe(struct usb_interface *intf, const struct usb_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ep;
 	struct usb_endpoint_descriptor *endpoint;
 	int ret = 0;
@@ -1610,6 +1804,8 @@ brcmf_usb_probe(struct usb_interface *intf, const struct usb_device_id *id)
 
 	brcmf_dbg(USB, "Enter\n");
 =======
+=======
+>>>>>>> v3.18
 	struct usb_device *usb = interface_to_usbdev(intf);
 	struct brcmf_usbdev_info *devinfo;
 	struct usb_interface_descriptor	*desc;
@@ -1619,6 +1815,9 @@ brcmf_usb_probe(struct usb_interface *intf, const struct usb_device_id *id)
 	u8 endpoint_num, ep;
 
 	brcmf_dbg(USB, "Enter 0x%04x:0x%04x\n", id->idVendor, id->idProduct);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	devinfo = kzalloc(sizeof(*devinfo), GFP_ATOMIC);
@@ -1628,13 +1827,17 @@ brcmf_usb_probe(struct usb_interface *intf, const struct usb_device_id *id)
 	devinfo->usbdev = usb;
 	devinfo->dev = &usb->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	usb_set_intfdata(intf, devinfo);
 
 	/* Check that the device supports only one configuration */
 	if (usb->descriptor.bNumConfigurations != 1) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = -1;
 		goto fail;
@@ -1728,6 +1931,8 @@ brcmf_usb_probe(struct usb_interface *intf, const struct usb_device_id *id)
 	else
 		brcmf_dbg(USB, "Broadcom full speed USB wireless device detected\n");
 =======
+=======
+>>>>>>> v3.18
 		brcmf_err("Number of configurations: %d not supported\n",
 			  usb->descriptor.bNumConfigurations);
 		ret = -ENODEV;
@@ -1789,6 +1994,9 @@ brcmf_usb_probe(struct usb_interface *intf, const struct usb_device_id *id)
 		brcmf_dbg(USB, "Broadcom high speed USB WLAN interface detected\n");
 	else
 		brcmf_dbg(USB, "Broadcom full speed USB WLAN interface detected\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = brcmf_usb_probe_cb(devinfo);
@@ -1800,11 +2008,17 @@ brcmf_usb_probe(struct usb_interface *intf, const struct usb_device_id *id)
 
 fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	brcmf_err("failed with errno %d\n", ret);
 	kfree(devinfo);
 	usb_set_intfdata(intf, NULL);
 	return ret;
 
+=======
+	kfree(devinfo);
+	usb_set_intfdata(intf, NULL);
+	return ret;
+>>>>>>> v3.18
 =======
 	kfree(devinfo);
 	usb_set_intfdata(intf, NULL);
@@ -1848,10 +2062,14 @@ static int brcmf_usb_resume(struct usb_interface *intf)
 
 	brcmf_dbg(USB, "Enter\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!brcmf_attach(0, devinfo->dev))
 		return brcmf_bus_start(&usb->dev);
 
 	return 0;
+=======
+	return brcmf_usb_bus_setup(devinfo);
+>>>>>>> v3.18
 =======
 	return brcmf_usb_bus_setup(devinfo);
 >>>>>>> v3.18
@@ -1864,6 +2082,7 @@ static int brcmf_usb_reset_resume(struct usb_interface *intf)
 
 	brcmf_dbg(USB, "Enter\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!brcmf_usb_fw_download(devinfo))
 		return brcmf_usb_resume(intf);
@@ -1885,6 +2104,8 @@ static struct usb_device_id brcmf_usb_devid_table[] = {
 	{ USB_DEVICE(BRCMF_USB_VENDOR_ID_BROADCOM, BRCMF_USB_DEVICE_ID_BCMFW) },
 	{ }
 =======
+=======
+>>>>>>> v3.18
 	return brcmf_fw_get_firmwares(&usb->dev, 0,
 				      brcmf_usb_get_fwname(devinfo), NULL,
 				      brcmf_usb_probe_phase2);
@@ -1901,6 +2122,9 @@ static struct usb_device_id brcmf_usb_devid_table[] = {
 	/* special entry for device with firmware loaded and running */
 	BRCMF_USB_DEVICE(BRCM_USB_BCMFW_DEVICE_ID),
 	{ /* end: all zeroes */ }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1909,6 +2133,10 @@ MODULE_FIRMWARE(BRCMF_USB_43143_FW_NAME);
 MODULE_FIRMWARE(BRCMF_USB_43236_FW_NAME);
 MODULE_FIRMWARE(BRCMF_USB_43242_FW_NAME);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_FIRMWARE(BRCMF_USB_43569_FW_NAME);
+>>>>>>> v3.18
 =======
 MODULE_FIRMWARE(BRCMF_USB_43569_FW_NAME);
 >>>>>>> v3.18
@@ -1926,6 +2154,7 @@ static struct usb_driver brcmf_usbdrvr = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void brcmf_release_fw(struct list_head *q)
 {
 	struct brcmf_usb_image *fw_image, *next;
@@ -1936,6 +2165,8 @@ static void brcmf_release_fw(struct list_head *q)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int brcmf_usb_reset_device(struct device *dev, void *notused)
@@ -1957,7 +2188,10 @@ void brcmf_usb_exit(void)
 				     brcmf_usb_reset_device);
 	usb_deregister(&brcmf_usbdrvr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	brcmf_release_fw(&fw_image_list);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1966,7 +2200,10 @@ void brcmf_usb_register(void)
 {
 	brcmf_dbg(USB, "Enter\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&fw_image_list);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	usb_register(&brcmf_usbdrvr);

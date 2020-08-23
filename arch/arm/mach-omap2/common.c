@@ -15,7 +15,10 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/dsp-omap.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -34,7 +37,10 @@ int __weak omap_secure_ram_reserve_memblock(void)
 void __init omap_reserve(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap_dsp_reserve_sdram_memblock();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	omap_secure_ram_reserve_memblock();

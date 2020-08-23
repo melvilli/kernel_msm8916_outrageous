@@ -5,7 +5,11 @@
  *
  * Copyright (C) 2012 ST Microelectronics
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Rajeev Kumar <rajeev-dlh.kumar@st.com>
+=======
+ * Rajeev Kumar <rajeevkumar.linux@gmail.com>
+>>>>>>> v3.18
 =======
  * Rajeev Kumar <rajeevkumar.linux@gmail.com>
 >>>>>>> v3.18
@@ -146,7 +150,11 @@ static const char *pwm_mode_text[] = { "Binary", "Headphone", "Ternary",
 static const DECLARE_TLV_DB_SCALE(out_gain_tlv, -9150, 50, 0);
 static const DECLARE_TLV_DB_SCALE(master_vol_tlv, -12750, 50, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const SOC_ENUM_SINGLE_DECL(pwm_src, STA529_FFXCFG1, 4, pwm_mode_text);
+=======
+static SOC_ENUM_SINGLE_DECL(pwm_src, STA529_FFXCFG1, 4, pwm_mode_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(pwm_src, STA529_FFXCFG1, 4, pwm_mode_text);
 >>>>>>> v3.18
@@ -202,6 +210,7 @@ static int sta529_hw_params(struct snd_pcm_substream *substream,
 		struct snd_soc_dai *dai)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct snd_soc_codec *codec = rtd->codec;
 	int pdata, play_freq_val, record_freq_val;
@@ -218,6 +227,8 @@ static int sta529_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_codec *codec = dai->codec;
 	int pdata, play_freq_val, record_freq_val;
 	int bclk_to_fs_ratio;
@@ -232,6 +243,9 @@ static int sta529_hw_params(struct snd_pcm_substream *substream,
 		bclk_to_fs_ratio = 1;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pdata = 3;
 		bclk_to_fs_ratio = 2;
@@ -348,6 +362,7 @@ static struct snd_soc_dai_driver sta529_dai = {
 static int sta529_probe(struct snd_soc_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sta529 *sta529 = snd_soc_codec_get_drvdata(codec);
 	int ret;
 
@@ -358,6 +373,8 @@ static int sta529_probe(struct snd_soc_codec *codec)
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sta529_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
@@ -420,10 +437,15 @@ static int sta529_i2c_probe(struct i2c_client *i2c,
 
 	sta529 = devm_kzalloc(&i2c->dev, sizeof(struct sta529), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sta529 == NULL) {
 		dev_err(&i2c->dev, "Can not allocate memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!sta529)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!sta529)
 		return -ENOMEM;
@@ -473,7 +495,11 @@ module_i2c_driver(sta529_i2c_driver);
 
 MODULE_DESCRIPTION("ASoC STA529 codec driver");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Rajeev Kumar <rajeev-dlh.kumar@st.com>");
+=======
+MODULE_AUTHOR("Rajeev Kumar <rajeevkumar.linux@gmail.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Rajeev Kumar <rajeevkumar.linux@gmail.com>");
 >>>>>>> v3.18

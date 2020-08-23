@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_AVR32_TERMBITS_H
 #define __ASM_AVR32_TERMBITS_H
+=======
+#ifndef _UAPI__ASM_AVR32_TERMBITS_H
+#define _UAPI__ASM_AVR32_TERMBITS_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI__ASM_AVR32_TERMBITS_H
 #define _UAPI__ASM_AVR32_TERMBITS_H
@@ -199,7 +204,11 @@ struct ktermios {
 #define	TCSAFLUSH	2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_AVR32_TERMBITS_H */
+=======
+#endif /* _UAPI__ASM_AVR32_TERMBITS_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI__ASM_AVR32_TERMBITS_H */
 >>>>>>> v3.18

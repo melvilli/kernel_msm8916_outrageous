@@ -1020,17 +1020,23 @@ static int __logfs_is_valid_block(struct inode *inode, u64 bix, u64 ofs)
  * logfs_is_valid_block - check whether this block is still valid
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @sb	- superblock
  * @ofs	- block physical offset
  * @ino	- block inode number
  * @bix	- block index
  * @level - block level
 =======
+=======
+>>>>>>> v3.18
  * @sb:		superblock
  * @ofs:	block physical offset
  * @ino:	block inode number
  * @bix:	block index
  * @gc_level:	block level
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Returns 0 if the block is invalid, 1 if it is valid and 2 if it will
@@ -2189,7 +2195,11 @@ void logfs_evict_inode(struct inode *inode)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -2239,10 +2249,16 @@ void btree_write_block(struct logfs_block *block)
  * @inode:		parent inode (ifile or directory)
  * @buf:		object to write (inode or dentry)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @n:			object size
  * @_pos:		object number (file position in blocks/objects)
  * @flags:		write flags
  * @lock:		0 if write lock is already taken, 1 otherwise
+=======
+ * @count:		object size
+ * @bix:		block index
+ * @flags:		write flags
+>>>>>>> v3.18
 =======
  * @count:		object size
  * @bix:		block index

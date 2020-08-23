@@ -23,6 +23,10 @@
 
 #include <linux/rwsem.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/interrupt.h>
+>>>>>>> v3.18
 =======
 #include <linux/interrupt.h>
 >>>>>>> v3.18
@@ -72,7 +76,10 @@
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct giveback_urb_bh {
 	bool running;
 	spinlock_t lock;
@@ -81,6 +88,9 @@ struct giveback_urb_bh {
 	struct usb_host_endpoint *completing_ep;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct usb_hcd {
 
@@ -113,7 +123,12 @@ struct usb_hcd {
 	 * other external phys should be software-transparent
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_phy	*phy;
+=======
+	struct usb_phy		*usb_phy;
+	struct phy		*phy;
+>>>>>>> v3.18
 =======
 	struct usb_phy		*usb_phy;
 	struct phy		*phy;
@@ -146,6 +161,10 @@ struct usb_hcd {
 	unsigned		rh_pollable:1;	/* may we poll the root hub? */
 	unsigned		msix_enabled:1;	/* driver has MSI-X enabled? */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned		remove_phy:1;	/* auto-remove USB phy */
+>>>>>>> v3.18
 =======
 	unsigned		remove_phy:1;	/* auto-remove USB phy */
 >>>>>>> v3.18
@@ -157,6 +176,12 @@ struct usb_hcd {
 	unsigned		authorized_default:1;
 	unsigned		has_tt:1;	/* Integrated TT in root hub */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned		amd_resume_bug:1; /* AMD remote wakeup quirk */
+	unsigned		can_do_streams:1; /* HC supports streams */
+	unsigned		tpl_support:1; /* OTG & EH TPL support */
+>>>>>>> v3.18
 =======
 	unsigned		amd_resume_bug:1; /* AMD remote wakeup quirk */
 	unsigned		can_do_streams:1; /* HC supports streams */
@@ -170,6 +195,12 @@ struct usb_hcd {
 	unsigned		power_budget;	/* in mA, 0 = no limit */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct giveback_urb_bh  high_prio_bh;
+	struct giveback_urb_bh  low_prio_bh;
+
+>>>>>>> v3.18
 =======
 	struct giveback_urb_bh  high_prio_bh;
 	struct giveback_urb_bh  low_prio_bh;
@@ -253,6 +284,7 @@ struct hc_driver {
 #define	HCD_LOCAL_MEM	0x0002		/* HC needs local memory */
 #define	HCD_SHARED	0x0004		/* Two (or more) usb_hcds share HW */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	HCD_RT_OLD_ENUM	0x0008		/* HC supports short enumeration
 					   on root port */
 #define	HCD_USB11	0x0010		/* USB 1.1 */
@@ -260,12 +292,17 @@ struct hc_driver {
 #define	HCD_USB3	0x0040		/* USB 3.0 */
 #define	HCD_MASK	0x0070
 =======
+=======
+>>>>>>> v3.18
 #define	HCD_USB11	0x0010		/* USB 1.1 */
 #define	HCD_USB2	0x0020		/* USB 2.0 */
 #define	HCD_USB25	0x0030		/* Wireless USB 1.0 (USB 2.5)*/
 #define	HCD_USB3	0x0040		/* USB 3.0 */
 #define	HCD_MASK	0x0070
 #define	HCD_BH		0x0100		/* URB complete in BH context */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* called to init HCD and root hub */
@@ -385,6 +422,11 @@ struct hc_driver {
 		/* Returns the hardware-chosen device address */
 	int	(*address_device)(struct usb_hcd *, struct usb_device *udev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* prepares the hardware to send commands to the device */
+	int	(*enable_device)(struct usb_hcd *, struct usb_device *udev);
+>>>>>>> v3.18
 =======
 		/* prepares the hardware to send commands to the device */
 	int	(*enable_device)(struct usb_hcd *, struct usb_device *udev);
@@ -411,6 +453,7 @@ struct hc_driver {
 			struct usb_device *, enum usb3_link_state state);
 	int	(*find_raw_port_number)(struct usb_hcd *, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* if hcd needs to finish ep cleanup asap after HC halt failiure */
 	void (*halt_failed_cleanup)(struct usb_hcd *);
 
@@ -423,6 +466,8 @@ struct hc_driver {
 };
 
 =======
+=======
+>>>>>>> v3.18
 };
 
 static inline int hcd_giveback_urb_in_bh(struct usb_hcd *hcd)
@@ -436,6 +481,9 @@ static inline bool hcd_periodic_completion_in_progress(struct usb_hcd *hcd,
 	return hcd->high_prio_bh.completing_ep == ep;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int usb_hcd_link_urb_to_ep(struct usb_hcd *hcd, struct urb *urb);
 extern int usb_hcd_check_unlink_urb(struct usb_hcd *hcd, struct urb *urb,
@@ -472,13 +520,17 @@ extern struct usb_hcd *usb_get_hcd(struct usb_hcd *hcd);
 extern void usb_put_hcd(struct usb_hcd *hcd);
 extern int usb_hcd_is_primary_hcd(struct usb_hcd *hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int usb_add_hcd(struct usb_hcd *hcd,
 		unsigned int irqnum, unsigned long irqflags);
 extern void usb_remove_hcd(struct usb_hcd *hcd);
 extern int usb_hcd_find_raw_port_number(struct usb_hcd *hcd, int port1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else
 static inline int
@@ -488,6 +540,8 @@ usb_add_hcd(struct usb_hcd *hcd, unsigned int irqnum, unsigned long irqflags)
 }
 static inline void usb_remove_hcd(struct usb_hcd *hcd) {}
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -503,6 +557,11 @@ extern void usb_hcd_pci_remove(struct pci_dev *dev);
 extern void usb_hcd_pci_shutdown(struct pci_dev *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int usb_hcd_amd_remote_wakeup_quirk(struct pci_dev *dev);
+
+>>>>>>> v3.18
 =======
 extern int usb_hcd_amd_remote_wakeup_quirk(struct pci_dev *dev);
 
@@ -514,7 +573,10 @@ extern const struct dev_pm_ops usb_hcd_pci_pm_ops;
 
 /* pci-ish (pdev null is ok) buffer alloc/mapping support */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void usb_init_pool_max(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int hcd_buffer_create(struct usb_hcd *hcd);
@@ -580,6 +642,10 @@ struct usb_tt {
 	int			multi;	/* true means one TT per port */
 	unsigned		think_time;	/* think time in ns */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void			*hcpriv;	/* HCD private data */
+>>>>>>> v3.18
 =======
 	void			*hcpriv;	/* HCD private data */
 >>>>>>> v3.18
@@ -642,9 +708,14 @@ extern void usb_ep0_reinit(struct usb_device *);
 		/* bytecount = data payload byte count */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NS_TO_US(ns)	((ns + 500L) / 1000L)
 			/* convert & round nanoseconds to microseconds */
 
+=======
+#define NS_TO_US(ns)	DIV_ROUND_UP(ns, 1000L)
+			/* convert nanoseconds to microseconds, rounding up */
+>>>>>>> v3.18
 =======
 #define NS_TO_US(ns)	DIV_ROUND_UP(ns, 1000L)
 			/* convert nanoseconds to microseconds, rounding up */

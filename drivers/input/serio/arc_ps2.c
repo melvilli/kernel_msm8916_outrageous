@@ -190,12 +190,15 @@ static int arc_ps2_probe(struct platform_device *pdev)
 	int error, id, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
 		dev_err(&pdev->dev, "no IO memory defined\n");
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	irq = platform_get_irq_byname(pdev, "arc_ps2_irq");
@@ -212,6 +215,10 @@ static int arc_ps2_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 >>>>>>> v3.18

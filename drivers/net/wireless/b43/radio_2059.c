@@ -26,7 +26,10 @@
 #include "radio_2059.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Extracted from MMIO dump of 6.30.223.141 */
 static u16 r2059_phy_rev1_init[][2] = {
 	{ 0x051, 0x70 }, { 0x05a, 0x03 }, { 0x079, 0x01 }, { 0x082, 0x70 },
@@ -34,6 +37,9 @@ static u16 r2059_phy_rev1_init[][2] = {
 	{ 0x188, 0x05 },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RADIOREGS(r00, r01, r02, r03, r04, r05, r06, r07, r08, r09, \
 		  r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, \
@@ -68,6 +74,7 @@ static u16 r2059_phy_rev1_init[][2] = {
 	.phy_regs.bw5	= r4,	\
 	.phy_regs.bw6	= r5
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct b43_phy_ht_channeltab_e_radio2059 b43_phy_ht_channeltab_radio2059[] = {
   {	.freq			= 2412,
@@ -137,6 +144,8 @@ static const struct b43_phy_ht_channeltab_e_radio2059 b43_phy_ht_channeltab_radi
 	PHYREGS(0x03dd, 0x03d9, 0x03d5, 0x0424, 0x0429, 0x042d),
   },
 =======
+=======
+>>>>>>> v3.18
 /* Extracted from MMIO dump of 6.30.223.141
  * TODO: Values for channels 12 & 13 are outdated (from some old 5.x driver)!
  */
@@ -218,6 +227,9 @@ static const struct b43_phy_ht_channeltab_e_radio2059 b43_phy_ht_channeltab_radi
 			  0x00, 0x00, 0x00, 0x60, 0x00),
 		PHYREGS(0x03dd, 0x03d9, 0x03d5, 0x0424, 0x0429, 0x042d),
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   {	.freq			= 2467,
 	RADIOREGS(0x6c, 0x16, 0x30, 0x1b, 0x0a, 0x0a, 0x30, 0xa3,
@@ -232,9 +244,12 @@ static const struct b43_phy_ht_channeltab_e_radio2059 b43_phy_ht_channeltab_radi
 	PHYREGS(0x03e1, 0x03dd, 0x03d9, 0x0420, 0x0424, 0x0429),
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	{
 		.freq			= 5180,
 		RADIOREGS(0xbe, 0x16, 0x10, 0x1f, 0x08, 0x08, 0x3f, 0x06,
@@ -425,6 +440,9 @@ void r2059_upload_inittabs(struct b43_wldev *dev)
 		b43_radio_write(dev, R2059_ALL | table[0], table[1]);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 const struct b43_phy_ht_channeltab_e_radio2059
 *b43_phy_ht_get_channeltab_e_r2059(struct b43_wldev *dev, u16 freq)

@@ -18,6 +18,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_edid.h>
+
+>>>>>>> v3.18
 =======
 #include <drm/drm_edid.h>
 
@@ -57,6 +62,12 @@ static void omap_encoder_destroy(struct drm_encoder *encoder)
 {
 	struct omap_encoder *omap_encoder = to_omap_encoder(encoder);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	omap_encoder_set_enabled(encoder, false);
+
+>>>>>>> v3.18
 =======
 
 	omap_encoder_set_enabled(encoder, false);
@@ -98,7 +109,10 @@ static void omap_encoder_mode_set(struct drm_encoder *encoder,
 				struct drm_display_mode *adjusted_mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct drm_device *dev = encoder->dev;
 	struct omap_encoder *omap_encoder = to_omap_encoder(encoder);
 	struct omap_dss_device *dssdev = omap_encoder->dssdev;
@@ -124,6 +138,9 @@ static void omap_encoder_mode_set(struct drm_encoder *encoder,
 		if (r == 0)
 			dssdev->driver->set_hdmi_infoframe(dssdev, &avi);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -173,7 +190,11 @@ int omap_encoder_update(struct drm_encoder *encoder,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dssdev->output->manager = mgr;
+=======
+	dssdev->src->manager = mgr;
+>>>>>>> v3.18
 =======
 	dssdev->src->manager = mgr;
 >>>>>>> v3.18

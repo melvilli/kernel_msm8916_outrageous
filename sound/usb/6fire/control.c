@@ -195,7 +195,12 @@ static int usb6fire_control_output_vol_put(struct snd_kcontrol *kcontrol,
 
 	if (ch > 4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "Invalid channel in volume control.");
+=======
+		dev_err(&rt->chip->dev->dev,
+			"Invalid channel in volume control.");
+>>>>>>> v3.18
 =======
 		dev_err(&rt->chip->dev->dev,
 			"Invalid channel in volume control.");
@@ -228,7 +233,12 @@ static int usb6fire_control_output_vol_get(struct snd_kcontrol *kcontrol,
 
 	if (ch > 4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "Invalid channel in volume control.");
+=======
+		dev_err(&rt->chip->dev->dev,
+			"Invalid channel in volume control.");
+>>>>>>> v3.18
 =======
 		dev_err(&rt->chip->dev->dev,
 			"Invalid channel in volume control.");
@@ -251,7 +261,12 @@ static int usb6fire_control_output_mute_put(struct snd_kcontrol *kcontrol,
 
 	if (ch > 4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "Invalid channel in volume control.");
+=======
+		dev_err(&rt->chip->dev->dev,
+			"Invalid channel in volume control.");
+>>>>>>> v3.18
 =======
 		dev_err(&rt->chip->dev->dev,
 			"Invalid channel in volume control.");
@@ -281,7 +296,12 @@ static int usb6fire_control_output_mute_get(struct snd_kcontrol *kcontrol,
 
 	if (ch > 4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "Invalid channel in volume control.");
+=======
+		dev_err(&rt->chip->dev->dev,
+			"Invalid channel in volume control.");
+>>>>>>> v3.18
 =======
 		dev_err(&rt->chip->dev->dev,
 			"Invalid channel in volume control.");
@@ -615,7 +635,11 @@ int usb6fire_control_init(struct sfire_chip *chip)
 		"Master Playback Volume", vol_elements);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "cannot add control.\n");
+=======
+		dev_err(&chip->dev->dev, "cannot add control.\n");
+>>>>>>> v3.18
 =======
 		dev_err(&chip->dev->dev, "cannot add control.\n");
 >>>>>>> v3.18
@@ -626,7 +650,11 @@ int usb6fire_control_init(struct sfire_chip *chip)
 		"Master Playback Switch", mute_elements);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "cannot add control.\n");
+=======
+		dev_err(&chip->dev->dev, "cannot add control.\n");
+>>>>>>> v3.18
 =======
 		dev_err(&chip->dev->dev, "cannot add control.\n");
 >>>>>>> v3.18
@@ -640,7 +668,11 @@ int usb6fire_control_init(struct sfire_chip *chip)
 		if (ret < 0) {
 			kfree(rt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR PREFIX "cannot add control.\n");
+=======
+			dev_err(&chip->dev->dev, "cannot add control.\n");
+>>>>>>> v3.18
 =======
 			dev_err(&chip->dev->dev, "cannot add control.\n");
 >>>>>>> v3.18

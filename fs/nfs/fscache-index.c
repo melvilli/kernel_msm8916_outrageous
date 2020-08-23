@@ -75,16 +75,22 @@ static uint16_t nfs_server_get_key(const void *cookie_netfs_data,
 	uint16_t len = sizeof(struct nfs_server_key);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key->nfsversion = clp->rpc_ops->version;
 	key->family = clp->cl_addr.ss_family;
 
 	memset(key, 0, len);
 
 =======
+=======
+>>>>>>> v3.18
 	memset(key, 0, len);
 	key->nfsversion = clp->rpc_ops->version;
 	key->family = clp->cl_addr.ss_family;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (clp->cl_addr.ss_family) {
 	case AF_INET:

@@ -25,7 +25,11 @@ struct cb710_mmc_reader {
 static inline struct mmc_host *cb710_slot_to_mmc(struct cb710_slot *slot)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dev_get_drvdata(&slot->pdev.dev);
+=======
+	return platform_get_drvdata(&slot->pdev);
+>>>>>>> v3.18
 =======
 	return platform_get_drvdata(&slot->pdev);
 >>>>>>> v3.18

@@ -22,6 +22,10 @@
 #include "ctresource.h"
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/core.h>
+>>>>>>> v3.18
 =======
 #include <sound/core.h>
 >>>>>>> v3.18
@@ -40,6 +44,10 @@ struct sum_desc {
 struct sum_mgr {
 	struct rsc_mgr mgr;	/* Basic resource manager info */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_card *card;	/* pointer to this card */
+>>>>>>> v3.18
 =======
 	struct snd_card *card;	/* pointer to this card */
 >>>>>>> v3.18
@@ -54,7 +62,11 @@ struct sum_mgr {
 
 /* Constructor and destructor of daio resource manager */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sum_mgr_create(void *hw, struct sum_mgr **rsum_mgr);
+=======
+int sum_mgr_create(struct hw *hw, struct sum_mgr **rsum_mgr);
+>>>>>>> v3.18
 =======
 int sum_mgr_create(struct hw *hw, struct sum_mgr **rsum_mgr);
 >>>>>>> v3.18
@@ -92,6 +104,10 @@ struct amixer_desc {
 struct amixer_mgr {
 	struct rsc_mgr mgr;	/* Basic resource manager info */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_card *card;	/* pointer to this card */
+>>>>>>> v3.18
 =======
 	struct snd_card *card;	/* pointer to this card */
 >>>>>>> v3.18
@@ -107,7 +123,11 @@ struct amixer_mgr {
 
 /* Constructor and destructor of amixer resource manager */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int amixer_mgr_create(void *hw, struct amixer_mgr **ramixer_mgr);
+=======
+int amixer_mgr_create(struct hw *hw, struct amixer_mgr **ramixer_mgr);
+>>>>>>> v3.18
 =======
 int amixer_mgr_create(struct hw *hw, struct amixer_mgr **ramixer_mgr);
 >>>>>>> v3.18

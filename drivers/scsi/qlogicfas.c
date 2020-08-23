@@ -172,8 +172,11 @@ static int qlogicfas_release(struct Scsi_Host *shost)
 		free_irq(shost->irq, shost);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (shost->dma_channel != 0xff)
 		free_dma(shost->dma_channel);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (shost->io_port && shost->n_io_port)

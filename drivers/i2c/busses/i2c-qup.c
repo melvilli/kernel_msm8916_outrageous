@@ -1,10 +1,16 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2009-2014, The Linux Foundation. All rights reserved.
 =======
+=======
+>>>>>>> v3.18
 /*
  * Copyright (c) 2009-2013, The Linux Foundation. All rights reserved.
  * Copyright (c) 2014, Sony Mobile Communications AB.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -17,6 +23,7 @@
  * GNU General Public License for more details.
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * QUP driver for Qualcomm MSM platforms
@@ -1426,6 +1433,8 @@ int msm_i2c_rsrcs_dt_to_pdata_map(struct platform_device *pdev,
 static u32
 qup_i2c_func(struct i2c_adapter *adap)
 =======
+=======
+>>>>>>> v3.18
 
 #include <linux/clk.h>
 #include <linux/delay.h>
@@ -1938,6 +1947,9 @@ out:
 }
 
 static u32 qup_i2c_func(struct i2c_adapter *adap)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return I2C_FUNC_I2C | (I2C_FUNC_SMBUS_EMUL & ~I2C_FUNC_SMBUS_QUICK);
@@ -1948,6 +1960,7 @@ static const struct i2c_algorithm qup_i2c_algo = {
 	.functionality	= qup_i2c_func,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int 
 qup_i2c_probe(struct platform_device *pdev)
@@ -2304,6 +2317,8 @@ qup_i2c_remove(struct platform_device *pdev)
 		kfree(dev->pdata);
 	kfree(dev);
 =======
+=======
+>>>>>>> v3.18
 static void qup_i2c_enable_clocks(struct qup_i2c_dev *qup)
 {
 	clk_prepare_enable(qup->clk);
@@ -2472,11 +2487,15 @@ static int qup_i2c_remove(struct platform_device *pdev)
 	i2c_del_adapter(&qup->adap);
 	pm_runtime_disable(qup->dev);
 	pm_runtime_set_suspended(qup->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 #ifdef CONFIG_PM
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int i2c_qup_pm_suspend_runtime(struct device *device)
 {
@@ -2573,6 +2592,8 @@ static void __exit qup_i2c_exit_driver(void)
 module_exit(qup_i2c_exit_driver);
 
 =======
+=======
+>>>>>>> v3.18
 static int qup_i2c_pm_suspend_runtime(struct device *device)
 {
 	struct qup_i2c_dev *qup = dev_get_drvdata(device);
@@ -2641,4 +2662,7 @@ module_platform_driver(qup_i2c_driver);
 
 MODULE_LICENSE("GPL v2");
 MODULE_ALIAS("platform:i2c_qup");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

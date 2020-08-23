@@ -65,7 +65,11 @@ static int blkpg_ioctl(struct block_device *bdev, struct blkpg_ioctl_arg __user 
 					     ADDPART_FLAG_NONE, NULL);
 			mutex_unlock(&bdev->bd_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return IS_ERR(part) ? PTR_ERR(part) : 0;
+=======
+			return PTR_ERR_OR_ZERO(part);
+>>>>>>> v3.18
 =======
 			return PTR_ERR_OR_ZERO(part);
 >>>>>>> v3.18
@@ -283,6 +287,10 @@ int blkdev_ioctl(struct block_device *bdev, fmode_t mode, unsigned cmd,
 	loff_t size;
 	int ret, n;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int max_sectors;
+>>>>>>> v3.18
 =======
 	unsigned int max_sectors;
 >>>>>>> v3.18
@@ -364,8 +372,11 @@ int blkdev_ioctl(struct block_device *bdev, fmode_t mode, unsigned cmd,
 			return -EINVAL;
 		bdi = blk_get_backing_dev_info(bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bdi == NULL)
 			return -ENOTTY;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return put_long(arg, (bdi->ra_pages * PAGE_CACHE_SIZE) / 512);
@@ -387,7 +398,13 @@ int blkdev_ioctl(struct block_device *bdev, fmode_t mode, unsigned cmd,
 		return put_uint(arg, bdev_discard_zeroes_data(bdev));
 	case BLKSECTGET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return put_ushort(arg, queue_max_sectors(bdev_get_queue(bdev)));
+=======
+		max_sectors = min_t(unsigned int, USHRT_MAX,
+				    queue_max_sectors(bdev_get_queue(bdev)));
+		return put_ushort(arg, max_sectors);
+>>>>>>> v3.18
 =======
 		max_sectors = min_t(unsigned int, USHRT_MAX,
 				    queue_max_sectors(bdev_get_queue(bdev)));
@@ -401,8 +418,11 @@ int blkdev_ioctl(struct block_device *bdev, fmode_t mode, unsigned cmd,
 			return -EACCES;
 		bdi = blk_get_backing_dev_info(bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bdi == NULL)
 			return -ENOTTY;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		bdi->ra_pages = (arg * 512) / PAGE_CACHE_SIZE;

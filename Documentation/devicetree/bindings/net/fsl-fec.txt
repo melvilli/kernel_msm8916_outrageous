@@ -5,6 +5,7 @@ Required properties:
 - reg : Address and length of the register set for the device
 - interrupts : Should contain fec interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
 - phy-mode : String, operation mode of the PHY interface.
   Supported values are: "mii", "gmii", "sgmii", "tbi", "rmii",
   "rgmii", "rgmii-id", "rgmii-rxid", "rgmii-txid", "rtbi", "smii".
@@ -16,13 +17,21 @@ Optional properties:
 
 Optional properties:
 >>>>>>> v3.18
+=======
+- phy-mode : See ethernet.txt file in the same directory
+
+Optional properties:
+>>>>>>> v3.18
 - phy-reset-gpios : Should specify the gpio for phy reset
 - phy-reset-duration : Reset duration in milliseconds.  Should present
   only if property "phy-reset-gpios" is available.  Missing the property
   will have the duration be 1 millisecond.  Numbers greater than 1000 are
   invalid and 1 millisecond will be used instead.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - phy-supply : regulator that powers the Ethernet PHY.
 - phy-handle : phandle to the PHY device connected to this device.
 - fixed-link : Assume a fixed link. See fixed-link.txt in the same directory.
@@ -37,6 +46,9 @@ Optional properties:
 Optional subnodes:
 - mdio : specifies the mdio bus in the FEC, used as a container for phy nodes
   according to phy.txt in the same directory
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
@@ -49,7 +61,10 @@ ethernet@83fec000 {
 	phy-reset-gpios = <&gpio2 14 0>; /* GPIO2_14 */
 	local-mac-address = [00 04 9F 01 1B B9];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	phy-supply = <&reg_fec_supply>;
 };
 
@@ -71,5 +86,8 @@ ethernet@83fec000 {
 			max-speed = <100>;
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

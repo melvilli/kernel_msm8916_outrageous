@@ -9,7 +9,11 @@
 #include <net/tcp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sysctl_tcp_fastopen __read_mostly;
+=======
+int sysctl_tcp_fastopen __read_mostly = TFO_CLIENT_ENABLE;
+>>>>>>> v3.18
 =======
 int sysctl_tcp_fastopen __read_mostly = TFO_CLIENT_ENABLE;
 >>>>>>> v3.18
@@ -19,7 +23,10 @@ struct tcp_fastopen_context __rcu *tcp_fastopen_ctx;
 static DEFINE_SPINLOCK(tcp_fastopen_ctx_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void tcp_fastopen_init_key_once(bool publish)
 {
 	static u8 key[TCP_FASTOPEN_KEY_LENGTH];
@@ -34,6 +41,9 @@ void tcp_fastopen_init_key_once(bool publish)
 		tcp_fastopen_reset_cipher(key, sizeof(key));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void tcp_fastopen_ctx_free(struct rcu_head *head)
 {
@@ -80,6 +90,7 @@ error:		kfree(ctx);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Computes the fastopen cookie for the peer.
  * The peer address is a 128 bits long (pad with zeros for IPv4).
  *
@@ -91,6 +102,8 @@ void tcp_fastopen_cookie_gen(__be32 addr, struct tcp_fastopen_cookie *foc)
 	__be32 peer_addr[4] = { addr, 0, 0, 0 };
 	struct tcp_fastopen_context *ctx;
 =======
+=======
+>>>>>>> v3.18
 static bool __tcp_fastopen_cookie_gen(const void *path,
 				      struct tcp_fastopen_cookie *foc)
 {
@@ -98,11 +111,15 @@ static bool __tcp_fastopen_cookie_gen(const void *path,
 	bool ok = false;
 
 	tcp_fastopen_init_key_once(true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rcu_read_lock();
 	ctx = rcu_dereference(tcp_fastopen_ctx);
 	if (ctx) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		crypto_cipher_encrypt_one(ctx->tfm,
 					  foc->val,
@@ -123,6 +140,8 @@ static int __init tcp_fastopen_init(void)
 
 late_initcall(tcp_fastopen_init);
 =======
+=======
+>>>>>>> v3.18
 		crypto_cipher_encrypt_one(ctx->tfm, foc->val, path);
 		foc->len = TCP_FASTOPEN_COOKIE_SIZE;
 		ok = true;
@@ -333,4 +352,7 @@ fastopen:
 	return false;
 }
 EXPORT_SYMBOL(tcp_try_fastopen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

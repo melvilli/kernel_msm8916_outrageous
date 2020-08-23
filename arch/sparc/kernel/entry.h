@@ -7,6 +7,7 @@
 
 /* irq */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void handler_irq(int irq, struct pt_regs *regs);
 
 #ifdef CONFIG_SPARC32
@@ -35,6 +36,8 @@ extern void handle_cp_disabled(struct pt_regs *regs, unsigned long pc,
 extern void handle_cp_exception(struct pt_regs *regs, unsigned long pc,
                                 unsigned long npc, unsigned long psr);
 =======
+=======
+>>>>>>> v3.18
 void handler_irq(int irq, struct pt_regs *regs);
 
 #ifdef CONFIG_SPARC32
@@ -61,15 +64,24 @@ void handle_cp_disabled(struct pt_regs *regs, unsigned long pc,
                         unsigned long npc, unsigned long psr);
 void handle_cp_exception(struct pt_regs *regs, unsigned long pc,
                          unsigned long npc, unsigned long psr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 
 /* entry.S */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void fpsave(unsigned long *fpregs, unsigned long *fsr,
                    void *fpqueue, unsigned long *fpqdepth);
 extern void fpload(unsigned long *fpregs, unsigned long *fsr);
+=======
+void fpsave(unsigned long *fpregs, unsigned long *fsr,
+            void *fpqueue, unsigned long *fpqdepth);
+void fpload(unsigned long *fpregs, unsigned long *fsr);
+>>>>>>> v3.18
 =======
 void fpsave(unsigned long *fpregs, unsigned long *fsr,
             void *fpqueue, unsigned long *fpqdepth);
@@ -101,6 +113,7 @@ struct pause_patch_entry {
 extern struct pause_patch_entry __pause_3insn_patch,
 	__pause_3insn_patch_end;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void __init per_cpu_patch(void);
 extern void sun4v_patch_1insn_range(struct sun4v_1insn_patch_entry *,
@@ -203,6 +216,8 @@ extern void sun4v_nonresum_error(struct pt_regs *regs,
 				 unsigned long offset);
 extern void sun4v_nonresum_overflow(struct pt_regs *regs);
 =======
+=======
+>>>>>>> v3.18
 void sun4v_patch_1insn_range(struct sun4v_1insn_patch_entry *,
 			     struct sun4v_1insn_patch_entry *);
 void sun4v_patch_2insn_range(struct sun4v_2insn_patch_entry *,
@@ -299,6 +314,9 @@ void sun4v_resum_overflow(struct pt_regs *regs);
 void sun4v_nonresum_error(struct pt_regs *regs,
 			  unsigned long offset);
 void sun4v_nonresum_overflow(struct pt_regs *regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern unsigned long sun4v_err_itlb_vaddr;
@@ -307,7 +325,11 @@ extern unsigned long sun4v_err_itlb_pte;
 extern unsigned long sun4v_err_itlb_error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void sun4v_itlb_error_report(struct pt_regs *regs, int tl);
+=======
+void sun4v_itlb_error_report(struct pt_regs *regs, int tl);
+>>>>>>> v3.18
 =======
 void sun4v_itlb_error_report(struct pt_regs *regs, int tl);
 >>>>>>> v3.18
@@ -318,17 +340,23 @@ extern unsigned long sun4v_err_dtlb_pte;
 extern unsigned long sun4v_err_dtlb_error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void sun4v_dtlb_error_report(struct pt_regs *regs, int tl);
 extern void hypervisor_tlbop_error(unsigned long err,
 				   unsigned long op);
 extern void hypervisor_tlbop_error_xcall(unsigned long err,
 					 unsigned long op);
 =======
+=======
+>>>>>>> v3.18
 void sun4v_dtlb_error_report(struct pt_regs *regs, int tl);
 void hypervisor_tlbop_error(unsigned long err,
 			    unsigned long op);
 void hypervisor_tlbop_error_xcall(unsigned long err,
 				  unsigned long op);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* WARNING: The error trap handlers in assembly know the precise
@@ -396,8 +424,13 @@ extern struct ino_bucket *ivector_table;
 extern unsigned long ivector_table_pa;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void init_irqwork_curcpu(void);
 extern void __cpuinit sun4v_register_mondo_queues(int this_cpu);
+=======
+void init_irqwork_curcpu(void);
+void sun4v_register_mondo_queues(int this_cpu);
+>>>>>>> v3.18
 =======
 void init_irqwork_curcpu(void);
 void sun4v_register_mondo_queues(int this_cpu);

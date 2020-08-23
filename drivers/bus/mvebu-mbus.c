@@ -36,6 +36,7 @@
  * - Provides an API for platform code or device drivers to
  *   dynamically add or remove address decoding windows for the CPU ->
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   device accesses. This API is mvebu_mbus_add_window(),
  *   mvebu_mbus_add_window_remap_flags() and
  *   mvebu_mbus_del_window(). Since the (target, attribute) values
@@ -43,6 +44,11 @@
  *   *' string to identify devices, and this driver is responsible for
  *   knowing the mapping between the name of a device and its
  *   corresponding (target, attribute) in the current SoC family.
+=======
+ *   device accesses. This API is mvebu_mbus_add_window_by_id(),
+ *   mvebu_mbus_add_window_remap_by_id() and
+ *   mvebu_mbus_del_window().
+>>>>>>> v3.18
 =======
  *   device accesses. This API is mvebu_mbus_add_window_by_id(),
  *   mvebu_mbus_add_window_remap_by_id() and
@@ -56,6 +62,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -70,6 +81,10 @@
 #include <linux/of_address.h>
 #include <linux/debugfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/log2.h>
+>>>>>>> v3.18
 =======
 #include <linux/log2.h>
 >>>>>>> v3.18
@@ -111,6 +126,7 @@
 #define DOVE_DDR_BASE_CS_OFF(n) ((n) << 4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mvebu_mbus_mapping {
 	const char *name;
 	u8 target;
@@ -140,6 +156,8 @@ struct mvebu_mbus_mapping {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct mvebu_mbus_state;
 
 struct mvebu_mbus_soc_data {
@@ -150,7 +168,10 @@ struct mvebu_mbus_soc_data {
 	int (*show_cpu_target)(struct mvebu_mbus_state *s,
 			       struct seq_file *seq, void *v);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct mvebu_mbus_mapping *map;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -162,6 +183,11 @@ struct mvebu_mbus_state {
 	struct dentry *debugfs_sdram;
 	struct dentry *debugfs_devs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct resource pcie_mem_aperture;
+	struct resource pcie_io_aperture;
+>>>>>>> v3.18
 =======
 	struct resource pcie_mem_aperture;
 	struct resource pcie_io_aperture;
@@ -236,6 +262,7 @@ static void mvebu_mbus_disable_window(struct mvebu_mbus_state *mbus,
 
 /* Checks whether the given window number is available */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* On Armada XP, 375 and 38x the MBus window 13 has the remap
  * capability, like windows 0 to 7. However, the mvebu-mbus driver
@@ -247,6 +274,8 @@ static void mvebu_mbus_disable_window(struct mvebu_mbus_state *mbus,
 */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int mvebu_mbus_window_is_free(struct mvebu_mbus_state *mbus,
 				     const int win)
 {
@@ -254,10 +283,13 @@ static int mvebu_mbus_window_is_free(struct mvebu_mbus_state *mbus,
 		mbus->soc->win_cfg_offset(win);
 	u32 ctrl = readl(addr + WIN_CTRL_OFF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (win == 13)
 		return false;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return !(ctrl & WIN_CTRL_ENABLE);
@@ -334,7 +366,10 @@ static int mvebu_mbus_setup_window(struct mvebu_mbus_state *mbus,
 	u32 ctrl, remap_addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!is_power_of_2(size)) {
 		WARN(true, "Invalid MBus window size: 0x%zx\n", size);
 		return -EINVAL;
@@ -346,6 +381,9 @@ static int mvebu_mbus_setup_window(struct mvebu_mbus_state *mbus,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ctrl = ((size - 1) & WIN_CTRL_SIZE_MASK) |
 		(attr << WIN_CTRL_ATTR_SHIFT)    |
@@ -480,8 +518,12 @@ static int mvebu_devs_debug_show(struct seq_file *seq, void *v)
 		u32 wsize;
 		u8 wtarget, wattr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int enabled, i;
 		const char *name;
+=======
+		int enabled;
+>>>>>>> v3.18
 =======
 		int enabled;
 >>>>>>> v3.18
@@ -496,6 +538,7 @@ static int mvebu_devs_debug_show(struct seq_file *seq, void *v)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		for (i = 0; mbus->soc->map[i].name; i++)
 			if (mbus->soc->map[i].target == wtarget &&
@@ -509,6 +552,8 @@ static int mvebu_devs_debug_show(struct seq_file *seq, void *v)
 			   win, (unsigned long long)wbase,
 			   (unsigned long long)(wbase + wsize), name);
 =======
+=======
+>>>>>>> v3.18
 		seq_printf(seq, "[%02d] %016llx - %016llx : %04x:%04x",
 			   win, (unsigned long long)wbase,
 			   (unsigned long long)(wbase + wsize), wtarget, wattr);
@@ -516,6 +561,9 @@ static int mvebu_devs_debug_show(struct seq_file *seq, void *v)
 		if (!is_power_of_2(wsize) ||
 		    ((wbase & (u64)(wsize - 1)) != 0))
 			seq_puts(seq, " (Invalid base/size!!)");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (win < mbus->soc->num_remappable_wins) {
@@ -642,6 +690,7 @@ mvebu_mbus_dove_setup_cpu_target(struct mvebu_mbus_state *mbus)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct mvebu_mbus_mapping armada_370_map[] = {
 	MAPDEF("bootrom",     1, 0xe0, MAPDEF_NOMASK),
 	MAPDEF("devbus-boot", 1, 0x2f, MAPDEF_NOMASK),
@@ -688,11 +737,15 @@ static const struct mvebu_mbus_mapping armada_xp_map[] = {
 };
 
 static const struct mvebu_mbus_soc_data armada_xp_mbus_data = {
+=======
+static const struct mvebu_mbus_soc_data armada_370_xp_mbus_data = {
+>>>>>>> v3.18
 	.num_wins            = 20,
 	.num_remappable_wins = 8,
 	.win_cfg_offset      = armada_370_xp_mbus_win_offset,
 	.setup_cpu_target    = mvebu_mbus_default_setup_cpu_target,
 	.show_cpu_target     = mvebu_sdram_debug_show_orion,
+<<<<<<< HEAD
 	.map                 = armada_xp_map,
 };
 
@@ -704,6 +757,8 @@ static const struct mvebu_mbus_mapping kirkwood_map[] = {
 	{},
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 };
 
 static const struct mvebu_mbus_soc_data kirkwood_mbus_data = {
@@ -712,6 +767,7 @@ static const struct mvebu_mbus_soc_data kirkwood_mbus_data = {
 	.win_cfg_offset      = orion_mbus_win_offset,
 	.setup_cpu_target    = mvebu_mbus_default_setup_cpu_target,
 	.show_cpu_target     = mvebu_sdram_debug_show_orion,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.map                 = kirkwood_map,
 };
@@ -725,6 +781,8 @@ static const struct mvebu_mbus_mapping dove_map[] = {
 	{},
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 };
 
 static const struct mvebu_mbus_soc_data dove_mbus_data = {
@@ -733,6 +791,7 @@ static const struct mvebu_mbus_soc_data dove_mbus_data = {
 	.win_cfg_offset      = orion_mbus_win_offset,
 	.setup_cpu_target    = mvebu_mbus_dove_setup_cpu_target,
 	.show_cpu_target     = mvebu_sdram_debug_show_dove,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.map                 = dove_map,
 };
@@ -748,6 +807,8 @@ static const struct mvebu_mbus_mapping orion5x_map[] = {
 	{},
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 };
 
 /*
@@ -761,7 +822,10 @@ static const struct mvebu_mbus_soc_data orion5x_4win_mbus_data = {
 	.setup_cpu_target    = mvebu_mbus_default_setup_cpu_target,
 	.show_cpu_target     = mvebu_sdram_debug_show_orion,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.map                 = orion5x_map,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -772,6 +836,7 @@ static const struct mvebu_mbus_soc_data orion5x_2win_mbus_data = {
 	.win_cfg_offset      = orion_mbus_win_offset,
 	.setup_cpu_target    = mvebu_mbus_default_setup_cpu_target,
 	.show_cpu_target     = mvebu_sdram_debug_show_orion,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.map                 = orion5x_map,
 };
@@ -790,6 +855,8 @@ static const struct mvebu_mbus_mapping mv78xx0_map[] = {
 	{},
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 };
 
 static const struct mvebu_mbus_soc_data mv78xx0_mbus_data = {
@@ -798,6 +865,7 @@ static const struct mvebu_mbus_soc_data mv78xx0_mbus_data = {
 	.win_cfg_offset      = mv78xx0_mbus_win_offset,
 	.setup_cpu_target    = mvebu_mbus_default_setup_cpu_target,
 	.show_cpu_target     = mvebu_sdram_debug_show_orion,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.map                 = mv78xx0_map,
 };
@@ -814,6 +882,8 @@ static const struct of_device_id of_mvebu_mbus_ids[] = {
 	{ .compatible = "marvell,armadaxp-mbus",
 	  .data = &armada_xp_mbus_data, },
 =======
+=======
+>>>>>>> v3.18
 };
 
 static const struct of_device_id of_mvebu_mbus_ids[] = {
@@ -821,6 +891,9 @@ static const struct of_device_id of_mvebu_mbus_ids[] = {
 	  .data = &armada_370_xp_mbus_data, },
 	{ .compatible = "marvell,armadaxp-mbus",
 	  .data = &armada_370_xp_mbus_data, },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "marvell,kirkwood-mbus",
 	  .data = &kirkwood_mbus_data, },
@@ -842,6 +915,7 @@ static const struct of_device_id of_mvebu_mbus_ids[] = {
 /*
  * Public API of the driver
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int mvebu_mbus_add_window_remap_flags(const char *devname, phys_addr_t base,
 				      size_t size, phys_addr_t remap,
@@ -886,6 +960,8 @@ int mvebu_mbus_add_window(const char *devname, phys_addr_t base, size_t size)
 	return mvebu_mbus_add_window_remap_flags(devname, base, size,
 						 MVEBU_MBUS_NO_REMAP, 0);
 =======
+=======
+>>>>>>> v3.18
 int mvebu_mbus_add_window_remap_by_id(unsigned int target,
 				      unsigned int attribute,
 				      phys_addr_t base, size_t size,
@@ -907,6 +983,9 @@ int mvebu_mbus_add_window_by_id(unsigned int target, unsigned int attribute,
 {
 	return mvebu_mbus_add_window_remap_by_id(target, attribute, base,
 						 size, MVEBU_MBUS_NO_REMAP);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -923,7 +1002,10 @@ int mvebu_mbus_del_window(phys_addr_t base, size_t size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void mvebu_mbus_get_pcie_mem_aperture(struct resource *res)
 {
 	if (!res)
@@ -938,6 +1020,9 @@ void mvebu_mbus_get_pcie_io_aperture(struct resource *res)
 	*res = mbus_state.pcie_io_aperture;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __init int mvebu_mbus_debugfs_init(void)
 {
@@ -965,6 +1050,7 @@ static __init int mvebu_mbus_debugfs_init(void)
 }
 fs_initcall(mvebu_mbus_debugfs_init);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int __init mvebu_mbus_init(const char *soc, phys_addr_t mbuswins_phys_base,
 			   size_t mbuswins_size,
@@ -1006,6 +1092,8 @@ int __init mvebu_mbus_init(const char *soc, phys_addr_t mbuswins_phys_base,
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 static int __init mvebu_mbus_common_init(struct mvebu_mbus_state *mbus,
 					 phys_addr_t mbuswins_phys_base,
 					 size_t mbuswins_size,
@@ -1249,4 +1337,7 @@ int __init mvebu_mbus_dt_init(bool is_coherent)
 	return mbus_dt_setup(&mbus_state, np);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

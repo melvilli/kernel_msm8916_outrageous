@@ -8,11 +8,14 @@
 # Licensed under GPLv2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y				:=
 obj-m				:=
 obj-n				:=
 obj-				:=
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # core
@@ -21,7 +24,10 @@ obj-y				+= common.o
 
 obj-$(CONFIG_CPU_S3C2410)	+= s3c2410.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_S3C2410_CPUFREQ)	+= cpufreq-s3c2410.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_S3C2410_DMA)	+= dma-s3c2410.o
@@ -29,8 +35,12 @@ obj-$(CONFIG_S3C2410_PLL)	+= pll-s3c2410.o
 obj-$(CONFIG_S3C2410_PM)	+= pm-s3c2410.o sleep-s3c2410.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_CPU_S3C2412)	+= s3c2412.o clock-s3c2412.o
 obj-$(CONFIG_S3C2412_CPUFREQ)	+= cpufreq-s3c2412.o
+=======
+obj-$(CONFIG_CPU_S3C2412)	+= s3c2412.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_CPU_S3C2412)	+= s3c2412.o
 >>>>>>> v3.18
@@ -38,6 +48,7 @@ obj-$(CONFIG_S3C2412_DMA)	+= dma-s3c2412.o
 obj-$(CONFIG_S3C2412_PM)	+= pm-s3c2412.o
 obj-$(CONFIG_S3C2412_PM_SLEEP)	+= sleep-s3c2412.o
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 obj-$(CONFIG_CPU_S3C2416)	+= s3c2416.o clock-s3c2416.o
 obj-$(CONFIG_S3C2416_PM)	+= pm-s3c2416.o
@@ -47,19 +58,28 @@ obj-$(CONFIG_CPU_S3C2442)	+= s3c2442.o
 obj-$(CONFIG_CPU_S3C244X)	+= s3c244x.o clock-s3c244x.o
 obj-$(CONFIG_S3C2440_CPUFREQ)	+= cpufreq-s3c2440.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_CPU_S3C2416)	+= s3c2416.o
 obj-$(CONFIG_S3C2416_PM)	+= pm-s3c2416.o
 
 obj-$(CONFIG_CPU_S3C2440)	+= s3c2440.o
 obj-$(CONFIG_CPU_S3C2442)	+= s3c2442.o
 obj-$(CONFIG_CPU_S3C244X)	+= s3c244x.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_S3C2440_DMA)	+= dma-s3c2440.o
 obj-$(CONFIG_S3C2440_PLL_12000000) += pll-s3c2440-12000000.o
 obj-$(CONFIG_S3C2440_PLL_16934400) += pll-s3c2440-16934400.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_CPU_S3C2443)	+= s3c2443.o clock-s3c2443.o
+=======
+obj-$(CONFIG_CPU_S3C2443)	+= s3c2443.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_CPU_S3C2443)	+= s3c2443.o
 >>>>>>> v3.18
@@ -71,10 +91,15 @@ obj-$(CONFIG_PM)		+= pm.o irq-pm.o sleep.o
 # common code
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_S3C24XX_DCLK)	+= clock-dclk.o
 obj-$(CONFIG_S3C24XX_DMA)	+= dma.o
 
 obj-$(CONFIG_S3C2410_CLOCK)	+= clock-s3c2410.o
+=======
+obj-$(CONFIG_S3C24XX_DMA)	+= dma.o
+
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_S3C24XX_DMA)	+= dma.o
 
@@ -85,12 +110,17 @@ obj-$(CONFIG_S3C2410_IOTIMING)	+= iotiming-s3c2410.o
 obj-$(CONFIG_S3C2412_IOTIMING)	+= iotiming-s3c2412.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_S3C2443_COMMON)	+= common-s3c2443.o
 obj-$(CONFIG_S3C2443_DMA)	+= dma-s3c2443.o
 
 obj-$(CONFIG_CPU_FREQ_S3C24XX)	+= cpufreq.o
 obj-$(CONFIG_CPU_FREQ_S3C24XX_DEBUGFS) += cpufreq-debugfs.o
 
+=======
+obj-$(CONFIG_S3C2443_DMA)	+= dma-s3c2443.o
+
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_S3C2443_DMA)	+= dma-s3c2443.o
 
@@ -119,6 +149,10 @@ obj-$(CONFIG_MACH_VSTMS)		+= mach-vstms.o
 
 obj-$(CONFIG_MACH_SMDK2416)		+= mach-smdk2416.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_MACH_S3C2416_DT)		+= mach-s3c2416-dt.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MACH_S3C2416_DT)		+= mach-s3c2416-dt.o
 >>>>>>> v3.18

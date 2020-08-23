@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -82,7 +86,11 @@ acpi_status acpi_ex_system_wait_semaphore(acpi_semaphore semaphore, u16 timeout)
 		/* We must wait, so unlock the interpreter */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_ex_relinquish_interpreter();
+=======
+		acpi_ex_exit_interpreter();
+>>>>>>> v3.18
 =======
 		acpi_ex_exit_interpreter();
 >>>>>>> v3.18
@@ -96,7 +104,11 @@ acpi_status acpi_ex_system_wait_semaphore(acpi_semaphore semaphore, u16 timeout)
 		/* Reacquire the interpreter */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_ex_reacquire_interpreter();
+=======
+		acpi_ex_enter_interpreter();
+>>>>>>> v3.18
 =======
 		acpi_ex_enter_interpreter();
 >>>>>>> v3.18
@@ -136,7 +148,11 @@ acpi_status acpi_ex_system_wait_mutex(acpi_mutex mutex, u16 timeout)
 		/* We must wait, so unlock the interpreter */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_ex_relinquish_interpreter();
+=======
+		acpi_ex_exit_interpreter();
+>>>>>>> v3.18
 =======
 		acpi_ex_exit_interpreter();
 >>>>>>> v3.18
@@ -150,7 +166,11 @@ acpi_status acpi_ex_system_wait_mutex(acpi_mutex mutex, u16 timeout)
 		/* Reacquire the interpreter */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_ex_reacquire_interpreter();
+=======
+		acpi_ex_enter_interpreter();
+>>>>>>> v3.18
 =======
 		acpi_ex_enter_interpreter();
 >>>>>>> v3.18
@@ -219,7 +239,11 @@ acpi_status acpi_ex_system_do_sleep(u64 how_long)
 	/* Since this thread will sleep, we must release the interpreter */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_ex_relinquish_interpreter();
+=======
+	acpi_ex_exit_interpreter();
+>>>>>>> v3.18
 =======
 	acpi_ex_exit_interpreter();
 >>>>>>> v3.18
@@ -237,7 +261,11 @@ acpi_status acpi_ex_system_do_sleep(u64 how_long)
 	/* And now we must get the interpreter again */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_ex_reacquire_interpreter();
+=======
+	acpi_ex_enter_interpreter();
+>>>>>>> v3.18
 =======
 	acpi_ex_enter_interpreter();
 >>>>>>> v3.18

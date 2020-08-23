@@ -6,7 +6,10 @@ Audio
 NAND
 ----
 <<<<<<< HEAD
+<<<<<<< HEAD
 - Switch from spinlock to mutex
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 - Remove excess checking of parameters in calls

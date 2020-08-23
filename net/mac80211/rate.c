@@ -11,8 +11,13 @@
 #include <linux/kernel.h>
 #include <linux/rtnetlink.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/slab.h>
 #include <linux/module.h>
+=======
+#include <linux/module.h>
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 #include <linux/slab.h>
@@ -24,7 +29,11 @@
 struct rate_control_alg {
 	struct list_head list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rate_control_ops *ops;
+=======
+	const struct rate_control_ops *ops;
+>>>>>>> v3.18
 =======
 	const struct rate_control_ops *ops;
 >>>>>>> v3.18
@@ -39,7 +48,11 @@ MODULE_PARM_DESC(ieee80211_default_rc_algo,
 		 "Default rate control algorithm for mac80211 to use");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ieee80211_rate_control_register(struct rate_control_ops *ops)
+=======
+int ieee80211_rate_control_register(const struct rate_control_ops *ops)
+>>>>>>> v3.18
 =======
 int ieee80211_rate_control_register(const struct rate_control_ops *ops)
 >>>>>>> v3.18
@@ -74,7 +87,11 @@ int ieee80211_rate_control_register(const struct rate_control_ops *ops)
 EXPORT_SYMBOL(ieee80211_rate_control_register);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ieee80211_rate_control_unregister(struct rate_control_ops *ops)
+=======
+void ieee80211_rate_control_unregister(const struct rate_control_ops *ops)
+>>>>>>> v3.18
 =======
 void ieee80211_rate_control_unregister(const struct rate_control_ops *ops)
 >>>>>>> v3.18
@@ -94,17 +111,23 @@ void ieee80211_rate_control_unregister(const struct rate_control_ops *ops)
 EXPORT_SYMBOL(ieee80211_rate_control_unregister);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct rate_control_ops *
 ieee80211_try_rate_control_ops_get(const char *name)
 {
 	struct rate_control_alg *alg;
 	struct rate_control_ops *ops = NULL;
 =======
+=======
+>>>>>>> v3.18
 static const struct rate_control_ops *
 ieee80211_try_rate_control_ops_get(const char *name)
 {
 	struct rate_control_alg *alg;
 	const struct rate_control_ops *ops = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!name)
@@ -113,16 +136,22 @@ ieee80211_try_rate_control_ops_get(const char *name)
 	mutex_lock(&rate_ctrl_mutex);
 	list_for_each_entry(alg, &rate_ctrl_algs, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!strcmp(alg->ops->name, name))
 			if (try_module_get(alg->ops->module)) {
 				ops = alg->ops;
 				break;
 			}
 =======
+=======
+>>>>>>> v3.18
 		if (!strcmp(alg->ops->name, name)) {
 			ops = alg->ops;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	mutex_unlock(&rate_ctrl_mutex);
@@ -131,15 +160,21 @@ ieee80211_try_rate_control_ops_get(const char *name)
 
 /* Get the rate control algorithm. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct rate_control_ops *
 ieee80211_rate_control_ops_get(const char *name)
 {
 	struct rate_control_ops *ops;
 =======
+=======
+>>>>>>> v3.18
 static const struct rate_control_ops *
 ieee80211_rate_control_ops_get(const char *name)
 {
 	const struct rate_control_ops *ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const char *alg_name;
 
@@ -151,10 +186,13 @@ ieee80211_rate_control_ops_get(const char *name)
 
 	ops = ieee80211_try_rate_control_ops_get(alg_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ops) {
 		request_module("rc80211_%s", alg_name);
 		ops = ieee80211_try_rate_control_ops_get(alg_name);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!ops && name)
@@ -170,11 +208,14 @@ ieee80211_rate_control_ops_get(const char *name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ieee80211_rate_control_ops_put(struct rate_control_ops *ops)
 {
 	module_put(ops->module);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_MAC80211_DEBUGFS
@@ -204,17 +245,23 @@ static struct rate_control_ref *rate_control_alloc(const char *name,
 	ref = kmalloc(sizeof(struct rate_control_ref), GFP_KERNEL);
 	if (!ref)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail_ref;
 	ref->local = local;
 	ref->ops = ieee80211_rate_control_ops_get(name);
 	if (!ref->ops)
 		goto fail_ops;
 =======
+=======
+>>>>>>> v3.18
 		return NULL;
 	ref->local = local;
 	ref->ops = ieee80211_rate_control_ops_get(name);
 	if (!ref->ops)
 		goto free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_MAC80211_DEBUGFS
@@ -226,6 +273,7 @@ static struct rate_control_ref *rate_control_alloc(const char *name,
 	ref->priv = ref->ops->alloc(&local->hw, debugfsdir);
 	if (!ref->priv)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail_priv;
 	return ref;
 
@@ -235,11 +283,16 @@ fail_ops:
 	kfree(ref);
 fail_ref:
 =======
+=======
+>>>>>>> v3.18
 		goto free;
 	return ref;
 
 free:
 	kfree(ref);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NULL;
 }
@@ -254,7 +307,10 @@ static void rate_control_free(struct rate_control_ref *ctrl_ref)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ieee80211_rate_control_ops_put(ctrl_ref->ops);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(ctrl_ref);
@@ -275,7 +331,11 @@ static bool rc_no_data_or_no_ack_use_min(struct ieee80211_tx_rate_control *txrc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void rc_send_low_broadcast(s8 *idx, u32 basic_rates,
+=======
+static void rc_send_low_basicrate(s8 *idx, u32 basic_rates,
+>>>>>>> v3.18
 =======
 static void rc_send_low_basicrate(s8 *idx, u32 basic_rates,
 >>>>>>> v3.18
@@ -300,6 +360,7 @@ static void rc_send_low_basicrate(s8 *idx, u32 basic_rates,
 	/* could not find a basic rate; use original selection */
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline s8
 rate_lowest_non_cck_index(struct ieee80211_supported_band *sband,
@@ -333,6 +394,8 @@ static void __rate_control_send_low(struct ieee80211_hw *hw,
 		info->control.rates[0].idx =
 			rate_lowest_non_cck_index(sband, sta);
 =======
+=======
+>>>>>>> v3.18
 static void __rate_control_send_low(struct ieee80211_hw *hw,
 				    struct ieee80211_supported_band *sband,
 				    struct ieee80211_sta *sta,
@@ -362,6 +425,9 @@ static void __rate_control_send_low(struct ieee80211_hw *hw,
 		break;
 	}
 	WARN_ON_ONCE(i == sband->n_bitrates);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	info->control.rates[0].count =
@@ -373,7 +439,11 @@ static void __rate_control_send_low(struct ieee80211_hw *hw,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool rate_control_send_low(struct ieee80211_sta *sta,
+=======
+bool rate_control_send_low(struct ieee80211_sta *pubsta,
+>>>>>>> v3.18
 =======
 bool rate_control_send_low(struct ieee80211_sta *pubsta,
 >>>>>>> v3.18
@@ -383,6 +453,7 @@ bool rate_control_send_low(struct ieee80211_sta *pubsta,
 	struct ieee80211_tx_info *info = IEEE80211_SKB_CB(txrc->skb);
 	struct ieee80211_supported_band *sband = txrc->sband;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int mcast_rate;
 
 	if (!sta || !priv_sta || rc_no_data_or_no_ack_use_min(txrc)) {
@@ -390,6 +461,8 @@ bool rate_control_send_low(struct ieee80211_sta *pubsta,
 
 		if (!sta && txrc->bss) {
 =======
+=======
+>>>>>>> v3.18
 	struct sta_info *sta;
 	int mcast_rate;
 	bool use_basicrate = false;
@@ -399,6 +472,9 @@ bool rate_control_send_low(struct ieee80211_sta *pubsta,
 					txrc->rate_idx_mask);
 
 		if (!pubsta && txrc->bss) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			mcast_rate = txrc->bss_conf->mcast_rate[sband->band];
 			if (mcast_rate > 0) {
@@ -406,12 +482,15 @@ bool rate_control_send_low(struct ieee80211_sta *pubsta,
 				return true;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			rc_send_low_broadcast(&info->control.rates[0].idx,
 					      txrc->bss_conf->basic_rates,
 					      sband);
 		}
 =======
+=======
+>>>>>>> v3.18
 			use_basicrate = true;
 		} else if (pubsta) {
 			sta = container_of(pubsta, struct sta_info, sta);
@@ -424,6 +503,9 @@ bool rate_control_send_low(struct ieee80211_sta *pubsta,
 					      txrc->bss_conf->basic_rates,
 					      sband);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return true;
 	}
@@ -529,9 +611,12 @@ static void rate_idx_match_mask(struct ieee80211_tx_rate *rate,
 
 		/* if HT BSS, and we handle a data frame, also try HT rates */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (chan_width == NL80211_CHAN_WIDTH_20_NOHT)
 			return;
 =======
+=======
+>>>>>>> v3.18
 		switch (chan_width) {
 		case NL80211_CHAN_WIDTH_20_NOHT:
 		case NL80211_CHAN_WIDTH_5:
@@ -540,6 +625,9 @@ static void rate_idx_match_mask(struct ieee80211_tx_rate *rate,
 		default:
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		alt_rate.idx = 0;
@@ -722,6 +810,10 @@ static void rate_control_apply_mask(struct ieee80211_sub_if_data *sdata,
 	bool has_mcs_mask;
 	u32 mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 rate_flags;
+>>>>>>> v3.18
 =======
 	u32 rate_flags;
 >>>>>>> v3.18
@@ -735,13 +827,19 @@ static void rate_control_apply_mask(struct ieee80211_sub_if_data *sdata,
 	mask = sdata->rc_rateidx_mask[info->band];
 	has_mcs_mask = sdata->rc_has_mcs_mask[info->band];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	rate_flags =
 		ieee80211_chandef_rate_flags(&sdata->vif.bss_conf.chandef);
 	for (i = 0; i < sband->n_bitrates; i++)
 		if ((rate_flags & sband->bitrates[i].flags) != rate_flags)
 			mask &= ~BIT(i);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (mask == (1 << sband->n_bitrates) - 1 && !has_mcs_mask)
 		return;
@@ -799,7 +897,12 @@ void ieee80211_get_tx_rates(struct ieee80211_vif *vif,
 
 	if (dest[0].idx < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__rate_control_send_low(&sdata->local->hw, sband, sta, info);
+=======
+		__rate_control_send_low(&sdata->local->hw, sband, sta, info,
+					sdata->rc_rateidx_mask[info->band]);
+>>>>>>> v3.18
 =======
 		__rate_control_send_low(&sdata->local->hw, sband, sta, info,
 					sdata->rc_rateidx_mask[info->band]);

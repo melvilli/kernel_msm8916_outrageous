@@ -40,7 +40,11 @@ struct vbt_header {
 	u32 bdb_offset;			/**< from beginning of VBT */
 	u32 aim_offset[4];		/**< from beginning of VBT */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -70,7 +74,11 @@ struct vbios_data {
 	u8 resize_pci_bios;
 	u8 rsvd5; /* is crt already on ddc2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -113,6 +121,11 @@ struct vbios_data {
 #define BDB_LVDS_BACKLIGHT	 43
 #define BDB_LVDS_POWER		 44
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BDB_MIPI_CONFIG		 52
+#define BDB_MIPI_SEQUENCE	 53
+>>>>>>> v3.18
 =======
 #define BDB_MIPI_CONFIG		 52
 #define BDB_MIPI_SEQUENCE	 53
@@ -155,7 +168,11 @@ struct bdb_general_features {
 	u8 dp_ssc_freq:1;	/* SSC freq for PCH attached eDP */
 	u8 rsvd11:3; /* finish byte */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -219,12 +236,18 @@ struct bdb_general_features {
 #define DEVICE_PORT_DVOC	0x02
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct child_device_config {
 =======
+=======
+>>>>>>> v3.18
 /* We used to keep this struct but without any version control. We should avoid
  * using it in the future, but it should be safe to keep using it in the old
  * code. */
 struct old_child_dev_config {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 handle;
 	u16 device_type;
@@ -246,8 +269,11 @@ struct old_child_dev_config {
 	u16 extended_type;
 	u8  dvo_function;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
 =======
+=======
+>>>>>>> v3.18
 } __packed;
 
 /* This one contains field offsets that are known to be common for all BDB
@@ -275,6 +301,9 @@ union child_device_config {
 	 * checks. */
 	struct common_child_dev_config common;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct bdb_general_definitions {
@@ -303,14 +332,20 @@ struct bdb_general_definitions {
 	 *	     sizeof(child_device_config);
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct child_device_config devices[0];
 } __attribute__((packed));
 =======
+=======
+>>>>>>> v3.18
 	union child_device_config devices[0];
 } __packed;
 
 /* Mask for DRRS / Panel Channel / SSC / BLT control bits extraction */
 #define MODE_MASK		0x3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct bdb_lvds_options {
@@ -326,8 +361,11 @@ struct bdb_lvds_options {
 	u8 rsvd2:1;
 	u8 rsvd4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
 =======
+=======
+>>>>>>> v3.18
 	/* LVDS Panel channel bits stored here */
 	u32 lvds_panel_channel_bits;
 	/* LVDS SSC (Spread Spectrum Clock) bits stored here. */
@@ -341,6 +379,9 @@ struct bdb_lvds_options {
 	/* LVDS backlight control type bits stored here */
 	u32 blt_control_type_bits;
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* LFP pointer table contains entries to the struct below */
@@ -352,7 +393,11 @@ struct bdb_lvds_lfp_data_ptr {
 	u16 panel_pnp_id_offset;
 	u8 pnp_table_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -361,7 +406,11 @@ struct bdb_lvds_lfp_data_ptrs {
 	u8 lvds_entries; /* followed by one or more lvds_data_ptr structs */
 	struct bdb_lvds_lfp_data_ptr ptr[16];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -382,7 +431,11 @@ struct lvds_fp_timing {
 	u32 pfit_reg_val;
 	u16 terminator;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -414,7 +467,11 @@ struct lvds_dvo_timing {
 	u8 hsync_positive:1;
 	u8 rsvd2:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -426,7 +483,11 @@ struct lvds_pnp_id {
 	u8 mfg_week;
 	u8 mfg_year;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -436,12 +497,15 @@ struct bdb_lvds_lfp_data_entry {
 	struct lvds_dvo_timing dvo_timing;
 	struct lvds_pnp_id pnp_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
 
 struct bdb_lvds_lfp_data {
 	struct bdb_lvds_lfp_data_entry data[16];
 } __attribute__((packed));
 =======
+=======
+>>>>>>> v3.18
 } __packed;
 
 struct bdb_lvds_lfp_data {
@@ -466,6 +530,9 @@ struct bdb_lfp_backlight_data {
 	struct bdb_lfp_backlight_data_entry data[16];
 	u8 level[16];
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct aimdb_header {
@@ -475,7 +542,11 @@ struct aimdb_header {
 	u16 aimdb_header_size;
 	u16 aimdb_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -484,7 +555,11 @@ struct aimdb_block {
 	u8 aimdb_id;
 	u16 aimdb_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -499,7 +574,11 @@ struct vch_panel_data {
 	u16 graphics_fitting_offset;
 	u8 graphics_fitting_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -508,7 +587,11 @@ struct vch_bdb_22 {
 	struct aimdb_block aimdb_block;
 	struct vch_panel_data panels[16];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -528,7 +611,11 @@ struct bdb_sdvo_lvds_options {
 	u8 panel_misc_bits_3;
 	u8 panel_misc_bits_4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -578,8 +665,11 @@ struct bdb_driver_features {
 	u8 hdmi_termination;
 	u8 custom_vbt_version;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
 =======
+=======
+>>>>>>> v3.18
 	/* Driver features data block */
 	u16 rmpm_enabled:1;
 	u16 s2ddt_enabled:1;
@@ -595,6 +685,9 @@ struct bdb_driver_features {
 	u16 reserved3:4;
 	u16 pc_feature_valid:1;
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define EDP_18BPP	0
@@ -621,7 +714,11 @@ struct edp_power_seq {
 	u16 t10;
 	u16 t11_t12;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -632,7 +729,11 @@ struct edp_link_params {
 	u8 preemphasis:4;
 	u8 vswing:4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -647,7 +748,11 @@ struct bdb_edp {
 	u16 edp_s3d_feature;
 	u16 edp_t3_optimization;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -784,7 +889,10 @@ int intel_parse_bios(struct drm_device *dev);
 #define	 DEVICE_TYPE_eDP	0x78C6
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define  DEVICE_TYPE_CLASS_EXTENSION	(1 << 15)
 #define  DEVICE_TYPE_POWER_MANAGEMENT	(1 << 14)
 #define  DEVICE_TYPE_HOTPLUG_SIGNALING	(1 << 13)
@@ -819,6 +927,9 @@ int intel_parse_bios(struct drm_device *dev);
 	 DEVICE_TYPE_DIGITAL_OUTPUT | \
 	 DEVICE_TYPE_ANALOG_OUTPUT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* define the DVO port for HDMI output type */
 #define		DVO_B		1
@@ -831,7 +942,10 @@ int intel_parse_bios(struct drm_device *dev);
 #define		PORT_IDPD	9
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Possible values for the "DVO Port" field for versions >= 155: */
 #define DVO_PORT_HDMIA	0
 #define DVO_PORT_HDMIB	1
@@ -1036,5 +1150,8 @@ enum mipi_gpio_pin_index {
 	MIPI_GPIO_MAX
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _I830_BIOS_H_ */

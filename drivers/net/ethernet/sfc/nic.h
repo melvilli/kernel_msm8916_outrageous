@@ -1,8 +1,14 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2006-2011 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2006-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
@@ -23,11 +29,14 @@
 #include "efx.h"
 #include "mcdi.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "spi.h"
 
 /*
  * Falcon hardware control
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -37,6 +46,10 @@ enum {
 	EFX_REV_FALCON_B0 = 2,
 	EFX_REV_SIENA_A0 = 3,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	EFX_REV_HUNT_A0 = 4,
+>>>>>>> v3.18
 =======
 	EFX_REV_HUNT_A0 = 4,
 >>>>>>> v3.18
@@ -48,7 +61,11 @@ static inline int efx_nic_rev(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32 efx_nic_fpga_ver(struct efx_nic *efx);
+=======
+u32 efx_farch_fpga_ver(struct efx_nic *efx);
+>>>>>>> v3.18
 =======
 u32 efx_farch_fpga_ver(struct efx_nic *efx);
 >>>>>>> v3.18
@@ -60,7 +77,10 @@ static inline bool efx_nic_is_dual_func(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Read the current event from the event queue */
 static inline efx_qword_t *efx_event(struct efx_channel *channel,
 				     unsigned int index)
@@ -155,6 +175,9 @@ efx_rx_desc(struct efx_rx_queue *rx_queue, unsigned int index)
 	return ((efx_qword_t *) (rx_queue->rxd.buf.addr)) + index;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	PHY_TYPE_NONE = 0,
@@ -174,9 +197,12 @@ enum {
 	 (1 << LOOPBACK_XAUI))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FALCON_GMAC_LOOPBACKS			\
 	(1 << LOOPBACK_GMAC)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Alignment of PCIe DMA boundaries (4KB) */
@@ -185,7 +211,10 @@ enum {
 #define EFX_BUF_SIZE	EFX_PAGE_SIZE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* NIC-generic software stats */
 enum {
 	GENERIC_STAT_rx_noskb_drops,
@@ -193,6 +222,9 @@ enum {
 	GENERIC_STAT_COUNT
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct falcon_board_type - board operations and type information
@@ -233,6 +265,7 @@ struct falcon_board {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct falcon_nic_data - Falcon NIC state
  * @pci_dev2: Secondary function of Falcon A
  * @board: Board state and functions
@@ -241,6 +274,8 @@ struct falcon_board {
  * @stats_timer: A timer for regularly fetching MAC statistics.
  * @stats_dma_done: Pointer to the flag which indicates DMA completion.
 =======
+=======
+>>>>>>> v3.18
  * struct falcon_spi_device - a Falcon SPI (Serial Peripheral Interface) device
  * @device_id:		Controller's id for the device
  * @size:		Size (in bytes)
@@ -331,6 +366,9 @@ enum {
  * @stats_disable_count: Nest count for disabling statistics fetches
  * @stats_pending: Is there a pending DMA of MAC statistics.
  * @stats_timer: A timer for regularly fetching MAC statistics.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @spi_flash: SPI flash device
  * @spi_eeprom: SPI EEPROM device
@@ -342,6 +380,7 @@ struct falcon_nic_data {
 	struct pci_dev *pci_dev2;
 	struct falcon_board board;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int stats_disable_count;
 	bool stats_pending;
 	struct timer_list stats_timer;
@@ -349,12 +388,17 @@ struct falcon_nic_data {
 	struct efx_spi_device spi_flash;
 	struct efx_spi_device spi_eeprom;
 =======
+=======
+>>>>>>> v3.18
 	u64 stats[FALCON_STAT_COUNT];
 	unsigned int stats_disable_count;
 	bool stats_pending;
 	struct timer_list stats_timer;
 	struct falcon_spi_device spi_flash;
 	struct falcon_spi_device spi_eeprom;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mutex spi_lock;
 	struct mutex mdio_lock;
@@ -367,6 +411,7 @@ static inline struct falcon_board *falcon_board(struct efx_nic *efx)
 	return &data->board;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * struct siena_nic_data - Siena NIC state
@@ -392,6 +437,8 @@ static inline struct efx_mcdi_mon *efx_mcdi_mon(struct efx_nic *efx)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 enum {
 	SIENA_STAT_tx_bytes = GENERIC_STAT_COUNT,
 	SIENA_STAT_tx_good_bytes,
@@ -567,6 +614,9 @@ struct efx_ef10_nic_data {
 	bool must_check_datapath_caps;
 	u32 datapath_caps;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -614,6 +664,7 @@ static inline unsigned int efx_vf_size(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int efx_init_sriov(void);
 extern void efx_sriov_probe(struct efx_nic *efx);
 extern int efx_sriov_init(struct efx_nic *efx);
@@ -627,6 +678,8 @@ extern void efx_sriov_reset(struct efx_nic *efx);
 extern void efx_sriov_fini(struct efx_nic *efx);
 extern void efx_fini_sriov(void);
 =======
+=======
+>>>>>>> v3.18
 int efx_init_sriov(void);
 void efx_sriov_probe(struct efx_nic *efx);
 int efx_sriov_init(struct efx_nic *efx);
@@ -639,6 +692,9 @@ void efx_sriov_flr(struct efx_nic *efx, unsigned flr);
 void efx_sriov_reset(struct efx_nic *efx);
 void efx_sriov_fini(struct efx_nic *efx);
 void efx_fini_sriov(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else
@@ -666,6 +722,7 @@ static inline void efx_fini_sriov(void) {}
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int efx_sriov_set_vf_mac(struct net_device *dev, int vf, u8 *mac);
 extern int efx_sriov_set_vf_vlan(struct net_device *dev, int vf,
 				 u16 vlan, u8 qos);
@@ -683,6 +740,8 @@ extern bool efx_ptp_is_ptp_tx(struct efx_nic *efx, struct sk_buff *skb);
 extern int efx_ptp_tx(struct efx_nic *efx, struct sk_buff *skb);
 extern void efx_ptp_event(struct efx_nic *efx, efx_qword_t *ev);
 =======
+=======
+>>>>>>> v3.18
 int efx_sriov_set_vf_mac(struct net_device *dev, int vf, u8 *mac);
 int efx_sriov_set_vf_vlan(struct net_device *dev, int vf, u16 vlan, u8 qos);
 int efx_sriov_get_vf_config(struct net_device *dev, int vf,
@@ -716,12 +775,19 @@ static inline void efx_rx_skb_attach_timestamp(struct efx_channel *channel,
 }
 void efx_ptp_start_datapath(struct efx_nic *efx);
 void efx_ptp_stop_datapath(struct efx_nic *efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern const struct efx_nic_type falcon_a1_nic_type;
 extern const struct efx_nic_type falcon_b0_nic_type;
 extern const struct efx_nic_type siena_a0_nic_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct efx_nic_type efx_hunt_a0_nic_type;
+>>>>>>> v3.18
 =======
 extern const struct efx_nic_type efx_hunt_a0_nic_type;
 >>>>>>> v3.18
@@ -733,6 +799,7 @@ extern const struct efx_nic_type efx_hunt_a0_nic_type;
  **************************************************************************
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int falcon_probe_board(struct efx_nic *efx, u16 revision_info);
 
@@ -767,6 +834,8 @@ extern bool falcon_xmac_check_fault(struct efx_nic *efx);
 extern int falcon_reconfigure_xmac(struct efx_nic *efx);
 extern void falcon_update_stats_xmac(struct efx_nic *efx);
 =======
+=======
+>>>>>>> v3.18
 int falcon_probe_board(struct efx_nic *efx, u16 revision_info);
 
 /* TX data path */
@@ -887,6 +956,9 @@ bool efx_farch_filter_rfs_expire_one(struct efx_nic *efx, u32 flow_id,
 void efx_farch_filter_sync_rx_mode(struct efx_nic *efx);
 
 bool efx_nic_event_present(struct efx_channel *channel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Some statistics are computed as A - B where A and B each increase
@@ -908,6 +980,7 @@ static inline void efx_update_diff_stat(u64 *stat, u64 diff)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Interrupts and test events */
 extern int efx_nic_init_interrupt(struct efx_nic *efx);
 extern void efx_nic_enable_interrupts(struct efx_nic *efx);
@@ -919,6 +992,8 @@ extern irqreturn_t efx_nic_fatal_interrupt(struct efx_nic *efx);
 extern irqreturn_t falcon_legacy_interrupt_a1(int irq, void *dev_id);
 extern void falcon_irq_ack_a1(struct efx_nic *efx);
 =======
+=======
+>>>>>>> v3.18
 /* Interrupts */
 int efx_nic_init_interrupt(struct efx_nic *efx);
 void efx_nic_irq_test_start(struct efx_nic *efx);
@@ -931,6 +1006,9 @@ void efx_farch_irq_disable_master(struct efx_nic *efx);
 irqreturn_t efx_farch_msi_interrupt(int irq, void *dev_id);
 irqreturn_t efx_farch_legacy_interrupt(int irq, void *dev_id);
 irqreturn_t efx_farch_fatal_interrupt(struct efx_nic *efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int efx_nic_event_test_irq_cpu(struct efx_channel *channel)
@@ -943,6 +1021,7 @@ static inline int efx_nic_irq_test_irq_cpu(struct efx_nic *efx)
 }
 
 /* Global Resources */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int efx_nic_flush_queues(struct efx_nic *efx);
 extern void siena_prepare_flush(struct efx_nic *efx);
@@ -1011,6 +1090,8 @@ extern void efx_generate_event(struct efx_nic *efx, unsigned int evq,
 
 extern void falcon_poll_xmac(struct efx_nic *efx);
 =======
+=======
+>>>>>>> v3.18
 int efx_nic_flush_queues(struct efx_nic *efx);
 void siena_prepare_flush(struct efx_nic *efx);
 int efx_farch_fini_dmaq(struct efx_nic *efx);
@@ -1051,6 +1132,9 @@ void efx_nic_fix_nodesc_drop_stat(struct efx_nic *efx, u64 *stat);
 
 void efx_farch_generate_event(struct efx_nic *efx, unsigned int evq,
 			      efx_qword_t *event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* EFX_NIC_H */

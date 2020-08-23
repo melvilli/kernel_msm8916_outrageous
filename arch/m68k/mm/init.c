@@ -60,7 +60,11 @@ void __init m68k_setup_node(int node)
 {
 #ifndef CONFIG_SINGLE_MEMORY_CHUNK
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mem_info *info = m68k_memory + node;
+=======
+	struct m68k_mem_info *info = m68k_memory + node;
+>>>>>>> v3.18
 =======
 	struct m68k_mem_info *info = m68k_memory + node;
 >>>>>>> v3.18
@@ -115,7 +119,11 @@ void free_initmem(void)
 {
 #ifndef CONFIG_MMU_SUN3
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 =======
 	free_initmem_default(-1);
 >>>>>>> v3.18
@@ -155,6 +163,7 @@ void __init print_memmap(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init mem_init(void)
 {
 	pg_data_t *pgdat;
@@ -188,11 +197,16 @@ void __init mem_init(void)
 
 #if defined(CONFIG_MMU) && !defined(CONFIG_SUN3) && !defined(CONFIG_COLDFIRE)
 =======
+=======
+>>>>>>> v3.18
 static inline void init_pointer_tables(void)
 {
 #if defined(CONFIG_MMU) && !defined(CONFIG_SUN3) && !defined(CONFIG_COLDFIRE)
 	int i;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* insert pointer tables allocated so far into the tablelist */
 	init_pointer_table((unsigned long)kernel_pg_dir);
@@ -206,6 +220,7 @@ static inline void init_pointer_tables(void)
 		init_pointer_table((unsigned long)zero_pgtable);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pr_info("Memory: %luk/%luk available (%dk kernel code, %dk data, %dk init)\n",
 	       nr_free_pages() << (PAGE_SHIFT-10),
@@ -214,6 +229,8 @@ static inline void init_pointer_tables(void)
 	       datapages << (PAGE_SHIFT-10),
 	       initpages << (PAGE_SHIFT-10));
 =======
+=======
+>>>>>>> v3.18
 }
 
 void __init mem_init(void)
@@ -222,6 +239,9 @@ void __init mem_init(void)
 	free_all_bootmem();
 	init_pointer_tables();
 	mem_init_print_info(NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	print_memmap();
 }
@@ -230,7 +250,11 @@ void __init mem_init(void)
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, -1, "initrd");
 >>>>>>> v3.18

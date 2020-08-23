@@ -351,6 +351,10 @@ static int amd8111_dev_probe(struct pci_dev *dev,
 {
 	struct amd8111_dev_info *dev_info = &amd8111_devices[id->driver_data];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret = -ENODEV;
+>>>>>>> v3.18
 =======
 	int ret = -ENODEV;
 >>>>>>> v3.18
@@ -364,23 +368,33 @@ static int amd8111_dev_probe(struct pci_dev *dev,
 			PCI_VENDOR_ID_AMD, dev_info->err_dev,
 			dev_info->ctl_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENODEV;
 	}
 
 	if (pci_enable_device(dev_info->dev)) {
 		pci_dev_put(dev_info->dev);
 =======
+=======
+>>>>>>> v3.18
 		goto err;
 	}
 
 	if (pci_enable_device(dev_info->dev)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printk(KERN_ERR "failed to enable:"
 			"vendor %x, device %x, name %s\n",
 			PCI_VENDOR_ID_AMD, dev_info->err_dev,
 			dev_info->ctl_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENODEV;
+=======
+		goto err_dev_put;
+>>>>>>> v3.18
 =======
 		goto err_dev_put;
 >>>>>>> v3.18
@@ -397,13 +411,19 @@ static int amd8111_dev_probe(struct pci_dev *dev,
 					   NULL, 0, 0,
 					   NULL, 0, dev_info->edac_idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev_info->edac_dev)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	if (!dev_info->edac_dev) {
 		ret = -ENOMEM;
 		goto err_dev_put;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_info->edac_dev->pvt_info = dev_info;
@@ -422,8 +442,12 @@ static int amd8111_dev_probe(struct pci_dev *dev,
 		printk(KERN_ERR "failed to add edac_dev for %s\n",
 			dev_info->ctl_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		edac_device_free_ctl_info(dev_info->edac_dev);
 		return -ENODEV;
+=======
+		goto err_edac_free_ctl;
+>>>>>>> v3.18
 =======
 		goto err_edac_free_ctl;
 >>>>>>> v3.18
@@ -436,7 +460,10 @@ static int amd8111_dev_probe(struct pci_dev *dev,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 err_edac_free_ctl:
 	edac_device_free_ctl_info(dev_info->edac_dev);
@@ -444,6 +471,9 @@ err_dev_put:
 	pci_dev_put(dev_info->dev);
 err:
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -474,6 +504,10 @@ static int amd8111_pci_probe(struct pci_dev *dev,
 {
 	struct amd8111_pci_info *pci_info = &amd8111_pcis[id->driver_data];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret = -ENODEV;
+>>>>>>> v3.18
 =======
 	int ret = -ENODEV;
 >>>>>>> v3.18
@@ -487,23 +521,33 @@ static int amd8111_pci_probe(struct pci_dev *dev,
 			PCI_VENDOR_ID_AMD, pci_info->err_dev,
 			pci_info->ctl_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENODEV;
 	}
 
 	if (pci_enable_device(pci_info->dev)) {
 		pci_dev_put(pci_info->dev);
 =======
+=======
+>>>>>>> v3.18
 		goto err;
 	}
 
 	if (pci_enable_device(pci_info->dev)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printk(KERN_ERR "failed to enable:"
 			"vendor %x, device %x, name %s\n",
 			PCI_VENDOR_ID_AMD, pci_info->err_dev,
 			pci_info->ctl_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENODEV;
+=======
+		goto err_dev_put;
+>>>>>>> v3.18
 =======
 		goto err_dev_put;
 >>>>>>> v3.18
@@ -517,13 +561,19 @@ static int amd8111_pci_probe(struct pci_dev *dev,
 	pci_info->edac_idx = edac_pci_alloc_index();
 	pci_info->edac_dev = edac_pci_alloc_ctl_info(0, pci_info->ctl_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pci_info->edac_dev)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	if (!pci_info->edac_dev) {
 		ret = -ENOMEM;
 		goto err_dev_put;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pci_info->edac_dev->pvt_info = pci_info;
@@ -542,8 +592,12 @@ static int amd8111_pci_probe(struct pci_dev *dev,
 		printk(KERN_ERR "failed to add edac_pci for %s\n",
 			pci_info->ctl_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		edac_pci_free_ctl_info(pci_info->edac_dev);
 		return -ENODEV;
+=======
+		goto err_edac_free_ctl;
+>>>>>>> v3.18
 =======
 		goto err_edac_free_ctl;
 >>>>>>> v3.18
@@ -556,7 +610,10 @@ static int amd8111_pci_probe(struct pci_dev *dev,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 err_edac_free_ctl:
 	edac_pci_free_ctl_info(pci_info->edac_dev);
@@ -564,6 +621,9 @@ err_dev_put:
 	pci_dev_put(pci_info->dev);
 err:
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

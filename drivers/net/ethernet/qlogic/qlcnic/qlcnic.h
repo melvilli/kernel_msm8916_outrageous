@@ -21,15 +21,21 @@
 #include <linux/skbuff.h>
 #include <linux/firmware.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/ethtool.h>
 #include <linux/mii.h>
 #include <linux/timer.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/ethtool.h>
 #include <linux/mii.h>
 #include <linux/timer.h>
 #include <linux/irq.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/vmalloc.h>
@@ -43,18 +49,24 @@
 #include "qlcnic_hw.h"
 #include "qlcnic_83xx_hw.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define _QLCNIC_LINUX_MAJOR 5
 #define _QLCNIC_LINUX_MINOR 2
 #define _QLCNIC_LINUX_SUBVERSION 42
 #define QLCNIC_LINUX_VERSIONID  "5.2.42"
 =======
+=======
+>>>>>>> v3.18
 #include "qlcnic_dcb.h"
 
 #define _QLCNIC_LINUX_MAJOR 5
 #define _QLCNIC_LINUX_MINOR 3
 #define _QLCNIC_LINUX_SUBVERSION 62
 #define QLCNIC_LINUX_VERSIONID  "5.3.62"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define QLCNIC_DRV_IDC_VER  0x01
 #define QLCNIC_DRIVER_VERSION  ((_QLCNIC_LINUX_MAJOR << 16) |\
@@ -115,7 +127,10 @@
 							+ MGMT_CMD_DESC_RESV)
 #define QLCNIC_MAX_TX_TIMEOUTS	2
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* Driver will use 1 Tx ring in INT-x/MSI/SRIOV mode. */
 #define QLCNIC_SINGLE_RING		1
@@ -139,6 +154,9 @@ enum qlcnic_queue_type {
 #define QLC_DEFAULT_VNIC_COUNT	8
 #define QLC_84XX_VNIC_COUNT	16
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Following are the states of the Phantom. Phantom will set them and
@@ -189,12 +207,15 @@ struct cmd_desc_type0 {
 	__le64 addr_buffer2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le16 reference_handle;
 	__le16 mss;
 	u8 port_ctxid;		/* 7:4 ctxid 3:0 port */
 	u8 total_hdr_length;	/* LSO only : MAC+IP+TCP Hdr size */
 	__le16 conn_id;		/* IPSec offoad only */
 =======
+=======
+>>>>>>> v3.18
 	__le16 encap_descr;	/* 15:10 offset of outer L3 header,
 				 * 9:6 number of 32bit words in outer L3 header,
 				 * 5 offload outer L4 checksum,
@@ -209,6 +230,9 @@ struct cmd_desc_type0 {
 	u8 hdr_length;		/* LSO only : MAC+IP+TCP Hdr size */
 	u8 outer_hdr_length;	/* Encapsulation only */
 	u8 rsvd1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	__le64 addr_buffer3;
@@ -220,7 +244,13 @@ struct cmd_desc_type0 {
 
 	u8 eth_addr[ETH_ALEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le16 vlan_TCI;
+=======
+	__le16 vlan_TCI;	/* In case of  encapsulation,
+				 * this is for outer VLAN
+				 */
+>>>>>>> v3.18
 =======
 	__le16 vlan_TCI;	/* In case of  encapsulation,
 				 * this is for outer VLAN
@@ -299,7 +329,11 @@ struct qlcnic_fdt {
 	u16	unused;
 	u8	model[16];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16	mfg_id;
+=======
+	u8	mfg_id;
+>>>>>>> v3.18
 =======
 	u8	mfg_id;
 >>>>>>> v3.18
@@ -373,7 +407,10 @@ extern int qlcnic_use_msi_x;
 extern int qlcnic_auto_fw_reset;
 extern int qlcnic_load_fw_file;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int qlcnic_config_npars;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -422,6 +459,10 @@ struct qlcnic_rx_buffer {
 #define QLCNIC_INTR_COAL_TYPE_RX		1
 #define QLCNIC_INTR_COAL_TYPE_TX		2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLCNIC_INTR_COAL_TYPE_RX_TX		3
+>>>>>>> v3.18
 =======
 #define QLCNIC_INTR_COAL_TYPE_RX_TX		3
 >>>>>>> v3.18
@@ -435,7 +476,11 @@ struct qlcnic_rx_buffer {
 #define QLCNIC_INTR_DEFAULT			0x04
 #define QLCNIC_CONFIG_INTR_COALESCE		3
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QLCNIC_DEV_INFO_SIZE			1
+=======
+#define QLCNIC_DEV_INFO_SIZE			2
+>>>>>>> v3.18
 =======
 #define QLCNIC_DEV_INFO_SIZE			2
 >>>>>>> v3.18
@@ -452,7 +497,11 @@ struct qlcnic_nic_intr_coalesce {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct qlcnic_dump_template_hdr {
+=======
+struct qlcnic_83xx_dump_template_hdr {
+>>>>>>> v3.18
 =======
 struct qlcnic_83xx_dump_template_hdr {
 >>>>>>> v3.18
@@ -473,6 +522,7 @@ struct qlcnic_83xx_dump_template_hdr {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct qlcnic_fw_dump {
 	u8	clr;	/* flag to indicate if dump is cleared */
 	u8	enable; /* enable/disable dump */
@@ -480,6 +530,8 @@ struct qlcnic_fw_dump {
 	void	*data;	/* dump data area */
 	struct	qlcnic_dump_template_hdr *tmpl_hdr;
 =======
+=======
+>>>>>>> v3.18
 struct qlcnic_82xx_dump_template_hdr {
 	u32	type;
 	u32	offset;
@@ -518,6 +570,9 @@ struct qlcnic_fw_dump {
 	u32	version;
 	u32	num_entries;
 	u32	offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -551,8 +606,14 @@ struct qlcnic_hardware_context {
 	u8 num_msix;
 	u8 nic_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char diag_cnt;
 
+=======
+	int diag_cnt;
+
+	u16 max_uc_count;
+>>>>>>> v3.18
 =======
 	int diag_cnt;
 
@@ -574,11 +635,14 @@ struct qlcnic_hardware_context {
 	u16 max_mtu;
 	u32 msg_enable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 act_pci_func;
 
 	u32 capabilities;
 	u32 capabilities2;
 =======
+=======
+>>>>>>> v3.18
 	u16 total_nic_func;
 	u16 max_pci_func;
 	u32 max_vnic_func;
@@ -586,6 +650,9 @@ struct qlcnic_hardware_context {
 
 	u32 capabilities;
 	u32 extra_capability[3];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 temp;
 	u32 int_vec_bit;
@@ -598,7 +665,11 @@ struct qlcnic_hardware_context {
 	struct qlc_83xx_reset reset;
 	struct qlc_83xx_idc idc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qlc_83xx_fw_info fw_info;
+=======
+	struct qlc_83xx_fw_info *fw_info;
+>>>>>>> v3.18
 =======
 	struct qlc_83xx_fw_info *fw_info;
 >>>>>>> v3.18
@@ -609,8 +680,11 @@ struct qlcnic_hardware_context {
 	u32 mbox_aen[QLC_83XX_MBX_AEN_CNT];
 	u32 mbox_reg[4];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t mbx_lock;
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_mailbox *mailbox;
 	u8 extend_lb_time;
 	u8 phys_port_id[ETH_ALEN];
@@ -619,6 +693,9 @@ struct qlcnic_hardware_context {
 	struct device *hwmon_dev;
 	u32 post_mode;
 	bool run_post;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -635,6 +712,12 @@ struct qlcnic_adapter_stats {
 	u64  lrobytes;
 	u64  lso_frames;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64  encap_lso_frames;
+	u64  encap_tx_csummed;
+	u64  encap_rx_csummed;
+>>>>>>> v3.18
 =======
 	u64  encap_lso_frames;
 	u64  encap_tx_csummed;
@@ -674,6 +757,10 @@ struct qlcnic_host_sds_ring {
 	void __iomem *crb_sts_consumer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct qlcnic_host_tx_ring *tx_ring;
+>>>>>>> v3.18
 =======
 	struct qlcnic_host_tx_ring *tx_ring;
 >>>>>>> v3.18
@@ -690,7 +777,10 @@ struct qlcnic_host_sds_ring {
 } ____cacheline_internodealigned_in_smp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct qlcnic_tx_queue_stats {
 	u64 xmit_on;
 	u64 xmit_off;
@@ -699,6 +789,9 @@ struct qlcnic_tx_queue_stats {
 	u64 tx_bytes;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qlcnic_host_tx_ring {
 	int irq;
@@ -706,10 +799,13 @@ struct qlcnic_host_tx_ring {
 	char name[IFNAMSIZ + 12];
 	u16 ctx_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 producer;
 	u32 sw_consumer;
 	u32 num_desc;
 =======
+=======
+>>>>>>> v3.18
 
 	u32 state;
 	u32 producer;
@@ -718,6 +814,9 @@ struct qlcnic_host_tx_ring {
 
 	struct qlcnic_tx_queue_stats tx_stats;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void __iomem *crb_cmd_producer;
 	struct cmd_desc_type0 *desc_head;
@@ -730,6 +829,11 @@ struct qlcnic_host_tx_ring {
 	dma_addr_t hw_cons_phys_addr;
 	struct netdev_queue *txq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Lock to protect Tx descriptors cleanup */
+	spinlock_t tx_clean_lock;
+>>>>>>> v3.18
 =======
 	/* Lock to protect Tx descriptors cleanup */
 	spinlock_t tx_clean_lock;
@@ -749,7 +853,10 @@ struct qlcnic_recv_context {
 	u16 context_id;
 	u16 virt_port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -797,6 +904,10 @@ struct qlcnic_recv_context {
 #define QLCNIC_CAP0_VALIDOFF		(1 << 11)
 #define QLCNIC_CAP0_LRO_MSS		(1 << 21)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLCNIC_CAP0_TX_MULTI		(1 << 22)
+>>>>>>> v3.18
 =======
 #define QLCNIC_CAP0_TX_MULTI		(1 << 22)
 >>>>>>> v3.18
@@ -828,7 +939,11 @@ struct qlcnic_hostrq_rds_ring {
 struct qlcnic_hostrq_rx_ctx {
 	__le64 host_rsp_dma_addr;	/* Response dma'd here */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 capabilities[4];	/* Flag bit vector */
+=======
+	__le32 capabilities[4];		/* Flag bit vector */
+>>>>>>> v3.18
 =======
 	__le32 capabilities[4];		/* Flag bit vector */
 >>>>>>> v3.18
@@ -956,14 +1071,20 @@ struct qlcnic_cardrsp_tx_ctx {
 #define QLCNIC_MAC_VLAN_DEL	4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct qlcnic_mac_list_s {
 	struct list_head list;
 	uint8_t mac_addr[ETH_ALEN+2];
 =======
+=======
+>>>>>>> v3.18
 struct qlcnic_mac_vlan_list {
 	struct list_head list;
 	uint8_t mac_addr[ETH_ALEN+2];
 	u16 vlan_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -983,6 +1104,10 @@ struct qlcnic_mac_vlan_list {
 #define QLCNIC_ILB_MODE		0x1
 #define QLCNIC_ELB_MODE		0x2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLCNIC_LB_MODE_MASK	0x3
+>>>>>>> v3.18
 =======
 #define QLCNIC_LB_MODE_MASK	0x3
 >>>>>>> v3.18
@@ -1014,6 +1139,10 @@ struct qlcnic_mac_vlan_list {
 #define QLCNIC_C2H_OPCODE_CONFIG_LOOPBACK		0x8f
 #define QLCNIC_C2H_OPCODE_GET_LINKEVENT_RESPONSE	0x8D
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLCNIC_C2H_OPCODE_GET_DCB_AEN			0x90
+>>>>>>> v3.18
 =======
 #define QLCNIC_C2H_OPCODE_GET_DCB_AEN			0x90
 >>>>>>> v3.18
@@ -1030,6 +1159,10 @@ struct qlcnic_mac_vlan_list {
 #define QLCNIC_FW_CAPABILITY_FVLANTX		BIT_9
 #define QLCNIC_FW_CAPABILITY_HW_LRO		BIT_10
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLCNIC_FW_CAPABILITY_2_MULTI_TX		BIT_4
+>>>>>>> v3.18
 =======
 #define QLCNIC_FW_CAPABILITY_2_MULTI_TX		BIT_4
 >>>>>>> v3.18
@@ -1039,8 +1172,11 @@ struct qlcnic_mac_vlan_list {
 #define QLCNIC_FW_CAPABILITY_2_LRO_MAX_TCP_SEG	BIT_2
 #define QLCNIC_FW_CAP2_HW_LRO_IPV6		BIT_3
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QLCNIC_FW_CAPABILITY_2_OCBB		BIT_5
 =======
+=======
+>>>>>>> v3.18
 #define QLCNIC_FW_CAPABILITY_SET_DRV_VER	BIT_5
 #define QLCNIC_FW_CAPABILITY_2_BEACON		BIT_7
 #define QLCNIC_FW_CAPABILITY_2_PER_PORT_ESWITCH_CFG	BIT_9
@@ -1048,6 +1184,9 @@ struct qlcnic_mac_vlan_list {
 #define QLCNIC_83XX_FW_CAPAB_ENCAP_RX_OFFLOAD	BIT_0
 #define QLCNIC_83XX_FW_CAPAB_ENCAP_TX_OFFLOAD	BIT_1
 #define QLCNIC_83XX_FW_CAPAB_ENCAP_CKO_OFFLOAD	BIT_4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* module types */
@@ -1142,7 +1281,10 @@ struct qlcnic_ipaddr {
 #define QLCNIC_TX_INTR_SHARED		0x10000
 #define QLCNIC_APP_CHANGED_FLAGS	0x20000
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define QLCNIC_HAS_PHYS_PORT_ID		0x40000
 #define QLCNIC_TSS_RSS			0x80000
 
@@ -1153,6 +1295,9 @@ struct qlcnic_ipaddr {
 
 #define QLCNIC_VLAN_FILTERING		0x800000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define QLCNIC_IS_MSI_FAMILY(adapter) \
 	((adapter)->flags & (QLCNIC_MSI_ENABLED | QLCNIC_MSIX_ENABLED))
@@ -1160,21 +1305,30 @@ struct qlcnic_ipaddr {
 	((adapter)->ahw->capabilities & QLCNIC_FW_CAPABILITY_TSO)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QLCNIC_DEF_NUM_STS_DESC_RINGS	4
 =======
+=======
+>>>>>>> v3.18
 #define QLCNIC_BEACON_EANBLE		0xC
 #define QLCNIC_BEACON_DISABLE		0xD
 
 #define QLCNIC_BEACON_ON		2
 #define QLCNIC_BEACON_OFF		0
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define QLCNIC_MSIX_TBL_SPACE		8192
 #define QLCNIC_PCI_REG_MSIX_TBL 	0x44
 #define QLCNIC_MSIX_TBL_PGSIZE		4096
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QLCNIC_NETDEV_WEIGHT	128
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define QLCNIC_ADAPTER_UP_MAGIC 777
@@ -1188,16 +1342,22 @@ struct qlcnic_ipaddr {
 #define __QLCNIC_LED_ENABLE		7
 #define __QLCNIC_ELB_INPROGRESS		8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __QLCNIC_SRIOV_ENABLE		10
 #define __QLCNIC_SRIOV_CAPABLE		11
 #define __QLCNIC_MBX_POLL_ENABLE	12
 =======
+=======
+>>>>>>> v3.18
 #define __QLCNIC_MULTI_TX_UNIQUE	9
 #define __QLCNIC_SRIOV_ENABLE		10
 #define __QLCNIC_SRIOV_CAPABLE		11
 #define __QLCNIC_MBX_POLL_ENABLE	12
 #define __QLCNIC_DIAG_MODE		13
 #define __QLCNIC_MAINTENANCE_MODE	16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define QLCNIC_INTERRUPT_TEST		1
@@ -1209,12 +1369,15 @@ struct qlcnic_ipaddr {
 #define QLCNIC_LB_MAX_FILTERS	64
 #define QLCNIC_LB_BUCKET_SIZE	32
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* QLCNIC Driver Error Code */
 #define QLCNIC_FW_NOT_RESPOND		51
 #define QLCNIC_TEST_IN_PROGRESS		52
 #define QLCNIC_UNDEFINED_ERROR		53
 #define QLCNIC_LB_CABLE_NOT_CONN	54
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define QLCNIC_ILB_MAX_RCV_LOOP	10
@@ -1234,7 +1397,10 @@ struct qlcnic_filter_hash {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Mailbox specific data structures */
 struct qlcnic_mailbox {
 	struct workqueue_struct	*work_q;
@@ -1250,6 +1416,9 @@ struct qlcnic_mailbox {
 	u32			num_cmds;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qlcnic_adapter {
 	struct qlcnic_hardware_context *ahw;
@@ -1262,7 +1431,10 @@ struct qlcnic_adapter {
 	u32 flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int max_drv_tx_rings;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 num_txd;
@@ -1273,8 +1445,11 @@ struct qlcnic_adapter {
 
 	u8 max_rds_rings;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 max_sds_rings;
 =======
+=======
+>>>>>>> v3.18
 
 	u8 max_sds_rings; /* max sds rings supported by adapter */
 	u8 max_tx_rings;  /* max tx rings supported by adapter */
@@ -1285,6 +1460,9 @@ struct qlcnic_adapter {
 	u8 drv_tss_rings; /* tss ring input */
 	u8 drv_rss_rings; /* rss ring input */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 rx_csum;
 	u8 portnum;
@@ -1312,6 +1490,10 @@ struct qlcnic_adapter {
 	bool drv_mac_learn;
 	bool fdb_mac_learn;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool rx_mac_learn;
+>>>>>>> v3.18
 =======
 	bool rx_mac_learn;
 >>>>>>> v3.18
@@ -1335,6 +1517,10 @@ struct qlcnic_adapter {
 	struct delayed_work idc_aen_work;
 	struct delayed_work mbx_poll_work;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct qlcnic_dcb *dcb;
+>>>>>>> v3.18
 =======
 	struct qlcnic_dcb *dcb;
 >>>>>>> v3.18
@@ -1344,7 +1530,10 @@ struct qlcnic_adapter {
 	struct list_head vf_mc_list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t tx_clean_lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spinlock_t mac_learn_lock;
@@ -1459,6 +1648,10 @@ struct qlcnic_pci_info {
 
 struct qlcnic_npar_info {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool	eswitch_status;
+>>>>>>> v3.18
 =======
 	bool	eswitch_status;
 >>>>>>> v3.18
@@ -1477,6 +1670,10 @@ struct qlcnic_npar_info {
 	u8	offload_flags;
 	u8      pci_func;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8      mac[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	u8      mac[ETH_ALEN];
 >>>>>>> v3.18
@@ -1503,6 +1700,10 @@ struct qlcnic_eswitch {
 
 #define MAX_BW			100	/* % of link speed */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MIN_BW			1	/* % of link speed */
+>>>>>>> v3.18
 =======
 #define MIN_BW			1	/* % of link speed */
 >>>>>>> v3.18
@@ -1521,7 +1722,11 @@ struct qlcnic_pci_func_cfg {
 	u8	pci_func;
 	u8	func_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	def_mac_addr[6];
+=======
+	u8	def_mac_addr[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	u8	def_mac_addr[ETH_ALEN];
 >>>>>>> v3.18
@@ -1694,7 +1899,10 @@ struct qlcnic_esw_statistics {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QLCNIC_DUMP_MASK_DEF		0x1f
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define QLCNIC_FORCE_FW_DUMP_KEY	0xdeadfeed
@@ -1711,10 +1919,13 @@ struct _cdrp_cmd {
 
 struct qlcnic_cmd_args {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct _cdrp_cmd req;
 	struct _cdrp_cmd rsp;
 	int op_type;
 =======
+=======
+>>>>>>> v3.18
 	struct completion	completion;
 	struct list_head	list;
 	struct _cdrp_cmd	req;
@@ -1729,6 +1940,9 @@ struct qlcnic_cmd_args {
 	u32			*hdr;	/* Back channel message header */
 	u32			*pay;	/* Back channel message payload */
 	u8			func_num;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1737,8 +1951,11 @@ int qlcnic_fw_cmd_set_port(struct qlcnic_adapter *adapter, u32 config);
 int qlcnic_pci_mem_write_2M(struct qlcnic_adapter *, u64 off, u64 data);
 int qlcnic_pci_mem_read_2M(struct qlcnic_adapter *, u64 off, u64 *data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qlcnic_pci_camqm_read_2M(struct qlcnic_adapter *, u64, u64 *);
 void qlcnic_pci_camqm_write_2M(struct qlcnic_adapter *, u64, u64);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1746,8 +1963,13 @@ void qlcnic_pci_camqm_write_2M(struct qlcnic_adapter *, u64, u64);
 	(((addr) < (high)) && ((addr) >= (low)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QLCRD32(adapter, off) \
 	(adapter->ahw->hw_ops->read_reg)(adapter, off)
+=======
+#define QLCRD32(adapter, off, err) \
+	(adapter->ahw->hw_ops->read_reg)(adapter, off, err)
+>>>>>>> v3.18
 =======
 #define QLCRD32(adapter, off, err) \
 	(adapter->ahw->hw_ops->read_reg)(adapter, off, err)
@@ -1782,16 +2004,22 @@ void qlcnic_pcie_sem_unlock(struct qlcnic_adapter *, int);
 #define MAX_CTL_CHECK 1000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_wol_supported(struct qlcnic_adapter *adapter);
 void qlcnic_prune_lb_filters(struct qlcnic_adapter *adapter);
 void qlcnic_delete_lb_filters(struct qlcnic_adapter *adapter);
 int qlcnic_dump_fw(struct qlcnic_adapter *);
 =======
+=======
+>>>>>>> v3.18
 void qlcnic_prune_lb_filters(struct qlcnic_adapter *adapter);
 void qlcnic_delete_lb_filters(struct qlcnic_adapter *adapter);
 int qlcnic_dump_fw(struct qlcnic_adapter *);
 int qlcnic_enable_fw_dump_state(struct qlcnic_adapter *);
 bool qlcnic_check_fw_dump_state(struct qlcnic_adapter *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Functions from qlcnic_init.c */
@@ -1821,7 +2049,12 @@ void qlcnic_fw_destroy_ctx(struct qlcnic_adapter *adapter);
 void qlcnic_reset_rx_buffers_list(struct qlcnic_adapter *adapter);
 void qlcnic_release_rx_buffers(struct qlcnic_adapter *adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qlcnic_release_tx_buffers(struct qlcnic_adapter *adapter);
+=======
+void qlcnic_release_tx_buffers(struct qlcnic_adapter *,
+			       struct qlcnic_host_tx_ring *);
+>>>>>>> v3.18
 =======
 void qlcnic_release_tx_buffers(struct qlcnic_adapter *,
 			       struct qlcnic_host_tx_ring *);
@@ -1831,6 +2064,7 @@ int qlcnic_check_fw_status(struct qlcnic_adapter *adapter);
 void qlcnic_watchdog_task(struct work_struct *work);
 void qlcnic_post_rx_buffers(struct qlcnic_adapter *adapter,
 		struct qlcnic_host_rds_ring *rds_ring, u8 ring_id);
+<<<<<<< HEAD
 <<<<<<< HEAD
 int qlcnic_process_rcv_ring(struct qlcnic_host_sds_ring *sds_ring, int max);
 void qlcnic_set_multi(struct net_device *netdev);
@@ -1842,6 +2076,8 @@ void qlcnic_82xx_free_mac_list(struct qlcnic_adapter *adapter);
 int qlcnic_fw_cmd_set_mtu(struct qlcnic_adapter *adapter, int mtu);
 int qlcnic_fw_cmd_set_drv_version(struct qlcnic_adapter *);
 =======
+=======
+>>>>>>> v3.18
 void qlcnic_set_multi(struct net_device *netdev);
 int qlcnic_nic_add_mac(struct qlcnic_adapter *, const u8 *, u16);
 int qlcnic_nic_del_mac(struct qlcnic_adapter *, const u8 *);
@@ -1850,6 +2086,9 @@ int qlcnic_82xx_read_phys_port_id(struct qlcnic_adapter *);
 
 int qlcnic_fw_cmd_set_mtu(struct qlcnic_adapter *adapter, int mtu);
 int qlcnic_fw_cmd_set_drv_version(struct qlcnic_adapter *, u32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int qlcnic_change_mtu(struct net_device *netdev, int new_mtu);
 netdev_features_t qlcnic_fix_features(struct net_device *netdev,
@@ -1857,7 +2096,10 @@ netdev_features_t qlcnic_fix_features(struct net_device *netdev,
 int qlcnic_set_features(struct net_device *netdev, netdev_features_t features);
 int qlcnic_config_bridged_mode(struct qlcnic_adapter *adapter, u32 enable);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_send_lro_cleanup(struct qlcnic_adapter *adapter);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void qlcnic_update_cmd_producer(struct qlcnic_host_tx_ring *);
@@ -1865,6 +2107,7 @@ void qlcnic_update_cmd_producer(struct qlcnic_host_tx_ring *);
 /* Functions from qlcnic_ethtool.c */
 int qlcnic_check_loopback_buff(unsigned char *, u8 []);
 int qlcnic_do_lb_test(struct qlcnic_adapter *, u8);
+<<<<<<< HEAD
 <<<<<<< HEAD
 int qlcnic_loopback_test(struct net_device *, u8);
 
@@ -1878,6 +2121,8 @@ int qlcnic_validate_max_rss(struct qlcnic_adapter *, __u32);
 void qlcnic_alloc_lb_filters_mem(struct qlcnic_adapter *adapter);
 int qlcnic_enable_msix(struct qlcnic_adapter *, u32);
 =======
+=======
+>>>>>>> v3.18
 
 /* Functions from qlcnic_main.c */
 int qlcnic_reset_context(struct qlcnic_adapter *);
@@ -1891,6 +2136,9 @@ int qlcnic_validate_rings(struct qlcnic_adapter *, __u32, int);
 void qlcnic_alloc_lb_filters_mem(struct qlcnic_adapter *adapter);
 int qlcnic_enable_msix(struct qlcnic_adapter *, u32);
 void qlcnic_set_drv_version(struct qlcnic_adapter *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*  eSwitch management functions */
@@ -1915,6 +2163,7 @@ void qlcnic_advert_link_change(struct qlcnic_adapter *, int);
 void qlcnic_free_tx_rings(struct qlcnic_adapter *);
 int qlcnic_alloc_tx_rings(struct qlcnic_adapter *, struct net_device *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void qlcnic_create_sysfs_entries(struct qlcnic_adapter *adapter);
 void qlcnic_remove_sysfs_entries(struct qlcnic_adapter *adapter);
@@ -1924,12 +2173,17 @@ void qlcnic_82xx_add_sysfs(struct qlcnic_adapter *adapter);
 void qlcnic_82xx_remove_sysfs(struct qlcnic_adapter *adapter);
 int qlcnic_82xx_get_settings(struct qlcnic_adapter *, struct ethtool_cmd *);
 =======
+=======
+>>>>>>> v3.18
 void qlcnic_dump_mbx(struct qlcnic_adapter *, struct qlcnic_cmd_args *);
 
 void qlcnic_create_sysfs_entries(struct qlcnic_adapter *adapter);
 void qlcnic_remove_sysfs_entries(struct qlcnic_adapter *adapter);
 void qlcnic_82xx_add_sysfs(struct qlcnic_adapter *adapter);
 void qlcnic_82xx_remove_sysfs(struct qlcnic_adapter *adapter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int qlcnicvf_config_bridged_mode(struct qlcnic_adapter *, u32);
@@ -1939,7 +2193,11 @@ void qlcnic_set_vlan_config(struct qlcnic_adapter *,
 void qlcnic_set_eswitch_port_features(struct qlcnic_adapter *,
 				      struct qlcnic_esw_func_cfg *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+int qlcnic_setup_tss_rss_intr(struct qlcnic_adapter  *);
+>>>>>>> v3.18
 =======
 int qlcnic_setup_tss_rss_intr(struct qlcnic_adapter  *);
 >>>>>>> v3.18
@@ -1958,7 +2216,10 @@ int qlcnic_set_default_offload_settings(struct qlcnic_adapter *);
 int qlcnic_reset_npar_config(struct qlcnic_adapter *);
 int qlcnic_set_eswitch_port_config(struct qlcnic_adapter *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qlcnic_add_lb_filter(struct qlcnic_adapter *, struct sk_buff *, int, u16);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int qlcnic_83xx_configure_opmode(struct qlcnic_adapter *adapter);
@@ -1967,13 +2228,19 @@ int qlcnic_setup_netdev(struct qlcnic_adapter *, struct net_device *, int);
 void qlcnic_set_netdev_features(struct qlcnic_adapter *,
 				struct qlcnic_esw_func_cfg *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qlcnic_sriov_vf_schedule_multi(struct net_device *);
 void qlcnic_vf_add_mc_list(struct net_device *, u16);
 =======
+=======
+>>>>>>> v3.18
 void qlcnic_sriov_vf_set_multi(struct net_device *);
 int qlcnic_is_valid_nic_func(struct qlcnic_adapter *, u8);
 int qlcnic_get_pci_func_type(struct qlcnic_adapter *, u16, u16 *, u16 *,
 			     u16 *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -2010,9 +2277,12 @@ struct qlcnic_nic_template {
 	void (*config_ipaddr)(struct qlcnic_adapter *, __be32, int);
 	irqreturn_t (*clear_legacy_intr)(struct qlcnic_adapter *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	int (*shutdown)(struct pci_dev *);
 	int (*resume)(struct qlcnic_adapter *);
 };
@@ -2032,11 +2302,15 @@ void qlcnic_83xx_reinit_mbx_work(struct qlcnic_mailbox *mbx);
 void qlcnic_83xx_free_mailbox(struct qlcnic_mailbox *mbx);
 void qlcnic_update_stats(struct qlcnic_adapter *);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Adapter hardware abstraction */
 struct qlcnic_hardware_ops {
 	void (*read_crb) (struct qlcnic_adapter *, char *, loff_t, size_t);
 	void (*write_crb) (struct qlcnic_adapter *, char *, loff_t, size_t);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int (*read_reg) (struct qlcnic_adapter *, ulong);
 	int (*write_reg) (struct qlcnic_adapter *, ulong, u32);
@@ -2044,11 +2318,16 @@ struct qlcnic_hardware_ops {
 	int (*get_mac_address) (struct qlcnic_adapter *, u8 *);
 	int (*setup_intr) (struct qlcnic_adapter *, u8);
 =======
+=======
+>>>>>>> v3.18
 	int (*read_reg) (struct qlcnic_adapter *, ulong, int *);
 	int (*write_reg) (struct qlcnic_adapter *, ulong, u32);
 	void (*get_ocm_win) (struct qlcnic_hardware_context *);
 	int (*get_mac_address) (struct qlcnic_adapter *, u8 *, u8);
 	int (*setup_intr) (struct qlcnic_adapter *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int (*alloc_mbx_args)(struct qlcnic_cmd_args *,
 			      struct qlcnic_adapter *, u32);
@@ -2073,7 +2352,12 @@ struct qlcnic_hardware_ops {
 	void (*napi_enable) (struct qlcnic_adapter *);
 	void (*napi_disable) (struct qlcnic_adapter *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*config_intr_coal) (struct qlcnic_adapter *);
+=======
+	int (*config_intr_coal) (struct qlcnic_adapter *,
+				 struct ethtool_coalesce *);
+>>>>>>> v3.18
 =======
 	int (*config_intr_coal) (struct qlcnic_adapter *,
 				 struct ethtool_coalesce *);
@@ -2086,8 +2370,11 @@ struct qlcnic_hardware_ops {
 	void (*change_l2_filter) (struct qlcnic_adapter *, u64 *, u16);
 	int (*get_board_info) (struct qlcnic_adapter *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*free_mac_list) (struct qlcnic_adapter *);
 =======
+=======
+>>>>>>> v3.18
 	void (*set_mac_filter_count) (struct qlcnic_adapter *);
 	void (*free_mac_list) (struct qlcnic_adapter *);
 	int (*read_phys_port_id) (struct qlcnic_adapter *);
@@ -2110,13 +2397,19 @@ struct qlcnic_hardware_ops {
 	u32 (*get_cap_size)(void *, int);
 	void (*set_sys_info)(void *, int, u32);
 	void (*store_cap_mask)(void *, u32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 extern struct qlcnic_nic_template qlcnic_vf_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool qlcnic_encap_tx_offload(struct qlcnic_adapter *adapter)
 {
 	return adapter->ahw->extra_capability[0] &
@@ -2129,6 +2422,9 @@ static inline bool qlcnic_encap_rx_offload(struct qlcnic_adapter *adapter)
 	       QLCNIC_83XX_FW_CAPAB_ENCAP_RX_OFFLOAD;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int qlcnic_start_firmware(struct qlcnic_adapter *adapter)
 {
@@ -2148,12 +2444,15 @@ static inline void qlcnic_write_crb(struct qlcnic_adapter *adapter, char *buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int qlcnic_hw_read_wx_2M(struct qlcnic_adapter *adapter,
 				       ulong off)
 {
 	return adapter->ahw->hw_ops->read_reg(adapter, off);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int qlcnic_hw_write_wx_2M(struct qlcnic_adapter *adapter,
@@ -2164,6 +2463,7 @@ static inline int qlcnic_hw_write_wx_2M(struct qlcnic_adapter *adapter,
 
 static inline int qlcnic_get_mac_address(struct qlcnic_adapter *adapter,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 u8 *mac)
 {
 	return adapter->ahw->hw_ops->get_mac_address(adapter, mac);
@@ -2173,6 +2473,8 @@ static inline int qlcnic_setup_intr(struct qlcnic_adapter *adapter, u8 num_intr)
 {
 	return adapter->ahw->hw_ops->setup_intr(adapter, num_intr);
 =======
+=======
+>>>>>>> v3.18
 					 u8 *mac, u8 function)
 {
 	return adapter->ahw->hw_ops->get_mac_address(adapter, mac, function);
@@ -2181,6 +2483,9 @@ static inline int qlcnic_setup_intr(struct qlcnic_adapter *adapter, u8 num_intr)
 static inline int qlcnic_setup_intr(struct qlcnic_adapter *adapter)
 {
 	return adapter->ahw->hw_ops->setup_intr(adapter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2302,7 +2607,10 @@ static inline void qlcnic_napi_enable(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int __qlcnic_shutdown(struct pci_dev *pdev)
 {
 	struct qlcnic_adapter *adapter = pci_get_drvdata(pdev);
@@ -2315,6 +2623,9 @@ static inline int __qlcnic_resume(struct qlcnic_adapter *adapter)
 	return adapter->nic_ops->resume(adapter);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void qlcnic_napi_disable(struct qlcnic_adapter *adapter)
 {
@@ -2322,14 +2633,20 @@ static inline void qlcnic_napi_disable(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void qlcnic_config_intr_coalesce(struct qlcnic_adapter *adapter)
 {
 	adapter->ahw->hw_ops->config_intr_coal(adapter);
 =======
+=======
+>>>>>>> v3.18
 static inline int qlcnic_config_intr_coalesce(struct qlcnic_adapter *adapter,
 					      struct ethtool_coalesce *ethcoal)
 {
 	return adapter->ahw->hw_ops->config_intr_coal(adapter, ethcoal);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2377,7 +2694,10 @@ static inline void qlcnic_free_mac_list(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void qlcnic_set_mac_filter_count(struct qlcnic_adapter *adapter)
 {
 	if (adapter->ahw->hw_ops->set_mac_filter_count)
@@ -2431,6 +2751,9 @@ static inline void qlcnic_store_cap_mask(struct qlcnic_adapter *adapter,
 	adapter->ahw->hw_ops->store_cap_mask(tmpl_hdr, mask);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void qlcnic_dev_request_reset(struct qlcnic_adapter *adapter,
 					    u32 key)
@@ -2464,8 +2787,11 @@ static inline void qlcnic_config_ipaddr(struct qlcnic_adapter *adapter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void qlcnic_disable_int(struct qlcnic_host_sds_ring *sds_ring)
 =======
+=======
+>>>>>>> v3.18
 static inline bool qlcnic_check_multi_tx(struct qlcnic_adapter *adapter)
 {
 	return test_bit(__QLCNIC_MULTI_TX_UNIQUE, &adapter->state);
@@ -2507,11 +2833,15 @@ qlcnic_83xx_disable_tx_intr(struct qlcnic_adapter *adapter,
 static inline void
 qlcnic_83xx_enable_sds_intr(struct qlcnic_adapter *adapter,
 			    struct qlcnic_host_sds_ring *sds_ring)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	writel(0, sds_ring->crb_intr_mask);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void qlcnic_enable_int(struct qlcnic_host_sds_ring *sds_ring)
 {
@@ -2519,6 +2849,8 @@ static inline void qlcnic_enable_int(struct qlcnic_host_sds_ring *sds_ring)
 
 	writel(0x1, sds_ring->crb_intr_mask);
 =======
+=======
+>>>>>>> v3.18
 /* Disable MSI-x and INT-x interrupts */
 static inline void
 qlcnic_83xx_disable_sds_intr(struct qlcnic_adapter *adapter,
@@ -2590,6 +2922,9 @@ qlcnic_82xx_enable_sds_intr(struct qlcnic_adapter *adapter,
 		writel(0, sds_ring->crb_intr_mask);
 	else
 		writel(0x1, sds_ring->crb_intr_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!QLCNIC_IS_MSI_FAMILY(adapter))
@@ -2597,7 +2932,10 @@ qlcnic_82xx_enable_sds_intr(struct qlcnic_adapter *adapter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int qlcnic_get_diag_lock(struct qlcnic_adapter *adapter)
 {
 	return test_and_set_bit(__QLCNIC_DIAG_MODE, &adapter->state);
@@ -2613,6 +2951,9 @@ static inline int qlcnic_check_diag_status(struct qlcnic_adapter *adapter)
 	return test_bit(__QLCNIC_DIAG_MODE, &adapter->state);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern const struct ethtool_ops qlcnic_sriov_vf_ethtool_ops;
 extern const struct ethtool_ops qlcnic_ethtool_ops;
@@ -2626,16 +2967,22 @@ extern const struct ethtool_ops qlcnic_ethtool_failed_ops;
 	} while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_QLOGIC_QLE834X    0x8030
 #define PCI_DEVICE_ID_QLOGIC_VF_QLE834X	0x8430
 #define PCI_DEVICE_ID_QLOGIC_QLE824X	0x8020
 =======
+=======
+>>>>>>> v3.18
 #define PCI_DEVICE_ID_QLOGIC_QLE824X		0x8020
 #define PCI_DEVICE_ID_QLOGIC_QLE834X		0x8030
 #define PCI_DEVICE_ID_QLOGIC_QLE8830		0x8830
 #define PCI_DEVICE_ID_QLOGIC_VF_QLE834X	0x8430
 #define PCI_DEVICE_ID_QLOGIC_QLE844X		0x8040
 #define PCI_DEVICE_ID_QLOGIC_VF_QLE844X	0x8440
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline bool qlcnic_82xx_check(struct qlcnic_adapter *adapter)
@@ -2645,7 +2992,10 @@ static inline bool qlcnic_82xx_check(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool qlcnic_84xx_check(struct qlcnic_adapter *adapter)
 {
 	unsigned short device = adapter->pdev->device;
@@ -2654,6 +3004,9 @@ static inline bool qlcnic_84xx_check(struct qlcnic_adapter *adapter)
 		(device == PCI_DEVICE_ID_QLOGIC_VF_QLE844X)) ? true : false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool qlcnic_83xx_check(struct qlcnic_adapter *adapter)
 {
@@ -2662,6 +3015,12 @@ static inline bool qlcnic_83xx_check(struct qlcnic_adapter *adapter)
 
 	status = ((device == PCI_DEVICE_ID_QLOGIC_QLE834X) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		  (device == PCI_DEVICE_ID_QLOGIC_QLE8830) ||
+		  (device == PCI_DEVICE_ID_QLOGIC_QLE844X) ||
+		  (device == PCI_DEVICE_ID_QLOGIC_VF_QLE844X) ||
+>>>>>>> v3.18
 =======
 		  (device == PCI_DEVICE_ID_QLOGIC_QLE8830) ||
 		  (device == PCI_DEVICE_ID_QLOGIC_QLE844X) ||
@@ -2681,10 +3040,13 @@ static inline bool qlcnic_sriov_vf_check(struct qlcnic_adapter *adapter)
 {
 	unsigned short device = adapter->pdev->device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return (device == PCI_DEVICE_ID_QLOGIC_VF_QLE834X) ? true : false;
 }
 =======
+=======
+>>>>>>> v3.18
 	bool status;
 
 	status = ((device == PCI_DEVICE_ID_QLOGIC_VF_QLE834X) ||
@@ -2751,5 +3113,8 @@ static inline void qlcnic_unregister_hwmon_dev(struct qlcnic_adapter *adapter)
 	return;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* __QLCNIC_H_ */

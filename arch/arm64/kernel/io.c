@@ -21,8 +21,11 @@
 #include <linux/io.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IO_CHECK_ALIGN(v, a) ((((unsigned long)(v)) & ((a) - 1)) == 0)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -30,6 +33,7 @@
  */
 void __memcpy_fromio(void *to, const volatile void __iomem *from, size_t count)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while (count && (!IO_CHECK_ALIGN(from, 8) || !IO_CHECK_ALIGN(to, 8))) {
 		*(u8 *)to = readb_relaxed_no_log(from);
@@ -53,6 +57,8 @@ void __memcpy_fromio(void *to, const volatile void __iomem *from, size_t count)
 	}
 	__iormb();
 =======
+=======
+>>>>>>> v3.18
 	unsigned char *t = to;
 	while (count) {
 		count--;
@@ -60,6 +66,9 @@ void __memcpy_fromio(void *to, const volatile void __iomem *from, size_t count)
 		t++;
 		from++;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(__memcpy_fromio);
@@ -69,6 +78,7 @@ EXPORT_SYMBOL(__memcpy_fromio);
  */
 void __memcpy_toio(volatile void __iomem *to, const void *from, size_t count)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void *p = (void __force *)to;
 
@@ -93,12 +103,17 @@ void __memcpy_toio(volatile void __iomem *to, const void *from, size_t count)
 		p++;
 		count--;
 =======
+=======
+>>>>>>> v3.18
 	const unsigned char *f = from;
 	while (count) {
 		count--;
 		writeb(*f, to);
 		f++;
 		to++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -109,6 +124,7 @@ EXPORT_SYMBOL(__memcpy_toio);
  */
 void __memset_io(volatile void __iomem *dst, int c, size_t count)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void *p = (void __force *)dst;
 	u64 qc = c;
@@ -135,10 +151,15 @@ void __memset_io(volatile void __iomem *dst, int c, size_t count)
 		p++;
 		count--;
 =======
+=======
+>>>>>>> v3.18
 	while (count) {
 		count--;
 		writeb(c, dst);
 		dst++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

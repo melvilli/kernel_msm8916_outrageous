@@ -306,16 +306,22 @@ int main(int argc, char **argv)
 				 data,
 				 toread*scan_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (read_size == -EAGAIN) {
 			printf("nothing available\n");
 			continue;
 =======
+=======
+>>>>>>> v3.18
 		if (read_size < 0) {
 			if (errno == -EAGAIN) {
 				printf("nothing available\n");
 				continue;
 			} else
 				break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		for (i = 0; i < read_size/scan_size; i++)

@@ -113,7 +113,11 @@ Linux内核代码中包含有大量的文档。这些文档对于学习如何与
     其他关于如何正确地生成补丁的优秀文档包括：
     "The Perfect Patch"
 <<<<<<< HEAD
+<<<<<<< HEAD
         http://userweb.kernel.org/~akpm/stuff/tpp.txt
+=======
+        http://www.ozlabs.org/~akpm/stuff/tpp.txt
+>>>>>>> v3.18
 =======
         http://www.ozlabs.org/~akpm/stuff/tpp.txt
 >>>>>>> v3.18
@@ -520,7 +524,11 @@ Linux内核社区并不喜欢一下接收大段的代码。修改需要被恰当
 想了解它具体应该看起来像什么，请查阅以下文档中的“ChangeLog”章节：
   “The Perfect Patch”
 <<<<<<< HEAD
+<<<<<<< HEAD
   	 http://userweb.kernel.org/~akpm/stuff/tpp.txt
+=======
+  	 http://www.ozlabs.org/~akpm/stuff/tpp.txt
+>>>>>>> v3.18
 =======
   	 http://www.ozlabs.org/~akpm/stuff/tpp.txt
 >>>>>>> v3.18

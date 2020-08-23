@@ -1,12 +1,18 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* bnx2.c: Broadcom NX2 network driver.
  *
  * Copyright (c) 2004-2011 Broadcom Corporation
 =======
+=======
+>>>>>>> v3.18
 /* bnx2.c: QLogic NX2 network driver.
  *
  * Copyright (c) 2004-2014 Broadcom Corporation
  * Copyright (c) 2014 QLogic Corporation
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -31,7 +37,10 @@
 #include <linux/interrupt.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/netdevice.h>
@@ -69,8 +78,13 @@
 
 #define DRV_MODULE_NAME		"bnx2"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_MODULE_VERSION	"2.2.3"
 #define DRV_MODULE_RELDATE	"June 27, 2012"
+=======
+#define DRV_MODULE_VERSION	"2.2.5"
+#define DRV_MODULE_RELDATE	"December 20, 2013"
+>>>>>>> v3.18
 =======
 #define DRV_MODULE_VERSION	"2.2.5"
 #define DRV_MODULE_RELDATE	"December 20, 2013"
@@ -88,15 +102,21 @@
 
 static char version[] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"Broadcom NetXtreme II Gigabit Ethernet Driver " DRV_MODULE_NAME " v" DRV_MODULE_VERSION " (" DRV_MODULE_RELDATE ")\n";
 
 MODULE_AUTHOR("Michael Chan <mchan@broadcom.com>");
 MODULE_DESCRIPTION("Broadcom NetXtreme II BCM5706/5708/5709/5716 Driver");
 =======
+=======
+>>>>>>> v3.18
 	"QLogic NetXtreme II Gigabit Ethernet Driver " DRV_MODULE_NAME " v" DRV_MODULE_VERSION " (" DRV_MODULE_RELDATE ")\n";
 
 MODULE_AUTHOR("Michael Chan <mchan@broadcom.com>");
 MODULE_DESCRIPTION("QLogic NetXtreme II BCM5706/5708/5709/5716 Driver");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");
 MODULE_VERSION(DRV_MODULE_VERSION);
@@ -109,7 +129,11 @@ MODULE_FIRMWARE(FW_RV2P_FILE_09_Ax);
 static int disable_msi = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param(disable_msi, int, 0);
+=======
+module_param(disable_msi, int, S_IRUGO);
+>>>>>>> v3.18
 =======
 module_param(disable_msi, int, S_IRUGO);
 >>>>>>> v3.18
@@ -147,7 +171,11 @@ static struct {
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(bnx2_pci_tbl) = {
+=======
+static const struct pci_device_id bnx2_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id bnx2_pci_tbl[] = {
 >>>>>>> v3.18
@@ -884,9 +912,14 @@ bnx2_alloc_mem(struct bnx2 *bp)
 				sizeof(struct statistics_block);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status_blk = dma_alloc_coherent(&bp->pdev->dev, bp->status_stats_size,
 					&bp->status_blk_mapping,
 					GFP_KERNEL | __GFP_ZERO);
+=======
+	status_blk = dma_zalloc_coherent(&bp->pdev->dev, bp->status_stats_size,
+					 &bp->status_blk_mapping, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	status_blk = dma_zalloc_coherent(&bp->pdev->dev, bp->status_stats_size,
 					 &bp->status_blk_mapping, GFP_KERNEL);
@@ -1234,6 +1267,11 @@ bnx2_copper_linkup(struct bnx2 *bp)
 	u32 bmcr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bp->phy_flags &= ~BNX2_PHY_FLAG_MDIX;
+
+>>>>>>> v3.18
 =======
 	bp->phy_flags &= ~BNX2_PHY_FLAG_MDIX;
 
@@ -1297,7 +1335,10 @@ bnx2_copper_linkup(struct bnx2 *bp)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (bp->link_up) {
 		u32 ext_status;
 
@@ -1306,6 +1347,9 @@ bnx2_copper_linkup(struct bnx2 *bp)
 			bp->phy_flags |= BNX2_PHY_FLAG_MDIX;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2101,7 +2145,11 @@ __releases(&bp->phy_lock)
 __acquires(&bp->phy_lock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 bmcr;
+=======
+	u32 bmcr, adv_reg, new_adv = 0;
+>>>>>>> v3.18
 =======
 	u32 bmcr, adv_reg, new_adv = 0;
 >>>>>>> v3.18
@@ -2109,6 +2157,7 @@ __acquires(&bp->phy_lock)
 
 	bnx2_read_phy(bp, bp->mii_bmcr, &bmcr);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (bp->autoneg & AUTONEG_SPEED) {
 		u32 adv_reg, adv1000_reg;
@@ -2119,6 +2168,8 @@ __acquires(&bp->phy_lock)
 		adv_reg &= (PHY_ALL_10_100_SPEED | ADVERTISE_PAUSE_CAP |
 			ADVERTISE_PAUSE_ASYM);
 =======
+=======
+>>>>>>> v3.18
 	bnx2_read_phy(bp, bp->mii_adv, &adv_reg);
 	adv_reg &= (PHY_ALL_10_100_SPEED | ADVERTISE_PAUSE_CAP |
 		    ADVERTISE_PAUSE_ASYM);
@@ -2130,11 +2181,15 @@ __acquires(&bp->phy_lock)
 		u32 new_adv1000 = 0;
 
 		new_adv |= bnx2_phy_get_pause_adv(bp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		bnx2_read_phy(bp, MII_CTRL1000, &adv1000_reg);
 		adv1000_reg &= PHY_ALL_1000_SPEED;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		new_adv = ethtool_adv_to_mii_adv_t(bp->advertising);
 		new_adv |= ADVERTISE_CSMA;
@@ -2142,6 +2197,9 @@ __acquires(&bp->phy_lock)
 
 		new_adv1000 |= ethtool_adv_to_mii_ctrl1000_t(bp->advertising);
 
+=======
+		new_adv1000 |= ethtool_adv_to_mii_ctrl1000_t(bp->advertising);
+>>>>>>> v3.18
 =======
 		new_adv1000 |= ethtool_adv_to_mii_ctrl1000_t(bp->advertising);
 >>>>>>> v3.18
@@ -2165,11 +2223,17 @@ __acquires(&bp->phy_lock)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* advertise nothing when forcing speed */
 	if (adv_reg != new_adv)
 		bnx2_write_phy(bp, bp->mii_adv, new_adv);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	new_bmcr = 0;
 	if (bp->req_line_speed == SPEED_100) {
@@ -2423,10 +2487,13 @@ bnx2_init_copper_phy(struct bnx2 *bp, int reset_phy)
 
 	/* ethernet@wirespeed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bnx2_write_phy(bp, 0x18, 0x7007);
 	bnx2_read_phy(bp, 0x18, &val);
 	bnx2_write_phy(bp, 0x18, val | (1 << 15) | (1 << 4));
 =======
+=======
+>>>>>>> v3.18
 	bnx2_write_phy(bp, MII_BNX2_AUX_CTL, AUX_CTL_MISC_CTL);
 	bnx2_read_phy(bp, MII_BNX2_AUX_CTL, &val);
 	val |=  AUX_CTL_MISC_CTL_WR | AUX_CTL_MISC_CTL_WIRESPEED;
@@ -2436,6 +2503,9 @@ bnx2_init_copper_phy(struct bnx2 *bp, int reset_phy)
 		val |=  AUX_CTL_MISC_CTL_AUTOMDIX;
 
 	bnx2_write_phy(bp, MII_BNX2_AUX_CTL, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2584,6 +2654,10 @@ bnx2_fw_sync(struct bnx2 *bp, u32 msg_data, int ack, int silent)
 	bp->fw_wr_seq++;
 	msg_data |= bp->fw_wr_seq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bp->fw_last_msg = msg_data;
+>>>>>>> v3.18
 =======
 	bp->fw_last_msg = msg_data;
 >>>>>>> v3.18
@@ -3213,6 +3287,12 @@ bnx2_rx_int(struct bnx2 *bp, struct bnx2_napi *bnapi, int budget)
 	int rx_pkt = 0, pg_ring_used = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (budget <= 0)
+		return rx_pkt;
+
+>>>>>>> v3.18
 =======
 	if (budget <= 0)
 		return rx_pkt;
@@ -3318,8 +3398,14 @@ bnx2_rx_int(struct bnx2 *bp, struct bnx2_napi *bnapi, int budget)
 		skb->protocol = eth_type_trans(skb, bp->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((len > (bp->dev->mtu + ETH_HLEN)) &&
 			(ntohs(skb->protocol) != 0x8100)) {
+=======
+		if (len > (bp->dev->mtu + ETH_HLEN) &&
+		    skb->protocol != htons(0x8100) &&
+		    skb->protocol != htons(ETH_P_8021AD)) {
+>>>>>>> v3.18
 =======
 		if (len > (bp->dev->mtu + ETH_HLEN) &&
 		    skb->protocol != htons(0x8100) &&
@@ -3344,7 +3430,12 @@ bnx2_rx_int(struct bnx2 *bp, struct bnx2_napi *bnapi, int budget)
 		    ((status & L2_FHDR_STATUS_USE_RXHASH) ==
 		     L2_FHDR_STATUS_USE_RXHASH))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			skb->rxhash = rx_hdr->l2_fhdr_hash;
+=======
+			skb_set_hash(skb, rx_hdr->l2_fhdr_hash,
+				     PKT_HASH_TYPE_L3);
+>>>>>>> v3.18
 =======
 			skb_set_hash(skb, rx_hdr->l2_fhdr_hash,
 				     PKT_HASH_TYPE_L3);
@@ -4022,6 +4113,7 @@ init_cpu_err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 bnx2_set_power_state(struct bnx2 *bp, pci_power_t state)
 {
@@ -4134,6 +4226,8 @@ bnx2_set_power_state(struct bnx2 *bp, pci_power_t state)
 
 		pmcsr &= ~PCI_PM_CTRL_STATE_MASK;
 =======
+=======
+>>>>>>> v3.18
 static void
 bnx2_setup_wol(struct bnx2 *bp)
 {
@@ -4252,11 +4346,15 @@ bnx2_set_power_state(struct bnx2 *bp, pci_power_t state)
 	case PCI_D3hot: {
 		bnx2_setup_wol(bp);
 		pci_wake_from_d3(bp->pdev, bp->wol);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if ((BNX2_CHIP_ID(bp) == BNX2_CHIP_ID_5706_A0) ||
 		    (BNX2_CHIP_ID(bp) == BNX2_CHIP_ID_5706_A1)) {
 
 			if (bp->wol)
+<<<<<<< HEAD
 <<<<<<< HEAD
 				pmcsr |= 3;
 		}
@@ -4269,6 +4367,8 @@ bnx2_set_power_state(struct bnx2 *bp, pci_power_t state)
 		pci_write_config_word(bp->pdev, bp->pm_cap + PCI_PM_CTRL,
 				      pmcsr);
 =======
+=======
+>>>>>>> v3.18
 				pci_set_power_state(bp->pdev, PCI_D3hot);
 			break;
 
@@ -4286,13 +4386,19 @@ bnx2_set_power_state(struct bnx2 *bp, pci_power_t state)
 			bnx2_shmem_wr(bp, BNX2_BC_STATE_CONDITION, val);
 		}
 		pci_set_power_state(bp->pdev, PCI_D3hot);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* No more memory access after this point until
 		 * device is brought back to D0.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		udelay(50);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -6035,8 +6141,13 @@ bnx2_run_loopback(struct bnx2 *bp, int loopback_mode)
 		return -ENOMEM;
 	packet = skb_put(skb, pkt_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(packet, bp->dev->dev_addr, 6);
 	memset(packet + 6, 0x0, 8);
+=======
+	memcpy(packet, bp->dev->dev_addr, ETH_ALEN);
+	memset(packet + ETH_ALEN, 0x0, 8);
+>>>>>>> v3.18
 =======
 	memcpy(packet, bp->dev->dev_addr, ETH_ALEN);
 	memset(packet + ETH_ALEN, 0x0, 8);
@@ -6467,7 +6578,11 @@ static void
 bnx2_enable_msix(struct bnx2 *bp, int msix_vecs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, total_vecs, rc;
+=======
+	int i, total_vecs;
+>>>>>>> v3.18
 =======
 	int i, total_vecs;
 >>>>>>> v3.18
@@ -6494,6 +6609,7 @@ bnx2_enable_msix(struct bnx2 *bp, int msix_vecs)
 	total_vecs++;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = -ENOSPC;
 	while (total_vecs >= BNX2_MIN_MSIX_VEC) {
 		rc = pci_enable_msix(bp->pdev, msix_ent, total_vecs);
@@ -6504,6 +6620,11 @@ bnx2_enable_msix(struct bnx2 *bp, int msix_vecs)
 	}
 
 	if (rc != 0)
+=======
+	total_vecs = pci_enable_msix_range(bp->pdev, msix_ent,
+					   BNX2_MIN_MSIX_VEC, total_vecs);
+	if (total_vecs < 0)
+>>>>>>> v3.18
 =======
 	total_vecs = pci_enable_msix_range(bp->pdev, msix_ent,
 					   BNX2_MIN_MSIX_VEC, total_vecs);
@@ -6590,7 +6711,10 @@ bnx2_open(struct net_device *dev)
 	netif_carrier_off(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bnx2_set_power_state(bp, PCI_D0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bnx2_disable_int(bp);
@@ -7000,7 +7124,10 @@ bnx2_close(struct net_device *dev)
 	bp->link_up = 0;
 	netif_carrier_off(bp->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bnx2_set_power_state(bp, PCI_D3hot);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -7162,11 +7289,14 @@ bnx2_get_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 		ethtool_cmd_speed_set(cmd, bp->line_speed);
 		cmd->duplex = bp->duplex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	else {
 		ethtool_cmd_speed_set(cmd, -1);
 		cmd->duplex = -1;
 =======
+=======
+>>>>>>> v3.18
 		if (!(bp->phy_flags & BNX2_PHY_FLAG_SERDES)) {
 			if (bp->phy_flags & BNX2_PHY_FLAG_MDIX)
 				cmd->eth_tp_mdix = ETH_TP_MDI_X;
@@ -7177,6 +7307,9 @@ bnx2_get_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 	else {
 		ethtool_cmd_speed_set(cmd, SPEED_UNKNOWN);
 		cmd->duplex = DUPLEX_UNKNOWN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	spin_unlock_bh(&bp->phy_lock);
@@ -7373,6 +7506,12 @@ bnx2_set_wol(struct net_device *dev, struct ethtool_wolinfo *wol)
 		bp->wol = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	device_set_wakeup_enable(&bp->pdev->dev, bp->wol);
+
+>>>>>>> v3.18
 =======
 
 	device_set_wakeup_enable(&bp->pdev->dev, bp->wol);
@@ -7454,9 +7593,12 @@ bnx2_get_eeprom(struct net_device *dev, struct ethtool_eeprom *eeprom,
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netif_running(dev))
 		return -EAGAIN;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* parameters already validated in ethtool_get_eeprom */
@@ -7474,9 +7616,12 @@ bnx2_set_eeprom(struct net_device *dev, struct ethtool_eeprom *eeprom,
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netif_running(dev))
 		return -EAGAIN;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* parameters already validated in ethtool_set_eeprom */
@@ -7839,8 +7984,11 @@ bnx2_self_test(struct net_device *dev, struct ethtool_test *etest, u64 *buf)
 	struct bnx2 *bp = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bnx2_set_power_state(bp, PCI_D0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memset(buf, 0, sizeof(u64) * BNX2_NUM_TESTS);
@@ -7892,8 +8040,11 @@ bnx2_self_test(struct net_device *dev, struct ethtool_test *etest, u64 *buf)
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netif_running(bp->dev))
 		bnx2_set_power_state(bp, PCI_D3hot);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -7968,8 +8119,11 @@ bnx2_set_phys_id(struct net_device *dev, enum ethtool_phys_id_state state)
 	switch (state) {
 	case ETHTOOL_ID_ACTIVE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bnx2_set_power_state(bp, PCI_D0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		bp->leds_save = BNX2_RD(bp, BNX2_MISC_CFG);
@@ -7993,9 +8147,12 @@ bnx2_set_phys_id(struct net_device *dev, enum ethtool_phys_id_state state)
 		BNX2_WR(bp, BNX2_EMAC_LED, 0);
 		BNX2_WR(bp, BNX2_MISC_CFG, bp->leds_save);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (!netif_running(dev))
 			bnx2_set_power_state(bp, PCI_D3hot);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -8420,7 +8577,11 @@ bnx2_init_board(struct pci_dev *pdev, struct net_device *dev)
 	pci_set_master(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bp->pm_cap = pci_find_capability(pdev, PCI_CAP_ID_PM);
+=======
+	bp->pm_cap = pdev->pm_cap;
+>>>>>>> v3.18
 =======
 	bp->pm_cap = pdev->pm_cap;
 >>>>>>> v3.18
@@ -8450,8 +8611,11 @@ bnx2_init_board(struct pci_dev *pdev, struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bnx2_set_power_state(bp, PCI_D0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Configure byte swap and enable write to the reg_window registers.
@@ -8493,7 +8657,11 @@ bnx2_init_board(struct pci_dev *pdev, struct net_device *dev)
 	if (BNX2_CHIP(bp) == BNX2_CHIP_5709 &&
 	    BNX2_CHIP_REV(bp) != BNX2_CHIP_REV_Ax) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pci_find_capability(pdev, PCI_CAP_ID_MSIX))
+=======
+		if (pdev->msix_cap)
+>>>>>>> v3.18
 =======
 		if (pdev->msix_cap)
 >>>>>>> v3.18
@@ -8503,7 +8671,11 @@ bnx2_init_board(struct pci_dev *pdev, struct net_device *dev)
 	if (BNX2_CHIP_ID(bp) != BNX2_CHIP_ID_5706_A0 &&
 	    BNX2_CHIP_ID(bp) != BNX2_CHIP_ID_5706_A1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pci_find_capability(pdev, PCI_CAP_ID_MSI))
+=======
+		if (pdev->msi_cap)
+>>>>>>> v3.18
 =======
 		if (pdev->msi_cap)
 >>>>>>> v3.18
@@ -8700,12 +8872,18 @@ bnx2_init_board(struct pci_dev *pdev, struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (bp->flags & BNX2_FLAG_NO_WOL)
 		device_set_wakeup_capable(&bp->pdev->dev, false);
 	else
 		device_set_wakeup_enable(&bp->pdev->dev, bp->wol);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (BNX2_CHIP_ID(bp) == BNX2_CHIP_ID_5706_A0) {
 		bp->tx_quick_cons_trip_int =
@@ -8779,7 +8957,10 @@ err_out_release:
 err_out_disable:
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -8883,7 +9064,11 @@ bnx2_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	pci_set_drvdata(pdev, dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, bp->mac_addr, 6);
+=======
+	memcpy(dev->dev_addr, bp->mac_addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(dev->dev_addr, bp->mac_addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -8919,7 +9104,10 @@ error:
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_free:
@@ -8954,6 +9142,7 @@ bnx2_remove_one(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 }
 
@@ -8979,6 +9168,8 @@ bnx2_suspend(struct pci_dev *pdev, pm_message_t state)
 	bnx2_free_skbs(bp);
 	bnx2_set_power_state(bp, pci_choose_state(pdev, state));
 =======
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PM_SLEEP
@@ -8999,11 +9190,15 @@ bnx2_suspend(struct device *device)
 		bnx2_free_skbs(bp);
 	}
 	bnx2_setup_wol(bp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static int
+<<<<<<< HEAD
 <<<<<<< HEAD
 bnx2_resume(struct pci_dev *pdev)
 {
@@ -9012,12 +9207,17 @@ bnx2_resume(struct pci_dev *pdev)
 
 	pci_restore_state(pdev);
 =======
+=======
+>>>>>>> v3.18
 bnx2_resume(struct device *device)
 {
 	struct pci_dev *pdev = to_pci_dev(device);
 	struct net_device *dev = pci_get_drvdata(pdev);
 	struct bnx2 *bp = netdev_priv(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!netif_running(dev))
 		return 0;
@@ -9025,6 +9225,10 @@ bnx2_resume(struct device *device)
 	bnx2_set_power_state(bp, PCI_D0);
 	netif_device_attach(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bnx2_request_irq(bp);
+>>>>>>> v3.18
 =======
 	bnx2_request_irq(bp);
 >>>>>>> v3.18
@@ -9034,7 +9238,10 @@ bnx2_resume(struct device *device)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static SIMPLE_DEV_PM_OPS(bnx2_pm_ops, bnx2_suspend, bnx2_resume);
 #define BNX2_PM_OPS (&bnx2_pm_ops)
 
@@ -9043,6 +9250,9 @@ static SIMPLE_DEV_PM_OPS(bnx2_pm_ops, bnx2_suspend, bnx2_resume);
 #define BNX2_PM_OPS NULL
 
 #endif /* CONFIG_PM_SLEEP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * bnx2_io_error_detected - called when PCI error is detected
@@ -9090,8 +9300,13 @@ static pci_ers_result_t bnx2_io_slot_reset(struct pci_dev *pdev)
 	struct net_device *dev = pci_get_drvdata(pdev);
 	struct bnx2 *bp = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_ers_result_t result;
 	int err;
+=======
+	pci_ers_result_t result = PCI_ERS_RESULT_DISCONNECT;
+	int err = 0;
+>>>>>>> v3.18
 =======
 	pci_ers_result_t result = PCI_ERS_RESULT_DISCONNECT;
 	int err = 0;
@@ -9102,7 +9317,10 @@ static pci_ers_result_t bnx2_io_slot_reset(struct pci_dev *pdev)
 		dev_err(&pdev->dev,
 			"Cannot re-enable PCI device after reset\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = PCI_ERS_RESULT_DISCONNECT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {
@@ -9111,12 +9329,15 @@ static pci_ers_result_t bnx2_io_slot_reset(struct pci_dev *pdev)
 		pci_save_state(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (netif_running(dev)) {
 			bnx2_set_power_state(bp, PCI_D0);
 			bnx2_init_nic(bp, 1);
 		}
 		result = PCI_ERS_RESULT_RECOVERED;
 =======
+=======
+>>>>>>> v3.18
 		if (netif_running(dev))
 			err = bnx2_init_nic(bp, 1);
 
@@ -9127,6 +9348,9 @@ static pci_ers_result_t bnx2_io_slot_reset(struct pci_dev *pdev)
 	if (result != PCI_ERS_RESULT_RECOVERED && netif_running(dev)) {
 		bnx2_napi_enable(bp);
 		dev_close(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	rtnl_unlock();
@@ -9165,7 +9389,10 @@ static void bnx2_io_resume(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void bnx2_shutdown(struct pci_dev *pdev)
 {
 	struct net_device *dev = pci_get_drvdata(pdev);
@@ -9188,6 +9415,9 @@ static void bnx2_shutdown(struct pci_dev *pdev)
 	rtnl_unlock();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct pci_error_handlers bnx2_err_handler = {
 	.error_detected	= bnx2_io_error_detected,
@@ -9200,6 +9430,7 @@ static struct pci_driver bnx2_pci_driver = {
 	.id_table	= bnx2_pci_tbl,
 	.probe		= bnx2_init_one,
 	.remove		= bnx2_remove_one,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.suspend	= bnx2_suspend,
 	.resume		= bnx2_resume,
@@ -9222,10 +9453,15 @@ module_exit(bnx2_cleanup);
 
 
 =======
+=======
+>>>>>>> v3.18
 	.driver.pm	= BNX2_PM_OPS,
 	.err_handler	= &bnx2_err_handler,
 	.shutdown	= bnx2_shutdown,
 };
 
 module_pci_driver(bnx2_pci_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

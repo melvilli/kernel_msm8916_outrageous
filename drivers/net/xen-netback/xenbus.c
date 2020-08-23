@@ -16,18 +16,24 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 #include "common.h"
 =======
+=======
+>>>>>>> v3.18
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "common.h"
 #include <linux/vmalloc.h>
 #include <linux/rtnetlink.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct backend_info {
@@ -43,6 +49,7 @@ struct backend_info {
 	struct xenbus_watch hotplug_status_watch;
 	u8 have_hotplug_status_watch:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	const char *hotplug_script;
 };
@@ -51,19 +58,27 @@ static int connect_rings(struct backend_info *);
 static void connect(struct backend_info *);
 static void backend_create_xenvif(struct backend_info *be);
 =======
+=======
+>>>>>>> v3.18
 };
 
 static int connect_rings(struct backend_info *be, struct xenvif_queue *queue);
 static void connect(struct backend_info *be);
 static int read_xenbus_vif_flags(struct backend_info *be);
 static int backend_create_xenvif(struct backend_info *be);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void unregister_hotplug_status_watch(struct backend_info *be);
 static void set_backend_state(struct backend_info *be,
 			      enum xenbus_state state);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 struct dentry *xen_netback_dbg_root = NULL;
 
@@ -243,6 +258,9 @@ static void xenvif_debugfs_delif(struct xenvif *vif)
 }
 #endif /* CONFIG_DEBUG_FS */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int netback_remove(struct xenbus_device *dev)
 {
@@ -258,7 +276,10 @@ static int netback_remove(struct xenbus_device *dev)
 		be->vif = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(be->hotplug_script);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(be);
@@ -279,7 +300,10 @@ static int netback_probe(struct xenbus_device *dev,
 	int err;
 	int sg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *script;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct backend_info *be = kzalloc(sizeof(struct backend_info),
@@ -316,7 +340,10 @@ static int netback_probe(struct xenbus_device *dev,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		err = xenbus_printf(xbt, dev->nodename, "feature-gso-tcpv6",
 				    "%d", sg);
 		if (err) {
@@ -333,6 +360,9 @@ static int netback_probe(struct xenbus_device *dev,
 			goto abort_transaction;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* We support rx-copy path. */
 		err = xenbus_printf(xbt, dev->nodename,
@@ -362,6 +392,7 @@ static int netback_probe(struct xenbus_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	script = xenbus_read(XBT_NIL, dev->nodename, "script", NULL);
 	if (IS_ERR(script)) {
 		err = PTR_ERR(script);
@@ -371,6 +402,8 @@ static int netback_probe(struct xenbus_device *dev,
 
 	be->hotplug_script = script;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Split event channels support, this is optional so it is not
 	 * put inside the above loop.
@@ -386,6 +419,9 @@ static int netback_probe(struct xenbus_device *dev,
 			    "multi-queue-max-queues", "%u", xenvif_max_queues);
 	if (err)
 		pr_debug("Error writing multi-queue-max-queues\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = xenbus_switch_state(dev, XenbusStateInitWait);
@@ -396,7 +432,13 @@ static int netback_probe(struct xenbus_device *dev,
 
 	/* This kicks hotplug scripts, so do it immediately. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	backend_create_xenvif(be);
+=======
+	err = backend_create_xenvif(be);
+	if (err)
+		goto fail;
+>>>>>>> v3.18
 =======
 	err = backend_create_xenvif(be);
 	if (err)
@@ -410,7 +452,11 @@ abort_transaction:
 	xenbus_dev_fatal(dev, err, "%s", message);
 fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("failed");
+=======
+	pr_debug("failed\n");
+>>>>>>> v3.18
 =======
 	pr_debug("failed\n");
 >>>>>>> v3.18
@@ -429,6 +475,7 @@ static int netback_uevent(struct xenbus_device *xdev,
 {
 	struct backend_info *be = dev_get_drvdata(&xdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!be)
 		return 0;
@@ -438,6 +485,8 @@ static int netback_uevent(struct xenbus_device *xdev,
 
 	if (!be->vif)
 =======
+=======
+>>>>>>> v3.18
 	char *val;
 
 	val = xenbus_read(XBT_NIL, xdev->nodename, "script", NULL);
@@ -454,6 +503,9 @@ static int netback_uevent(struct xenbus_device *xdev,
 	}
 
 	if (!be || !be->vif)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -462,7 +514,11 @@ static int netback_uevent(struct xenbus_device *xdev,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void backend_create_xenvif(struct backend_info *be)
+=======
+static int backend_create_xenvif(struct backend_info *be)
+>>>>>>> v3.18
 =======
 static int backend_create_xenvif(struct backend_info *be)
 >>>>>>> v3.18
@@ -473,7 +529,11 @@ static int backend_create_xenvif(struct backend_info *be)
 
 	if (be->vif != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -482,7 +542,11 @@ static int backend_create_xenvif(struct backend_info *be)
 	if (err != 1) {
 		xenbus_dev_fatal(dev, err, "reading handle");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return (err < 0) ? err : -EINVAL;
+>>>>>>> v3.18
 =======
 		return (err < 0) ? err : -EINVAL;
 >>>>>>> v3.18
@@ -494,31 +558,43 @@ static int backend_create_xenvif(struct backend_info *be)
 		be->vif = NULL;
 		xenbus_dev_fatal(dev, err, "creating interface");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
 	}
 
 	kobject_uevent(&dev->dev.kobj, KOBJ_ONLINE);
 =======
+=======
+>>>>>>> v3.18
 		return err;
 	}
 
 	kobject_uevent(&dev->dev.kobj, KOBJ_ONLINE);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void backend_disconnect(struct backend_info *be)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (be->vif)
 		xenvif_disconnect(be->vif);
 =======
+=======
+>>>>>>> v3.18
 	if (be->vif) {
 #ifdef CONFIG_DEBUG_FS
 		xenvif_debugfs_delif(be->vif);
 #endif /* CONFIG_DEBUG_FS */
 		xenvif_disconnect(be->vif);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -767,11 +843,14 @@ static void connect(struct backend_info *be)
 	int err;
 	struct xenbus_device *dev = be->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	err = connect_rings(be);
 	if (err)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long credit_bytes, credit_usec;
 	unsigned int queue_index;
 	unsigned int requested_num_queues;
@@ -792,6 +871,9 @@ static void connect(struct backend_info *be)
 				 requested_num_queues, xenvif_max_queues);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = xen_net_read_mac(dev, be->vif->fe_dev_addr);
@@ -801,10 +883,13 @@ static void connect(struct backend_info *be)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xen_net_read_rate(dev, &be->vif->credit_bytes,
 			  &be->vif->credit_usec);
 	be->vif->remaining_credit = be->vif->credit_bytes;
 =======
+=======
+>>>>>>> v3.18
 	xen_net_read_rate(dev, &credit_bytes, &credit_usec);
 	read_xenbus_vif_flags(be);
 
@@ -860,6 +945,9 @@ static void connect(struct backend_info *be)
 	rtnl_unlock();
 
 	xenvif_carrier_on(be->vif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	unregister_hotplug_status_watch(be);
@@ -869,6 +957,7 @@ static void connect(struct backend_info *be)
 	if (!err)
 		be->have_hotplug_status_watch = 1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	netif_wake_queue(be->vif->dev);
 }
@@ -895,6 +984,8 @@ static int connect_rings(struct backend_info *be)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	netif_tx_wake_all_queues(be->vif->dev);
 
 	return;
@@ -996,6 +1087,9 @@ static int read_xenbus_vif_flags(struct backend_info *be)
 	unsigned int rx_copy;
 	int err, val;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = xenbus_scanf(XBT_NIL, dev->otherend, "request-rx-copy", "%u",
 			   &rx_copy);
@@ -1012,6 +1106,7 @@ static int read_xenbus_vif_flags(struct backend_info *be)
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vif->dev->tx_queue_len != 0) {
 		if (xenbus_scanf(XBT_NIL, dev->otherend,
 				 "feature-rx-notify", "%d", &val) < 0)
@@ -1022,10 +1117,15 @@ static int read_xenbus_vif_flags(struct backend_info *be)
 			/* Must be non-zero for pfifo_fast to work. */
 			vif->dev->tx_queue_len = 1;
 =======
+=======
+>>>>>>> v3.18
 	if (xenbus_scanf(XBT_NIL, dev->otherend,
 			 "feature-rx-notify", "%d", &val) < 0 || val == 0) {
 		xenbus_dev_fatal(dev, -EINVAL, "feature-rx-notify is mandatory");
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1035,11 +1135,14 @@ static int read_xenbus_vif_flags(struct backend_info *be)
 	vif->can_sg = !!val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xenbus_scanf(XBT_NIL, dev->otherend, "feature-gso-tcpv4",
 			 "%d", &val) < 0)
 		val = 0;
 	vif->gso = !!val;
 =======
+=======
+>>>>>>> v3.18
 	vif->gso_mask = 0;
 	vif->gso_prefix_mask = 0;
 
@@ -1048,11 +1151,15 @@ static int read_xenbus_vif_flags(struct backend_info *be)
 		val = 0;
 	if (val)
 		vif->gso_mask |= GSO_BIT(TCPV4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (xenbus_scanf(XBT_NIL, dev->otherend, "feature-gso-tcpv4-prefix",
 			 "%d", &val) < 0)
 		val = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	vif->gso_prefix = !!val;
 
@@ -1076,6 +1183,8 @@ static int read_xenbus_vif_flags(struct backend_info *be)
 /* ** Driver Registration ** */
 
 =======
+=======
+>>>>>>> v3.18
 	if (val)
 		vif->gso_prefix_mask |= GSO_BIT(TCPV4);
 
@@ -1111,6 +1220,9 @@ static int read_xenbus_vif_flags(struct backend_info *be)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct xenbus_device_id netback_ids[] = {
@@ -1119,8 +1231,13 @@ static const struct xenbus_device_id netback_ids[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEFINE_XENBUS_DRIVER(netback, ,
+=======
+static struct xenbus_driver netback_driver = {
+	.ids = netback_ids,
+>>>>>>> v3.18
 =======
 static struct xenbus_driver netback_driver = {
 	.ids = netback_ids,
@@ -1130,7 +1247,11 @@ static struct xenbus_driver netback_driver = {
 	.uevent = netback_uevent,
 	.otherend_changed = frontend_changed,
 <<<<<<< HEAD
+<<<<<<< HEAD
 );
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -1140,10 +1261,16 @@ int xenvif_xenbus_init(void)
 	return xenbus_register_backend(&netback_driver);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void xenvif_xenbus_fini(void)
 {
 	return xenbus_unregister_driver(&netback_driver);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

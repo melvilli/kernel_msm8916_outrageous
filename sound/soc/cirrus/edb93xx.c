@@ -64,7 +64,11 @@ static struct snd_soc_dai_link edb93xx_dai = {
 	.name		= "CS4271",
 	.stream_name	= "CS4271 HiFi",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.platform_name	= "ep93xx-pcm-audio",
+=======
+	.platform_name	= "ep93xx-i2s",
+>>>>>>> v3.18
 =======
 	.platform_name	= "ep93xx-i2s",
 >>>>>>> v3.18

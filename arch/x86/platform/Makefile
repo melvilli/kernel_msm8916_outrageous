@@ -5,7 +5,11 @@ obj-y	+= geode/
 obj-y	+= goldfish/
 obj-y	+= iris/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y	+= mrst/
+=======
+obj-y	+= intel-mid/
+>>>>>>> v3.18
 =======
 obj-y	+= intel-mid/
 >>>>>>> v3.18
@@ -14,7 +18,10 @@ obj-y	+= scx200/
 obj-y	+= sfi/
 obj-y	+= ts5500/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y	+= visws/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-y	+= uv/

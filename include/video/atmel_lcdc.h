@@ -32,6 +32,7 @@
 #define ATMEL_LCDC_WIRING_RGB	1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct atmel_lcdfb_config;
 
  /* LCD Controller info data structure, stored in device platform_data */
@@ -57,17 +58,23 @@ struct atmel_lcdfb_info {
 	u8			saved_lcdcon;
 
 =======
+=======
+>>>>>>> v3.18
 
  /* LCD Controller info data structure, stored in device platform_data */
 struct atmel_lcdfb_pdata {
 	unsigned int		guard_time;
 	bool			lcdcon_is_backlight;
 	bool			lcdcon_pol_negative;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8			default_bpp;
 	u8			lcd_wiring_mode;
 	unsigned int		default_lcdcon2;
 	unsigned int		default_dmacon;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void (*atmel_lcdfb_power_control)(int on);
 	struct fb_monspecs	*default_monspecs;
@@ -75,10 +82,15 @@ struct atmel_lcdfb_pdata {
 
 	struct atmel_lcdfb_config *config;
 =======
+=======
+>>>>>>> v3.18
 	void (*atmel_lcdfb_power_control)(struct atmel_lcdfb_pdata *pdata, int on);
 	struct fb_monspecs	*default_monspecs;
 
 	struct list_head	pwr_gpios;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -1,6 +1,10 @@
 /*
  * Copyright (c) 2006-2007 Silicon Graphics, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2014 Christoph Hellwig.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2014 Christoph Hellwig.
 >>>>>>> v3.18
@@ -20,6 +24,7 @@
  * Inc.,  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #include "xfs.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "xfs_bmap_btree.h"
 #include "xfs_inum.h"
@@ -132,6 +137,8 @@ typedef struct fstrm_item
  * Allocation group filestream associations are tracked with per-ag atomic
  * counters.  These counters allow _xfs_filestream_pick_ag() to tell whether a
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_format.h"
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
@@ -162,6 +169,9 @@ enum xfs_fstrm_alloc {
 /*
  * Allocation group filestream associations are tracked with per-ag atomic
  * counters.  These counters allow xfs_filestream_pick_ag() to tell whether a
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * particular AG already has active filestreams associated with it. The mount
  * point's m_peraglock is used to protect these counters from per-ag array
@@ -198,7 +208,11 @@ enum xfs_fstrm_alloc {
  * reallocated.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
+=======
+int
+>>>>>>> v3.18
 =======
 int
 >>>>>>> v3.18
@@ -242,7 +256,10 @@ xfs_filestream_put_ag(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 xfs_fstrm_free_func(
 	struct xfs_mru_cache_elem *mru)
@@ -257,12 +274,16 @@ xfs_fstrm_free_func(
 	kmem_free(item);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Scan the AGs starting at startag looking for an AG that isn't in use and has
  * at least minlen blocks free.
  */
 static int
+<<<<<<< HEAD
 <<<<<<< HEAD
 _xfs_filestream_pick_ag(
 	xfs_mount_t	*mp,
@@ -277,6 +298,8 @@ _xfs_filestream_pick_ag(
 	xfs_agnumber_t	ag, max_ag = NULLAGNUMBER;
 	struct xfs_perag *pag;
 =======
+=======
+>>>>>>> v3.18
 xfs_filestream_pick_ag(
 	struct xfs_inode	*ip,
 	xfs_agnumber_t		startag,
@@ -292,6 +315,9 @@ xfs_filestream_pick_ag(
 	int			err, trylock, nscan;
 
 	ASSERT(S_ISDIR(ip->i_d.di_mode));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* 2% of an AG's blocks must be free for it to be chosen. */
@@ -305,8 +331,14 @@ xfs_filestream_pick_ag(
 
 	for (nscan = 0; 1; nscan++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pag = xfs_perag_get(mp, ag);
 		TRACE_AG_SCAN(mp, ag, atomic_read(&pag->pagf_fstrms));
+=======
+		trace_xfs_filestream_scan(ip, ag);
+
+		pag = xfs_perag_get(mp, ag);
+>>>>>>> v3.18
 =======
 		trace_xfs_filestream_scan(ip, ag);
 
@@ -329,7 +361,10 @@ xfs_filestream_pick_ag(
 		if (pag->pagf_freeblks > maxfree) {
 			maxfree = pag->pagf_freeblks;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			max_streams = atomic_read(&pag->pagf_fstrms);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			max_ag = ag;
@@ -355,7 +390,10 @@ xfs_filestream_pick_ag(
 			/* Break out, retaining the reference on the AG. */
 			free = pag->pagf_freeblks;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			streams = atomic_read(&pag->pagf_fstrms);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			xfs_perag_put(pag);
@@ -394,8 +432,11 @@ next_ag:
 		if (max_ag != NULLAGNUMBER) {
 			xfs_filestream_get_ag(mp, max_ag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			TRACE_AG_PICK1(mp, max_ag, maxfree);
 			streams = max_streams;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			free = maxfree;
@@ -405,7 +446,11 @@ next_ag:
 
 		/* take AG 0 if none matched */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		TRACE_AG_PICK1(mp, max_ag, maxfree);
+=======
+		trace_xfs_filestream_pick(ip, *agp, free, nscan);
+>>>>>>> v3.18
 =======
 		trace_xfs_filestream_pick(ip, *agp, free, nscan);
 >>>>>>> v3.18
@@ -413,6 +458,7 @@ next_ag:
 		return 0;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TRACE_AG_PICK2(mp, startag, *agp, streams, free, nscan, flags);
 
@@ -713,6 +759,8 @@ xfs_filestream_associate(
 
 		goto exit;
 =======
+=======
+>>>>>>> v3.18
 	trace_xfs_filestream_pick(ip, *agp, free, nscan);
 
 	if (*agp == NULLAGNUMBER)
@@ -794,6 +842,9 @@ xfs_filestream_lookup_ag(
 
 		trace_xfs_filestream_lookup(ip, ag);
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -803,7 +854,11 @@ xfs_filestream_lookup_ag(
 	 */
 	if (mp->m_flags & XFS_MOUNT_32BITINODES) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rotorstep = xfs_rotorstep;
+=======
+		xfs_agnumber_t	 rotorstep = xfs_rotorstep;
+>>>>>>> v3.18
 =======
 		xfs_agnumber_t	 rotorstep = xfs_rotorstep;
 >>>>>>> v3.18
@@ -813,6 +868,7 @@ xfs_filestream_lookup_ag(
 	} else
 		startag = XFS_INO_TO_AGNO(mp, pip->i_ino);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Pick a new AG for the parent inode starting at startag. */
 	err = _xfs_filestream_pick_ag(mp, startag, &ag, 0, 0);
@@ -1006,6 +1062,8 @@ xfs_filestream_deassociate(
 
 	xfs_mru_cache_delete(cache, ip->i_ino);
 =======
+=======
+>>>>>>> v3.18
 	if (xfs_filestream_pick_ag(pip, startag, &ag, 0, 0))
 		ag = NULLAGNUMBER;
 out:
@@ -1089,5 +1147,8 @@ xfs_filestream_unmount(
 	xfs_mount_t	*mp)
 {
 	xfs_mru_cache_destroy(mp->m_filestream);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

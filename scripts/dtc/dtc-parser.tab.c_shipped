@@ -1,15 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* A Bison parser, made by GNU Bison 2.5.  */
 
 /* Bison implementation for Yacc-like parsers in C
    
       Copyright (C) 1984, 1989-1990, 2000-2011 Free Software Foundation, Inc.
 =======
+=======
+>>>>>>> v3.18
 /* A Bison parser, made by GNU Bison 2.7.12-4996.  */
 
 /* Bison implementation for Yacc-like parsers in C
    
       Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
    
    This program is free software: you can redistribute it and/or modify
@@ -53,7 +59,11 @@
 
 /* Bison version.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define YYBISON_VERSION "2.5"
+=======
+#define YYBISON_VERSION "2.7.12-4996"
+>>>>>>> v3.18
 =======
 #define YYBISON_VERSION "2.7.12-4996"
 >>>>>>> v3.18
@@ -71,8 +81,11 @@
 #define YYPULL 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Using locations.  */
 #define YYLSP_NEEDED 0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -80,8 +93,12 @@
 
 /* Copy the first part of user declarations.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 268 of yacc.c  */
+=======
+/* Line 371 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 371 of yacc.c  */
 >>>>>>> v3.18
@@ -105,6 +122,7 @@ static unsigned long long eval_literal(const char *s, int base, int bits);
 static unsigned char eval_char_literal(const char *s);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 268 of yacc.c  */
 #line 91 "dtc-parser.tab.c"
@@ -114,6 +132,8 @@ static unsigned char eval_char_literal(const char *s);
 # define YYDEBUG 0
 #endif
 =======
+=======
+>>>>>>> v3.18
 /* Line 371 of yacc.c  */
 #line 87 "dtc-parser.tab.c"
 
@@ -124,6 +144,9 @@ static unsigned char eval_char_literal(const char *s);
 #   define YY_NULL 0
 #  endif
 # endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Enabling verbose error messages.  */
@@ -135,12 +158,15 @@ static unsigned char eval_char_literal(const char *s);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Enabling the token table.  */
 #ifndef YYTOKEN_TABLE
 # define YYTOKEN_TABLE 0
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 /* In a future release of Bison, this section will be replaced
    by #include "dtc-parser.tab.h".  */
 #ifndef YY_YY_DTC_PARSER_TAB_H_INCLUDED
@@ -152,6 +178,9 @@ static unsigned char eval_char_literal(const char *s);
 #if YYDEBUG
 extern int yydebug;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Tokens.  */
@@ -187,6 +216,7 @@ extern int yydebug;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
@@ -194,10 +224,15 @@ typedef union YYSTYPE
 
 /* Line 293 of yacc.c  */
 =======
+=======
+>>>>>>> v3.18
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
 {
 /* Line 387 of yacc.c  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #line 40 "dtc-parser.y"
 
@@ -222,9 +257,14 @@ typedef union YYSTYPE
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 293 of yacc.c  */
 #line 174 "dtc-parser.tab.c"
+=======
+/* Line 387 of yacc.c  */
+#line 176 "dtc-parser.tab.c"
+>>>>>>> v3.18
 =======
 /* Line 387 of yacc.c  */
 #line 176 "dtc-parser.tab.c"
@@ -236,6 +276,7 @@ typedef union YYSTYPE
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Copy the second part of user declarations.  */
 
@@ -243,6 +284,8 @@ typedef union YYSTYPE
 /* Line 343 of yacc.c  */
 #line 186 "dtc-parser.tab.c"
 =======
+=======
+>>>>>>> v3.18
 extern YYSTYPE yylval;
 
 #ifdef YYPARSE_PARAM
@@ -265,6 +308,9 @@ int yyparse ();
 
 /* Line 390 of yacc.c  */
 #line 204 "dtc-parser.tab.c"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef short
@@ -319,12 +365,15 @@ typedef short int yytype_int16;
 #  if ENABLE_NLS
 #   include <libintl.h> /* INFRINGES ON USER NAME SPACE */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #   define YY_(msgid) dgettext ("bison-runtime", msgid)
 #  endif
 # endif
 # ifndef YY_
 #  define YY_(msgid) msgid
 =======
+=======
+>>>>>>> v3.18
 #   define YY_(Msgid) dgettext ("bison-runtime", Msgid)
 #  endif
 # endif
@@ -338,12 +387,16 @@ typedef short int yytype_int16;
 # if (! defined __GNUC__ || __GNUC__ < 2 \
       || (__GNUC__ == 2 && __GNUC_MINOR__ < 5))
 #  define __attribute__(Spec) /* empty */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # endif
 #endif
 
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
+<<<<<<< HEAD
 <<<<<<< HEAD
 # define YYUSE(e) ((void) (e))
 #else
@@ -354,6 +407,8 @@ typedef short int yytype_int16;
 #ifndef lint
 # define YYID(n) (n)
 =======
+=======
+>>>>>>> v3.18
 # define YYUSE(E) ((void) (E))
 #else
 # define YYUSE(E) /* empty */
@@ -363,6 +418,9 @@ typedef short int yytype_int16;
 /* Identity function, used to suppress warnings about constant conditions.  */
 #ifndef lint
 # define YYID(N) (N)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 #if (defined __STDC__ || defined __C99__FUNC__ \
@@ -400,6 +458,10 @@ YYID (yyi)
      || defined __cplusplus || defined _MSC_VER)
 #     include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      /* Use EXIT_SUCCESS as a witness for stdlib.h.  */
+>>>>>>> v3.18
 =======
       /* Use EXIT_SUCCESS as a witness for stdlib.h.  */
 >>>>>>> v3.18
@@ -495,6 +557,7 @@ union yyalloc
 
 #if defined YYCOPY_NEEDED && YYCOPY_NEEDED
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copy COUNT objects from FROM to TO.  The source and destination do
    not overlap.  */
 # ifndef YYCOPY
@@ -510,6 +573,8 @@ union yyalloc
 	    (To)[yyi] = (From)[yyi];		\
 	}					\
 =======
+=======
+>>>>>>> v3.18
 /* Copy COUNT objects from SRC to DST.  The source and destination do
    not overlap.  */
 # ifndef YYCOPY
@@ -524,6 +589,9 @@ union yyalloc
           for (yyi = 0; yyi < (Count); yyi++)   \
             (Dst)[yyi] = (Src)[yyi];            \
         }                                       \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       while (YYID (0))
 #  endif
@@ -646,7 +714,11 @@ static const yytype_uint16 yyrline[] =
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if YYDEBUG || YYERROR_VERBOSE || YYTOKEN_TABLE
+=======
+#if YYDEBUG || YYERROR_VERBOSE || 0
+>>>>>>> v3.18
 =======
 #if YYDEBUG || YYERROR_VERBOSE || 0
 >>>>>>> v3.18
@@ -667,7 +739,11 @@ static const char *const yytname[] =
   "integer_bitor", "integer_bitxor", "integer_bitand", "integer_eq",
   "integer_rela", "integer_shift", "integer_add", "integer_mul",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "integer_unary", "bytestring", "subnodes", "subnode", 0
+=======
+  "integer_unary", "bytestring", "subnodes", "subnode", YY_NULL
+>>>>>>> v3.18
 =======
   "integer_unary", "bytestring", "subnodes", "subnode", YY_NULL
 >>>>>>> v3.18
@@ -796,15 +872,21 @@ static const yytype_uint8 yytable[] =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define yypact_value_is_default(yystate) \
   ((yystate) == (-78))
 
 #define yytable_value_is_error(yytable_value) \
 =======
+=======
+>>>>>>> v3.18
 #define yypact_value_is_default(Yystate) \
   (!!((Yystate) == (-78)))
 
 #define yytable_value_is_error(Yytable_value) \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   YYID (0)
 
@@ -875,6 +957,7 @@ static const yytype_uint8 yystos[] =
 #define YYRECOVERING()  (!!yyerrstatus)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define YYBACKUP(Token, Value)					\
 do								\
   if (yychar == YYEMPTY && yylen == 1)				\
@@ -887,6 +970,8 @@ do								\
   else								\
     {								\
 =======
+=======
+>>>>>>> v3.18
 #define YYBACKUP(Token, Value)                                  \
 do                                                              \
   if (yychar == YYEMPTY)                                        \
@@ -899,6 +984,9 @@ do                                                              \
     }                                                           \
   else                                                          \
     {                                                           \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       yyerror (YY_("syntax error: cannot back up")); \
       YYERROR;							\
@@ -906,7 +994,11 @@ do                                                              \
 while (YYID (0))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+/* Error token number */
+>>>>>>> v3.18
 =======
 /* Error token number */
 >>>>>>> v3.18
@@ -914,6 +1006,7 @@ while (YYID (0))
 #define YYERRCODE	256
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* YYLLOC_DEFAULT -- Set CURRENT to span from RHS[1] to RHS[N].
    If N is 0, then set CURRENT to the empty location which ends
@@ -946,6 +1039,9 @@ while (YYID (0))
 =======
 /* This macro is provided for backward compatibility. */
 >>>>>>> v3.18
+=======
+/* This macro is provided for backward compatibility. */
+>>>>>>> v3.18
 #ifndef YY_LOCATION_PRINT
 # define YY_LOCATION_PRINT(File, Loc) ((void) 0)
 #endif
@@ -953,7 +1049,10 @@ while (YYID (0))
 
 /* YYLEX -- calling `yylex' with the right arguments.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef YYLEX_PARAM
@@ -1006,6 +1105,11 @@ yy_symbol_value_print (yyoutput, yytype, yyvaluep)
 #endif
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  FILE *yyo = yyoutput;
+  YYUSE (yyo);
+>>>>>>> v3.18
 =======
   FILE *yyo = yyoutput;
   YYUSE (yyo);
@@ -1019,11 +1123,15 @@ yy_symbol_value_print (yyoutput, yytype, yyvaluep)
   YYUSE (yyoutput);
 # endif
 <<<<<<< HEAD
+<<<<<<< HEAD
   switch (yytype)
     {
       default:
 	break;
     }
+=======
+  YYUSE (yytype);
+>>>>>>> v3.18
 =======
   YYUSE (yytype);
 >>>>>>> v3.18
@@ -1266,6 +1374,7 @@ yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
                 yytype_int16 *yyssp, int yytoken)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   YYSIZE_T yysize0 = yytnamerr (0, yytname[yytoken]);
   YYSIZE_T yysize = yysize0;
   YYSIZE_T yysize1;
@@ -1273,11 +1382,16 @@ yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
   /* Internationalized format string. */
   const char *yyformat = 0;
 =======
+=======
+>>>>>>> v3.18
   YYSIZE_T yysize0 = yytnamerr (YY_NULL, yytname[yytoken]);
   YYSIZE_T yysize = yysize0;
   enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
   /* Internationalized format string. */
   const char *yyformat = YY_NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   /* Arguments of yyformat. */
   char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
@@ -1339,12 +1453,15 @@ yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
                   }
                 yyarg[yycount++] = yytname[yyx];
 <<<<<<< HEAD
+<<<<<<< HEAD
                 yysize1 = yysize + yytnamerr (0, yytname[yyx]);
                 if (! (yysize <= yysize1
                        && yysize1 <= YYSTACK_ALLOC_MAXIMUM))
                   return 2;
                 yysize = yysize1;
 =======
+=======
+>>>>>>> v3.18
                 {
                   YYSIZE_T yysize1 = yysize + yytnamerr (YY_NULL, yytname[yyx]);
                   if (! (yysize <= yysize1
@@ -1352,6 +1469,9 @@ yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
                     return 2;
                   yysize = yysize1;
                 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
               }
         }
@@ -1373,17 +1493,23 @@ yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   yysize1 = yysize + yystrlen (yyformat);
   if (! (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM))
     return 2;
   yysize = yysize1;
 =======
+=======
+>>>>>>> v3.18
   {
     YYSIZE_T yysize1 = yysize + yystrlen (yyformat);
     if (! (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM))
       return 2;
     yysize = yysize1;
   }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   if (*yymsg_alloc < yysize)
@@ -1441,6 +1567,7 @@ yydestruct (yymsg, yytype, yyvaluep)
   YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   switch (yytype)
     {
 
@@ -1465,10 +1592,15 @@ int yyparse ();
 #endif
 #endif /* ! YYPARSE_PARAM */
 =======
+=======
+>>>>>>> v3.18
   YYUSE (yytype);
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -1476,9 +1608,12 @@ int yyparse ();
 int yychar;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* The semantic value of the lookahead symbol.  */
 YYSTYPE yylval;
 =======
+=======
+>>>>>>> v3.18
 
 #ifndef YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
 # define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
@@ -1490,6 +1625,9 @@ YYSTYPE yylval;
 
 /* The semantic value of the lookahead symbol.  */
 YYSTYPE yylval YY_INITIAL_VALUE(yyval_default);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Number of syntax errors so far.  */
@@ -1531,7 +1669,11 @@ yyparse ()
        `yyvs': related to semantic values.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
        Refer to the stacks thru separate pointers, to allow yyoverflow
+=======
+       Refer to the stacks through separate pointers, to allow yyoverflow
+>>>>>>> v3.18
 =======
        Refer to the stacks through separate pointers, to allow yyoverflow
 >>>>>>> v3.18
@@ -1553,7 +1695,11 @@ yyparse ()
   int yyresult;
   /* Lookahead token as an internal (translated) token number.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
   int yytoken;
+=======
+  int yytoken = 0;
+>>>>>>> v3.18
 =======
   int yytoken = 0;
 >>>>>>> v3.18
@@ -1575,9 +1721,14 @@ yyparse ()
   int yylen = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   yytoken = 0;
   yyss = yyssa;
   yyvs = yyvsa;
+=======
+  yyssp = yyss = yyssa;
+  yyvsp = yyvs = yyvsa;
+>>>>>>> v3.18
 =======
   yyssp = yyss = yyssa;
   yyvsp = yyvs = yyvsa;
@@ -1591,6 +1742,7 @@ yyparse ()
   yynerrs = 0;
   yychar = YYEMPTY; /* Cause a token to be read.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   /* Initialize stack pointers.
      Waste one element of value and location stack
@@ -1599,6 +1751,8 @@ yyparse ()
   yyssp = yyss;
   yyvsp = yyvs;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
   goto yysetstate;
@@ -1742,7 +1896,13 @@ yybackup:
 
   yystate = yyn;
 <<<<<<< HEAD
+<<<<<<< HEAD
   *++yyvsp = yylval;
+=======
+  YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+  *++yyvsp = yylval;
+  YY_IGNORE_MAYBE_UNINITIALIZED_END
+>>>>>>> v3.18
 =======
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   *++yyvsp = yylval;
@@ -1785,8 +1945,12 @@ yyreduce:
     {
         case 2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1799,8 +1963,12 @@ yyreduce:
 
   case 3:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1812,8 +1980,12 @@ yyreduce:
 
   case 4:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1825,8 +1997,12 @@ yyreduce:
 
   case 5:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1838,8 +2014,12 @@ yyreduce:
 
   case 6:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1852,8 +2032,12 @@ yyreduce:
 
   case 7:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1865,8 +2049,12 @@ yyreduce:
 
   case 8:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1878,8 +2066,12 @@ yyreduce:
 
   case 9:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1897,8 +2089,12 @@ yyreduce:
 
   case 10:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1917,8 +2113,12 @@ yyreduce:
 
   case 11:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1930,8 +2130,12 @@ yyreduce:
 
   case 12:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1943,8 +2147,12 @@ yyreduce:
 
   case 13:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1956,8 +2164,12 @@ yyreduce:
 
   case 14:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1969,8 +2181,12 @@ yyreduce:
 
   case 15:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1982,8 +2198,12 @@ yyreduce:
 
   case 16:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -1995,8 +2215,12 @@ yyreduce:
 
   case 17:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2009,8 +2233,12 @@ yyreduce:
 
   case 18:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2022,8 +2250,12 @@ yyreduce:
 
   case 19:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2035,8 +2267,12 @@ yyreduce:
 
   case 20:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2048,8 +2284,12 @@ yyreduce:
 
   case 21:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2061,8 +2301,12 @@ yyreduce:
 
   case 22:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2087,8 +2331,12 @@ yyreduce:
 
   case 23:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2106,8 +2354,12 @@ yyreduce:
 
   case 24:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2119,8 +2371,12 @@ yyreduce:
 
   case 25:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2132,8 +2388,12 @@ yyreduce:
 
   case 26:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2145,8 +2405,12 @@ yyreduce:
 
   case 27:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2158,8 +2422,12 @@ yyreduce:
 
   case 28:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2182,8 +2450,12 @@ yyreduce:
 
   case 29:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2196,8 +2468,12 @@ yyreduce:
 
   case 30:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2225,8 +2501,12 @@ yyreduce:
 
   case 31:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2248,8 +2528,12 @@ yyreduce:
 
   case 32:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2261,8 +2545,12 @@ yyreduce:
 
   case 33:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2274,8 +2562,12 @@ yyreduce:
 
   case 34:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2287,8 +2579,12 @@ yyreduce:
 
   case 35:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2300,8 +2596,12 @@ yyreduce:
 
   case 38:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2311,8 +2611,12 @@ yyreduce:
 
   case 40:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2322,8 +2626,12 @@ yyreduce:
 
   case 42:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2333,8 +2641,12 @@ yyreduce:
 
   case 44:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2344,8 +2656,12 @@ yyreduce:
 
   case 46:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2355,8 +2671,12 @@ yyreduce:
 
   case 48:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2366,8 +2686,12 @@ yyreduce:
 
   case 50:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2377,8 +2701,12 @@ yyreduce:
 
   case 51:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2388,8 +2716,12 @@ yyreduce:
 
   case 53:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2399,8 +2731,12 @@ yyreduce:
 
   case 54:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2410,8 +2746,12 @@ yyreduce:
 
   case 55:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2421,8 +2761,12 @@ yyreduce:
 
   case 56:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2432,8 +2776,12 @@ yyreduce:
 
   case 57:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2443,8 +2791,12 @@ yyreduce:
 
   case 58:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2454,8 +2806,12 @@ yyreduce:
 
   case 60:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2465,8 +2821,12 @@ yyreduce:
 
   case 61:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2476,8 +2836,12 @@ yyreduce:
 
   case 63:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2487,8 +2851,12 @@ yyreduce:
 
   case 64:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2498,8 +2866,12 @@ yyreduce:
 
   case 65:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2509,8 +2881,12 @@ yyreduce:
 
   case 68:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2520,8 +2896,12 @@ yyreduce:
 
   case 69:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2531,8 +2911,12 @@ yyreduce:
 
   case 70:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2542,8 +2926,12 @@ yyreduce:
 
   case 71:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2555,8 +2943,12 @@ yyreduce:
 
   case 72:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2568,8 +2960,12 @@ yyreduce:
 
   case 73:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2581,8 +2977,12 @@ yyreduce:
 
   case 74:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2594,8 +2994,12 @@ yyreduce:
 
   case 75:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2607,8 +3011,12 @@ yyreduce:
 
   case 76:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2621,8 +3029,12 @@ yyreduce:
 
   case 77:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2634,8 +3046,12 @@ yyreduce:
 
   case 78:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2647,8 +3063,12 @@ yyreduce:
 
   case 79:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
+=======
+/* Line 1787 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 >>>>>>> v3.18
@@ -2661,9 +3081,14 @@ yyreduce:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 1806 of yacc.c  */
 #line 2154 "dtc-parser.tab.c"
+=======
+/* Line 1787 of yacc.c  */
+#line 2073 "dtc-parser.tab.c"
+>>>>>>> v3.18
 =======
 /* Line 1787 of yacc.c  */
 #line 2073 "dtc-parser.tab.c"
@@ -2831,7 +3256,13 @@ yyerrlab1:
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   *++yyvsp = yylval;
+=======
+  YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+  *++yyvsp = yylval;
+  YY_IGNORE_MAYBE_UNINITIALIZED_END
+>>>>>>> v3.18
 =======
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   *++yyvsp = yylval;
@@ -2861,7 +3292,11 @@ yyabortlab:
   goto yyreturn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !defined(yyoverflow) || YYERROR_VERBOSE
+=======
+#if !defined yyoverflow || YYERROR_VERBOSE
+>>>>>>> v3.18
 =======
 #if !defined yyoverflow || YYERROR_VERBOSE
 >>>>>>> v3.18
@@ -2907,8 +3342,12 @@ yyreturn:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Line 2067 of yacc.c  */
+=======
+/* Line 2050 of yacc.c  */
+>>>>>>> v3.18
 =======
 /* Line 2050 of yacc.c  */
 >>>>>>> v3.18
@@ -2976,6 +3415,9 @@ static unsigned char eval_char_literal(const char *s)
 	return c;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

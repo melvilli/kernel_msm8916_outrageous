@@ -3,7 +3,11 @@
 #
 menuconfig SPMI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "SPMI support"
+=======
+	tristate "SPMI support"
+>>>>>>> v3.18
 =======
 	tristate "SPMI support"
 >>>>>>> v3.18
@@ -14,9 +18,12 @@ menuconfig SPMI
 
 if SPMI
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SPMI_MSM_PMIC_ARB
 	tristate "Qualcomm MSM SPMI Controller (PMIC Arbiter)"
 =======
+=======
+>>>>>>> v3.18
 
 config SPMI_MSM_PMIC_ARB
 	tristate "Qualcomm MSM SPMI Controller (PMIC Arbiter)"
@@ -24,6 +31,9 @@ config SPMI_MSM_PMIC_ARB
 	depends on IRQ_DOMAIN
 	depends on ARCH_QCOM || COMPILE_TEST
 	default ARCH_QCOM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  If you say yes to this option, support will be included for the
@@ -33,6 +43,7 @@ config SPMI_MSM_PMIC_ARB
 	  This is required for communicating with Qualcomm PMICs and
 	  other devices that have the SPMI interface.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config MSM_QPNP_INT
 	depends on SPARSE_IRQ
@@ -49,6 +60,8 @@ config MSM_SPMI_DEBUGFS_RO
 	bool "Disable SPMI debugfs write"
 	help
 	  Say 'y' here to disable the SPMI debugfs register write operation.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif

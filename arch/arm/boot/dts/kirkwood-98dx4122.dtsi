@@ -1,5 +1,6 @@
 / {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ocp@f1000000 {
 		pinctrl: pinctrl@10000 {
 			compatible = "marvell,98dx4122-pinctrl";
@@ -31,6 +32,8 @@
 	};
 };
 =======
+=======
+>>>>>>> v3.18
 	mbus {
 		pciec: pcie-controller {
 			compatible = "marvell,kirkwood-pcie";
@@ -81,4 +84,7 @@
 &sata_phy1 {
 	status = "disabled";
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

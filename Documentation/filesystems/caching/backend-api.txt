@@ -300,7 +300,10 @@ performed on the denizens of the cache.  These are held in a structure of type:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  (*) Check coherency state of an object [mandatory]:
 
 	int (*check_consistency)(struct fscache_object *object)
@@ -310,6 +313,9 @@ performed on the denizens of the cache.  These are held in a structure of type:
      if they're consistent and -ESTALE otherwise.  -ENOMEM and -ERESTARTSYS
      may also be returned.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  (*) Update object [mandatory]:
 

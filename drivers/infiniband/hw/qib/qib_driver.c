@@ -559,7 +559,10 @@ move_along:
 
 	rcd->head = l;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcd->pkt_count += i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

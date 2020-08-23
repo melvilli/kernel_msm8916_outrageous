@@ -6,10 +6,13 @@
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HUGETLB_PAGE
 #define HAVE_ARCH_HUGETLB_UNMAPPED_AREA
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define __phys_addr_nodebug(x)	((x) - PAGE_OFFSET)

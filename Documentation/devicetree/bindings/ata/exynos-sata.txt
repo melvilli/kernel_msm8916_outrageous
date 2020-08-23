@@ -5,6 +5,7 @@ Each SATA controller should have its own node.
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible        : compatible list, contains "samsung,exynos5-sata"
 - interrupts        : <interrupt mapping for SATA IRQ>
 - reg               : <registers mapping>
@@ -17,6 +18,8 @@ Example:
                 interrupts = <115>;
         };
 =======
+=======
+>>>>>>> v3.18
 - compatible		: compatible list, contains "samsung,exynos5-sata"
 - interrupts		: <interrupt mapping for SATA IRQ>
 - reg			: <registers mapping>
@@ -41,4 +44,7 @@ Example:
 		phys = <&sata_phy>;
 		phy-names = "sata-phy";
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -19,11 +19,14 @@
 extern const struct ieee80211_regdomain __rcu *cfg80211_regdomain;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool is_world_regdom(const char *alpha2);
 bool reg_supported_dfs_region(u8 dfs_region);
 
 int reg_device_uevent(struct device *dev, struct kobj_uevent_env *env);
 =======
+=======
+>>>>>>> v3.18
 bool reg_is_valid_request(const char *alpha2);
 bool is_world_regdom(const char *alpha2);
 bool reg_supported_dfs_region(enum nl80211_dfs_regions dfs_region);
@@ -33,6 +36,9 @@ int regulatory_hint_user(const char *alpha2,
 			 enum nl80211_user_reg_hint_type user_reg_hint_type);
 int regulatory_hint_indoor_user(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void wiphy_regulatory_register(struct wiphy *wiphy);
 void wiphy_regulatory_deregister(struct wiphy *wiphy);
@@ -42,6 +48,11 @@ void regulatory_exit(void);
 
 int set_regdom(const struct ieee80211_regdomain *rd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unsigned int reg_get_max_bandwidth(const struct ieee80211_regdomain *rd,
+				   const struct ieee80211_reg_rule *rule);
+>>>>>>> v3.18
 =======
 unsigned int reg_get_max_bandwidth(const struct ieee80211_regdomain *rd,
 				   const struct ieee80211_reg_rule *rule);
@@ -73,7 +84,11 @@ int regulatory_hint_found_beacon(struct wiphy *wiphy,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * regulatory_hint_11d - hints a country IE as a regulatory domain
+=======
+ * regulatory_hint_country_ie - hints a country IE as a regulatory domain
+>>>>>>> v3.18
 =======
  * regulatory_hint_country_ie - hints a country IE as a regulatory domain
 >>>>>>> v3.18
@@ -97,7 +112,11 @@ int regulatory_hint_found_beacon(struct wiphy *wiphy,
  * information for a band the BSS is not present in it will be ignored.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void regulatory_hint_11d(struct wiphy *wiphy,
+=======
+void regulatory_hint_country_ie(struct wiphy *wiphy,
+>>>>>>> v3.18
 =======
 void regulatory_hint_country_ie(struct wiphy *wiphy,
 >>>>>>> v3.18
@@ -124,7 +143,10 @@ void regulatory_hint_country_ie(struct wiphy *wiphy,
 void regulatory_hint_disconnect(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * cfg80211_get_unii - get the U-NII band for the frequency
  * @freq: the frequency for which we want to get the UNII band.
@@ -142,5 +164,8 @@ int cfg80211_get_unii(int freq);
  */
 bool regulatory_indoor_allowed(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif  /* __NET_WIRELESS_REG_H */

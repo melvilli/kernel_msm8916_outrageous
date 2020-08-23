@@ -25,10 +25,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/fb.h>
 #include <subdev/vm.h>
 #include <subdev/instmem.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "nouveau_drm.h"
@@ -40,7 +43,11 @@ nouveau_vram_manager_init(struct ttm_mem_type_manager *man, unsigned long psize)
 {
 	struct nouveau_drm *drm = nouveau_bdev(man->bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_fb *pfb = nouveau_fb(drm->device);
+=======
+	struct nouveau_fb *pfb = nvkm_fb(&drm->device);
+>>>>>>> v3.18
 =======
 	struct nouveau_fb *pfb = nvkm_fb(&drm->device);
 >>>>>>> v3.18
@@ -75,9 +82,15 @@ nouveau_vram_manager_del(struct ttm_mem_type_manager *man,
 {
 	struct nouveau_drm *drm = nouveau_bdev(man->bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_fb *pfb = nouveau_fb(drm->device);
 	nouveau_mem_node_cleanup(mem->mm_node);
 	pfb->ram.put(pfb, (struct nouveau_mem **)&mem->mm_node);
+=======
+	struct nouveau_fb *pfb = nvkm_fb(&drm->device);
+	nouveau_mem_node_cleanup(mem->mm_node);
+	pfb->ram->put(pfb, (struct nouveau_mem **)&mem->mm_node);
+>>>>>>> v3.18
 =======
 	struct nouveau_fb *pfb = nvkm_fb(&drm->device);
 	nouveau_mem_node_cleanup(mem->mm_node);
@@ -89,17 +102,23 @@ static int
 nouveau_vram_manager_new(struct ttm_mem_type_manager *man,
 			 struct ttm_buffer_object *bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct ttm_placement *placement,
 			 struct ttm_mem_reg *mem)
 {
 	struct nouveau_drm *drm = nouveau_bdev(man->bdev);
 	struct nouveau_fb *pfb = nouveau_fb(drm->device);
 =======
+=======
+>>>>>>> v3.18
 			 const struct ttm_place *place,
 			 struct ttm_mem_reg *mem)
 {
 	struct nouveau_drm *drm = nouveau_bdev(man->bdev);
 	struct nouveau_fb *pfb = nvkm_fb(&drm->device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nouveau_bo *nvbo = nouveau_bo(bo);
 	struct nouveau_mem *node;
@@ -110,7 +129,11 @@ nouveau_vram_manager_new(struct ttm_mem_type_manager *man,
 		size_nc = 1 << nvbo->page_shift;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = pfb->ram.get(pfb, mem->num_pages << PAGE_SHIFT,
+=======
+	ret = pfb->ram->get(pfb, mem->num_pages << PAGE_SHIFT,
+>>>>>>> v3.18
 =======
 	ret = pfb->ram->get(pfb, mem->num_pages << PAGE_SHIFT,
 >>>>>>> v3.18
@@ -137,7 +160,11 @@ nouveau_vram_manager_debug(struct ttm_mem_type_manager *man, const char *prefix)
 	u32 total = 0, free = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&mm->mutex);
+=======
+	mutex_lock(&nv_subdev(pfb)->mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&nv_subdev(pfb)->mutex);
 >>>>>>> v3.18
@@ -151,7 +178,11 @@ nouveau_vram_manager_debug(struct ttm_mem_type_manager *man, const char *prefix)
 			free += r->length;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&mm->mutex);
+=======
+	mutex_unlock(&nv_subdev(pfb)->mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&nv_subdev(pfb)->mutex);
 >>>>>>> v3.18
@@ -195,7 +226,11 @@ static int
 nouveau_gart_manager_new(struct ttm_mem_type_manager *man,
 			 struct ttm_buffer_object *bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct ttm_placement *placement,
+=======
+			 const struct ttm_place *place,
+>>>>>>> v3.18
 =======
 			 const struct ttm_place *place,
 >>>>>>> v3.18
@@ -205,6 +240,7 @@ nouveau_gart_manager_new(struct ttm_mem_type_manager *man,
 	struct nouveau_bo *nvbo = nouveau_bo(bo);
 	struct nouveau_mem *node;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (unlikely((mem->num_pages << PAGE_SHIFT) >= 512 * 1024 * 1024))
 		return -ENOMEM;
@@ -223,6 +259,8 @@ nouveau_gart_manager_new(struct ttm_mem_type_manager *man,
 	case NV_D0:
 	case NV_E0:
 =======
+=======
+>>>>>>> v3.18
 	node = kzalloc(sizeof(*node), GFP_KERNEL);
 	if (!node)
 		return -ENOMEM;
@@ -236,6 +274,9 @@ nouveau_gart_manager_new(struct ttm_mem_type_manager *man,
 		break;
 	case NV_DEVICE_INFO_V0_FERMI:
 	case NV_DEVICE_INFO_V0_KEPLER:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		node->memtype = (nvbo->tile_flags & 0xff00) >> 8;
 		break;
@@ -262,6 +303,10 @@ const struct ttm_mem_type_manager_func nouveau_gart_manager = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/*XXX*/
+>>>>>>> v3.18
 =======
 /*XXX*/
 >>>>>>> v3.18
@@ -271,7 +316,11 @@ nv04_gart_manager_init(struct ttm_mem_type_manager *man, unsigned long psize)
 {
 	struct nouveau_drm *drm = nouveau_bdev(man->bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_vmmgr *vmm = nouveau_vmmgr(drm->device);
+=======
+	struct nouveau_vmmgr *vmm = nvkm_vmmgr(&drm->device);
+>>>>>>> v3.18
 =======
 	struct nouveau_vmmgr *vmm = nvkm_vmmgr(&drm->device);
 >>>>>>> v3.18
@@ -305,7 +354,11 @@ static int
 nv04_gart_manager_new(struct ttm_mem_type_manager *man,
 		      struct ttm_buffer_object *bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      struct ttm_placement *placement,
+=======
+		      const struct ttm_place *place,
+>>>>>>> v3.18
 =======
 		      const struct ttm_place *place,
 >>>>>>> v3.18
@@ -353,7 +406,11 @@ nouveau_ttm_mmap(struct file *filp, struct vm_area_struct *vma)
 
 	if (unlikely(vma->vm_pgoff < DRM_FILE_PAGE_OFFSET))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return drm_mmap(filp, vma);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -429,6 +486,7 @@ nouveau_ttm_init(struct nouveau_drm *drm)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bits = nouveau_vmmgr(drm->device)->dma_bits;
 	if ( drm->agp.stat == ENABLED ||
 	    !pci_dma_supported(dev->pdev, DMA_BIT_MASK(bits)))
@@ -442,6 +500,8 @@ nouveau_ttm_init(struct nouveau_drm *drm)
 	if (ret)
 		pci_set_consistent_dma_mask(dev->pdev, DMA_BIT_MASK(32));
 =======
+=======
+>>>>>>> v3.18
 	bits = nvkm_vmmgr(&drm->device)->dma_bits;
 	if (nv_device_is_pci(nvkm_device(&drm->device))) {
 		if (drm->agp.stat == ENABLED ||
@@ -458,6 +518,9 @@ nouveau_ttm_init(struct nouveau_drm *drm)
 			pci_set_consistent_dma_mask(dev->pdev,
 						    DMA_BIT_MASK(32));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = nouveau_ttm_global_init(drm);
@@ -467,7 +530,13 @@ nouveau_ttm_init(struct nouveau_drm *drm)
 	ret = ttm_bo_device_init(&drm->ttm.bdev,
 				  drm->ttm.bo_global_ref.ref.object,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  &nouveau_bo_driver, DRM_FILE_PAGE_OFFSET,
+=======
+				  &nouveau_bo_driver,
+				  dev->anon_inode->i_mapping,
+				  DRM_FILE_PAGE_OFFSET,
+>>>>>>> v3.18
 =======
 				  &nouveau_bo_driver,
 				  dev->anon_inode->i_mapping,
@@ -481,8 +550,12 @@ nouveau_ttm_init(struct nouveau_drm *drm)
 
 	/* VRAM init */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm->gem.vram_available  = nouveau_fb(drm->device)->ram.size;
 	drm->gem.vram_available -= nouveau_instmem(drm->device)->reserved;
+=======
+	drm->gem.vram_available = drm->device.info.ram_user;
+>>>>>>> v3.18
 =======
 	drm->gem.vram_available = drm->device.info.ram_user;
 >>>>>>> v3.18
@@ -495,6 +568,7 @@ nouveau_ttm_init(struct nouveau_drm *drm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm->ttm.mtrr = drm_mtrr_add(pci_resource_start(dev->pdev, 1),
 				     pci_resource_len(dev->pdev, 1),
 				     DRM_MTRR_WC);
@@ -505,12 +579,17 @@ nouveau_ttm_init(struct nouveau_drm *drm)
 		if (drm->gem.gart_available > 512 * 1024 * 1024)
 			drm->gem.gart_available = 512 * 1024 * 1024;
 =======
+=======
+>>>>>>> v3.18
 	drm->ttm.mtrr = arch_phys_wc_add(nv_device_resource_start(nvkm_device(&drm->device), 1),
 					 nv_device_resource_len(nvkm_device(&drm->device), 1));
 
 	/* GART init */
 	if (drm->agp.stat != ENABLED) {
 		drm->gem.gart_available = nvkm_vmmgr(&drm->device)->limit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		drm->gem.gart_available = drm->agp.size;
@@ -541,12 +620,17 @@ nouveau_ttm_fini(struct nouveau_drm *drm)
 	nouveau_ttm_global_release(drm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (drm->ttm.mtrr >= 0) {
 		drm_mtrr_del(drm->ttm.mtrr,
 			     pci_resource_start(drm->dev->pdev, 1),
 			     pci_resource_len(drm->dev->pdev, 1), DRM_MTRR_WC);
 		drm->ttm.mtrr = -1;
 	}
+=======
+	arch_phys_wc_del(drm->ttm.mtrr);
+	drm->ttm.mtrr = 0;
+>>>>>>> v3.18
 =======
 	arch_phys_wc_del(drm->ttm.mtrr);
 	drm->ttm.mtrr = 0;

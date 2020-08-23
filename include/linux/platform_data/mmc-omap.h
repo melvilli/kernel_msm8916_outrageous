@@ -29,6 +29,10 @@
 #define OMAP_HSMMC_SUPPORTS_DUAL_VOLT		BIT(0)
 #define OMAP_HSMMC_BROKEN_MULTIBLOCK_READ	BIT(1)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define OMAP_HSMMC_SWAKEUP_MISSING		BIT(2)
+>>>>>>> v3.18
 =======
 #define OMAP_HSMMC_SWAKEUP_MISSING		BIT(2)
 >>>>>>> v3.18

@@ -22,6 +22,10 @@
 #include <linux/io.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -38,9 +42,15 @@
 #include <asm/mach-types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
 #include <mach/regs-gpio.h>
 #include <mach/regs-lcd.h>
+=======
+#include <mach/regs-gpio.h>
+#include <mach/regs-lcd.h>
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/regs-gpio.h>
 #include <mach/regs-lcd.h>
@@ -55,7 +65,10 @@
 #include <linux/mtd/partitions.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/clock.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/devs.h>
@@ -205,7 +218,10 @@ static void __init at2440evb_map_io(void)
 {
 	s3c24xx_init_io(at2440evb_iodesc, ARRAY_SIZE(at2440evb_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(16934400);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s3c24xx_init_uarts(at2440evb_uartcfgs, ARRAY_SIZE(at2440evb_uartcfgs));
@@ -213,13 +229,19 @@ static void __init at2440evb_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init at2440evb_init_time(void)
 {
 	s3c2440_init_clocks(16934400);
 	samsung_timer_init();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init at2440evb_init(void)
 {
@@ -238,8 +260,12 @@ MACHINE_START(AT2440EVB, "AT2440EVB")
 	.init_machine	= at2440evb_init,
 	.init_irq	= s3c2440_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= samsung_timer_init,
 	.restart	= s3c244x_restart,
+=======
+	.init_time	= at2440evb_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= at2440evb_init_time,
 >>>>>>> v3.18

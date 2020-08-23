@@ -78,7 +78,10 @@ struct htc_config_pipe_msg {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct htc_panic_bad_vaddr {
 	__be32 pattern;
 	__be32 exccause;
@@ -91,6 +94,9 @@ struct htc_panic_bad_epid {
 	__be32 epid;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct htc_ep_callbacks {
 	void *priv;

@@ -973,6 +973,7 @@ enum davinci_da850_index {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum davinci_tnetv107x_index {
 	TNETV107X_ASR_A00,
 	TNETV107X_GPIO32,
@@ -1242,6 +1243,8 @@ enum davinci_tnetv107x_index {
 	TNETV107X_TDM0_RX,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PINMUX(x)		(4 * (x))

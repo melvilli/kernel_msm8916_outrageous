@@ -14,6 +14,11 @@ static ssize_t device_show(struct device *_d,
 	return sprintf(buf, "0x%04x\n", dev->id.device);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(device);
+
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(device);
 
@@ -25,6 +30,11 @@ static ssize_t vendor_show(struct device *_d,
 	return sprintf(buf, "0x%04x\n", dev->id.vendor);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(vendor);
+
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(vendor);
 
@@ -36,6 +46,11 @@ static ssize_t status_show(struct device *_d,
 	return sprintf(buf, "0x%08x\n", dev->config->get_status(dev));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(status);
+
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(status);
 
@@ -48,6 +63,11 @@ static ssize_t modalias_show(struct device *_d,
 		       dev->id.device, dev->id.vendor);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(modalias);
+
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(modalias);
 
@@ -68,6 +88,7 @@ static ssize_t features_show(struct device *_d,
 	return len;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device_attribute virtio_dev_attrs[] = {
 	__ATTR_RO(device),
 	__ATTR_RO(vendor),
@@ -77,6 +98,8 @@ static struct device_attribute virtio_dev_attrs[] = {
 	__ATTR_NULL
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(features);
 
 static struct attribute *virtio_dev_attrs[] = {
@@ -88,6 +111,9 @@ static struct attribute *virtio_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(virtio_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int virtio_id_match(const struct virtio_device *dev,
@@ -141,7 +167,10 @@ void virtio_check_driver_offered_feature(const struct virtio_device *vdev,
 EXPORT_SYMBOL_GPL(virtio_check_driver_offered_feature);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __virtio_config_changed(struct virtio_device *dev)
 {
 	struct virtio_driver *drv = drv_to_virtio(dev->dev.driver);
@@ -179,6 +208,9 @@ static void virtio_config_enable(struct virtio_device *dev)
 	spin_unlock_irq(&dev->config_lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int virtio_dev_probe(struct device *_d)
 {
@@ -217,6 +249,11 @@ static int virtio_dev_probe(struct device *_d)
 		if (drv->scan)
 			drv->scan(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		virtio_config_enable(dev);
+>>>>>>> v3.18
 =======
 
 		virtio_config_enable(dev);
@@ -232,6 +269,11 @@ static int virtio_dev_remove(struct device *_d)
 	struct virtio_driver *drv = drv_to_virtio(dev->dev.driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	virtio_config_disable(dev);
+
+>>>>>>> v3.18
 =======
 	virtio_config_disable(dev);
 
@@ -250,7 +292,11 @@ static struct bus_type virtio_bus = {
 	.name  = "virtio",
 	.match = virtio_dev_match,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs = virtio_dev_attrs,
+=======
+	.dev_groups = virtio_dev_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups = virtio_dev_groups,
 >>>>>>> v3.18
@@ -289,11 +335,17 @@ int register_virtio_device(struct virtio_device *dev)
 	dev_set_name(&dev->dev, "virtio%u", dev->index);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_init(&dev->config_lock);
 	dev->config_enabled = false;
 	dev->config_change_pending = false;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* We always start by resetting the device, in case a previous
 	 * driver messed it up.  This also tests that code path a little. */
@@ -324,7 +376,10 @@ void unregister_virtio_device(struct virtio_device *dev)
 EXPORT_SYMBOL_GPL(unregister_virtio_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 int virtio_device_freeze(struct virtio_device *dev)
 {
@@ -383,6 +438,9 @@ int virtio_device_restore(struct virtio_device *dev)
 EXPORT_SYMBOL_GPL(virtio_device_restore);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int virtio_init(void)
 {
@@ -395,7 +453,10 @@ static void __exit virtio_exit(void)
 {
 	bus_unregister(&virtio_bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ida_destroy(&virtio_index_ida);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

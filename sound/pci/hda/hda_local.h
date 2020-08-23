@@ -269,7 +269,12 @@ int snd_hda_input_mux_put(struct hda_codec *codec,
 			  struct snd_ctl_elem_value *ucontrol, hda_nid_t nid,
 			  unsigned int *cur_val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_hda_add_imux_item(struct hda_input_mux *imux, const char *label,
+=======
+int snd_hda_add_imux_item(struct hda_codec *codec,
+			  struct hda_input_mux *imux, const char *label,
+>>>>>>> v3.18
 =======
 int snd_hda_add_imux_item(struct hda_codec *codec,
 			  struct hda_input_mux *imux, const char *label,
@@ -358,6 +363,7 @@ int snd_hda_multi_out_analog_cleanup(struct hda_codec *codec,
  * generic codec parser
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SND_HDA_GENERIC
 int snd_hda_parse_generic_codec(struct hda_codec *codec);
 #else
@@ -366,6 +372,10 @@ static inline int snd_hda_parse_generic_codec(struct hda_codec *codec)
 	return -ENODEV;
 }
 #endif
+=======
+int snd_hda_parse_generic_codec(struct hda_codec *codec);
+int snd_hda_parse_hdmi_codec(struct hda_codec *codec);
+>>>>>>> v3.18
 =======
 int snd_hda_parse_generic_codec(struct hda_codec *codec);
 int snd_hda_parse_hdmi_codec(struct hda_codec *codec);
@@ -387,12 +397,15 @@ void snd_print_pcm_bits(int pcm, char *buf, int buflen);
  * Misc
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_hda_check_board_config(struct hda_codec *codec, int num_configs,
 			       const char * const *modelnames,
 			       const struct snd_pci_quirk *pci_list);
 int snd_hda_check_board_codec_sid_config(struct hda_codec *codec,
                                int num_configs, const char * const *models,
                                const struct snd_pci_quirk *tbl);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int snd_hda_add_new_ctls(struct hda_codec *codec,
@@ -427,7 +440,10 @@ struct hda_fixup {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct snd_hda_pin_quirk {
 	unsigned int codec;             /* Codec vendor/device ID */
 	unsigned short subvendor;	/* PCI subvendor ID */
@@ -461,6 +477,9 @@ struct snd_hda_pin_quirk {
 #define HDA_FIXUP_ID_NOT_SET -1
 #define HDA_FIXUP_ID_NO_FIXUP -2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* fixup types */
 enum {
@@ -478,6 +497,10 @@ enum {
 	HDA_FIXUP_ACT_INIT,
 	HDA_FIXUP_ACT_BUILD,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	HDA_FIXUP_ACT_FREE,
+>>>>>>> v3.18
 =======
 	HDA_FIXUP_ACT_FREE,
 >>>>>>> v3.18
@@ -493,11 +516,17 @@ void snd_hda_pick_fixup(struct hda_codec *codec,
 			const struct snd_pci_quirk *quirk,
 			const struct hda_fixup *fixlist);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void snd_hda_pick_pin_fixup(struct hda_codec *codec,
 			    const struct snd_hda_pin_quirk *pin_quirk,
 			    const struct hda_fixup *fixlist);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -637,7 +666,10 @@ u32 snd_hda_query_pin_caps(struct hda_codec *codec, hda_nid_t nid);
 int snd_hda_override_pin_caps(struct hda_codec *codec, hda_nid_t nid,
 			      unsigned int caps);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool snd_hda_check_amp_caps(struct hda_codec *codec, hda_nid_t nid,
 			   int dir, unsigned int bits);
 
@@ -646,6 +678,9 @@ bool snd_hda_check_amp_caps(struct hda_codec *codec, hda_nid_t nid,
 #define nid_has_volume(codec, nid, dir) \
 	snd_hda_check_amp_caps(codec, nid, dir, AC_AMPCAP_NUM_STEPS)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* flags for hda_nid_item */
@@ -674,6 +709,7 @@ static inline int snd_hda_create_hwdep(struct hda_codec *codec) { return 0; }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_PM) && defined(CONFIG_SND_HDA_HWDEP)
 int snd_hda_hwdep_add_power_sysfs(struct hda_codec *codec);
 #else
@@ -692,10 +728,15 @@ static inline int snd_hda_hwdep_add_sysfs(struct hda_codec *codec)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 void snd_hda_sysfs_init(struct hda_codec *codec);
 void snd_hda_sysfs_clear(struct hda_codec *codec);
 
 extern const struct attribute_group *snd_hda_dev_attr_groups[];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_SND_HDA_RECONFIG
@@ -830,10 +871,13 @@ struct hdmi_eld {
 	char    eld_buffer[ELD_MAX_SIZE];
 	struct parsed_hdmi_eld info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex lock;
 #ifdef CONFIG_PROC_FS
 	struct snd_info_entry *proc_entry;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -841,6 +885,7 @@ struct hdmi_eld {
 int snd_hdmi_get_eld_size(struct hda_codec *codec, hda_nid_t nid);
 int snd_hdmi_get_eld(struct hda_codec *codec, hda_nid_t nid,
 		     unsigned char *buf, int *eld_size);
+<<<<<<< HEAD
 <<<<<<< HEAD
 int snd_hdmi_parse_eld(struct parsed_hdmi_eld *e,
 		       const unsigned char *buf, int size);
@@ -864,6 +909,8 @@ static inline void snd_hda_eld_proc_free(struct hda_codec *codec,
 {
 }
 =======
+=======
+>>>>>>> v3.18
 int snd_hdmi_parse_eld(struct hda_codec *codec, struct parsed_hdmi_eld *e,
 		       const unsigned char *buf, int size);
 void snd_hdmi_show_eld(struct hda_codec *codec, struct parsed_hdmi_eld *e);
@@ -879,6 +926,9 @@ void snd_hdmi_print_eld_info(struct hdmi_eld *eld,
 			     struct snd_info_buffer *buffer);
 void snd_hdmi_write_eld_info(struct hdmi_eld *eld,
 			     struct snd_info_buffer *buffer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -886,7 +936,10 @@ void snd_hdmi_write_eld_info(struct hdmi_eld *eld,
 void snd_print_channel_allocation(int spk_alloc, char *buf, int buflen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  */
 #define codec_err(codec, fmt, args...) dev_err(&(codec)->dev, fmt, ##args)
@@ -894,5 +947,8 @@ void snd_print_channel_allocation(int spk_alloc, char *buf, int buflen);
 #define codec_info(codec, fmt, args...) dev_info(&(codec)->dev, fmt, ##args)
 #define codec_dbg(codec, fmt, args...) dev_dbg(&(codec)->dev, fmt, ##args)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __SOUND_HDA_LOCAL_H */

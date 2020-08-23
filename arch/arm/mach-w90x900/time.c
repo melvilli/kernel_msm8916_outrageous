@@ -112,7 +112,11 @@ static irqreturn_t nuc900_timer0_interrupt(int irq, void *dev_id)
 static struct irqaction nuc900_timer0_irq = {
 	.name		= "nuc900-timer0",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18

@@ -4,6 +4,7 @@
 #ifdef CONFIG_NUMA
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* sched_domains SD_NODE_INIT for Meta machines */
 #define SD_NODE_INIT (struct sched_domain) {		\
 	.parent			= NULL,			\
@@ -29,6 +30,8 @@
 	.nr_balance_failed	= 0,			\
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define cpu_to_node(cpu)	((void)(cpu), 0)

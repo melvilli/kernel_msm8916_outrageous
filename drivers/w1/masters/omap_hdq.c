@@ -578,8 +578,12 @@ static int omap_hdq_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = devm_request_irq(dev, irq, hdq_isr, IRQF_DISABLED,
 			"omap_hdq", hdq_data);
+=======
+	ret = devm_request_irq(dev, irq, hdq_isr, 0, "omap_hdq", hdq_data);
+>>>>>>> v3.18
 =======
 	ret = devm_request_irq(dev, irq, hdq_isr, 0, "omap_hdq", hdq_data);
 >>>>>>> v3.18

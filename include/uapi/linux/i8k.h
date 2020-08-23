@@ -35,7 +35,12 @@
 #define I8K_FAN_LOW		1
 #define I8K_FAN_HIGH		2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define I8K_FAN_MAX		I8K_FAN_HIGH
+=======
+#define I8K_FAN_TURBO		3
+#define I8K_FAN_MAX		I8K_FAN_TURBO
+>>>>>>> v3.18
 =======
 #define I8K_FAN_TURBO		3
 #define I8K_FAN_MAX		I8K_FAN_TURBO

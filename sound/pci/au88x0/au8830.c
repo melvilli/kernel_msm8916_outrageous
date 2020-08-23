@@ -1,7 +1,11 @@
 #include "au8830.h"
 #include "au88x0.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_vortex_ids) = {
+=======
+static const struct pci_device_id snd_vortex_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_vortex_ids[] = {
 >>>>>>> v3.18

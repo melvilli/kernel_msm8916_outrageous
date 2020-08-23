@@ -21,10 +21,16 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mach/irq.h>
 
 #include "intr.h"
 #include "dev.h"
+=======
+
+#include "../intr.h"
+#include "../dev.h"
+>>>>>>> v3.18
 =======
 
 #include "../intr.h"

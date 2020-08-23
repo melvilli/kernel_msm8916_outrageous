@@ -2,7 +2,11 @@
  *  tm6000-stds.c - driver for TM5600/TM6000/TM6010 USB video capture devices
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2007 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *  Copyright (C) 2007 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2007 Mauro Carvalho Chehab
 >>>>>>> v3.18

@@ -11,6 +11,10 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 >>>>>>> v3.18
@@ -44,11 +48,14 @@
  *            (http://gcc.gnu.org/PR8896) and incorrect structure
  *	      initialisation in fs/jffs2/erase.c
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 #if (__GNUC__ == 3 && __GNUC_MINOR__ < 3)
 #error Your compiler is too buggy; it is known to miscompile kernels.
 #error    Known good compilers: 3.3
 =======
+=======
+>>>>>>> v3.18
  * GCC 4.8.0-4.8.2: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=58854
  *	      miscompiles find_get_entry(), and can result in EXT3 and EXT4
  *	      filesystem corruption (possibly other FS too).
@@ -62,6 +69,9 @@
 #error Your compiler is too buggy; it is known to miscompile kernels
 #error and result in filesystem corruption and oopses.
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -195,6 +205,10 @@ int main(void)
   DEFINE(VCPU_PC,		offsetof(struct kvm_vcpu, arch.regs.usr_regs.ARM_pc));
   DEFINE(VCPU_CPSR,		offsetof(struct kvm_vcpu, arch.regs.usr_regs.ARM_cpsr));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  DEFINE(VCPU_HCR,		offsetof(struct kvm_vcpu, arch.hcr));
+>>>>>>> v3.18
 =======
   DEFINE(VCPU_HCR,		offsetof(struct kvm_vcpu, arch.hcr));
 >>>>>>> v3.18
@@ -206,6 +220,7 @@ int main(void)
 #ifdef CONFIG_KVM_ARM_VGIC
   DEFINE(VCPU_VGIC_CPU,		offsetof(struct kvm_vcpu, arch.vgic_cpu));
 <<<<<<< HEAD
+<<<<<<< HEAD
   DEFINE(VGIC_CPU_HCR,		offsetof(struct vgic_cpu, vgic_hcr));
   DEFINE(VGIC_CPU_VMCR,		offsetof(struct vgic_cpu, vgic_vmcr));
   DEFINE(VGIC_CPU_MISR,		offsetof(struct vgic_cpu, vgic_misr));
@@ -214,6 +229,8 @@ int main(void)
   DEFINE(VGIC_CPU_APR,		offsetof(struct vgic_cpu, vgic_apr));
   DEFINE(VGIC_CPU_LR,		offsetof(struct vgic_cpu, vgic_lr));
 =======
+=======
+>>>>>>> v3.18
   DEFINE(VGIC_V2_CPU_HCR,	offsetof(struct vgic_cpu, vgic_v2.vgic_hcr));
   DEFINE(VGIC_V2_CPU_VMCR,	offsetof(struct vgic_cpu, vgic_v2.vgic_vmcr));
   DEFINE(VGIC_V2_CPU_MISR,	offsetof(struct vgic_cpu, vgic_v2.vgic_misr));
@@ -221,6 +238,9 @@ int main(void)
   DEFINE(VGIC_V2_CPU_ELRSR,	offsetof(struct vgic_cpu, vgic_v2.vgic_elrsr));
   DEFINE(VGIC_V2_CPU_APR,	offsetof(struct vgic_cpu, vgic_v2.vgic_apr));
   DEFINE(VGIC_V2_CPU_LR,	offsetof(struct vgic_cpu, vgic_v2.vgic_lr));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   DEFINE(VGIC_CPU_NR_LR,	offsetof(struct vgic_cpu, nr_lr));
 #ifdef CONFIG_KVM_ARM_TIMER

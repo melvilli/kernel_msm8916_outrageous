@@ -5,17 +5,23 @@ active_mm.txt
 balance
 	- various information on memory balancing.
 <<<<<<< HEAD
+<<<<<<< HEAD
 hugepage-mmap.c
 	- Example app using huge page memory with the mmap system call.
 hugepage-shm.c
 	- Example app using huge page memory with Sys V shared memory system calls.
 =======
+=======
+>>>>>>> v3.18
 cleancache.txt
 	- Intro to cleancache and page-granularity victim cache.
 frontswap.txt
 	- Outline frontswap, part of the transcendent memory frontend.
 highmem.txt
 	- Outline of highmem and common issues.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 hugetlbpage.txt
 	- a brief summary of hugetlbpage support in the Linux kernel.
@@ -24,10 +30,13 @@ hwpoison.txt
 ksm.txt
 	- how to use the Kernel Samepage Merging feature.
 <<<<<<< HEAD
+<<<<<<< HEAD
 locking
 	- info on how locking and synchronization is done in the Linux vm code.
 map_hugetlb.c
 	- an example program that uses the MAP_HUGETLB mmap flag.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 numa
@@ -37,8 +46,11 @@ numa_memory_policy.txt
 overcommit-accounting
 	- description of the Linux kernels overcommit handling modes.
 <<<<<<< HEAD
+<<<<<<< HEAD
 page-types.c
 	- Tool for querying page flags
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 page_migration
@@ -48,9 +60,12 @@ pagemap.txt
 slub.txt
 	- a short users guide for SLUB.
 <<<<<<< HEAD
+<<<<<<< HEAD
 unevictable-lru.txt
 	- Unevictable LRU infrastructure
 =======
+=======
+>>>>>>> v3.18
 soft-dirty.txt
 	- short explanation for soft-dirty PTEs
 split_page_table_lock
@@ -61,4 +76,7 @@ unevictable-lru.txt
 	- Unevictable LRU infrastructure
 zswap.txt
 	- Intro to compressed cache for swap pages
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

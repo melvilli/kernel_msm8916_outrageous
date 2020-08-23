@@ -7,6 +7,11 @@
  */
 #define TM_CAUSE_PERSISTENT	0x01
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TM_CAUSE_KVM_RESCHED	0xe0  /* From PAPR */
+#define TM_CAUSE_KVM_FAC_UNAV	0xe2  /* From PAPR */
+>>>>>>> v3.18
 =======
 #define TM_CAUSE_KVM_RESCHED	0xe0  /* From PAPR */
 #define TM_CAUSE_KVM_FAC_UNAV	0xe2  /* From PAPR */

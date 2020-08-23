@@ -36,6 +36,11 @@ void btrfs_assert_tree_locked(struct extent_buffer *eb);
 int btrfs_try_tree_read_lock(struct extent_buffer *eb);
 int btrfs_try_tree_write_lock(struct extent_buffer *eb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int btrfs_tree_read_lock_atomic(struct extent_buffer *eb);
+
+>>>>>>> v3.18
 =======
 int btrfs_tree_read_lock_atomic(struct extent_buffer *eb);
 

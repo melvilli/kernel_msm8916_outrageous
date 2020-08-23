@@ -81,7 +81,11 @@ static int platform_lcd_probe(struct platform_device *pdev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -99,6 +103,7 @@ static int platform_lcd_probe(struct platform_device *pdev)
 	plcd = devm_kzalloc(&pdev->dev, sizeof(struct platform_lcd),
 			    GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!plcd) {
 		dev_err(dev, "no memory for state\n");
 		return -ENOMEM;
@@ -113,6 +118,8 @@ static int platform_lcd_probe(struct platform_device *pdev)
 		err = PTR_ERR(plcd->lcd);
 		goto err;
 =======
+=======
+>>>>>>> v3.18
 	if (!plcd)
 		return -ENOMEM;
 
@@ -123,6 +130,9 @@ static int platform_lcd_probe(struct platform_device *pdev)
 	if (IS_ERR(plcd->lcd)) {
 		dev_err(dev, "cannot register lcd device\n");
 		return PTR_ERR(plcd->lcd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -130,6 +140,7 @@ static int platform_lcd_probe(struct platform_device *pdev)
 	platform_lcd_set_power(plcd->lcd, FB_BLANK_NORMAL);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
  err:
@@ -143,6 +154,8 @@ static int platform_lcd_remove(struct platform_device *pdev)
 	lcd_device_unregister(plcd->lcd);
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -184,7 +197,10 @@ static struct platform_driver platform_lcd_driver = {
 	.driver		= {
 		.name	= "platform-lcd",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.pm	= &platform_lcd_pm_ops,
@@ -192,7 +208,10 @@ static struct platform_driver platform_lcd_driver = {
 	},
 	.probe		= platform_lcd_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= platform_lcd_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

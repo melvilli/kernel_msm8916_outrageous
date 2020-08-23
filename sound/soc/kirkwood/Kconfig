@@ -1,7 +1,12 @@
 config SND_KIRKWOOD_SOC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "SoC Audio for the Marvell Kirkwood chip"
 	depends on ARCH_KIRKWOOD
+=======
+	tristate "SoC Audio for the Marvell Kirkwood and Dove chips"
+	depends on ARCH_DOVE || ARCH_MVEBU || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	tristate "SoC Audio for the Marvell Kirkwood and Dove chips"
 	depends on ARCH_DOVE || ARCH_MVEBU || COMPILE_TEST
@@ -11,6 +16,7 @@ config SND_KIRKWOOD_SOC
 	  the Kirkwood I2S interface. You will also need to select the
 	  audio interfaces to support below.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config SND_KIRKWOOD_SOC_I2S
 	tristate
@@ -34,6 +40,8 @@ config SND_KIRKWOOD_SOC_T5325
 	  Say Y if you want to add support for SoC audio on
 	  the HP t5325 thin client.
 =======
+=======
+>>>>>>> v3.18
 config SND_KIRKWOOD_SOC_ARMADA370_DB
 	tristate "SoC Audio support for Armada 370 DB"
 	depends on SND_KIRKWOOD_SOC && (ARCH_MVEBU || COMPILE_TEST) && I2C
@@ -42,5 +50,8 @@ config SND_KIRKWOOD_SOC_ARMADA370_DB
 	help
 	  Say Y if you want to add support for SoC audio on
 	  the Armada 370 Development Board.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 

@@ -41,9 +41,12 @@ static struct bt_sock_list sco_sk_list = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __sco_chan_add(struct sco_conn *conn, struct sock *sk, struct sock *parent);
 static void sco_chan_del(struct sock *sk, int err);
 =======
+=======
+>>>>>>> v3.18
 /* ---- SCO connections ---- */
 struct sco_conn {
 	struct hci_conn	*hcon;
@@ -56,14 +59,20 @@ struct sco_conn {
 
 #define sco_conn_lock(c)	spin_lock(&c->lock);
 #define sco_conn_unlock(c)	spin_unlock(&c->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void sco_sock_close(struct sock *sk);
 static void sco_sock_kill(struct sock *sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* ---- SCO timers ---- */
 =======
+=======
+>>>>>>> v3.18
 /* ----- SCO socket info ----- */
 #define sco_pi(sk) ((struct sco_pinfo *) sk)
 
@@ -80,13 +89,20 @@ struct sco_pinfo {
 #define SCO_CONN_TIMEOUT	(HZ * 40)
 #define SCO_DISCONN_TIMEOUT	(HZ * 2)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void sco_sock_timeout(unsigned long arg)
 {
 	struct sock *sk = (struct sock *) arg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK state %d", sk, sk->sk_state);
+=======
+	BT_DBG("sock %p state %d", sk, sk->sk_state);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p state %d", sk, sk->sk_state);
 >>>>>>> v3.18
@@ -103,7 +119,11 @@ static void sco_sock_timeout(unsigned long arg)
 static void sco_sock_set_timer(struct sock *sk, long timeout)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK state %d timeout %ld", sk, sk->sk_state, timeout);
+=======
+	BT_DBG("sock %p state %d timeout %ld", sk, sk->sk_state, timeout);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p state %d timeout %ld", sk, sk->sk_state, timeout);
 >>>>>>> v3.18
@@ -113,7 +133,11 @@ static void sco_sock_set_timer(struct sock *sk, long timeout)
 static void sco_sock_clear_timer(struct sock *sk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK state %d", sk, sk->sk_state);
+=======
+	BT_DBG("sock %p state %d", sk, sk->sk_state);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p state %d", sk, sk->sk_state);
 >>>>>>> v3.18
@@ -139,9 +163,12 @@ static struct sco_conn *sco_conn_add(struct hci_conn *hcon)
 	conn->hcon = hcon;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	conn->src = &hdev->bdaddr;
 	conn->dst = &hcon->dst;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hdev->sco_mtu > 0)
@@ -150,7 +177,11 @@ static struct sco_conn *sco_conn_add(struct hci_conn *hcon)
 		conn->mtu = 60;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("hcon %pK conn %pK", hcon, conn);
+=======
+	BT_DBG("hcon %p conn %p", hcon, conn);
+>>>>>>> v3.18
 =======
 	BT_DBG("hcon %p conn %p", hcon, conn);
 >>>>>>> v3.18
@@ -158,6 +189,7 @@ static struct sco_conn *sco_conn_add(struct hci_conn *hcon)
 	return conn;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct sock *sco_chan_get(struct sco_conn *conn)
 {
@@ -167,6 +199,8 @@ static struct sock *sco_chan_get(struct sco_conn *conn)
 	sco_conn_unlock(conn);
 	return sk;
 =======
+=======
+>>>>>>> v3.18
 /* Delete channel.
  * Must be called on the locked socket. */
 static void sco_chan_del(struct sock *sk, int err)
@@ -192,6 +226,9 @@ static void sco_chan_del(struct sock *sk, int err)
 	sk->sk_state_change(sk);
 
 	sock_set_flag(sk, SOCK_ZAPPED);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -204,11 +241,14 @@ static int sco_conn_del(struct hci_conn *hcon, int err)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("hcon %pK conn %pK, err %d", hcon, conn, err);
 
 	/* Kill socket */
 	sk = sco_chan_get(conn);
 =======
+=======
+>>>>>>> v3.18
 	BT_DBG("hcon %p conn %p, err %d", hcon, conn, err);
 
 	/* Kill socket */
@@ -216,6 +256,9 @@ static int sco_conn_del(struct hci_conn *hcon, int err)
 	sk = conn->sk;
 	sco_conn_unlock(conn);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sk) {
 		bh_lock_sock(sk);
@@ -231,7 +274,10 @@ static int sco_conn_del(struct hci_conn *hcon, int err)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __sco_chan_add(struct sco_conn *conn, struct sock *sk, struct sock *parent)
 {
 	BT_DBG("conn %p", conn);
@@ -243,6 +289,9 @@ static void __sco_chan_add(struct sco_conn *conn, struct sock *sk, struct sock *
 		bt_accept_enqueue(parent, sk);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sco_chan_add(struct sco_conn *conn, struct sock *sk,
 			struct sock *parent)
@@ -262,9 +311,12 @@ static int sco_chan_add(struct sco_conn *conn, struct sock *sk,
 static int sco_connect(struct sock *sk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bdaddr_t *src = &bt_sk(sk)->src;
 	bdaddr_t *dst = &bt_sk(sk)->dst;
 	__u16 pkt_type = sco_pi(sk)->pkt_type;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct sco_conn *conn;
@@ -273,9 +325,15 @@ static int sco_connect(struct sock *sk)
 	int err, type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("%pMR -> %pMR", src, dst);
 
 	hdev = hci_get_route(dst, src);
+=======
+	BT_DBG("%pMR -> %pMR", &sco_pi(sk)->src, &sco_pi(sk)->dst);
+
+	hdev = hci_get_route(&sco_pi(sk)->dst, &sco_pi(sk)->src);
+>>>>>>> v3.18
 =======
 	BT_DBG("%pMR -> %pMR", &sco_pi(sk)->src, &sco_pi(sk)->dst);
 
@@ -289,6 +347,7 @@ static int sco_connect(struct sock *sk)
 	if (lmp_esco_capable(hdev) && !disable_esco)
 		type = ESCO_LINK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else {
 		type = SCO_LINK;
 		pkt_type &= SCO_ESCO_MASK;
@@ -297,6 +356,8 @@ static int sco_connect(struct sock *sk)
 	hcon = hci_connect(hdev, type, pkt_type, dst, BDADDR_BREDR,
 			   BT_SECURITY_LOW, HCI_AT_NO_BONDING);
 =======
+=======
+>>>>>>> v3.18
 	else
 		type = SCO_LINK;
 
@@ -308,6 +369,9 @@ static int sco_connect(struct sock *sk)
 
 	hcon = hci_connect_sco(hdev, type, &sco_pi(sk)->dst,
 			       sco_pi(sk)->setting);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(hcon)) {
 		err = PTR_ERR(hcon);
@@ -323,7 +387,11 @@ static int sco_connect(struct sock *sk)
 
 	/* Update source addr of the socket */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bacpy(src, conn->src);
+=======
+	bacpy(&sco_pi(sk)->src, &hcon->src);
+>>>>>>> v3.18
 =======
 	bacpy(&sco_pi(sk)->src, &hcon->src);
 >>>>>>> v3.18
@@ -357,7 +425,11 @@ static int sco_send_frame(struct sock *sk, struct msghdr *msg, int len)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK len %d", sk, len);
+=======
+	BT_DBG("sk %p len %d", sk, len);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p len %d", sk, len);
 >>>>>>> v3.18
@@ -379,20 +451,30 @@ static int sco_send_frame(struct sock *sk, struct msghdr *msg, int len)
 static void sco_recv_frame(struct sco_conn *conn, struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sock *sk = sco_chan_get(conn);
 =======
+=======
+>>>>>>> v3.18
 	struct sock *sk;
 
 	sco_conn_lock(conn);
 	sk = conn->sk;
 	sco_conn_unlock(conn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!sk)
 		goto drop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK len %d", sk, skb->len);
+=======
+	BT_DBG("sk %p len %d", sk, skb->len);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p len %d", sk, skb->len);
 >>>>>>> v3.18
@@ -417,7 +499,11 @@ static struct sock *__sco_get_sock_listen_by_addr(bdaddr_t *ba)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!bacmp(&bt_sk(sk)->src, ba))
+=======
+		if (!bacmp(&sco_pi(sk)->src, ba))
+>>>>>>> v3.18
 =======
 		if (!bacmp(&sco_pi(sk)->src, ba))
 >>>>>>> v3.18
@@ -442,17 +528,23 @@ static struct sock *sco_get_sock_listen(bdaddr_t *src)
 
 		/* Exact match. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!bacmp(&bt_sk(sk)->src, src))
 			break;
 
 		/* Closest match */
 		if (!bacmp(&bt_sk(sk)->src, BDADDR_ANY))
 =======
+=======
+>>>>>>> v3.18
 		if (!bacmp(&sco_pi(sk)->src, src))
 			break;
 
 		/* Closest match */
 		if (!bacmp(&sco_pi(sk)->src, BDADDR_ANY))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sk1 = sk;
 	}
@@ -465,7 +557,11 @@ static struct sock *sco_get_sock_listen(bdaddr_t *src)
 static void sco_sock_destruct(struct sock *sk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK", sk);
+=======
+	BT_DBG("sk %p", sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p", sk);
 >>>>>>> v3.18
@@ -479,7 +575,11 @@ static void sco_sock_cleanup_listen(struct sock *parent)
 	struct sock *sk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("parent %pK", parent);
+=======
+	BT_DBG("parent %p", parent);
+>>>>>>> v3.18
 =======
 	BT_DBG("parent %p", parent);
 >>>>>>> v3.18
@@ -503,7 +603,11 @@ static void sco_sock_kill(struct sock *sk)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK state %d", sk, sk->sk_state);
+=======
+	BT_DBG("sk %p state %d", sk, sk->sk_state);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p state %d", sk, sk->sk_state);
 >>>>>>> v3.18
@@ -517,7 +621,11 @@ static void sco_sock_kill(struct sock *sk)
 static void __sco_sock_close(struct sock *sk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK state %d socket %pK", sk, sk->sk_state, sk->sk_socket);
+=======
+	BT_DBG("sk %p state %d socket %p", sk, sk->sk_state, sk->sk_socket);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p state %d socket %p", sk, sk->sk_state, sk->sk_socket);
 >>>>>>> v3.18
@@ -533,10 +641,15 @@ static void __sco_sock_close(struct sock *sk)
 			sk->sk_state = BT_DISCONN;
 			sco_sock_set_timer(sk, SCO_DISCONN_TIMEOUT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (sco_pi(sk)->conn->hcon != NULL) {
 				hci_conn_drop(sco_pi(sk)->conn->hcon);
 				sco_pi(sk)->conn->hcon = NULL;
 			}
+=======
+			hci_conn_drop(sco_pi(sk)->conn->hcon);
+			sco_pi(sk)->conn->hcon = NULL;
+>>>>>>> v3.18
 =======
 			hci_conn_drop(sco_pi(sk)->conn->hcon);
 			sco_pi(sk)->conn->hcon = NULL;
@@ -570,7 +683,11 @@ static void sco_sock_close(struct sock *sk)
 static void sco_sock_init(struct sock *sk, struct sock *parent)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK", sk);
+=======
+	BT_DBG("sk %p", sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p", sk);
 >>>>>>> v3.18
@@ -608,6 +725,11 @@ static struct sock *sco_sock_alloc(struct net *net, struct socket *sock, int pro
 	sk->sk_state    = BT_OPEN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sco_pi(sk)->setting = BT_VOICE_CVSD_16BIT;
+
+>>>>>>> v3.18
 =======
 	sco_pi(sk)->setting = BT_VOICE_CVSD_16BIT;
 
@@ -624,7 +746,11 @@ static int sco_sock_create(struct net *net, struct socket *sock, int protocol,
 	struct sock *sk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK", sock);
+=======
+	BT_DBG("sock %p", sock);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p", sock);
 >>>>>>> v3.18
@@ -645,6 +771,7 @@ static int sco_sock_create(struct net *net, struct socket *sock, int protocol,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sco_sock_bind(struct socket *sock, struct sockaddr *addr, int alen)
 {
 	struct sockaddr_sco sa;
@@ -653,6 +780,8 @@ static int sco_sock_bind(struct socket *sock, struct sockaddr *addr, int alen)
 
 	BT_DBG("sk %pK %pMR", sk, &sa.sco_bdaddr);
 =======
+=======
+>>>>>>> v3.18
 static int sco_sock_bind(struct socket *sock, struct sockaddr *addr, int addr_len)
 {
 	struct sockaddr_sco *sa = (struct sockaddr_sco *) addr;
@@ -660,11 +789,15 @@ static int sco_sock_bind(struct socket *sock, struct sockaddr *addr, int addr_le
 	int err = 0;
 
 	BT_DBG("sk %p %pMR", sk, &sa->sco_bdaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!addr || addr->sa_family != AF_BLUETOOTH)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (alen < sizeof(struct sockaddr_sco))
 		return -EINVAL;
@@ -673,6 +806,8 @@ static int sco_sock_bind(struct socket *sock, struct sockaddr *addr, int addr_le
 	len = min_t(unsigned int, sizeof(sa), alen);
 	memcpy(&sa, addr, len);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	lock_sock(sk);
@@ -688,8 +823,12 @@ static int sco_sock_bind(struct socket *sock, struct sockaddr *addr, int addr_le
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bacpy(&bt_sk(sk)->src, &sa.sco_bdaddr);
 	sco_pi(sk)->pkt_type = sa.sco_pkt_type;
+=======
+	bacpy(&sco_pi(sk)->src, &sa->sco_bdaddr);
+>>>>>>> v3.18
 =======
 	bacpy(&sco_pi(sk)->src, &sa->sco_bdaddr);
 >>>>>>> v3.18
@@ -703,6 +842,7 @@ done:
 
 static int sco_sock_connect(struct socket *sock, struct sockaddr *addr, int alen, int flags)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sock *sk = sock->sk;
 	struct sockaddr_sco sa;
@@ -733,6 +873,8 @@ static int sco_sock_connect(struct socket *sock, struct sockaddr *addr, int alen
 	bacpy(&bt_sk(sk)->dst, &sa.sco_bdaddr);
 	sco_pi(sk)->pkt_type = sa.sco_pkt_type;
 =======
+=======
+>>>>>>> v3.18
 	struct sockaddr_sco *sa = (struct sockaddr_sco *) addr;
 	struct sock *sk = sock->sk;
 	int err;
@@ -753,6 +895,9 @@ static int sco_sock_connect(struct socket *sock, struct sockaddr *addr, int alen
 
 	/* Set destination address and psm */
 	bacpy(&sco_pi(sk)->dst, &sa->sco_bdaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = sco_connect(sk);
@@ -771,15 +916,21 @@ static int sco_sock_listen(struct socket *sock, int backlog)
 {
 	struct sock *sk = sock->sk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bdaddr_t *src = &bt_sk(sk)->src;
 	int err = 0;
 
 	BT_DBG("sk %pK backlog %d", sk, backlog);
 =======
+=======
+>>>>>>> v3.18
 	bdaddr_t *src = &sco_pi(sk)->src;
 	int err = 0;
 
 	BT_DBG("sk %p backlog %d", sk, backlog);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	lock_sock(sk);
@@ -826,7 +977,11 @@ static int sco_sock_accept(struct socket *sock, struct socket *newsock, int flag
 	timeo = sock_rcvtimeo(sk, flags & O_NONBLOCK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK timeo %ld", sk, timeo);
+=======
+	BT_DBG("sk %p timeo %ld", sk, timeo);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p timeo %ld", sk, timeo);
 >>>>>>> v3.18
@@ -868,7 +1023,11 @@ static int sco_sock_accept(struct socket *sock, struct socket *newsock, int flag
 	newsock->state = SS_CONNECTED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("new socket %pK", ch);
+=======
+	BT_DBG("new socket %p", ch);
+>>>>>>> v3.18
 =======
 	BT_DBG("new socket %p", ch);
 >>>>>>> v3.18
@@ -884,7 +1043,11 @@ static int sco_sock_getname(struct socket *sock, struct sockaddr *addr, int *len
 	struct sock *sk = sock->sk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK, sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p, sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p, sk %p", sock, sk);
 >>>>>>> v3.18
@@ -894,10 +1057,16 @@ static int sco_sock_getname(struct socket *sock, struct sockaddr *addr, int *len
 
 	if (peer)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bacpy(&sa->sco_bdaddr, &bt_sk(sk)->dst);
 	else
 		bacpy(&sa->sco_bdaddr, &bt_sk(sk)->src);
 	sa->sco_pkt_type = sco_pi(sk)->pkt_type;
+=======
+		bacpy(&sa->sco_bdaddr, &sco_pi(sk)->dst);
+	else
+		bacpy(&sa->sco_bdaddr, &sco_pi(sk)->src);
+>>>>>>> v3.18
 =======
 		bacpy(&sa->sco_bdaddr, &sco_pi(sk)->dst);
 	else
@@ -914,7 +1083,11 @@ static int sco_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK, sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p, sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p, sk %p", sock, sk);
 >>>>>>> v3.18
@@ -938,17 +1111,23 @@ static int sco_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sco_conn_defer_accept(struct hci_conn *conn, int mask)
 {
 	struct hci_dev *hdev = conn->hdev;
 
 	BT_DBG("conn %pK", conn);
 =======
+=======
+>>>>>>> v3.18
 static void sco_conn_defer_accept(struct hci_conn *conn, u16 setting)
 {
 	struct hci_dev *hdev = conn->hdev;
 
 	BT_DBG("conn %p", conn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	conn->state = BT_CONFIG;
@@ -958,11 +1137,15 @@ static void sco_conn_defer_accept(struct hci_conn *conn, u16 setting)
 
 		bacpy(&cp.bdaddr, &conn->dst);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (lmp_rswitch_capable(hdev) && (mask & HCI_LM_MASTER))
 			cp.role = 0x00; /* Become master */
 		else
 			cp.role = 0x01; /* Remain slave */
+=======
+		cp.role = 0x00; /* Ignored */
+>>>>>>> v3.18
 =======
 		cp.role = 0x00; /* Ignored */
 >>>>>>> v3.18
@@ -975,12 +1158,15 @@ static void sco_conn_defer_accept(struct hci_conn *conn, u16 setting)
 		cp.pkt_type = cpu_to_le16(conn->pkt_type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cp.tx_bandwidth   = __constant_cpu_to_le32(0x00001f40);
 		cp.rx_bandwidth   = __constant_cpu_to_le32(0x00001f40);
 		cp.max_latency    = __constant_cpu_to_le16(0xffff);
 		cp.content_format = cpu_to_le16(hdev->voice_setting);
 		cp.retrans_effort = 0xff;
 =======
+=======
+>>>>>>> v3.18
 		cp.tx_bandwidth   = cpu_to_le32(0x00001f40);
 		cp.rx_bandwidth   = cpu_to_le32(0x00001f40);
 		cp.content_format = cpu_to_le16(setting);
@@ -998,6 +1184,9 @@ static void sco_conn_defer_accept(struct hci_conn *conn, u16 setting)
 			cp.retrans_effort = 0xff;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		hci_send_cmd(hdev, HCI_OP_ACCEPT_SYNC_CONN_REQ,
@@ -1016,7 +1205,11 @@ static int sco_sock_recvmsg(struct kiocb *iocb, struct socket *sock,
 	if (sk->sk_state == BT_CONNECT2 &&
 	    test_bit(BT_SK_DEFER_SETUP, &bt_sk(sk)->flags)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sco_conn_defer_accept(pi->conn->hcon, 0);
+=======
+		sco_conn_defer_accept(pi->conn->hcon, pi->setting);
+>>>>>>> v3.18
 =======
 		sco_conn_defer_accept(pi->conn->hcon, pi->setting);
 >>>>>>> v3.18
@@ -1035,16 +1228,22 @@ static int sco_sock_setsockopt(struct socket *sock, int level, int optname, char
 {
 	struct sock *sk = sock->sk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = 0;
 	u32 opt;
 
 	BT_DBG("sk %pK", sk);
 =======
+=======
+>>>>>>> v3.18
 	int len, err = 0;
 	struct bt_voice voice;
 	u32 opt;
 
 	BT_DBG("sk %p", sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	lock_sock(sk);
@@ -1069,7 +1268,10 @@ static int sco_sock_setsockopt(struct socket *sock, int level, int optname, char
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case BT_VOICE:
 		if (sk->sk_state != BT_OPEN && sk->sk_state != BT_BOUND &&
 		    sk->sk_state != BT_CONNECT2) {
@@ -1095,6 +1297,9 @@ static int sco_sock_setsockopt(struct socket *sock, int level, int optname, char
 		sco_pi(sk)->setting = voice.setting;
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		err = -ENOPROTOOPT;
@@ -1113,7 +1318,11 @@ static int sco_sock_getsockopt_old(struct socket *sock, int optname, char __user
 	int len, err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK", sk);
+=======
+	BT_DBG("sk %p", sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p", sk);
 >>>>>>> v3.18
@@ -1126,7 +1335,13 @@ static int sco_sock_getsockopt_old(struct socket *sock, int optname, char __user
 	switch (optname) {
 	case SCO_OPTIONS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sk->sk_state != BT_CONNECTED) {
+=======
+		if (sk->sk_state != BT_CONNECTED &&
+		    !(sk->sk_state == BT_CONNECT2 &&
+		      test_bit(BT_SK_DEFER_SETUP, &bt_sk(sk)->flags))) {
+>>>>>>> v3.18
 =======
 		if (sk->sk_state != BT_CONNECTED &&
 		    !(sk->sk_state == BT_CONNECT2 &&
@@ -1148,7 +1363,13 @@ static int sco_sock_getsockopt_old(struct socket *sock, int optname, char __user
 
 	case SCO_CONNINFO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sk->sk_state != BT_CONNECTED) {
+=======
+		if (sk->sk_state != BT_CONNECTED &&
+		    !(sk->sk_state == BT_CONNECT2 &&
+		      test_bit(BT_SK_DEFER_SETUP, &bt_sk(sk)->flags))) {
+>>>>>>> v3.18
 =======
 		if (sk->sk_state != BT_CONNECTED &&
 		    !(sk->sk_state == BT_CONNECT2 &&
@@ -1182,8 +1403,14 @@ static int sco_sock_getsockopt(struct socket *sock, int level, int optname, char
 	struct sock *sk = sock->sk;
 	int len, err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	BT_DBG("sk %pK", sk);
+=======
+	struct bt_voice voice;
+
+	BT_DBG("sk %p", sk);
+>>>>>>> v3.18
 =======
 	struct bt_voice voice;
 
@@ -1213,7 +1440,10 @@ static int sco_sock_getsockopt(struct socket *sock, int level, int optname, char
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case BT_VOICE:
 		voice.setting = sco_pi(sk)->setting;
 
@@ -1223,6 +1453,9 @@ static int sco_sock_getsockopt(struct socket *sock, int level, int optname, char
 
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		err = -ENOPROTOOPT;
@@ -1239,7 +1472,11 @@ static int sco_sock_shutdown(struct socket *sock, int how)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK, sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p, sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p, sk %p", sock, sk);
 >>>>>>> v3.18
@@ -1268,7 +1505,11 @@ static int sco_sock_release(struct socket *sock)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK, sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p, sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p, sk %p", sock, sk);
 >>>>>>> v3.18
@@ -1290,6 +1531,7 @@ static int sco_sock_release(struct socket *sock)
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __sco_chan_add(struct sco_conn *conn, struct sock *sk, struct sock *parent)
 {
@@ -1331,13 +1573,19 @@ static void sco_chan_del(struct sock *sk, int err)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void sco_conn_ready(struct sco_conn *conn)
 {
 	struct sock *parent;
 	struct sock *sk = conn->sk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("conn %pK", conn);
+=======
+	BT_DBG("conn %p", conn);
+>>>>>>> v3.18
 =======
 	BT_DBG("conn %p", conn);
 >>>>>>> v3.18
@@ -1352,7 +1600,11 @@ static void sco_conn_ready(struct sco_conn *conn)
 		sco_conn_lock(conn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		parent = sco_get_sock_listen(conn->src);
+=======
+		parent = sco_get_sock_listen(&conn->hcon->src);
+>>>>>>> v3.18
 =======
 		parent = sco_get_sock_listen(&conn->hcon->src);
 >>>>>>> v3.18
@@ -1374,8 +1626,13 @@ static void sco_conn_ready(struct sco_conn *conn)
 		sco_sock_init(sk, parent);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bacpy(&bt_sk(sk)->src, conn->src);
 		bacpy(&bt_sk(sk)->dst, conn->dst);
+=======
+		bacpy(&sco_pi(sk)->src, &conn->hcon->src);
+		bacpy(&sco_pi(sk)->dst, &conn->hcon->dst);
+>>>>>>> v3.18
 =======
 		bacpy(&sco_pi(sk)->src, &conn->hcon->src);
 		bacpy(&sco_pi(sk)->dst, &conn->hcon->dst);
@@ -1391,7 +1648,11 @@ static void sco_conn_ready(struct sco_conn *conn)
 
 		/* Wake up parent */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		parent->sk_data_ready(parent, 1);
+=======
+		parent->sk_data_ready(parent);
+>>>>>>> v3.18
 =======
 		parent->sk_data_ready(parent);
 >>>>>>> v3.18
@@ -1417,8 +1678,13 @@ int sco_connect_ind(struct hci_dev *hdev, bdaddr_t *bdaddr, __u8 *flags)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!bacmp(&bt_sk(sk)->src, &hdev->bdaddr) ||
 		    !bacmp(&bt_sk(sk)->src, BDADDR_ANY)) {
+=======
+		if (!bacmp(&sco_pi(sk)->src, &hdev->bdaddr) ||
+		    !bacmp(&sco_pi(sk)->src, BDADDR_ANY)) {
+>>>>>>> v3.18
 =======
 		if (!bacmp(&sco_pi(sk)->src, &hdev->bdaddr) ||
 		    !bacmp(&sco_pi(sk)->src, BDADDR_ANY)) {
@@ -1438,7 +1704,11 @@ int sco_connect_ind(struct hci_dev *hdev, bdaddr_t *bdaddr, __u8 *flags)
 void sco_connect_cfm(struct hci_conn *hcon, __u8 status)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("hcon %pK bdaddr %pMR status %d", hcon, &hcon->dst, status);
+=======
+	BT_DBG("hcon %p bdaddr %pMR status %d", hcon, &hcon->dst, status);
+>>>>>>> v3.18
 =======
 	BT_DBG("hcon %p bdaddr %pMR status %d", hcon, &hcon->dst, status);
 >>>>>>> v3.18
@@ -1455,7 +1725,11 @@ void sco_connect_cfm(struct hci_conn *hcon, __u8 status)
 void sco_disconn_cfm(struct hci_conn *hcon, __u8 reason)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("hcon %pK reason %d", hcon, reason);
+=======
+	BT_DBG("hcon %p reason %d", hcon, reason);
+>>>>>>> v3.18
 =======
 	BT_DBG("hcon %p reason %d", hcon, reason);
 >>>>>>> v3.18
@@ -1471,7 +1745,11 @@ int sco_recv_scodata(struct hci_conn *hcon, struct sk_buff *skb)
 		goto drop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("conn %pK len %d", conn, skb->len);
+=======
+	BT_DBG("conn %p len %d", conn, skb->len);
+>>>>>>> v3.18
 =======
 	BT_DBG("conn %p len %d", conn, skb->len);
 >>>>>>> v3.18
@@ -1494,8 +1772,13 @@ static int sco_debugfs_show(struct seq_file *f, void *p)
 
 	sk_for_each(sk, &sco_sk_list.head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(f, "%pMR %pMR %d\n", &bt_sk(sk)->src,
 			   &bt_sk(sk)->dst, sk->sk_state);
+=======
+		seq_printf(f, "%pMR %pMR %d\n", &sco_pi(sk)->src,
+			   &sco_pi(sk)->dst, sk->sk_state);
+>>>>>>> v3.18
 =======
 		seq_printf(f, "%pMR %pMR %d\n", &sco_pi(sk)->src,
 			   &sco_pi(sk)->dst, sk->sk_state);
@@ -1569,6 +1852,7 @@ int __init sco_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bt_debugfs) {
 		sco_debugfs = debugfs_create_file("sco", 0444, bt_debugfs,
 						  NULL, &sco_debugfs_fops);
@@ -1579,6 +1863,8 @@ int __init sco_init(void)
 	BT_INFO("SCO socket layer initialized");
 
 =======
+=======
+>>>>>>> v3.18
 	BT_INFO("SCO socket layer initialized");
 
 	if (IS_ERR_OR_NULL(bt_debugfs))
@@ -1587,6 +1873,9 @@ int __init sco_init(void)
 	sco_debugfs = debugfs_create_file("sco", 0444, bt_debugfs,
 					  NULL, &sco_debugfs_fops);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 

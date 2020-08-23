@@ -7,6 +7,11 @@
 #include <uapi/linux/elfcore.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct coredump_params;
+
+>>>>>>> v3.18
 =======
 struct coredump_params;
 
@@ -69,10 +74,16 @@ static inline int elf_core_copy_task_xfpregs(struct task_struct *t, elf_fpxregse
 extern Elf_Half elf_core_extra_phdrs(void);
 extern int
 <<<<<<< HEAD
+<<<<<<< HEAD
 elf_core_write_extra_phdrs(struct file *file, loff_t offset, size_t *size,
 			   unsigned long limit);
 extern int
 elf_core_write_extra_data(struct file *file, size_t *size, unsigned long limit);
+=======
+elf_core_write_extra_phdrs(struct coredump_params *cprm, loff_t offset);
+extern int
+elf_core_write_extra_data(struct coredump_params *cprm);
+>>>>>>> v3.18
 =======
 elf_core_write_extra_phdrs(struct coredump_params *cprm, loff_t offset);
 extern int

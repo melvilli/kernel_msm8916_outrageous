@@ -11,6 +11,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
 #include <linux/device.h>
 #include <linux/regmap.h>
@@ -19,6 +20,8 @@
 #include <linux/irqdomain.h>
 #include <linux/pm_runtime.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/device.h>
 #include <linux/export.h>
 #include <linux/interrupt.h>
@@ -26,6 +29,9 @@
 #include <linux/irqdomain.h>
 #include <linux/pm_runtime.h>
 #include <linux/regmap.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/slab.h>
 
@@ -116,7 +122,10 @@ static void regmap_irq_sync_unlock(struct irq_data *data)
 					reg, ret);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (!d->chip->init_ack_masked)
 			continue;
@@ -133,6 +142,9 @@ static void regmap_irq_sync_unlock(struct irq_data *data)
 				dev_err(d->map->dev, "Failed to ack 0x%x: %d\n",
 					reg, ret);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -285,7 +297,11 @@ static irqreturn_t regmap_irq_thread(int irq, void *d)
 		data->status_buf[i] &= ~data->mask_buf[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (data->status_buf[i] && chip->ack_base) {
+=======
+		if (data->status_buf[i] && (chip->ack_base || chip->use_ack)) {
+>>>>>>> v3.18
 =======
 		if (data->status_buf[i] && (chip->ack_base || chip->use_ack)) {
 >>>>>>> v3.18
@@ -365,6 +381,12 @@ int regmap_add_irq_chip(struct regmap *map, int irq, int irq_flags,
 	u32 reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (chip->num_regs <= 0)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (chip->num_regs <= 0)
 		return -EINVAL;
@@ -392,8 +414,11 @@ int regmap_add_irq_chip(struct regmap *map, int irq, int irq_flags,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*data = d;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	d->status_buf = kzalloc(sizeof(unsigned int) * chip->num_regs,
@@ -461,7 +486,10 @@ int regmap_add_irq_chip(struct regmap *map, int irq, int irq_flags,
 			goto err_alloc;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (!chip->init_ack_masked)
 			continue;
@@ -487,6 +515,9 @@ int regmap_add_irq_chip(struct regmap *map, int irq, int irq_flags,
 				goto err_alloc;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -536,6 +567,11 @@ int regmap_add_irq_chip(struct regmap *map, int irq, int irq_flags,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	*data = d;
+
+>>>>>>> v3.18
 =======
 	*data = d;
 
@@ -568,7 +604,11 @@ void regmap_del_irq_chip(int irq, struct regmap_irq_chip_data *d)
 
 	free_irq(irq, d);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We should unmap the domain but... */
+=======
+	irq_domain_remove(d->domain);
+>>>>>>> v3.18
 =======
 	irq_domain_remove(d->domain);
 >>>>>>> v3.18

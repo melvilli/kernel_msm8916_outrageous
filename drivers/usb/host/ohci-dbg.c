@@ -10,8 +10,11 @@
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define edstring(ed_type) ({ char *temp; \
@@ -20,6 +23,7 @@
 	case PIPE_BULK:		temp = "bulk"; break; \
 	case PIPE_INTERRUPT:	temp = "intr"; break; \
 	default:		temp = "isoc"; break; \
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}; temp;})
 #define pipestring(pipe) edstring(usb_pipetype(pipe))
@@ -75,6 +79,11 @@ urb_print(struct urb * urb, char * str, int small, int status)
 	}
 #endif
 }
+=======
+	} temp;})
+#define pipestring(pipe) edstring(usb_pipetype(pipe))
+
+>>>>>>> v3.18
 =======
 	} temp;})
 #define pipestring(pipe) edstring(usb_pipetype(pipe))
@@ -299,7 +308,11 @@ ohci_dump_roothub (
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ohci_dump (struct ohci_hcd *controller, int verbose)
+=======
+static void ohci_dump(struct ohci_hcd *controller)
+>>>>>>> v3.18
 =======
 static void ohci_dump(struct ohci_hcd *controller)
 >>>>>>> v3.18
@@ -421,6 +434,7 @@ ohci_dump_ed (const struct ohci_hcd *ohci, const char *label,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static inline void ohci_dump (struct ohci_hcd *controller, int verbose) {}
 
@@ -437,6 +451,10 @@ static inline void remove_debug_files (struct ohci_hcd *bus) { }
 
 #else
 
+=======
+/*-------------------------------------------------------------------------*/
+
+>>>>>>> v3.18
 =======
 /*-------------------------------------------------------------------------*/
 
@@ -550,6 +568,7 @@ static ssize_t fill_async_buffer(struct debug_buffer *buf)
 {
 	struct ohci_hcd		*ohci;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t			temp;
 	unsigned long		flags;
 
@@ -560,6 +579,8 @@ static ssize_t fill_async_buffer(struct debug_buffer *buf)
 	temp = show_list(ohci, buf->page, buf->count, ohci->ed_controltail);
 	temp += show_list(ohci, buf->page + temp, buf->count - temp,
 =======
+=======
+>>>>>>> v3.18
 	size_t			temp, size;
 	unsigned long		flags;
 
@@ -570,6 +591,9 @@ static ssize_t fill_async_buffer(struct debug_buffer *buf)
 	spin_lock_irqsave (&ohci->lock, flags);
 	temp = show_list(ohci, buf->page, size, ohci->ed_controltail);
 	temp += show_list(ohci, buf->page + temp, size - temp,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  ohci->ed_bulktail);
 	spin_unlock_irqrestore (&ohci->lock, flags);
@@ -903,8 +927,11 @@ static inline void remove_debug_files (struct ohci_hcd *ohci)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*-------------------------------------------------------------------------*/

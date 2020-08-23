@@ -94,12 +94,18 @@ enum radeon_family {
 	CHIP_OLAND,
 	CHIP_HAINAN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	CHIP_BONAIRE,
 	CHIP_KAVERI,
 	CHIP_KABINI,
 	CHIP_HAWAII,
 	CHIP_MULLINS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CHIP_LAST,
 };
@@ -120,6 +126,10 @@ enum radeon_chip_flags {
 	RADEON_IS_PCI = 0x00800000UL,
 	RADEON_IS_IGPGART = 0x01000000UL,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RADEON_IS_PX = 0x02000000UL,
+>>>>>>> v3.18
 =======
 	RADEON_IS_PX = 0x02000000UL,
 >>>>>>> v3.18

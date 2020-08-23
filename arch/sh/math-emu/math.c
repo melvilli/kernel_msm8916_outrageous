@@ -575,6 +575,7 @@ static int ieee_fpe_handler(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void do_fpu_error(unsigned long r4, unsigned long r5,
 			     unsigned long r6, unsigned long r7,
 			     struct pt_regs regs)
@@ -593,6 +594,8 @@ asmlinkage void do_fpu_error(unsigned long r4, unsigned long r5,
 	force_sig_info(SIGFPE, &info, tsk);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**

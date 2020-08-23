@@ -514,10 +514,14 @@ static void i2c_w(struct gspca_dev *gspca_dev, const u8 *buf)
 			if (gspca_dev->usb_buf[0] & 0x08) {
 				dev_err(gspca_dev->v4l2_dev.dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					"i2c error writing %02x %02x %02x %02x"
 					" %02x %02x %02x %02x\n",
 					buf[0], buf[1], buf[2], buf[3],
 					buf[4], buf[5], buf[6], buf[7]);
+=======
+					"i2c error writing %8ph\n", buf);
+>>>>>>> v3.18
 =======
 					"i2c error writing %8ph\n", buf);
 >>>>>>> v3.18
@@ -758,7 +762,11 @@ static void setexposure(struct gspca_dev *gspca_dev)
 		   unstable (the bridge goes into a higher compression mode
 		   which we have not reverse engineered yet). */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (gspca_dev->width == 640 && reg11 < 4)
+=======
+		if (gspca_dev->pixfmt.width == 640 && reg11 < 4)
+>>>>>>> v3.18
 =======
 		if (gspca_dev->pixfmt.width == 640 && reg11 < 4)
 >>>>>>> v3.18
@@ -925,7 +933,11 @@ static void do_autogain(struct gspca_dev *gspca_dev)
 			sd->autogain_ignore_frames = AUTOGAIN_IGNORE_FRAMES;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int gain_knee = gspca_dev->gain->maximum * 9 / 10;
+=======
+		int gain_knee = (s32)gspca_dev->gain->maximum * 9 / 10;
+>>>>>>> v3.18
 =======
 		int gain_knee = (s32)gspca_dev->gain->maximum * 9 / 10;
 >>>>>>> v3.18
@@ -1446,10 +1458,15 @@ static const struct usb_device_id device_table[] = {
 	{USB_DEVICE(0x0c45, 0x6011), SB(OV6650, 101)},
 	{USB_DEVICE(0x0c45, 0x6019), SB(OV7630, 101)},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !IS_ENABLED(CONFIG_USB_SN9C102)
 	{USB_DEVICE(0x0c45, 0x6024), SB(TAS5130CXX, 102)},
 	{USB_DEVICE(0x0c45, 0x6025), SB(TAS5130CXX, 102)},
 #endif
+=======
+	{USB_DEVICE(0x0c45, 0x6024), SB(TAS5130CXX, 102)},
+	{USB_DEVICE(0x0c45, 0x6025), SB(TAS5130CXX, 102)},
+>>>>>>> v3.18
 =======
 	{USB_DEVICE(0x0c45, 0x6024), SB(TAS5130CXX, 102)},
 	{USB_DEVICE(0x0c45, 0x6025), SB(TAS5130CXX, 102)},

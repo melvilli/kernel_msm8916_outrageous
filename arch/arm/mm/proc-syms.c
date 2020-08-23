@@ -31,9 +31,12 @@ EXPORT_SYMBOL(__cpuc_flush_user_range);
 EXPORT_SYMBOL(__cpuc_coherent_kern_range);
 EXPORT_SYMBOL(__cpuc_flush_dcache_area);
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(dmac_inv_range);
 EXPORT_SYMBOL(dmac_clean_range);
 EXPORT_SYMBOL(dmac_flush_range);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else

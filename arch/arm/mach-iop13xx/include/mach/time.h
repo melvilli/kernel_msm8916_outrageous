@@ -1,6 +1,12 @@
 #ifndef _IOP13XX_TIME_H_
 #define _IOP13XX_TIME_H_
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#include <mach/irqs.h>
+
+>>>>>>> v3.18
 =======
 
 #include <mach/irqs.h>

@@ -21,6 +21,11 @@
 #include <linux/crash_dump.h>
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/vmalloc.h>
+#include <linux/pagemap.h>
+>>>>>>> v3.18
 =======
 #include <linux/vmalloc.h>
 #include <linux/pagemap.h>
@@ -38,18 +43,28 @@ static LIST_HEAD(vmcore_list);
 static char *elfcorebuf;
 static size_t elfcorebuf_sz;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static size_t elfcorebuf_sz_orig;
 
 static char *elfnotes_buf;
 static size_t elfnotes_sz;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Total size of vmcore file. */
 static u64 vmcore_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct proc_dir_entry *proc_vmcore = NULL;
+=======
+static struct proc_dir_entry *proc_vmcore;
+>>>>>>> v3.18
 =======
 static struct proc_dir_entry *proc_vmcore;
 >>>>>>> v3.18
@@ -135,6 +150,7 @@ static ssize_t read_from_oldmem(char *buf, size_t count,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Maps vmcore file offset to respective physical address in memroy. */
 static u64 map_offset_to_paddr(loff_t offset, struct list_head *vc_list,
 					struct vmcore **m_ptr)
@@ -154,6 +170,8 @@ static u64 map_offset_to_paddr(loff_t offset, struct list_head *vc_list,
 	}
 	*m_ptr = NULL;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Architectures may override this function to allocate ELF header in 2nd kernel
  */
@@ -205,6 +223,9 @@ static int copy_to(void *target, void *src, size_t size, int userbuf)
 	} else {
 		memcpy(target, src, size);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -212,6 +233,7 @@ static int copy_to(void *target, void *src, size_t size, int userbuf)
 /* Read from the ELF header and then the crash dump. On error, negative value is
  * returned otherwise number of bytes read are returned.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t read_vmcore(struct file *file, char __user *buffer,
 				size_t buflen, loff_t *fpos)
@@ -221,6 +243,8 @@ static ssize_t read_vmcore(struct file *file, char __user *buffer,
 	u64 start, nr_bytes;
 	struct vmcore *curr_m = NULL;
 =======
+=======
+>>>>>>> v3.18
 static ssize_t __read_vmcore(char *buffer, size_t buflen, loff_t *fpos,
 			     int userbuf)
 {
@@ -228,6 +252,9 @@ static ssize_t __read_vmcore(char *buffer, size_t buflen, loff_t *fpos,
 	size_t tsz;
 	u64 start;
 	struct vmcore *m = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (buflen == 0 || *fpos >= vmcore_size)
@@ -240,10 +267,15 @@ static ssize_t __read_vmcore(char *buffer, size_t buflen, loff_t *fpos,
 	/* Read ELF core header */
 	if (*fpos < elfcorebuf_sz) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsz = elfcorebuf_sz - *fpos;
 		if (buflen < tsz)
 			tsz = buflen;
 		if (copy_to_user(buffer, elfcorebuf + *fpos, tsz))
+=======
+		tsz = min(elfcorebuf_sz - (size_t)*fpos, buflen);
+		if (copy_to(buffer, elfcorebuf + *fpos, tsz, userbuf))
+>>>>>>> v3.18
 =======
 		tsz = min(elfcorebuf_sz - (size_t)*fpos, buflen);
 		if (copy_to(buffer, elfcorebuf + *fpos, tsz, userbuf))
@@ -259,6 +291,7 @@ static ssize_t __read_vmcore(char *buffer, size_t buflen, loff_t *fpos,
 			return acc;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	start = map_offset_to_paddr(*fpos, &vmcore_list, &curr_m);
 	if (!curr_m)
@@ -276,6 +309,8 @@ static ssize_t __read_vmcore(char *buffer, size_t buflen, loff_t *fpos,
 		if (tmp < 0)
 			return tmp;
 =======
+=======
+>>>>>>> v3.18
 	/* Read Elf note segment */
 	if (*fpos < elfcorebuf_sz + elfnotes_sz) {
 		void *kaddr;
@@ -284,11 +319,15 @@ static ssize_t __read_vmcore(char *buffer, size_t buflen, loff_t *fpos,
 		kaddr = elfnotes_buf + *fpos - elfcorebuf_sz;
 		if (copy_to(buffer, kaddr, tsz, userbuf))
 			return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		buflen -= tsz;
 		*fpos += tsz;
 		buffer += tsz;
 		acc += tsz;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (start >= (curr_m->paddr + curr_m->size)) {
 			if (curr_m->list.next == &vmcore_list)
@@ -342,6 +381,8 @@ static u64 __init get_vmcore_size_elf32(char *elfptr)
 		size += phdr_ptr->p_memsz;
 		phdr_ptr++;
 =======
+=======
+>>>>>>> v3.18
 
 		/* leave now if filled buffer already */
 		if (buflen == 0)
@@ -627,11 +668,15 @@ static u64 __init get_vmcore_size(size_t elfsz, size_t elfnotesegsz,
 	size = elfsz + elfnotesegsz;
 	list_for_each_entry(m, vc_list, list) {
 		size += m->size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return size;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Merges all the PT_NOTE headers into one. */
 static int __init merge_note_headers_elf64(char *elfptr, size_t *elfsz,
@@ -655,6 +700,8 @@ static int __init merge_note_headers_elf64(char *elfptr, size_t *elfsz,
 			continue;
 		nr_ptnote++;
 =======
+=======
+>>>>>>> v3.18
 /**
  * update_note_header_size_elf64 - update p_memsz member of each PT_NOTE entry
  *
@@ -676,6 +723,9 @@ static int __init update_note_header_size_elf64(const Elf64_Ehdr *ehdr_ptr)
 		u64 offset, max_sz, sz, real_sz = 0;
 		if (phdr_ptr->p_type != PT_NOTE)
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		max_sz = phdr_ptr->p_memsz;
 		offset = phdr_ptr->p_offset;
@@ -683,7 +733,11 @@ static int __init update_note_header_size_elf64(const Elf64_Ehdr *ehdr_ptr)
 		if (!notes_section)
 			return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = read_from_oldmem(notes_section, max_sz, &offset, 0);
+=======
+		rc = elfcorehdr_read_notes(notes_section, max_sz, &offset);
+>>>>>>> v3.18
 =======
 		rc = elfcorehdr_read_notes(notes_section, max_sz, &offset);
 >>>>>>> v3.18
@@ -692,6 +746,7 @@ static int __init update_note_header_size_elf64(const Elf64_Ehdr *ehdr_ptr)
 			return rc;
 		}
 		nhdr_ptr = notes_section;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for (j = 0; j < max_sz; j += sz) {
 			if (nhdr_ptr->n_namesz == 0)
@@ -717,6 +772,8 @@ static int __init update_note_header_size_elf64(const Elf64_Ehdr *ehdr_ptr)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		while (nhdr_ptr->n_namesz != 0) {
 			sz = sizeof(Elf64_Nhdr) +
 				((nhdr_ptr->n_namesz + 3) & ~3) +
@@ -843,6 +900,9 @@ static int __init merge_note_headers_elf64(char *elfptr, size_t *elfsz,
 	if (rc < 0)
 		return rc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Prepare merged PT_NOTE program header. */
 	phdr.p_type    = PT_NOTE;
@@ -850,7 +910,11 @@ static int __init merge_note_headers_elf64(char *elfptr, size_t *elfsz,
 	note_off = sizeof(Elf64_Ehdr) +
 			(ehdr_ptr->e_phnum - nr_ptnote +1) * sizeof(Elf64_Phdr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phdr.p_offset  = note_off;
+=======
+	phdr.p_offset  = roundup(note_off, PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	phdr.p_offset  = roundup(note_off, PAGE_SIZE);
 >>>>>>> v3.18
@@ -868,6 +932,11 @@ static int __init merge_note_headers_elf64(char *elfptr, size_t *elfsz,
 	*elfsz = *elfsz - i;
 	memmove(tmp, tmp+i, ((*elfsz)-sizeof(Elf64_Ehdr)-sizeof(Elf64_Phdr)));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(elfptr + *elfsz, 0, i);
+	*elfsz = roundup(*elfsz, PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	memset(elfptr + *elfsz, 0, i);
 	*elfsz = roundup(*elfsz, PAGE_SIZE);
@@ -879,6 +948,7 @@ static int __init merge_note_headers_elf64(char *elfptr, size_t *elfsz,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Merges all the PT_NOTE headers into one. */
 static int __init merge_note_headers_elf32(char *elfptr, size_t *elfsz,
@@ -902,6 +972,8 @@ static int __init merge_note_headers_elf32(char *elfptr, size_t *elfsz,
 			continue;
 		nr_ptnote++;
 =======
+=======
+>>>>>>> v3.18
 /**
  * update_note_header_size_elf32 - update p_memsz member of each PT_NOTE entry
  *
@@ -923,6 +995,9 @@ static int __init update_note_header_size_elf32(const Elf32_Ehdr *ehdr_ptr)
 		u64 offset, max_sz, sz, real_sz = 0;
 		if (phdr_ptr->p_type != PT_NOTE)
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		max_sz = phdr_ptr->p_memsz;
 		offset = phdr_ptr->p_offset;
@@ -930,7 +1005,11 @@ static int __init update_note_header_size_elf32(const Elf32_Ehdr *ehdr_ptr)
 		if (!notes_section)
 			return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = read_from_oldmem(notes_section, max_sz, &offset, 0);
+=======
+		rc = elfcorehdr_read_notes(notes_section, max_sz, &offset);
+>>>>>>> v3.18
 =======
 		rc = elfcorehdr_read_notes(notes_section, max_sz, &offset);
 >>>>>>> v3.18
@@ -939,6 +1018,7 @@ static int __init update_note_header_size_elf32(const Elf32_Ehdr *ehdr_ptr)
 			return rc;
 		}
 		nhdr_ptr = notes_section;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for (j = 0; j < max_sz; j += sz) {
 			if (nhdr_ptr->n_namesz == 0)
@@ -964,6 +1044,8 @@ static int __init update_note_header_size_elf32(const Elf32_Ehdr *ehdr_ptr)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		while (nhdr_ptr->n_namesz != 0) {
 			sz = sizeof(Elf32_Nhdr) +
 				((nhdr_ptr->n_namesz + 3) & ~3) +
@@ -1090,6 +1172,9 @@ static int __init merge_note_headers_elf32(char *elfptr, size_t *elfsz,
 	if (rc < 0)
 		return rc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Prepare merged PT_NOTE program header. */
 	phdr.p_type    = PT_NOTE;
@@ -1097,7 +1182,11 @@ static int __init merge_note_headers_elf32(char *elfptr, size_t *elfsz,
 	note_off = sizeof(Elf32_Ehdr) +
 			(ehdr_ptr->e_phnum - nr_ptnote +1) * sizeof(Elf32_Phdr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phdr.p_offset  = note_off;
+=======
+	phdr.p_offset  = roundup(note_off, PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	phdr.p_offset  = roundup(note_off, PAGE_SIZE);
 >>>>>>> v3.18
@@ -1115,6 +1204,11 @@ static int __init merge_note_headers_elf32(char *elfptr, size_t *elfsz,
 	*elfsz = *elfsz - i;
 	memmove(tmp, tmp+i, ((*elfsz)-sizeof(Elf32_Ehdr)-sizeof(Elf32_Phdr)));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(elfptr + *elfsz, 0, i);
+	*elfsz = roundup(*elfsz, PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	memset(elfptr + *elfsz, 0, i);
 	*elfsz = roundup(*elfsz, PAGE_SIZE);
@@ -1131,6 +1225,10 @@ static int __init merge_note_headers_elf32(char *elfptr, size_t *elfsz,
 static int __init process_ptload_program_headers_elf64(char *elfptr,
 						size_t elfsz,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+						size_t elfnotes_sz,
+>>>>>>> v3.18
 =======
 						size_t elfnotes_sz,
 >>>>>>> v3.18
@@ -1146,6 +1244,7 @@ static int __init process_ptload_program_headers_elf64(char *elfptr,
 	phdr_ptr = (Elf64_Phdr*)(elfptr + sizeof(Elf64_Ehdr)); /* PT_NOTE hdr */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* First program header is PT_NOTE header. */
 	vmcore_off = sizeof(Elf64_Ehdr) +
 			(ehdr_ptr->e_phnum) * sizeof(Elf64_Phdr) +
@@ -1156,6 +1255,8 @@ static int __init process_ptload_program_headers_elf64(char *elfptr,
 			continue;
 
 =======
+=======
+>>>>>>> v3.18
 	/* Skip Elf header, program headers and Elf note segment. */
 	vmcore_off = elfsz + elfnotes_sz;
 
@@ -1170,11 +1271,15 @@ static int __init process_ptload_program_headers_elf64(char *elfptr,
 		end = roundup(paddr + phdr_ptr->p_memsz, PAGE_SIZE);
 		size = end - start;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Add this contiguous chunk of memory to vmcore list.*/
 		new = get_new_element();
 		if (!new)
 			return -ENOMEM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		new->paddr = phdr_ptr->p_offset;
 		new->size = phdr_ptr->p_memsz;
@@ -1184,6 +1289,8 @@ static int __init process_ptload_program_headers_elf64(char *elfptr,
 		phdr_ptr->p_offset = vmcore_off;
 		vmcore_off = vmcore_off + phdr_ptr->p_memsz;
 =======
+=======
+>>>>>>> v3.18
 		new->paddr = start;
 		new->size = size;
 		list_add_tail(&new->list, vc_list);
@@ -1191,6 +1298,9 @@ static int __init process_ptload_program_headers_elf64(char *elfptr,
 		/* Update the program header offset. */
 		phdr_ptr->p_offset = vmcore_off + (paddr - start);
 		vmcore_off = vmcore_off + size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -1199,6 +1309,10 @@ static int __init process_ptload_program_headers_elf64(char *elfptr,
 static int __init process_ptload_program_headers_elf32(char *elfptr,
 						size_t elfsz,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+						size_t elfnotes_sz,
+>>>>>>> v3.18
 =======
 						size_t elfnotes_sz,
 >>>>>>> v3.18
@@ -1214,6 +1328,7 @@ static int __init process_ptload_program_headers_elf32(char *elfptr,
 	phdr_ptr = (Elf32_Phdr*)(elfptr + sizeof(Elf32_Ehdr)); /* PT_NOTE hdr */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* First program header is PT_NOTE header. */
 	vmcore_off = sizeof(Elf32_Ehdr) +
 			(ehdr_ptr->e_phnum) * sizeof(Elf32_Phdr) +
@@ -1224,6 +1339,8 @@ static int __init process_ptload_program_headers_elf32(char *elfptr,
 			continue;
 
 =======
+=======
+>>>>>>> v3.18
 	/* Skip Elf header, program headers and Elf note segment. */
 	vmcore_off = elfsz + elfnotes_sz;
 
@@ -1238,11 +1355,15 @@ static int __init process_ptload_program_headers_elf32(char *elfptr,
 		end = roundup(paddr + phdr_ptr->p_memsz, PAGE_SIZE);
 		size = end - start;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Add this contiguous chunk of memory to vmcore list.*/
 		new = get_new_element();
 		if (!new)
 			return -ENOMEM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		new->paddr = phdr_ptr->p_offset;
 		new->size = phdr_ptr->p_memsz;
@@ -1252,6 +1373,8 @@ static int __init process_ptload_program_headers_elf32(char *elfptr,
 		phdr_ptr->p_offset = vmcore_off;
 		vmcore_off = vmcore_off + phdr_ptr->p_memsz;
 =======
+=======
+>>>>>>> v3.18
 		new->paddr = start;
 		new->size = size;
 		list_add_tail(&new->list, vc_list);
@@ -1259,12 +1382,16 @@ static int __init process_ptload_program_headers_elf32(char *elfptr,
 		/* Update the program header offset */
 		phdr_ptr->p_offset = vmcore_off + (paddr - start);
 		vmcore_off = vmcore_off + size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
 }
 
 /* Sets offset fields of vmcore elements. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __init set_vmcore_list_offsets_elf64(char *elfptr,
 						struct list_head *vc_list)
@@ -1279,6 +1406,8 @@ static void __init set_vmcore_list_offsets_elf64(char *elfptr,
 	vmcore_off = sizeof(Elf64_Ehdr) +
 			(ehdr_ptr->e_phnum) * sizeof(Elf64_Phdr);
 =======
+=======
+>>>>>>> v3.18
 static void __init set_vmcore_list_offsets(size_t elfsz, size_t elfnotes_sz,
 					   struct list_head *vc_list)
 {
@@ -1287,6 +1416,9 @@ static void __init set_vmcore_list_offsets(size_t elfsz, size_t elfnotes_sz,
 
 	/* Skip Elf header, program headers and Elf note segment. */
 	vmcore_off = elfsz + elfnotes_sz;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	list_for_each_entry(m, vc_list, list) {
@@ -1295,6 +1427,7 @@ static void __init set_vmcore_list_offsets(size_t elfsz, size_t elfnotes_sz,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Sets offset fields of vmcore elements. */
 static void __init set_vmcore_list_offsets_elf32(char *elfptr,
@@ -1315,12 +1448,17 @@ static void __init set_vmcore_list_offsets_elf32(char *elfptr,
 		vmcore_off += m->size;
 	}
 =======
+=======
+>>>>>>> v3.18
 static void free_elfcorebuf(void)
 {
 	free_pages((unsigned long)elfcorebuf, get_order(elfcorebuf_sz_orig));
 	elfcorebuf = NULL;
 	vfree(elfnotes_buf);
 	elfnotes_buf = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1334,7 +1472,11 @@ static int __init parse_crash_elf64_headers(void)
 
 	/* Read Elf header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = read_from_oldmem((char*)&ehdr, sizeof(Elf64_Ehdr), &addr, 0);
+=======
+	rc = elfcorehdr_read((char *)&ehdr, sizeof(Elf64_Ehdr), &addr);
+>>>>>>> v3.18
 =======
 	rc = elfcorehdr_read((char *)&ehdr, sizeof(Elf64_Ehdr), &addr);
 >>>>>>> v3.18
@@ -1356,6 +1498,7 @@ static int __init parse_crash_elf64_headers(void)
 	}
 
 	/* Read in all elf headers. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	elfcorebuf_sz = sizeof(Elf64_Ehdr) + ehdr.e_phnum * sizeof(Elf64_Phdr);
 	elfcorebuf = kmalloc(elfcorebuf_sz, GFP_KERNEL);
@@ -1383,6 +1526,8 @@ static int __init parse_crash_elf64_headers(void)
 	set_vmcore_list_offsets_elf64(elfcorebuf, &vmcore_list);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	elfcorebuf_sz_orig = sizeof(Elf64_Ehdr) +
 				ehdr.e_phnum * sizeof(Elf64_Phdr);
 	elfcorebuf_sz = elfcorebuf_sz_orig;
@@ -1409,6 +1554,9 @@ static int __init parse_crash_elf64_headers(void)
 fail:
 	free_elfcorebuf();
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1422,7 +1570,11 @@ static int __init parse_crash_elf32_headers(void)
 
 	/* Read Elf header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = read_from_oldmem((char*)&ehdr, sizeof(Elf32_Ehdr), &addr, 0);
+=======
+	rc = elfcorehdr_read((char *)&ehdr, sizeof(Elf32_Ehdr), &addr);
+>>>>>>> v3.18
 =======
 	rc = elfcorehdr_read((char *)&ehdr, sizeof(Elf32_Ehdr), &addr);
 >>>>>>> v3.18
@@ -1444,6 +1596,7 @@ static int __init parse_crash_elf32_headers(void)
 	}
 
 	/* Read in all elf headers. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	elfcorebuf_sz = sizeof(Elf32_Ehdr) + ehdr.e_phnum * sizeof(Elf32_Phdr);
 	elfcorebuf = kmalloc(elfcorebuf_sz, GFP_KERNEL);
@@ -1471,6 +1624,8 @@ static int __init parse_crash_elf32_headers(void)
 	set_vmcore_list_offsets_elf32(elfcorebuf, &vmcore_list);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	elfcorebuf_sz_orig = sizeof(Elf32_Ehdr) + ehdr.e_phnum * sizeof(Elf32_Phdr);
 	elfcorebuf_sz = elfcorebuf_sz_orig;
 	elfcorebuf = (void *)__get_free_pages(GFP_KERNEL | __GFP_ZERO,
@@ -1496,6 +1651,9 @@ static int __init parse_crash_elf32_headers(void)
 fail:
 	free_elfcorebuf();
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1507,7 +1665,11 @@ static int __init parse_crash_elf_headers(void)
 
 	addr = elfcorehdr_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = read_from_oldmem(e_ident, EI_NIDENT, &addr, 0);
+=======
+	rc = elfcorehdr_read(e_ident, EI_NIDENT, &addr);
+>>>>>>> v3.18
 =======
 	rc = elfcorehdr_read(e_ident, EI_NIDENT, &addr);
 >>>>>>> v3.18
@@ -1523,9 +1685,12 @@ static int __init parse_crash_elf_headers(void)
 		if (rc)
 			return rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* Determine vmcore size. */
 		vmcore_size = get_vmcore_size_elf64(elfcorebuf);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else if (e_ident[EI_CLASS] == ELFCLASS32) {
@@ -1533,9 +1698,12 @@ static int __init parse_crash_elf_headers(void)
 		if (rc)
 			return rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* Determine vmcore size. */
 		vmcore_size = get_vmcore_size_elf32(elfcorebuf);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {
@@ -1543,12 +1711,18 @@ static int __init parse_crash_elf_headers(void)
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Determine vmcore size. */
 	vmcore_size = get_vmcore_size(elfcorebuf_sz, elfnotes_sz,
 				      &vmcore_list);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1559,8 +1733,11 @@ static int __init vmcore_init(void)
 	int rc = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If elfcorehdr= has been passed in cmdline, then capture the dump.*/
 =======
+=======
+>>>>>>> v3.18
 	/* Allow architectures to allocate ELF header in 2nd kernel */
 	rc = elfcorehdr_alloc(&elfcorehdr_addr, &elfcorehdr_size);
 	if (rc)
@@ -1569,6 +1746,9 @@ static int __init vmcore_init(void)
 	 * If elfcorehdr= has been passed in cmdline or created in 2nd kernel,
 	 * then capture the dump.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(is_vmcore_usable()))
 		return rc;
@@ -1578,6 +1758,11 @@ static int __init vmcore_init(void)
 		return rc;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	elfcorehdr_free(elfcorehdr_addr);
+	elfcorehdr_addr = ELFCORE_ADDR_ERR;
+>>>>>>> v3.18
 =======
 	elfcorehdr_free(elfcorehdr_addr);
 	elfcorehdr_addr = ELFCORE_ADDR_ERR;
@@ -1589,7 +1774,11 @@ static int __init vmcore_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(vmcore_init)
+=======
+fs_initcall(vmcore_init);
+>>>>>>> v3.18
 =======
 fs_initcall(vmcore_init);
 >>>>>>> v3.18
@@ -1613,10 +1802,15 @@ void vmcore_cleanup(void)
 		kfree(m);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(elfcorebuf);
 	elfcorebuf = NULL;
 }
 EXPORT_SYMBOL_GPL(vmcore_cleanup);
+=======
+	free_elfcorebuf();
+}
+>>>>>>> v3.18
 =======
 	free_elfcorebuf();
 }

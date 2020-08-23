@@ -23,6 +23,11 @@ struct sh_mobile_ceu_info {
 	int max_height;
 	struct sh_mobile_ceu_companion *csi2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_async_subdev **asd;	/* Flat array, arranged in groups */
+	unsigned int *asd_sizes;	/* 0-terminated array pf asd group sizes */
+>>>>>>> v3.18
 =======
 	struct v4l2_async_subdev **asd;	/* Flat array, arranged in groups */
 	unsigned int *asd_sizes;	/* 0-terminated array pf asd group sizes */

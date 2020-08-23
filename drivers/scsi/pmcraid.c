@@ -238,7 +238,11 @@ static int pmcraid_slave_configure(struct scsi_device *scsi_dev)
 		     scsi_dev->channel,
 		     scsi_dev->id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     scsi_dev->lun);
+=======
+		     (u8)scsi_dev->lun);
+>>>>>>> v3.18
 =======
 		     (u8)scsi_dev->lun);
 >>>>>>> v3.18
@@ -1409,12 +1413,15 @@ enum {
 #define PMCRAID_AEN_CMD_MAX (__PMCRAID_AEN_CMD_MAX - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct genl_family pmcraid_event_family = {
 	.id = GENL_ID_GENERATE,
 	.name = "pmcraid",
 	.version = 1,
 	.maxattr = PMCRAID_AEN_ATTR_MAX
 =======
+=======
+>>>>>>> v3.18
 static struct genl_multicast_group pmcraid_mcgrps[] = {
 	{ .name = "events", /* not really used - see ID discussion below */ },
 };
@@ -1431,6 +1438,9 @@ static struct genl_family pmcraid_event_family = {
 	.maxattr = PMCRAID_AEN_ATTR_MAX,
 	.mcgrps = pmcraid_mcgrps,
 	.n_mcgrps = ARRAY_SIZE(pmcraid_mcgrps),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1535,8 +1545,13 @@ static int pmcraid_notify_aen(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result =
 		genlmsg_multicast(skb, 0, pmcraid_event_family.id, GFP_ATOMIC);
+=======
+	result = genlmsg_multicast(&pmcraid_event_family, skb,
+				   0, 0, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	result = genlmsg_multicast(&pmcraid_event_family, skb,
 				   0, 0, GFP_ATOMIC);
@@ -4231,9 +4246,15 @@ static ssize_t pmcraid_store_log_level(
 	struct Scsi_Host *shost;
 	struct pmcraid_instance *pinstance;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long val;
 
 	if (strict_strtoul(buf, 10, &val))
+=======
+	u8 val;
+
+	if (kstrtou8(buf, 10, &val))
+>>>>>>> v3.18
 =======
 	u8 val;
 
@@ -4722,6 +4743,7 @@ pmcraid_register_interrupt_handler(struct pmcraid_instance *pinstance)
 			entries[i].entry = i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = pci_enable_msix(pdev, entries, num_hrrq);
 		if (rc < 0)
 			goto pmcraid_isr_legacy;
@@ -4736,10 +4758,15 @@ pmcraid_register_interrupt_handler(struct pmcraid_instance *pinstance)
 		}
 
 =======
+=======
+>>>>>>> v3.18
 		num_hrrq = pci_enable_msix_range(pdev, entries, 1, num_hrrq);
 		if (num_hrrq < 0)
 			goto pmcraid_isr_legacy;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		for (i = 0; i < num_hrrq; i++) {
 			pinstance->hrrq_vector[i].hrrq_id = i;
@@ -4777,7 +4804,10 @@ pmcraid_isr_legacy:
 	pinstance->hrrq_vector[0].vector = pdev->irq;
 	pinstance->num_hrrq = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -6095,7 +6125,10 @@ out_release_regions:
 out_disable_device:
 	atomic_dec(&pmcraid_adapter_count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_disable_device(pdev);
@@ -6141,7 +6174,11 @@ static int __init pmcraid_init(void)
 	if (IS_ERR(pmcraid_class)) {
 		error = PTR_ERR(pmcraid_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pmcraid_err("failed to register with with sysfs, error = %x\n",
+=======
+		pmcraid_err("failed to register with sysfs, error = %x\n",
+>>>>>>> v3.18
 =======
 		pmcraid_err("failed to register with sysfs, error = %x\n",
 >>>>>>> v3.18

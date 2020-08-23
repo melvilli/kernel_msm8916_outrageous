@@ -36,6 +36,7 @@ struct input_dev;
  */
 enum snd_jack_types {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SND_JACK_HEADPHONE	= 0x0000001,
 	SND_JACK_MICROPHONE	= 0x0000002,
 	SND_JACK_HEADSET	= SND_JACK_HEADPHONE | SND_JACK_MICROPHONE,
@@ -63,6 +64,8 @@ enum snd_jack_types {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	SND_JACK_HEADPHONE	= 0x0001,
 	SND_JACK_MICROPHONE	= 0x0002,
 	SND_JACK_HEADSET	= SND_JACK_HEADPHONE | SND_JACK_MICROPHONE,
@@ -84,6 +87,9 @@ enum snd_jack_types {
 /* Keep in sync with definitions above */
 #define SND_JACK_SWITCH_TYPES 6
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct snd_jack {
 	struct input_dev *input_dev;
@@ -92,7 +98,11 @@ struct snd_jack {
 	const char *id;
 	char name[100];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int key[8];   /* Keep in sync with definitions above */
+=======
+	unsigned int key[6];   /* Keep in sync with definitions above */
+>>>>>>> v3.18
 =======
 	unsigned int key[6];   /* Keep in sync with definitions above */
 >>>>>>> v3.18

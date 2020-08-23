@@ -8,6 +8,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -35,6 +39,12 @@
 static struct raw3270_fn con3270_fn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static bool auto_update = 1;
+module_param(auto_update, bool, 0);
+
+>>>>>>> v3.18
 =======
 static bool auto_update = 1;
 module_param(auto_update, bool, 0);
@@ -215,6 +225,11 @@ con3270_update(struct con3270 *cp)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!auto_update && !raw3270_view_active(&cp->view))
+		return;
+>>>>>>> v3.18
 =======
 	if (!auto_update && !raw3270_view_active(&cp->view))
 		return;
@@ -545,6 +560,10 @@ con3270_flush(void)
 		return;
 	raw3270_pm_unfreeze(&cp->view);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	raw3270_activate_view(&cp->view);
+>>>>>>> v3.18
 =======
 	raw3270_activate_view(&cp->view);
 >>>>>>> v3.18

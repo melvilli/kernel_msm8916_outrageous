@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* bnx2fc_fcoe.c: Broadcom NetXtreme II Linux FCoE offload driver.
+=======
+/* bnx2fc_fcoe.c: QLogic NetXtreme II Linux FCoE offload driver.
+>>>>>>> v3.18
 =======
 /* bnx2fc_fcoe.c: QLogic NetXtreme II Linux FCoE offload driver.
 >>>>>>> v3.18
@@ -9,6 +13,10 @@
  *
  * Copyright (c) 2008 - 2013 Broadcom Corporation
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2014, QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c) 2014, QLogic Corporation
 >>>>>>> v3.18
@@ -31,24 +39,34 @@ DEFINE_PER_CPU(struct bnx2fc_percpu_s, bnx2fc_percpu);
 #define DRV_MODULE_NAME		"bnx2fc"
 #define DRV_MODULE_VERSION	BNX2FC_VERSION
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_MODULE_RELDATE	"Mar 08, 2013"
 
 
 static char version[] =
 		"Broadcom NetXtreme II FCoE Driver " DRV_MODULE_NAME \
 =======
+=======
+>>>>>>> v3.18
 #define DRV_MODULE_RELDATE	"Dec 11, 2013"
 
 
 static char version[] =
 		"QLogic NetXtreme II FCoE Driver " DRV_MODULE_NAME \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		" v" DRV_MODULE_VERSION " (" DRV_MODULE_RELDATE ")\n";
 
 
 MODULE_AUTHOR("Bhanu Prakash Gollapudi <bprakash@broadcom.com>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Broadcom NetXtreme II BCM57710 FCoE Driver");
+=======
+MODULE_DESCRIPTION("QLogic NetXtreme II BCM57710 FCoE Driver");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("QLogic NetXtreme II BCM57710 FCoE Driver");
 >>>>>>> v3.18
@@ -492,7 +510,11 @@ static int bnx2fc_l2_rcv_thread(void *arg)
 	struct sk_buff *skb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_user_nice(current, -20);
+=======
+	set_user_nice(current, MIN_NICE);
+>>>>>>> v3.18
 =======
 	set_user_nice(current, MIN_NICE);
 >>>>>>> v3.18
@@ -548,10 +570,13 @@ static void bnx2fc_recv_frame(struct sk_buff *skb)
 	fr_len = skb->len - sizeof(struct fcoe_crc_eof);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stats = per_cpu_ptr(lport->stats, get_cpu());
 	stats->RxFrames++;
 	stats->RxWords += fr_len / FCOE_WORD_TO_BYTE;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fp = (struct fc_frame *)skb;
@@ -560,7 +585,10 @@ static void bnx2fc_recv_frame(struct sk_buff *skb)
 	fr_sof(fp) = hp->fcoe_sof;
 	if (skb_copy_bits(skb, fr_len, &crc_eof, sizeof(crc_eof))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_cpu();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kfree_skb(skb);
@@ -570,7 +598,10 @@ static void bnx2fc_recv_frame(struct sk_buff *skb)
 	fr_crc(fp) = crc_eof.fcoe_crc32;
 	if (pskb_trim(skb, fr_len)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_cpu();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kfree_skb(skb);
@@ -583,10 +614,15 @@ static void bnx2fc_recv_frame(struct sk_buff *skb)
 	if (vn_port) {
 		port = lport_priv(vn_port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (compare_ether_addr(port->data_src_addr, dest_mac)
 		    != 0) {
 			BNX2FC_HBA_DBG(lport, "fpma mismatch\n");
 			put_cpu();
+=======
+		if (!ether_addr_equal(port->data_src_addr, dest_mac)) {
+			BNX2FC_HBA_DBG(lport, "fpma mismatch\n");
+>>>>>>> v3.18
 =======
 		if (!ether_addr_equal(port->data_src_addr, dest_mac)) {
 			BNX2FC_HBA_DBG(lport, "fpma mismatch\n");
@@ -599,7 +635,10 @@ static void bnx2fc_recv_frame(struct sk_buff *skb)
 	    fh->fh_type == FC_TYPE_FCP) {
 		/* Drop FCP data. We dont this in L2 path */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_cpu();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kfree_skb(skb);
@@ -612,7 +651,10 @@ static void bnx2fc_recv_frame(struct sk_buff *skb)
 			if (ntoh24(fh->fh_s_id) == FC_FID_FLOGI) {
 				/* drop non-FIP LOGO */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				put_cpu();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				kfree_skb(skb);
@@ -625,7 +667,10 @@ static void bnx2fc_recv_frame(struct sk_buff *skb)
 	if (fh->fh_r_ctl == FC_RCTL_BA_ABTS) {
 		/* Drop incoming ABTS */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_cpu();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kfree_skb(skb);
@@ -633,11 +678,17 @@ static void bnx2fc_recv_frame(struct sk_buff *skb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	stats = per_cpu_ptr(lport->stats, smp_processor_id());
 	stats->RxFrames++;
 	stats->RxWords += fr_len / FCOE_WORD_TO_BYTE;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (le32_to_cpu(fr_crc(fp)) !=
 			~crc32(~0, skb->data, fr_len)) {
@@ -646,11 +697,17 @@ static void bnx2fc_recv_frame(struct sk_buff *skb)
 			       "CRC error\n");
 		stats->InvalidCRCCount++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_cpu();
 		kfree_skb(skb);
 		return;
 	}
 	put_cpu();
+=======
+		kfree_skb(skb);
+		return;
+	}
+>>>>>>> v3.18
 =======
 		kfree_skb(skb);
 		return;
@@ -671,7 +728,11 @@ int bnx2fc_percpu_io_thread(void *arg)
 	LIST_HEAD(work_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_user_nice(current, -20);
+=======
+	set_user_nice(current, MIN_NICE);
+>>>>>>> v3.18
 =======
 	set_user_nice(current, MIN_NICE);
 >>>>>>> v3.18
@@ -773,7 +834,11 @@ static int bnx2fc_shost_config(struct fc_lport *lport, struct device *dev)
 		fc_host_max_npiv_vports(lport->host) = USHRT_MAX;
 	snprintf(fc_host_symbolic_name(lport->host), 256,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 "%s (Broadcom %s) v%s over %s",
+=======
+		 "%s (QLogic %s) v%s over %s",
+>>>>>>> v3.18
 =======
 		 "%s (QLogic %s) v%s over %s",
 >>>>>>> v3.18
@@ -927,6 +992,12 @@ static void bnx2fc_indicate_netevent(void *context, unsigned long event,
 		}
 		mutex_unlock(&bnx2fc_dev_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		/* Ensure ALL destroy work has been completed before return */
+		flush_workqueue(bnx2fc_wq);
+>>>>>>> v3.18
 =======
 
 		/* Ensure ALL destroy work has been completed before return */
@@ -1463,6 +1534,10 @@ struct bnx2fc_interface *bnx2fc_interface_create(struct bnx2fc_hba *hba,
 	}
 	ctlr = fcoe_ctlr_device_priv(ctlr_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ctlr->cdev = ctlr_dev;
+>>>>>>> v3.18
 =======
 	ctlr->cdev = ctlr_dev;
 >>>>>>> v3.18
@@ -2090,7 +2165,10 @@ static void bnx2fc_ulp_init(struct cnic_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Assumes rtnl_lock and the bnx2fc_dev_lock are already taken */
 static int __bnx2fc_disable(struct fcoe_ctlr *ctlr)
 {
@@ -2109,6 +2187,9 @@ static int __bnx2fc_disable(struct fcoe_ctlr *ctlr)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * Deperecated: Use bnx2fc_enabled()
@@ -2125,6 +2206,7 @@ static int bnx2fc_disable(struct net_device *netdev)
 	interface = bnx2fc_interface_lookup(netdev);
 	ctlr = bnx2fc_to_ctlr(interface);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!interface || !ctlr->lp) {
 		rc = -ENODEV;
 		printk(KERN_ERR PFX "bnx2fc_disable: interface or lport not found\n");
@@ -2135,6 +2217,8 @@ static int bnx2fc_disable(struct net_device *netdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (!interface) {
 		rc = -ENODEV;
@@ -2142,6 +2226,9 @@ static int bnx2fc_disable(struct net_device *netdev)
 	} else {
 		rc = __bnx2fc_disable(ctlr);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&bnx2fc_dev_lock);
 	rtnl_unlock();
@@ -2149,7 +2236,10 @@ static int bnx2fc_disable(struct net_device *netdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __bnx2fc_enable(struct fcoe_ctlr *ctlr)
 {
 	struct bnx2fc_interface *interface = fcoe_ctlr_priv(ctlr);
@@ -2166,6 +2256,9 @@ static int __bnx2fc_enable(struct fcoe_ctlr *ctlr)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * Deprecated: Use bnx2fc_enabled()
@@ -2182,6 +2275,7 @@ static int bnx2fc_enable(struct net_device *netdev)
 	interface = bnx2fc_interface_lookup(netdev);
 	ctlr = bnx2fc_to_ctlr(interface);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!interface || !ctlr->lp) {
 		rc = -ENODEV;
 		printk(KERN_ERR PFX "bnx2fc_enable: interface or lport not found\n");
@@ -2189,11 +2283,16 @@ static int bnx2fc_enable(struct net_device *netdev)
 		fcoe_ctlr_link_up(ctlr);
 		interface->enabled = true;
 =======
+=======
+>>>>>>> v3.18
 	if (!interface) {
 		rc = -ENODEV;
 		pr_err(PFX "bnx2fc_enable: interface not found\n");
 	} else {
 		rc = __bnx2fc_enable(ctlr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2216,6 +2315,7 @@ static int bnx2fc_ctlr_enabled(struct fcoe_ctlr_device *cdev)
 {
 	struct fcoe_ctlr *ctlr = fcoe_ctlr_device_priv(cdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fc_lport *lport = ctlr->lp;
 	struct net_device *netdev = bnx2fc_netdev(lport);
 
@@ -2225,12 +2325,17 @@ static int bnx2fc_ctlr_enabled(struct fcoe_ctlr_device *cdev)
 	case FCOE_CTLR_DISABLED:
 		return bnx2fc_disable(netdev);
 =======
+=======
+>>>>>>> v3.18
 
 	switch (cdev->enabled) {
 	case FCOE_CTLR_ENABLED:
 		return __bnx2fc_enable(ctlr);
 	case FCOE_CTLR_DISABLED:
 		return __bnx2fc_disable(ctlr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case FCOE_CTLR_UNUSED:
 	default:
@@ -2513,6 +2618,12 @@ static void bnx2fc_ulp_exit(struct cnic_dev *dev)
 	mutex_unlock(&bnx2fc_dev_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Ensure ALL destroy work has been completed before return */
+	flush_workqueue(bnx2fc_wq);
+
+>>>>>>> v3.18
 =======
 	/* Ensure ALL destroy work has been completed before return */
 	flush_workqueue(bnx2fc_wq);
@@ -2716,6 +2827,11 @@ static int __init bnx2fc_mod_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpu_notifier_register_begin();
+
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 
@@ -2726,7 +2842,13 @@ static int __init bnx2fc_mod_init(void)
 
 	/* Initialize per CPU interrupt thread */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_hotcpu_notifier(&bnx2fc_cpu_notifier);
+=======
+	__register_hotcpu_notifier(&bnx2fc_cpu_notifier);
+
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__register_hotcpu_notifier(&bnx2fc_cpu_notifier);
 
@@ -2797,7 +2919,11 @@ static void __exit bnx2fc_mod_exit(void)
 		kthread_stop(l2_thread);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_hotcpu_notifier(&bnx2fc_cpu_notifier);
+=======
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 >>>>>>> v3.18
@@ -2808,11 +2934,17 @@ static void __exit bnx2fc_mod_exit(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	__unregister_hotcpu_notifier(&bnx2fc_cpu_notifier);
 
 	cpu_notifier_register_done();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	destroy_workqueue(bnx2fc_wq);
 	/*
@@ -2921,7 +3053,11 @@ static struct fc_function_template bnx2fc_vport_xport_function = {
 static struct scsi_host_template bnx2fc_shost_template = {
 	.module			= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name			= "Broadcom Offload FCoE Initiator",
+=======
+	.name			= "QLogic Offload FCoE Initiator",
+>>>>>>> v3.18
 =======
 	.name			= "QLogic Offload FCoE Initiator",
 >>>>>>> v3.18

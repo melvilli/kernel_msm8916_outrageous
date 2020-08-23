@@ -32,8 +32,13 @@
 #include "ttype.h"
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*---------------------  Export Definitions -------------------------*/
+=======
+#include <linux/nl80211.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/nl80211.h>
 
@@ -54,7 +59,11 @@
 
 #define CB_MAX_CHANNEL_24G      14
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CB_MAX_CHANNEL_5G       42 //[20050104] add channel9(5045MHz), 41==>42
+=======
+#define CB_MAX_CHANNEL_5G       42
+>>>>>>> v3.18
 =======
 #define CB_MAX_CHANNEL_5G       42
 >>>>>>> v3.18
@@ -80,6 +89,7 @@ typedef enum _CARD_STATUS_TYPE {
 	CARD_STATUS_PMKID
 } CARD_STATUS_TYPE, *PCARD_STATUS_TYPE;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 typedef enum _CARD_OP_MODE {
 	OP_MODE_INFRASTRUCTURE,
@@ -140,6 +150,8 @@ bool
 CARDbAdd_PMKID_Candidate(
 	void *pDeviceHandler,
 =======
+=======
+>>>>>>> v3.18
 struct vnt_private;
 
 void CARDvSetRSPINF(struct vnt_private *, CARD_PHY_TYPE ePHYType);
@@ -182,6 +194,9 @@ bool CARDbRemoveKey(struct vnt_private *, unsigned char *pbyBSSID);
 bool
 CARDbAdd_PMKID_Candidate(
 	struct vnt_private *,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char *pbyBSSID,
 	bool bRSNCapExist,
@@ -191,7 +206,11 @@ CARDbAdd_PMKID_Candidate(
 void *
 CARDpGetCurrentAddress(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *pDeviceHandler
+=======
+	struct vnt_private *
+>>>>>>> v3.18
 =======
 	struct vnt_private *
 >>>>>>> v3.18
@@ -200,7 +219,11 @@ CARDpGetCurrentAddress(
 bool
 CARDbStartMeasure(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *,
+>>>>>>> v3.18
 =======
 	struct vnt_private *,
 >>>>>>> v3.18
@@ -211,7 +234,11 @@ CARDbStartMeasure(
 bool
 CARDbChannelSwitch(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *,
+>>>>>>> v3.18
 =======
 	struct vnt_private *,
 >>>>>>> v3.18
@@ -223,7 +250,11 @@ CARDbChannelSwitch(
 bool
 CARDbSetQuiet(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *,
+>>>>>>> v3.18
 =======
 	struct vnt_private *,
 >>>>>>> v3.18
@@ -237,7 +268,11 @@ CARDbSetQuiet(
 bool
 CARDbStartQuiet(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *pDeviceHandler
+=======
+	struct vnt_private *
+>>>>>>> v3.18
 =======
 	struct vnt_private *
 >>>>>>> v3.18
@@ -246,7 +281,11 @@ CARDbStartQuiet(
 void
 CARDvSetPowerConstraint(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *,
+>>>>>>> v3.18
 =======
 	struct vnt_private *,
 >>>>>>> v3.18
@@ -257,7 +296,11 @@ CARDvSetPowerConstraint(
 void
 CARDvGetPowerCapability(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *pDeviceHandler,
+=======
+	struct vnt_private *,
+>>>>>>> v3.18
 =======
 	struct vnt_private *,
 >>>>>>> v3.18
@@ -268,7 +311,11 @@ CARDvGetPowerCapability(
 char
 CARDbyGetTransmitPower(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *pDeviceHandler
+=======
+	struct vnt_private *
+>>>>>>> v3.18
 =======
 	struct vnt_private *
 >>>>>>> v3.18

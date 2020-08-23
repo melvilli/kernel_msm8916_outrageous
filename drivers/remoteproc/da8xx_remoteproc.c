@@ -166,7 +166,11 @@ static int reset_assert(struct device *dev)
 	if (IS_ERR(dsp_clk)) {
 		dev_err(dev, "clk_get error: %ld\n", PTR_ERR(dsp_clk));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return PTR_RET(dsp_clk);
+=======
+		return PTR_ERR(dsp_clk);
+>>>>>>> v3.18
 =======
 		return PTR_ERR(dsp_clk);
 >>>>>>> v3.18
@@ -206,6 +210,7 @@ static int da8xx_rproc_probe(struct platform_device *pdev)
 
 	bootreg_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bootreg_res) {
 		dev_err(dev,
 			"platform_get_resource(IORESOURCE_MEM, 0): NULL\n");
@@ -221,11 +226,17 @@ static int da8xx_rproc_probe(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	bootreg = devm_ioremap_resource(dev, bootreg_res);
 	if (IS_ERR(bootreg))
 		return PTR_ERR(bootreg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	chipsig_res = platform_get_resource(pdev, IORESOURCE_MEM, 1);
+>>>>>>> v3.18
 =======
 	chipsig_res = platform_get_resource(pdev, IORESOURCE_MEM, 1);
 >>>>>>> v3.18
@@ -313,8 +324,11 @@ static int da8xx_rproc_remove(struct platform_device *pdev)
 	disable_irq(drproc->irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devm_clk_put(dev, drproc->dsp_clk);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rproc_del(rproc);

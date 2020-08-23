@@ -26,11 +26,15 @@
 #define MSP_USB_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MSP_HAS_DUAL_USB
 #define NUM_USB_DEVS   2
 #else
 #define NUM_USB_DEVS   1
 #endif
+=======
+#define NUM_USB_DEVS   1
+>>>>>>> v3.18
 =======
 #define NUM_USB_DEVS   1
 >>>>>>> v3.18

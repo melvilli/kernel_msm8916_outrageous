@@ -35,7 +35,10 @@ static inline void outl(unsigned int x, unsigned long port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void __iomem *ioport_map(unsigned long port, unsigned int size)
 {
 	BUG();
@@ -47,6 +50,9 @@ static inline void ioport_unmap(void __iomem *addr)
 	BUG();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define inb_p(addr)	inb(addr)
 #define inw_p(addr)	inw(addr)

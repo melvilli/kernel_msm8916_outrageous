@@ -19,11 +19,14 @@
 #include <linux/irq.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 #include <linux/irqdomain.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/irqchip/chained_irq.h>
 #include <linux/cpu.h>
 #include <linux/io.h>
@@ -33,6 +36,9 @@
 #include <linux/irqdomain.h>
 #include <linux/slab.h>
 #include <linux/msi.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/mach/arch.h>
 #include <asm/exception.h>
@@ -50,14 +56,20 @@
 #define ARMADA_370_XP_INT_CLEAR_ENABLE_OFFS	(0x34)
 #define ARMADA_370_XP_INT_SOURCE_CTL(irq)	(0x100 + irq*4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define ARMADA_370_XP_CPU_INTACK_OFFS		(0x44)
 =======
+=======
+>>>>>>> v3.18
 #define ARMADA_370_XP_INT_SOURCE_CPU_MASK	0xF
 #define ARMADA_370_XP_INT_IRQ_FIQ_MASK(cpuid)	((BIT(0) | BIT(8)) << cpuid)
 
 #define ARMADA_370_XP_CPU_INTACK_OFFS		(0x44)
 #define ARMADA_375_PPI_CAUSE			(0x10)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ARMADA_370_XP_SW_TRIG_INT_OFFS           (0x4)
@@ -72,26 +84,38 @@
 #define IPI_DOORBELL_END                        (8)
 #define IPI_DOORBELL_MASK                       0xFF
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEFINE_RAW_SPINLOCK(irq_controller_lock);
 =======
+=======
+>>>>>>> v3.18
 #define PCI_MSI_DOORBELL_START                  (16)
 #define PCI_MSI_DOORBELL_NR                     (16)
 #define PCI_MSI_DOORBELL_END                    (32)
 #define PCI_MSI_DOORBELL_MASK                   0xFFFF0000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void __iomem *per_cpu_int_base;
 static void __iomem *main_int_base;
 static struct irq_domain *armada_370_xp_mpic_domain;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI_MSI
 static struct irq_domain *armada_370_xp_msi_domain;
 static DECLARE_BITMAP(msi_used, PCI_MSI_DOORBELL_NR);
 static DEFINE_MUTEX(msi_used_lock);
 static phys_addr_t msi_doorbell_addr;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -123,6 +147,7 @@ static void armada_370_xp_irq_unmask(struct irq_data *d)
 				ARMADA_370_XP_INT_CLEAR_MASK_OFFS);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_SMP
 static int armada_xp_set_affinity(struct irq_data *d,
@@ -158,6 +183,8 @@ static int armada_xp_set_affinity(struct irq_data *d,
 	writel(reg, main_int_base + ARMADA_370_XP_INT_SOURCE_CTL(hwirq));
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI_MSI
 
 static int armada_370_xp_alloc_msi(void)
@@ -319,6 +346,9 @@ static int armada_xp_set_affinity(struct irq_data *d,
 	reg = readl(main_int_base + ARMADA_370_XP_INT_SOURCE_CTL(hwirq));
 	reg = (reg & (~ARMADA_370_XP_INT_SOURCE_CPU_MASK)) | mask;
 	writel(reg, main_int_base + ARMADA_370_XP_INT_SOURCE_CTL(hwirq));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	raw_spin_unlock(&irq_controller_lock);
 
@@ -363,7 +393,12 @@ static int armada_370_xp_mpic_irq_map(struct irq_domain *h,
 
 #ifdef CONFIG_SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 void armada_mpic_send_doorbell(const struct cpumask *mask, unsigned int irq)
+=======
+static void armada_mpic_send_doorbell(const struct cpumask *mask,
+				      unsigned int irq)
+>>>>>>> v3.18
 =======
 static void armada_mpic_send_doorbell(const struct cpumask *mask,
 				      unsigned int irq)
@@ -388,9 +423,12 @@ static void armada_mpic_send_doorbell(const struct cpumask *mask,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void armada_xp_mpic_smp_cpu_init(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static void armada_xp_mpic_smp_cpu_init(void)
 {
 	u32 control;
@@ -402,6 +440,9 @@ static void armada_xp_mpic_smp_cpu_init(void)
 	for (i = 0; i < nr_irqs; i++)
 		writel(i, per_cpu_int_base + ARMADA_370_XP_INT_SET_MASK_OFFS);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Clear pending IPIs */
 	writel(0, per_cpu_int_base + ARMADA_370_XP_IN_DRBEL_CAUSE_OFFS);
@@ -414,7 +455,10 @@ static void armada_xp_mpic_smp_cpu_init(void)
 	writel(0, per_cpu_int_base + ARMADA_370_XP_INT_CLEAR_MASK_OFFS);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int armada_xp_mpic_secondary_init(struct notifier_block *nfb,
 					 unsigned long action, void *hcpu)
@@ -429,6 +473,9 @@ static struct notifier_block armada_370_xp_mpic_cpu_notifier = {
 	.priority = 100,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_SMP */
 
@@ -438,8 +485,11 @@ static struct irq_domain_ops armada_370_xp_mpic_irq_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static asmlinkage void __exception_irq_entry
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI_MSI
 static void armada_370_xp_handle_msi_irq(struct pt_regs *regs, bool is_chained)
 {
@@ -509,6 +559,9 @@ static void armada_370_xp_mpic_handle_cascade_irq(unsigned int irq,
 }
 
 static void __exception_irq_entry
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 armada_370_xp_handle_irq(struct pt_regs *regs)
 {
@@ -523,6 +576,7 @@ armada_370_xp_handle_irq(struct pt_regs *regs)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (irqnr > 0) {
 			irqnr =	irq_find_mapping(armada_370_xp_mpic_domain,
 					irqnr);
@@ -530,6 +584,8 @@ armada_370_xp_handle_irq(struct pt_regs *regs)
 			continue;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (irqnr > 1) {
 			handle_domain_irq(armada_370_xp_mpic_domain,
 					  irqnr, regs);
@@ -540,6 +596,9 @@ armada_370_xp_handle_irq(struct pt_regs *regs)
 		if (irqnr == 1)
 			armada_370_xp_handle_msi_irq(regs, false);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SMP
 		/* IPI Handling */
@@ -569,6 +628,7 @@ armada_370_xp_handle_irq(struct pt_regs *regs)
 static int __init armada_370_xp_mpic_of_init(struct device_node *node,
 					     struct device_node *parent)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 control;
 
@@ -604,6 +664,8 @@ static int __init armada_370_xp_mpic_of_init(struct device_node *node,
 
 	set_handle_irq(armada_370_xp_handle_irq);
 =======
+=======
+>>>>>>> v3.18
 	struct resource main_int_res, per_cpu_int_res;
 	int parent_irq, nr_irqs, i;
 	u32 control;
@@ -656,6 +718,9 @@ static int __init armada_370_xp_mpic_of_init(struct device_node *node,
 		irq_set_chained_handler(parent_irq,
 					armada_370_xp_mpic_handle_cascade_irq);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

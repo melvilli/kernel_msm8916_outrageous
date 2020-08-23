@@ -29,8 +29,12 @@ int fsl8250_handle_irq(struct uart_port *port)
 	unsigned long flags;
 	unsigned int iir;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uart_8250_port *up =
 		container_of(port, struct uart_8250_port, port);
+=======
+	struct uart_8250_port *up = up_to_u8250p(port);
+>>>>>>> v3.18
 =======
 	struct uart_8250_port *up = up_to_u8250p(port);
 >>>>>>> v3.18

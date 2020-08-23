@@ -11,6 +11,7 @@
 #define BNX2X_FW_DEFS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CSTORM_ASSERT_LIST_INDEX_OFFSET	(IRO[148].base)
 #define CSTORM_ASSERT_LIST_OFFSET(assertListEntry) \
 	(IRO[147].base + ((assertListEntry) * IRO[147].m1))
@@ -92,6 +93,8 @@
 #define TSTORM_APPROXIMATE_MATCH_MULTICAST_FILTERING_OFFSET(pfId) \
 	(IRO[203].base + ((pfId) * IRO[203].m1))
 =======
+=======
+>>>>>>> v3.18
 #define CSTORM_ASSERT_LIST_INDEX_OFFSET	(IRO[152].base)
 #define CSTORM_ASSERT_LIST_OFFSET(assertListEntry) \
 	(IRO[151].base + ((assertListEntry) * IRO[151].m1))
@@ -171,11 +174,15 @@
 	(IRO[154].base + ((funcId) * IRO[154].m1))
 #define TSTORM_APPROXIMATE_MATCH_MULTICAST_FILTERING_OFFSET(pfId) \
 	(IRO[207].base + ((pfId) * IRO[207].m1))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TSTORM_ASSERT_LIST_INDEX_OFFSET	(IRO[102].base)
 #define TSTORM_ASSERT_LIST_OFFSET(assertListEntry) \
 	(IRO[101].base + ((assertListEntry) * IRO[101].m1))
 #define TSTORM_FUNCTION_COMMON_CONFIG_OFFSET(pfId) \
+<<<<<<< HEAD
 <<<<<<< HEAD
 	(IRO[201].base + ((pfId) * IRO[201].m1))
 #define TSTORM_FUNC_EN_OFFSET(funcId) \
@@ -259,6 +266,8 @@
 #define USTORM_VF_TO_PF_OFFSET(funcId) \
 	(IRO[179].base + ((funcId) * IRO[179].m1))
 =======
+=======
+>>>>>>> v3.18
 	(IRO[205].base + ((pfId) * IRO[205].m1))
 #define TSTORM_FUNC_EN_OFFSET(funcId) \
 	(IRO[107].base + ((funcId) * IRO[107].m1))
@@ -340,6 +349,9 @@
 #define USTORM_TPA_BTR_SIZE (IRO[213].size)
 #define USTORM_VF_TO_PF_OFFSET(funcId) \
 	(IRO[183].base + ((funcId) * IRO[183].m1))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define XSTORM_AGG_INT_FINAL_CLEANUP_COMP_TYPE (IRO[67].base)
 #define XSTORM_AGG_INT_FINAL_CLEANUP_INDEX (IRO[66].base)
@@ -353,6 +365,7 @@
 #define XSTORM_FUNC_EN_OFFSET(funcId) \
 	(IRO[47].base + ((funcId) * IRO[47].m1))
 #define XSTORM_ISCSI_HQ_SIZE_OFFSET(pfId) \
+<<<<<<< HEAD
 <<<<<<< HEAD
 	(IRO[296].base + ((pfId) * IRO[296].m1))
 #define XSTORM_ISCSI_LOCAL_MAC_ADDR0_OFFSET(pfId) \
@@ -388,6 +401,8 @@
 #define XSTORM_ISCSI_TCP_VARS_TTL_OFFSET(pfId) \
 	(IRO[289].base + ((pfId) * IRO[289].m1))
 =======
+=======
+>>>>>>> v3.18
 	(IRO[302].base + ((pfId) * IRO[302].m1))
 #define XSTORM_ISCSI_LOCAL_MAC_ADDR0_OFFSET(pfId) \
 	(IRO[305].base + ((pfId) * IRO[305].m1))
@@ -421,6 +436,9 @@
 	(IRO[296].base + ((pfId) * IRO[296].m1))
 #define XSTORM_ISCSI_TCP_VARS_TTL_OFFSET(pfId) \
 	(IRO[295].base + ((pfId) * IRO[295].m1))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define XSTORM_RATE_SHAPING_PER_VN_VARS_OFFSET(pfId) \
 	(IRO[44].base + ((pfId) * IRO[44].m1))
@@ -435,6 +453,7 @@
 	(IRO[31].base + ((funcId) * IRO[31].m1))
 #define XSTORM_TCP_GLOBAL_DEL_ACK_COUNTER_ENABLED_OFFSET(portId) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(IRO[211].base + ((portId) * IRO[211].m1))
 #define XSTORM_TCP_GLOBAL_DEL_ACK_COUNTER_MAX_COUNT_OFFSET(portId) \
 	(IRO[212].base + ((portId) * IRO[212].m1))
@@ -442,18 +461,29 @@
 	(IRO[214].base + (((pfId)>>1) * IRO[214].m1) + (((pfId)&1) * \
 	IRO[214].m2))
 =======
+=======
+>>>>>>> v3.18
 	(IRO[217].base + ((portId) * IRO[217].m1))
 #define XSTORM_TCP_GLOBAL_DEL_ACK_COUNTER_MAX_COUNT_OFFSET(portId) \
 	(IRO[218].base + ((portId) * IRO[218].m1))
 #define XSTORM_TCP_TX_SWS_TIMER_VAL_OFFSET(pfId) \
 	(IRO[220].base + (((pfId)>>1) * IRO[220].m1) + (((pfId)&1) * \
 	IRO[220].m2))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define XSTORM_VF_TO_PF_OFFSET(funcId) \
 	(IRO[48].base + ((funcId) * IRO[48].m1))
 #define COMMON_ASM_INVALID_ASSERT_OPCODE 0x0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* eth hsi version */
+#define ETH_FP_HSI_VERSION (ETH_FP_HSI_VER_2)
+
+>>>>>>> v3.18
 =======
 /* eth hsi version */
 #define ETH_FP_HSI_VERSION (ETH_FP_HSI_VER_2)
@@ -575,6 +605,10 @@
 
 #define SDM_TIMER_TICK_RESUL_CHIP (4 * (1e-6))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TSDM_TIMER_TICK_RESUL_CHIP (1 * (1e-6))
+>>>>>>> v3.18
 =======
 #define TSDM_TIMER_TICK_RESUL_CHIP (1 * (1e-6))
 >>>>>>> v3.18

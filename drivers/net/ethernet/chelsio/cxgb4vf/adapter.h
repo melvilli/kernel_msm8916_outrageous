@@ -300,7 +300,10 @@ struct sge {
 	u8 counter_val[SGE_NCOUNTERS];	/* interrupt RX threshold array */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Decoded Adapter Parameters.
 	 */
 	u32 fl_pg_order;		/* large page allocation size */
@@ -309,6 +312,9 @@ struct sge {
 	u32 fl_align;			/* response queue message alignment */
 	u32 fl_starve_thres;		/* Free List starvation threshold */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Reverse maps from Absolute Queue IDs to associated queue pointers.
@@ -356,7 +362,10 @@ struct adapter {
 	unsigned long open_device_map;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum chip_type chip;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct adapter_params params;

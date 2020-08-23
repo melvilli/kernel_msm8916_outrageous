@@ -1,7 +1,11 @@
 menuconfig RT2X00
 	tristate "Ralink driver support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MAC80211
+=======
+	depends on MAC80211 && HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on MAC80211 && HAS_DMA
 >>>>>>> v3.18
@@ -63,17 +67,23 @@ config RT61PCI
 config RT2800PCI
 	tristate "Ralink rt27xx/rt28xx/rt30xx (PCI/PCIe/PCMCIA) support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI || SOC_RT288X || SOC_RT305X
 	select RT2800_LIB
 	select RT2X00_LIB_MMIO
 	select RT2X00_LIB_PCI if PCI
 	select RT2X00_LIB_SOC if SOC_RT288X || SOC_RT305X
 =======
+=======
+>>>>>>> v3.18
 	depends on PCI
 	select RT2800_LIB
 	select RT2800_LIB_MMIO
 	select RT2X00_LIB_MMIO
 	select RT2X00_LIB_PCI
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select RT2X00_LIB_FIRMWARE
 	select RT2X00_LIB_CRYPTO
@@ -179,13 +189,19 @@ config RT2800USB_RT35XX
 	  Supported chips: RT3572
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RT2800USB_RT3573
 	bool "rt2800usb - Include support for rt3573 devices (EXPERIMENTAL)"
 	---help---
 	  This enables support for RT3573 chipset based wireless USB devices
 	  in the rt2800usb driver.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RT2800USB_RT53XX
        bool "rt2800usb - Include support for rt53xx devices (EXPERIMENTAL)"
@@ -215,10 +231,13 @@ config RT2800USB_UNKNOWN
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config RT2800_LIB
 	tristate
 
 =======
+=======
+>>>>>>> v3.18
 config RT2800SOC
 	tristate "Ralink WiSoC support"
 	depends on SOC_RT288X || SOC_RT305X
@@ -243,6 +262,9 @@ config RT2800_LIB_MMIO
 	select RT2X00_LIB_MMIO
 	select RT2800_LIB
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RT2X00_LIB_MMIO
 	tristate
@@ -262,6 +284,10 @@ config RT2X00_LIB_USB
 config RT2X00_LIB
 	tristate
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select AVERAGE
+>>>>>>> v3.18
 =======
 	select AVERAGE
 >>>>>>> v3.18

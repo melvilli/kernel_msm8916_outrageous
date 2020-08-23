@@ -14,7 +14,11 @@
 static struct ctl_table_header *nfs_callback_sysctl_table;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table nfs_cb_sysctls[] = {
+=======
+static struct ctl_table nfs_cb_sysctls[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table nfs_cb_sysctls[] = {
 >>>>>>> v3.18
@@ -36,7 +40,11 @@ static struct ctl_table nfs_cb_sysctls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table nfs_cb_sysctl_dir[] = {
+=======
+static struct ctl_table nfs_cb_sysctl_dir[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table nfs_cb_sysctl_dir[] = {
 >>>>>>> v3.18
@@ -49,7 +57,11 @@ static struct ctl_table nfs_cb_sysctl_dir[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table nfs_cb_sysctl_root[] = {
+=======
+static struct ctl_table nfs_cb_sysctl_root[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table nfs_cb_sysctl_root[] = {
 >>>>>>> v3.18

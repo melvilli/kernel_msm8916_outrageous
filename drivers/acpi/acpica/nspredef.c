@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -66,6 +70,7 @@ ACPI_MODULE_NAME("nspredef")
  *
  *  1) The number of input arguments as defined by the method/object in the
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      ASL is validated against the ACPI specification.
  *  2) The type of the return object (if any) is validated against the ACPI
  *      specification.
@@ -73,12 +78,17 @@ ACPI_MODULE_NAME("nspredef")
  *      validated, as well as the type of each package element. Nested
  *      packages are supported.
 =======
+=======
+>>>>>>> v3.18
  *     ASL is validated against the ACPI specification.
  *  2) The type of the return object (if any) is validated against the ACPI
  *     specification.
  *  3) For returned package objects, the count of package elements is
  *     validated, as well as the type of each package element. Nested
  *     packages are supported.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * For any problems found, a warning message is issued.
@@ -87,7 +97,11 @@ ACPI_MODULE_NAME("nspredef")
 /* Local prototypes */
 static acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_check_reference(struct acpi_predefined_data *data,
+=======
+acpi_ns_check_reference(struct acpi_evaluate_info *info,
+>>>>>>> v3.18
 =======
 acpi_ns_check_reference(struct acpi_evaluate_info *info,
 >>>>>>> v3.18
@@ -98,14 +112,20 @@ static u32 acpi_ns_get_bitmapped_type(union acpi_operand_object *return_object);
 /*******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * FUNCTION:    acpi_ns_check_predefined_names
  *
  * PARAMETERS:  node            - Namespace node for the method/object
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_ns_check_return_value
  *
  * PARAMETERS:  node            - Namespace node for the method/object
  *              info            - Method execution information block
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *              user_param_count - Number of parameters actually passed
  *              return_status   - Status from the object evaluation
@@ -115,7 +135,11 @@ static u32 acpi_ns_get_bitmapped_type(union acpi_operand_object *return_object);
  * RETURN:      Status
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * DESCRIPTION: Check an ACPI name for a match in the predefined name list.
+=======
+ * DESCRIPTION: Check the value returned from a predefined name.
+>>>>>>> v3.18
 =======
  * DESCRIPTION: Check the value returned from a predefined name.
 >>>>>>> v3.18
@@ -123,6 +147,7 @@ static u32 acpi_ns_get_bitmapped_type(union acpi_operand_object *return_object);
  ******************************************************************************/
 
 acpi_status
+<<<<<<< HEAD
 <<<<<<< HEAD
 acpi_ns_check_predefined_names(struct acpi_namespace_node *node,
 			       u32 user_param_count,
@@ -158,6 +183,8 @@ acpi_ns_check_predefined_names(struct acpi_namespace_node *node,
 	if (!predefined) {
 		goto cleanup;
 =======
+=======
+>>>>>>> v3.18
 acpi_ns_check_return_value(struct acpi_namespace_node *node,
 			   struct acpi_evaluate_info *info,
 			   u32 user_param_count,
@@ -172,6 +199,9 @@ acpi_ns_check_return_value(struct acpi_namespace_node *node,
 	predefined = info->predefined;
 	if (!predefined) {
 		return (AE_OK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -181,7 +211,11 @@ acpi_ns_check_return_value(struct acpi_namespace_node *node,
 	 */
 	if ((return_status != AE_OK) && (return_status != AE_CTRL_RETURN_VALUE)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto cleanup;
+=======
+		return (AE_OK);
+>>>>>>> v3.18
 =======
 		return (AE_OK);
 >>>>>>> v3.18
@@ -204,6 +238,7 @@ acpi_ns_check_return_value(struct acpi_namespace_node *node,
 	    (!predefined->info.expected_btypes) ||
 	    (predefined->info.expected_btypes == ACPI_RTYPE_ALL)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto cleanup;
 	}
 
@@ -221,13 +256,21 @@ acpi_ns_check_return_value(struct acpi_namespace_node *node,
 		return (AE_OK);
 	}
 >>>>>>> v3.18
+=======
+		return (AE_OK);
+	}
+>>>>>>> v3.18
 
 	/*
 	 * Check that the type of the main return object is what is expected
 	 * for this predefined name
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_ns_check_object_type(data, return_object_ptr,
+=======
+	status = acpi_ns_check_object_type(info, return_object_ptr,
+>>>>>>> v3.18
 =======
 	status = acpi_ns_check_object_type(info, return_object_ptr,
 >>>>>>> v3.18
@@ -239,7 +282,10 @@ acpi_ns_check_return_value(struct acpi_namespace_node *node,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 *
 	 * 4) If there is no return value and it is optional, just return
 	 * AE_OK (_WAK).
@@ -249,17 +295,23 @@ acpi_ns_check_return_value(struct acpi_namespace_node *node,
 	}
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * For returned Package objects, check the type of all sub-objects.
 	 * Note: Package may have been newly created by call above.
 	 */
 	if ((*return_object_ptr)->common.type == ACPI_TYPE_PACKAGE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		data->parent_package = *return_object_ptr;
 		status = acpi_ns_check_package(data, return_object_ptr);
 		if (ACPI_FAILURE(status)) {
 			goto exit;
 =======
+=======
+>>>>>>> v3.18
 		info->parent_package = *return_object_ptr;
 		status = acpi_ns_check_package(info, return_object_ptr);
 		if (ACPI_FAILURE(status)) {
@@ -270,6 +322,9 @@ acpi_ns_check_return_value(struct acpi_namespace_node *node,
 			    (status != AE_AML_OPERAND_VALUE)) {
 				goto exit;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -283,7 +338,11 @@ acpi_ns_check_return_value(struct acpi_namespace_node *node,
 	 * particular predefined names.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_ns_complex_repairs(data, node, status, return_object_ptr);
+=======
+	status = acpi_ns_complex_repairs(info, node, status, return_object_ptr);
+>>>>>>> v3.18
 =======
 	status = acpi_ns_complex_repairs(info, node, status, return_object_ptr);
 >>>>>>> v3.18
@@ -295,6 +354,7 @@ exit:
 	 * messages during the next evaluation of the same method/object.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ACPI_FAILURE(status) || (data->flags & ACPI_OBJECT_REPAIRED)) {
 		node->flags |= ANOBJ_EVALUATED;
 	}
@@ -303,16 +363,22 @@ exit:
 cleanup:
 	ACPI_FREE(pathname);
 =======
+=======
+>>>>>>> v3.18
 	if (ACPI_FAILURE(status) || (info->return_flags & ACPI_OBJECT_REPAIRED)) {
 		node->flags |= ANOBJ_EVALUATED;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (status);
 }
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * FUNCTION:    acpi_ns_check_parameter_count
  *
@@ -413,6 +479,11 @@ acpi_ns_check_parameter_count(char *pathname,
  *
  * PARAMETERS:  info            - Method execution information block
 >>>>>>> v3.18
+=======
+ * FUNCTION:    acpi_ns_check_object_type
+ *
+ * PARAMETERS:  info            - Method execution information block
+>>>>>>> v3.18
  *              return_object_ptr - Pointer to the object returned from the
  *                                evaluation of a method or object
  *              expected_btypes - Bitmap of expected return type(s)
@@ -429,7 +500,11 @@ acpi_ns_check_parameter_count(char *pathname,
 
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_check_object_type(struct acpi_predefined_data *data,
+=======
+acpi_ns_check_object_type(struct acpi_evaluate_info *info,
+>>>>>>> v3.18
 =======
 acpi_ns_check_object_type(struct acpi_evaluate_info *info,
 >>>>>>> v3.18
@@ -445,7 +520,12 @@ acpi_ns_check_object_type(struct acpi_evaluate_info *info,
 	if (return_object &&
 	    ACPI_GET_DESCRIPTOR_TYPE(return_object) == ACPI_DESC_TYPE_NAMED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ACPI_WARN_PREDEFINED((AE_INFO, data->pathname, data->node_flags,
+=======
+		ACPI_WARN_PREDEFINED((AE_INFO, info->full_pathname,
+				      info->node_flags,
+>>>>>>> v3.18
 =======
 		ACPI_WARN_PREDEFINED((AE_INFO, info->full_pathname,
 				      info->node_flags,
@@ -466,8 +546,13 @@ acpi_ns_check_object_type(struct acpi_evaluate_info *info,
 	 * packages)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->return_btype = acpi_ns_get_bitmapped_type(return_object);
 	if (data->return_btype == ACPI_RTYPE_ANY) {
+=======
+	info->return_btype = acpi_ns_get_bitmapped_type(return_object);
+	if (info->return_btype == ACPI_RTYPE_ANY) {
+>>>>>>> v3.18
 =======
 	info->return_btype = acpi_ns_get_bitmapped_type(return_object);
 	if (info->return_btype == ACPI_RTYPE_ANY) {
@@ -480,8 +565,13 @@ acpi_ns_check_object_type(struct acpi_evaluate_info *info,
 	/* For reference objects, check that the reference type is correct */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((data->return_btype & expected_btypes) == ACPI_RTYPE_REFERENCE) {
 		status = acpi_ns_check_reference(data, return_object);
+=======
+	if ((info->return_btype & expected_btypes) == ACPI_RTYPE_REFERENCE) {
+		status = acpi_ns_check_reference(info, return_object);
+>>>>>>> v3.18
 =======
 	if ((info->return_btype & expected_btypes) == ACPI_RTYPE_REFERENCE) {
 		status = acpi_ns_check_reference(info, return_object);
@@ -492,12 +582,15 @@ acpi_ns_check_object_type(struct acpi_evaluate_info *info,
 	/* Attempt simple repair of the returned object if necessary */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_ns_simple_repair(data, expected_btypes,
 				       package_index, return_object_ptr);
 	return (status);
 
       type_error_exit:
 =======
+=======
+>>>>>>> v3.18
 	status = acpi_ns_simple_repair(info, expected_btypes,
 				       package_index, return_object_ptr);
 	if (ACPI_SUCCESS(status)) {
@@ -505,6 +598,9 @@ acpi_ns_check_object_type(struct acpi_evaluate_info *info,
 	}
 
 type_error_exit:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Create a string with all expected types for this predefined object */
@@ -512,9 +608,12 @@ type_error_exit:
 	acpi_ut_get_expected_return_types(type_buffer, expected_btypes);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (package_index == ACPI_NOT_PACKAGE_ELEMENT) {
 		ACPI_WARN_PREDEFINED((AE_INFO, data->pathname, data->node_flags,
 =======
+=======
+>>>>>>> v3.18
 	if (!return_object) {
 		ACPI_WARN_PREDEFINED((AE_INFO, info->full_pathname,
 				      info->node_flags,
@@ -523,13 +622,21 @@ type_error_exit:
 	} else if (package_index == ACPI_NOT_PACKAGE_ELEMENT) {
 		ACPI_WARN_PREDEFINED((AE_INFO, info->full_pathname,
 				      info->node_flags,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				      "Return type mismatch - found %s, expected %s",
 				      acpi_ut_get_object_type_name
 				      (return_object), type_buffer));
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ACPI_WARN_PREDEFINED((AE_INFO, data->pathname, data->node_flags,
+=======
+		ACPI_WARN_PREDEFINED((AE_INFO, info->full_pathname,
+				      info->node_flags,
+>>>>>>> v3.18
 =======
 		ACPI_WARN_PREDEFINED((AE_INFO, info->full_pathname,
 				      info->node_flags,
@@ -548,7 +655,11 @@ type_error_exit:
  * FUNCTION:    acpi_ns_check_reference
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PARAMETERS:  data            - Pointer to validation data structure
+=======
+ * PARAMETERS:  info            - Method execution information block
+>>>>>>> v3.18
 =======
  * PARAMETERS:  info            - Method execution information block
 >>>>>>> v3.18
@@ -565,7 +676,11 @@ type_error_exit:
 
 static acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_check_reference(struct acpi_predefined_data *data,
+=======
+acpi_ns_check_reference(struct acpi_evaluate_info *info,
+>>>>>>> v3.18
 =======
 acpi_ns_check_reference(struct acpi_evaluate_info *info,
 >>>>>>> v3.18
@@ -582,7 +697,11 @@ acpi_ns_check_reference(struct acpi_evaluate_info *info,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_WARN_PREDEFINED((AE_INFO, data->pathname, data->node_flags,
+=======
+	ACPI_WARN_PREDEFINED((AE_INFO, info->full_pathname, info->node_flags,
+>>>>>>> v3.18
 =======
 	ACPI_WARN_PREDEFINED((AE_INFO, info->full_pathname, info->node_flags,
 >>>>>>> v3.18
@@ -620,6 +739,10 @@ static u32 acpi_ns_get_bitmapped_type(union acpi_operand_object *return_object)
 	switch (return_object->common.type) {
 	case ACPI_TYPE_INTEGER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -628,6 +751,10 @@ static u32 acpi_ns_get_bitmapped_type(union acpi_operand_object *return_object)
 
 	case ACPI_TYPE_BUFFER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -636,6 +763,10 @@ static u32 acpi_ns_get_bitmapped_type(union acpi_operand_object *return_object)
 
 	case ACPI_TYPE_STRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -644,6 +775,10 @@ static u32 acpi_ns_get_bitmapped_type(union acpi_operand_object *return_object)
 
 	case ACPI_TYPE_PACKAGE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -652,6 +787,10 @@ static u32 acpi_ns_get_bitmapped_type(union acpi_operand_object *return_object)
 
 	case ACPI_TYPE_LOCAL_REFERENCE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -660,6 +799,10 @@ static u32 acpi_ns_get_bitmapped_type(union acpi_operand_object *return_object)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -3,6 +3,10 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# When adding new entries keep the list in alphabetical order
+>>>>>>> v3.18
 =======
 # When adding new entries keep the list in alphabetical order
 >>>>>>> v3.18

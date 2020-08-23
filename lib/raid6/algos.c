@@ -67,6 +67,12 @@ const struct raid6_calls * const raid6_algos[] = {
 	&raid6_altivec8,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_TILEGX)
+	&raid6_tilegx8,
+#endif
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_TILEGX)
 	&raid6_tilegx8,
@@ -77,13 +83,19 @@ const struct raid6_calls * const raid6_algos[] = {
 	&raid6_intx4,
 	&raid6_intx8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KERNEL_MODE_NEON
 	&raid6_neonx1,
 	&raid6_neonx2,
 	&raid6_neonx4,
 	&raid6_neonx8,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NULL
 };
@@ -128,9 +140,15 @@ static inline const struct raid6_recov_calls *raid6_choose_recov(void)
 		raid6_datap_recov = best->datap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("raid6: using %s recovery algorithm\n", best->name);
 	} else
 		printk("raid6: Yikes! No recovery algorithm found!\n");
+=======
+		pr_info("raid6: using %s recovery algorithm\n", best->name);
+	} else
+		pr_err("raid6: Yikes! No recovery algorithm found!\n");
+>>>>>>> v3.18
 =======
 		pr_info("raid6: using %s recovery algorithm\n", best->name);
 	} else
@@ -170,7 +188,11 @@ static inline const struct raid6_calls *raid6_choose_gen(
 				best = *algo;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("raid6: %-8s %5ld MB/s\n", (*algo)->name,
+=======
+			pr_info("raid6: %-8s %5ld MB/s\n", (*algo)->name,
+>>>>>>> v3.18
 =======
 			pr_info("raid6: %-8s %5ld MB/s\n", (*algo)->name,
 >>>>>>> v3.18
@@ -180,7 +202,11 @@ static inline const struct raid6_calls *raid6_choose_gen(
 
 	if (best) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("raid6: using algorithm %s (%ld MB/s)\n",
+=======
+		pr_info("raid6: using algorithm %s (%ld MB/s)\n",
+>>>>>>> v3.18
 =======
 		pr_info("raid6: using algorithm %s (%ld MB/s)\n",
 >>>>>>> v3.18
@@ -189,7 +215,11 @@ static inline const struct raid6_calls *raid6_choose_gen(
 		raid6_call = *best;
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("raid6: Yikes!  No algorithm found!\n");
+=======
+		pr_err("raid6: Yikes!  No algorithm found!\n");
+>>>>>>> v3.18
 =======
 		pr_err("raid6: Yikes!  No algorithm found!\n");
 >>>>>>> v3.18
@@ -219,7 +249,11 @@ int __init raid6_select_algo(void)
 
 	if (!syndromes) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("raid6: Yikes!  No memory available.\n");
+=======
+		pr_err("raid6: Yikes!  No memory available.\n");
+>>>>>>> v3.18
 =======
 		pr_err("raid6: Yikes!  No memory available.\n");
 >>>>>>> v3.18

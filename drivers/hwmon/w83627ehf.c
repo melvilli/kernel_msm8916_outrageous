@@ -2,7 +2,11 @@
  *  w83627ehf - Driver for the hardware monitoring functionality of
  *		the Winbond W83627EHF Super-I/O chip
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2005-2012  Jean Delvare <khali@linux-fr.org>
+=======
+ *  Copyright (C) 2005-2012  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2005-2012  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -678,7 +682,11 @@ static void w83627ehf_write_fan_div_common(struct device *dev,
 					   struct w83627ehf_data *data, int nr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w83627ehf_sio_data *sio_data = dev->platform_data;
+=======
+	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -733,7 +741,11 @@ static void w83627ehf_update_fan_div_common(struct device *dev,
 					    struct w83627ehf_data *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w83627ehf_sio_data *sio_data = dev->platform_data;
+=======
+	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -794,7 +806,11 @@ static void w83627ehf_update_pwm_common(struct device *dev,
 					struct w83627ehf_data *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w83627ehf_sio_data *sio_data = dev->platform_data;
+=======
+	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -809,7 +825,11 @@ static struct w83627ehf_data *w83627ehf_update_device(struct device *dev)
 {
 	struct w83627ehf_data *data = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w83627ehf_sio_data *sio_data = dev->platform_data;
+=======
+	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -1413,7 +1433,11 @@ store_pwm_mode(struct device *dev, struct device_attribute *attr,
 	struct w83627ehf_data *data = dev_get_drvdata(dev);
 	struct sensor_device_attribute *sensor_attr = to_sensor_dev_attr(attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w83627ehf_sio_data *sio_data = dev->platform_data;
+=======
+	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -1473,7 +1497,11 @@ store_pwm_enable(struct device *dev, struct device_attribute *attr,
 {
 	struct w83627ehf_data *data = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w83627ehf_sio_data *sio_data = dev->platform_data;
+=======
+	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -1556,7 +1584,11 @@ store_tolerance(struct device *dev, struct device_attribute *attr,
 {
 	struct w83627ehf_data *data = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w83627ehf_sio_data *sio_data = dev->platform_data;
+=======
+	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -2098,7 +2130,11 @@ static int w83627ehf_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w83627ehf_sio_data *sio_data = dev->platform_data;
+=======
+	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -2635,7 +2671,10 @@ exit_remove:
 	w83627ehf_device_remove_files(dev);
 exit_release:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	release_region(res->start, IOREGION_LENGTH);
@@ -2651,7 +2690,10 @@ static int w83627ehf_remove(struct platform_device *pdev)
 	w83627ehf_device_remove_files(&pdev->dev);
 	release_region(data->addr, IOREGION_LENGTH);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2663,7 +2705,11 @@ static int w83627ehf_suspend(struct device *dev)
 {
 	struct w83627ehf_data *data = w83627ehf_update_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w83627ehf_sio_data *sio_data = dev->platform_data;
+=======
+	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -2683,7 +2729,11 @@ static int w83627ehf_resume(struct device *dev)
 {
 	struct w83627ehf_data *data = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w83627ehf_sio_data *sio_data = dev->platform_data;
+=======
+	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct w83627ehf_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -2747,6 +2797,11 @@ static const struct dev_pm_ops w83627ehf_dev_pm_ops = {
 	.suspend = w83627ehf_suspend,
 	.resume = w83627ehf_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.freeze = w83627ehf_suspend,
+	.restore = w83627ehf_resume,
+>>>>>>> v3.18
 =======
 	.freeze = w83627ehf_suspend,
 	.restore = w83627ehf_resume,
@@ -2945,7 +3000,11 @@ static void __exit sensors_w83627ehf_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Jean Delvare <khali@linux-fr.org>");
+=======
+MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
 >>>>>>> v3.18

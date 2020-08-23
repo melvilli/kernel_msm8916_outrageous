@@ -16,6 +16,11 @@
 #define __MACH_S3C64XX_PM_CORE_H __FILE__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 

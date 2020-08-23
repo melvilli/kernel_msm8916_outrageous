@@ -15,6 +15,10 @@
 #include <linux/dmaengine.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -29,6 +33,7 @@
 static bool filter(struct dma_chan *chan, void *param)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_dmaengine_dai_dma_data *dma_data = param;
 
 	if (!imx_dma_is_general_purpose(chan))
@@ -36,10 +41,15 @@ static bool filter(struct dma_chan *chan, void *param)
 
 	chan->private = dma_data->filter_data;
 =======
+=======
+>>>>>>> v3.18
 	if (!imx_dma_is_general_purpose(chan))
 		return false;
 
 	chan->private = param;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return true;
@@ -53,10 +63,13 @@ static const struct snd_pcm_hardware imx_pcm_hardware = {
 		SNDRV_PCM_INFO_PAUSE |
 		SNDRV_PCM_INFO_RESUME,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.formats = SNDRV_PCM_FMTBIT_S16_LE,
 	.rate_min = 8000,
 	.channels_min = 2,
 	.channels_max = 2,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.buffer_bytes_max = IMX_SSI_DMABUF_SIZE,
@@ -77,6 +90,7 @@ static const struct snd_dmaengine_pcm_config imx_dmaengine_pcm_config = {
 int imx_pcm_dma_init(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snd_dmaengine_pcm_register(&pdev->dev, &imx_dmaengine_pcm_config,
 		SND_DMAENGINE_PCM_FLAG_NO_RESIDUE |
 		SND_DMAENGINE_PCM_FLAG_NO_DT |
@@ -88,6 +102,8 @@ void imx_pcm_dma_exit(struct platform_device *pdev)
 	snd_dmaengine_pcm_unregister(&pdev->dev);
 }
 =======
+=======
+>>>>>>> v3.18
 	return devm_snd_dmaengine_pcm_register(&pdev->dev,
 		&imx_dmaengine_pcm_config,
 		SND_DMAENGINE_PCM_FLAG_COMPAT);
@@ -95,4 +111,7 @@ void imx_pcm_dma_exit(struct platform_device *pdev)
 EXPORT_SYMBOL_GPL(imx_pcm_dma_init);
 
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -901,7 +901,11 @@ brcms_c_ampdu_dotxstatus_complete(struct ampdu_info *ampdu, struct scb *scb,
 			update_rate = false;
 			if (supr_status == TX_STATUS_SUPR_BADCH) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				brcms_err(wlc->hw->d11core,
+=======
+				brcms_dbg_ht(wlc->hw->d11core,
+>>>>>>> v3.18
 =======
 				brcms_dbg_ht(wlc->hw->d11core,
 >>>>>>> v3.18
@@ -933,9 +937,15 @@ brcms_c_ampdu_dotxstatus_complete(struct ampdu_info *ampdu, struct scb *scb,
 		} else if (txs->phyerr) {
 			update_rate = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			brcms_err(wlc->hw->d11core,
 				  "%s: ampdu tx phy error (0x%x)\n",
 				  __func__, txs->phyerr);
+=======
+			brcms_dbg_ht(wlc->hw->d11core,
+				     "%s: ampdu tx phy error (0x%x)\n",
+				     __func__, txs->phyerr);
+>>>>>>> v3.18
 =======
 			brcms_dbg_ht(wlc->hw->d11core,
 				     "%s: ampdu tx phy error (0x%x)\n",

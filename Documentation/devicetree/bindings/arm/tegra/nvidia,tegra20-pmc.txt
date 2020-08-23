@@ -10,6 +10,10 @@ Required properties:
 - reg : Offset and length of the register set for the device
 - clocks : Must contain an entry for each entry in clock-names.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  See ../clocks/clock-bindings.txt for details.
+>>>>>>> v3.18
 =======
   See ../clocks/clock-bindings.txt for details.
 >>>>>>> v3.18

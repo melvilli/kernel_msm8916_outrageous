@@ -316,6 +316,7 @@ static int abort_handler(unsigned long addr, unsigned int fsr, struct pt_regs *r
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int ixp4xx_needs_bounce(struct device *dev, dma_addr_t dma_addr, size_t size)
 {
@@ -343,6 +344,8 @@ static int ixp4xx_pci_platform_notify_remove(struct device *dev)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init ixp4xx_pci_preinit(void)
@@ -479,6 +482,7 @@ int ixp4xx_setup(int nr, struct pci_sys_data *sys)
 	pci_add_resource_offset(&sys->resources, &res[1], sys->mem_offset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_notify = ixp4xx_pci_platform_notify;
 	platform_notify_remove = ixp4xx_pci_platform_notify_remove;
 
@@ -497,9 +501,14 @@ EXPORT_SYMBOL(ixp4xx_pci_read);
 EXPORT_SYMBOL(ixp4xx_pci_write);
 EXPORT_SYMBOL(dma_set_coherent_mask);
 =======
+=======
+>>>>>>> v3.18
 	return 1;
 }
 
 EXPORT_SYMBOL(ixp4xx_pci_read);
 EXPORT_SYMBOL(ixp4xx_pci_write);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

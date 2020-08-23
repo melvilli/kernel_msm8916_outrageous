@@ -153,9 +153,15 @@ EXPORT_SYMBOL_GPL(dcr_resource_len);
 #ifdef CONFIG_PPC_DCR_MMIO
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u64 of_translate_dcr_address(struct device_node *dev,
 			     unsigned int dcr_n,
 			     unsigned int *out_stride)
+=======
+static u64 of_translate_dcr_address(struct device_node *dev,
+				    unsigned int dcr_n,
+				    unsigned int *out_stride)
+>>>>>>> v3.18
 =======
 static u64 of_translate_dcr_address(struct device_node *dev,
 				    unsigned int dcr_n,
@@ -237,6 +243,10 @@ EXPORT_SYMBOL_GPL(dcr_unmap_mmio);
 #ifdef CONFIG_PPC_DCR_NATIVE
 DEFINE_SPINLOCK(dcr_ind_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(dcr_ind_lock);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(dcr_ind_lock);
 >>>>>>> v3.18

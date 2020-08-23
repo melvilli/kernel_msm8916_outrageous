@@ -34,6 +34,11 @@
 #include <linux/gpio.h>
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+#include <linux/of_gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 #include <linux/of_gpio.h>
@@ -45,7 +50,13 @@ struct pps_gpio_device_data {
 	struct pps_device *pps;		/* PPS source device */
 	struct pps_source_info info;	/* PPS source information */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pps_gpio_platform_data *pdata;
+=======
+	bool assert_falling_edge;
+	bool capture_clear;
+	unsigned int gpio_pin;
+>>>>>>> v3.18
 =======
 	bool assert_falling_edge;
 	bool capture_clear;
@@ -69,6 +80,7 @@ static irqreturn_t pps_gpio_irq_handler(int irq, void *data)
 	info = data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rising_edge = gpio_get_value(info->pdata->gpio_pin);
 	if ((rising_edge && !info->pdata->assert_falling_edge) ||
 			(!rising_edge && info->pdata->assert_falling_edge))
@@ -77,6 +89,8 @@ static irqreturn_t pps_gpio_irq_handler(int irq, void *data)
 			((rising_edge && info->pdata->assert_falling_edge) ||
 			 (!rising_edge && !info->pdata->assert_falling_edge)))
 =======
+=======
+>>>>>>> v3.18
 	rising_edge = gpio_get_value(info->gpio_pin);
 	if ((rising_edge && !info->assert_falling_edge) ||
 			(!rising_edge && info->assert_falling_edge))
@@ -84,12 +98,16 @@ static irqreturn_t pps_gpio_irq_handler(int irq, void *data)
 	else if (info->capture_clear &&
 			((rising_edge && info->assert_falling_edge) ||
 			 (!rising_edge && !info->assert_falling_edge)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pps_event(info->pps, &ts, PPS_CAPTURECLEAR, NULL);
 
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int pps_gpio_setup(struct platform_device *pdev)
 {
@@ -120,6 +138,8 @@ get_irqf_trigger_flags(const struct pps_gpio_platform_data *pdata)
 
 	if (pdata->capture_clear) {
 =======
+=======
+>>>>>>> v3.18
 static unsigned long
 get_irqf_trigger_flags(const struct pps_gpio_device_data *data)
 {
@@ -127,6 +147,9 @@ get_irqf_trigger_flags(const struct pps_gpio_device_data *data)
 		IRQF_TRIGGER_FALLING : IRQF_TRIGGER_RISING;
 
 	if (data->capture_clear) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		flags |= ((flags & IRQF_TRIGGER_RISING) ?
 				IRQF_TRIGGER_FALLING : IRQF_TRIGGER_RISING);
@@ -138,6 +161,7 @@ get_irqf_trigger_flags(const struct pps_gpio_device_data *data)
 static int pps_gpio_probe(struct platform_device *pdev)
 {
 	struct pps_gpio_device_data *data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int irq;
 	int ret;
@@ -167,6 +191,8 @@ static int pps_gpio_probe(struct platform_device *pdev)
 		goto return_error;
 	}
 =======
+=======
+>>>>>>> v3.18
 	const char *gpio_label;
 	int ret;
 	int pps_default_params;
@@ -219,13 +245,20 @@ static int pps_gpio_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 	data->irq = ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* initialize PPS specific parts of the bookkeeping data structure. */
 	data->info.mode = PPS_CAPTUREASSERT | PPS_OFFSETASSERT |
 		PPS_ECHOASSERT | PPS_CANWAIT | PPS_TSFMT_TSPEC;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->capture_clear)
+=======
+	if (data->capture_clear)
+>>>>>>> v3.18
 =======
 	if (data->capture_clear)
 >>>>>>> v3.18
@@ -237,6 +270,7 @@ static int pps_gpio_probe(struct platform_device *pdev)
 
 	/* register PPS source */
 	pps_default_params = PPS_CAPTUREASSERT | PPS_OFFSETASSERT;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (pdata->capture_clear)
 		pps_default_params |= PPS_CAPTURECLEAR | PPS_OFFSETCLEAR;
@@ -269,6 +303,8 @@ return_error:
 	gpio_free(pdata->gpio_pin);
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	if (data->capture_clear)
 		pps_default_params |= PPS_CAPTURECLEAR | PPS_OFFSETCLEAR;
 	data->pps = pps_register_source(&data->info, pps_default_params);
@@ -292,12 +328,16 @@ return_error:
 		 data->irq);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int pps_gpio_remove(struct platform_device *pdev)
 {
 	struct pps_gpio_device_data *data = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct pps_gpio_platform_data *pdata = data->pdata;
 
@@ -310,6 +350,8 @@ static int pps_gpio_remove(struct platform_device *pdev)
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	pps_unregister_source(data->pps);
 	dev_info(&pdev->dev, "removed IRQ %d as PPS source\n", data->irq);
@@ -322,12 +364,16 @@ static const struct of_device_id pps_gpio_dt_ids[] = {
 };
 MODULE_DEVICE_TABLE(of, pps_gpio_dt_ids);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver pps_gpio_driver = {
 	.probe		= pps_gpio_probe,
 	.remove		= pps_gpio_remove,
 	.driver		= {
 		.name	= PPS_GPIO_NAME,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.owner	= THIS_MODULE
 	},
@@ -351,12 +397,17 @@ module_init(pps_gpio_init);
 module_exit(pps_gpio_exit);
 
 =======
+=======
+>>>>>>> v3.18
 		.owner	= THIS_MODULE,
 		.of_match_table	= pps_gpio_dt_ids,
 	},
 };
 
 module_platform_driver(pps_gpio_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_AUTHOR("Ricardo Martins <rasm@fe.up.pt>");
 MODULE_AUTHOR("James Nuss <jamesnuss@nanometrics.ca>");

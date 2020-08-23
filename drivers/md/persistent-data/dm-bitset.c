@@ -66,7 +66,11 @@ int dm_bitset_flush(struct dm_disk_bitset *info, dm_block_t root,
 	__le64 value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!info->current_index_set)
+=======
+	if (!info->current_index_set || !info->dirty)
+>>>>>>> v3.18
 =======
 	if (!info->current_index_set || !info->dirty)
 >>>>>>> v3.18
@@ -82,6 +86,11 @@ int dm_bitset_flush(struct dm_disk_bitset *info, dm_block_t root,
 
 	info->current_index_set = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	info->dirty = false;
+
+>>>>>>> v3.18
 =======
 	info->dirty = false;
 
@@ -104,6 +113,11 @@ static int read_bits(struct dm_disk_bitset *info, dm_block_t root,
 	info->current_index_set = true;
 	info->current_index = array_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	info->dirty = false;
+
+>>>>>>> v3.18
 =======
 	info->dirty = false;
 
@@ -141,6 +155,11 @@ int dm_bitset_set_bit(struct dm_disk_bitset *info, dm_block_t root,
 
 	set_bit(b, (unsigned long *) &info->current_bits);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	info->dirty = true;
+
+>>>>>>> v3.18
 =======
 	info->dirty = true;
 
@@ -161,6 +180,11 @@ int dm_bitset_clear_bit(struct dm_disk_bitset *info, dm_block_t root,
 
 	clear_bit(b, (unsigned long *) &info->current_bits);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	info->dirty = true;
+
+>>>>>>> v3.18
 =======
 	info->dirty = true;
 

@@ -904,6 +904,7 @@ static int tda1004x_get_fe(struct dvb_frontend *fe)
 	struct dtv_frontend_properties *fe_params = &fe->dtv_property_cache;
 	struct tda1004x_state* state = fe->demodulator_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int status;
 
 	dprintk("%s\n", __func__);
@@ -916,6 +917,11 @@ static int tda1004x_get_fe(struct dvb_frontend *fe)
 	if (!(status & 8))
 		return 0;
 
+=======
+
+	dprintk("%s\n", __func__);
+
+>>>>>>> v3.18
 =======
 
 	dprintk("%s\n", __func__);

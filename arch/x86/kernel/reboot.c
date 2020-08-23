@@ -29,6 +29,10 @@
 #include <asm/realmode.h>
 #include <asm/x86_init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/efi.h>
+>>>>>>> v3.18
 =======
 #include <asm/efi.h>
 >>>>>>> v3.18
@@ -40,6 +44,7 @@ void (*pm_power_off)(void);
 EXPORT_SYMBOL(pm_power_off);
 
 static const struct desc_ptr no_idt = {};
+<<<<<<< HEAD
 <<<<<<< HEAD
 static enum reboot_mode reboot_mode;
 enum reboot_type reboot_type = BOOT_ACPI;
@@ -59,6 +64,8 @@ static int reboot_cpu = -1;
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /*
  * This is set if we need to go through the 'emergency' path.
@@ -71,6 +78,7 @@ static int reboot_emergency;
 bool port_cf9_safe = false;
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * reboot=b[ios] | s[mp] | t[riple] | k[bd] | e[fi] [, [w]arm | [c]old] | p[ci]
  * warm   Don't set the cold reboot flag
@@ -147,6 +155,8 @@ __setup("reboot=", reboot_setup);
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Reboot options and system auto-detection code provided by
  * Dell Inc. so their systems "just work". :-)
  */
@@ -161,7 +171,11 @@ static int __init set_bios_reboot(const struct dmi_system_id *d)
 		reboot_type = BOOT_BIOS;
 		pr_info("%s series board detected. Selecting %s-method for reboots.\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"BIOS", d->ident);
+=======
+			d->ident, "BIOS");
+>>>>>>> v3.18
 =======
 			d->ident, "BIOS");
 >>>>>>> v3.18
@@ -218,15 +232,21 @@ EXPORT_SYMBOL(machine_real_restart);
 static int __init set_pci_reboot(const struct dmi_system_id *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (reboot_type != BOOT_CF9) {
 		reboot_type = BOOT_CF9;
 		pr_info("%s series board detected. Selecting %s-method for reboots.\n",
 			"PCI", d->ident);
 =======
+=======
+>>>>>>> v3.18
 	if (reboot_type != BOOT_CF9_FORCE) {
 		reboot_type = BOOT_CF9_FORCE;
 		pr_info("%s series board detected. Selecting %s-method for reboots.\n",
 			d->ident, "PCI");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -238,7 +258,11 @@ static int __init set_kbd_reboot(const struct dmi_system_id *d)
 		reboot_type = BOOT_KBD;
 		pr_info("%s series board detected. Selecting %s-method for reboot.\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"KBD", d->ident);
+=======
+			d->ident, "KBD");
+>>>>>>> v3.18
 =======
 			d->ident, "KBD");
 >>>>>>> v3.18
@@ -250,6 +274,7 @@ static int __init set_kbd_reboot(const struct dmi_system_id *d)
  * This is a single dmi_table handling all reboot quirks.
  */
 static struct dmi_system_id __initdata reboot_dmi_table[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{	/* Handle problems with rebooting on Dell E520's */
 		.callback = set_bios_reboot,
@@ -498,6 +523,8 @@ static struct dmi_system_id __initdata reboot_dmi_table[] = {
 		},
 	},
 =======
+=======
+>>>>>>> v3.18
 
 	/* Acer */
 	{	/* Handle reboot issue on Acer Aspire one */
@@ -758,6 +785,9 @@ static struct dmi_system_id __initdata reboot_dmi_table[] = {
 		},
 	},
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };
@@ -765,6 +795,11 @@ static struct dmi_system_id __initdata reboot_dmi_table[] = {
 static int __init reboot_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int rv;
+
+>>>>>>> v3.18
 =======
 	int rv;
 
@@ -774,9 +809,12 @@ static int __init reboot_init(void)
 	 * on the command line
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (reboot_default)
 		dmi_check_system(reboot_dmi_table);
 =======
+=======
+>>>>>>> v3.18
 	if (!reboot_default)
 		return 0;
 
@@ -790,6 +828,9 @@ static int __init reboot_init(void)
 	if (!rv && efi_reboot_required())
 		reboot_type = BOOT_EFI;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -853,7 +894,12 @@ void __attribute__((weak)) mach_reboot_fixups(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Windows compatible x86 hardware expects the following on reboot:
+=======
+ * To the best of our knowledge Windows compatible x86 hardware expects
+ * the following on reboot:
+>>>>>>> v3.18
 =======
  * To the best of our knowledge Windows compatible x86 hardware expects
  * the following on reboot:
@@ -864,12 +910,15 @@ void __attribute__((weak)) mach_reboot_fixups(void)
  * 3) If still alive, write to the ACPI reboot register again
  * 4) If still alive, write to the keyboard controller again
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * If the machine is still alive at this stage, it gives up. We default to
  * following the same pattern, except that if we're still alive after (4) we'll
  * try to force a triple fault and then cycle between hitting the keyboard
  * controller and doing that
 =======
+=======
+>>>>>>> v3.18
  * 5) If still alive, call the EFI runtime service to reboot
  * 6) If no EFI runtime service, call the BIOS to do a reboot
  *
@@ -880,6 +929,9 @@ void __attribute__((weak)) mach_reboot_fixups(void)
  *
  * This means that this function can never return, it can misbehave
  * by not rebooting properly and hanging.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static void native_machine_emergency_restart(void)
@@ -902,12 +954,18 @@ static void native_machine_emergency_restart(void)
 		/* Could also try the reset bit in the Hammer NB */
 		switch (reboot_type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case BOOT_ACPI:
 			acpi_reboot();
 			reboot_type = BOOT_KBD;
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case BOOT_KBD:
 			mach_reboot_fixups(); /* For board specific fixups */
@@ -923,6 +981,7 @@ static void native_machine_emergency_restart(void)
 				reboot_type = BOOT_ACPI;
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				reboot_type = BOOT_TRIPLE;
 			}
 			break;
@@ -933,6 +992,8 @@ static void native_machine_emergency_restart(void)
 
 			reboot_type = BOOT_KBD;
 =======
+=======
+>>>>>>> v3.18
 				reboot_type = BOOT_EFI;
 			}
 			break;
@@ -940,12 +1001,16 @@ static void native_machine_emergency_restart(void)
 		case BOOT_EFI:
 			efi_reboot(reboot_mode, NULL);
 			reboot_type = BOOT_BIOS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
 		case BOOT_BIOS:
 			machine_real_restart(MRR_BIOS);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			reboot_type = BOOT_KBD;
 			break;
@@ -977,6 +1042,8 @@ static void native_machine_emergency_restart(void)
 				udelay(50);
 			}
 =======
+=======
+>>>>>>> v3.18
 			/* We're probably dead after this, but... */
 			reboot_type = BOOT_CF9_SAFE;
 			break;
@@ -1003,6 +1070,9 @@ static void native_machine_emergency_restart(void)
 			__asm__ __volatile__("int3");
 
 			/* We're probably dead after this, but... */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			reboot_type = BOOT_KBD;
 			break;
@@ -1013,6 +1083,7 @@ static void native_machine_emergency_restart(void)
 void native_machine_shutdown(void)
 {
 	/* Stop the cpus and apics */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_SMP
 
@@ -1036,6 +1107,8 @@ void native_machine_shutdown(void)
 	 * others. Also disable the local irq to not receive the per-cpu
 	 * timer interrupt which may trigger scheduler's load balance.
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_IO_APIC
 	/*
 	 * Disabling IO APIC before local APIC is a workaround for
@@ -1056,6 +1129,9 @@ void native_machine_shutdown(void)
 	 * Stop all of the others. Also disable the local irq to
 	 * not receive the per-cpu timer interrupt which may trigger
 	 * scheduler's load balance.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	local_irq_disable();
@@ -1065,10 +1141,13 @@ void native_machine_shutdown(void)
 	lapic_shutdown();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_IO_APIC
 	disable_IO_APIC();
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_HPET_TIMER

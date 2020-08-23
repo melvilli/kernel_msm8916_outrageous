@@ -32,12 +32,18 @@ config X86_64
 	select MODULES_USE_ELF_RELA
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ARCH_DEFCONFIG
 	string
 	default "arch/um/configs/i386_defconfig" if X86_32
 	default "arch/um/configs/x86_64_defconfig" if X86_64
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config RWSEM_XCHGADD_ALGORITHM
 	def_bool 64BIT

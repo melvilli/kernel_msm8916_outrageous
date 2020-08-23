@@ -16,8 +16,11 @@
 
 static struct device *scm_root;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct eadm_ops *eadm_ops;
 static DEFINE_MUTEX(eadm_ops_mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -77,6 +80,7 @@ void scm_driver_unregister(struct scm_driver *scmdrv)
 EXPORT_SYMBOL_GPL(scm_driver_unregister);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int scm_get_ref(void)
 {
 	int ret = 0;
@@ -120,6 +124,8 @@ int scm_start_aob(struct aob *aob)
 }
 EXPORT_SYMBOL_GPL(scm_start_aob);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void scm_irq_handler(struct aob *aob, int error)

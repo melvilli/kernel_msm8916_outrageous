@@ -31,6 +31,10 @@
 #include <linux/sched.h>
 #include <linux/sched/rt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -67,7 +71,11 @@ static int convert_prio(int prio)
  * priority configuration.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns: (int)bool - CPUs were found
+=======
+ * Return: (int)bool - CPUs were found
+>>>>>>> v3.18
 =======
  * Return: (int)bool - CPUs were found
 >>>>>>> v3.18
@@ -211,7 +219,11 @@ void cpupri_set(struct cpupri *cp, int cpu, int newpri)
  * @cp: The cpupri context
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns: -ENOMEM if memory fails.
+=======
+ * Return: -ENOMEM on memory allocation failure.
+>>>>>>> v3.18
 =======
  * Return: -ENOMEM on memory allocation failure.
 >>>>>>> v3.18
@@ -231,9 +243,12 @@ int cpupri_init(struct cpupri *cp)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_possible_cpu(i)
 		cp->cpu_to_pri[i] = CPUPRI_INVALID;
 =======
+=======
+>>>>>>> v3.18
 	cp->cpu_to_pri = kcalloc(nr_cpu_ids, sizeof(int), GFP_KERNEL);
 	if (!cp->cpu_to_pri)
 		goto cleanup;
@@ -241,6 +256,9 @@ int cpupri_init(struct cpupri *cp)
 	for_each_possible_cpu(i)
 		cp->cpu_to_pri[i] = CPUPRI_INVALID;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -259,6 +277,10 @@ void cpupri_cleanup(struct cpupri *cp)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(cp->cpu_to_pri);
+>>>>>>> v3.18
 =======
 	kfree(cp->cpu_to_pri);
 >>>>>>> v3.18

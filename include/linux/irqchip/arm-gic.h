@@ -3,7 +3,10 @@
  *
  *  Copyright (C) 2002 ARM Limited, All Rights Reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (c) 2014, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -22,7 +25,10 @@
 #define GIC_CPU_RUNNINGPRI		0x14
 #define GIC_CPU_HIGHPRI			0x18
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define GIC_CPU_ALIAS_BINPOINT		0x1c
 #define GIC_CPU_ACTIVEPRIO		0xd0
 #define GIC_CPU_IDENT			0xfc
@@ -32,6 +38,9 @@
 #define GICC_IAR_INT_ID_MASK		0x3ff
 #define GICC_INT_SPURIOUS		1023
 #define GICC_DIS_BYPASS_MASK		0x1e0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define GIC_DIST_CTRL			0x000
@@ -48,7 +57,10 @@
 #define GIC_DIST_CONFIG			0xc00
 #define GIC_DIST_SOFTINT		0xf00
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define GIC_DIST_SGI_PENDING_CLEAR	0xf10
 #define GIC_DIST_SGI_PENDING_SET	0xf20
 
@@ -63,6 +75,9 @@
 					(GICD_INT_DEF_PRI << 16) |\
 					(GICD_INT_DEF_PRI << 8) |\
 					GICD_INT_DEF_PRI)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define GICH_HCR			0x0
@@ -88,7 +103,10 @@
 #define GICH_LR_EOI			(1 << 19)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define GICH_VMCR_CTRL_SHIFT		0
 #define GICH_VMCR_CTRL_MASK		(0x21f << GICH_VMCR_CTRL_SHIFT)
 #define GICH_VMCR_PRIMASK_SHIFT		27
@@ -98,6 +116,9 @@
 #define GICH_VMCR_ALIAS_BINPOINT_SHIFT	18
 #define GICH_VMCR_ALIAS_BINPOINT_MASK	(0x7 << GICH_VMCR_ALIAS_BINPOINT_SHIFT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define GICH_MISR_EOI			(1 << 0)
 #define GICH_MISR_U			(1 << 1)
@@ -112,6 +133,7 @@ void gic_init_bases(unsigned int, int, void __iomem *, void __iomem *,
 		    u32 offset, struct device_node *);
 void gic_cascade_irq(unsigned int gic_nr, unsigned int irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool gic_is_irq_pending(unsigned int irq);
 void gic_clear_irq_pending(unsigned int irq);
 #ifdef CONFIG_ARM_GIC
@@ -123,6 +145,10 @@ static inline void gic_set_irq_secure(unsigned int irq) { }
 void gic_cpu_if_down(void);
 
 >>>>>>> v3.18
+=======
+void gic_cpu_if_down(void);
+
+>>>>>>> v3.18
 static inline void gic_init(unsigned int nr, int start,
 			    void __iomem *dist , void __iomem *cpu)
 {
@@ -130,8 +156,11 @@ static inline void gic_init(unsigned int nr, int start,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void gic_show_pending_irq(void);
 =======
+=======
+>>>>>>> v3.18
 void gic_send_sgi(unsigned int cpu_id, unsigned int irq);
 int gic_get_cpu_id(unsigned int cpu);
 void gic_migrate_target(unsigned int new_cpu_id);
@@ -143,6 +172,9 @@ static inline void __init register_routable_domain_ops
 {
 	gic_routable_irq_domain_ops = ops;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASSEMBLY */
 #endif

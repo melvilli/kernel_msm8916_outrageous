@@ -19,7 +19,11 @@ Performance counters are accessed via special file descriptors.
 There's one file descriptor per virtual counter used.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The special file descriptor is opened via the perf_event_open()
+=======
+The special file descriptor is opened via the sys_perf_event_open()
+>>>>>>> v3.18
 =======
 The special file descriptor is opened via the sys_perf_event_open()
 >>>>>>> v3.18
@@ -87,7 +91,11 @@ If 'raw_type' is 0, then the 'type' field says what kind of counter
 this is, with the following encoding:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum perf_event_types {
+=======
+enum perf_type_id {
+>>>>>>> v3.18
 =======
 enum perf_type_id {
 >>>>>>> v3.18
@@ -104,7 +112,11 @@ specified by 'event_id':
  * parameter of the sys_perf_event_open() syscall:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum hw_event_ids {
+=======
+enum perf_hw_id {
+>>>>>>> v3.18
 =======
 enum perf_hw_id {
 >>>>>>> v3.18
@@ -142,7 +154,11 @@ software events, selected by 'event_id':
  * well):
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum sw_event_ids {
+=======
+enum perf_sw_ids {
+>>>>>>> v3.18
 =======
 enum perf_sw_ids {
 >>>>>>> v3.18
@@ -247,7 +263,11 @@ The 'comm' bit allows tracking of process comm data on process creation.
 This too is recorded in the ring-buffer (see below).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The 'pid' parameter to the perf_event_open() system call allows the
+=======
+The 'pid' parameter to the sys_perf_event_open() system call allows the
+>>>>>>> v3.18
 =======
 The 'pid' parameter to the sys_perf_event_open() system call allows the
 >>>>>>> v3.18
@@ -281,7 +301,11 @@ The 'flags' parameter is currently unused and must be zero.
 The 'group_fd' parameter allows counter "groups" to be set up.  A
 counter group has one counter which is the group "leader".  The leader
 <<<<<<< HEAD
+<<<<<<< HEAD
 is created first, with group_fd = -1 in the perf_event_open call
+=======
+is created first, with group_fd = -1 in the sys_perf_event_open call
+>>>>>>> v3.18
 =======
 is created first, with group_fd = -1 in the sys_perf_event_open call
 >>>>>>> v3.18
@@ -479,7 +503,10 @@ will need at least this:
 	- asm/perf_event.h - a basic stub will suffice at first
 	- support for atomic64 types (and associated helper functions)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	- set_perf_event_pending() implemented
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

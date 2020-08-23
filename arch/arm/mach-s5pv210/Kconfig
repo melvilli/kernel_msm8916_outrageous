@@ -8,6 +8,7 @@
 # Configuration options for the S5PV210/S5PC110
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 if ARCH_S5PV210
 
 config CPU_S5PV210
@@ -197,6 +198,8 @@ config MACH_TORBRECK
 endmenu
 
 =======
+=======
+>>>>>>> v3.18
 config ARCH_S5PV210
 	bool "Samsung S5PV210/S5PC110" if ARCH_MULTI_V7
 	select ARCH_HAS_HOLES_MEMORYMODEL
@@ -221,5 +224,8 @@ config CPU_S5PV210
 	help
 	  Enable S5PV210 CPU support
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif

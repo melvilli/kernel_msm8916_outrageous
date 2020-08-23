@@ -4,7 +4,10 @@ menu "Xen driver support"
 config XEN_BALLOON
 	bool "Xen memory balloon driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on !ARM
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default y
@@ -148,7 +151,11 @@ config SWIOTLB_XEN
 config XEN_TMEM
 	tristate
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on !ARM
+=======
+	depends on !ARM && !ARM64
+>>>>>>> v3.18
 =======
 	depends on !ARM && !ARM64
 >>>>>>> v3.18
@@ -181,7 +188,10 @@ config XEN_PCIDEV_BACKEND
 	  If in doubt, say m.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config XEN_SCSI_BACKEND
 	tristate "XEN SCSI backend driver"
 	depends on XEN && XEN_BACKEND && TARGET_CORE
@@ -191,6 +201,9 @@ config XEN_SCSI_BACKEND
 	  Only needed for systems running as XEN driver domains (e.g. Dom0) and
 	  if guests need generic access to SCSI devices.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config XEN_PRIVCMD
 	tristate
@@ -242,7 +255,11 @@ config XEN_ACPI_PROCESSOR
 	  To do that the driver parses the Power Management data and uploads
 	  said information to the Xen hypervisor. Then the Xen hypervisor can
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  select the proper Cx and Pxx states. It also registers itslef as the
+=======
+	  select the proper Cx and Pxx states. It also registers itself as the
+>>>>>>> v3.18
 =======
 	  select the proper Cx and Pxx states. It also registers itself as the
 >>>>>>> v3.18
@@ -265,10 +282,16 @@ config XEN_HAVE_PVMMU
        bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config XEN_EFI
 	def_bool y
 	depends on X86_64 && EFI
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu

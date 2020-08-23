@@ -56,10 +56,13 @@ contain the following properties.
 - spi-3wire       - (optional) Empty property indicating device requires
     		    3-wire mode.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 If a gpio chipselect is used for the SPI slave the gpio number will be passed
 via the cs_gpio
 =======
+=======
+>>>>>>> v3.18
 - spi-lsb-first   - (optional) Empty property indicating device requires
 		LSB first mode.
 - spi-tx-bus-width - (optional) The bus width(number of data wires) that
@@ -75,6 +78,9 @@ Dual/Quad mode is not allowed when 3-wire mode is used.
 
 If a gpio chipselect is used for the SPI slave the gpio number will be passed
 via the SPI master node cs-gpios property.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 SPI example for an MPC5200 SPI bus:

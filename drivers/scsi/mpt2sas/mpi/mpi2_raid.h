@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (c) 2000-2012 LSI Corporation.
+=======
+ *  Copyright (c) 2000-2014 LSI Corporation.
+>>>>>>> v3.18
 =======
  *  Copyright (c) 2000-2014 LSI Corporation.
 >>>>>>> v3.18
@@ -11,7 +15,11 @@
  *  Creation Date:  April 26, 2007
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    mpi2_raid.h Version:  02.00.08
+=======
+ *    mpi2_raid.h Version:  02.00.10
+>>>>>>> v3.18
 =======
  *    mpi2_raid.h Version:  02.00.10
 >>>>>>> v3.18
@@ -36,6 +44,12 @@
  *                      Added product-specific range to RAID Action values.
  *  02-06-12  02.00.08  Added MPI2_RAID_ACTION_PHYSDISK_HIDDEN.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *  07-26-12  02.00.09  Added ElapsedSeconds field to MPI2_RAID_VOL_INDICATOR.
+ *                      Added MPI2_RAID_VOL_FLAGS_ELAPSED_SECONDS_VALID define.
+ *  04-17-13  02.00.10  Added MPI25_RAID_ACTION_ADATA_ALLOW_PI.
+>>>>>>> v3.18
 =======
  *  07-26-12  02.00.09  Added ElapsedSeconds field to MPI2_RAID_VOL_INDICATOR.
  *                      Added MPI2_RAID_VOL_FLAGS_ELAPSED_SECONDS_VALID define.
@@ -58,6 +72,12 @@
 ****************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* ActionDataWord defines for use with MPI2_RAID_ACTION_CREATE_VOLUME action */
+#define MPI25_RAID_ACTION_ADATA_ALLOW_PI            (0x80000000)
+
+>>>>>>> v3.18
 =======
 /* ActionDataWord defines for use with MPI2_RAID_ACTION_CREATE_VOLUME action */
 #define MPI25_RAID_ACTION_ADATA_ALLOW_PI            (0x80000000)
@@ -297,6 +317,10 @@ typedef struct _MPI2_RAID_VOL_INDICATOR
     U64                     BlocksRemaining;                /* 0x08 */
     U32                     Flags;                          /* 0x10 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	U32                     ElapsedSeconds;                 /* 0x14 */
+>>>>>>> v3.18
 =======
 	U32                     ElapsedSeconds;                 /* 0x14 */
 >>>>>>> v3.18
@@ -305,6 +329,11 @@ typedef struct _MPI2_RAID_VOL_INDICATOR
 
 /* defines for RAID Volume Indicator Flags field */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MPI2_RAID_VOL_FLAGS_ELAPSED_SECONDS_VALID   (0x80000000)
+
+>>>>>>> v3.18
 =======
 #define MPI2_RAID_VOL_FLAGS_ELAPSED_SECONDS_VALID   (0x80000000)
 
@@ -350,7 +379,11 @@ MPI2_POINTER pMpi2RaidCompatibilityResultStruct_t;
 typedef union _MPI2_RAID_ACTION_REPLY_DATA
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	U32                                     Word[5];
+=======
+	U32                                     Word[6];
+>>>>>>> v3.18
 =======
 	U32                                     Word[6];
 >>>>>>> v3.18

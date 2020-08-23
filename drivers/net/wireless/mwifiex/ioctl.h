@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: ioctl data structures & APIs
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -65,8 +69,12 @@ enum {
 	BAND_GN = 8,
 	BAND_AN = 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BAND_GAC = 32,
 	BAND_AAC = 64,
+=======
+	BAND_AAC = 32,
+>>>>>>> v3.18
 =======
 	BAND_AAC = 32,
 >>>>>>> v3.18
@@ -95,11 +103,17 @@ struct wep_key {
 #define MWIFIEX_SUPPORTED_RATES                 14
 #define MWIFIEX_SUPPORTED_RATES_EXT             32
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MWIFIEX_TDLS_SUPPORTED_RATES		8
 #define MWIFIEX_TDLS_DEF_QOS_CAPAB		0xf
 #define MWIFIEX_PRIO_BK				2
 #define MWIFIEX_PRIO_VI				5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct mwifiex_uap_bss_param {
@@ -190,6 +204,10 @@ struct mwifiex_ds_tx_ba_stream_tbl {
 	u16 tid;
 	u8 ra[ETH_ALEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 amsdu;
+>>>>>>> v3.18
 =======
 	u8 amsdu;
 >>>>>>> v3.18
@@ -226,7 +244,11 @@ struct mwifiex_debug_info {
 	u32 num_cmd_assoc_failure;
 	u32 num_tx_timeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 num_cmd_timeout;
+=======
+	u8 is_cmd_timedout;
+>>>>>>> v3.18
 =======
 	u8 is_cmd_timedout;
 >>>>>>> v3.18
@@ -257,12 +279,18 @@ struct mwifiex_ds_encrypt_key {
 	u32 is_wapi_key;
 	u8 pn[PN_LEN];		/* packet number */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 is_igtk_key;
 =======
+=======
+>>>>>>> v3.18
 	u8 pn_len;
 	u8 is_igtk_key;
 	u8 is_current_wep_key;
 	u8 is_rx_seq_valid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -327,7 +355,11 @@ struct mwifiex_ds_ant_cfg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MWIFIEX_NUM_OF_CMD_BUFFER	20
+=======
+#define MWIFIEX_NUM_OF_CMD_BUFFER	50
+>>>>>>> v3.18
 =======
 #define MWIFIEX_NUM_OF_CMD_BUFFER	50
 >>>>>>> v3.18
@@ -397,8 +429,13 @@ struct mwifiex_ds_misc_subsc_evt {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_BYTESEQ		6	/* non-adjustable */
 #define MWIFIEX_MAX_FILTERS	10
+=======
+#define MWIFIEX_MEF_MAX_BYTESEQ		6	/* non-adjustable */
+#define MWIFIEX_MEF_MAX_FILTERS		10
+>>>>>>> v3.18
 =======
 #define MWIFIEX_MEF_MAX_BYTESEQ		6	/* non-adjustable */
 #define MWIFIEX_MEF_MAX_FILTERS		10
@@ -408,7 +445,11 @@ struct mwifiex_mef_filter {
 	u16 repeat;
 	u16 offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s8 byte_seq[MAX_BYTESEQ + 1];
+=======
+	s8 byte_seq[MWIFIEX_MEF_MAX_BYTESEQ + 1];
+>>>>>>> v3.18
 =======
 	s8 byte_seq[MWIFIEX_MEF_MAX_BYTESEQ + 1];
 >>>>>>> v3.18
@@ -420,7 +461,11 @@ struct mwifiex_mef_entry {
 	u8 mode;
 	u8 action;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mwifiex_mef_filter filter[MWIFIEX_MAX_FILTERS];
+=======
+	struct mwifiex_mef_filter filter[MWIFIEX_MEF_MAX_FILTERS];
+>>>>>>> v3.18
 =======
 	struct mwifiex_mef_filter filter[MWIFIEX_MEF_MAX_FILTERS];
 >>>>>>> v3.18
@@ -445,7 +490,10 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum COALESCE_OPERATION {
 	RECV_FILTER_MATCH_TYPE_EQ = 0x80,
 	RECV_FILTER_MATCH_TYPE_NE,
@@ -493,5 +541,8 @@ struct mwifiex_ds_tdls_oper {
 	u8 *ht_capab;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !_MWIFIEX_IOCTL_H_ */

@@ -41,7 +41,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vram@3,00000000 {
+=======
+		v2m_video_ram: vram@3,00000000 {
+>>>>>>> v3.18
 =======
 		v2m_video_ram: vram@3,00000000 {
 >>>>>>> v3.18
@@ -78,9 +82,12 @@
 				compatible = "arm,vexpress-sysreg";
 				reg = <0x00000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				gpio-controller;
 				#gpio-cells = <2>;
 =======
+=======
+>>>>>>> v3.18
 
 				v2m_led_gpios: sys_led@08 {
 					compatible = "arm,vexpress-sysreg,sys_led";
@@ -99,6 +106,9 @@
 					gpio-controller;
 					#gpio-cells = <2>;
 				};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -138,8 +148,13 @@
 				reg = <0x05000 0x1000>;
 				interrupts = <9 10>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cd-gpios = <&v2m_sysreg 0 0>;
 				wp-gpios = <&v2m_sysreg 1 0>;
+=======
+				cd-gpios = <&v2m_mmc_gpios 0 0>;
+				wp-gpios = <&v2m_mmc_gpios 1 0>;
+>>>>>>> v3.18
 =======
 				cd-gpios = <&v2m_mmc_gpios 0 0>;
 				wp-gpios = <&v2m_mmc_gpios 1 0>;
@@ -260,10 +275,13 @@
 				compatible = "arm,pl111", "arm,primecell";
 				reg = <0x1f000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <14>;
 				clocks = <&v2m_oscclk1>, <&smbclk>;
 				clock-names = "clcdclk", "apb_pclk";
 =======
+=======
+>>>>>>> v3.18
 				interrupt-names = "combined";
 				interrupts = <14>;
 				clocks = <&v2m_oscclk1>, <&smbclk>;
@@ -299,6 +317,9 @@
 						vsync-len = <2>;
 					};
 				};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 		};
@@ -333,7 +354,10 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		leds {
 			compatible = "gpio-leds";
 
@@ -386,6 +410,9 @@
 			};
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mcc {
 			compatible = "arm,vexpress,config-bus";
@@ -405,7 +432,11 @@
 				compatible = "arm,vexpress-osc";
 				arm,vexpress-sysreg,func = <1 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				freq-range = <23750000 63500000>;
+=======
+				freq-range = <23750000 65000000>;
+>>>>>>> v3.18
 =======
 				freq-range = <23750000 65000000>;
 >>>>>>> v3.18

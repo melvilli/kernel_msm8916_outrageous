@@ -370,6 +370,10 @@
 #define	MSR_INFRA			0x02
 #define	MSR_AP				0x03
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	MSR_MASK			0x03
+>>>>>>> v3.18
 =======
 #define	MSR_MASK			0x03
 >>>>>>> v3.18
@@ -1300,6 +1304,7 @@
 #define	BDWORD					0xf
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	BMASKBYTE0				0xff
 #define	BMASKBYTE1				0xff00
 #define	BMASKBYTE2				0xff0000
@@ -1314,6 +1319,8 @@
 
 #define BRFREGOFFSETMASK			0xfffff
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

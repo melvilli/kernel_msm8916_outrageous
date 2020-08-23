@@ -89,7 +89,11 @@ static const char *const aa_audit_type[] = {
 	"STATUS",
 	"ERROR",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"KILLED"
+=======
+	"KILLED",
+>>>>>>> v3.18
 =======
 	"KILLED",
 >>>>>>> v3.18
@@ -116,7 +120,10 @@ static void audit_pre(struct audit_buffer *ab, void *ca)
 {
 	struct common_audit_data *sa = ca;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct task_struct *tsk = sa->aad->tsk ? sa->aad->tsk : current;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -140,11 +147,14 @@ static void audit_pre(struct audit_buffer *ab, void *ca)
 	if (sa->aad->profile) {
 		struct aa_profile *profile = sa->aad->profile;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pid_t pid;
 		rcu_read_lock();
 		pid = rcu_dereference(tsk->real_parent)->pid;
 		rcu_read_unlock();
 		audit_log_format(ab, " parent=%d", pid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (profile->ns != root_ns) {
@@ -160,12 +170,15 @@ static void audit_pre(struct audit_buffer *ab, void *ca)
 		audit_log_untrustedstring(ab, sa->aad->name);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (sa->aad->tsk) {
 		audit_log_format(ab, " pid=%d comm=", tsk->pid);
 		audit_log_untrustedstring(ab, tsk->comm);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -226,8 +239,12 @@ int aa_audit(int type, struct aa_profile *profile, gfp_t gfp,
 	if (sa->aad->type == AUDIT_APPARMOR_KILL)
 		(void)send_sig_info(SIGKILL, NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sa->type == LSM_AUDIT_DATA_TASK && sa->aad->tsk ?
 				    sa->aad->tsk : current);
+=======
+				    sa->u.tsk ?  sa->u.tsk : current);
+>>>>>>> v3.18
 =======
 				    sa->u.tsk ?  sa->u.tsk : current);
 >>>>>>> v3.18

@@ -40,6 +40,7 @@ Required properties:
 - address-cells: Address cells for I2C device address.
 - size-cells: Size of the I2C device address.
 <<<<<<< HEAD
+<<<<<<< HEAD
 - clocks: Clock ID as per
 		Documentation/devicetree/bindings/clock/tegra<chip-id>.txt
 	for I2C controller.
@@ -47,6 +48,8 @@ Required properties:
 	Tegra20/Tegra30 I2C controller: "div-clk and "fast-clk".
 	Tegra114 I2C controller: "div-clk".
 =======
+=======
+>>>>>>> v3.18
 - clocks: Must contain an entry for each entry in clock-names.
   See ../clocks/clock-bindings.txt for details.
 - clock-names: Must include the following entries:
@@ -64,6 +67,9 @@ Required properties:
 - dma-names: Must include the following entries:
   - rx
   - tx
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
@@ -77,11 +83,17 @@ Example:
 		clocks = <&tegra_car 12>, <&tegra_car 124>;
 		clock-names = "div-clk", "fast-clk";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		resets = <&tegra_car 12>;
 		reset-names = "i2c";
 		dmas = <&apbdma 16>, <&apbdma 16>;
 		dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "disabled";
 	};

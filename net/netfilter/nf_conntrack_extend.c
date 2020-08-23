@@ -54,11 +54,15 @@ nf_ct_ext_create(struct nf_ct_ext **ext, enum nf_ct_ext_id id,
 	rcu_read_lock();
 	t = rcu_dereference(nf_ct_ext_types[id]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!t) {
 		rcu_read_unlock();
 		return NULL;
 	}
 
+=======
+	BUG_ON(t == NULL);
+>>>>>>> v3.18
 =======
 	BUG_ON(t == NULL);
 >>>>>>> v3.18
@@ -97,10 +101,14 @@ void *__nf_ct_ext_add_length(struct nf_conn *ct, enum nf_ct_ext_id id,
 	rcu_read_lock();
 	t = rcu_dereference(nf_ct_ext_types[id]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!t) {
 		rcu_read_unlock();
 		return NULL;
 	}
+=======
+	BUG_ON(t == NULL);
+>>>>>>> v3.18
 =======
 	BUG_ON(t == NULL);
 >>>>>>> v3.18
@@ -202,7 +210,11 @@ void nf_ct_extend_unregister(struct nf_ct_ext_type *type)
 	update_alloc_size(type);
 	mutex_unlock(&nf_ct_ext_type_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	synchronize_rcu();
+=======
+	rcu_barrier(); /* Wait for completion of call_rcu()'s */
+>>>>>>> v3.18
 =======
 	rcu_barrier(); /* Wait for completion of call_rcu()'s */
 >>>>>>> v3.18

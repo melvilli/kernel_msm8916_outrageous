@@ -103,12 +103,18 @@ struct l2tp_session {
 	u32			ns;		/* session NR state (send) */
 	struct sk_buff_head	reorder_q;	/* receive reorder queue */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32			nr_max;		/* max NR. Depends on tunnel */
 	u32			nr_window_size;	/* NR window size */
 	u32			nr_oos;		/* NR of last OOS packet */
 	int			nr_oos_count;	/* For OOS recovery */
 	int			nr_oos_count_max;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct hlist_node	hlist;		/* Hash list node */
 	atomic_t		ref_count;
@@ -166,7 +172,13 @@ struct l2tp_tunnel_cfg {
 	u16			local_udp_port;
 	u16			peer_udp_port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		use_udp_checksums:1;
+=======
+	unsigned int		use_udp_checksums:1,
+				udp6_zero_tx_checksums:1,
+				udp6_zero_rx_checksums:1;
+>>>>>>> v3.18
 =======
 	unsigned int		use_udp_checksums:1,
 				udp6_zero_tx_checksums:1,
@@ -248,6 +260,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct sock *l2tp_tunnel_sock_lookup(struct l2tp_tunnel *tunnel);
 extern void l2tp_tunnel_sock_put(struct sock *sk);
 extern struct l2tp_session *l2tp_session_find(struct net *net, struct l2tp_tunnel *tunnel, u32 session_id);
@@ -274,6 +287,8 @@ extern int l2tp_nl_register_ops(enum l2tp_pwtype pw_type, const struct l2tp_nl_c
 extern void l2tp_nl_unregister_ops(enum l2tp_pwtype pw_type);
 int l2tp_ioctl(struct sock *sk, int cmd, unsigned long arg);
 =======
+=======
+>>>>>>> v3.18
 struct l2tp_session *l2tp_session_find(struct net *net,
 				       struct l2tp_tunnel *tunnel,
 				       u32 session_id);
@@ -307,6 +322,9 @@ int l2tp_xmit_skb(struct l2tp_session *session, struct sk_buff *skb,
 int l2tp_nl_register_ops(enum l2tp_pwtype pw_type,
 			 const struct l2tp_nl_cmd_ops *ops);
 void l2tp_nl_unregister_ops(enum l2tp_pwtype pw_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Session reference counts. Incremented when code obtains a reference

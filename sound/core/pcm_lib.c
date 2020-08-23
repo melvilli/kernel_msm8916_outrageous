@@ -33,9 +33,12 @@
 #include <sound/timer.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define STRING_LENGTH_OF_INT 12
 #define MAX_USR_CTRL_CNT 128
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -181,7 +184,11 @@ static void xrun(struct snd_pcm_substream *substream)
 		char name[16];
 		snd_pcm_debug_name(substream, name, sizeof(name));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd(KERN_DEBUG "XRUN: %s\n", name);
+=======
+		pcm_warn(substream->pcm, "XRUN: %s\n", name);
+>>>>>>> v3.18
 =======
 		pcm_warn(substream->pcm, "XRUN: %s\n", name);
 >>>>>>> v3.18
@@ -195,9 +202,13 @@ static void xrun(struct snd_pcm_substream *substream)
 		if (xrun_debug(substream, XRUN_DEBUG_BASIC)) {		\
 			xrun_log_show(substream);			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (printk_ratelimit()) {			\
 				snd_printd("PCM: " fmt, ##args);	\
 			}						\
+=======
+			pr_err_ratelimited("ALSA: PCM: " fmt, ##args);	\
+>>>>>>> v3.18
 =======
 			pr_err_ratelimited("ALSA: PCM: " fmt, ##args);	\
 >>>>>>> v3.18
@@ -268,7 +279,11 @@ static void xrun_log_show(struct snd_pcm_substream *substream)
 		if (entry->period_size == 0)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("hwptr log: %s: %sj=%lu, pos=%ld/%ld/%ld, "
+=======
+		pr_info("hwptr log: %s: %sj=%lu, pos=%ld/%ld/%ld, "
+>>>>>>> v3.18
 =======
 		pr_info("hwptr log: %s: %sj=%lu, pos=%ld/%ld/%ld, "
 >>>>>>> v3.18
@@ -365,15 +380,21 @@ static int snd_pcm_update_hw_ptr0(struct snd_pcm_substream *substream,
 			snd_pcm_debug_name(substream, name, sizeof(name));
 			xrun_log_show(substream);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printd(KERN_ERR  "BUG: %s, pos = %ld, "
 				   "buffer size = %ld, period size = %ld\n",
 				   name, pos, runtime->buffer_size,
 				   runtime->period_size);
 =======
+=======
+>>>>>>> v3.18
 			pcm_err(substream->pcm,
 				"XRUN: %s, pos = %ld, buffer size = %ld, period size = %ld\n",
 				name, pos, runtime->buffer_size,
 				runtime->period_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		pos = 0;
@@ -420,8 +441,13 @@ static int snd_pcm_update_hw_ptr0(struct snd_pcm_substream *substream,
 		char name[16];
 		snd_pcm_debug_name(substream, name, sizeof(name));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("%s_update: %s: pos=%u/%u/%u, "
 			   "hwptr=%ld/%ld/%ld/%ld\n",
+=======
+		pcm_dbg(substream->pcm,
+			"%s_update: %s: pos=%u/%u/%u, hwptr=%ld/%ld/%ld/%ld\n",
+>>>>>>> v3.18
 =======
 		pcm_dbg(substream->pcm,
 			"%s_update: %s: pos=%u/%u/%u, hwptr=%ld/%ld/%ld/%ld\n",
@@ -599,7 +625,12 @@ int snd_pcm_update_hw_ptr(struct snd_pcm_substream *substream)
  * Sets the given PCM operators to the pcm instance.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_pcm_set_ops(struct snd_pcm *pcm, int direction, struct snd_pcm_ops *ops)
+=======
+void snd_pcm_set_ops(struct snd_pcm *pcm, int direction,
+		     const struct snd_pcm_ops *ops)
+>>>>>>> v3.18
 =======
 void snd_pcm_set_ops(struct snd_pcm *pcm, int direction,
 		     const struct snd_pcm_ops *ops)
@@ -1150,6 +1181,7 @@ int snd_interval_list(struct snd_interval *i, unsigned int count,
 EXPORT_SYMBOL(snd_interval_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int snd_interval_step(struct snd_interval *i, unsigned int min, unsigned int step)
 {
 	unsigned int n;
@@ -1163,6 +1195,8 @@ static int snd_interval_step(struct snd_interval *i, unsigned int min, unsigned 
 	if (n != 0 || i->openmax) {
 		i->max -= n;
 =======
+=======
+>>>>>>> v3.18
 static int snd_interval_step(struct snd_interval *i, unsigned int step)
 {
 	unsigned int n;
@@ -1177,6 +1211,9 @@ static int snd_interval_step(struct snd_interval *i, unsigned int step)
 	if (n != 0 || i->openmax) {
 		i->max -= n;
 		i->openmax = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		changed = 1;
 	}
@@ -1294,6 +1331,10 @@ int snd_pcm_hw_constraint_mask64(struct snd_pcm_runtime *runtime, snd_pcm_hw_par
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(snd_pcm_hw_constraint_mask64);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(snd_pcm_hw_constraint_mask64);
 >>>>>>> v3.18
@@ -1484,7 +1525,11 @@ static int snd_pcm_hw_rule_step(struct snd_pcm_hw_params *params,
 {
 	unsigned long step = (unsigned long) rule->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snd_interval_step(hw_param_interval(params, rule->var), 0, step);
+=======
+	return snd_interval_step(hw_param_interval(params, rule->var), step);
+>>>>>>> v3.18
 =======
 	return snd_interval_step(hw_param_interval(params, rule->var), step);
 >>>>>>> v3.18
@@ -1820,11 +1865,14 @@ static int snd_pcm_lib_ioctl_channel_info(struct snd_pcm_substream *substream,
 	case SNDRV_PCM_ACCESS_MMAP_INTERLEAVED:
 	case SNDRV_PCM_ACCESS_RW_INTERLEAVED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((UINT_MAX/width) < info->channel) {
 			snd_printd("%s: integer overflow while multiply\n",
 				   __func__);
 			return -EINVAL;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		info->first = info->channel * width;
@@ -1835,12 +1883,15 @@ static int snd_pcm_lib_ioctl_channel_info(struct snd_pcm_substream *substream,
 	{
 		size_t size = runtime->dma_bytes / runtime->channels;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if ((size > 0) && ((UINT_MAX/(size * 8)) < info->channel)) {
 			snd_printd("%s: integer overflow while multiply\n",
 				   __func__);
 			return -EINVAL;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		info->first = info->channel * size * 8;
@@ -1889,6 +1940,11 @@ int snd_pcm_lib_ioctl(struct snd_pcm_substream *substream,
 {
 	switch (cmd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case SNDRV_PCM_IOCTL1_INFO:
+		return 0;
+>>>>>>> v3.18
 =======
 	case SNDRV_PCM_IOCTL1_INFO:
 		return 0;
@@ -1937,15 +1993,21 @@ void snd_pcm_period_elapsed(struct snd_pcm_substream *substream)
 		snd_timer_interrupt(substream->timer, 1);
  _end:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kill_fasync(&runtime->fasync, SIGIO, POLL_IN);
 	snd_pcm_stream_unlock_irqrestore(substream, flags);
 	if (runtime->transfer_ack_end)
 		runtime->transfer_ack_end(substream);
 =======
+=======
+>>>>>>> v3.18
 	snd_pcm_stream_unlock_irqrestore(substream, flags);
 	if (runtime->transfer_ack_end)
 		runtime->transfer_ack_end(substream);
 	kill_fasync(&runtime->fasync, SIGIO, POLL_IN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2030,8 +2092,14 @@ static int wait_for_avail(struct snd_pcm_substream *substream,
 		}
 		if (!tout) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printd("%s write error (DMA or IRQ trouble?)\n",
 				   is_playback ? "playback" : "capture");
+=======
+			pcm_dbg(substream->pcm,
+				"%s write error (DMA or IRQ trouble?)\n",
+				is_playback ? "playback" : "capture");
+>>>>>>> v3.18
 =======
 			pcm_dbg(substream->pcm,
 				"%s write error (DMA or IRQ trouble?)\n",
@@ -2180,9 +2248,12 @@ static int pcm_sanity_check(struct snd_pcm_substream *substream)
 	if (PCM_RUNTIME_CHECK(substream))
 		return -ENXIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* TODO: consider and -EINVAL here */
 	if (substream->hw_no_buffer)
 		snd_printd("%s: warning this PCM is host less\n", __func__);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	runtime = substream->runtime;
@@ -2636,6 +2707,7 @@ static void pcm_chmap_ctl_private_free(struct snd_kcontrol *kcontrol)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pcm_volume_ctl_info(struct snd_kcontrol *kcontrol,
 				struct snd_ctl_elem_info *uinfo)
 {
@@ -2653,6 +2725,8 @@ static void pcm_volume_ctl_private_free(struct snd_kcontrol *kcontrol)
 	kfree(info);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -2714,6 +2788,7 @@ int snd_pcm_add_chmap_ctls(struct snd_pcm *pcm, int stream,
 	return 0;
 }
 EXPORT_SYMBOL_GPL(snd_pcm_add_chmap_ctls);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /**
@@ -2880,5 +2955,7 @@ int snd_pcm_add_usr_ctls(struct snd_pcm *pcm, int stream,
 	return 0;
 }
 EXPORT_SYMBOL(snd_pcm_add_usr_ctls);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

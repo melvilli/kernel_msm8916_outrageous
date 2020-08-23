@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -134,6 +138,10 @@ union acpi_operand_object *acpi_ut_create_internal_object_dbg(const char
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -188,7 +196,11 @@ union acpi_operand_object *acpi_ut_create_package_object(u32 count)
 						 1) * sizeof(void *));
 	if (!package_elements) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_ut_remove_reference(package_desc);
+=======
+		ACPI_FREE(package_desc);
+>>>>>>> v3.18
 =======
 		ACPI_FREE(package_desc);
 >>>>>>> v3.18
@@ -366,8 +378,14 @@ u8 acpi_ut_valid_internal_object(void *object)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ACPI_DEBUG_PRINT((ACPI_DB_EXEC,
 				  "%p is not not an ACPI operand obj [%s]\n",
+=======
+
+		ACPI_DEBUG_PRINT((ACPI_DB_EXEC,
+				  "%p is not an ACPI operand obj [%s]\n",
+>>>>>>> v3.18
 =======
 
 		ACPI_DEBUG_PRINT((ACPI_DB_EXEC,
@@ -413,7 +431,10 @@ void *acpi_ut_allocate_object_desc_dbg(const char *module_name,
 	/* Mark the descriptor type */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(object, 0, sizeof(union acpi_operand_object));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ACPI_SET_DESCRIPTOR_TYPE(object, ACPI_DESC_TYPE_OPERAND);
@@ -481,6 +502,7 @@ acpi_ut_get_simple_object_size(union acpi_operand_object *internal_object,
 	ACPI_FUNCTION_TRACE_PTR(ut_get_simple_object_size, internal_object);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Handle a null object (Could be a uninitialized package
 	 * element -- which is legal)
@@ -501,6 +523,8 @@ acpi_ut_get_simple_object_size(union acpi_operand_object *internal_object,
 		*obj_length = ACPI_ROUND_UP_TO_NATIVE_WORD(length);
 		return_ACPI_STATUS(status);
 =======
+=======
+>>>>>>> v3.18
 	/* Start with the length of the (external) Acpi object */
 
 	length = sizeof(union acpi_object);
@@ -523,6 +547,9 @@ acpi_ut_get_simple_object_size(union acpi_operand_object *internal_object,
 		/* A namespace node should never get here */
 
 		return_ACPI_STATUS(AE_AML_INTERNAL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -556,7 +583,10 @@ acpi_ut_get_simple_object_size(union acpi_operand_object *internal_object,
 		switch (internal_object->reference.class) {
 		case ACPI_REFCLASS_NAME:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -575,7 +605,10 @@ acpi_ut_get_simple_object_size(union acpi_operand_object *internal_object,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -638,7 +671,10 @@ acpi_ut_get_element_length(u8 object_type,
 	switch (object_type) {
 	case ACPI_COPY_TYPE_SIMPLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*

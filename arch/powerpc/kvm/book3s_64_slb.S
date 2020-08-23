@@ -18,6 +18,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SHADOW_SLB_ESID(num)	(SLBSHADOW_SAVEAREA + (num * 0x10))
 #define SHADOW_SLB_VSID(num)	(SLBSHADOW_SAVEAREA + (num * 0x10) + 0x8)
 #define UNBOLT_SLB_ENTRY(num) \
@@ -38,6 +39,11 @@
 	slbmte	r9, r10; \
 	std	r10, SHADOW_SLB_ESID(num)(r11); \
 slb_exit_skip_ ## num:
+=======
+#define SHADOW_SLB_ENTRY_LEN	0x10
+#define OFFSET_ESID(x)		(SHADOW_SLB_ENTRY_LEN * x)
+#define OFFSET_VSID(x)		((SHADOW_SLB_ENTRY_LEN * x) + 8)
+>>>>>>> v3.18
 =======
 #define SHADOW_SLB_ENTRY_LEN	0x10
 #define OFFSET_ESID(x)		(SHADOW_SLB_ENTRY_LEN * x)
@@ -66,6 +72,7 @@ slb_exit_skip_ ## num:
 	 * SVCPU[LR]  = guest LR
 	 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Remove LPAR shadow entries */
 
@@ -98,6 +105,8 @@ slb_exit_skip_ ## num:
 	slbie	r10
 
 =======
+=======
+>>>>>>> v3.18
 BEGIN_FW_FTR_SECTION
 
 	/* Declare SLB shadow as 0 entries big */
@@ -114,6 +123,9 @@ END_FW_FTR_SECTION_IFSET(FW_FEATURE_LPAR)
 	slbmte	r10, r10
 	slbia
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Fill SLB with our shadow */
 
@@ -131,7 +143,11 @@ slb_loop_enter:
 	ld	r10, 0(r11)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rldicl. r0, r10, 37, 63
+=======
+	andis.	r9, r10, SLB_ESID_V@h
+>>>>>>> v3.18
 =======
 	andis.	r9, r10, SLB_ESID_V@h
 >>>>>>> v3.18
@@ -172,6 +188,7 @@ slb_do_enter:
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Restore bolted entries from the shadow and fix it along the way */
 
 	/* We don't store anything in entry 0, so we don't need to take care of it */
@@ -190,6 +207,8 @@ slb_do_enter:
 #error unknown number of bolted entries
 #endif
 =======
+=======
+>>>>>>> v3.18
 	/* Remove all SLB entries that are in use. */
 
 	li	r0, r0
@@ -226,6 +245,9 @@ END_FW_FTR_SECTION_IFSET(FW_FEATURE_LPAR)
 
 	isync
 	sync
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 slb_do_exit:

@@ -112,7 +112,11 @@ static int or51211_load_firmware (struct dvb_frontend* fe,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("Firmware is %zd bytes\n",fw->size);
+=======
+	dprintk("Firmware is %zu bytes\n", fw->size);
+>>>>>>> v3.18
 =======
 	dprintk("Firmware is %zu bytes\n", fw->size);
 >>>>>>> v3.18

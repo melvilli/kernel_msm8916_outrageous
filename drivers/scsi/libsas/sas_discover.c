@@ -501,7 +501,10 @@ static void sas_revalidate_domain(struct work_struct *work)
 	struct asd_sas_port *port = ev->port;
 	struct sas_ha_struct *ha = port->ha;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct domain_device *ddev = port->port_dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -519,9 +522,14 @@ static void sas_revalidate_domain(struct work_struct *work)
 		    task_pid_nr(current));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ddev && (ddev->dev_type == SAS_FANOUT_EXPANDER_DEVICE ||
 		     ddev->dev_type == SAS_EDGE_EXPANDER_DEVICE))
 		res = sas_ex_revalidate_domain(ddev);
+=======
+	if (port->port_dev)
+		res = sas_ex_revalidate_domain(port->port_dev);
+>>>>>>> v3.18
 =======
 	if (port->port_dev)
 		res = sas_ex_revalidate_domain(port->port_dev);

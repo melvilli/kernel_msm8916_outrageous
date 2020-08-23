@@ -18,6 +18,10 @@
 #include <linux/regulator/consumer.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -28,6 +32,7 @@
 
 static int arizona_i2c_probe(struct i2c_client *i2c,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  const struct i2c_device_id *id)
 {
 	struct arizona *arizona;
@@ -36,6 +41,8 @@ static int arizona_i2c_probe(struct i2c_client *i2c,
 
 	switch (id->driver_data) {
 =======
+=======
+>>>>>>> v3.18
 			     const struct i2c_device_id *id)
 {
 	struct arizona *arizona;
@@ -49,6 +56,9 @@ static int arizona_i2c_probe(struct i2c_client *i2c,
 		type = id->driver_data;
 
 	switch (type) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_MFD_WM5102
 	case WM5102:
@@ -61,12 +71,18 @@ static int arizona_i2c_probe(struct i2c_client *i2c,
 		break;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MFD_WM8997
 	case WM8997:
 		regmap_config = &wm8997_i2c_regmap;
 		break;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		dev_err(&i2c->dev, "Unknown device type %ld\n",
@@ -104,6 +120,10 @@ static const struct i2c_device_id arizona_i2c_id[] = {
 	{ "wm5102", WM5102 },
 	{ "wm5110", WM5110 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "wm8997", WM8997 },
+>>>>>>> v3.18
 =======
 	{ "wm8997", WM8997 },
 >>>>>>> v3.18
@@ -117,6 +137,10 @@ static struct i2c_driver arizona_i2c_driver = {
 		.owner	= THIS_MODULE,
 		.pm	= &arizona_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table	= of_match_ptr(arizona_of_match),
+>>>>>>> v3.18
 =======
 		.of_match_table	= of_match_ptr(arizona_of_match),
 >>>>>>> v3.18

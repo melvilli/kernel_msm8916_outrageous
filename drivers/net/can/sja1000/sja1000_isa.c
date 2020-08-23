@@ -12,8 +12,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -52,6 +56,10 @@ static unsigned char cdr[MAXDEV] = {[0 ... (MAXDEV - 1)] = 0xff};
 static unsigned char ocr[MAXDEV] = {[0 ... (MAXDEV - 1)] = 0xff};
 static int indirect[MAXDEV] = {[0 ... (MAXDEV - 1)] = -1};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static spinlock_t indirect_lock[MAXDEV];  /* lock for indirect access mode */
+>>>>>>> v3.18
 =======
 static spinlock_t indirect_lock[MAXDEV];  /* lock for indirect access mode */
 >>>>>>> v3.18
@@ -111,11 +119,14 @@ static u8 sja1000_isa_port_read_reg_indirect(const struct sja1000_priv *priv,
 					     int reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long base = (unsigned long)priv->reg_base;
 
 	outb(reg, base);
 	return inb(base + 1);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags, base = (unsigned long)priv->reg_base;
 	u8 readval;
 
@@ -125,6 +136,9 @@ static u8 sja1000_isa_port_read_reg_indirect(const struct sja1000_priv *priv,
 	spin_unlock_irqrestore(&indirect_lock[priv->dev->dev_id], flags);
 
 	return readval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -132,17 +146,23 @@ static void sja1000_isa_port_write_reg_indirect(const struct sja1000_priv *priv,
 						int reg, u8 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long base = (unsigned long)priv->reg_base;
 
 	outb(reg, base);
 	outb(val, base + 1);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags, base = (unsigned long)priv->reg_base;
 
 	spin_lock_irqsave(&indirect_lock[priv->dev->dev_id], flags);
 	outb(reg, base);
 	outb(val, base + 1);
 	spin_unlock_irqrestore(&indirect_lock[priv->dev->dev_id], flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -200,6 +220,10 @@ static int sja1000_isa_probe(struct platform_device *pdev)
 			priv->read_reg = sja1000_isa_port_read_reg_indirect;
 			priv->write_reg = sja1000_isa_port_write_reg_indirect;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			spin_lock_init(&indirect_lock[idx]);
+>>>>>>> v3.18
 =======
 			spin_lock_init(&indirect_lock[idx]);
 >>>>>>> v3.18
@@ -231,8 +255,14 @@ static int sja1000_isa_probe(struct platform_device *pdev)
 		priv->cdr = CDR_DEFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, dev);
 	SET_NETDEV_DEV(dev, &pdev->dev);
+=======
+	platform_set_drvdata(pdev, dev);
+	SET_NETDEV_DEV(dev, &pdev->dev);
+	dev->dev_id = idx;
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, dev);
 	SET_NETDEV_DEV(dev, &pdev->dev);
@@ -265,7 +295,11 @@ static int sja1000_isa_probe(struct platform_device *pdev)
 static int sja1000_isa_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -274,7 +308,10 @@ static int sja1000_isa_remove(struct platform_device *pdev)
 
 	unregister_sja1000dev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

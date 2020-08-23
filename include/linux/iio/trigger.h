@@ -9,6 +9,10 @@
 #include <linux/irq.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/atomic.h>
+>>>>>>> v3.18
 =======
 #include <linux/atomic.h>
 >>>>>>> v3.18
@@ -66,7 +70,11 @@ struct iio_trigger {
 	struct list_head		list;
 	struct list_head		alloc_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int use_count;
+=======
+	atomic_t			use_count;
+>>>>>>> v3.18
 =======
 	atomic_t			use_count;
 >>>>>>> v3.18
@@ -139,6 +147,7 @@ void iio_trigger_unregister(struct iio_trigger *trig_info);
  * iio_trigger_poll() - called on a trigger occurring
  * @trig:	trigger which occurred
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @time:	timestamp when trigger occurred
  *
  * Typically called in relevant hardware interrupt handler.
@@ -146,11 +155,16 @@ void iio_trigger_unregister(struct iio_trigger *trig_info);
 void iio_trigger_poll(struct iio_trigger *trig, s64 time);
 void iio_trigger_poll_chained(struct iio_trigger *trig, s64 time);
 =======
+=======
+>>>>>>> v3.18
  *
  * Typically called in relevant hardware interrupt handler.
  **/
 void iio_trigger_poll(struct iio_trigger *trig);
 void iio_trigger_poll_chained(struct iio_trigger *trig);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 irqreturn_t iio_trigger_generic_data_rdy_poll(int irq, void *private);

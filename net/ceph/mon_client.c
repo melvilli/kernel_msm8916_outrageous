@@ -297,7 +297,10 @@ void ceph_monc_request_next_osdmap(struct ceph_mon_client *monc)
 	mutex_unlock(&monc->mutex);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(ceph_monc_request_next_osdmap);
 
 int ceph_monc_wait_osdmap(struct ceph_mon_client *monc, u32 epoch,
@@ -325,6 +328,9 @@ int ceph_monc_wait_osdmap(struct ceph_mon_client *monc, u32 epoch,
 	return 0;
 }
 EXPORT_SYMBOL(ceph_monc_wait_osdmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -508,8 +514,13 @@ static struct ceph_msg *get_generic_reply(struct ceph_connection *con,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_generic_request(struct ceph_mon_client *monc,
 			      struct ceph_mon_generic_request *req)
+=======
+static int __do_generic_request(struct ceph_mon_client *monc, u64 tid,
+				struct ceph_mon_generic_request *req)
+>>>>>>> v3.18
 =======
 static int __do_generic_request(struct ceph_mon_client *monc, u64 tid,
 				struct ceph_mon_generic_request *req)
@@ -519,8 +530,12 @@ static int __do_generic_request(struct ceph_mon_client *monc, u64 tid,
 
 	/* register request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&monc->mutex);
 	req->tid = ++monc->last_tid;
+=======
+	req->tid = tid != 0 ? tid : ++monc->last_tid;
+>>>>>>> v3.18
 =======
 	req->tid = tid != 0 ? tid : ++monc->last_tid;
 >>>>>>> v3.18
@@ -536,7 +551,10 @@ static int __do_generic_request(struct ceph_mon_client *monc, u64 tid,
 	rb_erase(&req->node, &monc->generic_request_tree);
 	monc->num_generic_requests--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&monc->mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -546,7 +564,10 @@ static int __do_generic_request(struct ceph_mon_client *monc, u64 tid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int do_generic_request(struct ceph_mon_client *monc,
 			      struct ceph_mon_generic_request *req)
 {
@@ -559,6 +580,9 @@ static int do_generic_request(struct ceph_mon_client *monc,
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * statfs
@@ -637,7 +661,10 @@ out:
 EXPORT_SYMBOL(ceph_monc_do_statfs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void handle_get_version_reply(struct ceph_mon_client *monc,
 				     struct ceph_msg *msg)
 {
@@ -728,6 +755,9 @@ out:
 }
 EXPORT_SYMBOL(ceph_monc_do_get_version);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * pool ops
@@ -1132,11 +1162,17 @@ static void dispatch(struct ceph_connection *con, struct ceph_msg *msg)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CEPH_MSG_MON_GET_VERSION_REPLY:
 		handle_get_version_reply(monc, msg);
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CEPH_MSG_POOLOP_REPLY:
 		handle_poolop_reply(monc, msg);
@@ -1187,7 +1223,10 @@ static struct ceph_msg *mon_alloc_msg(struct ceph_connection *con,
 		m = ceph_msg_get(monc->m_auth_reply);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CEPH_MSG_MON_GET_VERSION_REPLY:
 		if (le64_to_cpu(hdr->tid) != 0)
 			return get_generic_reply(con, hdr, skip);
@@ -1197,6 +1236,9 @@ static struct ceph_msg *mon_alloc_msg(struct ceph_connection *con,
 		 * request had a non-zero tid.  Workaround this weirdness
 		 * by falling through to the allocate case.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CEPH_MSG_MON_MAP:
 	case CEPH_MSG_MDS_MAP:
@@ -1212,15 +1254,21 @@ static struct ceph_msg *mon_alloc_msg(struct ceph_connection *con,
 		*skip = 1;
 	} else if (front_len > m->front_alloc_len) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("mon_alloc_msg front %d > prealloc %d (%u#%llu)\n",
 			   front_len, m->front_alloc_len,
 			   (unsigned int)con->peer_name.type,
 			   le64_to_cpu(con->peer_name.num));
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("mon_alloc_msg front %d > prealloc %d (%u#%llu)\n",
 			front_len, m->front_alloc_len,
 			(unsigned int)con->peer_name.type,
 			le64_to_cpu(con->peer_name.num));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ceph_msg_put(m);
 		m = ceph_msg_new(type, front_len, GFP_NOFS, false);

@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * max77686.h - Voltage regulator driver for the Maxim 77686
+=======
+ * max77686-private.h - Voltage regulator driver for the Maxim 77686/802
+>>>>>>> v3.18
 =======
  * max77686-private.h - Voltage regulator driver for the Maxim 77686/802
 >>>>>>> v3.18
@@ -33,6 +37,10 @@
 #define MAX77686_REG_INVALID		(0xff)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* MAX77686 PMIC registers */
+>>>>>>> v3.18
 =======
 /* MAX77686 PMIC registers */
 >>>>>>> v3.18
@@ -190,9 +198,12 @@ enum max77686_rtc_reg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX77686_IRQSRC_PMIC	(0)
 #define MAX77686_IRQSRC_RTC		(1 << 0)
 =======
+=======
+>>>>>>> v3.18
 /* MAX77802 PMIC registers */
 enum max77802_pmic_reg {
 	MAX77802_REG_DEVICE_ID		= 0x00,
@@ -396,6 +407,9 @@ enum max77802_rtc_reg {
 
 	MAX77802_RTC_END		= 0xDF,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum max77686_irq_source {
@@ -420,7 +434,11 @@ enum max77686_irq {
 	MAX77686_PMICIRQ_120C,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MAX77686_RTCIRQ_RTC60S,
+=======
+	MAX77686_RTCIRQ_RTC60S = 0,
+>>>>>>> v3.18
 =======
 	MAX77686_RTCIRQ_RTC60S = 0,
 >>>>>>> v3.18
@@ -430,11 +448,14 @@ enum max77686_irq {
 	MAX77686_RTCIRQ_RTC1S,
 	MAX77686_RTCIRQ_WTSR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	MAX77686_IRQ_NR,
 };
 
 =======
+=======
+>>>>>>> v3.18
 };
 
 #define MAX77686_INT1_PWRONF_MSK	BIT(0)
@@ -456,12 +477,16 @@ enum max77686_irq {
 #define MAX77686_RTCINT_RTC1S_MSK	BIT(4)
 #define MAX77686_RTCINT_WTSR_MSK	BIT(5)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct max77686_dev {
 	struct device *dev;
 	struct i2c_client *i2c; /* 0xcc / PMIC, Battery Control, and FLASH */
 	struct i2c_client *rtc; /* slave addr 0x0c */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int type;
 
@@ -473,6 +498,8 @@ struct max77686_dev {
 	int irq;
 	int irq_gpio;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long type;
 
 	struct regmap *regmap;		/* regmap for mfd */
@@ -481,6 +508,9 @@ struct max77686_dev {
 	struct regmap_irq_chip_data *rtc_irq_data;
 
 	int irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool wakeup;
 	struct mutex irqlock;
@@ -491,6 +521,10 @@ struct max77686_dev {
 enum max77686_types {
 	TYPE_MAX77686,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TYPE_MAX77802,
+>>>>>>> v3.18
 =======
 	TYPE_MAX77802,
 >>>>>>> v3.18

@@ -22,6 +22,10 @@
 #include <asm/bootinfo.h>
 #include <asm/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu-type.h>
 >>>>>>> v3.18

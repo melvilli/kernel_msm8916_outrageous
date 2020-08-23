@@ -21,7 +21,10 @@
 #include <linux/sched.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/bootmem.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/irq.h>
@@ -56,6 +59,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int pci_probe = 1;
+
+>>>>>>> v3.18
 =======
 static int pci_probe = 1;
 
@@ -153,12 +161,18 @@ int __init tile_pci_init(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!pci_probe) {
 		pr_info("PCI: disabled by boot argument\n");
 		return 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_info("PCI: Searching for controllers...\n");
 
@@ -209,7 +223,10 @@ int __init tile_pci_init(void)
 			controller->hv_cfg_fd[1] = hv_cfg_fd1;
 			controller->hv_mem_fd = hv_mem_fd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			controller->first_busno = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			controller->last_busno = 0xff;
@@ -265,6 +282,7 @@ static void fixup_read_and_payload_sizes(void)
 	/* Scan for the smallest maximum payload size. */
 	for_each_pci_dev(dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 devcap;
 		int max_payload;
 
@@ -276,11 +294,16 @@ static void fixup_read_and_payload_sizes(void)
 		if (max_payload < smallest_max_payload)
 			smallest_max_payload = max_payload;
 =======
+=======
+>>>>>>> v3.18
 		if (!pci_is_pcie(dev))
 			continue;
 
 		if (dev->pcie_mpss < smallest_max_payload)
 			smallest_max_payload = dev->pcie_mpss;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -311,7 +334,11 @@ int __init pcibios_init(void)
 	 * conservative value.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mdelay(250);
+=======
+	msleep(250);
+>>>>>>> v3.18
 =======
 	msleep(250);
 >>>>>>> v3.18
@@ -336,6 +363,7 @@ int __init pcibios_init(void)
 			pr_info("PCI: initializing controller #%d\n", i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*
 			 * This comes from the generic Linux PCI driver.
 			 *
@@ -349,10 +377,15 @@ int __init pcibios_init(void)
 			pci_add_resource(&resources, &iomem_resource);
 			bus = pci_scan_root_bus(NULL, 0, controller->ops, controller, &resources);
 =======
+=======
+>>>>>>> v3.18
 			pci_add_resource(&resources, &ioport_resource);
 			pci_add_resource(&resources, &iomem_resource);
 			bus = pci_scan_root_bus(NULL, 0, controller->ops,
 						controller, &resources);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			controller->root_bus = bus;
 			controller->last_busno = bus->busn_res.end;
@@ -427,7 +460,10 @@ void pcibios_set_master(struct pci_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Process any "pci=" kernel boot arguments. */
 char *__init pcibios_setup(char *str)
 {
@@ -438,6 +474,9 @@ char *__init pcibios_setup(char *str)
 	return str;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Enable memory and/or address decoding, as appropriate, for the

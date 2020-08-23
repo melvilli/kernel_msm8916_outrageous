@@ -25,7 +25,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -225,7 +228,10 @@ struct moschip_port {
 	char open;
 	char open_ports;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_head_t wait_chase;	/* for handling sleeping while waiting for chase to finish */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct usb_serial_port *port;	/* loop back to the owner of this object */
@@ -316,6 +322,7 @@ static int mos7840_set_uart_reg(struct usb_serial_port *port, __u16 reg,
 	   to be Or'ed */
 	if (port->serial->num_ports == 4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val |= (((__u16) port->number -
 				(__u16) (port->serial->minor)) + 1) << 8;
 	} else {
@@ -326,12 +333,17 @@ static int mos7840_set_uart_reg(struct usb_serial_port *port, __u16 reg,
 			val |= (((__u16) port->number -
 			      (__u16) (port->serial->minor)) + 2) << 8;
 =======
+=======
+>>>>>>> v3.18
 		val |= ((__u16)port->port_number + 1) << 8;
 	} else {
 		if (port->port_number == 0) {
 			val |= ((__u16)port->port_number + 1) << 8;
 		} else {
 			val |= ((__u16)port->port_number + 2) << 8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -362,6 +374,7 @@ static int mos7840_get_uart_reg(struct usb_serial_port *port, __u16 reg,
 	/* Wval  is same as application number */
 	if (port->serial->num_ports == 4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Wval =
 		    (((__u16) port->number - (__u16) (port->serial->minor)) +
 		     1) << 8;
@@ -373,12 +386,17 @@ static int mos7840_get_uart_reg(struct usb_serial_port *port, __u16 reg,
 			Wval = (((__u16) port->number -
 			      (__u16) (port->serial->minor)) + 2) << 8;
 =======
+=======
+>>>>>>> v3.18
 		Wval = ((__u16)port->port_number + 1) << 8;
 	} else {
 		if (port->port_number == 0) {
 			Wval = ((__u16)port->port_number + 1) << 8;
 		} else {
 			Wval = ((__u16)port->port_number + 2) << 8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -556,17 +574,23 @@ static void mos7840_set_led_callback(struct urb *urb)
 	case -ESHUTDOWN:
 		/* This urb is terminated, clean up */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&urb->dev->dev, "%s - urb shutting down with status: %d",
 			__func__, urb->status);
 		break;
 	default:
 		dev_dbg(&urb->dev->dev, "%s - nonzero urb status received: %d",
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(&urb->dev->dev, "%s - urb shutting down: %d\n",
 			__func__, urb->status);
 		break;
 	default:
 		dev_dbg(&urb->dev->dev, "%s - nonzero urb status: %d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			__func__, urb->status);
 	}
@@ -690,9 +714,13 @@ static void mos7840_interrupt_callback(struct urb *urb)
 	for (i = 0; i < serial->num_ports; i++) {
 		mos7840_port = mos7840_get_port_private(serial->port[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wval =
 		    (((__u16) serial->port[i]->number -
 		      (__u16) (serial->minor)) + 1) << 8;
+=======
+		wval = ((__u16)serial->port[i]->port_number + 1) << 8;
+>>>>>>> v3.18
 =======
 		wval = ((__u16)serial->port[i]->port_number + 1) << 8;
 >>>>>>> v3.18
@@ -923,11 +951,16 @@ static int mos7840_open(struct tty_struct *tty, struct usb_serial_port *port)
 		urb = usb_alloc_urb(0, GFP_KERNEL);
 		mos7840_port->write_urb_pool[j] = urb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (urb == NULL) {
 			dev_err(&port->dev, "No more urbs???\n");
 			continue;
 		}
+=======
+		if (!urb)
+			continue;
+>>>>>>> v3.18
 =======
 		if (!urb)
 			continue;
@@ -939,9 +972,12 @@ static int mos7840_open(struct tty_struct *tty, struct usb_serial_port *port)
 			usb_free_urb(urb);
 			mos7840_port->write_urb_pool[j] = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(&port->dev,
 				"%s-out of memory for urb buffers.\n",
 				__func__);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			continue;
@@ -1086,7 +1122,10 @@ static int mos7840_open(struct tty_struct *tty, struct usb_serial_port *port)
 	 * were not set up at that time.)                        */
 	if (port0->open_ports == 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* FIXME: Buffer never NULL, so URB is not submitted. */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (serial->port[0]->interrupt_in_buffer == NULL) {
@@ -1122,8 +1161,13 @@ static int mos7840_open(struct tty_struct *tty, struct usb_serial_port *port)
 	 * structures were not set up at that time.)   */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "port number is %d\n", port->number);
 	dev_dbg(&port->dev, "serial number is %d\n", port->serial->minor);
+=======
+	dev_dbg(&port->dev, "port number is %d\n", port->port_number);
+	dev_dbg(&port->dev, "minor number is %d\n", port->minor);
+>>>>>>> v3.18
 =======
 	dev_dbg(&port->dev, "port number is %d\n", port->port_number);
 	dev_dbg(&port->dev, "minor number is %d\n", port->minor);
@@ -1136,9 +1180,13 @@ static int mos7840_open(struct tty_struct *tty, struct usb_serial_port *port)
 
 	/* set up our bulk in urb */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((serial->num_ports == 2)
 		&& ((((__u16)port->number -
 			(__u16)(port->serial->minor)) % 2) != 0)) {
+=======
+	if ((serial->num_ports == 2) && (((__u16)port->port_number % 2) != 0)) {
+>>>>>>> v3.18
 =======
 	if ((serial->num_ports == 2) && (((__u16)port->port_number % 2) != 0)) {
 >>>>>>> v3.18
@@ -1169,9 +1217,12 @@ static int mos7840_open(struct tty_struct *tty, struct usb_serial_port *port)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* initialize our wait queues */
 	init_waitqueue_head(&mos7840_port->wait_chase);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* initialize our port settings */
@@ -1264,10 +1315,14 @@ static void mos7840_close(struct usb_serial_port *port)
 	for (j = 0; j < NUM_URBS; ++j) {
 		if (mos7840_port->write_urb_pool[j]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (mos7840_port->write_urb_pool[j]->transfer_buffer)
 				kfree(mos7840_port->write_urb_pool[j]->
 				      transfer_buffer);
 
+=======
+			kfree(mos7840_port->write_urb_pool[j]->transfer_buffer);
+>>>>>>> v3.18
 =======
 			kfree(mos7840_port->write_urb_pool[j]->transfer_buffer);
 >>>>>>> v3.18
@@ -1281,7 +1336,11 @@ static void mos7840_close(struct usb_serial_port *port)
 
 	port0->open_ports--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s in close%d:in port%d\n", __func__, port0->open_ports, port->number);
+=======
+	dev_dbg(&port->dev, "%s in close%d\n", __func__, port0->open_ports);
+>>>>>>> v3.18
 =======
 	dev_dbg(&port->dev, "%s in close%d\n", __func__, port0->open_ports);
 >>>>>>> v3.18
@@ -1307,6 +1366,7 @@ static void mos7840_close(struct usb_serial_port *port)
 	mos7840_port->open = 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /************************************************************************
  *
@@ -1351,6 +1411,8 @@ static void mos7840_block_until_chase_response(struct tty_struct *tty,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*****************************************************************************
  * mos7840_break
  *	this function sends a break to the port
@@ -1375,9 +1437,12 @@ static void mos7840_break(struct tty_struct *tty, int break_state)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* flush and block until tx is empty */
 	mos7840_block_until_chase_response(tty, mos7840_port);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (break_state == -1)
@@ -1513,6 +1578,7 @@ static int mos7840_write(struct tty_struct *tty, struct usb_serial_port *port,
 
 	if (urb->transfer_buffer == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		urb->transfer_buffer = kmalloc(URB_TRANSFER_BUFFER_SIZE,
 					       GFP_ATOMIC);
 
@@ -1522,10 +1588,15 @@ static int mos7840_write(struct tty_struct *tty, struct usb_serial_port *port,
 			goto exit;
 		}
 =======
+=======
+>>>>>>> v3.18
 		urb->transfer_buffer =
 		    kmalloc(URB_TRANSFER_BUFFER_SIZE, GFP_KERNEL);
 		if (!urb->transfer_buffer)
 			goto exit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	transfer_size = min(count, URB_TRANSFER_BUFFER_SIZE);
@@ -1534,9 +1605,13 @@ static int mos7840_write(struct tty_struct *tty, struct usb_serial_port *port,
 
 	/* fill urb with data and submit  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((serial->num_ports == 2)
 		&& ((((__u16)port->number -
 			(__u16)(port->serial->minor)) % 2) != 0)) {
+=======
+	if ((serial->num_ports == 2) && (((__u16)port->port_number % 2) != 0)) {
+>>>>>>> v3.18
 =======
 	if ((serial->num_ports == 2) && (((__u16)port->port_number % 2) != 0)) {
 >>>>>>> v3.18
@@ -1834,10 +1909,16 @@ static int mos7840_send_cmd_write_baud_rate(struct moschip_port *mos7840_port,
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	number = mos7840_port->port->number - mos7840_port->port->serial->minor;
 
 	dev_dbg(&port->dev, "%s - port = %d, baud = %d\n", __func__,
 		mos7840_port->port->number, baudRate);
+=======
+	number = mos7840_port->port->port_number;
+
+	dev_dbg(&port->dev, "%s - baud = %d\n", __func__, baudRate);
+>>>>>>> v3.18
 =======
 	number = mos7840_port->port->port_number;
 
@@ -2124,7 +2205,10 @@ static void mos7840_set_termios(struct tty_struct *tty,
 	dev_dbg(&port->dev, "%s - old clfag %08x old iflag %08x\n", __func__,
 		old_termios->c_cflag, RELEVANT_IFLAG(old_termios->c_iflag));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s - port %d\n", __func__, port->number);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2194,8 +2278,13 @@ static int mos7840_get_serial_info(struct moschip_port *mos7840_port,
 
 	tmp.type = PORT_16550A;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp.line = mos7840_port->port->serial->minor;
 	tmp.port = mos7840_port->port->number;
+=======
+	tmp.line = mos7840_port->port->minor;
+	tmp.port = mos7840_port->port->port_number;
+>>>>>>> v3.18
 =======
 	tmp.line = mos7840_port->port->minor;
 	tmp.port = mos7840_port->port->port_number;
@@ -2233,8 +2322,11 @@ static int mos7840_ioctl(struct tty_struct *tty,
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s - cmd = 0x%x\n", __func__, cmd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (cmd) {
@@ -2358,6 +2450,7 @@ static int mos7840_calc_num_ports(struct usb_serial *serial)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mos7840_attach(struct usb_serial *serial)
 {
 	if (serial->num_bulk_in < serial->num_ports ||
@@ -2370,6 +2463,8 @@ static int mos7840_attach(struct usb_serial *serial)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int mos7840_port_probe(struct usb_serial_port *port)
@@ -2385,6 +2480,7 @@ static int mos7840_port_probe(struct usb_serial_port *port)
 	 * function, as the structures aren't created yet.             */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pnum = port->number - serial->minor;
 
 	dev_dbg(&port->dev, "mos7840_startup: configuring port %d\n", pnum);
@@ -2394,12 +2490,17 @@ static int mos7840_port_probe(struct usb_serial_port *port)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	pnum = port->port_number;
 
 	dev_dbg(&port->dev, "mos7840_startup: configuring port %d\n", pnum);
 	mos7840_port = kzalloc(sizeof(struct moschip_port), GFP_KERNEL);
 	if (!mos7840_port)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Initialize all port interrupt end point to port 0 int
@@ -2415,10 +2516,15 @@ static int mos7840_port_probe(struct usb_serial_port *port)
 	 * to index device instances */
 	mos7840_port->port_num = pnum + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "port->number = %d\n", port->number);
 	dev_dbg(&port->dev, "port->serial->minor = %d\n", port->serial->minor);
 	dev_dbg(&port->dev, "mos7840_port->port_num = %d\n", mos7840_port->port_num);
 	dev_dbg(&port->dev, "serial->minor = %d\n", serial->minor);
+=======
+	dev_dbg(&port->dev, "port->minor = %d\n", port->minor);
+	dev_dbg(&port->dev, "mos7840_port->port_num = %d\n", mos7840_port->port_num);
+>>>>>>> v3.18
 =======
 	dev_dbg(&port->dev, "port->minor = %d\n", port->minor);
 	dev_dbg(&port->dev, "mos7840_port->port_num = %d\n", mos7840_port->port_num);
@@ -2669,7 +2775,10 @@ static struct usb_serial_driver moschip7840_4port_device = {
 	.tiocmiwait = usb_serial_generic_tiocmiwait,
 	.get_icount = usb_serial_generic_get_icount,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.attach = mos7840_attach,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.port_probe = mos7840_port_probe,

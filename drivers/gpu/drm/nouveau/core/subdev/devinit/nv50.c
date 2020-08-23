@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2012 Red Hat Inc.
+=======
+ * Copyright 2013 Red Hat Inc.
+>>>>>>> v3.18
 =======
  * Copyright 2013 Red Hat Inc.
 >>>>>>> v3.18
@@ -31,6 +35,7 @@
 #include <subdev/bios/disp.h>
 #include <subdev/bios/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/devinit.h>
 #include <subdev/vga.h>
 
@@ -51,6 +56,8 @@ nv50_devinit_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	if (ret)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/vga.h>
 
 #include "nv50.h"
@@ -95,11 +102,15 @@ nv50_devinit_pll_set(struct nouveau_devinit *devinit, u32 type, u32 freq)
 		nv_wr32(priv, info.reg + 4, (N1 << 8) | M1);
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void
 nv50_devinit_dtor(struct nouveau_object *object)
@@ -110,6 +121,8 @@ nv50_devinit_dtor(struct nouveau_object *object)
 
 static int
 =======
+=======
+>>>>>>> v3.18
 static u64
 nv50_devinit_disable(struct nouveau_devinit *devinit)
 {
@@ -124,6 +137,9 @@ nv50_devinit_disable(struct nouveau_devinit *devinit)
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nv50_devinit_init(struct nouveau_object *object)
 {
@@ -171,6 +187,7 @@ nv50_devinit_init(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 nv50_devinit_fini(struct nouveau_object *object, bool suspend)
 {
@@ -189,6 +206,8 @@ nv50_devinit_oclass = {
 	},
 };
 =======
+=======
+>>>>>>> v3.18
 int
 nv50_devinit_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		  struct nouveau_oclass *oclass, void *data, u32 size,
@@ -217,4 +236,7 @@ nv50_devinit_oclass = &(struct nouveau_devinit_impl) {
 	.pll_set = nv50_devinit_pll_set,
 	.disable = nv50_devinit_disable,
 }.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

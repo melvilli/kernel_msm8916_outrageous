@@ -16,12 +16,15 @@
 #include <linux/nfs3.h>
 #include <linux/nfs4.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sunrpc/msg_prot.h>
 
 #include <linux/nfsd/debug.h>
 #include <linux/nfsd/export.h>
 #include <linux/nfsd/stats.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/sunrpc/svc.h>
 #include <linux/sunrpc/msg_prot.h>
 
@@ -36,13 +39,20 @@
 #else
 # define ifdebug(flag)		if (0)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * nfsd version
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NFSD_SUPPORTED_MINOR_VERSION	1
+=======
+#define NFSD_SUPPORTED_MINOR_VERSION	2
+>>>>>>> v3.18
 =======
 #define NFSD_SUPPORTED_MINOR_VERSION	2
 >>>>>>> v3.18
@@ -75,7 +85,10 @@ extern struct svc_program	nfsd_program;
 extern struct svc_version	nfsd_version2, nfsd_version3,
 				nfsd_version4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32			nfsd_supported_minorversion;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct mutex		nfsd_mutex;
@@ -132,7 +145,10 @@ static inline int nfsd_v4client(struct svc_rqst *rq)
 #ifdef CONFIG_NFSD_V4
 extern unsigned long max_delegations;
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nfs4_state_init(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int nfsd4_init_slabs(void);
@@ -146,7 +162,10 @@ int nfs4_reset_recoverydir(char *recdir);
 char * nfs4_recoverydir(void);
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void nfs4_state_init(void) { }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int nfsd4_init_slabs(void) { return 0; }
@@ -274,13 +293,19 @@ void		nfsd_lockd_shutdown(void);
 #define nfserr_returnconflict		cpu_to_be32(NFS4ERR_RETURNCONFLICT)
 #define nfserr_deleg_revoked		cpu_to_be32(NFS4ERR_DELEG_REVOKED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define nfserr_partner_notsupp		cpu_to_be32(NFS4ERR_PARTNER_NOTSUPP)
 #define nfserr_partner_no_auth		cpu_to_be32(NFS4ERR_PARTNER_NO_AUTH)
 #define nfserr_union_notsupp		cpu_to_be32(NFS4ERR_UNION_NOTSUPP)
 #define nfserr_offload_denied		cpu_to_be32(NFS4ERR_OFFLOAD_DENIED)
 #define nfserr_wrong_lfs		cpu_to_be32(NFS4ERR_WRONG_LFS)
 #define nfserr_badlabel		cpu_to_be32(NFS4ERR_BADLABEL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* error codes for internal use */
@@ -317,7 +342,11 @@ void		nfsd_lockd_shutdown(void);
  */
 #define	COMPOUND_SLACK_SPACE		140    /* OP_GETFH */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COMPOUND_ERR_SLACK_SPACE	12     /* OP_SETATTR */
+=======
+#define COMPOUND_ERR_SLACK_SPACE	16     /* OP_SETATTR */
+>>>>>>> v3.18
 =======
 #define COMPOUND_ERR_SLACK_SPACE	16     /* OP_SETATTR */
 >>>>>>> v3.18
@@ -366,7 +395,10 @@ void		nfsd_lockd_shutdown(void);
 	(NFSD4_SUPPORTED_ATTRS_WORD2 | FATTR4_WORD2_SUPPATTR_EXCLCREAT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NFSD_V4_SECURITY_LABEL
 #define NFSD4_2_SECURITY_ATTRS		FATTR4_WORD2_SECURITY_LABEL
 #else
@@ -377,6 +409,9 @@ void		nfsd_lockd_shutdown(void);
 	(NFSD4_1_SUPPORTED_ATTRS_WORD2 | \
 	NFSD4_2_SECURITY_ATTRS)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline u32 nfsd_suppattrs0(u32 minorversion)
 {
@@ -393,14 +428,20 @@ static inline u32 nfsd_suppattrs1(u32 minorversion)
 static inline u32 nfsd_suppattrs2(u32 minorversion)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return minorversion ? NFSD4_1_SUPPORTED_ATTRS_WORD2
 			    : NFSD4_SUPPORTED_ATTRS_WORD2;
 =======
+=======
+>>>>>>> v3.18
 	switch (minorversion) {
 	default: return NFSD4_2_SUPPORTED_ATTRS_WORD2;
 	case 1:  return NFSD4_1_SUPPORTED_ATTRS_WORD2;
 	case 0:  return NFSD4_SUPPORTED_ATTRS_WORD2;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -415,13 +456,19 @@ static inline u32 nfsd_suppattrs2(u32 minorversion)
 	(FATTR4_WORD1_MODE | FATTR4_WORD1_OWNER | FATTR4_WORD1_OWNER_GROUP \
 	| FATTR4_WORD1_TIME_ACCESS_SET | FATTR4_WORD1_TIME_MODIFY_SET)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NFSD_WRITEABLE_ATTRS_WORD2 0
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NFSD_V4_SECURITY_LABEL
 #define NFSD_WRITEABLE_ATTRS_WORD2 FATTR4_WORD2_SECURITY_LABEL
 #else
 #define NFSD_WRITEABLE_ATTRS_WORD2 0
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define NFSD_SUPPATTR_EXCLCREAT_WORD0 \

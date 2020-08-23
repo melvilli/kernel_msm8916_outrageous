@@ -226,7 +226,11 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_CON_ID("ubc0", &mstp_clks[MSTP017]),
 	CLKDEV_CON_ID("tmu_fck", &mstp_clks[MSTP015]),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLKDEV_CON_ID("cmt_fck", &mstp_clks[MSTP014]),
+=======
+	CLKDEV_ICK_ID("fck", "sh-cmt-32.0", &mstp_clks[MSTP014]),
+>>>>>>> v3.18
 =======
 	CLKDEV_ICK_ID("fck", "sh-cmt-32.0", &mstp_clks[MSTP014]),
 >>>>>>> v3.18

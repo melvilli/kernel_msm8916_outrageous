@@ -151,7 +151,11 @@ static void convert_to_wide(unsigned long *addr)
 
 #ifdef CONFIG_64BIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit set_firmware_width_unlocked(void)
+=======
+void set_firmware_width_unlocked(void)
+>>>>>>> v3.18
 =======
 void set_firmware_width_unlocked(void)
 >>>>>>> v3.18
@@ -172,7 +176,11 @@ void set_firmware_width_unlocked(void)
  * convert_to_wide function.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit set_firmware_width(void)
+=======
+void set_firmware_width(void)
+>>>>>>> v3.18
 =======
 void set_firmware_width(void)
 >>>>>>> v3.18
@@ -184,12 +192,15 @@ void set_firmware_width(void)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit set_firmware_width_unlocked(void) {
 	return;
 }
 
 void __cpuinit set_firmware_width(void) {
 =======
+=======
+>>>>>>> v3.18
 void set_firmware_width_unlocked(void)
 {
 	return;
@@ -197,6 +208,9 @@ void set_firmware_width_unlocked(void)
 
 void set_firmware_width(void)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return;
 }
@@ -320,7 +334,11 @@ int pdc_chassis_warn(unsigned long *warn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit pdc_coproc_cfg_unlocked(struct pdc_coproc_cfg *pdc_coproc_info)
+=======
+int pdc_coproc_cfg_unlocked(struct pdc_coproc_cfg *pdc_coproc_info)
+>>>>>>> v3.18
 =======
 int pdc_coproc_cfg_unlocked(struct pdc_coproc_cfg *pdc_coproc_info)
 >>>>>>> v3.18
@@ -345,7 +363,11 @@ int pdc_coproc_cfg_unlocked(struct pdc_coproc_cfg *pdc_coproc_info)
  * attached to the processor.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit pdc_coproc_cfg(struct pdc_coproc_cfg *pdc_coproc_info)
+=======
+int pdc_coproc_cfg(struct pdc_coproc_cfg *pdc_coproc_info)
+>>>>>>> v3.18
 =======
 int pdc_coproc_cfg(struct pdc_coproc_cfg *pdc_coproc_info)
 >>>>>>> v3.18

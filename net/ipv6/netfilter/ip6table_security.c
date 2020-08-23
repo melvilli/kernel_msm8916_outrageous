@@ -37,7 +37,11 @@ static const struct xt_table security_table = {
 
 static unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip6table_security_hook(unsigned int hook, struct sk_buff *skb,
+=======
+ip6table_security_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
+>>>>>>> v3.18
 =======
 ip6table_security_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
 >>>>>>> v3.18
@@ -48,7 +52,12 @@ ip6table_security_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
 	const struct net *net = dev_net((in != NULL) ? in : out);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ip6t_do_table(skb, hook, in, out, net->ipv6.ip6table_security);
+=======
+	return ip6t_do_table(skb, ops->hooknum, in, out,
+			     net->ipv6.ip6table_security);
+>>>>>>> v3.18
 =======
 	return ip6t_do_table(skb, ops->hooknum, in, out,
 			     net->ipv6.ip6table_security);
@@ -68,7 +77,11 @@ static int __net_init ip6table_security_net_init(struct net *net)
 		ip6t_register_table(net, &security_table, repl);
 	kfree(repl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(net->ipv6.ip6table_security);
+=======
+	return PTR_ERR_OR_ZERO(net->ipv6.ip6table_security);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(net->ipv6.ip6table_security);
 >>>>>>> v3.18

@@ -120,7 +120,11 @@
 #define V4L2_STD_NICAM		(V4L2_STD_NICAM_A | V4L2_STD_NICAM_B)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* To preserve backward compatibilty,
+=======
+/* To preserve backward compatibility,
+>>>>>>> v3.18
 =======
 /* To preserve backward compatibility,
 >>>>>>> v3.18

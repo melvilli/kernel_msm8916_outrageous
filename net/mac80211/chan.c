@@ -10,7 +10,10 @@
 #include "driver-ops.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ieee80211_chanctx_num_assigned(struct ieee80211_local *local,
 					  struct ieee80211_chanctx *ctx)
 {
@@ -332,6 +335,9 @@ void ieee80211_recalc_chanctx_min_def(struct ieee80211_local *local,
 	drv_change_chanctx(local, ctx, IEEE80211_CHANCTX_CHANGE_MIN_WIDTH);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ieee80211_change_chanctx(struct ieee80211_local *local,
 				     struct ieee80211_chanctx *ctx,
@@ -345,6 +351,10 @@ static void ieee80211_change_chanctx(struct ieee80211_local *local,
 	ctx->conf.def = *chandef;
 	drv_change_chanctx(local, ctx, IEEE80211_CHANCTX_CHANGE_WIDTH);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ieee80211_recalc_chanctx_min_def(local, ctx);
+>>>>>>> v3.18
 =======
 	ieee80211_recalc_chanctx_min_def(local, ctx);
 >>>>>>> v3.18
@@ -371,6 +381,12 @@ ieee80211_find_chanctx(struct ieee80211_local *local,
 		const struct cfg80211_chan_def *compat;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (ctx->replace_state != IEEE80211_CHANCTX_REPLACE_NONE)
+			continue;
+
+>>>>>>> v3.18
 =======
 		if (ctx->replace_state != IEEE80211_CHANCTX_REPLACE_NONE)
 			continue;
@@ -384,12 +400,18 @@ ieee80211_find_chanctx(struct ieee80211_local *local,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		compat = ieee80211_chanctx_reserved_chandef(local, ctx,
 							    compat);
 		if (!compat)
 			continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ieee80211_change_chanctx(local, ctx, compat);
 
@@ -404,6 +426,11 @@ static bool ieee80211_is_radar_required(struct ieee80211_local *local)
 	struct ieee80211_sub_if_data *sdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lockdep_assert_held(&local->mtx);
+
+>>>>>>> v3.18
 =======
 	lockdep_assert_held(&local->mtx);
 
@@ -422,6 +449,7 @@ static bool ieee80211_is_radar_required(struct ieee80211_local *local)
 
 static struct ieee80211_chanctx *
 <<<<<<< HEAD
+<<<<<<< HEAD
 ieee80211_new_chanctx(struct ieee80211_local *local,
 		      const struct cfg80211_chan_def *chandef,
 		      enum ieee80211_chanctx_mode mode)
@@ -430,11 +458,16 @@ ieee80211_new_chanctx(struct ieee80211_local *local,
 	u32 changed;
 	int err;
 =======
+=======
+>>>>>>> v3.18
 ieee80211_alloc_chanctx(struct ieee80211_local *local,
 			const struct cfg80211_chan_def *chandef,
 			enum ieee80211_chanctx_mode mode)
 {
 	struct ieee80211_chanctx *ctx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	lockdep_assert_held(&local->chanctx_mtx);
@@ -442,13 +475,19 @@ ieee80211_alloc_chanctx(struct ieee80211_local *local,
 	ctx = kzalloc(sizeof(*ctx) + local->hw.chanctx_data_size, GFP_KERNEL);
 	if (!ctx)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ERR_PTR(-ENOMEM);
 
 =======
+=======
+>>>>>>> v3.18
 		return NULL;
 
 	INIT_LIST_HEAD(&ctx->assigned_vifs);
 	INIT_LIST_HEAD(&ctx->reserved_vifs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ctx->conf.def = *chandef;
 	ctx->conf.rx_chains_static = 1;
@@ -456,12 +495,15 @@ ieee80211_alloc_chanctx(struct ieee80211_local *local,
 	ctx->mode = mode;
 	ctx->conf.radar_enabled = ieee80211_is_radar_required(local);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!local->use_chanctx)
 		local->hw.conf.radar_enabled = ctx->conf.radar_enabled;
 
 	/* acquire mutex to prevent idle from changing */
 	mutex_lock(&local->mtx);
 =======
+=======
+>>>>>>> v3.18
 	ieee80211_recalc_chanctx_min_def(local, ctx);
 
 	return ctx;
@@ -479,6 +521,9 @@ static int ieee80211_add_chanctx(struct ieee80211_local *local,
 	if (!local->use_chanctx)
 		local->hw.conf.radar_enabled = ctx->conf.radar_enabled;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* turn idle off *before* setting channel -- some drivers need that */
 	changed = ieee80211_idle_off(local);
@@ -486,6 +531,7 @@ static int ieee80211_add_chanctx(struct ieee80211_local *local,
 		ieee80211_hw_config(local, changed);
 
 	if (!local->use_chanctx) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		local->_oper_chandef = *chandef;
 		ieee80211_hw_config(local, 0);
@@ -518,6 +564,8 @@ static void ieee80211_free_chanctx(struct ieee80211_local *local,
 	WARN_ON_ONCE(ctx->refcount != 0);
 
 =======
+=======
+>>>>>>> v3.18
 		local->_oper_chandef = ctx->conf.def;
 		ieee80211_hw_config(local, IEEE80211_CONF_CHANGE_CHANNEL);
 	} else {
@@ -561,6 +609,9 @@ static void ieee80211_del_chanctx(struct ieee80211_local *local,
 {
 	lockdep_assert_held(&local->chanctx_mtx);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!local->use_chanctx) {
 		struct cfg80211_chan_def *chandef = &local->_oper_chandef;
@@ -572,23 +623,30 @@ static void ieee80211_del_chanctx(struct ieee80211_local *local,
 		 * single channel context. To be sure, check it ...
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (local->hw.conf.radar_enabled)
 			check_single_channel = true;
 		local->hw.conf.radar_enabled = false;
 
 		ieee80211_hw_config(local, 0);
 =======
+=======
+>>>>>>> v3.18
 		WARN_ON(local->hw.conf.radar_enabled &&
 			!list_empty(&local->chanctx_list));
 
 		local->hw.conf.radar_enabled = false;
 
 		ieee80211_hw_config(local, IEEE80211_CONF_CHANGE_CHANNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		drv_remove_chanctx(local, ctx);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_del_rcu(&ctx->list);
 	kfree_rcu(ctx, rcu_head);
@@ -809,6 +867,8 @@ void ieee80211_recalc_smps_chanctx(struct ieee80211_local *local,
 	chanctx->conf.rx_chains_dynamic = rx_chains_dynamic;
 	drv_change_chanctx(local, chanctx, IEEE80211_CHANCTX_CHANGE_RX_CHAINS);
 =======
+=======
+>>>>>>> v3.18
 	ieee80211_recalc_idle(local);
 }
 
@@ -1761,6 +1821,9 @@ static void __ieee80211_vif_release_channel(struct ieee80211_sub_if_data *sdata)
 	/* Unreserving may ready an in-place reservation. */
 	if (use_reserved_switch)
 		ieee80211_vif_use_reserved_switch(local);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1771,12 +1834,15 @@ int ieee80211_vif_use_channel(struct ieee80211_sub_if_data *sdata,
 	struct ieee80211_local *local = sdata->local;
 	struct ieee80211_chanctx *ctx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	WARN_ON(sdata->dev && netif_carrier_ok(sdata->dev));
 
 	mutex_lock(&local->chanctx_mtx);
 =======
+=======
+>>>>>>> v3.18
 	u8 radar_detect_width = 0;
 	int ret;
 
@@ -1801,6 +1867,9 @@ int ieee80211_vif_use_channel(struct ieee80211_sub_if_data *sdata,
 	if (ret < 0)
 		goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__ieee80211_vif_release_channel(sdata);
 
@@ -1818,7 +1887,11 @@ int ieee80211_vif_use_channel(struct ieee80211_sub_if_data *sdata,
 	if (ret) {
 		/* if assign fails refcount stays the same */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ctx->refcount == 0)
+=======
+		if (ieee80211_chanctx_refcount(local, ctx) == 0)
+>>>>>>> v3.18
 =======
 		if (ieee80211_chanctx_refcount(local, ctx) == 0)
 >>>>>>> v3.18
@@ -1834,7 +1907,10 @@ int ieee80211_vif_use_channel(struct ieee80211_sub_if_data *sdata,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ieee80211_vif_use_reserved_context(struct ieee80211_sub_if_data *sdata)
 {
 	struct ieee80211_local *local = sdata->local;
@@ -1899,6 +1975,9 @@ int ieee80211_vif_use_reserved_context(struct ieee80211_sub_if_data *sdata)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ieee80211_vif_change_bandwidth(struct ieee80211_sub_if_data *sdata,
 				   const struct cfg80211_chan_def *chandef,
@@ -1908,6 +1987,10 @@ int ieee80211_vif_change_bandwidth(struct ieee80211_sub_if_data *sdata,
 	struct ieee80211_chanctx_conf *conf;
 	struct ieee80211_chanctx *ctx;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct cfg80211_chan_def *compat;
+>>>>>>> v3.18
 =======
 	const struct cfg80211_chan_def *compat;
 >>>>>>> v3.18
@@ -1938,7 +2021,13 @@ int ieee80211_vif_change_bandwidth(struct ieee80211_sub_if_data *sdata,
 
 	ctx = container_of(conf, struct ieee80211_chanctx, conf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cfg80211_chandef_compatible(&conf->def, chandef)) {
+=======
+
+	compat = cfg80211_chandef_compatible(&conf->def, chandef);
+	if (!compat) {
+>>>>>>> v3.18
 =======
 
 	compat = cfg80211_chandef_compatible(&conf->def, chandef);
@@ -1949,7 +2038,10 @@ int ieee80211_vif_change_bandwidth(struct ieee80211_sub_if_data *sdata,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	switch (ctx->replace_state) {
 	case IEEE80211_CHANCTX_REPLACE_NONE:
 		if (!ieee80211_chanctx_reserved_chandef(local, ctx, compat)) {
@@ -1970,6 +2062,9 @@ int ieee80211_vif_change_bandwidth(struct ieee80211_sub_if_data *sdata,
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sdata->vif.bss_conf.chandef = *chandef;
 
@@ -1987,6 +2082,11 @@ void ieee80211_vif_release_channel(struct ieee80211_sub_if_data *sdata)
 	WARN_ON(sdata->dev && netif_carrier_ok(sdata->dev));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lockdep_assert_held(&sdata->local->mtx);
+
+>>>>>>> v3.18
 =======
 	lockdep_assert_held(&sdata->local->mtx);
 
@@ -2015,6 +2115,7 @@ void ieee80211_vif_vlan_copy_chanctx(struct ieee80211_sub_if_data *sdata)
 	mutex_unlock(&local->chanctx_mtx);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void ieee80211_vif_copy_chanctx_to_vlans(struct ieee80211_sub_if_data *sdata,
 					 bool clear)
@@ -2050,6 +2151,8 @@ void ieee80211_vif_copy_chanctx_to_vlans(struct ieee80211_sub_if_data *sdata,
 	mutex_unlock(&local->chanctx_mtx);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void ieee80211_iter_chan_contexts_atomic(

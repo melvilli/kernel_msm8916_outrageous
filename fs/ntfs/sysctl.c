@@ -35,7 +35,11 @@
 
 /* Definition of the ntfs sysctl. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table ntfs_sysctls[] = {
+=======
+static struct ctl_table ntfs_sysctls[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table ntfs_sysctls[] = {
 >>>>>>> v3.18
@@ -51,7 +55,11 @@ static struct ctl_table ntfs_sysctls[] = {
 
 /* Define the parent directory /proc/sys/fs. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table sysctls_root[] = {
+=======
+static struct ctl_table sysctls_root[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table sysctls_root[] = {
 >>>>>>> v3.18
@@ -65,7 +73,11 @@ static struct ctl_table sysctls_root[] = {
 
 /* Storage for the sysctls header. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ctl_table_header *sysctls_root_table = NULL;
+=======
+static struct ctl_table_header *sysctls_root_table;
+>>>>>>> v3.18
 =======
 static struct ctl_table_header *sysctls_root_table;
 >>>>>>> v3.18

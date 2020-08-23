@@ -22,6 +22,10 @@
 #include "s5p_mfc_opr.h"
 #include "s5p_mfc_pm.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "s5p_mfc_ctrl.h"
+>>>>>>> v3.18
 =======
 #include "s5p_mfc_ctrl.h"
 >>>>>>> v3.18
@@ -43,8 +47,12 @@ int s5p_mfc_alloc_firmware(struct s5p_mfc_dev *dev)
 					&dev->bank1, GFP_KERNEL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR_OR_NULL(dev->fw_virt_addr)) {
 		dev->fw_virt_addr = NULL;
+=======
+	if (!dev->fw_virt_addr) {
+>>>>>>> v3.18
 =======
 	if (!dev->fw_virt_addr) {
 >>>>>>> v3.18
@@ -53,8 +61,11 @@ int s5p_mfc_alloc_firmware(struct s5p_mfc_dev *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->bank1 = dev->bank1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (HAS_PORTNUM(dev) && IS_TWOPORT(dev)) {
@@ -62,7 +73,11 @@ int s5p_mfc_alloc_firmware(struct s5p_mfc_dev *dev)
 					&bank2_dma_addr, GFP_KERNEL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (IS_ERR(dev->fw_virt_addr)) {
+=======
+		if (!bank2_virt) {
+>>>>>>> v3.18
 =======
 		if (!bank2_virt) {
 >>>>>>> v3.18
@@ -85,7 +100,11 @@ int s5p_mfc_alloc_firmware(struct s5p_mfc_dev *dev)
 	} else {
 		/* In this case bank2 can point to the same address as bank1.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Firmware will always occupy the beggining of this area so it is
+=======
+		 * Firmware will always occupy the beginning of this area so it is
+>>>>>>> v3.18
 =======
 		 * Firmware will always occupy the beginning of this area so it is
 >>>>>>> v3.18
@@ -100,7 +119,11 @@ int s5p_mfc_load_firmware(struct s5p_mfc_dev *dev)
 {
 	struct firmware *fw_blob;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+	int i, err = -EINVAL;
+>>>>>>> v3.18
 =======
 	int i, err = -EINVAL;
 >>>>>>> v3.18
@@ -109,6 +132,7 @@ int s5p_mfc_load_firmware(struct s5p_mfc_dev *dev)
 	 * into kernel. */
 	mfc_debug_enter();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = request_firmware((const struct firmware **)&fw_blob,
 				     dev->variant->fw_name, dev->v4l2_dev.dev);
@@ -146,6 +170,8 @@ int s5p_mfc_reload_firmware(struct s5p_mfc_dev *dev)
 	err = request_firmware((const struct firmware **)&fw_blob,
 				     dev->variant->fw_name, dev->v4l2_dev.dev);
 =======
+=======
+>>>>>>> v3.18
 	for (i = MFC_FW_MAX_VERSIONS - 1; i >= 0; i--) {
 		if (!dev->variant->fw_name[i])
 			continue;
@@ -157,6 +183,9 @@ int s5p_mfc_reload_firmware(struct s5p_mfc_dev *dev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err != 0) {
 		mfc_err("Firmware is not present in the /lib/firmware directory nor compiled in kernel\n");
@@ -202,7 +231,11 @@ int s5p_mfc_reset(struct s5p_mfc_dev *dev)
 	mfc_debug_enter();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_MFCV6(dev)) {
+=======
+	if (IS_MFCV6_PLUS(dev)) {
+>>>>>>> v3.18
 =======
 	if (IS_MFCV6_PLUS(dev)) {
 >>>>>>> v3.18
@@ -255,6 +288,7 @@ int s5p_mfc_reset(struct s5p_mfc_dev *dev)
 static inline void s5p_mfc_init_memctrl(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_MFCV6(dev)) {
 		mfc_write(dev, dev->bank1, S5P_FIMV_RISC_BASE_ADDRESS_V6);
 		mfc_debug(2, "Base Address : %08x\n", dev->bank1);
@@ -264,6 +298,8 @@ static inline void s5p_mfc_init_memctrl(struct s5p_mfc_dev *dev)
 		mfc_debug(2, "Bank1: %08x, Bank2: %08x\n",
 				dev->bank1, dev->bank2);
 =======
+=======
+>>>>>>> v3.18
 	if (IS_MFCV6_PLUS(dev)) {
 		mfc_write(dev, dev->bank1, S5P_FIMV_RISC_BASE_ADDRESS_V6);
 		mfc_debug(2, "Base Address : %pad\n", &dev->bank1);
@@ -272,6 +308,9 @@ static inline void s5p_mfc_init_memctrl(struct s5p_mfc_dev *dev)
 		mfc_write(dev, dev->bank2, S5P_FIMV_MC_DRAMBASE_ADR_B);
 		mfc_debug(2, "Bank1: %pad, Bank2: %pad\n",
 				&dev->bank1, &dev->bank2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -279,7 +318,11 @@ static inline void s5p_mfc_init_memctrl(struct s5p_mfc_dev *dev)
 static inline void s5p_mfc_clear_cmds(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_MFCV6(dev)) {
+=======
+	if (IS_MFCV6_PLUS(dev)) {
+>>>>>>> v3.18
 =======
 	if (IS_MFCV6_PLUS(dev)) {
 >>>>>>> v3.18
@@ -321,7 +364,11 @@ int s5p_mfc_init_hw(struct s5p_mfc_dev *dev)
 	/* 3. Release reset signal to the RISC */
 	s5p_mfc_clean_dev_int_flags(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_MFCV6(dev))
+=======
+	if (IS_MFCV6_PLUS(dev))
+>>>>>>> v3.18
 =======
 	if (IS_MFCV6_PLUS(dev))
 >>>>>>> v3.18
@@ -345,9 +392,15 @@ int s5p_mfc_init_hw(struct s5p_mfc_dev *dev)
 		return ret;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfc_debug(2, "Ok, now will write a command to init the system\n");
 	if (s5p_mfc_wait_for_done_dev(dev, S5P_MFC_R2H_CMD_SYS_INIT_RET)) {
 		mfc_err("Failed to load firmware\n");
+=======
+	mfc_debug(2, "Ok, now will wait for completion of hardware init\n");
+	if (s5p_mfc_wait_for_done_dev(dev, S5P_MFC_R2H_CMD_SYS_INIT_RET)) {
+		mfc_err("Failed to init hardware\n");
+>>>>>>> v3.18
 =======
 	mfc_debug(2, "Ok, now will wait for completion of hardware init\n");
 	if (s5p_mfc_wait_for_done_dev(dev, S5P_MFC_R2H_CMD_SYS_INIT_RET)) {
@@ -368,7 +421,11 @@ int s5p_mfc_init_hw(struct s5p_mfc_dev *dev)
 		return -EIO;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_MFCV6(dev))
+=======
+	if (IS_MFCV6_PLUS(dev))
+>>>>>>> v3.18
 =======
 	if (IS_MFCV6_PLUS(dev))
 >>>>>>> v3.18
@@ -391,7 +448,11 @@ void s5p_mfc_deinit_hw(struct s5p_mfc_dev *dev)
 
 	s5p_mfc_reset(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5p_mfc_hw_call(dev->mfc_ops, release_dev_context_buffer, dev);
+=======
+	s5p_mfc_hw_call_void(dev->mfc_ops, release_dev_context_buffer, dev);
+>>>>>>> v3.18
 =======
 	s5p_mfc_hw_call_void(dev->mfc_ops, release_dev_context_buffer, dev);
 >>>>>>> v3.18
@@ -455,7 +516,11 @@ int s5p_mfc_wakeup(struct s5p_mfc_dev *dev)
 	}
 	/* 4. Release reset signal to the RISC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_MFCV6(dev))
+=======
+	if (IS_MFCV6_PLUS(dev))
+>>>>>>> v3.18
 =======
 	if (IS_MFCV6_PLUS(dev))
 >>>>>>> v3.18
@@ -481,7 +546,10 @@ int s5p_mfc_wakeup(struct s5p_mfc_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int s5p_mfc_open_mfc_inst(struct s5p_mfc_dev *dev, struct s5p_mfc_ctx *ctx)
 {
 	int ret = 0;
@@ -544,4 +612,7 @@ void s5p_mfc_close_mfc_inst(struct s5p_mfc_dev *dev, struct s5p_mfc_ctx *ctx)
 	ctx->inst_no = MFC_NO_INSTANCE_SET;
 	ctx->state = MFCINST_FREE;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

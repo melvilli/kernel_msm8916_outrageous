@@ -20,7 +20,10 @@
 #include <asm/ppc_asm.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef __BIG_ENDIAN__
 #define LVS(VRT,RA,RB)		lvsl	VRT,RA,RB
 #define VPERM(VRT,VRA,VRB,VRC)	vperm	VRT,VRA,VRB,VRC
@@ -29,6 +32,9 @@
 #define VPERM(VRT,VRA,VRB,VRC)	vperm	VRT,VRB,VRA,VRC
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.macro err1
 100:
@@ -70,7 +76,11 @@
 	ld	r14,STK_REG(R14)(r1)
 .Ldo_err3:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.exit_vmx_usercopy
+=======
+	bl	exit_vmx_usercopy
+>>>>>>> v3.18
 =======
 	bl	exit_vmx_usercopy
 >>>>>>> v3.18
@@ -93,9 +103,15 @@
 	addi	r1,r1,STACKFRAMESIZE
 .Ldo_err1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld	r3,48(r1)
 	ld	r4,56(r1)
 	ld	r5,64(r1)
+=======
+	ld	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)
+	ld	r4,-STACKFRAMESIZE+STK_REG(R30)(r1)
+	ld	r5,-STACKFRAMESIZE+STK_REG(R29)(r1)
+>>>>>>> v3.18
 =======
 	ld	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)
 	ld	r4,-STACKFRAMESIZE+STK_REG(R30)(r1)
@@ -110,9 +126,15 @@ _GLOBAL(__copy_tofrom_user_power7)
 	cmpldi	cr1,r5,4096
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std	r3,48(r1)
 	std	r4,56(r1)
 	std	r5,64(r1)
+=======
+	std	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)
+	std	r4,-STACKFRAMESIZE+STK_REG(R30)(r1)
+	std	r5,-STACKFRAMESIZE+STK_REG(R29)(r1)
+>>>>>>> v3.18
 =======
 	std	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)
 	std	r4,-STACKFRAMESIZE+STK_REG(R30)(r1)
@@ -125,9 +147,15 @@ _GLOBAL(__copy_tofrom_user_power7)
 	cmpldi	r5,16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std	r3,48(r1)
 	std	r4,56(r1)
 	std	r5,64(r1)
+=======
+	std	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)
+	std	r4,-STACKFRAMESIZE+STK_REG(R30)(r1)
+	std	r5,-STACKFRAMESIZE+STK_REG(R29)(r1)
+>>>>>>> v3.18
 =======
 	std	r3,-STACKFRAMESIZE+STK_REG(R31)(r1)
 	std	r4,-STACKFRAMESIZE+STK_REG(R30)(r1)
@@ -321,6 +349,7 @@ err1;	stb	r0,0(r3)
 	std	r0,16(r1)
 	stdu	r1,-STACKFRAMESIZE(r1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.enter_vmx_usercopy
 	cmpwi	cr1,r3,0
 	ld	r0,STACKFRAMESIZE+16(r1)
@@ -328,12 +357,17 @@ err1;	stb	r0,0(r3)
 	ld	r4,STACKFRAMESIZE+56(r1)
 	ld	r5,STACKFRAMESIZE+64(r1)
 =======
+=======
+>>>>>>> v3.18
 	bl	enter_vmx_usercopy
 	cmpwi	cr1,r3,0
 	ld	r0,STACKFRAMESIZE+16(r1)
 	ld	r3,STK_REG(R31)(r1)
 	ld	r4,STK_REG(R30)(r1)
 	ld	r5,STK_REG(R29)(r1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mtlr	r0
 
@@ -549,7 +583,11 @@ err3;	stb	r0,0(r3)
 
 15:	addi	r1,r1,STACKFRAMESIZE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.exit_vmx_usercopy	/* tail call optimise */
+=======
+	b	exit_vmx_usercopy	/* tail call optimise */
+>>>>>>> v3.18
 =======
 	b	exit_vmx_usercopy	/* tail call optimise */
 >>>>>>> v3.18
@@ -599,7 +637,11 @@ err3;	stw	r7,4(r3)
 	li	r11,48
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lvsl	vr16,0,r4	/* Setup permute control vector */
+=======
+	LVS(vr16,0,r4)		/* Setup permute control vector */
+>>>>>>> v3.18
 =======
 	LVS(vr16,0,r4)		/* Setup permute control vector */
 >>>>>>> v3.18
@@ -609,7 +651,11 @@ err3;	lvx	vr0,0,r4
 	bf	cr7*4+3,5f
 err3;	lvx	vr1,r0,r4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr1,vr16
+=======
+	VPERM(vr8,vr0,vr1,vr16)
+>>>>>>> v3.18
 =======
 	VPERM(vr8,vr0,vr1,vr16)
 >>>>>>> v3.18
@@ -621,9 +667,15 @@ err3;	stvx	vr8,r0,r3
 5:	bf	cr7*4+2,6f
 err3;	lvx	vr1,r0,r4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr1,vr16
 err3;	lvx	vr0,r4,r9
 	vperm	vr9,vr1,vr0,vr16
+=======
+	VPERM(vr8,vr0,vr1,vr16)
+err3;	lvx	vr0,r4,r9
+	VPERM(vr9,vr1,vr0,vr16)
+>>>>>>> v3.18
 =======
 	VPERM(vr8,vr0,vr1,vr16)
 err3;	lvx	vr0,r4,r9
@@ -637,6 +689,7 @@ err3;	stvx	vr9,r3,r9
 6:	bf	cr7*4+1,7f
 err3;	lvx	vr3,r0,r4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr3,vr16
 err3;	lvx	vr2,r4,r9
 	vperm	vr9,vr3,vr2,vr16
@@ -645,6 +698,8 @@ err3;	lvx	vr1,r4,r10
 err3;	lvx	vr0,r4,r11
 	vperm	vr11,vr1,vr0,vr16
 =======
+=======
+>>>>>>> v3.18
 	VPERM(vr8,vr0,vr3,vr16)
 err3;	lvx	vr2,r4,r9
 	VPERM(vr9,vr3,vr2,vr16)
@@ -652,6 +707,9 @@ err3;	lvx	vr1,r4,r10
 	VPERM(vr10,vr2,vr1,vr16)
 err3;	lvx	vr0,r4,r11
 	VPERM(vr11,vr1,vr0,vr16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	addi	r4,r4,64
 err3;	stvx	vr8,r0,r3
@@ -682,6 +740,7 @@ err3;	stvx	vr11,r3,r11
 8:
 err4;	lvx	vr7,r0,r4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr7,vr16
 err4;	lvx	vr6,r4,r9
 	vperm	vr9,vr7,vr6,vr16
@@ -698,6 +757,8 @@ err4;	lvx	vr1,r4,r15
 err4;	lvx	vr0,r4,r16
 	vperm	vr15,vr1,vr0,vr16
 =======
+=======
+>>>>>>> v3.18
 	VPERM(vr8,vr0,vr7,vr16)
 err4;	lvx	vr6,r4,r9
 	VPERM(vr9,vr7,vr6,vr16)
@@ -713,6 +774,9 @@ err4;	lvx	vr1,r4,r15
 	VPERM(vr14,vr2,vr1,vr16)
 err4;	lvx	vr0,r4,r16
 	VPERM(vr15,vr1,vr0,vr16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	addi	r4,r4,128
 err4;	stvx	vr8,r0,r3
@@ -738,6 +802,7 @@ err4;	stvx	vr15,r3,r16
 	bf	cr7*4+1,9f
 err3;	lvx	vr3,r0,r4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr3,vr16
 err3;	lvx	vr2,r4,r9
 	vperm	vr9,vr3,vr2,vr16
@@ -746,6 +811,8 @@ err3;	lvx	vr1,r4,r10
 err3;	lvx	vr0,r4,r11
 	vperm	vr11,vr1,vr0,vr16
 =======
+=======
+>>>>>>> v3.18
 	VPERM(vr8,vr0,vr3,vr16)
 err3;	lvx	vr2,r4,r9
 	VPERM(vr9,vr3,vr2,vr16)
@@ -753,6 +820,9 @@ err3;	lvx	vr1,r4,r10
 	VPERM(vr10,vr2,vr1,vr16)
 err3;	lvx	vr0,r4,r11
 	VPERM(vr11,vr1,vr0,vr16)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	addi	r4,r4,64
 err3;	stvx	vr8,r0,r3
@@ -764,9 +834,15 @@ err3;	stvx	vr11,r3,r11
 9:	bf	cr7*4+2,10f
 err3;	lvx	vr1,r0,r4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr1,vr16
 err3;	lvx	vr0,r4,r9
 	vperm	vr9,vr1,vr0,vr16
+=======
+	VPERM(vr8,vr0,vr1,vr16)
+err3;	lvx	vr0,r4,r9
+	VPERM(vr9,vr1,vr0,vr16)
+>>>>>>> v3.18
 =======
 	VPERM(vr8,vr0,vr1,vr16)
 err3;	lvx	vr0,r4,r9
@@ -780,7 +856,11 @@ err3;	stvx	vr9,r3,r9
 10:	bf	cr7*4+3,11f
 err3;	lvx	vr1,r0,r4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vperm	vr8,vr0,vr1,vr16
+=======
+	VPERM(vr8,vr0,vr1,vr16)
+>>>>>>> v3.18
 =======
 	VPERM(vr8,vr0,vr1,vr16)
 >>>>>>> v3.18
@@ -818,7 +898,11 @@ err3;	stb	r0,0(r3)
 
 15:	addi	r1,r1,STACKFRAMESIZE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.exit_vmx_usercopy	/* tail call optimise */
+=======
+	b	exit_vmx_usercopy	/* tail call optimise */
+>>>>>>> v3.18
 =======
 	b	exit_vmx_usercopy	/* tail call optimise */
 >>>>>>> v3.18

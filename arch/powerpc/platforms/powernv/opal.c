@@ -14,6 +14,7 @@
 #include <linux/types.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_platform.h>
 #include <linux/interrupt.h>
 #include <linux/slab.h>
@@ -29,6 +30,8 @@ struct opal {
 
 static struct device_node *opal_node;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_fdt.h>
 #include <linux/of_platform.h>
 #include <linux/interrupt.h>
@@ -65,13 +68,19 @@ static struct mcheck_recoverable_range *mc_recoverable_range;
 static int mc_recoverable_range_len;
 
 struct device_node *opal_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEFINE_SPINLOCK(opal_write_lock);
 extern u64 opal_mc_secondary_handler[];
 static unsigned int *opal_irqs;
 static unsigned int opal_irq_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ATOMIC_NOTIFIER_HEAD(opal_notifier_head);
 static struct atomic_notifier_head opal_msg_notifier_head[OPAL_MSG_TYPE_MAX];
 static DEFINE_SPINLOCK(opal_notifier_lock);
@@ -92,14 +101,22 @@ static void opal_reinit_cores(void)
 	opal_reinit_cpus(OPAL_REINIT_CPUS_HILE_LE);
 #endif
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int __init early_init_dt_scan_opal(unsigned long node,
 				   const char *uname, int depth, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const void *basep, *entryp;
 	unsigned long basesz, entrysz;
+=======
+	const void *basep, *entryp, *sizep;
+	int basesz, entrysz, runtimesz;
+>>>>>>> v3.18
 =======
 	const void *basep, *entryp, *sizep;
 	int basesz, entrysz, runtimesz;
@@ -111,8 +128,14 @@ int __init early_init_dt_scan_opal(unsigned long node,
 	basep  = of_get_flat_dt_prop(node, "opal-base-address", &basesz);
 	entryp = of_get_flat_dt_prop(node, "opal-entry-address", &entrysz);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!basep || !entryp)
+=======
+	sizep = of_get_flat_dt_prop(node, "opal-runtime-size", &runtimesz);
+
+	if (!basep || !entryp || !sizep)
+>>>>>>> v3.18
 =======
 	sizep = of_get_flat_dt_prop(node, "opal-runtime-size", &runtimesz);
 
@@ -123,6 +146,10 @@ int __init early_init_dt_scan_opal(unsigned long node,
 	opal.base = of_read_number(basep, basesz/4);
 	opal.entry = of_read_number(entryp, entrysz/4);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	opal.size = of_read_number(sizep, runtimesz/4);
+>>>>>>> v3.18
 =======
 	opal.size = of_read_number(sizep, runtimesz/4);
 >>>>>>> v3.18
@@ -132,6 +159,11 @@ int __init early_init_dt_scan_opal(unsigned long node,
 	pr_debug("OPAL Entry = 0x%llx (entryp=%p basesz=%d)\n",
 		 opal.entry, entryp, entrysz);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pr_debug("OPAL Entry = 0x%llx (sizep=%p runtimesz=%d)\n",
+		 opal.size, sizep, runtimesz);
+>>>>>>> v3.18
 =======
 	pr_debug("OPAL Entry = 0x%llx (sizep=%p runtimesz=%d)\n",
 		 opal.size, sizep, runtimesz);
@@ -142,6 +174,7 @@ int __init early_init_dt_scan_opal(unsigned long node,
 		powerpc_firmware_features |= FW_FEATURE_OPALv2;
 		powerpc_firmware_features |= FW_FEATURE_OPALv3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("OPAL V3 detected !\n");
 	} else if (of_flat_dt_is_compatible(node, "ibm,opal-v2")) {
 		powerpc_firmware_features |= FW_FEATURE_OPALv2;
@@ -151,6 +184,8 @@ int __init early_init_dt_scan_opal(unsigned long node,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		pr_info("OPAL V3 detected !\n");
 	} else if (of_flat_dt_is_compatible(node, "ibm,opal-v2")) {
 		powerpc_firmware_features |= FW_FEATURE_OPALv2;
@@ -225,6 +260,9 @@ int __init early_init_dt_scan_recoverable_ranges(unsigned long node,
 				mc_recoverable_range[i].end_addr,
 				mc_recoverable_range[i].recover_addr);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 1;
 }
@@ -232,6 +270,10 @@ int __init early_init_dt_scan_recoverable_ranges(unsigned long node,
 static int __init opal_register_exception_handlers(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef __BIG_ENDIAN__
+>>>>>>> v3.18
 =======
 #ifdef __BIG_ENDIAN__
 >>>>>>> v3.18
@@ -240,6 +282,7 @@ static int __init opal_register_exception_handlers(void)
 	if (!(powerpc_firmware_features & FW_FEATURE_OPAL))
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Hookup some exception handlers. We use the fwnmi area at 0x7000
 	 * to provide the glue space to OPAL
@@ -264,6 +307,8 @@ int opal_get_chars(uint32_t vtermno, char *buf, int count)
 	s64 len, rc;
 	u64 evt;
 =======
+=======
+>>>>>>> v3.18
 	/* Hookup some exception handlers except machine check. We use the
 	 * fwnmi area at 0x7000 to provide the glue space to OPAL
 	 */
@@ -467,11 +512,15 @@ int opal_get_chars(uint32_t vtermno, char *buf, int count)
 {
 	s64 rc;
 	__be64 evt, len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!opal.entry)
 		return -ENODEV;
 	opal_poll_events(&evt);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((evt & OPAL_EVENT_CONSOLE_INPUT) == 0)
 		return 0;
@@ -480,12 +529,17 @@ int opal_get_chars(uint32_t vtermno, char *buf, int count)
 	if (rc == OPAL_SUCCESS)
 		return len;
 =======
+=======
+>>>>>>> v3.18
 	if ((be64_to_cpu(evt) & OPAL_EVENT_CONSOLE_INPUT) == 0)
 		return 0;
 	len = cpu_to_be64(count);
 	rc = opal_console_read(vtermno, &len, buf);
 	if (rc == OPAL_SUCCESS)
 		return be64_to_cpu(len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -494,14 +548,20 @@ int opal_put_chars(uint32_t vtermno, const char *data, int total_len)
 {
 	int written = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s64 len, rc;
 	unsigned long flags;
 	u64 evt;
 =======
+=======
+>>>>>>> v3.18
 	__be64 olen;
 	s64 len, rc;
 	unsigned long flags;
 	__be64 evt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!opal.entry)
@@ -518,7 +578,12 @@ int opal_put_chars(uint32_t vtermno, const char *data, int total_len)
 	spin_lock_irqsave(&opal_write_lock, flags);
 	if (firmware_has_feature(FW_FEATURE_OPALv2)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = opal_console_write_buffer_space(vtermno, &len);
+=======
+		rc = opal_console_write_buffer_space(vtermno, &olen);
+		len = be64_to_cpu(olen);
+>>>>>>> v3.18
 =======
 		rc = opal_console_write_buffer_space(vtermno, &olen);
 		len = be64_to_cpu(olen);
@@ -529,7 +594,11 @@ int opal_put_chars(uint32_t vtermno, const char *data, int total_len)
 			if (rc)
 				return total_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			opal_poll_events(&evt);
+=======
+			opal_poll_events(NULL);
+>>>>>>> v3.18
 =======
 			opal_poll_events(NULL);
 >>>>>>> v3.18
@@ -544,8 +613,14 @@ int opal_put_chars(uint32_t vtermno, const char *data, int total_len)
 	while(total_len > 0 && (rc == OPAL_BUSY ||
 				rc == OPAL_BUSY_EVENT || rc == OPAL_SUCCESS)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len = total_len;
 		rc = opal_console_write(vtermno, &len, data);
+=======
+		olen = cpu_to_be64(total_len);
+		rc = opal_console_write(vtermno, &olen, data);
+		len = be64_to_cpu(olen);
+>>>>>>> v3.18
 =======
 		olen = cpu_to_be64(total_len);
 		rc = opal_console_write(vtermno, &olen, data);
@@ -571,7 +646,12 @@ int opal_put_chars(uint32_t vtermno, const char *data, int total_len)
 		do
 			opal_poll_events(&evt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while(rc == OPAL_SUCCESS && (evt & OPAL_EVENT_CONSOLE_OUTPUT));
+=======
+		while(rc == OPAL_SUCCESS &&
+			(be64_to_cpu(evt) & OPAL_EVENT_CONSOLE_OUTPUT));
+>>>>>>> v3.18
 =======
 		while(rc == OPAL_SUCCESS &&
 			(be64_to_cpu(evt) & OPAL_EVENT_CONSOLE_OUTPUT));
@@ -581,6 +661,7 @@ int opal_put_chars(uint32_t vtermno, const char *data, int total_len)
 	return written;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int opal_machine_check(struct pt_regs *regs)
 {
@@ -617,6 +698,8 @@ int opal_machine_check(struct pt_regs *regs)
 	/* Print things out */
 	if (evt.version != OpalMCE_V1) {
 =======
+=======
+>>>>>>> v3.18
 static int opal_recover_mce(struct pt_regs *regs,
 					struct machine_check_event *evt)
 {
@@ -664,11 +747,15 @@ int opal_machine_check(struct pt_regs *regs)
 
 	/* Print things out */
 	if (evt.version != MCE_V1) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_err("Machine Check Exception, Unknown event version %d !\n",
 		       evt.version);
 		return 0;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch(evt.severity) {
 	case OpalMCE_SEV_NO_ERROR:
@@ -746,6 +833,8 @@ int opal_machine_check(struct pt_regs *regs)
 	}
 	return evt.severity == OpalMCE_SEV_FATAL ? 0 : 1;
 =======
+=======
+>>>>>>> v3.18
 	machine_check_print_event_info(&evt);
 
 	if (opal_recover_mce(regs, &evt))
@@ -823,11 +912,15 @@ bool opal_mce_check_early_recovery(struct pt_regs *regs)
 
 out:
 	return !!recover_addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static irqreturn_t opal_interrupt(int irq, void *data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	uint64_t events;
 
@@ -835,22 +928,30 @@ static irqreturn_t opal_interrupt(int irq, void *data)
 
 	/* XXX TODO: Do something with the events */
 =======
+=======
+>>>>>>> v3.18
 	__be64 events;
 
 	opal_handle_interrupt(virq_to_hw(irq), &events);
 
 	opal_do_notifier(be64_to_cpu(events));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return IRQ_HANDLED;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init opal_init(void)
 {
 	struct device_node *np, *consoles;
 	const u32 *irqs;
 =======
+=======
+>>>>>>> v3.18
 static int opal_sysfs_init(void)
 {
 	opal_kobj = kobject_create_and_add("opal", firmware_kobj);
@@ -884,6 +985,9 @@ static int __init opal_init(void)
 {
 	struct device_node *np, *consoles;
 	const __be32 *irqs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rc, i, irqlen;
 
@@ -893,6 +997,11 @@ static int __init opal_init(void)
 		return -ENODEV;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* Register OPAL consoles if any ports */
+>>>>>>> v3.18
 =======
 
 	/* Register OPAL consoles if any ports */
@@ -901,6 +1010,7 @@ static int __init opal_init(void)
 		consoles = of_find_node_by_path("/ibm,opal/consoles");
 	else
 		consoles = of_node_get(opal_node);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* Register serial ports */
@@ -911,6 +1021,8 @@ static int __init opal_init(void)
 	}
 	of_node_put(consoles);
 =======
+=======
+>>>>>>> v3.18
 	if (consoles) {
 		for_each_child_of_node(consoles, np) {
 			if (strcmp(np->name, "serial"))
@@ -919,6 +1031,9 @@ static int __init opal_init(void)
 		}
 		of_node_put(consoles);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Find all OPAL interrupts and request them */
@@ -941,10 +1056,13 @@ static int __init opal_init(void)
 		opal_irqs[i] = irq;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 subsys_initcall(opal_init);
 =======
+=======
+>>>>>>> v3.18
 
 	/* Create "opal" kobject under /sys/firmware */
 	rc = opal_sysfs_init();
@@ -966,11 +1084,15 @@ subsys_initcall(opal_init);
 	return 0;
 }
 machine_subsys_initcall(powernv, opal_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void opal_shutdown(void)
 {
 	unsigned int i;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	for (i = 0; i < opal_irq_count; i++) {
@@ -979,6 +1101,8 @@ void opal_shutdown(void)
 		opal_irqs[i] = 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	long rc = OPAL_BUSY;
 
 	/* First free interrupts, which will also mask them */
@@ -1069,5 +1193,8 @@ void opal_free_sg_list(struct opal_sg_list *sg)
 		else
 			sg = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

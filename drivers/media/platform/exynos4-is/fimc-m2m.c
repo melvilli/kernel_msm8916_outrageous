@@ -28,6 +28,10 @@
 #include <media/videobuf2-dma-contig.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "common.h"
+>>>>>>> v3.18
 =======
 #include "common.h"
 >>>>>>> v3.18
@@ -48,17 +52,23 @@ void fimc_m2m_job_finish(struct fimc_ctx *ctx, int vb_state)
 	struct vb2_buffer *src_vb, *dst_vb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ctx || !ctx->m2m_ctx)
 		return;
 
 	src_vb = v4l2_m2m_src_buf_remove(ctx->m2m_ctx);
 	dst_vb = v4l2_m2m_dst_buf_remove(ctx->m2m_ctx);
 =======
+=======
+>>>>>>> v3.18
 	if (!ctx || !ctx->fh.m2m_ctx)
 		return;
 
 	src_vb = v4l2_m2m_src_buf_remove(ctx->fh.m2m_ctx);
 	dst_vb = v4l2_m2m_dst_buf_remove(ctx->fh.m2m_ctx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (src_vb && dst_vb) {
@@ -66,7 +76,11 @@ void fimc_m2m_job_finish(struct fimc_ctx *ctx, int vb_state)
 		v4l2_m2m_buf_done(dst_vb, vb_state);
 		v4l2_m2m_job_finish(ctx->fimc_dev->m2m.m2m_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    ctx->m2m_ctx);
+=======
+				    ctx->fh.m2m_ctx);
+>>>>>>> v3.18
 =======
 				    ctx->fh.m2m_ctx);
 >>>>>>> v3.18
@@ -101,7 +115,11 @@ static int start_streaming(struct vb2_queue *q, unsigned int count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int stop_streaming(struct vb2_queue *q)
+=======
+static void stop_streaming(struct vb2_queue *q)
+>>>>>>> v3.18
 =======
 static void stop_streaming(struct vb2_queue *q)
 >>>>>>> v3.18
@@ -115,7 +133,10 @@ static void stop_streaming(struct vb2_queue *q)
 
 	pm_runtime_put(&ctx->fimc_dev->pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -146,7 +167,11 @@ static void fimc_device_run(void *priv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	src_vb = v4l2_m2m_next_src_buf(ctx->m2m_ctx);
+=======
+	src_vb = v4l2_m2m_next_src_buf(ctx->fh.m2m_ctx);
+>>>>>>> v3.18
 =======
 	src_vb = v4l2_m2m_next_src_buf(ctx->fh.m2m_ctx);
 >>>>>>> v3.18
@@ -155,7 +180,11 @@ static void fimc_device_run(void *priv)
 		goto dma_unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dst_vb = v4l2_m2m_next_dst_buf(ctx->m2m_ctx);
+=======
+	dst_vb = v4l2_m2m_next_dst_buf(ctx->fh.m2m_ctx);
+>>>>>>> v3.18
 =======
 	dst_vb = v4l2_m2m_next_dst_buf(ctx->fh.m2m_ctx);
 >>>>>>> v3.18
@@ -165,6 +194,12 @@ static void fimc_device_run(void *priv)
 
 	dst_vb->v4l2_buf.timestamp = src_vb->v4l2_buf.timestamp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dst_vb->v4l2_buf.flags &= ~V4L2_BUF_FLAG_TSTAMP_SRC_MASK;
+	dst_vb->v4l2_buf.flags |=
+		src_vb->v4l2_buf.flags & V4L2_BUF_FLAG_TSTAMP_SRC_MASK;
+>>>>>>> v3.18
 =======
 	dst_vb->v4l2_buf.flags &= ~V4L2_BUF_FLAG_TSTAMP_SRC_MASK;
 	dst_vb->v4l2_buf.flags |=
@@ -231,7 +266,11 @@ static int fimc_queue_setup(struct vb2_queue *vq, const struct v4l2_format *fmt,
 	*num_planes = f->fmt->memplanes;
 	for (i = 0; i < f->fmt->memplanes; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sizes[i] = (f->f_width * f->f_height * f->fmt->depth[i]) / 8;
+=======
+		sizes[i] = f->payload[i];
+>>>>>>> v3.18
 =======
 		sizes[i] = f->payload[i];
 >>>>>>> v3.18
@@ -260,6 +299,7 @@ static void fimc_buf_queue(struct vb2_buffer *vb)
 {
 	struct fimc_ctx *ctx = vb2_get_drv_priv(vb->vb2_queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dbg("ctx: %p, ctx->state: 0x%x", ctx, ctx->state);
 
@@ -280,6 +320,9 @@ static void fimc_unlock(struct vb2_queue *vq)
 =======
 	v4l2_m2m_buf_queue(ctx->fh.m2m_ctx, vb);
 >>>>>>> v3.18
+=======
+	v4l2_m2m_buf_queue(ctx->fh.m2m_ctx, vb);
+>>>>>>> v3.18
 }
 
 static struct vb2_ops fimc_qops = {
@@ -287,8 +330,13 @@ static struct vb2_ops fimc_qops = {
 	.buf_prepare	 = fimc_buf_prepare,
 	.buf_queue	 = fimc_buf_queue,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.wait_prepare	 = fimc_unlock,
 	.wait_finish	 = fimc_lock,
+=======
+	.wait_prepare	 = vb2_ops_wait_prepare,
+	.wait_finish	 = vb2_ops_wait_finish,
+>>>>>>> v3.18
 =======
 	.wait_prepare	 = vb2_ops_wait_prepare,
 	.wait_finish	 = vb2_ops_wait_finish,
@@ -405,7 +453,11 @@ static void __set_frame_format(struct fimc_frame *frame, struct fimc_fmt *fmt,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < fmt->colplanes; i++) {
+=======
+	for (i = 0; i < fmt->memplanes; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < fmt->memplanes; i++) {
 >>>>>>> v3.18
@@ -439,7 +491,11 @@ static int fimc_m2m_s_fmt_mplane(struct file *file, void *fh,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vq = v4l2_m2m_get_vq(ctx->m2m_ctx, f->type);
+=======
+	vq = v4l2_m2m_get_vq(ctx->fh.m2m_ctx, f->type);
+>>>>>>> v3.18
 =======
 	vq = v4l2_m2m_get_vq(ctx->fh.m2m_ctx, f->type);
 >>>>>>> v3.18
@@ -467,6 +523,7 @@ static int fimc_m2m_s_fmt_mplane(struct file *file, void *fh,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int fimc_m2m_reqbufs(struct file *file, void *fh,
 			    struct v4l2_requestbuffers *reqbufs)
@@ -518,6 +575,8 @@ static int fimc_m2m_streamoff(struct file *file, void *fh,
 	return v4l2_m2m_streamoff(file, ctx->m2m_ctx, type);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int fimc_m2m_cropcap(struct file *file, void *fh,
@@ -585,7 +644,11 @@ static int fimc_m2m_try_crop(struct fimc_ctx *ctx, struct v4l2_crop *cr)
 		halign = ffs(fimc->variant->min_vsize_align) - 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < f->fmt->colplanes; i++)
+=======
+	for (i = 0; i < f->fmt->memplanes; i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < f->fmt->memplanes; i++)
 >>>>>>> v3.18
@@ -663,6 +726,7 @@ static const struct v4l2_ioctl_ops fimc_m2m_ioctl_ops = {
 	.vidioc_s_fmt_vid_cap_mplane	= fimc_m2m_s_fmt_mplane,
 	.vidioc_s_fmt_vid_out_mplane	= fimc_m2m_s_fmt_mplane,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_reqbufs			= fimc_m2m_reqbufs,
 	.vidioc_querybuf		= fimc_m2m_querybuf,
 	.vidioc_qbuf			= fimc_m2m_qbuf,
@@ -671,6 +735,8 @@ static const struct v4l2_ioctl_ops fimc_m2m_ioctl_ops = {
 	.vidioc_streamon		= fimc_m2m_streamon,
 	.vidioc_streamoff		= fimc_m2m_streamoff,
 =======
+=======
+>>>>>>> v3.18
 	.vidioc_reqbufs			= v4l2_m2m_ioctl_reqbufs,
 	.vidioc_querybuf		= v4l2_m2m_ioctl_querybuf,
 	.vidioc_qbuf			= v4l2_m2m_ioctl_qbuf,
@@ -678,6 +744,9 @@ static const struct v4l2_ioctl_ops fimc_m2m_ioctl_ops = {
 	.vidioc_expbuf			= v4l2_m2m_ioctl_expbuf,
 	.vidioc_streamon		= v4l2_m2m_ioctl_streamon,
 	.vidioc_streamoff		= v4l2_m2m_ioctl_streamoff,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.vidioc_g_crop			= fimc_m2m_g_crop,
 	.vidioc_s_crop			= fimc_m2m_s_crop,
@@ -698,7 +767,12 @@ static int queue_init(void *priv, struct vb2_queue *src_vq,
 	src_vq->mem_ops = &vb2_dma_contig_memops;
 	src_vq->buf_struct_size = sizeof(struct v4l2_m2m_buffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	src_vq->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+=======
+	src_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+	src_vq->lock = &ctx->fimc_dev->lock;
+>>>>>>> v3.18
 =======
 	src_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
 	src_vq->lock = &ctx->fimc_dev->lock;
@@ -715,7 +789,12 @@ static int queue_init(void *priv, struct vb2_queue *src_vq,
 	dst_vq->mem_ops = &vb2_dma_contig_memops;
 	dst_vq->buf_struct_size = sizeof(struct v4l2_m2m_buffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dst_vq->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+=======
+	dst_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+	dst_vq->lock = &ctx->fimc_dev->lock;
+>>>>>>> v3.18
 =======
 	dst_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
 	dst_vq->lock = &ctx->fimc_dev->lock;
@@ -793,9 +872,15 @@ static int fimc_m2m_open(struct file *file)
 	ctx->scaler.enabled = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctx->m2m_ctx = v4l2_m2m_ctx_init(fimc->m2m.m2m_dev, ctx, queue_init);
 	if (IS_ERR(ctx->m2m_ctx)) {
 		ret = PTR_ERR(ctx->m2m_ctx);
+=======
+	ctx->fh.m2m_ctx = v4l2_m2m_ctx_init(fimc->m2m.m2m_dev, ctx, queue_init);
+	if (IS_ERR(ctx->fh.m2m_ctx)) {
+		ret = PTR_ERR(ctx->fh.m2m_ctx);
+>>>>>>> v3.18
 =======
 	ctx->fh.m2m_ctx = v4l2_m2m_ctx_init(fimc->m2m.m2m_dev, ctx, queue_init);
 	if (IS_ERR(ctx->fh.m2m_ctx)) {
@@ -816,7 +901,11 @@ static int fimc_m2m_open(struct file *file)
 
 error_m2m_ctx:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_m2m_ctx_release(ctx->m2m_ctx);
+=======
+	v4l2_m2m_ctx_release(ctx->fh.m2m_ctx);
+>>>>>>> v3.18
 =======
 	v4l2_m2m_ctx_release(ctx->fh.m2m_ctx);
 >>>>>>> v3.18
@@ -842,7 +931,11 @@ static int fimc_m2m_release(struct file *file)
 	mutex_lock(&fimc->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_m2m_ctx_release(ctx->m2m_ctx);
+=======
+	v4l2_m2m_ctx_release(ctx->fh.m2m_ctx);
+>>>>>>> v3.18
 =======
 	v4l2_m2m_ctx_release(ctx->fh.m2m_ctx);
 >>>>>>> v3.18
@@ -858,6 +951,7 @@ static int fimc_m2m_release(struct file *file)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned int fimc_m2m_poll(struct file *file,
 				  struct poll_table_struct *wait)
@@ -893,14 +987,22 @@ static int fimc_m2m_mmap(struct file *file, struct vm_area_struct *vma)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct v4l2_file_operations fimc_m2m_fops = {
 	.owner		= THIS_MODULE,
 	.open		= fimc_m2m_open,
 	.release	= fimc_m2m_release,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.poll		= fimc_m2m_poll,
 	.unlocked_ioctl	= video_ioctl2,
 	.mmap		= fimc_m2m_mmap,
+=======
+	.poll		= v4l2_m2m_fop_poll,
+	.unlocked_ioctl	= video_ioctl2,
+	.mmap		= v4l2_m2m_fop_mmap,
+>>>>>>> v3.18
 =======
 	.poll		= v4l2_m2m_fop_poll,
 	.unlocked_ioctl	= video_ioctl2,

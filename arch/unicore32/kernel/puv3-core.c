@@ -273,7 +273,11 @@ void __init puv3_core_init(void)
 			puv3_uart1_resources, ARRAY_SIZE(puv3_uart1_resources));
 	platform_device_register_simple("PKUnity-v3-AC97", -1, NULL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_register_resndata(&platform_bus, "musb_hdrc", -1,
+=======
+	platform_device_register_resndata(NULL, "musb_hdrc", -1,
+>>>>>>> v3.18
 =======
 	platform_device_register_resndata(NULL, "musb_hdrc", -1,
 >>>>>>> v3.18

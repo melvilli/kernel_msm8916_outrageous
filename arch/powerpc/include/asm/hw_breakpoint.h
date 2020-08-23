@@ -80,7 +80,11 @@ static inline void hw_breakpoint_disable(void)
 	brk.type = 0;
 	brk.len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_breakpoint(&brk);
+=======
+	__set_breakpoint(&brk);
+>>>>>>> v3.18
 =======
 	__set_breakpoint(&brk);
 >>>>>>> v3.18

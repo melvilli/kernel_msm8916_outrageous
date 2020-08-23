@@ -15,8 +15,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -79,7 +83,10 @@
 #define MII_SR_100T4_CAPS        0x8000	/* 100T4 Capable */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* AR8031 PHY Debug Registers */
 #define PHY_AR803X_ID           0x00001374
 #define PHY_AR8031_DBG_OFF      0x1D
@@ -89,6 +96,9 @@
 #define PHY_AR8031_SERDES_TX_CLK_DLY   0x0100 /* TX clock delay of 2.0ns */
 #define PHY_AR8031_PS_HIB_EN           0x8000 /* Hibernate enable */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Phy Id Register (word 2) */
 #define PHY_REVISION_MASK        0x000F
@@ -114,6 +124,10 @@
 s32 pch_gbe_phy_get_id(struct pch_gbe_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct pch_gbe_adapter *adapter = pch_gbe_hw_to_adapter(hw);
+>>>>>>> v3.18
 =======
 	struct pch_gbe_adapter *adapter = pch_gbe_hw_to_adapter(hw);
 >>>>>>> v3.18
@@ -136,8 +150,14 @@ s32 pch_gbe_phy_get_id(struct pch_gbe_hw *hw)
 	phy->id = ((phy->id << 6) | ((phy_id2 & 0xFC00) >> 10));
 	phy->revision = (u32) (phy_id2 & 0x000F);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("phy->id : 0x%08x  phy->revision : 0x%08x\n",
 		 phy->id, phy->revision);
+=======
+	netdev_dbg(adapter->netdev,
+		   "phy->id : 0x%08x  phy->revision : 0x%08x\n",
+		   phy->id, phy->revision);
+>>>>>>> v3.18
 =======
 	netdev_dbg(adapter->netdev,
 		   "phy->id : 0x%08x  phy->revision : 0x%08x\n",
@@ -161,12 +181,18 @@ s32 pch_gbe_phy_read_reg_miic(struct pch_gbe_hw *hw, u32 offset, u16 *data)
 
 	if (offset > PHY_MAX_REG_ADDRESS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("PHY Address %d is out of range\n", offset);
 =======
+=======
+>>>>>>> v3.18
 		struct pch_gbe_adapter *adapter = pch_gbe_hw_to_adapter(hw);
 
 		netdev_err(adapter->netdev, "PHY Address %d is out of range\n",
 			   offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -190,12 +216,18 @@ s32 pch_gbe_phy_write_reg_miic(struct pch_gbe_hw *hw, u32 offset, u16 data)
 
 	if (offset > PHY_MAX_REG_ADDRESS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("PHY Address %d is out of range\n", offset);
 =======
+=======
+>>>>>>> v3.18
 		struct pch_gbe_adapter *adapter = pch_gbe_hw_to_adapter(hw);
 
 		netdev_err(adapter->netdev, "PHY Address %d is out of range\n",
 			   offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -276,7 +308,11 @@ void pch_gbe_phy_power_down(struct pch_gbe_hw *hw)
  * @hw:	            Pointer to the HW structure
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline void pch_gbe_phy_set_rgmii(struct pch_gbe_hw *hw)
+=======
+void pch_gbe_phy_set_rgmii(struct pch_gbe_hw *hw)
+>>>>>>> v3.18
 =======
 void pch_gbe_phy_set_rgmii(struct pch_gbe_hw *hw)
 >>>>>>> v3.18
@@ -286,7 +322,10 @@ void pch_gbe_phy_set_rgmii(struct pch_gbe_hw *hw)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * pch_gbe_phy_tx_clk_delay - Setup TX clock delay via the PHY
  * @hw:	            Pointer to the HW structure
  * Returns
@@ -332,6 +371,9 @@ static int pch_gbe_phy_tx_clk_delay(struct pch_gbe_hw *hw)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * pch_gbe_phy_init_setting - PHY initial setting
  * @hw:	            Pointer to the HW structure
@@ -339,7 +381,11 @@ static int pch_gbe_phy_tx_clk_delay(struct pch_gbe_hw *hw)
 void pch_gbe_phy_init_setting(struct pch_gbe_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pch_gbe_adapter *adapter;
+=======
+	struct pch_gbe_adapter *adapter = pch_gbe_hw_to_adapter(hw);
+>>>>>>> v3.18
 =======
 	struct pch_gbe_adapter *adapter = pch_gbe_hw_to_adapter(hw);
 >>>>>>> v3.18
@@ -348,10 +394,16 @@ void pch_gbe_phy_init_setting(struct pch_gbe_hw *hw)
 	u16 mii_reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter = container_of(hw, struct pch_gbe_adapter, hw);
 	ret = mii_ethtool_gset(&adapter->mii, &cmd);
 	if (ret)
 		pr_err("Error: mii_ethtool_gset\n");
+=======
+	ret = mii_ethtool_gset(&adapter->mii, &cmd);
+	if (ret)
+		netdev_err(adapter->netdev, "Error: mii_ethtool_gset\n");
+>>>>>>> v3.18
 =======
 	ret = mii_ethtool_gset(&adapter->mii, &cmd);
 	if (ret)
@@ -366,7 +418,11 @@ void pch_gbe_phy_init_setting(struct pch_gbe_hw *hw)
 	ret = mii_ethtool_sset(&adapter->mii, &cmd);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Error: mii_ethtool_sset\n");
+=======
+		netdev_err(adapter->netdev, "Error: mii_ethtool_sset\n");
+>>>>>>> v3.18
 =======
 		netdev_err(adapter->netdev, "Error: mii_ethtool_sset\n");
 >>>>>>> v3.18
@@ -378,7 +434,10 @@ void pch_gbe_phy_init_setting(struct pch_gbe_hw *hw)
 	pch_gbe_phy_write_reg_miic(hw, PHY_PHYSP_CONTROL, mii_reg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Setup a TX clock delay on certain platforms */
 	if (adapter->pdata && adapter->pdata->phy_tx_clk_delay)
 		pch_gbe_phy_tx_clk_delay(hw);
@@ -422,5 +481,8 @@ int pch_gbe_phy_disable_hibernate(struct pch_gbe_hw *hw)
 		netdev_err(adapter->netdev,
 			   "Could not disable PHY hibernation\n");
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

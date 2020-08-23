@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 *   of_xilinx_wdt.c  1.01  A Watchdog Device Driver for Xilinx xps_timebase_wdt
 *
 *   (C) Copyright 2011 (Alejandro Cabrera <aldaya@gmail.com>)
@@ -33,6 +34,8 @@
 #include <linux/io.h>
 #include <linux/uaccess.h>
 =======
+=======
+>>>>>>> v3.18
  * Watchdog Device Driver for Xilinx axi/xps_timebase_wdt
  *
  * (C) Copyright 2013 - 2014 Xilinx, Inc.
@@ -51,6 +54,9 @@
 #include <linux/ioport.h>
 #include <linux/watchdog.h>
 #include <linux/io.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_device.h>
@@ -74,6 +80,7 @@
 #define XWT_TIMER_FAILED            0xFFFFFFFF
 
 #define WATCHDOG_NAME     "Xilinx Watchdog"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define PFX WATCHDOG_NAME ": "
 
@@ -155,6 +162,8 @@ static void xwdt_get_status(int *status)
 
 static u32 xwdt_selftest(void)
 =======
+=======
+>>>>>>> v3.18
 
 struct xwdt_device {
 	void __iomem *base;
@@ -235,6 +244,9 @@ static const struct watchdog_ops xilinx_wdt_ops = {
 };
 
 static u32 xwdt_selftest(struct xwdt_device *xdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int i;
@@ -242,30 +254,42 @@ static u32 xwdt_selftest(struct xwdt_device *xdev)
 	u32 timer_value2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&spinlock);
 
 	timer_value1 = ioread32(xdev.base + XWT_TBR_OFFSET);
 	timer_value2 = ioread32(xdev.base + XWT_TBR_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&xdev->spinlock);
 
 	timer_value1 = ioread32(xdev->base + XWT_TBR_OFFSET);
 	timer_value2 = ioread32(xdev->base + XWT_TBR_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0;
 		((i <= XWT_MAX_SELFTEST_LOOP_COUNT) &&
 			(timer_value2 == timer_value1)); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		timer_value2 = ioread32(xdev.base + XWT_TBR_OFFSET);
 	}
 
 	spin_unlock(&spinlock);
 =======
+=======
+>>>>>>> v3.18
 		timer_value2 = ioread32(xdev->base + XWT_TBR_OFFSET);
 	}
 
 	spin_unlock(&xdev->spinlock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (timer_value2 != timer_value1)
@@ -274,6 +298,7 @@ static u32 xwdt_selftest(struct xwdt_device *xdev)
 		return XWT_TIMER_FAILED;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int xwdt_open(struct inode *inode, struct file *file)
 {
@@ -508,6 +533,8 @@ static int xwdt_remove(struct platform_device *dev)
 	iounmap(xdev.base);
 	release_mem_region(xdev.res.start, resource_size(&xdev.res));
 =======
+=======
+>>>>>>> v3.18
 static int xwdt_probe(struct platform_device *pdev)
 {
 	int rc;
@@ -585,6 +612,9 @@ static int xwdt_remove(struct platform_device *pdev)
 	struct xwdt_device *xdev = platform_get_drvdata(pdev);
 
 	watchdog_unregister_device(&xdev->xilinx_wdt_wdd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -592,7 +622,12 @@ static int xwdt_remove(struct platform_device *pdev)
 
 /* Match table for of_platform binding */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id xwdt_of_match[] = {
+=======
+static const struct of_device_id xwdt_of_match[] = {
+	{ .compatible = "xlnx,xps-timebase-wdt-1.00.a", },
+>>>>>>> v3.18
 =======
 static const struct of_device_id xwdt_of_match[] = {
 	{ .compatible = "xlnx,xps-timebase-wdt-1.00.a", },
@@ -607,7 +642,10 @@ static struct platform_driver xwdt_driver = {
 	.remove      = xwdt_remove,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name  = WATCHDOG_NAME,
@@ -620,8 +658,12 @@ module_platform_driver(xwdt_driver);
 MODULE_AUTHOR("Alejandro Cabrera <aldaya@gmail.com>");
 MODULE_DESCRIPTION("Xilinx Watchdog driver");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_LICENSE("GPL");
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+MODULE_LICENSE("GPL v2");
+>>>>>>> v3.18
 =======
 MODULE_LICENSE("GPL v2");
 >>>>>>> v3.18

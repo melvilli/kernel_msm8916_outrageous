@@ -40,18 +40,30 @@
  */
 #define RESET_VEC_PHYS		0x1fc00000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RESET_DATA_PHYS		(RESET_VEC_PHYS + (1<<10))
 =======
+=======
+>>>>>>> v3.18
 #define RESET_VEC_SIZE		8192		/* 8KB reset code and data */
 #define RESET_DATA_PHYS		(RESET_VEC_PHYS + (1<<10))
 
 /* Offsets of parameters in the RESET_DATA_PHYS area */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BOOT_THREAD_MODE	0
 #define BOOT_NMI_LOCK		4
 #define BOOT_NMI_HANDLER	8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* CPU ready flags for each CPU */
+#define BOOT_CPU_READY		2048
+
+>>>>>>> v3.18
 =======
 /* CPU ready flags for each CPU */
 #define BOOT_CPU_READY		2048
@@ -73,6 +85,7 @@ void nlm_rmiboot_preboot(void);
 void nlm_percpu_init(int hwcpuid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void
 nlm_set_nmi_handler(void *handler)
 {
@@ -81,6 +94,8 @@ nlm_set_nmi_handler(void *handler)
 	reset_data = (char *)CKSEG1ADDR(RESET_DATA_PHYS);
 	*(int64_t *)(reset_data + BOOT_NMI_HANDLER) = (long)handler;
 =======
+=======
+>>>>>>> v3.18
 static inline void *
 nlm_get_boot_data(int offset)
 {
@@ -93,12 +108,16 @@ nlm_set_nmi_handler(void *handler)
 	void *nmih = nlm_get_boot_data(BOOT_NMI_HANDLER);
 
 	*(int64_t *)nmih = (long)handler;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*
  * Misc.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 unsigned int nlm_get_cpu_frequency(void);
 void nlm_node_init(int node);
@@ -129,6 +148,8 @@ uint64_t nlm_pci_irqmask(int node);
 void nlm_set_pic_extra_ack(int node, int irq,  void (*xack)(struct irq_data *));
 
 =======
+=======
+>>>>>>> v3.18
 void nlm_init_boot_cpu(void);
 unsigned int nlm_get_cpu_frequency(void);
 extern struct plat_smp_ops nlm_smp_ops;
@@ -150,6 +171,9 @@ void nlm_dispatch_msi(int node, int lirq);
 void nlm_dispatch_msix(int node, int msixirq);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The NR_IRQs is divided between nodes, each of them has a separate irq space
@@ -160,7 +184,10 @@ static inline int nlm_irq_to_xirq(int node, int irq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct nlm_soc_info nlm_nodes[NLM_NR_NODES];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int nlm_cpu_ready[];

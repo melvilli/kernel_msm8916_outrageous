@@ -26,7 +26,10 @@ config SQUASHFS
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 choice
 	prompt "File decompression options"
 	depends on SQUASHFS
@@ -99,6 +102,9 @@ config SQUASHFS_DECOMP_MULTI_PERCPU
 
 endchoice
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SQUASHFS_XATTR
 	bool "Squashfs XATTR support"

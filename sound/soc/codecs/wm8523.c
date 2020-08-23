@@ -76,8 +76,13 @@ static const char *wm8523_zd_count_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum wm8523_zc_count =
 	SOC_ENUM_SINGLE(WM8523_ZERO_DETECT, 0, 2, wm8523_zd_count_text);
+=======
+static SOC_ENUM_SINGLE_DECL(wm8523_zc_count, WM8523_ZERO_DETECT, 0,
+			    wm8523_zd_count_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(wm8523_zc_count, WM8523_ZERO_DETECT, 0,
 			    wm8523_zd_count_text);
@@ -169,6 +174,7 @@ static int wm8523_hw_params(struct snd_pcm_substream *substream,
 
 	aifctrl1 &= ~WM8523_WL_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -180,6 +186,8 @@ static int wm8523_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -190,6 +198,9 @@ static int wm8523_hw_params(struct snd_pcm_substream *substream,
 		aifctrl1 |= 0x10;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		aifctrl1 |= 0x18;
 		break;
@@ -411,7 +422,10 @@ static int wm8523_probe(struct snd_soc_codec *codec)
 {
 	struct wm8523_priv *wm8523 = snd_soc_codec_get_drvdata(codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -420,12 +434,15 @@ static int wm8523_probe(struct snd_soc_codec *codec)
 		ARRAY_SIZE(wm8523->rate_constraint_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_codec_set_cache_io(codec, 8, 16, SND_SOC_REGMAP);
 	if (ret != 0) {
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Change some default settings - latch VU and enable ZC */
@@ -477,7 +494,11 @@ static const struct regmap_config wm8523_regmap = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -584,7 +605,11 @@ static int __init wm8523_modinit(void)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -601,7 +626,11 @@ module_init(wm8523_modinit);
 static void __exit wm8523_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18

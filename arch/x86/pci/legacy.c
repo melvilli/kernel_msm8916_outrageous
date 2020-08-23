@@ -38,7 +38,10 @@ void pcibios_scan_specific_bus(int busn)
 {
 	int devfn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long node;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 l;
@@ -47,7 +50,10 @@ void pcibios_scan_specific_bus(int busn)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	node = get_mp_bus_to_node(busn);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (devfn = 0; devfn < 256; devfn += 8) {
@@ -56,7 +62,11 @@ void pcibios_scan_specific_bus(int busn)
 			DBG("Found device at %02x:%02x [%04x]\n", busn, devfn, l);
 			printk(KERN_INFO "PCI: Discovered peer bus %02x\n", busn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pci_scan_bus_on_node(busn, &pci_root_ops, node);
+=======
+			pcibios_scan_root(busn);
+>>>>>>> v3.18
 =======
 			pcibios_scan_root(busn);
 >>>>>>> v3.18

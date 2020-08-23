@@ -24,9 +24,15 @@
 #include <linux/spi/spi.h>
 #include <linux/platform_data/davinci_asp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/keyscan-davinci.h>
 #include <mach/hardware.h>
 #include <mach/edma.h>
+=======
+#include <linux/platform_data/edma.h>
+#include <linux/platform_data/keyscan-davinci.h>
+#include <mach/hardware.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/edma.h>
 #include <linux/platform_data/keyscan-davinci.h>
@@ -60,6 +66,12 @@ extern void __iomem *davinci_sysmod_base;
 void davinci_map_sysmod(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DAVINCI_GPIO_BASE 0x01C67000
+int davinci_gpio_register(struct resource *res, int size, void *pdata);
+
+>>>>>>> v3.18
 =======
 #define DAVINCI_GPIO_BASE 0x01C67000
 int davinci_gpio_register(struct resource *res, int size, void *pdata);
@@ -88,6 +100,7 @@ int davinci_gpio_register(struct resource *res, int size, void *pdata);
 #define DM646X_ASYNC_EMIF_CONTROL_BASE	0x20008000
 #define DM646X_ASYNC_EMIF_CS2_SPACE_BASE 0x42000000
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* DM355 function declarations */
 void __init dm355_init(void);
@@ -120,6 +133,8 @@ void dm646x_video_init(void);
 void dm646x_setup_vpif(struct vpif_display_config *,
 		       struct vpif_capture_config *);
 =======
+=======
+>>>>>>> v3.18
 int davinci_init_wdt(void);
 
 /* DM355 function declarations */
@@ -161,5 +176,8 @@ extern struct platform_device dm365_serial_device[];
 extern struct platform_device dm355_serial_device[];
 extern struct platform_device dm644x_serial_device[];
 extern struct platform_device dm646x_serial_device[];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /*__DAVINCI_H */

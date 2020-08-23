@@ -19,7 +19,11 @@
 #include <linux/bitops.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kref.h>
+=======
+#include <linux/kobject.h>
+>>>>>>> v3.18
 =======
 #include <linux/kobject.h>
 >>>>>>> v3.18
@@ -42,6 +46,10 @@ struct property {
 	unsigned long _flags;
 	unsigned int unique_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct bin_attribute attr;
+>>>>>>> v3.18
 =======
 	struct bin_attribute attr;
 >>>>>>> v3.18
@@ -65,8 +73,12 @@ struct device_node {
 	struct	device_node *next;	/* next device of same type */
 	struct	device_node *allnext;	/* next in list of all nodes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct	proc_dir_entry *pde;	/* this node's proc directory */
 	struct	kref kref;
+=======
+	struct	kobject kobj;
+>>>>>>> v3.18
 =======
 	struct	kobject kobj;
 >>>>>>> v3.18
@@ -80,7 +92,11 @@ struct device_node {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_PHANDLE_ARGS 8
+=======
+#define MAX_PHANDLE_ARGS 16
+>>>>>>> v3.18
 =======
 #define MAX_PHANDLE_ARGS 16
 >>>>>>> v3.18
@@ -91,7 +107,10 @@ struct of_phandle_args {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* initialize a node */
 extern struct kobj_type of_node_ktype;
 static inline void of_node_init(struct device_node *node)
@@ -111,6 +130,9 @@ static inline int of_node_is_attached(struct device_node *node)
 	return node && node->kobj.state_in_sysfs;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_OF_DYNAMIC
 extern struct device_node *of_node_get(struct device_node *node);
@@ -131,6 +153,10 @@ extern struct device_node *of_allnodes;
 extern struct device_node *of_chosen;
 extern struct device_node *of_aliases;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct device_node *of_stdout;
+>>>>>>> v3.18
 =======
 extern struct device_node *of_stdout;
 >>>>>>> v3.18
@@ -152,13 +178,19 @@ static inline int of_node_check_flag(struct device_node *n, unsigned long flag)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int of_node_test_and_set_flag(struct device_node *n,
 					    unsigned long flag)
 {
 	return test_and_set_bit(flag, &n->_flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void of_node_set_flag(struct device_node *n, unsigned long flag)
 {
@@ -166,7 +198,10 @@ static inline void of_node_set_flag(struct device_node *n, unsigned long flag)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void of_node_clear_flag(struct device_node *n, unsigned long flag)
 {
 	clear_bit(flag, &n->_flags);
@@ -187,6 +222,9 @@ static inline void of_property_clear_flag(struct property *p, unsigned long flag
 	clear_bit(flag, &p->_flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct device_node *of_find_all_nodes(struct device_node *prev);
 
@@ -231,6 +269,11 @@ static inline unsigned long of_read_ulong(const __be32 *cell, int size)
 #define OF_DYNAMIC	1 /* node and properties were allocated via kmalloc */
 #define OF_DETACHED	2 /* node has been detached from the device tree */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define OF_POPULATED	3 /* device already created for the node */
+#define OF_POPULATED_BUS	4 /* of_platform_populate recursed to children of this node */
+>>>>>>> v3.18
 =======
 #define OF_POPULATED	3 /* device already created for the node */
 #define OF_POPULATED_BUS	4 /* of_platform_populate recursed to children of this node */
@@ -246,6 +289,7 @@ static inline const char *of_node_full_name(const struct device_node *np)
 	return np ? np->full_name : "<no-node>";
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct device_node *of_find_node_by_name(struct device_node *from,
 	const char *name);
@@ -263,6 +307,8 @@ extern struct device_node *of_find_compatible_node(struct device_node *from,
 	for (dn = of_find_compatible_node(NULL, type, compatible); dn; \
 	     dn = of_find_compatible_node(dn, type, compatible))
 =======
+=======
+>>>>>>> v3.18
 #define for_each_of_allnodes(dn) \
 	for (dn = of_allnodes; dn; dn = dn->allnext)
 extern struct device_node *of_find_node_by_name(struct device_node *from,
@@ -271,11 +317,15 @@ extern struct device_node *of_find_node_by_type(struct device_node *from,
 	const char *type);
 extern struct device_node *of_find_compatible_node(struct device_node *from,
 	const char *type, const char *compat);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct device_node *of_find_matching_node_and_match(
 	struct device_node *from,
 	const struct of_device_id *matches,
 	const struct of_device_id **match);
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline struct device_node *of_find_matching_node(
 	struct device_node *from,
@@ -292,6 +342,9 @@ static inline struct device_node *of_find_matching_node(
 =======
 
 >>>>>>> v3.18
+=======
+
+>>>>>>> v3.18
 extern struct device_node *of_find_node_by_path(const char *path);
 extern struct device_node *of_find_node_by_phandle(phandle handle);
 extern struct device_node *of_get_parent(const struct device_node *node);
@@ -303,6 +356,7 @@ extern struct device_node *of_get_next_available_child(
 
 extern struct device_node *of_get_child_by_name(const struct device_node *node,
 					const char *name);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define for_each_child_of_node(parent, child) \
 	for (child = of_get_next_child(parent, NULL); child != NULL; \
@@ -329,17 +383,27 @@ extern struct device_node *of_find_node_with_property(
 	for (dn = of_find_node_with_property(NULL, prop_name); dn; \
 	     dn = of_find_node_with_property(dn, prop_name))
 =======
+=======
+>>>>>>> v3.18
 
 /* cache lookup */
 extern struct device_node *of_find_next_cache_node(const struct device_node *);
 extern struct device_node *of_find_node_with_property(
 	struct device_node *from, const char *prop_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct property *of_find_property(const struct device_node *np,
 					 const char *name,
 					 int *lenp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int of_property_count_elems_of_size(const struct device_node *np,
+				const char *propname, int elem_size);
+>>>>>>> v3.18
 =======
 extern int of_property_count_elems_of_size(const struct device_node *np,
 				const char *propname, int elem_size);
@@ -383,6 +447,10 @@ extern const struct of_device_id *of_match_node(
 	const struct of_device_id *matches, const struct device_node *node);
 extern int of_modalias_node(struct device_node *node, char *modalias, int len);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void of_print_phandle_args(const char *msg, const struct of_phandle_args *args);
+>>>>>>> v3.18
 =======
 extern void of_print_phandle_args(const char *msg, const struct of_phandle_args *args);
 >>>>>>> v3.18
@@ -393,6 +461,12 @@ extern int of_parse_phandle_with_args(const struct device_node *np,
 	const char *list_name, const char *cells_name, int index,
 	struct of_phandle_args *out_args);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int of_parse_phandle_with_fixed_args(const struct device_node *np,
+	const char *list_name, int cells_count, int index,
+	struct of_phandle_args *out_args);
+>>>>>>> v3.18
 =======
 extern int of_parse_phandle_with_fixed_args(const struct device_node *np,
 	const char *list_name, int cells_count, int index,
@@ -421,6 +495,10 @@ struct of_prop_reconfig {
 	struct device_node	*dn;
 	struct property		*prop;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct property		*old_prop;
+>>>>>>> v3.18
 =======
 	struct property		*old_prop;
 >>>>>>> v3.18
@@ -446,12 +524,15 @@ extern int of_detach_node(struct device_node *);
 const __be32 *of_prop_next_u32(struct property *prop, const __be32 *cur,
 			       u32 *pu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define of_property_for_each_u32(np, propname, prop, p, u)	\
 	for (prop = of_find_property(np, propname, NULL),	\
 		p = of_prop_next_u32(prop, NULL, &u);		\
 		p;						\
 		p = of_prop_next_u32(prop, p, &u))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -463,6 +544,7 @@ const __be32 *of_prop_next_u32(struct property *prop, const __be32 *cur,
  */
 const char *of_prop_next_string(struct property *prop, const char *cur);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define of_property_for_each_string(np, propname, prop, s)	\
 	for (prop = of_find_property(np, propname, NULL),	\
 		s = of_prop_next_string(prop, NULL);		\
@@ -473,12 +555,17 @@ const char *of_prop_next_string(struct property *prop, const char *cur);
 
 static inline const char* of_node_full_name(struct device_node *np)
 =======
+=======
+>>>>>>> v3.18
 
 bool of_console_check(struct device_node *dn, char *name, int index);
 
 #else /* CONFIG_OF */
 
 static inline const char* of_node_full_name(const struct device_node *np)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return "<no-node>";
@@ -491,7 +578,10 @@ static inline struct device_node *of_find_node_by_name(struct device_node *from,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct device_node *of_find_node_by_type(struct device_node *from,
 	const char *type)
 {
@@ -511,6 +601,9 @@ static inline struct device_node *of_find_node_by_path(const char *path)
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct device_node *of_get_parent(const struct device_node *node)
 {
@@ -518,7 +611,10 @@ static inline struct device_node *of_get_parent(const struct device_node *node)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct device_node *of_get_next_child(
 	const struct device_node *node, struct device_node *prev)
 {
@@ -537,6 +633,9 @@ static inline struct device_node *of_find_node_with_property(
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool of_have_populated_dt(void)
 {
@@ -544,9 +643,12 @@ static inline bool of_have_populated_dt(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define for_each_child_of_node(parent, child) \
 	while (0)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline struct device_node *of_get_child_by_name(
@@ -557,11 +659,14 @@ static inline struct device_node *of_get_child_by_name(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int of_get_child_count(const struct device_node *np)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int of_device_is_compatible(const struct device_node *device,
@@ -591,13 +696,19 @@ static inline struct device_node *of_find_compatible_node(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int of_property_count_elems_of_size(const struct device_node *np,
 			const char *propname, int elem_size)
 {
 	return -ENOSYS;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int of_property_read_u32_index(const struct device_node *np,
 			const char *propname, u32 index, u32 *out_value)
@@ -681,7 +792,10 @@ static inline int of_parse_phandle_with_args(struct device_node *np,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int of_parse_phandle_with_fixed_args(const struct device_node *np,
 	const char *list_name, int cells_count, int index,
 	struct of_phandle_args *out_args)
@@ -689,6 +803,9 @@ static inline int of_parse_phandle_with_fixed_args(const struct device_node *np,
 	return -ENOSYS;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int of_count_phandle_with_args(struct device_node *np,
 					     const char *list_name,
@@ -708,6 +825,7 @@ static inline int of_machine_is_compatible(const char *compat)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define of_match_ptr(_ptr)	NULL
 #define of_match_node(_matches, _node)	NULL
 #define of_property_for_each_u32(np, propname, prop, p, u) \
@@ -725,6 +843,8 @@ static inline int of_node_to_nid(struct device_node *np)
 #define of_node_to_nid of_node_to_nid
 #endif
 =======
+=======
+>>>>>>> v3.18
 static inline bool of_console_check(const struct device_node *dn, const char *name, int index)
 {
 	return false;
@@ -826,6 +946,9 @@ static inline int of_property_count_u64_elems(const struct device_node *np,
 {
 	return of_property_count_elems_of_size(np, propname, sizeof(u64));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -906,6 +1029,7 @@ static inline bool of_property_read_bool(const struct device_node *np,
 	struct property *prop = of_find_property(np, propname, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Boolean properties have no value cells. The "value" of a boolean
 	 * property is determined by the presence or absence of the property
@@ -916,6 +1040,8 @@ static inline bool of_property_read_bool(const struct device_node *np,
 	 */
 	WARN_ON(prop && prop->length);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return prop ? true : false;
@@ -943,6 +1069,7 @@ static inline int of_property_read_u32(const struct device_node *np,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_PROC_FS) && defined(CONFIG_PROC_DEVICETREE)
 extern void proc_device_tree_add_node(struct device_node *, struct proc_dir_entry *);
 extern void proc_device_tree_add_prop(struct proc_dir_entry *pde, struct property *prop);
@@ -954,6 +1081,8 @@ extern void proc_device_tree_update_prop(struct proc_dir_entry *pde,
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #define of_property_for_each_u32(np, propname, prop, p, u)	\
 	for (prop = of_find_property(np, propname, NULL),	\
 		p = of_prop_next_u32(prop, NULL, &u);		\
@@ -1116,5 +1245,8 @@ static inline int of_changeset_update_property(struct of_changeset *ocs,
 /* CONFIG_OF_RESOLVE api */
 extern int of_resolve_phandles(struct device_node *tree);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_OF_H */

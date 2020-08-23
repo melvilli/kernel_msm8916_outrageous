@@ -21,6 +21,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
@@ -30,6 +31,11 @@
  * this source code.
  */
 
+=======
+ */
+
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
  */
 
@@ -73,6 +79,7 @@ static int apci16xx_insn_config(struct comedi_device *dev,
 				unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int chan_mask = 1 << CR_CHAN(insn->chanspec);
 	unsigned int bits;
 
@@ -104,6 +111,8 @@ static int apci16xx_insn_config(struct comedi_device *dev,
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	unsigned int chan = CR_CHAN(insn->chanspec);
 	unsigned int mask;
 	int ret;
@@ -120,6 +129,9 @@ static int apci16xx_insn_config(struct comedi_device *dev,
 	ret = comedi_dio_insn_config(dev, s, insn, data, mask);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	outl(s->io_bits, dev->iobase + APCI16XX_DIR_REG(s->index));
@@ -133,6 +145,7 @@ static int apci16xx_dio_insn_bits(struct comedi_device *dev,
 				  unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int mask = data[0];
 	unsigned int bits = data[1];
 
@@ -144,6 +157,10 @@ static int apci16xx_dio_insn_bits(struct comedi_device *dev,
 
 		outl(s->state, dev->iobase + APCI16XX_OUT_REG(s->index));
 	}
+=======
+	if (comedi_dio_update_state(s, data))
+		outl(s->state, dev->iobase + APCI16XX_OUT_REG(s->index));
+>>>>>>> v3.18
 =======
 	if (comedi_dio_update_state(s, data))
 		outl(s->state, dev->iobase + APCI16XX_OUT_REG(s->index));
@@ -219,7 +236,11 @@ static struct comedi_driver apci16xx_driver = {
 	.module		= THIS_MODULE,
 	.auto_attach	= apci16xx_auto_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= comedi_pci_disable,
+=======
+	.detach		= comedi_pci_detach,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_pci_detach,
 >>>>>>> v3.18
@@ -232,7 +253,11 @@ static int apci16xx_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci16xx_pci_table) = {
+=======
+static const struct pci_device_id apci16xx_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id apci16xx_pci_table[] = {
 >>>>>>> v3.18

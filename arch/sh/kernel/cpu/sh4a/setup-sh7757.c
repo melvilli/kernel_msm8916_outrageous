@@ -25,6 +25,7 @@
 
 static struct plat_sci_port scif2_platform_data = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mapbase	= 0xfe4b0000,		/* SCIF2 */
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
@@ -32,6 +33,8 @@ static struct plat_sci_port scif2_platform_data = {
 	.type		= PORT_SCIF,
 	.irqs		= SCIx_IRQ_MUXED(evt2irq(0x700)),
 =======
+=======
+>>>>>>> v3.18
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
 	.type		= PORT_SCIF,
@@ -40,6 +43,9 @@ static struct plat_sci_port scif2_platform_data = {
 static struct resource scif2_resources[] = {
 	DEFINE_RES_MEM(0xfe4b0000, 0x100),		/* SCIF2 */
 	DEFINE_RES_IRQ(evt2irq(0x700)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -47,6 +53,11 @@ static struct platform_device scif2_device = {
 	.name		= "sh-sci",
 	.id		= 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.resource	= scif2_resources,
+	.num_resources	= ARRAY_SIZE(scif2_resources),
+>>>>>>> v3.18
 =======
 	.resource	= scif2_resources,
 	.num_resources	= ARRAY_SIZE(scif2_resources),
@@ -58,6 +69,7 @@ static struct platform_device scif2_device = {
 
 static struct plat_sci_port scif3_platform_data = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mapbase	= 0xfe4c0000,		/* SCIF3 */
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
@@ -65,6 +77,8 @@ static struct plat_sci_port scif3_platform_data = {
 	.type		= PORT_SCIF,
 	.irqs		= SCIx_IRQ_MUXED(evt2irq(0xb80)),
 =======
+=======
+>>>>>>> v3.18
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
 	.type		= PORT_SCIF,
@@ -73,6 +87,9 @@ static struct plat_sci_port scif3_platform_data = {
 static struct resource scif3_resources[] = {
 	DEFINE_RES_MEM(0xfe4c0000, 0x100),		/* SCIF3 */
 	DEFINE_RES_IRQ(evt2irq(0xb80)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -80,6 +97,11 @@ static struct platform_device scif3_device = {
 	.name		= "sh-sci",
 	.id		= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.resource	= scif3_resources,
+	.num_resources	= ARRAY_SIZE(scif3_resources),
+>>>>>>> v3.18
 =======
 	.resource	= scif3_resources,
 	.num_resources	= ARRAY_SIZE(scif3_resources),
@@ -91,6 +113,7 @@ static struct platform_device scif3_device = {
 
 static struct plat_sci_port scif4_platform_data = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mapbase	= 0xfe4d0000,		/* SCIF4 */
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
@@ -98,6 +121,8 @@ static struct plat_sci_port scif4_platform_data = {
 	.type		= PORT_SCIF,
 	.irqs		= SCIx_IRQ_MUXED(evt2irq(0xF00)),
 =======
+=======
+>>>>>>> v3.18
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
 	.type		= PORT_SCIF,
@@ -106,6 +131,9 @@ static struct plat_sci_port scif4_platform_data = {
 static struct resource scif4_resources[] = {
 	DEFINE_RES_MEM(0xfe4d0000, 0x100),		/* SCIF4 */
 	DEFINE_RES_IRQ(evt2irq(0xf00)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -113,6 +141,11 @@ static struct platform_device scif4_device = {
 	.name		= "sh-sci",
 	.id		= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.resource	= scif4_resources,
+	.num_resources	= ARRAY_SIZE(scif4_resources),
+>>>>>>> v3.18
 =======
 	.resource	= scif4_resources,
 	.num_resources	= ARRAY_SIZE(scif4_resources),
@@ -123,6 +156,7 @@ static struct platform_device scif4_device = {
 };
 
 static struct sh_timer_config tmu0_platform_data = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.channel_offset = 0x04,
 	.timer_bit = 0,
@@ -144,6 +178,8 @@ static struct resource tmu0_resources[] = {
 static struct platform_device tmu0_device = {
 	.name		= "sh_tmu",
 =======
+=======
+>>>>>>> v3.18
 	.channels_mask = 3,
 };
 
@@ -155,6 +191,9 @@ static struct resource tmu0_resources[] = {
 
 static struct platform_device tmu0_device = {
 	.name		= "sh-tmu",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.id		= 0,
 	.dev = {
@@ -164,6 +203,7 @@ static struct platform_device tmu0_device = {
 	.num_resources	= ARRAY_SIZE(tmu0_resources),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct sh_timer_config tmu1_platform_data = {
 	.channel_offset = 0x10,
@@ -195,6 +235,8 @@ static struct platform_device tmu1_device = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct resource spi0_resources[] = {
 	[0] = {
 		.start	= 0xfe002000,
@@ -213,7 +255,11 @@ static const struct sh_dmae_slave_config sh7757_dmae0_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_SDHI_TX,
 		.addr		= 0x1fe50030,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -224,7 +270,11 @@ static const struct sh_dmae_slave_config sh7757_dmae0_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_SDHI_RX,
 		.addr		= 0x1fe50030,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -235,7 +285,11 @@ static const struct sh_dmae_slave_config sh7757_dmae0_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_MMCIF_TX,
 		.addr		= 0x1fcb0034,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -246,7 +300,11 @@ static const struct sh_dmae_slave_config sh7757_dmae0_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_MMCIF_RX,
 		.addr		= 0x1fcb0034,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -260,7 +318,11 @@ static const struct sh_dmae_slave_config sh7757_dmae1_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_SCIF2_TX,
 		.addr		= 0x1f4b000c,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -271,7 +333,11 @@ static const struct sh_dmae_slave_config sh7757_dmae1_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_SCIF2_RX,
 		.addr		= 0x1f4b0014,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -282,7 +348,11 @@ static const struct sh_dmae_slave_config sh7757_dmae1_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_SCIF3_TX,
 		.addr		= 0x1f4c000c,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -293,7 +363,11 @@ static const struct sh_dmae_slave_config sh7757_dmae1_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_SCIF3_RX,
 		.addr		= 0x1f4c0014,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -304,7 +378,11 @@ static const struct sh_dmae_slave_config sh7757_dmae1_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_SCIF4_TX,
 		.addr		= 0x1f4d000c,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -315,7 +393,11 @@ static const struct sh_dmae_slave_config sh7757_dmae1_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_SCIF4_RX,
 		.addr		= 0x1f4d0014,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -326,7 +408,11 @@ static const struct sh_dmae_slave_config sh7757_dmae1_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RSPI_TX,
 		.addr		= 0xfe480004,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -337,7 +423,11 @@ static const struct sh_dmae_slave_config sh7757_dmae1_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RSPI_RX,
 		.addr		= 0xfe480004,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -351,7 +441,11 @@ static const struct sh_dmae_slave_config sh7757_dmae2_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC0_TX,
 		.addr		= 0x1e500012,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -362,7 +456,11 @@ static const struct sh_dmae_slave_config sh7757_dmae2_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC0_RX,
 		.addr		= 0x1e500013,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -373,7 +471,11 @@ static const struct sh_dmae_slave_config sh7757_dmae2_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC1_TX,
 		.addr		= 0x1e510012,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -384,7 +486,11 @@ static const struct sh_dmae_slave_config sh7757_dmae2_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC1_RX,
 		.addr		= 0x1e510013,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -395,7 +501,11 @@ static const struct sh_dmae_slave_config sh7757_dmae2_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC2_TX,
 		.addr		= 0x1e520012,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -406,7 +516,11 @@ static const struct sh_dmae_slave_config sh7757_dmae2_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC2_RX,
 		.addr		= 0x1e520013,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -417,7 +531,11 @@ static const struct sh_dmae_slave_config sh7757_dmae2_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC3_TX,
 		.addr		= 0x1e530012,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -428,7 +546,11 @@ static const struct sh_dmae_slave_config sh7757_dmae2_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC3_RX,
 		.addr		= 0x1e530013,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -439,7 +561,11 @@ static const struct sh_dmae_slave_config sh7757_dmae2_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC4_TX,
 		.addr		= 0x1e540012,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -450,7 +576,11 @@ static const struct sh_dmae_slave_config sh7757_dmae2_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC4_RX,
 		.addr		= 0x1e540013,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -464,7 +594,11 @@ static const struct sh_dmae_slave_config sh7757_dmae3_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC5_TX,
 		.addr		= 0x1e550012,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -475,7 +609,11 @@ static const struct sh_dmae_slave_config sh7757_dmae3_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC5_RX,
 		.addr		= 0x1e550013,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -486,7 +624,11 @@ static const struct sh_dmae_slave_config sh7757_dmae3_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC6_TX,
 		.addr		= 0x1e560012,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -497,7 +639,11 @@ static const struct sh_dmae_slave_config sh7757_dmae3_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC6_RX,
 		.addr		= 0x1e560013,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -508,7 +654,11 @@ static const struct sh_dmae_slave_config sh7757_dmae3_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC7_TX,
 		.addr		= 0x1e570012,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -519,7 +669,11 @@ static const struct sh_dmae_slave_config sh7757_dmae3_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC7_RX,
 		.addr		= 0x1e570013,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -530,7 +684,11 @@ static const struct sh_dmae_slave_config sh7757_dmae3_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC8_TX,
 		.addr		= 0x1e580012,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -541,7 +699,11 @@ static const struct sh_dmae_slave_config sh7757_dmae3_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC8_RX,
 		.addr		= 0x1e580013,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -552,7 +714,11 @@ static const struct sh_dmae_slave_config sh7757_dmae3_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC9_TX,
 		.addr		= 0x1e590012,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= SM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= SM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= SM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -563,7 +729,11 @@ static const struct sh_dmae_slave_config sh7757_dmae3_slaves[] = {
 		.slave_id	= SHDMA_SLAVE_RIIC9_RX,
 		.addr		= 0x1e590013,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.chcr		= DM_INC | 0x800 | 0x40000000 |
+=======
+		.chcr		= DM_INC | RS_ERS | 0x40000000 |
+>>>>>>> v3.18
 =======
 		.chcr		= DM_INC | RS_ERS | 0x40000000 |
 >>>>>>> v3.18
@@ -964,7 +1134,10 @@ static struct platform_device *sh7757_devices[] __initdata = {
 	&scif4_device,
 	&tmu0_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&tmu1_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	&dma0_device,
@@ -991,7 +1164,10 @@ static struct platform_device *sh7757_early_devices[] __initdata = {
 	&scif4_device,
 	&tmu0_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&tmu1_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

@@ -35,6 +35,10 @@
 #include <linux/hwmon-sysfs.h>
 #include <linux/jiffies.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -82,7 +86,11 @@ struct ina2xx_config {
 
 struct ina2xx_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -120,8 +128,13 @@ static const struct ina2xx_config ina2xx_config[] = {
 static struct ina2xx_data *ina2xx_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ina2xx_data *data = i2c_get_clientdata(client);
+=======
+	struct ina2xx_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct ina2xx_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -217,7 +230,11 @@ static SENSOR_DEVICE_ATTR(power1_input, S_IRUGO, ina2xx_show_value, NULL,
 
 /* pointers to created device attributes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *ina2xx_attributes[] = {
+=======
+static struct attribute *ina2xx_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *ina2xx_attrs[] = {
 >>>>>>> v3.18
@@ -228,10 +245,14 @@ static struct attribute *ina2xx_attrs[] = {
 	NULL,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct attribute_group ina2xx_group = {
 	.attrs = ina2xx_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(ina2xx);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(ina2xx);
 >>>>>>> v3.18
@@ -241,22 +262,29 @@ static int ina2xx_probe(struct i2c_client *client,
 {
 	struct i2c_adapter *adapter = client->adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ina2xx_data *data;
 	struct ina2xx_platform_data *pdata;
 	int ret;
 	long shunt = 10000; /* default shunt value 10mOhms */
 =======
+=======
+>>>>>>> v3.18
 	struct ina2xx_platform_data *pdata;
 	struct device *dev = &client->dev;
 	struct ina2xx_data *data;
 	struct device *hwmon_dev;
 	long shunt = 10000; /* default shunt value 10mOhms */
 	u32 val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!i2c_check_functionality(adapter, I2C_FUNC_SMBUS_WORD_DATA))
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	data = devm_kzalloc(&client->dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
@@ -267,6 +295,8 @@ static int ina2xx_probe(struct i2c_client *client,
 		  (struct ina2xx_platform_data *)client->dev.platform_data;
 		shunt = pdata->shunt_uohms;
 =======
+=======
+>>>>>>> v3.18
 	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
@@ -277,6 +307,9 @@ static int ina2xx_probe(struct i2c_client *client,
 	} else if (!of_property_read_u32(dev->of_node,
 					 "shunt-resistor", &val)) {
 		shunt = val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -295,6 +328,7 @@ static int ina2xx_probe(struct i2c_client *client,
 	i2c_smbus_write_word_swapped(client, INA2XX_CALIBRATION,
 				     data->config->calibration_factor / shunt);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	i2c_set_clientdata(client, data);
 	mutex_init(&data->update_lock);
@@ -328,6 +362,8 @@ static int ina2xx_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	data->client = client;
 	mutex_init(&data->update_lock);
 
@@ -340,6 +376,9 @@ static int ina2xx_remove(struct i2c_client *client)
 		 id->name, shunt);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -358,7 +397,10 @@ static struct i2c_driver ina2xx_driver = {
 	},
 	.probe		= ina2xx_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= ina2xx_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= ina2xx_id,

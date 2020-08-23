@@ -104,7 +104,11 @@ module_init(sha1_s390_init);
 module_exit(sha1_s390_fini);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("sha1");
+=======
+MODULE_ALIAS("sha1");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("sha1");
 >>>>>>> v3.18

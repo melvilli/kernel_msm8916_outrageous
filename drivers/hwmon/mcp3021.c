@@ -32,7 +32,13 @@
 #define MCP3021_SAR_SHIFT	2
 #define MCP3021_SAR_MASK	0x3ff
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MCP3021_OUTPUT_RES	10	/* 10-bit resolution */
+=======
+
+#define MCP3021_OUTPUT_RES	10	/* 10-bit resolution */
+#define MCP3021_OUTPUT_SCALE	4
+>>>>>>> v3.18
 =======
 
 #define MCP3021_OUTPUT_RES	10	/* 10-bit resolution */
@@ -43,6 +49,10 @@
 #define MCP3221_SAR_MASK	0xfff
 #define MCP3221_OUTPUT_RES	12	/* 12-bit resolution */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MCP3221_OUTPUT_SCALE	1
+>>>>>>> v3.18
 =======
 #define MCP3221_OUTPUT_SCALE	1
 >>>>>>> v3.18
@@ -62,6 +72,10 @@ struct mcp3021_data {
 	u16 sar_mask;
 	u8 output_res;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 output_scale;
+>>>>>>> v3.18
 =======
 	u8 output_scale;
 >>>>>>> v3.18
@@ -95,8 +109,11 @@ static int mcp3021_read16(struct i2c_client *client)
 static inline u16 volts_from_reg(struct mcp3021_data *data, u16 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return DIV_ROUND_CLOSEST(data->vdd * val, 1 << data->output_res);
 =======
+=======
+>>>>>>> v3.18
 	if (val == 0)
 		return 0;
 
@@ -104,6 +121,9 @@ static inline u16 volts_from_reg(struct mcp3021_data *data, u16 val)
 
 	return val * DIV_ROUND_CLOSEST(data->vdd,
 			(1 << data->output_res) * data->output_scale);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -147,6 +167,10 @@ static int mcp3021_probe(struct i2c_client *client,
 		data->sar_mask = MCP3021_SAR_MASK;
 		data->output_res = MCP3021_OUTPUT_RES;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		data->output_scale = MCP3021_OUTPUT_SCALE;
+>>>>>>> v3.18
 =======
 		data->output_scale = MCP3021_OUTPUT_SCALE;
 >>>>>>> v3.18
@@ -156,6 +180,7 @@ static int mcp3021_probe(struct i2c_client *client,
 		data->sar_shift = MCP3221_SAR_SHIFT;
 		data->sar_mask = MCP3221_SAR_MASK;
 		data->output_res = MCP3221_OUTPUT_RES;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		break;
 	}
@@ -167,6 +192,8 @@ static int mcp3021_probe(struct i2c_client *client,
 	} else
 		data->vdd = MCP3021_VDD_REF;
 =======
+=======
+>>>>>>> v3.18
 		data->output_scale = MCP3221_OUTPUT_SCALE;
 		break;
 	}
@@ -178,6 +205,9 @@ static int mcp3021_probe(struct i2c_client *client,
 	} else {
 		data->vdd = MCP3021_VDD_REF;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = sysfs_create_file(&client->dev.kobj, &dev_attr_in0_input.attr);

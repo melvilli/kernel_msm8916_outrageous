@@ -119,6 +119,10 @@ unsigned char snd_usb_parse_datainterval(struct snd_usb_audio *chip,
 	switch (snd_usb_get_speed(chip->dev)) {
 	case USB_SPEED_HIGH:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case USB_SPEED_WIRELESS:
+>>>>>>> v3.18
 =======
 	case USB_SPEED_WIRELESS:
 >>>>>>> v3.18

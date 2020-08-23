@@ -12,7 +12,11 @@
 unsigned int __sw_hweight32(unsigned int w)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef ARCH_HAS_FAST_MULTIPLIER
+=======
+#ifdef CONFIG_ARCH_HAS_FAST_MULTIPLIER
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_ARCH_HAS_FAST_MULTIPLIER
 >>>>>>> v3.18
@@ -54,7 +58,11 @@ unsigned long __sw_hweight64(__u64 w)
 	       __sw_hweight32((unsigned int)w);
 #elif BITS_PER_LONG == 64
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef ARCH_HAS_FAST_MULTIPLIER
+=======
+#ifdef CONFIG_ARCH_HAS_FAST_MULTIPLIER
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_ARCH_HAS_FAST_MULTIPLIER
 >>>>>>> v3.18

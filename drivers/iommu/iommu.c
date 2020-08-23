@@ -30,6 +30,7 @@
 #include <linux/notifier.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/scatterlist.h>
 
 static struct kset *iommu_group_kset;
@@ -37,6 +38,8 @@ static struct idr iommu_group_idr;
 static struct mutex iommu_group_mutex;
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pci.h>
 #include <linux/bitops.h>
 #include <trace/events/iommu.h>
@@ -49,6 +52,9 @@ struct iommu_callback_data {
 	const struct iommu_ops *ops;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct iommu_group {
 	struct kobject kobj;
@@ -142,7 +148,11 @@ static void iommu_group_release(struct kobject *kobj)
 
 	mutex_lock(&iommu_group_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idr_remove(&iommu_group_idr, group->id);
+=======
+	ida_remove(&iommu_group_ida, group->id);
+>>>>>>> v3.18
 =======
 	ida_remove(&iommu_group_ida, group->id);
 >>>>>>> v3.18
@@ -185,6 +195,7 @@ struct iommu_group *iommu_group_alloc(void)
 
 	mutex_lock(&iommu_group_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = idr_alloc(&iommu_group_idr, group, 1, 0, GFP_KERNEL);
 	mutex_unlock(&iommu_group_mutex);
 
@@ -194,6 +205,8 @@ struct iommu_group *iommu_group_alloc(void)
 	}
 	group->id = ret;
 =======
+=======
+>>>>>>> v3.18
 
 again:
 	if (unlikely(0 == ida_pre_get(&iommu_group_ida, GFP_KERNEL))) {
@@ -206,6 +219,9 @@ again:
 		goto again;
 
 	mutex_unlock(&iommu_group_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = kobject_init_and_add(&group->kobj, &iommu_group_ktype,
@@ -213,7 +229,11 @@ again:
 	if (ret) {
 		mutex_lock(&iommu_group_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		idr_remove(&iommu_group_idr, group->id);
+=======
+		ida_remove(&iommu_group_ida, group->id);
+>>>>>>> v3.18
 =======
 		ida_remove(&iommu_group_ida, group->id);
 >>>>>>> v3.18
@@ -399,6 +419,11 @@ rename:
 	blocking_notifier_call_chain(&group->notifier,
 				     IOMMU_GROUP_NOTIFY_ADD_DEVICE, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	trace_add_device_to_group(group->id, dev);
+>>>>>>> v3.18
 =======
 
 	trace_add_device_to_group(group->id, dev);
@@ -440,6 +465,11 @@ void iommu_group_remove_device(struct device *dev)
 	sysfs_remove_link(&dev->kobj, "iommu_group");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_remove_device_from_group(group->id, dev);
+
+>>>>>>> v3.18
 =======
 	trace_remove_device_from_group(group->id, dev);
 
@@ -500,6 +530,7 @@ EXPORT_SYMBOL_GPL(iommu_group_get);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * iommu_group_find - Find and return the group based on the group name.
  * Also increment the reference count.
  * @name: the name of the group
@@ -531,6 +562,8 @@ struct iommu_group *iommu_group_find(const char *name)
 EXPORT_SYMBOL_GPL(iommu_group_find);
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * iommu_group_put - Decrement group reference
@@ -589,10 +622,13 @@ int iommu_group_id(struct iommu_group *group)
 EXPORT_SYMBOL_GPL(iommu_group_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int add_iommu_group(struct device *dev, void *data)
 {
 	struct iommu_ops *ops = data;
 =======
+=======
+>>>>>>> v3.18
 static struct iommu_group *get_pci_alias_group(struct pci_dev *pdev,
 					       unsigned long *devfns);
 
@@ -808,6 +844,9 @@ static int add_iommu_group(struct device *dev, void *data)
 {
 	struct iommu_callback_data *cb = data;
 	const struct iommu_ops *ops = cb->ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!ops->add_device)
@@ -825,7 +864,11 @@ static int iommu_bus_notifier(struct notifier_block *nb,
 {
 	struct device *dev = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iommu_ops *ops = dev->bus->iommu_ops;
+=======
+	const struct iommu_ops *ops = dev->bus->iommu_ops;
+>>>>>>> v3.18
 =======
 	const struct iommu_ops *ops = dev->bus->iommu_ops;
 >>>>>>> v3.18
@@ -878,6 +921,7 @@ static int iommu_bus_notifier(struct notifier_block *nb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block iommu_bus_nb = {
 	.notifier_call = iommu_bus_notifier,
 };
@@ -887,6 +931,8 @@ static void iommu_bus_init(struct bus_type *bus, struct iommu_ops *ops)
 	bus_register_notifier(bus, &iommu_bus_nb);
 	bus_for_each_dev(bus, NULL, ops, add_iommu_group);
 =======
+=======
+>>>>>>> v3.18
 static int iommu_bus_init(struct bus_type *bus, const struct iommu_ops *ops)
 {
 	int err;
@@ -907,6 +953,9 @@ static int iommu_bus_init(struct bus_type *bus, const struct iommu_ops *ops)
 		return err;
 	}
 	return bus_for_each_dev(bus, NULL, &cb, add_iommu_group);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -924,7 +973,11 @@ static int iommu_bus_init(struct bus_type *bus, const struct iommu_ops *ops)
  * afterwards.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bus_set_iommu(struct bus_type *bus, struct iommu_ops *ops)
+=======
+int bus_set_iommu(struct bus_type *bus, const struct iommu_ops *ops)
+>>>>>>> v3.18
 =======
 int bus_set_iommu(struct bus_type *bus, const struct iommu_ops *ops)
 >>>>>>> v3.18
@@ -936,9 +989,13 @@ int bus_set_iommu(struct bus_type *bus, const struct iommu_ops *ops)
 
 	/* Do IOMMU specific setup for this bus-type */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iommu_bus_init(bus, ops);
 
 	return 0;
+=======
+	return iommu_bus_init(bus, ops);
+>>>>>>> v3.18
 =======
 	return iommu_bus_init(bus, ops);
 >>>>>>> v3.18
@@ -952,7 +1009,10 @@ bool iommu_present(struct bus_type *bus)
 EXPORT_SYMBOL_GPL(iommu_present);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool iommu_capable(struct bus_type *bus, enum iommu_cap cap)
 {
 	if (!bus->iommu_ops || !bus->iommu_ops->capable)
@@ -962,6 +1022,9 @@ bool iommu_capable(struct bus_type *bus, enum iommu_cap cap)
 }
 EXPORT_SYMBOL_GPL(iommu_capable);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * iommu_set_fault_handler() - set a fault handler for an iommu domain
@@ -987,7 +1050,11 @@ void iommu_set_fault_handler(struct iommu_domain *domain,
 EXPORT_SYMBOL_GPL(iommu_set_fault_handler);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iommu_domain *iommu_domain_alloc(struct bus_type *bus, int flags)
+=======
+struct iommu_domain *iommu_domain_alloc(struct bus_type *bus)
+>>>>>>> v3.18
 =======
 struct iommu_domain *iommu_domain_alloc(struct bus_type *bus)
 >>>>>>> v3.18
@@ -1005,7 +1072,11 @@ struct iommu_domain *iommu_domain_alloc(struct bus_type *bus)
 	domain->ops = bus->iommu_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = domain->ops->domain_init(domain, flags);
+=======
+	ret = domain->ops->domain_init(domain);
+>>>>>>> v3.18
 =======
 	ret = domain->ops->domain_init(domain);
 >>>>>>> v3.18
@@ -1033,11 +1104,14 @@ EXPORT_SYMBOL_GPL(iommu_domain_free);
 int iommu_attach_device(struct iommu_domain *domain, struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(domain->ops->attach_dev == NULL))
 		return -ENODEV;
 
 	return domain->ops->attach_dev(domain, dev);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	if (unlikely(domain->ops->attach_dev == NULL))
 		return -ENODEV;
@@ -1046,6 +1120,9 @@ int iommu_attach_device(struct iommu_domain *domain, struct device *dev)
 	if (!ret)
 		trace_attach_device_to_domain(dev);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(iommu_attach_device);
@@ -1057,6 +1134,10 @@ void iommu_detach_device(struct iommu_domain *domain, struct device *dev)
 
 	domain->ops->detach_dev(domain, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_detach_device_from_domain(dev);
+>>>>>>> v3.18
 =======
 	trace_detach_device_from_domain(dev);
 >>>>>>> v3.18
@@ -1112,6 +1193,7 @@ phys_addr_t iommu_iova_to_phys(struct iommu_domain *domain, dma_addr_t iova)
 EXPORT_SYMBOL_GPL(iommu_iova_to_phys);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int iommu_domain_has_cap(struct iommu_domain *domain,
 			 unsigned long cap)
 {
@@ -1122,6 +1204,8 @@ int iommu_domain_has_cap(struct iommu_domain *domain,
 }
 EXPORT_SYMBOL_GPL(iommu_domain_has_cap);
 =======
+=======
+>>>>>>> v3.18
 static size_t iommu_pgsize(struct iommu_domain *domain,
 			   unsigned long addr_merge, size_t size)
 {
@@ -1153,6 +1237,9 @@ static size_t iommu_pgsize(struct iommu_domain *domain,
 
 	return pgsize;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int iommu_map(struct iommu_domain *domain, unsigned long iova,
@@ -1164,7 +1251,11 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(domain->ops->unmap == NULL ||
+=======
+	if (unlikely(domain->ops->map == NULL ||
+>>>>>>> v3.18
 =======
 	if (unlikely(domain->ops->map == NULL ||
 >>>>>>> v3.18
@@ -1180,6 +1271,7 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
 	 * size of the smallest page supported by the hardware
 	 */
 	if (!IS_ALIGNED(iova | paddr | size, min_pagesz)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pr_err("unaligned: iova 0x%lx pa 0x%lx size 0x%lx min_pagesz "
 			"0x%x\n", iova, (unsigned long)paddr,
@@ -1221,6 +1313,8 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
 		pr_debug("mapping: iova 0x%lx pa 0x%lx pgsize %lu\n", iova,
 					(unsigned long)paddr, pgsize);
 =======
+=======
+>>>>>>> v3.18
 		pr_err("unaligned: iova 0x%lx pa %pa size 0x%zx min_pagesz 0x%x\n",
 		       iova, &paddr, size, min_pagesz);
 		return -EINVAL;
@@ -1233,6 +1327,9 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
 
 		pr_debug("mapping: iova 0x%lx pa %pa pgsize 0x%zx\n",
 			 iova, &paddr, pgsize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ret = domain->ops->map(domain, iova, paddr, pgsize, prot);
@@ -1248,6 +1345,11 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
 	if (ret)
 		iommu_unmap(domain, orig_iova, orig_size - size);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else
+		trace_map(iova, paddr, size);
+>>>>>>> v3.18
 =======
 	else
 		trace_map(iova, paddr, size);
@@ -1276,6 +1378,7 @@ size_t iommu_unmap(struct iommu_domain *domain, unsigned long iova, size_t size)
 	 */
 	if (!IS_ALIGNED(iova | size, min_pagesz)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("unaligned: iova 0x%lx size 0x%lx min_pagesz 0x%x\n",
 					iova, (unsigned long)size, min_pagesz);
 		return -EINVAL;
@@ -1284,12 +1387,17 @@ size_t iommu_unmap(struct iommu_domain *domain, unsigned long iova, size_t size)
 	pr_debug("unmap this: iova 0x%lx size 0x%lx\n", iova,
 							(unsigned long)size);
 =======
+=======
+>>>>>>> v3.18
 		pr_err("unaligned: iova 0x%lx size 0x%zx min_pagesz 0x%x\n",
 		       iova, size, min_pagesz);
 		return -EINVAL;
 	}
 
 	pr_debug("unmap this: iova 0x%lx size 0x%zx\n", iova, size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1297,6 +1405,7 @@ size_t iommu_unmap(struct iommu_domain *domain, unsigned long iova, size_t size)
 	 * or we hit an area that isn't mapped.
 	 */
 	while (unmapped < size) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		size_t left = size - unmapped;
 
@@ -1307,6 +1416,8 @@ size_t iommu_unmap(struct iommu_domain *domain, unsigned long iova, size_t size)
 		pr_debug("unmapped: iova 0x%lx size %lx\n", iova,
 					(unsigned long)unmapped_page);
 =======
+=======
+>>>>>>> v3.18
 		size_t pgsize = iommu_pgsize(domain, iova, size - unmapped);
 
 		unmapped_page = domain->ops->unmap(domain, iova, pgsize);
@@ -1315,6 +1426,9 @@ size_t iommu_unmap(struct iommu_domain *domain, unsigned long iova, size_t size)
 
 		pr_debug("unmapped: iova 0x%lx size 0x%zx\n",
 			 iova, unmapped_page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		iova += unmapped_page;
@@ -1322,6 +1436,10 @@ size_t iommu_unmap(struct iommu_domain *domain, unsigned long iova, size_t size)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_unmap(iova, 0, size);
+>>>>>>> v3.18
 =======
 	trace_unmap(iova, 0, size);
 >>>>>>> v3.18
@@ -1350,6 +1468,7 @@ void iommu_domain_window_disable(struct iommu_domain *domain, u32 wnd_nr)
 }
 EXPORT_SYMBOL_GPL(iommu_domain_window_disable);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int iommu_map_range(struct iommu_domain *domain, unsigned int iova,
 		    struct scatterlist *sg, unsigned int len, int prot)
@@ -1386,12 +1505,18 @@ EXPORT_SYMBOL_GPL(iommu_get_pt_base_addr);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int __init iommu_init(void)
 {
 	iommu_group_kset = kset_create_and_add("iommu_groups",
 					       NULL, kernel_kobj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idr_init(&iommu_group_idr);
+=======
+	ida_init(&iommu_group_ida);
+>>>>>>> v3.18
 =======
 	ida_init(&iommu_group_ida);
 >>>>>>> v3.18

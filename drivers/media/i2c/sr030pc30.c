@@ -9,7 +9,11 @@
  *
  * Based on mt9v011 Micron Digital Image Sensor driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2009 Mauro Carvalho Chehab (mchehab@redhat.com)
+=======
+ * Copyright (c) 2009 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (c) 2009 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -28,6 +32,10 @@
 #include <media/v4l2-subdev.h>
 #include <media/v4l2-mediabus.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/v4l2-ctrls.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-ctrls.h>
 >>>>>>> v3.18
@@ -151,6 +159,7 @@ module_param(debug, int, 0644);
 struct sr030pc30_info {
 	struct v4l2_subdev sd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct sr030pc30_platform_data *pdata;
 	const struct sr030pc30_format *curr_fmt;
 	const struct sr030pc30_frmsize *curr_win;
@@ -163,6 +172,8 @@ struct sr030pc30_info {
 	u8 blue_balance;
 	u8 red_balance;
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_ctrl_handler hdl;
 	const struct sr030pc30_platform_data *pdata;
 	const struct sr030pc30_format *curr_fmt;
@@ -181,6 +192,9 @@ struct sr030pc30_info {
 		struct v4l2_ctrl *autoexp;
 		struct v4l2_ctrl *exp;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 i2c_reg_page;
 };
@@ -202,6 +216,7 @@ struct i2c_regval {
 	u16 val;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct v4l2_queryctrl sr030pc30_ctrl[] = {
 	{
@@ -249,6 +264,8 @@ static const struct v4l2_queryctrl sr030pc30_ctrl[] = {
 	}
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* supported resolutions */
@@ -427,6 +444,7 @@ static int sr030pc30_pwr_ctrl(struct v4l2_subdev *sd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int sr030pc30_enable_autoexposure(struct v4l2_subdev *sd, int on)
 {
 	struct sr030pc30_info *info = to_sr030pc30(sd);
@@ -469,6 +487,8 @@ static int sr030pc30_enable_autowhitebalance(struct v4l2_subdev *sd, int on)
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int sr030pc30_set_flip(struct v4l2_subdev *sd)
@@ -533,6 +553,7 @@ static int sr030pc30_try_frame_size(struct v4l2_mbus_framefmt *mf)
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int sr030pc30_queryctrl(struct v4l2_subdev *sd,
 			       struct v4l2_queryctrl *qc)
@@ -636,6 +657,8 @@ static int sr030pc30_g_ctrl(struct v4l2_subdev *sd,
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 static int sr030pc30_s_ctrl(struct v4l2_ctrl *ctrl)
 {
 	struct sr030pc30_info *info =
@@ -686,6 +709,9 @@ static int sr030pc30_s_ctrl(struct v4l2_ctrl *ctrl)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -841,12 +867,15 @@ static int sr030pc30_s_power(struct v4l2_subdev *sd, int on)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct v4l2_subdev_core_ops sr030pc30_core_ops = {
 	.s_power	= sr030pc30_s_power,
 	.queryctrl	= sr030pc30_queryctrl,
 	.s_ctrl		= sr030pc30_s_ctrl,
 	.g_ctrl		= sr030pc30_g_ctrl,
 =======
+=======
+>>>>>>> v3.18
 static const struct v4l2_ctrl_ops sr030pc30_ctrl_ops = {
 	.s_ctrl = sr030pc30_s_ctrl,
 };
@@ -860,6 +889,9 @@ static const struct v4l2_subdev_core_ops sr030pc30_core_ops = {
 	.s_ctrl = v4l2_subdev_s_ctrl,
 	.queryctrl = v4l2_subdev_queryctrl,
 	.querymenu = v4l2_subdev_querymenu,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -912,6 +944,10 @@ static int sr030pc30_probe(struct i2c_client *client,
 	struct sr030pc30_info *info;
 	struct v4l2_subdev *sd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_ctrl_handler *hdl;
+>>>>>>> v3.18
 =======
 	struct v4l2_ctrl_handler *hdl;
 >>>>>>> v3.18
@@ -929,7 +965,11 @@ static int sr030pc30_probe(struct i2c_client *client,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = kzalloc(sizeof(*info), GFP_KERNEL);
+=======
+	info = devm_kzalloc(&client->dev, sizeof(*info), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	info = devm_kzalloc(&client->dev, sizeof(*info), GFP_KERNEL);
 >>>>>>> v3.18
@@ -943,11 +983,14 @@ static int sr030pc30_probe(struct i2c_client *client,
 	v4l2_i2c_subdev_init(sd, client, &sr030pc30_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->i2c_reg_page	= -1;
 	info->hflip		= 1;
 	info->auto_exp		= 1;
 	info->exposure		= 30;
 =======
+=======
+>>>>>>> v3.18
 	hdl = &info->hdl;
 	v4l2_ctrl_handler_init(hdl, 6);
 	info->awb = v4l2_ctrl_new_std(hdl, &sr030pc30_ctrl_ops,
@@ -973,6 +1016,9 @@ static int sr030pc30_probe(struct i2c_client *client,
 
 	info->i2c_reg_page	= -1;
 	info->hflip		= 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -982,10 +1028,16 @@ static int sr030pc30_remove(struct i2c_client *client)
 {
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sr030pc30_info *info = to_sr030pc30(sd);
 
 	v4l2_device_unregister_subdev(sd);
 	kfree(info);
+=======
+
+	v4l2_device_unregister_subdev(sd);
+	v4l2_ctrl_handler_free(sd->ctrl_handler);
+>>>>>>> v3.18
 =======
 
 	v4l2_device_unregister_subdev(sd);

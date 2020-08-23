@@ -70,7 +70,10 @@ static inline void thermal_gov_fair_share_unregister(void) {}
 #endif /* CONFIG_THERMAL_GOV_FAIR_SHARE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_THERMAL_GOV_BANG_BANG
 int thermal_gov_bang_bang_register(void);
 void thermal_gov_bang_bang_unregister(void);
@@ -79,6 +82,9 @@ static inline int thermal_gov_bang_bang_register(void) { return 0; }
 static inline void thermal_gov_bang_bang_unregister(void) {}
 #endif /* CONFIG_THERMAL_GOV_BANG_BANG */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_THERMAL_GOV_USER_SPACE
 int thermal_gov_user_space_register(void);
@@ -89,7 +95,10 @@ static inline void thermal_gov_user_space_unregister(void) {}
 #endif /* CONFIG_THERMAL_GOV_USER_SPACE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* device tree support */
 #ifdef CONFIG_THERMAL_OF
 int of_parse_thermal_zones(void);
@@ -99,5 +108,8 @@ static inline int of_parse_thermal_zones(void) { return 0; }
 static inline void of_thermal_destroy_zones(void) { }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __THERMAL_CORE_H__ */

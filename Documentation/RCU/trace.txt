@@ -397,6 +397,7 @@ o	Each element of the form "3/3 ..>. 0:7 ^0" represents one rcu_node
 The output of "cat rcu/rcu_sched/rcu_pending" looks as follows:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   0!np=26111 qsp=29 rpq=5386 cbr=1 cng=570 gpc=3674 gps=577 nn=15903
   1!np=28913 qsp=35 rpq=6097 cbr=1 cng=448 gpc=3700 gps=554 nn=18113
   2!np=32740 qsp=37 rpq=6202 cbr=0 cng=476 gpc=4627 gps=546 nn=20889
@@ -406,6 +407,8 @@ The output of "cat rcu/rcu_sched/rcu_pending" looks as follows:
   6!np=38648 qsp=5 rpq=7076 cbr=0 cng=840 gpc=4072 gps=961 nn=25699
   7 np=37275 qsp=2 rpq=6873 cbr=0 cng=868 gpc=3416 gps=971 nn=25147
 =======
+=======
+>>>>>>> v3.18
   0!np=26111 qsp=29 rpq=5386 cbr=1 cng=570 gpc=3674 gps=577 nn=15903 ndw=0
   1!np=28913 qsp=35 rpq=6097 cbr=1 cng=448 gpc=3700 gps=554 nn=18113 ndw=0
   2!np=32740 qsp=37 rpq=6202 cbr=0 cng=476 gpc=4627 gps=546 nn=20889 ndw=0
@@ -414,6 +417,9 @@ The output of "cat rcu/rcu_sched/rcu_pending" looks as follows:
   5 np=28910 qsp=2 rpq=5246 cbr=0 cng=428 gpc=4105 gps=709 nn=18422 ndw=0
   6!np=38648 qsp=5 rpq=7076 cbr=0 cng=840 gpc=4072 gps=961 nn=25699 ndw=0
   7 np=37275 qsp=2 rpq=6873 cbr=0 cng=868 gpc=3416 gps=971 nn=25147 ndw=0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The fields are as follows:
@@ -444,11 +450,17 @@ o	"gps" is the number of times that a new grace period had started,
 	but this CPU was not yet aware of it.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 o	"ndw" is the number of times that a wakeup of an rcuo
 	callback-offload kthread had to be deferred in order to avoid
 	deadlock.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 o	"nn" is the number of times that this CPU needed nothing.
 
@@ -462,7 +474,11 @@ The output of "cat rcu/rcuboost" looks as follows:
 
 This information is output only for rcu_preempt.  Each two-line entry
 <<<<<<< HEAD
+<<<<<<< HEAD
 corresponds to a leaf rcu_node strcuture.  The fields are as follows:
+=======
+corresponds to a leaf rcu_node structure.  The fields are as follows:
+>>>>>>> v3.18
 =======
 corresponds to a leaf rcu_node structure.  The fields are as follows:
 >>>>>>> v3.18
@@ -553,6 +569,7 @@ o	"nos" counts the number of times we balked for other
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_TINY_RCU and CONFIG_TINY_PREEMPT_RCU debugfs Files and Formats
 
 These implementations of RCU provides a single debugfs file under the
@@ -574,6 +591,8 @@ rcu_preempt section appearing only in CONFIG_TINY_PREEMPT_RCU builds.
 The last three lines of the rcu_preempt section appear only in
 CONFIG_RCU_BOOST kernel builds.  The fields are as follows:
 =======
+=======
+>>>>>>> v3.18
 CONFIG_TINY_RCU debugfs Files and Formats
 
 These implementations of RCU provides a single debugfs file under the
@@ -587,12 +606,16 @@ rcu_bh: qlen: 0
 
 This is split into rcu_sched and rcu_bh sections.  The field is as
 follows:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 o	"qlen" is the number of RCU callbacks currently waiting either
 	for an RCU grace period or waiting to be invoked.  This is the
 	only field present for rcu_sched and rcu_bh, due to the
 	short-circuiting of grace period in those two cases.
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 o	"gp" is the number of grace periods that have completed.
@@ -679,5 +702,7 @@ o	In the line beginning with "exp balk", the fields are as follows:
 	o	"nos" is the number of times that the system balked from
 		 boosting for inexplicable ("not otherwise specified")
 		 reasons.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -75,7 +75,11 @@ static struct file_system_type fs_type = {
  * to be removed (no automatic cleanup happens if your module is unloaded,
  * you are responsible here).  If an error occurs, the function will return
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the erorr value (via ERR_PTR).
+=======
+ * the error value (via ERR_PTR).
+>>>>>>> v3.18
 =======
  * the error value (via ERR_PTR).
 >>>>>>> v3.18
@@ -110,7 +114,11 @@ struct dentry *securityfs_create_file(const char *name, umode_t mode,
 
 	mutex_lock(&dir->i_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dentry = lookup_one_len2(name, mount, parent, strlen(name));
+=======
+	dentry = lookup_one_len(name, parent, strlen(name));
+>>>>>>> v3.18
 =======
 	dentry = lookup_one_len(name, parent, strlen(name));
 >>>>>>> v3.18

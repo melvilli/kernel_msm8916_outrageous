@@ -28,10 +28,13 @@
 			bus-frequency = <0>;
 			clock-frequency = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
 	};
 
 =======
+=======
+>>>>>>> v3.18
 			clocks = <&clks 12>;
 			operating-points = <
 				/* kHz    uV */
@@ -49,6 +52,9 @@
 		interrupts = <29>;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	axi {
 		compatible = "simple-bus";
@@ -77,14 +83,20 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			reset-controller@88010000 {
 				compatible = "sirf,prima2-rstc";
 				reg = <0x88010000 0x1000>;
 =======
+=======
+>>>>>>> v3.18
 			rstc: reset-controller@88010000 {
 				compatible = "sirf,prima2-rstc";
 				reg = <0x88010000 0x1000>;
 				#reset-cells = <1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -93,13 +105,19 @@
 				reg = <0x88020000 0x1000>;
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			cphifbg@88030000 {
 				compatible = "sirf,prima2-cphifbg";
 				reg = <0x88030000 0x1000>;
 				clocks = <&clks 42>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -112,11 +130,14 @@
 			memory-controller@90000000 {
 				compatible = "sirf,prima2-memc";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				reg = <0x90000000 0x10000>;
 				interrupts = <27>;
 				clocks = <&clks 5>;
 			};
 =======
+=======
+>>>>>>> v3.18
 				reg = <0x90000000 0x2000>;
 				interrupts = <27>;
 				clocks = <&clks 5>;
@@ -128,6 +149,9 @@
 				interrupts = <4>;
 				clocks = <&clks 32>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -171,7 +195,10 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		graphics2d-iobg {
 			compatible = "simple-bus";
 			#address-cells = <1>;
@@ -186,6 +213,9 @@
 			};
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dsp-iobg {
 			compatible = "simple-bus";
@@ -198,6 +228,10 @@
 				reg = <0xa8000000 0x10000>;
 				interrupts = <9>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				resets = <&rstc 1>;
+>>>>>>> v3.18
 =======
 				resets = <&rstc 1>;
 >>>>>>> v3.18
@@ -209,6 +243,10 @@
 				interrupts = <7>;
 				clocks = <&clks 9>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				resets = <&rstc 2>;
+>>>>>>> v3.18
 =======
 				resets = <&rstc 2>;
 >>>>>>> v3.18
@@ -220,6 +258,10 @@
 				interrupts = <8>;
 				clocks = <&clks 8>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				resets = <&rstc 0>;
+>>>>>>> v3.18
 =======
 				resets = <&rstc 0>;
 >>>>>>> v3.18
@@ -238,6 +280,10 @@
 				reg = <0xb0020000 0x1000>;
 				interrupts = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				clocks = <&clks 11>;
+>>>>>>> v3.18
 =======
 				clocks = <&clks 11>;
 >>>>>>> v3.18
@@ -265,6 +311,11 @@
 				fifosize = <128>;
 				clocks = <&clks 13>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				dmas = <&dmac1 5>, <&dmac0 2>;
+				dma-names = "rx", "tx";
+>>>>>>> v3.18
 =======
 				dmas = <&dmac1 5>, <&dmac0 2>;
 				dma-names = "rx", "tx";
@@ -279,6 +330,10 @@
 				fifosize = <32>;
 				clocks = <&clks 14>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				dma-names = "no-rx", "no-tx";
+>>>>>>> v3.18
 =======
 				dma-names = "no-rx", "no-tx";
 >>>>>>> v3.18
@@ -292,6 +347,11 @@
 				fifosize = <128>;
 				clocks = <&clks 15>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				dmas = <&dmac0 6>, <&dmac0 7>;
+				dma-names = "rx", "tx";
+>>>>>>> v3.18
 =======
 				dmas = <&dmac0 6>, <&dmac0 7>;
 				dma-names = "rx", "tx";
@@ -304,12 +364,18 @@
 				reg = <0xb0080000 0x10000>;
 				interrupts = <20>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				clocks = <&clks 28>;
 =======
+=======
+>>>>>>> v3.18
 				fifosize = <128>;
 				clocks = <&clks 28>;
 				dmas = <&dmac1 1>, <&dmac1 2>;
 				dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -319,12 +385,18 @@
 				reg = <0xb0090000 0x10000>;
 				interrupts = <21>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				clocks = <&clks 29>;
 =======
+=======
+>>>>>>> v3.18
 				fifosize = <128>;
 				clocks = <&clks 29>;
 				dmas = <&dmac0 14>, <&dmac0 15>;
 				dma-names = "rx", "tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -335,6 +407,10 @@
 				interrupts = <12>;
 				clocks = <&clks 24>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				#dma-cells = <1>;
+>>>>>>> v3.18
 =======
 				#dma-cells = <1>;
 >>>>>>> v3.18
@@ -347,6 +423,10 @@
 				interrupts = <13>;
 				clocks = <&clks 25>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				#dma-cells = <1>;
+>>>>>>> v3.18
 =======
 				#dma-cells = <1>;
 >>>>>>> v3.18
@@ -357,6 +437,11 @@
 				reg = <0xb00C0000 0x10000>;
 				clocks = <&clks 31>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				interrupts = <14>;
+				sirf,vip-dma-rx-channel = <16>;
+>>>>>>> v3.18
 =======
 				interrupts = <14>;
 				sirf,vip-dma-rx-channel = <16>;
@@ -370,9 +455,15 @@
 				interrupts = <15>;
 				sirf,spi-num-chipselects = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cs-gpios = <&gpio 0 0>;
 				sirf,spi-dma-rx-channel = <25>;
 				sirf,spi-dma-tx-channel = <20>;
+=======
+				dmas = <&dmac1 9>,
+				     <&dmac1 4>;
+				dma-names = "rx", "tx";
+>>>>>>> v3.18
 =======
 				dmas = <&dmac1 9>,
 				     <&dmac1 4>;
@@ -390,13 +481,19 @@
 				reg = <0xb0170000 0x10000>;
 				interrupts = <16>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				sirf,spi-num-chipselects = <1>;
 				dmas = <&dmac0 12>,
 				     <&dmac0 13>;
 				dma-names = "rx", "tx";
 				#address-cells = <1>;
 				#size-cells = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				clocks = <&clks 20>;
 				status = "disabled";
@@ -469,13 +566,19 @@
 					};
 				};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				uart0_noflow_pins_a: uart0@1 {
 					uart {
 						sirf,pins = "uart0_nostreamctrlgrp";
 						sirf,function = "uart0_nostreamctrl";
 					};
 				};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				uart1_pins_a: uart1@0 {
 					uart {
@@ -634,7 +737,10 @@
                                         };
                                 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				usp0_uart_nostreamctrl_pins_a: usp0@1 {
                                         usp0 {
                                                 sirf,pins = "usp0_uart_nostreamctrl_grp";
@@ -653,6 +759,9 @@
 						sirf,function = "usp0_only_urfs";
 					};
 				};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                                 usp1_pins_a: usp1@0 {
                                         usp1 {
@@ -661,13 +770,19 @@
                                         };
                                 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				usp1_uart_nostreamctrl_pins_a: usp1@1 {
                                         usp1 {
                                                 sirf,pins = "usp1_uart_nostreamctrl_grp";
                                                 sirf,function = "usp1_uart_nostreamctrl";
                                         };
                                 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                                 usb0_upli_drvbus_pins_a: usb0_upli_drvbus@0 {
                                         usb0_upli_drvbus {
@@ -682,7 +797,10 @@
                                         };
                                 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
                                 usb1_dp_dn_pins_a: usb1_dp_dn@0 {
                                         usb1_dp_dn {
                                                 sirf,pins = "usb1_dp_dngrp";
@@ -695,6 +813,9 @@
                                                 sirf,function = "uart1_route_io_usb1";
                                         };
                                 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                                 warm_rst_pins_a: warm_rst@0 {
                                         warm_rst {
@@ -709,6 +830,7 @@
                                         };
                                 };
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 cko0_rst_pins_a: cko0_rst@0 {
                                         cko0_rst {
                                                 sirf,pins = "cko0_rstgrp";
@@ -720,6 +842,8 @@
                                                 sirf,pins = "cko1_rstgrp";
                                                 sirf,function = "cko1_rst";
 =======
+=======
+>>>>>>> v3.18
                                 cko0_pins_a: cko0@0 {
                                         cko0 {
                                                 sirf,pins = "cko0grp";
@@ -730,6 +854,9 @@
                                         cko1 {
                                                 sirf,pins = "cko1grp";
                                                 sirf,function = "cko1";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                                         };
                                 };
@@ -776,6 +903,10 @@
 					interrupts = <38>;
 					status = "disabled";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					bus-width = <4>;
+>>>>>>> v3.18
 =======
 					bus-width = <4>;
 >>>>>>> v3.18
@@ -789,6 +920,10 @@
 					interrupts = <23>;
 					status = "disabled";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					bus-width = <4>;
+>>>>>>> v3.18
 =======
 					bus-width = <4>;
 >>>>>>> v3.18
@@ -802,6 +937,10 @@
 					interrupts = <23>;
 					status = "disabled";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					bus-width = <4>;
+>>>>>>> v3.18
 =======
 					bus-width = <4>;
 >>>>>>> v3.18
@@ -815,6 +954,10 @@
 					interrupts = <39>;
 					status = "disabled";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					bus-width = <4>;
+>>>>>>> v3.18
 =======
 					bus-width = <4>;
 >>>>>>> v3.18
@@ -836,7 +979,11 @@
 
 		rtc-iobg {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			compatible = "sirf,prima2-rtciobg", "sirf-prima2-rtciobg-bus";
+=======
+			compatible = "sirf,prima2-rtciobg", "sirf-prima2-rtciobg-bus", "simple-bus";
+>>>>>>> v3.18
 =======
 			compatible = "sirf,prima2-rtciobg", "sirf-prima2-rtciobg-bus", "simple-bus";
 >>>>>>> v3.18
@@ -857,13 +1004,19 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			minigpsrtc@2000 {
 				compatible = "sirf,prima2-minigpsrtc";
 				reg = <0x2000 0x1000>;
 				interrupts = <54>;
 			};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pwrc@3000 {
 				compatible = "sirf,prima2-pwrc";

@@ -26,6 +26,7 @@
 
 /* GPIO1 registers within SYS_ area */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SYS_TRIOUTRD		0x100
 #define SYS_TRIOUTCLR		0x100
 #define SYS_OUTPUTRD		0x108
@@ -41,6 +42,8 @@
 #define GPIO2_INTENABLE		0x10
 #define GPIO2_ENABLE		0x14
 =======
+=======
+>>>>>>> v3.18
 #define AU1000_SYS_TRIOUTRD	0x100
 #define AU1000_SYS_TRIOUTCLR	0x100
 #define AU1000_SYS_OUTPUTRD	0x108
@@ -55,6 +58,9 @@
 #define AU1000_GPIO2_PINSTATE	0x0C
 #define AU1000_GPIO2_INTENABLE	0x10
 #define AU1000_GPIO2_ENABLE	0x14
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct gpio;
@@ -235,6 +241,7 @@ static inline int au1200_irq_to_gpio(int irq)
 static inline void alchemy_gpio1_set_value(int gpio, int v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *base = (void __iomem *)KSEG1ADDR(AU1000_SYS_PHYS_ADDR);
 	unsigned long mask = 1 << (gpio - ALCHEMY_GPIO1_BASE);
 	unsigned long r = v ? SYS_OUTPUTSET : SYS_OUTPUTCLR;
@@ -245,14 +252,24 @@ static inline void alchemy_gpio1_set_value(int gpio, int v)
 	unsigned long r = v ? AU1000_SYS_OUTPUTSET : AU1000_SYS_OUTPUTCLR;
 	alchemy_wrsys(mask, r);
 >>>>>>> v3.18
+=======
+	unsigned long mask = 1 << (gpio - ALCHEMY_GPIO1_BASE);
+	unsigned long r = v ? AU1000_SYS_OUTPUTSET : AU1000_SYS_OUTPUTCLR;
+	alchemy_wrsys(mask, r);
+>>>>>>> v3.18
 }
 
 static inline int alchemy_gpio1_get_value(int gpio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *base = (void __iomem *)KSEG1ADDR(AU1000_SYS_PHYS_ADDR);
 	unsigned long mask = 1 << (gpio - ALCHEMY_GPIO1_BASE);
 	return __raw_readl(base + SYS_PINSTATERD) & mask;
+=======
+	unsigned long mask = 1 << (gpio - ALCHEMY_GPIO1_BASE);
+	return alchemy_rdsys(AU1000_SYS_PINSTATERD) & mask;
+>>>>>>> v3.18
 =======
 	unsigned long mask = 1 << (gpio - ALCHEMY_GPIO1_BASE);
 	return alchemy_rdsys(AU1000_SYS_PINSTATERD) & mask;
@@ -262,10 +279,15 @@ static inline int alchemy_gpio1_get_value(int gpio)
 static inline int alchemy_gpio1_direction_input(int gpio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *base = (void __iomem *)KSEG1ADDR(AU1000_SYS_PHYS_ADDR);
 	unsigned long mask = 1 << (gpio - ALCHEMY_GPIO1_BASE);
 	__raw_writel(mask, base + SYS_TRIOUTCLR);
 	wmb();
+=======
+	unsigned long mask = 1 << (gpio - ALCHEMY_GPIO1_BASE);
+	alchemy_wrsys(mask, AU1000_SYS_TRIOUTCLR);
+>>>>>>> v3.18
 =======
 	unsigned long mask = 1 << (gpio - ALCHEMY_GPIO1_BASE);
 	alchemy_wrsys(mask, AU1000_SYS_TRIOUTCLR);
@@ -313,7 +335,11 @@ static inline void __alchemy_gpio2_mod_dir(int gpio, int to_out)
 	void __iomem *base = (void __iomem *)KSEG1ADDR(AU1500_GPIO2_PHYS_ADDR);
 	unsigned long mask = 1 << (gpio - ALCHEMY_GPIO2_BASE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long d = __raw_readl(base + GPIO2_DIR);
+=======
+	unsigned long d = __raw_readl(base + AU1000_GPIO2_DIR);
+>>>>>>> v3.18
 =======
 	unsigned long d = __raw_readl(base + AU1000_GPIO2_DIR);
 >>>>>>> v3.18
@@ -323,7 +349,11 @@ static inline void __alchemy_gpio2_mod_dir(int gpio, int to_out)
 	else
 		d &= ~mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(d, base + GPIO2_DIR);
+=======
+	__raw_writel(d, base + AU1000_GPIO2_DIR);
+>>>>>>> v3.18
 =======
 	__raw_writel(d, base + AU1000_GPIO2_DIR);
 >>>>>>> v3.18
@@ -336,7 +366,11 @@ static inline void alchemy_gpio2_set_value(int gpio, int v)
 	unsigned long mask;
 	mask = ((v) ? 0x00010001 : 0x00010000) << (gpio - ALCHEMY_GPIO2_BASE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(mask, base + GPIO2_OUTPUT);
+=======
+	__raw_writel(mask, base + AU1000_GPIO2_OUTPUT);
+>>>>>>> v3.18
 =======
 	__raw_writel(mask, base + AU1000_GPIO2_OUTPUT);
 >>>>>>> v3.18
@@ -347,7 +381,12 @@ static inline int alchemy_gpio2_get_value(int gpio)
 {
 	void __iomem *base = (void __iomem *)KSEG1ADDR(AU1500_GPIO2_PHYS_ADDR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(base + GPIO2_PINSTATE) & (1 << (gpio - ALCHEMY_GPIO2_BASE));
+=======
+	return __raw_readl(base + AU1000_GPIO2_PINSTATE) &
+				(1 << (gpio - ALCHEMY_GPIO2_BASE));
+>>>>>>> v3.18
 =======
 	return __raw_readl(base + AU1000_GPIO2_PINSTATE) &
 				(1 << (gpio - ALCHEMY_GPIO2_BASE));
@@ -403,7 +442,11 @@ static inline void __alchemy_gpio2_mod_int(int gpio2, int en)
 {
 	void __iomem *base = (void __iomem *)KSEG1ADDR(AU1500_GPIO2_PHYS_ADDR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long r = __raw_readl(base + GPIO2_INTENABLE);
+=======
+	unsigned long r = __raw_readl(base + AU1000_GPIO2_INTENABLE);
+>>>>>>> v3.18
 =======
 	unsigned long r = __raw_readl(base + AU1000_GPIO2_INTENABLE);
 >>>>>>> v3.18
@@ -412,7 +455,11 @@ static inline void __alchemy_gpio2_mod_int(int gpio2, int en)
 	else
 		r &= ~(1 << gpio2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(r, base + GPIO2_INTENABLE);
+=======
+	__raw_writel(r, base + AU1000_GPIO2_INTENABLE);
+>>>>>>> v3.18
 =======
 	__raw_writel(r, base + AU1000_GPIO2_INTENABLE);
 >>>>>>> v3.18
@@ -493,9 +540,15 @@ static inline void alchemy_gpio2_enable(void)
 {
 	void __iomem *base = (void __iomem *)KSEG1ADDR(AU1500_GPIO2_PHYS_ADDR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(3, base + GPIO2_ENABLE);	/* reset, clock enabled */
 	wmb();
 	__raw_writel(1, base + GPIO2_ENABLE);	/* clock enabled */
+=======
+	__raw_writel(3, base + AU1000_GPIO2_ENABLE);	/* reset, clock enabled */
+	wmb();
+	__raw_writel(1, base + AU1000_GPIO2_ENABLE);	/* clock enabled */
+>>>>>>> v3.18
 =======
 	__raw_writel(3, base + AU1000_GPIO2_ENABLE);	/* reset, clock enabled */
 	wmb();
@@ -513,7 +566,11 @@ static inline void alchemy_gpio2_disable(void)
 {
 	void __iomem *base = (void __iomem *)KSEG1ADDR(AU1500_GPIO2_PHYS_ADDR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(2, base + GPIO2_ENABLE);	/* reset, clock disabled */
+=======
+	__raw_writel(2, base + AU1000_GPIO2_ENABLE);	/* reset, clock disabled */
+>>>>>>> v3.18
 =======
 	__raw_writel(2, base + AU1000_GPIO2_ENABLE);	/* reset, clock disabled */
 >>>>>>> v3.18

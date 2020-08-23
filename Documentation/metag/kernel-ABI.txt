@@ -190,7 +190,11 @@ call:
 64-bit arguments are placed in matching pairs of registers (i.e. the same
 register number in both D0 and D1 units), with the least significant half in D0
 <<<<<<< HEAD
+<<<<<<< HEAD
 and the most significant half in D1, leaving a gap where necessary. Futher
+=======
+and the most significant half in D1, leaving a gap where necessary. Further
+>>>>>>> v3.18
 =======
 and the most significant half in D1, leaving a gap where necessary. Further
 >>>>>>> v3.18

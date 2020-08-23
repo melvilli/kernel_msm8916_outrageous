@@ -19,12 +19,18 @@
 #define __ARCH_IRQ_EXIT_IRQS_DISABLED
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HARDIRQ_BITS	8
 =======
+=======
+>>>>>>> v3.18
 static inline void ack_bad_irq(unsigned int irq)
 {
 	printk(KERN_CRIT "unexpected IRQ trap at vector %02x\n", irq);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __ASM_HARDIRQ_H */

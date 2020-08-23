@@ -544,7 +544,11 @@ THe code within the for loop was changed to:
 
 As you can see tmppar is used to accumulate the parity within a for
 <<<<<<< HEAD
+<<<<<<< HEAD
 iteration. In the last 3 statements is is added to par and, if needed,
+=======
+iteration. In the last 3 statements is added to par and, if needed,
+>>>>>>> v3.18
 =======
 iteration. In the last 3 statements is added to par and, if needed,
 >>>>>>> v3.18

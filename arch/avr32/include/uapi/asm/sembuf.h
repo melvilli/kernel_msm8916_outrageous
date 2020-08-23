@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_AVR32_SEMBUF_H
 #define __ASM_AVR32_SEMBUF_H
+=======
+#ifndef _UAPI__ASM_AVR32_SEMBUF_H
+#define _UAPI__ASM_AVR32_SEMBUF_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI__ASM_AVR32_SEMBUF_H
 #define _UAPI__ASM_AVR32_SEMBUF_H
@@ -28,7 +33,11 @@ struct semid64_ds {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_AVR32_SEMBUF_H */
+=======
+#endif /* _UAPI__ASM_AVR32_SEMBUF_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI__ASM_AVR32_SEMBUF_H */
 >>>>>>> v3.18

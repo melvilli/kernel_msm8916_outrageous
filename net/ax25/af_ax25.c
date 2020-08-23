@@ -112,9 +112,15 @@ again:
  */
 static int ax25_device_event(struct notifier_block *this, unsigned long event,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *ptr)
 {
 	struct net_device *dev = (struct net_device *)ptr;
+=======
+			     void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 			     void *ptr)
 {
@@ -813,9 +819,12 @@ static int ax25_create(struct net *net, struct socket *sock, int protocol,
 	ax25_cb *ax25;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (protocol < 0 || protocol > SK_PROTOCOL_MAX)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!net_eq(net, &init_net))
@@ -1448,7 +1457,11 @@ static int ax25_sendmsg(struct kiocb *iocb, struct socket *sock,
 			struct msghdr *msg, size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_ax25 *usax = (struct sockaddr_ax25 *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_ax25 *, usax, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_ax25 *, usax, msg->msg_name);
 >>>>>>> v3.18
@@ -1657,7 +1670,11 @@ static int ax25_recvmsg(struct kiocb *iocb, struct socket *sock,
 		ax25_address src;
 		const unsigned char *mac = skb_mac_header(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sockaddr_ax25 *sax = msg->msg_name;
+=======
+		DECLARE_SOCKADDR(struct sockaddr_ax25 *, sax, msg->msg_name);
+>>>>>>> v3.18
 =======
 		DECLARE_SOCKADDR(struct sockaddr_ax25 *, sax, msg->msg_name);
 >>>>>>> v3.18
@@ -1756,7 +1773,11 @@ static int ax25_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (amount > AX25_NOUID_BLOCK) {
+=======
+		if (amount < 0 || amount > AX25_NOUID_BLOCK) {
+>>>>>>> v3.18
 =======
 		if (amount < 0 || amount > AX25_NOUID_BLOCK) {
 >>>>>>> v3.18
@@ -1999,7 +2020,11 @@ static struct packet_type ax25_packet_type __read_mostly = {
 
 static struct notifier_block ax25_dev_notifier = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.notifier_call =ax25_device_event,
+=======
+	.notifier_call = ax25_device_event,
+>>>>>>> v3.18
 =======
 	.notifier_call = ax25_device_event,
 >>>>>>> v3.18

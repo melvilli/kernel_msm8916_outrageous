@@ -3,6 +3,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Now we have all buffers that must be used in balancing of the tree 	*/
 /* Further calculations can not cause schedule(), and thus the buffer 	*/
 /* tree will be stable until the balancing will be finished 		*/
@@ -18,6 +19,8 @@
 
 #include <asm/uaccess.h>
 =======
+=======
+>>>>>>> v3.18
 /*
  * Now we have all buffers that must be used in balancing of the tree
  * Further calculations can not cause schedule(), and thus the buffer
@@ -27,6 +30,9 @@
  */
 
 #include <linux/uaccess.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/time.h>
 #include "reiserfs.h"
@@ -74,8 +80,12 @@ inline void do_balance_mark_leaf_dirty(struct tree_balance *tb,
 				       struct buffer_head *bh, int flag)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	journal_mark_dirty(tb->transaction_handle,
 			   tb->transaction_handle->t_super, bh);
+=======
+	journal_mark_dirty(tb->transaction_handle, bh);
+>>>>>>> v3.18
 =======
 	journal_mark_dirty(tb->transaction_handle, bh);
 >>>>>>> v3.18
@@ -84,6 +94,7 @@ inline void do_balance_mark_leaf_dirty(struct tree_balance *tb,
 #define do_balance_mark_internal_dirty do_balance_mark_leaf_dirty
 #define do_balance_mark_sb_dirty do_balance_mark_leaf_dirty
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* summary:
  if deleting something ( tb->insert_size[0] < 0 )
@@ -110,6 +121,8 @@ be performed by do_balance.
 
 /* Balance leaf node in case of delete or cut: insert_size[0] < 0
 =======
+=======
+>>>>>>> v3.18
 /*
  * summary:
  *  if deleting something ( tb->insert_size[0] < 0 )
@@ -277,13 +290,21 @@ static int balance_leaf_when_delete_left(struct tree_balance *tb)
 
 /*
  * Balance leaf node in case of delete or cut: insert_size[0] < 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * lnum, rnum can have values >= -1
  *	-1 means that the neighbor must be joined with S
  *	 0 means that nothing should be done with the neighbor
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	>0 means to shift entirely or partly the specified number of items to the neighbor
+=======
+ *	>0 means to shift entirely or partly the specified number of items
+ *         to the neighbor
+>>>>>>> v3.18
 =======
  *	>0 means to shift entirely or partly the specified number of items
  *         to the neighbor
@@ -294,7 +315,10 @@ static int balance_leaf_when_delete(struct tree_balance *tb, int flag)
 	struct buffer_head *tbS0 = PATH_PLAST_BUFFER(tb->tb_path);
 	int item_pos = PATH_LAST_POSITION(tb->tb_path);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int pos_in_item = tb->tb_path->pos_in_item;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct buffer_info bi;
@@ -309,7 +333,11 @@ static int balance_leaf_when_delete(struct tree_balance *tb, int flag)
 	       "PAP-12010: tree can not be empty");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ih = B_N_PITEM_HEAD(tbS0, item_pos);
+=======
+	ih = item_head(tbS0, item_pos);
+>>>>>>> v3.18
 =======
 	ih = item_head(tbS0, item_pos);
 >>>>>>> v3.18
@@ -317,6 +345,7 @@ static int balance_leaf_when_delete(struct tree_balance *tb, int flag)
 
 	/* Delete or truncate the item */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (flag) {
 	case M_DELETE:		/* delete item in S[0] */
@@ -1835,6 +1864,8 @@ static int balance_leaf(struct tree_balance *tb, struct item_head *ih,	/* item h
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	BUG_ON(flag != M_DELETE && flag != M_CUT);
 	if (flag == M_DELETE)
 		balance_leaf_when_delete_del(tb);
@@ -3041,6 +3072,9 @@ static int balance_leaf(struct tree_balance *tb, struct item_head *ih,
 
 	balance_leaf_finish_node(tb, ih, body, flag);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_REISERFS_CHECK
 	if (flag == M_PASTE && tb->insert_size[0]) {
@@ -3050,15 +3084,21 @@ static int balance_leaf(struct tree_balance *tb, struct item_head *ih,
 			       tb->insert_size[0]);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif				/* CONFIG_REISERFS_CHECK */
 	return 0;
 }				/* Leaf level of the tree is balanced (end of balance_leaf) */
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 	/* Leaf level of the tree is balanced (end of balance_leaf) */
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Make empty node */
@@ -3099,9 +3139,13 @@ struct buffer_head *get_FEB(struct tree_balance *tb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This is now used because reiserfs_free_block has to be able to
 ** schedule.
 */
+=======
+/* This is now used because reiserfs_free_block has to be able to schedule. */
+>>>>>>> v3.18
 =======
 /* This is now used because reiserfs_free_block has to be able to schedule. */
 >>>>>>> v3.18
@@ -3171,15 +3215,21 @@ void replace_key(struct tree_balance *tb, struct buffer_head *dest, int n_dest,
 	if (B_IS_ITEMS_LEVEL(src))
 		/* source buffer contains leaf node */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(B_N_PDELIM_KEY(dest, n_dest), B_N_PITEM_HEAD(src, n_src),
 		       KEY_SIZE);
 	else
 		memcpy(B_N_PDELIM_KEY(dest, n_dest), B_N_PDELIM_KEY(src, n_src),
 =======
+=======
+>>>>>>> v3.18
 		memcpy(internal_key(dest, n_dest), item_head(src, n_src),
 		       KEY_SIZE);
 	else
 		memcpy(internal_key(dest, n_dest), internal_key(src, n_src),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       KEY_SIZE);
 
@@ -3267,13 +3317,19 @@ static int check_before_balancing(struct tree_balance *tb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* double check that buffers that we will modify are unlocked. (fix_nodes should already have
 	   prepped all of these for us). */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * double check that buffers that we will modify are unlocked.
 	 * (fix_nodes should already have prepped all of these for us).
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (tb->lnum[0]) {
 		retval |= locked_or_not_in_tree(tb, tb->L[0], "L[0]");
@@ -3368,6 +3424,7 @@ static void check_internal_levels(struct tree_balance *tb)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Now we have all of the buffers that must be used in balancing of
    the tree.  We rely on the assumption that schedule() will not occur
    while do_balance works. ( Only interrupt handlers are acceptable.)
@@ -3406,6 +3463,8 @@ static inline void do_balance_starts(struct tree_balance *tb)
 	/* use print_cur_tb() to see initial state of struct
 	   tree_balance */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Now we have all of the buffers that must be used in balancing of
  * the tree.  We rely on the assumption that schedule() will not occur
@@ -3443,19 +3502,28 @@ static inline void do_balance_starts(struct tree_balance *tb)
 static inline void do_balance_starts(struct tree_balance *tb)
 {
 	/* use print_cur_tb() to see initial state of struct tree_balance */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* store_print_tb (tb); */
 
 	/* do not delete, just comment it out */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*    print_tb(flag, PATH_LAST_POSITION(tb->tb_path), tb->tb_path->pos_in_item, tb,
 	     "check");*/
 =======
+=======
+>>>>>>> v3.18
 	/*
 	print_tb(flag, PATH_LAST_POSITION(tb->tb_path),
 		 tb->tb_path->pos_in_item, tb, "check");
 	*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	RFALSE(check_before_balancing(tb), "PAP-12340: locked buffers in TB");
 #ifdef CONFIG_REISERFS_CHECK
@@ -3473,14 +3541,20 @@ static inline void do_balance_completed(struct tree_balance *tb)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* reiserfs_free_block is no longer schedule safe.  So, we need to
 	 ** put the buffers we want freed on the thrown list during do_balance,
 	 ** and then free them now
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * reiserfs_free_block is no longer schedule safe.  So, we need to
 	 * put the buffers we want freed on the thrown list during do_balance,
 	 * and then free them now
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 
@@ -3492,6 +3566,7 @@ static inline void do_balance_completed(struct tree_balance *tb)
 	free_thrown(tb);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void do_balance(struct tree_balance *tb,	/* tree_balance structure */
 		struct item_head *ih,	/* item header of inserted item */
@@ -3524,6 +3599,8 @@ void do_balance(struct tree_balance *tb,	/* tree_balance structure */
 	struct buffer_head *insert_ptr[2];	/* inserted node-ptrs for the next
 						   level */
 =======
+=======
+>>>>>>> v3.18
 /*
  * do_balance - balance the tree
  *
@@ -3558,6 +3635,9 @@ void do_balance(struct tree_balance *tb, struct item_head *ih,
 
 	/* inserted node-ptrs for the next level */
 	struct buffer_head *insert_ptr[2];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tb->tb_mode = flag;
@@ -3576,6 +3656,7 @@ void do_balance(struct tree_balance *tb, struct item_head *ih,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_inc(&(fs_generation(tb->tb_sb)));
 	do_balance_starts(tb);
 
@@ -3583,6 +3664,8 @@ void do_balance(struct tree_balance *tb, struct item_head *ih,
 	   one node.  see balance_internal() for explanation of this
 	   line of code. */
 =======
+=======
+>>>>>>> v3.18
 	atomic_inc(&fs_generation(tb->tb_sb));
 	do_balance_starts(tb);
 
@@ -3591,6 +3674,9 @@ void do_balance(struct tree_balance *tb, struct item_head *ih,
 	 * one node.  see balance_internal() for explanation of this
 	 * line of code.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	child_pos = PATH_H_B_ITEM_ORDER(tb->tb_path, 0) +
 	    balance_leaf(tb, ih, body, flag, insert_key, insert_ptr);
@@ -3602,15 +3688,21 @@ void do_balance(struct tree_balance *tb, struct item_head *ih,
 	/* Balance internal level of the tree. */
 	for (h = 1; h < MAX_HEIGHT && tb->insert_size[h]; h++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		child_pos =
 		    balance_internal(tb, h, child_pos, insert_key, insert_ptr);
 
 	do_balance_completed(tb);
 
 =======
+=======
+>>>>>>> v3.18
 		child_pos = balance_internal(tb, h, child_pos, insert_key,
 					     insert_ptr);
 
 	do_balance_completed(tb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

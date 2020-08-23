@@ -2,7 +2,11 @@
 #
 # Intel 82575 PCI-Express Ethernet Linux driver
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Copyright(c) 1999 - 2013 Intel Corporation.
+=======
+# Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
 # Copyright(c) 1999 - 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -18,8 +22,12 @@
 #
 # You should have received a copy of the GNU General Public License along with
 <<<<<<< HEAD
+<<<<<<< HEAD
 # this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
+=======
+# this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 # this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18

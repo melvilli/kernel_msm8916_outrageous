@@ -22,6 +22,10 @@
 typedef u64 cycle_t;
 struct clocksource;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct module;
+>>>>>>> v3.18
 =======
 struct module;
 >>>>>>> v3.18
@@ -166,7 +170,11 @@ extern u64 timecounter_cyc2time(struct timecounter *tc,
  * @suspend:		suspend function for the clocksource, if necessary
  * @resume:		resume function for the clocksource, if necessary
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @cycle_last:		most recent cycle counter value seen by ::read()
+=======
+ * @owner:		module reference, must be set by clocksource in modules
+>>>>>>> v3.18
 =======
  * @owner:		module reference, must be set by clocksource in modules
 >>>>>>> v3.18
@@ -178,7 +186,10 @@ struct clocksource {
 	 */
 	cycle_t (*read)(struct clocksource *cs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cycle_t cycle_last;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cycle_t mask;
@@ -207,6 +218,10 @@ struct clocksource {
 	cycle_t wd_last;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct module *owner;
+>>>>>>> v3.18
 =======
 	struct module *owner;
 >>>>>>> v3.18
@@ -223,6 +238,10 @@ struct clocksource {
 #define CLOCK_SOURCE_UNSTABLE			0x40
 #define CLOCK_SOURCE_SUSPEND_NONSTOP		0x80
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CLOCK_SOURCE_RESELECT			0x100
+>>>>>>> v3.18
 =======
 #define CLOCK_SOURCE_RESELECT			0x100
 >>>>>>> v3.18
@@ -299,7 +318,11 @@ static inline s64 clocksource_cyc2ns(cycle_t cycles, u32 mult, u32 shift)
 
 extern int clocksource_register(struct clocksource*);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void clocksource_unregister(struct clocksource*);
+=======
+extern int clocksource_unregister(struct clocksource*);
+>>>>>>> v3.18
 =======
 extern int clocksource_unregister(struct clocksource*);
 >>>>>>> v3.18
@@ -347,7 +370,11 @@ static inline void __clocksource_updatefreq_khz(struct clocksource *cs, u32 khz)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void timekeeping_notify(struct clocksource *clock);
+=======
+extern int timekeeping_notify(struct clocksource *clock);
+>>>>>>> v3.18
 =======
 extern int timekeeping_notify(struct clocksource *clock);
 >>>>>>> v3.18
@@ -362,6 +389,7 @@ extern int clocksource_mmio_init(void __iomem *, const char *,
 
 extern int clocksource_i8253_init(void);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct device_node;
 typedef void(*clocksource_of_init_fn)(struct device_node *);
@@ -381,6 +409,8 @@ static inline void clocksource_of_init(void) {}
 		 = { .compatible = compat,				\
 		     .data = (fn == (clocksource_of_init_fn)NULL) ? fn : fn }
 =======
+=======
+>>>>>>> v3.18
 #define CLOCKSOURCE_OF_DECLARE(name, compat, fn) \
 	OF_DECLARE_1(clksrc, name, compat, fn)
 
@@ -388,6 +418,9 @@ static inline void clocksource_of_init(void) {}
 extern void clocksource_of_init(void);
 #else
 static inline void clocksource_of_init(void) {}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

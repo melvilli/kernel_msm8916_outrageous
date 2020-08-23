@@ -7,8 +7,13 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cfg80211_stop_ap(struct cfg80211_registered_device *rdev,
 			      struct net_device *dev)
+=======
+int __cfg80211_stop_ap(struct cfg80211_registered_device *rdev,
+		       struct net_device *dev, bool notify)
+>>>>>>> v3.18
 =======
 int __cfg80211_stop_ap(struct cfg80211_registered_device *rdev,
 		       struct net_device *dev, bool notify)
@@ -31,12 +36,15 @@ int __cfg80211_stop_ap(struct cfg80211_registered_device *rdev,
 
 	err = rdev_stop_ap(rdev, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wdev->beacon_interval = 0;
 	if (!err) {
 		wdev->channel = NULL;
 		wdev->ssid_len = 0;
 		rdev_set_qos_map(rdev, dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	if (!err) {
 		wdev->beacon_interval = 0;
 		memset(&wdev->chandef, 0, sizeof(wdev->chandef));
@@ -44,6 +52,9 @@ int __cfg80211_stop_ap(struct cfg80211_registered_device *rdev,
 		rdev_set_qos_map(rdev, dev, NULL);
 		if (notify)
 			nl80211_send_ap_stopped(wdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -52,7 +63,11 @@ int __cfg80211_stop_ap(struct cfg80211_registered_device *rdev,
 
 int cfg80211_stop_ap(struct cfg80211_registered_device *rdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     struct net_device *dev)
+=======
+		     struct net_device *dev, bool notify)
+>>>>>>> v3.18
 =======
 		     struct net_device *dev, bool notify)
 >>>>>>> v3.18
@@ -62,7 +77,11 @@ int cfg80211_stop_ap(struct cfg80211_registered_device *rdev,
 
 	wdev_lock(wdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = __cfg80211_stop_ap(rdev, dev);
+=======
+	err = __cfg80211_stop_ap(rdev, dev, notify);
+>>>>>>> v3.18
 =======
 	err = __cfg80211_stop_ap(rdev, dev, notify);
 >>>>>>> v3.18

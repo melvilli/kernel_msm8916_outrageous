@@ -22,7 +22,11 @@
 
 /* Defined in hibernate_asm_64.S */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int restore_image(void);
+=======
+extern asmlinkage __visible int restore_image(void);
+>>>>>>> v3.18
 =======
 extern asmlinkage __visible int restore_image(void);
 >>>>>>> v3.18
@@ -32,7 +36,11 @@ extern asmlinkage __visible int restore_image(void);
  * kernel's text (this value is passed in the image header).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long restore_jump_address;
+=======
+unsigned long restore_jump_address __visible;
+>>>>>>> v3.18
 =======
 unsigned long restore_jump_address __visible;
 >>>>>>> v3.18
@@ -42,17 +50,23 @@ unsigned long restore_jump_address __visible;
  * in the image header).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long restore_cr3;
 
 pgd_t *temp_level4_pgt;
 
 void *relocated_restore_code;
 =======
+=======
+>>>>>>> v3.18
 unsigned long restore_cr3 __visible;
 
 pgd_t *temp_level4_pgt __visible;
 
 void *relocated_restore_code __visible;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void *alloc_pgt_page(void *context)

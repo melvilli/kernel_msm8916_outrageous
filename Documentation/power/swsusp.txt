@@ -51,7 +51,10 @@ echo N > /sys/power/image_size
 before suspend (it is limited to 500 MB by default).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 . The resume process checks for the presence of the resume device,
 if found, it then checks the contents for the hibernation image signature.
 If both are found, it resumes the hibernation image.
@@ -65,6 +68,9 @@ If both are found, it resumes the hibernation image.
      the init script by using the /sys/power/resume file.  It is vital
      that this be done prior to remounting any filesystems (even as
      read-only) otherwise data may be corrupted.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Article about goals and implementation of Software Suspend for Linux
@@ -224,12 +230,18 @@ Q: After resuming, system is paging heavily, leading to very bad interactivity.
 A: Try running
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 cat `cat /proc/[0-9]*/maps | grep / | sed 's:.* /:/:' | sort -u` > /dev/null
 =======
+=======
+>>>>>>> v3.18
 cat /proc/[0-9]*/maps | grep / | sed 's:.* /:/:' | sort -u | while read file
 do
   test -f "$file" && cat "$file" > /dev/null
 done
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 after resume. swapoff -a; swapon -a may also be useful.
@@ -350,7 +362,11 @@ disk drivers (especially SATA)?
 
 A: Well, it can be done, load the drivers, then do echo into
 <<<<<<< HEAD
+<<<<<<< HEAD
 /sys/power/disk/resume file from initrd. Be sure not to mount
+=======
+/sys/power/resume file from initrd. Be sure not to mount
+>>>>>>> v3.18
 =======
 /sys/power/resume file from initrd. Be sure not to mount
 >>>>>>> v3.18

@@ -3,7 +3,11 @@
  * on modern Intel turbo-capable processors.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012 Intel Corporation.
+=======
+ * Copyright (c) 2013 Intel Corporation.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2013 Intel Corporation.
 >>>>>>> v3.18
@@ -26,7 +30,13 @@
 #define _GNU_SOURCE
 #include MSRHEADER
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <stdio.h>
+=======
+#include <stdarg.h>
+#include <stdio.h>
+#include <err.h>
+>>>>>>> v3.18
 =======
 #include <stdarg.h>
 #include <stdio.h>
@@ -52,13 +62,19 @@ unsigned int interval_sec = 5;	/* set with -i interval_sec */
 unsigned int verbose;		/* set with -v */
 unsigned int rapl_verbose;	/* set with -R */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int thermal_verbose;	/* set with -T */
 unsigned int summary_only;	/* set with -s */
 =======
+=======
+>>>>>>> v3.18
 unsigned int rapl_joules;	/* set with -J */
 unsigned int thermal_verbose;	/* set with -T */
 unsigned int summary_only;	/* set with -S */
 unsigned int dump_only;		/* set with -s */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned int skip_c0;
 unsigned int skip_c1;
@@ -66,15 +82,21 @@ unsigned int do_nhm_cstates;
 unsigned int do_snb_cstates;
 unsigned int do_c8_c9_c10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int has_aperf;
 unsigned int has_epb;
 unsigned int units = 1000000000;	/* Ghz etc */
 =======
+=======
+>>>>>>> v3.18
 unsigned int do_slm_cstates;
 unsigned int use_c1_residency_msr;
 unsigned int has_aperf;
 unsigned int has_epb;
 unsigned int units = 1000000;	/* MHz etc */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned int genuine_intel;
 unsigned int has_invariant_tsc;
@@ -102,6 +124,7 @@ double rapl_power_units, rapl_energy_units, rapl_time_units;
 double rapl_joule_counter_range;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RAPL_PKG	(1 << 0)
 #define RAPL_CORES	(1 << 1)
 #define RAPL_GFX	(1 << 2)
@@ -109,6 +132,8 @@ double rapl_joule_counter_range;
 #define RAPL_PKG_PERF_STATUS	(1 << 4)
 #define RAPL_DRAM_PERF_STATUS	(1 << 5)
 =======
+=======
+>>>>>>> v3.18
 #define RAPL_PKG		(1 << 0)
 					/* 0x610 MSR_PKG_POWER_LIMIT */
 					/* 0x611 MSR_PKG_ENERGY_STATUS */
@@ -135,6 +160,9 @@ double rapl_joule_counter_range;
 					/* 0x640 MSR_PP1_POWER_LIMIT */
 					/* 0x641 MSR_PP1_ENERGY_STATUS */
 					/* 0x642 MSR_PP1_POLICY */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	TJMAX_DEFAULT	100
 
@@ -152,7 +180,11 @@ struct thread_data {
 	unsigned long long aperf;
 	unsigned long long mperf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long long c1;	/* derived */
+=======
+	unsigned long long c1;
+>>>>>>> v3.18
 =======
 	unsigned long long c1;
 >>>>>>> v3.18
@@ -290,7 +322,11 @@ int get_msr(int cpu, off_t offset, unsigned long long *msr)
 
 	if (retval != sizeof *msr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fprintf(stderr, "%s offset 0x%zx read failed\n", pathname, offset);
+=======
+		fprintf(stderr, "%s offset 0x%llx read failed\n", pathname, (unsigned long long)offset);
+>>>>>>> v3.18
 =======
 		fprintf(stderr, "%s offset 0x%llx read failed\n", pathname, (unsigned long long)offset);
 >>>>>>> v3.18
@@ -300,6 +336,7 @@ int get_msr(int cpu, off_t offset, unsigned long long *msr)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void print_header(void)
 {
@@ -321,6 +358,8 @@ void print_header(void)
 	if (do_smi)
 		outp += sprintf(outp, " SMI");
 =======
+=======
+>>>>>>> v3.18
 /*
  * Example Format w/ field column widths:
  *
@@ -345,6 +384,9 @@ void print_header(void)
 	outp += sprintf(outp, " TSC_MHz");
 	if (do_smi)
 		outp += sprintf(outp, "     SMI");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (extra_delta_offset32)
 		outp += sprintf(outp, "  count 0x%03X", extra_delta_offset32);
@@ -355,6 +397,7 @@ void print_header(void)
 	if (extra_msr_offset64)
 		outp += sprintf(outp, "           MSR 0x%03X", extra_msr_offset64);
 	if (do_nhm_cstates)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		outp += sprintf(outp, "    %%c1");
 	if (do_nhm_cstates)
@@ -397,6 +440,8 @@ void print_header(void)
 		outp += sprintf(outp, " RAM_%%");
 
 =======
+=======
+>>>>>>> v3.18
 		outp += sprintf(outp, "  CPU%%c1");
 	if (do_nhm_cstates && !do_slm_cstates)
 		outp += sprintf(outp, "  CPU%%c3");
@@ -453,6 +498,9 @@ void print_header(void)
 		outp += sprintf(outp, "   time");
 
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	outp += sprintf(outp, "\n");
 }
@@ -460,6 +508,7 @@ void print_header(void)
 int dump_counters(struct thread_data *t, struct core_data *c,
 	struct pkg_data *p)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fprintf(stderr, "t %p, c %p, p %p\n", t, c, p);
 
@@ -507,6 +556,8 @@ int dump_counters(struct thread_data *t, struct core_data *c,
 		fprintf(stderr, "PTM: %dC\n", p->pkg_temp_c);
 	}
 =======
+=======
+>>>>>>> v3.18
 	outp += sprintf(outp, "t %p, c %p, p %p\n", t, c, p);
 
 	if (t) {
@@ -558,12 +609,16 @@ int dump_counters(struct thread_data *t, struct core_data *c,
 
 	outp += sprintf(outp, "\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 /*
  * column formatting convention & formats
+<<<<<<< HEAD
 <<<<<<< HEAD
  * package: "pk" 2 columns %2d
  * core: "cor" 3 columns %3d
@@ -580,13 +635,19 @@ int dump_counters(struct thread_data *t, struct core_data *c,
  * "CTMP" 4 columns %4d
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  */
 int format_counters(struct thread_data *t, struct core_data *c,
 	struct pkg_data *p)
 {
 	double interval_float;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *fmt5, *fmt6;
+=======
+	char *fmt8;
+>>>>>>> v3.18
 =======
 	char *fmt8;
 >>>>>>> v3.18
@@ -604,6 +665,7 @@ int format_counters(struct thread_data *t, struct core_data *c,
 	/* topo columns, print blanks on 1st (average) line */
 	if (t == &average.threads) {
 		if (show_pkg)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			outp += sprintf(outp, "  ");
 		if (show_pkg && show_core)
@@ -665,6 +727,8 @@ int format_counters(struct thread_data *t, struct core_data *c,
 	if (do_smi)
 		outp += sprintf(outp, "%4d", t->smi_count);
 =======
+=======
+>>>>>>> v3.18
 			outp += sprintf(outp, "       -");
 		if (show_core)
 			outp += sprintf(outp, "       -");
@@ -711,6 +775,9 @@ int format_counters(struct thread_data *t, struct core_data *c,
 	/* SMI */
 	if (do_smi)
 		outp += sprintf(outp, "%8d", t->smi_count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* delta */
@@ -731,9 +798,15 @@ int format_counters(struct thread_data *t, struct core_data *c,
 	if (do_nhm_cstates) {
 		if (!skip_c1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			outp += sprintf(outp, " %6.2f", 100.0 * t->c1/t->tsc);
 		else
 			outp += sprintf(outp, "  ****");
+=======
+			outp += sprintf(outp, "%8.2f", 100.0 * t->c1/t->tsc);
+		else
+			outp += sprintf(outp, "********");
+>>>>>>> v3.18
 =======
 			outp += sprintf(outp, "%8.2f", 100.0 * t->c1/t->tsc);
 		else
@@ -746,6 +819,7 @@ int format_counters(struct thread_data *t, struct core_data *c,
 		goto done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (do_nhm_cstates)
 		outp += sprintf(outp, " %6.2f", 100.0 * c->c3/t->tsc);
 	if (do_nhm_cstates)
@@ -756,6 +830,8 @@ int format_counters(struct thread_data *t, struct core_data *c,
 	if (do_dts)
 		outp += sprintf(outp, " %4d", c->core_temp_c);
 =======
+=======
+>>>>>>> v3.18
 	if (do_nhm_cstates && !do_slm_cstates)
 		outp += sprintf(outp, "%8.2f", 100.0 * c->c3/t->tsc);
 	if (do_nhm_cstates)
@@ -765,6 +841,9 @@ int format_counters(struct thread_data *t, struct core_data *c,
 
 	if (do_dts)
 		outp += sprintf(outp, "%8d", c->core_temp_c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* print per-package data only for 1st core in package */
@@ -772,6 +851,7 @@ int format_counters(struct thread_data *t, struct core_data *c,
 		goto done;
 
 	if (do_ptm)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		outp += sprintf(outp, " %4d", p->pkg_temp_c);
 
@@ -788,6 +868,8 @@ int format_counters(struct thread_data *t, struct core_data *c,
 		outp += sprintf(outp, " %6.2f", 100.0 * p->pc9/t->tsc);
 		outp += sprintf(outp, " %6.2f", 100.0 * p->pc10/t->tsc);
 =======
+=======
+>>>>>>> v3.18
 		outp += sprintf(outp, "%8d", p->pkg_temp_c);
 
 	if (do_snb_cstates)
@@ -802,6 +884,9 @@ int format_counters(struct thread_data *t, struct core_data *c,
 		outp += sprintf(outp, "%8.2f", 100.0 * p->pc8/t->tsc);
 		outp += sprintf(outp, "%8.2f", 100.0 * p->pc9/t->tsc);
 		outp += sprintf(outp, "%8.2f", 100.0 * p->pc10/t->tsc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -809,6 +894,7 @@ int format_counters(struct thread_data *t, struct core_data *c,
  	 * If measurement interval exceeds minimum RAPL Joule Counter range,
  	 * indicate that results are suspect by printing "**" in fraction place.
  	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (interval_float < rapl_joule_counter_range) {
 		fmt5 = " %5.2f";
@@ -832,6 +918,8 @@ int format_counters(struct thread_data *t, struct core_data *c,
 		outp += sprintf(outp, fmt5, 100.0 * p->rapl_dram_perf_status * rapl_time_units / interval_float);
 
 =======
+=======
+>>>>>>> v3.18
 	if (interval_float < rapl_joule_counter_range)
 		fmt8 = "%8.2f";
 	else
@@ -870,6 +958,9 @@ int format_counters(struct thread_data *t, struct core_data *c,
 	outp += sprintf(outp, fmt8, interval_float);
 
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 done:
 	outp += sprintf(outp, "\n");
@@ -954,6 +1045,7 @@ delta_thread(struct thread_data *new, struct thread_data *old,
 
 	/* check for TSC < 1 Mcycles over interval */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (old->tsc < (1000 * 1000)) {
 		fprintf(stderr, "Insanely slow TSC rate, TSC stops in idle?\n");
 		fprintf(stderr, "You can disable all c-states by booting with \"idle=poll\"\n");
@@ -961,10 +1053,15 @@ delta_thread(struct thread_data *new, struct thread_data *old,
 		exit(-3);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (old->tsc < (1000 * 1000))
 		errx(-3, "Insanely slow TSC rate, TSC stops in idle?\n"
 		     "You can disable all c-states by booting with \"idle=poll\"\n"
 		     "or just the deep ones with \"processor.max_cstate=1\"");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	old->c1 = new->c1 - old->c1;
@@ -991,6 +1088,7 @@ delta_thread(struct thread_data *new, struct thread_data *old,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * As counter collection is not atomic,
 	 * it is possible for mperf's non-halted cycles + idle states
@@ -1003,6 +1101,8 @@ delta_thread(struct thread_data *new, struct thread_data *old,
 		old->c1 = old->tsc - old->mperf - core_delta->c3
 				- core_delta->c6 - core_delta->c7;
 =======
+=======
+>>>>>>> v3.18
 	if (use_c1_residency_msr) {
 		/*
 		 * Some models have a dedicated C1 residency MSR,
@@ -1021,6 +1121,9 @@ delta_thread(struct thread_data *new, struct thread_data *old,
 			old->c1 = old->tsc - old->mperf - core_delta->c3
 				- core_delta->c6 - core_delta->c7;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1236,28 +1339,40 @@ int get_counters(struct thread_data *t, struct core_data *c, struct pkg_data *p)
 			return -5;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (use_c1_residency_msr) {
 		if (get_msr(cpu, MSR_CORE_C1_RES, &t->c1))
 			return -6;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* collect core counters only for 1st thread in core */
 	if (!(t->flags & CPU_IS_FIRST_THREAD_IN_CORE))
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (do_nhm_cstates) {
 		if (get_msr(cpu, MSR_CORE_C3_RESIDENCY, &c->c3))
 			return -6;
 =======
+=======
+>>>>>>> v3.18
 	if (do_nhm_cstates && !do_slm_cstates) {
 		if (get_msr(cpu, MSR_CORE_C3_RESIDENCY, &c->c3))
 			return -6;
 	}
 
 	if (do_nhm_cstates) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (get_msr(cpu, MSR_CORE_C6_RESIDENCY, &c->c6))
 			return -7;
@@ -1279,7 +1394,11 @@ int get_counters(struct thread_data *t, struct core_data *c, struct pkg_data *p)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (do_nhm_cstates) {
+=======
+	if (do_nhm_cstates && !do_slm_cstates) {
+>>>>>>> v3.18
 =======
 	if (do_nhm_cstates && !do_slm_cstates) {
 >>>>>>> v3.18
@@ -1362,7 +1481,11 @@ void print_verbose_header(void)
 
 	get_msr(0, MSR_IA32_POWER_CTL, &msr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fprintf(stderr, "cpu0: MSR_IA32_POWER_CTL: 0x%08llx (C1E: %sabled)\n",
+=======
+	fprintf(stderr, "cpu0: MSR_IA32_POWER_CTL: 0x%08llx (C1E auto-promotion: %sabled)\n",
+>>>>>>> v3.18
 =======
 	fprintf(stderr, "cpu0: MSR_IA32_POWER_CTL: 0x%08llx (C1E auto-promotion: %sabled)\n",
 >>>>>>> v3.18
@@ -1435,6 +1558,7 @@ print_nhm_turbo_ratio_limits:
 	switch(msr & 0x7) {
 	case 0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fprintf(stderr, "pc0");
 		break;
 	case 1:
@@ -1455,6 +1579,8 @@ print_nhm_turbo_ratio_limits:
 	case 7:
 		fprintf(stderr, "unlimited");
 =======
+=======
+>>>>>>> v3.18
 		fprintf(stderr, do_slm_cstates ? "no pkg states" : "pc0");
 		break;
 	case 1:
@@ -1477,6 +1603,9 @@ print_nhm_turbo_ratio_limits:
 		break;
 	case 7:
 		fprintf(stderr, do_slm_cstates ? "pc7" : "unlimited");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -1565,7 +1694,10 @@ void free_all_buffers(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Open a file, and exit on failure
  */
 FILE *fopen_or_die(const char *path, const char *mode)
@@ -1597,12 +1729,16 @@ int parse_int_file(const char *fmt, ...)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * cpu_is_first_sibling_in_core(cpu)
  * return 1 if given CPU is 1st HT sibling in the core
  */
 int cpu_is_first_sibling_in_core(int cpu)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char path[64];
 	FILE *filep;
@@ -1620,6 +1756,9 @@ int cpu_is_first_sibling_in_core(int cpu)
 =======
 	return cpu == parse_int_file("/sys/devices/system/cpu/cpu%d/topology/thread_siblings_list", cpu);
 >>>>>>> v3.18
+=======
+	return cpu == parse_int_file("/sys/devices/system/cpu/cpu%d/topology/thread_siblings_list", cpu);
+>>>>>>> v3.18
 }
 
 /*
@@ -1628,6 +1767,7 @@ int cpu_is_first_sibling_in_core(int cpu)
  */
 int cpu_is_first_core_in_package(int cpu)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char path[64];
 	FILE *filep;
@@ -1645,10 +1785,14 @@ int cpu_is_first_core_in_package(int cpu)
 =======
 	return cpu == parse_int_file("/sys/devices/system/cpu/cpu%d/topology/core_siblings_list", cpu);
 >>>>>>> v3.18
+=======
+	return cpu == parse_int_file("/sys/devices/system/cpu/cpu%d/topology/core_siblings_list", cpu);
+>>>>>>> v3.18
 }
 
 int get_physical_package_id(int cpu)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char path[80];
 	FILE *filep;
@@ -1666,10 +1810,14 @@ int get_physical_package_id(int cpu)
 =======
 	return parse_int_file("/sys/devices/system/cpu/cpu%d/topology/physical_package_id", cpu);
 >>>>>>> v3.18
+=======
+	return parse_int_file("/sys/devices/system/cpu/cpu%d/topology/physical_package_id", cpu);
+>>>>>>> v3.18
 }
 
 int get_core_id(int cpu)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char path[80];
 	FILE *filep;
@@ -1687,6 +1835,9 @@ int get_core_id(int cpu)
 =======
 	return parse_int_file("/sys/devices/system/cpu/cpu%d/topology/core_id", cpu);
 >>>>>>> v3.18
+=======
+	return parse_int_file("/sys/devices/system/cpu/cpu%d/topology/core_id", cpu);
+>>>>>>> v3.18
 }
 
 int get_num_ht_siblings(int cpu)
@@ -1699,11 +1850,15 @@ int get_num_ht_siblings(int cpu)
 
 	sprintf(path, "/sys/devices/system/cpu/cpu%d/topology/thread_siblings_list", cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	filep = fopen(path, "r");
 	if (filep == NULL) {
 		perror(path);
 		exit(1);
 	}
+=======
+	filep = fopen_or_die(path, "r");
+>>>>>>> v3.18
 =======
 	filep = fopen_or_die(path, "r");
 >>>>>>> v3.18
@@ -1777,6 +1932,7 @@ int for_all_proc_cpus(int (func)(int))
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fp = fopen(proc_stat, "r");
 	if (fp == NULL) {
 		perror(proc_stat);
@@ -1789,11 +1945,16 @@ int for_all_proc_cpus(int (func)(int))
 		exit(1);
 	}
 =======
+=======
+>>>>>>> v3.18
 	fp = fopen_or_die(proc_stat, "r");
 
 	retval = fscanf(fp, "cpu %*d %*d %*d %*d %*d %*d %*d %*d %*d %*d\n");
 	if (retval != 0)
 		err(1, "%s: failed to parse format", proc_stat);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (1) {
@@ -1899,6 +2060,7 @@ void check_dev_msr()
 	struct stat sb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (stat("/dev/cpu/0/msr", &sb)) {
 		fprintf(stderr, "no /dev/cpu/0/msr\n");
 		fprintf(stderr, "Try \"# modprobe msr\"\n");
@@ -1909,15 +2071,25 @@ void check_dev_msr()
 		err(-5, "no /dev/cpu/0/msr\n"
 		    "Try \"# modprobe msr\"");
 >>>>>>> v3.18
+=======
+	if (stat("/dev/cpu/0/msr", &sb))
+		err(-5, "no /dev/cpu/0/msr\n"
+		    "Try \"# modprobe msr\"");
+>>>>>>> v3.18
 }
 
 void check_super_user()
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (getuid() != 0) {
 		fprintf(stderr, "must be root\n");
 		exit(-6);
 	}
+=======
+	if (getuid() != 0)
+		errx(-6, "must be root");
+>>>>>>> v3.18
 =======
 	if (getuid() != 0)
 		errx(-6, "must be root");
@@ -1944,10 +2116,13 @@ int has_nehalem_turbo_ratio_limit(unsigned int family, unsigned int model)
 	case 0x3E:	/* IVB Xeon */
 	case 0x3C:	/* HSW */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 0x3F:	/* HSW */
 	case 0x45:	/* HSW */
 	case 0x46:	/* HSW */
 =======
+=======
+>>>>>>> v3.18
 	case 0x3F:	/* HSX */
 	case 0x45:	/* HSW */
 	case 0x46:	/* HSW */
@@ -1956,6 +2131,9 @@ int has_nehalem_turbo_ratio_limit(unsigned int family, unsigned int model)
 	case 0x3D:	/* BDW */
 	case 0x4F:	/* BDX */
 	case 0x56:	/* BDX-DE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 	case 0x2E:	/* Nehalem-EX Xeon - Beckton */
@@ -2030,11 +2208,14 @@ int print_epb(struct thread_data *t, struct core_data *c, struct pkg_data *p)
 #define	RAPL_TIME_GRANULARITY	0x3F /* 6 bit time granularity */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * rapl_probe()
  *
  * sets do_rapl
 =======
+=======
+>>>>>>> v3.18
 double get_tdp(model)
 {
 	unsigned long long msr;
@@ -2057,12 +2238,19 @@ double get_tdp(model)
  * rapl_probe()
  *
  * sets do_rapl, rapl_power_units, rapl_energy_units, rapl_time_units
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void rapl_probe(unsigned int family, unsigned int model)
 {
 	unsigned long long msr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int time_unit;
+>>>>>>> v3.18
 =======
 	unsigned int time_unit;
 >>>>>>> v3.18
@@ -2079,6 +2267,7 @@ void rapl_probe(unsigned int family, unsigned int model)
 	case 0x3A:
 	case 0x3C:	/* HSW */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 0x3F:	/* HSW */
 	case 0x45:	/* HSW */
 	case 0x46:	/* HSW */
@@ -2088,6 +2277,8 @@ void rapl_probe(unsigned int family, unsigned int model)
 	case 0x3E:
 		do_rapl = RAPL_PKG | RAPL_CORES | RAPL_DRAM | RAPL_PKG_PERF_STATUS | RAPL_DRAM_PERF_STATUS;
 =======
+=======
+>>>>>>> v3.18
 	case 0x45:	/* HSW */
 	case 0x46:	/* HSW */
 	case 0x3D:	/* BDW */
@@ -2105,6 +2296,9 @@ void rapl_probe(unsigned int family, unsigned int model)
 	case 0x37:	/* BYT */
 	case 0x4D:	/* AVN */
 		do_rapl = RAPL_PKG | RAPL_CORES ;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -2116,6 +2310,7 @@ void rapl_probe(unsigned int family, unsigned int model)
 		return;
 
 	rapl_power_units = 1.0 / (1 << (msr & 0xF));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rapl_energy_units = 1.0 / (1 << (msr >> 8 & 0x1F));
 	rapl_time_units = 1.0 / (1 << (msr >> 16 & 0xF));
@@ -2131,6 +2326,8 @@ void rapl_probe(unsigned int family, unsigned int model)
 	if (verbose)
 		fprintf(stderr, "RAPL: %.0f sec. Joule Counter Range\n", rapl_joule_counter_range);
 =======
+=======
+>>>>>>> v3.18
 	if (model == 0x37)
 		rapl_energy_units = 1.0 * (1 << (msr >> 8 & 0x1F)) / 1000000;
 	else
@@ -2147,6 +2344,9 @@ void rapl_probe(unsigned int family, unsigned int model)
 	rapl_joule_counter_range = 0xFFFFFFFF * rapl_energy_units / tdp;
 	if (verbose)
 		fprintf(stderr, "RAPL: %.0f sec. Joule Counter Range, at %.0f Watts\n", rapl_joule_counter_range, tdp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return;
@@ -2234,7 +2434,10 @@ int print_rapl(struct thread_data *t, struct core_data *c, struct pkg_data *p)
 	unsigned long long msr;
 	int cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	double local_rapl_power_units, local_rapl_energy_units, local_rapl_time_units;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2255,6 +2458,7 @@ int print_rapl(struct thread_data *t, struct core_data *c, struct pkg_data *p)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_rapl_power_units = 1.0 / (1 << (msr & 0xF));
 	local_rapl_energy_units = 1.0 / (1 << (msr >> 8 & 0x1F));
 	local_rapl_time_units = 1.0 / (1 << (msr >> 16 & 0xF));
@@ -2273,6 +2477,8 @@ int print_rapl(struct thread_data *t, struct core_data *c, struct pkg_data *p)
 	}
 	if (do_rapl & RAPL_PKG) {
 =======
+=======
+>>>>>>> v3.18
 	if (verbose) {
 		fprintf(stderr, "cpu%d: MSR_RAPL_POWER_UNIT: 0x%08llx "
 			"(%f Watts, %f Joules, %f sec.)\n", cpu, msr,
@@ -2280,6 +2486,9 @@ int print_rapl(struct thread_data *t, struct core_data *c, struct pkg_data *p)
 	}
 	if (do_rapl & RAPL_PKG_POWER_INFO) {
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (get_msr(cpu, MSR_PKG_POWER_INFO, &msr))
                 	return -5;
@@ -2293,6 +2502,12 @@ int print_rapl(struct thread_data *t, struct core_data *c, struct pkg_data *p)
 			((msr >> 48) & RAPL_TIME_GRANULARITY) * rapl_time_units);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	}
+	if (do_rapl & RAPL_PKG) {
+
+>>>>>>> v3.18
 =======
 	}
 	if (do_rapl & RAPL_PKG) {
@@ -2334,7 +2549,11 @@ int print_rapl(struct thread_data *t, struct core_data *c, struct pkg_data *p)
 		print_power_limit_msr(cpu, msr, "DRAM Limit");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (do_rapl & RAPL_CORES) {
+=======
+	if (do_rapl & RAPL_CORE_POLICY) {
+>>>>>>> v3.18
 =======
 	if (do_rapl & RAPL_CORE_POLICY) {
 >>>>>>> v3.18
@@ -2344,11 +2563,17 @@ int print_rapl(struct thread_data *t, struct core_data *c, struct pkg_data *p)
 
 			fprintf(stderr, "cpu%d: MSR_PP0_POLICY: %lld\n", cpu, msr & 0xF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		}
 	}
 	if (do_rapl & RAPL_CORES) {
 		if (verbose) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (get_msr(cpu, MSR_PP0_POWER_LIMIT, &msr))
@@ -2391,6 +2616,12 @@ int is_snb(unsigned int family, unsigned int model)
 	case 0x45:	/* HSW */
 	case 0x46:	/* HSW */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case 0x3D:	/* BDW */
+	case 0x4F:	/* BDX */
+	case 0x56:	/* BDX-DE */
+>>>>>>> v3.18
 =======
 	case 0x3D:	/* BDW */
 	case 0x4F:	/* BDX */
@@ -2408,8 +2639,11 @@ int has_c8_c9_c10(unsigned int family, unsigned int model)
 
 	switch (model) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 0x45:
 =======
+=======
+>>>>>>> v3.18
 	case 0x45:	/* HSW */
 	case 0x3D:	/* BDW */
 		return 1;
@@ -2425,6 +2659,9 @@ int is_slm(unsigned int family, unsigned int model)
 	switch (model) {
 	case 0x37:	/* BYT */
 	case 0x4D:	/* AVN */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 	}
@@ -2432,7 +2669,10 @@ int is_slm(unsigned int family, unsigned int model)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SLM_BCLK_FREQS 5
 double slm_freq_table[SLM_BCLK_FREQS] = { 83.3, 100.0, 133.3, 116.7, 80.0};
 
@@ -2456,6 +2696,9 @@ double slm_bclk(void)
 
 	return freq;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 double discover_bclk(unsigned int family, unsigned int model)
@@ -2463,6 +2706,11 @@ double discover_bclk(unsigned int family, unsigned int model)
 	if (is_snb(family, model))
 		return 100.00;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else if (is_slm(family, model))
+		return slm_bclk();
+>>>>>>> v3.18
 =======
 	else if (is_slm(family, model))
 		return slm_bclk();
@@ -2518,7 +2766,11 @@ int set_temperature_target(struct thread_data *t, struct core_data *c, struct pk
 		goto guess;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	target_c_local = (msr >> 16) & 0x7F;
+=======
+	target_c_local = (msr >> 16) & 0xFF;
+>>>>>>> v3.18
 =======
 	target_c_local = (msr >> 16) & 0xFF;
 >>>>>>> v3.18
@@ -2528,7 +2780,11 @@ int set_temperature_target(struct thread_data *t, struct core_data *c, struct pk
 			cpu, msr, target_c_local);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (target_c_local < 85 || target_c_local > 120)
+=======
+	if (!target_c_local)
+>>>>>>> v3.18
 =======
 	if (!target_c_local)
 >>>>>>> v3.18
@@ -2573,10 +2829,15 @@ void check_cpuid()
 			max_level, family, model, stepping, family, model, stepping);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(edx & (1 << 5))) {
 		fprintf(stderr, "CPUID: no MSR\n");
 		exit(1);
 	}
+=======
+	if (!(edx & (1 << 5)))
+		errx(1, "CPUID: no MSR");
+>>>>>>> v3.18
 =======
 	if (!(edx & (1 << 5)))
 		errx(1, "CPUID: no MSR");
@@ -2591,10 +2852,15 @@ void check_cpuid()
 	__get_cpuid(0x80000000, &max_level, &ebx, &ecx, &edx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (max_level < 0x80000007) {
 		fprintf(stderr, "CPUID: no invariant TSC (max_level 0x%x)\n", max_level);
 		exit(1);
 	}
+=======
+	if (max_level < 0x80000007)
+		errx(1, "CPUID: no invariant TSC (max_level 0x%x)", max_level);
+>>>>>>> v3.18
 =======
 	if (max_level < 0x80000007)
 		errx(1, "CPUID: no invariant TSC (max_level 0x%x)", max_level);
@@ -2608,10 +2874,15 @@ void check_cpuid()
 	has_invariant_tsc = edx & (1 << 8);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!has_invariant_tsc) {
 		fprintf(stderr, "No invariant TSC\n");
 		exit(1);
 	}
+=======
+	if (!has_invariant_tsc)
+		errx(1, "No invariant TSC");
+>>>>>>> v3.18
 =======
 	if (!has_invariant_tsc)
 		errx(1, "No invariant TSC");
@@ -2637,7 +2908,11 @@ void check_cpuid()
 
 	if (!has_aperf)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		exit(-1);
+=======
+		errx(-1, "No APERF");
+>>>>>>> v3.18
 =======
 		errx(-1, "No APERF");
 >>>>>>> v3.18
@@ -2648,6 +2923,10 @@ void check_cpuid()
 	do_snb_cstates = is_snb(family, model);
 	do_c8_c9_c10 = has_c8_c9_c10(family, model);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	do_slm_cstates = is_slm(family, model);
+>>>>>>> v3.18
 =======
 	do_slm_cstates = is_slm(family, model);
 >>>>>>> v3.18
@@ -2664,9 +2943,14 @@ void check_cpuid()
 void usage()
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fprintf(stderr, "%s: [-v][-R][-T][-p|-P|-S][-c MSR# | -s]][-C MSR#][-m MSR#][-M MSR#][-i interval_sec | command ...]\n",
 		progname);
 	exit(1);
+=======
+	errx(1, "%s: [-v][-R][-T][-p|-P|-S][-c MSR#][-C MSR#][-m MSR#][-M MSR#][-i interval_sec | command ...]\n",
+	     progname);
+>>>>>>> v3.18
 =======
 	errx(1, "%s: [-v][-R][-T][-p|-P|-S][-c MSR#][-C MSR#][-m MSR#][-M MSR#][-i interval_sec | command ...]\n",
 	     progname);
@@ -2714,10 +2998,15 @@ void topology_probe()
 
 	cpus = calloc(1, (topo.max_cpu_num  + 1) * sizeof(struct cpu_topology));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpus == NULL) {
 		perror("calloc cpus");
 		exit(1);
 	}
+=======
+	if (cpus == NULL)
+		err(1, "calloc cpus");
+>>>>>>> v3.18
 =======
 	if (cpus == NULL)
 		err(1, "calloc cpus");
@@ -2728,10 +3017,15 @@ void topology_probe()
 	 */
 	cpu_present_set = CPU_ALLOC((topo.max_cpu_num + 1));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_present_set == NULL) {
 		perror("CPU_ALLOC");
 		exit(3);
 	}
+=======
+	if (cpu_present_set == NULL)
+		err(3, "CPU_ALLOC");
+>>>>>>> v3.18
 =======
 	if (cpu_present_set == NULL)
 		err(3, "CPU_ALLOC");
@@ -2745,10 +3039,15 @@ void topology_probe()
 	 */
 	cpu_affinity_set = CPU_ALLOC((topo.max_cpu_num + 1));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_affinity_set == NULL) {
 		perror("CPU_ALLOC");
 		exit(3);
 	}
+=======
+	if (cpu_affinity_set == NULL)
+		err(3, "CPU_ALLOC");
+>>>>>>> v3.18
 =======
 	if (cpu_affinity_set == NULL)
 		err(3, "CPU_ALLOC");
@@ -2837,8 +3136,12 @@ allocate_counters(struct thread_data **t, struct core_data **c, struct pkg_data 
 	return;
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	perror("calloc counters");
 	exit(1);
+=======
+	err(1, "calloc counters");
+>>>>>>> v3.18
 =======
 	err(1, "calloc counters");
 >>>>>>> v3.18
@@ -2897,6 +3200,7 @@ int initialize_counters(int cpu_id)
 void allocate_output_buffer()
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	output_buffer = calloc(1, (1 + topo.num_cpus) * 256);
 	outp = output_buffer;
 	if (outp == NULL) {
@@ -2904,10 +3208,15 @@ void allocate_output_buffer()
 		exit(-1);
 	}
 =======
+=======
+>>>>>>> v3.18
 	output_buffer = calloc(1, (1 + topo.num_cpus) * 1024);
 	outp = output_buffer;
 	if (outp == NULL)
 		err(-1, "calloc output buffer");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2920,6 +3229,10 @@ void setup_all_buffers(void)
 	for_all_proc_cpus(initialize_counters);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2967,6 +3280,7 @@ int fork_it(char **argv)
 
 		/* parent */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (child_pid == -1) {
 			perror("fork");
 			exit(1);
@@ -2979,6 +3293,8 @@ int fork_it(char **argv)
 			exit(status);
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (child_pid == -1)
 			err(1, "fork");
 
@@ -2986,6 +3302,9 @@ int fork_it(char **argv)
 		signal(SIGQUIT, SIG_IGN);
 		if (waitpid(child_pid, &status, 0) == -1)
 			err(status, "waitpid");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	/*
@@ -3006,7 +3325,10 @@ int fork_it(char **argv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int get_and_dump_counters(void)
 {
 	int status;
@@ -3024,6 +3346,9 @@ int get_and_dump_counters(void)
 	return status;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void cmdline(int argc, char **argv)
 {
@@ -3032,7 +3357,11 @@ void cmdline(int argc, char **argv)
 	progname = argv[0];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((opt = getopt(argc, argv, "+pPSvi:sc:sC:m:M:RT:")) != -1) {
+=======
+	while ((opt = getopt(argc, argv, "+pPsSvi:c:C:m:M:RJT:")) != -1) {
+>>>>>>> v3.18
 =======
 	while ((opt = getopt(argc, argv, "+pPsSvi:c:C:m:M:RJT:")) != -1) {
 >>>>>>> v3.18
@@ -3044,6 +3373,12 @@ void cmdline(int argc, char **argv)
 			show_pkg_only++;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case 's':
+			dump_only++;
+			break;
+>>>>>>> v3.18
 =======
 		case 's':
 			dump_only++;
@@ -3077,11 +3412,17 @@ void cmdline(int argc, char **argv)
 			tcc_activation_temp_override = atoi(optarg);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 'J':
 			rapl_joules++;
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			usage();
@@ -3095,7 +3436,11 @@ int main(int argc, char **argv)
 
 	if (verbose)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fprintf(stderr, "turbostat v3.4 April 17, 2013"
+=======
+		fprintf(stderr, "turbostat v3.7 Feb 6, 2014"
+>>>>>>> v3.18
 =======
 		fprintf(stderr, "turbostat v3.7 Feb 6, 2014"
 >>>>>>> v3.18
@@ -3104,11 +3449,17 @@ int main(int argc, char **argv)
 	turbostat_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* dump counters and exit */
 	if (dump_only)
 		return get_and_dump_counters();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * if any params left, it must be a command to fork

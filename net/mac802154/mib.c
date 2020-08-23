@@ -25,6 +25,10 @@
 
 #include <net/mac802154.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/ieee802154_netdev.h>
+>>>>>>> v3.18
 =======
 #include <net/ieee802154_netdev.h>
 >>>>>>> v3.18
@@ -67,8 +71,11 @@ static void hw_addr_notify(struct work_struct *work)
 
 	kfree(nw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -87,11 +94,17 @@ static void set_hw_addr_filt(struct net_device *dev, unsigned long changed)
 	work->changed = changed;
 	queue_work(priv->hw->dev_workqueue, &work->work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
 }
 
 void mac802154_dev_set_short_addr(struct net_device *dev, u16 val)
+=======
+}
+
+void mac802154_dev_set_short_addr(struct net_device *dev, __le16 val)
+>>>>>>> v3.18
 =======
 }
 
@@ -114,15 +127,21 @@ void mac802154_dev_set_short_addr(struct net_device *dev, __le16 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 mac802154_dev_get_short_addr(const struct net_device *dev)
 {
 	struct mac802154_sub_if_data *priv = netdev_priv(dev);
 	u16 ret;
 =======
+=======
+>>>>>>> v3.18
 __le16 mac802154_dev_get_short_addr(const struct net_device *dev)
 {
 	struct mac802154_sub_if_data *priv = netdev_priv(dev);
 	__le16 ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	BUG_ON(dev->type != ARPHRD_IEEE802154);
@@ -140,32 +159,44 @@ void mac802154_dev_set_ieee_addr(struct net_device *dev)
 	struct mac802154_priv *mac = priv->hw;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mac->ops->set_hw_addr_filt &&
 	    memcmp(mac->hw.hw_filt.ieee_addr,
 		   dev->dev_addr, IEEE802154_ADDR_LEN)) {
 		memcpy(mac->hw.hw_filt.ieee_addr,
 		       dev->dev_addr, IEEE802154_ADDR_LEN);
 =======
+=======
+>>>>>>> v3.18
 	priv->extended_addr = ieee802154_devaddr_from_raw(dev->dev_addr);
 
 	if (mac->ops->set_hw_addr_filt &&
 	    mac->hw.hw_filt.ieee_addr != priv->extended_addr) {
 		mac->hw.hw_filt.ieee_addr = priv->extended_addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		set_hw_addr_filt(dev, IEEE802515_AFILT_IEEEADDR_CHANGED);
 	}
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 mac802154_dev_get_pan_id(const struct net_device *dev)
 {
 	struct mac802154_sub_if_data *priv = netdev_priv(dev);
 	u16 ret;
 =======
+=======
+>>>>>>> v3.18
 __le16 mac802154_dev_get_pan_id(const struct net_device *dev)
 {
 	struct mac802154_sub_if_data *priv = netdev_priv(dev);
 	__le16 ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	BUG_ON(dev->type != ARPHRD_IEEE802154);
@@ -178,7 +209,11 @@ __le16 mac802154_dev_get_pan_id(const struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mac802154_dev_set_pan_id(struct net_device *dev, u16 val)
+=======
+void mac802154_dev_set_pan_id(struct net_device *dev, __le16 val)
+>>>>>>> v3.18
 =======
 void mac802154_dev_set_pan_id(struct net_device *dev, __le16 val)
 >>>>>>> v3.18
@@ -218,9 +253,15 @@ static void phy_chan_notify(struct work_struct *work)
 	mutex_lock(&priv->hw->phy->pib_lock);
 	res = hw->ops->set_channel(&hw->hw, priv->page, priv->chan);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (res)
 		pr_debug("set_channel failed\n");
 	else {
+=======
+	if (res) {
+		pr_debug("set_channel failed\n");
+	} else {
+>>>>>>> v3.18
 =======
 	if (res) {
 		pr_debug("set_channel failed\n");
@@ -259,9 +300,12 @@ void mac802154_dev_set_page_channel(struct net_device *dev, u8 page, u8 chan)
 		work->dev = dev;
 		queue_work(priv->hw->dev_workqueue, &work->work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		mutex_unlock(&priv->hw->phy->pib_lock);
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		mutex_unlock(&priv->hw->phy->pib_lock);
 	}
@@ -452,5 +496,8 @@ void mac802154_unlock_table(struct net_device *dev)
 	BUG_ON(dev->type != ARPHRD_IEEE802154);
 
 	mutex_unlock(&priv->sec_mtx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

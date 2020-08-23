@@ -35,6 +35,10 @@
 #include <linux/crypto.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <crypto/ablk_helper.h>
+>>>>>>> v3.18
 =======
 #include <crypto/ablk_helper.h>
 >>>>>>> v3.18
@@ -47,7 +51,10 @@
 #include <crypto/xts.h>
 #include <asm/crypto/serpent-sse2.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/crypto/ablk_helper.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/crypto/glue_helper.h>
@@ -626,7 +633,11 @@ module_exit(serpent_sse2_exit);
 MODULE_DESCRIPTION("Serpent Cipher Algorithm, SSE2 optimized");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("serpent");
+=======
+MODULE_ALIAS("serpent");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("serpent");
 >>>>>>> v3.18

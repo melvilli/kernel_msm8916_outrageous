@@ -19,9 +19,13 @@
  *
  * You should have received a copy of the GNU General Public License along
 <<<<<<< HEAD
+<<<<<<< HEAD
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307. You can also get it
  * at http://www.gnu.org/licenses/gpl.html
+=======
+ * with this program; if not, see http://www.gnu.org/licenses/gpl.html
+>>>>>>> v3.18
 =======
  * with this program; if not, see http://www.gnu.org/licenses/gpl.html
 >>>>>>> v3.18
@@ -59,6 +63,10 @@
 #include <linux/init.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/workqueue.h>
+>>>>>>> v3.18
 =======
 #include <linux/workqueue.h>
 >>>>>>> v3.18
@@ -85,11 +93,17 @@ MODULE_PARM_DESC(maxdev, "Maximum number of slcan interfaces");
 #define SLC_MTU (sizeof("T1111222281122334455667788EA5F\r")+1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SLC_CMD_LEN 1
 #define SLC_SFF_ID_LEN 3
 #define SLC_EFF_ID_LEN 8
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct slcan {
 	int			magic;
@@ -99,6 +113,10 @@ struct slcan {
 	struct net_device	*dev;		/* easy for intr handling    */
 	spinlock_t		lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct work_struct	tx_work;	/* Flushes transmit buffer   */
+>>>>>>> v3.18
 =======
 	struct work_struct	tx_work;	/* Flushes transmit buffer   */
 >>>>>>> v3.18
@@ -162,6 +180,7 @@ static void slc_bump(struct slcan *sl)
 	struct sk_buff *skb;
 	struct can_frame cf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, dlc_pos, tmp;
 	unsigned long ultmp;
 	char cmd = sl->rbuff[0];
@@ -204,6 +223,8 @@ static void slc_bump(struct slcan *sl)
 			return;
 		cf.data[i] |= tmp;
 =======
+=======
+>>>>>>> v3.18
 	int i, tmp;
 	u32 tmpid;
 	char *cmd = sl->rbuff;
@@ -261,6 +282,9 @@ static void slc_bump(struct slcan *sl)
 				return;
 			cf.data[i] |= tmp;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -289,7 +313,10 @@ static void slc_bump(struct slcan *sl)
 static void slcan_unesc(struct slcan *sl, unsigned char s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((s == '\r') || (s == '\a')) { /* CR or BEL ends the pdu */
@@ -319,6 +346,7 @@ static void slcan_unesc(struct slcan *sl, unsigned char s)
 static void slc_encaps(struct slcan *sl, struct can_frame *cf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int actual, idx, i;
 	char cmd;
 
@@ -341,6 +369,8 @@ static void slc_encaps(struct slcan *sl, struct can_frame *cf)
 
 	strcat(sl->xbuff, "\r"); /* add terminating character */
 =======
+=======
+>>>>>>> v3.18
 	int actual, i;
 	unsigned char *pos;
 	unsigned char *endpos;
@@ -381,6 +411,9 @@ static void slc_encaps(struct slcan *sl, struct can_frame *cf)
 	}
 
 	*pos++ = '\r';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Order of next two lines is *very* important.
@@ -393,8 +426,13 @@ static void slc_encaps(struct slcan *sl, struct can_frame *cf)
 	 */
 	set_bit(TTY_DO_WRITE_WAKEUP, &sl->tty->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	actual = sl->tty->ops->write(sl->tty, sl->xbuff, strlen(sl->xbuff));
 	sl->xleft = strlen(sl->xbuff) - actual;
+=======
+	actual = sl->tty->ops->write(sl->tty, sl->xbuff, pos - sl->xbuff);
+	sl->xleft = (pos - sl->xbuff) - actual;
+>>>>>>> v3.18
 =======
 	actual = sl->tty->ops->write(sl->tty, sl->xbuff, pos - sl->xbuff);
 	sl->xleft = (pos - sl->xbuff) - actual;
@@ -403,6 +441,7 @@ static void slc_encaps(struct slcan *sl, struct can_frame *cf)
 	sl->dev->stats.tx_bytes += cf->can_dlc;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Called by the driver when there's room for more data.  If we have
@@ -417,6 +456,8 @@ static void slcan_write_wakeup(struct tty_struct *tty)
 	if (!sl || sl->magic != SLCAN_MAGIC || !netif_running(sl->dev))
 		return;
 =======
+=======
+>>>>>>> v3.18
 /* Write out any remaining transmit buffer. Scheduled when tty is writable */
 static void slcan_transmit(struct work_struct *work)
 {
@@ -429,6 +470,9 @@ static void slcan_transmit(struct work_struct *work)
 		spin_unlock_bh(&sl->lock);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (sl->xleft <= 0)  {
@@ -436,7 +480,12 @@ static void slcan_transmit(struct work_struct *work)
 		 * transmission of another packet */
 		sl->dev->stats.tx_packets++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(TTY_DO_WRITE_WAKEUP, &tty->flags);
+=======
+		clear_bit(TTY_DO_WRITE_WAKEUP, &sl->tty->flags);
+		spin_unlock_bh(&sl->lock);
+>>>>>>> v3.18
 =======
 		clear_bit(TTY_DO_WRITE_WAKEUP, &sl->tty->flags);
 		spin_unlock_bh(&sl->lock);
@@ -446,10 +495,13 @@ static void slcan_transmit(struct work_struct *work)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	actual = tty->ops->write(tty, sl->xhead, sl->xleft);
 	sl->xleft -= actual;
 	sl->xhead += actual;
 =======
+=======
+>>>>>>> v3.18
 	actual = sl->tty->ops->write(sl->tty, sl->xhead, sl->xleft);
 	sl->xleft -= actual;
 	sl->xhead += actual;
@@ -465,6 +517,9 @@ static void slcan_write_wakeup(struct tty_struct *tty)
 	struct slcan *sl = tty->disc_data;
 
 	schedule_work(&sl->tx_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -541,18 +596,28 @@ static void slc_free_netdev(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int slcan_change_mtu(struct net_device *dev, int new_mtu)
 {
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct net_device_ops slc_netdev_ops = {
 	.ndo_open               = slc_open,
 	.ndo_stop               = slc_close,
 	.ndo_start_xmit         = slc_xmit,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu         = slcan_change_mtu,
+>>>>>>> v3.18
 =======
 	.ndo_change_mtu         = slcan_change_mtu,
 >>>>>>> v3.18
@@ -653,7 +718,11 @@ static struct slcan *slc_alloc(dev_t line)
 
 	sprintf(name, "slcan%d", i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(*sl), name, slc_setup);
+=======
+	dev = alloc_netdev(sizeof(*sl), name, NET_NAME_UNKNOWN, slc_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(sizeof(*sl), name, NET_NAME_UNKNOWN, slc_setup);
 >>>>>>> v3.18
@@ -668,6 +737,10 @@ static struct slcan *slc_alloc(dev_t line)
 	sl->dev	= dev;
 	spin_lock_init(&sl->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_WORK(&sl->tx_work, slcan_transmit);
+>>>>>>> v3.18
 =======
 	INIT_WORK(&sl->tx_work, slcan_transmit);
 >>>>>>> v3.18
@@ -770,15 +843,21 @@ static void slcan_close(struct tty_struct *tty)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty->disc_data = NULL;
 	sl->tty = NULL;
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&sl->lock);
 	tty->disc_data = NULL;
 	sl->tty = NULL;
 	spin_unlock_bh(&sl->lock);
 
 	flush_work(&sl->tx_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Flush network side */

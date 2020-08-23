@@ -14,6 +14,7 @@
 
 #include <linux/fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mount.h>
 #include <linux/pagemap.h>
 #include <linux/init.h>
@@ -25,10 +26,16 @@
 #include <linux/mount.h>
 #include <linux/init.h>
 >>>>>>> v3.18
+=======
+#include <linux/magic.h>
+#include <linux/mount.h>
+#include <linux/init.h>
+>>>>>>> v3.18
 #include <linux/user_namespace.h>
 
 #include "sysfs.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static struct vfsmount *sysfs_mnt;
@@ -145,6 +152,8 @@ static struct dentry *sysfs_mount(struct file_system_type *fs_type,
 
 	return dget(sb->s_root);
 =======
+=======
+>>>>>>> v3.18
 static struct kernfs_root *sysfs_root;
 struct kernfs_node *sysfs_root_kn;
 
@@ -169,11 +178,15 @@ static struct dentry *sysfs_mount(struct file_system_type *fs_type,
 	if (IS_ERR(root) || !new_sb)
 		kobj_ns_drop(KOBJ_NS_TYPE_NET, ns);
 	return root;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void sysfs_kill_sb(struct super_block *sb)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sysfs_super_info *info = sysfs_info(sb);
 	/* Remove the superblock from fs_supers/s_instances
@@ -182,10 +195,15 @@ static void sysfs_kill_sb(struct super_block *sb)
 	kill_anon_super(sb);
 	free_sysfs_super_info(info);
 =======
+=======
+>>>>>>> v3.18
 	void *ns = (void *)kernfs_super_ns(sb);
 
 	kernfs_kill_sb(sb);
 	kobj_ns_drop(KOBJ_NS_TYPE_NET, ns);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -198,6 +216,7 @@ static struct file_system_type sysfs_fs_type = {
 
 int __init sysfs_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int err = -ENOMEM;
 
@@ -245,6 +264,8 @@ void sysfs_put(struct sysfs_dirent *sd)
 }
 EXPORT_SYMBOL_GPL(sysfs_put);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	sysfs_root = kernfs_create_root(NULL, KERNFS_ROOT_EXTRA_OPEN_PERM_CHECK,
@@ -262,4 +283,7 @@ EXPORT_SYMBOL_GPL(sysfs_put);
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -51,7 +51,11 @@ asmlinkage long sys_mmap(unsigned long addr, unsigned long len,
  * kernel/entry.S.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void * const sys_call_table[__NR_syscalls] __aligned(4096) = {
+=======
+void *sys_call_table[__NR_syscalls] __aligned(4096) = {
+>>>>>>> v3.18
 =======
 void *sys_call_table[__NR_syscalls] __aligned(4096) = {
 >>>>>>> v3.18

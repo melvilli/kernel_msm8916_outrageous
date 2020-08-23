@@ -21,6 +21,7 @@
 #include "r8192E_hw.h"
 #include "r8192E_cmdpkt.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------------Define Local Constant---------------------------*/
 /* Debug constant*/
 #define		CMPK_DEBOUNCE_CNT			1
@@ -35,6 +36,9 @@
 }
 
 /*---------------------------Define functions---------------------------------*/
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -105,7 +109,11 @@ bool cmpk_message_handle_tx(
 Failed:
 	return rt_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }	/* CMPK_Message_Handle_Tx */
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -158,10 +166,14 @@ cmpk_count_txstatistic(
 	priv->stats.txretrycount += pstx_fb->retry_cnt;
 	priv->stats.txfeedbackretry += pstx_fb->retry_cnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 }	/* cmpk_CountTxStatistic */
 
 
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -170,7 +182,11 @@ static void cmpk_handle_tx_feedback(struct net_device *dev, u8 *pmsg)
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cmpk_txfb rx_tx_fb;	/* */
+=======
+	struct cmpk_txfb rx_tx_fb;
+>>>>>>> v3.18
 =======
 	struct cmpk_txfb rx_tx_fb;
 >>>>>>> v3.18
@@ -181,8 +197,12 @@ static void cmpk_handle_tx_feedback(struct net_device *dev, u8 *pmsg)
 	memcpy((u8 *)&rx_tx_fb, pmsg, sizeof(struct cmpk_txfb));
 	cmpk_count_txstatistic(dev, &rx_tx_fb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 }	/* cmpk_Handle_Tx_Feedback */
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -191,13 +211,17 @@ static void cmdpkt_beacontimerinterrupt_819xusb(struct net_device *dev)
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 tx_rate;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if ((priv->rtllib->current_network.mode == IEEE_A)  ||
 	    (priv->rtllib->current_network.mode == IEEE_N_5G) ||
 	    ((priv->rtllib->current_network.mode == IEEE_N_24G)  &&
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    (!priv->rtllib->pHTInfo->bCurSuppCCK))) {
 		tx_rate = 60;
@@ -208,10 +232,15 @@ static void cmdpkt_beacontimerinterrupt_819xusb(struct net_device *dev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	    (!priv->rtllib->pHTInfo->bCurSuppCCK)))
 		DMESG("send beacon frame  tx rate is 6Mbpm\n");
 	else
 		DMESG("send beacon frame  tx rate is 1Mbpm\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -223,7 +252,10 @@ static void cmpk_handle_interrupt_status(struct net_device *dev, u8 *pmsg)
 	DMESG("---> cmpk_Handle_Interrupt_Status()\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rx_intr_status.length = pmsg[1];
@@ -233,7 +265,10 @@ static void cmpk_handle_interrupt_status(struct net_device *dev, u8 *pmsg)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (priv->rtllib->iw_mode == IW_MODE_ADHOC) {
@@ -257,6 +292,7 @@ static void cmpk_handle_interrupt_status(struct net_device *dev, u8 *pmsg)
 	DMESG("<---- cmpk_handle_interrupt_status()\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 }	/* cmpk_handle_interrupt_status */
 
 
@@ -264,11 +300,16 @@ static	void cmpk_handle_query_config_rx(struct net_device *dev, u8 *pmsg)
 {
 	cmpk_query_cfg_t	rx_query_cfg;	/* */
 =======
+=======
+>>>>>>> v3.18
 }
 
 static	void cmpk_handle_query_config_rx(struct net_device *dev, u8 *pmsg)
 {
 	cmpk_query_cfg_t	rx_query_cfg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -283,8 +324,12 @@ static	void cmpk_handle_query_config_rx(struct net_device *dev, u8 *pmsg)
 			    (pmsg[14] << 8) | (pmsg[15] << 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 }	/* cmpk_Handle_Query_Config_Rx */
 
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -329,6 +374,7 @@ static void cmpk_count_tx_status(struct net_device *dev,
 
 	priv->stats.last_packet_rate		= pstx_status->rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }	/* cmpk_CountTxStatus */
 
 
@@ -337,11 +383,16 @@ static	void cmpk_handle_tx_status(struct net_device *dev, u8 *pmsg)
 {
 	struct cmpk_tx_status rx_tx_sts;	/* */
 =======
+=======
+>>>>>>> v3.18
 }
 
 static	void cmpk_handle_tx_status(struct net_device *dev, u8 *pmsg)
 {
 	struct cmpk_tx_status rx_tx_sts;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memcpy((void *)&rx_tx_sts, (void *)pmsg, sizeof(struct cmpk_tx_status));
@@ -357,7 +408,10 @@ static	void cmpk_handle_tx_rate_history(struct net_device *dev, u8 *pmsg)
 	struct r8192_priv *priv = rtllib_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef ENABLE_PS
@@ -395,10 +449,15 @@ static	void cmpk_handle_tx_rate_history(struct net_device *dev, u8 *pmsg)
 							 ptxrate->ht_mcs[j][i];
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 }
 
 
+=======
+}
+
+>>>>>>> v3.18
 =======
 }
 
@@ -414,12 +473,17 @@ u32 cmpk_message_handle_rx(struct net_device *dev,
 	RT_TRACE(COMP_CMDPKT, "---->cmpk_message_handle_rx()\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pstats == NULL) {
 		/* Print error message. */
 		/*RT_TRACE(COMP_SEND, DebugLevel,
 				("\n\r[CMPK]-->Err queue id or pointer"));*/
 		return 0;
 	}
+=======
+	if (pstats == NULL)
+		return 0;
+>>>>>>> v3.18
 =======
 	if (pstats == NULL)
 		return 0;
@@ -474,7 +538,11 @@ u32 cmpk_message_handle_rx(struct net_device *dev,
 
 			RT_TRACE(COMP_CMDPKT, "---->cmpk_message_handle_rx():"
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 "unknow CMD Element\n");
+=======
+				 "unknown CMD Element\n");
+>>>>>>> v3.18
 =======
 				 "unknown CMD Element\n");
 >>>>>>> v3.18

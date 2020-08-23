@@ -15,8 +15,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, you can access it online at
+ * http://www.gnu.org/licenses/gpl-2.0.html.
+>>>>>>> v3.18
 =======
  * along with this program; if not, you can access it online at
  * http://www.gnu.org/licenses/gpl-2.0.html.
@@ -42,7 +47,11 @@ struct rcu_ctrlblk {
 	RCU_TRACE(unsigned long ticks_this_gp); /* Statistic for stalls. */
 	RCU_TRACE(unsigned long jiffies_stall); /* Jiffies at next stall. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RCU_TRACE(char *name);		/* Name of RCU type. */
+=======
+	RCU_TRACE(const char *name);	/* Name of RCU type. */
+>>>>>>> v3.18
 =======
 	RCU_TRACE(const char *name);	/* Name of RCU type. */
 >>>>>>> v3.18
@@ -62,6 +71,7 @@ static struct rcu_ctrlblk rcu_bh_ctrlblk = {
 };
 
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
+<<<<<<< HEAD
 <<<<<<< HEAD
 int rcu_scheduler_active __read_mostly;
 EXPORT_SYMBOL_GPL(rcu_scheduler_active);
@@ -1016,10 +1026,15 @@ early_initcall(rcu_scheduler_really_started);
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 #include <linux/kernel_stat.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kernel_stat.h>
 
 int rcu_scheduler_active __read_mostly;
 EXPORT_SYMBOL_GPL(rcu_scheduler_active);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1036,6 +1051,7 @@ void __init rcu_scheduler_starting(void)
 
 #ifdef CONFIG_RCU_TRACE
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_RCU_BOOST
 
@@ -1058,6 +1074,8 @@ static void rcu_initiate_boost_trace(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void rcu_trace_sub_qlen(struct rcu_ctrlblk *rcp, int n)
 {
 	unsigned long flags;
@@ -1073,7 +1091,10 @@ static void rcu_trace_sub_qlen(struct rcu_ctrlblk *rcp, int n)
 static int show_tiny_stats(struct seq_file *m, void *unused)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	show_tiny_preempt_stats(m);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	seq_printf(m, "rcu_sched: qlen: %ld\n", rcu_sched_ctrlblk.qlen);
@@ -1126,12 +1147,15 @@ MODULE_DESCRIPTION("Read-Copy Update tracing for tiny implementation");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void check_cpu_stall_preempt(void)
 {
 #ifdef CONFIG_TINY_PREEMPT_RCU
 	check_cpu_stall(&rcu_preempt_ctrlblk.rcb);
 #endif /* #ifdef CONFIG_TINY_PREEMPT_RCU */
 =======
+=======
+>>>>>>> v3.18
 static void check_cpu_stall(struct rcu_ctrlblk *rcp)
 {
 	unsigned long j;
@@ -1166,6 +1190,9 @@ static void check_cpu_stalls(void)
 {
 	RCU_TRACE(check_cpu_stall(&rcu_bh_ctrlblk));
 	RCU_TRACE(check_cpu_stall(&rcu_sched_ctrlblk));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

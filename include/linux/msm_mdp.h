@@ -2,7 +2,10 @@
  *
  * Copyright (C) 2007 Google Incorporated
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -18,6 +21,7 @@
 #ifndef _MSM_MDP_H_
 #define _MSM_MDP_H_
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <uapi/linux/msm_mdp.h>
 
@@ -40,6 +44,8 @@ bool msm_fb_get_cont_splash(void);
 
 #endif /*_MSM_MDP_H_*/
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 
 #define MSMFB_IOCTL_MAGIC 'm'
@@ -103,4 +109,7 @@ struct mdp_blit_req_list {
 };
 
 #endif /* _MSM_MDP_H_ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

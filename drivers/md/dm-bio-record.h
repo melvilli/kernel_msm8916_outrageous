@@ -18,6 +18,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dm_bio_vec_details {
 #if PAGE_SIZE < 65536
 	__u16 bv_len;
@@ -36,15 +37,21 @@ struct dm_bio_details {
 	unsigned long bi_flags;
 	struct dm_bio_vec_details bi_io_vec[BIO_MAX_PAGES];
 =======
+=======
+>>>>>>> v3.18
 struct dm_bio_details {
 	struct block_device *bi_bdev;
 	unsigned long bi_flags;
 	struct bvec_iter bi_iter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static inline void dm_bio_record(struct dm_bio_details *bd, struct bio *bio)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned i;
 
@@ -63,10 +70,16 @@ static inline void dm_bio_record(struct dm_bio_details *bd, struct bio *bio)
 	bd->bi_flags = bio->bi_flags;
 	bd->bi_iter = bio->bi_iter;
 >>>>>>> v3.18
+=======
+	bd->bi_bdev = bio->bi_bdev;
+	bd->bi_flags = bio->bi_flags;
+	bd->bi_iter = bio->bi_iter;
+>>>>>>> v3.18
 }
 
 static inline void dm_bio_restore(struct dm_bio_details *bd, struct bio *bio)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned i;
 
@@ -80,6 +93,11 @@ static inline void dm_bio_restore(struct dm_bio_details *bd, struct bio *bio)
 		bio->bi_io_vec[i].bv_len = bd->bi_io_vec[i].bv_len;
 		bio->bi_io_vec[i].bv_offset = bd->bi_io_vec[i].bv_offset;
 	}
+=======
+	bio->bi_bdev = bd->bi_bdev;
+	bio->bi_flags = bd->bi_flags;
+	bio->bi_iter = bd->bi_iter;
+>>>>>>> v3.18
 =======
 	bio->bi_bdev = bd->bi_bdev;
 	bio->bi_flags = bd->bi_flags;

@@ -2,15 +2,21 @@
 #define __MMU_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/errno.h>
 
 typedef struct {
 =======
+=======
+>>>>>>> v3.18
 #include <linux/cpumask.h>
 #include <linux/errno.h>
 
 typedef struct {
 	cpumask_t cpu_attach_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	atomic_t attach_count;
 	unsigned int flush_mm;
@@ -21,15 +27,21 @@ typedef struct {
 	unsigned long asce_limit;
 	unsigned long vdso_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Cloned contexts will be created with extended page tables. */
 	unsigned int alloc_pgste:1;
 	/* The mmu context has extended page tables. */
 	unsigned int has_pgste:1;
 =======
+=======
+>>>>>>> v3.18
 	/* The mmu context has extended page tables. */
 	unsigned int has_pgste:1;
 	/* The mmu context uses storage keys. */
 	unsigned int use_skey:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } mm_context_t;
 

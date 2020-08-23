@@ -1477,7 +1477,11 @@ static int process_rcf(struct sk_buff *skb, struct nf_conn *ct,
 
 		/* Set expect timeout */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&nf_conntrack_lock);
+=======
+		spin_lock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 		spin_lock_bh(&nf_conntrack_expect_lock);
 >>>>>>> v3.18
@@ -1491,7 +1495,11 @@ static int process_rcf(struct sk_buff *skb, struct nf_conn *ct,
 			set_expect_timeout(exp, info->timeout);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&nf_conntrack_lock);
+=======
+		spin_unlock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&nf_conntrack_expect_lock);
 >>>>>>> v3.18

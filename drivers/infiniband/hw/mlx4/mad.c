@@ -65,6 +65,7 @@ enum {
 #define GUID_TBL_BLK_SIZE (GUID_TBL_ENTRY_SIZE * GUID_TBL_BLK_NUM_ENTRIES)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Counters should be saturate once they reach their maximum value */
 #define ASSIGN_32BIT_COUNTER(counter, value) do {\
 	if ((value) > U32_MAX)			 \
@@ -73,6 +74,8 @@ enum {
 		counter = cpu_to_be32(value);	 \
 } while (0)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct mlx4_mad_rcv_buf {
@@ -479,6 +482,10 @@ int mlx4_ib_send_to_slave(struct mlx4_ib_dev *dev, int slave, u8 port,
 	u16 tun_pkey_ix;
 	u16 cached_pkey;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 is_eth = dev->dev->caps.port_type[port] == MLX4_PORT_TYPE_ETH;
+>>>>>>> v3.18
 =======
 	u8 is_eth = dev->dev->caps.port_type[port] == MLX4_PORT_TYPE_ETH;
 >>>>>>> v3.18
@@ -493,10 +500,13 @@ int mlx4_ib_send_to_slave(struct mlx4_ib_dev *dev, int slave, u8 port,
 		return -EAGAIN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* QP0 forwarding only for Dom0 */
 	if (!dest_qpt && (mlx4_master_func_num(dev->dev) != slave))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!dest_qpt)
@@ -528,11 +538,17 @@ int mlx4_ib_send_to_slave(struct mlx4_ib_dev *dev, int slave, u8 port,
 	memset(&attr, 0, sizeof attr);
 	attr.port_num = port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (is_eth) {
 		memcpy(&attr.grh.dgid.raw[0], &grh->dgid.raw[0], 16);
 		attr.ah_flags = IB_AH_GRH;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ah = ib_create_ah(tun_ctx->pd, &attr);
 	if (IS_ERR(ah))
@@ -566,12 +582,15 @@ int mlx4_ib_send_to_slave(struct mlx4_ib_dev *dev, int slave, u8 port,
 	/* adjust tunnel data */
 	tun_mad->hdr.pkey_index = cpu_to_be16(tun_pkey_ix);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tun_mad->hdr.sl_vid = cpu_to_be16(((u16)(wc->sl)) << 12);
 	tun_mad->hdr.slid_mac_47_32 = cpu_to_be16(wc->slid);
 	tun_mad->hdr.flags_src_qp = cpu_to_be32(wc->src_qp & 0xFFFFFF);
 	tun_mad->hdr.g_ml_path = (grh && (wc->wc_flags & IB_WC_GRH)) ? 0x80 : 0;
 
 =======
+=======
+>>>>>>> v3.18
 	tun_mad->hdr.flags_src_qp = cpu_to_be32(wc->src_qp & 0xFFFFFF);
 	tun_mad->hdr.g_ml_path = (grh && (wc->wc_flags & IB_WC_GRH)) ? 0x80 : 0;
 
@@ -602,6 +621,9 @@ int mlx4_ib_send_to_slave(struct mlx4_ib_dev *dev, int slave, u8 port,
 		tun_mad->hdr.slid_mac_47_32 = cpu_to_be16(wc->slid);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ib_dma_sync_single_for_device(&dev->ib_dev,
 				      tun_qp->tx_ring[tun_tx_ix].buf.map,
@@ -639,7 +661,10 @@ static int mlx4_ib_demux_mad(struct ib_device *ibdev, u8 port,
 	int slave;
 	u8 *slave_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int is_eth = 0;
 
 	if (rdma_port_get_link_layer(ibdev, port) == IB_LINK_LAYER_INFINIBAND)
@@ -675,6 +700,9 @@ static int mlx4_ib_demux_mad(struct ib_device *ibdev, u8 port,
 				 slave, err);
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Initially assume that this mad is for us */
@@ -699,7 +727,10 @@ static int mlx4_ib_demux_mad(struct ib_device *ibdev, u8 port,
 	/* Class-specific handling */
 	switch (mad->mad_hdr.mgmt_class) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case IB_MGMT_CLASS_SUBN_LID_ROUTED:
 	case IB_MGMT_CLASS_SUBN_DIRECTED_ROUTE:
 		/* 255 indicates the dom0 */
@@ -715,6 +746,9 @@ static int mlx4_ib_demux_mad(struct ib_device *ibdev, u8 port,
 			}
 		}
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IB_MGMT_CLASS_SUBN_ADM:
 		if (mlx4_ib_demux_sa_handler(ibdev, port, slave,
@@ -845,6 +879,7 @@ static void edit_counter(struct mlx4_counter *cnt,
 					struct ib_pma_portcounters *pma_cnt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ASSIGN_32BIT_COUNTER(pma_cnt->port_xmit_data,
 			     (be64_to_cpu(cnt->tx_bytes) >> 2));
 	ASSIGN_32BIT_COUNTER(pma_cnt->port_rcv_data,
@@ -854,10 +889,15 @@ static void edit_counter(struct mlx4_counter *cnt,
 	ASSIGN_32BIT_COUNTER(pma_cnt->port_rcv_packets,
 			     be64_to_cpu(cnt->rx_frames));
 =======
+=======
+>>>>>>> v3.18
 	pma_cnt->port_xmit_data = cpu_to_be32((be64_to_cpu(cnt->tx_bytes)>>2));
 	pma_cnt->port_rcv_data  = cpu_to_be32((be64_to_cpu(cnt->rx_bytes)>>2));
 	pma_cnt->port_xmit_packets = cpu_to_be32(be64_to_cpu(cnt->tx_frames));
 	pma_cnt->port_rcv_packets  = cpu_to_be32(be64_to_cpu(cnt->rx_frames));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -941,7 +981,11 @@ int mlx4_ib_mad_init(struct mlx4_ib_dev *dev)
 							      q ? IB_QPT_GSI : IB_QPT_SMI,
 							      NULL, 0, send_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							      NULL, NULL);
+=======
+							      NULL, NULL, 0);
+>>>>>>> v3.18
 =======
 							      NULL, NULL, 0);
 >>>>>>> v3.18
@@ -1206,8 +1250,14 @@ static int is_proxy_qp0(struct mlx4_ib_dev *dev, int qpn, int slave)
 
 int mlx4_ib_send_to_wire(struct mlx4_ib_dev *dev, int slave, u8 port,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 enum ib_qp_type dest_qpt, u16 pkey_index, u32 remote_qpn,
 			 u32 qkey, struct ib_ah_attr *attr, struct ib_mad *mad)
+=======
+			 enum ib_qp_type dest_qpt, u16 pkey_index,
+			 u32 remote_qpn, u32 qkey, struct ib_ah_attr *attr,
+			 u8 *s_mac, struct ib_mad *mad)
+>>>>>>> v3.18
 =======
 			 enum ib_qp_type dest_qpt, u16 pkey_index,
 			 u32 remote_qpn, u32 qkey, struct ib_ah_attr *attr,
@@ -1235,10 +1285,13 @@ int mlx4_ib_send_to_wire(struct mlx4_ib_dev *dev, int slave, u8 port,
 		return -EAGAIN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* QP0 forwarding only for Dom0 */
 	if (dest_qpt == IB_QPT_SMI && (mlx4_master_func_num(dev->dev) != slave))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (dest_qpt == IB_QPT_SMI) {
@@ -1305,6 +1358,12 @@ int mlx4_ib_send_to_wire(struct mlx4_ib_dev *dev, int slave, u8 port,
 	wr.opcode = IB_WR_SEND;
 	wr.send_flags = IB_SEND_SIGNALED;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (s_mac)
+		memcpy(to_mah(ah)->av.eth.s_mac, s_mac, 6);
+
+>>>>>>> v3.18
 =======
 	if (s_mac)
 		memcpy(to_mah(ah)->av.eth.s_mac, s_mac, 6);
@@ -1319,7 +1378,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int get_slave_base_gid_ix(struct mlx4_ib_dev *dev, int slave, int port)
 {
 	if (rdma_port_get_link_layer(&dev->ib_dev, port) == IB_LINK_LAYER_INFINIBAND)
@@ -1336,6 +1398,9 @@ static void fill_in_real_sgid_index(struct mlx4_ib_dev *dev, int slave, int port
 		ah_attr->grh.sgid_index += get_slave_base_gid_ix(dev, slave, port);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void mlx4_ib_multiplex_mad(struct mlx4_ib_demux_pv_ctx *ctx, struct ib_wc *wc)
 {
@@ -1348,6 +1413,10 @@ static void mlx4_ib_multiplex_mad(struct mlx4_ib_demux_pv_ctx *ctx, struct ib_wc
 	u8 *slave_id;
 	int slave;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int port;
+>>>>>>> v3.18
 =======
 	int port;
 >>>>>>> v3.18
@@ -1367,11 +1436,14 @@ static void mlx4_ib_multiplex_mad(struct mlx4_ib_demux_pv_ctx *ctx, struct ib_wc
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (slave != mlx4_master_func_num(dev->dev) && !(wc->src_qp & 0x2)) {
 		mlx4_ib_warn(ctx->ib_dev, "can't multiplex bad sqp:%d: "
 			     "non-master trying to send QP0 packets\n", wc->src_qp);
 		return;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1402,13 +1474,19 @@ static void mlx4_ib_multiplex_mad(struct mlx4_ib_demux_pv_ctx *ctx, struct ib_wc
 	/* Class-specific handling */
 	switch (tunnel->mad.mad_hdr.mgmt_class) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case IB_MGMT_CLASS_SUBN_LID_ROUTED:
 	case IB_MGMT_CLASS_SUBN_DIRECTED_ROUTE:
 		if (slave != mlx4_master_func_num(dev->dev) &&
 		    !mlx4_vf_smi_enabled(dev->dev, slave, ctx->port))
 			return;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IB_MGMT_CLASS_SUBN_ADM:
 		if (mlx4_ib_multiplex_sa_handler(ctx->ib_dev, ctx->port, slave,
@@ -1440,6 +1518,7 @@ static void mlx4_ib_multiplex_mad(struct mlx4_ib_demux_pv_ctx *ctx, struct ib_wc
 	ah.ibah.device = ctx->ib_dev;
 	mlx4_ib_query_ah(&ah.ibah, &ah_attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((ah_attr.ah_flags & IB_AH_GRH) &&
 	    (ah_attr.grh.sgid_index != slave)) {
 		mlx4_ib_warn(ctx->ib_dev, "slave:%d accessed invalid sgid_index:%d\n",
@@ -1447,6 +1526,8 @@ static void mlx4_ib_multiplex_mad(struct mlx4_ib_demux_pv_ctx *ctx, struct ib_wc
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (ah_attr.ah_flags & IB_AH_GRH)
 		fill_in_real_sgid_index(dev, slave, ctx->port, &ah_attr);
 
@@ -1459,6 +1540,9 @@ static void mlx4_ib_multiplex_mad(struct mlx4_ib_demux_pv_ctx *ctx, struct ib_wc
 	/* if slave have default vlan use it */
 	mlx4_get_slave_default_vlan(dev->dev, ctx->port, slave,
 				    &ah_attr.vlan_id, &ah_attr.sl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mlx4_ib_send_to_wire(dev, slave, ctx->port,
@@ -1468,7 +1552,11 @@ static void mlx4_ib_multiplex_mad(struct mlx4_ib_demux_pv_ctx *ctx, struct ib_wc
 			     be32_to_cpu(tunnel->hdr.remote_qpn),
 			     be32_to_cpu(tunnel->hdr.qkey),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     &ah_attr, &tunnel->mad);
+=======
+			     &ah_attr, wc->smac, &tunnel->mad);
+>>>>>>> v3.18
 =======
 			     &ah_attr, wc->smac, &tunnel->mad);
 >>>>>>> v3.18
@@ -1710,9 +1798,12 @@ static int create_pv_sqp(struct mlx4_ib_demux_pv_ctx *ctx,
 	memset(&attr, 0, sizeof attr);
 	attr.qp_state = IB_QPS_INIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	attr.pkey_index =
 		to_mdev(ctx->ib_dev)->pkeys.virt2phys_pkey[ctx->slave][ctx->port - 1][0];
 =======
+=======
+>>>>>>> v3.18
 	ret = 0;
 	if (create_tun)
 		ret = find_slave_port_pkey_ix(to_mdev(ctx->ib_dev), ctx->slave,
@@ -1721,6 +1812,9 @@ static int create_pv_sqp(struct mlx4_ib_demux_pv_ctx *ctx,
 	if (ret || !create_tun)
 		attr.pkey_index =
 			to_mdev(ctx->ib_dev)->pkeys.virt2phys_pkey[ctx->slave][ctx->port - 1][0];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	attr.qkey = IB_QP1_QKEY;
 	attr.port_num = ctx->port;
@@ -1861,9 +1955,15 @@ static int create_pv_resources(struct ib_device *ibdev, int slave, int port,
 
 	ctx->state = DEMUX_PV_STATE_STARTING;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* have QP0 only on port owner, and only if link layer is IB */
 	if (ctx->slave == mlx4_master_func_num(to_mdev(ctx->ib_dev)->dev) &&
 	    rdma_port_get_link_layer(ibdev, ctx->port) == IB_LINK_LAYER_INFINIBAND)
+=======
+	/* have QP0 only if link layer is IB */
+	if (rdma_port_get_link_layer(ibdev, ctx->port) ==
+	    IB_LINK_LAYER_INFINIBAND)
+>>>>>>> v3.18
 =======
 	/* have QP0 only if link layer is IB */
 	if (rdma_port_get_link_layer(ibdev, ctx->port) ==
@@ -2060,8 +2160,11 @@ static int mlx4_ib_alloc_demux_ctx(struct mlx4_ib_dev *dev,
 	ctx->ib_dev = &dev->ib_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < dev->dev->caps.sqp_demux; i++) {
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0;
 	     i < min(dev->dev->caps.sqp_demux, (u16)(dev->dev->num_vfs + 1));
 	     i++) {
@@ -2071,6 +2174,9 @@ static int mlx4_ib_alloc_demux_ctx(struct mlx4_ib_dev *dev,
 		if (!test_bit(port - 1, actv_ports.ports))
 			continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = alloc_pv_object(dev, i, port, &ctx->tun[i]);
 		if (ret) {

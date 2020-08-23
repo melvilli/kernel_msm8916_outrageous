@@ -173,7 +173,10 @@ void ath6kl_dump_registers(struct ath6kl_device *dev,
 			   struct ath6kl_irq_enable_reg *irq_enable_reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ath6kl_dbg(ATH6KL_DBG_IRQ, ("<------- Register Table -------->\n"));
@@ -223,7 +226,10 @@ void ath6kl_dump_registers(struct ath6kl_device *dev,
 				   irq_proc_reg->rx_gmbox_lkahd_alias[1]);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1247,8 +1253,11 @@ static ssize_t ath6kl_force_roam_write(struct file *file,
 	size_t len;
 	u8 bssid[ETH_ALEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	int addr[ETH_ALEN];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1258,12 +1267,17 @@ static ssize_t ath6kl_force_roam_write(struct file *file,
 	buf[len] = '\0';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sscanf(buf, "%02x:%02x:%02x:%02x:%02x:%02x",
 		   &addr[0], &addr[1], &addr[2], &addr[3], &addr[4], &addr[5])
 	    != ETH_ALEN)
 		return -EINVAL;
 	for (i = 0; i < ETH_ALEN; i++)
 		bssid[i] = addr[i];
+=======
+	if (!mac_pton(buf, bssid))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (!mac_pton(buf, bssid))
 		return -EINVAL;
@@ -1417,7 +1431,10 @@ static ssize_t ath6kl_create_qos_write(struct file *file,
 						size_t count, loff_t *ppos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ath6kl *ar = file->private_data;
@@ -1599,7 +1616,10 @@ static ssize_t ath6kl_delete_qos_write(struct file *file,
 				size_t count, loff_t *ppos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ath6kl *ar = file->private_data;

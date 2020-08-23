@@ -207,7 +207,11 @@ static void receive_rcom_status(struct dlm_ls *ls, struct dlm_rcom *rc_in)
 	rs = (struct rcom_status *)rc_in->rc_buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(rs->rs_flags & DLM_RSF_NEED_SLOTS)) {
+=======
+	if (!(le32_to_cpu(rs->rs_flags) & DLM_RSF_NEED_SLOTS)) {
+>>>>>>> v3.18
 =======
 	if (!(le32_to_cpu(rs->rs_flags) & DLM_RSF_NEED_SLOTS)) {
 >>>>>>> v3.18

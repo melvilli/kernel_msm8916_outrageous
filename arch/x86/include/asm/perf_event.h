@@ -30,6 +30,12 @@
 #define ARCH_PERFMON_EVENTSEL_CMASK			0xFF000000ULL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HSW_IN_TX					(1ULL << 32)
+#define HSW_IN_TX_CHECKPOINTED				(1ULL << 33)
+
+>>>>>>> v3.18
 =======
 #define HSW_IN_TX					(1ULL << 32)
 #define HSW_IN_TX_CHECKPOINTED				(1ULL << 33)
@@ -55,7 +61,10 @@
 	 ARCH_PERFMON_EVENTSEL_INV   |	\
 	 ARCH_PERFMON_EVENTSEL_CMASK)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define X86_ALL_EVENT_FLAGS  			\
 	(ARCH_PERFMON_EVENTSEL_EDGE |  		\
 	 ARCH_PERFMON_EVENTSEL_INV | 		\
@@ -64,6 +73,9 @@
 	 ARCH_PERFMON_EVENTSEL_PIN_CONTROL | 	\
 	 HSW_IN_TX | 				\
 	 HSW_IN_TX_CHECKPOINTED)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AMD64_RAW_EVENT_MASK		\
 	(X86_RAW_EVENT_MASK          |  \

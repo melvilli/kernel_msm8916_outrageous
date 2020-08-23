@@ -49,6 +49,10 @@ SIGN1(sys32_recvfrom, compat_sys_recvfrom, %o0)
 SIGN1(sys32_recvmsg, compat_sys_recvmsg, %o0)
 SIGN1(sys32_sendmsg, compat_sys_sendmsg, %o0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+SIGN2(sys32_renameat2, sys_renameat2, %o0, %o2)
+>>>>>>> v3.18
 =======
 SIGN2(sys32_renameat2, sys_renameat2, %o0, %o2)
 >>>>>>> v3.18

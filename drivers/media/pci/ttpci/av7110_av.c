@@ -959,13 +959,19 @@ static unsigned int dvb_video_poll(struct file *file, poll_table *wait)
 			if (FREE_COND)
 				mask |= (POLLOUT | POLLWRNORM);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else /* if not playing: may play if asked for */
 				mask |= (POLLOUT | POLLWRNORM);
 =======
+=======
+>>>>>>> v3.18
 		} else {
 			/* if not playing: may play if asked for */
 			mask |= (POLLOUT | POLLWRNORM);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

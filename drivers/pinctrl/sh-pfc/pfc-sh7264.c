@@ -605,8 +605,12 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const pinmux_enum_t pinmux_data[] = {
 
+=======
+static const u16 pinmux_data[] = {
+>>>>>>> v3.18
 =======
 static const u16 pinmux_data[] = {
 >>>>>>> v3.18
@@ -1077,6 +1081,7 @@ static const u16 pinmux_data[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sh_pfc_pin pinmux_pins[] = {
 
 	/* Port A */
@@ -1190,6 +1195,8 @@ static struct sh_pfc_pin pinmux_pins[] = {
 	PINMUX_GPIO(GPIO_PG1, PG1_DATA),
 	PINMUX_GPIO(GPIO_PG0, PG0_DATA),
 =======
+=======
+>>>>>>> v3.18
 static const struct sh_pfc_pin pinmux_pins[] = {
 	/* Port A */
 	PINMUX_GPIO(PA3),
@@ -1301,6 +1308,9 @@ static const struct sh_pfc_pin pinmux_pins[] = {
 	PINMUX_GPIO(PG2),
 	PINMUX_GPIO(PG1),
 	PINMUX_GPIO(PG0),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Port H - Port H does not have a Data Register */
@@ -1308,6 +1318,7 @@ static const struct sh_pfc_pin pinmux_pins[] = {
 	/* Port I - not on device */
 
 	/* Port J */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	PINMUX_GPIO(GPIO_PJ11, PJ11_DATA),
 	PINMUX_GPIO(GPIO_PJ10, PJ10_DATA),
@@ -1336,6 +1347,8 @@ static const struct sh_pfc_pin pinmux_pins[] = {
 	PINMUX_GPIO(GPIO_PK1, PK1_DATA),
 	PINMUX_GPIO(GPIO_PK0, PK0_DATA),
 =======
+=======
+>>>>>>> v3.18
 	PINMUX_GPIO(PJ11),
 	PINMUX_GPIO(PJ10),
 	PINMUX_GPIO(PJ9),
@@ -1362,6 +1375,9 @@ static const struct sh_pfc_pin pinmux_pins[] = {
 	PINMUX_GPIO(PK2),
 	PINMUX_GPIO(PK1),
 	PINMUX_GPIO(PK0),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

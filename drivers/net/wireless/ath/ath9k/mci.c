@@ -201,7 +201,11 @@ skip_tuning:
 		btcoex->duty_cycle = ATH_MCI_MAX_DUTY_CYCLE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	btcoex->btcoex_no_stomp =  btcoex->btcoex_period * 1000 *
+=======
+	btcoex->btcoex_no_stomp =  btcoex->btcoex_period *
+>>>>>>> v3.18
 =======
 	btcoex->btcoex_no_stomp =  btcoex->btcoex_period *
 >>>>>>> v3.18
@@ -560,7 +564,11 @@ void ath_mci_intr(struct ath_softc *sc)
 
 		while (more_data == MCI_GPM_MORE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (test_bit(SC_OP_HW_RESET, &sc->sc_flags))
+=======
+			if (test_bit(ATH_OP_HW_RESET, &common->op_flags))
+>>>>>>> v3.18
 =======
 			if (test_bit(ATH_OP_HW_RESET, &common->op_flags))
 >>>>>>> v3.18
@@ -670,9 +678,15 @@ void ath9k_mci_update_wlan_channels(struct ath_softc *sc, bool allow_all)
 	chan_end = wlan_chan + 10;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (chan->chanmode == CHANNEL_G_HT40PLUS)
 		chan_end += 20;
 	else if (chan->chanmode == CHANNEL_G_HT40MINUS)
+=======
+	if (IS_CHAN_HT40PLUS(chan))
+		chan_end += 20;
+	else if (IS_CHAN_HT40MINUS(chan))
+>>>>>>> v3.18
 =======
 	if (IS_CHAN_HT40PLUS(chan))
 		chan_end += 20;
@@ -721,6 +735,7 @@ void ath9k_mci_set_txpower(struct ath_softc *sc, bool setchannel,
 
 	if (setchannel) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct ath9k_hw_cal_data *caldata = &sc->caldata;
 		if ((caldata->chanmode == CHANNEL_G_HT40PLUS) &&
 		    (ah->curchan->channel > caldata->channel) &&
@@ -728,12 +743,17 @@ void ath9k_mci_set_txpower(struct ath_softc *sc, bool setchannel,
 			return;
 		if ((caldata->chanmode == CHANNEL_G_HT40MINUS) &&
 =======
+=======
+>>>>>>> v3.18
 		struct ath9k_hw_cal_data *caldata = &sc->cur_chan->caldata;
 		if (IS_CHAN_HT40PLUS(ah->curchan) &&
 		    (ah->curchan->channel > caldata->channel) &&
 		    (ah->curchan->channel <= caldata->channel + 20))
 			return;
 		if (IS_CHAN_HT40MINUS(ah->curchan) &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    (ah->curchan->channel < caldata->channel) &&
 		    (ah->curchan->channel >= caldata->channel - 20))
@@ -744,7 +764,11 @@ void ath9k_mci_set_txpower(struct ath_softc *sc, bool setchannel,
 
 	if (old_concur_tx != mci_hw->concur_tx)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath9k_hw_set_txpowerlimit(ah, sc->config.txpowlimit, false);
+=======
+		ath9k_hw_set_txpowerlimit(ah, sc->cur_chan->txpower, false);
+>>>>>>> v3.18
 =======
 		ath9k_hw_set_txpowerlimit(ah, sc->cur_chan->txpower, false);
 >>>>>>> v3.18

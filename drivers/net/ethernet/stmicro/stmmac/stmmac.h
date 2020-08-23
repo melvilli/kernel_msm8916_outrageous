@@ -33,13 +33,19 @@
 #include "common.h"
 #include <linux/ptp_clock_kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/reset.h>
 
 struct stmmac_tx_info {
 	dma_addr_t buf;
 	bool map_as_page;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct stmmac_priv {
@@ -54,7 +60,11 @@ struct stmmac_priv {
 	u32 tx_coal_frames;
 	u32 tx_coal_timer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_addr_t *tx_skbuff_dma;
+=======
+	struct stmmac_tx_info *tx_skbuff_dma;
+>>>>>>> v3.18
 =======
 	struct stmmac_tx_info *tx_skbuff_dma;
 >>>>>>> v3.18
@@ -84,7 +94,10 @@ struct stmmac_priv {
 	struct device *device;
 	struct mac_device_info *hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int no_csum_insertion;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spinlock_t lock;
@@ -109,6 +122,10 @@ struct stmmac_priv {
 	int wol_irq;
 	struct clk *stmmac_clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct reset_control *stmmac_rst;
+>>>>>>> v3.18
 =======
 	struct reset_control *stmmac_rst;
 >>>>>>> v3.18
@@ -124,6 +141,7 @@ struct stmmac_priv {
 	struct ptp_clock *ptp_clock;
 	struct ptp_clock_info ptp_clock_ops;
 	unsigned int default_addend;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 adv_ts;
 	int use_riwt;
@@ -143,6 +161,8 @@ extern void stmmac_ptp_unregister(struct stmmac_priv *priv);
 int stmmac_freeze(struct net_device *ndev);
 int stmmac_restore(struct net_device *ndev);
 =======
+=======
+>>>>>>> v3.18
 	struct clk *clk_ptp_ref;
 	unsigned int clk_ptp_rate;
 	u32 adv_ts;
@@ -160,6 +180,9 @@ extern const struct stmmac_desc_ops ndesc_ops;
 extern const struct stmmac_hwtimestamp stmmac_ptp;
 int stmmac_ptp_register(struct stmmac_priv *priv);
 void stmmac_ptp_unregister(struct stmmac_priv *priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int stmmac_resume(struct net_device *ndev);
 int stmmac_suspend(struct net_device *ndev);
@@ -172,7 +195,10 @@ bool stmmac_eee_init(struct stmmac_priv *priv);
 
 #ifdef CONFIG_STMMAC_PLATFORM
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DWMAC_MESON
 extern const struct stmmac_of_data meson6_dwmac_data;
 #endif
@@ -186,6 +212,9 @@ extern const struct stmmac_of_data stid127_dwmac_data;
 #ifdef CONFIG_DWMAC_SOCFPGA
 extern const struct stmmac_of_data socfpga_gmac_data;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct platform_driver stmmac_pltfr_driver;
 static inline int stmmac_register_platform(void)

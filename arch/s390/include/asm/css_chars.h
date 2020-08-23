@@ -30,6 +30,11 @@ struct css_general_char {
 	u32 : 19;
 	u32 alt_ssi : 1; /* bit 108 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32:1;
+	u32 narf:1;	 /* bit 110 */
+>>>>>>> v3.18
 =======
 	u32:1;
 	u32 narf:1;	 /* bit 110 */

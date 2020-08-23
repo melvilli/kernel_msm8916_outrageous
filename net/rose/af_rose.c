@@ -203,15 +203,21 @@ static void rose_kill_by_device(struct net_device *dev)
  *	Handle device status changes.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rose_device_event(struct notifier_block *this, unsigned long event,
 	void *ptr)
 {
 	struct net_device *dev = (struct net_device *)ptr;
 =======
+=======
+>>>>>>> v3.18
 static int rose_device_event(struct notifier_block *this,
 			     unsigned long event, void *ptr)
 {
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!net_eq(dev_net(dev), &init_net))
@@ -1020,7 +1026,11 @@ int rose_rx_call_request(struct sk_buff *skb, struct net_device *dev, struct ros
 	make_rose->source_ndigis = facilities.source_ndigis;
 	for (n = 0 ; n < facilities.source_ndigis ; n++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		make_rose->source_digis[n]= facilities.source_digis[n];
+=======
+		make_rose->source_digis[n] = facilities.source_digis[n];
+>>>>>>> v3.18
 =======
 		make_rose->source_digis[n] = facilities.source_digis[n];
 >>>>>>> v3.18
@@ -1053,7 +1063,11 @@ int rose_rx_call_request(struct sk_buff *skb, struct net_device *dev, struct ros
 
 	if (!sock_flag(sk, SOCK_DEAD))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb->len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -1067,7 +1081,11 @@ static int rose_sendmsg(struct kiocb *iocb, struct socket *sock,
 	struct sock *sk = sock->sk;
 	struct rose_sock *rose = rose_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_rose *usrose = (struct sockaddr_rose *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_rose *, usrose, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_rose *, usrose, msg->msg_name);
 >>>>>>> v3.18
@@ -1273,7 +1291,12 @@ static int rose_recvmsg(struct kiocb *iocb, struct socket *sock,
 	if (msg->msg_name) {
 		struct sockaddr_rose *srose;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct full_sockaddr_rose *full_srose = msg->msg_name;
+=======
+		DECLARE_SOCKADDR(struct full_sockaddr_rose *, full_srose,
+				 msg->msg_name);
+>>>>>>> v3.18
 =======
 		DECLARE_SOCKADDR(struct full_sockaddr_rose *, full_srose,
 				 msg->msg_name);
@@ -1562,7 +1585,11 @@ static int __init rose_proto_init(void)
 
 		sprintf(name, "rose%d", i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev = alloc_netdev(0, name, rose_setup);
+=======
+		dev = alloc_netdev(0, name, NET_NAME_UNKNOWN, rose_setup);
+>>>>>>> v3.18
 =======
 		dev = alloc_netdev(0, name, NET_NAME_UNKNOWN, rose_setup);
 >>>>>>> v3.18

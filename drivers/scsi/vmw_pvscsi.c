@@ -2,7 +2,11 @@
  * Linux driver for VMware's para-virtualized SCSI HBA.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2008-2009, VMware, Inc. All Rights Reserved.
+=======
+ * Copyright (C) 2008-2014, VMware, Inc. All Rights Reserved.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2008-2014, VMware, Inc. All Rights Reserved.
 >>>>>>> v3.18
@@ -37,6 +41,10 @@
 #include <scsi/scsi_cmnd.h>
 #include <scsi/scsi_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <scsi/scsi_tcq.h>
+>>>>>>> v3.18
 =======
 #include <scsi/scsi_tcq.h>
 >>>>>>> v3.18
@@ -53,7 +61,11 @@ MODULE_VERSION(PVSCSI_DRIVER_VERSION_STRING);
 #define PVSCSI_DEFAULT_NUM_PAGES_PER_RING	8
 #define PVSCSI_DEFAULT_NUM_PAGES_MSG_RING	1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PVSCSI_DEFAULT_QUEUE_DEPTH		64
+=======
+#define PVSCSI_DEFAULT_QUEUE_DEPTH		254
+>>>>>>> v3.18
 =======
 #define PVSCSI_DEFAULT_QUEUE_DEPTH		254
 >>>>>>> v3.18
@@ -75,6 +87,10 @@ struct pvscsi_ctx {
 	dma_addr_t		sensePA;
 	dma_addr_t		sglPA;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct completion	*abort_cmp;
+>>>>>>> v3.18
 =======
 	struct completion	*abort_cmp;
 >>>>>>> v3.18
@@ -88,6 +104,10 @@ struct pvscsi_adapter {
 	bool				use_msix;
 	bool				use_msg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool				use_req_threshold;
+>>>>>>> v3.18
 =======
 	bool				use_req_threshold;
 >>>>>>> v3.18
@@ -123,7 +143,11 @@ struct pvscsi_adapter {
 
 /* Command line parameters */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pvscsi_ring_pages     = PVSCSI_DEFAULT_NUM_PAGES_PER_RING;
+=======
+static int pvscsi_ring_pages;
+>>>>>>> v3.18
 =======
 static int pvscsi_ring_pages;
 >>>>>>> v3.18
@@ -133,6 +157,10 @@ static bool pvscsi_disable_msi;
 static bool pvscsi_disable_msix;
 static bool pvscsi_use_msg       = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static bool pvscsi_use_req_threshold = true;
+>>>>>>> v3.18
 =======
 static bool pvscsi_use_req_threshold = true;
 >>>>>>> v3.18
@@ -142,12 +170,18 @@ static bool pvscsi_use_req_threshold = true;
 module_param_named(ring_pages, pvscsi_ring_pages, int, PVSCSI_RW);
 MODULE_PARM_DESC(ring_pages, "Number of pages per req/cmp ring - (default="
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 __stringify(PVSCSI_DEFAULT_NUM_PAGES_PER_RING) ")");
 =======
+=======
+>>>>>>> v3.18
 		 __stringify(PVSCSI_DEFAULT_NUM_PAGES_PER_RING)
 		 "[up to 16 targets],"
 		 __stringify(PVSCSI_SETUP_RINGS_MAX_NUM_PAGES)
 		 "[for 16+ targets])");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 module_param_named(msg_ring_pages, pvscsi_msg_ring_pages, int, PVSCSI_RW);
@@ -157,7 +191,11 @@ MODULE_PARM_DESC(msg_ring_pages, "Number of pages for the msg ring - (default="
 module_param_named(cmd_per_lun, pvscsi_cmd_per_lun, int, PVSCSI_RW);
 MODULE_PARM_DESC(cmd_per_lun, "Maximum commands per lun - (default="
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 __stringify(PVSCSI_MAX_REQ_QUEUE_DEPTH) ")");
+=======
+		 __stringify(PVSCSI_DEFAULT_QUEUE_DEPTH) ")");
+>>>>>>> v3.18
 =======
 		 __stringify(PVSCSI_DEFAULT_QUEUE_DEPTH) ")");
 >>>>>>> v3.18
@@ -172,11 +210,17 @@ module_param_named(use_msg, pvscsi_use_msg, bool, PVSCSI_RW);
 MODULE_PARM_DESC(use_msg, "Use msg ring when available - (default=1)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 module_param_named(use_req_threshold, pvscsi_use_req_threshold,
 		   bool, PVSCSI_RW);
 MODULE_PARM_DESC(use_req_threshold, "Use driver-based request coalescing if configured - (default=1)");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct pci_device_id pvscsi_pci_tbl[] = {
 	{ PCI_VDEVICE(VMWARE, PCI_DEVICE_ID_VMWARE_PVSCSI) },
@@ -224,6 +268,10 @@ static void pvscsi_release_context(struct pvscsi_adapter *adapter,
 {
 	ctx->cmd = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ctx->abort_cmp = NULL;
+>>>>>>> v3.18
 =======
 	ctx->abort_cmp = NULL;
 >>>>>>> v3.18
@@ -331,11 +379,14 @@ static void pvscsi_kick_io(const struct pvscsi_adapter *adapter,
 			   unsigned char op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (scsi_is_rw(op))
 		pvscsi_kick_rw_io(adapter);
 	else
 		pvscsi_process_request_ring(adapter);
 =======
+=======
+>>>>>>> v3.18
 	if (scsi_is_rw(op)) {
 		struct PVSCSIRingsState *s = adapter->rings_state;
 
@@ -345,6 +396,9 @@ static void pvscsi_kick_io(const struct pvscsi_adapter *adapter,
 	} else {
 		pvscsi_process_request_ring(adapter);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -550,7 +604,10 @@ static void pvscsi_setup_all_rings(const struct pvscsi_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int pvscsi_change_queue_depth(struct scsi_device *sdev,
 				     int qdepth,
 				     int reason)
@@ -580,6 +637,9 @@ static int pvscsi_change_queue_depth(struct scsi_device *sdev,
 	return sdev->queue_depth;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Pull a completion descriptor off and pass the completion back
@@ -591,6 +651,10 @@ static void pvscsi_complete_request(struct pvscsi_adapter *adapter,
 	struct pvscsi_ctx *ctx;
 	struct scsi_cmnd *cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct completion *abort_cmp;
+>>>>>>> v3.18
 =======
 	struct completion *abort_cmp;
 >>>>>>> v3.18
@@ -600,11 +664,14 @@ static void pvscsi_complete_request(struct pvscsi_adapter *adapter,
 	ctx = pvscsi_get_context(adapter, e->context);
 	cmd = ctx->cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvscsi_unmap_buffers(adapter, ctx);
 	pvscsi_release_context(adapter, ctx);
 	cmd->result = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	abort_cmp = ctx->abort_cmp;
 	pvscsi_unmap_buffers(adapter, ctx);
 	pvscsi_release_context(adapter, ctx);
@@ -620,6 +687,9 @@ static void pvscsi_complete_request(struct pvscsi_adapter *adapter,
 	}
 
 	cmd->result = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sdstat != SAM_STAT_GOOD &&
 	    (btstat == BTSTAT_SUCCESS ||
@@ -843,6 +913,11 @@ static int pvscsi_abort(struct scsi_cmnd *cmd)
 	struct pvscsi_ctx *ctx;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int result = SUCCESS;
+	DECLARE_COMPLETION_ONSTACK(abort_cmp);
+>>>>>>> v3.18
 =======
 	int result = SUCCESS;
 	DECLARE_COMPLETION_ONSTACK(abort_cmp);
@@ -870,6 +945,7 @@ static int pvscsi_abort(struct scsi_cmnd *cmd)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvscsi_abort_cmd(adapter, ctx);
 
 	pvscsi_process_completion_ring(adapter);
@@ -878,6 +954,8 @@ out:
 	spin_unlock_irqrestore(&adapter->hw_lock, flags);
 	return SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Mark that the command has been requested to be aborted and issue
 	 * the abort.
@@ -912,6 +990,9 @@ out:
 out:
 	spin_unlock_irqrestore(&adapter->hw_lock, flags);
 	return result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1070,6 +1151,10 @@ static struct scsi_host_template pvscsi_template = {
 	.max_sectors			= 0xffff,
 	.use_clustering			= ENABLE_CLUSTERING,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.change_queue_depth		= pvscsi_change_queue_depth,
+>>>>>>> v3.18
 =======
 	.change_queue_depth		= pvscsi_change_queue_depth,
 >>>>>>> v3.18
@@ -1197,7 +1282,10 @@ static int pvscsi_setup_msg_workqueue(struct pvscsi_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool pvscsi_setup_req_threshold(struct pvscsi_adapter *adapter,
 				      bool enable)
 {
@@ -1226,6 +1314,9 @@ static bool pvscsi_setup_req_threshold(struct pvscsi_adapter *adapter,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static irqreturn_t pvscsi_isr(int irq, void *devp)
 {
@@ -1272,7 +1363,11 @@ static int pvscsi_setup_msix(const struct pvscsi_adapter *adapter,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = pci_enable_msix(adapter->dev, &entry, 1);
+=======
+	ret = pci_enable_msix_exact(adapter->dev, &entry, 1);
+>>>>>>> v3.18
 =======
 	ret = pci_enable_msix_exact(adapter->dev, &entry, 1);
 >>>>>>> v3.18
@@ -1434,18 +1529,24 @@ static int pvscsi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 {
 	struct pvscsi_adapter *adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct Scsi_Host *host;
 	struct device *dev;
 	unsigned int i;
 	unsigned long flags = 0;
 	int error;
 =======
+=======
+>>>>>>> v3.18
 	struct pvscsi_adapter adapter_temp;
 	struct Scsi_Host *host = NULL;
 	unsigned int i;
 	unsigned long flags = 0;
 	int error;
 	u32 max_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	error = -ENODEV;
@@ -1464,6 +1565,7 @@ static int pvscsi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		goto out_disable_device;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pvscsi_template.can_queue =
 		min(PVSCSI_MAX_NUM_PAGES_REQ_RING, pvscsi_ring_pages) *
@@ -1489,6 +1591,8 @@ static int pvscsi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	host->max_cmd_len = 16;
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Let's use a temp pvscsi_adapter struct until we find the number of
 	 * targets on the adapter, after that we will switch to the real
@@ -1497,13 +1601,20 @@ static int pvscsi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	adapter = &adapter_temp;
 	memset(adapter, 0, sizeof(*adapter));
 	adapter->dev  = pdev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	adapter->rev = pdev->revision;
 
 	if (pci_request_regions(pdev, "vmw_pvscsi")) {
 		printk(KERN_ERR "vmw_pvscsi: pci memory selection failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free_host;
+=======
+		goto out_disable_device;
+>>>>>>> v3.18
 =======
 		goto out_disable_device;
 >>>>>>> v3.18
@@ -1523,7 +1634,11 @@ static int pvscsi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		printk(KERN_ERR
 		       "vmw_pvscsi: adapter has no suitable MMIO region\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_release_resources;
+=======
+		goto out_release_resources_and_disable;
+>>>>>>> v3.18
 =======
 		goto out_release_resources_and_disable;
 >>>>>>> v3.18
@@ -1536,11 +1651,14 @@ static int pvscsi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		       "vmw_pvscsi: can't iomap for BAR %d memsize %lu\n",
 		       i, PVSCSI_MEM_SPACE_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_release_resources;
 	}
 
 	pci_set_master(pdev);
 =======
+=======
+>>>>>>> v3.18
 		goto out_release_resources_and_disable;
 	}
 
@@ -1595,6 +1713,9 @@ static int pvscsi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	host->max_cmd_len = 16;
 	host->max_id      = max_id;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pci_set_drvdata(pdev, host);
 
@@ -1610,6 +1731,7 @@ static int pvscsi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Ask the device for max number of targets.
 	 */
 	host->max_id = pvscsi_get_max_targets(adapter);
@@ -1617,6 +1739,8 @@ static int pvscsi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	dev_info(dev, "vmw_pvscsi: host->max_id: %u\n", host->max_id);
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * From this point on we should reset the adapter if anything goes
@@ -1659,11 +1783,17 @@ static int pvscsi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	adapter->use_req_threshold = pvscsi_setup_req_threshold(adapter, true);
 	printk(KERN_DEBUG "vmw_pvscsi: driver-based request coalescing %sabled\n",
 	       adapter->use_req_threshold ? "en" : "dis");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	error = request_irq(adapter->irq, pvscsi_isr, flags,
 			    "vmw_pvscsi", adapter);
@@ -1695,6 +1825,7 @@ out_reset_adapter:
 out_release_resources:
 	pvscsi_release_resources(adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free_host:
 	scsi_host_put(host);
 out_disable_device:
@@ -1703,6 +1834,8 @@ out_disable_device:
 
 	return error;
 =======
+=======
+>>>>>>> v3.18
 	scsi_host_put(host);
 out_disable_device:
 	pci_disable_device(pdev);
@@ -1712,6 +1845,9 @@ out_disable_device:
 out_release_resources_and_disable:
 	pvscsi_release_resources(adapter);
 	goto out_disable_device;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1750,7 +1886,10 @@ static void pvscsi_remove(struct pci_dev *pdev)
 	scsi_host_put(host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_disable_device(pdev);

@@ -51,7 +51,10 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * This is the maximum number of segments that would be allowed in indirect
  * requests. This value will also be passed to the frontend.
@@ -65,6 +68,9 @@
 #define INDIRECT_PAGES(_segs) \
 	((_segs + SEGS_PER_INDIRECT_FRAME - 1)/SEGS_PER_INDIRECT_FRAME)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Not a real protocol.  Used to generate ring structs which contain
  * the elements common to all protocols only.  This way we get a
@@ -100,7 +106,10 @@ struct blkif_x86_32_request_other {
 } __attribute__((__packed__));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct blkif_x86_32_request_indirect {
 	uint8_t        indirect_op;
 	uint16_t       nr_segments;
@@ -119,6 +128,9 @@ struct blkif_x86_32_request_indirect {
 	uint64_t       _pad2;        /* make it 64 byte aligned */
 } __attribute__((__packed__));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct blkif_x86_32_request {
 	uint8_t        operation;    /* BLKIF_OP_???                         */
@@ -127,6 +139,10 @@ struct blkif_x86_32_request {
 		struct blkif_x86_32_request_discard discard;
 		struct blkif_x86_32_request_other other;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct blkif_x86_32_request_indirect indirect;
+>>>>>>> v3.18
 =======
 		struct blkif_x86_32_request_indirect indirect;
 >>>>>>> v3.18
@@ -169,7 +185,10 @@ struct blkif_x86_64_request_other {
 } __attribute__((__packed__));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct blkif_x86_64_request_indirect {
 	uint8_t        indirect_op;
 	uint16_t       nr_segments;
@@ -189,6 +208,9 @@ struct blkif_x86_64_request_indirect {
 	uint32_t       _pad3;        /* make it 64 byte aligned */
 } __attribute__((__packed__));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct blkif_x86_64_request {
 	uint8_t        operation;    /* BLKIF_OP_???                         */
@@ -197,6 +219,10 @@ struct blkif_x86_64_request {
 		struct blkif_x86_64_request_discard discard;
 		struct blkif_x86_64_request_other other;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct blkif_x86_64_request_indirect indirect;
+>>>>>>> v3.18
 =======
 		struct blkif_x86_64_request_indirect indirect;
 >>>>>>> v3.18
@@ -250,7 +276,10 @@ struct xen_vbd {
 struct backend_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Number of available flags */
 #define PERSISTENT_GNT_FLAGS_SIZE	2
 /* This persistent grant is currently in use */
@@ -263,6 +292,9 @@ struct backend_info;
 
 /* Number of requests that we can fit in a ring */
 #define XEN_BLKIF_REQS			32
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct persistent_gnt {
@@ -270,7 +302,13 @@ struct persistent_gnt {
 	grant_ref_t gnt;
 	grant_handle_t handle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rb_node node;
+=======
+	DECLARE_BITMAP(flags, PERSISTENT_GNT_FLAGS_SIZE);
+	struct rb_node node;
+	struct list_head remove_node;
+>>>>>>> v3.18
 =======
 	DECLARE_BITMAP(flags, PERSISTENT_GNT_FLAGS_SIZE);
 	struct rb_node node;
@@ -301,6 +339,10 @@ struct xen_blkif {
 	struct completion	drain_complete;
 	atomic_t		drain;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_t		inflight;
+>>>>>>> v3.18
 =======
 	atomic_t		inflight;
 >>>>>>> v3.18
@@ -312,7 +354,10 @@ struct xen_blkif {
 	struct rb_root		persistent_gnts;
 	unsigned int		persistent_gnt_c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	atomic_t		persistent_gnt_in_use;
 	unsigned long           next_lru;
 
@@ -330,6 +375,9 @@ struct xen_blkif {
 	/* And its spinlock. */
 	spinlock_t		pending_free_lock;
 	wait_queue_head_t	pending_free_wq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* statistics */
@@ -343,8 +391,11 @@ struct xen_blkif {
 	unsigned long long			st_wr_sect;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_head_t	waiting_to_free;
 =======
+=======
+>>>>>>> v3.18
 	struct work_struct	free_work;
 	/* Thread shutdown wait queue. */
 	wait_queue_head_t	shutdown_wq;
@@ -381,6 +432,9 @@ struct pending_req {
 	struct grant_page	*indirect_pages[MAX_INDIRECT_PAGES];
 	struct seg_buf		seg[MAX_INDIRECT_SEGMENTS];
 	struct bio		*biolist[MAX_INDIRECT_SEGMENTS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -394,7 +448,11 @@ struct pending_req {
 	do {						\
 		if (atomic_dec_and_test(&(_b)->refcnt))	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			wake_up(&(_b)->waiting_to_free);\
+=======
+			schedule_work(&(_b)->free_work);\
+>>>>>>> v3.18
 =======
 			schedule_work(&(_b)->free_work);\
 >>>>>>> v3.18
@@ -413,6 +471,11 @@ int xen_blkif_xenbus_init(void);
 irqreturn_t xen_blkif_be_int(int irq, void *dev_id);
 int xen_blkif_schedule(void *arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int xen_blkif_purge_persistent(void *arg);
+void xen_blkbk_free_caches(struct xen_blkif *blkif);
+>>>>>>> v3.18
 =======
 int xen_blkif_purge_persistent(void *arg);
 void xen_blkbk_free_caches(struct xen_blkif *blkif);
@@ -425,6 +488,10 @@ int xen_blkbk_barrier(struct xenbus_transaction xbt,
 		      struct backend_info *be, int state);
 struct xenbus_device *xen_blkbk_xenbus(struct backend_info *be);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void xen_blkbk_unmap_purged_grants(struct work_struct *work);
+>>>>>>> v3.18
 =======
 void xen_blkbk_unmap_purged_grants(struct work_struct *work);
 >>>>>>> v3.18
@@ -433,9 +500,15 @@ static inline void blkif_get_x86_32_req(struct blkif_request *dst,
 					struct blkif_x86_32_request *src)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, n = BLKIF_MAX_SEGMENTS_PER_REQUEST;
 	dst->operation = ACCESS_ONCE(src->operation);
 	switch (dst->operation) {
+=======
+	int i, n = BLKIF_MAX_SEGMENTS_PER_REQUEST, j;
+	dst->operation = src->operation;
+	switch (src->operation) {
+>>>>>>> v3.18
 =======
 	int i, n = BLKIF_MAX_SEGMENTS_PER_REQUEST, j;
 	dst->operation = src->operation;
@@ -462,7 +535,10 @@ static inline void blkif_get_x86_32_req(struct blkif_request *dst,
 		dst->u.discard.nr_sectors = src->u.discard.nr_sectors;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case BLKIF_OP_INDIRECT:
 		dst->u.indirect.indirect_op = src->u.indirect.indirect_op;
 		dst->u.indirect.nr_segments = src->u.indirect.nr_segments;
@@ -475,6 +551,9 @@ static inline void blkif_get_x86_32_req(struct blkif_request *dst,
 			dst->u.indirect.indirect_grefs[i] =
 				src->u.indirect.indirect_grefs[i];
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		/*
@@ -490,9 +569,15 @@ static inline void blkif_get_x86_64_req(struct blkif_request *dst,
 					struct blkif_x86_64_request *src)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, n = BLKIF_MAX_SEGMENTS_PER_REQUEST;
 	dst->operation = ACCESS_ONCE(src->operation);
 	switch (dst->operation) {
+=======
+	int i, n = BLKIF_MAX_SEGMENTS_PER_REQUEST, j;
+	dst->operation = src->operation;
+	switch (src->operation) {
+>>>>>>> v3.18
 =======
 	int i, n = BLKIF_MAX_SEGMENTS_PER_REQUEST, j;
 	dst->operation = src->operation;
@@ -519,7 +604,10 @@ static inline void blkif_get_x86_64_req(struct blkif_request *dst,
 		dst->u.discard.nr_sectors = src->u.discard.nr_sectors;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case BLKIF_OP_INDIRECT:
 		dst->u.indirect.indirect_op = src->u.indirect.indirect_op;
 		dst->u.indirect.nr_segments = src->u.indirect.nr_segments;
@@ -532,6 +620,9 @@ static inline void blkif_get_x86_64_req(struct blkif_request *dst,
 			dst->u.indirect.indirect_grefs[i] =
 				src->u.indirect.indirect_grefs[i];
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		/*

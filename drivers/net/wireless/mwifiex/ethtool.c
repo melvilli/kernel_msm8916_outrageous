@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: ethtool
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2013, Marvell International Ltd.
+=======
+ * Copyright (C) 2013-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -69,10 +73,13 @@ static int mwifiex_ethtool_set_wol(struct net_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct ethtool_ops mwifiex_ethtool_ops = {
 	.get_wol = mwifiex_ethtool_get_wol,
 	.set_wol = mwifiex_ethtool_set_wol,
 =======
+=======
+>>>>>>> v3.18
 static int
 mwifiex_get_dump_flag(struct net_device *dev, struct ethtool_dump *dump)
 {
@@ -159,5 +166,8 @@ const struct ethtool_ops mwifiex_ethtool_ops = {
 	.get_dump_flag = mwifiex_get_dump_flag,
 	.get_dump_data = mwifiex_get_dump_data,
 	.set_dump = mwifiex_set_dump,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

@@ -310,7 +310,11 @@ static void midc_descriptor_complete(struct intel_mid_dma_chan *midc,
 	}
 	if (midc->raw_tfr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		desc->status = DMA_SUCCESS;
+=======
+		desc->status = DMA_COMPLETE;
+>>>>>>> v3.18
 =======
 		desc->status = DMA_COMPLETE;
 >>>>>>> v3.18
@@ -486,7 +490,11 @@ static enum dma_status intel_mid_dma_tx_status(struct dma_chan *chan,
 
 	ret = dma_cookie_status(chan, cookie, txstate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret != DMA_SUCCESS) {
+=======
+	if (ret != DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 	if (ret != DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -1414,7 +1422,11 @@ static int dma_runtime_idle(struct device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pm_schedule_suspend(dev, 0);
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

@@ -75,7 +75,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -100,7 +103,12 @@
 #define XTYPE_XBOX360     1
 #define XTYPE_XBOX360W    2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XTYPE_UNKNOWN     3
+=======
+#define XTYPE_XBOXONE     3
+#define XTYPE_UNKNOWN     4
+>>>>>>> v3.18
 =======
 #define XTYPE_XBOXONE     3
 #define XTYPE_UNKNOWN     4
@@ -131,10 +139,13 @@ static const struct xpad_device {
 	{ 0x045e, 0x0289, "Microsoft X-Box pad v2 (US)", 0, XTYPE_XBOX },
 	{ 0x045e, 0x028e, "Microsoft X-Box 360 pad", 0, XTYPE_XBOX360 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x045e, 0x0291, "Xbox 360 Wireless Receiver (XBOX)", MAP_DPAD_TO_BUTTONS, XTYPE_XBOX360W },
 	{ 0x045e, 0x0719, "Xbox 360 Wireless Receiver", MAP_DPAD_TO_BUTTONS, XTYPE_XBOX360W },
 	{ 0x044f, 0x0f07, "Thrustmaster, Inc. Controller", 0, XTYPE_XBOX },
 =======
+=======
+>>>>>>> v3.18
 	{ 0x045e, 0x02d1, "Microsoft X-Box One pad", 0, XTYPE_XBOXONE },
 	{ 0x045e, 0x0291, "Xbox 360 Wireless Receiver (XBOX)", MAP_DPAD_TO_BUTTONS, XTYPE_XBOX360W },
 	{ 0x045e, 0x0719, "Xbox 360 Wireless Receiver", MAP_DPAD_TO_BUTTONS, XTYPE_XBOX360W },
@@ -143,6 +154,9 @@ static const struct xpad_device {
 	{ 0x046d, 0xc21d, "Logitech Gamepad F310", 0, XTYPE_XBOX360 },
 	{ 0x046d, 0xc21e, "Logitech Gamepad F510", 0, XTYPE_XBOX360 },
 	{ 0x046d, 0xc21f, "Logitech Gamepad F710", 0, XTYPE_XBOX360 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0x046d, 0xc242, "Logitech Chillstream Controller", 0, XTYPE_XBOX360 },
 	{ 0x046d, 0xca84, "Logitech Xbox Cordless Controller", 0, XTYPE_XBOX },
@@ -157,11 +171,14 @@ static const struct xpad_device {
 	{ 0x0738, 0x4556, "Mad Catz Lynx Wireless Controller", 0, XTYPE_XBOX },
 	{ 0x0738, 0x4716, "Mad Catz Wired Xbox 360 Controller", 0, XTYPE_XBOX360 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x0738, 0x4728, "Mad Catz Street Fighter IV FightPad", MAP_TRIGGERS_TO_BUTTONS, XTYPE_XBOX360 },
 	{ 0x0738, 0x4738, "Mad Catz Wired Xbox 360 Controller (SFIV)", MAP_TRIGGERS_TO_BUTTONS, XTYPE_XBOX360 },
 	{ 0x0738, 0x6040, "Mad Catz Beat Pad Pro", MAP_DPAD_TO_BUTTONS, XTYPE_XBOX },
 	{ 0x0738, 0xbeef, "Mad Catz JOYTECH NEO SE Advanced GamePad", XTYPE_XBOX360 },
 =======
+=======
+>>>>>>> v3.18
 	{ 0x0738, 0x4718, "Mad Catz Street Fighter IV FightStick SE", 0, XTYPE_XBOX360 },
 	{ 0x0738, 0x4726, "Mad Catz Xbox 360 Controller", 0, XTYPE_XBOX360 },
 	{ 0x0738, 0x4728, "Mad Catz Street Fighter IV FightPad", MAP_TRIGGERS_TO_BUTTONS, XTYPE_XBOX360 },
@@ -173,6 +190,9 @@ static const struct xpad_device {
 	{ 0x0738, 0xcb02, "Saitek Cyborg Rumble Pad - PC/Xbox 360", 0, XTYPE_XBOX360 },
 	{ 0x0738, 0xcb03, "Saitek P3200 Rumble Pad - PC/Xbox 360", 0, XTYPE_XBOX360 },
 	{ 0x0738, 0xf738, "Super SFIV FightStick TE S", 0, XTYPE_XBOX360 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0x0c12, 0x8802, "Zeroplus Xbox Controller", 0, XTYPE_XBOX },
 	{ 0x0c12, 0x8809, "RedOctane Xbox Dance Pad", DANCEPAD_MAP_CONFIG, XTYPE_XBOX },
@@ -187,10 +207,13 @@ static const struct xpad_device {
 	{ 0x0e6f, 0x0006, "Edge wireless Controller", 0, XTYPE_XBOX },
 	{ 0x0e6f, 0x0105, "HSM3 Xbox360 dancepad", MAP_DPAD_TO_BUTTONS, XTYPE_XBOX360 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x0e6f, 0x0201, "Pelican PL-3601 'TSZ' Wired Xbox 360 Controller", 0, XTYPE_XBOX360 },
 	{ 0x0e6f, 0x0213, "Afterglow Gamepad for Xbox 360", 0, XTYPE_XBOX360 },
 	{ 0x0e8f, 0x0201, "SmartJoy Frag Xpad/PS2 adaptor", 0, XTYPE_XBOX },
 =======
+=======
+>>>>>>> v3.18
 	{ 0x0e6f, 0x0113, "Afterglow AX.1 Gamepad for Xbox 360", 0, XTYPE_XBOX360 },
 	{ 0x0e6f, 0x0201, "Pelican PL-3601 'TSZ' Wired Xbox 360 Controller", 0, XTYPE_XBOX360 },
 	{ 0x0e6f, 0x0213, "Afterglow Gamepad for Xbox 360", 0, XTYPE_XBOX360 },
@@ -200,6 +223,9 @@ static const struct xpad_device {
 	{ 0x0e8f, 0x0201, "SmartJoy Frag Xpad/PS2 adaptor", 0, XTYPE_XBOX },
 	{ 0x0e8f, 0x3008, "Generic xbox control (dealextreme)", 0, XTYPE_XBOX },
 	{ 0x0f0d, 0x000a, "Hori Co. DOA4 FightStick", 0, XTYPE_XBOX360 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0x0f0d, 0x000d, "Hori Fighting Stick EX2", MAP_TRIGGERS_TO_BUTTONS, XTYPE_XBOX360 },
 	{ 0x0f0d, 0x0016, "Hori Real Arcade Pro.EX", MAP_TRIGGERS_TO_BUTTONS, XTYPE_XBOX360 },
@@ -208,6 +234,10 @@ static const struct xpad_device {
 	{ 0x102c, 0xff0c, "Joytech Wireless Advanced Controller", 0, XTYPE_XBOX },
 	{ 0x12ab, 0x0004, "Honey Bee Xbox360 dancepad", MAP_DPAD_TO_BUTTONS, XTYPE_XBOX360 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ 0x12ab, 0x0301, "PDP AFTERGLOW AX.1", 0, XTYPE_XBOX360 },
+>>>>>>> v3.18
 =======
 	{ 0x12ab, 0x0301, "PDP AFTERGLOW AX.1", 0, XTYPE_XBOX360 },
 >>>>>>> v3.18
@@ -215,6 +245,7 @@ static const struct xpad_device {
 	{ 0x1430, 0x4748, "RedOctane Guitar Hero X-plorer", 0, XTYPE_XBOX360 },
 	{ 0x1430, 0x8888, "TX6500+ Dance Pad (first generation)", MAP_DPAD_TO_BUTTONS, XTYPE_XBOX },
 	{ 0x146b, 0x0601, "BigBen Interactive XBOX 360 Controller", 0, XTYPE_XBOX360 },
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ 0x1689, 0xfd00, "Razer Onza Tournament Edition", MAP_DPAD_TO_BUTTONS, XTYPE_XBOX360 },
 	{ 0x1689, 0xfd01, "Razer Onza Classic Edition", MAP_DPAD_TO_BUTTONS, XTYPE_XBOX360 },
@@ -226,6 +257,8 @@ static const struct xpad_device {
 	{ 0x1bad, 0xf903, "Tron Xbox 360 controller", 0, XTYPE_XBOX360 },
 	{ 0x24c6, 0x5300, "PowerA MINI PROEX Controller", 0, XTYPE_XBOX360 },
 =======
+=======
+>>>>>>> v3.18
 	{ 0x1532, 0x0037, "Razer Sabertooth", 0, XTYPE_XBOX360 },
 	{ 0x15e4, 0x3f00, "Power A Mini Pro Elite", 0, XTYPE_XBOX360 },
 	{ 0x15e4, 0x3f0a, "Xbox Airflo wired controller", 0, XTYPE_XBOX360 },
@@ -251,6 +284,9 @@ static const struct xpad_device {
 	{ 0x24c6, 0x5506, "Hori SOULCALIBUR V Stick", 0, XTYPE_XBOX360 },
 	{ 0x24c6, 0x5b02, "Thrustmaster, Inc. GPX Controller", 0, XTYPE_XBOX360 },
 	{ 0x24c6, 0x5b03, "Thrustmaster Ferrari 458 Racing Wheel", 0, XTYPE_XBOX360 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0xffff, 0xffff, "Chinese-made Xbox Controller", 0, XTYPE_XBOX },
 	{ 0x0000, 0x0000, "Generic X-Box pad", 0, XTYPE_UNKNOWN }
@@ -308,17 +344,23 @@ static const signed short xpad_abs_triggers[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Xbox 360 has a vendor-specific class, so we cannot match it with only
  * USB_INTERFACE_INFO (also specifically refused by USB subsystem), so we
  * match against vendor id as well. Wired Xbox 360 devices have protocol 1,
  * wireless controllers have protocol 129. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Xbox 360 has a vendor-specific class, so we cannot match it with only
  * USB_INTERFACE_INFO (also specifically refused by USB subsystem), so we
  * match against vendor id as well. Wired Xbox 360 devices have protocol 1,
  * wireless controllers have protocol 129.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define XPAD_XBOX360_VENDOR_PROTOCOL(vend,pr) \
 	.match_flags = USB_DEVICE_ID_MATCH_VENDOR | USB_DEVICE_ID_MATCH_INT_INFO, \
@@ -331,10 +373,13 @@ static const signed short xpad_abs_triggers[] = {
 	{ XPAD_XBOX360_VENDOR_PROTOCOL(vend,129) }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct usb_device_id xpad_table[] = {
 	{ USB_INTERFACE_INFO('X', 'B', 0) },	/* X-Box USB-IF not approved class */
 	XPAD_XBOX360_VENDOR(0x045e),		/* Microsoft X-Box 360 controllers */
 =======
+=======
+>>>>>>> v3.18
 /* The Xbox One controller uses subclass 71 and protocol 208. */
 #define XPAD_XBOXONE_VENDOR_PROTOCOL(vend, pr) \
 	.match_flags = USB_DEVICE_ID_MATCH_VENDOR | USB_DEVICE_ID_MATCH_INT_INFO, \
@@ -350,6 +395,9 @@ static struct usb_device_id xpad_table[] = {
 	XPAD_XBOX360_VENDOR(0x044f),		/* Thrustmaster X-Box 360 controllers */
 	XPAD_XBOX360_VENDOR(0x045e),		/* Microsoft X-Box 360 controllers */
 	XPAD_XBOXONE_VENDOR(0x045e),		/* Microsoft X-Box One controllers */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	XPAD_XBOX360_VENDOR(0x046d),		/* Logitech X-Box 360 style controllers */
 	XPAD_XBOX360_VENDOR(0x0738),		/* Mad Catz X-Box 360 controllers */
@@ -363,6 +411,12 @@ static struct usb_device_id xpad_table[] = {
 	XPAD_XBOX360_VENDOR(0x1689),		/* Razer Onza */
 	XPAD_XBOX360_VENDOR(0x24c6),		/* PowerA Controllers */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	XPAD_XBOX360_VENDOR(0x1532),		/* Razer Sabertooth */
+	XPAD_XBOX360_VENDOR(0x15e4),		/* Numark X-Box 360 controllers */
+	XPAD_XBOX360_VENDOR(0x162e),		/* Joytech X-Box 360 controllers */
+>>>>>>> v3.18
 =======
 	XPAD_XBOX360_VENDOR(0x1532),		/* Razer Sabertooth */
 	XPAD_XBOX360_VENDOR(0x15e4),		/* Numark X-Box 360 controllers */
@@ -388,7 +442,10 @@ struct usb_xpad {
 	unsigned char *bdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_JOYSTICK_XPAD_FF) || defined(CONFIG_JOYSTICK_XPAD_LEDS)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct urb *irq_out;		/* urb for interrupt out report */
@@ -396,7 +453,10 @@ struct usb_xpad {
 	dma_addr_t odata_dma;
 	struct mutex odata_mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -586,7 +646,10 @@ static void xpad360w_process_packet(struct usb_xpad *xpad, u16 cmd, unsigned cha
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  *	xpadone_process_buttons
  *
@@ -686,6 +749,9 @@ static void xpadone_process_packet(struct usb_xpad *xpad,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void xpad_irq_in(struct urb *urb)
 {
@@ -720,6 +786,12 @@ static void xpad_irq_in(struct urb *urb)
 		xpad360w_process_packet(xpad, 0, xpad->idata);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case XTYPE_XBOXONE:
+		xpadone_process_packet(xpad, 0, xpad->idata);
+		break;
+>>>>>>> v3.18
 =======
 	case XTYPE_XBOXONE:
 		xpadone_process_packet(xpad, 0, xpad->idata);
@@ -759,7 +831,10 @@ static void xpad_bulk_out(struct urb *urb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_JOYSTICK_XPAD_FF) || defined(CONFIG_JOYSTICK_XPAD_LEDS)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void xpad_irq_out(struct urb *urb)
@@ -800,6 +875,10 @@ static int xpad_init_output(struct usb_interface *intf, struct usb_xpad *xpad)
 {
 	struct usb_endpoint_descriptor *ep_irq_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ep_irq_out_idx;
+>>>>>>> v3.18
 =======
 	int ep_irq_out_idx;
 >>>>>>> v3.18
@@ -824,12 +903,18 @@ static int xpad_init_output(struct usb_interface *intf, struct usb_xpad *xpad)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ep_irq_out = &intf->cur_altsetting->endpoint[1].desc;
 =======
+=======
+>>>>>>> v3.18
 	/* Xbox One controller has in/out endpoints swapped. */
 	ep_irq_out_idx = xpad->xtype == XTYPE_XBOXONE ? 0 : 1;
 	ep_irq_out = &intf->cur_altsetting->endpoint[ep_irq_out_idx].desc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	usb_fill_int_urb(xpad->irq_out, xpad->udev,
 			 usb_sndintpipe(xpad->udev, ep_irq_out->bEndpointAddress),
@@ -859,11 +944,14 @@ static void xpad_deinit_output(struct usb_xpad *xpad)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static int xpad_init_output(struct usb_interface *intf, struct usb_xpad *xpad) { return 0; }
 static void xpad_deinit_output(struct usb_xpad *xpad) {}
 static void xpad_stop_output(struct usb_xpad *xpad) {}
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -933,7 +1021,11 @@ static int xpad_play_effect(struct input_dev *dev, void *data, struct ff_effect 
 static int xpad_init_ff(struct usb_xpad *xpad)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xpad->xtype == XTYPE_UNKNOWN)
+=======
+	if (xpad->xtype == XTYPE_UNKNOWN || xpad->xtype == XTYPE_XBOXONE)
+>>>>>>> v3.18
 =======
 	if (xpad->xtype == XTYPE_UNKNOWN || xpad->xtype == XTYPE_XBOXONE)
 >>>>>>> v3.18
@@ -1046,7 +1138,10 @@ static int xpad_open(struct input_dev *dev)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (xpad->xtype == XTYPE_XBOXONE) {
 		/* Xbox one controller needs to be initialized. */
 		xpad->odata[0] = 0x05;
@@ -1055,6 +1150,9 @@ static int xpad_open(struct input_dev *dev)
 		return usb_submit_urb(xpad->irq_out, GFP_KERNEL);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1072,6 +1170,10 @@ static void xpad_close(struct input_dev *dev)
 static void xpad_set_up_abs(struct input_dev *input_dev, signed short abs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct usb_xpad *xpad = input_get_drvdata(input_dev);
+>>>>>>> v3.18
 =======
 	struct usb_xpad *xpad = input_get_drvdata(input_dev);
 >>>>>>> v3.18
@@ -1087,12 +1189,18 @@ static void xpad_set_up_abs(struct input_dev *input_dev, signed short abs)
 	case ABS_Z:
 	case ABS_RZ:	/* the triggers (if mapped to axes) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		input_set_abs_params(input_dev, abs, 0, 255, 0, 0);
 =======
+=======
+>>>>>>> v3.18
 		if (xpad->xtype == XTYPE_XBOXONE)
 			input_set_abs_params(input_dev, abs, 0, 1023, 0, 0);
 		else
 			input_set_abs_params(input_dev, abs, 0, 255, 0, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case ABS_HAT0X:
@@ -1109,11 +1217,17 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 	struct input_dev *input_dev;
 	struct usb_endpoint_descriptor *ep_irq_in;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, error;
 
 	if (intf->cur_altsetting->desc.bNumEndpoints != 2)
 		return -ENODEV;
 
+=======
+	int ep_irq_in_idx;
+	int i, error;
+
+>>>>>>> v3.18
 =======
 	int ep_irq_in_idx;
 	int i, error;
@@ -1126,7 +1240,10 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (xpad_device[i].xtype == XTYPE_XBOXONE &&
 	    intf->cur_altsetting->desc.bInterfaceNumber != 0) {
 		/*
@@ -1137,6 +1254,9 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xpad = kzalloc(sizeof(struct usb_xpad), GFP_KERNEL);
 	input_dev = input_allocate_device();
@@ -1188,12 +1308,15 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 	input_dev->phys = xpad->phys;
 	usb_to_input_id(udev, &input_dev->id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (xpad->xtype == XTYPE_XBOX360W) {
 		/* x360w controllers and the receiver have different ids */
 		input_dev->id.product = 0x02a1;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	input_dev->dev.parent = &intf->dev;
@@ -1218,7 +1341,12 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 
 	/* set up model-specific ones */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xpad->xtype == XTYPE_XBOX360 || xpad->xtype == XTYPE_XBOX360W) {
+=======
+	if (xpad->xtype == XTYPE_XBOX360 || xpad->xtype == XTYPE_XBOX360W ||
+	    xpad->xtype == XTYPE_XBOXONE) {
+>>>>>>> v3.18
 =======
 	if (xpad->xtype == XTYPE_XBOX360 || xpad->xtype == XTYPE_XBOX360W ||
 	    xpad->xtype == XTYPE_XBOXONE) {
@@ -1236,7 +1364,11 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 	} else {
 		for (i = 0; xpad_abs_pad[i] >= 0; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    xpad_set_up_abs(input_dev, xpad_abs_pad[i]);
+=======
+			xpad_set_up_abs(input_dev, xpad_abs_pad[i]);
+>>>>>>> v3.18
 =======
 			xpad_set_up_abs(input_dev, xpad_abs_pad[i]);
 >>>>>>> v3.18
@@ -1263,12 +1395,18 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 		goto fail5;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ep_irq_in = &intf->cur_altsetting->endpoint[0].desc;
 =======
+=======
+>>>>>>> v3.18
 	/* Xbox One controller has in/out endpoints swapped. */
 	ep_irq_in_idx = xpad->xtype == XTYPE_XBOXONE ? 1 : 0;
 	ep_irq_in = &intf->cur_altsetting->endpoint[ep_irq_in_idx].desc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	usb_fill_int_urb(xpad->irq_in, udev,
 			 usb_rcvintpipe(udev, ep_irq_in->bEndpointAddress),

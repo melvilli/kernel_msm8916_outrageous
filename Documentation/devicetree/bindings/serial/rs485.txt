@@ -8,7 +8,11 @@ UART node.
 Required properties:
 - rs485-rts-delay: prop-encoded-array <a b> where:
 <<<<<<< HEAD
+<<<<<<< HEAD
   * a is the delay beteween rts signal and beginning of data sent in milliseconds.
+=======
+  * a is the delay between rts signal and beginning of data sent in milliseconds.
+>>>>>>> v3.18
 =======
   * a is the delay between rts signal and beginning of data sent in milliseconds.
 >>>>>>> v3.18

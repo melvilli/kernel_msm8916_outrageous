@@ -59,6 +59,10 @@ int bt_to_errno(__u16 code)
 
 	case 0x04:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case 0x3c:
+>>>>>>> v3.18
 =======
 	case 0x3c:
 >>>>>>> v3.18
@@ -139,16 +143,22 @@ int bt_to_errno(__u16 code)
 EXPORT_SYMBOL(bt_to_errno);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bt_info(const char *format, ...)
 {
 	struct va_format vaf;
 	va_list args;
 	int r;
 =======
+=======
+>>>>>>> v3.18
 void bt_info(const char *format, ...)
 {
 	struct va_format vaf;
 	va_list args;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	va_start(args, format);
@@ -156,6 +166,7 @@ void bt_info(const char *format, ...)
 	vaf.fmt = format;
 	vaf.va = &args;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	r = pr_info("%pKV", &vaf);
 
@@ -171,6 +182,8 @@ int bt_err(const char *format, ...)
 	va_list args;
 	int r;
 =======
+=======
+>>>>>>> v3.18
 	pr_info("%pV", &vaf);
 
 	va_end(args);
@@ -181,6 +194,9 @@ void bt_err(const char *format, ...)
 {
 	struct va_format vaf;
 	va_list args;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	va_start(args, format);
@@ -189,11 +205,17 @@ void bt_err(const char *format, ...)
 	vaf.va = &args;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = pr_err("%pKV", &vaf);
 
 	va_end(args);
 
 	return r;
+=======
+	pr_err("%pV", &vaf);
+
+	va_end(args);
+>>>>>>> v3.18
 =======
 	pr_err("%pV", &vaf);
 

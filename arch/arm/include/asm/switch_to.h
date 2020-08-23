@@ -5,7 +5,10 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * For v7 SMP cores running a preemptible kernel we may be pre-empted
  * during a TLB maintenance operation, so execute an inner-shareable dsb
  * to ensure that the maintenance completes in case we migrate to another
@@ -16,6 +19,9 @@
 #endif
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * switch_to(prev, next) should switch from task `prev' to `next'
  * `prev' will never be the same as `next'.  schedule() itself

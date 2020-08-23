@@ -84,6 +84,10 @@ struct ppi_info {
 
 struct ppi_if {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *dev;
+>>>>>>> v3.18
 =======
 	struct device *dev;
 >>>>>>> v3.18
@@ -96,7 +100,12 @@ struct ppi_if {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ppi_if *ppi_create_instance(const struct ppi_info *info);
+=======
+struct ppi_if *ppi_create_instance(struct platform_device *pdev,
+			const struct ppi_info *info);
+>>>>>>> v3.18
 =======
 struct ppi_if *ppi_create_instance(struct platform_device *pdev,
 			const struct ppi_info *info);

@@ -49,11 +49,14 @@ static int __init generic_rtc_probe(struct platform_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __exit generic_rtc_remove(struct platform_device *dev)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver generic_rtc_driver = {
@@ -62,7 +65,10 @@ static struct platform_driver generic_rtc_driver = {
 		.owner = THIS_MODULE,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = __exit_p(generic_rtc_remove),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

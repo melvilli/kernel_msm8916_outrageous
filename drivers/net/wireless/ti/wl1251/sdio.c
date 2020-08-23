@@ -29,6 +29,10 @@
 #include <linux/irq.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio.h>
 >>>>>>> v3.18
@@ -187,8 +191,14 @@ static int wl1251_sdio_set_power(struct wl1251 *wl, bool enable)
 		 * for example enabling clock buffer for the module.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (wl->set_power)
 			wl->set_power(true);
+=======
+		if (gpio_is_valid(wl->power_gpio))
+			gpio_set_value(wl->power_gpio, true);
+
+>>>>>>> v3.18
 =======
 		if (gpio_is_valid(wl->power_gpio))
 			gpio_set_value(wl->power_gpio, true);
@@ -214,8 +224,13 @@ static int wl1251_sdio_set_power(struct wl1251 *wl, bool enable)
 			goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (wl->set_power)
 			wl->set_power(false);
+=======
+		if (gpio_is_valid(wl->power_gpio))
+			gpio_set_value(wl->power_gpio, false);
+>>>>>>> v3.18
 =======
 		if (gpio_is_valid(wl->power_gpio))
 			gpio_set_value(wl->power_gpio, false);
@@ -243,7 +258,11 @@ static int wl1251_sdio_probe(struct sdio_func *func,
 	struct ieee80211_hw *hw;
 	struct wl1251_sdio *wl_sdio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct wl12xx_platform_data *wl12xx_board_data;
+=======
+	const struct wl1251_platform_data *wl1251_board_data;
+>>>>>>> v3.18
 =======
 	const struct wl1251_platform_data *wl1251_board_data;
 >>>>>>> v3.18
@@ -274,12 +293,15 @@ static int wl1251_sdio_probe(struct sdio_func *func,
 	wl->if_ops = &wl1251_sdio_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wl12xx_board_data = wl12xx_get_platform_data();
 	if (!IS_ERR(wl12xx_board_data)) {
 		wl->set_power = wl12xx_board_data->set_power;
 		wl->irq = wl12xx_board_data->irq;
 		wl->use_eeprom = wl12xx_board_data->use_eeprom;
 =======
+=======
+>>>>>>> v3.18
 	wl1251_board_data = wl1251_get_platform_data();
 	if (!IS_ERR(wl1251_board_data)) {
 		wl->power_gpio = wl1251_board_data->power_gpio;
@@ -294,6 +316,9 @@ static int wl1251_sdio_probe(struct sdio_func *func,
 			wl1251_error("Failed to request gpio: %d\n", ret);
 			goto disable;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

@@ -3,10 +3,13 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ADIS16080) += adis16080.o
 obj-$(CONFIG_ADIS16136) += adis16136.o
 obj-$(CONFIG_ADXRS450) += adxrs450.o
 =======
+=======
+>>>>>>> v3.18
 # When adding new entries keep the list in alphabetical order
 obj-$(CONFIG_ADIS16080) += adis16080.o
 obj-$(CONFIG_ADIS16130) += adis16130.o
@@ -14,6 +17,9 @@ obj-$(CONFIG_ADIS16136) += adis16136.o
 obj-$(CONFIG_ADIS16260) += adis16260.o
 obj-$(CONFIG_ADXRS450) += adxrs450.o
 obj-$(CONFIG_BMG160) += bmg160.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 obj-$(CONFIG_HID_SENSOR_GYRO_3D) += hid-sensor-gyro-3d.o

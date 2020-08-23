@@ -17,8 +17,11 @@
 #define _ASM_THREAD_INFO_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/page.h>
@@ -84,8 +87,11 @@ static inline __attribute_const__ struct thread_info *current_thread_info(void)
 #endif /* !__ASSEMBLY__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE      0x10000000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -123,8 +129,11 @@ static inline __attribute_const__ struct thread_info *current_thread_info(void)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ASM_THREAD_INFO_H */

@@ -83,7 +83,11 @@ static int lxt970_config_intr(struct phy_device *phydev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(phydev->interrupts == PHY_INTERRUPT_ENABLED)
+=======
+	if (phydev->interrupts == PHY_INTERRUPT_ENABLED)
+>>>>>>> v3.18
 =======
 	if (phydev->interrupts == PHY_INTERRUPT_ENABLED)
 >>>>>>> v3.18
@@ -119,7 +123,11 @@ static int lxt971_config_intr(struct phy_device *phydev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(phydev->interrupts == PHY_INTERRUPT_ENABLED)
+=======
+	if (phydev->interrupts == PHY_INTERRUPT_ENABLED)
+>>>>>>> v3.18
 =======
 	if (phydev->interrupts == PHY_INTERRUPT_ENABLED)
 >>>>>>> v3.18

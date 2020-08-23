@@ -46,7 +46,10 @@ config QLCNIC_SRIOV
 	  environments.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config QLCNIC_DCB
 	bool "QLOGIC QLCNIC 82XX and 83XX family DCB Support"
 	depends on QLCNIC && DCB
@@ -79,6 +82,9 @@ config QLCNIC_HWMON
 
 	  This data is available via the hwmon sysfs interface.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config QLGE
 	tristate "QLogic QLGE 10Gb Ethernet Driver Support"

@@ -14,6 +14,10 @@
 #include <linux/err.h>
 #include <linux/pm_clock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pm_domain.h>
+>>>>>>> v3.18
 =======
 #include <linux/pm_domain.h>
 >>>>>>> v3.18
@@ -22,6 +26,7 @@
 #include <linux/irq.h>
 #include <linux/interrupt.h>
 #include <linux/console.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <asm/io.h>
 #include <mach/common.h>
@@ -152,6 +157,8 @@ static void __init r8a7779_sysc_init(void)
 	iowrite32(0x0131000e, r8a7779_sysc_base + SYSCIER);
 	iowrite32(0, r8a7779_sysc_base + SYSCIMR);
 =======
+=======
+>>>>>>> v3.18
 
 #include <asm/io.h>
 
@@ -182,6 +189,9 @@ static void __init r8a7779_sysc_init(void)
 	/* enable all interrupt sources, but do not use interrupt handler */
 	iowrite32(0x0131000e, base + SYSCIER);
 	iowrite32(0, base + SYSCIMR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -196,7 +206,11 @@ static inline void r8a7779_sysc_init(void) {}
 static int pd_power_down(struct generic_pm_domain *genpd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return r8a7779_sysc_power_down(to_r8a7779_ch(genpd));
+=======
+	return rcar_sysc_power_down(to_r8a7779_ch(genpd));
+>>>>>>> v3.18
 =======
 	return rcar_sysc_power_down(to_r8a7779_ch(genpd));
 >>>>>>> v3.18
@@ -205,7 +219,11 @@ static int pd_power_down(struct generic_pm_domain *genpd)
 static int pd_power_up(struct generic_pm_domain *genpd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return r8a7779_sysc_power_up(to_r8a7779_ch(genpd));
+=======
+	return rcar_sysc_power_up(to_r8a7779_ch(genpd));
+>>>>>>> v3.18
 =======
 	return rcar_sysc_power_up(to_r8a7779_ch(genpd));
 >>>>>>> v3.18
@@ -213,6 +231,7 @@ static int pd_power_up(struct generic_pm_domain *genpd)
 
 static bool pd_is_off(struct generic_pm_domain *genpd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct r8a7779_pm_ch *r8a7779_ch = to_r8a7779_ch(genpd);
 	unsigned int st;
@@ -222,6 +241,9 @@ static bool pd_is_off(struct generic_pm_domain *genpd)
 		return true;
 
 	return false;
+=======
+	return rcar_sysc_power_is_off(to_r8a7779_ch(genpd));
+>>>>>>> v3.18
 =======
 	return rcar_sysc_power_is_off(to_r8a7779_ch(genpd));
 >>>>>>> v3.18
@@ -241,7 +263,10 @@ static void r8a7779_init_pm_domain(struct r8a7779_pm_domain *r8a7779_pd)
 	genpd->dev_ops.start = pm_clk_resume;
 	genpd->dev_ops.active_wakeup = pd_active_wakeup;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	genpd->dev_irq_safe = true;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	genpd->power_off = pd_power_down;

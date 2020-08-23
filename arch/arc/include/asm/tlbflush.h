@@ -19,7 +19,11 @@ void local_flush_tlb_range(struct vm_area_struct *vma,
 			   unsigned long start, unsigned long end);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* XXX: Revisit for SMP */
+=======
+#ifndef CONFIG_SMP
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_SMP
 >>>>>>> v3.18
@@ -29,8 +33,11 @@ void local_flush_tlb_range(struct vm_area_struct *vma,
 #define flush_tlb_all()			local_flush_tlb_all()
 #define flush_tlb_mm(mm)		local_flush_tlb_mm(mm)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #else
 extern void flush_tlb_range(struct vm_area_struct *vma, unsigned long start,
 							 unsigned long end);
@@ -39,5 +46,8 @@ extern void flush_tlb_kernel_range(unsigned long start, unsigned long end);
 extern void flush_tlb_all(void);
 extern void flush_tlb_mm(struct mm_struct *mm);
 #endif /* CONFIG_SMP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

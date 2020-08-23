@@ -1249,6 +1249,7 @@ il3945_rx_handle(struct il_priv *il)
 		len += sizeof(u32);	/* account for status word */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Reclaim a command buffer only if this packet is a response
 		 *   to a (driver-originated) command.
 		 * If the packet (e.g. Rx frame) originated from uCode,
@@ -1257,6 +1258,9 @@ il3945_rx_handle(struct il_priv *il)
 		 *   but apparently a few don't get set; catch them here. */
 		reclaim = !(pkt->hdr.sequence & SEQ_RX_FRAME) &&
 		    pkt->hdr.cmd != N_STATS && pkt->hdr.cmd != C_TX;
+=======
+		reclaim = il_need_reclaim(il, pkt);
+>>>>>>> v3.18
 =======
 		reclaim = il_need_reclaim(il, pkt);
 >>>>>>> v3.18
@@ -1500,6 +1504,11 @@ il3945_irq_tasklet(struct il_priv *il)
 		D_ISR("Wakeup interrupt\n");
 		il_rx_queue_update_write_ptr(il, &il->rxq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		spin_lock_irqsave(&il->lock, flags);
+>>>>>>> v3.18
 =======
 
 		spin_lock_irqsave(&il->lock, flags);
@@ -1510,7 +1519,11 @@ il3945_irq_tasklet(struct il_priv *il)
 		il_txq_update_write_ptr(il, &il->txq[3]);
 		il_txq_update_write_ptr(il, &il->txq[4]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		il_txq_update_write_ptr(il, &il->txq[5]);
+=======
+		spin_unlock_irqrestore(&il->lock, flags);
+>>>>>>> v3.18
 =======
 		spin_unlock_irqrestore(&il->lock, flags);
 >>>>>>> v3.18
@@ -1609,7 +1622,11 @@ il3945_get_channels_for_scan(struct il_priv *il, enum ieee80211_band band,
 		 */
 		if (!is_active || il_is_channel_passive(ch_info) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (chan->flags & IEEE80211_CHAN_PASSIVE_SCAN)) {
+=======
+		    (chan->flags & IEEE80211_CHAN_NO_IR)) {
+>>>>>>> v3.18
 =======
 		    (chan->flags & IEEE80211_CHAN_NO_IR)) {
 >>>>>>> v3.18
@@ -2414,8 +2431,12 @@ __il3945_up(struct il_priv *il)
 	else {
 		set_bit(S_RFKILL, &il->status);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IL_WARN("Radio disabled by HW RF Kill switch\n");
 		return -ENODEV;
+=======
+		return -ERFKILL;
+>>>>>>> v3.18
 =======
 		return -ERFKILL;
 >>>>>>> v3.18
@@ -3141,7 +3162,11 @@ il3945_store_debug_level(struct device *d, struct device_attribute *attr,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(buf, 0, &val);
+=======
+	ret = kstrtoul(buf, 0, &val);
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 0, &val);
 >>>>>>> v3.18
@@ -3601,9 +3626,15 @@ il3945_setup_mac(struct il_priv *il)
 	    BIT(NL80211_IFTYPE_STATION) | BIT(NL80211_IFTYPE_ADHOC);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->wiphy->flags |=
 	    WIPHY_FLAG_CUSTOM_REGULATORY | WIPHY_FLAG_DISABLE_BEACON_HINTS |
 	    WIPHY_FLAG_IBSS_RSN;
+=======
+	hw->wiphy->flags |= WIPHY_FLAG_IBSS_RSN;
+	hw->wiphy->regulatory_flags |= REGULATORY_CUSTOM_REG |
+				       REGULATORY_DISABLE_BEACON_HINTS;
+>>>>>>> v3.18
 =======
 	hw->wiphy->flags |= WIPHY_FLAG_IBSS_RSN;
 	hw->wiphy->regulatory_flags |= REGULATORY_CUSTOM_REG |
@@ -3759,7 +3790,12 @@ il3945_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	 * ********************/
 	/* Device-specific setup */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (il3945_hw_set_hw_params(il)) {
+=======
+	err = il3945_hw_set_hw_params(il);
+	if (err) {
+>>>>>>> v3.18
 =======
 	err = il3945_hw_set_hw_params(il);
 	if (err) {
@@ -3847,7 +3883,10 @@ out_pci_release_regions:
 	pci_release_regions(pdev);
 out_pci_disable_device:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_disable_device(pdev);
@@ -3927,7 +3966,10 @@ il3945_pci_remove(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

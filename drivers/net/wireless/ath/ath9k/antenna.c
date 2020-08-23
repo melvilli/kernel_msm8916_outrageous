@@ -17,6 +17,7 @@
 #include "ath9k.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool ath_is_alt_ant_ratio_better(int alt_ratio, int maxdelta,
 					       int mindelta, int main_rssi_avg,
 					       int alt_rssi_avg, int pkt_count)
@@ -33,6 +34,8 @@ static inline bool ath_ant_div_comb_alt_check(u8 div_group, int alt_ratio,
 	bool result = false;
 	switch (div_group) {
 =======
+=======
+>>>>>>> v3.18
 /*
  * AR9285
  * ======
@@ -122,6 +125,9 @@ static inline bool ath_ant_div_comb_alt_check(struct ath_hw_antcomb_conf *conf,
 		set2 = true;
 
 	switch (conf->div_group) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 0:
 		if (alt_ratio > ATH_ANT_DIV_COMB_ALT_ANT_RATIO)
@@ -129,6 +135,7 @@ static inline bool ath_ant_div_comb_alt_check(struct ath_hw_antcomb_conf *conf,
 		break;
 	case 1:
 	case 2:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ((((curr_main_set == ATH_ANT_DIV_COMB_LNA2) &&
 		      (curr_alt_set == ATH_ANT_DIV_COMB_LNA1) &&
@@ -141,6 +148,8 @@ static inline bool ath_ant_div_comb_alt_check(struct ath_hw_antcomb_conf *conf,
 		else
 			result = false;
 =======
+=======
+>>>>>>> v3.18
 		if (alt_rssi_avg < 4 || alt_rssi_avg < antcomb->low_rssi_thresh)
 			break;
 
@@ -159,6 +168,9 @@ static inline bool ath_ant_div_comb_alt_check(struct ath_hw_antcomb_conf *conf,
 		    (alt_ratio > antcomb->ant_ratio))
 			result = true;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -222,7 +234,10 @@ static void ath_lnaconf_alt_good_scan(struct ath_ant_comb *antcomb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ath_ant_set_alt_ratio(struct ath_ant_comb *antcomb,
 				  struct ath_hw_antcomb_conf *conf)
 {
@@ -291,6 +306,9 @@ static void ath_ant_set_alt_ratio(struct ath_ant_comb *antcomb,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ath_select_ant_div_from_quick_scan(struct ath_ant_comb *antcomb,
 				       struct ath_hw_antcomb_conf *div_ant_conf,
@@ -314,7 +332,11 @@ static void ath_select_ant_div_from_quick_scan(struct ath_ant_comb *antcomb,
 		if (antcomb->main_conf == ATH_ANT_DIV_COMB_LNA1) {
 			/* main is LNA1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ath_is_alt_ant_ratio_better(alt_ratio,
+=======
+			if (ath_is_alt_ant_ratio_better(antcomb, alt_ratio,
+>>>>>>> v3.18
 =======
 			if (ath_is_alt_ant_ratio_better(antcomb, alt_ratio,
 >>>>>>> v3.18
@@ -327,7 +349,11 @@ static void ath_select_ant_div_from_quick_scan(struct ath_ant_comb *antcomb,
 				antcomb->first_ratio = false;
 		} else if (antcomb->main_conf == ATH_ANT_DIV_COMB_LNA2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ath_is_alt_ant_ratio_better(alt_ratio,
+=======
+			if (ath_is_alt_ant_ratio_better(antcomb, alt_ratio,
+>>>>>>> v3.18
 =======
 			if (ath_is_alt_ant_ratio_better(antcomb, alt_ratio,
 >>>>>>> v3.18
@@ -340,17 +366,23 @@ static void ath_select_ant_div_from_quick_scan(struct ath_ant_comb *antcomb,
 				antcomb->first_ratio = false;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((((alt_ratio >= ATH_ANT_DIV_COMB_ALT_ANT_RATIO2) &&
 			      (alt_rssi_avg > main_rssi_avg +
 			       ATH_ANT_DIV_COMB_LNA1_DELTA_HI)) ||
 			     (alt_rssi_avg > main_rssi_avg)) &&
 			    (antcomb->total_pkt_count > 50))
 =======
+=======
+>>>>>>> v3.18
 			if (ath_is_alt_ant_ratio_better(antcomb, alt_ratio,
 						ATH_ANT_DIV_COMB_LNA1_DELTA_HI,
 						0,
 						main_rssi_avg, alt_rssi_avg,
 						antcomb->total_pkt_count))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				antcomb->first_ratio = true;
 			else
@@ -365,6 +397,7 @@ static void ath_select_ant_div_from_quick_scan(struct ath_ant_comb *antcomb,
 		antcomb->rssi_third = alt_rssi_avg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (antcomb->second_quick_scan_conf == ATH_ANT_DIV_COMB_LNA1)
 			antcomb->rssi_lna1 = alt_rssi_avg;
 		else if (antcomb->second_quick_scan_conf ==
@@ -373,6 +406,8 @@ static void ath_select_ant_div_from_quick_scan(struct ath_ant_comb *antcomb,
 		else if (antcomb->second_quick_scan_conf ==
 			 ATH_ANT_DIV_COMB_LNA1_PLUS_LNA2) {
 =======
+=======
+>>>>>>> v3.18
 		switch(antcomb->second_quick_scan_conf) {
 		case ATH_ANT_DIV_COMB_LNA1:
 			antcomb->rssi_lna1 = alt_rssi_avg;
@@ -381,17 +416,23 @@ static void ath_select_ant_div_from_quick_scan(struct ath_ant_comb *antcomb,
 			antcomb->rssi_lna2 = alt_rssi_avg;
 			break;
 		case ATH_ANT_DIV_COMB_LNA1_PLUS_LNA2:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (antcomb->main_conf == ATH_ANT_DIV_COMB_LNA2)
 				antcomb->rssi_lna2 = main_rssi_avg;
 			else if (antcomb->main_conf == ATH_ANT_DIV_COMB_LNA1)
 				antcomb->rssi_lna1 = main_rssi_avg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 
 		if (antcomb->rssi_lna2 > antcomb->rssi_lna1 +
 		    ATH_ANT_DIV_COMB_LNA1_LNA2_SWITCH_DELTA)
 =======
+=======
+>>>>>>> v3.18
 			break;
 		default:
 			break;
@@ -399,6 +440,9 @@ static void ath_select_ant_div_from_quick_scan(struct ath_ant_comb *antcomb,
 
 		if (antcomb->rssi_lna2 > antcomb->rssi_lna1 +
 		    div_ant_conf->lna1_lna2_switch_delta)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			div_ant_conf->main_lna_conf = ATH_ANT_DIV_COMB_LNA2;
 		else
@@ -406,7 +450,11 @@ static void ath_select_ant_div_from_quick_scan(struct ath_ant_comb *antcomb,
 
 		if (antcomb->main_conf == ATH_ANT_DIV_COMB_LNA1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ath_is_alt_ant_ratio_better(alt_ratio,
+=======
+			if (ath_is_alt_ant_ratio_better(antcomb, alt_ratio,
+>>>>>>> v3.18
 =======
 			if (ath_is_alt_ant_ratio_better(antcomb, alt_ratio,
 >>>>>>> v3.18
@@ -419,7 +467,11 @@ static void ath_select_ant_div_from_quick_scan(struct ath_ant_comb *antcomb,
 				antcomb->second_ratio = false;
 		} else if (antcomb->main_conf == ATH_ANT_DIV_COMB_LNA2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ath_is_alt_ant_ratio_better(alt_ratio,
+=======
+			if (ath_is_alt_ant_ratio_better(antcomb, alt_ratio,
+>>>>>>> v3.18
 =======
 			if (ath_is_alt_ant_ratio_better(antcomb, alt_ratio,
 >>>>>>> v3.18
@@ -432,23 +484,30 @@ static void ath_select_ant_div_from_quick_scan(struct ath_ant_comb *antcomb,
 				antcomb->second_ratio = false;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((((alt_ratio >= ATH_ANT_DIV_COMB_ALT_ANT_RATIO2) &&
 			      (alt_rssi_avg > main_rssi_avg +
 			       ATH_ANT_DIV_COMB_LNA1_DELTA_HI)) ||
 			     (alt_rssi_avg > main_rssi_avg)) &&
 			    (antcomb->total_pkt_count > 50))
 =======
+=======
+>>>>>>> v3.18
 			if (ath_is_alt_ant_ratio_better(antcomb, alt_ratio,
 						ATH_ANT_DIV_COMB_LNA1_DELTA_HI,
 						0,
 						main_rssi_avg, alt_rssi_avg,
 						antcomb->total_pkt_count))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				antcomb->second_ratio = true;
 			else
 				antcomb->second_ratio = false;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* set alt to the conf with maximun ratio */
 		if (antcomb->first_ratio && antcomb->second_ratio) {
@@ -539,6 +598,10 @@ static void ath_select_ant_div_from_quick_scan(struct ath_ant_comb *antcomb,
 				/* Set alt to A+B or A-B */
 				div_ant_conf->alt_lna_conf = antcomb->main_conf;
 		}
+=======
+		ath_ant_set_alt_ratio(antcomb, div_ant_conf);
+
+>>>>>>> v3.18
 =======
 		ath_ant_set_alt_ratio(antcomb, div_ant_conf);
 
@@ -673,8 +736,12 @@ static void ath_ant_div_conf_fast_divbias(struct ath_hw_antcomb_conf *ant_conf,
 			break;
 		case 0x10: /* LNA2 A-B */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(antcomb->scan) &&
 				(alt_ratio > ATH_ANT_DIV_COMB_ALT_ANT_RATIO))
+=======
+			if (!antcomb->scan && (alt_ratio > antcomb->ant_ratio))
+>>>>>>> v3.18
 =======
 			if (!antcomb->scan && (alt_ratio > antcomb->ant_ratio))
 >>>>>>> v3.18
@@ -687,8 +754,12 @@ static void ath_ant_div_conf_fast_divbias(struct ath_hw_antcomb_conf *ant_conf,
 			break;
 		case 0x13: /* LNA2 A+B */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(antcomb->scan) &&
 				(alt_ratio > ATH_ANT_DIV_COMB_ALT_ANT_RATIO))
+=======
+			if (!antcomb->scan && (alt_ratio > antcomb->ant_ratio))
+>>>>>>> v3.18
 =======
 			if (!antcomb->scan && (alt_ratio > antcomb->ant_ratio))
 >>>>>>> v3.18
@@ -698,8 +769,12 @@ static void ath_ant_div_conf_fast_divbias(struct ath_hw_antcomb_conf *ant_conf,
 			break;
 		case 0x20: /* LNA1 A-B */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(antcomb->scan) &&
 				(alt_ratio > ATH_ANT_DIV_COMB_ALT_ANT_RATIO))
+=======
+			if (!antcomb->scan && (alt_ratio > antcomb->ant_ratio))
+>>>>>>> v3.18
 =======
 			if (!antcomb->scan && (alt_ratio > antcomb->ant_ratio))
 >>>>>>> v3.18
@@ -712,8 +787,12 @@ static void ath_ant_div_conf_fast_divbias(struct ath_hw_antcomb_conf *ant_conf,
 			break;
 		case 0x23: /* LNA1 A+B */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(antcomb->scan) &&
 				(alt_ratio > ATH_ANT_DIV_COMB_ALT_ANT_RATIO))
+=======
+			if (!antcomb->scan && (alt_ratio > antcomb->ant_ratio))
+>>>>>>> v3.18
 =======
 			if (!antcomb->scan && (alt_ratio > antcomb->ant_ratio))
 >>>>>>> v3.18
@@ -734,6 +813,12 @@ static void ath_ant_div_conf_fast_divbias(struct ath_hw_antcomb_conf *ant_conf,
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		if (antcomb->fast_div_bias)
+			ant_conf->fast_div_bias = antcomb->fast_div_bias;
+>>>>>>> v3.18
 =======
 
 		if (antcomb->fast_div_bias)
@@ -752,6 +837,7 @@ static void ath_ant_div_conf_fast_divbias(struct ath_hw_antcomb_conf *ant_conf,
 			ant_conf->fast_div_bias = 0x1;
 			break;
 		case 0x10: /* LNA2 A-B */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if ((antcomb->scan == 0) &&
 			    (alt_ratio > ATH_ANT_DIV_COMB_ALT_ANT_RATIO)) {
@@ -790,6 +876,8 @@ static void ath_ant_div_conf_fast_divbias(struct ath_hw_antcomb_conf *ant_conf,
 				ant_conf->fast_div_bias = 0x6;
 			}
 =======
+=======
+>>>>>>> v3.18
 			ant_conf->fast_div_bias = 0x2;
 			break;
 		case 0x12: /* LNA2 LNA1 */
@@ -806,6 +894,9 @@ static void ath_ant_div_conf_fast_divbias(struct ath_hw_antcomb_conf *ant_conf,
 			break;
 		case 0x23: /* LNA1 A+B */
 			ant_conf->fast_div_bias = 0x3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case 0x30: /* A+B A-B */
@@ -824,7 +915,10 @@ static void ath_ant_div_conf_fast_divbias(struct ath_hw_antcomb_conf *ant_conf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ath_ant_try_scan(struct ath_ant_comb *antcomb,
 			     struct ath_hw_antcomb_conf *conf,
 			     int curr_alt_set, int alt_rssi_avg,
@@ -957,6 +1051,9 @@ static bool ath_ant_short_scan_check(struct ath_ant_comb *antcomb)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 {
@@ -964,6 +1061,7 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 	struct ath_ant_comb *antcomb = &sc->ant_comb;
 	int alt_ratio = 0, alt_rssi_avg = 0, main_rssi_avg = 0, curr_alt_set;
 	int curr_main_set;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int main_rssi = rs->rs_rssi_ctl0;
 	int alt_rssi = rs->rs_rssi_ctl1;
@@ -976,6 +1074,8 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 			 ATH_ANT_RX_MASK;
 
 =======
+=======
+>>>>>>> v3.18
 	int main_rssi = rs->rs_rssi_ctl[0];
 	int alt_rssi = rs->rs_rssi_ctl[1];
 	int rx_ant_conf,  main_ant_conf;
@@ -994,6 +1094,9 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 		antcomb->ant_ratio2 = ATH_ANT_DIV_COMB_ALT_ANT_RATIO2_LOW_RSSI;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Record packet only when both main_rssi and  alt_rssi is positive */
 	if (main_rssi > 0 && alt_rssi > 0) {
@@ -1001,6 +1104,10 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 		antcomb->main_total_rssi += main_rssi;
 		antcomb->alt_total_rssi  += alt_rssi;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1010,6 +1117,7 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 			antcomb->alt_recv_cnt++;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Short scan check */
 	if (antcomb->scan && antcomb->alt_good) {
@@ -1029,6 +1137,8 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 	if (((antcomb->total_pkt_count < ATH_ANT_DIV_COMB_MAX_PKTCOUNT) ||
 	    rs->rs_moreaggr) && !short_scan)
 =======
+=======
+>>>>>>> v3.18
 	if (main_ant_conf == rx_ant_conf) {
 		ANT_STAT_INC(ANT_MAIN, recv_cnt);
 		ANT_LNA_INC(ANT_MAIN, rx_ant_conf);
@@ -1042,6 +1152,9 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 
 	if (((antcomb->total_pkt_count < ATH_ANT_DIV_COMB_MAX_PKTCOUNT) ||
 	     rs->rs_moreaggr) && !short_scan)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
@@ -1055,6 +1168,7 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ath9k_hw_antdiv_comb_conf_get(sc->sc_ah, &div_ant_conf);
 	curr_alt_set = div_ant_conf.alt_lna_conf;
@@ -1065,6 +1179,8 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 	if (antcomb->count == ATH_ANT_DIV_COMB_MAX_COUNT) {
 		if (alt_ratio > ATH_ANT_DIV_COMB_ALT_ANT_RATIO) {
 =======
+=======
+>>>>>>> v3.18
 	ath9k_hw_antdiv_comb_conf_get(sc->sc_ah, &div_ant_conf);
 	curr_alt_set = div_ant_conf.alt_lna_conf;
 	curr_main_set = div_ant_conf.main_lna_conf;
@@ -1072,6 +1188,9 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 
 	if (antcomb->count == ATH_ANT_DIV_COMB_MAX_COUNT) {
 		if (alt_ratio > antcomb->ant_ratio) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ath_lnaconf_alt_good_scan(antcomb, div_ant_conf,
 						  main_rssi_avg);
@@ -1086,6 +1205,7 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 	}
 
 	if (!antcomb->scan) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ath_ant_div_comb_alt_check(div_ant_conf.div_group,
 					alt_ratio, curr_main_set, curr_alt_set,
@@ -1207,6 +1327,8 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 			break;
 		}
 =======
+=======
+>>>>>>> v3.18
 		ret = ath_ant_try_switch(&div_ant_conf, antcomb, alt_ratio,
 					 alt_rssi_avg, main_rssi_avg,
 					 curr_main_set, curr_alt_set);
@@ -1221,6 +1343,9 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 	if (!antcomb->scan_not_start) {
 		ath_ant_try_scan(antcomb, &div_ant_conf, curr_alt_set,
 				 alt_rssi_avg, main_rssi_avg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		if (!antcomb->alt_good) {
@@ -1228,6 +1353,7 @@ void ath_ant_comb_scan(struct ath_softc *sc, struct ath_rx_status *rs)
 			/* Set alt to another LNA */
 			if (curr_main_set == ATH_ANT_DIV_COMB_LNA2) {
 				div_ant_conf.main_lna_conf =
+<<<<<<< HEAD
 <<<<<<< HEAD
 						ATH_ANT_DIV_COMB_LNA2;
 				div_ant_conf.alt_lna_conf =
@@ -1252,6 +1378,8 @@ div_comb_done:
 	ath_ant_div_conf_fast_divbias(&div_ant_conf, antcomb, alt_ratio);
 	ath9k_hw_antdiv_comb_conf_set(sc->sc_ah, &div_ant_conf);
 =======
+=======
+>>>>>>> v3.18
 					ATH_ANT_DIV_COMB_LNA2;
 				div_ant_conf.alt_lna_conf =
 					ATH_ANT_DIV_COMB_LNA1;
@@ -1273,6 +1401,9 @@ div_comb_done:
 	ath_ant_div_conf_fast_divbias(&div_ant_conf, antcomb, alt_ratio);
 	ath9k_hw_antdiv_comb_conf_set(sc->sc_ah, &div_ant_conf);
 	ath9k_debug_stat_ant(sc, &div_ant_conf, main_rssi_avg, alt_rssi_avg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	antcomb->scan_start_time = jiffies;
@@ -1282,6 +1413,7 @@ div_comb_done:
 	antcomb->main_recv_cnt = 0;
 	antcomb->alt_recv_cnt = 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void ath_ant_comb_update(struct ath_softc *sc)
@@ -1306,5 +1438,7 @@ void ath_ant_comb_update(struct ath_softc *sc)
 	if (common->antenna_diversity)
 		ath9k_hw_antctrl_shared_chain_lnadiv(ah, true);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

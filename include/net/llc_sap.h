@@ -20,6 +20,7 @@ struct sk_buff;
 struct sock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void llc_sap_rtn_pdu(struct llc_sap *sap, struct sk_buff *skb);
 extern void llc_save_primitive(struct sock *sk, struct sk_buff* skb,
 			       unsigned char prim);
@@ -35,6 +36,8 @@ extern void llc_build_and_send_xid_pkt(struct llc_sap *sap,
 				       unsigned char *dmac,
 				       unsigned char dsap);
 =======
+=======
+>>>>>>> v3.18
 void llc_sap_rtn_pdu(struct llc_sap *sap, struct sk_buff *skb);
 void llc_save_primitive(struct sock *sk, struct sk_buff *skb,
 			unsigned char prim);
@@ -45,5 +48,8 @@ void llc_build_and_send_test_pkt(struct llc_sap *sap, struct sk_buff *skb,
 				 unsigned char *dmac, unsigned char dsap);
 void llc_build_and_send_xid_pkt(struct llc_sap *sap, struct sk_buff *skb,
 				unsigned char *dmac, unsigned char dsap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* LLC_SAP_H */

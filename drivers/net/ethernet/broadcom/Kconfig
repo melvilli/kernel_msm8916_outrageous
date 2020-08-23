@@ -23,8 +23,13 @@ config B44
 	depends on SSB_POSSIBLE && HAS_DMA
 	select SSB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
 	select MII
+=======
+	select MII
+	select PHYLIB
+>>>>>>> v3.18
 =======
 	select MII
 	select PHYLIB
@@ -60,7 +65,10 @@ config BCM63XX_ENET
 	tristate "Broadcom 63xx internal mac support"
 	depends on BCM63XX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -70,9 +78,12 @@ config BCM63XX_ENET
 	  MIPS chipset family (BCM63XX).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config BNX2
 	tristate "Broadcom NetXtremeII support"
 =======
+=======
+>>>>>>> v3.18
 config BCMGENET
 	tristate "Broadcom GENET internal MAC support"
 	depends on OF
@@ -86,13 +97,20 @@ config BCMGENET
 
 config BNX2
 	tristate "QLogic NetXtremeII support"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	depends on PCI
 	select CRC32
 	select FW_LOADER
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  This driver supports Broadcom NetXtremeII gigabit Ethernet cards.
+=======
+	  This driver supports QLogic NetXtremeII gigabit Ethernet cards.
+>>>>>>> v3.18
 =======
 	  This driver supports QLogic NetXtremeII gigabit Ethernet cards.
 >>>>>>> v3.18
@@ -102,6 +120,7 @@ config BNX2
 
 config CNIC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Broadcom CNIC support"
 	depends on PCI
 	select BNX2
@@ -109,12 +128,17 @@ config CNIC
 	---help---
 	  This driver supports offload features of Broadcom NetXtremeII
 =======
+=======
+>>>>>>> v3.18
 	tristate "QLogic CNIC support"
 	depends on PCI && (IPV6 || IPV6=n)
 	select BNX2
 	select UIO
 	---help---
 	  This driver supports offload features of QLogic NetXtremeII
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  gigabit Ethernet cards.
 
@@ -150,6 +174,10 @@ config BNX2X
 	tristate "Broadcom NetXtremeII 10Gb support"
 	depends on PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select PTP_1588_CLOCK
+>>>>>>> v3.18
 =======
 	select PTP_1588_CLOCK
 >>>>>>> v3.18
@@ -174,7 +202,12 @@ config BNX2X_SRIOV
 config BGMAC
 	tristate "BCMA bus GBit core support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on BCMA_HOST_SOC && HAS_DMA
+=======
+	depends on BCMA_HOST_SOC && HAS_DMA && BCM47XX
+	select PHYLIB
+>>>>>>> v3.18
 =======
 	depends on BCMA_HOST_SOC && HAS_DMA && BCM47XX
 	select PHYLIB
@@ -186,7 +219,10 @@ config BGMAC
 	  BCMA_DRIVER_GMAC_CMN to make it work.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SYSTEMPORT
 	tristate "Broadcom SYSTEMPORT internal MAC support"
 	depends on OF
@@ -198,5 +234,8 @@ config SYSTEMPORT
 	  Broadcom BCM7xxx Set Top Box family chipset using an internal
 	  Ethernet switch.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # NET_VENDOR_BROADCOM

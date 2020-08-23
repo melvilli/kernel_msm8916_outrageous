@@ -57,7 +57,11 @@ References
 kernel source:		<file:fs/hfsplus>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Apple Technote 1150	http://developer.apple.com/technotes/tn/tn1150.html
+=======
+Apple Technote 1150	https://developer.apple.com/legacy/library/technotes/tn/tn1150.html
+>>>>>>> v3.18
 =======
 Apple Technote 1150	https://developer.apple.com/legacy/library/technotes/tn/tn1150.html
 >>>>>>> v3.18

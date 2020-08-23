@@ -7,6 +7,7 @@
  *	    Sebastian Andrzej Siewior <bigeasy@linutronix.de>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -36,6 +37,8 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 =======
+=======
+>>>>>>> v3.18
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2  of
  * the License as published by the Free Software Foundation.
@@ -44,6 +47,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -55,7 +61,11 @@
 
 #include <linux/usb/otg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/usb/nop-usb-xceiv.h>
+=======
+#include <linux/usb/usb_phy_generic.h>
+>>>>>>> v3.18
 =======
 #include <linux/usb/usb_phy_generic.h>
 >>>>>>> v3.18
@@ -66,6 +76,10 @@
 #define PCI_DEVICE_ID_INTEL_BYT		0x0f37
 #define PCI_DEVICE_ID_INTEL_MRFLD	0x119e
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_DEVICE_ID_INTEL_BSW		0x22B7
+>>>>>>> v3.18
 =======
 #define PCI_DEVICE_ID_INTEL_BSW		0x22B7
 >>>>>>> v3.18
@@ -80,7 +94,11 @@ struct dwc3_pci {
 static int dwc3_pci_register_phys(struct dwc3_pci *glue)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nop_usb_xceiv_platform_data pdata;
+=======
+	struct usb_phy_generic_platform_data pdata;
+>>>>>>> v3.18
 =======
 	struct usb_phy_generic_platform_data pdata;
 >>>>>>> v3.18
@@ -90,7 +108,11 @@ static int dwc3_pci_register_phys(struct dwc3_pci *glue)
 	memset(&pdata, 0x00, sizeof(pdata));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev = platform_device_alloc("nop_usb_xceiv", 0);
+=======
+	pdev = platform_device_alloc("usb_phy_generic", 0);
+>>>>>>> v3.18
 =======
 	pdev = platform_device_alloc("usb_phy_generic", 0);
 >>>>>>> v3.18
@@ -100,6 +122,10 @@ static int dwc3_pci_register_phys(struct dwc3_pci *glue)
 	glue->usb2_phy = pdev;
 	pdata.type = USB_PHY_TYPE_USB2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pdata.gpio_reset = -1;
+>>>>>>> v3.18
 =======
 	pdata.gpio_reset = -1;
 >>>>>>> v3.18
@@ -109,7 +135,11 @@ static int dwc3_pci_register_phys(struct dwc3_pci *glue)
 		goto err1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev = platform_device_alloc("nop_usb_xceiv", 1);
+=======
+	pdev = platform_device_alloc("usb_phy_generic", 1);
+>>>>>>> v3.18
 =======
 	pdev = platform_device_alloc("usb_phy_generic", 1);
 >>>>>>> v3.18
@@ -154,6 +184,7 @@ static int dwc3_pci_probe(struct pci_dev *pci,
 	struct platform_device	*dwc3;
 	struct dwc3_pci		*glue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			ret = -ENOMEM;
 	struct device		*dev = &pci->dev;
 
@@ -167,6 +198,8 @@ static int dwc3_pci_probe(struct pci_dev *pci,
 
 	ret = pci_enable_device(pci);
 =======
+=======
+>>>>>>> v3.18
 	int			ret;
 	struct device		*dev = &pci->dev;
 
@@ -177,6 +210,9 @@ static int dwc3_pci_probe(struct pci_dev *pci,
 	glue->dev = dev;
 
 	ret = pcim_enable_device(pci);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		dev_err(dev, "failed to enable pci device\n");
@@ -184,7 +220,10 @@ static int dwc3_pci_probe(struct pci_dev *pci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_power_state(pci, PCI_D0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_set_master(pci);
@@ -199,8 +238,12 @@ static int dwc3_pci_probe(struct pci_dev *pci,
 	if (!dwc3) {
 		dev_err(dev, "couldn't allocate dwc3 device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		goto err1;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -221,7 +264,11 @@ static int dwc3_pci_probe(struct pci_dev *pci,
 	if (ret) {
 		dev_err(dev, "couldn't add resources to dwc3 device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err1;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -246,11 +293,15 @@ static int dwc3_pci_probe(struct pci_dev *pci,
 
 err3:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
 	platform_device_put(dwc3);
 err1:
 	pci_disable_device(pci);
 
+=======
+	platform_device_put(dwc3);
+>>>>>>> v3.18
 =======
 	platform_device_put(dwc3);
 >>>>>>> v3.18
@@ -265,6 +316,7 @@ static void dwc3_pci_remove(struct pci_dev *pci)
 	platform_device_unregister(glue->usb2_phy);
 	platform_device_unregister(glue->usb3_phy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
 	pci_disable_device(pci);
 }
@@ -275,11 +327,20 @@ static DEFINE_PCI_DEVICE_TABLE(dwc3_pci_id_table) = {
 
 static const struct pci_device_id dwc3_pci_id_table[] = {
 >>>>>>> v3.18
+=======
+}
+
+static const struct pci_device_id dwc3_pci_id_table[] = {
+>>>>>>> v3.18
 	{
 		PCI_DEVICE(PCI_VENDOR_ID_SYNOPSYS,
 				PCI_DEVICE_ID_SYNOPSYS_HAPSUSB3),
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_BSW), },
+>>>>>>> v3.18
 =======
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_BSW), },
 >>>>>>> v3.18
@@ -290,7 +351,11 @@ static const struct pci_device_id dwc3_pci_id_table[] = {
 MODULE_DEVICE_TABLE(pci, dwc3_pci_id_table);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -319,6 +384,10 @@ static int dwc3_pci_resume(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_PM_SLEEP */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PM_SLEEP */
 >>>>>>> v3.18
@@ -328,11 +397,14 @@ static const struct dev_pm_ops dwc3_pci_dev_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEV_PM_OPS	(&dwc3_pci_dev_pm_ops)
 #else
 #define DEV_PM_OPS	NULL
 #endif /* CONFIG_PM */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct pci_driver dwc3_pci_driver = {
@@ -342,7 +414,11 @@ static struct pci_driver dwc3_pci_driver = {
 	.remove		= dwc3_pci_remove,
 	.driver		= {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pm	= DEV_PM_OPS,
+=======
+		.pm	= &dwc3_pci_dev_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm	= &dwc3_pci_dev_pm_ops,
 >>>>>>> v3.18
@@ -351,7 +427,11 @@ static struct pci_driver dwc3_pci_driver = {
 
 MODULE_AUTHOR("Felipe Balbi <balbi@ti.com>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_LICENSE("Dual BSD/GPL");
+=======
+MODULE_LICENSE("GPL v2");
+>>>>>>> v3.18
 =======
 MODULE_LICENSE("GPL v2");
 >>>>>>> v3.18

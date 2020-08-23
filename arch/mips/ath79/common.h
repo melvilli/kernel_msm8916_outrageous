@@ -16,7 +16,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -25,6 +28,11 @@
 
 void ath79_clocks_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unsigned long ath79_get_sys_clk_rate(const char *id);
+
+>>>>>>> v3.18
 =======
 unsigned long ath79_get_sys_clk_rate(const char *id);
 

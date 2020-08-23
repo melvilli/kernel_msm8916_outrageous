@@ -4,7 +4,11 @@
 
 mmu-y			:= nommu.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 mmu-$(CONFIG_MMU)	:= fremap.o highmem.o madvise.o memory.o mincore.o \
+=======
+mmu-$(CONFIG_MMU)	:= fremap.o gup.o highmem.o memory.o mincore.o \
+>>>>>>> v3.18
 =======
 mmu-$(CONFIG_MMU)	:= fremap.o gup.o highmem.o memory.o mincore.o \
 >>>>>>> v3.18
@@ -16,7 +20,11 @@ mmu-$(CONFIG_MMU)	+= process_vm_access.o
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y			:= filemap.o mempool.o oom_kill.o fadvise.o \
+=======
+obj-y			:= filemap.o mempool.o oom_kill.o \
+>>>>>>> v3.18
 =======
 obj-y			:= filemap.o mempool.o oom_kill.o \
 >>>>>>> v3.18
@@ -25,9 +33,15 @@ obj-y			:= filemap.o mempool.o oom_kill.o \
 			   util.o mmzone.o vmstat.o backing-dev.o \
 			   mm_init.o mmu_context.o percpu.o slab_common.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   compaction.o balloon_compaction.o \
 			   interval_tree.o $(mmu-y) \
 			   showmem.o vmpressure.o
+=======
+			   compaction.o vmacache.o \
+			   interval_tree.o list_lru.o workingset.o \
+			   iov_iter.o debug.o $(mmu-y)
+>>>>>>> v3.18
 =======
 			   compaction.o vmacache.o \
 			   interval_tree.o list_lru.o workingset.o \
@@ -43,16 +57,22 @@ else
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_HAVE_MEMBLOCK) += memblock.o
 
 obj-$(CONFIG_BOUNCE)	+= bounce.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_ADVISE_SYSCALLS)	+= fadvise.o
 ifdef CONFIG_MMU
 	obj-$(CONFIG_ADVISE_SYSCALLS)	+= madvise.o
 endif
 obj-$(CONFIG_HAVE_MEMBLOCK) += memblock.o
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_SWAP)	+= page_io.o swap_state.o swapfile.o
 obj-$(CONFIG_FRONTSWAP)	+= frontswap.o
@@ -76,7 +96,11 @@ obj-$(CONFIG_MIGRATION) += migrate.o
 obj-$(CONFIG_QUICKLIST) += quicklist.o
 obj-$(CONFIG_TRANSPARENT_HUGEPAGE) += huge_memory.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MEMCG) += memcontrol.o page_cgroup.o
+=======
+obj-$(CONFIG_MEMCG) += memcontrol.o page_cgroup.o vmpressure.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MEMCG) += memcontrol.o page_cgroup.o vmpressure.o
 >>>>>>> v3.18
@@ -88,7 +112,10 @@ obj-$(CONFIG_DEBUG_KMEMLEAK_TEST) += kmemleak-test.o
 obj-$(CONFIG_CLEANCACHE) += cleancache.o
 obj-$(CONFIG_MEMORY_ISOLATION) += page_isolation.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_PAGE_OWNER) += pageowner.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_ZPOOL)	+= zpool.o
@@ -96,7 +123,12 @@ obj-$(CONFIG_ZBUD)	+= zbud.o
 obj-$(CONFIG_ZSMALLOC)	+= zsmalloc.o
 obj-$(CONFIG_GENERIC_EARLY_IOREMAP) += early_ioremap.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_PROCESS_RECLAIM)	+= process_reclaim.o
+=======
+obj-$(CONFIG_CMA)	+= cma.o
+obj-$(CONFIG_MEMORY_BALLOON) += balloon_compaction.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_CMA)	+= cma.o
 obj-$(CONFIG_MEMORY_BALLOON) += balloon_compaction.o

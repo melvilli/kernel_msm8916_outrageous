@@ -10,6 +10,7 @@ if XZ_DEC
 
 config XZ_DEC_X86
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "x86 BCJ filter decoder"
 	default y if X86
 	select XZ_DEC_BCJ
@@ -38,6 +39,8 @@ config XZ_DEC_SPARC
 	bool "SPARC BCJ filter decoder"
 	default y if SPARC
 =======
+=======
+>>>>>>> v3.18
 	bool "x86 BCJ filter decoder" if EXPERT
 	default y
 	select XZ_DEC_BCJ
@@ -65,6 +68,9 @@ config XZ_DEC_ARMTHUMB
 config XZ_DEC_SPARC
 	bool "SPARC BCJ filter decoder" if EXPERT
 	default y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select XZ_DEC_BCJ
 

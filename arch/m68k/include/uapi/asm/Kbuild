@@ -12,7 +12,10 @@ generic-y += termios.h
 
 header-y += a.out.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 header-y += bootinfo.h
 header-y += bootinfo-amiga.h
 header-y += bootinfo-apollo.h
@@ -21,6 +24,9 @@ header-y += bootinfo-hp300.h
 header-y += bootinfo-mac.h
 header-y += bootinfo-q40.h
 header-y += bootinfo-vme.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 header-y += byteorder.h
 header-y += cachectl.h

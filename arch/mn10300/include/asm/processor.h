@@ -69,7 +69,13 @@ extern void identify_cpu(struct mn10300_cpuinfo *);
 extern void print_cpu_info(struct mn10300_cpuinfo *);
 extern void dodgy_tsc(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define cpu_relax() barrier()
+=======
+
+#define cpu_relax() barrier()
+#define cpu_relax_lowlatency() cpu_relax()
+>>>>>>> v3.18
 =======
 
 #define cpu_relax() barrier()

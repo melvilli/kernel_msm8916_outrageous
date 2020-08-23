@@ -837,7 +837,10 @@ struct ulptx_idata {
 #define F_RX_DACK_CHANGE    V_RX_DACK_CHANGE(1U)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum {                     /* TCP congestion control algorithms */
 	CONG_ALG_RENO,
 	CONG_ALG_TAHOE,
@@ -852,5 +855,8 @@ enum {                     /* TCP congestion control algorithms */
 
 #define CONG_CNTRL_VALID   (1 << 18)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _T4FW_RI_API_H_ */

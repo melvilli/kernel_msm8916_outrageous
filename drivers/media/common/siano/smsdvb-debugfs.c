@@ -1,7 +1,11 @@
 /***********************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2013 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright(c) 2013 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright(c) 2013 Mauro Carvalho Chehab
 >>>>>>> v3.18

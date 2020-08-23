@@ -2,13 +2,19 @@
 #define _BCACHE_BSET_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bcache.h>
 #include <linux/kernel.h>
 #include <linux/types.h>
 
 #include "util.h" /* for time_stats */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * BKEYS:
@@ -150,6 +156,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Btree key comparison/iteration */
 
 struct btree_iter {
@@ -159,12 +166,17 @@ struct btree_iter {
 	} data[MAX_BSETS];
 };
 =======
+=======
+>>>>>>> v3.18
 struct btree_keys;
 struct btree_iter;
 struct btree_iter_set;
 struct bkey_float;
 
 #define MAX_BSETS		4U
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct bset_tree {
@@ -177,6 +189,7 @@ struct bset_tree {
 
 	/* size of the binary tree and prev array */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned	size;
 
 	/* function of size - precalculated for to_inorder() */
@@ -186,6 +199,8 @@ struct bset_tree {
 	struct bkey	end;
 	struct bkey_float *tree;
 =======
+=======
+>>>>>>> v3.18
 	unsigned		size;
 
 	/* function of size - precalculated for to_inorder() */
@@ -194,6 +209,9 @@ struct bset_tree {
 	/* copy of the last key in the set */
 	struct bkey		end;
 	struct bkey_float	*tree;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -204,6 +222,7 @@ struct bset_tree {
 	 * to keep bkey_float to 4 bytes and prev isn't used in the fast
 	 * path.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	uint8_t		*prev;
 
@@ -296,6 +315,8 @@ struct bkey *bch_keylist_pop(struct keylist *);
 int bch_keylist_realloc(struct keylist *, int, struct cache_set *);
 
 =======
+=======
+>>>>>>> v3.18
 	uint8_t			*prev;
 
 	/* The actual btree node, with pointers to each sorted set */
@@ -517,6 +538,9 @@ static __always_inline int64_t bkey_cmp(const struct bkey *l,
 		: (int64_t) KEY_OFFSET(l) - (int64_t) KEY_OFFSET(r);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void bch_bkey_copy_single_ptr(struct bkey *, const struct bkey *,
 			      unsigned);
@@ -535,6 +559,7 @@ static inline bool bch_cut_back(const struct bkey *where, struct bkey *k)
 	return __bch_cut_back(where, k);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 const char *bch_ptr_status(struct cache_set *, const struct bkey *);
 bool __bch_ptr_invalid(struct cache_set *, int level, const struct bkey *);
@@ -630,6 +655,8 @@ static inline void bch_btree_sort(struct btree *b)
 
 int bch_bset_print_stats(struct cache_set *, char *);
 =======
+=======
+>>>>>>> v3.18
 #define PRECEDING_KEY(_k)					\
 ({								\
 	struct bkey *_ret = NULL;				\
@@ -775,6 +802,9 @@ do {									\
 	if (btree_keys_expensive_checks(b))				\
 		__bch_check_keys(b, __VA_ARGS__);			\
 } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

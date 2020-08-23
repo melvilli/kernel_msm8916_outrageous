@@ -14,8 +14,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -24,7 +28,10 @@
 #include <linux/module.h>
 #include <linux/kmod.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/netdevice.h>
@@ -95,10 +102,13 @@ static int always_connected (struct usbnet *dev)
  *-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct driver_info	ali_m5632_info = {
 	.description =	"ALi M5632",
 	.flags       = FLAG_POINTTOPOINT,
 =======
+=======
+>>>>>>> v3.18
 static void m5632_recover(struct usbnet *dev)
 {
 	struct usb_device	*udev = dev->udev;
@@ -117,13 +127,19 @@ static const struct driver_info	ali_m5632_info = {
 	.description =	"ALi M5632",
 	.flags       = FLAG_POINTTOPOINT,
 	.recover     = m5632_recover,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef	CONFIG_USB_AN2720
@@ -360,7 +376,10 @@ MODULE_DEVICE_TABLE(usb, products);
 
 /*-------------------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int dummy_prereset(struct usb_interface *intf)
 {
         return 0;
@@ -370,6 +389,9 @@ static int dummy_postreset(struct usb_interface *intf)
 {
         return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct usb_driver cdc_subset_driver = {
@@ -378,6 +400,11 @@ static struct usb_driver cdc_subset_driver = {
 	.suspend =	usbnet_suspend,
 	.resume =	usbnet_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pre_reset =	dummy_prereset,
+	.post_reset =	dummy_postreset,
+>>>>>>> v3.18
 =======
 	.pre_reset =	dummy_prereset,
 	.post_reset =	dummy_postreset,

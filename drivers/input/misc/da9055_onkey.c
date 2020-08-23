@@ -12,7 +12,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/input.h>
@@ -40,7 +43,11 @@ static void da9055_onkey_query(struct da9055_onkey *onkey)
 		key_stat &= DA9055_NOKEY_STS;
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Onkey status bit is cleared when onkey button is relased.
+=======
+		 * Onkey status bit is cleared when onkey button is released.
+>>>>>>> v3.18
 =======
 		 * Onkey status bit is cleared when onkey button is released.
 >>>>>>> v3.18
@@ -118,7 +125,10 @@ static int da9055_onkey_probe(struct platform_device *pdev)
 	INIT_DELAYED_WORK(&onkey->work, da9055_onkey_work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq = regmap_irq_get_virq(da9055->irq_data, irq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = request_threaded_irq(irq, NULL, da9055_onkey_irq,

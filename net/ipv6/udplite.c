@@ -65,7 +65,10 @@ static struct inet_protosw udplite6_protosw = {
 	.prot		= &udplitev6_prot,
 	.ops		= &inet6_dgram_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.no_check	= 0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.flags		= INET_PROTOSW_PERMANENT,

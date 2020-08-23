@@ -293,7 +293,11 @@ int dlm_proxy_ast_handler(struct o2net_msg *msg, u32 len, void *data,
 	struct dlm_proxy_ast *past = (struct dlm_proxy_ast *) msg->buf;
 	char *name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *iter, *head=NULL;
+=======
+	struct list_head *head = NULL;
+>>>>>>> v3.18
 =======
 	struct list_head *head = NULL;
 >>>>>>> v3.18
@@ -378,8 +382,12 @@ int dlm_proxy_ast_handler(struct o2net_msg *msg, u32 len, void *data,
 	head = &res->converting;
 	lock = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each(iter, head) {
 		lock = list_entry (iter, struct dlm_lock, list);
+=======
+	list_for_each_entry(lock, head, list) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(lock, head, list) {
 >>>>>>> v3.18
@@ -394,8 +402,12 @@ int dlm_proxy_ast_handler(struct o2net_msg *msg, u32 len, void *data,
 		head = &res->granted;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each(iter, head) {
 		lock = list_entry (iter, struct dlm_lock, list);
+=======
+	list_for_each_entry(lock, head, list) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(lock, head, list) {
 >>>>>>> v3.18

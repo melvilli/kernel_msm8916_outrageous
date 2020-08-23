@@ -509,7 +509,11 @@ static int riptide_reset(struct cmdif *cif, struct snd_riptide *chip);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_riptide_ids) = {
+=======
+static const struct pci_device_id snd_riptide_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_riptide_ids[] = {
 >>>>>>> v3.18
@@ -522,7 +526,11 @@ static const struct pci_device_id snd_riptide_ids[] = {
 
 #ifdef SUPPORT_JOYSTICK
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_riptide_joystick_ids) = {
+=======
+static const struct pci_device_id snd_riptide_joystick_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_riptide_joystick_ids[] = {
 >>>>>>> v3.18
@@ -950,7 +958,11 @@ setmixer(struct cmdif *cif, short num, unsigned short rval, unsigned short lval)
 	int i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("sent mixer %d: 0x%d 0x%d\n", num, rval, lval);
+=======
+	snd_printdd("sent mixer %d: 0x%x 0x%x\n", num, rval, lval);
+>>>>>>> v3.18
 =======
 	snd_printdd("sent mixer %d: 0x%x 0x%x\n", num, rval, lval);
 >>>>>>> v3.18
@@ -1093,7 +1105,11 @@ getmixer(struct cmdif *cif, short num, unsigned short *rval,
 	*rval = rptr.retwords[0];
 	*lval = rptr.retwords[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("got mixer %d: 0x%d 0x%d\n", num, *rval, *lval);
+=======
+	snd_printdd("got mixer %d: 0x%x 0x%x\n", num, *rval, *lval);
+>>>>>>> v3.18
 =======
 	snd_printdd("got mixer %d: 0x%x 0x%x\n", num, *rval, *lval);
 >>>>>>> v3.18
@@ -1933,8 +1949,11 @@ snd_riptide_create(struct snd_card *card, struct pci_dev *pci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*rchip = chip;
@@ -2052,6 +2071,7 @@ snd_riptide_joystick_probe(struct pci_dev *pci, const struct pci_device_id *id)
 	static int dev;
 	struct gameport *gameport;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	if (dev >= SNDRV_CARDS)
@@ -2073,6 +2093,8 @@ snd_riptide_joystick_probe(struct pci_dev *pci, const struct pci_device_id *id)
 		goto inc_dev;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	if (dev >= SNDRV_CARDS)
 		return -ENODEV;
@@ -2087,6 +2109,9 @@ snd_riptide_joystick_probe(struct pci_dev *pci, const struct pci_device_id *id)
 	gameport = gameport_allocate_port();
 	if (!gameport)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!request_region(joystick_port[dev], 8, "Riptide gameport")) {
 		snd_printk(KERN_WARNING
@@ -2094,8 +2119,12 @@ snd_riptide_joystick_probe(struct pci_dev *pci, const struct pci_device_id *id)
 			   joystick_port[dev]);
 		gameport_free_port(gameport);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EBUSY;
 		goto inc_dev;
+=======
+		return -EBUSY;
+>>>>>>> v3.18
 =======
 		return -EBUSY;
 >>>>>>> v3.18
@@ -2105,11 +2134,15 @@ snd_riptide_joystick_probe(struct pci_dev *pci, const struct pci_device_id *id)
 	gameport_register_port(gameport);
 	pci_set_drvdata(pci, gameport);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = 0;
 inc_dev:
 	dev++;
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -2122,7 +2155,10 @@ static void snd_riptide_joystick_remove(struct pci_dev *pci)
 		release_region(gameport->io, 8);
 		gameport_unregister_port(gameport);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -2146,7 +2182,12 @@ snd_card_riptide_probe(struct pci_dev *pci, const struct pci_device_id *pci_id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -2243,7 +2284,10 @@ static void snd_card_riptide_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

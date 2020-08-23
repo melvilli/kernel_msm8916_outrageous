@@ -18,6 +18,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_inum.h"
@@ -37,6 +38,8 @@
 #include "xfs_trace.h"
 #include "xfs_icache.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_shared.h"
 #include "xfs_format.h"
 #include "xfs_log_format.h"
@@ -54,6 +57,9 @@
 #include "xfs_trace.h"
 #include "xfs_icache.h"
 #include "xfs_dinode.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 STATIC int
@@ -64,7 +70,11 @@ xfs_internal_inum(
 	return (ino == mp->m_sb.sb_rbmino || ino == mp->m_sb.sb_rsumino ||
 		(xfs_sb_version_hasquota(&mp->m_sb) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 (ino == mp->m_sb.sb_uquotino || ino == mp->m_sb.sb_gquotino)));
+=======
+		 xfs_is_quota_inode(&mp->m_sb, ino)));
+>>>>>>> v3.18
 =======
 		 xfs_is_quota_inode(&mp->m_sb, ino)));
 >>>>>>> v3.18
@@ -93,27 +103,38 @@ xfs_bulkstat_one_int(
 
 	if (!buffer || xfs_internal_inum(mp, ino))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EINVAL);
 
 	buf = kmem_alloc(sizeof(*buf), KM_SLEEP | KM_MAYFAIL);
 	if (!buf)
 		return XFS_ERROR(ENOMEM);
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 
 	buf = kmem_alloc(sizeof(*buf), KM_SLEEP | KM_MAYFAIL);
 	if (!buf)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	error = xfs_iget(mp, NULL, ino,
 			 (XFS_IGET_DONTCACHE | XFS_IGET_UNTRUSTED),
 			 XFS_ILOCK_SHARED, &ip);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (error) {
 		*stat = BULKSTAT_RV_NOTHING;
 		goto out_free;
 	}
+=======
+	if (error)
+		goto out_free;
+>>>>>>> v3.18
 =======
 	if (error)
 		goto out_free;
@@ -175,7 +196,10 @@ xfs_bulkstat_one_int(
 
 	error = formatter(buffer, ubsize, ubused, buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!error)
@@ -196,9 +220,15 @@ xfs_bulkstat_one_fmt(
 {
 	if (ubsize < sizeof(*buffer))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(ENOMEM);
 	if (copy_to_user(ubuffer, buffer, sizeof(*buffer)))
 		return XFS_ERROR(EFAULT);
+=======
+		return -ENOMEM;
+	if (copy_to_user(ubuffer, buffer, sizeof(*buffer)))
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 	if (copy_to_user(ubuffer, buffer, sizeof(*buffer)))
@@ -223,9 +253,12 @@ xfs_bulkstat_one(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XFS_BULKSTAT_UBLEFT(ubleft)	((ubleft) >= statstruct_size)
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * Loop over all clusters in a chunk for a given incore inode allocation btree
  * record.  Do a readahead if there are any allocated inodes in that cluster.
@@ -392,6 +425,9 @@ xfs_bulkstat_ag_ichunk(
 	return error;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Return stat information in bulk (by-inode) for the filesystem.
@@ -407,13 +443,17 @@ xfs_bulkstat(
 	int			*done)	/* 1 if there are more stats to get */
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_agblock_t		agbno=0;/* allocation group block number */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	xfs_buf_t		*agbp;	/* agi header buffer */
 	xfs_agi_t		*agi;	/* agi header data */
 	xfs_agino_t		agino;	/* inode # in allocation group */
 	xfs_agnumber_t		agno;	/* allocation group number */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int			chunkidx; /* current index into inode chunk */
 	int			clustidx; /* current index into inode cluster */
@@ -442,6 +482,8 @@ xfs_bulkstat(
 	int			ubused;	/* bytes used by formatter */
 	xfs_buf_t		*bp;	/* ptr to on-disk inode cluster buf */
 =======
+=======
+>>>>>>> v3.18
 	xfs_btree_cur_t		*cur;	/* btree cursor for ialloc btree */
 	size_t			irbsize; /* size of irec buffer in bytes */
 	xfs_inobt_rec_incore_t	*irbuf;	/* start of irec buffer */
@@ -449,11 +491,15 @@ xfs_bulkstat(
 	int			ubcount; /* size of user's buffer */
 	struct xfs_bulkstat_agichunk ac;
 	int			error = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * Get the last inode value, see if there's nothing to do.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ino = (xfs_ino_t)*lastinop;
 	lastino = ino;
@@ -462,15 +508,21 @@ xfs_bulkstat(
 	if (agno >= mp->m_sb.sb_agcount ||
 	    ino != XFS_AGINO_TO_INO(mp, agno, agino)) {
 =======
+=======
+>>>>>>> v3.18
 	agno = XFS_INO_TO_AGNO(mp, *lastinop);
 	agino = XFS_INO_TO_AGINO(mp, *lastinop);
 	if (agno >= mp->m_sb.sb_agcount ||
 	    *lastinop != XFS_AGINO_TO_INO(mp, agno, agino)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*done = 1;
 		*ubcountp = 0;
 		return 0;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!ubcountp || *ubcountp <= 0) {
 		return EINVAL;
@@ -490,6 +542,8 @@ xfs_bulkstat(
 	if (!irbuf)
 		return ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 
 	ubcount = *ubcountp; /* statstruct's */
 	ac.ac_ubuffer = &ubuffer;
@@ -502,6 +556,9 @@ xfs_bulkstat(
 	irbuf = kmem_zalloc_greedy(&irbsize, PAGE_SIZE, PAGE_SIZE * 4);
 	if (!irbuf)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	nirbuf = irbsize / sizeof(*irbuf);
@@ -510,6 +567,7 @@ xfs_bulkstat(
 	 * Loop over the allocation groups, starting from the last
 	 * inode returned; 0 means start of the allocation group.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rval = 0;
 	while (XFS_BULKSTAT_UBLEFT(ubleft) && agno < mp->m_sb.sb_agcount) {
@@ -525,6 +583,8 @@ xfs_bulkstat(
 			continue;
 		}
 =======
+=======
+>>>>>>> v3.18
 	while (agno < mp->m_sb.sb_agcount) {
 		struct xfs_inobt_rec_incore	*irbp = irbuf;
 		struct xfs_inobt_rec_incore	*irbufend = irbuf + nirbuf;
@@ -535,11 +595,15 @@ xfs_bulkstat(
 		error = xfs_ialloc_read_agi(mp, NULL, agno, &agbp);
 		if (error)
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		agi = XFS_BUF_TO_AGI(agbp);
 		/*
 		 * Allocate and initialize a btree cursor for ialloc btree.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		cur = xfs_inobt_init_cursor(mp, NULL, agbp, agno);
 		irbp = irbuf;
@@ -582,6 +646,8 @@ xfs_bulkstat(
 				}
 				r.ir_free |= xfs_inobt_maskn(0, chunkidx);
 =======
+=======
+>>>>>>> v3.18
 		cur = xfs_inobt_init_cursor(mp, NULL, agbp, agno,
 					    XFS_BTNUM_INO);
 		if (agino > 0) {
@@ -595,11 +661,15 @@ xfs_bulkstat(
 			if (error)
 				goto del_cursor;
 			if (icount) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				irbp->ir_startino = r.ir_startino;
 				irbp->ir_freecount = r.ir_freecount;
 				irbp->ir_free = r.ir_free;
 				irbp++;
+<<<<<<< HEAD
 <<<<<<< HEAD
 				agino = r.ir_startino + XFS_INODES_PER_CHUNK;
 				icount = XFS_INODES_PER_CHUNK - r.ir_freecount;
@@ -624,6 +694,8 @@ xfs_bulkstat(
 			icount = 0;
 		}
 =======
+=======
+>>>>>>> v3.18
 			}
 			/* Increment to the next record */
 			error = xfs_btree_increment(cur, 0, &stat);
@@ -636,12 +708,16 @@ xfs_bulkstat(
 			goto del_cursor;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Loop through inode btree records in this ag,
 		 * until we run out of inodes or space in the buffer.
 		 */
 		while (irbp < irbufend && icount < ubcount) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			xfs_inobt_rec_incore_t r;
 
@@ -672,12 +748,17 @@ xfs_bulkstat(
 				end_of_ag = 1;
 				break;
 =======
+=======
+>>>>>>> v3.18
 			struct xfs_inobt_rec_incore	r;
 
 			error = xfs_inobt_get_rec(cur, &r, &stat);
 			if (error || stat == 0) {
 				end_of_ag = true;
 				goto del_cursor;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 
@@ -686,6 +767,7 @@ xfs_bulkstat(
 			 * Also start read-ahead now for this chunk.
 			 */
 			if (r.ir_freecount < XFS_INODES_PER_CHUNK) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				/*
 				 * Loop over all clusters in the next chunk.
@@ -706,12 +788,16 @@ xfs_bulkstat(
 =======
 				xfs_bulkstat_ichunk_ra(mp, agno, &r);
 >>>>>>> v3.18
+=======
+				xfs_bulkstat_ichunk_ra(mp, agno, &r);
+>>>>>>> v3.18
 				irbp->ir_startino = r.ir_startino;
 				irbp->ir_freecount = r.ir_freecount;
 				irbp->ir_free = r.ir_free;
 				irbp++;
 				icount += XFS_INODES_PER_CHUNK - r.ir_freecount;
 			}
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/*
 			 * Set agino to after this chunk and bump the cursor.
@@ -805,6 +891,8 @@ xfs_bulkstat(
 				lastino = ino;
 			}
 =======
+=======
+>>>>>>> v3.18
 			error = xfs_btree_increment(cur, 0, &stat);
 			if (error || stat == 0) {
 				end_of_ag = true;
@@ -837,11 +925,15 @@ del_cursor:
 					&agino);
 			if (error)
 				break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			cond_resched();
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (bp)
 			xfs_buf_relse(bp);
@@ -858,6 +950,8 @@ del_cursor:
 		} else
 			break;
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * If we've run out of space or had a formatting error, we
 		 * are now done
@@ -869,11 +963,15 @@ del_cursor:
 			agno++;
 			agino = 0;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	/*
 	 * Done, we're either out of filesystem or space to put the data.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kmem_free_large(irbuf);
 	*ubcountp = ubelem;
@@ -942,6 +1040,8 @@ xfs_bulkstat_single(
 	*done = 0;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	kmem_free(irbuf);
 	*ubcountp = ac.ac_ubelem;
 
@@ -964,6 +1064,9 @@ xfs_bulkstat_single(
 		*done = 1;
 
 	return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -971,7 +1074,11 @@ int
 xfs_inumbers_fmt(
 	void			__user *ubuffer, /* buffer to write to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const xfs_inogrp_t	*buffer,	/* buffer to read from */
+=======
+	const struct xfs_inogrp	*buffer,	/* buffer to read from */
+>>>>>>> v3.18
 =======
 	const struct xfs_inogrp	*buffer,	/* buffer to read from */
 >>>>>>> v3.18
@@ -989,6 +1096,7 @@ xfs_inumbers_fmt(
  */
 int					/* error status */
 xfs_inumbers(
+<<<<<<< HEAD
 <<<<<<< HEAD
 	xfs_mount_t	*mp,		/* mount point for filesystem */
 	xfs_ino_t	*lastino,	/* last inode returned */
@@ -1062,6 +1170,8 @@ xfs_inumbers(
 			continue;
 		}
 =======
+=======
+>>>>>>> v3.18
 	struct xfs_mount	*mp,/* mount point for filesystem */
 	xfs_ino_t		*lastino,/* last inode returned */
 	int			*count,/* size of buffer/count returned */
@@ -1110,6 +1220,9 @@ xfs_inumbers(
 		if (!stat)
 			goto next_ag;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		agino = r.ir_startino + XFS_INODES_PER_CHUNK - 1;
 		buffer[bufidx].xi_startino =
@@ -1117,6 +1230,7 @@ xfs_inumbers(
 		buffer[bufidx].xi_alloccount =
 			XFS_INODES_PER_CHUNK - r.ir_freecount;
 		buffer[bufidx].xi_allocmask = ~r.ir_free;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		bufidx++;
 		left--;
@@ -1127,17 +1241,23 @@ xfs_inumbers(
 				break;
 			}
 =======
+=======
+>>>>>>> v3.18
 		if (++bufidx == bcount) {
 			long	written;
 
 			error = formatter(ubuffer, buffer, bufidx, &written);
 			if (error)
 				break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ubuffer += written;
 			*count += bufidx;
 			bufidx = 0;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (left) {
 			error = xfs_btree_increment(cur, 0, &tmp);
@@ -1162,6 +1282,8 @@ xfs_inumbers(
 				error = XFS_ERROR(EFAULT);
 			else
 =======
+=======
+>>>>>>> v3.18
 		if (!--left)
 			break;
 
@@ -1186,12 +1308,19 @@ next_ag:
 
 			error = formatter(ubuffer, buffer, bufidx, &written);
 			if (!error)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				*count += bufidx;
 		}
 		*lastino = XFS_AGINO_TO_INO(mp, agno, agino);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1202,6 +1331,10 @@ next_ag:
 	if (agbp)
 		xfs_buf_relse(agbp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

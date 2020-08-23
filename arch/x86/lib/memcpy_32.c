@@ -5,7 +5,11 @@
 #undef memset
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *memcpy(void *to, const void *from, size_t n)
+=======
+__visible void *memcpy(void *to, const void *from, size_t n)
+>>>>>>> v3.18
 =======
 __visible void *memcpy(void *to, const void *from, size_t n)
 >>>>>>> v3.18
@@ -19,7 +23,11 @@ __visible void *memcpy(void *to, const void *from, size_t n)
 EXPORT_SYMBOL(memcpy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *memset(void *s, int c, size_t count)
+=======
+__visible void *memset(void *s, int c, size_t count)
+>>>>>>> v3.18
 =======
 __visible void *memset(void *s, int c, size_t count)
 >>>>>>> v3.18
@@ -29,7 +37,11 @@ __visible void *memset(void *s, int c, size_t count)
 EXPORT_SYMBOL(memset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *memmove(void *dest, const void *src, size_t n)
+=======
+__visible void *memmove(void *dest, const void *src, size_t n)
+>>>>>>> v3.18
 =======
 __visible void *memmove(void *dest, const void *src, size_t n)
 >>>>>>> v3.18

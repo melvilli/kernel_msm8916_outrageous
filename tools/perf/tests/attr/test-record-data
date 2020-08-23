@@ -5,11 +5,17 @@ args    = -d kill >/dev/null 2>&1
 [event:base-record]
 sample_period=4000
 <<<<<<< HEAD
+<<<<<<< HEAD
 sample_type=271
 =======
+=======
+>>>>>>> v3.18
 
 # sample_type = PERF_SAMPLE_IP | PERF_SAMPLE_TID | PERF_SAMPLE_TIME |
 # PERF_SAMPLE_ADDR | PERF_SAMPLE_PERIOD | PERF_SAMPLE_DATA_SRC
 sample_type=33039
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 mmap_data=1

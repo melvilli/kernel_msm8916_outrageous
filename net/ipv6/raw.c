@@ -64,6 +64,11 @@
 #include <linux/export.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	ICMPV6_HDRLEN	4	/* ICMPv6 header, RFC 4443 Section 2.1 */
+
+>>>>>>> v3.18
 =======
 #define	ICMPV6_HDRLEN	4	/* ICMPv6 header, RFC 4443 Section 2.1 */
 
@@ -81,7 +86,10 @@ static struct sock *__raw_v6_lookup(struct net *net, struct sock *sk,
 	sk_for_each_from(sk)
 		if (inet_sk(sk)->inet_num == num) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct ipv6_pinfo *np = inet6_sk(sk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -89,8 +97,13 @@ static struct sock *__raw_v6_lookup(struct net *net, struct sock *sk,
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!ipv6_addr_any(&np->daddr) &&
 			    !ipv6_addr_equal(&np->daddr, rmt_addr))
+=======
+			if (!ipv6_addr_any(&sk->sk_v6_daddr) &&
+			    !ipv6_addr_equal(&sk->sk_v6_daddr, rmt_addr))
+>>>>>>> v3.18
 =======
 			if (!ipv6_addr_any(&sk->sk_v6_daddr) &&
 			    !ipv6_addr_equal(&sk->sk_v6_daddr, rmt_addr))
@@ -101,8 +114,13 @@ static struct sock *__raw_v6_lookup(struct net *net, struct sock *sk,
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!ipv6_addr_any(&np->rcv_saddr)) {
 				if (ipv6_addr_equal(&np->rcv_saddr, loc_addr))
+=======
+			if (!ipv6_addr_any(&sk->sk_v6_rcv_saddr)) {
+				if (ipv6_addr_equal(&sk->sk_v6_rcv_saddr, loc_addr))
+>>>>>>> v3.18
 =======
 			if (!ipv6_addr_any(&sk->sk_v6_rcv_saddr)) {
 				if (ipv6_addr_equal(&sk->sk_v6_rcv_saddr, loc_addr))
@@ -127,12 +145,15 @@ found:
 static int icmpv6_filter(const struct sock *sk, const struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct icmp6hdr *_hdr;
 	const struct icmp6hdr *hdr;
 
 	hdr = skb_header_pointer(skb, skb_transport_offset(skb),
 				 sizeof(_hdr), &_hdr);
 =======
+=======
+>>>>>>> v3.18
 	struct icmp6hdr _hdr;
 	const struct icmp6hdr *hdr;
 
@@ -141,6 +162,9 @@ static int icmpv6_filter(const struct sock *sk, const struct sk_buff *skb)
 	 */
 	hdr = skb_header_pointer(skb, skb_transport_offset(skb),
 				 ICMPV6_HDRLEN, &_hdr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (hdr) {
 		const __u32 *data = &raw6_sk(sk)->filter.data[0];
@@ -202,7 +226,11 @@ static bool ipv6_raw_deliver(struct sk_buff *skb, int nexthdr)
 
 	net = dev_net(skb->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk = __raw_v6_lookup(net, sk, nexthdr, daddr, saddr, IP6CB(skb)->iif);
+=======
+	sk = __raw_v6_lookup(net, sk, nexthdr, daddr, saddr, inet6_iif(skb));
+>>>>>>> v3.18
 =======
 	sk = __raw_v6_lookup(net, sk, nexthdr, daddr, saddr, inet6_iif(skb));
 >>>>>>> v3.18
@@ -250,7 +278,11 @@ static bool ipv6_raw_deliver(struct sk_buff *skb, int nexthdr)
 		}
 		sk = __raw_v6_lookup(net, sk_next(sk), nexthdr, daddr, saddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     IP6CB(skb)->iif);
+=======
+				     inet6_iif(skb));
+>>>>>>> v3.18
 =======
 				     inet6_iif(skb));
 >>>>>>> v3.18
@@ -284,11 +316,17 @@ static int rawv6_bind(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 	if (addr_len < SIN6_LEN_RFC2133)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (addr->sin6_family != AF_INET6)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	addr_type = ipv6_addr_type(&addr->sin6_addr);
 
@@ -342,7 +380,11 @@ static int rawv6_bind(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 
 	inet->inet_rcv_saddr = inet->inet_saddr = v4addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np->rcv_saddr = addr->sin6_addr;
+=======
+	sk->sk_v6_rcv_saddr = addr->sin6_addr;
+>>>>>>> v3.18
 =======
 	sk->sk_v6_rcv_saddr = addr->sin6_addr;
 >>>>>>> v3.18
@@ -379,13 +421,19 @@ static void rawv6_err(struct sock *sk, struct sk_buff *skb,
 		harderr = (np->pmtudisc == IPV6_PMTUDISC_DO);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (type == NDISC_REDIRECT)
 		ip6_sk_redirect(skb, sk);
 =======
+=======
+>>>>>>> v3.18
 	if (type == NDISC_REDIRECT) {
 		ip6_sk_redirect(skb, sk);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (np->recverr) {
 		u8 *payload = skb->data;
@@ -421,7 +469,11 @@ void raw6_icmp_error(struct sk_buff *skb, int nexthdr,
 
 		while ((sk = __raw_v6_lookup(net, sk, nexthdr, saddr, daddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						IP6CB(skb)->iif))) {
+=======
+						inet6_iif(skb)))) {
+>>>>>>> v3.18
 =======
 						inet6_iif(skb)))) {
 >>>>>>> v3.18
@@ -511,7 +563,11 @@ static int rawv6_recvmsg(struct kiocb *iocb, struct sock *sk,
 {
 	struct ipv6_pinfo *np = inet6_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_in6 *sin6 = (struct sockaddr_in6 *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_in6 *, sin6, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_in6 *, sin6, msg->msg_name);
 >>>>>>> v3.18
@@ -546,7 +602,11 @@ static int rawv6_recvmsg(struct kiocb *iocb, struct sock *sk,
 		err = skb_copy_datagram_iovec(skb, 0, msg->msg_iov, copied);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = skb_copy_and_csum_datagram_iovec(skb, 0, msg->msg_iov, copied);
+=======
+		err = skb_copy_and_csum_datagram_iovec(skb, 0, msg->msg_iov);
+>>>>>>> v3.18
 =======
 		err = skb_copy_and_csum_datagram_iovec(skb, 0, msg->msg_iov);
 >>>>>>> v3.18
@@ -564,7 +624,11 @@ static int rawv6_recvmsg(struct kiocb *iocb, struct sock *sk,
 		sin6->sin6_flowinfo = 0;
 		sin6->sin6_scope_id = ipv6_iface_scope_id(&sin6->sin6_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							  IP6CB(skb)->iif);
+=======
+							  inet6_iif(skb));
+>>>>>>> v3.18
 =======
 							  inet6_iif(skb));
 >>>>>>> v3.18
@@ -650,11 +714,15 @@ static int rawv6_push_pending_frames(struct sock *sk, struct flowi6 *fl6,
 
 	offset += skb_transport_offset(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = skb_copy_bits(skb, offset, &csum, 2);
 	if (err < 0) {
 		ip6_flush_pending_frames(sk);
 		goto out;
 	}
+=======
+	BUG_ON(skb_copy_bits(skb, offset, &csum, 2));
+>>>>>>> v3.18
 =======
 	BUG_ON(skb_copy_bits(skb, offset, &csum, 2));
 >>>>>>> v3.18
@@ -670,8 +738,12 @@ static int rawv6_push_pending_frames(struct sock *sk, struct flowi6 *fl6,
 		csum = CSUM_MANGLED_0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb_store_bits(skb, offset, &csum, 2))
 		BUG();
+=======
+	BUG_ON(skb_store_bits(skb, offset, &csum, 2));
+>>>>>>> v3.18
 =======
 	BUG_ON(skb_store_bits(skb, offset, &csum, 2));
 >>>>>>> v3.18
@@ -709,6 +781,10 @@ static int rawv6_send_hdrinc(struct sock *sk, void *from, int length,
 	skb_reserve(skb, hlen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	skb->protocol = htons(ETH_P_IPV6);
+>>>>>>> v3.18
 =======
 	skb->protocol = htons(ETH_P_IPV6);
 >>>>>>> v3.18
@@ -813,9 +889,14 @@ static int rawv6_sendmsg(struct kiocb *iocb, struct sock *sk,
 		   struct msghdr *msg, size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ipv6_txoptions *opt_to_free = NULL;
 	struct ipv6_txoptions opt_space;
 	struct sockaddr_in6 * sin6 = (struct sockaddr_in6 *) msg->msg_name;
+=======
+	struct ipv6_txoptions opt_space;
+	DECLARE_SOCKADDR(struct sockaddr_in6 *, sin6, msg->msg_name);
+>>>>>>> v3.18
 =======
 	struct ipv6_txoptions opt_space;
 	DECLARE_SOCKADDR(struct sockaddr_in6 *, sin6, msg->msg_name);
@@ -852,7 +933,10 @@ static int rawv6_sendmsg(struct kiocb *iocb, struct sock *sk,
 
 	fl6.flowi6_mark = sk->sk_mark;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fl6.flowi6_uid = sock_i_uid(sk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -882,7 +966,10 @@ static int rawv6_sendmsg(struct kiocb *iocb, struct sock *sk,
 				if (flowlabel == NULL)
 					return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				daddr = &flowlabel->dst;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			}
@@ -894,8 +981,13 @@ static int rawv6_sendmsg(struct kiocb *iocb, struct sock *sk,
 		 */
 		if (sk->sk_state == TCP_ESTABLISHED &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    ipv6_addr_equal(daddr, &np->daddr))
 			daddr = &np->daddr;
+=======
+		    ipv6_addr_equal(daddr, &sk->sk_v6_daddr))
+			daddr = &sk->sk_v6_daddr;
+>>>>>>> v3.18
 =======
 		    ipv6_addr_equal(daddr, &sk->sk_v6_daddr))
 			daddr = &sk->sk_v6_daddr;
@@ -911,7 +1003,11 @@ static int rawv6_sendmsg(struct kiocb *iocb, struct sock *sk,
 
 		proto = inet->inet_num;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		daddr = &np->daddr;
+=======
+		daddr = &sk->sk_v6_daddr;
+>>>>>>> v3.18
 =======
 		daddr = &sk->sk_v6_daddr;
 >>>>>>> v3.18
@@ -941,10 +1037,15 @@ static int rawv6_sendmsg(struct kiocb *iocb, struct sock *sk,
 			opt = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!opt) {
 		opt = txopt_get(np);
 		opt_to_free = opt;
 	}
+=======
+	if (opt == NULL)
+		opt = np->opt;
+>>>>>>> v3.18
 =======
 	if (opt == NULL)
 		opt = np->opt;
@@ -974,7 +1075,11 @@ static int rawv6_sendmsg(struct kiocb *iocb, struct sock *sk,
 	security_sk_classify_flow(sk, flowi6_to_flowi(&fl6));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dst = ip6_dst_lookup_flow(sk, &fl6, final_p, true);
+=======
+	dst = ip6_dst_lookup_flow(sk, &fl6, final_p);
+>>>>>>> v3.18
 =======
 	dst = ip6_dst_lookup_flow(sk, &fl6, final_p);
 >>>>>>> v3.18
@@ -982,6 +1087,7 @@ static int rawv6_sendmsg(struct kiocb *iocb, struct sock *sk,
 		err = PTR_ERR(dst);
 		goto out;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (hlimit < 0) {
 		if (ipv6_addr_is_multicast(&fl6.daddr))
@@ -991,6 +1097,10 @@ static int rawv6_sendmsg(struct kiocb *iocb, struct sock *sk,
 		if (hlimit < 0)
 			hlimit = ip6_dst_hoplimit(dst);
 	}
+=======
+	if (hlimit < 0)
+		hlimit = ip6_sk_dst_hoplimit(np, &fl6, dst);
+>>>>>>> v3.18
 =======
 	if (hlimit < 0)
 		hlimit = ip6_sk_dst_hoplimit(np, &fl6, dst);
@@ -1012,7 +1122,11 @@ back_from_confirm:
 		lock_sock(sk);
 		err = ip6_append_data(sk, ip_generic_getfrag, msg->msg_iov,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			len, 0, hlimit, tclass, opt, &fl6, (struct rt6_info*)dst,
+=======
+			len, 0, hlimit, tclass, opt, &fl6, (struct rt6_info *)dst,
+>>>>>>> v3.18
 =======
 			len, 0, hlimit, tclass, opt, &fl6, (struct rt6_info *)dst,
 >>>>>>> v3.18
@@ -1029,7 +1143,10 @@ done:
 out:
 	fl6_sock_release(flowlabel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	txopt_put(opt_to_free);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err < 0 ? err : len;
@@ -1176,7 +1293,11 @@ static int do_rawv6_getsockopt(struct sock *sk, int level, int optname,
 	int val, len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_user(len,optlen))
+=======
+	if (get_user(len, optlen))
+>>>>>>> v3.18
 =======
 	if (get_user(len, optlen))
 >>>>>>> v3.18
@@ -1204,7 +1325,11 @@ static int do_rawv6_getsockopt(struct sock *sk, int level, int optname,
 	if (put_user(len, optlen))
 		return -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (copy_to_user(optval,&val,len))
+=======
+	if (copy_to_user(optval, &val, len))
+>>>>>>> v3.18
 =======
 	if (copy_to_user(optval, &val, len))
 >>>>>>> v3.18
@@ -1271,7 +1396,12 @@ static int rawv6_ioctl(struct sock *sk, int cmd, unsigned long arg)
 		skb = skb_peek(&sk->sk_receive_queue);
 		if (skb != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			amount = skb->len;
+=======
+			amount = skb_tail_pointer(skb) -
+				skb_transport_header(skb);
+>>>>>>> v3.18
 =======
 			amount = skb_tail_pointer(skb) -
 				skb_transport_header(skb);
@@ -1348,7 +1478,11 @@ struct proto rawv6_prot = {
 	.close		   = rawv6_close,
 	.destroy	   = raw6_destroy,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.connect	   = ip6_datagram_connect,
+=======
+	.connect	   = ip6_datagram_connect_v6_only,
+>>>>>>> v3.18
 =======
 	.connect	   = ip6_datagram_connect_v6_only,
 >>>>>>> v3.18
@@ -1373,6 +1507,7 @@ struct proto rawv6_prot = {
 };
 
 #ifdef CONFIG_PROC_FS
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void raw6_sock_seq_show(struct seq_file *seq, struct sock *sp, int i)
 {
@@ -1414,6 +1549,8 @@ static int raw6_seq_show(struct seq_file *seq, void *v)
 	else
 		raw6_sock_seq_show(seq, v, raw_seq_private(seq)->bucket);
 =======
+=======
+>>>>>>> v3.18
 static int raw6_seq_show(struct seq_file *seq, void *v)
 {
 	if (v == SEQ_START_TOKEN) {
@@ -1424,6 +1561,9 @@ static int raw6_seq_show(struct seq_file *seq, void *v)
 		ip6_dgram_sock_seq_show(seq, v, srcp, 0,
 					raw_seq_private(seq)->bucket);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1479,7 +1619,11 @@ void raw6_proc_exit(void)
 
 /* Same as inet6_dgram_ops, sans udp_poll.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct proto_ops inet6_sockraw_ops = {
+=======
+static const struct proto_ops inet6_sockraw_ops = {
+>>>>>>> v3.18
 =======
 static const struct proto_ops inet6_sockraw_ops = {
 >>>>>>> v3.18
@@ -1513,7 +1657,10 @@ static struct inet_protosw rawv6_protosw = {
 	.prot		= &rawv6_prot,
 	.ops		= &inet6_sockraw_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.no_check	= UDP_CSUM_DEFAULT,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.flags		= INET_PROTOSW_REUSE,

@@ -133,13 +133,19 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void delayed_free_pidns(struct rcu_head *p)
 {
 	kmem_cache_free(pid_ns_cachep,
 			container_of(p, struct pid_namespace, rcu));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void destroy_pid_namespace(struct pid_namespace *ns)
 {
@@ -150,7 +156,11 @@ static void destroy_pid_namespace(struct pid_namespace *ns)
 		kfree(ns->pidmap[i].page);
 	put_user_ns(ns->user_ns);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kmem_cache_free(pid_ns_cachep, ns);
+=======
+	call_rcu(&ns->rcu, delayed_free_pidns);
+>>>>>>> v3.18
 =======
 	call_rcu(&ns->rcu, delayed_free_pidns);
 >>>>>>> v3.18
@@ -345,7 +355,11 @@ static int pidns_install(struct nsproxy *nsproxy, void *ns)
 
 	if (!ns_capable(new->user_ns, CAP_SYS_ADMIN) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !nsown_capable(CAP_SYS_ADMIN))
+=======
+	    !ns_capable(current_user_ns(), CAP_SYS_ADMIN))
+>>>>>>> v3.18
 =======
 	    !ns_capable(current_user_ns(), CAP_SYS_ADMIN))
 >>>>>>> v3.18
@@ -369,8 +383,13 @@ static int pidns_install(struct nsproxy *nsproxy, void *ns)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_pid_ns(nsproxy->pid_ns);
 	nsproxy->pid_ns = get_pid_ns(new);
+=======
+	put_pid_ns(nsproxy->pid_ns_for_children);
+	nsproxy->pid_ns_for_children = get_pid_ns(new);
+>>>>>>> v3.18
 =======
 	put_pid_ns(nsproxy->pid_ns_for_children);
 	nsproxy->pid_ns_for_children = get_pid_ns(new);

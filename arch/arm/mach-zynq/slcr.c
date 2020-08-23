@@ -15,6 +15,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
 #include <linux/io.h>
 #include <linux/fs.h>
@@ -43,6 +44,8 @@
 
 void __iomem *zynq_slcr_base;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/mfd/syscon.h>
 #include <linux/of_address.h>
@@ -129,6 +132,9 @@ u32 zynq_slcr_get_device_id(void)
 
 	return val;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -144,7 +150,11 @@ void zynq_slcr_system_reset(void)
 	 * functions or there's a lockup?
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(SLCR_UNLOCK_MAGIC, zynq_slcr_base + SLCR_UNLOCK);
+=======
+	zynq_slcr_unlock();
+>>>>>>> v3.18
 =======
 	zynq_slcr_unlock();
 >>>>>>> v3.18
@@ -155,9 +165,15 @@ void zynq_slcr_system_reset(void)
 	 * This is a temporary solution until we know more.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reboot = readl(zynq_slcr_base + SLCR_REBOOT_STATUS);
 	writel(reboot & 0xF0FFFFFF, zynq_slcr_base + SLCR_REBOOT_STATUS);
 	writel(1, zynq_slcr_base + SLCR_PS_RST_CTRL_OFFSET);
+=======
+	zynq_slcr_read(&reboot, SLCR_REBOOT_STATUS_OFFSET);
+	zynq_slcr_write(reboot & 0xF0FFFFFF, SLCR_REBOOT_STATUS_OFFSET);
+	zynq_slcr_write(1, SLCR_PS_RST_CTRL_OFFSET);
+>>>>>>> v3.18
 =======
 	zynq_slcr_read(&reboot, SLCR_REBOOT_STATUS_OFFSET);
 	zynq_slcr_write(reboot & 0xF0FFFFFF, SLCR_REBOOT_STATUS_OFFSET);
@@ -172,12 +188,15 @@ void zynq_slcr_system_reset(void)
 void zynq_slcr_cpu_start(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable CPUn */
 	writel(SLCR_A9_CPU_CLKSTOP << cpu,
 	       zynq_slcr_base + SLCR_A9_CPU_RST_CTRL);
 	/* enable CLK for CPUn */
 	writel(0x0 << cpu, zynq_slcr_base + SLCR_A9_CPU_RST_CTRL);
 =======
+=======
+>>>>>>> v3.18
 	u32 reg;
 
 	zynq_slcr_read(&reg, SLCR_A9_CPU_RST_CTRL_OFFSET);
@@ -187,6 +206,9 @@ void zynq_slcr_cpu_start(int cpu)
 	zynq_slcr_write(reg, SLCR_A9_CPU_RST_CTRL_OFFSET);
 
 	zynq_slcr_cpu_state_write(cpu, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -197,6 +219,7 @@ void zynq_slcr_cpu_start(int cpu)
 void zynq_slcr_cpu_stop(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* stop CLK and reset CPUn */
 	writel((SLCR_A9_CPU_CLKSTOP | SLCR_A9_CPU_RST) << cpu,
 	       zynq_slcr_base + SLCR_A9_CPU_RST_CTRL);
@@ -206,6 +229,8 @@ void zynq_slcr_cpu_stop(int cpu)
  * zynq_slcr_init
  * Returns 0 on success, negative errno otherwise.
 =======
+=======
+>>>>>>> v3.18
 	u32 reg;
 
 	zynq_slcr_read(&reg, SLCR_A9_CPU_RST_CTRL_OFFSET);
@@ -256,6 +281,9 @@ void zynq_slcr_cpu_state_write(int cpu, bool die)
 /**
  * zynq_slcr_init - Regular slcr driver init
  * Return:	0 on success, negative errno otherwise.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Called early during boot from platform code to remap SLCR area.
@@ -263,7 +291,10 @@ void zynq_slcr_cpu_state_write(int cpu, bool die)
 int __init zynq_slcr_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	zynq_slcr_regmap = syscon_regmap_lookup_by_compatible("xlnx,zynq-slcr");
 	if (IS_ERR(zynq_slcr_regmap)) {
 		pr_err("%s: failed to find zynq-slcr\n", __func__);
@@ -282,6 +313,9 @@ int __init zynq_slcr_init(void)
  */
 int __init zynq_early_slcr_init(void)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct device_node *np;
 
@@ -298,6 +332,7 @@ int __init zynq_early_slcr_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* unlock the SLCR so that registers can be changed */
 	writel(SLCR_UNLOCK_MAGIC, zynq_slcr_base + SLCR_UNLOCK);
 
@@ -306,6 +341,8 @@ int __init zynq_early_slcr_init(void)
 	xilinx_zynq_clocks_init(zynq_slcr_base);
 
 =======
+=======
+>>>>>>> v3.18
 	np->data = (__force void *)zynq_slcr_base;
 
 	/* unlock the SLCR so that registers can be changed */
@@ -313,6 +350,9 @@ int __init zynq_early_slcr_init(void)
 
 	pr_info("%s mapped to %p\n", np->name, zynq_slcr_base);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	of_node_put(np);
 

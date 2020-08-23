@@ -36,15 +36,21 @@
 #include <linux/pm.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/mmc/host.h>
 #include <linux/mmc/pm.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 
 #include <linux/mmc/host.h>
 #include <linux/mmc/pm.h>
 #include <linux/mmc/slot-gpio.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/mmc/sdhci.h>
 
@@ -52,8 +58,14 @@
 
 enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SDHCI_ACPI_SD_CD	= BIT(0),
 	SDHCI_ACPI_RUNTIME_PM	= BIT(1),
+=======
+	SDHCI_ACPI_SD_CD		= BIT(0),
+	SDHCI_ACPI_RUNTIME_PM		= BIT(1),
+	SDHCI_ACPI_SD_CD_OVERRIDE_LEVEL	= BIT(2),
+>>>>>>> v3.18
 =======
 	SDHCI_ACPI_SD_CD		= BIT(0),
 	SDHCI_ACPI_RUNTIME_PM		= BIT(1),
@@ -79,6 +91,11 @@ struct sdhci_acpi_slot {
 	mmc_pm_flag_t	pm_caps;
 	unsigned int	flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*probe_slot)(struct platform_device *, const char *, const char *);
+	int (*remove_slot)(struct platform_device *);
+>>>>>>> v3.18
 =======
 	int (*probe_slot)(struct platform_device *, const char *, const char *);
 	int (*remove_slot)(struct platform_device *);
@@ -103,6 +120,7 @@ static int sdhci_acpi_enable_dma(struct sdhci_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct sdhci_ops sdhci_acpi_ops_dflt = {
 	.enable_dma = sdhci_acpi_enable_dma,
 };
@@ -115,6 +133,8 @@ static const struct sdhci_acpi_slot sdhci_acpi_slot_int_emmc = {
 
 static const struct sdhci_acpi_slot sdhci_acpi_slot_int_sdio = {
 =======
+=======
+>>>>>>> v3.18
 static void sdhci_acpi_int_hw_reset(struct sdhci_host *host)
 {
 	u8 reg;
@@ -216,16 +236,22 @@ static const struct sdhci_acpi_slot sdhci_acpi_slot_int_emmc = {
 
 static const struct sdhci_acpi_slot sdhci_acpi_slot_int_sdio = {
 	.quirks  = SDHCI_QUIRK_BROKEN_CARD_DETECTION,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.quirks2 = SDHCI_QUIRK2_HOST_OFF_CARD_ON,
 	.caps    = MMC_CAP_NONREMOVABLE | MMC_CAP_POWER_OFF_CARD,
 	.flags   = SDHCI_ACPI_RUNTIME_PM,
 	.pm_caps = MMC_PM_KEEP_POWER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static const struct sdhci_acpi_slot sdhci_acpi_slot_int_sd = {
 =======
+=======
+>>>>>>> v3.18
 	.probe_slot	= sdhci_acpi_sdio_probe_slot,
 };
 
@@ -235,6 +261,9 @@ static const struct sdhci_acpi_slot sdhci_acpi_slot_int_sd = {
 	.quirks2 = SDHCI_QUIRK2_CARD_ON_NEEDS_BUS_ON |
 		   SDHCI_QUIRK2_STOP_WITH_TC,
 	.probe_slot	= sdhci_acpi_sd_probe_slot,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -248,14 +277,20 @@ static const struct sdhci_acpi_uid_slot sdhci_acpi_uids[] = {
 	{ "80860F14" , "1" , &sdhci_acpi_slot_int_emmc },
 	{ "80860F14" , "3" , &sdhci_acpi_slot_int_sd   },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "INT33BB"  , "2" , &sdhci_acpi_slot_int_sdio },
 	{ "INT33C6"  , NULL, &sdhci_acpi_slot_int_sdio },
 =======
+=======
+>>>>>>> v3.18
 	{ "80860F16" , NULL, &sdhci_acpi_slot_int_sd   },
 	{ "INT33BB"  , "2" , &sdhci_acpi_slot_int_sdio },
 	{ "INT33BB"  , "3" , &sdhci_acpi_slot_int_sd },
 	{ "INT33C6"  , NULL, &sdhci_acpi_slot_int_sdio },
 	{ "INT3436"  , NULL, &sdhci_acpi_slot_int_sdio },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ "PNP0D40"  },
 	{ },
@@ -264,13 +299,19 @@ static const struct sdhci_acpi_uid_slot sdhci_acpi_uids[] = {
 static const struct acpi_device_id sdhci_acpi_ids[] = {
 	{ "80860F14" },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "INT33BB"  },
 	{ "INT33C6"  },
 =======
+=======
+>>>>>>> v3.18
 	{ "80860F16" },
 	{ "INT33BB"  },
 	{ "INT33C6"  },
 	{ "INT3436"  },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ "PNP0D40"  },
 	{ },
@@ -278,8 +319,13 @@ static const struct acpi_device_id sdhci_acpi_ids[] = {
 MODULE_DEVICE_TABLE(acpi, sdhci_acpi_ids);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct sdhci_acpi_slot *sdhci_acpi_get_slot_by_ids(const char *hid,
 								const char *uid)
+=======
+static const struct sdhci_acpi_slot *sdhci_acpi_get_slot(const char *hid,
+							 const char *uid)
+>>>>>>> v3.18
 =======
 static const struct sdhci_acpi_slot *sdhci_acpi_get_slot(const char *hid,
 							 const char *uid)
@@ -298,6 +344,7 @@ static const struct sdhci_acpi_slot *sdhci_acpi_get_slot(const char *hid,
 	return NULL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct sdhci_acpi_slot *sdhci_acpi_get_slot(acpi_handle handle,
 							 const char *hid)
@@ -319,6 +366,8 @@ static const struct sdhci_acpi_slot *sdhci_acpi_get_slot(acpi_handle handle,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int sdhci_acpi_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
@@ -330,6 +379,10 @@ static int sdhci_acpi_probe(struct platform_device *pdev)
 	resource_size_t len;
 	const char *hid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *uid;
+>>>>>>> v3.18
 =======
 	const char *uid;
 >>>>>>> v3.18
@@ -343,6 +396,10 @@ static int sdhci_acpi_probe(struct platform_device *pdev)
 
 	hid = acpi_device_hid(device);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uid = device->pnp.unique_id;
+>>>>>>> v3.18
 =======
 	uid = device->pnp.unique_id;
 >>>>>>> v3.18
@@ -365,7 +422,11 @@ static int sdhci_acpi_probe(struct platform_device *pdev)
 	c = sdhci_priv(host);
 	c->host = host;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c->slot = sdhci_acpi_get_slot(handle, hid);
+=======
+	c->slot = sdhci_acpi_get_slot(hid, uid);
+>>>>>>> v3.18
 =======
 	c->slot = sdhci_acpi_get_slot(hid, uid);
 >>>>>>> v3.18
@@ -396,12 +457,15 @@ static int sdhci_acpi_probe(struct platform_device *pdev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->dma_mask = &dev->coherent_dma_mask;
 		dev->coherent_dma_mask = dma_mask;
 	}
 
 	if (c->slot) {
 =======
+=======
+>>>>>>> v3.18
 		err = dma_coerce_mask_and_coherent(dev, dma_mask);
 		if (err)
 			goto err_free;
@@ -413,6 +477,9 @@ static int sdhci_acpi_probe(struct platform_device *pdev)
 			if (err)
 				goto err_free;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (c->slot->chip) {
 			host->ops            = c->slot->chip->ops;
@@ -432,7 +499,10 @@ static int sdhci_acpi_probe(struct platform_device *pdev)
 	host->mmc->caps2 |= MMC_CAP2_NO_PRESCAN_POWERUP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (sdhci_acpi_flag(c, SDHCI_ACPI_SD_CD)) {
 		bool v = sdhci_acpi_flag(c, SDHCI_ACPI_SD_CD_OVERRIDE_LEVEL);
 
@@ -442,6 +512,9 @@ static int sdhci_acpi_probe(struct platform_device *pdev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = sdhci_add_host(host);
 	if (err)
@@ -459,7 +532,10 @@ static int sdhci_acpi_probe(struct platform_device *pdev)
 
 err_free:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sdhci_free_host(c->host);
@@ -479,15 +555,21 @@ static int sdhci_acpi_remove(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dead = (sdhci_readl(c->host, SDHCI_INT_STATUS) == ~0);
 	sdhci_remove_host(c->host, dead);
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	if (c->slot && c->slot->remove_slot)
 		c->slot->remove_slot(pdev);
 
 	dead = (sdhci_readl(c->host, SDHCI_INT_STATUS) == ~0);
 	sdhci_remove_host(c->host, dead);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sdhci_free_host(c->host);
 
@@ -539,6 +621,7 @@ static int sdhci_acpi_runtime_idle(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 
 #define sdhci_acpi_runtime_suspend	NULL
@@ -547,15 +630,22 @@ static int sdhci_acpi_runtime_idle(struct device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #endif
 
 static const struct dev_pm_ops sdhci_acpi_pm_ops = {
 	.suspend		= sdhci_acpi_suspend,
 	.resume			= sdhci_acpi_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.runtime_suspend	= sdhci_acpi_runtime_suspend,
 	.runtime_resume		= sdhci_acpi_runtime_resume,
 	.runtime_idle		= sdhci_acpi_runtime_idle,
+=======
+	SET_RUNTIME_PM_OPS(sdhci_acpi_runtime_suspend,
+			sdhci_acpi_runtime_resume, sdhci_acpi_runtime_idle)
+>>>>>>> v3.18
 =======
 	SET_RUNTIME_PM_OPS(sdhci_acpi_runtime_suspend,
 			sdhci_acpi_runtime_resume, sdhci_acpi_runtime_idle)

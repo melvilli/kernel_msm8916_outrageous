@@ -77,7 +77,11 @@ to enable these ioctls.</para>
 
     <para>To write a register applications must initialize all fields
 <<<<<<< HEAD
+<<<<<<< HEAD
 of a &v4l2-dbg-register; and call
+=======
+of a &v4l2-dbg-register; except for <structfield>size</structfield> and call
+>>>>>>> v3.18
 =======
 of a &v4l2-dbg-register; except for <structfield>size</structfield> and call
 >>>>>>> v3.18
@@ -96,8 +100,13 @@ written into the register.</para>
 <constant>VIDIOC_DBG_G_REGISTER</constant> with a pointer to this
 structure. On success the driver stores the register value in the
 <<<<<<< HEAD
+<<<<<<< HEAD
 <structfield>val</structfield> field. On failure the structure remains
 unchanged.</para>
+=======
+<structfield>val</structfield> field and the size (in bytes) of the
+value in <structfield>size</structfield>.</para>
+>>>>>>> v3.18
 =======
 <structfield>val</structfield> field and the size (in bytes) of the
 value in <structfield>size</structfield>.</para>
@@ -111,6 +120,7 @@ chip connected to the PCI or USB bus. You can find out which chips are
 present with the &VIDIOC-DBG-G-CHIP-INFO; ioctl.</para>
 
     <para>When <structfield>match.type</structfield> is
+<<<<<<< HEAD
 <<<<<<< HEAD
 <constant>V4L2_CHIP_MATCH_I2C_DRIVER</constant>,
 <structfield>match.name</structfield> contains the I2C driver name.
@@ -150,6 +160,11 @@ call confirming the presence of the selected &i2c; chip.</para>
 <structfield>match.addr</structfield> selects the nth sub-device.</para>
 
 >>>>>>> v3.18
+=======
+<constant>V4L2_CHIP_MATCH_SUBDEV</constant>,
+<structfield>match.addr</structfield> selects the nth sub-device.</para>
+
+>>>>>>> v3.18
     <para>These ioctls are optional, not all drivers may support them.
 However when a driver supports these ioctls it must also support
 &VIDIOC-DBG-G-CHIP-INFO;. Conversely it may support
@@ -166,7 +181,11 @@ url="http://linuxtv.org/repo/">http://linuxtv.org/repo/</ulink> for
 access instructions.</para>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <!-- Note for convenience vidioc-dbg-g-chip-ident.sgml
+=======
+    <!-- Note for convenience vidioc-dbg-g-chip-info.sgml
+>>>>>>> v3.18
 =======
     <!-- Note for convenience vidioc-dbg-g-chip-info.sgml
 >>>>>>> v3.18
@@ -180,7 +199,11 @@ access instructions.</para>
 	    <entry>__u32</entry>
 	    <entry><structfield>type</structfield></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>See <xref linkend="ident-chip-match-types" /> for a list of
+=======
+	    <entry>See <xref linkend="chip-match-types" /> for a list of
+>>>>>>> v3.18
 =======
 	    <entry>See <xref linkend="chip-match-types" /> for a list of
 >>>>>>> v3.18
@@ -203,7 +226,11 @@ to the <structfield>type</structfield> field.</entry>
 	    <entry><structfield>name[32]</structfield></entry>
 	    <entry>Match a chip by this name, interpreted according
 <<<<<<< HEAD
+<<<<<<< HEAD
 to the <structfield>type</structfield> field.</entry>
+=======
+to the <structfield>type</structfield> field. Currently unused.</entry>
+>>>>>>> v3.18
 =======
 to the <structfield>type</structfield> field. Currently unused.</entry>
 >>>>>>> v3.18
@@ -227,12 +254,18 @@ to the <structfield>type</structfield> field. Currently unused.</entry>
 	  </row>
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    <entry>__u32</entry>
 	    <entry><structfield>size</structfield></entry>
 	    <entry>The register size in bytes.</entry>
 	  </row>
 	  <row>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry>__u64</entry>
 	    <entry><structfield>reg</structfield></entry>
@@ -249,7 +282,11 @@ register.</entry>
     </table>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <!-- Note for convenience vidioc-dbg-g-chip-ident.sgml
+=======
+    <!-- Note for convenience vidioc-dbg-g-chip-info.sgml
+>>>>>>> v3.18
 =======
     <!-- Note for convenience vidioc-dbg-g-chip-info.sgml
 >>>>>>> v3.18
@@ -267,6 +304,7 @@ register.</entry>
 	  </row>
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry><constant>V4L2_CHIP_MATCH_I2C_DRIVER</constant></entry>
 	    <entry>1</entry>
 	    <entry>Match an &i2c; chip by its driver name.</entry>
@@ -282,6 +320,8 @@ register.</entry>
 	    <entry>Match the nth anciliary AC97 chip.</entry>
 	  </row>
 	  <row>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	    <entry><constant>V4L2_CHIP_MATCH_SUBDEV</constant></entry>

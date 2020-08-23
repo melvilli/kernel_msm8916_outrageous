@@ -48,8 +48,11 @@
 #include "kstack.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NUM_IVECS	(IMAP_INR + 1)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct ino_bucket *ivector_table;
@@ -111,6 +114,7 @@ static void bucket_set_irq(unsigned long bucket_pa, unsigned int irq)
 #define irq_work_pa(__cpu)	&(trap_block[(__cpu)].irq_worklist_pa)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct {
 	unsigned int dev_handle;
 	unsigned int dev_ino;
@@ -161,6 +165,8 @@ void irq_free(unsigned int irq)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 static unsigned long hvirq_major __initdata;
 static int __init early_hvirq_major(char *p)
 {
@@ -351,6 +357,9 @@ void irq_install_pre_handler(int irq,
 {
 	pr_warn("IRQ pre handler NOT supported.\n");
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -403,6 +412,7 @@ static unsigned int sun4u_compute_tid(unsigned long imap, unsigned long cpuid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct irq_handler_data {
 	unsigned long	iclr;
 	unsigned long	imap;
@@ -412,6 +422,8 @@ struct irq_handler_data {
 	void		*arg2;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_SMP
@@ -516,8 +528,13 @@ static void sun4u_irq_eoi(struct irq_data *data)
 static void sun4v_irq_enable(struct irq_data *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ino = irq_table[data->irq].dev_ino;
 	unsigned long cpuid = irq_choose_cpu(data->irq, data->affinity);
+=======
+	unsigned long cpuid = irq_choose_cpu(data->irq, data->affinity);
+	unsigned int ino = irq_data_to_sysino(data);
+>>>>>>> v3.18
 =======
 	unsigned long cpuid = irq_choose_cpu(data->irq, data->affinity);
 	unsigned int ino = irq_data_to_sysino(data);
@@ -542,8 +559,13 @@ static int sun4v_set_affinity(struct irq_data *data,
 			       const struct cpumask *mask, bool force)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ino = irq_table[data->irq].dev_ino;
 	unsigned long cpuid = irq_choose_cpu(data->irq, mask);
+=======
+	unsigned long cpuid = irq_choose_cpu(data->irq, mask);
+	unsigned int ino = irq_data_to_sysino(data);
+>>>>>>> v3.18
 =======
 	unsigned long cpuid = irq_choose_cpu(data->irq, mask);
 	unsigned int ino = irq_data_to_sysino(data);
@@ -561,7 +583,11 @@ static int sun4v_set_affinity(struct irq_data *data,
 static void sun4v_irq_disable(struct irq_data *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ino = irq_table[data->irq].dev_ino;
+=======
+	unsigned int ino = irq_data_to_sysino(data);
+>>>>>>> v3.18
 =======
 	unsigned int ino = irq_data_to_sysino(data);
 >>>>>>> v3.18
@@ -576,7 +602,11 @@ static void sun4v_irq_disable(struct irq_data *data)
 static void sun4v_irq_eoi(struct irq_data *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ino = irq_table[data->irq].dev_ino;
+=======
+	unsigned int ino = irq_data_to_sysino(data);
+>>>>>>> v3.18
 =======
 	unsigned int ino = irq_data_to_sysino(data);
 >>>>>>> v3.18
@@ -591,7 +621,13 @@ static void sun4v_irq_eoi(struct irq_data *data)
 static void sun4v_virq_enable(struct irq_data *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long cpuid, dev_handle, dev_ino;
+=======
+	unsigned long dev_handle = irq_data_to_handle(data);
+	unsigned long dev_ino = irq_data_to_ino(data);
+	unsigned long cpuid;
+>>>>>>> v3.18
 =======
 	unsigned long dev_handle = irq_data_to_handle(data);
 	unsigned long dev_ino = irq_data_to_ino(data);
@@ -602,9 +638,12 @@ static void sun4v_virq_enable(struct irq_data *data)
 	cpuid = irq_choose_cpu(data->irq, data->affinity);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_handle = irq_table[data->irq].dev_handle;
 	dev_ino = irq_table[data->irq].dev_ino;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = sun4v_vintr_set_target(dev_handle, dev_ino, cpuid);
@@ -630,7 +669,13 @@ static int sun4v_virt_set_affinity(struct irq_data *data,
 				    const struct cpumask *mask, bool force)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long cpuid, dev_handle, dev_ino;
+=======
+	unsigned long dev_handle = irq_data_to_handle(data);
+	unsigned long dev_ino = irq_data_to_ino(data);
+	unsigned long cpuid;
+>>>>>>> v3.18
 =======
 	unsigned long dev_handle = irq_data_to_handle(data);
 	unsigned long dev_ino = irq_data_to_ino(data);
@@ -641,9 +686,12 @@ static int sun4v_virt_set_affinity(struct irq_data *data,
 	cpuid = irq_choose_cpu(data->irq, mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_handle = irq_table[data->irq].dev_handle;
 	dev_ino = irq_table[data->irq].dev_ino;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = sun4v_vintr_set_target(dev_handle, dev_ino, cpuid);
@@ -658,16 +706,22 @@ static int sun4v_virt_set_affinity(struct irq_data *data,
 static void sun4v_virq_disable(struct irq_data *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long dev_handle, dev_ino;
 	int err;
 
 	dev_handle = irq_table[data->irq].dev_handle;
 	dev_ino = irq_table[data->irq].dev_ino;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long dev_handle = irq_data_to_handle(data);
 	unsigned long dev_ino = irq_data_to_ino(data);
 	int err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = sun4v_vintr_set_valid(dev_handle, dev_ino,
@@ -681,6 +735,7 @@ static void sun4v_virq_disable(struct irq_data *data)
 static void sun4v_virq_eoi(struct irq_data *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long dev_handle, dev_ino;
 	int err;
 
@@ -688,10 +743,15 @@ static void sun4v_virq_eoi(struct irq_data *data)
 	dev_ino = irq_table[data->irq].dev_ino;
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long dev_handle = irq_data_to_handle(data);
 	unsigned long dev_ino = irq_data_to_ino(data);
 	int err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = sun4v_vintr_set_state(dev_handle, dev_ino,
 				    HV_INTR_STATE_IDLE);
@@ -729,6 +789,7 @@ static struct irq_chip sun4v_virq = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pre_flow_handler(struct irq_data *d)
 {
 	struct irq_handler_data *handler_data = irq_data_get_irq_handler_data(d);
@@ -755,10 +816,15 @@ unsigned int build_irq(int inofixup, unsigned long iclr, unsigned long imap)
 	struct ino_bucket *bucket;
 	struct irq_handler_data *handler_data;
 =======
+=======
+>>>>>>> v3.18
 unsigned int build_irq(int inofixup, unsigned long iclr, unsigned long imap)
 {
 	struct irq_handler_data *handler_data;
 	struct ino_bucket *bucket;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int irq;
 	int ino;
@@ -793,6 +859,7 @@ out:
 	return irq;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned int sun4v_build_common(unsigned long sysino,
 				       struct irq_chip *chip)
@@ -908,6 +975,8 @@ void ack_bad_irq(unsigned int irq)
 	printk(KERN_CRIT "Unexpected IRQ from ino[%x] irq[%u]\n",
 	       ino, irq);
 =======
+=======
+>>>>>>> v3.18
 static unsigned int sun4v_build_common(u32 devhandle, unsigned int devino,
 		void (*handler_data_init)(struct irq_handler_data *data,
 		u32 devhandle, unsigned int devino),
@@ -1068,6 +1137,9 @@ unsigned int sun4v_build_virq(u32 devhandle, unsigned int devino)
 
 out:
 	return irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1118,6 +1190,7 @@ void __irq_entry handler_irq(int pil, struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void do_softirq(void)
 {
 	unsigned long flags;
@@ -1143,6 +1216,8 @@ void do_softirq(void)
 
 	local_irq_restore(flags);
 =======
+=======
+>>>>>>> v3.18
 void do_softirq_own_stack(void)
 {
 	void *orig_sp, *sp = softirq_stack[smp_processor_id()];
@@ -1156,6 +1231,9 @@ void do_softirq_own_stack(void)
 	__do_softirq();
 	__asm__ __volatile__("mov %0, %%sp"
 			     : : "r" (orig_sp));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1167,16 +1245,22 @@ void fixup_irqs(void)
 	for (irq = 0; irq < NR_IRQS; irq++) {
 		struct irq_desc *desc = irq_to_desc(irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct irq_data *data = irq_desc_get_irq_data(desc);
 		unsigned long flags;
 
 =======
+=======
+>>>>>>> v3.18
 		struct irq_data *data;
 		unsigned long flags;
 
 		if (!desc)
 			continue;
 		data = irq_desc_get_irq_data(desc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		raw_spin_lock_irqsave(&desc->lock, flags);
 		if (desc->action && !irqd_is_per_cpu(data)) {
@@ -1280,7 +1364,12 @@ void notrace init_irqwork_curcpu(void)
  * from these two routines.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit notrace register_one_mondo(unsigned long paddr, unsigned long type, unsigned long qmask)
+=======
+static void notrace register_one_mondo(unsigned long paddr, unsigned long type,
+				       unsigned long qmask)
+>>>>>>> v3.18
 =======
 static void notrace register_one_mondo(unsigned long paddr, unsigned long type,
 				       unsigned long qmask)
@@ -1298,7 +1387,11 @@ static void notrace register_one_mondo(unsigned long paddr, unsigned long type,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit notrace sun4v_register_mondo_queues(int this_cpu)
+=======
+void notrace sun4v_register_mondo_queues(int this_cpu)
+>>>>>>> v3.18
 =======
 void notrace sun4v_register_mondo_queues(int this_cpu)
 >>>>>>> v3.18
@@ -1386,6 +1479,7 @@ static struct irqaction timer_irq_action = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Only invoked on boot processor. */
 void __init init_IRQ(void)
 {
@@ -1397,6 +1491,8 @@ void __init init_IRQ(void)
 	size = sizeof(struct ino_bucket) * NUM_IVECS;
 	ivector_table = kzalloc(size, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 static void __init irq_ivector_init(void)
 {
 	unsigned long size, order;
@@ -1413,6 +1509,9 @@ static void __init irq_ivector_init(void)
 	order = get_order(size);
 	ivector_table = (struct ino_bucket *)
 		__get_free_pages(GFP_KERNEL | __GFP_ZERO, order);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ivector_table) {
 		prom_printf("Fatal error, cannot allocate ivector_table\n");
@@ -1423,7 +1522,10 @@ static void __init irq_ivector_init(void)
 
 	ivector_table_pa = __pa(ivector_table);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }
 
 /* Only invoked on boot processor.*/
@@ -1433,6 +1535,9 @@ void __init init_IRQ(void)
 	irq_ivector_init();
 	map_prom_timers();
 	kill_prom_timer();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (tlb_type == hypervisor)

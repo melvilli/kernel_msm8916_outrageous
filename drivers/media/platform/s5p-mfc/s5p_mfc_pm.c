@@ -22,6 +22,11 @@
 
 #define MFC_GATE_CLK_NAME	"mfc"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MFC_SCLK_NAME		"sclk_mfc"
+#define MFC_SCLK_RATE		(200 * 1000000)
+>>>>>>> v3.18
 =======
 #define MFC_SCLK_NAME		"sclk_mfc"
 #define MFC_SCLK_RATE		(200 * 1000000)
@@ -56,7 +61,10 @@ int s5p_mfc_init_pm(struct s5p_mfc_dev *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (dev->variant->version != MFC_VERSION_V6) {
 		pm->clock = clk_get(&dev->plat_dev->dev, MFC_SCLK_NAME);
 		if (IS_ERR(pm->clock)) {
@@ -71,6 +79,9 @@ int s5p_mfc_init_pm(struct s5p_mfc_dev *dev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	atomic_set(&pm->power, 0);
 #ifdef CONFIG_PM_RUNTIME
@@ -82,6 +93,12 @@ int s5p_mfc_init_pm(struct s5p_mfc_dev *dev)
 #endif
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+err_s_clk:
+	clk_put(pm->clock);
+>>>>>>> v3.18
 =======
 
 err_s_clk:
@@ -96,12 +113,18 @@ err_g_ip_clk:
 void s5p_mfc_final_pm(struct s5p_mfc_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (dev->variant->version != MFC_VERSION_V6 &&
 	    pm->clock) {
 		clk_disable_unprepare(pm->clock);
 		clk_put(pm->clock);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk_unprepare(pm->clock_gate);
 	clk_put(pm->clock_gate);

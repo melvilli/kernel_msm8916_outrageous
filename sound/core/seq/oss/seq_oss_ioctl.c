@@ -91,7 +91,10 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 
 	case SNDCTL_SEQ_PANIC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debug_printk(("panic\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		snd_seq_oss_reset(dp);
@@ -99,7 +102,10 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 
 	case SNDCTL_SEQ_SYNC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debug_printk(("sync\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (! is_write_mode(dp->file_mode) || dp->writeq == NULL)
@@ -112,7 +118,10 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 
 	case SNDCTL_SEQ_RESET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debug_printk(("reset\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		snd_seq_oss_reset(dp);
@@ -120,7 +129,10 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 
 	case SNDCTL_SEQ_TESTMIDI:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debug_printk(("test midi\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (get_user(dev, p))
@@ -129,7 +141,10 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 
 	case SNDCTL_SEQ_GETINCOUNT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debug_printk(("get in count\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (dp->readq == NULL || ! is_read_mode(dp->file_mode))
@@ -138,7 +153,10 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 
 	case SNDCTL_SEQ_GETOUTCOUNT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debug_printk(("get out count\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (! is_write_mode(dp->file_mode) || dp->writeq == NULL)
@@ -146,6 +164,7 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 		return put_user(snd_seq_oss_writeq_get_free_size(dp->writeq), p) ? -EFAULT : 0;
 
 	case SNDCTL_SEQ_GETTIME:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		debug_printk(("get time\n"));
 		return put_user(snd_seq_oss_timer_cur_tick(dp->timer), p) ? -EFAULT : 0;
@@ -157,11 +176,17 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 
 	case SNDCTL_SEQ_RESETSAMPLES:
 >>>>>>> v3.18
+=======
+		return put_user(snd_seq_oss_timer_cur_tick(dp->timer), p) ? -EFAULT : 0;
+
+	case SNDCTL_SEQ_RESETSAMPLES:
+>>>>>>> v3.18
 		if (get_user(dev, p))
 			return -EFAULT;
 		return snd_seq_oss_synth_ioctl(dp, dev, cmd, carg);
 
 	case SNDCTL_SEQ_NRSYNTHS:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		debug_printk(("nr synths\n"));
 		return put_user(dp->max_synthdev, p) ? -EFAULT : 0;
@@ -173,12 +198,17 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 	case SNDCTL_SYNTH_MEMAVL:
 		debug_printk(("mem avail\n"));
 =======
+=======
+>>>>>>> v3.18
 		return put_user(dp->max_synthdev, p) ? -EFAULT : 0;
 
 	case SNDCTL_SEQ_NRMIDIS:
 		return put_user(dp->max_mididev, p) ? -EFAULT : 0;
 
 	case SNDCTL_SYNTH_MEMAVL:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (get_user(dev, p))
 			return -EFAULT;
@@ -187,7 +217,10 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 
 	case SNDCTL_FM_4OP_ENABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debug_printk(("4op\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (get_user(dev, p))
@@ -197,6 +230,7 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 
 	case SNDCTL_SYNTH_INFO:
 	case SNDCTL_SYNTH_ID:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		debug_printk(("synth info\n"));
 		return snd_seq_oss_synth_info_user(dp, arg);
@@ -212,6 +246,8 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 	case SNDCTL_SEQ_THRESHOLD:
 		debug_printk(("threshold\n"));
 =======
+=======
+>>>>>>> v3.18
 		return snd_seq_oss_synth_info_user(dp, arg);
 
 	case SNDCTL_SEQ_OUTOFBAND:
@@ -221,6 +257,9 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 		return snd_seq_oss_midi_info_user(dp, arg);
 
 	case SNDCTL_SEQ_THRESHOLD:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (! is_write_mode(dp->file_mode))
 			return 0;
@@ -235,7 +274,10 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 
 	case SNDCTL_MIDI_PRETIME:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debug_printk(("pretime\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (dp->readq == NULL || !is_read_mode(dp->file_mode))
@@ -251,7 +293,10 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debug_printk(("others\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (! is_write_mode(dp->file_mode))

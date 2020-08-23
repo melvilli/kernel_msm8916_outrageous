@@ -9,15 +9,21 @@ listRCU.txt
 lockdep.txt
 	- RCU and lockdep checking
 <<<<<<< HEAD
+<<<<<<< HEAD
 NMI-RCU.txt
 	- Using RCU to Protect Dynamic NMI Handlers
 =======
+=======
+>>>>>>> v3.18
 lockdep-splat.txt
 	- RCU Lockdep splats explained.
 NMI-RCU.txt
 	- Using RCU to Protect Dynamic NMI Handlers
 rcu_dereference.txt
 	- Proper care and feeding of return values from rcu_dereference()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 rcubarrier.txt
 	- RCU and Unloadable Modules

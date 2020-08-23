@@ -158,7 +158,10 @@ static int mt2060_set_params(struct dvb_frontend *fe)
 	struct dtv_frontend_properties *c = &fe->dtv_property_cache;
 	struct mt2060_priv *priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret=0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i=0;
@@ -244,7 +247,11 @@ static int mt2060_set_params(struct dvb_frontend *fe)
 		fe->ops.i2c_gate_ctrl(fe, 0); /* close i2c_gate */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

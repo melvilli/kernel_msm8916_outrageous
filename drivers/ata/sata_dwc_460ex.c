@@ -30,8 +30,14 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/device.h>
+=======
+#include <linux/device.h>
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 #include <linux/of_address.h>
@@ -467,8 +473,12 @@ static irqreturn_t dma_dwc_interrupt(int irq, void *hsdev_instance)
 	u32 tfr_reg, err_reg;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sata_dwc_device *hsdev =
 		(struct sata_dwc_device *)hsdev_instance;
+=======
+	struct sata_dwc_device *hsdev = hsdev_instance;
+>>>>>>> v3.18
 =======
 	struct sata_dwc_device *hsdev = hsdev_instance;
 >>>>>>> v3.18
@@ -808,7 +818,11 @@ static int dma_dwc_init(struct sata_dwc_device *hsdev, int irq)
 		dev_err(host_pvt.dwc_dev, "%s: dma_request_interrupts returns"
 			" %d\n", __func__, err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return err;
+=======
+		goto error_out;
+>>>>>>> v3.18
 =======
 		goto error_out;
 >>>>>>> v3.18
@@ -823,12 +837,18 @@ static int dma_dwc_init(struct sata_dwc_device *hsdev, int irq)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 error_out:
 	dma_dwc_exit(hsdev);
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1680,7 +1700,11 @@ static int sata_dwc_probe(struct platform_device *ofdev)
 	u8 *base = NULL;
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq;
+=======
+	int irq, rc;
+>>>>>>> v3.18
 =======
 	int irq, rc;
 >>>>>>> v3.18
@@ -1747,7 +1771,11 @@ static int sata_dwc_probe(struct platform_device *ofdev)
 		dev_err(&ofdev->dev, "no SATA DMA irq\n");
 		err = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_iomap;
+=======
+		goto error_out;
+>>>>>>> v3.18
 =======
 		goto error_out;
 >>>>>>> v3.18
@@ -1760,7 +1788,11 @@ static int sata_dwc_probe(struct platform_device *ofdev)
 			" address\n");
 		err = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_iomap;
+=======
+		goto error_out;
+>>>>>>> v3.18
 =======
 		goto error_out;
 >>>>>>> v3.18
@@ -1771,9 +1803,13 @@ static int sata_dwc_probe(struct platform_device *ofdev)
 
 	/* Initialize AHB DMAC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = dma_dwc_init(hsdev, irq);
 	if (err)
 		goto error_dma_iomap;
+=======
+	dma_dwc_init(hsdev, irq);
+>>>>>>> v3.18
 =======
 	dma_dwc_init(hsdev, irq);
 >>>>>>> v3.18
@@ -1795,8 +1831,14 @@ static int sata_dwc_probe(struct platform_device *ofdev)
 	 * error_handler() to execute a dummy Softreset EH session
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = ata_host_activate(host, irq, sata_dwc_isr, 0, &sata_dwc_sht);
 	if (err)
+=======
+	rc = ata_host_activate(host, irq, sata_dwc_isr, 0, &sata_dwc_sht);
+
+	if (rc != 0)
+>>>>>>> v3.18
 =======
 	rc = ata_host_activate(host, irq, sata_dwc_isr, 0, &sata_dwc_sht);
 
@@ -1811,8 +1853,12 @@ error_out:
 	/* Free SATA DMA resources */
 	dma_dwc_exit(hsdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_dma_iomap:
 	iounmap((void __iomem *)host_pvt.sata_dma_regs);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1837,7 +1883,10 @@ static int sata_dwc_remove(struct platform_device *ofdev)
 	dma_dwc_exit(hsdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap((void __iomem *)host_pvt.sata_dma_regs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(hsdev->reg_base);

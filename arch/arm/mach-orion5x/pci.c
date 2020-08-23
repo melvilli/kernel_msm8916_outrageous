@@ -158,16 +158,22 @@ static int __init pcie_setup(struct pci_sys_data *sys)
 		printk(KERN_NOTICE "Applying Orion-1/Orion-NAS PCIe config "
 				   "read transaction workaround\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mvebu_mbus_add_window_remap_flags("pcie0.0",
 						  ORION5X_PCIE_WA_PHYS_BASE,
 						  ORION5X_PCIE_WA_SIZE,
 						  MVEBU_MBUS_NO_REMAP,
 						  MVEBU_MBUS_PCI_WA);
 =======
+=======
+>>>>>>> v3.18
 		mvebu_mbus_add_window_by_id(ORION_MBUS_PCIE_WA_TARGET,
 					    ORION_MBUS_PCIE_WA_ATTR,
 					    ORION5X_PCIE_WA_PHYS_BASE,
 					    ORION5X_PCIE_WA_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pcie_ops.read = pcie_rd_conf_wa;
 	}
@@ -249,17 +255,23 @@ static int __init pcie_setup(struct pci_sys_data *sys)
 				 ((n) == 1) ? ORION5X_PCI_REG(0xd08) : \
 				 ((n) == 2) ? ORION5X_PCI_REG(0xc0c) : \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 ((n) == 3) ? ORION5X_PCI_REG(0xd0c) : 0)
 #define PCI_BAR_REMAP_DDR_CS(n)	(((n) == 0) ? ORION5X_PCI_REG(0xc48) : \
 				 ((n) == 1) ? ORION5X_PCI_REG(0xd48) : \
 				 ((n) == 2) ? ORION5X_PCI_REG(0xc4c) : \
 				 ((n) == 3) ? ORION5X_PCI_REG(0xd4c) : 0)
 =======
+=======
+>>>>>>> v3.18
 				 ((n) == 3) ? ORION5X_PCI_REG(0xd0c) : NULL)
 #define PCI_BAR_REMAP_DDR_CS(n)	(((n) == 0) ? ORION5X_PCI_REG(0xc48) : \
 				 ((n) == 1) ? ORION5X_PCI_REG(0xd48) : \
 				 ((n) == 2) ? ORION5X_PCI_REG(0xc4c) : \
 				 ((n) == 3) ? ORION5X_PCI_REG(0xd4c) : NULL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PCI_BAR_ENABLE		ORION5X_PCI_REG(0xc3c)
 #define PCI_ADDR_DECODE_CTRL	ORION5X_PCI_REG(0xd3c)

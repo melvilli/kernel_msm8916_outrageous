@@ -37,7 +37,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -82,7 +85,11 @@ static int acard_ahci_port_start(struct ata_port *ap);
 static int acard_ahci_init_one(struct pci_dev *pdev, const struct pci_device_id *ent);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -127,7 +134,11 @@ static struct pci_driver acard_ahci_pci_driver = {
 	.probe			= acard_ahci_init_one,
 	.remove			= ata_pci_remove_one,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -137,15 +148,21 @@ static struct pci_driver acard_ahci_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int acard_ahci_pci_device_suspend(struct pci_dev *pdev, pm_message_t mesg)
 {
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int acard_ahci_pci_device_suspend(struct pci_dev *pdev, pm_message_t mesg)
 {
 	struct ata_host *host = pci_get_drvdata(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct ahci_host_priv *hpriv = host->private_data;
 	void __iomem *mmio = hpriv->mmio;
@@ -175,7 +192,11 @@ static int acard_ahci_pci_device_suspend(struct pci_dev *pdev, pm_message_t mesg
 static int acard_ahci_pci_device_resume(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
+=======
+	struct ata_host *host = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct ata_host *host = pci_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -465,7 +486,11 @@ static int acard_ahci_init_one(struct pci_dev *pdev, const struct pci_device_id 
 
 	/* save initial config */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ahci_save_initial_config(&pdev->dev, hpriv, 0, 0);
+=======
+	ahci_save_initial_config(&pdev->dev, hpriv);
+>>>>>>> v3.18
 =======
 	ahci_save_initial_config(&pdev->dev, hpriv);
 >>>>>>> v3.18
@@ -526,8 +551,12 @@ static int acard_ahci_init_one(struct pci_dev *pdev, const struct pci_device_id 
 
 	pci_set_master(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ata_host_activate(host, pdev->irq, ahci_interrupt, IRQF_SHARED,
 				 &acard_ahci_sht);
+=======
+	return ahci_host_activate(host, pdev->irq, &acard_ahci_sht);
+>>>>>>> v3.18
 =======
 	return ahci_host_activate(host, pdev->irq, &acard_ahci_sht);
 >>>>>>> v3.18

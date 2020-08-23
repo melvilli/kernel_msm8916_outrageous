@@ -172,15 +172,21 @@ ret_from_intr:
 					# returning to userspace
 	and	EPSW_nSL,d0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beq	resume_kernel		# returning to supervisor mode
 
 #ifdef CONFIG_PREEMPT
 ENTRY(resume_kernel)
 =======
+=======
+>>>>>>> v3.18
 	bne	resume_userspace	# returning to userspace
 
 #ifdef CONFIG_PREEMPT
 resume_kernel:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	LOCAL_IRQ_DISABLE
 	mov	(TI_preempt_count,a2),d0	# non-zero preempt_count ?
@@ -197,6 +203,11 @@ need_resched:
 	call	preempt_schedule_irq[],0
 	jmp	need_resched
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else
+	jmp	resume_kernel
+>>>>>>> v3.18
 =======
 #else
 	jmp	resume_kernel

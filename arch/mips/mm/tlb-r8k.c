@@ -9,7 +9,10 @@
  * Copyright (C) 2002 MIPS Technologies, Inc.  All rights reserved.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/sched.h>
@@ -217,7 +220,11 @@ void __update_tlb(struct vm_area_struct * vma, unsigned long address, pte_t pte)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit probe_tlb(unsigned long config)
+=======
+static void probe_tlb(unsigned long config)
+>>>>>>> v3.18
 =======
 static void probe_tlb(unsigned long config)
 >>>>>>> v3.18
@@ -228,7 +235,11 @@ static void probe_tlb(unsigned long config)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit tlb_init(void)
+=======
+void tlb_init(void)
+>>>>>>> v3.18
 =======
 void tlb_init(void)
 >>>>>>> v3.18

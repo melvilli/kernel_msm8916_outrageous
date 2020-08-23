@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -49,6 +52,7 @@ struct das08_board_struct {
 
 struct das08_private_struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int do_mux_bits;	/*  bits for do/mux register on boards without separate do register */
 	unsigned int do_bits;	/*  bits for do register on boards with register dedicated to digital out only */
 	const unsigned int *pg_gainlist;
@@ -58,6 +62,8 @@ struct das08_private_struct {
 int das08_common_attach(struct comedi_device *dev, unsigned long iobase);
 void das08_common_detach(struct comedi_device *dev);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int do_mux_bits;	/*  bits for do/mux register on boards
 					 *  without separate do register
 					 */
@@ -65,6 +71,9 @@ void das08_common_detach(struct comedi_device *dev);
 };
 
 int das08_common_attach(struct comedi_device *dev, unsigned long iobase);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _DAS08_H */

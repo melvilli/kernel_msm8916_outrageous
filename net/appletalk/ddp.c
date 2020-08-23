@@ -294,7 +294,11 @@ static int atif_probe_device(struct atalk_iface *atif)
 /* Perform AARP probing for a proxy address */
 static int atif_proxy_probe_device(struct atalk_iface *atif,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   struct atalk_addr* proxy_addr)
+=======
+				   struct atalk_addr *proxy_addr)
+>>>>>>> v3.18
 =======
 				   struct atalk_addr *proxy_addr)
 >>>>>>> v3.18
@@ -586,7 +590,11 @@ out:
 
 /* Delete a route. Find it and discard it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int atrtr_delete(struct atalk_addr * addr)
+=======
+static int atrtr_delete(struct atalk_addr *addr)
+>>>>>>> v3.18
 =======
 static int atrtr_delete(struct atalk_addr *addr)
 >>>>>>> v3.18
@@ -653,7 +661,11 @@ static int ddp_device_event(struct notifier_block *this, unsigned long event,
 			    void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -949,17 +961,23 @@ static unsigned long atalk_sum_skb(const struct sk_buff *skb, int offset,
 
 	/* checksum stuff in header space */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ( (copy = start - offset) > 0) {
 		if (copy > len)
 			copy = len;
 		sum = atalk_sum_partial(skb->data + offset, copy, sum);
 		if ( (len -= copy) == 0)
 =======
+=======
+>>>>>>> v3.18
 	if ((copy = start - offset) > 0) {
 		if (copy > len)
 			copy = len;
 		sum = atalk_sum_partial(skb->data + offset, copy, sum);
 		if ((len -= copy) == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return sum;
 
@@ -1172,7 +1190,11 @@ static int atalk_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 
 		at->src_net  = addr->sat_addr.s_net = ap->s_net;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		at->src_node = addr->sat_addr.s_node= ap->s_node;
+=======
+		at->src_node = addr->sat_addr.s_node = ap->s_node;
+>>>>>>> v3.18
 =======
 		at->src_node = addr->sat_addr.s_node = ap->s_node;
 >>>>>>> v3.18
@@ -1589,7 +1611,11 @@ static int atalk_sendmsg(struct kiocb *iocb, struct socket *sock, struct msghdr 
 	struct sock *sk = sock->sk;
 	struct atalk_sock *at = at_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_at *usat = (struct sockaddr_at *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_at *, usat, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_at *, usat, msg->msg_name);
 >>>>>>> v3.18
@@ -1695,7 +1721,11 @@ static int atalk_sendmsg(struct kiocb *iocb, struct socket *sock, struct msghdr 
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sk->sk_no_check == 1)
+=======
+	if (sk->sk_no_check_tx)
+>>>>>>> v3.18
 =======
 	if (sk->sk_no_check_tx)
 >>>>>>> v3.18
@@ -1794,7 +1824,11 @@ static int atalk_recvmsg(struct kiocb *iocb, struct socket *sock, struct msghdr 
 
 	if (!err && msg->msg_name) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sockaddr_at *sat = msg->msg_name;
+=======
+		DECLARE_SOCKADDR(struct sockaddr_at *, sat, msg->msg_name);
+>>>>>>> v3.18
 =======
 		DECLARE_SOCKADDR(struct sockaddr_at *, sat, msg->msg_name);
 >>>>>>> v3.18
@@ -1823,6 +1857,7 @@ static int atalk_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg)
 	void __user *argp = (void __user *)arg;
 
 	switch (cmd) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Protocol layer */
 		case TIOCOUTQ: {
@@ -1872,6 +1907,8 @@ static int atalk_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg)
 			rtnl_unlock();
 			break;
 =======
+=======
+>>>>>>> v3.18
 	/* Protocol layer */
 	case TIOCOUTQ: {
 		long amount = sk->sk_sndbuf - sk_wmem_alloc_get(sk);
@@ -1919,6 +1956,9 @@ static int atalk_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg)
 		rc = atif_ioctl(cmd, argp);
 		rtnl_unlock();
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -48,6 +51,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "igb.h"
@@ -143,8 +149,13 @@ static int igb_add_hwmon_attr(struct igb_adapter *adapter,
 	struct hwmon_attr *igb_attr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n_attr = adapter->igb_hwmon_buff.n_hwmon;
 	igb_attr = &adapter->igb_hwmon_buff.hwmon_list[n_attr];
+=======
+	n_attr = adapter->igb_hwmon_buff->n_hwmon;
+	igb_attr = &adapter->igb_hwmon_buff->hwmon_list[n_attr];
+>>>>>>> v3.18
 =======
 	n_attr = adapter->igb_hwmon_buff->n_hwmon;
 	igb_attr = &adapter->igb_hwmon_buff->hwmon_list[n_attr];
@@ -155,7 +166,11 @@ static int igb_add_hwmon_attr(struct igb_adapter *adapter,
 		igb_attr->dev_attr.show = igb_hwmon_show_location;
 		snprintf(igb_attr->name, sizeof(igb_attr->name),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "temp%u_label", offset);
+=======
+			 "temp%u_label", offset + 1);
+>>>>>>> v3.18
 =======
 			 "temp%u_label", offset + 1);
 >>>>>>> v3.18
@@ -164,7 +179,11 @@ static int igb_add_hwmon_attr(struct igb_adapter *adapter,
 		igb_attr->dev_attr.show = igb_hwmon_show_temp;
 		snprintf(igb_attr->name, sizeof(igb_attr->name),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "temp%u_input", offset);
+=======
+			 "temp%u_input", offset + 1);
+>>>>>>> v3.18
 =======
 			 "temp%u_input", offset + 1);
 >>>>>>> v3.18
@@ -173,7 +192,11 @@ static int igb_add_hwmon_attr(struct igb_adapter *adapter,
 		igb_attr->dev_attr.show = igb_hwmon_show_cautionthresh;
 		snprintf(igb_attr->name, sizeof(igb_attr->name),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "temp%u_max", offset);
+=======
+			 "temp%u_max", offset + 1);
+>>>>>>> v3.18
 =======
 			 "temp%u_max", offset + 1);
 >>>>>>> v3.18
@@ -182,7 +205,11 @@ static int igb_add_hwmon_attr(struct igb_adapter *adapter,
 		igb_attr->dev_attr.show = igb_hwmon_show_maxopthresh;
 		snprintf(igb_attr->name, sizeof(igb_attr->name),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "temp%u_crit", offset);
+=======
+			 "temp%u_crit", offset + 1);
+>>>>>>> v3.18
 =======
 			 "temp%u_crit", offset + 1);
 >>>>>>> v3.18
@@ -201,6 +228,7 @@ static int igb_add_hwmon_attr(struct igb_adapter *adapter,
 	igb_attr->dev_attr.attr.name = igb_attr->name;
 	sysfs_attr_init(&igb_attr->dev_attr.attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = device_create_file(&adapter->pdev->dev,
 				&igb_attr->dev_attr);
 	if (rc == 0)
@@ -208,17 +236,23 @@ static int igb_add_hwmon_attr(struct igb_adapter *adapter,
 
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 
 	adapter->igb_hwmon_buff->attrs[n_attr] = &igb_attr->dev_attr.attr;
 
 	++adapter->igb_hwmon_buff->n_hwmon;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void igb_sysfs_del_adapter(struct igb_adapter *adapter)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 
@@ -236,6 +270,8 @@ static void igb_sysfs_del_adapter(struct igb_adapter *adapter)
 		hwmon_device_unregister(adapter->igb_hwmon_buff.device);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 /* called from igb_main.c */
@@ -248,17 +284,23 @@ void igb_sysfs_exit(struct igb_adapter *adapter)
 int igb_sysfs_init(struct igb_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hwmon_buff *igb_hwmon = &adapter->igb_hwmon_buff;
 	unsigned int i;
 	int n_attrs;
 	int rc = 0;
 	struct i2c_client *client = NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct hwmon_buff *igb_hwmon;
 	struct i2c_client *client;
 	struct device *hwmon_dev;
 	unsigned int i;
 	int rc = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* If this method isn't defined we don't support thermals */
@@ -267,6 +309,7 @@ int igb_sysfs_init(struct igb_adapter *adapter)
 
 	/* Don't create thermal hwmon interface if no sensors present */
 	rc = (adapter->hw.mac.ops.init_thermal_sensor_thresh(&adapter->hw));
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (rc)
 			goto exit;
@@ -297,6 +340,8 @@ int igb_sysfs_init(struct igb_adapter *adapter)
 		goto err;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (rc)
 		goto exit;
 
@@ -307,6 +352,9 @@ int igb_sysfs_init(struct igb_adapter *adapter)
 		goto exit;
 	}
 	adapter->igb_hwmon_buff = igb_hwmon;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < E1000_MAX_SENSORS; i++) {
@@ -320,12 +368,15 @@ int igb_sysfs_init(struct igb_adapter *adapter)
 		/* Bail if any hwmon attr struct fails to initialize */
 		rc = igb_add_hwmon_attr(adapter, i, IGB_HWMON_TYPE_CAUTION);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc |= igb_add_hwmon_attr(adapter, i, IGB_HWMON_TYPE_LOC);
 		rc |= igb_add_hwmon_attr(adapter, i, IGB_HWMON_TYPE_TEMP);
 		rc |= igb_add_hwmon_attr(adapter, i, IGB_HWMON_TYPE_MAX);
 		if (rc)
 			goto err;
 =======
+=======
+>>>>>>> v3.18
 		if (rc)
 			goto exit;
 		rc = igb_add_hwmon_attr(adapter, i, IGB_HWMON_TYPE_LOC);
@@ -359,6 +410,9 @@ int igb_sysfs_init(struct igb_adapter *adapter)
 	if (IS_ERR(hwmon_dev)) {
 		rc = PTR_ERR(hwmon_dev);
 		goto err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

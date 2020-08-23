@@ -11,7 +11,11 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "imx23.dtsi"
+=======
+#include "imx23.dtsi"
+>>>>>>> v3.18
 =======
 #include "imx23.dtsi"
 >>>>>>> v3.18
@@ -44,6 +48,7 @@
 					reg = <0>;
 					fsl,pinmux-ids = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 						0x11d3 /* MX23_PAD_PWM3__GPIO_1_29 */
 						0x11e3 /* MX23_PAD_PWM4__GPIO_1_30 */
 					>;
@@ -51,12 +56,17 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_PWM3__GPIO_1_29
 						MX23_PAD_PWM4__GPIO_1_30
 					>;
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 			};
@@ -80,16 +90,22 @@
 	regulators {
 		compatible = "simple-bus";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		reg_vddio_sd0: vddio-sd0 {
 			compatible = "regulator-fixed";
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 
 		reg_vddio_sd0: regulator@0 {
 			compatible = "regulator-fixed";
 			reg = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regulator-name = "vddio-sd0";
 			regulator-min-microvolt = <3300000>;

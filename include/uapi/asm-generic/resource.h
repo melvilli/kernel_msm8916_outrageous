@@ -58,6 +58,7 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * RLIMIT_STACK default maximum - some architectures override it:
  */
@@ -65,6 +66,8 @@
 # define _STK_LIM_MAX		RLIM_INFINITY
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

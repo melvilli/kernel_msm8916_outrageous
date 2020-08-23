@@ -1,6 +1,10 @@
 snd-oxygen-lib-objs := oxygen_io.o oxygen_lib.o oxygen_mixer.o oxygen_pcm.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 snd-oxygen-objs := oxygen.o xonar_dg.o
+=======
+snd-oxygen-objs := oxygen.o xonar_dg_mixer.o xonar_dg.o
+>>>>>>> v3.18
 =======
 snd-oxygen-objs := oxygen.o xonar_dg_mixer.o xonar_dg.o
 >>>>>>> v3.18

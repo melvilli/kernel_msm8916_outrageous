@@ -364,7 +364,11 @@ again:
 		 * are too tough.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("stuck in space allocation", c->vi.ubi_num);
+=======
+		ubifs_err("stuck in space allocation");
+>>>>>>> v3.18
 =======
 		ubifs_err("stuck in space allocation");
 >>>>>>> v3.18
@@ -373,7 +377,11 @@ again:
 	} else if (cmt_retries > 32)
 		ubifs_warn("too many space allocation re-tries (%d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   c->vi.ubi_num, cmt_retries);
+=======
+			   cmt_retries);
+>>>>>>> v3.18
 =======
 			   cmt_retries);
 >>>>>>> v3.18
@@ -390,7 +398,11 @@ again:
 out:
 	ubifs_err("cannot reserve %d bytes in jhead %d, error %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  c->vi.ubi_num, len, jhead, err);
+=======
+		  len, jhead, err);
+>>>>>>> v3.18
 =======
 		  len, jhead, err);
 >>>>>>> v3.18
@@ -559,7 +571,11 @@ int ubifs_jnl_update(struct ubifs_info *c, const struct inode *dir,
 	int last_reference = !!(deletion && inode->i_nlink == 0);
 	struct ubifs_inode *ui = ubifs_inode(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ubifs_inode *dir_ui = ubifs_inode(dir);
+=======
+	struct ubifs_inode *host_ui = ubifs_inode(dir);
+>>>>>>> v3.18
 =======
 	struct ubifs_inode *host_ui = ubifs_inode(dir);
 >>>>>>> v3.18
@@ -570,8 +586,12 @@ int ubifs_jnl_update(struct ubifs_info *c, const struct inode *dir,
 	dbg_jnl("ino %lu, dent '%.*s', data len %d in dir ino %lu",
 		inode->i_ino, nm->len, nm->name, ui->data_len, dir->i_ino);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_assert(dir_ui->data_len == 0);
 	ubifs_assert(mutex_is_locked(&dir_ui->ui_mutex));
+=======
+	ubifs_assert(mutex_is_locked(&host_ui->ui_mutex));
+>>>>>>> v3.18
 =======
 	ubifs_assert(mutex_is_locked(&host_ui->ui_mutex));
 >>>>>>> v3.18
@@ -679,7 +699,11 @@ int ubifs_jnl_update(struct ubifs_info *c, const struct inode *dir,
 	spin_unlock(&ui->ui_lock);
 	mark_inode_clean(c, ui);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mark_inode_clean(c, dir_ui);
+=======
+	mark_inode_clean(c, host_ui);
+>>>>>>> v3.18
 =======
 	mark_inode_clean(c, host_ui);
 >>>>>>> v3.18
@@ -752,7 +776,11 @@ int ubifs_jnl_write_data(struct ubifs_info *c, const struct inode *inode,
 
 	out_len = dlen - UBIFS_DATA_NODE_SZ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_compress(c, buf, len, &data->data, &out_len, &compr_type);
+=======
+	ubifs_compress(buf, len, &data->data, &out_len, &compr_type);
+>>>>>>> v3.18
 =======
 	ubifs_compress(buf, len, &data->data, &out_len, &compr_type);
 >>>>>>> v3.18
@@ -962,10 +990,15 @@ int ubifs_jnl_rename(struct ubifs_info *c, const struct inode *old_dir,
 	struct ubifs_inode *uninitialized_var(new_ui);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg_jnl("dent '%.*s' in dir ino %lu to dent '%.*s' in dir ino %lu",
 		old_dentry->d_name.len, old_dentry->d_name.name,
 		old_dir->i_ino, new_dentry->d_name.len,
 		new_dentry->d_name.name, new_dir->i_ino);
+=======
+	dbg_jnl("dent '%pd' in dir ino %lu to dent '%pd' in dir ino %lu",
+		old_dentry, old_dir->i_ino, new_dentry, new_dir->i_ino);
+>>>>>>> v3.18
 =======
 	dbg_jnl("dent '%pd' in dir ino %lu to dent '%pd' in dir ino %lu",
 		old_dentry, old_dir->i_ino, new_dentry, new_dir->i_ino);
@@ -1126,7 +1159,10 @@ out_free:
 /**
  * recomp_data_node - re-compress a truncated data node.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @c: UBIFS file-system description object
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @dn: data node to re-compress
@@ -1136,8 +1172,12 @@ out_free:
  * the inode has to be re-compressed and re-written.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int recomp_data_node(struct ubifs_info *c, struct ubifs_data_node *dn,
 			    int *new_len)
+=======
+static int recomp_data_node(struct ubifs_data_node *dn, int *new_len)
+>>>>>>> v3.18
 =======
 static int recomp_data_node(struct ubifs_data_node *dn, int *new_len)
 >>>>>>> v3.18
@@ -1153,17 +1193,23 @@ static int recomp_data_node(struct ubifs_data_node *dn, int *new_len)
 	len = le32_to_cpu(dn->ch.len) - UBIFS_DATA_NODE_SZ;
 	compr_type = le16_to_cpu(dn->compr_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = ubifs_decompress(c, &dn->data, len, buf, &out_len, compr_type);
 	if (err)
 		goto out;
 
 	ubifs_compress(c, buf, *new_len, &dn->data, &out_len, &compr_type);
 =======
+=======
+>>>>>>> v3.18
 	err = ubifs_decompress(&dn->data, len, buf, &out_len, compr_type);
 	if (err)
 		goto out;
 
 	ubifs_compress(buf, *new_len, &dn->data, &out_len, &compr_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ubifs_assert(out_len <= UBIFS_BLOCK_SIZE);
 	dn->compr_type = cpu_to_le16(compr_type);
@@ -1240,7 +1286,11 @@ int ubifs_jnl_truncate(struct ubifs_info *c, const struct inode *inode,
 
 				if (compr_type != UBIFS_COMPR_NONE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					err = recomp_data_node(c, dn, &dlen);
+=======
+					err = recomp_data_node(dn, &dlen);
+>>>>>>> v3.18
 =======
 					err = recomp_data_node(dn, &dlen);
 >>>>>>> v3.18

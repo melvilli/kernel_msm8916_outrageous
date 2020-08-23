@@ -62,6 +62,12 @@ struct ptrace_peeksiginfo_args {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PTRACE_GETSIGMASK	0x420a
+#define PTRACE_SETSIGMASK	0x420b
+
+>>>>>>> v3.18
 =======
 #define PTRACE_GETSIGMASK	0x420a
 #define PTRACE_SETSIGMASK	0x420b

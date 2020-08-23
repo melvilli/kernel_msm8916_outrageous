@@ -70,7 +70,12 @@ unsigned int get_field(unsigned int data, unsigned int field)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!field);
+=======
+	if (WARN_ON(!field))
+		return 0;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!field))
 		return 0;
@@ -87,7 +92,12 @@ void set_field(unsigned int *data, unsigned int field, unsigned int value)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!field);
+=======
+	if (WARN_ON(!field))
+		return;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!field))
 		return;

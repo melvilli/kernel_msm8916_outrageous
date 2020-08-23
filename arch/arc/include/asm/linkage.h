@@ -12,6 +12,7 @@
 #ifdef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Can't use the ENTRY macro in linux/linkage.h
  * gas considers ';' as comment vs. newline
  */
@@ -25,6 +26,9 @@
 #define ASM_PREV_SYM_ADDR(name)  .-##name
 	.size \ name, ASM_PREV_SYM_ADDR(\name)
 .endm
+=======
+#define ASM_NL		 `	/* use '`' to mark new line in macro */
+>>>>>>> v3.18
 =======
 #define ASM_NL		 `	/* use '`' to mark new line in macro */
 >>>>>>> v3.18

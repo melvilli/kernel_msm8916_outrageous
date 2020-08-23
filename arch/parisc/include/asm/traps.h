@@ -7,7 +7,11 @@ struct pt_regs;
 /* traps.c */
 void parisc_terminate(char *msg, struct pt_regs *regs,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int code, unsigned long offset);
+=======
+		int code, unsigned long offset) __noreturn __cold;
+>>>>>>> v3.18
 =======
 		int code, unsigned long offset) __noreturn __cold;
 >>>>>>> v3.18

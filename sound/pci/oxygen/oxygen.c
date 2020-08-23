@@ -98,7 +98,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(oxygen_ids) = {
+=======
+static const struct pci_device_id oxygen_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id oxygen_ids[] = {
 >>>>>>> v3.18

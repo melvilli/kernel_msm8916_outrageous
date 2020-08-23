@@ -23,6 +23,7 @@
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * usb_find_descriptor_fillbuf - fill buffer with the requested descriptor
  * @buf: Buffer to be filled
  * @buflen: Size of buf
@@ -58,6 +59,8 @@ usb_find_descriptor_fillbuf(void *buf, unsigned buflen,
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * usb_descriptor_fillbuf - fill buffer with descriptors

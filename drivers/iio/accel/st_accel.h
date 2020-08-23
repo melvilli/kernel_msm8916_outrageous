@@ -26,8 +26,11 @@
 #define LSM330_ACCEL_DEV_NAME		"lsm330_accel"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int st_accel_common_probe(struct iio_dev *indio_dev);
 =======
+=======
+>>>>>>> v3.18
 /**
 * struct st_sensors_platform_data - default accel platform data
 * @drdy_int_pin: default accel DRDY is available on INT1 pin.
@@ -38,6 +41,9 @@ static const struct st_sensors_platform_data default_accel_pdata = {
 
 int st_accel_common_probe(struct iio_dev *indio_dev,
 					struct st_sensors_platform_data *pdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void st_accel_common_remove(struct iio_dev *indio_dev);
 

@@ -37,11 +37,14 @@ static const struct snd_pcm_hardware snd_mxs_hardware = {
 				  SNDRV_PCM_INFO_INTERLEAVED |
 				  SNDRV_PCM_INFO_HALF_DUPLEX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.formats		= SNDRV_PCM_FMTBIT_S16_LE |
 				  SNDRV_PCM_FMTBIT_S20_3LE |
 				  SNDRV_PCM_FMTBIT_S24_LE,
 	.channels_min		= 2,
 	.channels_max		= 2,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.period_bytes_min	= 32,
@@ -52,6 +55,7 @@ static const struct snd_pcm_hardware snd_mxs_hardware = {
 	.fifo_size		= 32,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool filter(struct dma_chan *chan, void *param)
 {
@@ -75,11 +79,16 @@ static const struct snd_dmaengine_pcm_config mxs_dmaengine_pcm_config = {
 static const struct snd_dmaengine_pcm_config mxs_dmaengine_pcm_config = {
 	.pcm_hardware = &snd_mxs_hardware,
 >>>>>>> v3.18
+=======
+static const struct snd_dmaengine_pcm_config mxs_dmaengine_pcm_config = {
+	.pcm_hardware = &snd_mxs_hardware,
+>>>>>>> v3.18
 	.prealloc_buffer_size = 64 * 1024,
 };
 
 int mxs_pcm_platform_register(struct device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return snd_dmaengine_pcm_register(dev, &mxs_dmaengine_pcm_config,
 		SND_DMAENGINE_PCM_FLAG_NO_RESIDUE |
@@ -88,10 +97,14 @@ int mxs_pcm_platform_register(struct device *dev)
 =======
 	return devm_snd_dmaengine_pcm_register(dev, &mxs_dmaengine_pcm_config,
 >>>>>>> v3.18
+=======
+	return devm_snd_dmaengine_pcm_register(dev, &mxs_dmaengine_pcm_config,
+>>>>>>> v3.18
 		SND_DMAENGINE_PCM_FLAG_HALF_DUPLEX);
 }
 EXPORT_SYMBOL_GPL(mxs_pcm_platform_register);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void mxs_pcm_platform_unregister(struct device *dev)
 {
@@ -99,6 +112,8 @@ void mxs_pcm_platform_unregister(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(mxs_pcm_platform_unregister);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");

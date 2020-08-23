@@ -184,8 +184,11 @@ enum s5m8767_regulators {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S5M8767_ENCTRL_SHIFT  6
 =======
+=======
+>>>>>>> v3.18
 /* LDO_EN/BUCK_EN field in registers */
 #define S5M8767_ENCTRL_SHIFT		6
 #define S5M8767_ENCTRL_MASK		(0x3 << S5M8767_ENCTRL_SHIFT)
@@ -210,6 +213,9 @@ enum s5m8767_dvs_buck_ramp_values {
 };
 #define S5M8767_DVS_BUCK_RAMP_SHIFT	4
 #define S5M8767_DVS_BUCK_RAMP_MASK	(0xf << S5M8767_DVS_BUCK_RAMP_SHIFT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __LINUX_MFD_S5M8767_H */

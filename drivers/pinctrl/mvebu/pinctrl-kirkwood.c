@@ -22,7 +22,10 @@
 #include "pinctrl-mvebu.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __iomem *mpp_base;
 
 static int kirkwood_mpp_ctrl_get(unsigned pid, unsigned long *config)
@@ -35,6 +38,9 @@ static int kirkwood_mpp_ctrl_set(unsigned pid, unsigned long config)
 	return default_mpp_ctrl_set(mpp_base, pid, config);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define V(f6180, f6190, f6192, f6281, f6282, dx4122)	\
 	((f6180 << 0) | (f6190 << 1) | (f6192 << 2) |	\
@@ -375,7 +381,11 @@ static struct mvebu_mpp_mode mv88f6xxx_mpp_modes[] = {
 
 static struct mvebu_mpp_ctrl mv88f6180_mpp_controls[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MPP_REG_CTRL(0, 29),
+=======
+	MPP_FUNC_CTRL(0, 29, NULL, kirkwood_mpp_ctrl),
+>>>>>>> v3.18
 =======
 	MPP_FUNC_CTRL(0, 29, NULL, kirkwood_mpp_ctrl),
 >>>>>>> v3.18
@@ -387,7 +397,11 @@ static struct pinctrl_gpio_range mv88f6180_gpio_ranges[] = {
 
 static struct mvebu_mpp_ctrl mv88f619x_mpp_controls[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MPP_REG_CTRL(0, 35),
+=======
+	MPP_FUNC_CTRL(0, 35, NULL, kirkwood_mpp_ctrl),
+>>>>>>> v3.18
 =======
 	MPP_FUNC_CTRL(0, 35, NULL, kirkwood_mpp_ctrl),
 >>>>>>> v3.18
@@ -400,7 +414,11 @@ static struct pinctrl_gpio_range mv88f619x_gpio_ranges[] = {
 
 static struct mvebu_mpp_ctrl mv88f628x_mpp_controls[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MPP_REG_CTRL(0, 49),
+=======
+	MPP_FUNC_CTRL(0, 49, NULL, kirkwood_mpp_ctrl),
+>>>>>>> v3.18
 =======
 	MPP_FUNC_CTRL(0, 49, NULL, kirkwood_mpp_ctrl),
 >>>>>>> v3.18
@@ -484,10 +502,13 @@ static struct of_device_id kirkwood_pinctrl_of_match[] = {
 static int kirkwood_pinctrl_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct of_device_id *match =
 		of_match_device(kirkwood_pinctrl_of_match, &pdev->dev);
 	pdev->dev.platform_data = (void *)match->data;
 =======
+=======
+>>>>>>> v3.18
 	struct resource *res;
 	const struct of_device_id *match =
 		of_match_device(kirkwood_pinctrl_of_match, &pdev->dev);
@@ -498,6 +519,9 @@ static int kirkwood_pinctrl_probe(struct platform_device *pdev)
 	if (IS_ERR(mpp_base))
 		return PTR_ERR(mpp_base);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return mvebu_pinctrl_probe(pdev);
 }
@@ -512,7 +536,11 @@ static struct platform_driver kirkwood_pinctrl_driver = {
 		.name = "kirkwood-pinctrl",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(kirkwood_pinctrl_of_match),
+=======
+		.of_match_table = kirkwood_pinctrl_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = kirkwood_pinctrl_of_match,
 >>>>>>> v3.18

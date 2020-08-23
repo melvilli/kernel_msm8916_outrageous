@@ -19,6 +19,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/hexagon_vm.h>
 #include <asm/uaccess.h>
 
@@ -30,6 +31,8 @@ EXPORT_SYMBOL(memcpy);
 EXPORT_SYMBOL(memset);
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/dma-mapping.h>
 #include <asm/hexagon_vm.h>
 #include <asm/io.h>
@@ -54,6 +57,9 @@ EXPORT_SYMBOL(__phys_offset);
 EXPORT_SYMBOL(_dflt_cache_att);
 EXPORT_SYMBOL(bad_dma_address);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DECLARE_EXPORT(name)     \
 	extern void name(void); EXPORT_SYMBOL(name)
@@ -62,15 +68,21 @@ EXPORT_SYMBOL(bad_dma_address);
 DECLARE_EXPORT(__hexagon_memcpy_likely_aligned_min32bytes_mult8bytes);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DECLARE_EXPORT(__hexagon_divsi3);
 DECLARE_EXPORT(__hexagon_modsi3);
 DECLARE_EXPORT(__hexagon_udivsi3);
 DECLARE_EXPORT(__hexagon_umodsi3);
 =======
+=======
+>>>>>>> v3.18
 /* Additional functions */
 DECLARE_EXPORT(__divsi3);
 DECLARE_EXPORT(__modsi3);
 DECLARE_EXPORT(__udivsi3);
 DECLARE_EXPORT(__umodsi3);
 DECLARE_EXPORT(csum_tcpudp_magic);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

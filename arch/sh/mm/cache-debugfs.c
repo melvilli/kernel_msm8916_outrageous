@@ -37,7 +37,11 @@ static int cache_seq_show(struct seq_file *file, void *iter)
 	jump_to_uncached();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ccr = __raw_readl(CCR);
+=======
+	ccr = __raw_readl(SH_CCR);
+>>>>>>> v3.18
 =======
 	ccr = __raw_readl(SH_CCR);
 >>>>>>> v3.18

@@ -179,7 +179,11 @@ static int vv6410_stop(struct sd *sd)
 	PDEBUG(D_STREAM, "Halting stream");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (err < 0) ? err : 0;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -264,7 +268,11 @@ static int vv6410_set_exposure(struct gspca_dev *gspca_dev, __s32 val)
 	coarse = min(512, val / VV6410_CIF_LINELENGTH);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PDEBUG(D_CONF, "Set coarse exposure to %d, fine expsure to %d",
+=======
+	PDEBUG(D_CONF, "Set coarse exposure to %d, fine exposure to %d",
+>>>>>>> v3.18
 =======
 	PDEBUG(D_CONF, "Set coarse exposure to %d, fine exposure to %d",
 >>>>>>> v3.18

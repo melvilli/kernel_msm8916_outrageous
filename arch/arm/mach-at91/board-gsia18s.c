@@ -32,6 +32,10 @@
 
 #include <mach/at91sam9_smc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/hardware.h>
+>>>>>>> v3.18
 =======
 #include <mach/hardware.h>
 >>>>>>> v3.18
@@ -43,6 +47,10 @@
 #include "gsia18s.h"
 #include "stamp9g20.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 =======
 #include "gpio.h"
 >>>>>>> v3.18
@@ -583,7 +591,11 @@ static void __init gsia18s_board_init(void)
 
 MACHINE_START(GSIA18S, "GS_IA18_S")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= at91_init_time,
 >>>>>>> v3.18

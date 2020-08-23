@@ -21,13 +21,19 @@
 #define IP_VS_SVC_F_HASHED	0x0002		/* hashed entry */
 #define IP_VS_SVC_F_ONEPACKET	0x0004		/* one-packet scheduling */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IP_VS_SVC_F_SCHED1	0x0008		/* scheduler flag 1 */
 #define IP_VS_SVC_F_SCHED2	0x0010		/* scheduler flag 2 */
 #define IP_VS_SVC_F_SCHED3	0x0020		/* scheduler flag 3 */
 
 #define IP_VS_SVC_F_SCHED_SH_FALLBACK	IP_VS_SVC_F_SCHED1 /* SH fallback */
 #define IP_VS_SVC_F_SCHED_SH_PORT	IP_VS_SVC_F_SCHED2 /* SH use port */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -338,7 +344,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IPVS_CMD_ATTR_MAX (__IPVS_SVC_ATTR_MAX - 1)
+=======
+#define IPVS_CMD_ATTR_MAX (__IPVS_CMD_ATTR_MAX - 1)
+>>>>>>> v3.18
 =======
 #define IPVS_CMD_ATTR_MAX (__IPVS_CMD_ATTR_MAX - 1)
 >>>>>>> v3.18
@@ -392,6 +402,12 @@ enum {
 
 	IPVS_DEST_ATTR_STATS,		/* nested attribute for dest stats */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	IPVS_DEST_ATTR_ADDR_FAMILY,	/* Address family of address */
+
+>>>>>>> v3.18
 =======
 
 	IPVS_DEST_ATTR_ADDR_FAMILY,	/* Address family of address */

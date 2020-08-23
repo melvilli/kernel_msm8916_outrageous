@@ -24,8 +24,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program;  if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+=======
+ * along with this program;  if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program;  if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -109,7 +113,11 @@ static int netlbl_mgmt_add_common(struct genl_info *info,
 		goto add_failure;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	entry->type = nla_get_u32(info->attrs[NLBL_MGMT_A_PROTOCOL]);
+=======
+	entry->def.type = nla_get_u32(info->attrs[NLBL_MGMT_A_PROTOCOL]);
+>>>>>>> v3.18
 =======
 	entry->def.type = nla_get_u32(info->attrs[NLBL_MGMT_A_PROTOCOL]);
 >>>>>>> v3.18
@@ -125,7 +133,11 @@ static int netlbl_mgmt_add_common(struct genl_info *info,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* NOTE: internally we allow/use a entry->type value of
+=======
+	/* NOTE: internally we allow/use a entry->def.type value of
+>>>>>>> v3.18
 =======
 	/* NOTE: internally we allow/use a entry->def.type value of
 >>>>>>> v3.18
@@ -134,7 +146,11 @@ static int netlbl_mgmt_add_common(struct genl_info *info,
 	 *       "real" protocol */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (entry->type) {
+=======
+	switch (entry->def.type) {
+>>>>>>> v3.18
 =======
 	switch (entry->def.type) {
 >>>>>>> v3.18
@@ -149,7 +165,11 @@ static int netlbl_mgmt_add_common(struct genl_info *info,
 		if (cipsov4 == NULL)
 			goto add_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entry->type_def.cipsov4 = cipsov4;
+=======
+		entry->def.cipso = cipsov4;
+>>>>>>> v3.18
 =======
 		entry->def.cipso = cipsov4;
 >>>>>>> v3.18
@@ -193,9 +213,15 @@ static int netlbl_mgmt_add_common(struct genl_info *info,
 		map->list.mask = mask->s_addr;
 		map->list.valid = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		map->type = entry->type;
 		if (cipsov4)
 			map->type_def.cipsov4 = cipsov4;
+=======
+		map->def.type = entry->def.type;
+		if (cipsov4)
+			map->def.cipso = cipsov4;
+>>>>>>> v3.18
 =======
 		map->def.type = entry->def.type;
 		if (cipsov4)
@@ -209,8 +235,13 @@ static int netlbl_mgmt_add_common(struct genl_info *info,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entry->type = NETLBL_NLTYPE_ADDRSELECT;
 		entry->type_def.addrsel = addrmap;
+=======
+		entry->def.type = NETLBL_NLTYPE_ADDRSELECT;
+		entry->def.addrsel = addrmap;
+>>>>>>> v3.18
 =======
 		entry->def.type = NETLBL_NLTYPE_ADDRSELECT;
 		entry->def.addrsel = addrmap;
@@ -255,7 +286,11 @@ static int netlbl_mgmt_add_common(struct genl_info *info,
 		map->list.mask = *mask;
 		map->list.valid = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		map->type = entry->type;
+=======
+		map->def.type = entry->def.type;
+>>>>>>> v3.18
 =======
 		map->def.type = entry->def.type;
 >>>>>>> v3.18
@@ -267,8 +302,13 @@ static int netlbl_mgmt_add_common(struct genl_info *info,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entry->type = NETLBL_NLTYPE_ADDRSELECT;
 		entry->type_def.addrsel = addrmap;
+=======
+		entry->def.type = NETLBL_NLTYPE_ADDRSELECT;
+		entry->def.addrsel = addrmap;
+>>>>>>> v3.18
 =======
 		entry->def.type = NETLBL_NLTYPE_ADDRSELECT;
 		entry->def.addrsel = addrmap;
@@ -322,7 +362,11 @@ static int netlbl_mgmt_listentry(struct sk_buff *skb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (entry->type) {
+=======
+	switch (entry->def.type) {
+>>>>>>> v3.18
 =======
 	switch (entry->def.type) {
 >>>>>>> v3.18
@@ -332,8 +376,12 @@ static int netlbl_mgmt_listentry(struct sk_buff *skb,
 			return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netlbl_af4list_foreach_rcu(iter4,
 					   &entry->type_def.addrsel->list4) {
+=======
+		netlbl_af4list_foreach_rcu(iter4, &entry->def.addrsel->list4) {
+>>>>>>> v3.18
 =======
 		netlbl_af4list_foreach_rcu(iter4, &entry->def.addrsel->list4) {
 >>>>>>> v3.18
@@ -359,6 +407,7 @@ static int netlbl_mgmt_listentry(struct sk_buff *skb,
 			map4 = netlbl_domhsh_addr4_entry(iter4);
 			ret_val = nla_put_u32(skb, NLBL_MGMT_A_PROTOCOL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      map4->type);
 			if (ret_val != 0)
 				return ret_val;
@@ -367,6 +416,8 @@ static int netlbl_mgmt_listentry(struct sk_buff *skb,
 				ret_val = nla_put_u32(skb, NLBL_MGMT_A_CV4DOI,
 						  map4->type_def.cipsov4->doi);
 =======
+=======
+>>>>>>> v3.18
 					      map4->def.type);
 			if (ret_val != 0)
 				return ret_val;
@@ -374,6 +425,9 @@ static int netlbl_mgmt_listentry(struct sk_buff *skb,
 			case NETLBL_NLTYPE_CIPSOV4:
 				ret_val = nla_put_u32(skb, NLBL_MGMT_A_CV4DOI,
 						      map4->def.cipso->doi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (ret_val != 0)
 					return ret_val;
@@ -384,8 +438,12 @@ static int netlbl_mgmt_listentry(struct sk_buff *skb,
 		}
 #if IS_ENABLED(CONFIG_IPV6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netlbl_af6list_foreach_rcu(iter6,
 					   &entry->type_def.addrsel->list6) {
+=======
+		netlbl_af6list_foreach_rcu(iter6, &entry->def.addrsel->list6) {
+>>>>>>> v3.18
 =======
 		netlbl_af6list_foreach_rcu(iter6, &entry->def.addrsel->list6) {
 >>>>>>> v3.18
@@ -408,7 +466,11 @@ static int netlbl_mgmt_listentry(struct sk_buff *skb,
 			map6 = netlbl_domhsh_addr6_entry(iter6);
 			ret_val = nla_put_u32(skb, NLBL_MGMT_A_PROTOCOL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      map6->type);
+=======
+					      map6->def.type);
+>>>>>>> v3.18
 =======
 					      map6->def.type);
 >>>>>>> v3.18
@@ -423,6 +485,7 @@ static int netlbl_mgmt_listentry(struct sk_buff *skb,
 		break;
 	case NETLBL_NLTYPE_UNLABELED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret_val = nla_put_u32(skb, NLBL_MGMT_A_PROTOCOL, entry->type);
 		break;
 	case NETLBL_NLTYPE_CIPSOV4:
@@ -432,6 +495,8 @@ static int netlbl_mgmt_listentry(struct sk_buff *skb,
 		ret_val = nla_put_u32(skb, NLBL_MGMT_A_CV4DOI,
 				      entry->type_def.cipsov4->doi);
 =======
+=======
+>>>>>>> v3.18
 		ret_val = nla_put_u32(skb,NLBL_MGMT_A_PROTOCOL,entry->def.type);
 		break;
 	case NETLBL_NLTYPE_CIPSOV4:
@@ -440,6 +505,9 @@ static int netlbl_mgmt_listentry(struct sk_buff *skb,
 			return ret_val;
 		ret_val = nla_put_u32(skb, NLBL_MGMT_A_CV4DOI,
 				      entry->def.cipso->doi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -785,7 +853,11 @@ version_failure:
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct genl_ops netlbl_mgmt_genl_ops[] = {
+=======
+static const struct genl_ops netlbl_mgmt_genl_ops[] = {
+>>>>>>> v3.18
 =======
 static const struct genl_ops netlbl_mgmt_genl_ops[] = {
 >>>>>>> v3.18
@@ -863,7 +935,11 @@ int __init netlbl_mgmt_genl_init(void)
 {
 	return genl_register_family_with_ops(&netlbl_mgmt_gnl_family,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netlbl_mgmt_genl_ops, ARRAY_SIZE(netlbl_mgmt_genl_ops));
+=======
+					     netlbl_mgmt_genl_ops);
+>>>>>>> v3.18
 =======
 					     netlbl_mgmt_genl_ops);
 >>>>>>> v3.18

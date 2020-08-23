@@ -60,6 +60,10 @@ static int compat_hdio_getgeo(struct gendisk *disk, struct block_device *bdev,
 		return -ENOTTY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(&geo, 0, sizeof(geo));
+>>>>>>> v3.18
 =======
 	memset(&geo, 0, sizeof(geo));
 >>>>>>> v3.18
@@ -74,7 +78,11 @@ static int compat_hdio_getgeo(struct gendisk *disk, struct block_device *bdev,
 
 	ret = copy_to_user(ugeo, &geo, 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret |= __put_user(geo.start, &ugeo->start);
+=======
+	ret |= put_user(geo.start, &ugeo->start);
+>>>>>>> v3.18
 =======
 	ret |= put_user(geo.start, &ugeo->start);
 >>>>>>> v3.18
@@ -671,6 +679,10 @@ long compat_blkdev_ioctl(struct file *file, unsigned cmd, unsigned long arg)
 	struct backing_dev_info *bdi;
 	loff_t size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int max_sectors;
+>>>>>>> v3.18
 =======
 	unsigned int max_sectors;
 >>>>>>> v3.18
@@ -720,8 +732,11 @@ long compat_blkdev_ioctl(struct file *file, unsigned cmd, unsigned long arg)
 			return -EINVAL;
 		bdi = blk_get_backing_dev_info(bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bdi == NULL)
 			return -ENOTTY;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return compat_put_long(arg,
@@ -734,8 +749,14 @@ long compat_blkdev_ioctl(struct file *file, unsigned cmd, unsigned long arg)
 		return compat_put_int(arg, bdev_logical_block_size(bdev));
 	case BLKSECTGET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return compat_put_ushort(arg,
 					 queue_max_sectors(bdev_get_queue(bdev)));
+=======
+		max_sectors = min_t(unsigned int, USHRT_MAX,
+				    queue_max_sectors(bdev_get_queue(bdev)));
+		return compat_put_ushort(arg, max_sectors);
+>>>>>>> v3.18
 =======
 		max_sectors = min_t(unsigned int, USHRT_MAX,
 				    queue_max_sectors(bdev_get_queue(bdev)));
@@ -750,8 +771,11 @@ long compat_blkdev_ioctl(struct file *file, unsigned cmd, unsigned long arg)
 			return -EACCES;
 		bdi = blk_get_backing_dev_info(bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bdi == NULL)
 			return -ENOTTY;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		bdi->ra_pages = (arg * 512) / PAGE_CACHE_SIZE;

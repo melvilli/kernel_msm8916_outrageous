@@ -75,8 +75,11 @@ endmenu
 
 config SOC_AR71XX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select USB_ARCH_HAS_EHCI
 	select USB_ARCH_HAS_OHCI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select HW_HAS_PCI
@@ -84,8 +87,11 @@ config SOC_AR71XX
 
 config SOC_AR724X
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select USB_ARCH_HAS_EHCI
 	select USB_ARCH_HAS_OHCI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select HW_HAS_PCI
@@ -93,6 +99,7 @@ config SOC_AR724X
 	def_bool n
 
 config SOC_AR913X
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select USB_ARCH_HAS_EHCI
 	def_bool n
@@ -103,6 +110,14 @@ config SOC_AR933X
 
 config SOC_AR934X
 	select USB_ARCH_HAS_EHCI
+=======
+	def_bool n
+
+config SOC_AR933X
+	def_bool n
+
+config SOC_AR934X
+>>>>>>> v3.18
 =======
 	def_bool n
 
@@ -117,7 +132,10 @@ config SOC_AR934X
 
 config SOC_QCA955X
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select USB_ARCH_HAS_EHCI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select HW_HAS_PCI

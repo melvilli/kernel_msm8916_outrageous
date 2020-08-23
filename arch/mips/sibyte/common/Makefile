@@ -1,5 +1,9 @@
 obj-y := cfe.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SIBYTE_BUS_WATCHER)	+= bus_watcher.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SIBYTE_BUS_WATCHER)	+= bus_watcher.o
 >>>>>>> v3.18

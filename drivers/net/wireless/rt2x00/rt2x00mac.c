@@ -14,9 +14,13 @@
 
 	You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 	along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -387,17 +391,23 @@ void rt2x00mac_configure_filter(struct ieee80211_hw *hw,
 	 * FIF_CONTROL flag implies FIF_PSPOLL.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(CAPABILITY_CONTROL_FILTERS, &rt2x00dev->cap_flags)) {
 		if (*total_flags & FIF_CONTROL || *total_flags & FIF_PSPOLL)
 			*total_flags |= FIF_CONTROL | FIF_PSPOLL;
 	}
 	if (!test_bit(CAPABILITY_CONTROL_FILTER_PSPOLL, &rt2x00dev->cap_flags)) {
 =======
+=======
+>>>>>>> v3.18
 	if (!rt2x00_has_cap_control_filters(rt2x00dev)) {
 		if (*total_flags & FIF_CONTROL || *total_flags & FIF_PSPOLL)
 			*total_flags |= FIF_CONTROL | FIF_PSPOLL;
 	}
 	if (!rt2x00_has_cap_control_filter_pspoll(rt2x00dev)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (*total_flags & FIF_CONTROL)
 			*total_flags |= FIF_PSPOLL;
@@ -482,7 +492,11 @@ int rt2x00mac_set_key(struct ieee80211_hw *hw, enum set_key_cmd cmd,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(CAPABILITY_HW_CRYPTO, &rt2x00dev->cap_flags))
+=======
+	if (!rt2x00_has_cap_hw_crypto(rt2x00dev))
+>>>>>>> v3.18
 =======
 	if (!rt2x00_has_cap_hw_crypto(rt2x00dev))
 >>>>>>> v3.18
@@ -645,6 +659,7 @@ void rt2x00mac_bss_info_changed(struct ieee80211_hw *hw,
 	 */
 	if (changes & BSS_CHANGED_BEACON_ENABLED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!bss_conf->enable_beacon && intf->enable_beacon) {
 			rt2x00dev->intf_beaconing--;
 			intf->enable_beacon = false;
@@ -655,10 +670,15 @@ void rt2x00mac_bss_info_changed(struct ieee80211_hw *hw,
 			 */
 			rt2x00queue_clear_beacon(rt2x00dev, vif);
 =======
+=======
+>>>>>>> v3.18
 		mutex_lock(&intf->beacon_skb_mutex);
 		if (!bss_conf->enable_beacon && intf->enable_beacon) {
 			rt2x00dev->intf_beaconing--;
 			intf->enable_beacon = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (rt2x00dev->intf_beaconing == 0) {
@@ -667,11 +687,14 @@ void rt2x00mac_bss_info_changed(struct ieee80211_hw *hw,
 				 * -> stop beacon queue.
 				 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mutex_lock(&intf->beacon_skb_mutex);
 				rt2x00queue_stop_queue(rt2x00dev->bcn);
 				mutex_unlock(&intf->beacon_skb_mutex);
 			}
 =======
+=======
+>>>>>>> v3.18
 				rt2x00queue_stop_queue(rt2x00dev->bcn);
 			}
 			/*
@@ -680,6 +703,9 @@ void rt2x00mac_bss_info_changed(struct ieee80211_hw *hw,
 			 * and keep it running on other interfaces.
 			 */
 			rt2x00queue_clear_beacon(rt2x00dev, vif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (bss_conf->enable_beacon && !intf->enable_beacon) {
 			rt2x00dev->intf_beaconing++;
@@ -697,16 +723,22 @@ void rt2x00mac_bss_info_changed(struct ieee80211_hw *hw,
 				 * -> start beacon queue.
 				 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mutex_lock(&intf->beacon_skb_mutex);
 				rt2x00queue_start_queue(rt2x00dev->bcn);
 				mutex_unlock(&intf->beacon_skb_mutex);
 			}
 		}
 =======
+=======
+>>>>>>> v3.18
 				rt2x00queue_start_queue(rt2x00dev->bcn);
 			}
 		}
 		mutex_unlock(&intf->beacon_skb_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -795,7 +827,12 @@ void rt2x00mac_rfkill_poll(struct ieee80211_hw *hw)
 EXPORT_SYMBOL_GPL(rt2x00mac_rfkill_poll);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rt2x00mac_flush(struct ieee80211_hw *hw, u32 queues, bool drop)
+=======
+void rt2x00mac_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+		     u32 queues, bool drop)
+>>>>>>> v3.18
 =======
 void rt2x00mac_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 		     u32 queues, bool drop)
@@ -849,6 +886,11 @@ int rt2x00mac_set_antenna(struct ieee80211_hw *hw, u32 tx_ant, u32 rx_ant)
 	setup.tx = tx_ant;
 	setup.rx = rx_ant;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	setup.rx_chain_num = 0;
+	setup.tx_chain_num = 0;
+>>>>>>> v3.18
 =======
 	setup.rx_chain_num = 0;
 	setup.tx_chain_num = 0;

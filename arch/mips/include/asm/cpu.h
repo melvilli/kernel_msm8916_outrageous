@@ -4,7 +4,11 @@
  *
  * Copyright (C) 1996 David S. Miller (davem@davemloft.net)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004  Maciej W. Rozycki
+=======
+ * Copyright (C) 2004, 2013  Maciej W. Rozycki
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004, 2013  Maciej W. Rozycki
 >>>>>>> v3.18
@@ -13,10 +17,16 @@
 #define _ASM_CPU_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Assigned Company values for bits 23:16 of the PRId Register
    (CP0 register 15, select 0).	 As of the MIPS32 and MIPS64 specs from
    MTI, the PRId register is defined in this (backwards compatible)
    way:
+=======
+/*
+   As of the MIPS32 and MIPS64 specs from MTI, the PRId register (CP0
+   register 15, select 0) is defined in this (backwards compatible) way:
+>>>>>>> v3.18
 =======
 /*
    As of the MIPS32 and MIPS64 specs from MTI, the PRId register (CP0
@@ -34,7 +44,10 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PRID_OPT_MASK		0xff000000
 
 /*
@@ -43,6 +56,9 @@
 
 #define PRID_COMP_MASK		0xff0000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PRID_COMP_LEGACY	0x000000
 #define PRID_COMP_MIPS		0x010000
@@ -60,11 +76,14 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Assigned values for the product ID register.	 In order to detect a
  * certain CPU type exactly eventually additional registers may need to
  * be examined.	 These are valid when 23:16 == PRID_COMP_LEGACY
  */
 =======
+=======
+>>>>>>> v3.18
  * Assigned Processor ID (implementation) values for bits 15:8 of the PRId
  * register.  In order to detect a certain CPU type exactly eventually
  * additional registers may need to be examined.
@@ -76,6 +95,9 @@
  * These are valid when 23:16 == PRID_COMP_LEGACY
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PRID_IMP_R2000		0x0100
 #define PRID_IMP_AU1_REV1	0x0100
@@ -104,15 +126,21 @@
 #define PRID_IMP_NEVADA		0x2800		/* RM5260 ??? */
 #define PRID_IMP_RM9000		0x3400
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PRID_IMP_LOONGSON1	0x4200
 #define PRID_IMP_R5432		0x5400
 #define PRID_IMP_R5500		0x5500
 #define PRID_IMP_LOONGSON2	0x6300
 =======
+=======
+>>>>>>> v3.18
 #define PRID_IMP_LOONGSON_32	0x4200  /* Loongson-1 */
 #define PRID_IMP_R5432		0x5400
 #define PRID_IMP_R5500		0x5500
 #define PRID_IMP_LOONGSON_64	0x6300  /* Loongson-2/3 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PRID_IMP_UNKNOWN	0xff00
@@ -140,13 +168,19 @@
 #define PRID_IMP_M14KC		0x9c00
 #define PRID_IMP_M14KEC		0x9e00
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PRID_IMP_INTERAPTIV_UP	0xa000
 #define PRID_IMP_INTERAPTIV_MP	0xa100
 #define PRID_IMP_PROAPTIV_UP	0xa200
 #define PRID_IMP_PROAPTIV_MP	0xa300
 #define PRID_IMP_M5150		0xa700
 #define PRID_IMP_P5600		0xa800
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -193,6 +227,12 @@
 #define PRID_IMP_CAVIUM_CN66XX 0x9200
 #define PRID_IMP_CAVIUM_CN61XX 0x9300
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PRID_IMP_CAVIUM_CNF71XX 0x9400
+#define PRID_IMP_CAVIUM_CN78XX 0x9500
+#define PRID_IMP_CAVIUM_CN70XX 0x9600
+>>>>>>> v3.18
 =======
 #define PRID_IMP_CAVIUM_CNF71XX 0x9400
 #define PRID_IMP_CAVIUM_CN78XX 0x9500
@@ -234,27 +274,39 @@
 #define PRID_IMP_NETLOGIC_XLP8XX	0x1000
 #define PRID_IMP_NETLOGIC_XLP3XX	0x1100
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * Definitions for 7:0 on legacy processors
 =======
+=======
+>>>>>>> v3.18
 #define PRID_IMP_NETLOGIC_XLP2XX	0x1200
 #define PRID_IMP_NETLOGIC_XLP9XX	0x1500
 #define PRID_IMP_NETLOGIC_XLP5XX	0x1300
 
 /*
  * Particular Revision values for bits 7:0 of the PRId register.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
 #define PRID_REV_MASK		0x00ff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Definitions for 7:0 on legacy processors
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PRID_REV_TX4927		0x0022
 #define PRID_REV_TX4937		0x0030
@@ -276,6 +328,12 @@
 #define PRID_REV_LOONGSON2E	0x0002
 #define PRID_REV_LOONGSON2F	0x0003
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PRID_REV_LOONGSON3A	0x0005
+#define PRID_REV_LOONGSON3B_R1	0x0006
+#define PRID_REV_LOONGSON3B_R2	0x0007
+>>>>>>> v3.18
 =======
 #define PRID_REV_LOONGSON3A	0x0005
 #define PRID_REV_LOONGSON3B_R1	0x0006
@@ -303,15 +361,21 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FPIR_IMP_NONE		0x0000
 
 =======
+=======
+>>>>>>> v3.18
 #define FPIR_IMP_MASK		0xff00
 
 #define FPIR_IMP_NONE		0x0000
 
 #if !defined(__ASSEMBLY__)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum cpu_type_enum {
 	CPU_UNKNOWN,
@@ -336,7 +400,11 @@ enum cpu_type_enum {
 	CPU_R12000, CPU_R14000, CPU_VR41XX, CPU_VR4111, CPU_VR4121, CPU_VR4122,
 	CPU_VR4131, CPU_VR4133, CPU_VR4181, CPU_VR4181A, CPU_RM7000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CPU_SR71000, CPU_RM9000, CPU_TX49XX,
+=======
+	CPU_SR71000, CPU_TX49XX,
+>>>>>>> v3.18
 =======
 	CPU_SR71000, CPU_TX49XX,
 >>>>>>> v3.18
@@ -358,7 +426,11 @@ enum cpu_type_enum {
 	CPU_ALCHEMY, CPU_PR4450, CPU_BMIPS32, CPU_BMIPS3300, CPU_BMIPS4350,
 	CPU_BMIPS4380, CPU_BMIPS5000, CPU_JZRISC, CPU_LOONGSON1, CPU_M14KC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CPU_M14KEC,
+=======
+	CPU_M14KEC, CPU_INTERAPTIV, CPU_P5600, CPU_PROAPTIV, CPU_1074K, CPU_M5150,
+>>>>>>> v3.18
 =======
 	CPU_M14KEC, CPU_INTERAPTIV, CPU_P5600, CPU_PROAPTIV, CPU_1074K, CPU_M5150,
 >>>>>>> v3.18
@@ -368,8 +440,13 @@ enum cpu_type_enum {
 	 */
 	CPU_5KC, CPU_5KE, CPU_20KC, CPU_25KF, CPU_SB1, CPU_SB1A, CPU_LOONGSON2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CPU_CAVIUM_OCTEON, CPU_CAVIUM_OCTEON_PLUS, CPU_CAVIUM_OCTEON2,
 	CPU_XLR, CPU_XLP,
+=======
+	CPU_LOONGSON3, CPU_CAVIUM_OCTEON, CPU_CAVIUM_OCTEON_PLUS,
+	CPU_CAVIUM_OCTEON2, CPU_CAVIUM_OCTEON3, CPU_XLR, CPU_XLP,
+>>>>>>> v3.18
 =======
 	CPU_LOONGSON3, CPU_CAVIUM_OCTEON, CPU_CAVIUM_OCTEON_PLUS,
 	CPU_CAVIUM_OCTEON2, CPU_CAVIUM_OCTEON3, CPU_XLR, CPU_XLP,
@@ -379,6 +456,10 @@ enum cpu_type_enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* !__ASSEMBLY */
+>>>>>>> v3.18
 =======
 #endif /* !__ASSEMBLY */
 >>>>>>> v3.18
@@ -387,6 +468,7 @@ enum cpu_type_enum {
  * ISA Level encodings
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MIPS_CPU_ISA_I		0x00000001
 #define MIPS_CPU_ISA_II		0x00000002
@@ -401,6 +483,8 @@ enum cpu_type_enum {
 #define MIPS_CPU_ISA_32BIT (MIPS_CPU_ISA_I | MIPS_CPU_ISA_II | \
 	MIPS_CPU_ISA_M32R1 | MIPS_CPU_ISA_M32R2)
 =======
+=======
+>>>>>>> v3.18
 #define MIPS_CPU_ISA_II		0x00000001
 #define MIPS_CPU_ISA_III	0x00000002
 #define MIPS_CPU_ISA_IV		0x00000004
@@ -412,6 +496,9 @@ enum cpu_type_enum {
 
 #define MIPS_CPU_ISA_32BIT (MIPS_CPU_ISA_II | MIPS_CPU_ISA_M32R1 | \
 	MIPS_CPU_ISA_M32R2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MIPS_CPU_ISA_64BIT (MIPS_CPU_ISA_III | MIPS_CPU_ISA_IV | \
 	MIPS_CPU_ISA_V | MIPS_CPU_ISA_M64R1 | MIPS_CPU_ISA_M64R2)
@@ -419,6 +506,7 @@ enum cpu_type_enum {
 /*
  * CPU Option encodings
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MIPS_CPU_TLB		0x00000001 /* CPU has TLB */
 #define MIPS_CPU_4KEX		0x00000002 /* "R4K" exception model */
@@ -446,6 +534,8 @@ enum cpu_type_enum {
 #define MIPS_CPU_RIXI		0x00800000 /* CPU has TLB Read/eXec Inhibit */
 #define MIPS_CPU_MICROMIPS	0x01000000 /* CPU has microMIPS capability */
 =======
+=======
+>>>>>>> v3.18
 #define MIPS_CPU_TLB		0x00000001ull /* CPU has TLB */
 #define MIPS_CPU_4KEX		0x00000002ull /* "R4K" exception model */
 #define MIPS_CPU_3K_CACHE	0x00000004ull /* R3000-style caches */
@@ -477,6 +567,9 @@ enum cpu_type_enum {
 #define MIPS_CPU_HTW		0x100000000ull /* CPU support Hardware Page Table Walker */
 #define MIPS_CPU_RIXIEX		0x200000000ull /* CPU has unique exception codes for {Read, Execute}-Inhibit exceptions */
 #define MIPS_CPU_MAAR		0x400000000ull /* MAAR(I) registers are present */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -491,6 +584,10 @@ enum cpu_type_enum {
 #define MIPS_ASE_DSP2P		0x00000040 /* Signal Processing ASE Rev 2 */
 #define MIPS_ASE_VZ		0x00000080 /* Virtualization ASE */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MIPS_ASE_MSA		0x00000100 /* MIPS SIMD Architecture */
+>>>>>>> v3.18
 =======
 #define MIPS_ASE_MSA		0x00000100 /* MIPS SIMD Architecture */
 >>>>>>> v3.18

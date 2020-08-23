@@ -9,6 +9,10 @@
 #include "check.h"
 #include "karma.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 >>>>>>> v3.18
@@ -31,7 +35,11 @@ int karma_partition(struct parsed_partitions *state)
 		u8 d_blank[208];
 		__le16 d_magic;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} __attribute__((packed)) *label;
+=======
+	} __packed *label;
+>>>>>>> v3.18
 =======
 	} __packed *label;
 >>>>>>> v3.18

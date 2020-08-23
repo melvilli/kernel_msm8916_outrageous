@@ -223,6 +223,7 @@ VNTWIFIvGetTxRate(
 	unsigned char *pbyOFDMBasicRate
 );
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
   bool
   VNTWIFIbInit(
@@ -230,6 +231,8 @@ VNTWIFIvGetTxRate(
   void **pMgmtHandler
 );
 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -280,6 +283,7 @@ VNTWIFIbChannelSwitch(
 	unsigned char byNewChannel
 );
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
   bool
   VNTWIFIbRadarPresent(
@@ -287,6 +291,8 @@ VNTWIFIbChannelSwitch(
   unsigned char byChannel
 );
 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

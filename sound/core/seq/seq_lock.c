@@ -29,6 +29,7 @@
 void snd_use_lock_sync_helper(snd_use_lock_t *lockp, const char *file, int line)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int warn_count = 5 * HZ;
 
 	if (atomic_read(lockp) < 0) {
@@ -40,6 +41,8 @@ void snd_use_lock_sync_helper(snd_use_lock_t *lockp, const char *file, int line)
 			pr_warn("ALSA: seq_lock: waiting [%d left] in %s:%d\n", atomic_read(lockp), file, line);
 		schedule_timeout_uninterruptible(1);
 =======
+=======
+>>>>>>> v3.18
 	int max_count = 5 * HZ;
 
 	if (atomic_read(lockp) < 0) {
@@ -53,6 +56,9 @@ void snd_use_lock_sync_helper(snd_use_lock_t *lockp, const char *file, int line)
 		}
 		schedule_timeout_uninterruptible(1);
 		max_count--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

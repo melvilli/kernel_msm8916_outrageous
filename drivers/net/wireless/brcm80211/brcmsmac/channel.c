@@ -60,6 +60,7 @@
 #define BRCM_2GHZ_2412_2462	REG_RULE(2412-10, 2462+10, 40, 0, 19, 0)
 #define BRCM_2GHZ_2467_2472	REG_RULE(2467-10, 2472+10, 20, 0, 19, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 NL80211_RRF_PASSIVE_SCAN | \
 					 NL80211_RRF_NO_IBSS)
 
@@ -78,6 +79,8 @@
 					 NL80211_RRF_PASSIVE_SCAN | \
 					 NL80211_RRF_NO_IBSS)
 =======
+=======
+>>>>>>> v3.18
 					 NL80211_RRF_NO_IR)
 
 #define BRCM_5GHZ_5180_5240	REG_RULE(5180-10, 5240+10, 40, 0, 21, \
@@ -90,6 +93,9 @@
 					 NL80211_RRF_NO_IR)
 #define BRCM_5GHZ_5745_5825	REG_RULE(5745-10, 5825+10, 40, 0, 21, \
 					 NL80211_RRF_NO_IR)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct ieee80211_regdomain brcms_regdom_x2 = {
@@ -411,7 +417,11 @@ brcms_c_channel_set_chanspec(struct brcms_cm_info *wlc_cm, u16 chanspec,
 
 	brcms_b_set_chanspec(wlc->hw, chanspec,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      !!(ch->flags & IEEE80211_CHAN_PASSIVE_SCAN),
+=======
+			      !!(ch->flags & IEEE80211_CHAN_NO_IR),
+>>>>>>> v3.18
 =======
 			      !!(ch->flags & IEEE80211_CHAN_NO_IR),
 >>>>>>> v3.18
@@ -677,8 +687,13 @@ static void brcms_reg_apply_radar_flags(struct wiphy *wiphy)
 		if (!(ch->flags & IEEE80211_CHAN_DISABLED))
 			ch->flags |= IEEE80211_CHAN_RADAR |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     IEEE80211_CHAN_NO_IBSS |
 				     IEEE80211_CHAN_PASSIVE_SCAN;
+=======
+				     IEEE80211_CHAN_NO_IR |
+				     IEEE80211_CHAN_NO_IR;
+>>>>>>> v3.18
 =======
 				     IEEE80211_CHAN_NO_IR |
 				     IEEE80211_CHAN_NO_IR;
@@ -709,6 +724,7 @@ brcms_reg_apply_beaconing_flags(struct wiphy *wiphy,
 
 			if (initiator == NL80211_REGDOM_SET_BY_COUNTRY_IE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rule = freq_reg_info(wiphy, ch->center_freq);
 				if (IS_ERR(rule))
 					continue;
@@ -722,6 +738,8 @@ brcms_reg_apply_beaconing_flags(struct wiphy *wiphy,
 				ch->flags &= ~(IEEE80211_CHAN_NO_IBSS |
 					       IEEE80211_CHAN_PASSIVE_SCAN);
 =======
+=======
+>>>>>>> v3.18
 				rule = freq_reg_info(wiphy,
 						     MHZ_TO_KHZ(ch->center_freq));
 				if (IS_ERR(rule))
@@ -731,6 +749,9 @@ brcms_reg_apply_beaconing_flags(struct wiphy *wiphy,
 					ch->flags &= ~IEEE80211_CHAN_NO_IR;
 			} else if (ch->beacon_found) {
 				ch->flags &= ~IEEE80211_CHAN_NO_IR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -812,8 +833,13 @@ void brcms_c_regd_init(struct brcms_c_info *wlc)
 
 	wlc->wiphy->reg_notifier = brcms_reg_notifier;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wlc->wiphy->flags |= WIPHY_FLAG_CUSTOM_REGULATORY |
 			     WIPHY_FLAG_STRICT_REGULATORY;
+=======
+	wlc->wiphy->regulatory_flags |= REGULATORY_CUSTOM_REG |
+					REGULATORY_STRICT_REG;
+>>>>>>> v3.18
 =======
 	wlc->wiphy->regulatory_flags |= REGULATORY_CUSTOM_REG |
 					REGULATORY_STRICT_REG;

@@ -5,7 +5,11 @@
 
 #include <sys/ptrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ptrace.h>
+=======
+#include <asm/ptrace.h>
+>>>>>>> v3.18
 =======
 #include <asm/ptrace.h>
 >>>>>>> v3.18

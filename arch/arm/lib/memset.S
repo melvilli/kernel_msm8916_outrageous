@@ -111,7 +111,11 @@ ENTRY(memset)
 	tst	r2, #1
 	strneb	r1, [ip], #1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

@@ -14,6 +14,10 @@
 #define JPEG_CORE_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/interrupt.h>
+>>>>>>> v3.18
 =======
 #include <linux/interrupt.h>
 >>>>>>> v3.18
@@ -39,6 +43,11 @@
 #define S5P_JPEG_COEF33			0x13
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EXYNOS3250_IRQ_TIMEOUT		0x10000000
+
+>>>>>>> v3.18
 =======
 #define EXYNOS3250_IRQ_TIMEOUT		0x10000000
 
@@ -53,9 +62,12 @@
 
 /* Flags that indicate a format can be used for capture/output */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MEM2MEM_CAPTURE			(1 << 0)
 #define MEM2MEM_OUTPUT			(1 << 1)
 =======
+=======
+>>>>>>> v3.18
 #define SJPEG_FMT_FLAG_ENC_CAPTURE	(1 << 0)
 #define SJPEG_FMT_FLAG_ENC_OUTPUT	(1 << 1)
 #define SJPEG_FMT_FLAG_DEC_CAPTURE	(1 << 2)
@@ -97,6 +109,9 @@ enum  exynos4_jpeg_img_quality_level {
 	QUALITY_LEVEL_3,
 	QUALITY_LEVEL_4,	/* low */
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -111,9 +126,12 @@ enum  exynos4_jpeg_img_quality_level {
  * @irq:		JPEG IP irq
  * @clk:		JPEG IP clock
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev:		JPEG IP struct device
  * @alloc_ctx:		videobuf2 memory allocator's context
 =======
+=======
+>>>>>>> v3.18
  * @sclk:		Exynos3250 JPEG IP special clock
  * @dev:		JPEG IP struct device
  * @alloc_ctx:		videobuf2 memory allocator's context
@@ -121,6 +139,9 @@ enum  exynos4_jpeg_img_quality_level {
  * @irq_status		interrupt flags set during single encode/decode
 			operation
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct s5p_jpeg {
@@ -135,10 +156,13 @@ struct s5p_jpeg {
 	void __iomem		*regs;
 	unsigned int		irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clk		*clk;
 	struct device		*dev;
 	void			*alloc_ctx;
 =======
+=======
+>>>>>>> v3.18
 	enum exynos4_jpeg_result irq_ret;
 	struct clk		*clk;
 	struct clk		*sclk;
@@ -153,6 +177,9 @@ struct s5p_jpeg_variant {
 	unsigned int		fmt_ver_flag;
 	struct v4l2_m2m_ops	*m2m_ops;
 	irqreturn_t		(*jpeg_irq)(int irq, void *priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -165,7 +192,11 @@ struct s5p_jpeg_variant {
  * @h_align:	horizontal alignment order (align to 2^h_align)
  * @v_align:	vertical alignment order (align to 2^v_align)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @types:	types of queue this format is applicable to
+=======
+ * @flags:	flags describing format applicability
+>>>>>>> v3.18
 =======
  * @flags:	flags describing format applicability
 >>>>>>> v3.18
@@ -176,15 +207,21 @@ struct s5p_jpeg_fmt {
 	int	depth;
 	int	colplanes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	h_align;
 	int	v_align;
 	u32	types;
 =======
+=======
+>>>>>>> v3.18
 	int	memplanes;
 	int	h_align;
 	int	v_align;
 	int	subsampling;
 	u32	flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -208,11 +245,14 @@ struct s5p_jpeg_q_data {
  * @mode:		compression (encode) operation or decompression (decode)
  * @compr_quality:	destination image quality in compression (encode) mode
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @m2m_ctx:		mem2mem device context
  * @out_q:		source (output) queue information
  * @cap_fmt:		destination (capture) queue queue information
  * @hdr_parsed:		set if header has been parsed during decompression
 =======
+=======
+>>>>>>> v3.18
  * @restart_interval:	JPEG restart interval for JPEG encoding
  * @subsampling:	subsampling of a raw format or a JPEG
  * @out_q:		source (output) queue information
@@ -222,6 +262,9 @@ struct s5p_jpeg_q_data {
  * @fh:			V4L2 file handle
  * @hdr_parsed:		set if header has been parsed during decompression
  * @crop_altered:	set if crop rectangle has been altered by the user space
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @ctrl_handler:	controls handler
  */
@@ -232,12 +275,15 @@ struct s5p_jpeg_ctx {
 	unsigned short		restart_interval;
 	unsigned short		subsampling;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct v4l2_m2m_ctx	*m2m_ctx;
 	struct s5p_jpeg_q_data	out_q;
 	struct s5p_jpeg_q_data	cap_q;
 	struct v4l2_fh		fh;
 	bool			hdr_parsed;
 =======
+=======
+>>>>>>> v3.18
 	struct s5p_jpeg_q_data	out_q;
 	struct s5p_jpeg_q_data	cap_q;
 	unsigned int		scale_factor;
@@ -245,6 +291,9 @@ struct s5p_jpeg_ctx {
 	struct v4l2_fh		fh;
 	bool			hdr_parsed;
 	bool			crop_altered;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct v4l2_ctrl_handler ctrl_handler;
 };
@@ -262,7 +311,10 @@ struct s5p_jpeg_buffer {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct s5p_jpeg_addr - JPEG converter physical address set for DMA
  * @y:   luminance plane physical address
@@ -275,5 +327,8 @@ struct s5p_jpeg_addr {
 	u32     cr;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* JPEG_CORE_H */

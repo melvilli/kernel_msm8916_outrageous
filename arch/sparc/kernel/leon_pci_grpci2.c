@@ -9,6 +9,10 @@
 #include <linux/kernel.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -195,7 +199,11 @@ struct grpci2_cap_first {
 struct grpci2_priv {
 	struct leon_pci_info	info; /* must be on top of this structure */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct grpci2_regs	*regs;
+=======
+	struct grpci2_regs __iomem *regs;
+>>>>>>> v3.18
 =======
 	struct grpci2_regs __iomem *regs;
 >>>>>>> v3.18
@@ -223,15 +231,21 @@ struct grpci2_priv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_SPINLOCK(grpci2_dev_lock);
 struct grpci2_priv *grpci2priv;
 
 int grpci2_map_irq(const struct pci_dev *dev, u8 slot, u8 pin)
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_SPINLOCK(grpci2_dev_lock);
 static struct grpci2_priv *grpci2priv;
 
 static int grpci2_map_irq(const struct pci_dev *dev, u8 slot, u8 pin)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct grpci2_priv *priv = dev->bus->sysdata;
@@ -285,7 +299,11 @@ static int grpci2_cfg_r32(struct grpci2_priv *priv, unsigned int bus,
 	} else {
 		/* Bus always little endian (unaffected by byte-swapping) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*val = flip_dword(tmp);
+=======
+		*val = swab32(tmp);
+>>>>>>> v3.18
 =======
 		*val = swab32(tmp);
 >>>>>>> v3.18
@@ -347,7 +365,11 @@ static int grpci2_cfg_w32(struct grpci2_priv *priv, unsigned int bus,
 	pci_conf = (unsigned int *) (priv->pci_conf |
 						(devfn << 8) | (where & 0xfc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LEON3_BYPASS_STORE_PA(pci_conf, flip_dword(val));
+=======
+	LEON3_BYPASS_STORE_PA(pci_conf, swab32(val));
+>>>>>>> v3.18
 =======
 	LEON3_BYPASS_STORE_PA(pci_conf, swab32(val));
 >>>>>>> v3.18
@@ -584,15 +606,21 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void grpci2_hw_init(struct grpci2_priv *priv)
 {
 	u32 ahbadr, pciadr, bar_sz, capptr, io_map, data;
 	struct grpci2_regs *regs = priv->regs;
 =======
+=======
+>>>>>>> v3.18
 static void grpci2_hw_init(struct grpci2_priv *priv)
 {
 	u32 ahbadr, pciadr, bar_sz, capptr, io_map, data;
 	struct grpci2_regs __iomem *regs = priv->regs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i;
 	struct grpci2_barcfg *barcfg = priv->tgtbars;
@@ -685,7 +713,11 @@ static irqreturn_t grpci2_err_interrupt(int irq, void *arg)
 {
 	struct grpci2_priv *priv = arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct grpci2_regs *regs = priv->regs;
+=======
+	struct grpci2_regs __iomem *regs = priv->regs;
+>>>>>>> v3.18
 =======
 	struct grpci2_regs __iomem *regs = priv->regs;
 >>>>>>> v3.18
@@ -716,7 +748,11 @@ static irqreturn_t grpci2_err_interrupt(int irq, void *arg)
 static int grpci2_of_probe(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct grpci2_regs *regs;
+=======
+	struct grpci2_regs __iomem *regs;
+>>>>>>> v3.18
 =======
 	struct grpci2_regs __iomem *regs;
 >>>>>>> v3.18
@@ -916,7 +952,11 @@ err4:
 err3:
 	err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap((void *)priv->pci_io_va);
+=======
+	iounmap((void __iomem *)priv->pci_io_va);
+>>>>>>> v3.18
 =======
 	iounmap((void __iomem *)priv->pci_io_va);
 >>>>>>> v3.18

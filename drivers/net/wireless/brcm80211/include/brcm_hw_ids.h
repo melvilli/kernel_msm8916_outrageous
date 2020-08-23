@@ -18,6 +18,7 @@
 #define	_BRCM_HW_IDS_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BCM4313_D11N2G_ID	0x4727	/* 4313 802.11n 2.4G device */
 
 #define BCM43224_D11N_ID	0x4353	/* 43224 802.11n dualband device */
@@ -43,6 +44,8 @@
 #define BCM4334_CHIP_ID		0x4334
 #define BCM4335_CHIP_ID		0x4335
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pci_ids.h>
 #include <linux/mmc/sdio_ids.h>
 
@@ -105,6 +108,9 @@
 
 #define BCM4313_CHIP_ID		0x4313
 #define BCM43224_CHIP_ID	43224
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* _BRCM_HW_IDS_H_ */

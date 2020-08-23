@@ -37,7 +37,11 @@ static int clk_prcmu_prepare(struct clk_hw *hw)
 		clk->is_prepared = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;;
+=======
+	return ret;
+>>>>>>> v3.18
 =======
 	return ret;
 >>>>>>> v3.18

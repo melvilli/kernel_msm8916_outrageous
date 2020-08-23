@@ -97,6 +97,11 @@ static int a8293_set_voltage(struct dvb_frontend *fe,
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usleep_range(1500, 50000);
+
+>>>>>>> v3.18
 =======
 	usleep_range(1500, 50000);
 

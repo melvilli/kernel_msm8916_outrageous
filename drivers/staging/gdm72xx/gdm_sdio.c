@@ -32,6 +32,7 @@
 
 #define SDU_TX_BUF_SIZE	2048
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TX_BUF_SIZE		2048
 #define TX_CHUNK_SIZE	(2048 - TYPE_A_HEADER_SIZE)
 #define RX_BUF_SIZE		(25*1024)
@@ -60,6 +61,8 @@ static void hexdump(char *title, u8 *data, int len)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #define TX_BUF_SIZE	2048
 #define TX_CHUNK_SIZE	(2048 - TYPE_A_HEADER_SIZE)
 #define RX_BUF_SIZE	(25*1024)
@@ -67,6 +70,9 @@ static void hexdump(char *title, u8 *data, int len)
 #define TX_HZ		2000
 #define TX_INTERVAL	(1000000/TX_HZ)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct sdio_tx *alloc_tx_struct(struct tx_cxt *tx)
 {
@@ -152,6 +158,7 @@ static void put_rx_struct(struct rx_cxt *rx, struct sdio_rx *r)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_sdio(struct sdiowm_dev *sdev)
 {
 	int ret = 0, i;
@@ -160,6 +167,8 @@ static int init_sdio(struct sdiowm_dev *sdev)
 	struct sdio_tx	*t;
 	struct sdio_rx	*r;
 =======
+=======
+>>>>>>> v3.18
 static void release_sdio(struct sdiowm_dev *sdev)
 {
 	struct tx_cxt	*tx = &sdev->tx;
@@ -204,6 +213,9 @@ static int init_sdio(struct sdiowm_dev *sdev)
 	struct rx_cxt *rx = &sdev->rx;
 	struct sdio_tx *t;
 	struct sdio_rx *r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	INIT_LIST_HEAD(&tx->free_list);
@@ -251,6 +263,7 @@ fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void release_sdio(struct sdiowm_dev *sdev)
 {
 	struct tx_cxt	*tx = &sdev->tx;
@@ -288,6 +301,8 @@ static void release_sdio(struct sdiowm_dev *sdev)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void send_sdio_pkt(struct sdio_func *func, u8 *data, int len)
@@ -353,6 +368,7 @@ static void send_sdu(struct sdio_func *func, struct tx_cxt *tx)
 
 	hci = (struct hci_s *)(tx->sdu_buf + TYPE_A_HEADER_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hci->cmd_evt = H2B(WIMAX_TX_SDU_AGGR);
 	hci->length = H2B(aggr_len - TYPE_A_HEADER_SIZE - HCI_HEADER_SIZE);
 
@@ -363,6 +379,8 @@ static void send_sdu(struct sdio_func *func, struct tx_cxt *tx)
 		aggr_len - TYPE_A_HEADER_SIZE);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	hci->cmd_evt = cpu_to_be16(WIMAX_TX_SDU_AGGR);
 	hci->length = cpu_to_be16(aggr_len - TYPE_A_HEADER_SIZE -
 				  HCI_HEADER_SIZE);
@@ -371,6 +389,9 @@ static void send_sdu(struct sdio_func *func, struct tx_cxt *tx)
 
 	dev_dbg(&func->dev, "sdio_send: %*ph\n", aggr_len - TYPE_A_HEADER_SIZE,
 		tx->sdu_buf + TYPE_A_HEADER_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (pos = TYPE_A_HEADER_SIZE; pos < aggr_len; pos += TX_CHUNK_SIZE) {
@@ -403,6 +424,7 @@ static void send_sdu(struct sdio_func *func, struct tx_cxt *tx)
 
 static void send_hci(struct sdio_func *func, struct tx_cxt *tx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct sdio_tx *t)
 {
 	unsigned long flags;
@@ -412,6 +434,8 @@ static void send_hci(struct sdio_func *func, struct tx_cxt *tx,
 		t->len - TYPE_A_HEADER_SIZE);
 #endif
 =======
+=======
+>>>>>>> v3.18
 		     struct sdio_tx *t)
 {
 	unsigned long flags;
@@ -419,6 +443,9 @@ static void send_hci(struct sdio_func *func, struct tx_cxt *tx,
 	dev_dbg(&func->dev, "sdio_send: %*ph\n", t->len - TYPE_A_HEADER_SIZE,
 		t->buf + TYPE_A_HEADER_SIZE);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	send_sdio_pkt(func, t->buf, t->len);
 
@@ -481,7 +508,11 @@ static void do_tx(struct work_struct *work)
 
 static int gdm_sdio_send(void *priv_dev, void *data, int len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			void (*cb)(void *data), void *cb_data)
+=======
+			 void (*cb)(void *data), void *cb_data)
+>>>>>>> v3.18
 =======
 			 void (*cb)(void *data), void *cb_data)
 >>>>>>> v3.18
@@ -495,7 +526,12 @@ static int gdm_sdio_send(void *priv_dev, void *data, int len,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(len > TX_BUF_SIZE - TYPE_A_HEADER_SIZE);
+=======
+	if (len > TX_BUF_SIZE - TYPE_A_HEADER_SIZE)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (len > TX_BUF_SIZE - TYPE_A_HEADER_SIZE)
 		return -EINVAL;
@@ -549,9 +585,13 @@ static int gdm_sdio_send(void *priv_dev, void *data, int len,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Handle the HCI, WIMAX_SDU_TX_FLOW.
  */
+=======
+/* Handle the HCI, WIMAX_SDU_TX_FLOW. */
+>>>>>>> v3.18
 =======
 /* Handle the HCI, WIMAX_SDU_TX_FLOW. */
 >>>>>>> v3.18
@@ -569,6 +609,7 @@ static int control_sdu_tx_flow(struct sdiowm_dev *sdev, u8 *hci_data, int len)
 
 	if (hci_data[4] == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 		printk(KERN_DEBUG "WIMAX ==> STOP SDU TX\n");
 #endif
@@ -583,6 +624,8 @@ static int control_sdu_tx_flow(struct sdiowm_dev *sdev, u8 *hci_data, int len)
 		/*
 		 * If free buffer for sdu tx doesn't exist, then tx queue
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(&sdev->func->dev, "WIMAX ==> STOP SDU TX\n");
 		tx->stop_sdu_tx = 1;
 	} else if (hci_data[4] == 1) {
@@ -591,6 +634,9 @@ static int control_sdu_tx_flow(struct sdiowm_dev *sdev, u8 *hci_data, int len)
 		if (tx->can_send)
 			schedule_work(&sdev->ws);
 		/* If free buffer for sdu tx doesn't exist, then tx queue
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * should not be woken. For this reason, don't pass the command,
 		 * START_SDU_TX.
@@ -638,9 +684,14 @@ static void gdm_sdio_irq(struct sdio_func *func)
 
 	if (hdr[3] == 1) {	/* Ack */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 		u32 *ack_seq = (u32 *)&hdr[4];
 #endif
+=======
+		u32 *ack_seq = (u32 *)&hdr[4];
+
+>>>>>>> v3.18
 =======
 		u32 *ack_seq = (u32 *)&hdr[4];
 
@@ -652,9 +703,13 @@ static void gdm_sdio_irq(struct sdio_func *func)
 			schedule_work(&sdev->ws);
 		spin_unlock_irqrestore(&tx->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 		printk(KERN_DEBUG "Ack... %0x\n", ntohl(*ack_seq));
 #endif
+=======
+		dev_dbg(&func->dev, "Ack... %0x\n", ntohl(*ack_seq));
+>>>>>>> v3.18
 =======
 		dev_dbg(&func->dev, "Ack... %0x\n", ntohl(*ack_seq));
 >>>>>>> v3.18
@@ -663,7 +718,11 @@ static void gdm_sdio_irq(struct sdio_func *func)
 
 	memcpy(rx->rx_buf, hdr + TYPE_A_HEADER_SIZE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			TYPE_A_LOOKAHEAD_SIZE - TYPE_A_HEADER_SIZE);
+=======
+	       TYPE_A_LOOKAHEAD_SIZE - TYPE_A_HEADER_SIZE);
+>>>>>>> v3.18
 =======
 	       TYPE_A_LOOKAHEAD_SIZE - TYPE_A_HEADER_SIZE);
 >>>>>>> v3.18
@@ -698,9 +757,14 @@ static void gdm_sdio_irq(struct sdio_func *func)
 
 end_io:
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 	hexdump("sdio_receive", rx->rx_buf, len);
 #endif
+=======
+	dev_dbg(&func->dev, "sdio_receive: %*ph\n", len, rx->rx_buf);
+
+>>>>>>> v3.18
 =======
 	dev_dbg(&func->dev, "sdio_receive: %*ph\n", len, rx->rx_buf);
 
@@ -729,8 +793,13 @@ done:
 
 static int gdm_sdio_receive(void *priv_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				void (*cb)(void *cb_data, void *data, int len),
 				void *cb_data)
+=======
+			    void (*cb)(void *cb_data, void *data, int len),
+			    void *cb_data)
+>>>>>>> v3.18
 =======
 			    void (*cb)(void *cb_data, void *data, int len),
 			    void *cb_data)
@@ -759,7 +828,11 @@ static int gdm_sdio_receive(void *priv_dev,
 
 static int sdio_wimax_probe(struct sdio_func *func,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const struct sdio_device_id *id)
+=======
+			    const struct sdio_device_id *id)
+>>>>>>> v3.18
 =======
 			    const struct sdio_device_id *id)
 >>>>>>> v3.18

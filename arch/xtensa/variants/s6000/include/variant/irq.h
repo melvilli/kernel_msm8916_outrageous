@@ -2,7 +2,10 @@
 #define _XTENSA_S6000_IRQ_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NO_IRQ		(-1)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define VARIANT_NR_IRQS 8 /* GPIO interrupts */

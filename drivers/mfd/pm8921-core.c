@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2011, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2011, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -19,6 +23,7 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/platform_device.h>
 #include <linux/slab.h>
@@ -31,6 +36,8 @@
 #include <linux/mfd/pm8xxx/regulator.h>
 #include <linux/leds-pm8xxx.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/irqchip/chained_irq.h>
 #include <linux/irq.h>
@@ -66,11 +73,15 @@
 
 #define	PM_IRQF_MASK_ALL		(PM_IRQF_MASK_FE | \
 					PM_IRQF_MASK_RE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define REG_HWREV		0x002  /* PMIC4 revision */
 #define REG_HWREV_2		0x0E8  /* PMIC4 revision 2 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define REG_MPP_BASE		0x050
 #define REG_IRQ_BASE		0x1BB
@@ -984,6 +995,8 @@ err_read_rev:
 	kfree(pmic);
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 #define PM8921_NR_IRQS		256
 
 struct pm_irq_chip {
@@ -1285,11 +1298,15 @@ static int pm8921_remove_child(struct device *dev, void *unused)
 {
 	platform_device_unregister(to_platform_device(dev));
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int pm8921_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pm8xxx_drvdata *drvdata;
 	struct pm8921 *pmic = NULL;
@@ -1316,6 +1333,8 @@ static int pm8921_remove(struct platform_device *pdev)
 	}
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	int irq = platform_get_irq(pdev, 0);
 	struct pm_irq_chip *chip = platform_get_drvdata(pdev);
 
@@ -1323,6 +1342,9 @@ static int pm8921_remove(struct platform_device *pdev)
 	irq_set_chained_handler(irq, NULL);
 	irq_set_handler_data(irq, NULL);
 	irq_domain_remove(chip->irqdomain);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1335,6 +1357,10 @@ static struct platform_driver pm8921_driver = {
 		.name	= "pm8921-core",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = pm8921_id_table,
+>>>>>>> v3.18
 =======
 		.of_match_table = pm8921_id_table,
 >>>>>>> v3.18
@@ -1346,7 +1372,11 @@ static int __init pm8921_init(void)
 	return platform_driver_register(&pm8921_driver);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 postcore_initcall(pm8921_init);
+=======
+subsys_initcall(pm8921_init);
+>>>>>>> v3.18
 =======
 subsys_initcall(pm8921_init);
 >>>>>>> v3.18

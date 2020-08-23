@@ -15,6 +15,7 @@
 #include <linux/kallsyms.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/fsnotify.h>
 #include <linux/namei.h>
 #include <linux/poll.h>
@@ -87,6 +88,8 @@ static int fill_read_buffer(struct dentry * dentry, struct sysfs_buffer * buffer
 
 	sysfs_put_active(attr_sd);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/list.h>
 #include <linux/mutex.h>
 #include <linux/seq_file.h>
@@ -137,6 +140,9 @@ static int sysfs_kf_seq_show(struct seq_file *sf, void *v)
 		if (count < 0)
 			return count;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -149,6 +155,7 @@ static int sysfs_kf_seq_show(struct seq_file *sf, void *v)
 		/* Try to struggle along */
 		count = PAGE_SIZE - 1;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (count >= 0) {
 		buffer->needs_read_fill = 0;
@@ -630,6 +637,8 @@ int sysfs_create_file(struct kobject * kobj, const struct attribute * attr)
 
 }
 =======
+=======
+>>>>>>> v3.18
 	seq_commit(sf, count);
 	return 0;
 }
@@ -839,6 +848,9 @@ int sysfs_create_file_ns(struct kobject *kobj, const struct attribute *attr,
 
 }
 EXPORT_SYMBOL_GPL(sysfs_create_file_ns);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int sysfs_create_files(struct kobject *kobj, const struct attribute **ptr)
@@ -854,6 +866,10 @@ int sysfs_create_files(struct kobject *kobj, const struct attribute **ptr)
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(sysfs_create_files);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(sysfs_create_files);
 >>>>>>> v3.18
@@ -867,6 +883,7 @@ EXPORT_SYMBOL_GPL(sysfs_create_files);
 int sysfs_add_file_to_group(struct kobject *kobj,
 		const struct attribute *attr, const char *group)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sysfs_dirent *dir_sd;
 	int error;
@@ -882,6 +899,8 @@ int sysfs_add_file_to_group(struct kobject *kobj,
 	error = sysfs_add_file(dir_sd, attr, SYSFS_KOBJ_ATTR);
 	sysfs_put(dir_sd);
 =======
+=======
+>>>>>>> v3.18
 	struct kernfs_node *parent;
 	int error;
 
@@ -897,6 +916,9 @@ int sysfs_add_file_to_group(struct kobject *kobj,
 
 	error = sysfs_add_file(parent, attr, false);
 	kernfs_put(parent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return error;
@@ -913,6 +935,7 @@ EXPORT_SYMBOL_GPL(sysfs_add_file_to_group);
 int sysfs_chmod_file(struct kobject *kobj, const struct attribute *attr,
 		     umode_t mode)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sysfs_dirent *sd;
 	struct iattr newattrs;
@@ -937,6 +960,8 @@ int sysfs_chmod_file(struct kobject *kobj, const struct attribute *attr,
  out:
 	mutex_unlock(&sysfs_mutex);
 =======
+=======
+>>>>>>> v3.18
 	struct kernfs_node *kn;
 	struct iattr newattrs;
 	int rc;
@@ -951,11 +976,15 @@ int sysfs_chmod_file(struct kobject *kobj, const struct attribute *attr,
 	rc = kernfs_setattr(kn, &newattrs);
 
 	kernfs_put(kn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
 EXPORT_SYMBOL_GPL(sysfs_chmod_file);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /**
@@ -978,6 +1007,8 @@ void sysfs_remove_file(struct kobject * kobj, const struct attribute * attr)
 
 void sysfs_remove_files(struct kobject * kobj, const struct attribute **ptr)
 =======
+=======
+>>>>>>> v3.18
 /**
  * sysfs_remove_file_ns - remove an object attribute with a custom ns tag
  * @kobj: object we're acting for
@@ -1019,6 +1050,9 @@ bool sysfs_remove_file_self(struct kobject *kobj, const struct attribute *attr)
 }
 
 void sysfs_remove_files(struct kobject *kobj, const struct attribute **ptr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int i;
@@ -1026,6 +1060,10 @@ void sysfs_remove_files(struct kobject *kobj, const struct attribute **ptr)
 		sysfs_remove_file(kobj, ptr[i]);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(sysfs_remove_files);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(sysfs_remove_files);
 >>>>>>> v3.18
@@ -1040,6 +1078,7 @@ void sysfs_remove_file_from_group(struct kobject *kobj,
 		const struct attribute *attr, const char *group)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sysfs_dirent *dir_sd;
 
 	if (group)
@@ -1050,6 +1089,8 @@ void sysfs_remove_file_from_group(struct kobject *kobj,
 		sysfs_hash_and_remove(dir_sd, NULL, attr->name);
 		sysfs_put(dir_sd);
 =======
+=======
+>>>>>>> v3.18
 	struct kernfs_node *parent;
 
 	if (group) {
@@ -1062,11 +1103,15 @@ void sysfs_remove_file_from_group(struct kobject *kobj,
 	if (parent) {
 		kernfs_remove_by_name(parent, attr->name);
 		kernfs_put(parent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 EXPORT_SYMBOL_GPL(sysfs_remove_file_from_group);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct sysfs_schedule_callback_struct {
 	struct list_head	workq_list;
@@ -1166,6 +1211,8 @@ EXPORT_SYMBOL_GPL(sysfs_remove_file);
 EXPORT_SYMBOL_GPL(sysfs_remove_files);
 EXPORT_SYMBOL_GPL(sysfs_create_files);
 =======
+=======
+>>>>>>> v3.18
 /**
  *	sysfs_create_bin_file - create binary file for object.
  *	@kobj:	object.
@@ -1191,4 +1238,7 @@ void sysfs_remove_bin_file(struct kobject *kobj,
 	kernfs_remove_by_name(kobj->sd, attr->attr.name);
 }
 EXPORT_SYMBOL_GPL(sysfs_remove_bin_file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

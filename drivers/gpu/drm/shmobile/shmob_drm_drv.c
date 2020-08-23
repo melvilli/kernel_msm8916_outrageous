@@ -2,7 +2,11 @@
  * shmob_drm_drv.c  --  SH Mobile DRM driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012 Renesas Corporation
+=======
+ * Copyright (C) 2012 Renesas Electronics Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012 Renesas Electronics Corporation
 >>>>>>> v3.18
@@ -95,7 +99,11 @@ static int shmob_drm_setup_clocks(struct shmob_drm_device *sdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk = clk_get(sdev->dev, clkname);
+=======
+	clk = devm_clk_get(sdev->dev, clkname);
+>>>>>>> v3.18
 =======
 	clk = devm_clk_get(sdev->dev, clkname);
 >>>>>>> v3.18
@@ -115,8 +123,11 @@ static int shmob_drm_setup_clocks(struct shmob_drm_device *sdev,
 static int shmob_drm_unload(struct drm_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct shmob_drm_device *sdev = dev->dev_private;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	drm_kms_helper_poll_fini(dev);
@@ -124,6 +135,7 @@ static int shmob_drm_unload(struct drm_device *dev)
 	drm_vblank_cleanup(dev);
 	drm_irq_uninstall(dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (sdev->clock)
 		clk_put(sdev->clock);
@@ -133,6 +145,9 @@ static int shmob_drm_unload(struct drm_device *dev)
 
 	dev->dev_private = NULL;
 	kfree(sdev);
+=======
+	dev->dev_private = NULL;
+>>>>>>> v3.18
 =======
 	dev->dev_private = NULL;
 >>>>>>> v3.18
@@ -155,7 +170,11 @@ static int shmob_drm_load(struct drm_device *dev, unsigned long flags)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sdev = kzalloc(sizeof(*sdev), GFP_KERNEL);
+=======
+	sdev = devm_kzalloc(&pdev->dev, sizeof(*sdev), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	sdev = devm_kzalloc(&pdev->dev, sizeof(*sdev), GFP_KERNEL);
 >>>>>>> v3.18
@@ -176,6 +195,7 @@ static int shmob_drm_load(struct drm_device *dev, unsigned long flags)
 	if (res == NULL) {
 		dev_err(&pdev->dev, "failed to get memory resource\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EINVAL;
 		goto done;
 	}
@@ -186,6 +206,8 @@ static int shmob_drm_load(struct drm_device *dev, unsigned long flags)
 		ret = -ENOMEM;
 		goto done;
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -194,11 +216,15 @@ static int shmob_drm_load(struct drm_device *dev, unsigned long flags)
 	if (sdev->mmio == NULL) {
 		dev_err(&pdev->dev, "failed to remap memory resource\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	ret = shmob_drm_setup_clocks(sdev, pdata->clk_source);
 	if (ret < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto done;
 
@@ -206,18 +232,27 @@ static int shmob_drm_load(struct drm_device *dev, unsigned long flags)
 	if (ret < 0)
 		goto done;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 
 	ret = shmob_drm_init_interface(sdev);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = shmob_drm_modeset_init(sdev);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "failed to initialize mode setting\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto done;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -238,7 +273,11 @@ static int shmob_drm_load(struct drm_device *dev, unsigned long flags)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = drm_irq_install(dev);
+=======
+	ret = drm_irq_install(dev, platform_get_irq(dev->platformdev, 0));
+>>>>>>> v3.18
 =======
 	ret = drm_irq_install(dev, platform_get_irq(dev->platformdev, 0));
 >>>>>>> v3.18
@@ -314,7 +353,10 @@ static const struct file_operations shmob_drm_fops = {
 	.poll		= drm_poll,
 	.read		= drm_read,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fasync		= drm_fasync,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.llseek		= no_llseek,
@@ -323,17 +365,23 @@ static const struct file_operations shmob_drm_fops = {
 
 static struct drm_driver shmob_drm_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.driver_features	= DRIVER_HAVE_IRQ | DRIVER_GEM | DRIVER_MODESET,
 	.load			= shmob_drm_load,
 	.unload			= shmob_drm_unload,
 	.preclose		= shmob_drm_preclose,
 =======
+=======
+>>>>>>> v3.18
 	.driver_features	= DRIVER_HAVE_IRQ | DRIVER_GEM | DRIVER_MODESET
 				| DRIVER_PRIME,
 	.load			= shmob_drm_load,
 	.unload			= shmob_drm_unload,
 	.preclose		= shmob_drm_preclose,
 	.set_busid		= drm_platform_set_busid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.irq_handler		= shmob_drm_irq,
 	.get_vblank_counter	= drm_vblank_count,
@@ -342,10 +390,13 @@ static struct drm_driver shmob_drm_driver = {
 	.gem_free_object	= drm_gem_cma_free_object,
 	.gem_vm_ops		= &drm_gem_cma_vm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dumb_create		= drm_gem_cma_dumb_create,
 	.dumb_map_offset	= drm_gem_cma_dumb_map_offset,
 	.dumb_destroy		= drm_gem_cma_dumb_destroy,
 =======
+=======
+>>>>>>> v3.18
 	.prime_handle_to_fd	= drm_gem_prime_handle_to_fd,
 	.prime_fd_to_handle	= drm_gem_prime_fd_to_handle,
 	.gem_prime_import	= drm_gem_prime_import,
@@ -358,6 +409,9 @@ static struct drm_driver shmob_drm_driver = {
 	.dumb_create		= drm_gem_cma_dumb_create,
 	.dumb_map_offset	= drm_gem_cma_dumb_map_offset,
 	.dumb_destroy		= drm_gem_dumb_destroy,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.fops			= &shmob_drm_fops,
 	.name			= "shmob-drm",
@@ -372,7 +426,11 @@ static struct drm_driver shmob_drm_driver = {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CONFIG_PM_SLEEP
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -415,7 +473,13 @@ static int shmob_drm_probe(struct platform_device *pdev)
 static int shmob_drm_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_platform_exit(&shmob_drm_driver, pdev);
+=======
+	struct shmob_drm_device *sdev = platform_get_drvdata(pdev);
+
+	drm_put_dev(sdev->ddev);
+>>>>>>> v3.18
 =======
 	struct shmob_drm_device *sdev = platform_get_drvdata(pdev);
 

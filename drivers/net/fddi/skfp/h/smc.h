@@ -470,6 +470,7 @@ struct s_smc {
 extern const struct fddi_addr fddi_broadcast;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void all_selection_criteria(struct s_smc *smc);
 extern void card_stop(struct s_smc *smc);
 extern void init_board(struct s_smc *smc, u_char *mac_addr);
@@ -485,6 +486,8 @@ extern void plc2_irq(struct s_smc *smc);
 extern void read_address(struct s_smc *smc, u_char * mac_addr);
 extern void timer_irq(struct s_smc *smc);
 =======
+=======
+>>>>>>> v3.18
 void all_selection_criteria(struct s_smc *smc);
 void card_stop(struct s_smc *smc);
 void init_board(struct s_smc *smc, u_char *mac_addr);
@@ -499,6 +502,9 @@ void plc1_irq(struct s_smc *smc);
 void plc2_irq(struct s_smc *smc);
 void read_address(struct s_smc *smc, u_char *mac_addr);
 void timer_irq(struct s_smc *smc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif	/* _SCMECM_ */

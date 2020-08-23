@@ -55,7 +55,11 @@ static struct workqueue_struct *deferred_wq;
 static atomic_t deferred_trigger_count = ATOMIC_INIT(0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -176,6 +180,7 @@ static void driver_deferred_probe_trigger(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void enable_trigger_defer_cycle(void)
 {
 	driver_deferred_probe_enable = true;
@@ -189,11 +194,14 @@ static void enable_trigger_defer_cycle(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * deferred_probe_initcall() - Enable probing of deferred devices
  *
  * We don't want to get in the way when the bulk of drivers are getting probed.
  * Instead, this initcall makes sure that deferred probing is delayed until
+<<<<<<< HEAD
 <<<<<<< HEAD
  * all the registered initcall functions at a particular level are completed.
  * This function is invoked at every *_initcall_sync level.
@@ -223,6 +231,8 @@ static int deferred_probe_enable_fn(void)
 }
 late_initcall(deferred_probe_enable_fn);
 =======
+=======
+>>>>>>> v3.18
  * late_initcall time.
  */
 static int deferred_probe_initcall(void)
@@ -238,6 +248,9 @@ static int deferred_probe_initcall(void)
 	return 0;
 }
 late_initcall(deferred_probe_initcall);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void driver_bound(struct device *dev)
@@ -249,8 +262,13 @@ static void driver_bound(struct device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("driver: '%s': %s: bound to device '%s'\n", dev_name(dev),
 		 __func__, dev->driver->name);
+=======
+	pr_debug("driver: '%s': %s: bound to device '%s'\n", dev->driver->name,
+		 __func__, dev_name(dev));
+>>>>>>> v3.18
 =======
 	pr_debug("driver: '%s': %s: bound to device '%s'\n", dev->driver->name,
 		 __func__, dev_name(dev));
@@ -641,6 +659,7 @@ void driver_detach(struct device_driver *drv)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * These exports can't be _GPL due to .h files using this within them, and it
@@ -667,5 +686,7 @@ int dev_set_drvdata(struct device *dev, void *data)
 	return 0;
 }
 EXPORT_SYMBOL(dev_set_drvdata);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

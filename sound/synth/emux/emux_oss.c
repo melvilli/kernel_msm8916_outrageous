@@ -70,8 +70,12 @@ snd_emux_init_seq_oss(struct snd_emux *emu)
 	struct snd_seq_device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* using device#1 here for avoiding conflicts with OPL3 */
 	if (snd_seq_device_new(emu->card, 1, SNDRV_SEQ_DEV_ID_OSS,
+=======
+	if (snd_seq_device_new(emu->card, 0, SNDRV_SEQ_DEV_ID_OSS,
+>>>>>>> v3.18
 =======
 	if (snd_seq_device_new(emu->card, 0, SNDRV_SEQ_DEV_ID_OSS,
 >>>>>>> v3.18
@@ -124,15 +128,21 @@ snd_emux_open_seq_oss(struct snd_seq_oss_arg *arg, void *closure)
 		return -ENXIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!snd_emux_inc_count(emu))
 		return -EFAULT;
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&emu->register_mutex);
 
 	if (!snd_emux_inc_count(emu)) {
 		mutex_unlock(&emu->register_mutex);
 		return -EFAULT;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(&callback, 0, sizeof(callback));
@@ -146,6 +156,10 @@ snd_emux_open_seq_oss(struct snd_seq_oss_arg *arg, void *closure)
 		snd_printk(KERN_ERR "can't create port\n");
 		snd_emux_dec_count(emu);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mutex_unlock(&emu->register_mutex);
+>>>>>>> v3.18
 =======
 		mutex_unlock(&emu->register_mutex);
 >>>>>>> v3.18
@@ -162,6 +176,11 @@ snd_emux_open_seq_oss(struct snd_seq_oss_arg *arg, void *closure)
 
 	snd_emux_reset_port(p);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	mutex_unlock(&emu->register_mutex);
+>>>>>>> v3.18
 =======
 
 	mutex_unlock(&emu->register_mutex);
@@ -212,6 +231,10 @@ snd_emux_close_seq_oss(struct snd_seq_oss_arg *arg)
 		return -ENXIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&emu->register_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&emu->register_mutex);
 >>>>>>> v3.18
@@ -221,6 +244,10 @@ snd_emux_close_seq_oss(struct snd_seq_oss_arg *arg)
 	snd_emux_dec_count(emu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&emu->register_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&emu->register_mutex);
 >>>>>>> v3.18

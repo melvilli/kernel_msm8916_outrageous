@@ -1,20 +1,29 @@
 #include "../perf.h"
 #include "util.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sys/mman.h>
 #ifdef BACKTRACE_SUPPORT
 =======
+=======
+>>>>>>> v3.18
 #include "debug.h"
 #include <api/fs/fs.h>
 #include <sys/mman.h>
 #ifdef HAVE_BACKTRACE_SUPPORT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <execinfo.h>
 #endif
 #include <stdio.h>
 #include <stdlib.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <string.h>
 #include <errno.h>
 #include <limits.h>
@@ -29,6 +38,9 @@ struct callchain_param	callchain_param = {
 	.order  = ORDER_CALLEE,
 	.key	= CCKEY_FUNCTION
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -36,6 +48,10 @@ struct callchain_param	callchain_param = {
  */
 unsigned int page_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int cacheline_size;
+>>>>>>> v3.18
 =======
 int cacheline_size;
 >>>>>>> v3.18
@@ -84,6 +100,7 @@ int mkdir_p(char *path, mode_t mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int slow_copyfile(const char *from, const char *to)
 {
 	int err = 0;
@@ -91,6 +108,8 @@ static int slow_copyfile(const char *from, const char *to)
 	size_t n;
 	FILE *from_fp = fopen(from, "r"), *to_fp;
 =======
+=======
+>>>>>>> v3.18
 static int slow_copyfile(const char *from, const char *to, mode_t mode)
 {
 	int err = -1;
@@ -98,13 +117,22 @@ static int slow_copyfile(const char *from, const char *to, mode_t mode)
 	size_t n;
 	FILE *from_fp = fopen(from, "r"), *to_fp;
 	mode_t old_umask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (from_fp == NULL)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	to_fp = fopen(to, "w");
+=======
+	old_umask = umask(mode ^ 0777);
+	to_fp = fopen(to, "w");
+	umask(old_umask);
+>>>>>>> v3.18
 =======
 	old_umask = umask(mode ^ 0777);
 	to_fp = fopen(to, "w");
@@ -127,7 +155,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int copyfile(const char *from, const char *to)
+=======
+int copyfile_mode(const char *from, const char *to, mode_t mode)
+>>>>>>> v3.18
 =======
 int copyfile_mode(const char *from, const char *to, mode_t mode)
 >>>>>>> v3.18
@@ -142,7 +174,11 @@ int copyfile_mode(const char *from, const char *to, mode_t mode)
 
 	if (st.st_size == 0) /* /proc? do it slowly... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return slow_copyfile(from, to);
+=======
+		return slow_copyfile(from, to, mode);
+>>>>>>> v3.18
 =======
 		return slow_copyfile(from, to, mode);
 >>>>>>> v3.18
@@ -152,7 +188,11 @@ int copyfile_mode(const char *from, const char *to, mode_t mode)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tofd = creat(to, 0755);
+=======
+	tofd = creat(to, mode);
+>>>>>>> v3.18
 =======
 	tofd = creat(to, mode);
 >>>>>>> v3.18
@@ -178,12 +218,18 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int copyfile(const char *from, const char *to)
 {
 	return copyfile_mode(from, to, 0755);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned long convert_unit(unsigned long value, char *unit)
 {
@@ -208,6 +254,7 @@ unsigned long convert_unit(unsigned long value, char *unit)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int readn(int fd, void *buf, size_t n)
 {
 	void *buf_start = buf;
@@ -224,6 +271,8 @@ int readn(int fd, void *buf, size_t n)
 
 	return buf - buf_start;
 =======
+=======
+>>>>>>> v3.18
 static ssize_t ion(bool is_read, int fd, void *buf, size_t n)
 {
 	void *buf_start = buf;
@@ -260,6 +309,9 @@ ssize_t readn(int fd, void *buf, size_t n)
 ssize_t writen(int fd, void *buf, size_t n)
 {
 	return ion(false, fd, buf, n);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -308,7 +360,11 @@ int hex2u64(const char *ptr, u64 *long_val)
 
 /* Obtain a backtrace and print it to stdout. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef BACKTRACE_SUPPORT
+=======
+#ifdef HAVE_BACKTRACE_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_BACKTRACE_SUPPORT
 >>>>>>> v3.18
@@ -353,7 +409,10 @@ void get_term_dimensions(struct winsize *ws)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void set_term_quiet_input(struct termios *old)
 {
 	struct termios tc;
@@ -366,6 +425,9 @@ void set_term_quiet_input(struct termios *old)
 	tcsetattr(0, TCSANOW, &tc);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void set_tracing_events_path(const char *mountpoint)
 {
@@ -392,7 +454,10 @@ void perf_debugfs_set_path(const char *mntpt)
 	set_tracing_events_path(mntpt);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static const char *find_debugfs(void)
 {
@@ -660,4 +725,7 @@ bool find_process(const char *name)
 	closedir(dir);
 	return ret ? false : true;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

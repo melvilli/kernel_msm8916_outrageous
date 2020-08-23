@@ -68,10 +68,13 @@ module_param_named(notimeout, i8042_notimeout, bool, 0);
 MODULE_PARM_DESC(notimeout, "Ignore timeouts signalled by i8042");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool i8042_kbdreset;
 module_param_named(kbdreset, i8042_kbdreset, bool, 0);
 MODULE_PARM_DESC(kbdreset, "Reset device connected to KBD port");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_X86
@@ -95,6 +98,11 @@ MODULE_PARM_DESC(debug, "Turn i8042 debugging mode on and off");
 
 static bool i8042_bypass_aux_irq_test;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static char i8042_kbd_firmware_id[128];
+static char i8042_aux_firmware_id[128];
+>>>>>>> v3.18
 =======
 static char i8042_kbd_firmware_id[128];
 static char i8042_aux_firmware_id[128];
@@ -236,6 +244,7 @@ static int i8042_flush(void)
 	unsigned long flags;
 	unsigned char data, str;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i = 0;
 
 	spin_lock_irqsave(&i8042_lock, flags);
@@ -247,6 +256,8 @@ static int i8042_flush(void)
 		dbg("%02x <- i8042 (flush, %s)\n",
 		    data, str & I8042_STR_AUXDATA ? "aux" : "kbd");
 =======
+=======
+>>>>>>> v3.18
 	int count = 0;
 	int retval = 0;
 
@@ -262,13 +273,20 @@ static int i8042_flush(void)
 			retval = -EIO;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	spin_unlock_irqrestore(&i8042_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return i;
+=======
+	return retval;
+>>>>>>> v3.18
 =======
 	return retval;
 >>>>>>> v3.18
@@ -818,6 +836,7 @@ static int __init i8042_check_aux(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Reset keyboard (needed on some laptops to successfully detect
  * touchpad, e.g., some Gigabyte laptop models with Elantech
  * touchpads).
@@ -828,6 +847,8 @@ static int __init i8042_check_aux(void)
 	}
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Test AUX IRQ delivery to make sure BIOS did not grab the IRQ and
@@ -897,7 +918,11 @@ static int __init i8042_check_aux(void)
 static int i8042_controller_check(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (i8042_flush() == I8042_BUFFER_SIZE) {
+=======
+	if (i8042_flush()) {
+>>>>>>> v3.18
 =======
 	if (i8042_flush()) {
 >>>>>>> v3.18
@@ -1083,7 +1108,11 @@ static void i8042_controller_reset(bool force_reset)
  * i8042_panic_blink() will turn the keyboard LEDs on or off and is called
  * when kernel panics. Flashing LEDs is useful for users running X who may
 <<<<<<< HEAD
+<<<<<<< HEAD
  * not see the console and will help distingushing panics from "real"
+=======
+ * not see the console and will help distinguishing panics from "real"
+>>>>>>> v3.18
 =======
  * not see the console and will help distinguishing panics from "real"
 >>>>>>> v3.18
@@ -1265,7 +1294,10 @@ static int __init i8042_create_kbd_port(void)
 	serio->stop		= i8042_stop;
 	serio->close		= i8042_port_close;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	serio->ps2_cmd_mutex	= &i8042_mutex;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	serio->port_data	= port;
@@ -1273,6 +1305,11 @@ static int __init i8042_create_kbd_port(void)
 	strlcpy(serio->name, "i8042 KBD port", sizeof(serio->name));
 	strlcpy(serio->phys, I8042_KBD_PHYS_DESC, sizeof(serio->phys));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	strlcpy(serio->firmware_id, i8042_kbd_firmware_id,
+		sizeof(serio->firmware_id));
+>>>>>>> v3.18
 =======
 	strlcpy(serio->firmware_id, i8042_kbd_firmware_id,
 		sizeof(serio->firmware_id));
@@ -1299,7 +1336,10 @@ static int __init i8042_create_aux_port(int idx)
 	serio->start		= i8042_start;
 	serio->stop		= i8042_stop;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	serio->ps2_cmd_mutex	= &i8042_mutex;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	serio->port_data	= port;
@@ -1308,6 +1348,11 @@ static int __init i8042_create_aux_port(int idx)
 		strlcpy(serio->name, "i8042 AUX port", sizeof(serio->name));
 		strlcpy(serio->phys, I8042_AUX_PHYS_DESC, sizeof(serio->phys));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		strlcpy(serio->firmware_id, i8042_aux_firmware_id,
+			sizeof(serio->firmware_id));
+>>>>>>> v3.18
 =======
 		strlcpy(serio->firmware_id, i8042_aux_firmware_id,
 			sizeof(serio->firmware_id));
@@ -1317,6 +1362,11 @@ static int __init i8042_create_aux_port(int idx)
 		snprintf(serio->name, sizeof(serio->name), "i8042 AUX%d port", idx);
 		snprintf(serio->phys, sizeof(serio->phys), I8042_MUX_PHYS_DESC, idx + 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		strlcpy(serio->firmware_id, i8042_aux_firmware_id,
+			sizeof(serio->firmware_id));
+>>>>>>> v3.18
 =======
 		strlcpy(serio->firmware_id, i8042_aux_firmware_id,
 			sizeof(serio->firmware_id));
@@ -1375,7 +1425,10 @@ static void i8042_unregister_ports(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Checks whether port belongs to i8042 controller.
  */
@@ -1391,6 +1444,9 @@ bool i8042_check_port_owner(const struct serio *port)
 }
 EXPORT_SYMBOL(i8042_check_port_owner);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void i8042_free_irqs(void)
 {

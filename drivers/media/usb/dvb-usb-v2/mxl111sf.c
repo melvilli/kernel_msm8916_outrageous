@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2010 Michael Krufky (mkrufky@kernellabs.com)
+=======
+ * Copyright (C) 2010-2014 Michael Krufky (mkrufky@linuxtv.org)
+>>>>>>> v3.18
 =======
  * Copyright (C) 2010-2014 Michael Krufky (mkrufky@linuxtv.org)
 >>>>>>> v3.18
@@ -36,17 +40,23 @@ MODULE_PARM_DESC(debug, "set debugging level "
 		 "(1=info, 2=xfer, 4=i2c, 8=reg, 16=adv (or-able)).");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dvb_usb_mxl111sf_isoc;
 module_param_named(isoc, dvb_usb_mxl111sf_isoc, int, 0644);
 MODULE_PARM_DESC(isoc, "enable usb isoc xfer (0=bulk, 1=isoc).");
 
 int dvb_usb_mxl111sf_spi;
 =======
+=======
+>>>>>>> v3.18
 static int dvb_usb_mxl111sf_isoc;
 module_param_named(isoc, dvb_usb_mxl111sf_isoc, int, 0644);
 MODULE_PARM_DESC(isoc, "enable usb isoc xfer (0=bulk, 1=isoc).");
 
 static int dvb_usb_mxl111sf_spi;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 module_param_named(spi, dvb_usb_mxl111sf_spi, int, 0644);
 MODULE_PARM_DESC(spi, "use spi rather than tp for data xfer (0=tp, 1=spi).");
@@ -56,7 +66,11 @@ MODULE_PARM_DESC(spi, "use spi rather than tp for data xfer (0=tp, 1=spi).");
 #define ANT_PATH_INTERNAL 2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dvb_usb_mxl111sf_rfswitch =
+=======
+static int dvb_usb_mxl111sf_rfswitch =
+>>>>>>> v3.18
 =======
 static int dvb_usb_mxl111sf_rfswitch =
 >>>>>>> v3.18
@@ -72,12 +86,15 @@ MODULE_PARM_DESC(rfswitch, "force rf switch position (0=auto, 1=ext, 2=int).");
 DVB_DEFINE_MOD_OPT_ADAPTER_NR(adapter_nr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define deb_info pr_debug
 #define deb_reg pr_debug
 #define deb_adv pr_debug
 #define err pr_err
 #define info pr_info
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int mxl111sf_ctrl_msg(struct dvb_usb_device *d,
@@ -93,7 +110,11 @@ int mxl111sf_ctrl_msg(struct dvb_usb_device *d,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_adv("%s(wlen = %d, rlen = %d)\n", __func__, wlen, rlen);
+=======
+	pr_debug("%s(wlen = %d, rlen = %d)\n", __func__, wlen, rlen);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(wlen = %d, rlen = %d)\n", __func__, wlen, rlen);
 >>>>>>> v3.18
@@ -130,7 +151,11 @@ int mxl111sf_read_reg(struct mxl111sf_state *state, u8 addr, u8 *data)
 		*data = buf[1];
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err("invalid response reading reg: 0x%02x != 0x%02x, 0x%02x",
+=======
+		pr_err("invalid response reading reg: 0x%02x != 0x%02x, 0x%02x",
+>>>>>>> v3.18
 =======
 		pr_err("invalid response reading reg: 0x%02x != 0x%02x, 0x%02x",
 >>>>>>> v3.18
@@ -139,7 +164,11 @@ int mxl111sf_read_reg(struct mxl111sf_state *state, u8 addr, u8 *data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_reg("R: (0x%02x, 0x%02x)\n", addr, *data);
+=======
+	pr_debug("R: (0x%02x, 0x%02x)\n", addr, buf[1]);
+>>>>>>> v3.18
 =======
 	pr_debug("R: (0x%02x, 0x%02x)\n", addr, buf[1]);
 >>>>>>> v3.18
@@ -153,17 +182,23 @@ int mxl111sf_write_reg(struct mxl111sf_state *state, u8 addr, u8 data)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_reg("W: (0x%02x, 0x%02x)\n", addr, data);
 
 	ret = mxl111sf_ctrl_msg(state->d, MXL_CMD_REG_WRITE, buf, 2, NULL, 0);
 	if (mxl_fail(ret))
 		err("error writing reg: 0x%02x, val: 0x%02x", addr, data);
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("W: (0x%02x, 0x%02x)\n", addr, data);
 
 	ret = mxl111sf_ctrl_msg(state->d, MXL_CMD_REG_WRITE, buf, 2, NULL, 0);
 	if (mxl_fail(ret))
 		pr_err("error writing reg: 0x%02x, val: 0x%02x", addr, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -175,7 +210,11 @@ int mxl111sf_write_reg_mask(struct mxl111sf_state *state,
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 val;
+=======
+	u8 val = 0;
+>>>>>>> v3.18
 =======
 	u8 val = 0;
 >>>>>>> v3.18
@@ -186,7 +225,11 @@ int mxl111sf_write_reg_mask(struct mxl111sf_state *state,
 		/* dont know why this usually errors out on the first try */
 		if (mxl_fail(ret))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err("error writing addr: 0x%02x, mask: 0x%02x, "
+=======
+			pr_err("error writing addr: 0x%02x, mask: 0x%02x, "
+>>>>>>> v3.18
 =======
 			pr_err("error writing addr: 0x%02x, mask: 0x%02x, "
 >>>>>>> v3.18
@@ -223,7 +266,11 @@ int mxl111sf_ctrl_program_regs(struct mxl111sf_state *state,
 					      ctrl_reg_info[i].data);
 		if (mxl_fail(ret)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err("failed on reg #%d (0x%02x)", i,
+=======
+			pr_err("failed on reg #%d (0x%02x)", i,
+>>>>>>> v3.18
 =======
 			pr_err("failed on reg #%d (0x%02x)", i,
 >>>>>>> v3.18
@@ -285,7 +332,11 @@ static int mxl1x1sf_get_chip_info(struct mxl111sf_state *state)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info("%s detected, %s (0x%x)", mxl_chip, mxl_rev, ver);
+=======
+	pr_info("%s detected, %s (0x%x)", mxl_chip, mxl_rev, ver);
+>>>>>>> v3.18
 =======
 	pr_info("%s detected, %s (0x%x)", mxl_chip, mxl_rev, ver);
 >>>>>>> v3.18
@@ -303,7 +354,11 @@ fail:
 		___ret = mxl1x1sf_get_chip_info(state);			\
 		if (mxl_fail(___ret))					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err("failed to get chip info during probe");	\
+=======
+			pr_err("failed to get chip info during probe");	\
+>>>>>>> v3.18
 =======
 			pr_err("failed to get chip info during probe");	\
 >>>>>>> v3.18
@@ -332,7 +387,11 @@ static int mxl111sf_adap_fe_init(struct dvb_frontend *fe)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* exit if we didnt initialize the driver yet */
+=======
+	/* exit if we didn't initialize the driver yet */
+>>>>>>> v3.18
 =======
 	/* exit if we didn't initialize the driver yet */
 >>>>>>> v3.18
@@ -342,7 +401,11 @@ static int mxl111sf_adap_fe_init(struct dvb_frontend *fe)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s()\n", __func__);
+=======
+	pr_debug("%s()\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_debug("%s()\n", __func__);
 >>>>>>> v3.18
@@ -353,7 +416,11 @@ static int mxl111sf_adap_fe_init(struct dvb_frontend *fe)
 
 	if (usb_set_interface(d->udev, 0, state->alt_mode) < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err("set interface failed");
+=======
+		pr_err("set interface failed");
+>>>>>>> v3.18
 =======
 		pr_err("set interface failed");
 >>>>>>> v3.18
@@ -400,7 +467,11 @@ static int mxl111sf_adap_fe_sleep(struct dvb_frontend *fe)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* exit if we didnt initialize the driver yet */
+=======
+	/* exit if we didn't initialize the driver yet */
+>>>>>>> v3.18
 =======
 	/* exit if we didn't initialize the driver yet */
 >>>>>>> v3.18
@@ -410,7 +481,11 @@ static int mxl111sf_adap_fe_sleep(struct dvb_frontend *fe)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s()\n", __func__);
+=======
+	pr_debug("%s()\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_debug("%s()\n", __func__);
 >>>>>>> v3.18
@@ -432,7 +507,11 @@ static int mxl111sf_ep6_streaming_ctrl(struct dvb_frontend *fe, int onoff)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s(%d)\n", __func__, onoff);
+=======
+	pr_debug("%s(%d)\n", __func__, onoff);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(%d)\n", __func__, onoff);
 >>>>>>> v3.18
@@ -460,7 +539,11 @@ static int mxl111sf_ep5_streaming_ctrl(struct dvb_frontend *fe, int onoff)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s(%d)\n", __func__, onoff);
+=======
+	pr_debug("%s(%d)\n", __func__, onoff);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(%d)\n", __func__, onoff);
 >>>>>>> v3.18
@@ -490,7 +573,11 @@ static int mxl111sf_ep4_streaming_ctrl(struct dvb_frontend *fe, int onoff)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s(%d)\n", __func__, onoff);
+=======
+	pr_debug("%s(%d)\n", __func__, onoff);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(%d)\n", __func__, onoff);
 >>>>>>> v3.18
@@ -524,7 +611,11 @@ static int mxl111sf_lgdt3305_frontend_attach(struct dvb_usb_adapter *adap, u8 fe
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_adv("%s()\n", __func__);
+=======
+	pr_debug("%s()\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_debug("%s()\n", __func__);
 >>>>>>> v3.18
@@ -536,7 +627,11 @@ static int mxl111sf_lgdt3305_frontend_attach(struct dvb_usb_adapter *adap, u8 fe
 
 	if (usb_set_interface(d->udev, 0, state->alt_mode) < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err("set interface failed");
+=======
+		pr_err("set interface failed");
+>>>>>>> v3.18
 =======
 		pr_err("set interface failed");
 >>>>>>> v3.18
@@ -603,7 +698,11 @@ static int mxl111sf_lg2160_frontend_attach(struct dvb_usb_adapter *adap, u8 fe_i
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_adv("%s()\n", __func__);
+=======
+	pr_debug("%s()\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_debug("%s()\n", __func__);
 >>>>>>> v3.18
@@ -615,7 +714,11 @@ static int mxl111sf_lg2160_frontend_attach(struct dvb_usb_adapter *adap, u8 fe_i
 
 	if (usb_set_interface(d->udev, 0, state->alt_mode) < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err("set interface failed");
+=======
+		pr_err("set interface failed");
+>>>>>>> v3.18
 =======
 		pr_err("set interface failed");
 >>>>>>> v3.18
@@ -696,7 +799,11 @@ static int mxl111sf_lg2161_frontend_attach(struct dvb_usb_adapter *adap, u8 fe_i
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_adv("%s()\n", __func__);
+=======
+	pr_debug("%s()\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_debug("%s()\n", __func__);
 >>>>>>> v3.18
@@ -708,7 +815,11 @@ static int mxl111sf_lg2161_frontend_attach(struct dvb_usb_adapter *adap, u8 fe_i
 
 	if (usb_set_interface(d->udev, 0, state->alt_mode) < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err("set interface failed");
+=======
+		pr_err("set interface failed");
+>>>>>>> v3.18
 =======
 		pr_err("set interface failed");
 >>>>>>> v3.18
@@ -791,7 +902,11 @@ static int mxl111sf_lg2161_ep6_frontend_attach(struct dvb_usb_adapter *adap, u8 
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_adv("%s()\n", __func__);
+=======
+	pr_debug("%s()\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_debug("%s()\n", __func__);
 >>>>>>> v3.18
@@ -803,7 +918,11 @@ static int mxl111sf_lg2161_ep6_frontend_attach(struct dvb_usb_adapter *adap, u8 
 
 	if (usb_set_interface(d->udev, 0, state->alt_mode) < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err("set interface failed");
+=======
+		pr_err("set interface failed");
+>>>>>>> v3.18
 =======
 		pr_err("set interface failed");
 >>>>>>> v3.18
@@ -874,7 +993,11 @@ static int mxl111sf_attach_demod(struct dvb_usb_adapter *adap, u8 fe_id)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_adv("%s()\n", __func__);
+=======
+	pr_debug("%s()\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_debug("%s()\n", __func__);
 >>>>>>> v3.18
@@ -886,7 +1009,11 @@ static int mxl111sf_attach_demod(struct dvb_usb_adapter *adap, u8 fe_id)
 
 	if (usb_set_interface(d->udev, 0, state->alt_mode) < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err("set interface failed");
+=======
+		pr_err("set interface failed");
+>>>>>>> v3.18
 =======
 		pr_err("set interface failed");
 >>>>>>> v3.18
@@ -942,7 +1069,11 @@ static inline int mxl111sf_set_ant_path(struct mxl111sf_state *state,
 
 #define DbgAntHunt(x, pwr0, pwr1, pwr2, pwr3) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err("%s(%d) FINAL input set to %s rxPwr:%d|%d|%d|%d\n", \
+=======
+	pr_err("%s(%d) FINAL input set to %s rxPwr:%d|%d|%d|%d\n", \
+>>>>>>> v3.18
 =======
 	pr_err("%s(%d) FINAL input set to %s rxPwr:%d|%d|%d|%d\n", \
 >>>>>>> v3.18
@@ -1012,7 +1143,11 @@ static int mxl111sf_attach_tuner(struct dvb_usb_adapter *adap)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_adv("%s()\n", __func__);
+=======
+	pr_debug("%s()\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_debug("%s()\n", __func__);
 >>>>>>> v3.18
@@ -1033,7 +1168,11 @@ static u32 mxl111sf_i2c_func(struct i2c_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct i2c_algorithm mxl111sf_i2c_algo = {
+=======
+static struct i2c_algorithm mxl111sf_i2c_algo = {
+>>>>>>> v3.18
 =======
 static struct i2c_algorithm mxl111sf_i2c_algo = {
 >>>>>>> v3.18
@@ -1054,7 +1193,11 @@ static int mxl111sf_init(struct dvb_usb_device *d)
 	ret = get_chip_info(state);
 	if (mxl_fail(ret))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err("failed to get chip info during probe");
+=======
+		pr_err("failed to get chip info during probe");
+>>>>>>> v3.18
 =======
 		pr_err("failed to get chip info during probe");
 >>>>>>> v3.18
@@ -1106,7 +1249,11 @@ static int mxl111sf_frontend_attach_atsc_mh(struct dvb_usb_adapter *adap)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s\n", __func__);
+=======
+	pr_debug("%s\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_debug("%s\n", __func__);
 >>>>>>> v3.18
@@ -1130,7 +1277,11 @@ static int mxl111sf_frontend_attach_mercury(struct dvb_usb_adapter *adap)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s\n", __func__);
+=======
+	pr_debug("%s\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_debug("%s\n", __func__);
 >>>>>>> v3.18
@@ -1154,7 +1305,11 @@ static int mxl111sf_frontend_attach_mercury_mh(struct dvb_usb_adapter *adap)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s\n", __func__);
+=======
+	pr_debug("%s\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_debug("%s\n", __func__);
 >>>>>>> v3.18
@@ -1174,7 +1329,11 @@ static int mxl111sf_frontend_attach_mercury_mh(struct dvb_usb_adapter *adap)
 static void mxl111sf_stream_config_bulk(struct usb_data_stream_properties *stream, u8 endpoint)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s: endpoint=%d size=8192\n", __func__, endpoint);
+=======
+	pr_debug("%s: endpoint=%d size=8192\n", __func__, endpoint);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: endpoint=%d size=8192\n", __func__, endpoint);
 >>>>>>> v3.18
@@ -1188,7 +1347,11 @@ static void mxl111sf_stream_config_isoc(struct usb_data_stream_properties *strea
 		u8 endpoint, int framesperurb, int framesize)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s: endpoint=%d size=%d\n", __func__, endpoint,
+=======
+	pr_debug("%s: endpoint=%d size=%d\n", __func__, endpoint,
+>>>>>>> v3.18
 =======
 	pr_debug("%s: endpoint=%d size=%d\n", __func__, endpoint,
 >>>>>>> v3.18
@@ -1211,7 +1374,11 @@ static int mxl111sf_get_stream_config_dvbt(struct dvb_frontend *fe,
 		u8 *ts_type, struct usb_data_stream_properties *stream)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s: fe=%d\n", __func__, fe->id);
+=======
+	pr_debug("%s: fe=%d\n", __func__, fe->id);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: fe=%d\n", __func__, fe->id);
 >>>>>>> v3.18
@@ -1256,7 +1423,11 @@ static int mxl111sf_get_stream_config_atsc(struct dvb_frontend *fe,
 		u8 *ts_type, struct usb_data_stream_properties *stream)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s: fe=%d\n", __func__, fe->id);
+=======
+	pr_debug("%s: fe=%d\n", __func__, fe->id);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: fe=%d\n", __func__, fe->id);
 >>>>>>> v3.18
@@ -1301,7 +1472,11 @@ static int mxl111sf_get_stream_config_mh(struct dvb_frontend *fe,
 		u8 *ts_type, struct usb_data_stream_properties *stream)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s: fe=%d\n", __func__, fe->id);
+=======
+	pr_debug("%s: fe=%d\n", __func__, fe->id);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: fe=%d\n", __func__, fe->id);
 >>>>>>> v3.18
@@ -1346,7 +1521,11 @@ static int mxl111sf_get_stream_config_atsc_mh(struct dvb_frontend *fe,
 		u8 *ts_type, struct usb_data_stream_properties *stream)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s: fe=%d\n", __func__, fe->id);
+=======
+	pr_debug("%s: fe=%d\n", __func__, fe->id);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: fe=%d\n", __func__, fe->id);
 >>>>>>> v3.18
@@ -1376,7 +1555,11 @@ static int mxl111sf_get_stream_config_atsc_mh(struct dvb_frontend *fe,
 static int mxl111sf_streaming_ctrl_atsc_mh(struct dvb_frontend *fe, int onoff)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s: fe=%d onoff=%d\n", __func__, fe->id, onoff);
+=======
+	pr_debug("%s: fe=%d onoff=%d\n", __func__, fe->id, onoff);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: fe=%d onoff=%d\n", __func__, fe->id, onoff);
 >>>>>>> v3.18
@@ -1424,7 +1607,11 @@ static int mxl111sf_get_stream_config_mercury(struct dvb_frontend *fe,
 		u8 *ts_type, struct usb_data_stream_properties *stream)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s: fe=%d\n", __func__, fe->id);
+=======
+	pr_debug("%s: fe=%d\n", __func__, fe->id);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: fe=%d\n", __func__, fe->id);
 >>>>>>> v3.18
@@ -1460,7 +1647,11 @@ static int mxl111sf_get_stream_config_mercury(struct dvb_frontend *fe,
 static int mxl111sf_streaming_ctrl_mercury(struct dvb_frontend *fe, int onoff)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s: fe=%d onoff=%d\n", __func__, fe->id, onoff);
+=======
+	pr_debug("%s: fe=%d onoff=%d\n", __func__, fe->id, onoff);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: fe=%d onoff=%d\n", __func__, fe->id, onoff);
 >>>>>>> v3.18
@@ -1510,7 +1701,11 @@ static int mxl111sf_get_stream_config_mercury_mh(struct dvb_frontend *fe,
 		u8 *ts_type, struct usb_data_stream_properties *stream)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s: fe=%d\n", __func__, fe->id);
+=======
+	pr_debug("%s: fe=%d\n", __func__, fe->id);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: fe=%d\n", __func__, fe->id);
 >>>>>>> v3.18
@@ -1540,7 +1735,11 @@ static int mxl111sf_get_stream_config_mercury_mh(struct dvb_frontend *fe,
 static int mxl111sf_streaming_ctrl_mercury_mh(struct dvb_frontend *fe, int onoff)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	deb_info("%s: fe=%d onoff=%d\n", __func__, fe->id, onoff);
+=======
+	pr_debug("%s: fe=%d onoff=%d\n", __func__, fe->id, onoff);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: fe=%d onoff=%d\n", __func__, fe->id, onoff);
 >>>>>>> v3.18
@@ -1631,7 +1830,11 @@ static struct usb_driver mxl111sf_usb_driver = {
 module_usb_driver(mxl111sf_usb_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Michael Krufky <mkrufky@kernellabs.com>");
+=======
+MODULE_AUTHOR("Michael Krufky <mkrufky@linuxtv.org>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Michael Krufky <mkrufky@linuxtv.org>");
 >>>>>>> v3.18

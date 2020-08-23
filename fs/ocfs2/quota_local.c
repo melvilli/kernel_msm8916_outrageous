@@ -167,6 +167,7 @@ static int ocfs2_read_quota_block(struct inode *inode, u64 v_block,
 static int ocfs2_local_check_quota_file(struct super_block *sb, int type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int lmagics[MAXQUOTAS] = OCFS2_LOCAL_QMAGICS;
 	unsigned int lversions[MAXQUOTAS] = OCFS2_LOCAL_QVERSIONS;
 	unsigned int gmagics[MAXQUOTAS] = OCFS2_GLOBAL_QMAGICS;
@@ -174,12 +175,17 @@ static int ocfs2_local_check_quota_file(struct super_block *sb, int type)
 	unsigned int ino[MAXQUOTAS] = { USER_QUOTA_SYSTEM_INODE,
 					GROUP_QUOTA_SYSTEM_INODE };
 =======
+=======
+>>>>>>> v3.18
 	unsigned int lmagics[OCFS2_MAXQUOTAS] = OCFS2_LOCAL_QMAGICS;
 	unsigned int lversions[OCFS2_MAXQUOTAS] = OCFS2_LOCAL_QVERSIONS;
 	unsigned int gmagics[OCFS2_MAXQUOTAS] = OCFS2_GLOBAL_QMAGICS;
 	unsigned int gversions[OCFS2_MAXQUOTAS] = OCFS2_GLOBAL_QVERSIONS;
 	unsigned int ino[OCFS2_MAXQUOTAS] = { USER_QUOTA_SYSTEM_INODE,
 					      GROUP_QUOTA_SYSTEM_INODE };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct buffer_head *bh = NULL;
 	struct inode *linode = sb_dqopt(sb)->files[type];
@@ -346,7 +352,11 @@ void ocfs2_free_quota_recovery(struct ocfs2_quota_recovery *rec)
 	int type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (type = 0; type < MAXQUOTAS; type++)
+=======
+	for (type = 0; type < OCFS2_MAXQUOTAS; type++)
+>>>>>>> v3.18
 =======
 	for (type = 0; type < OCFS2_MAXQUOTAS; type++)
 >>>>>>> v3.18
@@ -396,7 +406,11 @@ static struct ocfs2_quota_recovery *ocfs2_alloc_quota_recovery(void)
 	if (!rec)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (type = 0; type < MAXQUOTAS; type++)
+=======
+	for (type = 0; type < OCFS2_MAXQUOTAS; type++)
+>>>>>>> v3.18
 =======
 	for (type = 0; type < OCFS2_MAXQUOTAS; type++)
 >>>>>>> v3.18
@@ -410,16 +424,22 @@ struct ocfs2_quota_recovery *ocfs2_begin_quota_recovery(
 						int slot_num)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int feature[MAXQUOTAS] = { OCFS2_FEATURE_RO_COMPAT_USRQUOTA,
 					    OCFS2_FEATURE_RO_COMPAT_GRPQUOTA};
 	unsigned int ino[MAXQUOTAS] = { LOCAL_USER_QUOTA_SYSTEM_INODE,
 					LOCAL_GROUP_QUOTA_SYSTEM_INODE };
 =======
+=======
+>>>>>>> v3.18
 	unsigned int feature[OCFS2_MAXQUOTAS] = {
 					OCFS2_FEATURE_RO_COMPAT_USRQUOTA,
 					OCFS2_FEATURE_RO_COMPAT_GRPQUOTA};
 	unsigned int ino[OCFS2_MAXQUOTAS] = { LOCAL_USER_QUOTA_SYSTEM_INODE,
 					      LOCAL_GROUP_QUOTA_SYSTEM_INODE };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct super_block *sb = osb->sb;
 	struct ocfs2_local_disk_dqinfo *ldinfo;
@@ -438,7 +458,11 @@ struct ocfs2_quota_recovery *ocfs2_begin_quota_recovery(
 	/* First init... */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (type = 0; type < MAXQUOTAS; type++) {
+=======
+	for (type = 0; type < OCFS2_MAXQUOTAS; type++) {
+>>>>>>> v3.18
 =======
 	for (type = 0; type < OCFS2_MAXQUOTAS; type++) {
 >>>>>>> v3.18
@@ -619,8 +643,13 @@ int ocfs2_finish_quota_recovery(struct ocfs2_super *osb,
 				int slot_num)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ino[MAXQUOTAS] = { LOCAL_USER_QUOTA_SYSTEM_INODE,
 					LOCAL_GROUP_QUOTA_SYSTEM_INODE };
+=======
+	unsigned int ino[OCFS2_MAXQUOTAS] = { LOCAL_USER_QUOTA_SYSTEM_INODE,
+					      LOCAL_GROUP_QUOTA_SYSTEM_INODE };
+>>>>>>> v3.18
 =======
 	unsigned int ino[OCFS2_MAXQUOTAS] = { LOCAL_USER_QUOTA_SYSTEM_INODE,
 					      LOCAL_GROUP_QUOTA_SYSTEM_INODE };
@@ -639,7 +668,11 @@ int ocfs2_finish_quota_recovery(struct ocfs2_super *osb,
 
 	mutex_lock(&sb_dqopt(sb)->dqonoff_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (type = 0; type < MAXQUOTAS; type++) {
+=======
+	for (type = 0; type < OCFS2_MAXQUOTAS; type++) {
+>>>>>>> v3.18
 =======
 	for (type = 0; type < OCFS2_MAXQUOTAS; type++) {
 >>>>>>> v3.18
@@ -1021,8 +1054,13 @@ static struct ocfs2_quota_chunk *ocfs2_local_quota_add_chunk(
 	/* We are protected by dqio_sem so no locking needed */
 	status = ocfs2_extend_no_holes(lqinode, NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       lqinode->i_size + 2 * sb->s_blocksize,
 				       lqinode->i_size);
+=======
+				       i_size_read(lqinode) + 2 * sb->s_blocksize,
+				       i_size_read(lqinode));
+>>>>>>> v3.18
 =======
 				       i_size_read(lqinode) + 2 * sb->s_blocksize,
 				       i_size_read(lqinode));
@@ -1033,7 +1071,11 @@ static struct ocfs2_quota_chunk *ocfs2_local_quota_add_chunk(
 	}
 	status = ocfs2_simple_size_update(lqinode, oinfo->dqi_lqi_bh,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  lqinode->i_size + 2 * sb->s_blocksize);
+=======
+					  i_size_read(lqinode) + 2 * sb->s_blocksize);
+>>>>>>> v3.18
 =======
 					  i_size_read(lqinode) + 2 * sb->s_blocksize);
 >>>>>>> v3.18
@@ -1173,8 +1215,13 @@ static struct ocfs2_quota_chunk *ocfs2_extend_local_quota_file(
 	/* We are protected by dqio_sem so no locking needed */
 	status = ocfs2_extend_no_holes(lqinode, NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       lqinode->i_size + sb->s_blocksize,
 				       lqinode->i_size);
+=======
+				       i_size_read(lqinode) + sb->s_blocksize,
+				       i_size_read(lqinode));
+>>>>>>> v3.18
 =======
 				       i_size_read(lqinode) + sb->s_blocksize,
 				       i_size_read(lqinode));
@@ -1185,7 +1232,11 @@ static struct ocfs2_quota_chunk *ocfs2_extend_local_quota_file(
 	}
 	status = ocfs2_simple_size_update(lqinode, oinfo->dqi_lqi_bh,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  lqinode->i_size + sb->s_blocksize);
+=======
+					  i_size_read(lqinode) + sb->s_blocksize);
+>>>>>>> v3.18
 =======
 					  i_size_read(lqinode) + sb->s_blocksize);
 >>>>>>> v3.18

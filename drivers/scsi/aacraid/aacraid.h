@@ -13,7 +13,11 @@
 
 #ifndef AAC_DRIVER_BUILD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define AAC_DRIVER_BUILD 30200
+=======
+# define AAC_DRIVER_BUILD 30300
+>>>>>>> v3.18
 =======
 # define AAC_DRIVER_BUILD 30300
 >>>>>>> v3.18

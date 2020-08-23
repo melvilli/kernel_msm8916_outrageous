@@ -31,6 +31,10 @@ CONFIG_PCCARD=y
 CONFIG_YENTA=y
 CONFIG_HOTPLUG_PCI=y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_NET=y
+>>>>>>> v3.18
 =======
 CONFIG_NET=y
 >>>>>>> v3.18
@@ -105,8 +109,11 @@ CONFIG_HID_SONY=y
 CONFIG_HID_SUNPLUS=y
 CONFIG_USB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEBUG=y
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_USB_DEVICE_CLASS is not set

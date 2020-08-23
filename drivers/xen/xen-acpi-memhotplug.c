@@ -16,6 +16,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -26,7 +31,10 @@
 #include <linux/types.h>
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <xen/acpi.h>
@@ -176,7 +184,11 @@ static int acpi_memory_get_device(acpi_handle handle,
 
 	acpi_bus_get_device(handle, &device);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device)
+=======
+	if (acpi_device_enumerated(device))
+>>>>>>> v3.18
 =======
 	if (acpi_device_enumerated(device))
 >>>>>>> v3.18
@@ -193,8 +205,14 @@ static int acpi_memory_get_device(acpi_handle handle,
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = acpi_bus_get_device(handle, &device);
 	if (result) {
+=======
+	device = NULL;
+	acpi_bus_get_device(handle, &device);
+	if (!acpi_device_enumerated(device)) {
+>>>>>>> v3.18
 =======
 	device = NULL;
 	acpi_bus_get_device(handle, &device);
@@ -302,7 +320,11 @@ static void acpi_memory_device_notify(acpi_handle handle, u32 event, void *data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(void) acpi_evaluate_hotplug_ost(handle, event, ost_code, NULL);
+=======
+	(void) acpi_evaluate_ost(handle, event, ost_code, NULL);
+>>>>>>> v3.18
 =======
 	(void) acpi_evaluate_ost(handle, event, ost_code, NULL);
 >>>>>>> v3.18

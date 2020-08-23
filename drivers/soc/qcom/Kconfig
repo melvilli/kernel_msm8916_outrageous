@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # When adding new entries keep the list in alphabetical order
 
 if ARCH_MSM
@@ -584,6 +585,8 @@ source "drivers/soc/qcom/memshare/Kconfig"
 
 endif # ARCH_MSM
 =======
+=======
+>>>>>>> v3.18
 #
 # QCOM Soc drivers
 #
@@ -595,4 +598,7 @@ config QCOM_GSBI
           functions for connecting the underlying serial UART, SPI, and I2C
           devices to the output pins.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

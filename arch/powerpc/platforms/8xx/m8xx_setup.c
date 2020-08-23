@@ -19,7 +19,10 @@
 
 #include <asm/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mpc8xx.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/8xx_immap.h>
@@ -32,8 +35,11 @@
 #include "mpc8xx.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mpc8xx_pcmcia_ops m8xx_pcmcia_ops;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int cpm_pic_init(void);
@@ -50,6 +56,10 @@ static irqreturn_t timebase_interrupt(int irq, void *dev)
 static struct irqaction tbint_irqaction = {
 	.handler = timebase_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags = IRQF_NO_THREAD,
+>>>>>>> v3.18
 =======
 	.flags = IRQF_NO_THREAD,
 >>>>>>> v3.18
@@ -229,6 +239,7 @@ void mpc8xx_restart(char *cmd)
 static void cpm_cascade(unsigned int irq, struct irq_desc *desc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct irq_chip *chip;
 	int cascade_irq;
 
@@ -243,12 +254,17 @@ static void cpm_cascade(unsigned int irq, struct irq_desc *desc)
 
 	chip = irq_desc_get_chip(desc);
 =======
+=======
+>>>>>>> v3.18
 	struct irq_chip *chip = irq_desc_get_chip(desc);
 	int cascade_irq = cpm_get_irq();
 
 	if (cascade_irq >= 0)
 		generic_handle_irq(cascade_irq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	chip->irq_eoi(&desc->irq_data);
 }

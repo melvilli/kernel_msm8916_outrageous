@@ -25,9 +25,12 @@ typedef int (elevator_dispatch_fn) (struct request_queue *, int);
 
 typedef void (elevator_add_req_fn) (struct request_queue *, struct request *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef int (elevator_reinsert_req_fn) (struct request_queue *,
 					struct request *);
 typedef bool (elevator_is_urgent_fn) (struct request_queue *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef struct request *(elevator_request_list_fn) (struct request_queue *, struct request *);
@@ -57,9 +60,12 @@ struct elevator_ops
 	elevator_dispatch_fn *elevator_dispatch_fn;
 	elevator_add_req_fn *elevator_add_req_fn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	elevator_reinsert_req_fn *elevator_reinsert_req_fn;
 	elevator_is_urgent_fn *elevator_is_urgent_fn;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	elevator_activate_req_fn *elevator_activate_req_fn;
@@ -141,7 +147,10 @@ extern void elv_bio_merged(struct request_queue *q, struct request *,
 				struct bio *);
 extern void elv_requeue_request(struct request_queue *, struct request *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int elv_reinsert_request(struct request_queue *, struct request *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct request *elv_former_request(struct request_queue *, struct request *);
@@ -150,7 +159,10 @@ extern int elv_register_queue(struct request_queue *q);
 extern void elv_unregister_queue(struct request_queue *q);
 extern int elv_may_queue(struct request_queue *, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void elv_abort_queue(struct request_queue *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void elv_completed_request(struct request_queue *, struct request *);
@@ -222,6 +234,7 @@ enum {
 #define rb_entry_rq(node)	rb_entry((node), struct request, rb_node)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Hack to reuse the csd.list list_head as the fifo time holder while
  * the request is in the io scheduler. Saves an unsigned long in rq.
@@ -233,6 +246,10 @@ enum {
 	list_del_init(&(rq)->queuelist);	\
 	INIT_LIST_HEAD(&(rq)->csd.list);	\
 	} while (0)
+=======
+#define rq_entry_fifo(ptr)	list_entry((ptr), struct request, queuelist)
+#define rq_fifo_clear(rq)	list_del_init(&(rq)->queuelist)
+>>>>>>> v3.18
 =======
 #define rq_entry_fifo(ptr)	list_entry((ptr), struct request, queuelist)
 #define rq_fifo_clear(rq)	list_del_init(&(rq)->queuelist)

@@ -1,16 +1,25 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/err.h>
 #include <linux/of.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/spinlock.h>
 #include "clk.h"
 
 DEFINE_SPINLOCK(imx_ccm_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void __init imx_check_clocks(struct clk *clks[], unsigned int count)
 {
@@ -78,4 +87,7 @@ void imx_cscmr1_fixup(u32 *val)
 	*val ^= CSCMR1_FIXUP;
 	return;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

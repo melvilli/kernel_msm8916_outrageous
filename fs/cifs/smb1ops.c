@@ -24,6 +24,10 @@
 #include "cifs_debug.h"
 #include "cifspdu.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "cifs_unicode.h"
+>>>>>>> v3.18
 =======
 #include "cifs_unicode.h"
 >>>>>>> v3.18
@@ -72,7 +76,11 @@ send_nt_cancel(struct TCP_Server_Info *server, void *buf,
 
 	cifs_dbg(FYI, "issued NT_CANCEL for mid %u, rc = %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 in_buf->Mid, rc);
+=======
+		 get_mid(in_buf), rc);
+>>>>>>> v3.18
 =======
 		 get_mid(in_buf), rc);
 >>>>>>> v3.18
@@ -110,7 +118,11 @@ cifs_find_mid(struct TCP_Server_Info *server, char *buffer)
 	spin_lock(&GlobalMid_Lock);
 	list_for_each_entry(mid, &server->pending_mid_q, qhead) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mid->mid == buf->Mid &&
+=======
+		if (compare_mid(mid->mid, buf) &&
+>>>>>>> v3.18
 =======
 		if (compare_mid(mid->mid, buf) &&
 >>>>>>> v3.18
@@ -385,7 +397,10 @@ coalesce_t2(char *second_buf, struct smb_hdr *target_hdr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 cifs_downgrade_oplock(struct TCP_Server_Info *server,
 			struct cifsInodeInfo *cinode, bool set_level2)
@@ -396,6 +411,9 @@ cifs_downgrade_oplock(struct TCP_Server_Info *server,
 		cifs_set_oplock_level(cinode, 0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool
 cifs_check_trans2(struct mid_q_entry *mid, struct TCP_Server_Info *server,
@@ -475,8 +493,12 @@ cifs_negotiate_wsize(struct cifs_tcon *tcon, struct smb_vol *volume_info)
 	 */
 	if (!(server->capabilities & CAP_LARGE_WRITE_X) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (!(server->capabilities & CAP_UNIX) &&
 	     (server->sec_mode & (SECMODE_SIGN_ENABLED|SECMODE_SIGN_REQUIRED))))
+=======
+	    (!(server->capabilities & CAP_UNIX) && server->sign))
+>>>>>>> v3.18
 =======
 	    (!(server->capabilities & CAP_UNIX) && server->sign))
 >>>>>>> v3.18
@@ -551,6 +573,7 @@ cifs_is_path_accessible(const unsigned int xid, struct cifs_tcon *tcon,
 	rc = CIFSSMBQPathInfo(xid, tcon, full_path, file_info,
 			      0 /* not legacy */, cifs_sb->local_nls,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      cifs_sb->mnt_cifs_flags &
 				CIFS_MOUNT_MAP_SPECIAL_CHR);
 
@@ -559,11 +582,16 @@ cifs_is_path_accessible(const unsigned int xid, struct cifs_tcon *tcon,
 				cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 				  CIFS_MOUNT_MAP_SPECIAL_CHR);
 =======
+=======
+>>>>>>> v3.18
 			      cifs_remap(cifs_sb));
 
 	if (rc == -EOPNOTSUPP || rc == -EINVAL)
 		rc = SMBQueryInformation(xid, tcon, full_path, file_info,
 				cifs_sb->local_nls, cifs_remap(cifs_sb));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(file_info);
 	return rc;
@@ -572,6 +600,7 @@ cifs_is_path_accessible(const unsigned int xid, struct cifs_tcon *tcon,
 static int
 cifs_query_path_info(const unsigned int xid, struct cifs_tcon *tcon,
 		     struct cifs_sb_info *cifs_sb, const char *full_path,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		     FILE_ALL_INFO *data, bool *adjustTZ)
 {
@@ -582,6 +611,8 @@ cifs_query_path_info(const unsigned int xid, struct cifs_tcon *tcon,
 			      cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 						CIFS_MOUNT_MAP_SPECIAL_CHR);
 =======
+=======
+>>>>>>> v3.18
 		     FILE_ALL_INFO *data, bool *adjustTZ, bool *symlink)
 {
 	int rc;
@@ -591,6 +622,9 @@ cifs_query_path_info(const unsigned int xid, struct cifs_tcon *tcon,
 	/* could do find first instead but this returns more info */
 	rc = CIFSSMBQPathInfo(xid, tcon, full_path, data, 0 /* not legacy */,
 			      cifs_sb->local_nls, cifs_remap(cifs_sb));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * BB optimize code so we do not make the above call when server claims
@@ -601,11 +635,14 @@ cifs_query_path_info(const unsigned int xid, struct cifs_tcon *tcon,
 		rc = SMBQueryInformation(xid, tcon, full_path, data,
 					 cifs_sb->local_nls,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 cifs_sb->mnt_cifs_flags &
 						CIFS_MOUNT_MAP_SPECIAL_CHR);
 		*adjustTZ = true;
 	}
 =======
+=======
+>>>>>>> v3.18
 					 cifs_remap(cifs_sb));
 		*adjustTZ = true;
 	}
@@ -633,6 +670,9 @@ cifs_query_path_info(const unsigned int xid, struct cifs_tcon *tcon,
 			CIFSSMBClose(xid, tcon, fid.netfid);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -656,8 +696,12 @@ cifs_get_srv_inum(const unsigned int xid, struct cifs_tcon *tcon,
 	return CIFSGetSrvInodeNumber(xid, tcon, full_path, uniqueid,
 				     cifs_sb->local_nls,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     cifs_sb->mnt_cifs_flags &
 						CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				     cifs_remap(cifs_sb));
+>>>>>>> v3.18
 =======
 				     cifs_remap(cifs_sb));
 >>>>>>> v3.18
@@ -752,8 +796,12 @@ cifs_mkdir_setinfo(struct inode *inode, const char *full_path,
 	info.Attributes = cpu_to_le32(dosattrs);
 	rc = CIFSSMBSetPathInfo(xid, tcon, full_path, &info, cifs_sb->local_nls,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cifs_sb->mnt_cifs_flags &
 						CIFS_MOUNT_MAP_SPECIAL_CHR);
+=======
+				cifs_remap(cifs_sb));
+>>>>>>> v3.18
 =======
 				cifs_remap(cifs_sb));
 >>>>>>> v3.18
@@ -762,6 +810,7 @@ cifs_mkdir_setinfo(struct inode *inode, const char *full_path,
 }
 
 static int
+<<<<<<< HEAD
 <<<<<<< HEAD
 cifs_open_file(const unsigned int xid, struct cifs_tcon *tcon, const char *path,
 	       int disposition, int desired_access, int create_options,
@@ -779,6 +828,8 @@ cifs_open_file(const unsigned int xid, struct cifs_tcon *tcon, const char *path,
 			   cifs_sb->local_nls, cifs_sb->mnt_cifs_flags &
 						CIFS_MOUNT_MAP_SPECIAL_CHR);
 =======
+=======
+>>>>>>> v3.18
 cifs_open_file(const unsigned int xid, struct cifs_open_parms *oparms,
 	       __u32 *oplock, FILE_ALL_INFO *buf)
 {
@@ -791,6 +842,9 @@ cifs_open_file(const unsigned int xid, struct cifs_open_parms *oparms,
 				     oparms->cifs_sb->local_nls,
 				     cifs_remap(oparms->cifs_sb));
 	return CIFS_open(xid, oparms, oplock, buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -801,7 +855,11 @@ cifs_set_fid(struct cifsFileInfo *cfile, struct cifs_fid *fid, __u32 oplock)
 	cfile->fid.netfid = fid->netfid;
 	cifs_set_oplock_level(cinode, oplock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cinode->can_cache_brlcks = cinode->clientCanCacheAll;
+=======
+	cinode->can_cache_brlcks = CIFS_CACHE_WRITE(cinode);
+>>>>>>> v3.18
 =======
 	cinode->can_cache_brlcks = CIFS_CACHE_WRITE(cinode);
 >>>>>>> v3.18
@@ -823,24 +881,34 @@ cifs_flush_file(const unsigned int xid, struct cifs_tcon *tcon,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 cifs_sync_read(const unsigned int xid, struct cifsFileInfo *cfile,
 	       struct cifs_io_parms *parms, unsigned int *bytes_read,
 	       char **buf, int *buf_type)
 {
 	parms->netfid = cfile->fid.netfid;
 =======
+=======
+>>>>>>> v3.18
 cifs_sync_read(const unsigned int xid, struct cifs_fid *pfid,
 	       struct cifs_io_parms *parms, unsigned int *bytes_read,
 	       char **buf, int *buf_type)
 {
 	parms->netfid = pfid->netfid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return CIFSSMBRead(xid, parms, bytes_read, buf, buf_type);
 }
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 cifs_sync_write(const unsigned int xid, struct cifsFileInfo *cfile,
+=======
+cifs_sync_write(const unsigned int xid, struct cifs_fid *pfid,
+>>>>>>> v3.18
 =======
 cifs_sync_write(const unsigned int xid, struct cifs_fid *pfid,
 >>>>>>> v3.18
@@ -849,7 +917,11 @@ cifs_sync_write(const unsigned int xid, struct cifs_fid *pfid,
 {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	parms->netfid = cfile->fid.netfid;
+=======
+	parms->netfid = pfid->netfid;
+>>>>>>> v3.18
 =======
 	parms->netfid = pfid->netfid;
 >>>>>>> v3.18
@@ -863,8 +935,14 @@ smb_set_file_info(struct inode *inode, const char *full_path,
 	int oplock = 0;
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16 netfid;
 	__u32 netpid;
+=======
+	__u32 netpid;
+	struct cifs_fid fid;
+	struct cifs_open_parms oparms;
+>>>>>>> v3.18
 =======
 	__u32 netpid;
 	struct cifs_fid fid;
@@ -880,7 +958,11 @@ smb_set_file_info(struct inode *inode, const char *full_path,
 	open_file = find_writable_file(cinode, true);
 	if (open_file) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netfid = open_file->fid.netfid;
+=======
+		fid.netfid = open_file->fid.netfid;
+>>>>>>> v3.18
 =======
 		fid.netfid = open_file->fid.netfid;
 >>>>>>> v3.18
@@ -897,6 +979,7 @@ smb_set_file_info(struct inode *inode, const char *full_path,
 	}
 	tcon = tlink_tcon(tlink);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * NT4 apparently returns success on this call, but it doesn't really
@@ -921,6 +1004,8 @@ smb_set_file_info(struct inode *inode, const char *full_path,
 			 cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MAP_SPECIAL_CHR);
 
 =======
+=======
+>>>>>>> v3.18
 	rc = CIFSSMBSetPathInfo(xid, tcon, full_path, buf, cifs_sb->local_nls,
 				cifs_remap(cifs_sb));
 	if (rc == 0) {
@@ -941,6 +1026,9 @@ smb_set_file_info(struct inode *inode, const char *full_path,
 
 	cifs_dbg(FYI, "calling SetFileInfo since SetPathInfo for times not supported by this server\n");
 	rc = CIFS_open(xid, &oparms, &oplock, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc != 0) {
 		if (rc == -EIO)
@@ -952,7 +1040,11 @@ smb_set_file_info(struct inode *inode, const char *full_path,
 
 set_via_filehandle:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = CIFSSMBSetFileInfo(xid, tcon, buf, netfid, netpid);
+=======
+	rc = CIFSSMBSetFileInfo(xid, tcon, buf, fid.netfid, netpid);
+>>>>>>> v3.18
 =======
 	rc = CIFSSMBSetFileInfo(xid, tcon, buf, fid.netfid, netpid);
 >>>>>>> v3.18
@@ -961,7 +1053,11 @@ set_via_filehandle:
 
 	if (open_file == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		CIFSSMBClose(xid, tcon, netfid);
+=======
+		CIFSSMBClose(xid, tcon, fid.netfid);
+>>>>>>> v3.18
 =======
 		CIFSSMBClose(xid, tcon, fid.netfid);
 >>>>>>> v3.18
@@ -975,7 +1071,10 @@ out:
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 cifs_set_compression(const unsigned int xid, struct cifs_tcon *tcon,
 		   struct cifsFileInfo *cfile)
 {
@@ -983,6 +1082,9 @@ cifs_set_compression(const unsigned int xid, struct cifs_tcon *tcon,
 }
 
 static int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 cifs_query_dir_first(const unsigned int xid, struct cifs_tcon *tcon,
 		     const char *path, struct cifs_sb_info *cifs_sb,
@@ -1015,7 +1117,11 @@ cifs_oplock_response(struct cifs_tcon *tcon, struct cifs_fid *fid,
 	return CIFSSMBLock(0, tcon, fid->netfid, current->tgid, 0, 0, 0, 0,
 			   LOCKING_ANDX_OPLOCK_RELEASE, false,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   cinode->clientCanCacheRead ? 1 : 0);
+=======
+			   CIFS_CACHE_READ(cinode) ? 1 : 0);
+>>>>>>> v3.18
 =======
 			   CIFS_CACHE_READ(cinode) ? 1 : 0);
 >>>>>>> v3.18
@@ -1063,6 +1169,7 @@ cifs_mand_lock(const unsigned int xid, struct cifsFileInfo *cfile, __u64 offset,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool
 cifs_dir_needs_close(struct cifsFileInfo *cfile)
 {
@@ -1077,6 +1184,8 @@ cifs_can_echo(struct TCP_Server_Info *server)
 
 	return false;
 =======
+=======
+>>>>>>> v3.18
 static int
 cifs_unix_dfs_readlink(const unsigned int xid, struct cifs_tcon *tcon,
 		       const unsigned char *searchName, char **symlinkinfo,
@@ -1171,6 +1280,9 @@ static bool
 cifs_dir_needs_close(struct cifsFileInfo *cfile)
 {
 	return !cfile->srch_inf.endOfSearch && !cfile->invalidHandle;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1185,6 +1297,10 @@ struct smb_version_operations smb1_operations = {
 	.get_credits_field = cifs_get_credits_field,
 	.get_credits = cifs_get_credits,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.wait_mtu_credits = cifs_wait_mtu_credits,
+>>>>>>> v3.18
 =======
 	.wait_mtu_credits = cifs_wait_mtu_credits,
 >>>>>>> v3.18
@@ -1199,6 +1315,10 @@ struct smb_version_operations smb1_operations = {
 	.print_stats = cifs_print_stats,
 	.is_oplock_break = is_valid_oplock_break,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.downgrade_oplock = cifs_downgrade_oplock,
+>>>>>>> v3.18
 =======
 	.downgrade_oplock = cifs_downgrade_oplock,
 >>>>>>> v3.18
@@ -1215,7 +1335,10 @@ struct smb_version_operations smb1_operations = {
 	.qfs_tcon = cifs_qfs_tcon,
 	.is_path_accessible = cifs_is_path_accessible,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.can_echo = cifs_can_echo,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.query_path_info = cifs_query_path_info,
@@ -1225,6 +1348,10 @@ struct smb_version_operations smb1_operations = {
 	.set_file_size = CIFSSMBSetFileSize,
 	.set_file_info = smb_set_file_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_compression = cifs_set_compression,
+>>>>>>> v3.18
 =======
 	.set_compression = cifs_set_compression,
 >>>>>>> v3.18
@@ -1237,6 +1364,10 @@ struct smb_version_operations smb1_operations = {
 	.rename = CIFSSMBRename,
 	.create_hardlink = CIFSCreateHardLink,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.query_symlink = cifs_query_symlink,
+>>>>>>> v3.18
 =======
 	.query_symlink = cifs_query_symlink,
 >>>>>>> v3.18
@@ -1258,11 +1389,17 @@ struct smb_version_operations smb1_operations = {
 	.mand_unlock_range = cifs_unlock_range,
 	.push_mand_locks = cifs_push_mandatory_locks,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.query_mf_symlink = cifs_query_mf_symlink,
 	.create_mf_symlink = cifs_create_mf_symlink,
 	.is_read_op = cifs_is_read_op,
 	.wp_retry_size = cifs_wp_retry_size,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.dir_needs_close = cifs_dir_needs_close,
 #ifdef CONFIG_CIFS_XATTR
@@ -1272,6 +1409,10 @@ struct smb_version_operations smb1_operations = {
 #ifdef CONFIG_CIFS_ACL
 	.get_acl = get_cifs_acl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_acl_by_fid = get_cifs_acl_by_fid,
+>>>>>>> v3.18
 =======
 	.get_acl_by_fid = get_cifs_acl_by_fid,
 >>>>>>> v3.18
@@ -1293,7 +1434,12 @@ struct smb_version_values smb1_values = {
 	.cap_nt_find = CAP_NT_SMBS | CAP_NT_FIND,
 	.cap_large_files = CAP_LARGE_FILES,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.oplock_read = OPLOCK_READ,
+=======
+	.signing_enabled = SECMODE_SIGN_ENABLED,
+	.signing_required = SECMODE_SIGN_REQUIRED,
+>>>>>>> v3.18
 =======
 	.signing_enabled = SECMODE_SIGN_ENABLED,
 	.signing_required = SECMODE_SIGN_REQUIRED,

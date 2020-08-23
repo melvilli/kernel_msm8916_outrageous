@@ -7,7 +7,11 @@ lib-y	:= ashldi3.o ashrdi3.o lshrdi3.o muldi3.o \
 	   memcpy.o memset.o memmove.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 lib-$(CONFIG_MMU) += string.o uaccess.o
+=======
+lib-$(CONFIG_MMU) += uaccess.o
+>>>>>>> v3.18
 =======
 lib-$(CONFIG_MMU) += uaccess.o
 >>>>>>> v3.18

@@ -12,7 +12,11 @@ struct kern_ipc_perm
 {
 	spinlock_t	lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		deleted;
+=======
+	bool		deleted;
+>>>>>>> v3.18
 =======
 	bool		deleted;
 >>>>>>> v3.18

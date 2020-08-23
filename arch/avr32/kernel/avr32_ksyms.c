@@ -37,7 +37,11 @@ EXPORT_SYMBOL(copy_page);
  * Userspace access stuff.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(___copy_from_user);
+=======
+EXPORT_SYMBOL(copy_from_user);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(copy_from_user);
 >>>>>>> v3.18

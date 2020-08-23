@@ -51,6 +51,10 @@ typedef struct user_fp elf_fpregset_t;
 #define R_ARM_CALL		28
 #define R_ARM_JUMP24		29
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define R_ARM_TARGET1		38
+>>>>>>> v3.18
 =======
 #define R_ARM_TARGET1		38
 >>>>>>> v3.18
@@ -119,7 +123,11 @@ int dump_task_regs(struct task_struct *t, elf_gregset_t *elfregs);
    that it will "exec", and that there is sufficient room for the brk.  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ELF_ET_DYN_BASE	(TASK_SIZE / 3 * 2)
+=======
+#define ELF_ET_DYN_BASE	(2 * TASK_SIZE / 3)
+>>>>>>> v3.18
 =======
 #define ELF_ET_DYN_BASE	(2 * TASK_SIZE / 3)
 >>>>>>> v3.18

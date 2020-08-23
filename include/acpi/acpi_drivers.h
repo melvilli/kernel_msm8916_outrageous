@@ -27,9 +27,12 @@
 #define __ACPI_DRIVERS_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/acpi.h>
 #include <acpi/acpi_bus.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ACPI_MAX_STRING			80
@@ -103,14 +106,20 @@ struct pci_dev *acpi_get_pci_dev(acpi_handle);
 
 struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pci_acpi_crs_quirks(void);
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_X86
 void pci_acpi_crs_quirks(void);
 #else
 static inline void pci_acpi_crs_quirks(void) { }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* --------------------------------------------------------------------------
@@ -124,6 +133,7 @@ static inline void pci_acpi_crs_quirks(void) { }
 /*--------------------------------------------------------------------------
                                   Dock Station
   -------------------------------------------------------------------------- */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct acpi_dock_ops {
 	acpi_notify_handler handler;
@@ -165,6 +175,8 @@ static inline void unregister_hotplug_dock_device(acpi_handle handle)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_ACPI_DOCK
 extern int is_dock_device(struct acpi_device *adev);
@@ -174,6 +186,9 @@ static inline int is_dock_device(struct acpi_device *adev)
 	return 0;
 }
 #endif /* CONFIG_ACPI_DOCK */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /*__ACPI_DRIVERS_H__*/

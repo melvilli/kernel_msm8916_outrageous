@@ -113,6 +113,10 @@ static int ics_opal_set_affinity(struct irq_data *d,
 {
 	unsigned int hw_irq = (unsigned int)irqd_to_hwirq(d);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__be16 oserver;
+>>>>>>> v3.18
 =======
 	__be16 oserver;
 >>>>>>> v3.18
@@ -125,6 +129,7 @@ static int ics_opal_set_affinity(struct irq_data *d,
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = opal_get_xive(hw_irq, &server, &priority);
 	if (rc != OPAL_SUCCESS) {
 		pr_err("%s: opal_set_xive(irq=%d [hw 0x%x] server=%x)"
@@ -133,6 +138,8 @@ static int ics_opal_set_affinity(struct irq_data *d,
 		return -1;
 	}
 =======
+=======
+>>>>>>> v3.18
 	rc = opal_get_xive(hw_irq, &oserver, &priority);
 	if (rc != OPAL_SUCCESS) {
 		pr_err("%s: opal_get_xive(irq=%d [hw 0x%x]) error %lld\n",
@@ -140,6 +147,9 @@ static int ics_opal_set_affinity(struct irq_data *d,
 		return -1;
 	}
 	server = be16_to_cpu(oserver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	wanted_server = xics_get_irq_server(d->irq, cpumask, 1);
@@ -196,7 +206,11 @@ static int ics_opal_map(struct ics *ics, unsigned int virq)
 	unsigned int hw_irq = (unsigned int)virq_to_hw(virq);
 	int64_t rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int16_t server;
+=======
+	__be16 server;
+>>>>>>> v3.18
 =======
 	__be16 server;
 >>>>>>> v3.18
@@ -220,7 +234,11 @@ static void ics_opal_mask_unknown(struct ics *ics, unsigned long vec)
 {
 	int64_t rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int16_t server;
+=======
+	__be16 server;
+>>>>>>> v3.18
 =======
 	__be16 server;
 >>>>>>> v3.18
@@ -238,7 +256,11 @@ static long ics_opal_get_server(struct ics *ics, unsigned long vec)
 {
 	int64_t rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int16_t server;
+=======
+	__be16 server;
+>>>>>>> v3.18
 =======
 	__be16 server;
 >>>>>>> v3.18
@@ -249,7 +271,11 @@ static long ics_opal_get_server(struct ics *ics, unsigned long vec)
 	if (rc != OPAL_SUCCESS)
 		return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ics_opal_unmangle_server(server);
+=======
+	return ics_opal_unmangle_server(be16_to_cpu(server));
+>>>>>>> v3.18
 =======
 	return ics_opal_unmangle_server(be16_to_cpu(server));
 >>>>>>> v3.18

@@ -86,7 +86,13 @@ static int shadow_and_reallocate_code (struct snd_cs46xx * chip, u32 * data, u32
 						address |=  loval >> 15;
             
 <<<<<<< HEAD
+<<<<<<< HEAD
 						snd_printdd("handle_wideop[1]: %05x:%05x addr %04x\n",hival,loval,address);
+=======
+						dev_dbg(chip->card->dev,
+							"handle_wideop[1]: %05x:%05x addr %04x\n",
+							hival, loval, address);
+>>>>>>> v3.18
 =======
 						dev_dbg(chip->card->dev,
 							"handle_wideop[1]: %05x:%05x addr %04x\n",
@@ -97,7 +103,12 @@ static int shadow_and_reallocate_code (struct snd_cs46xx * chip, u32 * data, u32
 							address += (ins->code.offset / 2) - overlay_begin_address;
 						} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 							snd_printdd("handle_wideop[1]: ROM symbol not reallocated\n");
+=======
+							dev_dbg(chip->card->dev,
+								"handle_wideop[1]: ROM symbol not reallocated\n");
+>>>>>>> v3.18
 =======
 							dev_dbg(chip->card->dev,
 								"handle_wideop[1]: ROM symbol not reallocated\n");
@@ -114,8 +125,14 @@ static int shadow_and_reallocate_code (struct snd_cs46xx * chip, u32 * data, u32
 						address |=  loval >> 15;
             
 <<<<<<< HEAD
+<<<<<<< HEAD
 						snd_printdd("handle_wideop:[2] %05x:%05x addr %04x\n",hival,loval,address);            
 						nreallocated ++;
+=======
+						dev_dbg(chip->card->dev,
+							"handle_wideop:[2] %05x:%05x addr %04x\n",
+							hival, loval, address);						nreallocated++;
+>>>>>>> v3.18
 =======
 						dev_dbg(chip->card->dev,
 							"handle_wideop:[2] %05x:%05x addr %04x\n",
@@ -131,7 +148,12 @@ static int shadow_and_reallocate_code (struct snd_cs46xx * chip, u32 * data, u32
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("dsp_spos: %d instructions reallocated\n",nreallocated);
+=======
+	dev_dbg(chip->card->dev,
+		"dsp_spos: %d instructions reallocated\n", nreallocated);
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev,
 		"dsp_spos: %d instructions reallocated\n", nreallocated);
@@ -180,7 +202,12 @@ static int add_symbols (struct snd_cs46xx * chip, struct dsp_module_desc * modul
 	for (i = 0;i < module->symbol_table.nsymbols; ++i) {
 		if (ins->symbol_table.nsymbols == (DSP_MAX_SYMBOLS - 1)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "dsp_spos: symbol table is full\n");
+=======
+			dev_err(chip->card->dev,
+				"dsp_spos: symbol table is full\n");
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"dsp_spos: symbol table is full\n");
@@ -204,14 +231,20 @@ static int add_symbols (struct snd_cs46xx * chip, struct dsp_module_desc * modul
 			ins->symbol_table.nsymbols++;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
           /* if (0) printk ("dsp_spos: symbol <%s> duplicated, probably nothing wrong with that (Cirrus?)\n",
                              module->symbol_table.symbols[i].symbol_name); */
 =======
+=======
+>>>>>>> v3.18
 #if 0
 			dev_dbg(chip->card->dev,
 				"dsp_spos: symbol <%s> duplicated, probably nothing wrong with that (Cirrus?)\n",
 				module->symbol_table.symbols[i].symbol_name); */
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -228,7 +261,11 @@ add_symbol (struct snd_cs46xx * chip, char * symbol_name, u32 address, int type)
 
 	if (ins->symbol_table.nsymbols == (DSP_MAX_SYMBOLS - 1)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: symbol table is full\n");
+=======
+		dev_err(chip->card->dev, "dsp_spos: symbol table is full\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "dsp_spos: symbol table is full\n");
 >>>>>>> v3.18
@@ -239,7 +276,12 @@ add_symbol (struct snd_cs46xx * chip, char * symbol_name, u32 address, int type)
 				     symbol_name,
 				     type) != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: symbol <%s> duplicated\n", symbol_name);
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: symbol <%s> duplicated\n", symbol_name);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: symbol <%s> duplicated\n", symbol_name);
@@ -350,7 +392,12 @@ static int dsp_load_parameter(struct snd_cs46xx *chip,
 
 	if (!parameter) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("dsp_spos: module got no parameter segment\n");
+=======
+		dev_dbg(chip->card->dev,
+			"dsp_spos: module got no parameter segment\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev,
 			"dsp_spos: module got no parameter segment\n");
@@ -362,6 +409,7 @@ static int dsp_load_parameter(struct snd_cs46xx *chip,
 	dsize   = parameter->size * 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("dsp_spos: "
 		    "downloading parameter data to chip (%08x-%08x)\n",
 		    doffset,doffset + dsize);
@@ -369,12 +417,17 @@ static int dsp_load_parameter(struct snd_cs46xx *chip,
 		snd_printk(KERN_ERR "dsp_spos: "
 			   "failed to download parameter data to DSP\n");
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(chip->card->dev,
 		"dsp_spos: downloading parameter data to chip (%08x-%08x)\n",
 		    doffset,doffset + dsize);
 	if (snd_cs46xx_download (chip, parameter->data, doffset, dsize)) {
 		dev_err(chip->card->dev,
 			"dsp_spos: failed to download parameter data to DSP\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -388,7 +441,12 @@ static int dsp_load_sample(struct snd_cs46xx *chip,
 
 	if (!sample) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("dsp_spos: module got no sample segment\n");
+=======
+		dev_dbg(chip->card->dev,
+			"dsp_spos: module got no sample segment\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev,
 			"dsp_spos: module got no sample segment\n");
@@ -400,12 +458,15 @@ static int dsp_load_sample(struct snd_cs46xx *chip,
 	dsize   =  sample->size * 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("dsp_spos: downloading sample data to chip (%08x-%08x)\n",
 		    doffset,doffset + dsize);
 
 	if (snd_cs46xx_download (chip,sample->data,doffset,dsize)) {
 		snd_printk(KERN_ERR "dsp_spos: failed to sample data to DSP\n");
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(chip->card->dev,
 		"dsp_spos: downloading sample data to chip (%08x-%08x)\n",
 		    doffset,doffset + dsize);
@@ -413,6 +474,9 @@ static int dsp_load_sample(struct snd_cs46xx *chip,
 	if (snd_cs46xx_download (chip,sample->data,doffset,dsize)) {
 		dev_err(chip->card->dev,
 			"dsp_spos: failed to sample data to DSP\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -428,6 +492,7 @@ int cs46xx_dsp_load_module (struct snd_cs46xx * chip, struct dsp_module_desc * m
 
 	if (ins->nmodules == DSP_MAX_MODULES - 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: to many modules loaded into DSP\n");
 		return -ENOMEM;
 	}
@@ -437,6 +502,8 @@ int cs46xx_dsp_load_module (struct snd_cs46xx * chip, struct dsp_module_desc * m
 	if (ins->nmodules == 0) {
 		snd_printdd("dsp_spos: clearing parameter area\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_err(chip->card->dev,
 			"dsp_spos: to many modules loaded into DSP\n");
 		return -ENOMEM;
@@ -447,6 +514,9 @@ int cs46xx_dsp_load_module (struct snd_cs46xx * chip, struct dsp_module_desc * m
   
 	if (ins->nmodules == 0) {
 		dev_dbg(chip->card->dev, "dsp_spos: clearing parameter area\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		snd_cs46xx_clear_BA1(chip, DSP_PARAMETER_BYTE_OFFSET, DSP_PARAMETER_BYTE_SIZE);
 	}
@@ -458,7 +528,11 @@ int cs46xx_dsp_load_module (struct snd_cs46xx * chip, struct dsp_module_desc * m
 
 	if (ins->nmodules == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("dsp_spos: clearing sample area\n");
+=======
+		dev_dbg(chip->card->dev, "dsp_spos: clearing sample area\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev, "dsp_spos: clearing sample area\n");
 >>>>>>> v3.18
@@ -472,7 +546,11 @@ int cs46xx_dsp_load_module (struct snd_cs46xx * chip, struct dsp_module_desc * m
 
 	if (ins->nmodules == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("dsp_spos: clearing code area\n");
+=======
+		dev_dbg(chip->card->dev, "dsp_spos: clearing code area\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev, "dsp_spos: clearing code area\n");
 >>>>>>> v3.18
@@ -481,17 +559,23 @@ int cs46xx_dsp_load_module (struct snd_cs46xx * chip, struct dsp_module_desc * m
 
 	if (code == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("dsp_spos: module got no code segment\n");
 	} else {
 		if (ins->code.offset + code->size > DSP_CODE_BYTE_SIZE) {
 			snd_printk(KERN_ERR "dsp_spos: no space available in DSP\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(chip->card->dev,
 			"dsp_spos: module got no code segment\n");
 	} else {
 		if (ins->code.offset + code->size > DSP_CODE_BYTE_SIZE) {
 			dev_err(chip->card->dev,
 				"dsp_spos: no space available in DSP\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -ENOMEM;
 		}
@@ -505,7 +589,12 @@ int cs46xx_dsp_load_module (struct snd_cs46xx * chip, struct dsp_module_desc * m
 			return -ENOMEM;
 		if (add_symbols(chip,module)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "dsp_spos: failed to load symbol table\n");
+=======
+			dev_err(chip->card->dev,
+				"dsp_spos: failed to load symbol table\n");
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"dsp_spos: failed to load symbol table\n");
@@ -516,7 +605,12 @@ int cs46xx_dsp_load_module (struct snd_cs46xx * chip, struct dsp_module_desc * m
 		doffset = (code->offset * 4 + ins->code.offset * 4 + DSP_CODE_BYTE_OFFSET);
 		dsize   = code->size * 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("dsp_spos: downloading code to chip (%08x-%08x)\n",
+=======
+		dev_dbg(chip->card->dev,
+			"dsp_spos: downloading code to chip (%08x-%08x)\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev,
 			"dsp_spos: downloading code to chip (%08x-%08x)\n",
@@ -527,7 +621,12 @@ int cs46xx_dsp_load_module (struct snd_cs46xx * chip, struct dsp_module_desc * m
 
 		if (snd_cs46xx_download (chip,(ins->code.data + ins->code.offset),doffset,dsize)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "dsp_spos: failed to download code to DSP\n");
+=======
+			dev_err(chip->card->dev,
+				"dsp_spos: failed to download code to DSP\n");
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"dsp_spos: failed to download code to DSP\n");
@@ -566,7 +665,11 @@ cs46xx_dsp_lookup_symbol (struct snd_cs46xx * chip, char * symbol_name, int symb
 
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk ("dsp_spos: symbol <%s> type %02x not found\n",
+=======
+	dev_err(chip->card->dev, "dsp_spos: symbol <%s> type %02x not found\n",
+>>>>>>> v3.18
 =======
 	dev_err(chip->card->dev, "dsp_spos: symbol <%s> type %02x not found\n",
 >>>>>>> v3.18
@@ -1033,7 +1136,10 @@ int cs46xx_dsp_proc_done (struct snd_cs46xx *chip)
 #endif /* CONFIG_PROC_FS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int debug_tree;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void _dsp_create_task_tree (struct snd_cs46xx *chip, u32 * task_data,
@@ -1045,7 +1151,12 @@ static void _dsp_create_task_tree (struct snd_cs46xx *chip, u32 * task_data,
 
 	for (i = 0; i < size; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (debug_tree) printk ("addr %p, val %08x\n",spdst,task_data[i]);
+=======
+		dev_dbg(chip->card->dev, "addr %p, val %08x\n",
+			spdst, task_data[i]);
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev, "addr %p, val %08x\n",
 			spdst, task_data[i]);
@@ -1056,7 +1167,10 @@ static void _dsp_create_task_tree (struct snd_cs46xx *chip, u32 * task_data,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int debug_scb;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void _dsp_create_scb (struct snd_cs46xx *chip, u32 * scb_data, u32 dest)
@@ -1067,7 +1181,12 @@ static void _dsp_create_scb (struct snd_cs46xx *chip, u32 * scb_data, u32 dest)
 
 	for (i = 0; i < 0x10; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (debug_scb) printk ("addr %p, val %08x\n",spdst,scb_data[i]);
+=======
+		dev_dbg(chip->card->dev, "addr %p, val %08x\n",
+			spdst, scb_data[i]);
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev, "addr %p, val %08x\n",
 			spdst, scb_data[i]);
@@ -1099,7 +1218,12 @@ static struct dsp_scb_descriptor * _map_scb (struct snd_cs46xx *chip, char * nam
 
 	if (ins->nscb == DSP_MAX_SCB_DESC - 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: got no place for other SCB\n");
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: got no place for other SCB\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: got no place for other SCB\n");
@@ -1135,7 +1259,12 @@ _map_task_tree (struct snd_cs46xx *chip, char * name, u32 dest, u32 size)
 
 	if (ins->ntask == DSP_MAX_TASK_DESC - 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: got no place for other TASK\n");
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: got no place for other TASK\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: got no place for other TASK\n");
@@ -1180,7 +1309,11 @@ cs46xx_dsp_create_scb (struct snd_cs46xx *chip, char * name, u32 * scb_data, u32
 		_dsp_create_scb(chip,scb_data,dest);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: failed to map SCB\n");
+=======
+		dev_err(chip->card->dev, "dsp_spos: failed to map SCB\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "dsp_spos: failed to map SCB\n");
 >>>>>>> v3.18
@@ -1205,7 +1338,11 @@ cs46xx_dsp_create_task_tree (struct snd_cs46xx *chip, char * name, u32 * task_da
 		_dsp_create_task_tree(chip,task_data,dest,size);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: failed to map TASK\n");
+=======
+		dev_err(chip->card->dev, "dsp_spos: failed to map TASK\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "dsp_spos: failed to map TASK\n");
 >>>>>>> v3.18
@@ -1262,7 +1399,12 @@ int cs46xx_dsp_scb_and_task_init (struct snd_cs46xx *chip)
 	null_algorithm  = cs46xx_dsp_lookup_symbol(chip, "NULLALGORITHM", SYMBOL_CODE);
 	if (null_algorithm == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: symbol NULLALGORITHM not found\n");
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: symbol NULLALGORITHM not found\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: symbol NULLALGORITHM not found\n");
@@ -1273,7 +1415,12 @@ int cs46xx_dsp_scb_and_task_init (struct snd_cs46xx *chip)
 	fg_task_tree_header_code = cs46xx_dsp_lookup_symbol(chip, "FGTASKTREEHEADERCODE", SYMBOL_CODE);  
 	if (fg_task_tree_header_code == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: symbol FGTASKTREEHEADERCODE not found\n");
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: symbol FGTASKTREEHEADERCODE not found\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: symbol FGTASKTREEHEADERCODE not found\n");
@@ -1284,7 +1431,12 @@ int cs46xx_dsp_scb_and_task_init (struct snd_cs46xx *chip)
 	task_tree_header_code = cs46xx_dsp_lookup_symbol(chip, "TASKTREEHEADERCODE", SYMBOL_CODE);  
 	if (task_tree_header_code == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: symbol TASKTREEHEADERCODE not found\n");
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: symbol TASKTREEHEADERCODE not found\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: symbol TASKTREEHEADERCODE not found\n");
@@ -1295,7 +1447,12 @@ int cs46xx_dsp_scb_and_task_init (struct snd_cs46xx *chip)
 	task_tree_thread = cs46xx_dsp_lookup_symbol(chip, "TASKTREETHREAD", SYMBOL_CODE);
 	if (task_tree_thread == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: symbol TASKTREETHREAD not found\n");
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: symbol TASKTREETHREAD not found\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: symbol TASKTREETHREAD not found\n");
@@ -1306,7 +1463,12 @@ int cs46xx_dsp_scb_and_task_init (struct snd_cs46xx *chip)
 	magic_snoop_task = cs46xx_dsp_lookup_symbol(chip, "MAGICSNOOPTASK", SYMBOL_CODE);
 	if (magic_snoop_task == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: symbol MAGICSNOOPTASK not found\n");
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: symbol MAGICSNOOPTASK not found\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: symbol MAGICSNOOPTASK not found\n");
@@ -1658,7 +1820,11 @@ int cs46xx_dsp_scb_and_task_init (struct snd_cs46xx *chip)
 
  _fail_end:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "dsp_spos: failed to setup SCB's in DSP\n");
+=======
+	dev_err(chip->card->dev, "dsp_spos: failed to setup SCB's in DSP\n");
+>>>>>>> v3.18
 =======
 	dev_err(chip->card->dev, "dsp_spos: failed to setup SCB's in DSP\n");
 >>>>>>> v3.18
@@ -1677,7 +1843,12 @@ static int cs46xx_dsp_async_init (struct snd_cs46xx *chip,
 	s16_async_codec_input_task = cs46xx_dsp_lookup_symbol(chip, "S16_ASYNCCODECINPUTTASK", SYMBOL_CODE);
 	if (s16_async_codec_input_task == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: symbol S16_ASYNCCODECINPUTTASK not found\n");
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: symbol S16_ASYNCCODECINPUTTASK not found\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: symbol S16_ASYNCCODECINPUTTASK not found\n");
@@ -1687,7 +1858,12 @@ static int cs46xx_dsp_async_init (struct snd_cs46xx *chip,
 	spdifo_task = cs46xx_dsp_lookup_symbol(chip, "SPDIFOTASK", SYMBOL_CODE);
 	if (spdifo_task == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: symbol SPDIFOTASK not found\n");
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: symbol SPDIFOTASK not found\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: symbol SPDIFOTASK not found\n");
@@ -1698,7 +1874,12 @@ static int cs46xx_dsp_async_init (struct snd_cs46xx *chip,
 	spdifi_task = cs46xx_dsp_lookup_symbol(chip, "SPDIFITASK", SYMBOL_CODE);
 	if (spdifi_task == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: symbol SPDIFITASK not found\n");
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: symbol SPDIFITASK not found\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: symbol SPDIFITASK not found\n");
@@ -2084,7 +2265,12 @@ int cs46xx_poke_via_dsp (struct snd_cs46xx *chip, u32 address, u32 data)
 
 	if (i == 25) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "dsp_spos: SPIOWriteTask not responding\n");
+=======
+		dev_err(chip->card->dev,
+			"dsp_spos: SPIOWriteTask not responding\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"dsp_spos: SPIOWriteTask not responding\n");

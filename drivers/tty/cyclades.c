@@ -1580,7 +1580,11 @@ static int cy_open(struct tty_struct *tty, struct file *filp)
 	 * If the port is the middle of closing, bail out now
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tty_hung_up_p(filp) || (info->port.flags & ASYNC_CLOSING)) {
+=======
+	if (info->port.flags & ASYNC_CLOSING) {
+>>>>>>> v3.18
 =======
 	if (info->port.flags & ASYNC_CLOSING) {
 >>>>>>> v3.18
@@ -2714,6 +2718,11 @@ cy_ioctl(struct tty_struct *tty,
 #ifndef CONFIG_CYZ_INTR
 	case CYZSETPOLLCYCLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (arg > LONG_MAX / HZ)
+			return -ENODEV;
+>>>>>>> v3.18
 =======
 		if (arg > LONG_MAX / HZ)
 			return -ENODEV;

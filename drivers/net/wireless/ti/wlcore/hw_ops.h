@@ -107,7 +107,10 @@ wlcore_hw_init_vif(struct wl1271 *wl, struct wl12xx_vif *wlvif)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void
 wlcore_hw_convert_fw_status(struct wl1271 *wl, void *raw_fw_status,
 			    struct wl_fw_status *fw_status)
@@ -117,6 +120,9 @@ wlcore_hw_convert_fw_status(struct wl1271 *wl, void *raw_fw_status,
 	wl->ops->convert_fw_status(wl, raw_fw_status, fw_status);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline u32
 wlcore_hw_sta_get_ap_rate_mask(struct wl1271 *wl, struct wl12xx_vif *wlvif)
@@ -235,7 +241,10 @@ wlcore_hw_set_peer_cap(struct wl1271 *wl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline u32
 wlcore_hw_convert_hwaddr(struct wl1271 *wl, u32 hwaddr)
 {
@@ -245,6 +254,9 @@ wlcore_hw_convert_hwaddr(struct wl1271 *wl, u32 hwaddr)
 	return wl->ops->convert_hwaddr(wl, hwaddr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool
 wlcore_hw_lnk_high_prio(struct wl1271 *wl, u8 hlid,
@@ -267,7 +279,10 @@ wlcore_hw_lnk_low_prio(struct wl1271 *wl, u8 hlid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int
 wlcore_smart_config_start(struct wl1271 *wl, u32 group_bitmap)
 {
@@ -295,5 +310,8 @@ wlcore_smart_config_set_group_key(struct wl1271 *wl, u16 group_id,
 
 	return wl->ops->smart_config_set_group_key(wl, group_id, key_len, key);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

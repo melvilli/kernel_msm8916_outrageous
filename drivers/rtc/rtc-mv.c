@@ -222,6 +222,7 @@ static int __init mv_rtc_probe(struct platform_device *pdev)
 	struct resource *res;
 	struct rtc_plat_data *pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	resource_size_t size;
 	u32 rtc_time;
 	int ret = 0;
@@ -231,15 +232,21 @@ static int __init mv_rtc_probe(struct platform_device *pdev)
 		return -ENODEV;
 
 =======
+=======
+>>>>>>> v3.18
 	u32 rtc_time;
 	u32 rtc_date;
 	int ret = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 	if (!pdata)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	size = resource_size(res);
 	if (!devm_request_mem_region(&pdev->dev, res->start, size,
@@ -250,10 +257,15 @@ static int __init mv_rtc_probe(struct platform_device *pdev)
 	if (!pdata->ioaddr)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	pdata->ioaddr = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(pdata->ioaddr))
 		return PTR_ERR(pdata->ioaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pdata->clk = devm_clk_get(&pdev->dev, NULL);
@@ -281,7 +293,10 @@ static int __init mv_rtc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * A date after January 19th, 2038 does not fit on 32 bits and
 	 * will confuse the kernel and userspace. Reset to a sane date
@@ -293,6 +308,9 @@ static int __init mv_rtc_probe(struct platform_device *pdev)
 		writel(0x130101, pdata->ioaddr + RTC_DATE_REG_OFFS);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pdata->irq = platform_get_irq(pdev, 0);
 
@@ -345,7 +363,11 @@ static int __exit mv_rtc_remove(struct platform_device *pdev)
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id rtc_mv_of_match_table[] = {
+=======
+static const struct of_device_id rtc_mv_of_match_table[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id rtc_mv_of_match_table[] = {
 >>>>>>> v3.18

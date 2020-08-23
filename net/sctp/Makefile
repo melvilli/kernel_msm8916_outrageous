@@ -9,7 +9,11 @@ sctp-y := sm_statetable.o sm_statefuns.o sm_sideeffect.o \
 	  protocol.o endpointola.o associola.o \
 	  transport.o chunk.o sm_make_chunk.o ulpevent.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  inqueue.o outqueue.o ulpqueue.o command.o \
+=======
+	  inqueue.o outqueue.o ulpqueue.o \
+>>>>>>> v3.18
 =======
 	  inqueue.o outqueue.o ulpqueue.o \
 >>>>>>> v3.18

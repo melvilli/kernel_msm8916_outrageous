@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -9,7 +13,11 @@
  * Additions for SCSI 3+ (SPC-3 T10/1416-D Rev 07 3 May 2002)
  *   by D. Gilbert and aeb (20020609)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Update to SPC-4 T10/1713-D Rev 20, 22 May 2009, D. Gilbert 20090624
+=======
+ * Updated to SPC-4 T10/1713-D Rev 36g, D. Gilbert 20130701
+>>>>>>> v3.18
 =======
  * Updated to SPC-4 T10/1713-D Rev 36g, D. Gilbert 20130701
 >>>>>>> v3.18
@@ -30,6 +38,7 @@
 
 /* Commands with service actions that change the command name */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAINTENANCE_IN 0xa3
 #define MAINTENANCE_OUT 0xa4
 #define SERVICE_ACTION_IN_12 0xab
@@ -37,6 +46,8 @@
 #define SERVICE_ACTION_IN_16 0x9e
 #define SERVICE_ACTION_OUT_16 0x9f
 =======
+=======
+>>>>>>> v3.18
 #define SERVICE_ACTION_IN_12 0xab
 #define SERVICE_ACTION_OUT_12 0xa9
 #define SERVICE_ACTION_BIDIRECTIONAL 0x9d
@@ -44,6 +55,9 @@
 #define SERVICE_ACTION_OUT_16 0x9f
 #define THIRD_PARTY_COPY_OUT 0x83
 #define THIRD_PARTY_COPY_IN 0x84
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -55,17 +69,23 @@ static const char * cdb_byte0_names[] = {
 	    "Reassign Blocks",
 /* 08-0d */ "Read(6)", NULL, "Write(6)", "Seek(6)", NULL, NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 0e-12 */ NULL, "Read Reverse", "Write Filemarks", "Space", "Inquiry",  
 /* 13-16 */ "Verify(6)", "Recover Buffered Data", "Mode Select(6)",
 	    "Reserve(6)",
 /* 17-1a */ "Release(6)", "Copy", "Erase", "Mode Sense(6)",
 /* 1b-1d */ "Start/Stop Unit", "Receive Diagnostic", "Send Diagnostic", 
 =======
+=======
+>>>>>>> v3.18
 /* 0e-12 */ NULL, "Read Reverse", "Write Filemarks", "Space", "Inquiry",
 /* 13-16 */ "Verify(6)", "Recover Buffered Data", "Mode Select(6)",
 	    "Reserve(6)",
 /* 17-1a */ "Release(6)", "Copy", "Erase", "Mode Sense(6)",
 /* 1b-1d */ "Start/Stop Unit", "Receive Diagnostic", "Send Diagnostic",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* 1e-1f */ "Prevent/Allow Medium Removal", NULL,
 /* 20-22 */  NULL, NULL, NULL,
@@ -75,24 +95,34 @@ static const char * cdb_byte0_names[] = {
             "Read updated block",
 /* 2e-31 */ "Write Verify(10)", "Verify(10)", "Search High", "Search Equal",
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 32-34 */ "Search Low", "Set Limits", "Prefetch/Read Position", 
 /* 35-37 */ "Synchronize Cache(10)", "Lock/Unlock Cache(10)",
 	    "Read Defect Data(10)", 
 /* 38-3c */ "Medium Scan", "Compare", "Copy Verify", "Write Buffer", 
             "Read Buffer", 
 =======
+=======
+>>>>>>> v3.18
 /* 32-34 */ "Search Low", "Set Limits", "Prefetch/Read Position",
 /* 35-37 */ "Synchronize Cache(10)", "Lock/Unlock Cache(10)",
 	    "Read Defect Data(10)",
 /* 38-3c */ "Medium Scan", "Compare", "Copy Verify", "Write Buffer",
 	    "Read Buffer",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* 3d-3f */ "Update Block", "Read Long(10)",  "Write Long(10)",
 /* 40-41 */ "Change Definition", "Write Same(10)",
 /* 42-48 */ "Unmap/Read sub-channel", "Read TOC/PMA/ATIP",
 	    "Read density support", "Play audio(10)", "Get configuration",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    "Play audio msf", "Play audio track/index",
+=======
+	    "Play audio msf", "Sanitize/Play audio track/index",
+>>>>>>> v3.18
 =======
 	    "Play audio msf", "Sanitize/Play audio track/index",
 >>>>>>> v3.18
@@ -111,15 +141,21 @@ static const char * cdb_byte0_names[] = {
 /* 78-7f */ NULL, NULL, NULL, NULL, NULL, NULL, "Extended CDB",
 	    "Variable length",
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 80-84 */ "Xdwrite(16)", "Rebuild(16)", "Regenerate(16)", "Extended copy",
             "Receive copy results",
 /* 85-89 */ "ATA command pass through(16)", "Access control in",
 	    "Access control out", "Read(16)", "Memory Export Out(16)",
 =======
+=======
+>>>>>>> v3.18
 /* 80-84 */ "Xdwrite(16)", "Rebuild(16)", "Regenerate(16)",
 	    "Third party copy out", "Third party copy in",
 /* 85-89 */ "ATA command pass through(16)", "Access control in",
 	    "Access control out", "Read(16)", "Compare and Write",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* 8a-8f */ "Write(16)", "ORWrite", "Read attributes", "Write attributes",
             "Write and verify(16)", "Verify(16)",
@@ -127,8 +163,13 @@ static const char * cdb_byte0_names[] = {
             "Lock/unlock cache(16)", "Write same(16)", NULL,
 /* 95-99 */ NULL, NULL, NULL, NULL, NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 9a-9f */ NULL, NULL, NULL, NULL, "Service action in(16)",
             "Service action out(16)",
+=======
+/* 9a-9f */ NULL, NULL, NULL, "Service action bidirectional",
+	    "Service action in(16)", "Service action out(16)",
+>>>>>>> v3.18
 =======
 /* 9a-9f */ NULL, NULL, NULL, "Service action bidirectional",
 	    "Service action in(16)", "Service action out(16)",
@@ -173,6 +214,10 @@ static const struct value_name_pair maint_out_arr[] = {
 	{0xa, "Set target port groups"},
 	{0xb, "Change aliases"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0xc, "Remove I_T nexus"},
+>>>>>>> v3.18
 =======
 	{0xc, "Remove I_T nexus"},
 >>>>>>> v3.18
@@ -193,18 +238,28 @@ static const struct value_name_pair serv_out12_arr[] = {
 #define SERV_OUT12_SZ ARRAY_SIZE(serv_out12_arr)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct value_name_pair serv_bidi_arr[] = {
 	{-1, "dummy entry"},
 };
 #define SERV_BIDI_SZ ARRAY_SIZE(serv_bidi_arr)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct value_name_pair serv_in16_arr[] = {
 	{0x10, "Read capacity(16)"},
 	{0x11, "Read long(16)"},
 	{0x12, "Get LBA status"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x13, "Report referrals"},
+>>>>>>> v3.18
 =======
 	{0x13, "Report referrals"},
 >>>>>>> v3.18
@@ -218,7 +273,10 @@ static const struct value_name_pair serv_out16_arr[] = {
 #define SERV_OUT16_SZ ARRAY_SIZE(serv_out16_arr)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct value_name_pair pr_in_arr[] = {
 	{0x0, "Persistent reserve in, read keys"},
 	{0x1, "Persistent reserve in, read reservation"},
@@ -264,6 +322,9 @@ static const struct value_name_pair tpc_in_arr[] = {
 #define TPC_IN_SZ ARRAY_SIZE(tpc_in_arr)
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct value_name_pair variable_length_arr[] = {
 	{0x1, "Rebuild(32)"},
@@ -322,6 +383,10 @@ static void print_opcode_name(unsigned char * cdbp, int cdb_len)
 {
 	int sa, len, cdb0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int fin_name = 0;
+>>>>>>> v3.18
 =======
 	int fin_name = 0;
 >>>>>>> v3.18
@@ -338,7 +403,12 @@ static void print_opcode_name(unsigned char * cdbp, int cdb_len)
 		}
 		sa = (cdbp[8] << 8) + cdbp[9];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		name = get_sa_name(variable_length_arr, VARIABLE_LENGTH_SZ, sa);
+=======
+		name = get_sa_name(variable_length_arr, VARIABLE_LENGTH_SZ,
+				   sa);
+>>>>>>> v3.18
 =======
 		name = get_sa_name(variable_length_arr, VARIABLE_LENGTH_SZ,
 				   sa);
@@ -356,10 +426,14 @@ static void print_opcode_name(unsigned char * cdbp, int cdb_len)
 		sa = cdbp[1] & 0x1f;
 		name = get_sa_name(maint_in_arr, MAINT_IN_SZ, sa);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (name)
 			printk("%s", name);
 		else
 			printk("cdb[0]=0x%x, sa=0x%x", cdb0, sa);
+=======
+		fin_name = 1;
+>>>>>>> v3.18
 =======
 		fin_name = 1;
 >>>>>>> v3.18
@@ -368,11 +442,14 @@ static void print_opcode_name(unsigned char * cdbp, int cdb_len)
 		sa = cdbp[1] & 0x1f;
 		name = get_sa_name(maint_out_arr, MAINT_OUT_SZ, sa);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (name)
 			printk("%s", name);
 		else
 			printk("cdb[0]=0x%x, sa=0x%x", cdb0, sa);
 =======
+=======
+>>>>>>> v3.18
 		fin_name = 1;
 		break;
 	case PERSISTENT_RESERVE_IN:
@@ -384,16 +461,23 @@ static void print_opcode_name(unsigned char * cdbp, int cdb_len)
 		sa = cdbp[1] & 0x1f;
 		name = get_sa_name(pr_out_arr, PR_OUT_SZ, sa);
 		fin_name = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case SERVICE_ACTION_IN_12:
 		sa = cdbp[1] & 0x1f;
 		name = get_sa_name(serv_in12_arr, SERV_IN12_SZ, sa);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (name)
 			printk("%s", name);
 		else
 			printk("cdb[0]=0x%x, sa=0x%x", cdb0, sa);
+=======
+		fin_name = 1;
+>>>>>>> v3.18
 =======
 		fin_name = 1;
 >>>>>>> v3.18
@@ -402,27 +486,37 @@ static void print_opcode_name(unsigned char * cdbp, int cdb_len)
 		sa = cdbp[1] & 0x1f;
 		name = get_sa_name(serv_out12_arr, SERV_OUT12_SZ, sa);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (name)
 			printk("%s", name);
 		else
 			printk("cdb[0]=0x%x, sa=0x%x", cdb0, sa);
 =======
+=======
+>>>>>>> v3.18
 		fin_name = 1;
 		break;
 	case SERVICE_ACTION_BIDIRECTIONAL:
 		sa = cdbp[1] & 0x1f;
 		name = get_sa_name(serv_bidi_arr, SERV_BIDI_SZ, sa);
 		fin_name = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case SERVICE_ACTION_IN_16:
 		sa = cdbp[1] & 0x1f;
 		name = get_sa_name(serv_in16_arr, SERV_IN16_SZ, sa);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (name)
 			printk("%s", name);
 		else
 			printk("cdb[0]=0x%x, sa=0x%x", cdb0, sa);
+=======
+		fin_name = 1;
+>>>>>>> v3.18
 =======
 		fin_name = 1;
 >>>>>>> v3.18
@@ -431,11 +525,14 @@ static void print_opcode_name(unsigned char * cdbp, int cdb_len)
 		sa = cdbp[1] & 0x1f;
 		name = get_sa_name(serv_out16_arr, SERV_OUT16_SZ, sa);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (name)
 			printk("%s", name);
 		else
 			printk("cdb[0]=0x%x, sa=0x%x", cdb0, sa);
 =======
+=======
+>>>>>>> v3.18
 		fin_name = 1;
 		break;
 	case THIRD_PARTY_COPY_IN:
@@ -447,6 +544,9 @@ static void print_opcode_name(unsigned char * cdbp, int cdb_len)
 		sa = cdbp[1] & 0x1f;
 		name = get_sa_name(tpc_out_arr, TPC_OUT_SZ, sa);
 		fin_name = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -461,13 +561,19 @@ static void print_opcode_name(unsigned char * cdbp, int cdb_len)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (fin_name) {
 		if (name)
 			printk("%s", name);
 		else
 			printk("cdb[0]=0x%x, sa=0x%x", cdb0, sa);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -494,11 +600,14 @@ static void print_opcode_name(unsigned char * cdbp, int cdb_len)
 	case MAINTENANCE_IN:
 	case MAINTENANCE_OUT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SERVICE_ACTION_IN_12:
 	case SERVICE_ACTION_OUT_12:
 	case SERVICE_ACTION_IN_16:
 	case SERVICE_ACTION_OUT_16:
 =======
+=======
+>>>>>>> v3.18
 	case PERSISTENT_RESERVE_IN:
 	case PERSISTENT_RESERVE_OUT:
 	case SERVICE_ACTION_IN_12:
@@ -508,6 +617,9 @@ static void print_opcode_name(unsigned char * cdbp, int cdb_len)
 	case SERVICE_ACTION_OUT_16:
 	case THIRD_PARTY_COPY_IN:
 	case THIRD_PARTY_COPY_OUT:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sa = cdbp[1] & 0x1f;
 		printk("cdb[0]=0x%x, sa=0x%x", cdb0, sa);
@@ -521,7 +633,11 @@ static void print_opcode_name(unsigned char * cdbp, int cdb_len)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif  
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -534,7 +650,11 @@ void __scsi_print_command(unsigned char *cdb)
 	len = scsi_command_size(cdb);
 	/* print out all bytes in cdb */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (k = 0; k < len; ++k) 
+=======
+	for (k = 0; k < len; ++k)
+>>>>>>> v3.18
 =======
 	for (k = 0; k < len; ++k)
 >>>>>>> v3.18
@@ -606,8 +726,14 @@ struct error_info {
 /*
  * The canonical list of T10 Additional Sense Codes is available at:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * http://www.t10.org/lists/asc-num.txt
  */
+=======
+ * http://www.t10.org/lists/asc-num.txt [most recent: 20130605]
+ */
+
+>>>>>>> v3.18
 =======
  * http://www.t10.org/lists/asc-num.txt [most recent: 20130605]
  */
@@ -638,6 +764,11 @@ static const struct error_info additional[] =
 	{0x001D, "ATA pass through information available"},
 	{0x001E, "Conflicting SA creation request"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x001F, "Logical unit transitioning to another power condition"},
+	{0x0020, "Extended copy information available"},
+>>>>>>> v3.18
 =======
 	{0x001F, "Logical unit transitioning to another power condition"},
 	{0x0020, "Extended copy information available"},
@@ -673,7 +804,10 @@ static const struct error_info additional[] =
 	{0x0413, "Logical unit not ready, SA creation in progress"},
 	{0x0414, "Logical unit not ready, space allocation in progress"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{0x0415, "Logical unit not ready, robotics disabled"},
 	{0x0416, "Logical unit not ready, configuration required"},
 	{0x0417, "Logical unit not ready, calibration required"},
@@ -685,6 +819,9 @@ static const struct error_info additional[] =
 	{0x041C, "Logical unit not ready, additional power use not yet "
 	 "granted"},
 	{0x041D, "Logical unit not ready, configuration in progress"},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	{0x0500, "Logical unit does not respond to selection"},
@@ -717,6 +854,10 @@ static const struct error_info additional[] =
 	{0x0B07, "Warning - degraded power to non-volatile cache"},
 	{0x0B08, "Warning - power loss expected"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x0B09, "Warning - device statistics notification active"},
+>>>>>>> v3.18
 =======
 	{0x0B09, "Warning - device statistics notification active"},
 >>>>>>> v3.18
@@ -736,6 +877,10 @@ static const struct error_info additional[] =
 	{0x0C0C, "Write error - unexpected unsolicited data"},
 	{0x0C0D, "Write error - not enough unsolicited data"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x0C0E, "Multiple write errors"},
+>>>>>>> v3.18
 =======
 	{0x0C0E, "Multiple write errors"},
 >>>>>>> v3.18
@@ -758,6 +903,11 @@ static const struct error_info additional[] =
 	{0x1002, "Logical block application tag check failed"},
 	{0x1003, "Logical block reference tag check failed"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x1004, "Logical block protection error on recover buffered data"},
+	{0x1005, "Logical block protection method error"},
+>>>>>>> v3.18
 =======
 	{0x1004, "Logical block protection error on recover buffered data"},
 	{0x1005, "Logical block protection method error"},
@@ -785,6 +935,10 @@ static const struct error_info additional[] =
 	{0x1113, "Read error - failed retransmission request"},
 	{0x1114, "Read error - lba marked bad by application client"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x1115, "Write after sanitize required"},
+>>>>>>> v3.18
 =======
 	{0x1115, "Write after sanitize required"},
 >>>>>>> v3.18
@@ -866,6 +1020,10 @@ static const struct error_info additional[] =
 	{0x200A, "Access denied - invalid proxy token"},
 	{0x200B, "Access denied - ACL LUN conflict"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x200C, "Illegal command when not in append-only mode"},
+>>>>>>> v3.18
 =======
 	{0x200C, "Illegal command when not in append-only mode"},
 >>>>>>> v3.18
@@ -878,7 +1036,10 @@ static const struct error_info additional[] =
 	{0x2200, "Illegal function (use 20 00, 24 00, or 26 00)"},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{0x2300, "Invalid token operation, cause not reportable"},
 	{0x2301, "Invalid token operation, unsupported token type"},
 	{0x2302, "Invalid token operation, remote token usage not supported"},
@@ -892,6 +1053,9 @@ static const struct error_info additional[] =
 	{0x2309, "Invalid token operation, token deleted"},
 	{0x230A, "Invalid token operation, invalid token length"},
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{0x2400, "Invalid field in cdb"},
 	{0x2401, "CDB decryption error"},
@@ -969,6 +1133,10 @@ static const struct error_info additional[] =
 	{0x2A13, "Data encryption key instance counter has changed"},
 	{0x2A14, "SA creation capabilities data has changed"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x2A15, "Medium removal prevention preempted"},
+>>>>>>> v3.18
 =======
 	{0x2A15, "Medium removal prevention preempted"},
 >>>>>>> v3.18
@@ -988,6 +1156,10 @@ static const struct error_info additional[] =
 	{0x2C0A, "Partition or collection contains user objects"},
 	{0x2C0B, "Not reserved"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x2C0C, "Orwrite generation does not match"},
+>>>>>>> v3.18
 =======
 	{0x2C0C, "Orwrite generation does not match"},
 >>>>>>> v3.18
@@ -1000,6 +1172,10 @@ static const struct error_info additional[] =
 	{0x2F01, "Commands cleared by power loss notification"},
 	{0x2F02, "Commands cleared by device server"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x2F03, "Some commands cleared by queuing layer event"},
+>>>>>>> v3.18
 =======
 	{0x2F03, "Some commands cleared by queuing layer event"},
 >>>>>>> v3.18
@@ -1021,6 +1197,10 @@ static const struct error_info additional[] =
 	{0x3011, "Incompatible volume type"},
 	{0x3012, "Incompatible volume qualifier"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x3013, "Cleaning volume expired"},
+>>>>>>> v3.18
 =======
 	{0x3013, "Cleaning volume expired"},
 >>>>>>> v3.18
@@ -1029,6 +1209,10 @@ static const struct error_info additional[] =
 	{0x3101, "Format command failed"},
 	{0x3102, "Zoned formatting failed due to spare linking"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x3103, "Sanitize command failed"},
+>>>>>>> v3.18
 =======
 	{0x3103, "Sanitize command failed"},
 >>>>>>> v3.18
@@ -1093,6 +1277,11 @@ static const struct error_info additional[] =
 	{0x3B1A, "Data transfer device removed"},
 	{0x3B1B, "Data transfer device inserted"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x3B1C, "Too many logical objects on partition to support "
+	 "operation"},
+>>>>>>> v3.18
 =======
 	{0x3B1C, "Too many logical objects on partition to support "
 	 "operation"},
@@ -1128,6 +1317,10 @@ static const struct error_info additional[] =
 	{0x3F13, "iSCSI IP address removed"},
 	{0x3F14, "iSCSI IP address changed"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x3F15, "Inspect referrals sense descriptors"},
+>>>>>>> v3.18
 =======
 	{0x3F15, "Inspect referrals sense descriptors"},
 >>>>>>> v3.18
@@ -1141,6 +1334,10 @@ static const struct error_info additional[] =
 
 	{0x4400, "Internal target failure"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x4401, "Persistent reservation information lost"},
+>>>>>>> v3.18
 =======
 	{0x4401, "Persistent reservation information lost"},
 >>>>>>> v3.18
@@ -1173,7 +1370,10 @@ static const struct error_info additional[] =
 	{0x4B05, "Data offset error"},
 	{0x4B06, "Initiator response timeout"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{0x4B07, "Connection lost"},
 	{0x4B08, "Data-in buffer overflow - data buffer size"},
 	{0x4B09, "Data-in buffer overflow - data buffer descriptor area"},
@@ -1189,6 +1389,9 @@ static const struct error_info additional[] =
 	{0x4B13, "PCIe unsupported request"},
 	{0x4B14, "PCIe acs violation"},
 	{0x4B15, "PCIe tlp prefix blocked"},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	{0x4C00, "Logical unit failed self-configuration"},
@@ -1212,11 +1415,17 @@ static const struct error_info additional[] =
 	{0x5303, "Medium removal prevented by data transfer element"},
 	{0x5304, "Medium thread or unthread failure"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{0x5305, "Volume identifier invalid"},
 	{0x5306, "Volume identifier missing"},
 	{0x5307, "Duplicate volume identifier"},
 	{0x5308, "Element status unknown"},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	{0x5400, "Scsi to host system interface failure"},
@@ -1233,6 +1442,12 @@ static const struct error_info additional[] =
 	{0x5509, "Medium auxiliary memory not accessible"},
 	{0x550A, "Data currently unavailable"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x550B, "Insufficient power for operation"},
+	{0x550C, "Insufficient resources to create rod"},
+	{0x550D, "Insufficient resources to create rod token"},
+>>>>>>> v3.18
 =======
 	{0x550B, "Insufficient power for operation"},
 	{0x550C, "Insufficient resources to create rod"},
@@ -1397,6 +1612,10 @@ static const struct error_info additional[] =
 
 	{0x6800, "Logical unit not configured"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x6801, "Subsidiary logical unit not configured"},
+>>>>>>> v3.18
 =======
 	{0x6801, "Subsidiary logical unit not configured"},
 >>>>>>> v3.18
@@ -1517,11 +1736,14 @@ static const char * const snstext[] = {
 	"Copy Aborted",	    /* A: COPY or COMPARE was aborted */
 	"Aborted Command",  /* B: The target aborted the command */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"Equal",	    /* C: A SEARCH DATA command found data equal */
 	"Volume Overflow",  /* D: Medium full with still data to be written */
 	"Miscompare",	    /* E: Source data and data on the medium
 				  do not agree */
 =======
+=======
+>>>>>>> v3.18
 	"Equal",	    /* C: A SEARCH DATA command found data equal,
 				  reserved in SPC-4 rev 36 */
 	"Volume Overflow",  /* D: Medium full with still data to be written */
@@ -1529,6 +1751,9 @@ static const char * const snstext[] = {
 				  do not agree */
 	"Completed",	    /* F: command completed sense data reported,
 				  may occur for successful command */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #endif
@@ -1648,7 +1873,11 @@ scsi_decode_sense_buffer(const unsigned char *sense_buffer, int sense_len,
 {
 	int k, num, res;
 <<<<<<< HEAD
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1805,7 +2034,10 @@ void scsi_print_result(struct scsi_cmnd *cmd)
 }
 EXPORT_SYMBOL(scsi_print_result);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

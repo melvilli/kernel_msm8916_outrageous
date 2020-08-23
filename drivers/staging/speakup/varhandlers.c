@@ -47,7 +47,11 @@ static struct st_var_header var_headers[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct st_var_header *var_ptrs[MAXVARS] = { 0, 0, 0 };
+=======
+static struct st_var_header *var_ptrs[MAXVARS] = { NULL, NULL, NULL };
+>>>>>>> v3.18
 =======
 static struct st_var_header *var_ptrs[MAXVARS] = { NULL, NULL, NULL };
 >>>>>>> v3.18
@@ -117,7 +121,10 @@ void speakup_register_var(struct var_t *var)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -126,6 +133,10 @@ void speakup_unregister_var(enum var_id_t var_id)
 {
 	struct st_var_header *p_header;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -138,6 +149,10 @@ struct st_var_header *spk_get_var_header(enum var_id_t var_id)
 {
 	struct st_var_header *p_header;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -153,6 +168,7 @@ struct st_var_header *spk_var_header_by_name(const char *name)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct st_var_header *where = NULL;
 
 	if (name != NULL) {
@@ -166,6 +182,8 @@ struct st_var_header *spk_var_header_by_name(const char *name)
 	}
 	return where;
 =======
+=======
+>>>>>>> v3.18
 
 	if (!name)
 		return NULL;
@@ -175,6 +193,9 @@ struct st_var_header *spk_var_header_by_name(const char *name)
 			return var_ptrs[i];
 	}
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -255,6 +276,10 @@ int spk_set_num_var(int input, struct st_var_header *var, int how)
 	if (synth->synth_adjust != NULL) {
 		int status = synth->synth_adjust(var);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -307,6 +332,10 @@ int spk_set_mask_bits(const char *input, const int which, const int how)
 	u_char *cp;
 	short mask = spk_punc_info[which].mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -316,15 +345,21 @@ int spk_set_mask_bits(const char *input, const int which, const int how)
 	}
 	cp = (u_char *)input;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cp == 0)
 		cp = spk_punc_info[which].value;
 	else {
 		for ( ; *cp; cp++) {
 =======
+=======
+>>>>>>> v3.18
 	if (!cp)
 		cp = spk_punc_info[which].value;
 	else {
 		for (; *cp; cp++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (*cp < SPACE)
 				break;
@@ -340,17 +375,23 @@ int spk_set_mask_bits(const char *input, const int which, const int how)
 	}
 	if (how&2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for ( ; *cp; cp++)
 			if (*cp > SPACE)
 				spk_chartab[*cp] |= mask;
 	} else {
 		for ( ; *cp; cp++)
 =======
+=======
+>>>>>>> v3.18
 		for (; *cp; cp++)
 			if (*cp > SPACE)
 				spk_chartab[*cp] |= mask;
 	} else {
 		for (; *cp; cp++)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (*cp > SPACE)
 				spk_chartab[*cp] &= ~mask;
@@ -362,6 +403,10 @@ char *spk_strlwr(char *s)
 {
 	char *p;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -377,6 +422,10 @@ char *spk_s2uchar(char *start, char *dest)
 {
 	int val = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

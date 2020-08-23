@@ -19,7 +19,11 @@
 
 #define RSTOUTn_MASK		(ORION5X_BRIDGE_VIRT_BASE + 0x108)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WDT_RESET_OUT_EN	0x0002
+=======
+#define RSTOUTn_MASK_PHYS	(ORION5X_BRIDGE_PHYS_BASE + 0x108)
+>>>>>>> v3.18
 =======
 #define RSTOUTn_MASK_PHYS	(ORION5X_BRIDGE_PHYS_BASE + 0x108)
 >>>>>>> v3.18
@@ -31,8 +35,11 @@
 #define POWER_MNG_CTRL_REG	(ORION5X_BRIDGE_VIRT_BASE + 0x11C)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WDT_INT_REQ		0x0008
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define BRIDGE_INT_TIMER1_CLR	(~0x0004)

@@ -50,6 +50,7 @@ features :-
     (e.g. volume control for speaker amplifier).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 To achieve all this, ASoC basically splits an embedded audio system into 3
 components :-
 
@@ -63,6 +64,8 @@ components :-
   * Machine driver: The machine driver handles any machine specific controls and
     audio events (e.g. turning on an amp at start of playback).
 =======
+=======
+>>>>>>> v3.18
 To achieve all this, ASoC basically splits an embedded audio system into
 multiple re-usable component drivers :-
 
@@ -80,6 +83,9 @@ multiple re-usable component drivers :-
     decribes and binds the other component drivers together to form an ALSA
     "sound card device". It handles any machine specific controls and
     machine level audio events (e.g. turning on an amp at start of playback).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -105,9 +111,15 @@ pop_clicks.txt: How to minimise audio artifacts.
 
 clocking.txt: ASoC clocking for best power performance.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 jack.txt: ASoC jack detection.
 
 DPCM.txt: Dynamic PCM - Describes DPCM with DSP examples.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

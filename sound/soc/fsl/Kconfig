@@ -1,7 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SND_SOC_FSL_SSI
 	tristate
 =======
+=======
+>>>>>>> v3.18
 menu "SoC Audio for Freescale CPUs"
 
 comment "Common SoC Audio options for Freescale CPUs:"
@@ -58,14 +61,20 @@ config SND_SOC_FSL_ESAI
 	  (ESAI) support for the Freescale CPUs.
 	  This option is only useful for out-of-tree drivers since
 	  in-tree drivers select it automatically.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SND_SOC_FSL_UTILS
 	tristate
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 menuconfig SND_POWERPC_SOC
 =======
+=======
+>>>>>>> v3.18
 config SND_SOC_IMX_PCM_DMA
 	tristate
 	select SND_SOC_GENERIC_DMAENGINE_PCM
@@ -79,6 +88,9 @@ config SND_SOC_IMX_AUDMUX
 	  in-tree drivers select it automatically.
 
 config SND_POWERPC_SOC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tristate "SoC Audio for Freescale PowerPC CPUs"
 	depends on FSL_SOC || PPC_MPC52xx
@@ -87,7 +99,10 @@ config SND_POWERPC_SOC
 	  the PowerPC CPUs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SND_IMX_SOC
 	tristate "SoC Audio for Freescale i.MX CPUs"
 	depends on ARCH_MXC || COMPILE_TEST
@@ -95,6 +110,9 @@ config SND_IMX_SOC
 	  Say Y or M if you want to add support for codecs attached to
 	  the i.MX CPUs.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 if SND_POWERPC_SOC
 
@@ -105,6 +123,11 @@ config SND_SOC_POWERPC_DMA
 	tristate
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+comment "SoC Audio support for Freescale PPC boards:"
+
+>>>>>>> v3.18
 =======
 comment "SoC Audio support for Freescale PPC boards:"
 
@@ -187,6 +210,7 @@ config SND_MPC52xx_SOC_EFIKA
 endif # SND_POWERPC_SOC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 menuconfig SND_IMX_SOC
 	tristate "SoC Audio for Freescale i.MX CPUs"
 	depends on ARCH_MXC
@@ -196,10 +220,13 @@ menuconfig SND_IMX_SOC
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 if SND_IMX_SOC
 
 config SND_SOC_IMX_SSI
 	tristate
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 config SND_SOC_IMX_PCM
@@ -218,6 +245,8 @@ config SND_SOC_IMX_PCM_DMA
 config SND_SOC_IMX_AUDMUX
 	tristate
 =======
+=======
+>>>>>>> v3.18
 	select SND_SOC_FSL_UTILS
 
 config SND_SOC_IMX_PCM_FIQ
@@ -225,6 +254,9 @@ config SND_SOC_IMX_PCM_FIQ
 	select FIQ
 
 comment "SoC Audio support for Freescale i.MX boards:"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SND_MXC_SOC_WM1133_EV1
@@ -264,6 +296,7 @@ config SND_SOC_PHYCORE_AC97
 config SND_SOC_EUKREA_TLV320
 	tristate "Eukrea TLV320"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MACH_EUKREA_MBIMX27_BASEBOARD \
 		|| MACH_EUKREA_MBIMXSD25_BASEBOARD \
 		|| MACH_EUKREA_MBIMXSD35_BASEBOARD \
@@ -274,19 +307,27 @@ config SND_SOC_EUKREA_TLV320
 	select SND_SOC_IMX_AUDMUX
 	select SND_SOC_IMX_SSI
 =======
+=======
+>>>>>>> v3.18
 	depends on ARCH_MXC && I2C
 	select SND_SOC_TLV320AIC23_I2C
 	select SND_SOC_IMX_AUDMUX
 	select SND_SOC_IMX_SSI
 	select SND_SOC_FSL_SSI
 	select SND_SOC_IMX_PCM_DMA
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Enable I2S based access to the TLV320AIC23B codec attached
 	  to the SSI interface
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SND_SOC_IMX_WM8962
 	tristate "SoC Audio support for i.MX boards with wm8962"
 	depends on OF && I2C && INPUT
@@ -310,6 +351,9 @@ config SND_SOC_IMX_ES8328
 	  Say Y if you want to add support for the ES8328 audio codec connected
 	  via SSI/I2S over either SPI or I2C.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SND_SOC_IMX_SGTL5000
 	tristate "SoC Audio support for i.MX boards with sgtl5000"
@@ -319,7 +363,10 @@ config SND_SOC_IMX_SGTL5000
 	select SND_SOC_IMX_AUDMUX
 	select SND_SOC_FSL_SSI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SND_SOC_FSL_UTILS
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -327,10 +374,13 @@ config SND_SOC_IMX_SGTL5000
 	  a sgtl5000 codec.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SND_SOC_IMX_MC13783
 	tristate "SoC Audio support for I.MX boards with mc13783"
 	depends on MFD_MC13783
 =======
+=======
+>>>>>>> v3.18
 config SND_SOC_IMX_SPDIF
 	tristate "SoC Audio support for i.MX boards with S/PDIF"
 	select SND_SOC_IMX_PCM_DMA
@@ -343,6 +393,9 @@ config SND_SOC_IMX_SPDIF
 config SND_SOC_IMX_MC13783
 	tristate "SoC Audio support for I.MX boards with mc13783"
 	depends on MFD_MC13XXX && ARM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select SND_SOC_IMX_SSI
 	select SND_SOC_IMX_AUDMUX
@@ -350,8 +403,11 @@ config SND_SOC_IMX_MC13783
 	select SND_SOC_IMX_PCM_DMA
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endif # SND_IMX_SOC
 =======
+=======
+>>>>>>> v3.18
 config SND_SOC_FSL_ASOC_CARD
 	tristate "Generic ASoC Sound Card with ASRC support"
 	depends on OF && I2C
@@ -369,4 +425,7 @@ config SND_SOC_FSL_ASOC_CARD
 endif # SND_IMX_SOC
 
 endmenu
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

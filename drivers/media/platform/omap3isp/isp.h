@@ -13,6 +13,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,6 +24,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -49,8 +52,11 @@
 #include "ispccp2.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IOMMU_FLAG (IOVMF_ENDIAN_LITTLE | IOVMF_ELSZ_8)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ISP_TOK_TERM		0xFFFFFFFF	/*
@@ -142,6 +148,10 @@ struct isp_xclk {
 	struct clk_hw hw;
 	struct clk_lookup *lookup;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *clk;
+>>>>>>> v3.18
 =======
 	struct clk *clk;
 >>>>>>> v3.18
@@ -162,15 +172,21 @@ struct isp_xclk {
  * @mmio_base_phys: Array with physical L4 bus addresses for ISP register
  *                  regions.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mmio_size: Array with ISP register regions size in bytes.
  * @raw_dmamask: Raw DMA mask
  * @stat_lock: Spinlock for handling statistics
  * @isp_mutex: Mutex for serializing requests to ISP.
 =======
+=======
+>>>>>>> v3.18
  * @mapping: IOMMU mapping
  * @stat_lock: Spinlock for handling statistics
  * @isp_mutex: Mutex for serializing requests to ISP.
  * @stop_failure: Indicates that an entity failed to stop.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @crashed: Bitmask of crashed entities (indexed by entity ID)
  * @has_context: Context has been saved at least once and can be restored.
@@ -189,7 +205,10 @@ struct isp_xclk {
  * @isp_prev: Pointer to current settings for ISP Preview.
  * @isp_ccdc: Pointer to current settings for ISP CCDC.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @iommu: Pointer to requested IOMMU instance for ISP.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @platform_cb: ISP driver callback function pointers for platform code
@@ -209,9 +228,14 @@ struct isp_device {
 	void __iomem *mmio_base[OMAP3_ISP_IOMEM_LAST];
 	unsigned long mmio_base_phys[OMAP3_ISP_IOMEM_LAST];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	resource_size_t mmio_size[OMAP3_ISP_IOMEM_LAST];
 
 	u64 raw_dmamask;
+=======
+
+	struct dma_iommu_mapping *mapping;
+>>>>>>> v3.18
 =======
 
 	struct dma_iommu_mapping *mapping;
@@ -221,6 +245,10 @@ struct isp_device {
 	spinlock_t stat_lock;	/* common lock for statistic drivers */
 	struct mutex isp_mutex;	/* For handling ref_count field */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool stop_failure;
+>>>>>>> v3.18
 =======
 	bool stop_failure;
 >>>>>>> v3.18
@@ -251,8 +279,11 @@ struct isp_device {
 	unsigned int sbl_resources;
 	unsigned int subclk_resources;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct iommu_domain *domain;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -273,6 +304,10 @@ int omap3isp_module_sync_is_stopping(wait_queue_head_t *wait,
 int omap3isp_pipeline_set_stream(struct isp_pipeline *pipe,
 				 enum isp_pipeline_stream_state state);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void omap3isp_pipeline_cancel_stream(struct isp_pipeline *pipe);
+>>>>>>> v3.18
 =======
 void omap3isp_pipeline_cancel_stream(struct isp_pipeline *pipe);
 >>>>>>> v3.18
@@ -303,7 +338,11 @@ void omap3isp_unregister_entities(struct platform_device *pdev);
 /*
  * isp_reg_readl - Read value of an OMAP3 ISP register
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: Device pointer specific to the OMAP3 ISP.
+=======
+ * @isp: Device pointer specific to the OMAP3 ISP.
+>>>>>>> v3.18
 =======
  * @isp: Device pointer specific to the OMAP3 ISP.
 >>>>>>> v3.18
@@ -322,7 +361,11 @@ u32 isp_reg_readl(struct isp_device *isp, enum isp_mem_resources isp_mmio_range,
 /*
  * isp_reg_writel - Write value to an OMAP3 ISP register
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: Device pointer specific to the OMAP3 ISP.
+=======
+ * @isp: Device pointer specific to the OMAP3 ISP.
+>>>>>>> v3.18
 =======
  * @isp: Device pointer specific to the OMAP3 ISP.
 >>>>>>> v3.18
@@ -339,8 +382,13 @@ void isp_reg_writel(struct isp_device *isp, u32 reg_value,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * isp_reg_and - Clear individual bits in an OMAP3 ISP register
  * @dev: Device pointer specific to the OMAP3 ISP.
+=======
+ * isp_reg_clr - Clear individual bits in an OMAP3 ISP register
+ * @isp: Device pointer specific to the OMAP3 ISP.
+>>>>>>> v3.18
 =======
  * isp_reg_clr - Clear individual bits in an OMAP3 ISP register
  * @isp: Device pointer specific to the OMAP3 ISP.
@@ -361,7 +409,11 @@ void isp_reg_clr(struct isp_device *isp, enum isp_mem_resources mmio_range,
 /*
  * isp_reg_set - Set individual bits in an OMAP3 ISP register
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: Device pointer specific to the OMAP3 ISP.
+=======
+ * @isp: Device pointer specific to the OMAP3 ISP.
+>>>>>>> v3.18
 =======
  * @isp: Device pointer specific to the OMAP3 ISP.
 >>>>>>> v3.18
@@ -381,7 +433,11 @@ void isp_reg_set(struct isp_device *isp, enum isp_mem_resources mmio_range,
 /*
  * isp_reg_clr_set - Clear and set invidial bits in an OMAP3 ISP register
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: Device pointer specific to the OMAP3 ISP.
+=======
+ * @isp: Device pointer specific to the OMAP3 ISP.
+>>>>>>> v3.18
 =======
  * @isp: Device pointer specific to the OMAP3 ISP.
 >>>>>>> v3.18

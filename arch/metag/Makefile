@@ -21,7 +21,11 @@ checkflags-$(CONFIG_METAG_META21)	+= -DMETAC_2_1
 CHECKFLAGS				+= -D__metag__ $(checkflags-y)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 KBUILD_DEFCONFIG			:= meta2_defconfig
+=======
+KBUILD_DEFCONFIG			:= tz1090_defconfig
+>>>>>>> v3.18
 =======
 KBUILD_DEFCONFIG			:= tz1090_defconfig
 >>>>>>> v3.18

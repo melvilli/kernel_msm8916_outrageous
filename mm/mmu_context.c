@@ -32,6 +32,12 @@ void use_mm(struct mm_struct *mm)
 	switch_mm(active_mm, mm, tsk);
 	task_unlock(tsk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef finish_arch_post_lock_switch
+	finish_arch_post_lock_switch();
+#endif
+>>>>>>> v3.18
 =======
 #ifdef finish_arch_post_lock_switch
 	finish_arch_post_lock_switch();

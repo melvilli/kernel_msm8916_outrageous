@@ -79,7 +79,11 @@ struct i2o_scsi_host {
 	struct Scsi_Host *scsi_host;	/* pointer to the SCSI host */
 	struct i2o_controller *iop;	/* pointer to the I2O controller */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int lun;	/* lun's used for block devices */
+=======
+	u64 lun;	/* lun's used for block devices */
+>>>>>>> v3.18
 =======
 	u64 lun;	/* lun's used for block devices */
 >>>>>>> v3.18
@@ -292,9 +296,14 @@ static int i2o_scsi_probe(struct device *dev)
 
 	if (le64_to_cpu(lun) >= scsi_host->max_lun) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		osm_warn("SCSI device lun (%lu) >= max_lun of I2O host (%d)",
 			 (long unsigned int)le64_to_cpu(lun),
 			 scsi_host->max_lun);
+=======
+		osm_warn("SCSI device lun (%llu) >= max_lun of I2O host (%llu)",
+			 le64_to_cpu(lun), scsi_host->max_lun);
+>>>>>>> v3.18
 =======
 		osm_warn("SCSI device lun (%llu) >= max_lun of I2O host (%llu)",
 			 le64_to_cpu(lun), scsi_host->max_lun);
@@ -318,9 +327,15 @@ static int i2o_scsi_probe(struct device *dev)
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	osm_info("device added (TID: %03x) channel: %d, id: %d, lun: %ld\n",
 		 i2o_dev->lct_data.tid, channel, le32_to_cpu(id),
 		 (long unsigned int)le64_to_cpu(lun));
+=======
+	osm_info("device added (TID: %03x) channel: %d, id: %d, lun: %llu\n",
+		 i2o_dev->lct_data.tid, channel, le32_to_cpu(id),
+		 le64_to_cpu(lun));
+>>>>>>> v3.18
 =======
 	osm_info("device added (TID: %03x) channel: %d, id: %d, lun: %llu\n",
 		 i2o_dev->lct_data.tid, channel, le32_to_cpu(id),

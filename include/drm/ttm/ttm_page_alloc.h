@@ -30,6 +30,11 @@
 #include <drm/ttm/ttm_memory.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct device;
+
+>>>>>>> v3.18
 =======
 struct device;
 
@@ -68,7 +73,11 @@ extern int ttm_page_alloc_debugfs(struct seq_file *m, void *data);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SWIOTLB
+=======
+#if defined(CONFIG_SWIOTLB) || defined(CONFIG_INTEL_IOMMU)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_SWIOTLB) || defined(CONFIG_INTEL_IOMMU)
 >>>>>>> v3.18
@@ -104,7 +113,10 @@ static inline int ttm_dma_page_alloc_debugfs(struct seq_file *m, void *data)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int ttm_dma_populate(struct ttm_dma_tt *ttm_dma,
 				   struct device *dev)
 {
@@ -114,6 +126,9 @@ static inline void ttm_dma_unpopulate(struct ttm_dma_tt *ttm_dma,
 				      struct device *dev)
 {
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

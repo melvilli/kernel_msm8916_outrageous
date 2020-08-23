@@ -17,15 +17,21 @@
 #include <linux/bitops.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/regulator/driver.h>
 #include <linux/regulator/machine.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/platform_device.h>
 #include <linux/regulator/driver.h>
 #include <linux/regulator/machine.h>
 #include <linux/regulator/of_regulator.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/gpio.h>
 #include <linux/slab.h>
@@ -160,11 +166,17 @@ static const struct regulator_desc arizona_ldo1 = {
 	.vsel_reg = ARIZONA_LDO1_CONTROL_1,
 	.vsel_mask = ARIZONA_LDO1_VSEL_MASK,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.bypass_reg = ARIZONA_LDO1_CONTROL_1,
 	.bypass_mask = ARIZONA_LDO1_BYPASS,
 	.min_uV = 900000,
 	.uV_step = 50000,
 	.n_voltages = 7,
+=======
+	.min_uV = 900000,
+	.uV_step = 25000,
+	.n_voltages = 13,
+>>>>>>> v3.18
 =======
 	.min_uV = 900000,
 	.uV_step = 25000,
@@ -193,7 +205,10 @@ static const struct regulator_init_data arizona_ldo1_default = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int arizona_ldo1_of_get_pdata(struct arizona *arizona,
 				     struct regulator_config *config)
 {
@@ -230,6 +245,9 @@ static int arizona_ldo1_of_get_pdata(struct arizona *arizona,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int arizona_ldo1_probe(struct platform_device *pdev)
 {
@@ -240,17 +258,23 @@ static int arizona_ldo1_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldo1 = devm_kzalloc(&pdev->dev, sizeof(*ldo1), GFP_KERNEL);
 	if (ldo1 == NULL) {
 		dev_err(&pdev->dev, "Unable to allocate private data\n");
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	arizona->external_dcvdd = false;
 
 	ldo1 = devm_kzalloc(&pdev->dev, sizeof(*ldo1), GFP_KERNEL);
 	if (!ldo1)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ldo1->arizona = arizona;
@@ -263,6 +287,10 @@ static int arizona_ldo1_probe(struct platform_device *pdev)
 	switch (arizona->type) {
 	case WM5102:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case WM8997:
+>>>>>>> v3.18
 =======
 	case WM8997:
 >>>>>>> v3.18
@@ -283,7 +311,10 @@ static int arizona_ldo1_probe(struct platform_device *pdev)
 	config.driver_data = ldo1;
 	config.regmap = arizona->regmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (IS_ENABLED(CONFIG_OF)) {
 		if (!dev_get_platdata(arizona->dev)) {
@@ -293,6 +324,9 @@ static int arizona_ldo1_probe(struct platform_device *pdev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	config.ena_gpio = arizona->pdata.ldoena;
 
@@ -302,8 +336,11 @@ static int arizona_ldo1_probe(struct platform_device *pdev)
 		config.init_data = &ldo1->init_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldo1->regulator = regulator_register(desc, &config);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * LDO1 can only be used to supply DCVDD so if it has no
 	 * consumers then DCVDD is supplied externally.
@@ -312,6 +349,9 @@ static int arizona_ldo1_probe(struct platform_device *pdev)
 		arizona->external_dcvdd = true;
 
 	ldo1->regulator = devm_regulator_register(&pdev->dev, desc, &config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(ldo1->regulator)) {
 		ret = PTR_ERR(ldo1->regulator);
@@ -320,6 +360,7 @@ static int arizona_ldo1_probe(struct platform_device *pdev)
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_set_drvdata(pdev, ldo1);
 
@@ -336,6 +377,11 @@ static int arizona_ldo1_remove(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, ldo1);
 >>>>>>> v3.18
+=======
+	of_node_put(config.of_node);
+
+	platform_set_drvdata(pdev, ldo1);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -343,7 +389,10 @@ static int arizona_ldo1_remove(struct platform_device *pdev)
 static struct platform_driver arizona_ldo1_driver = {
 	.probe = arizona_ldo1_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = arizona_ldo1_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

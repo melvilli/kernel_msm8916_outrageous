@@ -7,17 +7,23 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/linkage.h>
 
 #define SMALL	7 /* Must be at least 6 to deal with alignment/loop issues.  */
 
 ARC_ENTRY memset
 =======
+=======
+>>>>>>> v3.18
 #include <linux/linkage.h>
 
 #define SMALL	7 /* Must be at least 6 to deal with alignment/loop issues.  */
 
 ENTRY(memset)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mov_s	r4,r0
 	or	r12,r0,r2
@@ -55,7 +61,11 @@ ENTRY(memset)
 .Ltiny_end:
 	j_s	[blink]
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_EXIT memset
+=======
+END(memset)
+>>>>>>> v3.18
 =======
 END(memset)
 >>>>>>> v3.18
@@ -64,7 +74,11 @@ END(memset)
 ; memset:  @r0 = mem, @r1 = char, @r2 = size_t
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_ENTRY memzero
+=======
+ENTRY(memzero)
+>>>>>>> v3.18
 =======
 ENTRY(memzero)
 >>>>>>> v3.18
@@ -73,7 +87,11 @@ ENTRY(memzero)
     mov r1, 0
     b  memset    ;tail call so need to tinker with blink
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_EXIT memzero
+=======
+END(memzero)
+>>>>>>> v3.18
 =======
 END(memzero)
 >>>>>>> v3.18

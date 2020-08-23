@@ -129,6 +129,7 @@ typedef int (*llc_conn_ev_t)(struct sock *sk, struct sk_buff *skb);
 typedef int (*llc_conn_ev_qfyr_t)(struct sock *sk, struct sk_buff *skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int llc_conn_ev_conn_req(struct sock *sk, struct sk_buff *skb);
 extern int llc_conn_ev_data_req(struct sock *sk, struct sk_buff *skb);
 extern int llc_conn_ev_disc_req(struct sock *sk, struct sk_buff *skb);
@@ -262,6 +263,8 @@ extern int llc_conn_ev_qlfy_set_status_conflict(struct sock *sk,
 extern int llc_conn_ev_qlfy_set_status_rst_done(struct sock *sk,
 						struct sk_buff *skb);
 =======
+=======
+>>>>>>> v3.18
 int llc_conn_ev_conn_req(struct sock *sk, struct sk_buff *skb);
 int llc_conn_ev_data_req(struct sock *sk, struct sk_buff *skb);
 int llc_conn_ev_disc_req(struct sock *sk, struct sk_buff *skb);
@@ -349,6 +352,9 @@ int llc_conn_ev_qlfy_set_status_remote_busy(struct sock *sk,
 int llc_conn_ev_qlfy_set_status_refuse(struct sock *sk, struct sk_buff *skb);
 int llc_conn_ev_qlfy_set_status_conflict(struct sock *sk, struct sk_buff *skb);
 int llc_conn_ev_qlfy_set_status_rst_done(struct sock *sk, struct sk_buff *skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static __inline__ int llc_conn_space(struct sock *sk, struct sk_buff *skb)

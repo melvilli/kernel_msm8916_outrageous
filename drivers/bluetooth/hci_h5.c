@@ -207,6 +207,11 @@ static int h5_close(struct hci_uart *hu)
 	struct h5 *h5 = hu->priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	del_timer_sync(&h5->timer);
+
+>>>>>>> v3.18
 =======
 	del_timer_sync(&h5->timer);
 
@@ -216,8 +221,11 @@ static int h5_close(struct hci_uart *hu)
 	skb_queue_purge(&h5->unrel);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&h5->timer);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(h5);
@@ -349,7 +357,11 @@ static void h5_complete_rx_pkt(struct hci_uart *hu)
 		skb_pull(h5->rx_skb, 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hci_recv_frame(h5->rx_skb);
+=======
+		hci_recv_frame(hu->hdev, h5->rx_skb);
+>>>>>>> v3.18
 =======
 		hci_recv_frame(hu->hdev, h5->rx_skb);
 >>>>>>> v3.18
@@ -368,10 +380,14 @@ static void h5_complete_rx_pkt(struct hci_uart *hu)
 static int h5_rx_crc(struct hci_uart *hu, unsigned char c)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct h5 *h5 = hu->priv;
 
 	h5_complete_rx_pkt(hu);
 	h5_reset_rx(h5);
+=======
+	h5_complete_rx_pkt(hu);
+>>>>>>> v3.18
 =======
 	h5_complete_rx_pkt(hu);
 >>>>>>> v3.18
@@ -390,7 +406,10 @@ static int h5_rx_payload(struct hci_uart *hu, unsigned char c)
 	} else {
 		h5_complete_rx_pkt(hu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		h5_reset_rx(h5);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -694,7 +713,12 @@ static struct sk_buff *h5_dequeue(struct hci_uart *hu)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((skb = skb_dequeue(&h5->unrel)) != NULL) {
+=======
+	skb = skb_dequeue(&h5->unrel);
+	if (skb != NULL) {
+>>>>>>> v3.18
 =======
 	skb = skb_dequeue(&h5->unrel);
 	if (skb != NULL) {
@@ -716,7 +740,12 @@ static struct sk_buff *h5_dequeue(struct hci_uart *hu)
 		goto unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((skb = skb_dequeue(&h5->rel)) != NULL) {
+=======
+	skb = skb_dequeue(&h5->rel);
+	if (skb != NULL) {
+>>>>>>> v3.18
 =======
 	skb = skb_dequeue(&h5->rel);
 	if (skb != NULL) {

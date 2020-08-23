@@ -22,8 +22,11 @@ struct device_node;
 extern void fsl_rstcr_restart(char *cmd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_FB_FSL_DIU) || defined(CONFIG_FB_FSL_DIU_MODULE)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* The different ports that the DIU can be connected to */
@@ -47,7 +50,10 @@ struct platform_diu_data_ops {
 
 extern struct platform_diu_data_ops diu_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

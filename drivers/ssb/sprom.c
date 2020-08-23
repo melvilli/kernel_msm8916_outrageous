@@ -55,7 +55,11 @@ static int hex2sprom(u16 *sprom, const char *dump, size_t len,
 		memcpy(tmp, dump, 4);
 		dump += 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = strict_strtoul(tmp, 16, &parsed);
+=======
+		err = kstrtoul(tmp, 16, &parsed);
+>>>>>>> v3.18
 =======
 		err = kstrtoul(tmp, 16, &parsed);
 >>>>>>> v3.18

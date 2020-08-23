@@ -37,6 +37,10 @@ void dbs_check_cpu(struct dbs_data *dbs_data, int cpu)
 	struct cs_dbs_tuners *cs_tuners = dbs_data->tuners;
 	struct cpufreq_policy *policy;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int sampling_rate;
+>>>>>>> v3.18
 =======
 	unsigned int sampling_rate;
 >>>>>>> v3.18
@@ -45,11 +49,14 @@ void dbs_check_cpu(struct dbs_data *dbs_data, int cpu)
 	unsigned int j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dbs_data->cdata->governor == GOV_ONDEMAND)
 		ignore_nice = od_tuners->ignore_nice_load;
 	else
 		ignore_nice = cs_tuners->ignore_nice_load;
 =======
+=======
+>>>>>>> v3.18
 	if (dbs_data->cdata->governor == GOV_ONDEMAND) {
 		struct od_cpu_dbs_info_s *od_dbs_info =
 				dbs_data->cdata->get_cpu_dbs_info_s(cpu);
@@ -68,6 +75,9 @@ void dbs_check_cpu(struct dbs_data *dbs_data, int cpu)
 		sampling_rate = cs_tuners->sampling_rate;
 		ignore_nice = cs_tuners->ignore_nice_load;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	policy = cdbs->cur_policy;
@@ -122,8 +132,11 @@ void dbs_check_cpu(struct dbs_data *dbs_data, int cpu)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		load = 100 * (wall_time - idle_time) / wall_time;
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * If the CPU had gone completely idle, and a task just woke up
 		 * on this CPU now, it would be unfair to calculate 'load' the
@@ -164,6 +177,9 @@ void dbs_check_cpu(struct dbs_data *dbs_data, int cpu)
 			load = 100 * (wall_time - idle_time) / wall_time;
 			j_cdbs->prev_load = load;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (load > max_load)
@@ -188,8 +204,14 @@ void gov_queue_work(struct dbs_data *dbs_data, struct cpufreq_policy *policy,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!policy->governor_enabled)
 		return;
+=======
+	mutex_lock(&cpufreq_governor_lock);
+	if (!policy->governor_enabled)
+		goto out_unlock;
+>>>>>>> v3.18
 =======
 	mutex_lock(&cpufreq_governor_lock);
 	if (!policy->governor_enabled)
@@ -210,6 +232,12 @@ void gov_queue_work(struct dbs_data *dbs_data, struct cpufreq_policy *policy,
 			__gov_queue_work(i, dbs_data, delay);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+out_unlock:
+	mutex_unlock(&cpufreq_governor_lock);
+>>>>>>> v3.18
 =======
 
 out_unlock:
@@ -395,6 +423,10 @@ int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 			struct cpu_dbs_common_info *j_cdbs =
 				dbs_data->cdata->get_cpu_cdbs(j);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			unsigned int prev_load;
+>>>>>>> v3.18
 =======
 			unsigned int prev_load;
 >>>>>>> v3.18
@@ -404,13 +436,19 @@ int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 			j_cdbs->prev_cpu_idle = get_cpu_idle_time(j,
 					       &j_cdbs->prev_cpu_wall, io_busy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			prev_load = (unsigned int)
 				(j_cdbs->prev_cpu_wall - j_cdbs->prev_cpu_idle);
 			j_cdbs->prev_load = 100 * prev_load /
 					(unsigned int) j_cdbs->prev_cpu_wall;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ignore_nice)
 				j_cdbs->prev_cpu_nice =
@@ -456,12 +494,18 @@ int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 
 	case CPUFREQ_GOV_LIMITS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		mutex_lock(&dbs_data->mutex);
 		if (!cpu_cdbs->cur_policy) {
 			mutex_unlock(&dbs_data->mutex);
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mutex_lock(&cpu_cdbs->timer_mutex);
 		if (policy->max < cpu_cdbs->cur_policy->cur)
@@ -473,6 +517,10 @@ int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 		dbs_check_cpu(dbs_data, cpu);
 		mutex_unlock(&cpu_cdbs->timer_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mutex_unlock(&dbs_data->mutex);
+>>>>>>> v3.18
 =======
 		mutex_unlock(&dbs_data->mutex);
 >>>>>>> v3.18

@@ -39,6 +39,7 @@
 #include <trace/events/syscalls.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum s390_regset {
 	REGSET_GENERAL,
 	REGSET_FP,
@@ -52,6 +53,9 @@ void update_per_regs(struct task_struct *task)
 =======
 void update_cr_regs(struct task_struct *task)
 >>>>>>> v3.18
+=======
+void update_cr_regs(struct task_struct *task)
+>>>>>>> v3.18
 {
 	struct pt_regs *regs = task_pt_regs(task);
 	struct thread_struct *thread = &task->thread;
@@ -59,6 +63,7 @@ void update_cr_regs(struct task_struct *task)
 
 #ifdef CONFIG_64BIT
 	/* Take care of the enable/disable of transactional execution. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (MACHINE_HAS_TE) {
 		unsigned long cr0, cr0_new;
@@ -73,6 +78,8 @@ void update_cr_regs(struct task_struct *task)
 		if (cr0 != cr0_new)
 			__ctl_load(cr0_new, 0, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (MACHINE_HAS_TE || MACHINE_HAS_VX) {
 		unsigned long cr, cr_new;
 
@@ -106,6 +113,9 @@ void update_cr_regs(struct task_struct *task)
 			if (cr_new != cr)
 				__ctl_load(cr_new, 2, 2);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 #endif
@@ -116,21 +126,32 @@ void update_cr_regs(struct task_struct *task)
 
 	/* merge TIF_SINGLE_STEP into user specified PER registers. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_tsk_thread_flag(task, TIF_SINGLE_STEP)) {
 		new.control |= PER_EVENT_IFETCH;
 =======
+=======
+>>>>>>> v3.18
 	if (test_tsk_thread_flag(task, TIF_SINGLE_STEP) ||
 	    test_tsk_thread_flag(task, TIF_UPROBE_SINGLESTEP)) {
 		if (test_tsk_thread_flag(task, TIF_BLOCK_STEP))
 			new.control |= PER_EVENT_BRANCH;
 		else
 			new.control |= PER_EVENT_IFETCH;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_64BIT
 		new.control |= PER_CONTROL_SUSPENSION;
 		new.control |= PER_EVENT_TRANSACTION_END;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (test_tsk_thread_flag(task, TIF_UPROBE_SINGLESTEP))
+			new.control |= PER_EVENT_IFETCH;
+>>>>>>> v3.18
 =======
 		if (test_tsk_thread_flag(task, TIF_UPROBE_SINGLESTEP))
 			new.control |= PER_EVENT_IFETCH;
@@ -153,9 +174,14 @@ void update_cr_regs(struct task_struct *task)
 void user_enable_single_step(struct task_struct *task)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_tsk_thread_flag(task, TIF_SINGLE_STEP);
 	if (task == current)
 		update_per_regs(task);
+=======
+	clear_tsk_thread_flag(task, TIF_BLOCK_STEP);
+	set_tsk_thread_flag(task, TIF_SINGLE_STEP);
+>>>>>>> v3.18
 =======
 	clear_tsk_thread_flag(task, TIF_BLOCK_STEP);
 	set_tsk_thread_flag(task, TIF_SINGLE_STEP);
@@ -165,10 +191,13 @@ void user_enable_single_step(struct task_struct *task)
 void user_disable_single_step(struct task_struct *task)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_tsk_thread_flag(task, TIF_SINGLE_STEP);
 	if (task == current)
 		update_per_regs(task);
 =======
+=======
+>>>>>>> v3.18
 	clear_tsk_thread_flag(task, TIF_BLOCK_STEP);
 	clear_tsk_thread_flag(task, TIF_SINGLE_STEP);
 }
@@ -177,6 +206,9 @@ void user_enable_block_step(struct task_struct *task)
 {
 	set_tsk_thread_flag(task, TIF_SINGLE_STEP);
 	set_tsk_thread_flag(task, TIF_BLOCK_STEP);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -191,7 +223,11 @@ void ptrace_disable(struct task_struct *task)
 	memset(&task->thread.per_event, 0, sizeof(task->thread.per_event));
 	clear_tsk_thread_flag(task, TIF_SINGLE_STEP);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_tsk_thread_flag(task, TIF_PER_TRAP);
+=======
+	clear_pt_regs_flag(task_pt_regs(task), PIF_PER_TRAP);
+>>>>>>> v3.18
 =======
 	clear_pt_regs_flag(task_pt_regs(task), PIF_PER_TRAP);
 >>>>>>> v3.18
@@ -265,15 +301,21 @@ static unsigned long __peek_user(struct task_struct *child, addr_t addr)
 		 */
 		tmp = *(addr_t *)((addr_t) &task_pt_regs(child)->psw + addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (addr == (addr_t) &dummy->regs.psw.mask)
 			/* Return a clean psw mask. */
 			tmp = psw_user_bits | (tmp & PSW_MASK_USER);
 =======
+=======
+>>>>>>> v3.18
 		if (addr == (addr_t) &dummy->regs.psw.mask) {
 			/* Return a clean psw mask. */
 			tmp &= PSW_MASK_USER | PSW_MASK_RI;
 			tmp |= PSW_USER_BITS;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	} else if (addr < (addr_t) &dummy->regs.orig_gpr2) {
@@ -314,8 +356,12 @@ static unsigned long __peek_user(struct task_struct *child, addr_t addr)
 		tmp = *(addr_t *)((addr_t) &child->thread.fp_regs + offset);
 		if (addr == (addr_t) &dummy->regs.fp_regs.fpc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tmp &= (unsigned long) FPC_VALID_MASK
 				<< (BITS_PER_LONG - 32);
+=======
+			tmp <<= BITS_PER_LONG - 32;
+>>>>>>> v3.18
 =======
 			tmp <<= BITS_PER_LONG - 32;
 >>>>>>> v3.18
@@ -400,6 +446,7 @@ static int __poke_user(struct task_struct *child, addr_t addr, addr_t data)
 		 * psw and gprs are stored on the stack
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (addr == (addr_t) &dummy->regs.psw.mask &&
 		    (((data^psw_user_bits) & ~PSW_MASK_USER) ||
 		     (((data^psw_user_bits) & PSW_MASK_ASC) &&
@@ -408,6 +455,8 @@ static int __poke_user(struct task_struct *child, addr_t addr, addr_t data)
 			/* Invalid psw mask. */
 			return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		if (addr == (addr_t) &dummy->regs.psw.mask) {
 			unsigned long mask = PSW_MASK_USER;
 
@@ -422,6 +471,9 @@ static int __poke_user(struct task_struct *child, addr_t addr, addr_t data)
 				/* Invalid addressing mode bits */
 				return -EINVAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*(addr_t *)((addr_t) &task_pt_regs(child)->psw + addr) = data;
 
@@ -461,15 +513,21 @@ static int __poke_user(struct task_struct *child, addr_t addr, addr_t data)
 		 * floating point regs. are stored in the thread structure
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (addr == (addr_t) &dummy->regs.fp_regs.fpc &&
 		    (data & ~((unsigned long) FPC_VALID_MASK
 			      << (BITS_PER_LONG - 32))) != 0)
 			return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		if (addr == (addr_t) &dummy->regs.fp_regs.fpc)
 			if ((unsigned int) data != 0 ||
 			    test_fp_ctl(data >> (BITS_PER_LONG - 32)))
 				return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		offset = addr - (addr_t) &dummy->regs.fp_regs;
 		*(addr_t *)((addr_t) &child->thread.fp_regs + offset) = data;
@@ -560,7 +618,10 @@ long arch_ptrace(struct task_struct *child, long request,
 			return -EIO;
 		child->thread.per_flags |= PER_FLAG_NO_TE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		child->thread.per_flags &= ~PER_FLAG_TE_ABORT_RAND;
 		return 0;
 	case PTRACE_TE_ABORT_RAND:
@@ -581,6 +642,9 @@ long arch_ptrace(struct task_struct *child, long request,
 		default:
 			return -EINVAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	default:
@@ -665,7 +729,12 @@ static u32 __peek_user_compat(struct task_struct *child, addr_t addr)
 			/* Fake a 31 bit psw mask. */
 			tmp = (__u32)(regs->psw.mask >> 32);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tmp = psw32_user_bits | (tmp & PSW32_MASK_USER);
+=======
+			tmp &= PSW32_MASK_USER | PSW32_MASK_RI;
+			tmp |= PSW32_USER_BITS;
+>>>>>>> v3.18
 =======
 			tmp &= PSW32_MASK_USER | PSW32_MASK_RI;
 			tmp |= PSW32_USER_BITS;
@@ -767,6 +836,7 @@ static int __poke_user_compat(struct task_struct *child,
 		 */
 		if (addr == (addr_t) &dummy32->regs.psw.mask) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Build a 64 bit psw mask from 31 bit mask. */
 			if (((tmp^psw32_user_bits) & ~PSW32_MASK_USER) ||
 			    (((tmp^psw32_user_bits) & PSW32_MASK_ASC) &&
@@ -778,6 +848,8 @@ static int __poke_user_compat(struct task_struct *child,
 				(regs->psw.mask & PSW_MASK_BA) |
 				(__u64)(tmp & PSW32_MASK_USER) << 32;
 =======
+=======
+>>>>>>> v3.18
 			__u32 mask = PSW32_MASK_USER;
 
 			mask |= is_ri_task(child) ? PSW32_MASK_RI : 0;
@@ -791,6 +863,9 @@ static int __poke_user_compat(struct task_struct *child,
 			regs->psw.mask = (regs->psw.mask & ~PSW_MASK_USER) |
 				(regs->psw.mask & PSW_MASK_BA) |
 				(__u64)(tmp & mask) << 32;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (addr == (addr_t) &dummy32->regs.psw.addr) {
 			/* Build a 64 bit psw address from 31 bit address. */
@@ -828,8 +903,12 @@ static int __poke_user_compat(struct task_struct *child,
 		 */
 		if (addr == (addr_t) &dummy32->regs.fp_regs.fpc &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (tmp & ~FPC_VALID_MASK) != 0)
 			/* Invalid floating point control. */
+=======
+		    test_fp_ctl(tmp))
+>>>>>>> v3.18
 =======
 		    test_fp_ctl(tmp))
 >>>>>>> v3.18
@@ -915,7 +994,11 @@ asmlinkage long do_syscall_trace_enter(struct pt_regs *regs)
 
 	/* Do the secure computing check first. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (secure_computing(regs->gprs[2])) {
+=======
+	if (secure_computing()) {
+>>>>>>> v3.18
 =======
 	if (secure_computing()) {
 >>>>>>> v3.18
@@ -937,7 +1020,11 @@ asmlinkage long do_syscall_trace_enter(struct pt_regs *regs)
 		 * the system call and the system call restart handling.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_thread_flag(TIF_SYSCALL);
+=======
+		clear_pt_regs_flag(regs, PIF_SYSCALL);
+>>>>>>> v3.18
 =======
 		clear_pt_regs_flag(regs, PIF_SYSCALL);
 >>>>>>> v3.18
@@ -948,9 +1035,13 @@ asmlinkage long do_syscall_trace_enter(struct pt_regs *regs)
 		trace_sys_enter(regs, regs->gprs[2]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_syscall_entry(is_compat_task() ?
 				AUDIT_ARCH_S390 : AUDIT_ARCH_S390X,
 			    regs->gprs[2], regs->orig_gpr2,
+=======
+	audit_syscall_entry(regs->gprs[2], regs->orig_gpr2,
+>>>>>>> v3.18
 =======
 	audit_syscall_entry(regs->gprs[2], regs->orig_gpr2,
 >>>>>>> v3.18
@@ -1043,10 +1134,13 @@ static int s390_fpregs_get(struct task_struct *target,
 			   unsigned int count, void *kbuf, void __user *ubuf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (target == current)
 		save_fp_regs(&target->thread.fp_regs);
 
 =======
+=======
+>>>>>>> v3.18
 	if (target == current) {
 		save_fp_ctl(&target->thread.fp_regs.fpc);
 		save_fp_regs(target->thread.fp_regs.fprs);
@@ -1060,6 +1154,9 @@ static int s390_fpregs_get(struct task_struct *target,
 				*(freg_t *)(target->thread.vxrs + i);
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return user_regset_copyout(&pos, &count, &kbuf, &ubuf,
 				   &target->thread.fp_regs, 0, -1);
@@ -1072,6 +1169,7 @@ static int s390_fpregs_set(struct task_struct *target,
 {
 	int rc = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (target == current)
 		save_fp_regs(&target->thread.fp_regs);
@@ -1087,6 +1185,8 @@ static int s390_fpregs_set(struct task_struct *target,
 			return -EINVAL;
 		target->thread.fp_regs.fpc = fpc[0];
 =======
+=======
+>>>>>>> v3.18
 	if (target == current) {
 		save_fp_ctl(&target->thread.fp_regs.fpc);
 		save_fp_regs(target->thread.fp_regs.fprs);
@@ -1102,6 +1202,9 @@ static int s390_fpregs_set(struct task_struct *target,
 		if (ufpc[1] != 0 || test_fp_ctl(ufpc[0]))
 			return -EINVAL;
 		target->thread.fp_regs.fpc = ufpc[0];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1111,9 +1214,12 @@ static int s390_fpregs_set(struct task_struct *target,
 					offsetof(s390_fp_regs, fprs), -1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc == 0 && target == current)
 		restore_fp_regs(&target->thread.fp_regs);
 =======
+=======
+>>>>>>> v3.18
 	if (rc == 0) {
 		if (target == current) {
 			restore_fp_ctl(&target->thread.fp_regs.fpc);
@@ -1129,6 +1235,9 @@ static int s390_fpregs_set(struct task_struct *target,
 		}
 #endif
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rc;
@@ -1185,7 +1294,10 @@ static int s390_tdb_set(struct task_struct *target,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int s390_vxrs_active(struct task_struct *target,
 			      const struct user_regset *regset)
 {
@@ -1275,6 +1387,9 @@ static int s390_vxrs_high_set(struct task_struct *target,
 	return rc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -1300,7 +1415,11 @@ static int s390_system_call_set(struct task_struct *target,
 
 static const struct user_regset s390_regsets[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[REGSET_GENERAL] = {
+=======
+	{
+>>>>>>> v3.18
 =======
 	{
 >>>>>>> v3.18
@@ -1312,7 +1431,11 @@ static const struct user_regset s390_regsets[] = {
 		.set = s390_regs_set,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[REGSET_FP] = {
+=======
+	{
+>>>>>>> v3.18
 =======
 	{
 >>>>>>> v3.18
@@ -1324,9 +1447,12 @@ static const struct user_regset s390_regsets[] = {
 		.set = s390_fpregs_set,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_64BIT
 	[REGSET_LAST_BREAK] = {
 =======
+=======
+>>>>>>> v3.18
 	{
 		.core_note_type = NT_S390_SYSTEM_CALL,
 		.n = 1,
@@ -1337,6 +1463,9 @@ static const struct user_regset s390_regsets[] = {
 	},
 #ifdef CONFIG_64BIT
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.core_note_type = NT_S390_LAST_BREAK,
 		.n = 1,
@@ -1346,7 +1475,11 @@ static const struct user_regset s390_regsets[] = {
 		.set = s390_last_break_set,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[REGSET_TDB] = {
+=======
+	{
+>>>>>>> v3.18
 =======
 	{
 >>>>>>> v3.18
@@ -1358,6 +1491,7 @@ static const struct user_regset s390_regsets[] = {
 		.set = s390_tdb_set,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 	[REGSET_SYSTEM_CALL] = {
 		.core_note_type = NT_S390_SYSTEM_CALL,
@@ -1368,6 +1502,8 @@ static const struct user_regset s390_regsets[] = {
 		.set = s390_system_call_set,
 	},
 =======
+=======
+>>>>>>> v3.18
 	{
 		.core_note_type = NT_S390_VXRS_LOW,
 		.n = __NUM_VXRS_LOW,
@@ -1387,6 +1523,9 @@ static const struct user_regset s390_regsets[] = {
 		.set = s390_vxrs_high_set,
 	},
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1553,7 +1692,11 @@ static int s390_compat_last_break_set(struct task_struct *target,
 
 static const struct user_regset s390_compat_regsets[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[REGSET_GENERAL] = {
+=======
+	{
+>>>>>>> v3.18
 =======
 	{
 >>>>>>> v3.18
@@ -1565,7 +1708,11 @@ static const struct user_regset s390_compat_regsets[] = {
 		.set = s390_compat_regs_set,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[REGSET_FP] = {
+=======
+	{
+>>>>>>> v3.18
 =======
 	{
 >>>>>>> v3.18
@@ -1577,8 +1724,11 @@ static const struct user_regset s390_compat_regsets[] = {
 		.set = s390_fpregs_set,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[REGSET_LAST_BREAK] = {
 =======
+=======
+>>>>>>> v3.18
 	{
 		.core_note_type = NT_S390_SYSTEM_CALL,
 		.n = 1,
@@ -1588,6 +1738,9 @@ static const struct user_regset s390_compat_regsets[] = {
 		.set = s390_system_call_set,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.core_note_type = NT_S390_LAST_BREAK,
 		.n = 1,
@@ -1597,7 +1750,11 @@ static const struct user_regset s390_compat_regsets[] = {
 		.set = s390_compat_last_break_set,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[REGSET_TDB] = {
+=======
+	{
+>>>>>>> v3.18
 =======
 	{
 >>>>>>> v3.18
@@ -1609,6 +1766,7 @@ static const struct user_regset s390_compat_regsets[] = {
 		.set = s390_tdb_set,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[REGSET_SYSTEM_CALL] = {
 		.core_note_type = NT_S390_SYSTEM_CALL,
 		.n = 1,
@@ -1619,6 +1777,8 @@ static const struct user_regset s390_compat_regsets[] = {
 	},
 	[REGSET_GENERAL_EXTENDED] = {
 =======
+=======
+>>>>>>> v3.18
 	{
 		.core_note_type = NT_S390_VXRS_LOW,
 		.n = __NUM_VXRS_LOW,
@@ -1638,6 +1798,9 @@ static const struct user_regset s390_compat_regsets[] = {
 		.set = s390_vxrs_high_set,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.core_note_type = NT_S390_HIGH_GPRS,
 		.n = sizeof(s390_compat_regs_high) / sizeof(compat_long_t),
@@ -1684,7 +1847,11 @@ int regs_query_register_offset(const char *name)
 	if (!name || *name != 'r')
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(name + 1, 10, &offset))
+=======
+	if (kstrtoul(name + 1, 10, &offset))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(name + 1, 10, &offset))
 >>>>>>> v3.18

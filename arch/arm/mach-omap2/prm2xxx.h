@@ -28,7 +28,11 @@
 /*
  * OMAP2-specific global PRM registers
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Use __raw_{read,write}l() with these registers.
+=======
+ * Use {read,write}l_relaxed() with these registers.
+>>>>>>> v3.18
 =======
  * Use {read,write}l_relaxed() with these registers.
 >>>>>>> v3.18
@@ -130,6 +134,10 @@ extern int omap2xxx_clkdm_wakeup(struct clockdomain *clkdm);
 
 extern void omap2xxx_prm_dpll_reset(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void omap2xxx_prm_clear_mod_irqs(s16 module, u8 regs, u32 wkst_mask);
+>>>>>>> v3.18
 =======
 void omap2xxx_prm_clear_mod_irqs(s16 module, u8 regs, u32 wkst_mask);
 >>>>>>> v3.18

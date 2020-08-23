@@ -10,7 +10,11 @@ extern void iscsit_free_r2t(struct iscsi_r2t *, struct iscsi_cmd *);
 extern void iscsit_free_r2ts_from_list(struct iscsi_cmd *);
 extern struct iscsi_cmd *iscsit_alloc_cmd(struct iscsi_conn *, gfp_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct iscsi_cmd *iscsit_allocate_cmd(struct iscsi_conn *, gfp_t);
+=======
+extern struct iscsi_cmd *iscsit_allocate_cmd(struct iscsi_conn *, int);
+>>>>>>> v3.18
 =======
 extern struct iscsi_cmd *iscsit_allocate_cmd(struct iscsi_conn *, int);
 >>>>>>> v3.18
@@ -35,6 +39,10 @@ extern bool iscsit_conn_all_queues_empty(struct iscsi_conn *);
 extern void iscsit_free_queue_reqs_for_conn(struct iscsi_conn *);
 extern void iscsit_release_cmd(struct iscsi_cmd *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void __iscsit_free_cmd(struct iscsi_cmd *, bool, bool);
+>>>>>>> v3.18
 =======
 extern void __iscsit_free_cmd(struct iscsi_cmd *, bool, bool);
 >>>>>>> v3.18

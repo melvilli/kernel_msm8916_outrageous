@@ -2124,8 +2124,13 @@ sisusb_get_ramconfig(struct sisusb_usb_data *sisusb)
 	int bw = 0;
 	char *ramtypetext1 = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *ramtypetext2[] = {	"SDR SDRAM", "SDR SGRAM",
 					"DDR SDRAM", "DDR SGRAM" };
+=======
+	static const char ram_datarate[4] = {'S', 'S', 'D', 'D'};
+	static const char ram_dynamictype[4] = {'D', 'G', 'D', 'G'};
+>>>>>>> v3.18
 =======
 	static const char ram_datarate[4] = {'S', 'S', 'D', 'D'};
 	static const char ram_dynamictype[4] = {'D', 'G', 'D', 'G'};
@@ -2162,13 +2167,19 @@ sisusb_get_ramconfig(struct sisusb_usb_data *sisusb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(&sisusb->sisusb_dev->dev, "%dMB %s %s, bus width %d\n", (sisusb->vramsize >> 20), ramtypetext1,
 			ramtypetext2[ramtype], bw);
 =======
+=======
+>>>>>>> v3.18
 
 	dev_info(&sisusb->sisusb_dev->dev, "%dMB %s %cDR S%cRAM, bus width %d\n",
 		 sisusb->vramsize >> 20, ramtypetext1,
 		 ram_datarate[ramtype], ram_dynamictype[ramtype], bw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

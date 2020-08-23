@@ -117,10 +117,15 @@ __xipram cfi_read_pri(struct map_info *map, __u16 adr, __u16 size, const char* n
 
 	extp = kmalloc(size, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!extp) {
 		printk(KERN_ERR "Failed to allocate memory\n");
 		goto out;
 	}
+=======
+	if (!extp)
+		goto out;
+>>>>>>> v3.18
 =======
 	if (!extp)
 		goto out;
@@ -247,7 +252,11 @@ int cfi_varsize_frob(struct mtd_info *mtd, varsize_frob_t frob,
 
 			if (chipnum >= cfi->numchips)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+				break;
+>>>>>>> v3.18
 =======
 				break;
 >>>>>>> v3.18

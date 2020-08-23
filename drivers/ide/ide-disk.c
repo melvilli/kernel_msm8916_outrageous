@@ -189,10 +189,16 @@ static ide_startstop_t ide_do_rw_disk(ide_drive_t *drive, struct request *rq,
 	ledtrig_ide_activity();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s: %sing: block=%llu, sectors=%u, buffer=0x%08lx\n",
 		 drive->name, rq_data_dir(rq) == READ ? "read" : "writ",
 		 (unsigned long long)block, blk_rq_sectors(rq),
 		 (unsigned long)rq->buffer);
+=======
+	pr_debug("%s: %sing: block=%llu, sectors=%u\n",
+		 drive->name, rq_data_dir(rq) == READ ? "read" : "writ",
+		 (unsigned long long)block, blk_rq_sectors(rq));
+>>>>>>> v3.18
 =======
 	pr_debug("%s: %sing: block=%llu, sectors=%u\n",
 		 drive->name, rq_data_dir(rq) == READ ? "read" : "writ",
@@ -693,13 +699,19 @@ static void ide_disk_setup(ide_drive_t *drive)
 	       queue_max_sectors(q) / 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ata_id_is_ssd(id))
 		queue_flag_set_unlocked(QUEUE_FLAG_NONROT, q);
 =======
+=======
+>>>>>>> v3.18
 	if (ata_id_is_ssd(id)) {
 		queue_flag_set_unlocked(QUEUE_FLAG_NONROT, q);
 		queue_flag_clear_unlocked(QUEUE_FLAG_ADD_RANDOM, q);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* calculate drive capacity, and select LBA if possible */

@@ -19,6 +19,10 @@
 
 extern pte_t *pkmap_page_table;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern pte_t *fixmap_page_table;
+>>>>>>> v3.18
 =======
 extern pte_t *fixmap_page_table;
 >>>>>>> v3.18

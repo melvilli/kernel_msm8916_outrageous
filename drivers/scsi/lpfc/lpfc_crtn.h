@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2011 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -192,12 +196,18 @@ void lpfc_offline(struct lpfc_hba *);
 void lpfc_reset_hba(struct lpfc_hba *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int lpfc_fof_queue_create(struct lpfc_hba *);
 int lpfc_fof_queue_setup(struct lpfc_hba *);
 int lpfc_fof_queue_destroy(struct lpfc_hba *);
 irqreturn_t lpfc_sli4_fof_intr_handler(int, void *);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int lpfc_sli_setup(struct lpfc_hba *);
 int lpfc_sli_queue_setup(struct lpfc_hba *);
@@ -255,6 +265,10 @@ void lpfc_sli4_clear_fcf_rr_bmask(struct lpfc_hba *);
 
 int lpfc_mem_alloc(struct lpfc_hba *, int align);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int lpfc_mem_alloc_active_rrq_pool_s4(struct lpfc_hba *);
+>>>>>>> v3.18
 =======
 int lpfc_mem_alloc_active_rrq_pool_s4(struct lpfc_hba *);
 >>>>>>> v3.18
@@ -300,6 +314,10 @@ void lpfc_sli_pcimem_bcopy(void *, void *, uint32_t);
 void lpfc_sli_bemem_bcopy(void *, void *, uint32_t);
 void lpfc_sli_abort_iocb_ring(struct lpfc_hba *, struct lpfc_sli_ring *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void lpfc_sli_abort_fcp_rings(struct lpfc_hba *phba);
+>>>>>>> v3.18
 =======
 void lpfc_sli_abort_fcp_rings(struct lpfc_hba *phba);
 >>>>>>> v3.18
@@ -325,6 +343,12 @@ int lpfc_sli_sum_iocb(struct lpfc_vport *, uint16_t, uint64_t, lpfc_ctx_cmd);
 int lpfc_sli_abort_iocb(struct lpfc_vport *, struct lpfc_sli_ring *, uint16_t,
 			uint64_t, lpfc_ctx_cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int
+lpfc_sli_abort_taskmgmt(struct lpfc_vport *, struct lpfc_sli_ring *,
+			uint16_t, uint64_t, lpfc_ctx_cmd);
+>>>>>>> v3.18
 =======
 int
 lpfc_sli_abort_taskmgmt(struct lpfc_vport *, struct lpfc_sli_ring *,
@@ -426,7 +450,10 @@ void lpfc_unblock_fabric_iocbs(struct lpfc_hba *);
 void lpfc_rampdown_queue_depth(struct lpfc_hba *);
 void lpfc_ramp_down_queue_handler(struct lpfc_hba *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void lpfc_ramp_up_queue_handler(struct lpfc_hba *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void lpfc_scsi_dev_block(struct lpfc_hba *);
@@ -472,7 +499,10 @@ int lpfc_set_rrq_active(struct lpfc_hba *, struct lpfc_nodelist *,
 	uint16_t, uint16_t, uint16_t);
 uint16_t lpfc_sli4_xri_inrange(struct lpfc_hba *, uint16_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void lpfc_cleanup_wt_rrqs(struct lpfc_hba *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void lpfc_cleanup_vports_rrqs(struct lpfc_vport *, struct lpfc_nodelist *);
@@ -504,7 +534,10 @@ uint32_t lpfc_sli_port_speed_get(struct lpfc_hba *);
 int lpfc_sli4_request_firmware_update(struct lpfc_hba *, uint8_t);
 void lpfc_sli4_offline_eratt(struct lpfc_hba *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 struct lpfc_device_data *lpfc_create_device_data(struct lpfc_hba *,
 						struct lpfc_name *,
@@ -522,4 +555,7 @@ bool lpfc_disable_oas_lun(struct lpfc_hba *, struct lpfc_name *,
 bool lpfc_find_next_oas_lun(struct lpfc_hba *, struct lpfc_name *,
 			    struct lpfc_name *, uint64_t *, struct lpfc_name *,
 			    struct lpfc_name *, uint64_t *, uint32_t *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

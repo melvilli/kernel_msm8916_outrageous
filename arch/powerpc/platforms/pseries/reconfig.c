@@ -13,7 +13,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kref.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/notifier.h>
@@ -74,7 +77,11 @@ static int pSeries_reconfig_add_node(const char *path, struct property *proplist
 	np->properties = proplist;
 	of_node_set_flag(np, OF_DYNAMIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kref_init(&np->kref);
+=======
+	of_node_init(np);
+>>>>>>> v3.18
 =======
 	of_node_init(np);
 >>>>>>> v3.18
@@ -455,9 +462,12 @@ static int proc_ppc64_create_ofdt(void)
 	struct proc_dir_entry *ent;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!machine_is(pseries))
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ent = proc_create("powerpc/ofdt", S_IWUSR, NULL, &ofdt_fops);
@@ -467,7 +477,11 @@ static int proc_ppc64_create_ofdt(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 __initcall(proc_ppc64_create_ofdt);
+=======
+machine_device_initcall(pseries, proc_ppc64_create_ofdt);
+>>>>>>> v3.18
 =======
 machine_device_initcall(pseries, proc_ppc64_create_ofdt);
 >>>>>>> v3.18

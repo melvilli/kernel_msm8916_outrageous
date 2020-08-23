@@ -10,10 +10,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -22,7 +25,10 @@
 #include <linux/kernel.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/errno.h>
@@ -194,7 +200,11 @@ static DEFINE_MUTEX(pch_mutex);
 #define PCI_DEVICE_ID_ML7831_I2C	0x8817
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pch_pcidev_id) = {
+=======
+static const struct pci_device_id pch_pcidev_id[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pch_pcidev_id[] = {
 >>>>>>> v3.18
@@ -323,6 +333,7 @@ static void pch_i2c_start(struct i2c_algo_pch_data *adap)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pch_i2c_getack() - to confirm ACK/NACK
  * @adap:	Pointer to struct i2c_algo_pch_data.
  */
@@ -343,6 +354,8 @@ static s32 pch_i2c_getack(struct i2c_algo_pch_data *adap)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * pch_i2c_stop() - generate stop condition in normal mode.
  * @adap:	Pointer to struct i2c_algo_pch_data.
  */
@@ -358,6 +371,10 @@ static int pch_i2c_wait_for_check_xfer(struct i2c_algo_pch_data *adap)
 {
 	long ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem *p = adap->pch_base_address;
+>>>>>>> v3.18
 =======
 	void __iomem *p = adap->pch_base_address;
 >>>>>>> v3.18
@@ -384,10 +401,16 @@ static int pch_i2c_wait_for_check_xfer(struct i2c_algo_pch_data *adap)
 	adap->pch_event_flag = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pch_i2c_getack(adap)) {
 		pch_dbg(adap, "Receive NACK for slave address"
 			"setting\n");
 		return -EIO;
+=======
+	if (ioread32(p + PCH_I2CSR) & PCH_GETACK) {
+		pch_dbg(adap, "Receive NACK for slave address setting\n");
+		return -ENXIO;
+>>>>>>> v3.18
 =======
 	if (ioread32(p + PCH_I2CSR) & PCH_GETACK) {
 		pch_dbg(adap, "Receive NACK for slave address setting\n");
@@ -794,10 +817,15 @@ static int pch_i2c_probe(struct pci_dev *pdev,
 
 	adap_info = kzalloc((sizeof(struct adapter_info)), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (adap_info == NULL) {
 		pch_pci_err(pdev, "Memory allocation FAILED\n");
 		return -ENOMEM;
 	}
+=======
+	if (adap_info == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (adap_info == NULL)
 		return -ENOMEM;
@@ -827,7 +855,10 @@ static int pch_i2c_probe(struct pci_dev *pdev,
 	adap_info->ch_num = id->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = request_irq(pdev->irq, pch_i2c_handler, IRQF_SHARED,
 		  KBUILD_MODNAME, adap_info);
 	if (ret) {
@@ -835,6 +866,9 @@ static int pch_i2c_probe(struct pci_dev *pdev,
 		goto err_request_irq;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < adap_info->ch_num; i++) {
 		pch_adap = &adap_info->pch_data[i].pch_adapter;
@@ -853,6 +887,7 @@ static int pch_i2c_probe(struct pci_dev *pdev,
 
 		pch_adap->dev.parent = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	ret = request_irq(pdev->irq, pch_i2c_handler, IRQF_SHARED,
@@ -864,6 +899,8 @@ static int pch_i2c_probe(struct pci_dev *pdev,
 
 	for (i = 0; i < adap_info->ch_num; i++) {
 		pch_adap = &adap_info->pch_data[i].pch_adapter;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

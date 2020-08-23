@@ -30,8 +30,13 @@ struct compat_cmsghdr {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int compat_sock_get_timestamp(struct sock *, struct timeval __user *);
 extern int compat_sock_get_timestampns(struct sock *, struct timespec __user *);
+=======
+int compat_sock_get_timestamp(struct sock *, struct timeval __user *);
+int compat_sock_get_timestampns(struct sock *, struct timespec __user *);
+>>>>>>> v3.18
 =======
 int compat_sock_get_timestamp(struct sock *, struct timeval __user *);
 int compat_sock_get_timestampns(struct sock *, struct timespec __user *);
@@ -45,6 +50,7 @@ int compat_sock_get_timestampns(struct sock *, struct timespec __user *);
 #define compat_mmsghdr	mmsghdr
 #endif /* defined(CONFIG_COMPAT) */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int get_compat_msghdr(struct msghdr *, struct compat_msghdr __user *);
 extern int verify_compat_iovec(struct msghdr *, struct iovec *, struct sockaddr_storage *, int);
@@ -66,6 +72,8 @@ extern int compat_mc_getsockopt(struct sock *, int, int, char __user *,
 	int __user *, int (*)(struct sock *, int, int, char __user *,
 				int __user *));
 =======
+=======
+>>>>>>> v3.18
 int get_compat_msghdr(struct msghdr *, struct compat_msghdr __user *);
 int verify_compat_iovec(struct msghdr *, struct iovec *,
 			struct sockaddr_storage *, int);
@@ -91,6 +99,9 @@ int compat_mc_setsockopt(struct sock *, int, int, char __user *, unsigned int,
 int compat_mc_getsockopt(struct sock *, int, int, char __user *, int __user *,
 			 int (*)(struct sock *, int, int, char __user *,
 				 int __user *));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* NET_COMPAT_H */

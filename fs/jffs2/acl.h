@@ -28,6 +28,7 @@ struct jffs2_acl_header {
 
 struct posix_acl *jffs2_get_acl(struct inode *inode, int type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int jffs2_acl_chmod(struct inode *);
 extern int jffs2_init_acl_pre(struct inode *, struct inode *, umode_t *);
 extern int jffs2_init_acl_post(struct inode *);
@@ -40,6 +41,8 @@ extern const struct xattr_handler jffs2_acl_default_xattr_handler;
 #define jffs2_get_acl				(NULL)
 #define jffs2_acl_chmod(inode)			(0)
 =======
+=======
+>>>>>>> v3.18
 int jffs2_set_acl(struct inode *inode, struct posix_acl *acl, int type);
 extern int jffs2_init_acl_pre(struct inode *, struct inode *, umode_t *);
 extern int jffs2_init_acl_post(struct inode *);
@@ -48,6 +51,9 @@ extern int jffs2_init_acl_post(struct inode *);
 
 #define jffs2_get_acl				(NULL)
 #define jffs2_set_acl				(NULL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define jffs2_init_acl_pre(dir_i,inode,mode)	(0)
 #define jffs2_init_acl_post(inode)		(0)

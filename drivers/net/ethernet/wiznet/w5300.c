@@ -543,7 +543,11 @@ static const struct net_device_ops w5300_netdev_ops = {
 static int w5300_hw_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wiznet_platform_data *data = pdev->dev.platform_data;
+=======
+	struct wiznet_platform_data *data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct wiznet_platform_data *data = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -566,16 +570,22 @@ static int w5300_hw_probe(struct platform_device *pdev)
 		return -ENXIO;
 	mem_size = resource_size(mem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!devm_request_mem_region(&pdev->dev, mem->start, mem_size, name))
 		return -EBUSY;
 	priv->base = devm_ioremap(&pdev->dev, mem->start, mem_size);
 	if (!priv->base)
 		return -EBUSY;
 =======
+=======
+>>>>>>> v3.18
 
 	priv->base = devm_ioremap_resource(&pdev->dev, mem);
 	if (IS_ERR(priv->base))
 		return PTR_ERR(priv->base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_init(&priv->reg_lock);
@@ -633,7 +643,10 @@ static int w5300_probe(struct platform_device *pdev)
 	priv->ndev = ndev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ether_setup(ndev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ndev->netdev_ops = &w5300_netdev_ops;
@@ -661,7 +674,10 @@ err_hw_probe:
 err_register:
 	free_netdev(ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;
@@ -680,7 +696,10 @@ static int w5300_remove(struct platform_device *pdev)
 	unregister_netdev(ndev);
 	free_netdev(ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

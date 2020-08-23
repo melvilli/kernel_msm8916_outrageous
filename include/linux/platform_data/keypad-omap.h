@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  arch/arm/plat-omap/include/mach/keypad.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  Copyright (C) 2006 Komal Shah <komal_shah802003@yahoo.com>
@@ -11,8 +14,13 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef ASMARM_ARCH_KEYPAD_H
 #define ASMARM_ARCH_KEYPAD_H
+=======
+#ifndef __KEYPAD_OMAP_H
+#define __KEYPAD_OMAP_H
+>>>>>>> v3.18
 =======
 #ifndef __KEYPAD_OMAP_H
 #define __KEYPAD_OMAP_H

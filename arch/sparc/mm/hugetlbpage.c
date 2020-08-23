@@ -5,7 +5,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/fs.h>
@@ -25,8 +28,11 @@
  * definition we don't have to worry about any page coloring stuff
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VA_EXCLUDE_START (0x0000080000000000UL - (1UL << 32UL))
 #define VA_EXCLUDE_END   (0xfffff80000000000UL + (1UL << 32UL))
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -125,7 +131,11 @@ hugetlb_get_unmapped_area(struct file *file, unsigned long addr,
 		vma = find_vma(mm, addr);
 		if (task_size - len >= addr &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (!vma || addr + len <= vm_start_gap(vma)))
+=======
+		    (!vma || addr + len <= vma->vm_start))
+>>>>>>> v3.18
 =======
 		    (!vma || addr + len <= vma->vm_start))
 >>>>>>> v3.18
@@ -245,11 +255,14 @@ int pud_huge(pud_t pud)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pmd_huge_support(void)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct page *follow_huge_pmd(struct mm_struct *mm, unsigned long address,

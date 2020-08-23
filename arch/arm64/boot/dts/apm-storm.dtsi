@@ -168,6 +168,7 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			eth8clk: eth8clk {
 				compatible = "apm,xgene-device-clock";
 				#clock-cells = <1>;
@@ -177,6 +178,8 @@
 				reg-names = "csr-reg";
 				clock-output-names = "eth8clk";
 =======
+=======
+>>>>>>> v3.18
 			menetclk: menetclk {
 				compatible = "apm,xgene-device-clock";
 				#clock-cells = <1>;
@@ -204,6 +207,9 @@
 				reg-names = "csr-reg";
 				csr-mask = <0x3>;
 				clock-output-names = "xge0clk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -301,7 +307,10 @@
 				clock-output-names = "rtcclk";
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			rngpkaclk: rngpkaclk@17000000 {
 				compatible = "apm,xgene-device-clock";
@@ -480,6 +489,9 @@
 					 0x0 0x0 0x0 0x4 &gic 0x0 0xdd 0x1>;
 			dma-coherent;
 			clocks = <&pcie4clk 0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -566,6 +578,10 @@
 			      <0x0 0x1f217000 0x0 0x1000>;
 			interrupts = <0x0 0x86 0x4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			dma-coherent;
+>>>>>>> v3.18
 =======
 			dma-coherent;
 >>>>>>> v3.18
@@ -584,6 +600,10 @@
 			      <0x0 0x1f227000 0x0 0x1000>;
 			interrupts = <0x0 0x87 0x4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			dma-coherent;
+>>>>>>> v3.18
 =======
 			dma-coherent;
 >>>>>>> v3.18
@@ -601,6 +621,10 @@
 			      <0x0 0x1f23e000 0x0 0x1000>;
 			interrupts = <0x0 0x88 0x4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			dma-coherent;
+>>>>>>> v3.18
 =======
 			dma-coherent;
 >>>>>>> v3.18
@@ -618,7 +642,10 @@
 			clocks = <&rtcclk 0>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		menet: ethernet@17020000 {
 			compatible = "apm,xgene-enet";
@@ -681,6 +708,9 @@
 			interrupts = <0x0 0x41 0x4>;
 			clocks = <&rngpkaclk 0>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

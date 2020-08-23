@@ -9,7 +9,11 @@ CONFIG_EMBEDDED=y
 CONFIG_SLAB=y
 # CONFIG_IOSCHED_CFQ is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_ARCH_SHMOBILE=y
+=======
+CONFIG_ARCH_SHMOBILE_LEGACY=y
+>>>>>>> v3.18
 =======
 CONFIG_ARCH_SHMOBILE_LEGACY=y
 >>>>>>> v3.18
@@ -32,17 +36,23 @@ CONFIG_ZBOOT_ROM_TEXT=0x0
 CONFIG_ZBOOT_ROM_BSS=0x0
 CONFIG_ARM_APPENDED_DTB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_CMDLINE="console=ttySC0,115200 ignore_loglevel root=/dev/nfs ip=dhcp"
 CONFIG_CMDLINE_FORCE=y
 # CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
 # CONFIG_SUSPEND is not set
 CONFIG_NET=y
 =======
+=======
+>>>>>>> v3.18
 CONFIG_VFP=y
 # CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
 CONFIG_PM_RUNTIME=y
 CONFIG_NET=y
 CONFIG_PACKET=y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 CONFIG_UNIX=y
 CONFIG_INET=y
@@ -61,7 +71,10 @@ CONFIG_DEVTMPFS_MOUNT=y
 # CONFIG_PREVENT_FIRMWARE_BUILD is not set
 # CONFIG_FW_LOADER is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 CONFIG_MTD=y
 CONFIG_MTD_CHAR=y
 CONFIG_MTD_BLOCK=y
@@ -71,6 +84,9 @@ CONFIG_MTD_M25P80=y
 CONFIG_MTD_SPI_NOR=y
 CONFIG_SCSI=y
 CONFIG_BLK_DEV_SD=y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 CONFIG_NETDEVICES=y
 # CONFIG_NET_CADENCE is not set
@@ -96,8 +112,11 @@ CONFIG_SERIAL_SH_SCI_CONSOLE=y
 # CONFIG_HW_RANDOM is not set
 # CONFIG_HWMON is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
 # CONFIG_USB_SUPPORT is not set
 =======
+=======
+>>>>>>> v3.18
 CONFIG_I2C=y
 CONFIG_I2C_RCAR=y
 CONFIG_GPIO_RCAR=y
@@ -130,13 +149,19 @@ CONFIG_RTC_CLASS=y
 CONFIG_RTC_DRV_RX8581=y
 CONFIG_DMADEVICES=y
 CONFIG_RCAR_HPB_DMAE=y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 CONFIG_UIO=y
 CONFIG_UIO_PDRV_GENIRQ=y
 # CONFIG_IOMMU_SUPPORT is not set
 # CONFIG_DNOTIFY is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
 # CONFIG_INOTIFY_USER is not set
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_TMPFS=y

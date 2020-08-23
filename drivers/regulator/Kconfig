@@ -29,6 +29,7 @@ config REGULATOR_DEBUG
 	  Say yes here to enable debugging support.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config REGULATOR_DUMMY
 	bool "Provide a dummy regulator if regulator lookups fail"
 	help
@@ -39,6 +40,8 @@ config REGULATOR_DUMMY
 
 	  A warning will be generated when this substitution is done.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config REGULATOR_FIXED_VOLTAGE
@@ -68,6 +71,7 @@ config REGULATOR_USERSPACE_CONSUMER
 	  If unsure, say no.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config REGULATOR_PROXY_CONSUMER
 	bool "Boot time regulator proxy consumer support"
 	help
@@ -88,6 +92,8 @@ config REGULATOR_GPIO
 	  and the platform has to provide a mapping of GPIO-states
 	  to target volts/amps.
 =======
+=======
+>>>>>>> v3.18
 config REGULATOR_88PM800
 	tristate "Marvell 88PM800 Power regulators"
 	depends on MFD_88PM800
@@ -111,6 +117,9 @@ config REGULATOR_ACT8865
 	help
 	  This driver controls a active-semi act8865 voltage output
 	  regulator via I2C bus.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config REGULATOR_AD5398
@@ -121,7 +130,10 @@ config REGULATOR_AD5398
 	  If building into module, its name is ad5398.ko.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config REGULATOR_ANATOP
 	tristate "Freescale i.MX on-chip ANATOP LDO regulators"
 	depends on MFD_SYSCON
@@ -130,6 +142,9 @@ config REGULATOR_ANATOP
 	  regulators. It is recommended that this option be
 	  enabled on i.MX6 platform.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config REGULATOR_AAT2870
 	tristate "AnalogicTech AAT2870 Regulators"
@@ -139,7 +154,10 @@ config REGULATOR_AAT2870
 	  regulator driver.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config REGULATOR_AB3100
 	tristate "ST-Ericsson AB3100 Regulator functions"
 	depends on AB3100_CORE
@@ -156,6 +174,9 @@ config REGULATOR_AB8500
 	  This driver supports the regulators found on the ST-Ericsson mixed
 	  signal AB8500 PMIC
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config REGULATOR_ARIZONA
 	tristate "Wolfson Arizona class devices"
@@ -166,7 +187,10 @@ config REGULATOR_ARIZONA
 	  devices.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config REGULATOR_AS3711
 	tristate "AS3711 PMIC"
 	depends on MFD_AS3711
@@ -197,6 +221,9 @@ config REGULATOR_BCM590XX
 	  BCM590xx PMUs. This will enable support for the software
 	  controllable LDO/Switching regulators.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config REGULATOR_DA903X
 	tristate "Dialog Semiconductor DA9030/DA9034 regulators"
@@ -223,7 +250,10 @@ config REGULATOR_DA9055
 	  will be called da9055-regulator.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config REGULATOR_DA9063
 	tristate "Dialog Semiconductor DA9063 regulators"
 	depends on MFD_DA9063
@@ -266,6 +296,9 @@ config REGULATOR_DB8500_PRCMU
 	  This driver supports the voltage domain regulators controlled by the
 	  DB8500 PRCMU
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config REGULATOR_FAN53555
 	tristate "Fairchild FAN53555 Regulator"
@@ -278,6 +311,7 @@ config REGULATOR_FAN53555
 	  input voltage supply of 2.5V to 5.5V. The output voltage is
 	  programmed through an I2C interface.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config REGULATOR_ANATOP
 	tristate "Freescale i.MX on-chip ANATOP LDO regulators"
@@ -315,6 +349,8 @@ config REGULATOR_MEM_ACC
 	 This driver configures the power-mode (corner) for the memory
 	 accelerator.
 =======
+=======
+>>>>>>> v3.18
 config REGULATOR_GPIO
 	tristate "GPIO regulator support"
 	depends on GPIOLIB
@@ -341,6 +377,9 @@ config REGULATOR_ISL9305
 	select REGMAP_I2C
 	help
 	  This driver supports ISL9305 voltage regulator chip.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config REGULATOR_ISL6271A
@@ -350,12 +389,15 @@ config REGULATOR_ISL6271A
 	  This driver supports ISL6271A voltage regulator chip.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config REGULATOR_88PM8607
 	bool "Marvell 88PM8607 Power regulators"
 	depends on MFD_88PM860X=y
 	help
 	  This driver supports 88PM8607 voltage regulator chips.
 =======
+=======
+>>>>>>> v3.18
 config REGULATOR_LP3971
 	tristate "National Semiconductors LP3971 PMIC regulator driver"
 	depends on I2C
@@ -407,6 +449,9 @@ config REGULATOR_MAX14577
 	  This driver controls a Maxim MAX14577/77836 regulator via I2C bus.
 	  The MAX14577 regulators include safeout LDO and charger current
 	  regulator. The MAX77836 has two additional LDOs.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config REGULATOR_MAX1586
@@ -490,6 +535,7 @@ config REGULATOR_MAX77686
 	  Exynos-4 chips to control VARM and VINT voltages.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config REGULATOR_ONSEMI_NCP6335D
 	tristate "OnSemi NCP6335D regulator support"
 	depends on I2C
@@ -542,6 +588,8 @@ config REGULATOR_LP8788
 	help
 	  This driver supports LP8788 voltage regulator chip.
 =======
+=======
+>>>>>>> v3.18
 config REGULATOR_MAX77693
 	tristate "Maxim MAX77693 regulator"
 	depends on MFD_MAX77693
@@ -606,6 +654,9 @@ config REGULATOR_PCAP
 	help
 	 This driver provides support for the voltage regulators of the
 	 PCAP2 PMIC.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config REGULATOR_PCF50633
@@ -616,7 +667,10 @@ config REGULATOR_PCF50633
 	 on PCF50633
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config REGULATOR_PFUZE100
 	tristate "Freescale PFUZE100/PFUZE200 regulator driver"
 	depends on I2C
@@ -644,6 +698,9 @@ config REGULATOR_QCOM_RPM
 	  Qualcomm RPM as a module. The module will be named
 	  "qcom_rpm-regulator".
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config REGULATOR_RC5T583
 	tristate "RICOH RC5T583 Power regulators"
@@ -656,6 +713,7 @@ config REGULATOR_RC5T583
 	  outputs which can be controlled by i2c communication.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config REGULATOR_S2MPS11
 	tristate "Samsung S2MPS11 voltage regulator"
 	depends on MFD_SEC_CORE
@@ -664,6 +722,8 @@ config REGULATOR_S2MPS11
 	 via I2C bus. S2MPS11 is comprised of high efficient Buck converters
 	 including Dual-Phase Buck converter, Buck-Boost converter, various LDOs.
 =======
+=======
+>>>>>>> v3.18
 config REGULATOR_RK808
 	tristate "Rockchip RK808 Power regulators"
 	depends on MFD_RK808
@@ -695,6 +755,9 @@ config REGULATOR_S2MPS11
 	 regulator via I2C bus. The chip is comprised of high efficient Buck
 	 converters including Dual-Phase Buck converter, Buck-Boost converter,
 	 various LDOs.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config REGULATOR_S5M8767
@@ -705,6 +768,7 @@ config REGULATOR_S5M8767
 	 via I2C bus. S5M8767A have 9 Bucks and 28 LDOs output and
 	 supports DVS mode with 8bits of output voltage control.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config REGULATOR_AB3100
 	tristate "ST-Ericsson AB3100 Regulator functions"
@@ -745,6 +809,8 @@ config REGULATOR_PALMAS
 	  on the muxing. This is handled automatically in the driver by
 	  reading the mux info from OTP.
 =======
+=======
+>>>>>>> v3.18
 config REGULATOR_SKY81452
 	tristate "Skyworks Solutions SKY81452 voltage regulator"
 	depends on SKY81452
@@ -773,6 +839,9 @@ config REGULATOR_STW481X_VMMC
 	help
 	  This driver supports the internal VMMC regulator in the STw481x
 	  PMIC chips.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config REGULATOR_TPS51632
@@ -839,7 +908,10 @@ config REGULATOR_TPS65217
 	  for different voltage domains
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config REGULATOR_TPS65218
 	tristate "TI TPS65218 Power regulators"
 	depends on MFD_TPS65218 && OF
@@ -849,6 +921,9 @@ config REGULATOR_TPS65218
 	  voltage regulators. It supports software based voltage control
 	  for different voltage domains
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config REGULATOR_TPS6524X
 	tristate "TI TPS6524X Power regulators"
@@ -889,7 +964,11 @@ config REGULATOR_TPS80031
 
 config REGULATOR_TWL4030
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "TI TWL4030/TWL5030/TWL6030/TPS659x0 PMIC"
+=======
+	tristate "TI TWL4030/TWL5030/TWL6030/TPS659x0 PMIC"
+>>>>>>> v3.18
 =======
 	tristate "TI TWL4030/TWL5030/TWL6030/TPS659x0 PMIC"
 >>>>>>> v3.18
@@ -898,6 +977,7 @@ config REGULATOR_TWL4030
 	  This driver supports the voltage regulators provided by
 	  this family of companion chips.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config REGULATOR_TPS65132
 	tristate "TI TPS65132 Power regulator"
@@ -913,6 +993,8 @@ config REGULATOR_TPS65132
 	  can be configured separately. Each regulator can be enabled and
           disabled independently through an external pin.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config REGULATOR_VEXPRESS
@@ -950,6 +1032,7 @@ config REGULATOR_WM8994
 	  This driver provides support for the voltage regulators on the
 	  WM8994 CODEC.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config REGULATOR_AS3711
 	tristate "AS3711 PMIC"
@@ -1009,6 +1092,8 @@ config REGULATOR_CPR
 	  suggestions in efuse as initial settings. It converts corner vote
 	  to voltage value before writing to a voltage regulator API, such as
 	  that provided by spm-regulator driver.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif

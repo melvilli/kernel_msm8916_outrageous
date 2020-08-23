@@ -10,10 +10,14 @@ config IP_MULTICAST
 	  of the Internet which carries audio and video broadcasts. More
 	  information about the MBONE is on the WWW at
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <http://www.savetz.com/mbone/>. Information about the multicast
 	  capabilities of the various network cards is contained in
 	  <file:Documentation/networking/multicast.txt>. For most people, it's
 	  safe to say N.
+=======
+	  <http://www.savetz.com/mbone/>. For most people, it's safe to say N.
+>>>>>>> v3.18
 =======
 	  <http://www.savetz.com/mbone/>. For most people, it's safe to say N.
 >>>>>>> v3.18
@@ -228,10 +232,15 @@ config IP_MROUTE
 	  MBONE, a high bandwidth network on top of the Internet which carries
 	  audio and video broadcasts. In order to do that, you would most
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  likely run the program mrouted. Information about the multicast
 	  capabilities of the various network cards is contained in
 	  <file:Documentation/networking/multicast.txt>. If you haven't heard
 	  about it, you don't need it.
+=======
+	  likely run the program mrouted. If you haven't heard about it, you
+	  don't need it.
+>>>>>>> v3.18
 =======
 	  likely run the program mrouted. If you haven't heard about it, you
 	  don't need it.
@@ -274,6 +283,7 @@ config IP_PIMSM_V2
 	  you want to play with it.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARPD
 	bool "IP: ARP daemon support"
 	---help---
@@ -290,6 +300,8 @@ config ARPD
 
 	  If unsure, say N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SYN_COOKIES
@@ -341,7 +353,10 @@ config NET_IPVTI
 	  on top.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NET_UDP_TUNNEL
 	tristate
 	select NET_IP_TUNNEL
@@ -371,6 +386,9 @@ config GENEVE
 	  To compile this driver as a module, choose M here: the module
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config INET_AH
 	tristate "IP: AH transformation"
@@ -478,6 +496,7 @@ config INET_UDP_DIAG
 	  If unsure, say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config INET_DIAG_DESTROY
 	bool "INET: allow privileged process to administratively close sockets"
 	depends on INET_DIAG
@@ -491,6 +510,8 @@ config INET_DIAG_DESTROY
 	  had been disconnected.
 	  If unsure, say N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 menuconfig TCP_CONG_ADVANCED
@@ -638,7 +659,10 @@ config TCP_CONG_ILLINOIS
 	  http://www.ews.uiuc.edu/~shaoliu/tcpillinois/index.html
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config TCP_CONG_DCTCP
 	tristate "DataCenter TCP (DCTCP)"
 	default n
@@ -660,6 +684,9 @@ config TCP_CONG_DCTCP
 	For further details see:
 	  http://simula.stanford.edu/~alizade/Site/DCTCP_files/dctcp-final.pdf
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 choice
 	prompt "Default TCP congestion control"
@@ -690,15 +717,21 @@ choice
 		bool "Westwood" if TCP_CONG_WESTWOOD=y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config DEFAULT_RENO
 		bool "Reno"
 
 =======
+=======
+>>>>>>> v3.18
 	config DEFAULT_DCTCP
 		bool "DCTCP" if TCP_CONG_DCTCP=y
 
 	config DEFAULT_RENO
 		bool "Reno"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endchoice
 
@@ -720,6 +753,10 @@ config DEFAULT_TCP_CONG
 	default "veno" if DEFAULT_VENO
 	default "reno" if DEFAULT_RENO
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	default "dctcp" if DEFAULT_DCTCP
+>>>>>>> v3.18
 =======
 	default "dctcp" if DEFAULT_DCTCP
 >>>>>>> v3.18

@@ -12,6 +12,10 @@
 #include <linux/err.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/input.h>
+>>>>>>> v3.18
 =======
 #include <linux/input.h>
 >>>>>>> v3.18
@@ -35,8 +39,11 @@
 #include <linux/iio/triggered_buffer.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/at91_adc.h>
 =======
+=======
+>>>>>>> v3.18
 /* Registers */
 #define AT91_ADC_CR		0x00		/* Control Register */
 #define		AT91_ADC_SWRST		(1 << 0)	/* Software Reset */
@@ -139,6 +146,9 @@
 #define		AT91_ADC_TRGR_TRGMOD	(0x7 << 0)
 #define			AT91_ADC_TRGR_NONE		(0 << 0)
 #define			AT91_ADC_TRGR_MOD_PERIOD_TRIG	(5 << 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define AT91_ADC_CHAN(st, ch) \
@@ -149,7 +159,10 @@
 	(writel_relaxed(val, st->reg_base + reg))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DRIVER_NAME		"at91_adc"
 #define MAX_POS_BITS		12
 
@@ -197,6 +210,9 @@ struct at91_adc_caps {
 	struct at91_adc_reg_desc registers;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct at91_adc_state {
 	struct clk		*adc_clk;
@@ -207,6 +223,10 @@ struct at91_adc_state {
 	int			irq;
 	u16			last_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			chnb;
+>>>>>>> v3.18
 =======
 	int			chnb;
 >>>>>>> v3.18
@@ -226,7 +246,10 @@ struct at91_adc_state {
 	bool			low_res;	/* the resolution corresponds to the lowest one */
 	wait_queue_head_t	wq_data_avail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct at91_adc_caps	*caps;
 
 	/*
@@ -253,6 +276,9 @@ struct at91_adc_state {
 	bool			ts_bufferedmeasure;
 	u32			ts_prev_absx;
 	u32			ts_prev_absy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -271,6 +297,7 @@ static irqreturn_t at91_adc_trigger_handler(int irq, void *p)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (idev->scan_timestamp) {
 		s64 *timestamp = (s64 *)((u8 *)st->buffer +
 					ALIGN(j, sizeof(s64)));
@@ -278,6 +305,9 @@ static irqreturn_t at91_adc_trigger_handler(int irq, void *p)
 	}
 
 	iio_push_to_buffers(idev, (u8 *)st->buffer);
+=======
+	iio_push_to_buffers_with_timestamp(idev, st->buffer, pf->timestamp);
+>>>>>>> v3.18
 =======
 	iio_push_to_buffers_with_timestamp(idev, st->buffer, pf->timestamp);
 >>>>>>> v3.18
@@ -292,6 +322,7 @@ static irqreturn_t at91_adc_trigger_handler(int irq, void *p)
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static irqreturn_t at91_adc_eoc_trigger(int irq, void *private)
 {
@@ -311,6 +342,8 @@ static irqreturn_t at91_adc_eoc_trigger(int irq, void *private)
 		wake_up_interruptible(&st->wq_data_avail);
 	}
 =======
+=======
+>>>>>>> v3.18
 /* Handler for classic adc channel eoc trigger */
 static void handle_adc_eoc_trigger(int irq, struct iio_dev *idev)
 {
@@ -498,6 +531,9 @@ static irqreturn_t at91_adc_9x5_interrupt(int irq, void *private)
 			at91_adc_readl(st, AT91_ADC_TSPRESSR);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return IRQ_HANDLED;
@@ -509,7 +545,10 @@ static int at91_adc_channel_init(struct iio_dev *idev)
 	struct iio_chan_spec *chan_array, *timestamp;
 	int bit, idx = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned long rsvd_mask = 0;
 
 	/* If touchscreen is enable, then reserve the adc channels */
@@ -520,6 +559,9 @@ static int at91_adc_channel_init(struct iio_dev *idev)
 
 	/* set up the channel mask to reserve touchscreen channels */
 	st->channels_mask &= ~rsvd_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	idev->num_channels = bitmap_weight(&st->channels_mask,
@@ -674,7 +716,11 @@ static int at91_adc_trigger_init(struct iio_dev *idev)
 
 	st->trig = devm_kzalloc(&idev->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				st->trigger_number * sizeof(st->trig),
+=======
+				st->trigger_number * sizeof(*st->trig),
+>>>>>>> v3.18
 =======
 				st->trigger_number * sizeof(*st->trig),
 >>>>>>> v3.18
@@ -744,14 +790,20 @@ static int at91_adc_read_raw(struct iio_dev *idev,
 		mutex_lock(&st->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		at91_adc_writel(st, AT91_ADC_CHER,
 				AT91_ADC_CH(chan->channel));
 		at91_adc_writel(st, AT91_ADC_IER, st->registers->drdy_mask);
 =======
+=======
+>>>>>>> v3.18
 		st->chnb = chan->channel;
 		at91_adc_writel(st, AT91_ADC_CHER,
 				AT91_ADC_CH(chan->channel));
 		at91_adc_writel(st, AT91_ADC_IER, BIT(chan->channel));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		at91_adc_writel(st, AT91_ADC_CR, AT91_ADC_START);
 
@@ -770,7 +822,11 @@ static int at91_adc_read_raw(struct iio_dev *idev,
 		at91_adc_writel(st, AT91_ADC_CHDR,
 				AT91_ADC_CH(chan->channel));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		at91_adc_writel(st, AT91_ADC_IDR, st->registers->drdy_mask);
+=======
+		at91_adc_writel(st, AT91_ADC_IDR, BIT(chan->channel));
+>>>>>>> v3.18
 =======
 		at91_adc_writel(st, AT91_ADC_IDR, BIT(chan->channel));
 >>>>>>> v3.18
@@ -782,9 +838,15 @@ static int at91_adc_read_raw(struct iio_dev *idev,
 
 	case IIO_CHAN_INFO_SCALE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*val = (st->vref_mv * 1000) >> chan->scan_type.realbits;
 		*val2 = 0;
 		return IIO_VAL_INT_PLUS_MICRO;
+=======
+		*val = st->vref_mv;
+		*val2 = chan->scan_type.realbits;
+		return IIO_VAL_FRACTIONAL_LOG2;
+>>>>>>> v3.18
 =======
 		*val = st->vref_mv;
 		*val2 = chan->scan_type.realbits;
@@ -850,7 +912,10 @@ ret:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 calc_startup_ticks_9260(u8 startup_time, u32 adc_clk_khz)
 {
 	/*
@@ -927,6 +992,9 @@ static int at91_adc_probe_dt_ts(struct device_node *node,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int at91_adc_probe_dt(struct at91_adc_state *st,
 			     struct platform_device *pdev)
@@ -941,6 +1009,12 @@ static int at91_adc_probe_dt(struct at91_adc_state *st,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	st->caps = (struct at91_adc_caps *)
+		of_match_device(at91_adc_dt_ids, &pdev->dev)->data;
+
+>>>>>>> v3.18
 =======
 	st->caps = (struct at91_adc_caps *)
 		of_match_device(at91_adc_dt_ids, &pdev->dev)->data;
@@ -956,6 +1030,7 @@ static int at91_adc_probe_dt(struct at91_adc_state *st,
 	st->channels_mask = prop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (of_property_read_u32(node, "atmel,adc-num-channels", &prop)) {
 		dev_err(&idev->dev, "Missing adc-num-channels property in the DT.\n");
 		ret = -EINVAL;
@@ -963,6 +1038,8 @@ static int at91_adc_probe_dt(struct at91_adc_state *st,
 	}
 	st->num_channels = prop;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	st->sleep_mode = of_property_read_bool(node, "atmel,adc-sleep-mode");
@@ -989,6 +1066,7 @@ static int at91_adc_probe_dt(struct at91_adc_state *st,
 	if (ret)
 		goto error_ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	st->registers = devm_kzalloc(&idev->dev,
 				     sizeof(struct at91_adc_reg_desc),
@@ -1031,6 +1109,10 @@ static int at91_adc_probe_dt(struct at91_adc_state *st,
 	st->registers = &st->caps->registers;
 	st->num_channels = st->caps->num_channels;
 >>>>>>> v3.18
+=======
+	st->registers = &st->caps->registers;
+	st->num_channels = st->caps->num_channels;
+>>>>>>> v3.18
 	st->trigger_number = of_get_child_count(node);
 	st->trigger_list = devm_kzalloc(&idev->dev, st->trigger_number *
 					sizeof(struct at91_adc_trigger),
@@ -1063,13 +1145,19 @@ static int at91_adc_probe_dt(struct at91_adc_state *st,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Check if touchscreen is supported. */
 	if (st->caps->has_ts)
 		return at91_adc_probe_dt_ts(node, st, &idev->dev);
 	else
 		dev_info(&idev->dev, "not support touchscreen in the adc compatible string.\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -1086,6 +1174,7 @@ static int at91_adc_probe_pdata(struct at91_adc_state *st,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st->use_external = pdata->use_external_triggers;
 	st->vref_mv = pdata->vref;
 	st->channels_mask = pdata->channels_used;
@@ -1095,6 +1184,8 @@ static int at91_adc_probe_pdata(struct at91_adc_state *st,
 	st->trigger_list = pdata->trigger_list;
 	st->registers = pdata->registers;
 =======
+=======
+>>>>>>> v3.18
 	st->caps = (struct at91_adc_caps *)
 			platform_get_device_id(pdev)->driver_data;
 
@@ -1107,6 +1198,9 @@ static int at91_adc_probe_pdata(struct at91_adc_state *st,
 	st->trigger_list = pdata->trigger_list;
 	st->registers = &st->caps->registers;
 	st->touchscreen_type = pdata->touchscreen_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1118,10 +1212,13 @@ static const struct iio_info at91_adc_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int at91_adc_probe(struct platform_device *pdev)
 {
 	unsigned int prsc, mstrclk, ticks, adc_clk, shtim;
 =======
+=======
+>>>>>>> v3.18
 /* Touchscreen related functions */
 static int atmel_ts_open(struct input_dev *dev)
 {
@@ -1272,6 +1369,9 @@ static void at91_ts_unregister(struct at91_adc_state *st)
 static int at91_adc_probe(struct platform_device *pdev)
 {
 	unsigned int prsc, mstrclk, ticks, adc_clk, adc_clk_khz, shtim;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 	struct iio_dev *idev;
@@ -1280,11 +1380,17 @@ static int at91_adc_probe(struct platform_device *pdev)
 	u32 reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idev = iio_device_alloc(sizeof(struct at91_adc_state));
 	if (idev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	idev = devm_iio_device_alloc(&pdev->dev, sizeof(struct at91_adc_state));
+	if (!idev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	idev = devm_iio_device_alloc(&pdev->dev, sizeof(struct at91_adc_state));
 	if (!idev)
@@ -1301,8 +1407,12 @@ static int at91_adc_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "No platform data available.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EINVAL;
 		goto error_free_device;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -1319,8 +1429,12 @@ static int at91_adc_probe(struct platform_device *pdev)
 	if (st->irq < 0) {
 		dev_err(&pdev->dev, "No IRQ ID is designated\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENODEV;
 		goto error_free_device;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -1331,8 +1445,12 @@ static int at91_adc_probe(struct platform_device *pdev)
 	st->reg_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(st->reg_base)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = PTR_ERR(st->reg_base);
 		goto error_free_device;
+=======
+		return PTR_ERR(st->reg_base);
+>>>>>>> v3.18
 =======
 		return PTR_ERR(st->reg_base);
 >>>>>>> v3.18
@@ -1344,6 +1462,7 @@ static int at91_adc_probe(struct platform_device *pdev)
 	at91_adc_writel(st, AT91_ADC_CR, AT91_ADC_SWRST);
 	at91_adc_writel(st, AT91_ADC_IDR, 0xFFFFFFFF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_irq(st->irq,
 			  at91_adc_eoc_trigger,
 			  0,
@@ -1353,6 +1472,8 @@ static int at91_adc_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Failed to allocate IRQ.\n");
 		goto error_free_device;
 =======
+=======
+>>>>>>> v3.18
 
 	if (st->caps->has_tsmr)
 		ret = request_irq(st->irq, at91_adc_9x5_interrupt, 0,
@@ -1363,6 +1484,9 @@ static int at91_adc_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "Failed to allocate IRQ.\n");
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1402,12 +1526,18 @@ static int at91_adc_probe(struct platform_device *pdev)
 	mstrclk = clk_get_rate(st->clk);
 	adc_clk = clk_get_rate(st->adc_clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	adc_clk_khz = adc_clk / 1000;
 
 	dev_dbg(&pdev->dev, "Master clock is set as: %d Hz, adc_clk should set as: %d Hz\n",
 		mstrclk, adc_clk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	prsc = (mstrclk / (2 * adc_clk)) - 1;
 
@@ -1416,6 +1546,7 @@ static int at91_adc_probe(struct platform_device *pdev)
 		ret = -EINVAL;
 		goto error_disable_adc_clk;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/*
@@ -1431,10 +1562,16 @@ static int at91_adc_probe(struct platform_device *pdev)
 
 	/*
 >>>>>>> v3.18
+=======
+	ticks = (*st->caps->calc_startup_ticks)(st->startup_time, adc_clk_khz);
+
+	/*
+>>>>>>> v3.18
 	 * a minimal Sample and Hold Time is necessary for the ADC to guarantee
 	 * the best converted final value between two channels selection
 	 * The formula thus is : Sample and Hold Time = (shtim + 1) / ADCClock
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	shtim = round_up((st->sample_hold_time * adc_clk /
 			  1000000) - 1, 1);
@@ -1442,6 +1579,8 @@ static int at91_adc_probe(struct platform_device *pdev)
 	reg = AT91_ADC_PRESCAL_(prsc) & AT91_ADC_PRESCAL;
 	reg |= AT91_ADC_STARTUP_(ticks) & AT91_ADC_STARTUP;
 =======
+=======
+>>>>>>> v3.18
 	if (st->sample_hold_time > 0)
 		shtim = round_up((st->sample_hold_time * adc_clk_khz / 1000)
 				 - 1, 1);
@@ -1450,6 +1589,9 @@ static int at91_adc_probe(struct platform_device *pdev)
 
 	reg = AT91_ADC_PRESCAL_(prsc) & st->registers->mr_prescal_mask;
 	reg |= AT91_ADC_STARTUP_(ticks) & st->registers->mr_startup_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (st->low_res)
 		reg |= AT91_ADC_LOWRES;
@@ -1469,6 +1611,7 @@ static int at91_adc_probe(struct platform_device *pdev)
 	mutex_init(&st->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = at91_adc_buffer_init(idev);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "Couldn't initialize the buffer.\n");
@@ -1480,6 +1623,8 @@ static int at91_adc_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Couldn't setup the triggers.\n");
 		goto error_unregister_buffer;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Since touch screen will set trigger register as period trigger. So
 	 * when touch screen is enabled, then we have to disable hardware
@@ -1504,6 +1649,9 @@ static int at91_adc_probe(struct platform_device *pdev)
 			goto error_disable_adc_clk;
 
 		at91_ts_hw_init(st, adc_clk_khz);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1511,7 +1659,11 @@ static int at91_adc_probe(struct platform_device *pdev)
 	if (ret < 0) {
 		dev_err(&pdev->dev, "Couldn't register the device.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_remove_triggers;
+=======
+		goto error_iio_device_register;
+>>>>>>> v3.18
 =======
 		goto error_iio_device_register;
 >>>>>>> v3.18
@@ -1520,11 +1672,14 @@ static int at91_adc_probe(struct platform_device *pdev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_remove_triggers:
 	at91_adc_trigger_remove(idev);
 error_unregister_buffer:
 	at91_adc_buffer_remove(idev);
 =======
+=======
+>>>>>>> v3.18
 error_iio_device_register:
 	if (!st->touchscreen_type) {
 		at91_adc_trigger_remove(idev);
@@ -1532,6 +1687,9 @@ error_iio_device_register:
 	} else {
 		at91_ts_unregister(st);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error_disable_adc_clk:
 	clk_disable_unprepare(st->adc_clk);
@@ -1540,9 +1698,12 @@ error_disable_clk:
 error_free_irq:
 	free_irq(st->irq, idev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_device:
 	iio_device_free(idev);
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1555,6 +1716,7 @@ static int at91_adc_remove(struct platform_device *pdev)
 
 	iio_device_unregister(idev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	at91_adc_trigger_remove(idev);
 	at91_adc_buffer_remove(idev);
 	clk_disable_unprepare(st->adc_clk);
@@ -1562,6 +1724,8 @@ static int at91_adc_remove(struct platform_device *pdev)
 	free_irq(st->irq, idev);
 	iio_device_free(idev);
 =======
+=======
+>>>>>>> v3.18
 	if (!st->touchscreen_type) {
 		at91_adc_trigger_remove(idev);
 		at91_adc_buffer_remove(idev);
@@ -1571,15 +1735,21 @@ static int at91_adc_remove(struct platform_device *pdev)
 	clk_disable_unprepare(st->adc_clk);
 	clk_disable_unprepare(st->clk);
 	free_irq(st->irq, idev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id at91_adc_dt_ids[] = {
 	{ .compatible = "atmel,at91sam9260-adc" },
 =======
+=======
+>>>>>>> v3.18
 static struct at91_adc_caps at91sam9260_caps = {
 	.calc_startup_ticks = calc_startup_ticks_9260,
 	.num_channels = 4,
@@ -1644,11 +1814,15 @@ static const struct of_device_id at91_adc_dt_ids[] = {
 	{ .compatible = "atmel,at91sam9rl-adc", .data = &at91sam9rl_caps },
 	{ .compatible = "atmel,at91sam9g45-adc", .data = &at91sam9g45_caps },
 	{ .compatible = "atmel,at91sam9x5-adc", .data = &at91sam9x5_caps },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{},
 };
 MODULE_DEVICE_TABLE(of, at91_adc_dt_ids);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct platform_driver at91_adc_driver = {
 	.probe = at91_adc_probe,
@@ -1656,6 +1830,8 @@ static struct platform_driver at91_adc_driver = {
 	.driver = {
 		   .name = "at91_adc",
 =======
+=======
+>>>>>>> v3.18
 static const struct platform_device_id at91_adc_ids[] = {
 	{
 		.name = "at91sam9260-adc",
@@ -1681,6 +1857,9 @@ static struct platform_driver at91_adc_driver = {
 	.id_table = at91_adc_ids,
 	.driver = {
 		   .name = DRIVER_NAME,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		   .of_match_table = of_match_ptr(at91_adc_dt_ids),
 	},

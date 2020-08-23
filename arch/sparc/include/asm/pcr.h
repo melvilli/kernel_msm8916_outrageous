@@ -13,8 +13,13 @@ struct pcr_ops {
 extern const struct pcr_ops *pcr_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void deferred_pcr_work_irq(int irq, struct pt_regs *regs);
 extern void schedule_deferred_pcr_work(void);
+=======
+void deferred_pcr_work_irq(int irq, struct pt_regs *regs);
+void schedule_deferred_pcr_work(void);
+>>>>>>> v3.18
 =======
 void deferred_pcr_work_irq(int irq, struct pt_regs *regs);
 void schedule_deferred_pcr_work(void);
@@ -51,7 +56,11 @@ void schedule_deferred_pcr_work(void);
 #define PCR_N4_NTC		0x00040000 /* Next-To-Commit wrap      */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int pcr_arch_init(void);
+=======
+int pcr_arch_init(void);
+>>>>>>> v3.18
 =======
 int pcr_arch_init(void);
 >>>>>>> v3.18

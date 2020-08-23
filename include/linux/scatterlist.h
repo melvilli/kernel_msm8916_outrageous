@@ -137,7 +137,11 @@ static inline void sg_chain(struct scatterlist *prv, unsigned int prv_nents,
 			    struct scatterlist *sgl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef ARCH_HAS_SG_CHAIN
+=======
+#ifndef CONFIG_ARCH_HAS_SG_CHAIN
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_ARCH_HAS_SG_CHAIN
 >>>>>>> v3.18
@@ -234,15 +238,21 @@ typedef struct scatterlist *(sg_alloc_fn)(unsigned int, gfp_t);
 typedef void (sg_free_fn)(struct scatterlist *, unsigned int);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __sg_free_table(struct sg_table *, unsigned int, sg_free_fn *);
 void sg_free_table(struct sg_table *);
 int __sg_alloc_table(struct sg_table *, unsigned int, unsigned int, gfp_t,
 		     sg_alloc_fn *);
 =======
+=======
+>>>>>>> v3.18
 void __sg_free_table(struct sg_table *, unsigned int, bool, sg_free_fn *);
 void sg_free_table(struct sg_table *);
 int __sg_alloc_table(struct sg_table *, unsigned int, unsigned int,
 		     struct scatterlist *, gfp_t, sg_alloc_fn *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int sg_alloc_table(struct sg_table *, unsigned int, gfp_t);
 int sg_alloc_table_from_pages(struct sg_table *sgt,
@@ -256,12 +266,18 @@ size_t sg_copy_to_buffer(struct scatterlist *sgl, unsigned int nents,
 			 void *buf, size_t buflen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 size_t sg_pcopy_from_buffer(struct scatterlist *sgl, unsigned int nents,
 			    void *buf, size_t buflen, off_t skip);
 size_t sg_pcopy_to_buffer(struct scatterlist *sgl, unsigned int nents,
 			  void *buf, size_t buflen, off_t skip);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Maximum number of entries that will be allocated in one piece, if
@@ -360,6 +376,10 @@ struct sg_mapping_iter {
 void sg_miter_start(struct sg_mapping_iter *miter, struct scatterlist *sgl,
 		    unsigned int nents, unsigned int flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool sg_miter_skip(struct sg_mapping_iter *miter, off_t offset);
+>>>>>>> v3.18
 =======
 bool sg_miter_skip(struct sg_mapping_iter *miter, off_t offset);
 >>>>>>> v3.18

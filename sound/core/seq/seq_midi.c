@@ -122,7 +122,11 @@ static int dump_midi(struct snd_rawmidi_substream *substream, const char *buf, i
 	if ((tmp = runtime->avail) < count) {
 		if (printk_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "MIDI output buffer overrun\n");
+=======
+			pr_err("ALSA: seq_midi: MIDI output buffer overrun\n");
+>>>>>>> v3.18
 =======
 			pr_err("ALSA: seq_midi: MIDI output buffer overrun\n");
 >>>>>>> v3.18
@@ -150,7 +154,11 @@ static int event_process_midi(struct snd_seq_event *ev, int direct,
 		if ((ev->flags & SNDRV_SEQ_EVENT_LENGTH_MASK) != SNDRV_SEQ_EVENT_LENGTH_VARIABLE) {
 			/* invalid event */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printd("seq_midi: invalid sysex event flags = 0x%x\n", ev->flags);
+=======
+			pr_debug("ALSA: seq_midi: invalid sysex event flags = 0x%x\n", ev->flags);
+>>>>>>> v3.18
 =======
 			pr_debug("ALSA: seq_midi: invalid sysex event flags = 0x%x\n", ev->flags);
 >>>>>>> v3.18
@@ -198,7 +206,11 @@ static int midisynth_subscribe(void *private_data, struct snd_seq_port_subscribe
 					   SNDRV_RAWMIDI_LFLG_INPUT,
 					   &msynth->input_rfile)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("midi input open failed!!!\n");
+=======
+		pr_debug("ALSA: seq_midi: midi input open failed!!!\n");
+>>>>>>> v3.18
 =======
 		pr_debug("ALSA: seq_midi: midi input open failed!!!\n");
 >>>>>>> v3.18
@@ -244,7 +256,11 @@ static int midisynth_use(void *private_data, struct snd_seq_port_subscribe *info
 					   SNDRV_RAWMIDI_LFLG_OUTPUT,
 					   &msynth->output_rfile)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("midi output open failed!!!\n");
+=======
+		pr_debug("ALSA: seq_midi: midi output open failed!!!\n");
+>>>>>>> v3.18
 =======
 		pr_debug("ALSA: seq_midi: midi output open failed!!!\n");
 >>>>>>> v3.18
@@ -379,7 +395,11 @@ snd_seq_midisynth_register_port(struct snd_seq_device *dev)
 			if (info->name[0]) {
 				if (ports > 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					snprintf(port->name, sizeof(port->name), "%s-%d", info->name, p);
+=======
+					snprintf(port->name, sizeof(port->name), "%s-%u", info->name, p);
+>>>>>>> v3.18
 =======
 					snprintf(port->name, sizeof(port->name), "%s-%u", info->name, p);
 >>>>>>> v3.18
@@ -389,7 +409,11 @@ snd_seq_midisynth_register_port(struct snd_seq_device *dev)
 				/* last resort */
 				if (ports > 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					sprintf(port->name, "MIDI %d-%d-%d", card->number, device, p);
+=======
+					sprintf(port->name, "MIDI %d-%d-%u", card->number, device, p);
+>>>>>>> v3.18
 =======
 					sprintf(port->name, "MIDI %d-%d-%u", card->number, device, p);
 >>>>>>> v3.18

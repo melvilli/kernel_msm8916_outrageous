@@ -22,7 +22,10 @@
 #include <asm/unaligned.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "u_os_desc.h"
 
 /**
@@ -41,6 +44,9 @@ struct usb_os_string {
 	__u8	bPad;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The code in this file is utility code, used to build a gadget driver
@@ -147,6 +153,7 @@ int config_ep_by_speed(struct usb_gadget *g,
 ep_found:
 	/* commit results */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_ep->maxpacket = usb_endpoint_maxp(chosen_desc) & 0x7ff;
 	_ep->desc = chosen_desc;
 	_ep->comp_desc = NULL;
@@ -158,11 +165,16 @@ ep_found:
 		_ep->mult = ((usb_endpoint_maxp(_ep->desc) & 0x1800) >> 11) + 1;
 
 =======
+=======
+>>>>>>> v3.18
 	_ep->maxpacket = usb_endpoint_maxp(chosen_desc);
 	_ep->desc = chosen_desc;
 	_ep->comp_desc = NULL;
 	_ep->maxburst = 0;
 	_ep->mult = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!want_comp_desc)
 		return 0;
@@ -181,7 +193,11 @@ ep_found:
 		case USB_ENDPOINT_XFER_ISOC:
 			/* mult: bits 1:0 of bmAttributes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_ep->mult = (comp_desc->bmAttributes & 0x3) + 1;
+=======
+			_ep->mult = comp_desc->bmAttributes & 0x3;
+>>>>>>> v3.18
 =======
 			_ep->mult = comp_desc->bmAttributes & 0x3;
 >>>>>>> v3.18
@@ -220,7 +236,11 @@ int usb_add_function(struct usb_configuration *config,
 	int	value = -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(config->cdev, "adding '%s'/%pK to config '%s'/%pK\n",
+=======
+	DBG(config->cdev, "adding '%s'/%p to config '%s'/%p\n",
+>>>>>>> v3.18
 =======
 	DBG(config->cdev, "adding '%s'/%p to config '%s'/%p\n",
 >>>>>>> v3.18
@@ -258,7 +278,11 @@ int usb_add_function(struct usb_configuration *config,
 done:
 	if (value)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG(config->cdev, "adding '%s'/%pK --> %d\n",
+=======
+		DBG(config->cdev, "adding '%s'/%p --> %d\n",
+>>>>>>> v3.18
 =======
 		DBG(config->cdev, "adding '%s'/%p --> %d\n",
 >>>>>>> v3.18
@@ -385,6 +409,7 @@ int usb_interface_id(struct usb_configuration *config,
 EXPORT_SYMBOL_GPL(usb_interface_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * usb_get_func_interface_id() - Find the interface ID of a function
  * @function: the function for which want to find the interface ID
@@ -488,6 +513,8 @@ int usb_func_wakeup(struct usb_function *func)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static u8 encode_bMaxPower(enum usb_device_speed speed,
 		struct usb_configuration *c)
 {
@@ -505,7 +532,11 @@ static u8 encode_bMaxPower(enum usb_device_speed speed,
 	default:
 		return DIV_ROUND_UP(val, 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -577,6 +608,10 @@ static int config_desc(struct usb_composite_dev *cdev, unsigned w_value)
 	struct usb_gadget		*gadget = cdev->gadget;
 	struct usb_configuration	*c;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head		*pos;
+>>>>>>> v3.18
 =======
 	struct list_head		*pos;
 >>>>>>> v3.18
@@ -599,8 +634,11 @@ static int config_desc(struct usb_composite_dev *cdev, unsigned w_value)
 	/* This is a lookup by config *INDEX* */
 	w_value &= 0xff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(c, &cdev->configs, list) {
 =======
+=======
+>>>>>>> v3.18
 
 	pos = &cdev->configs;
 	c = cdev->os_desc_config;
@@ -615,6 +653,9 @@ static int config_desc(struct usb_composite_dev *cdev, unsigned w_value)
 			continue;
 
 check_config:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* ignore configs that won't work at this speed */
 		switch (speed) {
@@ -696,8 +737,12 @@ static int bos_desc(struct usb_composite_dev *cdev)
 	/*
 	 * A SuperSpeed device shall include the USB2.0 extension descriptor
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * and shall support LPM when operating in USB2.0 HS mode, as well as
 	 * a HS device when operating in USB2.1 HS mode.
+=======
+	 * and shall support LPM when operating in USB2.0 HS mode.
+>>>>>>> v3.18
 =======
 	 * and shall support LPM when operating in USB2.0 HS mode.
 >>>>>>> v3.18
@@ -710,6 +755,7 @@ static int bos_desc(struct usb_composite_dev *cdev)
 	usb_ext->bDevCapabilityType = USB_CAP_TYPE_EXT;
 	usb_ext->bmAttributes = cpu_to_le32(USB_LPM_SUPPORT | USB_BESL_SUPPORT);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (gadget_is_superspeed(cdev->gadget)) {
 		/*
@@ -743,6 +789,8 @@ static int bos_desc(struct usb_composite_dev *cdev)
 		ss_cap->bU2DevExitLat = dcd_config_params.bU2DevExitLat;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The Superspeed USB Capability descriptor shall be implemented by all
 	 * SuperSpeed devices.
@@ -770,6 +818,9 @@ static int bos_desc(struct usb_composite_dev *cdev)
 	}
 	ss_cap->bU1devExitLat = dcd_config_params.bU1devExitLat;
 	ss_cap->bU2DevExitLat = dcd_config_params.bU2DevExitLat;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return le16_to_cpu(bos->wTotalLength);
@@ -805,11 +856,14 @@ static void reset_config(struct usb_composite_dev *cdev)
 			f->disable(f);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* USB 3.0 addition */
 		f->func_is_suspended = false;
 		f->func_wakeup_allowed = false;
 		f->func_wakeup_pending = false;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		bitmap_zero(f->endpoints, 32);
@@ -828,6 +882,7 @@ static int set_config(struct usb_composite_dev *cdev,
 	int			tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * ignore 2nd time SET_CONFIGURATION
 	 * only for same config value twice.
@@ -838,6 +893,8 @@ static int set_config(struct usb_composite_dev *cdev,
 		return 0;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (number) {
@@ -870,9 +927,14 @@ static int set_config(struct usb_composite_dev *cdev,
 		goto done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cdev->config = c;
 	c->num_ineps_used = 0;
 	c->num_outeps_used = 0;
+=======
+	usb_gadget_set_state(gadget, USB_STATE_CONFIGURED);
+	cdev->config = c;
+>>>>>>> v3.18
 =======
 	usb_gadget_set_state(gadget, USB_STATE_CONFIGURED);
 	cdev->config = c;
@@ -895,12 +957,15 @@ static int set_config(struct usb_composite_dev *cdev,
 		switch (gadget->speed) {
 		case USB_SPEED_SUPER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!f->ss_descriptors) {
 				pr_err("%s(): No SS desc for function:%s\n",
 							__func__, f->name);
 				usb_gadget_set_state(gadget, USB_STATE_ADDRESS);
 				return -EINVAL;
 			}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			descriptors = f->ss_descriptors;
@@ -924,10 +989,13 @@ static int set_config(struct usb_composite_dev *cdev,
 			     |  (ep->bEndpointAddress & 0x0f);
 			set_bit(addr, f->endpoints);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (usb_endpoint_dir_in(ep))
 				c->num_ineps_used++;
 			else
 				c->num_outeps_used++;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -935,7 +1003,11 @@ static int set_config(struct usb_composite_dev *cdev,
 		result = f->set_alt(f, tmp, 0);
 		if (result < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG(cdev, "interface %d (%s/%pK) alt 0 --> %d\n",
+=======
+			DBG(cdev, "interface %d (%s/%p) alt 0 --> %d\n",
+>>>>>>> v3.18
 =======
 			DBG(cdev, "interface %d (%s/%p) alt 0 --> %d\n",
 >>>>>>> v3.18
@@ -1014,7 +1086,11 @@ int usb_add_config(struct usb_composite_dev *cdev,
 		goto done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(cdev, "adding config #%u '%s'/%pK\n",
+=======
+	DBG(cdev, "adding config #%u '%s'/%p\n",
+>>>>>>> v3.18
 =======
 	DBG(cdev, "adding config #%u '%s'/%p\n",
 >>>>>>> v3.18
@@ -1035,7 +1111,11 @@ int usb_add_config(struct usb_composite_dev *cdev,
 			list_del(&f->list);
 			if (f->unbind) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				DBG(cdev, "unbind function '%s'/%pK\n",
+=======
+				DBG(cdev, "unbind function '%s'/%p\n",
+>>>>>>> v3.18
 =======
 				DBG(cdev, "unbind function '%s'/%p\n",
 >>>>>>> v3.18
@@ -1050,7 +1130,11 @@ int usb_add_config(struct usb_composite_dev *cdev,
 		unsigned	i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG(cdev, "cfg %d/%pK speeds:%s%s%s\n",
+=======
+		DBG(cdev, "cfg %d/%p speeds:%s%s%s\n",
+>>>>>>> v3.18
 =======
 		DBG(cdev, "cfg %d/%p speeds:%s%s%s\n",
 >>>>>>> v3.18
@@ -1069,7 +1153,11 @@ int usb_add_config(struct usb_composite_dev *cdev,
 			if (!f)
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG(cdev, "  interface %d = %s/%pK\n",
+=======
+			DBG(cdev, "  interface %d = %s/%p\n",
+>>>>>>> v3.18
 =======
 			DBG(cdev, "  interface %d = %s/%p\n",
 >>>>>>> v3.18
@@ -1091,7 +1179,11 @@ done:
 EXPORT_SYMBOL_GPL(usb_add_config);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void unbind_config(struct usb_composite_dev *cdev,
+=======
+static void remove_config(struct usb_composite_dev *cdev,
+>>>>>>> v3.18
 =======
 static void remove_config(struct usb_composite_dev *cdev,
 >>>>>>> v3.18
@@ -1105,7 +1197,11 @@ static void remove_config(struct usb_composite_dev *cdev,
 		list_del(&f->list);
 		if (f->unbind) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG(cdev, "unbind function '%s'/%pK\n", f->name, f);
+=======
+			DBG(cdev, "unbind function '%s'/%p\n", f->name, f);
+>>>>>>> v3.18
 =======
 			DBG(cdev, "unbind function '%s'/%p\n", f->name, f);
 >>>>>>> v3.18
@@ -1114,8 +1210,14 @@ static void remove_config(struct usb_composite_dev *cdev,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (config->unbind) {
 		DBG(cdev, "unbind config '%s'/%pK\n", config->label, config);
+=======
+	list_del(&config->list);
+	if (config->unbind) {
+		DBG(cdev, "unbind config '%s'/%p\n", config->label, config);
+>>>>>>> v3.18
 =======
 	list_del(&config->list);
 	if (config->unbind) {
@@ -1143,6 +1245,7 @@ void usb_remove_config(struct usb_composite_dev *cdev,
 	spin_lock_irqsave(&cdev->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON(!config->cdev)) {
 		spin_unlock_irqrestore(&cdev->lock, flags);
 		return;
@@ -1157,12 +1260,17 @@ void usb_remove_config(struct usb_composite_dev *cdev,
 
 	unbind_config(cdev, config);
 =======
+=======
+>>>>>>> v3.18
 	if (cdev->config == config)
 		reset_config(cdev);
 
 	spin_unlock_irqrestore(&cdev->lock, flags);
 
 	remove_config(cdev, config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1268,7 +1376,10 @@ static int get_string(struct usb_composite_dev *cdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cdev->use_os_string && language == 0 && id == OS_STRING_IDX) {
 		struct usb_os_string *b = buf;
 		b->bLength = sizeof(*b);
@@ -1282,6 +1393,9 @@ static int get_string(struct usb_composite_dev *cdev,
 		return sizeof(*b);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_for_each_entry(uc, &cdev->gstrings, list) {
 		struct usb_gadget_strings **sp;
@@ -1463,7 +1577,11 @@ struct usb_string *usb_gstrings_attach(struct usb_composite_dev *cdev,
 	uc = copy_gadget_strings(sp, n_gstrings, n_strings);
 	if (IS_ERR(uc))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ERR_PTR(PTR_ERR(uc));
+=======
+		return ERR_CAST(uc);
+>>>>>>> v3.18
 =======
 		return ERR_CAST(uc);
 >>>>>>> v3.18
@@ -1534,7 +1652,10 @@ static void composite_setup_complete(struct usb_ep *ep, struct usb_request *req)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int count_ext_compat(struct usb_configuration *c)
 {
 	int i, res;
@@ -1685,6 +1806,9 @@ static int fill_ext_prop(struct usb_configuration *c, int interface, u8 *buf)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The setup() callback implements all the ep0 functionality that's
@@ -1707,11 +1831,14 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 	struct usb_function		*f = NULL;
 	u8				endp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_configuration *c;
 
 
 	if (w_length > USB_COMP_EP0_BUFSIZ)
 		return value;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1745,9 +1872,12 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 					cdev->desc.bcdUSB = cpu_to_le16(0x0210);
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else if (gadget->l1_supported) {
 				cdev->desc.bcdUSB = cpu_to_le16(0x0201);
 				DBG(cdev, "Config HS device with LPM(L1)\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			}
@@ -1774,6 +1904,7 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 				value = min(w_length, (u16) value);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case USB_DT_OTG:
 			if (!gadget_is_otg(gadget))
 				break;
@@ -1787,6 +1918,8 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 			break;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		case USB_DT_STRING:
 			value = get_string(cdev, req->buf,
 					w_index, w_value & 0xff);
@@ -1795,8 +1928,12 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 			break;
 		case USB_DT_BOS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (gadget_is_superspeed(gadget) ||
 				gadget->l1_supported) {
+=======
+			if (gadget_is_superspeed(gadget)) {
+>>>>>>> v3.18
 =======
 			if (gadget_is_superspeed(gadget)) {
 >>>>>>> v3.18
@@ -1834,7 +1971,13 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* function drivers must handle get/set altsetting */
+=======
+	/* function drivers must handle get/set altsetting; if there's
+	 * no get() method, we know only altsetting zero works.
+	 */
+>>>>>>> v3.18
 =======
 	/* function drivers must handle get/set altsetting; if there's
 	 * no get() method, we know only altsetting zero works.
@@ -1848,6 +1991,7 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 		f = cdev->config->interface[intf];
 		if (!f)
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		/*
@@ -1866,6 +2010,10 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 			value = 0;
 			break;
 		}
+=======
+		if (w_value && !f->set_alt)
+			break;
+>>>>>>> v3.18
 =======
 		if (w_value && !f->set_alt)
 			break;
@@ -1940,6 +2088,7 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 				break;
 			value = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (f->func_suspend) {
 				const u8 suspend_opt = w_index >> 8;
 
@@ -1947,6 +2096,10 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 				DBG(cdev, "%s function: FUNCTION_SUSPEND(%u)",
 					f->name ? f->name : "", suspend_opt);
 			}
+=======
+			if (f->func_suspend)
+				value = f->func_suspend(f, w_index >> 8);
+>>>>>>> v3.18
 =======
 			if (f->func_suspend)
 				value = f->func_suspend(f, w_index >> 8);
@@ -1963,7 +2116,10 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 	default:
 unknown:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * OS descriptors handling
 		 */
@@ -2049,6 +2205,9 @@ unknown:
 			return value;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		VDBG(cdev,
 			"non-core control req%02x.%02x v%04x i%04x l%d\n",
@@ -2088,6 +2247,7 @@ unknown:
 
 			c = cdev->config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (c && c->setup)
 				value = c->setup(c, ctrl);
 		}
@@ -2099,6 +2259,8 @@ unknown:
 			DBG(cdev, "delayed_status count %d\n",
 					cdev->delayed_status);
 =======
+=======
+>>>>>>> v3.18
 			if (!c)
 				goto done;
 
@@ -2115,6 +2277,9 @@ unknown:
 					     list);
 			if (f->setup)
 				value = f->setup(f, ctrl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -2156,10 +2321,13 @@ void composite_disconnect(struct usb_gadget *gadget)
 	if (cdev->driver->disconnect)
 		cdev->driver->disconnect(cdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cdev->delayed_status != 0) {
 		INFO(cdev, "delayed status mismatch..resetting\n");
 		cdev->delayed_status = 0;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&cdev->lock, flags);
@@ -2168,9 +2336,14 @@ void composite_disconnect(struct usb_gadget *gadget)
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t composite_show_suspended(struct device *dev,
 					struct device_attribute *attr,
 					char *buf)
+=======
+static ssize_t suspended_show(struct device *dev, struct device_attribute *attr,
+			      char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t suspended_show(struct device *dev, struct device_attribute *attr,
 			      char *buf)
@@ -2182,8 +2355,12 @@ static ssize_t suspended_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%d\n", cdev->suspended);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEVICE_ATTR(suspended, 0444, composite_show_suspended, NULL);
+=======
+static DEVICE_ATTR_RO(suspended);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(suspended);
 >>>>>>> v3.18
@@ -2192,8 +2369,11 @@ static void __composite_unbind(struct usb_gadget *gadget, bool unbind_driver)
 {
 	struct usb_composite_dev	*cdev = get_gadget_data(gadget);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_gadget_strings	*gstr = cdev->driver->strings[0];
 	struct usb_string		*dev_str = gstr->strings;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2209,8 +2389,12 @@ static void __composite_unbind(struct usb_gadget *gadget, bool unbind_driver)
 		c = list_first_entry(&cdev->configs,
 				struct usb_configuration, list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_del(&c->list);
 		unbind_config(cdev, c);
+=======
+		remove_config(cdev, c);
+>>>>>>> v3.18
 =======
 		remove_config(cdev, c);
 >>>>>>> v3.18
@@ -2221,9 +2405,12 @@ static void __composite_unbind(struct usb_gadget *gadget, bool unbind_driver)
 	composite_dev_cleanup(cdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev_str[USB_GADGET_MANUFACTURER_IDX].s == cdev->def_manufacturer)
 		dev_str[USB_GADGET_MANUFACTURER_IDX].s = "";
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(cdev->def_manufacturer);
@@ -2321,7 +2508,10 @@ fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int composite_os_desc_req_prepare(struct usb_composite_dev *cdev,
 				  struct usb_ep *ep0)
 {
@@ -2345,6 +2535,9 @@ end:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void composite_dev_cleanup(struct usb_composite_dev *cdev)
 {
@@ -2355,11 +2548,17 @@ void composite_dev_cleanup(struct usb_composite_dev *cdev)
 		kfree(uc);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cdev->os_desc_req) {
 		kfree(cdev->os_desc_req->buf);
 		usb_ep_free_request(cdev->gadget->ep0, cdev->os_desc_req);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cdev->req) {
 		kfree(cdev->req->buf);
@@ -2399,13 +2598,19 @@ static int composite_bind(struct usb_gadget *gadget,
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cdev->use_os_string) {
 		status = composite_os_desc_req_prepare(cdev, gadget->ep0);
 		if (status)
 			goto fail;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	update_unchanged_dev_desc(&cdev->desc, composite->dev);
 
@@ -2453,9 +2658,13 @@ composite_resume(struct usb_gadget *gadget)
 	struct usb_composite_dev	*cdev = get_gadget_data(gadget);
 	struct usb_function		*f;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8				maxpower;
 	int ret;
 	unsigned long			flags;
+=======
+	u16				maxpower;
+>>>>>>> v3.18
 =======
 	u16				maxpower;
 >>>>>>> v3.18
@@ -2466,6 +2675,7 @@ composite_resume(struct usb_gadget *gadget)
 	DBG(cdev, "resume\n");
 	if (cdev->driver->resume)
 		cdev->driver->resume(cdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	spin_lock_irqsave(&cdev->lock, flags);
@@ -2490,6 +2700,10 @@ composite_resume(struct usb_gadget *gadget)
 	if (cdev->config) {
 		list_for_each_entry(f, &cdev->config->functions, list) {
 >>>>>>> v3.18
+=======
+	if (cdev->config) {
+		list_for_each_entry(f, &cdev->config->functions, list) {
+>>>>>>> v3.18
 			if (f->resume)
 				f->resume(f);
 		}
@@ -2501,7 +2715,10 @@ composite_resume(struct usb_gadget *gadget)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&cdev->lock, flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cdev->suspended = 0;
@@ -2515,6 +2732,10 @@ static const struct usb_gadget_driver composite_driver_template = {
 
 	.setup		= composite_setup,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.reset		= composite_disconnect,
+>>>>>>> v3.18
 =======
 	.reset		= composite_disconnect,
 >>>>>>> v3.18
@@ -2548,7 +2769,10 @@ int usb_composite_probe(struct usb_composite_driver *driver)
 {
 	struct usb_gadget_driver *gadget_driver;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 core_id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2559,7 +2783,10 @@ int usb_composite_probe(struct usb_composite_driver *driver)
 		driver->name = "composite";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	core_id = driver->gadget_driver.usb_core_id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	driver->gadget_driver = composite_driver_template;
@@ -2570,11 +2797,14 @@ int usb_composite_probe(struct usb_composite_driver *driver)
 	gadget_driver->max_speed = driver->max_speed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (core_id)
 		gadget_driver->usb_core_id = core_id;
 
 	pr_debug("%s(): gadget_driver->usb_core_id:%d\n", __func__,
 					gadget_driver->usb_core_id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return usb_gadget_probe_driver(gadget_driver);

@@ -240,6 +240,7 @@ config DM_CRYPT
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DM_REQ_CRYPT
 	tristate "Crypt target support"
 	depends on BLK_DEV_DM
@@ -261,10 +262,15 @@ config DM_SNAPSHOT
        tristate "Snapshot target"
        depends on BLK_DEV_DM
 =======
+=======
+>>>>>>> v3.18
 config DM_SNAPSHOT
        tristate "Snapshot target"
        depends on BLK_DEV_DM
        select DM_BUFIO
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
        ---help---
          Allow volume managers to take writable snapshots of a device.
@@ -278,6 +284,7 @@ config DM_THIN_PROVISIONING
          Provides thin provisioning and snapshots that share a data store.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DM_DEBUG_BLOCK_STACK_TRACING
 	boolean "Keep stack trace of thin provisioning block lock holders"
 	depends on STACKTRACE_SUPPORT && DM_THIN_PROVISIONING
@@ -288,6 +295,8 @@ config DM_DEBUG_BLOCK_STACK_TRACING
 
 	  If unsure, say N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config DM_CACHE
@@ -322,7 +331,10 @@ config DM_CACHE_CLEANER
          origin.  Used when decommissioning a dm-cache.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config DM_ERA
        tristate "Era target (EXPERIMENTAL)"
        depends on BLK_DEV_DM
@@ -334,6 +346,9 @@ config DM_ERA
          over time.  Useful for maintaining cache coherency when using
          vendor snapshots.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config DM_MIRROR
        tristate "Mirror target"
@@ -343,7 +358,10 @@ config DM_MIRROR
          needed for live data migration tools such as 'pvmove'.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config DM_LOG_USERSPACE
 	tristate "Mirror userspace logging"
 	depends on DM_MIRROR && NET
@@ -355,6 +373,9 @@ config DM_LOG_USERSPACE
 	  shared storage logs) or experimental logs can be implemented
 	  by leveraging this framework.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config DM_RAID
        tristate "RAID 1/4/5/6/10 target"
@@ -383,6 +404,7 @@ config DM_RAID
 	 in one of the available parity distribution methods.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DM_LOG_USERSPACE
 	tristate "Mirror userspace logging"
 	depends on DM_MIRROR && NET
@@ -394,6 +416,8 @@ config DM_LOG_USERSPACE
 	  shared storage logs) or experimental logs can be implemented
 	  by leveraging this framework.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config DM_ZERO
@@ -475,7 +499,10 @@ config DM_VERITY
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config DM_SWITCH
 	tristate "Switch target support (EXPERIMENTAL)"
 	depends on BLK_DEV_DM
@@ -490,5 +517,8 @@ config DM_SWITCH
 
 	  If unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # MD

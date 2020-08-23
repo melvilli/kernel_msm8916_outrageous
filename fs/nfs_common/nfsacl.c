@@ -31,9 +31,12 @@
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(nfsacl_encode);
 EXPORT_SYMBOL_GPL(nfsacl_decode);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct nfsacl_encode_desc {
@@ -140,6 +143,10 @@ int nfsacl_encode(struct xdr_buf *buf, unsigned int base, struct inode *inode,
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(nfsacl_encode);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(nfsacl_encode);
 >>>>>>> v3.18
@@ -303,6 +310,10 @@ int nfsacl_decode(struct xdr_buf *buf, unsigned int base, unsigned int *aclcnt,
 		   nfsacl_desc.desc.array_len;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(nfsacl_decode);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(nfsacl_decode);
 >>>>>>> v3.18

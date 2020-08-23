@@ -118,8 +118,12 @@ static inline void pxa_ac97_warm_pxa25x(void)
 	gsr_bits = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	GCR |= GCR_WARM_RST | GCR_PRIRDY_IEN | GCR_SECRDY_IEN;
 	wait_event_timeout(gsr_wq, gsr_bits & (GSR_PCR | GSR_SCR), 1);
+=======
+	GCR |= GCR_WARM_RST;
+>>>>>>> v3.18
 =======
 	GCR |= GCR_WARM_RST;
 >>>>>>> v3.18
@@ -134,8 +138,11 @@ static inline void pxa_ac97_cold_pxa25x(void)
 
 	GCR = GCR_COLD_RST;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	GCR |= GCR_CDONE_IE|GCR_SDONE_IE;
 	wait_event_timeout(gsr_wq, gsr_bits & (GSR_PCR | GSR_SCR), 1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -157,8 +164,11 @@ static inline void pxa_ac97_warm_pxa27x(void)
 static inline void pxa_ac97_cold_pxa27x(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int timeout;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	GCR &=  GCR_COLD_RST;  /* clear everything but nCRST */
@@ -168,6 +178,7 @@ static inline void pxa_ac97_cold_pxa27x(void)
 
 	/* PXA27x Developers Manual section 13.5.2.2.1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(ac97conf_clk);
 	udelay(5);
 	clk_disable(ac97conf_clk);
@@ -176,10 +187,15 @@ static inline void pxa_ac97_cold_pxa27x(void)
 	while (!((GSR | gsr_bits) & (GSR_PCR | GSR_SCR)) && timeout--)
 		mdelay(1);
 =======
+=======
+>>>>>>> v3.18
 	clk_prepare_enable(ac97conf_clk);
 	udelay(5);
 	clk_disable_unprepare(ac97conf_clk);
 	GCR = GCR_COLD_RST | GCR_WARM_RST;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
@@ -188,8 +204,11 @@ static inline void pxa_ac97_cold_pxa27x(void)
 static inline void pxa_ac97_warm_pxa3xx(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int timeout = 100;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	gsr_bits = 0;
@@ -197,8 +216,11 @@ static inline void pxa_ac97_warm_pxa3xx(void)
 	/* Can't use interrupts */
 	GCR |= GCR_WARM_RST;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (!((GSR | gsr_bits) & (GSR_PCR | GSR_SCR)) && timeout--)
 		mdelay(1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -206,8 +228,11 @@ static inline void pxa_ac97_warm_pxa3xx(void)
 static inline void pxa_ac97_cold_pxa3xx(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int timeout = 1000;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Hold CLKBPB for 100us */
@@ -226,8 +251,11 @@ static inline void pxa_ac97_cold_pxa3xx(void)
 
 	GCR = GCR_WARM_RST | GCR_COLD_RST;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (!(GSR & (GSR_PCR | GSR_SCR)) && timeout--)
 		mdelay(10);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -237,6 +265,10 @@ bool pxa2xx_ac97_try_warm_reset(struct snd_ac97 *ac97)
 {
 	unsigned long gsr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int timeout = 100;
+>>>>>>> v3.18
 =======
 	unsigned int timeout = 100;
 >>>>>>> v3.18
@@ -257,13 +289,19 @@ bool pxa2xx_ac97_try_warm_reset(struct snd_ac97 *ac97)
 	else
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG();
 =======
+=======
+>>>>>>> v3.18
 		snd_BUG();
 
 	while (!((GSR | gsr_bits) & (GSR_PCR | GSR_SCR)) && timeout--)
 		mdelay(1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gsr = GSR | gsr_bits;
 	if (!(gsr & (GSR_PCR | GSR_SCR))) {
@@ -281,6 +319,10 @@ bool pxa2xx_ac97_try_cold_reset(struct snd_ac97 *ac97)
 {
 	unsigned long gsr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int timeout = 1000;
+>>>>>>> v3.18
 =======
 	unsigned int timeout = 1000;
 >>>>>>> v3.18
@@ -301,12 +343,18 @@ bool pxa2xx_ac97_try_cold_reset(struct snd_ac97 *ac97)
 	else
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG();
 =======
+=======
+>>>>>>> v3.18
 		snd_BUG();
 
 	while (!((GSR | gsr_bits) & (GSR_PCR | GSR_SCR)) && timeout--)
 		mdelay(1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	gsr = GSR | gsr_bits;
@@ -359,7 +407,11 @@ int pxa2xx_ac97_hw_suspend(void)
 {
 	GCR |= GCR_ACLINK_OFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(ac97_clk);
+=======
+	clk_disable_unprepare(ac97_clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(ac97_clk);
 >>>>>>> v3.18
@@ -370,7 +422,11 @@ EXPORT_SYMBOL_GPL(pxa2xx_ac97_hw_suspend);
 int pxa2xx_ac97_hw_resume(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(ac97_clk);
+=======
+	clk_prepare_enable(ac97_clk);
+>>>>>>> v3.18
 =======
 	clk_prepare_enable(ac97_clk);
 >>>>>>> v3.18
@@ -436,7 +492,11 @@ int pxa2xx_ac97_hw_probe(struct platform_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = clk_enable(ac97_clk);
+=======
+	ret = clk_prepare_enable(ac97_clk);
+>>>>>>> v3.18
 =======
 	ret = clk_prepare_enable(ac97_clk);
 >>>>>>> v3.18
@@ -475,7 +535,11 @@ void pxa2xx_ac97_hw_remove(struct platform_device *dev)
 		ac97conf_clk = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(ac97_clk);
+=======
+	clk_disable_unprepare(ac97_clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(ac97_clk);
 >>>>>>> v3.18

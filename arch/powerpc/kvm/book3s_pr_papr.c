@@ -22,6 +22,11 @@
 #include <asm/kvm_book3s.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HPTE_SIZE	16		/* bytes per HPT entry */
+
+>>>>>>> v3.18
 =======
 #define HPTE_SIZE	16		/* bytes per HPT entry */
 
@@ -44,6 +49,7 @@ static int kvmppc_h_pr_enter(struct kvm_vcpu *vcpu)
 	long flags = kvmppc_get_gpr(vcpu, 4);
 	long pte_index = kvmppc_get_gpr(vcpu, 5);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long pteg[2 * 8];
 	unsigned long pteg_addr, i, *hpte;
 
@@ -60,6 +66,8 @@ static int kvmppc_h_pr_enter(struct kvm_vcpu *vcpu)
 				return H_PTEG_FULL;
 			if ((*hpte & HPTE_V_VALID) == 0)
 =======
+=======
+>>>>>>> v3.18
 	__be64 pteg[2 * 8];
 	__be64 *hpte;
 	unsigned long pteg_addr, i;
@@ -79,11 +87,15 @@ static int kvmppc_h_pr_enter(struct kvm_vcpu *vcpu)
 			if (i == 8)
 				goto done;
 			if ((be64_to_cpu(*hpte) & HPTE_V_VALID) == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			hpte += 2;
 		}
 	} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		i = kvmppc_get_gpr(vcpu, 5) & 7UL;
 		hpte += i * 2;
@@ -95,6 +107,8 @@ static int kvmppc_h_pr_enter(struct kvm_vcpu *vcpu)
 	kvmppc_set_gpr(vcpu, 3, H_SUCCESS);
 	kvmppc_set_gpr(vcpu, 4, pte_index | i);
 =======
+=======
+>>>>>>> v3.18
 		hpte += i * 2;
 		if (*hpte & HPTE_V_VALID)
 			goto done;
@@ -110,6 +124,9 @@ static int kvmppc_h_pr_enter(struct kvm_vcpu *vcpu)
  done:
 	mutex_unlock(&vcpu->kvm->arch.hpt_mutex);
 	kvmppc_set_gpr(vcpu, 3, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return EMULATE_DONE;
@@ -123,6 +140,7 @@ static int kvmppc_h_pr_remove(struct kvm_vcpu *vcpu)
 	unsigned long v = 0, pteg, rb;
 	unsigned long pte[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pteg = get_pteg_addr(vcpu, pte_index);
 	copy_from_user(pte, (void __user *)pteg, sizeof(pte));
@@ -134,6 +152,8 @@ static int kvmppc_h_pr_remove(struct kvm_vcpu *vcpu)
 		return EMULATE_DONE;
 	}
 =======
+=======
+>>>>>>> v3.18
 	long int ret;
 
 	pteg = get_pteg_addr(vcpu, pte_index);
@@ -147,6 +167,9 @@ static int kvmppc_h_pr_remove(struct kvm_vcpu *vcpu)
 	    ((flags & H_AVPN) && (pte[0] & ~0x7fUL) != avpn) ||
 	    ((flags & H_ANDCOND) && (pte[0] & avpn) != 0))
 		goto done;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	copy_to_user((void __user *)pteg, &v, sizeof(v));
@@ -155,11 +178,14 @@ static int kvmppc_h_pr_remove(struct kvm_vcpu *vcpu)
 	vcpu->arch.mmu.tlbie(vcpu, rb, rb & 1 ? true : false);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kvmppc_set_gpr(vcpu, 3, H_SUCCESS);
 	kvmppc_set_gpr(vcpu, 4, pte[0]);
 	kvmppc_set_gpr(vcpu, 5, pte[1]);
 
 =======
+=======
+>>>>>>> v3.18
 	ret = H_SUCCESS;
 	kvmppc_set_gpr(vcpu, 4, pte[0]);
 	kvmppc_set_gpr(vcpu, 5, pte[1]);
@@ -168,6 +194,9 @@ static int kvmppc_h_pr_remove(struct kvm_vcpu *vcpu)
 	mutex_unlock(&vcpu->kvm->arch.hpt_mutex);
 	kvmppc_set_gpr(vcpu, 3, ret);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return EMULATE_DONE;
 }
@@ -197,6 +226,10 @@ static int kvmppc_h_pr_bulk_remove(struct kvm_vcpu *vcpu)
 	int ret = H_SUCCESS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&vcpu->kvm->arch.hpt_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&vcpu->kvm->arch.hpt_mutex);
 >>>>>>> v3.18
@@ -229,6 +262,11 @@ static int kvmppc_h_pr_bulk_remove(struct kvm_vcpu *vcpu)
 		pteg = get_pteg_addr(vcpu, tsh & H_BULK_REMOVE_PTEX);
 		copy_from_user(pte, (void __user *)pteg, sizeof(pte));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pte[0] = be64_to_cpu((__force __be64)pte[0]);
+		pte[1] = be64_to_cpu((__force __be64)pte[1]);
+>>>>>>> v3.18
 =======
 		pte[0] = be64_to_cpu((__force __be64)pte[0]);
 		pte[1] = be64_to_cpu((__force __be64)pte[1]);
@@ -254,6 +292,10 @@ static int kvmppc_h_pr_bulk_remove(struct kvm_vcpu *vcpu)
 		kvmppc_set_gpr(vcpu, paramnr+(2*i), tsh);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&vcpu->kvm->arch.hpt_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&vcpu->kvm->arch.hpt_mutex);
 >>>>>>> v3.18
@@ -270,6 +312,7 @@ static int kvmppc_h_pr_protect(struct kvm_vcpu *vcpu)
 	unsigned long rb, pteg, r, v;
 	unsigned long pte[2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pteg = get_pteg_addr(vcpu, pte_index);
 	copy_from_user(pte, (void __user *)pteg, sizeof(pte));
@@ -280,6 +323,8 @@ static int kvmppc_h_pr_protect(struct kvm_vcpu *vcpu)
 		return EMULATE_DONE;
 	}
 =======
+=======
+>>>>>>> v3.18
 	long int ret;
 
 	pteg = get_pteg_addr(vcpu, pte_index);
@@ -292,6 +337,9 @@ static int kvmppc_h_pr_protect(struct kvm_vcpu *vcpu)
 	if ((pte[0] & HPTE_V_VALID) == 0 ||
 	    ((flags & H_AVPN) && (pte[0] & ~0x7fUL) != avpn))
 		goto done;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	v = pte[0];
@@ -307,10 +355,13 @@ static int kvmppc_h_pr_protect(struct kvm_vcpu *vcpu)
 	rb = compute_tlbie_rb(v, r, pte_index);
 	vcpu->arch.mmu.tlbie(vcpu, rb, rb & 1 ? true : false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	copy_to_user((void __user *)pteg, pte, sizeof(pte));
 
 	kvmppc_set_gpr(vcpu, 3, H_SUCCESS);
 =======
+=======
+>>>>>>> v3.18
 	pte[0] = (__force u64)cpu_to_be64(pte[0]);
 	pte[1] = (__force u64)cpu_to_be64(pte[1]);
 	copy_to_user((void __user *)pteg, pte, sizeof(pte));
@@ -319,6 +370,9 @@ static int kvmppc_h_pr_protect(struct kvm_vcpu *vcpu)
  done:
 	mutex_unlock(&vcpu->kvm->arch.hpt_mutex);
 	kvmppc_set_gpr(vcpu, 3, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return EMULATE_DONE;
@@ -348,13 +402,19 @@ static int kvmppc_h_pr_xics_hcall(struct kvm_vcpu *vcpu, u32 cmd)
 int kvmppc_h_pr(struct kvm_vcpu *vcpu, unsigned long cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int rc, idx;
 
 	if (cmd <= MAX_HCALL_OPCODE &&
 	    !test_bit(cmd/4, vcpu->kvm->arch.enabled_hcalls))
 		return EMULATE_FAIL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (cmd) {
 	case H_ENTER:
@@ -369,7 +429,11 @@ int kvmppc_h_pr(struct kvm_vcpu *vcpu, unsigned long cmd)
 		return kvmppc_h_pr_put_tce(vcpu);
 	case H_CEDE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vcpu->arch.shared->msr |= MSR_EE;
+=======
+		kvmppc_set_msr_fast(vcpu, kvmppc_get_msr(vcpu) | MSR_EE);
+>>>>>>> v3.18
 =======
 		kvmppc_set_msr_fast(vcpu, kvmppc_get_msr(vcpu) | MSR_EE);
 >>>>>>> v3.18
@@ -389,14 +453,20 @@ int kvmppc_h_pr(struct kvm_vcpu *vcpu, unsigned long cmd)
 	case H_RTAS:
 		if (list_empty(&vcpu->kvm->arch.rtas_tokens))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return RESUME_HOST;
 		if (kvmppc_rtas_hcall(vcpu))
 =======
+=======
+>>>>>>> v3.18
 			break;
 		idx = srcu_read_lock(&vcpu->kvm->srcu);
 		rc = kvmppc_rtas_hcall(vcpu);
 		srcu_read_unlock(&vcpu->kvm->srcu, idx);
 		if (rc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		kvmppc_set_gpr(vcpu, 3, 0);
@@ -406,7 +476,10 @@ int kvmppc_h_pr(struct kvm_vcpu *vcpu, unsigned long cmd)
 	return EMULATE_FAIL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int kvmppc_hcall_impl_pr(unsigned long cmd)
 {
@@ -465,4 +538,7 @@ void kvmppc_pr_init_default_hcalls(struct kvm *kvm)
 		__set_bit(hcall / 4, kvm->arch.enabled_hcalls);
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

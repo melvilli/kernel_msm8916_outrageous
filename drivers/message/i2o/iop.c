@@ -653,7 +653,10 @@ static int i2o_iop_activate(struct i2o_controller *c)
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void i2o_res_alloc(struct i2o_controller *c, unsigned long flags)
 {
 	i2o_status_block *sb = c->status_block.virt;
@@ -692,6 +695,9 @@ static void i2o_res_alloc(struct i2o_controller *c, unsigned long flags)
 	osm_info("%s: allocated PCI space %pR\n", c->name, res);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  *	i2o_iop_systab_set - Set the I2O System Table of the specified IOP
@@ -706,6 +712,7 @@ static int i2o_iop_systab_set(struct i2o_controller *c)
 	struct i2o_message *msg;
 	i2o_status_block *sb = c->status_block.virt;
 	struct device *dev = &c->pdev->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct resource *root;
 	int rc;
@@ -754,6 +761,8 @@ static int i2o_iop_systab_set(struct i2o_controller *c)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	int rc;
 
 	if (sb->current_mem_size < sb->desired_mem_size)
@@ -761,6 +770,9 @@ static int i2o_iop_systab_set(struct i2o_controller *c)
 
 	if (sb->current_io_size < sb->desired_io_size)
 		i2o_res_alloc(c, IORESOURCE_IO);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	msg = i2o_msg_get_wait(c, I2O_TIMEOUT_MESSAGE_GET);

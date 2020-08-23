@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -181,15 +185,21 @@ acpi_ps_complete_this_op(struct acpi_walk_state * walk_state,
 		switch (parent_info->class) {
 		case AML_CLASS_CONTROL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
 
 		case AML_CLASS_CREATE:
 
 =======
+=======
+>>>>>>> v3.18
 
 			break;
 
 		case AML_CLASS_CREATE:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * These opcodes contain term_arg operands. The current
@@ -204,7 +214,10 @@ acpi_ps_complete_this_op(struct acpi_walk_state * walk_state,
 
 		case AML_CLASS_NAMED_OBJECT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -313,7 +326,11 @@ acpi_ps_complete_this_op(struct acpi_walk_state * walk_state,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18

@@ -102,6 +102,10 @@ extern const struct raid6_calls raid6_avx2x1;
 extern const struct raid6_calls raid6_avx2x2;
 extern const struct raid6_calls raid6_avx2x4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct raid6_calls raid6_tilegx8;
+>>>>>>> v3.18
 =======
 extern const struct raid6_calls raid6_tilegx8;
 >>>>>>> v3.18
@@ -119,12 +123,18 @@ extern const struct raid6_recov_calls raid6_recov_ssse3;
 extern const struct raid6_recov_calls raid6_recov_avx2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern const struct raid6_calls raid6_neonx1;
 extern const struct raid6_calls raid6_neonx2;
 extern const struct raid6_calls raid6_neonx4;
 extern const struct raid6_calls raid6_neonx8;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Algorithm list */
 extern const struct raid6_calls * const raid6_algos[];

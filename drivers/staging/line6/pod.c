@@ -193,18 +193,24 @@ static int pod_set_system_param_int(struct usb_line6_pod *pod, int value,
 	"read" request on "serial_number" special file.
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pod_get_serial_number(struct device *dev,
 				     struct device_attribute *attr, char *buf)
 {
 	struct usb_interface *interface = to_usb_interface(dev);
 	struct usb_line6_pod *pod = usb_get_intfdata(interface);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t serial_number_show(struct device *dev,
 				  struct device_attribute *attr, char *buf)
 {
 	struct usb_interface *interface = to_usb_interface(dev);
 	struct usb_line6_pod *pod = usb_get_intfdata(interface);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return sprintf(buf, "%d\n", pod->serial_number);
 }
@@ -213,6 +219,7 @@ static ssize_t serial_number_show(struct device *dev,
 	"read" request on "firmware_version" special file.
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pod_get_firmware_version(struct device *dev,
 					struct device_attribute *attr,
 					char *buf)
@@ -220,12 +227,17 @@ static ssize_t pod_get_firmware_version(struct device *dev,
 	struct usb_interface *interface = to_usb_interface(dev);
 	struct usb_line6_pod *pod = usb_get_intfdata(interface);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t firmware_version_show(struct device *dev,
 				     struct device_attribute *attr, char *buf)
 {
 	struct usb_interface *interface = to_usb_interface(dev);
 	struct usb_line6_pod *pod = usb_get_intfdata(interface);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return sprintf(buf, "%d.%02d\n", pod->firmware_version / 100,
 		       pod->firmware_version % 100);
@@ -235,18 +247,24 @@ static ssize_t firmware_version_show(struct device *dev,
 	"read" request on "device_id" special file.
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pod_get_device_id(struct device *dev,
 				 struct device_attribute *attr, char *buf)
 {
 	struct usb_interface *interface = to_usb_interface(dev);
 	struct usb_line6_pod *pod = usb_get_intfdata(interface);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t device_id_show(struct device *dev,
 			      struct device_attribute *attr, char *buf)
 {
 	struct usb_interface *interface = to_usb_interface(dev);
 	struct usb_line6_pod *pod = usb_get_intfdata(interface);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return sprintf(buf, "%d\n", pod->device_id);
 }
@@ -272,6 +290,10 @@ static void pod_startup2(unsigned long data)
 	struct usb_line6_pod *pod = (struct usb_line6_pod *)data;
 	struct usb_line6 *line6 = &pod->line6;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -306,11 +328,17 @@ static void pod_startup4(struct work_struct *work)
 
 /* POD special files: */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(device_id, S_IRUGO, pod_get_device_id, line6_nop_write);
 static DEVICE_ATTR(firmware_version, S_IRUGO, pod_get_firmware_version,
 		   line6_nop_write);
 static DEVICE_ATTR(serial_number, S_IRUGO, pod_get_serial_number,
 		   line6_nop_write);
+=======
+static DEVICE_ATTR_RO(device_id);
+static DEVICE_ATTR_RO(firmware_version);
+static DEVICE_ATTR_RO(serial_number);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(device_id);
 static DEVICE_ATTR_RO(firmware_version);
@@ -335,6 +363,10 @@ static int snd_pod_control_monitor_get(struct snd_kcontrol *kcontrol,
 	struct snd_line6_pcm *line6pcm = snd_kcontrol_chip(kcontrol);
 	struct usb_line6_pod *pod = (struct usb_line6_pod *)line6pcm->line6;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

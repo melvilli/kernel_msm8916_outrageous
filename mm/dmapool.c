@@ -63,6 +63,10 @@ struct dma_page {		/* cacheable header for 'allocation' bytes */
 
 static DEFINE_MUTEX(pools_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEFINE_MUTEX(pools_reg_lock);
+>>>>>>> v3.18
 =======
 static DEFINE_MUTEX(pools_reg_lock);
 >>>>>>> v3.18
@@ -137,6 +141,7 @@ struct dma_pool *dma_pool_create(const char *name, struct device *dev,
 	struct dma_pool *retval;
 	size_t allocation;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (align == 0) {
 		align = 1;
@@ -150,6 +155,8 @@ struct dma_pool *dma_pool_create(const char *name, struct device *dev,
 		size = 4;
 	}
 =======
+=======
+>>>>>>> v3.18
 	bool empty = false;
 
 	if (align == 0)
@@ -161,6 +168,9 @@ struct dma_pool *dma_pool_create(const char *name, struct device *dev,
 		return NULL;
 	else if (size < 4)
 		size = 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((size % align) != 0)
@@ -169,16 +179,22 @@ struct dma_pool *dma_pool_create(const char *name, struct device *dev,
 	allocation = max_t(size_t, size, PAGE_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!boundary) {
 		boundary = allocation;
 	} else if ((boundary < size) || (boundary & (boundary - 1))) {
 		return NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!boundary)
 		boundary = allocation;
 	else if ((boundary < size) || (boundary & (boundary - 1)))
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	retval = kmalloc_node(sizeof(*retval), GFP_KERNEL, dev_to_node(dev));
@@ -195,6 +211,7 @@ struct dma_pool *dma_pool_create(const char *name, struct device *dev,
 	retval->boundary = boundary;
 	retval->allocation = allocation;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dev) {
 		int ret;
@@ -216,6 +233,8 @@ struct dma_pool *dma_pool_create(const char *name, struct device *dev,
 		INIT_LIST_HEAD(&retval->pools);
 
 =======
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&retval->pools);
 
 	/*
@@ -246,6 +265,9 @@ struct dma_pool *dma_pool_create(const char *name, struct device *dev,
 		}
 	}
 	mutex_unlock(&pools_reg_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return retval;
 }
@@ -318,12 +340,15 @@ static void pool_free_page(struct dma_pool *pool, struct dma_page *page)
 void dma_pool_destroy(struct dma_pool *pool)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&pools_lock);
 	list_del(&pool->pools);
 	if (pool->dev && list_empty(&pool->dev->dma_pools))
 		device_remove_file(pool->dev, &dev_attr_pools);
 	mutex_unlock(&pools_lock);
 =======
+=======
+>>>>>>> v3.18
 	bool empty = false;
 
 	mutex_lock(&pools_reg_lock);
@@ -335,6 +360,9 @@ void dma_pool_destroy(struct dma_pool *pool)
 	if (empty)
 		device_remove_file(pool->dev, &dev_attr_pools);
 	mutex_unlock(&pools_reg_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (!list_empty(&pool->page_list)) {
@@ -414,15 +442,21 @@ void *dma_pool_alloc(struct dma_pool *pool, gfp_t mem_flags,
 			if (pool->dev)
 				dev_err(pool->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					"dma_pool_alloc %s, %p (corruped)\n",
 					pool->name, retval);
 			else
 				pr_err("dma_pool_alloc %s, %p (corruped)\n",
 =======
+=======
+>>>>>>> v3.18
 					"dma_pool_alloc %s, %p (corrupted)\n",
 					pool->name, retval);
 			else
 				pr_err("dma_pool_alloc %s, %p (corrupted)\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					pool->name, retval);
 
@@ -588,8 +622,12 @@ void dmam_pool_destroy(struct dma_pool *pool)
 	struct device *dev = pool->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(devres_destroy(dev, dmam_pool_release, dmam_pool_match, pool));
 	dma_pool_destroy(pool);
+=======
+	WARN_ON(devres_release(dev, dmam_pool_release, dmam_pool_match, pool));
+>>>>>>> v3.18
 =======
 	WARN_ON(devres_release(dev, dmam_pool_release, dmam_pool_match, pool));
 >>>>>>> v3.18

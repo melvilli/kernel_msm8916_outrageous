@@ -274,7 +274,10 @@ static int orinoco_plx_init_one(struct pci_dev *pdev,
 
  fail_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_orinocodev(priv);
@@ -305,7 +308,10 @@ static void orinoco_plx_remove_one(struct pci_dev *pdev)
 	orinoco_if_del(priv);
 	free_irq(pdev->irq, priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_orinocodev(priv);
@@ -317,7 +323,11 @@ static void orinoco_plx_remove_one(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(orinoco_plx_id_table) = {
+=======
+static const struct pci_device_id orinoco_plx_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id orinoco_plx_id_table[] = {
 >>>>>>> v3.18

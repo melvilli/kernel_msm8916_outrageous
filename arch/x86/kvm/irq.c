@@ -114,6 +114,10 @@ int kvm_cpu_get_interrupt(struct kvm_vcpu *v)
 	return kvm_get_apic_interrupt(v);	/* APIC */
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(kvm_cpu_get_interrupt);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(kvm_cpu_get_interrupt);
 >>>>>>> v3.18

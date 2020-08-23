@@ -44,10 +44,13 @@
 #include <asm/setup.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 #include <asm/mipsmtregs.h>
 #endif /* CONFIG_MIPS_MT_SMTC */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 volatile cpumask_t cpu_callin_map;	/* Bitmask of started secondaries */
@@ -67,10 +70,13 @@ cpumask_t cpu_sibling_map[NR_CPUS] __read_mostly;
 EXPORT_SYMBOL(cpu_sibling_map);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* representing cpus for which sibling maps can be computed */
 static cpumask_t cpu_sibling_setup_map;
 
 =======
+=======
+>>>>>>> v3.18
 /* representing the core map of multi-core chips of each logical CPU */
 cpumask_t cpu_core_map[NR_CPUS] __read_mostly;
 EXPORT_SYMBOL(cpu_core_map);
@@ -83,6 +89,9 @@ static cpumask_t cpu_core_setup_map;
 
 cpumask_t cpu_coherent_mask;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void set_cpu_sibling_map(int cpu)
 {
@@ -93,7 +102,12 @@ static inline void set_cpu_sibling_map(int cpu)
 	if (smp_num_siblings > 1) {
 		for_each_cpu_mask(i, cpu_sibling_setup_map) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (cpu_data[cpu].core == cpu_data[i].core) {
+=======
+			if (cpu_data[cpu].package == cpu_data[i].package &&
+				    cpu_data[cpu].core == cpu_data[i].core) {
+>>>>>>> v3.18
 =======
 			if (cpu_data[cpu].package == cpu_data[i].package &&
 				    cpu_data[cpu].core == cpu_data[i].core) {
@@ -107,11 +121,14 @@ static inline void set_cpu_sibling_map(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct plat_smp_ops *mp_ops;
 EXPORT_SYMBOL(mp_ops);
 
 __cpuinit void register_smp_ops(struct plat_smp_ops *ops)
 =======
+=======
+>>>>>>> v3.18
 static inline void set_cpu_core_map(int cpu)
 {
 	int i;
@@ -130,6 +147,9 @@ struct plat_smp_ops *mp_ops;
 EXPORT_SYMBOL(mp_ops);
 
 void register_smp_ops(struct plat_smp_ops *ops)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (mp_ops)
@@ -142,6 +162,7 @@ void register_smp_ops(struct plat_smp_ops *ops)
  * First C code run on the secondary CPUs after being started up by
  * the master.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 asmlinkage __cpuinit void start_secondary(void)
 {
@@ -159,6 +180,8 @@ asmlinkage __cpuinit void start_secondary(void)
 	mp_ops->init_secondary();
 	cpu_report();
 =======
+=======
+>>>>>>> v3.18
 asmlinkage void start_secondary(void)
 {
 	unsigned int cpu;
@@ -168,6 +191,9 @@ asmlinkage void start_secondary(void)
 	per_cpu_trap_init(false);
 	mips_clockevent_init();
 	mp_ops->init_secondary();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -181,6 +207,10 @@ asmlinkage void start_secondary(void)
 	cpu_data[cpu].udelay_val = loops_per_jiffy;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpu_set(cpu, cpu_coherent_mask);
+>>>>>>> v3.18
 =======
 	cpu_set(cpu, cpu_coherent_mask);
 >>>>>>> v3.18
@@ -190,6 +220,10 @@ asmlinkage void start_secondary(void)
 
 	set_cpu_sibling_map(cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	set_cpu_core_map(cpu);
+>>>>>>> v3.18
 =======
 	set_cpu_core_map(cpu);
 >>>>>>> v3.18
@@ -215,7 +249,10 @@ void __irq_entry smp_call_function_interrupt(void)
 {
 	irq_enter();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	generic_smp_call_function_single_interrupt();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	generic_smp_call_function_interrupt();
@@ -242,7 +279,10 @@ void smp_send_stop(void)
 void __init smp_cpus_done(unsigned int max_cpus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mp_ops->cpus_done();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -255,15 +295,21 @@ void __init smp_prepare_cpus(unsigned int max_cpus)
 	mp_ops->prepare_cpus(max_cpus);
 	set_cpu_sibling_map(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_HOTPLUG_CPU
 	init_cpu_present(cpu_possible_mask);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	set_cpu_core_map(0);
 #ifndef CONFIG_HOTPLUG_CPU
 	init_cpu_present(cpu_possible_mask);
 #endif
 	cpumask_copy(&cpu_coherent_mask, cpu_possible_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -276,7 +322,11 @@ void smp_prepare_boot_cpu(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *tidle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *tidle)
+>>>>>>> v3.18
 =======
 int __cpu_up(unsigned int cpu, struct task_struct *tidle)
 >>>>>>> v3.18
@@ -322,6 +372,7 @@ static void flush_tlb_mm_ipi(void *mm)
  *  o collapses to normal function call on systems with a single shared
  *    primary cache.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  o CONFIG_MIPS_MT_SMTC currently implies there is only one physical core.
  */
 static inline void smp_on_other_tlbs(void (*func) (void *info), void *info)
@@ -330,10 +381,15 @@ static inline void smp_on_other_tlbs(void (*func) (void *info), void *info)
 	smp_call_function(func, info, 1);
 #endif
 =======
+=======
+>>>>>>> v3.18
  */
 static inline void smp_on_other_tlbs(void (*func) (void *info), void *info)
 {
 	smp_call_function(func, info, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -495,7 +551,10 @@ void dump_send_ipi(void (*dump_ipi_callback)(void *))
 EXPORT_SYMBOL(dump_send_ipi);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_GENERIC_CLOCKEVENTS_BROADCAST
 
@@ -539,4 +598,7 @@ static int __init tick_broadcast_init(void)
 early_initcall(tick_broadcast_init);
 
 #endif /* CONFIG_GENERIC_CLOCKEVENTS_BROADCAST */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

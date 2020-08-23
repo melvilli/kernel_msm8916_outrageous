@@ -43,7 +43,11 @@
 static struct usb_driver bfusb_driver;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct usb_device_id bfusb_table[] = {
+=======
+static const struct usb_device_id bfusb_table[] = {
+>>>>>>> v3.18
 =======
 static const struct usb_device_id bfusb_table[] = {
 >>>>>>> v3.18
@@ -136,14 +140,20 @@ static int bfusb_send_bulk(struct bfusb_data *data, struct sk_buff *skb)
 	BT_DBG("bfusb %p skb %p len %d", data, skb, skb->len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!urb && !(urb = usb_alloc_urb(0, GFP_ATOMIC)))
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	if (!urb) {
 		urb = usb_alloc_urb(0, GFP_ATOMIC);
 		if (!urb)
 			return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pipe = usb_sndbulkpipe(data->udev, data->bulk_out_ep);
@@ -231,14 +241,20 @@ static int bfusb_rx_submit(struct bfusb_data *data, struct urb *urb)
 	BT_DBG("bfusb %p urb %p", data, urb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!urb && !(urb = usb_alloc_urb(0, GFP_ATOMIC)))
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	if (!urb) {
 		urb = usb_alloc_urb(0, GFP_ATOMIC);
 		if (!urb)
 			return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	skb = bt_skb_alloc(size, GFP_ATOMIC);
@@ -339,7 +355,10 @@ static inline int bfusb_recv_block(struct bfusb_data *data, int hdr, unsigned ch
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb->dev = (void *) data->hdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		bt_cb(skb)->pkt_type = pkt_type;
@@ -357,7 +376,11 @@ static inline int bfusb_recv_block(struct bfusb_data *data, int hdr, unsigned ch
 
 	if (hdr & 0x08) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hci_recv_frame(data->reassembly);
+=======
+		hci_recv_frame(data->hdev, data->reassembly);
+>>>>>>> v3.18
 =======
 		hci_recv_frame(data->hdev, data->reassembly);
 >>>>>>> v3.18
@@ -493,10 +516,16 @@ static int bfusb_close(struct hci_dev *hdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bfusb_send_frame(struct sk_buff *skb)
 {
 	struct hci_dev *hdev = (struct hci_dev *) skb->dev;
 	struct bfusb_data *data;
+=======
+static int bfusb_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
+{
+	struct bfusb_data *data = hci_get_drvdata(hdev);
+>>>>>>> v3.18
 =======
 static int bfusb_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 {
@@ -509,6 +538,7 @@ static int bfusb_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 	BT_DBG("hdev %p skb %p type %d len %d", hdev, skb, bt_cb(skb)->pkt_type, skb->len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!hdev) {
 		BT_ERR("Frame for unknown HCI device (hdev=NULL)");
 		return -ENODEV;
@@ -519,6 +549,11 @@ static int bfusb_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 
 	data = hci_get_drvdata(hdev);
 
+=======
+	if (!test_bit(HCI_RUNNING, &hdev->flags))
+		return -EBUSY;
+
+>>>>>>> v3.18
 =======
 	if (!test_bit(HCI_RUNNING, &hdev->flags))
 		return -EBUSY;
@@ -584,11 +619,14 @@ static int bfusb_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bfusb_ioctl(struct hci_dev *hdev, unsigned int cmd, unsigned long arg)
 {
 	return -ENOIOCTLCMD;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int bfusb_load_firmware(struct bfusb_data *data,
@@ -742,16 +780,22 @@ static int bfusb_probe(struct usb_interface *intf, const struct usb_device_id *i
 	SET_HCIDEV_DEV(hdev, &intf->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hdev->open     = bfusb_open;
 	hdev->close    = bfusb_close;
 	hdev->flush    = bfusb_flush;
 	hdev->send     = bfusb_send_frame;
 	hdev->ioctl    = bfusb_ioctl;
 =======
+=======
+>>>>>>> v3.18
 	hdev->open  = bfusb_open;
 	hdev->close = bfusb_close;
 	hdev->flush = bfusb_flush;
 	hdev->send  = bfusb_send_frame;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (hci_register_dev(hdev) < 0) {

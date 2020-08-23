@@ -13,7 +13,11 @@ What:		/sys/bus/hid/drivers/wiimote/<dev>/extension
 Date:		August 2011
 KernelVersion:	3.2
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	David Herrmann <dh.herrmann@googlemail.com>
+=======
+Contact:	David Herrmann <dh.herrmann@gmail.com>
+>>>>>>> v3.18
 =======
 Contact:	David Herrmann <dh.herrmann@gmail.com>
 >>>>>>> v3.18
@@ -25,7 +29,10 @@ Description:	This file contains the currently connected and initialized
 		Nintendo Classic Controller extension. The motionp extension can
 		be combined with the other two.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		Starting with kernel-version 3.11 Motion Plus hotplugging is
 		supported and if detected, it's no longer reported as static
 		extension. You will get uevent notifications for the motion-plus
@@ -81,4 +88,7 @@ Description:	This attribute is only provided if the device was detected as a
 		You can write "scan\n" into this file to re-trigger calibration.
 		You can also write data directly in the form "x1:y1 x2:y2" to
 		set the calibration values manually.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

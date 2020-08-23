@@ -11,6 +11,10 @@
 #include <linux/fs.h>
 #include <linux/atomic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/page-flags.h>
+>>>>>>> v3.18
 =======
 #include <linux/page-flags.h>
 >>>>>>> v3.18
@@ -24,11 +28,14 @@ struct bio;
 #define SWAP_FLAG_PRIO_MASK	0x7fff
 #define SWAP_FLAG_PRIO_SHIFT	0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SWAP_FLAG_DISCARD	0x10000 /* discard swap cluster after use */
 
 #define SWAP_FLAGS_VALID	(SWAP_FLAG_PRIO_MASK | SWAP_FLAG_PREFER | \
 				 SWAP_FLAG_DISCARD)
 =======
+=======
+>>>>>>> v3.18
 #define SWAP_FLAG_DISCARD	0x10000 /* enable discard for swap */
 #define SWAP_FLAG_DISCARD_ONCE	0x20000 /* discard swap area at swapon-time */
 #define SWAP_FLAG_DISCARD_PAGES 0x40000 /* discard page-clusters after use */
@@ -36,6 +43,9 @@ struct bio;
 #define SWAP_FLAGS_VALID	(SWAP_FLAG_PRIO_MASK | SWAP_FLAG_PREFER | \
 				 SWAP_FLAG_DISCARD | SWAP_FLAG_DISCARD_ONCE | \
 				 SWAP_FLAG_DISCARD_PAGES)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int current_is_kswapd(void)
@@ -161,7 +171,11 @@ enum {
 	SWP_USED	= (1 << 0),	/* is slot in swap_info[] used? */
 	SWP_WRITEOK	= (1 << 1),	/* ok to write to this swap?	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SWP_DISCARDABLE = (1 << 2),	/* swapon+blkdev support discard */
+=======
+	SWP_DISCARDABLE = (1 << 2),	/* blkdev support discard */
+>>>>>>> v3.18
 =======
 	SWP_DISCARDABLE = (1 << 2),	/* blkdev support discard */
 >>>>>>> v3.18
@@ -171,14 +185,20 @@ enum {
 	SWP_BLKDEV	= (1 << 6),	/* its a block device */
 	SWP_FILE	= (1 << 7),	/* set after swap_activate success */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SWP_FAST	= (1 << 8),	/* blkdev access is fast and cheap */
 					/* add others here before... */
 	SWP_SCANNING	= (1 << 9),	/* refcount in scan_swap_map */
 =======
+=======
+>>>>>>> v3.18
 	SWP_AREA_DISCARD = (1 << 8),	/* single-time swap area discards */
 	SWP_PAGE_DISCARD = (1 << 9),	/* freed swap page-cluster discards */
 					/* add others here before... */
 	SWP_SCANNING	= (1 << 10),	/* refcount in scan_swap_map */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -187,15 +207,21 @@ enum {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Ratio between the present memory in the zone and the "gap" that
  * we're allowing kswapd to shrink in addition to the per-zone high
  * wmark, even for zones that already have the high wmark satisfied,
  * in order to provide better per-zone lru behavior. We are ok to
 =======
+=======
+>>>>>>> v3.18
  * Ratio between zone->managed_pages and the "gap" that above the per-zone
  * "high_wmark". While balancing nodes, We allow kswapd to shrink zones that
  * do not meet the (high_wmark + gap) watermark, even which already met the
  * high_wmark, in order to provide better per-zone lru behavior. We are ok to
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * spend not more than 1% of the memory for this zone balancing "gap".
  */
@@ -210,7 +236,10 @@ enum {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * We use this to track usage of a cluster. A cluster is a block of swap disk
  * space with SWAPFILE_CLUSTER pages long and naturally aligns in disk. All
  * free clusters are organized into a list. We fetch an entry from the list to
@@ -238,6 +267,9 @@ struct percpu_cluster {
 };
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * The in-memory structure used to track swap areas.
  */
@@ -245,11 +277,14 @@ struct swap_info_struct {
 	unsigned long	flags;		/* SWP_USED etc: see above */
 	signed short	prio;		/* swap priority of this type */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	signed char	type;		/* strange name for an index */
 	signed char	next;		/* next type on the swap list */
 	unsigned int	max;		/* extent of the swap_map */
 	unsigned char *swap_map;	/* vmalloc'ed array of usage counts */
 =======
+=======
+>>>>>>> v3.18
 	struct plist_node list;		/* entry in swap_active_head */
 	struct plist_node avail_list;	/* entry in swap_avail_head */
 	signed char	type;		/* strange name for an index */
@@ -258,6 +293,9 @@ struct swap_info_struct {
 	struct swap_cluster_info *cluster_info; /* cluster info. Only for SSD */
 	struct swap_cluster_info free_cluster_head; /* free cluster list head */
 	struct swap_cluster_info free_cluster_tail; /* free cluster list tail */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int lowest_bit;	/* index of first free in swap_map */
 	unsigned int highest_bit;	/* index of last free in swap_map */
@@ -266,8 +304,12 @@ struct swap_info_struct {
 	unsigned int cluster_next;	/* likely index for next allocation */
 	unsigned int cluster_nr;	/* countdown to next cluster search */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int lowest_alloc;	/* while preparing discard cluster */
 	unsigned int highest_alloc;	/* while preparing discard cluster */
+=======
+	struct percpu_cluster __percpu *percpu_cluster; /* per cpu's swap location */
+>>>>>>> v3.18
 =======
 	struct percpu_cluster __percpu *percpu_cluster; /* per cpu's swap location */
 >>>>>>> v3.18
@@ -285,6 +327,7 @@ struct swap_info_struct {
 					 * swap_map, lowest_bit, highest_bit,
 					 * inuse_pages, cluster_next,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 * cluster_nr, lowest_alloc and
 					 * highest_alloc. other fields are only
 					 * changed at swapon/swapoff, so are
@@ -300,6 +343,8 @@ struct swap_list_t {
 	int next;	/* swapfile to be used next */
 };
 =======
+=======
+>>>>>>> v3.18
 					 * cluster_nr, lowest_alloc,
 					 * highest_alloc, free/discard cluster
 					 * list. other fields are only changed
@@ -349,6 +394,9 @@ static inline void workingset_node_shadows_dec(struct radix_tree_node *node)
 {
 	node->count -= 1U << RADIX_TREE_COUNT_SHIFT;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* linux/mm/page_alloc.c */
@@ -364,8 +412,14 @@ extern unsigned long nr_free_pagecache_pages(void);
 
 /* linux/mm/swap.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __lru_cache_add(struct page *, enum lru_list lru);
 extern void lru_cache_add_lru(struct page *, enum lru_list lru);
+=======
+extern void lru_cache_add(struct page *);
+extern void lru_cache_add_anon(struct page *page);
+extern void lru_cache_add_file(struct page *page);
+>>>>>>> v3.18
 =======
 extern void lru_cache_add(struct page *);
 extern void lru_cache_add_anon(struct page *page);
@@ -378,7 +432,11 @@ extern void mark_page_accessed(struct page *);
 extern void lru_add_drain(void);
 extern void lru_add_drain_cpu(int cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int lru_add_drain_all(void);
+=======
+extern void lru_add_drain_all(void);
+>>>>>>> v3.18
 =======
 extern void lru_add_drain_all(void);
 >>>>>>> v3.18
@@ -388,6 +446,7 @@ extern void swap_setup(void);
 
 extern void add_page_to_unevictable_list(struct page *page);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * lru_cache_add: add a page to the page lists
@@ -406,19 +465,29 @@ static inline void lru_cache_add_file(struct page *page)
 extern void lru_cache_add_active_or_unevictable(struct page *page,
 						struct vm_area_struct *vma);
 >>>>>>> v3.18
+=======
+extern void lru_cache_add_active_or_unevictable(struct page *page,
+						struct vm_area_struct *vma);
+>>>>>>> v3.18
 
 /* linux/mm/vmscan.c */
 extern unsigned long try_to_free_pages(struct zonelist *zonelist, int order,
 					gfp_t gfp_mask, nodemask_t *mask);
 extern int __isolate_lru_page(struct page *page, isolate_mode_t mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long try_to_free_mem_cgroup_pages(struct mem_cgroup *mem,
 						  gfp_t gfp_mask, bool noswap);
 =======
+=======
+>>>>>>> v3.18
 extern unsigned long try_to_free_mem_cgroup_pages(struct mem_cgroup *memcg,
 						  unsigned long nr_pages,
 						  gfp_t gfp_mask,
 						  bool may_swap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern unsigned long mem_cgroup_shrink_node_zone(struct mem_cgroup *mem,
 						gfp_t gfp_mask, bool noswap,
@@ -446,6 +515,7 @@ extern int page_evictable(struct page *page);
 extern void check_move_unevictable_pages(struct page **, int nr_pages);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long scan_unevictable_pages;
 extern int scan_unevictable_handler(struct ctl_table *, int,
 					void __user *, size_t *, loff_t *);
@@ -464,6 +534,8 @@ static inline void scan_unevictable_unregister_node(struct node *node)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 extern int kswapd_run(int nid);
 extern void kswapd_stop(int nid);
 #ifdef CONFIG_MEMCG
@@ -476,10 +548,13 @@ static inline int mem_cgroup_swappiness(struct mem_cgroup *mem)
 #endif
 #ifdef CONFIG_MEMCG_SWAP
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void mem_cgroup_uncharge_swap(swp_entry_t ent);
 #else
 static inline void mem_cgroup_uncharge_swap(swp_entry_t ent)
 =======
+=======
+>>>>>>> v3.18
 extern void mem_cgroup_swapout(struct page *page, swp_entry_t entry);
 extern void mem_cgroup_uncharge_swap(swp_entry_t entry);
 #else
@@ -487,6 +562,9 @@ static inline void mem_cgroup_swapout(struct page *page, swp_entry_t entry)
 {
 }
 static inline void mem_cgroup_uncharge_swap(swp_entry_t entry)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 }
@@ -528,6 +606,7 @@ extern struct page *swapin_readahead(swp_entry_t, gfp_t,
 extern atomic_long_t nr_swap_pages;
 extern long total_swap_pages;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool is_swap_fast(swp_entry_t entry);
 
 /* Swap 50% full? Release swapcache more aggressively.. */
@@ -541,10 +620,15 @@ static inline bool vm_swap_full(struct swap_info_struct *si)
 		return true;
 
 =======
+=======
+>>>>>>> v3.18
 
 /* Swap 50% full? Release swapcache more aggressively.. */
 static inline bool vm_swap_full(void)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return atomic_long_read(&nr_swap_pages) * 2 < total_swap_pages;
 }
@@ -563,7 +647,11 @@ extern int swap_duplicate(swp_entry_t);
 extern int swapcache_prepare(swp_entry_t);
 extern void swap_free(swp_entry_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void swapcache_free(swp_entry_t, struct page *page);
+=======
+extern void swapcache_free(swp_entry_t);
+>>>>>>> v3.18
 =======
 extern void swapcache_free(swp_entry_t);
 >>>>>>> v3.18
@@ -574,7 +662,10 @@ extern sector_t map_swap_page(struct page *, struct block_device **);
 extern sector_t swapdev_block(int, pgoff_t);
 extern int page_swapcount(struct page *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int swp_swapcount(swp_entry_t entry);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct swap_info_struct *page_swap_info(struct page *);
@@ -595,16 +686,22 @@ mem_cgroup_uncharge_swapcache(struct page *page, swp_entry_t ent, bool swapout)
 #else /* CONFIG_SWAP */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define get_nr_swap_pages()			0L
 #define total_swap_pages			0L
 #define total_swapcache_pages()			0UL
 #define vm_swap_full(si)			0
 =======
+=======
+>>>>>>> v3.18
 #define swap_address_space(entry)		(NULL)
 #define get_nr_swap_pages()			0L
 #define total_swap_pages			0L
 #define total_swapcache_pages()			0UL
 #define vm_swap_full()				0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define si_swapinfo(val) \
@@ -615,7 +712,11 @@ mem_cgroup_uncharge_swapcache(struct page *page, swp_entry_t ent, bool swapout)
 	page_cache_release(page)
 #define free_pages_and_swap_cache(pages, nr) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_pages((pages), (nr), 0);
+=======
+	release_pages((pages), (nr), false);
+>>>>>>> v3.18
 =======
 	release_pages((pages), (nr), false);
 >>>>>>> v3.18
@@ -646,7 +747,11 @@ static inline void swap_free(swp_entry_t swp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void swapcache_free(swp_entry_t swp, struct page *page)
+=======
+static inline void swapcache_free(swp_entry_t swp)
+>>>>>>> v3.18
 =======
 static inline void swapcache_free(swp_entry_t swp)
 >>>>>>> v3.18
@@ -694,11 +799,14 @@ static inline int page_swapcount(struct page *page)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int swp_swapcount(swp_entry_t entry)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define reuse_swap_page(page)	(page_mapcount(page) == 1)

@@ -30,7 +30,11 @@
 #include <drm/drmP.h>
 #include "radeon.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include "radeon_trace.h"
+>>>>>>> v3.18
 =======
 #include "radeon_trace.h"
 >>>>>>> v3.18
@@ -39,7 +43,12 @@ int radeon_semaphore_create(struct radeon_device *rdev,
 			    struct radeon_semaphore **semaphore)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int r;
+=======
+	uint64_t *cpu_addr;
+	int i, r;
+>>>>>>> v3.18
 =======
 	uint64_t *cpu_addr;
 	int i, r;
@@ -50,8 +59,13 @@ int radeon_semaphore_create(struct radeon_device *rdev,
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = radeon_sa_bo_new(rdev, &rdev->ring_tmp_bo,
 			     &(*semaphore)->sa_bo, 8, 8, true);
+=======
+	r = radeon_sa_bo_new(rdev, &rdev->ring_tmp_bo, &(*semaphore)->sa_bo,
+			     8 * RADEON_NUM_SYNCS, 8);
+>>>>>>> v3.18
 =======
 	r = radeon_sa_bo_new(rdev, &rdev->ring_tmp_bo, &(*semaphore)->sa_bo,
 			     8 * RADEON_NUM_SYNCS, 8);
@@ -63,6 +77,7 @@ int radeon_semaphore_create(struct radeon_device *rdev,
 	}
 	(*semaphore)->waiters = 0;
 	(*semaphore)->gpu_addr = radeon_sa_bo_gpu_addr((*semaphore)->sa_bo);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	*((uint64_t*)radeon_sa_bo_cpu_addr((*semaphore)->sa_bo)) = 0;
 	return 0;
@@ -114,6 +129,8 @@ int radeon_semaphore_sync_rings(struct radeon_device *rdev,
 	rdev->ring[signaler].last_semaphore_signal_addr = semaphore->gpu_addr;
 	rdev->ring[waiter].last_semaphore_wait_addr = semaphore->gpu_addr;
 =======
+=======
+>>>>>>> v3.18
 
 	cpu_addr = radeon_sa_bo_cpu_addr((*semaphore)->sa_bo);
 	for (i = 0; i < RADEON_NUM_SYNCS; ++i)
@@ -295,6 +312,9 @@ int radeon_semaphore_sync_rings(struct radeon_device *rdev,
 
 		semaphore->gpu_addr += 8;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

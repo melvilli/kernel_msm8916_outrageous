@@ -70,8 +70,14 @@ struct gss_cl_ctx {
 	u32			gc_seq;
 	spinlock_t		gc_seq_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gss_ctx __rcu	*gc_gss_ctx;
 	struct xdr_netobj	gc_wire_ctx;
+=======
+	struct gss_ctx		*gc_gss_ctx;
+	struct xdr_netobj	gc_wire_ctx;
+	struct xdr_netobj	gc_acceptor;
+>>>>>>> v3.18
 =======
 	struct gss_ctx		*gc_gss_ctx;
 	struct xdr_netobj	gc_wire_ctx;

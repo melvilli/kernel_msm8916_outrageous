@@ -595,9 +595,13 @@ int is_dsp_inst(struct pt_regs *regs)
 
 #ifdef CONFIG_CPU_SH2A
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void do_divide_error(unsigned long r4, unsigned long r5,
 				unsigned long r6, unsigned long r7,
 				struct pt_regs __regs)
+=======
+asmlinkage void do_divide_error(unsigned long r4)
+>>>>>>> v3.18
 =======
 asmlinkage void do_divide_error(unsigned long r4)
 >>>>>>> v3.18
@@ -618,11 +622,17 @@ asmlinkage void do_divide_error(unsigned long r4)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void do_reserved_inst(unsigned long r4, unsigned long r5,
 				unsigned long r6, unsigned long r7,
 				struct pt_regs __regs)
 {
 	struct pt_regs *regs = RELOC_HIDE(&__regs, 0);
+=======
+asmlinkage void do_reserved_inst(void)
+{
+	struct pt_regs *regs = current_pt_regs();
+>>>>>>> v3.18
 =======
 asmlinkage void do_reserved_inst(void)
 {
@@ -712,11 +722,17 @@ static int emulate_branch(unsigned short inst, struct pt_regs *regs)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void do_illegal_slot_inst(unsigned long r4, unsigned long r5,
 				unsigned long r6, unsigned long r7,
 				struct pt_regs __regs)
 {
 	struct pt_regs *regs = RELOC_HIDE(&__regs, 0);
+=======
+asmlinkage void do_illegal_slot_inst(void)
+{
+	struct pt_regs *regs = current_pt_regs();
+>>>>>>> v3.18
 =======
 asmlinkage void do_illegal_slot_inst(void)
 {
@@ -747,6 +763,7 @@ asmlinkage void do_illegal_slot_inst(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void do_exception_error(unsigned long r4, unsigned long r5,
 				   unsigned long r6, unsigned long r7,
 				   struct pt_regs __regs)
@@ -760,6 +777,8 @@ asmlinkage void do_exception_error(unsigned long r4, unsigned long r5,
 
 void __cpuinit per_cpu_trap_init(void)
 =======
+=======
+>>>>>>> v3.18
 asmlinkage void do_exception_error(void)
 {
 	long ex;
@@ -769,6 +788,9 @@ asmlinkage void do_exception_error(void)
 }
 
 void per_cpu_trap_init(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	extern void *vbr_base;

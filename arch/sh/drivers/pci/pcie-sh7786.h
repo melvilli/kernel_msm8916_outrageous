@@ -146,9 +146,12 @@
 #define	SH4A_PCIERMSGIER	(0x004040)	/* R/W - 0x0000 0000 32 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*	PCIEPHYCTLR	*/
 #define SH4A_PCIEPHYCTLR	(0x010000)	/* R/W - 0x0000 0000 32 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*	PCIEPHYADRR	*/

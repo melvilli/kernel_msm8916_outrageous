@@ -5,8 +5,14 @@
 #define _SPARC_SETUP_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <uapi/asm/setup.h>
 
+=======
+#include <linux/interrupt.h>
+
+#include <uapi/asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <linux/interrupt.h>
 
@@ -29,10 +35,13 @@ static inline int con_is_present(void)
 	return serial_console ? 0 : 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 extern void sun_do_break(void);
 =======
+=======
+>>>>>>> v3.18
 
 /* from irq_32.c */
 extern volatile unsigned char *fdc_status;
@@ -72,6 +81,9 @@ extern int sysctl_tsb_ratio;
 #endif
 
 void sun_do_break(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int stop_a_enabled;
 extern int scons_pwroff;

@@ -73,6 +73,10 @@ FILELINE * docsection;
 #define NOFUNCTION    "-nofunction"
 #define NODOCSECTIONS "-no-doc-sections"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SHOWNOTFOUND  "-show-not-found"
+>>>>>>> v3.18
 =======
 #define SHOWNOTFOUND  "-show-not-found"
 >>>>>>> v3.18
@@ -158,7 +162,11 @@ static void add_new_symbol(struct symfile *sym, char * symname)
 {
 	sym->symbollist =
 <<<<<<< HEAD
+<<<<<<< HEAD
           realloc(sym->symbollist, (sym->symbolcnt + 1) * sizeof(char *));
+=======
+	  realloc(sym->symbollist, (sym->symbolcnt + 1) * sizeof(char *));
+>>>>>>> v3.18
 =======
 	  realloc(sym->symbollist, (sym->symbolcnt + 1) * sizeof(char *));
 >>>>>>> v3.18
@@ -223,7 +231,11 @@ static void find_export_symbols(char * filename)
 			char *e;
 			if (((p = strstr(line, "EXPORT_SYMBOL_GPL")) != NULL) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
                             ((p = strstr(line, "EXPORT_SYMBOL")) != NULL)) {
+=======
+			    ((p = strstr(line, "EXPORT_SYMBOL")) != NULL)) {
+>>>>>>> v3.18
 =======
 			    ((p = strstr(line, "EXPORT_SYMBOL")) != NULL)) {
 >>>>>>> v3.18
@@ -303,6 +315,7 @@ static void singfunc(char * filename, char * line)
 {
 	char *vec[200]; /* Enough for specific functions */
 <<<<<<< HEAD
+<<<<<<< HEAD
         int i, idx = 0;
         int startofsym = 1;
 	vec[idx++] = KERNELDOC;
@@ -325,6 +338,8 @@ static void singfunc(char * filename, char * line)
         	if (strcmp(vec[i], FUNCTION))
         		continue;
 =======
+=======
+>>>>>>> v3.18
 	int i, idx = 0;
 	int startofsym = 1;
 	vec[idx++] = KERNELDOC;
@@ -347,6 +362,9 @@ static void singfunc(char * filename, char * line)
 	for (i = 0; i < idx; i++) {
 		if (strcmp(vec[i], FUNCTION))
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		consume_symbol(vec[i + 1]);
 	}
@@ -363,7 +381,12 @@ static void singfunc(char * filename, char * line)
 static void docsect(char *filename, char *line)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *vec[6]; /* kerneldoc -docbook -function "section" file NULL */
+=======
+	/* kerneldoc -docbook -show-not-found -function "section" file NULL */
+	char *vec[7];
+>>>>>>> v3.18
 =======
 	/* kerneldoc -docbook -show-not-found -function "section" file NULL */
 	char *vec[7];
@@ -384,16 +407,22 @@ static void docsect(char *filename, char *line)
 	vec[0] = KERNELDOC;
 	vec[1] = DOCBOOK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vec[2] = FUNCTION;
 	vec[3] = line;
 	vec[4] = filename;
 	vec[5] = NULL;
 =======
+=======
+>>>>>>> v3.18
 	vec[2] = SHOWNOTFOUND;
 	vec[3] = FUNCTION;
 	vec[4] = line;
 	vec[5] = filename;
 	vec[6] = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	exec_kernel_doc(vec);
 }
@@ -507,9 +536,15 @@ static void parse_file(FILE *infile)
 				case 'D':
 					while (*s && !isspace(*s)) s++;
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         *s = '\0';
                                         symbolsonly(line+2);
                                         break;
+=======
+					*s = '\0';
+					symbolsonly(line+2);
+					break;
+>>>>>>> v3.18
 =======
 					*s = '\0';
 					symbolsonly(line+2);
@@ -520,7 +555,11 @@ static void parse_file(FILE *infile)
 					while (*s && !isspace(*s)) s++;
 					*s++ = '\0';
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         /* function names */
+=======
+					/* function names */
+>>>>>>> v3.18
 =======
 					/* function names */
 >>>>>>> v3.18
@@ -572,17 +611,23 @@ int main(int argc, char *argv[])
 	/* Open file, exit on error */
 	infile = fopen(argv[2], "r");
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (infile == NULL) {
                 fprintf(stderr, "docproc: ");
                 perror(argv[2]);
                 exit(2);
         }
 =======
+=======
+>>>>>>> v3.18
 	if (infile == NULL) {
 		fprintf(stderr, "docproc: ");
 		perror(argv[2]);
 		exit(2);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (strcmp("doc", argv[1]) == 0) {

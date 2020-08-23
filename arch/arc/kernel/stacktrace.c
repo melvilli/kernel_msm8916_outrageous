@@ -80,7 +80,11 @@ static void seed_unwind_frame_info(struct task_struct *tsk,
 		 */
 		frame_info->regs.r27 = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		frame_info->regs.r28 += 64;
+=======
+		frame_info->regs.r28 += 60;
+>>>>>>> v3.18
 =======
 		frame_info->regs.r28 += 60;
 >>>>>>> v3.18
@@ -136,7 +140,11 @@ arc_unwind_core(struct task_struct *tsk, struct pt_regs *regs,
 	 * way around
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_warn_once("CONFIG_ARC_DW2_UNWIND needs to be enabled\n");
+=======
+	pr_warn("CONFIG_ARC_DW2_UNWIND needs to be enabled\n");
+>>>>>>> v3.18
 =======
 	pr_warn("CONFIG_ARC_DW2_UNWIND needs to be enabled\n");
 >>>>>>> v3.18
@@ -246,6 +254,10 @@ unsigned int get_wchan(struct task_struct *tsk)
 void save_stack_trace_tsk(struct task_struct *tsk, struct stack_trace *trace)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Assumes @tsk is sleeping so unwinds from __switch_to */
+>>>>>>> v3.18
 =======
 	/* Assumes @tsk is sleeping so unwinds from __switch_to */
 >>>>>>> v3.18
@@ -255,12 +267,18 @@ void save_stack_trace_tsk(struct task_struct *tsk, struct stack_trace *trace)
 void save_stack_trace(struct stack_trace *trace)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arc_unwind_core(current, NULL, __collect_all, trace);
 }
 =======
+=======
+>>>>>>> v3.18
 	/* Pass NULL for task so it unwinds the current call frame */
 	arc_unwind_core(NULL, NULL, __collect_all, trace);
 }
 EXPORT_SYMBOL_GPL(save_stack_trace);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

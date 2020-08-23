@@ -52,7 +52,11 @@ static u8 CISCO_BROADCOM[3] = {0x00, 0x17, 0x94};
  *  notice:  These value need be modified if any changes.
  * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTUpdateDefaultSetting(struct ieee80211_device* ieee)
+=======
+void HTUpdateDefaultSetting(struct ieee80211_device *ieee)
+>>>>>>> v3.18
 =======
 void HTUpdateDefaultSetting(struct ieee80211_device *ieee)
 >>>>>>> v3.18
@@ -126,7 +130,11 @@ void HTUpdateDefaultSetting(struct ieee80211_device *ieee)
  *  notice:  Driver should not print out this message by default.
  * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTDebugHTCapability(u8* CapIE, u8* TitleString )
+=======
+void HTDebugHTCapability(u8 *CapIE, u8 *TitleString )
+>>>>>>> v3.18
 =======
 void HTDebugHTCapability(u8 *CapIE, u8 *TitleString )
 >>>>>>> v3.18
@@ -139,7 +147,11 @@ void HTDebugHTCapability(u8 *CapIE, u8 *TitleString )
 	{
 		//EWC IE
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_HT, "EWC IE in %s()\n", __FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_HT, "EWC IE in %s()\n", __func__);
+>>>>>>> v3.18
 =======
 		IEEE80211_DEBUG(IEEE80211_DL_HT, "EWC IE in %s()\n", __func__);
 >>>>>>> v3.18
@@ -171,7 +183,11 @@ void HTDebugHTCapability(u8 *CapIE, u8 *TitleString )
  *  notice:  Driver should not print out this message by default.
  * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTDebugHTInfo(u8*	InfoIE, u8* TitleString)
+=======
+void HTDebugHTInfo(u8 *InfoIE, u8 *TitleString)
+>>>>>>> v3.18
 =======
 void HTDebugHTInfo(u8 *InfoIE, u8 *TitleString)
 >>>>>>> v3.18
@@ -184,7 +200,11 @@ void HTDebugHTInfo(u8 *InfoIE, u8 *TitleString)
 	{
 		// Not EWC IE
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_HT, "EWC IE in %s()\n", __FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_HT, "EWC IE in %s()\n", __func__);
+>>>>>>> v3.18
 =======
 		IEEE80211_DEBUG(IEEE80211_DL_HT, "EWC IE in %s()\n", __func__);
 >>>>>>> v3.18
@@ -198,7 +218,11 @@ void HTDebugHTInfo(u8 *InfoIE, u8 *TitleString)
 	IEEE80211_DEBUG(IEEE80211_DL_HT, "\tPrimary channel = %d\n", pHTInfoEle->ControlChl);
 	IEEE80211_DEBUG(IEEE80211_DL_HT, "\tSenondary channel =");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(pHTInfoEle->ExtChlOffset)
+=======
+	switch (pHTInfoEle->ExtChlOffset)
+>>>>>>> v3.18
 =======
 	switch (pHTInfoEle->ExtChlOffset)
 >>>>>>> v3.18
@@ -220,7 +244,11 @@ void HTDebugHTInfo(u8 *InfoIE, u8 *TitleString)
 
 	IEEE80211_DEBUG(IEEE80211_DL_HT, "\tOperation mode for protection = ");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(pHTInfoEle->OptMode)
+=======
+	switch (pHTInfoEle->OptMode)
+>>>>>>> v3.18
 =======
 	switch (pHTInfoEle->OptMode)
 >>>>>>> v3.18
@@ -248,7 +276,11 @@ void HTDebugHTInfo(u8 *InfoIE, u8 *TitleString)
 *	Return:		true if station in half n mode and AP supports 40 bw
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool IsHTHalfNmode40Bandwidth(struct ieee80211_device* ieee)
+=======
+static bool IsHTHalfNmode40Bandwidth(struct ieee80211_device *ieee)
+>>>>>>> v3.18
 =======
 static bool IsHTHalfNmode40Bandwidth(struct ieee80211_device *ieee)
 >>>>>>> v3.18
@@ -271,7 +303,11 @@ static bool IsHTHalfNmode40Bandwidth(struct ieee80211_device *ieee)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool IsHTHalfNmodeSGI(struct ieee80211_device* ieee, bool is40MHz)
+=======
+static bool IsHTHalfNmodeSGI(struct ieee80211_device *ieee, bool is40MHz)
+>>>>>>> v3.18
 =======
 static bool IsHTHalfNmodeSGI(struct ieee80211_device *ieee, bool is40MHz)
 >>>>>>> v3.18
@@ -302,7 +338,11 @@ static bool IsHTHalfNmodeSGI(struct ieee80211_device *ieee, bool is40MHz)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 HTHalfMcsToDataRate(struct ieee80211_device* ieee,	u8	nMcsRate)
+=======
+u16 HTHalfMcsToDataRate(struct ieee80211_device *ieee,	u8	nMcsRate)
+>>>>>>> v3.18
 =======
 u16 HTHalfMcsToDataRate(struct ieee80211_device *ieee,	u8	nMcsRate)
 >>>>>>> v3.18
@@ -319,7 +359,11 @@ u16 HTHalfMcsToDataRate(struct ieee80211_device *ieee,	u8	nMcsRate)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 HTMcsToDataRate( struct ieee80211_device* ieee, u8 nMcsRate)
+=======
+u16 HTMcsToDataRate(struct ieee80211_device *ieee, u8 nMcsRate)
+>>>>>>> v3.18
 =======
 u16 HTMcsToDataRate(struct ieee80211_device *ieee, u8 nMcsRate)
 >>>>>>> v3.18
@@ -342,7 +386,11 @@ u16 HTMcsToDataRate(struct ieee80211_device *ieee, u8 nMcsRate)
  *  notice:  quite unsure about how to use this function //wb
  * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16  TxCountToDataRate( struct ieee80211_device* ieee, u8 nDataRate)
+=======
+u16  TxCountToDataRate(struct ieee80211_device *ieee, u8 nDataRate)
+>>>>>>> v3.18
 =======
 u16  TxCountToDataRate(struct ieee80211_device *ieee, u8 nDataRate)
 >>>>>>> v3.18
@@ -393,15 +441,21 @@ u16  TxCountToDataRate(struct ieee80211_device *ieee, u8 nDataRate)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool IsHTHalfNmodeAPs(struct ieee80211_device* ieee)
 {
 	bool			retValue = false;
 	struct ieee80211_network* net = &ieee->current_network;
 =======
+=======
+>>>>>>> v3.18
 bool IsHTHalfNmodeAPs(struct ieee80211_device *ieee)
 {
 	bool			retValue = false;
 	struct ieee80211_network *net = &ieee->current_network;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if((memcmp(net->bssid, BELKINF5D8233V1_RALINK, 3)==0) ||
 		     (memcmp(net->bssid, BELKINF5D82334V3_RALINK, 3)==0) ||
@@ -432,15 +486,21 @@ bool IsHTHalfNmodeAPs(struct ieee80211_device *ieee)
  *  notice:
  * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTIOTPeerDetermine(struct ieee80211_device* ieee)
 {
 	PRT_HIGH_THROUGHPUT	pHTInfo = ieee->pHTInfo;
 	struct ieee80211_network* net = &ieee->current_network;
 =======
+=======
+>>>>>>> v3.18
 static void HTIOTPeerDetermine(struct ieee80211_device *ieee)
 {
 	PRT_HIGH_THROUGHPUT	pHTInfo = ieee->pHTInfo;
 	struct ieee80211_network *net = &ieee->current_network;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if(net->bssht.bdRT2RTAggregation)
 		pHTInfo->IOTPeer = HT_IOT_PEER_REALTEK;
@@ -476,10 +536,16 @@ static void HTIOTPeerDetermine(struct ieee80211_device *ieee)
  *  return:  return 1 if driver should declare MCS13 only(otherwise return 0)
   * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 HTIOTActIsDisableMCS14(struct ieee80211_device* ieee, u8* PeerMacAddr)
 {
 	u8 ret = 0;
 	return ret;
+=======
+static u8 HTIOTActIsDisableMCS14(struct ieee80211_device *ieee, u8 *PeerMacAddr)
+{
+	return 0;
+>>>>>>> v3.18
 =======
 static u8 HTIOTActIsDisableMCS14(struct ieee80211_device *ieee, u8 *PeerMacAddr)
 {
@@ -501,7 +567,11 @@ static u8 HTIOTActIsDisableMCS14(struct ieee80211_device *ieee, u8 *PeerMacAddr)
 * 2008.04.15	Emily
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool HTIOTActIsDisableMCS15(struct ieee80211_device* ieee)
+=======
+static bool HTIOTActIsDisableMCS15(struct ieee80211_device *ieee)
+>>>>>>> v3.18
 =======
 static bool HTIOTActIsDisableMCS15(struct ieee80211_device *ieee)
 >>>>>>> v3.18
@@ -542,7 +612,12 @@ static bool HTIOTActIsDisableMCS15(struct ieee80211_device *ieee)
 * 2008.04.21	Emily
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool HTIOTActIsDisableMCSTwoSpatialStream(struct ieee80211_device* ieee, u8 *PeerMacAddr)
+=======
+static bool HTIOTActIsDisableMCSTwoSpatialStream(struct ieee80211_device *ieee,
+						 u8 *PeerMacAddr)
+>>>>>>> v3.18
 =======
 static bool HTIOTActIsDisableMCSTwoSpatialStream(struct ieee80211_device *ieee,
 						 u8 *PeerMacAddr)
@@ -564,7 +639,12 @@ static bool HTIOTActIsDisableMCSTwoSpatialStream(struct ieee80211_device *ieee,
  *  return:  return 1 if driver should disable EDCA turbo mode(otherwise return 0)
   * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 HTIOTActIsDisableEDCATurbo(struct ieee80211_device*	ieee, u8* PeerMacAddr)
+=======
+static u8 HTIOTActIsDisableEDCATurbo(struct ieee80211_device *ieee,
+				     u8 *PeerMacAddr)
+>>>>>>> v3.18
 =======
 static u8 HTIOTActIsDisableEDCATurbo(struct ieee80211_device *ieee,
 				     u8 *PeerMacAddr)
@@ -583,7 +663,11 @@ static u8 HTIOTActIsDisableEDCATurbo(struct ieee80211_device *ieee,
  *  return:  return 1 if true
   * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 HTIOTActIsMgntUseCCK6M(struct ieee80211_network *network)
+=======
+static u8 HTIOTActIsMgntUseCCK6M(struct ieee80211_network *network)
+>>>>>>> v3.18
 =======
 static u8 HTIOTActIsMgntUseCCK6M(struct ieee80211_network *network)
 >>>>>>> v3.18
@@ -602,7 +686,11 @@ static u8 HTIOTActIsMgntUseCCK6M(struct ieee80211_network *network)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 HTIOTActIsCCDFsync(u8* PeerMacAddr)
+=======
+static u8 HTIOTActIsCCDFsync(u8 *PeerMacAddr)
+>>>>>>> v3.18
 =======
 static u8 HTIOTActIsCCDFsync(u8 *PeerMacAddr)
 >>>>>>> v3.18
@@ -638,7 +726,11 @@ void HTResetIOTSetting(
  *  notice:  posHTCap can't be null and should be initialized before.
   * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTConstructCapabilityElement(struct ieee80211_device* ieee, u8* posHTCap, u8* len, u8 IsEncrypt)
+=======
+void HTConstructCapabilityElement(struct ieee80211_device *ieee, u8 *posHTCap, u8 *len, u8 IsEncrypt)
+>>>>>>> v3.18
 =======
 void HTConstructCapabilityElement(struct ieee80211_device *ieee, u8 *posHTCap, u8 *len, u8 IsEncrypt)
 >>>>>>> v3.18
@@ -761,7 +853,11 @@ void HTConstructCapabilityElement(struct ieee80211_device *ieee, u8 *posHTCap, u
  *  notice:  posHTCap can't be null and be initialized before. only AP and IBSS sta should do this
   * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTConstructInfoElement(struct ieee80211_device* ieee, u8* posHTInfo, u8* len, u8 IsEncrypt)
+=======
+void HTConstructInfoElement(struct ieee80211_device *ieee, u8 *posHTInfo, u8 *len, u8 IsEncrypt)
+>>>>>>> v3.18
 =======
 void HTConstructInfoElement(struct ieee80211_device *ieee, u8 *posHTInfo, u8 *len, u8 IsEncrypt)
 >>>>>>> v3.18
@@ -837,7 +933,11 @@ void HTConstructInfoElement(struct ieee80211_device *ieee, u8 *posHTInfo, u8 *le
  *  notice:
   * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTConstructRT2RTAggElement(struct ieee80211_device* ieee, u8* posRT2RTAgg, u8* len)
+=======
+void HTConstructRT2RTAggElement(struct ieee80211_device *ieee, u8 *posRT2RTAgg, u8 *len)
+>>>>>>> v3.18
 =======
 void HTConstructRT2RTAggElement(struct ieee80211_device *ieee, u8 *posRT2RTAgg, u8 *len)
 >>>>>>> v3.18
@@ -895,7 +995,11 @@ void HTConstructRT2RTAggElement(struct ieee80211_device *ieee, u8 *posRT2RTAgg, 
  *  notice:
   * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 HT_PickMCSRate(struct ieee80211_device* ieee, u8* pOperateMCS)
+=======
+static u8 HT_PickMCSRate(struct ieee80211_device *ieee, u8 *pOperateMCS)
+>>>>>>> v3.18
 =======
 static u8 HT_PickMCSRate(struct ieee80211_device *ieee, u8 *pOperateMCS)
 >>>>>>> v3.18
@@ -908,7 +1012,11 @@ static u8 HT_PickMCSRate(struct ieee80211_device *ieee, u8 *pOperateMCS)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(ieee->mode)
+=======
+	switch (ieee->mode)
+>>>>>>> v3.18
 =======
 	switch (ieee->mode)
 >>>>>>> v3.18
@@ -966,7 +1074,11 @@ static u8 HT_PickMCSRate(struct ieee80211_device *ieee, u8 *pOperateMCS)
  *  notice:
   * *****************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 HTGetHighestMCSRate(struct ieee80211_device* ieee, u8* pMCSRateSet, u8* pMCSFilter)
+=======
+u8 HTGetHighestMCSRate(struct ieee80211_device *ieee, u8 *pMCSRateSet, u8 *pMCSFilter)
+>>>>>>> v3.18
 =======
 u8 HTGetHighestMCSRate(struct ieee80211_device *ieee, u8 *pMCSRateSet, u8 *pMCSFilter)
 >>>>>>> v3.18
@@ -1022,7 +1134,12 @@ u8 HTGetHighestMCSRate(struct ieee80211_device *ieee, u8 *pMCSRateSet, u8 *pMCSF
 ** \pHTSupportedCap: the connected STA's supported rate Capability element
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 HTFilterMCSRate( struct ieee80211_device* ieee, u8* pSupportMCS, u8* pOperateMCS)
+=======
+static u8 HTFilterMCSRate(struct ieee80211_device *ieee, u8 *pSupportMCS,
+			  u8 *pOperateMCS)
+>>>>>>> v3.18
 =======
 static u8 HTFilterMCSRate(struct ieee80211_device *ieee, u8 *pSupportMCS,
 			  u8 *pOperateMCS)
@@ -1057,7 +1174,11 @@ static u8 HTFilterMCSRate(struct ieee80211_device *ieee, u8 *pSupportMCS,
 	return true;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTSetConnectBwMode(struct ieee80211_device* ieee, HT_CHANNEL_WIDTH	Bandwidth, HT_EXTCHNL_OFFSET	Offset);
+=======
+void HTSetConnectBwMode(struct ieee80211_device *ieee, HT_CHANNEL_WIDTH	Bandwidth, HT_EXTCHNL_OFFSET	Offset);
+>>>>>>> v3.18
 =======
 void HTSetConnectBwMode(struct ieee80211_device *ieee, HT_CHANNEL_WIDTH	Bandwidth, HT_EXTCHNL_OFFSET	Offset);
 >>>>>>> v3.18
@@ -1068,7 +1189,11 @@ void HTOnAssocRsp(struct ieee80211_device *ieee)
 	PHT_INFORMATION_ELE		pPeerHTInfo = NULL;
 	u16	nMaxAMSDUSize = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8*	pMcsFilter = NULL;
+=======
+	u8	*pMcsFilter = NULL;
+>>>>>>> v3.18
 =======
 	u8	*pMcsFilter = NULL;
 >>>>>>> v3.18
@@ -1243,7 +1368,11 @@ void HTOnAssocRsp(struct ieee80211_device *ieee)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTSetConnectBwModeCallback(struct ieee80211_device* ieee);
+=======
+void HTSetConnectBwModeCallback(struct ieee80211_device *ieee);
+>>>>>>> v3.18
 =======
 void HTSetConnectBwModeCallback(struct ieee80211_device *ieee);
 >>>>>>> v3.18
@@ -1256,7 +1385,11 @@ void HTSetConnectBwModeCallback(struct ieee80211_device *ieee);
 ********************************************************************************************************************/
 // TODO: Should this funciton be called when receiving of Disassociation?
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTInitializeHTInfo(struct ieee80211_device* ieee)
+=======
+void HTInitializeHTInfo(struct ieee80211_device *ieee)
+>>>>>>> v3.18
 =======
 void HTInitializeHTInfo(struct ieee80211_device *ieee)
 >>>>>>> v3.18
@@ -1267,7 +1400,11 @@ void HTInitializeHTInfo(struct ieee80211_device *ieee)
 	// These parameters will be reset when receiving deauthentication packet
 	//
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IEEE80211_DEBUG(IEEE80211_DL_HT, "===========>%s()\n", __FUNCTION__);
+=======
+	IEEE80211_DEBUG(IEEE80211_DL_HT, "===========>%s()\n", __func__);
+>>>>>>> v3.18
 =======
 	IEEE80211_DEBUG(IEEE80211_DL_HT, "===========>%s()\n", __func__);
 >>>>>>> v3.18
@@ -1300,15 +1437,21 @@ void HTInitializeHTInfo(struct ieee80211_device *ieee)
 
 	// Initialize all of the parameters related to 11n
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset((void*)(&(pHTInfo->SelfHTCap)), 0, sizeof(pHTInfo->SelfHTCap));
 	memset((void*)(&(pHTInfo->SelfHTInfo)), 0, sizeof(pHTInfo->SelfHTInfo));
 	memset((void*)(&(pHTInfo->PeerHTCapBuf)), 0, sizeof(pHTInfo->PeerHTCapBuf));
 	memset((void*)(&(pHTInfo->PeerHTInfoBuf)), 0, sizeof(pHTInfo->PeerHTInfoBuf));
 =======
+=======
+>>>>>>> v3.18
 	memset((void *)(&(pHTInfo->SelfHTCap)), 0, sizeof(pHTInfo->SelfHTCap));
 	memset((void *)(&(pHTInfo->SelfHTInfo)), 0, sizeof(pHTInfo->SelfHTInfo));
 	memset((void *)(&(pHTInfo->PeerHTCapBuf)), 0, sizeof(pHTInfo->PeerHTCapBuf));
 	memset((void *)(&(pHTInfo->PeerHTInfoBuf)), 0, sizeof(pHTInfo->PeerHTInfoBuf));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pHTInfo->bSwBwInProgress = false;
@@ -1326,7 +1469,11 @@ void HTInitializeHTInfo(struct ieee80211_device *ieee)
 	//MCS rate initialized here
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8* RegHTSuppRateSets = &(ieee->RegHTSuppRateSet[0]);
+=======
+		u8 *RegHTSuppRateSets = &(ieee->RegHTSuppRateSet[0]);
+>>>>>>> v3.18
 =======
 		u8 *RegHTSuppRateSets = &(ieee->RegHTSuppRateSet[0]);
 >>>>>>> v3.18
@@ -1365,7 +1512,11 @@ void HTInitializeBssDesc(PBSS_HT pBssHT)
  *  notice: This function should ONLY be called before association
 ********************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTResetSelfAndSavePeerSetting(struct ieee80211_device* ieee,	struct ieee80211_network * pNetwork)
+=======
+void HTResetSelfAndSavePeerSetting(struct ieee80211_device *ieee,	struct ieee80211_network *pNetwork)
+>>>>>>> v3.18
 =======
 void HTResetSelfAndSavePeerSetting(struct ieee80211_device *ieee,	struct ieee80211_network *pNetwork)
 >>>>>>> v3.18
@@ -1381,7 +1532,11 @@ void HTResetSelfAndSavePeerSetting(struct ieee80211_device *ieee,	struct ieee802
 	//  Save Peer Setting before Association
 	//
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IEEE80211_DEBUG(IEEE80211_DL_HT, "==============>%s()\n", __FUNCTION__);
+=======
+	IEEE80211_DEBUG(IEEE80211_DL_HT, "==============>%s()\n", __func__);
+>>>>>>> v3.18
 =======
 	IEEE80211_DEBUG(IEEE80211_DL_HT, "==============>%s()\n", __func__);
 >>>>>>> v3.18
@@ -1456,7 +1611,11 @@ void HTResetSelfAndSavePeerSetting(struct ieee80211_device *ieee,	struct ieee802
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTUpdateSelfAndPeerSetting(struct ieee80211_device* ieee,	struct ieee80211_network * pNetwork)
+=======
+void HTUpdateSelfAndPeerSetting(struct ieee80211_device *ieee,	struct ieee80211_network *pNetwork)
+>>>>>>> v3.18
 =======
 void HTUpdateSelfAndPeerSetting(struct ieee80211_device *ieee,	struct ieee80211_network *pNetwork)
 >>>>>>> v3.18
@@ -1478,6 +1637,7 @@ void HTUpdateSelfAndPeerSetting(struct ieee80211_device *ieee,	struct ieee80211_
 		//
 	}
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void HTUseDefaultSetting(struct ieee80211_device* ieee)
@@ -1529,6 +1689,10 @@ void HTUseDefaultSetting(struct ieee80211_device* ieee)
 EXPORT_SYMBOL(HTUpdateSelfAndPeerSetting);
 
 >>>>>>> v3.18
+=======
+EXPORT_SYMBOL(HTUpdateSelfAndPeerSetting);
+
+>>>>>>> v3.18
 /********************************************************************************************************************
  *function:  check whether HT control field exists
  *   input:  struct ieee80211_device	*ieee
@@ -1538,7 +1702,11 @@ EXPORT_SYMBOL(HTUpdateSelfAndPeerSetting);
  *  notice:
 ********************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 HTCCheck(struct ieee80211_device* ieee, u8*	pFrame)
+=======
+u8 HTCCheck(struct ieee80211_device *ieee, u8 *pFrame)
+>>>>>>> v3.18
 =======
 u8 HTCCheck(struct ieee80211_device *ieee, u8 *pFrame)
 >>>>>>> v3.18
@@ -1558,7 +1726,11 @@ u8 HTCCheck(struct ieee80211_device *ieee, u8 *pFrame)
 // This function set bandwidth mode in protocol layer.
 //
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTSetConnectBwMode(struct ieee80211_device* ieee, HT_CHANNEL_WIDTH	Bandwidth, HT_EXTCHNL_OFFSET	Offset)
+=======
+void HTSetConnectBwMode(struct ieee80211_device *ieee, HT_CHANNEL_WIDTH	Bandwidth, HT_EXTCHNL_OFFSET	Offset)
+>>>>>>> v3.18
 =======
 void HTSetConnectBwMode(struct ieee80211_device *ieee, HT_CHANNEL_WIDTH	Bandwidth, HT_EXTCHNL_OFFSET	Offset)
 >>>>>>> v3.18
@@ -1611,17 +1783,23 @@ void HTSetConnectBwMode(struct ieee80211_device *ieee, HT_CHANNEL_WIDTH	Bandwidt
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HTSetConnectBwModeCallback(struct ieee80211_device* ieee)
 {
 	PRT_HIGH_THROUGHPUT pHTInfo = ieee->pHTInfo;
 
 	IEEE80211_DEBUG(IEEE80211_DL_HT, "======>%s()\n", __FUNCTION__);
 =======
+=======
+>>>>>>> v3.18
 void HTSetConnectBwModeCallback(struct ieee80211_device *ieee)
 {
 	PRT_HIGH_THROUGHPUT pHTInfo = ieee->pHTInfo;
 
 	IEEE80211_DEBUG(IEEE80211_DL_HT, "======>%s()\n", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if(pHTInfo->bCurBW40MHz)
@@ -1642,7 +1820,10 @@ void HTSetConnectBwModeCallback(struct ieee80211_device *ieee)
 	pHTInfo->bSwBwInProgress = false;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(HTUpdateSelfAndPeerSetting);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

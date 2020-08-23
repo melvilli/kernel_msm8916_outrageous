@@ -17,9 +17,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the
  * Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -34,7 +38,10 @@
 #include "nfc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct nfc_sock_list raw_sk_list = {
 	.lock = __RW_LOCK_UNLOCKED(raw_sk_list.lock)
 };
@@ -53,6 +60,9 @@ static void nfc_sock_unlink(struct nfc_sock_list *l, struct sock *sk)
 	write_unlock(&l->lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void rawsock_write_queue_purge(struct sock *sk)
 {
@@ -85,6 +95,12 @@ static int rawsock_release(struct socket *sock)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (sock->type == SOCK_RAW)
+		nfc_sock_unlink(&raw_sk_list, sk);
+
+>>>>>>> v3.18
 =======
 	if (sock->type == SOCK_RAW)
 		nfc_sock_unlink(&raw_sk_list, sk);
@@ -174,17 +190,23 @@ static void rawsock_data_exchange_complete(void *context, struct sk_buff *skb,
 	err = rawsock_add_header(skb);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error;
 
 	err = sock_queue_rcv_skb(sk, skb);
 	if (err)
 		goto error;
 =======
+=======
+>>>>>>> v3.18
 		goto error_skb;
 
 	err = sock_queue_rcv_skb(sk, skb);
 	if (err)
 		goto error_skb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_bh(&sk->sk_write_queue.lock);
@@ -198,6 +220,12 @@ static void rawsock_data_exchange_complete(void *context, struct sk_buff *skb,
 	return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+error_skb:
+	kfree_skb(skb);
+
+>>>>>>> v3.18
 =======
 error_skb:
 	kfree_skb(skb);
@@ -320,7 +348,10 @@ static const struct proto_ops rawsock_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct proto_ops rawsock_raw_ops = {
 	.family         = PF_NFC,
 	.owner          = THIS_MODULE,
@@ -341,6 +372,9 @@ static const struct proto_ops rawsock_raw_ops = {
 	.mmap           = sock_no_mmap,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void rawsock_destruct(struct sock *sk)
 {
@@ -368,11 +402,14 @@ static int rawsock_create(struct net *net, struct socket *sock,
 	pr_debug("sock=%p\n", sock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sock->type != SOCK_SEQPACKET)
 		return -ESOCKTNOSUPPORT;
 
 	sock->ops = &rawsock_ops;
 =======
+=======
+>>>>>>> v3.18
 	if ((sock->type != SOCK_SEQPACKET) && (sock->type != SOCK_RAW))
 		return -ESOCKTNOSUPPORT;
 
@@ -380,6 +417,9 @@ static int rawsock_create(struct net *net, struct socket *sock,
 		sock->ops = &rawsock_raw_ops;
 	else
 		sock->ops = &rawsock_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sk = sk_alloc(net, PF_NFC, GFP_ATOMIC, nfc_proto->proto);
@@ -391,23 +431,32 @@ static int rawsock_create(struct net *net, struct socket *sock,
 	sk->sk_destruct = rawsock_destruct;
 	sock->state = SS_UNCONNECTED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	INIT_WORK(&nfc_rawsock(sk)->tx_work, rawsock_tx_work);
 	nfc_rawsock(sk)->tx_work_scheduled = false;
 =======
+=======
+>>>>>>> v3.18
 	if (sock->type == SOCK_RAW)
 		nfc_sock_link(&raw_sk_list, sk);
 	else {
 		INIT_WORK(&nfc_rawsock(sk)->tx_work, rawsock_tx_work);
 		nfc_rawsock(sk)->tx_work_scheduled = false;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void nfc_send_to_raw_sock(struct nfc_dev *dev, struct sk_buff *skb,
 			  u8 payload_type, u8 direction)
 {
@@ -445,6 +494,9 @@ void nfc_send_to_raw_sock(struct nfc_dev *dev, struct sk_buff *skb,
 }
 EXPORT_SYMBOL(nfc_send_to_raw_sock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct proto rawsock_proto = {
 	.name     = "NFC_RAW",

@@ -36,6 +36,7 @@ struct nf_nat_l3proto {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int nf_nat_l3proto_register(const struct nf_nat_l3proto *);
 extern void nf_nat_l3proto_unregister(const struct nf_nat_l3proto *);
 extern const struct nf_nat_l3proto *__nf_nat_l3proto_find(u8 l3proto);
@@ -50,6 +51,8 @@ extern int nf_nat_icmpv6_reply_translation(struct sk_buff *skb,
 					   unsigned int hooknum,
 					   unsigned int hdrlen);
 =======
+=======
+>>>>>>> v3.18
 int nf_nat_l3proto_register(const struct nf_nat_l3proto *);
 void nf_nat_l3proto_unregister(const struct nf_nat_l3proto *);
 const struct nf_nat_l3proto *__nf_nat_l3proto_find(u8 l3proto);
@@ -135,6 +138,9 @@ unsigned int nf_nat_ipv6_fn(const struct nf_hook_ops *ops, struct sk_buff *skb,
 						     const struct net_device *in,
 						     const struct net_device *out,
 						     struct nf_conn *ct));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _NF_NAT_L3PROTO_H */

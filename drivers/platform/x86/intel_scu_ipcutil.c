@@ -50,7 +50,11 @@ struct scu_ipc_data {
 static int scu_reg_access(u32 cmd, struct scu_ipc_data  *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int count = data->count;
+=======
+	int count = data->count;
+>>>>>>> v3.18
 =======
 	int count = data->count;
 >>>>>>> v3.18

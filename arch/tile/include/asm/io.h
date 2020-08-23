@@ -20,7 +20,12 @@
 #include <asm/page.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IO_SPACE_LIMIT 0xfffffffful
+=======
+/* Maximum PCI I/O space address supported. */
+#define IO_SPACE_LIMIT 0xffffffff
+>>>>>>> v3.18
 =======
 /* Maximum PCI I/O space address supported. */
 #define IO_SPACE_LIMIT 0xffffffff
@@ -260,7 +265,11 @@ static inline void writeq(u64 val, unsigned long addr)
 static inline void memset_io(volatile void *dst, int val, size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int x;
+=======
+	size_t x;
+>>>>>>> v3.18
 =======
 	size_t x;
 >>>>>>> v3.18
@@ -274,7 +283,11 @@ static inline void memcpy_fromio(void *dst, const volatile void __iomem *src,
 				 size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int x;
+=======
+	size_t x;
+>>>>>>> v3.18
 =======
 	size_t x;
 >>>>>>> v3.18
@@ -287,7 +300,11 @@ static inline void memcpy_toio(volatile void __iomem *dst, const void *src,
 				size_t len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int x;
+=======
+	size_t x;
+>>>>>>> v3.18
 =======
 	size_t x;
 >>>>>>> v3.18
@@ -299,9 +316,12 @@ static inline void memcpy_toio(volatile void __iomem *dst, const void *src,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * The Tile architecture does not support IOPORT, even with PCI.
 =======
+=======
+>>>>>>> v3.18
 #if CHIP_HAS_MMIO() && defined(CONFIG_TILE_PCI_IO)
 
 static inline u8 inb(unsigned long addr)
@@ -404,6 +424,9 @@ extern void ioport_unmap(void __iomem *addr);
 
 /*
  * The TilePro architecture does not support IOPORT, even with PCI.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Unfortunately we can't yet simply not declare these methods,
  * since some generic code that compiles into the kernel, but
@@ -413,14 +436,20 @@ extern void ioport_unmap(void __iomem *addr);
 static inline long ioport_panic(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	panic("inb/outb and friends do not exist on tile");
 =======
+=======
+>>>>>>> v3.18
 #ifdef __tilegx__
 	panic("PCI IO space support is disabled. Configure the kernel with"
 	      " CONFIG_TILE_PCI_IO to enable it");
 #else
 	panic("inb/outb and friends do not exist on tile");
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -467,6 +496,7 @@ static inline void outl(u32 b, unsigned long addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define inb_p(addr)	inb(addr)
 #define inw_p(addr)	inw(addr)
 #define inl_p(addr)	inl(addr)
@@ -474,6 +504,8 @@ static inline void outl(u32 b, unsigned long addr)
 #define outw_p(x, addr)	outw((x), (addr))
 #define outl_p(x, addr)	outl((x), (addr))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void insb(unsigned long addr, void *buffer, int count)
@@ -507,7 +539,10 @@ static inline void outsl(unsigned long addr, const void *buffer, int count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #endif /* CHIP_HAS_MMIO() && defined(CONFIG_TILE_PCI_IO) */
 
 #define inb_p(addr)	inb(addr)
@@ -517,6 +552,9 @@ static inline void outsl(unsigned long addr, const void *buffer, int count)
 #define outw_p(x, addr)	outw((x), (addr))
 #define outl_p(x, addr)	outl((x), (addr))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ioread16be(addr)	be16_to_cpu(ioread16(addr))
 #define ioread32be(addr)	be32_to_cpu(ioread32(addr))

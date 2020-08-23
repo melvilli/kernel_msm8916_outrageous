@@ -57,6 +57,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -151,6 +156,7 @@ static const struct address_space_operations romfs_aops = {
  * read the entries from a directory
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int romfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode *i = file_inode(filp);
@@ -159,12 +165,17 @@ static int romfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 	int j, ino, nextfh;
 	int stored = 0;
 =======
+=======
+>>>>>>> v3.18
 static int romfs_readdir(struct file *file, struct dir_context *ctx)
 {
 	struct inode *i = file_inode(file);
 	struct romfs_inode ri;
 	unsigned long offset, maxoff;
 	int j, ino, nextfh;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char fsname[ROMFS_MAXFN];	/* XXX dynamic? */
 	int ret;
@@ -172,7 +183,11 @@ static int romfs_readdir(struct file *file, struct dir_context *ctx)
 	maxoff = romfs_maxsize(i->i_sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	offset = filp->f_pos;
+=======
+	offset = ctx->pos;
+>>>>>>> v3.18
 =======
 	offset = ctx->pos;
 >>>>>>> v3.18
@@ -189,15 +204,21 @@ static int romfs_readdir(struct file *file, struct dir_context *ctx)
 		if (!offset || offset >= maxoff) {
 			offset = maxoff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos = offset;
 			goto out;
 		}
 		filp->f_pos = offset;
 =======
+=======
+>>>>>>> v3.18
 			ctx->pos = offset;
 			goto out;
 		}
 		ctx->pos = offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Fetch inode info */
@@ -220,6 +241,7 @@ static int romfs_readdir(struct file *file, struct dir_context *ctx)
 		if ((nextfh & ROMFH_TYPE) == ROMFH_HRD)
 			ino = be32_to_cpu(ri.spec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (filldir(dirent, fsname, j, offset, ino,
 			    romfs_dtype_table[nextfh & ROMFH_TYPE]) < 0)
 			goto out;
@@ -231,6 +253,8 @@ static int romfs_readdir(struct file *file, struct dir_context *ctx)
 out:
 	return stored;
 =======
+=======
+>>>>>>> v3.18
 		if (!dir_emit(ctx, fsname, j, ino,
 			    romfs_dtype_table[nextfh & ROMFH_TYPE]))
 			goto out;
@@ -239,6 +263,9 @@ out:
 	}
 out:
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -318,7 +345,11 @@ error:
 static const struct file_operations romfs_dir_operations = {
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= romfs_readdir,
+=======
+	.iterate	= romfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= romfs_readdir,
 >>>>>>> v3.18
@@ -424,7 +455,11 @@ eio:
 	ret = -EIO;
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "ROMFS: read error for inode 0x%lx\n", pos);
+=======
+	pr_err("read error for inode 0x%lx\n", pos);
+>>>>>>> v3.18
 =======
 	pr_err("read error for inode 0x%lx\n", pos);
 >>>>>>> v3.18
@@ -438,6 +473,10 @@ static struct inode *romfs_alloc_inode(struct super_block *sb)
 {
 	struct romfs_inode_info *inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -452,6 +491,10 @@ static void romfs_i_callback(struct rcu_head *head)
 {
 	struct inode *inode = container_of(head, struct inode, i_rcu);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -488,6 +531,10 @@ static int romfs_statfs(struct dentry *dentry, struct kstatfs *buf)
 static int romfs_remount(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -566,8 +613,12 @@ static int romfs_fill_super(struct super_block *sb, void *data, int silent)
 	    img_size < ROMFH_SIZE) {
 		if (!silent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "VFS:"
 			       " Can't find a romfs filesystem on dev %s.\n",
+=======
+			pr_warn("VFS: Can't find a romfs filesystem on dev %s.\n",
+>>>>>>> v3.18
 =======
 			pr_warn("VFS: Can't find a romfs filesystem on dev %s.\n",
 >>>>>>> v3.18
@@ -577,8 +628,12 @@ static int romfs_fill_super(struct super_block *sb, void *data, int silent)
 
 	if (romfs_checksum(rsb, min_t(size_t, img_size, 512))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "ROMFS: bad initial checksum on dev %s.\n",
 		       sb->s_id);
+=======
+		pr_err("bad initial checksum on dev %s.\n", sb->s_id);
+>>>>>>> v3.18
 =======
 		pr_err("bad initial checksum on dev %s.\n", sb->s_id);
 >>>>>>> v3.18
@@ -590,8 +645,13 @@ static int romfs_fill_super(struct super_block *sb, void *data, int silent)
 	len = strnlen(rsb->name, ROMFS_MAXFN);
 	if (!silent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_NOTICE "ROMFS: Mounting image '%*.*s' through %s\n",
 		       (unsigned) len, (unsigned) len, rsb->name, storage);
+=======
+		pr_notice("Mounting image '%*.*s' through %s\n",
+			  (unsigned) len, (unsigned) len, rsb->name, storage);
+>>>>>>> v3.18
 =======
 		pr_notice("Mounting image '%*.*s' through %s\n",
 			  (unsigned) len, (unsigned) len, rsb->name, storage);
@@ -606,6 +666,7 @@ static int romfs_fill_super(struct super_block *sb, void *data, int silent)
 	root = romfs_iget(sb, pos);
 	if (IS_ERR(root))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error;
 
 	sb->s_root = d_make_root(root);
@@ -617,6 +678,8 @@ static int romfs_fill_super(struct super_block *sb, void *data, int silent)
 error:
 	return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		return PTR_ERR(root);
 
 	sb->s_root = d_make_root(root);
@@ -625,6 +688,9 @@ error:
 
 	return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error_rsb_inval:
 	ret = -EINVAL;
@@ -699,7 +765,11 @@ static int __init init_romfs_fs(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "ROMFS MTD (C) 2007 Red Hat, Inc.\n");
+=======
+	pr_info("ROMFS MTD (C) 2007 Red Hat, Inc.\n");
+>>>>>>> v3.18
 =======
 	pr_info("ROMFS MTD (C) 2007 Red Hat, Inc.\n");
 >>>>>>> v3.18
@@ -712,8 +782,12 @@ static int __init init_romfs_fs(void)
 
 	if (!romfs_inode_cachep) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "ROMFS error: Failed to initialise inode cache\n");
+=======
+		pr_err("Failed to initialise inode cache\n");
+>>>>>>> v3.18
 =======
 		pr_err("Failed to initialise inode cache\n");
 >>>>>>> v3.18
@@ -722,7 +796,11 @@ static int __init init_romfs_fs(void)
 	ret = register_filesystem(&romfs_fs_type);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "ROMFS error: Failed to register filesystem\n");
+=======
+		pr_err("Failed to register filesystem\n");
+>>>>>>> v3.18
 =======
 		pr_err("Failed to register filesystem\n");
 >>>>>>> v3.18

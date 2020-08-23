@@ -67,7 +67,11 @@
 #define EDAC_DEBUG "DEBUG"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const char *edac_mem_types[];
+=======
+extern const char * const edac_mem_types[];
+>>>>>>> v3.18
 =======
 extern const char * const edac_mem_types[];
 >>>>>>> v3.18
@@ -226,11 +230,17 @@ struct edac_device_ctl_info {
 	int log_ue;		/* boolean for logging UEs */
 	int log_ce;		/* boolean for logging CEs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int panic_on_ce;	/* boolean for panic'ing on an CE */
 	int panic_on_ue;	/* boolean for panic'ing on an UE */
 	unsigned poll_msec;	/* number of milliseconds to poll interval */
 	unsigned long delay;	/* number of jiffies for poll_msec */
 	bool defer_work;	/* Create a deferrable work for polling */
+=======
+	int panic_on_ue;	/* boolean for panic'ing on an UE */
+	unsigned poll_msec;	/* number of milliseconds to poll interval */
+	unsigned long delay;	/* number of jiffies for poll_msec */
+>>>>>>> v3.18
 =======
 	int panic_on_ue;	/* boolean for panic'ing on an UE */
 	unsigned poll_msec;	/* number of milliseconds to poll interval */

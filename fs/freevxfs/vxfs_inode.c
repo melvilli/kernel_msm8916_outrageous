@@ -355,7 +355,11 @@ void
 vxfs_evict_inode(struct inode *ip)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&ip->i_data, 0);
+=======
+	truncate_inode_pages_final(&ip->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&ip->i_data);
 >>>>>>> v3.18

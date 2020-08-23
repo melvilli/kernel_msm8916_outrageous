@@ -122,7 +122,10 @@ static int esp_output(struct xfrm_state *x, struct sk_buff *skb)
 	struct scatterlist *sg;
 	struct scatterlist *asg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct sk_buff *trailer;
@@ -143,8 +146,12 @@ static int esp_output(struct xfrm_state *x, struct sk_buff *skb)
 	/* skb is pure payload to encrypt */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	esp = x->data;
 	aead = esp->aead;
+=======
+	aead = x->data;
+>>>>>>> v3.18
 =======
 	aead = x->data;
 >>>>>>> v3.18
@@ -162,8 +169,11 @@ static int esp_output(struct xfrm_state *x, struct sk_buff *skb)
 	blksize = ALIGN(crypto_aead_blocksize(aead), 4);
 	clen = ALIGN(skb->len + 2 + tfclen, blksize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (esp->padlen)
 		clen = ALIGN(clen, esp->padlen);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	plen = clen - skb->len - tfclen;
@@ -291,8 +301,12 @@ static int esp_input_done2(struct sk_buff *skb, int err)
 	const struct iphdr *iph;
 	struct xfrm_state *x = xfrm_input_state(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp = x->data;
 	struct crypto_aead *aead = esp->aead;
+=======
+	struct crypto_aead *aead = x->data;
+>>>>>>> v3.18
 =======
 	struct crypto_aead *aead = x->data;
 >>>>>>> v3.18
@@ -391,8 +405,12 @@ static int esp_input(struct xfrm_state *x, struct sk_buff *skb)
 {
 	struct ip_esp_hdr *esph;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp = x->data;
 	struct crypto_aead *aead = esp->aead;
+=======
+	struct crypto_aead *aead = x->data;
+>>>>>>> v3.18
 =======
 	struct crypto_aead *aead = x->data;
 >>>>>>> v3.18
@@ -478,9 +496,14 @@ out:
 static u32 esp4_get_mtu(struct xfrm_state *x, int mtu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp = x->data;
 	u32 blksize = ALIGN(crypto_aead_blocksize(esp->aead), 4);
 	u32 align = max_t(u32, blksize, esp->padlen);
+=======
+	struct crypto_aead *aead = x->data;
+	u32 blksize = ALIGN(crypto_aead_blocksize(aead), 4);
+>>>>>>> v3.18
 =======
 	struct crypto_aead *aead = x->data;
 	u32 blksize = ALIGN(crypto_aead_blocksize(aead), 4);
@@ -500,17 +523,23 @@ static u32 esp4_get_mtu(struct xfrm_state *x, int mtu)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ((mtu - x->props.header_len - crypto_aead_authsize(esp->aead) -
 		 net_adj) & ~(align - 1)) + (net_adj - 2);
 }
 
 static void esp4_err(struct sk_buff *skb, u32 info)
 =======
+=======
+>>>>>>> v3.18
 	return ((mtu - x->props.header_len - crypto_aead_authsize(aead) -
 		 net_adj) & ~(blksize - 1)) + net_adj - 2;
 }
 
 static int esp4_err(struct sk_buff *skb, u32 info)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct net *net = dev_net(skb->dev);
@@ -522,23 +551,30 @@ static int esp4_err(struct sk_buff *skb, u32 info)
 	case ICMP_DEST_UNREACH:
 		if (icmp_hdr(skb)->code != ICMP_FRAG_NEEDED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return;
 	case ICMP_REDIRECT:
 		break;
 	default:
 		return;
 =======
+=======
+>>>>>>> v3.18
 			return 0;
 	case ICMP_REDIRECT:
 		break;
 	default:
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	x = xfrm_state_lookup(net, skb->mark, (const xfrm_address_t *)&iph->daddr,
 			      esph->spi, IPPROTO_ESP, AF_INET);
 	if (!x)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return;
 
@@ -551,6 +587,8 @@ static int esp4_err(struct sk_buff *skb, u32 info)
 		ipv4_redirect(skb, net, 0, 0, IPPROTO_ESP, 0);
 	xfrm_state_put(x);
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 
 	if (icmp_hdr(skb)->type == ICMP_DEST_UNREACH)
@@ -560,11 +598,15 @@ static int esp4_err(struct sk_buff *skb, u32 info)
 	xfrm_state_put(x);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void esp_destroy(struct xfrm_state *x)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct esp_data *esp = x->data;
 
@@ -574,19 +616,27 @@ static void esp_destroy(struct xfrm_state *x)
 	crypto_free_aead(esp->aead);
 	kfree(esp);
 =======
+=======
+>>>>>>> v3.18
 	struct crypto_aead *aead = x->data;
 
 	if (!aead)
 		return;
 
 	crypto_free_aead(aead);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int esp_init_aead(struct xfrm_state *x)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp = x->data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct crypto_aead *aead;
@@ -598,7 +648,11 @@ static int esp_init_aead(struct xfrm_state *x)
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	esp->aead = aead;
+=======
+	x->data = aead;
+>>>>>>> v3.18
 =======
 	x->data = aead;
 >>>>>>> v3.18
@@ -619,7 +673,10 @@ error:
 static int esp_init_authenc(struct xfrm_state *x)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp = x->data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct crypto_aead *aead;
@@ -657,7 +714,11 @@ static int esp_init_authenc(struct xfrm_state *x)
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	esp->aead = aead;
+=======
+	x->data = aead;
+>>>>>>> v3.18
 =======
 	x->data = aead;
 >>>>>>> v3.18
@@ -716,7 +777,10 @@ error:
 static int esp_init_state(struct xfrm_state *x)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct esp_data *esp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct crypto_aead *aead;
@@ -724,11 +788,15 @@ static int esp_init_state(struct xfrm_state *x)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	esp = kzalloc(sizeof(*esp), GFP_KERNEL);
 	if (esp == NULL)
 		return -ENOMEM;
 
 	x->data = esp;
+=======
+	x->data = NULL;
+>>>>>>> v3.18
 =======
 	x->data = NULL;
 >>>>>>> v3.18
@@ -742,9 +810,13 @@ static int esp_init_state(struct xfrm_state *x)
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aead = esp->aead;
 
 	esp->padlen = 0;
+=======
+	aead = x->data;
+>>>>>>> v3.18
 =======
 	aead = x->data;
 >>>>>>> v3.18
@@ -772,9 +844,13 @@ static int esp_init_state(struct xfrm_state *x)
 
 	align = ALIGN(crypto_aead_blocksize(aead), 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (esp->padlen)
 		align = max_t(u32, align, esp->padlen);
 	x->props.trailer_len = align + 1 + crypto_aead_authsize(esp->aead);
+=======
+	x->props.trailer_len = align + 1 + crypto_aead_authsize(aead);
+>>>>>>> v3.18
 =======
 	x->props.trailer_len = align + 1 + crypto_aead_authsize(aead);
 >>>>>>> v3.18
@@ -784,12 +860,18 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int esp4_rcv_cb(struct sk_buff *skb, int err)
 {
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct xfrm_type esp_type =
 {
@@ -805,18 +887,24 @@ static const struct xfrm_type esp_type =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct net_protocol esp4_protocol = {
 	.handler	=	xfrm4_rcv,
 	.err_handler	=	esp4_err,
 	.no_policy	=	1,
 	.netns_ok	=	1,
 =======
+=======
+>>>>>>> v3.18
 static struct xfrm4_protocol esp4_protocol = {
 	.handler	=	xfrm4_rcv,
 	.input_handler	=	xfrm_input,
 	.cb_handler	=	esp4_rcv_cb,
 	.err_handler	=	esp4_err,
 	.priority	=	0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -827,7 +915,11 @@ static int __init esp4_init(void)
 		return -EAGAIN;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inet_add_protocol(&esp4_protocol, IPPROTO_ESP) < 0) {
+=======
+	if (xfrm4_protocol_register(&esp4_protocol, IPPROTO_ESP) < 0) {
+>>>>>>> v3.18
 =======
 	if (xfrm4_protocol_register(&esp4_protocol, IPPROTO_ESP) < 0) {
 >>>>>>> v3.18
@@ -841,7 +933,11 @@ static int __init esp4_init(void)
 static void __exit esp4_fini(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inet_del_protocol(&esp4_protocol, IPPROTO_ESP) < 0)
+=======
+	if (xfrm4_protocol_deregister(&esp4_protocol, IPPROTO_ESP) < 0)
+>>>>>>> v3.18
 =======
 	if (xfrm4_protocol_deregister(&esp4_protocol, IPPROTO_ESP) < 0)
 >>>>>>> v3.18

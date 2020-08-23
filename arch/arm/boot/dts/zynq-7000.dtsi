@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2011 Xilinx
+=======
+ *  Copyright (C) 2011 - 2014 Xilinx
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2011 - 2014 Xilinx
 >>>>>>> v3.18
@@ -20,7 +24,10 @@
 	compatible = "xlnx,zynq-7000";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -47,6 +54,9 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pmu {
 		compatible = "arm,cortex-a9-pmu";
@@ -56,7 +66,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	regulator_vccpint: fixedregulator@0 {
 		compatible = "regulator-fixed";
 		regulator-name = "VCCPINT";
@@ -66,6 +79,9 @@
 		regulator-always-on;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	amba {
 		compatible = "simple-bus";
@@ -75,11 +91,14 @@
 		ranges;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		intc: interrupt-controller@f8f01000 {
 			compatible = "arm,cortex-a9-gic";
 			#interrupt-cells = <3>;
 			#address-cells = <1>;
 =======
+=======
+>>>>>>> v3.18
 		adc: adc@f8007100 {
 			compatible = "xlnx,zynq-xadc-1.00.a";
 			reg = <0xf8007100 0x20>;
@@ -147,6 +166,9 @@
 		intc: interrupt-controller@f8f01000 {
 			compatible = "arm,cortex-a9-gic";
 			#interrupt-cells = <3>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			interrupt-controller;
 			reg = <0xF8F01000 0x1000>,
@@ -154,22 +176,29 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		L2: cache-controller {
 			compatible = "arm,pl310-cache";
 			reg = <0xF8F02000 0x1000>;
 			arm,data-latency = <2 3 2>;
 			arm,tag-latency = <2 3 2>;
 =======
+=======
+>>>>>>> v3.18
 		L2: cache-controller@f8f02000 {
 			compatible = "arm,pl310-cache";
 			reg = <0xF8F02000 0x1000>;
 			arm,data-latency = <3 2 2>;
 			arm,tag-latency = <2 2 2>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			cache-unified;
 			cache-level = <2>;
 		};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		uart0: uart@e0000000 {
 			compatible = "xlnx,xuartps";
@@ -268,6 +297,8 @@
 			clocks = <&cpu_clk 1>;
 		} ;
 =======
+=======
+>>>>>>> v3.18
 		mc: memory-controller@f8006000 {
 			compatible = "xlnx,zynq-ddrc-a05";
 			reg = <0xf8006000 0x1000>;
@@ -448,6 +479,9 @@
 			reset = <0>;
 			timeout-sec = <10>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

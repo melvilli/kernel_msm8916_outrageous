@@ -73,7 +73,11 @@ enum tegra_pinconf_tristate {
 struct tegra_function {
 	const char *name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char * const *groups;
+=======
+	const char **groups;
+>>>>>>> v3.18
 =======
 	const char **groups;
 >>>>>>> v3.18
@@ -82,6 +86,7 @@ struct tegra_function {
 
 /**
  * struct tegra_pingroup - Tegra pin group
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @mux_reg:		Mux register offset. -1 if unsupported.
  * @mux_bank:		Mux register bank. 0 if unsupported.
@@ -126,6 +131,8 @@ struct tegra_function {
  * @drvtype_bank:	Drive type fields register bank. 0 if unsupported.
  * @drvtype_bit:	Drive type register bit. 0 if unsupported.
 =======
+=======
+>>>>>>> v3.18
  * @name		The name of the pin group.
  * @pins		An array of pin IDs included in this pin group.
  * @npins		The number of entries in @pins.
@@ -166,6 +173,9 @@ struct tegra_function {
  * -1 in a *_reg field means that feature is unsupported for this group.
  * *_bank and *_reg values are irrelevant when *_reg is -1.
  * When *_reg is valid, *_bit may be -1 to indicate an unsupported feature.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * A representation of a group of pins (possibly just one pin) in the Tegra
@@ -174,7 +184,11 @@ struct tegra_function {
  * such as pull-up/down, tri-state, etc. Tegra's pin controller is complex;
  * certain groups may only support configuring certain parameters, hence
 <<<<<<< HEAD
+<<<<<<< HEAD
  * each parameter is optional, represented by a -1 "reg" value.
+=======
+ * each parameter is optional.
+>>>>>>> v3.18
 =======
  * each parameter is optional.
 >>>>>>> v3.18
@@ -182,6 +196,7 @@ struct tegra_function {
 struct tegra_pingroup {
 	const char *name;
 	const unsigned *pins;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned npins;
 	unsigned funcs[4];
@@ -223,6 +238,8 @@ struct tegra_pingroup {
 	u32 slwf_bit:5;
 	u32 drvtype_bit:5;
 =======
+=======
+>>>>>>> v3.18
 	u8 npins;
 	u8 funcs[4];
 	s16 mux_reg;
@@ -249,6 +266,9 @@ struct tegra_pingroup {
 	u32 slwr_bit:6;
 	u32 slwf_bit:6;
 	u32 drvtype_bit:6;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 drvdn_width:6;
 	u32 drvup_width:6;
@@ -274,7 +294,11 @@ struct tegra_pinctrl_soc_data {
 	const struct pinctrl_pin_desc *pins;
 	unsigned npins;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct tegra_function *functions;
+=======
+	struct tegra_function *functions;
+>>>>>>> v3.18
 =======
 	struct tegra_function *functions;
 >>>>>>> v3.18

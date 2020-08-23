@@ -52,6 +52,10 @@
 #include <linux/bitops.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 =======
 #include <asm/byteorder.h>
 >>>>>>> v3.18
@@ -722,7 +726,11 @@ static int ariadne_init_one(struct zorro_dev *z,
 	struct resource *r1, *r2;
 	struct net_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ariadne_private *priv;
+=======
+	u32 serial;
+>>>>>>> v3.18
 =======
 	u32 serial;
 >>>>>>> v3.18
@@ -745,6 +753,7 @@ static int ariadne_init_one(struct zorro_dev *z,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv = netdev_priv(dev);
 
 	r1->name = dev->name;
@@ -759,6 +768,8 @@ static int ariadne_init_one(struct zorro_dev *z,
 	dev->base_addr = ZTWO_VADDR(base_addr);
 	dev->mem_start = ZTWO_VADDR(mem_start);
 =======
+=======
+>>>>>>> v3.18
 	r1->name = dev->name;
 	r2->name = dev->name;
 
@@ -771,6 +782,9 @@ static int ariadne_init_one(struct zorro_dev *z,
 	dev->dev_addr[5] = serial & 0xff;
 	dev->base_addr = (unsigned long)ZTWO_VADDR(base_addr);
 	dev->mem_start = (unsigned long)ZTWO_VADDR(mem_start);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->mem_end = dev->mem_start + ARIADNE_RAM_SIZE;
 

@@ -2,17 +2,23 @@
 #define DECOMPRESS_GENERIC_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef int (*decompress_fn) (unsigned char *inbuf, int len,
 			      int(*fill)(void*, unsigned int),
 			      int(*flush)(void*, unsigned int),
 			      unsigned char *outbuf,
 			      int *posp,
 =======
+=======
+>>>>>>> v3.18
 typedef int (*decompress_fn) (unsigned char *inbuf, long len,
 			      long (*fill)(void*, unsigned long),
 			      long (*flush)(void*, unsigned long),
 			      unsigned char *outbuf,
 			      long *posp,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      void(*error)(char *x));
 
@@ -42,7 +48,11 @@ typedef int (*decompress_fn) (unsigned char *inbuf, long len,
 
 /* Utility routine to detect the decompression method */
 <<<<<<< HEAD
+<<<<<<< HEAD
 decompress_fn decompress_method(const unsigned char *inbuf, int len,
+=======
+decompress_fn decompress_method(const unsigned char *inbuf, long len,
+>>>>>>> v3.18
 =======
 decompress_fn decompress_method(const unsigned char *inbuf, long len,
 >>>>>>> v3.18

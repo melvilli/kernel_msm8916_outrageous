@@ -26,6 +26,10 @@
 #include <linux/cpu.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kgdb.h>
+>>>>>>> v3.18
 =======
 #include <linux/kgdb.h>
 >>>>>>> v3.18
@@ -40,6 +44,10 @@
 #include <asm/io.h>
 #include <asm/timer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18
@@ -61,8 +69,12 @@
 
 #include "cpumap.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int sparc64_multi_core __read_mostly;
+=======
+#include "kernel.h"
+>>>>>>> v3.18
 =======
 #include "kernel.h"
 >>>>>>> v3.18
@@ -100,7 +112,11 @@ extern void setup_sparc64_timer(void);
 static volatile unsigned long callin_flag = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit smp_callin(void)
+=======
+void smp_callin(void)
+>>>>>>> v3.18
 =======
 void smp_callin(void)
 >>>>>>> v3.18
@@ -140,7 +156,10 @@ void smp_callin(void)
 
 	set_cpu_online(cpuid, true);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_irq_enable();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -148,6 +167,11 @@ void smp_callin(void)
 	preempt_disable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	local_irq_enable();
+
+>>>>>>> v3.18
 =======
 	local_irq_enable();
 
@@ -298,6 +322,7 @@ static void smp_synchronize_one_tick(int cpu)
 
 #if defined(CONFIG_SUN_LDOMS) && defined(CONFIG_HOTPLUG_CPU)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* XXX Put this in some common place. XXX */
 static unsigned long kimage_addr_to_ra(void *p)
 {
@@ -307,6 +332,10 @@ static unsigned long kimage_addr_to_ra(void *p)
 }
 
 static void __cpuinit ldom_startcpu_cpuid(unsigned int cpu, unsigned long thread_reg, void **descrp)
+=======
+static void ldom_startcpu_cpuid(unsigned int cpu, unsigned long thread_reg,
+				void **descrp)
+>>>>>>> v3.18
 =======
 static void ldom_startcpu_cpuid(unsigned int cpu, unsigned long thread_reg,
 				void **descrp)
@@ -372,7 +401,11 @@ extern unsigned long sparc64_cpu_startup;
 static struct thread_info *cpu_new_thread = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit smp_boot_one_cpu(unsigned int cpu, struct task_struct *idle)
+=======
+static int smp_boot_one_cpu(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 static int smp_boot_one_cpu(unsigned int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -905,11 +938,14 @@ extern unsigned long xcall_flush_dcache_page_cheetah;
 extern unsigned long xcall_flush_dcache_page_spitfire;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_DEBUG_DCFLUSH
 extern atomic_t dcpage_flushes;
 extern atomic_t dcpage_flushes_xcall;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void __local_flush_dcache_page(struct page *page)
@@ -1189,7 +1225,11 @@ static unsigned long penguins_are_doing_time;
 void smp_capture(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int result = atomic_add_ret(1, &smp_capture_depth);
+=======
+	int result = atomic_add_return(1, &smp_capture_depth);
+>>>>>>> v3.18
 =======
 	int result = atomic_add_return(1, &smp_capture_depth);
 >>>>>>> v3.18
@@ -1311,7 +1351,11 @@ void smp_fill_in_sib_core_maps(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *tidle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *tidle)
+>>>>>>> v3.18
 =======
 int __cpu_up(unsigned int cpu, struct task_struct *tidle)
 >>>>>>> v3.18
@@ -1442,7 +1486,10 @@ void __cpu_die(unsigned int cpu)
 void __init smp_cpus_done(unsigned int max_cpus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcr_arch_init();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1450,9 +1497,12 @@ void __init smp_cpus_done(unsigned int max_cpus)
 void smp_send_reschedule(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xcall_deliver((u64) &xcall_receive_signal, 0, 0,
 		      cpumask_of(cpu));
 =======
+=======
+>>>>>>> v3.18
 	if (cpu == smp_processor_id()) {
 		WARN_ON_ONCE(preemptible());
 		set_softint(1 << PIL_SMP_RECEIVE_SIGNAL);
@@ -1460,6 +1510,9 @@ void smp_send_reschedule(int cpu)
 		xcall_deliver((u64) &xcall_receive_signal,
 			      0, 0, cpumask_of(cpu));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1535,7 +1588,10 @@ static void __init pcpu_populate_pte(unsigned long addr)
 	pmd_t *pmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pgd_none(*pgd)) {
 		pud_t *new;
 
@@ -1543,6 +1599,9 @@ static void __init pcpu_populate_pte(unsigned long addr)
 		pgd_populate(&init_mm, pgd, new);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pud = pud_offset(pgd, addr);
 	if (pud_none(*pud)) {

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -27,6 +28,8 @@
 *******************************************************************************/
 
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -49,6 +52,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Linux PRO/1000 Ethernet Driver main header file */
@@ -67,6 +73,11 @@
 #include <linux/i2c.h>
 #include <linux/i2c-algo-bit.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pci.h>
+#include <linux/mdio.h>
+>>>>>>> v3.18
 =======
 #include <linux/pci.h>
 #include <linux/mdio.h>
@@ -98,6 +109,10 @@ struct igb_adapter;
 #define NON_Q_VECTORS		1
 #define MAX_Q_VECTORS		8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MAX_MSIX_ENTRIES	10
+>>>>>>> v3.18
 =======
 #define MAX_MSIX_ENTRIES	10
 >>>>>>> v3.18
@@ -162,9 +177,15 @@ struct vf_data_storage {
 #define IGB_TX_HTHRESH	1
 #define IGB_RX_WTHRESH	((hw->mac.type == e1000_82576 && \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  adapter->msix_entries) ? 1 : 4)
 #define IGB_TX_WTHRESH	((hw->mac.type == e1000_82576 && \
 			  adapter->msix_entries) ? 1 : 16)
+=======
+			  (adapter->flags & IGB_FLAG_HAS_MSIX)) ? 1 : 4)
+#define IGB_TX_WTHRESH	((hw->mac.type == e1000_82576 && \
+			  (adapter->flags & IGB_FLAG_HAS_MSIX)) ? 1 : 16)
+>>>>>>> v3.18
 =======
 			  (adapter->flags & IGB_FLAG_HAS_MSIX)) ? 1 : 4)
 #define IGB_TX_WTHRESH	((hw->mac.type == e1000_82576 && \
@@ -237,6 +258,10 @@ struct igb_tx_buffer {
 	u16 gso_segs;
 	__be16 protocol;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -284,7 +309,10 @@ struct igb_ring {
 		struct igb_rx_buffer *rx_buffer_info;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long last_rx_timestamp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void *desc;			/* descriptor ring memory */
@@ -370,11 +398,14 @@ static inline int igb_desc_unused(struct igb_ring *ring)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct igb_i2c_client_list {
 	struct i2c_client *client;
 	struct igb_i2c_client_list *next;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_IGB_HWMON
@@ -393,19 +424,30 @@ struct hwmon_attr {
 
 struct hwmon_buff {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *device;
 	struct hwmon_attr *hwmon_list;
 =======
+=======
+>>>>>>> v3.18
 	struct attribute_group group;
 	const struct attribute_group *groups[2];
 	struct attribute *attrs[E1000_MAX_SENSORS * 4 + 1];
 	struct hwmon_attr hwmon_list[E1000_MAX_SENSORS * 4];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int n_hwmon;
 	};
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IGB_RETA_SIZE	128
+
+>>>>>>> v3.18
 =======
 #define IGB_RETA_SIZE	128
 
@@ -421,7 +463,11 @@ struct igb_adapter {
 
 	unsigned int num_q_vectors;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct msix_entry *msix_entries;
+=======
+	struct msix_entry msix_entries[MAX_MSIX_ENTRIES];
+>>>>>>> v3.18
 =======
 	struct msix_entry msix_entries[MAX_MSIX_ENTRIES];
 >>>>>>> v3.18
@@ -473,7 +519,10 @@ struct igb_adapter {
 	struct e1000_hw_stats stats;
 	struct e1000_phy_info phy_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct e1000_phy_stats phy_stats;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -503,13 +552,19 @@ struct igb_adapter {
 	struct work_struct ptp_tx_work;
 	struct sk_buff *ptp_tx_skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long ptp_tx_start;
 	unsigned long last_rx_ptp_check;
 =======
+=======
+>>>>>>> v3.18
 	struct hwtstamp_config tstamp_config;
 	unsigned long ptp_tx_start;
 	unsigned long last_rx_ptp_check;
 	unsigned long last_rx_timestamp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spinlock_t tmreg_lock;
 	struct cyclecounter cc;
@@ -520,7 +575,11 @@ struct igb_adapter {
 	char fw_version[32];
 #ifdef CONFIG_IGB_HWMON
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hwmon_buff igb_hwmon_buff;
+=======
+	struct hwmon_buff *igb_hwmon_buff;
+>>>>>>> v3.18
 =======
 	struct hwmon_buff *igb_hwmon_buff;
 >>>>>>> v3.18
@@ -530,7 +589,10 @@ struct igb_adapter {
 	struct i2c_adapter i2c_adap;
 	struct i2c_client *i2c_client;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32 rss_indir_tbl_init;
 	u8 rss_indir_tbl[IGB_RETA_SIZE];
 
@@ -538,6 +600,9 @@ struct igb_adapter {
 	int copper_tries;
 	struct e1000_info ei;
 	u16 eee_advert;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -551,7 +616,10 @@ struct igb_adapter {
 #define IGB_FLAG_RSS_FIELD_IPV6_UDP	(1 << 7)
 #define IGB_FLAG_WOL_SUPPORTED		(1 << 8)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IGB_FLAG_NEED_LINK_UPDATE	(1 << 9)
 #define IGB_FLAG_MEDIA_RESET		(1 << 10)
 #define IGB_FLAG_MAS_CAPABLE		(1 << 11)
@@ -564,6 +632,9 @@ struct igb_adapter {
 #define IGB_MAS_ENABLE_1		0X0002
 #define IGB_MAS_ENABLE_2		0X0004
 #define IGB_MAS_ENABLE_3		0X0008
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* DMA Coalescing defines */
@@ -577,7 +648,12 @@ enum e1000_state_t {
 	__IGB_TESTING,
 	__IGB_RESETTING,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__IGB_DOWN
+=======
+	__IGB_DOWN,
+	__IGB_PTP_TX_IN_PROGRESS,
+>>>>>>> v3.18
 =======
 	__IGB_DOWN,
 	__IGB_PTP_TX_IN_PROGRESS,
@@ -591,6 +667,7 @@ enum igb_boards {
 extern char igb_driver_name[];
 extern char igb_driver_version[];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int igb_up(struct igb_adapter *);
 extern void igb_down(struct igb_adapter *);
@@ -640,6 +717,8 @@ extern int igb_ptp_hwtstamp_ioctl(struct net_device *netdev,
 extern void igb_sysfs_exit(struct igb_adapter *adapter);
 extern int igb_sysfs_init(struct igb_adapter *adapter);
 =======
+=======
+>>>>>>> v3.18
 int igb_up(struct igb_adapter *);
 void igb_down(struct igb_adapter *);
 void igb_reinit_locked(struct igb_adapter *);
@@ -675,6 +754,9 @@ int igb_ptp_get_ts_config(struct net_device *netdev, struct ifreq *ifr);
 #ifdef CONFIG_IGB_HWMON
 void igb_sysfs_exit(struct igb_adapter *adapter);
 int igb_sysfs_init(struct igb_adapter *adapter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 static inline s32 igb_reset_phy(struct e1000_hw *hw)

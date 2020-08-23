@@ -145,17 +145,23 @@ void __iomem *__uc32_ioremap_pfn_caller(unsigned long pfn,
 	 */
 	if (pfn_valid(pfn)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "BUG: Your driver calls ioremap() on\n"
 			"system memory.  This leads to architecturally\n"
 			"unpredictable behaviour, and ioremap() will fail in\n"
 			"the next kernel release. Please fix your driver.\n");
 		WARN_ON(1);
 =======
+=======
+>>>>>>> v3.18
 		WARN(1, "BUG: Your driver calls ioremap() on\n"
 			"system memory.  This leads to architecturally\n"
 			"unpredictable behaviour, and ioremap() will fail in\n"
 			"the next kernel release. Please fix your driver.\n");
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

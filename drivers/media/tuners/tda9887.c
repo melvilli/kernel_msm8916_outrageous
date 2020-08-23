@@ -537,8 +537,13 @@ static int tda9887_status(struct dvb_frontend *fe)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(buf,0,sizeof(buf));
 	if (1 != (rc = tuner_i2c_xfer_recv(&priv->i2c_props,buf,1)))
+=======
+	rc = tuner_i2c_xfer_recv(&priv->i2c_props, buf, 1);
+	if (rc != 1)
+>>>>>>> v3.18
 =======
 	rc = tuner_i2c_xfer_recv(&priv->i2c_props, buf, 1);
 	if (rc != 1)

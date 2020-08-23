@@ -9,7 +9,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -17,6 +20,10 @@
 #include <linux/mfd/adp5520.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -79,7 +86,11 @@ static int adp5520_keys_notifier(struct notifier_block *nb,
 static int adp5520_keys_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct adp5520_keys_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct adp5520_keys_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct adp5520_keys_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -94,7 +105,11 @@ static int adp5520_keys_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata == NULL) {
+=======
+	if (!pdata) {
+>>>>>>> v3.18
 =======
 	if (!pdata) {
 >>>>>>> v3.18
@@ -106,8 +121,13 @@ static int adp5520_keys_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = kzalloc(sizeof(*dev), GFP_KERNEL);
 	if (dev == NULL) {
+=======
+	dev = devm_kzalloc(&pdev->dev, sizeof(*dev), GFP_KERNEL);
+	if (!dev) {
+>>>>>>> v3.18
 =======
 	dev = devm_kzalloc(&pdev->dev, sizeof(*dev), GFP_KERNEL);
 	if (!dev) {
@@ -117,11 +137,17 @@ static int adp5520_keys_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input = input_allocate_device();
 	if (!input) {
 		ret = -ENOMEM;
 		goto err;
 	}
+=======
+	input = devm_input_allocate_device(&pdev->dev);
+	if (!input)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	input = devm_input_allocate_device(&pdev->dev);
 	if (!input)
@@ -163,7 +189,11 @@ static int adp5520_keys_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "unable to register input device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -189,8 +219,12 @@ static int adp5520_keys_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "failed to write\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EIO;
 		goto err1;
+=======
+		return -EIO;
+>>>>>>> v3.18
 =======
 		return -EIO;
 >>>>>>> v3.18
@@ -202,7 +236,11 @@ static int adp5520_keys_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "failed to register notifier\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err1;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -210,6 +248,7 @@ static int adp5520_keys_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, dev);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err1:
@@ -219,6 +258,8 @@ err:
 	input_free_device(input);
 	kfree(dev);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -231,8 +272,11 @@ static int adp5520_keys_remove(struct platform_device *pdev)
 				ADP5520_KP_IEN | ADP5520_KR_IEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input_unregister_device(dev->input);
 	kfree(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

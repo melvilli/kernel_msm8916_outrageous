@@ -37,15 +37,21 @@ static void omap_mcbsp_write(struct omap_mcbsp *mcbsp, u16 reg, u32 val)
 	if (mcbsp->pdata->reg_size == 2) {
 		((u16 *)mcbsp->reg_cache)[reg] = (u16)val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__raw_writew((u16)val, addr);
 	} else {
 		((u32 *)mcbsp->reg_cache)[reg] = val;
 		__raw_writel(val, addr);
 =======
+=======
+>>>>>>> v3.18
 		writew_relaxed((u16)val, addr);
 	} else {
 		((u32 *)mcbsp->reg_cache)[reg] = val;
 		writel_relaxed(val, addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -56,15 +62,21 @@ static int omap_mcbsp_read(struct omap_mcbsp *mcbsp, u16 reg, bool from_cache)
 
 	if (mcbsp->pdata->reg_size == 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return !from_cache ? __raw_readw(addr) :
 				     ((u16 *)mcbsp->reg_cache)[reg];
 	} else {
 		return !from_cache ? __raw_readl(addr) :
 =======
+=======
+>>>>>>> v3.18
 		return !from_cache ? readw_relaxed(addr) :
 				     ((u16 *)mcbsp->reg_cache)[reg];
 	} else {
 		return !from_cache ? readl_relaxed(addr) :
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				     ((u32 *)mcbsp->reg_cache)[reg];
 	}
@@ -73,7 +85,11 @@ static int omap_mcbsp_read(struct omap_mcbsp *mcbsp, u16 reg, bool from_cache)
 static void omap_mcbsp_st_write(struct omap_mcbsp *mcbsp, u16 reg, u32 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, mcbsp->st_data->io_base_st + reg);
+=======
+	writel_relaxed(val, mcbsp->st_data->io_base_st + reg);
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, mcbsp->st_data->io_base_st + reg);
 >>>>>>> v3.18
@@ -82,7 +98,11 @@ static void omap_mcbsp_st_write(struct omap_mcbsp *mcbsp, u16 reg, u32 val)
 static int omap_mcbsp_st_read(struct omap_mcbsp *mcbsp, u16 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(mcbsp->st_data->io_base_st + reg);
+=======
+	return readl_relaxed(mcbsp->st_data->io_base_st + reg);
+>>>>>>> v3.18
 =======
 	return readl_relaxed(mcbsp->st_data->io_base_st + reg);
 >>>>>>> v3.18
@@ -804,7 +824,11 @@ static ssize_t prop##_store(struct device *dev,				\
 	int status;							\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = strict_strtoul(buf, 0, &val);				\
+=======
+	status = kstrtoul(buf, 0, &val);				\
+>>>>>>> v3.18
 =======
 	status = kstrtoul(buf, 0, &val);				\
 >>>>>>> v3.18
@@ -1039,6 +1063,7 @@ int omap_mcbsp_init(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource_byname(pdev, IORESOURCE_DMA, "rx");
 	if (!res) {
 		dev_err(&pdev->dev, "invalid rx DMA channel\n");
@@ -1062,6 +1087,8 @@ int omap_mcbsp_init(struct platform_device *pdev)
 	mcbsp->dma_data[0].maxburst = 4;
 
 =======
+=======
+>>>>>>> v3.18
 	if (!pdev->dev.of_node) {
 		res = platform_get_resource_byname(pdev, IORESOURCE_DMA, "tx");
 		if (!res) {
@@ -1089,6 +1116,9 @@ int omap_mcbsp_init(struct platform_device *pdev)
 	mcbsp->dma_data[1].addr = omap_mcbsp_dma_reg_params(mcbsp, 1);
 	mcbsp->dma_data[1].maxburst = 4;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mcbsp->fclk = clk_get(&pdev->dev, "fck");
 	if (IS_ERR(mcbsp->fclk)) {

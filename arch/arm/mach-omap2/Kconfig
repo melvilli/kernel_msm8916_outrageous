@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_OMAP
 	bool
 
@@ -20,6 +21,8 @@ config ARCH_OMAP2PLUS
 	select SPARSE_IRQ
 	select USE_OF
 =======
+=======
+>>>>>>> v3.18
 menu "TI OMAP/AM/DM/DRA Family"
 	depends on ARCH_MULTI_V6 || ARCH_MULTI_V7
 
@@ -106,6 +109,9 @@ config ARCH_OMAP2PLUS
 	select SOC_BUS
 	select TI_PRIV_EDMA
 	select OMAP_IRQCHIP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Systems based on OMAP2, OMAP3, OMAP4 or OMAP5
@@ -124,7 +130,11 @@ config ARCH_OMAP2PLUS_TYPICAL
 	select I2C_OMAP
 	select MENELAUS if ARCH_OMAP2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NEON if ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5
+=======
+	select NEON if CPU_V7
+>>>>>>> v3.18
 =======
 	select NEON if CPU_V7
 >>>>>>> v3.18
@@ -141,6 +151,7 @@ config SOC_HAS_OMAP2_SDRC
 
 config SOC_HAS_REALTIME_COUNTER
 	bool "Real time free running counter"
+<<<<<<< HEAD
 <<<<<<< HEAD
 	depends on SOC_OMAP5
 	default y
@@ -209,6 +220,10 @@ config SOC_OMAP5
 	depends on SOC_OMAP5 || SOC_DRA7XX
 	default y
 >>>>>>> v3.18
+=======
+	depends on SOC_OMAP5 || SOC_DRA7XX
+	default y
+>>>>>>> v3.18
 
 comment "OMAP Core Type"
 	depends on ARCH_OMAP2
@@ -238,6 +253,7 @@ config SOC_TI81XX
 	default y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SOC_AM33XX
 	bool "AM33XX support"
 	depends on ARCH_MULTI_V7
@@ -255,6 +271,8 @@ config OMAP_PACKAGE_ZAC
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config OMAP_PACKAGE_CBC
        bool
 
@@ -267,6 +285,7 @@ config OMAP_PACKAGE_CUS
 config OMAP_PACKAGE_CBP
        bool
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config OMAP_PACKAGE_CBL
        bool
@@ -285,11 +304,16 @@ config MACH_OMAP_GENERIC
 	  Support for generic TI OMAP2+ boards using Flattened Device Tree.
 	  More information at Documentation/devicetree
 =======
+=======
+>>>>>>> v3.18
 comment "OMAP Legacy Platform Data Board Type"
 	depends on ARCH_OMAP2PLUS
 
 config MACH_OMAP_GENERIC
 	bool
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config MACH_OMAP2_TUSB6010
@@ -297,6 +321,7 @@ config MACH_OMAP2_TUSB6010
 	depends on ARCH_OMAP2 && SOC_OMAP2420
 	default y if MACH_NOKIA_N8X0
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config MACH_OMAP_H4
 	bool "OMAP 2420 H4 board"
@@ -311,6 +336,8 @@ config MACH_OMAP_2430SDP
 	default y
 	select OMAP_PACKAGE_ZAC
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MACH_OMAP3_BEAGLE
@@ -358,12 +385,15 @@ config MACH_OVERO
 	select OMAP_PACKAGE_CBB
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MACH_OMAP3EVM
 	bool "OMAP 3530 EVM board"
 	depends on ARCH_OMAP3
 	default y
 	select OMAP_PACKAGE_CBB
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MACH_OMAP3517EVM
@@ -397,9 +427,12 @@ config MACH_OMAP_3430SDP
 	select OMAP_PACKAGE_CBB
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MACH_NOKIA_N800
        bool
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MACH_NOKIA_N810
@@ -412,6 +445,7 @@ config MACH_NOKIA_N8X0
 	bool "Nokia N800/N810"
 	depends on SOC_OMAP2420
 	default y
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select MACH_NOKIA_N800
 	select MACH_NOKIA_N810
@@ -428,6 +462,10 @@ config MACH_NOKIA_RM680
 	select MACH_NOKIA_N810
 	select MACH_NOKIA_N810_WIMAX
 >>>>>>> v3.18
+=======
+	select MACH_NOKIA_N810
+	select MACH_NOKIA_N810_WIMAX
+>>>>>>> v3.18
 
 config MACH_NOKIA_RX51
 	bool "Nokia N900 (RX-51) phone"
@@ -435,6 +473,7 @@ config MACH_NOKIA_RX51
 	default y
 	select OMAP_PACKAGE_CBB
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config MACH_OMAP_ZOOM2
 	bool "OMAP3 Zoom2 board"
@@ -450,6 +489,8 @@ config MACH_OMAP_ZOOM3
 	select OMAP_PACKAGE_CBP
 	select REGULATOR_FIXED_VOLTAGE if REGULATOR
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MACH_CM_T35
@@ -469,6 +510,7 @@ config MACH_CM_T3730
        bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MACH_IGEP0020
 	bool "IGEP v2 board"
 	depends on ARCH_OMAP3
@@ -484,6 +526,8 @@ config MACH_IGEP0030
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config MACH_SBC3530
 	bool "OMAP3 SBC STALKER board"
 	depends on ARCH_OMAP3
@@ -491,12 +535,15 @@ config MACH_SBC3530
 	select OMAP_PACKAGE_CUS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MACH_OMAP_3630SDP
 	bool "OMAP3630 SDP board"
 	depends on ARCH_OMAP3
 	default y
 	select OMAP_PACKAGE_CBP
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MACH_TI8168EVM
@@ -509,6 +556,7 @@ config MACH_TI8148EVM
 	depends on SOC_TI81XX
 	default y
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config MACH_OMAP_4430SDP
 	bool "OMAP 4430 SDP board"
@@ -526,6 +574,8 @@ config MACH_OMAP4_PANDA
 	select OMAP_PACKAGE_CBS
 	select REGULATOR_FIXED_VOLTAGE if REGULATOR
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config OMAP3_EMU
@@ -573,6 +623,11 @@ endmenu
 
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+endmenu
+>>>>>>> v3.18
 =======
 
 endmenu

@@ -9,6 +9,10 @@
  *
  * Copyright (C) 2001 - 2005 Tensilica Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Cadence Design Systems Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Cadence Design Systems Inc.
 >>>>>>> v3.18
@@ -24,6 +28,10 @@
 #include <linux/bootmem.h>
 #include <linux/gfp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/highmem.h>
+>>>>>>> v3.18
 =======
 #include <linux/highmem.h>
 >>>>>>> v3.18
@@ -36,7 +44,10 @@
 #include <asm/page.h>
 #include <asm/sections.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <asm/sysmem.h>
 
 struct sysmem_info sysmem __initdata;
@@ -157,6 +168,9 @@ int __init add_sysmem_bank(unsigned long start, unsigned long end)
 	move_banks(it + 1, sysmem.bank + i);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -164,6 +178,11 @@ int __init add_sysmem_bank(unsigned long start, unsigned long end)
  *
  * Reserve some memory from the memory pool.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * If must_exist is set and a part of the region being reserved does not exist
+ * memory map is not altered.
+>>>>>>> v3.18
 =======
  * If must_exist is set and a part of the region being reserved does not exist
  * memory map is not altered.
@@ -176,8 +195,13 @@ int __init add_sysmem_bank(unsigned long start, unsigned long end)
  *
  * Returns:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  0 (memory area couldn't be mapped)
  * -1 (success)
+=======
+ *  0 (success)
+ *  < 0 (error)
+>>>>>>> v3.18
 =======
  *  0 (success)
  *  < 0 (error)
@@ -186,6 +210,7 @@ int __init add_sysmem_bank(unsigned long start, unsigned long end)
 
 int __init mem_reserve(unsigned long start, unsigned long end, int must_exist)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 
@@ -229,6 +254,8 @@ int __init mem_reserve(unsigned long start, unsigned long end, int must_exist)
 	}
 	return -1;
 =======
+=======
+>>>>>>> v3.18
 	struct meminfo *it;
 	struct meminfo *rm = NULL;
 	unsigned long sz;
@@ -286,13 +313,20 @@ int __init mem_reserve(unsigned long start, unsigned long end, int must_exist)
 		move_banks(rm, it);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Initialize the bootmem system and give it all the memory we have available.
+=======
+ * Initialize the bootmem system and give it all low memory we have available.
+>>>>>>> v3.18
 =======
  * Initialize the bootmem system and give it all low memory we have available.
 >>>>>>> v3.18
@@ -305,6 +339,10 @@ void __init bootmem_init(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sysmem_dump();
+>>>>>>> v3.18
 =======
 	sysmem_dump();
 >>>>>>> v3.18
@@ -352,10 +390,13 @@ void __init bootmem_init(void)
 	/* Add all remaining memory pieces into the bootmem map */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0; i<sysmem.nr_banks; i++)
 		free_bootmem(sysmem.bank[i].start,
 			     sysmem.bank[i].end - sysmem.bank[i].start);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < sysmem.nr_banks; i++) {
 		if (sysmem.bank[i].start >> PAGE_SHIFT < max_low_pfn) {
 			unsigned long end = min(max_low_pfn << PAGE_SHIFT,
@@ -364,6 +405,9 @@ void __init bootmem_init(void)
 				     end - sysmem.bank[i].start);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 }
@@ -371,6 +415,7 @@ void __init bootmem_init(void)
 
 void __init zones_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long zones_size[MAX_NR_ZONES];
 	int i;
@@ -386,6 +431,8 @@ void __init zones_init(void)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	/* All pages are DMA-able, so we put them all in the DMA zone. */
 	unsigned long zones_size[MAX_NR_ZONES] = {
 		[ZONE_DMA] = max_low_pfn - ARCH_PFN_OFFSET,
@@ -393,6 +440,9 @@ void __init zones_init(void)
 		[ZONE_HIGHMEM] = max_pfn - max_low_pfn,
 #endif
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_area_init_node(0, zones_size, ARCH_PFN_OFFSET, NULL);
 }
@@ -403,6 +453,7 @@ void __init zones_init(void)
 
 void __init mem_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long codesize, reservedpages, datasize, initsize;
 	unsigned long highmemsize, tmp, ram;
@@ -438,6 +489,8 @@ void __init mem_init(void)
 	       initsize >> 10,
 	       highmemsize >> 10);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HIGHMEM
 	unsigned long tmp;
 
@@ -470,6 +523,9 @@ void __init mem_init(void)
 		PAGE_OFFSET, PAGE_OFFSET +
 		(max_low_pfn - min_low_pfn) * PAGE_SIZE,
 		((max_low_pfn - min_low_pfn) * PAGE_SIZE) >> 20);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -480,7 +536,11 @@ void free_initrd_mem(unsigned long start, unsigned long end)
 {
 	if (initrd_is_mapped)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free_reserved_area(start, end, 0, "initrd");
+=======
+		free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 =======
 		free_reserved_area((void *)start, (void *)end, -1, "initrd");
 >>>>>>> v3.18
@@ -490,9 +550,12 @@ void free_initrd_mem(unsigned long start, unsigned long end)
 void free_initmem(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_initmem_default(0);
 }
 =======
+=======
+>>>>>>> v3.18
 	free_initmem_default(-1);
 }
 
@@ -545,4 +608,7 @@ static int __init parse_memmap_opt(char *str)
 	return 0;
 }
 early_param("memmap", parse_memmap_opt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

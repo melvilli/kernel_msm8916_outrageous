@@ -6,6 +6,7 @@
 #include <asm/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HARDIRQ_BITS	8
 
 /*
@@ -17,6 +18,8 @@
 # error HARDIRQ_BITS is too low!
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_MMU

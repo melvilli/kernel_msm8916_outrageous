@@ -2,7 +2,11 @@
  *	O32 interface for the 64 (or N32) ABI.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Copyright (C) 2002  Maciej W. Rozycki
+=======
+ *	Copyright (C) 2002, 2014  Maciej W. Rozycki
+>>>>>>> v3.18
 =======
  *	Copyright (C) 2002, 2014  Maciej W. Rozycki
 >>>>>>> v3.18
@@ -17,6 +21,7 @@
 #include <asm/regdef.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Maximum number of arguments supported.  Must be even!  */
 #define O32_ARGC	32
 /* Number of static registers we save.	*/
@@ -26,6 +31,8 @@
 /* Frame size on new stack */
 #define O32_FRAMESZ_NEW (SZREG + 4 * O32_ARGC)
 =======
+=======
+>>>>>>> v3.18
 /* O32 register size.  */
 #define O32_SZREG	4
 /* Maximum number of arguments supported.  Must be even!  */
@@ -42,6 +49,9 @@
 #define O32_FRAMESZ	(O32_ARGSZ + O32_SPSZ + O32_STATSZ)
 /* Switched stack frame size.  */
 #define O32_NFRAMESZ	(O32_ARGSZ + O32_SPSZ)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		.text
@@ -49,6 +59,7 @@
 /*
  * O32 function call dispatcher, for interfacing 32-bit ROM routines.
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * The standard 64 (N32) calling sequence is supported, with a0
  * holding a function pointer, a1 a new stack pointer, a2-a7 -- its
@@ -59,6 +70,8 @@
  * address space.  Any pointers passed have to point to addresses within
  * one of these spaces as well.
 =======
+=======
+>>>>>>> v3.18
  * The standard 64 (N32) calling sequence is supported, with a0 holding
  * a function pointer, a1 a pointer to the new stack to call the
  * function with or 0 if no stack switching is requested, a2-a7 -- the
@@ -68,6 +81,9 @@
  * called o32 function for sp and ra restoration and this dispatcher has
  * to be placed in a KSEGx (or KUSEG) address space.  Any pointers
  * passed have to point to addresses within one of these spaces as well.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 NESTED(call_o32, O32_FRAMESZ, ra)
@@ -87,15 +103,21 @@ NESTED(call_o32, O32_FRAMESZ, ra)
 
 		move		jp,a0
 <<<<<<< HEAD
+<<<<<<< HEAD
 		REG_SUBU	s0,a1,O32_FRAMESZ_NEW
 		REG_S		sp,O32_FRAMESZ_NEW-1*SZREG(s0)
 =======
+=======
+>>>>>>> v3.18
 
 		move		fp,sp
 		beqz		a1,0f
 		REG_SUBU	fp,a1,O32_NFRAMESZ
 0:
 		REG_S		sp,O32_NFRAMESZ-1*SZREG(fp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		sll		a0,a2,zero
@@ -103,17 +125,23 @@ NESTED(call_o32, O32_FRAMESZ, ra)
 		sll		a2,a4,zero
 		sll		a3,a5,zero
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sw		a6,0x10(s0)
 		sw		a7,0x14(s0)
 
 		PTR_LA		t0,O32_FRAMESZ(sp)
 		PTR_LA		t1,0x18(s0)
 =======
+=======
+>>>>>>> v3.18
 		sw		a6,4*O32_SZREG(fp)
 		sw		a7,5*O32_SZREG(fp)
 
 		PTR_LA		t0,O32_FRAMESZ(sp)
 		PTR_LA		t1,6*O32_SZREG(fp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		li		t2,O32_ARGC-6
 1:
@@ -121,6 +149,7 @@ NESTED(call_o32, O32_FRAMESZ, ra)
 		REG_ADDU	t0,SZREG
 		sw		t3,(t1)
 		REG_SUBU	t2,1
+<<<<<<< HEAD
 <<<<<<< HEAD
 		REG_ADDU	t1,4
 		bnez		t2,1b
@@ -131,6 +160,8 @@ NESTED(call_o32, O32_FRAMESZ, ra)
 
 		REG_L		sp,O32_FRAMESZ_NEW-1*SZREG(sp)
 =======
+=======
+>>>>>>> v3.18
 		REG_ADDU	t1,O32_SZREG
 		bnez		t2,1b
 
@@ -139,6 +170,9 @@ NESTED(call_o32, O32_FRAMESZ, ra)
 		jalr		jp
 
 		REG_L		sp,O32_NFRAMESZ-1*SZREG(sp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		REG_L		s0,O32_FRAMESZ-11*SZREG(sp)

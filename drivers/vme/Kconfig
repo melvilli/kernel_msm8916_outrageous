@@ -4,7 +4,11 @@
 
 menuconfig VME_BUS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "VME bridge support"
+=======
+	bool "VME bridge support"
+>>>>>>> v3.18
 =======
 	bool "VME bridge support"
 >>>>>>> v3.18

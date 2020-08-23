@@ -42,7 +42,10 @@
 #include <linux/omap-dma.h>
 #include <mach/tc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/irda.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_data/keypad-omap.h>
@@ -54,7 +57,10 @@
 #include "common.h"
 #include "board-h2.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dma.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -283,6 +289,7 @@ static struct platform_device h2_kp_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define H2_IRDA_FIRSEL_GPIO_PIN	17
 
 static struct omap_irda_config h2_irda_data = {
@@ -318,6 +325,8 @@ static struct platform_device h2_irda_device = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct gpio_led h2_gpio_led_pins[] = {
 	{
 		.name		= "h2:red",
@@ -349,7 +358,10 @@ static struct platform_device *h2_devices[] __initdata = {
 	&h2_nand_device,
 	&h2_smc91x_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&h2_irda_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	&h2_kp_device,
@@ -367,6 +379,12 @@ static void __init h2_init_smc91x(void)
 static int tps_setup(struct i2c_client *client, void *context)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!IS_BUILTIN(CONFIG_TPS65010))
+		return -ENOSYS;
+	
+>>>>>>> v3.18
 =======
 	if (!IS_BUILTIN(CONFIG_TPS65010))
 		return -ENOSYS;

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 What:		/sys/bus/usb/devices/.../power/autosuspend
 Date:		March 2007
 KernelVersion:	2.6.21
@@ -79,6 +80,8 @@ Users:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 What:		/sys/bus/usb/device/.../authorized
 Date:		July 2008
 KernelVersion:	2.6.26
@@ -132,26 +135,38 @@ Description:
 		was included in the driver's static device ID support
 		table at compile time. The format for the device ID is:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		idVendor idProduct bInterfaceClass.
 		The vendor ID and device ID fields are required, the
 		interface class is optional.
 =======
+=======
+>>>>>>> v3.18
 		idVendor idProduct bInterfaceClass RefIdVendor RefIdProduct
 		The vendor ID and device ID fields are required, the
 		rest is optional. The Ref* tuple can be used to tell the
 		driver to use the same driver_data for the new device as
 		it is used for the reference device.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		Upon successfully adding an ID, the driver will probe
 		for the device and attempt to bind to it.  For example:
 		# echo "8086 10f5" > /sys/bus/usb/drivers/foo/new_id
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		Here add a new device (0458:7045) using driver_data from
 		an already supported device (0458:704c):
 		# echo "0458 7045 0 0458 704c" > /sys/bus/usb/drivers/foo/new_id
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		Reading from this file will list all dynamically added
 		device IDs in the same format, with one entry per
@@ -191,6 +206,7 @@ Description:
 		"/sys/bus/usb/drivers/.../new_id"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 What:		/sys/bus/usb/device/.../avoid_reset_quirk
 Date:		December 2009
 Contact:	Oliver Neukum <oliver@neukum.org>
@@ -202,6 +218,8 @@ Description:
 Users:
 		usb_modeswitch
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 What:		/sys/bus/usb/devices/.../power/usb2_hardware_lpm
@@ -258,7 +276,10 @@ Description:
 		The file will read "hotplug", "wired" and "not used" if the
 		information is available, and "unknown" otherwise.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 What:		/sys/bus/usb/devices/.../power/usb2_lpm_l1_timeout
 Date:		May 2013
@@ -286,4 +307,7 @@ Description:
 		Supported values are 0 - 15.
 		More information on how besl values map to microseconds can be found in
 		USB 2.0 ECN Errata for Link Power Management, section 4.10)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

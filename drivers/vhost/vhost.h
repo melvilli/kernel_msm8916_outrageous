@@ -47,6 +47,11 @@ void vhost_poll_stop(struct vhost_poll *poll);
 void vhost_poll_flush(struct vhost_poll *poll);
 void vhost_poll_queue(struct vhost_poll *poll);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void vhost_work_flush(struct vhost_dev *dev, struct vhost_work *work);
+long vhost_vring_ioctl(struct vhost_dev *d, int ioctl, void __user *argp);
+>>>>>>> v3.18
 =======
 void vhost_work_flush(struct vhost_dev *dev, struct vhost_work *work);
 long vhost_vring_ioctl(struct vhost_dev *d, int ioctl, void __user *argp);
@@ -107,6 +112,7 @@ struct vhost_virtqueue {
 	struct iovec *indirect;
 	struct vring_used_elem *heads;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We use a kind of RCU to access private pointer.
 	 * All readers access it from worker, which makes it possible to
 	 * flush the vhost_work instead of synchronize_rcu. Therefore readers do
@@ -116,10 +122,15 @@ struct vhost_virtqueue {
 	 * Writers use virtqueue mutex. */
 	void __rcu *private_data;
 =======
+=======
+>>>>>>> v3.18
 	/* Protected by virtqueue mutex. */
 	struct vhost_memory *memory;
 	void *private_data;
 	unsigned acked_features;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Log write descriptors */
 	void __user *log_base;
@@ -128,6 +139,7 @@ struct vhost_virtqueue {
 
 struct vhost_dev {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Readers use RCU to access memory table pointer
 	 * log base pointer and features.
 	 * Writers use mutex below.*/
@@ -135,6 +147,11 @@ struct vhost_dev {
 	struct mm_struct *mm;
 	struct mutex mutex;
 	unsigned acked_features;
+=======
+	struct vhost_memory *memory;
+	struct mm_struct *mm;
+	struct mutex mutex;
+>>>>>>> v3.18
 =======
 	struct vhost_memory *memory;
 	struct mm_struct *mm;
@@ -150,7 +167,11 @@ struct vhost_dev {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 long vhost_dev_init(struct vhost_dev *, struct vhost_virtqueue **vqs, int nvqs);
+=======
+void vhost_dev_init(struct vhost_dev *, struct vhost_virtqueue **vqs, int nvqs);
+>>>>>>> v3.18
 =======
 void vhost_dev_init(struct vhost_dev *, struct vhost_virtqueue **vqs, int nvqs);
 >>>>>>> v3.18
@@ -167,7 +188,11 @@ int vhost_vq_access_ok(struct vhost_virtqueue *vq);
 int vhost_log_access_ok(struct vhost_dev *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vhost_get_vq_desc(struct vhost_dev *, struct vhost_virtqueue *,
+=======
+int vhost_get_vq_desc(struct vhost_virtqueue *,
+>>>>>>> v3.18
 =======
 int vhost_get_vq_desc(struct vhost_virtqueue *,
 >>>>>>> v3.18
@@ -205,6 +230,7 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int vhost_has_feature(struct vhost_dev *dev, int bit)
 {
 	unsigned acked_features;
@@ -213,6 +239,11 @@ static inline int vhost_has_feature(struct vhost_dev *dev, int bit)
 	 * held? */
 	acked_features = rcu_dereference_index_check(dev->acked_features, 1);
 	return acked_features & (1 << bit);
+=======
+static inline int vhost_has_feature(struct vhost_virtqueue *vq, int bit)
+{
+	return vq->acked_features & (1 << bit);
+>>>>>>> v3.18
 =======
 static inline int vhost_has_feature(struct vhost_virtqueue *vq, int bit)
 {

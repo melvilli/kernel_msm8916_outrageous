@@ -20,6 +20,12 @@ to deliver its interrupts via SPIs.
 - clock-frequency : The frequency of the main counter, in Hz. Optional.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- always-on : a boolean property. If present, the timer is powered through an
+  always-on power domain, therefore it never loses context.
+
+>>>>>>> v3.18
 =======
 - always-on : a boolean property. If present, the timer is powered through an
   always-on power domain, therefore it never loses context.

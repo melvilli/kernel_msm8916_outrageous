@@ -179,7 +179,11 @@ static int s_name ## _from_attrs_for_change(struct s_name *s,		\
 		nla = ntb[attr_nr];						\
 		if (nla) {						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (exclude_invariants && ((attr_flag) & DRBD_F_INVARIANT)) {		\
+=======
+			if (exclude_invariants && !!((attr_flag) & DRBD_F_INVARIANT)) {		\
+>>>>>>> v3.18
 =======
 			if (exclude_invariants && !!((attr_flag) & DRBD_F_INVARIANT)) {		\
 >>>>>>> v3.18
@@ -188,7 +192,11 @@ static int s_name ## _from_attrs_for_change(struct s_name *s,		\
 			}						\
 			assignment;					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (exclude_invariants && ((attr_flag) & DRBD_F_INVARIANT)) {		\
+=======
+		} else if (exclude_invariants && !!((attr_flag) & DRBD_F_INVARIANT)) {		\
+>>>>>>> v3.18
 =======
 		} else if (exclude_invariants && !!((attr_flag) & DRBD_F_INVARIANT)) {		\
 >>>>>>> v3.18
@@ -282,6 +290,7 @@ static struct genl_family ZZZ_genl_family __read_mostly = {
  * Magic: define multicast group registration helper
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef GENL_mc_group
 #define GENL_mc_group(group)						\
 static struct genl_multicast_group					\
@@ -289,6 +298,8 @@ CONCAT_(GENL_MAGIC_FAMILY, _mcg_ ## group) __read_mostly = {		\
 	.name = #group,							\
 };									\
 =======
+=======
+>>>>>>> v3.18
 #define ZZZ_genl_mcgrps		CONCAT_(GENL_MAGIC_FAMILY, _genl_mcgrps)
 static const struct genl_multicast_group ZZZ_genl_mcgrps[] = {
 #undef GENL_mc_group
@@ -304,11 +315,15 @@ enum CONCAT_(GENL_MAGIC_FAMILY, group_ids) {
 
 #undef GENL_mc_group
 #define GENL_mc_group(group)						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int CONCAT_(GENL_MAGIC_FAMILY, _genl_multicast_ ## group)(	\
 	struct sk_buff *skb, gfp_t flags)				\
 {									\
 	unsigned int group_id =						\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		CONCAT_(GENL_MAGIC_FAMILY, _mcg_ ## group).id;	\
 	if (!group_id)							\
@@ -319,10 +334,16 @@ static int CONCAT_(GENL_MAGIC_FAMILY, _genl_multicast_ ## group)(	\
 	return genlmsg_multicast(&ZZZ_genl_family, skb, 0,		\
 				 group_id, flags);			\
 >>>>>>> v3.18
+=======
+		CONCAT_(GENL_MAGIC_FAMILY, _group_ ## group);		\
+	return genlmsg_multicast(&ZZZ_genl_family, skb, 0,		\
+				 group_id, flags);			\
+>>>>>>> v3.18
 }
 
 #include GENL_MAGIC_INCLUDE_FILE
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int CONCAT_(GENL_MAGIC_FAMILY, _genl_register)(void)
 {
@@ -350,6 +371,8 @@ fail:
 	genl_unregister_family(&ZZZ_genl_family);
 	return err;
 =======
+=======
+>>>>>>> v3.18
 #undef GENL_mc_group
 #define GENL_mc_group(group)
 
@@ -358,6 +381,9 @@ int CONCAT_(GENL_MAGIC_FAMILY, _genl_register)(void)
 	return genl_register_family_with_ops_groups(&ZZZ_genl_family,	\
 						    ZZZ_genl_ops,	\
 						    ZZZ_genl_mcgrps);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

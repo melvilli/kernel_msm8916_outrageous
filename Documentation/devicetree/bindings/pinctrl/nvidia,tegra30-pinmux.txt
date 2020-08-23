@@ -92,7 +92,10 @@ Valid values for pin and group names are:
     uart3, uda, vi1.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Valid values for nvidia,functions are:
 
   blink, cec, clk_12m_out, clk_32k_in, core_pwr_req, cpu_pwr_req, crt,
@@ -105,6 +108,9 @@ Valid values for nvidia,functions are:
   uartb, uartc, uartd, uarte, ulpi, vgp1, vgp2, vgp3, vgp4, vgp5, vgp6,
   vi, vi_alt1, vi_alt2, vi_alt3
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 

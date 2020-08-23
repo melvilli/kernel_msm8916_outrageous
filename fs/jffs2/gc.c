@@ -1297,6 +1297,7 @@ static int jffs2_garbage_collect_dnode(struct jffs2_sb_info *c, struct jffs2_era
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The rules state that we must obtain the page lock *before* f->sem, so
 	 * drop f->sem temporarily. Since we also hold c->alloc_sem, nothing's
 	 * actually going to *change* so we're safe; we only allow reading.
@@ -1309,6 +1310,8 @@ static int jffs2_garbage_collect_dnode(struct jffs2_sb_info *c, struct jffs2_era
 	pg_ptr = jffs2_gc_fetch_page(c, f, start, &pg);
 	mutex_lock(&f->sem);
 =======
+=======
+>>>>>>> v3.18
 	/* First, use readpage() to read the appropriate page into the page cache */
 	/* Q: What happens if we actually try to GC the _same_ page for which commit_write()
 	 *    triggered garbage collection in the first place?
@@ -1317,6 +1320,9 @@ static int jffs2_garbage_collect_dnode(struct jffs2_sb_info *c, struct jffs2_era
 	 *    suboptimal, but at least we're correct.
 	 */
 	pg_ptr = jffs2_gc_fetch_page(c, f, start, &pg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (IS_ERR(pg_ptr)) {

@@ -17,6 +17,7 @@
 
 struct ghash_ctx {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 key[GHASH_BLOCK_SIZE];
 };
 
@@ -24,11 +25,16 @@ struct ghash_desc_ctx {
 	u8 icv[GHASH_BLOCK_SIZE];
 	u8 key[GHASH_BLOCK_SIZE];
 =======
+=======
+>>>>>>> v3.18
 	u8 icv[16];
 	u8 key[16];
 };
 
 struct ghash_desc_ctx {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 buffer[GHASH_BLOCK_SIZE];
 	u32 bytes;
@@ -38,10 +44,15 @@ static int ghash_init(struct shash_desc *desc)
 {
 	struct ghash_desc_ctx *dctx = shash_desc_ctx(desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ghash_ctx *ctx = crypto_shash_ctx(desc->tfm);
 
 	memset(dctx, 0, sizeof(*dctx));
 	memcpy(dctx->key, ctx->key, GHASH_BLOCK_SIZE);
+=======
+
+	memset(dctx, 0, sizeof(*dctx));
+>>>>>>> v3.18
 =======
 
 	memset(dctx, 0, sizeof(*dctx));
@@ -62,6 +73,10 @@ static int ghash_setkey(struct crypto_shash *tfm,
 
 	memcpy(ctx->key, key, GHASH_BLOCK_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(ctx->icv, 0, GHASH_BLOCK_SIZE);
+>>>>>>> v3.18
 =======
 	memset(ctx->icv, 0, GHASH_BLOCK_SIZE);
 >>>>>>> v3.18
@@ -74,6 +89,10 @@ static int ghash_update(struct shash_desc *desc,
 {
 	struct ghash_desc_ctx *dctx = shash_desc_ctx(desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ghash_ctx *ctx = crypto_shash_ctx(desc->tfm);
+>>>>>>> v3.18
 =======
 	struct ghash_ctx *ctx = crypto_shash_ctx(desc->tfm);
 >>>>>>> v3.18
@@ -93,7 +112,11 @@ static int ghash_update(struct shash_desc *desc,
 
 		if (!dctx->bytes) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = crypt_s390_kimd(KIMD_GHASH, dctx, buf,
+=======
+			ret = crypt_s390_kimd(KIMD_GHASH, ctx, buf,
+>>>>>>> v3.18
 =======
 			ret = crypt_s390_kimd(KIMD_GHASH, ctx, buf,
 >>>>>>> v3.18
@@ -106,7 +129,11 @@ static int ghash_update(struct shash_desc *desc,
 	n = srclen & ~(GHASH_BLOCK_SIZE - 1);
 	if (n) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = crypt_s390_kimd(KIMD_GHASH, dctx, src, n);
+=======
+		ret = crypt_s390_kimd(KIMD_GHASH, ctx, src, n);
+>>>>>>> v3.18
 =======
 		ret = crypt_s390_kimd(KIMD_GHASH, ctx, src, n);
 >>>>>>> v3.18
@@ -125,7 +152,11 @@ static int ghash_update(struct shash_desc *desc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ghash_flush(struct ghash_desc_ctx *dctx)
+=======
+static int ghash_flush(struct ghash_ctx *ctx, struct ghash_desc_ctx *dctx)
+>>>>>>> v3.18
 =======
 static int ghash_flush(struct ghash_ctx *ctx, struct ghash_desc_ctx *dctx)
 >>>>>>> v3.18
@@ -139,6 +170,7 @@ static int ghash_flush(struct ghash_ctx *ctx, struct ghash_desc_ctx *dctx)
 		memset(pos, 0, dctx->bytes);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = crypt_s390_kimd(KIMD_GHASH, dctx, buf, GHASH_BLOCK_SIZE);
 		if (ret != GHASH_BLOCK_SIZE)
 			return -EIO;
@@ -147,12 +179,17 @@ static int ghash_flush(struct ghash_ctx *ctx, struct ghash_desc_ctx *dctx)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		ret = crypt_s390_kimd(KIMD_GHASH, ctx, buf, GHASH_BLOCK_SIZE);
 		if (ret != GHASH_BLOCK_SIZE)
 			return -EIO;
 	}
 
 	dctx->bytes = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -161,18 +198,24 @@ static int ghash_final(struct shash_desc *desc, u8 *dst)
 {
 	struct ghash_desc_ctx *dctx = shash_desc_ctx(desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	ret = ghash_flush(dctx);
 	if (!ret)
 		memcpy(dst, dctx->icv, GHASH_BLOCK_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	struct ghash_ctx *ctx = crypto_shash_ctx(desc->tfm);
 	int ret;
 
 	ret = ghash_flush(ctx, dctx);
 	if (!ret)
 		memcpy(dst, ctx->icv, GHASH_BLOCK_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -213,7 +256,11 @@ module_init(ghash_mod_init);
 module_exit(ghash_mod_exit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("ghash");
+=======
+MODULE_ALIAS("ghash");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("ghash");
 >>>>>>> v3.18

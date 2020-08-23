@@ -47,7 +47,12 @@ static inline int debugger_fault_handler(struct pt_regs *regs) { return 0; }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int set_breakpoint(struct arch_hw_breakpoint *brk);
+=======
+void set_breakpoint(struct arch_hw_breakpoint *brk);
+void __set_breakpoint(struct arch_hw_breakpoint *brk);
+>>>>>>> v3.18
 =======
 void set_breakpoint(struct arch_hw_breakpoint *brk);
 void __set_breakpoint(struct arch_hw_breakpoint *brk);

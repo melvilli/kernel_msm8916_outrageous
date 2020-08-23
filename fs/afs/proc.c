@@ -42,11 +42,16 @@ static const struct file_operations afs_proc_cells_fops = {
 	.llseek		= seq_lseek,
 	.release	= seq_release,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.owner		= THIS_MODULE,
 };
 
 static int afs_proc_rootcell_open(struct inode *inode, struct file *file);
 static int afs_proc_rootcell_release(struct inode *inode, struct file *file);
+=======
+};
+
+>>>>>>> v3.18
 =======
 };
 
@@ -59,6 +64,7 @@ static ssize_t afs_proc_rootcell_write(struct file *file,
 
 static const struct file_operations afs_proc_rootcell_fops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.open		= afs_proc_rootcell_open,
 	.read		= afs_proc_rootcell_read,
 	.write		= afs_proc_rootcell_write,
@@ -70,6 +76,14 @@ static const struct file_operations afs_proc_rootcell_fops = {
 static int afs_proc_cell_volumes_open(struct inode *inode, struct file *file);
 static int afs_proc_cell_volumes_release(struct inode *inode,
 					 struct file *file);
+=======
+	.read		= afs_proc_rootcell_read,
+	.write		= afs_proc_rootcell_write,
+	.llseek		= no_llseek,
+};
+
+static int afs_proc_cell_volumes_open(struct inode *inode, struct file *file);
+>>>>>>> v3.18
 =======
 	.read		= afs_proc_rootcell_read,
 	.write		= afs_proc_rootcell_write,
@@ -96,8 +110,12 @@ static const struct file_operations afs_proc_cell_volumes_fops = {
 	.read		= seq_read,
 	.llseek		= seq_lseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release	= afs_proc_cell_volumes_release,
 	.owner		= THIS_MODULE,
+=======
+	.release	= seq_release,
+>>>>>>> v3.18
 =======
 	.release	= seq_release,
 >>>>>>> v3.18
@@ -106,8 +124,11 @@ static const struct file_operations afs_proc_cell_volumes_fops = {
 static int afs_proc_cell_vlservers_open(struct inode *inode,
 					struct file *file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int afs_proc_cell_vlservers_release(struct inode *inode,
 					   struct file *file);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void *afs_proc_cell_vlservers_start(struct seq_file *p, loff_t *pos);
@@ -128,6 +149,7 @@ static const struct file_operations afs_proc_cell_vlservers_fops = {
 	.read		= seq_read,
 	.llseek		= seq_lseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release	= afs_proc_cell_vlservers_release,
 	.owner		= THIS_MODULE,
 };
@@ -136,10 +158,15 @@ static int afs_proc_cell_servers_open(struct inode *inode, struct file *file);
 static int afs_proc_cell_servers_release(struct inode *inode,
 					 struct file *file);
 =======
+=======
+>>>>>>> v3.18
 	.release	= seq_release,
 };
 
 static int afs_proc_cell_servers_open(struct inode *inode, struct file *file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void *afs_proc_cell_servers_start(struct seq_file *p, loff_t *pos);
 static void *afs_proc_cell_servers_next(struct seq_file *p, void *v,
@@ -159,8 +186,12 @@ static const struct file_operations afs_proc_cell_servers_fops = {
 	.read		= seq_read,
 	.llseek		= seq_lseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release	= afs_proc_cell_servers_release,
 	.owner		= THIS_MODULE,
+=======
+	.release	= seq_release,
+>>>>>>> v3.18
 =======
 	.release	= seq_release,
 >>>>>>> v3.18
@@ -172,8 +203,11 @@ static const struct file_operations afs_proc_cell_servers_fops = {
 int afs_proc_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct proc_dir_entry *p;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	_enter("");
@@ -182,6 +216,7 @@ int afs_proc_init(void)
 	if (!proc_afs)
 		goto error_dir;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	p = proc_create("cells", 0, proc_afs, &afs_proc_cells_fops);
 	if (!p)
@@ -195,15 +230,25 @@ int afs_proc_init(void)
 	    !proc_create("rootcell", 0644, proc_afs, &afs_proc_rootcell_fops))
 		goto error_tree;
 >>>>>>> v3.18
+=======
+	if (!proc_create("cells", 0644, proc_afs, &afs_proc_cells_fops) ||
+	    !proc_create("rootcell", 0644, proc_afs, &afs_proc_rootcell_fops))
+		goto error_tree;
+>>>>>>> v3.18
 
 	_leave(" = 0");
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_rootcell:
  	remove_proc_entry("cells", proc_afs);
 error_cells:
 	remove_proc_entry("fs/afs", NULL);
+=======
+error_tree:
+	remove_proc_subtree("fs/afs", NULL);
+>>>>>>> v3.18
 =======
 error_tree:
 	remove_proc_subtree("fs/afs", NULL);
@@ -219,9 +264,13 @@ error_dir:
 void afs_proc_cleanup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	remove_proc_entry("rootcell", proc_afs);
 	remove_proc_entry("cells", proc_afs);
 	remove_proc_entry("fs/afs", NULL);
+=======
+	remove_proc_subtree("fs/afs", NULL);
+>>>>>>> v3.18
 =======
 	remove_proc_subtree("fs/afs", NULL);
 >>>>>>> v3.18
@@ -370,6 +419,7 @@ inval:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Stubs for /proc/fs/afs/rootcell
  */
@@ -383,6 +433,8 @@ static int afs_proc_rootcell_release(struct inode *inode, struct file *file)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t afs_proc_rootcell_read(struct file *file, char __user *buf,
@@ -441,6 +493,7 @@ nomem:
 int afs_proc_cell_setup(struct afs_cell *cell)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct proc_dir_entry *p;
 
 	_enter("%p{%s}", cell, cell->name);
@@ -464,6 +517,8 @@ int afs_proc_cell_setup(struct afs_cell *cell)
 	if (!p)
 		goto error_volumes;
 =======
+=======
+>>>>>>> v3.18
 	struct proc_dir_entry *dir;
 
 	_enter("%p{%s}", cell, cell->name);
@@ -479,11 +534,15 @@ int afs_proc_cell_setup(struct afs_cell *cell)
 	    !proc_create_data("volumes", 0, dir,
 			     &afs_proc_cell_volumes_fops, cell))
 		goto error_tree;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	_leave(" = 0");
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 error_volumes:
 	remove_proc_entry("vlservers", cell->proc_dir);
@@ -491,6 +550,10 @@ error_vlservers:
 	remove_proc_entry("servers", cell->proc_dir);
 error_servers:
 	remove_proc_entry(cell->name, proc_afs);
+=======
+error_tree:
+	remove_proc_subtree(cell->name, proc_afs);
+>>>>>>> v3.18
 =======
 error_tree:
 	remove_proc_subtree(cell->name, proc_afs);
@@ -508,10 +571,14 @@ void afs_proc_cell_remove(struct afs_cell *cell)
 	_enter("");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	remove_proc_entry("volumes", cell->proc_dir);
 	remove_proc_entry("vlservers", cell->proc_dir);
 	remove_proc_entry("servers", cell->proc_dir);
 	remove_proc_entry(cell->name, proc_afs);
+=======
+	remove_proc_subtree(cell->name, proc_afs);
+>>>>>>> v3.18
 =======
 	remove_proc_subtree(cell->name, proc_afs);
 >>>>>>> v3.18
@@ -544,6 +611,7 @@ static int afs_proc_cell_volumes_open(struct inode *inode, struct file *file)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * close the file and release the ref to the cell
  */
 static int afs_proc_cell_volumes_release(struct inode *inode, struct file *file)
@@ -552,6 +620,8 @@ static int afs_proc_cell_volumes_release(struct inode *inode, struct file *file)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * set up the iterator to start reading from the cells list and return the
@@ -653,6 +723,7 @@ static int afs_proc_cell_vlservers_open(struct inode *inode, struct file *file)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * close the file and release the ref to the cell
  */
 static int afs_proc_cell_vlservers_release(struct inode *inode,
@@ -662,6 +733,8 @@ static int afs_proc_cell_vlservers_release(struct inode *inode,
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * set up the iterator to start reading from the cells list and return the
@@ -760,6 +833,7 @@ static int afs_proc_cell_servers_open(struct inode *inode, struct file *file)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * close the file and release the ref to the cell
  */
 static int afs_proc_cell_servers_release(struct inode *inode,
@@ -769,6 +843,8 @@ static int afs_proc_cell_servers_release(struct inode *inode,
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * set up the iterator to start reading from the cells list and return the

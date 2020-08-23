@@ -39,8 +39,14 @@
 #include "../perf.h"
 #include "trace-event.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <lk/debugfs.h>
 #include "evsel.h"
+=======
+#include <api/fs/debugfs.h>
+#include "evsel.h"
+#include "debug.h"
+>>>>>>> v3.18
 =======
 #include <api/fs/debugfs.h>
 #include "evsel.h"
@@ -52,6 +58,7 @@
 static int output_fd;
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const char *find_debugfs(void)
 {
@@ -114,6 +121,8 @@ static void put_tracing_file(char *file)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int bigendian(void)
 {
 	unsigned char str[] = { 0x1, 0x2, 0x3, 0x4, 0x0, 0x0, 0x0, 0x0};
@@ -170,7 +179,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int read_header_files(void)
+=======
+static int record_header_files(void)
+>>>>>>> v3.18
 =======
 static int record_header_files(void)
 >>>>>>> v3.18
@@ -264,6 +277,7 @@ static int copy_event_system(const char *sys, struct tracepoint_path *tps)
 		    !name_in_tp_list(dent->d_name, tps))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		format = malloc(strlen(sys) + strlen(dent->d_name) + 10);
 		if (!format) {
 			err = -ENOMEM;
@@ -271,10 +285,15 @@ static int copy_event_system(const char *sys, struct tracepoint_path *tps)
 		}
 		sprintf(format, "%s/%s/format", sys, dent->d_name);
 =======
+=======
+>>>>>>> v3.18
 		if (asprintf(&format, "%s/%s/format", sys, dent->d_name) < 0) {
 			err = -ENOMEM;
 			goto out;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = stat(format, &st);
 		free(format);
@@ -297,6 +316,7 @@ static int copy_event_system(const char *sys, struct tracepoint_path *tps)
 		    !name_in_tp_list(dent->d_name, tps))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		format = malloc(strlen(sys) + strlen(dent->d_name) + 10);
 		if (!format) {
 			err = -ENOMEM;
@@ -304,10 +324,15 @@ static int copy_event_system(const char *sys, struct tracepoint_path *tps)
 		}
 		sprintf(format, "%s/%s/format", sys, dent->d_name);
 =======
+=======
+>>>>>>> v3.18
 		if (asprintf(&format, "%s/%s/format", sys, dent->d_name) < 0) {
 			err = -ENOMEM;
 			goto out;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = stat(format, &st);
 
@@ -327,7 +352,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int read_ftrace_files(struct tracepoint_path *tps)
+=======
+static int record_ftrace_files(struct tracepoint_path *tps)
+>>>>>>> v3.18
 =======
 static int record_ftrace_files(struct tracepoint_path *tps)
 >>>>>>> v3.18
@@ -360,7 +389,11 @@ static bool system_in_tp_list(char *sys, struct tracepoint_path *tps)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int read_event_files(struct tracepoint_path *tps)
+=======
+static int record_event_files(struct tracepoint_path *tps)
+>>>>>>> v3.18
 =======
 static int record_event_files(struct tracepoint_path *tps)
 >>>>>>> v3.18
@@ -412,6 +445,7 @@ static int record_event_files(struct tracepoint_path *tps)
 		    !system_in_tp_list(dent->d_name, tps))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sys = malloc(strlen(path) + strlen(dent->d_name) + 2);
 		if (!sys) {
 			err = -ENOMEM;
@@ -419,10 +453,15 @@ static int record_event_files(struct tracepoint_path *tps)
 		}
 		sprintf(sys, "%s/%s", path, dent->d_name);
 =======
+=======
+>>>>>>> v3.18
 		if (asprintf(&sys, "%s/%s", path, dent->d_name) < 0) {
 			err = -ENOMEM;
 			goto out;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = stat(sys, &st);
 		if (ret >= 0) {
@@ -446,7 +485,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int read_proc_kallsyms(void)
+=======
+static int record_proc_kallsyms(void)
+>>>>>>> v3.18
 =======
 static int record_proc_kallsyms(void)
 >>>>>>> v3.18
@@ -468,7 +511,11 @@ static int record_proc_kallsyms(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int read_ftrace_printk(void)
+=======
+static int record_ftrace_printk(void)
+>>>>>>> v3.18
 =======
 static int record_ftrace_printk(void)
 >>>>>>> v3.18
@@ -507,8 +554,13 @@ put_tracepoints_path(struct tracepoint_path *tps)
 
 		tps = tps->next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(t->name);
 		free(t->system);
+=======
+		zfree(&t->name);
+		zfree(&t->system);
+>>>>>>> v3.18
 =======
 		zfree(&t->name);
 		zfree(&t->system);
@@ -529,9 +581,12 @@ get_tracepoints_path(struct list_head *pattrs)
 			continue;
 		++nr_tracepoints;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ppath->next = tracepoint_id_to_path(pos->attr.config);
 		if (!ppath->next) {
 =======
+=======
+>>>>>>> v3.18
 
 		if (pos->name) {
 			ppath->next = tracepoint_name_to_path(pos->name);
@@ -548,12 +603,19 @@ try_id:
 		ppath->next = tracepoint_id_to_path(pos->attr.config);
 		if (!ppath->next) {
 error:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pr_debug("No memory to alloc tracepoints list\n");
 			put_tracepoints_path(&path);
 			return NULL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+next:
+>>>>>>> v3.18
 =======
 next:
 >>>>>>> v3.18
@@ -599,8 +661,11 @@ static int tracing_data_header(void)
 		buf[0] = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_trace_init(buf[0], buf[0]);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (write(output_fd, buf, 1) != 1)
@@ -665,6 +730,7 @@ struct tracing_data *tracing_data_get(struct list_head *pattrs,
 	if (err)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = read_header_files();
 	if (err)
 		goto out;
@@ -679,6 +745,8 @@ struct tracing_data *tracing_data_get(struct list_head *pattrs,
 		goto out;
 	err = read_ftrace_printk();
 =======
+=======
+>>>>>>> v3.18
 	err = record_header_files();
 	if (err)
 		goto out;
@@ -692,6 +760,9 @@ struct tracing_data *tracing_data_get(struct list_head *pattrs,
 	if (err)
 		goto out;
 	err = record_ftrace_printk();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -706,10 +777,15 @@ out:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err) {
 		free(tdata);
 		tdata = NULL;
 	}
+=======
+	if (err)
+		zfree(&tdata);
+>>>>>>> v3.18
 =======
 	if (err)
 		zfree(&tdata);

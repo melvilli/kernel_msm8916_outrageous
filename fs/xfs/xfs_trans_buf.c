@@ -18,6 +18,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
@@ -30,6 +31,8 @@
 #include "xfs_dinode.h"
 #include "xfs_inode.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_shared.h"
 #include "xfs_format.h"
 #include "xfs_log_format.h"
@@ -39,6 +42,9 @@
 #include "xfs_mount.h"
 #include "xfs_inode.h"
 #include "xfs_trans.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_buf_item.h"
 #include "xfs_trans_priv.h"
@@ -181,7 +187,11 @@ xfs_trans_get_buf_map(
 		bip->bli_recur++;
 		trace_xfs_trans_get_buf_recur(bip);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (bp);
+=======
+		return bp;
+>>>>>>> v3.18
 =======
 		return bp;
 >>>>>>> v3.18
@@ -197,7 +207,11 @@ xfs_trans_get_buf_map(
 	_xfs_trans_bjoin(tp, bp, 1);
 	trace_xfs_trans_get_buf(bp->b_fspriv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (bp);
+=======
+	return bp;
+>>>>>>> v3.18
 =======
 	return bp;
 >>>>>>> v3.18
@@ -224,9 +238,14 @@ xfs_trans_getsb(xfs_trans_t	*tp,
 	 * if tp is NULL.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tp == NULL) {
 		return (xfs_getsb(mp, flags));
 	}
+=======
+	if (tp == NULL)
+		return xfs_getsb(mp, flags);
+>>>>>>> v3.18
 =======
 	if (tp == NULL)
 		return xfs_getsb(mp, flags);
@@ -246,7 +265,11 @@ xfs_trans_getsb(xfs_trans_t	*tp,
 		bip->bli_recur++;
 		trace_xfs_trans_getsb_recur(bip);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (bp);
+=======
+		return bp;
+>>>>>>> v3.18
 =======
 		return bp;
 >>>>>>> v3.18
@@ -259,7 +282,11 @@ xfs_trans_getsb(xfs_trans_t	*tp,
 	_xfs_trans_bjoin(tp, bp, 1);
 	trace_xfs_trans_getsb(bp->b_fspriv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (bp);
+=======
+	return bp;
+>>>>>>> v3.18
 =======
 	return bp;
 >>>>>>> v3.18
@@ -303,7 +330,11 @@ xfs_trans_read_buf_map(
 		if (!bp)
 			return (flags & XBF_TRYLOCK) ?
 <<<<<<< HEAD
+<<<<<<< HEAD
 					EAGAIN : XFS_ERROR(ENOMEM);
+=======
+					-EAGAIN : -ENOMEM;
+>>>>>>> v3.18
 =======
 					-EAGAIN : -ENOMEM;
 >>>>>>> v3.18
@@ -315,11 +346,17 @@ xfs_trans_read_buf_map(
 			xfs_buf_stale(bp);
 			xfs_buf_relse(bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			/* bad CRC means corrupted metadata */
 			if (error == -EFSBADCRC)
 				error = -EFSCORRUPTED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return error;
 		}
@@ -330,7 +367,11 @@ xfs_trans_read_buf_map(
 					xfs_buf_relse(bp);
 					xfs_debug(mp, "Returning error!");
 <<<<<<< HEAD
+<<<<<<< HEAD
 					return XFS_ERROR(EIO);
+=======
+					return -EIO;
+>>>>>>> v3.18
 =======
 					return -EIO;
 >>>>>>> v3.18
@@ -365,16 +406,22 @@ xfs_trans_read_buf_map(
 			XFS_BUF_READ(bp);
 			bp->b_ops = ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			xfsbdstrat(tp->t_mountp, bp);
 			error = xfs_buf_iowait(bp);
 			if (error) {
 				xfs_buf_ioerror_alert(bp, __func__);
 =======
+=======
+>>>>>>> v3.18
 
 			error = xfs_buf_submit_wait(bp);
 			if (error) {
 				if (!XFS_FORCED_SHUTDOWN(mp))
 					xfs_buf_ioerror_alert(bp, __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				xfs_buf_relse(bp);
 				/*
@@ -386,6 +433,12 @@ xfs_trans_read_buf_map(
 					xfs_force_shutdown(tp->t_mountp,
 							SHUTDOWN_META_IO_ERROR);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				/* bad CRC means corrupted metadata */
+				if (error == -EFSBADCRC)
+					error = -EFSCORRUPTED;
+>>>>>>> v3.18
 =======
 				/* bad CRC means corrupted metadata */
 				if (error == -EFSBADCRC)
@@ -402,7 +455,11 @@ xfs_trans_read_buf_map(
 			trace_xfs_trans_read_buf_shut(bp, _RET_IP_);
 			*bpp = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EIO);
+=======
+			return -EIO;
+>>>>>>> v3.18
 =======
 			return -EIO;
 >>>>>>> v3.18
@@ -423,7 +480,11 @@ xfs_trans_read_buf_map(
 		*bpp = NULL;
 		return (flags & XBF_TRYLOCK) ?
 <<<<<<< HEAD
+<<<<<<< HEAD
 					0 : XFS_ERROR(ENOMEM);
+=======
+					0 : -ENOMEM;
+>>>>>>> v3.18
 =======
 					0 : -ENOMEM;
 >>>>>>> v3.18
@@ -437,11 +498,17 @@ xfs_trans_read_buf_map(
 			xfs_force_shutdown(tp->t_mountp, SHUTDOWN_META_IO_ERROR);
 		xfs_buf_relse(bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* bad CRC means corrupted metadata */
 		if (error == -EFSBADCRC)
 			error = -EFSCORRUPTED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return error;
 	}
@@ -454,7 +521,11 @@ xfs_trans_read_buf_map(
 				xfs_buf_relse(bp);
 				xfs_debug(mp, "Returning trans error!");
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return XFS_ERROR(EIO);
+=======
+				return -EIO;
+>>>>>>> v3.18
 =======
 				return -EIO;
 >>>>>>> v3.18
@@ -476,10 +547,16 @@ shutdown_abort:
 	xfs_buf_relse(bp);
 	*bpp = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return XFS_ERROR(EIO);
 }
 
 
+=======
+	return -EIO;
+}
+
+>>>>>>> v3.18
 =======
 	return -EIO;
 }
@@ -594,7 +671,11 @@ xfs_trans_brelse(xfs_trans_t	*tp,
 /*
  * Mark the buffer as not needing to be unlocked when the buf item's
 <<<<<<< HEAD
+<<<<<<< HEAD
  * IOP_UNLOCK() routine is called.  The buffer must already be locked
+=======
+ * iop_unlock() routine is called.  The buffer must already be locked
+>>>>>>> v3.18
 =======
  * iop_unlock() routine is called.  The buffer must already be locked
 >>>>>>> v3.18
@@ -695,9 +776,12 @@ xfs_trans_log_buf(xfs_trans_t	*tp,
 	tp->t_flags |= XFS_TRANS_DIRTY;
 	bip->bli_item.li_desc->lid_flags |= XFS_LID_DIRTY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bip->bli_flags |= XFS_BLI_LOGGED;
 	xfs_buf_item_log(bip, first, last);
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * If we have an ordered buffer we are not logging any dirty range but
@@ -706,6 +790,9 @@ xfs_trans_log_buf(xfs_trans_t	*tp,
 	bip->bli_flags |= XFS_BLI_DIRTY | XFS_BLI_LOGGED;
 	if (!(bip->bli_flags & XFS_BLI_ORDERED))
 		xfs_buf_item_log(bip, first, last);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -860,7 +947,10 @@ xfs_trans_inode_alloc_buf(
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Mark the buffer as ordered for this transaction. This means
  * that the contents of the buffer are not recorded in the transaction
  * but it is tracked in the AIL as though it was. This allows us
@@ -884,6 +974,9 @@ xfs_trans_ordered_buf(
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Set the type of the buffer for log recovery so that it can correctly identify
  * and hence attach the correct buffer ops to the buffer after replay.

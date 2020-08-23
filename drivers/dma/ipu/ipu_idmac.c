@@ -1233,13 +1233,19 @@ static irqreturn_t idmac_interrupt(int irq, void *dev_id)
 	descnew = desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(dev, "IDMAC irq %d, dma 0x%08x, next dma 0x%08x, current %d, curbuf 0x%08x\n",
 		irq, sg_dma_address(*sg), sgnext ? sg_dma_address(sgnext) : 0, ichan->active_buffer, curbuf);
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(dev, "IDMAC irq %d, dma %#llx, next dma %#llx, current %d, curbuf %#x\n",
 		irq, (u64)sg_dma_address(*sg),
 		sgnext ? (u64)sg_dma_address(sgnext) : 0,
 		ichan->active_buffer, curbuf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Find the descriptor of sgnext */
@@ -1538,12 +1544,15 @@ static int idmac_alloc_chan_resources(struct dma_chan *chan)
 	if (chan->chan_id == IDMAC_IC_7) {
 		ic_sof = ipu_irq_map(69);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ic_sof > 0)
 			request_irq(ic_sof, ic_sof_irq, 0, "IC SOF", ichan);
 		ic_eof = ipu_irq_map(70);
 		if (ic_eof > 0)
 			request_irq(ic_eof, ic_eof_irq, 0, "IC EOF", ichan);
 =======
+=======
+>>>>>>> v3.18
 		if (ic_sof > 0) {
 			ret = request_irq(ic_sof, ic_sof_irq, 0, "IC SOF", ichan);
 			if (ret)
@@ -1555,6 +1564,9 @@ static int idmac_alloc_chan_resources(struct dma_chan *chan)
 			if (ret)
 				dev_err(&chan->dev->device, "request irq failed for IC EOF");
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 #endif
@@ -1615,10 +1627,14 @@ static enum dma_status idmac_tx_status(struct dma_chan *chan,
 		       dma_cookie_t cookie, struct dma_tx_state *txstate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_set_tx_state(txstate, chan->completed_cookie, chan->cookie, 0);
 	if (cookie != chan->cookie)
 		return DMA_ERROR;
 	return DMA_SUCCESS;
+=======
+	return dma_cookie_status(chan, cookie, txstate);
+>>>>>>> v3.18
 =======
 	return dma_cookie_status(chan, cookie, txstate);
 >>>>>>> v3.18
@@ -1793,7 +1809,10 @@ static int ipu_remove(struct platform_device *pdev)
 	iounmap(ipu->reg_ipu);
 	tasklet_kill(&ipu->tasklet);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

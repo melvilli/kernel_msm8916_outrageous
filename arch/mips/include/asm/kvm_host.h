@@ -20,7 +20,10 @@
 #include <linux/spinlock.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* MIPS KVM register ids */
 #define MIPS_CP0_32(_R, _S)					\
 	(KVM_REG_MIPS | KVM_REG_SIZE_U32 | 0x10000 | (8 * (_R) + (_S)))
@@ -53,6 +56,9 @@
 #define KVM_REG_MIPS_CP0_XCONTEXT	MIPS_CP0_64(20, 0)
 #define KVM_REG_MIPS_CP0_ERROREPC	MIPS_CP0_64(30, 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define KVM_MAX_VCPUS		1
@@ -62,6 +68,7 @@
 
 #define KVM_COALESCED_MMIO_PAGE_OFFSET 1
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Don't support huge pages */
 #define KVM_HPAGE_GFN_SHIFT(x)	0
@@ -75,15 +82,21 @@
 /* Special address that contains the comm page, used for reducing # of traps */
 #define KVM_GUEST_COMMPAGE_ADDR     0x0
 =======
+=======
+>>>>>>> v3.18
 
 
 /* Special address that contains the comm page, used for reducing # of traps */
 #define KVM_GUEST_COMMPAGE_ADDR		0x0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define KVM_GUEST_KERNEL_MODE(vcpu)	((kvm_read_c0_guest_status(vcpu->arch.cop0) & (ST0_EXL | ST0_ERL)) || \
 					((kvm_read_c0_guest_status(vcpu->arch.cop0) & KSU_USER) == 0))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define KVM_GUEST_KUSEG             0x00000000UL
 #define KVM_GUEST_KSEG0             0x40000000UL
@@ -91,11 +104,16 @@
 #define KVM_GUEST_KSEGX(a)          ((_ACAST32_(a)) & 0x60000000)
 #define KVM_GUEST_CPHYSADDR(a)      ((_ACAST32_(a)) & 0x1fffffff)
 =======
+=======
+>>>>>>> v3.18
 #define KVM_GUEST_KUSEG			0x00000000UL
 #define KVM_GUEST_KSEG0			0x40000000UL
 #define KVM_GUEST_KSEG23		0x60000000UL
 #define KVM_GUEST_KSEGX(a)		((_ACAST32_(a)) & 0x60000000)
 #define KVM_GUEST_CPHYSADDR(a)		((_ACAST32_(a)) & 0x1fffffff)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define KVM_GUEST_CKSEG0ADDR(a)		(KVM_GUEST_CPHYSADDR(a) | KVM_GUEST_KSEG0)
@@ -109,6 +127,7 @@
 #define KVM_GUEST_KSEG1ADDR(a)		(KVM_GUEST_CPHYSADDR(a) | KVM_GUEST_KSEG1)
 #define KVM_GUEST_KSEG23ADDR(a)		(KVM_GUEST_CPHYSADDR(a) | KVM_GUEST_KSEG23)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define KVM_INVALID_PAGE            0xdeadbeef
 #define KVM_INVALID_INST            0xdeadbeef
@@ -127,6 +146,8 @@ struct kvm_run;
 struct kvm_vcpu;
 struct kvm_interrupt;
 =======
+=======
+>>>>>>> v3.18
 #define KVM_INVALID_PAGE		0xdeadbeef
 #define KVM_INVALID_INST		0xdeadbeef
 #define KVM_INVALID_ADDR		0xdeadbeef
@@ -138,6 +159,9 @@ struct kvm_interrupt;
 
 #define CAUSEB_DC			27
 #define CAUSEF_DC			(_ULCAST_(1) << 27)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern atomic_t kvm_mips_instance;
@@ -198,8 +222,13 @@ struct kvm_arch {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define N_MIPS_COPROC_REGS      32
 #define N_MIPS_COPROC_SEL   	8
+=======
+#define N_MIPS_COPROC_REGS	32
+#define N_MIPS_COPROC_SEL	8
+>>>>>>> v3.18
 =======
 #define N_MIPS_COPROC_REGS	32
 #define N_MIPS_COPROC_SEL	8
@@ -215,6 +244,7 @@ struct mips_coproc {
 /*
  * Coprocessor 0 register names
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	MIPS_CP0_TLB_INDEX	    0
 #define	MIPS_CP0_TLB_RANDOM	    1
@@ -314,6 +344,8 @@ struct mips_coproc {
 /* Have config1, Cacheable, noncoherent, write-back, write allocate*/
 #define MIPS_CONFIG0                                              \
 =======
+=======
+>>>>>>> v3.18
 #define MIPS_CP0_TLB_INDEX	0
 #define MIPS_CP0_TLB_RANDOM	1
 #define MIPS_CP0_TLB_LOW	2
@@ -411,12 +443,16 @@ struct mips_coproc {
 
 /* Have config1, Cacheable, noncoherent, write-back, write allocate*/
 #define MIPS_CONFIG0						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   ((1 << CP0C0_M) | (0x3 << CP0C0_K0))
 
 /* Have config2, no coprocessor2 attached, no MDMX support attached,
    no performance counters, watch registers present,
    no code compression, EJTAG present, no FPU, no watch registers */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MIPS_CONFIG1                                              \
 ((1 << CP0C1_M) |                                                 \
@@ -427,6 +463,8 @@ struct mips_coproc {
 /* Have config3, no tertiary/secondary caches implemented */
 #define MIPS_CONFIG2                                              \
 =======
+=======
+>>>>>>> v3.18
 #define MIPS_CONFIG1						\
 ((1 << CP0C1_M) |						\
  (0 << CP0C1_C2) | (0 << CP0C1_MD) | (0 << CP0C1_PC) |		\
@@ -435,6 +473,9 @@ struct mips_coproc {
 
 /* Have config3, no tertiary/secondary caches implemented */
 #define MIPS_CONFIG2						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ((1 << CP0C2_M))
 
@@ -442,9 +483,15 @@ struct mips_coproc {
    no external interrupt controller, no vectored interrupts,
    no 1kb pages, no SmartMIPS ASE, no trace logic */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MIPS_CONFIG3                                              \
 ((0 << CP0C3_M) | (0 << CP0C3_DSPP) | (0 << CP0C3_LPA) |          \
  (0 << CP0C3_VEIC) | (0 << CP0C3_VInt) | (0 << CP0C3_SP) |        \
+=======
+#define MIPS_CONFIG3						\
+((0 << CP0C3_M) | (0 << CP0C3_DSPP) | (0 << CP0C3_LPA) |	\
+ (0 << CP0C3_VEIC) | (0 << CP0C3_VInt) | (0 << CP0C3_SP) |	\
+>>>>>>> v3.18
 =======
 #define MIPS_CONFIG3						\
 ((0 << CP0C3_M) | (0 << CP0C3_DSPP) | (0 << CP0C3_LPA) |	\
@@ -468,6 +515,7 @@ enum mips_mmu_types {
  * Trap codes
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define T_INT           0	/* Interrupt pending */
 #define T_TLB_MOD       1	/* TLB modified fault */
 #define T_TLB_LD_MISS       2	/* TLB miss on load or ifetch */
@@ -482,6 +530,8 @@ enum mips_mmu_types {
 #define T_COP_UNUSABLE      11	/* Coprocessor unusable */
 #define T_OVFLOW        12	/* Arithmetic overflow */
 =======
+=======
+>>>>>>> v3.18
 #define T_INT			0	/* Interrupt pending */
 #define T_TLB_MOD		1	/* TLB modified fault */
 #define T_TLB_LD_MISS		2	/* TLB miss on load or ifetch */
@@ -495,11 +545,15 @@ enum mips_mmu_types {
 #define T_RES_INST		10	/* Reserved instruction exception */
 #define T_COP_UNUSABLE		11	/* Coprocessor unusable */
 #define T_OVFLOW		12	/* Arithmetic overflow */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Trap definitions added for r4000 port.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define T_TRAP          13	/* Trap instruction */
 #define T_VCEI          14	/* Virtual coherency exception */
@@ -515,6 +569,8 @@ enum mips_mmu_types {
 #define RESUME_GUEST_DR         RESUME_FLAG_DR
 #define RESUME_HOST             RESUME_FLAG_HOST
 =======
+=======
+>>>>>>> v3.18
 #define T_TRAP			13	/* Trap instruction */
 #define T_VCEI			14	/* Virtual coherency exception */
 #define T_FPE			15	/* Floating point exception */
@@ -528,6 +584,9 @@ enum mips_mmu_types {
 #define RESUME_GUEST		0
 #define RESUME_GUEST_DR		RESUME_FLAG_DR
 #define RESUME_HOST		RESUME_FLAG_HOST
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum emulation_result {
@@ -538,6 +597,7 @@ enum emulation_result {
 	EMULATE_PRIV_FAIL,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MIPS3_PG_G  0x00000001	/* Global; ignore ASID if in lo0 & lo1 */
 #define MIPS3_PG_V  0x00000002	/* Valid */
@@ -558,6 +618,8 @@ enum emulation_result {
 #define TLB_ASID(x)         ((x).tlb_hi & ASID_MASK)
 #define TLB_IS_VALID(x, va) (((va) & (1 << PAGE_SHIFT)) ? ((x).tlb_lo1 & MIPS3_PG_V) : ((x).tlb_lo0 & MIPS3_PG_V))
 =======
+=======
+>>>>>>> v3.18
 #define MIPS3_PG_G	0x00000001 /* Global; ignore ASID if in lo0 & lo1 */
 #define MIPS3_PG_V	0x00000002 /* Valid */
 #define MIPS3_PG_NV	0x00000000
@@ -583,6 +645,9 @@ enum emulation_result {
 				 ((y) & VPN2_MASK & ~(x).tlb_mask))
 #define TLB_HI_ASID_HIT(x, y)	(TLB_IS_GLOBAL(x) ||			\
 				 TLB_ASID(x) == ((y) & ASID_MASK))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct kvm_mips_tlb {
@@ -593,10 +658,16 @@ struct kvm_mips_tlb {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define KVM_MIPS_GUEST_TLB_SIZE     64
 struct kvm_vcpu_arch {
 	void *host_ebase, *guest_ebase;
 	int (*vcpu_run)(struct kvm_run *run, struct kvm_vcpu *vcpu);
+=======
+#define KVM_MIPS_GUEST_TLB_SIZE	64
+struct kvm_vcpu_arch {
+	void *host_ebase, *guest_ebase;
+>>>>>>> v3.18
 =======
 #define KVM_MIPS_GUEST_TLB_SIZE	64
 struct kvm_vcpu_arch {
@@ -628,6 +699,7 @@ struct kvm_vcpu_arch {
 	void *kseg0_commpage;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Resume PC after MMIO completion */
 	unsigned long io_pc;
 	/* GPR used as IO source/target */
@@ -636,6 +708,8 @@ struct kvm_vcpu_arch {
 	/* Used to calibrate the virutal count register for the guest */
 	int32_t host_cp0_count;
 =======
+=======
+>>>>>>> v3.18
 	u32 io_gpr;		/* GPR used as IO source/target */
 
 	struct hrtimer comparecount_timer;
@@ -651,6 +725,9 @@ struct kvm_vcpu_arch {
 	ktime_t count_resume;
 	/* Period of timer tick in ns */
 	u64 count_period;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Bitmask of exceptions that are pending */
@@ -660,6 +737,11 @@ struct kvm_vcpu_arch {
 	unsigned long pending_exceptions_clr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long pending_load_cause;
+
+>>>>>>> v3.18
 =======
 	unsigned long pending_load_cause;
 
@@ -676,11 +758,14 @@ struct kvm_vcpu_arch {
 	struct mm_struct guest_kernel_mm, guest_user_mm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kvm_mips_tlb shadow_tlb[NR_CPUS][KVM_MIPS_GUEST_TLB_SIZE];
 
 
 	struct hrtimer comparecount_timer;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int last_sched_cpu;
@@ -690,6 +775,7 @@ struct kvm_vcpu_arch {
 };
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define kvm_read_c0_guest_index(cop0)               (cop0->reg[MIPS_CP0_TLB_INDEX][0])
 #define kvm_write_c0_guest_index(cop0, val)         (cop0->reg[MIPS_CP0_TLB_INDEX][0] = val)
@@ -751,6 +837,8 @@ struct kvm_vcpu_arch {
     kvm_clear_c0_guest_ebase(cop0, change);           \
     kvm_set_c0_guest_ebase(cop0, ((val) & (change))); \
 =======
+=======
+>>>>>>> v3.18
 #define kvm_read_c0_guest_index(cop0)		(cop0->reg[MIPS_CP0_TLB_INDEX][0])
 #define kvm_write_c0_guest_index(cop0, val)	(cop0->reg[MIPS_CP0_TLB_INDEX][0] = val)
 #define kvm_read_c0_guest_entrylo0(cop0)	(cop0->reg[MIPS_CP0_TLB_LO0][0])
@@ -872,11 +960,15 @@ static inline void _kvm_atomic_change_c0_guest_reg(unsigned long *reg,
 {									\
 	kvm_clear_c0_guest_ebase(cop0, change);				\
 	kvm_set_c0_guest_ebase(cop0, ((val) & (change)));		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 struct kvm_mips_callbacks {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int (*handle_cop_unusable) (struct kvm_vcpu *vcpu);
 	int (*handle_tlb_mod) (struct kvm_vcpu *vcpu);
@@ -902,6 +994,8 @@ struct kvm_mips_callbacks {
 	int (*irq_clear) (struct kvm_vcpu *vcpu, unsigned int priority,
 			  uint32_t cause);
 =======
+=======
+>>>>>>> v3.18
 	int (*handle_cop_unusable)(struct kvm_vcpu *vcpu);
 	int (*handle_tlb_mod)(struct kvm_vcpu *vcpu);
 	int (*handle_tlb_ld_miss)(struct kvm_vcpu *vcpu);
@@ -929,6 +1023,9 @@ struct kvm_mips_callbacks {
 			   const struct kvm_one_reg *reg, s64 *v);
 	int (*set_one_reg)(struct kvm_vcpu *vcpu,
 			   const struct kvm_one_reg *reg, s64 v);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 extern struct kvm_mips_callbacks *kvm_mips_callbacks;
@@ -971,7 +1068,10 @@ extern enum emulation_result kvm_mips_handle_tlbmod(unsigned long cause,
 extern void kvm_mips_dump_host_tlbs(void);
 extern void kvm_mips_dump_guest_tlbs(struct kvm_vcpu *vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void kvm_mips_dump_shadow_tlbs(struct kvm_vcpu *vcpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void kvm_mips_flush_host_tlb(int skip_kseg0);
@@ -986,10 +1086,14 @@ extern unsigned long kvm_mips_translate_guest_kseg0_to_hpa(struct kvm_vcpu *vcpu
 extern void kvm_get_new_mmu_context(struct mm_struct *mm, unsigned long cpu,
 				    struct kvm_vcpu *vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void kvm_shadow_tlb_put(struct kvm_vcpu *vcpu);
 extern void kvm_shadow_tlb_load(struct kvm_vcpu *vcpu);
 extern void kvm_local_flush_tlb_all(void);
 extern void kvm_mips_init_shadow_tlb(struct kvm_vcpu *vcpu);
+=======
+extern void kvm_local_flush_tlb_all(void);
+>>>>>>> v3.18
 =======
 extern void kvm_local_flush_tlb_all(void);
 >>>>>>> v3.18
@@ -1060,8 +1164,11 @@ extern enum emulation_result kvm_mips_complete_mmio_load(struct kvm_vcpu *vcpu,
 							 struct kvm_run *run);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum emulation_result kvm_mips_emulate_count(struct kvm_vcpu *vcpu);
 =======
+=======
+>>>>>>> v3.18
 uint32_t kvm_mips_read_count(struct kvm_vcpu *vcpu);
 void kvm_mips_write_count(struct kvm_vcpu *vcpu, uint32_t count);
 void kvm_mips_write_compare(struct kvm_vcpu *vcpu, uint32_t compare);
@@ -1072,6 +1179,9 @@ int kvm_mips_set_count_hz(struct kvm_vcpu *vcpu, s64 count_hz);
 void kvm_mips_count_enable_cause(struct kvm_vcpu *vcpu);
 void kvm_mips_count_disable_cause(struct kvm_vcpu *vcpu);
 enum hrtimer_restart kvm_mips_count_timeout(struct kvm_vcpu *vcpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum emulation_result kvm_mips_check_privilege(unsigned long cause,
@@ -1110,11 +1220,14 @@ extern int kvm_mips_trans_mtc0(uint32_t inst, uint32_t *opc,
 
 /* Misc */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void mips32_SyncICache(unsigned long addr, unsigned long size);
 extern int kvm_mips_dump_stats(struct kvm_vcpu *vcpu);
 extern unsigned long kvm_mips_get_ramsize(struct kvm *kvm);
 
 =======
+=======
+>>>>>>> v3.18
 extern void kvm_mips_dump_stats(struct kvm_vcpu *vcpu);
 extern unsigned long kvm_mips_get_ramsize(struct kvm *kvm);
 
@@ -1129,6 +1242,9 @@ static inline void kvm_arch_flush_shadow_memslot(struct kvm *kvm,
 		struct kvm_memory_slot *slot) {}
 static inline void kvm_arch_vcpu_uninit(struct kvm_vcpu *vcpu) {}
 static inline void kvm_arch_sched_in(struct kvm_vcpu *vcpu, int cpu) {}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __MIPS_KVM_HOST_H__ */

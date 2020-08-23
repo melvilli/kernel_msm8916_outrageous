@@ -34,6 +34,7 @@
 #include "wm8994.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * wm8994_reg_read: Read a single WM8994 register.
  *
@@ -116,6 +117,9 @@ static struct mfd_cell wm8994_regulator_devs[] = {
 =======
 static const struct mfd_cell wm8994_regulator_devs[] = {
 >>>>>>> v3.18
+=======
+static const struct mfd_cell wm8994_regulator_devs[] = {
+>>>>>>> v3.18
 	{
 		.name = "wm8994-ldo",
 		.id = 1,
@@ -145,7 +149,11 @@ static struct resource wm8994_gpio_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell wm8994_devs[] = {
+=======
+static const struct mfd_cell wm8994_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell wm8994_devs[] = {
 >>>>>>> v3.18
@@ -210,6 +218,7 @@ static int wm8994_suspend(struct device *dev)
 
 	/* Don't actually go through with the suspend if the CODEC is
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * still active (eg, for audio passthrough from CP. */
 	ret = wm8994_reg_read(wm8994, WM8994_POWER_MANAGEMENT_1);
 	if (ret < 0) {
@@ -242,6 +251,9 @@ static int wm8994_suspend(struct device *dev)
 =======
 	 * still active for accessory detect. */
 >>>>>>> v3.18
+=======
+	 * still active for accessory detect. */
+>>>>>>> v3.18
 	switch (wm8994->type) {
 	case WM8958:
 	case WM1811:
@@ -257,6 +269,7 @@ static int wm8994_suspend(struct device *dev)
 		break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (wm8994->type) {
 	case WM1811:
@@ -286,6 +299,8 @@ static int wm8994_suspend(struct device *dev)
 		break;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Disable LDO pulldowns while the device is suspended if we
@@ -668,7 +683,10 @@ static int wm8994_device_init(struct wm8994 *wm8994, int irq)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Explicitly put the device into reset in case regulators
 	 * don't get disabled in order to ensure we know the device
 	 * state.
@@ -680,6 +698,9 @@ static int wm8994_device_init(struct wm8994 *wm8994, int irq)
 		return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (regmap_patch) {
 		ret = regmap_register_patch(wm8994->regmap, regmap_patch,
@@ -789,7 +810,11 @@ static int wm8994_i2c_probe(struct i2c_client *i2c,
 		of_id = of_match_device(wm8994_of_match, &i2c->dev);
 		if (of_id)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			wm8994->type = (int)of_id->data;
+=======
+			wm8994->type = (enum wm8994_type)of_id->data;
+>>>>>>> v3.18
 =======
 			wm8994->type = (enum wm8994_type)of_id->data;
 >>>>>>> v3.18

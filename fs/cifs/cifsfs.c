@@ -88,10 +88,13 @@ extern mempool_t *cifs_mid_poolp;
 struct workqueue_struct	*cifsiod_wq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CIFS_SMB2
 __u8 cifs_client_guid[SMB2_CLIENT_GUID_SIZE];
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -124,22 +127,32 @@ cifs_read_super(struct super_block *sb)
 	struct inode *inode;
 	struct cifs_sb_info *cifs_sb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = 0;
 
 	cifs_sb = CIFS_SB(sb);
 =======
+=======
+>>>>>>> v3.18
 	struct cifs_tcon *tcon;
 	int rc = 0;
 
 	cifs_sb = CIFS_SB(sb);
 	tcon = cifs_sb_master_tcon(cifs_sb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_POSIXACL)
 		sb->s_flags |= MS_POSIXACL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cifs_sb_master_tcon(cifs_sb)->ses->capabilities & CAP_LARGE_FILES)
+=======
+	if (tcon->ses->capabilities & tcon->ses->server->vals->cap_large_files)
+>>>>>>> v3.18
 =======
 	if (tcon->ses->capabilities & tcon->ses->server->vals->cap_large_files)
 >>>>>>> v3.18
@@ -163,12 +176,18 @@ cifs_read_super(struct super_block *sb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (tcon->nocase)
 		sb->s_d_op = &cifs_ci_dentry_ops;
 	else
 		sb->s_d_op = &cifs_dentry_ops;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sb->s_root = d_make_root(inode);
 	if (!sb->s_root) {
@@ -177,12 +196,15 @@ cifs_read_super(struct super_block *sb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* do that *after* d_make_root() - we want NULL ->d_op for root here */
 	if (cifs_sb_master_tcon(cifs_sb)->nocase)
 		sb->s_d_op = &cifs_ci_dentry_ops;
 	else
 		sb->s_d_op = &cifs_dentry_ops;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_CIFS_NFSD_EXPORT
@@ -237,7 +259,10 @@ cifs_statfs(struct dentry *dentry, struct kstatfs *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static long cifs_fallocate(struct file *file, int mode, loff_t off, loff_t len)
 {
 	struct super_block *sb = file->f_path.dentry->d_sb;
@@ -251,6 +276,9 @@ static long cifs_fallocate(struct file *file, int mode, loff_t off, loff_t len)
 	return -EOPNOTSUPP;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int cifs_permission(struct inode *inode, int mask)
 {
@@ -293,8 +321,14 @@ cifs_alloc_inode(struct super_block *sb)
 	 */
 	cifs_set_oplock_level(cifs_inode, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cifs_inode->delete_pending = false;
 	cifs_inode->invalid_mapping = false;
+=======
+	cifs_inode->flags = 0;
+	spin_lock_init(&cifs_inode->writers_lock);
+	cifs_inode->writers = 0;
+>>>>>>> v3.18
 =======
 	cifs_inode->flags = 0;
 	spin_lock_init(&cifs_inode->writers_lock);
@@ -305,6 +339,10 @@ cifs_alloc_inode(struct super_block *sb)
 	cifs_inode->uniqueid = 0;
 	cifs_inode->createtime = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cifs_inode->epoch = 0;
+>>>>>>> v3.18
 =======
 	cifs_inode->epoch = 0;
 >>>>>>> v3.18
@@ -337,7 +375,11 @@ static void
 cifs_evict_inode(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -352,7 +394,11 @@ cifs_show_address(struct seq_file *s, struct TCP_Server_Info *server)
 	struct sockaddr_in6 *sa6 = (struct sockaddr_in6 *) &server->dstaddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(s, ",addr=");
+=======
+	seq_puts(s, ",addr=");
+>>>>>>> v3.18
 =======
 	seq_puts(s, ",addr=");
 >>>>>>> v3.18
@@ -368,7 +414,11 @@ cifs_show_address(struct seq_file *s, struct TCP_Server_Info *server)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(s, "(unknown)");
+=======
+		seq_puts(s, "(unknown)");
+>>>>>>> v3.18
 =======
 		seq_puts(s, "(unknown)");
 >>>>>>> v3.18
@@ -376,6 +426,7 @@ cifs_show_address(struct seq_file *s, struct TCP_Server_Info *server)
 }
 
 static void
+<<<<<<< HEAD
 <<<<<<< HEAD
 cifs_show_security(struct seq_file *s, struct TCP_Server_Info *server)
 {
@@ -406,6 +457,8 @@ cifs_show_security(struct seq_file *s, struct TCP_Server_Info *server)
 	if (server->sec_mode & (SECMODE_SIGN_REQUIRED | SECMODE_SIGN_ENABLED))
 		seq_printf(s, "i");
 =======
+=======
+>>>>>>> v3.18
 cifs_show_security(struct seq_file *s, struct cifs_ses *ses)
 {
 	if (ses->sectype == Unspecified)
@@ -437,12 +490,16 @@ cifs_show_security(struct seq_file *s, struct cifs_ses *ses)
 
 	if (ses->sign)
 		seq_puts(s, "i");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void
 cifs_show_cache_flavor(struct seq_file *s, struct cifs_sb_info *cifs_sb)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	seq_printf(s, ",cache=");
 
@@ -453,6 +510,8 @@ cifs_show_cache_flavor(struct seq_file *s, struct cifs_sb_info *cifs_sb)
 	else
 		seq_printf(s, "loose");
 =======
+=======
+>>>>>>> v3.18
 	seq_puts(s, ",cache=");
 
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_STRICT_IO)
@@ -473,6 +532,9 @@ cifs_show_nls(struct seq_file *s, struct nls_table *cur)
 	if (def != cur)
 		seq_printf(s, ",iocharset=%s", cur->charset);
 	unload_nls(def);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -491,17 +553,23 @@ cifs_show_options(struct seq_file *s, struct dentry *root)
 
 	seq_printf(s, ",vers=%s", tcon->ses->server->vals->version_string);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cifs_show_security(s, tcon->ses->server);
 	cifs_show_cache_flavor(s, cifs_sb);
 
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MULTIUSER)
 		seq_printf(s, ",multiuser");
 =======
+=======
+>>>>>>> v3.18
 	cifs_show_security(s, tcon->ses);
 	cifs_show_cache_flavor(s, cifs_sb);
 
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_MULTIUSER)
 		seq_puts(s, ",multiuser");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else if (tcon->ses->user_name)
 		seq_printf(s, ",username=%s", tcon->ses->user_name);
@@ -529,9 +597,15 @@ cifs_show_options(struct seq_file *s, struct dentry *root)
 		   from_kuid_munged(&init_user_ns, cifs_sb->mnt_uid));
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_OVERR_UID)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(s, ",forceuid");
 	else
 		seq_printf(s, ",noforceuid");
+=======
+		seq_puts(s, ",forceuid");
+	else
+		seq_puts(s, ",noforceuid");
+>>>>>>> v3.18
 =======
 		seq_puts(s, ",forceuid");
 	else
@@ -542,9 +616,15 @@ cifs_show_options(struct seq_file *s, struct dentry *root)
 		   from_kgid_munged(&init_user_ns, cifs_sb->mnt_gid));
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_OVERR_GID)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(s, ",forcegid");
 	else
 		seq_printf(s, ",noforcegid");
+=======
+		seq_puts(s, ",forcegid");
+	else
+		seq_puts(s, ",noforcegid");
+>>>>>>> v3.18
 =======
 		seq_puts(s, ",forcegid");
 	else
@@ -557,6 +637,7 @@ cifs_show_options(struct seq_file *s, struct dentry *root)
 		seq_printf(s, ",file_mode=0%ho,dir_mode=0%ho",
 					   cifs_sb->mnt_file_mode,
 					   cifs_sb->mnt_dir_mode);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (tcon->seal)
 		seq_printf(s, ",seal");
@@ -601,6 +682,8 @@ cifs_show_options(struct seq_file *s, struct dentry *root)
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_NO_PERM)
 		seq_printf(s, ",noperm");
 =======
+=======
+>>>>>>> v3.18
 
 	cifs_show_nls(s, cifs_sb->local_nls);
 
@@ -646,6 +729,9 @@ cifs_show_options(struct seq_file *s, struct dentry *root)
 		seq_puts(s, ",nostrictsync");
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_NO_PERM)
 		seq_puts(s, ",noperm");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_CIFS_BACKUPUID)
 		seq_printf(s, ",backupuid=%u",
@@ -711,6 +797,10 @@ static int cifs_show_stats(struct seq_file *s, struct dentry *root)
 static int cifs_remount(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -759,9 +849,12 @@ cifs_get_root(struct smb_vol *vol, struct super_block *sb)
 	char sep;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_USE_PREFIX_PATH)
 		return dget(sb->s_root);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	full_path = cifs_build_path_to_root(vol, cifs_sb,
@@ -844,6 +937,7 @@ cifs_do_mount(struct file_system_type *fs_type,
 	if (cifs_sb->mountdata == NULL) {
 		root = ERR_PTR(-ENOMEM);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free;
 	}
 
@@ -853,10 +947,15 @@ cifs_do_mount(struct file_system_type *fs_type,
 		goto out_free;
 	}
 =======
+=======
+>>>>>>> v3.18
 		goto out_cifs_sb;
 	}
 
 	cifs_setup_cifs_sb(volume_info, cifs_sb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rc = cifs_mount(cifs_sb, volume_info);
@@ -866,7 +965,11 @@ cifs_do_mount(struct file_system_type *fs_type,
 				 rc);
 		root = ERR_PTR(rc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free;
+=======
+		goto out_mountdata;
+>>>>>>> v3.18
 =======
 		goto out_mountdata;
 >>>>>>> v3.18
@@ -913,9 +1016,15 @@ out:
 	return root;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free:
 	kfree(cifs_sb->prepath);
 	kfree(cifs_sb->mountdata);
+=======
+out_mountdata:
+	kfree(cifs_sb->mountdata);
+out_cifs_sb:
+>>>>>>> v3.18
 =======
 out_mountdata:
 	kfree(cifs_sb->mountdata);
@@ -927,6 +1036,7 @@ out_nls:
 	goto out;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t cifs_file_aio_write(struct kiocb *iocb, const struct iovec *iov,
 				   unsigned long nr_segs, loff_t pos)
@@ -946,6 +1056,8 @@ static ssize_t cifs_file_aio_write(struct kiocb *iocb, const struct iovec *iov,
 			 rc, inode);
 
 =======
+=======
+>>>>>>> v3.18
 static ssize_t
 cifs_loose_read_iter(struct kiocb *iocb, struct iov_iter *iter)
 {
@@ -982,6 +1094,9 @@ static ssize_t cifs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 
 out:
 	cifs_put_writer(cinode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return written;
 }
@@ -1001,7 +1116,11 @@ static loff_t cifs_llseek(struct file *file, loff_t offset, int whence)
 		 * server has the newest file length.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!CIFS_I(inode)->clientCanCacheRead && inode->i_mapping &&
+=======
+		if (!CIFS_CACHE_READ(CIFS_I(inode)) && inode->i_mapping &&
+>>>>>>> v3.18
 =======
 		if (!CIFS_CACHE_READ(CIFS_I(inode)) && inode->i_mapping &&
 >>>>>>> v3.18
@@ -1027,11 +1146,14 @@ static loff_t cifs_llseek(struct file *file, loff_t offset, int whence)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cifs_setlease(struct file *file, long arg, struct file_lock **lease)
 {
 	/* note that this is called by vfs setlease with lock_flocks held
 	   to protect *lease from going away */
 =======
+=======
+>>>>>>> v3.18
 static int
 cifs_setlease(struct file *file, long arg, struct file_lock **lease, void **priv)
 {
@@ -1039,6 +1161,9 @@ cifs_setlease(struct file *file, long arg, struct file_lock **lease, void **priv
 	 * Note that this is called by vfs setlease with i_lock held to
 	 * protect *lease from going away.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct inode *inode = file_inode(file);
 	struct cifsFileInfo *cfile = file->private_data;
@@ -1046,6 +1171,7 @@ cifs_setlease(struct file *file, long arg, struct file_lock **lease, void **priv
 	if (!(S_ISREG(inode->i_mode)))
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* check if file is oplocked */
 	if (((arg == F_RDLCK) &&
@@ -1064,6 +1190,8 @@ cifs_setlease(struct file *file, long arg, struct file_lock **lease, void **priv
 		   by anyone else */
 		return generic_setlease(file, arg, lease);
 =======
+=======
+>>>>>>> v3.18
 	/* Check if file is oplocked if this is request for new lease */
 	if (arg == F_UNLCK ||
 	    ((arg == F_RDLCK) && CIFS_CACHE_READ(CIFS_I(inode))) ||
@@ -1080,6 +1208,9 @@ cifs_setlease(struct file *file, long arg, struct file_lock **lease, void **priv
 		 * else.
 		 */
 		return generic_setlease(file, arg, lease, priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		return -EAGAIN;
@@ -1103,7 +1234,11 @@ const struct inode_operations cifs_dir_inode_ops = {
 	.mkdir = cifs_mkdir,
 	.rmdir = cifs_rmdir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rename = cifs_rename,
+=======
+	.rename2 = cifs_rename2,
+>>>>>>> v3.18
 =======
 	.rename2 = cifs_rename2,
 >>>>>>> v3.18
@@ -1125,7 +1260,10 @@ const struct inode_operations cifs_file_inode_ops = {
 	.setattr = cifs_setattr,
 	.getattr = cifs_getattr, /* do we need this anymore? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rename = cifs_rename,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.permission = cifs_permission,
@@ -1141,7 +1279,11 @@ const struct inode_operations cifs_symlink_inode_ops = {
 	.readlink = generic_readlink,
 	.follow_link = cifs_follow_link,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.put_link = cifs_put_link,
+=======
+	.put_link = kfree_put_link,
+>>>>>>> v3.18
 =======
 	.put_link = kfree_put_link,
 >>>>>>> v3.18
@@ -1159,15 +1301,21 @@ const struct inode_operations cifs_symlink_inode_ops = {
 
 const struct file_operations cifs_file_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read = do_sync_read,
 	.write = do_sync_write,
 	.aio_read = generic_file_aio_read,
 	.aio_write = cifs_file_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.read = new_sync_read,
 	.write = new_sync_write,
 	.read_iter = cifs_loose_read_iter,
 	.write_iter = cifs_file_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = cifs_open,
 	.release = cifs_close,
@@ -1182,6 +1330,7 @@ const struct file_operations cifs_file_ops = {
 #endif /* CONFIG_CIFS_POSIX */
 	.setlease = cifs_setlease,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 const struct file_operations cifs_file_strict_ops = {
@@ -1190,6 +1339,8 @@ const struct file_operations cifs_file_strict_ops = {
 	.aio_read = cifs_strict_readv,
 	.aio_write = cifs_strict_writev,
 =======
+=======
+>>>>>>> v3.18
 	.fallocate = cifs_fallocate,
 };
 
@@ -1198,6 +1349,9 @@ const struct file_operations cifs_file_strict_ops = {
 	.write = new_sync_write,
 	.read_iter = cifs_strict_readv,
 	.write_iter = cifs_strict_writev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = cifs_open,
 	.release = cifs_close,
@@ -1212,6 +1366,10 @@ const struct file_operations cifs_file_strict_ops = {
 #endif /* CONFIG_CIFS_POSIX */
 	.setlease = cifs_setlease,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.fallocate = cifs_fallocate,
+>>>>>>> v3.18
 =======
 	.fallocate = cifs_fallocate,
 >>>>>>> v3.18
@@ -1220,15 +1378,21 @@ const struct file_operations cifs_file_strict_ops = {
 const struct file_operations cifs_file_direct_ops = {
 	/* BB reevaluate whether they can be done with directio, no cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read = do_sync_read,
 	.write = do_sync_write,
 	.aio_read = cifs_user_readv,
 	.aio_write = cifs_user_writev,
 =======
+=======
+>>>>>>> v3.18
 	.read = new_sync_read,
 	.write = new_sync_write,
 	.read_iter = cifs_user_readv,
 	.write_iter = cifs_user_writev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = cifs_open,
 	.release = cifs_close,
@@ -1243,6 +1407,7 @@ const struct file_operations cifs_file_direct_ops = {
 	.llseek = cifs_llseek,
 	.setlease = cifs_setlease,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 const struct file_operations cifs_file_nobrl_ops = {
@@ -1251,6 +1416,8 @@ const struct file_operations cifs_file_nobrl_ops = {
 	.aio_read = generic_file_aio_read,
 	.aio_write = cifs_file_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.fallocate = cifs_fallocate,
 };
 
@@ -1259,6 +1426,9 @@ const struct file_operations cifs_file_nobrl_ops = {
 	.write = new_sync_write,
 	.read_iter = cifs_loose_read_iter,
 	.write_iter = cifs_file_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = cifs_open,
 	.release = cifs_close,
@@ -1272,6 +1442,7 @@ const struct file_operations cifs_file_nobrl_ops = {
 #endif /* CONFIG_CIFS_POSIX */
 	.setlease = cifs_setlease,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 const struct file_operations cifs_file_strict_nobrl_ops = {
@@ -1280,6 +1451,8 @@ const struct file_operations cifs_file_strict_nobrl_ops = {
 	.aio_read = cifs_strict_readv,
 	.aio_write = cifs_strict_writev,
 =======
+=======
+>>>>>>> v3.18
 	.fallocate = cifs_fallocate,
 };
 
@@ -1288,6 +1461,9 @@ const struct file_operations cifs_file_strict_nobrl_ops = {
 	.write = new_sync_write,
 	.read_iter = cifs_strict_readv,
 	.write_iter = cifs_strict_writev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = cifs_open,
 	.release = cifs_close,
@@ -1301,6 +1477,10 @@ const struct file_operations cifs_file_strict_nobrl_ops = {
 #endif /* CONFIG_CIFS_POSIX */
 	.setlease = cifs_setlease,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.fallocate = cifs_fallocate,
+>>>>>>> v3.18
 =======
 	.fallocate = cifs_fallocate,
 >>>>>>> v3.18
@@ -1309,15 +1489,21 @@ const struct file_operations cifs_file_strict_nobrl_ops = {
 const struct file_operations cifs_file_direct_nobrl_ops = {
 	/* BB reevaluate whether they can be done with directio, no cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read = do_sync_read,
 	.write = do_sync_write,
 	.aio_read = cifs_user_readv,
 	.aio_write = cifs_user_writev,
 =======
+=======
+>>>>>>> v3.18
 	.read = new_sync_read,
 	.write = new_sync_write,
 	.read_iter = cifs_user_readv,
 	.write_iter = cifs_user_writev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = cifs_open,
 	.release = cifs_close,
@@ -1331,16 +1517,22 @@ const struct file_operations cifs_file_direct_nobrl_ops = {
 	.llseek = cifs_llseek,
 	.setlease = cifs_setlease,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 const struct file_operations cifs_dir_ops = {
 	.readdir = cifs_readdir,
 =======
+=======
+>>>>>>> v3.18
 	.fallocate = cifs_fallocate,
 };
 
 const struct file_operations cifs_dir_ops = {
 	.iterate = cifs_readdir,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.release = cifs_closedir,
 	.read    = generic_read_dir,
@@ -1358,7 +1550,11 @@ cifs_init_once(void *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
+=======
+static int __init
+>>>>>>> v3.18
 =======
 static int __init
 >>>>>>> v3.18
@@ -1537,10 +1733,13 @@ init_cifs(void)
 	spin_lock_init(&GlobalMid_Lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CIFS_SMB2
 	get_random_bytes(cifs_client_guid, SMB2_CLIENT_GUID_SIZE);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (cifs_max_pending < 2) {

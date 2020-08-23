@@ -1322,7 +1322,10 @@ static void init_video_context(struct running_context *context)
 				.sizeimage	= 720 * 576 * 2,
 				.colorspace	= V4L2_COLORSPACE_SMPTE170M,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				.priv		= 0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			};

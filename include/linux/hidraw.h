@@ -24,6 +24,10 @@ struct hidraw {
 	struct hid_device *hid;
 	struct device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t list_lock;
+>>>>>>> v3.18
 =======
 	spinlock_t list_lock;
 >>>>>>> v3.18

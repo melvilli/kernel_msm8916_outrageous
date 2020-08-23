@@ -57,6 +57,7 @@ struct rgmii_instance {
 #ifdef CONFIG_IBM_EMAC_RGMII
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int rgmii_init(void);
 extern void rgmii_exit(void);
 extern int rgmii_attach(struct platform_device *ofdev, int input, int mode);
@@ -67,6 +68,8 @@ extern void rgmii_set_speed(struct platform_device *ofdev, int input, int speed)
 extern int rgmii_get_regs_len(struct platform_device *ofdev);
 extern void *rgmii_dump_regs(struct platform_device *ofdev, void *buf);
 =======
+=======
+>>>>>>> v3.18
 int rgmii_init(void);
 void rgmii_exit(void);
 int rgmii_attach(struct platform_device *ofdev, int input, int mode);
@@ -76,6 +79,9 @@ void rgmii_put_mdio(struct platform_device *ofdev, int input);
 void rgmii_set_speed(struct platform_device *ofdev, int input, int speed);
 int rgmii_get_regs_len(struct platform_device *ofdev);
 void *rgmii_dump_regs(struct platform_device *ofdev, void *buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else

@@ -36,7 +36,11 @@ _GLOBAL(slb_allocate_realmode)
 	 * (ea & ~REGION_MASK) >= PGTABLE_RANGE
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rldicr. r9,r3,4,(63 - 46 - 4)
+=======
+	rldicr. r9,r3,4,(63 - PGTABLE_EADDR_SIZE - 4)
+>>>>>>> v3.18
 =======
 	rldicr. r9,r3,4,(63 - PGTABLE_EADDR_SIZE - 4)
 >>>>>>> v3.18
@@ -64,7 +68,12 @@ _GLOBAL(slb_allocate_realmode)
 	 * be patched by the kernel at boot
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(slb_miss_kernel_load_linear)
+=======
+.globl slb_miss_kernel_load_linear
+slb_miss_kernel_load_linear:
+>>>>>>> v3.18
 =======
 .globl slb_miss_kernel_load_linear
 slb_miss_kernel_load_linear:
@@ -89,7 +98,12 @@ END_MMU_FTR_SECTION_IFCLR(MMU_FTR_1T_SEGMENT)
 	cmpldi	cr0,r9,0xf
 	bne	1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(slb_miss_kernel_load_vmemmap)
+=======
+.globl slb_miss_kernel_load_vmemmap
+slb_miss_kernel_load_vmemmap:
+>>>>>>> v3.18
 =======
 .globl slb_miss_kernel_load_vmemmap
 slb_miss_kernel_load_vmemmap:
@@ -110,7 +124,12 @@ slb_miss_kernel_load_vmemmap:
 5:
 	/* IO mapping */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_GLOBAL(slb_miss_kernel_load_io)
+=======
+.globl slb_miss_kernel_load_io
+slb_miss_kernel_load_io:
+>>>>>>> v3.18
 =======
 .globl slb_miss_kernel_load_io
 slb_miss_kernel_load_io:
@@ -130,12 +149,16 @@ END_MMU_FTR_SECTION_IFCLR(MMU_FTR_1T_SEGMENT)
 	b	slb_finish_load_1T
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 0:	/*
 	 * For userspace addresses, make sure this is region 0.
 	 */
 	cmpdi	r9, 0
 	bne	8f
 
+=======
+0:
+>>>>>>> v3.18
 =======
 0:
 >>>>>>> v3.18
@@ -279,7 +302,12 @@ slb_finish_load:
 	addi	r10,r10,1
 	/* This gets soft patched on boot. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(slb_compare_rr_to_size)
+=======
+.globl slb_compare_rr_to_size
+slb_compare_rr_to_size:
+>>>>>>> v3.18
 =======
 .globl slb_compare_rr_to_size
 slb_compare_rr_to_size:

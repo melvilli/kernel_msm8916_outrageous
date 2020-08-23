@@ -189,8 +189,14 @@ static int ipip_rcv(struct sk_buff *skb)
 	struct ip_tunnel_net *itn = net_generic(net, ipip_net_id);
 	struct ip_tunnel *tunnel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct iphdr *iph = ip_hdr(skb);
 
+=======
+	const struct iphdr *iph;
+
+	iph = ip_hdr(skb);
+>>>>>>> v3.18
 =======
 	const struct iphdr *iph;
 
@@ -202,7 +208,13 @@ static int ipip_rcv(struct sk_buff *skb)
 		if (!xfrm4_policy_check(NULL, XFRM_POLICY_IN, skb))
 			goto drop;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ip_tunnel_rcv(tunnel, skb, &tpi, 0, log_ecn_error);
+=======
+		if (iptunnel_pull_header(skb, 0, tpi.proto))
+			goto drop;
+		return ip_tunnel_rcv(tunnel, skb, &tpi, log_ecn_error);
+>>>>>>> v3.18
 =======
 		if (iptunnel_pull_header(skb, 0, tpi.proto))
 			goto drop;
@@ -230,6 +242,7 @@ static netdev_tx_t ipip_tunnel_xmit(struct sk_buff *skb, struct net_device *dev)
 		goto tx_error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(!skb->encapsulation)) {
 		skb_reset_inner_headers(skb);
 		skb->encapsulation = 1;
@@ -242,6 +255,8 @@ tx_error:
 	dev->stats.tx_errors++;
 	dev_kfree_skb(skb);
 =======
+=======
+>>>>>>> v3.18
 	skb = iptunnel_handle_offloads(skb, false, SKB_GSO_IPIP);
 	if (IS_ERR(skb))
 		goto out;
@@ -255,6 +270,9 @@ tx_error:
 	kfree_skb(skb);
 out:
 	dev->stats.tx_errors++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NETDEV_TX_OK;
 }
@@ -301,6 +319,10 @@ static const struct net_device_ops ipip_netdev_ops = {
 		       NETIF_F_FRAGLIST |	\
 		       NETIF_F_HIGHDMA |	\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		       NETIF_F_GSO_SOFTWARE |	\
+>>>>>>> v3.18
 =======
 		       NETIF_F_GSO_SOFTWARE |	\
 >>>>>>> v3.18
@@ -315,9 +337,14 @@ static void ipip_tunnel_setup(struct net_device *dev)
 	dev->iflink		= 0;
 	dev->addr_len		= 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->features		|= NETIF_F_NETNS_LOCAL;
 	dev->features		|= NETIF_F_LLTX;
 	dev->priv_flags		&= ~IFF_XMIT_DST_RELEASE;
+=======
+	dev->features		|= NETIF_F_LLTX;
+	netif_keep_dst(dev);
+>>>>>>> v3.18
 =======
 	dev->features		|= NETIF_F_LLTX;
 	netif_keep_dst(dev);
@@ -336,7 +363,12 @@ static int ipip_tunnel_init(struct net_device *dev)
 	memcpy(dev->broadcast, &tunnel->parms.iph.daddr, 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tunnel->hlen = 0;
+=======
+	tunnel->tun_hlen = 0;
+	tunnel->hlen = tunnel->tun_hlen + tunnel->encap_hlen;
+>>>>>>> v3.18
 =======
 	tunnel->tun_hlen = 0;
 	tunnel->hlen = tunnel->tun_hlen + tunnel->encap_hlen;
@@ -380,7 +412,10 @@ static void ipip_netlink_parms(struct nlattr *data[],
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This function returns true when ENCAP attributes are present in the nl msg */
 static bool ipip_netlink_encap_parms(struct nlattr *data[],
 				     struct ip_tunnel_encap *ipencap)
@@ -415,13 +450,19 @@ static bool ipip_netlink_encap_parms(struct nlattr *data[],
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ipip_newlink(struct net *src_net, struct net_device *dev,
 			struct nlattr *tb[], struct nlattr *data[])
 {
 	struct ip_tunnel_parm p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct ip_tunnel_encap ipencap;
 
 	if (ipip_netlink_encap_parms(data, &ipencap)) {
@@ -431,6 +472,9 @@ static int ipip_newlink(struct net *src_net, struct net_device *dev,
 		if (err < 0)
 			return err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ipip_netlink_parms(data, &p);
@@ -442,7 +486,10 @@ static int ipip_changelink(struct net_device *dev, struct nlattr *tb[],
 {
 	struct ip_tunnel_parm p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct ip_tunnel_encap ipencap;
 
 	if (ipip_netlink_encap_parms(data, &ipencap)) {
@@ -452,6 +499,9 @@ static int ipip_changelink(struct net_device *dev, struct nlattr *tb[],
 		if (err < 0)
 			return err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ipip_netlink_parms(data, &p);
@@ -479,7 +529,10 @@ static size_t ipip_get_size(const struct net_device *dev)
 		/* IFLA_IPTUN_PMTUDISC */
 		nla_total_size(1) +
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* IFLA_IPTUN_ENCAP_TYPE */
 		nla_total_size(2) +
 		/* IFLA_IPTUN_ENCAP_FLAGS */
@@ -488,6 +541,9 @@ static size_t ipip_get_size(const struct net_device *dev)
 		nla_total_size(2) +
 		/* IFLA_IPTUN_ENCAP_DPORT */
 		nla_total_size(2) +
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		0;
 }
@@ -506,7 +562,10 @@ static int ipip_fill_info(struct sk_buff *skb, const struct net_device *dev)
 		       !!(parm->iph.frag_off & htons(IP_DF))))
 		goto nla_put_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (nla_put_u16(skb, IFLA_IPTUN_ENCAP_TYPE,
 			tunnel->encap.type) ||
@@ -518,6 +577,9 @@ static int ipip_fill_info(struct sk_buff *skb, const struct net_device *dev)
 			tunnel->encap.dport))
 		goto nla_put_failure;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -533,11 +595,17 @@ static const struct nla_policy ipip_policy[IFLA_IPTUN_MAX + 1] = {
 	[IFLA_IPTUN_TOS]		= { .type = NLA_U8 },
 	[IFLA_IPTUN_PMTUDISC]		= { .type = NLA_U8 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[IFLA_IPTUN_ENCAP_TYPE]		= { .type = NLA_U16 },
 	[IFLA_IPTUN_ENCAP_FLAGS]	= { .type = NLA_U16 },
 	[IFLA_IPTUN_ENCAP_SPORT]	= { .type = NLA_U16 },
 	[IFLA_IPTUN_ENCAP_DPORT]	= { .type = NLA_U16 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -569,7 +637,11 @@ static void __net_exit ipip_exit_net(struct net *net)
 {
 	struct ip_tunnel_net *itn = net_generic(net, ipip_net_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ip_tunnel_delete_net(itn);
+=======
+	ip_tunnel_delete_net(itn, &ipip_link_ops);
+>>>>>>> v3.18
 =======
 	ip_tunnel_delete_net(itn, &ipip_link_ops);
 >>>>>>> v3.18

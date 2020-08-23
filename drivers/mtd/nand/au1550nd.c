@@ -12,7 +12,10 @@
 #include <linux/slab.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -46,7 +49,11 @@ static u_char au_read_byte(struct mtd_info *mtd)
 	struct nand_chip *this = mtd->priv;
 	u_char ret = readb(this->IO_ADDR_R);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -65,7 +72,11 @@ static void au_write_byte(struct mtd_info *mtd, u_char byte)
 	struct nand_chip *this = mtd->priv;
 	writeb(byte, this->IO_ADDR_W);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -82,7 +93,11 @@ static u_char au_read_byte16(struct mtd_info *mtd)
 	struct nand_chip *this = mtd->priv;
 	u_char ret = (u_char) cpu_to_le16(readw(this->IO_ADDR_R));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -101,7 +116,11 @@ static void au_write_byte16(struct mtd_info *mtd, u_char byte)
 	struct nand_chip *this = mtd->priv;
 	writew(le16_to_cpu((u16) byte), this->IO_ADDR_W);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -118,7 +137,11 @@ static u16 au_read_word(struct mtd_info *mtd)
 	struct nand_chip *this = mtd->priv;
 	u16 ret = readw(this->IO_ADDR_R);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_sync();
+=======
+	wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -141,7 +164,11 @@ static void au_write_buf(struct mtd_info *mtd, const u_char *buf, int len)
 	for (i = 0; i < len; i++) {
 		writeb(buf[i], this->IO_ADDR_W);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync();
+=======
+		wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 		wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -164,7 +191,11 @@ static void au_read_buf(struct mtd_info *mtd, u_char *buf, int len)
 	for (i = 0; i < len; i++) {
 		buf[i] = readb(this->IO_ADDR_R);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync();
+=======
+		wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 		wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -189,7 +220,11 @@ static void au_write_buf16(struct mtd_info *mtd, const u_char *buf, int len)
 	for (i = 0; i < len; i++) {
 		writew(p[i], this->IO_ADDR_W);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync();
+=======
+		wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 		wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -215,7 +250,11 @@ static void au_read_buf16(struct mtd_info *mtd, u_char *buf, int len)
 	for (i = 0; i < len; i++) {
 		p[i] = readw(this->IO_ADDR_R);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_sync();
+=======
+		wmb(); /* drain writebuffer */
+>>>>>>> v3.18
 =======
 		wmb(); /* drain writebuffer */
 >>>>>>> v3.18
@@ -264,7 +303,11 @@ static void au1550_hwcontrol(struct mtd_info *mtd, int cmd)
 	case NAND_CTL_SETNCE:
 		/* assert (force assert) chip enable */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_writel((1 << (4 + ctx->cs)), MEM_STNDCTL);
+=======
+		alchemy_wrsmem((1 << (4 + ctx->cs)), AU1000_MEM_STNDCTL);
+>>>>>>> v3.18
 =======
 		alchemy_wrsmem((1 << (4 + ctx->cs)), AU1000_MEM_STNDCTL);
 >>>>>>> v3.18
@@ -273,7 +316,11 @@ static void au1550_hwcontrol(struct mtd_info *mtd, int cmd)
 	case NAND_CTL_CLRNCE:
 		/* deassert chip enable */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		au_writel(0, MEM_STNDCTL);
+=======
+		alchemy_wrsmem(0, AU1000_MEM_STNDCTL);
+>>>>>>> v3.18
 =======
 		alchemy_wrsmem(0, AU1000_MEM_STNDCTL);
 >>>>>>> v3.18
@@ -283,8 +330,12 @@ static void au1550_hwcontrol(struct mtd_info *mtd, int cmd)
 	this->IO_ADDR_R = this->IO_ADDR_W;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Drain the writebuffer */
 	au_sync();
+=======
+	wmb(); /* Drain the writebuffer */
+>>>>>>> v3.18
 =======
 	wmb(); /* Drain the writebuffer */
 >>>>>>> v3.18
@@ -293,9 +344,13 @@ static void au1550_hwcontrol(struct mtd_info *mtd, int cmd)
 int au1550_device_ready(struct mtd_info *mtd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = (au_readl(MEM_STSTAT) & 0x1) ? 1 : 0;
 	au_sync();
 	return ret;
+=======
+	return (alchemy_rdsmem(AU1000_MEM_STSTAT) & 0x1) ? 1 : 0;
+>>>>>>> v3.18
 =======
 	return (alchemy_rdsmem(AU1000_MEM_STSTAT) & 0x1) ? 1 : 0;
 >>>>>>> v3.18
@@ -364,7 +419,12 @@ static void au1550_command(struct mtd_info *mtd, unsigned command, int column, i
 		if (column != -1) {
 			/* Adjust columns for 16 bit buswidth */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (this->options & NAND_BUSWIDTH_16)
+=======
+			if (this->options & NAND_BUSWIDTH_16 &&
+					!nand_opcode_8bits(command))
+>>>>>>> v3.18
 =======
 			if (this->options & NAND_BUSWIDTH_16 &&
 					!nand_opcode_8bits(command))
@@ -472,7 +532,11 @@ static int au1550nd_probe(struct platform_device *pdev)
 	int ret, cs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pd = pdev->dev.platform_data;
+=======
+	pd = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pd = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -483,10 +547,15 @@ static int au1550nd_probe(struct platform_device *pdev)
 
 	ctx = kzalloc(sizeof(*ctx), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ctx) {
 		dev_err(&pdev->dev, "no memory for NAND context\n");
 		return -ENOMEM;
 	}
+=======
+	if (!ctx)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!ctx)
 		return -ENOMEM;
@@ -550,6 +619,11 @@ static int au1550nd_probe(struct platform_device *pdev)
 	mtd_device_register(&ctx->info, pd->parts, pd->num_parts);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	platform_set_drvdata(pdev, ctx);
+
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, ctx);
 

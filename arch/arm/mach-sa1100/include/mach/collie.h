@@ -81,7 +81,11 @@ extern void locomolcd_power(int on);
 #define COLLIE_TC35143_GPIO_TBL_CHK     UCB_IO_1
 #define COLLIE_TC35143_GPIO_VPEN_ON     UCB_IO_2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COLLIE_TC35143_GPIO_IR_ON       UCB_IO_3
+=======
+#define COLLIE_GPIO_IR_ON		(COLLIE_TC35143_GPIO_BASE + 3)
+>>>>>>> v3.18
 =======
 #define COLLIE_GPIO_IR_ON		(COLLIE_TC35143_GPIO_BASE + 3)
 >>>>>>> v3.18

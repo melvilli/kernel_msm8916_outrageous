@@ -216,7 +216,11 @@ static int generate_txhdr_fw3(struct b43legacy_wldev *dev,
 
 	txhdr->mac_frame_ctl = wlhdr->frame_control;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(txhdr->tx_receiver, wlhdr->addr1, 6);
+=======
+	memcpy(txhdr->tx_receiver, wlhdr->addr1, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(txhdr->tx_receiver, wlhdr->addr1, ETH_ALEN);
 >>>>>>> v3.18
@@ -259,7 +263,11 @@ static int generate_txhdr_fw3(struct b43legacy_wldev *dev,
 				   B43legacy_TX4_MAC_KEYALG;
 			wlhdr_len = ieee80211_hdrlen(wlhdr->frame_control);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iv_len = min((size_t)info->control.hw_key->iv_len,
+=======
+			iv_len = min_t(size_t, info->control.hw_key->iv_len,
+>>>>>>> v3.18
 =======
 			iv_len = min_t(size_t, info->control.hw_key->iv_len,
 >>>>>>> v3.18

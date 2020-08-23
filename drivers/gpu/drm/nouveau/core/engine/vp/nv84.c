@@ -20,6 +20,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Authors: Ben Skeggs
  */
 
@@ -33,12 +34,17 @@ struct nv84_vp_priv {
 };
 
 =======
+=======
+>>>>>>> v3.18
  * Authors: Ben Skeggs, Ilia Mirkin
  */
 
 #include <engine/xtensa.h>
 #include <engine/vp.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*******************************************************************************
  * VP object classes
@@ -47,6 +53,10 @@ struct nv84_vp_priv {
 static struct nouveau_oclass
 nv84_vp_sclass[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ 0x7476, &nouveau_object_ofuncs },
+>>>>>>> v3.18
 =======
 	{ 0x7476, &nouveau_object_ofuncs },
 >>>>>>> v3.18
@@ -62,7 +72,11 @@ nv84_vp_cclass = {
 	.handle = NV_ENGCTX(VP, 0x84),
 	.ofuncs = &(struct nouveau_ofuncs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ctor = _nouveau_engctx_ctor,
+=======
+		.ctor = _nouveau_xtensa_engctx_ctor,
+>>>>>>> v3.18
 =======
 		.ctor = _nouveau_xtensa_engctx_ctor,
 >>>>>>> v3.18
@@ -84,15 +98,21 @@ nv84_vp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	     struct nouveau_object **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nv84_vp_priv *priv;
 	int ret;
 
 	ret = nouveau_engine_create(parent, engine, oclass, true,
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_xtensa *priv;
 	int ret;
 
 	ret = nouveau_xtensa_create(parent, engine, oclass, 0xf000, true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				    "PVP", "vp", &priv);
 	*pobject = nv_object(priv);
@@ -103,6 +123,11 @@ nv84_vp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	nv_engine(priv)->cclass = &nv84_vp_cclass;
 	nv_engine(priv)->sclass = nv84_vp_sclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->fifo_val = 0x111;
+	priv->unkd28 = 0x9c544;
+>>>>>>> v3.18
 =======
 	priv->fifo_val = 0x111;
 	priv->unkd28 = 0x9c544;
@@ -116,15 +141,21 @@ nv84_vp_oclass = {
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv84_vp_ctor,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.dtor = _nouveau_engine_dtor,
 		.init = _nouveau_engine_init,
 		.fini = _nouveau_engine_fini,
 =======
+=======
+>>>>>>> v3.18
 		.dtor = _nouveau_xtensa_dtor,
 		.init = _nouveau_xtensa_init,
 		.fini = _nouveau_xtensa_fini,
 		.rd32 = _nouveau_xtensa_rd32,
 		.wr32 = _nouveau_xtensa_wr32,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };

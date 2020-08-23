@@ -8,6 +8,10 @@
 #include <linux/slab.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irqdomain.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqdomain.h>
 >>>>>>> v3.18
@@ -21,11 +25,14 @@ static LIST_HEAD(gc_list);
 static DEFINE_RAW_SPINLOCK(gc_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct irq_chip_regs *cur_regs(struct irq_data *d)
 {
 	return &container_of(d->chip, struct irq_chip_type, chip)->regs;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -47,25 +54,35 @@ void irq_gc_mask_disable_reg(struct irq_data *d)
 {
 	struct irq_chip_generic *gc = irq_data_get_irq_chip_data(d);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 mask = 1 << (d->irq - gc->irq_base);
 
 	irq_gc_lock(gc);
 	irq_reg_writel(mask, gc->reg_base + cur_regs(d)->disable);
 	gc->mask_cache &= ~mask;
 =======
+=======
+>>>>>>> v3.18
 	struct irq_chip_type *ct = irq_data_get_chip_type(d);
 	u32 mask = d->mask;
 
 	irq_gc_lock(gc);
 	irq_reg_writel(mask, gc->reg_base + ct->regs.disable);
 	*ct->mask_cache &= ~mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	irq_gc_unlock(gc);
 }
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * irq_gc_mask_set_mask_bit - Mask chip via setting bit in mask register
+=======
+ * irq_gc_mask_set_bit - Mask chip via setting bit in mask register
+>>>>>>> v3.18
 =======
  * irq_gc_mask_set_bit - Mask chip via setting bit in mask register
 >>>>>>> v3.18
@@ -78,6 +95,7 @@ void irq_gc_mask_set_bit(struct irq_data *d)
 {
 	struct irq_chip_generic *gc = irq_data_get_irq_chip_data(d);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 mask = 1 << (d->irq - gc->irq_base);
 
 	irq_gc_lock(gc);
@@ -89,6 +107,8 @@ void irq_gc_mask_set_bit(struct irq_data *d)
 /**
  * irq_gc_mask_set_mask_bit - Mask chip via clearing bit in mask register
 =======
+=======
+>>>>>>> v3.18
 	struct irq_chip_type *ct = irq_data_get_chip_type(d);
 	u32 mask = d->mask;
 
@@ -101,6 +121,9 @@ EXPORT_SYMBOL_GPL(irq_gc_mask_set_bit);
 
 /**
  * irq_gc_mask_clr_bit - Mask chip via clearing bit in mask register
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @d: irq_data
  *
@@ -111,6 +134,7 @@ void irq_gc_mask_clr_bit(struct irq_data *d)
 {
 	struct irq_chip_generic *gc = irq_data_get_irq_chip_data(d);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 mask = 1 << (d->irq - gc->irq_base);
 
 	irq_gc_lock(gc);
@@ -119,6 +143,8 @@ void irq_gc_mask_clr_bit(struct irq_data *d)
 	irq_gc_unlock(gc);
 }
 =======
+=======
+>>>>>>> v3.18
 	struct irq_chip_type *ct = irq_data_get_chip_type(d);
 	u32 mask = d->mask;
 
@@ -128,6 +154,9 @@ void irq_gc_mask_clr_bit(struct irq_data *d)
 	irq_gc_unlock(gc);
 }
 EXPORT_SYMBOL_GPL(irq_gc_mask_clr_bit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -141,18 +170,24 @@ void irq_gc_unmask_enable_reg(struct irq_data *d)
 {
 	struct irq_chip_generic *gc = irq_data_get_irq_chip_data(d);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 mask = 1 << (d->irq - gc->irq_base);
 
 	irq_gc_lock(gc);
 	irq_reg_writel(mask, gc->reg_base + cur_regs(d)->enable);
 	gc->mask_cache |= mask;
 =======
+=======
+>>>>>>> v3.18
 	struct irq_chip_type *ct = irq_data_get_chip_type(d);
 	u32 mask = d->mask;
 
 	irq_gc_lock(gc);
 	irq_reg_writel(mask, gc->reg_base + ct->regs.enable);
 	*ct->mask_cache |= mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	irq_gc_unlock(gc);
 }
@@ -165,6 +200,7 @@ void irq_gc_ack_set_bit(struct irq_data *d)
 {
 	struct irq_chip_generic *gc = irq_data_get_irq_chip_data(d);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 mask = 1 << (d->irq - gc->irq_base);
 
 	irq_gc_lock(gc);
@@ -172,6 +208,8 @@ void irq_gc_ack_set_bit(struct irq_data *d)
 	irq_gc_unlock(gc);
 }
 =======
+=======
+>>>>>>> v3.18
 	struct irq_chip_type *ct = irq_data_get_chip_type(d);
 	u32 mask = d->mask;
 
@@ -180,6 +218,9 @@ void irq_gc_ack_set_bit(struct irq_data *d)
 	irq_gc_unlock(gc);
 }
 EXPORT_SYMBOL_GPL(irq_gc_ack_set_bit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -190,23 +231,33 @@ void irq_gc_ack_clr_bit(struct irq_data *d)
 {
 	struct irq_chip_generic *gc = irq_data_get_irq_chip_data(d);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 mask = ~(1 << (d->irq - gc->irq_base));
 
 	irq_gc_lock(gc);
 	irq_reg_writel(mask, gc->reg_base + cur_regs(d)->ack);
 =======
+=======
+>>>>>>> v3.18
 	struct irq_chip_type *ct = irq_data_get_chip_type(d);
 	u32 mask = ~d->mask;
 
 	irq_gc_lock(gc);
 	irq_reg_writel(mask, gc->reg_base + ct->regs.ack);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	irq_gc_unlock(gc);
 }
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * irq_gc_mask_disable_reg_and_ack- Mask and ack pending interrupt
+=======
+ * irq_gc_mask_disable_reg_and_ack - Mask and ack pending interrupt
+>>>>>>> v3.18
 =======
  * irq_gc_mask_disable_reg_and_ack - Mask and ack pending interrupt
 >>>>>>> v3.18
@@ -216,18 +267,24 @@ void irq_gc_mask_disable_reg_and_ack(struct irq_data *d)
 {
 	struct irq_chip_generic *gc = irq_data_get_irq_chip_data(d);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 mask = 1 << (d->irq - gc->irq_base);
 
 	irq_gc_lock(gc);
 	irq_reg_writel(mask, gc->reg_base + cur_regs(d)->mask);
 	irq_reg_writel(mask, gc->reg_base + cur_regs(d)->ack);
 =======
+=======
+>>>>>>> v3.18
 	struct irq_chip_type *ct = irq_data_get_chip_type(d);
 	u32 mask = d->mask;
 
 	irq_gc_lock(gc);
 	irq_reg_writel(mask, gc->reg_base + ct->regs.mask);
 	irq_reg_writel(mask, gc->reg_base + ct->regs.ack);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	irq_gc_unlock(gc);
 }
@@ -240,16 +297,22 @@ void irq_gc_eoi(struct irq_data *d)
 {
 	struct irq_chip_generic *gc = irq_data_get_irq_chip_data(d);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 mask = 1 << (d->irq - gc->irq_base);
 
 	irq_gc_lock(gc);
 	irq_reg_writel(mask, gc->reg_base + cur_regs(d)->eoi);
 =======
+=======
+>>>>>>> v3.18
 	struct irq_chip_type *ct = irq_data_get_chip_type(d);
 	u32 mask = d->mask;
 
 	irq_gc_lock(gc);
 	irq_reg_writel(mask, gc->reg_base + ct->regs.eoi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	irq_gc_unlock(gc);
 }
@@ -257,7 +320,12 @@ void irq_gc_eoi(struct irq_data *d)
 /**
  * irq_gc_set_wake - Set/clr wake bit for an interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @d: irq_data
+=======
+ * @d:  irq_data
+ * @on: Indicates whether the wake bit should be set or cleared
+>>>>>>> v3.18
 =======
  * @d:  irq_data
  * @on: Indicates whether the wake bit should be set or cleared
@@ -271,7 +339,11 @@ int irq_gc_set_wake(struct irq_data *d, unsigned int on)
 {
 	struct irq_chip_generic *gc = irq_data_get_irq_chip_data(d);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 mask = 1 << (d->irq - gc->irq_base);
+=======
+	u32 mask = d->mask;
+>>>>>>> v3.18
 =======
 	u32 mask = d->mask;
 >>>>>>> v3.18
@@ -289,7 +361,10 @@ int irq_gc_set_wake(struct irq_data *d, unsigned int on)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 irq_init_generic_chip(struct irq_chip_generic *gc, const char *name,
 		      int num_ct, unsigned int irq_base,
@@ -303,6 +378,9 @@ irq_init_generic_chip(struct irq_chip_generic *gc, const char *name,
 	gc->chip_types->handler = handler;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * irq_alloc_generic_chip - Allocate a generic chip and initialize it
@@ -325,6 +403,7 @@ irq_alloc_generic_chip(const char *name, int num_ct, unsigned int irq_base,
 	gc = kzalloc(sz, GFP_KERNEL);
 	if (gc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		raw_spin_lock_init(&gc->lock);
 		gc->num_ct = num_ct;
 		gc->irq_base = irq_base;
@@ -335,13 +414,20 @@ irq_alloc_generic_chip(const char *name, int num_ct, unsigned int irq_base,
 		irq_init_generic_chip(gc, name, num_ct, irq_base, reg_base,
 				      handler);
 >>>>>>> v3.18
+=======
+		irq_init_generic_chip(gc, name, num_ct, irq_base, reg_base,
+				      handler);
+>>>>>>> v3.18
 	}
 	return gc;
 }
 EXPORT_SYMBOL_GPL(irq_alloc_generic_chip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 irq_gc_init_mask_cache(struct irq_chip_generic *gc, enum irq_gc_flags flags)
 {
@@ -443,6 +529,9 @@ irq_get_domain_generic_chip(struct irq_domain *d, unsigned int hw_irq)
 }
 EXPORT_SYMBOL_GPL(irq_get_domain_generic_chip);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Separate lockdep class for interrupt chip which can nest irq_desc
@@ -451,7 +540,10 @@ EXPORT_SYMBOL_GPL(irq_get_domain_generic_chip);
 static struct lock_class_key irq_nested_lock_class;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * irq_map_generic_chip - Map a generic chip for an irq domain
  */
@@ -516,6 +608,9 @@ struct irq_domain_ops irq_generic_chip_ops = {
 };
 EXPORT_SYMBOL_GPL(irq_generic_chip_ops);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * irq_setup_generic_chip - Setup a range of interrupts with a generic chip
@@ -535,6 +630,10 @@ void irq_setup_generic_chip(struct irq_chip_generic *gc, u32 msk,
 {
 	struct irq_chip_type *ct = gc->chip_types;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct irq_chip *chip = &ct->chip;
+>>>>>>> v3.18
 =======
 	struct irq_chip *chip = &ct->chip;
 >>>>>>> v3.18
@@ -545,9 +644,13 @@ void irq_setup_generic_chip(struct irq_chip_generic *gc, u32 msk,
 	raw_spin_unlock(&gc_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Init mask cache ? */
 	if (flags & IRQ_GC_INIT_MASK_CACHE)
 		gc->mask_cache = irq_reg_readl(gc->reg_base + ct->regs.mask);
+=======
+	irq_gc_init_mask_cache(gc, flags);
+>>>>>>> v3.18
 =======
 	irq_gc_init_mask_cache(gc, flags);
 >>>>>>> v3.18
@@ -560,8 +663,11 @@ void irq_setup_generic_chip(struct irq_chip_generic *gc, u32 msk,
 			irq_set_lockdep_class(i, &irq_nested_lock_class);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq_set_chip_and_handler(i, &ct->chip, ct->handler);
 =======
+=======
+>>>>>>> v3.18
 		if (!(flags & IRQ_GC_NO_MASK)) {
 			struct irq_data *d = irq_get_irq_data(i);
 
@@ -571,6 +677,9 @@ void irq_setup_generic_chip(struct irq_chip_generic *gc, u32 msk,
 				d->mask = 1 << (i - gc->irq_base);
 		}
 		irq_set_chip_and_handler(i, chip, ct->handler);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		irq_set_chip_data(i, gc);
 		irq_modify_status(i, clr, set);
@@ -583,7 +692,11 @@ EXPORT_SYMBOL_GPL(irq_setup_generic_chip);
  * irq_setup_alt_chip - Switch to alternative chip
  * @d:		irq_data for this interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @type	Flow type to be initialized
+=======
+ * @type:	Flow type to be initialized
+>>>>>>> v3.18
 =======
  * @type:	Flow type to be initialized
 >>>>>>> v3.18
@@ -639,7 +752,10 @@ void irq_remove_generic_chip(struct irq_chip_generic *gc, u32 msk,
 EXPORT_SYMBOL_GPL(irq_remove_generic_chip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct irq_data *irq_gc_get_irq_data(struct irq_chip_generic *gc)
 {
 	unsigned int virq;
@@ -658,6 +774,9 @@ static struct irq_data *irq_gc_get_irq_data(struct irq_chip_generic *gc)
 	return virq ? irq_get_irq_data(virq) : NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PM
 static int irq_gc_suspend(void)
@@ -668,15 +787,21 @@ static int irq_gc_suspend(void)
 		struct irq_chip_type *ct = gc->chip_types;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ct->chip.irq_suspend)
 			ct->chip.irq_suspend(irq_get_irq_data(gc->irq_base));
 =======
+=======
+>>>>>>> v3.18
 		if (ct->chip.irq_suspend) {
 			struct irq_data *data = irq_gc_get_irq_data(gc);
 
 			if (data)
 				ct->chip.irq_suspend(data);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -690,15 +815,21 @@ static void irq_gc_resume(void)
 		struct irq_chip_type *ct = gc->chip_types;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ct->chip.irq_resume)
 			ct->chip.irq_resume(irq_get_irq_data(gc->irq_base));
 =======
+=======
+>>>>>>> v3.18
 		if (ct->chip.irq_resume) {
 			struct irq_data *data = irq_gc_get_irq_data(gc);
 
 			if (data)
 				ct->chip.irq_resume(data);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -715,15 +846,21 @@ static void irq_gc_shutdown(void)
 		struct irq_chip_type *ct = gc->chip_types;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ct->chip.irq_pm_shutdown)
 			ct->chip.irq_pm_shutdown(irq_get_irq_data(gc->irq_base));
 =======
+=======
+>>>>>>> v3.18
 		if (ct->chip.irq_pm_shutdown) {
 			struct irq_data *data = irq_gc_get_irq_data(gc);
 
 			if (data)
 				ct->chip.irq_pm_shutdown(data);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

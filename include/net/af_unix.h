@@ -7,6 +7,7 @@
 #include <net/sock.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void unix_inflight(struct user_struct *user, struct file *fp);
 extern void unix_notinflight(struct user_struct *user, struct file *fp);
 extern void unix_gc(void);
@@ -14,12 +15,17 @@ extern void wait_for_unix_gc(void);
 extern struct sock *unix_get_socket(struct file *filp);
 extern struct sock *unix_peer_get(struct sock *);
 =======
+=======
+>>>>>>> v3.18
 void unix_inflight(struct file *fp);
 void unix_notinflight(struct file *fp);
 void unix_gc(void);
 void wait_for_unix_gc(void);
 struct sock *unix_get_socket(struct file *filp);
 struct sock *unix_peer_get(struct sock *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define UNIX_HASH_SIZE	256
@@ -45,6 +51,10 @@ struct unix_skb_parms {
 	u32			secid;		/* Security ID		*/
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32			consumed;
+>>>>>>> v3.18
 =======
 	u32			consumed;
 >>>>>>> v3.18
@@ -76,6 +86,7 @@ struct unix_sock {
 #define UNIX_GC_MAYBE_CYCLE	1
 	struct socket_wq	peer_wq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_t		peer_wake;
 };
 
@@ -83,6 +94,10 @@ static inline struct unix_sock *unix_sk(struct sock *sk)
 {
 	return (struct unix_sock *)sk;
 }
+=======
+};
+#define unix_sk(__sk) ((struct unix_sock *)__sk)
+>>>>>>> v3.18
 =======
 };
 #define unix_sk(__sk) ((struct unix_sock *)__sk)
@@ -95,8 +110,13 @@ long unix_outq_len(struct sock *sk);
 
 #ifdef CONFIG_SYSCTL
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int unix_sysctl_register(struct net *net);
 extern void unix_sysctl_unregister(struct net *net);
+=======
+int unix_sysctl_register(struct net *net);
+void unix_sysctl_unregister(struct net *net);
+>>>>>>> v3.18
 =======
 int unix_sysctl_register(struct net *net);
 void unix_sysctl_unregister(struct net *net);

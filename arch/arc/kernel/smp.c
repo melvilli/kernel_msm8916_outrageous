@@ -13,14 +13,18 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/spinlock.h>
 #include <linux/sched.h>
 #include <linux/interrupt.h>
 #include <linux/profile.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/errno.h>
 #include <linux/err.h>
@@ -33,6 +37,13 @@
 #include <linux/percpu.h>
 #include <linux/cpumask.h>
 #include <linux/spinlock_types.h>
+=======
+#include <linux/mm.h>
+#include <linux/cpu.h>
+#include <linux/irq.h>
+#include <linux/atomic.h>
+#include <linux/cpumask.h>
+>>>>>>> v3.18
 =======
 #include <linux/mm.h>
 #include <linux/cpu.h>
@@ -107,7 +118,11 @@ void __init smp_cpus_done(unsigned int max_cpus)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __attribute__((weak)) arc_platform_smp_wait_to_boot(int cpu)
+=======
+void __weak arc_platform_smp_wait_to_boot(int cpu)
+>>>>>>> v3.18
 =======
 void __weak arc_platform_smp_wait_to_boot(int cpu)
 >>>>>>> v3.18
@@ -125,7 +140,11 @@ void __weak arc_platform_smp_wait_to_boot(int cpu)
 const char *arc_platform_smp_cpuinfo(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return plat_smp_ops.info;
+=======
+	return plat_smp_ops.info ? : "";
+>>>>>>> v3.18
 =======
 	return plat_smp_ops.info ? : "";
 >>>>>>> v3.18
@@ -137,7 +156,11 @@ const char *arc_platform_smp_cpuinfo(void)
  * "current"/R25 already setup by low level boot code
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit start_kernel_secondary(void)
+=======
+void start_kernel_secondary(void)
+>>>>>>> v3.18
 =======
 void start_kernel_secondary(void)
 >>>>>>> v3.18
@@ -152,6 +175,10 @@ void start_kernel_secondary(void)
 	atomic_inc(&mm->mm_count);
 	current->active_mm = mm;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpumask_set_cpu(cpu, mm_cpumask(mm));
+>>>>>>> v3.18
 =======
 	cpumask_set_cpu(cpu, mm_cpumask(mm));
 >>>>>>> v3.18
@@ -163,9 +190,15 @@ void start_kernel_secondary(void)
 
 	if (machine_desc->init_smp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		machine_desc->init_smp(smp_processor_id());
 
 	arc_local_timer_setup(cpu);
+=======
+		machine_desc->init_smp(cpu);
+
+	arc_local_timer_setup();
+>>>>>>> v3.18
 =======
 		machine_desc->init_smp(cpu);
 
@@ -188,7 +221,11 @@ void start_kernel_secondary(void)
  * Essential requirements being where to run from (PC) and stack (SP)
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *idle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 int __cpu_up(unsigned int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -234,6 +271,7 @@ int __init setup_profiling_timer(unsigned int multiplier)
 /*****************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * structures for inter-processor calls
  * A Collection of single bit ipi messages
@@ -274,6 +312,8 @@ static void ipi_send_msg(const struct cpumask *callmap, enum ipi_msg_type msg)
 	if (plat_smp_ops.ipi_send)
 		plat_smp_ops.ipi_send((void *)callmap);
 =======
+=======
+>>>>>>> v3.18
 enum ipi_msg_type {
 	IPI_EMPTY = 0,
 	IPI_RESCHEDULE = 1,
@@ -318,16 +358,22 @@ static void ipi_send_msg_one(int cpu, enum ipi_msg_type msg)
 	 */
 	if (plat_smp_ops.ipi_send && !old)
 		plat_smp_ops.ipi_send(cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	local_irq_restore(flags);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void smp_send_reschedule(int cpu)
 {
 	ipi_send_msg(cpumask_of(cpu), IPI_RESCHEDULE);
 =======
+=======
+>>>>>>> v3.18
 static void ipi_send_msg(const struct cpumask *callmap, enum ipi_msg_type msg)
 {
 	unsigned int cpu;
@@ -339,6 +385,9 @@ static void ipi_send_msg(const struct cpumask *callmap, enum ipi_msg_type msg)
 void smp_send_reschedule(int cpu)
 {
 	ipi_send_msg_one(cpu, IPI_RESCHEDULE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -353,7 +402,11 @@ void smp_send_stop(void)
 void arch_send_call_function_single_ipi(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ipi_send_msg(cpumask_of(cpu), IPI_CALL_FUNC_SINGLE);
+=======
+	ipi_send_msg_one(cpu, IPI_CALL_FUNC);
+>>>>>>> v3.18
 =======
 	ipi_send_msg_one(cpu, IPI_CALL_FUNC);
 >>>>>>> v3.18
@@ -368,7 +421,11 @@ void arch_send_call_function_ipi_mask(const struct cpumask *mask)
  * ipi_cpu_stop - handle IPI from smp_send_stop()
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ipi_cpu_stop(unsigned int cpu)
+=======
+static void ipi_cpu_stop(void)
+>>>>>>> v3.18
 =======
 static void ipi_cpu_stop(void)
 >>>>>>> v3.18
@@ -376,6 +433,7 @@ static void ipi_cpu_stop(void)
 	machine_halt();
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void __do_IPI(unsigned long *ops, struct ipi_data *ipi, int cpu)
 {
@@ -404,6 +462,8 @@ static inline void __do_IPI(unsigned long *ops, struct ipi_data *ipi, int cpu)
 	} while (msg < BITS_PER_LONG);
 
 =======
+=======
+>>>>>>> v3.18
 static inline void __do_IPI(unsigned long msg)
 {
 	switch (msg) {
@@ -422,6 +482,9 @@ static inline void __do_IPI(unsigned long msg)
 	default:
 		pr_warn("IPI with unexpected msg %ld\n", msg);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -431,6 +494,7 @@ static inline void __do_IPI(unsigned long msg)
  */
 irqreturn_t do_IPI(int irq, void *dev_id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int cpu = smp_processor_id();
 	struct ipi_data *ipi = &per_cpu(ipi_data, cpu);
@@ -446,6 +510,8 @@ irqreturn_t do_IPI(int irq, void *dev_id)
 	while ((ops = xchg(&ipi->bits, 0)) != 0)
 		__do_IPI(&ops, ipi, cpu);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long pending;
 
 	pr_debug("IPI [%ld] received on cpu %d\n",
@@ -465,6 +531,9 @@ irqreturn_t do_IPI(int irq, void *dev_id)
 		__do_IPI(msg);
 		pending &= ~(1U << msg);
 	} while (pending);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return IRQ_HANDLED;
@@ -475,11 +544,14 @@ irqreturn_t do_IPI(int irq, void *dev_id)
  */
 static DEFINE_PER_CPU(int, ipi_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int smp_ipi_irq_setup(int cpu, int irq)
 {
 	int *dev_id = &per_cpu(ipi_dev, smp_processor_id());
 	return request_percpu_irq(irq, do_IPI, "IPI Interrupt", dev_id);
 =======
+=======
+>>>>>>> v3.18
 
 int smp_ipi_irq_setup(int cpu, int irq)
 {
@@ -488,5 +560,8 @@ int smp_ipi_irq_setup(int cpu, int irq)
 	arc_request_percpu_irq(irq, cpu, do_IPI, "IPI Interrupt", dev);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -375,8 +375,12 @@ netdev_tx_t i2400m_hard_start_xmit(struct sk_buff *skb,
 	d_fnstart(3, dev, "(skb %p net_dev %p)\n", skb, net_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb_header_cloned(skb) && 
 	    pskb_expand_head(skb, 0, 0, GFP_ATOMIC))
+=======
+	if (skb_cow_head(skb, 0))
+>>>>>>> v3.18
 =======
 	if (skb_cow_head(skb, 0))
 >>>>>>> v3.18

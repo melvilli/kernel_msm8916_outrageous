@@ -2,7 +2,11 @@
  * net/tipc/discover.c
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2003-2006, Ericsson AB
+=======
+ * Copyright (c) 2003-2006, 2014, Ericsson AB
+>>>>>>> v3.18
 =======
  * Copyright (c) 2003-2006, 2014, Ericsson AB
 >>>>>>> v3.18
@@ -51,16 +55,22 @@
 /**
  * struct tipc_link_req - information about an ongoing link setup request
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @bearer: bearer issuing requests
  * @dest: destination address for request messages
  * @domain: network domain to which links can be established
  * @num_nodes: number of nodes currently discovered (i.e. with an active link)
 =======
+=======
+>>>>>>> v3.18
  * @bearer_id: identity of bearer issuing requests
  * @dest: destination address for request messages
  * @domain: network domain to which links can be established
  * @num_nodes: number of nodes currently discovered (i.e. with an active link)
  * @lock: spinlock for controlling access to requests
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @buf: request message to be (repeatedly) sent
  * @timer: timer governing period between requests
@@ -68,16 +78,22 @@
  */
 struct tipc_link_req {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tipc_bearer *bearer;
 	struct tipc_media_addr dest;
 	u32 domain;
 	int num_nodes;
 =======
+=======
+>>>>>>> v3.18
 	u32 bearer_id;
 	struct tipc_media_addr dest;
 	u32 domain;
 	int num_nodes;
 	spinlock_t lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct sk_buff *buf;
 	struct timer_list timer;
@@ -87,6 +103,7 @@ struct tipc_link_req {
 /**
  * tipc_disc_init_msg - initialize a link setup message
  * @type: message type (request or response)
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @dest_domain: network domain of node(s) which should respond to message
  * @b_ptr: ptr to bearer issuing message
@@ -109,6 +126,8 @@ static struct sk_buff *tipc_disc_init_msg(u32 type,
 	}
 	return buf;
 =======
+=======
+>>>>>>> v3.18
  * @b_ptr: ptr to bearer issuing message
  */
 static void tipc_disc_init_msg(struct sk_buff *buf, u32 type,
@@ -124,6 +143,9 @@ static void tipc_disc_init_msg(struct sk_buff *buf, u32 type,
 	msg_set_dest_domain(msg, dest_domain);
 	msg_set_bc_netid(msg, tipc_net_id);
 	b_ptr->media->addr2msg(msg_media_addr(msg), &b_ptr->addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -148,6 +170,7 @@ static void disc_dupl_alert(struct tipc_bearer *b_ptr, u32 node_addr,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * tipc_disc_recv_msg - handle incoming link setup message (request or response)
  * @buf: buffer containing message
  * @b_ptr: bearer that message arrived on
@@ -170,6 +193,8 @@ void tipc_disc_recv_msg(struct sk_buff *buf, struct tipc_bearer *b_ptr)
 	media_addr.broadcast = 1;
 	b_ptr->media->msg2addr(b_ptr, &media_addr, msg_media_addr(msg));
 =======
+=======
+>>>>>>> v3.18
  * tipc_disc_rcv - handle incoming discovery message (request or response)
  * @buf: buffer containing message
  * @bearer: bearer that message arrived on
@@ -194,12 +219,16 @@ void tipc_disc_rcv(struct sk_buff *buf, struct tipc_bearer *bearer)
 	bool respond = false;
 
 	bearer->media->msg2addr(bearer, &maddr, msg_media_addr(msg));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree_skb(buf);
 
 	/* Ensure message from node is valid and communication is permitted */
 	if (net_id != tipc_net_id)
 		return;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (media_addr.broadcast)
 		return;
@@ -316,6 +345,8 @@ void tipc_disc_rcv(struct sk_buff *buf, struct tipc_bearer *bearer)
 
 	tipc_node_unlock(n_ptr);
 =======
+=======
+>>>>>>> v3.18
 	if (maddr.broadcast)
 		return;
 	if (!tipc_addr_domain_valid(ddom))
@@ -431,6 +462,9 @@ void tipc_disc_rcv(struct sk_buff *buf, struct tipc_bearer *bearer)
 		}
 	}
 	tipc_node_unlock(node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -459,7 +493,13 @@ static void disc_update(struct tipc_link_req *req)
 void tipc_disc_add_dest(struct tipc_link_req *req)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req->num_nodes++;
+=======
+	spin_lock_bh(&req->lock);
+	req->num_nodes++;
+	spin_unlock_bh(&req->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&req->lock);
 	req->num_nodes++;
@@ -474,6 +514,7 @@ void tipc_disc_add_dest(struct tipc_link_req *req)
 void tipc_disc_remove_dest(struct tipc_link_req *req)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req->num_nodes--;
 	disc_update(req);
 }
@@ -487,10 +528,15 @@ static void disc_send_msg(struct tipc_link_req *req)
 	if (!req->bearer->blocked)
 		tipc_bearer_send(req->bearer, req->buf, &req->dest);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&req->lock);
 	req->num_nodes--;
 	disc_update(req);
 	spin_unlock_bh(&req->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -505,7 +551,11 @@ static void disc_timeout(struct tipc_link_req *req)
 	int max_delay;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&req->bearer->lock);
+=======
+	spin_lock_bh(&req->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&req->lock);
 >>>>>>> v3.18
@@ -524,7 +574,12 @@ static void disc_timeout(struct tipc_link_req *req)
 	 * otherwise hold at slow polling rate
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	disc_send_msg(req);
+=======
+	tipc_bearer_send(req->bearer_id, req->buf, &req->dest);
+
+>>>>>>> v3.18
 =======
 	tipc_bearer_send(req->bearer_id, req->buf, &req->dest);
 
@@ -541,7 +596,11 @@ static void disc_timeout(struct tipc_link_req *req)
 	k_start_timer(&req->timer, req->timer_intv);
 exit:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&req->bearer->lock);
+=======
+	spin_unlock_bh(&req->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&req->lock);
 >>>>>>> v3.18
@@ -556,8 +615,12 @@ exit:
  * Returns 0 if successful, otherwise -errno.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int tipc_disc_create(struct tipc_bearer *b_ptr,
 		     struct tipc_media_addr *dest, u32 dest_domain)
+=======
+int tipc_disc_create(struct tipc_bearer *b_ptr, struct tipc_media_addr *dest)
+>>>>>>> v3.18
 =======
 int tipc_disc_create(struct tipc_bearer *b_ptr, struct tipc_media_addr *dest)
 >>>>>>> v3.18
@@ -568,6 +631,7 @@ int tipc_disc_create(struct tipc_bearer *b_ptr, struct tipc_media_addr *dest)
 	if (!req)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	req->buf = tipc_disc_init_msg(DSC_REQ_MSG, dest_domain, b_ptr);
 	if (!req->buf) {
@@ -585,6 +649,8 @@ int tipc_disc_create(struct tipc_bearer *b_ptr, struct tipc_media_addr *dest)
 	b_ptr->link_req = req;
 	disc_send_msg(req);
 =======
+=======
+>>>>>>> v3.18
 	req->buf = tipc_buf_acquire(INT_H_SIZE);
 	if (!req->buf) {
 		kfree(req);
@@ -602,6 +668,9 @@ int tipc_disc_create(struct tipc_bearer *b_ptr, struct tipc_media_addr *dest)
 	k_start_timer(&req->timer, req->timer_intv);
 	b_ptr->link_req = req;
 	tipc_bearer_send(req->bearer_id, req->buf, &req->dest);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -618,7 +687,10 @@ void tipc_disc_delete(struct tipc_link_req *req)
 	kfree(req);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * tipc_disc_reset - reset object to send periodic link setup requests
@@ -639,4 +711,7 @@ void tipc_disc_reset(struct tipc_bearer *b_ptr)
 	tipc_bearer_send(req->bearer_id, req->buf, &req->dest);
 	spin_unlock_bh(&req->lock);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

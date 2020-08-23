@@ -45,7 +45,10 @@ extern void unit_pci_init(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long pci_mem_start;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PCIBIOS_MIN_IO		0xBE000004
@@ -53,7 +56,10 @@ extern unsigned long pci_mem_start;
 
 void pcibios_set_master(struct pci_dev *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pcibios_penalize_isa_irq(int irq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

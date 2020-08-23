@@ -35,8 +35,11 @@ struct ctl_table_header;
 struct ctl_dir;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct ctl_table ctl_table;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef int proc_handler (struct ctl_table *ctl, int write,

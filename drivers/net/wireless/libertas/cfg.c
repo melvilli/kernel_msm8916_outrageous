@@ -591,7 +591,10 @@ static int lbs_ret_scan(struct lbs_private *priv, unsigned long dummy,
 		const u8 *ssid = NULL;
 		u8 ssid_len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DECLARE_SSID_BUF(ssid_buf);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -625,7 +628,11 @@ static int lbs_ret_scan(struct lbs_private *priv, unsigned long dummy,
 			elen = *pos++;
 			left -= 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (elen > left || elen == 0) {
+=======
+			if (elen > left) {
+>>>>>>> v3.18
 =======
 			if (elen > left) {
 >>>>>>> v3.18
@@ -652,10 +659,15 @@ static int lbs_ret_scan(struct lbs_private *priv, unsigned long dummy,
 				ieee80211_get_channel(wiphy, freq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			lbs_deb_scan("scan: %pM, capa %04x, chan %2d, %s, "
 				     "%d dBm\n",
 				     bssid, capa, chan_no,
 				     print_ssid(ssid_buf, ssid, ssid_len),
+=======
+			lbs_deb_scan("scan: %pM, capa %04x, chan %2d, %*pE, %d dBm\n",
+				     bssid, capa, chan_no, ssid_len, ssid,
+>>>>>>> v3.18
 =======
 			lbs_deb_scan("scan: %pM, capa %04x, chan %2d, %*pE, %d dBm\n",
 				     bssid, capa, chan_no, ssid_len, ssid,
@@ -666,6 +678,10 @@ static int lbs_ret_scan(struct lbs_private *priv, unsigned long dummy,
 			    !(channel->flags & IEEE80211_CHAN_DISABLED)) {
 				bss = cfg80211_inform_bss(wiphy, channel,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					CFG80211_BSS_FTYPE_UNKNOWN,
+>>>>>>> v3.18
 =======
 					CFG80211_BSS_FTYPE_UNKNOWN,
 >>>>>>> v3.18
@@ -1023,9 +1039,14 @@ struct cmd_key_material {
 
 static int lbs_set_key_material(struct lbs_private *priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				int key_type,
 				int key_info,
 				u8 *key, u16 key_len)
+=======
+				int key_type, int key_info,
+				const u8 *key, u16 key_len)
+>>>>>>> v3.18
 =======
 				int key_type, int key_info,
 				const u8 *key, u16 key_len)
@@ -1290,6 +1311,7 @@ _new_connect_scan_req(struct wiphy *wiphy, struct cfg80211_connect_params *sme)
 {
 	struct cfg80211_scan_request *creq = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, n_channels = 0;
 	enum ieee80211_band band;
 
@@ -1298,6 +1320,11 @@ _new_connect_scan_req(struct wiphy *wiphy, struct cfg80211_connect_params *sme)
 			n_channels += wiphy->bands[band]->n_channels;
 	}
 
+=======
+	int i, n_channels = ieee80211_get_num_supported_channels(wiphy);
+	enum ieee80211_band band;
+
+>>>>>>> v3.18
 =======
 	int i, n_channels = ieee80211_get_num_supported_channels(wiphy);
 	enum ieee80211_band band;
@@ -1387,7 +1414,11 @@ static int lbs_cfg_connect(struct wiphy *wiphy, struct net_device *dev,
 						 (priv->scan_req == NULL),
 						 (15 * HZ));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lbs_deb_assoc("assoc: scanning competed\n");
+=======
+		lbs_deb_assoc("assoc: scanning completed\n");
+>>>>>>> v3.18
 =======
 		lbs_deb_assoc("assoc: scanning completed\n");
 >>>>>>> v3.18
@@ -1647,7 +1678,11 @@ static int lbs_cfg_del_key(struct wiphy *wiphy, struct net_device *netdev,
 
 static int lbs_cfg_get_station(struct wiphy *wiphy, struct net_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      u8 *mac, struct station_info *sinfo)
+=======
+			       const u8 *mac, struct station_info *sinfo)
+>>>>>>> v3.18
 =======
 			       const u8 *mac, struct station_info *sinfo)
 >>>>>>> v3.18
@@ -1796,6 +1831,10 @@ static void lbs_join_post(struct lbs_private *priv,
 	bss = cfg80211_inform_bss(priv->wdev->wiphy,
 				  params->chandef.chan,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				  CFG80211_BSS_FTYPE_UNKNOWN,
+>>>>>>> v3.18
 =======
 				  CFG80211_BSS_FTYPE_UNKNOWN,
 >>>>>>> v3.18
@@ -1811,7 +1850,12 @@ static void lbs_join_post(struct lbs_private *priv,
 	priv->wdev->ssid_len = params->ssid_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg80211_ibss_joined(priv->dev, bssid, GFP_KERNEL);
+=======
+	cfg80211_ibss_joined(priv->dev, bssid, params->chandef.chan,
+			     GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	cfg80211_ibss_joined(priv->dev, bssid, params->chandef.chan,
 			     GFP_KERNEL);
@@ -2032,7 +2076,10 @@ static int lbs_join_ibss(struct wiphy *wiphy, struct net_device *dev,
 	int ret = 0;
 	struct cfg80211_bss *bss;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECLARE_SSID_BUF(ssid_buf);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

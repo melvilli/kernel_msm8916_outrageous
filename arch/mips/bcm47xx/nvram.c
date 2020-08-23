@@ -12,7 +12,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -26,6 +29,10 @@
 
 static char nvram_buf[NVRAM_SPACE];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static const u32 nvram_sizes[] = {0x8000, 0xF000, 0x10000};
+>>>>>>> v3.18
 =======
 static const u32 nvram_sizes[] = {0x8000, 0xF000, 0x10000};
 >>>>>>> v3.18
@@ -34,7 +41,10 @@ static u32 find_nvram_size(u32 end)
 {
 	struct nvram_header *header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 nvram_sizes[] = {0x8000, 0xF000, 0x10000};
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
@@ -201,7 +211,10 @@ int bcm47xx_nvram_getenv(char *name, char *val, size_t val_len)
 }
 EXPORT_SYMBOL(bcm47xx_nvram_getenv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int bcm47xx_nvram_gpio_pin(const char *name)
 {
@@ -222,4 +235,7 @@ int bcm47xx_nvram_gpio_pin(const char *name)
 	return -ENOENT;
 }
 EXPORT_SYMBOL(bcm47xx_nvram_gpio_pin);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

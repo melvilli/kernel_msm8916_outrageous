@@ -287,7 +287,11 @@ int qib_multicast_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 	struct qib_ibport *ibp = to_iport(ibqp->device, qp->port_num);
 	struct qib_mcast *mcast = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qib_mcast_qp *p, *tmp, *delp = NULL;
+=======
+	struct qib_mcast_qp *p, *tmp;
+>>>>>>> v3.18
 =======
 	struct qib_mcast_qp *p, *tmp;
 >>>>>>> v3.18
@@ -296,13 +300,19 @@ int qib_multicast_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ibqp->qp_num <= 1 || qp->state == IB_QPS_RESET)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	if (ibqp->qp_num <= 1 || qp->state == IB_QPS_RESET) {
 		ret = -EINVAL;
 		goto bail;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_irq(&ibp->lock);
@@ -313,7 +323,12 @@ int qib_multicast_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 		if (n == NULL) {
 			spin_unlock_irq(&ibp->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -EINVAL;
+=======
+			ret = -EINVAL;
+			goto bail;
+>>>>>>> v3.18
 =======
 			ret = -EINVAL;
 			goto bail;
@@ -342,7 +357,10 @@ int qib_multicast_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 		list_del_rcu(&p->list);
 		mcast->n_attached--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		delp = p;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -356,6 +374,7 @@ int qib_multicast_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 
 	spin_unlock_irq(&ibp->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* QP not attached */
 	if (!delp)
 		return -EINVAL;
@@ -367,6 +386,8 @@ int qib_multicast_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 	qib_mcast_qp_free(delp);
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (p) {
 		/*
@@ -376,6 +397,9 @@ int qib_multicast_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 		wait_event(mcast->wait, atomic_read(&mcast->refcount) <= 1);
 		qib_mcast_qp_free(p);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (last) {
 		atomic_dec(&mcast->refcount);
@@ -386,13 +410,19 @@ int qib_multicast_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
 		spin_unlock_irq(&dev->n_mcast_grps_lock);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 
 	ret = 0;
 
 bail:
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

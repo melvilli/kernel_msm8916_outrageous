@@ -20,6 +20,10 @@
 #include <linux/errno.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/interrupt.h>
+>>>>>>> v3.18
 =======
 #include <linux/interrupt.h>
 >>>>>>> v3.18
@@ -29,6 +33,10 @@
 #include <linux/moduleparam.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/reboot.h>
+>>>>>>> v3.18
 =======
 #include <linux/reboot.h>
 >>>>>>> v3.18
@@ -40,6 +48,10 @@
 #include <linux/uaccess.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -49,15 +61,21 @@
 #define DRV_NAME "AT91SAM9 Watchdog"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define wdt_read(field) \
 	__raw_readl(at91wdt_private.base + field)
 #define wdt_write(field, val) \
 	__raw_writel((val), at91wdt_private.base + field)
 =======
+=======
+>>>>>>> v3.18
 #define wdt_read(wdt, field) \
 	__raw_readl((wdt)->base + (field))
 #define wdt_write(wtd, field, val) \
 	__raw_writel((val), (wdt)->base + (field))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* AT91SAM9 watchdog runs a 12bit counter @ 256Hz,
@@ -65,9 +83,12 @@
  * value from/to milliseconds.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ms_to_ticks(t)	(((t << 8) / 1000) - 1)
 #define ticks_to_ms(t)	(((t + 1) * 1000) >> 8)
 =======
+=======
+>>>>>>> v3.18
 #define ticks_to_hz_rounddown(t)	((((t) + 1) * HZ) >> 8)
 #define ticks_to_hz_roundup(t)		(((((t) + 1) * HZ) + 255) >> 8)
 #define ticks_to_secs(t)		(((t) + 1) >> 8)
@@ -80,6 +101,9 @@
 
 /* Watchdog max delta/value in secs */
 #define WDT_COUNTER_MAX_SECS	ticks_to_secs(WDT_COUNTER_MAX_TICKS)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Hardware timeout in seconds */
@@ -101,6 +125,7 @@ MODULE_PARM_DESC(nowayout, "Watchdog cannot be stopped once started "
 	"(default=" __MODULE_STRING(WATCHDOG_NOWAYOUT) ")");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct watchdog_device at91_wdt_dev;
 static void at91_ping(unsigned long data);
 
@@ -119,6 +144,8 @@ static inline void at91_wdt_reset(void)
 {
 	wdt_write(AT91_WDT_CR, AT91_WDT_KEY | AT91_WDT_WDRSTT);
 =======
+=======
+>>>>>>> v3.18
 #define to_wdt(wdd) container_of(wdd, struct at91wdt, wdd)
 struct at91wdt {
 	struct watchdog_device wdd;
@@ -153,6 +180,9 @@ static irqreturn_t wdt_interrupt(int irq, void *dev_id)
 static inline void at91_wdt_reset(struct at91wdt *wdt)
 {
 	wdt_write(wdt, AT91_WDT_CR, AT91_WDT_KEY | AT91_WDT_WDRSTT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -161,6 +191,7 @@ static inline void at91_wdt_reset(struct at91wdt *wdt)
  */
 static void at91_ping(unsigned long data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (time_before(jiffies, at91wdt_private.next_heartbeat) ||
 	    (!watchdog_active(&at91_wdt_dev))) {
@@ -176,6 +207,8 @@ static int at91_wdt_ping(struct watchdog_device *wdd)
 	at91wdt_private.next_heartbeat = jiffies + wdd->timeout * HZ;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct at91wdt *wdt = (struct at91wdt *)data;
 	if (time_before(jiffies, wdt->next_heartbeat) ||
 	    !watchdog_active(&wdt->wdd)) {
@@ -184,15 +217,24 @@ static int at91_wdt_ping(struct watchdog_device *wdd)
 	} else {
 		pr_crit("I will reset your machine !\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int at91_wdt_start(struct watchdog_device *wdd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* calculate the next userspace timeout and modify the timer */
 	at91_wdt_ping(wdd);
 	mod_timer(&at91wdt_private.timer, jiffies + WDT_TIMEOUT);
+=======
+	struct at91wdt *wdt = to_wdt(wdd);
+	/* calculate when the next userspace timeout will be */
+	wdt->next_heartbeat = jiffies + wdd->timeout * HZ;
+>>>>>>> v3.18
 =======
 	struct at91wdt *wdt = to_wdt(wdd);
 	/* calculate when the next userspace timeout will be */
@@ -210,6 +252,7 @@ static int at91_wdt_stop(struct watchdog_device *wdd)
 static int at91_wdt_set_timeout(struct watchdog_device *wdd, unsigned int new_timeout)
 {
 	wdd->timeout = new_timeout;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 }
@@ -245,6 +288,8 @@ static int at91_wdt_settimeout(unsigned int timeout)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	return at91_wdt_start(wdd);
 }
 
@@ -343,6 +388,9 @@ static int at91_wdt_init(struct platform_device *pdev, struct at91wdt *wdt)
 out_stop_timer:
 	del_timer(&wdt->timer);
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -359,6 +407,7 @@ static const struct watchdog_ops at91_wdt_ops = {
 	.start =	at91_wdt_start,
 	.stop =		at91_wdt_stop,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ping =		at91_wdt_ping,
 	.set_timeout =	at91_wdt_set_timeout,
 };
@@ -371,6 +420,8 @@ static struct watchdog_device at91_wdt_dev = {
 	.max_timeout =	0xFFFF,
 };
 =======
+=======
+>>>>>>> v3.18
 	.set_timeout =	at91_wdt_set_timeout,
 };
 
@@ -436,11 +487,15 @@ static inline int of_at91wdt_init(struct device_node *np, struct at91wdt *wdt)
 	return 0;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __init at91wdt_probe(struct platform_device *pdev)
 {
 	struct resource	*r;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int res;
 
@@ -473,6 +528,8 @@ static int __init at91wdt_probe(struct platform_device *pdev)
 	pr_info("enabled (heartbeat=%d sec, nowayout=%d)\n",
 		at91_wdt_dev.timeout, nowayout);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 	struct at91wdt *wdt;
 
@@ -510,6 +567,9 @@ static int __init at91wdt_probe(struct platform_device *pdev)
 
 	pr_info("enabled (heartbeat=%d sec, nowayout=%d)\n",
 		wdt->wdd.timeout, wdt->nowayout);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -518,16 +578,22 @@ static int __init at91wdt_probe(struct platform_device *pdev)
 static int __exit at91wdt_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	watchdog_unregister_device(&at91_wdt_dev);
 
 	pr_warn("I quit now, hardware will probably reboot!\n");
 	del_timer(&at91wdt_private.timer);
 =======
+=======
+>>>>>>> v3.18
 	struct at91wdt *wdt = platform_get_drvdata(pdev);
 	watchdog_unregister_device(&wdt->wdd);
 
 	pr_warn("I quit now, hardware will probably reboot!\n");
 	del_timer(&wdt->timer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -19,7 +23,11 @@ static const struct addi_board apci1500_boardtypes[] = {
 		.pc_DriverName		= "apci1500",
 		.i_IorangeBase1		= APCI1500_ADDRESS_RANGE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.i_PCIEeprom		= ADDIDATA_NO_EEPROM,
+=======
+		.i_PCIEeprom		= 0,
+>>>>>>> v3.18
 =======
 		.i_PCIEeprom		= 0,
 >>>>>>> v3.18
@@ -27,6 +35,7 @@ static const struct addi_board apci1500_boardtypes[] = {
 		.i_NbrDoChannel		= 16,
 		.i_DoMaxdata		= 0xffff,
 		.i_Timer		= 1,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.interrupt		= v_APCI1500_Interrupt,
 		.reset			= i_APCI1500_Reset,
@@ -42,6 +51,8 @@ static const struct addi_board apci1500_boardtypes[] = {
 		.timer_read		= i_APCI1500_ReadInterruptMask,
 		.timer_bits		= i_APCI1500_ReadCounterTimerWatchdog,
 =======
+=======
+>>>>>>> v3.18
 		.interrupt		= apci1500_interrupt,
 		.reset			= apci1500_reset,
 		.di_config		= apci1500_di_config,
@@ -55,6 +66,9 @@ static const struct addi_board apci1500_boardtypes[] = {
 		.timer_write		= apci1500_timer_write,
 		.timer_read		= apci1500_timer_read,
 		.timer_bits		= apci1500_timer_bits,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -81,7 +95,11 @@ static int apci1500_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci1500_pci_table) = {
+=======
+static const struct pci_device_id apci1500_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id apci1500_pci_table[] = {
 >>>>>>> v3.18
@@ -100,7 +118,11 @@ module_comedi_pci_driver(apci1500_driver, apci1500_pci_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("ADDI-DATA APCI-1500, 16 channel DI / 16 channel DO boards");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("ADDI-DATA APCI-1500, 16 channel DI / 16 channel DO boards");
 >>>>>>> v3.18

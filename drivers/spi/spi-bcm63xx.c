@@ -21,7 +21,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/clk.h>
@@ -34,7 +37,10 @@
 #include <linux/completion.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/workqueue.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pm_runtime.h>
@@ -42,8 +48,11 @@
 #include <bcm63xx_dev_spi.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PFX		KBUILD_MODNAME
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define BCM63XX_SPI_MAX_PREPEND		15
@@ -134,6 +143,7 @@ static void bcm63xx_spi_setup_transfer(struct spi_device *spi,
 #define MODEBITS (SPI_CPOL | SPI_CPHA)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bcm63xx_spi_setup(struct spi_device *spi)
 {
 	if (spi->bits_per_word != 8) {
@@ -145,6 +155,8 @@ static int bcm63xx_spi_setup(struct spi_device *spi)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int bcm63xx_txrx_bufs(struct spi_device *spi, struct spi_transfer *first,
@@ -193,7 +205,11 @@ static int bcm63xx_txrx_bufs(struct spi_device *spi, struct spi_transfer *first,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_completion(&bs->done);
+=======
+	reinit_completion(&bs->done);
+>>>>>>> v3.18
 =======
 	reinit_completion(&bs->done);
 >>>>>>> v3.18
@@ -231,6 +247,7 @@ static int bcm63xx_txrx_bufs(struct spi_device *spi, struct spi_transfer *first,
 		return -ETIMEDOUT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* read out all data */
 	rx_tail = bcm_spi_readb(bs, SPI_RX_TAIL);
 
@@ -238,6 +255,9 @@ static int bcm63xx_txrx_bufs(struct spi_device *spi, struct spi_transfer *first,
 		return -EIO;
 
 	if (!rx_tail)
+=======
+	if (!do_rx)
+>>>>>>> v3.18
 =======
 	if (!do_rx)
 >>>>>>> v3.18
@@ -261,6 +281,7 @@ static int bcm63xx_txrx_bufs(struct spi_device *spi, struct spi_transfer *first,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bcm63xx_spi_prepare_transfer(struct spi_master *master)
 {
 	struct bcm63xx_spi *bs = spi_master_get_devdata(master);
@@ -281,6 +302,8 @@ static int bcm63xx_spi_unprepare_transfer(struct spi_master *master)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int bcm63xx_spi_transfer_one(struct spi_master *master,
 					struct spi_message *m)
 {
@@ -299,6 +322,7 @@ static int bcm63xx_spi_transfer_one(struct spi_master *master,
 	 */
 	list_for_each_entry(t, &m->transfers, transfer_list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (t->bits_per_word != 8) {
 			dev_err(&spi->dev, "%s, unsupported bits_per_word=%d\n",
 				__func__, t->bits_per_word);
@@ -306,6 +330,8 @@ static int bcm63xx_spi_transfer_one(struct spi_master *master,
 			goto exit;
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (!first)
@@ -396,7 +422,11 @@ static int bcm63xx_spi_probe(struct platform_device *pdev)
 	struct resource *r;
 	struct device *dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcm63xx_spi_pdata *pdata = pdev->dev.platform_data;
+=======
+	struct bcm63xx_spi_pdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct bcm63xx_spi_pdata *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -406,6 +436,7 @@ static int bcm63xx_spi_probe(struct platform_device *pdev)
 	struct bcm63xx_spi *bs;
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!r) {
@@ -427,6 +458,8 @@ static int bcm63xx_spi_probe(struct platform_device *pdev)
 		ret = PTR_ERR(clk);
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	irq = platform_get_irq(pdev, 0);
 	if (irq < 0) {
 		dev_err(dev, "no irq\n");
@@ -437,6 +470,9 @@ static int bcm63xx_spi_probe(struct platform_device *pdev)
 	if (IS_ERR(clk)) {
 		dev_err(dev, "no clock for device\n");
 		return PTR_ERR(clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -444,23 +480,33 @@ static int bcm63xx_spi_probe(struct platform_device *pdev)
 	if (!master) {
 		dev_err(dev, "out of memory\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		goto out_clk;
 	}
 
 	bs = spi_master_get_devdata(master);
 =======
+=======
+>>>>>>> v3.18
 		return -ENOMEM;
 	}
 
 	bs = spi_master_get_devdata(master);
 	init_completion(&bs->done);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	platform_set_drvdata(pdev, master);
 	bs->pdev = pdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 	r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 >>>>>>> v3.18
@@ -484,16 +530,22 @@ static int bcm63xx_spi_probe(struct platform_device *pdev)
 	master->bus_num = pdata->bus_num;
 	master->num_chipselect = pdata->num_chipselect;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->setup = bcm63xx_spi_setup;
 	master->prepare_transfer_hardware = bcm63xx_spi_prepare_transfer;
 	master->unprepare_transfer_hardware = bcm63xx_spi_unprepare_transfer;
 	master->transfer_one_message = bcm63xx_spi_transfer_one;
 	master->mode_bits = MODEBITS;
 =======
+=======
+>>>>>>> v3.18
 	master->transfer_one_message = bcm63xx_spi_transfer_one;
 	master->mode_bits = MODEBITS;
 	master->bits_per_word_mask = SPI_BPW_MASK(8);
 	master->auto_runtime_pm = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bs->msg_type_shift = pdata->msg_type_shift;
 	bs->msg_ctl_width = pdata->msg_ctl_width;
@@ -512,12 +564,15 @@ static int bcm63xx_spi_probe(struct platform_device *pdev)
 
 	/* Initialize hardware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_prepare_enable(bs->clk);
 	bcm_spi_writeb(bs, SPI_INTR_CLEAR_ALL, SPI_INT_STATUS);
 
 	/* register and we are done */
 	ret = spi_register_master(master);
 =======
+=======
+>>>>>>> v3.18
 	ret = clk_prepare_enable(bs->clk);
 	if (ret)
 		goto out_err;
@@ -526,6 +581,9 @@ static int bcm63xx_spi_probe(struct platform_device *pdev)
 
 	/* register and we are done */
 	ret = devm_spi_register_master(dev, master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		dev_err(dev, "spi register failed\n");
@@ -541,6 +599,7 @@ out_clk_disable:
 	clk_disable_unprepare(clk);
 out_err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 	spi_master_put(master);
 out_clk:
@@ -549,11 +608,15 @@ out:
 =======
 	spi_master_put(master);
 >>>>>>> v3.18
+=======
+	spi_master_put(master);
+>>>>>>> v3.18
 	return ret;
 }
 
 static int bcm63xx_spi_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct spi_master *master = spi_master_get(platform_get_drvdata(pdev));
 	struct bcm63xx_spi *bs = spi_master_get_devdata(master);
@@ -565,11 +628,17 @@ static int bcm63xx_spi_remove(struct platform_device *pdev)
 	struct bcm63xx_spi *bs = spi_master_get_devdata(master);
 
 >>>>>>> v3.18
+=======
+	struct spi_master *master = platform_get_drvdata(pdev);
+	struct bcm63xx_spi *bs = spi_master_get_devdata(master);
+
+>>>>>>> v3.18
 	/* reset spi block */
 	bcm_spi_writeb(bs, 0, SPI_INT_MASK);
 
 	/* HW shutdown */
 	clk_disable_unprepare(bs->clk);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk_put(bs->clk);
 
@@ -578,10 +647,13 @@ static int bcm63xx_spi_remove(struct platform_device *pdev)
 	spi_master_put(master);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PM
 static int bcm63xx_spi_suspend(struct device *dev)
@@ -589,10 +661,15 @@ static int bcm63xx_spi_suspend(struct device *dev)
 	struct spi_master *master =
 			platform_get_drvdata(to_platform_device(dev));
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int bcm63xx_spi_suspend(struct device *dev)
 {
 	struct spi_master *master = dev_get_drvdata(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct bcm63xx_spi *bs = spi_master_get_devdata(master);
 
@@ -606,12 +683,15 @@ static int bcm63xx_spi_suspend(struct device *dev)
 static int bcm63xx_spi_resume(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_master *master =
 			platform_get_drvdata(to_platform_device(dev));
 	struct bcm63xx_spi *bs = spi_master_get_devdata(master);
 
 	clk_prepare_enable(bs->clk);
 =======
+=======
+>>>>>>> v3.18
 	struct spi_master *master = dev_get_drvdata(dev);
 	struct bcm63xx_spi *bs = spi_master_get_devdata(master);
 	int ret;
@@ -619,12 +699,16 @@ static int bcm63xx_spi_resume(struct device *dev)
 	ret = clk_prepare_enable(bs->clk);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spi_master_resume(master);
 
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static const struct dev_pm_ops bcm63xx_spi_pm_ops = {
@@ -638,19 +722,28 @@ static const struct dev_pm_ops bcm63xx_spi_pm_ops = {
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 static const struct dev_pm_ops bcm63xx_spi_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(bcm63xx_spi_suspend, bcm63xx_spi_resume)
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver bcm63xx_spi_driver = {
 	.driver = {
 		.name	= "bcm63xx-spi",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pm	= BCM63XX_SPI_PM_OPS,
+=======
+		.pm	= &bcm63xx_spi_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm	= &bcm63xx_spi_pm_ops,
 >>>>>>> v3.18

@@ -26,7 +26,10 @@ config ATH_DEBUG
 	  Right now only ath9k makes use of this.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ATH_TRACEPOINTS
        bool "Atheros wireless tracing"
        depends on ATH_DEBUG
@@ -52,6 +55,9 @@ config ATH_REG_DYNAMIC_USER_CERT_TESTING
 	  Say N. This should only be enabled on systems
 	  undergoing certification testing.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "drivers/net/wireless/ath/ath5k/Kconfig"
 source "drivers/net/wireless/ath/ath9k/Kconfig"
@@ -60,6 +66,11 @@ source "drivers/net/wireless/ath/ath6kl/Kconfig"
 source "drivers/net/wireless/ath/ar5523/Kconfig"
 source "drivers/net/wireless/ath/wil6210/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/net/wireless/ath/ath10k/Kconfig"
+source "drivers/net/wireless/ath/wcn36xx/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/net/wireless/ath/ath10k/Kconfig"
 source "drivers/net/wireless/ath/wcn36xx/Kconfig"

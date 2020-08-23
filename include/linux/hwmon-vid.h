@@ -39,7 +39,11 @@ static inline int vid_to_reg(int val, u8 vrm)
 			((18499 - val * 10) / 25 + 5) / 10 : -1);
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -1;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18

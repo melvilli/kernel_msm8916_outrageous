@@ -15,6 +15,10 @@
 #include <linux/vmalloc.h>
 #include <linux/kdebug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/export.h>
+>>>>>>> v3.18
 =======
 #include <linux/export.h>
 >>>>>>> v3.18
@@ -53,7 +57,11 @@
 #include <asm/ross.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "srmmu.h"
+=======
+#include "mm_32.h"
+>>>>>>> v3.18
 =======
 #include "mm_32.h"
 >>>>>>> v3.18
@@ -71,6 +79,10 @@ static pgd_t *srmmu_swapper_pg_dir;
 
 const struct sparc32_cachetlb_ops *sparc32_cachetlb_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(sparc32_cachetlb_ops);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(sparc32_cachetlb_ops);
 >>>>>>> v3.18
@@ -111,7 +123,10 @@ static unsigned long srmmu_nocache_end;
 
 void *srmmu_nocache_pool;
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *srmmu_nocache_bitmap;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct bit_map srmmu_nocache_map;
@@ -187,7 +202,11 @@ static void *__srmmu_get_nocache(int size, int align)
 		       size, (int) srmmu_nocache_size,
 		       srmmu_nocache_map.used << SRMMU_NOCACHE_BITMAP_SHIFT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return NULL;
+>>>>>>> v3.18
 =======
 		return NULL;
 >>>>>>> v3.18
@@ -287,6 +306,10 @@ static void __init srmmu_nocache_calcsize(void)
 static void __init srmmu_nocache_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void *srmmu_nocache_bitmap;
+>>>>>>> v3.18
 =======
 	void *srmmu_nocache_bitmap;
 >>>>>>> v3.18
@@ -369,12 +392,18 @@ pgtable_t pte_alloc_one(struct mm_struct *mm, unsigned long address)
 		return NULL;
 	page = pfn_to_page(__nocache_pa(pte) >> PAGE_SHIFT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgtable_page_ctor(page);
 =======
+=======
+>>>>>>> v3.18
 	if (!pgtable_page_ctor(page)) {
 		__free_page(page);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return page;
 }
@@ -486,6 +515,7 @@ void switch_mm(struct mm_struct *old_mm, struct mm_struct *mm,
 	       struct task_struct *tsk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	if (mm->context == NO_CONTEXT) {
@@ -493,10 +523,15 @@ void switch_mm(struct mm_struct *old_mm, struct mm_struct *mm,
 		alloc_context(old_mm, mm);
 		spin_unlock_irqrestore(&srmmu_context_spinlock, flags);
 =======
+=======
+>>>>>>> v3.18
 	if (mm->context == NO_CONTEXT) {
 		spin_lock(&srmmu_context_spinlock);
 		alloc_context(old_mm, mm);
 		spin_unlock(&srmmu_context_spinlock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		srmmu_ctxd_set(&srmmu_context_table[mm->context], mm->pgd);
 	}
@@ -763,7 +798,11 @@ static inline unsigned long srmmu_probe(unsigned long vaddr)
 				     "r" (vaddr | 0x400), "i" (ASI_M_FLUSH_PROBE));
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = leon_swprobe(vaddr, 0);
+=======
+		retval = leon_swprobe(vaddr, NULL);
+>>>>>>> v3.18
 =======
 		retval = leon_swprobe(vaddr, NULL);
 >>>>>>> v3.18
@@ -902,9 +941,13 @@ static void __init map_kernel(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void (*poke_srmmu)(void) __cpuinitdata = NULL;
 
 extern unsigned long bootmem_init(unsigned long *pages_avail);
+=======
+void (*poke_srmmu)(void) = NULL;
+>>>>>>> v3.18
 =======
 void (*poke_srmmu)(void) = NULL;
 >>>>>>> v3.18
@@ -1031,7 +1074,10 @@ int init_new_context(struct task_struct *tsk, struct mm_struct *mm)
 void destroy_context(struct mm_struct *mm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1040,9 +1086,15 @@ void destroy_context(struct mm_struct *mm)
 		srmmu_ctxd_set(&srmmu_context_table[mm->context], srmmu_swapper_pg_dir);
 		flush_tlb_mm(mm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_irqsave(&srmmu_context_spinlock, flags);
 		free_context(mm->context);
 		spin_unlock_irqrestore(&srmmu_context_spinlock, flags);
+=======
+		spin_lock(&srmmu_context_spinlock);
+		free_context(mm->context);
+		spin_unlock(&srmmu_context_spinlock);
+>>>>>>> v3.18
 =======
 		spin_lock(&srmmu_context_spinlock);
 		free_context(mm->context);
@@ -1113,7 +1165,11 @@ static void __init init_vac_layout(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit poke_hypersparc(void)
+=======
+static void poke_hypersparc(void)
+>>>>>>> v3.18
 =======
 static void poke_hypersparc(void)
 >>>>>>> v3.18
@@ -1169,7 +1225,11 @@ static void __init init_hypersparc(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit poke_swift(void)
+=======
+static void poke_swift(void)
+>>>>>>> v3.18
 =======
 static void poke_swift(void)
 >>>>>>> v3.18
@@ -1353,7 +1413,11 @@ static void turbosparc_flush_tlb_page(struct vm_area_struct *vma, unsigned long 
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit poke_turbosparc(void)
+=======
+static void poke_turbosparc(void)
+>>>>>>> v3.18
 =======
 static void poke_turbosparc(void)
 >>>>>>> v3.18
@@ -1420,7 +1484,11 @@ static void __init init_turbosparc(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit poke_tsunami(void)
+=======
+static void poke_tsunami(void)
+>>>>>>> v3.18
 =======
 static void poke_tsunami(void)
 >>>>>>> v3.18
@@ -1465,7 +1533,11 @@ static void __init init_tsunami(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit poke_viking(void)
+=======
+static void poke_viking(void)
+>>>>>>> v3.18
 =======
 static void poke_viking(void)
 >>>>>>> v3.18
@@ -1844,9 +1916,12 @@ static struct sparc32_cachetlb_ops smp_cachetlb_ops = {
 void __init load_mmu(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern void ld_mmu_iommu(void);
 	extern void ld_mmu_iounit(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Functions */

@@ -27,6 +27,10 @@
 #include <linux/uaccess.h>
 #include <linux/ioport.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dcache.h>
+>>>>>>> v3.18
 =======
 #include <linux/dcache.h>
 >>>>>>> v3.18
@@ -37,6 +41,10 @@
 #include <asm/sections.h>	/* for dereference_function_descriptor() */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/string_helpers.h>
+>>>>>>> v3.18
 =======
 #include <linux/string_helpers.h>
 >>>>>>> v3.18
@@ -372,7 +380,10 @@ enum format_type {
 	FORMAT_TYPE_UINT,
 	FORMAT_TYPE_INT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	FORMAT_TYPE_NRCHARS,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	FORMAT_TYPE_SIZE_T,
@@ -545,7 +556,10 @@ char *string(char *buf, char *end, const char *s, struct printf_spec spec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void widen(char *buf, char *end, unsigned len, unsigned spaces)
 {
 	size_t size;
@@ -621,6 +635,9 @@ char *dentry_name(char *buf, char *end, const struct dentry *d, struct printf_sp
 	return buf;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static noinline_for_stack
 char *symbol_string(char *buf, char *end, void *ptr,
@@ -733,11 +750,14 @@ char *resource_string(char *buf, char *end, struct resource *res,
 		decode = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = number(p, pend, res->start, *specp);
 	if (res->start != res->end) {
 		*p++ = '-';
 		p = number(p, pend, res->end, *specp);
 =======
+=======
+>>>>>>> v3.18
 	if (decode && res->flags & IORESOURCE_UNSET) {
 		p = string(p, pend, "size ", str_spec);
 		p = number(p, pend, resource_size(res), *specp);
@@ -747,6 +767,9 @@ char *resource_string(char *buf, char *end, struct resource *res,
 			*p++ = '-';
 			p = number(p, pend, res->end, *specp);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (decode) {
@@ -773,7 +796,11 @@ char *hex_string(char *buf, char *end, u8 *addr, struct printf_spec spec,
 		 const char *fmt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, len = 1;		/* if we pass '%ph[CDN]', field witdh remains
+=======
+	int i, len = 1;		/* if we pass '%ph[CDN]', field width remains
+>>>>>>> v3.18
 =======
 	int i, len = 1;		/* if we pass '%ph[CDN]', field width remains
 >>>>>>> v3.18
@@ -1030,7 +1057,10 @@ char *ip4_addr_string(char *buf, char *end, const u8 *addr,
 
 static noinline_for_stack
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 char *ip6_addr_string_sa(char *buf, char *end, const struct sockaddr_in6 *sa,
 			 struct printf_spec spec, const char *fmt)
 {
@@ -1184,6 +1214,9 @@ char *escaped_string(char *buf, char *end, u8 *addr, struct printf_spec spec,
 }
 
 static noinline_for_stack
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 char *uuid_string(char *buf, char *end, const u8 *addr,
 		  struct printf_spec spec, const char *fmt)
@@ -1244,7 +1277,10 @@ char *netdev_feature_string(char *buf, char *end, const u8 *addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static noinline_for_stack
 char *address_val(char *buf, char *end, const void *addr,
 		  struct printf_spec spec, const char *fmt)
@@ -1269,6 +1305,9 @@ char *address_val(char *buf, char *end, const void *addr,
 	return number(buf, end, num, spec);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int kptr_restrict __read_mostly;
 
@@ -1297,6 +1336,7 @@ int kptr_restrict __read_mostly;
  *       IPv4 uses dot-separated decimal without leading 0's (1.2.3.4)
  *       IPv6 uses colon separated network-order 16 bit hex with leading 0's
 <<<<<<< HEAD
+<<<<<<< HEAD
  * - 'i' [46] for 'raw' IPv4/IPv6 addresses
  *       IPv6 omits the colons (01020304...0f)
  *       IPv4 uses dot-separated decimal with leading 0's (010.123.045.006)
@@ -1304,6 +1344,8 @@ int kptr_restrict __read_mostly;
  * - 'I6c' for IPv6 addresses printed as specified by
  *       http://tools.ietf.org/html/rfc5952
 =======
+=======
+>>>>>>> v3.18
  *       [S][pfs]
  *       Generic IPv4/IPv6 address (struct sockaddr *) that falls back to
  *       [4] or [6] and is able to print port [p], flowinfo [f], scope [s]
@@ -1327,6 +1369,9 @@ int kptr_restrict __read_mostly;
  *                  p - ESCAPE_NP
  *                  s - ESCAPE_SPACE
  *                By default ESCAPE_ANY_NP is used.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * - 'U' For a 16 byte UUID/GUID, it prints the UUID/GUID in the form
  *       "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
@@ -1354,12 +1399,18 @@ int kptr_restrict __read_mostly;
  *            The maximum supported length is 64 bytes of the input. Consider
  *            to use print_hex_dump() for the larger input.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * - 'a' For a phys_addr_t type and its derivative types (passed by reference)
 =======
+=======
+>>>>>>> v3.18
  * - 'a[pd]' For address types [p] phys_addr_t, [d] dma_addr_t and derivatives
  *           (default assumed to be phys_addr_t, passed by reference)
  * - 'd[234]' For a dentry name (optionally 2-4 last components)
  * - 'D[234]' Same as 'd' but for a struct file
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Note: The difference between 'S' and 'F' is that on ia64 and ppc64
@@ -1416,9 +1467,12 @@ char *pointer(const char *fmt, char *buf, char *end, void *ptr,
 		case '4':
 			return ip4_addr_string(buf, end, ptr, spec, fmt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		break;
 =======
+=======
+>>>>>>> v3.18
 		case 'S': {
 			const union {
 				struct sockaddr		raw;
@@ -1438,6 +1492,9 @@ char *pointer(const char *fmt, char *buf, char *end, void *ptr,
 		break;
 	case 'E':
 		return escaped_string(buf, end, ptr, spec, fmt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 'U':
 		return uuid_string(buf, end, ptr, spec, fmt);
@@ -1501,12 +1558,15 @@ char *pointer(const char *fmt, char *buf, char *end, void *ptr,
 		break;
 	case 'a':
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spec.flags |= SPECIAL | SMALL | ZEROPAD;
 		spec.field_width = sizeof(phys_addr_t) * 2 + 2;
 		spec.base = 16;
 		return number(buf, end,
 			      (unsigned long long) *((phys_addr_t *)ptr), spec);
 =======
+=======
+>>>>>>> v3.18
 		return address_val(buf, end, ptr, spec, fmt);
 	case 'd':
 		return dentry_name(buf, end, ptr, spec, fmt);
@@ -1514,6 +1574,9 @@ char *pointer(const char *fmt, char *buf, char *end, void *ptr,
 		return dentry_name(buf, end,
 				   ((const struct file *)ptr)->f_path.dentry,
 				   spec, fmt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	spec.flags |= SMALL;
@@ -1664,10 +1727,13 @@ qualifier:
 		/* skip alnum */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 'n':
 		spec->type = FORMAT_TYPE_NRCHARS;
 		return ++fmt - start;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case '%':
@@ -1693,7 +1759,10 @@ qualifier:
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 'n':
 		/*
 		 * Since %n poses a greater security risk than utility, treat
@@ -1703,6 +1772,9 @@ qualifier:
 		WARN_ONCE(1, "Please remove ignored %%n in '%s'\n", fmt);
 		/* Fall-through */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		spec->type = FORMAT_TYPE_INVALID;
@@ -1766,14 +1838,20 @@ qualifier:
  * %pi6 print an IPv6 address without colons
  * %pI6c print an IPv6 address as specified by RFC 5952
 <<<<<<< HEAD
+<<<<<<< HEAD
  * %pU[bBlL] print a UUID/GUID in big or little endian using lower or upper
  *   case.
 =======
+=======
+>>>>>>> v3.18
  * %pIS depending on sa_family of 'struct sockaddr *' print IPv4/IPv6 address
  * %piS depending on sa_family of 'struct sockaddr *' print IPv4/IPv6 address
  * %pU[bBlL] print a UUID/GUID in big or little endian using lower or upper
  *   case.
  * %*pE[achnops] print an escaped buffer
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * %*ph[CDN] a variable-length hex string with a separator (supports up to 64
  *           bytes of the input)
@@ -1884,6 +1962,7 @@ int vsnprintf(char *buf, size_t size, const char *fmt, va_list args)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case FORMAT_TYPE_NRCHARS: {
 			/*
 			 * Since %n poses a greater security risk than
@@ -1898,6 +1977,8 @@ int vsnprintf(char *buf, size_t size, const char *fmt, va_list args)
 			break;
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		default:
@@ -2097,7 +2178,11 @@ EXPORT_SYMBOL(sprintf);
  *
  * The format follows C99 vsnprintf, except %n is ignored, and its argument
 <<<<<<< HEAD
+<<<<<<< HEAD
  * is skiped.
+=======
+ * is skipped.
+>>>>>>> v3.18
 =======
  * is skipped.
 >>>>>>> v3.18
@@ -2179,6 +2264,7 @@ do {									\
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case FORMAT_TYPE_NRCHARS: {
 			/* skip %n 's argument */
 			u8 qualifier = spec.qualifier;
@@ -2192,6 +2278,8 @@ do {									\
 			break;
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		default:
@@ -2353,10 +2441,13 @@ int bstr_printf(char *buf, size_t size, const char *fmt, const u32 *bin_buf)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case FORMAT_TYPE_NRCHARS:
 			/* skip */
 			break;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		default: {
@@ -2534,7 +2625,11 @@ int vsscanf(const char *buf, const char *fmt, va_list args)
 
 		base = 10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		is_sign = 0;
+=======
+		is_sign = false;
+>>>>>>> v3.18
 =======
 		is_sign = false;
 >>>>>>> v3.18
@@ -2577,7 +2672,11 @@ int vsscanf(const char *buf, const char *fmt, va_list args)
 			base = 0;
 		case 'd':
 <<<<<<< HEAD
+<<<<<<< HEAD
 			is_sign = 1;
+=======
+			is_sign = true;
+>>>>>>> v3.18
 =======
 			is_sign = true;
 >>>>>>> v3.18

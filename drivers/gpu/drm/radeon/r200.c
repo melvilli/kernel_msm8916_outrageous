@@ -81,6 +81,7 @@ static int r200_get_vtx_size_0(uint32_t vtx_fmt_0)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int r200_copy_dma(struct radeon_device *rdev,
 		  uint64_t src_offset,
 		  uint64_t dst_offset,
@@ -89,6 +90,8 @@ int r200_copy_dma(struct radeon_device *rdev,
 {
 	struct radeon_ring *ring = &rdev->ring[RADEON_RING_TYPE_GFX_INDEX];
 =======
+=======
+>>>>>>> v3.18
 struct radeon_fence *r200_copy_dma(struct radeon_device *rdev,
 				   uint64_t src_offset,
 				   uint64_t dst_offset,
@@ -97,6 +100,9 @@ struct radeon_fence *r200_copy_dma(struct radeon_device *rdev,
 {
 	struct radeon_ring *ring = &rdev->ring[RADEON_RING_TYPE_GFX_INDEX];
 	struct radeon_fence *fence;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint32_t size;
 	uint32_t cur_size;
@@ -110,7 +116,11 @@ struct radeon_fence *r200_copy_dma(struct radeon_device *rdev,
 	if (r) {
 		DRM_ERROR("radeon: moving bo (%d).\n", r);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return r;
+=======
+		return ERR_PTR(r);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(r);
 >>>>>>> v3.18
@@ -134,12 +144,15 @@ struct radeon_fence *r200_copy_dma(struct radeon_device *rdev,
 	radeon_ring_write(ring, PACKET0(RADEON_WAIT_UNTIL, 0));
 	radeon_ring_write(ring, RADEON_WAIT_DMA_GUI_IDLE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fence) {
 		r = radeon_fence_emit(rdev, fence, RADEON_RING_TYPE_GFX_INDEX);
 	}
 	radeon_ring_unlock_commit(rdev, ring);
 	return r;
 =======
+=======
+>>>>>>> v3.18
 	r = radeon_fence_emit(rdev, &fence, RADEON_RING_TYPE_GFX_INDEX);
 	if (r) {
 		radeon_ring_unlock_undo(rdev, ring);
@@ -147,6 +160,9 @@ struct radeon_fence *r200_copy_dma(struct radeon_device *rdev,
 	}
 	radeon_ring_unlock_commit(rdev, ring, false);
 	return fence;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -211,7 +227,11 @@ int r200_packet0_check(struct radeon_cs_parser *p,
 		track->zb.offset = idx_value;
 		track->zb_dirty = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] = idx_value + ((u32)reloc->lobj.gpu_offset);
+=======
+		ib[idx] = idx_value + ((u32)reloc->gpu_offset);
+>>>>>>> v3.18
 =======
 		ib[idx] = idx_value + ((u32)reloc->gpu_offset);
 >>>>>>> v3.18
@@ -228,7 +248,11 @@ int r200_packet0_check(struct radeon_cs_parser *p,
 		track->cb[0].offset = idx_value;
 		track->cb_dirty = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] = idx_value + ((u32)reloc->lobj.gpu_offset);
+=======
+		ib[idx] = idx_value + ((u32)reloc->gpu_offset);
+>>>>>>> v3.18
 =======
 		ib[idx] = idx_value + ((u32)reloc->gpu_offset);
 >>>>>>> v3.18
@@ -249,9 +273,15 @@ int r200_packet0_check(struct radeon_cs_parser *p,
 		}
 		if (!(p->cs_flags & RADEON_CS_KEEP_TILING_FLAGS)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (reloc->lobj.tiling_flags & RADEON_TILING_MACRO)
 				tile_flags |= R200_TXO_MACRO_TILE;
 			if (reloc->lobj.tiling_flags & RADEON_TILING_MICRO)
+=======
+			if (reloc->tiling_flags & RADEON_TILING_MACRO)
+				tile_flags |= R200_TXO_MACRO_TILE;
+			if (reloc->tiling_flags & RADEON_TILING_MICRO)
+>>>>>>> v3.18
 =======
 			if (reloc->tiling_flags & RADEON_TILING_MACRO)
 				tile_flags |= R200_TXO_MACRO_TILE;
@@ -262,9 +292,15 @@ int r200_packet0_check(struct radeon_cs_parser *p,
 			tmp = idx_value & ~(0x7 << 2);
 			tmp |= tile_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ib[idx] = tmp + ((u32)reloc->lobj.gpu_offset);
 		} else
 			ib[idx] = idx_value + ((u32)reloc->lobj.gpu_offset);
+=======
+			ib[idx] = tmp + ((u32)reloc->gpu_offset);
+		} else
+			ib[idx] = idx_value + ((u32)reloc->gpu_offset);
+>>>>>>> v3.18
 =======
 			ib[idx] = tmp + ((u32)reloc->gpu_offset);
 		} else
@@ -314,7 +350,11 @@ int r200_packet0_check(struct radeon_cs_parser *p,
 		}
 		track->textures[i].cube_info[face - 1].offset = idx_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] = idx_value + ((u32)reloc->lobj.gpu_offset);
+=======
+		ib[idx] = idx_value + ((u32)reloc->gpu_offset);
+>>>>>>> v3.18
 =======
 		ib[idx] = idx_value + ((u32)reloc->gpu_offset);
 >>>>>>> v3.18
@@ -337,9 +377,15 @@ int r200_packet0_check(struct radeon_cs_parser *p,
 
 		if (!(p->cs_flags & RADEON_CS_KEEP_TILING_FLAGS)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (reloc->lobj.tiling_flags & RADEON_TILING_MACRO)
 				tile_flags |= RADEON_COLOR_TILE_ENABLE;
 			if (reloc->lobj.tiling_flags & RADEON_TILING_MICRO)
+=======
+			if (reloc->tiling_flags & RADEON_TILING_MACRO)
+				tile_flags |= RADEON_COLOR_TILE_ENABLE;
+			if (reloc->tiling_flags & RADEON_TILING_MICRO)
+>>>>>>> v3.18
 =======
 			if (reloc->tiling_flags & RADEON_TILING_MACRO)
 				tile_flags |= RADEON_COLOR_TILE_ENABLE;
@@ -418,7 +464,11 @@ int r200_packet0_check(struct radeon_cs_parser *p,
 			return r;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ib[idx] = idx_value + ((u32)reloc->lobj.gpu_offset);
+=======
+		ib[idx] = idx_value + ((u32)reloc->gpu_offset);
+>>>>>>> v3.18
 =======
 		ib[idx] = idx_value + ((u32)reloc->gpu_offset);
 >>>>>>> v3.18

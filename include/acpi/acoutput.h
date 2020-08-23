@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -433,7 +437,10 @@
  * leaving no executable debug code!
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_FUNCTION_NAME(a)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ACPI_DEBUG_PRINT(pl)
@@ -441,6 +448,10 @@
 #define ACPI_DEBUG_EXEC(a)
 #define ACPI_DEBUG_ONLY_MEMBERS(a)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ACPI_FUNCTION_NAME(a)
+>>>>>>> v3.18
 =======
 #define ACPI_FUNCTION_NAME(a)
 >>>>>>> v3.18
@@ -449,9 +460,12 @@
 #define ACPI_FUNCTION_TRACE_U32(a, b)
 #define ACPI_FUNCTION_TRACE_STR(a, b)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_FUNCTION_EXIT
 #define ACPI_FUNCTION_STATUS_EXIT(s)
 #define ACPI_FUNCTION_VALUE_EXIT(s)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ACPI_FUNCTION_ENTRY()
@@ -459,11 +473,16 @@
 #define ACPI_DUMP_OPERANDS(a, b, c)
 #define ACPI_DUMP_ENTRY(a, b)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_DUMP_TABLES(a, b)
 #define ACPI_DUMP_PATHNAME(a, b, c, d)
 #define ACPI_DUMP_BUFFER(a, b)
 #define ACPI_DEBUG_PRINT(pl)
 #define ACPI_DEBUG_PRINT_RAW(pl)
+=======
+#define ACPI_DUMP_PATHNAME(a, b, c, d)
+#define ACPI_DUMP_BUFFER(a, b)
+>>>>>>> v3.18
 =======
 #define ACPI_DUMP_PATHNAME(a, b, c, d)
 #define ACPI_DUMP_BUFFER(a, b)

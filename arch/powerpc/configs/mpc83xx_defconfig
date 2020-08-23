@@ -43,6 +43,10 @@ CONFIG_INET_ESP=y
 CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
 CONFIG_DEVTMPFS=y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_DEVTMPFS_MOUNT=y
+>>>>>>> v3.18
 =======
 CONFIG_DEVTMPFS_MOUNT=y
 >>>>>>> v3.18

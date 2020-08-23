@@ -24,6 +24,10 @@
 #include <bcm63xx_dev_dsp.h>
 #include <bcm63xx_dev_flash.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <bcm63xx_dev_hsspi.h>
+>>>>>>> v3.18
 =======
 #include <bcm63xx_dev_hsspi.h>
 >>>>>>> v3.18
@@ -33,12 +37,15 @@
 #include <board_bcm963xx.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PFX	"board_bcm963xx: "
 
 static struct board_info board;
 
 /*
 =======
+=======
+>>>>>>> v3.18
 #include <uapi/linux/bcm933xx_hcs.h>
 
 #define PFX	"board_bcm963xx: "
@@ -80,6 +87,9 @@ static struct board_info __initdata board_cvg834g = {
 #endif
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * known 6328 boards
  */
@@ -688,6 +698,12 @@ static struct board_info __initdata board_DWVS0 = {
  */
 static const struct board_info __initconst *bcm963xx_boards[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_BCM63XX_CPU_3368
+	&board_cvg834g,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_BCM63XX_CPU_3368
 	&board_cvg834g,
@@ -777,8 +793,14 @@ void __init board_prom_init(void)
 	u8 *boot_addr, *cfe;
 	char cfe_version[32];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *board_name;
 	u32 val;
+=======
+	char *board_name = NULL;
+	u32 val;
+	struct bcm_hcs *hcs;
+>>>>>>> v3.18
 =======
 	char *board_name = NULL;
 	u32 val;
@@ -808,14 +830,20 @@ void __init board_prom_init(void)
 	bcm63xx_nvram_init(boot_addr + BCM963XX_NVRAM_OFFSET);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	board_name = bcm63xx_nvram_get_name();
 =======
+=======
+>>>>>>> v3.18
 	if (BCMCPU_IS_3368()) {
 		hcs = (struct bcm_hcs *)boot_addr;
 		board_name = hcs->filename;
 	} else {
 		board_name = bcm63xx_nvram_get_name();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* find board by name */
 	for (i = 0; i < ARRAY_SIZE(bcm963xx_boards); i++) {
@@ -915,11 +943,17 @@ int __init board_register_devices(void)
 		bcm63xx_enet_register(1, &board.enet1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (board.has_enetsw &&
 	    !bcm63xx_nvram_get_mac_address(board.enetsw.mac_addr))
 		bcm63xx_enetsw_register(&board.enetsw);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (board.has_usbd)
 		bcm63xx_usbd_register(&board.usbd);
@@ -943,6 +977,11 @@ int __init board_register_devices(void)
 	bcm63xx_spi_register();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bcm63xx_hsspi_register();
+
+>>>>>>> v3.18
 =======
 	bcm63xx_hsspi_register();
 
@@ -955,11 +994,17 @@ int __init board_register_devices(void)
 	platform_device_register(&bcm63xx_gpio_leds);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (board.ephy_reset_gpio && board.ephy_reset_gpio_flags)
 		gpio_request_one(board.ephy_reset_gpio,
 				board.ephy_reset_gpio_flags, "ephy-reset");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

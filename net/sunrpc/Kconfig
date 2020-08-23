@@ -10,6 +10,7 @@ config SUNRPC_BACKCHANNEL
 	depends on SUNRPC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SUNRPC_XPRT_RDMA
 	tristate
 	depends on SUNRPC && INFINIBAND && INFINIBAND_ADDR_TRANS
@@ -23,6 +24,8 @@ config SUNRPC_XPRT_RDMA
 
 	  If unsure, say N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SUNRPC_SWAP
@@ -61,7 +64,10 @@ config SUNRPC_DEBUG
 
 	  If unsure, say Y.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config SUNRPC_XPRT_RDMA_CLIENT
 	tristate "RPC over RDMA Client Support"
@@ -88,4 +94,7 @@ config SUNRPC_XPRT_RDMA_SERVER
 	  choose M here: the module will be called svcrdma.
 
 	  If unsure, say N.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

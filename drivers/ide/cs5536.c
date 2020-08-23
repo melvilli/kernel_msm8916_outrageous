@@ -296,6 +296,7 @@ static struct pci_driver cs5536_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init cs5536_init(void)
 {
 	return pci_register_driver(&cs5536_pci_driver);
@@ -308,6 +309,9 @@ static void __exit cs5536_exit(void)
 =======
 module_pci_driver(cs5536_pci_driver);
 >>>>>>> v3.18
+=======
+module_pci_driver(cs5536_pci_driver);
+>>>>>>> v3.18
 
 MODULE_AUTHOR("Martin K. Petersen, Bartlomiej Zolnierkiewicz");
 MODULE_DESCRIPTION("low-level driver for the CS5536 IDE controller");
@@ -317,8 +321,11 @@ MODULE_DEVICE_TABLE(pci, cs5536_pci_tbl);
 module_param_named(msr, use_msr, int, 0644);
 MODULE_PARM_DESC(msr, "Force using MSR to configure IDE function (Default: 0)");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 module_init(cs5536_init);
 module_exit(cs5536_exit);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

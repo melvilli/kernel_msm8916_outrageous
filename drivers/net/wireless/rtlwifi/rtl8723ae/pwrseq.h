@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -33,6 +36,7 @@
 #ifndef __RTL8723E_PWRSEQ_H__
 #define __RTL8723E_PWRSEQ_H__
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "pwrseqcmd.h"
 /*
@@ -312,6 +316,8 @@ extern struct
 wlan_pwr_cfg rtl8723A_leave_lps_flow[RTL8723A_TRANS_LPS_TO_ACT_STPS
 				     + RTL8723A_TRANS_END_STPS];
 =======
+=======
+>>>>>>> v3.18
 #include "../pwrseqcmd.h"
 /*
  *	Check document WM-20110607-Paul-RTL8723A_Power_Architecture-R02.vsd
@@ -611,6 +617,9 @@ extern struct wlan_pwr_cfg rtl8723A_enter_lps_flow
 		[RTL8723A_TRANS_ACT_TO_LPS_STEPS + RTL8723A_TRANS_END_STEPS];
 extern struct wlan_pwr_cfg rtl8723A_leave_lps_flow
 		[RTL8723A_TRANS_LPS_TO_ACT_STEPS + RTL8723A_TRANS_END_STEPS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* RTL8723 Power Configuration CMDs for PCIe interface */

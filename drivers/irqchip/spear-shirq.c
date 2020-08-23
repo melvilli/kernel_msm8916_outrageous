@@ -6,7 +6,11 @@
  *
  * Copyright (C) 2012 ST Microelectronics
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Shiraz Hashim <shiraz.hashim@st.com>
+=======
+ * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
+>>>>>>> v3.18
 =======
  * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
 >>>>>>> v3.18
@@ -24,7 +28,10 @@
 #include <linux/irq.h>
 #include <linux/irqdomain.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irqchip/spear-shirq.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/of.h>
@@ -35,8 +42,11 @@
 #include "irqchip.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_SPINLOCK(lock);
 =======
+=======
+>>>>>>> v3.18
 /*
  * struct spear_shirq: shared irq structure
  *
@@ -60,12 +70,16 @@ struct spear_shirq {
 	u32			offset;
 	struct irq_chip		*irq_chip;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* spear300 shared irq registers offsets and masks */
 #define SPEAR300_INT_ENB_MASK_REG	0x54
 #define SPEAR300_INT_STS_MASK_REG	0x58
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct spear_shirq spear300_shirq_ras1 = {
 	.irq_nr = 9,
@@ -76,6 +90,8 @@ static struct spear_shirq spear300_shirq_ras1 = {
 		.clear_reg = -1,
 	},
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_RAW_SPINLOCK(shirq_lock);
 
 static void shirq_irq_mask(struct irq_data *d)
@@ -115,6 +131,9 @@ static struct spear_shirq spear300_shirq_ras1 = {
 	.irq_chip	= &shirq_chip,
 	.status_reg	= SPEAR300_INT_STS_MASK_REG,
 	.mask_reg	= SPEAR300_INT_ENB_MASK_REG,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -126,6 +145,7 @@ static struct spear_shirq *spear300_shirq_blocks[] = {
 #define SPEAR310_INT_STS_MASK_REG	0x04
 
 static struct spear_shirq spear310_shirq_ras1 = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.irq_nr = 8,
 	.irq_bit_off = 0,
@@ -165,6 +185,8 @@ static struct spear_shirq spear310_shirq_intrcomm_ras = {
 		.clear_reg = -1,
 	},
 =======
+=======
+>>>>>>> v3.18
 	.offset		= 0,
 	.nr_irqs	= 8,
 	.mask		= ((0x1 << 8) - 1) << 0,
@@ -194,6 +216,9 @@ static struct spear_shirq spear310_shirq_intrcomm_ras = {
 	.mask		= ((0x1 << 3) - 1) << 14,
 	.irq_chip	= &dummy_irq_chip,
 	.status_reg	= SPEAR310_INT_STS_MASK_REG,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -209,6 +234,7 @@ static struct spear_shirq *spear310_shirq_blocks[] = {
 #define SPEAR320_INT_CLR_MASK_REG		0x04
 #define SPEAR320_INT_ENB_MASK_REG		0x08
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct spear_shirq spear320_shirq_ras1 = {
 	.irq_nr = 3,
@@ -255,6 +281,8 @@ static struct spear_shirq spear320_shirq_intrcomm_ras = {
 		.reset_to_clear = 1,
 	},
 =======
+=======
+>>>>>>> v3.18
 static struct spear_shirq spear320_shirq_ras3 = {
 	.offset		= 0,
 	.nr_irqs	= 7,
@@ -283,6 +311,9 @@ static struct spear_shirq spear320_shirq_intrcomm_ras = {
 	.mask		= ((0x1 << 11) - 1) << 11,
 	.irq_chip	= &dummy_irq_chip,
 	.status_reg	= SPEAR320_INT_STS_MASK_REG,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -293,6 +324,7 @@ static struct spear_shirq *spear320_shirq_blocks[] = {
 	&spear320_shirq_intrcomm_ras,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void shirq_irq_mask_unmask(struct irq_data *d, bool mask)
 {
@@ -386,6 +418,8 @@ static void __init spear_shirq_register(struct spear_shirq *shirq)
 
 	irq_set_handler_data(shirq->irq, shirq);
 =======
+=======
+>>>>>>> v3.18
 static void shirq_handler(unsigned irq, struct irq_desc *desc)
 {
 	struct spear_shirq *shirq = irq_get_handler_data(irq);
@@ -419,6 +453,9 @@ static void __init spear_shirq_register(struct spear_shirq *shirq,
 		set_irq_flags(shirq->virq_base + i, IRQF_VALID);
 		irq_set_chip_data(shirq->virq_base + i, shirq);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -426,8 +463,13 @@ static int __init shirq_init(struct spear_shirq **shirq_blocks, int block_nr,
 		struct device_node *np)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, irq_base, hwirq = 0, irq_nr = 0;
 	static struct irq_domain *shirq_domain;
+=======
+	int i, parent_irq, virq_base, hwirq = 0, nr_irqs = 0;
+	struct irq_domain *shirq_domain;
+>>>>>>> v3.18
 =======
 	int i, parent_irq, virq_base, hwirq = 0, nr_irqs = 0;
 	struct irq_domain *shirq_domain;
@@ -442,22 +484,32 @@ static int __init shirq_init(struct spear_shirq **shirq_blocks, int block_nr,
 
 	for (i = 0; i < block_nr; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq_nr += shirq_blocks[i]->irq_nr;
 
 	irq_base = irq_alloc_descs(-1, 0, irq_nr, 0);
 	if (IS_ERR_VALUE(irq_base)) {
 =======
+=======
+>>>>>>> v3.18
 		nr_irqs += shirq_blocks[i]->nr_irqs;
 
 	virq_base = irq_alloc_descs(-1, 0, nr_irqs, 0);
 	if (IS_ERR_VALUE(virq_base)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_err("%s: irq desc alloc failed\n", __func__);
 		goto err_unmap;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	shirq_domain = irq_domain_add_legacy(np, irq_nr, irq_base, 0,
+=======
+	shirq_domain = irq_domain_add_legacy(np, nr_irqs, virq_base, 0,
+>>>>>>> v3.18
 =======
 	shirq_domain = irq_domain_add_legacy(np, nr_irqs, virq_base, 0,
 >>>>>>> v3.18
@@ -470,6 +522,7 @@ static int __init shirq_init(struct spear_shirq **shirq_blocks, int block_nr,
 	for (i = 0; i < block_nr; i++) {
 		shirq_blocks[i]->base = base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		shirq_blocks[i]->irq_base = irq_find_mapping(shirq_domain,
 				hwirq);
 		shirq_blocks[i]->irq = irq_of_parse_and_map(np, i);
@@ -477,12 +530,17 @@ static int __init shirq_init(struct spear_shirq **shirq_blocks, int block_nr,
 		spear_shirq_register(shirq_blocks[i]);
 		hwirq += shirq_blocks[i]->irq_nr;
 =======
+=======
+>>>>>>> v3.18
 		shirq_blocks[i]->virq_base = irq_find_mapping(shirq_domain,
 				hwirq);
 
 		parent_irq = irq_of_parse_and_map(np, i);
 		spear_shirq_register(shirq_blocks[i], parent_irq);
 		hwirq += shirq_blocks[i]->nr_irqs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -490,7 +548,11 @@ static int __init shirq_init(struct spear_shirq **shirq_blocks, int block_nr,
 
 err_free_desc:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_free_descs(irq_base, irq_nr);
+=======
+	irq_free_descs(virq_base, nr_irqs);
+>>>>>>> v3.18
 =======
 	irq_free_descs(virq_base, nr_irqs);
 >>>>>>> v3.18
@@ -500,8 +562,13 @@ err_unmap:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init spear300_shirq_of_init(struct device_node *np,
 		struct device_node *parent)
+=======
+static int __init spear300_shirq_of_init(struct device_node *np,
+					 struct device_node *parent)
+>>>>>>> v3.18
 =======
 static int __init spear300_shirq_of_init(struct device_node *np,
 					 struct device_node *parent)
@@ -513,8 +580,13 @@ static int __init spear300_shirq_of_init(struct device_node *np,
 IRQCHIP_DECLARE(spear300_shirq, "st,spear300-shirq", spear300_shirq_of_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init spear310_shirq_of_init(struct device_node *np,
 		struct device_node *parent)
+=======
+static int __init spear310_shirq_of_init(struct device_node *np,
+					 struct device_node *parent)
+>>>>>>> v3.18
 =======
 static int __init spear310_shirq_of_init(struct device_node *np,
 					 struct device_node *parent)
@@ -526,8 +598,13 @@ static int __init spear310_shirq_of_init(struct device_node *np,
 IRQCHIP_DECLARE(spear310_shirq, "st,spear310-shirq", spear310_shirq_of_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init spear320_shirq_of_init(struct device_node *np,
 		struct device_node *parent)
+=======
+static int __init spear320_shirq_of_init(struct device_node *np,
+					 struct device_node *parent)
+>>>>>>> v3.18
 =======
 static int __init spear320_shirq_of_init(struct device_node *np,
 					 struct device_node *parent)

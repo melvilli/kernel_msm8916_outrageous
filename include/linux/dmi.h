@@ -100,6 +100,10 @@ extern const struct dmi_device * dmi_find_device(int type, const char *name,
 	const struct dmi_device *from);
 extern void dmi_scan_machine(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void dmi_memdev_walk(void);
+>>>>>>> v3.18
 =======
 extern void dmi_memdev_walk(void);
 >>>>>>> v3.18
@@ -112,6 +116,10 @@ extern int dmi_walk(void (*decode)(const struct dmi_header *, void *),
 	void *private_data);
 extern bool dmi_match(enum dmi_field f, const char *str);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void dmi_memdev_name(u16 handle, const char **bank, const char **device);
+>>>>>>> v3.18
 =======
 extern void dmi_memdev_name(u16 handle, const char **bank, const char **device);
 >>>>>>> v3.18
@@ -124,6 +132,10 @@ static inline const struct dmi_device * dmi_find_device(int type, const char *na
 	const struct dmi_device *from) { return NULL; }
 static inline void dmi_scan_machine(void) { return; }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void dmi_memdev_walk(void) { }
+>>>>>>> v3.18
 =======
 static inline void dmi_memdev_walk(void) { }
 >>>>>>> v3.18
@@ -146,6 +158,11 @@ static inline int dmi_walk(void (*decode)(const struct dmi_header *, void *),
 static inline bool dmi_match(enum dmi_field f, const char *str)
 	{ return false; }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void dmi_memdev_name(u16 handle, const char **bank,
+		const char **device) { }
+>>>>>>> v3.18
 =======
 static inline void dmi_memdev_name(u16 handle, const char **bank,
 		const char **device) { }

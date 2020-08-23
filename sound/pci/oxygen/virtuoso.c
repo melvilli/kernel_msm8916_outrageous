@@ -42,7 +42,11 @@ module_param_array(enable, bool, NULL, 0444);
 MODULE_PARM_DESC(enable, "enable card");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(xonar_ids) = {
+=======
+static const struct pci_device_id xonar_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id xonar_ids[] = {
 >>>>>>> v3.18
@@ -57,6 +61,10 @@ static const struct pci_device_id xonar_ids[] = {
 	{ OXYGEN_PCI_SUBID(0x1043, 0x835e) },
 	{ OXYGEN_PCI_SUBID(0x1043, 0x838e) },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ OXYGEN_PCI_SUBID(0x1043, 0x8428) },
+>>>>>>> v3.18
 =======
 	{ OXYGEN_PCI_SUBID(0x1043, 0x8428) },
 >>>>>>> v3.18

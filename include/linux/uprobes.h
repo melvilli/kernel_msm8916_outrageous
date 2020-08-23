@@ -27,6 +27,10 @@
 #include <linux/errno.h>
 #include <linux/rbtree.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 >>>>>>> v3.18
@@ -35,10 +39,15 @@ struct vm_area_struct;
 struct mm_struct;
 struct inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_ARCH_SUPPORTS_UPROBES
 # include <asm/uprobes.h>
 #endif
+=======
+struct notifier_block;
+struct page;
+>>>>>>> v3.18
 =======
 struct notifier_block;
 struct page;
@@ -69,6 +78,11 @@ struct uprobe_consumer {
 
 #ifdef CONFIG_UPROBES
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/uprobes.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/uprobes.h>
 
@@ -85,6 +99,7 @@ enum uprobe_task_state {
  */
 struct uprobe_task {
 	enum uprobe_task_state		state;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct arch_uprobe_task		autask;
 
@@ -116,6 +131,8 @@ struct xol_area {
 };
 
 =======
+=======
+>>>>>>> v3.18
 
 	union {
 		struct {
@@ -138,17 +155,23 @@ struct xol_area {
 
 struct xol_area;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct uprobes_state {
 	struct xol_area		*xol_area;
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __weak set_swbp(struct arch_uprobe *aup, struct mm_struct *mm, unsigned long vaddr);
 extern int __weak set_orig_insn(struct arch_uprobe *aup, struct mm_struct *mm, unsigned long vaddr);
 extern bool __weak is_swbp_insn(uprobe_opcode_t *insn);
 extern bool __weak is_trap_insn(uprobe_opcode_t *insn);
 =======
+=======
+>>>>>>> v3.18
 extern int set_swbp(struct arch_uprobe *aup, struct mm_struct *mm, unsigned long vaddr);
 extern int set_orig_insn(struct arch_uprobe *aup, struct mm_struct *mm, unsigned long vaddr);
 extern bool is_swbp_insn(uprobe_opcode_t *insn);
@@ -156,6 +179,9 @@ extern bool is_trap_insn(uprobe_opcode_t *insn);
 extern unsigned long uprobe_get_swbp_addr(struct pt_regs *regs);
 extern unsigned long uprobe_get_trap_addr(struct pt_regs *regs);
 extern int uprobe_write_opcode(struct mm_struct *mm, unsigned long vaddr, uprobe_opcode_t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int uprobe_register(struct inode *inode, loff_t offset, struct uprobe_consumer *uc);
 extern int uprobe_apply(struct inode *inode, loff_t offset, struct uprobe_consumer *uc, bool);
@@ -167,8 +193,12 @@ extern void uprobe_end_dup_mmap(void);
 extern void uprobe_dup_mmap(struct mm_struct *oldmm, struct mm_struct *newmm);
 extern void uprobe_free_utask(struct task_struct *t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void uprobe_copy_process(struct task_struct *t);
 extern unsigned long __weak uprobe_get_swbp_addr(struct pt_regs *regs);
+=======
+extern void uprobe_copy_process(struct task_struct *t, unsigned long flags);
+>>>>>>> v3.18
 =======
 extern void uprobe_copy_process(struct task_struct *t, unsigned long flags);
 >>>>>>> v3.18
@@ -177,12 +207,15 @@ extern int uprobe_pre_sstep_notifier(struct pt_regs *regs);
 extern void uprobe_notify_resume(struct pt_regs *regs);
 extern bool uprobe_deny_signal(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool __weak arch_uprobe_skip_sstep(struct arch_uprobe *aup, struct pt_regs *regs);
 extern void uprobe_clear_state(struct mm_struct *mm);
 #else /* !CONFIG_UPROBES */
 struct uprobes_state {
 };
 =======
+=======
+>>>>>>> v3.18
 extern bool arch_uprobe_skip_sstep(struct arch_uprobe *aup, struct pt_regs *regs);
 extern void uprobe_clear_state(struct mm_struct *mm);
 extern int  arch_uprobe_analyze_insn(struct arch_uprobe *aup, struct mm_struct *mm, unsigned long addr);
@@ -201,6 +234,9 @@ struct uprobes_state {
 
 #define uprobe_get_trap_addr(regs)	instruction_pointer(regs)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int
 uprobe_register(struct inode *inode, loff_t offset, struct uprobe_consumer *uc)
@@ -242,6 +278,7 @@ static inline bool uprobe_deny_signal(void)
 	return false;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long uprobe_get_swbp_addr(struct pt_regs *regs)
 {
 	return 0;
@@ -251,10 +288,15 @@ static inline void uprobe_free_utask(struct task_struct *t)
 }
 static inline void uprobe_copy_process(struct task_struct *t)
 =======
+=======
+>>>>>>> v3.18
 static inline void uprobe_free_utask(struct task_struct *t)
 {
 }
 static inline void uprobe_copy_process(struct task_struct *t, unsigned long flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 }

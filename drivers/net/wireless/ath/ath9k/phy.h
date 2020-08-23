@@ -49,7 +49,10 @@
 #define AR_PHY_PLL_MODE 0x16184
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum ath9k_ant_div_comb_lna_conf {
 	ATH_ANT_DIV_COMB_LNA1_MINUS_LNA2,
 	ATH_ANT_DIV_COMB_LNA2,
@@ -57,5 +60,8 @@ enum ath9k_ant_div_comb_lna_conf {
 	ATH_ANT_DIV_COMB_LNA1_PLUS_LNA2,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

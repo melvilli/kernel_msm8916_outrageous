@@ -42,12 +42,15 @@ static void * __init __alloc_memory_core_early(int nid, u64 size, u64 align,
 		limit = memblock.current_limit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = memblock_find_in_range_node(goal, limit, size, align, nid);
 	if (!addr)
 		return NULL;
 
 	memblock_reserve(addr, size);
 =======
+=======
+>>>>>>> v3.18
 	addr = memblock_find_in_range_node(size, align, goal, limit, nid);
 	if (!addr)
 		return NULL;
@@ -55,6 +58,9 @@ static void * __init __alloc_memory_core_early(int nid, u64 size, u64 align,
 	if (memblock_reserve(addr, size))
 		return NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ptr = phys_to_virt(addr);
 	memset(ptr, 0, size);
@@ -76,7 +82,11 @@ static void * __init __alloc_memory_core_early(int nid, u64 size, u64 align,
  * to the page allocator, no bootmem metadata is updated because it is gone.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void free_bootmem_late(unsigned long addr, unsigned long size)
+=======
+void __init free_bootmem_late(unsigned long addr, unsigned long size)
+>>>>>>> v3.18
 =======
 void __init free_bootmem_late(unsigned long addr, unsigned long size)
 >>>>>>> v3.18
@@ -129,6 +139,7 @@ static unsigned long __init free_low_memory_core_early(void)
 {
 	unsigned long count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phys_addr_t start, end, size;
 	u64 i;
 
@@ -140,6 +151,8 @@ static unsigned long __init free_low_memory_core_early(void)
 	if (size)
 		count += __free_memory_core(start, start + size);
 =======
+=======
+>>>>>>> v3.18
 	phys_addr_t start, end;
 	u64 i;
 
@@ -163,6 +176,9 @@ static unsigned long __init free_low_memory_core_early(void)
 			count += __free_memory_core(start, start + size);
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return count;
@@ -171,6 +187,7 @@ static unsigned long __init free_low_memory_core_early(void)
 static int reset_managed_pages_done __initdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __init reset_node_managed_pages(pg_data_t *pgdat)
 {
 	struct zone *z;
@@ -178,10 +195,15 @@ static inline void __init reset_node_managed_pages(pg_data_t *pgdat)
 	if (reset_managed_pages_done)
 		return;
 =======
+=======
+>>>>>>> v3.18
 void reset_node_managed_pages(pg_data_t *pgdat)
 {
 	struct zone *z;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (z = pgdat->node_zones; z < pgdat->node_zones + MAX_NR_ZONES; z++)
 		z->managed_pages = 0;
@@ -192,15 +214,21 @@ void __init reset_all_zones_managed_pages(void)
 	struct pglist_data *pgdat;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_online_pgdat(pgdat)
 		reset_node_managed_pages(pgdat);
 =======
+=======
+>>>>>>> v3.18
 	if (reset_managed_pages_done)
 		return;
 
 	for_each_online_pgdat(pgdat)
 		reset_node_managed_pages(pgdat);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reset_managed_pages_done = 1;
 }
@@ -218,7 +246,11 @@ unsigned long __init free_all_bootmem(void)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * We need to use MAX_NUMNODES instead of NODE_DATA(0)->node_id
+=======
+	 * We need to use NUMA_NO_NODE instead of NODE_DATA(0)->node_id
+>>>>>>> v3.18
 =======
 	 * We need to use NUMA_NO_NODE instead of NODE_DATA(0)->node_id
 >>>>>>> v3.18
@@ -245,7 +277,10 @@ void __init free_bootmem_node(pg_data_t *pgdat, unsigned long physaddr,
 			      unsigned long size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kmemleak_free_part(__va(physaddr), size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memblock_free(physaddr, size);
@@ -263,7 +298,10 @@ void __init free_bootmem_node(pg_data_t *pgdat, unsigned long physaddr,
 void __init free_bootmem(unsigned long addr, unsigned long size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kmemleak_free_part(__va(addr), size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memblock_free(addr, size);
@@ -282,7 +320,11 @@ static void * __init ___alloc_bootmem_nopanic(unsigned long size,
 restart:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptr = __alloc_memory_core_early(MAX_NUMNODES, size, align, goal, limit);
+=======
+	ptr = __alloc_memory_core_early(NUMA_NO_NODE, size, align, goal, limit);
+>>>>>>> v3.18
 =======
 	ptr = __alloc_memory_core_early(NUMA_NO_NODE, size, align, goal, limit);
 >>>>>>> v3.18
@@ -370,7 +412,11 @@ again:
 		return ptr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptr = __alloc_memory_core_early(MAX_NUMNODES, size, align,
+=======
+	ptr = __alloc_memory_core_early(NUMA_NO_NODE, size, align,
+>>>>>>> v3.18
 =======
 	ptr = __alloc_memory_core_early(NUMA_NO_NODE, size, align,
 >>>>>>> v3.18
@@ -396,7 +442,11 @@ void * __init __alloc_bootmem_node_nopanic(pg_data_t *pgdat, unsigned long size,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void * __init ___alloc_bootmem_node(pg_data_t *pgdat, unsigned long size,
+=======
+static void * __init ___alloc_bootmem_node(pg_data_t *pgdat, unsigned long size,
+>>>>>>> v3.18
 =======
 static void * __init ___alloc_bootmem_node(pg_data_t *pgdat, unsigned long size,
 >>>>>>> v3.18

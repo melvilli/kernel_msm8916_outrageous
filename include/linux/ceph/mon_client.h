@@ -41,9 +41,15 @@ struct ceph_mon_request {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ceph_mon_generic_request is being used for the statfs and poolop requests
  * which are bening done a bit differently because we need to get data back
  * to the caller
+=======
+ * ceph_mon_generic_request is being used for the statfs, poolop and
+ * mon_get_version requests which are being done a bit differently
+ * because we need to get data back to the caller
+>>>>>>> v3.18
 =======
  * ceph_mon_generic_request is being used for the statfs, poolop and
  * mon_get_version requests which are being done a bit differently
@@ -111,6 +117,11 @@ extern int ceph_monc_got_osdmap(struct ceph_mon_client *monc, u32 have);
 
 extern void ceph_monc_request_next_osdmap(struct ceph_mon_client *monc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int ceph_monc_wait_osdmap(struct ceph_mon_client *monc, u32 epoch,
+				 unsigned long timeout);
+>>>>>>> v3.18
 =======
 extern int ceph_monc_wait_osdmap(struct ceph_mon_client *monc, u32 epoch,
 				 unsigned long timeout);
@@ -120,6 +131,12 @@ extern int ceph_monc_do_statfs(struct ceph_mon_client *monc,
 			       struct ceph_statfs *buf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int ceph_monc_do_get_version(struct ceph_mon_client *monc,
+				    const char *what, u64 *newest);
+
+>>>>>>> v3.18
 =======
 extern int ceph_monc_do_get_version(struct ceph_mon_client *monc,
 				    const char *what, u64 *newest);

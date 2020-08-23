@@ -183,7 +183,10 @@
 
 			mdio@10d40 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				device_type = "mdio";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				compatible = "fsl,mpc8272ads-mdio-bitbang",
@@ -200,7 +203,10 @@
 					interrupts = <23 8>;
 					reg = <0x0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};
@@ -210,7 +216,10 @@
 					interrupts = <23 8>;
 					reg = <0x3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};

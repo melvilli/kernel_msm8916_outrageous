@@ -12,7 +12,11 @@
  * These structs MUST NOT be changed.
  * They are the ABI between hypervisor and guest OS.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Both Xen and KVM are using this.
+=======
+ * KVM is using this.
+>>>>>>> v3.18
 =======
  * KVM is using this.
 >>>>>>> v3.18

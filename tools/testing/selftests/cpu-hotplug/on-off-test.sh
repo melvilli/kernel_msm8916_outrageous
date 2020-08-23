@@ -12,6 +12,11 @@ prerequisite()
 	fi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	taskset -p 01 $$
+
+>>>>>>> v3.18
 =======
 	taskset -p 01 $$
 
@@ -28,7 +33,10 @@ prerequisite()
 		exit 0
 	fi
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	echo "CPU online/offline summary:"
 	online_cpus=`cat $SYSFS/devices/system/cpu/online`
@@ -42,6 +50,9 @@ prerequisite()
 		offline_max=${offline_cpus##*-}
 	fi
 	echo -e "\t Cpus in offline state: $offline_cpus"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -135,10 +146,13 @@ offline_cpu_expect_fail()
 
 error=-12
 <<<<<<< HEAD
+<<<<<<< HEAD
 priority=0
 
 while getopts e:hp: opt; do
 =======
+=======
+>>>>>>> v3.18
 allcpus=0
 priority=0
 online_cpus=0
@@ -147,15 +161,21 @@ offline_cpus=0
 offline_max=0
 
 while getopts e:ahp: opt; do
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case $opt in
 	e)
 		error=$OPTARG
 		;;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	h)
 		echo "Usage $0 [ -e errno ] [ -p notifier-priority ]"
 =======
+=======
+>>>>>>> v3.18
 	a)
 		allcpus=1
 		;;
@@ -163,6 +183,9 @@ while getopts e:ahp: opt; do
 		echo "Usage $0 [ -a ] [ -e errno ] [ -p notifier-priority ]"
 		echo -e "\t default offline one cpu"
 		echo -e "\t run with -a option to offline all cpus"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		exit
 		;;
@@ -181,7 +204,10 @@ prerequisite
 
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # Safe test (default) - offline and online one cpu
 #
 if [ $allcpus -eq 0 ]; then
@@ -205,6 +231,9 @@ else
 fi
 
 #
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # Online all hot-pluggable CPUs
 #

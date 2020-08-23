@@ -233,8 +233,13 @@ struct ib_mr *qib_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	struct qib_mr *mr;
 	struct ib_umem *umem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ib_umem_chunk *chunk;
 	int n, m, i;
+=======
+	struct scatterlist *sg;
+	int n, m, entry;
+>>>>>>> v3.18
 =======
 	struct scatterlist *sg;
 	int n, m, entry;
@@ -252,9 +257,13 @@ struct ib_mr *qib_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 		return (void *) umem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n = 0;
 	list_for_each_entry(chunk, &umem->chunk_list, list)
 		n += chunk->nents;
+=======
+	n = umem->nmap;
+>>>>>>> v3.18
 =======
 	n = umem->nmap;
 >>>>>>> v3.18
@@ -278,16 +287,22 @@ struct ib_mr *qib_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	m = 0;
 	n = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(chunk, &umem->chunk_list, list) {
 		for (i = 0; i < chunk->nents; i++) {
 			void *vaddr;
 
 			vaddr = page_address(sg_page(&chunk->page_list[i]));
 =======
+=======
+>>>>>>> v3.18
 	for_each_sg(umem->sg_head.sgl, sg, umem->nmap, entry) {
 			void *vaddr;
 
 			vaddr = page_address(sg_page(sg));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!vaddr) {
 				ret = ERR_PTR(-EINVAL);
@@ -301,7 +316,10 @@ struct ib_mr *qib_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 				n = 0;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

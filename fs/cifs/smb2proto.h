@@ -54,7 +54,10 @@ extern int smb3_calc_signature(struct smb_rqst *rqst,
 extern void smb2_echo_request(struct work_struct *work);
 extern __le32 smb2_get_lease_state(struct cifsInodeInfo *cinode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern __u8 smb2_map_lease_to_oplock(__le32 lease_state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern bool smb2_is_valid_oplock_break(char *buffer,
@@ -66,7 +69,11 @@ extern int smb2_query_path_info(const unsigned int xid, struct cifs_tcon *tcon,
 				struct cifs_sb_info *cifs_sb,
 				const char *full_path, FILE_ALL_INFO *data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				bool *adjust_tz);
+=======
+				bool *adjust_tz, bool *symlink);
+>>>>>>> v3.18
 =======
 				bool *adjust_tz, bool *symlink);
 >>>>>>> v3.18
@@ -91,6 +98,7 @@ extern int smb2_create_hardlink(const unsigned int xid, struct cifs_tcon *tcon,
 				const char *from_name, const char *to_name,
 				struct cifs_sb_info *cifs_sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern int smb2_open_file(const unsigned int xid, struct cifs_tcon *tcon,
 			  const char *full_path, int disposition,
@@ -103,6 +111,8 @@ extern int smb2_unlock_range(struct cifsFileInfo *cfile,
 extern int smb2_push_mandatory_locks(struct cifsFileInfo *cfile);
 extern void smb2_reconnect_server(struct work_struct *work);
 =======
+=======
+>>>>>>> v3.18
 extern int smb3_create_mf_symlink(unsigned int xid, struct cifs_tcon *tcon,
 			struct cifs_sb_info *cifs_sb, const unsigned char *path,
 			char *pbuf, unsigned int *pbytes_written);
@@ -116,6 +126,9 @@ extern int smb2_open_file(const unsigned int xid,
 extern int smb2_unlock_range(struct cifsFileInfo *cfile,
 			     struct file_lock *flock, const unsigned int xid);
 extern int smb2_push_mandatory_locks(struct cifsFileInfo *cfile);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -131,12 +144,15 @@ extern int SMB2_tcon(const unsigned int xid, struct cifs_ses *ses,
 		     const struct nls_table *);
 extern int SMB2_tdis(const unsigned int xid, struct cifs_tcon *tcon);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int SMB2_open(const unsigned int xid, struct cifs_tcon *tcon,
 		     __le16 *path, u64 *persistent_fid, u64 *volatile_fid,
 		     __u32 desired_access, __u32 create_disposition,
 		     __u32 file_attributes, __u32 create_options,
 		     __u8 *oplock, struct smb2_file_all_info *buf);
 =======
+=======
+>>>>>>> v3.18
 extern int SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms,
 		     __le16 *path, __u8 *oplock,
 		     struct smb2_file_all_info *buf,
@@ -145,6 +161,9 @@ extern int SMB2_ioctl(const unsigned int xid, struct cifs_tcon *tcon,
 		     u64 persistent_fid, u64 volatile_fid, u32 opcode,
 		     bool is_fsctl, char *in_data, u32 indatalen,
 		     char **out_data, u32 *plen /* returned data len */);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int SMB2_close(const unsigned int xid, struct cifs_tcon *tcon,
 		      u64 persistent_file_id, u64 volatile_file_id);
@@ -160,7 +179,12 @@ extern int smb2_async_readv(struct cifs_readdata *rdata);
 extern int SMB2_read(const unsigned int xid, struct cifs_io_parms *io_parms,
 		     unsigned int *nbytes, char **buf, int *buf_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int smb2_async_writev(struct cifs_writedata *wdata);
+=======
+extern int smb2_async_writev(struct cifs_writedata *wdata,
+			     void (*release)(struct kref *kref));
+>>>>>>> v3.18
 =======
 extern int smb2_async_writev(struct cifs_writedata *wdata,
 			     void (*release)(struct kref *kref));
@@ -180,17 +204,23 @@ extern int SMB2_set_hardlink(const unsigned int xid, struct cifs_tcon *tcon,
 extern int SMB2_set_eof(const unsigned int xid, struct cifs_tcon *tcon,
 			u64 persistent_fid, u64 volatile_fid, u32 pid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__le64 *eof);
 extern int SMB2_set_info(const unsigned int xid, struct cifs_tcon *tcon,
 			 u64 persistent_fid, u64 volatile_fid,
 			 FILE_BASIC_INFO *buf);
 =======
+=======
+>>>>>>> v3.18
 			__le64 *eof, bool is_fallocate);
 extern int SMB2_set_info(const unsigned int xid, struct cifs_tcon *tcon,
 			 u64 persistent_fid, u64 volatile_fid,
 			 FILE_BASIC_INFO *buf);
 extern int SMB2_set_compression(const unsigned int xid, struct cifs_tcon *tcon,
 				u64 persistent_fid, u64 volatile_fid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int SMB2_oplock_break(const unsigned int xid, struct cifs_tcon *tcon,
 			     const u64 persistent_fid, const u64 volatile_fid,
@@ -199,6 +229,11 @@ extern int SMB2_QFS_info(const unsigned int xid, struct cifs_tcon *tcon,
 			 u64 persistent_file_id, u64 volatile_file_id,
 			 struct kstatfs *FSData);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int SMB2_QFS_attr(const unsigned int xid, struct cifs_tcon *tcon,
+			 u64 persistent_file_id, u64 volatile_file_id, int lvl);
+>>>>>>> v3.18
 =======
 extern int SMB2_QFS_attr(const unsigned int xid, struct cifs_tcon *tcon,
 			 u64 persistent_file_id, u64 volatile_file_id, int lvl);
@@ -214,6 +249,10 @@ extern int smb2_lockv(const unsigned int xid, struct cifs_tcon *tcon,
 extern int SMB2_lease_break(const unsigned int xid, struct cifs_tcon *tcon,
 			    __u8 *lease_key, const __le32 lease_state);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int smb3_validate_negotiate(const unsigned int, struct cifs_tcon *);
+>>>>>>> v3.18
 =======
 extern int smb3_validate_negotiate(const unsigned int, struct cifs_tcon *);
 >>>>>>> v3.18

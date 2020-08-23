@@ -23,6 +23,7 @@ struct ebus_dma_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ebus_dma_register(struct ebus_dma_info *p);
 extern int ebus_dma_irq_enable(struct ebus_dma_info *p, int on);
 extern void ebus_dma_unregister(struct ebus_dma_info *p);
@@ -33,6 +34,8 @@ extern unsigned int ebus_dma_residue(struct ebus_dma_info *p);
 extern unsigned int ebus_dma_addr(struct ebus_dma_info *p);
 extern void ebus_dma_enable(struct ebus_dma_info *p, int on);
 =======
+=======
+>>>>>>> v3.18
 int ebus_dma_register(struct ebus_dma_info *p);
 int ebus_dma_irq_enable(struct ebus_dma_info *p, int on);
 void ebus_dma_unregister(struct ebus_dma_info *p);
@@ -42,6 +45,9 @@ void ebus_dma_prepare(struct ebus_dma_info *p, int write);
 unsigned int ebus_dma_residue(struct ebus_dma_info *p);
 unsigned int ebus_dma_addr(struct ebus_dma_info *p);
 void ebus_dma_enable(struct ebus_dma_info *p, int on);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __ASM_SPARC_EBUS_DMA_H */

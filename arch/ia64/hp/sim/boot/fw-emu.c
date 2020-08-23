@@ -291,6 +291,7 @@ sys_fw_init (const char *args, int arglen)
 	efi_runtime->hdr.revision = EFI_RUNTIME_SERVICES_REVISION;
 	efi_runtime->hdr.headersize = sizeof(efi_runtime->hdr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efi_runtime->get_time = __pa(&fw_efi_get_time);
 	efi_runtime->set_time = __pa(&efi_unimplemented);
 	efi_runtime->get_wakeup_time = __pa(&efi_unimplemented);
@@ -302,6 +303,8 @@ sys_fw_init (const char *args, int arglen)
 	efi_runtime->get_next_high_mono_count = __pa(&efi_unimplemented);
 	efi_runtime->reset_system = __pa(&efi_reset_system);
 =======
+=======
+>>>>>>> v3.18
 	efi_runtime->get_time = (void *)__pa(&fw_efi_get_time);
 	efi_runtime->set_time = (void *)__pa(&efi_unimplemented);
 	efi_runtime->get_wakeup_time = (void *)__pa(&efi_unimplemented);
@@ -312,6 +315,9 @@ sys_fw_init (const char *args, int arglen)
 	efi_runtime->set_variable = (void *)__pa(&efi_unimplemented);
 	efi_runtime->get_next_high_mono_count = (void *)__pa(&efi_unimplemented);
 	efi_runtime->reset_system = (void *)__pa(&efi_reset_system);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	efi_tables->guid = SAL_SYSTEM_TABLE_GUID;

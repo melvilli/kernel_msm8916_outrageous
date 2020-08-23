@@ -1,8 +1,14 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Xilinx gpio driver
  *
  * Copyright 2008 Xilinx, Inc.
+=======
+ * Xilinx gpio driver for xps/axi_gpio IP.
+ *
+ * Copyright 2008 - 2013 Xilinx, Inc.
+>>>>>>> v3.18
 =======
  * Xilinx gpio driver for xps/axi_gpio IP.
  *
@@ -19,6 +25,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bitops.h>
+>>>>>>> v3.18
 =======
 #include <linux/bitops.h>
 >>>>>>> v3.18
@@ -37,12 +47,15 @@
 #define XGPIO_TRI_OFFSET    (0x4)	/* I/O direction register  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct xgpio_instance {
 	struct of_mm_gpio_chip mmchip;
 	u32 gpio_state;		/* GPIO state shadow register */
 	u32 gpio_dir;		/* GPIO direction shadow register */
 	spinlock_t gpio_lock;	/* Lock used for synchronization */
 =======
+=======
+>>>>>>> v3.18
 #define XGPIO_CHANNEL_OFFSET	0x8
 
 /* Read/Write access to the GPIO registers */
@@ -68,6 +81,9 @@ struct xgpio_instance {
 	u32 gpio_dir;
 	u32 offset;
 	spinlock_t gpio_lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -83,15 +99,21 @@ static int xgpio_get(struct gpio_chip *gc, unsigned int gpio)
 {
 	struct of_mm_gpio_chip *mm_gc = to_of_mm_gpio_chip(gc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return (in_be32(mm_gc->regs + XGPIO_DATA_OFFSET) >> gpio) & 1;
 =======
+=======
+>>>>>>> v3.18
 	struct xgpio_instance *chip =
 	    container_of(mm_gc, struct xgpio_instance, mmchip);
 
 	void __iomem *regs = mm_gc->regs + chip->offset;
 
 	return !!(xgpio_readreg(regs + XGPIO_DATA_OFFSET) & BIT(gpio));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -111,6 +133,10 @@ static void xgpio_set(struct gpio_chip *gc, unsigned int gpio, int val)
 	struct xgpio_instance *chip =
 	    container_of(mm_gc, struct xgpio_instance, mmchip);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem *regs = mm_gc->regs;
+>>>>>>> v3.18
 =======
 	void __iomem *regs = mm_gc->regs;
 >>>>>>> v3.18
@@ -120,17 +146,23 @@ static void xgpio_set(struct gpio_chip *gc, unsigned int gpio, int val)
 	/* Write to GPIO signal and set its direction to output */
 	if (val)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chip->gpio_state |= 1 << gpio;
 	else
 		chip->gpio_state &= ~(1 << gpio);
 	out_be32(mm_gc->regs + XGPIO_DATA_OFFSET, chip->gpio_state);
 =======
+=======
+>>>>>>> v3.18
 		chip->gpio_state |= BIT(gpio);
 	else
 		chip->gpio_state &= ~BIT(gpio);
 
 	xgpio_writereg(regs + chip->offset + XGPIO_DATA_OFFSET,
 							 chip->gpio_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock_irqrestore(&chip->gpio_lock, flags);
@@ -152,6 +184,10 @@ static int xgpio_dir_in(struct gpio_chip *gc, unsigned int gpio)
 	struct xgpio_instance *chip =
 	    container_of(mm_gc, struct xgpio_instance, mmchip);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem *regs = mm_gc->regs;
+>>>>>>> v3.18
 =======
 	void __iomem *regs = mm_gc->regs;
 >>>>>>> v3.18
@@ -160,8 +196,13 @@ static int xgpio_dir_in(struct gpio_chip *gc, unsigned int gpio)
 
 	/* Set the GPIO bit in shadow register and set direction as input */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->gpio_dir |= (1 << gpio);
 	out_be32(mm_gc->regs + XGPIO_TRI_OFFSET, chip->gpio_dir);
+=======
+	chip->gpio_dir |= BIT(gpio);
+	xgpio_writereg(regs + chip->offset + XGPIO_TRI_OFFSET, chip->gpio_dir);
+>>>>>>> v3.18
 =======
 	chip->gpio_dir |= BIT(gpio);
 	xgpio_writereg(regs + chip->offset + XGPIO_TRI_OFFSET, chip->gpio_dir);
@@ -189,6 +230,10 @@ static int xgpio_dir_out(struct gpio_chip *gc, unsigned int gpio, int val)
 	struct xgpio_instance *chip =
 	    container_of(mm_gc, struct xgpio_instance, mmchip);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem *regs = mm_gc->regs;
+>>>>>>> v3.18
 =======
 	void __iomem *regs = mm_gc->regs;
 >>>>>>> v3.18
@@ -197,6 +242,7 @@ static int xgpio_dir_out(struct gpio_chip *gc, unsigned int gpio, int val)
 
 	/* Write state of GPIO signal */
 	if (val)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		chip->gpio_state |= 1 << gpio;
 	else
@@ -207,6 +253,8 @@ static int xgpio_dir_out(struct gpio_chip *gc, unsigned int gpio, int val)
 	chip->gpio_dir &= (~(1 << gpio));
 	out_be32(mm_gc->regs + XGPIO_TRI_OFFSET, chip->gpio_dir);
 =======
+=======
+>>>>>>> v3.18
 		chip->gpio_state |= BIT(gpio);
 	else
 		chip->gpio_state &= ~BIT(gpio);
@@ -216,6 +264,9 @@ static int xgpio_dir_out(struct gpio_chip *gc, unsigned int gpio, int val)
 	/* Clear the GPIO bit in shadow register and set direction as output */
 	chip->gpio_dir &= ~BIT(gpio);
 	xgpio_writereg(regs + chip->offset + XGPIO_TRI_OFFSET, chip->gpio_dir);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock_irqrestore(&chip->gpio_lock, flags);
@@ -233,13 +284,19 @@ static void xgpio_save_regs(struct of_mm_gpio_chip *mm_gc)
 	    container_of(mm_gc, struct xgpio_instance, mmchip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_be32(mm_gc->regs + XGPIO_DATA_OFFSET, chip->gpio_state);
 	out_be32(mm_gc->regs + XGPIO_TRI_OFFSET, chip->gpio_dir);
 =======
+=======
+>>>>>>> v3.18
 	xgpio_writereg(mm_gc->regs + chip->offset + XGPIO_DATA_OFFSET,
 							chip->gpio_state);
 	xgpio_writereg(mm_gc->regs + chip->offset + XGPIO_TRI_OFFSET,
 							 chip->gpio_dir);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -257,6 +314,10 @@ static int xgpio_of_probe(struct device_node *np)
 	int status = 0;
 	const u32 *tree_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 ngpio;
+>>>>>>> v3.18
 =======
 	u32 ngpio;
 >>>>>>> v3.18
@@ -266,6 +327,7 @@ static int xgpio_of_probe(struct device_node *np)
 		return -ENOMEM;
 
 	/* Update GPIO state shadow register with default value */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tree_info = of_get_property(np, "xlnx,dout-default", NULL);
 	if (tree_info)
@@ -286,6 +348,8 @@ static int xgpio_of_probe(struct device_node *np)
 	if (tree_info)
 		chip->mmchip.gc.ngpio = be32_to_cpup(tree_info);
 =======
+=======
+>>>>>>> v3.18
 	of_property_read_u32(np, "xlnx,dout-default", &chip->gpio_state);
 
 	/* By default, all pins are inputs */
@@ -301,6 +365,9 @@ static int xgpio_of_probe(struct device_node *np)
 	if (of_property_read_u32(np, "xlnx,gpio-width", &ngpio))
 		ngpio = 32;
 	chip->mmchip.gc.ngpio = (u16)ngpio;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_init(&chip->gpio_lock);
@@ -321,11 +388,14 @@ static int xgpio_of_probe(struct device_node *np)
 		return status;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 static struct of_device_id xgpio_of_match[] = {
 =======
+=======
+>>>>>>> v3.18
 
 	pr_info("XGpio: %s: registered, base is %d\n", np->full_name,
 							chip->mmchip.gc.base);
@@ -382,6 +452,9 @@ static struct of_device_id xgpio_of_match[] = {
 }
 
 static const struct of_device_id xgpio_of_match[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "xlnx,xps-gpio-1.00.a", },
 	{ /* end of list */ },

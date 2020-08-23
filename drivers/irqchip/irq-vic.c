@@ -25,6 +25,10 @@
 #include <linux/io.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irqchip/chained_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqchip/chained_irq.h>
 >>>>>>> v3.18
@@ -62,6 +66,10 @@
 /**
  * struct vic_device - VIC PM device
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @parent_irq: The parent IRQ number of the VIC if cascaded, or 0.
+>>>>>>> v3.18
 =======
  * @parent_irq: The parent IRQ number of the VIC if cascaded, or 0.
 >>>>>>> v3.18
@@ -226,7 +234,11 @@ static int handle_one_vic(struct vic_device *vic, struct pt_regs *regs)
 	while ((stat = readl_relaxed(vic->base + VIC_IRQ_STATUS))) {
 		irq = ffs(stat) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		handle_IRQ(irq_find_mapping(vic->domain, irq), regs);
+=======
+		handle_domain_irq(vic->domain, irq, regs);
+>>>>>>> v3.18
 =======
 		handle_domain_irq(vic->domain, irq, regs);
 >>>>>>> v3.18
@@ -237,7 +249,10 @@ static int handle_one_vic(struct vic_device *vic, struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void vic_handle_irq_cascaded(unsigned int irq, struct irq_desc *desc)
 {
 	u32 stat, hwirq;
@@ -254,13 +269,20 @@ static void vic_handle_irq_cascaded(unsigned int irq, struct irq_desc *desc)
 	chained_irq_exit(host_chip, desc);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Keep iterating over all registered VIC's until there are no pending
  * interrupts.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static asmlinkage void __exception_irq_entry vic_handle_irq(struct pt_regs *regs)
+=======
+static void __exception_irq_entry vic_handle_irq(struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 static void __exception_irq_entry vic_handle_irq(struct pt_regs *regs)
 >>>>>>> v3.18
@@ -282,6 +304,10 @@ static struct irq_domain_ops vic_irqdomain_ops = {
  * vic_register() - Register a VIC.
  * @base: The base address of the VIC.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @parent_irq: The parent IRQ if cascaded, else 0.
+>>>>>>> v3.18
 =======
  * @parent_irq: The parent IRQ if cascaded, else 0.
 >>>>>>> v3.18
@@ -297,7 +323,12 @@ static struct irq_domain_ops vic_irqdomain_ops = {
  * This also configures the IRQ domain for the VIC.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init vic_register(void __iomem *base, unsigned int irq,
+=======
+static void __init vic_register(void __iomem *base, unsigned int parent_irq,
+				unsigned int irq,
+>>>>>>> v3.18
 =======
 static void __init vic_register(void __iomem *base, unsigned int parent_irq,
 				unsigned int irq,
@@ -318,10 +349,13 @@ static void __init vic_register(void __iomem *base, unsigned int parent_irq,
 	v->valid_sources = valid_sources;
 	v->resume_sources = resume_sources;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v->irq = irq;
 	set_handle_irq(vic_handle_irq);
 	vic_id++;
 =======
+=======
+>>>>>>> v3.18
 	set_handle_irq(vic_handle_irq);
 	vic_id++;
 
@@ -330,6 +364,9 @@ static void __init vic_register(void __iomem *base, unsigned int parent_irq,
 		irq_set_chained_handler(parent_irq, vic_handle_irq_cascaded);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	v->domain = irq_domain_add_simple(node, fls(valid_sources), irq,
 					  &vic_irqdomain_ops, v);
@@ -338,12 +375,18 @@ static void __init vic_register(void __iomem *base, unsigned int parent_irq,
 		if (valid_sources & (1 << i))
 			irq_create_mapping(v->domain, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* If no base IRQ was passed, figure out our allocated base */
 	if (irq)
 		v->irq = irq;
 	else
 		v->irq = irq_find_mapping(v->domain, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -473,15 +516,21 @@ static void __init vic_init_st(void __iomem *base, unsigned int irq_start,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vic_register(base, irq_start, vic_sources, 0, node);
 }
 
 void __init __vic_init(void __iomem *base, int irq_start,
 =======
+=======
+>>>>>>> v3.18
 	vic_register(base, 0, irq_start, vic_sources, 0, node);
 }
 
 void __init __vic_init(void __iomem *base, int parent_irq, int irq_start,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      u32 vic_sources, u32 resume_sources,
 			      struct device_node *node)
@@ -520,7 +569,11 @@ void __init __vic_init(void __iomem *base, int parent_irq, int irq_start,
 	vic_init2(base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vic_register(base, irq_start, vic_sources, resume_sources, node);
+=======
+	vic_register(base, parent_irq, irq_start, vic_sources, resume_sources, node);
+>>>>>>> v3.18
 =======
 	vic_register(base, parent_irq, irq_start, vic_sources, resume_sources, node);
 >>>>>>> v3.18
@@ -537,9 +590,12 @@ void __init vic_init(void __iomem *base, unsigned int irq_start,
 		     u32 vic_sources, u32 resume_sources)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__vic_init(base, irq_start, vic_sources, resume_sources, NULL);
 }
 =======
+=======
+>>>>>>> v3.18
 	__vic_init(base, 0, irq_start, vic_sources, resume_sources, NULL);
 }
 
@@ -564,6 +620,9 @@ int __init vic_init_cascaded(void __iomem *base, unsigned int parent_irq,
 	return v->irq;
 }
 EXPORT_SYMBOL_GPL(vic_init_cascaded);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_OF
@@ -571,6 +630,11 @@ int __init vic_of_init(struct device_node *node, struct device_node *parent)
 {
 	void __iomem *regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 interrupt_mask = ~0;
+	u32 wakeup_mask = ~0;
+>>>>>>> v3.18
 =======
 	u32 interrupt_mask = ~0;
 	u32 wakeup_mask = ~0;
@@ -584,11 +648,14 @@ int __init vic_of_init(struct device_node *node, struct device_node *parent)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Passing 0 as first IRQ makes the simple domain allocate descriptors
 	 */
 	__vic_init(regs, 0, ~0, ~0, node);
 =======
+=======
+>>>>>>> v3.18
 	of_property_read_u32(node, "valid-mask", &interrupt_mask);
 	of_property_read_u32(node, "valid-wakeup-mask", &wakeup_mask);
 
@@ -596,6 +663,9 @@ int __init vic_of_init(struct device_node *node, struct device_node *parent)
 	 * Passing 0 as first IRQ makes the simple domain allocate descriptors
 	 */
 	__vic_init(regs, 0, 0, interrupt_mask, wakeup_mask, node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

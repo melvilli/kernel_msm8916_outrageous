@@ -15,6 +15,10 @@
 #include <linux/sunrpc/msg_prot.h>
 #include <linux/sunrpc/cache.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sunrpc/gss_api.h>
+>>>>>>> v3.18
 =======
 #include <linux/sunrpc/gss_api.h>
 >>>>>>> v3.18
@@ -28,9 +32,12 @@ struct svc_cred {
 	u32			cr_flavor; /* pseudoflavor */
 	char			*cr_principal; /* for gss */
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct gss_api_mech	*cr_gss_mech;
 };
 
@@ -41,6 +48,9 @@ static inline void init_svc_cred(struct svc_cred *cred)
 	cred->cr_gss_mech = NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void free_svc_cred(struct svc_cred *cred)
 {
@@ -48,6 +58,11 @@ static inline void free_svc_cred(struct svc_cred *cred)
 		put_group_info(cred->cr_group_info);
 	kfree(cred->cr_principal);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gss_mech_put(cred->cr_gss_mech);
+	init_svc_cred(cred);
+>>>>>>> v3.18
 =======
 	gss_mech_put(cred->cr_gss_mech);
 	init_svc_cred(cred);

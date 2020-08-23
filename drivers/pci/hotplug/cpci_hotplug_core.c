@@ -47,7 +47,11 @@
 		if (cpci_debug)					\
 			printk (KERN_DEBUG "%s: " format "\n",	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 				MY_NAME , ## arg); 		\
+=======
+				MY_NAME , ## arg);		\
+>>>>>>> v3.18
 =======
 				MY_NAME , ## arg);		\
 >>>>>>> v3.18
@@ -70,15 +74,21 @@ static int enable_slot(struct hotplug_slot *slot);
 static int disable_slot(struct hotplug_slot *slot);
 static int set_attention_status(struct hotplug_slot *slot, u8 value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_power_status(struct hotplug_slot *slot, u8 * value);
 static int get_attention_status(struct hotplug_slot *slot, u8 * value);
 static int get_adapter_status(struct hotplug_slot *slot, u8 * value);
 static int get_latch_status(struct hotplug_slot *slot, u8 * value);
 =======
+=======
+>>>>>>> v3.18
 static int get_power_status(struct hotplug_slot *slot, u8 *value);
 static int get_attention_status(struct hotplug_slot *slot, u8 *value);
 static int get_adapter_status(struct hotplug_slot *slot, u8 *value);
 static int get_latch_status(struct hotplug_slot *slot, u8 *value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct hotplug_slot_ops cpci_hotplug_slot_ops = {
@@ -137,7 +147,12 @@ disable_slot(struct hotplug_slot *hotplug_slot)
 	/* Unconfigure device */
 	dbg("%s - unconfiguring slot %s", __func__, slot_name(slot));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((retval = cpci_unconfigure_slot(slot))) {
+=======
+	retval = cpci_unconfigure_slot(slot);
+	if (retval) {
+>>>>>>> v3.18
 =======
 	retval = cpci_unconfigure_slot(slot);
 	if (retval) {
@@ -158,15 +173,21 @@ disable_slot(struct hotplug_slot *hotplug_slot)
 	cpci_led_on(slot);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (controller->ops->set_power)
 		if ((retval = controller->ops->set_power(slot, 0)))
 			goto disable_error;
 =======
+=======
+>>>>>>> v3.18
 	if (controller->ops->set_power) {
 		retval = controller->ops->set_power(slot, 0);
 		if (retval)
 			goto disable_error;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (update_adapter_status(slot->hotplug_slot, 0))
@@ -193,7 +214,11 @@ cpci_get_power_status(struct slot *slot)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 get_power_status(struct hotplug_slot *hotplug_slot, u8 * value)
+=======
+get_power_status(struct hotplug_slot *hotplug_slot, u8 *value)
+>>>>>>> v3.18
 =======
 get_power_status(struct hotplug_slot *hotplug_slot, u8 *value)
 >>>>>>> v3.18
@@ -206,7 +231,11 @@ get_power_status(struct hotplug_slot *hotplug_slot, u8 *value)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 get_attention_status(struct hotplug_slot *hotplug_slot, u8 * value)
+=======
+get_attention_status(struct hotplug_slot *hotplug_slot, u8 *value)
+>>>>>>> v3.18
 =======
 get_attention_status(struct hotplug_slot *hotplug_slot, u8 *value)
 >>>>>>> v3.18
@@ -225,7 +254,11 @@ set_attention_status(struct hotplug_slot *hotplug_slot, u8 status)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 get_adapter_status(struct hotplug_slot *hotplug_slot, u8 * value)
+=======
+get_adapter_status(struct hotplug_slot *hotplug_slot, u8 *value)
+>>>>>>> v3.18
 =======
 get_adapter_status(struct hotplug_slot *hotplug_slot, u8 *value)
 >>>>>>> v3.18
@@ -236,7 +269,11 @@ get_adapter_status(struct hotplug_slot *hotplug_slot, u8 *value)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 get_latch_status(struct hotplug_slot *hotplug_slot, u8 * value)
+=======
+get_latch_status(struct hotplug_slot *hotplug_slot, u8 *value)
+>>>>>>> v3.18
 =======
 get_latch_status(struct hotplug_slot *hotplug_slot, u8 *value)
 >>>>>>> v3.18
@@ -340,6 +377,10 @@ error:
 	return status;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cpci_hp_register_bus);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cpci_hp_register_bus);
 >>>>>>> v3.18
@@ -374,6 +415,10 @@ cpci_hp_unregister_bus(struct pci_bus *bus)
 	return status;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cpci_hp_unregister_bus);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cpci_hp_unregister_bus);
 >>>>>>> v3.18
@@ -409,7 +454,11 @@ init_slots(int clear_ins)
 {
 	struct slot *slot;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev* dev;
+=======
+	struct pci_dev *dev;
+>>>>>>> v3.18
 =======
 	struct pci_dev *dev;
 >>>>>>> v3.18
@@ -518,9 +567,15 @@ check_slots(void)
 
 			if (!slot->extracting) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (update_latch_status(slot->hotplug_slot, 0)) {
 					warn("failure to update latch file");
 				}
+=======
+				if (update_latch_status(slot->hotplug_slot, 0))
+					warn("failure to update latch file");
+
+>>>>>>> v3.18
 =======
 				if (update_latch_status(slot->hotplug_slot, 0))
 					warn("failure to update latch file");
@@ -673,6 +728,10 @@ cpci_hp_register_controller(struct cpci_hp_controller *new_controller)
 	return status;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cpci_hp_register_controller);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cpci_hp_register_controller);
 >>>>>>> v3.18
@@ -716,6 +775,10 @@ cpci_hp_unregister_controller(struct cpci_hp_controller *old_controller)
 	return status;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cpci_hp_unregister_controller);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cpci_hp_unregister_controller);
 >>>>>>> v3.18
@@ -757,6 +820,10 @@ cpci_hp_start(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cpci_hp_start);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cpci_hp_start);
 >>>>>>> v3.18
@@ -775,6 +842,10 @@ cpci_hp_stop(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cpci_hp_stop);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cpci_hp_stop);
 >>>>>>> v3.18
@@ -796,6 +867,7 @@ cpci_hotplug_exit(void)
 	cpci_hp_unregister_controller(controller);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL_GPL(cpci_hp_register_controller);
 EXPORT_SYMBOL_GPL(cpci_hp_unregister_controller);
@@ -803,5 +875,7 @@ EXPORT_SYMBOL_GPL(cpci_hp_register_bus);
 EXPORT_SYMBOL_GPL(cpci_hp_unregister_bus);
 EXPORT_SYMBOL_GPL(cpci_hp_start);
 EXPORT_SYMBOL_GPL(cpci_hp_stop);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -106,6 +106,7 @@ static LIST_HEAD(mtd_notifiers);
 static void mtd_release(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mtd_info __maybe_unused *mtd = dev_get_drvdata(dev);
 	dev_t index = MTD_DEVT(mtd->index);
 
@@ -113,11 +114,16 @@ static void mtd_release(struct device *dev)
 	if (index)
 		device_destroy(&mtd_class, index + 1);
 =======
+=======
+>>>>>>> v3.18
 	struct mtd_info *mtd = dev_get_drvdata(dev);
 	dev_t index = MTD_DEVT(mtd->index);
 
 	/* remove /dev/mtdXro node */
 	device_destroy(&mtd_class, index + 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -166,6 +172,12 @@ static ssize_t mtd_type_show(struct device *dev,
 		type = "ubi";
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case MTD_MLCNANDFLASH:
+		type = "mlc-nand";
+		break;
+>>>>>>> v3.18
 =======
 	case MTD_MLCNANDFLASH:
 		type = "mlc-nand";
@@ -300,7 +312,10 @@ static DEVICE_ATTR(bitflip_threshold, S_IRUGO | S_IWUSR,
 		   mtd_bitflip_threshold_store);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t mtd_ecc_step_size_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
@@ -352,6 +367,9 @@ static ssize_t mtd_bbtblocks_show(struct device *dev,
 }
 static DEVICE_ATTR(bbt_blocks, S_IRUGO, mtd_bbtblocks_show, NULL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct attribute *mtd_attrs[] = {
 	&dev_attr_type.attr,
@@ -364,6 +382,7 @@ static struct attribute *mtd_attrs[] = {
 	&dev_attr_numeraseregions.attr,
 	&dev_attr_name.attr,
 	&dev_attr_ecc_strength.attr,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	&dev_attr_bitflip_threshold.attr,
 	NULL,
@@ -378,6 +397,8 @@ static const struct attribute_group *mtd_groups[] = {
 	NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 	&dev_attr_ecc_step_size.attr,
 	&dev_attr_corrected_bits.attr,
 	&dev_attr_ecc_failures.attr,
@@ -387,6 +408,9 @@ static const struct attribute_group *mtd_groups[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(mtd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct device_type mtd_devtype = {
@@ -472,10 +496,15 @@ int add_mtd_device(struct mtd_info *mtd)
 		goto fail_added;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (MTD_DEVT(i))
 		device_create(&mtd_class, mtd->dev.parent,
 			      MTD_DEVT(i) + 1,
 			      NULL, "mtd%dro", i);
+=======
+	device_create(&mtd_class, mtd->dev.parent, MTD_DEVT(i) + 1, NULL,
+		      "mtd%dro", i);
+>>>>>>> v3.18
 =======
 	device_create(&mtd_class, mtd->dev.parent, MTD_DEVT(i) + 1, NULL,
 		      "mtd%dro", i);
@@ -813,7 +842,11 @@ EXPORT_SYMBOL_GPL(__put_mtd_device);
 int mtd_erase(struct mtd_info *mtd, struct erase_info *instr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (instr->addr > mtd->size || instr->len > mtd->size - instr->addr)
+=======
+	if (instr->addr >= mtd->size || instr->len > mtd->size - instr->addr)
+>>>>>>> v3.18
 =======
 	if (instr->addr >= mtd->size || instr->len > mtd->size - instr->addr)
 >>>>>>> v3.18
@@ -843,7 +876,11 @@ int mtd_point(struct mtd_info *mtd, loff_t from, size_t len, size_t *retlen,
 	if (!mtd->_point)
 		return -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (from < 0 || from > mtd->size || len > mtd->size - from)
+=======
+	if (from < 0 || from >= mtd->size || len > mtd->size - from)
+>>>>>>> v3.18
 =======
 	if (from < 0 || from >= mtd->size || len > mtd->size - from)
 >>>>>>> v3.18
@@ -860,7 +897,11 @@ int mtd_unpoint(struct mtd_info *mtd, loff_t from, size_t len)
 	if (!mtd->_point)
 		return -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (from < 0 || from > mtd->size || len > mtd->size - from)
+=======
+	if (from < 0 || from >= mtd->size || len > mtd->size - from)
+>>>>>>> v3.18
 =======
 	if (from < 0 || from >= mtd->size || len > mtd->size - from)
 >>>>>>> v3.18
@@ -882,7 +923,11 @@ unsigned long mtd_get_unmapped_area(struct mtd_info *mtd, unsigned long len,
 	if (!mtd->_get_unmapped_area)
 		return -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (offset > mtd->size || len > mtd->size - offset)
+=======
+	if (offset >= mtd->size || len > mtd->size - offset)
+>>>>>>> v3.18
 =======
 	if (offset >= mtd->size || len > mtd->size - offset)
 >>>>>>> v3.18
@@ -897,7 +942,11 @@ int mtd_read(struct mtd_info *mtd, loff_t from, size_t len, size_t *retlen,
 	int ret_code;
 	*retlen = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (from < 0 || from > mtd->size || len > mtd->size - from)
+=======
+	if (from < 0 || from >= mtd->size || len > mtd->size - from)
+>>>>>>> v3.18
 =======
 	if (from < 0 || from >= mtd->size || len > mtd->size - from)
 >>>>>>> v3.18
@@ -924,7 +973,11 @@ int mtd_write(struct mtd_info *mtd, loff_t to, size_t len, size_t *retlen,
 {
 	*retlen = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (to < 0 || to > mtd->size || len > mtd->size - to)
+=======
+	if (to < 0 || to >= mtd->size || len > mtd->size - to)
+>>>>>>> v3.18
 =======
 	if (to < 0 || to >= mtd->size || len > mtd->size - to)
 >>>>>>> v3.18
@@ -951,7 +1004,11 @@ int mtd_panic_write(struct mtd_info *mtd, loff_t to, size_t len, size_t *retlen,
 	if (!mtd->_panic_write)
 		return -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (to < 0 || to > mtd->size || len > mtd->size - to)
+=======
+	if (to < 0 || to >= mtd->size || len > mtd->size - to)
+>>>>>>> v3.18
 =======
 	if (to < 0 || to >= mtd->size || len > mtd->size - to)
 >>>>>>> v3.18
@@ -991,8 +1048,13 @@ EXPORT_SYMBOL_GPL(mtd_read_oob);
  * only.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mtd_get_fact_prot_info(struct mtd_info *mtd, struct otp_info *buf,
 			   size_t len)
+=======
+int mtd_get_fact_prot_info(struct mtd_info *mtd, size_t len, size_t *retlen,
+			   struct otp_info *buf)
+>>>>>>> v3.18
 =======
 int mtd_get_fact_prot_info(struct mtd_info *mtd, size_t len, size_t *retlen,
 			   struct otp_info *buf)
@@ -1003,7 +1065,11 @@ int mtd_get_fact_prot_info(struct mtd_info *mtd, size_t len, size_t *retlen,
 	if (!len)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mtd->_get_fact_prot_info(mtd, buf, len);
+=======
+	return mtd->_get_fact_prot_info(mtd, len, retlen, buf);
+>>>>>>> v3.18
 =======
 	return mtd->_get_fact_prot_info(mtd, len, retlen, buf);
 >>>>>>> v3.18
@@ -1023,8 +1089,13 @@ int mtd_read_fact_prot_reg(struct mtd_info *mtd, loff_t from, size_t len,
 EXPORT_SYMBOL_GPL(mtd_read_fact_prot_reg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mtd_get_user_prot_info(struct mtd_info *mtd, struct otp_info *buf,
 			   size_t len)
+=======
+int mtd_get_user_prot_info(struct mtd_info *mtd, size_t len, size_t *retlen,
+			   struct otp_info *buf)
+>>>>>>> v3.18
 =======
 int mtd_get_user_prot_info(struct mtd_info *mtd, size_t len, size_t *retlen,
 			   struct otp_info *buf)
@@ -1035,7 +1106,11 @@ int mtd_get_user_prot_info(struct mtd_info *mtd, size_t len, size_t *retlen,
 	if (!len)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mtd->_get_user_prot_info(mtd, buf, len);
+=======
+	return mtd->_get_user_prot_info(mtd, len, retlen, buf);
+>>>>>>> v3.18
 =======
 	return mtd->_get_user_prot_info(mtd, len, retlen, buf);
 >>>>>>> v3.18
@@ -1058,6 +1133,11 @@ int mtd_write_user_prot_reg(struct mtd_info *mtd, loff_t to, size_t len,
 			    size_t *retlen, u_char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+
+>>>>>>> v3.18
 =======
 	int ret;
 
@@ -1068,8 +1148,11 @@ int mtd_write_user_prot_reg(struct mtd_info *mtd, loff_t to, size_t len,
 	if (!len)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mtd->_write_user_prot_reg(mtd, to, len, retlen, buf);
 =======
+=======
+>>>>>>> v3.18
 	ret = mtd->_write_user_prot_reg(mtd, to, len, retlen, buf);
 	if (ret)
 		return ret;
@@ -1079,6 +1162,9 @@ int mtd_write_user_prot_reg(struct mtd_info *mtd, loff_t to, size_t len,
 	 * must return -ENOSPC.
 	 */
 	return (*retlen) ? 0 : -ENOSPC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(mtd_write_user_prot_reg);
@@ -1099,7 +1185,11 @@ int mtd_lock(struct mtd_info *mtd, loff_t ofs, uint64_t len)
 	if (!mtd->_lock)
 		return -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ofs < 0 || ofs > mtd->size || len > mtd->size - ofs)
+=======
+	if (ofs < 0 || ofs >= mtd->size || len > mtd->size - ofs)
+>>>>>>> v3.18
 =======
 	if (ofs < 0 || ofs >= mtd->size || len > mtd->size - ofs)
 >>>>>>> v3.18
@@ -1115,7 +1205,11 @@ int mtd_unlock(struct mtd_info *mtd, loff_t ofs, uint64_t len)
 	if (!mtd->_unlock)
 		return -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ofs < 0 || ofs > mtd->size || len > mtd->size - ofs)
+=======
+	if (ofs < 0 || ofs >= mtd->size || len > mtd->size - ofs)
+>>>>>>> v3.18
 =======
 	if (ofs < 0 || ofs >= mtd->size || len > mtd->size - ofs)
 >>>>>>> v3.18
@@ -1131,7 +1225,11 @@ int mtd_is_locked(struct mtd_info *mtd, loff_t ofs, uint64_t len)
 	if (!mtd->_is_locked)
 		return -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ofs < 0 || ofs > mtd->size || len > mtd->size - ofs)
+=======
+	if (ofs < 0 || ofs >= mtd->size || len > mtd->size - ofs)
+>>>>>>> v3.18
 =======
 	if (ofs < 0 || ofs >= mtd->size || len > mtd->size - ofs)
 >>>>>>> v3.18
@@ -1143,6 +1241,7 @@ int mtd_is_locked(struct mtd_info *mtd, loff_t ofs, uint64_t len)
 EXPORT_SYMBOL_GPL(mtd_is_locked);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mtd_block_isbad(struct mtd_info *mtd, loff_t ofs)
 {
 	if (!mtd->_block_isbad)
@@ -1150,6 +1249,8 @@ int mtd_block_isbad(struct mtd_info *mtd, loff_t ofs)
 	if (ofs < 0 || ofs > mtd->size)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 int mtd_block_isreserved(struct mtd_info *mtd, loff_t ofs)
 {
 	if (ofs < 0 || ofs >= mtd->size)
@@ -1166,6 +1267,9 @@ int mtd_block_isbad(struct mtd_info *mtd, loff_t ofs)
 		return -EINVAL;
 	if (!mtd->_block_isbad)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return mtd->_block_isbad(mtd, ofs);
 }
@@ -1176,7 +1280,11 @@ int mtd_block_markbad(struct mtd_info *mtd, loff_t ofs)
 	if (!mtd->_block_markbad)
 		return -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ofs < 0 || ofs > mtd->size)
+=======
+	if (ofs < 0 || ofs >= mtd->size)
+>>>>>>> v3.18
 =======
 	if (ofs < 0 || ofs >= mtd->size)
 >>>>>>> v3.18
@@ -1335,7 +1443,11 @@ static int __init mtd_bdi_init(struct backing_dev_info *bdi, const char *name)
 	ret = bdi_init(bdi);
 	if (!ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = bdi_register(bdi, NULL, name);
+=======
+		ret = bdi_register(bdi, NULL, "%s", name);
+>>>>>>> v3.18
 =======
 		ret = bdi_register(bdi, NULL, "%s", name);
 >>>>>>> v3.18

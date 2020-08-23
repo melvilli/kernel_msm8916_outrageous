@@ -127,7 +127,10 @@ struct zr36050 {
 
 #define ZR050_MO_COMP                0x80
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ZR050_MO_COMP                0x80
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ZR050_MO_ATP                 0x40

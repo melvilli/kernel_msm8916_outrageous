@@ -193,7 +193,11 @@ static int ds2786_get_voltage(struct ds278x_info *info, int *voltage_uV)
 	/*
 	 * Voltage is measured in units of 1.22mV. The voltage is stored as
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * a 10-bit number plus sign, in the upper bits of a 16-bit register
+=======
+	 * a 12-bit number plus sign, in the upper bits of a 16-bit register
+>>>>>>> v3.18
 =======
 	 * a 12-bit number plus sign, in the upper bits of a 16-bit register
 >>>>>>> v3.18

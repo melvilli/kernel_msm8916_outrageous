@@ -16,7 +16,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -53,8 +56,11 @@
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 LEAF(except_vec2_sb1)
@@ -149,8 +155,11 @@ unrecoverable:
 END(except_vec2_sb1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__FINIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	LEAF(handle_vec2_sb1)

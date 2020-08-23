@@ -35,6 +35,7 @@ module_param_named(btcoex_enable, ath9k_htc_btcoex_enable, int, 0444);
 MODULE_PARM_DESC(btcoex_enable, "Enable wifi-BT coexistence");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CHAN2G(_freq, _idx)  { \
 	.center_freq = (_freq), \
 	.hw_value = (_idx), \
@@ -121,6 +122,11 @@ static struct ieee80211_rate ath9k_legacy_rates[] = {
 	RATE(480, 0x08, 0),
 	RATE(540, 0x0c, 0),
 };
+=======
+static int ath9k_ps_enable;
+module_param_named(ps_enable, ath9k_ps_enable, int, 0444);
+MODULE_PARM_DESC(ps_enable, "Enable WLAN PowerSave");
+>>>>>>> v3.18
 =======
 static int ath9k_ps_enable;
 module_param_named(ps_enable, ath9k_ps_enable, int, 0444);
@@ -346,7 +352,10 @@ static void ath9k_multi_regread(void *hw_priv, u32 *addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ath9k_regwrite_multi(struct ath_common *common)
 {
 	struct ath9k_htc_priv *priv = (struct ath9k_htc_priv *) common->priv;
@@ -366,6 +375,9 @@ static void ath9k_regwrite_multi(struct ath_common *common)
 	priv->wmi->multi_write_idx = 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ath9k_regwrite_single(void *hw_priv, u32 val, u32 reg_offset)
 {
@@ -394,8 +406,11 @@ static void ath9k_regwrite_buffer(void *hw_priv, u32 val, u32 reg_offset)
 	struct ath_common *common = ath9k_hw_common(ah);
 	struct ath9k_htc_priv *priv = (struct ath9k_htc_priv *) common->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rsp_status;
 	int r;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -411,6 +426,7 @@ static void ath9k_regwrite_buffer(void *hw_priv, u32 val, u32 reg_offset)
 
 	/* If the buffer is full, send it out. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->wmi->multi_write_idx == MAX_CMD_NUMBER) {
 		r = ath9k_wmi_cmd(priv->wmi, WMI_REG_WRITE_CMDID,
 			  (u8 *) &priv->wmi->multi_write,
@@ -424,6 +440,10 @@ static void ath9k_regwrite_buffer(void *hw_priv, u32 val, u32 reg_offset)
 		}
 		priv->wmi->multi_write_idx = 0;
 	}
+=======
+	if (priv->wmi->multi_write_idx == MAX_CMD_NUMBER)
+		ath9k_regwrite_multi(common);
+>>>>>>> v3.18
 =======
 	if (priv->wmi->multi_write_idx == MAX_CMD_NUMBER)
 		ath9k_regwrite_multi(common);
@@ -459,8 +479,11 @@ static void ath9k_regwrite_flush(void *hw_priv)
 	struct ath_common *common = ath9k_hw_common(ah);
 	struct ath9k_htc_priv *priv = (struct ath9k_htc_priv *) common->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rsp_status;
 	int r;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -468,6 +491,7 @@ static void ath9k_regwrite_flush(void *hw_priv)
 
 	mutex_lock(&priv->wmi->multi_write_mutex);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (priv->wmi->multi_write_idx) {
 		r = ath9k_wmi_cmd(priv->wmi, WMI_REG_WRITE_CMDID,
@@ -482,6 +506,10 @@ static void ath9k_regwrite_flush(void *hw_priv)
 		}
 		priv->wmi->multi_write_idx = 0;
 	}
+=======
+	if (priv->wmi->multi_write_idx)
+		ath9k_regwrite_multi(common);
+>>>>>>> v3.18
 =======
 	if (priv->wmi->multi_write_idx)
 		ath9k_regwrite_multi(common);
@@ -532,6 +560,7 @@ static const struct ath_bus_ops ath9k_usb_bus_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void setup_ht_cap(struct ath9k_htc_priv *priv,
 			 struct ieee80211_sta_ht_cap *ht_info)
 {
@@ -576,6 +605,8 @@ static void setup_ht_cap(struct ath9k_htc_priv *priv,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int ath9k_init_queues(struct ath9k_htc_priv *priv)
 {
 	struct ath_common *common = ath9k_hw_common(priv->ah);
@@ -585,8 +616,13 @@ static int ath9k_init_queues(struct ath9k_htc_priv *priv)
 		priv->hwq_map[i] = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->beaconq = ath9k_hw_beaconq_setup(priv->ah);
 	if (priv->beaconq == -1) {
+=======
+	priv->beacon.beaconq = ath9k_hw_beaconq_setup(priv->ah);
+	if (priv->beacon.beaconq == -1) {
+>>>>>>> v3.18
 =======
 	priv->beacon.beaconq = ath9k_hw_beaconq_setup(priv->ah);
 	if (priv->beacon.beaconq == -1) {
@@ -626,6 +662,7 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ath9k_init_channels_rates(struct ath9k_htc_priv *priv)
 {
 	if (priv->ah->caps.hw_caps & ATH9K_HW_CAP_2GHZ) {
@@ -653,6 +690,8 @@ static void ath9k_init_channels_rates(struct ath9k_htc_priv *priv)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void ath9k_init_misc(struct ath9k_htc_priv *priv)
 {
 	struct ath_common *common = ath9k_hw_common(priv->ah);
@@ -660,6 +699,10 @@ static void ath9k_init_misc(struct ath9k_htc_priv *priv)
 	memcpy(common->bssidmask, ath_bcast_mac, ETH_ALEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	common->last_rssi = ATH_RSSI_DUMMY_MARKER;
+>>>>>>> v3.18
 =======
 	common->last_rssi = ATH_RSSI_DUMMY_MARKER;
 >>>>>>> v3.18
@@ -675,8 +718,11 @@ static int ath9k_init_priv(struct ath9k_htc_priv *priv,
 	int i, ret = 0, csz = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(OP_INVALID, &priv->op_flags);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ah = kzalloc(sizeof(struct ath_hw), GFP_KERNEL);
@@ -684,6 +730,11 @@ static int ath9k_init_priv(struct ath9k_htc_priv *priv,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ah->dev = priv->dev;
+	ah->hw = priv->hw;
+>>>>>>> v3.18
 =======
 	ah->dev = priv->dev;
 	ah->hw = priv->hw;
@@ -708,6 +759,10 @@ static int ath9k_init_priv(struct ath9k_htc_priv *priv,
 	common->debug_mask = ath9k_debug;
 	common->btcoex_enabled = ath9k_htc_btcoex_enable == 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	set_bit(ATH_OP_INVALID, &common->op_flags);
+>>>>>>> v3.18
 =======
 	set_bit(ATH_OP_INVALID, &common->op_flags);
 >>>>>>> v3.18
@@ -747,16 +802,22 @@ static int ath9k_init_priv(struct ath9k_htc_priv *priv,
 
 	for (i = 0; i < ATH9K_HTC_MAX_BCN_VIF; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->cur_beacon_conf.bslot[i] = NULL;
 
 	ath9k_cmn_init_crypto(ah);
 	ath9k_init_channels_rates(priv);
 =======
+=======
+>>>>>>> v3.18
 		priv->beacon.bslot[i] = NULL;
 	priv->beacon.slottime = ATH9K_SLOT_TIME_9;
 
 	ath9k_cmn_init_channels_rates(common);
 	ath9k_cmn_init_crypto(ah);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ath9k_init_misc(priv);
 	ath9k_htc_init_btcoex(priv, product);
@@ -778,6 +839,12 @@ static const struct ieee80211_iface_limit if_limits[] = {
 				 BIT(NL80211_IFTYPE_P2P_CLIENT) },
 	{ .max = 2,	.types = BIT(NL80211_IFTYPE_AP) |
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_MAC80211_MESH
+				 BIT(NL80211_IFTYPE_MESH_POINT) |
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_MAC80211_MESH
 				 BIT(NL80211_IFTYPE_MESH_POINT) |
@@ -797,7 +864,13 @@ static void ath9k_set_hw_capab(struct ath9k_htc_priv *priv,
 			       struct ieee80211_hw *hw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_common *common = ath9k_hw_common(priv->ah);
+=======
+	struct ath_hw *ah = priv->ah;
+	struct ath_common *common = ath9k_hw_common(priv->ah);
+	struct base_eep_header *pBase;
+>>>>>>> v3.18
 =======
 	struct ath_hw *ah = priv->ah;
 	struct ath_common *common = ath9k_hw_common(priv->ah);
@@ -810,12 +883,15 @@ static void ath9k_set_hw_capab(struct ath9k_htc_priv *priv,
 		IEEE80211_HW_HAS_RATE_CONTROL |
 		IEEE80211_HW_RX_INCLUDES_FCS |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IEEE80211_HW_SUPPORTS_PS |
 		IEEE80211_HW_PS_NULLFUNC_STACK |
 		IEEE80211_HW_REPORTS_TX_ACK_STATUS |
 		IEEE80211_HW_HOST_BROADCAST_PS_BUFFERING;
 
 =======
+=======
+>>>>>>> v3.18
 		IEEE80211_HW_PS_NULLFUNC_STACK |
 		IEEE80211_HW_REPORTS_TX_ACK_STATUS |
 		IEEE80211_HW_MFP_CAPABLE |
@@ -824,6 +900,9 @@ static void ath9k_set_hw_capab(struct ath9k_htc_priv *priv,
 	if (ath9k_ps_enable)
 		hw->flags |= IEEE80211_HW_SUPPORTS_PS;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hw->wiphy->interface_modes =
 		BIT(NL80211_IFTYPE_STATION) |
@@ -831,7 +910,12 @@ static void ath9k_set_hw_capab(struct ath9k_htc_priv *priv,
 		BIT(NL80211_IFTYPE_AP) |
 		BIT(NL80211_IFTYPE_P2P_GO) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BIT(NL80211_IFTYPE_P2P_CLIENT);
+=======
+		BIT(NL80211_IFTYPE_P2P_CLIENT) |
+		BIT(NL80211_IFTYPE_MESH_POINT);
+>>>>>>> v3.18
 =======
 		BIT(NL80211_IFTYPE_P2P_CLIENT) |
 		BIT(NL80211_IFTYPE_MESH_POINT);
@@ -846,8 +930,14 @@ static void ath9k_set_hw_capab(struct ath9k_htc_priv *priv,
 			    WIPHY_FLAG_HAS_REMAIN_ON_CHANNEL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->queues = 4;
 	hw->channel_change_time = 5000;
+=======
+	hw->wiphy->flags |= WIPHY_FLAG_SUPPORTS_TDLS;
+
+	hw->queues = 4;
+>>>>>>> v3.18
 =======
 	hw->wiphy->flags |= WIPHY_FLAG_SUPPORTS_TDLS;
 
@@ -865,6 +955,7 @@ static void ath9k_set_hw_capab(struct ath9k_htc_priv *priv,
 	if (priv->ah->caps.hw_caps & ATH9K_HW_CAP_2GHZ)
 		hw->wiphy->bands[IEEE80211_BAND_2GHZ] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			&priv->sbands[IEEE80211_BAND_2GHZ];
 	if (priv->ah->caps.hw_caps & ATH9K_HW_CAP_5GHZ)
 		hw->wiphy->bands[IEEE80211_BAND_5GHZ] =
@@ -878,6 +969,8 @@ static void ath9k_set_hw_capab(struct ath9k_htc_priv *priv,
 			setup_ht_cap(priv,
 				     &priv->sbands[IEEE80211_BAND_5GHZ].ht_cap);
 =======
+=======
+>>>>>>> v3.18
 			&common->sbands[IEEE80211_BAND_2GHZ];
 	if (priv->ah->caps.hw_caps & ATH9K_HW_CAP_5GHZ)
 		hw->wiphy->bands[IEEE80211_BAND_5GHZ] =
@@ -889,6 +982,9 @@ static void ath9k_set_hw_capab(struct ath9k_htc_priv *priv,
 	if (pBase) {
 		hw->wiphy->available_antennas_rx = pBase->rxMask;
 		hw->wiphy->available_antennas_tx = pBase->txMask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1113,6 +1209,11 @@ int ath9k_htc_resume(struct htc_target *htc_handle)
 	ret = ath9k_init_htc_services(priv, priv->ah->hw_version.devid,
 				      priv->ah->hw_version.usbdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ath9k_configure_leds(priv);
+
+>>>>>>> v3.18
 =======
 	ath9k_configure_leds(priv);
 

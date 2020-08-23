@@ -16,7 +16,10 @@
 #include <linux/types.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/slab.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/sysrq.h>
@@ -42,6 +45,7 @@ struct tracectx {
 	unsigned int	etb_bufsz;
 	void __iomem	*etb_regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem	**etm_regs;
 	int		etm_regs_count;
 	unsigned long	flags;
@@ -55,10 +59,15 @@ struct tracectx {
 	unsigned long	data_range_end;
 	bool		dump_initial_etb;
 =======
+=======
+>>>>>>> v3.18
 	void __iomem	*etm_regs;
 	unsigned long	flags;
 	int		ncmppairs;
 	int		etm_portsz;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct device	*dev;
 	struct clk	*emu_clk;
@@ -66,10 +75,14 @@ struct tracectx {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tracectx tracer = {
 	.range_start = (unsigned long)_stext,
 	.range_end = (unsigned long)_etext,
 };
+=======
+static struct tracectx tracer;
+>>>>>>> v3.18
 =======
 static struct tracectx tracer;
 >>>>>>> v3.18
@@ -80,15 +93,21 @@ static inline bool trace_isrunning(struct tracectx *t)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int etm_setup_address_range(struct tracectx *t, int id, int n,
 		unsigned long start, unsigned long end, int exclude, int data)
 {
 	u32 flags = ETMAAT_ARM | ETMAAT_IGNCONTEXTID | ETMAAT_IGNSECURITY |
 =======
+=======
+>>>>>>> v3.18
 static int etm_setup_address_range(struct tracectx *t, int n,
 		unsigned long start, unsigned long end, int exclude, int data)
 {
 	u32 flags = ETMAAT_ARM | ETMAAT_IGNCONTEXTID | ETMAAT_NSONLY | \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    ETMAAT_NOVALCMP;
 
@@ -105,6 +124,7 @@ static int etm_setup_address_range(struct tracectx *t, int n,
 		flags |= ETMAAT_IEXEC;
 
 	/* first comparator for the range */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	etm_writel(t, id, flags, ETMR_COMP_ACC_TYPE(n * 2));
 	etm_writel(t, id, start, ETMR_COMP_VAL(n * 2));
@@ -123,6 +143,8 @@ static int etm_setup_address_range(struct tracectx *t, int n,
 		etm_writel(t, id, flags | (1 << n), ETMR_TRACEENCTRL);
 	}
 =======
+=======
+>>>>>>> v3.18
 	etm_writel(t, flags, ETMR_COMP_ACC_TYPE(n * 2));
 	etm_writel(t, start, ETMR_COMP_VAL(n * 2));
 
@@ -132,13 +154,20 @@ static int etm_setup_address_range(struct tracectx *t, int n,
 
 	flags = exclude ? ETMTE_INCLEXCL : 0;
 	etm_writel(t, flags | (1 << n), ETMR_TRACEENCTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int trace_start_etm(struct tracectx *t, int id)
+=======
+static int trace_start(struct tracectx *t)
+>>>>>>> v3.18
 =======
 static int trace_start(struct tracectx *t)
 >>>>>>> v3.18
@@ -146,6 +175,7 @@ static int trace_start(struct tracectx *t)
 	u32 v;
 	unsigned long timeout = TRACER_TIMEOUT;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	v = ETMCTRL_OPTS | ETMCTRL_PROGRAM | ETMCTRL_PORTSIZE(t->etm_portsz);
 	v |= ETMCTRL_CONTEXTIDSIZE(t->etm_contextid_size);
@@ -198,6 +228,8 @@ static int trace_start(struct tracectx *t)
 
 	etm_writel(t, id, 0x6f, ETMR_VIEWDATAEVT);
 =======
+=======
+>>>>>>> v3.18
 	etb_unlock(t);
 
 	etb_writel(t, 0, ETBR_FORMATTERCTRL);
@@ -228,11 +260,15 @@ static int trace_start(struct tracectx *t)
 	etm_writel(t, 0, ETMR_TRACEENCTRL2);
 	etm_writel(t, 0, ETMR_TRACESSCTRL);
 	etm_writel(t, 0x6f, ETMR_TRACEENEVT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	v &= ~ETMCTRL_PROGRAM;
 	v |= ETMCTRL_PORTSEL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	etm_writel(t, id, v, ETMR_CTRL);
 
@@ -271,6 +307,8 @@ static int trace_start(struct tracectx *t)
 			return ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	etm_writel(t, v, ETMR_CTRL);
 
 	timeout = TRACER_TIMEOUT;
@@ -283,6 +321,9 @@ static int trace_start(struct tracectx *t)
 	}
 
 	etm_lock(t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	t->flags |= TRACER_RUNNING;
@@ -290,6 +331,7 @@ static int trace_start(struct tracectx *t)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int trace_stop_etm(struct tracectx *t, int id)
 {
@@ -350,6 +392,8 @@ static int trace_stop(struct tracectx *t)
 	}
 	etb_writel(t, etb_fc | ETBFF_MANUAL_FLUSH, ETBR_FORMATTERCTRL);
 =======
+=======
+>>>>>>> v3.18
 static int trace_stop(struct tracectx *t)
 {
 	unsigned long timeout = TRACER_TIMEOUT;
@@ -369,6 +413,9 @@ static int trace_stop(struct tracectx *t)
 
 	etb_unlock(t);
 	etb_writel(t, ETBFF_MANUAL_FLUSH, ETBR_FORMATTERCTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	timeout = TRACER_TIMEOUT;
@@ -395,7 +442,11 @@ static int etb_getdatalen(struct tracectx *t)
 {
 	u32 v;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int wp;
+=======
+	int rp, wp;
+>>>>>>> v3.18
 =======
 	int rp, wp;
 >>>>>>> v3.18
@@ -406,9 +457,12 @@ static int etb_getdatalen(struct tracectx *t)
 		return t->etb_bufsz;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wp = etb_readl(t, ETBR_WRITEADDR);
 	return wp;
 =======
+=======
+>>>>>>> v3.18
 	rp = etb_readl(t, ETBR_READADDR);
 	wp = etb_readl(t, ETBR_WRITEADDR);
 
@@ -420,6 +474,9 @@ static int etb_getdatalen(struct tracectx *t)
 	}
 
 	return wp - rp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -454,7 +511,10 @@ static void etm_dump(void)
 	printk(KERN_INFO "\n--- ETB buffer end ---\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* deassert the overflow bit */
 	etb_writel(t, 1, ETBR_CTRL);
 	etb_writel(t, 0, ETBR_CTRL);
@@ -463,12 +523,16 @@ static void etm_dump(void)
 	etb_writel(t, 0, ETBR_READADDR);
 	etb_writel(t, 0, ETBR_WRITEADDR);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	etb_lock(t);
 }
 
 static void sysrq_etm_dump(int key)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!mutex_trylock(&tracer.mutex)) {
 		printk(KERN_INFO "Tracing hardware busy\n");
@@ -477,6 +541,10 @@ static void sysrq_etm_dump(int key)
 	dev_dbg(tracer.dev, "Dumping ETB buffer\n");
 	etm_dump();
 	mutex_unlock(&tracer.mutex);
+=======
+	dev_dbg(tracer.dev, "Dumping ETB buffer\n");
+	etm_dump();
+>>>>>>> v3.18
 =======
 	dev_dbg(tracer.dev, "Dumping ETB buffer\n");
 	etm_dump();
@@ -508,10 +576,13 @@ static ssize_t etb_read(struct file *file, char __user *data,
 	u32 first = 0;
 	u32 *buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int wpos;
 	int skip;
 	long wlength;
 	loff_t pos = *ppos;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -525,6 +596,7 @@ static ssize_t etb_read(struct file *file, char __user *data,
 	etb_unlock(t);
 
 	total = etb_getdatalen(t);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (total == 0 && t->dump_initial_etb)
 		total = t->etb_bufsz;
@@ -560,6 +632,8 @@ static ssize_t etb_read(struct file *file, char __user *data,
 	vfree(buf);
 	*ppos = pos + length;
 =======
+=======
+>>>>>>> v3.18
 	if (total == t->etb_bufsz)
 		first = etb_readl(t, ETBR_WRITEADDR);
 
@@ -585,6 +659,9 @@ static ssize_t etb_read(struct file *file, char __user *data,
 
 	length -= copy_to_user(data, buf, length);
 	vfree(buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -623,7 +700,10 @@ static int etb_probe(struct amba_device *dev, const struct amba_id *id)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&t->mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	t->etb_regs = ioremap_nocache(dev->res.start, resource_size(&dev->res));
@@ -632,6 +712,7 @@ static int etb_probe(struct amba_device *dev, const struct amba_id *id)
 		goto out_release;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	t->dev = &dev->dev;
 	t->dump_initial_etb = true;
@@ -651,12 +732,17 @@ static int etb_probe(struct amba_device *dev, const struct amba_id *id)
 	amba_set_drvdata(dev, t);
 
 >>>>>>> v3.18
+=======
+	amba_set_drvdata(dev, t);
+
+>>>>>>> v3.18
 	etb_miscdev.parent = &dev->dev;
 
 	ret = misc_register(&etb_miscdev);
 	if (ret)
 		goto out_unmap;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Get optional clock. Currently used to select clock source on omap3 */
 	t->emu_clk = clk_get(&dev->dev, "emu_src_ck");
@@ -665,6 +751,8 @@ static int etb_probe(struct amba_device *dev, const struct amba_id *id)
 	else
 		clk_enable(t->emu_clk);
 =======
+=======
+>>>>>>> v3.18
 	t->emu_clk = clk_get(&dev->dev, "emu_src_ck");
 	if (IS_ERR(t->emu_clk)) {
 		dev_dbg(&dev->dev, "Failed to obtain emu_src_ck.\n");
@@ -681,6 +769,9 @@ static int etb_probe(struct amba_device *dev, const struct amba_id *id)
 	etb_writel(t, 0, ETBR_CTRL);
 	etb_writel(t, 0x1000, ETBR_FORMATTERCTRL);
 	etb_lock(t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(&dev->dev, "ETB AMBA driver initialized.\n");
@@ -690,6 +781,7 @@ out:
 
 out_unmap:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&t->mutex);
 	amba_set_drvdata(dev, NULL);
 	iounmap(t->etb_regs);
@@ -697,6 +789,11 @@ out_unmap:
 
 out_release:
 	mutex_unlock(&t->mutex);
+=======
+	iounmap(t->etb_regs);
+
+out_release:
+>>>>>>> v3.18
 =======
 	iounmap(t->etb_regs);
 
@@ -712,6 +809,7 @@ static int etb_remove(struct amba_device *dev)
 	struct tracectx *t = amba_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amba_set_drvdata(dev, NULL);
 
 	iounmap(t->etb_regs);
@@ -722,11 +820,16 @@ static int etb_remove(struct amba_device *dev)
 		clk_put(t->emu_clk);
 	}
 =======
+=======
+>>>>>>> v3.18
 	iounmap(t->etb_regs);
 	t->etb_regs = NULL;
 
 	clk_disable(t->emu_clk);
 	clk_put(t->emu_clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	amba_release_regions(dev);
@@ -772,10 +875,14 @@ static ssize_t trace_running_store(struct kobject *kobj,
 
 	mutex_lock(&tracer.mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tracer.etb_regs)
 		ret = -ENODEV;
 	else
 		ret = value ? trace_start(&tracer) : trace_stop(&tracer);
+=======
+	ret = value ? trace_start(&tracer) : trace_stop(&tracer);
+>>>>>>> v3.18
 =======
 	ret = value ? trace_start(&tracer) : trace_stop(&tracer);
 >>>>>>> v3.18
@@ -793,6 +900,7 @@ static ssize_t trace_info_show(struct kobject *kobj,
 {
 	u32 etb_wa, etb_ra, etb_st, etb_fc, etm_ctrl, etm_st;
 	int datalen;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int id;
 	int ret;
@@ -817,6 +925,8 @@ static ssize_t trace_info_show(struct kobject *kobj,
 			"ETBR_STATUS:\t%08x\n"
 			"ETBR_FORMATTERCTRL:\t%08x\n",
 =======
+=======
+>>>>>>> v3.18
 
 	etb_unlock(&tracer);
 	datalen = etb_getdatalen(&tracer);
@@ -838,12 +948,16 @@ static ssize_t trace_info_show(struct kobject *kobj,
 			"ETBR_FORMATTERCTRL:\t%08x\n"
 			"ETMR_CTRL:\t%08x\n"
 			"ETMR_STATUS:\t%08x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			datalen,
 			tracer.ncmppairs,
 			etb_wa,
 			etb_ra,
 			etb_st,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			etb_fc
 			);
@@ -863,10 +977,15 @@ static ssize_t trace_info_show(struct kobject *kobj,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 			etb_fc,
 			etm_ctrl,
 			etm_st
 			);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -906,6 +1025,7 @@ static ssize_t trace_mode_store(struct kobject *kobj,
 static struct kobj_attribute trace_mode_attr =
 	__ATTR(trace_mode, 0644, trace_mode_show, trace_mode_store);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t trace_contextid_size_show(struct kobject *kobj,
 					 struct kobj_attribute *attr,
@@ -1107,10 +1227,13 @@ static struct kobj_attribute trace_data_range_attr =
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int etm_probe(struct amba_device *dev, const struct amba_id *id)
 {
 	struct tracectx *t = &tracer;
 	int ret = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void __iomem **new_regs;
 	int new_count;
@@ -1131,18 +1254,24 @@ static int etm_probe(struct amba_device *dev, const struct amba_id *id)
 	}
 	t->etm_regs = new_regs;
 =======
+=======
+>>>>>>> v3.18
 
 	if (t->etm_regs) {
 		dev_dbg(&dev->dev, "ETM already initialized\n");
 		ret = -EBUSY;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = amba_request_regions(dev, NULL);
 	if (ret)
 		goto out;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	t->etm_regs[t->etm_regs_count] =
 		ioremap_nocache(dev->res.start, resource_size(&dev->res));
@@ -1151,10 +1280,15 @@ static int etm_probe(struct amba_device *dev, const struct amba_id *id)
 	t->etm_regs = ioremap_nocache(dev->res.start, resource_size(&dev->res));
 	if (!t->etm_regs) {
 >>>>>>> v3.18
+=======
+	t->etm_regs = ioremap_nocache(dev->res.start, resource_size(&dev->res));
+	if (!t->etm_regs) {
+>>>>>>> v3.18
 		ret = -ENOMEM;
 		goto out_release;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	amba_set_drvdata(dev, t->etm_regs[t->etm_regs_count]);
 
@@ -1179,6 +1313,8 @@ static int etm_probe(struct amba_device *dev, const struct amba_id *id)
 	etm_writel(t, t->etm_regs_count, new_count, ETMR_TRACEIDR);
 	etm_lock(t, t->etm_regs_count);
 =======
+=======
+>>>>>>> v3.18
 	amba_set_drvdata(dev, t);
 
 	mutex_init(&t->mutex);
@@ -1194,6 +1330,9 @@ static int etm_probe(struct amba_device *dev, const struct amba_id *id)
 	t->ncmppairs = etm_readl(t, ETMR_CONFCODE) & 0xf;
 	etm_writel(t, 0x440, ETMR_CTRL);
 	etm_lock(t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = sysfs_create_file(&dev->dev.kobj,
@@ -1210,6 +1349,7 @@ static int etm_probe(struct amba_device *dev, const struct amba_id *id)
 	if (ret)
 		dev_dbg(&dev->dev, "Failed to create trace_mode in sysfs\n");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = sysfs_create_file(&dev->dev.kobj,
 				&trace_contextid_size_attr.attr);
@@ -1269,6 +1409,8 @@ out_unmap:
 	amba_set_drvdata(dev, NULL);
 	iounmap(t->etm_regs[t->etm_regs_count]);
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(t->dev, "ETM AMBA driver initialized.\n");
 
 out:
@@ -1276,13 +1418,19 @@ out:
 
 out_unmap:
 	iounmap(t->etm_regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out_release:
 	amba_release_regions(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&t->mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1291,21 +1439,28 @@ out_release:
 static int etm_remove(struct amba_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	struct tracectx *t = &tracer;
 	void __iomem	*etm_regs = amba_get_drvdata(dev);
 =======
+=======
+>>>>>>> v3.18
 	struct tracectx *t = amba_get_drvdata(dev);
 
 	iounmap(t->etm_regs);
 	t->etm_regs = NULL;
 
 	amba_release_regions(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sysfs_remove_file(&dev->dev.kobj, &trace_running_attr.attr);
 	sysfs_remove_file(&dev->dev.kobj, &trace_info_attr.attr);
 	sysfs_remove_file(&dev->dev.kobj, &trace_mode_attr.attr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sysfs_remove_file(&dev->dev.kobj, &trace_range_attr.attr);
 	sysfs_remove_file(&dev->dev.kobj, &trace_data_range_attr.attr);
@@ -1329,6 +1484,8 @@ static int etm_remove(struct amba_device *dev)
 	amba_release_regions(dev);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1339,10 +1496,13 @@ static struct amba_id etm_ids[] = {
 		.mask	= 0x0007ffff,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		.id	= 0x0003b950,
 		.mask	= 0x0007ffff,
 	},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ 0, 0 },
@@ -1363,8 +1523,11 @@ static int __init etm_init(void)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&tracer.mutex);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	retval = amba_driver_register(&etb_driver);

@@ -302,8 +302,11 @@ isdn_ppp_open(int min, struct file *file)
 
 	is->reset = isdn_ppp_ccp_reset_alloc(is);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!is->reset)
 		return -ENOMEM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -326,10 +329,13 @@ isdn_ppp_open(int min, struct file *file)
 	 */
 	is->slcomp = slhc_init(16, 16);	/* not necessary for 2. link in bundle */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(is->slcomp)) {
 		isdn_ppp_ccp_reset_free(is);
 		return PTR_ERR(is->slcomp);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -391,11 +397,14 @@ isdn_ppp_release(int min, struct file *file)
 #endif
 #ifdef CONFIG_IPPP_FILTER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(is->pass_filter);
 	is->pass_filter = NULL;
 	kfree(is->active_filter);
 	is->active_filter = NULL;
 =======
+=======
+>>>>>>> v3.18
 	if (is->pass_filter) {
 		bpf_prog_destroy(is->pass_filter);
 		is->pass_filter = NULL;
@@ -405,6 +414,9 @@ isdn_ppp_release(int min, struct file *file)
 		bpf_prog_destroy(is->active_filter);
 		is->active_filter = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -462,7 +474,11 @@ static int get_filter(void __user *arg, struct sock_filter **p)
 	struct sock_fprog uprog;
 	struct sock_filter *code = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int len, err;
+=======
+	int len;
+>>>>>>> v3.18
 =======
 	int len;
 >>>>>>> v3.18
@@ -482,12 +498,15 @@ static int get_filter(void __user *arg, struct sock_filter **p)
 		return PTR_ERR(code);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = sk_chk_filter(code, uprog.len);
 	if (err) {
 		kfree(code);
 		return err;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*p = code;
@@ -600,13 +619,19 @@ isdn_ppp_ioctl(int min, struct file *file, unsigned int cmd, unsigned long arg)
 #ifdef CONFIG_ISDN_PPP_VJ
 			sltmp = slhc_init(16, val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (IS_ERR(sltmp))
 				return PTR_ERR(sltmp);
 =======
+=======
+>>>>>>> v3.18
 			if (!sltmp) {
 				printk(KERN_ERR "ippp, can't realloc slhc struct\n");
 				return -ENOMEM;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (is->slcomp)
 				slhc_free(is->slcomp);
@@ -666,6 +691,7 @@ isdn_ppp_ioctl(int min, struct file *file, unsigned int cmd, unsigned long arg)
 	case PPPIOCSPASS:
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sock_filter *code;
 		int len = get_filter(argp, &code);
 		if (len < 0)
@@ -686,6 +712,8 @@ isdn_ppp_ioctl(int min, struct file *file, unsigned int cmd, unsigned long arg)
 		is->active_len = len;
 		break;
 =======
+=======
+>>>>>>> v3.18
 		struct sock_fprog_kern fprog;
 		struct sock_filter *code;
 		int err, len = get_filter(argp, &code);
@@ -731,6 +759,9 @@ isdn_ppp_ioctl(int min, struct file *file, unsigned int cmd, unsigned long arg)
 		kfree(code);
 
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 #endif /* CONFIG_IPPP_FILTER */
@@ -1232,7 +1263,11 @@ isdn_ppp_push_higher(isdn_net_dev *net_dev, isdn_net_local *lp, struct sk_buff *
 
 	if (is->pass_filter
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    && sk_run_filter(skb, is->pass_filter) == 0) {
+=======
+	    && BPF_PROG_RUN(is->pass_filter, skb) == 0) {
+>>>>>>> v3.18
 =======
 	    && BPF_PROG_RUN(is->pass_filter, skb) == 0) {
 >>>>>>> v3.18
@@ -1243,7 +1278,11 @@ isdn_ppp_push_higher(isdn_net_dev *net_dev, isdn_net_local *lp, struct sk_buff *
 	}
 	if (!(is->active_filter
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      && sk_run_filter(skb, is->active_filter) == 0)) {
+=======
+	      && BPF_PROG_RUN(is->active_filter, skb) == 0)) {
+>>>>>>> v3.18
 =======
 	      && BPF_PROG_RUN(is->active_filter, skb) == 0)) {
 >>>>>>> v3.18
@@ -1386,7 +1425,11 @@ isdn_ppp_xmit(struct sk_buff *skb, struct net_device *netdev)
 
 	if (ipt->pass_filter
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    && sk_run_filter(skb, ipt->pass_filter) == 0) {
+=======
+	    && BPF_PROG_RUN(ipt->pass_filter, skb) == 0) {
+>>>>>>> v3.18
 =======
 	    && BPF_PROG_RUN(ipt->pass_filter, skb) == 0) {
 >>>>>>> v3.18
@@ -1397,7 +1440,11 @@ isdn_ppp_xmit(struct sk_buff *skb, struct net_device *netdev)
 	}
 	if (!(ipt->active_filter
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      && sk_run_filter(skb, ipt->active_filter) == 0)) {
+=======
+	      && BPF_PROG_RUN(ipt->active_filter, skb) == 0)) {
+>>>>>>> v3.18
 =======
 	      && BPF_PROG_RUN(ipt->active_filter, skb) == 0)) {
 >>>>>>> v3.18
@@ -1591,9 +1638,15 @@ int isdn_ppp_autodial_filter(struct sk_buff *skb, isdn_net_local *lp)
 
 	drop |= is->pass_filter
 <<<<<<< HEAD
+<<<<<<< HEAD
 		&& sk_run_filter(skb, is->pass_filter) == 0;
 	drop |= is->active_filter
 		&& sk_run_filter(skb, is->active_filter) == 0;
+=======
+		&& BPF_PROG_RUN(is->pass_filter, skb) == 0;
+	drop |= is->active_filter
+		&& BPF_PROG_RUN(is->active_filter, skb) == 0;
+>>>>>>> v3.18
 =======
 		&& BPF_PROG_RUN(is->pass_filter, skb) == 0;
 	drop |= is->active_filter

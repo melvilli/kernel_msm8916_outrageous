@@ -33,7 +33,10 @@
 #elif defined(CONFIG_CPU_SUBTYPE_SH7757) || \
 	defined(CONFIG_CPU_SUBTYPE_SH7763) || \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	defined(CONFIG_CPU_SUBTYPE_SH7764) || \
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	defined(CONFIG_CPU_SUBTYPE_SH7780) || \

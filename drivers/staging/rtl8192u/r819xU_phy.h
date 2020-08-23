@@ -2,7 +2,11 @@
 #define _R819XU_PHY_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Channel switch:The size of command tables for switch channel*/
+=======
+/* Channel switch: The size of command tables for switch channel */
+>>>>>>> v3.18
 =======
 /* Channel switch: The size of command tables for switch channel */
 >>>>>>> v3.18
@@ -11,7 +15,11 @@
 #define MAX_POSTCMD_CNT 16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef enum _SwChnlCmdID{
+=======
+typedef enum _SwChnlCmdID {
+>>>>>>> v3.18
 =======
 typedef enum _SwChnlCmdID {
 >>>>>>> v3.18
@@ -22,6 +30,7 @@ typedef enum _SwChnlCmdID {
 	CmdID_WritePortUshort,
 	CmdID_WritePortUchar,
 	CmdID_RF_WriteReg,
+<<<<<<< HEAD
 <<<<<<< HEAD
 }SwChnlCmdID;
 
@@ -34,6 +43,8 @@ typedef struct _SwChnlCmd{
 	u32			msDelay;
 }__attribute__ ((packed)) SwChnlCmd;
 =======
+=======
+>>>>>>> v3.18
 } SwChnlCmdID;
 
 /* -----------------------Define structure---------------------- */
@@ -44,6 +55,9 @@ typedef struct _SwChnlCmd {
 	u32		Para2;
 	u32		msDelay;
 } __packed SwChnlCmd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern u32 rtl819XMACPHY_Array_PG[];
@@ -55,7 +69,11 @@ extern u32 rtl819XRadioC_Array[];
 extern u32 rtl819XRadioD_Array[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef enum _HW90_BLOCK{
+=======
+typedef enum _HW90_BLOCK {
+>>>>>>> v3.18
 =======
 typedef enum _HW90_BLOCK {
 >>>>>>> v3.18
@@ -63,6 +81,7 @@ typedef enum _HW90_BLOCK {
 	HW90_BLOCK_PHY0 = 1,
 	HW90_BLOCK_PHY1 = 2,
 	HW90_BLOCK_RF = 3,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	HW90_BLOCK_MAXIMUM = 4, // Never use this
 }HW90_BLOCK_E, *PHW90_BLOCK_E;
@@ -75,6 +94,8 @@ typedef enum _RF90_RADIO_PATH{
 	RF90_PATH_MAX				//Max RF number 92 support
 }RF90_RADIO_PATH_E, *PRF90_RADIO_PATH_E;
 =======
+=======
+>>>>>>> v3.18
 	HW90_BLOCK_MAXIMUM = 4, /* Never use this */
 } HW90_BLOCK_E, *PHW90_BLOCK_E;
 
@@ -85,6 +106,9 @@ typedef enum _RF90_RADIO_PATH {
 	RF90_PATH_D = 3,			/* Radio Path D */
 	RF90_PATH_MAX				/* Max RF number 92 support */
 } RF90_RADIO_PATH_E, *PRF90_RADIO_PATH_E;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define bMaskByte0                0xff
@@ -95,6 +119,7 @@ typedef enum _RF90_RADIO_PATH {
 #define bMaskLWord                0x0000ffff
 #define bMaskDWord                0xffffffff
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //extern u32 rtl8192_CalculateBitShift(u32 dwBitMask);
 extern u8 rtl8192_phy_CheckIsLegalRFPath(struct net_device* dev, u32 eRFPath);
@@ -124,6 +149,8 @@ extern bool rtl8192_SetRFPowerState(struct net_device *dev, RT_RF_POWER_STATE eR
 //added by amy
 extern void InitialGain819xUsb(struct net_device *dev,	u8 Operation);
 =======
+=======
+>>>>>>> v3.18
 extern u8 rtl8192_phy_CheckIsLegalRFPath(struct net_device *dev, u32 eRFPath);
 extern void rtl8192_setBBreg(struct net_device *dev, u32 reg_addr,
 	u32 bitmask, u32 data);
@@ -153,6 +180,9 @@ void rtl8192_SetBWModeWorkItem(struct net_device *dev);
 extern bool rtl8192_SetRFPowerState(struct net_device *dev,
 	RT_RF_POWER_STATE eRFPowerState);
 extern void InitialGain819xUsb(struct net_device *dev, u8 Operation);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern void InitialGainOperateWorkItemCallBack(struct work_struct *work);

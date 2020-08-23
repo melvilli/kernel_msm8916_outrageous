@@ -118,7 +118,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_CPU_V7M)
 # ifdef _CACHE
 #  define MULTI_CACHE 1
@@ -127,13 +130,19 @@
 # endif
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if !defined(_CACHE) && !defined(MULTI_CACHE)
 #error Unknown cache maintenance model
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef __ASSEMBLER__
 static inline void nop_flush_icache_all(void) { }
 static inline void nop_flush_kern_cache_all(void) { }
@@ -153,6 +162,9 @@ static inline void nop_dma_map_area(const void *s, size_t l, int f) { }
 static inline void nop_dma_unmap_area(const void *s, size_t l, int f) { }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef MULTI_CACHE
 #define __cpuc_flush_icache_all		__glue(_CACHE,_flush_icache_all)
@@ -168,8 +180,11 @@ static inline void nop_dma_unmap_area(const void *s, size_t l, int f) { }
 #define dmac_unmap_area			__glue(_CACHE,_dma_unmap_area)
 #define dmac_flush_range		__glue(_CACHE,_dma_flush_range)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dmac_inv_range			__glue(_CACHE,_dma_inv_range)
 #define dmac_clean_range		__glue(_CACHE,_dma_clean_range)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

@@ -50,8 +50,13 @@ struct iw_cm_event {
 	enum iw_cm_event_type event;
 	int			 status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_in local_addr;
 	struct sockaddr_in remote_addr;
+=======
+	struct sockaddr_storage local_addr;
+	struct sockaddr_storage remote_addr;
+>>>>>>> v3.18
 =======
 	struct sockaddr_storage local_addr;
 	struct sockaddr_storage remote_addr;
@@ -89,8 +94,13 @@ struct iw_cm_id {
 	void		        *context;	 /* client cb context */
 	struct ib_device	*device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_in      local_addr;
 	struct sockaddr_in	remote_addr;
+=======
+	struct sockaddr_storage local_addr;
+	struct sockaddr_storage	remote_addr;
+>>>>>>> v3.18
 =======
 	struct sockaddr_storage local_addr;
 	struct sockaddr_storage	remote_addr;

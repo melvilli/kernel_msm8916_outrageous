@@ -13,7 +13,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/errno.h>
@@ -239,7 +242,12 @@ static int mpc52xx_spi_fsmstate_transfer(int irq, struct mpc52xx_spi *ms,
 		mpc52xx_spi_chipsel(ms, 0);
 		ms->message->status = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ms->message->complete(ms->message->context);
+=======
+		if (ms->message->complete)
+			ms->message->complete(ms->message->context);
+>>>>>>> v3.18
 =======
 		if (ms->message->complete)
 			ms->message->complete(ms->message->context);
@@ -298,7 +306,12 @@ mpc52xx_spi_fsmstate_wait(int irq, struct mpc52xx_spi *ms, u8 status, u8 data)
 		mpc52xx_spi_chipsel(ms, 0);
 		ms->message->status = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ms->message->complete(ms->message->context);
+=======
+		if (ms->message->complete)
+			ms->message->complete(ms->message->context);
+>>>>>>> v3.18
 =======
 		if (ms->message->complete)
 			ms->message->complete(ms->message->context);
@@ -371,6 +384,7 @@ static void mpc52xx_spi_wq(struct work_struct *work)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mpc52xx_spi_setup(struct spi_device *spi)
 {
 	if (spi->bits_per_word % 8)
@@ -385,6 +399,8 @@ static int mpc52xx_spi_setup(struct spi_device *spi)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int mpc52xx_spi_transfer(struct spi_device *spi, struct spi_message *m)
@@ -450,6 +466,7 @@ static int mpc52xx_spi_probe(struct platform_device *op)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->setup = mpc52xx_spi_setup;
 	master->transfer = mpc52xx_spi_transfer;
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_LSB_FIRST;
@@ -457,12 +474,17 @@ static int mpc52xx_spi_probe(struct platform_device *op)
 
 	dev_set_drvdata(&op->dev, master);
 =======
+=======
+>>>>>>> v3.18
 	master->transfer = mpc52xx_spi_transfer;
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_LSB_FIRST;
 	master->bits_per_word_mask = SPI_BPW_MASK(8);
 	master->dev.of_node = op->dev.of_node;
 
 	platform_set_drvdata(op, master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ms = spi_master_get_devdata(master);
@@ -555,7 +577,11 @@ static int mpc52xx_spi_probe(struct platform_device *op)
 static int mpc52xx_spi_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_master *master = spi_master_get(dev_get_drvdata(&op->dev));
+=======
+	struct spi_master *master = spi_master_get(platform_get_drvdata(op));
+>>>>>>> v3.18
 =======
 	struct spi_master *master = spi_master_get(platform_get_drvdata(op));
 >>>>>>> v3.18

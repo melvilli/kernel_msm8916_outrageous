@@ -49,14 +49,20 @@ extern int ixp4xx_pci_write(u32 addr, u32 cmd, u32 data);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int is_pci_memory(u32 addr)
 {
 	return (addr >= PCIBIOS_MIN_MEM) && (addr <= 0x4FFFFFFF);
 =======
+=======
+>>>>>>> v3.18
 extern unsigned long pcibios_min_mem;
 static inline int is_pci_memory(u32 addr)
 {
 	return (addr >= pcibios_min_mem) && (addr <= 0x4FFFFFFF);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -83,7 +89,11 @@ static inline void __indirect_writeb(u8 value, volatile void __iomem *p)
 
 	if (!is_pci_memory(addr)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__raw_writeb(value, addr);
+=======
+		__raw_writeb(value, p);
+>>>>>>> v3.18
 =======
 		__raw_writeb(value, p);
 >>>>>>> v3.18
@@ -152,7 +162,11 @@ static inline unsigned char __indirect_readb(const volatile void __iomem *p)
 
 	if (!is_pci_memory(addr))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return __raw_readb(addr);
+=======
+		return __raw_readb(p);
+>>>>>>> v3.18
 =======
 		return __raw_readb(p);
 >>>>>>> v3.18

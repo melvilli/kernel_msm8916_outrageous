@@ -16,6 +16,10 @@
 #include "boot.h"
 #include <linux/edd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "string.h"
+>>>>>>> v3.18
 =======
 #include "string.h"
 >>>>>>> v3.18

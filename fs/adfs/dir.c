@@ -18,9 +18,15 @@ static DEFINE_RWLOCK(adfs_dir_lock);
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 adfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode *inode = file_inode(filp);
+=======
+adfs_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 =======
 adfs_readdir(struct file *file, struct dir_context *ctx)
 {
@@ -32,6 +38,7 @@ adfs_readdir(struct file *file, struct dir_context *ctx)
 	struct adfs_dir dir;
 	int ret = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (filp->f_pos >> 32)
 		goto out;
@@ -54,6 +61,8 @@ adfs_readdir(struct file *file, struct dir_context *ctx)
 	default:
 		break;
 =======
+=======
+>>>>>>> v3.18
 	if (ctx->pos >> 32)
 		return 0;
 
@@ -70,11 +79,15 @@ adfs_readdir(struct file *file, struct dir_context *ctx)
 		if (!dir_emit(ctx, "..", 2, dir.parent_id, DT_DIR))
 			goto free_out;
 		ctx->pos = 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	read_lock(&adfs_dir_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = ops->setpos(&dir, filp->f_pos - 2);
 	if (ret)
@@ -85,6 +98,8 @@ adfs_readdir(struct file *file, struct dir_context *ctx)
 			goto unlock_out;
 		filp->f_pos += 1;
 =======
+=======
+>>>>>>> v3.18
 	ret = ops->setpos(&dir, ctx->pos - 2);
 	if (ret)
 		goto unlock_out;
@@ -93,6 +108,9 @@ adfs_readdir(struct file *file, struct dir_context *ctx)
 			    obj.file_id, DT_UNKNOWN))
 			break;
 		ctx->pos++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -102,8 +120,11 @@ unlock_out:
 free_out:
 	ops->free(&dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -184,7 +205,11 @@ adfs_dir_lookup_byname(struct inode *inode, struct qstr *name, struct object_inf
 
 	if (ADFS_I(inode)->parent_id != dir.parent_id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		adfs_error(sb, "parent directory changed under me! (%lx but got %lx)\n",
+=======
+		adfs_error(sb, "parent directory changed under me! (%lx but got %x)\n",
+>>>>>>> v3.18
 =======
 		adfs_error(sb, "parent directory changed under me! (%lx but got %x)\n",
 >>>>>>> v3.18
@@ -236,7 +261,11 @@ const struct file_operations adfs_dir_operations = {
 	.read		= generic_read_dir,
 	.llseek		= generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= adfs_readdir,
+=======
+	.iterate	= adfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= adfs_readdir,
 >>>>>>> v3.18
@@ -245,8 +274,12 @@ const struct file_operations adfs_dir_operations = {
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 adfs_hash(const struct dentry *parent, const struct inode *inode,
 		struct qstr *qstr)
+=======
+adfs_hash(const struct dentry *parent, struct qstr *qstr)
+>>>>>>> v3.18
 =======
 adfs_hash(const struct dentry *parent, struct qstr *qstr)
 >>>>>>> v3.18
@@ -286,8 +319,12 @@ adfs_hash(const struct dentry *parent, struct qstr *qstr)
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 adfs_compare(const struct dentry *parent, const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
+=======
+adfs_compare(const struct dentry *parent, const struct dentry *dentry,
+>>>>>>> v3.18
 =======
 adfs_compare(const struct dentry *parent, const struct dentry *dentry,
 >>>>>>> v3.18

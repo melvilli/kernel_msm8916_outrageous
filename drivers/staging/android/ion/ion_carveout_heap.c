@@ -1,9 +1,15 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * drivers/gpu/ion/ion_carveout_heap.c
  *
  * Copyright (C) 2011 Google, Inc.
  * Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+=======
+ * drivers/staging/android/ion/ion_carveout_heap.c
+ *
+ * Copyright (C) 2011 Google, Inc.
+>>>>>>> v3.18
 =======
  * drivers/staging/android/ion/ion_carveout_heap.c
  *
@@ -22,7 +28,11 @@
  */
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <linux/dma-mapping.h>
+>>>>>>> v3.18
 =======
 #include <linux/dma-mapping.h>
 >>>>>>> v3.18
@@ -33,6 +43,7 @@
 #include <linux/scatterlist.h>
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/seq_file.h>
 #include "ion.h"
@@ -47,13 +58,21 @@
 #include "ion_priv.h"
 
 >>>>>>> v3.18
+=======
+#include "ion.h"
+#include "ion_priv.h"
+
+>>>>>>> v3.18
 struct ion_carveout_heap {
 	struct ion_heap heap;
 	struct gen_pool *pool;
 	ion_phys_addr_t base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long allocated_bytes;
 	unsigned long total_size;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -64,6 +83,7 @@ ion_phys_addr_t ion_carveout_allocate(struct ion_heap *heap,
 {
 	struct ion_carveout_heap *carveout_heap =
 		container_of(heap, struct ion_carveout_heap, heap);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long offset = gen_pool_alloc_aligned(carveout_heap->pool,
 							size, ilog2(align));
@@ -82,11 +102,16 @@ ion_phys_addr_t ion_carveout_allocate(struct ion_heap *heap,
 
 	carveout_heap->allocated_bytes += size;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long offset = gen_pool_alloc(carveout_heap->pool, size);
 
 	if (!offset)
 		return ION_CARVEOUT_ALLOCATE_FAIL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return offset;
 }
@@ -101,7 +126,10 @@ void ion_carveout_free(struct ion_heap *heap, ion_phys_addr_t addr,
 		return;
 	gen_pool_free(carveout_heap->pool, addr, size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	carveout_heap->allocated_bytes -= size;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -111,13 +139,19 @@ static int ion_carveout_heap_phys(struct ion_heap *heap,
 				  ion_phys_addr_t *addr, size_t *len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*addr = buffer->priv_phys;
 =======
+=======
+>>>>>>> v3.18
 	struct sg_table *table = buffer->priv_virt;
 	struct page *page = sg_page(table->sgl);
 	ion_phys_addr_t paddr = PFN_PHYS(page_to_pfn(page));
 
 	*addr = paddr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*len = buffer->size;
 	return 0;
@@ -128,6 +162,7 @@ static int ion_carveout_heap_allocate(struct ion_heap *heap,
 				      unsigned long size, unsigned long align,
 				      unsigned long flags)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	buffer->priv_phys = ion_carveout_allocate(heap, size, align);
 	return buffer->priv_phys == ION_CARVEOUT_ALLOCATE_FAIL ? -ENOMEM : 0;
@@ -257,6 +292,8 @@ static int ion_carveout_print_debug(struct ion_heap *heap, struct seq_file *s,
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct sg_table *table;
 	ion_phys_addr_t paddr;
 	int ret;
@@ -316,6 +353,9 @@ static struct sg_table *ion_carveout_heap_map_dma(struct ion_heap *heap,
 static void ion_carveout_heap_unmap_dma(struct ion_heap *heap,
 					struct ion_buffer *buffer)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -324,6 +364,7 @@ static struct ion_heap_ops carveout_heap_ops = {
 	.free = ion_carveout_heap_free,
 	.phys = ion_carveout_heap_phys,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.map_user = ion_carveout_heap_map_user,
 	.map_kernel = ion_carveout_heap_map_kernel,
 	.unmap_kernel = ion_carveout_heap_unmap_kernel,
@@ -331,11 +372,16 @@ static struct ion_heap_ops carveout_heap_ops = {
 	.unmap_dma = ion_carveout_heap_unmap_dma,
 	.print_debug = ion_carveout_print_debug,
 =======
+=======
+>>>>>>> v3.18
 	.map_dma = ion_carveout_heap_map_dma,
 	.unmap_dma = ion_carveout_heap_unmap_dma,
 	.map_user = ion_heap_map_user,
 	.map_kernel = ion_heap_map_kernel,
 	.unmap_kernel = ion_heap_unmap_kernel,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -345,7 +391,10 @@ struct ion_heap *ion_carveout_heap_create(struct ion_platform_heap *heap_data)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct page *page;
 	size_t size;
 
@@ -358,6 +407,9 @@ struct ion_heap *ion_carveout_heap_create(struct ion_platform_heap *heap_data)
 	if (ret)
 		return ERR_PTR(ret);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	carveout_heap = kzalloc(sizeof(struct ion_carveout_heap), GFP_KERNEL);
 	if (!carveout_heap)
@@ -369,6 +421,7 @@ struct ion_heap *ion_carveout_heap_create(struct ion_platform_heap *heap_data)
 		return ERR_PTR(-ENOMEM);
 	}
 	carveout_heap->base = heap_data->base;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = gen_pool_add(carveout_heap->pool, carveout_heap->base,
 			heap_data->size, -1);
@@ -382,11 +435,16 @@ struct ion_heap *ion_carveout_heap_create(struct ion_platform_heap *heap_data)
 	carveout_heap->allocated_bytes = 0;
 	carveout_heap->total_size = heap_data->size;
 =======
+=======
+>>>>>>> v3.18
 	gen_pool_add(carveout_heap->pool, carveout_heap->base, heap_data->size,
 		     -1);
 	carveout_heap->heap.ops = &carveout_heap_ops;
 	carveout_heap->heap.type = ION_HEAP_TYPE_CARVEOUT;
 	carveout_heap->heap.flags = ION_HEAP_FLAG_DEFER_FREE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return &carveout_heap->heap;

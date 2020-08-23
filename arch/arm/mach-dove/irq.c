@@ -109,7 +109,10 @@ static int __initdata gpio2_irqs[4] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MULTI_IRQ_HANDLER
 /*
  * Compiling with both non-DT and DT support enabled, will
@@ -142,6 +145,9 @@ __exception_irq_entry dove_legacy_handle_irq(struct pt_regs *regs)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init dove_init_irq(void)
 {
@@ -151,11 +157,17 @@ void __init dove_init_irq(void)
 	orion_irq_init(32, IRQ_VIRT_BASE + IRQ_MASK_HIGH_OFF);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MULTI_IRQ_HANDLER
 	set_handle_irq(dove_legacy_handle_irq);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Initialize gpiolib for GPIOs 0-71.

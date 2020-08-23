@@ -15,6 +15,11 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+#include <linux/in6.h>
+>>>>>>> v3.18
 =======
 #include <linux/if_ether.h>
 #include <linux/in6.h>
@@ -94,7 +99,11 @@ struct __port_info {
 
 struct __fdb_entry {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 mac_addr[6];
+=======
+	__u8 mac_addr[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	__u8 mac_addr[ETH_ALEN];
 >>>>>>> v3.18

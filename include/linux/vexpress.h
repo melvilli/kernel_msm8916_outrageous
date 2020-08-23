@@ -16,7 +16,13 @@
 
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/reboot.h>
+=======
+#include <linux/platform_device.h>
+#include <linux/reboot.h>
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_device.h>
 #include <linux/reboot.h>
@@ -28,6 +34,7 @@
 #define VEXPRESS_SITE_DB2		2
 #define VEXPRESS_SITE_MASTER		0xf
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define VEXPRESS_CONFIG_STATUS_DONE	0
 #define VEXPRESS_CONFIG_STATUS_WAIT	1
@@ -46,6 +53,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define VEXPRESS_RES_FUNC(_site, _func)	\
 {					\
 	.start = (_site),		\
@@ -53,6 +62,7 @@
 	.flags = IORESOURCE_BUS,	\
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Config bridge API */
 
@@ -134,6 +144,8 @@ void vexpress_osc_of_setup(struct device_node *node);
 void vexpress_clk_init(void __iomem *sp810_base);
 void vexpress_clk_of_init(void);
 =======
+=======
+>>>>>>> v3.18
 /* Config infrastructure */
 
 void vexpress_config_set_master(u32 site);
@@ -172,6 +184,9 @@ int vexpress_syscfg_device_register(struct platform_device *pdev);
 /* Clocks */
 
 void vexpress_clk_init(void __iomem *sp810_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

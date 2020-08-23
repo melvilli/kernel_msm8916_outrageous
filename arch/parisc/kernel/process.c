@@ -14,7 +14,11 @@
  *    Copyright (C) 2001 Alan Modra <amodra at parisc-linux.org>
  *    Copyright (C) 2001-2002 Ryan Bradetich <rbrad at parisc-linux.org>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    Copyright (C) 2001-2007 Helge Deller <deller at parisc-linux.org>
+=======
+ *    Copyright (C) 2001-2014 Helge Deller <deller@gmx.de>
+>>>>>>> v3.18
 =======
  *    Copyright (C) 2001-2014 Helge Deller <deller@gmx.de>
 >>>>>>> v3.18
@@ -54,6 +58,10 @@
 #include <linux/uaccess.h>
 #include <linux/rcupdate.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/random.h>
+>>>>>>> v3.18
 =======
 #include <linux/random.h>
 >>>>>>> v3.18
@@ -295,7 +303,10 @@ void *dereference_function_descriptor(void *ptr)
 }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline unsigned long brk_rnd(void)
 {
@@ -314,4 +325,7 @@ unsigned long arch_randomize_brk(struct mm_struct *mm)
 		return mm->brk;
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

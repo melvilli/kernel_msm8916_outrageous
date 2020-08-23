@@ -179,15 +179,21 @@ static int wm8960_get_deemph(struct snd_kcontrol *kcontrol,
 			     struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct wm8960_priv *wm8960 = snd_soc_codec_get_drvdata(codec);
 
 	ucontrol->value.integer.value[0] = wm8960->deemph;
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 	struct wm8960_priv *wm8960 = snd_soc_codec_get_drvdata(codec);
 
 	ucontrol->value.enumerated.item[0] = wm8960->deemph;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -196,9 +202,15 @@ static int wm8960_put_deemph(struct snd_kcontrol *kcontrol,
 			     struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct wm8960_priv *wm8960 = snd_soc_codec_get_drvdata(codec);
 	int deemph = ucontrol->value.integer.value[0];
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+	struct wm8960_priv *wm8960 = snd_soc_codec_get_drvdata(codec);
+	int deemph = ucontrol->value.enumerated.item[0];
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 	struct wm8960_priv *wm8960 = snd_soc_codec_get_drvdata(codec);
@@ -256,7 +268,11 @@ SOC_ENUM("ADC Polarity", wm8960_enum[0]),
 SOC_SINGLE("ADC High Pass Filter Switch", WM8960_DACCTL1, 0, 1, 0),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SOC_ENUM("DAC Polarity", wm8960_enum[1]),
+=======
+SOC_ENUM("DAC Polarity", wm8960_enum[2]),
+>>>>>>> v3.18
 =======
 SOC_ENUM("DAC Polarity", wm8960_enum[2]),
 >>>>>>> v3.18
@@ -281,8 +297,13 @@ SOC_SINGLE("Noise Gate Threshold", WM8960_NOISEG, 3, 31, 0),
 SOC_SINGLE("Noise Gate Switch", WM8960_NOISEG, 0, 1, 0),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SOC_DOUBLE_R("ADC PCM Capture Volume", WM8960_LINPATH, WM8960_RINPATH,
 	0, 127, 0),
+=======
+SOC_DOUBLE_R_TLV("ADC PCM Capture Volume", WM8960_LADC, WM8960_RADC,
+	0, 255, 0, adc_tlv),
+>>>>>>> v3.18
 =======
 SOC_DOUBLE_R_TLV("ADC PCM Capture Volume", WM8960_LADC, WM8960_RADC,
 	0, 255, 0, adc_tlv),
@@ -415,7 +436,11 @@ static const struct snd_soc_dapm_route audio_paths[] = {
 	{ "Right Input Mixer", NULL, "RINPUT1", },  /* Really Boost Switch */
 	{ "Right Input Mixer", NULL, "RINPUT2" },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "Right Input Mixer", NULL, "RINPUT3" },
+=======
+	{ "Right Input Mixer", NULL, "LINPUT3" },
+>>>>>>> v3.18
 =======
 	{ "Right Input Mixer", NULL, "LINPUT3" },
 >>>>>>> v3.18
@@ -499,7 +524,11 @@ static int wm8960_add_widgets(struct snd_soc_codec *codec)
 	 * and save the result.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(w, &codec->card->widgets, list) {
+=======
+	list_for_each_entry(w, &codec->component.card->widgets, list) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(w, &codec->component.card->widgets, list) {
 >>>>>>> v3.18
@@ -586,7 +615,11 @@ static struct {
 	{ 24000, 2 },
 	{ 16000, 3 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 11025, 4 },
+=======
+	{ 11250, 4 },
+>>>>>>> v3.18
 =======
 	{ 11250, 4 },
 >>>>>>> v3.18
@@ -601,6 +634,7 @@ static int wm8960_hw_params(struct snd_pcm_substream *substream,
 	struct snd_soc_codec *codec = dai->codec;
 	struct wm8960_priv *wm8960 = snd_soc_codec_get_drvdata(codec);
 	u16 iface = snd_soc_read(codec, WM8960_IFACE1) & 0xfff3;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	snd_pcm_format_t format = params_format(params);
 	int i;
@@ -621,6 +655,8 @@ static int wm8960_hw_params(struct snd_pcm_substream *substream,
 	default:
 		dev_err(codec->dev, "unsupported format %i\n", format);
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	/* bit size */
@@ -636,6 +672,9 @@ static int wm8960_hw_params(struct snd_pcm_substream *substream,
 	default:
 		dev_err(codec->dev, "unsupported width %d\n",
 			params_width(params));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -1029,12 +1068,15 @@ static int wm8960_probe(struct snd_soc_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_codec_set_cache_io(codec, 7, 9, SND_SOC_REGMAP);
 	if (ret < 0) {
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = wm8960_reset(codec);

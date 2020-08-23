@@ -11,7 +11,10 @@
 #include <linux/of_mdio.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/phy.h>
@@ -110,7 +113,11 @@ err:
 static int mdio_mux_gpio_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mdio_mux_gpio_state *s = pdev->dev.platform_data;
+=======
+	struct mdio_mux_gpio_state *s = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct mdio_mux_gpio_state *s = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

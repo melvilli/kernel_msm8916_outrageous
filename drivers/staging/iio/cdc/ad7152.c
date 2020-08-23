@@ -79,7 +79,11 @@ enum {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct ad7152_chip_info - chip specifc information
+=======
+ * struct ad7152_chip_info - chip specific information
+>>>>>>> v3.18
 =======
  * struct ad7152_chip_info - chip specific information
 >>>>>>> v3.18
@@ -486,11 +490,17 @@ static int ad7152_probe(struct i2c_client *client,
 	struct iio_dev *indio_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*chip));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*chip));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*chip));
 	if (!indio_dev)
@@ -517,7 +527,11 @@ static int ad7152_probe(struct i2c_client *client,
 	ret = iio_device_register(indio_dev);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -526,11 +540,14 @@ static int ad7152_probe(struct i2c_client *client,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 error_free_dev:
 	iio_device_free(indio_dev);
 error_ret:
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -541,7 +558,10 @@ static int ad7152_remove(struct i2c_client *client)
 
 	iio_device_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

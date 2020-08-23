@@ -1253,7 +1253,11 @@ static int wd7000_init(Adapter * host)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(host->irq, wd7000_intr, IRQF_DISABLED, "wd7000", host)) {
+=======
+	if (request_irq(host->irq, wd7000_intr, 0, "wd7000", host)) {
+>>>>>>> v3.18
 =======
 	if (request_irq(host->irq, wd7000_intr, 0, "wd7000", host)) {
 >>>>>>> v3.18

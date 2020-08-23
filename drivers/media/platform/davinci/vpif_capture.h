@@ -20,6 +20,7 @@
 #define VPIF_CAPTURE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
 /* Header files */
@@ -28,6 +29,11 @@
 #include <media/v4l2-device.h>
 #include <media/videobuf2-dma-contig.h>
 #include <media/davinci/vpif_types.h>
+=======
+/* Header files */
+#include <media/videobuf2-dma-contig.h>
+#include <media/v4l2-device.h>
+>>>>>>> v3.18
 =======
 /* Header files */
 #include <media/videobuf2-dma-contig.h>
@@ -73,11 +79,14 @@ struct common_obj {
 	/* Pointer pointing to current v4l2_buffer */
 	struct vpif_cap_buffer *next_frm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * This field keeps track of type of buffer exchange mechanism
 	 * user has selected
 	 */
 	enum v4l2_memory memory;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Used to store pixel format */
@@ -93,10 +102,13 @@ struct common_obj {
 	/* lock used to access this structure */
 	struct mutex lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* number of users performing IO */
 	u32 io_usrs;
 	/* Indicates whether streaming started */
 	u8 started;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Function pointer to set the addresses */
@@ -120,10 +132,13 @@ struct channel_obj {
 	/* Identifies video device for this channel */
 	struct video_device *video_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Used to keep track of state of the priority */
 	struct v4l2_prio_state prio;
 	/* number of open instances of the channel */
 	int usrs;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Indicates id of the field which is being displayed */
@@ -145,6 +160,7 @@ struct channel_obj {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* File handle structure */
 struct vpif_fh {
 	/* pointer to channel object for opened device */
@@ -159,10 +175,13 @@ struct vpif_fh {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct vpif_device {
 	struct v4l2_device v4l2_dev;
 	struct channel_obj *dev[VPIF_CAPTURE_NUM_CHANNELS];
 	struct v4l2_subdev **sd;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -179,9 +198,14 @@ struct vpif_config_params {
 
 #endif				/* End of __KERNEL__ */
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_async_notifier notifier;
 	struct vpif_capture_config *config;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* VPIF_CAPTURE_H */

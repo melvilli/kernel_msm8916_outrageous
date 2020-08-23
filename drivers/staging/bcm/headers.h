@@ -1,7 +1,11 @@
 
 /*******************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
 * 		Headers.h
+=======
+*		Headers.h
+>>>>>>> v3.18
 =======
 *		Headers.h
 >>>>>>> v3.18
@@ -39,16 +43,22 @@
 #include <linux/udp.h>
 #include <linux/usb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
 #include <net/ip.h>
 
 #include "Typedefs.h"
 #include "Version.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/uaccess.h>
 #include <net/ip.h>
 
 #include "Typedefs.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "Macros.h"
 #include "HostMIBSInterface.h"
@@ -83,7 +93,11 @@
 #define DRV_DESCRIPTION "Beceem Communications Inc. WiMAX driver"
 #define DRV_COPYRIGHT	"Copyright 2010. Beceem Communications Inc"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_VERSION	VER_FILEVERSION_STR
+=======
+#define DRV_VERSION	"5.2.45"
+>>>>>>> v3.18
 =======
 #define DRV_VERSION	"5.2.45"
 >>>>>>> v3.18

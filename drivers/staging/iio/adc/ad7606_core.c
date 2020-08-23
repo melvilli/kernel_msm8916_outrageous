@@ -86,7 +86,10 @@ static int ad7606_read_raw(struct iio_dev *indio_dev,
 	int ret;
 	struct ad7606_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int scale_uv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -105,11 +108,17 @@ static int ad7606_read_raw(struct iio_dev *indio_dev,
 		return IIO_VAL_INT;
 	case IIO_CHAN_INFO_SCALE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scale_uv = (st->range * 1000 * 2)
 			>> st->chip_info->channels[0].scan_type.realbits;
 		*val =  scale_uv / 1000;
 		*val2 = (scale_uv % 1000) * 1000;
 		return IIO_VAL_INT_PLUS_MICRO;
+=======
+		*val = st->range * 2;
+		*val2 = st->chip_info->channels[0].scan_type.realbits;
+		return IIO_VAL_FRACTIONAL_LOG2;
+>>>>>>> v3.18
 =======
 		*val = st->range * 2;
 		*val2 = st->chip_info->channels[0].scan_type.realbits;
@@ -135,16 +144,22 @@ static ssize_t ad7606_store_range(struct device *dev,
 	struct ad7606_state *st = iio_priv(indio_dev);
 	unsigned long lval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtoul(buf, 10, &lval))
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 10, &lval);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(lval == 5000 || lval == 10000)) {
 		dev_err(dev, "range is not supported\n");
@@ -159,7 +174,11 @@ static ssize_t ad7606_store_range(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static IIO_DEVICE_ATTR(in_voltage_range, S_IRUGO | S_IWUSR, \
+=======
+static IIO_DEVICE_ATTR(in_voltage_range, S_IRUGO | S_IWUSR,
+>>>>>>> v3.18
 =======
 static IIO_DEVICE_ATTR(in_voltage_range, S_IRUGO | S_IWUSR,
 >>>>>>> v3.18
@@ -196,8 +215,14 @@ static ssize_t ad7606_store_oversampling_ratio(struct device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 10, &lval))
 		return -EINVAL;
+=======
+	ret = kstrtoul(buf, 10, &lval);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 10, &lval);
 	if (ret)
@@ -214,7 +239,11 @@ static ssize_t ad7606_store_oversampling_ratio(struct device *dev,
 	gpio_set_value(st->pdata->gpio_os0, (ret >> 0) & 1);
 	gpio_set_value(st->pdata->gpio_os1, (ret >> 1) & 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_set_value(st->pdata->gpio_os2, (ret >> 2) & 1);
+=======
+	gpio_set_value(st->pdata->gpio_os1, (ret >> 2) & 1);
+>>>>>>> v3.18
 =======
 	gpio_set_value(st->pdata->gpio_os1, (ret >> 2) & 1);
 >>>>>>> v3.18
@@ -271,14 +300,20 @@ static const struct attribute_group ad7606_attribute_group_range = {
 		.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE),\
 		.scan_index = num,				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.scan_type = IIO_ST('s', 16, 16, 0),		\
 =======
+=======
+>>>>>>> v3.18
 		.scan_type = {					\
 			.sign = 's',				\
 			.realbits = 16,				\
 			.storagebits = 16,			\
 			.endianness = IIO_CPU,			\
 		},						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -463,8 +498,12 @@ static irqreturn_t ad7606_interrupt(int irq, void *dev_id)
 
 	if (iio_buffer_enabled(indio_dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!work_pending(&st->poll_work))
 			schedule_work(&st->poll_work);
+=======
+		schedule_work(&st->poll_work);
+>>>>>>> v3.18
 =======
 		schedule_work(&st->poll_work);
 >>>>>>> v3.18
@@ -508,6 +547,7 @@ struct iio_dev *ad7606_probe(struct device *dev, int irq,
 	struct ad7606_state *st;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iio_dev *indio_dev = iio_device_alloc(sizeof(*st));
 
 	if (indio_dev == NULL) {
@@ -515,11 +555,16 @@ struct iio_dev *ad7606_probe(struct device *dev, int irq,
 		goto error_ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct iio_dev *indio_dev;
 
 	indio_dev = devm_iio_device_alloc(dev, sizeof(*st));
 	if (!indio_dev)
 		return ERR_PTR(-ENOMEM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	st = iio_priv(indio_dev);
@@ -539,17 +584,23 @@ struct iio_dev *ad7606_probe(struct device *dev, int irq,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st->reg = regulator_get(dev, "vcc");
 	if (!IS_ERR(st->reg)) {
 		ret = regulator_enable(st->reg);
 		if (ret)
 			goto error_put_reg;
 =======
+=======
+>>>>>>> v3.18
 	st->reg = devm_regulator_get(dev, "vcc");
 	if (!IS_ERR(st->reg)) {
 		ret = regulator_enable(st->reg);
 		if (ret)
 			return ERR_PTR(ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -612,11 +663,14 @@ error_disable_reg:
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_put_reg:
 	if (!IS_ERR(st->reg))
 		regulator_put(st->reg);
 	iio_device_free(indio_dev);
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ERR_PTR(ret);
@@ -631,6 +685,7 @@ int ad7606_remove(struct iio_dev *indio_dev, int irq)
 
 	free_irq(irq, indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR(st->reg)) {
 		regulator_disable(st->reg);
 		regulator_put(st->reg);
@@ -639,10 +694,15 @@ int ad7606_remove(struct iio_dev *indio_dev, int irq)
 	ad7606_free_gpios(st);
 	iio_device_free(indio_dev);
 =======
+=======
+>>>>>>> v3.18
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);
 
 	ad7606_free_gpios(st);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

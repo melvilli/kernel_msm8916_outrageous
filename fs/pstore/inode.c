@@ -250,6 +250,10 @@ static void parse_options(char *options)
 static int pstore_remount(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -280,8 +284,13 @@ int pstore_is_mounted(void)
  */
 int pstore_mkfile(enum pstore_type_id type, char *psname, u64 id, int count,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  char *data, size_t size, struct timespec time,
 		  struct pstore_info *psi)
+=======
+		  char *data, bool compressed, size_t size,
+		  struct timespec time, struct pstore_info *psi)
+>>>>>>> v3.18
 =======
 		  char *data, bool compressed, size_t size,
 		  struct timespec time, struct pstore_info *psi)
@@ -325,6 +334,7 @@ int pstore_mkfile(enum pstore_type_id type, char *psname, u64 id, int count,
 	switch (type) {
 	case PSTORE_TYPE_DMESG:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scnprintf(name, sizeof(name), "dmesg-%s-%lld",
 			  psname, id);
 		break;
@@ -347,6 +357,8 @@ int pstore_mkfile(enum pstore_type_id type, char *psname, u64 id, int count,
 		scnprintf(name, sizeof(name), "type%d-%s-%lld",
 			  type, psname, id);
 =======
+=======
+>>>>>>> v3.18
 		sprintf(name, "dmesg-%s-%lld%s", psname, id,
 						compressed ? ".enc.z" : "");
 		break;
@@ -373,6 +385,9 @@ int pstore_mkfile(enum pstore_type_id type, char *psname, u64 id, int count,
 		break;
 	default:
 		sprintf(name, "type%d-%s-%lld", type, psname, id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}

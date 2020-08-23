@@ -84,7 +84,11 @@ struct	evt_priv {
 #define init_h2fwcmd_w_parm_no_rsp(pcmd, pparm, code) \
 do {\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_init_listhead(&pcmd->list);\
+=======
+	INIT_LIST_HEAD(&pcmd->list);\
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&pcmd->list);\
 >>>>>>> v3.18

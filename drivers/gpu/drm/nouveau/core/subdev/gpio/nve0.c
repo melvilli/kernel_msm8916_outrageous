@@ -25,6 +25,7 @@
 #include "priv.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nve0_gpio_priv {
 	struct nouveau_gpio base;
 };
@@ -131,6 +132,8 @@ nve0_gpio_oclass = {
 	},
 };
 =======
+=======
+>>>>>>> v3.18
 static void
 nve0_gpio_intr_stat(struct nouveau_gpio *gpio, u32 *hi, u32 *lo)
 {
@@ -179,4 +182,7 @@ nve0_gpio_oclass = &(struct nouveau_gpio_impl) {
 	.sense = nvd0_gpio_sense,
 	.reset = nvd0_gpio_reset,
 }.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

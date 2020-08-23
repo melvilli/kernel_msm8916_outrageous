@@ -31,6 +31,12 @@
 #include <asm/xics.h>
 #include <asm/opal.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/runlatch.h>
+#include <asm/code-patching.h>
+#include <asm/dbell.h>
+>>>>>>> v3.18
 =======
 #include <asm/runlatch.h>
 #include <asm/code-patching.h>
@@ -46,6 +52,7 @@
 #define DBG(fmt...)
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __cpuinit pnv_smp_setup_cpu(int cpu)
 {
@@ -75,6 +82,8 @@ int pnv_smp_kick_cpu(int nr)
 	unsigned long start_here = __pa(*((unsigned long *)
 					  generic_secondary_smp_init));
 =======
+=======
+>>>>>>> v3.18
 static void pnv_smp_setup_cpu(int cpu)
 {
 	if (cpu != boot_cpuid)
@@ -91,6 +100,9 @@ static int pnv_smp_kick_cpu(int nr)
 	unsigned int pcpu = get_hard_smp_processor_id(nr);
 	unsigned long start_here =
 			__pa(ppc_function_entry(generic_secondary_smp_init));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	long rc;
 
@@ -198,6 +210,7 @@ static void pnv_smp_cpu_kill_self(void)
 	mtspr(SPRN_LPCR, mfspr(SPRN_LPCR) & ~(u64)LPCR_PECE1);
 	while (!generic_check_cpu_restart(cpu)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		power7_nap();
 		if (!generic_check_cpu_restart(cpu)) {
 			DBG("CPU%d Unexpected exit while offline !\n", cpu);
@@ -209,6 +222,8 @@ static void pnv_smp_cpu_kill_self(void)
 			local_irq_disable();
 		}
 =======
+=======
+>>>>>>> v3.18
 		ppc64_runlatch_off();
 		power7_nap(1);
 		ppc64_runlatch_on();
@@ -223,6 +238,9 @@ static void pnv_smp_cpu_kill_self(void)
 
 		if (!generic_check_cpu_restart(cpu))
 			DBG("CPU%d Unexpected exit while offline !\n", cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	mtspr(SPRN_LPCR, mfspr(SPRN_LPCR) | LPCR_PECE1);
@@ -238,7 +256,11 @@ static struct smp_ops_t pnv_smp_ops = {
 	.kick_cpu	= pnv_smp_kick_cpu,
 	.setup_cpu	= pnv_smp_setup_cpu,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cpu_bootable	= pnv_smp_cpu_bootable,
+=======
+	.cpu_bootable	= smp_generic_cpu_bootable,
+>>>>>>> v3.18
 =======
 	.cpu_bootable	= smp_generic_cpu_bootable,
 >>>>>>> v3.18

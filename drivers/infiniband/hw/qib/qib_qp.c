@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012 Intel Corporation.  All rights reserved.
+=======
+ * Copyright (c) 2012, 2013 Intel Corporation.  All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2012, 2013 Intel Corporation.  All rights reserved.
 >>>>>>> v3.18
@@ -40,6 +44,12 @@
 #include <linux/vmalloc.h>
 #include <linux/jhash.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_DEBUG_FS
+#include <linux/seq_file.h>
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_DEBUG_FS
 #include <linux/seq_file.h>
@@ -233,8 +243,13 @@ static void insert_qp(struct qib_ibdev *dev, struct qib_qp *qp)
 	unsigned n = qpn_hash(dev, qp->ibqp.qp_num);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&dev->qpt_lock, flags);
 	atomic_inc(&qp->refcount);
+=======
+	atomic_inc(&qp->refcount);
+	spin_lock_irqsave(&dev->qpt_lock, flags);
+>>>>>>> v3.18
 =======
 	atomic_inc(&qp->refcount);
 	spin_lock_irqsave(&dev->qpt_lock, flags);
@@ -251,7 +266,10 @@ static void insert_qp(struct qib_ibdev *dev, struct qib_qp *qp)
 
 	spin_unlock_irqrestore(&dev->qpt_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	synchronize_rcu();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -266,6 +284,10 @@ static void remove_qp(struct qib_ibdev *dev, struct qib_qp *qp)
 	unsigned n = qpn_hash(dev, qp->ibqp.qp_num);
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int removed = 1;
+>>>>>>> v3.18
 =======
 	int removed = 1;
 >>>>>>> v3.18
@@ -275,11 +297,17 @@ static void remove_qp(struct qib_ibdev *dev, struct qib_qp *qp)
 	if (rcu_dereference_protected(ibp->qp0,
 			lockdep_is_held(&dev->qpt_lock)) == qp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_dec(&qp->refcount);
 		rcu_assign_pointer(ibp->qp0, NULL);
 	} else if (rcu_dereference_protected(ibp->qp1,
 			lockdep_is_held(&dev->qpt_lock)) == qp) {
 		atomic_dec(&qp->refcount);
+=======
+		rcu_assign_pointer(ibp->qp0, NULL);
+	} else if (rcu_dereference_protected(ibp->qp1,
+			lockdep_is_held(&dev->qpt_lock)) == qp) {
+>>>>>>> v3.18
 =======
 		rcu_assign_pointer(ibp->qp0, NULL);
 	} else if (rcu_dereference_protected(ibp->qp1,
@@ -291,6 +319,10 @@ static void remove_qp(struct qib_ibdev *dev, struct qib_qp *qp)
 		struct qib_qp __rcu **qpp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		removed = 0;
+>>>>>>> v3.18
 =======
 		removed = 0;
 >>>>>>> v3.18
@@ -300,15 +332,21 @@ static void remove_qp(struct qib_ibdev *dev, struct qib_qp *qp)
 				qpp = &q->next)
 			if (q == qp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				atomic_dec(&qp->refcount);
 				rcu_assign_pointer(*qpp,
 					rcu_dereference_protected(qp->next,
 					 lockdep_is_held(&dev->qpt_lock)));
 =======
+=======
+>>>>>>> v3.18
 				rcu_assign_pointer(*qpp,
 					rcu_dereference_protected(qp->next,
 					 lockdep_is_held(&dev->qpt_lock)));
 				removed = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			}
@@ -316,12 +354,18 @@ static void remove_qp(struct qib_ibdev *dev, struct qib_qp *qp)
 
 	spin_unlock_irqrestore(&dev->qpt_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	synchronize_rcu();
 =======
+=======
+>>>>>>> v3.18
 	if (removed) {
 		synchronize_rcu();
 		atomic_dec(&qp->refcount);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -381,8 +425,13 @@ struct qib_qp *qib_lookup_qpn(struct qib_ibport *ibp, u32 qpn)
 	struct qib_qp *qp = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(qpn <= 1)) {
 		rcu_read_lock();
+=======
+	rcu_read_lock();
+	if (unlikely(qpn <= 1)) {
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 	if (unlikely(qpn <= 1)) {
@@ -392,6 +441,11 @@ struct qib_qp *qib_lookup_qpn(struct qib_ibport *ibp, u32 qpn)
 		else
 			qp = rcu_dereference(ibp->qp1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (qp)
+			atomic_inc(&qp->refcount);
+>>>>>>> v3.18
 =======
 		if (qp)
 			atomic_inc(&qp->refcount);
@@ -400,6 +454,7 @@ struct qib_qp *qib_lookup_qpn(struct qib_ibport *ibp, u32 qpn)
 		struct qib_ibdev *dev = &ppd_from_ibp(ibp)->dd->verbs_dev;
 		unsigned n = qpn_hash(dev, qpn);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rcu_read_lock();
 		for (qp = rcu_dereference(dev->qp_table[n]); qp;
@@ -412,6 +467,8 @@ struct qib_qp *qib_lookup_qpn(struct qib_ibport *ibp, u32 qpn)
 			qp = NULL;
 
 =======
+=======
+>>>>>>> v3.18
 		for (qp = rcu_dereference(dev->qp_table[n]); qp;
 			qp = rcu_dereference(qp->next))
 			if (qp->ibqp.qp_num == qpn) {
@@ -419,6 +476,9 @@ struct qib_qp *qib_lookup_qpn(struct qib_ibport *ibp, u32 qpn)
 				break;
 			}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rcu_read_unlock();
 	return qp;
@@ -648,7 +708,11 @@ int qib_modify_qp(struct ib_qp *ibqp, struct ib_qp_attr *attr,
 
 	if (!ib_modify_qp_is_ok(cur_state, new_state, ibqp->qp_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				attr_mask))
+=======
+				attr_mask, IB_LINK_LAYER_UNSPECIFIED))
+>>>>>>> v3.18
 =======
 				attr_mask, IB_LINK_LAYER_UNSPECIFIED))
 >>>>>>> v3.18
@@ -1052,7 +1116,12 @@ struct ib_qp *qib_create_qp(struct ib_pd *ibpd,
 
 	if (init_attr->cap.max_send_sge > ib_qib_max_sges ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    init_attr->cap.max_send_wr > ib_qib_max_qp_wrs) {
+=======
+	    init_attr->cap.max_send_wr > ib_qib_max_qp_wrs ||
+	    init_attr->create_flags) {
+>>>>>>> v3.18
 =======
 	    init_attr->cap.max_send_wr > ib_qib_max_qp_wrs ||
 	    init_attr->create_flags) {
@@ -1362,7 +1431,10 @@ void qib_get_credit(struct qib_qp *qp, u32 aeth)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_DEBUG_FS
 
@@ -1446,4 +1518,7 @@ void qib_qp_iter_print(struct seq_file *s, struct qib_qp_iter *iter)
 }
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -8,7 +8,11 @@ Supported chips:
     Datasheets: No longer available
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Authors: Jean Delvare <khali@linux-fr.org>
+=======
+Authors: Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
 Authors: Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

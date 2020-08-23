@@ -98,10 +98,13 @@ struct b43_tx_legacy_rate_phy_ctl_entry {
 
 /* MAC TX control */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define B43_TXH_MAC_USEFBR		0x10000000 /* Use fallback rate for this AMPDU */
 #define B43_TXH_MAC_KEYIDX		0x0FF00000 /* Security key index */
 #define B43_TXH_MAC_KEYIDX_SHIFT	20
 =======
+=======
+>>>>>>> v3.18
 #define B43_TXH_MAC_RTS_FB_SHORTPRMBL	0x80000000 /* RTS fallback preamble */
 #define B43_TXH_MAC_RTS_SHORTPRMBL	0x40000000 /* RTS main rate preamble */
 #define B43_TXH_MAC_FB_SHORTPRMBL	0x20000000 /* Main fallback preamble */
@@ -109,6 +112,9 @@ struct b43_tx_legacy_rate_phy_ctl_entry {
 #define B43_TXH_MAC_KEYIDX		0x0FF00000 /* Security key index */
 #define B43_TXH_MAC_KEYIDX_SHIFT	20
 #define B43_TXH_MAC_ALT_TXPWR		0x00080000 /* Use alternate txpwr defined at loc. M_ALT_TXPWR_IDX */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define B43_TXH_MAC_KEYALG		0x00070000 /* Security key algorithm */
 #define B43_TXH_MAC_KEYALG_SHIFT	16
@@ -137,6 +143,7 @@ struct b43_tx_legacy_rate_phy_ctl_entry {
 #define  B43_TXH_EFT_FB_CCK		0x00 /* CCK */
 #define  B43_TXH_EFT_FB_OFDM		0x01 /* OFDM */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  B43_TXH_EFT_FB_EWC		0x02 /* EWC */
 #define  B43_TXH_EFT_FB_N		0x03 /* N */
 #define B43_TXH_EFT_RTS			0x0C /* RTS/CTS encoding */
@@ -150,6 +157,8 @@ struct b43_tx_legacy_rate_phy_ctl_entry {
 #define  B43_TXH_EFT_RTSFB_EWC		0x20 /* EWC */
 #define  B43_TXH_EFT_RTSFB_N		0x30 /* N */
 =======
+=======
+>>>>>>> v3.18
 #define  B43_TXH_EFT_FB_HT		0x02 /* HT */
 #define  B43_TXH_EFT_FB_VHT		0x03 /* VHT */
 #define B43_TXH_EFT_RTS			0x0C /* RTS/CTS encoding */
@@ -162,6 +171,9 @@ struct b43_tx_legacy_rate_phy_ctl_entry {
 #define  B43_TXH_EFT_RTSFB_OFDM		0x10 /* OFDM */
 #define  B43_TXH_EFT_RTSFB_HT		0x20 /* HT */
 #define  B43_TXH_EFT_RTSFB_VHT		0x30 /* VHT */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* PHY TX control word */
@@ -169,8 +181,13 @@ struct b43_tx_legacy_rate_phy_ctl_entry {
 #define  B43_TXH_PHY_ENC_CCK		0x0000 /* CCK */
 #define  B43_TXH_PHY_ENC_OFDM		0x0001 /* OFDM */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  B43_TXH_PHY_ENC_EWC		0x0002 /* EWC */
 #define  B43_TXH_PHY_ENC_N		0x0003 /* N */
+=======
+#define  B43_TXH_PHY_ENC_HT		0x0002 /* HT */
+#define  B43_TXH_PHY_ENC_VHT		0x0003 /* VHT */
+>>>>>>> v3.18
 =======
 #define  B43_TXH_PHY_ENC_HT		0x0002 /* HT */
 #define  B43_TXH_PHY_ENC_VHT		0x0003 /* VHT */
@@ -193,7 +210,11 @@ struct b43_tx_legacy_rate_phy_ctl_entry {
 #define  B43_TXH_PHY1_BW_20U		0x0003 /* 20 MHz upper */
 #define  B43_TXH_PHY1_BW_40		0x0004 /* 40 MHz */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  B43_TXH_PHY1_BW_40DUP		0x0005 /* 50 MHz duplicate */
+=======
+#define  B43_TXH_PHY1_BW_40DUP		0x0005 /* 40 MHz duplicate */
+>>>>>>> v3.18
 =======
 #define  B43_TXH_PHY1_BW_40DUP		0x0005 /* 40 MHz duplicate */
 >>>>>>> v3.18

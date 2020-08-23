@@ -8,10 +8,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "mux2420.h"
 #include "mux2430.h"
 #include "mux34xx.h"
 #include "mux44xx.h"
+=======
+#include "mux34xx.h"
+>>>>>>> v3.18
 =======
 #include "mux34xx.h"
 >>>>>>> v3.18
@@ -34,7 +38,11 @@
 #define OMAP_ALTELECTRICALSEL		(1 << 5)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 34xx specific mux bit defines */
+=======
+/* omap3/4/5 specific mux bit defines */
+>>>>>>> v3.18
 =======
 /* omap3/4/5 specific mux bit defines */
 >>>>>>> v3.18
@@ -46,8 +54,11 @@
 #define OMAP_OFF_PULL_UP		(1 << 13)
 #define OMAP_WAKEUP_EN			(1 << 14)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* 44xx specific mux bit defines */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define OMAP_WAKEUP_EVENT		(1 << 15)
@@ -76,8 +87,11 @@
 /* Flags for omapX_mux_init */
 #define OMAP_PACKAGE_MASK		0xffff
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OMAP_PACKAGE_CBS		8		/* 547-pin 0.40 0.40 */
 #define OMAP_PACKAGE_CBL		7		/* 547-pin 0.40 0.40 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define OMAP_PACKAGE_CBP		6		/* 515-pin 0.40 0.50 */
@@ -85,9 +99,12 @@
 #define OMAP_PACKAGE_CBB		4		/* 515-pin 0.40 0.50 */
 #define OMAP_PACKAGE_CBC		3		/* 515-pin 0.50 0.65 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OMAP_PACKAGE_ZAC		2		/* 24xx 447-pin POP */
 #define OMAP_PACKAGE_ZAF		1		/* 2420 447-pin SIP */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

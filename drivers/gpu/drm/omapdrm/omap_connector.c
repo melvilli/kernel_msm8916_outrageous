@@ -33,6 +33,7 @@ struct omap_connector {
 	struct omap_dss_device *dssdev;
 	struct drm_encoder *encoder;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 void copy_timings_omap_to_drm(struct drm_display_mode *mode,
@@ -40,6 +41,8 @@ void copy_timings_omap_to_drm(struct drm_display_mode *mode,
 {
 	mode->clock = timings->pixel_clock;
 =======
+=======
+>>>>>>> v3.18
 	bool hdmi_mode;
 };
 
@@ -54,6 +57,9 @@ void copy_timings_omap_to_drm(struct drm_display_mode *mode,
 		struct omap_video_timings *timings)
 {
 	mode->clock = timings->pixelclock / 1000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mode->hdisplay = timings->x_res;
@@ -86,7 +92,11 @@ void copy_timings_drm_to_omap(struct omap_video_timings *timings,
 		struct drm_display_mode *mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	timings->pixel_clock = mode->clock;
+=======
+	timings->pixelclock = mode->clock * 1000;
+>>>>>>> v3.18
 =======
 	timings->pixelclock = mode->clock * 1000;
 >>>>>>> v3.18
@@ -152,7 +162,11 @@ static void omap_connector_destroy(struct drm_connector *connector)
 
 	DBG("%s", omap_connector->dssdev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_remove(connector);
+=======
+	drm_connector_unregister(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_unregister(connector);
 >>>>>>> v3.18
@@ -188,6 +202,12 @@ static int omap_connector_get_modes(struct drm_connector *connector)
 					connector, edid);
 			n = drm_add_edid_modes(connector, edid);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+			omap_connector->hdmi_mode =
+				drm_detect_hdmi_monitor(edid);
+>>>>>>> v3.18
 =======
 
 			omap_connector->hdmi_mode =
@@ -198,6 +218,10 @@ static int omap_connector_get_modes(struct drm_connector *connector)
 					connector, NULL);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -256,7 +280,11 @@ static int omap_connector_mode_valid(struct drm_connector *connector,
 		/* check if vrefresh is still valid */
 		new_mode = drm_mode_duplicate(dev, mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		new_mode->clock = timings.pixel_clock;
+=======
+		new_mode->clock = timings.pixelclock / 1000;
+>>>>>>> v3.18
 =======
 		new_mode->clock = timings.pixelclock / 1000;
 >>>>>>> v3.18
@@ -347,7 +375,11 @@ struct drm_connector *omap_connector_init(struct drm_device *dev,
 	connector->doublescan_allowed = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
+=======
+	drm_connector_register(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_register(connector);
 >>>>>>> v3.18

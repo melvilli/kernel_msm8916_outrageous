@@ -134,8 +134,11 @@ struct bttv_ir {
 	u32                     last_gpio;
 	int                     shift_by;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int                     start; // What should RC5_START() be
 	int                     addr; // What RC5_ADDR() should be.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int                     rc5_remote_gap;
@@ -463,6 +466,12 @@ struct bttv {
 	int mbox_csel;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* switch status for multi-controller cards */
+	char sw_status[4];
+
+>>>>>>> v3.18
 =======
 	/* switch status for multi-controller cards */
 	char sw_status[4];

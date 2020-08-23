@@ -48,6 +48,7 @@ FORCE : $(obj)/$(offsets-file)
 ccflags-y := -Ivirt/kvm -Iarch/ia64/kvm/
 asflags-y := -Ivirt/kvm -Iarch/ia64/kvm/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 common-objs = $(addprefix ../../../virt/kvm/, kvm_main.o ioapic.o \
 		coalesced_mmio.o irq_comm.o)
@@ -55,6 +56,8 @@ common-objs = $(addprefix ../../../virt/kvm/, kvm_main.o ioapic.o \
 ifeq ($(CONFIG_KVM_DEVICE_ASSIGNMENT),y)
 common-objs += $(addprefix ../../../virt/kvm/, assigned-dev.o iommu.o)
 =======
+=======
+>>>>>>> v3.18
 KVM := ../../../virt/kvm
 
 common-objs = $(KVM)/kvm_main.o $(KVM)/ioapic.o \
@@ -62,6 +65,9 @@ common-objs = $(KVM)/kvm_main.o $(KVM)/ioapic.o \
 
 ifeq ($(CONFIG_KVM_DEVICE_ASSIGNMENT),y)
 common-objs += $(KVM)/assigned-dev.o $(KVM)/iommu.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif
 

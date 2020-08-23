@@ -35,9 +35,12 @@ static unsigned long clk_fixed_rate_recalc_rate(struct clk_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct clk_ops clk_fixed_rate_ops = {
 	.recalc_rate = clk_fixed_rate_recalc_rate,
 =======
+=======
+>>>>>>> v3.18
 static unsigned long clk_fixed_rate_recalc_accuracy(struct clk_hw *hw,
 		unsigned long parent_accuracy)
 {
@@ -47,13 +50,21 @@ static unsigned long clk_fixed_rate_recalc_accuracy(struct clk_hw *hw,
 const struct clk_ops clk_fixed_rate_ops = {
 	.recalc_rate = clk_fixed_rate_recalc_rate,
 	.recalc_accuracy = clk_fixed_rate_recalc_accuracy,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 EXPORT_SYMBOL_GPL(clk_fixed_rate_ops);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * clk_register_fixed_rate - register fixed-rate clock with the clock framework
+=======
+ * clk_register_fixed_rate_with_accuracy - register fixed-rate clock with the
+ *					   clock framework
+>>>>>>> v3.18
 =======
  * clk_register_fixed_rate_with_accuracy - register fixed-rate clock with the
  *					   clock framework
@@ -64,16 +75,22 @@ EXPORT_SYMBOL_GPL(clk_fixed_rate_ops);
  * @flags: framework-specific flags
  * @fixed_rate: non-adjustable clock rate
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 struct clk *clk_register_fixed_rate(struct device *dev, const char *name,
 		const char *parent_name, unsigned long flags,
 		unsigned long fixed_rate)
 =======
+=======
+>>>>>>> v3.18
  * @fixed_accuracy: non-adjustable clock rate
  */
 struct clk *clk_register_fixed_rate_with_accuracy(struct device *dev,
 		const char *name, const char *parent_name, unsigned long flags,
 		unsigned long fixed_rate, unsigned long fixed_accuracy)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct clk_fixed_rate *fixed;
@@ -96,6 +113,10 @@ struct clk *clk_register_fixed_rate_with_accuracy(struct device *dev,
 	/* struct clk_fixed_rate assignments */
 	fixed->fixed_rate = fixed_rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fixed->fixed_accuracy = fixed_accuracy;
+>>>>>>> v3.18
 =======
 	fixed->fixed_accuracy = fixed_accuracy;
 >>>>>>> v3.18
@@ -104,7 +125,10 @@ struct clk *clk_register_fixed_rate_with_accuracy(struct device *dev,
 	/* register the clock */
 	clk = clk_register(dev, &fixed->hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (IS_ERR(clk))
@@ -113,7 +137,10 @@ struct clk *clk_register_fixed_rate_with_accuracy(struct device *dev,
 	return clk;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(clk_register_fixed_rate_with_accuracy);
 
 /**
@@ -132,6 +159,9 @@ struct clk *clk_register_fixed_rate(struct device *dev, const char *name,
 						     flags, fixed_rate, 0);
 }
 EXPORT_SYMBOL_GPL(clk_register_fixed_rate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_OF
@@ -144,6 +174,10 @@ void of_fixed_clk_setup(struct device_node *node)
 	const char *clk_name = node->name;
 	u32 rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 accuracy = 0;
+>>>>>>> v3.18
 =======
 	u32 accuracy = 0;
 >>>>>>> v3.18
@@ -152,10 +186,13 @@ void of_fixed_clk_setup(struct device_node *node)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_property_read_string(node, "clock-output-names", &clk_name);
 
 	clk = clk_register_fixed_rate(NULL, clk_name, NULL, CLK_IS_ROOT, rate);
 =======
+=======
+>>>>>>> v3.18
 	of_property_read_u32(node, "clock-accuracy", &accuracy);
 
 	of_property_read_string(node, "clock-output-names", &clk_name);
@@ -163,6 +200,9 @@ void of_fixed_clk_setup(struct device_node *node)
 	clk = clk_register_fixed_rate_with_accuracy(NULL, clk_name, NULL,
 						    CLK_IS_ROOT, rate,
 						    accuracy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!IS_ERR(clk))
 		of_clk_add_provider(node, of_clk_src_simple_get, clk);

@@ -235,7 +235,11 @@ static const struct {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(rtl8139_pci_tbl) = {
+=======
+static const struct pci_device_id rtl8139_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id rtl8139_pci_tbl[] = {
 >>>>>>> v3.18
@@ -732,7 +736,10 @@ static void __rtl8139_cleanup_dev (struct net_device *dev)
 
 	free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata (pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -799,6 +806,12 @@ static struct net_device *rtl8139_init_board(struct pci_dev *pdev)
 	pci_set_master (pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64_stats_init(&tp->rx_stats.syncp);
+	u64_stats_init(&tp->tx_stats.syncp);
+
+>>>>>>> v3.18
 =======
 	u64_stats_init(&tp->rx_stats.syncp);
 	u64_stats_init(&tp->tx_stats.syncp);
@@ -2534,6 +2547,7 @@ rtl8139_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *stats)
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		start = u64_stats_fetch_begin_bh(&tp->rx_stats.syncp);
 		stats->rx_packets = tp->rx_stats.packets;
 		stats->rx_bytes = tp->rx_stats.bytes;
@@ -2545,6 +2559,8 @@ rtl8139_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *stats)
 		stats->tx_bytes = tp->tx_stats.bytes;
 	} while (u64_stats_fetch_retry_bh(&tp->tx_stats.syncp, start));
 =======
+=======
+>>>>>>> v3.18
 		start = u64_stats_fetch_begin_irq(&tp->rx_stats.syncp);
 		stats->rx_packets = tp->rx_stats.packets;
 		stats->rx_bytes = tp->rx_stats.bytes;
@@ -2555,6 +2571,9 @@ rtl8139_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *stats)
 		stats->tx_packets = tp->tx_stats.packets;
 		stats->tx_bytes = tp->tx_stats.bytes;
 	} while (u64_stats_fetch_retry_irq(&tp->tx_stats.syncp, start));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return stats;

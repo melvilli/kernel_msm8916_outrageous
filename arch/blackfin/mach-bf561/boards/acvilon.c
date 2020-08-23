@@ -45,6 +45,10 @@
 #include <linux/irq.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio.h>
 >>>>>>> v3.18
@@ -65,7 +69,11 @@
 const char bfin_board_name[] = "Acvilon board";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_USB_ISP1760_HCD) || defined(CONFIG_USB_ISP1760_HCD_MODULE)
+=======
+#if IS_ENABLED(CONFIG_USB_ISP1760_HCD)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_ISP1760_HCD)
 >>>>>>> v3.18
@@ -146,7 +154,11 @@ static struct i2c_board_info acvilon_i2c_devs[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_PLATRAM) || defined(CONFIG_MTD_PLATRAM_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_PLATRAM)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_PLATRAM)
 >>>>>>> v3.18
@@ -173,7 +185,11 @@ static struct platform_device mtd_ram_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SMSC911X) || defined(CONFIG_SMSC911X_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SMSC911X)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SMSC911X)
 >>>>>>> v3.18
@@ -211,7 +227,11 @@ static struct platform_device smsc911x_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SERIAL_BFIN) || defined(CONFIG_SERIAL_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SERIAL_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SERIAL_BFIN)
 >>>>>>> v3.18
@@ -267,7 +287,11 @@ static struct platform_device bfin_uart0_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_NAND_PLATFORM) || defined(CONFIG_MTD_NAND_PLATFORM_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_NAND_PLATFORM)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_NAND_PLATFORM)
 >>>>>>> v3.18
@@ -348,7 +372,11 @@ static void bfin_plat_nand_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_DATAFLASH) || defined(CONFIG_MTD_DATAFLASH_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_DATAFLASH)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_DATAFLASH)
 >>>>>>> v3.18
@@ -398,7 +426,11 @@ static struct bfin5xx_spi_chip data_flash_chip_info = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SPI_BFIN5XX) || defined(CONFIG_SPI_BFIN5XX_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SPI_BFIN5XX)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SPI_BFIN5XX)
 >>>>>>> v3.18
@@ -441,7 +473,11 @@ static struct platform_device bfin_spi0_device = {
 
 static struct spi_board_info bfin_spi_board_info[] __initdata = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SPI_SPIDEV) || defined(CONFIG_SPI_SPIDEV_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SPI_SPIDEV)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SPI_SPIDEV)
 >>>>>>> v3.18
@@ -453,7 +489,11 @@ static struct spi_board_info bfin_spi_board_info[] __initdata = {
 	 },
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_DATAFLASH) || defined(CONFIG_MTD_DATAFLASH_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_DATAFLASH)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_DATAFLASH)
 >>>>>>> v3.18
@@ -513,17 +553,23 @@ static struct platform_device *acvilon_devices[] __initdata = {
 	&bfin_dpmc,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SPI_BFIN5XX) || defined(CONFIG_SPI_BFIN5XX_MODULE)
 	&bfin_spi0_device,
 #endif
 
 #if defined(CONFIG_SERIAL_BFIN) || defined(CONFIG_SERIAL_BFIN_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_SPI_BFIN5XX)
 	&bfin_spi0_device,
 #endif
 
 #if IS_ENABLED(CONFIG_SERIAL_BFIN)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SERIAL_BFIN_UART0
 	&bfin_uart0_device,
@@ -533,7 +579,11 @@ static struct platform_device *acvilon_devices[] __initdata = {
 	&bfin_gpios_device,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SMSC911X) || defined(CONFIG_SMSC911X_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SMSC911X)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SMSC911X)
 >>>>>>> v3.18
@@ -543,17 +593,23 @@ static struct platform_device *acvilon_devices[] __initdata = {
 	&bfin_i2c_pca_device,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_NAND_PLATFORM) || defined(CONFIG_MTD_NAND_PLATFORM_MODULE)
 	&bfin_async_nand_device,
 #endif
 
 #if defined(CONFIG_MTD_PLATRAM) || defined(CONFIG_MTD_PLATRAM_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_MTD_NAND_PLATFORM)
 	&bfin_async_nand_device,
 #endif
 
 #if IS_ENABLED(CONFIG_MTD_PLATRAM)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&mtd_ram_device,
 #endif

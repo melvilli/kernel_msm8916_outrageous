@@ -107,7 +107,11 @@ struct dma_chan {
 	int dev_id;		/* this channel is allocated if >= 0, */
 				/* free otherwise */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int io;
+=======
+	void __iomem *io;
+>>>>>>> v3.18
 =======
 	void __iomem *io;
 >>>>>>> v3.18
@@ -162,7 +166,11 @@ static inline void enable_dma_buffer0(unsigned int dmanr)
 	if (!chan)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(DMA_BE0, chan->io + DMA_MODE_SET);
+=======
+	__raw_writel(DMA_BE0, chan->io + DMA_MODE_SET);
+>>>>>>> v3.18
 =======
 	__raw_writel(DMA_BE0, chan->io + DMA_MODE_SET);
 >>>>>>> v3.18
@@ -175,7 +183,11 @@ static inline void enable_dma_buffer1(unsigned int dmanr)
 	if (!chan)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(DMA_BE1, chan->io + DMA_MODE_SET);
+=======
+	__raw_writel(DMA_BE1, chan->io + DMA_MODE_SET);
+>>>>>>> v3.18
 =======
 	__raw_writel(DMA_BE1, chan->io + DMA_MODE_SET);
 >>>>>>> v3.18
@@ -187,7 +199,11 @@ static inline void enable_dma_buffers(unsigned int dmanr)
 	if (!chan)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(DMA_BE0 | DMA_BE1, chan->io + DMA_MODE_SET);
+=======
+	__raw_writel(DMA_BE0 | DMA_BE1, chan->io + DMA_MODE_SET);
+>>>>>>> v3.18
 =======
 	__raw_writel(DMA_BE0 | DMA_BE1, chan->io + DMA_MODE_SET);
 >>>>>>> v3.18
@@ -200,7 +216,11 @@ static inline void start_dma(unsigned int dmanr)
 	if (!chan)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(DMA_GO, chan->io + DMA_MODE_SET);
+=======
+	__raw_writel(DMA_GO, chan->io + DMA_MODE_SET);
+>>>>>>> v3.18
 =======
 	__raw_writel(DMA_GO, chan->io + DMA_MODE_SET);
 >>>>>>> v3.18
@@ -216,17 +236,23 @@ static inline void halt_dma(unsigned int dmanr)
 	if (!chan)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(DMA_GO, chan->io + DMA_MODE_CLEAR);
 
 	/* Poll the halt bit */
 	for (i = 0; i < DMA_HALT_POLL; i++)
 		if (au_readl(chan->io + DMA_MODE_READ) & DMA_HALT)
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(DMA_GO, chan->io + DMA_MODE_CLEAR);
 
 	/* Poll the halt bit */
 	for (i = 0; i < DMA_HALT_POLL; i++)
 		if (__raw_readl(chan->io + DMA_MODE_READ) & DMA_HALT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 	if (i == DMA_HALT_POLL)
@@ -244,7 +270,11 @@ static inline void disable_dma(unsigned int dmanr)
 
 	/* Now we can disable the buffers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(~DMA_GO, chan->io + DMA_MODE_CLEAR);
+=======
+	__raw_writel(~DMA_GO, chan->io + DMA_MODE_CLEAR);
+>>>>>>> v3.18
 =======
 	__raw_writel(~DMA_GO, chan->io + DMA_MODE_CLEAR);
 >>>>>>> v3.18
@@ -257,7 +287,11 @@ static inline int dma_halted(unsigned int dmanr)
 	if (!chan)
 		return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (au_readl(chan->io + DMA_MODE_READ) & DMA_HALT) ? 1 : 0;
+=======
+	return (__raw_readl(chan->io + DMA_MODE_READ) & DMA_HALT) ? 1 : 0;
+>>>>>>> v3.18
 =======
 	return (__raw_readl(chan->io + DMA_MODE_READ) & DMA_HALT) ? 1 : 0;
 >>>>>>> v3.18
@@ -276,7 +310,11 @@ static inline void init_dma(unsigned int dmanr)
 
 	/* Set device FIFO address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(CPHYSADDR(chan->fifo_addr), chan->io + DMA_PERIPHERAL_ADDR);
+=======
+	__raw_writel(CPHYSADDR(chan->fifo_addr), chan->io + DMA_PERIPHERAL_ADDR);
+>>>>>>> v3.18
 =======
 	__raw_writel(CPHYSADDR(chan->fifo_addr), chan->io + DMA_PERIPHERAL_ADDR);
 >>>>>>> v3.18
@@ -286,8 +324,13 @@ static inline void init_dma(unsigned int dmanr)
 		mode |= DMA_IE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(~mode, chan->io + DMA_MODE_CLEAR);
 	au_writel(mode,	 chan->io + DMA_MODE_SET);
+=======
+	__raw_writel(~mode, chan->io + DMA_MODE_CLEAR);
+	__raw_writel(mode,	 chan->io + DMA_MODE_SET);
+>>>>>>> v3.18
 =======
 	__raw_writel(~mode, chan->io + DMA_MODE_CLEAR);
 	__raw_writel(mode,	 chan->io + DMA_MODE_SET);
@@ -329,7 +372,11 @@ static inline int get_dma_active_buffer(unsigned int dmanr)
 	if (!chan)
 		return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (au_readl(chan->io + DMA_MODE_READ) & DMA_AB) ? 1 : 0;
+=======
+	return (__raw_readl(chan->io + DMA_MODE_READ) & DMA_AB) ? 1 : 0;
+>>>>>>> v3.18
 =======
 	return (__raw_readl(chan->io + DMA_MODE_READ) & DMA_AB) ? 1 : 0;
 >>>>>>> v3.18
@@ -354,7 +401,11 @@ static inline void set_dma_fifo_addr(unsigned int dmanr, unsigned int a)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(CPHYSADDR(a), chan->io + DMA_PERIPHERAL_ADDR);
+=======
+	__raw_writel(CPHYSADDR(a), chan->io + DMA_PERIPHERAL_ADDR);
+>>>>>>> v3.18
 =======
 	__raw_writel(CPHYSADDR(a), chan->io + DMA_PERIPHERAL_ADDR);
 >>>>>>> v3.18
@@ -370,7 +421,11 @@ static inline void clear_dma_done0(unsigned int dmanr)
 	if (!chan)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(DMA_D0, chan->io + DMA_MODE_CLEAR);
+=======
+	__raw_writel(DMA_D0, chan->io + DMA_MODE_CLEAR);
+>>>>>>> v3.18
 =======
 	__raw_writel(DMA_D0, chan->io + DMA_MODE_CLEAR);
 >>>>>>> v3.18
@@ -383,7 +438,11 @@ static inline void clear_dma_done1(unsigned int dmanr)
 	if (!chan)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(DMA_D1, chan->io + DMA_MODE_CLEAR);
+=======
+	__raw_writel(DMA_D1, chan->io + DMA_MODE_CLEAR);
+>>>>>>> v3.18
 =======
 	__raw_writel(DMA_D1, chan->io + DMA_MODE_CLEAR);
 >>>>>>> v3.18
@@ -406,7 +465,11 @@ static inline void set_dma_addr0(unsigned int dmanr, unsigned int a)
 	if (!chan)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(a, chan->io + DMA_BUFFER0_START);
+=======
+	__raw_writel(a, chan->io + DMA_BUFFER0_START);
+>>>>>>> v3.18
 =======
 	__raw_writel(a, chan->io + DMA_BUFFER0_START);
 >>>>>>> v3.18
@@ -422,7 +485,11 @@ static inline void set_dma_addr1(unsigned int dmanr, unsigned int a)
 	if (!chan)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(a, chan->io + DMA_BUFFER1_START);
+=======
+	__raw_writel(a, chan->io + DMA_BUFFER1_START);
+>>>>>>> v3.18
 =======
 	__raw_writel(a, chan->io + DMA_BUFFER1_START);
 >>>>>>> v3.18
@@ -440,7 +507,11 @@ static inline void set_dma_count0(unsigned int dmanr, unsigned int count)
 		return;
 	count &= DMA_COUNT_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(count, chan->io + DMA_BUFFER0_COUNT);
+=======
+	__raw_writel(count, chan->io + DMA_BUFFER0_COUNT);
+>>>>>>> v3.18
 =======
 	__raw_writel(count, chan->io + DMA_BUFFER0_COUNT);
 >>>>>>> v3.18
@@ -457,7 +528,11 @@ static inline void set_dma_count1(unsigned int dmanr, unsigned int count)
 		return;
 	count &= DMA_COUNT_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(count, chan->io + DMA_BUFFER1_COUNT);
+=======
+	__raw_writel(count, chan->io + DMA_BUFFER1_COUNT);
+>>>>>>> v3.18
 =======
 	__raw_writel(count, chan->io + DMA_BUFFER1_COUNT);
 >>>>>>> v3.18
@@ -474,8 +549,13 @@ static inline void set_dma_count(unsigned int dmanr, unsigned int count)
 		return;
 	count &= DMA_COUNT_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(count, chan->io + DMA_BUFFER0_COUNT);
 	au_writel(count, chan->io + DMA_BUFFER1_COUNT);
+=======
+	__raw_writel(count, chan->io + DMA_BUFFER0_COUNT);
+	__raw_writel(count, chan->io + DMA_BUFFER1_COUNT);
+>>>>>>> v3.18
 =======
 	__raw_writel(count, chan->io + DMA_BUFFER0_COUNT);
 	__raw_writel(count, chan->io + DMA_BUFFER1_COUNT);
@@ -493,7 +573,11 @@ static inline unsigned int get_dma_buffer_done(unsigned int dmanr)
 	if (!chan)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return au_readl(chan->io + DMA_MODE_READ) & (DMA_D0 | DMA_D1);
+=======
+	return __raw_readl(chan->io + DMA_MODE_READ) & (DMA_D0 | DMA_D1);
+>>>>>>> v3.18
 =======
 	return __raw_readl(chan->io + DMA_MODE_READ) & (DMA_D0 | DMA_D1);
 >>>>>>> v3.18
@@ -524,15 +608,21 @@ static inline int get_dma_residue(unsigned int dmanr)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	curBufCntReg = (au_readl(chan->io + DMA_MODE_READ) & DMA_AB) ?
 	    DMA_BUFFER1_COUNT : DMA_BUFFER0_COUNT;
 
 	count = au_readl(chan->io + curBufCntReg) & DMA_COUNT_MASK;
 =======
+=======
+>>>>>>> v3.18
 	curBufCntReg = (__raw_readl(chan->io + DMA_MODE_READ) & DMA_AB) ?
 	    DMA_BUFFER1_COUNT : DMA_BUFFER0_COUNT;
 
 	count = __raw_readl(chan->io + curBufCntReg) & DMA_COUNT_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((chan->mode & DMA_DW_MASK) == DMA_DW16)

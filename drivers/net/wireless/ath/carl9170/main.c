@@ -38,7 +38,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -1435,6 +1438,7 @@ static int carl9170_op_ampdu_action(struct ieee80211_hw *hw,
 			return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcu_read_lock();
 		if (rcu_dereference(sta_info->agg[tid])) {
 			rcu_read_unlock();
@@ -1448,10 +1452,15 @@ static int carl9170_op_ampdu_action(struct ieee80211_hw *hw,
 			return -ENOMEM;
 		}
 =======
+=======
+>>>>>>> v3.18
 		tid_info = kzalloc(sizeof(struct carl9170_sta_tid),
 				   GFP_ATOMIC);
 		if (!tid_info)
 			return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		tid_info->hsn = tid_info->bsn = tid_info->snx = (*ssn);
@@ -1459,6 +1468,11 @@ static int carl9170_op_ampdu_action(struct ieee80211_hw *hw,
 		tid_info->tid = tid;
 		tid_info->max = sta_info->ampdu_max_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		tid_info->sta = sta;
+		tid_info->vif = vif;
+>>>>>>> v3.18
 =======
 		tid_info->sta = sta;
 		tid_info->vif = vif;
@@ -1475,7 +1489,10 @@ static int carl9170_op_ampdu_action(struct ieee80211_hw *hw,
 		rcu_assign_pointer(sta_info->agg[tid], tid_info);
 		spin_unlock_bh(&ar->tx_ampdu_list_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcu_read_unlock();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1725,7 +1742,13 @@ found:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void carl9170_op_flush(struct ieee80211_hw *hw, u32 queues, bool drop)
+=======
+static void carl9170_op_flush(struct ieee80211_hw *hw,
+			      struct ieee80211_vif *vif,
+			      u32 queues, bool drop)
+>>>>>>> v3.18
 =======
 static void carl9170_op_flush(struct ieee80211_hw *hw,
 			      struct ieee80211_vif *vif,
@@ -1882,6 +1905,10 @@ void *carl9170_alloc(size_t priv_size)
 		     IEEE80211_HW_PS_NULLFUNC_STACK |
 		     IEEE80211_HW_NEED_DTIM_BEFORE_ASSOC |
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		     IEEE80211_HW_SUPPORTS_RC_TABLE |
+>>>>>>> v3.18
 =======
 		     IEEE80211_HW_SUPPORTS_RC_TABLE |
 >>>>>>> v3.18
@@ -1994,6 +2021,7 @@ static int carl9170_parse_eeprom(struct ar9170 *ar)
 	ar->num_channels = chans;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * I measured this, a bandswitch takes roughly
 	 * 135 ms and a frequency switch about 80.
@@ -2006,6 +2034,8 @@ static int carl9170_parse_eeprom(struct ar9170 *ar)
 	else
 		ar->hw->channel_change_time = 80 * 1000;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	regulatory->current_rd = le16_to_cpu(ar->eeprom.reg_domain[0]);

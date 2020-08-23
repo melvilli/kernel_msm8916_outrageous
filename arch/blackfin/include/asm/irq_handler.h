@@ -13,17 +13,23 @@
 
 /* init functions only */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __init init_arch_irq(void);
 extern void init_exception_vectors(void);
 extern void __init program_IAR(void);
 #ifdef init_mach_irq
 extern void __init init_mach_irq(void);
 =======
+=======
+>>>>>>> v3.18
 extern int init_arch_irq(void);
 extern void init_exception_vectors(void);
 extern void program_IAR(void);
 #ifdef init_mach_irq
 extern void init_mach_irq(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 # define init_mach_irq()

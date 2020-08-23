@@ -138,7 +138,11 @@ struct ib_sa_path_rec {
 	__be16       dlid;
 	__be16       slid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8           raw_traffic;
+=======
+	int          raw_traffic;
+>>>>>>> v3.18
 =======
 	int          raw_traffic;
 >>>>>>> v3.18
@@ -147,7 +151,11 @@ struct ib_sa_path_rec {
 	u8           hop_limit;
 	u8           traffic_class;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8           reversible;
+=======
+	int          reversible;
+>>>>>>> v3.18
 =======
 	int          reversible;
 >>>>>>> v3.18
@@ -163,6 +171,12 @@ struct ib_sa_path_rec {
 	u8           packet_life_time;
 	u8           preference;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8           smac[ETH_ALEN];
+	u8           dmac[ETH_ALEN];
+	u16	     vlan_id;
+>>>>>>> v3.18
 =======
 	u8           smac[ETH_ALEN];
 	u8           dmac[ETH_ALEN];
@@ -208,7 +222,11 @@ struct ib_sa_mcmember_rec {
 	u8           scope;
 	u8           join_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8           proxy_join;
+=======
+	int          proxy_join;
+>>>>>>> v3.18
 =======
 	int          proxy_join;
 >>>>>>> v3.18
@@ -421,13 +439,19 @@ int ib_init_ah_from_path(struct ib_device *device, u8 port_num,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * ib_sa_pack_path - Conert a path record from struct ib_sa_path_rec
  * to IB MAD wire format.
  */
 void ib_sa_pack_path(struct ib_sa_path_rec *rec, void *attribute);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * ib_sa_unpack_path - Convert a path record from MAD format to struct
  * ib_sa_path_rec.
@@ -446,6 +470,10 @@ int ib_sa_guid_info_rec_query(struct ib_sa_client *client,
 			      void *context,
 			      struct ib_sa_query **sa_query);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

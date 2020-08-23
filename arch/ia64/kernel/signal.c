@@ -310,6 +310,7 @@ force_sigsegv_info (int sig, void __user *addr)
 	si.si_addr = addr;
 	force_sig_info(SIGSEGV, &si, current);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
@@ -317,11 +318,16 @@ static long
 setup_frame (int sig, struct k_sigaction *ka, siginfo_t *info, sigset_t *set,
 	     struct sigscratch *scr)
 =======
+=======
+>>>>>>> v3.18
 	return 1;
 }
 
 static long
 setup_frame(struct ksignal *ksig, sigset_t *set, struct sigscratch *scr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	extern char __kernel_sigtramp[];
@@ -332,7 +338,11 @@ setup_frame(struct ksignal *ksig, sigset_t *set, struct sigscratch *scr)
 	new_sp = scr->pt.r12;
 	tramp_addr = (unsigned long) __kernel_sigtramp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_ONSTACK) {
+=======
+	if (ksig->ka.sa.sa_flags & SA_ONSTACK) {
+>>>>>>> v3.18
 =======
 	if (ksig->ka.sa.sa_flags & SA_ONSTACK) {
 >>>>>>> v3.18
@@ -360,7 +370,11 @@ setup_frame(struct ksignal *ksig, sigset_t *set, struct sigscratch *scr)
 			check_sp = (new_sp - sizeof(*frame)) & -STACK_ALIGN;
 			if (!likely(on_sig_stack(check_sp)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return force_sigsegv_info(sig, (void __user *)
+=======
+				return force_sigsegv_info(ksig->sig, (void __user *)
+>>>>>>> v3.18
 =======
 				return force_sigsegv_info(ksig->sig, (void __user *)
 >>>>>>> v3.18
@@ -371,9 +385,15 @@ setup_frame(struct ksignal *ksig, sigset_t *set, struct sigscratch *scr)
 
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return force_sigsegv_info(sig, frame);
 
 	err  = __put_user(sig, &frame->arg0);
+=======
+		return force_sigsegv_info(ksig->sig, frame);
+
+	err  = __put_user(ksig->sig, &frame->arg0);
+>>>>>>> v3.18
 =======
 		return force_sigsegv_info(ksig->sig, frame);
 
@@ -384,9 +404,15 @@ setup_frame(struct ksignal *ksig, sigset_t *set, struct sigscratch *scr)
 	err |= __put_user(new_rbs, &frame->sc.sc_rbs_base);
 	err |= __put_user(0, &frame->sc.sc_loadrs);	/* initialize to zero */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err |= __put_user(ka->sa.sa_handler, &frame->handler);
 
 	err |= copy_siginfo_to_user(&frame->info, info);
+=======
+	err |= __put_user(ksig->ka.sa.sa_handler, &frame->handler);
+
+	err |= copy_siginfo_to_user(&frame->info, &ksig->info);
+>>>>>>> v3.18
 =======
 	err |= __put_user(ksig->ka.sa.sa_handler, &frame->handler);
 
@@ -398,7 +424,11 @@ setup_frame(struct ksignal *ksig, sigset_t *set, struct sigscratch *scr)
 
 	if (unlikely(err))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return force_sigsegv_info(sig, frame);
+=======
+		return force_sigsegv_info(ksig->sig, frame);
+>>>>>>> v3.18
 =======
 		return force_sigsegv_info(ksig->sig, frame);
 >>>>>>> v3.18
@@ -427,6 +457,7 @@ setup_frame(struct ksignal *ksig, sigset_t *set, struct sigscratch *scr)
 #if DEBUG_SIG
 	printk("SIG deliver (%s:%d): sig=%d sp=%lx ip=%lx handler=%p\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       current->comm, current->pid, sig, scr->pt.r12, frame->sc.sc_ip, frame->handler);
 #endif
 	return 1;
@@ -444,6 +475,8 @@ handle_signal (unsigned long sig, struct k_sigaction *ka, siginfo_t *info,
 
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 	       current->comm, current->pid, ksig->sig, scr->pt.r12, frame->sc.sc_ip, frame->handler);
 #endif
 	return 0;
@@ -458,6 +491,9 @@ handle_signal (struct ksignal *ksig, struct sigscratch *scr)
 		signal_setup_done(ret, ksig, test_thread_flag(TIF_SINGLESTEP));
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -469,10 +505,16 @@ void
 ia64_do_signal (struct sigscratch *scr, long in_syscall)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct k_sigaction ka;
 	siginfo_t info;
 	long restart = in_syscall;
 	long errno = scr->pt.r8;
+=======
+	long restart = in_syscall;
+	long errno = scr->pt.r8;
+	struct ksignal ksig;
+>>>>>>> v3.18
 =======
 	long restart = in_syscall;
 	long errno = scr->pt.r8;
@@ -485,7 +527,11 @@ ia64_do_signal (struct sigscratch *scr, long in_syscall)
 	 */
 	while (1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int signr = get_signal_to_deliver(&info, &ka, &scr->pt, NULL);
+=======
+		get_signal(&ksig);
+>>>>>>> v3.18
 =======
 		get_signal(&ksig);
 >>>>>>> v3.18
@@ -506,7 +552,11 @@ ia64_do_signal (struct sigscratch *scr, long in_syscall)
 			restart = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (signr <= 0)
+=======
+		if (ksig.sig <= 0)
+>>>>>>> v3.18
 =======
 		if (ksig.sig <= 0)
 >>>>>>> v3.18
@@ -522,7 +572,11 @@ ia64_do_signal (struct sigscratch *scr, long in_syscall)
 
 			      case ERESTARTSYS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if ((ka.sa.sa_flags & SA_RESTART) == 0) {
+=======
+				if ((ksig.ka.sa.sa_flags & SA_RESTART) == 0) {
+>>>>>>> v3.18
 =======
 				if ((ksig.ka.sa.sa_flags & SA_RESTART) == 0) {
 >>>>>>> v3.18
@@ -541,7 +595,11 @@ ia64_do_signal (struct sigscratch *scr, long in_syscall)
 		 * continue to iterate in this loop so we can deliver the SIGSEGV...
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (handle_signal(signr, &ka, &info, scr))
+=======
+		if (handle_signal(&ksig, scr))
+>>>>>>> v3.18
 =======
 		if (handle_signal(&ksig, scr))
 >>>>>>> v3.18

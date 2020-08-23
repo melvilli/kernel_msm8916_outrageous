@@ -398,13 +398,19 @@ static void __init net2big_init(void)
 	orion5x_sata_init(&net2big_sata_data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mvebu_mbus_add_window("devbus-boot", NET2BIG_NOR_BOOT_BASE,
 			      NET2BIG_NOR_BOOT_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	mvebu_mbus_add_window_by_id(ORION_MBUS_DEVBUS_BOOT_TARGET,
 				    ORION_MBUS_DEVBUS_BOOT_ATTR,
 				    NET2BIG_NOR_BOOT_BASE,
 				    NET2BIG_NOR_BOOT_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register(&net2big_nor_flash);
 

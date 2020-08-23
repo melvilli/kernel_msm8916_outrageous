@@ -36,8 +36,11 @@ struct v4l2_subscribed_event;
 struct v4l2_fh;
 struct poll_table_struct;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct file;
 =======
+=======
+>>>>>>> v3.18
 
 /** union v4l2_ctrl_ptr - A pointer to a control value.
  * @p_s32:	Pointer to a 32-bit signed value.
@@ -57,6 +60,9 @@ union v4l2_ctrl_ptr {
 	char *p_char;
 	void *p;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /** struct v4l2_ctrl_ops - The control operations that the driver has to provide.
@@ -78,7 +84,10 @@ struct v4l2_ctrl_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /** struct v4l2_ctrl_type_ops - The control type operations that the driver has to provide.
   * @equal: return true if both values are equal.
   * @init: initialize the value.
@@ -96,6 +105,9 @@ struct v4l2_ctrl_type_ops {
 			union v4l2_ctrl_ptr ptr);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef void (*v4l2_ctrl_notify_fnc)(struct v4l2_ctrl *ctrl, void *priv);
 
@@ -110,6 +122,11 @@ typedef void (*v4l2_ctrl_notify_fnc)(struct v4l2_ctrl *ctrl, void *priv);
   *		is also set when called from v4l2_ctrl_handler_setup. Drivers
   *		should never set this flag.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  * @has_changed: Set when the current value differs from the new value. Drivers
+  *		should never use this flag.
+>>>>>>> v3.18
 =======
   * @has_changed: Set when the current value differs from the new value. Drivers
   *		should never use this flag.
@@ -122,7 +139,10 @@ typedef void (*v4l2_ctrl_notify_fnc)(struct v4l2_ctrl *ctrl, void *priv);
   *		used for autogain/gain type clusters. Drivers should never
   *		set this flag directly.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   * @is_int:    If set, then this control has a simple integer value (i.e. it
   *		uses ctrl->val).
   * @is_string: If set, then this control has type V4L2_CTRL_TYPE_STRING.
@@ -130,6 +150,9 @@ typedef void (*v4l2_ctrl_notify_fnc)(struct v4l2_ctrl *ctrl, void *priv);
   *		and/or has type V4L2_CTRL_TYPE_STRING. In other words, struct
   *		v4l2_ext_control uses field p to point to the data.
   * @is_array: If set, then this control contains an N-dimensional array.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   * @has_volatiles: If set, then one or more members of the cluster are volatile.
   *		Drivers should never touch this flag.
@@ -142,6 +165,10 @@ typedef void (*v4l2_ctrl_notify_fnc)(struct v4l2_ctrl *ctrl, void *priv);
   *		never set this flag directly.
   * @ops:	The control ops.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  * @type_ops:	The control type ops.
+>>>>>>> v3.18
 =======
   * @type_ops:	The control type ops.
 >>>>>>> v3.18
@@ -153,11 +180,17 @@ typedef void (*v4l2_ctrl_notify_fnc)(struct v4l2_ctrl *ctrl, void *priv);
   * @default_value: The control's default value.
   * @step:	The control's step value for non-menu controls.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   * @elems:	The number of elements in the N-dimensional array.
   * @elem_size:	The size in bytes of the control.
   * @dims:	The size of each dimension.
   * @nr_of_dims:The number of dimensions in @dims.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   * @menu_skip_mask: The control's skip mask for menu controls. This makes it
   *		easy to skip menu items that are not valid. If bit X is set,
@@ -174,7 +207,10 @@ typedef void (*v4l2_ctrl_notify_fnc)(struct v4l2_ctrl *ctrl, void *priv);
   * @val:	The control's new s32 value.
   * @val64:	The control's new s64 value.
 <<<<<<< HEAD
+<<<<<<< HEAD
   * @string:	The control's new string value.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
   * @priv:	The control's private pointer. For use by the driver. It is
@@ -194,9 +230,12 @@ struct v4l2_ctrl {
 
 	unsigned int is_new:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int is_private:1;
 	unsigned int is_auto:1;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int has_changed:1;
 	unsigned int is_private:1;
 	unsigned int is_auto:1;
@@ -204,12 +243,16 @@ struct v4l2_ctrl {
 	unsigned int is_string:1;
 	unsigned int is_ptr:1;
 	unsigned int is_array:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int has_volatiles:1;
 	unsigned int call_notify:1;
 	unsigned int manual_mode_value:8;
 
 	const struct v4l2_ctrl_ops *ops;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 id;
 	const char *name;
@@ -219,6 +262,8 @@ struct v4l2_ctrl {
 		u32 step;
 		u32 menu_skip_mask;
 =======
+=======
+>>>>>>> v3.18
 	const struct v4l2_ctrl_type_ops *type_ops;
 	u32 id;
 	const char *name;
@@ -231,6 +276,9 @@ struct v4l2_ctrl {
 	union {
 		u64 step;
 		u64 menu_skip_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 	union {
@@ -238,6 +286,7 @@ struct v4l2_ctrl {
 		const s64 *qmenu_int;
 	};
 	unsigned long flags;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	union {
 		s32 val;
@@ -251,6 +300,8 @@ struct v4l2_ctrl {
 	};
 	void *priv;
 =======
+=======
+>>>>>>> v3.18
 	void *priv;
 	s32 val;
 	struct {
@@ -259,6 +310,9 @@ struct v4l2_ctrl {
 
 	union v4l2_ctrl_ptr p_new;
 	union v4l2_ctrl_ptr p_cur;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -314,6 +368,10 @@ struct v4l2_ctrl_handler {
 /** struct v4l2_ctrl_config - Control configuration structure.
   * @ops:	The control ops.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  * @type_ops:	The control type ops. Only needed for compound controls.
+>>>>>>> v3.18
 =======
   * @type_ops:	The control type ops. Only needed for compound controls.
 >>>>>>> v3.18
@@ -325,6 +383,11 @@ struct v4l2_ctrl_handler {
   * @step:	The control's step value for non-menu controls.
   * @def: 	The control's default value.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  * @dims:	The size of each dimension.
+  * @elem_size:	The size in bytes of the control.
+>>>>>>> v3.18
 =======
   * @dims:	The size of each dimension.
   * @elem_size:	The size in bytes of the control.
@@ -334,9 +397,15 @@ struct v4l2_ctrl_handler {
   *		easy to skip menu items that are not valid. If bit X is set,
   *		then menu item X is skipped. Of course, this only works for
 <<<<<<< HEAD
+<<<<<<< HEAD
   *		menus with <= 32 menu items. There are no menus that come
   *		close to that number, so this is OK. Should we ever need more,
   *		then this will have to be extended to a u64 or a bit array.
+=======
+  *		menus with <= 64 menu items. There are no menus that come
+  *		close to that number, so this is OK. Should we ever need more,
+  *		then this will have to be extended to a bit array.
+>>>>>>> v3.18
 =======
   *		menus with <= 64 menu items. There are no menus that come
   *		close to that number, so this is OK. Should we ever need more,
@@ -352,6 +421,7 @@ struct v4l2_ctrl_handler {
 struct v4l2_ctrl_config {
 	const struct v4l2_ctrl_ops *ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 id;
 	const char *name;
 	enum v4l2_ctrl_type type;
@@ -362,6 +432,8 @@ struct v4l2_ctrl_config {
 	u32 flags;
 	u32 menu_skip_mask;
 =======
+=======
+>>>>>>> v3.18
 	const struct v4l2_ctrl_type_ops *type_ops;
 	u32 id;
 	const char *name;
@@ -374,6 +446,9 @@ struct v4l2_ctrl_config {
 	u32 elem_size;
 	u32 flags;
 	u64 menu_skip_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const char * const *qmenu;
 	const s64 *qmenu_int;
@@ -396,7 +471,11 @@ struct v4l2_ctrl_config {
   */
 void v4l2_ctrl_fill(u32 id, const char **name, enum v4l2_ctrl_type *type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    s32 *min, s32 *max, s32 *step, s32 *def, u32 *flags);
+=======
+		    s64 *min, s64 *max, u64 *step, s64 *def, u32 *flags);
+>>>>>>> v3.18
 =======
 		    s64 *min, s64 *max, u64 *step, s64 *def, u32 *flags);
 >>>>>>> v3.18
@@ -450,7 +529,10 @@ int v4l2_ctrl_handler_init_class(struct v4l2_ctrl_handler *hdl,
 void v4l2_ctrl_handler_free(struct v4l2_ctrl_handler *hdl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /** v4l2_ctrl_lock() - Helper function to lock the handler
   * associated with the control.
   * @ctrl:	The control to lock.
@@ -469,6 +551,9 @@ static inline void v4l2_ctrl_unlock(struct v4l2_ctrl *ctrl)
 	mutex_unlock(ctrl->handler->lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /** v4l2_ctrl_handler_setup() - Call the s_ctrl op for all controls belonging
   * to the handler to initialize the hardware to the current control values.
@@ -526,7 +611,11 @@ struct v4l2_ctrl *v4l2_ctrl_new_custom(struct v4l2_ctrl_handler *hdl,
 struct v4l2_ctrl *v4l2_ctrl_new_std(struct v4l2_ctrl_handler *hdl,
 			const struct v4l2_ctrl_ops *ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u32 id, s32 min, s32 max, u32 step, s32 def);
+=======
+			u32 id, s64 min, s64 max, u64 step, s64 def);
+>>>>>>> v3.18
 =======
 			u32 id, s64 min, s64 max, u64 step, s64 def);
 >>>>>>> v3.18
@@ -540,9 +629,15 @@ struct v4l2_ctrl *v4l2_ctrl_new_std(struct v4l2_ctrl_handler *hdl,
   *		easy to skip menu items that are not valid. If bit X is set,
   *		then menu item X is skipped. Of course, this only works for
 <<<<<<< HEAD
+<<<<<<< HEAD
   *		menus with <= 32 menu items. There are no menus that come
   *		close to that number, so this is OK. Should we ever need more,
   *		then this will have to be extended to a u64 or a bit array.
+=======
+  *		menus with <= 64 menu items. There are no menus that come
+  *		close to that number, so this is OK. Should we ever need more,
+  *		then this will have to be extended to a bit array.
+>>>>>>> v3.18
 =======
   *		menus with <= 64 menu items. There are no menus that come
   *		close to that number, so this is OK. Should we ever need more,
@@ -558,7 +653,11 @@ struct v4l2_ctrl *v4l2_ctrl_new_std(struct v4l2_ctrl_handler *hdl,
 struct v4l2_ctrl *v4l2_ctrl_new_std_menu(struct v4l2_ctrl_handler *hdl,
 			const struct v4l2_ctrl_ops *ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u32 id, s32 max, s32 mask, s32 def);
+=======
+			u32 id, u8 max, u64 mask, u8 def);
+>>>>>>> v3.18
 =======
 			u32 id, u8 max, u64 mask, u8 def);
 >>>>>>> v3.18
@@ -573,9 +672,15 @@ struct v4l2_ctrl *v4l2_ctrl_new_std_menu(struct v4l2_ctrl_handler *hdl,
   *		easy to skip menu items that are not valid. If bit X is set,
   *		then menu item X is skipped. Of course, this only works for
 <<<<<<< HEAD
+<<<<<<< HEAD
   *		menus with <= 32 menu items. There are no menus that come
   *		close to that number, so this is OK. Should we ever need more,
   *		then this will have to be extended to a u64 or a bit array.
+=======
+  *		menus with <= 64 menu items. There are no menus that come
+  *		close to that number, so this is OK. Should we ever need more,
+  *		then this will have to be extended to a bit array.
+>>>>>>> v3.18
 =======
   *		menus with <= 64 menu items. There are no menus that come
   *		close to that number, so this is OK. Should we ever need more,
@@ -590,8 +695,13 @@ struct v4l2_ctrl *v4l2_ctrl_new_std_menu(struct v4l2_ctrl_handler *hdl,
   */
 struct v4l2_ctrl *v4l2_ctrl_new_std_menu_items(struct v4l2_ctrl_handler *hdl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			const struct v4l2_ctrl_ops *ops, u32 id, s32 max,
 			s32 mask, s32 def, const char * const *qmenu);
+=======
+			const struct v4l2_ctrl_ops *ops, u32 id, u8 max,
+			u64 mask, u8 def, const char * const *qmenu);
+>>>>>>> v3.18
 =======
 			const struct v4l2_ctrl_ops *ops, u32 id, u8 max,
 			u64 mask, u8 def, const char * const *qmenu);
@@ -613,7 +723,11 @@ struct v4l2_ctrl *v4l2_ctrl_new_std_menu_items(struct v4l2_ctrl_handler *hdl,
 struct v4l2_ctrl *v4l2_ctrl_new_int_menu(struct v4l2_ctrl_handler *hdl,
 			const struct v4l2_ctrl_ops *ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u32 id, s32 max, s32 def, const s64 *qmenu_int);
+=======
+			u32 id, u8 max, u8 def, const s64 *qmenu_int);
+>>>>>>> v3.18
 =======
 			u32 id, u8 max, u8 def, const s64 *qmenu_int);
 >>>>>>> v3.18
@@ -735,12 +849,18 @@ void v4l2_ctrl_activate(struct v4l2_ctrl *ctrl, bool active);
 void v4l2_ctrl_grab(struct v4l2_ctrl *ctrl, bool grabbed);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /** __v4l2_ctrl_modify_range() - Unlocked variant of v4l2_ctrl_modify_range() */
 int __v4l2_ctrl_modify_range(struct v4l2_ctrl *ctrl,
 			     s64 min, s64 max, u64 step, s64 def);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /** v4l2_ctrl_modify_range() - Update the range of a control.
   * @ctrl:	The control to update.
@@ -759,6 +879,7 @@ int __v4l2_ctrl_modify_range(struct v4l2_ctrl *ctrl,
   * This function assumes that the control handler is not locked and will
   * take the lock itself.
   */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int v4l2_ctrl_modify_range(struct v4l2_ctrl *ctrl,
 			s32 min, s32 max, u32 step, s32 def);
@@ -780,6 +901,8 @@ static inline void v4l2_ctrl_unlock(struct v4l2_ctrl *ctrl)
 {
 	mutex_unlock(ctrl->handler->lock);
 =======
+=======
+>>>>>>> v3.18
 static inline int v4l2_ctrl_modify_range(struct v4l2_ctrl *ctrl,
 					 s64 min, s64 max, u64 step, s64 def)
 {
@@ -790,6 +913,9 @@ static inline int v4l2_ctrl_modify_range(struct v4l2_ctrl *ctrl,
 	v4l2_ctrl_unlock(ctrl);
 
 	return rval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -819,6 +945,11 @@ void v4l2_ctrl_notify(struct v4l2_ctrl *ctrl, v4l2_ctrl_notify_fnc notify, void 
 s32 v4l2_ctrl_g_ctrl(struct v4l2_ctrl *ctrl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/** __v4l2_ctrl_s_ctrl() - Unlocked variant of v4l2_ctrl_s_ctrl(). */
+int __v4l2_ctrl_s_ctrl(struct v4l2_ctrl *ctrl, s32 val);
+>>>>>>> v3.18
 =======
 /** __v4l2_ctrl_s_ctrl() - Unlocked variant of v4l2_ctrl_s_ctrl(). */
 int __v4l2_ctrl_s_ctrl(struct v4l2_ctrl *ctrl, s32 val);
@@ -834,8 +965,11 @@ int __v4l2_ctrl_s_ctrl(struct v4l2_ctrl *ctrl, s32 val);
   * This function is for integer type controls only.
   */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int v4l2_ctrl_s_ctrl(struct v4l2_ctrl *ctrl, s32 val);
 =======
+=======
+>>>>>>> v3.18
 static inline int v4l2_ctrl_s_ctrl(struct v4l2_ctrl *ctrl, s32 val)
 {
 	int rval;
@@ -846,6 +980,9 @@ static inline int v4l2_ctrl_s_ctrl(struct v4l2_ctrl *ctrl, s32 val)
 
 	return rval;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /** v4l2_ctrl_g_ctrl_int64() - Helper function to get a 64-bit control's value from within a driver.
@@ -860,6 +997,12 @@ static inline int v4l2_ctrl_s_ctrl(struct v4l2_ctrl *ctrl, s32 val)
 s64 v4l2_ctrl_g_ctrl_int64(struct v4l2_ctrl *ctrl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/** __v4l2_ctrl_s_ctrl_int64() - Unlocked variant of v4l2_ctrl_s_ctrl_int64(). */
+int __v4l2_ctrl_s_ctrl_int64(struct v4l2_ctrl *ctrl, s64 val);
+
+>>>>>>> v3.18
 =======
 /** __v4l2_ctrl_s_ctrl_int64() - Unlocked variant of v4l2_ctrl_s_ctrl_int64(). */
 int __v4l2_ctrl_s_ctrl_int64(struct v4l2_ctrl *ctrl, s64 val);
@@ -876,8 +1019,11 @@ int __v4l2_ctrl_s_ctrl_int64(struct v4l2_ctrl *ctrl, s64 val);
   * This function is for 64-bit integer type controls only.
   */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int v4l2_ctrl_s_ctrl_int64(struct v4l2_ctrl *ctrl, s64 val);
 =======
+=======
+>>>>>>> v3.18
 static inline int v4l2_ctrl_s_ctrl_int64(struct v4l2_ctrl *ctrl, s64 val)
 {
 	int rval;
@@ -912,6 +1058,9 @@ static inline int v4l2_ctrl_s_ctrl_string(struct v4l2_ctrl *ctrl, const char *s)
 
 	return rval;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Internal helper functions that deal with control events. */
@@ -934,6 +1083,10 @@ unsigned int v4l2_ctrl_poll(struct file *file, struct poll_table_struct *wait);
 /* Helpers for ioctl_ops. If hdl == NULL then they will all return -EINVAL. */
 int v4l2_queryctrl(struct v4l2_ctrl_handler *hdl, struct v4l2_queryctrl *qc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int v4l2_query_ext_ctrl(struct v4l2_ctrl_handler *hdl, struct v4l2_query_ext_ctrl *qc);
+>>>>>>> v3.18
 =======
 int v4l2_query_ext_ctrl(struct v4l2_ctrl_handler *hdl, struct v4l2_query_ext_ctrl *qc);
 >>>>>>> v3.18

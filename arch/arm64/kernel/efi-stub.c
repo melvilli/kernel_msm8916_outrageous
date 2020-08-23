@@ -11,6 +11,7 @@
  */
 #include <linux/efi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/libfdt.h>
 #include <asm/sections.h>
 #include <generated/compile.h>
@@ -54,6 +55,8 @@ static efi_status_t handle_kernel_image(efi_system_table_t *sys_table,
 					unsigned long dram_base,
 					efi_loaded_image_t *image)
 =======
+=======
+>>>>>>> v3.18
 #include <asm/efi.h>
 #include <asm/sections.h>
 
@@ -64,6 +67,9 @@ efi_status_t handle_kernel_image(efi_system_table_t *sys_table,
 				 unsigned long *reserve_size,
 				 unsigned long dram_base,
 				 efi_loaded_image_t *image)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	efi_status_t status;
@@ -74,10 +80,15 @@ efi_status_t handle_kernel_image(efi_system_table_t *sys_table,
 	if (*image_addr != (dram_base + TEXT_OFFSET)) {
 		kernel_memsize = kernel_size + (_end - _edata);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = efi_relocate_kernel(sys_table, image_addr,
 					     kernel_size, kernel_memsize,
 					     dram_base + TEXT_OFFSET,
 					     PAGE_SIZE);
+=======
+		status = efi_low_alloc(sys_table, kernel_memsize + TEXT_OFFSET,
+				       SZ_2M, reserve_addr);
+>>>>>>> v3.18
 =======
 		status = efi_low_alloc(sys_table, kernel_memsize + TEXT_OFFSET,
 				       SZ_2M, reserve_addr);
@@ -87,6 +98,7 @@ efi_status_t handle_kernel_image(efi_system_table_t *sys_table,
 			return status;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (*image_addr != (dram_base + TEXT_OFFSET)) {
 			pr_efi_err(sys_table, "Failed to alloc kernel memory\n");
 			efi_free(sys_table, kernel_memsize, *image_addr);
@@ -94,10 +106,15 @@ efi_status_t handle_kernel_image(efi_system_table_t *sys_table,
 		}
 		*image_size = kernel_memsize;
 =======
+=======
+>>>>>>> v3.18
 		memcpy((void *)*reserve_addr + TEXT_OFFSET, (void *)*image_addr,
 		       kernel_size);
 		*image_addr = *reserve_addr + TEXT_OFFSET;
 		*reserve_size = kernel_memsize + TEXT_OFFSET;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

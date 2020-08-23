@@ -12,7 +12,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/jiffies.h>
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -28,6 +32,7 @@ static void vexpress_reset_do(struct device *dev, const char *what)
 {
 	int err = -ENOENT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vexpress_config_func *func =
 			vexpress_config_func_get_by_dev(dev);
 
@@ -40,12 +45,17 @@ static void vexpress_reset_do(struct device *dev, const char *what)
 		while (time_before(jiffies, timeout))
 			cpu_relax();
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *reg = dev_get_drvdata(dev);
 
 	if (reg) {
 		err = regmap_write(reg, 0, 0);
 		if (!err)
 			mdelay(1000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -110,6 +120,10 @@ static int vexpress_reset_probe(struct platform_device *pdev)
 	const struct of_device_id *match =
 			of_match_device(vexpress_reset_of_match, &pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct regmap *regmap;
+>>>>>>> v3.18
 =======
 	struct regmap *regmap;
 >>>>>>> v3.18
@@ -120,12 +134,18 @@ static int vexpress_reset_probe(struct platform_device *pdev)
 		func = pdev->id_entry->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	regmap = devm_regmap_init_vexpress_config(&pdev->dev);
 	if (IS_ERR(regmap))
 		return PTR_ERR(regmap);
 	dev_set_drvdata(&pdev->dev, regmap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (func) {
 	case FUNC_SHUTDOWN:

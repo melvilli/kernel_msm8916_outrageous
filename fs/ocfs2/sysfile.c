@@ -114,15 +114,21 @@ struct inode *ocfs2_get_system_file_inode(struct ocfs2_super *osb,
 		arr = get_local_system_inode(osb, type, slot);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (arr && ((inode = *arr) != NULL)) {
 		/* get a ref in addition to the array ref */
 		inode = igrab(inode);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&osb->system_file_mutex);
 	if (arr && ((inode = *arr) != NULL)) {
 		/* get a ref in addition to the array ref */
 		inode = igrab(inode);
 		mutex_unlock(&osb->system_file_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		BUG_ON(!inode);
 
@@ -138,6 +144,10 @@ struct inode *ocfs2_get_system_file_inode(struct ocfs2_super *osb,
 		BUG_ON(!*arr);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&osb->system_file_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&osb->system_file_mutex);
 >>>>>>> v3.18

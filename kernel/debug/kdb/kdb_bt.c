@@ -22,7 +22,11 @@ static void kdb_show_stack(struct task_struct *p, void *addr)
 {
 	int old_lvl = console_loglevel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	console_loglevel = 15;
+=======
+	console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
+>>>>>>> v3.18
 =======
 	console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
 >>>>>>> v3.18

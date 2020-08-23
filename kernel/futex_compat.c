@@ -156,7 +156,11 @@ COMPAT_SYSCALL_DEFINE3(get_robust_list, int, pid,
 
 	ret = -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ptrace_may_access(p, PTRACE_MODE_READ_REALCREDS))
+=======
+	if (!ptrace_may_access(p, PTRACE_MODE_READ))
+>>>>>>> v3.18
 =======
 	if (!ptrace_may_access(p, PTRACE_MODE_READ))
 >>>>>>> v3.18
@@ -188,7 +192,11 @@ COMPAT_SYSCALL_DEFINE6(futex, u32 __user *, uaddr, int, op, u32, val,
 		      cmd == FUTEX_WAIT_BITSET ||
 		      cmd == FUTEX_WAIT_REQUEUE_PI)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (get_compat_timespec(&ts, utime))
+=======
+		if (compat_get_timespec(&ts, utime))
+>>>>>>> v3.18
 =======
 		if (compat_get_timespec(&ts, utime))
 >>>>>>> v3.18

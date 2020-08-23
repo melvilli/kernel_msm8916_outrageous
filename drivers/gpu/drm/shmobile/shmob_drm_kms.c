@@ -2,7 +2,11 @@
  * shmob_drm_kms.c  --  SH Mobile DRM Mode Setting
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012 Renesas Corporation
+=======
+ * Copyright (C) 2012 Renesas Electronics Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012 Renesas Electronics Corporation
 >>>>>>> v3.18
@@ -121,7 +125,11 @@ shmob_drm_fb_create(struct drm_device *dev, struct drm_file *file_priv,
 
 	if (mode_cmd->pitches[0] & 7 || mode_cmd->pitches[0] >= 65536) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(dev->dev, "valid pitch value %u\n",
+=======
+		dev_dbg(dev->dev, "invalid pitch value %u\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(dev->dev, "invalid pitch value %u\n",
 >>>>>>> v3.18

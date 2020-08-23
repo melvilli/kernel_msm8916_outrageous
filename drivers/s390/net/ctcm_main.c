@@ -1138,15 +1138,21 @@ static struct net_device *ctcm_init_netdevice(struct ctcm_priv *priv)
 
 	if (IS_MPC(priv))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev = alloc_netdev(0, MPC_DEVICE_GENE, ctcm_dev_setup);
 	else
 		dev = alloc_netdev(0, CTC_DEVICE_GENE, ctcm_dev_setup);
 =======
+=======
+>>>>>>> v3.18
 		dev = alloc_netdev(0, MPC_DEVICE_GENE, NET_NAME_UNKNOWN,
 				   ctcm_dev_setup);
 	else
 		dev = alloc_netdev(0, CTC_DEVICE_GENE, NET_NAME_UNKNOWN,
 				   ctcm_dev_setup);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!dev) {
@@ -1846,7 +1852,11 @@ static int __init ctcm_init(void)
 		goto out_err;
 	ctcm_root_dev = root_device_register("ctcm");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = IS_ERR(ctcm_root_dev) ? PTR_ERR(ctcm_root_dev) : 0;
+=======
+	ret = PTR_ERR_OR_ZERO(ctcm_root_dev);
+>>>>>>> v3.18
 =======
 	ret = PTR_ERR_OR_ZERO(ctcm_root_dev);
 >>>>>>> v3.18

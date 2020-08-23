@@ -23,10 +23,13 @@
 #include  <linux/irqreturn.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef bool
 #define bool int
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -289,9 +292,15 @@ struct arcnet_local {
 	unsigned long last_recon;  /* time of most recent RECON */
 	int num_recons;		/* number of RECONs between first and last. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool network_down;	/* do we think the network is down? */
 
 	bool excnak_pending;    /* We just got an excesive nak interrupt */
+=======
+	int network_down;	/* do we think the network is down? */
+
+	int excnak_pending;    /* We just got an excesive nak interrupt */
+>>>>>>> v3.18
 =======
 	int network_down;	/* do we think the network is down? */
 
@@ -315,7 +324,11 @@ struct arcnet_local {
 		int (*status) (struct net_device * dev);
 		void (*intmask) (struct net_device * dev, int mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bool (*reset) (struct net_device * dev, bool really_reset);
+=======
+		int (*reset) (struct net_device * dev, int really_reset);
+>>>>>>> v3.18
 =======
 		int (*reset) (struct net_device * dev, int really_reset);
 >>>>>>> v3.18

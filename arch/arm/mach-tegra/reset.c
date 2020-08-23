@@ -15,6 +15,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/io.h>
 #include <linux/cpumask.h>
@@ -22,6 +23,8 @@
 
 #include <asm/cacheflush.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bitops.h>
 #include <linux/cpumask.h>
 #include <linux/init.h>
@@ -31,6 +34,9 @@
 
 #include <asm/cacheflush.h>
 #include <asm/firmware.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/hardware/cache-l2x0.h>
 
@@ -39,7 +45,10 @@
 #include "reset.h"
 #include "sleep.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "fuse.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -49,9 +58,14 @@
 static bool is_enabled;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init tegra_cpu_reset_handler_enable(void)
 {
 	void __iomem *iram_base = IO_ADDRESS(TEGRA_IRAM_RESET_BASE);
+=======
+static void __init tegra_cpu_reset_handler_set(const u32 reset_address)
+{
+>>>>>>> v3.18
 =======
 static void __init tegra_cpu_reset_handler_set(const u32 reset_address)
 {
@@ -62,6 +76,7 @@ static void __init tegra_cpu_reset_handler_set(const u32 reset_address)
 	u32 reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(is_enabled);
 	BUG_ON(tegra_cpu_reset_handler_size > TEGRA_IRAM_RESET_HANDLER_SIZE);
 
@@ -70,13 +85,19 @@ static void __init tegra_cpu_reset_handler_set(const u32 reset_address)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/*
 	 * NOTE: This must be the one and only write to the EVP CPU reset
 	 *       vector in the entire system.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(TEGRA_IRAM_RESET_BASE + tegra_cpu_reset_handler_offset,
 			evp_cpu_reset);
+=======
+	writel(reset_address, evp_cpu_reset);
+>>>>>>> v3.18
 =======
 	writel(reset_address, evp_cpu_reset);
 >>>>>>> v3.18
@@ -88,6 +109,7 @@ static void __init tegra_cpu_reset_handler_set(const u32 reset_address)
 	 *  NOTE: Has no effect on chips prior to Tegra30.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tegra_chip_id != TEGRA20) {
 		reg = readl(sb_ctrl);
 		reg |= 2;
@@ -97,6 +119,8 @@ static void __init tegra_cpu_reset_handler_set(const u32 reset_address)
 
 	is_enabled = true;
 =======
+=======
+>>>>>>> v3.18
 	reg = readl(sb_ctrl);
 	reg |= 2;
 	writel(reg, sb_ctrl);
@@ -128,6 +152,9 @@ static void __init tegra_cpu_reset_handler_enable(void)
 		pr_crit("Cannot set CPU reset handler: %d\n", err);
 		BUG();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -143,6 +170,11 @@ void __init tegra_cpu_reset_handler_init(void)
 
 #ifdef CONFIG_PM_SLEEP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__tegra_cpu_reset_handler_data[TEGRA_RESET_STARTUP_LP1] =
+		TEGRA_IRAM_LPx_RESUME_AREA;
+>>>>>>> v3.18
 =======
 	__tegra_cpu_reset_handler_data[TEGRA_RESET_STARTUP_LP1] =
 		TEGRA_IRAM_LPx_RESUME_AREA;

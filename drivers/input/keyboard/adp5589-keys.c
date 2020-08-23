@@ -9,7 +9,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -503,7 +506,11 @@ static int adp5589_gpio_add(struct adp5589_kpad *kpad)
 {
 	struct device *dev = &kpad->client->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct adp5589_kpad_platform_data *pdata = dev->platform_data;
+=======
+	const struct adp5589_kpad_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	const struct adp5589_kpad_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -561,7 +568,11 @@ static void adp5589_gpio_remove(struct adp5589_kpad *kpad)
 {
 	struct device *dev = &kpad->client->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct adp5589_kpad_platform_data *pdata = dev->platform_data;
+=======
+	const struct adp5589_kpad_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	const struct adp5589_kpad_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -580,9 +591,13 @@ static void adp5589_gpio_remove(struct adp5589_kpad *kpad)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = gpiochip_remove(&kpad->gc);
 	if (error)
 		dev_warn(dev, "gpiochip_remove failed %d\n", error);
+=======
+	gpiochip_remove(&kpad->gc);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&kpad->gc);
 >>>>>>> v3.18
@@ -674,7 +689,11 @@ static int adp5589_setup(struct adp5589_kpad *kpad)
 	struct i2c_client *client = kpad->client;
 	const struct adp5589_kpad_platform_data *pdata =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		client->dev.platform_data;
+=======
+		dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 		dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -884,7 +903,11 @@ static int adp5589_probe(struct i2c_client *client,
 	struct adp5589_kpad *kpad;
 	const struct adp5589_kpad_platform_data *pdata =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		client->dev.platform_data;
+=======
+		dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 		dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -1016,7 +1039,12 @@ static int adp5589_probe(struct i2c_client *client,
 
 	for (i = 0; i < input->keycodemax; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__set_bit(kpad->keycode[i] & KEY_MAX, input->keybit);
+=======
+		if (kpad->keycode[i] <= KEY_MAX)
+			__set_bit(kpad->keycode[i], input->keybit);
+>>>>>>> v3.18
 =======
 		if (kpad->keycode[i] <= KEY_MAX)
 			__set_bit(kpad->keycode[i], input->keybit);

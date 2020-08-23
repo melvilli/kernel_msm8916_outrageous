@@ -27,7 +27,11 @@ static struct buffer_head *bfs_find_entry(struct inode *dir,
 				struct bfs_dirent **res_dir);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bfs_readdir(struct file *f, void *dirent, filldir_t filldir)
+=======
+static int bfs_readdir(struct file *f, struct dir_context *ctx)
+>>>>>>> v3.18
 =======
 static int bfs_readdir(struct file *f, struct dir_context *ctx)
 >>>>>>> v3.18
@@ -35,6 +39,7 @@ static int bfs_readdir(struct file *f, struct dir_context *ctx)
 	struct inode *dir = file_inode(f);
 	struct buffer_head *bh;
 	struct bfs_dirent *de;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct bfs_sb_info *info = BFS_SB(dir->i_sb);
 	unsigned int offset;
@@ -57,6 +62,8 @@ static int bfs_readdir(struct file *f, struct dir_context *ctx)
 		if (!bh) {
 			f->f_pos += BFS_BSIZE - offset;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int offset;
 	int block;
 
@@ -73,6 +80,9 @@ static int bfs_readdir(struct file *f, struct dir_context *ctx)
 		bh = sb_bread(dir->i_sb, block);
 		if (!bh) {
 			ctx->pos += BFS_BSIZE - offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
@@ -81,21 +91,28 @@ static int bfs_readdir(struct file *f, struct dir_context *ctx)
 			if (de->ino) {
 				int size = strnlen(de->name, BFS_NAMELEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (filldir(dirent, de->name, size, f->f_pos,
 						le16_to_cpu(de->ino),
 						DT_UNKNOWN) < 0) {
 					brelse(bh);
 					mutex_unlock(&info->bfs_lock);
 =======
+=======
+>>>>>>> v3.18
 				if (!dir_emit(ctx, de->name, size,
 						le16_to_cpu(de->ino),
 						DT_UNKNOWN)) {
 					brelse(bh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					return 0;
 				}
 			}
 			offset += BFS_DIRENT_SIZE;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			f->f_pos += BFS_DIRENT_SIZE;
 		} while ((offset < BFS_BSIZE) && (f->f_pos < dir->i_size));
@@ -105,18 +122,27 @@ static int bfs_readdir(struct file *f, struct dir_context *ctx)
 	mutex_unlock(&info->bfs_lock);
 	return 0;	
 =======
+=======
+>>>>>>> v3.18
 			ctx->pos += BFS_DIRENT_SIZE;
 		} while ((offset < BFS_BSIZE) && (ctx->pos < dir->i_size));
 		brelse(bh);
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 const struct file_operations bfs_dir_operations = {
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= bfs_readdir,
+=======
+	.iterate	= bfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= bfs_readdir,
 >>>>>>> v3.18
@@ -125,8 +151,11 @@ const struct file_operations bfs_dir_operations = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dump_imap(const char *, struct super_block *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int bfs_create(struct inode *dir, struct dentry *dentry, umode_t mode,
@@ -163,7 +192,11 @@ static int bfs_create(struct inode *dir, struct dentry *dentry, umode_t mode,
 	insert_inode_hash(inode);
         mark_inode_dirty(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dump_imap("create", s);
+=======
+	bfs_dump_imap("create", s);
+>>>>>>> v3.18
 =======
 	bfs_dump_imap("create", s);
 >>>>>>> v3.18

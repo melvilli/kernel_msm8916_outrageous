@@ -24,7 +24,11 @@ SECTIONS
 	. = CONFIG_ENTRY_ADDRESS;
 	.init		: AT(ADDR(.init) - LOAD_OFFSET) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_stext = .;
+=======
+		_text = .;
+>>>>>>> v3.18
 =======
 		_text = .;
 >>>>>>> v3.18
@@ -51,7 +55,11 @@ SECTIONS
 	.text		: AT(ADDR(.text) - LOAD_OFFSET) {
 		_evba = .;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_text = .;
+=======
+		_stext = .;
+>>>>>>> v3.18
 =======
 		_stext = .;
 >>>>>>> v3.18

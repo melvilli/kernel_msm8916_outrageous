@@ -58,7 +58,10 @@ MACHINE_START(BUG, "BugLabs BUGBase")
 	.init_early = imx31_init_early,
 	.init_irq = mx31_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx31_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= bug_timer_init,

@@ -11,6 +11,11 @@ Required properties:
 - interrupts : A list of 6 interrupts; one per each of timer channels 1
     through 5, and one for the shared interrupt for the remaining channels.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- clocks : Must contain one entry, for the module clock.
+  See ../clocks/clock-bindings.txt for details.
+>>>>>>> v3.18
 =======
 - clocks : Must contain one entry, for the module clock.
   See ../clocks/clock-bindings.txt for details.
@@ -26,6 +31,10 @@ timer {
 		      0 121 0x04
 		      0 122 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clocks = <&tegra_car 214>;
+>>>>>>> v3.18
 =======
 	clocks = <&tegra_car 214>;
 >>>>>>> v3.18

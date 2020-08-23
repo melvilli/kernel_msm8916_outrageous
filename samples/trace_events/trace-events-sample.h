@@ -57,7 +57,12 @@
  *    There are currently two types of elements. __field and __array.
  *    a __field is broken up into (type, name). Where type can be any
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    type but an array.
+=======
+ *    primitive type (integer, long or pointer). __field_struct() can
+ *    be any static complex data value (struct, union, but not an array).
+>>>>>>> v3.18
 =======
  *    primitive type (integer, long or pointer). __field_struct() can
  *    be any static complex data value (struct, union, but not an array).
@@ -92,7 +97,11 @@ TRACE_EVENT(foo_bar,
 
 	TP_fast_assign(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		strncpy(__entry->foo, foo, 10);
+=======
+		strlcpy(__entry->foo, foo, 10);
+>>>>>>> v3.18
 =======
 		strlcpy(__entry->foo, foo, 10);
 >>>>>>> v3.18

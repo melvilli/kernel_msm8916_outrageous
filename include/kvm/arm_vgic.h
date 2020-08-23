@@ -25,6 +25,7 @@
 #include <linux/spinlock.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irqchip/arm-gic.h>
 
 #define VGIC_NR_IRQS		128
@@ -46,6 +47,8 @@
 
 #if (VGIC_NR_IRQS > 1024)
 =======
+=======
+>>>>>>> v3.18
 
 #define VGIC_NR_IRQS_LEGACY	256
 #define VGIC_NR_SGIS		16
@@ -66,6 +69,9 @@
 #endif
 
 #if (VGIC_NR_IRQS_LEGACY > VGIC_MAX_IRQS)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #error "VGIC_NR_IRQS must be <= 1024"
 #endif
@@ -76,6 +82,7 @@
  * - a bunch of shared interrupts (SPI)
  */
 struct vgic_bitmap {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	union {
 		u32 reg[VGIC_NR_PRIVATE_IRQS / 32];
@@ -91,6 +98,8 @@ struct vgic_bytemap {
 	u32 percpu[VGIC_MAX_CPUS][VGIC_NR_PRIVATE_IRQS / 4];
 	u32 shared[VGIC_NR_SHARED_IRQS  / 4];
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * - One UL per VCPU for private interrupts (assumes UL is at
 	 *   least 32 bits)
@@ -170,6 +179,9 @@ struct vgic_params {
 	unsigned int	maint_irq;
 	/* Virtual control interface base address */
 	void __iomem	*vctrl_base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -177,15 +189,21 @@ struct vgic_dist {
 #ifdef CONFIG_KVM_ARM_VGIC
 	spinlock_t		lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool			ready;
 
 =======
+=======
+>>>>>>> v3.18
 	bool			in_kernel;
 	bool			ready;
 
 	int			nr_cpus;
 	int			nr_irqs;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Virtual control interface mapping */
 	void __iomem		*vctrl_base;
@@ -201,12 +219,15 @@ struct vgic_dist {
 	struct vgic_bitmap	irq_enabled;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Interrupt 'pin' level */
 	struct vgic_bitmap	irq_state;
 
 	/* Level-triggered interrupt in progress */
 	struct vgic_bitmap	irq_active;
 =======
+=======
+>>>>>>> v3.18
 	/* Level-triggered interrupt external input is asserted */
 	struct vgic_bitmap	irq_level;
 
@@ -226,6 +247,9 @@ struct vgic_dist {
 
 	/* Level-triggered interrupt queued on VCPU interface */
 	struct vgic_bitmap	irq_queued;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Interrupt priority. Not used yet. */
@@ -234,6 +258,7 @@ struct vgic_dist {
 	/* Level/edge triggered */
 	struct vgic_bitmap	irq_cfg;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Source CPU per SGI and target CPU */
 	u8			irq_sgi_sources[VGIC_MAX_CPUS][VGIC_NR_SGIS];
@@ -245,6 +270,8 @@ struct vgic_dist {
 	/* Bitmap indicating which CPU has something pending */
 	unsigned long		irq_pending_on_cpu;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Source CPU per SGI and target CPU:
 	 *
@@ -298,6 +325,9 @@ struct vgic_v3_cpu_if {
 	u32		vgic_ap0r[4];
 	u32		vgic_ap1r[4];
 	u64		vgic_lr[VGIC_V3_MAX_LRS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };
@@ -305,6 +335,7 @@ struct vgic_v3_cpu_if {
 struct vgic_cpu {
 #ifdef CONFIG_KVM_ARM_VGIC
 	/* per IRQ to LR mapping */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8		vgic_irq_lr_map[VGIC_NR_IRQS];
 
@@ -315,6 +346,8 @@ struct vgic_cpu {
 	/* Bitmap of used/free list registers */
 	DECLARE_BITMAP(	lr_used, VGIC_MAX_LRS);
 =======
+=======
+>>>>>>> v3.18
 	u8		*vgic_irq_lr_map;
 
 	/* Pending interrupts on this VCPU */
@@ -323,12 +356,16 @@ struct vgic_cpu {
 
 	/* Bitmap of used/free list registers */
 	DECLARE_BITMAP(	lr_used, VGIC_V2_MAX_LRS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Number of list registers on this CPU */
 	int		nr_lr;
 
 	/* CPU vif control registers for world switch */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32		vgic_hcr;
 	u32		vgic_vmcr;
@@ -338,10 +375,15 @@ struct vgic_cpu {
 	u32		vgic_apr;
 	u32		vgic_lr[VGIC_MAX_LRS];
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct vgic_v2_cpu_if	vgic_v2;
 		struct vgic_v3_cpu_if	vgic_v3;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };
@@ -349,6 +391,12 @@ struct vgic_cpu {
 #define LR_EMPTY	0xff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define INT_STATUS_EOI		(1 << 0)
+#define INT_STATUS_UNDERFLOW	(1 << 1)
+
+>>>>>>> v3.18
 =======
 #define INT_STATUS_EOI		(1 << 0)
 #define INT_STATUS_UNDERFLOW	(1 << 1)
@@ -361,18 +409,24 @@ struct kvm_exit_mmio;
 
 #ifdef CONFIG_KVM_ARM_VGIC
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_vgic_set_addr(struct kvm *kvm, unsigned long type, u64 addr);
 int kvm_vgic_hyp_init(void);
 int kvm_vgic_init(struct kvm *kvm);
 int kvm_vgic_create(struct kvm *kvm);
 int kvm_vgic_vcpu_init(struct kvm_vcpu *vcpu);
 =======
+=======
+>>>>>>> v3.18
 int kvm_vgic_addr(struct kvm *kvm, unsigned long type, u64 *addr, bool write);
 int kvm_vgic_hyp_init(void);
 int kvm_vgic_init(struct kvm *kvm);
 int kvm_vgic_create(struct kvm *kvm);
 void kvm_vgic_destroy(struct kvm *kvm);
 void kvm_vgic_vcpu_destroy(struct kvm_vcpu *vcpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void kvm_vgic_flush_hwstate(struct kvm_vcpu *vcpu);
 void kvm_vgic_sync_hwstate(struct kvm_vcpu *vcpu);
@@ -383,10 +437,13 @@ bool vgic_handle_mmio(struct kvm_vcpu *vcpu, struct kvm_run *run,
 		      struct kvm_exit_mmio *mmio);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define irqchip_in_kernel(k)	(!!((k)->arch.vgic.vctrl_base))
 #define vgic_initialized(k)	((k)->arch.vgic.ready)
 
 =======
+=======
+>>>>>>> v3.18
 #define irqchip_in_kernel(k)	(!!((k)->arch.vgic.in_kernel))
 #define vgic_initialized(k)	((k)->arch.vgic.ready)
 
@@ -406,6 +463,9 @@ static inline int vgic_v3_probe(struct device_node *vgic_node,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int kvm_vgic_hyp_init(void)
@@ -419,12 +479,18 @@ static inline int kvm_vgic_set_addr(struct kvm *kvm, unsigned long type, u64 add
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int kvm_vgic_addr(struct kvm *kvm, unsigned long type, u64 *addr, bool write)
 {
 	return -ENXIO;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int kvm_vgic_init(struct kvm *kvm)
 {
@@ -437,7 +503,10 @@ static inline int kvm_vgic_create(struct kvm *kvm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void kvm_vgic_destroy(struct kvm *kvm)
 {
 }
@@ -446,6 +515,9 @@ static inline void kvm_vgic_vcpu_destroy(struct kvm_vcpu *vcpu)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int kvm_vgic_vcpu_init(struct kvm_vcpu *vcpu)
 {

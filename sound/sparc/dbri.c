@@ -2535,6 +2535,7 @@ static int snd_dbri_create(struct snd_card *card,
 	dbri->irq = irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbri->dma = dma_alloc_coherent(&op->dev,
 				       sizeof(struct dbri_dma),
 				       &dbri->dma_dvma, GFP_ATOMIC);
@@ -2542,10 +2543,15 @@ static int snd_dbri_create(struct snd_card *card,
 		return -ENOMEM;
 	memset((void *)dbri->dma, 0, sizeof(struct dbri_dma));
 =======
+=======
+>>>>>>> v3.18
 	dbri->dma = dma_zalloc_coherent(&op->dev, sizeof(struct dbri_dma),
 					&dbri->dma_dvma, GFP_ATOMIC);
 	if (!dbri->dma)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dprintk(D_GEN, "DMA Cmd Block 0x%p (0x%08x)\n",
@@ -2623,8 +2629,13 @@ static int dbri_probe(struct platform_device *op)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct snd_dbri), &card);
+=======
+	err = snd_card_new(&op->dev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct snd_dbri), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&op->dev, index[dev], id[dev], THIS_MODULE,
 			   sizeof(struct snd_dbri), &card);
@@ -2683,8 +2694,11 @@ static int dbri_remove(struct platform_device *op)
 	snd_card_free(card);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

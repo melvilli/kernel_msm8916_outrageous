@@ -12,6 +12,11 @@
 #define CSB726_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "irqs.h" /* PXA_GPIO_TO_IRQ */
+
+>>>>>>> v3.18
 =======
 #include "irqs.h" /* PXA_GPIO_TO_IRQ */
 

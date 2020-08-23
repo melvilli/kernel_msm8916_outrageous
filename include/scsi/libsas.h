@@ -173,7 +173,10 @@ struct sata_device {
         struct smp_resp        rps_resp; /* report_phy_sata_resp */
         u8     port_no;        /* port number, if this is a PM (Port) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int    pm_result;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -612,7 +615,11 @@ struct sas_ssp_task {
 	enum   task_attribute task_attr;
 	u8     task_prio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8     cdb[16];
+=======
+	struct scsi_cmnd *cmd;
+>>>>>>> v3.18
 =======
 	struct scsi_cmnd *cmd;
 >>>>>>> v3.18

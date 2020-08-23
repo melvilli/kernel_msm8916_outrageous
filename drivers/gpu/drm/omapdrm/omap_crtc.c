@@ -34,6 +34,10 @@ struct omap_crtc {
 	enum omap_channel channel;
 	struct omap_overlay_manager_info info;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct drm_encoder *current_encoder;
+>>>>>>> v3.18
 =======
 	struct drm_encoder *current_encoder;
 >>>>>>> v3.18
@@ -45,7 +49,11 @@ struct omap_crtc {
 	 * more common-panel-framework-y
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_overlay_manager mgr;
+=======
+	struct omap_overlay_manager *mgr;
+>>>>>>> v3.18
 =======
 	struct omap_overlay_manager *mgr;
 >>>>>>> v3.18
@@ -99,8 +107,11 @@ uint32_t pipe2vbl(struct drm_crtc *crtc)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* we can probably ignore these until we support command-mode panels: */
 =======
+=======
+>>>>>>> v3.18
 /* ovl-mgr-id -> crtc */
 static struct omap_crtc *omap_crtcs[8];
 
@@ -127,15 +138,21 @@ static void omap_crtc_disconnect(struct omap_overlay_manager *mgr,
 	mgr->output = NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void omap_crtc_start_update(struct omap_overlay_manager *mgr)
 {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int omap_crtc_enable(struct omap_overlay_manager *mgr)
 {
 =======
+=======
+>>>>>>> v3.18
 static void set_enabled(struct drm_crtc *crtc, bool enable);
 
 static int omap_crtc_enable(struct omap_overlay_manager *mgr)
@@ -147,6 +164,9 @@ static int omap_crtc_enable(struct omap_overlay_manager *mgr)
 			&omap_crtc->timings);
 	set_enabled(&omap_crtc->base, true);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -154,6 +174,12 @@ static int omap_crtc_enable(struct omap_overlay_manager *mgr)
 static void omap_crtc_disable(struct omap_overlay_manager *mgr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct omap_crtc *omap_crtc = omap_crtcs[mgr->id];
+
+	set_enabled(&omap_crtc->base, false);
+>>>>>>> v3.18
 =======
 	struct omap_crtc *omap_crtc = omap_crtcs[mgr->id];
 
@@ -165,7 +191,11 @@ static void omap_crtc_set_timings(struct omap_overlay_manager *mgr,
 		const struct omap_video_timings *timings)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_crtc *omap_crtc = container_of(mgr, struct omap_crtc, mgr);
+=======
+	struct omap_crtc *omap_crtc = omap_crtcs[mgr->id];
+>>>>>>> v3.18
 =======
 	struct omap_crtc *omap_crtc = omap_crtcs[mgr->id];
 >>>>>>> v3.18
@@ -178,7 +208,11 @@ static void omap_crtc_set_lcd_config(struct omap_overlay_manager *mgr,
 		const struct dss_lcd_mgr_config *config)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_crtc *omap_crtc = container_of(mgr, struct omap_crtc, mgr);
+=======
+	struct omap_crtc *omap_crtc = omap_crtcs[mgr->id];
+>>>>>>> v3.18
 =======
 	struct omap_crtc *omap_crtc = omap_crtcs[mgr->id];
 >>>>>>> v3.18
@@ -201,6 +235,11 @@ static void omap_crtc_unregister_framedone_handler(
 
 static const struct dss_mgr_ops mgr_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.connect = omap_crtc_connect,
+		.disconnect = omap_crtc_disconnect,
+>>>>>>> v3.18
 =======
 		.connect = omap_crtc_connect,
 		.disconnect = omap_crtc_disconnect,
@@ -228,7 +267,10 @@ static void omap_crtc_destroy(struct drm_crtc *crtc)
 	omap_irq_unregister(crtc->dev, &omap_crtc->error_irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap_crtc->plane->funcs->destroy(omap_crtc->plane);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	drm_crtc_cleanup(crtc);
@@ -292,7 +334,11 @@ static int omap_crtc_mode_set(struct drm_crtc *crtc,
 	omap_crtc->full_update = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return omap_plane_mode_set(omap_crtc->plane, crtc, crtc->fb,
+=======
+	return omap_plane_mode_set(omap_crtc->plane, crtc, crtc->primary->fb,
+>>>>>>> v3.18
 =======
 	return omap_plane_mode_set(omap_crtc->plane, crtc, crtc->primary->fb,
 >>>>>>> v3.18
@@ -324,7 +370,11 @@ static int omap_crtc_mode_set_base(struct drm_crtc *crtc, int x, int y,
 	struct drm_display_mode *mode = &crtc->mode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return omap_plane_mode_set(plane, crtc, crtc->fb,
+=======
+	return omap_plane_mode_set(plane, crtc, crtc->primary->fb,
+>>>>>>> v3.18
 =======
 	return omap_plane_mode_set(plane, crtc, crtc->primary->fb,
 >>>>>>> v3.18
@@ -335,10 +385,13 @@ static int omap_crtc_mode_set_base(struct drm_crtc *crtc, int x, int y,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void omap_crtc_load_lut(struct drm_crtc *crtc)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void vblank_cb(void *arg)
@@ -369,8 +422,13 @@ static void page_flip_worker(struct work_struct *work)
 	struct drm_gem_object *bo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&crtc->mutex);
 	omap_plane_mode_set(omap_crtc->plane, crtc, crtc->fb,
+=======
+	drm_modeset_lock(&crtc->mutex, NULL);
+	omap_plane_mode_set(omap_crtc->plane, crtc, crtc->primary->fb,
+>>>>>>> v3.18
 =======
 	drm_modeset_lock(&crtc->mutex, NULL);
 	omap_plane_mode_set(omap_crtc->plane, crtc, crtc->primary->fb,
@@ -380,9 +438,15 @@ static void page_flip_worker(struct work_struct *work)
 			mode->hdisplay << 16, mode->vdisplay << 16,
 			vblank_cb, crtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&crtc->mutex);
 
 	bo = omap_framebuffer_bo(crtc->fb, 0);
+=======
+	drm_modeset_unlock(&crtc->mutex);
+
+	bo = omap_framebuffer_bo(crtc->primary->fb, 0);
+>>>>>>> v3.18
 =======
 	drm_modeset_unlock(&crtc->mutex);
 
@@ -404,6 +468,7 @@ static void page_flip_cb(void *arg)
 static int omap_crtc_page_flip_locked(struct drm_crtc *crtc,
 		 struct drm_framebuffer *fb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 struct drm_pending_vblank_event *event)
 {
 	struct drm_device *dev = crtc->dev;
@@ -415,6 +480,8 @@ static int omap_crtc_page_flip_locked(struct drm_crtc *crtc,
 
 	if (omap_crtc->old_fb) {
 =======
+=======
+>>>>>>> v3.18
 		 struct drm_pending_vblank_event *event,
 		 uint32_t page_flip_flags)
 {
@@ -431,6 +498,9 @@ static int omap_crtc_page_flip_locked(struct drm_crtc *crtc,
 
 	if (omap_crtc->old_fb) {
 		spin_unlock_irqrestore(&dev->event_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(dev->dev, "already a pending flip\n");
 		return -EINVAL;
@@ -438,7 +508,13 @@ static int omap_crtc_page_flip_locked(struct drm_crtc *crtc,
 
 	omap_crtc->event = event;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crtc->fb = fb;
+=======
+	omap_crtc->old_fb = primary->fb = fb;
+
+	spin_unlock_irqrestore(&dev->event_lock, flags);
+>>>>>>> v3.18
 =======
 	omap_crtc->old_fb = primary->fb = fb;
 
@@ -487,7 +563,10 @@ static const struct drm_crtc_helper_funcs omap_crtc_helper_funcs = {
 	.commit = omap_crtc_commit,
 	.mode_set_base = omap_crtc_mode_set_base,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.load_lut = omap_crtc_load_lut,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -512,7 +591,11 @@ static void omap_crtc_error_irq(struct omap_drm_irq *irq, uint32_t irqstatus)
 	DRM_ERROR("%s: errors: %08x\n", omap_crtc->name, irqstatus);
 	/* avoid getting in a flood, unregister the irq until next vblank */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap_irq_unregister(crtc->dev, &omap_crtc->error_irq);
+=======
+	__omap_irq_unregister(crtc->dev, &omap_crtc->error_irq);
+>>>>>>> v3.18
 =======
 	__omap_irq_unregister(crtc->dev, &omap_crtc->error_irq);
 >>>>>>> v3.18
@@ -526,7 +609,11 @@ static void omap_crtc_apply_irq(struct omap_drm_irq *irq, uint32_t irqstatus)
 
 	if (!omap_crtc->error_irq.registered)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		omap_irq_register(crtc->dev, &omap_crtc->error_irq);
+=======
+		__omap_irq_register(crtc->dev, &omap_crtc->error_irq);
+>>>>>>> v3.18
 =======
 		__omap_irq_register(crtc->dev, &omap_crtc->error_irq);
 >>>>>>> v3.18
@@ -536,7 +623,11 @@ static void omap_crtc_apply_irq(struct omap_drm_irq *irq, uint32_t irqstatus)
 				crtc->dev->dev_private;
 		DBG("%s: apply done", omap_crtc->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		omap_irq_unregister(crtc->dev, &omap_crtc->apply_irq);
+=======
+		__omap_irq_unregister(crtc->dev, &omap_crtc->apply_irq);
+>>>>>>> v3.18
 =======
 		__omap_irq_unregister(crtc->dev, &omap_crtc->apply_irq);
 >>>>>>> v3.18
@@ -559,7 +650,11 @@ static void apply_worker(struct work_struct *work)
 	 * with respect to modesetting ioctls from userspace.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&crtc->mutex);
+=======
+	drm_modeset_lock(&crtc->mutex, NULL);
+>>>>>>> v3.18
 =======
 	drm_modeset_lock(&crtc->mutex, NULL);
 >>>>>>> v3.18
@@ -608,7 +703,11 @@ static void apply_worker(struct work_struct *work)
 out:
 	dispc_runtime_put();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&crtc->mutex);
+=======
+	drm_modeset_unlock(&crtc->mutex);
+>>>>>>> v3.18
 =======
 	drm_modeset_unlock(&crtc->mutex);
 >>>>>>> v3.18
@@ -620,7 +719,11 @@ int omap_crtc_apply(struct drm_crtc *crtc,
 	struct omap_crtc *omap_crtc = to_omap_crtc(crtc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(!mutex_is_locked(&crtc->mutex));
+=======
+	WARN_ON(!drm_modeset_is_locked(&crtc->mutex));
+>>>>>>> v3.18
 =======
 	WARN_ON(!drm_modeset_is_locked(&crtc->mutex));
 >>>>>>> v3.18
@@ -652,7 +755,13 @@ static void set_enabled(struct drm_crtc *crtc, bool enable)
 	struct omap_crtc *omap_crtc = to_omap_crtc(crtc);
 	enum omap_channel channel = omap_crtc->channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_irq_wait *wait = NULL;
+=======
+	struct omap_irq_wait *wait;
+	u32 framedone_irq, vsync_irq;
+	int ret;
+>>>>>>> v3.18
 =======
 	struct omap_irq_wait *wait;
 	u32 framedone_irq, vsync_irq;
@@ -662,6 +771,7 @@ static void set_enabled(struct drm_crtc *crtc, bool enable)
 	if (dispc_mgr_is_enabled(channel) == enable)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* ignore sync-lost irqs during enable/disable */
 	omap_irq_unregister(crtc->dev, &omap_crtc->error_irq);
@@ -681,6 +791,8 @@ static void set_enabled(struct drm_crtc *crtc, bool enable)
 		wait = omap_irq_wait_init(dev,
 				dispc_mgr_get_vsync_irq(channel), 2);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Digit output produces some sync lost interrupts during the first
 	 * frame when enabling, so we need to ignore those.
@@ -706,11 +818,15 @@ static void set_enabled(struct drm_crtc *crtc, bool enable)
 			wait = omap_irq_wait_init(dev, framedone_irq, 1);
 		else
 			wait = omap_irq_wait_init(dev, vsync_irq, 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	dispc_mgr_enable(channel, enable);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (wait) {
 		int ret = omap_irq_wait(dev, wait, msecs_to_jiffies(100));
@@ -719,10 +835,15 @@ static void set_enabled(struct drm_crtc *crtc, bool enable)
 					omap_crtc->name, enable ? "enable" : "disable");
 		}
 =======
+=======
+>>>>>>> v3.18
 	ret = omap_irq_wait(dev, wait, msecs_to_jiffies(100));
 	if (ret) {
 		dev_err(dev->dev, "%s: timeout waiting for %s\n",
 				omap_crtc->name, enable ? "enable" : "disable");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -751,21 +872,28 @@ static void omap_crtc_pre_apply(struct omap_drm_apply *apply)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!omap_crtc->enabled) {
 		set_enabled(&omap_crtc->base, false);
 =======
+=======
+>>>>>>> v3.18
 	if (omap_crtc->current_encoder && encoder != omap_crtc->current_encoder)
 		omap_encoder_set_enabled(omap_crtc->current_encoder, false);
 
 	omap_crtc->current_encoder = encoder;
 
 	if (!omap_crtc->enabled) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (encoder)
 			omap_encoder_set_enabled(encoder, false);
 	} else {
 		if (encoder) {
 			omap_encoder_set_enabled(encoder, false);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			omap_encoder_update(encoder, &omap_crtc->mgr,
 					&omap_crtc->timings);
@@ -778,10 +906,15 @@ static void omap_crtc_pre_apply(struct omap_drm_apply *apply)
 				&omap_crtc->timings);
 		set_enabled(&omap_crtc->base, true);
 =======
+=======
+>>>>>>> v3.18
 			omap_encoder_update(encoder, omap_crtc->mgr,
 					&omap_crtc->timings);
 			omap_encoder_set_enabled(encoder, true);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -794,7 +927,10 @@ static void omap_crtc_post_apply(struct omap_drm_apply *apply)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void omap_crtc_flush(struct drm_crtc *crtc)
 {
 	struct omap_crtc *omap_crtc = to_omap_crtc(crtc);
@@ -814,15 +950,21 @@ void omap_crtc_flush(struct drm_crtc *crtc)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char *channel_names[] = {
 		[OMAP_DSS_CHANNEL_LCD] = "lcd",
 		[OMAP_DSS_CHANNEL_DIGIT] = "tv",
 		[OMAP_DSS_CHANNEL_LCD2] = "lcd2",
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 		[OMAP_DSS_CHANNEL_LCD3] = "lcd3",
 };
 
@@ -836,6 +978,9 @@ void omap_crtc_pre_uninit(void)
 	dss_uninstall_mgr_ops();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* initialize crtc */
 struct drm_crtc *omap_crtc_init(struct drm_device *dev,
@@ -878,9 +1023,13 @@ struct drm_crtc *omap_crtc_init(struct drm_device *dev,
 
 	/* temporary: */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap_crtc->mgr.id = channel;
 
 	dss_install_mgr_ops(&mgr_ops);
+=======
+	omap_crtc->mgr = omap_dss_get_overlay_manager(channel);
+>>>>>>> v3.18
 =======
 	omap_crtc->mgr = omap_dss_get_overlay_manager(channel);
 >>>>>>> v3.18
@@ -898,6 +1047,11 @@ struct drm_crtc *omap_crtc_init(struct drm_device *dev,
 	omap_plane_install_properties(omap_crtc->plane, &crtc->base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	omap_crtcs[channel] = omap_crtc;
+
+>>>>>>> v3.18
 =======
 	omap_crtcs[channel] = omap_crtc;
 

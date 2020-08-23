@@ -53,6 +53,11 @@
 #include <rdma/ib_verbs.h>
 #include <rdma/iw_cm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <rdma/rdma_netlink.h>
+#include <rdma/iw_portmap.h>
+>>>>>>> v3.18
 =======
 #include <rdma/rdma_netlink.h>
 #include <rdma/iw_portmap.h>
@@ -115,6 +120,10 @@ struct c4iw_dev_ucontext {
 enum c4iw_rdev_flags {
 	T4_FATAL_ERROR = (1<<0),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	T4_STATUS_PAGE_DISABLED = (1<<1),
+>>>>>>> v3.18
 =======
 	T4_STATUS_PAGE_DISABLED = (1<<1),
 >>>>>>> v3.18
@@ -140,6 +149,10 @@ struct c4iw_stats {
 	u64  db_drop;
 	u64  db_state_transitions;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64  db_fc_interruptions;
+>>>>>>> v3.18
 =======
 	u64  db_fc_interruptions;
 >>>>>>> v3.18
@@ -149,7 +162,10 @@ struct c4iw_stats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct c4iw_hw_queue {
 	int t4_eq_status_entries;
 	int t4_max_eq_size;
@@ -173,6 +189,9 @@ struct wr_log_entry {
 	u8 valid;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct c4iw_rdev {
 	struct c4iw_resource resource;
@@ -187,10 +206,13 @@ struct c4iw_rdev {
 	u32 flags;
 	struct cxgb4_lld_info lldi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long oc_mw_pa;
 	void __iomem *oc_mw_kva;
 	struct c4iw_stats stats;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long bar2_pa;
 	void __iomem *bar2_kva;
 	unsigned long oc_mw_pa;
@@ -201,6 +223,9 @@ struct c4iw_rdev {
 	atomic_t wr_log_idx;
 	struct wr_log_entry *wr_log;
 	int wr_log_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -212,7 +237,11 @@ static inline int c4iw_fatal_error(struct c4iw_rdev *rdev)
 static inline int c4iw_num_stags(struct c4iw_rdev *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return min((int)T4_MAX_NUM_STAG, (int)(rdev->lldi.vr->stag.size >> 5));
+=======
+	return (int)(rdev->lldi.vr->stag.size >> 5);
+>>>>>>> v3.18
 =======
 	return (int)(rdev->lldi.vr->stag.size >> 5);
 >>>>>>> v3.18
@@ -268,7 +297,12 @@ enum db_state {
 	NORMAL = 0,
 	FLOW_CONTROL = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RECOVERY = 2
+=======
+	RECOVERY = 2,
+	STOPPED = 3
+>>>>>>> v3.18
 =======
 	RECOVERY = 2,
 	STOPPED = 3
@@ -287,16 +321,22 @@ struct c4iw_dev {
 	struct dentry *debugfs_root;
 	enum db_state db_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int qpcnt;
 	struct idr hwtid_idr;
 	struct idr atid_idr;
 	struct idr stid_idr;
 =======
+=======
+>>>>>>> v3.18
 	struct idr hwtid_idr;
 	struct idr atid_idr;
 	struct idr stid_idr;
 	struct list_head db_fc_list;
 	u32 avail_ird;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -380,7 +420,10 @@ static inline void remove_handle_nolock(struct c4iw_dev *rhp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern uint c4iw_max_read_depth;
 
 static inline int cur_max_read_depth(struct c4iw_dev *dev)
@@ -388,6 +431,9 @@ static inline int cur_max_read_depth(struct c4iw_dev *dev)
 	return min(dev->rdev.lldi.max_ordird_qp, c4iw_max_read_depth);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct c4iw_pd {
 	struct ib_pd ibpd;
@@ -449,6 +495,10 @@ struct c4iw_fr_page_list {
 	dma_addr_t dma_addr;
 	struct c4iw_dev *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int pll_len;
+>>>>>>> v3.18
 =======
 	int pll_len;
 >>>>>>> v3.18
@@ -512,6 +562,10 @@ struct c4iw_qp_attributes {
 	u16 sq_db_inc;
 	u16 rq_db_inc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 send_term;
+>>>>>>> v3.18
 =======
 	u8 send_term;
 >>>>>>> v3.18
@@ -520,6 +574,10 @@ struct c4iw_qp_attributes {
 struct c4iw_qp {
 	struct ib_qp ibqp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head db_fc_entry;
+>>>>>>> v3.18
 =======
 	struct list_head db_fc_entry;
 >>>>>>> v3.18
@@ -533,6 +591,10 @@ struct c4iw_qp {
 	wait_queue_head_t wait;
 	struct timer_list timer;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int sq_sig_all;
+>>>>>>> v3.18
 =======
 	int sq_sig_all;
 >>>>>>> v3.18
@@ -814,6 +876,10 @@ enum c4iw_ep_flags {
 	TIMEOUT                 = 4,
 	QP_REFERENCED           = 5,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RELEASE_MAPINFO		= 6,
+>>>>>>> v3.18
 =======
 	RELEASE_MAPINFO		= 6,
 >>>>>>> v3.18
@@ -852,13 +918,19 @@ struct c4iw_ep_common {
 	struct kref kref;
 	struct mutex mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_in local_addr;
 	struct sockaddr_in remote_addr;
 =======
+=======
+>>>>>>> v3.18
 	struct sockaddr_storage local_addr;
 	struct sockaddr_storage remote_addr;
 	struct sockaddr_storage mapped_local_addr;
 	struct sockaddr_storage mapped_remote_addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct c4iw_wr_wait wr_wait;
 	unsigned long flags;
@@ -902,9 +974,12 @@ struct c4iw_ep {
 	u8 tried_with_mpa_v1;
 	unsigned int retry_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	int snd_win;
 	int rcv_win;
 };
@@ -948,6 +1023,9 @@ static inline void print_addr(struct c4iw_ep_common *epc, const char *func,
 #undef SIN6P
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct c4iw_ep *to_ep(struct iw_cm_id *cm_id)
 {
@@ -1005,7 +1083,11 @@ int c4iw_register_device(struct c4iw_dev *dev);
 void c4iw_unregister_device(struct c4iw_dev *dev);
 int __init c4iw_cm_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __exit c4iw_cm_term(void);
+=======
+void c4iw_cm_term(void);
+>>>>>>> v3.18
 =======
 void c4iw_cm_term(void);
 >>>>>>> v3.18
@@ -1074,6 +1156,7 @@ u32 c4iw_ocqp_pool_alloc(struct c4iw_rdev *rdev, int size);
 void c4iw_ocqp_pool_free(struct c4iw_rdev *rdev, u32 addr, int size);
 int c4iw_ofld_send(struct c4iw_rdev *rdev, struct sk_buff *skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void c4iw_flush_hw_cq(struct t4_cq *cq);
 void c4iw_count_rcqes(struct t4_cq *cq, struct t4_wq *wq, int *count);
 void c4iw_count_scqes(struct t4_cq *cq, struct t4_wq *wq, int *count);
@@ -1081,11 +1164,16 @@ int c4iw_ep_disconnect(struct c4iw_ep *ep, int abrupt, gfp_t gfp);
 int c4iw_flush_rq(struct t4_wq *wq, struct t4_cq *cq, int count);
 int c4iw_flush_sq(struct t4_wq *wq, struct t4_cq *cq, int count);
 =======
+=======
+>>>>>>> v3.18
 void c4iw_flush_hw_cq(struct c4iw_cq *chp);
 void c4iw_count_rcqes(struct t4_cq *cq, struct t4_wq *wq, int *count);
 int c4iw_ep_disconnect(struct c4iw_ep *ep, int abrupt, gfp_t gfp);
 int c4iw_flush_rq(struct t4_wq *wq, struct t4_cq *cq, int count);
 int c4iw_flush_sq(struct c4iw_qp *qhp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int c4iw_ev_handler(struct c4iw_dev *rnicp, u32 qid);
 u16 c4iw_rqes_posted(struct c4iw_qp *qhp);
@@ -1101,7 +1189,12 @@ void c4iw_ev_dispatch(struct c4iw_dev *dev, struct t4_cqe *err_cqe);
 extern struct cxgb4_client t4c_client;
 extern c4iw_handler_func c4iw_handlers[NUM_CPL_CMDS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int c4iw_max_read_depth;
+=======
+extern void c4iw_log_wr_stats(struct t4_wq *wq, struct t4_cqe *cqe);
+extern int c4iw_wr_log;
+>>>>>>> v3.18
 =======
 extern void c4iw_log_wr_stats(struct t4_wq *wq, struct t4_cqe *cqe);
 extern int c4iw_wr_log;

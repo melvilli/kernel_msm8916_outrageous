@@ -11,7 +11,11 @@ config PPC_PMAC
 config PPC_PMAC64
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PPC_PMAC && POWER4
+=======
+	depends on PPC_PMAC && PPC64
+>>>>>>> v3.18
 =======
 	depends on PPC_PMAC && PPC64
 >>>>>>> v3.18

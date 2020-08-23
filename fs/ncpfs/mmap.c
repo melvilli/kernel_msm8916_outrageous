@@ -108,7 +108,11 @@ int ncp_mmap(struct file *file, struct vm_area_struct *vma)
 	struct inode *inode = file_inode(file);
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DPRINTK("ncp_mmap: called\n");
+=======
+	ncp_dbg(1, "called\n");
+>>>>>>> v3.18
 =======
 	ncp_dbg(1, "called\n");
 >>>>>>> v3.18
@@ -122,7 +126,11 @@ int ncp_mmap(struct file *file, struct vm_area_struct *vma)
 	/* we do not support files bigger than 4GB... We eventually 
 	   supports just 4GB... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (((vma->vm_end - vma->vm_start) >> PAGE_SHIFT) + vma->vm_pgoff 
+=======
+	if (vma_pages(vma) + vma->vm_pgoff
+>>>>>>> v3.18
 =======
 	if (vma_pages(vma) + vma->vm_pgoff
 >>>>>>> v3.18

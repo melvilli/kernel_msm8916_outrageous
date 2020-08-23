@@ -376,10 +376,13 @@ static int __init dryice_rtc_probe(struct platform_device *pdev)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	imxdi = devm_kzalloc(&pdev->dev, sizeof(*imxdi), GFP_KERNEL);
@@ -388,6 +391,7 @@ static int __init dryice_rtc_probe(struct platform_device *pdev)
 
 	imxdi->pdev = pdev;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!devm_request_mem_region(&pdev->dev, res->start, resource_size(res),
 				pdev->name))
@@ -398,10 +402,15 @@ static int __init dryice_rtc_probe(struct platform_device *pdev)
 	if (imxdi->ioaddr == NULL)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	imxdi->ioaddr = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(imxdi->ioaddr))
 		return PTR_ERR(imxdi->ioaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_init(&imxdi->irq_lock);
@@ -420,7 +429,13 @@ static int __init dryice_rtc_probe(struct platform_device *pdev)
 	if (IS_ERR(imxdi->clk))
 		return PTR_ERR(imxdi->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_prepare_enable(imxdi->clk);
+=======
+	rc = clk_prepare_enable(imxdi->clk);
+	if (rc)
+		return rc;
+>>>>>>> v3.18
 =======
 	rc = clk_prepare_enable(imxdi->clk);
 	if (rc)

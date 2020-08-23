@@ -22,7 +22,11 @@ enum die_val {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void printk_address(unsigned long address, int reliable);
+=======
+extern void printk_address(unsigned long address);
+>>>>>>> v3.18
 =======
 extern void printk_address(unsigned long address);
 >>>>>>> v3.18

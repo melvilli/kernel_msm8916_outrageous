@@ -341,7 +341,11 @@ static unsigned int de_ok_to_advertise (struct de_private *de, u32 new_media);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(de_pci_tbl) = {
+=======
+static const struct pci_device_id de_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id de_pci_tbl[] = {
 >>>>>>> v3.18
@@ -2115,7 +2119,10 @@ static void de_remove_one(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(dev);

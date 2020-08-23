@@ -12,9 +12,14 @@
 #include <linux/leds.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/cm.h>
 #include <mach/hardware.h>
 #include <mach/platform.h>
+=======
+#include "hardware.h"
+#include "cm.h"
+>>>>>>> v3.18
 =======
 #include "hardware.h"
 #include "cm.h"
@@ -84,7 +89,11 @@ static void cm_led_set(struct led_classdev *cdev,
 static enum led_brightness cm_led_get(struct led_classdev *cdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reg = readl(CM_CTRL);
+=======
+	u32 reg = cm_get();
+>>>>>>> v3.18
 =======
 	u32 reg = cm_get();
 >>>>>>> v3.18

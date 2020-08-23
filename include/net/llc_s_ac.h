@@ -26,6 +26,7 @@
 typedef int (*llc_sap_action_t)(struct llc_sap *sap, struct sk_buff *skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int llc_sap_action_unitdata_ind(struct llc_sap *sap,
 				       struct sk_buff *skb);
 extern int llc_sap_action_send_ui(struct llc_sap *sap, struct sk_buff *skb);
@@ -38,6 +39,8 @@ extern int llc_sap_action_report_status(struct llc_sap *sap,
 extern int llc_sap_action_xid_ind(struct llc_sap *sap, struct sk_buff *skb);
 extern int llc_sap_action_test_ind(struct llc_sap *sap, struct sk_buff *skb);
 =======
+=======
+>>>>>>> v3.18
 int llc_sap_action_unitdata_ind(struct llc_sap *sap, struct sk_buff *skb);
 int llc_sap_action_send_ui(struct llc_sap *sap, struct sk_buff *skb);
 int llc_sap_action_send_xid_c(struct llc_sap *sap, struct sk_buff *skb);
@@ -47,5 +50,8 @@ int llc_sap_action_send_test_r(struct llc_sap *sap, struct sk_buff *skb);
 int llc_sap_action_report_status(struct llc_sap *sap, struct sk_buff *skb);
 int llc_sap_action_xid_ind(struct llc_sap *sap, struct sk_buff *skb);
 int llc_sap_action_test_ind(struct llc_sap *sap, struct sk_buff *skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* LLC_S_AC_H */

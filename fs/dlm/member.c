@@ -61,9 +61,15 @@ void dlm_slots_copy_out(struct dlm_ls *ls, struct dlm_rcom *rc)
 #define SLOT_DEBUG_LINE 128
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void log_debug_slots(struct dlm_ls *ls, uint32_t gen, int num_slots,
 			    struct rcom_slot *ro0, struct dlm_slot *array,
 			    int array_size)
+=======
+static void log_slots(struct dlm_ls *ls, uint32_t gen, int num_slots,
+		      struct rcom_slot *ro0, struct dlm_slot *array,
+		      int array_size)
+>>>>>>> v3.18
 =======
 static void log_slots(struct dlm_ls *ls, uint32_t gen, int num_slots,
 		      struct rcom_slot *ro0, struct dlm_slot *array,
@@ -76,9 +82,12 @@ static void log_slots(struct dlm_ls *ls, uint32_t gen, int num_slots,
 	int ret, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dlm_config.ci_log_debug)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memset(line, 0, sizeof(line));
@@ -105,7 +114,11 @@ static void log_slots(struct dlm_ls *ls, uint32_t gen, int num_slots,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "generation %u slots %d%s", gen, num_slots, line);
+=======
+	log_rinfo(ls, "generation %u slots %d%s", gen, num_slots, line);
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "generation %u slots %d%s", gen, num_slots, line);
 >>>>>>> v3.18
@@ -143,7 +156,11 @@ int dlm_slots_copy_in(struct dlm_ls *ls)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug_slots(ls, gen, num_slots, ro0, NULL, 0);
+=======
+	log_slots(ls, gen, num_slots, ro0, NULL, 0);
+>>>>>>> v3.18
 =======
 	log_slots(ls, gen, num_slots, ro0, NULL, 0);
 >>>>>>> v3.18
@@ -292,7 +309,11 @@ int dlm_slots_assign(struct dlm_ls *ls, int *num_slots, int *slots_size,
 	gen++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug_slots(ls, gen, num, NULL, array, array_size);
+=======
+	log_slots(ls, gen, num, NULL, array, array_size);
+>>>>>>> v3.18
 =======
 	log_slots(ls, gen, num, NULL, array, array_size);
 >>>>>>> v3.18
@@ -469,7 +490,11 @@ static int ping_members(struct dlm_ls *ls)
 	}
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "ping_members aborted %d last nodeid %d",
+=======
+		log_rinfo(ls, "ping_members aborted %d last nodeid %d",
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "ping_members aborted %d last nodeid %d",
 >>>>>>> v3.18
@@ -565,7 +590,11 @@ int dlm_recover_members(struct dlm_ls *ls, struct dlm_recover *rv, int *neg_out)
 
 	list_for_each_entry(memb, &ls->ls_nodes_gone, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "prev removed member %d", memb->nodeid);
+=======
+		log_rinfo(ls, "prev removed member %d", memb->nodeid);
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "prev removed member %d", memb->nodeid);
 >>>>>>> v3.18
@@ -581,15 +610,21 @@ int dlm_recover_members(struct dlm_ls *ls, struct dlm_recover *rv, int *neg_out)
 
 		if (!node) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			log_debug(ls, "remove member %d", memb->nodeid);
 		} else {
 			/* removed and re-added */
 			log_debug(ls, "remove member %d comm_seq %u %u",
 =======
+=======
+>>>>>>> v3.18
 			log_rinfo(ls, "remove member %d", memb->nodeid);
 		} else {
 			/* removed and re-added */
 			log_rinfo(ls, "remove member %d comm_seq %u %u",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  memb->nodeid, memb->comm_seq, node->comm_seq);
 		}
@@ -608,7 +643,11 @@ int dlm_recover_members(struct dlm_ls *ls, struct dlm_recover *rv, int *neg_out)
 			continue;
 		dlm_add_member(ls, node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_debug(ls, "add member %d", node->nodeid);
+=======
+		log_rinfo(ls, "add member %d", node->nodeid);
+>>>>>>> v3.18
 =======
 		log_rinfo(ls, "add member %d", node->nodeid);
 >>>>>>> v3.18
@@ -632,7 +671,11 @@ int dlm_recover_members(struct dlm_ls *ls, struct dlm_recover *rv, int *neg_out)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	log_debug(ls, "dlm_recover_members %d nodes", ls->ls_num_nodes);
+=======
+	log_rinfo(ls, "dlm_recover_members %d nodes", ls->ls_num_nodes);
+>>>>>>> v3.18
 =======
 	log_rinfo(ls, "dlm_recover_members %d nodes", ls->ls_num_nodes);
 >>>>>>> v3.18

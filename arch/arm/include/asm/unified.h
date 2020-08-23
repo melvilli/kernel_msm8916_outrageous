@@ -39,6 +39,11 @@
 #define W(instr)	instr.w
 #define BSYM(sym)	sym + 1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else
+#define WASM(instr)	#instr ".w"
+>>>>>>> v3.18
 =======
 #else
 #define WASM(instr)	#instr ".w"
@@ -56,6 +61,11 @@
 #define W(instr)	instr
 #define BSYM(sym)	sym
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else
+#define WASM(instr)	#instr
+>>>>>>> v3.18
 =======
 #else
 #define WASM(instr)	#instr

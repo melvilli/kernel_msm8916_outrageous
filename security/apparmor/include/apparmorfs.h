@@ -62,7 +62,10 @@ extern const struct file_operations aa_fs_seq_file_ops;
 extern void __init aa_destroy_aafs(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct aa_profile;
 struct aa_namespace;
 
@@ -103,5 +106,8 @@ void __aa_fs_namespace_rmdir(struct aa_namespace *ns);
 int __aa_fs_namespace_mkdir(struct aa_namespace *ns, struct dentry *parent,
 			    const char *name);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __AA_APPARMORFS_H */

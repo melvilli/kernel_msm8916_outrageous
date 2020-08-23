@@ -26,16 +26,22 @@ extern struct oprofile_stat_struct oprofile_stats;
 void oprofile_reset_stats(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct super_block;
 struct dentry;
 
 /* create the stats/ dir */
 void oprofile_create_stats_files(struct super_block *sb, struct dentry *root);
 =======
+=======
+>>>>>>> v3.18
 struct dentry;
 
 /* create the stats/ dir */
 void oprofile_create_stats_files(struct dentry *root);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* OPROFILE_STATS_H */

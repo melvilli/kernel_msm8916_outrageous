@@ -82,7 +82,11 @@ static inline void get_mmu_context(struct mm_struct *mm, unsigned int cpu)
 		/*
 		 * Fix version; Note that we avoid version #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * to distingush NO_CONTEXT.
+=======
+		 * to distinguish NO_CONTEXT.
+>>>>>>> v3.18
 =======
 		 * to distinguish NO_CONTEXT.
 >>>>>>> v3.18

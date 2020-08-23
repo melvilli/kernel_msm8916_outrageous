@@ -7,6 +7,10 @@
 #define UNCORE_PMU_NAME_LEN		32
 #define UNCORE_PMU_HRTIMER_INTERVAL	(60LL * NSEC_PER_SEC)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define UNCORE_SNB_IMC_HRTIMER_INTERVAL (5ULL * NSEC_PER_SEC)
+>>>>>>> v3.18
 =======
 #define UNCORE_SNB_IMC_HRTIMER_INTERVAL (5ULL * NSEC_PER_SEC)
 >>>>>>> v3.18
@@ -16,6 +20,7 @@
 #define UNCORE_PMC_IDX_FIXED		UNCORE_PMC_IDX_MAX_GENERIC
 #define UNCORE_PMC_IDX_MAX		(UNCORE_PMC_IDX_FIXED + 1)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define UNCORE_EVENT_CONSTRAINT(c, n) EVENT_CONSTRAINT(c, n, 0xff)
 
@@ -407,6 +412,8 @@
 
 #define NHMEX_W_PMON_GLOBAL_FIXED_EN		(1ULL << 31)
 =======
+=======
+>>>>>>> v3.18
 #define UNCORE_PCI_DEV_DATA(type, idx)	((type << 8) | idx)
 #define UNCORE_PCI_DEV_TYPE(data)	((data >> 8) & 0xff)
 #define UNCORE_PCI_DEV_IDX(data)	(data & 0xff)
@@ -417,6 +424,9 @@
 #define UNCORE_SOCKET_MAX		8
 
 #define UNCORE_EVENT_CONSTRAINT(c, n) EVENT_CONSTRAINT(c, n, 0xff)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct intel_uncore_ops;
@@ -448,6 +458,10 @@ struct intel_uncore_type {
 	struct uncore_event_desc *event_descs;
 	const struct attribute_group *attr_groups[4];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct pmu *pmu; /* for custom pmu ops */
+>>>>>>> v3.18
 =======
 	struct pmu *pmu; /* for custom pmu ops */
 >>>>>>> v3.18
@@ -500,14 +514,20 @@ struct intel_uncore_box {
 	struct pci_dev *pci_dev;
 	struct intel_uncore_pmu *pmu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hrtimer hrtimer;
 	struct list_head list;
 =======
+=======
+>>>>>>> v3.18
 	u64 hrtimer_duration; /* hrtimer timeout for this box */
 	struct hrtimer hrtimer;
 	struct list_head list;
 	struct list_head active_list;
 	void *io_addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct intel_uncore_extra_reg shared_regs[0];
 };
@@ -520,6 +540,12 @@ struct uncore_event_desc {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ssize_t uncore_event_show(struct kobject *kobj,
+			  struct kobj_attribute *attr, char *buf);
+
+>>>>>>> v3.18
 =======
 ssize_t uncore_event_show(struct kobject *kobj,
 			  struct kobj_attribute *attr, char *buf);
@@ -543,6 +569,7 @@ static struct kobj_attribute format_attr_##_var =			\
 	__ATTR(_name, 0444, __uncore_##_var##_show, NULL)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t uncore_event_show(struct kobject *kobj,
 				struct kobj_attribute *attr, char *buf)
@@ -552,6 +579,8 @@ static ssize_t uncore_event_show(struct kobject *kobj,
 	return sprintf(buf, "%s", event->config);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline unsigned uncore_pci_box_ctl(struct intel_uncore_box *box)
@@ -718,7 +747,10 @@ static inline bool uncore_box_is_fake(struct intel_uncore_box *box)
 	return (box->phys_id < 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 struct intel_uncore_pmu *uncore_event_to_pmu(struct perf_event *event);
 struct intel_uncore_box *uncore_pmu_to_box(struct intel_uncore_pmu *pmu, int cpu);
@@ -757,4 +789,7 @@ void hswep_uncore_cpu_init(void);
 
 /* perf_event_intel_uncore_nhmex.c */
 void nhmex_uncore_cpu_init(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

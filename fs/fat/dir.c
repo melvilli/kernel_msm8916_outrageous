@@ -544,6 +544,10 @@ EXPORT_SYMBOL_GPL(fat_search_long);
 
 struct fat_ioctl_filldir_callback {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dir_context ctx;
+>>>>>>> v3.18
 =======
 	struct dir_context ctx;
 >>>>>>> v3.18
@@ -557,8 +561,14 @@ struct fat_ioctl_filldir_callback {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __fat_readdir(struct inode *inode, struct file *filp, void *dirent,
 			 filldir_t filldir, int short_only, int both)
+=======
+static int __fat_readdir(struct inode *inode, struct file *file,
+			 struct dir_context *ctx, int short_only,
+			 struct fat_ioctl_filldir_callback *both)
+>>>>>>> v3.18
 =======
 static int __fat_readdir(struct inode *inode, struct file *file,
 			 struct dir_context *ctx, int short_only,
@@ -575,8 +585,12 @@ static int __fat_readdir(struct inode *inode, struct file *file,
 	int isvfat = sbi->options.isvfat;
 	const char *fill_name = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long inum;
 	unsigned long lpos, dummy, *furrfu = &lpos;
+=======
+	int fake_offset = 0;
+>>>>>>> v3.18
 =======
 	int fake_offset = 0;
 >>>>>>> v3.18
@@ -586,6 +600,7 @@ static int __fat_readdir(struct inode *inode, struct file *file,
 
 	mutex_lock(&sbi->s_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpos = filp->f_pos;
 	/* Fake . and .. for the root directory. */
@@ -601,6 +616,8 @@ static int __fat_readdir(struct inode *inode, struct file *file,
 			dummy = 2;
 			furrfu = &dummy;
 =======
+=======
+>>>>>>> v3.18
 	cpos = ctx->pos;
 	/* Fake . and .. for the root directory. */
 	if (inode->i_ino == MSDOS_ROOT_INO) {
@@ -608,6 +625,9 @@ static int __fat_readdir(struct inode *inode, struct file *file,
 			goto out;
 		if (ctx->pos == 2) {
 			fake_offset = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			cpos = 0;
 		}
@@ -644,7 +664,11 @@ parse_record:
 					    &unicode, &nr_slots);
 		if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos = cpos;
+=======
+			ctx->pos = cpos;
+>>>>>>> v3.18
 =======
 			ctx->pos = cpos;
 >>>>>>> v3.18
@@ -668,7 +692,10 @@ parse_record:
 			if (!both)
 				goto start_filldir;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			short_len = fat_parse_short(sb, de, bufname,
 						    sbi->options.dotsOK);
@@ -682,6 +709,9 @@ parse_record:
 			fill_name = NULL;
 			fill_len = 0;
 			goto start_filldir;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -690,6 +720,7 @@ parse_record:
 	if (short_len == 0)
 		goto record_end;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (nr_slots) {
 		/* hack for fat_ioctl_filldir() */
@@ -714,6 +745,8 @@ start_filldir:
 		inum = parent_ino(filp->f_path.dentry);
 	} else {
 =======
+=======
+>>>>>>> v3.18
 	fill_name = bufname;
 	fill_len = short_len;
 
@@ -729,6 +762,9 @@ start_filldir:
 			goto fill_failed;
 	} else {
 		unsigned long inum;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		loff_t i_pos = fat_make_i_pos(sb, bh, de);
 		struct inode *tmp = fat_iget(sb, i_pos);
@@ -737,6 +773,7 @@ start_filldir:
 			iput(tmp);
 		} else
 			inum = iunique(sb, MSDOS_ROOT_INO);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 
@@ -751,6 +788,8 @@ record_end:
 end_of_dir:
 	filp->f_pos = cpos;
 =======
+=======
+>>>>>>> v3.18
 		if (!dir_emit(ctx, fill_name, fill_len, inum,
 			    (de->attr & ATTR_DIR) ? DT_DIR : DT_REG))
 			goto fill_failed;
@@ -762,6 +801,9 @@ record_end:
 	goto get_new;
 end_of_dir:
 	ctx->pos = cpos;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 fill_failed:
 	brelse(bh);
@@ -773,10 +815,16 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fat_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode *inode = file_inode(filp);
 	return __fat_readdir(inode, filp, dirent, filldir, 0, 0);
+=======
+static int fat_readdir(struct file *file, struct dir_context *ctx)
+{
+	return __fat_readdir(file_inode(file), file, ctx, 0, NULL);
+>>>>>>> v3.18
 =======
 static int fat_readdir(struct file *file, struct dir_context *ctx)
 {
@@ -838,12 +886,15 @@ efault:									   \
 FAT_IOCTL_FILLDIR_FUNC(fat_ioctl_filldir, __fat_dirent)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fat_ioctl_readdir(struct inode *inode, struct file *filp,
 			     void __user *dirent, filldir_t filldir,
 			     int short_only, int both)
 {
 	struct fat_ioctl_filldir_callback buf;
 =======
+=======
+>>>>>>> v3.18
 static int fat_ioctl_readdir(struct inode *inode, struct file *file,
 			     void __user *dirent, filldir_t filldir,
 			     int short_only, int both)
@@ -852,6 +903,9 @@ static int fat_ioctl_readdir(struct inode *inode, struct file *file,
 		.ctx.actor = filldir,
 		.dirent = dirent
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -859,17 +913,23 @@ static int fat_ioctl_readdir(struct inode *inode, struct file *file,
 	buf.result = 0;
 	mutex_lock(&inode->i_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -ENOENT;
 	if (!IS_DEADDIR(inode)) {
 		ret = __fat_readdir(inode, filp, &buf, filldir,
 				    short_only, both);
 =======
+=======
+>>>>>>> v3.18
 	buf.ctx.pos = file->f_pos;
 	ret = -ENOENT;
 	if (!IS_DEADDIR(inode)) {
 		ret = __fat_readdir(inode, file, &buf.ctx,
 				    short_only, both ? &buf : NULL);
 		file->f_pos = buf.ctx.pos;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	mutex_unlock(&inode->i_mutex);
@@ -879,6 +939,7 @@ static int fat_ioctl_readdir(struct inode *inode, struct file *file,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fat_ioctl_volume_id(struct inode *dir)
 {
 	struct super_block *sb = dir->i_sb;
@@ -886,6 +947,8 @@ static int fat_ioctl_volume_id(struct inode *dir)
 	return sbi->vol_id;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static long fat_dir_ioctl(struct file *filp, unsigned int cmd,
@@ -905,8 +968,11 @@ static long fat_dir_ioctl(struct file *filp, unsigned int cmd,
 		both = 1;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case VFAT_IOCTL_GET_VOLUME_ID:
 		return fat_ioctl_volume_id(inode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:
@@ -950,8 +1016,11 @@ static long fat_compat_dir_ioctl(struct file *filp, unsigned cmd,
 		both = 1;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case VFAT_IOCTL_GET_VOLUME_ID:
 		return fat_ioctl_volume_id(inode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:
@@ -977,7 +1046,11 @@ const struct file_operations fat_dir_operations = {
 	.llseek		= generic_file_llseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= fat_readdir,
+=======
+	.iterate	= fat_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= fat_readdir,
 >>>>>>> v3.18

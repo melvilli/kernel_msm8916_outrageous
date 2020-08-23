@@ -1,7 +1,11 @@
 config TEGRA_HOST1X
 	tristate "NVIDIA Tegra host1x driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_TEGRA || ARCH_MULTIPLATFORM
+=======
+	depends on ARCH_TEGRA || (ARM && COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on ARCH_TEGRA || (ARM && COMPILE_TEST)
 >>>>>>> v3.18
@@ -24,8 +28,11 @@ config TEGRA_HOST1X_FIREWALL
 	  If unsure, choose Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/gpu/host1x/drm/Kconfig"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif

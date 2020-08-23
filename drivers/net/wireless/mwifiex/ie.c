@@ -3,7 +3,11 @@
  * deleting IE.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012, Marvell International Ltd.
+=======
+ * Copyright (C) 2012-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -87,7 +91,11 @@ mwifiex_update_autoindex_ies(struct mwifiex_private *priv,
 {
 	u16 travel_len, index, mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s16 input_len;
+=======
+	s16 input_len, tlv_len;
+>>>>>>> v3.18
 =======
 	s16 input_len, tlv_len;
 >>>>>>> v3.18
@@ -95,6 +103,7 @@ mwifiex_update_autoindex_ies(struct mwifiex_private *priv,
 	u8 *tmp;
 
 	input_len = le16_to_cpu(ie_list->len);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	travel_len = sizeof(struct host_cmd_tlv);
 
@@ -106,6 +115,8 @@ mwifiex_update_autoindex_ies(struct mwifiex_private *priv,
 		travel_len += le16_to_cpu(ie->ie_length) + MWIFIEX_IE_HDR_SIZE;
 
 =======
+=======
+>>>>>>> v3.18
 	travel_len = sizeof(struct mwifiex_ie_types_header);
 
 	ie_list->len = 0;
@@ -117,6 +128,9 @@ mwifiex_update_autoindex_ies(struct mwifiex_private *priv,
 
 		if (input_len < tlv_len + MWIFIEX_IE_HDR_SIZE)
 			return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		index = le16_to_cpu(ie->ie_index);
 		mask = le16_to_cpu(ie->mgmt_subtype_mask);
@@ -155,6 +169,7 @@ mwifiex_update_autoindex_ies(struct mwifiex_private *priv,
 			     le16_to_cpu(priv->mgmt_ie[index].ie_length) +
 			     MWIFIEX_IE_HDR_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	if (GET_BSS_ROLE(priv) == MWIFIEX_BSS_ROLE_UAP)
@@ -162,6 +177,8 @@ mwifiex_update_autoindex_ies(struct mwifiex_private *priv,
 					      HostCmd_ACT_GEN_SET,
 					      UAP_CUSTOM_IE_I, ie_list);
 =======
+=======
+>>>>>>> v3.18
 		input_len -= tlv_len + MWIFIEX_IE_HDR_SIZE;
 	}
 
@@ -169,6 +186,9 @@ mwifiex_update_autoindex_ies(struct mwifiex_private *priv,
 		return mwifiex_send_cmd(priv, HostCmd_CMD_UAP_SYS_CONFIG,
 					HostCmd_ACT_GEN_SET,
 					UAP_CUSTOM_IE_I, ie_list, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

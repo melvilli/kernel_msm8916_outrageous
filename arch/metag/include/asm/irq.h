@@ -18,6 +18,10 @@ struct pt_regs;
 int tbisig_map(unsigned int hw);
 extern void do_IRQ(int irq, struct pt_regs *regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void init_IRQ(void);
+>>>>>>> v3.18
 =======
 extern void init_IRQ(void);
 >>>>>>> v3.18

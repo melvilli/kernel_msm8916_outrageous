@@ -12,6 +12,11 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_device.h>
+#include <linux/clk/at91_pmc.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_device.h>
 #include <linux/clk/at91_pmc.h>
@@ -24,6 +29,7 @@
 #include <asm/system_misc.h>
 #include <mach/at91sam9263.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/at91_pmc.h>
 
 #include "at91_aic.h"
@@ -34,6 +40,8 @@
 #include "sam9_smc.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include <mach/hardware.h>
 
 #include "at91_aic.h"
@@ -44,6 +52,9 @@
 
 #if defined(CONFIG_OLD_CLK_AT91)
 #include "clock.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* --------------------------------------------------------------------
  *  Clocks
@@ -216,6 +227,10 @@ static struct clk_lookup periph_clocks_lookups[] = {
 	CLKDEV_CON_DEV_ID("t0_clk", "atmel_tcb.0", &tcb_clk),
 	CLKDEV_CON_DEV_ID(NULL, "i2c-at91sam9260.0", &twi_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CLKDEV_CON_DEV_ID(NULL, "at91sam9rl-pwm", &pwm_clk),
+>>>>>>> v3.18
 =======
 	CLKDEV_CON_DEV_ID(NULL, "at91sam9rl-pwm", &pwm_clk),
 >>>>>>> v3.18
@@ -245,6 +260,10 @@ static struct clk_lookup periph_clocks_lookups[] = {
 	CLKDEV_CON_DEV_ID(NULL, "fffff800.gpio", &pioCDE_clk),
 	CLKDEV_CON_DEV_ID(NULL, "fffffa00.gpio", &pioCDE_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CLKDEV_CON_DEV_ID(NULL, "fffb8000.pwm", &pwm_clk),
+>>>>>>> v3.18
 =======
 	CLKDEV_CON_DEV_ID(NULL, "fffb8000.pwm", &pwm_clk),
 >>>>>>> v3.18
@@ -304,6 +323,12 @@ static void __init at91sam9263_register_clocks(void)
 	clk_register(&pck3);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else
+#define at91sam9263_register_clocks NULL
+#endif
+>>>>>>> v3.18
 =======
 #else
 #define at91sam9263_register_clocks NULL
@@ -346,8 +371,11 @@ static void __init at91sam9263_map_io(void)
 static void __init at91sam9263_ioremap_registers(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	at91_ioremap_shdwc(AT91SAM9263_BASE_SHDWC);
 	at91_ioremap_rstc(AT91SAM9263_BASE_RSTC);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	at91_ioremap_ramc(0, AT91SAM9263_BASE_SDRAMC0, 512);
@@ -357,6 +385,10 @@ static void __init at91sam9263_ioremap_registers(void)
 	at91sam9_ioremap_smc(1, AT91SAM9263_BASE_SMC1);
 	at91_ioremap_matrix(AT91SAM9263_BASE_MATRIX);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	at91_pm_set_standby(at91sam9_sdram_standby);
+>>>>>>> v3.18
 =======
 	at91_pm_set_standby(at91sam9_sdram_standby);
 >>>>>>> v3.18
@@ -366,8 +398,11 @@ static void __init at91sam9263_initialize(void)
 {
 	arm_pm_idle = at91sam9_idle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arm_pm_restart = at91sam9_alt_restart;
 	at91_extern_irq = (1 << AT91SAM9263_ID_IRQ0) | (1 << AT91SAM9263_ID_IRQ1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -379,7 +414,10 @@ static void __init at91sam9263_initialize(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct resource rstc_resources[] = {
 	[0] = {
 		.start  = AT91SAM9263_BASE_RSTC,
@@ -419,6 +457,9 @@ static void __init at91sam9263_register_devices(void)
 	platform_device_register(&shdwc_device);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* --------------------------------------------------------------------
  *  Interrupt initialization
@@ -463,6 +504,7 @@ static unsigned int at91sam9263_default_irq_priority[NR_AIC_IRQS] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 AT91_SOC_START(at91sam9263)
 	.map_io = at91sam9263_map_io,
 	.default_irq_priority = at91sam9263_default_irq_priority,
@@ -470,6 +512,8 @@ AT91_SOC_START(at91sam9263)
 	.register_clocks = at91sam9263_register_clocks,
 	.init = at91sam9263_initialize,
 =======
+=======
+>>>>>>> v3.18
 static void __init at91sam9263_init_time(void)
 {
 	at91sam926x_pit_init(NR_IRQS_LEGACY + AT91_ID_SYS);
@@ -484,5 +528,8 @@ AT91_SOC_START(at91sam9263)
 	.register_devices = at91sam9263_register_devices,
 	.init = at91sam9263_initialize,
 	.init_time = at91sam9263_init_time,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 AT91_SOC_END

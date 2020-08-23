@@ -10,6 +10,7 @@
 
 #include <linux/workqueue.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct hws_qsi_info_block          /* QUERY SAMPLING information block  */
 { /* Bit(s) */
@@ -31,6 +32,9 @@ struct hws_qsi_info_block          /* QUERY SAMPLING information block  */
 	unsigned long long rsvrd1;  /* 48-55: reserved                   */
 	unsigned long long rsvrd2;  /* 56-63: reserved                   */
 };
+=======
+#include <asm/cpu_mf.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu_mf.h>
 >>>>>>> v3.18
@@ -73,6 +77,7 @@ struct hws_cpu_buffer {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct hws_data_entry {
 	unsigned int def:16;        /* 0-15  Data Entry Format           */
 	unsigned int R:4;           /* 16-19 reserved                    */
@@ -103,6 +108,8 @@ struct hws_trailer_entry {
 	unsigned long progusage2;   /*                                   */
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int hwsampler_setup(void);

@@ -21,8 +21,12 @@
  *
  *  You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -80,7 +84,11 @@ static int __nci_request(struct nci_dev *ndev,
 	ndev->req_status = NCI_REQ_PEND;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_completion(&ndev->req_completion);
+=======
+	reinit_completion(&ndev->req_completion);
+>>>>>>> v3.18
 =======
 	reinit_completion(&ndev->req_completion);
 >>>>>>> v3.18
@@ -241,7 +249,10 @@ static void nci_rf_discover_req(struct nci_dev *ndev, unsigned long opt)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if ((cmd.num_disc_configs < NCI_MAX_NUM_RF_CONFIGS) &&
 	    (protocols & NFC_PROTO_ISO15693_MASK)) {
 		cmd.disc_configs[cmd.num_disc_configs].rf_tech_and_mode =
@@ -250,6 +261,9 @@ static void nci_rf_discover_req(struct nci_dev *ndev, unsigned long opt)
 		cmd.num_disc_configs++;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nci_send_cmd(ndev, NCI_OP_RF_DISCOVER_CMD,
 		     (1 + (cmd.num_disc_configs * sizeof(struct disc_config))),
@@ -322,6 +336,12 @@ static int nci_open_device(struct nci_dev *ndev)
 			   msecs_to_jiffies(NCI_RESET_TIMEOUT));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ndev->ops->setup)
+		ndev->ops->setup(ndev);
+
+>>>>>>> v3.18
 =======
 	if (ndev->ops->setup)
 		ndev->ops->setup(ndev);
@@ -388,6 +408,11 @@ static int nci_close_device(struct nci_dev *ndev)
 	clear_bit(NCI_INIT, &ndev->flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	del_timer_sync(&ndev->cmd_timer);
+
+>>>>>>> v3.18
 =======
 	del_timer_sync(&ndev->cmd_timer);
 
@@ -440,7 +465,10 @@ static int nci_dev_down(struct nfc_dev *nfc_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int nci_set_config(struct nci_dev *ndev, __u8 id, size_t len, __u8 *val)
 {
 	struct nci_set_config_param param;
@@ -457,14 +485,20 @@ int nci_set_config(struct nci_dev *ndev, __u8 id, size_t len, __u8 *val)
 }
 EXPORT_SYMBOL(nci_set_config);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nci_set_local_general_bytes(struct nfc_dev *nfc_dev)
 {
 	struct nci_dev *ndev = nfc_get_drvdata(nfc_dev);
 	struct nci_set_config_param param;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 local_gb[NFC_MAX_GT_LEN];
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -476,11 +510,15 @@ static int nci_set_local_general_bytes(struct nfc_dev *nfc_dev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < param.len; i++)
 		local_gb[param.len-1-i] = param.val[i];
 
 	param.id = NCI_PN_ATR_REQ_GEN_BYTES;
 	param.val = local_gb;
+=======
+	param.id = NCI_PN_ATR_REQ_GEN_BYTES;
+>>>>>>> v3.18
 =======
 	param.id = NCI_PN_ATR_REQ_GEN_BYTES;
 >>>>>>> v3.18
@@ -693,7 +731,10 @@ static int nci_transceive(struct nfc_dev *nfc_dev, struct nfc_target *target,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int nci_enable_se(struct nfc_dev *nfc_dev, u32 se_idx)
 {
 	return 0;
@@ -709,6 +750,9 @@ static int nci_discover_se(struct nfc_dev *nfc_dev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct nfc_ops nci_nfc_ops = {
 	.dev_up = nci_dev_up,
@@ -721,6 +765,12 @@ static struct nfc_ops nci_nfc_ops = {
 	.deactivate_target = nci_deactivate_target,
 	.im_transceive = nci_transceive,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_se = nci_enable_se,
+	.disable_se = nci_disable_se,
+	.discover_se = nci_discover_se,
+>>>>>>> v3.18
 =======
 	.enable_se = nci_enable_se,
 	.disable_se = nci_disable_se,
@@ -739,7 +789,10 @@ static struct nfc_ops nci_nfc_ops = {
 struct nci_dev *nci_allocate_device(struct nci_ops *ops,
 				    __u32 supported_protocols,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    __u32 supported_se,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				    int tx_headroom, int tx_tailroom)
@@ -762,15 +815,21 @@ struct nci_dev *nci_allocate_device(struct nci_ops *ops,
 	ndev->tx_headroom = tx_headroom;
 	ndev->tx_tailroom = tx_tailroom;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ndev->nfc_dev = nfc_allocate_device(&nci_nfc_ops,
 					    supported_protocols,
 					    supported_se,
 =======
+=======
+>>>>>>> v3.18
 	init_completion(&ndev->req_completion);
 
 	ndev->nfc_dev = nfc_allocate_device(&nci_nfc_ops,
 					    supported_protocols,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					    tx_headroom + NCI_DATA_HDR_SIZE,
 					    tx_tailroom);
@@ -811,10 +870,13 @@ int nci_register_device(struct nci_dev *ndev)
 	char name[32];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = nfc_register_device(ndev->nfc_dev);
 	if (rc)
 		goto exit;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ndev->flags = 0;
@@ -825,7 +887,11 @@ int nci_register_device(struct nci_dev *ndev)
 	if (!ndev->cmd_wq) {
 		rc = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto unreg_exit;
+=======
+		goto exit;
+>>>>>>> v3.18
 =======
 		goto exit;
 >>>>>>> v3.18
@@ -859,11 +925,17 @@ int nci_register_device(struct nci_dev *ndev)
 	mutex_init(&ndev->req_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	rc = nfc_register_device(ndev->nfc_dev);
 	if (rc)
 		goto destroy_rx_wq_exit;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	goto exit;
 
@@ -874,9 +946,12 @@ destroy_cmd_wq_exit:
 	destroy_workqueue(ndev->cmd_wq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unreg_exit:
 	nfc_unregister_device(ndev->nfc_dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 exit:
@@ -905,6 +980,7 @@ EXPORT_SYMBOL(nci_unregister_device);
  * nci_recv_frame - receive frame from NCI drivers
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @skb: The sk_buff to receive
  */
 int nci_recv_frame(struct sk_buff *skb)
@@ -912,11 +988,16 @@ int nci_recv_frame(struct sk_buff *skb)
 	struct nci_dev *ndev = (struct nci_dev *) skb->dev;
 
 =======
+=======
+>>>>>>> v3.18
  * @ndev: The nci device
  * @skb: The sk_buff to receive
  */
 int nci_recv_frame(struct nci_dev *ndev, struct sk_buff *skb)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_debug("len %d\n", skb->len);
 
@@ -935,10 +1016,15 @@ int nci_recv_frame(struct nci_dev *ndev, struct sk_buff *skb)
 EXPORT_SYMBOL(nci_recv_frame);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nci_send_frame(struct sk_buff *skb)
 {
 	struct nci_dev *ndev = (struct nci_dev *) skb->dev;
 
+=======
+static int nci_send_frame(struct nci_dev *ndev, struct sk_buff *skb)
+{
+>>>>>>> v3.18
 =======
 static int nci_send_frame(struct nci_dev *ndev, struct sk_buff *skb)
 {
@@ -954,13 +1040,19 @@ static int nci_send_frame(struct nci_dev *ndev, struct sk_buff *skb)
 	skb_orphan(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ndev->ops->send(skb);
 =======
+=======
+>>>>>>> v3.18
 	/* Send copy to sniffer */
 	nfc_send_to_raw_sock(ndev->nfc_dev, skb,
 			     RAW_PAYLOAD_NCI, NFC_DIRECTION_TX);
 
 	return ndev->ops->send(ndev, skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -990,8 +1082,11 @@ int nci_send_cmd(struct nci_dev *ndev, __u16 opcode, __u8 plen, void *payload)
 		memcpy(skb_put(skb, plen), payload, plen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->dev = (void *) ndev;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	skb_queue_tail(&ndev->cmd_q, skb);
@@ -1026,7 +1121,11 @@ static void nci_tx_work(struct work_struct *work)
 			 nci_plen(skb->data));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nci_send_frame(skb);
+=======
+		nci_send_frame(ndev, skb);
+>>>>>>> v3.18
 =======
 		nci_send_frame(ndev, skb);
 >>>>>>> v3.18
@@ -1045,12 +1144,18 @@ static void nci_rx_work(struct work_struct *work)
 
 	while ((skb = skb_dequeue(&ndev->rx_q))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* Send copy to sniffer */
 		nfc_send_to_raw_sock(ndev->nfc_dev, skb,
 				     RAW_PAYLOAD_NCI, NFC_DIRECTION_RX);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Process frame */
 		switch (nci_mt(skb->data)) {
@@ -1107,7 +1212,11 @@ static void nci_cmd_work(struct work_struct *work)
 			 nci_plen(skb->data));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nci_send_frame(skb);
+=======
+		nci_send_frame(ndev, skb);
+>>>>>>> v3.18
 =======
 		nci_send_frame(ndev, skb);
 >>>>>>> v3.18

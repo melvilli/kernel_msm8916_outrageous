@@ -15,6 +15,7 @@
 #define __MACH_370_XP_COHERENCY_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SMP
 int coherency_get_cpu_count(void);
 #endif
@@ -23,11 +24,16 @@ int set_cpu_coherent(int cpu_id, int smp_group_id);
 int coherency_available(void);
 int coherency_init(void);
 =======
+=======
+>>>>>>> v3.18
 extern unsigned long coherency_phys_base;
 int set_cpu_coherent(void);
 
 int coherency_init(void);
 int coherency_available(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif	/* __MACH_370_XP_COHERENCY_H */

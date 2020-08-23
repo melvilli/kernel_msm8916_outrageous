@@ -1464,8 +1464,11 @@ static int usbvision_write_reg_irq(struct usb_usbvision *usbvision, int address,
 static int usbvision_init_compression(struct usb_usbvision *usbvision)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err_code = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	usbvision->last_isoc_frame_num = -1;
@@ -1479,7 +1482,11 @@ static int usbvision_init_compression(struct usb_usbvision *usbvision)
 	usbvision->isoc_measure_bandwidth_count = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err_code;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1492,11 +1499,17 @@ static int usbvision_init_compression(struct usb_usbvision *usbvision)
 static int usbvision_measure_bandwidth(struct usb_usbvision *usbvision)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err_code = 0;
 
 	if (usbvision->isoc_measure_bandwidth_count < 2) { /* this gives an average bandwidth of 3 frames */
 		usbvision->isoc_measure_bandwidth_count++;
 		return err_code;
+=======
+	if (usbvision->isoc_measure_bandwidth_count < 2) { /* this gives an average bandwidth of 3 frames */
+		usbvision->isoc_measure_bandwidth_count++;
+		return 0;
+>>>>>>> v3.18
 =======
 	if (usbvision->isoc_measure_bandwidth_count < 2) { /* this gives an average bandwidth of 3 frames */
 		usbvision->isoc_measure_bandwidth_count++;
@@ -1513,7 +1526,11 @@ static int usbvision_measure_bandwidth(struct usb_usbvision *usbvision)
 	usbvision->isoc_packet_count = 0;
 	usbvision->isoc_skip_count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err_code;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1564,7 +1581,10 @@ static int usbvision_adjust_compression(struct usb_usbvision *usbvision)
 static int usbvision_request_intra(struct usb_usbvision *usbvision)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err_code = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char buffer[1];
@@ -1574,7 +1594,11 @@ static int usbvision_request_intra(struct usb_usbvision *usbvision)
 	buffer[0] = 1;
 	usbvision_write_reg_irq(usbvision, USBVISION_FORCE_INTRA, buffer, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err_code;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1583,7 +1607,10 @@ static int usbvision_request_intra(struct usb_usbvision *usbvision)
 static int usbvision_unrequest_intra(struct usb_usbvision *usbvision)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err_code = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char buffer[1];
@@ -1593,7 +1620,11 @@ static int usbvision_unrequest_intra(struct usb_usbvision *usbvision)
 	buffer[0] = 0;
 	usbvision_write_reg_irq(usbvision, USBVISION_FORCE_INTRA, buffer, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err_code;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

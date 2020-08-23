@@ -18,12 +18,15 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ************************************************************************
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -62,7 +65,11 @@ irq can be omitted, although the cmd interface will not work without it.
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ioport.h>
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -74,11 +81,16 @@ irq can be omitted, although the cmd interface will not work without it.
 #include "comedi_fc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DAS16M1_SIZE 16
 #define DAS16M1_SIZE2 8
 
 #define DAS16M1_XTAL 100	/* 10 MHz master clock */
 
+=======
+#define DAS16M1_SIZE2 8
+
+>>>>>>> v3.18
 =======
 #define DAS16M1_SIZE2 8
 
@@ -131,6 +143,7 @@ irq can be omitted, although the cmd interface will not work without it.
 #define DAS16M1_8254_THIRD             0x404
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct comedi_lrange range_das16m1 = { 9,
 	{
 	 BIP_RANGE(5),
@@ -144,6 +157,8 @@ static const struct comedi_lrange range_das16m1 = { 9,
 	 BIP_RANGE(10),
 	 }
 =======
+=======
+>>>>>>> v3.18
 static const struct comedi_lrange range_das16m1 = {
 	9, {
 		BIP_RANGE(5),
@@ -156,13 +171,20 @@ static const struct comedi_lrange range_das16m1 = {
 		UNI_RANGE(1.25),
 		BIP_RANGE(10)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 struct das16m1_private_struct {
 	unsigned int control_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	volatile unsigned int adc_count;	/*  number of samples completed */
+=======
+	unsigned int adc_count;	/*  number of samples completed */
+>>>>>>> v3.18
 =======
 	unsigned int adc_count;	/*  number of samples completed */
 >>>>>>> v3.18
@@ -171,8 +193,12 @@ struct das16m1_private_struct {
 	 * counter yet (loaded by first sample conversion) */
 	u16 initial_hw_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	short ai_buffer[FIFO_SIZE];
 	unsigned int do_bits;	/*  saves status of digital output bits */
+=======
+	unsigned short ai_buffer[FIFO_SIZE];
+>>>>>>> v3.18
 =======
 	unsigned short ai_buffer[FIFO_SIZE];
 >>>>>>> v3.18
@@ -182,7 +208,11 @@ struct das16m1_private_struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline short munge_sample(short data)
+=======
+static inline unsigned short munge_sample(unsigned short data)
+>>>>>>> v3.18
 =======
 static inline unsigned short munge_sample(unsigned short data)
 >>>>>>> v3.18
@@ -191,7 +221,11 @@ static inline unsigned short munge_sample(unsigned short data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void munge_sample_array(short *array, unsigned int num_elements)
+=======
+static void munge_sample_array(unsigned short *array, unsigned int num_elements)
+>>>>>>> v3.18
 =======
 static void munge_sample_array(unsigned short *array, unsigned int num_elements)
 >>>>>>> v3.18
@@ -203,7 +237,10 @@ static void munge_sample_array(unsigned short *array, unsigned int num_elements)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int das16m1_ai_check_chanlist(struct comedi_device *dev,
 				     struct comedi_subdevice *s,
 				     struct comedi_cmd *cmd)
@@ -232,13 +269,21 @@ static int das16m1_ai_check_chanlist(struct comedi_device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int das16m1_cmd_test(struct comedi_device *dev,
 			    struct comedi_subdevice *s, struct comedi_cmd *cmd)
 {
 	struct das16m1_private_struct *devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int err = 0, tmp, i;
+=======
+	int err = 0;
+	unsigned int arg;
+>>>>>>> v3.18
 =======
 	int err = 0;
 	unsigned int arg;
@@ -279,6 +324,7 @@ static int das16m1_cmd_test(struct comedi_device *dev,
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd->stop_src == TRIG_COUNT) {
 		/* any count is allowed */
 	} else {
@@ -286,10 +332,15 @@ static int das16m1_cmd_test(struct comedi_device *dev,
 		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (cmd->stop_src == TRIG_COUNT)
 		err |= cfc_check_trigger_arg_min(&cmd->stop_arg, 1);
 	else	/* TRIG_NONE */
 		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (err)
@@ -298,6 +349,7 @@ static int das16m1_cmd_test(struct comedi_device *dev,
 	/* step 4: fix up arguments */
 
 	if (cmd->convert_src == TRIG_TIMER) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		tmp = cmd->convert_arg;
 		/* calculate counter values that give desired timing */
@@ -309,18 +361,24 @@ static int das16m1_cmd_test(struct comedi_device *dev,
 		if (tmp != cmd->convert_arg)
 			err++;
 =======
+=======
+>>>>>>> v3.18
 		arg = cmd->convert_arg;
 		i8253_cascade_ns_to_timer(I8254_OSC_BASE_10MHZ,
 					  &devpriv->divisor1,
 					  &devpriv->divisor2,
 					  &arg, cmd->flags);
 		err |= cfc_check_trigger_arg_is(&cmd->convert_arg, arg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (err)
 		return 4;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*  check chanlist against board's peculiarities */
 	if (cmd->chanlist && cmd->chanlist_len > 1) {
@@ -343,6 +401,11 @@ static int das16m1_cmd_test(struct comedi_device *dev,
 	if (cmd->chanlist && cmd->chanlist_len > 0)
 		err |= das16m1_ai_check_chanlist(dev, s, cmd);
 >>>>>>> v3.18
+=======
+	/* Step 5: check channel list if it exists */
+	if (cmd->chanlist && cmd->chanlist_len > 0)
+		err |= das16m1_ai_check_chanlist(dev, s, cmd);
+>>>>>>> v3.18
 
 	if (err)
 		return 5;
@@ -350,6 +413,7 @@ static int das16m1_cmd_test(struct comedi_device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* This function takes a time in nanoseconds and sets the     *
  * 2 pacer clocks to the closest frequency possible. It also  *
@@ -371,6 +435,8 @@ static unsigned int das16m1_set_pacer(struct comedi_device *dev,
 
 	return ns;
 =======
+=======
+>>>>>>> v3.18
 static void das16m1_set_pacer(struct comedi_device *dev)
 {
 	struct das16m1_private_struct *devpriv = dev->private;
@@ -381,6 +447,9 @@ static void das16m1_set_pacer(struct comedi_device *dev)
 
 	i8254_write(timer_base, 0, 1, devpriv->divisor1);
 	i8254_write(timer_base, 0, 2, devpriv->divisor2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -391,6 +460,7 @@ static int das16m1_cmd_exec(struct comedi_device *dev,
 	struct comedi_async *async = s->async;
 	struct comedi_cmd *cmd = &async->cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int byte, i;
 
 	if (dev->irq == 0) {
@@ -398,6 +468,11 @@ static int das16m1_cmd_exec(struct comedi_device *dev,
 		return -1;
 	}
 
+=======
+	unsigned long timer_base = dev->iobase + DAS16M1_8254_FIRST;
+	unsigned int byte, i;
+
+>>>>>>> v3.18
 =======
 	unsigned long timer_base = dev->iobase + DAS16M1_8254_FIRST;
 	unsigned int byte, i;
@@ -413,17 +488,23 @@ static int das16m1_cmd_exec(struct comedi_device *dev,
 	 * many samples are in fifo.  Value doesn't actually load into counter
 	 * until counter's next clock (the next a/d conversion) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i8254_load(dev->iobase + DAS16M1_8254_FIRST, 0, 1, 0, 2);
 	/* remember current reading of counter so we know when counter has
 	 * actually been loaded */
 	devpriv->initial_hw_count =
 	    i8254_read(dev->iobase + DAS16M1_8254_FIRST, 0, 1);
 =======
+=======
+>>>>>>> v3.18
 	i8254_set_mode(timer_base, 0, 1, I8254_MODE2 | I8254_BINARY);
 	i8254_write(timer_base, 0, 1, 0);
 	/* remember current reading of counter so we know when counter has
 	 * actually been loaded */
 	devpriv->initial_hw_count = i8254_read(timer_base, 0, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* setup channel/gain queue */
 	for (i = 0; i < cmd->chanlist_len; i++) {
@@ -435,11 +516,14 @@ static int das16m1_cmd_exec(struct comedi_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* set counter mode and counts */
 	cmd->convert_arg =
 	    das16m1_set_pacer(dev, cmd->convert_arg,
 			      cmd->flags & TRIG_ROUND_MASK);
 =======
+=======
+>>>>>>> v3.18
 	/* enable interrupts and set internal pacer counter mode and counts */
 	devpriv->control_state &= ~PACER_MASK;
 	if (cmd->convert_src == TRIG_TIMER) {
@@ -448,6 +532,9 @@ static int das16m1_cmd_exec(struct comedi_device *dev,
 	} else {	/* TRIG_EXT */
 		devpriv->control_state |= EXT_PACER;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*  set control & status register */
@@ -462,6 +549,7 @@ static int das16m1_cmd_exec(struct comedi_device *dev,
 	outb(0, dev->iobase + DAS16M1_CLEAR_INTR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable interrupts and internal pacer */
 	devpriv->control_state &= ~PACER_MASK;
 	if (cmd->convert_src == TRIG_TIMER)
@@ -469,6 +557,8 @@ static int das16m1_cmd_exec(struct comedi_device *dev,
 	else
 		devpriv->control_state |= EXT_PACER;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	devpriv->control_state |= INTE;
@@ -488,7 +578,10 @@ static int das16m1_cancel(struct comedi_device *dev, struct comedi_subdevice *s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int das16m1_ai_eoc(struct comedi_device *dev,
 			  struct comedi_subdevice *s,
 			  struct comedi_insn *insn,
@@ -502,6 +595,9 @@ static int das16m1_ai_eoc(struct comedi_device *dev,
 	return -EBUSY;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int das16m1_ai_rinsn(struct comedi_device *dev,
 			    struct comedi_subdevice *s,
@@ -509,9 +605,15 @@ static int das16m1_ai_rinsn(struct comedi_device *dev,
 {
 	struct das16m1_private_struct *devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, n;
 	int byte;
 	const int timeout = 1000;
+=======
+	int ret;
+	int n;
+	int byte;
+>>>>>>> v3.18
 =======
 	int ret;
 	int n;
@@ -535,6 +637,7 @@ static int das16m1_ai_rinsn(struct comedi_device *dev,
 		outb(0, dev->iobase);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < timeout; i++) {
 			if (inb(dev->iobase + DAS16M1_CS) & IRQDATA)
 				break;
@@ -544,10 +647,15 @@ static int das16m1_ai_rinsn(struct comedi_device *dev,
 			return -ETIME;
 		}
 =======
+=======
+>>>>>>> v3.18
 		ret = comedi_timeout(dev, s, insn, das16m1_ai_eoc, 0);
 		if (ret)
 			return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		data[n] = munge_sample(inw(dev->iobase));
 	}
@@ -571,6 +679,7 @@ static int das16m1_di_rbits(struct comedi_device *dev,
 static int das16m1_do_wbits(struct comedi_device *dev,
 			    struct comedi_subdevice *s,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    struct comedi_insn *insn, unsigned int *data)
 {
 	struct das16m1_private_struct *devpriv = dev->private;
@@ -588,6 +697,8 @@ static int das16m1_do_wbits(struct comedi_device *dev,
 
 	outb(devpriv->do_bits, dev->iobase + DAS16M1_DIO);
 =======
+=======
+>>>>>>> v3.18
 			    struct comedi_insn *insn,
 			    unsigned int *data)
 {
@@ -595,6 +706,9 @@ static int das16m1_do_wbits(struct comedi_device *dev,
 		outb(s->state, dev->iobase + DAS16M1_DIO);
 
 	data[1] = s->state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
@@ -612,7 +726,10 @@ static void das16m1_handler(struct comedi_device *dev, unsigned int status)
 	s = dev->read_subdev;
 	async = s->async;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	async->events = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cmd = &async->cmd;
@@ -648,8 +765,13 @@ static void das16m1_handler(struct comedi_device *dev, unsigned int status)
 
 	if (cmd->stop_src == TRIG_COUNT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (devpriv->adc_count >= cmd->stop_arg * cmd->chanlist_len) {	/* end of acquisition */
 			das16m1_cancel(dev, s);
+=======
+		if (devpriv->adc_count >= cmd->stop_arg * cmd->chanlist_len) {
+			/* end of acquisition */
+>>>>>>> v3.18
 =======
 		if (devpriv->adc_count >= cmd->stop_arg * cmd->chanlist_len) {
 			/* end of acquisition */
@@ -662,6 +784,7 @@ static void das16m1_handler(struct comedi_device *dev, unsigned int status)
 	 * overrun interrupts, but we might as well try */
 	if (status & OVRUN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		das16m1_cancel(dev, s);
 		async->events |= COMEDI_CB_EOA | COMEDI_CB_ERROR;
 		comedi_error(dev, "fifo overflow");
@@ -670,11 +793,16 @@ static void das16m1_handler(struct comedi_device *dev, unsigned int status)
 	comedi_event(dev, s);
 
 =======
+=======
+>>>>>>> v3.18
 		async->events |= COMEDI_CB_EOA | COMEDI_CB_ERROR;
 		dev_err(dev->class_dev, "fifo overflow\n");
 	}
 
 	cfc_handle_events(dev, s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -690,7 +818,11 @@ static int das16m1_poll(struct comedi_device *dev, struct comedi_subdevice *s)
 	spin_unlock_irqrestore(&dev->spinlock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return s->async->buf_write_count - s->async->buf_read_count;
+=======
+	return comedi_buf_n_bytes_ready(s);
+>>>>>>> v3.18
 =======
 	return comedi_buf_n_bytes_ready(s);
 >>>>>>> v3.18
@@ -703,7 +835,11 @@ static irqreturn_t das16m1_interrupt(int irq, void *d)
 
 	if (!dev->attached) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev, "premature interrupt");
+=======
+		dev_err(dev->class_dev, "premature interrupt\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "premature interrupt\n");
 >>>>>>> v3.18
@@ -716,7 +852,11 @@ static irqreturn_t das16m1_interrupt(int irq, void *d)
 
 	if ((status & (IRQDATA | OVRUN)) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev, "spurious interrupt");
+=======
+		dev_err(dev->class_dev, "spurious interrupt\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "spurious interrupt\n");
 >>>>>>> v3.18
@@ -735,6 +875,7 @@ static irqreturn_t das16m1_interrupt(int irq, void *d)
 
 static int das16m1_irq_bits(unsigned int irq)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -769,6 +910,8 @@ static int das16m1_irq_bits(unsigned int irq)
 	}
 	return ret << 4;
 =======
+=======
+>>>>>>> v3.18
 	switch (irq) {
 	case 10:
 		return 0x0;
@@ -789,6 +932,9 @@ static int das16m1_irq_bits(unsigned int irq)
 	default:
 		return 0x0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -804,6 +950,7 @@ static int das16m1_attach(struct comedi_device *dev,
 	struct comedi_subdevice *s;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int irq;
 
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
@@ -813,12 +960,17 @@ static int das16m1_attach(struct comedi_device *dev,
 
 	ret = comedi_request_region(dev, it->options[0], DAS16M1_SIZE);
 =======
+=======
+>>>>>>> v3.18
 
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
 		return -ENOMEM;
 
 	ret = comedi_request_region(dev, it->options[0], 0x10);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
@@ -829,6 +981,7 @@ static int das16m1_attach(struct comedi_device *dev,
 		return ret;
 	devpriv->extra_iobase = dev->iobase + DAS16M1_82C55;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* now for the irq */
 	irq = it->options[1];
@@ -849,12 +1002,17 @@ static int das16m1_attach(struct comedi_device *dev,
 			     " valid irqs are 2, 3, 5, 7, 10, 11, 12, or 15\n");
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	/* only irqs 2, 3, 4, 5, 6, 7, 10, 11, 12, 14, and 15 are valid */
 	if ((1 << it->options[1]) & 0xdcfc) {
 		ret = request_irq(it->options[1], das16m1_interrupt, 0,
 				  dev->board_name, dev);
 		if (ret == 0)
 			dev->irq = it->options[1];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -863,6 +1021,7 @@ static int das16m1_attach(struct comedi_device *dev,
 		return ret;
 
 	s = &dev->subdevices[0];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev->read_subdev = s;
 	/* ai */
@@ -879,6 +1038,8 @@ static int das16m1_attach(struct comedi_device *dev,
 	s->cancel = das16m1_cancel;
 	s->poll = das16m1_poll;
 =======
+=======
+>>>>>>> v3.18
 	/* ai */
 	s->type = COMEDI_SUBD_AI;
 	s->subdev_flags = SDF_READABLE | SDF_DIFF;
@@ -895,6 +1056,9 @@ static int das16m1_attach(struct comedi_device *dev,
 		s->cancel = das16m1_cancel;
 		s->poll = das16m1_poll;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s = &dev->subdevices[1];
@@ -918,7 +1082,11 @@ static int das16m1_attach(struct comedi_device *dev,
 	s = &dev->subdevices[3];
 	/* 8255 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = subdev_8255_init(dev, s, NULL, devpriv->extra_iobase);
+=======
+	ret = subdev_8255_init(dev, s, NULL, DAS16M1_82C55);
+>>>>>>> v3.18
 =======
 	ret = subdev_8255_init(dev, s, NULL, DAS16M1_82C55);
 >>>>>>> v3.18
@@ -930,6 +1098,7 @@ static int das16m1_attach(struct comedi_device *dev,
 
 	/*  initialize digital output lines */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outb(devpriv->do_bits, dev->iobase + DAS16M1_DIO);
 
 	/* set the interrupt level */
@@ -938,10 +1107,15 @@ static int das16m1_attach(struct comedi_device *dev,
 	else
 		devpriv->control_state = 0;
 =======
+=======
+>>>>>>> v3.18
 	outb(0, dev->iobase + DAS16M1_DIO);
 
 	/* set the interrupt level */
 	devpriv->control_state = das16m1_irq_bits(dev->irq) << 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	outb(devpriv->control_state, dev->iobase + DAS16M1_INTR_CONTROL);
 
@@ -953,7 +1127,10 @@ static void das16m1_detach(struct comedi_device *dev)
 	struct das16m1_private_struct *devpriv = dev->private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comedi_spriv_free(dev, 3);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (devpriv && devpriv->extra_iobase)

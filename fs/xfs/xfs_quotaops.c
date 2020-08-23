@@ -17,6 +17,7 @@
  */
 #include "xfs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_sb.h"
 #include "xfs_log.h"
 #include "xfs_ag.h"
@@ -26,6 +27,8 @@
 #include "xfs_bmap_btree.h"
 #include "xfs_inode.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_format.h"
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
@@ -35,6 +38,9 @@
 #include "xfs_inode.h"
 #include "xfs_quota.h"
 #include "xfs_trans.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_qm.h"
 #include <linux/quota.h>
@@ -63,8 +69,11 @@ xfs_fs_get_xstate(
 	if (!XFS_IS_QUOTA_RUNNING(mp))
 		return -ENOSYS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -xfs_qm_scall_getqstat(mp, fqs);
 =======
+=======
+>>>>>>> v3.18
 	return xfs_qm_scall_getqstat(mp, fqs);
 }
 
@@ -78,6 +87,9 @@ xfs_fs_get_xstatev(
 	if (!XFS_IS_QUOTA_RUNNING(mp))
 		return -ENOSYS;
 	return xfs_qm_scall_getqstatv(mp, fqs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -104,6 +116,7 @@ xfs_fs_set_xstate(
 	if (uflags & FS_QUOTA_UDQ_ENFD)
 		flags |= XFS_UQUOTA_ENFD;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (uflags & (FS_QUOTA_PDQ_ENFD|FS_QUOTA_GDQ_ENFD))
 		flags |= XFS_OQUOTA_ENFD;
 
@@ -119,6 +132,8 @@ xfs_fs_set_xstate(
 			return -EINVAL;
 		return -xfs_qm_scall_trunc_qfiles(mp, flags);
 =======
+=======
+>>>>>>> v3.18
 	if (uflags & FS_QUOTA_GDQ_ENFD)
 		flags |= XFS_GQUOTA_ENFD;
 	if (uflags & FS_QUOTA_PDQ_ENFD)
@@ -131,6 +146,9 @@ xfs_fs_set_xstate(
 		if (!XFS_IS_QUOTA_ON(mp))
 			return -EINVAL;
 		return xfs_qm_scall_quotaoff(mp, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -139,7 +157,10 @@ xfs_fs_set_xstate(
 
 STATIC int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 xfs_fs_rm_xquota(
 	struct super_block	*sb,
 	unsigned int		uflags)
@@ -164,6 +185,9 @@ xfs_fs_rm_xquota(
 }
 
 STATIC int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 xfs_fs_get_dqblk(
 	struct super_block	*sb,
@@ -178,7 +202,11 @@ xfs_fs_get_dqblk(
 		return -ESRCH;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -xfs_qm_scall_getquota(mp, from_kqid(&init_user_ns, qid),
+=======
+	return xfs_qm_scall_getquota(mp, from_kqid(&init_user_ns, qid),
+>>>>>>> v3.18
 =======
 	return xfs_qm_scall_getquota(mp, from_kqid(&init_user_ns, qid),
 >>>>>>> v3.18
@@ -201,7 +229,11 @@ xfs_fs_set_dqblk(
 		return -ESRCH;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -xfs_qm_scall_setqlim(mp, from_kqid(&init_user_ns, qid),
+=======
+	return xfs_qm_scall_setqlim(mp, from_kqid(&init_user_ns, qid),
+>>>>>>> v3.18
 =======
 	return xfs_qm_scall_setqlim(mp, from_kqid(&init_user_ns, qid),
 >>>>>>> v3.18
@@ -210,13 +242,19 @@ xfs_fs_set_dqblk(
 
 const struct quotactl_ops xfs_quotactl_operations = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_xstate		= xfs_fs_get_xstate,
 	.set_xstate		= xfs_fs_set_xstate,
 =======
+=======
+>>>>>>> v3.18
 	.get_xstatev		= xfs_fs_get_xstatev,
 	.get_xstate		= xfs_fs_get_xstate,
 	.set_xstate		= xfs_fs_set_xstate,
 	.rm_xquota		= xfs_fs_rm_xquota,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.get_dqblk		= xfs_fs_get_dqblk,
 	.set_dqblk		= xfs_fs_set_dqblk,

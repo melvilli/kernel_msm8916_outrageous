@@ -314,7 +314,11 @@ static int vmlogrdr_open (struct inode *inode, struct file *filp)
 
 	dev_num = iminor(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev_num > MAXMINOR)
+=======
+	if (dev_num >= MAXMINOR)
+>>>>>>> v3.18
 =======
 	if (dev_num >= MAXMINOR)
 >>>>>>> v3.18
@@ -343,7 +347,10 @@ static int vmlogrdr_open (struct inode *inode, struct file *filp)
 	/* set the file options */
 	filp->private_data = logptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	filp->f_op = &vmlogrdr_fops;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -769,7 +776,11 @@ static int vmlogrdr_register_device(struct vmlogrdr_priv_t *priv)
 	dev = kzalloc(sizeof(struct device), GFP_KERNEL);
 	if (dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_set_name(dev, priv->internal_name);
+=======
+		dev_set_name(dev, "%s", priv->internal_name);
+>>>>>>> v3.18
 =======
 		dev_set_name(dev, "%s", priv->internal_name);
 >>>>>>> v3.18
@@ -885,7 +896,11 @@ static int __init vmlogrdr_init(void)
 
 	for (i=0; i < MAXMINOR; ++i ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sys_ser[i].buffer = (char *) get_zeroed_page(GFP_KERNEL | GFP_DMA);
+=======
+		sys_ser[i].buffer = (char *) get_zeroed_page(GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		sys_ser[i].buffer = (char *) get_zeroed_page(GFP_KERNEL);
 >>>>>>> v3.18

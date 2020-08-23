@@ -146,6 +146,7 @@ static struct scsi_transport_template *ahc_linux_transport_template = NULL;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Control collection of SCSI transfer statistics for the /proc filesystem.
  *
  * NOTE: Do NOT enable this when running on kernels version 1.2.x and below.
@@ -156,6 +157,8 @@ static struct scsi_transport_template *ahc_linux_transport_template = NULL;
 #endif
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * To change the default number of tagged transactions allowed per-device,
@@ -2124,7 +2127,11 @@ ahc_linux_queue_recovery_cmd(struct scsi_cmnd *cmd, scb_flag flag)
 		printk("%s:%d:%d:%d: Is not an active device\n",
 		       ahc_name(ahc), cmd->device->channel, cmd->device->id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       cmd->device->lun);
+=======
+		       (u8)cmd->device->lun);
+>>>>>>> v3.18
 =======
 		       (u8)cmd->device->lun);
 >>>>>>> v3.18
@@ -2136,17 +2143,23 @@ ahc_linux_queue_recovery_cmd(struct scsi_cmnd *cmd, scb_flag flag)
 	 && ahc_search_untagged_queues(ahc, cmd, cmd->device->id,
 				       cmd->device->channel + 'A',
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       cmd->device->lun,
 				       CAM_REQ_ABORTED, SEARCH_COMPLETE) != 0) {
 		printk("%s:%d:%d:%d: Command found on untagged queue\n",
 		       ahc_name(ahc), cmd->device->channel, cmd->device->id,
 		       cmd->device->lun);
 =======
+=======
+>>>>>>> v3.18
 				       (u8)cmd->device->lun,
 				       CAM_REQ_ABORTED, SEARCH_COMPLETE) != 0) {
 		printk("%s:%d:%d:%d: Command found on untagged queue\n",
 		       ahc_name(ahc), cmd->device->channel, cmd->device->id,
 		       (u8)cmd->device->lun);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		retval = SUCCESS;
 		goto done;
@@ -2214,7 +2227,11 @@ ahc_linux_queue_recovery_cmd(struct scsi_cmnd *cmd, scb_flag flag)
 			printk("%s:%d:%d:%d: Cmd aborted from QINFIFO\n",
 			       ahc_name(ahc), cmd->device->channel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					cmd->device->id, cmd->device->lun);
+=======
+			       cmd->device->id, (u8)cmd->device->lun);
+>>>>>>> v3.18
 =======
 			       cmd->device->id, (u8)cmd->device->lun);
 >>>>>>> v3.18
@@ -2224,7 +2241,12 @@ ahc_linux_queue_recovery_cmd(struct scsi_cmnd *cmd, scb_flag flag)
 	} else if (ahc_search_qinfifo(ahc, cmd->device->id,
 				      cmd->device->channel + 'A',
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      cmd->device->lun, pending_scb->hscb->tag,
+=======
+				      cmd->device->lun,
+				      pending_scb->hscb->tag,
+>>>>>>> v3.18
 =======
 				      cmd->device->lun,
 				      pending_scb->hscb->tag,

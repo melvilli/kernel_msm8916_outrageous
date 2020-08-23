@@ -20,6 +20,10 @@
 #include <linux/spinlock.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -32,8 +36,11 @@
 #include <asm/fsl_hcalls.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../../../kernel/irq/settings.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct ehv_pic *global_ehv_pic;
@@ -120,7 +127,10 @@ int ehv_pic_set_irq_type(struct irq_data *d, unsigned int flow_type)
 {
 	unsigned int src = virq_to_hw(d->irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct irq_desc *desc = irq_to_desc(d->irq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int vecpri, vold, vnew, prio, cpu_dest;
@@ -130,10 +140,14 @@ int ehv_pic_set_irq_type(struct irq_data *d, unsigned int flow_type)
 		flow_type = IRQ_TYPE_LEVEL_LOW;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_settings_clr_level(desc);
 	irq_settings_set_trigger_mask(desc, flow_type);
 	if (flow_type & (IRQ_TYPE_LEVEL_HIGH | IRQ_TYPE_LEVEL_LOW))
 		irq_settings_set_level(desc);
+=======
+	irqd_set_trigger_type(d, flow_type);
+>>>>>>> v3.18
 =======
 	irqd_set_trigger_type(d, flow_type);
 >>>>>>> v3.18
@@ -158,7 +172,11 @@ int ehv_pic_set_irq_type(struct irq_data *d, unsigned int flow_type)
 
 	spin_unlock_irqrestore(&ehv_pic_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return IRQ_SET_MASK_OK_NOCOPY;
+>>>>>>> v3.18
 =======
 	return IRQ_SET_MASK_OK_NOCOPY;
 >>>>>>> v3.18

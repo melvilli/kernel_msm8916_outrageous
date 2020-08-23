@@ -113,6 +113,10 @@ struct mrp_applicant {
 	struct net_device	*dev;
 	struct timer_list	join_timer;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct timer_list	periodic_timer;
+>>>>>>> v3.18
 =======
 	struct timer_list	periodic_timer;
 >>>>>>> v3.18
@@ -130,6 +134,7 @@ struct mrp_port {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int	mrp_register_application(struct mrp_application *app);
 extern void	mrp_unregister_application(struct mrp_application *app);
 
@@ -145,6 +150,8 @@ extern void	mrp_request_leave(const struct net_device *dev,
 				   const struct mrp_application *app,
 				   const void *value, u8 len, u8 type);
 =======
+=======
+>>>>>>> v3.18
 int mrp_register_application(struct mrp_application *app);
 void mrp_unregister_application(struct mrp_application *app);
 
@@ -157,6 +164,9 @@ int mrp_request_join(const struct net_device *dev,
 void mrp_request_leave(const struct net_device *dev,
 		       const struct mrp_application *app,
 		       const void *value, u8 len, u8 type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _NET_MRP_H */

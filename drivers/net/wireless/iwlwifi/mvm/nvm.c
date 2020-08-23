@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -71,7 +81,13 @@
  *
  *****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "iwl-trans.h"
+=======
+#include <linux/firmware.h>
+#include "iwl-trans.h"
+#include "iwl-csr.h"
+>>>>>>> v3.18
 =======
 #include <linux/firmware.h>
 #include "iwl-trans.h"
@@ -82,6 +98,7 @@
 #include "iwl-eeprom-read.h"
 #include "iwl-nvm-parse.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* list of NVM sections we are allowed/need to read */
 static const int nvm_to_read[] = {
@@ -101,6 +118,8 @@ static inline void iwl_nvm_fill_read(struct iwl_nvm_access_cmd *cmd,
 	cmd->length = cpu_to_le16(length);
 	cmd->type = cpu_to_le16(section);
 =======
+=======
+>>>>>>> v3.18
 /* Default NVM size to read */
 #define IWL_NVM_DEFAULT_CHUNK_SIZE (2*1024)
 #define IWL_MAX_NVM_SECTION_SIZE	0x1b58
@@ -139,6 +158,9 @@ static int iwl_nvm_write_chunk(struct iwl_mvm *mvm, u16 section,
 	};
 
 	return iwl_mvm_send_cmd(mvm, &cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -146,21 +168,31 @@ static int iwl_nvm_read_chunk(struct iwl_mvm *mvm, u16 section,
 			      u16 offset, u16 length, u8 *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iwl_nvm_access_cmd nvm_access_cmd = {};
 =======
+=======
+>>>>>>> v3.18
 	struct iwl_nvm_access_cmd nvm_access_cmd = {
 		.offset = cpu_to_le16(offset),
 		.length = cpu_to_le16(length),
 		.type = cpu_to_le16(section),
 		.op_code = NVM_READ_OPCODE,
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct iwl_nvm_access_resp *nvm_resp;
 	struct iwl_rx_packet *pkt;
 	struct iwl_host_cmd cmd = {
 		.id = NVM_ACCESS_CMD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = CMD_SYNC | CMD_WANT_SKB,
+=======
+		.flags = CMD_WANT_SKB | CMD_SEND_IN_RFKILL,
+>>>>>>> v3.18
 =======
 		.flags = CMD_WANT_SKB | CMD_SEND_IN_RFKILL,
 >>>>>>> v3.18
@@ -170,7 +202,10 @@ static int iwl_nvm_read_chunk(struct iwl_mvm *mvm, u16 section,
 	u8 *resp_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_nvm_fill_read(&nvm_access_cmd, offset, length, section);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cmd.len[0] = sizeof(struct iwl_nvm_access_cmd);
@@ -195,11 +230,14 @@ static int iwl_nvm_read_chunk(struct iwl_mvm *mvm, u16 section,
 	resp_data = nvm_resp->data;
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IWL_ERR(mvm,
 			"NVM access command failed with status %d (device: %s)\n",
 			ret, mvm->cfg->name);
 		ret = -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		if ((offset != 0) &&
 		    (ret == READ_NVM_CHUNK_NOT_VALID_ADDRESS)) {
 			/*
@@ -220,6 +258,9 @@ static int iwl_nvm_read_chunk(struct iwl_mvm *mvm, u16 section,
 					 ret, mvm->cfg->name);
 			ret = -EIO;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto exit;
 	}
@@ -241,7 +282,10 @@ exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int iwl_nvm_write_section(struct iwl_mvm *mvm, u16 section,
 				 const u8 *data, u16 length)
 {
@@ -266,6 +310,9 @@ static int iwl_nvm_write_section(struct iwl_mvm *mvm, u16 section,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Reads an NVM section completely.
@@ -279,7 +326,11 @@ static int iwl_nvm_write_section(struct iwl_mvm *mvm, u16 section,
  */
 static int iwl_nvm_read_section(struct iwl_mvm *mvm, u16 section,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				u8 *data)
+=======
+				u8 *data, u32 size_read)
+>>>>>>> v3.18
 =======
 				u8 *data, u32 size_read)
 >>>>>>> v3.18
@@ -295,12 +346,15 @@ static int iwl_nvm_read_section(struct iwl_mvm *mvm, u16 section,
 	/* Read the NVM until exhausted (reading less than requested) */
 	while (ret == length) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = iwl_nvm_read_chunk(mvm, section, offset, length, data);
 		if (ret < 0) {
 			IWL_ERR(mvm,
 				"Cannot read NVM from section %d offset %d, length %d\n",
 				section, offset, length);
 =======
+=======
+>>>>>>> v3.18
 		/* Check no memory assumptions fail and cause an overflow */
 		if ((size_read + offset + length) >
 		    mvm->cfg->base_params->eeprom_size) {
@@ -313,6 +367,9 @@ static int iwl_nvm_read_section(struct iwl_mvm *mvm, u16 section,
 			IWL_DEBUG_EEPROM(mvm->trans->dev,
 					 "Cannot read NVM from section %d offset %d, length %d\n",
 					 section, offset, length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return ret;
 		}
@@ -320,7 +377,12 @@ static int iwl_nvm_read_section(struct iwl_mvm *mvm, u16 section,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IWL_INFO(mvm, "NVM section %d read completed\n", section);
+=======
+	IWL_DEBUG_EEPROM(mvm->trans->dev,
+			 "NVM section %d read completed\n", section);
+>>>>>>> v3.18
 =======
 	IWL_DEBUG_EEPROM(mvm->trans->dev,
 			 "NVM section %d read completed\n", section);
@@ -333,6 +395,7 @@ iwl_parse_nvm_sections(struct iwl_mvm *mvm)
 {
 	struct iwl_nvm_section *sections = mvm->nvm_sections;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const __le16 *hw, *sw, *calib;
 
 	/* Checking for required sections */
@@ -341,6 +404,8 @@ iwl_parse_nvm_sections(struct iwl_mvm *mvm)
 		IWL_ERR(mvm, "Can't parse empty NVM sections\n");
 		return NULL;
 =======
+=======
+>>>>>>> v3.18
 	const __le16 *hw, *sw, *calib, *regulatory, *mac_override;
 
 	/* Checking for required sections */
@@ -365,12 +430,16 @@ iwl_parse_nvm_sections(struct iwl_mvm *mvm)
 				"Can't parse mac_address, empty sections\n");
 			return NULL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (WARN_ON(!mvm->cfg))
 		return NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hw = (const __le16 *)sections[NVM_SECTION_TYPE_HW].data;
 	sw = (const __le16 *)sections[NVM_SECTION_TYPE_SW].data;
@@ -396,6 +465,8 @@ int iwl_nvm_init(struct iwl_mvm *mvm)
 			break;
 		temp = kmemdup(nvm_buffer, ret, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	hw = (const __le16 *)sections[mvm->cfg->nvm_hw_section_num].data;
 	sw = (const __le16 *)sections[NVM_SECTION_TYPE_SW].data;
 	calib = (const __le16 *)sections[NVM_SECTION_TYPE_CALIBRATION].data;
@@ -546,11 +617,15 @@ static int iwl_mvm_read_external_nvm(struct iwl_mvm *mvm)
 		}
 
 		temp = kmemdup(file_sec->data, section_size, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!temp) {
 			ret = -ENOMEM;
 			break;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		mvm->nvm_sections[section].data = temp;
 		mvm->nvm_sections[section].length = ret;
@@ -565,6 +640,8 @@ static int iwl_mvm_read_external_nvm(struct iwl_mvm *mvm)
 	return ret;
 }
 =======
+=======
+>>>>>>> v3.18
 		mvm->nvm_sections[section_id].data = temp;
 		mvm->nvm_sections[section_id].length = section_size;
 
@@ -673,4 +750,7 @@ int iwl_nvm_init(struct iwl_mvm *mvm, bool read_nvm_from_nic)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

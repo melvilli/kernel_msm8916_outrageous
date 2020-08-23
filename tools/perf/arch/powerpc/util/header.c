@@ -6,9 +6,13 @@
 
 #include "../../util/header.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define __stringify_1(x)        #x
 #define __stringify(x)          __stringify_1(x)
+=======
+#include "../../util/util.h"
+>>>>>>> v3.18
 =======
 #include "../../util/util.h"
 >>>>>>> v3.18

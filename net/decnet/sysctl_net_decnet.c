@@ -133,7 +133,11 @@ static int parse_addr(__le16 *addr, char *str)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dn_node_address_handler(ctl_table *table, int write,
+=======
+static int dn_node_address_handler(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int dn_node_address_handler(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -188,7 +192,11 @@ static int dn_node_address_handler(struct ctl_table *table, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dn_def_dev_handler(ctl_table *table, int write,
+=======
+static int dn_def_dev_handler(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int dn_def_dev_handler(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -255,7 +263,11 @@ static int dn_def_dev_handler(struct ctl_table *table, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table dn_table[] = {
+=======
+static struct ctl_table dn_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table dn_table[] = {
 >>>>>>> v3.18

@@ -20,7 +20,10 @@
 #include <linux/gfp.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -33,17 +36,23 @@
 #include <linux/platform_device.h>
 #include <linux/libata.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ahci_platform.h>
 #include <linux/interrupt.h>
 #include <linux/delay.h>
 #include <linux/export.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/delay.h>
 #include <linux/export.h>
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "ahci.h"
 
@@ -56,16 +65,22 @@
 #define CR_START			0x0001
 #define CR_WR_RDN			0x0002
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CPHY_RX_INPUT_STS		0x2002
 #define CPHY_SATA_OVERRIDE	 	0x4000
 #define CPHY_OVERRIDE			0x2005
 =======
+=======
+>>>>>>> v3.18
 #define CPHY_TX_INPUT_STS		0x2001
 #define CPHY_RX_INPUT_STS		0x2002
 #define CPHY_SATA_TX_OVERRIDE		0x8000
 #define CPHY_SATA_RX_OVERRIDE	 	0x4000
 #define CPHY_TX_OVERRIDE		0x2004
 #define CPHY_RX_OVERRIDE		0x2005
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SPHY_LANE			0x100
 #define SPHY_HALF_RATE			0x0001
@@ -73,6 +88,11 @@
 #define CPHY_SATA_DPLL_SHIFT		8
 #define CPHY_SATA_DPLL_RESET		(1 << 11)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CPHY_SATA_TX_ATTEN		0x1c00
+#define CPHY_SATA_TX_ATTEN_SHIFT	10
+>>>>>>> v3.18
 =======
 #define CPHY_SATA_TX_ATTEN		0x1c00
 #define CPHY_SATA_TX_ATTEN_SHIFT	10
@@ -90,10 +110,13 @@ struct phy_lane_info {
 	u8 lane_mapping;
 	u8 phy_devs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 static struct phy_lane_info port_data[CPHY_PORT_COUNT];
 
 =======
+=======
+>>>>>>> v3.18
 	u8 tx_atten;
 };
 static struct phy_lane_info port_data[CPHY_PORT_COUNT];
@@ -250,6 +273,9 @@ static void highbank_set_em_messages(struct device *dev,
 	pi->flags |= ATA_FLAG_EM | ATA_FLAG_SW_ACTIVITY;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u32 __combo_phy_reg_read(u8 sata_port, u32 addr)
 {
@@ -302,9 +328,12 @@ static void highbank_cphy_disable_overrides(u8 sata_port)
 		return;
 	tmp = combo_phy_read(sata_port, CPHY_RX_INPUT_STS + lane * SPHY_LANE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp &= ~CPHY_SATA_OVERRIDE;
 	combo_phy_write(sata_port, CPHY_OVERRIDE + lane * SPHY_LANE, tmp);
 =======
+=======
+>>>>>>> v3.18
 	tmp &= ~CPHY_SATA_RX_OVERRIDE;
 	combo_phy_write(sata_port, CPHY_RX_OVERRIDE + lane * SPHY_LANE, tmp);
 }
@@ -326,6 +355,9 @@ static void cphy_override_tx_attenuation(u8 sata_port, u32 val)
 
 	tmp |= (val << CPHY_SATA_TX_ATTEN_SHIFT) & CPHY_SATA_TX_ATTEN;
 	combo_phy_write(sata_port, CPHY_TX_OVERRIDE + lane * SPHY_LANE, tmp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -334,6 +366,7 @@ static void cphy_override_rx_mode(u8 sata_port, u32 val)
 	u8 lane = port_data[sata_port].lane_mapping;
 	u32 tmp;
 	tmp = combo_phy_read(sata_port, CPHY_RX_INPUT_STS + lane * SPHY_LANE);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tmp &= ~CPHY_SATA_OVERRIDE;
 	combo_phy_write(sata_port, CPHY_OVERRIDE + lane * SPHY_LANE, tmp);
@@ -351,6 +384,8 @@ static void cphy_override_rx_mode(u8 sata_port, u32 val)
 	tmp &= ~CPHY_SATA_DPLL_RESET;
 	combo_phy_write(sata_port, CPHY_OVERRIDE + lane * SPHY_LANE, tmp);
 =======
+=======
+>>>>>>> v3.18
 	tmp &= ~CPHY_SATA_RX_OVERRIDE;
 	combo_phy_write(sata_port, CPHY_RX_OVERRIDE + lane * SPHY_LANE, tmp);
 
@@ -366,6 +401,9 @@ static void cphy_override_rx_mode(u8 sata_port, u32 val)
 
 	tmp &= ~CPHY_SATA_DPLL_RESET;
 	combo_phy_write(sata_port, CPHY_RX_OVERRIDE + lane * SPHY_LANE, tmp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	msleep(15);
@@ -384,6 +422,10 @@ static void highbank_cphy_override_lane(u8 sata_port)
 	} while ((tmp & SPHY_HALF_RATE) && (k++ < 1000));
 	cphy_override_rx_mode(sata_port, 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cphy_override_tx_attenuation(sata_port, port_data[sata_port].tx_atten);
+>>>>>>> v3.18
 =======
 	cphy_override_tx_attenuation(sata_port, port_data[sata_port].tx_atten);
 >>>>>>> v3.18
@@ -393,18 +435,24 @@ static int highbank_initialize_phys(struct device *dev, void __iomem *addr)
 {
 	struct device_node *sata_node = dev->of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int phy_count = 0, phy, port = 0;
 	void __iomem *cphy_base[CPHY_PHY_COUNT];
 	struct device_node *phy_nodes[CPHY_PHY_COUNT];
 	memset(port_data, 0, sizeof(struct phy_lane_info) * CPHY_PORT_COUNT);
 	memset(phy_nodes, 0, sizeof(struct device_node*) * CPHY_PHY_COUNT);
 =======
+=======
+>>>>>>> v3.18
 	int phy_count = 0, phy, port = 0, i;
 	void __iomem *cphy_base[CPHY_PHY_COUNT] = {};
 	struct device_node *phy_nodes[CPHY_PHY_COUNT] = {};
 	u32 tx_atten[CPHY_PORT_COUNT] = {};
 
 	memset(port_data, 0, sizeof(struct phy_lane_info) * CPHY_PORT_COUNT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	do {
@@ -434,11 +482,17 @@ static int highbank_initialize_phys(struct device *dev, void __iomem *addr)
 		port += 1;
 	} while (port < CPHY_PORT_COUNT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	of_property_read_u32_array(sata_node, "calxeda,tx-atten",
 				tx_atten, port);
 	for (i = 0; i < port; i++)
 		port_data[i].tx_atten = (u8) tx_atten[i];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -466,6 +520,10 @@ static int ahci_highbank_hardreset(struct ata_link *link, unsigned int *class,
 	struct ata_port *ap = link->ap;
 	struct ahci_port_priv *pp = ap->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ahci_host_priv *hpriv = ap->host->private_data;
+>>>>>>> v3.18
 =======
 	struct ahci_host_priv *hpriv = ap->host->private_data;
 >>>>>>> v3.18
@@ -498,7 +556,11 @@ static int ahci_highbank_hardreset(struct ata_link *link, unsigned int *class,
 	} while (!online && retry--);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ahci_start_engine(ap);
+=======
+	hpriv->start_engine(ap);
+>>>>>>> v3.18
 =======
 	hpriv->start_engine(ap);
 >>>>>>> v3.18
@@ -513,6 +575,10 @@ static struct ata_port_operations ahci_highbank_ops = {
 	.inherits		= &ahci_ops,
 	.hardreset		= ahci_highbank_hardreset,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.transmit_led_message   = ecx_transmit_led_message,
+>>>>>>> v3.18
 =======
 	.transmit_led_message   = ecx_transmit_led_message,
 >>>>>>> v3.18
@@ -540,6 +606,7 @@ static int ahci_highbank_probe(struct platform_device *pdev)
 	struct device *dev = &pdev->dev;
 	struct ahci_host_priv *hpriv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ata_host *host;
 	struct resource *mem;
 	int irq;
@@ -547,6 +614,8 @@ static int ahci_highbank_probe(struct platform_device *pdev)
 	int i;
 	int rc;
 =======
+=======
+>>>>>>> v3.18
 	struct ecx_plat_data *pdata;
 	struct ata_host *host;
 	struct resource *mem;
@@ -554,6 +623,9 @@ static int ahci_highbank_probe(struct platform_device *pdev)
 	int i;
 	int rc;
 	u32 n_ports;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct ata_port_info pi = ahci_highbank_port_info;
 	const struct ata_port_info *ppi[] = { &pi, NULL };
@@ -576,12 +648,18 @@ static int ahci_highbank_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pdata = devm_kzalloc(dev, sizeof(*pdata), GFP_KERNEL);
 	if (!pdata) {
 		dev_err(dev, "can't alloc ecx_plat_data\n");
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hpriv->flags |= (unsigned long)pi.private_data;
@@ -598,7 +676,11 @@ static int ahci_highbank_probe(struct platform_device *pdev)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ahci_save_initial_config(dev, hpriv, 0, 0);
+=======
+	ahci_save_initial_config(dev, hpriv);
+>>>>>>> v3.18
 =======
 	ahci_save_initial_config(dev, hpriv);
 >>>>>>> v3.18
@@ -611,7 +693,12 @@ static int ahci_highbank_probe(struct platform_device *pdev)
 		pi.flags |= ATA_FLAG_PMP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ahci_set_em_messages(hpriv, &pi);
+=======
+	if (hpriv->cap & HOST_CAP_64)
+		dma_set_coherent_mask(dev, DMA_BIT_MASK(64));
+>>>>>>> v3.18
 =======
 	if (hpriv->cap & HOST_CAP_64)
 		dma_set_coherent_mask(dev, DMA_BIT_MASK(64));
@@ -625,11 +712,17 @@ static int ahci_highbank_probe(struct platform_device *pdev)
 	n_ports = max(ahci_nr_ports(hpriv->cap), fls(hpriv->port_map));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pdata->n_ports = n_ports;
 	hpriv->plat_data = pdata;
 	highbank_set_em_messages(dev, hpriv, &pi);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	host = ata_host_alloc_pinfo(dev, ppi, n_ports);
 	if (!host) {
@@ -643,9 +736,12 @@ static int ahci_highbank_probe(struct platform_device *pdev)
 		host->flags |= ATA_HOST_PARALLEL_SCAN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pi.flags & ATA_FLAG_EM)
 		ahci_reset_em(host);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < host->n_ports; i++) {
@@ -671,8 +767,12 @@ static int ahci_highbank_probe(struct platform_device *pdev)
 	ahci_print_info(host, "platform");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = ata_host_activate(host, irq, ahci_interrupt, 0,
 					&ahci_highbank_platform_sht);
+=======
+	rc = ahci_host_activate(host, irq, &ahci_highbank_platform_sht);
+>>>>>>> v3.18
 =======
 	rc = ahci_host_activate(host, irq, &ahci_highbank_platform_sht);
 >>>>>>> v3.18

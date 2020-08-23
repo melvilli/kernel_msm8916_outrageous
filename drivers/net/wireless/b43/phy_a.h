@@ -124,10 +124,13 @@ struct b43_phy_a {
 void b43_phy_inita(struct b43_wldev *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct b43_phy_operations;
 extern const struct b43_phy_operations b43_phyops_a;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* LINUX_B43_PHY_A_H_ */

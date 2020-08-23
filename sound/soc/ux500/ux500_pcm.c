@@ -29,12 +29,15 @@
 #include "ux500_pcm.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UX500_PLATFORM_MIN_RATE 8000
 #define UX500_PLATFORM_MAX_RATE 48000
 
 #define UX500_PLATFORM_MIN_CHANNELS 1
 #define UX500_PLATFORM_MAX_CHANNELS 8
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define UX500_PLATFORM_PERIODS_BYTES_MIN	128
@@ -49,6 +52,7 @@ static const struct snd_pcm_hardware ux500_pcm_hw = {
 		SNDRV_PCM_INFO_RESUME |
 		SNDRV_PCM_INFO_PAUSE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.formats = SNDRV_PCM_FMTBIT_S16_LE |
 		SNDRV_PCM_FMTBIT_U16_LE |
 		SNDRV_PCM_FMTBIT_S16_BE |
@@ -58,6 +62,8 @@ static const struct snd_pcm_hardware ux500_pcm_hw = {
 	.rate_max = UX500_PLATFORM_MAX_RATE,
 	.channels_min = UX500_PLATFORM_MIN_CHANNELS,
 	.channels_max = UX500_PLATFORM_MAX_CHANNELS,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.buffer_bytes_max = UX500_PLATFORM_BUFFER_BYTES_MAX,
@@ -72,13 +78,17 @@ static struct dma_chan *ux500_pcm_request_chan(struct snd_soc_pcm_runtime *rtd,
 {
 	struct snd_soc_dai *dai = rtd->cpu_dai;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev = dai->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 per_data_width, mem_data_width;
 	struct stedma40_chan_cfg *dma_cfg;
 	struct ux500_msp_dma_params *dma_params;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_dbg(dev, "%s: MSP %d (%s): Enter.\n", __func__, dai->id,
 		snd_pcm_stream_str(substream));
@@ -101,6 +111,8 @@ static struct dma_chan *ux500_pcm_request_chan(struct snd_soc_pcm_runtime *rtd,
 	default:
 		per_data_width = STEDMA40_WORD_WIDTH;
 =======
+=======
+>>>>>>> v3.18
 	dma_params = snd_soc_dai_get_dma_data(dai, substream);
 	dma_cfg = dma_params->dma_cfg;
 
@@ -118,6 +130,9 @@ static struct dma_chan *ux500_pcm_request_chan(struct snd_soc_pcm_runtime *rtd,
 		break;
 	default:
 		per_data_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -133,7 +148,10 @@ static struct dma_chan *ux500_pcm_request_chan(struct snd_soc_pcm_runtime *rtd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ux500_pcm_prepare_slave_config(struct snd_pcm_substream *substream,
 		struct snd_pcm_hw_params *params,
 		struct dma_slave_config *slave_config)
@@ -173,24 +191,34 @@ static int ux500_pcm_prepare_slave_config(struct snd_pcm_substream *substream,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct snd_dmaengine_pcm_config ux500_dmaengine_pcm_config = {
 	.pcm_hardware = &ux500_pcm_hw,
 	.compat_request_channel = ux500_pcm_request_chan,
 	.prealloc_buffer_size = 128 * 1024,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.prepare_slave_config = ux500_pcm_prepare_slave_config,
 };
 
 static const struct snd_dmaengine_pcm_config ux500_dmaengine_of_pcm_config = {
 	.compat_request_channel = ux500_pcm_request_chan,
 	.prepare_slave_config = ux500_pcm_prepare_slave_config,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 int ux500_pcm_register_platform(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -200,6 +228,8 @@ int ux500_pcm_register_platform(struct platform_device *pdev)
 			SND_DMAENGINE_PCM_FLAG_COMPAT |
 			SND_DMAENGINE_PCM_FLAG_NO_DT);
 =======
+=======
+>>>>>>> v3.18
 	const struct snd_dmaengine_pcm_config *pcm_config;
 	struct device_node *np = pdev->dev.of_node;
 	int ret;
@@ -212,6 +242,9 @@ int ux500_pcm_register_platform(struct platform_device *pdev)
 	ret = snd_dmaengine_pcm_register(&pdev->dev, pcm_config,
 					 SND_DMAENGINE_PCM_FLAG_NO_RESIDUE |
 					 SND_DMAENGINE_PCM_FLAG_COMPAT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0) {
 		dev_err(&pdev->dev,

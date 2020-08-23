@@ -63,10 +63,15 @@ extern user_regset_set_fn fpregs_set, xfpregs_set, fpregs_soft_set,
 
 #ifdef CONFIG_MATH_EMULATION
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define HAVE_HWFP		(boot_cpu_data.hard_math)
 extern void finit_soft_fpu(struct i387_soft_struct *soft);
 #else
 # define HAVE_HWFP		1
+=======
+extern void finit_soft_fpu(struct i387_soft_struct *soft);
+#else
+>>>>>>> v3.18
 =======
 extern void finit_soft_fpu(struct i387_soft_struct *soft);
 #else
@@ -95,7 +100,11 @@ static inline int is_x32_frame(void)
 static __always_inline __pure bool use_eager_fpu(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return static_cpu_has(X86_FEATURE_EAGER_FPU);
+=======
+	return static_cpu_has_safe(X86_FEATURE_EAGER_FPU);
+>>>>>>> v3.18
 =======
 	return static_cpu_has_safe(X86_FEATURE_EAGER_FPU);
 >>>>>>> v3.18
@@ -104,7 +113,11 @@ static __always_inline __pure bool use_eager_fpu(void)
 static __always_inline __pure bool use_xsaveopt(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return static_cpu_has(X86_FEATURE_XSAVEOPT);
+=======
+	return static_cpu_has_safe(X86_FEATURE_XSAVEOPT);
+>>>>>>> v3.18
 =======
 	return static_cpu_has_safe(X86_FEATURE_XSAVEOPT);
 >>>>>>> v3.18
@@ -113,7 +126,11 @@ static __always_inline __pure bool use_xsaveopt(void)
 static __always_inline __pure bool use_xsave(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return static_cpu_has(X86_FEATURE_XSAVE);
+=======
+	return static_cpu_has_safe(X86_FEATURE_XSAVE);
+>>>>>>> v3.18
 =======
 	return static_cpu_has_safe(X86_FEATURE_XSAVE);
 >>>>>>> v3.18
@@ -122,7 +139,11 @@ static __always_inline __pure bool use_xsave(void)
 static __always_inline __pure bool use_fxsr(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return static_cpu_has(X86_FEATURE_FXSR);
+=======
+	return static_cpu_has_safe(X86_FEATURE_FXSR);
+>>>>>>> v3.18
 =======
 	return static_cpu_has_safe(X86_FEATURE_FXSR);
 >>>>>>> v3.18
@@ -317,7 +338,11 @@ static inline int restore_fpu_checking(struct task_struct *tsk)
 	   is pending.  Clear the x87 state here by setting it to fixed
 	   values. "m" is a random variable that should be in L1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(static_cpu_has(X86_FEATURE_FXSAVE_LEAK))) {
+=======
+	if (unlikely(static_cpu_has_bug_safe(X86_BUG_FXSAVE_LEAK))) {
+>>>>>>> v3.18
 =======
 	if (unlikely(static_cpu_has_bug_safe(X86_BUG_FXSAVE_LEAK))) {
 >>>>>>> v3.18
@@ -394,9 +419,15 @@ static inline void drop_fpu(struct task_struct *tsk)
 	 */
 	preempt_disable();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tsk->fpu_counter = 0;
 	__drop_fpu(tsk);
 	clear_stopped_child_used_math(tsk);
+=======
+	tsk->thread.fpu_counter = 0;
+	__drop_fpu(tsk);
+	clear_used_math();
+>>>>>>> v3.18
 =======
 	tsk->thread.fpu_counter = 0;
 	__drop_fpu(tsk);
@@ -459,7 +490,11 @@ static inline fpu_switch_t switch_fpu_prepare(struct task_struct *old, struct ta
 	 */
 	fpu.preload = tsk_used_math(new) && (use_eager_fpu() ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 					     new->fpu_counter > 5);
+=======
+					     new->thread.fpu_counter > 5);
+>>>>>>> v3.18
 =======
 					     new->thread.fpu_counter > 5);
 >>>>>>> v3.18
@@ -472,7 +507,11 @@ static inline fpu_switch_t switch_fpu_prepare(struct task_struct *old, struct ta
 		/* Don't change CR0.TS if we just switch! */
 		if (fpu.preload) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			new->fpu_counter++;
+=======
+			new->thread.fpu_counter++;
+>>>>>>> v3.18
 =======
 			new->thread.fpu_counter++;
 >>>>>>> v3.18
@@ -482,15 +521,21 @@ static inline fpu_switch_t switch_fpu_prepare(struct task_struct *old, struct ta
 			stts();
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		old->fpu_counter = 0;
 		old->thread.fpu.last_cpu = ~0;
 		if (fpu.preload) {
 			new->fpu_counter++;
 =======
+=======
+>>>>>>> v3.18
 		old->thread.fpu_counter = 0;
 		old->thread.fpu.last_cpu = ~0;
 		if (fpu.preload) {
 			new->thread.fpu_counter++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!use_eager_fpu() && fpu_lazy_restore(new, cpu))
 				fpu.preload = 0;
@@ -557,16 +602,22 @@ static inline void user_fpu_begin(void)
 static inline void __save_fpu(struct task_struct *tsk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (use_xsave())
 		xsave_state(&tsk->thread.fpu.state->xsave, -1);
 	else
 =======
+=======
+>>>>>>> v3.18
 	if (use_xsave()) {
 		if (unlikely(system_state == SYSTEM_BOOTING))
 			xsave_state_booting(&tsk->thread.fpu.state->xsave, -1);
 		else
 			xsave_state(&tsk->thread.fpu.state->xsave, -1);
 	} else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		fpu_fxsave(&tsk->thread.fpu);
 }

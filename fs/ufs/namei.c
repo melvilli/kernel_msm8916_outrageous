@@ -39,6 +39,10 @@ static inline int ufs_add_nondir(struct dentry *dentry, struct inode *inode)
 	int err = ufs_add_link(dentry, inode);
 	if (!err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		unlock_new_inode(inode);
+>>>>>>> v3.18
 =======
 		unlock_new_inode(inode);
 >>>>>>> v3.18
@@ -47,6 +51,10 @@ static inline int ufs_add_nondir(struct dentry *dentry, struct inode *inode)
 	}
 	inode_dec_link_count(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unlock_new_inode(inode);
+>>>>>>> v3.18
 =======
 	unlock_new_inode(inode);
 >>>>>>> v3.18
@@ -135,6 +143,7 @@ static int ufs_symlink (struct inode * dir, struct dentry * dentry,
 		goto out_notlocked;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lock_ufs(dir->i_sb);
 	inode = ufs_new_inode(dir, S_IFLNK | S_IRWXUGO);
 	err = PTR_ERR(inode);
@@ -142,12 +151,17 @@ static int ufs_symlink (struct inode * dir, struct dentry * dentry,
 		goto out;
 
 =======
+=======
+>>>>>>> v3.18
 	inode = ufs_new_inode(dir, S_IFLNK | S_IRWXUGO);
 	err = PTR_ERR(inode);
 	if (IS_ERR(inode))
 		goto out_notlocked;
 
 	lock_ufs(dir->i_sb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (l > UFS_SB(sb)->s_uspi->s_maxsymlinklen) {
 		/* slow symlink */
@@ -173,6 +187,10 @@ out_notlocked:
 out_fail:
 	inode_dec_link_count(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unlock_new_inode(inode);
+>>>>>>> v3.18
 =======
 	unlock_new_inode(inode);
 >>>>>>> v3.18
@@ -203,6 +221,7 @@ static int ufs_mkdir(struct inode * dir, struct dentry * dentry, umode_t mode)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lock_ufs(dir->i_sb);
 	inode_inc_link_count(dir);
 
@@ -210,6 +229,11 @@ static int ufs_mkdir(struct inode * dir, struct dentry * dentry, umode_t mode)
 	err = PTR_ERR(inode);
 	if (IS_ERR(inode))
 		goto out_dir;
+=======
+	inode = ufs_new_inode(dir, S_IFDIR|mode);
+	if (IS_ERR(inode))
+		return PTR_ERR(inode);
+>>>>>>> v3.18
 =======
 	inode = ufs_new_inode(dir, S_IFDIR|mode);
 	if (IS_ERR(inode))
@@ -223,6 +247,12 @@ static int ufs_mkdir(struct inode * dir, struct dentry * dentry, umode_t mode)
 	inode_inc_link_count(inode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lock_ufs(dir->i_sb);
+	inode_inc_link_count(dir);
+
+>>>>>>> v3.18
 =======
 	lock_ufs(dir->i_sb);
 	inode_inc_link_count(dir);
@@ -245,8 +275,13 @@ out_fail:
 	inode_dec_link_count(inode);
 	inode_dec_link_count(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iput (inode);
 out_dir:
+=======
+	unlock_new_inode(inode);
+	iput (inode);
+>>>>>>> v3.18
 =======
 	unlock_new_inode(inode);
 	iput (inode);

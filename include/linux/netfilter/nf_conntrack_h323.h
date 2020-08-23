@@ -30,6 +30,7 @@ struct nf_ct_h323_master {
 struct nf_conn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int get_h225_addr(struct nf_conn *ct, unsigned char *data,
 			 TransportAddress *taddr,
 			 union nf_inet_addr *addr, __be16 *port);
@@ -38,6 +39,8 @@ extern void nf_conntrack_h245_expect(struct nf_conn *new,
 extern void nf_conntrack_q931_expect(struct nf_conn *new,
 				     struct nf_conntrack_expect *this);
 =======
+=======
+>>>>>>> v3.18
 int get_h225_addr(struct nf_conn *ct, unsigned char *data,
 		  TransportAddress *taddr, union nf_inet_addr *addr,
 		  __be16 *port);
@@ -45,6 +48,9 @@ void nf_conntrack_h245_expect(struct nf_conn *new,
 			      struct nf_conntrack_expect *this);
 void nf_conntrack_q931_expect(struct nf_conn *new,
 			      struct nf_conntrack_expect *this);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int (*set_h245_addr_hook) (struct sk_buff *skb, unsigned int protoff,
 				  unsigned char **data, int dataoff,

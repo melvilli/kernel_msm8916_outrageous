@@ -5,9 +5,15 @@ struct net_device *gblpnetdev;
 static INT bcm_open(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(dev);
 
 	if (Adapter->fw_download_done == FALSE) {
+=======
+	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
+
+	if (ad->fw_download_done == false) {
+>>>>>>> v3.18
 =======
 	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
 
@@ -19,6 +25,7 @@ static INT bcm_open(struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (netif_msg_ifup(Adapter))
 		pr_info(PFX "%s: enabling interface\n", dev->name);
 
@@ -29,6 +36,8 @@ static INT bcm_open(struct net_device *dev)
 		netif_carrier_on(Adapter->dev);
 		netif_start_queue(Adapter->dev);
 =======
+=======
+>>>>>>> v3.18
 	if (netif_msg_ifup(ad))
 		pr_info(PFX "%s: enabling interface\n", dev->name);
 
@@ -38,6 +47,9 @@ static INT bcm_open(struct net_device *dev)
 
 		netif_carrier_on(ad->dev);
 		netif_start_queue(ad->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -47,9 +59,15 @@ static INT bcm_open(struct net_device *dev)
 static INT bcm_close(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(dev);
 
 	if (netif_msg_ifdown(Adapter))
+=======
+	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
+
+	if (netif_msg_ifdown(ad))
+>>>>>>> v3.18
 =======
 	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
 
@@ -64,7 +82,12 @@ static INT bcm_close(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 bcm_select_queue(struct net_device *dev, struct sk_buff *skb)
+=======
+static u16 bcm_select_queue(struct net_device *dev, struct sk_buff *skb,
+			    void *accel_priv, select_queue_fallback_t fallback)
+>>>>>>> v3.18
 =======
 static u16 bcm_select_queue(struct net_device *dev, struct sk_buff *skb,
 			    void *accel_priv, select_queue_fallback_t fallback)
@@ -89,6 +112,7 @@ static u16 bcm_select_queue(struct net_device *dev, struct sk_buff *skb,
 static netdev_tx_t bcm_transmit(struct sk_buff *skb, struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(dev);
 	u16 qindex = skb_get_queue_mapping(skb);
 
@@ -98,6 +122,8 @@ static netdev_tx_t bcm_transmit(struct sk_buff *skb, struct net_device *dev)
 
 	if (Adapter->TransferMode != IP_PACKET_ONLY_MODE)
 =======
+=======
+>>>>>>> v3.18
 	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
 	u16 qindex = skb_get_queue_mapping(skb);
 
@@ -106,6 +132,9 @@ static netdev_tx_t bcm_transmit(struct sk_buff *skb, struct net_device *dev)
 		goto drop;
 
 	if (ad->TransferMode != IP_PACKET_ONLY_MODE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto drop;
 
@@ -113,7 +142,11 @@ static netdev_tx_t bcm_transmit(struct sk_buff *skb, struct net_device *dev)
 		goto drop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (Adapter->PackInfo[qindex].uiCurrentPacketsOnHost >=
+=======
+	if (ad->PackInfo[qindex].uiCurrentPacketsOnHost >=
+>>>>>>> v3.18
 =======
 	if (ad->PackInfo[qindex].uiCurrentPacketsOnHost >=
 >>>>>>> v3.18
@@ -121,6 +154,7 @@ static netdev_tx_t bcm_transmit(struct sk_buff *skb, struct net_device *dev)
 		return NETDEV_TX_BUSY;
 
 	/* Now Enqueue the packet */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (netif_msg_tx_queued(Adapter))
 		pr_info(PFX "%s: enqueueing packet to queue %d\n",
@@ -141,6 +175,8 @@ static netdev_tx_t bcm_transmit(struct sk_buff *skb, struct net_device *dev)
 		atomic_set(&Adapter->TxPktAvail, 1);
 		wake_up(&Adapter->tx_packet_wait_queue);
 =======
+=======
+>>>>>>> v3.18
 	if (netif_msg_tx_queued(ad))
 		pr_info(PFX "%s: enqueueing packet to queue %d\n",
 			dev->name, qindex);
@@ -159,6 +195,9 @@ static netdev_tx_t bcm_transmit(struct sk_buff *skb, struct net_device *dev)
 	if (!atomic_read(&ad->TxPktAvail)) {
 		atomic_set(&ad->TxPktAvail, 1);
 		wake_up(&ad->tx_packet_wait_queue);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return NETDEV_TX_OK;
@@ -207,9 +246,15 @@ static void bcm_get_drvinfo(struct net_device *dev,
 			    struct ethtool_drvinfo *info)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(dev);
 	struct bcm_interface_adapter *psIntfAdapter = Adapter->pvInterfaceAdapter;
 	struct usb_device *udev = interface_to_usbdev(psIntfAdapter->interface);
+=======
+	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
+	struct bcm_interface_adapter *intf_ad = ad->pvInterfaceAdapter;
+	struct usb_device *udev = interface_to_usbdev(intf_ad->interface);
+>>>>>>> v3.18
 =======
 	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
 	struct bcm_interface_adapter *intf_ad = ad->pvInterfaceAdapter;
@@ -220,8 +265,13 @@ static void bcm_get_drvinfo(struct net_device *dev,
 	strlcpy(info->version, DRV_VERSION, sizeof(info->version));
 	snprintf(info->fw_version, sizeof(info->fw_version), "%u.%u",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 Adapter->uiFlashLayoutMajorVersion,
 		 Adapter->uiFlashLayoutMinorVersion);
+=======
+		 ad->uiFlashLayoutMajorVersion,
+		 ad->uiFlashLayoutMinorVersion);
+>>>>>>> v3.18
 =======
 		 ad->uiFlashLayoutMajorVersion,
 		 ad->uiFlashLayoutMinorVersion);
@@ -233,9 +283,15 @@ static void bcm_get_drvinfo(struct net_device *dev,
 static u32 bcm_get_link(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(dev);
 
 	return Adapter->LinkUpStatus;
+=======
+	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
+
+	return ad->LinkUpStatus;
+>>>>>>> v3.18
 =======
 	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
 
@@ -246,9 +302,15 @@ static u32 bcm_get_link(struct net_device *dev)
 static u32 bcm_get_msglevel(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(dev);
 
 	return Adapter->msg_enable;
+=======
+	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
+
+	return ad->msg_enable;
+>>>>>>> v3.18
 =======
 	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
 
@@ -259,9 +321,15 @@ static u32 bcm_get_msglevel(struct net_device *dev)
 static void bcm_set_msglevel(struct net_device *dev, u32 level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcm_mini_adapter *Adapter = GET_BCM_ADAPTER(dev);
 
 	Adapter->msg_enable = level;
+=======
+	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
+
+	ad->msg_enable = level;
+>>>>>>> v3.18
 =======
 	struct bcm_mini_adapter *ad = GET_BCM_ADAPTER(dev);
 
@@ -278,6 +346,7 @@ static const struct ethtool_ops bcm_ethtool_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int register_networkdev(struct bcm_mini_adapter *Adapter)
 {
 	struct net_device *net = Adapter->dev;
@@ -285,12 +354,17 @@ int register_networkdev(struct bcm_mini_adapter *Adapter)
 	struct usb_interface *udev = IntfAdapter->interface;
 	struct usb_device *xdev = IntfAdapter->udev;
 =======
+=======
+>>>>>>> v3.18
 int register_networkdev(struct bcm_mini_adapter *ad)
 {
 	struct net_device *net = ad->dev;
 	struct bcm_interface_adapter *intf_ad = ad->pvInterfaceAdapter;
 	struct usb_interface *udev = intf_ad->interface;
 	struct usb_device *xdev = intf_ad->udev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int result;
@@ -307,7 +381,11 @@ int register_networkdev(struct bcm_mini_adapter *ad)
 
 	/* Read the MAC Address from EEPROM */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = ReadMacAddressFromNVM(Adapter);
+=======
+	result = ReadMacAddressFromNVM(ad);
+>>>>>>> v3.18
 =======
 	result = ReadMacAddressFromNVM(ad);
 >>>>>>> v3.18
@@ -322,9 +400,15 @@ int register_networkdev(struct bcm_mini_adapter *ad)
 		return result;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gblpnetdev = Adapter->dev;
 
 	if (netif_msg_probe(Adapter))
+=======
+	gblpnetdev = ad->dev;
+
+	if (netif_msg_probe(ad))
+>>>>>>> v3.18
 =======
 	gblpnetdev = ad->dev;
 
@@ -337,6 +421,7 @@ int register_networkdev(struct bcm_mini_adapter *ad)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void unregister_networkdev(struct bcm_mini_adapter *Adapter)
 {
@@ -351,6 +436,8 @@ void unregister_networkdev(struct bcm_mini_adapter *Adapter)
 
 	unregister_netdev(Adapter->dev);
 =======
+=======
+>>>>>>> v3.18
 void unregister_networkdev(struct bcm_mini_adapter *ad)
 {
 	struct net_device *net = ad->dev;
@@ -363,5 +450,8 @@ void unregister_networkdev(struct bcm_mini_adapter *ad)
 			 net->name, xdev->bus->bus_name, xdev->devpath);
 
 	unregister_netdev(ad->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

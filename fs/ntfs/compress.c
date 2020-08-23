@@ -59,7 +59,11 @@ typedef enum {
  * ntfs_compression_buffer - one buffer for the decompression engine
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 *ntfs_compression_buffer = NULL;
+=======
+static u8 *ntfs_compression_buffer;
+>>>>>>> v3.18
 =======
 static u8 *ntfs_compression_buffer;
 >>>>>>> v3.18

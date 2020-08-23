@@ -240,7 +240,10 @@ struct sound_queue {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SLEEP(queue)		interruptible_sleep_on_timeout(&queue, HZ)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define WAKE_UP(queue)		(wake_up_interruptible(&queue))

@@ -31,6 +31,10 @@
 #include <linux/module.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
@@ -77,6 +81,7 @@ static int tegra30_i2s_runtime_resume(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tegra30_i2s_startup(struct snd_pcm_substream *substream,
 			struct snd_soc_dai *dai)
 {
@@ -118,6 +123,8 @@ static void tegra30_i2s_shutdown(struct snd_pcm_substream *substream,
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int tegra30_i2s_set_fmt(struct snd_soc_dai *dai,
@@ -187,6 +194,10 @@ static int tegra30_i2s_hw_params(struct snd_pcm_substream *substream,
 	unsigned int mask, val, reg;
 	int ret, sample_size, srate, i2sclock, bitcnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tegra30_ahub_cif_conf cif_conf;
+>>>>>>> v3.18
 =======
 	struct tegra30_ahub_cif_conf cif_conf;
 >>>>>>> v3.18
@@ -229,6 +240,7 @@ static int tegra30_i2s_hw_params(struct snd_pcm_substream *substream,
 	regmap_write(i2s->regmap, TEGRA30_I2S_TIMING, val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = (0 << TEGRA30_AUDIOCIF_CTRL_FIFO_THRESHOLD_SHIFT) |
 	      (1 << TEGRA30_AUDIOCIF_CTRL_AUDIO_CHANNELS_SHIFT) |
 	      (1 << TEGRA30_AUDIOCIF_CTRL_CLIENT_CHANNELS_SHIFT) |
@@ -245,6 +257,8 @@ static int tegra30_i2s_hw_params(struct snd_pcm_substream *substream,
 
 	regmap_write(i2s->regmap, reg, val);
 =======
+=======
+>>>>>>> v3.18
 	cif_conf.threshold = 0;
 	cif_conf.audio_channels = 2;
 	cif_conf.client_channels = 2;
@@ -265,6 +279,9 @@ static int tegra30_i2s_hw_params(struct snd_pcm_substream *substream,
 	}
 
 	i2s->soc_data->set_audio_cif(i2s->regmap, reg, &cif_conf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	val = (1 << TEGRA30_I2S_OFFSET_RX_DATA_OFFSET_SHIFT) |
@@ -345,8 +362,11 @@ static int tegra30_i2s_probe(struct snd_soc_dai *dai)
 
 static struct snd_soc_dai_ops tegra30_i2s_dai_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.startup	= tegra30_i2s_startup,
 	.shutdown	= tegra30_i2s_shutdown,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.set_fmt	= tegra30_i2s_set_fmt,
@@ -407,7 +427,11 @@ static bool tegra30_i2s_wr_rd_reg(struct device *dev, unsigned int reg)
 	default:
 		return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -424,7 +448,11 @@ static bool tegra30_i2s_volatile_reg(struct device *dev, unsigned int reg)
 	default:
 		return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -439,8 +467,11 @@ static const struct regmap_config tegra30_i2s_regmap_config = {
 	.readable_reg = tegra30_i2s_wr_rd_reg,
 	.volatile_reg = tegra30_i2s_volatile_reg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cache_type = REGCACHE_RBTREE,
 =======
+=======
+>>>>>>> v3.18
 	.cache_type = REGCACHE_FLAT,
 };
 
@@ -456,6 +487,9 @@ static const struct of_device_id tegra30_i2s_of_match[] = {
 	{ .compatible = "nvidia,tegra124-i2s", .data = &tegra124_i2s_config },
 	{ .compatible = "nvidia,tegra30-i2s", .data = &tegra30_i2s_config },
 	{},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -463,6 +497,10 @@ static int tegra30_i2s_platform_probe(struct platform_device *pdev)
 {
 	struct tegra30_i2s *i2s;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct of_device_id *match;
+>>>>>>> v3.18
 =======
 	const struct of_device_id *match;
 >>>>>>> v3.18
@@ -480,7 +518,10 @@ static int tegra30_i2s_platform_probe(struct platform_device *pdev)
 	dev_set_drvdata(&pdev->dev, i2s);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	match = of_match_device(tegra30_i2s_of_match, &pdev->dev);
 	if (!match) {
 		dev_err(&pdev->dev, "Error: No device match found\n");
@@ -489,6 +530,9 @@ static int tegra30_i2s_platform_probe(struct platform_device *pdev)
 	}
 	i2s->soc_data = (struct tegra30_i2s_soc_data *)match->data;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2s->dai = tegra30_i2s_dai_template;
 	i2s->dai.name = dev_name(&pdev->dev);
@@ -548,7 +592,10 @@ static int tegra30_i2s_platform_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	i2s->playback_dma_data.addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
 	i2s->playback_dma_data.maxburst = 4;
 	ret = tegra30_ahub_allocate_tx_fifo(&i2s->playback_fifo_cif,
@@ -583,6 +630,9 @@ static int tegra30_i2s_platform_probe(struct platform_device *pdev)
 		goto err_free_rx_fifo;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = snd_soc_register_component(&pdev->dev, &tegra30_i2s_component,
 				   &i2s->dai, 1);
@@ -590,17 +640,23 @@ static int tegra30_i2s_platform_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Could not register DAI: %d\n", ret);
 		ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_suspend;
 	}
 
 	ret = tegra_pcm_platform_register(&pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 		goto err_unroute_rx_fifo;
 	}
 
 	ret = tegra_pcm_platform_register_with_chan_names(&pdev->dev,
 				&i2s->dma_config, i2s->playback_dma_chan,
 				i2s->capture_dma_chan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		dev_err(&pdev->dev, "Could not register PCM: %d\n", ret);
@@ -612,7 +668,10 @@ static int tegra30_i2s_platform_probe(struct platform_device *pdev)
 err_unregister_component:
 	snd_soc_unregister_component(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 err_unroute_rx_fifo:
 	tegra30_ahub_unset_rx_cif_source(i2s->capture_fifo_cif);
 err_free_rx_fifo:
@@ -621,6 +680,9 @@ err_unroute_tx_fifo:
 	tegra30_ahub_unset_rx_cif_source(i2s->playback_i2s_cif);
 err_free_tx_fifo:
 	tegra30_ahub_free_tx_fifo(i2s->playback_fifo_cif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_suspend:
 	if (!pm_runtime_status_suspended(&pdev->dev))
@@ -645,13 +707,19 @@ static int tegra30_i2s_platform_remove(struct platform_device *pdev)
 	snd_soc_unregister_component(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	tegra30_ahub_unset_rx_cif_source(i2s->capture_fifo_cif);
 	tegra30_ahub_free_rx_fifo(i2s->capture_fifo_cif);
 
 	tegra30_ahub_unset_rx_cif_source(i2s->playback_i2s_cif);
 	tegra30_ahub_free_tx_fifo(i2s->playback_fifo_cif);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk_put(i2s->clk_i2s);
 
@@ -659,11 +727,14 @@ static int tegra30_i2s_platform_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id tegra30_i2s_of_match[] = {
 	{ .compatible = "nvidia,tegra30-i2s", },
 	{},
 };
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int tegra30_i2s_suspend(struct device *dev)
 {
@@ -688,12 +759,19 @@ static int tegra30_i2s_resume(struct device *dev)
 	return ret;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct dev_pm_ops tegra30_i2s_pm_ops = {
 	SET_RUNTIME_PM_OPS(tegra30_i2s_runtime_suspend,
 			   tegra30_i2s_runtime_resume, NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SET_SYSTEM_SLEEP_PM_OPS(tegra30_i2s_suspend, tegra30_i2s_resume)
+>>>>>>> v3.18
 =======
 	SET_SYSTEM_SLEEP_PM_OPS(tegra30_i2s_suspend, tegra30_i2s_resume)
 >>>>>>> v3.18

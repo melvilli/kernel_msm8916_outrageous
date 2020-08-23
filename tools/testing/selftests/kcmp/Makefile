@@ -2,17 +2,23 @@ uname_M := $(shell uname -m 2>/dev/null || echo not)
 ARCH ?= $(shell echo $(uname_M) | sed -e s/i.86/i386/)
 ifeq ($(ARCH),i386)
 <<<<<<< HEAD
+<<<<<<< HEAD
         ARCH := X86
 	CFLAGS := -DCONFIG_X86_32 -D__i386__
 endif
 ifeq ($(ARCH),x86_64)
 	ARCH := X86
 =======
+=======
+>>>>>>> v3.18
         ARCH := x86
 	CFLAGS := -DCONFIG_X86_32 -D__i386__
 endif
 ifeq ($(ARCH),x86_64)
 	ARCH := x86
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CFLAGS := -DCONFIG_X86_64 -D__x86_64__
 endif
@@ -24,7 +30,11 @@ CFLAGS += -I../../../../arch/x86/include/
 
 all:
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifeq ($(ARCH),X86)
+=======
+ifeq ($(ARCH),x86)
+>>>>>>> v3.18
 =======
 ifeq ($(ARCH),x86)
 >>>>>>> v3.18
@@ -38,8 +48,12 @@ run_tests: all
 
 clean:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rm -fr ./run_test
 	rm -fr ./test-file
+=======
+	$(RM) kcmp_test kcmp-test-file
+>>>>>>> v3.18
 =======
 	$(RM) kcmp_test kcmp-test-file
 >>>>>>> v3.18

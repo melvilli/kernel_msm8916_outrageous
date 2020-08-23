@@ -1,7 +1,11 @@
 config OCTEON_ETHERNET
 	tristate "Cavium Networks Octeon Ethernet support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CPU_CAVIUM_OCTEON && NETDEVICES
+=======
+	depends on CAVIUM_OCTEON_SOC && NETDEVICES
+>>>>>>> v3.18
 =======
 	depends on CAVIUM_OCTEON_SOC && NETDEVICES
 >>>>>>> v3.18

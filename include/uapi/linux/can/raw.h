@@ -9,11 +9,14 @@
  * All rights reserved.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 #ifndef CAN_RAW_H
 #define CAN_RAW_H
 =======
+=======
+>>>>>>> v3.18
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -50,6 +53,9 @@
 
 #ifndef _UAPI_CAN_RAW_H
 #define _UAPI_CAN_RAW_H
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/can.h>
@@ -67,7 +73,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif /* !_UAPI_CAN_RAW_H */
+>>>>>>> v3.18
 =======
 #endif /* !_UAPI_CAN_RAW_H */
 >>>>>>> v3.18

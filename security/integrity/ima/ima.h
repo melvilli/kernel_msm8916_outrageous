@@ -27,7 +27,12 @@
 #include "../integrity.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum ima_show_type { IMA_SHOW_BINARY, IMA_SHOW_ASCII };
+=======
+enum ima_show_type { IMA_SHOW_BINARY, IMA_SHOW_BINARY_NO_FIELD_LEN,
+		     IMA_SHOW_BINARY_OLD_STRING_FMT, IMA_SHOW_ASCII };
+>>>>>>> v3.18
 =======
 enum ima_show_type { IMA_SHOW_BINARY, IMA_SHOW_BINARY_NO_FIELD_LEN,
 		     IMA_SHOW_BINARY_OLD_STRING_FMT, IMA_SHOW_ASCII };
@@ -41,6 +46,7 @@ enum tpm_pcrs { TPM_PCR0 = 0, TPM_PCR8 = 8 };
 #define IMA_HASH_BITS 9
 #define IMA_MEASURE_HTABLE_SIZE (1 << IMA_HASH_BITS)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* set during initialization */
 extern int ima_initialized;
@@ -60,6 +66,8 @@ struct ima_template_entry {
 	int template_len;
 	struct ima_template_data template;
 =======
+=======
+>>>>>>> v3.18
 #define IMA_TEMPLATE_FIELD_ID_MAX_LEN	16
 #define IMA_TEMPLATE_NUM_FIELDS_MAX	15
 
@@ -105,6 +113,9 @@ struct ima_template_entry {
 	struct ima_template_desc *template_desc; /* template descriptor */
 	u32 template_data_len;
 	struct ima_field_data template_data[0];	/* template related data */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -115,6 +126,7 @@ struct ima_queue_entry {
 };
 extern struct list_head ima_measurements;	/* list of all measurements */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_IMA_AUDIT
 /* declarations */
@@ -145,6 +157,8 @@ void ima_add_violation(struct inode *inode, const unsigned char *filename,
 		       const char *op, const char *cause);
 int ima_init_crypto(void);
 =======
+=======
+>>>>>>> v3.18
 /* Internal IMA function definitions */
 int ima_init(void);
 int ima_fs_init(void);
@@ -163,6 +177,9 @@ void ima_putc(struct seq_file *m, void *data, int datalen);
 void ima_print_digest(struct seq_file *m, u8 *digest, int size);
 struct ima_template_desc *ima_template_desc_current(void);
 int ima_init_template(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -187,6 +204,7 @@ int ima_get_action(struct inode *inode, int mask, int function);
 int ima_must_measure(struct inode *inode, int mask, int function);
 int ima_collect_measurement(struct integrity_iint_cache *iint,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    struct file *file);
 void ima_store_measurement(struct integrity_iint_cache *iint, struct file *file,
 			   const unsigned char *filename);
@@ -206,6 +224,8 @@ struct integrity_iint_cache *integrity_iint_find(struct inode *inode);
 /* IMA policy related functions */
 enum ima_hooks { FILE_CHECK = 1, MMAP_CHECK, BPRM_CHECK, MODULE_CHECK, POST_SETATTR };
 =======
+=======
+>>>>>>> v3.18
 			    struct file *file,
 			    struct evm_ima_xattr_data **xattr_value,
 			    int *xattr_len);
@@ -226,6 +246,9 @@ const char *ima_d_path(struct path *path, char **pathbuf);
 
 /* IMA policy related functions */
 enum ima_hooks { FILE_CHECK = 1, MMAP_CHECK, BPRM_CHECK, MODULE_CHECK, FIRMWARE_CHECK, POST_SETATTR };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int ima_match_policy(struct inode *inode, enum ima_hooks func, int mask,
@@ -233,6 +256,10 @@ int ima_match_policy(struct inode *inode, enum ima_hooks func, int mask,
 void ima_init_policy(void);
 void ima_update_policy(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void ima_update_policy_flag(void);
+>>>>>>> v3.18
 =======
 void ima_update_policy_flag(void);
 >>>>>>> v3.18
@@ -243,12 +270,15 @@ void ima_delete_rules(void);
 #define IMA_APPRAISE_ENFORCE	0x01
 #define IMA_APPRAISE_FIX	0x02
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IMA_APPRAISE_MODULES	0x04
 
 #ifdef CONFIG_IMA_APPRAISE
 int ima_appraise_measurement(int func, struct integrity_iint_cache *iint,
 			     struct file *file, const unsigned char *filename);
 =======
+=======
+>>>>>>> v3.18
 #define IMA_APPRAISE_LOG	0x04
 #define IMA_APPRAISE_MODULES	0x08
 #define IMA_APPRAISE_FIRMWARE	0x10
@@ -258,17 +288,26 @@ int ima_appraise_measurement(int func, struct integrity_iint_cache *iint,
 			     struct file *file, const unsigned char *filename,
 			     struct evm_ima_xattr_data *xattr_value,
 			     int xattr_len, int opened);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ima_must_appraise(struct inode *inode, int mask, enum ima_hooks func);
 void ima_update_xattr(struct integrity_iint_cache *iint, struct file *file);
 enum integrity_status ima_get_cache_status(struct integrity_iint_cache *iint,
 					   int func);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void ima_get_hash_algo(struct evm_ima_xattr_data *xattr_value, int xattr_len,
 		       struct ima_digest_data *hash);
 int ima_read_xattr(struct dentry *dentry,
 		   struct evm_ima_xattr_data **xattr_value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else
@@ -276,7 +315,13 @@ static inline int ima_appraise_measurement(int func,
 					   struct integrity_iint_cache *iint,
 					   struct file *file,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   const unsigned char *filename)
+=======
+					   const unsigned char *filename,
+					   struct evm_ima_xattr_data *xattr_value,
+					   int xattr_len, int opened)
+>>>>>>> v3.18
 =======
 					   const unsigned char *filename,
 					   struct evm_ima_xattr_data *xattr_value,
@@ -303,7 +348,10 @@ static inline enum integrity_status ima_get_cache_status(struct integrity_iint_c
 	return INTEGRITY_UNKNOWN;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline void ima_get_hash_algo(struct evm_ima_xattr_data *xattr_value,
 				     int xattr_len,
@@ -317,6 +365,9 @@ static inline int ima_read_xattr(struct dentry *dentry,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -342,7 +393,10 @@ static inline int security_filter_rule_match(u32 secid, u32 field, u32 op,
 }
 #endif /* CONFIG_IMA_LSM_RULES */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_IMA_TRUSTED_KEYRING
 static inline int ima_init_keyring(const unsigned int id)
@@ -355,5 +409,8 @@ static inline int ima_init_keyring(const unsigned int id)
 	return 0;
 }
 #endif /* CONFIG_IMA_TRUSTED_KEYRING */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

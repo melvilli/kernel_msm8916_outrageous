@@ -55,6 +55,11 @@ struct vmw_resource_relocation {
  * @switch_backup: Boolean whether to switch backup buffer on unreserve.
  * @new_backup: Refcounted pointer to the new backup buffer.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @staged_bindings: If @res is a context, tracks bindings set up during
+ * the command batch. Otherwise NULL.
+>>>>>>> v3.18
 =======
  * @staged_bindings: If @res is a context, tracks bindings set up during
  * the command batch. Otherwise NULL.
@@ -71,6 +76,10 @@ struct vmw_resource_val_node {
 	struct vmw_resource *res;
 	struct vmw_dma_buffer *new_backup;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct vmw_ctx_binding_state *staged_bindings;
+>>>>>>> v3.18
 =======
 	struct vmw_ctx_binding_state *staged_bindings;
 >>>>>>> v3.18
@@ -81,7 +90,10 @@ struct vmw_resource_val_node {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct vmw_cmd_entry - Describe a command for the verifier
  *
  * @user_allow: Whether allowed from the execbuf ioctl.
@@ -101,6 +113,9 @@ struct vmw_cmd_entry {
 				       (_gb_disable), (_gb_enable)}
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * vmw_resource_unreserve - unreserve resources previously reserved for
  * command submission.
@@ -119,7 +134,10 @@ static void vmw_resource_list_unreserve(struct list_head *list,
 			backoff ? NULL : val->new_backup;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Transfer staged context bindings to the
 		 * persistent context binding tracker.
@@ -132,6 +150,9 @@ static void vmw_resource_list_unreserve(struct list_head *list,
 			kfree(val->staged_bindings);
 			val->staged_bindings = NULL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		vmw_resource_unreserve(res, new_backup,
 			val->new_backup_offset);
@@ -193,7 +214,10 @@ static int vmw_resource_val_add(struct vmw_sw_context *sw_context,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * vmw_resource_context_res_add - Put resources previously bound to a context on
  * the validation list
  *
@@ -232,6 +256,9 @@ static int vmw_resource_context_res_add(struct vmw_private *dev_priv,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * vmw_resource_relocation_add - Add a relocation to the relocation list
  *
@@ -289,15 +316,21 @@ static void vmw_resource_relocations_apply(uint32_t *cb,
 	struct vmw_resource_relocation *rel;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(rel, list, head)
 		cb[rel->offset] = rel->res->id;
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry(rel, list, head) {
 		if (likely(rel->res != NULL))
 			cb[rel->offset] = rel->res->id;
 		else
 			cb[rel->offset] = SVGA_3D_CMD_NOP;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -321,6 +354,10 @@ static int vmw_cmd_ok(struct vmw_private *dev_priv,
  * @sw_context: The software context used for this command submission batch.
  * @bo: The buffer object to add.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @validate_as_mob: Validate this buffer as a MOB.
+>>>>>>> v3.18
 =======
  * @validate_as_mob: Validate this buffer as a MOB.
 >>>>>>> v3.18
@@ -333,6 +370,10 @@ static int vmw_cmd_ok(struct vmw_private *dev_priv,
 static int vmw_bo_to_validate_list(struct vmw_sw_context *sw_context,
 				   struct ttm_buffer_object *bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				   bool validate_as_mob,
+>>>>>>> v3.18
 =======
 				   bool validate_as_mob,
 >>>>>>> v3.18
@@ -349,11 +390,17 @@ static int vmw_bo_to_validate_list(struct vmw_sw_context *sw_context,
 		vval_buf = container_of(hash, struct vmw_validate_buffer,
 					hash);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (unlikely(vval_buf->validate_as_mob != validate_as_mob)) {
 			DRM_ERROR("Inconsistent buffer usage.\n");
 			return -EINVAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val_buf = &vval_buf->base;
 		val_node = vval_buf - sw_context->val_bufs;
@@ -376,6 +423,7 @@ static int vmw_bo_to_validate_list(struct vmw_sw_context *sw_context,
 		val_buf = &vval_buf->base;
 		val_buf->bo = ttm_bo_reference(bo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val_buf->reserved = false;
 		list_add_tail(&val_buf->head, &sw_context->validate_nodes);
 	}
@@ -383,11 +431,16 @@ static int vmw_bo_to_validate_list(struct vmw_sw_context *sw_context,
 	sw_context->fence_flags |= DRM_VMW_FENCE_FLAG_EXEC;
 
 =======
+=======
+>>>>>>> v3.18
 		val_buf->shared = false;
 		list_add_tail(&val_buf->head, &sw_context->validate_nodes);
 		vval_buf->validate_as_mob = validate_as_mob;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (p_val_node)
 		*p_val_node = val_node;
@@ -422,7 +475,12 @@ static int vmw_resources_reserve(struct vmw_sw_context *sw_context)
 
 			ret = vmw_bo_to_validate_list
 <<<<<<< HEAD
+<<<<<<< HEAD
 				(sw_context, bo, NULL);
+=======
+				(sw_context, bo,
+				 vmw_resource_needs_backup(res), NULL);
+>>>>>>> v3.18
 =======
 				(sw_context, bo,
 				 vmw_resource_needs_backup(res), NULL);
@@ -463,7 +521,10 @@ static int vmw_resources_validate(struct vmw_sw_context *sw_context)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * vmw_cmd_res_reloc_add - Add a resource to a software context's
@@ -528,6 +589,9 @@ static int vmw_cmd_res_reloc_add(struct vmw_private *dev_priv,
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * vmw_cmd_res_check - Check that a resource is present and if so, put it
@@ -537,6 +601,7 @@ static int vmw_cmd_res_reloc_add(struct vmw_private *dev_priv,
  * @sw_context: Pointer to the software context.
  * @res_type: Resource type.
  * @converter: User-space visisble type specific information.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @id: Pointer to the location in the command buffer currently being
  * parsed from where the user-space resource id handle is located.
@@ -548,6 +613,8 @@ static int vmw_cmd_res_check(struct vmw_private *dev_priv,
 			     uint32_t *id,
 			     struct vmw_resource_val_node **p_val)
 =======
+=======
+>>>>>>> v3.18
  * @id_loc: Pointer to the location in the command buffer currently being
  * parsed from where the user-space resource id handle is located.
  * @p_val: Pointer to pointer to resource validalidation node. Populated
@@ -560,6 +627,9 @@ vmw_cmd_res_check(struct vmw_private *dev_priv,
 		  const struct vmw_user_resource_conv *converter,
 		  uint32_t *id_loc,
 		  struct vmw_resource_val_node **p_val)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct vmw_res_cache_entry *rcache =
@@ -569,9 +639,12 @@ vmw_cmd_res_check(struct vmw_private *dev_priv,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*id == SVGA3D_INVALID_ID)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (*id_loc == SVGA3D_INVALID_ID) {
 		if (p_val)
 			*p_val = NULL;
@@ -581,6 +654,9 @@ vmw_cmd_res_check(struct vmw_private *dev_priv,
 		}
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -589,7 +665,11 @@ vmw_cmd_res_check(struct vmw_private *dev_priv,
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(rcache->valid && *id == rcache->handle)) {
+=======
+	if (likely(rcache->valid && *id_loc == rcache->handle)) {
+>>>>>>> v3.18
 =======
 	if (likely(rcache->valid && *id_loc == rcache->handle)) {
 >>>>>>> v3.18
@@ -602,6 +682,7 @@ vmw_cmd_res_check(struct vmw_private *dev_priv,
 		return vmw_resource_relocation_add
 			(&sw_context->res_relocations, res,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 id - sw_context->buf_start);
 	}
 
@@ -609,19 +690,28 @@ vmw_cmd_res_check(struct vmw_private *dev_priv,
 					      sw_context->tfile,
 					      *id,
 =======
+=======
+>>>>>>> v3.18
 			 id_loc - sw_context->buf_start);
 	}
 
 	ret = vmw_user_resource_lookup_handle(dev_priv,
 					      sw_context->fp->tfile,
 					      *id_loc,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					      converter,
 					      &res);
 	if (unlikely(ret != 0)) {
 		DRM_ERROR("Could not find or use resource 0x%08x.\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  (unsigned) *id);
+=======
+			  (unsigned) *id_loc);
+>>>>>>> v3.18
 =======
 			  (unsigned) *id_loc);
 >>>>>>> v3.18
@@ -631,6 +721,7 @@ vmw_cmd_res_check(struct vmw_private *dev_priv,
 
 	rcache->valid = true;
 	rcache->res = res;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rcache->handle = *id;
 
@@ -642,10 +733,15 @@ vmw_cmd_res_check(struct vmw_private *dev_priv,
 
 	ret = vmw_resource_val_add(sw_context, res, &node);
 =======
+=======
+>>>>>>> v3.18
 	rcache->handle = *id_loc;
 
 	ret = vmw_cmd_res_reloc_add(dev_priv, sw_context, res_type, id_loc,
 				    res, &node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(ret != 0))
 		goto out_no_reloc;
@@ -665,7 +761,10 @@ out_no_reloc:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * vmw_rebind_contexts - Rebind all resources previously bound to
  * referenced contexts.
  *
@@ -694,6 +793,9 @@ static int vmw_rebind_contexts(struct vmw_sw_context *sw_context)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * vmw_cmd_cid_check - Check a command header for valid context information.
  *
@@ -711,7 +813,11 @@ static int vmw_cmd_cid_check(struct vmw_private *dev_priv,
 	struct vmw_cid_cmd {
 		SVGA3dCmdHeader header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__le32 cid;
+=======
+		uint32_t cid;
+>>>>>>> v3.18
 =======
 		uint32_t cid;
 >>>>>>> v3.18
@@ -731,6 +837,7 @@ static int vmw_cmd_set_render_target_check(struct vmw_private *dev_priv,
 		SVGA3dCmdSetRenderTarget body;
 	} *cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	ret = vmw_cmd_cid_check(dev_priv, sw_context, header);
@@ -743,6 +850,8 @@ static int vmw_cmd_set_render_target_check(struct vmw_private *dev_priv,
 				&cmd->body.target.sid, NULL);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	struct vmw_resource_val_node *ctx_node;
 	struct vmw_resource_val_node *res_node;
 	int ret;
@@ -772,6 +881,9 @@ static int vmw_cmd_set_render_target_check(struct vmw_private *dev_priv,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -829,11 +941,14 @@ static int vmw_cmd_blt_surf_screen_check(struct vmw_private *dev_priv,
 	cmd = container_of(header, struct vmw_sid_cmd, header);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(!sw_context->kernel)) {
 		DRM_ERROR("Kernel only SVGA3d command: %u.\n", cmd->header.id);
 		return -EPERM;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return vmw_cmd_res_check(dev_priv, sw_context, vmw_res_surface,
@@ -854,11 +969,14 @@ static int vmw_cmd_present_check(struct vmw_private *dev_priv,
 	cmd = container_of(header, struct vmw_sid_cmd, header);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(!sw_context->kernel)) {
 		DRM_ERROR("Kernel only SVGA3d command: %u.\n", cmd->header.id);
 		return -EPERM;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return vmw_cmd_res_check(dev_priv, sw_context, vmw_res_surface,
@@ -902,7 +1020,11 @@ static int vmw_query_bo_switch_prepare(struct vmw_private *dev_priv,
 			ret = vmw_bo_to_validate_list(sw_context,
 						      sw_context->cur_query_bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						      NULL);
+=======
+						      dev_priv->has_mob, NULL);
+>>>>>>> v3.18
 =======
 						      dev_priv->has_mob, NULL);
 >>>>>>> v3.18
@@ -914,7 +1036,11 @@ static int vmw_query_bo_switch_prepare(struct vmw_private *dev_priv,
 		ret = vmw_bo_to_validate_list(sw_context,
 					      dev_priv->dummy_query_bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      NULL);
+=======
+					      dev_priv->has_mob, NULL);
+>>>>>>> v3.18
 =======
 					      dev_priv->has_mob, NULL);
 >>>>>>> v3.18
@@ -996,7 +1122,10 @@ static void vmw_query_bo_switch_commit(struct vmw_private *dev_priv,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * vmw_translate_mob_pointer - Prepare to translate a user-space buffer
  * handle to a MOB id.
  *
@@ -1057,6 +1186,9 @@ out_no_reloc:
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * vmw_translate_guest_pointer - Prepare to translate a user-space buffer
  * handle to a valid SVGAGuestPtr
@@ -1088,7 +1220,11 @@ static int vmw_translate_guest_ptr(struct vmw_private *dev_priv,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = vmw_user_dmabuf_lookup(sw_context->tfile, handle, &vmw_bo);
+=======
+	ret = vmw_user_dmabuf_lookup(sw_context->fp->tfile, handle, &vmw_bo);
+>>>>>>> v3.18
 =======
 	ret = vmw_user_dmabuf_lookup(sw_context->fp->tfile, handle, &vmw_bo);
 >>>>>>> v3.18
@@ -1109,7 +1245,11 @@ static int vmw_translate_guest_ptr(struct vmw_private *dev_priv,
 	reloc->location = ptr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = vmw_bo_to_validate_list(sw_context, bo, &reloc->index);
+=======
+	ret = vmw_bo_to_validate_list(sw_context, bo, false, &reloc->index);
+>>>>>>> v3.18
 =======
 	ret = vmw_bo_to_validate_list(sw_context, bo, false, &reloc->index);
 >>>>>>> v3.18
@@ -1127,7 +1267,10 @@ out_no_reloc:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * vmw_cmd_begin_gb_query - validate a  SVGA_3D_CMD_BEGIN_GB_QUERY command.
  *
  * @dev_priv: Pointer to a device private struct.
@@ -1152,6 +1295,9 @@ static int vmw_cmd_begin_gb_query(struct vmw_private *dev_priv,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * vmw_cmd_begin_query - validate a  SVGA_3D_CMD_BEGIN_QUERY command.
  *
@@ -1172,7 +1318,10 @@ static int vmw_cmd_begin_query(struct vmw_private *dev_priv,
 			   header);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(dev_priv->has_mob)) {
 		struct {
 			SVGA3dCmdHeader header;
@@ -1190,6 +1339,9 @@ static int vmw_cmd_begin_query(struct vmw_private *dev_priv,
 		return vmw_cmd_begin_gb_query(dev_priv, sw_context, header);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return vmw_cmd_res_check(dev_priv, sw_context, vmw_res_context,
 				 user_context_converter, &cmd->q.cid,
@@ -1198,7 +1350,10 @@ static int vmw_cmd_begin_query(struct vmw_private *dev_priv,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * vmw_cmd_end_gb_query - validate a  SVGA_3D_CMD_END_GB_QUERY command.
  *
  * @dev_priv: Pointer to a device private struct.
@@ -1234,6 +1389,9 @@ static int vmw_cmd_end_gb_query(struct vmw_private *dev_priv,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * vmw_cmd_end_query - validate a  SVGA_3D_CMD_END_QUERY command.
  *
@@ -1254,7 +1412,10 @@ static int vmw_cmd_end_query(struct vmw_private *dev_priv,
 
 	cmd = container_of(header, struct vmw_query_cmd, header);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (dev_priv->has_mob) {
 		struct {
 			SVGA3dCmdHeader header;
@@ -1274,6 +1435,9 @@ static int vmw_cmd_end_query(struct vmw_private *dev_priv,
 		return vmw_cmd_end_gb_query(dev_priv, sw_context, header);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = vmw_cmd_cid_check(dev_priv, sw_context, header);
 	if (unlikely(ret != 0))
@@ -1292,8 +1456,11 @@ static int vmw_cmd_end_query(struct vmw_private *dev_priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
 =======
+=======
+>>>>>>> v3.18
 /**
  * vmw_cmd_wait_gb_query - validate a  SVGA_3D_CMD_WAIT_GB_QUERY command.
  *
@@ -1328,6 +1495,9 @@ static int vmw_cmd_wait_gb_query(struct vmw_private *dev_priv,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * vmw_cmd_wait_query - validate a  SVGA_3D_CMD_WAIT_QUERY command.
  *
@@ -1348,7 +1518,10 @@ static int vmw_cmd_wait_query(struct vmw_private *dev_priv,
 
 	cmd = container_of(header, struct vmw_query_cmd, header);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (dev_priv->has_mob) {
 		struct {
 			SVGA3dCmdHeader header;
@@ -1368,6 +1541,9 @@ static int vmw_cmd_wait_query(struct vmw_private *dev_priv,
 		return vmw_cmd_wait_gb_query(dev_priv, sw_context, header);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = vmw_cmd_cid_check(dev_priv, sw_context, header);
 	if (unlikely(ret != 0))
@@ -1436,7 +1612,12 @@ static int vmw_cmd_dma(struct vmw_private *dev_priv,
 	srf = vmw_res_to_srf(sw_context->res_cache[vmw_res_surface].res);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vmw_kms_cursor_snoop(srf, sw_context->tfile, &vmw_bo->base, header);
+=======
+	vmw_kms_cursor_snoop(srf, sw_context->fp->tfile, &vmw_bo->base,
+			     header);
+>>>>>>> v3.18
 =======
 	vmw_kms_cursor_snoop(srf, sw_context->fp->tfile, &vmw_bo->base,
 			     header);
@@ -1509,7 +1690,11 @@ static int vmw_cmd_tex_state(struct vmw_private *dev_priv,
 		SVGA3dCmdHeader header;
 		SVGA3dCmdSetTextureState state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	} *cmd;
+>>>>>>> v3.18
 =======
 	} *cmd;
 >>>>>>> v3.18
@@ -1519,10 +1704,13 @@ static int vmw_cmd_tex_state(struct vmw_private *dev_priv,
 	SVGA3dTextureState *cur_state = (SVGA3dTextureState *)
 		((unsigned long) header + sizeof(struct vmw_tex_state_cmd));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	ret = vmw_cmd_cid_check(dev_priv, sw_context, header);
 =======
+=======
+>>>>>>> v3.18
 	struct vmw_resource_val_node *ctx_node;
 	struct vmw_resource_val_node *res_node;
 	int ret;
@@ -1533,6 +1721,9 @@ static int vmw_cmd_tex_state(struct vmw_private *dev_priv,
 	ret = vmw_cmd_res_check(dev_priv, sw_context, vmw_res_context,
 				user_context_converter, &cmd->state.cid,
 				&ctx_node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(ret != 0))
 		return ret;
@@ -1544,10 +1735,13 @@ static int vmw_cmd_tex_state(struct vmw_private *dev_priv,
 		ret = vmw_cmd_res_check(dev_priv, sw_context, vmw_res_surface,
 					user_surface_converter,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					&cur_state->value, NULL);
 		if (unlikely(ret != 0))
 			return ret;
 =======
+=======
+>>>>>>> v3.18
 					&cur_state->value, &res_node);
 		if (unlikely(ret != 0))
 			return ret;
@@ -1562,6 +1756,9 @@ static int vmw_cmd_tex_state(struct vmw_private *dev_priv,
 			vmw_context_binding_add(ctx_node->staged_bindings,
 						&bi);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1593,6 +1790,7 @@ static int vmw_cmd_check_define_gmrfb(struct vmw_private *dev_priv,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * vmw_cmd_set_shader - Validate an SVGA_3D_CMD_SET_SHADER
  * command
  *
@@ -1609,6 +1807,8 @@ static int vmw_cmd_set_shader(struct vmw_private *dev_priv,
 		SVGA3dCmdSetShader body;
 	} *cmd;
 =======
+=======
+>>>>>>> v3.18
  * vmw_cmd_switch_backup - Utility function to handle backup buffer switching
  *
  * @dev_priv: Pointer to a device private struct.
@@ -1937,12 +2137,16 @@ static int vmw_cmd_set_shader(struct vmw_private *dev_priv,
 	struct vmw_resource_val_node *ctx_node, *res_node = NULL;
 	struct vmw_ctx_bindinfo bi;
 	struct vmw_resource *res = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
 	cmd = container_of(header, struct vmw_set_shader_cmd,
 			   header);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = vmw_cmd_cid_check(dev_priv, sw_context, header);
 	if (unlikely(ret != 0))
@@ -1952,6 +2156,8 @@ static int vmw_cmd_set_shader(struct vmw_private *dev_priv,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	ret = vmw_cmd_res_check(dev_priv, sw_context, vmw_res_context,
 				user_context_converter, &cmd->body.cid,
 				&ctx_node);
@@ -2053,6 +2259,9 @@ static int vmw_cmd_bind_gb_shader(struct vmw_private *dev_priv,
 				     cmd->body.offsetInBytes);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int vmw_cmd_check_not_3d(struct vmw_private *dev_priv,
 				struct vmw_sw_context *sw_context,
@@ -2097,6 +2306,7 @@ static int vmw_cmd_check_not_3d(struct vmw_private *dev_priv,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 typedef int (*vmw_cmd_func) (struct vmw_private *,
 			     struct vmw_sw_context *,
@@ -2143,6 +2353,8 @@ static vmw_cmd_func vmw_cmd_funcs[SVGA_3D_CMD_MAX] = {
 	VMW_CMD_DEF(SVGA_3D_CMD_ACTIVATE_SURFACE, &vmw_cmd_invalid),
 	VMW_CMD_DEF(SVGA_3D_CMD_DEACTIVATE_SURFACE, &vmw_cmd_invalid),
 =======
+=======
+>>>>>>> v3.18
 static const struct vmw_cmd_entry vmw_cmd_entries[SVGA_3D_CMD_MAX] = {
 	VMW_CMD_DEF(SVGA_3D_CMD_SURFACE_DEFINE, &vmw_cmd_invalid,
 		    false, false, false),
@@ -2310,6 +2522,9 @@ static const struct vmw_cmd_entry vmw_cmd_entries[SVGA_3D_CMD_MAX] = {
 		    false, false, true),
 	VMW_CMD_DEF(SVGA_3D_CMD_SET_GB_SHADERCONSTS_INLINE, &vmw_cmd_cid_check,
 		    true, false, true)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2322,6 +2537,11 @@ static int vmw_cmd_check(struct vmw_private *dev_priv,
 	SVGA3dCmdHeader *header = (SVGA3dCmdHeader *) buf;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct vmw_cmd_entry *entry;
+	bool gb = dev_priv->capabilities & SVGA_CAP_GBOBJECTS;
+>>>>>>> v3.18
 =======
 	const struct vmw_cmd_entry *entry;
 	bool gb = dev_priv->capabilities & SVGA_CAP_GBOBJECTS;
@@ -2339,6 +2559,7 @@ static int vmw_cmd_check(struct vmw_private *dev_priv,
 	cmd_id -= SVGA_3D_CMD_BASE;
 	if (unlikely(*size > size_remaining))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_err;
 
 	if (unlikely(cmd_id >= SVGA_3D_CMD_MAX - SVGA_3D_CMD_BASE))
@@ -2352,6 +2573,8 @@ static int vmw_cmd_check(struct vmw_private *dev_priv,
 out_err:
 	DRM_ERROR("Illegal / Invalid SVGA3D command: %d\n",
 =======
+=======
+>>>>>>> v3.18
 		goto out_invalid;
 
 	if (unlikely(cmd_id >= SVGA_3D_CMD_MAX - SVGA_3D_CMD_BASE))
@@ -2389,6 +2612,9 @@ out_old:
 	return -EINVAL;
 out_new:
 	DRM_ERROR("SVGA3D command: %d not supported by virtual hardware.\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  cmd_id + SVGA_3D_CMD_BASE);
 	return -EINVAL;
@@ -2446,6 +2672,12 @@ static void vmw_apply_relocations(struct vmw_sw_context *sw_context)
 			reloc->location->gmrId = bo->mem.start;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case VMW_PL_MOB:
+			*reloc->mob_loc = bo->mem.start;
+			break;
+>>>>>>> v3.18
 =======
 		case VMW_PL_MOB:
 			*reloc->mob_loc = bo->mem.start;
@@ -2476,6 +2708,11 @@ static void vmw_resource_list_unreference(struct list_head *list)
 		list_del_init(&val->head);
 		vmw_resource_unreference(&val->res);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (unlikely(val->staged_bindings))
+			kfree(val->staged_bindings);
+>>>>>>> v3.18
 =======
 		if (unlikely(val->staged_bindings))
 			kfree(val->staged_bindings);
@@ -2507,7 +2744,12 @@ static void vmw_clear_validations(struct vmw_sw_context *sw_context)
 
 static int vmw_validate_single_buffer(struct vmw_private *dev_priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      struct ttm_buffer_object *bo)
+=======
+				      struct ttm_buffer_object *bo,
+				      bool validate_as_mob)
+>>>>>>> v3.18
 =======
 				      struct ttm_buffer_object *bo,
 				      bool validate_as_mob)
@@ -2526,6 +2768,12 @@ static int vmw_validate_single_buffer(struct vmw_private *dev_priv,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (validate_as_mob)
+		return ttm_bo_validate(bo, &vmw_mob_placement, true, false);
+
+>>>>>>> v3.18
 =======
 	if (validate_as_mob)
 		return ttm_bo_validate(bo, &vmw_mob_placement, true, false);
@@ -2553,7 +2801,10 @@ static int vmw_validate_single_buffer(struct vmw_private *dev_priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int vmw_validate_buffers(struct vmw_private *dev_priv,
@@ -2564,7 +2815,12 @@ static int vmw_validate_buffers(struct vmw_private *dev_priv,
 
 	list_for_each_entry(entry, &sw_context->validate_nodes, base.head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = vmw_validate_single_buffer(dev_priv, entry->base.bo);
+=======
+		ret = vmw_validate_single_buffer(dev_priv, entry->base.bo,
+						 entry->validate_as_mob);
+>>>>>>> v3.18
 =======
 		ret = vmw_validate_single_buffer(dev_priv, entry->base.bo,
 						 entry->validate_as_mob);
@@ -2636,6 +2892,7 @@ int vmw_execbuf_fence_commands(struct drm_file *file_priv,
 	if (p_handle != NULL)
 		ret = vmw_user_fence_create(file_priv, dev_priv->fman,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    sequence,
 					    DRM_VMW_FENCE_FLAG_EXEC,
 					    p_fence, p_handle);
@@ -2643,6 +2900,11 @@ int vmw_execbuf_fence_commands(struct drm_file *file_priv,
 		ret = vmw_fence_create(dev_priv->fman, sequence,
 				       DRM_VMW_FENCE_FLAG_EXEC,
 				       p_fence);
+=======
+					    sequence, p_fence, p_handle);
+	else
+		ret = vmw_fence_create(dev_priv->fman, sequence, p_fence);
+>>>>>>> v3.18
 =======
 					    sequence, p_fence, p_handle);
 	else
@@ -2700,7 +2962,11 @@ vmw_execbuf_copy_fence_user(struct vmw_private *dev_priv,
 
 		fence_rep.handle = fence_handle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fence_rep.seqno = fence->seqno;
+=======
+		fence_rep.seqno = fence->base.seqno;
+>>>>>>> v3.18
 =======
 		fence_rep.seqno = fence->base.seqno;
 >>>>>>> v3.18
@@ -2725,8 +2991,12 @@ vmw_execbuf_copy_fence_user(struct vmw_private *dev_priv,
 					  fence_handle, TTM_REF_USAGE);
 		DRM_ERROR("Fence copy error. Syncing.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(void) vmw_fence_obj_wait(fence, fence->signal_mask,
 					  false, false,
+=======
+		(void) vmw_fence_obj_wait(fence, false, false,
+>>>>>>> v3.18
 =======
 		(void) vmw_fence_obj_wait(fence, false, false,
 >>>>>>> v3.18
@@ -2735,6 +3005,11 @@ vmw_execbuf_copy_fence_user(struct vmw_private *dev_priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> v3.18
 =======
 
 
@@ -2753,6 +3028,10 @@ int vmw_execbuf_process(struct drm_file *file_priv,
 	struct vmw_resource *error_resource;
 	struct list_head resource_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ww_acquire_ctx ticket;
+>>>>>>> v3.18
 =======
 	struct ww_acquire_ctx ticket;
 >>>>>>> v3.18
@@ -2785,10 +3064,16 @@ int vmw_execbuf_process(struct drm_file *file_priv,
 		sw_context->kernel = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sw_context->tfile = vmw_fpriv(file_priv)->tfile;
 	sw_context->cur_reloc = 0;
 	sw_context->cur_val_buf = 0;
 	sw_context->fence_flags = 0;
+=======
+	sw_context->fp = vmw_fpriv(file_priv);
+	sw_context->cur_reloc = 0;
+	sw_context->cur_val_buf = 0;
+>>>>>>> v3.18
 =======
 	sw_context->fp = vmw_fpriv(file_priv);
 	sw_context->cur_reloc = 0;
@@ -2808,6 +3093,10 @@ int vmw_execbuf_process(struct drm_file *file_priv,
 		sw_context->res_ht_initialized = true;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&sw_context->staged_cmd_res);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&sw_context->staged_cmd_res);
 >>>>>>> v3.18
@@ -2817,6 +3106,7 @@ int vmw_execbuf_process(struct drm_file *file_priv,
 				command_size);
 	if (unlikely(ret != 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_err;
 
 	ret = vmw_resources_reserve(sw_context);
@@ -2825,6 +3115,8 @@ int vmw_execbuf_process(struct drm_file *file_priv,
 
 	ret = ttm_eu_reserve_buffers(&sw_context->validate_nodes);
 =======
+=======
+>>>>>>> v3.18
 		goto out_err_nores;
 
 	ret = vmw_resources_reserve(sw_context);
@@ -2832,6 +3124,9 @@ int vmw_execbuf_process(struct drm_file *file_priv,
 		goto out_err_nores;
 
 	ret = ttm_eu_reserve_buffers(&ticket, &sw_context->validate_nodes, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(ret != 0))
 		goto out_err;
@@ -2853,7 +3148,10 @@ int vmw_execbuf_process(struct drm_file *file_priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = mutex_lock_interruptible(&dev_priv->binding_mutex);
 	if (unlikely(ret != 0)) {
 		ret = -ERESTARTSYS;
@@ -2866,13 +3164,20 @@ int vmw_execbuf_process(struct drm_file *file_priv,
 			goto out_unlock_binding;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmd = vmw_fifo_reserve(dev_priv, command_size);
 	if (unlikely(cmd == NULL)) {
 		DRM_ERROR("Failed reserving fifo space for commands.\n");
 		ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_err;
+=======
+		goto out_unlock_binding;
+>>>>>>> v3.18
 =======
 		goto out_unlock_binding;
 >>>>>>> v3.18
@@ -2901,7 +3206,13 @@ int vmw_execbuf_process(struct drm_file *file_priv,
 
 	vmw_resource_list_unreserve(&sw_context->resource_list, false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_eu_fence_buffer_objects(&sw_context->validate_nodes,
+=======
+	mutex_unlock(&dev_priv->binding_mutex);
+
+	ttm_eu_fence_buffer_objects(&ticket, &sw_context->validate_nodes,
+>>>>>>> v3.18
 =======
 	mutex_unlock(&dev_priv->binding_mutex);
 
@@ -2927,6 +3238,10 @@ int vmw_execbuf_process(struct drm_file *file_priv,
 
 	list_splice_init(&sw_context->resource_list, &resource_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vmw_cmdbuf_res_commit(&sw_context->staged_cmd_res);
+>>>>>>> v3.18
 =======
 	vmw_cmdbuf_res_commit(&sw_context->staged_cmd_res);
 >>>>>>> v3.18
@@ -2941,12 +3256,15 @@ int vmw_execbuf_process(struct drm_file *file_priv,
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_err:
 	vmw_resource_relocations_free(&sw_context->res_relocations);
 	vmw_free_relocations(sw_context);
 	ttm_eu_backoff_reservation(&sw_context->validate_nodes);
 	vmw_resource_list_unreserve(&sw_context->resource_list, true);
 =======
+=======
+>>>>>>> v3.18
 out_unlock_binding:
 	mutex_unlock(&dev_priv->binding_mutex);
 out_err:
@@ -2955,6 +3273,9 @@ out_err_nores:
 	vmw_resource_list_unreserve(&sw_context->resource_list, true);
 	vmw_resource_relocations_free(&sw_context->res_relocations);
 	vmw_free_relocations(sw_context);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vmw_clear_validations(sw_context);
 	if (unlikely(dev_priv->pinned_bo != NULL &&
@@ -2965,6 +3286,10 @@ out_unlock:
 	error_resource = sw_context->error_resource;
 	sw_context->error_resource = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vmw_cmdbuf_res_revert(&sw_context->staged_cmd_res);
+>>>>>>> v3.18
 =======
 	vmw_cmdbuf_res_revert(&sw_context->staged_cmd_res);
 >>>>>>> v3.18
@@ -3033,6 +3358,10 @@ void __vmw_execbuf_release_pinned_bo(struct vmw_private *dev_priv,
 	struct ttm_validate_buffer pinned_val, query_val;
 	struct vmw_fence_obj *lfence = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ww_acquire_ctx ticket;
+>>>>>>> v3.18
 =======
 	struct ww_acquire_ctx ticket;
 >>>>>>> v3.18
@@ -3044,6 +3373,7 @@ void __vmw_execbuf_release_pinned_bo(struct vmw_private *dev_priv,
 
 	pinned_val.bo = ttm_bo_reference(dev_priv->pinned_bo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add_tail(&pinned_val.head, &validate_list);
 
 	query_val.bo = ttm_bo_reference(dev_priv->dummy_query_bo);
@@ -3054,6 +3384,8 @@ void __vmw_execbuf_release_pinned_bo(struct vmw_private *dev_priv,
 	} while (ret == -ERESTARTSYS);
 
 =======
+=======
+>>>>>>> v3.18
 	pinned_val.shared = false;
 	list_add_tail(&pinned_val.head, &validate_list);
 
@@ -3062,6 +3394,9 @@ void __vmw_execbuf_release_pinned_bo(struct vmw_private *dev_priv,
 	list_add_tail(&query_val.head, &validate_list);
 
 	ret = ttm_eu_reserve_buffers(&ticket, &validate_list, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(ret != 0)) {
 		vmw_execbuf_unpin_panic(dev_priv);
@@ -3088,7 +3423,11 @@ void __vmw_execbuf_release_pinned_bo(struct vmw_private *dev_priv,
 		fence = lfence;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_eu_fence_buffer_objects(&validate_list, (void *) fence);
+=======
+	ttm_eu_fence_buffer_objects(&ticket, &validate_list, (void *) fence);
+>>>>>>> v3.18
 =======
 	ttm_eu_fence_buffer_objects(&ticket, &validate_list, (void *) fence);
 >>>>>>> v3.18
@@ -3104,7 +3443,11 @@ out_unlock:
 
 out_no_emit:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_eu_backoff_reservation(&validate_list);
+=======
+	ttm_eu_backoff_reservation(&ticket, &validate_list);
+>>>>>>> v3.18
 =======
 	ttm_eu_backoff_reservation(&ticket, &validate_list);
 >>>>>>> v3.18
@@ -3147,7 +3490,10 @@ int vmw_execbuf_ioctl(struct drm_device *dev, void *data,
 	struct vmw_private *dev_priv = vmw_priv(dev);
 	struct drm_vmw_execbuf_arg *arg = (struct drm_vmw_execbuf_arg *)data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_master *vmaster = vmw_master(file_priv->master);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -3167,7 +3513,11 @@ int vmw_execbuf_ioctl(struct drm_device *dev, void *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_read_lock(&vmaster->lock, true);
+=======
+	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
+>>>>>>> v3.18
 =======
 	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
 >>>>>>> v3.18
@@ -3187,7 +3537,11 @@ int vmw_execbuf_ioctl(struct drm_device *dev, void *data,
 
 out_unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_read_unlock(&vmaster->lock);
+=======
+	ttm_read_unlock(&dev_priv->reservation_sem);
+>>>>>>> v3.18
 =======
 	ttm_read_unlock(&dev_priv->reservation_sem);
 >>>>>>> v3.18

@@ -595,8 +595,11 @@ static void gdth_pci_remove_one(struct pci_dev *pdev)
 	gdth_ha_str *ha = pci_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	list_del(&ha->list);
@@ -4717,7 +4720,11 @@ static int __init gdth_isa_probe_one(u32 isa_bios)
 		isa_bios, ha->irq, ha->drq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = request_irq(ha->irq, gdth_interrupt, IRQF_DISABLED, "gdth", ha);
+=======
+	error = request_irq(ha->irq, gdth_interrupt, 0, "gdth", ha);
+>>>>>>> v3.18
 =======
 	error = request_irq(ha->irq, gdth_interrupt, 0, "gdth", ha);
 >>>>>>> v3.18
@@ -4853,7 +4860,11 @@ static int __init gdth_eisa_probe_one(u16 eisa_slot)
 		eisa_slot >> 12, ha->irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = request_irq(ha->irq, gdth_interrupt, IRQF_DISABLED, "gdth", ha);
+=======
+	error = request_irq(ha->irq, gdth_interrupt, 0, "gdth", ha);
+>>>>>>> v3.18
 =======
 	error = request_irq(ha->irq, gdth_interrupt, 0, "gdth", ha);
 >>>>>>> v3.18
@@ -4993,7 +5004,11 @@ static int gdth_pci_probe_one(gdth_pci_str *pcistr, gdth_ha_str **ha_out)
 
 	error = request_irq(ha->irq, gdth_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				IRQF_DISABLED|IRQF_SHARED, "gdth", ha);
+=======
+				IRQF_SHARED, "gdth", ha);
+>>>>>>> v3.18
 =======
 				IRQF_SHARED, "gdth", ha);
 >>>>>>> v3.18

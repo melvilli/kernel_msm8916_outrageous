@@ -14,7 +14,10 @@
 #include <linux/types.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -38,11 +41,16 @@ static int rbtx4939_flash_remove(struct platform_device *dev)
 	if (!info)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
 
 	if (info->mtd) {
 		struct rbtx4939_flash_data *pdata = dev->dev.platform_data;
 
+=======
+
+	if (info->mtd) {
+>>>>>>> v3.18
 =======
 
 	if (info->mtd) {
@@ -66,7 +74,11 @@ static int rbtx4939_flash_probe(struct platform_device *dev)
 	unsigned long size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = dev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18

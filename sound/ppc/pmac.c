@@ -29,6 +29,11 @@
 #include <linux/pci.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -996,9 +1001,15 @@ static int snd_pmac_detect(struct snd_pmac *chip)
 
 	if (!sound) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sound = of_find_node_by_name(NULL, "sound");
 		while (sound && sound->parent != chip->node)
 			sound = of_find_node_by_name(sound, "sound");
+=======
+		for_each_node_by_name(sound, "sound")
+			if (sound->parent == chip->node)
+				break;
+>>>>>>> v3.18
 =======
 		for_each_node_by_name(sound, "sound")
 			if (sound->parent == chip->node)

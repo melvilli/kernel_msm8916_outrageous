@@ -35,7 +35,11 @@ void __init setup_bootmem_node(int nid, unsigned long start, unsigned long end)
 
 	/* Don't allow bogus node assignment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(nid > MAX_NUMNODES || nid <= 0);
+=======
+	BUG_ON(nid >= MAX_NUMNODES || nid <= 0);
+>>>>>>> v3.18
 =======
 	BUG_ON(nid >= MAX_NUMNODES || nid <= 0);
 >>>>>>> v3.18
@@ -47,7 +51,12 @@ void __init setup_bootmem_node(int nid, unsigned long start, unsigned long end)
 
 	memblock_set_node(PFN_PHYS(start_pfn),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  PFN_PHYS(end_pfn - start_pfn), nid);
+=======
+			  PFN_PHYS(end_pfn - start_pfn),
+			  &memblock.memory, nid);
+>>>>>>> v3.18
 =======
 			  PFN_PHYS(end_pfn - start_pfn),
 			  &memblock.memory, nid);

@@ -19,7 +19,11 @@
  *     TSC-based delay routine on the Linux kernel does not correctly
  *     handle the cpufreq transition. Please report this to
 <<<<<<< HEAD
+<<<<<<< HEAD
  *     cpufreq@vger.kernel.org
+=======
+ *     linux-pm@vger.kernel.org
+>>>>>>> v3.18
 =======
  *     linux-pm@vger.kernel.org
 >>>>>>> v3.18
@@ -30,12 +34,18 @@
 #include <linux/init.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/io.h>
 
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
 
+=======
+#include <linux/acpi.h>
+#include <asm/io.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 #include <asm/io.h>

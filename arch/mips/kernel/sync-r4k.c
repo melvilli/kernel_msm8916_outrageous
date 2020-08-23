@@ -7,12 +7,18 @@
  * enabled briefly - prom_smp_finish() should not be responsible for enabling
  * interrupts...)
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * FIXME: broken for SMTC
  */
 
 #include <linux/kernel.h>
 #include <linux/init.h>
+=======
+ */
+
+#include <linux/kernel.h>
+>>>>>>> v3.18
 =======
  */
 
@@ -27,22 +33,32 @@
 #include <asm/mipsregs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static atomic_t __cpuinitdata count_start_flag = ATOMIC_INIT(0);
 static atomic_t __cpuinitdata count_count_start = ATOMIC_INIT(0);
 static atomic_t __cpuinitdata count_count_stop = ATOMIC_INIT(0);
 static atomic_t __cpuinitdata count_reference = ATOMIC_INIT(0);
 =======
+=======
+>>>>>>> v3.18
 static atomic_t count_start_flag = ATOMIC_INIT(0);
 static atomic_t count_count_start = ATOMIC_INIT(0);
 static atomic_t count_count_stop = ATOMIC_INIT(0);
 static atomic_t count_reference = ATOMIC_INIT(0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define COUNTON 100
 #define NR_LOOPS 5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit synchronise_count_master(int cpu)
+=======
+void synchronise_count_master(int cpu)
+>>>>>>> v3.18
 =======
 void synchronise_count_master(int cpu)
 >>>>>>> v3.18
@@ -52,6 +68,7 @@ void synchronise_count_master(int cpu)
 	unsigned int initcount;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
 	 * SMTC needs to synchronise per VPE, not per CPU
@@ -60,6 +77,8 @@ void synchronise_count_master(int cpu)
 	return;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	printk(KERN_INFO "Synchronize counters for CPU %u: ", cpu);
@@ -127,7 +146,11 @@ void synchronise_count_master(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit synchronise_count_slave(int cpu)
+=======
+void synchronise_count_slave(int cpu)
+>>>>>>> v3.18
 =======
 void synchronise_count_slave(int cpu)
 >>>>>>> v3.18
@@ -135,6 +158,7 @@ void synchronise_count_slave(int cpu)
 	int i;
 	unsigned int initcount;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/*
@@ -144,6 +168,8 @@ void synchronise_count_slave(int cpu)
 	return;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*

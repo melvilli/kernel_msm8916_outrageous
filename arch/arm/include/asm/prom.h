@@ -12,8 +12,11 @@
 #define __ASMARM_PROM_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HAVE_ARCH_DEVTREE_FIXUPS
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_OF

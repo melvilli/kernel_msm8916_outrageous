@@ -28,6 +28,7 @@ STD_ENTRY(current_text_addr)
 	STD_ENDPROC(current_text_addr)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * We don't run this function directly, but instead copy it to a page
  * we map into every user process.  See vdso_setup().
@@ -44,6 +45,8 @@ ENTRY(__rt_sigreturn)
 	ENTRY(__rt_sigreturn_end)
 	.popsection
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 STD_ENTRY(dump_stack)

@@ -93,6 +93,11 @@ int proc_remount(struct super_block *sb, int *flags, char *data)
 {
 	struct pid_namespace *pid = sb->s_fs_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 
 	sync_filesystem(sb);
@@ -116,14 +121,20 @@ static struct dentry *proc_mount(struct file_system_type *fs_type,
 		options = data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!current_user_ns()->may_mount_proc ||
 		    !ns_capable(ns->user_ns, CAP_SYS_ADMIN))
 =======
+=======
+>>>>>>> v3.18
 		if (!capable(CAP_SYS_ADMIN) && !fs_fully_visible(fs_type))
 			return ERR_PTR(-EPERM);
 
 		/* Does the mounter have privilege over the pid namespace? */
 		if (!ns_capable(ns->user_ns, CAP_SYS_ADMIN))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return ERR_PTR(-EPERM);
 	}
@@ -158,6 +169,11 @@ static void proc_kill_sb(struct super_block *sb)
 	if (ns->proc_self)
 		dput(ns->proc_self);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ns->proc_thread_self)
+		dput(ns->proc_thread_self);
+>>>>>>> v3.18
 =======
 	if (ns->proc_thread_self)
 		dput(ns->proc_thread_self);
@@ -184,6 +200,10 @@ void __init proc_root_init(void)
 
 	proc_self_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	proc_thread_self_init();
+>>>>>>> v3.18
 =======
 	proc_thread_self_init();
 >>>>>>> v3.18
@@ -203,9 +223,12 @@ void __init proc_root_init(void)
 #endif
 	proc_tty_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PROC_DEVICETREE
 	proc_device_tree_init();
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	proc_mkdir("bus", NULL);
@@ -222,6 +245,7 @@ static int proc_root_getattr(struct vfsmount *mnt, struct dentry *dentry, struct
 
 static struct dentry *proc_root_lookup(struct inode * dir, struct dentry * dentry, unsigned int flags)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!proc_lookup(dir, dentry, flags))
 		return NULL;
@@ -245,6 +269,8 @@ static int proc_root_readdir(struct file * filp,
 	ret = proc_pid_readdir(filp, dirent, filldir);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (!proc_pid_lookup(dir, dentry, flags))
 		return NULL;
 	
@@ -261,6 +287,9 @@ static int proc_root_readdir(struct file *file, struct dir_context *ctx)
 	}
 
 	return proc_pid_readdir(file, ctx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -272,7 +301,11 @@ static int proc_root_readdir(struct file *file, struct dir_context *ctx)
 static const struct file_operations proc_root_operations = {
 	.read		 = generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	 = proc_root_readdir,
+=======
+	.iterate	 = proc_root_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	 = proc_root_readdir,
 >>>>>>> v3.18

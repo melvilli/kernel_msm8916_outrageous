@@ -49,6 +49,10 @@ static struct ulpi_info ulpi_ids[] = {
 	ULPI_INFO(ULPI_ID(0x0424, 0x0006), "SMSC USB331x"),
 	ULPI_INFO(ULPI_ID(0x0424, 0x0007), "SMSC USB3320"),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ULPI_INFO(ULPI_ID(0x0424, 0x0009), "SMSC USB334x"),
+>>>>>>> v3.18
 =======
 	ULPI_INFO(ULPI_ID(0x0424, 0x0009), "SMSC USB334x"),
 >>>>>>> v3.18

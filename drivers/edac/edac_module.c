@@ -29,7 +29,11 @@ static int edac_set_debug_level(const char *buf, struct kernel_param *kp)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (val < 0 || val > 4)
+=======
+	if (val > 4)
+>>>>>>> v3.18
 =======
 	if (val > 4)
 >>>>>>> v3.18

@@ -1,6 +1,7 @@
 /*Created on  2008/ 7/16,  5:31*/
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 u32 Rtl8192UsbPHY_REGArray[] = {
 0x0, };
@@ -546,6 +547,8 @@ u32 Rtl8192UsbAGCTAB_Array[] = {
 0xc78,0x693e001e,
 0xc78,0x6a3f001e,
 =======
+=======
+>>>>>>> v3.18
 #include "r819xU_firmware_img.h"
 
 u32 Rtl8192UsbPHY_REGArray[] = {
@@ -1091,5 +1094,8 @@ u32 Rtl8192UsbAGCTAB_Array[] = {
 	0xc78, 0x683d001e,
 	0xc78, 0x693e001e,
 	0xc78, 0x6a3f001e,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

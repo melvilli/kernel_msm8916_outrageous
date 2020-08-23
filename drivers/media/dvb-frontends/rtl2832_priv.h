@@ -24,16 +24,22 @@
 #include "dvb_frontend.h"
 #include "rtl2832.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct rtl2832_priv {
 	struct i2c_adapter *i2c;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/i2c-mux.h>
 
 struct rtl2832_priv {
 	struct i2c_adapter *i2c;
 	struct i2c_adapter *i2c_adapter;
 	struct i2c_adapter *i2c_adapter_tuner;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct dvb_frontend fe;
 	struct rtl2832_config cfg;
@@ -44,6 +50,10 @@ struct rtl2832_priv {
 	u8 tuner;
 	u8 page; /* active register page */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct delayed_work i2c_gate_work;
+>>>>>>> v3.18
 =======
 	struct delayed_work i2c_gate_work;
 >>>>>>> v3.18
@@ -281,7 +291,11 @@ static const struct rtl2832_reg_value rtl2832_tuner_init_tua9001[] = {
 	{DVBT_AD_AVI,                    0x0},
 	{DVBT_AD_AVQ,                    0x0},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{DVBT_SPEC_INV,			 0x0},
+=======
+	{DVBT_SPEC_INV,                  0x0},
+>>>>>>> v3.18
 =======
 	{DVBT_SPEC_INV,                  0x0},
 >>>>>>> v3.18
@@ -319,7 +333,11 @@ static const struct rtl2832_reg_value rtl2832_tuner_init_fc0012[] = {
 	{DVBT_EN_AGC_PGA,                0x1},
 	{DVBT_IF_AGC_MAN,                0x0},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{DVBT_SPEC_INV,			 0x0},
+=======
+	{DVBT_SPEC_INV,                  0x0},
+>>>>>>> v3.18
 =======
 	{DVBT_SPEC_INV,                  0x0},
 >>>>>>> v3.18
@@ -361,6 +379,7 @@ static const struct rtl2832_reg_value rtl2832_tuner_init_e4000[] = {
 	{DVBT_REG_MON,                   0x1},
 	{DVBT_REG_4MSEL,                 0x0},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{DVBT_SPEC_INV,			 0x0},
 };
 
@@ -388,6 +407,8 @@ static const struct rtl2832_reg_value rtl2832_tuner_init_r820t[] = {
 	{DVBT_AD7_SETTING,		0xe9f4},
 	{DVBT_SPEC_INV,			0x1},
 =======
+=======
+>>>>>>> v3.18
 	{DVBT_SPEC_INV,                  0x0},
 };
 
@@ -414,6 +435,9 @@ static const struct rtl2832_reg_value rtl2832_tuner_init_r820t[] = {
 	{DVBT_POLAR_IF_AGC,              0x0},
 	{DVBT_AD7_SETTING,            0xe9f4},
 	{DVBT_SPEC_INV,                  0x1},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

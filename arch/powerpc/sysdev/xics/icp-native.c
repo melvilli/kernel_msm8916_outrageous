@@ -27,6 +27,10 @@
 #include <asm/xics.h>
 #include <asm/kvm_ppc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/dbell.h>
+>>>>>>> v3.18
 =======
 #include <asm/dbell.h>
 >>>>>>> v3.18
@@ -150,8 +154,11 @@ static void icp_native_cause_ipi(int cpu, unsigned long data)
 {
 	kvmppc_set_host_ipi(cpu, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	icp_native_set_qirr(cpu, IPI_PRIORITY);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_DOORBELL
 	if (cpu_has_feature(CPU_FTR_DBELL) &&
 	    (cpumask_test_cpu(cpu, cpu_sibling_mask(smp_processor_id()))))
@@ -184,6 +191,9 @@ void icp_native_flush_interrupt(void)
 	}
 	/* EOI the interrupt */
 	icp_native_set_xirr(xirr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -256,7 +266,11 @@ static int __init icp_native_init_one_node(struct device_node *np,
 {
 	unsigned int ilen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *ireg;
+=======
+	const __be32 *ireg;
+>>>>>>> v3.18
 =======
 	const __be32 *ireg;
 >>>>>>> v3.18

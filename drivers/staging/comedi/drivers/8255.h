@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -30,6 +33,7 @@
 #include "../comedidev.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int subdev_8255_init(struct comedi_device *dev, struct comedi_subdevice *s,
 		     int (*io) (int, int, int, unsigned long),
 		     unsigned long iobase);
@@ -39,6 +43,8 @@ int subdev_8255_init_irq(struct comedi_device *dev, struct comedi_subdevice *s,
 void subdev_8255_interrupt(struct comedi_device *dev,
 			   struct comedi_subdevice *s);
 =======
+=======
+>>>>>>> v3.18
 #define I8255_SIZE		0x04
 
 #define I8255_DATA_A_REG	0x00
@@ -62,6 +68,9 @@ int subdev_8255_mm_init(struct comedi_device *, struct comedi_subdevice *,
 			int (*io)(struct comedi_device *,
 				  int, int, int, unsigned long),
 			unsigned long regbase);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

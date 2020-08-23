@@ -232,7 +232,11 @@ u16 r8712_efuse_get_current_size(struct _adapter *padapter)
 			efuse_addr = efuse_addr + (word_cnts * 2) + 1;
 		} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bContinual = false ;
+=======
+			bContinual = false;
+>>>>>>> v3.18
 =======
 			bContinual = false;
 >>>>>>> v3.18

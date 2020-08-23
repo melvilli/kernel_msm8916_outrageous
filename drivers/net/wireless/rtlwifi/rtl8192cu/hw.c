@@ -37,14 +37,20 @@
 #include "def.h"
 #include "phy.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "mac.h"
 #include "dm.h"
 =======
+=======
+>>>>>>> v3.18
 #include "../rtl8192c/phy_common.h"
 #include "mac.h"
 #include "dm.h"
 #include "../rtl8192c/dm_common.h"
 #include "../rtl8192c/fw_common.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "hw.h"
 #include "../rtl8192ce/hw.h"
@@ -189,7 +195,11 @@ static void _rtl92cu_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 	for (rf_path = 0; rf_path < 2; rf_path++) {
 		for (i = 0; i < 14; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			index = _rtl92c_get_chnl_group((u8) i);
+=======
+			index = rtl92c_get_chnl_group((u8)i);
+>>>>>>> v3.18
 =======
 			index = rtl92c_get_chnl_group((u8)i);
 >>>>>>> v3.18
@@ -235,7 +245,11 @@ static void _rtl92cu_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 	for (rf_path = 0; rf_path < 2; rf_path++) {
 		for (i = 0; i < 14; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			index = _rtl92c_get_chnl_group((u8) i);
+=======
+			index = rtl92c_get_chnl_group((u8)i);
+>>>>>>> v3.18
 =======
 			index = rtl92c_get_chnl_group((u8)i);
 >>>>>>> v3.18
@@ -266,7 +280,11 @@ static void _rtl92cu_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 	}
 	for (i = 0; i < 14; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		index = _rtl92c_get_chnl_group((u8) i);
+=======
+		index = rtl92c_get_chnl_group((u8)i);
+>>>>>>> v3.18
 =======
 		index = rtl92c_get_chnl_group((u8)i);
 >>>>>>> v3.18
@@ -282,7 +300,11 @@ static void _rtl92cu_read_txpower_info_from_hwpg(struct ieee80211_hw *hw,
 		if (rtlefuse->txpwr_ht20diff[RF90_PATH_B][i] & BIT(3))
 			rtlefuse->txpwr_ht20diff[RF90_PATH_B][i] |= 0xF0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		index = _rtl92c_get_chnl_group((u8) i);
+=======
+		index = rtl92c_get_chnl_group((u8)i);
+>>>>>>> v3.18
 =======
 		index = rtl92c_get_chnl_group((u8)i);
 >>>>>>> v3.18
@@ -419,7 +441,11 @@ static void _rtl92cu_read_adapter_info(struct ieee80211_hw *hw)
 				if ((rtlefuse->eeprom_svid == 0x103C &&
 				     rtlefuse->eeprom_smid == 0x1629))
 <<<<<<< HEAD
+<<<<<<< HEAD
 					rtlhal->oem_id = RT_CID_819x_HP;
+=======
+					rtlhal->oem_id = RT_CID_819X_HP;
+>>>>>>> v3.18
 =======
 					rtlhal->oem_id = RT_CID_819X_HP;
 >>>>>>> v3.18
@@ -434,7 +460,11 @@ static void _rtl92cu_read_adapter_info(struct ieee80211_hw *hw)
 			break;
 		case EEPROM_CID_QMI:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rtlhal->oem_id = RT_CID_819x_QMI;
+=======
+			rtlhal->oem_id = RT_CID_819X_QMI;
+>>>>>>> v3.18
 =======
 			rtlhal->oem_id = RT_CID_819X_QMI;
 >>>>>>> v3.18
@@ -456,6 +486,7 @@ static void _rtl92cu_hal_customized_behavior(struct ieee80211_hw *hw)
 
 	switch (rtlhal->oem_id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case RT_CID_819x_HP:
 		usb_priv->ledctl.led_opendrain = true;
 		break;
@@ -465,6 +496,8 @@ static void _rtl92cu_hal_customized_behavior(struct ieee80211_hw *hw)
 	case RT_CID_CCX:
 	case RT_CID_819x_Acer:
 =======
+=======
+>>>>>>> v3.18
 	case RT_CID_819X_HP:
 		usb_priv->ledctl.led_opendrain = true;
 		break;
@@ -473,6 +506,9 @@ static void _rtl92cu_hal_customized_behavior(struct ieee80211_hw *hw)
 	case RT_CID_TOSHIBA:
 	case RT_CID_CCX:
 	case RT_CID_819X_ACER:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case RT_CID_WHQL:
 	default:
@@ -555,7 +591,11 @@ static int _rtl92cu_init_power_on(struct ieee80211_hw *hw)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pollingCount++ > 100) {
+=======
+		if (pollingCount++ > 1000) {
+>>>>>>> v3.18
 =======
 		if (pollingCount++ > 1000) {
 >>>>>>> v3.18
@@ -1081,7 +1121,11 @@ int rtl92cu_hw_init(struct ieee80211_hw *hw)
 		rtl92c_phy_set_rfpath_switch(hw, 1);
 		if (iqk_initialized) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rtl92c_phy_iq_calibrate(hw, false);
+=======
+			rtl92c_phy_iq_calibrate(hw, true);
+>>>>>>> v3.18
 =======
 			rtl92c_phy_iq_calibrate(hw, true);
 >>>>>>> v3.18
@@ -1221,7 +1265,11 @@ n. LEDCFG 0x4C[15:0] = 0x8080
 	rtl_write_word(rtlpriv, REG_GPIO_PIN_CTRL+2, 0x0000);
 	value32 = rtl_read_dword(rtlpriv, REG_GPIO_PIN_CTRL) & 0xFFFF00FF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	value8 = (u8) (value32&0x000000FF);
+=======
+	value8 = (u8)(value32&0x000000FF);
+>>>>>>> v3.18
 =======
 	value8 = (u8)(value32&0x000000FF);
 >>>>>>> v3.18
@@ -1231,7 +1279,11 @@ n. LEDCFG 0x4C[15:0] = 0x8080
 	rtl_write_byte(rtlpriv, REG_GPIO_MUXCFG+3, 0x00);
 	value16 = rtl_read_word(rtlpriv, REG_GPIO_MUXCFG+2) & 0xFF0F;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	value8 = (u8) (value16&0x000F);
+=======
+	value8 = (u8)(value16&0x000F);
+>>>>>>> v3.18
 =======
 	value8 = (u8)(value16&0x000F);
 >>>>>>> v3.18
@@ -1305,7 +1357,11 @@ static void _rtl92cu_set_bcn_ctrl_reg(struct ieee80211_hw *hw,
 	rtlusb->reg_bcn_ctrl_val |= set_bits;
 	rtlusb->reg_bcn_ctrl_val &= ~clear_bits;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl_write_byte(rtlpriv, REG_BCN_CTRL, (u8) rtlusb->reg_bcn_ctrl_val);
+=======
+	rtl_write_byte(rtlpriv, REG_BCN_CTRL, (u8)rtlusb->reg_bcn_ctrl_val);
+>>>>>>> v3.18
 =======
 	rtl_write_byte(rtlpriv, REG_BCN_CTRL, (u8)rtlusb->reg_bcn_ctrl_val);
 >>>>>>> v3.18
@@ -1424,7 +1480,11 @@ static int _rtl92cu_set_media_status(struct ieee80211_hw *hw,
 	rtl_write_byte(rtlpriv, (MSR), bt_msr);
 	rtlpriv->cfg->ops->led_control(hw, ledaction);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((bt_msr & 0xfc) == MSR_AP)
+=======
+	if ((bt_msr & MSR_MASK) == MSR_AP)
+>>>>>>> v3.18
 =======
 	if ((bt_msr & MSR_MASK) == MSR_AP)
 >>>>>>> v3.18
@@ -1460,7 +1520,11 @@ void rtl92cu_set_check_bssid(struct ieee80211_hw *hw, bool check_bssid)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_hal *rtlhal = rtl_hal(rtlpriv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reg_rcr = rtl_read_dword(rtlpriv, REG_RCR);
+=======
+	u32 reg_rcr;
+>>>>>>> v3.18
 =======
 	u32 reg_rcr;
 >>>>>>> v3.18
@@ -1469,6 +1533,11 @@ void rtl92cu_set_check_bssid(struct ieee80211_hw *hw, bool check_bssid)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rtlpriv->cfg->ops->get_hw_reg(hw, HW_VAR_RCR, (u8 *)(&reg_rcr));
+
+>>>>>>> v3.18
 =======
 	rtlpriv->cfg->ops->get_hw_reg(hw, HW_VAR_RCR, (u8 *)(&reg_rcr));
 
@@ -1664,7 +1733,10 @@ void rtl92cu_get_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool usb_cmd_send_packet(struct ieee80211_hw *hw, struct sk_buff *skb)
 {
   /* Currently nothing happens here.
@@ -1679,6 +1751,9 @@ bool usb_cmd_send_packet(struct ieee80211_hw *hw, struct sk_buff *skb)
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void rtl92cu_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 {
@@ -1902,7 +1977,11 @@ void rtl92cu_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (rtlusb->acm_method != eAcmWay2_SW)
+=======
+			if (rtlusb->acm_method != EACMWAY2_SW)
+>>>>>>> v3.18
 =======
 			if (rtlusb->acm_method != EACMWAY2_SW)
 >>>>>>> v3.18
@@ -2032,7 +2111,12 @@ void rtl92cu_set_hw_reg(struct ieee80211_hw *hw, u8 variable, u8 *val)
 				rtl_write_byte(rtlpriv, REG_FWHW_TXQ_CTRL + 2,
 					       tmp_reg422 & (~BIT(6)));
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rtl92c_set_fw_rsvdpagepkt(hw, 0);
+=======
+				rtl92c_set_fw_rsvdpagepkt(hw,
+							  &usb_cmd_send_packet);
+>>>>>>> v3.18
 =======
 				rtl92c_set_fw_rsvdpagepkt(hw,
 							  &usb_cmd_send_packet);

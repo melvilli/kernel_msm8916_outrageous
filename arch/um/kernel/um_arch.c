@@ -14,6 +14,10 @@
 #include <asm/pgtable.h>
 #include <asm/processor.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/sections.h>
+>>>>>>> v3.18
 =======
 #include <asm/sections.h>
 >>>>>>> v3.18
@@ -239,7 +243,10 @@ static int panic_exit(struct notifier_block *self, unsigned long unused1,
 {
 	bust_spinlocks(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	show_regs(&(current->thread.regs));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bust_spinlocks(0);
@@ -356,12 +363,16 @@ int __init linux_main(int argc, char **argv)
 
 	setup_physmem(uml_physmem, uml_reserved, physmem_size, highmem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (init_maps(physmem_size, iomem_size, highmem)) {
 		printf("Failed to allocate mem_map for %Lu bytes of physical "
 		       "memory and %Lu bytes of highmem\n", physmem_size,
 		       highmem);
 		exit(1);
 	}
+=======
+	mem_total_pages(physmem_size, iomem_size, highmem);
+>>>>>>> v3.18
 =======
 	mem_total_pages(physmem_size, iomem_size, highmem);
 >>>>>>> v3.18

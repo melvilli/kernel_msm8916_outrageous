@@ -78,6 +78,10 @@ struct hvc_iucv_private {
 	struct list_head	tty_inqueue;	/* incoming IUCV messages */
 	struct device		*dev;		/* device structure */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8			info_path[16];	/* IUCV path info (dev attr) */
+>>>>>>> v3.18
 =======
 	u8			info_path[16];	/* IUCV path info (dev attr) */
 >>>>>>> v3.18
@@ -131,7 +135,11 @@ static struct iucv_handler hvc_iucv_handler = {
  * to the HVC virtual terminal number specified as parameter @num.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct hvc_iucv_private *hvc_iucv_get_private(uint32_t num)
+=======
+static struct hvc_iucv_private *hvc_iucv_get_private(uint32_t num)
+>>>>>>> v3.18
 =======
 static struct hvc_iucv_private *hvc_iucv_get_private(uint32_t num)
 >>>>>>> v3.18
@@ -665,7 +673,10 @@ static void hvc_iucv_notifier_hangup(struct hvc_struct *hp, int id)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * hvc_iucv_dtr_rts() - HVC notifier for handling DTR/RTS
  * @hp:		Pointer the HVC device (struct hvc_struct)
  * @raise:	Non-zero to raise or zero to lower DTR/RTS lines
@@ -709,6 +720,9 @@ static void hvc_iucv_dtr_rts(struct hvc_struct *hp, int raise)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * hvc_iucv_notifier_del() - HVC notifier for closing a TTY for the last time.
  * @hp:		Pointer to the HVC device (struct hvc_struct)
@@ -717,8 +731,14 @@ static void hvc_iucv_dtr_rts(struct hvc_struct *hp, int raise)
  *
  * This routine notifies the HVC back-end that the last tty device fd has been
 <<<<<<< HEAD
+<<<<<<< HEAD
  * closed.  The function calls hvc_iucv_cleanup() to clean up the struct
  * hvc_iucv_private instance.
+=======
+ * closed.  The function cleans up tty resources.  The clean-up of the IUCV
+ * connection is done in hvc_iucv_dtr_rts() and depends on the HUPCL termios
+ * control setting.
+>>>>>>> v3.18
 =======
  * closed.  The function cleans up tty resources.  The clean-up of the IUCV
  * connection is done in hvc_iucv_dtr_rts() and depends on the HUPCL termios
@@ -731,7 +751,10 @@ static void hvc_iucv_notifier_del(struct hvc_struct *hp, int id)
 {
 	struct hvc_iucv_private *priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iucv_path	*path;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -742,6 +765,7 @@ static void hvc_iucv_notifier_del(struct hvc_struct *hp, int id)
 	flush_sndbuf_sync(priv);
 
 	spin_lock_bh(&priv->lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	path = priv->path;		/* save reference to IUCV path */
 	priv->path = NULL;
@@ -755,11 +779,16 @@ static void hvc_iucv_notifier_del(struct hvc_struct *hp, int id)
 		iucv_path_free(path);
 	}
 =======
+=======
+>>>>>>> v3.18
 	destroy_tty_buffer_list(&priv->tty_outqueue);
 	destroy_tty_buffer_list(&priv->tty_inqueue);
 	priv->tty_state = TTY_CLOSED;
 	priv->sndbuf_len = 0;
 	spin_unlock_bh(&priv->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -807,6 +836,7 @@ static	int hvc_iucv_path_pending(struct iucv_path *path,
 				  u8 ipvmid[8], u8 ipuser[16])
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hvc_iucv_private *priv;
 	u8 nuser_data[16];
 	u8 vm_user_id[9];
@@ -820,6 +850,8 @@ static	int hvc_iucv_path_pending(struct iucv_path *path,
 			break;
 		}
 =======
+=======
+>>>>>>> v3.18
 	struct hvc_iucv_private *priv, *tmp;
 	u8 wildcard[9] = "lnxhvc  ";
 	int i, rc, find_unused;
@@ -851,6 +883,9 @@ static	int hvc_iucv_path_pending(struct iucv_path *path,
 		if (priv)
 			break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!priv)
 		return -ENODEV;
@@ -895,11 +930,17 @@ static	int hvc_iucv_path_pending(struct iucv_path *path,
 	priv->iucv_state = IUCV_CONNECTED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* store path information */
 	memcpy(priv->info_path, ipvmid, 8);
 	memcpy(priv->info_path + 8, ipuser + 8, 8);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* flush buffered output data... */
 	schedule_delayed_work(&priv->sndbuf_work, 5);
@@ -1036,7 +1077,10 @@ static int hvc_iucv_pm_restore_thaw(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t hvc_iucv_dev_termid_show(struct device *dev,
 					struct device_attribute *attr,
 					char *buf)
@@ -1080,6 +1124,9 @@ static ssize_t hvc_iucv_dev_peer_show(struct device *dev,
 	return sprintf(buf, "%s:%s\n", vmid, ipuser);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* HVC operations */
@@ -1090,6 +1137,10 @@ static const struct hv_ops hvc_iucv_ops = {
 	.notifier_del = hvc_iucv_notifier_del,
 	.notifier_hangup = hvc_iucv_notifier_hangup,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.dtr_rts = hvc_iucv_dtr_rts,
+>>>>>>> v3.18
 =======
 	.dtr_rts = hvc_iucv_dtr_rts,
 >>>>>>> v3.18
@@ -1110,7 +1161,10 @@ static struct device_driver hvc_iucv_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* IUCV HVC device attributes */
 static DEVICE_ATTR(termid, 0640, hvc_iucv_dev_termid_show, NULL);
 static DEVICE_ATTR(state, 0640, hvc_iucv_dev_state_show, NULL);
@@ -1130,6 +1184,9 @@ static const struct attribute_group *hvc_iucv_dev_attr_groups[] = {
 };
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * hvc_iucv_alloc() - Allocates a new struct hvc_iucv_private instance
@@ -1193,6 +1250,10 @@ static int __init hvc_iucv_alloc(int id, unsigned int is_console)
 	priv->dev->parent = iucv_root;
 	priv->dev->driver = &hvc_iucv_driver;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->dev->groups = hvc_iucv_dev_attr_groups;
+>>>>>>> v3.18
 =======
 	priv->dev->groups = hvc_iucv_dev_attr_groups;
 >>>>>>> v3.18
@@ -1505,8 +1566,12 @@ out_error_memory:
 	kmem_cache_destroy(hvc_iucv_buffer_cache);
 out_error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hvc_iucv_filter)
 		kfree(hvc_iucv_filter);
+=======
+	kfree(hvc_iucv_filter);
+>>>>>>> v3.18
 =======
 	kfree(hvc_iucv_filter);
 >>>>>>> v3.18
@@ -1521,7 +1586,11 @@ out_error:
 static	int __init hvc_iucv_config(char *val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 return strict_strtoul(val, 10, &hvc_iucv_devices);
+=======
+	 return kstrtoul(val, 10, &hvc_iucv_devices);
+>>>>>>> v3.18
 =======
 	 return kstrtoul(val, 10, &hvc_iucv_devices);
 >>>>>>> v3.18

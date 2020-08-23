@@ -35,6 +35,7 @@
 	dmtc0	v0, CP0_CVMMEMCTL_REG	# Write the cavium mem control register
 	dmfc0	v0, CP0_CVMCTL_REG	# Read the cavium control register
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CAVIUM_OCTEON_HW_FIX_UNALIGNED
 	# Disable unaligned load/store support but leave HW fixup enabled
 	or  v0, v0, 0x5001
@@ -45,10 +46,15 @@
 	xor v0, v0, 0x5001
 #endif
 =======
+=======
+>>>>>>> v3.18
 	# Disable unaligned load/store support but leave HW fixup enabled
 	# Needed for octeon specific memcpy
 	or  v0, v0, 0x5001
 	xor v0, v0, 0x1001
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	# Read the processor ID register
 	mfc0 v1, CP0_PRID_REG

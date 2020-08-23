@@ -11,6 +11,10 @@
 
 #ifndef __PINCTRL_LANTIQ_H
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define __PINCTRL_LANTIQ_H
+>>>>>>> v3.18
 =======
 #define __PINCTRL_LANTIQ_H
 >>>>>>> v3.18

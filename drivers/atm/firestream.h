@@ -421,7 +421,10 @@ struct fs_transmit_config {
 #define RC_FLAGS_BFPS_BFP47 (0xe << 17)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RC_FLAGS_BFPS       (0x1 << 17)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RC_FLAGS_BFPP       (0x1 << 21)

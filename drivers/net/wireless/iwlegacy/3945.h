@@ -190,6 +190,7 @@ struct il3945_ibss_seq {
  *
  *****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int il3945_calc_db_from_ratio(int sig_ratio);
 extern void il3945_rx_replenish(void *data);
 extern void il3945_rx_queue_reset(struct il_priv *il, struct il_rx_queue *rxq);
@@ -200,6 +201,8 @@ extern int il3945_dump_nic_event_log(struct il_priv *il, bool full_log,
 				     char **buf, bool display);
 extern void il3945_dump_nic_error_log(struct il_priv *il);
 =======
+=======
+>>>>>>> v3.18
 int il3945_calc_db_from_ratio(int sig_ratio);
 void il3945_rx_replenish(void *data);
 void il3945_rx_queue_reset(struct il_priv *il, struct il_rx_queue *rxq);
@@ -208,6 +211,9 @@ unsigned int il3945_fill_beacon_frame(struct il_priv *il,
 int il3945_dump_nic_event_log(struct il_priv *il, bool full_log, char **buf,
 			      bool display);
 void il3945_dump_nic_error_log(struct il_priv *il);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /******************************************************************************
@@ -226,6 +232,7 @@ void il3945_dump_nic_error_log(struct il_priv *il);
  * il3945_mac_     <-- mac80211 callback
  *
  ****************************************************************************/
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void il3945_hw_handler_setup(struct il_priv *il);
 extern void il3945_hw_setup_deferred_work(struct il_priv *il);
@@ -261,6 +268,8 @@ extern void il3945_config_ap(struct il_priv *il);
 
 extern int il3945_commit_rxon(struct il_priv *il);
 =======
+=======
+>>>>>>> v3.18
 void il3945_hw_handler_setup(struct il_priv *il);
 void il3945_hw_setup_deferred_work(struct il_priv *il);
 void il3945_hw_cancel_deferred_work(struct il_priv *il);
@@ -291,6 +300,9 @@ void il3945_post_associate(struct il_priv *il);
 void il3945_config_ap(struct il_priv *il);
 
 int il3945_commit_rxon(struct il_priv *il);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -302,6 +314,7 @@ int il3945_commit_rxon(struct il_priv *il);
  * station tables.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u8 il3945_hw_find_station(struct il_priv *il, const u8 * bssid);
 
 extern __le32 il3945_get_antenna_flags(const struct il_priv *il);
@@ -311,6 +324,8 @@ extern int il3945_txpower_set_from_eeprom(struct il_priv *il);
 
 extern int il3945_rs_next_rate(struct il_priv *il, int rate);
 =======
+=======
+>>>>>>> v3.18
 u8 il3945_hw_find_station(struct il_priv *il, const u8 *bssid);
 
 __le32 il3945_get_antenna_flags(const struct il_priv *il);
@@ -319,6 +334,9 @@ void il3945_reg_txpower_periodic(struct il_priv *il);
 int il3945_txpower_set_from_eeprom(struct il_priv *il);
 
 int il3945_rs_next_rate(struct il_priv *il, int rate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* scanning */

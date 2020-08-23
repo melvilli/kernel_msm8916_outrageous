@@ -15,10 +15,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -40,7 +43,11 @@
 #include <linux/slab.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -94,6 +101,10 @@
 #define QUIRK_HDMIPHY		(1 << 1)
 #define QUIRK_NO_GPIO		(1 << 2)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QUIRK_POLL		(1 << 3)
+>>>>>>> v3.18
 =======
 #define QUIRK_POLL		(1 << 3)
 >>>>>>> v3.18
@@ -113,7 +124,11 @@ enum s3c24xx_i2c_state {
 struct s3c24xx_i2c {
 	wait_queue_head_t	wait;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int            quirks;
+=======
+	kernel_ulong_t		quirks;
+>>>>>>> v3.18
 =======
 	kernel_ulong_t		quirks;
 >>>>>>> v3.18
@@ -139,7 +154,11 @@ struct s3c24xx_i2c {
 	int			gpios[2];
 	struct pinctrl          *pctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_FREQ
+=======
+#if defined(CONFIG_ARM_S3C24XX_CPUFREQ)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_ARM_S3C24XX_CPUFREQ)
 >>>>>>> v3.18
@@ -162,6 +181,11 @@ static struct platform_device_id s3c24xx_driver_ids[] = {
 MODULE_DEVICE_TABLE(platform, s3c24xx_driver_ids);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int i2c_s3c_irq_nextbyte(struct s3c24xx_i2c *i2c, unsigned long iicstat);
+
+>>>>>>> v3.18
 =======
 static int i2c_s3c_irq_nextbyte(struct s3c24xx_i2c *i2c, unsigned long iicstat);
 
@@ -175,6 +199,11 @@ static const struct of_device_id s3c24xx_i2c_match[] = {
 	{ .compatible = "samsung,exynos5440-i2c",
 	  .data = (void *)(QUIRK_S3C2440 | QUIRK_NO_GPIO) },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible = "samsung,exynos5-sata-phy-i2c",
+	  .data = (void *)(QUIRK_S3C2440 | QUIRK_POLL | QUIRK_NO_GPIO) },
+>>>>>>> v3.18
 =======
 	{ .compatible = "samsung,exynos5-sata-phy-i2c",
 	  .data = (void *)(QUIRK_S3C2440 | QUIRK_POLL | QUIRK_NO_GPIO) },
@@ -190,7 +219,11 @@ MODULE_DEVICE_TABLE(of, s3c24xx_i2c_match);
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned int s3c24xx_get_device_quirks(struct platform_device *pdev)
+=======
+static inline kernel_ulong_t s3c24xx_get_device_quirks(struct platform_device *pdev)
+>>>>>>> v3.18
 =======
 static inline kernel_ulong_t s3c24xx_get_device_quirks(struct platform_device *pdev)
 >>>>>>> v3.18
@@ -199,7 +232,11 @@ static inline kernel_ulong_t s3c24xx_get_device_quirks(struct platform_device *p
 		const struct of_device_id *match;
 		match = of_match_node(s3c24xx_i2c_match, pdev->dev.of_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (unsigned int)match->data;
+=======
+		return (kernel_ulong_t)match->data;
+>>>>>>> v3.18
 =======
 		return (kernel_ulong_t)match->data;
 >>>>>>> v3.18
@@ -226,7 +263,12 @@ static inline void s3c24xx_i2c_master_complete(struct s3c24xx_i2c *i2c, int ret)
 		i2c->msg_idx = ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wake_up(&i2c->wait);
+=======
+	if (!(i2c->quirks & QUIRK_POLL))
+		wake_up(&i2c->wait);
+>>>>>>> v3.18
 =======
 	if (!(i2c->quirks & QUIRK_POLL))
 		wake_up(&i2c->wait);
@@ -268,7 +310,10 @@ static inline void s3c24xx_i2c_enable_irq(struct s3c24xx_i2c *i2c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool is_ack(struct s3c24xx_i2c *i2c)
 {
 	int tries;
@@ -285,6 +330,9 @@ static bool is_ack(struct s3c24xx_i2c *i2c)
 	dev_err(i2c->dev, "ack was not received\n");
 	return false;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* s3c24xx_i2c_message_start
@@ -331,7 +379,10 @@ static void s3c24xx_i2c_message_start(struct s3c24xx_i2c *i2c,
 	stat |= S3C2410_IICSTAT_START;
 	writel(stat, i2c->regs + S3C2410_IICSTAT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (i2c->quirks & QUIRK_POLL) {
 		while ((i2c->msg_num != 0) && is_ack(i2c)) {
@@ -342,6 +393,9 @@ static void s3c24xx_i2c_message_start(struct s3c24xx_i2c *i2c,
 				dev_err(i2c->dev, "deal with arbitration loss\n");
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -644,7 +698,10 @@ static irqreturn_t s3c24xx_i2c_irq(int irqno, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Disable the bus so that we won't get any interrupts from now on, or try
  * to drive any lines. This is the default state when we don't have
@@ -670,6 +727,9 @@ static inline void s3c24xx_i2c_disable_bus(struct s3c24xx_i2c *i2c)
 	writel(tmp, i2c->regs + S3C2410_IICCON);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* s3c24xx_i2c_set_master
@@ -779,7 +839,10 @@ static int s3c24xx_i2c_doxfer(struct s3c24xx_i2c *i2c,
 	s3c24xx_i2c_message_start(i2c, msgs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (i2c->quirks & QUIRK_POLL) {
 		ret = i2c->msg_idx;
 
@@ -789,6 +852,9 @@ static int s3c24xx_i2c_doxfer(struct s3c24xx_i2c *i2c,
 		goto out;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	timeout = wait_event_timeout(i2c->wait, i2c->msg_num == 0, HZ * 5);
 
@@ -809,13 +875,19 @@ static int s3c24xx_i2c_doxfer(struct s3c24xx_i2c *i2c,
 	s3c24xx_i2c_wait_idle(i2c);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  out:
 =======
+=======
+>>>>>>> v3.18
 	s3c24xx_i2c_disable_bus(i2c);
 
  out:
 	i2c->state = STATE_IDLE;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -944,6 +1016,12 @@ static int s3c24xx_i2c_clockrate(struct s3c24xx_i2c *i2c, unsigned int *got)
 		iiccon |= S3C2410_IICCON_TXDIV_512;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (i2c->quirks & QUIRK_POLL)
+		iiccon |= S3C2410_IICCON_SCALE(2);
+
+>>>>>>> v3.18
 =======
 	if (i2c->quirks & QUIRK_POLL)
 		iiccon |= S3C2410_IICCON_SCALE(2);
@@ -972,7 +1050,11 @@ static int s3c24xx_i2c_clockrate(struct s3c24xx_i2c *i2c, unsigned int *got)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_FREQ
+=======
+#if defined(CONFIG_ARM_S3C24XX_CPUFREQ)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_ARM_S3C24XX_CPUFREQ)
 >>>>>>> v3.18
@@ -1093,7 +1175,10 @@ static void s3c24xx_i2c_dt_gpio_free(struct s3c24xx_i2c *i2c)
 static int s3c24xx_i2c_init(struct s3c24xx_i2c *i2c)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long iicon = S3C2410_IICCON_IRQEN | S3C2410_IICCON_ACKEN;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct s3c2410_platform_i2c *pdata;
@@ -1110,7 +1195,12 @@ static int s3c24xx_i2c_init(struct s3c24xx_i2c *i2c)
 	dev_info(i2c->dev, "slave address 0x%02x\n", pdata->slave_addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(iicon, i2c->regs + S3C2410_IICCON);
+=======
+	writel(0, i2c->regs + S3C2410_IICCON);
+	writel(0, i2c->regs + S3C2410_IICSTAT);
+>>>>>>> v3.18
 =======
 	writel(0, i2c->regs + S3C2410_IICCON);
 	writel(0, i2c->regs + S3C2410_IICSTAT);
@@ -1120,7 +1210,10 @@ static int s3c24xx_i2c_init(struct s3c24xx_i2c *i2c)
 
 	if (s3c24xx_i2c_clockrate(i2c, &freq) != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		writel(0, i2c->regs + S3C2410_IICCON);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		dev_err(i2c->dev, "cannot meet bus frequency required\n");
@@ -1131,7 +1224,12 @@ static int s3c24xx_i2c_init(struct s3c24xx_i2c *i2c)
 
 	dev_info(i2c->dev, "bus frequency set to %d KHz\n", freq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(i2c->dev, "S3C2410_IICCON=0x%02lx\n", iicon);
+=======
+	dev_dbg(i2c->dev, "S3C2410_IICCON=0x%02x\n",
+		readl(i2c->regs + S3C2410_IICCON));
+>>>>>>> v3.18
 =======
 	dev_dbg(i2c->dev, "S3C2410_IICCON=0x%02x\n",
 		readl(i2c->regs + S3C2410_IICCON));
@@ -1182,7 +1280,11 @@ static int s3c24xx_i2c_probe(struct platform_device *pdev)
 
 	if (!pdev->dev.of_node) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pdata = pdev->dev.platform_data;
+=======
+		pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 		pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1193,6 +1295,7 @@ static int s3c24xx_i2c_probe(struct platform_device *pdev)
 	}
 
 	i2c = devm_kzalloc(&pdev->dev, sizeof(struct s3c24xx_i2c), GFP_KERNEL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!i2c) {
 		dev_err(&pdev->dev, "no memory for state\n");
@@ -1205,12 +1308,17 @@ static int s3c24xx_i2c_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!i2c)
 		return -ENOMEM;
 
 	i2c->pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 	if (!i2c->pdata)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	i2c->quirks = s3c24xx_get_device_quirks(pdev);
@@ -1221,17 +1329,23 @@ static int s3c24xx_i2c_probe(struct platform_device *pdev)
 
 	strlcpy(i2c->adap.name, "s3c2410-i2c", sizeof(i2c->adap.name));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c->adap.owner   = THIS_MODULE;
 	i2c->adap.algo    = &s3c24xx_i2c_algorithm;
 	i2c->adap.retries = 2;
 	i2c->adap.class   = I2C_CLASS_HWMON | I2C_CLASS_SPD;
 	i2c->tx_setup     = 50;
 =======
+=======
+>>>>>>> v3.18
 	i2c->adap.owner = THIS_MODULE;
 	i2c->adap.algo = &s3c24xx_i2c_algorithm;
 	i2c->adap.retries = 2;
 	i2c->adap.class = I2C_CLASS_DEPRECATED;
 	i2c->tx_setup = 50;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	init_waitqueue_head(&i2c->wait);
@@ -1288,6 +1402,7 @@ static int s3c24xx_i2c_probe(struct platform_device *pdev)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c->irq = ret = platform_get_irq(pdev, 0);
 	if (ret <= 0) {
 		dev_err(&pdev->dev, "cannot find IRQ\n");
@@ -1301,6 +1416,8 @@ static int s3c24xx_i2c_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "cannot claim IRQ %d\n", i2c->irq);
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (!(i2c->quirks & QUIRK_POLL)) {
 		i2c->irq = ret = platform_get_irq(pdev, 0);
 		if (ret <= 0) {
@@ -1315,6 +1432,9 @@ static int s3c24xx_i2c_probe(struct platform_device *pdev)
 			dev_err(&pdev->dev, "cannot claim IRQ %d\n", i2c->irq);
 			return ret;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1341,7 +1461,10 @@ static int s3c24xx_i2c_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_i2c_register_devices(&i2c->adap);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	platform_set_drvdata(pdev, i2c);
@@ -1370,8 +1493,11 @@ static int s3c24xx_i2c_remove(struct platform_device *pdev)
 	i2c_del_adapter(&i2c->adap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable_unprepare(i2c->clk);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (pdev->dev.of_node && IS_ERR(i2c->pctrl))
@@ -1392,7 +1518,11 @@ static int s3c24xx_i2c_suspend_noirq(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int s3c24xx_i2c_resume(struct device *dev)
+=======
+static int s3c24xx_i2c_resume_noirq(struct device *dev)
+>>>>>>> v3.18
 =======
 static int s3c24xx_i2c_resume_noirq(struct device *dev)
 >>>>>>> v3.18
@@ -1414,13 +1544,19 @@ static const struct dev_pm_ops s3c24xx_i2c_dev_pm_ops = {
 #ifdef CONFIG_PM_SLEEP
 	.suspend_noirq = s3c24xx_i2c_suspend_noirq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.resume = s3c24xx_i2c_resume,
 =======
+=======
+>>>>>>> v3.18
 	.resume_noirq = s3c24xx_i2c_resume_noirq,
 	.freeze_noirq = s3c24xx_i2c_suspend_noirq,
 	.thaw_noirq = s3c24xx_i2c_resume_noirq,
 	.poweroff_noirq = s3c24xx_i2c_suspend_noirq,
 	.restore_noirq = s3c24xx_i2c_resume_noirq,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };

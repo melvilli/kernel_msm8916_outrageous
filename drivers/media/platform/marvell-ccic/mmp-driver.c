@@ -19,7 +19,10 @@
 #include <linux/videodev2.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/mmp-camera.h>
@@ -31,6 +34,10 @@
 #include <linux/list.h>
 #include <linux/pm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -42,6 +49,11 @@ MODULE_AUTHOR("Jonathan Corbet <corbet@lwn.net>");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static char *mcam_clks[] = {"CCICAXICLK", "CCICFUNCLK", "CCICPHYCLK"};
+
+>>>>>>> v3.18
 =======
 static char *mcam_clks[] = {"CCICAXICLK", "CCICFUNCLK", "CCICPHYCLK"};
 
@@ -52,6 +64,10 @@ struct mmp_camera {
 	struct mcam_camera mcam;
 	struct list_head devlist;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *mipi_clk;
+>>>>>>> v3.18
 =======
 	struct clk *mipi_clk;
 >>>>>>> v3.18
@@ -119,7 +135,10 @@ static struct mmp_camera *mmpcam_find_device(struct platform_device *pdev)
 #define REG_CCIC_DCGCR		0x28	/* CCIC dyn clock gate ctrl reg */
 #define REG_CCIC_CRCR		0x50	/* CCIC clk reset ctrl reg	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define REG_CCIC2_CRCR		0xf4	/* CCIC2 clk reset ctrl reg	*/
 
 static void mcam_clk_enable(struct mcam_camera *mcam)
@@ -141,6 +160,9 @@ static void mcam_clk_disable(struct mcam_camera *mcam)
 			clk_disable_unprepare(mcam->clk[i]);
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -154,16 +176,22 @@ static void mmpcam_power_up_ctlr(struct mmp_camera *cam)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mmpcam_power_up(struct mcam_camera *mcam)
 {
 	struct mmp_camera *cam = mcam_to_cam(mcam);
 	struct mmp_camera_platform_data *pdata;
 =======
+=======
+>>>>>>> v3.18
 static int mmpcam_power_up(struct mcam_camera *mcam)
 {
 	struct mmp_camera *cam = mcam_to_cam(mcam);
 	struct mmp_camera_platform_data *pdata;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Turn on power and clocks to the controller.
@@ -182,11 +210,17 @@ static int mmpcam_power_up(struct mcam_camera *mcam)
 	gpio_set_value(pdata->sensor_reset_gpio, 1); /* reset is active low */
 	mdelay(5);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	mcam_clk_enable(mcam);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -206,9 +240,12 @@ static void mmpcam_power_down(struct mcam_camera *mcam)
 	gpio_set_value(pdata->sensor_power_gpio, 0);
 	gpio_set_value(pdata->sensor_reset_gpio, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	mcam_clk_disable(mcam);
 }
@@ -331,6 +368,9 @@ void mmpcam_calc_dphy(struct mcam_camera *mcam)
 	dev_dbg(dev, "camera: DPHY sets: dphy3=0x%x, dphy5=0x%x, dphy6=0x%x\n",
 		pdata->dphy[0], pdata->dphy[1], pdata->dphy[2]);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static irqreturn_t mmpcam_irq(int irq, void *data)
@@ -346,7 +386,10 @@ static irqreturn_t mmpcam_irq(int irq, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void mcam_init_clk(struct mcam_camera *mcam)
 {
 	unsigned int i;
@@ -363,6 +406,9 @@ static void mcam_init_clk(struct mcam_camera *mcam)
 		}
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int mmpcam_probe(struct platform_device *pdev)
@@ -374,13 +420,19 @@ static int mmpcam_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cam = kzalloc(sizeof(*cam), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	pdata = pdev->dev.platform_data;
 	if (!pdata)
 		return -ENODEV;
 
 	cam = devm_kzalloc(&pdev->dev, sizeof(*cam), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cam == NULL)
 		return -ENOMEM;
@@ -391,10 +443,13 @@ static int mmpcam_probe(struct platform_device *pdev)
 	mcam->plat_power_up = mmpcam_power_up;
 	mcam->plat_power_down = mmpcam_power_down;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mcam->dev = &pdev->dev;
 	mcam->use_smbus = 0;
 	mcam->chip_id = V4L2_IDENT_ARMADA610;
 =======
+=======
+>>>>>>> v3.18
 	mcam->ctlr_reset = mcam_ctlr_reset;
 	mcam->calc_dphy = mmpcam_calc_dphy;
 	mcam->dev = &pdev->dev;
@@ -413,6 +468,9 @@ static int mmpcam_probe(struct platform_device *pdev)
 	mcam->mipi_enabled = false;
 	mcam->lane = pdata->lane;
 	mcam->chip_id = MCAM_ARMADA610;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mcam->buffer_mode = B_DMA_sg;
 	spin_lock_init(&mcam->dev_lock);
@@ -420,6 +478,7 @@ static int mmpcam_probe(struct platform_device *pdev)
 	 * Get our I/O memory.
 	 */
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (res == NULL) {
 		dev_err(&pdev->dev, "no iomem resource!\n");
@@ -433,16 +492,22 @@ static int mmpcam_probe(struct platform_device *pdev)
 		goto out_free;
 	}
 =======
+=======
+>>>>>>> v3.18
 	mcam->regs = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(mcam->regs))
 		return PTR_ERR(mcam->regs);
 	mcam->regs_size = resource_size(res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Power/clock memory is elsewhere; get it too.  Perhaps this
 	 * should really be managed outside of this driver?
 	 */
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (res == NULL) {
 		dev_err(&pdev->dev, "no power resource!\n");
@@ -460,10 +525,16 @@ static int mmpcam_probe(struct platform_device *pdev)
 	if (IS_ERR(cam->power_regs))
 		return PTR_ERR(cam->power_regs);
 >>>>>>> v3.18
+=======
+	cam->power_regs = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(cam->power_regs))
+		return PTR_ERR(cam->power_regs);
+>>>>>>> v3.18
 	/*
 	 * Find the i2c adapter.  This assumes, of course, that the
 	 * i2c bus is already up and functioning.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
 	mcam->i2c_adapter = platform_get_drvdata(pdata->i2c_device);
@@ -472,15 +543,21 @@ static int mmpcam_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "No i2c adapter\n");
 		goto out_unmap2;
 =======
+=======
+>>>>>>> v3.18
 	mcam->i2c_adapter = platform_get_drvdata(pdata->i2c_device);
 	if (mcam->i2c_adapter == NULL) {
 		dev_err(&pdev->dev, "No i2c adapter\n");
 		return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	/*
 	 * Sensor GPIO pins.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = gpio_request(pdata->sensor_power_gpio, "cam-power");
 	if (ret) {
@@ -504,6 +581,8 @@ static int mmpcam_probe(struct platform_device *pdev)
 	if (ret)
 		goto out_gpio2;
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_gpio_request(&pdev->dev, pdata->sensor_power_gpio,
 							"cam-power");
 	if (ret) {
@@ -532,6 +611,9 @@ static int mmpcam_probe(struct platform_device *pdev)
 	ret = mccic_register(mcam);
 	if (ret)
 		goto out_power_down;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Finally, set up our IRQ now that the core is ready to
@@ -544,8 +626,13 @@ static int mmpcam_probe(struct platform_device *pdev)
 	}
 	cam->irq = res->start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_irq(cam->irq, mmpcam_irq, IRQF_SHARED,
 			"mmp-camera", mcam);
+=======
+	ret = devm_request_irq(&pdev->dev, cam->irq, mmpcam_irq, IRQF_SHARED,
+					"mmp-camera", mcam);
+>>>>>>> v3.18
 =======
 	ret = devm_request_irq(&pdev->dev, cam->irq, mmpcam_irq, IRQF_SHARED,
 					"mmp-camera", mcam);
@@ -557,6 +644,7 @@ static int mmpcam_probe(struct platform_device *pdev)
 
 out_unregister:
 	mccic_shutdown(mcam);
+<<<<<<< HEAD
 <<<<<<< HEAD
 out_gpio2:
 	mmpcam_power_down(mcam);
@@ -573,6 +661,10 @@ out_free:
 out_power_down:
 	mmpcam_power_down(mcam);
 >>>>>>> v3.18
+=======
+out_power_down:
+	mmpcam_power_down(mcam);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -580,6 +672,7 @@ out_power_down:
 static int mmpcam_remove(struct mmp_camera *cam)
 {
 	struct mcam_camera *mcam = &cam->mcam;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mmp_camera_platform_data *pdata;
 
@@ -594,10 +687,15 @@ static int mmpcam_remove(struct mmp_camera *cam)
 	iounmap(mcam->regs);
 	kfree(cam);
 =======
+=======
+>>>>>>> v3.18
 
 	mmpcam_remove_device(cam);
 	mccic_shutdown(mcam);
 	mmpcam_power_down(mcam);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

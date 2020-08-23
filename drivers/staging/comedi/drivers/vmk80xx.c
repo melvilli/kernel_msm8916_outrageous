@@ -17,11 +17,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -163,8 +166,11 @@ static const struct vmk80xx_board vmk80xx_boardinfo[] = {
 
 struct vmk80xx_private {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_device *usb;
 	struct usb_interface *intf;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct usb_endpoint_descriptor *ep_rx;
@@ -177,14 +183,20 @@ struct vmk80xx_private {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vmk80xx_check_data_link(struct vmk80xx_private *devpriv)
 {
 	struct usb_device *usb = devpriv->usb;
 =======
+=======
+>>>>>>> v3.18
 static int vmk80xx_check_data_link(struct comedi_device *dev)
 {
 	struct vmk80xx_private *devpriv = dev->private;
 	struct usb_device *usb = comedi_to_usb_dev(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int tx_pipe;
 	unsigned int rx_pipe;
@@ -208,14 +220,20 @@ static int vmk80xx_check_data_link(struct comedi_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void vmk80xx_read_eeprom(struct vmk80xx_private *devpriv, int flag)
 {
 	struct usb_device *usb = devpriv->usb;
 =======
+=======
+>>>>>>> v3.18
 static void vmk80xx_read_eeprom(struct comedi_device *dev, int flag)
 {
 	struct vmk80xx_private *devpriv = dev->private;
 	struct usb_device *usb = comedi_to_usb_dev(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int tx_pipe;
 	unsigned int rx_pipe;
@@ -244,14 +262,20 @@ static void vmk80xx_read_eeprom(struct comedi_device *dev, int flag)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void vmk80xx_do_bulk_msg(struct vmk80xx_private *devpriv)
 {
 	struct usb_device *usb = devpriv->usb;
 =======
+=======
+>>>>>>> v3.18
 static void vmk80xx_do_bulk_msg(struct comedi_device *dev)
 {
 	struct vmk80xx_private *devpriv = dev->private;
 	struct usb_device *usb = comedi_to_usb_dev(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u8 tx_addr;
 	__u8 rx_addr;
@@ -276,6 +300,7 @@ static void vmk80xx_do_bulk_msg(struct comedi_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vmk80xx_read_packet(struct vmk80xx_private *devpriv)
 {
 	struct usb_device *usb;
@@ -292,6 +317,8 @@ static int vmk80xx_read_packet(struct vmk80xx_private *devpriv)
 
 	usb = devpriv->usb;
 =======
+=======
+>>>>>>> v3.18
 static int vmk80xx_read_packet(struct comedi_device *dev)
 {
 	struct vmk80xx_private *devpriv = dev->private;
@@ -304,6 +331,9 @@ static int vmk80xx_read_packet(struct comedi_device *dev)
 		return 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ep = devpriv->ep_rx;
 	pipe = usb_rcvintpipe(usb, ep->bEndpointAddress);
@@ -312,6 +342,7 @@ static int vmk80xx_read_packet(struct comedi_device *dev)
 				 HZ * 10);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int vmk80xx_write_packet(struct vmk80xx_private *devpriv, int cmd)
 {
@@ -331,6 +362,8 @@ static int vmk80xx_write_packet(struct vmk80xx_private *devpriv, int cmd)
 
 	usb = devpriv->usb;
 =======
+=======
+>>>>>>> v3.18
 static int vmk80xx_write_packet(struct comedi_device *dev, int cmd)
 {
 	struct vmk80xx_private *devpriv = dev->private;
@@ -345,6 +378,9 @@ static int vmk80xx_write_packet(struct comedi_device *dev, int cmd)
 		return 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ep = devpriv->ep_tx;
 	pipe = usb_sndintpipe(usb, ep->bEndpointAddress);
@@ -354,8 +390,14 @@ static int vmk80xx_write_packet(struct comedi_device *dev, int cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vmk80xx_reset_device(struct vmk80xx_private *devpriv)
 {
+=======
+static int vmk80xx_reset_device(struct comedi_device *dev)
+{
+	struct vmk80xx_private *devpriv = dev->private;
+>>>>>>> v3.18
 =======
 static int vmk80xx_reset_device(struct comedi_device *dev)
 {
@@ -367,17 +409,23 @@ static int vmk80xx_reset_device(struct comedi_device *dev)
 	size = le16_to_cpu(devpriv->ep_tx->wMaxPacketSize);
 	memset(devpriv->usb_tx_buf, 0, size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = vmk80xx_write_packet(devpriv, VMK8055_CMD_RST);
 	if (retval)
 		return retval;
 	/* set outputs to known state as we cannot read them */
 	return vmk80xx_write_packet(devpriv, VMK8055_CMD_WRT_AD);
 =======
+=======
+>>>>>>> v3.18
 	retval = vmk80xx_write_packet(dev, VMK8055_CMD_RST);
 	if (retval)
 		return retval;
 	/* set outputs to known state as we cannot read them */
 	return vmk80xx_write_packet(dev, VMK8055_CMD_WRT_AD);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -412,7 +460,11 @@ static int vmk80xx_ai_insn_read(struct comedi_device *dev,
 
 	for (n = 0; n < insn->n; n++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vmk80xx_read_packet(devpriv))
+=======
+		if (vmk80xx_read_packet(dev))
+>>>>>>> v3.18
 =======
 		if (vmk80xx_read_packet(dev))
 >>>>>>> v3.18
@@ -466,7 +518,11 @@ static int vmk80xx_ao_insn_write(struct comedi_device *dev,
 		devpriv->usb_tx_buf[reg] = data[n];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vmk80xx_write_packet(devpriv, cmd))
+=======
+		if (vmk80xx_write_packet(dev, cmd))
+>>>>>>> v3.18
 =======
 		if (vmk80xx_write_packet(dev, cmd))
 >>>>>>> v3.18
@@ -497,7 +553,11 @@ static int vmk80xx_ao_insn_read(struct comedi_device *dev,
 
 	for (n = 0; n < insn->n; n++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vmk80xx_read_packet(devpriv))
+=======
+		if (vmk80xx_read_packet(dev))
+>>>>>>> v3.18
 =======
 		if (vmk80xx_read_packet(dev))
 >>>>>>> v3.18
@@ -533,7 +593,11 @@ static int vmk80xx_di_insn_bits(struct comedi_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = vmk80xx_read_packet(devpriv);
+=======
+	retval = vmk80xx_read_packet(dev);
+>>>>>>> v3.18
 =======
 	retval = vmk80xx_read_packet(dev);
 >>>>>>> v3.18
@@ -561,14 +625,20 @@ static int vmk80xx_do_insn_bits(struct comedi_device *dev,
 {
 	struct vmk80xx_private *devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char *rx_buf, *tx_buf;
 	int reg, cmd;
 	int retval;
 =======
+=======
+>>>>>>> v3.18
 	unsigned char *rx_buf = devpriv->usb_rx_buf;
 	unsigned char *tx_buf = devpriv->usb_tx_buf;
 	int reg, cmd;
 	int ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (devpriv->model == VMK8061_MODEL) {
@@ -582,6 +652,7 @@ static int vmk80xx_do_insn_bits(struct comedi_device *dev,
 	down(&devpriv->limit_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rx_buf = devpriv->usb_rx_buf;
 	tx_buf = devpriv->usb_tx_buf;
 
@@ -593,16 +664,22 @@ static int vmk80xx_do_insn_bits(struct comedi_device *dev,
 
 		if (retval)
 =======
+=======
+>>>>>>> v3.18
 	if (comedi_dio_update_state(s, data)) {
 		tx_buf[reg] = s->state;
 		ret = vmk80xx_write_packet(dev, cmd);
 		if (ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto out;
 	}
 
 	if (devpriv->model == VMK8061_MODEL) {
 		tx_buf[0] = VMK8061_CMD_RD_DO;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		retval = vmk80xx_read_packet(devpriv);
@@ -615,12 +692,17 @@ static int vmk80xx_do_insn_bits(struct comedi_device *dev,
 		data[1] = tx_buf[reg];
 		retval = 2;
 =======
+=======
+>>>>>>> v3.18
 		ret = vmk80xx_read_packet(dev);
 		if (ret)
 			goto out;
 		data[1] = rx_buf[reg];
 	} else {
 		data[1] = s->state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -628,7 +710,11 @@ out:
 	up(&devpriv->limit_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return retval;
+=======
+	return ret ? ret : insn->n;
+>>>>>>> v3.18
 =======
 	return ret ? ret : insn->n;
 >>>>>>> v3.18
@@ -664,7 +750,11 @@ static int vmk80xx_cnt_insn_read(struct comedi_device *dev,
 
 	for (n = 0; n < insn->n; n++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vmk80xx_read_packet(devpriv))
+=======
+		if (vmk80xx_read_packet(dev))
+>>>>>>> v3.18
 =======
 		if (vmk80xx_read_packet(dev))
 >>>>>>> v3.18
@@ -718,7 +808,11 @@ static int vmk80xx_cnt_insn_config(struct comedi_device *dev,
 
 	for (n = 0; n < insn->n; n++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vmk80xx_write_packet(devpriv, cmd))
+=======
+		if (vmk80xx_write_packet(dev, cmd))
+>>>>>>> v3.18
 =======
 		if (vmk80xx_write_packet(dev, cmd))
 >>>>>>> v3.18
@@ -765,7 +859,11 @@ static int vmk80xx_cnt_insn_write(struct comedi_device *dev,
 		devpriv->usb_tx_buf[6 + chan] = val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vmk80xx_write_packet(devpriv, cmd))
+=======
+		if (vmk80xx_write_packet(dev, cmd))
+>>>>>>> v3.18
 =======
 		if (vmk80xx_write_packet(dev, cmd))
 >>>>>>> v3.18
@@ -800,7 +898,11 @@ static int vmk80xx_pwm_insn_read(struct comedi_device *dev,
 
 	for (n = 0; n < insn->n; n++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vmk80xx_read_packet(devpriv))
+=======
+		if (vmk80xx_read_packet(dev))
+>>>>>>> v3.18
 =======
 		if (vmk80xx_read_packet(dev))
 >>>>>>> v3.18
@@ -852,7 +954,11 @@ static int vmk80xx_pwm_insn_write(struct comedi_device *dev,
 		tx_buf[reg[1]] = (unsigned char)(data[n] >> 2) & 0xff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vmk80xx_write_packet(devpriv, cmd))
+=======
+		if (vmk80xx_write_packet(dev, cmd))
+>>>>>>> v3.18
 =======
 		if (vmk80xx_write_packet(dev, cmd))
 >>>>>>> v3.18
@@ -868,7 +974,11 @@ static int vmk80xx_find_usb_endpoints(struct comedi_device *dev)
 {
 	struct vmk80xx_private *devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_interface *intf = devpriv->intf;
+=======
+	struct usb_interface *intf = comedi_to_usb_interface(dev);
+>>>>>>> v3.18
 =======
 	struct usb_interface *intf = comedi_to_usb_interface(dev);
 >>>>>>> v3.18
@@ -926,7 +1036,11 @@ static int vmk80xx_alloc_usb_buffers(struct comedi_device *dev)
 static int vmk80xx_init_subdevices(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct vmk80xx_board *boardinfo = comedi_board(dev);
+=======
+	const struct vmk80xx_board *boardinfo = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct vmk80xx_board *boardinfo = dev->board_ptr;
 >>>>>>> v3.18
@@ -1029,6 +1143,7 @@ static int vmk80xx_auto_attach(struct comedi_device *dev,
 	dev->board_name = boardinfo->name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
@@ -1037,10 +1152,15 @@ static int vmk80xx_auto_attach(struct comedi_device *dev,
 	devpriv->usb = interface_to_usbdev(intf);
 	devpriv->intf = intf;
 =======
+=======
+>>>>>>> v3.18
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	devpriv->model = boardinfo->model;
 
@@ -1058,17 +1178,23 @@ static int vmk80xx_auto_attach(struct comedi_device *dev,
 
 	if (devpriv->model == VMK8061_MODEL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vmk80xx_read_eeprom(devpriv, IC3_VERSION);
 		dev_info(&intf->dev, "%s\n", devpriv->fw.ic3_vers);
 
 		if (vmk80xx_check_data_link(devpriv)) {
 			vmk80xx_read_eeprom(devpriv, IC6_VERSION);
 =======
+=======
+>>>>>>> v3.18
 		vmk80xx_read_eeprom(dev, IC3_VERSION);
 		dev_info(&intf->dev, "%s\n", devpriv->fw.ic3_vers);
 
 		if (vmk80xx_check_data_link(dev)) {
 			vmk80xx_read_eeprom(dev, IC6_VERSION);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev_info(&intf->dev, "%s\n", devpriv->fw.ic6_vers);
 		}
@@ -1076,7 +1202,11 @@ static int vmk80xx_auto_attach(struct comedi_device *dev,
 
 	if (devpriv->model == VMK8055_MODEL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vmk80xx_reset_device(devpriv);
+=======
+		vmk80xx_reset_device(dev);
+>>>>>>> v3.18
 =======
 		vmk80xx_reset_device(dev);
 >>>>>>> v3.18
@@ -1087,6 +1217,10 @@ static int vmk80xx_auto_attach(struct comedi_device *dev,
 static void vmk80xx_detach(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct usb_interface *intf = comedi_to_usb_interface(dev);
+>>>>>>> v3.18
 =======
 	struct usb_interface *intf = comedi_to_usb_interface(dev);
 >>>>>>> v3.18
@@ -1098,7 +1232,11 @@ static void vmk80xx_detach(struct comedi_device *dev)
 	down(&devpriv->limit_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_set_intfdata(devpriv->intf, NULL);
+=======
+	usb_set_intfdata(intf, NULL);
+>>>>>>> v3.18
 =======
 	usb_set_intfdata(intf, NULL);
 >>>>>>> v3.18
@@ -1151,7 +1289,10 @@ MODULE_AUTHOR("Manuel Gebele <forensixs@gmx.de>");
 MODULE_DESCRIPTION("Velleman USB Board Low-Level Driver");
 MODULE_SUPPORTED_DEVICE("K8055/K8061 aka VM110/VM140");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_VERSION("0.8.01");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");

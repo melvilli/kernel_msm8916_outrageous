@@ -15,6 +15,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_PCI
 #error "This file is PCI bus glue.  CONFIG_PCI must be defined."
 #endif
@@ -22,6 +23,8 @@
 #include <linux/pci.h>
 #include <linux/io.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -35,6 +38,9 @@
 #define DRIVER_DESC "OHCI PCI platform driver"
 
 static const char hcd_name[] = "ohci-pci";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -140,6 +146,7 @@ static void ohci_quirk_nec_worker(struct work_struct *work)
 	int status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = ohci_init(ohci);
 	if (status != 0) {
 		ohci_err(ohci, "Restarting NEC controller failed in %s, %d\n",
@@ -147,6 +154,8 @@ static void ohci_quirk_nec_worker(struct work_struct *work)
 		return;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	status = ohci_restart(ohci);
@@ -170,14 +179,18 @@ static int ohci_quirk_amd700(struct usb_hcd *hcd)
 {
 	struct ohci_hcd *ohci = hcd_to_ohci(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev *amd_smbus_dev;
 	u8 rev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (usb_amd_find_chipset_info())
 		ohci->flags |= OHCI_QUIRK_AMD_PLL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	amd_smbus_dev = pci_get_device(PCI_VENDOR_ID_ATI,
 			PCI_DEVICE_ID_ATI_SBX00_SMBUS, NULL);
@@ -192,20 +205,28 @@ static int ohci_quirk_amd700(struct usb_hcd *hcd)
 	/* SB800 needs pre-fetch fix */
 	if (usb_amd_prefetch_quirk()) {
 >>>>>>> v3.18
+=======
+	/* SB800 needs pre-fetch fix */
+	if (usb_amd_prefetch_quirk()) {
+>>>>>>> v3.18
 		ohci->flags |= OHCI_QUIRK_AMD_PREFETCH;
 		ohci_dbg(ohci, "enabled AMD prefetch quirk\n");
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pci_dev_put(amd_smbus_dev);
 	amd_smbus_dev = NULL;
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	ohci->flags |= OHCI_QUIRK_GLOBAL_SUSPEND;
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void sb800_prefetch(struct ohci_hcd *ohci, int on)
 {
@@ -220,6 +241,8 @@ static void sb800_prefetch(struct ohci_hcd *ohci, int on)
 		pci_write_config_word(pdev, 0x50, misc | 0x0300);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* List of quirks for OHCI */
@@ -284,15 +307,21 @@ static int ohci_pci_reset (struct usb_hcd *hcd)
 {
 	struct ohci_hcd	*ohci = hcd_to_ohci (hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (hcd->self.controller) {
 		struct pci_dev *pdev = to_pci_dev(hcd->self.controller);
 =======
+=======
+>>>>>>> v3.18
 	struct pci_dev *pdev = to_pci_dev(hcd->self.controller);
 	int ret = 0;
 
 	if (hcd->self.controller) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		const struct pci_device_id *quirk_id;
 
@@ -303,6 +332,7 @@ static int ohci_pci_reset (struct usb_hcd *hcd)
 			ret = quirk(hcd);
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ret == 0) {
 		ohci_hcd_init (ohci);
@@ -393,6 +423,8 @@ static const struct hc_driver ohci_pci_hc_driver = {
 
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (ret == 0)
 		ret = ohci_setup(hcd);
@@ -412,6 +444,9 @@ static const struct ohci_driver_overrides pci_overrides __initconst = {
 	.reset =		ohci_pci_reset,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct pci_device_id pci_ids [] = { {
 	/* handle any USB OHCI controller */
@@ -441,7 +476,10 @@ static struct pci_driver ohci_pci_driver = {
 #endif
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int __init ohci_pci_init(void)
 {
@@ -471,4 +509,7 @@ module_exit(ohci_pci_cleanup);
 MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL");
 MODULE_SOFTDEP("pre: ehci_pci");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

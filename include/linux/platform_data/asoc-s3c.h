@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* arch/arm/plat-samsung/include/plat/audio.h
  *
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -21,6 +25,7 @@
 extern void s3c64xx_ac97_setup_gpio(int);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * The machine init code calls s5p*_spdif_setup_gpio with
  * one of these defines in order to select appropriate bank
@@ -30,6 +35,8 @@ extern void s3c64xx_ac97_setup_gpio(int);
 #define S5PC100_SPDIF_GPG3 1
 extern void s5pc100_spdif_setup_gpio(int);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct samsung_i2s {
@@ -44,6 +51,10 @@ struct samsung_i2s {
 #define QUIRK_NO_MUXPSR		(1 << 2)
 #define QUIRK_NEED_RSTCLR	(1 << 3)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QUIRK_SUPPORTS_TDM	(1 << 4)
+>>>>>>> v3.18
 =======
 #define QUIRK_SUPPORTS_TDM	(1 << 4)
 >>>>>>> v3.18

@@ -139,11 +139,14 @@ bool
 nv_lockvgac(void *obj, bool lock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool locked = !nv_rdvgac(obj, 0, 0x1f);
 	u8 data = lock ? 0x99 : 0x57;
 	nv_wrvgac(obj, 0, 0x1f, data);
 	if (nv_device(obj)->chipset == 0x11) {
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_device *dev = nv_device(obj);
 
 	bool locked = !nv_rdvgac(obj, 0, 0x1f);
@@ -153,6 +156,9 @@ nv_lockvgac(void *obj, bool lock)
 	else
 		nv_wrvgac(obj, 0, 0x3f, data);
 	if (dev->chipset == 0x11) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!(nv_rd32(obj, 0x001084) & 0x10000000))
 			nv_wrvgac(obj, 1, 0x1f, data);

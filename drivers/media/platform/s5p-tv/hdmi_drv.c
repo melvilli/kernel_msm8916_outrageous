@@ -38,6 +38,10 @@
 #include <media/v4l2-dev.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/v4l2-dv-timings.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-dv-timings.h>
 >>>>>>> v3.18
@@ -581,11 +585,14 @@ static int hdmi_s_stream(struct v4l2_subdev *sd, int enable)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void hdmi_resource_poweron(struct hdmi_resources *res)
 {
 	/* turn HDMI power on */
 	regulator_bulk_enable(res->regul_count, res->regul_bulk);
 =======
+=======
+>>>>>>> v3.18
 static int hdmi_resource_poweron(struct hdmi_resources *res)
 {
 	int ret;
@@ -594,6 +601,9 @@ static int hdmi_resource_poweron(struct hdmi_resources *res)
 	ret = regulator_bulk_enable(res->regul_count, res->regul_bulk);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* power-on hdmi physical interface */
 	clk_enable(res->hdmiphy);
@@ -602,6 +612,11 @@ static int hdmi_resource_poweron(struct hdmi_resources *res)
 	/* turn clocks on */
 	clk_enable(res->sclk_hdmi);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -629,7 +644,11 @@ static int hdmi_s_power(struct v4l2_subdev *sd, int on)
 		ret = pm_runtime_put_sync(hdev->dev);
 	/* only values < 0 indicate errors */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return IS_ERR_VALUE(ret) ? ret : 0;
+=======
+	return ret < 0 ? ret : 0;
+>>>>>>> v3.18
 =======
 	return ret < 0 ? ret : 0;
 >>>>>>> v3.18
@@ -644,7 +663,11 @@ static int hdmi_s_dv_timings(struct v4l2_subdev *sd,
 
 	for (i = 0; i < ARRAY_SIZE(hdmi_timings); i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (v4l_match_dv_timings(&hdmi_timings[i].dv_timings,
+=======
+		if (v4l2_match_dv_timings(&hdmi_timings[i].dv_timings,
+>>>>>>> v3.18
 =======
 		if (v4l2_match_dv_timings(&hdmi_timings[i].dv_timings,
 >>>>>>> v3.18
@@ -696,6 +719,11 @@ static int hdmi_enum_dv_timings(struct v4l2_subdev *sd,
 	struct v4l2_enum_dv_timings *timings)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (timings->pad != 0)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (timings->pad != 0)
 		return -EINVAL;
@@ -714,14 +742,20 @@ static int hdmi_dv_timings_cap(struct v4l2_subdev *sd,
 	struct hdmi_device *hdev = sd_to_hdmi_dev(sd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Let the phy fill in the pixelclock range */
 	v4l2_subdev_call(hdev->phy_sd, video, dv_timings_cap, cap);
 =======
+=======
+>>>>>>> v3.18
 	if (cap->pad != 0)
 		return -EINVAL;
 
 	/* Let the phy fill in the pixelclock range */
 	v4l2_subdev_call(hdev->phy_sd, pad, dv_timings_cap, cap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cap->type = V4L2_DV_BT_656_1120;
 	cap->bt.min_width = 720;
@@ -742,8 +776,11 @@ static const struct v4l2_subdev_video_ops hdmi_sd_video_ops = {
 	.s_dv_timings = hdmi_s_dv_timings,
 	.g_dv_timings = hdmi_g_dv_timings,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enum_dv_timings = hdmi_enum_dv_timings,
 	.dv_timings_cap = hdmi_dv_timings_cap,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.g_mbus_fmt = hdmi_g_mbus_fmt,
@@ -751,12 +788,18 @@ static const struct v4l2_subdev_video_ops hdmi_sd_video_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct v4l2_subdev_pad_ops hdmi_sd_pad_ops = {
 	.enum_dv_timings = hdmi_enum_dv_timings,
 	.dv_timings_cap = hdmi_dv_timings_cap,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct v4l2_subdev_ops hdmi_sd_ops = {
 	.core = &hdmi_sd_core_ops,
@@ -781,12 +824,15 @@ static int hdmi_runtime_resume(struct device *dev)
 	struct v4l2_subdev *sd = dev_get_drvdata(dev);
 	struct hdmi_device *hdev = sd_to_hdmi_dev(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 	dev_dbg(dev, "%s\n", __func__);
 
 	hdmi_resource_poweron(&hdev->res);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	dev_dbg(dev, "%s\n", __func__);
@@ -794,6 +840,9 @@ static int hdmi_runtime_resume(struct device *dev)
 	ret = hdmi_resource_poweron(&hdev->res);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* starting MHL */
@@ -818,7 +867,10 @@ static const struct dev_pm_ops hdmi_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void hdmi_resource_clear_clocks(struct hdmi_resources *res)
 {
 	res->hdmi	 = ERR_PTR(-EINVAL);
@@ -828,6 +880,9 @@ static void hdmi_resource_clear_clocks(struct hdmi_resources *res)
 	res->hdmiphy	 = ERR_PTR(-EINVAL);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void hdmi_resources_cleanup(struct hdmi_device *hdev)
 {
@@ -839,6 +894,7 @@ static void hdmi_resources_cleanup(struct hdmi_device *hdev)
 		regulator_bulk_free(res->regul_count, res->regul_bulk);
 	/* kfree is NULL-safe */
 	kfree(res->regul_bulk);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!IS_ERR_OR_NULL(res->hdmiphy))
 		clk_put(res->hdmiphy);
@@ -852,6 +908,8 @@ static void hdmi_resources_cleanup(struct hdmi_device *hdev)
 		clk_put(res->hdmi);
 	memset(res, 0, sizeof(*res));
 =======
+=======
+>>>>>>> v3.18
 	if (!IS_ERR(res->hdmiphy))
 		clk_put(res->hdmiphy);
 	if (!IS_ERR(res->sclk_hdmiphy))
@@ -864,6 +922,9 @@ static void hdmi_resources_cleanup(struct hdmi_device *hdev)
 		clk_put(res->hdmi);
 	memset(res, 0, sizeof(*res));
 	hdmi_resource_clear_clocks(res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -883,8 +944,14 @@ static int hdmi_resources_init(struct hdmi_device *hdev)
 
 	memset(res, 0, sizeof(*res));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* get clocks, power */
 
+=======
+	hdmi_resource_clear_clocks(res);
+
+	/* get clocks, power */
+>>>>>>> v3.18
 =======
 	hdmi_resource_clear_clocks(res);
 

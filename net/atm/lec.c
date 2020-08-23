@@ -153,7 +153,11 @@ static void lec_handle_bridge(struct sk_buff *skb, struct net_device *dev)
 		sk = sk_atm(priv->lecd);
 		skb_queue_tail(&sk->sk_receive_queue, skb2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb2->len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -415,15 +419,21 @@ static int lec_atm_send(struct atm_vcc *vcc, struct sk_buff *skb)
 		if (priv->lane_version > 1)
 			priv->lane2_ops = &lane2_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dev_set_mtu(dev, mesg->content.config.mtu))
 			pr_info("%s: change_mtu to %d failed\n",
 				dev->name, mesg->content.config.mtu);
 =======
+=======
+>>>>>>> v3.18
 		rtnl_lock();
 		if (dev_set_mtu(dev, mesg->content.config.mtu))
 			pr_info("%s: change_mtu to %d failed\n",
 				dev->name, mesg->content.config.mtu);
 		rtnl_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		priv->is_proxy = mesg->content.config.is_proxy;
 		break;
@@ -460,7 +470,11 @@ static int lec_atm_send(struct atm_vcc *vcc, struct sk_buff *skb)
 			sk = sk_atm(priv->lecd);
 			skb_queue_tail(&sk->sk_receive_queue, skb2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sk->sk_data_ready(sk, skb2->len);
+=======
+			sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 			sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -538,7 +552,11 @@ send_to_lecd(struct lec_priv *priv, atmlec_msg_type type,
 		mesg->sizeoftlvs = data->len;
 	if (mac_addr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(&mesg->content.normal.mac_addr, mac_addr, ETH_ALEN);
+=======
+		ether_addr_copy(mesg->content.normal.mac_addr, mac_addr);
+>>>>>>> v3.18
 =======
 		ether_addr_copy(mesg->content.normal.mac_addr, mac_addr);
 >>>>>>> v3.18
@@ -551,7 +569,11 @@ send_to_lecd(struct lec_priv *priv, atmlec_msg_type type,
 	sk = sk_atm(priv->lecd);
 	skb_queue_tail(&sk->sk_receive_queue, skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk->sk_data_ready(sk, skb->len);
+=======
+	sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 	sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -561,7 +583,11 @@ send_to_lecd(struct lec_priv *priv, atmlec_msg_type type,
 		atm_force_charge(priv->lecd, data->truesize);
 		skb_queue_tail(&sk->sk_receive_queue, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb->len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -645,7 +671,11 @@ static void lec_push(struct atm_vcc *vcc, struct sk_buff *skb)
 		pr_debug("%s: To daemon\n", dev->name);
 		skb_queue_tail(&sk->sk_receive_queue, skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb->len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -866,7 +896,10 @@ static void *lec_tbl_walk(struct lec_state *state, struct hlist_head *tbl,
 {
 	struct hlist_node *e = state->node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lec_arp_table *tmp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -878,9 +911,13 @@ static void *lec_tbl_walk(struct lec_state *state, struct hlist_head *tbl,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = container_of(e, struct lec_arp_table, next);
 
 	hlist_for_each_entry_from(tmp, next) {
+=======
+	for (; e; e = e->next) {
+>>>>>>> v3.18
 =======
 	for (; e; e = e->next) {
 >>>>>>> v3.18
@@ -1605,7 +1642,11 @@ static struct lec_arp_table *make_entry(struct lec_priv *priv,
 		return NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(to_return->mac_addr, mac_addr, ETH_ALEN);
+=======
+	ether_addr_copy(to_return->mac_addr, mac_addr);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(to_return->mac_addr, mac_addr);
 >>>>>>> v3.18
@@ -1931,7 +1972,12 @@ lec_arp_update(struct lec_priv *priv, const unsigned char *mac_addr,
 				} else {
 					entry->status = ESI_FORWARD_DIRECT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					memcpy(entry->mac_addr, mac_addr, ETH_ALEN);
+=======
+					ether_addr_copy(entry->mac_addr,
+							mac_addr);
+>>>>>>> v3.18
 =======
 					ether_addr_copy(entry->mac_addr,
 							mac_addr);
@@ -2312,7 +2358,11 @@ lec_arp_check_empties(struct lec_priv *priv,
 		if (vcc == entry->vcc) {
 			del_timer(&entry->timer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(entry->mac_addr, src, ETH_ALEN);
+=======
+			ether_addr_copy(entry->mac_addr, src);
+>>>>>>> v3.18
 =======
 			ether_addr_copy(entry->mac_addr, src);
 >>>>>>> v3.18

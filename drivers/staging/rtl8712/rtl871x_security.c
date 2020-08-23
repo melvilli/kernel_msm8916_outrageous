@@ -32,7 +32,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -257,7 +260,10 @@ void r8712_wep_decrypt(struct _adapter  *padapter, u8 *precvframe)
 		*((u32 *)crc) = cpu_to_le32(getcrc32(payload, length - 4));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -280,6 +286,10 @@ static void secmicputuint32(u8 *p, u32 val)
 {
 	long i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -777,6 +787,10 @@ static void xor_32(u8 *a, u8 *b, u8 *out)
 {
 	sint i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -814,6 +828,10 @@ static void byte_sub(u8 *in, u8 *out)
 {
 	sint i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -854,7 +872,11 @@ static void mix_column(u8 *in, u8 *out)
 	u8 tempb[4];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0 ; i < 4; i++) {
+=======
+	for (i = 0; i < 4; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < 4; i++) {
 >>>>>>> v3.18
@@ -1188,7 +1210,11 @@ u32 r8712_aes_encrypt(struct _adapter *padapter, u8 *pxmitframe)
 	pframe = ((struct xmit_frame *)pxmitframe)->buf_addr + TXDESC_OFFSET;
 	/* 4 start to encrypt each fragment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((pattrib->encrypt == _AES_)) {
+=======
+	if (pattrib->encrypt == _AES_) {
+>>>>>>> v3.18
 =======
 	if (pattrib->encrypt == _AES_) {
 >>>>>>> v3.18
@@ -1203,7 +1229,11 @@ u32 r8712_aes_encrypt(struct _adapter *padapter, u8 *pxmitframe)
 			for (curfragnum = 0; curfragnum < pattrib->nr_frags;
 			     curfragnum++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if ((curfragnum + 1) == pattrib->nr_frags) {\
+=======
+				if ((curfragnum + 1) == pattrib->nr_frags) {
+>>>>>>> v3.18
 =======
 				if ((curfragnum + 1) == pattrib->nr_frags) {
 >>>>>>> v3.18
@@ -1218,7 +1248,11 @@ u32 r8712_aes_encrypt(struct _adapter *padapter, u8 *pxmitframe)
 						 pattrib->hdrlen -
 						 pattrib->iv_len -
 <<<<<<< HEAD
+<<<<<<< HEAD
 						 pattrib->icv_len ;
+=======
+						 pattrib->icv_len;
+>>>>>>> v3.18
 =======
 						 pattrib->icv_len;
 >>>>>>> v3.18
@@ -1280,6 +1314,7 @@ static sint aes_decipher(u8 *key, uint	hdrlen,
 	    (frtype == WIFI_DATA_CFACKPOLL)) {
 		qc_exists = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (hdrlen !=  WLAN_HDR_A3_QOS_LEN)
 			hdrlen += 2;
 		}  else if ((frsubtype == 0x08) ||
@@ -1292,6 +1327,8 @@ static sint aes_decipher(u8 *key, uint	hdrlen,
 	} else
 		qc_exists = 0;
 =======
+=======
+>>>>>>> v3.18
 		if (hdrlen != WLAN_HDR_A3_QOS_LEN)
 			hdrlen += 2;
 	} else if ((frsubtype == 0x08) ||
@@ -1304,6 +1341,9 @@ static sint aes_decipher(u8 *key, uint	hdrlen,
 	} else {
 		qc_exists = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* now, decrypt pframe with hdrlen offset and plen long */
 	payload_index = hdrlen + 8; /* 8 is for extiv */
@@ -1365,7 +1405,11 @@ static sint aes_decipher(u8 *key, uint	hdrlen,
 		aes128k128d(key, chain_buffer, aes_out);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (j = 0 ; j < 8; j++)
+=======
+	for (j = 0; j < 8; j++)
+>>>>>>> v3.18
 =======
 	for (j = 0; j < 8; j++)
 >>>>>>> v3.18
@@ -1425,7 +1469,11 @@ u32 r8712_aes_decrypt(struct _adapter *padapter, u8 *precvframe)
 		 u.hdr.rx_data;
 	/* 4 start to encrypt each fragment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((prxattrib->encrypt == _AES_)) {
+=======
+	if (prxattrib->encrypt == _AES_) {
+>>>>>>> v3.18
 =======
 	if (prxattrib->encrypt == _AES_) {
 >>>>>>> v3.18

@@ -25,7 +25,11 @@
 struct device;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __iowrite32_copy(void __iomem *to, const void *from, size_t count);
+=======
+__visible void __iowrite32_copy(void __iomem *to, const void *from, size_t count);
+>>>>>>> v3.18
 =======
 __visible void __iowrite32_copy(void __iomem *to, const void *from, size_t count);
 >>>>>>> v3.18
@@ -63,6 +67,11 @@ static inline void devm_ioport_unmap(struct device *dev, void __iomem *addr)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IOMEM_ERR_PTR(err) (__force void __iomem *)ERR_PTR(err)
+
+>>>>>>> v3.18
 =======
 #define IOMEM_ERR_PTR(err) (__force void __iomem *)ERR_PTR(err)
 
@@ -86,7 +95,10 @@ void devm_ioremap_release(struct device *dev, void *res);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Some systems (x86 without PAT) have a somewhat reliable way to mark a
  * physical address range such that uncached mappings will actually
@@ -112,5 +124,8 @@ static inline void arch_phys_wc_del(int handle)
 #define arch_phys_wc_add arch_phys_wc_add
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_IO_H */

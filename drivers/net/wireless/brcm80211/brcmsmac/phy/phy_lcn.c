@@ -1138,8 +1138,14 @@ wlc_lcnphy_set_rx_gain_by_distribution(struct brcms_phy *pi,
 		   ((tia & 0xf) << 8) |
 		   ((lna2 & 0x3) << 6) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   ((lna2 &
 		     0x3) << 4) | ((lna1 & 0x3) << 2) | ((lna1 & 0x3) << 0);
+=======
+		   ((lna2 & 0x3) << 4) |
+		   ((lna1 & 0x3) << 2) |
+		   ((lna1 & 0x3) << 0);
+>>>>>>> v3.18
 =======
 		   ((lna2 & 0x3) << 4) |
 		   ((lna1 & 0x3) << 2) |
@@ -1335,7 +1341,10 @@ static u32 wlc_lcnphy_measure_digital_power(struct brcms_phy *pi, u16 nsamples)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool wlc_lcnphy_rx_iq_cal_gain(struct brcms_phy *pi, u16 biq1_gain,
 				      u16 tia_gain, u16 lna2_gain)
 {
@@ -1373,6 +1382,9 @@ static bool wlc_lcnphy_rx_iq_cal_gain(struct brcms_phy *pi, u16 biq1_gain,
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool
 wlc_lcnphy_rx_iq_cal(struct brcms_phy *pi,
@@ -1389,8 +1401,13 @@ wlc_lcnphy_rx_iq_cal(struct brcms_phy *pi,
 	    rfoverride3_old, rfoverride3val_old, rfoverride4_old,
 	    rfoverride4val_old, afectrlovr_old, afectrlovrval_old;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int tia_gain;
 	u32 received_power, rx_pwr_threshold;
+=======
+	int tia_gain, lna2_gain, biq1_gain;
+	bool set_gain;
+>>>>>>> v3.18
 =======
 	int tia_gain, lna2_gain, biq1_gain;
 	bool set_gain;
@@ -1419,6 +1436,7 @@ wlc_lcnphy_rx_iq_cal(struct brcms_phy *pi,
 		goto cal_done;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (module == 1) {
 
@@ -1541,6 +1559,8 @@ wlc_lcnphy_rx_iq_cal(struct brcms_phy *pi,
 		wlc_lcnphy_rx_gain_override_enable(pi, false);
 	}
 =======
+=======
+>>>>>>> v3.18
 	WARN_ON(module != 1);
 	tx_pwr_ctrl = wlc_lcnphy_get_tx_pwr_ctrl(pi);
 	wlc_lcnphy_set_tx_pwr_ctrl(pi, LCNPHY_TX_PWR_CTRL_OFF);
@@ -1660,6 +1680,9 @@ stop_tone:
 
 	wlc_lcnphy_set_tx_pwr_ctrl(pi, tx_pwr_ctrl);
 	wlc_lcnphy_rx_gain_override_enable(pi, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 cal_done:
@@ -1963,7 +1986,10 @@ wlc_lcnphy_radio_2064_channel_tune_4313(struct brcms_phy *pi, u8 channel)
 		write_radio_reg(pi, RADIO_2064_REG091, 7);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (!(pi->sh->boardflags & BFL_FEM)) {
 		static const u8 reg038[14] = {
@@ -1977,6 +2003,9 @@ wlc_lcnphy_radio_2064_channel_tune_4313(struct brcms_phy *pi, u8 channel)
 
 		write_radio_reg(pi, RADIO_2064_REG038, reg038[channel - 1]);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2173,7 +2202,10 @@ wlc_lcnphy_set_tssi_mux(struct brcms_phy *pi, enum lcnphy_tssi_mode pos)
 			mod_radio_reg(pi, RADIO_2064_REG03A, 1, 0x1);
 			mod_radio_reg(pi, RADIO_2064_REG11A, 0x8, 0x8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			mod_radio_reg(pi, RADIO_2064_REG028, 0x1, 0x0);
 			mod_radio_reg(pi, RADIO_2064_REG11A, 0x4, 1<<2);
 			mod_radio_reg(pi, RADIO_2064_REG036, 0x10, 0x0);
@@ -2184,6 +2216,9 @@ wlc_lcnphy_set_tssi_mux(struct brcms_phy *pi, enum lcnphy_tssi_mode pos)
 			mod_radio_reg(pi, RADIO_2064_REG112, 0x80, 1<<7);
 			mod_radio_reg(pi, RADIO_2064_REG005, 0x7, 1<<1);
 			mod_radio_reg(pi, RADIO_2064_REG029, 0xf0, 0<<4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else {
@@ -2272,6 +2307,10 @@ static void wlc_lcnphy_pwrctrl_rssiparams(struct brcms_phy *pi)
 
 	mod_radio_reg(pi, RADIO_2064_REG082, (1 << 5), (1 << 5));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mod_radio_reg(pi, RADIO_2064_REG07C, (1 << 0), (1 << 0));
+>>>>>>> v3.18
 =======
 	mod_radio_reg(pi, RADIO_2064_REG07C, (1 << 0), (1 << 0));
 >>>>>>> v3.18
@@ -2282,8 +2321,11 @@ static void wlc_lcnphy_tssi_setup(struct brcms_phy *pi)
 	struct phytbl_info tab;
 	u32 rfseq, ind;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	enum lcnphy_tssi_mode mode;
 	u8 tssi_sel;
 
@@ -2294,6 +2336,9 @@ static void wlc_lcnphy_tssi_setup(struct brcms_phy *pi)
 		tssi_sel = 0xe;
 		mode = LCNPHY_TSSI_POST_PA;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tab.tbl_id = LCNPHY_TBL_ID_TXPWRCTL;
 	tab.tbl_width = 32;
@@ -2316,7 +2361,11 @@ static void wlc_lcnphy_tssi_setup(struct brcms_phy *pi)
 	mod_phy_reg(pi, 0x503, (0x1 << 4), (1) << 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wlc_lcnphy_set_tssi_mux(pi, LCNPHY_TSSI_EXT);
+=======
+	wlc_lcnphy_set_tssi_mux(pi, mode);
+>>>>>>> v3.18
 =======
 	wlc_lcnphy_set_tssi_mux(pi, mode);
 >>>>>>> v3.18
@@ -2356,14 +2405,20 @@ static void wlc_lcnphy_tssi_setup(struct brcms_phy *pi)
 
 	if (LCNREV_IS(pi->pubpi.phy_rev, 2)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mod_radio_reg(pi, RADIO_2064_REG028, 0xf, 0xe);
 		mod_radio_reg(pi, RADIO_2064_REG086, 0x4, 0x4);
 	} else {
 =======
+=======
+>>>>>>> v3.18
 		mod_radio_reg(pi, RADIO_2064_REG028, 0xf, tssi_sel);
 		mod_radio_reg(pi, RADIO_2064_REG086, 0x4, 0x4);
 	} else {
 		mod_radio_reg(pi, RADIO_2064_REG028, 0x1e, tssi_sel << 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mod_radio_reg(pi, RADIO_2064_REG03A, 0x1, 1);
 		mod_radio_reg(pi, RADIO_2064_REG11A, 0x8, 1 << 3);
@@ -2412,11 +2467,17 @@ static void wlc_lcnphy_tssi_setup(struct brcms_phy *pi)
 	mod_phy_reg(pi, 0x4d7, (0xf << 8), (0) << 8);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	mod_radio_reg(pi, RADIO_2064_REG035, 0xff, 0x0);
 	mod_radio_reg(pi, RADIO_2064_REG036, 0x3, 0x0);
 	mod_radio_reg(pi, RADIO_2064_REG11A, 0x8, 0x8);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wlc_lcnphy_pwrctrl_rssiparams(pi);
 }
@@ -3028,7 +3089,11 @@ static void wlc_lcnphy_idle_tssi_est(struct brcms_phy_pub *ppi)
 	bool suspend, tx_gain_override_old;
 	struct lcnphy_txgains old_gains;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -3041,6 +3106,11 @@ static void wlc_lcnphy_idle_tssi_est(struct brcms_phy_pub *ppi)
 	u16 SAVE_jtag_auxpga = read_radio_reg(pi, RADIO_2064_REG0FF) & 0x10;
 	u16 SAVE_iqadc_aux_en = read_radio_reg(pi, RADIO_2064_REG11F) & 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 SAVE_bbmult = wlc_lcnphy_get_bbmult(pi);
+
+>>>>>>> v3.18
 =======
 	u8 SAVE_bbmult = wlc_lcnphy_get_bbmult(pi);
 
@@ -3063,13 +3133,19 @@ static void wlc_lcnphy_idle_tssi_est(struct brcms_phy_pub *ppi)
 	mod_radio_reg(pi, RADIO_2064_REG11F, 0x4, 1 << 2);
 	wlc_lcnphy_tssi_setup(pi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	mod_phy_reg(pi, 0x4d7, (0x1 << 0), (1 << 0));
 	mod_phy_reg(pi, 0x4d7, (0x1 << 6), (1 << 6));
 
 	wlc_lcnphy_set_bbmult(pi, 0x0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wlc_phy_do_dummy_tx(pi, true, OFF);
 	idleTssi = ((read_phy_reg(pi, 0x4ab) & (0x1ff << 0))
@@ -3093,6 +3169,10 @@ static void wlc_lcnphy_idle_tssi_est(struct brcms_phy_pub *ppi)
 	mod_phy_reg(pi, 0x44c, (0x1 << 12), (0) << 12);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wlc_lcnphy_set_bbmult(pi, SAVE_bbmult);
+>>>>>>> v3.18
 =======
 	wlc_lcnphy_set_bbmult(pi, SAVE_bbmult);
 >>>>>>> v3.18
@@ -3260,7 +3340,11 @@ static void wlc_lcnphy_tx_pwr_ctrl_init(struct brcms_phy_pub *ppi)
 	s32 tssi, pwr, maxtargetpwr, mintargetpwr;
 	bool suspend;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -3314,12 +3398,18 @@ static void wlc_lcnphy_tx_pwr_ctrl_init(struct brcms_phy_pub *ppi)
 			tab.tbl_offset++;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		mod_phy_reg(pi, 0x4d0, (0x1 << 0), (0) << 0);
 		mod_phy_reg(pi, 0x4d3, (0xff << 0), (0) << 0);
 		mod_phy_reg(pi, 0x4d3, (0xff << 8), (0) << 8);
 		mod_phy_reg(pi, 0x4d0, (0x1 << 4), (0) << 4);
 		mod_phy_reg(pi, 0x4d0, (0x1 << 2), (0) << 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		mod_phy_reg(pi, 0x410, (0x1 << 7), (0) << 7);
@@ -4123,7 +4213,10 @@ static void wlc_lcnphy_txpwrtbl_iqlo_cal(struct brcms_phy *pi)
 	target_gains.dac_gain = 0;
 	wlc_lcnphy_set_tx_gain(pi, &target_gains);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wlc_lcnphy_set_tx_pwr_by_index(pi, 16);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -4137,6 +4230,10 @@ static void wlc_lcnphy_txpwrtbl_iqlo_cal(struct brcms_phy *pi)
 					LCNPHY_CAL_FULL), false);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		wlc_lcnphy_set_tx_pwr_by_index(pi, 16);
+>>>>>>> v3.18
 =======
 		wlc_lcnphy_set_tx_pwr_by_index(pi, 16);
 >>>>>>> v3.18
@@ -4538,7 +4635,11 @@ void wlc_lcnphy_tx_power_adjustment(struct brcms_phy_pub *ppi)
 	s8 index;
 	u16 index2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct brcms_phy *pi = (struct brcms_phy *) ppi;
+=======
+	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
+>>>>>>> v3.18
 =======
 	struct brcms_phy *pi = container_of(ppi, struct brcms_phy, pubpi_ro);
 >>>>>>> v3.18
@@ -4566,6 +4667,7 @@ wlc_lcnphy_load_tx_gain_table(struct brcms_phy *pi,
 	u16 gm_gain;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (CHSPEC_IS5G(pi->radio_chanspec))
 		pa_gain = 0x70;
 	else
@@ -4574,10 +4676,15 @@ wlc_lcnphy_load_tx_gain_table(struct brcms_phy *pi,
 	if (pi->sh->boardflags & BFL_FEM)
 		pa_gain = 0x10;
 =======
+=======
+>>>>>>> v3.18
 	if (pi->sh->boardflags & BFL_FEM)
 		pa_gain = 0x10;
 	else
 		pa_gain = 0x60;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tab.tbl_id = LCNPHY_TBL_ID_TXPWRCTL;
 	tab.tbl_width = 32;
@@ -4585,14 +4692,20 @@ wlc_lcnphy_load_tx_gain_table(struct brcms_phy *pi,
 	tab.tbl_ptr = &val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (j = 0; j < 128; j++) {
 		gm_gain = gain_table[j].gm;
 =======
+=======
+>>>>>>> v3.18
 	/* fixed gm_gain value for iPA */
 	gm_gain = 15;
 	for (j = 0; j < 128; j++) {
 		if (pi->sh->boardflags & BFL_FEM)
 			gm_gain = gain_table[j].gm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val = (((u32) pa_gain << 24) |
 		       (gain_table[j].pad << 16) |
@@ -4805,12 +4918,18 @@ static void wlc_radio_2064_init(struct brcms_phy *pi)
 	write_phy_reg(pi, 0x4ea, 0x4688);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mod_phy_reg(pi, 0x4eb, (0x7 << 0), 2 << 0);
 =======
+=======
+>>>>>>> v3.18
 	if (pi->sh->boardflags & BFL_FEM)
 		mod_phy_reg(pi, 0x4eb, (0x7 << 0), 2 << 0);
 	else
 		mod_phy_reg(pi, 0x4eb, (0x7 << 0), 3 << 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mod_phy_reg(pi, 0x4eb, (0x7 << 6), 0 << 6);
@@ -4823,7 +4942,10 @@ static void wlc_radio_2064_init(struct brcms_phy *pi)
 
 	wlc_lcnphy_rc_cal(pi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (!(pi->sh->boardflags & BFL_FEM)) {
 		write_radio_reg(pi, RADIO_2064_REG032, 0x6f);
@@ -4831,6 +4953,9 @@ static void wlc_radio_2064_init(struct brcms_phy *pi)
 		write_radio_reg(pi, RADIO_2064_REG039, 0xe);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4845,6 +4970,10 @@ static void wlc_lcnphy_tbl_init(struct brcms_phy *pi)
 	u8 phybw40;
 	struct phytbl_info tab;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct phytbl_info *tb;
+>>>>>>> v3.18
 =======
 	const struct phytbl_info *tb;
 >>>>>>> v3.18
@@ -4866,6 +4995,7 @@ static void wlc_lcnphy_tbl_init(struct brcms_phy *pi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tab.tbl_id = LCNPHY_TBL_ID_RFSEQ;
 	tab.tbl_width = 16;
 	tab.tbl_ptr = &val;
@@ -4883,6 +5013,8 @@ static void wlc_lcnphy_tbl_init(struct brcms_phy *pi)
 	tab.tbl_offset = 8;
 	wlc_lcnphy_write_table(pi, &tab);
 =======
+=======
+>>>>>>> v3.18
 	if (!(pi->sh->boardflags & BFL_FEM)) {
 		tab.tbl_id = LCNPHY_TBL_ID_RFSEQ;
 		tab.tbl_width = 16;
@@ -4897,6 +5029,9 @@ static void wlc_lcnphy_tbl_init(struct brcms_phy *pi)
 		tab.tbl_offset = 1;
 		wlc_lcnphy_write_table(pi, &tab);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (CHSPEC_IS2G(pi->radio_chanspec)) {
@@ -4912,7 +5047,10 @@ static void wlc_lcnphy_tbl_init(struct brcms_phy *pi)
 
 	if (LCNREV_IS(pi->pubpi.phy_rev, 2)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const struct phytbl_info *tb;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		int l;
@@ -4936,6 +5074,7 @@ static void wlc_lcnphy_tbl_init(struct brcms_phy *pi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((pi->sh->boardflags & BFL_FEM)
 	    && !(pi->sh->boardflags & BFL_FEM_BT))
 		wlc_lcnphy_write_table(pi, &dot11lcn_sw_ctrl_tbl_info_4313_epa);
@@ -4952,6 +5091,8 @@ static void wlc_lcnphy_tbl_init(struct brcms_phy *pi)
 		wlc_lcnphy_write_table(pi, &dot11lcn_sw_ctrl_tbl_info_4313);
 
 =======
+=======
+>>>>>>> v3.18
 	if (pi->sh->boardflags & BFL_FEM) {
 		if (pi->sh->boardflags & BFL_FEM_BT) {
 			if (pi->sh->boardrev < 0x1250)
@@ -4968,6 +5109,9 @@ static void wlc_lcnphy_tbl_init(struct brcms_phy *pi)
 			tb = &dot11lcn_sw_ctrl_tbl_info_4313;
 	}
 	wlc_lcnphy_write_table(pi, tb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wlc_lcnphy_load_rfpower(pi);
 
@@ -5313,6 +5457,11 @@ void wlc_phy_chanspec_set_lcnphy(struct brcms_phy *pi, u16 chanspec)
 
 	mod_phy_reg(pi, 0x4eb, (0x7 << 3), (1) << 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (wlc_lcnphy_tssi_based_pwr_ctrl_enabled(pi))
+		wlc_lcnphy_tssi_setup(pi);
+>>>>>>> v3.18
 =======
 	if (wlc_lcnphy_tssi_based_pwr_ctrl_enabled(pi))
 		wlc_lcnphy_tssi_setup(pi);
@@ -5356,8 +5505,12 @@ bool wlc_phy_attach_lcnphy(struct brcms_phy *pi)
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((pi->sh->boardflags & BFL_FEM) &&
 	    (LCNREV_IS(pi->pubpi.phy_rev, 1))) {
+=======
+	if (LCNREV_IS(pi->pubpi.phy_rev, 1)) {
+>>>>>>> v3.18
 =======
 	if (LCNREV_IS(pi->pubpi.phy_rev, 1)) {
 >>>>>>> v3.18

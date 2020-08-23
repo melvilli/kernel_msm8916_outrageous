@@ -61,7 +61,11 @@
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define via_flush_write_combine() DRM_MEMORYBARRIER()
+=======
+#define via_flush_write_combine() mb()
+>>>>>>> v3.18
 =======
 #define via_flush_write_combine() mb()
 >>>>>>> v3.18
@@ -166,7 +170,11 @@ int via_dma_cleanup(struct drm_device *dev)
 			via_cmdbuf_reset(dev_priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			drm_core_ioremapfree(&dev_priv->ring.map, dev);
+=======
+			drm_legacy_ioremapfree(&dev_priv->ring.map, dev);
+>>>>>>> v3.18
 =======
 			drm_legacy_ioremapfree(&dev_priv->ring.map, dev);
 >>>>>>> v3.18
@@ -209,7 +217,11 @@ static int via_initialize(struct drm_device *dev,
 	dev_priv->ring.map.mtrr = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_core_ioremap(&dev_priv->ring.map, dev);
+=======
+	drm_legacy_ioremap(&dev_priv->ring.map, dev);
+>>>>>>> v3.18
 =======
 	drm_legacy_ioremap(&dev_priv->ring.map, dev);
 >>>>>>> v3.18
@@ -247,7 +259,11 @@ static int via_dma_init(struct drm_device *dev, void *data, struct drm_file *fil
 	switch (init->func) {
 	case VIA_INIT_DMA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!DRM_SUSER(DRM_CURPROC))
+=======
+		if (!capable(CAP_SYS_ADMIN))
+>>>>>>> v3.18
 =======
 		if (!capable(CAP_SYS_ADMIN))
 >>>>>>> v3.18
@@ -257,7 +273,11 @@ static int via_dma_init(struct drm_device *dev, void *data, struct drm_file *fil
 		break;
 	case VIA_CLEANUP_DMA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!DRM_SUSER(DRM_CURPROC))
+=======
+		if (!capable(CAP_SYS_ADMIN))
+>>>>>>> v3.18
 =======
 		if (!capable(CAP_SYS_ADMIN))
 >>>>>>> v3.18
@@ -294,7 +314,11 @@ static int via_dispatch_cmdbuffer(struct drm_device *dev, drm_via_cmdbuffer_t *c
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(dev_priv->pci_buf, cmd->buf, cmd->size))
+=======
+	if (copy_from_user(dev_priv->pci_buf, cmd->buf, cmd->size))
+>>>>>>> v3.18
 =======
 	if (copy_from_user(dev_priv->pci_buf, cmd->buf, cmd->size))
 >>>>>>> v3.18
@@ -371,7 +395,11 @@ static int via_dispatch_pci_cmdbuffer(struct drm_device *dev,
 	if (cmd->size > VIA_PCI_BUF_SIZE)
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(dev_priv->pci_buf, cmd->buf, cmd->size))
+=======
+	if (copy_from_user(dev_priv->pci_buf, cmd->buf, cmd->size))
+>>>>>>> v3.18
 =======
 	if (copy_from_user(dev_priv->pci_buf, cmd->buf, cmd->size))
 >>>>>>> v3.18
@@ -572,7 +600,11 @@ static void via_cmdbuf_start(drm_via_private_t *dev_priv)
 	VIA_WRITE(VIA_REG_TRANSPACE, pause_addr_hi);
 	VIA_WRITE(VIA_REG_TRANSPACE, pause_addr_lo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_WRITEMEMORYBARRIER();
+=======
+	wmb();
+>>>>>>> v3.18
 =======
 	wmb();
 >>>>>>> v3.18
@@ -753,7 +785,11 @@ static int via_cmdbuf_size(struct drm_device *dev, void *data, struct drm_file *
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drm_ioctl_desc via_ioctls[] = {
+=======
+const struct drm_ioctl_desc via_ioctls[] = {
+>>>>>>> v3.18
 =======
 const struct drm_ioctl_desc via_ioctls[] = {
 >>>>>>> v3.18
@@ -774,7 +810,11 @@ const struct drm_ioctl_desc via_ioctls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int via_max_ioctl = DRM_ARRAY_SIZE(via_ioctls);
+=======
+int via_max_ioctl = ARRAY_SIZE(via_ioctls);
+>>>>>>> v3.18
 =======
 int via_max_ioctl = ARRAY_SIZE(via_ioctls);
 >>>>>>> v3.18

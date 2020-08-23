@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -167,8 +177,11 @@ static void iwl_mvm_phy_ctxt_cmd_data(struct iwl_mvm *mvm,
 	active_cnt = chains_dynamic;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd->rxchain_info = cpu_to_le32(iwl_fw_valid_rx_ant(mvm->fw) <<
 =======
+=======
+>>>>>>> v3.18
 	/* In scenarios where we only ever use a single-stream rates,
 	 * i.e. legacy 11b/g/a associations, single-stream APs or even
 	 * static SMPS, enable both chains to get diversity, improving
@@ -182,6 +195,9 @@ static void iwl_mvm_phy_ctxt_cmd_data(struct iwl_mvm *mvm,
 	}
 
 	cmd->rxchain_info = cpu_to_le32(mvm->fw->valid_rx_ant <<
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					PHY_RX_CHAIN_VALID_POS);
 	cmd->rxchain_info |= cpu_to_le32(idle_cnt << PHY_RX_CHAIN_CNT_POS);
@@ -189,7 +205,11 @@ static void iwl_mvm_phy_ctxt_cmd_data(struct iwl_mvm *mvm,
 					 PHY_RX_CHAIN_MIMO_CNT_POS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd->txchain_info = cpu_to_le32(iwl_fw_valid_tx_ant(mvm->fw));
+=======
+	cmd->txchain_info = cpu_to_le32(mvm->fw->valid_tx_ant);
+>>>>>>> v3.18
 =======
 	cmd->txchain_info = cpu_to_le32(mvm->fw->valid_tx_ant);
 >>>>>>> v3.18
@@ -218,7 +238,11 @@ static int iwl_mvm_phy_ctxt_apply(struct iwl_mvm *mvm,
 				  chains_static, chains_dynamic);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_mvm_send_cmd_pdu(mvm, PHY_CONTEXT_CMD, CMD_SYNC,
+=======
+	ret = iwl_mvm_send_cmd_pdu(mvm, PHY_CONTEXT_CMD, 0,
+>>>>>>> v3.18
 =======
 	ret = iwl_mvm_send_cmd_pdu(mvm, PHY_CONTEXT_CMD, 0,
 >>>>>>> v3.18
@@ -229,6 +253,7 @@ static int iwl_mvm_phy_ctxt_apply(struct iwl_mvm *mvm,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct phy_ctx_used_data {
@@ -247,6 +272,8 @@ static void iwl_mvm_phy_ctx_used_iter(struct ieee80211_hw *hw,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Send a command to add a PHY context based on the current HW configuration.
  */
@@ -254,6 +281,7 @@ int iwl_mvm_phy_ctxt_add(struct iwl_mvm *mvm, struct iwl_mvm_phy_ctxt *ctxt,
 			 struct cfg80211_chan_def *chandef,
 			 u8 chains_static, u8 chains_dynamic)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct phy_ctx_used_data data = {
 		.used = { },
@@ -281,12 +309,17 @@ int iwl_mvm_phy_ctxt_add(struct iwl_mvm *mvm, struct iwl_mvm_phy_ctxt *ctxt,
 
 	ctxt->channel = chandef->chan;
 =======
+=======
+>>>>>>> v3.18
 	WARN_ON(!test_bit(IWL_MVM_STATUS_IN_HW_RESTART, &mvm->status) &&
 		ctxt->ref);
 	lockdep_assert_held(&mvm->mutex);
 
 	ctxt->channel = chandef->chan;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return iwl_mvm_phy_ctxt_apply(mvm, ctxt, chandef,
 				      chains_static, chains_dynamic,
@@ -295,7 +328,10 @@ int iwl_mvm_phy_ctxt_add(struct iwl_mvm *mvm, struct iwl_mvm_phy_ctxt *ctxt,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Update the number of references to the given PHY context. This is valid only
  * in case the PHY context was already created, i.e., its reference count > 0.
  */
@@ -306,6 +342,9 @@ void iwl_mvm_phy_ctxt_ref(struct iwl_mvm *mvm, struct iwl_mvm_phy_ctxt *ctxt)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Send a command to modify the PHY context based on the current HW
  * configuration. Note that the function does not check that the configuration
@@ -323,6 +362,7 @@ int iwl_mvm_phy_ctxt_changed(struct iwl_mvm *mvm, struct iwl_mvm_phy_ctxt *ctxt,
 				      FW_CTXT_ACTION_MODIFY, 0);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Send a command to the FW to remove the given phy context.
@@ -344,6 +384,8 @@ void iwl_mvm_phy_ctxt_remove(struct iwl_mvm *mvm, struct iwl_mvm_phy_ctxt *ctxt)
 		IWL_ERR(mvm, "Failed to send PHY remove: ctxt id=%d\n",
 			ctxt->id);
 =======
+=======
+>>>>>>> v3.18
 void iwl_mvm_phy_ctxt_unref(struct iwl_mvm *mvm, struct iwl_mvm_phy_ctxt *ctxt)
 {
 	lockdep_assert_held(&mvm->mutex);
@@ -378,5 +420,8 @@ int iwl_mvm_phy_ctx_count(struct iwl_mvm *mvm)
 						   &phy_ctxt_counter);
 
 	return hweight8(phy_ctxt_counter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

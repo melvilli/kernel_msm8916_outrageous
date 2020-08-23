@@ -47,7 +47,11 @@ static int m48t86_rtc_read_time(struct device *dev, struct rtc_time *tm)
 	unsigned char reg;
 	struct platform_device *pdev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct m48t86_ops *ops = pdev->dev.platform_data;
+=======
+	struct m48t86_ops *ops = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct m48t86_ops *ops = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -89,7 +93,11 @@ static int m48t86_rtc_set_time(struct device *dev, struct rtc_time *tm)
 	unsigned char reg;
 	struct platform_device *pdev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct m48t86_ops *ops = pdev->dev.platform_data;
+=======
+	struct m48t86_ops *ops = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct m48t86_ops *ops = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -132,7 +140,11 @@ static int m48t86_rtc_proc(struct device *dev, struct seq_file *seq)
 	unsigned char reg;
 	struct platform_device *pdev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct m48t86_ops *ops = pdev->dev.platform_data;
+=======
+	struct m48t86_ops *ops = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct m48t86_ops *ops = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -160,7 +172,11 @@ static int m48t86_rtc_probe(struct platform_device *dev)
 {
 	unsigned char reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct m48t86_ops *ops = dev->dev.platform_data;
+=======
+	struct m48t86_ops *ops = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct m48t86_ops *ops = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -183,6 +199,7 @@ static int m48t86_rtc_probe(struct platform_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int m48t86_rtc_remove(struct platform_device *dev)
 {
 	platform_set_drvdata(dev, NULL);
@@ -192,6 +209,8 @@ static int m48t86_rtc_remove(struct platform_device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct platform_driver m48t86_rtc_platform_driver = {
 	.driver		= {
 		.name	= "rtc-m48t86",
@@ -199,7 +218,10 @@ static struct platform_driver m48t86_rtc_platform_driver = {
 	},
 	.probe		= m48t86_rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= m48t86_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

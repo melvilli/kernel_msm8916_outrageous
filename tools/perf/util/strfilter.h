@@ -31,6 +31,7 @@ struct strfilter *strfilter__new(const char *rules, const char **err);
 /**
  * strfilter__compare - compare given string and a string filter
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @self: String filter
  * @str: target string
  *
@@ -46,6 +47,8 @@ bool strfilter__compare(struct strfilter *self, const char *str);
  */
 void strfilter__delete(struct strfilter *self);
 =======
+=======
+>>>>>>> v3.18
  * @filter: String filter
  * @str: target string
  *
@@ -60,6 +63,9 @@ bool strfilter__compare(struct strfilter *filter, const char *str);
  * Delete @filter.
  */
 void strfilter__delete(struct strfilter *filter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

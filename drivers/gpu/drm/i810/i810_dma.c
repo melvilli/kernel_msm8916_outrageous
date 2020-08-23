@@ -98,7 +98,11 @@ static int i810_mmap_buffers(struct file *filp, struct vm_area_struct *vma)
 	buf_priv = buf->dev_private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma->vm_flags |= (VM_IO | VM_DONTCOPY);
+=======
+	vma->vm_flags |= VM_DONTCOPY;
+>>>>>>> v3.18
 =======
 	vma->vm_flags |= VM_DONTCOPY;
 >>>>>>> v3.18
@@ -118,7 +122,10 @@ static const struct file_operations i810_buffer_fops = {
 	.unlocked_ioctl = drm_ioctl,
 	.mmap = i810_mmap_buffers,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fasync = drm_fasync,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_COMPAT
@@ -222,7 +229,11 @@ static int i810_dma_cleanup(struct drm_device *dev)
 
 		if (dev_priv->ring.virtual_start)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			drm_core_ioremapfree(&dev_priv->ring.map, dev);
+=======
+			drm_legacy_ioremapfree(&dev_priv->ring.map, dev);
+>>>>>>> v3.18
 =======
 			drm_legacy_ioremapfree(&dev_priv->ring.map, dev);
 >>>>>>> v3.18
@@ -240,7 +251,11 @@ static int i810_dma_cleanup(struct drm_device *dev)
 
 			if (buf_priv->kernel_virtual && buf->total)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				drm_core_ioremapfree(&buf_priv->map, dev);
+=======
+				drm_legacy_ioremapfree(&buf_priv->map, dev);
+>>>>>>> v3.18
 =======
 				drm_legacy_ioremapfree(&buf_priv->map, dev);
 >>>>>>> v3.18
@@ -323,7 +338,11 @@ static int i810_freelist_init(struct drm_device *dev, drm_i810_private_t *dev_pr
 		buf_priv->map.mtrr = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drm_core_ioremap(&buf_priv->map, dev);
+=======
+		drm_legacy_ioremap(&buf_priv->map, dev);
+>>>>>>> v3.18
 =======
 		drm_legacy_ioremap(&buf_priv->map, dev);
 >>>>>>> v3.18
@@ -355,7 +374,11 @@ static int i810_dma_initialize(struct drm_device *dev,
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->mmio_map = drm_core_findmap(dev, init->mmio_offset);
+=======
+	dev_priv->mmio_map = drm_legacy_findmap(dev, init->mmio_offset);
+>>>>>>> v3.18
 =======
 	dev_priv->mmio_map = drm_legacy_findmap(dev, init->mmio_offset);
 >>>>>>> v3.18
@@ -367,7 +390,11 @@ static int i810_dma_initialize(struct drm_device *dev,
 	}
 	dev->agp_buffer_token = init->buffers_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->agp_buffer_map = drm_core_findmap(dev, init->buffers_offset);
+=======
+	dev->agp_buffer_map = drm_legacy_findmap(dev, init->buffers_offset);
+>>>>>>> v3.18
 =======
 	dev->agp_buffer_map = drm_legacy_findmap(dev, init->buffers_offset);
 >>>>>>> v3.18
@@ -392,7 +419,11 @@ static int i810_dma_initialize(struct drm_device *dev,
 	dev_priv->ring.map.mtrr = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_core_ioremap(&dev_priv->ring.map, dev);
+=======
+	drm_legacy_ioremap(&dev_priv->ring.map, dev);
+>>>>>>> v3.18
 =======
 	drm_legacy_ioremap(&dev_priv->ring.map, dev);
 >>>>>>> v3.18
@@ -426,8 +457,13 @@ static int i810_dma_initialize(struct drm_device *dev,
 	/* Program Hardware Status Page */
 	dev_priv->hw_status_page =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    pci_alloc_consistent(dev->pdev, PAGE_SIZE,
 				 &dev_priv->dma_status_page);
+=======
+		pci_zalloc_consistent(dev->pdev, PAGE_SIZE,
+				      &dev_priv->dma_status_page);
+>>>>>>> v3.18
 =======
 		pci_zalloc_consistent(dev->pdev, PAGE_SIZE,
 				      &dev_priv->dma_status_page);
@@ -439,7 +475,10 @@ static int i810_dma_initialize(struct drm_device *dev,
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(dev_priv->hw_status_page, 0, PAGE_SIZE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	DRM_DEBUG("hw status page @ %p\n", dev_priv->hw_status_page);
@@ -985,8 +1024,11 @@ static int i810_dma_vertex(struct drm_device *dev, void *data,
 				 vertex->discard, vertex->used);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_add(vertex->used, &dev->counts[_DRM_STAT_SECONDARY]);
 	atomic_inc(&dev->counts[_DRM_STAT_DMA]);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sarea_priv->last_enqueue = dev_priv->counter - 1;
@@ -1149,8 +1191,11 @@ static int i810_dma_mc(struct drm_device *dev, void *data,
 			     mc->last_render);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_add(mc->used, &dev->counts[_DRM_STAT_SECONDARY]);
 	atomic_inc(&dev->counts[_DRM_STAT_DMA]);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sarea_priv->last_enqueue = dev_priv->counter - 1;
@@ -1244,12 +1289,18 @@ static int i810_flip_bufs(struct drm_device *dev, void *data,
 int i810_driver_load(struct drm_device *dev, unsigned long flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* i810 has 4 more counters */
 	dev->counters += 4;
 	dev->types[6] = _DRM_STAT_IRQ;
 	dev->types[7] = _DRM_STAT_PRIMARY;
 	dev->types[8] = _DRM_STAT_SECONDARY;
 	dev->types[9] = _DRM_STAT_DMA;
+=======
+	/* Our userspace depends upon the agp mapping support. */
+	if (!dev->agp)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	/* Our userspace depends upon the agp mapping support. */
 	if (!dev->agp)
@@ -1276,9 +1327,15 @@ void i810_driver_preclose(struct drm_device *dev, struct drm_file *file_priv)
 
 	if (file_priv->master && file_priv->master->lock.hw_lock) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drm_idlelock_take(&file_priv->master->lock);
 		i810_driver_reclaim_buffers(dev, file_priv);
 		drm_idlelock_release(&file_priv->master->lock);
+=======
+		drm_legacy_idlelock_take(&file_priv->master->lock);
+		i810_driver_reclaim_buffers(dev, file_priv);
+		drm_legacy_idlelock_release(&file_priv->master->lock);
+>>>>>>> v3.18
 =======
 		drm_legacy_idlelock_take(&file_priv->master->lock);
 		i810_driver_reclaim_buffers(dev, file_priv);
@@ -1299,7 +1356,11 @@ int i810_driver_dma_quiescent(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drm_ioctl_desc i810_ioctls[] = {
+=======
+const struct drm_ioctl_desc i810_ioctls[] = {
+>>>>>>> v3.18
 =======
 const struct drm_ioctl_desc i810_ioctls[] = {
 >>>>>>> v3.18
@@ -1321,7 +1382,11 @@ const struct drm_ioctl_desc i810_ioctls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int i810_max_ioctl = DRM_ARRAY_SIZE(i810_ioctls);
+=======
+int i810_max_ioctl = ARRAY_SIZE(i810_ioctls);
+>>>>>>> v3.18
 =======
 int i810_max_ioctl = ARRAY_SIZE(i810_ioctls);
 >>>>>>> v3.18

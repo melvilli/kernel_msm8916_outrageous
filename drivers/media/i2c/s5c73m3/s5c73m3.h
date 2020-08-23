@@ -18,6 +18,10 @@
 #define S5C73M3_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -326,6 +330,10 @@ enum s5c73m3_oif_pads {
 
 #define S5C73M3_MAX_SUPPLIES			6
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define S5C73M3_DEFAULT_MCLK_FREQ		24000000U
+>>>>>>> v3.18
 =======
 #define S5C73M3_DEFAULT_MCLK_FREQ		24000000U
 >>>>>>> v3.18
@@ -400,15 +408,21 @@ struct s5c73m3 {
 	struct s5c73m3_gpio gpio[GPIO_NUM];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* External master clock frequency */
 	u32 mclk_frequency;
 	/* Video bus type - MIPI-CSI2/paralell */
 =======
+=======
+>>>>>>> v3.18
 	struct clk *clock;
 
 	/* External master clock frequency */
 	u32 mclk_frequency;
 	/* Video bus type - MIPI-CSI2/parallel */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	enum v4l2_mbus_type bus_type;
 

@@ -40,6 +40,12 @@ static int qlcnic_83xx_init_default_driver(struct qlcnic_adapter *adapter);
 static int qlcnic_83xx_check_heartbeat(struct qlcnic_adapter *p_dev);
 static int qlcnic_83xx_restart_hw(struct qlcnic_adapter *adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int qlcnic_83xx_check_hw_status(struct qlcnic_adapter *p_dev);
+static int qlcnic_83xx_get_reset_instruction_template(struct qlcnic_adapter *);
+static void qlcnic_83xx_stop_hw(struct qlcnic_adapter *);
+>>>>>>> v3.18
 =======
 static int qlcnic_83xx_check_hw_status(struct qlcnic_adapter *p_dev);
 static int qlcnic_83xx_get_reset_instruction_template(struct qlcnic_adapter *);
@@ -387,7 +393,11 @@ static int qlcnic_83xx_idc_tx_soft_reset(struct qlcnic_adapter *adapter)
 	netif_device_attach(netdev);
 	clear_bit(__QLCNIC_RESETTING, &adapter->state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_err(&adapter->pdev->dev, "%s:\n", __func__);
+=======
+	netdev_info(adapter->netdev, "%s: soft reset complete.\n", __func__);
+>>>>>>> v3.18
 =======
 	netdev_info(adapter->netdev, "%s: soft reset complete.\n", __func__);
 >>>>>>> v3.18
@@ -410,6 +420,10 @@ static void qlcnic_83xx_idc_detach_driver(struct qlcnic_adapter *adapter)
 
 	netif_device_detach(netdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qlcnic_83xx_detach_mailbox_work(adapter);
+>>>>>>> v3.18
 =======
 	qlcnic_83xx_detach_mailbox_work(adapter);
 >>>>>>> v3.18
@@ -621,6 +635,7 @@ static int qlcnic_83xx_idc_check_fan_failure(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qlcnic_83xx_idc_reattach_driver(struct qlcnic_adapter *adapter)
 {
 	int err;
@@ -628,6 +643,8 @@ static int qlcnic_83xx_idc_reattach_driver(struct qlcnic_adapter *adapter)
 	/* register for NIC IDC AEN Events */
 	qlcnic_83xx_register_nic_idc_func(adapter, 1);
 =======
+=======
+>>>>>>> v3.18
 int qlcnic_83xx_idc_reattach_driver(struct qlcnic_adapter *adapter)
 {
 	int err;
@@ -636,6 +653,9 @@ int qlcnic_83xx_idc_reattach_driver(struct qlcnic_adapter *adapter)
 	qlcnic_83xx_enable_mbx_interrupt(adapter);
 
 	qlcnic_83xx_initialize_nic(adapter, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = qlcnic_sriov_pf_reinit(adapter);
@@ -643,7 +663,11 @@ int qlcnic_83xx_idc_reattach_driver(struct qlcnic_adapter *adapter)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_83xx_enable_mbx_intrpt(adapter);
+=======
+	qlcnic_83xx_enable_mbx_interrupt(adapter);
+>>>>>>> v3.18
 =======
 	qlcnic_83xx_enable_mbx_interrupt(adapter);
 >>>>>>> v3.18
@@ -659,11 +683,17 @@ int qlcnic_83xx_idc_reattach_driver(struct qlcnic_adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (adapter->portnum == 0)
 		qlcnic_set_drv_version(adapter);
 
 	qlcnic_dcb_get_info(adapter->dcb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	qlcnic_83xx_idc_attach_driver(adapter);
 
@@ -676,7 +706,10 @@ static void qlcnic_83xx_idc_update_idc_params(struct qlcnic_adapter *adapter)
 
 	qlcnic_83xx_idc_update_drv_presence_reg(adapter, 1, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(QLC_83XX_MBX_READY, &adapter->ahw->idc.status);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	qlcnic_83xx_idc_update_audit_reg(adapter, 0, 1);
@@ -689,6 +722,10 @@ static void qlcnic_83xx_idc_update_idc_params(struct qlcnic_adapter *adapter)
 	ahw->reset_context = 0;
 	adapter->tx_timeo_cnt = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ahw->idc.delay_reset = 0;
+>>>>>>> v3.18
 =======
 	ahw->idc.delay_reset = 0;
 >>>>>>> v3.18
@@ -776,6 +813,10 @@ static int qlcnic_83xx_idc_unknown_state(struct qlcnic_adapter *adapter)
 	dev_err(&adapter->pdev->dev,
 		"%s: Device in unknown state\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clear_bit(__QLCNIC_RESETTING, &adapter->state);
+>>>>>>> v3.18
 =======
 	clear_bit(__QLCNIC_RESETTING, &adapter->state);
 >>>>>>> v3.18
@@ -837,7 +878,10 @@ static int qlcnic_83xx_idc_init_state(struct qlcnic_adapter *adapter)
 	} else {
 		ret = qlcnic_83xx_idc_check_timeout(adapter, timeout);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -859,14 +903,20 @@ static int qlcnic_83xx_idc_init_state(struct qlcnic_adapter *adapter)
 static int qlcnic_83xx_idc_ready_state(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 val;
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	int ret = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	struct qlcnic_mailbox *mbx = ahw->mailbox;
 	int ret = 0;
 	u32 val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Perform NIC configuration based ready state entry actions */
@@ -880,7 +930,11 @@ static int qlcnic_83xx_idc_ready_state(struct qlcnic_adapter *adapter)
 				"Error: device temperature %d above limits\n",
 				adapter->ahw->temp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clear_bit(QLC_83XX_MBX_READY, &ahw->idc.status);
+=======
+			clear_bit(QLC_83XX_MBX_READY, &mbx->status);
+>>>>>>> v3.18
 =======
 			clear_bit(QLC_83XX_MBX_READY, &mbx->status);
 >>>>>>> v3.18
@@ -897,10 +951,13 @@ static int qlcnic_83xx_idc_ready_state(struct qlcnic_adapter *adapter)
 		adapter->flags |= QLCNIC_FW_HANG;
 		if (!(val & QLC_83XX_IDC_DISABLE_FW_RESET_RECOVERY)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clear_bit(QLC_83XX_MBX_READY, &ahw->idc.status);
 			set_bit(__QLCNIC_RESETTING, &adapter->state);
 			qlcnic_83xx_idc_enter_need_reset_state(adapter, 1);
 =======
+=======
+>>>>>>> v3.18
 			clear_bit(QLC_83XX_MBX_READY, &mbx->status);
 			set_bit(__QLCNIC_RESETTING, &adapter->state);
 			qlcnic_83xx_idc_enter_need_reset_state(adapter, 1);
@@ -908,6 +965,9 @@ static int qlcnic_83xx_idc_ready_state(struct qlcnic_adapter *adapter)
 			netdev_info(adapter->netdev, "%s: Auto firmware recovery is disabled\n",
 				    __func__);
 			qlcnic_83xx_idc_enter_failed_state(adapter, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		return -EIO;
@@ -915,6 +975,11 @@ static int qlcnic_83xx_idc_ready_state(struct qlcnic_adapter *adapter)
 
 	if ((val & QLC_83XX_IDC_GRACEFULL_RESET) || ahw->idc.collect_dump) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clear_bit(QLC_83XX_MBX_READY, &mbx->status);
+
+>>>>>>> v3.18
 =======
 		clear_bit(QLC_83XX_MBX_READY, &mbx->status);
 
@@ -957,6 +1022,7 @@ static int qlcnic_83xx_idc_ready_state(struct qlcnic_adapter *adapter)
 static int qlcnic_83xx_idc_need_reset_state(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (adapter->ahw->idc.prev_state != QLC_83XX_IDC_DEV_NEED_RESET) {
@@ -976,6 +1042,8 @@ static int qlcnic_83xx_idc_need_reset_state(struct qlcnic_adapter *adapter)
 			 "%s: Waiting for reset ACK\n", __func__);
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_mailbox *mbx = adapter->ahw->mailbox;
 	int ret = 0;
 
@@ -1015,6 +1083,9 @@ static int qlcnic_83xx_idc_need_reset_state(struct qlcnic_adapter *adapter)
 				 "%s: Waiting for reset ACK\n", __func__);
 			return -1;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1031,6 +1102,7 @@ static int qlcnic_83xx_idc_need_quiesce_state(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qlcnic_83xx_idc_failed_state(struct qlcnic_adapter *adapter)
 {
 	dev_err(&adapter->pdev->dev, "%s: please restart!!\n", __func__);
@@ -1039,6 +1111,8 @@ static int qlcnic_83xx_idc_failed_state(struct qlcnic_adapter *adapter)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static void qlcnic_83xx_idc_failed_state(struct qlcnic_adapter *adapter)
 {
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
@@ -1059,6 +1133,9 @@ static void qlcnic_83xx_idc_failed_state(struct qlcnic_adapter *adapter)
 	ahw->idc.err_code = -EIO;
 
 	return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1111,7 +1188,10 @@ static int qlcnic_83xx_idc_check_state_validity(struct qlcnic_adapter *adapter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_QLCNIC_VXLAN
 #define QLC_83XX_ENCAP_TYPE_VXLAN	BIT_1
 #define QLC_83XX_MATCH_ENCAP_ID		BIT_2
@@ -1183,13 +1263,19 @@ static int qlcnic_set_vxlan_parsing(struct qlcnic_adapter *adapter,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void qlcnic_83xx_periodic_tasks(struct qlcnic_adapter *adapter)
 {
 	if (adapter->fhash.fnum)
 		qlcnic_prune_lb_filters(adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_QLCNIC_VXLAN
 	if (adapter->flags & QLCNIC_ADD_VXLAN_PORT) {
@@ -1208,6 +1294,9 @@ static void qlcnic_83xx_periodic_tasks(struct qlcnic_adapter *adapter)
 		adapter->flags &= ~QLCNIC_DEL_VXLAN_PORT;
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1274,9 +1363,14 @@ static void qlcnic_83xx_setup_idc_parameters(struct qlcnic_adapter *adapter)
 	u32 idc_params, val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (qlcnic_83xx_lockless_flash_read32(adapter,
 					      QLC_83XX_IDC_FLASH_PARAM_ADDR,
 					      (u8 *)&idc_params, 1)) {
+=======
+	if (qlcnic_83xx_flash_read32(adapter, QLC_83XX_IDC_FLASH_PARAM_ADDR,
+				     (u8 *)&idc_params, 1)) {
+>>>>>>> v3.18
 =======
 	if (qlcnic_83xx_flash_read32(adapter, QLC_83XX_IDC_FLASH_PARAM_ADDR,
 				     (u8 *)&idc_params, 1)) {
@@ -1299,7 +1393,10 @@ static void qlcnic_83xx_setup_idc_parameters(struct qlcnic_adapter *adapter)
 
 	clear_bit(__QLCNIC_RESETTING, &adapter->state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(QLC_83XX_MBX_READY, &adapter->ahw->idc.status);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	set_bit(QLC_83XX_MODULE_LOADED, &adapter->ahw->idc.status);
@@ -1358,7 +1455,11 @@ qlcnic_83xx_idc_first_to_load_function_handler(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qlcnic_83xx_idc_init(struct qlcnic_adapter *adapter)
+=======
+int qlcnic_83xx_idc_init(struct qlcnic_adapter *adapter)
+>>>>>>> v3.18
 =======
 int qlcnic_83xx_idc_init(struct qlcnic_adapter *adapter)
 >>>>>>> v3.18
@@ -1417,6 +1518,12 @@ void qlcnic_83xx_idc_request_reset(struct qlcnic_adapter *adapter, u32 key)
 	u32 val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (qlcnic_sriov_vf_check(adapter))
+		return;
+
+>>>>>>> v3.18
 =======
 	if (qlcnic_sriov_vf_check(adapter))
 		return;
@@ -1430,15 +1537,21 @@ void qlcnic_83xx_idc_request_reset(struct qlcnic_adapter *adapter, u32 key)
 
 	val = QLCRDX(adapter->ahw, QLC_83XX_IDC_CTRL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((val & QLC_83XX_IDC_DISABLE_FW_RESET_RECOVERY) ||
 	    !qlcnic_auto_fw_reset) {
 		dev_err(&adapter->pdev->dev,
 			"%s:failed, device in non reset mode\n", __func__);
 =======
+=======
+>>>>>>> v3.18
 	if (val & QLC_83XX_IDC_DISABLE_FW_RESET_RECOVERY) {
 		netdev_info(adapter->netdev, "%s: Auto firmware recovery is disabled\n",
 			    __func__);
 		qlcnic_83xx_idc_enter_failed_state(adapter, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		qlcnic_83xx_unlock_driver(adapter);
 		return;
@@ -1472,7 +1585,11 @@ static int qlcnic_83xx_copy_bootloader(struct qlcnic_adapter *adapter)
 		size = (size + 16) & ~0xF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p_cache = kzalloc(size, GFP_KERNEL);
+=======
+	p_cache = vzalloc(size);
+>>>>>>> v3.18
 =======
 	p_cache = vzalloc(size);
 >>>>>>> v3.18
@@ -1482,6 +1599,7 @@ static int qlcnic_83xx_copy_bootloader(struct qlcnic_adapter *adapter)
 	ret = qlcnic_83xx_lockless_flash_read32(adapter, src, p_cache,
 						size / sizeof(u32));
 	if (ret) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		kfree(p_cache);
 		return ret;
@@ -1495,6 +1613,8 @@ static int qlcnic_83xx_copy_bootloader(struct qlcnic_adapter *adapter)
 	}
 	kfree(p_cache);
 =======
+=======
+>>>>>>> v3.18
 		vfree(p_cache);
 		return ret;
 	}
@@ -1506,6 +1626,9 @@ static int qlcnic_83xx_copy_bootloader(struct qlcnic_adapter *adapter)
 		return ret;
 	}
 	vfree(p_cache);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1513,6 +1636,7 @@ static int qlcnic_83xx_copy_bootloader(struct qlcnic_adapter *adapter)
 
 static int qlcnic_83xx_copy_fw_file(struct qlcnic_adapter *adapter)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 dest, *p_cache;
 	u64 addr;
@@ -1556,6 +1680,8 @@ static int qlcnic_83xx_copy_fw_file(struct qlcnic_adapter *adapter)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct qlc_83xx_fw_info *fw_info = adapter->ahw->fw_info;
 	const struct firmware *fw = fw_info->fw;
 	u32 dest, *p_cache, *temp;
@@ -1614,6 +1740,9 @@ exit:
 	kfree(temp);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1622,14 +1751,20 @@ static void qlcnic_83xx_dump_pause_control_regs(struct qlcnic_adapter *adapter)
 	int i, j;
 	u32 val = 0, val1 = 0, reg = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	val = QLCRD32(adapter, QLC_83XX_SRE_SHIM_REG);
 =======
+=======
+>>>>>>> v3.18
 	int err = 0;
 
 	val = QLCRD32(adapter, QLC_83XX_SRE_SHIM_REG, &err);
 	if (err == -EIO)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_info(&adapter->pdev->dev, "SRE-Shim Ctrl:0x%x\n", val);
 
@@ -1645,7 +1780,13 @@ static void qlcnic_83xx_dump_pause_control_regs(struct qlcnic_adapter *adapter)
 		}
 		for (i = 0; i < 8; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			val = QLCRD32(adapter, reg + (i * 0x4));
+=======
+			val = QLCRD32(adapter, reg + (i * 0x4), &err);
+			if (err == -EIO)
+				return;
+>>>>>>> v3.18
 =======
 			val = QLCRD32(adapter, reg + (i * 0x4), &err);
 			if (err == -EIO)
@@ -1668,13 +1809,19 @@ static void qlcnic_83xx_dump_pause_control_regs(struct qlcnic_adapter *adapter)
 		}
 		for (i = 0; i < 4; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			val = QLCRD32(adapter, reg + (i * 0x4));
 			 dev_info(&adapter->pdev->dev, "0x%x  ", val);
 =======
+=======
+>>>>>>> v3.18
 			val = QLCRD32(adapter, reg + (i * 0x4), &err);
 			if (err == -EIO)
 				return;
 			dev_info(&adapter->pdev->dev, "0x%x  ", val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		dev_info(&adapter->pdev->dev, "\n");
@@ -1692,11 +1839,14 @@ static void qlcnic_83xx_dump_pause_control_regs(struct qlcnic_adapter *adapter)
 		}
 		for (i = 7; i >= 0; i--) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			val = QLCRD32(adapter, reg);
 			val &= ~(0x7 << 29);    /* Reset bits 29 to 31 */
 			QLCWR32(adapter, reg, (val | (i << 29)));
 			val = QLCRD32(adapter, reg);
 =======
+=======
+>>>>>>> v3.18
 			val = QLCRD32(adapter, reg, &err);
 			if (err == -EIO)
 				return;
@@ -1705,6 +1855,9 @@ static void qlcnic_83xx_dump_pause_control_regs(struct qlcnic_adapter *adapter)
 			val = QLCRD32(adapter, reg, &err);
 			if (err == -EIO)
 				return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev_info(&adapter->pdev->dev, "0x%x  ", val);
 		}
@@ -1712,15 +1865,21 @@ static void qlcnic_83xx_dump_pause_control_regs(struct qlcnic_adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = QLCRD32(adapter, QLC_83XX_PORT2_IFB_THRESHOLD);
 	val1 = QLCRD32(adapter, QLC_83XX_PORT3_IFB_THRESHOLD);
 =======
+=======
+>>>>>>> v3.18
 	val = QLCRD32(adapter, QLC_83XX_PORT2_IFB_THRESHOLD, &err);
 	if (err == -EIO)
 		return;
 	val1 = QLCRD32(adapter, QLC_83XX_PORT3_IFB_THRESHOLD, &err);
 	if (err == -EIO)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_info(&adapter->pdev->dev,
 		 "IFB-Pause Thresholds: Port 2:0x%x, Port 3:0x%x\n",
@@ -1785,7 +1944,11 @@ static int qlcnic_83xx_check_heartbeat(struct qlcnic_adapter *p_dev)
 {
 	u32 heartbeat, peg_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int retries, ret = -EIO;
+=======
+	int retries, ret = -EIO, err = 0;
+>>>>>>> v3.18
 =======
 	int retries, ret = -EIO, err = 0;
 >>>>>>> v3.18
@@ -1817,17 +1980,23 @@ static int qlcnic_83xx_check_heartbeat(struct qlcnic_adapter *p_dev)
 			 "PEG_NET_4_PC: 0x%x\n", peg_status,
 			 QLC_SHARED_REG_RD32(p_dev, QLCNIC_PEG_HALT_STATUS2),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 QLCRD32(p_dev, QLC_83XX_CRB_PEG_NET_0),
 			 QLCRD32(p_dev, QLC_83XX_CRB_PEG_NET_1),
 			 QLCRD32(p_dev, QLC_83XX_CRB_PEG_NET_2),
 			 QLCRD32(p_dev, QLC_83XX_CRB_PEG_NET_3),
 			 QLCRD32(p_dev, QLC_83XX_CRB_PEG_NET_4));
 =======
+=======
+>>>>>>> v3.18
 			 QLCRD32(p_dev, QLC_83XX_CRB_PEG_NET_0, &err),
 			 QLCRD32(p_dev, QLC_83XX_CRB_PEG_NET_1, &err),
 			 QLCRD32(p_dev, QLC_83XX_CRB_PEG_NET_2, &err),
 			 QLCRD32(p_dev, QLC_83XX_CRB_PEG_NET_3, &err),
 			 QLCRD32(p_dev, QLC_83XX_CRB_PEG_NET_4, &err));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (QLCNIC_FWERROR_CODE(peg_status) == 0x67)
@@ -1855,7 +2024,11 @@ static int qlcnic_83xx_check_cmd_peg_status(struct qlcnic_adapter *p_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_83xx_check_hw_status(struct qlcnic_adapter *p_dev)
+=======
+static int qlcnic_83xx_check_hw_status(struct qlcnic_adapter *p_dev)
+>>>>>>> v3.18
 =======
 static int qlcnic_83xx_check_hw_status(struct qlcnic_adapter *p_dev)
 >>>>>>> v3.18
@@ -1877,12 +2050,15 @@ static int qlcnic_83xx_poll_reg(struct qlcnic_adapter *p_dev, u32 addr,
 				int duration, u32 mask, u32 status)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 value;
 	int timeout_error;
 	u8 retries;
 
 	value = qlcnic_83xx_rd_reg_indirect(p_dev, addr);
 =======
+=======
+>>>>>>> v3.18
 	int timeout_error, err = 0;
 	u32 value;
 	u8 retries;
@@ -1890,6 +2066,9 @@ static int qlcnic_83xx_poll_reg(struct qlcnic_adapter *p_dev, u32 addr,
 	value = QLCRD32(p_dev, addr, &err);
 	if (err == -EIO)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	retries = duration / 10;
 
@@ -1898,7 +2077,13 @@ static int qlcnic_83xx_poll_reg(struct qlcnic_adapter *p_dev, u32 addr,
 			timeout_error = 1;
 			msleep(duration / 10);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			value = qlcnic_83xx_rd_reg_indirect(p_dev, addr);
+=======
+			value = QLCRD32(p_dev, addr, &err);
+			if (err == -EIO)
+				return err;
+>>>>>>> v3.18
 =======
 			value = QLCRD32(p_dev, addr, &err);
 			if (err == -EIO)
@@ -1944,12 +2129,15 @@ static int qlcnic_83xx_reset_template_checksum(struct qlcnic_adapter *p_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_83xx_get_reset_instruction_template(struct qlcnic_adapter *p_dev)
 {
 	u8 *p_buff;
 	u32 addr, count;
 	struct qlcnic_hardware_context *ahw = p_dev->ahw;
 =======
+=======
+>>>>>>> v3.18
 static int qlcnic_83xx_get_reset_instruction_template(struct qlcnic_adapter *p_dev)
 {
 	struct qlcnic_hardware_context *ahw = p_dev->ahw;
@@ -1964,6 +2152,9 @@ static int qlcnic_83xx_get_reset_instruction_template(struct qlcnic_adapter *p_d
 		else
 			return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ahw->reset.seq_error = 0;
@@ -2006,16 +2197,22 @@ static void qlcnic_83xx_read_write_crb_reg(struct qlcnic_adapter *p_dev,
 					   u32 raddr, u32 waddr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int value;
 
 	value = qlcnic_83xx_rd_reg_indirect(p_dev, raddr);
 =======
+=======
+>>>>>>> v3.18
 	int err = 0;
 	u32 value;
 
 	value = QLCRD32(p_dev, raddr, &err);
 	if (err == -EIO)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	qlcnic_83xx_wrt_reg_indirect(p_dev, waddr, value);
 }
@@ -2026,6 +2223,7 @@ static void qlcnic_83xx_rmw_crb_reg(struct qlcnic_adapter *p_dev,
 				    struct qlc_83xx_rmw *p_rmw_hdr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int value;
 
 	if (p_rmw_hdr->index_a)
@@ -2033,6 +2231,8 @@ static void qlcnic_83xx_rmw_crb_reg(struct qlcnic_adapter *p_dev,
 	else
 		value = qlcnic_83xx_rd_reg_indirect(p_dev, raddr);
 =======
+=======
+>>>>>>> v3.18
 	int err = 0;
 	u32 value;
 
@@ -2043,6 +2243,9 @@ static void qlcnic_83xx_rmw_crb_reg(struct qlcnic_adapter *p_dev,
 		if (err == -EIO)
 			return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	value &= p_rmw_hdr->mask;
@@ -2097,7 +2300,11 @@ static void qlcnic_83xx_poll_list(struct qlcnic_adapter *p_dev,
 	struct qlc_83xx_entry *entry;
 	struct qlc_83xx_poll *poll;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+	int i, err = 0;
+>>>>>>> v3.18
 =======
 	int i, err = 0;
 >>>>>>> v3.18
@@ -2125,17 +2332,23 @@ static void qlcnic_83xx_poll_list(struct qlcnic_adapter *p_dev,
 							 poll->mask,
 							 poll->status)){
 <<<<<<< HEAD
+<<<<<<< HEAD
 					qlcnic_83xx_rd_reg_indirect(p_dev,
 								    arg1);
 					qlcnic_83xx_rd_reg_indirect(p_dev,
 								    arg2);
 =======
+=======
+>>>>>>> v3.18
 					QLCRD32(p_dev, arg1, &err);
 					if (err == -EIO)
 						return;
 					QLCRD32(p_dev, arg2, &err);
 					if (err == -EIO)
 						return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
@@ -2203,7 +2416,11 @@ static void qlcnic_83xx_poll_read_list(struct qlcnic_adapter *p_dev,
 {
 	long delay;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int index, i, j;
+=======
+	int index, i, j, err;
+>>>>>>> v3.18
 =======
 	int index, i, j, err;
 >>>>>>> v3.18
@@ -2227,12 +2444,18 @@ static void qlcnic_83xx_poll_read_list(struct qlcnic_adapter *p_dev,
 				index = p_dev->ahw->reset.array_index;
 				addr = entry->dr_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				j = qlcnic_83xx_rd_reg_indirect(p_dev, addr);
 =======
+=======
+>>>>>>> v3.18
 				j = QLCRD32(p_dev, addr, &err);
 				if (err == -EIO)
 					return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				p_dev->ahw->reset.array[index++] = j;
 
@@ -2353,6 +2576,7 @@ static void qlcnic_83xx_init_hw(struct qlcnic_adapter *p_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qlcnic_83xx_load_fw_image_from_host(struct qlcnic_adapter *adapter)
 {
 	int err = -EIO;
@@ -2360,6 +2584,8 @@ static int qlcnic_83xx_load_fw_image_from_host(struct qlcnic_adapter *adapter)
 	if (request_firmware(&adapter->ahw->fw_info.fw,
 			     QLC_83XX_FW_FILE_NAME, &(adapter->pdev->dev))) {
 =======
+=======
+>>>>>>> v3.18
 /* POST FW related definations*/
 #define QLC_83XX_POST_SIGNATURE_REG	0x41602014
 #define QLC_83XX_POST_MODE_REG		0x41602018
@@ -2482,6 +2708,9 @@ static int qlcnic_83xx_load_fw_image_from_host(struct qlcnic_adapter *adapter)
 
 	if (request_firmware(&fw_info->fw, fw_info->fw_file_name,
 			     &(adapter->pdev->dev))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(&adapter->pdev->dev,
 			"No file FW image, loading flash FW image.\n");
@@ -2509,7 +2738,10 @@ static int qlcnic_83xx_restart_hw(struct qlcnic_adapter *adapter)
 	if (!(val & QLC_83XX_IDC_GRACEFULL_RESET))
 		qlcnic_dump_fw(adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (val & QLC_83XX_IDC_DISABLE_FW_RESET_RECOVERY) {
 		netdev_info(adapter->netdev, "%s: Auto firmware recovery is disabled\n",
@@ -2518,15 +2750,21 @@ static int qlcnic_83xx_restart_hw(struct qlcnic_adapter *adapter)
 		return err;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	qlcnic_83xx_init_hw(adapter);
 
 	if (qlcnic_83xx_copy_bootloader(adapter))
 		return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Boot either flash image or firmware image from host file system */
 	if (qlcnic_load_fw_file) {
 =======
+=======
+>>>>>>> v3.18
 
 	/* Check if POST needs to be run */
 	if (adapter->ahw->run_post) {
@@ -2548,6 +2786,9 @@ static int qlcnic_83xx_restart_hw(struct qlcnic_adapter *adapter)
 
 	/* Boot either flash image or firmware image from host file system */
 	if (qlcnic_load_fw_file == 1) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (qlcnic_83xx_load_fw_image_from_host(adapter))
 			return err;
@@ -2563,6 +2804,7 @@ static int qlcnic_83xx_restart_hw(struct qlcnic_adapter *adapter)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
 * qlcnic_83xx_config_default_opmode
@@ -2598,6 +2840,9 @@ int qlcnic_83xx_get_nic_configuration(struct qlcnic_adapter *adapter)
 =======
 static int qlcnic_83xx_get_nic_configuration(struct qlcnic_adapter *adapter)
 >>>>>>> v3.18
+=======
+static int qlcnic_83xx_get_nic_configuration(struct qlcnic_adapter *adapter)
+>>>>>>> v3.18
 {
 	int err;
 	struct qlcnic_info nic_info;
@@ -2617,6 +2862,7 @@ static int qlcnic_83xx_get_nic_configuration(struct qlcnic_adapter *adapter)
 	ahw->max_mtu = nic_info.max_mtu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* VNIC mode is detected by BIT_23 in capabilities. This bit is also
 	 * set in case device is SRIOV capable. VNIC and SRIOV are mutually
 	 * exclusive. So in case of sriov capable device load driver in
@@ -2634,6 +2880,8 @@ static int qlcnic_83xx_get_nic_configuration(struct qlcnic_adapter *adapter)
 
 	return ahw->nic_mode;
 =======
+=======
+>>>>>>> v3.18
 	/* eSwitch capability indicates vNIC mode.
 	 * vNIC and SRIOV are mutually exclusive operational modes.
 	 * If SR-IOV capability is detected, SR-IOV physical function
@@ -2649,12 +2897,20 @@ static int qlcnic_83xx_get_nic_configuration(struct qlcnic_adapter *adapter)
 		return QLCNIC_VNIC_MODE;
 
 	return QLC_83XX_DEFAULT_OPMODE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int qlcnic_83xx_configure_opmode(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct qlcnic_hardware_context *ahw = adapter->ahw;
+	u16 max_sds_rings, max_tx_rings;
+>>>>>>> v3.18
 =======
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	u16 max_sds_rings, max_tx_rings;
@@ -2666,6 +2922,7 @@ int qlcnic_83xx_configure_opmode(struct qlcnic_adapter *adapter)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == QLC_83XX_VIRTUAL_NIC_MODE) {
 		if (qlcnic_83xx_config_vnic_opmode(adapter))
 			return -EIO;
@@ -2675,6 +2932,8 @@ int qlcnic_83xx_configure_opmode(struct qlcnic_adapter *adapter)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (ret == QLCNIC_VNIC_MODE) {
 		ahw->nic_mode = QLCNIC_VNIC_MODE;
 
@@ -2698,6 +2957,9 @@ int qlcnic_83xx_configure_opmode(struct qlcnic_adapter *adapter)
 	adapter->max_sds_rings = min(ahw->max_rx_ques, max_sds_rings);
 	adapter->max_tx_rings = min(ahw->max_tx_ques, max_tx_rings);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2752,13 +3014,19 @@ static void qlcnic_83xx_clear_function_resources(struct qlcnic_adapter *adapter)
 
 	if (IS_QLC_83XX_USED(adapter, presence_mask, audit_mask)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_STOP_NIC_FUNC);
 =======
+=======
+>>>>>>> v3.18
 		status = qlcnic_alloc_mbx_args(&cmd, adapter,
 					       QLCNIC_CMD_STOP_NIC_FUNC);
 		if (status)
 			return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cmd.req.arg[1] = BIT_31;
 		status = qlcnic_issue_cmd(adapter, &cmd);
@@ -2769,6 +3037,7 @@ static void qlcnic_83xx_clear_function_resources(struct qlcnic_adapter *adapter)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int qlcnic_83xx_init(struct qlcnic_adapter *adapter, int pci_using_dac)
 {
@@ -2810,6 +3079,8 @@ int qlcnic_83xx_init(struct qlcnic_adapter *adapter, int pci_using_dac)
 
 	return adapter->ahw->idc.err_code;
 =======
+=======
+>>>>>>> v3.18
 static int qlcnic_83xx_get_fw_info(struct qlcnic_adapter *adapter)
 {
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
@@ -3020,5 +3291,8 @@ void qlcnic_83xx_aer_start_poll_work(struct qlcnic_adapter *adapter)
 		qlcnic_83xx_idc_enter_ready_state(adapter, 0);
 
 	qlcnic_schedule_work(adapter, qlcnic_83xx_idc_poll_dev_state, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

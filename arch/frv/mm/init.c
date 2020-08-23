@@ -79,7 +79,11 @@ void __init paging_init(void)
 
 #ifdef CONFIG_HIGHMEM
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (num_physpages - num_mappedpages) {
+=======
+	if (get_num_physpages() - num_mappedpages) {
+>>>>>>> v3.18
 =======
 	if (get_num_physpages() - num_mappedpages) {
 >>>>>>> v3.18
@@ -101,7 +105,11 @@ void __init paging_init(void)
 	zones_size[ZONE_NORMAL]  = max_low_pfn - min_low_pfn;
 #ifdef CONFIG_HIGHMEM
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zones_size[ZONE_HIGHMEM] = num_physpages - num_mappedpages;
+=======
+	zones_size[ZONE_HIGHMEM] = get_num_physpages() - num_mappedpages;
+>>>>>>> v3.18
 =======
 	zones_size[ZONE_HIGHMEM] = get_num_physpages() - num_mappedpages;
 >>>>>>> v3.18
@@ -122,6 +130,7 @@ void __init paging_init(void)
  */
 void __init mem_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long npages = (memory_end - memory_start) >> PAGE_SHIFT;
 	unsigned long tmp;
@@ -163,6 +172,8 @@ void __init mem_init(void)
 	       );
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long code_size = _etext - _stext;
 
 	/* this will put all low memory onto the freelists */
@@ -181,6 +192,9 @@ void __init mem_init(void)
 	if (rom_length > 0 && rom_length >= code_size)
 		printk("Memory available:  %luKiB/%luKiB ROM\n",
 			(rom_length - code_size) >> 10, rom_length >> 10);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } /* end mem_init() */
 
@@ -192,7 +206,11 @@ void free_initmem(void)
 {
 #if defined(CONFIG_RAMKERNEL) && !defined(CONFIG_PROTECT_KERNEL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 =======
 	free_initmem_default(-1);
 >>>>>>> v3.18
@@ -207,7 +225,11 @@ void free_initmem(void)
 void __init free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, -1, "initrd");
 >>>>>>> v3.18

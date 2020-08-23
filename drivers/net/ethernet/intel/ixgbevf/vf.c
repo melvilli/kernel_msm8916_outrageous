@@ -243,7 +243,11 @@ static s32 ixgbevf_set_uc_addr_vf(struct ixgbe_hw *hw, u32 index, u8 *addr)
 	msgbuf[0] |= IXGBE_VF_SET_MACVLAN;
 	if (addr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(msg_addr, addr, 6);
+=======
+		memcpy(msg_addr, addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		memcpy(msg_addr, addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -280,7 +284,11 @@ static s32 ixgbevf_set_rar_vf(struct ixgbe_hw *hw, u32 index, u8 *addr,
 	memset(msgbuf, 0, sizeof(msgbuf));
 	msgbuf[0] = IXGBE_VF_SET_MAC_ADDR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(msg_addr, addr, 6);
+=======
+	memcpy(msg_addr, addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(msg_addr, addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -443,7 +451,10 @@ static s32 ixgbevf_check_mac_link_vf(struct ixgbe_hw *hw,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* for SFP+ modules and DA cables on 82599 it can take up to 500usecs
 	 * before the link status is correct
 	 */
@@ -459,6 +470,9 @@ static s32 ixgbevf_check_mac_link_vf(struct ixgbe_hw *hw,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (links_reg & IXGBE_LINKS_SPEED_82599) {
 	case IXGBE_LINKS_SPEED_10G_82599:

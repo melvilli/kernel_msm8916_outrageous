@@ -237,6 +237,12 @@ static int si21_writeregs(struct si21xx_state *state, u8 reg1,
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (len > sizeof(buf) - 1)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (len > sizeof(buf) - 1)
 		return -EINVAL;

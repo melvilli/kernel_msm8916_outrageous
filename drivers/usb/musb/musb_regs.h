@@ -73,13 +73,19 @@
 #define MUSB_DEVCTL_SESSION	0x01
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* BABBLE_CTL */
 #define MUSB_BABBLE_FORCE_TXIDLE	0x80
 #define MUSB_BABBLE_SW_SESSION_CTRL	0x40
 #define MUSB_BABBLE_STUCK_J		0x20
 #define MUSB_BABBLE_RCV_DISABLE		0x04
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* MUSB ULPI VBUSCONTROL */
 #define MUSB_ULPI_USE_EXTVBUS	0x01
@@ -256,6 +262,10 @@
 
 #define MUSB_DEVCTL		0x60	/* 8 bit */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MUSB_BABBLE_CTL		0x61	/* 8 bit */
+>>>>>>> v3.18
 =======
 #define MUSB_BABBLE_CTL		0x61	/* 8 bit */
 >>>>>>> v3.18
@@ -584,7 +594,11 @@ static inline u16 musb_read_hwvers(void __iomem *mbase)
 	/*
 	 * This register is invisible on Blackfin, actually the MUSB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * RTL version of Blackfin is 1.9, so just harcode its value.
+=======
+	 * RTL version of Blackfin is 1.9, so just hardcode its value.
+>>>>>>> v3.18
 =======
 	 * RTL version of Blackfin is 1.9, so just hardcode its value.
 >>>>>>> v3.18

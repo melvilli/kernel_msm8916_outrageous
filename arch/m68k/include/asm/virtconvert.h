@@ -27,8 +27,12 @@ static inline void *phys_to_virt(unsigned long address)
 
 /* Permanent address of a page. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MMU
 #ifdef CONFIG_SINGLE_MEMORY_CHUNK
+=======
+#if defined(CONFIG_MMU) && defined(CONFIG_SINGLE_MEMORY_CHUNK)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_MMU) && defined(CONFIG_SINGLE_MEMORY_CHUNK)
 >>>>>>> v3.18
@@ -38,9 +42,12 @@ static inline void *phys_to_virt(unsigned long address)
 #define page_to_phys(page)	(page_to_pfn(page) << PAGE_SHIFT)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define page_to_phys(page)	(((page) - mem_map) << PAGE_SHIFT)
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

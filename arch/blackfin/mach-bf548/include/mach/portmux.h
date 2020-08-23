@@ -8,8 +8,11 @@
 #define _MACH_PORTMUX_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_RESOURCES	MAX_BLACKFIN_GPIOS
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define P_SPORT2_TFS	(P_DEFINED | P_IDENT(GPIO_PA0) | P_FUNCT(0))

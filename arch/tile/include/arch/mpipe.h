@@ -177,8 +177,11 @@ typedef union
     uint_reg_t stack_idx    : 5;
     /* Reserved. */
 <<<<<<< HEAD
+<<<<<<< HEAD
     uint_reg_t __reserved_2 : 5;
 =======
+=======
+>>>>>>> v3.18
     uint_reg_t __reserved_2 : 3;
     /*
      * Instance ID.  For devices that support automatic buffer return between
@@ -191,6 +194,9 @@ typedef union
      * hardware. This field is ignored on writes.
      */
     uint_reg_t inst         : 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     /*
      * Reads as one to indicate that this is a hardware managed buffer.
@@ -221,7 +227,12 @@ typedef union
     uint_reg_t size         : 3;
     uint_reg_t hwb          : 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
     uint_reg_t __reserved_2 : 5;
+=======
+    uint_reg_t inst         : 2;
+    uint_reg_t __reserved_2 : 3;
+>>>>>>> v3.18
 =======
     uint_reg_t inst         : 2;
     uint_reg_t __reserved_2 : 3;
@@ -252,9 +263,15 @@ typedef union
     uint_reg_t __reserved_0 : 3;
     /* eDMA ring being accessed */
 <<<<<<< HEAD
+<<<<<<< HEAD
     uint_reg_t ring         : 5;
     /* Reserved. */
     uint_reg_t __reserved_1 : 18;
+=======
+    uint_reg_t ring         : 6;
+    /* Reserved. */
+    uint_reg_t __reserved_1 : 17;
+>>>>>>> v3.18
 =======
     uint_reg_t ring         : 6;
     /* Reserved. */
@@ -277,8 +294,13 @@ typedef union
     uint_reg_t __reserved_2 : 6;
     uint_reg_t region       : 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
     uint_reg_t __reserved_1 : 18;
     uint_reg_t ring         : 5;
+=======
+    uint_reg_t __reserved_1 : 17;
+    uint_reg_t ring         : 6;
+>>>>>>> v3.18
 =======
     uint_reg_t __reserved_1 : 17;
     uint_reg_t ring         : 6;

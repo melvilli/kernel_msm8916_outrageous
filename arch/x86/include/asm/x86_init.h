@@ -143,6 +143,11 @@ struct x86_cpuinit_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct timespec;
+
+>>>>>>> v3.18
 =======
 struct timespec;
 
@@ -162,8 +167,13 @@ struct timespec;
 struct x86_platform_ops {
 	unsigned long (*calibrate_tsc)(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long (*get_wallclock)(void);
 	int (*set_wallclock)(unsigned long nowtime);
+=======
+	void (*get_wallclock)(struct timespec *ts);
+	int (*set_wallclock)(const struct timespec *ts);
+>>>>>>> v3.18
 =======
 	void (*get_wallclock)(struct timespec *ts);
 	int (*set_wallclock)(const struct timespec *ts);
@@ -181,6 +191,10 @@ struct x86_platform_ops {
 struct pci_dev;
 struct msi_msg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct msi_desc;
+>>>>>>> v3.18
 =======
 struct msi_desc;
 >>>>>>> v3.18
@@ -193,13 +207,19 @@ struct x86_msi_ops {
 	void (*teardown_msi_irq)(unsigned int irq);
 	void (*teardown_msi_irqs)(struct pci_dev *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*restore_msi_irqs)(struct pci_dev *dev, int irq);
 	int  (*setup_hpet_msi)(unsigned int irq, unsigned int id);
 =======
+=======
+>>>>>>> v3.18
 	void (*restore_msi_irqs)(struct pci_dev *dev);
 	int  (*setup_hpet_msi)(unsigned int irq, unsigned int id);
 	u32 (*msi_mask_irq)(struct msi_desc *desc, u32 mask, u32 flag);
 	u32 (*msix_mask_irq)(struct msi_desc *desc, u32 flag);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

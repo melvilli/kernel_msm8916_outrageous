@@ -36,6 +36,10 @@
 #include <linux/cdev.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/rc-core.h>
+>>>>>>> v3.18
 =======
 #include <media/rc-core.h>
 >>>>>>> v3.18
@@ -472,13 +476,19 @@ int lirc_dev_fop_open(struct inode *inode, struct file *file)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ir->d.rdev) {
 		retval = rc_open(ir->d.rdev);
 		if (retval)
 			goto error;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cdev = ir->cdev;
 	if (try_module_get(cdev->owner)) {
@@ -525,6 +535,12 @@ int lirc_dev_fop_close(struct inode *inode, struct file *file)
 	WARN_ON(mutex_lock_killable(&lirc_dev_lock));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ir->d.rdev)
+		rc_close(ir->d.rdev);
+
+>>>>>>> v3.18
 =======
 	if (ir->d.rdev)
 		rc_close(ir->d.rdev);
@@ -605,7 +621,11 @@ long lirc_dev_fop_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	switch (cmd) {
 	case LIRC_GET_FEATURES:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = put_user(ir->d.features, (__u32 *)arg);
+=======
+		result = put_user(ir->d.features, (__u32 __user *)arg);
+>>>>>>> v3.18
 =======
 		result = put_user(ir->d.features, (__u32 __user *)arg);
 >>>>>>> v3.18
@@ -619,7 +639,11 @@ long lirc_dev_fop_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		result = put_user(LIRC_REC2MODE
 				  (ir->d.features & LIRC_CAN_REC_MASK),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  (__u32 *)arg);
+=======
+				  (__u32 __user *)arg);
+>>>>>>> v3.18
 =======
 				  (__u32 __user *)arg);
 >>>>>>> v3.18
@@ -631,7 +655,11 @@ long lirc_dev_fop_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = get_user(mode, (__u32 *)arg);
+=======
+		result = get_user(mode, (__u32 __user *)arg);
+>>>>>>> v3.18
 =======
 		result = get_user(mode, (__u32 __user *)arg);
 >>>>>>> v3.18
@@ -644,7 +672,11 @@ long lirc_dev_fop_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		break;
 	case LIRC_GET_LENGTH:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = put_user(ir->d.code_length, (__u32 *)arg);
+=======
+		result = put_user(ir->d.code_length, (__u32 __user *)arg);
+>>>>>>> v3.18
 =======
 		result = put_user(ir->d.code_length, (__u32 __user *)arg);
 >>>>>>> v3.18
@@ -657,7 +689,11 @@ long lirc_dev_fop_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = put_user(ir->d.min_timeout, (__u32 *)arg);
+=======
+		result = put_user(ir->d.min_timeout, (__u32 __user *)arg);
+>>>>>>> v3.18
 =======
 		result = put_user(ir->d.min_timeout, (__u32 __user *)arg);
 >>>>>>> v3.18
@@ -670,7 +706,11 @@ long lirc_dev_fop_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = put_user(ir->d.max_timeout, (__u32 *)arg);
+=======
+		result = put_user(ir->d.max_timeout, (__u32 __user *)arg);
+>>>>>>> v3.18
 =======
 		result = put_user(ir->d.max_timeout, (__u32 __user *)arg);
 >>>>>>> v3.18
@@ -770,7 +810,11 @@ ssize_t lirc_dev_fop_read(struct file *file,
 		} else {
 			lirc_buffer_read(ir->buf, buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = copy_to_user((void *)buffer+written, buf,
+=======
+			ret = copy_to_user((void __user *)buffer+written, buf,
+>>>>>>> v3.18
 =======
 			ret = copy_to_user((void __user *)buffer+written, buf,
 >>>>>>> v3.18

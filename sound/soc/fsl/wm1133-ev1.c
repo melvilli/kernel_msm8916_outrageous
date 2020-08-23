@@ -215,12 +215,15 @@ static int wm1133_ev1_init(struct snd_soc_pcm_runtime *rtd)
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dapm_new_controls(dapm, wm1133_ev1_widgets,
 				  ARRAY_SIZE(wm1133_ev1_widgets));
 
 	snd_soc_dapm_add_routes(dapm, wm1133_ev1_map,
 				ARRAY_SIZE(wm1133_ev1_map));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Headphone jack detection */
@@ -249,7 +252,11 @@ static struct snd_soc_dai_link wm1133_ev1_dai = {
 	.cpu_dai_name = "imx-ssi.0",
 	.codec_dai_name = "wm8350-hifi",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.platform_name = "imx-fiq-pcm-audio.0",
+=======
+	.platform_name = "imx-ssi.0",
+>>>>>>> v3.18
 =======
 	.platform_name = "imx-ssi.0",
 >>>>>>> v3.18
@@ -265,12 +272,18 @@ static struct snd_soc_card wm1133_ev1 = {
 	.dai_link = &wm1133_ev1_dai,
 	.num_links = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	.dapm_widgets = wm1133_ev1_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(wm1133_ev1_widgets),
 	.dapm_routes = wm1133_ev1_map,
 	.num_dapm_routes = ARRAY_SIZE(wm1133_ev1_map),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

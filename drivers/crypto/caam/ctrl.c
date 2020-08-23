@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * CAAM control-plane driver backend
+=======
+/* * CAAM control-plane driver backend
+>>>>>>> v3.18
 =======
 /* * CAAM control-plane driver backend
 >>>>>>> v3.18
@@ -10,11 +14,17 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/device.h>
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "compat.h"
 #include "regs.h"
@@ -22,6 +32,7 @@
 #include "jr.h"
 #include "desc_constr.h"
 #include "error.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "ctrl.h"
 
@@ -134,6 +145,8 @@ static int instantiate_rng(struct device *jrdev)
 
 	dma_unmap_single(jrdev, desc_dma, desc_bytes(desc), DMA_TO_DEVICE);
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Descriptor to instantiate RNG State Handle 0 in normal mode and
@@ -392,6 +405,9 @@ static int deinstantiate_rng(struct device *ctrldev, int state_handle_mask)
 			dev_info(ctrldev, "Deinstantiated RNG4 SH%d\n", sh_idx);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(desc);
@@ -399,6 +415,7 @@ static int deinstantiate_rng(struct device *ctrldev, int state_handle_mask)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * By default, the TRNG runs for 200 clocks per sample;
@@ -428,6 +445,8 @@ static void kick_trng(struct platform_device *pdev)
 	/* put RNG4 into run mode */
 	clrbits32(&r4tst->rtmctl, RTMCTL_PRGM);
 =======
+=======
+>>>>>>> v3.18
 static int caam_remove(struct platform_device *pdev)
 {
 	struct device *ctrldev;
@@ -515,11 +534,15 @@ static void kick_trng(struct platform_device *pdev, int ent_delay)
 	clrbits32(&val, RTMCTL_PRGM);
 	/* write back the control register */
 	wr_reg32(&r4tst->rtmctl, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * caam_get_era() - Return the ERA of the SEC on SoC, based
+<<<<<<< HEAD
 <<<<<<< HEAD
  * on the SEC_VID register.
  * Returns the ERA number (1..4) or -ENOTSUPP if the ERA is unknown.
@@ -548,6 +571,8 @@ int caam_get_era(u64 caam_id)
 			caam_eras[i].maj_rev == sec_vid->maj_rev)
 				return caam_eras[i].era;
 =======
+=======
+>>>>>>> v3.18
  * on "sec-era" propery in the DTS. This property is updated by u-boot.
  **/
 int caam_get_era(void)
@@ -559,6 +584,9 @@ int caam_get_era(void)
 				NULL);
 		return prop ? *prop : -ENOTSUPP;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return -ENOTSUPP;
@@ -569,7 +597,11 @@ EXPORT_SYMBOL(caam_get_era);
 static int caam_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, ring, rspec;
+=======
+	int ret, ring, rspec, gen_sk, ent_delay = RTSDCTL_ENT_DLY_MIN;
+>>>>>>> v3.18
 =======
 	int ret, ring, rspec, gen_sk, ent_delay = RTSDCTL_ENT_DLY_MIN;
 >>>>>>> v3.18
@@ -578,7 +610,10 @@ static int caam_probe(struct platform_device *pdev)
 	struct device_node *nprop, *np;
 	struct caam_ctrl __iomem *ctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct caam_full __iomem *topregs;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct caam_drv_private *ctrlpriv;
@@ -586,9 +621,12 @@ static int caam_probe(struct platform_device *pdev)
 	struct caam_perfmon *perfmon;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ctrlpriv = kzalloc(sizeof(struct caam_drv_private), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	u32 scfgr, comp_params;
 	u32 cha_vid_ls;
 	int pg_size;
@@ -596,6 +634,9 @@ static int caam_probe(struct platform_device *pdev)
 
 	ctrlpriv = devm_kzalloc(&pdev->dev, sizeof(struct caam_drv_private),
 				GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ctrlpriv)
 		return -ENOMEM;
@@ -613,6 +654,7 @@ static int caam_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctrlpriv->ctrl = (struct caam_ctrl __force *)ctrl;
 
 	/* topregs used to derive pointers to CAAM sub-blocks only */
@@ -621,6 +663,8 @@ static int caam_probe(struct platform_device *pdev)
 	/* Get the IRQ of the controller (for security violations only) */
 	ctrlpriv->secvio_irq = of_irq_to_resource(nprop, 0, NULL);
 =======
+=======
+>>>>>>> v3.18
 	/* Finding the page size for using the CTPR_MS register */
 	comp_params = rd_reg32(&ctrl->perfmon.comp_parms_ms);
 	pg_size = (comp_params & CTPR_MS_PG_SZ_MASK) >> CTPR_MS_PG_SZ_SHIFT;
@@ -645,12 +689,16 @@ static int caam_probe(struct platform_device *pdev)
 
 	/* Get the IRQ of the controller (for security violations only) */
 	ctrlpriv->secvio_irq = irq_of_parse_and_map(nprop, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * Enable DECO watchdogs and, if this is a PHYS_ADDR_T_64BIT kernel,
 	 * long pointers in master configuration register
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	setbits32(&topregs->ctrl.mcr, MCFGR_WDENABLE |
 		  (sizeof(dma_addr_t) == sizeof(u64) ? MCFGR_LONG_PTR : 0));
@@ -663,6 +711,8 @@ static int caam_probe(struct platform_device *pdev)
 	else
 		dma_set_mask(dev, DMA_BIT_MASK(32));
 =======
+=======
+>>>>>>> v3.18
 	setbits32(&ctrl->mcr, MCFGR_WDENABLE |
 		  (sizeof(dma_addr_t) == sizeof(u64) ? MCFGR_LONG_PTR : 0));
 
@@ -699,6 +749,9 @@ static int caam_probe(struct platform_device *pdev)
 			dma_set_mask_and_coherent(dev, DMA_BIT_MASK(36));
 	else
 		dma_set_mask_and_coherent(dev, DMA_BIT_MASK(32));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -707,6 +760,7 @@ static int caam_probe(struct platform_device *pdev)
 	 * for all, then go probe each one.
 	 */
 	rspec = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for_each_compatible_node(np, NULL, "fsl,sec-v4.0-job-ring")
 		rspec++;
@@ -720,6 +774,8 @@ static int caam_probe(struct platform_device *pdev)
 	if (ctrlpriv->jrdev == NULL) {
 		iounmap(&topregs->ctrl);
 =======
+=======
+>>>>>>> v3.18
 	for_each_available_child_of_node(nprop, np)
 		if (of_device_is_compatible(np, "fsl,sec-v4.0-job-ring") ||
 		    of_device_is_compatible(np, "fsl,sec4.0-job-ring"))
@@ -730,12 +786,16 @@ static int caam_probe(struct platform_device *pdev)
 					GFP_KERNEL);
 	if (ctrlpriv->jrpdev == NULL) {
 		iounmap(&ctrl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENOMEM;
 	}
 
 	ring = 0;
 	ctrlpriv->total_jobrs = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for_each_compatible_node(np, NULL, "fsl,sec-v4.0-job-ring") {
 		caam_jr_probe(pdev, np, ring);
@@ -758,6 +818,8 @@ static int caam_probe(struct platform_device *pdev)
 		/* This is all that's required to physically enable QI */
 		wr_reg32(&topregs->qi.qi_control_lo, QICTL_DQEN);
 =======
+=======
+>>>>>>> v3.18
 	for_each_available_child_of_node(nprop, np)
 		if (of_device_is_compatible(np, "fsl,sec-v4.0-job-ring") ||
 		    of_device_is_compatible(np, "fsl,sec4.0-job-ring")) {
@@ -788,6 +850,9 @@ static int caam_probe(struct platform_device *pdev)
 			       );
 		/* This is all that's required to physically enable QI */
 		wr_reg32(&ctrlpriv->qi->qi_control_lo, QICTL_DQEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -798,6 +863,7 @@ static int caam_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * RNG4 based SECs (v5+) need special initialization prior
@@ -814,6 +880,8 @@ static int caam_probe(struct platform_device *pdev)
 		/* Enable RDB bit so that RNG works faster */
 		setbits32(&topregs->ctrl.scfgr, SCFGR_RDBENABLE);
 =======
+=======
+>>>>>>> v3.18
 	cha_vid_ls = rd_reg32(&ctrl->perfmon.cha_id_ls);
 
 	/*
@@ -879,11 +947,15 @@ static int caam_probe(struct platform_device *pdev)
 
 		/* Enable RDB bit so that RNG works faster */
 		setbits32(&ctrl->scfgr, SCFGR_RDBENABLE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* NOTE: RTIC detection ought to go here, around Si time */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Initialize queue allocator lock */
 	spin_lock_init(&ctrlpriv->jr_alloc_lock);
@@ -894,12 +966,17 @@ static int caam_probe(struct platform_device *pdev)
 	dev_info(dev, "device ID = 0x%016llx (Era %d)\n", caam_id,
 		 caam_get_era(caam_id));
 =======
+=======
+>>>>>>> v3.18
 	caam_id = (u64)rd_reg32(&ctrl->perfmon.caam_id_ms) << 32 |
 		  (u64)rd_reg32(&ctrl->perfmon.caam_id_ls);
 
 	/* Report "alive" for developer to see */
 	dev_info(dev, "device ID = 0x%016llx (Era %d)\n", caam_id,
 		 caam_get_era());
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_info(dev, "job rings = %d, qi = %d\n",
 		 ctrlpriv->total_jobrs, ctrlpriv->qi_present);
@@ -913,7 +990,11 @@ static int caam_probe(struct platform_device *pdev)
 	perfmon = (struct caam_perfmon __force *)&ctrl->perfmon;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctrlpriv->dfs_root = debugfs_create_dir("caam", NULL);
+=======
+	ctrlpriv->dfs_root = debugfs_create_dir(dev_name(dev), NULL);
+>>>>>>> v3.18
 =======
 	ctrlpriv->dfs_root = debugfs_create_dir(dev_name(dev), NULL);
 >>>>>>> v3.18

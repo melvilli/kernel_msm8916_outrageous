@@ -182,7 +182,10 @@ int cvmx_helper_board_get_mii_address(int ipd_port)
 		else
 			return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CVMX_BOARD_TYPE_UBNT_E100:
 		if (ipd_port >= 0 && ipd_port <= 2)
 			return 7 - ipd_port;
@@ -197,6 +200,9 @@ int cvmx_helper_board_get_mii_address(int ipd_port)
 			return 8;
 		else
 			return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -287,7 +293,10 @@ cvmx_helper_link_info_t __cvmx_helper_board_link_get(int ipd_port)
 		}
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CVMX_BOARD_TYPE_CUST_DSR1000N:
 		if (ipd_port == 0 || ipd_port == 1) {
 			/* Ports 0 and 1 connect to a switch (BCM53115). */
@@ -300,6 +309,9 @@ cvmx_helper_link_info_t __cvmx_helper_board_link_get(int ipd_port)
 			is_broadcom_phy = 1;
 		}
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -739,10 +751,13 @@ int __cvmx_helper_board_hardware_enable(int interface)
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	} else if (cvmx_sysinfo_get()->board_type ==
 			CVMX_BOARD_TYPE_UBNT_E100) {
 		cvmx_write_csr(CVMX_ASXX_RX_CLK_SETX(0, interface), 0);
@@ -782,4 +797,7 @@ enum cvmx_helper_board_usb_clock_types __cvmx_helper_board_usb_get_clock_type(vo
 		return USB_CLOCK_TYPE_CRYSTAL_12;
 	return USB_CLOCK_TYPE_REF_48;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

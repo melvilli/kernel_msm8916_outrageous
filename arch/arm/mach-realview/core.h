@@ -38,6 +38,10 @@ struct machine_desc;
 extern struct platform_device realview_flash_device;
 extern struct platform_device realview_cf_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct platform_device realview_leds_device;
+>>>>>>> v3.18
 =======
 extern struct platform_device realview_leds_device;
 >>>>>>> v3.18
@@ -56,8 +60,12 @@ extern int realview_eth_register(const char *name, struct resource *res);
 extern int realview_usb_register(struct resource *res);
 extern void realview_init_early(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void realview_fixup(struct tag *tags, char **from,
 			   struct meminfo *meminfo);
+=======
+extern void realview_fixup(struct tag *tags, char **from);
+>>>>>>> v3.18
 =======
 extern void realview_fixup(struct tag *tags, char **from);
 >>>>>>> v3.18

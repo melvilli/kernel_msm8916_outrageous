@@ -60,7 +60,11 @@ void tick_setup_oneshot(struct clock_event_device *newdev,
 int tick_switch_to_oneshot(void (*handler)(struct clock_event_device *))
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tick_device *td = &__get_cpu_var(tick_cpu_device);
+=======
+	struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
+>>>>>>> v3.18
 =======
 	struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
 >>>>>>> v3.18

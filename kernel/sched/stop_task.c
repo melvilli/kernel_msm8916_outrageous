@@ -12,7 +12,11 @@
 #ifdef CONFIG_SMP
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 select_task_rq_stop(struct task_struct *p, int sd_flag, int flags)
+=======
+select_task_rq_stop(struct task_struct *p, int cpu, int sd_flag, int flags)
+>>>>>>> v3.18
 =======
 select_task_rq_stop(struct task_struct *p, int cpu, int sd_flag, int flags)
 >>>>>>> v3.18
@@ -28,6 +32,7 @@ check_preempt_curr_stop(struct rq *rq, struct task_struct *p, int flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct task_struct *pick_next_task_stop(struct rq *rq)
 {
 	struct task_struct *stop = rq->stop;
@@ -39,6 +44,8 @@ static struct task_struct *pick_next_task_stop(struct rq *rq)
 
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 static struct task_struct *
 pick_next_task_stop(struct rq *rq, struct task_struct *prev)
 {
@@ -52,6 +59,9 @@ pick_next_task_stop(struct rq *rq, struct task_struct *prev)
 	stop->se.exec_start = rq_clock_task(rq);
 
 	return stop;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -59,7 +69,11 @@ static void
 enqueue_task_stop(struct rq *rq, struct task_struct *p, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inc_nr_running(rq);
+=======
+	add_nr_running(rq, 1);
+>>>>>>> v3.18
 =======
 	add_nr_running(rq, 1);
 >>>>>>> v3.18
@@ -69,7 +83,11 @@ static void
 dequeue_task_stop(struct rq *rq, struct task_struct *p, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dec_nr_running(rq);
+=======
+	sub_nr_running(rq, 1);
+>>>>>>> v3.18
 =======
 	sub_nr_running(rq, 1);
 >>>>>>> v3.18
@@ -86,7 +104,11 @@ static void put_prev_task_stop(struct rq *rq, struct task_struct *prev)
 	u64 delta_exec;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	delta_exec = rq->clock_task - curr->se.exec_start;
+=======
+	delta_exec = rq_clock_task(rq) - curr->se.exec_start;
+>>>>>>> v3.18
 =======
 	delta_exec = rq_clock_task(rq) - curr->se.exec_start;
 >>>>>>> v3.18
@@ -100,7 +122,11 @@ static void put_prev_task_stop(struct rq *rq, struct task_struct *prev)
 	account_group_exec_runtime(curr, delta_exec);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	curr->se.exec_start = rq->clock_task;
+=======
+	curr->se.exec_start = rq_clock_task(rq);
+>>>>>>> v3.18
 =======
 	curr->se.exec_start = rq_clock_task(rq);
 >>>>>>> v3.18
@@ -116,7 +142,11 @@ static void set_curr_task_stop(struct rq *rq)
 	struct task_struct *stop = rq->stop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stop->se.exec_start = rq->clock_task;
+=======
+	stop->se.exec_start = rq_clock_task(rq);
+>>>>>>> v3.18
 =======
 	stop->se.exec_start = rq_clock_task(rq);
 >>>>>>> v3.18
@@ -140,18 +170,28 @@ get_rr_interval_stop(struct rq *rq, struct task_struct *task)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void update_curr_stop(struct rq *rq)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Simple, special scheduling class for the per-CPU stop tasks:
  */
 const struct sched_class stop_sched_class = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.next			= &rt_sched_class,
+=======
+	.next			= &dl_sched_class,
+>>>>>>> v3.18
 =======
 	.next			= &dl_sched_class,
 >>>>>>> v3.18
@@ -177,6 +217,10 @@ const struct sched_class stop_sched_class = {
 	.prio_changed		= prio_changed_stop,
 	.switched_to		= switched_to_stop,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.update_curr		= update_curr_stop,
+>>>>>>> v3.18
 =======
 	.update_curr		= update_curr_stop,
 >>>>>>> v3.18

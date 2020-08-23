@@ -79,7 +79,11 @@ static struct platform_device net5501_leds_dev = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata platform_device *net5501_devs[] = {
+=======
+static struct platform_device *net5501_devs[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct platform_device *net5501_devs[] __initdata = {
 >>>>>>> v3.18

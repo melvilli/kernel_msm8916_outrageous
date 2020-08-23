@@ -14,7 +14,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef ADV7343_REG_H
+=======
+#ifndef ADV7343_REGS_H
+>>>>>>> v3.18
 =======
 #ifndef ADV7343_REGS_H
 >>>>>>> v3.18

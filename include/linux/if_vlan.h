@@ -74,7 +74,11 @@ static inline struct vlan_ethhdr *vlan_eth_hdr(const struct sk_buff *skb)
 extern void vlan_ioctl_set(int (*hook)(struct net *, void __user *));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int is_vlan_dev(struct net_device *dev)
+=======
+static inline bool is_vlan_dev(struct net_device *dev)
+>>>>>>> v3.18
 =======
 static inline bool is_vlan_dev(struct net_device *dev)
 >>>>>>> v3.18
@@ -87,6 +91,7 @@ static inline bool is_vlan_dev(struct net_device *dev)
 #define vlan_tx_tag_get_id(__skb)	((__skb)->vlan_tci & VLAN_VID_MASK)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_VLAN_8021Q) || defined(CONFIG_VLAN_8021Q_MODULE)
 
 extern struct net_device *__vlan_find_dev_deep(struct net_device *real_dev,
@@ -97,6 +102,8 @@ extern u16 vlan_dev_vlan_id(const struct net_device *dev);
 extern bool vlan_do_receive(struct sk_buff **skb);
 extern struct sk_buff *vlan_untag(struct sk_buff *skb);
 =======
+=======
+>>>>>>> v3.18
 /**
  *	struct vlan_pcpu_stats - VLAN percpu rx/tx stats
  *	@rx_packets: number of received packets
@@ -202,6 +209,9 @@ vlan_dev_get_egress_qos_mask(struct net_device *dev, u32 skprio)
 }
 
 extern bool vlan_do_receive(struct sk_buff **skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int vlan_vid_add(struct net_device *dev, __be16 proto, u16 vid);
@@ -214,10 +224,13 @@ extern void vlan_vids_del_by_dev(struct net_device *dev,
 
 extern bool vlan_uses_dev(const struct net_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static inline struct net_device *
 __vlan_find_dev_deep(struct net_device *real_dev,
 =======
+=======
+>>>>>>> v3.18
 
 static inline int vlan_get_encap_level(struct net_device *dev)
 {
@@ -227,6 +240,9 @@ static inline int vlan_get_encap_level(struct net_device *dev)
 #else
 static inline struct net_device *
 __vlan_find_dev_deep_rcu(struct net_device *real_dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		     __be16 vlan_proto, u16 vlan_id)
 {
@@ -246,6 +262,7 @@ static inline u16 vlan_dev_vlan_id(const struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool vlan_do_receive(struct sk_buff **skb)
 {
 	return false;
@@ -255,6 +272,8 @@ static inline struct sk_buff *vlan_untag(struct sk_buff *skb)
 {
 	return skb;
 =======
+=======
+>>>>>>> v3.18
 static inline __be16 vlan_dev_vlan_proto(const struct net_device *dev)
 {
 	BUG();
@@ -270,6 +289,9 @@ static inline u16 vlan_dev_get_egress_qos_mask(struct net_device *dev,
 static inline bool vlan_do_receive(struct sk_buff **skb)
 {
 	return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -298,12 +320,18 @@ static inline bool vlan_uses_dev(const struct net_device *dev)
 	return false;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int vlan_get_encap_level(struct net_device *dev)
 {
 	BUG();
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -338,7 +366,11 @@ static inline struct sk_buff *vlan_insert_tag(struct sk_buff *skb,
 
 	if (skb_cow_head(skb, VLAN_HLEN) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree_skb(skb);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 		dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -397,8 +429,11 @@ static inline struct sk_buff *__vlan_hwaccel_put_tag(struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HAVE_VLAN_PUT_TAG
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -535,6 +570,10 @@ static inline void vlan_set_encap_proto(struct sk_buff *skb,
 		skb->protocol = htons(ETH_P_802_2);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

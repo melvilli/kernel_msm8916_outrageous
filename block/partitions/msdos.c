@@ -24,6 +24,10 @@
 #include "msdos.h"
 #include "efi.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "aix.h"
+>>>>>>> v3.18
 =======
 #include "aix.h"
 >>>>>>> v3.18
@@ -95,7 +99,11 @@ static int aix_magic_present(struct parsed_partitions *state, unsigned char *p)
 			ret = 1;
 		put_dev_sector(sect);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -151,7 +159,11 @@ static void parse_extended(struct parsed_partitions *state,
 
 		if (!msdos_magic_present(data + 510))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto done; 
+=======
+			goto done;
+>>>>>>> v3.18
 =======
 			goto done;
 >>>>>>> v3.18
@@ -168,18 +180,24 @@ static void parse_extended(struct parsed_partitions *state,
 		 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* 
 		 * First process the data partition(s)
 		 */
 		for (i=0; i<4; i++, p++) {
 			sector_t offs, size, next;
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * First process the data partition(s)
 		 */
 		for (i = 0; i < 4; i++, p++) {
 			sector_t offs, size, next;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!nr_sects(p) || is_extended_partition(p))
 				continue;
@@ -215,7 +233,11 @@ static void parse_extended(struct parsed_partitions *state,
 		 */
 		p -= 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i=0; i<4; i++, p++)
+=======
+		for (i = 0; i < 4; i++, p++)
+>>>>>>> v3.18
 =======
 		for (i = 0; i < 4; i++, p++)
 >>>>>>> v3.18
@@ -268,8 +290,13 @@ static void parse_solaris_x86(struct parsed_partitions *state,
 	}
 	/* Ensure we can handle previous case of VTOC with 8 entries gracefully */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max_nparts = le16_to_cpu (v->v_nparts) > 8 ? SOLARIS_X86_NUMSLICE : 8;
 	for (i=0; i<max_nparts && state->next<state->limit; i++) {
+=======
+	max_nparts = le16_to_cpu(v->v_nparts) > 8 ? SOLARIS_X86_NUMSLICE : 8;
+	for (i = 0; i < max_nparts && state->next < state->limit; i++) {
+>>>>>>> v3.18
 =======
 	max_nparts = le16_to_cpu(v->v_nparts) > 8 ? SOLARIS_X86_NUMSLICE : 8;
 	for (i = 0; i < max_nparts && state->next < state->limit; i++) {
@@ -294,7 +321,11 @@ static void parse_solaris_x86(struct parsed_partitions *state,
 
 #if defined(CONFIG_BSD_DISKLABEL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -329,7 +360,11 @@ static void parse_bsd(struct parsed_partitions *state,
 		if (state->next == state->limit)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (p->p_fstype == BSD_FS_UNUSED) 
+=======
+		if (p->p_fstype == BSD_FS_UNUSED)
+>>>>>>> v3.18
 =======
 		if (p->p_fstype == BSD_FS_UNUSED)
 >>>>>>> v3.18
@@ -447,7 +482,11 @@ static void parse_minix(struct parsed_partitions *state,
 	 * a secondary MBR describing its subpartitions, or
 	 * the normal boot sector. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (msdos_magic_present (data + 510) &&
+=======
+	if (msdos_magic_present(data + 510) &&
+>>>>>>> v3.18
 =======
 	if (msdos_magic_present(data + 510) &&
 >>>>>>> v3.18
@@ -484,7 +523,11 @@ static struct {
 	{0, NULL},
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -509,15 +552,21 @@ int msdos_partition(struct parsed_partitions *state)
 	if (aix_magic_present(state, data)) {
 		put_dev_sector(sect);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		strlcat(state->pp_buf, " [AIX]", PAGE_SIZE);
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_AIX_PARTITION
 		return aix_partition(state);
 #else
 		strlcat(state->pp_buf, " [AIX]", PAGE_SIZE);
 		return 0;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -578,6 +627,10 @@ int msdos_partition(struct parsed_partitions *state)
 		sector_t start = start_sect(p)*sector_size;
 		sector_t size = nr_sects(p)*sector_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -592,6 +645,10 @@ int msdos_partition(struct parsed_partitions *state)
 			 */
 			sector_t n = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

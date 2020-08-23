@@ -40,6 +40,10 @@
 #include <linux/compiler.h>
 #include <asm/page.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/early_ioremap.h>
+>>>>>>> v3.18
 =======
 #include <asm/early_ioremap.h>
 >>>>>>> v3.18
@@ -242,7 +246,11 @@ memcpy_toio(volatile void __iomem *dst, const void *src, size_t count)
 static inline void flush_write_buffers(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_X86_OOSTORE) || defined(CONFIG_X86_PPRO_FENCE)
+=======
+#if defined(CONFIG_X86_PPRO_FENCE)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_X86_PPRO_FENCE)
 >>>>>>> v3.18
@@ -305,7 +313,11 @@ static inline void outs##bwl(int port, const void *addr, unsigned long count) \
 {									\
 	asm volatile("rep; outs" #bwl					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     : "+S"(addr), "+c"(count) : "d"(port) : "memory");	\
+=======
+		     : "+S"(addr), "+c"(count) : "d"(port));		\
+>>>>>>> v3.18
 =======
 		     : "+S"(addr), "+c"(count) : "d"(port));		\
 >>>>>>> v3.18
@@ -315,7 +327,11 @@ static inline void ins##bwl(int port, void *addr, unsigned long count)	\
 {									\
 	asm volatile("rep; ins" #bwl					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     : "+D"(addr), "+c"(count) : "d"(port) : "memory");	\
+=======
+		     : "+D"(addr), "+c"(count) : "d"(port));		\
+>>>>>>> v3.18
 =======
 		     : "+D"(addr), "+c"(count) : "d"(port));		\
 >>>>>>> v3.18
@@ -333,6 +349,7 @@ extern int ioremap_change_attr(unsigned long vaddr, unsigned long size,
 extern void __iomem *ioremap_wc(resource_size_t offset, unsigned long size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * early_ioremap() and early_iounmap() are for temporary early boot-time
  * mappings, before the real ioremap() is functional.
@@ -346,6 +363,8 @@ extern void __iomem *early_memremap(resource_size_t phys_addr,
 				    unsigned long size);
 extern void early_iounmap(void __iomem *addr, unsigned long size);
 extern void fixup_early_ioremap(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern bool is_early_ioremap_ptep(pte_t *ptep);
@@ -365,7 +384,10 @@ extern bool xen_biovec_phys_mergeable(const struct bio_vec *vec1,
 #define IO_SPACE_LIMIT 0xffff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MTRR
 extern int __must_check arch_phys_wc_add(unsigned long base,
 					 unsigned long size);
@@ -373,5 +395,8 @@ extern void arch_phys_wc_del(int handle);
 #define arch_phys_wc_add arch_phys_wc_add
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_X86_IO_H */

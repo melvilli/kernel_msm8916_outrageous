@@ -9,13 +9,19 @@
 
 #define __TYPE_IS_PTR(t) (!__builtin_types_compatible_p(typeof(0?(t)0:0ULL), u64))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __SC_DELOUSE(t,v) (t)(__TYPE_IS_PTR(t) ? ((v) & 0x7fffffff) : (v))
 =======
+=======
+>>>>>>> v3.18
 
 #define __SC_DELOUSE(t,v) ({ \
 	BUILD_BUG_ON(sizeof(t) > 4 && !__TYPE_IS_PTR(t)); \
 	(t)(__TYPE_IS_PTR(t) ? ((v) & 0x7fffffff) : (v)); \
 })
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PSW32_MASK_PER		0x40000000UL
@@ -31,6 +37,10 @@
 #define PSW32_MASK_CC		0x00003000UL
 #define PSW32_MASK_PM		0x00000f00UL
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PSW32_MASK_RI		0x00000080UL
+>>>>>>> v3.18
 =======
 #define PSW32_MASK_RI		0x00000080UL
 >>>>>>> v3.18
@@ -48,12 +58,18 @@
 #define PSW32_ASC_HOME		0x0000C000UL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32 psw32_user_bits;
 =======
+=======
+>>>>>>> v3.18
 #define PSW32_USER_BITS (PSW32_MASK_DAT | PSW32_MASK_IO | PSW32_MASK_EXT | \
 			 PSW32_DEFAULT_KEY | PSW32_MASK_BASE | \
 			 PSW32_MASK_MCHECK | PSW32_MASK_PSTATE | \
 			 PSW32_ASC_PRIMARY)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define COMPAT_USER_HZ		100

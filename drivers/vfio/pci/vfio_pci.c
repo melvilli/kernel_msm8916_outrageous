@@ -14,6 +14,10 @@
 #include <linux/device.h>
 #include <linux/eventfd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/file.h>
+>>>>>>> v3.18
 =======
 #include <linux/file.h>
 >>>>>>> v3.18
@@ -41,11 +45,17 @@ MODULE_PARM_DESC(nointxmask,
 		  "Disable support for PCI 2.3 style INTx masking.  If this resolves problems for specific devices, report lspci -vvvxxx to linux-pci@vger.kernel.org so the device can be fixed automatically via the broken_intx_masking flag.");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_MUTEX(driver_lock);
 
 static void vfio_pci_try_bus_reset(struct vfio_pci_device *vdev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int vfio_pci_enable(struct vfio_pci_device *vdev)
 {
@@ -55,6 +65,12 @@ static int vfio_pci_enable(struct vfio_pci_device *vdev)
 	u8 msix_pos;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Don't allow our initial saved state to include busmaster */
+	pci_clear_master(pdev);
+
+>>>>>>> v3.18
 =======
 	/* Don't allow our initial saved state to include busmaster */
 	pci_clear_master(pdev);
@@ -74,7 +90,12 @@ static int vfio_pci_enable(struct vfio_pci_device *vdev)
 	ret = vfio_config_init(vdev);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_load_and_free_saved_state(pdev, &vdev->pci_saved_state);
+=======
+		kfree(vdev->pci_saved_state);
+		vdev->pci_saved_state = NULL;
+>>>>>>> v3.18
 =======
 		kfree(vdev->pci_saved_state);
 		vdev->pci_saved_state = NULL;
@@ -120,7 +141,12 @@ static void vfio_pci_disable(struct vfio_pci_device *vdev)
 	int bar;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_disable_device(pdev);
+=======
+	/* Stop the device from further DMA */
+	pci_clear_master(pdev);
+>>>>>>> v3.18
 =======
 	/* Stop the device from further DMA */
 	pci_clear_master(pdev);
@@ -143,6 +169,11 @@ static void vfio_pci_disable(struct vfio_pci_device *vdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vdev->needs_reset = true;
+
+>>>>>>> v3.18
 =======
 	vdev->needs_reset = true;
 
@@ -159,7 +190,11 @@ static void vfio_pci_disable(struct vfio_pci_device *vdev)
 
 		if (!vdev->reset_works)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -174,11 +209,14 @@ static void vfio_pci_disable(struct vfio_pci_device *vdev)
 	pci_write_config_word(pdev, PCI_COMMAND, PCI_COMMAND_INTX_DISABLE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vdev->reset_works)
 		__pci_reset_function(pdev);
 
 	pci_restore_state(pdev);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Try to reset the device.  The success of this is dependent on
 	 * being able to lock the device, which is not always possible.
@@ -197,6 +235,9 @@ out:
 	pci_disable_device(pdev);
 
 	vfio_pci_try_bus_reset(vdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -205,9 +246,12 @@ static void vfio_pci_release(void *device_data)
 	struct vfio_pci_device *vdev = device_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_dec_and_test(&vdev->refcnt))
 		vfio_pci_disable(vdev);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&driver_lock);
 
 	if (!(--vdev->refcnt)) {
@@ -216,6 +260,9 @@ static void vfio_pci_release(void *device_data)
 	}
 
 	mutex_unlock(&driver_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	module_put(THIS_MODULE);
@@ -225,6 +272,10 @@ static int vfio_pci_open(void *device_data)
 {
 	struct vfio_pci_device *vdev = device_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 >>>>>>> v3.18
@@ -232,6 +283,7 @@ static int vfio_pci_open(void *device_data)
 	if (!try_module_get(THIS_MODULE))
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (atomic_inc_return(&vdev->refcnt) == 1) {
 		int ret = vfio_pci_enable(vdev);
@@ -243,6 +295,8 @@ static int vfio_pci_open(void *device_data)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&driver_lock);
 
 	if (!vdev->refcnt) {
@@ -258,6 +312,9 @@ error:
 	if (ret)
 		module_put(THIS_MODULE);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -278,8 +335,12 @@ static int vfio_pci_get_irq_count(struct vfio_pci_device *vdev, int irq_type)
 			pci_read_config_word(vdev->pdev,
 					     pos + PCI_MSI_FLAGS, &flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			return 1 << (flags & PCI_MSI_FLAGS_QMASK);
+=======
+			return 1 << ((flags & PCI_MSI_FLAGS_QMASK) >> 1);
+>>>>>>> v3.18
 =======
 			return 1 << ((flags & PCI_MSI_FLAGS_QMASK) >> 1);
 >>>>>>> v3.18
@@ -303,7 +364,10 @@ static int vfio_pci_get_irq_count(struct vfio_pci_device *vdev, int irq_type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vfio_pci_count_devs(struct pci_dev *pdev, void *data)
 {
 	(*(int *)data)++;
@@ -408,6 +472,9 @@ static int vfio_pci_for_each_slot_or_bus(struct pci_dev *pdev,
 	return walk.ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static long vfio_pci_ioctl(void *device_data,
 			   unsigned int cmd, unsigned long arg)
@@ -546,9 +613,14 @@ static long vfio_pci_ioctl(void *device_data,
 	} else if (cmd == VFIO_DEVICE_SET_IRQS) {
 		struct vfio_irq_set hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		size_t size;
 		u8 *data = NULL;
 		int max, ret = 0;
+=======
+		u8 *data = NULL;
+		int ret = 0;
+>>>>>>> v3.18
 =======
 		u8 *data = NULL;
 		int ret = 0;
@@ -561,13 +633,17 @@ static long vfio_pci_ioctl(void *device_data,
 
 		if (hdr.argsz < minsz || hdr.index >= VFIO_PCI_NUM_IRQS ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    hdr.count >= (U32_MAX - hdr.start) ||
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		    hdr.flags & ~(VFIO_IRQ_SET_DATA_TYPE_MASK |
 				  VFIO_IRQ_SET_ACTION_TYPE_MASK))
 			return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		max = vfio_pci_get_irq_count(vdev, hdr.index);
 		if (hdr.start >= max || hdr.start + hdr.count > max)
@@ -590,6 +666,8 @@ static long vfio_pci_ioctl(void *device_data,
 		if (size) {
 			if (hdr.argsz - minsz < hdr.count * size)
 =======
+=======
+>>>>>>> v3.18
 		if (!(hdr.flags & VFIO_IRQ_SET_DATA_NONE)) {
 			size_t size;
 			int max = vfio_pci_get_irq_count(vdev, hdr.index);
@@ -603,6 +681,9 @@ static long vfio_pci_ioctl(void *device_data,
 
 			if (hdr.argsz - minsz < hdr.count * size ||
 			    hdr.start >= max || hdr.start + hdr.count > max)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return -EINVAL;
 
@@ -623,10 +704,13 @@ static long vfio_pci_ioctl(void *device_data,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (cmd == VFIO_DEVICE_RESET)
 		return vdev->reset_works ?
 			pci_reset_function(vdev->pdev) : -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	} else if (cmd == VFIO_DEVICE_RESET) {
 		return vdev->reset_works ?
 			pci_try_reset_function(vdev->pdev) : -EINVAL;
@@ -809,6 +893,9 @@ hot_reset_release:
 		kfree(groups);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return -ENOTTY;
@@ -919,7 +1006,10 @@ static int vfio_pci_mmap(void *device_data, struct vm_area_struct *vma)
 
 	vma->vm_private_data = vdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma->vm_flags |= VM_IO | VM_DONTEXPAND | VM_DONTDUMP;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
@@ -942,6 +1032,10 @@ static const struct vfio_device_ops vfio_pci_ops = {
 static int vfio_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 type;
+>>>>>>> v3.18
 =======
 	u8 type;
 >>>>>>> v3.18
@@ -950,7 +1044,12 @@ static int vfio_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->hdr_type != PCI_HEADER_TYPE_NORMAL)
+=======
+	pci_read_config_byte(pdev, PCI_HEADER_TYPE, &type);
+	if ((type & PCI_HEADER_TYPE) != PCI_HEADER_TYPE_NORMAL)
+>>>>>>> v3.18
 =======
 	pci_read_config_byte(pdev, PCI_HEADER_TYPE, &type);
 	if ((type & PCI_HEADER_TYPE) != PCI_HEADER_TYPE_NORMAL)
@@ -972,7 +1071,10 @@ static int vfio_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	mutex_init(&vdev->igate);
 	spin_lock_init(&vdev->irqlock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&vdev->refcnt, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -991,16 +1093,22 @@ static void vfio_pci_remove(struct pci_dev *pdev)
 
 	vdev = vfio_del_group_dev(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!vdev)
 		return;
 
 	iommu_group_put(pdev->dev.iommu_group);
 	kfree(vdev);
 =======
+=======
+>>>>>>> v3.18
 	if (vdev) {
 		iommu_group_put(pdev->dev.iommu_group);
 		kfree(vdev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1021,10 +1129,13 @@ static pci_ers_result_t vfio_pci_aer_err_detected(struct pci_dev *pdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vdev->err_trigger)
 		eventfd_signal(vdev->err_trigger, 1);
 
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&vdev->igate);
 
 	if (vdev->err_trigger)
@@ -1032,6 +1143,9 @@ static pci_ers_result_t vfio_pci_aer_err_detected(struct pci_dev *pdev,
 
 	mutex_unlock(&vdev->igate);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vfio_device_put(device);
 
@@ -1051,7 +1165,10 @@ static struct pci_driver vfio_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct vfio_devices {
 	struct vfio_device **devices;
 	int cur_index;
@@ -1138,6 +1255,9 @@ put_devs:
 	kfree(devs.devices);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __exit vfio_pci_cleanup(void)
 {

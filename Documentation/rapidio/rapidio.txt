@@ -74,7 +74,10 @@ ports that form the same network. It also contains a pointer to the default
 master port that is used to communicate with devices within the network.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 2.5 Device Drivers
 
 RapidIO device-specific drivers follow Linux Kernel Driver Model and are
@@ -91,12 +94,16 @@ registered for a device, all common RapidIO services have to be registered as
 subsystem interfaces. This allows to have multiple common services attached to
 the same device without blocking attachment of a device-specific driver.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 3. Subsystem Initialization
 ---------------------------
 
 In order to initialize the RapidIO subsystem, a platform must initialize and
 register at least one master port within the RapidIO network. To register mport
+<<<<<<< HEAD
 <<<<<<< HEAD
 within the subsystem controller driver initialization code calls function
 rio_register_mport() for each available master port.
@@ -109,11 +116,22 @@ within the subsystem controller driver's initialization code calls function
 rio_register_mport() for each available master port.
 
 >>>>>>> v3.18
+=======
+within the subsystem controller driver's initialization code calls function
+rio_register_mport() for each available master port.
+
+>>>>>>> v3.18
 After all active master ports are registered with a RapidIO subsystem,
 an enumeration and/or discovery routine may be called automatically or
 by user-space command.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+RapidIO subsystem can be configured to be built as a statically linked or
+modular component of the kernel (see details below).
+
+>>>>>>> v3.18
 =======
 RapidIO subsystem can be configured to be built as a statically linked or
 modular component of the kernel (see details below).
@@ -126,7 +144,11 @@ modular component of the kernel (see details below).
 ------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 RapidIO subsystem configuration options allow users to specify enumeration and
+=======
+RapidIO subsystem configuration options allow users to build enumeration and
+>>>>>>> v3.18
 =======
 RapidIO subsystem configuration options allow users to build enumeration and
 >>>>>>> v3.18
@@ -151,8 +173,13 @@ several methods to initiate an enumeration and/or discovery process:
   expires the discovery process is terminated without obtaining RapidIO network
   information. NOTE: a timed out discovery process may be restarted later using
 <<<<<<< HEAD
+<<<<<<< HEAD
   a user-space command as it is described later if the given endpoint was
   enumerated successfully.
+=======
+  a user-space command as it is described below (if the given endpoint was
+  enumerated successfully).
+>>>>>>> v3.18
 =======
   a user-space command as it is described below (if the given endpoint was
   enumerated successfully).
@@ -179,12 +206,15 @@ routine depending on the configured role of a master port: host or agent.
 
 Enumeration is performed by a master port if it is configured as a host port by
 <<<<<<< HEAD
+<<<<<<< HEAD
 assigning a host device ID greater than or equal to zero. A host device ID is
 assigned to a master port through the kernel command line parameter "riohdid=",
 or can be configured in a platform-specific manner. If the host device ID for
 a specific master port is set to -1, the discovery process will be performed
 for it.
 =======
+=======
+>>>>>>> v3.18
 assigning a host destination ID greater than or equal to zero. The host
 destination ID can be assigned to a master port using various methods depending
 on RapidIO subsystem build configuration:
@@ -212,18 +242,27 @@ on RapidIO subsystem build configuration:
 
 If the host device ID for a specific master port is set to -1, the discovery
 process will be performed for it.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The enumeration and discovery routines use RapidIO maintenance transactions
 to access the configuration space of devices.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 NOTE: If RapidIO switch-specific device drivers are built as loadable modules
 they must be loaded before enumeration/discovery process starts.
 This requirement is cased by the fact that enumeration/discovery methods invoke
 vendor-specific callbacks on early stages.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 4.2 Automatic Start of Enumeration and Discovery
 ------------------------------------------------
@@ -336,7 +375,11 @@ initialization.
 
 RapidIO subsystem code organization allows addition of new enumeration/discovery
 <<<<<<< HEAD
+<<<<<<< HEAD
 methods as new configuration options without significant impact to to the core
+=======
+methods as new configuration options without significant impact to the core
+>>>>>>> v3.18
 =======
 methods as new configuration options without significant impact to the core
 >>>>>>> v3.18
@@ -349,8 +392,11 @@ an enumerator to a specified mport device (or devices). The basic enumerator
 implementation demonstrates this process.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 5. References
 =======
+=======
+>>>>>>> v3.18
 4.6 Using Loadable RapidIO Switch Drivers
 -----------------------------------------
 
@@ -381,6 +427,9 @@ NOTE: In the example above, one of "softdep" commands must be removed or
 commented out to keep required module loading sequence.
 
 A. References
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 -------------
 

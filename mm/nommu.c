@@ -14,14 +14,20 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
 #include <linux/mm.h>
 =======
+=======
+>>>>>>> v3.18
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/export.h>
 #include <linux/mm.h>
 #include <linux/vmacache.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/mman.h>
 #include <linux/swap.h>
@@ -33,6 +39,10 @@
 #include <linux/blkdev.h>
 #include <linux/backing-dev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 >>>>>>> v3.18
@@ -43,6 +53,10 @@
 #include <linux/audit.h>
 #include <linux/sched/sysctl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/printk.h>
+>>>>>>> v3.18
 =======
 #include <linux/printk.h>
 >>>>>>> v3.18
@@ -73,7 +87,10 @@ void *high_memory;
 struct page *mem_map;
 unsigned long max_mapnr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long num_physpages;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 unsigned long highest_memmap_pfn;
@@ -81,6 +98,10 @@ struct percpu_counter vm_committed_as;
 int sysctl_overcommit_memory = OVERCOMMIT_GUESS; /* heuristic overcommit */
 int sysctl_overcommit_ratio = 50; /* default is 50% */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unsigned long sysctl_overcommit_kbytes __read_mostly;
+>>>>>>> v3.18
 =======
 unsigned long sysctl_overcommit_kbytes __read_mostly;
 >>>>>>> v3.18
@@ -109,7 +130,10 @@ EXPORT_SYMBOL_GPL(vm_memory_committed);
 
 EXPORT_SYMBOL(mem_map);
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(num_physpages);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -309,11 +333,17 @@ EXPORT_SYMBOL(vmalloc_to_pfn);
 long vread(char *buf, char *addr, unsigned long count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Don't allow overflow */
 	if ((unsigned long) buf + count < count)
 		count = -(unsigned long) buf;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memcpy(buf, addr, count);
 	return count;
@@ -327,7 +357,11 @@ long vwrite(char *buf, char *addr, unsigned long count)
 
 	memcpy(addr, buf, count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return(count);
+=======
+	return count;
+>>>>>>> v3.18
 =======
 	return count;
 >>>>>>> v3.18
@@ -494,7 +528,11 @@ EXPORT_SYMBOL_GPL(vm_unmap_aliases);
  * have one.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void  __attribute__((weak)) vmalloc_sync_all(void)
+=======
+void __weak vmalloc_sync_all(void)
+>>>>>>> v3.18
 =======
 void __weak vmalloc_sync_all(void)
 >>>>>>> v3.18
@@ -573,7 +611,11 @@ void __init mmap_init(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = percpu_counter_init(&vm_committed_as, 0);
+=======
+	ret = percpu_counter_init(&vm_committed_as, 0, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ret = percpu_counter_init(&vm_committed_as, 0, GFP_KERNEL);
 >>>>>>> v3.18
@@ -811,13 +853,19 @@ static void add_vma_to_mm(struct mm_struct *mm, struct vm_area_struct *vma)
 static void delete_vma_from_mm(struct vm_area_struct *vma)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct address_space *mapping;
 	struct mm_struct *mm = vma->vm_mm;
 =======
+=======
+>>>>>>> v3.18
 	int i;
 	struct address_space *mapping;
 	struct mm_struct *mm = vma->vm_mm;
 	struct task_struct *curr = current;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kenter("%p", vma);
@@ -826,9 +874,12 @@ static void delete_vma_from_mm(struct vm_area_struct *vma)
 
 	mm->map_count--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mm->mmap_cache == vma)
 		mm->mmap_cache = NULL;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < VMACACHE_SIZE; i++) {
 		/* if the vma is cached, invalidate the entire cache */
 		if (curr->vmacache[i] == vma) {
@@ -836,6 +887,9 @@ static void delete_vma_from_mm(struct vm_area_struct *vma)
 			break;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* remove the VMA from the mapping */
@@ -885,8 +939,13 @@ struct vm_area_struct *find_vma(struct mm_struct *mm, unsigned long addr)
 
 	/* check the cache first */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma = ACCESS_ONCE(mm->mmap_cache);
 	if (vma && vma->vm_start <= addr && vma->vm_end > addr)
+=======
+	vma = vmacache_find(mm, addr);
+	if (likely(vma))
+>>>>>>> v3.18
 =======
 	vma = vmacache_find(mm, addr);
 	if (likely(vma))
@@ -900,7 +959,11 @@ struct vm_area_struct *find_vma(struct mm_struct *mm, unsigned long addr)
 			return NULL;
 		if (vma->vm_end > addr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mm->mmap_cache = vma;
+=======
+			vmacache_update(addr, vma);
+>>>>>>> v3.18
 =======
 			vmacache_update(addr, vma);
 >>>>>>> v3.18
@@ -943,8 +1006,13 @@ static struct vm_area_struct *find_vma_exact(struct mm_struct *mm,
 
 	/* check the cache first */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma = mm->mmap_cache;
 	if (vma && vma->vm_start == addr && vma->vm_end == end)
+=======
+	vma = vmacache_find_exact(mm, addr, end);
+	if (vma)
+>>>>>>> v3.18
 =======
 	vma = vmacache_find_exact(mm, addr, end);
 	if (vma)
@@ -960,7 +1028,11 @@ static struct vm_area_struct *find_vma_exact(struct mm_struct *mm,
 			return NULL;
 		if (vma->vm_end == end) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mm->mmap_cache = vma;
+=======
+			vmacache_update(addr, vma);
+>>>>>>> v3.18
 =======
 			vmacache_update(addr, vma);
 >>>>>>> v3.18
@@ -1016,7 +1088,11 @@ static int validate_mmap_request(struct file *file,
 
 		/* files must support mmap */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!file->f_op || !file->f_op->mmap)
+=======
+		if (!file->f_op->mmap)
+>>>>>>> v3.18
 =======
 		if (!file->f_op->mmap)
 >>>>>>> v3.18
@@ -1077,7 +1153,11 @@ static int validate_mmap_request(struct file *file,
 				return -EACCES;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (locks_verify_locked(file_inode(file)))
+=======
+			if (locks_verify_locked(file))
+>>>>>>> v3.18
 =======
 			if (locks_verify_locked(file))
 >>>>>>> v3.18
@@ -1089,8 +1169,12 @@ static int validate_mmap_request(struct file *file,
 			/* we mustn't privatise shared mappings */
 			capabilities &= ~BDI_CAP_MAP_COPY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		else {
+=======
+		} else {
+>>>>>>> v3.18
 =======
 		} else {
 >>>>>>> v3.18
@@ -1125,8 +1209,12 @@ static int validate_mmap_request(struct file *file,
 			if (prot & PROT_EXEC)
 				return -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		else if ((prot & PROT_READ) && !(prot & PROT_EXEC)) {
+=======
+		} else if ((prot & PROT_READ) && !(prot & PROT_EXEC)) {
+>>>>>>> v3.18
 =======
 		} else if ((prot & PROT_READ) && !(prot & PROT_EXEC)) {
 >>>>>>> v3.18
@@ -1136,8 +1224,12 @@ static int validate_mmap_request(struct file *file,
 					prot |= PROT_EXEC;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		else if ((prot & PROT_READ) &&
+=======
+		} else if ((prot & PROT_READ) &&
+>>>>>>> v3.18
 =======
 		} else if ((prot & PROT_READ) &&
 >>>>>>> v3.18
@@ -1148,8 +1240,12 @@ static int validate_mmap_request(struct file *file,
 			capabilities &= ~BDI_CAP_MAP_DIRECT;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	else {
+=======
+	} else {
+>>>>>>> v3.18
 =======
 	} else {
 >>>>>>> v3.18
@@ -1343,7 +1439,11 @@ error_free:
 
 enomem:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Allocation of length %lu from process %d (%s) failed\n",
+=======
+	pr_err("Allocation of length %lu from process %d (%s) failed\n",
+>>>>>>> v3.18
 =======
 	pr_err("Allocation of length %lu from process %d (%s) failed\n",
 >>>>>>> v3.18
@@ -1765,7 +1865,11 @@ int do_munmap(struct mm_struct *mm, unsigned long start, size_t len)
 	vma = find_vma(mm, start);
 	if (!vma) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		static int limit = 0;
+=======
+		static int limit;
+>>>>>>> v3.18
 =======
 		static int limit;
 >>>>>>> v3.18
@@ -2007,7 +2111,11 @@ EXPORT_SYMBOL(unmap_mapping_range);
 int __vm_enough_memory(struct mm_struct *mm, long pages, int cap_sys_admin)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long free, allowed, reserve;
+=======
+	unsigned long free, allowed, reserve;
+>>>>>>> v3.18
 =======
 	unsigned long free, allowed, reserve;
 >>>>>>> v3.18
@@ -2063,7 +2171,11 @@ int __vm_enough_memory(struct mm_struct *mm, long pages, int cap_sys_admin)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	allowed = totalram_pages * sysctl_overcommit_ratio / 100;
+=======
+	allowed = vm_commit_limit();
+>>>>>>> v3.18
 =======
 	allowed = vm_commit_limit();
 >>>>>>> v3.18
@@ -2073,7 +2185,10 @@ int __vm_enough_memory(struct mm_struct *mm, long pages, int cap_sys_admin)
 	if (!cap_sys_admin)
 		allowed -= sysctl_admin_reserve_kbytes >> (PAGE_SHIFT - 10);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	allowed += total_swap_pages;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2083,7 +2198,11 @@ int __vm_enough_memory(struct mm_struct *mm, long pages, int cap_sys_admin)
 	if (mm) {
 		reserve = sysctl_user_reserve_kbytes >> (PAGE_SHIFT - 10);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		allowed -= min_t(long, mm->total_vm / 32, reserve);
+=======
+		allowed -= min(mm->total_vm / 32, reserve);
+>>>>>>> v3.18
 =======
 		allowed -= min(mm->total_vm / 32, reserve);
 >>>>>>> v3.18
@@ -2099,6 +2218,7 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int in_gate_area_no_mm(unsigned long addr)
 {
 	return 0;
@@ -2111,6 +2231,8 @@ int filemap_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 }
 EXPORT_SYMBOL(filemap_fault);
 =======
+=======
+>>>>>>> v3.18
 int filemap_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 {
 	BUG();
@@ -2123,6 +2245,9 @@ void filemap_map_pages(struct vm_area_struct *vma, struct vm_fault *vmf)
 	BUG();
 }
 EXPORT_SYMBOL(filemap_map_pages);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int generic_file_remap_pages(struct vm_area_struct *vma, unsigned long addr,

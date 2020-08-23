@@ -1,11 +1,17 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef pr_fmt
 #undef pr_fmt
 #endif
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/types.h>
 #include <linux/fs.h>
@@ -15,6 +21,7 @@
 #include <linux/workqueue.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* AmigaOS allows file names with up to 30 characters length.
  * Names longer than that will be silently truncated. If you
  * want to disallow this, comment out the following #define.
@@ -23,6 +30,8 @@
  */
 /*#define AFFS_NO_TRUNCATE */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Ugly macros make the code more pretty. */
@@ -41,7 +50,10 @@
 #define AFFS_CACHE_SIZE		PAGE_SIZE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AFFS_MAX_PREALLOC	32
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define AFFS_LC_SIZE		(AFFS_CACHE_SIZE/sizeof(u32)/2)
@@ -134,6 +146,10 @@ struct affs_sb_info {
 #define SF_PREFIX	0x0400		/* Buffer for prefix is allocated */
 #define SF_VERBOSE	0x0800		/* Talk about fs when mounting */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SF_NO_TRUNCATE	0x1000		/* Don't truncate filenames */
+>>>>>>> v3.18
 =======
 #define SF_NO_TRUNCATE	0x1000		/* Don't truncate filenames */
 >>>>>>> v3.18
@@ -157,10 +173,13 @@ extern void	secs_to_datestamp(time_t secs, struct affs_date *ds);
 extern umode_t	prot_to_mode(u32 prot);
 extern void	mode_to_prot(struct inode *inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void	affs_error(struct super_block *sb, const char *function, const char *fmt, ...);
 extern void	affs_warning(struct super_block *sb, const char *function, const char *fmt, ...);
 extern int	affs_check_name(const unsigned char *name, int len);
 =======
+=======
+>>>>>>> v3.18
 extern void	affs_error(struct super_block *sb, const char *function,
 			   const char *fmt, ...);
 extern void	affs_warning(struct super_block *sb, const char *function,
@@ -168,6 +187,9 @@ extern void	affs_warning(struct super_block *sb, const char *function,
 extern bool	affs_nofilenametruncate(const struct dentry *dentry);
 extern int	affs_check_name(const unsigned char *name, int len,
 				bool notruncate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int	affs_copy_name(unsigned char *bstr, struct dentry *dentry);
 
@@ -240,7 +262,11 @@ static inline struct buffer_head *
 affs_bread(struct super_block *sb, int block)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("affs_bread: %d\n", block);
+=======
+	pr_debug("%s: %d\n", __func__, block);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: %d\n", __func__, block);
 >>>>>>> v3.18
@@ -252,7 +278,11 @@ static inline struct buffer_head *
 affs_getblk(struct super_block *sb, int block)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("affs_getblk: %d\n", block);
+=======
+	pr_debug("%s: %d\n", __func__, block);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: %d\n", __func__, block);
 >>>>>>> v3.18
@@ -265,7 +295,11 @@ affs_getzeroblk(struct super_block *sb, int block)
 {
 	struct buffer_head *bh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("affs_getzeroblk: %d\n", block);
+=======
+	pr_debug("%s: %d\n", __func__, block);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: %d\n", __func__, block);
 >>>>>>> v3.18
@@ -284,7 +318,11 @@ affs_getemptyblk(struct super_block *sb, int block)
 {
 	struct buffer_head *bh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("affs_getemptyblk: %d\n", block);
+=======
+	pr_debug("%s: %d\n", __func__, block);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: %d\n", __func__, block);
 >>>>>>> v3.18
@@ -301,7 +339,11 @@ affs_brelse(struct buffer_head *bh)
 {
 	if (bh)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("affs_brelse: %lld\n", (long long) bh->b_blocknr);
+=======
+		pr_debug("%s: %lld\n", __func__, (long long) bh->b_blocknr);
+>>>>>>> v3.18
 =======
 		pr_debug("%s: %lld\n", __func__, (long long) bh->b_blocknr);
 >>>>>>> v3.18

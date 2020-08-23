@@ -66,8 +66,13 @@ static struct p9_fid *v9fs_fid_find(struct dentry *dentry, kuid_t uid, int any)
 	struct p9_fid *fid, *ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, " dentry: %s (%p) uid %d any %d\n",
 		 dentry->d_name.name, dentry, from_kuid(&init_user_ns, uid),
+=======
+	p9_debug(P9_DEBUG_VFS, " dentry: %pd (%p) uid %d any %d\n",
+		 dentry, dentry, from_kuid(&init_user_ns, uid),
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, " dentry: %pd (%p) uid %d any %d\n",
 		 dentry, dentry, from_kuid(&init_user_ns, uid),

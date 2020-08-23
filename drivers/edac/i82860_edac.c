@@ -289,7 +289,11 @@ static void i82860_remove_one(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i82860_pci_tbl) = {
+=======
+static const struct pci_device_id i82860_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id i82860_pci_tbl[] = {
 >>>>>>> v3.18

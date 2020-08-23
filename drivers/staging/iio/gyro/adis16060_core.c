@@ -152,11 +152,17 @@ static int adis16060_r_probe(struct spi_device *spi)
 
 	/* setup the industrialio driver allocated elements */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
@@ -175,6 +181,7 @@ static int adis16060_r_probe(struct spi_device *spi)
 	indio_dev->channels = adis16060_channels;
 	indio_dev->num_channels = ARRAY_SIZE(adis16060_channels);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = iio_device_register(indio_dev);
 	if (ret)
@@ -197,12 +204,17 @@ static int adis16060_r_remove(struct spi_device *spi)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_iio_device_register(&spi->dev, indio_dev);
 	if (ret)
 		return ret;
 
 	adis16060_iio_dev = indio_dev;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -212,6 +224,10 @@ static int adis16060_w_probe(struct spi_device *spi)
 	struct iio_dev *indio_dev = adis16060_iio_dev;
 	struct adis16060_state *st;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -240,7 +256,10 @@ static struct spi_driver adis16060_r_driver = {
 	},
 	.probe = adis16060_r_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = adis16060_r_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

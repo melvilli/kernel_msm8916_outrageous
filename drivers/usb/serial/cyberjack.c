@@ -31,7 +31,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -55,7 +58,10 @@
 
 /* Function prototypes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cyberjack_attach(struct usb_serial *serial);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int cyberjack_port_probe(struct usb_serial_port *port);
@@ -86,7 +92,10 @@ static struct usb_serial_driver cyberjack_device = {
 	.id_table =		id_table,
 	.num_ports =		1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.attach =		cyberjack_attach,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.port_probe =		cyberjack_port_probe,
@@ -113,6 +122,7 @@ struct cyberjack_private {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cyberjack_attach(struct usb_serial *serial)
 {
 	if (serial->num_bulk_out < serial->num_ports)
@@ -121,6 +131,8 @@ static int cyberjack_attach(struct usb_serial *serial)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int cyberjack_port_probe(struct usb_serial_port *port)
@@ -244,7 +256,11 @@ static int cyberjack_write(struct tty_struct *tty,
 		if (result) {
 			dev_err(&port->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"%s - failed submitting write urb, error %d",
+=======
+				"%s - failed submitting write urb, error %d\n",
+>>>>>>> v3.18
 =======
 				"%s - failed submitting write urb, error %d\n",
 >>>>>>> v3.18
@@ -306,7 +322,11 @@ static void cyberjack_read_int_callback(struct urb *urb)
 		old_rdtodo = priv->rdtodo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (old_rdtodo + size < old_rdtodo) {
+=======
+		if (old_rdtodo > SHRT_MAX - size) {
+>>>>>>> v3.18
 =======
 		if (old_rdtodo > SHRT_MAX - size) {
 >>>>>>> v3.18
@@ -316,7 +336,11 @@ static void cyberjack_read_int_callback(struct urb *urb)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* "+=" is probably more fault tollerant than "=" */
+=======
+		/* "+=" is probably more fault tolerant than "=" */
+>>>>>>> v3.18
 =======
 		/* "+=" is probably more fault tolerant than "=" */
 >>>>>>> v3.18

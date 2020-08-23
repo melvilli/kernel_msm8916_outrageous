@@ -6,6 +6,10 @@
  *    Copyright (C) 2000-2003 Paul Bame <bame at parisc-linux.org>
  *    Copyright (C) 2001 Thomas Bogendoerfer <tsbogend at parisc-linux.org>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *    Copyright (C) 1999-2014 Helge Deller <deller@gmx.de>
+>>>>>>> v3.18
 =======
  *    Copyright (C) 1999-2014 Helge Deller <deller@gmx.de>
 >>>>>>> v3.18
@@ -28,6 +32,10 @@
 
 #include <asm/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/elf.h>
+>>>>>>> v3.18
 =======
 #include <asm/elf.h>
 >>>>>>> v3.18
@@ -40,6 +48,7 @@
 #include <linux/syscalls.h>
 #include <linux/utsname.h>
 #include <linux/personality.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static unsigned long get_unshared_area(unsigned long addr, unsigned long len)
@@ -110,6 +119,8 @@ unsigned long arch_get_unmapped_area(struct file *filp, unsigned long addr,
 	else
 		addr = get_unshared_area(addr, len);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/random.h>
 
 /* we construct an artificial offset for the mapping based on the physical
@@ -276,13 +287,19 @@ arch_get_unmapped_area_topdown(struct file *filp, const unsigned long addr0,
 found_addr:
 	if (do_color_align && !last_mmap && !(addr & ~PAGE_MASK))
 		SET_LAST_MMAP(filp, addr - (pgoff << PAGE_SHIFT));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return addr;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int mmap_is_legacy(void)
 {
 	if (current->personality & ADDR_COMPAT_LAYOUT)
@@ -337,6 +354,9 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 asmlinkage unsigned long sys_mmap2(unsigned long addr, unsigned long len,
 	unsigned long prot, unsigned long flags, unsigned long fd,

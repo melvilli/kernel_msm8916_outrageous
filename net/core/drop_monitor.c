@@ -81,7 +81,10 @@ static struct sk_buff *reset_per_cpu_data(struct per_cpu_dm_data *data)
 	struct sk_buff *skb;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *msg_header;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -91,6 +94,7 @@ static struct sk_buff *reset_per_cpu_data(struct per_cpu_dm_data *data)
 
 	skb = genlmsg_new(al, GFP_KERNEL);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!skb)
 		goto err;
@@ -117,6 +121,8 @@ err:
 	mod_timer(&data->send_timer, jiffies + HZ / 10);
 out:
 =======
+=======
+>>>>>>> v3.18
 	if (skb) {
 		genlmsg_put(skb, 0, 0, &net_drop_monitor_family,
 				0, NET_DM_CMD_ALERT);
@@ -128,11 +134,15 @@ out:
 		mod_timer(&data->send_timer, jiffies + HZ / 10);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&data->lock, flags);
 	swap(data->skb, skb);
 	spin_unlock_irqrestore(&data->lock, flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (skb) {
 		struct nlmsghdr *nlh = (struct nlmsghdr *)skb->data;
@@ -145,6 +155,8 @@ out:
 }
 
 =======
+=======
+>>>>>>> v3.18
 	return skb;
 }
 
@@ -152,6 +164,9 @@ static struct genl_multicast_group dropmon_mcgrps[] = {
 	{ .name = "events", },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void send_dm_alert(struct work_struct *work)
 {
@@ -164,7 +179,12 @@ static void send_dm_alert(struct work_struct *work)
 
 	if (skb)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		genlmsg_multicast(skb, 0, NET_DM_GRP_ALERT, GFP_KERNEL);
+=======
+		genlmsg_multicast(&net_drop_monitor_family, skb, 0,
+				  0, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		genlmsg_multicast(&net_drop_monitor_family, skb, 0,
 				  0, GFP_KERNEL);
@@ -195,7 +215,11 @@ static void trace_drop_common(struct sk_buff *skb, void *location)
 
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = &__get_cpu_var(dm_cpu_data);
+=======
+	data = this_cpu_ptr(&dm_cpu_data);
+>>>>>>> v3.18
 =======
 	data = this_cpu_ptr(&dm_cpu_data);
 >>>>>>> v3.18
@@ -342,10 +366,15 @@ static int net_dm_cmd_trace(struct sk_buff *skb,
 	case NET_DM_CMD_START:
 		return set_all_monitor_traces(TRACE_ON);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case NET_DM_CMD_STOP:
 		return set_all_monitor_traces(TRACE_OFF);
 		break;
+=======
+	case NET_DM_CMD_STOP:
+		return set_all_monitor_traces(TRACE_OFF);
+>>>>>>> v3.18
 =======
 	case NET_DM_CMD_STOP:
 		return set_all_monitor_traces(TRACE_OFF);
@@ -357,9 +386,15 @@ static int net_dm_cmd_trace(struct sk_buff *skb,
 
 static int dropmon_net_event(struct notifier_block *ev_block,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned long event, void *ptr)
 {
 	struct net_device *dev = ptr;
+=======
+			     unsigned long event, void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 			     unsigned long event, void *ptr)
 {
@@ -401,7 +436,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct genl_ops dropmon_ops[] = {
+=======
+static const struct genl_ops dropmon_ops[] = {
+>>>>>>> v3.18
 =======
 static const struct genl_ops dropmon_ops[] = {
 >>>>>>> v3.18
@@ -436,9 +475,14 @@ static int __init init_net_drop_monitor(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = genl_register_family_with_ops(&net_drop_monitor_family,
 					   dropmon_ops,
 					   ARRAY_SIZE(dropmon_ops));
+=======
+	rc = genl_register_family_with_ops_groups(&net_drop_monitor_family,
+						  dropmon_ops, dropmon_mcgrps);
+>>>>>>> v3.18
 =======
 	rc = genl_register_family_with_ops_groups(&net_drop_monitor_family,
 						  dropmon_ops, dropmon_mcgrps);
@@ -448,6 +492,10 @@ static int __init init_net_drop_monitor(void)
 		return rc;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	WARN_ON(net_drop_monitor_family.mcgrp_offset != NET_DM_GRP_ALERT);
+>>>>>>> v3.18
 =======
 	WARN_ON(net_drop_monitor_family.mcgrp_offset != NET_DM_GRP_ALERT);
 >>>>>>> v3.18

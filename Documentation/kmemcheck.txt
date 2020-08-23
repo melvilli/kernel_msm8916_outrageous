@@ -92,9 +92,15 @@ debugging a problem. This option is not mandatory, however, because it slows
 down the compilation process and produces a much bigger kernel image.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Now the kmemcheck menu should be visible (under "Kernel hacking" / "kmemcheck:
 trap use of uninitialized memory"). Here follows a description of the
 kmemcheck configuration variables:
+=======
+Now the kmemcheck menu should be visible (under "Kernel hacking" / "Memory
+Debugging" / "kmemcheck: trap use of uninitialized memory"). Here follows
+a description of the kmemcheck configuration variables:
+>>>>>>> v3.18
 =======
 Now the kmemcheck menu should be visible (under "Kernel hacking" / "Memory
 Debugging" / "kmemcheck: trap use of uninitialized memory"). Here follows
@@ -548,7 +554,11 @@ initialized. This is the beginning of the struct:
 93 } siginfo_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 On 64-bit, the int is 4 bytes long, so it must the the union member that has
+=======
+On 64-bit, the int is 4 bytes long, so it must the union member that has
+>>>>>>> v3.18
 =======
 On 64-bit, the int is 4 bytes long, so it must the union member that has
 >>>>>>> v3.18

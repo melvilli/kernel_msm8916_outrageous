@@ -23,7 +23,11 @@ For more details on capabilities, see capabilities(7) in the Linux
 man-pages project.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Based on http://kerneltrap.org/Linux/Documenting_Security_Module_Intent,
+=======
+Based on https://lkml.org/lkml/2007/10/26/215,
+>>>>>>> v3.18
 =======
 Based on https://lkml.org/lkml/2007/10/26/215,
 >>>>>>> v3.18

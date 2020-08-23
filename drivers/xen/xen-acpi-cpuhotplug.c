@@ -16,6 +16,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -28,10 +33,14 @@
 #include <linux/acpi.h>
 #include <linux/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
 #include <acpi/processor.h>
 
+=======
+#include <acpi/processor.h>
+>>>>>>> v3.18
 =======
 #include <acpi/processor.h>
 >>>>>>> v3.18
@@ -99,7 +108,11 @@ static int xen_acpi_processor_enable(struct acpi_device *device)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit xen_acpi_processor_add(struct acpi_device *device)
+=======
+static int xen_acpi_processor_add(struct acpi_device *device)
+>>>>>>> v3.18
 =======
 static int xen_acpi_processor_add(struct acpi_device *device)
 >>>>>>> v3.18
@@ -281,7 +294,12 @@ static void acpi_processor_hotplug_notify(acpi_handle handle,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!acpi_bus_get_device(handle, &device))
+=======
+		acpi_bus_get_device(handle, &device);
+		if (acpi_device_enumerated(device))
+>>>>>>> v3.18
 =======
 		acpi_bus_get_device(handle, &device);
 		if (acpi_device_enumerated(device))
@@ -294,8 +312,14 @@ static void acpi_processor_hotplug_notify(acpi_handle handle,
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = acpi_bus_get_device(handle, &device);
 		if (result) {
+=======
+		device = NULL;
+		acpi_bus_get_device(handle, &device);
+		if (!acpi_device_enumerated(device)) {
+>>>>>>> v3.18
 =======
 		device = NULL;
 		acpi_bus_get_device(handle, &device);
@@ -337,7 +361,11 @@ static void acpi_processor_hotplug_notify(acpi_handle handle,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(void) acpi_evaluate_hotplug_ost(handle, event, ost_code, NULL);
+=======
+	(void) acpi_evaluate_ost(handle, event, ost_code, NULL);
+>>>>>>> v3.18
 =======
 	(void) acpi_evaluate_ost(handle, event, ost_code, NULL);
 >>>>>>> v3.18

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MTD_NAND_IDS
 	tristate "Include chip ids for known NAND devices."
 	depends on MTD
@@ -6,6 +7,8 @@ config MTD_NAND_IDS
 	  Useful for NAND drivers that do not use the NAND subsystem but
 	  still like to take advantage of the known chip information.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MTD_NAND_ECC
@@ -54,6 +57,10 @@ config MTD_SM_COMMON
 config MTD_NAND_DENALI
         tristate "Support Denali NAND controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        depends on HAS_DMA
+>>>>>>> v3.18
 =======
         depends on HAS_DMA
 >>>>>>> v3.18
@@ -90,7 +97,11 @@ config MTD_NAND_DENALI_SCRATCH_REG_ADDR
 config MTD_NAND_GPIO
 	tristate "GPIO NAND Flash driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on GPIOLIB && ARM
+=======
+	depends on GPIOLIB
+>>>>>>> v3.18
 =======
 	depends on GPIOLIB
 >>>>>>> v3.18
@@ -112,6 +123,7 @@ config MTD_NAND_OMAP2
 	  platforms.
 
 config MTD_NAND_OMAP_BCH
+<<<<<<< HEAD
 <<<<<<< HEAD
 	depends on MTD_NAND && MTD_NAND_OMAP2 && ARCH_OMAP3
 	tristate "Enable support for hardware BCH error correction"
@@ -152,6 +164,8 @@ config BCH_CONST_T
 	default 8 if MTD_NAND_OMAP_BCH8
 endif
 =======
+=======
+>>>>>>> v3.18
 	depends on MTD_NAND_OMAP2
 	bool "Support hardware based BCH error correction"
 	default n
@@ -168,6 +182,9 @@ config MTD_NAND_OMAP_BCH_BUILD
 
 config MTD_NAND_IDS
 	tristate
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config MTD_NAND_RICOH
@@ -388,17 +405,23 @@ config MTD_NAND_ATMEL
 
 config MTD_NAND_PXA3xx
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Support for NAND flash devices on PXA3xx"
 	depends on PXA3xx || ARCH_MMP
 	help
 	  This enables the driver for the NAND flash device found on
 	  PXA3xx processors
 =======
+=======
+>>>>>>> v3.18
 	tristate "NAND support on PXA3xx and Armada 370/XP"
 	depends on PXA3xx || ARCH_MMP || PLAT_ORION
 	help
 	  This enables the driver for the NAND flash device found on
 	  PXA3xx processors (NFCv1) and also on Armada 370/XP (NFCv2).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config MTD_NAND_SLC_LPC32XX
@@ -475,6 +498,7 @@ config MTD_NAND_PLATFORM
 	  via platform_data.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MTD_ALAUDA
 	tristate "MTD driver for Olympus MAUSB-10 and Fujifilm DPC-R1"
 	depends on USB
@@ -482,6 +506,8 @@ config MTD_ALAUDA
 	  These two (and possibly other) Alauda-based cardreaders for
 	  SmartMedia and xD allow raw flash access.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MTD_NAND_ORION
@@ -508,6 +534,10 @@ config MTD_NAND_FSL_IFC
 	depends on MTD_NAND && FSL_SOC
 	select FSL_IFC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select MEMORY
+>>>>>>> v3.18
 =======
 	select MEMORY
 >>>>>>> v3.18
@@ -542,7 +572,13 @@ config MTD_NAND_MXC
 config MTD_NAND_SH_FLCTL
 	tristate "Support for NAND on Renesas SuperH FLCTL"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SUPERH || ARCH_SHMOBILE
+=======
+	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
+	depends on HAS_IOMEM
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
 	depends on HAS_IOMEM
@@ -554,17 +590,23 @@ config MTD_NAND_SH_FLCTL
 
 config MTD_NAND_DAVINCI
 <<<<<<< HEAD
+<<<<<<< HEAD
         tristate "Support NAND on DaVinci SoC"
         depends on ARCH_DAVINCI
         help
 	  Enable the driver for NAND flash chips on Texas Instruments
 	  DaVinci processors.
 =======
+=======
+>>>>>>> v3.18
         tristate "Support NAND on DaVinci/Keystone SoC"
         depends on ARCH_DAVINCI || (ARCH_KEYSTONE && TI_AEMIF)
         help
 	  Enable the driver for NAND flash chips on Texas Instruments
 	  DaVinci/Keystone processors.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config MTD_NAND_TXX9NDFMC
@@ -601,7 +643,11 @@ config MTD_NAND_FSMC
 
 config MTD_NAND_XWAY
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Support for NAND on Lantiq XWAY SoC"
+=======
+	tristate "Support for NAND on Lantiq XWAY SoC"
+>>>>>>> v3.18
 =======
 	tristate "Support for NAND on Lantiq XWAY SoC"
 >>>>>>> v3.18

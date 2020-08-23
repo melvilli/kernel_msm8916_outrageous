@@ -33,7 +33,10 @@
 #include <linux/of.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -42,14 +45,20 @@
 #include "c_can.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CAN_RAMINIT_START_MASK(i)	(1 << (i))
 
 =======
+=======
+>>>>>>> v3.18
 #define CAN_RAMINIT_START_MASK(i)	(0x001 << (i))
 #define CAN_RAMINIT_DONE_MASK(i)	(0x100 << (i))
 #define CAN_RAMINIT_ALL_MASK(i)		(0x101 << (i))
 #define DCAN_RAM_INIT_BIT		(1 << 3)
 static DEFINE_SPINLOCK(raminit_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * 16-bit c_can registers can be arranged differently in the memory
@@ -58,7 +67,11 @@ static DEFINE_SPINLOCK(raminit_lock);
  * Handle the same by providing a common read/write interface.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 c_can_plat_read_reg_aligned_to_16bit(struct c_can_priv *priv,
+=======
+static u16 c_can_plat_read_reg_aligned_to_16bit(const struct c_can_priv *priv,
+>>>>>>> v3.18
 =======
 static u16 c_can_plat_read_reg_aligned_to_16bit(const struct c_can_priv *priv,
 >>>>>>> v3.18
@@ -68,7 +81,11 @@ static u16 c_can_plat_read_reg_aligned_to_16bit(const struct c_can_priv *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void c_can_plat_write_reg_aligned_to_16bit(struct c_can_priv *priv,
+=======
+static void c_can_plat_write_reg_aligned_to_16bit(const struct c_can_priv *priv,
+>>>>>>> v3.18
 =======
 static void c_can_plat_write_reg_aligned_to_16bit(const struct c_can_priv *priv,
 >>>>>>> v3.18
@@ -78,7 +95,11 @@ static void c_can_plat_write_reg_aligned_to_16bit(const struct c_can_priv *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 c_can_plat_read_reg_aligned_to_32bit(struct c_can_priv *priv,
+=======
+static u16 c_can_plat_read_reg_aligned_to_32bit(const struct c_can_priv *priv,
+>>>>>>> v3.18
 =======
 static u16 c_can_plat_read_reg_aligned_to_32bit(const struct c_can_priv *priv,
 >>>>>>> v3.18
@@ -88,7 +109,11 @@ static u16 c_can_plat_read_reg_aligned_to_32bit(const struct c_can_priv *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void c_can_plat_write_reg_aligned_to_32bit(struct c_can_priv *priv,
+=======
+static void c_can_plat_write_reg_aligned_to_32bit(const struct c_can_priv *priv,
+>>>>>>> v3.18
 =======
 static void c_can_plat_write_reg_aligned_to_32bit(const struct c_can_priv *priv,
 >>>>>>> v3.18
@@ -97,6 +122,7 @@ static void c_can_plat_write_reg_aligned_to_32bit(const struct c_can_priv *priv,
 	writew(val, priv->base + 2 * priv->regs[index]);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void c_can_hw_raminit(const struct c_can_priv *priv, bool enable)
 {
@@ -109,6 +135,8 @@ static void c_can_hw_raminit(const struct c_can_priv *priv, bool enable)
 		val &= ~CAN_RAMINIT_START_MASK(priv->instance);
 	writel(val, priv->raminit_ctrlreg);
 =======
+=======
+>>>>>>> v3.18
 static void c_can_hw_raminit_wait_ti(const struct c_can_priv *priv, u32 mask,
 				  u32 val)
 {
@@ -194,6 +222,9 @@ static void c_can_hw_raminit(const struct c_can_priv *priv, bool enable)
 		priv->write_reg32(priv, C_CAN_FUNCTION_REG, ctrl);
 		c_can_hw_raminit_wait(priv, ctrl);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -230,7 +261,10 @@ static int c_can_plat_probe(struct platform_device *pdev)
 	const struct of_device_id *match;
 	const struct platform_device_id *id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pinctrl *pinctrl;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct resource *mem, *res;
@@ -250,6 +284,7 @@ static int c_can_plat_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
 	if (IS_ERR(pinctrl))
 		dev_warn(&pdev->dev,
@@ -261,15 +296,21 @@ static int c_can_plat_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "no clock defined\n");
 		ret = -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	/* get the appropriate clk */
 	clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(clk)) {
 		ret = PTR_ERR(clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto exit;
 	}
 
 	/* get the platform data */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	irq = platform_get_irq(pdev, 0);
@@ -291,6 +332,8 @@ static int c_can_plat_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto exit_release_mem;
 =======
+=======
+>>>>>>> v3.18
 	irq = platform_get_irq(pdev, 0);
 	if (irq <= 0) {
 		ret = -ENODEV;
@@ -302,6 +345,9 @@ static int c_can_plat_probe(struct platform_device *pdev)
 	if (IS_ERR(addr)) {
 		ret =  PTR_ERR(addr);
 		goto exit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -310,7 +356,11 @@ static int c_can_plat_probe(struct platform_device *pdev)
 	if (!dev) {
 		ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_iounmap;
+=======
+		goto exit;
+>>>>>>> v3.18
 =======
 		goto exit;
 >>>>>>> v3.18
@@ -325,6 +375,11 @@ static int c_can_plat_probe(struct platform_device *pdev)
 			priv->read_reg = c_can_plat_read_reg_aligned_to_32bit;
 			priv->write_reg = c_can_plat_write_reg_aligned_to_32bit;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			priv->read_reg32 = c_can_plat_read_reg32;
+			priv->write_reg32 = c_can_plat_write_reg32;
+>>>>>>> v3.18
 =======
 			priv->read_reg32 = c_can_plat_read_reg32;
 			priv->write_reg32 = c_can_plat_write_reg32;
@@ -335,6 +390,11 @@ static int c_can_plat_probe(struct platform_device *pdev)
 			priv->read_reg = c_can_plat_read_reg_aligned_to_16bit;
 			priv->write_reg = c_can_plat_write_reg_aligned_to_16bit;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			priv->read_reg32 = c_can_plat_read_reg32;
+			priv->write_reg32 = c_can_plat_write_reg32;
+>>>>>>> v3.18
 =======
 			priv->read_reg32 = c_can_plat_read_reg32;
 			priv->write_reg32 = c_can_plat_write_reg32;
@@ -348,6 +408,11 @@ static int c_can_plat_probe(struct platform_device *pdev)
 		priv->read_reg = c_can_plat_read_reg_aligned_to_16bit;
 		priv->write_reg = c_can_plat_write_reg_aligned_to_16bit;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		priv->read_reg32 = d_can_plat_read_reg32;
+		priv->write_reg32 = d_can_plat_write_reg32;
+>>>>>>> v3.18
 =======
 		priv->read_reg32 = d_can_plat_read_reg32;
 		priv->write_reg32 = d_can_plat_write_reg32;
@@ -360,12 +425,15 @@ static int c_can_plat_probe(struct platform_device *pdev)
 
 		res = platform_get_resource(pdev, IORESOURCE_MEM, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->raminit_ctrlreg =	devm_request_and_ioremap(&pdev->dev, res);
 		if (!priv->raminit_ctrlreg || priv->instance < 0)
 			dev_info(&pdev->dev, "control memory is not used for raminit\n");
 		else
 			priv->raminit = c_can_hw_raminit;
 =======
+=======
+>>>>>>> v3.18
 		/* Not all D_CAN modules have a separate register for the D_CAN
 		 * RAM initialization. Use default RAM init bit in D_CAN module
 		 * if not specified in DT.
@@ -381,6 +449,9 @@ static int c_can_plat_probe(struct platform_device *pdev)
 			dev_info(&pdev->dev, "control memory is not used for raminit\n");
 		else
 			priv->raminit = c_can_hw_raminit_ti;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -411,6 +482,7 @@ static int c_can_plat_probe(struct platform_device *pdev)
 
 exit_free_device:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 	free_c_can_dev(dev);
 exit_iounmap:
@@ -419,6 +491,9 @@ exit_release_mem:
 	release_mem_region(mem->start, resource_size(mem));
 exit_free_clk:
 	clk_put(clk);
+=======
+	free_c_can_dev(dev);
+>>>>>>> v3.18
 =======
 	free_c_can_dev(dev);
 >>>>>>> v3.18
@@ -431,6 +506,7 @@ exit:
 static int c_can_plat_remove(struct platform_device *pdev)
 {
 	struct net_device *dev = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct c_can_priv *priv = netdev_priv(dev);
 	struct resource *mem;
@@ -446,10 +522,15 @@ static int c_can_plat_remove(struct platform_device *pdev)
 
 	clk_put(priv->priv);
 =======
+=======
+>>>>>>> v3.18
 
 	unregister_c_can_dev(dev);
 
 	free_c_can_dev(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -519,7 +600,11 @@ static struct platform_driver c_can_plat_driver = {
 		.name = KBUILD_MODNAME,
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(c_can_of_table),
+=======
+		.of_match_table = c_can_of_table,
+>>>>>>> v3.18
 =======
 		.of_match_table = c_can_of_table,
 >>>>>>> v3.18

@@ -390,7 +390,11 @@ static int au1x_ic1_setwake(struct irq_data *d, unsigned int on)
 
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wakemsk = __raw_readl((void __iomem *)SYS_WAKEMSK);
+=======
+	wakemsk = alchemy_rdsys(AU1000_SYS_WAKEMSK);
+>>>>>>> v3.18
 =======
 	wakemsk = alchemy_rdsys(AU1000_SYS_WAKEMSK);
 >>>>>>> v3.18
@@ -399,8 +403,12 @@ static int au1x_ic1_setwake(struct irq_data *d, unsigned int on)
 	else
 		wakemsk &= ~(1 << bit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(wakemsk, (void __iomem *)SYS_WAKEMSK);
 	wmb();
+=======
+	alchemy_wrsys(wakemsk, AU1000_SYS_WAKEMSK);
+>>>>>>> v3.18
 =======
 	alchemy_wrsys(wakemsk, AU1000_SYS_WAKEMSK);
 >>>>>>> v3.18

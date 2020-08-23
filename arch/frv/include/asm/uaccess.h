@@ -264,7 +264,11 @@ extern long __memset_user(void *dst, unsigned long count);
 extern long __memcpy_user(void *dst, const void *src, unsigned long count);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __clear_user(dst,count)			__memset_user(____force(dst), (count))
+=======
+#define clear_user(dst,count)			__memset_user(____force(dst), (count))
+>>>>>>> v3.18
 =======
 #define clear_user(dst,count)			__memset_user(____force(dst), (count))
 >>>>>>> v3.18
@@ -274,7 +278,11 @@ extern long __memcpy_user(void *dst, const void *src, unsigned long count);
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __clear_user(dst,count)			(memset(____force(dst), 0, (count)), 0)
+=======
+#define clear_user(dst,count)			(memset(____force(dst), 0, (count)), 0)
+>>>>>>> v3.18
 =======
 #define clear_user(dst,count)			(memset(____force(dst), 0, (count)), 0)
 >>>>>>> v3.18
@@ -283,6 +291,7 @@ extern long __memcpy_user(void *dst, const void *src, unsigned long count);
 
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline unsigned long __must_check
 clear_user(void __user *to, unsigned long n)
@@ -294,12 +303,19 @@ clear_user(void __user *to, unsigned long n)
 =======
 #define __clear_user clear_user
 >>>>>>> v3.18
+=======
+#define __clear_user clear_user
+>>>>>>> v3.18
 
 static inline unsigned long __must_check
 __copy_to_user(void __user *to, const void *from, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
        might_sleep();
+=======
+       might_fault();
+>>>>>>> v3.18
 =======
        might_fault();
 >>>>>>> v3.18
@@ -310,7 +326,11 @@ static inline unsigned long
 __copy_from_user(void *to, const void __user *from, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
        might_sleep();
+=======
+       might_fault();
+>>>>>>> v3.18
 =======
        might_fault();
 >>>>>>> v3.18

@@ -19,6 +19,12 @@
 	.set	noreorder
 	.set	mips2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set	push
+	SET_HARDFLOAT
+
+>>>>>>> v3.18
 =======
 	.set	push
 	SET_HARDFLOAT
@@ -92,6 +98,11 @@
 	 nop
 	END(_restore_fp_context)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	.set pop	/* SET_HARDFLOAT */
+>>>>>>> v3.18
 =======
 
 	.set pop	/* SET_HARDFLOAT */

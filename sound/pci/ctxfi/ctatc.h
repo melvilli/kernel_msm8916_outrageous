@@ -132,7 +132,11 @@ struct ct_atc {
 	void *rsc_mgrs[NUM_RSCTYP]; /* chip resource managers */
 	void *mixer;		/* internal mixer object */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *hw;		/* chip specific hardware access object */
+=======
+	struct hw *hw;		/* chip specific hardware access object */
+>>>>>>> v3.18
 =======
 	struct hw *hw;		/* chip specific hardware access object */
 >>>>>>> v3.18

@@ -28,6 +28,10 @@
 #define OMAP_AUX_CORE_BOOT_0			0x800
 #define OMAP_AUX_CORE_BOOT_1			0x804
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define OMAP_AMBA_IF_MODE			0x80c
+>>>>>>> v3.18
 =======
 #define OMAP_AMBA_IF_MODE			0x80c
 >>>>>>> v3.18

@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Atomic operations that C can't guarantee us.	 Useful for
+=======
+ * Atomic operations that C can't guarantee us.  Useful for
+>>>>>>> v3.18
 =======
  * Atomic operations that C can't guarantee us.  Useful for
 >>>>>>> v3.18
@@ -34,7 +38,11 @@
  * Atomically reads the value of @v.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_read(v)		(*(volatile int *)&(v)->counter)
+=======
+#define atomic_read(v)		ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 =======
 #define atomic_read(v)		ACCESS_ONCE((v)->counter)
 >>>>>>> v3.18
@@ -48,6 +56,7 @@
  */
 #define atomic_set(v, i)		((v)->counter = (i))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * atomic_add - add integer to atomic variable
@@ -239,6 +248,8 @@ static __inline__ int atomic_sub_return(int i, atomic_t * v)
 	return result;
 }
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC_OP(op, c_op, asm_op)						\
 static __inline__ void atomic_##op(int i, atomic_t * v)				\
 {										\
@@ -336,6 +347,9 @@ ATOMIC_OPS(sub, -=, subu)
 #undef ATOMIC_OPS
 #undef ATOMIC_OP_RETURN
 #undef ATOMIC_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -357,7 +371,11 @@ static __inline__ int atomic_sub_if_positive(int i, atomic_t * v)
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -379,7 +397,11 @@ static __inline__ int atomic_sub_if_positive(int i, atomic_t * v)
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -515,7 +537,11 @@ static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic64_read(v)	(*(volatile long *)&(v)->counter)
+=======
+#define atomic64_read(v)	ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 =======
 #define atomic64_read(v)	ACCESS_ONCE((v)->counter)
 >>>>>>> v3.18
@@ -527,6 +553,7 @@ static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
  */
 #define atomic64_set(v, i)	((v)->counter = (i))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * atomic64_add - add integer to atomic variable
@@ -718,6 +745,8 @@ static __inline__ long atomic64_sub_return(long i, atomic64_t * v)
 	return result;
 }
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC64_OP(op, c_op, asm_op)						\
 static __inline__ void atomic64_##op(long i, atomic64_t * v)			\
 {										\
@@ -816,6 +845,9 @@ ATOMIC64_OPS(sub, -=, dsubu)
 #undef ATOMIC64_OPS
 #undef ATOMIC64_OP_RETURN
 #undef ATOMIC64_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -837,7 +869,11 @@ static __inline__ long atomic64_sub_if_positive(long i, atomic64_t * v)
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -859,7 +895,11 @@ static __inline__ long atomic64_sub_if_positive(long i, atomic64_t * v)
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -991,6 +1031,7 @@ static __inline__ int atomic64_add_unless(atomic64_t *v, long a, long u)
 #endif /* CONFIG_64BIT */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * atomic*_return operations are serializing but not the non-*_return
  * versions.
@@ -1000,6 +1041,8 @@ static __inline__ int atomic64_add_unless(atomic64_t *v, long a, long u)
 #define smp_mb__before_atomic_inc()	smp_mb__before_llsc()
 #define smp_mb__after_atomic_inc()	smp_llsc_mb()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ASM_ATOMIC_H */

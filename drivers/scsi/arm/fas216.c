@@ -1822,7 +1822,12 @@ static void fas216_allocate_tag(FAS216_Info *info, struct scsi_cmnd *SCpnt)
 	} else
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_bit(SCpnt->device->id * 8 + SCpnt->device->lun, info->busyluns);
+=======
+		set_bit(SCpnt->device->id * 8 +
+			(u8)(SCpnt->device->lun & 0x7), info->busyluns);
+>>>>>>> v3.18
 =======
 		set_bit(SCpnt->device->id * 8 +
 			(u8)(SCpnt->device->lun & 0x7), info->busyluns);
@@ -2177,7 +2182,12 @@ static void fas216_done(FAS216_Info *info, unsigned int result)
 	 */
 	info->device[SCpnt->device->id].parity_check = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_bit(SCpnt->device->id * 8 + SCpnt->device->lun, info->busyluns);
+=======
+	clear_bit(SCpnt->device->id * 8 +
+		  (u8)(SCpnt->device->lun & 0x7), info->busyluns);
+>>>>>>> v3.18
 =======
 	clear_bit(SCpnt->device->id * 8 +
 		  (u8)(SCpnt->device->lun & 0x7), info->busyluns);
@@ -2409,7 +2419,12 @@ static enum res_find fas216_find_command(FAS216_Info *info,
 		 */
 		info->origSCpnt = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(SCpnt->device->id * 8 + SCpnt->device->lun, info->busyluns);
+=======
+		clear_bit(SCpnt->device->id * 8 +
+			  (u8)(SCpnt->device->lun & 0x7), info->busyluns);
+>>>>>>> v3.18
 =======
 		clear_bit(SCpnt->device->id * 8 +
 			  (u8)(SCpnt->device->lun & 0x7), info->busyluns);
@@ -3016,7 +3031,11 @@ void fas216_print_devices(FAS216_Info *info, struct seq_file *m)
 	shost_for_each_device(scd, info->host) {
 		dev = &info->device[scd->id];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(m, "     %d/%d   ", scd->id, scd->lun);
+=======
+		seq_printf(m, "     %d/%llu   ", scd->id, scd->lun);
+>>>>>>> v3.18
 =======
 		seq_printf(m, "     %d/%llu   ", scd->id, scd->lun);
 >>>>>>> v3.18

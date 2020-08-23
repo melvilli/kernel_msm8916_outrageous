@@ -393,7 +393,11 @@ static int ide_gd_probe(ide_drive_t *drive)
 	idkp->dev.parent = &drive->gendev;
 	idkp->dev.release = ide_disk_release;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_name(&idkp->dev, dev_name(&drive->gendev));
+=======
+	dev_set_name(&idkp->dev, "%s", dev_name(&drive->gendev));
+>>>>>>> v3.18
 =======
 	dev_set_name(&idkp->dev, "%s", dev_name(&drive->gendev));
 >>>>>>> v3.18

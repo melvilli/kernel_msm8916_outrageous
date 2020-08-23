@@ -1,7 +1,11 @@
 /* Driver for Realtek PCI-Express card reader
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2009 Realtek Semiconductor Corp. All rights reserved.
+=======
+ * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
 >>>>>>> v3.18
@@ -22,7 +26,10 @@
  * Author:
  *   Wei WANG <wei_wang@realsil.com.cn>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   No. 450, Shenhu Road, Suzhou Industry Park, Suzhou, China
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -42,7 +49,10 @@ static u8 rts5229_get_ic_version(struct rtsx_pcr *pcr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void rts5229_fetch_vendor_settings(struct rtsx_pcr *pcr)
 {
 	u32 reg;
@@ -70,6 +80,9 @@ static void rts5229_force_power_down(struct rtsx_pcr *pcr, u8 pm_state)
 	rtsx_pci_write_register(pcr, FPDCTL, 0x03, 0x03);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int rts5229_extra_init_hw(struct rtsx_pcr *pcr)
 {
@@ -78,11 +91,17 @@ static int rts5229_extra_init_hw(struct rtsx_pcr *pcr)
 	/* Configure GPIO as output */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, GPIO_CTL, 0x02, 0x02);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Reset ASPM state to default value */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, ASPM_FORCE_CTL, 0x3F, 0);
 	/* Force CLKREQ# PIN to drive 0 to request clock */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, PETXCFG, 0x08, 0x08);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Switch LDO3318 source from DV33 to card_3v3 */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, LDO_PWR_SEL, 0x03, 0x00);
@@ -90,6 +109,12 @@ static int rts5229_extra_init_hw(struct rtsx_pcr *pcr)
 	/* LED shine disabled, set initial shine cycle period */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, OLT_LED_CTL, 0x0F, 0x02);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Configure driving */
+	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, SD30_DRIVE_SEL,
+			0xFF, pcr->sd30_drive_sel_3v3);
+>>>>>>> v3.18
 =======
 	/* Configure driving */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, SD30_DRIVE_SEL,
@@ -161,7 +186,11 @@ static int rts5229_card_power_off(struct rtsx_pcr *pcr, int card)
 			SD_POWER_OFF | PMOS_STRG_400mA);
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, PWR_GATE_CTRL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			LDO3318_PWR_MASK, 0X00);
+=======
+			LDO3318_PWR_MASK, 0x00);
+>>>>>>> v3.18
 =======
 			LDO3318_PWR_MASK, 0x00);
 >>>>>>> v3.18
@@ -175,7 +204,11 @@ static int rts5229_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 	if (voltage == OUTPUT_3V3) {
 		err = rtsx_pci_write_register(pcr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				SD30_DRIVE_SEL, 0x07, DRIVER_TYPE_D);
+=======
+				SD30_DRIVE_SEL, 0x07, pcr->sd30_drive_sel_3v3);
+>>>>>>> v3.18
 =======
 				SD30_DRIVE_SEL, 0x07, pcr->sd30_drive_sel_3v3);
 >>>>>>> v3.18
@@ -187,7 +220,11 @@ static int rts5229_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 	} else if (voltage == OUTPUT_1V8) {
 		err = rtsx_pci_write_register(pcr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				SD30_DRIVE_SEL, 0x07, DRIVER_TYPE_B);
+=======
+				SD30_DRIVE_SEL, 0x07, pcr->sd30_drive_sel_1v8);
+>>>>>>> v3.18
 =======
 				SD30_DRIVE_SEL, 0x07, pcr->sd30_drive_sel_1v8);
 >>>>>>> v3.18
@@ -205,6 +242,10 @@ static int rts5229_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 
 static const struct pcr_ops rts5229_pcr_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.fetch_vendor_settings = rts5229_fetch_vendor_settings,
+>>>>>>> v3.18
 =======
 	.fetch_vendor_settings = rts5229_fetch_vendor_settings,
 >>>>>>> v3.18
@@ -220,6 +261,10 @@ static const struct pcr_ops rts5229_pcr_ops = {
 	.cd_deglitch = NULL,
 	.conv_clk_and_div_n = NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.force_power_down = rts5229_force_power_down,
+>>>>>>> v3.18
 =======
 	.force_power_down = rts5229_force_power_down,
 >>>>>>> v3.18
@@ -292,7 +337,10 @@ void rts5229_init_params(struct rtsx_pcr *pcr)
 	pcr->ops = &rts5229_pcr_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pcr->flags = 0;
 	pcr->card_drive_sel = RTSX_CARD_DRIVE_DEFAULT;
 	pcr->sd30_drive_sel_1v8 = DRIVER_TYPE_B;
@@ -301,6 +349,9 @@ void rts5229_init_params(struct rtsx_pcr *pcr)
 	pcr->tx_initial_phase = SET_CLOCK_PHASE(27, 27, 15);
 	pcr->rx_initial_phase = SET_CLOCK_PHASE(30, 6, 6);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pcr->ic_version = rts5229_get_ic_version(pcr);
 	if (pcr->ic_version == IC_VER_C) {

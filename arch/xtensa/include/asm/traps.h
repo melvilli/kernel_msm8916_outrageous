@@ -20,6 +20,10 @@
 extern void * __init trap_set_handler(int cause, void *handler);
 extern void do_unhandled(struct pt_regs *regs, unsigned long exccause);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void secondary_trap_init(void);
+>>>>>>> v3.18
 =======
 void secondary_trap_init(void);
 >>>>>>> v3.18
@@ -29,7 +33,11 @@ static inline void spill_registers(void)
 #if XCHAL_NUM_AREGS > 16
 	__asm__ __volatile__ (
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	call8	1f\n"
+=======
+		"	call12	1f\n"
+>>>>>>> v3.18
 =======
 		"	call12	1f\n"
 >>>>>>> v3.18
@@ -37,6 +45,7 @@ static inline void spill_registers(void)
 		"	retw\n"
 		"	.align	4\n"
 		"1:\n"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if XCHAL_NUM_AREGS == 32
 		"	_entry	a1, 32\n"
@@ -67,6 +76,8 @@ static inline void spill_registers(void)
 		"2:\n"
 		: : : "a8", "a9", "memory");
 =======
+=======
+>>>>>>> v3.18
 		"	_entry	a1, 48\n"
 		"	addi	a12, a0, 3\n"
 #if XCHAL_NUM_AREGS > 32
@@ -86,6 +97,9 @@ static inline void spill_registers(void)
 		"	retw\n"
 		"2:\n"
 		: : : "a12", "a13", "memory");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 	__asm__ __volatile__ (

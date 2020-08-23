@@ -7,8 +7,11 @@ obj-$(CONFIG_ETRAX_I2C)			+= i2c.o
 obj-$(CONFIG_ETRAX_I2C_EEPROM)		+= eeprom.o
 obj-$(CONFIG_ETRAX_GPIO)		+= gpio.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ETRAX_DS1302)		+= ds1302.o
 obj-$(CONFIG_ETRAX_PCF8563)		+= pcf8563.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_ETRAX_SYNCHRONOUS_SERIAL)	+= sync_serial.o

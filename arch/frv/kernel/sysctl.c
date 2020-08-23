@@ -47,7 +47,11 @@ static void frv_change_dcache_mode(unsigned long newmode)
  * handle requests to dynamically switch the write caching mode delivered by /proc
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int procctl_frv_cachemode(ctl_table *table, int write,
+=======
+static int procctl_frv_cachemode(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int procctl_frv_cachemode(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -126,7 +130,11 @@ static int procctl_frv_cachemode(struct ctl_table *table, int write,
  */
 #ifdef CONFIG_MMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int procctl_frv_pin_cxnr(ctl_table *table, int write,
+=======
+static int procctl_frv_pin_cxnr(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int procctl_frv_pin_cxnr(struct ctl_table *table, int write,
 >>>>>>> v3.18

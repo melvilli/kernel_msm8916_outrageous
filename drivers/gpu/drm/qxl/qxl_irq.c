@@ -26,7 +26,11 @@
 #include "qxl_drv.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t qxl_irq_handler(DRM_IRQ_ARGS)
+=======
+irqreturn_t qxl_irq_handler(int irq, void *arg)
+>>>>>>> v3.18
 =======
 irqreturn_t qxl_irq_handler(int irq, void *arg)
 >>>>>>> v3.18
@@ -95,7 +99,11 @@ int qxl_irq_init(struct qxl_device *qdev)
 	atomic_set(&qdev->irq_received_io_cmd, 0);
 	qdev->irq_received_error = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = drm_irq_install(qdev->ddev);
+=======
+	ret = drm_irq_install(qdev->ddev, qdev->ddev->pdev->irq);
+>>>>>>> v3.18
 =======
 	ret = drm_irq_install(qdev->ddev, qdev->ddev->pdev->irq);
 >>>>>>> v3.18

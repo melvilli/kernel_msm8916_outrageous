@@ -1,7 +1,11 @@
 config INFINIBAND_OCRDMA
 	tristate "Emulex One Connect HCA support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ETHERNET && NETDEVICES && PCI && (IPV6 || IPV6=n)
+=======
+	depends on ETHERNET && NETDEVICES && PCI && INET && (IPV6 || IPV6=n)
+>>>>>>> v3.18
 =======
 	depends on ETHERNET && NETDEVICES && PCI && INET && (IPV6 || IPV6=n)
 >>>>>>> v3.18

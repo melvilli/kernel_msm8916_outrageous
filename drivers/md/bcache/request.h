@@ -2,6 +2,7 @@
 #define _BCACHE_REQUEST_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/cgroup.h>
 
 struct search {
@@ -39,6 +40,8 @@ void bch_cache_read_endio(struct bio *, int);
 void bch_open_buckets_free(struct cache_set *);
 int bch_open_buckets_alloc(struct cache_set *);
 =======
+=======
+>>>>>>> v3.18
 struct data_insert_op {
 	struct closure		cl;
 	struct cache_set	*c;
@@ -72,6 +75,9 @@ struct data_insert_op {
 
 unsigned bch_get_congested(struct cache_set *);
 void bch_data_insert(struct closure *cl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void bch_cached_dev_request_init(struct cached_dev *dc);
@@ -79,6 +85,7 @@ void bch_flash_dev_request_init(struct bcache_device *d);
 
 extern struct kmem_cache *bch_search_cache, *bch_passthrough_cache;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct bch_cgroup {
 #ifdef CONFIG_CGROUP_BCACHE
@@ -96,6 +103,8 @@ struct bch_cgroup {
 
 struct bch_cgroup *bch_bio_to_cgroup(struct bio *bio);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _BCACHE_REQUEST_H_ */

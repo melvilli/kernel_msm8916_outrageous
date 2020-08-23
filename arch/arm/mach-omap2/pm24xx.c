@@ -63,6 +63,7 @@ static struct clockdomain *dsp_clkdm, *mpu_clkdm, *wkup_clkdm, *gfx_clkdm;
 static struct clk *osc_ck, *emul_ck;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int omap2_fclks_active(void)
 {
 	u32 f1, f2;
@@ -73,6 +74,8 @@ static int omap2_fclks_active(void)
 	return (f1 | f2) ? 1 : 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int omap2_enter_full_retention(void)
@@ -89,9 +92,15 @@ static int omap2_enter_full_retention(void)
 	/* Clear old wake-up events */
 	/* REVISIT: These write to reserved bits? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap2_prm_write_mod_reg(0xffffffff, CORE_MOD, PM_WKST1);
 	omap2_prm_write_mod_reg(0xffffffff, CORE_MOD, OMAP24XX_PM_WKST2);
 	omap2_prm_write_mod_reg(0xffffffff, WKUP_MOD, PM_WKST);
+=======
+	omap2xxx_prm_clear_mod_irqs(CORE_MOD, PM_WKST1, ~0);
+	omap2xxx_prm_clear_mod_irqs(CORE_MOD, OMAP24XX_PM_WKST2, ~0);
+	omap2xxx_prm_clear_mod_irqs(WKUP_MOD, PM_WKST, ~0);
+>>>>>>> v3.18
 =======
 	omap2xxx_prm_clear_mod_irqs(CORE_MOD, PM_WKST1, ~0);
 	omap2xxx_prm_clear_mod_irqs(CORE_MOD, OMAP24XX_PM_WKST2, ~0);
@@ -124,6 +133,7 @@ no_sleep:
 
 	/* clear CORE wake-up events */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap2_prm_write_mod_reg(0xffffffff, CORE_MOD, PM_WKST1);
 	omap2_prm_write_mod_reg(0xffffffff, CORE_MOD, OMAP24XX_PM_WKST2);
 
@@ -142,6 +152,8 @@ no_sleep:
 	/* Mask future PRCM-to-MPU interrupts */
 	omap2_prm_write_mod_reg(0x0, OCP_MOD, OMAP2_PRCM_IRQSTATUS_MPU_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 	omap2xxx_prm_clear_mod_irqs(CORE_MOD, PM_WKST1, ~0);
 	omap2xxx_prm_clear_mod_irqs(CORE_MOD, OMAP24XX_PM_WKST2, ~0);
 
@@ -154,6 +166,9 @@ no_sleep:
 
 	omap2xxx_prm_clear_mod_irqs(OCP_MOD, OMAP2_PRCM_IRQSTATUS_MPU_OFFSET,
 				    0x20);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pwrdm_set_next_pwrst(mpu_pwrdm, PWRDM_POWER_ON);
@@ -167,6 +182,7 @@ static int sti_console_enabled;
 static int omap2_allow_mpu_retention(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 l;
 
 	/* Check for MMC, UART2, UART1, McSPI2, McSPI1 and DSS1. */
@@ -178,6 +194,9 @@ static int omap2_allow_mpu_retention(void)
 	/* Check for UART3. */
 	l = omap2_cm_read_mod_reg(CORE_MOD, OMAP24XX_CM_FCLKEN2);
 	if (l & OMAP24XX_EN_UART3_MASK)
+=======
+	if (!omap2xxx_cm_mpu_retention_allowed())
+>>>>>>> v3.18
 =======
 	if (!omap2xxx_cm_mpu_retention_allowed())
 >>>>>>> v3.18
@@ -197,9 +216,15 @@ static void omap2_enter_mpu_retention(void)
 	if (omap2_allow_mpu_retention()) {
 		/* REVISIT: These write to reserved bits? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		omap2_prm_write_mod_reg(0xffffffff, CORE_MOD, PM_WKST1);
 		omap2_prm_write_mod_reg(0xffffffff, CORE_MOD, OMAP24XX_PM_WKST2);
 		omap2_prm_write_mod_reg(0xffffffff, WKUP_MOD, PM_WKST);
+=======
+		omap2xxx_prm_clear_mod_irqs(CORE_MOD, PM_WKST1, ~0);
+		omap2xxx_prm_clear_mod_irqs(CORE_MOD, OMAP24XX_PM_WKST2, ~0);
+		omap2xxx_prm_clear_mod_irqs(WKUP_MOD, PM_WKST, ~0);
+>>>>>>> v3.18
 =======
 		omap2xxx_prm_clear_mod_irqs(CORE_MOD, PM_WKST1, ~0);
 		omap2xxx_prm_clear_mod_irqs(CORE_MOD, OMAP24XX_PM_WKST2, ~0);
@@ -223,7 +248,11 @@ static void omap2_enter_mpu_retention(void)
 static int omap2_can_sleep(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (omap2_fclks_active())
+=======
+	if (omap2xxx_cm_fclks_active())
+>>>>>>> v3.18
 =======
 	if (omap2xxx_cm_fclks_active())
 >>>>>>> v3.18
@@ -288,9 +317,13 @@ static void __init prcm_setup_regs(void)
 	clkdm_add_wkdep(mpu_clkdm, wkup_clkdm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SUSPEND
 	omap_pm_suspend = omap2_enter_full_retention;
 #endif
+=======
+	omap_common_suspend_init(omap2_enter_full_retention);
+>>>>>>> v3.18
 =======
 	omap_common_suspend_init(omap2_enter_full_retention);
 >>>>>>> v3.18
@@ -314,11 +347,17 @@ static void __init prcm_setup_regs(void)
 	omap2_prm_write_mod_reg(OMAP24XX_EN_GPIOS_MASK | OMAP24XX_EN_GPT1_MASK,
 				WKUP_MOD, PM_WKEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Enable SYS_CLKEN control when all domains idle */
 	omap2_prm_set_mod_reg_bits(OMAP_AUTOEXTCLKMODE_MASK, OMAP24XX_GR_MOD,
 				   OMAP2_PRCM_CLKSRC_CTRL_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

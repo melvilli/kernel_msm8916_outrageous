@@ -27,8 +27,11 @@
 #include <linux/freezer.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ALARM_DELTA 120
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -57,6 +60,7 @@ static struct wakeup_source *ws;
 static struct rtc_timer		rtctimer;
 static struct rtc_device	*rtcdev;
 static DEFINE_SPINLOCK(rtcdev_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned long power_on_alarm;
 static struct mutex power_on_alarm_lock;
@@ -131,6 +135,9 @@ static struct rtc_task alarmtimer_rtc_task = {
 =======
 
 >>>>>>> v3.18
+=======
+
+>>>>>>> v3.18
 /**
  * alarmtimer_get_rtcdev - Return selected rtcdevice
  *
@@ -142,7 +149,11 @@ struct rtc_device *alarmtimer_get_rtcdev(void)
 {
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtc_device *ret = NULL;
+=======
+	struct rtc_device *ret;
+>>>>>>> v3.18
 =======
 	struct rtc_device *ret;
 >>>>>>> v3.18
@@ -154,6 +165,10 @@ struct rtc_device *alarmtimer_get_rtcdev(void)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(alarmtimer_get_rtcdev);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(alarmtimer_get_rtcdev);
 >>>>>>> v3.18
@@ -162,6 +177,7 @@ static int alarmtimer_rtc_add_device(struct device *dev,
 				struct class_interface *class_intf)
 {
 	unsigned long flags;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int err = 0;
 	struct rtc_device *rtc = to_rtc_device(dev);
@@ -176,6 +192,8 @@ static int alarmtimer_rtc_add_device(struct device *dev,
 		if (err)
 			goto rtc_irq_reg_err;
 =======
+=======
+>>>>>>> v3.18
 	struct rtc_device *rtc = to_rtc_device(dev);
 
 	if (rtcdev)
@@ -188,11 +206,15 @@ static int alarmtimer_rtc_add_device(struct device *dev,
 
 	spin_lock_irqsave(&rtcdev_lock, flags);
 	if (!rtcdev) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rtcdev = rtc;
 		/* hold a reference so it doesn't go away */
 		get_device(dev);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 rtc_irq_reg_err:
@@ -212,13 +234,20 @@ static void alarmtimer_rtc_remove_device(struct device *dev,
 	spin_unlock_irqrestore(&rtcdev_lock, flags);
 	return 0;
 >>>>>>> v3.18
+=======
+	spin_unlock_irqrestore(&rtcdev_lock, flags);
+	return 0;
+>>>>>>> v3.18
 }
 
 static inline void alarmtimer_rtc_timer_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&power_on_alarm_lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rtc_timer_init(&rtctimer, NULL, NULL);
@@ -227,7 +256,10 @@ static inline void alarmtimer_rtc_timer_init(void)
 static struct class_interface alarmtimer_rtc_interface = {
 	.add_dev = &alarmtimer_rtc_add_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove_dev = &alarmtimer_rtc_remove_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -251,7 +283,10 @@ static inline int alarmtimer_rtc_interface_setup(void) { return 0; }
 static inline void alarmtimer_rtc_interface_remove(void) { }
 static inline void alarmtimer_rtc_timer_init(void) { }
 <<<<<<< HEAD
+<<<<<<< HEAD
 void set_power_on_alarm(long secs, bool enable) { }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -335,6 +370,10 @@ ktime_t alarm_expires_remaining(const struct alarm *alarm)
 	return ktime_sub(alarm->node.expires, base->gettime());
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(alarm_expires_remaining);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(alarm_expires_remaining);
 >>>>>>> v3.18
@@ -405,6 +444,7 @@ static int alarmtimer_suspend(struct device *dev)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int alarmtimer_resume(struct device *dev)
 {
 	struct rtc_device *rtc;
@@ -420,17 +460,22 @@ static int alarmtimer_resume(struct device *dev)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #else
 static int alarmtimer_suspend(struct device *dev)
 {
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int alarmtimer_resume(struct device *dev)
 {
 	return 0;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -468,6 +513,10 @@ void alarm_init(struct alarm *alarm, enum alarmtimer_type type,
 	alarm->state = ALARMTIMER_STATE_INACTIVE;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(alarm_init);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(alarm_init);
 >>>>>>> v3.18
@@ -492,6 +541,10 @@ int alarm_start(struct alarm *alarm, ktime_t start)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(alarm_start);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(alarm_start);
 >>>>>>> v3.18
@@ -504,6 +557,7 @@ EXPORT_SYMBOL_GPL(alarm_start);
 int alarm_start_relative(struct alarm *alarm, ktime_t start)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct alarm_base *base;
 
 	if (alarm->type >= ALARM_NUMTYPE) {
@@ -515,12 +569,17 @@ int alarm_start_relative(struct alarm *alarm, ktime_t start)
 	return alarm_start(alarm, start);
 }
 =======
+=======
+>>>>>>> v3.18
 	struct alarm_base *base = &alarm_bases[alarm->type];
 
 	start = ktime_add(start, base->gettime());
 	return alarm_start(alarm, start);
 }
 EXPORT_SYMBOL_GPL(alarm_start_relative);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void alarm_restart(struct alarm *alarm)
@@ -535,6 +594,10 @@ void alarm_restart(struct alarm *alarm)
 	spin_unlock_irqrestore(&base->lock, flags);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(alarm_restart);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(alarm_restart);
 >>>>>>> v3.18
@@ -549,6 +612,7 @@ EXPORT_SYMBOL_GPL(alarm_restart);
 int alarm_try_to_cancel(struct alarm *alarm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct alarm_base *base;
 	unsigned long flags;
 	int ret;
@@ -559,10 +623,15 @@ int alarm_try_to_cancel(struct alarm *alarm)
 	}
 	base = &alarm_bases[alarm->type];
 =======
+=======
+>>>>>>> v3.18
 	struct alarm_base *base = &alarm_bases[alarm->type];
 	unsigned long flags;
 	int ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&base->lock, flags);
 	ret = hrtimer_try_to_cancel(&alarm->timer);
@@ -572,6 +641,10 @@ int alarm_try_to_cancel(struct alarm *alarm)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(alarm_try_to_cancel);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(alarm_try_to_cancel);
 >>>>>>> v3.18
@@ -593,6 +666,10 @@ int alarm_cancel(struct alarm *alarm)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(alarm_cancel);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(alarm_cancel);
 >>>>>>> v3.18
@@ -629,6 +706,10 @@ u64 alarm_forward(struct alarm *alarm, ktime_t now, ktime_t interval)
 	return overrun;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(alarm_forward);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(alarm_forward);
 >>>>>>> v3.18
@@ -640,7 +721,11 @@ u64 alarm_forward_now(struct alarm *alarm, ktime_t interval)
 	return alarm_forward(alarm, base->gettime(), interval);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+EXPORT_SYMBOL_GPL(alarm_forward_now);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(alarm_forward_now);
 >>>>>>> v3.18
@@ -754,7 +839,11 @@ static int alarm_timer_create(struct k_itimer *new_timer)
  * @cur_setting: itimerspec data to fill
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copies the itimerspec data out from the k_itimer
+=======
+ * Copies out the current itimerspec data
+>>>>>>> v3.18
 =======
  * Copies out the current itimerspec data
 >>>>>>> v3.18
@@ -762,6 +851,7 @@ static int alarm_timer_create(struct k_itimer *new_timer)
 static void alarm_timer_get(struct k_itimer *timr,
 				struct itimerspec *cur_setting)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memset(cur_setting, 0, sizeof(struct itimerspec));
 
@@ -771,6 +861,8 @@ static void alarm_timer_get(struct k_itimer *timr,
 		ktime_to_timespec(timr->it.alarm.alarmtimer.node.expires);
 	return;
 =======
+=======
+>>>>>>> v3.18
 	ktime_t relative_expiry_time =
 		alarm_expires_remaining(&(timr->it.alarm.alarmtimer));
 
@@ -782,6 +874,9 @@ static void alarm_timer_get(struct k_itimer *timr,
 	}
 
 	cur_setting->it_interval = ktime_to_timespec(timr->it.alarm.interval);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1022,7 +1117,10 @@ out:
 static const struct dev_pm_ops alarmtimer_pm_ops = {
 	.suspend = alarmtimer_suspend,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.resume = alarmtimer_resume,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

@@ -23,6 +23,10 @@
 #include <linux/xattr.h>
 #include <linux/security.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/posix_acl_xattr.h>
+>>>>>>> v3.18
 =======
 #include <linux/posix_acl_xattr.h>
 >>>>>>> v3.18
@@ -32,7 +36,11 @@
 #include "xattr.h"
 #include "disk-io.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "locking.h"
+=======
+#include "props.h"
+>>>>>>> v3.18
 =======
 #include "props.h"
 >>>>>>> v3.18
@@ -99,7 +107,11 @@ static int do_setxattr(struct btrfs_trans_handle *trans,
 		       const void *value, size_t size, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct btrfs_dir_item *di = NULL;
+=======
+	struct btrfs_dir_item *di;
+>>>>>>> v3.18
 =======
 	struct btrfs_dir_item *di;
 >>>>>>> v3.18
@@ -114,6 +126,7 @@ static int do_setxattr(struct btrfs_trans_handle *trans,
 	path = btrfs_alloc_path();
 	if (!path)
 		return -ENOMEM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	path->skip_release_on_error = 1;
 
@@ -238,6 +251,8 @@ static int do_setxattr(struct btrfs_trans_handle *trans,
 		 * filled it.
 		 */
 =======
+=======
+>>>>>>> v3.18
 
 	if (flags & XATTR_REPLACE) {
 		di = btrfs_lookup_xattr(trans, root, path, btrfs_ino(inode), name,
@@ -316,6 +331,9 @@ again:
 			btrfs_release_path(path);
 			goto again;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 out:
@@ -374,7 +392,11 @@ ssize_t btrfs_listxattr(struct dentry *dentry, char *buffer, size_t size)
 	 */
 	key.objectid = btrfs_ino(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	btrfs_set_key_type(&key, BTRFS_XATTR_ITEM_KEY);
+=======
+	key.type = BTRFS_XATTR_ITEM_KEY;
+>>>>>>> v3.18
 =======
 	key.type = BTRFS_XATTR_ITEM_KEY;
 >>>>>>> v3.18
@@ -414,7 +436,11 @@ ssize_t btrfs_listxattr(struct dentry *dentry, char *buffer, size_t size)
 		if (found_key.objectid != key.objectid)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (btrfs_key_type(&found_key) != BTRFS_XATTR_ITEM_KEY)
+=======
+		if (found_key.type != BTRFS_XATTR_ITEM_KEY)
+>>>>>>> v3.18
 =======
 		if (found_key.type != BTRFS_XATTR_ITEM_KEY)
 >>>>>>> v3.18
@@ -460,8 +486,13 @@ err:
 const struct xattr_handler *btrfs_xattr_handlers[] = {
 #ifdef CONFIG_BTRFS_FS_POSIX_ACL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&btrfs_xattr_acl_access_handler,
 	&btrfs_xattr_acl_default_handler,
+=======
+	&posix_acl_access_xattr_handler,
+	&posix_acl_default_xattr_handler,
+>>>>>>> v3.18
 =======
 	&posix_acl_access_xattr_handler,
 	&posix_acl_default_xattr_handler,
@@ -483,7 +514,12 @@ static bool btrfs_is_valid_xattr(const char *name)
 	       !strncmp(name, XATTR_SYSTEM_PREFIX, XATTR_SYSTEM_PREFIX_LEN) ||
 	       !strncmp(name, XATTR_TRUSTED_PREFIX, XATTR_TRUSTED_PREFIX_LEN) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       !strncmp(name, XATTR_USER_PREFIX, XATTR_USER_PREFIX_LEN);
+=======
+	       !strncmp(name, XATTR_USER_PREFIX, XATTR_USER_PREFIX_LEN) ||
+		!strncmp(name, XATTR_BTRFS_PREFIX, XATTR_BTRFS_PREFIX_LEN);
+>>>>>>> v3.18
 =======
 	       !strncmp(name, XATTR_USER_PREFIX, XATTR_USER_PREFIX_LEN) ||
 		!strncmp(name, XATTR_BTRFS_PREFIX, XATTR_BTRFS_PREFIX_LEN);
@@ -530,11 +566,17 @@ int btrfs_setxattr(struct dentry *dentry, const char *name, const void *value,
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!strncmp(name, XATTR_BTRFS_PREFIX, XATTR_BTRFS_PREFIX_LEN))
 		return btrfs_set_prop(dentry->d_inode, name,
 				      value, size, flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (size == 0)
 		value = "";  /* empty EA, do not remove */
@@ -566,11 +608,17 @@ int btrfs_removexattr(struct dentry *dentry, const char *name)
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!strncmp(name, XATTR_BTRFS_PREFIX, XATTR_BTRFS_PREFIX_LEN))
 		return btrfs_set_prop(dentry->d_inode, name,
 				      NULL, 0, XATTR_REPLACE);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return __btrfs_setxattr(NULL, dentry->d_inode, name, NULL, 0,
 				XATTR_REPLACE);

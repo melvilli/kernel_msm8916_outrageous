@@ -7,6 +7,10 @@
  * Copyright 2007, Michael Wu <flamingice@sourmilk.net>
  * Copyright 2009, Johannes Berg <johannes@sipsolutions.net>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright 2013-2014  Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright 2013-2014  Intel Mobile Communications GmbH
 >>>>>>> v3.18
@@ -34,6 +38,7 @@
 
 #define IEEE80211_IBSS_MERGE_INTERVAL (30 * HZ)
 #define IEEE80211_IBSS_INACTIVITY_LIMIT (60 * HZ)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define IEEE80211_IBSS_MAX_STA_ENTRIES 128
@@ -105,6 +110,8 @@ static void __ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 
 	sband = local->hw.wiphy->bands[chan->band];
 =======
+=======
+>>>>>>> v3.18
 #define IEEE80211_IBSS_RSN_INACTIVITY_LIMIT (10 * HZ)
 
 #define IEEE80211_IBSS_MAX_STA_ENTRIES 128
@@ -127,6 +134,9 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 	struct beacon_data *presp;
 	int frame_len;
 	int shift;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Build IBSS probe response */
@@ -137,6 +147,10 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 		    3 /* max DS params */ +
 		    4 /* IBSS params */ +
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		    5 /* Channel Switch Announcement */ +
+>>>>>>> v3.18
 =======
 		    5 /* Channel Switch Announcement */ +
 >>>>>>> v3.18
@@ -147,7 +161,11 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 	presp = kzalloc(sizeof(*presp) + frame_len, GFP_KERNEL);
 	if (!presp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return NULL;
+>>>>>>> v3.18
 =======
 		return NULL;
 >>>>>>> v3.18
@@ -172,6 +190,7 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 	pos += ifibss->ssid_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rates = min_t(int, 8, sband->n_bitrates);
 	*pos++ = WLAN_EID_SUPP_RATES;
 	*pos++ = rates;
@@ -182,6 +201,8 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 			basic = 0x80;
 		*pos++ = basic | (u8) (rate / 5);
 =======
+=======
+>>>>>>> v3.18
 	sband = local->hw.wiphy->bands[chandef->chan->band];
 	rate_flags = ieee80211_chandef_rate_flags(chandef);
 	shift = ieee80211_chandef_get_shift(chandef);
@@ -216,6 +237,9 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 			ri++; /* continue at next rate for EXT_SUPP_RATES */
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -223,7 +247,12 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 		*pos++ = WLAN_EID_DS_PARAMS;
 		*pos++ = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*pos++ = ieee80211_frequency_to_channel(chan->center_freq);
+=======
+		*pos++ = ieee80211_frequency_to_channel(
+				chandef->chan->center_freq);
+>>>>>>> v3.18
 =======
 		*pos++ = ieee80211_frequency_to_channel(
 				chandef->chan->center_freq);
@@ -237,6 +266,7 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 	*pos++ = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sband->n_bitrates > 8) {
 		*pos++ = WLAN_EID_EXT_SUPP_RATES;
 		*pos++ = sband->n_bitrates - 8;
@@ -247,6 +277,8 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 				basic = 0x80;
 			*pos++ = basic | (u8) (rate / 5);
 =======
+=======
+>>>>>>> v3.18
 	if (csa_settings) {
 		*pos++ = WLAN_EID_CHANNEL_SWITCH;
 		*pos++ = 3;
@@ -271,6 +303,9 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 			if (basic_rates & BIT(ri))
 				basic = 0x80;
 			*pos++ = basic | (u8) rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -282,11 +317,14 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 
 	/* add HT capability and information IEs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (chandef.width != NL80211_CHAN_WIDTH_20_NOHT &&
 	    sband->ht_cap.ht_supported) {
 		pos = ieee80211_ie_build_ht_cap(pos, &sband->ht_cap,
 						sband->ht_cap.cap);
 =======
+=======
+>>>>>>> v3.18
 	if (chandef->width != NL80211_CHAN_WIDTH_20_NOHT &&
 	    chandef->width != NL80211_CHAN_WIDTH_5 &&
 	    chandef->width != NL80211_CHAN_WIDTH_10 &&
@@ -297,6 +335,9 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 		ieee80211_apply_htcap_overrides(sdata, &ht_cap);
 
 		pos = ieee80211_ie_build_ht_cap(pos, &ht_cap, ht_cap.cap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Note: According to 802.11n-2009 9.13.3.1, HT Protection
@@ -304,6 +345,7 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 		 * keep them at 0
 		 */
 		pos = ieee80211_ie_build_ht_oper(pos, &sband->ht_cap,
+<<<<<<< HEAD
 <<<<<<< HEAD
 						 &chandef, 0);
 	}
@@ -326,6 +368,8 @@ ieee80211_ibss_build_presp(struct ieee80211_sub_if_data *sdata,
 
 	rcu_assign_pointer(ifibss->presp, presp);
 =======
+=======
+>>>>>>> v3.18
 						 chandef, 0);
 	}
 
@@ -451,6 +495,9 @@ static void __ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 
 	rcu_assign_pointer(ifibss->presp, presp);
 	mgmt = (void *)presp->head;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sdata->vif.bss_conf.enable_beacon = true;
@@ -482,12 +529,15 @@ static void __ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 	bss_change |= BSS_CHANGED_ERP_SLOT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sdata->vif.bss_conf.ibss_joined = true;
 	sdata->vif.bss_conf.ibss_creator = creator;
 	ieee80211_bss_info_change_notify(sdata, bss_change);
 
 	ieee80211_sta_def_wmm_params(sdata, sband->n_bitrates, supp_rates);
 =======
+=======
+>>>>>>> v3.18
 	/* cf. IEEE 802.11 9.2.12 */
 	if (chan->band == IEEE80211_BAND_2GHZ && have_higher_than_11mbit)
 		sdata->flags |= IEEE80211_SDATA_OPERATING_GMODE;
@@ -516,6 +566,9 @@ static void __ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 	}
 
 	ieee80211_bss_info_change_notify(sdata, bss_change);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ifibss->state = IEEE80211_IBSS_MLME_JOINED;
@@ -523,12 +576,15 @@ static void __ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 		  round_jiffies(jiffies + IEEE80211_IBSS_MERGE_INTERVAL));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bss = cfg80211_inform_bss_frame(local->hw.wiphy, chan,
 					mgmt, presp->head_len, 0, GFP_KERNEL);
 	cfg80211_put_bss(local->hw.wiphy, bss);
 	netif_carrier_on(sdata->dev);
 	cfg80211_ibss_joined(sdata->dev, ifibss->bssid, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	scan_width = cfg80211_chandef_to_scan_width(&chandef);
 	bss = cfg80211_inform_bss_width_frame(local->hw.wiphy, chan,
 					      scan_width, mgmt,
@@ -536,6 +592,9 @@ static void __ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 	cfg80211_put_bss(local->hw.wiphy, bss);
 	netif_carrier_on(sdata->dev);
 	cfg80211_ibss_joined(sdata->dev, ifibss->bssid, chan, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -546,6 +605,10 @@ static void ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 		container_of((void *)bss, struct cfg80211_bss, priv);
 	struct ieee80211_supported_band *sband;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct cfg80211_chan_def chandef;
+>>>>>>> v3.18
 =======
 	struct cfg80211_chan_def chandef;
 >>>>>>> v3.18
@@ -554,24 +617,33 @@ static void ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 	u16 beacon_int = cbss->beacon_interval;
 	const struct cfg80211_bss_ies *ies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 tsf;
 
 	lockdep_assert_held(&sdata->u.ibss.mtx);
 =======
+=======
+>>>>>>> v3.18
 	enum nl80211_channel_type chan_type;
 	u64 tsf;
 	u32 rate_flags;
 	int shift;
 
 	sdata_assert_lock(sdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (beacon_int < 10)
 		beacon_int = 10;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sband = sdata->local->hw.wiphy->bands[cbss->channel->band];
 =======
+=======
+>>>>>>> v3.18
 	switch (sdata->u.ibss.chandef.width) {
 	case NL80211_CHAN_WIDTH_20_NOHT:
 	case NL80211_CHAN_WIDTH_20:
@@ -595,11 +667,15 @@ static void ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 	sband = sdata->local->hw.wiphy->bands[cbss->channel->band];
 	rate_flags = ieee80211_chandef_rate_flags(&sdata->u.ibss.chandef);
 	shift = ieee80211_vif_get_shift(&sdata->vif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	basic_rates = 0;
 
 	for (i = 0; i < bss->supp_rates_len; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		int rate = (bss->supp_rates[i] & 0x7f) * 5;
 		bool is_basic = !!(bss->supp_rates[i] & 0x80);
@@ -607,6 +683,8 @@ static void ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 		for (j = 0; j < sband->n_bitrates; j++) {
 			if (sband->bitrates[j].bitrate == rate) {
 =======
+=======
+>>>>>>> v3.18
 		int rate = bss->supp_rates[i] & 0x7f;
 		bool is_basic = !!(bss->supp_rates[i] & 0x80);
 
@@ -619,6 +697,9 @@ static void ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 			brate = DIV_ROUND_UP(sband->bitrates[j].bitrate,
 					     5 * (1 << shift));
 			if (brate == rate) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (is_basic)
 					basic_rates |= BIT(j);
@@ -635,7 +716,11 @@ static void ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 	__ieee80211_sta_join_ibss(sdata, cbss->bssid,
 				  beacon_int,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  cbss->channel,
+=======
+				  &chandef,
+>>>>>>> v3.18
 =======
 				  &chandef,
 >>>>>>> v3.18
@@ -645,9 +730,12 @@ static void ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sta_info *ieee80211_ibss_finish_sta(struct sta_info *sta,
 						  bool auth)
 =======
+=======
+>>>>>>> v3.18
 int ieee80211_ibss_csa_beacon(struct ieee80211_sub_if_data *sdata,
 			      struct cfg80211_csa_settings *csa_settings)
 {
@@ -754,6 +842,9 @@ void ieee80211_ibss_stop(struct ieee80211_sub_if_data *sdata)
 }
 
 static struct sta_info *ieee80211_ibss_finish_sta(struct sta_info *sta)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__acquires(RCU)
 {
@@ -777,6 +868,7 @@ static struct sta_info *ieee80211_ibss_finish_sta(struct sta_info *sta)
 	if (sta_info_insert_rcu(sta))
 		return sta_info_get(sdata, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (auth && !sdata->u.ibss.auth_frame_registrations) {
 		ibss_dbg(sdata,
 			 "TX Auth SA=%pM DA=%pM BSSID=%pM (auth_transaction=1)\n",
@@ -786,14 +878,21 @@ static struct sta_info *ieee80211_ibss_finish_sta(struct sta_info *sta)
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return sta;
 }
 
 static struct sta_info *
 <<<<<<< HEAD
+<<<<<<< HEAD
 ieee80211_ibss_add_sta(struct ieee80211_sub_if_data *sdata,
 		       const u8 *bssid, const u8 *addr,
 		       u32 supp_rates, bool auth)
+=======
+ieee80211_ibss_add_sta(struct ieee80211_sub_if_data *sdata, const u8 *bssid,
+		       const u8 *addr, u32 supp_rates)
+>>>>>>> v3.18
 =======
 ieee80211_ibss_add_sta(struct ieee80211_sub_if_data *sdata, const u8 *bssid,
 		       const u8 *addr, u32 supp_rates)
@@ -805,6 +904,11 @@ ieee80211_ibss_add_sta(struct ieee80211_sub_if_data *sdata, const u8 *bssid,
 	struct sta_info *sta;
 	struct ieee80211_chanctx_conf *chanctx_conf;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ieee80211_supported_band *sband;
+	enum nl80211_bss_scan_width scan_width;
+>>>>>>> v3.18
 =======
 	struct ieee80211_supported_band *sband;
 	enum nl80211_bss_scan_width scan_width;
@@ -838,6 +942,10 @@ ieee80211_ibss_add_sta(struct ieee80211_sub_if_data *sdata, const u8 *bssid,
 		return NULL;
 	band = chanctx_conf->def.chan->band;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	scan_width = cfg80211_chandef_to_scan_width(&chanctx_conf->def);
+>>>>>>> v3.18
 =======
 	scan_width = cfg80211_chandef_to_scan_width(&chanctx_conf->def);
 >>>>>>> v3.18
@@ -853,11 +961,14 @@ ieee80211_ibss_add_sta(struct ieee80211_sub_if_data *sdata, const u8 *bssid,
 
 	/* make sure mandatory rates are always added */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sta->sta.supp_rates[band] = supp_rates |
 			ieee80211_mandatory_rates(local, band);
 
 	return ieee80211_ibss_finish_sta(sta, auth);
 =======
+=======
+>>>>>>> v3.18
 	sband = local->hw.wiphy->bands[band];
 	sta->sta.supp_rates[band] = supp_rates |
 			ieee80211_mandatory_rates(sband, scan_width);
@@ -1147,6 +1258,9 @@ ieee80211_rx_mgmt_spectrum_mgmt(struct ieee80211_sub_if_data *sdata,
 
 	if (!sdata->vif.csa_active)
 		ieee80211_ibss_process_chanswitch(sdata, elems, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1170,10 +1284,15 @@ static void ieee80211_rx_mgmt_auth_ibss(struct ieee80211_sub_if_data *sdata,
 {
 	u16 auth_alg, auth_transaction;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sta_info *sta;
 	u8 deauth_frame_buf[IEEE80211_DEAUTH_FRAME_LEN];
 
 	lockdep_assert_held(&sdata->u.ibss.mtx);
+=======
+
+	sdata_assert_lock(sdata);
+>>>>>>> v3.18
 =======
 
 	sdata_assert_lock(sdata);
@@ -1193,6 +1312,7 @@ static void ieee80211_rx_mgmt_auth_ibss(struct ieee80211_sub_if_data *sdata,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sta_info_destroy_addr(sdata, mgmt->sa);
 	sta = ieee80211_ibss_add_sta(sdata, mgmt->bssid, mgmt->sa, 0, false);
 	rcu_read_unlock();
@@ -1209,6 +1329,8 @@ static void ieee80211_rx_mgmt_auth_ibss(struct ieee80211_sub_if_data *sdata,
 		return;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1228,7 +1350,10 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 {
 	struct ieee80211_local *local = sdata->local;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int freq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct cfg80211_bss *cbss;
@@ -1238,6 +1363,7 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 	u64 beacon_timestamp, rx_timestamp;
 	u32 supp_rates = 0;
 	enum ieee80211_band band = rx_status->band;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ieee80211_supported_band *sband = local->hw.wiphy->bands[band];
 	bool rates_updated = false;
@@ -1252,12 +1378,17 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 
 	if (!channel || channel->flags & IEEE80211_CHAN_DISABLED)
 =======
+=======
+>>>>>>> v3.18
 	enum nl80211_bss_scan_width scan_width;
 	struct ieee80211_supported_band *sband = local->hw.wiphy->bands[band];
 	bool rates_updated = false;
 
 	channel = ieee80211_get_channel(local->hw.wiphy, rx_status->freq);
 	if (!channel)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
@@ -1269,7 +1400,11 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 
 		if (elems->supp_rates) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			supp_rates = ieee80211_sta_get_rates(local, elems,
+=======
+			supp_rates = ieee80211_sta_get_rates(sdata, elems,
+>>>>>>> v3.18
 =======
 			supp_rates = ieee80211_sta_get_rates(sdata, elems,
 >>>>>>> v3.18
@@ -1280,10 +1415,13 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 				prev_rates = sta->sta.supp_rates[band];
 				/* make sure mandatory rates are always added */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sta->sta.supp_rates[band] = supp_rates |
 					ieee80211_mandatory_rates(local, band);
 
 =======
+=======
+>>>>>>> v3.18
 				scan_width = NL80211_BSS_CHAN_WIDTH_20;
 				if (rx_status->flag & RX_FLAG_5MHZ)
 					scan_width = NL80211_BSS_CHAN_WIDTH_5;
@@ -1293,6 +1431,9 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 				sta->sta.supp_rates[band] = supp_rates |
 					ieee80211_mandatory_rates(sband,
 								  scan_width);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (sta->sta.supp_rates[band] != prev_rates) {
 					ibss_dbg(sdata,
@@ -1305,7 +1446,11 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 				rcu_read_unlock();
 				sta = ieee80211_ibss_add_sta(sdata, mgmt->bssid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						mgmt->sa, supp_rates, true);
+=======
+						mgmt->sa, supp_rates);
+>>>>>>> v3.18
 =======
 						mgmt->sa, supp_rates);
 >>>>>>> v3.18
@@ -1314,17 +1459,23 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 
 		if (sta && elems->wmm_info)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			set_sta_flag(sta, WLAN_STA_WME);
 
 		if (sta && elems->ht_operation && elems->ht_cap_elem &&
 		    sdata->u.ibss.channel_type != NL80211_CHAN_NO_HT) {
 =======
+=======
+>>>>>>> v3.18
 			sta->sta.wme = true;
 
 		if (sta && elems->ht_operation && elems->ht_cap_elem &&
 		    sdata->u.ibss.chandef.width != NL80211_CHAN_WIDTH_20_NOHT &&
 		    sdata->u.ibss.chandef.width != NL80211_CHAN_WIDTH_5 &&
 		    sdata->u.ibss.chandef.width != NL80211_CHAN_WIDTH_10) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* we both use HT */
 			struct ieee80211_ht_cap htcap_ie;
@@ -1341,8 +1492,13 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 			 * the other extension channel
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (cfg80211_get_chandef_type(&chandef) !=
 						sdata->u.ibss.channel_type)
+=======
+			if (chandef.center_freq1 !=
+			    sdata->u.ibss.chandef.center_freq1)
+>>>>>>> v3.18
 =======
 			if (chandef.center_freq1 !=
 			    sdata->u.ibss.chandef.center_freq1)
@@ -1376,10 +1532,13 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 	/* check if we need to merge IBSS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we use a fixed BSSID */
 	if (sdata->u.ibss.fixed_bssid)
 		goto put_bss;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* not an IBSS */
@@ -1389,7 +1548,11 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 	/* different channel */
 	if (sdata->u.ibss.fixed_channel &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    sdata->u.ibss.channel != cbss->channel)
+=======
+	    sdata->u.ibss.chandef.chan != cbss->channel)
+>>>>>>> v3.18
 =======
 	    sdata->u.ibss.chandef.chan != cbss->channel)
 >>>>>>> v3.18
@@ -1402,23 +1565,35 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 		goto put_bss;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* process channel switch */
 	if (sdata->vif.csa_active ||
 	    ieee80211_ibss_process_chanswitch(sdata, elems, true))
 		goto put_bss;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* same BSSID */
 	if (ether_addr_equal(cbss->bssid, sdata->u.ibss.bssid))
 		goto put_bss;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* we use a fixed BSSID */
 	if (sdata->u.ibss.fixed_bssid)
 		goto put_bss;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ieee80211_have_rx_timestamp(rx_status)) {
 		/* time when timestamp field was received */
@@ -1447,9 +1622,15 @@ static void ieee80211_rx_bss_info(struct ieee80211_sub_if_data *sdata,
 			 mgmt->bssid);
 		ieee80211_sta_join_ibss(sdata, bss);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		supp_rates = ieee80211_sta_get_rates(local, elems, band, NULL);
 		ieee80211_ibss_add_sta(sdata, mgmt->bssid, mgmt->sa,
 				       supp_rates, true);
+=======
+		supp_rates = ieee80211_sta_get_rates(sdata, elems, band, NULL);
+		ieee80211_ibss_add_sta(sdata, mgmt->bssid, mgmt->sa,
+				       supp_rates);
+>>>>>>> v3.18
 =======
 		supp_rates = ieee80211_sta_get_rates(sdata, elems, band, NULL);
 		ieee80211_ibss_add_sta(sdata, mgmt->bssid, mgmt->sa,
@@ -1471,6 +1652,11 @@ void ieee80211_ibss_rx_no_sta(struct ieee80211_sub_if_data *sdata,
 	struct sta_info *sta;
 	struct ieee80211_chanctx_conf *chanctx_conf;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ieee80211_supported_band *sband;
+	enum nl80211_bss_scan_width scan_width;
+>>>>>>> v3.18
 =======
 	struct ieee80211_supported_band *sband;
 	enum nl80211_bss_scan_width scan_width;
@@ -1501,6 +1687,10 @@ void ieee80211_ibss_rx_no_sta(struct ieee80211_sub_if_data *sdata,
 	}
 	band = chanctx_conf->def.chan->band;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	scan_width = cfg80211_chandef_to_scan_width(&chanctx_conf->def);
+>>>>>>> v3.18
 =======
 	scan_width = cfg80211_chandef_to_scan_width(&chanctx_conf->def);
 >>>>>>> v3.18
@@ -1514,8 +1704,14 @@ void ieee80211_ibss_rx_no_sta(struct ieee80211_sub_if_data *sdata,
 
 	/* make sure mandatory rates are always added */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sta->sta.supp_rates[band] = supp_rates |
 			ieee80211_mandatory_rates(local, band);
+=======
+	sband = local->hw.wiphy->bands[band];
+	sta->sta.supp_rates[band] = supp_rates |
+			ieee80211_mandatory_rates(sband, scan_width);
+>>>>>>> v3.18
 =======
 	sband = local->hw.wiphy->bands[band];
 	sta->sta.supp_rates[band] = supp_rates |
@@ -1528,6 +1724,7 @@ void ieee80211_ibss_rx_no_sta(struct ieee80211_sub_if_data *sdata,
 	ieee80211_queue_work(&local->hw, &sdata->work);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ieee80211_sta_active_ibss(struct ieee80211_sub_if_data *sdata)
 {
@@ -1552,6 +1749,8 @@ static int ieee80211_sta_active_ibss(struct ieee80211_sub_if_data *sdata)
 
 	return active;
 =======
+=======
+>>>>>>> v3.18
 static void ieee80211_ibss_sta_expire(struct ieee80211_sub_if_data *sdata)
 {
 	struct ieee80211_local *local = sdata->local;
@@ -1577,6 +1776,9 @@ static void ieee80211_ibss_sta_expire(struct ieee80211_sub_if_data *sdata)
 	}
 
 	mutex_unlock(&local->sta_mtx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1588,8 +1790,14 @@ static void ieee80211_sta_merge_ibss(struct ieee80211_sub_if_data *sdata)
 {
 	struct ieee80211_if_ibss *ifibss = &sdata->u.ibss;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	lockdep_assert_held(&ifibss->mtx);
+=======
+	enum nl80211_bss_scan_width scan_width;
+
+	sdata_assert_lock(sdata);
+>>>>>>> v3.18
 =======
 	enum nl80211_bss_scan_width scan_width;
 
@@ -1600,7 +1808,11 @@ static void ieee80211_sta_merge_ibss(struct ieee80211_sub_if_data *sdata)
 		  round_jiffies(jiffies + IEEE80211_IBSS_MERGE_INTERVAL));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ieee80211_sta_expire(sdata, IEEE80211_IBSS_INACTIVITY_LIMIT);
+=======
+	ieee80211_ibss_sta_expire(sdata);
+>>>>>>> v3.18
 =======
 	ieee80211_ibss_sta_expire(sdata);
 >>>>>>> v3.18
@@ -1619,8 +1831,14 @@ static void ieee80211_sta_merge_ibss(struct ieee80211_sub_if_data *sdata)
 		   "No active IBSS STAs - trying to scan for other IBSS networks with same SSID (merge)\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ieee80211_request_ibss_scan(sdata, ifibss->ssid, ifibss->ssid_len,
 				    NULL);
+=======
+	scan_width = cfg80211_chandef_to_scan_width(&ifibss->chandef);
+	ieee80211_request_ibss_scan(sdata, ifibss->ssid, ifibss->ssid_len,
+				    NULL, scan_width);
+>>>>>>> v3.18
 =======
 	scan_width = cfg80211_chandef_to_scan_width(&ifibss->chandef);
 	ieee80211_request_ibss_scan(sdata, ifibss->ssid, ifibss->ssid_len,
@@ -1636,7 +1854,11 @@ static void ieee80211_sta_create_ibss(struct ieee80211_sub_if_data *sdata)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lockdep_assert_held(&ifibss->mtx);
+=======
+	sdata_assert_lock(sdata);
+>>>>>>> v3.18
 =======
 	sdata_assert_lock(sdata);
 >>>>>>> v3.18
@@ -1665,7 +1887,11 @@ static void ieee80211_sta_create_ibss(struct ieee80211_sub_if_data *sdata)
 
 	__ieee80211_sta_join_ibss(sdata, bssid, sdata->vif.bss_conf.beacon_int,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  ifibss->channel, ifibss->basic_rates,
+=======
+				  &ifibss->chandef, ifibss->basic_rates,
+>>>>>>> v3.18
 =======
 				  &ifibss->chandef, ifibss->basic_rates,
 >>>>>>> v3.18
@@ -1684,16 +1910,22 @@ static void ieee80211_sta_find_ibss(struct ieee80211_sub_if_data *sdata)
 	struct ieee80211_channel *chan = NULL;
 	const u8 *bssid = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int active_ibss;
 	u16 capability;
 
 	lockdep_assert_held(&ifibss->mtx);
 =======
+=======
+>>>>>>> v3.18
 	enum nl80211_bss_scan_width scan_width;
 	int active_ibss;
 	u16 capability;
 
 	sdata_assert_lock(sdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	active_ibss = ieee80211_sta_active_ibss(sdata);
@@ -1709,7 +1941,11 @@ static void ieee80211_sta_find_ibss(struct ieee80211_sub_if_data *sdata)
 		bssid = ifibss->bssid;
 	if (ifibss->fixed_channel)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chan = ifibss->channel;
+=======
+		chan = ifibss->chandef.chan;
+>>>>>>> v3.18
 =======
 		chan = ifibss->chandef.chan;
 >>>>>>> v3.18
@@ -1737,7 +1973,10 @@ static void ieee80211_sta_find_ibss(struct ieee80211_sub_if_data *sdata)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* if a fixed bssid and a fixed freq have been provided create the IBSS
 	 * directly and do not waste time scanning
 	 */
@@ -1749,6 +1988,9 @@ static void ieee80211_sta_find_ibss(struct ieee80211_sub_if_data *sdata)
 	}
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ibss_dbg(sdata, "sta_find_ibss: did not try to join ibss\n");
 
@@ -1758,13 +2000,19 @@ static void ieee80211_sta_find_ibss(struct ieee80211_sub_if_data *sdata)
 		sdata_info(sdata, "Trigger new scan to find an IBSS to join\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ieee80211_request_ibss_scan(sdata, ifibss->ssid,
 					    ifibss->ssid_len, chan);
 =======
+=======
+>>>>>>> v3.18
 		scan_width = cfg80211_chandef_to_scan_width(&ifibss->chandef);
 		ieee80211_request_ibss_scan(sdata, ifibss->ssid,
 					    ifibss->ssid_len, chan,
 					    scan_width);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		int interval = IEEE80211_SCAN_INTERVAL;
@@ -1790,15 +2038,21 @@ static void ieee80211_rx_mgmt_probe_req(struct ieee80211_sub_if_data *sdata,
 	u8 *pos, *end;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lockdep_assert_held(&ifibss->mtx);
 
 	presp = rcu_dereference_protected(ifibss->presp,
 					  lockdep_is_held(&ifibss->mtx));
 =======
+=======
+>>>>>>> v3.18
 	sdata_assert_lock(sdata);
 
 	presp = rcu_dereference_protected(ifibss->presp,
 					  lockdep_is_held(&sdata->wdev.mtx));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ifibss->state != IEEE80211_IBSS_MLME_JOINED ||
@@ -1845,12 +2099,18 @@ static void ieee80211_rx_mgmt_probe_req(struct ieee80211_sub_if_data *sdata,
 	ibss_dbg(sdata, "Sending ProbeResp to %pM\n", mgmt->sa);
 	IEEE80211_SKB_CB(skb)->flags |= IEEE80211_TX_INTFL_DONT_ENCRYPT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* avoid excessive retries for probe request to wildcard SSIDs */
 	if (pos[1] == 0)
 		IEEE80211_SKB_CB(skb)->flags |= IEEE80211_TX_CTL_NO_ACK;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ieee80211_tx_skb(sdata, skb);
 }
@@ -1887,6 +2147,11 @@ void ieee80211_ibss_rx_queued_mgmt(struct ieee80211_sub_if_data *sdata,
 	struct ieee80211_mgmt *mgmt;
 	u16 fc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ieee802_11_elems elems;
+	int ies_len;
+>>>>>>> v3.18
 =======
 	struct ieee802_11_elems elems;
 	int ies_len;
@@ -1897,7 +2162,11 @@ void ieee80211_ibss_rx_queued_mgmt(struct ieee80211_sub_if_data *sdata,
 	fc = le16_to_cpu(mgmt->frame_control);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&sdata->u.ibss.mtx);
+=======
+	sdata_lock(sdata);
+>>>>>>> v3.18
 =======
 	sdata_lock(sdata);
 >>>>>>> v3.18
@@ -1921,11 +2190,14 @@ void ieee80211_ibss_rx_queued_mgmt(struct ieee80211_sub_if_data *sdata,
 		ieee80211_rx_mgmt_deauth_ibss(sdata, mgmt, skb->len);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
  mgmt_out:
 	mutex_unlock(&sdata->u.ibss.mtx);
 =======
+=======
+>>>>>>> v3.18
 	case IEEE80211_STYPE_ACTION:
 		switch (mgmt->u.action.category) {
 		case WLAN_CATEGORY_SPECTRUM_MGMT:
@@ -1951,6 +2223,9 @@ void ieee80211_ibss_rx_queued_mgmt(struct ieee80211_sub_if_data *sdata,
 
  mgmt_out:
 	sdata_unlock(sdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1960,7 +2235,11 @@ void ieee80211_ibss_work(struct ieee80211_sub_if_data *sdata)
 	struct sta_info *sta;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&ifibss->mtx);
+=======
+	sdata_lock(sdata);
+>>>>>>> v3.18
 =======
 	sdata_lock(sdata);
 >>>>>>> v3.18
@@ -1981,7 +2260,11 @@ void ieee80211_ibss_work(struct ieee80211_sub_if_data *sdata)
 		spin_unlock_bh(&ifibss->incomplete_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ieee80211_ibss_finish_sta(sta, true);
+=======
+		ieee80211_ibss_finish_sta(sta);
+>>>>>>> v3.18
 =======
 		ieee80211_ibss_finish_sta(sta);
 >>>>>>> v3.18
@@ -2004,7 +2287,11 @@ void ieee80211_ibss_work(struct ieee80211_sub_if_data *sdata)
 
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&ifibss->mtx);
+=======
+	sdata_unlock(sdata);
+>>>>>>> v3.18
 =======
 	sdata_unlock(sdata);
 >>>>>>> v3.18
@@ -2025,14 +2312,20 @@ void ieee80211_ibss_setup_sdata(struct ieee80211_sub_if_data *sdata)
 	setup_timer(&ifibss->timer, ieee80211_ibss_timer,
 		    (unsigned long) sdata);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&ifibss->mtx);
 	INIT_LIST_HEAD(&ifibss->incomplete_stations);
 	spin_lock_init(&ifibss->incomplete_lock);
 =======
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&ifibss->incomplete_stations);
 	spin_lock_init(&ifibss->incomplete_lock);
 	INIT_WORK(&ifibss->csa_connection_drop_work,
 		  ieee80211_csa_connection_drop_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2058,9 +2351,12 @@ int ieee80211_ibss_join(struct ieee80211_sub_if_data *sdata,
 {
 	u32 changed = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mutex_lock(&sdata->u.ibss.mtx);
 =======
+=======
+>>>>>>> v3.18
 	u32 rate_flags;
 	struct ieee80211_supported_band *sband;
 	enum ieee80211_chanctx_mode chanmode;
@@ -2090,6 +2386,9 @@ int ieee80211_ibss_join(struct ieee80211_sub_if_data *sdata,
 	mutex_unlock(&local->chanctx_mtx);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (params->bssid) {
@@ -2101,8 +2400,11 @@ int ieee80211_ibss_join(struct ieee80211_sub_if_data *sdata,
 	sdata->u.ibss.privacy = params->privacy;
 	sdata->u.ibss.control_port = params->control_port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sdata->u.ibss.basic_rates = params->basic_rates;
 =======
+=======
+>>>>>>> v3.18
 	sdata->u.ibss.userspace_handles_dfs = params->userspace_handles_dfs;
 	sdata->u.ibss.basic_rates = params->basic_rates;
 	sdata->u.ibss.last_scan_completed = jiffies;
@@ -2114,6 +2416,9 @@ int ieee80211_ibss_join(struct ieee80211_sub_if_data *sdata,
 		if ((rate_flags & sband->bitrates[i].flags) != rate_flags)
 			sdata->u.ibss.basic_rates &= ~BIT(i);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memcpy(sdata->vif.bss_conf.mcast_rate, params->mcast_rate,
 	       sizeof(params->mcast_rate));
@@ -2121,9 +2426,13 @@ int ieee80211_ibss_join(struct ieee80211_sub_if_data *sdata,
 	sdata->vif.bss_conf.beacon_int = params->beacon_interval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sdata->u.ibss.channel = params->chandef.chan;
 	sdata->u.ibss.channel_type =
 		cfg80211_get_chandef_type(&params->chandef);
+=======
+	sdata->u.ibss.chandef = params->chandef;
+>>>>>>> v3.18
 =======
 	sdata->u.ibss.chandef = params->chandef;
 >>>>>>> v3.18
@@ -2143,12 +2452,18 @@ int ieee80211_ibss_join(struct ieee80211_sub_if_data *sdata,
 	sdata->u.ibss.ssid_len = params->ssid_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&sdata->u.ibss.mtx);
 =======
+=======
+>>>>>>> v3.18
 	memcpy(&sdata->u.ibss.ht_capa, &params->ht_capa,
 	       sizeof(sdata->u.ibss.ht_capa));
 	memcpy(&sdata->u.ibss.ht_capa_mask, &params->ht_capa_mask,
 	       sizeof(sdata->u.ibss.ht_capa_mask));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -2170,9 +2485,15 @@ int ieee80211_ibss_join(struct ieee80211_sub_if_data *sdata,
 
 	sdata->smps_mode = IEEE80211_SMPS_OFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sdata->needed_rx_chains = sdata->local->rx_chains;
 
 	ieee80211_queue_work(&sdata->local->hw, &sdata->work);
+=======
+	sdata->needed_rx_chains = local->rx_chains;
+
+	ieee80211_queue_work(&local->hw, &sdata->work);
+>>>>>>> v3.18
 =======
 	sdata->needed_rx_chains = local->rx_chains;
 
@@ -2185,6 +2506,7 @@ int ieee80211_ibss_join(struct ieee80211_sub_if_data *sdata,
 int ieee80211_ibss_leave(struct ieee80211_sub_if_data *sdata)
 {
 	struct ieee80211_if_ibss *ifibss = &sdata->u.ibss;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ieee80211_local *local = sdata->local;
 	struct cfg80211_bss *cbss;
@@ -2251,6 +2573,8 @@ int ieee80211_ibss_leave(struct ieee80211_sub_if_data *sdata)
 	synchronize_rcu();
 	kfree(presp);
 =======
+=======
+>>>>>>> v3.18
 
 	ieee80211_ibss_disconnect(sdata);
 	ifibss->ssid_len = 0;
@@ -2264,6 +2588,9 @@ int ieee80211_ibss_leave(struct ieee80211_sub_if_data *sdata)
 	memset(&ifibss->ht_capa_mask, 0, sizeof(ifibss->ht_capa_mask));
 
 	synchronize_rcu();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	skb_queue_purge(&sdata->skb_queue);
@@ -2271,8 +2598,11 @@ int ieee80211_ibss_leave(struct ieee80211_sub_if_data *sdata)
 	del_timer_sync(&sdata->u.ibss.timer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&sdata->u.ibss.mtx);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

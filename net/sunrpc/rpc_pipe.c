@@ -18,6 +18,10 @@
 #include <linux/kernel.h>
 #include <linux/rcupdate.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/utsname.h>
+>>>>>>> v3.18
 =======
 #include <linux/utsname.h>
 >>>>>>> v3.18
@@ -43,7 +47,11 @@
 
 static struct file_system_type rpc_pipe_fs_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+static const struct rpc_pipe_ops gssd_dummy_pipe_ops;
+>>>>>>> v3.18
 =======
 static const struct rpc_pipe_ops gssd_dummy_pipe_ops;
 >>>>>>> v3.18
@@ -203,7 +211,11 @@ rpc_alloc_inode(struct super_block *sb)
 {
 	struct rpc_inode *rpci;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rpci = (struct rpc_inode *)kmem_cache_alloc(rpc_inode_cachep, GFP_KERNEL);
+=======
+	rpci = kmem_cache_alloc(rpc_inode_cachep, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	rpci = kmem_cache_alloc(rpc_inode_cachep, GFP_KERNEL);
 >>>>>>> v3.18
@@ -229,8 +241,11 @@ static int
 rpc_pipe_open(struct inode *inode, struct file *filp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net *net = inode->i_sb->s_fs_info;
 	struct sunrpc_net *sn = net_generic(net, sunrpc_net_id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct rpc_pipe *pipe;
@@ -239,7 +254,10 @@ rpc_pipe_open(struct inode *inode, struct file *filp)
 
 	mutex_lock(&inode->i_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sn->gssd_running = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pipe = RPC_I(inode)->pipe;
@@ -428,7 +446,11 @@ rpc_show_info(struct seq_file *m, void *v)
 	seq_printf(m, "RPC server: %s\n",
 			rcu_dereference(clnt->cl_xprt)->servername);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(m, "service: %s (%d) version %d\n", clnt->cl_protname,
+=======
+	seq_printf(m, "service: %s (%d) version %d\n", clnt->cl_program->name,
+>>>>>>> v3.18
 =======
 	seq_printf(m, "service: %s (%d) version %d\n", clnt->cl_program->name,
 >>>>>>> v3.18
@@ -494,6 +516,7 @@ struct rpc_filelist {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rpc_delete_dentry(const struct dentry *dentry)
 {
 	return 1;
@@ -503,6 +526,8 @@ static const struct dentry_operations rpc_dentry_operations = {
 	.d_delete = rpc_delete_dentry,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct inode *
@@ -545,8 +570,13 @@ static int __rpc_create_common(struct inode *dir, struct dentry *dentry,
 	return 0;
 out_err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING "%s: %s failed to allocate inode for dentry %s\n",
 			__FILE__, __func__, dentry->d_name.name);
+=======
+	printk(KERN_WARNING "%s: %s failed to allocate inode for dentry %pd\n",
+			__FILE__, __func__, dentry);
+>>>>>>> v3.18
 =======
 	printk(KERN_WARNING "%s: %s failed to allocate inode for dentry %pd\n",
 			__FILE__, __func__, dentry);
@@ -687,6 +717,7 @@ static int __rpc_rmpipe(struct inode *dir, struct dentry *dentry)
 
 static struct dentry *__rpc_lookup_create_exclusive(struct dentry *parent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  struct qstr *name)
 {
 	struct dentry *dentry;
@@ -702,6 +733,8 @@ static struct dentry *__rpc_lookup_create_exclusive(struct dentry *parent,
 		return dentry;
 	}
 =======
+=======
+>>>>>>> v3.18
 					  const char *name)
 {
 	struct qstr q = QSTR_INIT(name, strlen(name));
@@ -713,6 +746,9 @@ static struct dentry *__rpc_lookup_create_exclusive(struct dentry *parent,
 	}
 	if (dentry->d_inode == NULL)
 		return dentry;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dput(dentry);
 	return ERR_PTR(-EEXIST);
@@ -734,8 +770,12 @@ static void __rpc_depopulate(struct dentry *parent,
 		name.name = files[i].name;
 		name.len = strlen(files[i].name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		name.hash = full_name_hash(name.name, name.len);
 		dentry = d_lookup(parent, &name);
+=======
+		dentry = d_hash_and_lookup(parent, &name);
+>>>>>>> v3.18
 =======
 		dentry = d_hash_and_lookup(parent, &name);
 >>>>>>> v3.18
@@ -781,12 +821,16 @@ static int rpc_populate(struct dentry *parent,
 	mutex_lock(&dir->i_mutex);
 	for (i = start; i < eof; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct qstr q;
 
 		q.name = files[i].name;
 		q.len = strlen(files[i].name);
 		q.hash = full_name_hash(q.name, q.len);
 		dentry = __rpc_lookup_create_exclusive(parent, &q);
+=======
+		dentry = __rpc_lookup_create_exclusive(parent, files[i].name);
+>>>>>>> v3.18
 =======
 		dentry = __rpc_lookup_create_exclusive(parent, files[i].name);
 >>>>>>> v3.18
@@ -817,8 +861,13 @@ out_bad:
 	__rpc_depopulate(parent, files, start, eof);
 	mutex_unlock(&dir->i_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING "%s: %s failed to populate directory %s\n",
 			__FILE__, __func__, parent->d_name.name);
+=======
+	printk(KERN_WARNING "%s: %s failed to populate directory %pd\n",
+			__FILE__, __func__, parent);
+>>>>>>> v3.18
 =======
 	printk(KERN_WARNING "%s: %s failed to populate directory %pd\n",
 			__FILE__, __func__, parent);
@@ -828,7 +877,11 @@ out_bad:
 
 static struct dentry *rpc_mkdir_populate(struct dentry *parent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct qstr *name, umode_t mode, void *private,
+=======
+		const char *name, umode_t mode, void *private,
+>>>>>>> v3.18
 =======
 		const char *name, umode_t mode, void *private,
 >>>>>>> v3.18
@@ -903,7 +956,10 @@ struct dentry *rpc_mkpipe_dentry(struct dentry *parent, const char *name,
 	struct inode *dir = parent->d_inode;
 	umode_t umode = S_IFIFO | S_IRUSR | S_IWUSR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qstr q;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int err;
@@ -914,12 +970,17 @@ struct dentry *rpc_mkpipe_dentry(struct dentry *parent, const char *name,
 		umode &= ~S_IWUGO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q.name = name;
 	q.len = strlen(name);
 	q.hash = full_name_hash(q.name, q.len),
 
 	mutex_lock_nested(&dir->i_mutex, I_MUTEX_PARENT);
 	dentry = __rpc_lookup_create_exclusive(parent, &q);
+=======
+	mutex_lock_nested(&dir->i_mutex, I_MUTEX_PARENT);
+	dentry = __rpc_lookup_create_exclusive(parent, name);
+>>>>>>> v3.18
 =======
 	mutex_lock_nested(&dir->i_mutex, I_MUTEX_PARENT);
 	dentry = __rpc_lookup_create_exclusive(parent, name);
@@ -936,8 +997,13 @@ out:
 out_err:
 	dentry = ERR_PTR(err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING "%s: %s() failed to create pipe %s/%s (errno = %d)\n",
 			__FILE__, __func__, parent->d_name.name, name,
+=======
+	printk(KERN_WARNING "%s: %s() failed to create pipe %pd/%s (errno = %d)\n",
+			__FILE__, __func__, parent, name,
+>>>>>>> v3.18
 =======
 	printk(KERN_WARNING "%s: %s() failed to create pipe %pd/%s (errno = %d)\n",
 			__FILE__, __func__, parent, name,
@@ -973,7 +1039,10 @@ rpc_unlink(struct dentry *dentry)
 EXPORT_SYMBOL_GPL(rpc_unlink);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * rpc_init_pipe_dir_head - initialise a struct rpc_pipe_dir_head
  * @pdh: pointer to struct rpc_pipe_dir_head
@@ -1127,6 +1196,9 @@ rpc_destroy_pipe_dir_objects(struct rpc_pipe_dir_head *pdh)
 		pdo->pdo_ops->destroy(dir, pdo);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	RPCAUTH_info,
@@ -1156,8 +1228,13 @@ static void rpc_clntdir_depopulate(struct dentry *dentry)
 /**
  * rpc_create_client_dir - Create a new rpc_client directory in rpc_pipefs
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dentry: dentry from the rpc_pipefs root to the new directory
  * @name: &struct qstr for the name
+=======
+ * @dentry: the parent of new directory
+ * @name: the name of new directory
+>>>>>>> v3.18
 =======
  * @dentry: the parent of new directory
  * @name: the name of new directory
@@ -1171,12 +1248,15 @@ static void rpc_clntdir_depopulate(struct dentry *dentry)
  */
 struct dentry *rpc_create_client_dir(struct dentry *dentry,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   struct qstr *name,
 				   struct rpc_clnt *rpc_client)
 {
 	return rpc_mkdir_populate(dentry, name, S_IRUGO | S_IXUGO, NULL,
 			rpc_clntdir_populate, rpc_client);
 =======
+=======
+>>>>>>> v3.18
 				   const char *name,
 				   struct rpc_clnt *rpc_client)
 {
@@ -1189,17 +1269,23 @@ struct dentry *rpc_create_client_dir(struct dentry *dentry,
 		rpc_create_pipe_dir_objects(&rpc_client->cl_pipedir_objects);
 	}
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * rpc_remove_client_dir - Remove a directory created with rpc_create_client_dir()
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dentry: dentry for the pipe
  */
 int rpc_remove_client_dir(struct dentry *dentry)
 {
 =======
+=======
+>>>>>>> v3.18
  * @rpc_client: rpc_client for the pipe
  */
 int rpc_remove_client_dir(struct rpc_clnt *rpc_client)
@@ -1210,6 +1296,9 @@ int rpc_remove_client_dir(struct rpc_clnt *rpc_client)
 		return 0;
 	rpc_destroy_pipe_dir_objects(&rpc_client->cl_pipedir_objects);
 	rpc_client->cl_pipedir_objects.pdh_dentry = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rpc_rmdir_depopulate(dentry, rpc_clntdir_depopulate);
 }
@@ -1245,7 +1334,11 @@ static void rpc_cachedir_depopulate(struct dentry *dentry)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dentry *rpc_create_cache_dir(struct dentry *parent, struct qstr *name,
+=======
+struct dentry *rpc_create_cache_dir(struct dentry *parent, const char *name,
+>>>>>>> v3.18
 =======
 struct dentry *rpc_create_cache_dir(struct dentry *parent, const char *name,
 >>>>>>> v3.18
@@ -1284,6 +1377,10 @@ enum {
 	RPCAUTH_cache,
 	RPCAUTH_nfsd,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RPCAUTH_gssd,
+>>>>>>> v3.18
 =======
 	RPCAUTH_gssd,
 >>>>>>> v3.18
@@ -1324,11 +1421,17 @@ static const struct rpc_filelist files[] = {
 		.mode = S_IFDIR | S_IRUGO | S_IXUGO,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[RPCAUTH_gssd] = {
 		.name = "gssd",
 		.mode = S_IFDIR | S_IRUGO | S_IXUGO,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1339,6 +1442,7 @@ struct dentry *rpc_d_lookup_sb(const struct super_block *sb,
 			       const unsigned char *dir_name)
 {
 	struct qstr dir = QSTR_INIT(dir_name, strlen(dir_name));
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	dir.hash = full_name_hash(dir.name, dir.len);
@@ -1354,6 +1458,8 @@ void rpc_pipefs_init_net(struct net *net)
 	sn->gssd_running = 1;
 	sn->pipe_version = -1;
 =======
+=======
+>>>>>>> v3.18
 	return d_hash_and_lookup(sb->s_root, &dir);
 }
 EXPORT_SYMBOL_GPL(rpc_d_lookup_sb);
@@ -1376,6 +1482,9 @@ void rpc_pipefs_exit_net(struct net *net)
 	struct sunrpc_net *sn = net_generic(net, sunrpc_net_id);
 
 	rpc_destroy_pipe_data(sn->gssd_dummy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1407,7 +1516,10 @@ void rpc_put_sb_net(const struct net *net)
 EXPORT_SYMBOL_GPL(rpc_put_sb_net);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct rpc_filelist gssd_dummy_clnt_dir[] = {
 	[0] = {
 		.name = "clntXX",
@@ -1531,13 +1643,20 @@ rpc_gssd_dummy_depopulate(struct dentry *pipe_dentry)
 	dput(pipe_dentry);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 rpc_fill_super(struct super_block *sb, void *data, int silent)
 {
 	struct inode *inode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry *root;
+=======
+	struct dentry *root, *gssd_dentry;
+>>>>>>> v3.18
 =======
 	struct dentry *root, *gssd_dentry;
 >>>>>>> v3.18
@@ -1550,6 +1669,10 @@ rpc_fill_super(struct super_block *sb, void *data, int silent)
 	sb->s_magic = RPCAUTH_GSSMAGIC;
 	sb->s_op = &s_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sb->s_d_op = &simple_dentry_operations;
+>>>>>>> v3.18
 =======
 	sb->s_d_op = &simple_dentry_operations;
 >>>>>>> v3.18
@@ -1562,9 +1685,12 @@ rpc_fill_super(struct super_block *sb, void *data, int silent)
 	if (rpc_populate(root, files, RPCAUTH_lockd, RPCAUTH_RootEOF, NULL))
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("RPC:       sending pipefs MOUNT notification for net %p%s\n",
 		net, NET_NAME(net));
 =======
+=======
+>>>>>>> v3.18
 
 	gssd_dentry = rpc_gssd_dummy_populate(root, sn->gssd_dummy);
 	if (IS_ERR(gssd_dentry)) {
@@ -1575,6 +1701,9 @@ rpc_fill_super(struct super_block *sb, void *data, int silent)
 	dprintk("RPC:       sending pipefs MOUNT notification for net %p%s\n",
 		net, NET_NAME(net));
 	mutex_lock(&sn->pipefs_sb_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sn->pipefs_sb = sb;
 	err = blocking_notifier_call_chain(&rpc_pipefs_notifier_list,
@@ -1584,15 +1713,21 @@ rpc_fill_super(struct super_block *sb, void *data, int silent)
 		goto err_depopulate;
 	sb->s_fs_info = get_net(net);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 err_depopulate:
 =======
+=======
+>>>>>>> v3.18
 	mutex_unlock(&sn->pipefs_sb_lock);
 	return 0;
 
 err_depopulate:
 	rpc_gssd_dummy_depopulate(gssd_dentry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	blocking_notifier_call_chain(&rpc_pipefs_notifier_list,
 					   RPC_PIPEFS_UMOUNT,
@@ -1600,10 +1735,13 @@ err_depopulate:
 	sn->pipefs_sb = NULL;
 	__rpc_depopulate(root, files, RPCAUTH_lockd, RPCAUTH_RootEOF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	mutex_unlock(&sn->pipefs_sb_lock);
 	return err;
 }
@@ -1618,6 +1756,9 @@ gssd_running(struct net *net)
 }
 EXPORT_SYMBOL_GPL(gssd_running);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct dentry *
 rpc_mount(struct file_system_type *fs_type,
@@ -1638,7 +1779,10 @@ static void rpc_kill_sb(struct super_block *sb)
 	}
 	sn->pipefs_sb = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&sn->pipefs_sb_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dprintk("RPC:       sending pipefs UMOUNT notification for net %p%s\n",
@@ -1647,6 +1791,10 @@ static void rpc_kill_sb(struct super_block *sb)
 					   RPC_PIPEFS_UMOUNT,
 					   sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&sn->pipefs_sb_lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&sn->pipefs_sb_lock);
 >>>>>>> v3.18

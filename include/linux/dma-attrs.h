@@ -19,8 +19,11 @@ enum dma_attr {
 	DMA_ATTR_SKIP_CPU_SYNC,
 	DMA_ATTR_FORCE_CONTIGUOUS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DMA_ATTR_STRONGLY_ORDERED,
 	DMA_ATTR_SKIP_ZEROING,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	DMA_ATTR_MAX,

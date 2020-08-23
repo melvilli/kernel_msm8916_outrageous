@@ -51,7 +51,10 @@ config IPMI_SI
 	 you are using IPMI, you should probably say "y" here.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config IPMI_SI_PROBE_DEFAULTS
        bool 'Probe for all possible IPMI system interfaces by default'
        default n
@@ -64,6 +67,9 @@ config IPMI_SI_PROBE_DEFAULTS
 	 only be available on older systems if the "ipmi_si_intf.trydefaults=1"
 	 boot argument is passed.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config IPMI_WATCHDOG
        tristate 'IPMI Watchdog Timer'

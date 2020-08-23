@@ -37,7 +37,11 @@ nva3_therm_fan_sense(struct nouveau_therm *therm)
 	u32 ctrl = nv_rd32(therm, 0x00e720);
 	if (ctrl & 0x00000001)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return tach * 60;
+=======
+		return tach * 60 / 2;
+>>>>>>> v3.18
 =======
 		return tach * 60 / 2;
 >>>>>>> v3.18
@@ -56,6 +60,11 @@ nva3_therm_init(struct nouveau_object *object)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nv84_sensor_setup(&priv->base.base);
+
+>>>>>>> v3.18
 =======
 	nv84_sensor_setup(&priv->base.base);
 
@@ -104,7 +113,11 @@ nva3_therm_oclass = {
 		.dtor = _nouveau_therm_dtor,
 		.init = nva3_therm_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.fini = _nouveau_therm_fini,
+=======
+		.fini = nv84_therm_fini,
+>>>>>>> v3.18
 =======
 		.fini = nv84_therm_fini,
 >>>>>>> v3.18

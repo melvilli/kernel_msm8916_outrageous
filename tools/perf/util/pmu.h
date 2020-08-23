@@ -2,8 +2,14 @@
 #define __PMU_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/bitops.h>
 #include <linux/perf_event.h>
+=======
+#include <linux/bitmap.h>
+#include <linux/perf_event.h>
+#include <stdbool.h>
+>>>>>>> v3.18
 =======
 #include <linux/bitmap.h>
 #include <linux/perf_event.h>
@@ -19,6 +25,7 @@ enum {
 #define PERF_PMU_FORMAT_BITS 64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct perf_pmu {
 	char *name;
 	__u32 type;
@@ -30,6 +37,8 @@ struct perf_pmu {
 
 struct perf_pmu *perf_pmu__find(char *name);
 =======
+=======
+>>>>>>> v3.18
 struct perf_event_attr;
 
 struct perf_pmu {
@@ -58,19 +67,28 @@ struct perf_pmu_alias {
 };
 
 struct perf_pmu *perf_pmu__find(const char *name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int perf_pmu__config(struct perf_pmu *pmu, struct perf_event_attr *attr,
 		     struct list_head *head_terms);
 int perf_pmu__config_terms(struct list_head *formats,
 			   struct perf_event_attr *attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   struct list_head *head_terms);
 int perf_pmu__check_alias(struct perf_pmu *pmu, struct list_head *head_terms);
 =======
+=======
+>>>>>>> v3.18
 			   struct list_head *head_terms,
 			   bool zero);
 int perf_pmu__check_alias(struct perf_pmu *pmu, struct list_head *head_terms,
 			  struct perf_pmu_info *info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct list_head *perf_pmu__alias(struct perf_pmu *pmu,
 				  struct list_head *head_terms);
@@ -85,8 +103,11 @@ int perf_pmu__format_parse(char *dir, struct list_head *head);
 struct perf_pmu *perf_pmu__scan(struct perf_pmu *pmu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int perf_pmu__test(void);
 =======
+=======
+>>>>>>> v3.18
 void print_pmu_events(const char *event_glob, bool name_only);
 bool pmu_have_event(const char *pname, const char *name);
 
@@ -97,5 +118,8 @@ int perf_pmu__test(void);
 
 struct perf_event_attr *perf_pmu__get_default_config(struct perf_pmu *pmu);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __PMU_H */

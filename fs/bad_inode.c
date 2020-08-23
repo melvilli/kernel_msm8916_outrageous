@@ -46,7 +46,11 @@ static ssize_t bad_file_aio_write(struct kiocb *iocb, const struct iovec *iov,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bad_file_readdir(struct file *filp, void *dirent, filldir_t filldir)
+=======
+static int bad_file_readdir(struct file *file, struct dir_context *ctx)
+>>>>>>> v3.18
 =======
 static int bad_file_readdir(struct file *file, struct dir_context *ctx)
 >>>>>>> v3.18
@@ -157,7 +161,11 @@ static const struct file_operations bad_file_ops =
 	.aio_read	= bad_file_aio_read,
 	.aio_write	= bad_file_aio_write,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= bad_file_readdir,
+=======
+	.iterate	= bad_file_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= bad_file_readdir,
 >>>>>>> v3.18
@@ -227,8 +235,14 @@ static int bad_inode_mknod (struct inode *dir, struct dentry *dentry,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bad_inode_rename (struct inode *old_dir, struct dentry *old_dentry,
 		struct inode *new_dir, struct dentry *new_dentry)
+=======
+static int bad_inode_rename2(struct inode *old_dir, struct dentry *old_dentry,
+			     struct inode *new_dir, struct dentry *new_dentry,
+			     unsigned int flags)
+>>>>>>> v3.18
 =======
 static int bad_inode_rename2(struct inode *old_dir, struct dentry *old_dentry,
 			     struct inode *new_dir, struct dentry *new_dentry,
@@ -294,7 +308,11 @@ static const struct inode_operations bad_inode_ops =
 	.rmdir		= bad_inode_rmdir,
 	.mknod		= bad_inode_mknod,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rename		= bad_inode_rename,
+=======
+	.rename2	= bad_inode_rename2,
+>>>>>>> v3.18
 =======
 	.rename2	= bad_inode_rename2,
 >>>>>>> v3.18

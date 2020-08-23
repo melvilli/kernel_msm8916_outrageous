@@ -132,7 +132,11 @@ static inline struct pppoe_net *pppoe_pernet(struct net *net)
 static inline int cmp_2_addr(struct pppoe_addr *a, struct pppoe_addr *b)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return a->sid == b->sid && !memcmp(a->remote, b->remote, ETH_ALEN);
+=======
+	return a->sid == b->sid && ether_addr_equal(a->remote, b->remote);
+>>>>>>> v3.18
 =======
 	return a->sid == b->sid && ether_addr_equal(a->remote, b->remote);
 >>>>>>> v3.18
@@ -141,7 +145,11 @@ static inline int cmp_2_addr(struct pppoe_addr *a, struct pppoe_addr *b)
 static inline int cmp_addr(struct pppoe_addr *a, __be16 sid, char *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return a->sid == sid && !memcmp(a->remote, addr, ETH_ALEN);
+=======
+	return a->sid == sid && ether_addr_equal(a->remote, addr);
+>>>>>>> v3.18
 =======
 	return a->sid == sid && ether_addr_equal(a->remote, addr);
 >>>>>>> v3.18
@@ -322,6 +330,10 @@ static void pppoe_flush_dev(struct net_device *dev)
 			    sk->sk_state & (PPPOX_CONNECTED | PPPOX_BOUND | PPPOX_ZOMBIE)) {
 				pppox_unbind_sock(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				sk->sk_state = PPPOX_ZOMBIE;
+>>>>>>> v3.18
 =======
 				sk->sk_state = PPPOX_ZOMBIE;
 >>>>>>> v3.18
@@ -350,7 +362,11 @@ static int pppoe_device_event(struct notifier_block *this,
 			      unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = (struct net_device *)ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -586,7 +602,11 @@ static int pppoe_release(struct socket *sock)
 	po = pppox_sk(sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (po->pppoe_dev) {
+=======
+	if (sk->sk_state & (PPPOX_CONNECTED | PPPOX_BOUND | PPPOX_ZOMBIE)) {
+>>>>>>> v3.18
 =======
 	if (sk->sk_state & (PPPOX_CONNECTED | PPPOX_BOUND | PPPOX_ZOMBIE)) {
 >>>>>>> v3.18

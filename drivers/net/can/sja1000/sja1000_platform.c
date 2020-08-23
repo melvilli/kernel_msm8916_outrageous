@@ -13,8 +13,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -32,6 +36,11 @@
 #include <linux/can/platform/sja1000.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_irq.h>
@@ -41,13 +50,19 @@
 
 #define DRV_NAME "sja1000_platform"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 MODULE_AUTHOR("Sascha Hauer <s.hauer@pengutronix.de>");
 =======
+=======
+>>>>>>> v3.18
 #define SP_CAN_CLOCK  (16000000 / 2)
 
 MODULE_AUTHOR("Sascha Hauer <s.hauer@pengutronix.de>");
 MODULE_AUTHOR("Wolfgang Grandegger <wg@grandegger.com>");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_DESCRIPTION("Socket-CAN driver for SJA1000 on the platform bus");
 MODULE_ALIAS("platform:" DRV_NAME);
@@ -83,6 +98,7 @@ static void sp_write_reg32(const struct sja1000_priv *priv, int reg, u8 val)
 	iowrite8(val, priv->reg_base + reg * 4);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int sp_probe(struct platform_device *pdev)
 {
@@ -132,10 +148,15 @@ static int sp_probe(struct platform_device *pdev)
 		priv->irq_flags |= IRQF_SHARED;
 	priv->reg_base = addr;
 =======
+=======
+>>>>>>> v3.18
 static void sp_populate(struct sja1000_priv *priv,
 			struct sja1000_platform_data *pdata,
 			unsigned long resource_mem_flags)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* The CAN clock frequency is half the oscillator clock frequency */
 	priv->can.clock.freq = pdata->osc_freq / 2;
@@ -143,7 +164,11 @@ static void sp_populate(struct sja1000_priv *priv,
 	priv->cdr = pdata->cdr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (res_mem->flags & IORESOURCE_MEM_TYPE_MASK) {
+=======
+	switch (resource_mem_flags & IORESOURCE_MEM_TYPE_MASK) {
+>>>>>>> v3.18
 =======
 	switch (resource_mem_flags & IORESOURCE_MEM_TYPE_MASK) {
 >>>>>>> v3.18
@@ -162,9 +187,12 @@ static void sp_populate(struct sja1000_priv *priv,
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dev_set_drvdata(&pdev->dev, dev);
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void sp_populate_of(struct sja1000_priv *priv, struct device_node *of)
@@ -285,6 +313,9 @@ static int sp_probe(struct platform_device *pdev)
 		sp_populate(priv, pdata, res_mem->flags);
 
 	platform_set_drvdata(pdev, dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SET_NETDEV_DEV(dev, &pdev->dev);
 
@@ -302,6 +333,7 @@ static int sp_probe(struct platform_device *pdev)
  exit_free:
 	free_sja1000dev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
  exit_iounmap:
 	iounmap(addr);
  exit_release:
@@ -309,11 +341,14 @@ static int sp_probe(struct platform_device *pdev)
  exit:
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return err;
 }
 
 static int sp_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pdev->dev);
 	struct sja1000_priv *priv = netdev_priv(dev);
@@ -333,19 +368,30 @@ static int sp_remove(struct platform_device *pdev)
 
 	unregister_sja1000dev(dev);
 >>>>>>> v3.18
+=======
+	struct net_device *dev = platform_get_drvdata(pdev);
+
+	unregister_sja1000dev(dev);
+>>>>>>> v3.18
 	free_sja1000dev(dev);
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct of_device_id sp_of_table[] = {
 	{.compatible = "nxp,sja1000"},
 	{},
 };
 MODULE_DEVICE_TABLE(of, sp_of_table);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver sp_driver = {
 	.probe = sp_probe,
@@ -354,6 +400,10 @@ static struct platform_driver sp_driver = {
 		.name = DRV_NAME,
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = sp_of_table,
+>>>>>>> v3.18
 =======
 		.of_match_table = sp_of_table,
 >>>>>>> v3.18

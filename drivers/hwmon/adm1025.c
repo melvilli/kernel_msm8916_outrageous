@@ -3,7 +3,11 @@
  *
  * Copyright (C) 2000       Chen-Yuan Wu <gwu@esoft.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2003-2009  Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2003-2009  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2003-2009  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -108,6 +112,7 @@ static const int in_scale[6] = { 2500, 2250, 3300, 5000, 12000, 3300 };
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Functions declaration
  */
 
@@ -145,12 +150,19 @@ static struct i2c_driver adm1025_driver = {
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Client data (each client gets its own)
  */
 
 struct adm1025_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+	const struct attribute_group *groups[3];
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 	const struct attribute_group *groups[3];
@@ -171,7 +183,10 @@ struct adm1025_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct adm1025_data *adm1025_update_device(struct device *dev)
 {
 	struct adm1025_data *data = dev_get_drvdata(dev);
@@ -217,6 +232,9 @@ static struct adm1025_data *adm1025_update_device(struct device *dev)
 	return data;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Sysfs stuff
@@ -278,8 +296,13 @@ static ssize_t set_in_min(struct device *dev, struct device_attribute *attr,
 {
 	int index = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1025_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1025_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1025_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -304,8 +327,13 @@ static ssize_t set_in_max(struct device *dev, struct device_attribute *attr,
 {
 	int index = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1025_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1025_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1025_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -344,8 +372,13 @@ static ssize_t set_temp_min(struct device *dev, struct device_attribute *attr,
 {
 	int index = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1025_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1025_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1025_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -370,8 +403,13 @@ static ssize_t set_temp_max(struct device *dev, struct device_attribute *attr,
 {
 	int index = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1025_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1025_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1025_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -452,6 +490,12 @@ static ssize_t set_vrm(struct device *dev, struct device_attribute *attr,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (val > 255)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (val > 255)
 		return -EINVAL;
@@ -557,6 +601,7 @@ static int adm1025_detect(struct i2c_client *client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adm1025_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
@@ -604,6 +649,8 @@ exit_remove:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void adm1025_init_client(struct i2c_client *client)
 {
 	u8 reg;
@@ -646,6 +693,7 @@ static void adm1025_init_client(struct i2c_client *client)
 					  (reg&0x7E)|0x01);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int adm1025_remove(struct i2c_client *client)
 {
@@ -707,6 +755,8 @@ module_i2c_driver(adm1025_driver);
 
 MODULE_AUTHOR("Jean Delvare <khali@linux-fr.org>");
 =======
+=======
+>>>>>>> v3.18
 static int adm1025_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
@@ -759,6 +809,9 @@ static struct i2c_driver adm1025_driver = {
 module_i2c_driver(adm1025_driver);
 
 MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_DESCRIPTION("ADM1025 driver");
 MODULE_LICENSE("GPL");

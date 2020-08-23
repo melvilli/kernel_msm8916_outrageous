@@ -27,7 +27,10 @@
 #include <asm/cpu.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <trace/events/power.h>
@@ -52,7 +55,10 @@ u16 cpu_mask;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Clock features setup. Used instead of CPU type checks.
  */
 struct ti_clk_features ti_clk_features;
@@ -71,6 +77,9 @@ struct ti_clk_features ti_clk_features;
 #define OMAP3PLUS_DPLL_FINT_MAX		52000000
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * clkdm_control: if true, then when a clock is enabled in the
  * hardware, its clockdomain will first be enabled; and when a clock
@@ -80,6 +89,7 @@ struct ti_clk_features ti_clk_features;
 static bool clkdm_control = true;
 
 static LIST_HEAD(clk_hw_omap_clocks);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*
@@ -102,6 +112,8 @@ unsigned long omap_fixed_divisor_recalc(struct clk_hw *hw,
 
 	return parent_rate / oclk->fixed_div;
 =======
+=======
+>>>>>>> v3.18
 void __iomem *clk_memmaps[CLK_MAX_MEMMAPS];
 
 void omap2_clk_writel(u32 val, struct clk_hw_omap *clk, void __iomem *reg)
@@ -126,6 +138,9 @@ u32 omap2_clk_readl(struct clk_hw_omap *clk, void __iomem *reg)
 	}
 
 	return val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -139,6 +154,10 @@ u32 omap2_clk_readl(struct clk_hw_omap *clk, void __iomem *reg)
 /**
  * _wait_idlest_generic - wait for a module to leave the idle state
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @clk: module clock to wait for (needed for register offsets)
+>>>>>>> v3.18
 =======
  * @clk: module clock to wait for (needed for register offsets)
 >>>>>>> v3.18
@@ -154,8 +173,13 @@ u32 omap2_clk_readl(struct clk_hw_omap *clk, void __iomem *reg)
  * individual IP block that the IDLEST register exists in.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int _wait_idlest_generic(void __iomem *reg, u32 mask, u8 idlest,
 				const char *name)
+=======
+static int _wait_idlest_generic(struct clk_hw_omap *clk, void __iomem *reg,
+				u32 mask, u8 idlest, const char *name)
+>>>>>>> v3.18
 =======
 static int _wait_idlest_generic(struct clk_hw_omap *clk, void __iomem *reg,
 				u32 mask, u8 idlest, const char *name)
@@ -166,7 +190,11 @@ static int _wait_idlest_generic(struct clk_hw_omap *clk, void __iomem *reg,
 	ena = (idlest) ? 0 : mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap_test_timeout(((__raw_readl(reg) & mask) == ena),
+=======
+	omap_test_timeout(((omap2_clk_readl(clk, reg) & mask) == ena),
+>>>>>>> v3.18
 =======
 	omap_test_timeout(((omap2_clk_readl(clk, reg) & mask) == ena),
 >>>>>>> v3.18
@@ -203,7 +231,11 @@ static void _omap2_module_wait_ready(struct clk_hw_omap *clk)
 	if (clk->ops->find_companion) {
 		clk->ops->find_companion(clk, &companion_reg, &other_bit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(__raw_readl(companion_reg) & (1 << other_bit)))
+=======
+		if (!(omap2_clk_readl(clk, companion_reg) & (1 << other_bit)))
+>>>>>>> v3.18
 =======
 		if (!(omap2_clk_readl(clk, companion_reg) & (1 << other_bit)))
 >>>>>>> v3.18
@@ -215,8 +247,13 @@ static void _omap2_module_wait_ready(struct clk_hw_omap *clk)
 	if (r) {
 		/* IDLEST register not in the CM module */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_wait_idlest_generic(idlest_reg, (1 << idlest_bit), idlest_val,
 				     __clk_get_name(clk->hw.clk));
+=======
+		_wait_idlest_generic(clk, idlest_reg, (1 << idlest_bit),
+				     idlest_val, __clk_get_name(clk->hw.clk));
+>>>>>>> v3.18
 =======
 		_wait_idlest_generic(clk, idlest_reg, (1 << idlest_bit),
 				     idlest_val, __clk_get_name(clk->hw.clk));
@@ -336,6 +373,7 @@ void omap2_clk_dflt_find_idlest(struct clk_hw_omap *clk,
 	 * AM35xx uses both, depending on the module.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_is_omap24xx())
 		*idlest_val = OMAP24XX_CM_IDLEST_VAL;
 	else if (cpu_is_omap34xx())
@@ -343,6 +381,9 @@ void omap2_clk_dflt_find_idlest(struct clk_hw_omap *clk,
 	else
 		BUG();
 
+=======
+	*idlest_val = ti_clk_features.cm_idlest_val;
+>>>>>>> v3.18
 =======
 	*idlest_val = ti_clk_features.cm_idlest_val;
 >>>>>>> v3.18
@@ -387,7 +428,11 @@ int omap2_dflt_clk_enable(struct clk_hw *hw)
 
 	/* FIXME should not have INVERT_ENABLE bit here */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(clk->enable_reg);
+=======
+	v = omap2_clk_readl(clk, clk->enable_reg);
+>>>>>>> v3.18
 =======
 	v = omap2_clk_readl(clk, clk->enable_reg);
 >>>>>>> v3.18
@@ -396,8 +441,13 @@ int omap2_dflt_clk_enable(struct clk_hw *hw)
 	else
 		v |= (1 << clk->enable_bit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(v, clk->enable_reg);
 	v = __raw_readl(clk->enable_reg); /* OCP barrier */
+=======
+	omap2_clk_writel(v, clk, clk->enable_reg);
+	v = omap2_clk_readl(clk, clk->enable_reg); /* OCP barrier */
+>>>>>>> v3.18
 =======
 	omap2_clk_writel(v, clk, clk->enable_reg);
 	v = omap2_clk_readl(clk, clk->enable_reg); /* OCP barrier */
@@ -440,7 +490,11 @@ void omap2_dflt_clk_disable(struct clk_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(clk->enable_reg);
+=======
+	v = omap2_clk_readl(clk, clk->enable_reg);
+>>>>>>> v3.18
 =======
 	v = omap2_clk_readl(clk, clk->enable_reg);
 >>>>>>> v3.18
@@ -449,7 +503,11 @@ void omap2_dflt_clk_disable(struct clk_hw *hw)
 	else
 		v &= ~(1 << clk->enable_bit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(v, clk->enable_reg);
+=======
+	omap2_clk_writel(v, clk, clk->enable_reg);
+>>>>>>> v3.18
 =======
 	omap2_clk_writel(v, clk, clk->enable_reg);
 >>>>>>> v3.18
@@ -549,7 +607,11 @@ int omap2_dflt_clk_is_enabled(struct clk_hw *hw)
 	u32 v;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = __raw_readl(clk->enable_reg);
+=======
+	v = omap2_clk_readl(clk, clk->enable_reg);
+>>>>>>> v3.18
 =======
 	v = omap2_clk_readl(clk, clk->enable_reg);
 >>>>>>> v3.18
@@ -619,6 +681,12 @@ int omap2_clk_enable_autoidle_all(void)
 		if (c->ops && c->ops->allow_idle)
 			c->ops->allow_idle(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	of_ti_clk_allow_autoidle_all();
+
+>>>>>>> v3.18
 =======
 
 	of_ti_clk_allow_autoidle_all();
@@ -644,7 +712,10 @@ int omap2_clk_disable_autoidle_all(void)
 		if (c->ops && c->ops->deny_idle)
 			c->ops->deny_idle(c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	of_ti_clk_deny_autoidle_all();
 
@@ -686,6 +757,9 @@ int omap2_clk_allow_idle(struct clk *clk)
 	c = to_clk_hw_omap(__clk_get_hw(clk));
 	if (c->ops && c->ops->allow_idle)
 		c->ops->allow_idle(c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -811,7 +885,10 @@ void __init omap2_clk_print_new_rates(const char *hfclkin_ck_name,
 		(clk_get_rate(mpu_ck) / 1000000));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * ti_clk_init_features - init clock features struct for the SoC
@@ -862,4 +939,7 @@ void __init ti_clk_init_features(void)
 	else if (cpu_is_omap34xx())
 		ti_clk_features.cm_idlest_val = OMAP34XX_CM_IDLEST_VAL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -17,7 +17,10 @@
 extern char _ssbss[], _esbss[];
 extern unsigned long __ivt_start[], __ivt_end[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern char _etext[], _stext[];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

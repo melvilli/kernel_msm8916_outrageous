@@ -31,7 +31,11 @@
 #include <linux/apm-emulation.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/pca953x.h>
 >>>>>>> v3.18
@@ -482,12 +486,15 @@ static int em_x270_usb_hub_init(void)
 	gpio_direction_output(usb_hub_reset, 1);
 	gpio_direction_output(GPIO9_USB_VBUS_EN, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regulator_enable(em_x270_usb_ldo);
 	gpio_set_value(usb_hub_reset, 0);
 	gpio_set_value(usb_hub_reset, 1);
 	regulator_disable(em_x270_usb_ldo);
 	regulator_enable(em_x270_usb_ldo);
 =======
+=======
+>>>>>>> v3.18
 	err = regulator_enable(em_x270_usb_ldo);
 	if (err)
 		goto err_free_rst_gpio;
@@ -499,6 +506,9 @@ static int em_x270_usb_hub_init(void)
 	if (err)
 		goto err_free_rst_gpio;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gpio_set_value(usb_hub_reset, 0);
 	gpio_set_value(GPIO9_USB_VBUS_EN, 1);
@@ -506,6 +516,11 @@ static int em_x270_usb_hub_init(void)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+err_free_rst_gpio:
+	gpio_free(usb_hub_reset);
+>>>>>>> v3.18
 =======
 err_free_rst_gpio:
 	gpio_free(usb_hub_reset);
@@ -580,8 +595,12 @@ static int em_x270_mci_init(struct device *dev,
 
 	err = request_irq(gpio_to_irq(mmc_cd), em_x270_detect_int,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      IRQF_DISABLED | IRQF_TRIGGER_RISING |
 			      IRQF_TRIGGER_FALLING,
+=======
+			      IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING,
+>>>>>>> v3.18
 =======
 			      IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING,
 >>>>>>> v3.18
@@ -620,7 +639,11 @@ err_irq:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void em_x270_mci_setpower(struct device *dev, unsigned int vdd)
+=======
+static int em_x270_mci_setpower(struct device *dev, unsigned int vdd)
+>>>>>>> v3.18
 =======
 static int em_x270_mci_setpower(struct device *dev, unsigned int vdd)
 >>>>>>> v3.18
@@ -632,16 +655,22 @@ static int em_x270_mci_setpower(struct device *dev, unsigned int vdd)
 
 		regulator_set_voltage(em_x270_sdio_ldo, vdd_uV, vdd_uV);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		regulator_enable(em_x270_sdio_ldo);
 	} else {
 		regulator_disable(em_x270_sdio_ldo);
 	}
 =======
+=======
+>>>>>>> v3.18
 		return regulator_enable(em_x270_sdio_ldo);
 	} else {
 		regulator_disable(em_x270_sdio_ldo);
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -873,7 +902,11 @@ static inline void em_x270_init_ac97(void) {}
 
 #if defined(CONFIG_KEYBOARD_PXA27x) || defined(CONFIG_KEYBOARD_PXA27x_MODULE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int em_x270_module_matrix_keys[] = {
+=======
+static const unsigned int em_x270_module_matrix_keys[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int em_x270_module_matrix_keys[] = {
 >>>>>>> v3.18
@@ -883,17 +916,24 @@ static const unsigned int em_x270_module_matrix_keys[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data em_x270_matrix_keymap_data = {
 	.keymap			= em_x270_module_matrix_keys,
 	.keymap_size		= ARRAY_SIZE(em_x270_module_matrix_keys),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pxa27x_keypad_platform_data em_x270_module_keypad_info = {
 	/* code map for the matrix keys */
 	.matrix_key_rows	= 3,
 	.matrix_key_cols	= 3,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.matrix_key_map		= em_x270_module_matrix_keys,
 	.matrix_key_map_size	= ARRAY_SIZE(em_x270_module_matrix_keys),
@@ -901,10 +941,15 @@ struct pxa27x_keypad_platform_data em_x270_module_keypad_info = {
 
 static unsigned int em_x270_exeda_matrix_keys[] = {
 =======
+=======
+>>>>>>> v3.18
 	.matrix_keymap_data	= &em_x270_matrix_keymap_data,
 };
 
 static const unsigned int em_x270_exeda_matrix_keys[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	KEY(0, 0, KEY_RIGHTSHIFT), KEY(0, 1, KEY_RIGHTCTRL),
 	KEY(0, 2, KEY_RIGHTALT), KEY(0, 3, KEY_SPACE),
@@ -948,20 +993,30 @@ static const unsigned int em_x270_exeda_matrix_keys[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data em_x270_exeda_matrix_keymap_data = {
 	.keymap			= em_x270_exeda_matrix_keys,
 	.keymap_size		= ARRAY_SIZE(em_x270_exeda_matrix_keys),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pxa27x_keypad_platform_data em_x270_exeda_keypad_info = {
 	/* code map for the matrix keys */
 	.matrix_key_rows	= 8,
 	.matrix_key_cols	= 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.matrix_key_map		= em_x270_exeda_matrix_keys,
 	.matrix_key_map_size	= ARRAY_SIZE(em_x270_exeda_matrix_keys),
+=======
+	.matrix_keymap_data	= &em_x270_exeda_matrix_keymap_data,
+>>>>>>> v3.18
 =======
 	.matrix_keymap_data	= &em_x270_exeda_matrix_keymap_data,
 >>>>>>> v3.18

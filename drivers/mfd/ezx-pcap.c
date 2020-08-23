@@ -63,7 +63,11 @@ static int ezx_pcap_putget(struct pcap_chip *pcap, u32 *data)
 	int status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(&t, 0, sizeof t);
+=======
+	memset(&t, 0, sizeof(t));
+>>>>>>> v3.18
 =======
 	memset(&t, 0, sizeof(t));
 >>>>>>> v3.18
@@ -182,7 +186,11 @@ static void pcap_isr_work(struct work_struct *work)
 {
 	struct pcap_chip *pcap = container_of(work, struct pcap_chip, isr_work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pcap_platform_data *pdata = pcap->spi->dev.platform_data;
+=======
+	struct pcap_platform_data *pdata = dev_get_platdata(&pcap->spi->dev);
+>>>>>>> v3.18
 =======
 	struct pcap_platform_data *pdata = dev_get_platdata(&pcap->spi->dev);
 >>>>>>> v3.18
@@ -220,7 +228,10 @@ static void pcap_irq_handler(unsigned int irq, struct irq_desc *desc)
 	desc->irq_data.chip->irq_ack(&desc->irq_data);
 	queue_work(pcap->workqueue, &pcap->isr_work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -406,8 +417,12 @@ static int ezx_pcap_remove(struct spi_device *spi)
 {
 	struct pcap_chip *pcap = spi_get_drvdata(spi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pcap_platform_data *pdata = spi->dev.platform_data;
 	int i, adc_irq;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -417,9 +432,12 @@ static int ezx_pcap_remove(struct spi_device *spi)
 
 	/* cleanup ADC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adc_irq = pcap_to_irq(pcap, (pdata->config & PCAP_SECOND_PORT) ?
 				PCAP_IRQ_ADCDONE2 : PCAP_IRQ_ADCDONE);
 	devm_free_irq(&spi->dev, adc_irq, pcap);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&pcap->adc_mutex);
@@ -439,7 +457,11 @@ static int ezx_pcap_remove(struct spi_device *spi)
 static int ezx_pcap_probe(struct spi_device *spi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pcap_platform_data *pdata = spi->dev.platform_data;
+=======
+	struct pcap_platform_data *pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	struct pcap_platform_data *pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -532,8 +554,11 @@ static int ezx_pcap_probe(struct spi_device *spi)
 remove_subdevs:
 	device_for_each_child(&spi->dev, NULL, pcap_remove_subdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* free_adc: */
 	devm_free_irq(&spi->dev, adc_irq, pcap);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 free_irqchip:

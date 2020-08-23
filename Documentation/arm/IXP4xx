@@ -37,7 +37,11 @@ Linux currently supports the following features on the IXP4xx chips:
 
 The following components of the chips are not supported by Linux and
 <<<<<<< HEAD
+<<<<<<< HEAD
 require the use of Intel's proprietary CSR softare:
+=======
+require the use of Intel's proprietary CSR software:
+>>>>>>> v3.18
 =======
 require the use of Intel's proprietary CSR software:
 >>>>>>> v3.18

@@ -8,6 +8,10 @@ generic-y += emergency-restart.h
 generic-y += errno.h
 generic-y += exec.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += hash.h
+>>>>>>> v3.18
 =======
 generic-y += hash.h
 >>>>>>> v3.18
@@ -23,12 +27,18 @@ generic-y += param.h
 generic-y += parport.h
 generic-y += poll.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 generic-y += resource.h
 =======
+=======
+>>>>>>> v3.18
 generic-y += preempt.h
 generic-y += resource.h
 generic-y += rwsem.h
 generic-y += scatterlist.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 generic-y += sections.h
 generic-y += segment.h
@@ -45,7 +55,10 @@ generic-y += termios.h
 generic-y += timex.h
 generic-y += trace_clock.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 generic-y += types.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 generic-y += unaligned.h

@@ -25,9 +25,13 @@
  *
  *     You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  *     along with this program; if not, write to the Free Software
  *     Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *     MA 02111-1307 USA
+=======
+ *     along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *     along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -327,8 +331,12 @@ static int ircomm_tty_block_til_ready(struct ircomm_tty_cb *self,
 
 	spin_lock_irqsave(&port->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tty_hung_up_p(filp))
 		port->count--;
+=======
+	port->count--;
+>>>>>>> v3.18
 =======
 	port->count--;
 >>>>>>> v3.18
@@ -469,8 +477,12 @@ static int ircomm_tty_open(struct tty_struct *tty, struct file *filp)
 	 * If the port is the middle of closing, bail out now
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tty_hung_up_p(filp) ||
 	    test_bit(ASYNCB_CLOSING, &self->port.flags)) {
+=======
+	if (test_bit(ASYNCB_CLOSING, &self->port.flags)) {
+>>>>>>> v3.18
 =======
 	if (test_bit(ASYNCB_CLOSING, &self->port.flags)) {
 >>>>>>> v3.18
@@ -833,9 +845,13 @@ static void ircomm_tty_wait_until_sent(struct tty_struct *tty, int timeout)
 
 	/* Set poll time to 200 ms */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	poll_time = msecs_to_jiffies(200);
 	if (timeout)
 		poll_time = min_t(unsigned long, timeout, poll_time);
+=======
+	poll_time = IRDA_MIN(timeout, msecs_to_jiffies(200));
+>>>>>>> v3.18
 =======
 	poll_time = IRDA_MIN(timeout, msecs_to_jiffies(200));
 >>>>>>> v3.18

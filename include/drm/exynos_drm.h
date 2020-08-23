@@ -16,6 +16,10 @@
 
 #include <uapi/drm/exynos_drm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <video/videomode.h>
+>>>>>>> v3.18
 =======
 #include <video/videomode.h>
 >>>>>>> v3.18
@@ -29,7 +33,11 @@
  */
 struct exynos_drm_panel_info {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fb_videomode timing;
+=======
+	struct videomode vm;
+>>>>>>> v3.18
 =======
 	struct videomode vm;
 >>>>>>> v3.18

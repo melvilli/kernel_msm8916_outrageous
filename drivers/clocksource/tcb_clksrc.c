@@ -179,6 +179,7 @@ static irqreturn_t ch2_irq(int irq, void *handle)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct irqaction tc_irqaction = {
 	.name		= "tc_clkevt",
 	.flags		= IRQF_TIMER | IRQF_DISABLED,
@@ -194,6 +195,8 @@ static void __init setup_clkevents(struct atmel_tc *tc, int clk32k_divisor_idx)
 	clkevt.clk = t2_clk;
 	tc_irqaction.dev_id = &clkevt;
 =======
+=======
+>>>>>>> v3.18
 static int __init setup_clkevents(struct atmel_tc *tc, int clk32k_divisor_idx)
 {
 	int ret;
@@ -208,6 +211,9 @@ static int __init setup_clkevents(struct atmel_tc *tc, int clk32k_divisor_idx)
 
 	clkevt.regs = tc->regs;
 	clkevt.clk = t2_clk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	timer_clock = clk32k_divisor_idx;
@@ -215,10 +221,13 @@ static int __init setup_clkevents(struct atmel_tc *tc, int clk32k_divisor_idx)
 	clkevt.clkevt.cpumask = cpumask_of(0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clockevents_config_and_register(&clkevt.clkevt, 32768, 1, 0xffff);
 
 	setup_irq(irq, &tc_irqaction);
 =======
+=======
+>>>>>>> v3.18
 	ret = request_irq(irq, ch2_irq, IRQF_TIMER, "tc_clkevt", &clkevt);
 	if (ret) {
 		clk_disable_unprepare(t2_clk);
@@ -228,20 +237,29 @@ static int __init setup_clkevents(struct atmel_tc *tc, int clk32k_divisor_idx)
 	clockevents_config_and_register(&clkevt.clkevt, 32768, 1, 0xffff);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 #else /* !CONFIG_GENERIC_CLOCKEVENTS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init setup_clkevents(struct atmel_tc *tc, int clk32k_divisor_idx)
 {
 	/* NOTHING */
 =======
+=======
+>>>>>>> v3.18
 static int __init setup_clkevents(struct atmel_tc *tc, int clk32k_divisor_idx)
 {
 	/* NOTHING */
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -302,8 +320,14 @@ static int __init tcb_clksrc_init(void)
 	int clk32k_divisor_idx = -1;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	tc = atmel_tc_alloc(CONFIG_ATMEL_TCB_CLKSRC_BLOCK, clksrc.name);
+=======
+	int ret;
+
+	tc = atmel_tc_alloc(CONFIG_ATMEL_TCB_CLKSRC_BLOCK);
+>>>>>>> v3.18
 =======
 	int ret;
 
@@ -318,13 +342,19 @@ static int __init tcb_clksrc_init(void)
 
 	t0_clk = tc->clk[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(t0_clk);
 =======
+=======
+>>>>>>> v3.18
 	ret = clk_prepare_enable(t0_clk);
 	if (ret) {
 		pr_debug("can't enable T0 clk\n");
 		goto err_free_tc;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* How fast will we be counting?  Pick something over 5 MHz.  */
@@ -364,19 +394,26 @@ static int __init tcb_clksrc_init(void)
 		 * underlying platform supports.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_enable(tc->clk[1]);
 =======
+=======
+>>>>>>> v3.18
 		ret = clk_prepare_enable(tc->clk[1]);
 		if (ret) {
 			pr_debug("can't enable T1 clk\n");
 			goto err_disable_t0;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* setup both channel 0 & 1 */
 		tcb_setup_dual_chan(tc, best_divisor_idx);
 	}
 
 	/* and away we go! */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clocksource_register_hz(&clksrc, divided_rate);
 
@@ -385,6 +422,8 @@ static int __init tcb_clksrc_init(void)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ret = clocksource_register_hz(&clksrc, divided_rate);
 	if (ret)
 		goto err_disable_t1;
@@ -409,6 +448,9 @@ err_disable_t0:
 err_free_tc:
 	atmel_tc_free(tc);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 arch_initcall(tcb_clksrc_init);

@@ -32,7 +32,11 @@ struct wm831x_clk {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wm831x_xtal_is_enabled(struct clk_hw *hw)
+=======
+static int wm831x_xtal_is_prepared(struct clk_hw *hw)
+>>>>>>> v3.18
 =======
 static int wm831x_xtal_is_prepared(struct clk_hw *hw)
 >>>>>>> v3.18
@@ -57,7 +61,11 @@ static unsigned long wm831x_xtal_recalc_rate(struct clk_hw *hw,
 
 static const struct clk_ops wm831x_xtal_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.is_enabled = wm831x_xtal_is_enabled,
+=======
+	.is_prepared = wm831x_xtal_is_prepared,
+>>>>>>> v3.18
 =======
 	.is_prepared = wm831x_xtal_is_prepared,
 >>>>>>> v3.18
@@ -82,7 +90,11 @@ static const unsigned long wm831x_fll_auto_rates[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wm831x_fll_is_enabled(struct clk_hw *hw)
+=======
+static int wm831x_fll_is_prepared(struct clk_hw *hw)
+>>>>>>> v3.18
 =======
 static int wm831x_fll_is_prepared(struct clk_hw *hw)
 >>>>>>> v3.18
@@ -110,7 +122,11 @@ static int wm831x_fll_prepare(struct clk_hw *hw)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = wm831x_set_bits(wm831x, WM831X_FLL_CONTROL_2,
+=======
+	ret = wm831x_set_bits(wm831x, WM831X_FLL_CONTROL_1,
+>>>>>>> v3.18
 =======
 	ret = wm831x_set_bits(wm831x, WM831X_FLL_CONTROL_1,
 >>>>>>> v3.18
@@ -131,9 +147,15 @@ static void wm831x_fll_unprepare(struct clk_hw *hw)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = wm831x_set_bits(wm831x, WM831X_FLL_CONTROL_2, WM831X_FLL_ENA, 0);
 	if (ret != 0)
 		dev_crit(wm831x->dev, "Failed to disaable FLL: %d\n", ret);
+=======
+	ret = wm831x_set_bits(wm831x, WM831X_FLL_CONTROL_1, WM831X_FLL_ENA, 0);
+	if (ret != 0)
+		dev_crit(wm831x->dev, "Failed to disable FLL: %d\n", ret);
+>>>>>>> v3.18
 =======
 	ret = wm831x_set_bits(wm831x, WM831X_FLL_CONTROL_1, WM831X_FLL_ENA, 0);
 	if (ret != 0)
@@ -193,7 +215,11 @@ static int wm831x_fll_set_rate(struct clk_hw *hw, unsigned long rate,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wm831x_fll_is_enabled(hw))
+=======
+	if (wm831x_fll_is_prepared(hw))
+>>>>>>> v3.18
 =======
 	if (wm831x_fll_is_prepared(hw))
 >>>>>>> v3.18
@@ -247,7 +273,11 @@ static u8 wm831x_fll_get_parent(struct clk_hw *hw)
 
 static const struct clk_ops wm831x_fll_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.is_enabled = wm831x_fll_is_enabled,
+=======
+	.is_prepared = wm831x_fll_is_prepared,
+>>>>>>> v3.18
 =======
 	.is_prepared = wm831x_fll_is_prepared,
 >>>>>>> v3.18
@@ -268,7 +298,11 @@ static struct clk_init_data wm831x_fll_init = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wm831x_clkout_is_enabled(struct clk_hw *hw)
+=======
+static int wm831x_clkout_is_prepared(struct clk_hw *hw)
+>>>>>>> v3.18
 =======
 static int wm831x_clkout_is_prepared(struct clk_hw *hw)
 >>>>>>> v3.18
@@ -283,7 +317,11 @@ static int wm831x_clkout_is_prepared(struct clk_hw *hw)
 		dev_err(wm831x->dev, "Unable to read CLOCK_CONTROL_1: %d\n",
 			ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return false;
+=======
+		return true;
+>>>>>>> v3.18
 =======
 		return true;
 >>>>>>> v3.18
@@ -338,8 +376,13 @@ static void wm831x_clkout_unprepare(struct clk_hw *hw)
 
 static const char *wm831x_clkout_parents[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"xtal",
 	"fll",
+=======
+	"fll",
+	"xtal",
+>>>>>>> v3.18
 =======
 	"fll",
 	"xtal",
@@ -362,9 +405,15 @@ static u8 wm831x_clkout_get_parent(struct clk_hw *hw)
 
 	if (ret & WM831X_CLKOUT_SRC)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 	else
 		return 1;
+=======
+		return 1;
+	else
+		return 0;
+>>>>>>> v3.18
 =======
 		return 1;
 	else
@@ -385,7 +434,11 @@ static int wm831x_clkout_set_parent(struct clk_hw *hw, u8 parent)
 
 static const struct clk_ops wm831x_clkout_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.is_enabled = wm831x_clkout_is_enabled,
+=======
+	.is_prepared = wm831x_clkout_is_prepared,
+>>>>>>> v3.18
 =======
 	.is_prepared = wm831x_clkout_is_prepared,
 >>>>>>> v3.18
@@ -440,6 +493,7 @@ static int wm831x_clk_probe(struct platform_device *pdev)
 		return PTR_ERR(clkdata->clkout);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, clkdata);
 =======
 	platform_set_drvdata(pdev, clkdata);
@@ -451,11 +505,16 @@ static int wm831x_clk_probe(struct platform_device *pdev)
 <<<<<<< HEAD
 static int wm831x_clk_remove(struct platform_device *pdev)
 {
+=======
+	platform_set_drvdata(pdev, clkdata);
+
+>>>>>>> v3.18
 	return 0;
 }
 
 static struct platform_driver wm831x_clk_driver = {
 	.probe = wm831x_clk_probe,
+<<<<<<< HEAD
 	.remove = wm831x_clk_remove,
 	.driver		= {
 		.name	= "wm831x-clk",
@@ -463,6 +522,10 @@ static struct platform_driver wm831x_clk_driver = {
 =======
 static struct platform_driver wm831x_clk_driver = {
 	.probe = wm831x_clk_probe,
+	.driver		= {
+		.name	= "wm831x-clk",
+>>>>>>> v3.18
+=======
 	.driver		= {
 		.name	= "wm831x-clk",
 >>>>>>> v3.18

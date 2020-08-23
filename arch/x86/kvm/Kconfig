@@ -28,6 +28,10 @@ config KVM
 	select ANON_INODES
 	select HAVE_KVM_IRQCHIP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_KVM_IRQFD
+>>>>>>> v3.18
 =======
 	select HAVE_KVM_IRQFD
 >>>>>>> v3.18
@@ -43,6 +47,10 @@ config KVM
 	select HAVE_KVM_MSI
 	select HAVE_KVM_CPU_RELAX_INTERCEPT
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select KVM_VFIO
+>>>>>>> v3.18
 =======
 	select KVM_VFIO
 >>>>>>> v3.18
@@ -88,7 +96,11 @@ config KVM_MMU_AUDIT
 	---help---
 	 This option adds a R/W kVM module parameter 'mmu_audit', which allows
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 audit  KVM MMU at runtime.
+=======
+	 auditing of KVM MMU events at runtime.
+>>>>>>> v3.18
 =======
 	 auditing of KVM MMU events at runtime.
 >>>>>>> v3.18

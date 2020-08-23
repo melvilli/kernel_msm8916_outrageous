@@ -87,6 +87,7 @@ static inline unsigned char FAN_TO_REG(unsigned rpm, unsigned div)
 				(val) == 255 ? 0 : 1350000/((div) * (val)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline long TEMP_FROM_REG(u16 temp)
 {
 	long res;
@@ -108,6 +109,8 @@ static inline long TEMP_FROM_REG(u16 temp)
 
 #define DIV_FROM_REG(val)		(1 << (val))
 =======
+=======
+>>>>>>> v3.18
 #define TEMP_FROM_REG(reg)	((reg) * 125 / 32)
 #define TEMP_TO_REG(temp)	(DIV_ROUND_CLOSEST(clamp_val((temp), \
 					-128000, 127000), 1000) << 8)
@@ -143,6 +146,9 @@ enum fan_index {
 	f_min,
 	f_num_fan
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -151,7 +157,11 @@ enum fan_index {
 
 struct lm80_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -160,6 +170,7 @@ struct lm80_data {
 	char valid;		/* !=0 if following fields are valid */
 	unsigned long last_updated;	/* In jiffies */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 in[7];		/* Register value */
 	u8 in_max[7];		/* Register value */
@@ -211,6 +222,8 @@ static struct i2c_driver lm80_driver = {
 	.address_list	= normal_i2c,
 };
 =======
+=======
+>>>>>>> v3.18
 	u8 in[i_num_in][7];	/* Register value, 1st index is enum in_index */
 	u8 fan[f_num_fan][2];	/* Register value, 1st index enum fan_index */
 	u8 fan_div[2];		/* Register encoding, shifted right */
@@ -342,12 +355,16 @@ done:
 
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Sysfs stuff
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define show_in(suffix, value) \
 static ssize_t show_in_##suffix(struct device *dev, \
@@ -398,6 +415,8 @@ static ssize_t show_fan_##suffix(struct device *dev, \
 show_fan(min, fan_min)
 show_fan(input, fan)
 =======
+=======
+>>>>>>> v3.18
 static ssize_t show_in(struct device *dev, struct device_attribute *attr,
 		       char *buf)
 {
@@ -443,6 +462,9 @@ static ssize_t show_fan(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%d\n", FAN_FROM_REG(data->fan[nr][index],
 		       DIV_FROM_REG(data->fan_div[index])));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t show_fan_div(struct device *dev, struct device_attribute *attr,
@@ -459,14 +481,20 @@ static ssize_t set_fan_min(struct device *dev, struct device_attribute *attr,
 	const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int nr = to_sensor_dev_attr(attr)->index;
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm80_data *data = i2c_get_clientdata(client);
 =======
+=======
+>>>>>>> v3.18
 	int index = to_sensor_dev_attr_2(attr)->index;
 	int nr = to_sensor_dev_attr_2(attr)->nr;
 	struct lm80_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long val;
 	int err = kstrtoul(buf, 10, &val);
@@ -475,13 +503,19 @@ static ssize_t set_fan_min(struct device *dev, struct device_attribute *attr,
 
 	mutex_lock(&data->update_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->fan_min[nr] = FAN_TO_REG(val, DIV_FROM_REG(data->fan_div[nr]));
 	lm80_write_value(client, LM80_REG_FAN_MIN(nr + 1), data->fan_min[nr]);
 =======
+=======
+>>>>>>> v3.18
 	data->fan[nr][index] = FAN_TO_REG(val,
 					  DIV_FROM_REG(data->fan_div[index]));
 	lm80_write_value(client, LM80_REG_FAN_MIN(index + 1),
 			 data->fan[nr][index]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&data->update_lock);
 	return count;
@@ -498,8 +532,13 @@ static ssize_t set_fan_div(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm80_data *data = i2c_get_clientdata(client);
+=======
+	struct lm80_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm80_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -513,7 +552,11 @@ static ssize_t set_fan_div(struct device *dev, struct device_attribute *attr,
 	/* Save fan_min */
 	mutex_lock(&data->update_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	min = FAN_FROM_REG(data->fan_min[nr],
+=======
+	min = FAN_FROM_REG(data->fan[f_min][nr],
+>>>>>>> v3.18
 =======
 	min = FAN_FROM_REG(data->fan[f_min][nr],
 >>>>>>> v3.18
@@ -534,7 +577,11 @@ static ssize_t set_fan_div(struct device *dev, struct device_attribute *attr,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&client->dev,
+=======
+		dev_err(dev,
+>>>>>>> v3.18
 =======
 		dev_err(dev,
 >>>>>>> v3.18
@@ -545,6 +592,7 @@ static ssize_t set_fan_div(struct device *dev, struct device_attribute *attr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg = (lm80_read_value(client, LM80_REG_FANDIV) & ~(3 << (2 * (nr + 1))))
 	    | (data->fan_div[nr] << (2 * (nr + 1)));
 	lm80_write_value(client, LM80_REG_FANDIV, reg);
@@ -553,6 +601,8 @@ static ssize_t set_fan_div(struct device *dev, struct device_attribute *attr,
 	data->fan_min[nr] = FAN_TO_REG(min, DIV_FROM_REG(data->fan_div[nr]));
 	lm80_write_value(client, LM80_REG_FAN_MIN(nr + 1), data->fan_min[nr]);
 =======
+=======
+>>>>>>> v3.18
 	reg = (lm80_read_value(client, LM80_REG_FANDIV) &
 	       ~(3 << (2 * (nr + 1)))) | (data->fan_div[nr] << (2 * (nr + 1)));
 	lm80_write_value(client, LM80_REG_FANDIV, reg);
@@ -561,12 +611,16 @@ static ssize_t set_fan_div(struct device *dev, struct device_attribute *attr,
 	data->fan[f_min][nr] = FAN_TO_REG(min, DIV_FROM_REG(data->fan_div[nr]));
 	lm80_write_value(client, LM80_REG_FAN_MIN(nr + 1),
 			 data->fan[f_min][nr]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&data->update_lock);
 
 	return count;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t show_temp_input1(struct device *dev,
 	struct device_attribute *attr, char *buf)
@@ -613,6 +667,8 @@ set_temp(hot_hyst, temp_hot_hyst, LM80_REG_TEMP_HOT_HYST);
 set_temp(os_max, temp_os_max, LM80_REG_TEMP_OS_MAX);
 set_temp(os_hyst, temp_os_hyst, LM80_REG_TEMP_OS_HYST);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t show_temp(struct device *dev, struct device_attribute *devattr,
 			 char *buf)
 {
@@ -641,6 +697,9 @@ static ssize_t set_temp(struct device *dev, struct device_attribute *devattr,
 	mutex_unlock(&data->update_lock);
 	return count;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t show_alarms(struct device *dev, struct device_attribute *attr,
@@ -662,6 +721,7 @@ static ssize_t show_alarm(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%u\n", (data->alarms >> bitnr) & 1);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static SENSOR_DEVICE_ATTR(in0_min, S_IWUSR | S_IRUGO,
 		show_in_min, set_in_min, 0);
@@ -705,6 +765,8 @@ static SENSOR_DEVICE_ATTR(fan2_min, S_IWUSR | S_IRUGO,
 static SENSOR_DEVICE_ATTR(fan1_input, S_IRUGO, show_fan_input, NULL, 0);
 static SENSOR_DEVICE_ATTR(fan2_input, S_IRUGO, show_fan_input, NULL, 1);
 =======
+=======
+>>>>>>> v3.18
 static SENSOR_DEVICE_ATTR_2(in0_min, S_IWUSR | S_IRUGO,
 		show_in, set_in, i_min, 0);
 static SENSOR_DEVICE_ATTR_2(in1_min, S_IWUSR | S_IRUGO,
@@ -746,11 +808,15 @@ static SENSOR_DEVICE_ATTR_2(fan2_min, S_IWUSR | S_IRUGO,
 		show_fan, set_fan_min, f_min, 1);
 static SENSOR_DEVICE_ATTR_2(fan1_input, S_IRUGO, show_fan, NULL, f_input, 0);
 static SENSOR_DEVICE_ATTR_2(fan2_input, S_IRUGO, show_fan, NULL, f_input, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static SENSOR_DEVICE_ATTR(fan1_div, S_IWUSR | S_IRUGO,
 		show_fan_div, set_fan_div, 0);
 static SENSOR_DEVICE_ATTR(fan2_div, S_IWUSR | S_IRUGO,
 		show_fan_div, set_fan_div, 1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 static DEVICE_ATTR(temp1_input, S_IRUGO, show_temp_input1, NULL);
 static DEVICE_ATTR(temp1_max, S_IWUSR | S_IRUGO, show_temp_hot_max,
@@ -762,6 +828,8 @@ static DEVICE_ATTR(temp1_crit, S_IWUSR | S_IRUGO, show_temp_os_max,
 static DEVICE_ATTR(temp1_crit_hyst, S_IWUSR | S_IRUGO, show_temp_os_hyst,
 	set_temp_os_hyst);
 =======
+=======
+>>>>>>> v3.18
 static SENSOR_DEVICE_ATTR(temp1_input, S_IRUGO, show_temp, NULL, t_input);
 static SENSOR_DEVICE_ATTR(temp1_max, S_IWUSR | S_IRUGO, show_temp,
 		set_temp, t_hot_max);
@@ -771,6 +839,9 @@ static SENSOR_DEVICE_ATTR(temp1_crit, S_IWUSR | S_IRUGO, show_temp,
 		set_temp, t_os_max);
 static SENSOR_DEVICE_ATTR(temp1_crit_hyst, S_IWUSR | S_IRUGO, show_temp,
 		set_temp, t_os_hyst);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEVICE_ATTR(alarms, S_IRUGO, show_alarms, NULL);
 static SENSOR_DEVICE_ATTR(in0_alarm, S_IRUGO, show_alarm, NULL, 0);
@@ -790,7 +861,11 @@ static SENSOR_DEVICE_ATTR(temp1_crit_alarm, S_IRUGO, show_alarm, NULL, 13);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *lm80_attributes[] = {
+=======
+static struct attribute *lm80_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *lm80_attrs[] = {
 >>>>>>> v3.18
@@ -822,17 +897,23 @@ static struct attribute *lm80_attrs[] = {
 	&sensor_dev_attr_fan1_div.dev_attr.attr,
 	&sensor_dev_attr_fan2_div.dev_attr.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&dev_attr_temp1_input.attr,
 	&dev_attr_temp1_max.attr,
 	&dev_attr_temp1_max_hyst.attr,
 	&dev_attr_temp1_crit.attr,
 	&dev_attr_temp1_crit_hyst.attr,
 =======
+=======
+>>>>>>> v3.18
 	&sensor_dev_attr_temp1_input.dev_attr.attr,
 	&sensor_dev_attr_temp1_max.dev_attr.attr,
 	&sensor_dev_attr_temp1_max_hyst.dev_attr.attr,
 	&sensor_dev_attr_temp1_crit.dev_attr.attr,
 	&sensor_dev_attr_temp1_crit_hyst.dev_attr.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&dev_attr_alarms.attr,
 	&sensor_dev_attr_in0_alarm.dev_attr.attr,
@@ -849,10 +930,14 @@ static struct attribute *lm80_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct attribute_group lm80_group = {
 	.attrs = lm80_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(lm80);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(lm80);
 >>>>>>> v3.18
@@ -907,6 +992,7 @@ static int lm80_probe(struct i2c_client *client,
 		      const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lm80_data *data;
 	int err;
 
@@ -916,6 +1002,8 @@ static int lm80_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, data);
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct device *hwmon_dev;
 	struct lm80_data *data;
@@ -925,6 +1013,9 @@ static int lm80_probe(struct i2c_client *client,
 		return -ENOMEM;
 
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_init(&data->update_lock);
 
@@ -932,6 +1023,7 @@ static int lm80_probe(struct i2c_client *client,
 	lm80_init_client(client);
 
 	/* A few vars need to be filled upon startup */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	data->fan_min[0] = lm80_read_value(client, LM80_REG_FAN_MIN(1));
 	data->fan_min[1] = lm80_read_value(client, LM80_REG_FAN_MIN(2));
@@ -1102,6 +1194,8 @@ done:
 	return ret;
 }
 =======
+=======
+>>>>>>> v3.18
 	data->fan[f_min][0] = lm80_read_value(client, LM80_REG_FAN_MIN(1));
 	data->fan[f_min][1] = lm80_read_value(client, LM80_REG_FAN_MIN(2));
 
@@ -1132,6 +1226,9 @@ static struct i2c_driver lm80_driver = {
 	.detect		= lm80_detect,
 	.address_list	= normal_i2c,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 module_i2c_driver(lm80_driver);

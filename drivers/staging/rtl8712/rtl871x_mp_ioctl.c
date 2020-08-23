@@ -67,7 +67,10 @@ uint oid_rt_wireless_mode_hdl(struct oid_par_priv *poid_par_priv)
 uint oid_rt_pro_write_bb_reg_hdl(struct oid_par_priv *poid_par_priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct _adapter *Adapter = (struct _adapter *)
@@ -87,7 +90,11 @@ uint oid_rt_pro_write_bb_reg_hdl(struct oid_par_priv *poid_par_priv)
 	value = pbbreg->value;
 	r8712_bb_reg_write(Adapter, offset, value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -96,7 +103,10 @@ uint oid_rt_pro_write_bb_reg_hdl(struct oid_par_priv *poid_par_priv)
 uint oid_rt_pro_read_bb_reg_hdl(struct oid_par_priv *poid_par_priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct _adapter *Adapter = (struct _adapter *)
@@ -117,7 +127,11 @@ uint oid_rt_pro_read_bb_reg_hdl(struct oid_par_priv *poid_par_priv)
 	pbbreg->value = value;
 	*poid_par_priv->bytes_rw = poid_par_priv->information_buf_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -126,7 +140,10 @@ uint oid_rt_pro_read_bb_reg_hdl(struct oid_par_priv *poid_par_priv)
 uint oid_rt_pro_write_rf_reg_hdl(struct oid_par_priv *poid_par_priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct _adapter *Adapter = (struct _adapter *)
@@ -148,7 +165,11 @@ uint oid_rt_pro_write_rf_reg_hdl(struct oid_par_priv *poid_par_priv)
 	value = pbbreg->value;
 	r8712_rf_reg_write(Adapter, path, offset, value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -159,7 +180,10 @@ uint oid_rt_pro_read_rf_reg_hdl(struct oid_par_priv *poid_par_priv)
 	struct _adapter *Adapter = (struct _adapter *)
 				   (poid_par_priv->adapter_context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct rf_reg_param *pbbreg;
@@ -180,7 +204,11 @@ uint oid_rt_pro_read_rf_reg_hdl(struct oid_par_priv *poid_par_priv)
 	pbbreg->value = value;
 	*poid_par_priv->bytes_rw = poid_par_priv->information_buf_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -295,7 +323,10 @@ uint oid_rt_pro_set_data_rate_hdl(struct oid_par_priv
 	struct _adapter *Adapter = (struct _adapter *)
 				   (poid_par_priv->adapter_context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 ratevalue;
@@ -310,7 +341,11 @@ uint oid_rt_pro_set_data_rate_hdl(struct oid_par_priv
 	Adapter->mppriv.curr_rateidx = ratevalue;
 	r8712_SetDataRate(Adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -364,7 +399,10 @@ uint oid_rt_pro_set_channel_direct_call_hdl(struct oid_par_priv
 	struct _adapter *Adapter = (struct _adapter *)
 				   (poid_par_priv->adapter_context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32		Channel;
@@ -379,7 +417,11 @@ uint oid_rt_pro_set_channel_direct_call_hdl(struct oid_par_priv
 	Adapter->mppriv.curr_ch = Channel;
 	r8712_SetChannel(Adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -390,7 +432,10 @@ uint oid_rt_pro_set_antenna_bb_hdl(struct oid_par_priv *poid_par_priv)
 	struct _adapter *Adapter = (struct _adapter *)
 				   (poid_par_priv->adapter_context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 antenna;
@@ -404,7 +449,11 @@ uint oid_rt_pro_set_antenna_bb_hdl(struct oid_par_priv *poid_par_priv)
 	Adapter->mppriv.antenna_rx = (u16)(antenna & 0x0000FFFF);
 	r8712_SwitchAntenna(Adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -416,7 +465,10 @@ uint oid_rt_pro_set_tx_power_control_hdl(
 	struct _adapter *Adapter = (struct _adapter *)
 				   (poid_par_priv->adapter_context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 tx_pwr_idx;
@@ -431,7 +483,11 @@ uint oid_rt_pro_set_tx_power_control_hdl(
 	Adapter->mppriv.curr_txpoweridx = (u8)tx_pwr_idx;
 	r8712_SetTxPower(Adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -896,7 +952,10 @@ uint oid_rt_poll_rx_status_hdl(struct oid_par_priv *poid_par_priv)
 	struct _adapter *Adapter = (struct _adapter *)
 				   (poid_par_priv->adapter_context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -907,7 +966,11 @@ uint oid_rt_poll_rx_status_hdl(struct oid_par_priv *poid_par_priv)
 		sizeof(struct recv_stat));
 	*poid_par_priv->bytes_rw = poid_par_priv->information_buf_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -939,7 +1002,10 @@ uint oid_rt_get_thermal_meter_hdl(struct oid_par_priv *poid_par_priv)
 	struct _adapter *Adapter = (struct _adapter *)
 				   (poid_par_priv->adapter_context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -964,7 +1030,11 @@ uint oid_rt_get_thermal_meter_hdl(struct oid_par_priv *poid_par_priv)
 				 Adapter->mppriv.workparam.io_value;
 	*poid_par_priv->bytes_rw = sizeof(u32);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -1162,7 +1232,10 @@ uint oid_rt_pro_dele_sta_info_hdl(struct oid_par_priv *poid_par_priv)
 
 	unsigned long			irqL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1187,7 +1260,11 @@ uint oid_rt_pro_dele_sta_info_hdl(struct oid_par_priv *poid_par_priv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -1204,8 +1281,11 @@ uint oid_rt_pro_query_dr_variable_hdl(struct oid_par_priv *poid_par_priv)
 				   (poid_par_priv->adapter_context);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct DR_VARIABLE_STRUCT *pdrv_var;
@@ -1220,7 +1300,11 @@ uint oid_rt_pro_query_dr_variable_hdl(struct oid_par_priv *poid_par_priv)
 					      pdrv_var->variable);
 	*poid_par_priv->bytes_rw = poid_par_priv->information_buf_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -1328,7 +1412,10 @@ uint oid_rt_get_efuse_current_size_hdl(struct oid_par_priv
 	struct _adapter *Adapter = (struct _adapter *)
 				   (poid_par_priv->adapter_context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1342,7 +1429,11 @@ uint oid_rt_get_efuse_current_size_hdl(struct oid_par_priv
 	r8712_efuse_reg_uninit(Adapter);
 	*poid_par_priv->bytes_rw = poid_par_priv->information_buf_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -1353,7 +1444,10 @@ uint oid_rt_get_efuse_max_size_hdl(struct oid_par_priv *poid_par_priv)
 	struct _adapter *Adapter = (struct _adapter *)
 				   (poid_par_priv->adapter_context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1365,7 +1459,11 @@ uint oid_rt_get_efuse_max_size_hdl(struct oid_par_priv *poid_par_priv)
 					 r8712_efuse_get_max_size(Adapter);
 	*poid_par_priv->bytes_rw = poid_par_priv->information_buf_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -1419,7 +1517,10 @@ uint oid_rt_set_bandwidth_hdl(struct oid_par_priv *poid_par_priv)
 	struct _adapter *Adapter = (struct _adapter *)
 				   (poid_par_priv->adapter_context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32		bandwidth;
@@ -1434,7 +1535,11 @@ uint oid_rt_set_bandwidth_hdl(struct oid_par_priv *poid_par_priv)
 	Adapter->mppriv.curr_bandwidth = (u8)bandwidth;
 	r8712_SwitchBandwidth(Adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18
@@ -1445,7 +1550,10 @@ uint oid_rt_set_crystal_cap_hdl(struct oid_par_priv *poid_par_priv)
 	struct _adapter *Adapter = (struct _adapter *)
 				   (poid_par_priv->adapter_context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint status = RNDIS_STATUS_SUCCESS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32		crystal_cap = 0;
@@ -1460,7 +1568,11 @@ uint oid_rt_set_crystal_cap_hdl(struct oid_par_priv *poid_par_priv)
 	Adapter->mppriv.curr_crystalcap = crystal_cap;
 	r8712_SetCrystalCap(Adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return status;
+=======
+	return RNDIS_STATUS_SUCCESS;
+>>>>>>> v3.18
 =======
 	return RNDIS_STATUS_SUCCESS;
 >>>>>>> v3.18

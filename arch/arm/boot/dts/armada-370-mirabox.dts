@@ -10,7 +10,12 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "armada-370.dtsi"
+=======
+#include <dt-bindings/gpio/gpio.h>
+#include "armada-370.dtsi"
+>>>>>>> v3.18
 =======
 #include <dt-bindings/gpio/gpio.h>
 #include "armada-370.dtsi"
@@ -31,10 +36,13 @@
 
 	soc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		internal-regs {
 			serial@12000 {
 				clock-frequency = <200000000>;
 =======
+=======
+>>>>>>> v3.18
 		ranges = <MBUS_ID(0xf0, 0x01) 0 0xd0000000 0x100000
 			  MBUS_ID(0x01, 0xe0) 0 0xfff00000 0x100000>;
 
@@ -56,6 +64,9 @@
 
 		internal-regs {
 			serial@12000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "okay";
 			};
@@ -84,8 +95,13 @@
 				green_pwr_led {
 					label = "mirabox:green:pwr";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					gpios = <&gpio1 31 1>;
 					linux,default-trigger = "heartbeat";
+=======
+					gpios = <&gpio1 31 GPIO_ACTIVE_LOW>;
+					default-state = "keep";
+>>>>>>> v3.18
 =======
 					gpios = <&gpio1 31 GPIO_ACTIVE_LOW>;
 					default-state = "keep";
@@ -95,8 +111,13 @@
 				blue_stat_led {
 					label = "mirabox:blue:stat";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					gpios = <&gpio2 0 1>;
 					linux,default-trigger = "cpu0";
+=======
+					gpios = <&gpio2 0 GPIO_ACTIVE_LOW>;
+					default-state = "off";
+>>>>>>> v3.18
 =======
 					gpios = <&gpio2 0 GPIO_ACTIVE_LOW>;
 					default-state = "off";
@@ -106,7 +127,11 @@
 				green_stat_led {
 					label = "mirabox:green:stat";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					gpios = <&gpio2 1 1>;
+=======
+					gpios = <&gpio2 1 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 					gpios = <&gpio2 1 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -116,6 +141,11 @@
 
 			mdio {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				pinctrl-0 = <&mdio_pins>;
+				pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 				pinctrl-0 = <&mdio_pins>;
 				pinctrl-names = "default";
@@ -130,6 +160,11 @@
 			};
 			ethernet@70000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				pinctrl-0 = <&ge0_rgmii_pins>;
+				pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 				pinctrl-0 = <&ge0_rgmii_pins>;
 				pinctrl-names = "default";
@@ -140,6 +175,11 @@
 			};
 			ethernet@74000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				pinctrl-0 = <&ge1_rgmii_pins>;
+				pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 				pinctrl-0 = <&ge1_rgmii_pins>;
 				pinctrl-names = "default";
@@ -158,6 +198,10 @@
 				 * Wifi/Bluetooth chip
 				 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				 broken-cd;
+>>>>>>> v3.18
 =======
 				 broken-cd;
 >>>>>>> v3.18
@@ -183,6 +227,7 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pcie-controller {
 				status = "okay";
 
@@ -197,6 +242,8 @@
 					/* Port 1, Lane 0 */
 					status = "okay";
 =======
+=======
+>>>>>>> v3.18
 			nand@d0000 {
 				status = "okay";
 				num-cs = <1>;
@@ -215,6 +262,9 @@
 				partition@800000 {
 					label = "Filesystem";
 					reg = <0x800000 0x3f800000>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 			};

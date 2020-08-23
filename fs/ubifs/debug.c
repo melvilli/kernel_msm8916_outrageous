@@ -335,9 +335,15 @@ void ubifs_dump_node(const struct ubifs_info *c, const void *node)
 		       (int)sup->key_fmt, get_key_fmt(sup->key_fmt));
 		pr_err("\tflags          %#x\n", sup_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("\t  big_lpt      %u\n",
 		       !!(sup_flags & UBIFS_FLG_BIGLPT));
 		pr_err("\t  space_fixup  %u\n",
+=======
+		pr_err("\tbig_lpt        %u\n",
+		       !!(sup_flags & UBIFS_FLG_BIGLPT));
+		pr_err("\tspace_fixup    %u\n",
+>>>>>>> v3.18
 =======
 		pr_err("\tbig_lpt        %u\n",
 		       !!(sup_flags & UBIFS_FLG_BIGLPT));
@@ -752,14 +758,20 @@ void ubifs_dump_lprops(struct ubifs_info *c)
 	for (lnum = c->main_first; lnum < c->leb_cnt; lnum++) {
 		err = ubifs_read_one_lp(c, lnum, &lp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (err)
 			ubifs_err("cannot read lprops for LEB %d",
 					c->vi.ubi_num, lnum);
 =======
+=======
+>>>>>>> v3.18
 		if (err) {
 			ubifs_err("cannot read lprops for LEB %d", lnum);
 			continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ubifs_dump_lprop(c, &lp);
@@ -832,8 +844,12 @@ void ubifs_dump_leb(const struct ubifs_info *c, int lnum)
 	buf = __vmalloc(c->leb_size, GFP_NOFS, PAGE_KERNEL);
 	if (!buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("cannot allocate memory for dumping LEB %d",
 				c->vi.ubi_num, lnum);
+=======
+		ubifs_err("cannot allocate memory for dumping LEB %d", lnum);
+>>>>>>> v3.18
 =======
 		ubifs_err("cannot allocate memory for dumping LEB %d", lnum);
 >>>>>>> v3.18
@@ -843,7 +859,11 @@ void ubifs_dump_leb(const struct ubifs_info *c, int lnum)
 	sleb = ubifs_scan(c, lnum, 0, buf, 0);
 	if (IS_ERR(sleb)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("scan error %d", c->vi.ubi_num, (int)PTR_ERR(sleb));
+=======
+		ubifs_err("scan error %d", (int)PTR_ERR(sleb));
+>>>>>>> v3.18
 =======
 		ubifs_err("scan error %d", (int)PTR_ERR(sleb));
 >>>>>>> v3.18
@@ -1055,7 +1075,11 @@ int dbg_check_space_info(struct ubifs_info *c)
 	if (free != d->saved_free) {
 		ubifs_err("free space changed from %lld to %lld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  c->vi.ubi_num, d->saved_free, free);
+=======
+			  d->saved_free, free);
+>>>>>>> v3.18
 =======
 			  d->saved_free, free);
 >>>>>>> v3.18
@@ -1065,6 +1089,7 @@ int dbg_check_space_info(struct ubifs_info *c)
 	return 0;
 
 out:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ubifs_msg("saved lprops statistics dump", c->vi.ubi_num);
 	ubifs_dump_lstats(&d->saved_lst);
@@ -1076,6 +1101,8 @@ out:
 	ubifs_dump_lstats(&lst);
 	ubifs_msg("current budgeting info dump", c->vi.ubi_num);
 =======
+=======
+>>>>>>> v3.18
 	ubifs_msg("saved lprops statistics dump");
 	ubifs_dump_lstats(&d->saved_lst);
 	ubifs_msg("saved budgeting info dump");
@@ -1085,6 +1112,9 @@ out:
 	ubifs_get_lp_stats(c, &lst);
 	ubifs_dump_lstats(&lst);
 	ubifs_msg("current budgeting info dump");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ubifs_dump_budg(c, &c->bi);
 	dump_stack();
@@ -1116,9 +1146,15 @@ int dbg_check_synced_i_size(const struct ubifs_info *c, struct inode *inode)
 	if (ui->ui_size != ui->synced_i_size && !ui->dirty) {
 		ubifs_err("ui_size is %lld, synced_i_size is %lld, but inode is clean",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  c->vi.ubi_num, ui->ui_size, ui->synced_i_size);
 		ubifs_err("i_ino %lu, i_mode %#x, i_size %lld", c->vi.ubi_num,
 			  inode->i_ino, inode->i_mode, i_size_read(inode));
+=======
+			  ui->ui_size, ui->synced_i_size);
+		ubifs_err("i_ino %lu, i_mode %#x, i_size %lld", inode->i_ino,
+			  inode->i_mode, i_size_read(inode));
+>>>>>>> v3.18
 =======
 			  ui->ui_size, ui->synced_i_size);
 		ubifs_err("i_ino %lu, i_mode %#x, i_size %lld", inode->i_ino,
@@ -1185,8 +1221,12 @@ int dbg_check_dir(struct ubifs_info *c, const struct inode *dir)
 	if (i_size_read(dir) != size) {
 		ubifs_err("directory inode %lu has size %llu, but calculated size is %llu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  c->vi.ubi_num, dir->i_ino,
 			  (unsigned long long)i_size_read(dir),
+=======
+			  dir->i_ino, (unsigned long long)i_size_read(dir),
+>>>>>>> v3.18
 =======
 			  dir->i_ino, (unsigned long long)i_size_read(dir),
 >>>>>>> v3.18
@@ -1198,7 +1238,11 @@ int dbg_check_dir(struct ubifs_info *c, const struct inode *dir)
 	if (dir->i_nlink != nlink) {
 		ubifs_err("directory inode %lu has nlink %u, but calculated nlink is %u",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  c->vi.ubi_num, dir->i_ino, dir->i_nlink, nlink);
+=======
+			  dir->i_ino, dir->i_nlink, nlink);
+>>>>>>> v3.18
 =======
 			  dir->i_ino, dir->i_nlink, nlink);
 >>>>>>> v3.18
@@ -1260,6 +1304,7 @@ static int dbg_check_key_order(struct ubifs_info *c, struct ubifs_zbranch *zbr1,
 	key_read(c, &dent1->key, &key);
 	if (keys_cmp(c, &zbr1->key, &key)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("1st entry at %d:%d has key %s", c->vi.ubi_num,
 			  zbr1->lnum, zbr1->offs,
 			  dbg_snprintf_key(c, &key, key_buf, DBG_KEY_BUF_LEN));
@@ -1267,12 +1312,17 @@ static int dbg_check_key_order(struct ubifs_info *c, struct ubifs_zbranch *zbr1,
 			  c->vi.ubi_num, dbg_snprintf_key(c, &zbr1->key,
 					  key_buf, DBG_KEY_BUF_LEN));
 =======
+=======
+>>>>>>> v3.18
 		ubifs_err("1st entry at %d:%d has key %s", zbr1->lnum,
 			  zbr1->offs, dbg_snprintf_key(c, &key, key_buf,
 						       DBG_KEY_BUF_LEN));
 		ubifs_err("but it should have key %s according to tnc",
 			  dbg_snprintf_key(c, &zbr1->key, key_buf,
 					   DBG_KEY_BUF_LEN));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ubifs_dump_node(c, dent1);
 		goto out_free;
@@ -1280,6 +1330,7 @@ static int dbg_check_key_order(struct ubifs_info *c, struct ubifs_zbranch *zbr1,
 
 	key_read(c, &dent2->key, &key);
 	if (keys_cmp(c, &zbr2->key, &key)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ubifs_err("2nd entry at %d:%d has key %s", c->vi.ubi_num,
 			  zbr1->lnum,
@@ -1289,12 +1340,17 @@ static int dbg_check_key_order(struct ubifs_info *c, struct ubifs_zbranch *zbr1,
 			  c->vi.ubi_num,  dbg_snprintf_key(c, &zbr2->key,
 					  key_buf, DBG_KEY_BUF_LEN));
 =======
+=======
+>>>>>>> v3.18
 		ubifs_err("2nd entry at %d:%d has key %s", zbr1->lnum,
 			  zbr1->offs, dbg_snprintf_key(c, &key, key_buf,
 						       DBG_KEY_BUF_LEN));
 		ubifs_err("but it should have key %s according to tnc",
 			  dbg_snprintf_key(c, &zbr2->key, key_buf,
 					   DBG_KEY_BUF_LEN));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ubifs_dump_node(c, dent2);
 		goto out_free;
@@ -1310,6 +1366,7 @@ static int dbg_check_key_order(struct ubifs_info *c, struct ubifs_zbranch *zbr1,
 	}
 	if (cmp == 0 && nlen1 == nlen2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("2 xent/dent nodes with the same name",
 				c->vi.ubi_num);
 	else
@@ -1322,6 +1379,8 @@ static int dbg_check_key_order(struct ubifs_info *c, struct ubifs_zbranch *zbr1,
 	ubifs_msg("second node at %d:%d\n",
 			c->vi.ubi_num, zbr2->lnum, zbr2->offs);
 =======
+=======
+>>>>>>> v3.18
 		ubifs_err("2 xent/dent nodes with the same name");
 	else
 		ubifs_err("bad order of colliding key %s",
@@ -1330,6 +1389,9 @@ static int dbg_check_key_order(struct ubifs_info *c, struct ubifs_zbranch *zbr1,
 	ubifs_msg("first node at %d:%d\n", zbr1->lnum, zbr1->offs);
 	ubifs_dump_node(c, dent1);
 	ubifs_msg("second node at %d:%d\n", zbr2->lnum, zbr2->offs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ubifs_dump_node(c, dent2);
 
@@ -1533,17 +1595,23 @@ static int dbg_check_znode(struct ubifs_info *c, struct ubifs_zbranch *zbr)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("failed, error %d", c->vi.ubi_num, err);
 	ubifs_msg("dump of the znode", c->vi.ubi_num);
 	ubifs_dump_znode(c, znode);
 	if (zp) {
 		ubifs_msg("dump of the parent znode", c->vi.ubi_num);
 =======
+=======
+>>>>>>> v3.18
 	ubifs_err("failed, error %d", err);
 	ubifs_msg("dump of the znode");
 	ubifs_dump_znode(c, znode);
 	if (zp) {
 		ubifs_msg("dump of the parent znode");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ubifs_dump_znode(c, zp);
 	}
@@ -1612,9 +1680,15 @@ int dbg_check_tnc(struct ubifs_info *c, int extra)
 				return err;
 			if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ubifs_msg("first znode", c->vi.ubi_num);
 				ubifs_dump_znode(c, prev);
 				ubifs_msg("second znode", c->vi.ubi_num);
+=======
+				ubifs_msg("first znode");
+				ubifs_dump_znode(c, prev);
+				ubifs_msg("second znode");
+>>>>>>> v3.18
 =======
 				ubifs_msg("first znode");
 				ubifs_dump_znode(c, prev);
@@ -1630,7 +1704,10 @@ int dbg_check_tnc(struct ubifs_info *c, int extra)
 		if (clean_cnt != atomic_long_read(&c->clean_zn_cnt)) {
 			ubifs_err("incorrect clean_zn_cnt %ld, calculated %ld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				  atomic_long_read(&c->clean_zn_cnt),
@@ -1640,7 +1717,10 @@ int dbg_check_tnc(struct ubifs_info *c, int extra)
 		if (dirty_cnt != atomic_long_read(&c->dirty_zn_cnt)) {
 			ubifs_err("incorrect dirty_zn_cnt %ld, calculated %ld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				  atomic_long_read(&c->dirty_zn_cnt),
@@ -1717,7 +1797,11 @@ int dbg_walk_index(struct ubifs_info *c, dbg_leaf_callback leaf_cb,
 			if (err) {
 				ubifs_err("znode checking function returned error %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num, err);
+=======
+					  err);
+>>>>>>> v3.18
 =======
 					  err);
 >>>>>>> v3.18
@@ -1732,8 +1816,12 @@ int dbg_walk_index(struct ubifs_info *c, dbg_leaf_callback leaf_cb,
 				if (err) {
 					ubifs_err("leaf checking function returned error %d, for leaf at LEB %d:%d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  c->vi.ubi_num, err,
 						  zbr->lnum, zbr->offs);
+=======
+						  err, zbr->lnum, zbr->offs);
+>>>>>>> v3.18
 =======
 						  err, zbr->lnum, zbr->offs);
 >>>>>>> v3.18
@@ -1792,8 +1880,12 @@ out_dump:
 	else
 		zbr = &c->zroot;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_msg("dump of znode at LEB %d:%d", c->vi.ubi_num, zbr->lnum,
 			zbr->offs);
+=======
+	ubifs_msg("dump of znode at LEB %d:%d", zbr->lnum, zbr->offs);
+>>>>>>> v3.18
 =======
 	ubifs_msg("dump of znode at LEB %d:%d", zbr->lnum, zbr->offs);
 >>>>>>> v3.18
@@ -1844,8 +1936,12 @@ int dbg_check_idx_size(struct ubifs_info *c, long long idx_size)
 	err = dbg_walk_index(c, NULL, add_size, &calc);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("error %d while walking the index",
 				c->vi.ubi_num, err);
+=======
+		ubifs_err("error %d while walking the index", err);
+>>>>>>> v3.18
 =======
 		ubifs_err("error %d while walking the index", err);
 >>>>>>> v3.18
@@ -1855,7 +1951,11 @@ int dbg_check_idx_size(struct ubifs_info *c, long long idx_size)
 	if (calc != idx_size) {
 		ubifs_err("index size check failed: calculated size is %lld, should be %lld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  c->vi.ubi_num, calc, idx_size);
+=======
+			  calc, idx_size);
+>>>>>>> v3.18
 =======
 			  calc, idx_size);
 >>>>>>> v3.18
@@ -1945,7 +2045,11 @@ static struct fsck_inode *add_inode(struct ubifs_info *c,
 
 	if (inum > c->highest_inum) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("too high inode number, max. is %lu",  c->vi.ubi_num,
+=======
+		ubifs_err("too high inode number, max. is %lu",
+>>>>>>> v3.18
 =======
 		ubifs_err("too high inode number, max. is %lu",
 >>>>>>> v3.18
@@ -2056,16 +2160,22 @@ static struct fsck_inode *read_add_inode(struct ubifs_info *c,
 	err = ubifs_lookup_level0(c, &key, &znode, &n);
 	if (!err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("inode %lu not found in index", c->vi.ubi_num,
 			  (unsigned long)inum);
 		return ERR_PTR(-ENOENT);
 	} else if (err < 0) {
 		ubifs_err("error %d while looking up inode %lu", c->vi.ubi_num,
 =======
+=======
+>>>>>>> v3.18
 		ubifs_err("inode %lu not found in index", (unsigned long)inum);
 		return ERR_PTR(-ENOENT);
 	} else if (err < 0) {
 		ubifs_err("error %d while looking up inode %lu",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  err, (unsigned long)inum);
 		return ERR_PTR(err);
@@ -2074,7 +2184,11 @@ static struct fsck_inode *read_add_inode(struct ubifs_info *c,
 	zbr = &znode->zbranch[n];
 	if (zbr->len < UBIFS_INO_NODE_SZ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("bad node %lu node length %d", c->vi.ubi_num,
+=======
+		ubifs_err("bad node %lu node length %d",
+>>>>>>> v3.18
 =======
 		ubifs_err("bad node %lu node length %d",
 >>>>>>> v3.18
@@ -2090,7 +2204,11 @@ static struct fsck_inode *read_add_inode(struct ubifs_info *c,
 	if (err) {
 		ubifs_err("cannot read inode node at LEB %d:%d, error %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  c->vi.ubi_num, zbr->lnum, zbr->offs, err);
+=======
+			  zbr->lnum, zbr->offs, err);
+>>>>>>> v3.18
 =======
 			  zbr->lnum, zbr->offs, err);
 >>>>>>> v3.18
@@ -2103,7 +2221,11 @@ static struct fsck_inode *read_add_inode(struct ubifs_info *c,
 	if (IS_ERR(fscki)) {
 		ubifs_err("error %ld while adding inode %lu node",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  c->vi.ubi_num, PTR_ERR(fscki), (unsigned long)inum);
+=======
+			  PTR_ERR(fscki), (unsigned long)inum);
+>>>>>>> v3.18
 =======
 			  PTR_ERR(fscki), (unsigned long)inum);
 >>>>>>> v3.18
@@ -2140,7 +2262,11 @@ static int check_leaf(struct ubifs_info *c, struct ubifs_zbranch *zbr,
 
 	if (zbr->len < UBIFS_CH_SZ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("bad leaf length %d (LEB %d:%d)",  c->vi.ubi_num,
+=======
+		ubifs_err("bad leaf length %d (LEB %d:%d)",
+>>>>>>> v3.18
 =======
 		ubifs_err("bad leaf length %d (LEB %d:%d)",
 >>>>>>> v3.18
@@ -2156,7 +2282,11 @@ static int check_leaf(struct ubifs_info *c, struct ubifs_zbranch *zbr,
 	if (err) {
 		ubifs_err("cannot read leaf node at LEB %d:%d, error %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  c->vi.ubi_num, zbr->lnum, zbr->offs, err);
+=======
+			  zbr->lnum, zbr->offs, err);
+>>>>>>> v3.18
 =======
 			  zbr->lnum, zbr->offs, err);
 >>>>>>> v3.18
@@ -2169,8 +2299,12 @@ static int check_leaf(struct ubifs_info *c, struct ubifs_zbranch *zbr,
 		if (IS_ERR(fscki)) {
 			err = PTR_ERR(fscki);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("error %d while adding inode node",
 					c->vi.ubi_num, err);
+=======
+			ubifs_err("error %d while adding inode node", err);
+>>>>>>> v3.18
 =======
 			ubifs_err("error %d while adding inode node", err);
 >>>>>>> v3.18
@@ -2182,7 +2316,11 @@ static int check_leaf(struct ubifs_info *c, struct ubifs_zbranch *zbr,
 	if (type != UBIFS_DENT_KEY && type != UBIFS_XENT_KEY &&
 	    type != UBIFS_DATA_KEY) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("unexpected node type %d at LEB %d:%d", c->vi.ubi_num,
+=======
+		ubifs_err("unexpected node type %d at LEB %d:%d",
+>>>>>>> v3.18
 =======
 		ubifs_err("unexpected node type %d at LEB %d:%d",
 >>>>>>> v3.18
@@ -2195,7 +2333,11 @@ static int check_leaf(struct ubifs_info *c, struct ubifs_zbranch *zbr,
 	if (le64_to_cpu(ch->sqnum) > c->max_sqnum) {
 		ubifs_err("too high sequence number, max. is %llu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  c->vi.ubi_num, c->max_sqnum);
+=======
+			  c->max_sqnum);
+>>>>>>> v3.18
 =======
 			  c->max_sqnum);
 >>>>>>> v3.18
@@ -2217,7 +2359,11 @@ static int check_leaf(struct ubifs_info *c, struct ubifs_zbranch *zbr,
 			err = PTR_ERR(fscki);
 			ubifs_err("error %d while processing data node and trying to find inode node %lu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, err, (unsigned long)inum);
+=======
+				  err, (unsigned long)inum);
+>>>>>>> v3.18
 =======
 				  err, (unsigned long)inum);
 >>>>>>> v3.18
@@ -2231,8 +2377,12 @@ static int check_leaf(struct ubifs_info *c, struct ubifs_zbranch *zbr,
 		if (blk_offs > fscki->size) {
 			ubifs_err("data node at LEB %d:%d is not within inode size %lld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, zbr->lnum, zbr->offs,
 				  fscki->size);
+=======
+				  zbr->lnum, zbr->offs, fscki->size);
+>>>>>>> v3.18
 =======
 				  zbr->lnum, zbr->offs, fscki->size);
 >>>>>>> v3.18
@@ -2258,7 +2408,11 @@ static int check_leaf(struct ubifs_info *c, struct ubifs_zbranch *zbr,
 			err = PTR_ERR(fscki);
 			ubifs_err("error %d while processing entry node and trying to find inode node %lu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, err, (unsigned long)inum);
+=======
+				  err, (unsigned long)inum);
+>>>>>>> v3.18
 =======
 				  err, (unsigned long)inum);
 >>>>>>> v3.18
@@ -2274,7 +2428,11 @@ static int check_leaf(struct ubifs_info *c, struct ubifs_zbranch *zbr,
 			err = PTR_ERR(fscki1);
 			ubifs_err("error %d while processing entry node and trying to find parent inode node %lu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, err, (unsigned long)inum);
+=======
+				  err, (unsigned long)inum);
+>>>>>>> v3.18
 =======
 				  err, (unsigned long)inum);
 >>>>>>> v3.18
@@ -2300,8 +2458,12 @@ out:
 
 out_dump:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_msg("dump of node at LEB %d:%d", c->vi.ubi_num, zbr->lnum,
 			zbr->offs);
+=======
+	ubifs_msg("dump of node at LEB %d:%d", zbr->lnum, zbr->offs);
+>>>>>>> v3.18
 =======
 	ubifs_msg("dump of node at LEB %d:%d", zbr->lnum, zbr->offs);
 >>>>>>> v3.18
@@ -2317,6 +2479,7 @@ out_free:
  */
 static void free_inodes(struct fsck_data *fsckd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct rb_node *this = fsckd->inodes.rb_node;
 	struct fsck_inode *fscki;
@@ -2339,10 +2502,15 @@ static void free_inodes(struct fsck_data *fsckd)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct fsck_inode *fscki, *n;
 
 	rbtree_postorder_for_each_entry_safe(fscki, n, &fsckd->inodes, rb)
 		kfree(fscki);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2380,7 +2548,10 @@ static int check_inodes(struct ubifs_info *c, struct fsck_data *fsckd)
 			    fscki->references != 1) {
 				ubifs_err("directory inode %lu has %d direntries which refer it, but should be 1",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					  (unsigned long)fscki->inum,
@@ -2391,7 +2562,10 @@ static int check_inodes(struct ubifs_info *c, struct fsck_data *fsckd)
 			    fscki->references != 0) {
 				ubifs_err("root inode %lu has non-zero (%d) direntries which refer it",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					  (unsigned long)fscki->inum,
@@ -2401,7 +2575,10 @@ static int check_inodes(struct ubifs_info *c, struct fsck_data *fsckd)
 			if (fscki->calc_sz != fscki->size) {
 				ubifs_err("directory inode %lu size is %lld, but calculated size is %lld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					  (unsigned long)fscki->inum,
@@ -2411,7 +2588,10 @@ static int check_inodes(struct ubifs_info *c, struct fsck_data *fsckd)
 			if (fscki->calc_cnt != fscki->nlink) {
 				ubifs_err("directory inode %lu nlink is %d, but calculated nlink is %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					  (unsigned long)fscki->inum,
@@ -2422,7 +2602,10 @@ static int check_inodes(struct ubifs_info *c, struct fsck_data *fsckd)
 			if (fscki->references != fscki->nlink) {
 				ubifs_err("inode %lu nlink is %d, but calculated nlink is %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  c->vi.ubi_num,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					  (unsigned long)fscki->inum,
@@ -2433,7 +2616,10 @@ static int check_inodes(struct ubifs_info *c, struct fsck_data *fsckd)
 		if (fscki->xattr_sz != fscki->calc_xsz) {
 			ubifs_err("inode %lu has xattr size %u, but calculated size is %lld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				  (unsigned long)fscki->inum, fscki->xattr_sz,
@@ -2443,7 +2629,10 @@ static int check_inodes(struct ubifs_info *c, struct fsck_data *fsckd)
 		if (fscki->xattr_cnt != fscki->calc_xcnt) {
 			ubifs_err("inode %lu has %u xattrs, but calculated count is %lld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				  (unsigned long)fscki->inum,
@@ -2453,7 +2642,10 @@ static int check_inodes(struct ubifs_info *c, struct fsck_data *fsckd)
 		if (fscki->xattr_nms != fscki->calc_xnms) {
 			ubifs_err("inode %lu has xattr names' size %u, but calculated names' size is %lld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				  (unsigned long)fscki->inum, fscki->xattr_nms,
@@ -2470,17 +2662,23 @@ out_dump:
 	err = ubifs_lookup_level0(c, &key, &znode, &n);
 	if (!err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("inode %lu not found in index", c->vi.ubi_num,
 			  (unsigned long)fscki->inum);
 		return -ENOENT;
 	} else if (err < 0) {
 		ubifs_err("error %d while looking up inode %lu", c->vi.ubi_num,
 =======
+=======
+>>>>>>> v3.18
 		ubifs_err("inode %lu not found in index",
 			  (unsigned long)fscki->inum);
 		return -ENOENT;
 	} else if (err < 0) {
 		ubifs_err("error %d while looking up inode %lu",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  err, (unsigned long)fscki->inum);
 		return err;
@@ -2495,7 +2693,11 @@ out_dump:
 	if (err) {
 		ubifs_err("cannot read inode node at LEB %d:%d, error %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  c->vi.ubi_num, zbr->lnum, zbr->offs, err);
+=======
+			  zbr->lnum, zbr->offs, err);
+>>>>>>> v3.18
 =======
 			  zbr->lnum, zbr->offs, err);
 >>>>>>> v3.18
@@ -2505,8 +2707,12 @@ out_dump:
 
 	ubifs_msg("dump of the inode %lu sitting in LEB %d:%d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  c->vi.ubi_num, (unsigned long)fscki->inum, zbr->lnum,
 		  zbr->offs);
+=======
+		  (unsigned long)fscki->inum, zbr->lnum, zbr->offs);
+>>>>>>> v3.18
 =======
 		  (unsigned long)fscki->inum, zbr->lnum, zbr->offs);
 >>>>>>> v3.18
@@ -2550,7 +2756,11 @@ int dbg_check_filesystem(struct ubifs_info *c)
 
 out_free:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("file-system check failed with error %d", c->vi.ubi_num, err);
+=======
+	ubifs_err("file-system check failed with error %d", err);
+>>>>>>> v3.18
 =======
 	ubifs_err("file-system check failed with error %d", err);
 >>>>>>> v3.18
@@ -2585,7 +2795,11 @@ int dbg_check_data_nodes_order(struct ubifs_info *c, struct list_head *head)
 
 		if (sa->type != UBIFS_DATA_NODE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("bad node type %d", c->vi.ubi_num, sa->type);
+=======
+			ubifs_err("bad node type %d", sa->type);
+>>>>>>> v3.18
 =======
 			ubifs_err("bad node type %d", sa->type);
 >>>>>>> v3.18
@@ -2594,7 +2808,11 @@ int dbg_check_data_nodes_order(struct ubifs_info *c, struct list_head *head)
 		}
 		if (sb->type != UBIFS_DATA_NODE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("bad node type %d", c->vi.ubi_num, sb->type);
+=======
+			ubifs_err("bad node type %d", sb->type);
+>>>>>>> v3.18
 =======
 			ubifs_err("bad node type %d", sb->type);
 >>>>>>> v3.18
@@ -2610,8 +2828,12 @@ int dbg_check_data_nodes_order(struct ubifs_info *c, struct list_head *head)
 		if (inuma > inumb) {
 			ubifs_err("larger inum %lu goes before inum %lu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, (unsigned long)inuma,
 				  (unsigned long)inumb);
+=======
+				  (unsigned long)inuma, (unsigned long)inumb);
+>>>>>>> v3.18
 =======
 				  (unsigned long)inuma, (unsigned long)inumb);
 >>>>>>> v3.18
@@ -2623,6 +2845,7 @@ int dbg_check_data_nodes_order(struct ubifs_info *c, struct list_head *head)
 
 		if (blka > blkb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("larger block %u goes before %u",
 				  c->vi.ubi_num, blka, blkb);
 			goto error_dump;
@@ -2631,11 +2854,16 @@ int dbg_check_data_nodes_order(struct ubifs_info *c, struct list_head *head)
 			ubifs_err("two data nodes for the same block",
 					c->vi.ubi_num);
 =======
+=======
+>>>>>>> v3.18
 			ubifs_err("larger block %u goes before %u", blka, blkb);
 			goto error_dump;
 		}
 		if (blka == blkb) {
 			ubifs_err("two data nodes for the same block");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto error_dump;
 		}
@@ -2676,7 +2904,11 @@ int dbg_check_nondata_nodes_order(struct ubifs_info *c, struct list_head *head)
 		if (sa->type != UBIFS_INO_NODE && sa->type != UBIFS_DENT_NODE &&
 		    sa->type != UBIFS_XENT_NODE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("bad node type %d", c->vi.ubi_num, sa->type);
+=======
+			ubifs_err("bad node type %d", sa->type);
+>>>>>>> v3.18
 =======
 			ubifs_err("bad node type %d", sa->type);
 >>>>>>> v3.18
@@ -2686,7 +2918,11 @@ int dbg_check_nondata_nodes_order(struct ubifs_info *c, struct list_head *head)
 		if (sa->type != UBIFS_INO_NODE && sa->type != UBIFS_DENT_NODE &&
 		    sa->type != UBIFS_XENT_NODE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("bad node type %d", c->vi.ubi_num, sb->type);
+=======
+			ubifs_err("bad node type %d", sb->type);
+>>>>>>> v3.18
 =======
 			ubifs_err("bad node type %d", sb->type);
 >>>>>>> v3.18
@@ -2696,8 +2932,12 @@ int dbg_check_nondata_nodes_order(struct ubifs_info *c, struct list_head *head)
 
 		if (sa->type != UBIFS_INO_NODE && sb->type == UBIFS_INO_NODE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("non-inode node goes before inode node",
 					c->vi.ubi_num);
+=======
+			ubifs_err("non-inode node goes before inode node");
+>>>>>>> v3.18
 =======
 			ubifs_err("non-inode node goes before inode node");
 >>>>>>> v3.18
@@ -2711,8 +2951,12 @@ int dbg_check_nondata_nodes_order(struct ubifs_info *c, struct list_head *head)
 			/* Inode nodes are sorted in descending size order */
 			if (sa->len < sb->len) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ubifs_err("smaller inode node goes first",
 						c->vi.ubi_num);
+=======
+				ubifs_err("smaller inode node goes first");
+>>>>>>> v3.18
 =======
 				ubifs_err("smaller inode node goes first");
 >>>>>>> v3.18
@@ -2733,8 +2977,12 @@ int dbg_check_nondata_nodes_order(struct ubifs_info *c, struct list_head *head)
 		if (inuma > inumb) {
 			ubifs_err("larger inum %lu goes before inum %lu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, (unsigned long)inuma,
 				  (unsigned long)inumb);
+=======
+				  (unsigned long)inuma, (unsigned long)inumb);
+>>>>>>> v3.18
 =======
 				  (unsigned long)inuma, (unsigned long)inumb);
 >>>>>>> v3.18
@@ -2747,7 +2995,11 @@ int dbg_check_nondata_nodes_order(struct ubifs_info *c, struct list_head *head)
 		if (hasha > hashb) {
 			ubifs_err("larger hash %u goes before %u",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, hasha, hashb);
+=======
+				  hasha, hashb);
+>>>>>>> v3.18
 =======
 				  hasha, hashb);
 >>>>>>> v3.18
@@ -2759,9 +3011,15 @@ int dbg_check_nondata_nodes_order(struct ubifs_info *c, struct list_head *head)
 
 error_dump:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_msg("dumping first node", c->vi.ubi_num);
 	ubifs_dump_node(c, sa->node);
 	ubifs_msg("dumping second node", c->vi.ubi_num);
+=======
+	ubifs_msg("dumping first node");
+	ubifs_dump_node(c, sa->node);
+	ubifs_msg("dumping second node");
+>>>>>>> v3.18
 =======
 	ubifs_msg("dumping first node");
 	ubifs_dump_node(c, sa->node);
@@ -2792,6 +3050,7 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 			if (chance(1, 2)) {
 				d->pc_delay = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/* Fail withing 1 minute */
 				delay = prandom_u32() % 60000;
 				d->pc_timeout = jiffies;
@@ -2799,11 +3058,16 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 				ubifs_warn("failing after %lums",
 						c->vi.ubi_num, delay);
 =======
+=======
+>>>>>>> v3.18
 				/* Fail within 1 minute */
 				delay = prandom_u32() % 60000;
 				d->pc_timeout = jiffies;
 				d->pc_timeout += msecs_to_jiffies(delay);
 				ubifs_warn("failing after %lums", delay);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			} else {
 				d->pc_delay = 2;
@@ -2811,8 +3075,12 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 				/* Fail within 10000 operations */
 				d->pc_cnt_max = delay;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ubifs_warn("failing after %lu calls",
 						c->vi.ubi_num, delay);
+=======
+				ubifs_warn("failing after %lu calls", delay);
+>>>>>>> v3.18
 =======
 				ubifs_warn("failing after %lu calls", delay);
 >>>>>>> v3.18
@@ -2834,6 +3102,7 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 		if (chance(19, 20))
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_warn("failing in super block LEB %d", c->vi.ubi_num,
 				lnum);
 	} else if (lnum == UBIFS_MST_LNUM || lnum == UBIFS_MST_LNUM + 1) {
@@ -2841,11 +3110,16 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 			return 0;
 		ubifs_warn("failing in master LEB %d", c->vi.ubi_num, lnum);
 =======
+=======
+>>>>>>> v3.18
 		ubifs_warn("failing in super block LEB %d", lnum);
 	} else if (lnum == UBIFS_MST_LNUM || lnum == UBIFS_MST_LNUM + 1) {
 		if (chance(19, 20))
 			return 0;
 		ubifs_warn("failing in master LEB %d", lnum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (lnum >= UBIFS_LOG_LNUM && lnum <= c->log_last) {
 		if (write && chance(99, 100))
@@ -2853,7 +3127,11 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 		if (chance(399, 400))
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_warn("failing in log LEB %d", c->vi.ubi_num, lnum);
+=======
+		ubifs_warn("failing in log LEB %d", lnum);
+>>>>>>> v3.18
 =======
 		ubifs_warn("failing in log LEB %d", lnum);
 >>>>>>> v3.18
@@ -2863,7 +3141,11 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 		if (chance(19, 20))
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_warn("failing in LPT LEB %d", c->vi.ubi_num, lnum);
+=======
+		ubifs_warn("failing in LPT LEB %d", lnum);
+>>>>>>> v3.18
 =======
 		ubifs_warn("failing in LPT LEB %d", lnum);
 >>>>>>> v3.18
@@ -2872,6 +3154,7 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 			return 0;
 		if (chance(9, 10))
 			return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ubifs_warn("failing in orphan LEB %d", c->vi.ubi_num, lnum);
 	} else if (lnum == c->ihead_lnum) {
@@ -2883,6 +3166,8 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 			return 0;
 		ubifs_warn("failing in GC head LEB %d", c->vi.ubi_num, lnum);
 =======
+=======
+>>>>>>> v3.18
 		ubifs_warn("failing in orphan LEB %d", lnum);
 	} else if (lnum == c->ihead_lnum) {
 		if (chance(99, 100))
@@ -2892,13 +3177,20 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 		if (chance(9, 10))
 			return 0;
 		ubifs_warn("failing in GC head LEB %d", lnum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (write && !RB_EMPTY_ROOT(&c->buds) &&
 		   !ubifs_search_bud(c, lnum)) {
 		if (chance(19, 20))
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_warn("failing in non-bud LEB %d", c->vi.ubi_num, lnum);
+=======
+		ubifs_warn("failing in non-bud LEB %d", lnum);
+>>>>>>> v3.18
 =======
 		ubifs_warn("failing in non-bud LEB %d", lnum);
 >>>>>>> v3.18
@@ -2906,6 +3198,7 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 		   c->cmt_state == COMMIT_RUNNING_REQUIRED) {
 		if (chance(999, 1000))
 			return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ubifs_warn("failing in bud LEB %d commit running",
 				c->vi.ubi_num, lnum);
@@ -2919,6 +3212,8 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 	d->pc_happened = 1;
 	ubifs_warn("========== Power cut emulated ==========", c->vi.ubi_num);
 =======
+=======
+>>>>>>> v3.18
 		ubifs_warn("failing in bud LEB %d commit running", lnum);
 	} else {
 		if (chance(9999, 10000))
@@ -2928,6 +3223,9 @@ static int power_cut_emulated(struct ubifs_info *c, int lnum, int write)
 
 	d->pc_happened = 1;
 	ubifs_warn("========== Power cut emulated ==========");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dump_stack();
 	return 1;
@@ -2940,17 +3238,23 @@ static int corrupt_data(const struct ubifs_info *c, const void *buf,
 	unsigned char *p = (void *)buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	from = prandom_u32() % (len + 1);
 	/* Corruption may only span one max. write unit */
 	to = min(len, ALIGN(from, c->max_write_size));
 
 	ubifs_warn("filled bytes %u-%u with %s", c->vi.ubi_num, from, to - 1,
 =======
+=======
+>>>>>>> v3.18
 	from = prandom_u32() % len;
 	/* Corruption span max to end of write unit */
 	to = min(len, ALIGN(from + 1, c->max_write_size));
 
 	ubifs_warn("filled bytes %u-%u with %s", from, to - 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		   ffs ? "0xFFs" : "random data");
 
@@ -2972,16 +3276,22 @@ int dbg_leb_write(struct ubifs_info *c, int lnum, const void *buf,
 
 	failing = power_cut_emulated(c, lnum, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (failing)
 		len = corrupt_data(c, buf, len);
 	ubifs_warn("actually write %d bytes to LEB %d:%d (the buffer was corrupted)",
 			c->vi.ubi_num, len, lnum, offs);
 =======
+=======
+>>>>>>> v3.18
 	if (failing) {
 		len = corrupt_data(c, buf, len);
 		ubifs_warn("actually write %d bytes to LEB %d:%d (the buffer was corrupted)",
 			   len, lnum, offs);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = ubi_leb_write(c->ubi, lnum, buf, offs, len);
 	if (err)
@@ -3312,7 +3622,11 @@ out:
 	err = dent ? PTR_ERR(dent) : -ENODEV;
 	ubifs_err("cannot create \"%s\" debugfs file or directory, error %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  c->vi.ubi_num, fname, err);
+=======
+		  fname, err);
+>>>>>>> v3.18
 =======
 		  fname, err);
 >>>>>>> v3.18
@@ -3470,7 +3784,11 @@ out:
 	err = dent ? PTR_ERR(dent) : -ENODEV;
 	ubifs_err("cannot create \"%s\" debugfs file or directory, error %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  UBIFS_UNKNOWN_DEV_NUM, fname, err);
+=======
+		  fname, err);
+>>>>>>> v3.18
 =======
 		  fname, err);
 >>>>>>> v3.18

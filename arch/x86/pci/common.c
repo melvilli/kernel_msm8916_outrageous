@@ -82,7 +82,11 @@ struct pci_ops pci_root_ops = {
 DEFINE_RAW_SPINLOCK(pci_config_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int can_skip_ioresource_align(const struct dmi_system_id *d)
+=======
+static int __init can_skip_ioresource_align(const struct dmi_system_id *d)
+>>>>>>> v3.18
 =======
 static int __init can_skip_ioresource_align(const struct dmi_system_id *d)
 >>>>>>> v3.18
@@ -93,7 +97,11 @@ static int __init can_skip_ioresource_align(const struct dmi_system_id *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct dmi_system_id can_skip_pciprobe_dmi_table[] = {
+=======
+static const struct dmi_system_id can_skip_pciprobe_dmi_table[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct dmi_system_id can_skip_pciprobe_dmi_table[] __initconst = {
 >>>>>>> v3.18
@@ -195,7 +203,11 @@ void pcibios_remove_bus(struct pci_bus *bus)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int set_bf_sort(const struct dmi_system_id *d)
+=======
+static int __init set_bf_sort(const struct dmi_system_id *d)
+>>>>>>> v3.18
 =======
 static int __init set_bf_sort(const struct dmi_system_id *d)
 >>>>>>> v3.18
@@ -208,8 +220,13 @@ static int __init set_bf_sort(const struct dmi_system_id *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void read_dmi_type_b1(const struct dmi_header *dm,
 				       void *private_data)
+=======
+static void __init read_dmi_type_b1(const struct dmi_header *dm,
+				    void *private_data)
+>>>>>>> v3.18
 =======
 static void __init read_dmi_type_b1(const struct dmi_header *dm,
 				    void *private_data)
@@ -235,7 +252,11 @@ static void __init read_dmi_type_b1(const struct dmi_header *dm,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int find_sort_method(const struct dmi_system_id *d)
+=======
+static int __init find_sort_method(const struct dmi_system_id *d)
+>>>>>>> v3.18
 =======
 static int __init find_sort_method(const struct dmi_system_id *d)
 >>>>>>> v3.18
@@ -254,7 +275,11 @@ static int __init find_sort_method(const struct dmi_system_id *d)
  */
 #ifdef __i386__
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int assign_all_busses(const struct dmi_system_id *d)
+=======
+static int __init assign_all_busses(const struct dmi_system_id *d)
+>>>>>>> v3.18
 =======
 static int __init assign_all_busses(const struct dmi_system_id *d)
 >>>>>>> v3.18
@@ -267,7 +292,11 @@ static int __init assign_all_busses(const struct dmi_system_id *d)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int set_scan_all(const struct dmi_system_id *d)
+=======
+static int __init set_scan_all(const struct dmi_system_id *d)
+>>>>>>> v3.18
 =======
 static int __init set_scan_all(const struct dmi_system_id *d)
 >>>>>>> v3.18
@@ -279,7 +308,11 @@ static int __init set_scan_all(const struct dmi_system_id *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct dmi_system_id pciprobe_dmi_table[] = {
+=======
+static const struct dmi_system_id pciprobe_dmi_table[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct dmi_system_id pciprobe_dmi_table[] __initconst = {
 >>>>>>> v3.18
@@ -482,6 +515,7 @@ static const struct dmi_system_id pciprobe_dmi_table[] __initconst = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
         {
                 .callback = set_scan_all,
                 .ident = "Stratus/NEC ftServer",
@@ -500,6 +534,8 @@ static const struct dmi_system_id pciprobe_dmi_table[] __initconst = {
         },
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	{}
 };
 
@@ -508,6 +544,7 @@ void __init dmi_check_pciprobe(void)
 	dmi_check_system(pciprobe_dmi_table);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct pci_bus *pcibios_scan_root(int busnum)
 {
@@ -523,6 +560,8 @@ struct pci_bus *pcibios_scan_root(int busnum)
 	return pci_scan_bus_on_node(busnum, &pci_root_ops,
 					get_mp_bus_to_node(busnum));
 =======
+=======
+>>>>>>> v3.18
 void pcibios_scan_root(int busnum)
 {
 	struct pci_bus *bus;
@@ -542,6 +581,9 @@ void pcibios_scan_root(int busnum)
 		pci_free_resource_list(&resources);
 		kfree(sd);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -581,7 +623,11 @@ int __init pcibios_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 char * __init pcibios_setup(char *str)
+=======
+char *__init pcibios_setup(char *str)
+>>>>>>> v3.18
 =======
 char *__init pcibios_setup(char *str)
 >>>>>>> v3.18
@@ -640,7 +686,10 @@ char *__init pcibios_setup(char *str)
 		return NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_X86_VISWS
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	else if (!strcmp(str, "usepirqmask")) {
@@ -653,9 +702,13 @@ char *__init pcibios_setup(char *str)
 		pcibios_last_bus = simple_strtol(str+8, NULL, 0);
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 #endif
 	else if (!strcmp(str, "rom")) {
+=======
+	} else if (!strcmp(str, "rom")) {
+>>>>>>> v3.18
 =======
 	} else if (!strcmp(str, "rom")) {
 >>>>>>> v3.18
@@ -763,6 +816,7 @@ int pci_ext_cfg_avail(void)
 		return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct pci_bus *pci_scan_bus_on_node(int busno, struct pci_ops *ops, int node)
 {
@@ -865,5 +919,7 @@ int get_mp_bus_to_node(int busnum)
 #endif /* CONFIG_X86_32 */
 
 #endif /* CONFIG_NUMA */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

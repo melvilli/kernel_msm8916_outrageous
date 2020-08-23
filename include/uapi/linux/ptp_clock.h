@@ -51,7 +51,12 @@ struct ptp_clock_caps {
 	int n_per_out; /* Number of programmable periodic signals. */
 	int pps;       /* Whether the clock supports a PPS callback. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rsv[15];   /* Reserved for future use. */
+=======
+	int n_pins;    /* Number of input/output pins. */
+	int rsv[14];   /* Reserved for future use. */
+>>>>>>> v3.18
 =======
 	int n_pins;    /* Number of input/output pins. */
 	int rsv[14];   /* Reserved for future use. */
@@ -86,7 +91,10 @@ struct ptp_sys_offset {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum ptp_pin_function {
 	PTP_PF_NONE,
 	PTP_PF_EXTTS,
@@ -121,6 +129,9 @@ struct ptp_pin_desc {
 	unsigned int rsv[5];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PTP_CLK_MAGIC '='
 
@@ -130,6 +141,11 @@ struct ptp_pin_desc {
 #define PTP_ENABLE_PPS     _IOW(PTP_CLK_MAGIC, 4, int)
 #define PTP_SYS_OFFSET     _IOW(PTP_CLK_MAGIC, 5, struct ptp_sys_offset)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PTP_PIN_GETFUNC    _IOWR(PTP_CLK_MAGIC, 6, struct ptp_pin_desc)
+#define PTP_PIN_SETFUNC    _IOW(PTP_CLK_MAGIC, 7, struct ptp_pin_desc)
+>>>>>>> v3.18
 =======
 #define PTP_PIN_GETFUNC    _IOWR(PTP_CLK_MAGIC, 6, struct ptp_pin_desc)
 #define PTP_PIN_SETFUNC    _IOW(PTP_CLK_MAGIC, 7, struct ptp_pin_desc)

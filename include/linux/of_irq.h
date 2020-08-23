@@ -2,8 +2,11 @@
 #define __OF_IRQ_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_OF)
 struct of_irq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -13,6 +16,7 @@ struct of_irq;
 #include <linux/ioport.h>
 #include <linux/of.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * irq_of_parse_and_map() is used by all OF enabled platforms; but SPARC
@@ -40,6 +44,8 @@ struct of_irq {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 typedef int (*of_irq_init_cb_t)(struct device_node *, struct device_node *);
 
 /*
@@ -52,6 +58,7 @@ typedef int (*of_irq_init_cb_t)(struct device_node *, struct device_node *);
 extern unsigned int of_irq_workarounds;
 extern struct device_node *of_irq_dflt_pic;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int of_irq_map_oldworld(struct device_node *device, int index,
 			       struct of_irq *out_irq);
 #else /* CONFIG_PPC32 && CONFIG_PPC_PMAC */
@@ -60,6 +67,8 @@ extern int of_irq_map_oldworld(struct device_node *device, int index,
 static inline int of_irq_map_oldworld(struct device_node *device, int index,
 				      struct of_irq *out_irq)
 =======
+=======
+>>>>>>> v3.18
 extern int of_irq_parse_oldworld(struct device_node *device, int index,
 			       struct of_phandle_args *out_irq);
 #else /* CONFIG_PPC32 && CONFIG_PPC_PMAC */
@@ -67,12 +76,16 @@ extern int of_irq_parse_oldworld(struct device_node *device, int index,
 #define of_irq_dflt_pic (NULL)
 static inline int of_irq_parse_oldworld(struct device_node *device, int index,
 				      struct of_phandle_args *out_irq)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return -EINVAL;
 }
 #endif /* CONFIG_PPC32 && CONFIG_PPC_PMAC */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 extern int of_irq_map_raw(struct device_node *parent, const __be32 *intspec,
@@ -94,6 +107,8 @@ extern void of_irq_init(const struct of_device_id *matches);
 
 #endif /* CONFIG_OF_IRQ */
 =======
+=======
+>>>>>>> v3.18
 extern int of_irq_parse_raw(const __be32 *addr, struct of_phandle_args *out_irq);
 extern int of_irq_parse_one(struct device_node *device, int index,
 			  struct of_phandle_args *out_irq);
@@ -132,6 +147,9 @@ static inline int of_irq_get_byname(struct device_node *dev, const char *name)
  */
 extern unsigned int irq_of_parse_and_map(struct device_node *node, int index);
 extern struct device_node *of_irq_find_parent(struct device_node *child);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else /* !CONFIG_OF */

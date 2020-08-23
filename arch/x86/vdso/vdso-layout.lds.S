@@ -1,4 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/vdso.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/vdso.h>
 
@@ -10,10 +15,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SECTIONS
 {
 	. = VDSO_PRELINK + SIZEOF_HEADERS;
 =======
+=======
+>>>>>>> v3.18
 #if defined(BUILD_VDSO64)
 # define SHDR_SIZE 64
 #elif defined(BUILD_VDSO32) || defined(BUILD_VDSOX32)
@@ -46,6 +54,9 @@ SECTIONS
 	hpet_page = vvar_start + PAGE_SIZE;
 
 	. = SIZEOF_HEADERS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.hash		: { *(.hash) }			:text
@@ -57,7 +68,10 @@ SECTIONS
 	.gnu.version_r	: { *(.gnu.version_r) }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.dynamic	: { *(.dynamic) }		:text	:dynamic
 
 	.rodata		: {
@@ -83,12 +97,16 @@ SECTIONS
 	.fake_shstrtab	: { *(.fake_shstrtab) }		:text
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.note		: { *(.note.*) }		:text	:note
 
 	.eh_frame_hdr	: { *(.eh_frame_hdr) }		:text	:eh_frame_hdr
 	.eh_frame	: { KEEP (*(.eh_frame)) }	:text
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.dynamic	: { *(.dynamic) }		:text	:dynamic
 
@@ -114,6 +132,8 @@ SECTIONS
 
 	.text		: { *(.text*) }			:text	=0x90909090
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Text is well-separated from actual data: there's plenty of
@@ -135,6 +155,9 @@ SECTIONS
 		*(.discard.*)
 		*(__bug_table)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

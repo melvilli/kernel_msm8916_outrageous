@@ -53,10 +53,15 @@ void __init prom_init(void)
 
 	memsize_str = prom_getenv("memsize");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!memsize_str)
 		memsize = 0x04000000;
 	else
 		strict_strtoul(memsize_str, 0, &memsize);
+=======
+	if (!memsize_str || kstrtoul(memsize_str, 0, &memsize))
+		memsize = 0x04000000;
+>>>>>>> v3.18
 =======
 	if (!memsize_str || kstrtoul(memsize_str, 0, &memsize))
 		memsize = 0x04000000;
@@ -93,15 +98,21 @@ void __init board_setup(void)
 
 	/* Initialize sys_pinfunc */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	au_writel(SYS_PF_NI2, SYS_PINFUNC);
 
 	/* Initialize GPIO */
 	au_writel(~0, KSEG1ADDR(AU1000_SYS_PHYS_ADDR) + SYS_TRIOUTCLR);
 =======
+=======
+>>>>>>> v3.18
 	alchemy_wrsys(SYS_PF_NI2, AU1000_SYS_PINFUNC);
 
 	/* Initialize GPIO */
 	alchemy_wrsys(~0, AU1000_SYS_TRIOUTCLR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	alchemy_gpio_direction_output(0, 0);	/* Disable M66EN (PCI 66MHz) */
 	alchemy_gpio_direction_output(3, 1);	/* Disable PCI CLKRUN# */
@@ -289,7 +300,11 @@ static struct platform_device mtx1_pci_host = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata platform_device * mtx1_devs[] = {
+=======
+static struct platform_device *mtx1_devs[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct platform_device *mtx1_devs[] __initdata = {
 >>>>>>> v3.18

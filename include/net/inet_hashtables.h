@@ -38,6 +38,7 @@
 
 /* This is for all connections with a full identity, no wildcards.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * One chain is dedicated to TIME_WAIT sockets.
  * I'll experiment with dynamic table growth later.
  */
@@ -45,11 +46,16 @@ struct inet_ehash_bucket {
 	struct hlist_nulls_head chain;
 	struct hlist_nulls_head twchain;
 =======
+=======
+>>>>>>> v3.18
  * The 'e' prefix stands for Establish, but we really put all sockets
  * but LISTEN ones.
  */
 struct inet_ehash_bucket {
 	struct hlist_nulls_head chain;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -132,7 +138,10 @@ struct inet_hashinfo {
 	 *          TCP_ESTABLISHED <= sk->sk_state < TCP_CLOSE
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * TIME_WAIT sockets use a separate chain (twchain).
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 */
@@ -230,6 +239,7 @@ static inline void inet_ehash_locks_free(struct inet_hashinfo *hashinfo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct inet_bind_bucket *
 		    inet_bind_bucket_create(struct kmem_cache *cachep,
 					    struct net *net,
@@ -241,6 +251,8 @@ extern void inet_bind_bucket_destroy(struct kmem_cache *cachep,
 static inline int inet_bhashfn(struct net *net,
 		const __u16 lport, const int bhash_size)
 =======
+=======
+>>>>>>> v3.18
 struct inet_bind_bucket *
 inet_bind_bucket_create(struct kmem_cache *cachep, struct net *net,
 			struct inet_bind_hashbucket *head,
@@ -250,14 +262,22 @@ void inet_bind_bucket_destroy(struct kmem_cache *cachep,
 
 static inline int inet_bhashfn(struct net *net, const __u16 lport,
 			       const int bhash_size)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return (lport + net_hash_mix(net)) & (bhash_size - 1);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void inet_bind_hash(struct sock *sk, struct inet_bind_bucket *tb,
 			   const unsigned short snum);
+=======
+void inet_bind_hash(struct sock *sk, struct inet_bind_bucket *tb,
+		    const unsigned short snum);
+>>>>>>> v3.18
 =======
 void inet_bind_hash(struct sock *sk, struct inet_bind_bucket *tb,
 		    const unsigned short snum);
@@ -275,6 +295,7 @@ static inline int inet_sk_listen_hashfn(const struct sock *sk)
 }
 
 /* Caller must disable local BH processing. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int __inet_inherit_port(struct sock *sk, struct sock *child);
 
@@ -294,6 +315,8 @@ extern struct sock *__inet_lookup_listener(struct net *net,
 					   const unsigned short hnum,
 					   const int dif);
 =======
+=======
+>>>>>>> v3.18
 int __inet_inherit_port(struct sock *sk, struct sock *child);
 
 void inet_put_port(struct sock *sk);
@@ -310,6 +333,9 @@ struct sock *__inet_lookup_listener(struct net *net,
 				    const __be32 daddr,
 				    const unsigned short hnum,
 				    const int dif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct sock *inet_lookup_listener(struct net *net,
@@ -344,7 +370,11 @@ static inline struct sock *inet_lookup_listener(struct net *net,
 	const __addrpair __name = (__force __addrpair) ( \
 				   (((__force __u64)(__be32)(__saddr)) << 32) | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   ((__force __u64)(__be32)(__daddr)));
+=======
+				   ((__force __u64)(__be32)(__daddr)))
+>>>>>>> v3.18
 =======
 				   ((__force __u64)(__be32)(__daddr)))
 >>>>>>> v3.18
@@ -352,6 +382,7 @@ static inline struct sock *inet_lookup_listener(struct net *net,
 #define INET_ADDR_COOKIE(__name, __saddr, __daddr) \
 	const __addrpair __name = (__force __addrpair) ( \
 				   (((__force __u64)(__be32)(__daddr)) << 32) | \
+<<<<<<< HEAD
 <<<<<<< HEAD
 				   ((__force __u64)(__be32)(__saddr)));
 #endif /* __BIG_ENDIAN */
@@ -381,6 +412,8 @@ static inline struct sock *inet_lookup_listener(struct net *net,
 	 (inet_twsk(__sk)->tw_daddr	== (__saddr))	&&		\
 	 (inet_twsk(__sk)->tw_rcv_saddr	== (__daddr))	&&		\
 =======
+=======
+>>>>>>> v3.18
 				   ((__force __u64)(__be32)(__saddr)))
 #endif /* __BIG_ENDIAN */
 #define INET_MATCH(__sk, __net, __cookie, __saddr, __daddr, __ports, __dif)	\
@@ -397,6 +430,9 @@ static inline struct sock *inet_lookup_listener(struct net *net,
 	(((__sk)->sk_portpair == (__ports))		&&		\
 	 ((__sk)->sk_daddr	== (__saddr))		&&		\
 	 ((__sk)->sk_rcv_saddr	== (__daddr))		&&		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 (!(__sk)->sk_bound_dev_if	||				\
 	   ((__sk)->sk_bound_dev_if == (__dif))) 	&&		\
@@ -410,16 +446,22 @@ static inline struct sock *inet_lookup_listener(struct net *net,
  * Local BH must be disabled here.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct sock * __inet_lookup_established(struct net *net,
 		struct inet_hashinfo *hashinfo,
 		const __be32 saddr, const __be16 sport,
 		const __be32 daddr, const u16 hnum, const int dif);
 =======
+=======
+>>>>>>> v3.18
 struct sock *__inet_lookup_established(struct net *net,
 				       struct inet_hashinfo *hashinfo,
 				       const __be32 saddr, const __be16 sport,
 				       const __be32 daddr, const u16 hnum,
 				       const int dif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct sock *
@@ -478,6 +520,7 @@ static inline struct sock *__inet_lookup_skb(struct inet_hashinfo *hashinfo,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __inet_hash_connect(struct inet_timewait_death_row *death_row,
 		struct sock *sk,
 		u32 port_offset,
@@ -488,6 +531,8 @@ extern int __inet_hash_connect(struct inet_timewait_death_row *death_row,
 extern int inet_hash_connect(struct inet_timewait_death_row *death_row,
 			     struct sock *sk);
 =======
+=======
+>>>>>>> v3.18
 int __inet_hash_connect(struct inet_timewait_death_row *death_row,
 			struct sock *sk, u32 port_offset,
 			int (*check_established)(struct inet_timewait_death_row *,
@@ -498,5 +543,8 @@ int __inet_hash_connect(struct inet_timewait_death_row *death_row,
 
 int inet_hash_connect(struct inet_timewait_death_row *death_row,
 		      struct sock *sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _INET_HASHTABLES_H */

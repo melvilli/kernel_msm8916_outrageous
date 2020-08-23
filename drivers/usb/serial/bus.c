@@ -39,7 +39,11 @@ static int usb_serial_device_match(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_port_number(struct device *dev,
+=======
+static ssize_t port_number_show(struct device *dev,
+>>>>>>> v3.18
 =======
 static ssize_t port_number_show(struct device *dev,
 >>>>>>> v3.18
@@ -48,10 +52,16 @@ static ssize_t port_number_show(struct device *dev,
 	struct usb_serial_port *port = to_usb_serial_port(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sprintf(buf, "%d\n", port->number - port->serial->minor);
 }
 
 static DEVICE_ATTR(port_number, S_IRUGO, show_port_number, NULL);
+=======
+	return sprintf(buf, "%d\n", port->port_number);
+}
+static DEVICE_ATTR_RO(port_number);
+>>>>>>> v3.18
 =======
 	return sprintf(buf, "%d\n", port->port_number);
 }
@@ -87,17 +97,23 @@ static int usb_serial_device_probe(struct device *dev)
 	if (retval) {
 		if (driver->port_remove)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			driver->port_remove(port);
 		goto exit_with_autopm;
 	}
 
 	minor = port->number;
 =======
+=======
+>>>>>>> v3.18
 			retval = driver->port_remove(port);
 		goto exit_with_autopm;
 	}
 
 	minor = port->minor;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tty_register_device(usb_serial_tty_driver, minor, dev);
 	dev_info(&port->serial->dev->dev,
@@ -131,7 +147,11 @@ static int usb_serial_device_remove(struct device *dev)
 	autopm_err = usb_autopm_get_interface(port->serial->interface);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	minor = port->number;
+=======
+	minor = port->minor;
+>>>>>>> v3.18
 =======
 	minor = port->minor;
 >>>>>>> v3.18
@@ -153,6 +173,7 @@ static int usb_serial_device_remove(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t store_new_id(struct device_driver *driver,
 			    const char *buf, size_t count)
 {
@@ -162,6 +183,8 @@ static ssize_t store_new_id(struct device_driver *driver,
 	if (retval >= 0 && usb_drv->usb_driver != NULL)
 		retval = usb_store_new_id(&usb_drv->usb_driver->dynids,
 =======
+=======
+>>>>>>> v3.18
 static ssize_t new_id_store(struct device_driver *driver,
 			    const char *buf, size_t count)
 {
@@ -172,6 +195,9 @@ static ssize_t new_id_store(struct device_driver *driver,
 	if (retval >= 0 && usb_drv->usb_driver != NULL)
 		retval = usb_store_new_id(&usb_drv->usb_driver->dynids,
 					  usb_drv->usb_driver->id_table,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					  &usb_drv->usb_driver->drvwrap.driver,
 					  buf, count);
@@ -179,7 +205,11 @@ static ssize_t new_id_store(struct device_driver *driver,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_dynids(struct device_driver *driver, char *buf)
+=======
+static ssize_t new_id_show(struct device_driver *driver, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t new_id_show(struct device_driver *driver, char *buf)
 >>>>>>> v3.18
@@ -189,12 +219,15 @@ static ssize_t new_id_show(struct device_driver *driver, char *buf)
 	return usb_show_dynids(&usb_drv->dynids, buf);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct driver_attribute drv_attrs[] = {
 	__ATTR(new_id, S_IRUGO | S_IWUSR, show_dynids, store_new_id),
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 static DRIVER_ATTR_RW(new_id);
 
 static struct attribute *usb_serial_drv_attrs[] = {
@@ -202,6 +235,9 @@ static struct attribute *usb_serial_drv_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(usb_serial_drv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void free_dynids(struct usb_serial_driver *drv)
@@ -222,7 +258,11 @@ struct bus_type usb_serial_bus_type = {
 	.probe =	usb_serial_device_probe,
 	.remove =	usb_serial_device_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.drv_attrs = 	drv_attrs,
+=======
+	.drv_groups = 	usb_serial_drv_groups,
+>>>>>>> v3.18
 =======
 	.drv_groups = 	usb_serial_drv_groups,
 >>>>>>> v3.18

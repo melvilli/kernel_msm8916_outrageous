@@ -15,6 +15,11 @@
 #include <linux/math64.h>
 #include <linux/gfp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+#include <linux/pvclock_gtod.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 #include <linux/pvclock_gtod.h>
@@ -84,7 +89,11 @@ static void get_runstate_snapshot(struct vcpu_runstate_info *res)
 	BUG_ON(preemptible());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state = &__get_cpu_var(xen_runstate);
+=======
+	state = this_cpu_ptr(&xen_runstate);
+>>>>>>> v3.18
 =======
 	state = this_cpu_ptr(&xen_runstate);
 >>>>>>> v3.18
@@ -131,7 +140,11 @@ static void do_stolen_accounting(void)
 	WARN_ON(state.state != RUNSTATE_running);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snap = &__get_cpu_var(xen_runstate_snapshot);
+=======
+	snap = this_cpu_ptr(&xen_runstate_snapshot);
+>>>>>>> v3.18
 =======
 	snap = this_cpu_ptr(&xen_runstate_snapshot);
 >>>>>>> v3.18
@@ -170,7 +183,11 @@ cycle_t xen_clocksource_read(void)
 
 	preempt_disable_notrace();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	src = &__get_cpu_var(xen_vcpu)->time;
+=======
+	src = &__this_cpu_read(xen_vcpu)->time;
+>>>>>>> v3.18
 =======
 	src = &__this_cpu_read(xen_vcpu)->time;
 >>>>>>> v3.18
@@ -195,6 +212,7 @@ static void xen_read_wallclock(struct timespec *ts)
 	put_cpu_var(xen_vcpu);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned long xen_get_wallclock(void)
 {
@@ -225,6 +243,8 @@ static int xen_set_wallclock(unsigned long now)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static void xen_get_wallclock(struct timespec *now)
 {
 	xen_read_wallclock(now);
@@ -275,6 +295,9 @@ static struct notifier_block xen_pvclock_gtod_notifier = {
 	.notifier_call = xen_pvclock_gtod_notify,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct clocksource xen_clocksource __read_mostly = {
 	.name = "xen",
@@ -409,17 +432,23 @@ static int xen_vcpuop_set_next_event(unsigned long delta,
 
 	single.timeout_abs_ns = get_abs_timeout(delta);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Get an event anyway, even if the timeout is already expired */
 	single.flags = 0;
 
 	ret = HYPERVISOR_vcpu_op(VCPUOP_set_singleshot_timer, cpu, &single);
 	BUG_ON(ret != 0);
 =======
+=======
+>>>>>>> v3.18
 	single.flags = VCPU_SSHOTTMR_future;
 
 	ret = HYPERVISOR_vcpu_op(VCPUOP_set_singleshot_timer, cpu, &single);
 
 	BUG_ON(ret != 0 && ret != -ETIME);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -443,12 +472,15 @@ static const struct clock_event_device xen_vcpuop_clockevent = {
 static const struct clock_event_device *xen_clockevent =
 	&xen_timerop_clockevent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PER_CPU(struct clock_event_device, xen_clock_events) = { .irq = -1 };
 
 static irqreturn_t xen_timer_interrupt(int irq, void *dev_id)
 {
 	struct clock_event_device *evt = &__get_cpu_var(xen_clock_events);
 =======
+=======
+>>>>>>> v3.18
 
 struct xen_clock_event_device {
 	struct clock_event_device evt;
@@ -459,6 +491,9 @@ static DEFINE_PER_CPU(struct xen_clock_event_device, xen_clock_events) = { .evt.
 static irqreturn_t xen_timer_interrupt(int irq, void *dev_id)
 {
 	struct clock_event_device *evt = this_cpu_ptr(&xen_clock_events.evt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	irqreturn_t ret;
 
@@ -474,6 +509,7 @@ static irqreturn_t xen_timer_interrupt(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xen_setup_timer(int cpu)
 {
 	const char *name;
@@ -483,6 +519,8 @@ void xen_setup_timer(int cpu)
 	evt = &per_cpu(xen_clock_events, cpu);
 	WARN(evt->irq >= 0, "IRQ%d for CPU%d is already allocated\n", evt->irq, cpu);
 =======
+=======
+>>>>>>> v3.18
 void xen_teardown_timer(int cpu)
 {
 	struct clock_event_device *evt;
@@ -507,6 +545,9 @@ void xen_setup_timer(int cpu)
 	WARN(evt->irq >= 0, "IRQ%d for CPU%d is already allocated\n", evt->irq, cpu);
 	if (evt->irq >= 0)
 		xen_teardown_timer(cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	printk(KERN_INFO "installing Xen timer for CPU %d\n", cpu);
@@ -517,21 +558,28 @@ void xen_setup_timer(int cpu)
 
 	irq = bind_virq_to_irqhandler(VIRQ_TIMER, cpu, xen_timer_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      IRQF_DISABLED|IRQF_PERCPU|
 				      IRQF_NOBALANCING|IRQF_TIMER|
 				      IRQF_FORCE_RESUME,
 				      name, NULL);
 =======
+=======
+>>>>>>> v3.18
 				      IRQF_PERCPU|IRQF_NOBALANCING|IRQF_TIMER|
 				      IRQF_FORCE_RESUME|IRQF_EARLY_RESUME,
 				      name, NULL);
 	(void)xen_set_irq_priority(irq, XEN_IRQ_PRIORITY_MAX);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memcpy(evt, xen_clockevent, sizeof(*evt));
 
 	evt->cpumask = cpumask_of(cpu);
 	evt->irq = irq;
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -548,13 +596,22 @@ void xen_teardown_timer(int cpu)
 }
 
 >>>>>>> v3.18
+=======
+	per_cpu(xen_clock_events, cpu).name = name;
+}
+
+>>>>>>> v3.18
 
 void xen_setup_cpu_clockevents(void)
 {
 	BUG_ON(preemptible());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clockevents_register_device(&__get_cpu_var(xen_clock_events));
+=======
+	clockevents_register_device(this_cpu_ptr(&xen_clock_events.evt));
+>>>>>>> v3.18
 =======
 	clockevents_register_device(this_cpu_ptr(&xen_clock_events.evt));
 >>>>>>> v3.18
@@ -603,6 +660,12 @@ static void __init xen_time_init(void)
 	xen_setup_timer(cpu);
 	xen_setup_cpu_clockevents();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	if (xen_initial_domain())
+		pvclock_gtod_register_notifier(&xen_pvclock_gtod_notifier);
+>>>>>>> v3.18
 =======
 
 	if (xen_initial_domain())
@@ -621,7 +684,13 @@ void __init xen_init_time_ops(void)
 	x86_platform.calibrate_tsc = xen_tsc_khz;
 	x86_platform.get_wallclock = xen_get_wallclock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	x86_platform.set_wallclock = xen_set_wallclock;
+=======
+	/* Dom0 uses the native method to set the hardware RTC. */
+	if (!xen_initial_domain())
+		x86_platform.set_wallclock = xen_set_wallclock;
+>>>>>>> v3.18
 =======
 	/* Dom0 uses the native method to set the hardware RTC. */
 	if (!xen_initial_domain())

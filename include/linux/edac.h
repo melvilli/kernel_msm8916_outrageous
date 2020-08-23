@@ -36,7 +36,10 @@ extern struct bus_type *edac_get_sysfs_subsys(void);
 extern void edac_put_sysfs_subsys(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum {
 	EDAC_REPORTING_ENABLED,
 	EDAC_REPORTING_DISABLED,
@@ -65,6 +68,9 @@ static inline void set_edac_report_status(int new)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void opstate_init(void)
 {
@@ -83,7 +89,11 @@ static inline void opstate_init(void)
 
 /* Maximum size of the location string */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LOCATION_SIZE 80
+=======
+#define LOCATION_SIZE 256
+>>>>>>> v3.18
 =======
 #define LOCATION_SIZE 256
 >>>>>>> v3.18
@@ -202,6 +212,12 @@ static inline char *mc_event_error_type(const unsigned int err_type)
  * @MEM_RDDR3:		Registered DDR3 RAM
  *			This is a variant of the DDR3 memories.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @MEM_DDR4:		DDR4 RAM
+ * @MEM_RDDR4:		Registered DDR4 RAM
+ *			This is a variant of the DDR4 memories.
+>>>>>>> v3.18
 =======
  * @MEM_DDR4:		DDR4 RAM
  * @MEM_RDDR4:		Registered DDR4 RAM
@@ -227,6 +243,11 @@ enum mem_type {
 	MEM_DDR3,
 	MEM_RDDR3,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	MEM_DDR4,
+	MEM_RDDR4,
+>>>>>>> v3.18
 =======
 	MEM_DDR4,
 	MEM_RDDR4,

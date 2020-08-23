@@ -20,12 +20,15 @@ source "drivers/char/agp/Kconfig"
 source "drivers/gpu/vga/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/gpu/drm/Kconfig"
 
 source "drivers/gpu/host1x/Kconfig"
 
 source "drivers/gpu/msm/Kconfig"
 =======
+=======
+>>>>>>> v3.18
 source "drivers/gpu/host1x/Kconfig"
 source "drivers/gpu/ipu-v3/Kconfig"
 
@@ -38,12 +41,16 @@ source "drivers/video/fbdev/Kconfig"
 endmenu
 
 source "drivers/video/backlight/Kconfig"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config VGASTATE
        tristate
        default n
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config VIDEO_OUTPUT_CONTROL
 	tristate "Lowlevel video output switch controls"
@@ -53,12 +60,15 @@ config VIDEO_OUTPUT_CONTROL
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config VIDEOMODE_HELPERS
 	bool
 
 config HDMI
 	bool
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 menuconfig FB
 	tristate "Support for frame buffer devices"
@@ -2481,12 +2491,15 @@ source "drivers/video/adf/Kconfig"
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 if VT
 	source "drivers/video/console/Kconfig"
 endif
 
 if FB || SGI_NEWPORT_CONSOLE
 	source "drivers/video/logo/Kconfig"
+<<<<<<< HEAD
 <<<<<<< HEAD
 endif
 
@@ -2516,6 +2529,11 @@ config FB_SSD1307
 	help
 	  This driver implements support for the Solomon SSD1307
 	  OLED controller over I2C.
+=======
+
+endif
+
+>>>>>>> v3.18
 =======
 
 endif

@@ -402,7 +402,11 @@ static int __init wlf_gf_module_register(void)
 	return i2c_add_driver(&wlf_gf_module_driver);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(wlf_gf_module_register);
+=======
+device_initcall(wlf_gf_module_register);
+>>>>>>> v3.18
 =======
 device_initcall(wlf_gf_module_register);
 >>>>>>> v3.18

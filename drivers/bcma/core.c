@@ -10,7 +10,10 @@
 #include <linux/bcma/bcma.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool bcma_core_wait_value(struct bcma_device *core, u16 reg, u32 mask,
 				 u32 value, int timeout)
 {
@@ -30,6 +33,9 @@ static bool bcma_core_wait_value(struct bcma_device *core, u16 reg, u32 mask,
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 bool bcma_core_is_enabled(struct bcma_device *core)
 {
@@ -48,9 +54,13 @@ void bcma_core_disable(struct bcma_device *core, u32 flags)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bcma_awrite32(core, BCMA_IOCTL, flags);
 	bcma_aread32(core, BCMA_IOCTL);
 	udelay(10);
+=======
+	bcma_core_wait_value(core, BCMA_RESET_ST, ~0, 0, 300);
+>>>>>>> v3.18
 =======
 	bcma_core_wait_value(core, BCMA_RESET_ST, ~0, 0, 300);
 >>>>>>> v3.18
@@ -59,11 +69,17 @@ void bcma_core_disable(struct bcma_device *core, u32 flags)
 	bcma_aread32(core, BCMA_RESET_CTL);
 	udelay(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	bcma_awrite32(core, BCMA_IOCTL, flags);
 	bcma_aread32(core, BCMA_IOCTL);
 	udelay(10);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(bcma_core_disable);
@@ -77,6 +93,10 @@ int bcma_core_enable(struct bcma_device *core, u32 flags)
 
 	bcma_awrite32(core, BCMA_RESET_CTL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bcma_aread32(core, BCMA_RESET_CTL);
+>>>>>>> v3.18
 =======
 	bcma_aread32(core, BCMA_RESET_CTL);
 >>>>>>> v3.18

@@ -4,7 +4,11 @@
 
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/system.h>
+=======
+#include <asm/system_misc.h>
+>>>>>>> v3.18
 =======
 #include <asm/system_misc.h>
 >>>>>>> v3.18

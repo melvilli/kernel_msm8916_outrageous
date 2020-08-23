@@ -119,16 +119,22 @@ u64 stable_page_flags(struct page *page)
 	 * PageTransCompound can be true for non-huge compound pages (slab
 	 * pages or pages allocated by drivers with __GFP_COMP) because it
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * just checks PG_head/PG_tail, so we need to check PageLRU to make
 	 * sure a given page is a thp, not a non-huge compound page.
 	 */
 	else if (PageTransCompound(page) && PageLRU(compound_head(page)))
 =======
+=======
+>>>>>>> v3.18
 	 * just checks PG_head/PG_tail, so we need to check PageLRU/PageAnon
 	 * to make sure a given page is a thp, not a non-huge compound page.
 	 */
 	else if (PageTransCompound(page) && (PageLRU(compound_head(page)) ||
 					     PageAnon(compound_head(page))))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		u |= 1 << KPF_THP;
 
@@ -141,6 +147,12 @@ u64 stable_page_flags(struct page *page)
 		u |= 1 << KPF_BUDDY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (PageBalloon(page))
+		u |= 1 << KPF_BALLOON;
+
+>>>>>>> v3.18
 =======
 	if (PageBalloon(page))
 		u |= 1 << KPF_BALLOON;
@@ -232,7 +244,11 @@ static int __init proc_page_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(proc_page_init);
+=======
+fs_initcall(proc_page_init);
+>>>>>>> v3.18
 =======
 fs_initcall(proc_page_init);
 >>>>>>> v3.18

@@ -19,6 +19,10 @@ my %opt;
 my %repeat_tests;
 my %repeats;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+my %evals;
+>>>>>>> v3.18
 =======
 my %evals;
 >>>>>>> v3.18
@@ -30,6 +34,10 @@ my %default = (
     "BUILD_TYPE"		=> "randconfig",
     "MAKE_CMD"			=> "make",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "CLOSE_CONSOLE_SIGNAL"	=> "INT",
+>>>>>>> v3.18
 =======
     "CLOSE_CONSOLE_SIGNAL"	=> "INT",
 >>>>>>> v3.18
@@ -48,6 +56,10 @@ my %default = (
     "BISECT_MANUAL"		=> 0,
     "BISECT_SKIP"		=> 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "BISECT_TRIES"		=> 1,
+>>>>>>> v3.18
 =======
     "BISECT_TRIES"		=> 1,
 >>>>>>> v3.18
@@ -82,7 +94,11 @@ my %default = (
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 my $ktest_config;
+=======
+my $ktest_config = "ktest.conf";
+>>>>>>> v3.18
 =======
 my $ktest_config = "ktest.conf";
 >>>>>>> v3.18
@@ -154,6 +170,10 @@ my $reverse_bisect;
 my $bisect_manual;
 my $bisect_skip;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+my $bisect_tries;
+>>>>>>> v3.18
 =======
 my $bisect_tries;
 >>>>>>> v3.18
@@ -166,7 +186,10 @@ my $bisect_ret_default;
 my $in_patchcheck = 0;
 my $run_test;
 <<<<<<< HEAD
+<<<<<<< HEAD
 my $redirect;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 my $buildlog;
@@ -187,6 +210,10 @@ my $booted_timeout;
 my $detect_triplefault;
 my $console;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+my $close_console_signal;
+>>>>>>> v3.18
 =======
 my $close_console_signal;
 >>>>>>> v3.18
@@ -218,6 +245,10 @@ my $config_bisect_check;
 my $patchcheck_type;
 my $patchcheck_start;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+my $patchcheck_cherry;
+>>>>>>> v3.18
 =======
 my $patchcheck_cherry;
 >>>>>>> v3.18
@@ -305,6 +336,10 @@ my %option_map = (
     "BISECT_MANUAL"		=> \$bisect_manual,
     "BISECT_SKIP"		=> \$bisect_skip,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "BISECT_TRIES"		=> \$bisect_tries,
+>>>>>>> v3.18
 =======
     "BISECT_TRIES"		=> \$bisect_tries,
 >>>>>>> v3.18
@@ -321,6 +356,10 @@ my %option_map = (
     "BOOTED_TIMEOUT"		=> \$booted_timeout,
     "CONSOLE"			=> \$console,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "CLOSE_CONSOLE_SIGNAL"	=> \$close_console_signal,
+>>>>>>> v3.18
 =======
     "CLOSE_CONSOLE_SIGNAL"	=> \$close_console_signal,
 >>>>>>> v3.18
@@ -354,6 +393,10 @@ my %option_map = (
     "PATCHCHECK_TYPE"		=> \$patchcheck_type,
     "PATCHCHECK_START"		=> \$patchcheck_start,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "PATCHCHECK_CHERRY"		=> \$patchcheck_cherry,
+>>>>>>> v3.18
 =======
     "PATCHCHECK_CHERRY"		=> \$patchcheck_cherry,
 >>>>>>> v3.18
@@ -489,7 +532,10 @@ EOF
     ;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 sub _logit {
     if (defined($opt{"LOG_FILE"})) {
 	open(OUT, ">> $opt{LOG_FILE}") or die "Can't write to $opt{LOG_FILE}";
@@ -511,6 +557,9 @@ sub doprint {
     _logit @_;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 sub read_prompt {
     my ($cancel, $prompt) = @_;
@@ -562,7 +611,11 @@ sub read_ync {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 sub get_ktest_config {
+=======
+sub get_mandatory_config {
+>>>>>>> v3.18
 =======
 sub get_mandatory_config {
 >>>>>>> v3.18
@@ -597,6 +650,7 @@ sub get_mandatory_config {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 sub get_ktest_configs {
     get_ktest_config("MACHINE");
     get_ktest_config("BUILD_DIR");
@@ -605,6 +659,8 @@ sub get_ktest_configs {
     if ($newconfig) {
 	get_ktest_config("BUILD_OPTIONS");
 =======
+=======
+>>>>>>> v3.18
 sub get_mandatory_configs {
     get_mandatory_config("MACHINE");
     get_mandatory_config("BUILD_DIR");
@@ -612,14 +668,22 @@ sub get_mandatory_configs {
 
     if ($newconfig) {
 	get_mandatory_config("BUILD_OPTIONS");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     }
 
     # options required for other than just building a kernel
     if (!$buildonly) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_ktest_config("POWER_CYCLE");
 	get_ktest_config("CONSOLE");
+=======
+	get_mandatory_config("POWER_CYCLE");
+	get_mandatory_config("CONSOLE");
+>>>>>>> v3.18
 =======
 	get_mandatory_config("POWER_CYCLE");
 	get_mandatory_config("CONSOLE");
@@ -629,6 +693,7 @@ sub get_mandatory_configs {
     # options required for install and more
     if ($buildonly != 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_ktest_config("SSH_USER");
 	get_ktest_config("BUILD_TARGET");
 	get_ktest_config("TARGET_IMAGE");
@@ -636,12 +701,17 @@ sub get_mandatory_configs {
 
     get_ktest_config("LOCALVERSION");
 =======
+=======
+>>>>>>> v3.18
 	get_mandatory_config("SSH_USER");
 	get_mandatory_config("BUILD_TARGET");
 	get_mandatory_config("TARGET_IMAGE");
     }
 
     get_mandatory_config("LOCALVERSION");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     return if ($buildonly);
@@ -651,7 +721,11 @@ sub get_mandatory_configs {
     if (!defined($rtype)) {
 	if (!defined($opt{"GRUB_MENU"})) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    get_ktest_config("REBOOT_TYPE");
+=======
+	    get_mandatory_config("REBOOT_TYPE");
+>>>>>>> v3.18
 =======
 	    get_mandatory_config("REBOOT_TYPE");
 >>>>>>> v3.18
@@ -662,6 +736,7 @@ sub get_mandatory_configs {
     }
 
     if ($rtype eq "grub") {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	get_ktest_config("GRUB_MENU");
     }
@@ -674,6 +749,8 @@ sub get_mandatory_configs {
     if ($rtype eq "syslinux") {
 	get_ktest_config("SYSLINUX_LABEL");
 =======
+=======
+>>>>>>> v3.18
 	get_mandatory_config("GRUB_MENU");
     }
 
@@ -684,6 +761,9 @@ sub get_mandatory_configs {
 
     if ($rtype eq "syslinux") {
 	get_mandatory_config("SYSLINUX_LABEL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     }
 }
@@ -775,7 +855,10 @@ sub set_value {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 sub set_eval {
     my ($lvalue, $rvalue, $name) = @_;
 
@@ -792,6 +875,9 @@ sub set_eval {
     push @{$arr}, $rvalue;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 sub set_variable {
     my ($lvalue, $rvalue) = @_;
@@ -1079,7 +1165,10 @@ sub __read_config {
 	    }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} elsif (/^\s*([A-Z_\[\]\d]+)\s*=~\s*(.*?)\s*$/) {
 
 	    next if ($skip);
@@ -1094,6 +1183,9 @@ sub __read_config {
 		set_eval($val, $rvalue, $name);
 	    }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} elsif (/^\s*([A-Z_\[\]\d]+)\s*=\s*(.*?)\s*$/) {
 
@@ -1181,7 +1273,11 @@ sub read_config {
 
     # make sure we have all mandatory configs
 <<<<<<< HEAD
+<<<<<<< HEAD
     get_ktest_configs;
+=======
+    get_mandatory_configs;
+>>>>>>> v3.18
 =======
     get_mandatory_configs;
 >>>>>>> v3.18
@@ -1279,11 +1375,17 @@ sub __eval_option {
 	    $o = $opt{$var};
 	    $retval = "$retval$o";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} elsif ($var eq "KERNEL_VERSION" && defined($make)) {
 	    # special option KERNEL_VERSION uses kernel version
 	    get_version();
 	    $retval = "$retval$version";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 	    $retval = "$retval\$\{$var\}";
@@ -1300,7 +1402,10 @@ sub __eval_option {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 sub process_evals {
     my ($name, $option, $i) = @_;
 
@@ -1328,6 +1433,9 @@ sub process_evals {
     return $option;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 sub eval_option {
     my ($name, $option, $i) = @_;
@@ -1349,6 +1457,7 @@ sub eval_option {
 	$option = __eval_option($name, $option, $i);
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     return $option;
 }
@@ -1372,6 +1481,11 @@ sub logit {
 sub doprint {
     print @_;
     _logit @_;
+=======
+    $option = process_evals($name, $option, $i);
+
+    return $option;
+>>>>>>> v3.18
 =======
     $option = process_evals($name, $option, $i);
 
@@ -1492,7 +1606,11 @@ sub close_console {
 
     doprint "kill child process $pid\n";
 <<<<<<< HEAD
+<<<<<<< HEAD
     kill 2, $pid;
+=======
+    kill $close_console_signal, $pid;
+>>>>>>> v3.18
 =======
     kill $close_console_signal, $pid;
 >>>>>>> v3.18
@@ -1579,13 +1697,19 @@ sub wait_for_monitor {
     }
     print "** Monitor flushed **\n";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
     # if stop is defined but wasn't hit, return error
     # used by reboot (which wants to see a reboot)
     if (defined($stop) && !$booted) {
 	$bug = 1;
     }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     return $bug;
 }
@@ -1668,7 +1792,11 @@ sub fail {
 
 sub run_command {
 <<<<<<< HEAD
+<<<<<<< HEAD
     my ($command) = @_;
+=======
+    my ($command, $redirect) = @_;
+>>>>>>> v3.18
 =======
     my ($command, $redirect) = @_;
 >>>>>>> v3.18
@@ -2009,7 +2137,11 @@ sub monitor {
 		# but now we booted into another kernel?
 		# Consider this a triple fault.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		doprint "Aleady booted in Linux kernel $version, but now\n";
+=======
+		doprint "Already booted in Linux kernel $version, but now\n";
+>>>>>>> v3.18
 =======
 		doprint "Already booted in Linux kernel $version, but now\n";
 >>>>>>> v3.18
@@ -2412,9 +2544,13 @@ sub build {
     make_oldconfig;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     $redirect = "$buildlog";
     my $build_ret = run_command "$make $build_options";
     undef $redirect;
+=======
+    my $build_ret = run_command "$make $build_options", $buildlog;
+>>>>>>> v3.18
 =======
     my $build_ret = run_command "$make $build_options", $buildlog;
 >>>>>>> v3.18
@@ -2490,7 +2626,11 @@ sub success {
 sub answer_bisect {
     for (;;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	doprint "Pass or fail? [p/f]";
+=======
+	doprint "Pass, fail, or skip? [p/f/s]";
+>>>>>>> v3.18
 =======
 	doprint "Pass, fail, or skip? [p/f/s]";
 >>>>>>> v3.18
@@ -2501,13 +2641,19 @@ sub answer_bisect {
 	} elsif ($ans eq "f" || $ans eq "F") {
 	    return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 	    print "Please answer 'P' or 'F'\n";
 =======
+=======
+>>>>>>> v3.18
 	} elsif ($ans eq "s" || $ans eq "S") {
 	    return -1;
 	} else {
 	    print "Please answer 'p', 'f', or 's'\n";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
     }
@@ -2522,9 +2668,13 @@ sub child_run_test {
     $die_on_failure = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     $redirect = "$testlog";
     run_command $run_test or $failed = 1;
     undef $redirect;
+=======
+    run_command $run_test, $testlog or $failed = 1;
+>>>>>>> v3.18
 =======
     run_command $run_test, $testlog or $failed = 1;
 >>>>>>> v3.18
@@ -2611,7 +2761,11 @@ sub do_run_test {
 
     waitpid $child_pid, 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
     $child_exit = $? >> 8;
+=======
+    $child_exit = $?;
+>>>>>>> v3.18
 =======
     $child_exit = $?;
 >>>>>>> v3.18
@@ -2757,6 +2911,7 @@ sub run_bisect {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     my $ret = run_bisect_test $type, $buildtype;
 
     if ($bisect_manual) {
@@ -2764,6 +2919,8 @@ sub run_bisect {
     }
 
 =======
+=======
+>>>>>>> v3.18
     # If the user sets bisect_tries to less than 1, then no tries
     # is a success.
     my $ret = 1;
@@ -2787,6 +2944,9 @@ sub run_bisect {
 	last if (!$ret);
     }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     # Are we looking for where it worked, not failed?
     if ($reverse_bisect && $ret >= 0) {
@@ -2910,6 +3070,7 @@ sub bisect {
 	dodie "could not start bisect";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     run_command "git bisect good $good" or
 	dodie "could not set bisect good to $good";
 
@@ -2920,6 +3081,8 @@ sub bisect {
 	run_command "git bisect replay $replay" or
 	    dodie "failed to run replay";
 =======
+=======
+>>>>>>> v3.18
     if (defined($replay)) {
 	run_command "git bisect replay $replay" or
 	    dodie "failed to run replay";
@@ -2931,6 +3094,9 @@ sub bisect {
 	run_git_bisect "git bisect bad $bad" or
 	    dodie "could not set bisect bad to $bad";
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     }
 
@@ -2982,6 +3148,11 @@ sub assign_configs {
     my ($hash, $config) = @_;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    doprint "Reading configs from $config\n";
+
+>>>>>>> v3.18
 =======
     doprint "Reading configs from $config\n";
 
@@ -2991,14 +3162,20 @@ sub assign_configs {
 
     while (<IN>) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (/^((CONFIG\S*)=.*)/) {
 	    ${$hash}{$2} = $1;
 =======
+=======
+>>>>>>> v3.18
 	chomp;
 	if (/^((CONFIG\S*)=.*)/) {
 	    ${$hash}{$2} = $1;
 	} elsif (/^(# (CONFIG\S*) is not set)/) {
 	    ${$hash}{$2} = $1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
     }
@@ -3012,6 +3189,7 @@ sub process_config_ignore {
     assign_configs \%config_ignore, $config;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 sub read_current_config {
     my ($config_ref) = @_;
@@ -3036,6 +3214,8 @@ sub read_current_config {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 sub get_dependencies {
     my ($config) = @_;
 
@@ -3054,6 +3234,7 @@ sub get_dependencies {
     return @deps;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 sub create_config {
     my @configs = @_;
@@ -3103,6 +3284,8 @@ sub compare_configs {
     }
     return -1 if ($#keys >= 0);
 =======
+=======
+>>>>>>> v3.18
 sub save_config {
     my ($pc, $file) = @_;
 
@@ -3194,6 +3377,9 @@ sub compare_configs {
 	    return -1;
 	}
     }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     return 0;
@@ -3202,6 +3388,7 @@ sub compare_configs {
 sub run_config_bisect_test {
     my ($type) = @_;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     return run_bisect_test $type, "oldconfig";
 }
@@ -3222,6 +3409,8 @@ sub process_passed {
     doprint "config copied to $outputdir/config_good\n";
     run_command "cp -f $output_config $outputdir/config_good";
 =======
+=======
+>>>>>>> v3.18
     my $ret = run_bisect_test $type, "oldconfig";
 
     if ($bisect_manual) {
@@ -3229,6 +3418,9 @@ sub process_passed {
     }
 
     return $ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3240,6 +3432,7 @@ sub process_failed {
     doprint "***************************************\n\n";
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 sub run_config_bisect {
 
@@ -3362,6 +3555,8 @@ sub run_config_bisect {
     process_failed $start_list[0];
     return 1;
 =======
+=======
+>>>>>>> v3.18
 # used for config bisecting
 my $good_config;
 my $bad_config;
@@ -3509,12 +3704,16 @@ sub run_config_bisect {
 
     fail "Hmm, need to do a mix match?\n";
     return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 sub config_bisect {
     my ($i) = @_;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     my $start_config = $config_bisect;
 
@@ -3639,6 +3838,8 @@ sub config_bisect {
     do {
 	$ret = run_config_bisect;
 =======
+=======
+>>>>>>> v3.18
     my $type = $config_bisect_type;
     my $ret;
 
@@ -3706,6 +3907,9 @@ sub config_bisect {
 
     do {
 	$ret = run_config_bisect \%good_configs, \%bad_configs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     } while (!$ret);
 
@@ -3730,10 +3934,13 @@ sub patchcheck {
     my $start = $patchcheck_start;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     my $end = "HEAD";
     if (defined($patchcheck_end)) {
 	$end = $patchcheck_end;
 =======
+=======
+>>>>>>> v3.18
     my $cherry = $patchcheck_cherry;
     if (!defined($cherry)) {
 	$cherry = 0;
@@ -3744,6 +3951,9 @@ sub patchcheck {
 	$end = $patchcheck_end;
     } elsif ($cherry) {
 	die "PATCHCHECK_END must be defined with PATCHCHECK_CHERRY\n";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     }
 
@@ -3759,9 +3969,12 @@ sub patchcheck {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     open (IN, "git log --pretty=oneline $end|") or
 	dodie "could not get git list";
 =======
+=======
+>>>>>>> v3.18
     if ($cherry) {
 	open (IN, "git cherry -v $start $end|") or
 	    dodie "could not get git list";
@@ -3769,6 +3982,9 @@ sub patchcheck {
 	open (IN, "git log --pretty=oneline $end|") or
 	    dodie "could not get git list";
     }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     my @list;
@@ -3776,6 +3992,11 @@ sub patchcheck {
     while (<IN>) {
 	chomp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	# git cherry adds a '+' we want to remove
+	s/^\+ //;
+>>>>>>> v3.18
 =======
 	# git cherry adds a '+' we want to remove
 	s/^\+ //;
@@ -3786,6 +4007,7 @@ sub patchcheck {
     close(IN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     if ($list[$#list] !~ /^$start/) {
 	fail "SHA1 $start not found";
     }
@@ -3793,6 +4015,8 @@ sub patchcheck {
     # go backwards in the list
     @list = reverse @list;
 =======
+=======
+>>>>>>> v3.18
     if (!$cherry) {
 	if ($list[$#list] !~ /^$start/) {
 	    fail "SHA1 $start not found";
@@ -3806,6 +4030,9 @@ sub patchcheck {
     foreach my $l (@list) {
 	doprint "$l\n";
     }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     my $save_clean = $noclean;
@@ -4032,6 +4259,7 @@ sub read_depends {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 sub read_config_list {
     my ($config) = @_;
 
@@ -4055,6 +4283,8 @@ sub read_output_config {
     assign_configs \%config_ignore, $config;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 sub make_new_config {
@@ -4443,7 +4673,11 @@ sub make_warnings_file {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $#ARGV < 1 or die "ktest.pl version: $VERSION\n   usage: ktest.pl config-file\n";
+=======
+$#ARGV < 1 or die "ktest.pl version: $VERSION\n   usage: ktest.pl [config-file]\n";
+>>>>>>> v3.18
 =======
 $#ARGV < 1 or die "ktest.pl version: $VERSION\n   usage: ktest.pl [config-file]\n";
 >>>>>>> v3.18
@@ -4457,8 +4691,11 @@ if ($#ARGV == 0) {
 	}
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 } else {
     $ktest_config = "ktest.conf";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -4590,7 +4827,10 @@ for (my $i = 1; $i <= $opt{"NUM_TESTS"}; $i++) {
     my $makecmd = set_test_option("MAKE_CMD", $i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
     $outputdir = set_test_option("OUTPUT_DIR", $i);
     $builddir = set_test_option("BUILD_DIR", $i);
 
@@ -4603,6 +4843,9 @@ for (my $i = 1; $i <= $opt{"NUM_TESTS"}; $i++) {
 
     $make = "$makecmd O=$outputdir";
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     # Load all the options into their mapped variable names
     foreach my $opt (keys %option_map) {
@@ -4629,6 +4872,7 @@ for (my $i = 1; $i <= $opt{"NUM_TESTS"}; $i++) {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     chdir $builddir || die "can't change directory to $builddir";
 
     foreach my $dir ($tmpdir, $outputdir) {
@@ -4636,6 +4880,11 @@ for (my $i = 1; $i <= $opt{"NUM_TESTS"}; $i++) {
 	    mkpath($dir) or
 		die "can't create $dir";
 	}
+=======
+    if (!-d $tmpdir) {
+	mkpath($tmpdir) or
+	    die "can't create $tmpdir";
+>>>>>>> v3.18
 =======
     if (!-d $tmpdir) {
 	mkpath($tmpdir) or
@@ -4650,7 +4899,10 @@ for (my $i = 1; $i <= $opt{"NUM_TESTS"}; $i++) {
     $testlog = "$tmpdir/testlog-$machine";
     $dmesg = "$tmpdir/dmesg-$machine";
 <<<<<<< HEAD
+<<<<<<< HEAD
     $make = "$makecmd O=$outputdir";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     $output_config = "$outputdir/.config";

@@ -1140,7 +1140,10 @@ static int carl9170_set_freq_cal_data(struct ar9170 *ar,
 	default:
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

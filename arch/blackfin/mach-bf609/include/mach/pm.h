@@ -11,6 +11,10 @@
 
 #include <linux/suspend.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_device.h>
 >>>>>>> v3.18
@@ -24,8 +28,13 @@ void bfin_sec_raise_irq(unsigned int sid);
 void coreb_enable(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bf609_nor_flash_init(void);
 void bf609_nor_flash_exit(void);
+=======
+int bf609_nor_flash_init(struct platform_device *pdev);
+void bf609_nor_flash_exit(struct platform_device *pdev);
+>>>>>>> v3.18
 =======
 int bf609_nor_flash_init(struct platform_device *pdev);
 void bf609_nor_flash_exit(struct platform_device *pdev);

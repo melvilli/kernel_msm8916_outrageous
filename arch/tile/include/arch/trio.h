@@ -24,7 +24,10 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Map SQ Doorbell Format.
  * This describes the format of the write-only doorbell register that exists
  * in the last 8-bytes of the MAP_SQ_BASE/LIM range.  This register is only
@@ -64,6 +67,9 @@ typedef union
 
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Tile PIO Region Configuration - CFG Address Format.
  * This register describes the address format for PIO accesses when the

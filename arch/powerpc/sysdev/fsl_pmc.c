@@ -19,6 +19,10 @@
 #include <linux/delay.h>
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18

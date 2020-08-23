@@ -18,6 +18,10 @@
 #include <linux/io.h>
 #include <asm/thread_notify.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cputype.h>
+>>>>>>> v3.18
 =======
 #include <asm/cputype.h>
 >>>>>>> v3.18
@@ -49,7 +53,11 @@ static int iwmmxt_do(struct notifier_block *self, unsigned long cmd, void *t)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block iwmmxt_notifier_block = {
+=======
+static struct notifier_block __maybe_unused iwmmxt_notifier_block = {
+>>>>>>> v3.18
 =======
 static struct notifier_block __maybe_unused iwmmxt_notifier_block = {
 >>>>>>> v3.18
@@ -80,7 +88,10 @@ static void __init pj4_cp_access_write(u32 value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init pj4_get_iwmmxt_version(void)
 {
 	u32 cp_access, wcid;
@@ -108,6 +119,9 @@ static int __init pj4_get_iwmmxt_version(void)
 
 	return -EINVAL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -116,6 +130,7 @@ static int __init pj4_get_iwmmxt_version(void)
  */
 static int __init pj4_cp0_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 cp_access;
 
@@ -126,6 +141,8 @@ static int __init pj4_cp0_init(void)
 	elf_hwcap |= HWCAP_IWMMXT;
 	thread_register_notifier(&iwmmxt_notifier_block);
 =======
+=======
+>>>>>>> v3.18
 	u32 __maybe_unused cp_access;
 	int vers;
 
@@ -146,6 +163,9 @@ static int __init pj4_cp0_init(void)
 	elf_hwcap |= HWCAP_IWMMXT;
 	thread_register_notifier(&iwmmxt_notifier_block);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

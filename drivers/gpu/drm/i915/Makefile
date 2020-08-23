@@ -4,6 +4,7 @@
 
 ccflags-y := -Iinclude/drm
 <<<<<<< HEAD
+<<<<<<< HEAD
 i915-y := i915_drv.o i915_dma.o i915_irq.o \
 	  i915_debugfs.o \
           i915_suspend.o \
@@ -49,6 +50,8 @@ i915-$(CONFIG_COMPAT)   += i915_ioc32.o
 
 i915-$(CONFIG_ACPI)	+= intel_acpi.o
 =======
+=======
+>>>>>>> v3.18
 
 # Please keep these build lists sorted!
 
@@ -122,6 +125,9 @@ i915-y += dvo_ch7017.o \
 # legacy horrors
 i915-y += i915_dma.o \
 	  i915_ums.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 obj-$(CONFIG_DRM_I915)  += i915.o

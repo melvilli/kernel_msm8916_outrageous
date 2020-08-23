@@ -5,6 +5,10 @@
 config OPENVSWITCH
 	tristate "Open vSwitch"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select LIBCRC32C
+>>>>>>> v3.18
 =======
 	select LIBCRC32C
 >>>>>>> v3.18
@@ -31,7 +35,10 @@ config OPENVSWITCH
 
 	  If unsure, say N.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config OPENVSWITCH_GRE
 	bool "Open vSwitch GRE tunneling support"
@@ -70,4 +77,7 @@ config OPENVSWITCH_GENEVE
 	  If you say Y here, then the Open vSwitch will be able create geneve vport.
 
 	  Say N to exclude this support and reduce the binary size.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

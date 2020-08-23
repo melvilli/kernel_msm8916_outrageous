@@ -93,9 +93,12 @@ struct usbhid_device {
 	struct work_struct reset_work;                                  /* Task context for resets */
 	wait_queue_head_t wait;						/* For sleeping */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ledcount;							/* counting the number of active leds */
 
 	struct work_struct led_work;					/* Task context for setting LEDs */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

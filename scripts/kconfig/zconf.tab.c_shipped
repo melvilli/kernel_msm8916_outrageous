@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* A Bison parser, made by GNU Bison 2.4.3.  */
 
 /* Skeleton implementation for Bison's Yacc-like parsers in C
@@ -6,11 +7,16 @@
       Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006,
    2009, 2010 Free Software Foundation, Inc.
 =======
+=======
+>>>>>>> v3.18
 /* A Bison parser, made by GNU Bison 2.5.  */
 
 /* Bison implementation for Yacc-like parsers in C
    
       Copyright (C) 1984, 1989-1990, 2000-2011 Free Software Foundation, Inc.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
    
    This program is free software: you can redistribute it and/or modify
@@ -54,7 +60,11 @@
 
 /* Bison version.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define YYBISON_VERSION "2.4.3"
+=======
+#define YYBISON_VERSION "2.5"
+>>>>>>> v3.18
 =======
 #define YYBISON_VERSION "2.5"
 >>>>>>> v3.18
@@ -315,17 +325,23 @@ YYID (yyi)
 #   else
 #    define YYSTACK_ALLOC alloca
 <<<<<<< HEAD
+<<<<<<< HEAD
 #    if ! defined _ALLOCA_H && ! defined _STDLIB_H && (defined __STDC__ || defined __C99__FUNC__ \
      || defined __cplusplus || defined _MSC_VER)
 #     include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
 #     ifndef _STDLIB_H
 #      define _STDLIB_H 1
 =======
+=======
+>>>>>>> v3.18
 #    if ! defined _ALLOCA_H && ! defined EXIT_SUCCESS && (defined __STDC__ || defined __C99__FUNC__ \
      || defined __cplusplus || defined _MSC_VER)
 #     include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
 #     ifndef EXIT_SUCCESS
 #      define EXIT_SUCCESS 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #     endif
 #    endif
@@ -350,6 +366,7 @@ YYID (yyi)
 #   define YYSTACK_ALLOC_MAXIMUM YYSIZE_MAXIMUM
 #  endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #  if (defined __cplusplus && ! defined _STDLIB_H \
        && ! ((defined YYMALLOC || defined malloc) \
 	     && (defined YYFREE || defined free)))
@@ -357,19 +374,28 @@ YYID (yyi)
 #   ifndef _STDLIB_H
 #    define _STDLIB_H 1
 =======
+=======
+>>>>>>> v3.18
 #  if (defined __cplusplus && ! defined EXIT_SUCCESS \
        && ! ((defined YYMALLOC || defined malloc) \
 	     && (defined YYFREE || defined free)))
 #   include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
 #   ifndef EXIT_SUCCESS
 #    define EXIT_SUCCESS 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #   endif
 #  endif
 #  ifndef YYMALLOC
 #   define YYMALLOC malloc
 <<<<<<< HEAD
+<<<<<<< HEAD
 #   if ! defined malloc && ! defined _STDLIB_H && (defined __STDC__ || defined __C99__FUNC__ \
+=======
+#   if ! defined malloc && ! defined EXIT_SUCCESS && (defined __STDC__ || defined __C99__FUNC__ \
+>>>>>>> v3.18
 =======
 #   if ! defined malloc && ! defined EXIT_SUCCESS && (defined __STDC__ || defined __C99__FUNC__ \
 >>>>>>> v3.18
@@ -380,7 +406,11 @@ void *malloc (YYSIZE_T); /* INFRINGES ON USER NAME SPACE */
 #  ifndef YYFREE
 #   define YYFREE free
 <<<<<<< HEAD
+<<<<<<< HEAD
 #   if ! defined free && ! defined _STDLIB_H && (defined __STDC__ || defined __C99__FUNC__ \
+=======
+#   if ! defined free && ! defined EXIT_SUCCESS && (defined __STDC__ || defined __C99__FUNC__ \
+>>>>>>> v3.18
 =======
 #   if ! defined free && ! defined EXIT_SUCCESS && (defined __STDC__ || defined __C99__FUNC__ \
 >>>>>>> v3.18
@@ -413,6 +443,7 @@ union yyalloc
       + YYSTACK_GAP_MAXIMUM)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copy COUNT objects from FROM to TO.  The source and destination do
    not overlap.  */
 # ifndef YYCOPY
@@ -430,6 +461,9 @@ union yyalloc
       while (YYID (0))
 #  endif
 # endif
+=======
+# define YYCOPY_NEEDED 1
+>>>>>>> v3.18
 =======
 # define YYCOPY_NEEDED 1
 >>>>>>> v3.18
@@ -453,7 +487,10 @@ union yyalloc
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined YYCOPY_NEEDED && YYCOPY_NEEDED
 /* Copy COUNT objects from FROM to TO.  The source and destination do
    not overlap.  */
@@ -474,6 +511,9 @@ union yyalloc
 # endif
 #endif /* !YYCOPY_NEEDED */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  11
@@ -594,6 +634,7 @@ static const yytype_int8 yyrhs[] =
 static const yytype_uint16 yyrline[] =
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
        0,   104,   104,   104,   106,   106,   108,   110,   111,   112,
      113,   114,   115,   119,   123,   123,   123,   123,   123,   123,
      123,   123,   127,   128,   129,   130,   131,   132,   136,   137,
@@ -607,6 +648,8 @@ static const yytype_uint16 yyrline[] =
      453,   456,   457,   458,   462,   463,   466,   467,   470,   471,
      472,   473,   474,   475,   476,   479,   480,   483,   484
 =======
+=======
+>>>>>>> v3.18
        0,   103,   103,   103,   105,   105,   107,   109,   110,   111,
      112,   113,   114,   118,   122,   122,   122,   122,   122,   122,
      122,   122,   126,   127,   128,   129,   130,   131,   135,   136,
@@ -619,6 +662,9 @@ static const yytype_uint16 yyrline[] =
      419,   420,   423,   431,   433,   434,   437,   444,   446,   451,
      452,   455,   456,   457,   461,   462,   465,   466,   469,   470,
      471,   472,   473,   474,   475,   478,   479,   482,   483
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #endif
@@ -695,8 +741,13 @@ static const yytype_uint8 yyr2[] =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
    STATE-NUM when YYTABLE doesn't specify something else to do.  Zero
+=======
+/* YYDEFACT[STATE-NAME] -- Default reduction number in state STATE-NUM.
+   Performed when YYTABLE doesn't specify something else to do.  Zero
+>>>>>>> v3.18
 =======
 /* YYDEFACT[STATE-NAME] -- Default reduction number in state STATE-NUM.
    Performed when YYTABLE doesn't specify something else to do.  Zero
@@ -776,8 +827,12 @@ static const yytype_int16 yypgoto[] =
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
    positive, shift that token.  If negative, reduce the rule which
 <<<<<<< HEAD
+<<<<<<< HEAD
    number is the opposite.  If zero, do what YYDEFACT says.
    If YYTABLE_NINF, syntax error.  */
+=======
+   number is the opposite.  If YYTABLE_NINF, syntax error.  */
+>>>>>>> v3.18
 =======
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 >>>>>>> v3.18
@@ -817,13 +872,19 @@ static const yytype_int16 yytable[] =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define yypact_value_is_default(yystate) \
   ((yystate) == (-90))
 
 #define yytable_value_is_error(yytable_value) \
   YYID (0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const yytype_int16 yycheck[] =
 {
@@ -919,7 +980,10 @@ do								\
       yychar = (Token);						\
       yylval = (Value);						\
 <<<<<<< HEAD
+<<<<<<< HEAD
       yytoken = YYTRANSLATE (yychar);				\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
       YYPOPSTACK (1);						\
@@ -964,6 +1028,7 @@ while (YYID (0))
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* YY_LOCATION_PRINT -- Print the location on the stream.
    This macro was not mandated originally: define only if we know
    we won't break user code: when these are the locations we know.  */
@@ -978,10 +1043,15 @@ while (YYID (0))
 #  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
 # endif
 =======
+=======
+>>>>>>> v3.18
 /* This macro is provided for backward compatibility. */
 
 #ifndef YY_LOCATION_PRINT
 # define YY_LOCATION_PRINT(File, Loc) ((void) 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -1175,7 +1245,10 @@ int yydebug;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1280,6 +1353,7 @@ yytnamerr (char *yyres, const char *yystr)
 }
 # endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Copy into YYRESULT an error message about the unexpected token
    YYCHAR while in state YYSTATE.  Return the number of bytes copied,
@@ -1391,6 +1465,8 @@ yysyntax_error (char *yyresult, int yystate, int yychar)
 #endif /* YYERROR_VERBOSE */
 
 =======
+=======
+>>>>>>> v3.18
 /* Copy into *YYMSG, which is of size *YYMSG_ALLOC, an error message
    about the unexpected token YYTOKEN for the state stack whose top is
    YYSSP.
@@ -1527,6 +1603,9 @@ yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
   return 0;
 }
 #endif /* YYERROR_VERBOSE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*-----------------------------------------------.
@@ -1591,6 +1670,10 @@ yydestruct (yymsg, yytype, yyvaluep)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1621,10 +1704,16 @@ int yynerrs;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*-------------------------.
 | yyparse or yypush_parse.  |
 `-------------------------*/
+=======
+/*----------.
+| yyparse.  |
+`----------*/
+>>>>>>> v3.18
 =======
 /*----------.
 | yyparse.  |
@@ -1654,8 +1743,11 @@ yyparse ()
 #endif
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     int yystate;
@@ -1813,7 +1905,11 @@ yybackup:
   /* First try to decide what to do without reference to lookahead token.  */
   yyn = yypact[yystate];
 <<<<<<< HEAD
+<<<<<<< HEAD
   if (yyn == YYPACT_NINF)
+=======
+  if (yypact_value_is_default (yyn))
+>>>>>>> v3.18
 =======
   if (yypact_value_is_default (yyn))
 >>>>>>> v3.18
@@ -1848,8 +1944,13 @@ yybackup:
   if (yyn <= 0)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
       if (yyn == 0 || yyn == YYTABLE_NINF)
 	goto yyerrlab;
+=======
+      if (yytable_value_is_error (yyn))
+        goto yyerrlab;
+>>>>>>> v3.18
 =======
       if (yytable_value_is_error (yyn))
         goto yyerrlab;
@@ -1909,7 +2010,11 @@ yyreduce:
         case 10:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { zconf_error("unexpected end statement"); ;}
+=======
+    { zconf_error("unexpected end statement"); }
+>>>>>>> v3.18
 =======
     { zconf_error("unexpected end statement"); }
 >>>>>>> v3.18
@@ -1918,7 +2023,11 @@ yyreduce:
   case 11:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { zconf_error("unknown statement \"%s\"", (yyvsp[(2) - (4)].string)); ;}
+=======
+    { zconf_error("unknown statement \"%s\"", (yyvsp[(2) - (4)].string)); }
+>>>>>>> v3.18
 =======
     { zconf_error("unknown statement \"%s\"", (yyvsp[(2) - (4)].string)); }
 >>>>>>> v3.18
@@ -1929,7 +2038,11 @@ yyreduce:
     {
 	zconf_error("unexpected option \"%s\"", kconf_id_strings + (yyvsp[(2) - (4)].id)->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -1938,7 +2051,11 @@ yyreduce:
   case 13:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { zconf_error("invalid statement"); ;}
+=======
+    { zconf_error("invalid statement"); }
+>>>>>>> v3.18
 =======
     { zconf_error("invalid statement"); }
 >>>>>>> v3.18
@@ -1947,7 +2064,11 @@ yyreduce:
   case 28:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { zconf_error("unknown option \"%s\"", (yyvsp[(1) - (3)].string)); ;}
+=======
+    { zconf_error("unknown option \"%s\"", (yyvsp[(1) - (3)].string)); }
+>>>>>>> v3.18
 =======
     { zconf_error("unknown option \"%s\"", (yyvsp[(1) - (3)].string)); }
 >>>>>>> v3.18
@@ -1956,7 +2077,11 @@ yyreduce:
   case 29:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { zconf_error("invalid option"); ;}
+=======
+    { zconf_error("invalid option"); }
+>>>>>>> v3.18
 =======
     { zconf_error("invalid option"); }
 >>>>>>> v3.18
@@ -1970,7 +2095,11 @@ yyreduce:
 	menu_add_entry(sym);
 	printd(DEBUG_PARSE, "%s:%d:config %s\n", zconf_curname(), zconf_lineno(), (yyvsp[(2) - (3)].string));
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -1982,7 +2111,11 @@ yyreduce:
 	menu_end_entry();
 	printd(DEBUG_PARSE, "%s:%d:endconfig\n", zconf_curname(), zconf_lineno());
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -1996,7 +2129,11 @@ yyreduce:
 	menu_add_entry(sym);
 	printd(DEBUG_PARSE, "%s:%d:menuconfig %s\n", zconf_curname(), zconf_lineno(), (yyvsp[(2) - (3)].string));
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2012,7 +2149,11 @@ yyreduce:
 	menu_end_entry();
 	printd(DEBUG_PARSE, "%s:%d:endconfig\n", zconf_curname(), zconf_lineno());
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2026,7 +2167,11 @@ yyreduce:
 		zconf_curname(), zconf_lineno(),
 		(yyvsp[(1) - (3)].id)->stype);
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2038,7 +2183,11 @@ yyreduce:
 	menu_add_prompt(P_PROMPT, (yyvsp[(2) - (4)].string), (yyvsp[(3) - (4)].expr));
 	printd(DEBUG_PARSE, "%s:%d:prompt\n", zconf_curname(), zconf_lineno());
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2054,7 +2203,11 @@ yyreduce:
 		zconf_curname(), zconf_lineno(),
 		(yyvsp[(1) - (4)].id)->stype);
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2066,7 +2219,11 @@ yyreduce:
 	menu_add_symbol(P_SELECT, sym_lookup((yyvsp[(2) - (4)].string), 0), (yyvsp[(3) - (4)].expr));
 	printd(DEBUG_PARSE, "%s:%d:select\n", zconf_curname(), zconf_lineno());
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2078,7 +2235,11 @@ yyreduce:
 	menu_add_expr(P_RANGE, expr_alloc_comp(E_RANGE,(yyvsp[(2) - (5)].symbol), (yyvsp[(3) - (5)].symbol)), (yyvsp[(4) - (5)].expr));
 	printd(DEBUG_PARSE, "%s:%d:range\n", zconf_curname(), zconf_lineno());
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2094,7 +2255,11 @@ yyreduce:
 		zconfprint("warning: ignoring unknown option %s", (yyvsp[(2) - (3)].string));
 	free((yyvsp[(2) - (3)].string));
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2103,7 +2268,11 @@ yyreduce:
   case 49:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.string) = NULL; ;}
+=======
+    { (yyval.string) = NULL; }
+>>>>>>> v3.18
 =======
     { (yyval.string) = NULL; }
 >>>>>>> v3.18
@@ -2112,7 +2281,11 @@ yyreduce:
   case 50:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.string) = (yyvsp[(2) - (2)].string); ;}
+=======
+    { (yyval.string) = (yyvsp[(2) - (2)].string); }
+>>>>>>> v3.18
 =======
     { (yyval.string) = (yyvsp[(2) - (2)].string); }
 >>>>>>> v3.18
@@ -2127,7 +2300,11 @@ yyreduce:
 	menu_add_expr(P_CHOICE, NULL, NULL);
 	printd(DEBUG_PARSE, "%s:%d:choice\n", zconf_curname(), zconf_lineno());
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2138,7 +2315,11 @@ yyreduce:
     {
 	(yyval.menu) = menu_add_menu();
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2152,7 +2333,11 @@ yyreduce:
 		printd(DEBUG_PARSE, "%s:%d:endchoice\n", zconf_curname(), zconf_lineno());
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2164,7 +2349,11 @@ yyreduce:
 	menu_add_prompt(P_PROMPT, (yyvsp[(2) - (4)].string), (yyvsp[(3) - (4)].expr));
 	printd(DEBUG_PARSE, "%s:%d:prompt\n", zconf_curname(), zconf_lineno());
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2181,7 +2370,11 @@ yyreduce:
 	} else
 		YYERROR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2193,7 +2386,11 @@ yyreduce:
 	current_entry->sym->flags |= SYMBOL_OPTIONAL;
 	printd(DEBUG_PARSE, "%s:%d:optional\n", zconf_curname(), zconf_lineno());
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2209,7 +2406,11 @@ yyreduce:
 	} else
 		YYERROR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2223,7 +2424,11 @@ yyreduce:
 	menu_add_dep((yyvsp[(2) - (3)].expr));
 	(yyval.menu) = menu_add_menu();
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2237,7 +2442,11 @@ yyreduce:
 		printd(DEBUG_PARSE, "%s:%d:endif\n", zconf_curname(), zconf_lineno());
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2248,7 +2457,11 @@ yyreduce:
     {
 	menu_add_prompt(P_MENU, (yyvsp[(2) - (3)].string), NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2261,7 +2474,11 @@ yyreduce:
 	menu_add_prompt(P_MENU, (yyvsp[(2) - (3)].string), NULL);
 	printd(DEBUG_PARSE, "%s:%d:menu\n", zconf_curname(), zconf_lineno());
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2272,7 +2489,11 @@ yyreduce:
     {
 	(yyval.menu) = menu_add_menu();
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2286,7 +2507,11 @@ yyreduce:
 		printd(DEBUG_PARSE, "%s:%d:endmenu\n", zconf_curname(), zconf_lineno());
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2298,7 +2523,11 @@ yyreduce:
 	printd(DEBUG_PARSE, "%s:%d:source %s\n", zconf_curname(), zconf_lineno(), (yyvsp[(2) - (3)].string));
 	zconf_nextfile((yyvsp[(2) - (3)].string));
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2311,7 +2540,11 @@ yyreduce:
 	menu_add_prompt(P_COMMENT, (yyvsp[(2) - (3)].string), NULL);
 	printd(DEBUG_PARSE, "%s:%d:comment\n", zconf_curname(), zconf_lineno());
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2322,7 +2555,11 @@ yyreduce:
     {
 	menu_end_entry();
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2334,7 +2571,11 @@ yyreduce:
 	printd(DEBUG_PARSE, "%s:%d:help\n", zconf_curname(), zconf_lineno());
 	zconf_starthelp();
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2345,7 +2586,11 @@ yyreduce:
     {
 	current_entry->help = (yyvsp[(2) - (2)].string);
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2357,7 +2602,11 @@ yyreduce:
 	menu_add_dep((yyvsp[(3) - (4)].expr));
 	printd(DEBUG_PARSE, "%s:%d:depends on\n", zconf_curname(), zconf_lineno());
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2368,7 +2617,11 @@ yyreduce:
     {
 	menu_add_visibility((yyvsp[(2) - (2)].expr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2379,7 +2632,11 @@ yyreduce:
     {
 	menu_add_prompt(P_PROMPT, (yyvsp[(1) - (2)].string), (yyvsp[(2) - (2)].expr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;}
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -2388,7 +2645,11 @@ yyreduce:
   case 101:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.id) = (yyvsp[(1) - (2)].id); ;}
+=======
+    { (yyval.id) = (yyvsp[(1) - (2)].id); }
+>>>>>>> v3.18
 =======
     { (yyval.id) = (yyvsp[(1) - (2)].id); }
 >>>>>>> v3.18
@@ -2397,7 +2658,11 @@ yyreduce:
   case 102:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.id) = (yyvsp[(1) - (2)].id); ;}
+=======
+    { (yyval.id) = (yyvsp[(1) - (2)].id); }
+>>>>>>> v3.18
 =======
     { (yyval.id) = (yyvsp[(1) - (2)].id); }
 >>>>>>> v3.18
@@ -2406,7 +2671,11 @@ yyreduce:
   case 103:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.id) = (yyvsp[(1) - (2)].id); ;}
+=======
+    { (yyval.id) = (yyvsp[(1) - (2)].id); }
+>>>>>>> v3.18
 =======
     { (yyval.id) = (yyvsp[(1) - (2)].id); }
 >>>>>>> v3.18
@@ -2415,7 +2684,11 @@ yyreduce:
   case 106:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.expr) = NULL; ;}
+=======
+    { (yyval.expr) = NULL; }
+>>>>>>> v3.18
 =======
     { (yyval.expr) = NULL; }
 >>>>>>> v3.18
@@ -2424,7 +2697,11 @@ yyreduce:
   case 107:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.expr) = (yyvsp[(2) - (2)].expr); ;}
+=======
+    { (yyval.expr) = (yyvsp[(2) - (2)].expr); }
+>>>>>>> v3.18
 =======
     { (yyval.expr) = (yyvsp[(2) - (2)].expr); }
 >>>>>>> v3.18
@@ -2433,7 +2710,11 @@ yyreduce:
   case 108:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.expr) = expr_alloc_symbol((yyvsp[(1) - (1)].symbol)); ;}
+=======
+    { (yyval.expr) = expr_alloc_symbol((yyvsp[(1) - (1)].symbol)); }
+>>>>>>> v3.18
 =======
     { (yyval.expr) = expr_alloc_symbol((yyvsp[(1) - (1)].symbol)); }
 >>>>>>> v3.18
@@ -2442,7 +2723,11 @@ yyreduce:
   case 109:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.expr) = expr_alloc_comp(E_EQUAL, (yyvsp[(1) - (3)].symbol), (yyvsp[(3) - (3)].symbol)); ;}
+=======
+    { (yyval.expr) = expr_alloc_comp(E_EQUAL, (yyvsp[(1) - (3)].symbol), (yyvsp[(3) - (3)].symbol)); }
+>>>>>>> v3.18
 =======
     { (yyval.expr) = expr_alloc_comp(E_EQUAL, (yyvsp[(1) - (3)].symbol), (yyvsp[(3) - (3)].symbol)); }
 >>>>>>> v3.18
@@ -2451,7 +2736,11 @@ yyreduce:
   case 110:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.expr) = expr_alloc_comp(E_UNEQUAL, (yyvsp[(1) - (3)].symbol), (yyvsp[(3) - (3)].symbol)); ;}
+=======
+    { (yyval.expr) = expr_alloc_comp(E_UNEQUAL, (yyvsp[(1) - (3)].symbol), (yyvsp[(3) - (3)].symbol)); }
+>>>>>>> v3.18
 =======
     { (yyval.expr) = expr_alloc_comp(E_UNEQUAL, (yyvsp[(1) - (3)].symbol), (yyvsp[(3) - (3)].symbol)); }
 >>>>>>> v3.18
@@ -2460,7 +2749,11 @@ yyreduce:
   case 111:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.expr) = (yyvsp[(2) - (3)].expr); ;}
+=======
+    { (yyval.expr) = (yyvsp[(2) - (3)].expr); }
+>>>>>>> v3.18
 =======
     { (yyval.expr) = (yyvsp[(2) - (3)].expr); }
 >>>>>>> v3.18
@@ -2469,7 +2762,11 @@ yyreduce:
   case 112:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.expr) = expr_alloc_one(E_NOT, (yyvsp[(2) - (2)].expr)); ;}
+=======
+    { (yyval.expr) = expr_alloc_one(E_NOT, (yyvsp[(2) - (2)].expr)); }
+>>>>>>> v3.18
 =======
     { (yyval.expr) = expr_alloc_one(E_NOT, (yyvsp[(2) - (2)].expr)); }
 >>>>>>> v3.18
@@ -2478,7 +2775,11 @@ yyreduce:
   case 113:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.expr) = expr_alloc_two(E_OR, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); ;}
+=======
+    { (yyval.expr) = expr_alloc_two(E_OR, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); }
+>>>>>>> v3.18
 =======
     { (yyval.expr) = expr_alloc_two(E_OR, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); }
 >>>>>>> v3.18
@@ -2487,7 +2788,11 @@ yyreduce:
   case 114:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.expr) = expr_alloc_two(E_AND, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); ;}
+=======
+    { (yyval.expr) = expr_alloc_two(E_AND, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); }
+>>>>>>> v3.18
 =======
     { (yyval.expr) = expr_alloc_two(E_AND, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); }
 >>>>>>> v3.18
@@ -2496,7 +2801,11 @@ yyreduce:
   case 115:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.symbol) = sym_lookup((yyvsp[(1) - (1)].string), 0); free((yyvsp[(1) - (1)].string)); ;}
+=======
+    { (yyval.symbol) = sym_lookup((yyvsp[(1) - (1)].string), 0); free((yyvsp[(1) - (1)].string)); }
+>>>>>>> v3.18
 =======
     { (yyval.symbol) = sym_lookup((yyvsp[(1) - (1)].string), 0); free((yyvsp[(1) - (1)].string)); }
 >>>>>>> v3.18
@@ -2505,7 +2814,11 @@ yyreduce:
   case 116:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.symbol) = sym_lookup((yyvsp[(1) - (1)].string), SYMBOL_CONST); free((yyvsp[(1) - (1)].string)); ;}
+=======
+    { (yyval.symbol) = sym_lookup((yyvsp[(1) - (1)].string), SYMBOL_CONST); free((yyvsp[(1) - (1)].string)); }
+>>>>>>> v3.18
 =======
     { (yyval.symbol) = sym_lookup((yyvsp[(1) - (1)].string), SYMBOL_CONST); free((yyvsp[(1) - (1)].string)); }
 >>>>>>> v3.18
@@ -2514,7 +2827,11 @@ yyreduce:
   case 117:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     { (yyval.string) = NULL; ;}
+=======
+    { (yyval.string) = NULL; }
+>>>>>>> v3.18
 =======
     { (yyval.string) = NULL; }
 >>>>>>> v3.18
@@ -2525,7 +2842,10 @@ yyreduce:
       default: break;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   /* User semantic actions sometimes alter yychar, and that requires
      that yytoken be updated with the new translation.  We take the
      approach of translating immediately before every use of yytoken.
@@ -2537,6 +2857,9 @@ yyreduce:
      case of YYERROR or YYBACKUP, subsequent parser actions might lead
      to an incorrect destructor call or verbose syntax error message
      before the lookahead is translated.  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
 
@@ -2566,11 +2889,17 @@ yyreduce:
 `------------------------------------*/
 yyerrlab:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   /* Make sure we have latest lookahead translation.  See comments at
      user semantic actions for why this is necessary.  */
   yytoken = yychar == YYEMPTY ? YYEMPTY : YYTRANSLATE (yychar);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   /* If not already recovering from an error, report this error.  */
   if (!yyerrstatus)
@@ -2579,6 +2908,7 @@ yyerrlab:
 #if ! YYERROR_VERBOSE
       yyerror (YY_("syntax error"));
 #else
+<<<<<<< HEAD
 <<<<<<< HEAD
       {
 	YYSIZE_T yysize = yysyntax_error (0, yystate, yychar);
@@ -2612,6 +2942,8 @@ yyerrlab:
 	  }
       }
 =======
+=======
+>>>>>>> v3.18
 # define YYSYNTAX_ERROR yysyntax_error (&yymsg_alloc, &yymsg, \
                                         yyssp, yytoken)
       {
@@ -2642,6 +2974,9 @@ yyerrlab:
           goto yyexhaustedlab;
       }
 # undef YYSYNTAX_ERROR
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
     }
@@ -2702,7 +3037,11 @@ yyerrlab1:
     {
       yyn = yypact[yystate];
 <<<<<<< HEAD
+<<<<<<< HEAD
       if (yyn != YYPACT_NINF)
+=======
+      if (!yypact_value_is_default (yyn))
+>>>>>>> v3.18
 =======
       if (!yypact_value_is_default (yyn))
 >>>>>>> v3.18
@@ -2765,9 +3104,12 @@ yyexhaustedlab:
 yyreturn:
   if (yychar != YYEMPTY)
 <<<<<<< HEAD
+<<<<<<< HEAD
      yydestruct ("Cleanup: discarding lookahead",
 		 yytoken, &yylval);
 =======
+=======
+>>>>>>> v3.18
     {
       /* Make sure we have latest lookahead translation.  See comments at
          user semantic actions for why this is necessary.  */
@@ -2775,6 +3117,9 @@ yyreturn:
       yydestruct ("Cleanup: discarding lookahead",
                   yytoken, &yylval);
     }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   /* Do not reclaim the symbols of the rule which action triggered
      this YYABORT or YYACCEPT.  */
@@ -2812,9 +3157,12 @@ void conf_parse(const char *name)
 	sym_init();
 	_menu_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	modules_sym = sym_lookup(NULL, 0);
 	modules_sym->type = S_BOOLEAN;
 	modules_sym->flags |= SYMBOL_AUTO;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rootmenu.prompt = menu_add_prompt(P_MENU, "Linux Kernel Configuration", NULL);
@@ -2825,12 +3173,17 @@ void conf_parse(const char *name)
 	if (zconfnerrs)
 		exit(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!modules_sym->prop) {
 		struct property *prop;
 
 		prop = prop_alloc(P_DEFAULT, modules_sym);
 		prop->expr = expr_alloc_symbol(sym_lookup("MODULES", 0));
 	}
+=======
+	if (!modules_sym)
+		modules_sym = sym_find( "n" );
+>>>>>>> v3.18
 =======
 	if (!modules_sym)
 		modules_sym = sym_find( "n" );
@@ -2844,7 +3197,11 @@ void conf_parse(const char *name)
 		if (sym_check_deps(sym))
 			zconfnerrs++;
 <<<<<<< HEAD
+<<<<<<< HEAD
         }
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18

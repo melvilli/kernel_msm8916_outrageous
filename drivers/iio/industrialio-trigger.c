@@ -56,6 +56,7 @@ static struct attribute *iio_trig_dev_attrs[] = {
 	NULL,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct attribute_group iio_trig_attr_group = {
 	.attrs	= iio_trig_dev_attrs,
@@ -68,6 +69,9 @@ static const struct attribute_group *iio_trig_attr_groups[] = {
 =======
 ATTRIBUTE_GROUPS(iio_trig_dev);
 >>>>>>> v3.18
+=======
+ATTRIBUTE_GROUPS(iio_trig_dev);
+>>>>>>> v3.18
 
 int iio_trigger_register(struct iio_trigger *trig_info)
 {
@@ -75,10 +79,16 @@ int iio_trigger_register(struct iio_trigger *trig_info)
 
 	trig_info->id = ida_simple_get(&iio_trigger_ida, 0, 0, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (trig_info->id < 0) {
 		ret = trig_info->id;
 		goto error_ret;
 	}
+=======
+	if (trig_info->id < 0)
+		return trig_info->id;
+
+>>>>>>> v3.18
 =======
 	if (trig_info->id < 0)
 		return trig_info->id;
@@ -102,7 +112,10 @@ int iio_trigger_register(struct iio_trigger *trig_info)
 error_unregister_id:
 	ida_simple_remove(&iio_trigger_ida, trig_info->id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -118,7 +131,11 @@ void iio_trigger_unregister(struct iio_trigger *trig_info)
 	ida_simple_remove(&iio_trigger_ida, trig_info->id);
 	/* Possible issue in here */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_unregister(&trig_info->dev);
+=======
+	device_del(&trig_info->dev);
+>>>>>>> v3.18
 =======
 	device_del(&trig_info->dev);
 >>>>>>> v3.18
@@ -142,6 +159,7 @@ static struct iio_trigger *iio_trigger_find_by_name(const char *name,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void iio_trigger_poll(struct iio_trigger *trig, s64 time)
 {
 	int i;
@@ -152,6 +170,8 @@ void iio_trigger_poll(struct iio_trigger *trig, s64 time)
 				generic_handle_irq(trig->subirq_base + i);
 			}
 =======
+=======
+>>>>>>> v3.18
 void iio_trigger_poll(struct iio_trigger *trig)
 {
 	int i;
@@ -166,6 +186,9 @@ void iio_trigger_poll(struct iio_trigger *trig)
 				iio_trigger_notify_done(trig);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(iio_trigger_poll);
@@ -173,7 +196,11 @@ EXPORT_SYMBOL(iio_trigger_poll);
 irqreturn_t iio_trigger_generic_data_rdy_poll(int irq, void *private)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_trigger_poll(private, iio_get_time_ns());
+=======
+	iio_trigger_poll(private);
+>>>>>>> v3.18
 =======
 	iio_trigger_poll(private);
 >>>>>>> v3.18
@@ -181,6 +208,7 @@ irqreturn_t iio_trigger_generic_data_rdy_poll(int irq, void *private)
 }
 EXPORT_SYMBOL(iio_trigger_generic_data_rdy_poll);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void iio_trigger_poll_chained(struct iio_trigger *trig, s64 time)
 {
@@ -192,6 +220,8 @@ void iio_trigger_poll_chained(struct iio_trigger *trig, s64 time)
 				handle_nested_irq(trig->subirq_base + i);
 			}
 =======
+=======
+>>>>>>> v3.18
 void iio_trigger_poll_chained(struct iio_trigger *trig)
 {
 	int i;
@@ -206,6 +236,9 @@ void iio_trigger_poll_chained(struct iio_trigger *trig)
 				iio_trigger_notify_done(trig);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(iio_trigger_poll_chained);
@@ -213,17 +246,23 @@ EXPORT_SYMBOL(iio_trigger_poll_chained);
 void iio_trigger_notify_done(struct iio_trigger *trig)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trig->use_count--;
 	if (trig->use_count == 0 && trig->ops && trig->ops->try_reenable)
 		if (trig->ops->try_reenable(trig))
 			/* Missed an interrupt so launch new poll now */
 			iio_trigger_poll(trig, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (atomic_dec_and_test(&trig->use_count) && trig->ops &&
 		trig->ops->try_reenable)
 		if (trig->ops->try_reenable(trig))
 			/* Missed an interrupt so launch new poll now */
 			iio_trigger_poll(trig);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(iio_trigger_notify_done);
@@ -267,6 +306,7 @@ static int iio_trigger_attach_poll_func(struct iio_trigger *trig,
 	/* Prevent the module from being removed whilst attached to a trigger */
 	__module_get(pf->indio_dev->info->driver_module);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Get irq number */
 	pf->irq = iio_trigger_get_irq(trig);
@@ -297,6 +337,8 @@ out_put_module:
 	module_put(pf->indio_dev->info->driver_module);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	pf->irq = iio_trigger_get_irq(trig);
 	ret = request_threaded_irq(pf->irq, pf->h, pf->thread,
 				   pf->type, pf->name,
@@ -313,6 +355,9 @@ out_put_module:
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -328,7 +373,11 @@ static int iio_trigger_detach_poll_func(struct iio_trigger *trig,
 		ret = trig->ops->set_trigger_state(trig, false);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto error_ret;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -338,7 +387,10 @@ static int iio_trigger_detach_poll_func(struct iio_trigger *trig,
 	module_put(pf->indio_dev->info->driver_module);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -411,7 +463,11 @@ static ssize_t iio_trigger_read_current(struct device *dev,
  *
  * For trigger consumers the current_trigger interface allows the trigger
 <<<<<<< HEAD
+<<<<<<< HEAD
  * used for this device to be specified at run time based on the triggers
+=======
+ * used for this device to be specified at run time based on the trigger's
+>>>>>>> v3.18
 =======
  * used for this device to be specified at run time based on the trigger's
 >>>>>>> v3.18
@@ -453,7 +509,11 @@ static ssize_t iio_trigger_write_current(struct device *dev,
 	indio_dev->trig = trig;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (oldtrig && indio_dev->trig != oldtrig)
+=======
+	if (oldtrig)
+>>>>>>> v3.18
 =======
 	if (oldtrig)
 >>>>>>> v3.18
@@ -504,7 +564,11 @@ static void iio_trig_release(struct device *device)
 static struct device_type iio_trig_type = {
 	.release = iio_trig_release,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.groups = iio_trig_attr_groups,
+=======
+	.groups = iio_trig_dev_groups,
+>>>>>>> v3.18
 =======
 	.groups = iio_trig_dev_groups,
 >>>>>>> v3.18
@@ -529,9 +593,14 @@ static void iio_trig_subirqunmask(struct irq_data *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iio_trigger *iio_trigger_alloc(const char *fmt, ...)
 {
 	va_list vargs;
+=======
+static struct iio_trigger *viio_trigger_alloc(const char *fmt, va_list vargs)
+{
+>>>>>>> v3.18
 =======
 static struct iio_trigger *viio_trigger_alloc(const char *fmt, va_list vargs)
 {
@@ -554,9 +623,14 @@ static struct iio_trigger *viio_trigger_alloc(const char *fmt, va_list vargs)
 			return NULL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		va_start(vargs, fmt);
 		trig->name = kvasprintf(GFP_KERNEL, fmt, vargs);
 		va_end(vargs);
+=======
+
+		trig->name = kvasprintf(GFP_KERNEL, fmt, vargs);
+>>>>>>> v3.18
 =======
 
 		trig->name = kvasprintf(GFP_KERNEL, fmt, vargs);
@@ -582,7 +656,10 @@ static struct iio_trigger *viio_trigger_alloc(const char *fmt, va_list vargs)
 		get_device(&trig->dev);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	return trig;
 }
@@ -596,6 +673,9 @@ struct iio_trigger *iio_trigger_alloc(const char *fmt, ...)
 	trig = viio_trigger_alloc(fmt, vargs);
 	va_end(vargs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return trig;
 }
@@ -609,7 +689,10 @@ void iio_trigger_free(struct iio_trigger *trig)
 EXPORT_SYMBOL(iio_trigger_free);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void devm_iio_trigger_release(struct device *dev, void *res)
 {
 	iio_trigger_free(*(struct iio_trigger **)res);
@@ -687,6 +770,9 @@ void devm_iio_trigger_free(struct device *dev, struct iio_trigger *iio_trig)
 }
 EXPORT_SYMBOL_GPL(devm_iio_trigger_free);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void iio_device_register_trigger_consumer(struct iio_dev *indio_dev)
 {

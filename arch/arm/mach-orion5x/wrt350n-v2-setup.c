@@ -214,13 +214,19 @@ static void __init wrt350n_v2_init(void)
 	orion5x_uart0_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mvebu_mbus_add_window("devbus-boot", WRT350N_V2_NOR_BOOT_BASE,
 			      WRT350N_V2_NOR_BOOT_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	mvebu_mbus_add_window_by_id(ORION_MBUS_DEVBUS_BOOT_TARGET,
 				    ORION_MBUS_DEVBUS_BOOT_ATTR,
 				    WRT350N_V2_NOR_BOOT_BASE,
 				    WRT350N_V2_NOR_BOOT_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register(&wrt350n_v2_nor_flash);
 	platform_device_register(&wrt350n_v2_leds);

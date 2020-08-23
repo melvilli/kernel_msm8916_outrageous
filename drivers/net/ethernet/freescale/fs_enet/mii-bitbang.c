@@ -16,7 +16,10 @@
 #include <linux/ioport.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -26,6 +29,10 @@
 #include <linux/platform_device.h>
 #include <linux/mdio-bitbang.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -187,7 +194,11 @@ static int fs_enet_mdio_probe(struct platform_device *ofdev)
 
 	new_bus->parent = &ofdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, new_bus);
+=======
+	platform_set_drvdata(ofdev, new_bus);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, new_bus);
 >>>>>>> v3.18
@@ -200,7 +211,10 @@ static int fs_enet_mdio_probe(struct platform_device *ofdev)
 
 out_free_irqs:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(new_bus->irq);
@@ -217,16 +231,22 @@ out:
 static int fs_enet_mdio_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mii_bus *bus = dev_get_drvdata(&ofdev->dev);
 	struct bb_info *bitbang = bus->priv;
 
 	mdiobus_unregister(bus);
 	dev_set_drvdata(&ofdev->dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct mii_bus *bus = platform_get_drvdata(ofdev);
 	struct bb_info *bitbang = bus->priv;
 
 	mdiobus_unregister(bus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(bus->irq);
 	free_mdio_bitbang(bus);

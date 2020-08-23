@@ -14,7 +14,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "armada-xp.dtsi"
+=======
+#include "armada-xp.dtsi"
+>>>>>>> v3.18
 =======
 #include "armada-xp.dtsi"
 >>>>>>> v3.18
@@ -32,6 +36,10 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		enable-method = "marvell,armada-xp-smp";
+>>>>>>> v3.18
 =======
 		enable-method = "marvell,armada-xp-smp";
 >>>>>>> v3.18
@@ -42,6 +50,10 @@
 			reg = <0>;
 			clocks = <&cpuclk 0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clock-latency = <1000000>;
+>>>>>>> v3.18
 =======
 			clock-latency = <1000000>;
 >>>>>>> v3.18
@@ -53,6 +65,10 @@
 			reg = <1>;
 			clocks = <&cpuclk 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clock-latency = <1000000>;
+>>>>>>> v3.18
 =======
 			clock-latency = <1000000>;
 >>>>>>> v3.18
@@ -61,7 +77,10 @@
 
 	soc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * MV78230 has 2 PCIe units Gen2.0: One unit can be
 		 * configured as x4 or quad x1 lanes. One unit is
@@ -181,6 +200,9 @@
 			};
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		internal-regs {
 			pinctrl {
@@ -202,7 +224,11 @@
 				#gpio-cells = <2>;
 				interrupt-controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				#interrupts-cells = <2>;
+=======
+				#interrupt-cells = <2>;
+>>>>>>> v3.18
 =======
 				#interrupt-cells = <2>;
 >>>>>>> v3.18
@@ -216,6 +242,7 @@
 				gpio-controller;
 				#gpio-cells = <2>;
 				interrupt-controller;
+<<<<<<< HEAD
 <<<<<<< HEAD
 				#interrupts-cells = <2>;
 				interrupts = <87>, <88>, <89>;
@@ -324,6 +351,11 @@
 					status = "disabled";
 				};
 			};
+=======
+				#interrupt-cells = <2>;
+				interrupts = <87>, <88>, <89>;
+			};
+>>>>>>> v3.18
 =======
 				#interrupt-cells = <2>;
 				interrupts = <87>, <88>, <89>;

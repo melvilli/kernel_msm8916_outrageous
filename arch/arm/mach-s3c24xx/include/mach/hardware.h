@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* arch/arm/mach-s3c2410/include/mach/hardware.h
  *
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -22,6 +26,7 @@
 extern unsigned int s3c2410_modify_misccr(unsigned int clr, unsigned int chg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_S3C2440
 
 extern int s3c2440_set_dsc(unsigned int pin, unsigned int value);
@@ -30,17 +35,22 @@ extern int s3c2440_set_dsc(unsigned int pin, unsigned int value);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #endif /* __ASSEMBLY__ */
 
 #include <asm/sizes.h>
 #include <mach/map.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* machine specific hardware definitions should go after this */
 
 /* currently here until moved into config (todo) */
 #define CONFIG_NO_MULTIWORD_IO
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __ASM_ARCH_HARDWARE_H */

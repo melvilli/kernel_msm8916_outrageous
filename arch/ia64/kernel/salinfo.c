@@ -569,7 +569,11 @@ static const struct file_operations salinfo_data_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -614,7 +618,11 @@ salinfo_cpu_callback(struct notifier_block *nb, unsigned long action, void *hcpu
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block salinfo_cpu_notifier __cpuinitdata =
+=======
+static struct notifier_block salinfo_cpu_notifier =
+>>>>>>> v3.18
 =======
 static struct notifier_block salinfo_cpu_notifier =
 >>>>>>> v3.18
@@ -644,6 +652,11 @@ salinfo_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpu_notifier_register_begin();
+
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 
@@ -683,7 +696,13 @@ salinfo_init(void)
 	add_timer(&salinfo_timer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_hotcpu_notifier(&salinfo_cpu_notifier);
+=======
+	__register_hotcpu_notifier(&salinfo_cpu_notifier);
+
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__register_hotcpu_notifier(&salinfo_cpu_notifier);
 

@@ -121,23 +121,33 @@ static int ecryptfs_init_lower_file(struct dentry *dentry,
 {
 	const struct cred *cred = current_cred();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry *lower_dentry = ecryptfs_dentry_to_lower(dentry);
 	struct vfsmount *lower_mnt = ecryptfs_dentry_to_lower_mnt(dentry);
 	int rc;
 
 	rc = ecryptfs_privileged_open(lower_file, lower_dentry, lower_mnt,
 =======
+=======
+>>>>>>> v3.18
 	struct path *path = ecryptfs_dentry_to_lower_path(dentry);
 	int rc;
 
 	rc = ecryptfs_privileged_open(lower_file, path->dentry, path->mnt,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				      cred);
 	if (rc) {
 		printk(KERN_ERR "Error opening lower file "
 		       "for lower_dentry [0x%p] and lower_mnt [0x%p]; "
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       "rc = [%d]\n", lower_dentry, lower_mnt, rc);
+=======
+		       "rc = [%d]\n", path->dentry, path->mnt, rc);
+>>>>>>> v3.18
 =======
 		       "rc = [%d]\n", path->dentry, path->mnt, rc);
 >>>>>>> v3.18
@@ -506,7 +516,10 @@ static struct dentry *ecryptfs_mount(struct file_system_type *fs_type, int flags
 	struct super_block *s;
 	struct ecryptfs_sb_info *sbi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ecryptfs_mount_crypt_stat *mount_crypt_stat;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ecryptfs_dentry_info *root_info;
@@ -528,7 +541,10 @@ static struct dentry *ecryptfs_mount(struct file_system_type *fs_type, int flags
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mount_crypt_stat = &sbi->mount_crypt_stat;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -578,6 +594,7 @@ static struct dentry *ecryptfs_mount(struct file_system_type *fs_type, int flags
 	/**
 	 * Set the POSIX ACL flag based on whether they're enabled in the lower
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * mount.
 	 */
 	s->s_flags = flags & ~MS_POSIXACL;
@@ -592,11 +609,16 @@ static struct dentry *ecryptfs_mount(struct file_system_type *fs_type, int flags
 	    mount_crypt_stat->flags & ECRYPTFS_ENCRYPTED_VIEW_ENABLED)
 		s->s_flags |= MS_RDONLY;
 =======
+=======
+>>>>>>> v3.18
 	 * mount. Force a read-only eCryptfs mount if the lower mount is ro.
 	 * Allow a ro eCryptfs mount even when the lower mount is rw.
 	 */
 	s->s_flags = flags & ~MS_POSIXACL;
 	s->s_flags |= path.dentry->d_sb->s_flags & (MS_RDONLY | MS_POSIXACL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s->s_maxbytes = path.dentry->d_sb->s_maxbytes;
@@ -629,8 +651,12 @@ static struct dentry *ecryptfs_mount(struct file_system_type *fs_type, int flags
 	/* ->kill_sb() will take care of root_info */
 	ecryptfs_set_dentry_private(s->s_root, root_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ecryptfs_set_dentry_lower(s->s_root, path.dentry);
 	ecryptfs_set_dentry_lower_mnt(s->s_root, path.mnt);
+=======
+	root_info->lower_path = path;
+>>>>>>> v3.18
 =======
 	root_info->lower_path = path;
 >>>>>>> v3.18

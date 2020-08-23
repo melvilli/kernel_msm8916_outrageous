@@ -1,6 +1,7 @@
 Coherency fabric
 ----------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 Available on Marvell SOCs: Armada 370 and Armada XP
 
 Required properties:
@@ -13,6 +14,8 @@ Required properties:
 
 Example:
 =======
+=======
+>>>>>>> v3.18
 Available on Marvell SOCs: Armada 370, Armada 375, Armada 38x and Armada XP
 
 Required properties:
@@ -41,6 +44,9 @@ Required properties:
    for the per-CPU fabric registers.
 
 Examples:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 coherency-fabric@d0020200 {
@@ -51,10 +57,16 @@ coherency-fabric@d0020200 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 coherency-fabric@21810 {
 	compatible = "marvell,armada-375-coherency-fabric";
 	reg = <0x21810 0x1c>;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

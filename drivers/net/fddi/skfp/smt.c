@@ -901,7 +901,11 @@ static void smt_send_rdf(struct s_smc *smc, SMbuf *rej, int fc, int reason,
 
 	/* set P13 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((unsigned) frame_len <= SMT_MAX_INFO_LEN - sizeof(*rdf) +
+=======
+	if ((unsigned int) frame_len <= SMT_MAX_INFO_LEN - sizeof(*rdf) +
+>>>>>>> v3.18
 =======
 	if ((unsigned int) frame_len <= SMT_MAX_INFO_LEN - sizeof(*rdf) +
 >>>>>>> v3.18

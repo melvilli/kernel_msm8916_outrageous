@@ -716,7 +716,11 @@ __SYSCALL(324, sys_name_to_handle_at, 5)
 #define __NR_open_by_handle_at			325
 __SYSCALL(325, sys_open_by_handle_at, 3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __NR_sync_file_range2			326
+=======
+#define __NR_sync_file_range			326
+>>>>>>> v3.18
 =======
 #define __NR_sync_file_range			326
 >>>>>>> v3.18
@@ -740,8 +744,11 @@ __SYSCALL(332, sys_finit_module, 3)
 __SYSCALL(333, sys_accept4, 4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __NR_syscall_count			334
 =======
+=======
+>>>>>>> v3.18
 #define __NR_sched_setattr			334
 __SYSCALL(334, sys_sched_setattr, 2)
 #define __NR_sched_getattr			335
@@ -758,6 +765,9 @@ __SYSCALL(338, sys_getrandom, 3)
 __SYSCALL(339, sys_memfd_create, 2)
 
 #define __NR_syscall_count			340
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

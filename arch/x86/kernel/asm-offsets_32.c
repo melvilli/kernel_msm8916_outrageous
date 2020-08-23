@@ -29,7 +29,10 @@ void foo(void)
 	OFFSET(CPUINFO_x86_model, cpuinfo_x86, x86_model);
 	OFFSET(CPUINFO_x86_mask, cpuinfo_x86, x86_mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OFFSET(CPUINFO_hard_math, cpuinfo_x86, hard_math);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	OFFSET(CPUINFO_cpuid_level, cpuinfo_x86, cpuid_level);

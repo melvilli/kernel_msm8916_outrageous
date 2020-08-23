@@ -39,6 +39,10 @@
 #include "mac.h"
 #include "trx.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../rtl8192c/fw_common.h"
+>>>>>>> v3.18
 =======
 #include "../rtl8192c/fw_common.h"
 >>>>>>> v3.18
@@ -355,7 +359,10 @@ bool rtl92cu_rx_query_desc(struct ieee80211_hw *hw,
 	/*rx_status->qual = stats->signal; */
 	rx_status->signal = stats->recvsignalpower + 10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*rx_status->noise = -stats->noise; */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return true;
@@ -373,7 +380,10 @@ static void _rtl_rx_process(struct ieee80211_hw *hw, struct sk_buff *skb)
 	struct rtl_stats stats = {
 		.signal = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.noise = -98,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.rate = 0,
@@ -508,7 +518,11 @@ static void _rtl_tx_desc_checksum(u8 *txdesc)
 void rtl92cu_tx_fill_desc(struct ieee80211_hw *hw,
 			  struct ieee80211_hdr *hdr, u8 *pdesc_tx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct ieee80211_tx_info *info,
+=======
+			  u8 *pbd_desc_tx, struct ieee80211_tx_info *info,
+>>>>>>> v3.18
 =======
 			  u8 *pbd_desc_tx, struct ieee80211_tx_info *info,
 >>>>>>> v3.18

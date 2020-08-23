@@ -204,8 +204,13 @@ static void pnp_print_option(pnp_info_buffer_t * buffer, char *space,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pnp_show_options(struct device *dmdev,
 				struct device_attribute *attr, char *buf)
+=======
+static ssize_t options_show(struct device *dmdev, struct device_attribute *attr,
+			    char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t options_show(struct device *dmdev, struct device_attribute *attr,
 			    char *buf)
@@ -247,15 +252,21 @@ static ssize_t options_show(struct device *dmdev, struct device_attribute *attr,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t pnp_show_current_resources(struct device *dmdev,
 					  struct device_attribute *attr,
 					  char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(options);
 
 static ssize_t resources_show(struct device *dmdev,
 			      struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pnp_dev *dev = to_pnp_dev(dmdev);
@@ -344,9 +355,15 @@ static char *pnp_get_resource_value(char *buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pnp_set_current_resources(struct device *dmdev,
 					 struct device_attribute *attr,
 					 const char *ubuf, size_t count)
+=======
+static ssize_t resources_store(struct device *dmdev,
+			       struct device_attribute *attr, const char *ubuf,
+			       size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t resources_store(struct device *dmdev,
 			       struct device_attribute *attr, const char *ubuf,
@@ -365,6 +382,7 @@ static ssize_t resources_store(struct device *dmdev,
 
 	buf = skip_spaces(buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strnicmp(buf, "disable", 7)) {
 		retval = pnp_disable_dev(dev);
 		goto done;
@@ -375,6 +393,8 @@ static ssize_t resources_store(struct device *dmdev,
 	}
 	if (!strnicmp(buf, "fill", 4)) {
 =======
+=======
+>>>>>>> v3.18
 	if (!strncasecmp(buf, "disable", 7)) {
 		retval = pnp_disable_dev(dev);
 		goto done;
@@ -384,6 +404,9 @@ static ssize_t resources_store(struct device *dmdev,
 		goto done;
 	}
 	if (!strncasecmp(buf, "fill", 4)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (dev->active)
 			goto done;
@@ -391,7 +414,11 @@ static ssize_t resources_store(struct device *dmdev,
 		goto done;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strnicmp(buf, "auto", 4)) {
+=======
+	if (!strncasecmp(buf, "auto", 4)) {
+>>>>>>> v3.18
 =======
 	if (!strncasecmp(buf, "auto", 4)) {
 >>>>>>> v3.18
@@ -402,7 +429,11 @@ static ssize_t resources_store(struct device *dmdev,
 		goto done;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strnicmp(buf, "clear", 5)) {
+=======
+	if (!strncasecmp(buf, "clear", 5)) {
+>>>>>>> v3.18
 =======
 	if (!strncasecmp(buf, "clear", 5)) {
 >>>>>>> v3.18
@@ -412,7 +443,11 @@ static ssize_t resources_store(struct device *dmdev,
 		goto done;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strnicmp(buf, "get", 3)) {
+=======
+	if (!strncasecmp(buf, "get", 3)) {
+>>>>>>> v3.18
 =======
 	if (!strncasecmp(buf, "get", 3)) {
 >>>>>>> v3.18
@@ -423,7 +458,11 @@ static ssize_t resources_store(struct device *dmdev,
 		goto done;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strnicmp(buf, "set", 3)) {
+=======
+	if (!strncasecmp(buf, "set", 3)) {
+>>>>>>> v3.18
 =======
 	if (!strncasecmp(buf, "set", 3)) {
 >>>>>>> v3.18
@@ -439,7 +478,11 @@ static ssize_t resources_store(struct device *dmdev,
 		while (1) {
 			buf = skip_spaces(buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!strnicmp(buf, "io", 2)) {
+=======
+			if (!strncasecmp(buf, "io", 2)) {
+>>>>>>> v3.18
 =======
 			if (!strncasecmp(buf, "io", 2)) {
 >>>>>>> v3.18
@@ -449,7 +492,11 @@ static ssize_t resources_store(struct device *dmdev,
 							     &flags);
 				pnp_add_io_resource(dev, start, end, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else if (!strnicmp(buf, "mem", 3)) {
+=======
+			} else if (!strncasecmp(buf, "mem", 3)) {
+>>>>>>> v3.18
 =======
 			} else if (!strncasecmp(buf, "mem", 3)) {
 >>>>>>> v3.18
@@ -459,7 +506,11 @@ static ssize_t resources_store(struct device *dmdev,
 							     &flags);
 				pnp_add_mem_resource(dev, start, end, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else if (!strnicmp(buf, "irq", 3)) {
+=======
+			} else if (!strncasecmp(buf, "irq", 3)) {
+>>>>>>> v3.18
 =======
 			} else if (!strncasecmp(buf, "irq", 3)) {
 >>>>>>> v3.18
@@ -469,7 +520,11 @@ static ssize_t resources_store(struct device *dmdev,
 							     &flags);
 				pnp_add_irq_resource(dev, start, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else if (!strnicmp(buf, "dma", 3)) {
+=======
+			} else if (!strncasecmp(buf, "dma", 3)) {
+>>>>>>> v3.18
 =======
 			} else if (!strncasecmp(buf, "dma", 3)) {
 >>>>>>> v3.18
@@ -479,7 +534,11 @@ static ssize_t resources_store(struct device *dmdev,
 							     &flags);
 				pnp_add_dma_resource(dev, start, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else if (!strnicmp(buf, "bus", 3)) {
+=======
+			} else if (!strncasecmp(buf, "bus", 3)) {
+>>>>>>> v3.18
 =======
 			} else if (!strncasecmp(buf, "bus", 3)) {
 >>>>>>> v3.18
@@ -501,14 +560,20 @@ done:
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t pnp_show_current_ids(struct device *dmdev,
 				    struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RW(resources);
 
 static ssize_t id_show(struct device *dmdev, struct device_attribute *attr,
 		       char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	char *str = buf;
@@ -522,6 +587,7 @@ static ssize_t id_show(struct device *dmdev, struct device_attribute *attr,
 	return (str - buf);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct device_attribute pnp_interface_attrs[] = {
 	__ATTR(resources, S_IRUGO | S_IWUSR,
@@ -531,6 +597,8 @@ struct device_attribute pnp_interface_attrs[] = {
 	__ATTR(id, S_IRUGO, pnp_show_current_ids, NULL),
 	__ATTR_NULL,
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(id);
 
 static struct attribute *pnp_dev_attrs[] = {
@@ -547,5 +615,8 @@ static const struct attribute_group pnp_dev_group = {
 const struct attribute_group *pnp_dev_groups[] = {
 	&pnp_dev_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

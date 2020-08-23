@@ -53,7 +53,11 @@
 static inline u32 omap2_cm_read_mod_reg(s16 module, u16 idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(cm_base + module + idx);
+=======
+	return readl_relaxed(cm_base + module + idx);
+>>>>>>> v3.18
 =======
 	return readl_relaxed(cm_base + module + idx);
 >>>>>>> v3.18
@@ -62,7 +66,11 @@ static inline u32 omap2_cm_read_mod_reg(s16 module, u16 idx)
 static inline void omap2_cm_write_mod_reg(u32 val, s16 module, u16 idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, cm_base + module + idx);
+=======
+	writel_relaxed(val, cm_base + module + idx);
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, cm_base + module + idx);
 >>>>>>> v3.18

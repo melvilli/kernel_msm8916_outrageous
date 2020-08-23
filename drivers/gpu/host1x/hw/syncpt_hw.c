@@ -19,8 +19,13 @@
 #include <linux/io.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dev.h"
 #include "syncpt.h"
+=======
+#include "../dev.h"
+#include "../syncpt.h"
+>>>>>>> v3.18
 =======
 #include "../dev.h"
 #include "../syncpt.h"
@@ -83,7 +88,11 @@ static u32 syncpt_load(struct host1x_syncpt *sp)
  * the cache.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void syncpt_cpu_incr(struct host1x_syncpt *sp)
+=======
+static int syncpt_cpu_incr(struct host1x_syncpt *sp)
+>>>>>>> v3.18
 =======
 static int syncpt_cpu_incr(struct host1x_syncpt *sp)
 >>>>>>> v3.18
@@ -92,6 +101,7 @@ static int syncpt_cpu_incr(struct host1x_syncpt *sp)
 	u32 reg_offset = sp->id / 32;
 
 	if (!host1x_syncpt_client_managed(sp) &&
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    host1x_syncpt_idle(sp)) {
 		dev_err(host->dev, "Trying to increment syncpoint id %d beyond max\n",
@@ -103,6 +113,8 @@ static int syncpt_cpu_incr(struct host1x_syncpt *sp)
 			   HOST1X_SYNC_SYNCPT_CPU_INCR(reg_offset));
 	wmb();
 =======
+=======
+>>>>>>> v3.18
 	    host1x_syncpt_idle(sp))
 		return -EINVAL;
 	host1x_sync_writel(host, BIT_MASK(sp->id),
@@ -110,6 +122,9 @@ static int syncpt_cpu_incr(struct host1x_syncpt *sp)
 	wmb();
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

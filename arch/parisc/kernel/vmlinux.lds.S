@@ -7,6 +7,7 @@
  *    Copyright (C) 2002 Randolph Chung <tausq with parisc-linux.org>
  *    Copyright (C) 2003 James Bottomley <jejb with parisc-linux.org>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    Copyright (C) 2006 Helge Deller <deller@gmx.de>
  *
  *
@@ -26,6 +27,8 @@
  */
 #include <asm-generic/vmlinux.lds.h>
 =======
+=======
+>>>>>>> v3.18
  *    Copyright (C) 2006-2013 Helge Deller <deller@gmx.de>
  */
 
@@ -39,6 +42,9 @@
 
 #include <asm-generic/vmlinux.lds.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* needed for the processor specific cache alignment size */	
 #include <asm/cache.h>
@@ -56,7 +62,11 @@ OUTPUT_ARCH(hppa:hppa2.0w)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENTRY(_stext)
+=======
+ENTRY(parisc_kernel_start)
+>>>>>>> v3.18
 =======
 ENTRY(parisc_kernel_start)
 >>>>>>> v3.18
@@ -70,12 +80,15 @@ SECTIONS
 	. = KERNEL_BINARY_TEXT_START;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_text = .;		/* Text and read-only data */
 	.head ALIGN(16) : {
 		HEAD_TEXT
 	} = 0
 	.text ALIGN(16) : {
 =======
+=======
+>>>>>>> v3.18
 	__init_begin = .;
 	HEAD_TEXT_SECTION
 	INIT_TEXT_SECTION(8)
@@ -99,6 +112,9 @@ SECTIONS
 	_text = .;		/* Text and read-only data */
 	_stext = .;
 	.text ALIGN(PAGE_SIZE) : {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		TEXT_TEXT
 		SCHED_TEXT
@@ -115,8 +131,14 @@ SECTIONS
 		*(.gnu.warning)
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* End of text section */
 	_etext = .;
+=======
+	. = ALIGN(PAGE_SIZE);
+	_etext = .;
+	/* End of text section */
+>>>>>>> v3.18
 =======
 	. = ALIGN(PAGE_SIZE);
 	_etext = .;
@@ -126,6 +148,7 @@ SECTIONS
 	/* Start of data section */
 	_sdata = .;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	RODATA
 
@@ -137,6 +160,8 @@ SECTIONS
 	. = ALIGN(PAGE_SIZE);
 	data_start = .;
 =======
+=======
+>>>>>>> v3.18
 	RO_DATA_SECTION(8)
 
 #ifdef CONFIG_64BIT
@@ -152,6 +177,9 @@ SECTIONS
 		*(.dlt)
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* unwind info */
@@ -162,8 +190,11 @@ SECTIONS
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXCEPTION_TABLE(16)
 =======
+=======
+>>>>>>> v3.18
 	/* writeable */
 	/* Make sure this is page aligned so
 	 * that we can properly leave these
@@ -173,6 +204,9 @@ SECTIONS
 	data_start = .;
 
 	EXCEPTION_TABLE(8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NOTES
 
@@ -189,6 +223,7 @@ SECTIONS
 	_edata = .;
 
 	/* BSS */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__bss_start = .;
 	/* page table entries need to be PAGE_SIZE aligned */
@@ -238,6 +273,10 @@ SECTIONS
 	. = ALIGN(PAGE_SIZE);
 	__init_end = .;
 	/* freed after init ends here */
+=======
+	BSS_SECTION(PAGE_SIZE, PAGE_SIZE, 8)
+
+>>>>>>> v3.18
 =======
 	BSS_SECTION(PAGE_SIZE, PAGE_SIZE, 8)
 

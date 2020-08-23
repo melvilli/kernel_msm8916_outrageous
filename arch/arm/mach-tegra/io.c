@@ -19,6 +19,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/init.h>
@@ -28,6 +29,8 @@
 #include <asm/page.h>
 #include <asm/mach/map.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/io.h>
 #include <linux/kernel.h>
@@ -36,6 +39,9 @@
 
 #include <asm/mach/map.h>
 #include <asm/page.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "board.h"

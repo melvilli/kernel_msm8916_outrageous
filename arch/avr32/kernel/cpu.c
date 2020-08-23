@@ -40,17 +40,23 @@ static ssize_t store_pc0event(struct device *dev,
 {
 	unsigned long val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endp;
 
 	val = simple_strtoul(buf, &endp, 0);
 	if (endp == buf || val > 0x3f)
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &val);
 	if (ret)
 		return ret;
 	if (val > 0x3f)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	val = (val << 12) | (sysreg_read(PCCR) & 0xfffc0fff);
@@ -71,17 +77,23 @@ static ssize_t store_pc0count(struct device *dev,
 {
 	unsigned long val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endp;
 
 	val = simple_strtoul(buf, &endp, 0);
 	if (endp == buf)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &val);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sysreg_write(PCNT0, val);
 
@@ -102,17 +114,23 @@ static ssize_t store_pc1event(struct device *dev,
 {
 	unsigned long val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endp;
 
 	val = simple_strtoul(buf, &endp, 0);
 	if (endp == buf || val > 0x3f)
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &val);
 	if (ret)
 		return ret;
 	if (val > 0x3f)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	val = (val << 18) | (sysreg_read(PCCR) & 0xff03ffff);
@@ -133,17 +151,23 @@ static ssize_t store_pc1count(struct device *dev,
 {
 	unsigned long val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endp;
 
 	val = simple_strtoul(buf, &endp, 0);
 	if (endp == buf)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &val);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sysreg_write(PCNT1, val);
 
@@ -164,17 +188,23 @@ static ssize_t store_pccycles(struct device *dev,
 {
 	unsigned long val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endp;
 
 	val = simple_strtoul(buf, &endp, 0);
 	if (endp == buf)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &val);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sysreg_write(PCCNT, val);
 
@@ -195,17 +225,23 @@ static ssize_t store_pcenable(struct device *dev,
 {
 	unsigned long pccr, val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endp;
 
 	val = simple_strtoul(buf, &endp, 0);
 	if (endp == buf)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtoul(buf, 0, &val);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (val)
 		val = 1;

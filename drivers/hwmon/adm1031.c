@@ -5,7 +5,11 @@
  * Supports adm1030 / adm1031
  * Copyright (C) 2004 Alexandre d'Alton <alex@alexdalton.org>
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Reworked by Jean Delvare <khali@linux-fr.org>
+=======
+ * Reworked by Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Reworked by Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -79,7 +83,12 @@ typedef u8 auto_chan_table_t[8][2];
 /* Each client has this additional data */
 struct adm1031_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+	const struct attribute_group *groups[3];
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 	const struct attribute_group *groups[3];
@@ -115,6 +124,7 @@ struct adm1031_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adm1031_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id);
 static int adm1031_detect(struct i2c_client *client,
@@ -145,6 +155,8 @@ static struct i2c_driver adm1031_driver = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline u8 adm1031_read_value(struct i2c_client *client, u8 reg)
 {
 	return i2c_smbus_read_byte_data(client, reg);
@@ -157,7 +169,10 @@ adm1031_write_value(struct i2c_client *client, u8 reg, unsigned int value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct adm1031_data *adm1031_update_device(struct device *dev)
 {
 	struct adm1031_data *data = dev_get_drvdata(dev);
@@ -248,6 +263,9 @@ static struct adm1031_data *adm1031_update_device(struct device *dev)
 
 	return data;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define TEMP_TO_REG(val)		(((val) < 0 ? ((val - 500) / 1000) : \
@@ -386,8 +404,13 @@ set_fan_auto_channel(struct device *dev, struct device_attribute *attr,
 		     const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1031_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1031_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1031_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -466,8 +489,13 @@ set_auto_temp_min(struct device *dev, struct device_attribute *attr,
 		  const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1031_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1031_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1031_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -501,8 +529,13 @@ set_auto_temp_max(struct device *dev, struct device_attribute *attr,
 		  const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1031_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1031_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1031_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -549,8 +582,13 @@ static ssize_t set_pwm(struct device *dev, struct device_attribute *attr,
 		       const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1031_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1031_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1031_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -667,8 +705,13 @@ static ssize_t set_fan_min(struct device *dev, struct device_attribute *attr,
 			   const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1031_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1031_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1031_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -696,8 +739,13 @@ static ssize_t set_fan_div(struct device *dev, struct device_attribute *attr,
 			   const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1031_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1031_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1031_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -803,8 +851,13 @@ static ssize_t set_temp_offset(struct device *dev,
 			       size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1031_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1031_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1031_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -829,8 +882,13 @@ static ssize_t set_temp_min(struct device *dev, struct device_attribute *attr,
 			    const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1031_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1031_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1031_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -855,8 +913,13 @@ static ssize_t set_temp_max(struct device *dev, struct device_attribute *attr,
 			    const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1031_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1031_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1031_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -881,8 +944,13 @@ static ssize_t set_temp_crit(struct device *dev, struct device_attribute *attr,
 			     const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1031_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1031_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1031_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -963,8 +1031,12 @@ static ssize_t show_update_interval(struct device *dev,
 				    struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1031_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1031_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct adm1031_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -977,8 +1049,13 @@ static ssize_t set_update_interval(struct device *dev,
 				   const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct adm1031_data *data = i2c_get_clientdata(client);
+=======
+	struct adm1031_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct adm1031_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1115,6 +1192,7 @@ static int adm1031_detect(struct i2c_client *client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adm1031_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
@@ -1175,6 +1253,8 @@ static int adm1031_remove(struct i2c_client *client)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void adm1031_init_client(struct i2c_client *client)
 {
 	unsigned int read_val;
@@ -1206,6 +1286,7 @@ static void adm1031_init_client(struct i2c_client *client)
 	data->update_interval = update_intervals[i];
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct adm1031_data *adm1031_update_device(struct device *dev)
 {
@@ -1298,6 +1379,8 @@ static struct adm1031_data *adm1031_update_device(struct device *dev)
 	return data;
 }
 =======
+=======
+>>>>>>> v3.18
 static int adm1031_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
@@ -1349,6 +1432,9 @@ static struct i2c_driver adm1031_driver = {
 	.detect		= adm1031_detect,
 	.address_list	= normal_i2c,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 module_i2c_driver(adm1031_driver);

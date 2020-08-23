@@ -66,7 +66,11 @@ static const char *tv_format_names[] = {
 
 struct psb_intel_sdvo {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder base;
+=======
+	struct gma_encoder base;
+>>>>>>> v3.18
 =======
 	struct gma_encoder base;
 >>>>>>> v3.18
@@ -145,7 +149,11 @@ struct psb_intel_sdvo {
 
 struct psb_intel_sdvo_connector {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_connector base;
+=======
+	struct gma_connector base;
+>>>>>>> v3.18
 =======
 	struct gma_connector base;
 >>>>>>> v3.18
@@ -209,7 +217,11 @@ static struct psb_intel_sdvo *to_psb_intel_sdvo(struct drm_encoder *encoder)
 static struct psb_intel_sdvo *intel_attached_sdvo(struct drm_connector *connector)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return container_of(psb_intel_attached_encoder(connector),
+=======
+	return container_of(gma_attached_encoder(connector),
+>>>>>>> v3.18
 =======
 	return container_of(gma_attached_encoder(connector),
 >>>>>>> v3.18
@@ -219,7 +231,11 @@ static struct psb_intel_sdvo *intel_attached_sdvo(struct drm_connector *connecto
 static struct psb_intel_sdvo_connector *to_psb_intel_sdvo_connector(struct drm_connector *connector)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return container_of(to_psb_intel_connector(connector), struct psb_intel_sdvo_connector, base);
+=======
+	return container_of(to_gma_connector(connector), struct psb_intel_sdvo_connector, base);
+>>>>>>> v3.18
 =======
 	return container_of(to_gma_connector(connector), struct psb_intel_sdvo_connector, base);
 >>>>>>> v3.18
@@ -245,6 +261,7 @@ static void psb_intel_sdvo_write_sdvox(struct psb_intel_sdvo *psb_intel_sdvo, u3
 	struct drm_device *dev = psb_intel_sdvo->base.base.dev;
 	u32 bval = val, cval = val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 
 	if (psb_intel_sdvo->sdvo_reg == SDVOB) {
@@ -264,6 +281,8 @@ static void psb_intel_sdvo_write_sdvox(struct psb_intel_sdvo *psb_intel_sdvo, u3
 		REG_WRITE(SDVOC, cval);
 		REG_READ(SDVOC);
 =======
+=======
+>>>>>>> v3.18
 	int i, j;
 	int need_aux = IS_MRST(dev) ? 1 : 0;
 
@@ -284,6 +303,9 @@ static void psb_intel_sdvo_write_sdvox(struct psb_intel_sdvo *psb_intel_sdvo, u3
 			REG_WRITE_WITH_AUX(SDVOC, cval, j);
 			REG_READ_WITH_AUX(SDVOC, j);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -444,6 +466,7 @@ static void psb_intel_sdvo_debug_write(struct psb_intel_sdvo *psb_intel_sdvo, u8
 				SDVO_NAME(psb_intel_sdvo), cmd);
 	for (i = 0; i < args_len; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_LOG_KMS("%02X ", ((u8 *)args)[i]);
 	for (; i < 8; i++)
 		DRM_LOG_KMS("   ");
@@ -451,20 +474,30 @@ static void psb_intel_sdvo_debug_write(struct psb_intel_sdvo *psb_intel_sdvo, u8
 		if (cmd == sdvo_cmd_names[i].cmd) {
 			DRM_LOG_KMS("(%s)", sdvo_cmd_names[i].name);
 =======
+=======
+>>>>>>> v3.18
 		DRM_DEBUG_KMS("%02X ", ((u8 *)args)[i]);
 	for (; i < 8; i++)
 		DRM_DEBUG_KMS("   ");
 	for (i = 0; i < ARRAY_SIZE(sdvo_cmd_names); i++) {
 		if (cmd == sdvo_cmd_names[i].cmd) {
 			DRM_DEBUG_KMS("(%s)", sdvo_cmd_names[i].name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
 	}
 	if (i == ARRAY_SIZE(sdvo_cmd_names))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_LOG_KMS("(%02X)", cmd);
 	DRM_LOG_KMS("\n");
+=======
+		DRM_DEBUG_KMS("(%02X)", cmd);
+	DRM_DEBUG_KMS("\n");
+>>>>>>> v3.18
 =======
 		DRM_DEBUG_KMS("(%02X)", cmd);
 	DRM_DEBUG_KMS("\n");
@@ -554,7 +587,12 @@ static bool psb_intel_sdvo_read_response(struct psb_intel_sdvo *psb_intel_sdvo,
 		goto log_fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (status == SDVO_CMD_STATUS_PENDING && retry--) {
+=======
+	while ((status == SDVO_CMD_STATUS_PENDING ||
+		status == SDVO_CMD_STATUS_TARGET_NOT_SPECIFIED) && retry--) {
+>>>>>>> v3.18
 =======
 	while ((status == SDVO_CMD_STATUS_PENDING ||
 		status == SDVO_CMD_STATUS_TARGET_NOT_SPECIFIED) && retry--) {
@@ -568,9 +606,15 @@ static bool psb_intel_sdvo_read_response(struct psb_intel_sdvo *psb_intel_sdvo,
 
 	if (status <= SDVO_CMD_STATUS_SCALING_NOT_SUPP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_LOG_KMS("(%s)", cmd_status_names[status]);
 	else
 		DRM_LOG_KMS("(??? %d)", status);
+=======
+		DRM_DEBUG_KMS("(%s)", cmd_status_names[status]);
+	else
+		DRM_DEBUG_KMS("(??? %d)", status);
+>>>>>>> v3.18
 =======
 		DRM_DEBUG_KMS("(%s)", cmd_status_names[status]);
 	else
@@ -587,6 +631,7 @@ static bool psb_intel_sdvo_read_response(struct psb_intel_sdvo *psb_intel_sdvo,
 					  &((u8 *)response)[i]))
 			goto log_fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_LOG_KMS(" %02X", ((u8 *)response)[i]);
 	}
 	DRM_LOG_KMS("\n");
@@ -595,6 +640,8 @@ static bool psb_intel_sdvo_read_response(struct psb_intel_sdvo *psb_intel_sdvo,
 log_fail:
 	DRM_LOG_KMS("... failed\n");
 =======
+=======
+>>>>>>> v3.18
 		DRM_DEBUG_KMS(" %02X", ((u8 *)response)[i]);
 	}
 	DRM_DEBUG_KMS("\n");
@@ -602,6 +649,9 @@ log_fail:
 
 log_fail:
 	DRM_DEBUG_KMS("... failed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return false;
 }
@@ -1062,7 +1112,11 @@ static void psb_intel_sdvo_mode_set(struct drm_encoder *encoder,
 	struct drm_device *dev = encoder->dev;
 	struct drm_crtc *crtc = encoder->crtc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
+=======
+	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
+>>>>>>> v3.18
 =======
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 >>>>>>> v3.18
@@ -1073,6 +1127,10 @@ static void psb_intel_sdvo_mode_set(struct drm_encoder *encoder,
 	int pixel_multiplier = psb_intel_mode_get_pixel_multiplier(adjusted_mode);
 	int rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int need_aux = IS_MRST(dev) ? 1 : 0;
+>>>>>>> v3.18
 =======
 	int need_aux = IS_MRST(dev) ? 1 : 0;
 >>>>>>> v3.18
@@ -1142,13 +1200,19 @@ static void psb_intel_sdvo_mode_set(struct drm_encoder *encoder,
 
 	/* Set the SDVO control regs. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sdvox = REG_READ(psb_intel_sdvo->sdvo_reg);
 =======
+=======
+>>>>>>> v3.18
 	if (need_aux)
 		sdvox = REG_READ_AUX(psb_intel_sdvo->sdvo_reg);
 	else
 		sdvox = REG_READ(psb_intel_sdvo->sdvo_reg);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (psb_intel_sdvo->sdvo_reg) {
 	case SDVOB:
@@ -1161,7 +1225,11 @@ static void psb_intel_sdvo_mode_set(struct drm_encoder *encoder,
 	sdvox |= (9 << 19) | SDVO_BORDER_ENABLE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (psb_intel_crtc->pipe == 1)
+=======
+	if (gma_crtc->pipe == 1)
+>>>>>>> v3.18
 =======
 	if (gma_crtc->pipe == 1)
 >>>>>>> v3.18
@@ -1184,6 +1252,11 @@ static void psb_intel_sdvo_dpms(struct drm_encoder *encoder, int mode)
 	struct psb_intel_sdvo *psb_intel_sdvo = to_psb_intel_sdvo(encoder);
 	u32 temp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int i;
+	int need_aux = IS_MRST(dev) ? 1 : 0;
+>>>>>>> v3.18
 =======
 	int i;
 	int need_aux = IS_MRST(dev) ? 1 : 0;
@@ -1207,13 +1280,19 @@ static void psb_intel_sdvo_dpms(struct drm_encoder *encoder, int mode)
 
 		if (mode == DRM_MODE_DPMS_OFF) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			temp = REG_READ(psb_intel_sdvo->sdvo_reg);
 =======
+=======
+>>>>>>> v3.18
 			if (need_aux)
 				temp = REG_READ_AUX(psb_intel_sdvo->sdvo_reg);
 			else
 				temp = REG_READ(psb_intel_sdvo->sdvo_reg);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if ((temp & SDVO_ENABLE) != 0) {
 				psb_intel_sdvo_write_sdvox(psb_intel_sdvo, temp & ~SDVO_ENABLE);
@@ -1221,6 +1300,7 @@ static void psb_intel_sdvo_dpms(struct drm_encoder *encoder, int mode)
 		}
 	} else {
 		bool input1, input2;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		int i;
 		u8 status;
@@ -1231,6 +1311,8 @@ static void psb_intel_sdvo_dpms(struct drm_encoder *encoder, int mode)
 		for (i = 0; i < 2; i++)
 			psb_intel_wait_for_vblank(dev);
 =======
+=======
+>>>>>>> v3.18
 		u8 status;
 
 		if (need_aux)
@@ -1243,6 +1325,9 @@ static void psb_intel_sdvo_dpms(struct drm_encoder *encoder, int mode)
 
 		for (i = 0; i < 2; i++)
 			gma_wait_for_vblank(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		status = psb_intel_sdvo_get_trained_inputs(psb_intel_sdvo, &input1, &input2);
@@ -1787,7 +1872,11 @@ static void psb_intel_sdvo_destroy(struct drm_connector *connector)
 
 	psb_intel_sdvo_destroy_enhance_property(connector);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_remove(connector);
+=======
+	drm_connector_unregister(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_unregister(connector);
 >>>>>>> v3.18
@@ -1953,7 +2042,11 @@ done:
 		struct drm_crtc *crtc = psb_intel_sdvo->base.base.crtc;
 		drm_crtc_helper_set_mode(crtc, &crtc->mode, crtc->x,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 crtc->y, crtc->fb);
+=======
+					 crtc->y, crtc->primary->fb);
+>>>>>>> v3.18
 =======
 					 crtc->y, crtc->primary->fb);
 >>>>>>> v3.18
@@ -1967,10 +2060,15 @@ static void psb_intel_sdvo_save(struct drm_connector *connector)
 {
 	struct drm_device *dev = connector->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder =
 					psb_intel_attached_encoder(connector);
 	struct psb_intel_sdvo *sdvo =
 				to_psb_intel_sdvo(&psb_intel_encoder->base);
+=======
+	struct gma_encoder *gma_encoder = gma_attached_encoder(connector);
+	struct psb_intel_sdvo *sdvo = to_psb_intel_sdvo(&gma_encoder->base);
+>>>>>>> v3.18
 =======
 	struct gma_encoder *gma_encoder = gma_attached_encoder(connector);
 	struct psb_intel_sdvo *sdvo = to_psb_intel_sdvo(&gma_encoder->base);
@@ -1983,8 +2081,12 @@ static void psb_intel_sdvo_restore(struct drm_connector *connector)
 {
 	struct drm_device *dev = connector->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_encoder *encoder =
 				&psb_intel_attached_encoder(connector)->base;
+=======
+	struct drm_encoder *encoder = &gma_attached_encoder(connector)->base;
+>>>>>>> v3.18
 =======
 	struct drm_encoder *encoder = &gma_attached_encoder(connector)->base;
 >>>>>>> v3.18
@@ -2004,9 +2106,15 @@ static const struct drm_encoder_helper_funcs psb_intel_sdvo_helper_funcs = {
 	.dpms = psb_intel_sdvo_dpms,
 	.mode_fixup = psb_intel_sdvo_mode_fixup,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.prepare = psb_intel_encoder_prepare,
 	.mode_set = psb_intel_sdvo_mode_set,
 	.commit = psb_intel_encoder_commit,
+=======
+	.prepare = gma_encoder_prepare,
+	.mode_set = psb_intel_sdvo_mode_set,
+	.commit = gma_encoder_commit,
+>>>>>>> v3.18
 =======
 	.prepare = gma_encoder_prepare,
 	.mode_set = psb_intel_sdvo_mode_set,
@@ -2028,7 +2136,11 @@ static const struct drm_connector_helper_funcs psb_intel_sdvo_connector_helper_f
 	.get_modes = psb_intel_sdvo_get_modes,
 	.mode_valid = psb_intel_sdvo_mode_valid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.best_encoder = psb_intel_best_encoder,
+=======
+	.best_encoder = gma_best_encoder,
+>>>>>>> v3.18
 =======
 	.best_encoder = gma_best_encoder,
 >>>>>>> v3.18
@@ -2044,7 +2156,11 @@ static void psb_intel_sdvo_enc_destroy(struct drm_encoder *encoder)
 
 	i2c_del_adapter(&psb_intel_sdvo->ddc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_encoder_destroy(encoder);
+=======
+	gma_encoder_destroy(encoder);
+>>>>>>> v3.18
 =======
 	gma_encoder_destroy(encoder);
 >>>>>>> v3.18
@@ -2209,8 +2325,13 @@ psb_intel_sdvo_connector_init(struct psb_intel_sdvo_connector *connector,
 	connector->base.base.display_info.subpixel_order = SubPixelHorizontalRGB;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_connector_attach_encoder(&connector->base, &encoder->base);
 	drm_sysfs_connector_add(&connector->base.base);
+=======
+	gma_connector_attach_encoder(&connector->base, &encoder->base);
+	drm_connector_register(&connector->base.base);
+>>>>>>> v3.18
 =======
 	gma_connector_attach_encoder(&connector->base, &encoder->base);
 	drm_connector_register(&connector->base.base);
@@ -2234,7 +2355,11 @@ psb_intel_sdvo_dvi_init(struct psb_intel_sdvo *psb_intel_sdvo, int device)
 	struct drm_encoder *encoder = &psb_intel_sdvo->base.base;
 	struct drm_connector *connector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_connector *intel_connector;
+=======
+	struct gma_connector *intel_connector;
+>>>>>>> v3.18
 =======
 	struct gma_connector *intel_connector;
 >>>>>>> v3.18
@@ -2278,7 +2403,11 @@ psb_intel_sdvo_tv_init(struct psb_intel_sdvo *psb_intel_sdvo, int type)
 	struct drm_encoder *encoder = &psb_intel_sdvo->base.base;
 	struct drm_connector *connector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_connector *intel_connector;
+=======
+	struct gma_connector *intel_connector;
+>>>>>>> v3.18
 =======
 	struct gma_connector *intel_connector;
 >>>>>>> v3.18
@@ -2321,7 +2450,11 @@ psb_intel_sdvo_analog_init(struct psb_intel_sdvo *psb_intel_sdvo, int device)
 	struct drm_encoder *encoder = &psb_intel_sdvo->base.base;
 	struct drm_connector *connector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_connector *intel_connector;
+=======
+	struct gma_connector *intel_connector;
+>>>>>>> v3.18
 =======
 	struct gma_connector *intel_connector;
 >>>>>>> v3.18
@@ -2359,7 +2492,11 @@ psb_intel_sdvo_lvds_init(struct psb_intel_sdvo *psb_intel_sdvo, int device)
 	struct drm_encoder *encoder = &psb_intel_sdvo->base.base;
 	struct drm_connector *connector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_connector *intel_connector;
+=======
+	struct gma_connector *intel_connector;
+>>>>>>> v3.18
 =======
 	struct gma_connector *intel_connector;
 >>>>>>> v3.18
@@ -2715,7 +2852,11 @@ bool psb_intel_sdvo_init(struct drm_device *dev, int sdvo_reg)
 {
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder;
+=======
+	struct gma_encoder *gma_encoder;
+>>>>>>> v3.18
 =======
 	struct gma_encoder *gma_encoder;
 >>>>>>> v3.18
@@ -2736,9 +2877,15 @@ bool psb_intel_sdvo_init(struct drm_device *dev, int sdvo_reg)
 
 	/* encoder type will be decided later */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_encoder = &psb_intel_sdvo->base;
 	psb_intel_encoder->type = INTEL_OUTPUT_SDVO;
 	drm_encoder_init(dev, &psb_intel_encoder->base, &psb_intel_sdvo_enc_funcs, 0);
+=======
+	gma_encoder = &psb_intel_sdvo->base;
+	gma_encoder->type = INTEL_OUTPUT_SDVO;
+	drm_encoder_init(dev, &gma_encoder->base, &psb_intel_sdvo_enc_funcs, 0);
+>>>>>>> v3.18
 =======
 	gma_encoder = &psb_intel_sdvo->base;
 	gma_encoder->type = INTEL_OUTPUT_SDVO;
@@ -2762,7 +2909,11 @@ bool psb_intel_sdvo_init(struct drm_device *dev, int sdvo_reg)
 		dev_priv->hotplug_supported_mask |= SDVOC_HOTPLUG_INT_STATUS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_encoder_helper_add(&psb_intel_encoder->base, &psb_intel_sdvo_helper_funcs);
+=======
+	drm_encoder_helper_add(&gma_encoder->base, &psb_intel_sdvo_helper_funcs);
+>>>>>>> v3.18
 =======
 	drm_encoder_helper_add(&gma_encoder->base, &psb_intel_sdvo_helper_funcs);
 >>>>>>> v3.18
@@ -2809,7 +2960,11 @@ bool psb_intel_sdvo_init(struct drm_device *dev, int sdvo_reg)
 
 err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_encoder_cleanup(&psb_intel_encoder->base);
+=======
+	drm_encoder_cleanup(&gma_encoder->base);
+>>>>>>> v3.18
 =======
 	drm_encoder_cleanup(&gma_encoder->base);
 >>>>>>> v3.18

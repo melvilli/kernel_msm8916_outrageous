@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -53,7 +57,10 @@
 ACPI_MODULE_NAME("utalloc")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if !defined (USE_NATIVE_ALLOCATE_ZEROED)
 /*******************************************************************************
  *
@@ -87,6 +94,9 @@ void *acpi_os_allocate_zeroed(acpi_size size)
 
 #endif				/* !USE_NATIVE_ALLOCATE_ZEROED */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*******************************************************************************
  *
@@ -100,6 +110,10 @@ void *acpi_os_allocate_zeroed(acpi_size size)
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -220,15 +234,21 @@ acpi_status acpi_ut_delete_caches(void)
 	/* Free memory lists */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_FREE(acpi_gbl_global_list);
 	acpi_gbl_global_list = NULL;
 
 	ACPI_FREE(acpi_gbl_ns_node_list);
 =======
+=======
+>>>>>>> v3.18
 	acpi_os_free(acpi_gbl_global_list);
 	acpi_gbl_global_list = NULL;
 
 	acpi_os_free(acpi_gbl_ns_node_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	acpi_gbl_ns_node_list = NULL;
 #endif
@@ -320,10 +340,13 @@ acpi_ut_initialize_buffer(struct acpi_buffer * buffer,
 
 	case ACPI_ALLOCATE_BUFFER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* Allocate a new buffer */
 
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Allocate a new buffer. We directectly call acpi_os_allocate here to
 		 * purposefully bypass the (optionally enabled) internal allocation
@@ -331,6 +354,9 @@ acpi_ut_initialize_buffer(struct acpi_buffer * buffer,
 		 * allocations. Note: The caller should use acpi_os_free to free this
 		 * buffer created via ACPI_ALLOCATE_BUFFER.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		buffer->pointer = acpi_os_allocate(required_length);
 		break;
@@ -363,6 +389,7 @@ acpi_ut_initialize_buffer(struct acpi_buffer * buffer,
 	ACPI_MEMSET(buffer->pointer, 0, required_length);
 	return (AE_OK);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #ifdef NOT_USED_BY_LINUX
@@ -443,5 +470,7 @@ void *acpi_ut_allocate_zeroed(acpi_size size,
 	return (allocation);
 }
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

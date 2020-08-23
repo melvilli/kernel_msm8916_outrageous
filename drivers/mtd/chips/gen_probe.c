@@ -115,7 +115,10 @@ static struct cfi_private *genprobe_ident_chips(struct map_info *map, struct chi
 	chip_map = kzalloc(mapsize, GFP_KERNEL);
 	if (!chip_map) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: kmalloc failed for CFI chip map\n", map->name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kfree(cfi.cfiq);
@@ -143,7 +146,10 @@ static struct cfi_private *genprobe_ident_chips(struct map_info *map, struct chi
 
 	if (!retcfi) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: kmalloc failed for CFI private structure\n", map->name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kfree(cfi.cfiq);
@@ -218,9 +224,13 @@ static inline struct mtd_info *cfi_cmdset_unknown(struct map_info *map,
 	probe_function = __symbol_get(probename);
 	if (!probe_function) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char modname[sizeof("cfi_cmdset_%4.4X")];
 		sprintf(modname, "cfi_cmdset_%4.4X", type);
 		request_module(modname);
+=======
+		request_module("cfi_cmdset_%4.4X", type);
+>>>>>>> v3.18
 =======
 		request_module("cfi_cmdset_%4.4X", type);
 >>>>>>> v3.18

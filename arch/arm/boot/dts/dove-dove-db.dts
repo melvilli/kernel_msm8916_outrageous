@@ -1,7 +1,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "dove.dtsi"
+=======
+#include "dove.dtsi"
+>>>>>>> v3.18
 =======
 #include "dove.dtsi"
 >>>>>>> v3.18

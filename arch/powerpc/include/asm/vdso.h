@@ -5,17 +5,23 @@
 
 /* Default link addresses for the vDSOs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VDSO32_LBASE	0x100000
 #define VDSO64_LBASE	0x100000
 
 /* Default map addresses for 32bit vDSO */
 #define VDSO32_MBASE	VDSO32_LBASE
 =======
+=======
+>>>>>>> v3.18
 #define VDSO32_LBASE	0x0
 #define VDSO64_LBASE	0x0
 
 /* Default map addresses for 32bit vDSO */
 #define VDSO32_MBASE	0x100000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define VDSO_VERSION_STRING	LINUX_2.6.15
@@ -31,7 +37,11 @@ extern unsigned long vdso32_sigtramp;
 extern unsigned long vdso32_rt_sigtramp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit vdso_getcpu_init(void);
+=======
+int vdso_getcpu_init(void);
+>>>>>>> v3.18
 =======
 int vdso_getcpu_init(void);
 >>>>>>> v3.18

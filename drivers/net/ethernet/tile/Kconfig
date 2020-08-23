@@ -10,6 +10,10 @@ config TILE_NET
 	select TILE_GXIO_MPIPE if TILEGX
 	select HIGH_RES_TIMERS if TILEGX
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select PTP_1588_CLOCK if TILEGX
+>>>>>>> v3.18
 =======
 	select PTP_1588_CLOCK if TILEGX
 >>>>>>> v3.18

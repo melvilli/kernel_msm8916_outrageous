@@ -15,7 +15,10 @@
 
 #include <linux/oprofile.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/smp.h>
@@ -50,13 +53,19 @@ static inline u32 get_pmlca(int ctr)
 			pmlca = mfpmr(PMRN_PMLCA3);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 4:
 			pmlca = mfpmr(PMRN_PMLCA4);
 			break;
 		case 5:
 			pmlca = mfpmr(PMRN_PMLCA5);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			panic("Bad ctr number\n");
@@ -81,13 +90,19 @@ static inline void set_pmlca(int ctr, u32 pmlca)
 			mtpmr(PMRN_PMLCA3, pmlca);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 4:
 			mtpmr(PMRN_PMLCA4, pmlca);
 			break;
 		case 5:
 			mtpmr(PMRN_PMLCA5, pmlca);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			panic("Bad ctr number\n");
@@ -106,11 +121,17 @@ static inline unsigned int ctr_read(unsigned int i)
 		case 3:
 			return mfpmr(PMRN_PMC3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 4:
 			return mfpmr(PMRN_PMC4);
 		case 5:
 			return mfpmr(PMRN_PMC5);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			return 0;
@@ -133,13 +154,19 @@ static inline void ctr_write(unsigned int i, unsigned int val)
 			mtpmr(PMRN_PMC3, val);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 4:
 			mtpmr(PMRN_PMC4, val);
 			break;
 		case 5:
 			mtpmr(PMRN_PMC5, val);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			break;
@@ -171,7 +198,10 @@ static void init_pmc_stop(int ctr)
 			mtpmr(PMRN_PMLCB3, pmlcb);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 4:
 			mtpmr(PMRN_PMLCA4, pmlca);
 			mtpmr(PMRN_PMLCB4, pmlcb);
@@ -180,6 +210,9 @@ static void init_pmc_stop(int ctr)
 			mtpmr(PMRN_PMLCA5, pmlca);
 			mtpmr(PMRN_PMLCB5, pmlcb);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			panic("Bad ctr number!\n");

@@ -316,7 +316,11 @@ vmci_transport_handle_wrote(struct sock *sk,
 	PKT_FIELD(vsk, sent_waiting_read) = false;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk->sk_data_ready(sk, 0);
+=======
+	sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 	sk->sk_data_ready(sk);
 >>>>>>> v3.18

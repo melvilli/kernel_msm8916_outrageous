@@ -63,7 +63,10 @@ static struct target_fabric_tpg_attrib_attribute _fabric##_tpg_attrib_##_name = 
 	_fabric##_tpg_attrib_store_##_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 CONFIGFS_EATTR_STRUCT(target_fabric_tpg_auth, se_portal_group);
 #define TF_TPG_AUTH_ATTR(_fabric, _name, _mode) 			\
 static struct target_fabric_tpg_auth_attribute _fabric##_tpg_auth_##_name = \
@@ -75,6 +78,9 @@ static struct target_fabric_tpg_auth_attribute _fabric##_tpg_auth_##_name = \
 static struct target_fabric_tpg_auth_attribute _fabric##_tpg_auth_##_name = \
 	__CONFIGFS_EATTR_RO(_name,					\
 	_fabric##_tpg_auth_show_##_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 CONFIGFS_EATTR_STRUCT(target_fabric_tpg_param, se_portal_group);

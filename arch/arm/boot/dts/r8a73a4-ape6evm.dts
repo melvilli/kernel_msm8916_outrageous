@@ -10,7 +10,12 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "r8a73a4.dtsi"
+=======
+#include "r8a73a4.dtsi"
+#include <dt-bindings/interrupt-controller/irq.h>
+>>>>>>> v3.18
 =======
 #include "r8a73a4.dtsi"
 #include <dt-bindings/interrupt-controller/irq.h>
@@ -22,7 +27,11 @@
 
 	chosen {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bootargs = "console=ttySC0,115200 ignore_loglevel root=/dev/nfs ip=dhcp";
+=======
+		bootargs = "console=ttySC0,115200 ignore_loglevel root=/dev/nfs ip=dhcp rw";
+>>>>>>> v3.18
 =======
 		bootargs = "console=ttySC0,115200 ignore_loglevel root=/dev/nfs ip=dhcp rw";
 >>>>>>> v3.18
@@ -34,12 +43,18 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	memory@200000000 {
 		device_type = "memory";
 		reg = <2 0x00000000 0 0x40000000>;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ape6evm_fixed_3v3: fixedregulator@0 {
 		compatible = "regulator-fixed";
@@ -58,7 +73,11 @@
 			reg = <0x08000000 0x1000>;
 			interrupt-parent = <&irqc1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <8 0x4>;
+=======
+			interrupts = <8 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <8 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -72,7 +91,10 @@
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &i2c5 {
 	status = "okay";
@@ -96,4 +118,7 @@
 	>;
 	voltage-tolerance = <1>; /* 1% */
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

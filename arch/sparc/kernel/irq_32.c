@@ -18,6 +18,10 @@
 #include <asm/cacheflush.h>
 #include <asm/cpudata.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18

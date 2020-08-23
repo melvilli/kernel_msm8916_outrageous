@@ -31,7 +31,10 @@ void pcibios_resource_survey(void);
 /* pci-vdk.c */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __nongpreldata pcibios_last_bus;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct pci_ops *__nongpreldata pci_root_ops;

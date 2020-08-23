@@ -130,6 +130,7 @@ static int __hw_perf_event_init(struct perf_event *event)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * All of the on-chip counters are "limited", in that they have
 	 * no interrupts, and are therefore unable to do sampling without
 	 * further work and timer assistance.
@@ -138,6 +139,8 @@ static int __hw_perf_event_init(struct perf_event *event)
 		return -EINVAL;
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * See if we need to reserve the counter.
@@ -231,7 +234,11 @@ again:
 static void sh_pmu_stop(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -253,7 +260,11 @@ static void sh_pmu_stop(struct perf_event *event, int flags)
 static void sh_pmu_start(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -274,7 +285,11 @@ static void sh_pmu_start(struct perf_event *event, int flags)
 static void sh_pmu_del(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -288,7 +303,11 @@ static void sh_pmu_del(struct perf_event *event, int flags)
 static int sh_pmu_add(struct perf_event *event, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -387,7 +406,11 @@ static void sh_pmu_setup(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -408,7 +431,11 @@ sh_pmu_notifier(struct notifier_block *self, unsigned long action, void *hcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit register_sh_pmu(struct sh_pmu *_pmu)
+=======
+int register_sh_pmu(struct sh_pmu *_pmu)
+>>>>>>> v3.18
 =======
 int register_sh_pmu(struct sh_pmu *_pmu)
 >>>>>>> v3.18
@@ -420,7 +447,10 @@ int register_sh_pmu(struct sh_pmu *_pmu)
 	pr_info("Performance Events: %s support registered\n", _pmu->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * All of the on-chip counters are "limited", in that they have
 	 * no interrupts, and are therefore unable to do sampling without
@@ -428,6 +458,9 @@ int register_sh_pmu(struct sh_pmu *_pmu)
 	 */
 	pmu.capabilities |= PERF_PMU_CAP_NO_INTERRUPT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	WARN_ON(_pmu->num_events > MAX_HWEVENTS);
 

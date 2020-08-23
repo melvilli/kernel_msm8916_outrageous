@@ -25,6 +25,11 @@ Optional properties:
 - no_bd_ram		: Must be 0 or 1
 - dual_emac		: Specifies Switch to act as Dual EMAC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- syscon		: Phandle to the system control device node, which is
+			  the control module device of the am33x
+>>>>>>> v3.18
 =======
 - syscon		: Phandle to the system control device node, which is
 			  the control module device of the am33x
@@ -34,16 +39,22 @@ Slave Properties:
 Required properties:
 - phy_id		: Specifies slave phy id
 <<<<<<< HEAD
+<<<<<<< HEAD
 - mac-address		: Specifies slave MAC address
 
 Optional properties:
 - dual_emac_res_vlan	: Specifies VID to be used to segregate the ports
 =======
+=======
+>>>>>>> v3.18
 - phy-mode		: See ethernet.txt file in the same directory
 
 Optional properties:
 - dual_emac_res_vlan	: Specifies VID to be used to segregate the ports
 - mac-address		: See ethernet.txt file in the same directory
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Note: "ti,hwmods" field is used to fetch the base address and irq
@@ -70,13 +81,19 @@ Examples:
 		cpts_clock_mult = <0x80000000>;
 		cpts_clock_shift = <29>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpsw_emac0: slave@0 {
 			phy_id = <&davinci_mdio>, <0>;
 =======
+=======
+>>>>>>> v3.18
 		syscon = <&cm>;
 		cpsw_emac0: slave@0 {
 			phy_id = <&davinci_mdio>, <0>;
 			phy-mode = "rgmii-txid";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* Filled in by U-Boot */
 			mac-address = [ 00 00 00 00 00 00 ];
@@ -84,6 +101,10 @@ Examples:
 		cpsw_emac1: slave@1 {
 			phy_id = <&davinci_mdio>, <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			phy-mode = "rgmii-txid";
+>>>>>>> v3.18
 =======
 			phy-mode = "rgmii-txid";
 >>>>>>> v3.18
@@ -107,13 +128,19 @@ Examples:
 		cpts_clock_mult = <0x80000000>;
 		cpts_clock_shift = <29>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpsw_emac0: slave@0 {
 			phy_id = <&davinci_mdio>, <0>;
 =======
+=======
+>>>>>>> v3.18
 		syscon = <&cm>;
 		cpsw_emac0: slave@0 {
 			phy_id = <&davinci_mdio>, <0>;
 			phy-mode = "rgmii-txid";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* Filled in by U-Boot */
 			mac-address = [ 00 00 00 00 00 00 ];
@@ -121,6 +148,10 @@ Examples:
 		cpsw_emac1: slave@1 {
 			phy_id = <&davinci_mdio>, <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			phy-mode = "rgmii-txid";
+>>>>>>> v3.18
 =======
 			phy-mode = "rgmii-txid";
 >>>>>>> v3.18

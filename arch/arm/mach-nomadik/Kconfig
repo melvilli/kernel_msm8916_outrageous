@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_NOMADIK
+=======
+menuconfig ARCH_NOMADIK
+>>>>>>> v3.18
 =======
 menuconfig ARCH_NOMADIK
 >>>>>>> v3.18
@@ -11,9 +15,13 @@ menuconfig ARCH_NOMADIK
 	select CLKSRC_NOMADIK_MTU
 	select CLKSRC_NOMADIK_MTU_SCHED_CLOCK
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select COMMON_CLK
 	select CPU_ARM926T
 	select GENERIC_CLOCKEVENTS
+=======
+	select CPU_ARM926T
+>>>>>>> v3.18
 =======
 	select CPU_ARM926T
 >>>>>>> v3.18
@@ -22,8 +30,11 @@ menuconfig ARCH_NOMADIK
 	select PINCTRL_NOMADIK
 	select PINCTRL_STN8815
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SPARSE_IRQ
 	select USE_OF
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -31,7 +42,10 @@ menuconfig ARCH_NOMADIK
 
 if ARCH_NOMADIK
 <<<<<<< HEAD
+<<<<<<< HEAD
 menu "Nomadik boards"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -41,8 +55,13 @@ config MACH_NOMADIK_8815NHK
 	select I2C
 	select I2C_ALGOBIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 endmenu
+=======
+	select I2C_NOMADIK
+
+>>>>>>> v3.18
 =======
 	select I2C_NOMADIK
 

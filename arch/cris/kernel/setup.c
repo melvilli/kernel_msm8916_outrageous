@@ -166,6 +166,10 @@ void __init setup_arch(char **cmdline_p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PROC_FS
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PROC_FS
 >>>>>>> v3.18
@@ -193,6 +197,10 @@ const struct seq_operations cpuinfo_op = {
 	.show  = show_cpuinfo,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_PROC_FS */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PROC_FS */
 >>>>>>> v3.18

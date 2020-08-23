@@ -90,8 +90,13 @@ extern void rpm_sysfs_remove(struct device *dev);
 extern int wakeup_sysfs_add(struct device *dev);
 extern void wakeup_sysfs_remove(struct device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int pm_qos_sysfs_add_latency(struct device *dev);
 extern void pm_qos_sysfs_remove_latency(struct device *dev);
+=======
+extern int pm_qos_sysfs_add_resume_latency(struct device *dev);
+extern void pm_qos_sysfs_remove_resume_latency(struct device *dev);
+>>>>>>> v3.18
 =======
 extern int pm_qos_sysfs_add_resume_latency(struct device *dev);
 extern void pm_qos_sysfs_remove_resume_latency(struct device *dev);

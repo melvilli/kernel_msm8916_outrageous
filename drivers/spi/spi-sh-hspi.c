@@ -47,8 +47,11 @@
 #define RXFL	(1 << 2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define hspi2info(h)	(h->dev->platform_data)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct hspi_priv {
@@ -103,6 +106,7 @@ static int hspi_status_check_timeout(struct hspi_priv *hspi, u32 mask, u32 val)
  *		spi master function
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hspi_prepare_transfer(struct spi_master *master)
 {
 	struct hspi_priv *hspi = spi_master_get_devdata(master);
@@ -120,6 +124,8 @@ static int hspi_unprepare_transfer(struct spi_master *master)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 #define hspi_hw_cs_enable(hspi)		hspi_hw_cs_ctrl(hspi, 0)
 #define hspi_hw_cs_disable(hspi)	hspi_hw_cs_ctrl(hspi, 1)
@@ -135,6 +141,7 @@ static void hspi_hw_setup(struct hspi_priv *hspi,
 	struct spi_device *spi = msg->spi;
 	struct device *dev = hspi->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 target_rate;
 	u32 spcr, idiv_clk;
 	u32 rate, best_rate, min, tmp;
@@ -143,6 +150,11 @@ static void hspi_hw_setup(struct hspi_priv *hspi,
 	if (!target_rate)
 		target_rate = spi->max_speed_hz;
 
+=======
+	u32 spcr, idiv_clk;
+	u32 rate, best_rate, min, tmp;
+
+>>>>>>> v3.18
 =======
 	u32 spcr, idiv_clk;
 	u32 rate, best_rate, min, tmp;
@@ -165,15 +177,21 @@ static void hspi_hw_setup(struct hspi_priv *hspi,
 
 		/* CLKCx calculation */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rate /= (((idiv_clk & 0x1F) + 1) * 2) ;
 
 		/* save best settings */
 		tmp = abs(target_rate - rate);
 =======
+=======
+>>>>>>> v3.18
 		rate /= (((idiv_clk & 0x1F) + 1) * 2);
 
 		/* save best settings */
 		tmp = abs(t->speed_hz - rate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (tmp < min) {
 			min = tmp;
@@ -188,7 +206,11 @@ static void hspi_hw_setup(struct hspi_priv *hspi,
 		spcr |= 1 << 6;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(dev, "speed %d/%d\n", target_rate, best_rate);
+=======
+	dev_dbg(dev, "speed %d/%d\n", t->speed_hz, best_rate);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "speed %d/%d\n", t->speed_hz, best_rate);
 >>>>>>> v3.18
@@ -236,7 +258,11 @@ static int hspi_transfer_one_message(struct spi_master *master,
 			hspi_write(hspi, SPTBR, tx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* wait recive */
+=======
+			/* wait receive */
+>>>>>>> v3.18
 =======
 			/* wait receive */
 >>>>>>> v3.18
@@ -273,6 +299,7 @@ static int hspi_transfer_one_message(struct spi_master *master,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hspi_setup(struct spi_device *spi)
 {
 	struct hspi_priv *hspi = spi_master_get_devdata(spi->master);
@@ -298,6 +325,8 @@ static void hspi_cleanup(struct spi_device *spi)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int hspi_probe(struct platform_device *pdev)
 {
 	struct resource *res;
@@ -320,9 +349,15 @@ static int hspi_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk = clk_get(NULL, "shyway_clk");
 	if (IS_ERR(clk)) {
 		dev_err(&pdev->dev, "shyway_clk is required\n");
+=======
+	clk = clk_get(&pdev->dev, NULL);
+	if (IS_ERR(clk)) {
+		dev_err(&pdev->dev, "couldn't get clock\n");
+>>>>>>> v3.18
 =======
 	clk = clk_get(&pdev->dev, NULL);
 	if (IS_ERR(clk)) {
@@ -334,7 +369,11 @@ static int hspi_probe(struct platform_device *pdev)
 
 	hspi = spi_master_get_devdata(master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, hspi);
+=======
+	platform_set_drvdata(pdev, hspi);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, hspi);
 >>>>>>> v3.18
@@ -351,6 +390,7 @@ static int hspi_probe(struct platform_device *pdev)
 		goto error1;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	master->num_chipselect	= 1;
 	master->bus_num		= pdev->id;
@@ -373,6 +413,8 @@ static int hspi_probe(struct platform_device *pdev)
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	pm_runtime_enable(&pdev->dev);
 
 	master->bus_num		= pdev->id;
@@ -392,6 +434,9 @@ static int hspi_probe(struct platform_device *pdev)
 
  error2:
 	pm_runtime_disable(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  error1:
 	clk_put(clk);
@@ -404,7 +449,11 @@ static int hspi_probe(struct platform_device *pdev)
 static int hspi_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hspi_priv *hspi = dev_get_drvdata(&pdev->dev);
+=======
+	struct hspi_priv *hspi = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct hspi_priv *hspi = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -413,7 +462,10 @@ static int hspi_remove(struct platform_device *pdev)
 
 	clk_put(hspi->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_unregister_master(hspi->master);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -421,13 +473,19 @@ static int hspi_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id hspi_of_match[] = {
 	{ .compatible = "renesas,hspi", },
 	{ /* sentinel */ }
 };
 MODULE_DEVICE_TABLE(of, hspi_of_match);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver hspi_driver = {
 	.probe = hspi_probe,
@@ -436,6 +494,10 @@ static struct platform_driver hspi_driver = {
 		.name = "sh-hspi",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = hspi_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = hspi_of_match,
 >>>>>>> v3.18
@@ -447,7 +509,11 @@ MODULE_DESCRIPTION("SuperH HSPI bus driver");
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS("platform:sh_spi");
+=======
+MODULE_ALIAS("platform:sh-hspi");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("platform:sh-hspi");
 >>>>>>> v3.18

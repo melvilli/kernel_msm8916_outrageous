@@ -19,6 +19,7 @@
 #define	__XFS_MOUNT_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct xfs_trans_reservations {
 	uint	tr_write;	/* extent alloc trans */
 	uint	tr_itruncate;	/* truncate trans */
@@ -61,6 +62,9 @@ typedef struct xfs_trans_reservations {
 =======
 #ifdef __KERNEL__
 >>>>>>> v3.18
+=======
+#ifdef __KERNEL__
+>>>>>>> v3.18
 
 struct xlog;
 struct xfs_inode;
@@ -69,6 +73,11 @@ struct xfs_nameops;
 struct xfs_ail;
 struct xfs_quotainfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct xfs_dir_ops;
+struct xfs_da_geometry;
+>>>>>>> v3.18
 =======
 struct xfs_dir_ops;
 struct xfs_da_geometry;
@@ -143,6 +152,11 @@ typedef struct xfs_mount {
 	uint			m_writeio_log;	/* min write size log bytes */
 	uint			m_writeio_blocks; /* min write size blocks */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct xfs_da_geometry	*m_dir_geo;	/* directory block geometry */
+	struct xfs_da_geometry	*m_attr_geo;	/* attribute block geometry */
+>>>>>>> v3.18
 =======
 	struct xfs_da_geometry	*m_dir_geo;	/* directory block geometry */
 	struct xfs_da_geometry	*m_attr_geo;	/* attribute block geometry */
@@ -164,7 +178,11 @@ typedef struct xfs_mount {
 	__uint8_t		m_agno_log;	/* log #ag's */
 	__uint8_t		m_agino_log;	/* #bits for agino in inum */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__uint16_t		m_inode_cluster_size;/* min inode buf size */
+=======
+	uint			m_inode_cluster_size;/* min inode buf size */
+>>>>>>> v3.18
 =======
 	uint			m_inode_cluster_size;/* min inode buf size */
 >>>>>>> v3.18
@@ -187,8 +205,11 @@ typedef struct xfs_mount {
 	uint			m_dmevmask;	/* DMI events for this FS */
 	__uint64_t		m_flags;	/* global mount flags */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint			m_dir_node_ents; /* #entries in a dir danode */
 	uint			m_attr_node_ents; /* #entries in attr danode */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int			m_ialloc_inos;	/* inodes in inode allocation */
@@ -196,7 +217,11 @@ typedef struct xfs_mount {
 	int			m_inoalign_mask;/* mask sb_inoalignmt if used */
 	uint			m_qflags;	/* quota status flags */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_trans_reservations_t m_reservations;/* precomputed res values */
+=======
+	struct xfs_trans_resv	m_resv;		/* precomputed res values */
+>>>>>>> v3.18
 =======
 	struct xfs_trans_resv	m_resv;		/* precomputed res values */
 >>>>>>> v3.18
@@ -207,6 +232,7 @@ typedef struct xfs_mount {
 	int			m_dalign;	/* stripe unit */
 	int			m_swidth;	/* stripe width */
 	int			m_sinoalign;	/* stripe unit inode alignment */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int			m_attr_magicpct;/* 37% of the blocksize */
 	int			m_dir_magicpct;	/* 37% of the dir blocksize */
@@ -221,11 +247,16 @@ typedef struct xfs_mount {
 	struct xfs_chash	*m_chash;	/* fs private inode per-cluster
 						 * hash table */
 =======
+=======
+>>>>>>> v3.18
 	__uint8_t		m_sectbb_log;	/* sectlog - BBSHIFT */
 	const struct xfs_nameops *m_dirnameops;	/* vector of dir name ops */
 	const struct xfs_dir_ops *m_dir_inode_ops; /* vector of dir inode ops */
 	const struct xfs_dir_ops *m_nondir_inode_ops; /* !dir inode ops */
 	uint			m_chsize;	/* size of next field */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	atomic_t		m_active_trans;	/* number trans frozen */
 #ifdef HAVE_PERCPU_SB
@@ -243,6 +274,10 @@ typedef struct xfs_mount {
 	int64_t			m_low_space[XFS_LOWSP_MAX];
 						/* low free space thresholds */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct xfs_kobj		m_kobj;
+>>>>>>> v3.18
 =======
 	struct xfs_kobj		m_kobj;
 >>>>>>> v3.18
@@ -267,8 +302,11 @@ typedef struct xfs_mount {
 						   disk errors in metadata */
 #define XFS_MOUNT_DISCARD	(1ULL << 5)	/* discard unused blocks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XFS_MOUNT_RETERR	(1ULL << 6)     /* return alignment errors to
 						   user */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define XFS_MOUNT_NOALIGN	(1ULL << 7)	/* turn off stripe alignment
@@ -375,6 +413,7 @@ xfs_daddr_to_agbno(struct xfs_mount *mp, xfs_daddr_t d)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * perag get/put wrappers for ref counting
  */
 struct xfs_perag *xfs_perag_get(struct xfs_mount *mp, xfs_agnumber_t agno);
@@ -383,6 +422,8 @@ struct xfs_perag *xfs_perag_get_tag(struct xfs_mount *mp, xfs_agnumber_t agno,
 void	xfs_perag_put(struct xfs_perag *pag);
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Per-cpu superblock locking functions
@@ -414,10 +455,13 @@ typedef struct xfs_mod_sb {
 } xfs_mod_sb_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int	xfs_log_sbcount(xfs_mount_t *);
 extern __uint64_t xfs_default_resblks(xfs_mount_t *mp);
 extern int	xfs_mountfs(xfs_mount_t *mp);
 =======
+=======
+>>>>>>> v3.18
 /*
  * Per-ag incore structure, copies of information in agf and agi, to improve the
  * performance of allocation group selection. This is defined for the kernel
@@ -475,6 +519,9 @@ extern __uint64_t xfs_default_resblks(xfs_mount_t *mp);
 extern int	xfs_mountfs(xfs_mount_t *mp);
 extern int	xfs_initialize_perag(xfs_mount_t *mp, xfs_agnumber_t agcount,
 				     xfs_agnumber_t *maxagi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern void	xfs_unmountfs(xfs_mount_t *);
@@ -495,6 +542,7 @@ extern void	xfs_set_low_space_thresholds(struct xfs_mount *);
 #endif	/* __KERNEL__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void	xfs_sb_calc_crc(struct xfs_buf	*);
 extern void	xfs_mod_sb(struct xfs_trans *, __int64_t);
 extern int	xfs_initialize_perag(struct xfs_mount *, xfs_agnumber_t,
@@ -504,6 +552,8 @@ extern void	xfs_sb_to_disk(struct xfs_dsb *, struct xfs_sb *, __int64_t);
 
 extern const struct xfs_buf_ops xfs_sb_buf_ops;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif	/* __XFS_MOUNT_H__ */

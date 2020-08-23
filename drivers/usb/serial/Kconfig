@@ -52,7 +52,10 @@ config USB_SERIAL_GENERIC
 	  properly.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config USB_SERIAL_SIMPLE
 	tristate "USB Serial Simple Driver"
 	help
@@ -73,6 +76,9 @@ config USB_SERIAL_SIMPLE
 	  To compile this driver as a module, choose M here: the module
 	  will be called usb-serial-simple.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config USB_SERIAL_AIRCABLE
 	tristate "USB AIRcable Bluetooth Dongle Driver"
@@ -182,6 +188,7 @@ config USB_SERIAL_FTDI_SIO
 	  module will be called ftdi_sio.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_SERIAL_FUNSOFT
 	tristate "USB Fundamental Software Dongle Driver"
 	---help---
@@ -190,6 +197,8 @@ config USB_SERIAL_FUNSOFT
 	  To compile this driver as a module, choose M here: the
 	  module will be called funsoft.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config USB_SERIAL_VISOR
@@ -489,6 +498,7 @@ config USB_SERIAL_MOS7840
 	  module will be called mos7840.  If unsure, choose N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_SERIAL_MOTOROLA
 	tristate "USB Motorola Phone modem driver"
 	---help---
@@ -498,6 +508,8 @@ config USB_SERIAL_MOTOROLA
 	  To compile this driver as a module, choose M here: the
 	  module will be called moto_modem.  If unsure, choose N.
 =======
+=======
+>>>>>>> v3.18
 config USB_SERIAL_MXUPORT
 	tristate "USB Moxa UPORT Serial Driver"
 	---help---
@@ -526,6 +538,9 @@ config USB_SERIAL_MXUPORT
 
 	  To compile this driver as a module, choose M here: the
 	  module will be called mxuport.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config USB_SERIAL_NAVMAN
@@ -583,6 +598,7 @@ config USB_SERIAL_SPCP8X5
 	  module will be called spcp8x5.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_SERIAL_HP4X
         tristate "USB HP4x Calculators support"
         help
@@ -593,6 +609,8 @@ config USB_SERIAL_HP4X
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config USB_SERIAL_SAFE
 	tristate "USB Safe Serial (Encapsulated) Driver"
 
@@ -600,6 +618,7 @@ config USB_SERIAL_SAFE_PADDED
 	bool "USB Secure Encapsulated Driver - Padded"
 	depends on USB_SERIAL_SAFE
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config USB_SERIAL_SIEMENS_MPI
 	tristate "USB Siemens MPI driver"
@@ -609,6 +628,8 @@ config USB_SERIAL_SIEMENS_MPI
 	  To compile this driver as a module, choose M here: the
 	  module will be called siemens_mpi.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config USB_SERIAL_SIERRAWIRELESS
@@ -703,6 +724,7 @@ config USB_SERIAL_OPTICON
 	  module will be called opticon.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_SERIAL_VIVOPAY_SERIAL
         tristate "USB ViVOpay serial interface driver"
         help
@@ -711,6 +733,8 @@ config USB_SERIAL_VIVOPAY_SERIAL
           To compile this driver as a module, choose M here: the
           module will be called vivopay-serial.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config USB_SERIAL_XSENS_MT
@@ -726,6 +750,7 @@ config USB_SERIAL_XSENS_MT
 	  module will be called xsens_mt.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_SERIAL_ZIO
 	tristate "ZIO Motherboard USB serial interface driver"
 	help
@@ -734,6 +759,8 @@ config USB_SERIAL_ZIO
 	  To compile this driver as a module, choose M here: the
 	  module will be called zio.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config USB_SERIAL_WISHBONE
@@ -754,6 +781,7 @@ config USB_SERIAL_WISHBONE
 	  module will be called wishbone-serial.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_SERIAL_ZTE
 	tristate "ZTE USB serial driver"
 	help
@@ -762,6 +790,8 @@ config USB_SERIAL_ZTE
 	  To compile this driver as a module, choose M here: the
 	  module will be called zte.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config USB_SERIAL_SSU100
@@ -783,6 +813,7 @@ config USB_SERIAL_QT2
 	  module will be called quatech-serial.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_SERIAL_CSVT
 	tristate "USB serial driver for Circuit-Switched Video Telephony"
 	help
@@ -792,6 +823,8 @@ config USB_SERIAL_CSVT
 	  To compile this driver as a module, choose M here: the
 	  module will be called csvt.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config USB_SERIAL_DEBUG

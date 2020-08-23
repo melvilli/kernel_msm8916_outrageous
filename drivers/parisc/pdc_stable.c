@@ -279,7 +279,11 @@ pdcspath_hwpath_write(struct pdcspath_entry *entry, const char *buf, size_t coun
 	struct hardware_path hwpath;
 	unsigned short i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char in[count+1], *temp;
+=======
+	char in[64], *temp;
+>>>>>>> v3.18
 =======
 	char in[64], *temp;
 >>>>>>> v3.18
@@ -291,8 +295,14 @@ pdcspath_hwpath_write(struct pdcspath_entry *entry, const char *buf, size_t coun
 
 	/* We'll use a local copy of buf */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(in, 0, count+1);
 	strncpy(in, buf, count);
+=======
+	count = min_t(size_t, count, sizeof(in)-1);
+	strncpy(in, buf, count);
+	in[count] = '\0';
+>>>>>>> v3.18
 =======
 	count = min_t(size_t, count, sizeof(in)-1);
 	strncpy(in, buf, count);
@@ -404,7 +414,11 @@ pdcspath_layer_write(struct pdcspath_entry *entry, const char *buf, size_t count
 	unsigned int layers[6]; /* device-specific info (ctlr#, unit#, ...) */
 	unsigned short i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char in[count+1], *temp;
+=======
+	char in[64], *temp;
+>>>>>>> v3.18
 =======
 	char in[64], *temp;
 >>>>>>> v3.18
@@ -414,8 +428,14 @@ pdcspath_layer_write(struct pdcspath_entry *entry, const char *buf, size_t count
 
 	/* We'll use a local copy of buf */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(in, 0, count+1);
 	strncpy(in, buf, count);
+=======
+	count = min_t(size_t, count, sizeof(in)-1);
+	strncpy(in, buf, count);
+	in[count] = '\0';
+>>>>>>> v3.18
 =======
 	count = min_t(size_t, count, sizeof(in)-1);
 	strncpy(in, buf, count);
@@ -776,7 +796,11 @@ static ssize_t pdcs_auto_write(struct kobject *kobj,
 	struct pdcspath_entry *pathentry;
 	unsigned char flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char in[count+1], *temp;
+=======
+	char in[8], *temp;
+>>>>>>> v3.18
 =======
 	char in[8], *temp;
 >>>>>>> v3.18
@@ -790,8 +814,14 @@ static ssize_t pdcs_auto_write(struct kobject *kobj,
 
 	/* We'll use a local copy of buf */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(in, 0, count+1);
 	strncpy(in, buf, count);
+=======
+	count = min_t(size_t, count, sizeof(in)-1);
+	strncpy(in, buf, count);
+	in[count] = '\0';
+>>>>>>> v3.18
 =======
 	count = min_t(size_t, count, sizeof(in)-1);
 	strncpy(in, buf, count);

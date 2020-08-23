@@ -14,6 +14,7 @@
 #include <linux/slab.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/string.h>
 #include <linux/regulator/machine.h>
 #include <linux/regulator/of_regulator.h>
@@ -25,6 +26,8 @@ static void of_get_regulation_constraints(struct device_node *np,
 	const __be32 *min_uA, *max_uA, *ramp_delay;
 	struct regulation_constraints *constraints = &(*init_data)->constraints;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/regulator/machine.h>
 #include <linux/regulator/driver.h>
 #include <linux/regulator/of_regulator.h>
@@ -38,6 +41,9 @@ static void of_get_regulation_constraints(struct device_node *np,
 	struct regulation_constraints *constraints = &(*init_data)->constraints;
 	int ret;
 	u32 pval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	constraints->name = of_get_property(np, "regulator-name", NULL);
@@ -57,6 +63,7 @@ static void of_get_regulation_constraints(struct device_node *np,
 		constraints->apply_uV = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uV_offset = of_get_property(np, "regulator-microvolt-offset", NULL);
 	if (uV_offset)
 		constraints->uV_offset = be32_to_cpu(*uV_offset);
@@ -67,18 +74,24 @@ static void of_get_regulation_constraints(struct device_node *np,
 	if (max_uA)
 		constraints->max_uA = be32_to_cpu(*max_uA);
 =======
+=======
+>>>>>>> v3.18
 	if (!of_property_read_u32(np, "regulator-microvolt-offset", &pval))
 		constraints->uV_offset = pval;
 	if (!of_property_read_u32(np, "regulator-min-microamp", &pval))
 		constraints->min_uA = pval;
 	if (!of_property_read_u32(np, "regulator-max-microamp", &pval))
 		constraints->max_uA = pval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Current change possible? */
 	if (constraints->min_uA != constraints->max_uA)
 		constraints->valid_ops_mask |= REGULATOR_CHANGE_CURRENT;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (of_find_property(np, "regulator-boot-on", NULL))
 		constraints->boot_on = true;
@@ -157,6 +170,8 @@ static int of_get_qcom_regulator_init_data(struct device *dev,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	constraints->boot_on = of_property_read_bool(np, "regulator-boot-on");
 	constraints->always_on = of_property_read_bool(np, "regulator-always-on");
 	if (!constraints->always_on) /* status change should be possible. */
@@ -176,6 +191,9 @@ static int of_get_qcom_regulator_init_data(struct device *dev,
 	ret = of_property_read_u32(np, "regulator-enable-ramp-delay", &pval);
 	if (!ret)
 		constraints->enable_time = pval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -192,7 +210,10 @@ struct regulator_init_data *of_get_regulator_init_data(struct device *dev,
 {
 	struct regulator_init_data *init_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -205,6 +226,7 @@ struct regulator_init_data *of_get_regulator_init_data(struct device *dev,
 
 	of_get_regulation_constraints(node, &init_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = of_get_qcom_regulator_init_data(dev, &init_data);
 	if (rc) {
 		devm_kfree(dev, init_data);
@@ -213,12 +235,17 @@ struct regulator_init_data *of_get_regulator_init_data(struct device *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return init_data;
 }
 EXPORT_SYMBOL_GPL(of_get_regulator_init_data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct devm_of_regulator_matches {
 	struct of_regulator_match *matches;
 	unsigned int num_matches;
@@ -233,6 +260,9 @@ static void devm_of_regulator_put_matches(struct device *dev, void *res)
 		of_node_put(devm_matches->matches[i].of_node);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * of_regulator_match - extract multiple regulator init data from device tree.
@@ -248,7 +278,12 @@ static void devm_of_regulator_put_matches(struct device *dev, void *res)
  * based on either the deprecated property regulator-compatible if present,
  * or otherwise the child node's name. Note that the match table is modified
 <<<<<<< HEAD
+<<<<<<< HEAD
  * in place.
+=======
+ * in place and an additional of_node reference is taken for each matched
+ * regulator.
+>>>>>>> v3.18
 =======
  * in place and an additional of_node reference is taken for each matched
  * regulator.
@@ -265,6 +300,10 @@ int of_regulator_match(struct device *dev, struct device_node *node,
 	const char *name;
 	struct device_node *child;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct devm_of_regulator_matches *devm_matches;
+>>>>>>> v3.18
 =======
 	struct devm_of_regulator_matches *devm_matches;
 >>>>>>> v3.18
@@ -273,7 +312,10 @@ int of_regulator_match(struct device *dev, struct device_node *node,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	devm_matches = devres_alloc(devm_of_regulator_put_matches,
 				    sizeof(struct devm_of_regulator_matches),
 				    GFP_KERNEL);
@@ -285,6 +327,9 @@ int of_regulator_match(struct device *dev, struct device_node *node,
 
 	devres_add(dev, devm_matches);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < num_matches; i++) {
 		struct of_regulator_match *match = &matches[i];
@@ -314,7 +359,11 @@ int of_regulator_match(struct device *dev, struct device_node *node,
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			match->of_node = child;
+=======
+			match->of_node = of_node_get(child);
+>>>>>>> v3.18
 =======
 			match->of_node = of_node_get(child);
 >>>>>>> v3.18
@@ -327,7 +376,10 @@ int of_regulator_match(struct device *dev, struct device_node *node,
 }
 EXPORT_SYMBOL_GPL(of_regulator_match);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 struct regulator_init_data *regulator_of_get_init_data(struct device *dev,
 					    const struct regulator_desc *desc,
@@ -377,4 +429,7 @@ struct regulator_init_data *regulator_of_get_init_data(struct device *dev,
 
 	return init_data;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

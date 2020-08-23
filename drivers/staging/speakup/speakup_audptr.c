@@ -40,7 +40,11 @@ static struct var_t vars[] = {
 	{ PITCH, .u.n = {"\x05[f%d]", 80, 39, 4500, 0, 0, NULL } },
 	{ VOL, .u.n = {"\x05[g%d]", 21, 0, 40, 0, 0, NULL } },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ TONE, .u.n = {"\x05[s%d]", 9, 0, 63, 0, 0, 0 } },
+=======
+	{ TONE, .u.n = {"\x05[s%d]", 9, 0, 63, 0, 0, NULL } },
+>>>>>>> v3.18
 =======
 	{ TONE, .u.n = {"\x05[s%d]", 9, 0, 63, 0, 0, NULL } },
 >>>>>>> v3.18
@@ -53,6 +57,7 @@ static struct var_t vars[] = {
  * These attributes will appear in /sys/accessibility/speakup/audptr.
  */
 static struct kobj_attribute caps_start_attribute =
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__ATTR(caps_start, USER_RW, spk_var_show, spk_var_store);
 static struct kobj_attribute caps_stop_attribute =
@@ -79,6 +84,8 @@ static struct kobj_attribute jiffy_delta_attribute =
 static struct kobj_attribute trigger_time_attribute =
 	__ATTR(trigger_time, ROOT_W, spk_var_show, spk_var_store);
 =======
+=======
+>>>>>>> v3.18
 	__ATTR(caps_start, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
 static struct kobj_attribute caps_stop_attribute =
 	__ATTR(caps_stop, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
@@ -103,6 +110,9 @@ static struct kobj_attribute jiffy_delta_attribute =
 	__ATTR(jiffy_delta, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
 static struct kobj_attribute trigger_time_attribute =
 	__ATTR(trigger_time, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -164,6 +174,10 @@ static void synth_flush(struct spk_synth *synth)
 {
 	int timeout = SPK_XMITR_TIMEOUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -181,6 +195,10 @@ static void synth_version(struct spk_synth *synth)
 	unsigned char test = 0;
 	char synth_id[40] = "";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

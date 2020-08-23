@@ -29,6 +29,10 @@
 #include <linux/fsl_devices.h>
 #include <linux/mii.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_fdt.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_fdt.h>
 >>>>>>> v3.18
@@ -41,7 +45,10 @@
 #include <asm/processor.h>
 #include <asm/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mpc8xx.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/8xx_immap.h>
@@ -56,7 +63,11 @@ struct cpm_pin {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata cpm_pin tqm8xx_pins[] = {
+=======
+static struct cpm_pin tqm8xx_pins[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct cpm_pin tqm8xx_pins[] __initdata = {
 >>>>>>> v3.18
@@ -75,7 +86,11 @@ static struct cpm_pin tqm8xx_pins[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata cpm_pin tqm8xx_fec_pins[] = {
+=======
+static struct cpm_pin tqm8xx_fec_pins[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct cpm_pin tqm8xx_fec_pins[] __initdata = {
 >>>>>>> v3.18
@@ -140,7 +155,11 @@ static int __init tqm8xx_probe(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id __initdata of_bus_ids[] = {
+=======
+static const struct of_device_id of_bus_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id of_bus_ids[] __initconst = {
 >>>>>>> v3.18

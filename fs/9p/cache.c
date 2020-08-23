@@ -91,7 +91,11 @@ void v9fs_cache_session_get_cookie(struct v9fs_session_info *v9ses)
 	v9ses->fscache = fscache_acquire_cookie(v9fs_cache_netfs.primary_index,
 						&v9fs_cache_session_index_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						v9ses);
+=======
+						v9ses, true);
+>>>>>>> v3.18
 =======
 						v9ses, true);
 >>>>>>> v3.18
@@ -209,7 +213,11 @@ void v9fs_cache_inode_get_cookie(struct inode *inode)
 	v9inode->fscache = fscache_acquire_cookie(v9ses->fscache,
 						  &v9fs_cache_inode_index_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  v9inode);
+=======
+						  v9inode, true);
+>>>>>>> v3.18
 =======
 						  v9inode, true);
 >>>>>>> v3.18
@@ -248,7 +256,10 @@ void v9fs_cache_inode_set_cookie(struct inode *inode, struct file *filp)
 {
 	struct v9fs_inode *v9inode = V9FS_I(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct p9_fid *fid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -257,7 +268,11 @@ void v9fs_cache_inode_set_cookie(struct inode *inode, struct file *filp)
 
 	spin_lock(&v9inode->fscache_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fid = filp->private_data;
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -287,7 +302,11 @@ void v9fs_cache_inode_reset_cookie(struct inode *inode)
 	v9inode->fscache = fscache_acquire_cookie(v9ses->fscache,
 						  &v9fs_cache_inode_index_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  v9inode);
+=======
+						  v9inode, true);
+>>>>>>> v3.18
 =======
 						  v9inode, true);
 >>>>>>> v3.18

@@ -32,6 +32,10 @@ void machine_power_off(void)
 
 void (*pm_power_off) (void) = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(pm_power_off);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(pm_power_off);
 >>>>>>> v3.18

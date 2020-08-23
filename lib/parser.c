@@ -114,6 +114,10 @@ int match_token(char *s, const match_table_t table, substring_t args[])
 	return p->token;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(match_token);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(match_token);
 >>>>>>> v3.18
@@ -168,6 +172,10 @@ int match_int(substring_t *s, int *result)
 	return match_number(s, result, 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(match_int);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(match_int);
 >>>>>>> v3.18
@@ -186,6 +194,10 @@ int match_octal(substring_t *s, int *result)
 	return match_number(s, result, 8);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(match_octal);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(match_octal);
 >>>>>>> v3.18
@@ -204,7 +216,10 @@ int match_hex(substring_t *s, int *result)
 	return match_number(s, result, 16);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(match_hex);
 
 /**
@@ -257,6 +272,9 @@ bool match_wildcard(const char *pattern, const char *str)
 	return !*p;
 }
 EXPORT_SYMBOL(match_wildcard);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -281,6 +299,10 @@ size_t match_strlcpy(char *dest, const substring_t *src, size_t size)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(match_strlcpy);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(match_strlcpy);
 >>>>>>> v3.18
@@ -302,12 +324,15 @@ char *match_strdup(const substring_t *s)
 	return p;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(match_token);
 EXPORT_SYMBOL(match_int);
 EXPORT_SYMBOL(match_octal);
 EXPORT_SYMBOL(match_hex);
 EXPORT_SYMBOL(match_strlcpy);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(match_strdup);

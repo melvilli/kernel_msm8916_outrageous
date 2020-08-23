@@ -115,6 +115,7 @@ static DECLARE_INTC_DESC(intc_desc, "mxg", vectors, groups,
 			 mask_registers, prio_registers, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sh_timer_config mtu2_0_platform_data = {
 	.channel_offset = -0x80,
 	.timer_bit = 0,
@@ -207,6 +208,8 @@ static struct plat_sci_port scif0_platform_data = {
 	.type		= PORT_SCIF,
 	.irqs		= SCIx_IRQ_MUXED(220),
 =======
+=======
+>>>>>>> v3.18
 static struct resource mtu2_resources[] = {
 	DEFINE_RES_MEM(0xff801000, 0x400),
 	DEFINE_RES_IRQ_NAMED(228, "tgi0a"),
@@ -230,6 +233,9 @@ static struct plat_sci_port scif0_platform_data = {
 static struct resource scif0_resources[] = {
 	DEFINE_RES_MEM(0xff804000, 0x100),
 	DEFINE_RES_IRQ(220),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -237,6 +243,11 @@ static struct platform_device scif0_device = {
 	.name		= "sh-sci",
 	.id		= 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.resource	= scif0_resources,
+	.num_resources	= ARRAY_SIZE(scif0_resources),
+>>>>>>> v3.18
 =======
 	.resource	= scif0_resources,
 	.num_resources	= ARRAY_SIZE(scif0_resources),
@@ -249,9 +260,13 @@ static struct platform_device scif0_device = {
 static struct platform_device *mxg_devices[] __initdata = {
 	&scif0_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&mtu2_0_device,
 	&mtu2_1_device,
 	&mtu2_2_device,
+=======
+	&mtu2_device,
+>>>>>>> v3.18
 =======
 	&mtu2_device,
 >>>>>>> v3.18
@@ -272,9 +287,13 @@ void __init plat_irq_setup(void)
 static struct platform_device *mxg_early_devices[] __initdata = {
 	&scif0_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&mtu2_0_device,
 	&mtu2_1_device,
 	&mtu2_2_device,
+=======
+	&mtu2_device,
+>>>>>>> v3.18
 =======
 	&mtu2_device,
 >>>>>>> v3.18

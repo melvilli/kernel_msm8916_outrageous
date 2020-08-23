@@ -33,6 +33,10 @@
 #include <linux/skbuff.h>
 #include <linux/netdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+>>>>>>> v3.18
 =======
 #include <linux/if_ether.h>
 >>>>>>> v3.18
@@ -166,7 +170,11 @@ struct irlan_provider_cb {
 	__u16 send_arb_val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 mac_address[6]; /* Generated MAC address for peer device */
+=======
+	__u8 mac_address[ETH_ALEN]; /* Generated MAC address for peer device */
+>>>>>>> v3.18
 =======
 	__u8 mac_address[ETH_ALEN]; /* Generated MAC address for peer device */
 >>>>>>> v3.18

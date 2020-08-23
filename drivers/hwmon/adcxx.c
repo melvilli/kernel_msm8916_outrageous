@@ -204,7 +204,10 @@ out_err:
 		device_remove_file(&spi->dev, &ad_input[i].dev_attr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_unlock(&adc->lock);
@@ -222,7 +225,10 @@ static int adcxx_remove(struct spi_device *spi)
 		device_remove_file(&spi->dev, &ad_input[i].dev_attr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_unlock(&adc->lock);

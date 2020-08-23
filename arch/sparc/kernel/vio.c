@@ -181,13 +181,19 @@ static void vio_fill_channel_info(struct mdesc_handle *hp, u64 mp,
 
 		irq = mdesc_get_property(hp, target, "rx-ino", NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (irq)
 			vdev->rx_irq = sun4v_build_virq(cdev_cfg_handle, *irq);
 =======
+=======
+>>>>>>> v3.18
 		if (irq) {
 			vdev->rx_irq = sun4v_build_virq(cdev_cfg_handle, *irq);
 			vdev->rx_ino = *irq;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		chan_id = mdesc_get_property(hp, target, "id", NULL);
@@ -197,7 +203,10 @@ static void vio_fill_channel_info(struct mdesc_handle *hp, u64 mp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int vio_set_intr(unsigned long dev_ino, int state)
 {
 	int err;
@@ -207,6 +216,9 @@ int vio_set_intr(unsigned long dev_ino, int state)
 }
 EXPORT_SYMBOL(vio_set_intr);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct vio_dev *vio_create_one(struct mdesc_handle *hp, u64 mp,
 				      struct device *parent)

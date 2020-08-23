@@ -23,6 +23,7 @@
 #include <sound/soc.h>
 #include <linux/platform_data/asoc-kirkwood.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "kirkwood.h"
 
 #define DRV_NAME	"kirkwood-i2s"
@@ -31,12 +32,17 @@
 	(SNDRV_PCM_RATE_44100 | \
 	 SNDRV_PCM_RATE_48000 | SNDRV_PCM_RATE_96000)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 
 #include "kirkwood.h"
 
 #define DRV_NAME	"mvebu-audio"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define KIRKWOOD_I2S_FORMATS \
 	(SNDRV_PCM_FMTBIT_S16_LE | \
@@ -44,11 +50,17 @@
 	 SNDRV_PCM_FMTBIT_S32_LE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define KIRKWOOD_SPDIF_FORMATS \
 	(SNDRV_PCM_FMTBIT_S16_LE | \
 	 SNDRV_PCM_FMTBIT_S24_LE)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int kirkwood_i2s_set_fmt(struct snd_soc_dai *cpu_dai,
 		unsigned int fmt)
@@ -121,8 +133,14 @@ static void kirkwood_set_rate(struct snd_soc_dai *dai,
 	uint32_t clks_ctrl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rate == 44100 || rate == 48000 || rate == 96000) {
 		/* use internal dco for supported rates */
+=======
+	if (IS_ERR(priv->extclk)) {
+		/* use internal dco for the supported rates
+		 * defined in kirkwood_i2s_dai */
+>>>>>>> v3.18
 =======
 	if (IS_ERR(priv->extclk)) {
 		/* use internal dco for the supported rates
@@ -134,8 +152,14 @@ static void kirkwood_set_rate(struct snd_soc_dai *dai,
 
 		clks_ctrl = KIRKWOOD_MCLK_SOURCE_DCO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (!IS_ERR(priv->extclk)) {
 		/* use optional external clk for other rates */
+=======
+	} else {
+		/* use the external clock for the other rates
+		 * defined in kirkwood_i2s_dai_extclk */
+>>>>>>> v3.18
 =======
 	} else {
 		/* use the external clock for the other rates
@@ -188,15 +212,21 @@ static int kirkwood_i2s_hw_params(struct snd_pcm_substream *substream,
 		i2s_value |= KIRKWOOD_I2S_CTL_SIZE_16;
 		ctl_play = KIRKWOOD_PLAYCTL_SIZE_16_C |
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   KIRKWOOD_PLAYCTL_I2S_EN;
 		ctl_rec = KIRKWOOD_RECCTL_SIZE_16_C |
 			  KIRKWOOD_RECCTL_I2S_EN;
 =======
+=======
+>>>>>>> v3.18
 			   KIRKWOOD_PLAYCTL_I2S_EN |
 			   KIRKWOOD_PLAYCTL_SPDIF_EN;
 		ctl_rec = KIRKWOOD_RECCTL_SIZE_16_C |
 			  KIRKWOOD_RECCTL_I2S_EN |
 			  KIRKWOOD_RECCTL_SPDIF_EN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	/*
@@ -214,15 +244,21 @@ static int kirkwood_i2s_hw_params(struct snd_pcm_substream *substream,
 		i2s_value |= KIRKWOOD_I2S_CTL_SIZE_24;
 		ctl_play = KIRKWOOD_PLAYCTL_SIZE_24 |
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   KIRKWOOD_PLAYCTL_I2S_EN;
 		ctl_rec = KIRKWOOD_RECCTL_SIZE_24 |
 			  KIRKWOOD_RECCTL_I2S_EN;
 =======
+=======
+>>>>>>> v3.18
 			   KIRKWOOD_PLAYCTL_I2S_EN |
 			   KIRKWOOD_PLAYCTL_SPDIF_EN;
 		ctl_rec = KIRKWOOD_RECCTL_SIZE_24 |
 			  KIRKWOOD_RECCTL_I2S_EN |
 			  KIRKWOOD_RECCTL_SPDIF_EN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
@@ -244,6 +280,7 @@ static int kirkwood_i2s_hw_params(struct snd_pcm_substream *substream,
 
 		priv->ctl_play &= ~(KIRKWOOD_PLAYCTL_MONO_MASK |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    KIRKWOOD_PLAYCTL_I2S_EN |
 				    KIRKWOOD_PLAYCTL_SPDIF_EN |
 				    KIRKWOOD_PLAYCTL_SIZE_MASK);
@@ -251,12 +288,17 @@ static int kirkwood_i2s_hw_params(struct snd_pcm_substream *substream,
 	} else {
 		priv->ctl_rec &= ~KIRKWOOD_RECCTL_SIZE_MASK;
 =======
+=======
+>>>>>>> v3.18
 				    KIRKWOOD_PLAYCTL_ENABLE_MASK |
 				    KIRKWOOD_PLAYCTL_SIZE_MASK);
 		priv->ctl_play |= ctl_play;
 	} else {
 		priv->ctl_rec &= ~(KIRKWOOD_RECCTL_ENABLE_MASK |
 				   KIRKWOOD_RECCTL_SIZE_MASK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		priv->ctl_rec |= ctl_rec;
 	}
@@ -267,10 +309,13 @@ static int kirkwood_i2s_hw_params(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int kirkwood_i2s_play_trigger(struct snd_pcm_substream *substream,
 				int cmd, struct snd_soc_dai *dai)
 {
 =======
+=======
+>>>>>>> v3.18
 static unsigned kirkwood_i2s_play_mute(unsigned ctl)
 {
 	if (!(ctl & KIRKWOOD_PLAYCTL_I2S_EN))
@@ -284,13 +329,20 @@ static int kirkwood_i2s_play_trigger(struct snd_pcm_substream *substream,
 				int cmd, struct snd_soc_dai *dai)
 {
 	struct snd_pcm_runtime *runtime = substream->runtime;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct kirkwood_dma_data *priv = snd_soc_dai_get_drvdata(dai);
 	uint32_t ctl, value;
 
 	ctl = readl(priv->io + KIRKWOOD_PLAYCTL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ctl & KIRKWOOD_PLAYCTL_PAUSE) {
+=======
+	if ((ctl & KIRKWOOD_PLAYCTL_ENABLE_MASK) == 0) {
+>>>>>>> v3.18
 =======
 	if ((ctl & KIRKWOOD_PLAYCTL_ENABLE_MASK) == 0) {
 >>>>>>> v3.18
@@ -318,6 +370,7 @@ static int kirkwood_i2s_play_trigger(struct snd_pcm_substream *substream,
 		/* configure */
 		ctl = priv->ctl_play;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		value = ctl & ~(KIRKWOOD_PLAYCTL_I2S_EN |
 				KIRKWOOD_PLAYCTL_SPDIF_EN);
 		writel(value, priv->io + KIRKWOOD_PLAYCTL);
@@ -327,6 +380,8 @@ static int kirkwood_i2s_play_trigger(struct snd_pcm_substream *substream,
 		value |= KIRKWOOD_INT_CAUSE_PLAY_BYTES;
 		writel(value, priv->io + KIRKWOOD_INT_MASK);
 =======
+=======
+>>>>>>> v3.18
 		if (dai->id == 0)
 			ctl &= ~KIRKWOOD_PLAYCTL_SPDIF_EN;	/* i2s */
 		else
@@ -341,6 +396,9 @@ static int kirkwood_i2s_play_trigger(struct snd_pcm_substream *substream,
 			value |= KIRKWOOD_INT_CAUSE_PLAY_BYTES;
 			writel(value, priv->io + KIRKWOOD_INT_MASK);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* enable playback */
@@ -350,7 +408,12 @@ static int kirkwood_i2s_play_trigger(struct snd_pcm_substream *substream,
 	case SNDRV_PCM_TRIGGER_STOP:
 		/* stop audio, disable interrupts */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctl |= KIRKWOOD_PLAYCTL_PAUSE | KIRKWOOD_PLAYCTL_I2S_MUTE;
+=======
+		ctl |= KIRKWOOD_PLAYCTL_PAUSE | KIRKWOOD_PLAYCTL_I2S_MUTE |
+				KIRKWOOD_PLAYCTL_SPDIF_MUTE;
+>>>>>>> v3.18
 =======
 		ctl |= KIRKWOOD_PLAYCTL_PAUSE | KIRKWOOD_PLAYCTL_I2S_MUTE |
 				KIRKWOOD_PLAYCTL_SPDIF_MUTE;
@@ -363,7 +426,11 @@ static int kirkwood_i2s_play_trigger(struct snd_pcm_substream *substream,
 
 		/* disable all playbacks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctl &= ~(KIRKWOOD_PLAYCTL_I2S_EN | KIRKWOOD_PLAYCTL_SPDIF_EN);
+=======
+		ctl &= ~KIRKWOOD_PLAYCTL_ENABLE_MASK;
+>>>>>>> v3.18
 =======
 		ctl &= ~KIRKWOOD_PLAYCTL_ENABLE_MASK;
 >>>>>>> v3.18
@@ -373,7 +440,12 @@ static int kirkwood_i2s_play_trigger(struct snd_pcm_substream *substream,
 	case SNDRV_PCM_TRIGGER_PAUSE_PUSH:
 	case SNDRV_PCM_TRIGGER_SUSPEND:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctl |= KIRKWOOD_PLAYCTL_PAUSE | KIRKWOOD_PLAYCTL_I2S_MUTE;
+=======
+		ctl |= KIRKWOOD_PLAYCTL_PAUSE | KIRKWOOD_PLAYCTL_I2S_MUTE |
+				KIRKWOOD_PLAYCTL_SPDIF_MUTE;
+>>>>>>> v3.18
 =======
 		ctl |= KIRKWOOD_PLAYCTL_PAUSE | KIRKWOOD_PLAYCTL_I2S_MUTE |
 				KIRKWOOD_PLAYCTL_SPDIF_MUTE;
@@ -384,7 +456,13 @@ static int kirkwood_i2s_play_trigger(struct snd_pcm_substream *substream,
 	case SNDRV_PCM_TRIGGER_RESUME:
 	case SNDRV_PCM_TRIGGER_PAUSE_RELEASE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctl &= ~(KIRKWOOD_PLAYCTL_PAUSE | KIRKWOOD_PLAYCTL_I2S_MUTE);
+=======
+		ctl &= ~(KIRKWOOD_PLAYCTL_PAUSE | KIRKWOOD_PLAYCTL_I2S_MUTE |
+				KIRKWOOD_PLAYCTL_SPDIF_MUTE);
+		ctl = kirkwood_i2s_play_mute(ctl);
+>>>>>>> v3.18
 =======
 		ctl &= ~(KIRKWOOD_PLAYCTL_PAUSE | KIRKWOOD_PLAYCTL_I2S_MUTE |
 				KIRKWOOD_PLAYCTL_SPDIF_MUTE);
@@ -413,14 +491,20 @@ static int kirkwood_i2s_rec_trigger(struct snd_pcm_substream *substream,
 		/* configure */
 		ctl = priv->ctl_rec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		value = ctl & ~KIRKWOOD_RECCTL_I2S_EN;
 =======
+=======
+>>>>>>> v3.18
 		if (dai->id == 0)
 			ctl &= ~KIRKWOOD_RECCTL_SPDIF_EN;	/* i2s */
 		else
 			ctl &= ~KIRKWOOD_RECCTL_I2S_EN;		/* spdif */
 
 		value = ctl & ~KIRKWOOD_RECCTL_ENABLE_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		writel(value, priv->io + KIRKWOOD_RECCTL);
 
@@ -446,7 +530,11 @@ static int kirkwood_i2s_rec_trigger(struct snd_pcm_substream *substream,
 		/* disable all records */
 		value = readl(priv->io + KIRKWOOD_RECCTL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		value &= ~(KIRKWOOD_RECCTL_I2S_EN | KIRKWOOD_RECCTL_SPDIF_EN);
+=======
+		value &= ~KIRKWOOD_RECCTL_ENABLE_MASK;
+>>>>>>> v3.18
 =======
 		value &= ~KIRKWOOD_RECCTL_ENABLE_MASK;
 >>>>>>> v3.18
@@ -486,9 +574,14 @@ static int kirkwood_i2s_trigger(struct snd_pcm_substream *substream, int cmd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int kirkwood_i2s_probe(struct snd_soc_dai *dai)
 {
 	struct kirkwood_dma_data *priv = snd_soc_dai_get_drvdata(dai);
+=======
+static int kirkwood_i2s_init(struct kirkwood_dma_data *priv)
+{
+>>>>>>> v3.18
 =======
 static int kirkwood_i2s_init(struct kirkwood_dma_data *priv)
 {
@@ -516,17 +609,23 @@ static int kirkwood_i2s_init(struct kirkwood_dma_data *priv)
 	/* disable playback/record */
 	value = readl(priv->io + KIRKWOOD_PLAYCTL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	value &= ~(KIRKWOOD_PLAYCTL_I2S_EN|KIRKWOOD_PLAYCTL_SPDIF_EN);
 	writel(value, priv->io + KIRKWOOD_PLAYCTL);
 
 	value = readl(priv->io + KIRKWOOD_RECCTL);
 	value &= ~(KIRKWOOD_RECCTL_I2S_EN | KIRKWOOD_RECCTL_SPDIF_EN);
 =======
+=======
+>>>>>>> v3.18
 	value &= ~KIRKWOOD_PLAYCTL_ENABLE_MASK;
 	writel(value, priv->io + KIRKWOOD_PLAYCTL);
 
 	value = readl(priv->io + KIRKWOOD_RECCTL);
 	value &= ~KIRKWOOD_RECCTL_ENABLE_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel(value, priv->io + KIRKWOOD_RECCTL);
 
@@ -535,11 +634,14 @@ static int kirkwood_i2s_init(struct kirkwood_dma_data *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int kirkwood_i2s_remove(struct snd_soc_dai *dai)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct snd_soc_dai_ops kirkwood_i2s_dai_ops = {
@@ -550,6 +652,7 @@ static const struct snd_soc_dai_ops kirkwood_i2s_dai_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct snd_soc_dai_driver kirkwood_i2s_dai = {
 	.probe = kirkwood_i2s_probe,
@@ -559,6 +662,8 @@ static struct snd_soc_dai_driver kirkwood_i2s_dai = {
 		.channels_max = 2,
 		.rates = KIRKWOOD_I2S_RATES,
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_dai_driver kirkwood_i2s_dai[2] = {
     {
 	.name = "i2s",
@@ -568,12 +673,16 @@ static struct snd_soc_dai_driver kirkwood_i2s_dai[2] = {
 		.channels_max = 2,
 		.rates = SNDRV_PCM_RATE_44100 | SNDRV_PCM_RATE_48000 |
 				SNDRV_PCM_RATE_96000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.formats = KIRKWOOD_I2S_FORMATS,
 	},
 	.capture = {
 		.channels_min = 1,
 		.channels_max = 2,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.rates = KIRKWOOD_I2S_RATES,
 		.formats = KIRKWOOD_I2S_FORMATS,
@@ -591,6 +700,8 @@ static struct snd_soc_dai_driver kirkwood_i2s_dai_extclk = {
 			 SNDRV_PCM_RATE_CONTINUOUS |
 			 SNDRV_PCM_RATE_KNOT,
 =======
+=======
+>>>>>>> v3.18
 		.rates = SNDRV_PCM_RATE_44100 | SNDRV_PCM_RATE_48000 |
 				SNDRV_PCM_RATE_96000,
 		.formats = KIRKWOOD_I2S_FORMATS,
@@ -628,12 +739,16 @@ static struct snd_soc_dai_driver kirkwood_i2s_dai_extclk[2] = {
 		.rates = SNDRV_PCM_RATE_CONTINUOUS,
 		.rate_min = 5512,
 		.rate_max = 192000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.formats = KIRKWOOD_I2S_FORMATS,
 	},
 	.capture = {
 		.channels_min = 1,
 		.channels_max = 2,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.rates = SNDRV_PCM_RATE_8000_192000 |
 			 SNDRV_PCM_RATE_CONTINUOUS |
@@ -642,6 +757,8 @@ static struct snd_soc_dai_driver kirkwood_i2s_dai_extclk[2] = {
 	},
 	.ops = &kirkwood_i2s_dai_ops,
 =======
+=======
+>>>>>>> v3.18
 		.rates = SNDRV_PCM_RATE_CONTINUOUS,
 		.rate_min = 5512,
 		.rate_max = 192000,
@@ -670,6 +787,9 @@ static struct snd_soc_dai_driver kirkwood_i2s_dai_extclk[2] = {
 	},
 	.ops = &kirkwood_i2s_dai_ops,
     },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -681,14 +801,20 @@ static int kirkwood_i2s_dev_probe(struct platform_device *pdev)
 {
 	struct kirkwood_asoc_platform_data *data = pdev->dev.platform_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_dai_driver *soc_dai = &kirkwood_i2s_dai;
 	struct kirkwood_dma_data *priv;
 	struct resource *mem;
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_dai_driver *soc_dai = kirkwood_i2s_dai;
 	struct kirkwood_dma_data *priv;
 	struct resource *mem;
 	struct device_node *np = pdev->dev.of_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err;
 
@@ -711,6 +837,7 @@ static int kirkwood_i2s_dev_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!data) {
 		dev_err(&pdev->dev, "no platform data ?!\n");
 		return -EINVAL;
@@ -720,6 +847,8 @@ static int kirkwood_i2s_dev_probe(struct platform_device *pdev)
 
 	priv->clk = devm_clk_get(&pdev->dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	if (np) {
 		priv->burst = 128;		/* might be 32 or 128 */
 	} else if (data) {
@@ -730,6 +859,9 @@ static int kirkwood_i2s_dev_probe(struct platform_device *pdev)
 	}
 
 	priv->clk = devm_clk_get(&pdev->dev, np ? "internal" : NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(priv->clk)) {
 		dev_err(&pdev->dev, "no clock\n");
@@ -741,11 +873,14 @@ static int kirkwood_i2s_dev_probe(struct platform_device *pdev)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->extclk = clk_get(&pdev->dev, "extclk");
 	if (!IS_ERR(priv->extclk)) {
 		if (priv->extclk == priv->clk) {
 			clk_put(priv->extclk);
 =======
+=======
+>>>>>>> v3.18
 	priv->extclk = devm_clk_get(&pdev->dev, "extclk");
 	if (IS_ERR(priv->extclk)) {
 		if (PTR_ERR(priv->extclk) == -EPROBE_DEFER)
@@ -753,13 +888,20 @@ static int kirkwood_i2s_dev_probe(struct platform_device *pdev)
 	} else {
 		if (priv->extclk == priv->clk) {
 			devm_clk_put(&pdev->dev, priv->extclk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			priv->extclk = ERR_PTR(-EINVAL);
 		} else {
 			dev_info(&pdev->dev, "found external clock\n");
 			clk_prepare_enable(priv->extclk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			soc_dai = &kirkwood_i2s_dai_extclk;
+=======
+			soc_dai = kirkwood_i2s_dai_extclk;
+>>>>>>> v3.18
 =======
 			soc_dai = kirkwood_i2s_dai_extclk;
 >>>>>>> v3.18
@@ -772,7 +914,11 @@ static int kirkwood_i2s_dev_probe(struct platform_device *pdev)
 
 	/* Select the burst size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data->burst == 32) {
+=======
+	if (priv->burst == 32) {
+>>>>>>> v3.18
 =======
 	if (priv->burst == 32) {
 >>>>>>> v3.18
@@ -785,6 +931,7 @@ static int kirkwood_i2s_dev_probe(struct platform_device *pdev)
 
 	err = snd_soc_register_component(&pdev->dev, &kirkwood_i2s_component,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 soc_dai, 1);
 	if (!err)
 		return 0;
@@ -795,6 +942,8 @@ static int kirkwood_i2s_dev_probe(struct platform_device *pdev)
 		clk_put(priv->extclk);
 	}
 =======
+=======
+>>>>>>> v3.18
 					 soc_dai, 2);
 	if (err) {
 		dev_err(&pdev->dev, "snd_soc_register_component failed\n");
@@ -815,6 +964,9 @@ static int kirkwood_i2s_dev_probe(struct platform_device *pdev)
  err_component:
 	if (!IS_ERR(priv->extclk))
 		clk_disable_unprepare(priv->extclk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk_disable_unprepare(priv->clk);
 
@@ -826,6 +978,7 @@ static int kirkwood_i2s_dev_remove(struct platform_device *pdev)
 	struct kirkwood_dma_data *priv = dev_get_drvdata(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_unregister_component(&pdev->dev);
 
 	if (!IS_ERR(priv->extclk)) {
@@ -833,11 +986,16 @@ static int kirkwood_i2s_dev_remove(struct platform_device *pdev)
 		clk_put(priv->extclk);
 	}
 =======
+=======
+>>>>>>> v3.18
 	snd_soc_unregister_platform(&pdev->dev);
 	snd_soc_unregister_component(&pdev->dev);
 
 	if (!IS_ERR(priv->extclk))
 		clk_disable_unprepare(priv->extclk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk_disable_unprepare(priv->clk);
 
@@ -845,7 +1003,10 @@ static int kirkwood_i2s_dev_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static struct of_device_id mvebu_audio_of_match[] = {
 	{ .compatible = "marvell,kirkwood-audio" },
@@ -856,6 +1017,9 @@ static struct of_device_id mvebu_audio_of_match[] = {
 MODULE_DEVICE_TABLE(of, mvebu_audio_of_match);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver kirkwood_i2s_driver = {
 	.probe  = kirkwood_i2s_dev_probe,
@@ -864,6 +1028,10 @@ static struct platform_driver kirkwood_i2s_driver = {
 		.name = DRV_NAME,
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(mvebu_audio_of_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(mvebu_audio_of_match),
 >>>>>>> v3.18
@@ -877,7 +1045,11 @@ MODULE_AUTHOR("Arnaud Patard, <arnaud.patard@rtp-net.org>");
 MODULE_DESCRIPTION("Kirkwood I2S SoC Interface");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS("platform:kirkwood-i2s");
+=======
+MODULE_ALIAS("platform:mvebu-audio");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("platform:mvebu-audio");
 >>>>>>> v3.18

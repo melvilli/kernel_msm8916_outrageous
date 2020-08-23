@@ -264,7 +264,11 @@ static const struct stb0899_s1_reg vp1041_stb0899_s1_init_3[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct stb0899_config vp1041_stb0899_config = {
+=======
+static struct stb0899_config vp1041_stb0899_config = {
+>>>>>>> v3.18
 =======
 static struct stb0899_config vp1041_stb0899_config = {
 >>>>>>> v3.18
@@ -278,7 +282,11 @@ static struct stb0899_config vp1041_stb0899_config = {
 
 	.xtal_freq		= 27000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.inversion		= IQ_SWAP_ON, /* 1 */
+=======
+	.inversion		= IQ_SWAP_ON,
+>>>>>>> v3.18
 =======
 	.inversion		= IQ_SWAP_ON,
 >>>>>>> v3.18
@@ -309,7 +317,11 @@ static struct stb0899_config vp1041_stb0899_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct stb6100_config vp1041_stb6100_config = {
+=======
+static struct stb6100_config vp1041_stb6100_config = {
+>>>>>>> v3.18
 =======
 static struct stb6100_config vp1041_stb6100_config = {
 >>>>>>> v3.18

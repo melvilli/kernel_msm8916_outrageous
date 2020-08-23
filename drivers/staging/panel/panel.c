@@ -172,8 +172,13 @@ struct logical_input {
 	union {
 		struct {	/* valid when type == INPUT_TYPE_STD */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			void (*press_fct) (int);
 			void (*release_fct) (int);
+=======
+			void (*press_fct)(int);
+			void (*release_fct)(int);
+>>>>>>> v3.18
 =======
 			void (*press_fct)(int);
 			void (*release_fct)(int);
@@ -281,17 +286,23 @@ static unsigned char lcd_bits[LCD_PORTS][LCD_BITS][BIT_STATES];
  */
 #define LCD_TYPE_NONE		0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LCD_TYPE_CUSTOM		1
 #define LCD_TYPE_OLD		2
 #define LCD_TYPE_KS0074		3
 #define LCD_TYPE_HANTRONIX	4
 #define LCD_TYPE_NEXCOM		5
 =======
+=======
+>>>>>>> v3.18
 #define LCD_TYPE_OLD		1
 #define LCD_TYPE_KS0074		2
 #define LCD_TYPE_HANTRONIX	3
 #define LCD_TYPE_NEXCOM		4
 #define LCD_TYPE_CUSTOM		5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -431,9 +442,15 @@ static char lcd_left_shift;
 static char init_in_progress;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void (*lcd_write_cmd) (int);
 static void (*lcd_write_data) (int);
 static void (*lcd_clear_fast) (void);
+=======
+static void (*lcd_write_cmd)(int);
+static void (*lcd_write_data)(int);
+static void (*lcd_clear_fast)(void);
+>>>>>>> v3.18
 =======
 static void (*lcd_write_cmd)(int);
 static void (*lcd_write_data)(int);
@@ -477,7 +494,11 @@ static int lcd_type = -1;
 module_param(lcd_type, int, 0000);
 MODULE_PARM_DESC(lcd_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"LCD type: 0=none, 1=compiled-in, 2=old, 3=serial ks0074, 4=hantronix, 5=nexcom");
+=======
+		 "LCD type: 0=none, 1=old //, 2=serial ks0074, 3=hantronix //, 4=nexcom //, 5=compiled-in");
+>>>>>>> v3.18
 =======
 		 "LCD type: 0=none, 1=old //, 2=serial ks0074, 3=hantronix //, 4=nexcom //, 5=compiled-in");
 >>>>>>> v3.18
@@ -486,8 +507,12 @@ static int lcd_proto = -1;
 module_param(lcd_proto, int, 0000);
 MODULE_PARM_DESC(lcd_proto,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"LCD communication: 0=parallel (//), 1=serial,"
 		"2=TI LCD Interface");
+=======
+		 "LCD communication: 0=parallel (//), 1=serial, 2=TI LCD Interface");
+>>>>>>> v3.18
 =======
 		 "LCD communication: 0=parallel (//), 1=serial, 2=TI LCD Interface");
 >>>>>>> v3.18
@@ -500,8 +525,12 @@ static int keypad_type = -1;
 module_param(keypad_type, int, 0000);
 MODULE_PARM_DESC(keypad_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 "Keypad type: 0=none, 1=old 6 keys, 2=new 6+1 keys, "
 		 "3=nexcom 4 keys");
+=======
+		 "Keypad type: 0=none, 1=old 6 keys, 2=new 6+1 keys, 3=nexcom 4 keys");
+>>>>>>> v3.18
 =======
 		 "Keypad type: 0=none, 1=old 6 keys, 2=new 6+1 keys, 3=nexcom 4 keys");
 >>>>>>> v3.18
@@ -525,8 +554,12 @@ static int lcd_e_pin  = PIN_NOT_SET;
 module_param(lcd_e_pin, int, 0000);
 MODULE_PARM_DESC(lcd_e_pin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 "# of the // port pin connected to LCD 'E' signal, "
 		 "with polarity (-17..17)");
+=======
+		 "# of the // port pin connected to LCD 'E' signal, with polarity (-17..17)");
+>>>>>>> v3.18
 =======
 		 "# of the // port pin connected to LCD 'E' signal, with polarity (-17..17)");
 >>>>>>> v3.18
@@ -535,8 +568,12 @@ static int lcd_rs_pin = PIN_NOT_SET;
 module_param(lcd_rs_pin, int, 0000);
 MODULE_PARM_DESC(lcd_rs_pin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 "# of the // port pin connected to LCD 'RS' signal, "
 		 "with polarity (-17..17)");
+=======
+		 "# of the // port pin connected to LCD 'RS' signal, with polarity (-17..17)");
+>>>>>>> v3.18
 =======
 		 "# of the // port pin connected to LCD 'RS' signal, with polarity (-17..17)");
 >>>>>>> v3.18
@@ -545,8 +582,12 @@ static int lcd_rw_pin = PIN_NOT_SET;
 module_param(lcd_rw_pin, int, 0000);
 MODULE_PARM_DESC(lcd_rw_pin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 "# of the // port pin connected to LCD 'RW' signal, "
 		 "with polarity (-17..17)");
+=======
+		 "# of the // port pin connected to LCD 'RW' signal, with polarity (-17..17)");
+>>>>>>> v3.18
 =======
 		 "# of the // port pin connected to LCD 'RW' signal, with polarity (-17..17)");
 >>>>>>> v3.18
@@ -555,8 +596,12 @@ static int lcd_bl_pin = PIN_NOT_SET;
 module_param(lcd_bl_pin, int, 0000);
 MODULE_PARM_DESC(lcd_bl_pin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 "# of the // port pin connected to LCD backlight, "
 		 "with polarity (-17..17)");
+=======
+		 "# of the // port pin connected to LCD backlight, with polarity (-17..17)");
+>>>>>>> v3.18
 =======
 		 "# of the // port pin connected to LCD backlight, with polarity (-17..17)");
 >>>>>>> v3.18
@@ -565,8 +610,12 @@ static int lcd_da_pin = PIN_NOT_SET;
 module_param(lcd_da_pin, int, 0000);
 MODULE_PARM_DESC(lcd_da_pin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 "# of the // port pin connected to serial LCD 'SDA' "
 		 "signal, with polarity (-17..17)");
+=======
+		 "# of the // port pin connected to serial LCD 'SDA' signal, with polarity (-17..17)");
+>>>>>>> v3.18
 =======
 		 "# of the // port pin connected to serial LCD 'SDA' signal, with polarity (-17..17)");
 >>>>>>> v3.18
@@ -575,8 +624,12 @@ static int lcd_cl_pin = PIN_NOT_SET;
 module_param(lcd_cl_pin, int, 0000);
 MODULE_PARM_DESC(lcd_cl_pin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 "# of the // port pin connected to serial LCD 'SCL' "
 		 "signal, with polarity (-17..17)");
+=======
+		 "# of the // port pin connected to serial LCD 'SCL' signal, with polarity (-17..17)");
+>>>>>>> v3.18
 =======
 		 "# of the // port pin connected to serial LCD 'SCL' signal, with polarity (-17..17)");
 >>>>>>> v3.18
@@ -728,15 +781,21 @@ static void pin_to_bits(int pin, unsigned char *d_val, unsigned char *c_val)
 	int d_bit, c_bit, inv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	d_val[0] = c_val[0] = d_val[1] = c_val[1] = 0;
 	d_val[2] = c_val[2] = 0xFF;
 =======
+=======
+>>>>>>> v3.18
 	d_val[0] = 0;
 	c_val[0] = 0;
 	d_val[1] = 0;
 	c_val[1] = 0;
 	d_val[2] = 0xFF;
 	c_val[2] = 0xFF;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pin == 0)
@@ -747,7 +806,12 @@ static void pin_to_bits(int pin, unsigned char *d_val, unsigned char *c_val)
 		pin = -pin;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	d_bit = c_bit = 0;
+=======
+	d_bit = 0;
+	c_bit = 0;
+>>>>>>> v3.18
 =======
 	d_bit = 0;
 	c_bit = 0;
@@ -789,10 +853,16 @@ static void pin_to_bits(int pin, unsigned char *d_val, unsigned char *c_val)
 static void long_sleep(int ms)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (in_interrupt())
 		mdelay(ms);
 	else {
+=======
+	if (in_interrupt()) {
+		mdelay(ms);
+	} else {
+>>>>>>> v3.18
 =======
 	if (in_interrupt()) {
 		mdelay(ms);
@@ -951,7 +1021,13 @@ static void lcd_clear_fast_s(void)
 {
 	int pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_addr_x = lcd_addr_y = 0;
+=======
+
+	lcd_addr_x = 0;
+	lcd_addr_y = 0;
+>>>>>>> v3.18
 =======
 
 	lcd_addr_x = 0;
@@ -969,7 +1045,12 @@ static void lcd_clear_fast_s(void)
 	spin_unlock_irq(&pprt_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_addr_x = lcd_addr_y = 0;
+=======
+	lcd_addr_x = 0;
+	lcd_addr_y = 0;
+>>>>>>> v3.18
 =======
 	lcd_addr_x = 0;
 	lcd_addr_y = 0;
@@ -982,7 +1063,13 @@ static void lcd_clear_fast_p8(void)
 {
 	int pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_addr_x = lcd_addr_y = 0;
+=======
+
+	lcd_addr_x = 0;
+	lcd_addr_y = 0;
+>>>>>>> v3.18
 =======
 
 	lcd_addr_x = 0;
@@ -1015,7 +1102,12 @@ static void lcd_clear_fast_p8(void)
 	spin_unlock_irq(&pprt_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_addr_x = lcd_addr_y = 0;
+=======
+	lcd_addr_x = 0;
+	lcd_addr_y = 0;
+>>>>>>> v3.18
 =======
 	lcd_addr_x = 0;
 	lcd_addr_y = 0;
@@ -1028,7 +1120,13 @@ static void lcd_clear_fast_tilcd(void)
 {
 	int pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_addr_x = lcd_addr_y = 0;
+=======
+
+	lcd_addr_x = 0;
+	lcd_addr_y = 0;
+>>>>>>> v3.18
 =======
 
 	lcd_addr_x = 0;
@@ -1046,7 +1144,12 @@ static void lcd_clear_fast_tilcd(void)
 	spin_unlock_irq(&pprt_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_addr_x = lcd_addr_y = 0;
+=======
+	lcd_addr_x = 0;
+	lcd_addr_y = 0;
+>>>>>>> v3.18
 =======
 	lcd_addr_x = 0;
 	lcd_addr_y = 0;
@@ -1059,7 +1162,12 @@ static void lcd_clear_display(void)
 {
 	lcd_write_cmd(0x01);	/* clear display */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_addr_x = lcd_addr_y = 0;
+=======
+	lcd_addr_x = 0;
+	lcd_addr_y = 0;
+>>>>>>> v3.18
 =======
 	lcd_addr_x = 0;
 	lcd_addr_y = 0;
@@ -1071,7 +1179,10 @@ static void lcd_clear_display(void)
 static void lcd_init_display(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	lcd_flags = ((lcd_height > 1) ? LCD_FLAG_N : 0)
@@ -1217,6 +1328,10 @@ static inline int handle_lcd_special_code(void)
 	case 'k': {	/* kill end of line */
 		int x;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1266,6 +1381,7 @@ static inline int handle_lcd_special_code(void)
 		while (*esc && cgoffset < 8) {
 			shift ^= 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (*esc >= '0' && *esc <= '9')
 				value |= (*esc - '0') << shift;
 			else if (*esc >= 'A' && *esc <= 'Z')
@@ -1274,6 +1390,8 @@ static inline int handle_lcd_special_code(void)
 				value |= (*esc - 'a' + 10) << shift;
 			else {
 =======
+=======
+>>>>>>> v3.18
 			if (*esc >= '0' && *esc <= '9') {
 				value |= (*esc - '0') << shift;
 			} else if (*esc >= 'A' && *esc <= 'Z') {
@@ -1281,6 +1399,9 @@ static inline int handle_lcd_special_code(void)
 			} else if (*esc >= 'a' && *esc <= 'z') {
 				value |= (*esc - 'a' + 10) << shift;
 			} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				esc++;
 				continue;
@@ -1318,8 +1439,14 @@ static inline int handle_lcd_special_code(void)
 				if (kstrtoul(esc, 10, &lcd_addr_y) < 0)
 					break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else
 				break;
+=======
+			} else {
+				break;
+			}
+>>>>>>> v3.18
 =======
 			} else {
 				break;
@@ -1362,6 +1489,7 @@ static inline int handle_lcd_special_code(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t lcd_write(struct file *file,
 			 const char *buf, size_t count, loff_t *ppos)
 {
@@ -1370,6 +1498,8 @@ static ssize_t lcd_write(struct file *file,
 
 	for (; count-- > 0; (ppos ? (*ppos)++ : 0), ++tmp) {
 =======
+=======
+>>>>>>> v3.18
 static void lcd_write_char(char c)
 {
 	/* first, we'll test if we're in escape mode */
@@ -1469,12 +1599,16 @@ static ssize_t lcd_write(struct file *file,
 	char c;
 
 	for (; count-- > 0; (*ppos)++, tmp++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!in_interrupt() && (((count + 1) & 0x1f) == 0))
 			/* let's be a little nice with other processes
 			   that need some CPU */
 			schedule();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ppos == NULL && file == NULL)
 			/* let's not use get_user() from the kernel ! */
@@ -1570,10 +1704,15 @@ static ssize_t lcd_write(struct file *file,
 				lcd_escape_len = -1;
 		} /* escape codes */
 =======
+=======
+>>>>>>> v3.18
 		if (get_user(c, tmp))
 			return -EFAULT;
 
 		lcd_write_char(c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1619,9 +1758,12 @@ static struct miscdevice lcd_dev = {
 static void panel_lcd_print(const char *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lcd_enabled && lcd_initialized)
 		lcd_write(NULL, s, strlen(s), NULL);
 =======
+=======
+>>>>>>> v3.18
 	const char *tmp = s;
 	int count = strlen(s);
 
@@ -1635,6 +1777,9 @@ static void panel_lcd_print(const char *s)
 			lcd_write_char(*tmp);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1830,7 +1975,12 @@ static void lcd_init(void)
 			PANEL_VERSION);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_addr_x = lcd_addr_y = 0;
+=======
+	lcd_addr_x = 0;
+	lcd_addr_y = 0;
+>>>>>>> v3.18
 =======
 	lcd_addr_x = 0;
 	lcd_addr_y = 0;
@@ -1846,16 +1996,22 @@ static void lcd_init(void)
 
 static ssize_t keypad_read(struct file *file,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   char *buf, size_t count, loff_t *ppos)
 {
 
 	unsigned i = *ppos;
 	char *tmp = buf;
 =======
+=======
+>>>>>>> v3.18
 			   char __user *buf, size_t count, loff_t *ppos)
 {
 	unsigned i = *ppos;
 	char __user *tmp = buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (keypad_buflen == 0) {
@@ -1863,8 +2019,13 @@ static ssize_t keypad_read(struct file *file,
 			return -EAGAIN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interruptible_sleep_on(&keypad_read_wait);
 		if (signal_pending(current))
+=======
+		if (wait_event_interruptible(keypad_read_wait,
+					     keypad_buflen != 0))
+>>>>>>> v3.18
 =======
 		if (wait_event_interruptible(keypad_read_wait,
 					     keypad_buflen != 0))
@@ -1885,7 +2046,10 @@ static ssize_t keypad_read(struct file *file,
 static int keypad_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (keypad_open_cnt)
@@ -2018,8 +2182,13 @@ static inline int input_state_high(struct logical_input *input)
 	 * eg: 0 -(press A)-> A -(press B)-> AB : don't match A's release.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (((phys_prev & input->mask) == input->value)
 	    && ((phys_curr & input->mask) > input->value)) {
+=======
+	if (((phys_prev & input->mask) == input->value) &&
+	    ((phys_curr & input->mask) >  input->value)) {
+>>>>>>> v3.18
 =======
 	if (((phys_prev & input->mask) == input->value) &&
 	    ((phys_curr & input->mask) >  input->value)) {
@@ -2042,33 +2211,45 @@ static inline int input_state_high(struct logical_input *input)
 			if (input->high_timer == 0) {
 				char *press_str = input->u.kbd.press_str;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (press_str[0])
 					keypad_send_key(press_str,
 							sizeof(input->u.kbd.press_str));
 =======
+=======
+>>>>>>> v3.18
 
 				if (press_str[0]) {
 					int s = sizeof(input->u.kbd.press_str);
 
 					keypad_send_key(press_str, s);
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 
 			if (input->u.kbd.repeat_str[0]) {
 				char *repeat_str = input->u.kbd.repeat_str;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (input->high_timer >= KEYPAD_REP_START) {
 					input->high_timer -= KEYPAD_REP_DELAY;
 					keypad_send_key(repeat_str,
 							sizeof(input->u.kbd.repeat_str));
 =======
+=======
+>>>>>>> v3.18
 
 				if (input->high_timer >= KEYPAD_REP_START) {
 					int s = sizeof(input->u.kbd.repeat_str);
 
 					input->high_timer -= KEYPAD_REP_DELAY;
 					keypad_send_key(repeat_str, s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 				/* we will need to come back here soon */
@@ -2080,18 +2261,24 @@ static inline int input_state_high(struct logical_input *input)
 		}
 		return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		/* else signal falling down. Let's fall through. */
 		input->state = INPUT_ST_FALLING;
 		input->fall_timer = 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	/* else signal falling down. Let's fall through. */
 	input->state = INPUT_ST_FALLING;
 	input->fall_timer = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2101,8 +2288,13 @@ static inline void input_state_falling(struct logical_input *input)
 #if 0
 	/* FIXME !!! same comment as in input_state_high */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (((phys_prev & input->mask) == input->value)
 	    && ((phys_curr & input->mask) > input->value)) {
+=======
+	if (((phys_prev & input->mask) == input->value) &&
+	    ((phys_curr & input->mask) >  input->value)) {
+>>>>>>> v3.18
 =======
 	if (((phys_prev & input->mask) == input->value) &&
 	    ((phys_curr & input->mask) >  input->value)) {
@@ -2120,11 +2312,14 @@ static inline void input_state_falling(struct logical_input *input)
 			if (input->u.kbd.repeat_str[0]) {
 				char *repeat_str = input->u.kbd.repeat_str;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (input->high_timer >= KEYPAD_REP_START)
 					input->high_timer -= KEYPAD_REP_DELAY;
 					keypad_send_key(repeat_str,
 							sizeof(input->u.kbd.repeat_str));
 =======
+=======
+>>>>>>> v3.18
 
 				if (input->high_timer >= KEYPAD_REP_START) {
 					int s = sizeof(input->u.kbd.repeat_str);
@@ -2132,6 +2327,9 @@ static inline void input_state_falling(struct logical_input *input)
 					input->high_timer -= KEYPAD_REP_DELAY;
 					keypad_send_key(repeat_str, s);
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				/* we will need to come back here soon */
 				inputs_stable = 0;
@@ -2146,6 +2344,10 @@ static inline void input_state_falling(struct logical_input *input)
 		if (input->type == INPUT_TYPE_STD) {
 			void (*release_fct)(int) = input->u.std.release_fct;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2154,16 +2356,22 @@ static inline void input_state_falling(struct logical_input *input)
 		} else if (input->type == INPUT_TYPE_KBD) {
 			char *release_str = input->u.kbd.release_str;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (release_str[0])
 				keypad_send_key(release_str,
 						sizeof(input->u.kbd.release_str));
 =======
+=======
+>>>>>>> v3.18
 
 			if (release_str[0]) {
 				int s = sizeof(input->u.kbd.release_str);
 
 				keypad_send_key(release_str, s);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -2277,6 +2485,7 @@ static int input_name2mask(const char *name, pmask_t *mask, pmask_t *value,
 	pmask_t m, v;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	om = im = m = v = 0ULL;
 	while (*name) {
 		int in, out, bit, neg;
@@ -2284,6 +2493,8 @@ static int input_name2mask(const char *name, pmask_t *mask, pmask_t *value,
 			     (sigtab[in] != *name); in++)
 			;
 =======
+=======
+>>>>>>> v3.18
 	om = 0ULL;
 	im = 0ULL;
 	m = 0ULL;
@@ -2295,6 +2506,9 @@ static int input_name2mask(const char *name, pmask_t *mask, pmask_t *value,
 		     in++)
 			;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (in >= sizeof(sigtab))
 			return 0;	/* input name not found */
@@ -2307,16 +2521,22 @@ static int input_name2mask(const char *name, pmask_t *mask, pmask_t *value,
 			out = *name - '0';
 			om |= (1 << out);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (*name == '-')
 			out = 8;
 		else
 			return 0;	/* unknown bit name */
 =======
+=======
+>>>>>>> v3.18
 		} else if (*name == '-') {
 			out = 8;
 		} else {
 			return 0;	/* unknown bit name */
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		bit = (out * 5) + in;
@@ -2346,7 +2566,11 @@ static struct logical_input *panel_bind_key(const char *name, const char *press,
 	struct logical_input *key;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key = kzalloc(sizeof(struct logical_input), GFP_KERNEL);
+=======
+	key = kzalloc(sizeof(*key), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	key = kzalloc(sizeof(*key), GFP_KERNEL);
 >>>>>>> v3.18
@@ -2381,9 +2605,15 @@ static struct logical_input *panel_bind_key(const char *name, const char *press,
  */
 static struct logical_input *panel_bind_callback(char *name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						 void (*press_fct) (int),
 						 int press_data,
 						 void (*release_fct) (int),
+=======
+						 void (*press_fct)(int),
+						 int press_data,
+						 void (*release_fct)(int),
+>>>>>>> v3.18
 =======
 						 void (*press_fct)(int),
 						 int press_data,
@@ -2394,7 +2624,11 @@ static struct logical_input *panel_bind_callback(char *name,
 	struct logical_input *callback;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	callback = kmalloc(sizeof(struct logical_input), GFP_KERNEL);
+=======
+	callback = kmalloc(sizeof(*callback), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	callback = kmalloc(sizeof(*callback), GFP_KERNEL);
 >>>>>>> v3.18
@@ -2423,6 +2657,10 @@ static void keypad_init(void)
 {
 	int keynum;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2685,7 +2923,11 @@ static void __exit panel_cleanup_module(void)
 
 	if (scan_timer.function != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		del_timer(&scan_timer);
+=======
+		del_timer_sync(&scan_timer);
+>>>>>>> v3.18
 =======
 		del_timer_sync(&scan_timer);
 >>>>>>> v3.18

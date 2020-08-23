@@ -96,8 +96,11 @@ static int start_ptraced_child(void)
 	int pid, n, status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fflush(stdout);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pid = fork();

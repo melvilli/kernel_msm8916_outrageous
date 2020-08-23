@@ -341,7 +341,10 @@
 #define __NR_pwritev		334
 #define __NR_setns		335
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define __NR_name_to_handle_at	336
 #define __NR_open_by_handle_at	337
 #define __NR_rt_tgsigqueueinfo 338
@@ -358,6 +361,9 @@
 #define __NR_process_vm_writev	349
 #define __NR_kcmp		350
 #define __NR_finit_module	351
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UAPI_ASM_CRIS_UNISTD_H_ */

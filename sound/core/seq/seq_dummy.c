@@ -83,7 +83,10 @@ static int my_client = -1;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * unuse callback - send ALL_SOUNDS_OFF and RESET_CONTROLLERS events
  * to subscribers.
  * Note: this callback is called only after all subscribers are removed.
@@ -114,6 +117,9 @@ dummy_unuse(void *private_data, struct snd_seq_port_subscribe *info)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * event input callback - just redirect events to subscribers
  */
@@ -179,6 +185,10 @@ create_port(int idx, int type)
 	memset(&pcb, 0, sizeof(pcb));
 	pcb.owner = THIS_MODULE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pcb.unuse = dummy_unuse;
+>>>>>>> v3.18
 =======
 	pcb.unuse = dummy_unuse;
 >>>>>>> v3.18
@@ -205,7 +215,11 @@ register_client(void)
 
 	if (ports < 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "invalid number of ports %d\n", ports);
+=======
+		pr_err("ALSA: seq_dummy: invalid number of ports %d\n", ports);
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq_dummy: invalid number of ports %d\n", ports);
 >>>>>>> v3.18

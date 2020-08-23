@@ -15,6 +15,10 @@
 #include <linux/of_gpio.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regulator/consumer.h>
+>>>>>>> v3.18
 =======
 #include <linux/regulator/consumer.h>
 >>>>>>> v3.18
@@ -23,12 +27,15 @@
 #include <sound/initval.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ak5386_priv {
 	int reset_gpio;
 };
 
 static struct snd_soc_codec_driver soc_codec_ak5386;
 =======
+=======
+>>>>>>> v3.18
 static const char * const supply_names[] = {
 	"va", "vd"
 };
@@ -89,6 +96,9 @@ static struct snd_soc_codec_driver soc_codec_ak5386 = {
 	.dapm_routes = ak5386_dapm_routes,
 	.num_dapm_routes = ARRAY_SIZE(ak5386_dapm_routes),
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ak5386_set_dai_fmt(struct snd_soc_dai *codec_dai,
@@ -175,6 +185,10 @@ static int ak5386_probe(struct platform_device *pdev)
 	struct device *dev = &pdev->dev;
 	struct ak5386_priv *priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret, i;
+>>>>>>> v3.18
 =======
 	int ret, i;
 >>>>>>> v3.18
@@ -187,7 +201,10 @@ static int ak5386_probe(struct platform_device *pdev)
 	dev_set_drvdata(dev, priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(supply_names); i++)
 		priv->supplies[i].supply = supply_names[i];
 
@@ -196,6 +213,9 @@ static int ak5386_probe(struct platform_device *pdev)
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (of_match_device(of_match_ptr(ak5386_dt_ids), dev))
 		priv->reset_gpio = of_get_named_gpio(dev->of_node,

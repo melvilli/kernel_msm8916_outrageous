@@ -21,7 +21,11 @@
 
 #include "udfdecl.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -35,6 +39,7 @@
 #include "udf_i.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int udf_pc_to_char(struct super_block *sb, unsigned char *from,
 			  int fromlen, unsigned char *to, int tolen)
 {
@@ -46,6 +51,8 @@ static int udf_pc_to_char(struct super_block *sb, unsigned char *from,
 	/* Reserve one byte for terminating \0 */
 	tolen--;
 =======
+=======
+>>>>>>> v3.18
 static void udf_pc_to_char(struct super_block *sb, unsigned char *from,
 			   int fromlen, unsigned char *to)
 {
@@ -53,6 +60,9 @@ static void udf_pc_to_char(struct super_block *sb, unsigned char *from,
 	int elen = 0;
 	unsigned char *p = to;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (elen < fromlen) {
 		pc = (struct pathComponent *)(from + elen);
@@ -66,6 +76,7 @@ static void udf_pc_to_char(struct super_block *sb, unsigned char *from,
 				break;
 			/* Fall through */
 		case 2:
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (tolen == 0)
 				return -ENAMETOOLONG;
@@ -99,6 +110,8 @@ static void udf_pc_to_char(struct super_block *sb, unsigned char *from,
 			*p++ = '/';
 			tolen--;
 =======
+=======
+>>>>>>> v3.18
 			p = to;
 			*p++ = '/';
 			break;
@@ -115,6 +128,9 @@ static void udf_pc_to_char(struct super_block *sb, unsigned char *from,
 			p += udf_get_filename(sb, pc->componentIdent, p,
 					      pc->lengthComponentIdent);
 			*p++ = '/';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -125,7 +141,10 @@ static void udf_pc_to_char(struct super_block *sb, unsigned char *from,
 	else
 		p[0] = '\0';
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -136,7 +155,11 @@ static int udf_symlink_filler(struct file *file, struct page *page)
 	struct buffer_head *bh = NULL;
 	unsigned char *symlink;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+	int err = -EIO;
+>>>>>>> v3.18
 =======
 	int err = -EIO;
 >>>>>>> v3.18
@@ -145,12 +168,15 @@ static int udf_symlink_filler(struct file *file, struct page *page)
 	uint32_t pos;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We don't support symlinks longer than one block */
 	if (inode->i_size > inode->i_sb->s_blocksize) {
 		err = -ENAMETOOLONG;
 		goto out_unmap;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iinfo = UDF_I(inode);
@@ -163,10 +189,15 @@ static int udf_symlink_filler(struct file *file, struct page *page)
 		bh = sb_bread(inode->i_sb, pos);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!bh) {
 			err = -EIO;
 			goto out_unlock_inode;
 		}
+=======
+		if (!bh)
+			goto out;
+>>>>>>> v3.18
 =======
 		if (!bh)
 			goto out;
@@ -176,10 +207,15 @@ static int udf_symlink_filler(struct file *file, struct page *page)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = udf_pc_to_char(inode->i_sb, symlink, inode->i_size, p, PAGE_SIZE);
 	brelse(bh);
 	if (err)
 		goto out_unlock_inode;
+=======
+	udf_pc_to_char(inode->i_sb, symlink, inode->i_size, p);
+	brelse(bh);
+>>>>>>> v3.18
 =======
 	udf_pc_to_char(inode->i_sb, symlink, inode->i_size, p);
 	brelse(bh);
@@ -192,10 +228,16 @@ static int udf_symlink_filler(struct file *file, struct page *page)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_unlock_inode:
 	up_read(&iinfo->i_data_sem);
 	SetPageError(page);
 out_unmap:
+=======
+out:
+	up_read(&iinfo->i_data_sem);
+	SetPageError(page);
+>>>>>>> v3.18
 =======
 out:
 	up_read(&iinfo->i_data_sem);

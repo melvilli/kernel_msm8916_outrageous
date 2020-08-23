@@ -8,7 +8,11 @@ or if there is a problem with the translation.
 
 Maintainer: Catalin Marinas <catalin.marinas@arm.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
 Chinese maintainer: Fu Wei <tekkamanninja@gmail.com>
+=======
+Chinese maintainer: Fu Wei <wefu@redhat.com>
+>>>>>>> v3.18
 =======
 Chinese maintainer: Fu Wei <wefu@redhat.com>
 >>>>>>> v3.18
@@ -21,9 +25,15 @@ Documentation/arm64/memory.txt 的中文翻译
 
 英文版维护者： Catalin Marinas <catalin.marinas@arm.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
 中文版维护者： 傅炜  Fu Wei <tekkamanninja@gmail.com>
 中文版翻译者： 傅炜  Fu Wei <tekkamanninja@gmail.com>
 中文版校译者： 傅炜  Fu Wei <tekkamanninja@gmail.com>
+=======
+中文版维护者： 傅炜  Fu Wei <wefu@redhat.com>
+中文版翻译者： 傅炜  Fu Wei <wefu@redhat.com>
+中文版校译者： 傅炜  Fu Wei <wefu@redhat.com>
+>>>>>>> v3.18
 =======
 中文版维护者： 傅炜  Fu Wei <wefu@redhat.com>
 中文版翻译者： 傅炜  Fu Wei <wefu@redhat.com>
@@ -52,7 +62,11 @@ TTBR1 中，且从不写入 TTBR0。
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 AArch64 Linux 内存布局：
+=======
+AArch64 Linux 在页大小为 4KB 时的内存布局：
+>>>>>>> v3.18
 =======
 AArch64 Linux 在页大小为 4KB 时的内存布局：
 >>>>>>> v3.18
@@ -70,15 +84,21 @@ ffffffbc00000000	ffffffbdffffffff	   8GB		vmemmap
 ffffffbe00000000	ffffffbffbbfffff	  ~8GB		[防护页，未来用于 vmmemap]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ffffffbffbe00000	ffffffbffbe0ffff	  64KB		PCI I/O 空间
 
 ffffffbbffff0000	ffffffbcffffffff	  ~2MB		[防护页]
 =======
+=======
+>>>>>>> v3.18
 ffffffbffbc00000	ffffffbffbdfffff	   2MB		earlyprintk 设备
 
 ffffffbffbe00000	ffffffbffbe0ffff	  64KB		PCI I/O 空间
 
 ffffffbffbe10000	ffffffbcffffffff	  ~2MB		[防护页]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ffffffbffc000000	ffffffbfffffffff	  64MB		模块
@@ -87,7 +107,10 @@ ffffffc000000000	ffffffffffffffff	 256GB		内核逻辑内存映射
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 AArch64 Linux 在页大小为 64KB 时的内存布局：
 
 起始地址			结束地址			大小		用途
@@ -113,6 +136,9 @@ fffffdfffc000000	fffffdffffffffff	  64MB		模块
 fffffe0000000000	ffffffffffffffff	   2TB		内核逻辑内存映射
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 4KB 页大小的转换表查找：
 
@@ -142,7 +168,10 @@ fffffe0000000000	ffffffffffffffff	   2TB		内核逻辑内存映射
  |                 +-------------------------------> [47:42] L1 索引 (未使用)
  +-------------------------------------------------> [63] TTBR0/1
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 当使用 KVM 时, 管理程序（hypervisor）在 EL2 中通过相对内核虚拟地址的
 一个固定偏移来映射内核页（内核虚拟地址的高 24 位设为零）:
@@ -150,4 +179,7 @@ fffffe0000000000	ffffffffffffffff	   2TB		内核逻辑内存映射
 起始地址			结束地址			大小		用途
 -----------------------------------------------------------------------
 0000004000000000	0000007fffffffff	 256GB		在 HYP 中映射的内核对象
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -20,6 +20,7 @@
 #include <linux/of.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/slab.h>
 
 #include <asm/cputype.h>
@@ -49,6 +50,12 @@ static void set_power_scale(unsigned int cpu, unsigned long power)
 	per_cpu(cpu_scale, cpu) = power;
 }
 
+=======
+
+#include <asm/cputype.h>
+#include <asm/topology.h>
+
+>>>>>>> v3.18
 =======
 
 #include <asm/cputype.h>
@@ -194,6 +201,7 @@ static int __init parse_cluster(struct device_node *cluster, int depth)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cpu_efficiency {
 	const char *compatible;
 	unsigned long efficiency;
@@ -237,6 +245,8 @@ unsigned long arch_get_cpu_efficiency(int cpu)
  */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int __init parse_dt_topology(void)
 {
 	struct device_node *cn, *map;
@@ -266,6 +276,7 @@ static int __init parse_dt_topology(void)
 	 * only mark cores described in the DT as possible.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_possible_cpu(cpu) {
 		if (cpu_topology[cpu].cluster_id == -1) {
 			pr_err("CPU%d: No topology information specified\n",
@@ -273,6 +284,11 @@ static int __init parse_dt_topology(void)
 			ret = -EINVAL;
 		}
 	}
+=======
+	for_each_possible_cpu(cpu)
+		if (cpu_topology[cpu].cluster_id == -1)
+			ret = -EINVAL;
+>>>>>>> v3.18
 =======
 	for_each_possible_cpu(cpu)
 		if (cpu_topology[cpu].cluster_id == -1)
@@ -286,6 +302,7 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __init parse_dt_cpu_power(void)
 {
@@ -376,6 +393,8 @@ static void update_cpu_power(unsigned int cpu)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * cpu topology table
  */
@@ -393,12 +412,15 @@ static void update_siblings_masks(unsigned int cpuid)
 	int cpu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpuid_topo->cluster_id == -1) {
 		/* No topology information for this cpu ?! */
 		pr_err("CPU%u: No topology information configured\n", cpuid);
 		return;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* update core and thread sibling masks */
@@ -432,6 +454,7 @@ void store_cpu_topology(unsigned int cpuid)
 	mpidr = read_cpuid_mpidr();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Create cpu topology mapping based on MPIDR. */
 	if (mpidr & MPIDR_UP_BITMASK) {
 		/* Uniprocessor system */
@@ -447,6 +470,8 @@ void store_cpu_topology(unsigned int cpuid)
 			 (mpidr & MPIDR_AFF_MASK(3)) >> mpidr_hash.shift_aff[3])
 			>> mpidr_hash.shift_aff[1] >> mpidr_hash.shift_aff[0];
 =======
+=======
+>>>>>>> v3.18
 	/* Uniprocessor systems can rely on default topology values */
 	if (mpidr & MPIDR_UP_BITMASK)
 		return;
@@ -457,11 +482,15 @@ void store_cpu_topology(unsigned int cpuid)
 		cpuid_topo->thread_id  = MPIDR_AFFINITY_LEVEL(mpidr, 0);
 		cpuid_topo->core_id    = MPIDR_AFFINITY_LEVEL(mpidr, 1);
 		cpuid_topo->cluster_id = MPIDR_AFFINITY_LEVEL(mpidr, 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/* Multiprocessor system : Single-thread per core */
 		cpuid_topo->thread_id  = -1;
 		cpuid_topo->core_id    = MPIDR_AFFINITY_LEVEL(mpidr, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		cpuid_topo->cluster_id =
 			((mpidr & MPIDR_AFF_MASK(1)) >> mpidr_hash.shift_aff[1] |
@@ -472,10 +501,15 @@ void store_cpu_topology(unsigned int cpuid)
 
 	pr_debug("CPU%u: cluster %d core %d thread %d mpidr %llx\n",
 =======
+=======
+>>>>>>> v3.18
 		cpuid_topo->cluster_id = MPIDR_AFFINITY_LEVEL(mpidr, 1);
 	}
 
 	pr_debug("CPU%u: cluster %d core %d thread %d mpidr %#016llx\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 cpuid, cpuid_topo->cluster_id, cpuid_topo->core_id,
 		 cpuid_topo->thread_id, mpidr);
@@ -483,7 +517,10 @@ void store_cpu_topology(unsigned int cpuid)
 topology_populated:
 	update_siblings_masks(cpuid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	update_cpu_power(cpuid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -507,6 +544,7 @@ static void __init reset_cpu_topology(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init reset_cpu_power(void)
 {
 	unsigned int cpu;
@@ -515,6 +553,8 @@ static void __init reset_cpu_power(void)
 		set_power_scale(cpu, SCHED_POWER_SCALE);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init init_cpu_topology(void)
@@ -528,9 +568,12 @@ void __init init_cpu_topology(void)
 	if (parse_dt_topology())
 		reset_cpu_topology();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	reset_cpu_power();
 	parse_dt_cpu_power();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

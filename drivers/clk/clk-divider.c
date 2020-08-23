@@ -25,7 +25,11 @@
  * prepare - clk_prepare only ensures that parents are prepared
  * enable - clk_enable only ensures that parents are enabled
 <<<<<<< HEAD
+<<<<<<< HEAD
  * rate - rate is adjustable.  clk->rate = parent->rate / divisor
+=======
+ * rate - rate is adjustable.  clk->rate = DIV_ROUND_UP(parent->rate / divisor)
+>>>>>>> v3.18
 =======
  * rate - rate is adjustable.  clk->rate = DIV_ROUND_UP(parent->rate / divisor)
 >>>>>>> v3.18
@@ -48,7 +52,10 @@ static unsigned int _get_table_maxdiv(const struct clk_div_table *table)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned int _get_table_mindiv(const struct clk_div_table *table)
 {
 	unsigned int mindiv = UINT_MAX;
@@ -60,6 +67,9 @@ static unsigned int _get_table_mindiv(const struct clk_div_table *table)
 	return mindiv;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned int _get_maxdiv(struct clk_divider *divider)
 {
@@ -123,7 +133,11 @@ static unsigned long clk_divider_recalc_rate(struct clk_hw *hw,
 	unsigned int div, val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = readl(divider->reg) >> divider->shift;
+=======
+	val = clk_readl(divider->reg) >> divider->shift;
+>>>>>>> v3.18
 =======
 	val = clk_readl(divider->reg) >> divider->shift;
 >>>>>>> v3.18
@@ -138,7 +152,11 @@ static unsigned long clk_divider_recalc_rate(struct clk_hw *hw,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return parent_rate / div;
+=======
+	return DIV_ROUND_UP(parent_rate, div);
+>>>>>>> v3.18
 =======
 	return DIV_ROUND_UP(parent_rate, div);
 >>>>>>> v3.18
@@ -171,7 +189,10 @@ static bool _is_valid_div(struct clk_divider *divider, unsigned int div)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int _round_up_table(const struct clk_div_table *table, int div)
 {
 	const struct clk_div_table *clkt;
@@ -269,6 +290,9 @@ static int _next_div(struct clk_divider *divider, int div)
 	return div;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int clk_divider_bestdiv(struct clk_hw *hw, unsigned long rate,
 		unsigned long *best_parent_rate)
@@ -277,6 +301,10 @@ static int clk_divider_bestdiv(struct clk_hw *hw, unsigned long rate,
 	int i, bestdiv = 0;
 	unsigned long parent_rate, best = 0, now, maxdiv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long parent_rate_saved = *best_parent_rate;
+>>>>>>> v3.18
 =======
 	unsigned long parent_rate_saved = *best_parent_rate;
 >>>>>>> v3.18
@@ -285,7 +313,10 @@ static int clk_divider_bestdiv(struct clk_hw *hw, unsigned long rate,
 		rate = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* if read only, just return current value */
 	if (divider->flags & CLK_DIVIDER_READ_ONLY) {
 		bestdiv = readl(divider->reg) >> divider->shift;
@@ -294,13 +325,20 @@ static int clk_divider_bestdiv(struct clk_hw *hw, unsigned long rate,
 		return bestdiv;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	maxdiv = _get_maxdiv(divider);
 
 	if (!(__clk_get_flags(hw->clk) & CLK_SET_RATE_PARENT)) {
 		parent_rate = *best_parent_rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bestdiv = DIV_ROUND_UP(parent_rate, rate);
+=======
+		bestdiv = _div_round(divider, parent_rate, rate);
+>>>>>>> v3.18
 =======
 		bestdiv = _div_round(divider, parent_rate, rate);
 >>>>>>> v3.18
@@ -316,6 +354,7 @@ static int clk_divider_bestdiv(struct clk_hw *hw, unsigned long rate,
 	maxdiv = min(ULONG_MAX / rate, maxdiv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 1; i <= maxdiv; i++) {
 		if (!_is_valid_div(divider, i))
 			continue;
@@ -324,6 +363,8 @@ static int clk_divider_bestdiv(struct clk_hw *hw, unsigned long rate,
 		now = parent_rate / i;
 		if (now <= rate && now > best) {
 =======
+=======
+>>>>>>> v3.18
 	for (i = 1; i <= maxdiv; i = _next_div(divider, i)) {
 		if (!_is_valid_div(divider, i))
 			continue;
@@ -340,6 +381,9 @@ static int clk_divider_bestdiv(struct clk_hw *hw, unsigned long rate,
 				MULT_ROUND_UP(rate, i));
 		now = DIV_ROUND_UP(parent_rate, i);
 		if (_is_best_div(divider, rate, now, best)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			bestdiv = i;
 			best = now;
@@ -362,7 +406,11 @@ static long clk_divider_round_rate(struct clk_hw *hw, unsigned long rate,
 	div = clk_divider_bestdiv(hw, rate, prate);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return *prate / div;
+=======
+	return DIV_ROUND_UP(*prate, div);
+>>>>>>> v3.18
 =======
 	return DIV_ROUND_UP(*prate, div);
 >>>>>>> v3.18
@@ -377,13 +425,19 @@ static int clk_divider_set_rate(struct clk_hw *hw, unsigned long rate,
 	u32 val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	div = parent_rate / rate;
 =======
+=======
+>>>>>>> v3.18
 	div = DIV_ROUND_UP(parent_rate, rate);
 
 	if (!_is_valid_div(divider, div))
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	value = _get_val(divider, div);
 
@@ -394,11 +448,14 @@ static int clk_divider_set_rate(struct clk_hw *hw, unsigned long rate,
 		spin_lock_irqsave(divider->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = readl(divider->reg);
 	val &= ~(div_mask(divider) << divider->shift);
 	val |= value << divider->shift;
 	writel(val, divider->reg);
 =======
+=======
+>>>>>>> v3.18
 	if (divider->flags & CLK_DIVIDER_HIWORD_MASK) {
 		val = div_mask(divider) << (divider->shift + 16);
 	} else {
@@ -407,6 +464,9 @@ static int clk_divider_set_rate(struct clk_hw *hw, unsigned long rate,
 	}
 	val |= value << divider->shift;
 	clk_writel(val, divider->reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (divider->lock)
@@ -433,7 +493,10 @@ static struct clk *_register_divider(struct device *dev, const char *name,
 	struct clk_init_data init;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (clk_divider_flags & CLK_DIVIDER_HIWORD_MASK) {
 		if (width + shift > 16) {
 			pr_warn("divider value exceeds LOWORD field\n");
@@ -441,6 +504,9 @@ static struct clk *_register_divider(struct device *dev, const char *name,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* allocate the divider */
 	div = kzalloc(sizeof(struct clk_divider), GFP_KERNEL);
@@ -494,6 +560,10 @@ struct clk *clk_register_divider(struct device *dev, const char *name,
 			width, clk_divider_flags, NULL, lock);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(clk_register_divider);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(clk_register_divider);
 >>>>>>> v3.18
@@ -522,6 +592,10 @@ struct clk *clk_register_divider_table(struct device *dev, const char *name,
 			width, clk_divider_flags, table, lock);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(clk_register_divider_table);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(clk_register_divider_table);
 >>>>>>> v3.18

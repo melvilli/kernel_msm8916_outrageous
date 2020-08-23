@@ -117,7 +117,11 @@ wait_boot_cpu_to_stop(int cpuid)
  * Where secondaries begin a life of C.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit
+=======
+void
+>>>>>>> v3.18
 =======
 void
 >>>>>>> v3.18
@@ -143,15 +147,21 @@ smp_callin(void)
 	/* Get our local ticker going. */
 	smp_setup_percpu_timer(cpuid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Call platform-specific callin, if specified */
 	if (alpha_mv.smp_callin) alpha_mv.smp_callin();
 =======
+=======
+>>>>>>> v3.18
 	init_clockevent();
 
 	/* Call platform-specific callin, if specified */
 	if (alpha_mv.smp_callin)
 		alpha_mv.smp_callin();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* All kernel threads share the same mm context.  */
@@ -207,7 +217,11 @@ wait_for_txrdy (unsigned long cpumask)
  * interesting message.  ;-)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -281,14 +295,20 @@ recv_secondary_console_msg(void)
 			strcpy(buf, "<<< BOGUS MSG >>>");
 		else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cp1 = (char *) &cpu->ipc_buffer[11];
 			cp2 = buf;
 			strcpy(cp2, cp1);
 =======
+=======
+>>>>>>> v3.18
 			cp1 = (char *) &cpu->ipc_buffer[1];
 			cp2 = buf;
 			memcpy(cp2, cp1, cnt);
 			cp2[cnt] = '\0';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			
 			while ((cp2 = strchr(cp2, '\r')) != 0) {
@@ -309,7 +329,11 @@ recv_secondary_console_msg(void)
  * Convince the console to have a secondary cpu begin execution.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -384,7 +408,11 @@ secondary_cpu_start(int cpuid, struct task_struct *idle)
  * Bring one cpu online.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -504,7 +532,11 @@ smp_prepare_boot_cpu(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit
+=======
+int
+>>>>>>> v3.18
 =======
 int
 >>>>>>> v3.18
@@ -532,6 +564,7 @@ smp_cpus_done(unsigned int max_cpus)
 	       ((bogosum + 2500) / (5000/HZ)) % 100);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void
@@ -562,6 +595,8 @@ smp_percpu_timer_interrupt(struct pt_regs *regs)
 	set_irq_regs(old_regs);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int

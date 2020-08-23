@@ -137,7 +137,10 @@ Table 1-1: Process specific entries in /proc
  mem		Memory held by this process
  root		Link to the root directory of this process
 <<<<<<< HEAD
+<<<<<<< HEAD
  reclaim	Reclaim pages in this process
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  stat		Process status
@@ -239,7 +242,11 @@ Table 1-2: Contents of the status files (as of 2.6.30-rc7)
  SigBlk                      bitmap of blocked signals
  SigIgn                      bitmap of ignored signals
 <<<<<<< HEAD
+<<<<<<< HEAD
  SigCgt                      bitmap of catched signals
+=======
+ SigCgt                      bitmap of caught signals
+>>>>>>> v3.18
 =======
  SigCgt                      bitmap of caught signals
 >>>>>>> v3.18
@@ -309,7 +316,11 @@ Table 1-4: Contents of the stat files (as of 2.6.30-rc7)
   blocked       bitmap of blocked signals
   sigign        bitmap of ignored signals
 <<<<<<< HEAD
+<<<<<<< HEAD
   sigcatch      bitmap of catched signals
+=======
+  sigcatch      bitmap of caught signals
+>>>>>>> v3.18
 =======
   sigcatch      bitmap of caught signals
 >>>>>>> v3.18
@@ -382,8 +393,11 @@ is not associated with a file:
  [vdso]                   = the "virtual dynamic shared object",
                             the kernel system call handler
 <<<<<<< HEAD
+<<<<<<< HEAD
  [anon:<name>]            = an anonymous mapping that has been
                             named by userspace
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -433,7 +447,10 @@ Referenced:          892 kB
 Anonymous:             0 kB
 Swap:                  0 kB
 <<<<<<< HEAD
+<<<<<<< HEAD
 SwapPss:               0 kB
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 KernelPageSize:        4 kB
@@ -441,7 +458,10 @@ MMUPageSize:           4 kB
 Locked:              374 kB
 VmFlags: rd ex mr mw me de
 <<<<<<< HEAD
+<<<<<<< HEAD
 Name:           name from userspace
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -449,6 +469,7 @@ the first of these lines shows the same information as is displayed for the
 mapping in /proc/PID/maps.  The remaining lines show the size of the mapping
 (size), the amount of the mapping that is currently resident in RAM (RSS), the
 process' proportional share of this mapping (PSS), the number of clean and
+<<<<<<< HEAD
 <<<<<<< HEAD
 dirty private pages in the mapping.
 
@@ -462,10 +483,15 @@ as private and not as shared.
 "Referenced" indicates the amount of memory currently marked as referenced or
 accessed.
 =======
+=======
+>>>>>>> v3.18
 dirty private pages in the mapping.  Note that even a page which is part of a
 MAP_SHARED mapping, but has only a single pte mapped, i.e.  is currently used
 by only one process, is accounted as private and not as shared.  "Referenced"
 indicates the amount of memory currently marked as referenced or accessed.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 "Anonymous" shows the amount of memory that does not belong to any file.  Even
 a mapping associated with a file may contain anonymous pages: when MAP_PRIVATE
@@ -473,7 +499,11 @@ and a page is modified, the file page is replaced by a private anonymous copy.
 "Swap" shows how much would-be-anonymous memory is also used, but out on
 swap.
 <<<<<<< HEAD
+<<<<<<< HEAD
 "SwapPss" shows proportional swap share of this mapping.
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -504,6 +534,10 @@ manner. The codes are the following:
     ar  - architecture specific flag
     dd  - do not include area into core dump
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    sd  - soft-dirty flag
+>>>>>>> v3.18
 =======
     sd  - soft-dirty flag
 >>>>>>> v3.18
@@ -517,9 +551,12 @@ be present in all further kernel releases. Things get changed, the flags may
 be vanished or the reverse -- new added.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The "Name" field will only be present on a mapping that has been named by
 userspace, and will show the name passed in by userspace.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 This file is only present if the CONFIG_MMU kernel configuration option is
@@ -527,7 +564,12 @@ enabled.
 
 The /proc/PID/clear_refs is used to reset the PG_Referenced and ACCESSED/YOUNG
 <<<<<<< HEAD
+<<<<<<< HEAD
 bits on both physical and virtual pages associated with a process.
+=======
+bits on both physical and virtual pages associated with a process, and the
+soft-dirty bit on pte (see Documentation/vm/soft-dirty.txt for details).
+>>>>>>> v3.18
 =======
 bits on both physical and virtual pages associated with a process, and the
 soft-dirty bit on pte (see Documentation/vm/soft-dirty.txt for details).
@@ -540,6 +582,7 @@ To clear the bits for the anonymous pages associated with the process
 
 To clear the bits for the file mapped pages associated with the process
     > echo 3 > /proc/PID/clear_refs
+<<<<<<< HEAD
 <<<<<<< HEAD
 Any other value written to /proc/PID/clear_refs will have no effect.
 
@@ -562,11 +605,16 @@ NOTE: addr should be page-aligned.
 Below is example which try to reclaim 2M from 0x100000.
     > echo 0x100000 2M > /proc/PID/reclaim
 =======
+=======
+>>>>>>> v3.18
 
 To clear the soft-dirty bit
     > echo 4 > /proc/PID/clear_refs
 
 Any other value written to /proc/PID/clear_refs will have no effect.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The /proc/pid/pagemap gives the PFN, which can be used to find the pageflags
@@ -627,7 +675,11 @@ Table 1-5: Kernel info in /proc
  sysvipc     Info of SysVIPC Resources (msg, sem, shm)		(2.4)
  tty	     Info of tty drivers
 <<<<<<< HEAD
+<<<<<<< HEAD
  uptime      System uptime                                     
+=======
+ uptime      Wall clock since boot, combined idle time of all cpus
+>>>>>>> v3.18
 =======
  uptime      Wall clock since boot, combined idle time of all cpus
 >>>>>>> v3.18
@@ -851,6 +903,10 @@ The "Locked" indicates whether the mapping is locked in memory or not.
 MemTotal:     16344972 kB
 MemFree:      13634064 kB
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MemAvailable: 14836172 kB
+>>>>>>> v3.18
 =======
 MemAvailable: 14836172 kB
 >>>>>>> v3.18
@@ -887,7 +943,10 @@ AnonHugePages:   49152 kB
               bits and the kernel binary code)
      MemFree: The sum of LowFree+HighFree
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 MemAvailable: An estimate of how much memory is available for starting new
               applications, without swapping. Calculated from MemFree,
               SReclaimable, the size of the file LRU lists, and the low
@@ -896,6 +955,9 @@ MemAvailable: An estimate of how much memory is available for starting new
               page cache to function well, and that not all reclaimable
               slab will be reclaimable, due to items being in use. The
               impact of those factors will vary from system to system.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
      Buffers: Relatively temporary storage for raw disk blocks
               shouldn't get tremendously large (20MB or so)
@@ -944,7 +1006,12 @@ WritebackTmp: Memory used by FUSE for temporary writeback buffers
               'vm.overcommit_memory').
               The CommitLimit is calculated with the following formula:
 <<<<<<< HEAD
+<<<<<<< HEAD
               CommitLimit = ('vm.overcommit_ratio' * Physical RAM) + Swap
+=======
+              CommitLimit = ([total RAM pages] - [total huge TLB pages]) *
+                             overcommit_ratio / 100 + [total swap pages]
+>>>>>>> v3.18
 =======
               CommitLimit = ([total RAM pages] - [total huge TLB pages]) *
                              overcommit_ratio / 100 + [total swap pages]
@@ -959,6 +1026,7 @@ Committed_AS: The amount of memory presently allocated on the system.
               has been allocated by processes, even if it has not been
               "used" by them as of yet. A process which malloc()'s 1G
 <<<<<<< HEAD
+<<<<<<< HEAD
               of memory, but only touches 300M of it will only show up
               as using 300M of memory even if it has the address space
               allocated for the entire 1G. This 1G is memory which has
@@ -970,6 +1038,8 @@ Committed_AS: The amount of memory presently allocated on the system.
               to guarantee that processes will not fail due to lack of
               memory once that memory has been successfully allocated.
 =======
+=======
+>>>>>>> v3.18
               of memory, but only touches 300M of it will show up as
 	      using 1G. This 1G is memory which has been "committed" to
               by the VM and can be used at any time by the allocating
@@ -979,6 +1049,9 @@ Committed_AS: The amount of memory presently allocated on the system.
               This is useful if one needs to guarantee that processes will
               not fail due to lack of memory once that memory has been
               successfully allocated.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 VmallocTotal: total size of vmalloc memory area
  VmallocUsed: amount of vmalloc area which is used
@@ -1353,8 +1426,14 @@ second).  The meanings of the columns are as follows, from left to right:
 The "intr" line gives counts of interrupts  serviced since boot time, for each
 of the  possible system interrupts.   The first  column  is the  total of  all
 <<<<<<< HEAD
+<<<<<<< HEAD
 interrupts serviced; each  subsequent column is the  total for that particular
 interrupt.
+=======
+interrupts serviced  including  unnumbered  architecture specific  interrupts;
+each  subsequent column is the  total for that particular numbered interrupt.
+Unnumbered interrupts are not shown, only summed into the total.
+>>>>>>> v3.18
 =======
 interrupts serviced  including  unnumbered  architecture specific  interrupts;
 each  subsequent column is the  total for that particular numbered interrupt.
@@ -1762,6 +1841,7 @@ if precise results are needed.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 3.7	/proc/<pid>/fdinfo/<fd> - Information about opened file
 ---------------------------------------------------------------
 This file provides information associated with an opened file. The regular
@@ -1770,6 +1850,8 @@ the current offset of the opened file in decimal form [see lseek(2) for
 details] and 'flags' denotes the octal O_xxx mask the file has been
 created with [see open(2) for details].
 =======
+=======
+>>>>>>> v3.18
 3.8	/proc/<pid>/fdinfo/<fd> - Information about opened file
 ---------------------------------------------------------------
 This file provides information associated with an opened file. The regular
@@ -1779,6 +1861,9 @@ for details], 'flags' denotes the octal O_xxx mask the file has been
 created with [see open(2) for details] and 'mnt_id' represents mount ID of
 the file system containing the opened file [see 3.5 /proc/<pid>/mountinfo
 for details].
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 A typical output is
@@ -1786,6 +1871,10 @@ A typical output is
 	pos:	0
 	flags:	0100002
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mnt_id:	19
+>>>>>>> v3.18
 =======
 	mnt_id:	19
 >>>>>>> v3.18
@@ -1798,6 +1887,10 @@ pair provide additional information particular to the objects they represent.
 	pos:	0
 	flags:	04002
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mnt_id:	9
+>>>>>>> v3.18
 =======
 	mnt_id:	9
 >>>>>>> v3.18
@@ -1810,6 +1903,10 @@ pair provide additional information particular to the objects they represent.
 	pos:	0
 	flags:	04002
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mnt_id:	9
+>>>>>>> v3.18
 =======
 	mnt_id:	9
 >>>>>>> v3.18
@@ -1823,6 +1920,10 @@ pair provide additional information particular to the objects they represent.
 	pos:	0
 	flags:	02
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mnt_id:	9
+>>>>>>> v3.18
 =======
 	mnt_id:	9
 >>>>>>> v3.18
@@ -1860,6 +1961,10 @@ pair provide additional information particular to the objects they represent.
 	pos:	0
 	flags:	02
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mnt_id:	9
+>>>>>>> v3.18
 =======
 	mnt_id:	9
 >>>>>>> v3.18
@@ -1880,7 +1985,10 @@ pair provide additional information particular to the objects they represent.
 	optional and may be omitted if no marks created yet.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	Timerfd files
 	~~~~~~~~~~~~~
 
@@ -1900,6 +2008,9 @@ pair provide additional information particular to the objects they represent.
 	'it_interval' is the interval for the timer. Note the timer might be set up
 	with TIMER_ABSTIME option which will be shown in 'settime flags', but 'it_value'
 	still exhibits timer's remaining time.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ------------------------------------------------------------------------------

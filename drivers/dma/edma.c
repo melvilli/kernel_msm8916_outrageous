@@ -24,8 +24,14 @@
 #include <linux/slab.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/edma.h>
+=======
+#include <linux/of.h>
+
+#include <linux/platform_data/edma.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 
@@ -53,6 +59,7 @@
 #endif /* CONFIG_ARCH_DAVINCI_DA8XX */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Max of 16 segments per channel to conserve PaRAM slots */
 #define MAX_NR_SG		16
 #define EDMA_MAX_SLOTS		MAX_NR_SG
@@ -65,6 +72,8 @@ struct edma_desc {
 	int				pset_nr;
 	struct edmacc_param		pset[0];
 =======
+=======
+>>>>>>> v3.18
 /*
  * Max of 20 segments per channel to conserve PaRAM slots
  * Also note that MAX_NR_SG should be atleast the no.of periods
@@ -118,6 +127,9 @@ struct edma_desc {
 	u32				residue_stat;
 
 	struct edma_pset		pset[0];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -132,6 +144,10 @@ struct edma_chan {
 	bool				alloced;
 	int				slot[EDMA_MAX_SLOTS];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int				missed;
+>>>>>>> v3.18
 =======
 	int				missed;
 >>>>>>> v3.18
@@ -171,6 +187,7 @@ static void edma_desc_free(struct virt_dma_desc *vdesc)
 static void edma_execute(struct edma_chan *echan)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct virt_dma_desc *vdesc = vchan_next_desc(&echan->vchan);
 	struct edma_desc *edesc;
 	int i;
@@ -189,6 +206,8 @@ static void edma_execute(struct edma_chan *echan)
 		edma_write_slot(echan->slot[i], &edesc->pset[i]);
 		dev_dbg(echan->vchan.chan.device->dev,
 =======
+=======
+>>>>>>> v3.18
 	struct virt_dma_desc *vdesc;
 	struct edma_desc *edesc;
 	struct device *dev = echan->vchan.chan.device->dev;
@@ -220,6 +239,9 @@ static void edma_execute(struct edma_chan *echan)
 		edma_write_slot(echan->slot[i], &edesc->pset[j].param);
 		edesc->sg_len += edesc->pset[j].len;
 		dev_vdbg(echan->vchan.chan.device->dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			"\n pset[%d]:\n"
 			"  chnum\t%d\n"
@@ -232,6 +254,7 @@ static void edma_execute(struct edma_chan *echan)
 			"  bidx\t%08x\n"
 			"  cidx\t%08x\n"
 			"  lkrld\t%08x\n",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			i, echan->ch_num, echan->slot[i],
 			edesc->pset[i].opt,
@@ -252,6 +275,8 @@ static void edma_execute(struct edma_chan *echan)
 
 	edma_start(echan->ch_num);
 =======
+=======
+>>>>>>> v3.18
 			j, echan->ch_num, echan->slot[i],
 			edesc->pset[j].param.opt,
 			edesc->pset[j].param.src,
@@ -304,6 +329,9 @@ static void edma_execute(struct edma_chan *echan)
 		edma_trigger_channel(echan->ch_num);
 		echan->missed = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -321,9 +349,12 @@ static int edma_terminate_all(struct edma_chan *echan)
 	 */
 	if (echan->edesc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		echan->edesc = NULL;
 		edma_stop(echan->ch_num);
 =======
+=======
+>>>>>>> v3.18
 		int cyclic = echan->edesc->cyclic;
 		echan->edesc = NULL;
 		edma_stop(echan->ch_num);
@@ -331,6 +362,9 @@ static int edma_terminate_all(struct edma_chan *echan)
 		if (cyclic)
 			edma_assign_channel_eventq(echan->ch_num,
 						   EVENTQ_DEFAULT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -354,7 +388,10 @@ static int edma_slave_config(struct edma_chan *echan,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int edma_dma_pause(struct edma_chan *echan)
 {
 	/* Pause/Resume only allowed with cyclic mode */
@@ -375,6 +412,9 @@ static int edma_dma_resume(struct edma_chan *echan)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int edma_control(struct dma_chan *chan, enum dma_ctrl_cmd cmd,
 			unsigned long arg)
@@ -392,7 +432,10 @@ static int edma_control(struct dma_chan *chan, enum dma_ctrl_cmd cmd,
 		ret = edma_slave_config(echan, config);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case DMA_PAUSE:
 		ret = edma_dma_pause(echan);
 		break;
@@ -401,6 +444,9 @@ static int edma_control(struct dma_chan *chan, enum dma_ctrl_cmd cmd,
 		ret = edma_dma_resume(echan);
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		ret = -ENOSYS;
@@ -410,7 +456,10 @@ static int edma_control(struct dma_chan *chan, enum dma_ctrl_cmd cmd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * A PaRAM set configuration abstraction used by other modes
  * @chan: Channel who's PaRAM set we're configuring
@@ -536,6 +585,9 @@ static int edma_config_pset(struct dma_chan *chan, struct edma_pset *epset,
 	return absync;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct dma_async_tx_descriptor *edma_prep_slave_sg(
 	struct dma_chan *chan, struct scatterlist *sgl,
@@ -546,6 +598,7 @@ static struct dma_async_tx_descriptor *edma_prep_slave_sg(
 	struct device *dev = chan->device->dev;
 	struct edma_desc *edesc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_addr_t dev_addr;
 	enum dma_slave_buswidth dev_width;
 	u32 burst;
@@ -554,17 +607,23 @@ static struct dma_async_tx_descriptor *edma_prep_slave_sg(
 	int acnt, bcnt, ccnt, src, dst, cidx;
 	int src_bidx, dst_bidx, src_cidx, dst_cidx;
 =======
+=======
+>>>>>>> v3.18
 	dma_addr_t src_addr = 0, dst_addr = 0;
 	enum dma_slave_buswidth dev_width;
 	u32 burst;
 	struct scatterlist *sg;
 	int i, nslots, ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(!echan || !sgl || !sg_len))
 		return NULL;
 
 	if (direction == DMA_DEV_TO_MEM) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_addr = echan->cfg.src_addr;
 		dev_width = echan->cfg.src_addr_width;
@@ -576,6 +635,8 @@ static struct dma_async_tx_descriptor *edma_prep_slave_sg(
 	} else {
 		dev_err(dev, "%s: bad direction?\n", __func__);
 =======
+=======
+>>>>>>> v3.18
 		src_addr = echan->cfg.src_addr;
 		dev_width = echan->cfg.src_addr_width;
 		burst = echan->cfg.src_maxburst;
@@ -585,11 +646,15 @@ static struct dma_async_tx_descriptor *edma_prep_slave_sg(
 		burst = echan->cfg.dst_maxburst;
 	} else {
 		dev_err(dev, "%s: bad direction: %d\n", __func__, direction);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 	}
 
 	if (dev_width == DMA_SLAVE_BUSWIDTH_UNDEFINED) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_err(dev, "Undefined slave buswidth\n");
 		return NULL;
@@ -601,6 +666,9 @@ static struct dma_async_tx_descriptor *edma_prep_slave_sg(
 =======
 		dev_err(dev, "%s: Undefined slave buswidth\n", __func__);
 >>>>>>> v3.18
+=======
+		dev_err(dev, "%s: Undefined slave buswidth\n", __func__);
+>>>>>>> v3.18
 		return NULL;
 	}
 
@@ -608,7 +676,11 @@ static struct dma_async_tx_descriptor *edma_prep_slave_sg(
 		sizeof(edesc->pset[0]), GFP_ATOMIC);
 	if (!edesc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(dev, "Failed to allocate a descriptor\n");
+=======
+		dev_err(dev, "%s: Failed to allocate a descriptor\n", __func__);
+>>>>>>> v3.18
 =======
 		dev_err(dev, "%s: Failed to allocate a descriptor\n", __func__);
 >>>>>>> v3.18
@@ -617,10 +689,13 @@ static struct dma_async_tx_descriptor *edma_prep_slave_sg(
 
 	edesc->pset_nr = sg_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	for_each_sg(sgl, sg, sg_len, i) {
 		/* Allocate a PaRAM slot, if needed */
 =======
+=======
+>>>>>>> v3.18
 	edesc->residue = 0;
 	edesc->direction = direction;
 	edesc->echan = echan;
@@ -629,12 +704,16 @@ static struct dma_async_tx_descriptor *edma_prep_slave_sg(
 	nslots = min_t(unsigned, MAX_NR_SG, sg_len);
 
 	for (i = 0; i < nslots; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (echan->slot[i] < 0) {
 			echan->slot[i] =
 				edma_alloc_slot(EDMA_CTLR(echan->ch_num),
 						EDMA_SLOT_ANY);
 			if (echan->slot[i] < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				dev_err(dev, "Failed to allocate slot\n");
 				return NULL;
@@ -714,6 +793,8 @@ static struct dma_async_tx_descriptor *edma_prep_slave_sg(
 	}
 
 =======
+=======
+>>>>>>> v3.18
 				kfree(edesc);
 				dev_err(dev, "%s: Failed to allocate slot\n",
 					__func__);
@@ -931,6 +1012,9 @@ static struct dma_async_tx_descriptor *edma_prep_dma_cyclic(
 	/* Place the cyclic channel to highest priority queue */
 	edma_assign_channel_eventq(echan->ch_num, EVENTQ_0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return vchan_tx_prep(&echan->vchan, &edesc->vdesc, tx_flags);
 }
@@ -940,6 +1024,7 @@ static void edma_callback(unsigned ch_num, u16 ch_status, void *data)
 	struct edma_chan *echan = data;
 	struct device *dev = echan->vchan.chan.device->dev;
 	struct edma_desc *edesc;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 
@@ -964,6 +1049,8 @@ static void edma_callback(unsigned ch_num, u16 ch_status, void *data)
 	case DMA_CC_ERROR:
 		dev_dbg(dev, "transfer error on channel %d\n", ch_num);
 =======
+=======
+>>>>>>> v3.18
 	struct edmacc_param p;
 
 	edesc = echan->edesc;
@@ -1034,6 +1121,9 @@ static void edma_callback(unsigned ch_num, u16 ch_status, void *data)
 
 		spin_unlock(&echan->vchan.lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -1070,8 +1160,13 @@ static int edma_alloc_chan_resources(struct dma_chan *chan)
 	echan->slot[0] = echan->ch_num;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(dev, "allocated channel for %u:%u\n",
 		 EDMA_CTLR(echan->ch_num), EDMA_CHAN_SLOT(echan->ch_num));
+=======
+	dev_dbg(dev, "allocated channel %d for %u:%u\n", echan->ch_num,
+		EDMA_CTLR(echan->ch_num), EDMA_CHAN_SLOT(echan->ch_num));
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "allocated channel %d for %u:%u\n", echan->ch_num,
 		EDMA_CTLR(echan->ch_num), EDMA_CHAN_SLOT(echan->ch_num));
@@ -1112,7 +1207,11 @@ static void edma_free_chan_resources(struct dma_chan *chan)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(dev, "freeing channel for %u\n", echan->ch_num);
+=======
+	dev_dbg(dev, "freeing channel for %u\n", echan->ch_num);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "freeing channel for %u\n", echan->ch_num);
 >>>>>>> v3.18
@@ -1130,6 +1229,7 @@ static void edma_issue_pending(struct dma_chan *chan)
 	spin_unlock_irqrestore(&echan->vchan.lock, flags);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static size_t edma_desc_size(struct edma_desc *edesc)
 {
@@ -1149,6 +1249,8 @@ static size_t edma_desc_size(struct edma_desc *edesc)
 
 	return size;
 =======
+=======
+>>>>>>> v3.18
 static u32 edma_residue(struct edma_desc *edesc)
 {
 	bool dst = edesc->direction == DMA_DEV_TO_MEM;
@@ -1195,6 +1297,9 @@ static u32 edma_residue(struct edma_desc *edesc)
 		edesc->residue_stat -= pset->len;
 	}
 	return edesc->residue_stat;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1210,6 +1315,7 @@ static enum dma_status edma_tx_status(struct dma_chan *chan,
 
 	ret = dma_cookie_status(chan, cookie, txstate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == DMA_SUCCESS || !txstate)
 		return ret;
 
@@ -1224,6 +1330,8 @@ static enum dma_status edma_tx_status(struct dma_chan *chan,
 		txstate->residue = 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (ret == DMA_COMPLETE || !txstate)
 		return ret;
 
@@ -1232,6 +1340,9 @@ static enum dma_status edma_tx_status(struct dma_chan *chan,
 		txstate->residue = edma_residue(echan->edesc);
 	else if ((vdesc = vchan_find_desc(&echan->vchan, cookie)))
 		txstate->residue = to_edma_desc(&vdesc->tx)->residue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&echan->vchan.lock, flags);
 
@@ -1259,7 +1370,10 @@ static void __init edma_chan_init(struct edma_cc *ecc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define EDMA_DMA_BUSWIDTHS	(BIT(DMA_SLAVE_BUSWIDTH_1_BYTE) | \
 				 BIT(DMA_SLAVE_BUSWIDTH_2_BYTES) | \
 				 BIT(DMA_SLAVE_BUSWIDTH_3_BYTES) | \
@@ -1278,12 +1392,20 @@ static int edma_dma_device_slave_caps(struct dma_chan *dchan,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void edma_dma_init(struct edma_cc *ecc, struct dma_device *dma,
 			  struct device *dev)
 {
 	dma->device_prep_slave_sg = edma_prep_slave_sg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dma->device_prep_dma_cyclic = edma_prep_dma_cyclic;
+	dma->device_prep_dma_memcpy = edma_prep_dma_memcpy;
+>>>>>>> v3.18
 =======
 	dma->device_prep_dma_cyclic = edma_prep_dma_cyclic;
 	dma->device_prep_dma_memcpy = edma_prep_dma_memcpy;
@@ -1294,9 +1416,12 @@ static void edma_dma_init(struct edma_cc *ecc, struct dma_device *dma,
 	dma->device_tx_status = edma_tx_status;
 	dma->device_control = edma_control;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma->dev = dev;
 
 =======
+=======
+>>>>>>> v3.18
 	dma->device_slave_caps = edma_dma_device_slave_caps;
 	dma->dev = dev;
 
@@ -1306,6 +1431,9 @@ static void edma_dma_init(struct edma_cc *ecc, struct dma_device *dma,
 	 */
 	dma->copy_align = DMA_SLAVE_BUSWIDTH_4_BYTES;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&dma->channels);
 }
@@ -1316,11 +1444,17 @@ static int edma_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ecc = devm_kzalloc(&pdev->dev, sizeof(*ecc), GFP_KERNEL);
 	if (!ecc) {
@@ -1333,7 +1467,11 @@ static int edma_probe(struct platform_device *pdev)
 	if (ecc->dummy_slot < 0) {
 		dev_err(&pdev->dev, "Can't allocate PaRAM dummy slot\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EIO;
+=======
+		return ecc->dummy_slot;
+>>>>>>> v3.18
 =======
 		return ecc->dummy_slot;
 >>>>>>> v3.18
@@ -1342,6 +1480,11 @@ static int edma_probe(struct platform_device *pdev)
 	dma_cap_zero(ecc->dma_slave.cap_mask);
 	dma_cap_set(DMA_SLAVE, ecc->dma_slave.cap_mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dma_cap_set(DMA_CYCLIC, ecc->dma_slave.cap_mask);
+	dma_cap_set(DMA_MEMCPY, ecc->dma_slave.cap_mask);
+>>>>>>> v3.18
 =======
 	dma_cap_set(DMA_CYCLIC, ecc->dma_slave.cap_mask);
 	dma_cap_set(DMA_MEMCPY, ecc->dma_slave.cap_mask);
@@ -1398,6 +1541,7 @@ bool edma_filter_fn(struct dma_chan *chan, void *param)
 EXPORT_SYMBOL(edma_filter_fn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_device *pdev0, *pdev1;
 
 static const struct platform_device_info edma_dev_info0 = {
@@ -1443,15 +1587,23 @@ static int edma_init(void)
 {
 	return platform_driver_register(&edma_driver);
 >>>>>>> v3.18
+=======
+static int edma_init(void)
+{
+	return platform_driver_register(&edma_driver);
+>>>>>>> v3.18
 }
 subsys_initcall(edma_init);
 
 static void __exit edma_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_unregister(pdev0);
 	if (pdev1)
 		platform_device_unregister(pdev1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	platform_driver_unregister(&edma_driver);
@@ -1459,7 +1611,11 @@ static void __exit edma_exit(void)
 module_exit(edma_exit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Matt Porter <mporter@ti.com>");
+=======
+MODULE_AUTHOR("Matt Porter <matt.porter@linaro.org>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Matt Porter <matt.porter@linaro.org>");
 >>>>>>> v3.18

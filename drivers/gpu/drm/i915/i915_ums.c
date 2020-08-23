@@ -42,7 +42,11 @@ static bool i915_pipe_enabled(struct drm_device *dev, enum pipe pipe)
 
 	if (HAS_PCH_SPLIT(dev))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dpll_reg = _PCH_DPLL(pipe);
+=======
+		dpll_reg = PCH_DPLL(pipe);
+>>>>>>> v3.18
 =======
 		dpll_reg = PCH_DPLL(pipe);
 >>>>>>> v3.18
@@ -153,6 +157,7 @@ void i915_save_display_reg(struct drm_device *dev)
 		dev_priv->regfile.savePFA_WIN_POS = I915_READ(_PFA_WIN_POS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_priv->regfile.saveTRANSACONF = I915_READ(_TRANSACONF);
 		dev_priv->regfile.saveTRANS_HTOTAL_A = I915_READ(_TRANS_HTOTAL_A);
 		dev_priv->regfile.saveTRANS_HBLANK_A = I915_READ(_TRANS_HBLANK_A);
@@ -161,6 +166,8 @@ void i915_save_display_reg(struct drm_device *dev)
 		dev_priv->regfile.saveTRANS_VBLANK_A = I915_READ(_TRANS_VBLANK_A);
 		dev_priv->regfile.saveTRANS_VSYNC_A = I915_READ(_TRANS_VSYNC_A);
 =======
+=======
+>>>>>>> v3.18
 		dev_priv->regfile.saveTRANSACONF = I915_READ(_PCH_TRANSACONF);
 		dev_priv->regfile.saveTRANS_HTOTAL_A = I915_READ(_PCH_TRANS_HTOTAL_A);
 		dev_priv->regfile.saveTRANS_HBLANK_A = I915_READ(_PCH_TRANS_HBLANK_A);
@@ -168,6 +175,9 @@ void i915_save_display_reg(struct drm_device *dev)
 		dev_priv->regfile.saveTRANS_VTOTAL_A = I915_READ(_PCH_TRANS_VTOTAL_A);
 		dev_priv->regfile.saveTRANS_VBLANK_A = I915_READ(_PCH_TRANS_VBLANK_A);
 		dev_priv->regfile.saveTRANS_VSYNC_A = I915_READ(_PCH_TRANS_VSYNC_A);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -220,6 +230,7 @@ void i915_save_display_reg(struct drm_device *dev)
 		dev_priv->regfile.savePFB_WIN_POS = I915_READ(_PFB_WIN_POS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_priv->regfile.saveTRANSBCONF = I915_READ(_TRANSBCONF);
 		dev_priv->regfile.saveTRANS_HTOTAL_B = I915_READ(_TRANS_HTOTAL_B);
 		dev_priv->regfile.saveTRANS_HBLANK_B = I915_READ(_TRANS_HBLANK_B);
@@ -228,6 +239,8 @@ void i915_save_display_reg(struct drm_device *dev)
 		dev_priv->regfile.saveTRANS_VBLANK_B = I915_READ(_TRANS_VBLANK_B);
 		dev_priv->regfile.saveTRANS_VSYNC_B = I915_READ(_TRANS_VSYNC_B);
 =======
+=======
+>>>>>>> v3.18
 		dev_priv->regfile.saveTRANSBCONF = I915_READ(_PCH_TRANSBCONF);
 		dev_priv->regfile.saveTRANS_HTOTAL_B = I915_READ(_PCH_TRANS_HTOTAL_B);
 		dev_priv->regfile.saveTRANS_HBLANK_B = I915_READ(_PCH_TRANS_HBLANK_B);
@@ -235,6 +248,9 @@ void i915_save_display_reg(struct drm_device *dev)
 		dev_priv->regfile.saveTRANS_VTOTAL_B = I915_READ(_PCH_TRANS_VTOTAL_B);
 		dev_priv->regfile.saveTRANS_VBLANK_B = I915_READ(_PCH_TRANS_VBLANK_B);
 		dev_priv->regfile.saveTRANS_VSYNC_B = I915_READ(_PCH_TRANS_VSYNC_B);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -284,6 +300,7 @@ void i915_save_display_reg(struct drm_device *dev)
 		dev_priv->regfile.saveDP_C = I915_READ(DP_C);
 		dev_priv->regfile.saveDP_D = I915_READ(DP_D);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_priv->regfile.savePIPEA_GMCH_DATA_M = I915_READ(_PIPEA_GMCH_DATA_M);
 		dev_priv->regfile.savePIPEB_GMCH_DATA_M = I915_READ(_PIPEB_GMCH_DATA_M);
 		dev_priv->regfile.savePIPEA_GMCH_DATA_N = I915_READ(_PIPEA_GMCH_DATA_N);
@@ -296,6 +313,8 @@ void i915_save_display_reg(struct drm_device *dev)
 	/* FIXME: regfile.save TV & SDVO state */
 
 =======
+=======
+>>>>>>> v3.18
 		dev_priv->regfile.savePIPEA_GMCH_DATA_M = I915_READ(_PIPEA_DATA_M_G4X);
 		dev_priv->regfile.savePIPEB_GMCH_DATA_M = I915_READ(_PIPEB_DATA_M_G4X);
 		dev_priv->regfile.savePIPEA_GMCH_DATA_N = I915_READ(_PIPEA_DATA_N_G4X);
@@ -323,6 +342,9 @@ void i915_save_display_reg(struct drm_device *dev)
 			dev_priv->regfile.saveBLC_PWM_CTL2 = I915_READ(BLC_PWM_CTL2);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return;
 }
@@ -335,6 +357,7 @@ void i915_restore_display_reg(struct drm_device *dev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Display port ratios (must be done before clock is set) */
 	if (SUPPORTS_INTEGRATED_DP(dev)) {
 		I915_WRITE(_PIPEA_GMCH_DATA_M, dev_priv->regfile.savePIPEA_GMCH_DATA_M);
@@ -346,6 +369,8 @@ void i915_restore_display_reg(struct drm_device *dev)
 		I915_WRITE(_PIPEA_DP_LINK_N, dev_priv->regfile.savePIPEA_DP_LINK_N);
 		I915_WRITE(_PIPEB_DP_LINK_N, dev_priv->regfile.savePIPEB_DP_LINK_N);
 =======
+=======
+>>>>>>> v3.18
 	/* Backlight */
 	if (INTEL_INFO(dev)->gen <= 4)
 		pci_write_config_byte(dev->pdev, PCI_LBPC,
@@ -375,6 +400,9 @@ void i915_restore_display_reg(struct drm_device *dev)
 		I915_WRITE(_PIPEB_LINK_M_G4X, dev_priv->regfile.savePIPEB_DP_LINK_M);
 		I915_WRITE(_PIPEA_LINK_N_G4X, dev_priv->regfile.savePIPEA_DP_LINK_N);
 		I915_WRITE(_PIPEB_LINK_N_G4X, dev_priv->regfile.savePIPEB_DP_LINK_N);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -466,6 +494,7 @@ void i915_restore_display_reg(struct drm_device *dev)
 		I915_WRITE(_PFA_WIN_POS, dev_priv->regfile.savePFA_WIN_POS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		I915_WRITE(_TRANSACONF, dev_priv->regfile.saveTRANSACONF);
 		I915_WRITE(_TRANS_HTOTAL_A, dev_priv->regfile.saveTRANS_HTOTAL_A);
 		I915_WRITE(_TRANS_HBLANK_A, dev_priv->regfile.saveTRANS_HBLANK_A);
@@ -474,6 +503,8 @@ void i915_restore_display_reg(struct drm_device *dev)
 		I915_WRITE(_TRANS_VBLANK_A, dev_priv->regfile.saveTRANS_VBLANK_A);
 		I915_WRITE(_TRANS_VSYNC_A, dev_priv->regfile.saveTRANS_VSYNC_A);
 =======
+=======
+>>>>>>> v3.18
 		I915_WRITE(_PCH_TRANSACONF, dev_priv->regfile.saveTRANSACONF);
 		I915_WRITE(_PCH_TRANS_HTOTAL_A, dev_priv->regfile.saveTRANS_HTOTAL_A);
 		I915_WRITE(_PCH_TRANS_HBLANK_A, dev_priv->regfile.saveTRANS_HBLANK_A);
@@ -481,6 +512,9 @@ void i915_restore_display_reg(struct drm_device *dev)
 		I915_WRITE(_PCH_TRANS_VTOTAL_A, dev_priv->regfile.saveTRANS_VTOTAL_A);
 		I915_WRITE(_PCH_TRANS_VBLANK_A, dev_priv->regfile.saveTRANS_VBLANK_A);
 		I915_WRITE(_PCH_TRANS_VSYNC_A, dev_priv->regfile.saveTRANS_VSYNC_A);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -545,6 +579,7 @@ void i915_restore_display_reg(struct drm_device *dev)
 		I915_WRITE(_PFB_WIN_POS, dev_priv->regfile.savePFB_WIN_POS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		I915_WRITE(_TRANSBCONF, dev_priv->regfile.saveTRANSBCONF);
 		I915_WRITE(_TRANS_HTOTAL_B, dev_priv->regfile.saveTRANS_HTOTAL_B);
 		I915_WRITE(_TRANS_HBLANK_B, dev_priv->regfile.saveTRANS_HBLANK_B);
@@ -553,6 +588,8 @@ void i915_restore_display_reg(struct drm_device *dev)
 		I915_WRITE(_TRANS_VBLANK_B, dev_priv->regfile.saveTRANS_VBLANK_B);
 		I915_WRITE(_TRANS_VSYNC_B, dev_priv->regfile.saveTRANS_VSYNC_B);
 =======
+=======
+>>>>>>> v3.18
 		I915_WRITE(_PCH_TRANSBCONF, dev_priv->regfile.saveTRANSBCONF);
 		I915_WRITE(_PCH_TRANS_HTOTAL_B, dev_priv->regfile.saveTRANS_HTOTAL_B);
 		I915_WRITE(_PCH_TRANS_HBLANK_B, dev_priv->regfile.saveTRANS_HBLANK_B);
@@ -560,6 +597,9 @@ void i915_restore_display_reg(struct drm_device *dev)
 		I915_WRITE(_PCH_TRANS_VTOTAL_B, dev_priv->regfile.saveTRANS_VTOTAL_B);
 		I915_WRITE(_PCH_TRANS_VBLANK_B, dev_priv->regfile.saveTRANS_VBLANK_B);
 		I915_WRITE(_PCH_TRANS_VSYNC_B, dev_priv->regfile.saveTRANS_VSYNC_B);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

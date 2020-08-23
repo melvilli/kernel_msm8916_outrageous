@@ -2932,7 +2932,11 @@ static int initio_probe_one(struct pci_dev *pdev,
 	shost->sg_tablesize = TOTAL_SG_ENTRY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = request_irq(pdev->irq, i91u_intr, IRQF_DISABLED|IRQF_SHARED, "i91u", shost);
+=======
+	error = request_irq(pdev->irq, i91u_intr, IRQF_SHARED, "i91u", shost);
+>>>>>>> v3.18
 =======
 	error = request_irq(pdev->irq, i91u_intr, IRQF_SHARED, "i91u", shost);
 >>>>>>> v3.18

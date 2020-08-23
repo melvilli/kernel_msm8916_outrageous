@@ -13,8 +13,11 @@
 
 #include <linux/phy.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/dsa.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/netdevice.h>
 
 struct dsa_device_ops {
@@ -22,6 +25,9 @@ struct dsa_device_ops {
 	int (*rcv)(struct sk_buff *skb, struct net_device *dev,
 		   struct packet_type *pt, struct net_device *orig_dev);
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct dsa_slave_priv {
@@ -31,6 +37,11 @@ struct dsa_slave_priv {
 	 */
 	struct net_device	*dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	netdev_tx_t		(*xmit)(struct sk_buff *skb,
+					struct net_device *dev);
+>>>>>>> v3.18
 =======
 	netdev_tx_t		(*xmit)(struct sk_buff *skb,
 					struct net_device *dev);
@@ -49,11 +60,17 @@ struct dsa_slave_priv {
 	 */
 	struct phy_device	*phy;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	phy_interface_t		phy_interface;
 	int			old_link;
 	int			old_pause;
 	int			old_duplex;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -62,6 +79,10 @@ extern char dsa_driver_version[];
 
 /* slave.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct dsa_device_ops notag_netdev_ops;
+>>>>>>> v3.18
 =======
 extern const struct dsa_device_ops notag_netdev_ops;
 >>>>>>> v3.18
@@ -69,6 +90,7 @@ void dsa_slave_mii_bus_init(struct dsa_switch *ds);
 struct net_device *dsa_slave_create(struct dsa_switch *ds,
 				    struct device *parent,
 				    int port, char *name);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* tag_dsa.c */
@@ -83,6 +105,8 @@ extern struct packet_type edsa_packet_type;
 netdev_tx_t trailer_xmit(struct sk_buff *skb, struct net_device *dev);
 extern struct packet_type trailer_packet_type;
 =======
+=======
+>>>>>>> v3.18
 int dsa_slave_suspend(struct net_device *slave_dev);
 int dsa_slave_resume(struct net_device *slave_dev);
 
@@ -97,6 +121,9 @@ extern const struct dsa_device_ops trailer_netdev_ops;
 
 /* tag_brcm.c */
 extern const struct dsa_device_ops brcm_netdev_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

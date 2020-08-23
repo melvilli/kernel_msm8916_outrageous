@@ -1,6 +1,10 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
+=======
+ * Driver for Solarflare network controllers and boards
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
 >>>>>>> v3.18
@@ -25,7 +29,11 @@
 static inline unsigned efx_mdio_id_rev(u32 id) { return id & 0xf; }
 static inline unsigned efx_mdio_id_model(u32 id) { return (id >> 4) & 0x3f; }
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned efx_mdio_id_oui(u32 id);
+=======
+unsigned efx_mdio_id_oui(u32 id);
+>>>>>>> v3.18
 =======
 unsigned efx_mdio_id_oui(u32 id);
 >>>>>>> v3.18
@@ -65,7 +73,11 @@ static inline bool efx_mdio_phyxgxs_lane_sync(struct efx_nic *efx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const char *efx_mdio_mmd_name(int mmd);
+=======
+const char *efx_mdio_mmd_name(int mmd);
+>>>>>>> v3.18
 =======
 const char *efx_mdio_mmd_name(int mmd);
 >>>>>>> v3.18
@@ -77,8 +89,12 @@ const char *efx_mdio_mmd_name(int mmd);
  * This function will sleep
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int efx_mdio_reset_mmd(struct efx_nic *efx, int mmd,
 			      int spins, int spintime);
+=======
+int efx_mdio_reset_mmd(struct efx_nic *efx, int mmd, int spins, int spintime);
+>>>>>>> v3.18
 =======
 int efx_mdio_reset_mmd(struct efx_nic *efx, int mmd, int spins, int spintime);
 >>>>>>> v3.18
@@ -87,6 +103,7 @@ int efx_mdio_reset_mmd(struct efx_nic *efx, int mmd, int spins, int spintime);
 int efx_mdio_check_mmds(struct efx_nic *efx, unsigned int mmd_mask);
 
 /* Check the link status of specified mmds in bit mask */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern bool efx_mdio_links_ok(struct efx_nic *efx, unsigned int mmd_mask);
 
@@ -106,6 +123,8 @@ extern int efx_mdio_set_settings(struct efx_nic *efx, struct ethtool_cmd *ecmd);
 /* Push advertising flags and restart autonegotiation */
 extern void efx_mdio_an_reconfigure(struct efx_nic *efx);
 =======
+=======
+>>>>>>> v3.18
 bool efx_mdio_links_ok(struct efx_nic *efx, unsigned int mmd_mask);
 
 /* Generic transmit disable support though PMAPMD */
@@ -123,6 +142,9 @@ int efx_mdio_set_settings(struct efx_nic *efx, struct ethtool_cmd *ecmd);
 
 /* Push advertising flags and restart autonegotiation */
 void efx_mdio_an_reconfigure(struct efx_nic *efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Get pause parameters from AN if available (otherwise return
@@ -132,8 +154,12 @@ u8 efx_mdio_get_pause(struct efx_nic *efx);
 
 /* Wait for specified MMDs to exit reset within a timeout */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int efx_mdio_wait_reset_mmds(struct efx_nic *efx,
 				    unsigned int mmd_mask);
+=======
+int efx_mdio_wait_reset_mmds(struct efx_nic *efx, unsigned int mmd_mask);
+>>>>>>> v3.18
 =======
 int efx_mdio_wait_reset_mmds(struct efx_nic *efx, unsigned int mmd_mask);
 >>>>>>> v3.18
@@ -148,7 +174,11 @@ efx_mdio_set_flag(struct efx_nic *efx, int devad, int addr,
 
 /* Liveness self-test for MDIO PHYs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int efx_mdio_test_alive(struct efx_nic *efx);
+=======
+int efx_mdio_test_alive(struct efx_nic *efx);
+>>>>>>> v3.18
 =======
 int efx_mdio_test_alive(struct efx_nic *efx);
 >>>>>>> v3.18

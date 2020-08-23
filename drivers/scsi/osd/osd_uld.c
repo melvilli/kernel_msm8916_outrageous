@@ -11,7 +11,11 @@
  *
  * Authors:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Boaz Harrosh <bharrosh@panasas.com>
+=======
+ *   Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  *   Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18
@@ -79,7 +83,11 @@ static const char osd_name[] = "osd";
 static const char *osd_version_string = "open-osd 0.2.1";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Boaz Harrosh <bharrosh@panasas.com>");
+=======
+MODULE_AUTHOR("Boaz Harrosh <ooo@electrozaur.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Boaz Harrosh <ooo@electrozaur.com>");
 >>>>>>> v3.18
@@ -116,6 +124,10 @@ static ssize_t osdname_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%s\n", ould->odi.osdname);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(osdname);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(osdname);
 >>>>>>> v3.18
@@ -130,6 +142,7 @@ static ssize_t systemid_show(struct device *dev, struct device_attribute *attr,
 	return ould->odi.systemid_len;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute osd_uld_attrs[] = {
 	__ATTR(osdname, S_IRUGO, osdname_show, NULL),
@@ -137,6 +150,8 @@ static struct device_attribute osd_uld_attrs[] = {
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(systemid);
 
 static struct attribute *osd_uld_attrs[] = {
@@ -145,13 +160,20 @@ static struct attribute *osd_uld_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(osd_uld);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct class osd_uld_class = {
 	.owner		= THIS_MODULE,
 	.name		= "scsi_osd",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= osd_uld_attrs,
+=======
+	.dev_groups	= osd_uld_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups	= osd_uld_groups,
 >>>>>>> v3.18

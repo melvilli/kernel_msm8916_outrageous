@@ -428,7 +428,11 @@ Memhscx_empty_fifo(struct BCState *bcs, int count)
 			     bcs->hw.hscx.hscx ? 'B' : 'A', count);
 		QuickHex(t, ptr, count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debugl1(cs, bcs->blog);
+=======
+		debugl1(cs, "%s", bcs->blog);
+>>>>>>> v3.18
 =======
 		debugl1(cs, "%s", bcs->blog);
 >>>>>>> v3.18
@@ -474,7 +478,11 @@ Memhscx_fill_fifo(struct BCState *bcs)
 			     bcs->hw.hscx.hscx ? 'B' : 'A', count);
 		QuickHex(t, ptr, count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debugl1(cs, bcs->blog);
+=======
+		debugl1(cs, "%s", bcs->blog);
+>>>>>>> v3.18
 =======
 		debugl1(cs, "%s", bcs->blog);
 >>>>>>> v3.18

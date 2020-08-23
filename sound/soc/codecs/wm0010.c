@@ -15,6 +15,10 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/interrupt.h>
+>>>>>>> v3.18
 =======
 #include <linux/interrupt.h>
 >>>>>>> v3.18
@@ -148,7 +152,11 @@ static const struct snd_soc_dapm_route wm0010_dapm_routes[] = {
 static const char *wm0010_state_to_str(enum wm0010_state state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *state_to_str[] = {
+=======
+	static const char * const state_to_str[] = {
+>>>>>>> v3.18
 =======
 	static const char * const state_to_str[] = {
 >>>>>>> v3.18
@@ -380,7 +388,12 @@ static int wm0010_firmware_load(const char *name, struct snd_soc_codec *codec)
 	dsp = inforec->dsp_target;
 	wm0010->boot_failed = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!list_empty(&xfer_list));
+=======
+	if (WARN_ON(!list_empty(&xfer_list)))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!list_empty(&xfer_list)))
 		return -EINVAL;
@@ -423,6 +436,7 @@ static int wm0010_firmware_load(const char *name, struct snd_soc_codec *codec)
 		len = rec->length + 8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		out = kzalloc(len, GFP_KERNEL);
 		if (!out) {
 			dev_err(codec->dev,
@@ -451,6 +465,8 @@ static int wm0010_firmware_load(const char *name, struct snd_soc_codec *codec)
 		xfer->codec = codec;
 		list_add_tail(&xfer->list, &xfer_list);
 =======
+=======
+>>>>>>> v3.18
 		xfer = kzalloc(sizeof(*xfer), GFP_KERNEL);
 		if (!xfer) {
 			ret = -ENOMEM;
@@ -475,14 +491,20 @@ static int wm0010_firmware_load(const char *name, struct snd_soc_codec *codec)
 		xfer->t.tx_buf = img;
 
 		byte_swap_64((u64 *)&rec->command, img, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		spi_message_init(&xfer->m);
 		xfer->m.complete = wm0010_boot_xfer_complete;
 		xfer->m.context = xfer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xfer->t.tx_buf = img;
 		xfer->t.rx_buf = out;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		xfer->t.len = len;
@@ -566,9 +588,14 @@ static int wm0010_stage2_load(struct snd_soc_codec *codec)
 
 	/* Copy to local buffer first as vmalloc causes problems for dma */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	img = kzalloc(fw->size, GFP_KERNEL);
 	if (!img) {
 		dev_err(codec->dev, "Failed to allocate image buffer\n");
+=======
+	img = kzalloc(fw->size, GFP_KERNEL | GFP_DMA);
+	if (!img) {
+>>>>>>> v3.18
 =======
 	img = kzalloc(fw->size, GFP_KERNEL | GFP_DMA);
 	if (!img) {
@@ -578,9 +605,14 @@ static int wm0010_stage2_load(struct snd_soc_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out = kzalloc(fw->size, GFP_KERNEL);
 	if (!out) {
 		dev_err(codec->dev, "Failed to allocate output buffer\n");
+=======
+	out = kzalloc(fw->size, GFP_KERNEL | GFP_DMA);
+	if (!out) {
+>>>>>>> v3.18
 =======
 	out = kzalloc(fw->size, GFP_KERNEL | GFP_DMA);
 	if (!out) {
@@ -723,7 +755,11 @@ static int wm0010_boot(struct snd_soc_codec *codec)
 		ret = -ENOMEM;
 		len = pll_rec.length + 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		out = kzalloc(len, GFP_KERNEL);
+=======
+		out = kzalloc(len, GFP_KERNEL | GFP_DMA);
+>>>>>>> v3.18
 =======
 		out = kzalloc(len, GFP_KERNEL | GFP_DMA);
 >>>>>>> v3.18
@@ -734,12 +770,18 @@ static int wm0010_boot(struct snd_soc_codec *codec)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		img_swap = kzalloc(len, GFP_KERNEL);
 		if (!img_swap) {
 			dev_err(codec->dev,
 				"Failed to allocate image buffer\n");
 			goto abort;
 		}
+=======
+		img_swap = kzalloc(len, GFP_KERNEL | GFP_DMA);
+		if (!img_swap)
+			goto abort;
+>>>>>>> v3.18
 =======
 		img_swap = kzalloc(len, GFP_KERNEL | GFP_DMA);
 		if (!img_swap)
@@ -856,17 +898,23 @@ static int wm0010_set_sysclk(struct snd_soc_codec *codec, int source,
 	} else {
 		for (i = 0; i < ARRAY_SIZE(pll_clock_map); i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (freq >= pll_clock_map[i].max_sysclk)
 				break;
 
 		wm0010->max_spi_freq = pll_clock_map[i].max_pll_spi_speed;
 		wm0010->pll_clkctrl1 = pll_clock_map[i].pll_clkctrl1;
 =======
+=======
+>>>>>>> v3.18
 			if (freq >= pll_clock_map[i].max_sysclk) {
 				wm0010->max_spi_freq = pll_clock_map[i].max_pll_spi_speed;
 				wm0010->pll_clkctrl1 = pll_clock_map[i].pll_clkctrl1;
 				break;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1044,7 +1092,10 @@ static int wm0010_spi_probe(struct spi_device *spi)
 	wm0010->irq = irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = irq_set_irq_wake(irq, 1);
 	if (ret) {
 		dev_err(wm0010->dev, "Failed to set IRQ %d as wake source: %d\n",
@@ -1052,6 +1103,9 @@ static int wm0010_spi_probe(struct spi_device *spi)
 		return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (spi->max_speed_hz)
 		wm0010->board_max_spi_speed = spi->max_speed_hz;
@@ -1077,6 +1131,11 @@ static int wm0010_spi_remove(struct spi_device *spi)
 				wm0010->gpio_reset_value);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	irq_set_irq_wake(wm0010->irq, 0);
+
+>>>>>>> v3.18
 =======
 	irq_set_irq_wake(wm0010->irq, 0);
 

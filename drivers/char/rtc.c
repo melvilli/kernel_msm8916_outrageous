@@ -228,7 +228,11 @@ static inline unsigned char rtc_is_updating(void)
 #ifdef RTC_IRQ
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	A very tiny interrupt handler. It runs with IRQF_DISABLED set,
+=======
+ *	A very tiny interrupt handler. It runs with interrupts disabled,
+>>>>>>> v3.18
 =======
  *	A very tiny interrupt handler. It runs with interrupts disabled,
 >>>>>>> v3.18
@@ -285,7 +289,11 @@ static irqreturn_t rtc_interrupt(int irq, void *dev_id)
  * sysctl-tuning infrastructure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table rtc_table[] = {
+=======
+static struct ctl_table rtc_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table rtc_table[] = {
 >>>>>>> v3.18
@@ -300,7 +308,11 @@ static struct ctl_table rtc_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table rtc_root[] = {
+=======
+static struct ctl_table rtc_root[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table rtc_root[] = {
 >>>>>>> v3.18
@@ -313,7 +325,11 @@ static struct ctl_table rtc_root[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table dev_root[] = {
+=======
+static struct ctl_table dev_root[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table dev_root[] = {
 >>>>>>> v3.18
@@ -1057,8 +1073,12 @@ no_irq:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(RTC_IRQ, rtc_int_handler_ptr, IRQF_DISABLED,
 			"rtc", NULL)) {
+=======
+	if (request_irq(RTC_IRQ, rtc_int_handler_ptr, 0, "rtc", NULL)) {
+>>>>>>> v3.18
 =======
 	if (request_irq(RTC_IRQ, rtc_int_handler_ptr, 0, "rtc", NULL)) {
 >>>>>>> v3.18

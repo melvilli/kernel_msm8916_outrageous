@@ -1185,7 +1185,11 @@ static int old_capi_manufacturer(unsigned int cmd, void __user *data)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int capi20_manufacturer(unsigned int cmd, void __user *data)
+=======
+int capi20_manufacturer(unsigned long cmd, void __user *data)
+>>>>>>> v3.18
 =======
 int capi20_manufacturer(unsigned long cmd, void __user *data)
 >>>>>>> v3.18
@@ -1264,7 +1268,11 @@ int capi20_manufacturer(unsigned long cmd, void __user *data)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "kcapi: manufacturer command %d unknown.\n",
+=======
+		printk(KERN_ERR "kcapi: manufacturer command %lu unknown.\n",
+>>>>>>> v3.18
 =======
 		printk(KERN_ERR "kcapi: manufacturer command %lu unknown.\n",
 >>>>>>> v3.18

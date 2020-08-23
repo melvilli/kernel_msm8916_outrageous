@@ -168,6 +168,11 @@
 #define S3C_PA_SPI1		S3C2443_PA_SPI1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SAMSUNG_PA_TIMER	S3C2410_PA_TIMER
+
+>>>>>>> v3.18
 =======
 #define SAMSUNG_PA_TIMER	S3C2410_PA_TIMER
 

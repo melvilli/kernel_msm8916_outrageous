@@ -28,6 +28,11 @@
 #include <linux/dmaengine.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+#include <linux/of_dma.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 #include <linux/of_dma.h>
@@ -192,12 +197,18 @@ struct imxdma_engine {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct imxdma_filter_data {
 	struct imxdma_engine	*imxdma;
 	int			 request;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_device_id imx_dma_devtype[] = {
 	{
@@ -216,7 +227,10 @@ static struct platform_device_id imx_dma_devtype[] = {
 MODULE_DEVICE_TABLE(platform, imx_dma_devtype);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id imx_dma_of_dev_id[] = {
 	{
 		.compatible = "fsl,imx1-dma",
@@ -233,6 +247,9 @@ static const struct of_device_id imx_dma_of_dev_id[] = {
 };
 MODULE_DEVICE_TABLE(of, imx_dma_of_dev_id);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int is_imx1_dma(struct imxdma_engine *imxdma)
 {
@@ -432,6 +449,7 @@ static irqreturn_t imxdma_err_handler(int irq, void *dev_id)
 		tasklet_schedule(&imxdma->channel[i].dma_tasklet);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "DMA timeout on channel %d -%s%s%s%s\n", i,
 		       errcode & IMX_DMA_ERR_BURST ?    " burst" : "",
@@ -439,12 +457,17 @@ static irqreturn_t imxdma_err_handler(int irq, void *dev_id)
 		       errcode & IMX_DMA_ERR_TRANSFER ? " transfer" : "",
 		       errcode & IMX_DMA_ERR_BUFFER ?   " buffer" : "");
 =======
+=======
+>>>>>>> v3.18
 		dev_warn(imxdma->dev,
 			 "DMA timeout on channel %d -%s%s%s%s\n", i,
 			 errcode & IMX_DMA_ERR_BURST ?    " burst" : "",
 			 errcode & IMX_DMA_ERR_REQUEST ?  " request" : "",
 			 errcode & IMX_DMA_ERR_TRANSFER ? " transfer" : "",
 			 errcode & IMX_DMA_ERR_BUFFER ?   " buffer" : "");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return IRQ_HANDLED;
@@ -591,15 +614,21 @@ static int imxdma_xfer_desc(struct imxdma_desc *d)
 		imx_dmav1_writel(imxdma, d->len, DMA_CNTR(imxdmac->channel));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(imxdma->dev, "%s channel: %d dest=0x%08x src=0x%08x "
 			"dma_length=%d\n", __func__, imxdmac->channel,
 			d->dest, d->src, d->len);
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(imxdma->dev,
 			"%s channel: %d dest=0x%08llx src=0x%08llx dma_length=%zu\n",
 			__func__, imxdmac->channel,
 			(unsigned long long)d->dest,
 			(unsigned long long)d->src, d->len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		break;
@@ -613,16 +642,22 @@ static int imxdma_xfer_desc(struct imxdma_desc *d)
 					 DMA_CCR(imxdmac->channel));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_dbg(imxdma->dev, "%s channel: %d sg=%p sgcount=%d "
 				"total length=%d dev_addr=0x%08x (dev2mem)\n",
 				__func__, imxdmac->channel, d->sg, d->sgcount,
 				d->len, imxdmac->per_address);
 =======
+=======
+>>>>>>> v3.18
 			dev_dbg(imxdma->dev,
 				"%s channel: %d sg=%p sgcount=%d total length=%zu dev_addr=0x%08llx (dev2mem)\n",
 				__func__, imxdmac->channel,
 				d->sg, d->sgcount, d->len,
 				(unsigned long long)imxdmac->per_address);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (d->direction == DMA_MEM_TO_DEV) {
 			imx_dmav1_writel(imxdma, imxdmac->per_address,
@@ -631,16 +666,22 @@ static int imxdma_xfer_desc(struct imxdma_desc *d)
 					 DMA_CCR(imxdmac->channel));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_dbg(imxdma->dev, "%s channel: %d sg=%p sgcount=%d "
 				"total length=%d dev_addr=0x%08x (mem2dev)\n",
 				__func__, imxdmac->channel, d->sg, d->sgcount,
 				d->len, imxdmac->per_address);
 =======
+=======
+>>>>>>> v3.18
 			dev_dbg(imxdma->dev,
 				"%s channel: %d sg=%p sgcount=%d total length=%zu dev_addr=0x%08llx (mem2dev)\n",
 				__func__, imxdmac->channel,
 				d->sg, d->sgcount, d->len,
 				(unsigned long long)imxdmac->per_address);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			dev_err(imxdma->dev, "%s channel: %d bad dma mode\n",
@@ -814,7 +855,11 @@ static int imxdma_alloc_chan_resources(struct dma_chan *chan)
 		/* txd.flags will be overwritten in prep funcs */
 		desc->desc.flags = DMA_CTRL_ACK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		desc->status = DMA_SUCCESS;
+=======
+		desc->status = DMA_COMPLETE;
+>>>>>>> v3.18
 =======
 		desc->status = DMA_COMPLETE;
 >>>>>>> v3.18
@@ -851,10 +896,15 @@ static void imxdma_free_chan_resources(struct dma_chan *chan)
 	INIT_LIST_HEAD(&imxdmac->ld_free);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (imxdmac->sg_list) {
 		kfree(imxdmac->sg_list);
 		imxdmac->sg_list = NULL;
 	}
+=======
+	kfree(imxdmac->sg_list);
+	imxdmac->sg_list = NULL;
+>>>>>>> v3.18
 =======
 	kfree(imxdmac->sg_list);
 	imxdmac->sg_list = NULL;
@@ -916,7 +966,11 @@ static struct dma_async_tx_descriptor *imxdma_prep_dma_cyclic(
 		struct dma_chan *chan, dma_addr_t dma_addr, size_t buf_len,
 		size_t period_len, enum dma_transfer_direction direction,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long flags, void *context)
+=======
+		unsigned long flags)
+>>>>>>> v3.18
 =======
 		unsigned long flags)
 >>>>>>> v3.18
@@ -928,7 +982,11 @@ static struct dma_async_tx_descriptor *imxdma_prep_dma_cyclic(
 	unsigned int periods = buf_len / period_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(imxdma->dev, "%s channel: %d buf_len=%d period_len=%d\n",
+=======
+	dev_dbg(imxdma->dev, "%s channel: %d buf_len=%zu period_len=%zu\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(imxdma->dev, "%s channel: %d buf_len=%zu period_len=%zu\n",
 >>>>>>> v3.18
@@ -988,8 +1046,14 @@ static struct dma_async_tx_descriptor *imxdma_prep_dma_memcpy(
 	struct imxdma_desc *desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(imxdma->dev, "%s channel: %d src=0x%x dst=0x%x len=%d\n",
 			__func__, imxdmac->channel, src, dest, len);
+=======
+	dev_dbg(imxdma->dev, "%s channel: %d src=0x%llx dst=0x%llx len=%zu\n",
+		__func__, imxdmac->channel, (unsigned long long)src,
+		(unsigned long long)dest, len);
+>>>>>>> v3.18
 =======
 	dev_dbg(imxdma->dev, "%s channel: %d src=0x%llx dst=0x%llx len=%zu\n",
 		__func__, imxdmac->channel, (unsigned long long)src,
@@ -1024,14 +1088,20 @@ static struct dma_async_tx_descriptor *imxdma_prep_dma_interleaved(
 	struct imxdma_desc *desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(imxdma->dev, "%s channel: %d src_start=0x%x dst_start=0x%x\n"
 		"   src_sgl=%s dst_sgl=%s numf=%d frame_size=%d\n", __func__,
 		imxdmac->channel, xt->src_start, xt->dst_start,
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(imxdma->dev, "%s channel: %d src_start=0x%llx dst_start=0x%llx\n"
 		"   src_sgl=%s dst_sgl=%s numf=%zu frame_size=%zu\n", __func__,
 		imxdmac->channel, (unsigned long long)xt->src_start,
 		(unsigned long long) xt->dst_start,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		xt->src_sgl ? "true" : "false", xt->dst_sgl ? "true" : "false",
 		xt->numf, xt->frame_size);
@@ -1091,7 +1161,10 @@ static void imxdma_issue_pending(struct dma_chan *chan)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool imxdma_filter_fn(struct dma_chan *chan, void *param)
 {
 	struct imxdma_filter_data *fdata = param;
@@ -1124,16 +1197,22 @@ static struct dma_chan *imxdma_xlate(struct of_phandle_args *dma_spec,
 					imxdma_filter_fn, &fdata);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init imxdma_probe(struct platform_device *pdev)
 	{
 	struct imxdma_engine *imxdma;
 	struct resource *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, i;
 	int irq, irq_err;
 
 =======
+=======
+>>>>>>> v3.18
 	const struct of_device_id *of_id;
 	int ret, i;
 	int irq, irq_err;
@@ -1142,12 +1221,19 @@ static int __init imxdma_probe(struct platform_device *pdev)
 	if (of_id)
 		pdev->id_entry = of_id->data;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	imxdma = devm_kzalloc(&pdev->dev, sizeof(*imxdma), GFP_KERNEL);
 	if (!imxdma)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	imxdma->dev = &pdev->dev;
+>>>>>>> v3.18
 =======
 	imxdma->dev = &pdev->dev;
 >>>>>>> v3.18
@@ -1256,7 +1342,10 @@ static int __init imxdma_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	imxdma->dev = &pdev->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	imxdma->dma_device.dev = &pdev->dev;
@@ -1284,9 +1373,12 @@ static int __init imxdma_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	if (pdev->dev.of_node) {
 		ret = of_dma_controller_register(pdev->dev.of_node,
 				imxdma_xlate, imxdma);
@@ -1300,6 +1392,9 @@ static int __init imxdma_probe(struct platform_device *pdev)
 
 err_of_dma_controller:
 	dma_async_device_unregister(&imxdma->dma_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err:
 	clk_disable_unprepare(imxdma->dma_ipg);
@@ -1314,6 +1409,12 @@ static int imxdma_remove(struct platform_device *pdev)
         dma_async_device_unregister(&imxdma->dma_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (pdev->dev.of_node)
+		of_dma_controller_free(pdev->dev.of_node);
+
+>>>>>>> v3.18
 =======
 	if (pdev->dev.of_node)
 		of_dma_controller_free(pdev->dev.of_node);
@@ -1329,6 +1430,11 @@ static struct platform_driver imxdma_driver = {
 	.driver		= {
 		.name	= "imx-dma",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.owner	= THIS_MODULE,
+		.of_match_table = imx_dma_of_dev_id,
+>>>>>>> v3.18
 =======
 		.owner	= THIS_MODULE,
 		.of_match_table = imx_dma_of_dev_id,

@@ -2,6 +2,10 @@ config DRM_IMX
 	tristate "DRM Support for Freescale i.MX"
 	select DRM_KMS_HELPER
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select DRM_KMS_FB_HELPER
+>>>>>>> v3.18
 =======
 	select DRM_KMS_FB_HELPER
 >>>>>>> v3.18
@@ -20,16 +24,22 @@ config DRM_IMX_FB_HELPER
 	  The DRM framework can provide a legacy /dev/fb0 framebuffer
 	  for your device. This is necessary to get a framebuffer console
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  and also for appplications using the legacy framebuffer API
 
 config DRM_IMX_PARALLEL_DISPLAY
 	tristate "Support for parallel displays"
 =======
+=======
+>>>>>>> v3.18
 	  and also for applications using the legacy framebuffer API
 
 config DRM_IMX_PARALLEL_DISPLAY
 	tristate "Support for parallel displays"
 	select DRM_PANEL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	depends on DRM_IMX
 	select VIDEOMODE_HELPERS
@@ -43,6 +53,7 @@ config DRM_IMX_TVE
 	  found on i.MX53 processors.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DRM_IMX_IPUV3_CORE
 	tristate "IPUv3 core support"
 	depends on DRM_IMX
@@ -52,22 +63,30 @@ config DRM_IMX_IPUV3_CORE
 	  to use the IPU. This option only enables IPU base
 	  support.
 =======
+=======
+>>>>>>> v3.18
 config DRM_IMX_LDB
 	tristate "Support for LVDS displays"
 	depends on DRM_IMX && MFD_SYSCON
 	help
 	  Choose this to enable the internal LVDS Display Bridge (LDB)
 	  found on i.MX53 and i.MX6 processors.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config DRM_IMX_IPUV3
 	tristate "DRM Support for i.MX IPUv3"
 	depends on DRM_IMX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on DRM_IMX_IPUV3_CORE
 	help
 	  Choose this if you have a i.MX5 or i.MX6 processor.
 =======
+=======
+>>>>>>> v3.18
 	depends on IMX_IPUV3_CORE
 	help
 	  Choose this if you have a i.MX5 or i.MX6 processor.
@@ -77,4 +96,7 @@ config DRM_IMX_HDMI
 	depends on DRM_IMX
 	help
 	  Choose this if you want to use HDMI on i.MX6.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

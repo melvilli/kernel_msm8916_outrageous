@@ -33,9 +33,14 @@ ENTRY(v6_early_abort)
 	bic	r1, r1, #1 << 11		@ clear bit 11 of FSR
 	ldr	r3, [r4]			@ read aborted ARM instruction
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_ENDIAN_BE8
 	rev	r3, r3
 #endif
+=======
+ ARM_BE8(rev	r3, r3)
+
+>>>>>>> v3.18
 =======
  ARM_BE8(rev	r3, r3)
 

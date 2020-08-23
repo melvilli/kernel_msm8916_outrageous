@@ -381,7 +381,11 @@ failed:
 /****************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void old_reloc(unsigned long rl)
+=======
+static void old_reloc(unsigned long rl)
+>>>>>>> v3.18
 =======
 static void old_reloc(unsigned long rl)
 >>>>>>> v3.18

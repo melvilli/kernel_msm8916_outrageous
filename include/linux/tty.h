@@ -11,6 +11,11 @@
 #include <linux/tty_flags.h>
 #include <uapi/linux/tty.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/rwsem.h>
+#include <linux/llist.h>
+>>>>>>> v3.18
 =======
 #include <linux/rwsem.h>
 #include <linux/llist.h>
@@ -35,20 +40,30 @@
 
 struct tty_buffer {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tty_buffer *next;
 	char *char_buf_ptr;
 	unsigned char *flag_buf_ptr;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct tty_buffer *next;
 		struct llist_node free;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int used;
 	int size;
 	int commit;
 	int read;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int flags;
+>>>>>>> v3.18
 =======
 	int flags;
 >>>>>>> v3.18
@@ -56,6 +71,7 @@ struct tty_buffer {
 	unsigned long data[0];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * We default to dicing tty buffer allocations to this many characters
@@ -77,6 +93,8 @@ struct tty_bufhead {
 	int memory_used;		/* Buffer space used excluding
 								free queue */
 =======
+=======
+>>>>>>> v3.18
 /* Values for .flags field of tty_buffer */
 #define TTYB_NORMAL	1	/* buffer has no flags buffer */
 
@@ -100,6 +118,9 @@ struct tty_bufhead {
 	atomic_t	   mem_used;    /* In-use buffers excluding free list */
 	int		   mem_limit;
 	struct tty_buffer *tail;	/* Active buffer */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 /*
@@ -177,6 +198,10 @@ struct tty_bufhead {
 #define C_CIBAUD(tty)	_C_FLAG((tty), CIBAUD)
 #define C_CRTSCTS(tty)	_C_FLAG((tty), CRTSCTS)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define C_CMSPAR(tty)	_C_FLAG((tty), CMSPAR)
+>>>>>>> v3.18
 =======
 #define C_CMSPAR(tty)	_C_FLAG((tty), CMSPAR)
 >>>>>>> v3.18
@@ -224,7 +249,10 @@ struct tty_port_operations {
 	   under the port mutex to serialize against activate/shutdowns */
 	void (*shutdown)(struct tty_port *port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*drop)(struct tty_port *port);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Called under the port mutex from tty_port_open, serialized using
@@ -249,11 +277,16 @@ struct tty_port {
 	wait_queue_head_t	delta_msr_wait;	/* Modem status change */
 	unsigned long		flags;		/* TTY flags ASY_*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long		iflags;		/* TTYP_ internal flags */
 #define TTYP_FLUSHING			1  /* Flushing to ldisc in progress */
 #define TTYP_FLUSHPENDING		2  /* Queued buffer flush pending */
 	unsigned char		console:1,	/* port is a console */
 				low_latency:1;	/* direct buffer flush */
+=======
+	unsigned char		console:1,	/* port is a console */
+				low_latency:1;	/* optional: tune for latency */
+>>>>>>> v3.18
 =======
 	unsigned char		console:1,	/* port is a console */
 				low_latency:1;	/* optional: tune for latency */
@@ -298,16 +331,22 @@ struct tty_struct {
 	struct mutex atomic_write_lock;
 	struct mutex legacy_mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex termios_mutex;
 	spinlock_t ctrl_lock;
 	/* Termios values are protected by the termios mutex */
 =======
+=======
+>>>>>>> v3.18
 	struct mutex throttle_mutex;
 	struct rw_semaphore termios_rwsem;
 	struct mutex winsize_mutex;
 	spinlock_t ctrl_lock;
 	spinlock_t flow_lock;
 	/* Termios values are protected by the termios rwsem */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct ktermios termios, termios_locked;
 	struct termiox *termiox;	/* May be NULL for unsupported */
@@ -317,10 +356,13 @@ struct tty_struct {
 	unsigned long flags;
 	int count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct winsize winsize;		/* termios mutex */
 	unsigned char stopped:1, hw_stopped:1, flow_stopped:1, packet:1;
 	unsigned char ctrl_status;	/* ctrl_lock */
 =======
+=======
+>>>>>>> v3.18
 	struct winsize winsize;		/* winsize_mutex */
 	unsigned long stopped:1,	/* flow_lock */
 		      flow_stopped:1,
@@ -329,6 +371,9 @@ struct tty_struct {
 	unsigned long ctrl_status:8,	/* ctrl_lock */
 		      packet:1,
 		      unused_ctrl:BITS_PER_LONG - 9;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int receive_room;	/* Bytes free for queue */
 	int flow_change;
@@ -347,7 +392,10 @@ struct tty_struct {
 
 	unsigned char closing:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short minimum_to_wake;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char *write_buf;
@@ -382,11 +430,16 @@ struct tty_file_private {
 #define TTY_DEBUG 		4	/* Debugging */
 #define TTY_DO_WRITE_WAKEUP 	5	/* Call write_wakeup after queuing new */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TTY_PUSH 		6	/* n_tty private */
 #define TTY_CLOSING 		7	/* ->close() in progress */
 #define TTY_LDISC_OPEN	 	11	/* Line discipline is open */
 #define TTY_HW_COOK_OUT 	14	/* Hardware can do output cooking */
 #define TTY_HW_COOK_IN 		15	/* Hardware can do input cooking */
+=======
+#define TTY_CLOSING 		7	/* ->close() in progress */
+#define TTY_LDISC_OPEN	 	11	/* Line discipline is open */
+>>>>>>> v3.18
 =======
 #define TTY_CLOSING 		7	/* ->close() in progress */
 #define TTY_LDISC_OPEN	 	11	/* Line discipline is open */
@@ -477,7 +530,13 @@ extern char *tty_name(struct tty_struct *tty, char *buf);
 extern void tty_wait_until_sent(struct tty_struct *tty, long timeout);
 extern int tty_check_change(struct tty_struct *tty);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void stop_tty(struct tty_struct *tty);
+=======
+extern void __stop_tty(struct tty_struct *tty);
+extern void stop_tty(struct tty_struct *tty);
+extern void __start_tty(struct tty_struct *tty);
+>>>>>>> v3.18
 =======
 extern void __stop_tty(struct tty_struct *tty);
 extern void stop_tty(struct tty_struct *tty);
@@ -497,6 +556,10 @@ extern int tty_read_raw_data(struct tty_struct *tty, unsigned char *bufp,
 			     int buflen);
 extern void tty_write_message(struct tty_struct *tty, char *msg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int tty_send_xchar(struct tty_struct *tty, char ch);
+>>>>>>> v3.18
 =======
 extern int tty_send_xchar(struct tty_struct *tty, char ch);
 >>>>>>> v3.18
@@ -518,7 +581,10 @@ extern int tty_signal(int sig, struct tty_struct *tty);
 extern void tty_hangup(struct tty_struct *tty);
 extern void tty_vhangup(struct tty_struct *tty);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void tty_vhangup_locked(struct tty_struct *tty);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void tty_unhangup(struct file *filp);
@@ -571,7 +637,11 @@ extern int tty_mode_ioctl(struct tty_struct *tty, struct file *file,
 extern int tty_perform_flush(struct tty_struct *tty, unsigned long arg);
 extern void tty_default_fops(struct file_operations *fops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct tty_struct *alloc_tty_struct(void);
+=======
+extern struct tty_struct *alloc_tty_struct(struct tty_driver *driver, int idx);
+>>>>>>> v3.18
 =======
 extern struct tty_struct *alloc_tty_struct(struct tty_driver *driver, int idx);
 >>>>>>> v3.18
@@ -580,8 +650,11 @@ extern void tty_add_file(struct tty_struct *tty, struct file *file);
 extern void tty_free_file(struct file *file);
 extern void free_tty_struct(struct tty_struct *tty);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void initialize_tty_struct(struct tty_struct *tty,
 		struct tty_driver *driver, int idx);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void deinitialize_tty_struct(struct tty_struct *tty);
@@ -598,8 +671,11 @@ extern struct mutex tty_mutex;
 extern spinlock_t tty_files_lock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void tty_write_unlock(struct tty_struct *tty);
 extern int tty_write_lock(struct tty_struct *tty, int ndelay);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define tty_is_writelocked(tty)  (mutex_is_locked(&tty->atomic_write_lock))
@@ -622,9 +698,15 @@ extern void tty_port_put(struct tty_port *port);
 static inline struct tty_port *tty_port_get(struct tty_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (port)
 		kref_get(&port->kref);
 	return port;
+=======
+	if (port && kref_get_unless_zero(&port->kref))
+		return port;
+	return NULL;
+>>>>>>> v3.18
 =======
 	if (port && kref_get_unless_zero(&port->kref))
 		return port;
@@ -672,7 +754,10 @@ extern void tty_ldisc_deinit(struct tty_struct *tty);
 extern void tty_ldisc_begin(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int tty_ldisc_receive_buf(struct tty_ldisc *ld, unsigned char *p,
 					char *f, int count)
 {
@@ -686,6 +771,9 @@ static inline int tty_ldisc_receive_buf(struct tty_ldisc *ld, unsigned char *p,
 	return count;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* n_tty.c */
@@ -789,6 +877,7 @@ static inline void tty_wait_until_sent_from_close(struct tty_struct *tty,
 ({									\
 	int __ret = 0;							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(condition)) {						\
 		__wait_event_interruptible_tty(tty, wq, condition, __ret);	\
 	}								\
@@ -815,6 +904,8 @@ do {									\
 	finish_wait(&wq, &__wait);					\
 } while (0)
 =======
+=======
+>>>>>>> v3.18
 	if (!(condition))						\
 		__ret = __wait_event_interruptible_tty(tty, wq,		\
 						       condition);	\
@@ -826,6 +917,9 @@ do {									\
 			tty_unlock(tty);				\
 			schedule();					\
 			tty_lock(tty))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PROC_FS

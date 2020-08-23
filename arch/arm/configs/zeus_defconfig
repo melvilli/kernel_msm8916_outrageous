@@ -133,7 +133,10 @@ CONFIG_SND_PXA2XX_SOC=m
 # CONFIG_HID_SUPPORT is not set
 CONFIG_USB=m
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_USB_OHCI_HCD=m

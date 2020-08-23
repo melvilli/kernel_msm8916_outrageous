@@ -7,6 +7,10 @@
 #define IP_SET_LIST_DEFAULT_SIZE	8
 #define IP_SET_LIST_MIN_SIZE		4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IP_SET_LIST_MAX_SIZE		65536
+>>>>>>> v3.18
 =======
 #define IP_SET_LIST_MAX_SIZE		65536
 >>>>>>> v3.18

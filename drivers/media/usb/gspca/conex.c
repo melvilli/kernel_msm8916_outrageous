@@ -784,7 +784,12 @@ static int sd_start(struct gspca_dev *gspca_dev)
 
 	/* create the JPEG header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jpeg_define(sd->jpeg_hdr, gspca_dev->height, gspca_dev->width,
+=======
+	jpeg_define(sd->jpeg_hdr, gspca_dev->pixfmt.height,
+			gspca_dev->pixfmt.width,
+>>>>>>> v3.18
 =======
 	jpeg_define(sd->jpeg_hdr, gspca_dev->pixfmt.height,
 			gspca_dev->pixfmt.width,

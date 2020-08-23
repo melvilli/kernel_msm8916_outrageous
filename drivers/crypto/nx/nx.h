@@ -118,6 +118,10 @@ struct nx_ctr_priv {
 
 struct nx_crypto_ctx {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t lock;	  /* synchronize access to the context */
+>>>>>>> v3.18
 =======
 	spinlock_t lock;	  /* synchronize access to the context */
 >>>>>>> v3.18
@@ -160,7 +164,11 @@ struct nx_sg *nx_build_sg_list(struct nx_sg *, u8 *, unsigned int, u32);
 int nx_build_sg_lists(struct nx_crypto_ctx *, struct blkcipher_desc *,
 		      struct scatterlist *, struct scatterlist *, unsigned int,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      u8 *);
+=======
+		      unsigned int, u8 *);
+>>>>>>> v3.18
 =======
 		      unsigned int, u8 *);
 >>>>>>> v3.18

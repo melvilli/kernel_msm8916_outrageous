@@ -7,7 +7,10 @@
 #include <linux/security.h>
 #include <linux/syscalls.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/user_namespace.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/uaccess.h>
@@ -162,11 +165,16 @@ int groups_search(const struct group_info *group_info, kgid_t grp)
  * @new: The newly prepared set of credentials to alter
  * @group_info: The group list to install
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Validate a group subscription and, if valid, insert it into a set
  * of credentials.
  */
 int set_groups(struct cred *new, struct group_info *group_info)
+=======
+ */
+void set_groups(struct cred *new, struct group_info *group_info)
+>>>>>>> v3.18
 =======
  */
 void set_groups(struct cred *new, struct group_info *group_info)
@@ -177,7 +185,10 @@ void set_groups(struct cred *new, struct group_info *group_info)
 	get_group_info(group_info);
 	new->group_info = group_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -195,7 +206,10 @@ int set_current_groups(struct group_info *group_info)
 {
 	struct cred *new;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -204,12 +218,16 @@ int set_current_groups(struct group_info *group_info)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = set_groups(new, group_info);
 	if (ret < 0) {
 		abort_creds(new);
 		return ret;
 	}
 
+=======
+	set_groups(new, group_info);
+>>>>>>> v3.18
 =======
 	set_groups(new, group_info);
 >>>>>>> v3.18
@@ -243,6 +261,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool may_setgroups(void)
 {
 	struct user_namespace *user_ns = current_user_ns();
@@ -251,6 +270,8 @@ bool may_setgroups(void)
 		userns_may_setgroups(user_ns);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -264,7 +285,11 @@ SYSCALL_DEFINE2(setgroups, int, gidsetsize, gid_t __user *, grouplist)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!may_setgroups())
+=======
+	if (!ns_capable(current_user_ns(), CAP_SETGID))
+>>>>>>> v3.18
 =======
 	if (!ns_capable(current_user_ns(), CAP_SETGID))
 >>>>>>> v3.18

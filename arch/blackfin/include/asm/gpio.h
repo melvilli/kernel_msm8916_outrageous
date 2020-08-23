@@ -26,15 +26,21 @@
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/compiler.h>
 #include <linux/gpio.h>
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_PINCTRL
 
 #include <linux/compiler.h>
 #include <asm/blackfin.h>
 #include <asm/portmux.h>
 #include <asm/irq_handler.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /***********************************************************
@@ -55,7 +61,10 @@
 **************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !BFIN_GPIO_PINT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void set_gpio_dir(unsigned, unsigned short);
@@ -128,7 +137,10 @@ struct gpio_port_t {
 	unsigned short inen;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -143,12 +155,15 @@ void bfin_special_gpio_pm_hibernate_suspend(void);
 
 #ifdef CONFIG_PM
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bfin_pm_standby_ctrl(unsigned ctrl);
 
 static inline int bfin_pm_standby_setup(void)
 {
 	return bfin_pm_standby_ctrl(1);
 =======
+=======
+>>>>>>> v3.18
 void bfin_gpio_pm_hibernate_restore(void);
 void bfin_gpio_pm_hibernate_suspend(void);
 int bfin_gpio_pm_wakeup_ctrl(unsigned gpio, unsigned ctrl);
@@ -157,11 +172,15 @@ int bfin_gpio_pm_standby_ctrl(unsigned ctrl);
 static inline int bfin_pm_standby_setup(void)
 {
 	return bfin_gpio_pm_standby_ctrl(1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void bfin_pm_standby_restore(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bfin_pm_standby_ctrl(0);
 }
@@ -173,6 +192,11 @@ void bfin_pint_resume(void);
 
 # if !BFIN_GPIO_PINT
 int gpio_pm_wakeup_ctrl(unsigned gpio, unsigned ctrl);
+=======
+	bfin_gpio_pm_standby_ctrl(0);
+}
+
+>>>>>>> v3.18
 =======
 	bfin_gpio_pm_standby_ctrl(0);
 }
@@ -194,7 +218,10 @@ struct gpio_port_s {
 	unsigned short mux;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 # endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /*CONFIG_PM*/
@@ -214,6 +241,7 @@ struct gpio_port_s {
 * MODIFICATION HISTORY :
 **************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int bfin_gpio_request(unsigned gpio, const char *label);
 void bfin_gpio_free(unsigned gpio);
@@ -224,6 +252,8 @@ int bfin_gpio_direction_output(unsigned gpio, int value);
 int bfin_gpio_get_value(unsigned gpio);
 void bfin_gpio_set_value(unsigned gpio, int value);
 =======
+=======
+>>>>>>> v3.18
 int bfin_gpio_irq_request(unsigned gpio, const char *label);
 void bfin_gpio_irq_free(unsigned gpio);
 void bfin_gpio_irq_prepare(unsigned gpio);
@@ -233,19 +263,26 @@ static inline int irq_to_gpio(unsigned irq)
 	return irq - GPIO_IRQ_BASE;
 }
 #endif /* CONFIG_PINCTRL */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/irq.h>
 #include <asm/errno.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_GPIOLIB
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm-generic/gpio.h>		/* cansleep wrappers */
 
 static inline int gpio_get_value(unsigned int gpio)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (gpio < MAX_BLACKFIN_GPIOS)
 		return bfin_gpio_get_value(gpio);
@@ -254,15 +291,22 @@ static inline int gpio_get_value(unsigned int gpio)
 =======
 	return __gpio_get_value(gpio);
 >>>>>>> v3.18
+=======
+	return __gpio_get_value(gpio);
+>>>>>>> v3.18
 }
 
 static inline void gpio_set_value(unsigned int gpio, int value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpio < MAX_BLACKFIN_GPIOS)
 		bfin_gpio_set_value(gpio, value);
 	else
 		__gpio_set_value(gpio, value);
+=======
+	__gpio_set_value(gpio, value);
+>>>>>>> v3.18
 =======
 	__gpio_set_value(gpio, value);
 >>>>>>> v3.18
@@ -277,6 +321,7 @@ static inline int gpio_to_irq(unsigned gpio)
 {
 	return __gpio_to_irq(gpio);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #else /* !CONFIG_GPIOLIB */
@@ -385,6 +430,8 @@ static inline int irq_to_gpio(unsigned irq)
 	return (irq - GPIO_IRQ_BASE);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __ASSEMBLY__ */

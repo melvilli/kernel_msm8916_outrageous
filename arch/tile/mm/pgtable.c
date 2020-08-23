@@ -84,6 +84,7 @@ void show_mem(unsigned int filter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Associate a virtual page frame with a given physical page frame
  * and protection flags for that frame.
@@ -135,6 +136,8 @@ void __set_fixmap(enum fixed_addresses idx, unsigned long phys, pgprot_t flags)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * shatter_huge_page() - ensure a given address is mapped by a small page.
  *
@@ -180,8 +183,12 @@ void shatter_huge_page(unsigned long addr)
 
 	/* Shatter the huge page into the preallocated L2 page table. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmd_populate_kernel(&init_mm, pmd,
 			    get_prealloc_pte(pte_pfn(*(pte_t *)pmd)));
+=======
+	pmd_populate_kernel(&init_mm, pmd, get_prealloc_pte(pmd_pfn(*pmd)));
+>>>>>>> v3.18
 =======
 	pmd_populate_kernel(&init_mm, pmd, get_prealloc_pte(pmd_pfn(*pmd)));
 >>>>>>> v3.18
@@ -299,12 +306,18 @@ struct page *pgtable_alloc_one(struct mm_struct *mm, unsigned long address,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!pgtable_page_ctor(p)) {
 		__free_pages(p, L2_USER_PGTABLE_ORDER);
 		return NULL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Make every page have a page_count() of one, not just the first.
@@ -317,7 +330,10 @@ struct page *pgtable_alloc_one(struct mm_struct *mm, unsigned long address,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgtable_page_ctor(p);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return p;
@@ -393,7 +409,10 @@ void ptep_set_wrprotect(struct mm_struct *mm,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Return a pointer to the PTE that corresponds to the given
  * address in the given page table.  A NULL page table just uses
@@ -405,6 +424,9 @@ void ptep_set_wrprotect(struct mm_struct *mm,
  * in the page table.  For bottom-level PTEs, the returned pointer
  * can point to a PTE that is either present or not.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 pte_t *virt_to_pte(struct mm_struct* mm, unsigned long addr)
 {
@@ -420,6 +442,7 @@ pte_t *virt_to_pte(struct mm_struct* mm, unsigned long addr)
 	if (!pud_present(*pud))
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmd = pmd_offset(pud, addr);
 	if (pmd_huge_page(*pmd))
 		return (pte_t *)pmd;
@@ -428,6 +451,8 @@ pte_t *virt_to_pte(struct mm_struct* mm, unsigned long addr)
 	return pte_offset_kernel(pmd, addr);
 }
 =======
+=======
+>>>>>>> v3.18
 	if (pud_huge_page(*pud))
 		return (pte_t *)pud;
 	pmd = pmd_offset(pud, addr);
@@ -445,6 +470,9 @@ pte_t *virt_to_kpte(unsigned long kaddr)
 	return virt_to_pte(NULL, kaddr);
 }
 EXPORT_SYMBOL(virt_to_kpte);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 pgprot_t set_remote_cache_cpu(pgprot_t prot, int cpu)
@@ -621,7 +649,11 @@ void __iomem *ioremap_prot(resource_size_t phys_addr, unsigned long size,
 	if (ioremap_page_range((unsigned long)addr, (unsigned long)addr + size,
 			       phys_addr, pgprot)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		remove_vm_area((void *)(PAGE_MASK & (unsigned long) addr));
+=======
+		free_vm_area(area);
+>>>>>>> v3.18
 =======
 		free_vm_area(area);
 >>>>>>> v3.18

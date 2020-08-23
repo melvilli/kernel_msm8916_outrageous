@@ -23,6 +23,7 @@
 #include <linux/iio/sysfs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * SPEAR registers definitions
  */
@@ -49,6 +50,8 @@
 #define CLK_MIN			2500000
 #define CLK_MAX			20000000
 =======
+=======
+>>>>>>> v3.18
 /* SPEAR registers definitions */
 #define SPEAR600_ADC_SCAN_RATE_LO(x)	((x) & 0xFFFF)
 #define SPEAR600_ADC_SCAN_RATE_HI(x)	(((x) >> 0x10) & 0xFFFF)
@@ -71,6 +74,9 @@
 
 #define SPEAR_ADC_CLK_MIN			2500000
 #define SPEAR_ADC_CLK_MAX			20000000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct adc_regs_spear3xx {
@@ -79,8 +85,13 @@ struct adc_regs_spear3xx {
 	u32 scan_rate;
 	u32 clk;	/* Not avail for 1340 & 1310 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ch_ctrl[ADC_CHANNEL_NUM];
 	u32 ch_data[ADC_CHANNEL_NUM];
+=======
+	u32 ch_ctrl[SPEAR_ADC_CHANNEL_NUM];
+	u32 ch_data[SPEAR_ADC_CHANNEL_NUM];
+>>>>>>> v3.18
 =======
 	u32 ch_ctrl[SPEAR_ADC_CHANNEL_NUM];
 	u32 ch_data[SPEAR_ADC_CHANNEL_NUM];
@@ -97,8 +108,13 @@ struct adc_regs_spear6xx {
 	u32 pad[2];
 	u32 clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 ch_ctrl[ADC_CHANNEL_NUM];
 	struct chan_data ch_data[ADC_CHANNEL_NUM];
+=======
+	u32 ch_ctrl[SPEAR_ADC_CHANNEL_NUM];
+	struct chan_data ch_data[SPEAR_ADC_CHANNEL_NUM];
+>>>>>>> v3.18
 =======
 	u32 ch_ctrl[SPEAR_ADC_CHANNEL_NUM];
 	struct chan_data ch_data[SPEAR_ADC_CHANNEL_NUM];
@@ -109,7 +125,11 @@ struct adc_regs_spear6xx {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct spear_adc_info {
+=======
+struct spear_adc_state {
+>>>>>>> v3.18
 =======
 struct spear_adc_state {
 >>>>>>> v3.18
@@ -131,6 +151,7 @@ struct spear_adc_state {
  * on different SoC variants (SPEAr300 vs SPEAr600 etc).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void spear_adc_set_status(struct spear_adc_info *info, u32 val)
 {
 	__raw_writel(val, &info->adc_base_spear6xx->status);
@@ -141,6 +162,8 @@ static void spear_adc_set_clk(struct spear_adc_info *info, u32 val)
 	u32 clk_high, clk_low, count;
 	u32 apb_clk = clk_get_rate(info->clk);
 =======
+=======
+>>>>>>> v3.18
 static void spear_adc_set_status(struct spear_adc_state *st, u32 val)
 {
 	__raw_writel(val, &st->adc_base_spear6xx->status);
@@ -150,11 +173,15 @@ static void spear_adc_set_clk(struct spear_adc_state *st, u32 val)
 {
 	u32 clk_high, clk_low, count;
 	u32 apb_clk = clk_get_rate(st->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	count = (apb_clk + val - 1) / val;
 	clk_low = count / 2;
 	clk_high = count - clk_low;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	info->current_clk = apb_clk / count;
 
@@ -200,6 +227,8 @@ static int spear_read_raw(struct iio_dev *indio_dev,
 	struct spear_adc_info *info = iio_priv(indio_dev);
 	u32 scale_mv;
 =======
+=======
+>>>>>>> v3.18
 	st->current_clk = apb_clk / count;
 
 	__raw_writel(SPEAR_ADC_CLK_LOW(clk_low) | SPEAR_ADC_CLK_HIGH(clk_high),
@@ -242,6 +271,9 @@ static int spear_adc_read_raw(struct iio_dev *indio_dev,
 			      long mask)
 {
 	struct spear_adc_state *st = iio_priv(indio_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 status;
 
@@ -249,6 +281,7 @@ static int spear_adc_read_raw(struct iio_dev *indio_dev,
 	case IIO_CHAN_INFO_RAW:
 		mutex_lock(&indio_dev->mlock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		status = CHANNEL_NUM(chan->channel) |
 			AVG_SAMPLE(info->avg_samples) |
@@ -260,6 +293,8 @@ static int spear_adc_read_raw(struct iio_dev *indio_dev,
 		wait_for_completion(&info->completion); /* set by ISR */
 		*val = info->value;
 =======
+=======
+>>>>>>> v3.18
 		status = SPEAR_ADC_STATUS_CHANNEL_NUM(chan->channel) |
 			SPEAR_ADC_STATUS_AVG_SAMPLE(st->avg_samples) |
 			SPEAR_ADC_STATUS_START_CONVERSION |
@@ -270,6 +305,9 @@ static int spear_adc_read_raw(struct iio_dev *indio_dev,
 		spear_adc_set_status(st, status);
 		wait_for_completion(&st->completion); /* set by ISR */
 		*val = st->value;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		mutex_unlock(&indio_dev->mlock);
@@ -278,17 +316,23 @@ static int spear_adc_read_raw(struct iio_dev *indio_dev,
 
 	case IIO_CHAN_INFO_SCALE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scale_mv = (info->vref_external * 1000) >> DATA_BITS;
 		*val =  scale_mv / 1000;
 		*val2 = (scale_mv % 1000) * 1000;
 		return IIO_VAL_INT_PLUS_MICRO;
 =======
+=======
+>>>>>>> v3.18
 		*val = st->vref_external;
 		*val2 = SPEAR_ADC_DATA_BITS;
 		return IIO_VAL_FRACTIONAL_LOG2;
 	case IIO_CHAN_INFO_SAMP_FREQ:
 		*val = st->current_clk;
 		return IIO_VAL_INT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -296,7 +340,10 @@ static int spear_adc_read_raw(struct iio_dev *indio_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int spear_adc_write_raw(struct iio_dev *indio_dev,
 			       struct iio_chan_spec const *chan,
 			       int val,
@@ -325,6 +372,9 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SPEAR_ADC_CHAN(idx) {				\
 	.type = IIO_VOLTAGE,				\
@@ -332,11 +382,16 @@ out:
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),	\
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE),	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.channel = idx,					\
 	.scan_type = {					\
 		.sign = 'u',				\
 		.storagebits = 16,			\
 	},						\
+=======
+	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ),\
+	.channel = idx,					\
+>>>>>>> v3.18
 =======
 	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ),\
 	.channel = idx,					\
@@ -357,24 +412,34 @@ static const struct iio_chan_spec spear_adc_iio_channels[] = {
 static irqreturn_t spear_adc_isr(int irq, void *dev_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spear_adc_info *info = (struct spear_adc_info *)dev_id;
 
 	/* Read value to clear IRQ */
 	info->value = spear_adc_get_average(info);
 	complete(&info->completion);
 =======
+=======
+>>>>>>> v3.18
 	struct spear_adc_state *st = (struct spear_adc_state *)dev_id;
 
 	/* Read value to clear IRQ */
 	st->value = spear_adc_get_average(st);
 	complete(&st->completion);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return IRQ_HANDLED;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int spear_adc_configure(struct spear_adc_info *info)
+=======
+static int spear_adc_configure(struct spear_adc_state *st)
+>>>>>>> v3.18
 =======
 static int spear_adc_configure(struct spear_adc_state *st)
 >>>>>>> v3.18
@@ -382,6 +447,7 @@ static int spear_adc_configure(struct spear_adc_state *st)
 	int i;
 
 	/* Reset ADC core */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spear_adc_set_status(info, 0);
 	__raw_writel(0, &info->adc_base_spear6xx->clk);
@@ -391,6 +457,8 @@ static int spear_adc_configure(struct spear_adc_state *st)
 
 	spear_adc_set_clk(info, info->sampling_freq);
 =======
+=======
+>>>>>>> v3.18
 	spear_adc_set_status(st, 0);
 	__raw_writel(0, &st->adc_base_spear6xx->clk);
 	for (i = 0; i < 8; i++)
@@ -398,11 +466,15 @@ static int spear_adc_configure(struct spear_adc_state *st)
 	spear_adc_set_scanrate(st, 0);
 
 	spear_adc_set_clk(st, st->sampling_freq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t spear_adc_read_frequency(struct device *dev,
 					struct device_attribute *attr,
@@ -470,6 +542,11 @@ static const struct iio_info spear_adc_info = {
 	.read_raw = &spear_adc_read_raw,
 	.write_raw = &spear_adc_write_raw,
 >>>>>>> v3.18
+=======
+static const struct iio_info spear_adc_info = {
+	.read_raw = &spear_adc_read_raw,
+	.write_raw = &spear_adc_write_raw,
+>>>>>>> v3.18
 	.driver_module = THIS_MODULE,
 };
 
@@ -477,6 +554,7 @@ static int spear_adc_probe(struct platform_device *pdev)
 {
 	struct device_node *np = pdev->dev.of_node;
 	struct device *dev = &pdev->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct spear_adc_info *info;
 	struct iio_dev *iodev = NULL;
@@ -493,6 +571,8 @@ static int spear_adc_probe(struct platform_device *pdev)
 	info = iio_priv(iodev);
 	info->np = np;
 =======
+=======
+>>>>>>> v3.18
 	struct spear_adc_state *st;
 	struct iio_dev *indio_dev = NULL;
 	int ret = -ENODEV;
@@ -506,6 +586,9 @@ static int spear_adc_probe(struct platform_device *pdev)
 
 	st = iio_priv(indio_dev);
 	st->np = np;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -513,6 +596,7 @@ static int spear_adc_probe(struct platform_device *pdev)
 	 * (e.g. SPEAr3xx). Let's provide two register base addresses
 	 * to support multi-arch kernels.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	info->adc_base_spear6xx = of_iomap(np, 0);
 	if (!info->adc_base_spear6xx) {
@@ -554,6 +638,8 @@ static int spear_adc_probe(struct platform_device *pdev)
 		ret = -EINVAL;
 		goto errout5;
 =======
+=======
+>>>>>>> v3.18
 	st->adc_base_spear6xx = of_iomap(np, 0);
 	if (!st->adc_base_spear6xx) {
 		dev_err(dev, "failed mapping memory\n");
@@ -593,6 +679,9 @@ static int spear_adc_probe(struct platform_device *pdev)
 		dev_err(dev, "sampling-frequency missing in DT\n");
 		ret = -EINVAL;
 		goto errout3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -601,7 +690,11 @@ static int spear_adc_probe(struct platform_device *pdev)
 	 * conversion
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_property_read_u32(np, "average-samples", &info->avg_samples);
+=======
+	of_property_read_u32(np, "average-samples", &st->avg_samples);
+>>>>>>> v3.18
 =======
 	of_property_read_u32(np, "average-samples", &st->avg_samples);
 >>>>>>> v3.18
@@ -610,6 +703,7 @@ static int spear_adc_probe(struct platform_device *pdev)
 	 * Optional vref_external defaults to 0, resulting in internal vref
 	 * selection
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	of_property_read_u32(np, "vref-external", &info->vref_external);
 
@@ -630,6 +724,8 @@ static int spear_adc_probe(struct platform_device *pdev)
 	if (ret)
 		goto errout5;
 =======
+=======
+>>>>>>> v3.18
 	of_property_read_u32(np, "vref-external", &st->vref_external);
 
 	spear_adc_configure(st);
@@ -648,12 +744,16 @@ static int spear_adc_probe(struct platform_device *pdev)
 	ret = iio_device_register(indio_dev);
 	if (ret)
 		goto errout3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_info(dev, "SPEAR ADC driver loaded, IRQ %d\n", irq);
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 errout5:
 	clk_disable_unprepare(info->clk);
@@ -665,18 +765,24 @@ errout2:
 	iio_device_free(iodev);
 errout1:
 =======
+=======
+>>>>>>> v3.18
 errout3:
 	clk_disable_unprepare(st->clk);
 errout2:
 	clk_put(st->clk);
 errout1:
 	iounmap(st->adc_base_spear6xx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
 
 static int spear_adc_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct iio_dev *iodev = platform_get_drvdata(pdev);
 	struct spear_adc_info *info = iio_priv(iodev);
@@ -688,6 +794,8 @@ static int spear_adc_remove(struct platform_device *pdev)
 	iounmap(info->adc_base_spear6xx);
 	iio_device_free(iodev);
 =======
+=======
+>>>>>>> v3.18
 	struct iio_dev *indio_dev = platform_get_drvdata(pdev);
 	struct spear_adc_state *st = iio_priv(indio_dev);
 
@@ -695,12 +803,19 @@ static int spear_adc_remove(struct platform_device *pdev)
 	clk_disable_unprepare(st->clk);
 	clk_put(st->clk);
 	iounmap(st->adc_base_spear6xx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_OF
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_OF
 >>>>>>> v3.18
@@ -710,6 +825,10 @@ static const struct of_device_id spear_adc_dt_ids[] = {
 };
 MODULE_DEVICE_TABLE(of, spear_adc_dt_ids);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -719,7 +838,11 @@ static struct platform_driver spear_adc_driver = {
 	.remove		= spear_adc_remove,
 	.driver		= {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name	= MOD_NAME,
+=======
+		.name	= SPEAR_ADC_MOD_NAME,
+>>>>>>> v3.18
 =======
 		.name	= SPEAR_ADC_MOD_NAME,
 >>>>>>> v3.18

@@ -26,6 +26,11 @@
 #include <linux/fsl_devices.h>
 #include <linux/mii.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_fdt.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_fdt.h>
@@ -39,7 +44,10 @@
 #include <asm/processor.h>
 #include <asm/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mpc8xx.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/8xx_immap.h>
@@ -52,6 +60,7 @@
 
 static u32 __iomem *bcsr, *bcsr5;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PCMCIA_M8XX
 static void pcmcia_hw_setup(int slot, int enable)
@@ -108,6 +117,8 @@ static int pcmcia_set_voltage(int slot, int vcc, int vpp)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct cpm_pin {
@@ -255,12 +266,15 @@ static void __init mpc885ads_setup_arch(void)
 		of_node_put(np);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_PCMCIA_M8XX
 	/* Set up board specific hook-ups.*/
 	m8xx_pcmcia_ops.hw_ctrl = pcmcia_hw_setup;
 	m8xx_pcmcia_ops.voltage_set = pcmcia_set_voltage;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -272,7 +286,11 @@ static int __init mpc885ads_probe(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id __initdata of_bus_ids[] = {
+=======
+static const struct of_device_id of_bus_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id of_bus_ids[] __initconst = {
 >>>>>>> v3.18

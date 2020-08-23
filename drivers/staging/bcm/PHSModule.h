@@ -6,7 +6,11 @@ int PHSTransmit(struct bcm_mini_adapter *Adapter,
 					 USHORT Vcid,
 					 B_UINT16 uiClassifierRuleID,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 BOOLEAN bHeaderSuppressionEnabled,
+=======
+					 bool bHeaderSuppressionEnabled,
+>>>>>>> v3.18
 =======
 					 bool bHeaderSuppressionEnabled,
 >>>>>>> v3.18
@@ -25,7 +29,11 @@ int PHSReceive(struct bcm_mini_adapter *Adapter,
 void DumpDataPacketHeader(PUCHAR pPkt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void DumpFullPacket(UCHAR *pBuf,UINT nPktLen);
+=======
+void DumpFullPacket(UCHAR *pBuf, UINT nPktLen);
+>>>>>>> v3.18
 =======
 void DumpFullPacket(UCHAR *pBuf, UINT nPktLen);
 >>>>>>> v3.18
@@ -33,6 +41,7 @@ void DumpFullPacket(UCHAR *pBuf, UINT nPktLen);
 void DumpPhsRules(struct bcm_phs_extension *pDeviceExtension);
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int phs_init(struct bcm_phs_extension *pPhsdeviceExtension,struct bcm_mini_adapter *Adapter);
 
@@ -52,6 +61,8 @@ BOOLEAN ValidatePHSRule(struct bcm_phs_rule *psPhsRule);
 
 UINT GetServiceFlowEntry(struct bcm_phs_table *psServiceFlowTable,B_UINT16 uiVcid, struct bcm_phs_entry **ppstServiceFlowEntry);
 =======
+=======
+>>>>>>> v3.18
 int phs_init(struct bcm_phs_extension *pPhsdeviceExtension,
 	     struct bcm_mini_adapter *Adapter);
 
@@ -78,6 +89,9 @@ bool ValidatePHSRule(struct bcm_phs_rule *psPhsRule);
 UINT GetServiceFlowEntry(struct bcm_phs_table *psServiceFlowTable,
 			 B_UINT16 uiVcid,
 			 struct bcm_phs_entry **ppstServiceFlowEntry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

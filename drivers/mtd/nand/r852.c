@@ -182,7 +182,11 @@ static void r852_do_dma(struct r852_device *dev, uint8_t *buf, int do_read)
 	dev->dma_dir = do_read;
 	dev->dma_stage = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(dev->dma_done);
+=======
+	reinit_completion(&dev->dma_done);
+>>>>>>> v3.18
 =======
 	reinit_completion(&dev->dma_done);
 >>>>>>> v3.18
@@ -234,7 +238,11 @@ static void r852_do_dma(struct r852_device *dev, uint8_t *buf, int do_read)
  * Program data lines of the nand chip to send data to it
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r852_write_buf(struct mtd_info *mtd, const uint8_t *buf, int len)
+=======
+static void r852_write_buf(struct mtd_info *mtd, const uint8_t *buf, int len)
+>>>>>>> v3.18
 =======
 static void r852_write_buf(struct mtd_info *mtd, const uint8_t *buf, int len)
 >>>>>>> v3.18
@@ -254,7 +262,11 @@ static void r852_write_buf(struct mtd_info *mtd, const uint8_t *buf, int len)
 
 	/* write DWORD chinks - faster */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (len) {
+=======
+	while (len >= 4) {
+>>>>>>> v3.18
 =======
 	while (len >= 4) {
 >>>>>>> v3.18
@@ -267,13 +279,19 @@ static void r852_write_buf(struct mtd_info *mtd, const uint8_t *buf, int len)
 
 	/* write rest */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (len)
 		r852_write_reg(dev, R852_DATALINE, *buf++);
 =======
+=======
+>>>>>>> v3.18
 	while (len > 0) {
 		r852_write_reg(dev, R852_DATALINE, *buf++);
 		len--;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -281,7 +299,11 @@ static void r852_write_buf(struct mtd_info *mtd, const uint8_t *buf, int len)
  * Read data lines of the nand chip to retrieve data
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r852_read_buf(struct mtd_info *mtd, uint8_t *buf, int len)
+=======
+static void r852_read_buf(struct mtd_info *mtd, uint8_t *buf, int len)
+>>>>>>> v3.18
 =======
 static void r852_read_buf(struct mtd_info *mtd, uint8_t *buf, int len)
 >>>>>>> v3.18
@@ -336,7 +358,11 @@ static uint8_t r852_read_byte(struct mtd_info *mtd)
  * Control several chip lines & send commands
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r852_cmdctl(struct mtd_info *mtd, int dat, unsigned int ctrl)
+=======
+static void r852_cmdctl(struct mtd_info *mtd, int dat, unsigned int ctrl)
+>>>>>>> v3.18
 =======
 static void r852_cmdctl(struct mtd_info *mtd, int dat, unsigned int ctrl)
 >>>>>>> v3.18
@@ -385,7 +411,11 @@ static void r852_cmdctl(struct mtd_info *mtd, int dat, unsigned int ctrl)
  * based on nand_wait, but returns errors on DMA error
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int r852_wait(struct mtd_info *mtd, struct nand_chip *chip)
+=======
+static int r852_wait(struct mtd_info *mtd, struct nand_chip *chip)
+>>>>>>> v3.18
 =======
 static int r852_wait(struct mtd_info *mtd, struct nand_chip *chip)
 >>>>>>> v3.18
@@ -418,7 +448,11 @@ static int r852_wait(struct mtd_info *mtd, struct nand_chip *chip)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int r852_ready(struct mtd_info *mtd)
+=======
+static int r852_ready(struct mtd_info *mtd)
+>>>>>>> v3.18
 =======
 static int r852_ready(struct mtd_info *mtd)
 >>>>>>> v3.18
@@ -433,7 +467,11 @@ static int r852_ready(struct mtd_info *mtd)
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r852_ecc_hwctl(struct mtd_info *mtd, int mode)
+=======
+static void r852_ecc_hwctl(struct mtd_info *mtd, int mode)
+>>>>>>> v3.18
 =======
 static void r852_ecc_hwctl(struct mtd_info *mtd, int mode)
 >>>>>>> v3.18
@@ -469,7 +507,11 @@ static void r852_ecc_hwctl(struct mtd_info *mtd, int mode)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int r852_ecc_calculate(struct mtd_info *mtd, const uint8_t *dat,
+=======
+static int r852_ecc_calculate(struct mtd_info *mtd, const uint8_t *dat,
+>>>>>>> v3.18
 =======
 static int r852_ecc_calculate(struct mtd_info *mtd, const uint8_t *dat,
 >>>>>>> v3.18
@@ -505,7 +547,11 @@ static int r852_ecc_calculate(struct mtd_info *mtd, const uint8_t *dat,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int r852_ecc_correct(struct mtd_info *mtd, uint8_t *dat,
+=======
+static int r852_ecc_correct(struct mtd_info *mtd, uint8_t *dat,
+>>>>>>> v3.18
 =======
 static int r852_ecc_correct(struct mtd_info *mtd, uint8_t *dat,
 >>>>>>> v3.18
@@ -577,7 +623,11 @@ static int r852_read_oob(struct mtd_info *mtd, struct nand_chip *chip,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r852_engine_enable(struct r852_device *dev)
+=======
+static void r852_engine_enable(struct r852_device *dev)
+>>>>>>> v3.18
 =======
 static void r852_engine_enable(struct r852_device *dev)
 >>>>>>> v3.18
@@ -599,7 +649,11 @@ static void r852_engine_enable(struct r852_device *dev)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r852_engine_disable(struct r852_device *dev)
+=======
+static void r852_engine_disable(struct r852_device *dev)
+>>>>>>> v3.18
 =======
 static void r852_engine_disable(struct r852_device *dev)
 >>>>>>> v3.18
@@ -613,7 +667,11 @@ static void r852_engine_disable(struct r852_device *dev)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r852_card_update_present(struct r852_device *dev)
+=======
+static void r852_card_update_present(struct r852_device *dev)
+>>>>>>> v3.18
 =======
 static void r852_card_update_present(struct r852_device *dev)
 >>>>>>> v3.18
@@ -632,7 +690,11 @@ static void r852_card_update_present(struct r852_device *dev)
  * which is read in r852_card_update_present
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r852_update_card_detect(struct r852_device *dev)
+=======
+static void r852_update_card_detect(struct r852_device *dev)
+>>>>>>> v3.18
 =======
 static void r852_update_card_detect(struct r852_device *dev)
 >>>>>>> v3.18
@@ -650,8 +712,13 @@ static void r852_update_card_detect(struct r852_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t r852_media_type_show(struct device *sys_dev,
 		struct device_attribute *attr, char *buf)
+=======
+static ssize_t r852_media_type_show(struct device *sys_dev,
+			struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t r852_media_type_show(struct device *sys_dev,
 			struct device_attribute *attr, char *buf)
@@ -666,17 +733,23 @@ static ssize_t r852_media_type_show(struct device *sys_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEVICE_ATTR(media_type, S_IRUGO, r852_media_type_show, NULL);
 
 
 /* Detect properties of card in slot */
 void r852_update_media_status(struct r852_device *dev)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(media_type, S_IRUGO, r852_media_type_show, NULL);
 
 
 /* Detect properties of card in slot */
 static void r852_update_media_status(struct r852_device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	uint8_t reg;
@@ -707,7 +780,11 @@ static void r852_update_media_status(struct r852_device *dev)
  * Called when the card is detected
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int r852_register_nand_device(struct r852_device *dev)
+=======
+static int r852_register_nand_device(struct r852_device *dev)
+>>>>>>> v3.18
 =======
 static int r852_register_nand_device(struct r852_device *dev)
 >>>>>>> v3.18
@@ -749,7 +826,11 @@ error1:
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r852_unregister_nand_device(struct r852_device *dev)
+=======
+static void r852_unregister_nand_device(struct r852_device *dev)
+>>>>>>> v3.18
 =======
 static void r852_unregister_nand_device(struct r852_device *dev)
 >>>>>>> v3.18
@@ -767,7 +848,11 @@ static void r852_unregister_nand_device(struct r852_device *dev)
 
 /* Card state updater */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r852_card_detect_work(struct work_struct *work)
+=======
+static void r852_card_detect_work(struct work_struct *work)
+>>>>>>> v3.18
 =======
 static void r852_card_detect_work(struct work_struct *work)
 >>>>>>> v3.18
@@ -910,7 +995,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int  r852_probe(struct pci_dev *pci_dev, const struct pci_device_id *id)
+=======
+static int  r852_probe(struct pci_dev *pci_dev, const struct pci_device_id *id)
+>>>>>>> v3.18
 =======
 static int  r852_probe(struct pci_dev *pci_dev, const struct pci_device_id *id)
 >>>>>>> v3.18
@@ -1054,7 +1143,11 @@ error1:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r852_remove(struct pci_dev *pci_dev)
+=======
+static void r852_remove(struct pci_dev *pci_dev)
+>>>>>>> v3.18
 =======
 static void r852_remove(struct pci_dev *pci_dev)
 >>>>>>> v3.18
@@ -1089,7 +1182,11 @@ static void r852_remove(struct pci_dev *pci_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void r852_shutdown(struct pci_dev *pci_dev)
+=======
+static void r852_shutdown(struct pci_dev *pci_dev)
+>>>>>>> v3.18
 =======
 static void r852_shutdown(struct pci_dev *pci_dev)
 >>>>>>> v3.18
@@ -1103,7 +1200,11 @@ static void r852_shutdown(struct pci_dev *pci_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -1160,9 +1261,12 @@ static int r852_resume(struct device *device)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define r852_suspend	NULL
 #define r852_resume	NULL
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

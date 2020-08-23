@@ -66,7 +66,11 @@ int sync_filesystem(struct super_block *sb)
 	return __sync_filesystem(sb, 1);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(sync_filesystem);
+=======
+EXPORT_SYMBOL(sync_filesystem);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(sync_filesystem);
 >>>>>>> v3.18
@@ -182,7 +186,11 @@ SYSCALL_DEFINE1(syncfs, int, fd)
 int vfs_fsync_range(struct file *file, loff_t start, loff_t end, int datasync)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!file->f_op || !file->f_op->fsync)
+=======
+	if (!file->f_op->fsync)
+>>>>>>> v3.18
 =======
 	if (!file->f_op->fsync)
 >>>>>>> v3.18
@@ -228,6 +236,7 @@ SYSCALL_DEFINE1(fdatasync, unsigned int, fd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * generic_write_sync - perform syncing after a write if file / inode is sync
  * @file:	file to which the write happened
@@ -245,6 +254,8 @@ int generic_write_sync(struct file *file, loff_t pos, loff_t count)
 }
 EXPORT_SYMBOL(generic_write_sync);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

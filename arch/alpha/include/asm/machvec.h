@@ -34,6 +34,10 @@ struct alpha_machine_vector
 	int nr_irqs;
 	int rtc_port;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int rtc_boot_cpu_only;
+>>>>>>> v3.18
 =======
 	int rtc_boot_cpu_only;
 >>>>>>> v3.18
@@ -100,9 +104,12 @@ struct alpha_machine_vector
 	struct _alpha_agp_info *(*agp_info)(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int (*rtc_get_time)(struct rtc_time *);
 	int (*rtc_set_time)(struct rtc_time *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	const char *vector_name;
@@ -134,6 +141,7 @@ extern struct alpha_machine_vector alpha_mv;
 #ifdef CONFIG_ALPHA_GENERIC
 extern int alpha_using_srm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #ifdef CONFIG_ALPHA_SRM
 #define alpha_using_srm 1
@@ -144,6 +152,8 @@ extern int alpha_using_srm;
 
 #endif
 =======
+=======
+>>>>>>> v3.18
 extern int alpha_using_qemu;
 #else
 # ifdef CONFIG_ALPHA_SRM
@@ -159,5 +169,8 @@ extern int alpha_using_qemu;
 #endif /* GENERIC */
 
 #endif /* __KERNEL__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ALPHA_MACHVEC_H */

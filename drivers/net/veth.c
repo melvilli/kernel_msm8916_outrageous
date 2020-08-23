@@ -15,6 +15,10 @@
 #include <linux/u64_stats_sync.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/rtnetlink.h>
+>>>>>>> v3.18
 =======
 #include <net/rtnetlink.h>
 >>>>>>> v3.18
@@ -121,13 +125,19 @@ static netdev_tx_t veth_xmit(struct sk_buff *skb, struct net_device *dev)
 		goto drop;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* don't change ip_summed == CHECKSUM_PARTIAL, as that
 	 * will cause bad checksum on forwarded packets
 	 */
 	if (skb->ip_summed == CHECKSUM_NONE &&
 	    rcv->features & NETIF_F_RXCSUM)
 		skb->ip_summed = CHECKSUM_UNNECESSARY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (likely(dev_forward_skb(rcv, skb) == NET_RX_SUCCESS)) {
@@ -163,15 +173,21 @@ static u64 veth_stats_one(struct pcpu_vstats *result, struct net_device *dev)
 
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			start = u64_stats_fetch_begin_bh(&stats->syncp);
 			packets = stats->packets;
 			bytes = stats->bytes;
 		} while (u64_stats_fetch_retry_bh(&stats->syncp, start));
 =======
+=======
+>>>>>>> v3.18
 			start = u64_stats_fetch_begin_irq(&stats->syncp);
 			packets = stats->packets;
 			bytes = stats->bytes;
 		} while (u64_stats_fetch_retry_irq(&stats->syncp, start));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		result->packets += packets;
 		result->bytes += bytes;
@@ -203,12 +219,18 @@ static struct rtnl_link_stats64 *veth_get_stats64(struct net_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* fake multicast ability */
 static void veth_set_multicast_list(struct net_device *dev)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int veth_open(struct net_device *dev)
 {
@@ -253,10 +275,16 @@ static int veth_change_mtu(struct net_device *dev, int new_mtu)
 static int veth_dev_init(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->vstats = alloc_percpu(struct pcpu_vstats);
 	if (!dev->vstats)
 		return -ENOMEM;
 
+=======
+	dev->vstats = netdev_alloc_pcpu_stats(struct pcpu_vstats);
+	if (!dev->vstats)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	dev->vstats = netdev_alloc_pcpu_stats(struct pcpu_vstats);
 	if (!dev->vstats)
@@ -272,7 +300,10 @@ static void veth_dev_free(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_POLL_CONTROLLER
 static void veth_poll_controller(struct net_device *dev)
 {
@@ -288,6 +319,9 @@ static void veth_poll_controller(struct net_device *dev)
 }
 #endif	/* CONFIG_NET_POLL_CONTROLLER */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct net_device_ops veth_netdev_ops = {
 	.ndo_init            = veth_dev_init,
@@ -297,19 +331,30 @@ static const struct net_device_ops veth_netdev_ops = {
 	.ndo_change_mtu      = veth_change_mtu,
 	.ndo_get_stats64     = veth_get_stats64,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ndo_set_mac_address = eth_mac_addr,
 =======
+=======
+>>>>>>> v3.18
 	.ndo_set_rx_mode     = veth_set_multicast_list,
 	.ndo_set_mac_address = eth_mac_addr,
 #ifdef CONFIG_NET_POLL_CONTROLLER
 	.ndo_poll_controller	= veth_poll_controller,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 #define VETH_FEATURES (NETIF_F_SG | NETIF_F_FRAGLIST | NETIF_F_ALL_TSO |    \
 		       NETIF_F_HW_CSUM | NETIF_F_RXCSUM | NETIF_F_HIGHDMA | \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		       NETIF_F_GSO_GRE | NETIF_F_GSO_UDP_TUNNEL |	    \
+		       NETIF_F_GSO_IPIP | NETIF_F_GSO_SIT | NETIF_F_UFO	|   \
+>>>>>>> v3.18
 =======
 		       NETIF_F_GSO_GRE | NETIF_F_GSO_UDP_TUNNEL |	    \
 		       NETIF_F_GSO_IPIP | NETIF_F_GSO_SIT | NETIF_F_UFO	|   \
@@ -329,10 +374,13 @@ static void veth_setup(struct net_device *dev)
 	dev->features |= NETIF_F_LLTX;
 	dev->features |= VETH_FEATURES;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->destructor = veth_dev_free;
 
 	dev->hw_features = VETH_FEATURES;
 =======
+=======
+>>>>>>> v3.18
 	dev->vlan_features = dev->features &
 			     ~(NETIF_F_HW_VLAN_CTAG_TX |
 			       NETIF_F_HW_VLAN_STAG_TX |
@@ -342,6 +390,9 @@ static void veth_setup(struct net_device *dev)
 
 	dev->hw_features = VETH_FEATURES;
 	dev->hw_enc_features = VETH_FEATURES;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -375,6 +426,10 @@ static int veth_newlink(struct net *src_net, struct net_device *dev,
 	char ifname[IFNAMSIZ];
 	struct nlattr *peer_tb[IFLA_MAX + 1], **tbp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned char name_assign_type;
+>>>>>>> v3.18
 =======
 	unsigned char name_assign_type;
 >>>>>>> v3.18
@@ -390,10 +445,16 @@ static int veth_newlink(struct net *src_net, struct net_device *dev,
 		nla_peer = data[VETH_INFO_PEER];
 		ifmp = nla_data(nla_peer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = nla_parse(peer_tb, IFLA_MAX,
 				nla_data(nla_peer) + sizeof(struct ifinfomsg),
 				nla_len(nla_peer) - sizeof(struct ifinfomsg),
 				ifla_policy);
+=======
+		err = rtnl_nla_parse_ifla(peer_tb,
+					  nla_data(nla_peer) + sizeof(struct ifinfomsg),
+					  nla_len(nla_peer) - sizeof(struct ifinfomsg));
+>>>>>>> v3.18
 =======
 		err = rtnl_nla_parse_ifla(peer_tb,
 					  nla_data(nla_peer) + sizeof(struct ifinfomsg),
@@ -413,11 +474,14 @@ static int veth_newlink(struct net *src_net, struct net_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tbp[IFLA_IFNAME])
 		nla_strlcpy(ifname, tbp[IFLA_IFNAME], IFNAMSIZ);
 	else
 		snprintf(ifname, IFNAMSIZ, DRV_NAME "%%d");
 =======
+=======
+>>>>>>> v3.18
 	if (tbp[IFLA_IFNAME]) {
 		nla_strlcpy(ifname, tbp[IFLA_IFNAME], IFNAMSIZ);
 		name_assign_type = NET_NAME_USER;
@@ -425,6 +489,9 @@ static int veth_newlink(struct net *src_net, struct net_device *dev,
 		snprintf(ifname, IFNAMSIZ, DRV_NAME "%%d");
 		name_assign_type = NET_NAME_ENUM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	net = rtnl_link_get_net(src_net, tbp);
@@ -432,7 +499,12 @@ static int veth_newlink(struct net *src_net, struct net_device *dev,
 		return PTR_ERR(net);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	peer = rtnl_create_link(net, ifname, &veth_link_ops, tbp);
+=======
+	peer = rtnl_create_link(net, ifname, name_assign_type,
+				&veth_link_ops, tbp);
+>>>>>>> v3.18
 =======
 	peer = rtnl_create_link(net, ifname, name_assign_type,
 				&veth_link_ops, tbp);
@@ -476,12 +548,15 @@ static int veth_newlink(struct net *src_net, struct net_device *dev,
 		snprintf(dev->name, IFNAMSIZ, DRV_NAME "%%d");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strchr(dev->name, '%')) {
 		err = dev_alloc_name(dev, dev->name);
 		if (err < 0)
 			goto err_alloc_name;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = register_netdevice(dev);
@@ -504,7 +579,10 @@ static int veth_newlink(struct net *src_net, struct net_device *dev,
 err_register_dev:
 	/* nothing to do */
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_alloc_name:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_configure_peer:

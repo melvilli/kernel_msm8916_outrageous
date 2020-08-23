@@ -40,9 +40,12 @@ struct posix_acl_entry {
 		kuid_t		e_uid;
 		kgid_t		e_gid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_UIDGID_STRICT_TYPE_CHECKS
 		unsigned int	e_id;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	};
@@ -92,9 +95,14 @@ extern int posix_acl_permission(struct inode *, const struct posix_acl *, int);
 extern struct posix_acl *posix_acl_from_mode(umode_t, gfp_t);
 extern int posix_acl_equiv_mode(const struct posix_acl *, umode_t *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int posix_acl_create(struct posix_acl **, gfp_t, umode_t *);
 extern int posix_acl_update_mode(struct inode *, umode_t *, struct posix_acl **);
 extern int posix_acl_chmod(struct posix_acl **, gfp_t, umode_t);
+=======
+extern int __posix_acl_create(struct posix_acl **, gfp_t, umode_t *);
+extern int __posix_acl_chmod(struct posix_acl **, gfp_t, umode_t);
+>>>>>>> v3.18
 =======
 extern int __posix_acl_create(struct posix_acl **, gfp_t, umode_t *);
 extern int __posix_acl_chmod(struct posix_acl **, gfp_t, umode_t);
@@ -104,6 +112,7 @@ extern struct posix_acl *get_posix_acl(struct inode *, int);
 extern int set_posix_acl(struct inode *, int, struct posix_acl *);
 
 #ifdef CONFIG_FS_POSIX_ACL
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline struct posix_acl **acl_by_type(struct inode *inode, int type)
 {
@@ -161,6 +170,8 @@ static inline void forget_cached_acl(struct inode *inode, int type)
 	if (old != ACL_NOT_CACHED)
 		posix_acl_release(old);
 =======
+=======
+>>>>>>> v3.18
 extern int posix_acl_chmod(struct inode *, umode_t);
 extern int posix_acl_create(struct inode *, umode_t *, struct posix_acl **,
 		struct posix_acl **);
@@ -201,11 +212,15 @@ static inline int posix_acl_create(struct inode *inode, umode_t *mode,
 {
 	*default_acl = *acl = NULL;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void forget_all_cached_acls(struct inode *inode)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct posix_acl *old_access, *old_default;
 	spin_lock(&inode->i_lock);
@@ -228,10 +243,15 @@ static inline void cache_no_acl(struct inode *inode)
 #endif
 }
 =======
+=======
+>>>>>>> v3.18
 }
 #endif /* CONFIG_FS_POSIX_ACL */
 
 struct posix_acl *get_acl(struct inode *inode, int type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif  /* __LINUX_POSIX_ACL_H */

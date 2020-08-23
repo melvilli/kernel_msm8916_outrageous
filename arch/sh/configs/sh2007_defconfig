@@ -26,6 +26,10 @@ CONFIG_CMDLINE="console=ttySC1,115200 ip=dhcp root=/dev/nfs rw nfsroot=/nfs/root
 CONFIG_PCCARD=y
 CONFIG_BINFMT_MISC=y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_NET=y
+>>>>>>> v3.18
 =======
 CONFIG_NET=y
 >>>>>>> v3.18
@@ -57,7 +61,10 @@ CONFIG_CDROM_PKTCDVD=y
 CONFIG_RAID_ATTRS=y
 CONFIG_SCSI=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_SCSI_TGT=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_BLK_DEV_SD=y
@@ -105,7 +112,10 @@ CONFIG_LOGO=y
 # CONFIG_HID_SUPPORT is not set
 CONFIG_USB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_USB_DEVICE_CLASS is not set

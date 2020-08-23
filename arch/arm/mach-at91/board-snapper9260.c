@@ -27,7 +27,11 @@
 #include <linux/platform_device.h>
 #include <linux/spi/spi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/pca953x.h>
 >>>>>>> v3.18
@@ -43,6 +47,10 @@
 #include "sam9_smc.h"
 #include "generic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 =======
 #include "gpio.h"
 >>>>>>> v3.18
@@ -162,6 +170,11 @@ static void __init snapper9260_add_device_nand(void)
 static void __init snapper9260_board_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	at91_register_devices();
+
+>>>>>>> v3.18
 =======
 	at91_register_devices();
 
@@ -191,7 +204,11 @@ static void __init snapper9260_board_init(void)
 
 MACHINE_START(SNAPPER_9260, "Bluewater Systems Snapper 9260/9G20 module")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= at91_init_time,
 >>>>>>> v3.18

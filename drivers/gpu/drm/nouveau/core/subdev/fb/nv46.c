@@ -25,11 +25,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/fb.h>
 
 struct nv46_fb_priv {
 	struct nouveau_fb base;
 };
+=======
+#include "nv04.h"
+>>>>>>> v3.18
 =======
 #include "nv04.h"
 >>>>>>> v3.18
@@ -48,6 +52,7 @@ nv46_fb_tile_init(struct nouveau_fb *pfb, int i, u32 addr, u32 size, u32 pitch,
 	tile->pitch = pitch;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 nv46_fb_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
@@ -78,19 +83,27 @@ nv46_fb_oclass = {
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv46_fb_ctor,
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_oclass *
 nv46_fb_oclass = &(struct nv04_fb_impl) {
 	.base.base.handle = NV_SUBDEV(FB, 0x46),
 	.base.base.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv04_fb_ctor,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.dtor = _nouveau_fb_dtor,
 		.init = nv44_fb_init,
 		.fini = _nouveau_fb_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 	.base.memtype = nv04_fb_memtype_valid,
 	.base.ram = &nv44_ram_oclass,
 	.tile.regions = 15,
@@ -98,4 +111,7 @@ nv46_fb_oclass = &(struct nv04_fb_impl) {
 	.tile.fini = nv20_fb_tile_fini,
 	.tile.prog = nv44_fb_tile_prog,
 }.base.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

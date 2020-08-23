@@ -95,6 +95,7 @@ static int wm8728_hw_params(struct snd_pcm_substream *substream,
 	dac &= ~0x18;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -103,6 +104,8 @@ static int wm8728_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S24_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -110,6 +113,9 @@ static int wm8728_hw_params(struct snd_pcm_substream *substream,
 		dac |= 0x10;
 		break;
 	case 24:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dac |= 0x08;
 		break;
@@ -239,6 +245,7 @@ static int wm8728_resume(struct snd_soc_codec *codec)
 static int wm8728_probe(struct snd_soc_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	ret = snd_soc_codec_set_cache_io(codec, 7, 9, SND_SOC_REGMAP);
@@ -253,10 +260,15 @@ static int wm8728_probe(struct snd_soc_codec *codec)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	/* power on device */
 	wm8728_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -338,7 +350,11 @@ static struct spi_driver wm8728_spi_driver = {
 #endif /* CONFIG_SPI_MASTER */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -393,7 +409,11 @@ static int __init wm8728_modinit(void)
 {
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -417,7 +437,11 @@ module_init(wm8728_modinit);
 static void __exit wm8728_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18

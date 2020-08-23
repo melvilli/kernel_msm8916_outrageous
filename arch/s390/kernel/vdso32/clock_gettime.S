@@ -20,11 +20,14 @@
 __kernel_clock_gettime:
 	.cfi_startproc
 <<<<<<< HEAD
+<<<<<<< HEAD
 	basr	%r5,0
 0:	al	%r5,21f-0b(%r5)			/* get &_vdso_data */
 	chi	%r2,__CLOCK_REALTIME
 	je	10f
 =======
+=======
+>>>>>>> v3.18
 	ahi	%r15,-16
 	basr	%r5,0
 0:	al	%r5,21f-0b(%r5)			/* get &_vdso_data */
@@ -34,11 +37,15 @@ __kernel_clock_gettime:
 	je	11f
 	chi	%r2,__CLOCK_MONOTONIC_COARSE
 	je	9f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	chi	%r2,__CLOCK_MONOTONIC
 	jne	19f
 
 	/* CLOCK_MONOTONIC */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ltr	%r3,%r3
 	jz	9f				/* tp == NULL */
@@ -48,16 +55,22 @@ __kernel_clock_gettime:
 	stck	24(%r15)			/* Store TOD clock */
 	lm	%r0,%r1,24(%r15)
 =======
+=======
+>>>>>>> v3.18
 1:	l	%r4,__VDSO_UPD_COUNT+4(%r5)	/* load update counter */
 	tml	%r4,0x0001			/* pending update ? loop */
 	jnz	1b
 	stcke	0(%r15)				/* Store TOD clock */
 	lm	%r0,%r1,1(%r15)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s	%r0,__VDSO_XTIME_STAMP(%r5)	/* TOD - cycle_last */
 	sl	%r1,__VDSO_XTIME_STAMP+4(%r5)
 	brc	3,2f
 	ahi	%r0,-1
+<<<<<<< HEAD
 <<<<<<< HEAD
 2:	ms	%r0,__VDSO_NTP_MULT(%r5)	/* cyc2ns(clock,cycle_delta) */
 	lr	%r2,%r0
@@ -79,6 +92,8 @@ __kernel_clock_gettime:
 	ahi	%r0,1
 5:	al	%r2,__VDSO_WTOM_SEC+4(%r5)
 =======
+=======
+>>>>>>> v3.18
 2:	ms	%r0,__VDSO_TK_MULT(%r5)		/*  * tk->mult */
 	lr	%r2,%r0
 	l	%r0,__VDSO_TK_MULT(%r5)
@@ -94,6 +109,9 @@ __kernel_clock_gettime:
 5:	l	%r2,__VDSO_TK_SHIFT(%r5)	/* Timekeeper shift */
 	srdl	%r0,0(%r2)			/*  >> tk->shift */
 	l	%r2,__VDSO_WTOM_SEC+4(%r5)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cl	%r4,__VDSO_UPD_COUNT+4(%r5)	/* check update counter */
 	jne	1b
@@ -110,6 +128,7 @@ __kernel_clock_gettime:
 8:	st	%r2,0(%r3)			/* store tp->tv_sec */
 	st	%r1,4(%r3)			/* store tp->tv_nsec */
 <<<<<<< HEAD
+<<<<<<< HEAD
 9:	lhi	%r2,0
 	br	%r14
 
@@ -122,6 +141,8 @@ __kernel_clock_gettime:
 	stck	24(%r15)			/* Store TOD clock */
 	lm	%r0,%r1,24(%r15)
 =======
+=======
+>>>>>>> v3.18
 	lhi	%r2,0
 	ahi	%r15,16
 	br	%r14
@@ -152,11 +173,15 @@ __kernel_clock_gettime:
 	jnz	11b
 	stcke	0(%r15)				/* Store TOD clock */
 	lm	%r0,%r1,1(%r15)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s	%r0,__VDSO_XTIME_STAMP(%r5)	/* TOD - cycle_last */
 	sl	%r1,__VDSO_XTIME_STAMP+4(%r5)
 	brc	3,12f
 	ahi	%r0,-1
+<<<<<<< HEAD
 <<<<<<< HEAD
 12:	ms	%r0,__VDSO_NTP_MULT(%r5)	/* cyc2ns(clock,cycle_delta) */
 	lr	%r2,%r0
@@ -173,6 +198,8 @@ __kernel_clock_gettime:
 	ahi	%r0,1
 14:	l	%r2,__VDSO_XTIME_SEC+4(%r5)
 =======
+=======
+>>>>>>> v3.18
 12:	ms	%r0,__VDSO_TK_MULT(%r5)		/*  * tk->mult */
 	lr	%r2,%r0
 	l	%r0,__VDSO_TK_MULT(%r5)
@@ -188,6 +215,9 @@ __kernel_clock_gettime:
 14:	l	%r2,__VDSO_TK_SHIFT(%r5)	/* Timekeeper shift */
 	srdl	%r0,0(%r2)			/*  >> tk->shift */
 	l	%r2,__VDSO_XTIME_SEC+4(%r5)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cl	%r4,__VDSO_UPD_COUNT+4(%r5)	/* check update counter */
 	jne	11b
@@ -204,7 +234,12 @@ __kernel_clock_gettime:
 17:	st	%r2,0(%r3)			/* store tp->tv_sec */
 	st	%r1,4(%r3)			/* store tp->tv_nsec */
 <<<<<<< HEAD
+<<<<<<< HEAD
 18:	lhi	%r2,0
+=======
+	lhi	%r2,0
+	ahi	%r15,16
+>>>>>>> v3.18
 =======
 	lhi	%r2,0
 	ahi	%r15,16
@@ -215,6 +250,10 @@ __kernel_clock_gettime:
 19:	lhi	%r1,__NR_clock_gettime
 	svc	0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ahi	%r15,16
+>>>>>>> v3.18
 =======
 	ahi	%r15,16
 >>>>>>> v3.18

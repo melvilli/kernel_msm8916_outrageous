@@ -11,6 +11,10 @@
  * Copyright (c) Jean-Francois Dive <jef@linuxbe.org>
  * Copyright (c) Mathias Krause <minipli@googlemail.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (c) Chandramouli Narayanan <mouli@linux.intel.com>
+>>>>>>> v3.18
 =======
  * Copyright (c) Chandramouli Narayanan <mouli@linux.intel.com>
 >>>>>>> v3.18
@@ -44,13 +48,19 @@ asmlinkage void sha1_transform_avx(u32 *digest, const char *data,
 				   unsigned int rounds);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_AS_AVX2
 #define SHA1_AVX2_BLOCK_OPTSIZE	4	/* optimal 4*64 bytes of SHA1 blocks */
 
 asmlinkage void sha1_transform_avx2(u32 *digest, const char *data,
 				unsigned int rounds);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static asmlinkage void (*sha1_transform_asm)(u32 *, const char *, unsigned int);
@@ -179,7 +189,10 @@ static int sha1_ssse3_import(struct shash_desc *desc, const void *in)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_AS_AVX2
 static void sha1_apply_transform_avx2(u32 *digest, const char *data,
 				unsigned int rounds)
@@ -192,6 +205,9 @@ static void sha1_apply_transform_avx2(u32 *digest, const char *data,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct shash_alg alg = {
 	.digestsize	=	SHA1_DIGEST_SIZE,
@@ -230,7 +246,10 @@ static bool __init avx_usable(void)
 	return true;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_AS_AVX2
 static bool __init avx2_usable(void)
@@ -242,11 +261,15 @@ static bool __init avx2_usable(void)
 	return false;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 static int __init sha1_ssse3_mod_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* test for SSSE3 first */
 	if (cpu_has_ssse3)
@@ -266,6 +289,8 @@ static int __init sha1_ssse3_mod_init(void)
 	}
 	pr_info("Neither AVX nor SSSE3 is available/usable.\n");
 =======
+=======
+>>>>>>> v3.18
 	char *algo_name;
 
 	/* test for SSSE3 first */
@@ -294,6 +319,9 @@ static int __init sha1_ssse3_mod_init(void)
 		return crypto_register_shash(&alg);
 	}
 	pr_info("Neither AVX nor AVX2 nor SSSE3 is available/usable.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return -ENODEV;
@@ -311,7 +339,11 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("SHA1 Secure Hash Algorithm, Supplemental SSE3 accelerated");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("sha1");
+=======
+MODULE_ALIAS("sha1");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("sha1");
 >>>>>>> v3.18

@@ -40,7 +40,11 @@ struct snd_compressed_buffer {
 	__u32 fragment_size;
 	__u32 fragments;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+} __attribute__((packed, aligned(4)));
+>>>>>>> v3.18
 =======
 } __attribute__((packed, aligned(4)));
 >>>>>>> v3.18
@@ -56,7 +60,11 @@ struct snd_compr_params {
 	struct snd_codec codec;
 	__u8 no_wake_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+} __attribute__((packed, aligned(4)));
+>>>>>>> v3.18
 =======
 } __attribute__((packed, aligned(4)));
 >>>>>>> v3.18
@@ -79,8 +87,12 @@ struct snd_compr_tstamp {
 	__u32 pcm_io_frames;
 	__u32 sampling_rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint64_t timestamp;
 };
+=======
+} __attribute__((packed, aligned(4)));
+>>>>>>> v3.18
 =======
 } __attribute__((packed, aligned(4)));
 >>>>>>> v3.18
@@ -94,7 +106,11 @@ struct snd_compr_avail {
 	__u64 avail;
 	struct snd_compr_tstamp tstamp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __attribute__((packed, aligned(4)));
+>>>>>>> v3.18
 =======
 } __attribute__((packed, aligned(4)));
 >>>>>>> v3.18
@@ -125,7 +141,11 @@ struct snd_compr_caps {
 	__u32 codecs[MAX_NUM_CODECS];
 	__u32 reserved[11];
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+} __attribute__((packed, aligned(4)));
+>>>>>>> v3.18
 =======
 } __attribute__((packed, aligned(4)));
 >>>>>>> v3.18
@@ -141,6 +161,7 @@ struct snd_compr_codec_caps {
 	__u32 num_descriptors;
 	struct snd_codec_desc descriptor[MAX_NUM_CODEC_DESCRIPTORS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 /**
@@ -155,6 +176,9 @@ struct snd_compr_audio_info {
 =======
 } __attribute__((packed, aligned(4)));
 >>>>>>> v3.18
+=======
+} __attribute__((packed, aligned(4)));
+>>>>>>> v3.18
 
 /**
  * @SNDRV_COMPRESS_ENCODER_PADDING: no of samples appended by the encoder at the
@@ -166,8 +190,11 @@ enum {
 	SNDRV_COMPRESS_ENCODER_PADDING = 1,
 	SNDRV_COMPRESS_ENCODER_DELAY = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SNDRV_COMPRESS_MIN_BLK_SIZE = 3,
 	SNDRV_COMPRESS_MAX_BLK_SIZE = 4,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -181,7 +208,11 @@ struct snd_compr_metadata {
 	 __u32 key;
 	 __u32 value[8];
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+} __attribute__((packed, aligned(4)));
+>>>>>>> v3.18
 =======
 } __attribute__((packed, aligned(4)));
 >>>>>>> v3.18
@@ -224,8 +255,11 @@ struct snd_compr_metadata {
 #define SNDRV_COMPRESS_NEXT_TRACK	_IO('C', 0x35)
 #define SNDRV_COMPRESS_PARTIAL_DRAIN	_IO('C', 0x36)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SNDRV_COMPRESS_SET_NEXT_TRACK_PARAM\
 					_IOW('C', 0x37, union snd_codec_options)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -237,8 +271,11 @@ struct snd_compr_metadata {
 #define SND_COMPR_TRIGGER_NEXT_TRACK 8
 #define SND_COMPR_TRIGGER_PARTIAL_DRAIN 9
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define SNDRV_COMPRESS_METADATA_MODE          _IOW('C', 0x99, bool)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

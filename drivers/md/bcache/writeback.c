@@ -10,6 +10,7 @@
 #include "btree.h"
 #include "debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct workqueue_struct *dirty_wq;
 
@@ -21,12 +22,17 @@ struct dirty_io {
 	struct bio		bio;
 };
 =======
+=======
+>>>>>>> v3.18
 #include "writeback.h"
 
 #include <linux/delay.h>
 #include <linux/freezer.h>
 #include <linux/kthread.h>
 #include <trace/events/bcache.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Rate limiting */
@@ -43,6 +49,7 @@ static void __update_writeback_rate(struct cached_dev *dc)
 
 	/* PD controller */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int change = 0;
 	int64_t error;
@@ -66,6 +73,8 @@ static void __update_writeback_rate(struct cached_dev *dc)
 	change = div_s64((dc->writeback_rate.rate * error) >> 8,
 			 dc->writeback_rate_p_term_inverse);
 =======
+=======
+>>>>>>> v3.18
 	int64_t dirty = bcache_dev_sectors_dirty(&dc->disk);
 	int64_t derivative = dirty - dc->disk.sectors_dirty_last;
 	int64_t proportional = dirty - target;
@@ -88,11 +97,15 @@ static void __update_writeback_rate(struct cached_dev *dc)
 	derivative = div_s64(derivative, dc->writeback_rate_p_term_inverse);
 
 	change = proportional + derivative;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Don't increase writeback rate if the device isn't keeping up */
 	if (change > 0 &&
 	    time_after64(local_clock(),
+<<<<<<< HEAD
 <<<<<<< HEAD
 			 dc->writeback_rate.next + 10 * NSEC_PER_MSEC))
 		change = 0;
@@ -108,6 +121,8 @@ out:
 	schedule_delayed_work(&dc->writeback_rate_update,
 			      dc->writeback_rate_update_seconds * HZ);
 =======
+=======
+>>>>>>> v3.18
 			 dc->writeback_rate.next + NSEC_PER_MSEC))
 		change = 0;
 
@@ -119,6 +134,9 @@ out:
 	dc->writeback_rate_derivative = derivative;
 	dc->writeback_rate_change = change;
 	dc->writeback_rate_target = target;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -136,6 +154,12 @@ static void update_writeback_rate(struct work_struct *work)
 
 	up_read(&dc->writeback_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	schedule_delayed_work(&dc->writeback_rate_update,
+			      dc->writeback_rate_update_seconds * HZ);
+>>>>>>> v3.18
 =======
 
 	schedule_delayed_work(&dc->writeback_rate_update,
@@ -145,6 +169,7 @@ static void update_writeback_rate(struct work_struct *work)
 
 static unsigned writeback_delay(struct cached_dev *dc, unsigned sectors)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	uint64_t ret;
 
@@ -164,6 +189,8 @@ static bool dirty_pred(struct keybuf *buf, struct bkey *k)
 	return KEY_DIRTY(k);
 }
 =======
+=======
+>>>>>>> v3.18
 	if (test_bit(BCACHE_DEV_DETACHING, &dc->disk.flags) ||
 	    !dc->writeback_percent)
 		return 0;
@@ -176,6 +203,9 @@ struct dirty_io {
 	struct cached_dev	*dc;
 	struct bio		bio;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void dirty_init(struct keybuf_key *w)
@@ -188,7 +218,11 @@ static void dirty_init(struct keybuf_key *w)
 		bio_set_prio(bio, IOPRIO_PRIO_VALUE(IOPRIO_CLASS_IDLE, 0));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_size		= KEY_SIZE(&w->key) << 9;
+=======
+	bio->bi_iter.bi_size	= KEY_SIZE(&w->key) << 9;
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_size	= KEY_SIZE(&w->key) << 9;
 >>>>>>> v3.18
@@ -198,6 +232,7 @@ static void dirty_init(struct keybuf_key *w)
 	bch_bio_map(bio, NULL);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void refill_dirty(struct closure *cl)
 {
@@ -285,6 +320,8 @@ void bch_writeback_add(struct cached_dev *dc, unsigned sectors)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void dirty_io_destructor(struct closure *cl)
 {
 	struct dirty_io *io = container_of(cl, struct dirty_io, cl);
@@ -297,19 +334,26 @@ static void write_dirty_finish(struct closure *cl)
 	struct keybuf_key *w = io->bio.bi_private;
 	struct cached_dev *dc = io->dc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bv = bio_iovec_idx(&io->bio, io->bio.bi_vcnt);
 
 	while (bv-- != io->bio.bi_io_vec)
 =======
+=======
+>>>>>>> v3.18
 	struct bio_vec *bv;
 	int i;
 
 	bio_for_each_segment_all(bv, &io->bio, i)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__free_page(bv->bv_page);
 
 	/* This is kind of a dumb way of signalling errors. */
 	if (KEY_DIRTY(&w->key)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		unsigned i;
 		struct btree_op op;
@@ -321,6 +365,8 @@ static void write_dirty_finish(struct closure *cl)
 		SET_KEY_DIRTY(&w->key, false);
 		bch_keylist_add(&op.keys, &w->key);
 =======
+=======
+>>>>>>> v3.18
 		int ret;
 		unsigned i;
 		struct keylist keys;
@@ -330,11 +376,15 @@ static void write_dirty_finish(struct closure *cl)
 		bkey_copy(keys.top, &w->key);
 		SET_KEY_DIRTY(keys.top, false);
 		bch_keylist_push(&keys);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		for (i = 0; i < KEY_PTRS(&w->key); i++)
 			atomic_inc(&PTR_BUCKET(dc->disk.c, &w->key, i)->pin);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pr_debug("clearing %s", pkey(&w->key));
 		bch_btree_insert(&op, dc->disk.c);
@@ -342,12 +392,17 @@ static void write_dirty_finish(struct closure *cl)
 
 		atomic_long_inc(op.insert_collision
 =======
+=======
+>>>>>>> v3.18
 		ret = bch_btree_insert(dc->disk.c, &keys, NULL, &w->key);
 
 		if (ret)
 			trace_bcache_writeback_collision(&w->key);
 
 		atomic_long_inc(ret
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				? &dc->disk.c->writeback_keys_failed
 				: &dc->disk.c->writeback_keys_done);
@@ -378,16 +433,22 @@ static void write_dirty(struct closure *cl)
 	dirty_init(w);
 	io->bio.bi_rw		= WRITE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	io->bio.bi_sector	= KEY_START(&w->key);
 	io->bio.bi_bdev		= io->dc->bdev;
 	io->bio.bi_end_io	= dirty_endio;
 
 	trace_bcache_write_dirty(&io->bio);
 =======
+=======
+>>>>>>> v3.18
 	io->bio.bi_iter.bi_sector = KEY_START(&w->key);
 	io->bio.bi_bdev		= io->dc->bdev;
 	io->bio.bi_end_io	= dirty_endio;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	closure_bio_submit(&io->bio, cl, &io->dc->disk);
 
@@ -410,7 +471,10 @@ static void read_dirty_submit(struct closure *cl)
 	struct dirty_io *io = container_of(cl, struct dirty_io, cl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_bcache_read_dirty(&io->bio);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	closure_bio_submit(&io->bio, cl, &io->dc->disk);
@@ -418,6 +482,7 @@ static void read_dirty_submit(struct closure *cl)
 	continue_at(cl, write_dirty, system_wq);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void read_dirty(struct closure *cl)
 {
@@ -427,6 +492,8 @@ static void read_dirty(struct closure *cl)
 	struct keybuf_key *w;
 	struct dirty_io *io;
 =======
+=======
+>>>>>>> v3.18
 static void read_dirty(struct cached_dev *dc)
 {
 	unsigned delay = 0;
@@ -435,6 +502,9 @@ static void read_dirty(struct cached_dev *dc)
 	struct closure cl;
 
 	closure_init_stack(&cl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -443,7 +513,13 @@ static void read_dirty(struct cached_dev *dc)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (1) {
+=======
+	while (!kthread_should_stop()) {
+		try_to_freeze();
+
+>>>>>>> v3.18
 =======
 	while (!kthread_should_stop()) {
 		try_to_freeze();
@@ -456,15 +532,21 @@ static void read_dirty(struct cached_dev *dc)
 		BUG_ON(ptr_stale(dc->disk.c, &w->key, 0));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (delay > 0 &&
 		    (KEY_START(&w->key) != dc->last_read ||
 		     jiffies_to_msecs(delay) > 50))
 			delay = schedule_timeout_uninterruptible(delay);
 =======
+=======
+>>>>>>> v3.18
 		if (KEY_START(&w->key) != dc->last_read ||
 		    jiffies_to_msecs(delay) > 50)
 			while (!kthread_should_stop() && delay)
 				delay = schedule_timeout_interruptible(delay);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		dc->last_read	= KEY_OFFSET(&w->key);
@@ -480,7 +562,11 @@ static void read_dirty(struct cached_dev *dc)
 
 		dirty_init(w);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		io->bio.bi_sector	= PTR_OFFSET(&w->key, 0);
+=======
+		io->bio.bi_iter.bi_sector = PTR_OFFSET(&w->key, 0);
+>>>>>>> v3.18
 =======
 		io->bio.bi_iter.bi_sector = PTR_OFFSET(&w->key, 0);
 >>>>>>> v3.18
@@ -490,6 +576,7 @@ static void read_dirty(struct cached_dev *dc)
 		io->bio.bi_end_io	= read_dirty_endio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bch_bio_alloc_pages(&io->bio, GFP_KERNEL))
 			goto err_free;
 
@@ -498,6 +585,8 @@ static void read_dirty(struct cached_dev *dc)
 		down(&dc->in_flight);
 		closure_call(&io->cl, read_dirty_submit, NULL, cl);
 =======
+=======
+>>>>>>> v3.18
 		if (bio_alloc_pages(&io->bio, GFP_KERNEL))
 			goto err_free;
 
@@ -505,6 +594,9 @@ static void read_dirty(struct cached_dev *dc)
 
 		down(&dc->in_flight);
 		closure_call(&io->cl, read_dirty_submit, NULL, &cl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		delay = writeback_delay(dc, KEY_SIZE(&w->key));
@@ -522,8 +614,11 @@ err:
 	 * freed) before refilling again
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	continue_at(cl, refill_dirty, dirty_wq);
 =======
+=======
+>>>>>>> v3.18
 	closure_sync(&cl);
 }
 
@@ -719,6 +814,9 @@ void bch_sectors_dirty_init(struct cached_dev *dc)
 			   sectors_dirty_init_fn, 0);
 
 	dc->disk.sectors_dirty_last = bcache_dev_sectors_dirty(&dc->disk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -726,10 +824,15 @@ void bch_cached_dev_writeback_init(struct cached_dev *dc)
 {
 	sema_init(&dc->in_flight, 64);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	closure_init_unlocked(&dc->writeback);
 	init_rwsem(&dc->writeback_lock);
 
 	bch_keybuf_init(&dc->writeback_keys, dirty_pred);
+=======
+	init_rwsem(&dc->writeback_lock);
+	bch_keybuf_init(&dc->writeback_keys);
+>>>>>>> v3.18
 =======
 	init_rwsem(&dc->writeback_lock);
 	bch_keybuf_init(&dc->writeback_keys);
@@ -741,6 +844,7 @@ void bch_cached_dev_writeback_init(struct cached_dev *dc)
 	dc->writeback_delay		= 30;
 	dc->writeback_rate.rate		= 1024;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dc->writeback_rate_update_seconds = 30;
 	dc->writeback_rate_d_term	= 16;
@@ -764,6 +868,8 @@ int __init bch_writeback_init(void)
 	if (!dirty_wq)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	dc->writeback_rate_update_seconds = 5;
 	dc->writeback_rate_d_term	= 30;
 	dc->writeback_rate_p_term_inverse = 6000;
@@ -782,6 +888,9 @@ int bch_cached_dev_writeback_start(struct cached_dev *dc)
 			      dc->writeback_rate_update_seconds * HZ);
 
 	bch_writeback_queue(dc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

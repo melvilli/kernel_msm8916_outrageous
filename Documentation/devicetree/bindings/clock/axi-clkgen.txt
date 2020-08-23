@@ -6,7 +6,11 @@ This binding uses the common clock binding[1].
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : shall be "adi,axi-clkgen".
+=======
+- compatible : shall be "adi,axi-clkgen-1.00.a" or "adi,axi-clkgen-2.00.a".
+>>>>>>> v3.18
 =======
 - compatible : shall be "adi,axi-clkgen-1.00.a" or "adi,axi-clkgen-2.00.a".
 >>>>>>> v3.18

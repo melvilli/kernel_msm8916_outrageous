@@ -10,7 +10,10 @@
 #include "dm-transaction-manager.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DM_SM_METADATA_BLOCK_SIZE (4096 >> SECTOR_SHIFT)
 
 /*
@@ -22,6 +25,9 @@
 #define DM_SM_METADATA_MAX_BLOCKS (255 * ((1 << 14) - 64))
 #define DM_SM_METADATA_MAX_SECTORS (DM_SM_METADATA_MAX_BLOCKS * DM_SM_METADATA_BLOCK_SIZE)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Unfortunately we have to use two-phase construction due to the cycle

@@ -3,6 +3,11 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+KBUILD_CFLAGS += $(DISABLE_LTO)
+
+>>>>>>> v3.18
 =======
 KBUILD_CFLAGS += $(DISABLE_LTO)
 
@@ -12,6 +17,7 @@ VDSOX32-$(CONFIG_X86_X32_ABI)	:= y
 VDSO32-$(CONFIG_X86_32)		:= y
 VDSO32-$(CONFIG_COMPAT)		:= y
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 vdso-install-$(VDSO64-y)	+= vdso.so
 vdso-install-$(VDSOX32-y)	+= vdsox32.so
@@ -37,6 +43,8 @@ $(obj)/vdso.o: $(obj)/vdso.so
 
 targets += vdso.so vdso.so.dbg vdso.lds $(vobjs-y)
 =======
+=======
+>>>>>>> v3.18
 # files to link into the vdso
 vobjs-y := vdso-note.o vclock_gettime.o vgetcpu.o
 
@@ -67,12 +75,16 @@ targets += $(vdso_img_cfiles)
 targets += $(vdso_img_sodbg)
 .SECONDARY: $(vdso_img-y:%=$(obj)/vdso-image-%.c) \
 	$(vdso_img-y:%=$(obj)/vdso%.so)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 export CPPFLAGS_vdso.lds += -P -C
 
 VDSO_LDFLAGS_vdso.lds = -m64 -Wl,-soname=linux-vdso.so.1 \
 			-Wl,--no-undefined \
+<<<<<<< HEAD
 <<<<<<< HEAD
 		      	-Wl,-z,max-page-size=4096 -Wl,-z,common-page-size=4096
 
@@ -85,6 +97,8 @@ $(obj)/%.so: OBJCOPYFLAGS := -S
 $(obj)/%.so: $(obj)/%.so.dbg FORCE
 	$(call if_changed,objcopy)
 =======
+=======
+>>>>>>> v3.18
 			-Wl,-z,max-page-size=4096 -Wl,-z,common-page-size=4096 \
 			$(DISABLE_LTO)
 
@@ -101,6 +115,9 @@ endef
 
 $(obj)/vdso-image-%.c: $(obj)/vdso%.so.dbg $(obj)/vdso%.so $(obj)/vdso2c FORCE
 	$(call if_changed,vdso2c)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #
@@ -110,7 +127,12 @@ $(obj)/vdso-image-%.c: $(obj)/vdso%.so.dbg $(obj)/vdso%.so $(obj)/vdso2c FORCE
 CFL := $(PROFILING) -mcmodel=small -fPIC -O2 -fasynchronous-unwind-tables -m64 \
        $(filter -g%,$(KBUILD_CFLAGS)) $(call cc-option, -fno-stack-protector) \
 <<<<<<< HEAD
+<<<<<<< HEAD
        -fno-omit-frame-pointer -foptimize-sibling-calls
+=======
+       -fno-omit-frame-pointer -foptimize-sibling-calls \
+       -DDISABLE_BRANCH_PROFILING
+>>>>>>> v3.18
 =======
        -fno-omit-frame-pointer -foptimize-sibling-calls \
        -DDISABLE_BRANCH_PROFILING
@@ -126,6 +148,7 @@ CFLAGS_REMOVE_vclock_gettime.o = -pg
 CFLAGS_REMOVE_vgetcpu.o = -pg
 CFLAGS_REMOVE_vvar.o = -pg
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 targets += vdso-syms.lds
 obj-$(VDSO64-y)			+= vdso-syms.lds
@@ -145,6 +168,8 @@ $(obj)/%-syms.lds: $(obj)/%.so.dbg FORCE
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #
 # X32 processes use x32 vDSO to access 64bit kernel data.
 #
@@ -156,9 +181,12 @@ $(obj)/%-syms.lds: $(obj)/%.so.dbg FORCE
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 targets += vdsox32-syms.lds
 obj-$(VDSOX32-y)		+= vdsox32-syms.lds
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CPPFLAGS_vdsox32.lds = $(CPPFLAGS_vdso.lds)
@@ -168,8 +196,11 @@ VDSO_LDFLAGS_vdsox32.lds = -Wl,-m,elf32_x86_64 \
 			   -Wl,-z,common-page-size=4096
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 vobjx32s-y := $(vobj64s:.o=-x32.o)
 =======
+=======
+>>>>>>> v3.18
 # 64-bit objects to re-brand as x32
 vobjs64-for-x32 := $(filter-out $(vobjs-nox32),$(vobjs-y))
 
@@ -177,6 +208,9 @@ vobjs64-for-x32 := $(filter-out $(vobjs-nox32),$(vobjs-y))
 vobjx32s-y := $(vobjs64-for-x32:.o=-x32.o)
 
 # same thing, but in the output directory
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 vobjx32s := $(foreach F,$(vobjx32s-y),$(obj)/$F)
 
@@ -188,15 +222,21 @@ $(obj)/%-x32.o: $(obj)/%.o FORCE
 	$(call if_changed,x32)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 targets += vdsox32.so vdsox32.so.dbg vdsox32.lds $(vobjx32s-y)
 
 $(obj)/vdsox32.o: $(src)/vdsox32.S $(obj)/vdsox32.so
 =======
+=======
+>>>>>>> v3.18
 targets += vdsox32.lds $(vobjx32s-y)
 
 $(obj)/%.so: OBJCOPYFLAGS := -S
 $(obj)/%.so: $(obj)/%.so.dbg
 	$(call if_changed,objcopy)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 $(obj)/vdsox32.so.dbg: $(src)/vdsox32.lds $(vobjx32s) FORCE
@@ -206,7 +246,10 @@ $(obj)/vdsox32.so.dbg: $(src)/vdsox32.lds $(vobjx32s) FORCE
 # Build multiple 32-bit vDSO images to choose from at boot time.
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(VDSO32-y)			+= vdso32-syms.lds
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 vdso32.so-$(VDSO32-y)		+= int80
@@ -217,7 +260,11 @@ vdso32-images			= $(vdso32.so-y:%=vdso32-%.so)
 
 CPPFLAGS_vdso32.lds = $(CPPFLAGS_vdso.lds)
 <<<<<<< HEAD
+<<<<<<< HEAD
 VDSO_LDFLAGS_vdso32.lds = -m32 -Wl,-soname=linux-gate.so.1
+=======
+VDSO_LDFLAGS_vdso32.lds = -m32 -Wl,-m,elf_i386 -Wl,-soname=linux-gate.so.1
+>>>>>>> v3.18
 =======
 VDSO_LDFLAGS_vdso32.lds = -m32 -Wl,-m,elf_i386 -Wl,-soname=linux-gate.so.1
 >>>>>>> v3.18
@@ -228,10 +275,15 @@ override obj-dirs = $(dir $(obj)) $(obj)/vdso32/
 
 targets += vdso32/vdso32.lds
 <<<<<<< HEAD
+<<<<<<< HEAD
 targets += $(vdso32-images) $(vdso32-images:=.dbg)
 targets += vdso32/note.o $(vdso32.so-y:%=vdso32/%.o)
 
 extra-y	+= $(vdso32-images)
+=======
+targets += vdso32/note.o vdso32/vclock_gettime.o $(vdso32.so-y:%=vdso32/%.o)
+targets += vdso32/vclock_gettime.o
+>>>>>>> v3.18
 =======
 targets += vdso32/note.o vdso32/vclock_gettime.o $(vdso32.so-y:%=vdso32/%.o)
 targets += vdso32/vclock_gettime.o
@@ -244,9 +296,12 @@ $(vdso32-images:%=$(obj)/%.dbg): KBUILD_AFLAGS = $(KBUILD_AFLAGS_32)
 $(vdso32-images:%=$(obj)/%.dbg): asflags-$(CONFIG_X86_64) += -m32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $(vdso32-images:%=$(obj)/%.dbg): $(obj)/vdso32-%.so.dbg: FORCE \
 				 $(obj)/vdso32/vdso32.lds \
 =======
+=======
+>>>>>>> v3.18
 KBUILD_CFLAGS_32 := $(filter-out -m64,$(KBUILD_CFLAGS))
 KBUILD_CFLAGS_32 := $(filter-out -mcmodel=kernel,$(KBUILD_CFLAGS_32))
 KBUILD_CFLAGS_32 := $(filter-out -fno-pic,$(KBUILD_CFLAGS_32))
@@ -261,11 +316,15 @@ $(vdso32-images:%=$(obj)/%.dbg): KBUILD_CFLAGS = $(KBUILD_CFLAGS_32)
 $(vdso32-images:%=$(obj)/%.dbg): $(obj)/vdso32-%.so.dbg: FORCE \
 				 $(obj)/vdso32/vdso32.lds \
 				 $(obj)/vdso32/vclock_gettime.o \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 $(obj)/vdso32/note.o \
 				 $(obj)/vdso32/%.o
 	$(call if_changed,vdso)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # Make vdso32-*-syms.lds from each image, and then make sure they match.
 # The only difference should be that some do not define VDSO32_SYSENTER_RETURN.
@@ -290,6 +349,8 @@ $(obj)/vdso32-syms.lds: $(vdso32.so-y:%=$(obj)/vdso32-%-syms.lds) FORCE
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #
 # The DSO images are built using a special linker script.
 #
@@ -299,6 +360,7 @@ quiet_cmd_vdso = VDSO    $@
 		       -Wl,-T,$(filter %.lds,$^) $(filter %.o,$^) && \
 		 sh $(srctree)/$(src)/checkundef.sh '$(NM)' '$@'
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 VDSO_LDFLAGS = -fPIC -shared $(call cc-ldoption, -Wl$(comma)--hash-style=sysv)
 GCOV_PROFILE := n
@@ -315,6 +377,8 @@ $(vdso-install-y): %.so: $(obj)/%.so.dbg FORCE
 PHONY += vdso_install $(vdso-install-y)
 vdso_install: $(vdso-install-y)
 =======
+=======
+>>>>>>> v3.18
 VDSO_LDFLAGS = -fPIC -shared $(call cc-ldoption, -Wl$(comma)--hash-style=sysv) \
 	$(call cc-ldoption, -Wl$(comma)--build-id) -Wl,-Bsymbolic $(LTO_CFLAGS)
 GCOV_PROFILE := n
@@ -345,6 +409,9 @@ $(vdso_img_insttargets): install_%: $(obj)/%.dbg $(MODLIB)/vdso FORCE
 
 PHONY += vdso_install $(vdso_img_insttargets)
 vdso_install: $(vdso_img_insttargets) FORCE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 clean-files := vdso32-syscall* vdso32-sysenter* vdso32-int80*

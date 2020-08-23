@@ -27,17 +27,23 @@
 #include "st_magn.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* DEFAULT VALUE FOR SENSORS */
 #define ST_MAGN_DEFAULT_OUT_X_L_ADDR		0X04
 #define ST_MAGN_DEFAULT_OUT_Y_L_ADDR		0X08
 #define ST_MAGN_DEFAULT_OUT_Z_L_ADDR		0X06
 =======
+=======
+>>>>>>> v3.18
 #define ST_MAGN_NUMBER_DATA_CHANNELS		3
 
 /* DEFAULT VALUE FOR SENSORS */
 #define ST_MAGN_DEFAULT_OUT_X_H_ADDR		0X03
 #define ST_MAGN_DEFAULT_OUT_Y_H_ADDR		0X07
 #define ST_MAGN_DEFAULT_OUT_Z_H_ADDR		0X05
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* FULLSCALE */
@@ -126,6 +132,7 @@
 
 static const struct iio_chan_spec st_magn_16bit_channels[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ST_SENSORS_LSM_CHANNELS(IIO_MAGN, ST_SENSORS_SCAN_X, IIO_MOD_X, IIO_LE,
 		ST_SENSORS_DEFAULT_16_REALBITS, ST_MAGN_DEFAULT_OUT_X_L_ADDR),
 	ST_SENSORS_LSM_CHANNELS(IIO_MAGN, ST_SENSORS_SCAN_Y, IIO_MOD_Y, IIO_LE,
@@ -133,6 +140,8 @@ static const struct iio_chan_spec st_magn_16bit_channels[] = {
 	ST_SENSORS_LSM_CHANNELS(IIO_MAGN, ST_SENSORS_SCAN_Z, IIO_MOD_Z, IIO_LE,
 		ST_SENSORS_DEFAULT_16_REALBITS, ST_MAGN_DEFAULT_OUT_Z_L_ADDR),
 =======
+=======
+>>>>>>> v3.18
 	ST_SENSORS_LSM_CHANNELS(IIO_MAGN,
 			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE),
 			ST_SENSORS_SCAN_X, 1, IIO_MOD_X, 's', IIO_BE, 16, 16,
@@ -145,11 +154,15 @@ static const struct iio_chan_spec st_magn_16bit_channels[] = {
 			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE),
 			ST_SENSORS_SCAN_Z, 1, IIO_MOD_Z, 's', IIO_BE, 16, 16,
 			ST_MAGN_DEFAULT_OUT_Z_H_ADDR),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	IIO_CHAN_SOFT_TIMESTAMP(3)
 };
 
 static const struct iio_chan_spec st_magn_2_16bit_channels[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ST_SENSORS_LSM_CHANNELS(IIO_MAGN, ST_SENSORS_SCAN_X, IIO_MOD_X, IIO_LE,
 		ST_SENSORS_DEFAULT_16_REALBITS, ST_MAGN_2_OUT_X_L_ADDR),
@@ -158,6 +171,8 @@ static const struct iio_chan_spec st_magn_2_16bit_channels[] = {
 	ST_SENSORS_LSM_CHANNELS(IIO_MAGN, ST_SENSORS_SCAN_Z, IIO_MOD_Z, IIO_LE,
 		ST_SENSORS_DEFAULT_16_REALBITS, ST_MAGN_2_OUT_Z_L_ADDR),
 =======
+=======
+>>>>>>> v3.18
 	ST_SENSORS_LSM_CHANNELS(IIO_MAGN,
 			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE),
 			ST_SENSORS_SCAN_X, 1, IIO_MOD_X, 's', IIO_LE, 16, 16,
@@ -170,6 +185,9 @@ static const struct iio_chan_spec st_magn_2_16bit_channels[] = {
 			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE),
 			ST_SENSORS_SCAN_Z, 1, IIO_MOD_Z, 's', IIO_LE, 16, 16,
 			ST_MAGN_2_OUT_Z_L_ADDR),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	IIO_CHAN_SOFT_TIMESTAMP(3)
 };
@@ -333,6 +351,12 @@ static int st_magn_read_raw(struct iio_dev *indio_dev,
 			*val2 = mdata->current_fullscale->gain;
 		return IIO_VAL_INT_PLUS_MICRO;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case IIO_CHAN_INFO_SAMP_FREQ:
+		*val = mdata->odr;
+		return IIO_VAL_INT;
+>>>>>>> v3.18
 =======
 	case IIO_CHAN_INFO_SAMP_FREQ:
 		*val = mdata->odr;
@@ -356,7 +380,10 @@ static int st_magn_write_raw(struct iio_dev *indio_dev,
 		err = st_sensors_set_fullscale_by_gain(indio_dev, val2);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case IIO_CHAN_INFO_SAMP_FREQ:
 		if (val2)
 			return -EINVAL;
@@ -364,6 +391,9 @@ static int st_magn_write_raw(struct iio_dev *indio_dev,
 		err = st_sensors_set_odr(indio_dev, val);
 		mutex_unlock(&indio_dev->mlock);
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		err = -EINVAL;
@@ -373,7 +403,10 @@ static int st_magn_write_raw(struct iio_dev *indio_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ST_SENSOR_DEV_ATTR_SAMP_FREQ();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ST_SENSORS_DEV_ATTR_SAMP_FREQ_AVAIL();
@@ -383,7 +416,10 @@ static struct attribute *st_magn_attributes[] = {
 	&iio_dev_attr_sampling_frequency_available.dev_attr.attr,
 	&iio_dev_attr_in_magn_scale_available.dev_attr.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&iio_dev_attr_sampling_frequency.dev_attr.attr,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	NULL,
@@ -401,22 +437,29 @@ static const struct iio_info magn_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int st_magn_common_probe(struct iio_dev *indio_dev)
 {
 	int err;
 	struct st_sensor_data *mdata = iio_priv(indio_dev);
 =======
+=======
+>>>>>>> v3.18
 int st_magn_common_probe(struct iio_dev *indio_dev,
 					struct st_sensors_platform_data *pdata)
 {
 	struct st_sensor_data *mdata = iio_priv(indio_dev);
 	int irq = mdata->get_irq_data_ready(indio_dev);
 	int err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	indio_dev->modes = INDIO_DIRECT_MODE;
 	indio_dev->info = &magn_info;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = st_sensors_check_device_support(indio_dev,
 				ARRAY_SIZE(st_magn_sensors), st_magn_sensors);
@@ -424,6 +467,8 @@ int st_magn_common_probe(struct iio_dev *indio_dev,
 		goto st_magn_common_probe_error;
 
 =======
+=======
+>>>>>>> v3.18
 	st_sensors_power_enable(indio_dev);
 
 	err = st_sensors_check_device_support(indio_dev,
@@ -432,6 +477,9 @@ int st_magn_common_probe(struct iio_dev *indio_dev,
 		return err;
 
 	mdata->num_data_channels = ST_MAGN_NUMBER_DATA_CHANNELS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mdata->multiread_bit = mdata->sensor->multi_read_bit;
 	indio_dev->channels = mdata->sensor->ch;
@@ -442,6 +490,7 @@ int st_magn_common_probe(struct iio_dev *indio_dev,
 	mdata->odr = mdata->sensor->odr.odr_avl[0].hz;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = st_sensors_init_sensor(indio_dev);
 	if (err < 0)
 		goto st_magn_common_probe_error;
@@ -451,6 +500,8 @@ int st_magn_common_probe(struct iio_dev *indio_dev,
 		if (err < 0)
 			goto st_magn_common_probe_error;
 =======
+=======
+>>>>>>> v3.18
 	err = st_sensors_init_sensor(indio_dev, pdata);
 	if (err < 0)
 		return err;
@@ -460,6 +511,9 @@ int st_magn_common_probe(struct iio_dev *indio_dev,
 		return err;
 
 	if (irq > 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = st_sensors_allocate_trigger(indio_dev, NULL);
 		if (err < 0)
@@ -471,6 +525,7 @@ int st_magn_common_probe(struct iio_dev *indio_dev,
 		goto st_magn_device_register_error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err;
 
 st_magn_device_register_error:
@@ -481,6 +536,8 @@ st_magn_probe_trigger_error:
 		st_magn_deallocate_ring(indio_dev);
 st_magn_common_probe_error:
 =======
+=======
+>>>>>>> v3.18
 	dev_info(&indio_dev->dev, "registered magnetometer %s\n",
 		 indio_dev->name);
 
@@ -492,6 +549,9 @@ st_magn_device_register_error:
 st_magn_probe_trigger_error:
 	st_magn_deallocate_ring(indio_dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -502,6 +562,7 @@ void st_magn_common_remove(struct iio_dev *indio_dev)
 	struct st_sensor_data *mdata = iio_priv(indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_unregister(indio_dev);
 	if (mdata->get_irq_data_ready(indio_dev) > 0) {
 		st_sensors_deallocate_trigger(indio_dev);
@@ -509,6 +570,8 @@ void st_magn_common_remove(struct iio_dev *indio_dev)
 	}
 	iio_device_free(indio_dev);
 =======
+=======
+>>>>>>> v3.18
 	st_sensors_power_disable(indio_dev);
 
 	iio_device_unregister(indio_dev);
@@ -516,6 +579,9 @@ void st_magn_common_remove(struct iio_dev *indio_dev)
 		st_sensors_deallocate_trigger(indio_dev);
 
 	st_magn_deallocate_ring(indio_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(st_magn_common_remove);

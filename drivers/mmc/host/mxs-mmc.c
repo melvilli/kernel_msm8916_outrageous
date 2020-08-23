@@ -39,15 +39,21 @@
 #include <linux/mmc/mmc.h>
 #include <linux/mmc/sdio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gpio.h>
 #include <linux/regulator/consumer.h>
 #include <linux/module.h>
 #include <linux/pinctrl/consumer.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/mmc/slot-gpio.h>
 #include <linux/gpio.h>
 #include <linux/regulator/consumer.h>
 #include <linux/module.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/stmp_device.h>
 #include <linux/spi/mxs-spi.h>
@@ -77,6 +83,7 @@ struct mxs_mmc_host {
 	unsigned char			bus_width;
 	spinlock_t			lock;
 	int				sdio_irq_en;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int				wp_gpio;
 	bool				wp_inverted;
@@ -118,6 +125,8 @@ static void mxs_mmc_reset(struct mxs_mmc_host *host)
 
 	stmp_reset_block(ssp->base);
 =======
+=======
+>>>>>>> v3.18
 	bool				broken_cd;
 };
 
@@ -153,6 +162,9 @@ static int mxs_mmc_reset(struct mxs_mmc_host *host)
 	ret = stmp_reset_block(ssp->base);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ctrl0 = BM_SSP_CTRL0_IGNORE_CRC;
@@ -179,6 +191,10 @@ static int mxs_mmc_reset(struct mxs_mmc_host *host)
 	writel(ctrl0, ssp->base + HW_SSP_CTRL0);
 	writel(ctrl1, ssp->base + HW_SSP_CTRL1(ssp));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -362,9 +378,12 @@ static void mxs_mmc_ac(struct mxs_mmc_host *host)
 	cmd1 = cmd->arg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd->opcode == MMC_STOP_TRANSMISSION)
 		cmd0 |= BM_SSP_CMD0_APPEND_8CYC;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (host->sdio_irq_en) {
@@ -476,7 +495,12 @@ static void mxs_mmc_adtc(struct mxs_mmc_host *host)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd->opcode == SD_IO_RW_EXTENDED)
+=======
+	if ((cmd->opcode == MMC_STOP_TRANSMISSION) ||
+	    (cmd->opcode == SD_IO_RW_EXTENDED))
+>>>>>>> v3.18
 =======
 	if ((cmd->opcode == MMC_STOP_TRANSMISSION) ||
 	    (cmd->opcode == SD_IO_RW_EXTENDED))
@@ -606,7 +630,11 @@ static void mxs_mmc_enable_sdio_irq(struct mmc_host *mmc, int enable)
 static const struct mmc_host_ops mxs_mmc_ops = {
 	.request = mxs_mmc_request,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_ro = mxs_mmc_get_ro,
+=======
+	.get_ro = mmc_gpio_get_ro,
+>>>>>>> v3.18
 =======
 	.get_ro = mmc_gpio_get_ro,
 >>>>>>> v3.18
@@ -644,12 +672,18 @@ static int mxs_mmc_probe(struct platform_device *pdev)
 	struct mmc_host *mmc;
 	struct resource *iores;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pinctrl *pinctrl;
 	int ret = 0, irq_err;
 	struct regulator *reg_vmmc;
 	enum of_gpio_flags flags;
 	struct mxs_ssp *ssp;
 	u32 bus_width = 0;
+=======
+	int ret = 0, irq_err;
+	struct regulator *reg_vmmc;
+	struct mxs_ssp *ssp;
+>>>>>>> v3.18
 =======
 	int ret = 0, irq_err;
 	struct regulator *reg_vmmc;
@@ -690,6 +724,7 @@ static int mxs_mmc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
 	if (IS_ERR(pinctrl)) {
 		ret = PTR_ERR(pinctrl);
@@ -700,6 +735,9 @@ static int mxs_mmc_probe(struct platform_device *pdev)
 =======
 	ssp->clk = devm_clk_get(&pdev->dev, NULL);
 >>>>>>> v3.18
+=======
+	ssp->clk = devm_clk_get(&pdev->dev, NULL);
+>>>>>>> v3.18
 	if (IS_ERR(ssp->clk)) {
 		ret = PTR_ERR(ssp->clk);
 		goto out_mmc_free;
@@ -707,13 +745,19 @@ static int mxs_mmc_probe(struct platform_device *pdev)
 	clk_prepare_enable(ssp->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mxs_mmc_reset(host);
 =======
+=======
+>>>>>>> v3.18
 	ret = mxs_mmc_reset(host);
 	if (ret) {
 		dev_err(&pdev->dev, "Failed to reset mmc: %d\n", ret);
 		goto out_clk_disable;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ssp->dmach = dma_request_slave_channel(&pdev->dev, "rx-tx");
@@ -721,7 +765,12 @@ static int mxs_mmc_probe(struct platform_device *pdev)
 		dev_err(mmc_dev(host->mmc),
 			"%s: failed to request dma\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_clk_put;
+=======
+		ret = -ENODEV;
+		goto out_clk_disable;
+>>>>>>> v3.18
 =======
 		ret = -ENODEV;
 		goto out_clk_disable;
@@ -733,6 +782,7 @@ static int mxs_mmc_probe(struct platform_device *pdev)
 	mmc->caps = MMC_CAP_SD_HIGHSPEED | MMC_CAP_MMC_HIGHSPEED |
 		    MMC_CAP_SDIO_IRQ | MMC_CAP_NEEDS_POLL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	of_property_read_u32(np, "bus-width", &bus_width);
 	if (bus_width == 4)
@@ -752,6 +802,8 @@ static int mxs_mmc_probe(struct platform_device *pdev)
 	mmc->f_min = 400000;
 	mmc->f_max = 288000000;
 =======
+=======
+>>>>>>> v3.18
 	host->broken_cd = of_property_read_bool(np, "broken-cd");
 
 	mmc->f_min = 400000;
@@ -761,6 +813,9 @@ static int mxs_mmc_probe(struct platform_device *pdev)
 	if (ret)
 		goto out_clk_disable;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mmc->ocr_avail = MMC_VDD_32_33 | MMC_VDD_33_34;
 
@@ -773,8 +828,11 @@ static int mxs_mmc_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, mmc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&host->lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = devm_request_irq(&pdev->dev, irq_err, mxs_mmc_irq_handler, 0,
@@ -783,6 +841,11 @@ static int mxs_mmc_probe(struct platform_device *pdev)
 		goto out_free_dma;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&host->lock);
+
+>>>>>>> v3.18
 =======
 	spin_lock_init(&host->lock);
 
@@ -799,9 +862,14 @@ out_free_dma:
 	if (ssp->dmach)
 		dma_release_channel(ssp->dmach);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_clk_put:
 	clk_disable_unprepare(ssp->clk);
 	clk_put(ssp->clk);
+=======
+out_clk_disable:
+	clk_disable_unprepare(ssp->clk);
+>>>>>>> v3.18
 =======
 out_clk_disable:
 	clk_disable_unprepare(ssp->clk);
@@ -820,8 +888,11 @@ static int mxs_mmc_remove(struct platform_device *pdev)
 	mmc_remove_host(mmc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ssp->dmach)
@@ -829,7 +900,10 @@ static int mxs_mmc_remove(struct platform_device *pdev)
 
 	clk_disable_unprepare(ssp->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(ssp->clk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -845,6 +919,7 @@ static int mxs_mmc_suspend(struct device *dev)
 	struct mxs_mmc_host *host = mmc_priv(mmc);
 	struct mxs_ssp *ssp = &host->ssp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 	ret = mmc_suspend_host(mmc);
@@ -852,6 +927,11 @@ static int mxs_mmc_suspend(struct device *dev)
 	clk_disable_unprepare(ssp->clk);
 
 	return ret;
+=======
+
+	clk_disable_unprepare(ssp->clk);
+	return 0;
+>>>>>>> v3.18
 =======
 
 	clk_disable_unprepare(ssp->clk);
@@ -865,6 +945,7 @@ static int mxs_mmc_resume(struct device *dev)
 	struct mxs_mmc_host *host = mmc_priv(mmc);
 	struct mxs_ssp *ssp = &host->ssp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 	clk_prepare_enable(ssp->clk);
@@ -872,6 +953,11 @@ static int mxs_mmc_resume(struct device *dev)
 	ret = mmc_resume_host(mmc);
 
 	return ret;
+=======
+
+	clk_prepare_enable(ssp->clk);
+	return 0;
+>>>>>>> v3.18
 =======
 
 	clk_prepare_enable(ssp->clk);
@@ -892,7 +978,10 @@ static struct platform_driver mxs_mmc_driver = {
 	.driver		= {
 		.name	= DRIVER_NAME,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PM

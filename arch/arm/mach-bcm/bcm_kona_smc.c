@@ -22,11 +22,16 @@
 #include "bcm_kona_smc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct secure_bridge_data {
 	void __iomem *bounce;		/* virtual address */
 	u32 __iomem buffer_addr;	/* physical address */
 	int initialized;
 } bridge_data;
+=======
+static u32		bcm_smc_buffer_phys;	/* physical address */
+static void __iomem	*bcm_smc_buffer;	/* virtual address */
+>>>>>>> v3.18
 =======
 static u32		bcm_smc_buffer_phys;	/* physical address */
 static void __iomem	*bcm_smc_buffer;	/* virtual address */
@@ -38,6 +43,7 @@ struct bcm_kona_smc_data {
 	unsigned arg1;
 	unsigned arg2;
 	unsigned arg3;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -67,6 +73,8 @@ void __init bcm_kona_smc_init(void)
 
 	pr_info("Secure API initialized!\n");
 =======
+=======
+>>>>>>> v3.18
 	unsigned result;
 };
 
@@ -173,6 +181,9 @@ static int bcm_kona_do_smc(u32 service_id, u32 buffer_phys)
 	BUG_ON(ip != SEC_EXIT_NORMAL);
 
 	return r0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -180,6 +191,7 @@ static int bcm_kona_do_smc(u32 service_id, u32 buffer_phys)
 static void __bcm_kona_smc(void *info)
 {
 	struct bcm_kona_smc_data *data = info;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 *args = bridge_data.bounce;
 	int rc = 0;
@@ -206,6 +218,8 @@ static void __bcm_kona_smc(void *info)
 	if (rc != SEC_ROM_RET_OK)
 		pr_err("Secure Monitor call failed (0x%x)!\n", rc);
 =======
+=======
+>>>>>>> v3.18
 	u32 *args = bcm_smc_buffer;
 
 	BUG_ON(smp_processor_id() != 0);
@@ -222,6 +236,9 @@ static void __bcm_kona_smc(void *info)
 
 	/* Trap into Secure Monitor and record the request result */
 	data->result = bcm_kona_do_smc(data->service_id, bcm_smc_buffer_phys);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -236,6 +253,10 @@ unsigned bcm_kona_smc(unsigned service_id, unsigned arg0, unsigned arg1,
 	data.arg2 = arg2;
 	data.arg3 = arg3;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	data.result = 0;
+>>>>>>> v3.18
 =======
 	data.result = 0;
 >>>>>>> v3.18
@@ -245,6 +266,7 @@ unsigned bcm_kona_smc(unsigned service_id, unsigned arg0, unsigned arg1,
 	 * infrastructure to forward all secure monitor calls to Core 0.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_cpu() != 0)
 		smp_call_function_single(0, __bcm_kona_smc, (void *)&data, 1);
 	else
@@ -253,6 +275,11 @@ unsigned bcm_kona_smc(unsigned service_id, unsigned arg0, unsigned arg1,
 	put_cpu();
 
 	return 0;
+=======
+	smp_call_function_single(0, __bcm_kona_smc, &data, 1);
+
+	return data.result;
+>>>>>>> v3.18
 =======
 	smp_call_function_single(0, __bcm_kona_smc, &data, 1);
 

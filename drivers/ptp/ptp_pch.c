@@ -515,6 +515,10 @@ static struct ptp_clock_info ptp_pch_caps = {
 	.max_adj	= 50000000,
 	.n_ext_ts	= N_EXT_TS,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.n_pins		= 0,
+>>>>>>> v3.18
 =======
 	.n_pins		= 0,
 >>>>>>> v3.18
@@ -695,7 +699,11 @@ err_pci_en:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pch_ieee1588_pcidev_id) = {
+=======
+static const struct pci_device_id pch_ieee1588_pcidev_id[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pch_ieee1588_pcidev_id[] = {
 >>>>>>> v3.18

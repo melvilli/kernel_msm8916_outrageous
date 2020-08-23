@@ -1895,6 +1895,7 @@ enum tegra_mux {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char * const ahb_clk_groups[] = {
 	"cdev2",
 };
@@ -2527,12 +2528,17 @@ static const char * const xio_groups[] = {
 
 static const struct tegra_function tegra20_functions[] = {
 =======
+=======
+>>>>>>> v3.18
 #define FUNCTION(fname)					\
 	{						\
 		.name = #fname,				\
 	}
 
 static struct tegra_function tegra20_functions[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	FUNCTION(ahb_clk),
 	FUNCTION(apb_clk),
@@ -2608,7 +2614,11 @@ static struct tegra_function tegra20_functions[] = {
 
 /* Pin group with mux control, and typically tri-state and pull-up/down too */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MUX_PG(pg_name, f0, f1, f2, f3, f_safe,			\
+=======
+#define MUX_PG(pg_name, f0, f1, f2, f3,				\
+>>>>>>> v3.18
 =======
 #define MUX_PG(pg_name, f0, f1, f2, f3,				\
 >>>>>>> v3.18
@@ -2624,7 +2634,10 @@ static struct tegra_function tegra20_functions[] = {
 			TEGRA_MUX_ ## f3,			\
 		},						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.func_safe = TEGRA_MUX_ ## f_safe,		\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.mux_reg = ((mux_r) - PIN_MUX_CTL_REG_A),	\
@@ -2637,6 +2650,7 @@ static struct tegra_function tegra20_functions[] = {
 		.tri_bank = 0,					\
 		.tri_bit = tri_b,				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.einput_reg = -1,				\
 		.odrain_reg = -1,				\
 		.lock_reg = -1,					\
@@ -2645,12 +2659,17 @@ static struct tegra_function tegra20_functions[] = {
 		.drv_reg = -1,					\
 		.drvtype_reg = -1,				\
 =======
+=======
+>>>>>>> v3.18
 		.einput_bit = -1,				\
 		.odrain_bit = -1,				\
 		.lock_bit = -1,					\
 		.ioreset_bit = -1,				\
 		.rcv_sel_bit = -1,				\
 		.drv_reg = -1,					\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2665,6 +2684,7 @@ static struct tegra_function tegra20_functions[] = {
 		.pupd_bank = 2,					\
 		.pupd_bit = pupd_b,				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.tri_reg = -1,					\
 		.einput_reg = -1,				\
 		.odrain_reg = -1,				\
@@ -2673,6 +2693,9 @@ static struct tegra_function tegra20_functions[] = {
 		.rcv_sel_reg = -1,				\
 		.drv_reg = -1,					\
 		.drvtype_reg = -1,				\
+=======
+		.drv_reg = -1,					\
+>>>>>>> v3.18
 =======
 		.drv_reg = -1,					\
 >>>>>>> v3.18
@@ -2690,11 +2713,14 @@ static struct tegra_function tegra20_functions[] = {
 		.pupd_reg = -1,					\
 		.tri_reg = -1,					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.einput_reg = -1,				\
 		.odrain_reg = -1,				\
 		.lock_reg = -1,					\
 		.ioreset_reg = -1,				\
 		.rcv_sel_reg = -1,				\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.drv_reg = ((r) - PINGROUP_REG_A),		\
@@ -2711,7 +2737,11 @@ static struct tegra_function tegra20_functions[] = {
 		.slwf_bit = slwf_b,				\
 		.slwf_width = slwf_w,				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.drvtype_reg = -1,				\
+=======
+		.drvtype_bit = -1,				\
+>>>>>>> v3.18
 =======
 		.drvtype_bit = -1,				\
 >>>>>>> v3.18
@@ -2722,6 +2752,7 @@ static struct tegra_function tegra20_functions[] = {
 	DRV_PG_EXT(pg_name, r, 2,  3,  4, 12, 20, 28, 2, 30, 2)
 
 static const struct tegra_pingroup tegra20_groups[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*     name,   f0,        f1,        f2,        f3,            f_safe,    tri r/b,  mux r/b,  pupd r/b */
 	MUX_PG(ata,    IDE,       NAND,      GMI,       RSVD4,         IDE,       0x14, 0,  0x80, 24, 0xa0, 0),
@@ -2832,6 +2863,8 @@ static const struct tegra_pingroup tegra20_groups[] = {
 	MUX_PG(ucb,    UARTC,     PWM,       GMI,       RSVD4,         RSVD4,     0x18, 23, 0x84, 18, 0xac, 10),
 	MUX_PG(uda,    SPI1,      RSVD2,     UARTD,     ULPI,          RSVD2,     0x20, 13, 0x80, 8,  0xb0, 16),
 =======
+=======
+>>>>>>> v3.18
 	/*     name,   f0,        f1,        f2,        f3,            tri r/b,  mux r/b,  pupd r/b */
 	MUX_PG(ata,    IDE,       NAND,      GMI,       RSVD4,         0x14, 0,  0x80, 24, 0xa0, 0),
 	MUX_PG(atb,    IDE,       NAND,      GMI,       SDIO4,         0x14, 1,  0x80, 16, 0xa0, 2),
@@ -2940,6 +2973,9 @@ static const struct tegra_pingroup tegra20_groups[] = {
 	MUX_PG(uca,    UARTC,     RSVD2,     GMI,       RSVD4,         0x18, 22, 0x84, 16, 0xac, 8),
 	MUX_PG(ucb,    UARTC,     PWM,       GMI,       RSVD4,         0x18, 23, 0x84, 18, 0xac, 10),
 	MUX_PG(uda,    SPI1,      RSVD2,     UARTD,     ULPI,          0x20, 13, 0x80, 8,  0xb0, 16),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*      pg_name, pupd_r/b */
 	PULL_PG(ck32,    0xb0, 14),
@@ -3015,7 +3051,11 @@ static int tegra20_pinctrl_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id tegra20_pinctrl_of_match[] = {
+=======
+static const struct of_device_id tegra20_pinctrl_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id tegra20_pinctrl_of_match[] = {
 >>>>>>> v3.18
@@ -3033,6 +3073,7 @@ static struct platform_driver tegra20_pinctrl_driver = {
 	.remove = tegra_pinctrl_remove,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int __init tegra20_pinctrl_init(void)
 {
@@ -3045,6 +3086,9 @@ static void __exit tegra20_pinctrl_exit(void)
 	platform_driver_unregister(&tegra20_pinctrl_driver);
 }
 module_exit(tegra20_pinctrl_exit);
+=======
+module_platform_driver(tegra20_pinctrl_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(tegra20_pinctrl_driver);
 >>>>>>> v3.18

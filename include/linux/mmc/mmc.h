@@ -25,8 +25,11 @@
 #define LINUX_MMC_MMC_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <uapi/linux/mmc/mmc.h>
 =======
+=======
+>>>>>>> v3.18
 /* Standard MMC commands (4.1)           type  argument     response */
    /* class 1 */
 #define MMC_GO_IDLE_STATE         0   /* bc                          */
@@ -91,6 +94,9 @@ extern const u8 tuning_blk_pattern_8bit[MMC_TUNING_BLK_PATTERN_8BIT_SIZE];
   /* class 8 */
 #define MMC_APP_CMD              55   /* ac   [31:16] RCA        R1  */
 #define MMC_GEN_CMD              56   /* adtc [0] RD/WR          R1  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline bool mmc_op_multi(u32 opcode)
@@ -233,7 +239,10 @@ struct _mmc_csd {
  */
 #define MMC_CARD_BUSY	0x80000000	/* Card Power up status bit */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MMC_CARD_SECTOR_ADDR 0x40000000 /* Card supports sectors */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -295,6 +304,10 @@ struct _mmc_csd {
 #define EXT_CSD_DATA_SECTOR_SIZE	61	/* R */
 #define EXT_CSD_GP_SIZE_MULT		143	/* R/W */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EXT_CSD_PARTITION_SETTING_COMPLETED 155	/* R/W */
+>>>>>>> v3.18
 =======
 #define EXT_CSD_PARTITION_SETTING_COMPLETED 155	/* R/W */
 >>>>>>> v3.18
@@ -318,7 +331,10 @@ struct _mmc_csd {
 #define EXT_CSD_STRUCTURE		194	/* RO */
 #define EXT_CSD_CARD_TYPE		196	/* RO */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXT_CSD_DRIVE_STRENGTH		197	/* RO */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EXT_CSD_OUT_OF_INTERRUPT_TIME	198	/* RO */
@@ -343,7 +359,10 @@ struct _mmc_csd {
 #define EXT_CSD_PWR_CL_DDR_52_195	238	/* RO */
 #define EXT_CSD_PWR_CL_DDR_52_360	239	/* RO */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXT_CSD_CORRECTLY_PRG_SECTORS_NUM 242	/* RO, 4 bytes */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EXT_CSD_BKOPS_STATUS		246	/* RO */
@@ -363,11 +382,15 @@ struct _mmc_csd {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXT_CSD_BKOPS_EN_MANUAL_EN	BIT(0)
 #define EXT_CSD_BKOPS_EN_AUTO_EN	BIT(1)
 
 #define EXT_CSD_WR_REL_PARAM_EN		(1<<2)
 #define EXT_CSD_WR_REL_PARAM_EN_RPMB	(1<<4)
+=======
+#define EXT_CSD_WR_REL_PARAM_EN		(1<<2)
+>>>>>>> v3.18
 =======
 #define EXT_CSD_WR_REL_PARAM_EN		(1<<2)
 >>>>>>> v3.18
@@ -383,6 +406,10 @@ struct _mmc_csd {
 #define EXT_CSD_PART_CONFIG_ACC_GP0	(0x4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EXT_CSD_PART_SETTING_COMPLETED	(0x1)
+>>>>>>> v3.18
 =======
 #define EXT_CSD_PART_SETTING_COMPLETED	(0x1)
 >>>>>>> v3.18
@@ -393,14 +420,20 @@ struct _mmc_csd {
 #define EXT_CSD_CMD_SET_CPSECURE	(1<<2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXT_CSD_CARD_TYPE_26	(1<<0)	/* Card can run at 26MHz */
 #define EXT_CSD_CARD_TYPE_52	(1<<1)	/* Card can run at 52MHz */
 #define EXT_CSD_CARD_TYPE_MASK	0xFF	/* Mask out reserved bits */
 =======
+=======
+>>>>>>> v3.18
 #define EXT_CSD_CARD_TYPE_HS_26	(1<<0)	/* Card can run at 26MHz */
 #define EXT_CSD_CARD_TYPE_HS_52	(1<<1)	/* Card can run at 52MHz */
 #define EXT_CSD_CARD_TYPE_HS	(EXT_CSD_CARD_TYPE_HS_26 | \
 				 EXT_CSD_CARD_TYPE_HS_52)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EXT_CSD_CARD_TYPE_DDR_1_8V  (1<<2)   /* Card can run at 52MHz */
 					     /* DDR mode @1.8V or 3V I/O */
@@ -408,6 +441,7 @@ struct _mmc_csd {
 					     /* DDR mode @1.2V I/O */
 #define EXT_CSD_CARD_TYPE_DDR_52       (EXT_CSD_CARD_TYPE_DDR_1_8V  \
 					| EXT_CSD_CARD_TYPE_DDR_1_2V)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define EXT_CSD_CARD_TYPE_SDR_1_8V	(1<<4)	/* Card can run at 200MHz */
 #define EXT_CSD_CARD_TYPE_SDR_1_2V	(1<<5)	/* Card can run at 200MHz */
@@ -421,6 +455,8 @@ struct _mmc_csd {
 #define EXT_CSD_CARD_TYPE_HS400		(EXT_CSD_CARD_TYPE_HS400_1_8V  \
 					| EXT_CSD_CARD_TYPE_HS400_1_2V)
 =======
+=======
+>>>>>>> v3.18
 #define EXT_CSD_CARD_TYPE_HS200_1_8V	(1<<4)	/* Card can run at 200MHz */
 #define EXT_CSD_CARD_TYPE_HS200_1_2V	(1<<5)	/* Card can run at 200MHz */
 						/* SDR mode @1.2V I/O */
@@ -430,6 +466,9 @@ struct _mmc_csd {
 #define EXT_CSD_CARD_TYPE_HS400_1_2V	(1<<7)	/* Card can run at 200MHz DDR, 1.2V */
 #define EXT_CSD_CARD_TYPE_HS400		(EXT_CSD_CARD_TYPE_HS400_1_8V | \
 					 EXT_CSD_CARD_TYPE_HS400_1_2V)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define EXT_CSD_BUS_WIDTH_1	0	/* Card is in 1 bit mode */
@@ -439,12 +478,18 @@ struct _mmc_csd {
 #define EXT_CSD_DDR_BUS_WIDTH_8	6	/* Card is in 8 bit DDR mode */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define EXT_CSD_TIMING_BC	0	/* Backwards compatility */
 #define EXT_CSD_TIMING_HS	1	/* High speed */
 #define EXT_CSD_TIMING_HS200	2	/* HS200 */
 #define EXT_CSD_TIMING_HS400	3	/* HS400 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EXT_CSD_SEC_ER_EN	BIT(0)
 #define EXT_CSD_SEC_BD_BLK_EN	BIT(2)

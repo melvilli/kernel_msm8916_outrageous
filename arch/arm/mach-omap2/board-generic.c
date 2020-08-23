@@ -20,8 +20,11 @@
 
 #include "common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "common-board-devices.h"
 #include "dss-common.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -33,7 +36,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id omap_dt_match_table[] __initdata = {
+=======
+static const struct of_device_id omap_dt_match_table[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id omap_dt_match_table[] __initconst = {
 >>>>>>> v3.18
@@ -44,6 +51,7 @@ static const struct of_device_id omap_dt_match_table[] __initconst = {
 
 static void __init omap_generic_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	omap_sdrc_init(NULL, NULL);
 
@@ -62,6 +70,8 @@ static void __init omap_generic_init(void)
 #ifdef CONFIG_SOC_OMAP2420
 static const char *omap242x_boards_compat[] __initdata = {
 =======
+=======
+>>>>>>> v3.18
 	omapdss_early_init_of();
 
 	pdata_quirks_init(omap_dt_match_table);
@@ -71,6 +81,9 @@ static const char *omap242x_boards_compat[] __initdata = {
 
 #ifdef CONFIG_SOC_OMAP2420
 static const char *const omap242x_boards_compat[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"ti,omap2420",
 	NULL,
@@ -81,8 +94,11 @@ DT_MACHINE_START(OMAP242X_DT, "Generic OMAP2420 (Flattened Device Tree)")
 	.map_io		= omap242x_map_io,
 	.init_early	= omap2420_init_early,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	= omap_intc_of_init,
 	.handle_irq	= omap2_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= omap_generic_init,
@@ -94,7 +110,11 @@ MACHINE_END
 
 #ifdef CONFIG_SOC_OMAP2430
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *omap243x_boards_compat[] __initdata = {
+=======
+static const char *const omap243x_boards_compat[] __initconst = {
+>>>>>>> v3.18
 =======
 static const char *const omap243x_boards_compat[] __initconst = {
 >>>>>>> v3.18
@@ -107,8 +127,11 @@ DT_MACHINE_START(OMAP243X_DT, "Generic OMAP2430 (Flattened Device Tree)")
 	.map_io		= omap243x_map_io,
 	.init_early	= omap2430_init_early,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	= omap_intc_of_init,
 	.handle_irq	= omap2_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= omap_generic_init,
@@ -120,7 +143,12 @@ MACHINE_END
 
 #ifdef CONFIG_ARCH_OMAP3
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *omap3_boards_compat[] __initdata = {
+=======
+static const char *const omap3_boards_compat[] __initconst = {
+	"ti,omap3430",
+>>>>>>> v3.18
 =======
 static const char *const omap3_boards_compat[] __initconst = {
 	"ti,omap3430",
@@ -134,8 +162,11 @@ DT_MACHINE_START(OMAP3_DT, "Generic OMAP3 (Flattened Device Tree)")
 	.map_io		= omap3_map_io,
 	.init_early	= omap3430_init_early,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	= omap_intc_of_init,
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= omap_generic_init,
@@ -146,8 +177,11 @@ DT_MACHINE_START(OMAP3_DT, "Generic OMAP3 (Flattened Device Tree)")
 MACHINE_END
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *omap3_gp_boards_compat[] __initdata = {
 =======
+=======
+>>>>>>> v3.18
 static const char *const omap36xx_boards_compat[] __initconst = {
 	"ti,omap36xx",
 	NULL,
@@ -165,6 +199,9 @@ DT_MACHINE_START(OMAP36XX_DT, "Generic OMAP36xx (Flattened Device Tree)")
 MACHINE_END
 
 static const char *const omap3_gp_boards_compat[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"ti,omap3-beagle",
 	"timll,omap3-devkit8000",
@@ -176,8 +213,11 @@ DT_MACHINE_START(OMAP3_GP_DT, "Generic OMAP3-GP (Flattened Device Tree)")
 	.map_io		= omap3_map_io,
 	.init_early	= omap3430_init_early,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	= omap_intc_of_init,
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= omap_generic_init,
@@ -187,11 +227,14 @@ DT_MACHINE_START(OMAP3_GP_DT, "Generic OMAP3-GP (Flattened Device Tree)")
 	.restart	= omap3xxx_restart,
 MACHINE_END
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 #ifdef CONFIG_SOC_AM33XX
 static const char *am33xx_boards_compat[] __initdata = {
 =======
+=======
+>>>>>>> v3.18
 
 static const char *const am3517_boards_compat[] __initconst = {
 	"ti,am3517",
@@ -212,6 +255,9 @@ MACHINE_END
 
 #ifdef CONFIG_SOC_AM33XX
 static const char *const am33xx_boards_compat[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"ti,am33xx",
 	NULL,
@@ -222,9 +268,14 @@ DT_MACHINE_START(AM33XX_DT, "Generic AM33XX (Flattened Device Tree)")
 	.map_io		= am33xx_map_io,
 	.init_early	= am33xx_init_early,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	= omap_intc_of_init,
 	.handle_irq	= omap3_intc_handle_irq,
 	.init_machine	= omap_generic_init,
+=======
+	.init_machine	= omap_generic_init,
+	.init_late	= am33xx_init_late,
+>>>>>>> v3.18
 =======
 	.init_machine	= omap_generic_init,
 	.init_late	= am33xx_init_late,
@@ -237,7 +288,13 @@ MACHINE_END
 
 #ifdef CONFIG_ARCH_OMAP4
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *omap4_boards_compat[] __initdata = {
+=======
+static const char *const omap4_boards_compat[] __initconst = {
+	"ti,omap4460",
+	"ti,omap4430",
+>>>>>>> v3.18
 =======
 static const char *const omap4_boards_compat[] __initconst = {
 	"ti,omap4460",
@@ -263,7 +320,13 @@ MACHINE_END
 
 #ifdef CONFIG_SOC_OMAP5
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *omap5_boards_compat[] __initdata = {
+=======
+static const char *const omap5_boards_compat[] __initconst = {
+	"ti,omap5432",
+	"ti,omap5430",
+>>>>>>> v3.18
 =======
 static const char *const omap5_boards_compat[] __initconst = {
 	"ti,omap5432",
@@ -281,6 +344,10 @@ DT_MACHINE_START(OMAP5_DT, "Generic OMAP5 (Flattened Device Tree)")
 	.init_irq	= omap_gic_of_init,
 	.init_machine	= omap_generic_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.init_late	= omap5_init_late,
+>>>>>>> v3.18
 =======
 	.init_late	= omap5_init_late,
 >>>>>>> v3.18
@@ -290,7 +357,10 @@ DT_MACHINE_START(OMAP5_DT, "Generic OMAP5 (Flattened Device Tree)")
 MACHINE_END
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_SOC_AM43XX
 static const char *const am43_boards_compat[] __initconst = {
@@ -352,4 +422,7 @@ DT_MACHINE_START(DRA72X_DT, "Generic DRA72X (Flattened Device Tree)")
 	.restart	= omap44xx_restart,
 MACHINE_END
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

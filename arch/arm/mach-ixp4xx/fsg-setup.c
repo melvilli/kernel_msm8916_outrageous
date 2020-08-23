@@ -209,8 +209,12 @@ static void __init fsg_init(void)
 
 	if (request_irq(gpio_to_irq(FSG_RB_GPIO), &fsg_reset_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED | IRQF_TRIGGER_LOW,
 			"FSG reset button", NULL) < 0) {
+=======
+			IRQF_TRIGGER_LOW, "FSG reset button", NULL) < 0) {
+>>>>>>> v3.18
 =======
 			IRQF_TRIGGER_LOW, "FSG reset button", NULL) < 0) {
 >>>>>>> v3.18
@@ -221,8 +225,12 @@ static void __init fsg_init(void)
 
 	if (request_irq(gpio_to_irq(FSG_SB_GPIO), &fsg_power_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED | IRQF_TRIGGER_LOW,
 			"FSG power button", NULL) < 0) {
+=======
+			IRQF_TRIGGER_LOW, "FSG power button", NULL) < 0) {
+>>>>>>> v3.18
 =======
 			IRQF_TRIGGER_LOW, "FSG power button", NULL) < 0) {
 >>>>>>> v3.18

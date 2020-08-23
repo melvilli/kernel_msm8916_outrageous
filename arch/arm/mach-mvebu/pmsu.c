@@ -17,6 +17,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/of_address.h>
@@ -75,6 +76,8 @@ int __init armada_370_xp_pmsu_init(void)
 
 early_initcall(armada_370_xp_pmsu_init);
 =======
+=======
+>>>>>>> v3.18
 #define pr_fmt(fmt) "mvebu-pmsu: " fmt
 
 #include <linux/clk.h>
@@ -708,4 +711,7 @@ static int __init armada_xp_pmsu_cpufreq_init(void)
 }
 
 device_initcall(armada_xp_pmsu_cpufreq_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

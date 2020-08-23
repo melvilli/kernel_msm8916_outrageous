@@ -28,6 +28,7 @@
 int mmp2_set_wake(struct irq_data *d, unsigned int on)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq = d->irq;
 	struct irq_desc *desc = irq_to_desc(irq);
 	unsigned long data = 0;
@@ -44,6 +45,10 @@ int mmp2_set_wake(struct irq_data *d, unsigned int on)
 		if (desc->action)
 			desc->action->flags &= ~IRQF_NO_SUSPEND;
 	}
+=======
+	unsigned long data = 0;
+	int irq = d->irq;
+>>>>>>> v3.18
 =======
 	unsigned long data = 0;
 	int irq = d->irq;

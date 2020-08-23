@@ -3,9 +3,12 @@
 		 Alan Stern <stern@rowland.harvard.edu>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    October 28, 2010
 
 =======
+=======
+>>>>>>> v3.18
 		       Last-updated: February 2014
 
 
@@ -27,6 +30,9 @@
 	* USB Port Power Control
 	* User Interface for Port Power Control
 	* Suggested Userspace Port Power Policy
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -541,7 +547,10 @@ relevant attribute files is usb2_hardware_lpm.
 		can write y/Y/1 or n/N/0 to the file to	enable/disable
 		USB2 hardware LPM manually. This is for	test purpose mainly.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 
 	USB Port Power Control
@@ -764,4 +773,7 @@ system.  For example, a distro may want to enable power off all USB
 ports when the screen blanks, and re-power them when the screen becomes
 active.  Smart phones and tablets may want to power off USB ports when
 the user pushes the power button.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

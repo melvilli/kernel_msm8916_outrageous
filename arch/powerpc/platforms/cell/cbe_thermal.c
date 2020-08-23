@@ -126,7 +126,11 @@ static ssize_t store_throttle(struct cbe_pmd_regs __iomem *pmd_regs, const char 
 {
 	u64 reg_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int temp;
+=======
+	unsigned int temp;
+>>>>>>> v3.18
 =======
 	unsigned int temp;
 >>>>>>> v3.18

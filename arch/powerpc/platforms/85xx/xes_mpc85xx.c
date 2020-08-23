@@ -171,6 +171,10 @@ define_machine(xes_mpc8572) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -189,6 +193,10 @@ define_machine(xes_mpc8548) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -207,6 +215,10 @@ define_machine(xes_mpc8540) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18

@@ -89,7 +89,12 @@ static void clear_global_latency_tracing(void)
 
 static void __sched
 <<<<<<< HEAD
+<<<<<<< HEAD
 account_global_scheduler_latency(struct task_struct *tsk, struct latency_record *lat)
+=======
+account_global_scheduler_latency(struct task_struct *tsk,
+				 struct latency_record *lat)
+>>>>>>> v3.18
 =======
 account_global_scheduler_latency(struct task_struct *tsk,
 				 struct latency_record *lat)
@@ -261,7 +266,11 @@ static int lstats_show(struct seq_file *m, void *v)
 				seq_printf(m, " %ps", (void *)bt);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(m, "\n");
+=======
+			seq_puts(m, "\n");
+>>>>>>> v3.18
 =======
 			seq_puts(m, "\n");
 >>>>>>> v3.18

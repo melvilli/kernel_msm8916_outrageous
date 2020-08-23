@@ -20,6 +20,11 @@
 #undef DEBUG
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
 
@@ -71,7 +76,11 @@ struct gntdev_priv {
 	struct list_head freeable_maps;
 	/* lock protects maps and freeable_maps */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex lock;
+=======
+	spinlock_t lock;
+>>>>>>> v3.18
 =======
 	spinlock_t lock;
 >>>>>>> v3.18
@@ -224,9 +233,15 @@ static void gntdev_put_map(struct gntdev_priv *priv, struct grant_map *map)
 
 	if (populate_freeable_maps && priv) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock(&priv->lock);
 		list_del(&map->next);
 		mutex_unlock(&priv->lock);
+=======
+		spin_lock(&priv->lock);
+		list_del(&map->next);
+		spin_unlock(&priv->lock);
+>>>>>>> v3.18
 =======
 		spin_lock(&priv->lock);
 		list_del(&map->next);
@@ -286,6 +301,7 @@ static int map_grant_pages(struct grant_map *map)
 		 */
 		for (i = 0; i < map->count; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned level;
 			unsigned long address = (unsigned long)
 				pfn_to_kaddr(page_to_pfn(map->pages[i]));
@@ -300,12 +316,17 @@ static int map_grant_pages(struct grant_map *map)
 				GNTMAP_host_map |
 				GNTMAP_contains_pte,
 =======
+=======
+>>>>>>> v3.18
 			unsigned long address = (unsigned long)
 				pfn_to_kaddr(page_to_pfn(map->pages[i]));
 			BUG_ON(PageHighMem(map->pages[i]));
 
 			gnttab_set_map_op(&map->kmap_ops[i], address,
 				map->flags | GNTMAP_host_map,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				map->grants[i].ref,
 				map->grants[i].domid);
@@ -417,9 +438,15 @@ static void gntdev_vma_close(struct vm_area_struct *vma)
 		 * closing the vma, but it may still iterate the unmap_ops list.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock(&priv->lock);
 		map->vma = NULL;
 		mutex_unlock(&priv->lock);
+=======
+		spin_lock(&priv->lock);
+		map->vma = NULL;
+		spin_unlock(&priv->lock);
+>>>>>>> v3.18
 =======
 		spin_lock(&priv->lock);
 		map->vma = NULL;
@@ -469,7 +496,11 @@ static void mn_invl_range_start(struct mmu_notifier *mn,
 	struct grant_map *map;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&priv->lock);
+=======
+	spin_lock(&priv->lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&priv->lock);
 >>>>>>> v3.18
@@ -480,7 +511,11 @@ static void mn_invl_range_start(struct mmu_notifier *mn,
 		unmap_if_in_range(map, start, end);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&priv->lock);
+=======
+	spin_unlock(&priv->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&priv->lock);
 >>>>>>> v3.18
@@ -501,7 +536,11 @@ static void mn_release(struct mmu_notifier *mn,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&priv->lock);
+=======
+	spin_lock(&priv->lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&priv->lock);
 >>>>>>> v3.18
@@ -524,7 +563,11 @@ static void mn_release(struct mmu_notifier *mn,
 		WARN_ON(err);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&priv->lock);
+=======
+	spin_unlock(&priv->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&priv->lock);
 >>>>>>> v3.18
@@ -550,7 +593,11 @@ static int gntdev_open(struct inode *inode, struct file *flip)
 	INIT_LIST_HEAD(&priv->maps);
 	INIT_LIST_HEAD(&priv->freeable_maps);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&priv->lock);
+=======
+	spin_lock_init(&priv->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&priv->lock);
 >>>>>>> v3.18
@@ -585,7 +632,10 @@ static int gntdev_release(struct inode *inode, struct file *flip)
 	pr_debug("priv %p\n", priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&priv->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	while (!list_empty(&priv->maps)) {
@@ -595,7 +645,10 @@ static int gntdev_release(struct inode *inode, struct file *flip)
 	}
 	WARN_ON(!list_empty(&priv->freeable_maps));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&priv->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -636,15 +689,21 @@ static long gntdev_ioctl_map_grant_ref(struct gntdev_priv *priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&priv->lock);
 	gntdev_add_map(priv, map);
 	op.index = map->index << PAGE_SHIFT;
 	mutex_unlock(&priv->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&priv->lock);
 	gntdev_add_map(priv, map);
 	op.index = map->index << PAGE_SHIFT;
 	spin_unlock(&priv->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (copy_to_user(u, &op, sizeof(op)) != 0)
@@ -665,7 +724,11 @@ static long gntdev_ioctl_unmap_grant_ref(struct gntdev_priv *priv,
 	pr_debug("priv %p, del %d+%d\n", priv, (int)op.index, (int)op.count);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&priv->lock);
+=======
+	spin_lock(&priv->lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&priv->lock);
 >>>>>>> v3.18
@@ -677,7 +740,11 @@ static long gntdev_ioctl_unmap_grant_ref(struct gntdev_priv *priv,
 		err = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&priv->lock);
+=======
+	spin_unlock(&priv->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&priv->lock);
 >>>>>>> v3.18
@@ -749,7 +816,11 @@ static long gntdev_ioctl_notify(struct gntdev_priv *priv, void __user *u)
 	out_event = op.event_channel_port;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&priv->lock);
+=======
+	spin_lock(&priv->lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&priv->lock);
 >>>>>>> v3.18
@@ -781,7 +852,11 @@ static long gntdev_ioctl_notify(struct gntdev_priv *priv, void __user *u)
 
  unlock_out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&priv->lock);
+=======
+	spin_unlock(&priv->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&priv->lock);
 >>>>>>> v3.18
@@ -835,7 +910,11 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
 			index, count, vma->vm_start, vma->vm_pgoff);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&priv->lock);
+=======
+	spin_lock(&priv->lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&priv->lock);
 >>>>>>> v3.18
@@ -846,7 +925,11 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
 		goto unlock_out;
 	if (use_ptemod && priv->mm != vma->vm_mm) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "Huh? Other mm?\n");
+=======
+		pr_warn("Huh? Other mm?\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Huh? Other mm?\n");
 >>>>>>> v3.18
@@ -858,7 +941,11 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
 	vma->vm_ops = &gntdev_vmops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma->vm_flags |= VM_DONTEXPAND | VM_DONTDUMP | VM_IO;
+=======
+	vma->vm_flags |= VM_DONTEXPAND | VM_DONTDUMP;
+>>>>>>> v3.18
 =======
 	vma->vm_flags |= VM_DONTEXPAND | VM_DONTDUMP;
 >>>>>>> v3.18
@@ -882,7 +969,11 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&priv->lock);
+=======
+	spin_unlock(&priv->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&priv->lock);
 >>>>>>> v3.18
@@ -893,7 +984,11 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
 					  find_grant_ptes, map);
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "find_grant_ptes() failure.\n");
+=======
+			pr_warn("find_grant_ptes() failure.\n");
+>>>>>>> v3.18
 =======
 			pr_warn("find_grant_ptes() failure.\n");
 >>>>>>> v3.18
@@ -918,17 +1013,23 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
 
 unlock_out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&priv->lock);
 	return err;
 
 out_unlock_put:
 	mutex_unlock(&priv->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock(&priv->lock);
 	return err;
 
 out_unlock_put:
 	spin_unlock(&priv->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_put_map:
 	if (use_ptemod)
@@ -961,17 +1062,23 @@ static int __init gntdev_init(void)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	use_ptemod = xen_pv_domain();
 
 	err = misc_register(&gntdev_miscdev);
 	if (err != 0) {
 		printk(KERN_ERR "Could not register gntdev device\n");
 =======
+=======
+>>>>>>> v3.18
 	use_ptemod = !xen_feature(XENFEAT_auto_translated_physmap);
 
 	err = misc_register(&gntdev_miscdev);
 	if (err != 0) {
 		pr_err("Could not register gntdev device\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return err;
 	}

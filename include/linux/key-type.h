@@ -42,17 +42,23 @@ struct key_preparsed_payload {
 	char		*description;	/* Proposed key description (or NULL) */
 	void		*type_data[2];	/* Private key-type data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void		*payload;	/* Proposed payload */
 	const void	*data;		/* Raw data */
 	size_t		datalen;	/* Raw datalen */
 	size_t		quotalen;	/* Quota length for proposed payload */
 =======
+=======
+>>>>>>> v3.18
 	void		*payload[2];	/* Proposed payload */
 	const void	*data;		/* Raw data */
 	size_t		datalen;	/* Raw datalen */
 	size_t		quotalen;	/* Quota length for proposed payload */
 	time_t		expiry;		/* Expiry time of key */
 	bool		trusted;	/* True if key is trusted */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -61,7 +67,10 @@ typedef int (*request_key_actor_t)(struct key_construction *key,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Preparsed matching criterion.
  */
 struct key_match_data {
@@ -80,6 +89,9 @@ struct key_match_data {
 };
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * kernel managed key type definition
  */
@@ -120,9 +132,12 @@ struct key_type {
 	int (*update)(struct key *key, struct key_preparsed_payload *prep);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* match a key against a description */
 	int (*match)(const struct key *key, const void *desc);
 =======
+=======
+>>>>>>> v3.18
 	/* Preparse the data supplied to ->match() (optional).  The
 	 * data to be preparsed can be found in match_data->raw_data.
 	 * The lookup type can also be set by this function.
@@ -132,6 +147,9 @@ struct key_type {
 	/* Free preparsed match data (optional).  This should be supplied it
 	 * ->match_preparse() is supplied. */
 	void (*match_free)(struct key_match_data *match_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* clear some of the data from a key on revokation (optional)
@@ -196,6 +214,11 @@ static inline int key_negate_and_link(struct key *key,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int generic_key_instantiate(struct key *key, struct key_preparsed_payload *prep);
+
+>>>>>>> v3.18
 =======
 extern int generic_key_instantiate(struct key *key, struct key_preparsed_payload *prep);
 

@@ -90,8 +90,13 @@ it as lower layer.
 
 Note that for certain kind of soft-devices, which are not managing any
 <<<<<<< HEAD
+<<<<<<< HEAD
 real hardware, there is possible to set this bit from userpsace.
 One should use TVL IFLA_CARRIER to do so.
+=======
+real hardware, it is possible to set this bit from userspace.  One
+should use TVL IFLA_CARRIER to do so.
+>>>>>>> v3.18
 =======
 real hardware, it is possible to set this bit from userspace.  One
 should use TVL IFLA_CARRIER to do so.

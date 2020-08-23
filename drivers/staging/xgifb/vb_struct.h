@@ -1,7 +1,11 @@
 #ifndef _VB_STRUCT_
 #define _VB_STRUCT_
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../../video/sis/vstruct.h"
+=======
+#include "../../video/fbdev/sis/vstruct.h"
+>>>>>>> v3.18
 =======
 #include "../../video/fbdev/sis/vstruct.h"
 >>>>>>> v3.18

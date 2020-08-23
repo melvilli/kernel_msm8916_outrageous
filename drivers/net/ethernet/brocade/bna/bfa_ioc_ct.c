@@ -49,13 +49,19 @@ static void bfa_ioc_ct_sync_leave(struct bfa_ioc *ioc);
 static void bfa_ioc_ct_sync_ack(struct bfa_ioc *ioc);
 static bool bfa_ioc_ct_sync_complete(struct bfa_ioc *ioc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void bfa_ioc_ct_set_cur_ioc_fwstate(
 			struct bfa_ioc *ioc, enum bfi_ioc_state fwstate);
 static enum bfi_ioc_state bfa_ioc_ct_get_cur_ioc_fwstate(struct bfa_ioc *ioc);
 static void bfa_ioc_ct_set_alt_ioc_fwstate(
 			struct bfa_ioc *ioc, enum bfi_ioc_state fwstate);
 static enum bfi_ioc_state bfa_ioc_ct_get_alt_ioc_fwstate(struct bfa_ioc *ioc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static enum bfa_status bfa_ioc_ct_pll_init(void __iomem *rb,
 				enum bfi_asic_mode asic_mode);
@@ -78,11 +84,17 @@ static const struct bfa_ioc_hwif nw_hwif_ct = {
 	.ioc_sync_ack	     = bfa_ioc_ct_sync_ack,
 	.ioc_sync_complete   = bfa_ioc_ct_sync_complete,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.ioc_set_fwstate     = bfa_ioc_ct_set_cur_ioc_fwstate,
 	.ioc_get_fwstate     = bfa_ioc_ct_get_cur_ioc_fwstate,
 	.ioc_set_alt_fwstate     = bfa_ioc_ct_set_alt_ioc_fwstate,
 	.ioc_get_alt_fwstate     = bfa_ioc_ct_get_alt_ioc_fwstate,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -102,11 +114,17 @@ static const struct bfa_ioc_hwif nw_hwif_ct2 = {
 	.ioc_sync_ack	     = bfa_ioc_ct_sync_ack,
 	.ioc_sync_complete   = bfa_ioc_ct_sync_complete,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.ioc_set_fwstate     = bfa_ioc_ct_set_cur_ioc_fwstate,
 	.ioc_get_fwstate     = bfa_ioc_ct_get_cur_ioc_fwstate,
 	.ioc_set_alt_fwstate     = bfa_ioc_ct_set_alt_ioc_fwstate,
 	.ioc_get_alt_fwstate     = bfa_ioc_ct_get_alt_ioc_fwstate,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -589,7 +607,10 @@ bfa_ioc_ct_sync_complete(struct bfa_ioc *ioc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 bfa_ioc_ct_set_cur_ioc_fwstate(struct bfa_ioc *ioc,
 			       enum bfi_ioc_state fwstate)
@@ -616,6 +637,9 @@ bfa_ioc_ct_get_alt_ioc_fwstate(struct bfa_ioc *ioc)
 	return (enum bfi_ioc_state)readl(ioc->ioc_regs.alt_ioc_fwstate);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static enum bfa_status
 bfa_ioc_ct_pll_init(void __iomem *rb, enum bfi_asic_mode asic_mode)

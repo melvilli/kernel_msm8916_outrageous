@@ -17,7 +17,11 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
+=======
+ *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
+>>>>>>> v3.18
 =======
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
 >>>>>>> v3.18
@@ -29,6 +33,7 @@
  *  Copyright (C) 2000 MIPS Technologies, Inc. All rights reserved.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/kernel.h>
 #include "ieee754.h"
@@ -63,6 +68,8 @@
 
 ieee754dp ieee754dp_dump(char *m, ieee754dp x)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include <linux/printk.h>
 #include "ieee754.h"
@@ -70,6 +77,9 @@ ieee754dp ieee754dp_dump(char *m, ieee754dp x)
 #include "ieee754dp.h"
 
 union ieee754dp ieee754dp_dump(char *m, union ieee754dp x)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int i;
@@ -111,7 +121,11 @@ union ieee754dp ieee754dp_dump(char *m, union ieee754dp x)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ieee754sp ieee754sp_dump(char *m, ieee754sp x)
+=======
+union ieee754sp ieee754sp_dump(char *m, union ieee754sp x)
+>>>>>>> v3.18
 =======
 union ieee754sp ieee754sp_dump(char *m, union ieee754sp x)
 >>>>>>> v3.18

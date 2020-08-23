@@ -280,7 +280,12 @@ static int wm8900_hp_event(struct snd_soc_dapm_widget *w,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG();
+=======
+		WARN(1, "Invalid event %d\n", event);
+		break;
+>>>>>>> v3.18
 =======
 		WARN(1, "Invalid event %d\n", event);
 		break;
@@ -309,6 +314,7 @@ static const DECLARE_TLV_DB_SCALE(adc_tlv, -7200, 75, 1);
 static const char *mic_bias_level_txt[] = { "0.9*AVDD", "0.65*AVDD" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum mic_bias_level =
 SOC_ENUM_SINGLE(WM8900_REG_INCTL, 8, 2, mic_bias_level_txt);
 
@@ -317,6 +323,8 @@ static const char *dac_mute_rate_txt[] = { "Fast", "Slow" };
 static const struct soc_enum dac_mute_rate =
 SOC_ENUM_SINGLE(WM8900_REG_DACCTRL, 7, 2, dac_mute_rate_txt);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(mic_bias_level,
 			    WM8900_REG_INCTL, 8, mic_bias_level_txt);
 
@@ -324,6 +332,9 @@ static const char *dac_mute_rate_txt[] = { "Fast", "Slow" };
 
 static SOC_ENUM_SINGLE_DECL(dac_mute_rate,
 			    WM8900_REG_DACCTRL, 7, dac_mute_rate_txt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char *dac_deemphasis_txt[] = {
@@ -331,8 +342,13 @@ static const char *dac_deemphasis_txt[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum dac_deemphasis =
 SOC_ENUM_SINGLE(WM8900_REG_DACCTRL, 4, 4, dac_deemphasis_txt);
+=======
+static SOC_ENUM_SINGLE_DECL(dac_deemphasis,
+			    WM8900_REG_DACCTRL, 4, dac_deemphasis_txt);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(dac_deemphasis,
 			    WM8900_REG_DACCTRL, 4, dac_deemphasis_txt);
@@ -343,8 +359,13 @@ static const char *adc_hpf_cut_txt[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum adc_hpf_cut =
 SOC_ENUM_SINGLE(WM8900_REG_ADCCTRL, 5, 4, adc_hpf_cut_txt);
+=======
+static SOC_ENUM_SINGLE_DECL(adc_hpf_cut,
+			    WM8900_REG_ADCCTRL, 5, adc_hpf_cut_txt);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(adc_hpf_cut,
 			    WM8900_REG_ADCCTRL, 5, adc_hpf_cut_txt);
@@ -354,6 +375,7 @@ static const char *lr_txt[] = {
 	"Left", "Right"
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct soc_enum aifl_src =
 SOC_ENUM_SINGLE(WM8900_REG_AUDIO1, 15, 2, lr_txt);
@@ -367,6 +389,8 @@ SOC_ENUM_SINGLE(WM8900_REG_AUDIO2, 15, 2, lr_txt);
 static const struct soc_enum dacr_src =
 SOC_ENUM_SINGLE(WM8900_REG_AUDIO2, 14, 2, lr_txt);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(aifl_src,
 			    WM8900_REG_AUDIO1, 15, lr_txt);
 
@@ -378,6 +402,9 @@ static SOC_ENUM_SINGLE_DECL(dacl_src,
 
 static SOC_ENUM_SINGLE_DECL(dacr_src,
 			    WM8900_REG_AUDIO2, 14, lr_txt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char *sidetone_txt[] = {
@@ -385,17 +412,23 @@ static const char *sidetone_txt[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum dacl_sidetone =
 SOC_ENUM_SINGLE(WM8900_REG_SIDETONE, 2, 3, sidetone_txt);
 
 static const struct soc_enum dacr_sidetone =
 SOC_ENUM_SINGLE(WM8900_REG_SIDETONE, 0, 3, sidetone_txt);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(dacl_sidetone,
 			    WM8900_REG_SIDETONE, 2, sidetone_txt);
 
 static SOC_ENUM_SINGLE_DECL(dacr_sidetone,
 			    WM8900_REG_SIDETONE, 0, sidetone_txt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new wm8900_snd_controls[] = {
@@ -543,8 +576,13 @@ SOC_DAPM_SINGLE("RINPUT3 Switch", WM8900_REG_INCTL, 0, 1, 0),
 static const char *wm8900_lp_mux[] = { "Disabled", "Enabled" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum wm8900_lineout2_lp_mux =
 SOC_ENUM_SINGLE(WM8900_REG_LOUTMIXCTL1, 1, 2, wm8900_lp_mux);
+=======
+static SOC_ENUM_SINGLE_DECL(wm8900_lineout2_lp_mux,
+			    WM8900_REG_LOUTMIXCTL1, 1, wm8900_lp_mux);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(wm8900_lineout2_lp_mux,
 			    WM8900_REG_LOUTMIXCTL1, 1, wm8900_lp_mux);
@@ -692,6 +730,7 @@ static int wm8900_hw_params(struct snd_pcm_substream *substream,
 	reg = snd_soc_read(codec, WM8900_REG_AUDIO1) & ~0x60;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -703,6 +742,8 @@ static int wm8900_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -713,6 +754,9 @@ static int wm8900_hw_params(struct snd_pcm_substream *substream,
 		reg |= 0x40;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		reg |= 0x60;
 		break;
@@ -757,7 +801,12 @@ static int fll_factors(struct _fll_div *fll_div, unsigned int Fref,
 	unsigned int div;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!Fout);
+=======
+	if (WARN_ON(!Fout))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!Fout))
 		return -EINVAL;
@@ -813,8 +862,14 @@ static int fll_factors(struct _fll_div *fll_div, unsigned int Fref,
 	fll_div->k = K / 10;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(target != Fout * (fll_div->fllclk_div << 2));
 	BUG_ON(!K && target != Fref * fll_div->fll_ratio * fll_div->n);
+=======
+	if (WARN_ON(target != Fout * (fll_div->fllclk_div << 2)) ||
+	    WARN_ON(!K && target != Fref * fll_div->fll_ratio * fll_div->n))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(target != Fout * (fll_div->fllclk_div << 2)) ||
 	    WARN_ON(!K && target != Fref * fll_div->fll_ratio * fll_div->n))
@@ -1252,6 +1307,7 @@ static int wm8900_resume(struct snd_soc_codec *codec)
 static int wm8900_probe(struct snd_soc_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0, reg;
 
 	ret = snd_soc_codec_set_cache_io(codec, 8, 16, SND_SOC_REGMAP);
@@ -1259,6 +1315,9 @@ static int wm8900_probe(struct snd_soc_codec *codec)
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
+=======
+	int reg;
+>>>>>>> v3.18
 =======
 	int reg;
 >>>>>>> v3.18
@@ -1366,7 +1425,11 @@ static struct spi_driver wm8900_spi_driver = {
 #endif /* CONFIG_SPI_MASTER */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -1420,7 +1483,11 @@ static int __init wm8900_modinit(void)
 {
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -1444,7 +1511,11 @@ module_init(wm8900_modinit);
 static void __exit wm8900_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18

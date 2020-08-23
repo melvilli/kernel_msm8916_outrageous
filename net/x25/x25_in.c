@@ -24,6 +24,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "X25: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "X25: " fmt
 
@@ -83,7 +88,11 @@ static int x25_queue_rx_frame(struct sock *sk, struct sk_buff *skb, int more)
 	skb_queue_tail(&sk->sk_receive_queue, skbn);
 	if (!sock_flag(sk, SOCK_DEAD))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skbn->len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -327,7 +336,11 @@ static int x25_state3_machine(struct sock *sk, struct sk_buff *skb, int frametyp
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "x25: unknown %02X in state 3\n", frametype);
+=======
+			pr_warn("unknown %02X in state 3\n", frametype);
+>>>>>>> v3.18
 =======
 			pr_warn("unknown %02X in state 3\n", frametype);
 >>>>>>> v3.18

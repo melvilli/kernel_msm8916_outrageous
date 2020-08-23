@@ -24,6 +24,7 @@
 
 #include <core/object.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
 
 #include <subdev/fb.h>
@@ -62,6 +63,8 @@ nouveau_dmaobj_ctor(struct nouveau_object *parent,
 	case NV_DMA_TARGET_PCI_US:
 	case NV_DMA_TARGET_AGP:
 =======
+=======
+>>>>>>> v3.18
 #include <core/client.h>
 #include <nvif/unpack.h>
 #include <nvif/class.h>
@@ -157,6 +160,9 @@ nvkm_dmaobj_create_(struct nouveau_object *parent,
 	case NV_DMA_V0_TARGET_AGP:
 		if (!client->super)
 			return -EACCES;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dmaobj->target = NV_MEM_TARGET_PCI_NOSNOOP;
 		break;
@@ -164,6 +170,7 @@ nvkm_dmaobj_create_(struct nouveau_object *parent,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (args->flags & NV_DMA_ACCESS_MASK) {
 	case NV_DMA_ACCESS_VM:
@@ -177,6 +184,8 @@ nvkm_dmaobj_create_(struct nouveau_object *parent,
 		break;
 	case NV_DMA_ACCESS_RDWR:
 =======
+=======
+>>>>>>> v3.18
 	switch (dmaobj->access) {
 	case NV_DMA_V0_ACCESS_VM:
 		dmaobj->access = NV_MEM_ACCESS_VM;
@@ -188,6 +197,9 @@ nvkm_dmaobj_create_(struct nouveau_object *parent,
 		dmaobj->access = NV_MEM_ACCESS_WO;
 		break;
 	case NV_DMA_V0_ACCESS_RDWR:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dmaobj->access = NV_MEM_ACCESS_RW;
 		break;
@@ -195,6 +207,7 @@ nvkm_dmaobj_create_(struct nouveau_object *parent,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dmaobj->start = args->start;
 	dmaobj->limit = args->limit;
@@ -232,6 +245,8 @@ nouveau_dmaobj_sclass[] = {
 	{}
 };
 =======
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -254,4 +269,7 @@ _nvkm_dmaeng_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	dmaeng->bind = nvkm_dmaobj_bind;
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -22,7 +22,10 @@
 
 #include "security.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "avc.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -22,7 +22,10 @@
 #include <linux/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/bootinfo.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/macintosh.h>

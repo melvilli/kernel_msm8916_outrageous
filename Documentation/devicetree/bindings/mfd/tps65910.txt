@@ -12,7 +12,11 @@ Required properties:
   The first cell is the IRQ number.
   The second cell is the flags, encoded as the trigger masks from
 <<<<<<< HEAD
+<<<<<<< HEAD
   Documentation/devicetree/bindings/interrupts.txt
+=======
+  Documentation/devicetree/bindings/interrupt-controller/interrupts.txt
+>>>>>>> v3.18
 =======
   Documentation/devicetree/bindings/interrupt-controller/interrupts.txt
 >>>>>>> v3.18
@@ -26,7 +30,11 @@ Required properties:
   The valid regulator-compatible values are:
   tps65910: vrtc, vio, vdd1, vdd2, vdd3, vdig1, vdig2, vpll, vdac, vaux1,
 <<<<<<< HEAD
+<<<<<<< HEAD
             vaux2, vaux33, vmmc
+=======
+            vaux2, vaux33, vmmc, vbb
+>>>>>>> v3.18
 =======
             vaux2, vaux33, vmmc, vbb
 >>>>>>> v3.18
@@ -47,7 +55,11 @@ Required properties:
 	vcc5-supply: VPLL and VDAC input.
 	vcc6-supply: VDIG1 and VDIG2 input.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vcc7-supply: VRTC input.
+=======
+	vcc7-supply: VRTC and VBB input.
+>>>>>>> v3.18
 =======
 	vcc7-supply: VRTC and VBB input.
 >>>>>>> v3.18

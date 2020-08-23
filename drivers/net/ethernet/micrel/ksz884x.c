@@ -4129,15 +4129,21 @@ static int hw_add_addr(struct ksz_hw *hw, u8 *mac_addr)
 	int j = ADDITIONAL_ENTRIES;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!memcmp(hw->override_addr, mac_addr, ETH_ALEN))
 		return 0;
 	for (i = 0; i < hw->addr_list_size; i++) {
 		if (!memcmp(hw->address[i], mac_addr, ETH_ALEN))
 =======
+=======
+>>>>>>> v3.18
 	if (ether_addr_equal(hw->override_addr, mac_addr))
 		return 0;
 	for (i = 0; i < hw->addr_list_size; i++) {
 		if (ether_addr_equal(hw->address[i], mac_addr))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 0;
 		if (ADDITIONAL_ENTRIES == j && empty_addr(hw->address[i]))
@@ -4157,7 +4163,11 @@ static int hw_del_addr(struct ksz_hw *hw, u8 *mac_addr)
 
 	for (i = 0; i < hw->addr_list_size; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!memcmp(hw->address[i], mac_addr, ETH_ALEN)) {
+=======
+		if (ether_addr_equal(hw->address[i], mac_addr)) {
+>>>>>>> v3.18
 =======
 		if (ether_addr_equal(hw->address[i], mac_addr)) {
 >>>>>>> v3.18
@@ -4421,9 +4431,15 @@ static int ksz_alloc_desc(struct dev_info *adapter)
 
 	adapter->desc_pool.alloc_virt =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_alloc_consistent(
 			adapter->pdev, adapter->desc_pool.alloc_size,
 			&adapter->desc_pool.dma_addr);
+=======
+		pci_zalloc_consistent(adapter->pdev,
+				      adapter->desc_pool.alloc_size,
+				      &adapter->desc_pool.dma_addr);
+>>>>>>> v3.18
 =======
 		pci_zalloc_consistent(adapter->pdev,
 				      adapter->desc_pool.alloc_size,
@@ -4434,7 +4450,10 @@ static int ksz_alloc_desc(struct dev_info *adapter)
 		return 1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(adapter->desc_pool.alloc_virt, 0, adapter->desc_pool.alloc_size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -4853,7 +4872,11 @@ static inline void copy_old_skb(struct sk_buff *old, struct sk_buff *skb)
 	skb_set_network_header(skb, ETH_HLEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(old);
+=======
+	dev_consume_skb_any(old);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any(old);
 >>>>>>> v3.18
@@ -4955,7 +4978,11 @@ static void netdev_tx_timeout(struct net_device *dev)
 		 * enough.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (jiffies - last_reset <= dev->watchdog_timeo)
+=======
+		if (time_before_eq(jiffies, last_reset + dev->watchdog_timeo))
+>>>>>>> v3.18
 =======
 		if (time_before_eq(jiffies, last_reset + dev->watchdog_timeo))
 >>>>>>> v3.18
@@ -5882,7 +5909,10 @@ static int netdev_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 	struct ksz_hw *hw = &hw_priv->hw;
 	struct ksz_port *port = &priv->port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int result = 0;
@@ -5892,8 +5922,11 @@ static int netdev_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 		return -ERESTARTSYS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* assume success */
 	rc = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (cmd) {
@@ -7110,6 +7143,10 @@ static int pcidev_init(struct pci_dev *pdev, const struct pci_device_id *id)
 		if (!dev)
 			goto pcidev_init_reg_err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		SET_NETDEV_DEV(dev, &pdev->dev);
+>>>>>>> v3.18
 =======
 		SET_NETDEV_DEV(dev, &pdev->dev);
 >>>>>>> v3.18
@@ -7143,8 +7180,12 @@ static int pcidev_init(struct pci_dev *pdev, const struct pci_device_id *id)
 		else {
 			memcpy(dev->dev_addr, sw->other_addr, ETH_ALEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!memcmp(sw->other_addr, hw->override_addr,
 				    ETH_ALEN))
+=======
+			if (ether_addr_equal(sw->other_addr, hw->override_addr))
+>>>>>>> v3.18
 =======
 			if (ether_addr_equal(sw->other_addr, hw->override_addr))
 >>>>>>> v3.18
@@ -7153,7 +7194,11 @@ static int pcidev_init(struct pci_dev *pdev, const struct pci_device_id *id)
 
 		dev->netdev_ops = &netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SET_ETHTOOL_OPS(dev, &netdev_ethtool_ops);
+=======
+		dev->ethtool_ops = &netdev_ethtool_ops;
+>>>>>>> v3.18
 =======
 		dev->ethtool_ops = &netdev_ethtool_ops;
 >>>>>>> v3.18
@@ -7197,8 +7242,11 @@ static void pcidev_exit(struct pci_dev *pdev)
 	struct dev_info *hw_priv = &info->dev_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	release_mem_region(pci_resource_start(pdev, 0),
@@ -7277,7 +7325,11 @@ static int pcidev_suspend(struct pci_dev *pdev, pm_message_t state)
 static char pcidev_name[] = "ksz884xp";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pci_device_id pcidev_table[] = {
+=======
+static const struct pci_device_id pcidev_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pcidev_table[] = {
 >>>>>>> v3.18

@@ -2,7 +2,11 @@ config SCSI_QLA_FC
 	tristate "QLogic QLA2XXX Fibre Channel Support"
 	depends on PCI && SCSI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SCSI_FC_ATTRS
+=======
+	depends on SCSI_FC_ATTRS
+>>>>>>> v3.18
 =======
 	depends on SCSI_FC_ATTRS
 >>>>>>> v3.18
@@ -36,7 +40,11 @@ config TCM_QLA2XXX
 	tristate "TCM_QLA2XXX fabric module for Qlogic 2xxx series target mode HBAs"
 	depends on SCSI_QLA_FC && TARGET_CORE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select LIBFC
+=======
+	depends on LIBFC
+>>>>>>> v3.18
 =======
 	depends on LIBFC
 >>>>>>> v3.18

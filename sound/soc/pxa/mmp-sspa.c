@@ -28,6 +28,11 @@
 #include <linux/pxa2xx_ssp.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dmaengine.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/dmaengine.h>
 
@@ -39,6 +44,10 @@
 #include <sound/soc.h>
 #include <sound/pxa2xx-lib.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/dmaengine_pcm.h>
+>>>>>>> v3.18
 =======
 #include <sound/dmaengine_pcm.h>
 >>>>>>> v3.18
@@ -50,7 +59,11 @@
 struct sspa_priv {
 	struct ssp_device *sspa;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa2xx_pcm_dma_params *dma_params;
+=======
+	struct snd_dmaengine_dai_dma_data *dma_params;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data *dma_params;
 >>>>>>> v3.18
@@ -280,7 +293,11 @@ static int mmp_sspa_hw_params(struct snd_pcm_substream *substream,
 	struct sspa_priv *sspa_priv = snd_soc_dai_get_drvdata(dai);
 	struct ssp_device *sspa = sspa_priv->sspa;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa2xx_pcm_dma_params *dma_params;
+=======
+	struct snd_dmaengine_dai_dma_data *dma_params;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data *dma_params;
 >>>>>>> v3.18
@@ -327,7 +344,11 @@ static int mmp_sspa_hw_params(struct snd_pcm_substream *substream,
 
 	dma_params = &sspa_priv->dma_params[substream->stream];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_params->dev_addr = substream->stream == SNDRV_PCM_STREAM_PLAYBACK ?
+=======
+	dma_params->addr = substream->stream == SNDRV_PCM_STREAM_PLAYBACK ?
+>>>>>>> v3.18
 =======
 	dma_params->addr = substream->stream == SNDRV_PCM_STREAM_PLAYBACK ?
 >>>>>>> v3.18
@@ -410,7 +431,11 @@ static struct snd_soc_dai_ops mmp_sspa_dai_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_soc_dai_driver mmp_sspa_dai = {
+=======
+static struct snd_soc_dai_driver mmp_sspa_dai = {
+>>>>>>> v3.18
 =======
 static struct snd_soc_dai_driver mmp_sspa_dai = {
 >>>>>>> v3.18
@@ -451,7 +476,12 @@ static int asoc_mmp_sspa_probe(struct platform_device *pdev)
 
 	priv->dma_params = devm_kzalloc(&pdev->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			2 * sizeof(struct pxa2xx_pcm_dma_params), GFP_KERNEL);
+=======
+			2 * sizeof(struct snd_dmaengine_dai_dma_data),
+			GFP_KERNEL);
+>>>>>>> v3.18
 =======
 			2 * sizeof(struct snd_dmaengine_dai_dma_data),
 			GFP_KERNEL);
@@ -461,9 +491,12 @@ static int asoc_mmp_sspa_probe(struct platform_device *pdev)
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (res == NULL)
 		return -ENOMEM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	priv->sspa->mmio_base = devm_ioremap_resource(&pdev->dev, res);
@@ -488,8 +521,13 @@ static int asoc_mmp_sspa_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snd_soc_register_component(&pdev->dev, &mmp_sspa_component,
 					  &mmp_sspa_dai, 1);
+=======
+	return devm_snd_soc_register_component(&pdev->dev, &mmp_sspa_component,
+					       &mmp_sspa_dai, 1);
+>>>>>>> v3.18
 =======
 	return devm_snd_soc_register_component(&pdev->dev, &mmp_sspa_component,
 					       &mmp_sspa_dai, 1);
@@ -504,7 +542,10 @@ static int asoc_mmp_sspa_remove(struct platform_device *pdev)
 	clk_put(priv->audio_clk);
 	clk_put(priv->sysclk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_unregister_component(&pdev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

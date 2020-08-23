@@ -77,6 +77,10 @@ static struct wf_control *cpufreq_clamp;
 /* Set to kick the control loop into life */
 static int wf_smu_all_controls_ok, wf_smu_all_sensors_ok, wf_smu_started;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static bool wf_smu_overtemp;
+>>>>>>> v3.18
 =======
 static bool wf_smu_overtemp;
 >>>>>>> v3.18
@@ -522,6 +526,10 @@ static void wf_smu_tick(void)
 		wf_set_overtemp();
 		wf_smu_skipping = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		wf_smu_overtemp = true;
+>>>>>>> v3.18
 =======
 		wf_smu_overtemp = true;
 >>>>>>> v3.18
@@ -534,13 +542,19 @@ static void wf_smu_tick(void)
 	 * here in this case
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_failure == 0 && last_failure & FAILURE_OVERTEMP)
 		wf_clear_overtemp();
 =======
+=======
+>>>>>>> v3.18
 	if (!wf_smu_failure_state && wf_smu_overtemp) {
 		wf_clear_overtemp();
 		wf_smu_overtemp = false;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

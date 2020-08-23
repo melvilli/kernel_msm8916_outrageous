@@ -26,6 +26,10 @@
 #include <linux/errno.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/machdep.h>
+>>>>>>> v3.18
 =======
 #include <asm/machdep.h>
 >>>>>>> v3.18
@@ -76,7 +80,11 @@ static int __init pm_init(void)
 	return sysfs_create_group(power_kobj, &attr_group);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 core_initcall(pm_init);
+=======
+machine_core_initcall(pseries, pm_init);
+>>>>>>> v3.18
 =======
 machine_core_initcall(pseries, pm_init);
 >>>>>>> v3.18
@@ -86,7 +94,11 @@ static int __init apo_pm_init(void)
 	return (sysfs_create_file(power_kobj, &auto_poweron_attr.attr));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 __initcall(apo_pm_init);
+=======
+machine_device_initcall(pseries, apo_pm_init);
+>>>>>>> v3.18
 =======
 machine_device_initcall(pseries, apo_pm_init);
 >>>>>>> v3.18

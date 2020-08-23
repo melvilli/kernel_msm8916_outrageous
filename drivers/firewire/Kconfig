@@ -1,6 +1,11 @@
 menu "IEEE 1394 (FireWire) support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI || BROKEN
+=======
+	depends on HAS_DMA
+	depends on PCI || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 	depends on PCI || COMPILE_TEST

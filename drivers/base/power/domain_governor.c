@@ -7,7 +7,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -47,7 +50,11 @@ static int dev_update_qos_constraint(struct device *dev, void *data)
  * @dev: Device to check.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool default_stop_ok(struct device *dev)
+=======
+static bool default_stop_ok(struct device *dev)
+>>>>>>> v3.18
 =======
 static bool default_stop_ok(struct device *dev)
 >>>>>>> v3.18
@@ -238,10 +245,14 @@ static bool always_on_power_down_ok(struct dev_pm_domain *domain)
 #else /* !CONFIG_PM_RUNTIME */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool default_stop_ok(struct device *dev)
 {
 	return false;
 }
+=======
+static inline bool default_stop_ok(struct device *dev) { return false; }
+>>>>>>> v3.18
 =======
 static inline bool default_stop_ok(struct device *dev) { return false; }
 >>>>>>> v3.18

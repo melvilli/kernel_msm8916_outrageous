@@ -66,8 +66,11 @@ struct snd_pcm_ops {
 	int (*ioctl)(struct snd_pcm_substream * substream,
 		     unsigned int cmd, void *arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*compat_ioctl)(struct snd_pcm_substream *substream,
 		     unsigned int cmd, void *arg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int (*hw_params)(struct snd_pcm_substream *substream,
@@ -88,7 +91,10 @@ struct snd_pcm_ops {
 	int (*mmap)(struct snd_pcm_substream *substream, struct vm_area_struct *vma);
 	int (*ack)(struct snd_pcm_substream *substream);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*restart)(struct snd_pcm_substream *substream);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -108,7 +114,11 @@ struct snd_pcm_ops {
 
 #define SNDRV_PCM_IOCTL1_RESET		0
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 1 is absent slot. */
+=======
+#define SNDRV_PCM_IOCTL1_INFO		1
+>>>>>>> v3.18
 =======
 #define SNDRV_PCM_IOCTL1_INFO		1
 >>>>>>> v3.18
@@ -126,12 +136,15 @@ struct snd_pcm_ops {
 #define SNDRV_PCM_POS_XRUN		((snd_pcm_uframes_t)-1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SNDRV_DMA_MODE          (0)
 #define SNDRV_NON_DMA_MODE      (1 << 0)
 #define SNDRV_RENDER_STOPPED    (1 << 1)
 #define SNDRV_RENDER_RUNNING    (1 << 2)
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* If you change this don't forget to change rates[] table in pcm_native.c */
@@ -206,6 +219,12 @@ struct snd_pcm_ops {
 #define SNDRV_PCM_FMTBIT_DSD_U8		_SNDRV_PCM_FMTBIT(DSD_U8)
 #define SNDRV_PCM_FMTBIT_DSD_U16_LE	_SNDRV_PCM_FMTBIT(DSD_U16_LE)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SNDRV_PCM_FMTBIT_DSD_U32_LE	_SNDRV_PCM_FMTBIT(DSD_U32_LE)
+#define SNDRV_PCM_FMTBIT_DSD_U16_BE	_SNDRV_PCM_FMTBIT(DSD_U16_BE)
+#define SNDRV_PCM_FMTBIT_DSD_U32_BE	_SNDRV_PCM_FMTBIT(DSD_U32_BE)
+>>>>>>> v3.18
 =======
 #define SNDRV_PCM_FMTBIT_DSD_U32_LE	_SNDRV_PCM_FMTBIT(DSD_U32_LE)
 #define SNDRV_PCM_FMTBIT_DSD_U16_BE	_SNDRV_PCM_FMTBIT(DSD_U16_BE)
@@ -333,7 +352,10 @@ struct snd_pcm_runtime {
 	unsigned int rate_den;
 	unsigned int no_period_wakeup: 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int render_flag;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -398,6 +420,10 @@ struct snd_pcm_runtime {
 struct snd_pcm_group {		/* keep linked substreams */
 	spinlock_t lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex mutex;
+>>>>>>> v3.18
 =======
 	struct mutex mutex;
 >>>>>>> v3.18
@@ -418,6 +444,7 @@ struct snd_pcm_substream {
 	size_t buffer_bytes_max;	/* limit ring buffer size */
 	struct snd_dma_buffer dma_buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int dma_buf_id;
 	size_t dma_max;
 	/* -- hardware operations -- */
@@ -426,11 +453,16 @@ struct snd_pcm_substream {
 	struct snd_pcm_runtime *runtime;
 	spinlock_t runtime_lock;
 =======
+=======
+>>>>>>> v3.18
 	size_t dma_max;
 	/* -- hardware operations -- */
 	const struct snd_pcm_ops *ops;
 	/* -- runtime information -- */
 	struct snd_pcm_runtime *runtime;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
         /* -- timer section -- */
 	struct snd_timer *timer;		/* timer */
@@ -464,7 +496,10 @@ struct snd_pcm_substream {
 	/* misc flags */
 	unsigned int hw_opened: 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int hw_no_buffer: 1; /* substream may not have a buffer */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -493,8 +528,11 @@ struct snd_pcm_str {
 #endif
 	struct snd_kcontrol *chmap_kctl; /* channel-mapping controls */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_kcontrol *vol_kctl; /* volume controls */
 	struct snd_kcontrol *usr_kctl; /* user controls */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -516,6 +554,10 @@ struct snd_pcm {
 	struct device *dev; /* actual hw device this belongs to */
 	bool internal; /* pcm is for internal use only */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool nonatomic; /* whole PCM operations are in non-atomic context */
+>>>>>>> v3.18
 =======
 	bool nonatomic; /* whole PCM operations are in non-atomic context */
 >>>>>>> v3.18
@@ -552,8 +594,11 @@ int snd_pcm_notify(struct snd_pcm_notify *notify, int nfree);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern rwlock_t snd_pcm_link_rwlock;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int snd_pcm_info(struct snd_pcm_substream *substream, struct snd_pcm_info *info);
@@ -600,6 +645,7 @@ static inline int snd_pcm_stream_linked(struct snd_pcm_substream *substream)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void snd_pcm_stream_lock(struct snd_pcm_substream *substream)
 {
 	read_lock(&snd_pcm_link_rwlock);
@@ -636,6 +682,8 @@ do { \
 	read_unlock_irqrestore(&snd_pcm_link_rwlock, (flags)); \
 } while (0)
 =======
+=======
+>>>>>>> v3.18
 void snd_pcm_stream_lock(struct snd_pcm_substream *substream);
 void snd_pcm_stream_unlock(struct snd_pcm_substream *substream);
 void snd_pcm_stream_lock_irq(struct snd_pcm_substream *substream);
@@ -648,6 +696,9 @@ unsigned long _snd_pcm_stream_lock_irqsave(struct snd_pcm_substream *substream);
 	} while (0)
 void snd_pcm_stream_unlock_irqrestore(struct snd_pcm_substream *substream,
 				      unsigned long flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define snd_pcm_group_for_each_entry(s, substream) \
@@ -948,7 +999,12 @@ int snd_pcm_format_set_silence(snd_pcm_format_t format, void *buf, unsigned int 
 snd_pcm_format_t snd_pcm_build_linear_format(int width, int unsigned, int big_endian);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_pcm_set_ops(struct snd_pcm * pcm, int direction, struct snd_pcm_ops *ops);
+=======
+void snd_pcm_set_ops(struct snd_pcm * pcm, int direction,
+		     const struct snd_pcm_ops *ops);
+>>>>>>> v3.18
 =======
 void snd_pcm_set_ops(struct snd_pcm * pcm, int direction,
 		     const struct snd_pcm_ops *ops);
@@ -982,6 +1038,11 @@ int snd_pcm_limit_hw_rates(struct snd_pcm_runtime *runtime);
 unsigned int snd_pcm_rate_to_rate_bit(unsigned int rate);
 unsigned int snd_pcm_rate_bit_to_rate(unsigned int rate_bit);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unsigned int snd_pcm_rate_mask_intersect(unsigned int rates_a,
+					 unsigned int rates_b);
+>>>>>>> v3.18
 =======
 unsigned int snd_pcm_rate_mask_intersect(unsigned int rates_a,
 					 unsigned int rates_b);
@@ -1016,11 +1077,14 @@ static inline void snd_pcm_gettime(struct snd_pcm_runtime *runtime,
 				   struct timespec *tv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (runtime->tstamp_type == SNDRV_PCM_TSTAMP_TYPE_MONOTONIC)
 		do_posix_clock_monotonic_gettime(tv);
 	else
 		getnstimeofday(tv);
 =======
+=======
+>>>>>>> v3.18
 	switch (runtime->tstamp_type) {
 	case SNDRV_PCM_TSTAMP_TYPE_MONOTONIC:
 		ktime_get_ts(tv);
@@ -1032,6 +1096,9 @@ static inline void snd_pcm_gettime(struct snd_pcm_runtime *runtime,
 		getnstimeofday(tv);
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1240,6 +1307,7 @@ static inline u64 pcm_format_to_bits(snd_pcm_format_t pcm_format)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * PCM Volume control API
  */
@@ -1288,6 +1356,8 @@ int snd_pcm_add_usr_ctls(struct snd_pcm *pcm, int stream,
 			 unsigned long private_value,
 			 struct snd_pcm_usr **info_ret);
 =======
+=======
+>>>>>>> v3.18
 /* printk helpers */
 #define pcm_err(pcm, fmt, args...) \
 	dev_err((pcm)->card->dev, fmt, ##args)
@@ -1295,6 +1365,9 @@ int snd_pcm_add_usr_ctls(struct snd_pcm *pcm, int stream,
 	dev_warn((pcm)->card->dev, fmt, ##args)
 #define pcm_dbg(pcm, fmt, args...) \
 	dev_dbg((pcm)->card->dev, fmt, ##args)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __SOUND_PCM_H */

@@ -13,6 +13,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ctype.h>
+>>>>>>> v3.18
 =======
 #include <linux/ctype.h>
 >>>>>>> v3.18
@@ -24,6 +28,10 @@
 #include <linux/namei.h>
 #include <linux/capability.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/rcupdate.h>
+>>>>>>> v3.18
 =======
 #include <linux/rcupdate.h>
 >>>>>>> v3.18
@@ -33,6 +41,10 @@
 #include "include/audit.h"
 #include "include/context.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "include/crypto.h"
+>>>>>>> v3.18
 =======
 #include "include/crypto.h"
 >>>>>>> v3.18
@@ -41,7 +53,10 @@
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * aa_mangle_name - mangle a profile name to std profile layout form
  * @name: profile name to mangle  (NOT NULL)
  * @target: buffer to store mangled name, same length as @name (MAYBE NULL)
@@ -81,6 +96,9 @@ static int mangle_name(char *name, char *target)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * aa_simple_write_to_buffer - common routine for getting policy from user
  * @op: operation doing the user buffer copy
@@ -237,9 +255,12 @@ const struct file_operations aa_fs_seq_file_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Base file system setup **/
 
 =======
+=======
+>>>>>>> v3.18
 static int aa_fs_seq_profile_open(struct inode *inode, struct file *file,
 				  int (*show)(struct seq_file *, void *))
 {
@@ -799,6 +820,9 @@ static const struct file_operations aa_fs_profiles_fops = {
 
 
 /** Base file system setup **/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct aa_fs_entry aa_fs_entry_file[] = {
 	AA_FS_FILE_STRING("mask", "create read write exec append mmap_exec " \
@@ -815,8 +839,11 @@ static struct aa_fs_entry aa_fs_entry_domain[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct aa_fs_entry aa_fs_entry_features[] = {
 =======
+=======
+>>>>>>> v3.18
 static struct aa_fs_entry aa_fs_entry_policy[] = {
 	AA_FS_FILE_BOOLEAN("set_load",          1),
 	{}
@@ -824,12 +851,19 @@ static struct aa_fs_entry aa_fs_entry_policy[] = {
 
 static struct aa_fs_entry aa_fs_entry_features[] = {
 	AA_FS_DIR("policy",			aa_fs_entry_policy),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	AA_FS_DIR("domain",			aa_fs_entry_domain),
 	AA_FS_DIR("file",			aa_fs_entry_file),
 	AA_FS_FILE_U64("capability",		VFS_CAP_FLAGS_MASK),
 	AA_FS_DIR("rlimit",			aa_fs_entry_rlimit),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	AA_FS_DIR("caps",			aa_fs_entry_caps),
+>>>>>>> v3.18
 =======
 	AA_FS_DIR("caps",			aa_fs_entry_caps),
 >>>>>>> v3.18
@@ -841,6 +875,10 @@ static struct aa_fs_entry aa_fs_entry_apparmor[] = {
 	AA_FS_FILE_FOPS(".replace", 0640, &aa_fs_profile_replace),
 	AA_FS_FILE_FOPS(".remove", 0640, &aa_fs_profile_remove),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	AA_FS_FILE_FOPS("profiles", 0640, &aa_fs_profiles_fops),
+>>>>>>> v3.18
 =======
 	AA_FS_FILE_FOPS("profiles", 0640, &aa_fs_profiles_fops),
 >>>>>>> v3.18
@@ -875,6 +913,10 @@ static int __init aafs_create_file(struct aa_fs_entry *fs_file,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void __init aafs_remove_dir(struct aa_fs_entry *fs_dir);
+>>>>>>> v3.18
 =======
 static void __init aafs_remove_dir(struct aa_fs_entry *fs_dir);
 >>>>>>> v3.18
@@ -889,6 +931,7 @@ static int __init aafs_create_dir(struct aa_fs_entry *fs_dir,
 				  struct dentry *parent)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int error;
 	struct aa_fs_entry *fs_file;
 
@@ -901,6 +944,8 @@ static int __init aafs_create_dir(struct aa_fs_entry *fs_dir,
 
 	for (fs_file = fs_dir->v.files; fs_file->name; ++fs_file) {
 =======
+=======
+>>>>>>> v3.18
 	struct aa_fs_entry *fs_file;
 	struct dentry *dir;
 	int error;
@@ -911,6 +956,9 @@ static int __init aafs_create_dir(struct aa_fs_entry *fs_dir,
 	fs_dir->dentry = dir;
 
 	for (fs_file = fs_dir->v.files; fs_file && fs_file->name; ++fs_file) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (fs_file->v_type == AA_FS_TYPE_DIR)
 			error = aafs_create_dir(fs_file, fs_dir->dentry);
@@ -924,6 +972,11 @@ static int __init aafs_create_dir(struct aa_fs_entry *fs_dir,
 
 failed:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	aafs_remove_dir(fs_dir);
+
+>>>>>>> v3.18
 =======
 	aafs_remove_dir(fs_dir);
 
@@ -953,7 +1006,11 @@ static void __init aafs_remove_dir(struct aa_fs_entry *fs_dir)
 	struct aa_fs_entry *fs_file;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (fs_file = fs_dir->v.files; fs_file->name; ++fs_file) {
+=======
+	for (fs_file = fs_dir->v.files; fs_file && fs_file->name; ++fs_file) {
+>>>>>>> v3.18
 =======
 	for (fs_file = fs_dir->v.files; fs_file && fs_file->name; ++fs_file) {
 >>>>>>> v3.18
@@ -1001,12 +1058,18 @@ static int __init aa_create_aafs(void)
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	error = __aa_fs_namespace_mkdir(root_ns, aa_fs_entry.dentry,
 					"policy");
 	if (error)
 		goto error;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* TODO: add support for apparmorfs_null and apparmorfs_mnt */
 

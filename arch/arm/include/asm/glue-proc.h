@@ -222,7 +222,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_V7
+=======
+#ifdef CONFIG_CPU_V7M
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_CPU_V7M
 >>>>>>> v3.18
@@ -231,7 +235,11 @@
 #  define MULTI_CPU
 # else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #  define CPU_NAME cpu_v7
+=======
+#  define CPU_NAME cpu_v7m
+>>>>>>> v3.18
 =======
 #  define CPU_NAME cpu_v7m
 >>>>>>> v3.18
@@ -248,7 +256,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_V7
 /*
  * Cortex-A9 needs a different suspend/resume function, so we need
@@ -258,6 +269,9 @@
 #  define MULTI_CPU
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef MULTI_CPU
 #define cpu_proc_init			__glue(CPU_NAME,_proc_init)

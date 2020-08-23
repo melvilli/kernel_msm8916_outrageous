@@ -31,7 +31,11 @@ struct plock_op {
 struct plock_xop {
 	struct plock_op xop;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *callback;
+=======
+	int (*callback)(struct file_lock *fl, int result);
+>>>>>>> v3.18
 =======
 	int (*callback)(struct file_lock *fl, int result);
 >>>>>>> v3.18
@@ -195,7 +199,11 @@ static int dlm_plock_callback(struct plock_op *op)
 	struct file_lock *fl;
 	struct file_lock *flc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*notify)(void *, void *, int) = NULL;
+=======
+	int (*notify)(struct file_lock *fl, int result) = NULL;
+>>>>>>> v3.18
 =======
 	int (*notify)(struct file_lock *fl, int result) = NULL;
 >>>>>>> v3.18
@@ -218,7 +226,11 @@ static int dlm_plock_callback(struct plock_op *op)
 
 	if (op->info.rv) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		notify(fl, NULL, op->info.rv);
+=======
+		notify(fl, op->info.rv);
+>>>>>>> v3.18
 =======
 		notify(fl, op->info.rv);
 >>>>>>> v3.18
@@ -241,7 +253,11 @@ static int dlm_plock_callback(struct plock_op *op)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rv = notify(fl, NULL, 0);
+=======
+	rv = notify(fl, 0);
+>>>>>>> v3.18
 =======
 	rv = notify(fl, 0);
 >>>>>>> v3.18

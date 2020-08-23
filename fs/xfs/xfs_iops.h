@@ -28,7 +28,10 @@ extern ssize_t xfs_vn_listxattr(struct dentry *, char *data, size_t size);
 extern void xfs_setup_inode(struct xfs_inode *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Internal setattr interfaces.
  */
@@ -38,5 +41,8 @@ extern int xfs_setattr_nonsize(struct xfs_inode *ip, struct iattr *vap,
 			       int flags);
 extern int xfs_setattr_size(struct xfs_inode *ip, struct iattr *vap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __XFS_IOPS_H__ */

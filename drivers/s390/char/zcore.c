@@ -18,6 +18,11 @@
 #include <linux/debugfs.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/memblock.h>
 
@@ -32,6 +37,10 @@
 #include <asm/irqflags.h>
 #include <asm/checksum.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/switch_to.h>
+>>>>>>> v3.18
 =======
 #include <asm/switch_to.h>
 >>>>>>> v3.18
@@ -40,8 +49,13 @@
 #define TRACE(x...) debug_sprintf_event(zcore_dbf, 1, x)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TO_USER		0
 #define TO_KERNEL	1
+=======
+#define TO_USER		1
+#define TO_KERNEL	0
+>>>>>>> v3.18
 =======
 #define TO_USER		1
 #define TO_KERNEL	0
@@ -88,7 +102,11 @@ static struct ipl_parameter_block *ipl_block;
  * @mode:  Either TO_KERNEL or TO_USER
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int memcpy_hsa(void *dest, unsigned long src, size_t count, int mode)
+=======
+int memcpy_hsa(void *dest, unsigned long src, size_t count, int mode)
+>>>>>>> v3.18
 =======
 int memcpy_hsa(void *dest, unsigned long src, size_t count, int mode)
 >>>>>>> v3.18
@@ -166,6 +184,7 @@ static int memcpy_hsa_kernel(void *dest, unsigned long src, size_t count)
 static int __init init_cpu_info(enum arch_id arch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct save_area *sa;
 
 	/* get info for boot cpu from lowcore, stored in the HSA */
@@ -180,6 +199,8 @@ static int __init init_cpu_info(enum arch_id arch)
 	}
 	zfcpdump_save_areas[0] = sa;
 =======
+=======
+>>>>>>> v3.18
 	struct save_area_ext *sa_ext;
 
 	/* get info for boot cpu from lowcore, stored in the HSA */
@@ -195,6 +216,9 @@ static int __init init_cpu_info(enum arch_id arch)
 	}
 	if (MACHINE_HAS_VX)
 		save_vx_regs_safe(sa_ext->vx_regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -283,7 +307,11 @@ static int zcore_add_lc(char __user *buf, unsigned long start, size_t count)
 {
 	unsigned long end;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i = 0;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -293,7 +321,11 @@ static int zcore_add_lc(char __user *buf, unsigned long start, size_t count)
 
 	end = start + count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (zfcpdump_save_areas[i]) {
+=======
+	for (i = 0; i < dump_save_areas.count; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < dump_save_areas.count; i++) {
 >>>>>>> v3.18
@@ -302,8 +334,14 @@ static int zcore_add_lc(char __user *buf, unsigned long start, size_t count)
 		unsigned long prefix;
 		unsigned long sa_off, len, buf_off;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		prefix = zfcpdump_save_areas[i]->pref_reg;
+=======
+		struct save_area *save_area = &dump_save_areas.areas[i]->sa;
+
+		prefix = save_area->pref_reg;
+>>>>>>> v3.18
 =======
 		struct save_area *save_area = &dump_save_areas.areas[i]->sa;
 
@@ -314,7 +352,11 @@ static int zcore_add_lc(char __user *buf, unsigned long start, size_t count)
 
 		if ((end < sa_start) || (start > sa_end))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto next;
+=======
+			continue;
+>>>>>>> v3.18
 =======
 			continue;
 >>>>>>> v3.18
@@ -327,10 +369,15 @@ static int zcore_add_lc(char __user *buf, unsigned long start, size_t count)
 
 		TRACE("copy_lc for: %lx\n", start);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (copy_lc(buf + buf_off, zfcpdump_save_areas[i], sa_off, len))
 			return -EFAULT;
 next:
 		i++;
+=======
+		if (copy_lc(buf + buf_off, save_area, sa_off, len))
+			return -EFAULT;
+>>>>>>> v3.18
 =======
 		if (copy_lc(buf + buf_off, save_area, sa_off, len))
 			return -EFAULT;
@@ -390,9 +437,15 @@ static ssize_t zcore_read(struct file *file, char __user *buf, size_t count,
 
 	/* Copy from HSA data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*ppos < (ZFCPDUMP_HSA_SIZE + HEADER_SIZE)) {
 		size = min((count - hdr_count), (size_t) (ZFCPDUMP_HSA_SIZE
 			   - mem_start));
+=======
+	if (*ppos < sclp_get_hsa_size() + HEADER_SIZE) {
+		size = min((count - hdr_count),
+			   (size_t) (sclp_get_hsa_size() - mem_start));
+>>>>>>> v3.18
 =======
 	if (*ppos < sclp_get_hsa_size() + HEADER_SIZE) {
 		size = min((count - hdr_count),
@@ -479,7 +532,11 @@ static ssize_t zcore_memmap_read(struct file *filp, char __user *buf,
 {
 	return simple_read_from_buffer(buf, count, ppos, filp->private_data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       MEMORY_CHUNKS * CHUNK_INFO_SIZE);
+=======
+				       memblock.memory.cnt * CHUNK_INFO_SIZE);
+>>>>>>> v3.18
 =======
 				       memblock.memory.cnt * CHUNK_INFO_SIZE);
 >>>>>>> v3.18
@@ -487,6 +544,7 @@ static ssize_t zcore_memmap_read(struct file *filp, char __user *buf,
 
 static int zcore_memmap_open(struct inode *inode, struct file *filp)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 	char *buf;
@@ -511,6 +569,8 @@ static int zcore_memmap_open(struct inode *inode, struct file *filp)
 	}
 	kfree(chunk_array);
 =======
+=======
+>>>>>>> v3.18
 	struct memblock_region *reg;
 	char *buf;
 	int i = 0;
@@ -524,6 +584,9 @@ static int zcore_memmap_open(struct inode *inode, struct file *filp)
 			(unsigned long long) reg->base,
 			(unsigned long long) reg->size);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	filp->private_data = buf;
 	return nonseekable_open(inode, filp);
@@ -578,7 +641,11 @@ static ssize_t zcore_hsa_read(struct file *filp, char __user *buf,
 
 	if (hsa_available)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snprintf(str, sizeof(str), "%lx\n", ZFCPDUMP_HSA_SIZE);
+=======
+		snprintf(str, sizeof(str), "%lx\n", sclp_get_hsa_size());
+>>>>>>> v3.18
 =======
 		snprintf(str, sizeof(str), "%lx\n", sclp_get_hsa_size());
 >>>>>>> v3.18
@@ -676,6 +743,7 @@ static int __init sys_info_init(enum arch_id arch, unsigned long mem_end)
 static int __init check_sdias(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc, act_hsa_size;
 
 	rc = sclp_sdias_blk_count();
@@ -692,12 +760,18 @@ static int __init check_sdias(void)
 		TRACE("Could not determine HSA size\n");
 		return -ENODEV;
 >>>>>>> v3.18
+=======
+	if (!sclp_get_hsa_size()) {
+		TRACE("Could not determine HSA size\n");
+		return -ENODEV;
+>>>>>>> v3.18
 	}
 	return 0;
 }
 
 static int __init get_mem_info(unsigned long *mem, unsigned long *end)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 	struct mem_chunk *chunk_array;
@@ -715,12 +789,17 @@ static int __init get_mem_info(unsigned long *mem, unsigned long *end)
 	}
 	kfree(chunk_array);
 =======
+=======
+>>>>>>> v3.18
 	struct memblock_region *reg;
 
 	for_each_memblock(memory, reg) {
 		*mem += reg->size;
 		*end = max_t(unsigned long, *end, reg->base + reg->size);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -742,8 +821,13 @@ static void __init zcore_header_init(int arch, struct zcore_header *hdr,
 	hdr->tod = get_tod_clock();
 	get_cpu_id(&hdr->cpu_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; zfcpdump_save_areas[i]; i++) {
 		prefix = zfcpdump_save_areas[i]->pref_reg;
+=======
+	for (i = 0; i < dump_save_areas.count; i++) {
+		prefix = dump_save_areas.areas[i]->sa.pref_reg;
+>>>>>>> v3.18
 =======
 	for (i = 0; i < dump_save_areas.count; i++) {
 		prefix = dump_save_areas.areas[i]->sa.pref_reg;
@@ -774,7 +858,11 @@ static int __init zcore_reipl_init(void)
 	if (!ipl_block)
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ipib_info.ipib < ZFCPDUMP_HSA_SIZE)
+=======
+	if (ipib_info.ipib < sclp_get_hsa_size())
+>>>>>>> v3.18
 =======
 	if (ipib_info.ipib < sclp_get_hsa_size())
 >>>>>>> v3.18

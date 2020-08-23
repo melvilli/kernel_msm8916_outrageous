@@ -327,8 +327,13 @@ err_ctlreg:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static s8 r123_extract_antgain(u8 sprom_revision, const u16 *in,
 			       u16 mask, u16 shift)
+=======
+static s8 sprom_extract_antgain(u8 sprom_revision, const u16 *in, u16 offset,
+				u16 mask, u16 shift)
+>>>>>>> v3.18
 =======
 static s8 sprom_extract_antgain(u8 sprom_revision, const u16 *in, u16 offset,
 				u16 mask, u16 shift)
@@ -338,7 +343,11 @@ static s8 sprom_extract_antgain(u8 sprom_revision, const u16 *in, u16 offset,
 	u8 gain;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v = in[SPOFF(SSB_SPROM1_AGAIN)];
+=======
+	v = in[SPOFF(offset)];
+>>>>>>> v3.18
 =======
 	v = in[SPOFF(offset)];
 >>>>>>> v3.18
@@ -426,6 +435,7 @@ static void sprom_extract_r123(struct ssb_sprom *out, const u16 *in)
 
 	/* Extract the antenna gain values. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out->antenna_gain.a0 = r123_extract_antgain(out->revision, in,
 						    SSB_SPROM1_AGAIN_BG,
 						    SSB_SPROM1_AGAIN_BG_SHIFT);
@@ -433,6 +443,8 @@ static void sprom_extract_r123(struct ssb_sprom *out, const u16 *in)
 						    SSB_SPROM1_AGAIN_A,
 						    SSB_SPROM1_AGAIN_A_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 	out->antenna_gain.a0 = sprom_extract_antgain(out->revision, in,
 						     SSB_SPROM1_AGAIN,
 						     SSB_SPROM1_AGAIN_BG,
@@ -441,6 +453,9 @@ static void sprom_extract_r123(struct ssb_sprom *out, const u16 *in)
 						     SSB_SPROM1_AGAIN,
 						     SSB_SPROM1_AGAIN_A,
 						     SSB_SPROM1_AGAIN_A_SHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (out->revision >= 2)
 		sprom_extract_r23(out, in);
@@ -489,8 +504,11 @@ static void sprom_extract_r458(struct ssb_sprom *out, const u16 *in)
 static void sprom_extract_r45(struct ssb_sprom *out, const u16 *in)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 il0mac_offset;
 =======
+=======
+>>>>>>> v3.18
 	static const u16 pwr_info_offset[] = {
 		SSB_SPROM4_PWR_INFO_CORE0, SSB_SPROM4_PWR_INFO_CORE1,
 		SSB_SPROM4_PWR_INFO_CORE2, SSB_SPROM4_PWR_INFO_CORE3
@@ -500,6 +518,9 @@ static void sprom_extract_r45(struct ssb_sprom *out, const u16 *in)
 
 	BUILD_BUG_ON(ARRAY_SIZE(pwr_info_offset) !=
 		     ARRAY_SIZE(out->core_pwr_info));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (out->revision == 4)
@@ -557,6 +578,7 @@ static void sprom_extract_r45(struct ssb_sprom *out, const u16 *in)
 
 	/* Extract the antenna gain values. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SPEX(antenna_gain.a0, SSB_SPROM4_AGAIN01,
 	     SSB_SPROM4_AGAIN0, SSB_SPROM4_AGAIN0_SHIFT);
 	SPEX(antenna_gain.a1, SSB_SPROM4_AGAIN01,
@@ -566,6 +588,8 @@ static void sprom_extract_r45(struct ssb_sprom *out, const u16 *in)
 	SPEX(antenna_gain.a3, SSB_SPROM4_AGAIN23,
 	     SSB_SPROM4_AGAIN3, SSB_SPROM4_AGAIN3_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 	out->antenna_gain.a0 = sprom_extract_antgain(out->revision, in,
 						     SSB_SPROM4_AGAIN01,
 						     SSB_SPROM4_AGAIN0,
@@ -619,6 +643,9 @@ static void sprom_extract_r45(struct ssb_sprom *out, const u16 *in)
 		SPEX(core_pwr_info[i].pa_5gh[2], o + SSB_SPROM4_5GH_PA_2, ~0, 0);
 		SPEX(core_pwr_info[i].pa_5gh[3], o + SSB_SPROM4_5GH_PA_3, ~0, 0);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sprom_extract_r458(out, in);
@@ -710,6 +737,7 @@ static void sprom_extract_r8(struct ssb_sprom *out, const u16 *in)
 
 	/* Extract the antenna gain values. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SPEX(antenna_gain.a0, SSB_SPROM8_AGAIN01,
 	     SSB_SPROM8_AGAIN0, SSB_SPROM8_AGAIN0_SHIFT);
 	SPEX(antenna_gain.a1, SSB_SPROM8_AGAIN01,
@@ -719,6 +747,8 @@ static void sprom_extract_r8(struct ssb_sprom *out, const u16 *in)
 	SPEX(antenna_gain.a3, SSB_SPROM8_AGAIN23,
 	     SSB_SPROM8_AGAIN3, SSB_SPROM8_AGAIN3_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 	out->antenna_gain.a0 = sprom_extract_antgain(out->revision, in,
 						     SSB_SPROM8_AGAIN01,
 						     SSB_SPROM8_AGAIN0,
@@ -735,6 +765,9 @@ static void sprom_extract_r8(struct ssb_sprom *out, const u16 *in)
 						     SSB_SPROM8_AGAIN23,
 						     SSB_SPROM8_AGAIN3,
 						     SSB_SPROM8_AGAIN3_SHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Extract cores power info info */
@@ -954,7 +987,10 @@ static int ssb_pci_sprom_get(struct ssb_bus *bus,
 				ssb_warn("WARNING: Using fallback SPROM failed (err %d)\n",
 					 err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto out_free;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			} else {

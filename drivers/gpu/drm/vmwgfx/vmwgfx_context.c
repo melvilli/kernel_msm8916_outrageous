@@ -33,9 +33,12 @@ struct vmw_user_context {
 	struct ttm_base_object base;
 	struct vmw_resource res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct vmw_ctx_binding_state cbs;
 	struct vmw_cmdbuf_res_manager *man;
 };
@@ -44,13 +47,19 @@ struct vmw_user_context {
 
 typedef int (*vmw_scrub_func)(struct vmw_ctx_bindinfo *, bool);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void vmw_user_context_free(struct vmw_resource *res);
 static struct vmw_resource *
 vmw_user_context_base_to_res(struct ttm_base_object *base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vmw_gb_context_create(struct vmw_resource *res);
 static int vmw_gb_context_bind(struct vmw_resource *res,
 			       struct ttm_validate_buffer *val_buf);
@@ -64,6 +73,9 @@ static int vmw_context_scrub_render_target(struct vmw_ctx_bindinfo *bi,
 static int vmw_context_scrub_texture(struct vmw_ctx_bindinfo *bi, bool rebind);
 static void vmw_context_binding_state_scrub(struct vmw_ctx_binding_state *cbs);
 static void vmw_context_binding_state_kill(struct vmw_ctx_binding_state *cbs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static uint64_t vmw_user_context_size;
 
@@ -90,7 +102,10 @@ static const struct vmw_res_func vmw_legacy_context_func = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct vmw_res_func vmw_gb_context_func = {
 	.res_type = vmw_res_context,
 	.needs_backup = true,
@@ -108,6 +123,9 @@ static const vmw_scrub_func vmw_scrub_funcs[vmw_ctx_binding_max] = {
 	[vmw_ctx_binding_rt] = vmw_context_scrub_render_target,
 	[vmw_ctx_binding_tex] = vmw_context_scrub_texture };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * Context management:
@@ -116,7 +134,12 @@ static const vmw_scrub_func vmw_scrub_funcs[vmw_ctx_binding_max] = {
 static void vmw_hw_context_destroy(struct vmw_resource *res)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	struct vmw_user_context *uctx =
+		container_of(res, struct vmw_user_context, res);
+>>>>>>> v3.18
 =======
 	struct vmw_user_context *uctx =
 		container_of(res, struct vmw_user_context, res);
@@ -129,7 +152,10 @@ static void vmw_hw_context_destroy(struct vmw_resource *res)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (res->func->destroy == vmw_gb_context_destroy) {
 		mutex_lock(&dev_priv->cmdbuf_mutex);
 		vmw_cmdbuf_res_man_destroy(uctx->man);
@@ -144,6 +170,9 @@ static void vmw_hw_context_destroy(struct vmw_resource *res)
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vmw_execbuf_release_pinned_bo(dev_priv);
 	cmd = vmw_fifo_reserve(dev_priv, sizeof(*cmd));
@@ -162,7 +191,10 @@ static void vmw_hw_context_destroy(struct vmw_resource *res)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vmw_gb_context_init(struct vmw_private *dev_priv,
 			       struct vmw_resource *res,
 			       void (*res_free) (struct vmw_resource *res))
@@ -200,6 +232,9 @@ out_err:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int vmw_context_init(struct vmw_private *dev_priv,
 			    struct vmw_resource *res,
@@ -213,6 +248,12 @@ static int vmw_context_init(struct vmw_private *dev_priv,
 	} *cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (dev_priv->has_mob)
+		return vmw_gb_context_init(dev_priv, res, res_free);
+
+>>>>>>> v3.18
 =======
 	if (dev_priv->has_mob)
 		return vmw_gb_context_init(dev_priv, res, res_free);
@@ -270,7 +311,10 @@ struct vmw_resource *vmw_context_alloc(struct vmw_private *dev_priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int vmw_gb_context_create(struct vmw_resource *res)
 {
@@ -445,6 +489,9 @@ static int vmw_gb_context_destroy(struct vmw_resource *res)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * User-space context management:
@@ -502,7 +549,10 @@ int vmw_context_define_ioctl(struct drm_device *dev, void *data,
 	struct drm_vmw_context_arg *arg = (struct drm_vmw_context_arg *)data;
 	struct ttm_object_file *tfile = vmw_fpriv(file_priv)->tfile;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_master *vmaster = vmw_master(file_priv->master);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -515,14 +565,20 @@ int vmw_context_define_ioctl(struct drm_device *dev, void *data,
 
 	if (unlikely(vmw_user_context_size == 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vmw_user_context_size = ttm_round_pot(sizeof(*ctx)) + 128;
 
 	ret = ttm_read_lock(&vmaster->lock, true);
 =======
+=======
+>>>>>>> v3.18
 		vmw_user_context_size = ttm_round_pot(sizeof(*ctx)) + 128 +
 		  ((dev_priv->has_mob) ? vmw_cmdbuf_res_man_size() : 0);
 
 	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(ret != 0))
 		return ret;
@@ -571,11 +627,14 @@ out_err:
 	vmw_resource_unreference(&res);
 out_unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_read_unlock(&vmaster->lock);
 	return ret;
 
 }
 =======
+=======
+>>>>>>> v3.18
 	ttm_read_unlock(&dev_priv->reservation_sem);
 	return ret;
 
@@ -962,4 +1021,7 @@ struct vmw_cmdbuf_res_manager *vmw_context_res_man(struct vmw_resource *ctx)
 {
 	return container_of(ctx, struct vmw_user_context, res)->man;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

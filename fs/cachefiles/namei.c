@@ -36,6 +36,7 @@ void __cachefiles_printk_object(struct cachefiles_object *object,
 	unsigned keylen, loop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "%sobject: OBJ%x\n",
 	       prefix, object->fscache.debug_id);
 	printk(KERN_ERR "%sobjstate=%s fl=%lx wbusy=%x ev=%lx[%lx]\n",
@@ -47,6 +48,8 @@ void __cachefiles_printk_object(struct cachefiles_object *object,
 	       object->fscache.n_exclusive);
 	printk(KERN_ERR "%sparent=%p\n",
 =======
+=======
+>>>>>>> v3.18
 	pr_err("%sobject: OBJ%x\n", prefix, object->fscache.debug_id);
 	pr_err("%sobjstate=%s fl=%lx wbusy=%x ev=%lx[%lx]\n",
 	       prefix, object->fscache.state->name,
@@ -56,6 +59,9 @@ void __cachefiles_printk_object(struct cachefiles_object *object,
 	       prefix, object->fscache.n_ops, object->fscache.n_in_progress,
 	       object->fscache.n_exclusive);
 	pr_err("%sparent=%p\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	       prefix, object->fscache.parent);
 
@@ -63,7 +69,11 @@ void __cachefiles_printk_object(struct cachefiles_object *object,
 	cookie = object->fscache.cookie;
 	if (cookie) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%scookie=%p [pr=%p nd=%p fl=%lx]\n",
+=======
+		pr_err("%scookie=%p [pr=%p nd=%p fl=%lx]\n",
+>>>>>>> v3.18
 =======
 		pr_err("%scookie=%p [pr=%p nd=%p fl=%lx]\n",
 >>>>>>> v3.18
@@ -73,7 +83,11 @@ void __cachefiles_printk_object(struct cachefiles_object *object,
 		       object->fscache.cookie->netfs_data,
 		       object->fscache.cookie->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (keybuf)
+=======
+		if (keybuf && cookie->def)
+>>>>>>> v3.18
 =======
 		if (keybuf && cookie->def)
 >>>>>>> v3.18
@@ -83,7 +97,11 @@ void __cachefiles_printk_object(struct cachefiles_object *object,
 			keylen = 0;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%scookie=NULL\n", prefix);
+=======
+		pr_err("%scookie=NULL\n", prefix);
+>>>>>>> v3.18
 =======
 		pr_err("%scookie=NULL\n", prefix);
 >>>>>>> v3.18
@@ -93,15 +111,21 @@ void __cachefiles_printk_object(struct cachefiles_object *object,
 
 	if (keylen) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%skey=[%u] '", prefix, keylen);
 		for (loop = 0; loop < keylen; loop++)
 			printk("%02x", keybuf[loop]);
 		printk("'\n");
 =======
+=======
+>>>>>>> v3.18
 		pr_err("%skey=[%u] '", prefix, keylen);
 		for (loop = 0; loop < keylen; loop++)
 			pr_cont("%02x", keybuf[loop]);
 		pr_cont("'\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -159,6 +183,7 @@ found_dentry:
 	kdebug("preemptive burial: OBJ%x [%s] %p",
 	       object->fscache.debug_id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       fscache_object_states[object->fscache.state],
 	       dentry);
 
@@ -171,6 +196,8 @@ found_dentry:
 		printk(KERN_ERR "CacheFiles: Error:"
 		       " Object already preemptively buried\n");
 =======
+=======
+>>>>>>> v3.18
 	       object->fscache.state->name,
 	       dentry);
 
@@ -180,6 +207,9 @@ found_dentry:
 		cachefiles_printk_object(object, NULL);
 	} else if (test_and_set_bit(CACHEFILES_OBJECT_BURIED, &object->flags)) {
 		pr_err("Error: Object already preemptively buried\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -204,7 +234,11 @@ try_again:
 
 	if (test_and_set_bit(CACHEFILES_OBJECT_ACTIVE, &object->flags)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "CacheFiles: Error: Object already active\n");
+=======
+		pr_err("Error: Object already active\n");
+>>>>>>> v3.18
 =======
 		pr_err("Error: Object already active\n");
 >>>>>>> v3.18
@@ -240,10 +274,16 @@ try_again:
 	 * need to wait for it to be destroyed */
 wait_for_old_object:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xobject->fscache.state < FSCACHE_OBJECT_DYING) {
 		printk(KERN_ERR "\n");
 		printk(KERN_ERR "CacheFiles: Error:"
 		       " Unexpected object collision\n");
+=======
+	if (fscache_object_is_live(&xobject->fscache)) {
+		pr_err("\n");
+		pr_err("Error: Unexpected object collision\n");
+>>>>>>> v3.18
 =======
 	if (fscache_object_is_live(&xobject->fscache)) {
 		pr_err("\n");
@@ -295,9 +335,14 @@ wait_for_old_object:
 
 		if (timeout <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "\n");
 			printk(KERN_ERR "CacheFiles: Error: Overlong"
 			       " wait for old active object to go away\n");
+=======
+			pr_err("\n");
+			pr_err("Error: Overlong wait for old active object to go away\n");
+>>>>>>> v3.18
 =======
 			pr_err("\n");
 			pr_err("Error: Overlong wait for old active object to go away\n");
@@ -353,7 +398,11 @@ static int cachefiles_bury_object(struct cachefiles_cache *cache,
 			cachefiles_io_error(cache, "Unlink security error");
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = vfs_unlink(dir->d_inode, rep);
+=======
+			ret = vfs_unlink(dir->d_inode, rep, NULL);
+>>>>>>> v3.18
 =======
 			ret = vfs_unlink(dir->d_inode, rep, NULL);
 >>>>>>> v3.18
@@ -454,7 +503,11 @@ try_again:
 	path_to_graveyard.mnt = cache->mnt;
 	path_to_graveyard.dentry = cache->graveyard;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = security_path_rename(&path, rep, &path_to_graveyard, grave);
+=======
+	ret = security_path_rename(&path, rep, &path_to_graveyard, grave, 0);
+>>>>>>> v3.18
 =======
 	ret = security_path_rename(&path, rep, &path_to_graveyard, grave, 0);
 >>>>>>> v3.18
@@ -463,7 +516,11 @@ try_again:
 	} else {
 		ret = vfs_rename(dir->d_inode, rep,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 cache->graveyard->d_inode, grave);
+=======
+				 cache->graveyard->d_inode, grave, NULL, 0);
+>>>>>>> v3.18
 =======
 				 cache->graveyard->d_inode, grave, NULL, 0);
 >>>>>>> v3.18
@@ -619,7 +676,11 @@ lookup_again:
 
 		} else if (!S_ISDIR(next->d_inode->i_mode)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kerror("inode %lu is not a directory",
+=======
+			pr_err("inode %lu is not a directory\n",
+>>>>>>> v3.18
 =======
 			pr_err("inode %lu is not a directory\n",
 >>>>>>> v3.18
@@ -654,7 +715,11 @@ lookup_again:
 			   !S_ISREG(next->d_inode->i_mode)
 			   ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kerror("inode %lu is not a file or directory",
+=======
+			pr_err("inode %lu is not a file or directory\n",
+>>>>>>> v3.18
 =======
 			pr_err("inode %lu is not a file or directory\n",
 >>>>>>> v3.18
@@ -852,7 +917,11 @@ struct dentry *cachefiles_get_directory(struct cachefiles_cache *cache,
 
 	if (!S_ISDIR(subdir->d_inode->i_mode)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kerror("%s is not a directory", dirname);
+=======
+		pr_err("%s is not a directory\n", dirname);
+>>>>>>> v3.18
 =======
 		pr_err("%s is not a directory\n", dirname);
 >>>>>>> v3.18
@@ -862,8 +931,12 @@ struct dentry *cachefiles_get_directory(struct cachefiles_cache *cache,
 
 	ret = -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!subdir->d_inode->i_op ||
 	    !subdir->d_inode->i_op->setxattr ||
+=======
+	if (!subdir->d_inode->i_op->setxattr ||
+>>>>>>> v3.18
 =======
 	if (!subdir->d_inode->i_op->setxattr ||
 >>>>>>> v3.18
@@ -872,7 +945,12 @@ struct dentry *cachefiles_get_directory(struct cachefiles_cache *cache,
 	    !subdir->d_inode->i_op->mkdir ||
 	    !subdir->d_inode->i_op->create ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !subdir->d_inode->i_op->rename ||
+=======
+	    (!subdir->d_inode->i_op->rename &&
+	     !subdir->d_inode->i_op->rename2) ||
+>>>>>>> v3.18
 =======
 	    (!subdir->d_inode->i_op->rename &&
 	     !subdir->d_inode->i_op->rename2) ||
@@ -893,7 +971,11 @@ mkdir_error:
 	mutex_unlock(&dir->d_inode->i_mutex);
 	dput(subdir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kerror("mkdir %s failed with error %d", dirname, ret);
+=======
+	pr_err("mkdir %s failed with error %d\n", dirname, ret);
+>>>>>>> v3.18
 =======
 	pr_err("mkdir %s failed with error %d\n", dirname, ret);
 >>>>>>> v3.18
@@ -903,7 +985,11 @@ lookup_error:
 	mutex_unlock(&dir->d_inode->i_mutex);
 	ret = PTR_ERR(subdir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kerror("Lookup %s failed with error %d", dirname, ret);
+=======
+	pr_err("Lookup %s failed with error %d\n", dirname, ret);
+>>>>>>> v3.18
 =======
 	pr_err("Lookup %s failed with error %d\n", dirname, ret);
 >>>>>>> v3.18
@@ -936,7 +1022,11 @@ static struct dentry *cachefiles_check_active(struct cachefiles_cache *cache,
 
 	/* look up the victim */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock_nested(&dir->d_inode->i_mutex, 1);
+=======
+	mutex_lock_nested(&dir->d_inode->i_mutex, I_MUTEX_PARENT);
+>>>>>>> v3.18
 =======
 	mutex_lock_nested(&dir->d_inode->i_mutex, I_MUTEX_PARENT);
 >>>>>>> v3.18
@@ -1001,7 +1091,11 @@ lookup_error:
 		cachefiles_io_error(cache, "Lookup failed");
 	} else if (ret != -ENOMEM) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kerror("Internal error: %d", ret);
+=======
+		pr_err("Internal error: %d\n", ret);
+>>>>>>> v3.18
 =======
 		pr_err("Internal error: %d\n", ret);
 >>>>>>> v3.18
@@ -1064,7 +1158,11 @@ error:
 
 	if (ret != -ENOMEM) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kerror("Internal error: %d", ret);
+=======
+		pr_err("Internal error: %d\n", ret);
+>>>>>>> v3.18
 =======
 		pr_err("Internal error: %d\n", ret);
 >>>>>>> v3.18

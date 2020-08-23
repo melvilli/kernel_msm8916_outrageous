@@ -84,6 +84,11 @@ struct iscsi_tcp_task {
 	struct kfifo		r2tqueue;
 	void			*dd_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t		pool2queue;
+	spinlock_t		queue2pool;
+>>>>>>> v3.18
 =======
 	spinlock_t		pool2queue;
 	spinlock_t		queue2pool;

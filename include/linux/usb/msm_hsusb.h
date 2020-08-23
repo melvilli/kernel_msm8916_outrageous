@@ -1,15 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* include/linux/usb/msm_hsusb.h
  *
  * Copyright (C) 2008 Google, Inc.
  * Author: Brian Swetland <swetland@google.com>
  * Copyright (c) 2009-2015, The Linux Foundation. All rights reserved.
 =======
+=======
+>>>>>>> v3.18
 /* linux/include/asm-arm/arch-msm/hsusb.h
  *
  * Copyright (C) 2008 Google, Inc.
  * Author: Brian Swetland <swetland@google.com>
  * Copyright (c) 2009-2011, Code Aurora Forum. All rights reserved.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This software is licensed under the terms of the GNU General Public
@@ -27,6 +33,7 @@
 #define __ASM_ARCH_MSM_HSUSB_H
 
 #include <linux/types.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/usb/ch9.h>
 #include <linux/usb/gadget.h>
@@ -83,6 +90,10 @@ enum usb_mode_type {
 #include <linux/usb/otg.h>
 #include <linux/clk.h>
 >>>>>>> v3.18
+=======
+#include <linux/usb/otg.h>
+#include <linux/clk.h>
+>>>>>>> v3.18
 
 /**
  * OTG control
@@ -106,9 +117,14 @@ enum otg_control_type {
  *
  * INVALID_PHY			Unsupported PHY
 <<<<<<< HEAD
+<<<<<<< HEAD
  * CI_PHY			Chipidea PHY
  * SNPS_PICO_PHY		Synopsis Pico PHY
  * SNPS_FEMTO_PHY		Synopsis Femto PHY
+=======
+ * CI_45NM_INTEGRATED_PHY	Chipidea 45nm integrated PHY
+ * SNPS_28NM_INTEGRATED_PHY	Synopsis 28nm integrated PHY
+>>>>>>> v3.18
 =======
  * CI_45NM_INTEGRATED_PHY	Chipidea 45nm integrated PHY
  * SNPS_28NM_INTEGRATED_PHY	Synopsis 28nm integrated PHY
@@ -117,6 +133,7 @@ enum otg_control_type {
  */
 enum msm_usb_phy_type {
 	INVALID_PHY = 0,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	CI_PHY,			/* not supported */
 	SNPS_PICO_PHY,
@@ -132,6 +149,8 @@ enum msm_usb_phy_type {
 #define IDEV_HVDCP_CHG_MAX	1800
 
 =======
+=======
+>>>>>>> v3.18
 	CI_45NM_INTEGRATED_PHY,
 	SNPS_28NM_INTEGRATED_PHY,
 };
@@ -139,6 +158,9 @@ enum msm_usb_phy_type {
 #define IDEV_CHG_MAX	1500
 #define IUNIT		100
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * Different states involved in USB charger detection.
@@ -173,6 +195,7 @@ enum usb_chg_state {
  * USB_CDP_CHARGER	Charging downstream port. Enumeration can happen and
  *                      IDEV_CHG_MAX can be drawn irrespective of USB state.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * USB_ACA_A_CHARGER	B-device is connected on accessory port with charger
  *                      connected on charging port. This configuration allows
  *                      charging in host mode.
@@ -188,6 +211,8 @@ enum usb_chg_state {
  *			voltages between 2.0-3.3v for identification.
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  *
  */
 enum usb_chg_type {
@@ -195,6 +220,7 @@ enum usb_chg_type {
 	USB_SDP_CHARGER,
 	USB_DCP_CHARGER,
 	USB_CDP_CHARGER,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	USB_ACA_A_CHARGER,
 	USB_ACA_B_CHARGER,
@@ -256,11 +282,14 @@ enum usb_id_state {
 	USB_ID_FLOAT,
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 };
 
 /**
  * struct msm_otg_platform_data - platform device data
  *              for msm_otg driver.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @phy_init_seq: PHY configuration sequence. val, reg pairs
  *              terminated by -1.
@@ -402,6 +431,8 @@ struct msm_otg_platform_data {
 #define USB_NUM_BUS_CLOCKS      3
 
 =======
+=======
+>>>>>>> v3.18
  * @phy_init_seq: PHY configuration sequence values. Value of -1 is reserved as
  *              "do not overwrite default vaule at this address".
  * @phy_init_sz: PHY configuration sequence size.
@@ -423,12 +454,16 @@ struct msm_otg_platform_data {
 	int (*phy_clk_reset)(struct clk *phy_clk);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct msm_otg: OTG driver data. Shared by HCD and DCD.
  * @otg: USB OTG Transceiver structure.
  * @pdata: otg device platform data.
  * @irq: IRQ number assigned for HSUSB controller.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @async_irq: IRQ number used by some controllers during low power state
  * @phy_irq: IRQ number assigned for PHY to notify events like id and line
@@ -458,6 +493,8 @@ struct msm_otg_platform_data {
  * @cur_power: The amount of mA available from downstream port.
  * @otg_wq: Strict order otg workqueue for OTG works (SM/ID/SUSPEND).
 =======
+=======
+>>>>>>> v3.18
  * @clk: clock struct of usb_hs_clk.
  * @pclk: clock struct of usb_hs_pclk.
  * @phy_reset_clk: clock struct of usb_phy_clk.
@@ -468,12 +505,16 @@ struct msm_otg_platform_data {
  * @in_lpm: indicates low power mode (LPM) state.
  * @async_int: Async interrupt arrived.
  * @cur_power: The amount of mA available from downstream port.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @chg_work: Charger detection work.
  * @chg_state: The state of charger detection process.
  * @chg_type: The type of charger attached.
  * @dcd_retires: The retry count used to track Data contact
  *               detection process.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @wlock: Wake lock struct to prevent system suspend when
  *               USB is active.
@@ -503,11 +544,14 @@ struct msm_otg_platform_data {
  * @id_state: Indicates USBID line status.
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  */
 struct msm_otg {
 	struct usb_phy phy;
 	struct msm_otg_platform_data *pdata;
 	int irq;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int async_irq;
 	int phy_irq;
@@ -868,6 +912,8 @@ extern atomic_t headset_status;
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	struct clk *clk;
 	struct clk *pclk;
 	struct clk *phy_reset_clk;
@@ -894,5 +940,8 @@ extern atomic_t headset_status;
 	int vdd_levels[3];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

@@ -414,7 +414,11 @@ static int vprbrd_gpio_probe(struct platform_device *pdev)
 	vb_gpio->gpioa.base = -1;
 	vb_gpio->gpioa.ngpio = 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vb_gpio->gpioa.can_sleep = 1;
+=======
+	vb_gpio->gpioa.can_sleep = true;
+>>>>>>> v3.18
 =======
 	vb_gpio->gpioa.can_sleep = true;
 >>>>>>> v3.18
@@ -435,7 +439,11 @@ static int vprbrd_gpio_probe(struct platform_device *pdev)
 	vb_gpio->gpiob.base = -1;
 	vb_gpio->gpiob.ngpio = 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vb_gpio->gpiob.can_sleep = 1;
+=======
+	vb_gpio->gpiob.can_sleep = true;
+>>>>>>> v3.18
 =======
 	vb_gpio->gpiob.can_sleep = true;
 >>>>>>> v3.18
@@ -455,8 +463,12 @@ static int vprbrd_gpio_probe(struct platform_device *pdev)
 
 err_gpiob:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpiochip_remove(&vb_gpio->gpioa))
 		dev_err(&pdev->dev, "%s gpiochip_remove failed\n", __func__);
+=======
+	gpiochip_remove(&vb_gpio->gpioa);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&vb_gpio->gpioa);
 >>>>>>> v3.18
@@ -469,6 +481,7 @@ static int vprbrd_gpio_remove(struct platform_device *pdev)
 {
 	struct vprbrd_gpio *vb_gpio = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	ret = gpiochip_remove(&vb_gpio->gpiob);
@@ -477,10 +490,15 @@ static int vprbrd_gpio_remove(struct platform_device *pdev)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 	gpiochip_remove(&vb_gpio->gpiob);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

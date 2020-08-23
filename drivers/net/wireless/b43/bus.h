@@ -6,7 +6,13 @@ enum b43_bus_type {
 	B43_BUS_BCMA,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	B43_BUS_SSB,
+=======
+#ifdef CONFIG_B43_SSB
+	B43_BUS_SSB,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_B43_SSB
 	B43_BUS_SSB,
@@ -38,6 +44,10 @@ struct b43_bus_dev {
 	void (*block_write)(struct b43_bus_dev *dev, const void *buffer,
 			    size_t count, u16 offset, u8 reg_width);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool flush_writes;
+>>>>>>> v3.18
 =======
 	bool flush_writes;
 >>>>>>> v3.18
@@ -63,6 +73,7 @@ struct b43_bus_dev {
 static inline bool b43_bus_host_is_pcmcia(struct b43_bus_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (dev->bus_type == B43_BUS_SSB &&
 		dev->sdev->bus->bustype == SSB_BUSTYPE_PCMCIA);
 }
@@ -71,6 +82,8 @@ static inline bool b43_bus_host_is_sdio(struct b43_bus_dev *dev)
 	return (dev->bus_type == B43_BUS_SSB &&
 		dev->sdev->bus->bustype == SSB_BUSTYPE_SDIO);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_B43_SSB
 	return (dev->bus_type == B43_BUS_SSB &&
 		dev->sdev->bus->bustype == SSB_BUSTYPE_PCMCIA);
@@ -100,6 +113,9 @@ static inline bool b43_bus_host_is_sdio(struct b43_bus_dev *dev)
 #else
 	return false;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

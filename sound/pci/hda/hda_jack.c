@@ -35,7 +35,11 @@ bool is_jack_detectable(struct hda_codec *codec, hda_nid_t nid)
 	return true;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(is_jack_detectable);
+=======
+EXPORT_SYMBOL_GPL(is_jack_detectable);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(is_jack_detectable);
 >>>>>>> v3.18
@@ -76,7 +80,11 @@ snd_hda_jack_tbl_get(struct hda_codec *codec, hda_nid_t nid)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_jack_tbl_get);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_jack_tbl_get);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_jack_tbl_get);
 >>>>>>> v3.18
@@ -98,7 +106,11 @@ snd_hda_jack_tbl_get_from_tag(struct hda_codec *codec, unsigned char tag)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_jack_tbl_get_from_tag);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_jack_tbl_get_from_tag);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_jack_tbl_get_from_tag);
 >>>>>>> v3.18
@@ -107,7 +119,11 @@ EXPORT_SYMBOL_GPL(snd_hda_jack_tbl_get_from_tag);
  * snd_hda_jack_tbl_new - create a jack-table entry for the given NID
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct hda_jack_tbl *
+=======
+static struct hda_jack_tbl *
+>>>>>>> v3.18
 =======
 static struct hda_jack_tbl *
 >>>>>>> v3.18
@@ -125,6 +141,7 @@ snd_hda_jack_tbl_new(struct hda_codec *codec, hda_nid_t nid)
 	return jack;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_jack_tbl_new);
 
 void snd_hda_jack_tbl_clear(struct hda_codec *codec)
@@ -141,6 +158,8 @@ void snd_hda_jack_tbl_clear(struct hda_codec *codec)
 	}
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 void snd_hda_jack_tbl_clear(struct hda_codec *codec)
 {
@@ -159,6 +178,9 @@ void snd_hda_jack_tbl_clear(struct hda_codec *codec)
 			kfree(cb);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	snd_array_free(&codec->jacktbl);
 }
@@ -210,7 +232,11 @@ void snd_hda_jack_set_dirty_all(struct hda_codec *codec)
 			jack->jack_dirty = 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_jack_set_dirty_all);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_jack_set_dirty_all);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_jack_set_dirty_all);
 >>>>>>> v3.18
@@ -232,6 +258,7 @@ u32 snd_hda_pin_sense(struct hda_codec *codec, hda_nid_t nid)
 	}
 	return read_pin_sense(codec, nid);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_pin_sense);
 
@@ -281,6 +308,8 @@ int snd_hda_jack_detect_enable(struct hda_codec *codec, hda_nid_t nid,
 }
 EXPORT_SYMBOL_HDA(snd_hda_jack_detect_enable);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(snd_hda_pin_sense);
 
 /**
@@ -350,6 +379,9 @@ int snd_hda_jack_detect_enable(struct hda_codec *codec, hda_nid_t nid)
 	return PTR_ERR_OR_ZERO(snd_hda_jack_detect_enable_callback(codec, nid, NULL));
 }
 EXPORT_SYMBOL_GPL(snd_hda_jack_detect_enable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -361,8 +393,13 @@ int snd_hda_jack_set_gating_jack(struct hda_codec *codec, hda_nid_t gated_nid,
 				 hda_nid_t gating_nid)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hda_jack_tbl *gated = snd_hda_jack_tbl_get(codec, gated_nid);
 	struct hda_jack_tbl *gating = snd_hda_jack_tbl_get(codec, gating_nid);
+=======
+	struct hda_jack_tbl *gated = snd_hda_jack_tbl_new(codec, gated_nid);
+	struct hda_jack_tbl *gating = snd_hda_jack_tbl_new(codec, gating_nid);
+>>>>>>> v3.18
 =======
 	struct hda_jack_tbl *gated = snd_hda_jack_tbl_new(codec, gated_nid);
 	struct hda_jack_tbl *gating = snd_hda_jack_tbl_new(codec, gating_nid);
@@ -377,7 +414,11 @@ int snd_hda_jack_set_gating_jack(struct hda_codec *codec, hda_nid_t gated_nid,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_jack_set_gating_jack);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_jack_set_gating_jack);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_jack_set_gating_jack);
 >>>>>>> v3.18
@@ -403,7 +444,11 @@ void snd_hda_jack_report_sync(struct hda_codec *codec)
 	for (i = 0; i < codec->jacktbl.used; i++, jack++)
 		if (jack->nid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!jack->kctl)
+=======
+			if (!jack->kctl || jack->block_report)
+>>>>>>> v3.18
 =======
 			if (!jack->kctl || jack->block_report)
 >>>>>>> v3.18
@@ -418,7 +463,11 @@ void snd_hda_jack_report_sync(struct hda_codec *codec)
 		}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_jack_report_sync);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_jack_report_sync);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_jack_report_sync);
 >>>>>>> v3.18
@@ -502,7 +551,11 @@ int snd_hda_jack_add_kctl(struct hda_codec *codec, hda_nid_t nid,
 	return __snd_hda_jack_add_kctl(codec, nid, name, idx, false);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_jack_add_kctl);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_jack_add_kctl);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_jack_add_kctl);
 >>>>>>> v3.18
@@ -533,7 +586,11 @@ static int add_jack_kctl(struct hda_codec *codec, hda_nid_t nid,
 {
 	unsigned int def_conf, conn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[44];
+=======
+	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
+>>>>>>> v3.18
 =======
 	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
 >>>>>>> v3.18
@@ -564,7 +621,11 @@ static int add_jack_kctl(struct hda_codec *codec, hda_nid_t nid,
 
 	if (!phantom_jack)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return snd_hda_jack_detect_enable(codec, nid, 0);
+=======
+		return snd_hda_jack_detect_enable(codec, nid);
+>>>>>>> v3.18
 =======
 		return snd_hda_jack_detect_enable(codec, nid);
 >>>>>>> v3.18
@@ -630,7 +691,11 @@ int snd_hda_jack_add_kctls(struct hda_codec *codec,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_jack_add_kctls);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_jack_add_kctls);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_jack_add_kctls);
 >>>>>>> v3.18
@@ -638,6 +703,7 @@ EXPORT_SYMBOL_GPL(snd_hda_jack_add_kctls);
 static void call_jack_callback(struct hda_codec *codec,
 			       struct hda_jack_tbl *jack)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (jack->callback)
 		jack->callback(codec, jack);
@@ -647,6 +713,8 @@ static void call_jack_callback(struct hda_codec *codec,
 		if (gated && gated->callback)
 			gated->callback(codec, gated);
 =======
+=======
+>>>>>>> v3.18
 	struct hda_jack_callback *cb;
 
 	for (cb = jack->callback; cb; cb = cb->next)
@@ -658,6 +726,9 @@ static void call_jack_callback(struct hda_codec *codec,
 			for (cb = gated->callback; cb; cb = cb->next)
 				cb->func(codec, cb);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -676,7 +747,11 @@ void snd_hda_jack_unsol_event(struct hda_codec *codec, unsigned int res)
 	snd_hda_jack_report_sync(codec);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_jack_unsol_event);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_jack_unsol_event);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_jack_unsol_event);
 >>>>>>> v3.18
@@ -701,7 +776,11 @@ void snd_hda_jack_poll_all(struct hda_codec *codec)
 		snd_hda_jack_report_sync(codec);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_HDA(snd_hda_jack_poll_all);
+=======
+EXPORT_SYMBOL_GPL(snd_hda_jack_poll_all);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(snd_hda_jack_poll_all);
 >>>>>>> v3.18

@@ -2,7 +2,11 @@
 
   Intel 10 Gigabit PCI Express Linux driver
 <<<<<<< HEAD
+<<<<<<< HEAD
   Copyright(c) 1999 - 2013 Intel Corporation.
+=======
+  Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
   Copyright(c) 1999 - 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -92,7 +96,10 @@ s32 ixgbe_dcb_calculate_tc_credits(struct ixgbe_hw *hw,
 	int min_multiplier;
 	int min_percent = 100;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 ret_val = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Initialization values default for Tx settings */
@@ -103,10 +110,15 @@ s32 ixgbe_dcb_calculate_tc_credits(struct ixgbe_hw *hw,
 	u8  i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dcb_config == NULL) {
 		ret_val = DCB_ERR_CONFIG;
 		goto out;
 	}
+=======
+	if (!dcb_config)
+		return DCB_ERR_CONFIG;
+>>>>>>> v3.18
 =======
 	if (!dcb_config)
 		return DCB_ERR_CONFIG;
@@ -187,8 +199,12 @@ s32 ixgbe_dcb_calculate_tc_credits(struct ixgbe_hw *hw,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	return ret_val;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -253,7 +269,11 @@ u8 ixgbe_dcb_get_tc_from_up(struct ixgbe_dcb_config *cfg, int direction, u8 up)
 	/* If tc is 0 then DCB is likely not enabled or supported */
 	if (!tc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -268,7 +288,11 @@ u8 ixgbe_dcb_get_tc_from_up(struct ixgbe_dcb_config *cfg, int direction, u8 up)
 			break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -292,9 +316,14 @@ void ixgbe_dcb_unpack_map(struct ixgbe_dcb_config *cfg, int direction, u8 *map)
  */
 s32 ixgbe_dcb_hw_config(struct ixgbe_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
                         struct ixgbe_dcb_config *dcb_config)
 {
 	s32 ret = 0;
+=======
+			struct ixgbe_dcb_config *dcb_config)
+{
+>>>>>>> v3.18
 =======
 			struct ixgbe_dcb_config *dcb_config)
 {
@@ -317,6 +346,7 @@ s32 ixgbe_dcb_hw_config(struct ixgbe_hw *hw,
 	switch (hw->mac.type) {
 	case ixgbe_mac_82598EB:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = ixgbe_dcb_hw_config_82598(hw, pfc_en, refill, max,
 						bwgid, ptype);
 		break;
@@ -330,6 +360,8 @@ s32 ixgbe_dcb_hw_config(struct ixgbe_hw *hw,
 	}
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		return ixgbe_dcb_hw_config_82598(hw, pfc_en, refill, max,
 						 bwgid, ptype);
 	case ixgbe_mac_82599EB:
@@ -340,12 +372,16 @@ s32 ixgbe_dcb_hw_config(struct ixgbe_hw *hw,
 		break;
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /* Helper routines to abstract HW specifics from DCB netlink ops */
 s32 ixgbe_dcb_hw_pfc_config(struct ixgbe_hw *hw, u8 pfc_en, u8 *prio_tc)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret = -EINVAL;
 
@@ -362,6 +398,8 @@ s32 ixgbe_dcb_hw_pfc_config(struct ixgbe_hw *hw, u8 pfc_en, u8 *prio_tc)
 	}
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	switch (hw->mac.type) {
 	case ixgbe_mac_82598EB:
 		return ixgbe_dcb_config_pfc_82598(hw, pfc_en);
@@ -372,6 +410,9 @@ s32 ixgbe_dcb_hw_pfc_config(struct ixgbe_hw *hw, u8 pfc_en, u8 *prio_tc)
 		break;
 	}
 	return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -436,7 +477,10 @@ s32 ixgbe_dcb_hw_ets_config(struct ixgbe_hw *hw,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void ixgbe_dcb_read_rtrup2tc_82599(struct ixgbe_hw *hw, u8 *map)
 {
@@ -459,4 +503,7 @@ void ixgbe_dcb_read_rtrup2tc(struct ixgbe_hw *hw, u8 *map)
 		break;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

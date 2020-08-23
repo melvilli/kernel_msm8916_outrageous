@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 The existing interfaces for getting network packages time stamped are:
 
 * SO_TIMESTAMP
@@ -88,6 +89,8 @@ by the network device and will be empty without that support.
 
 SIOCSHWTSTAMP:
 =======
+=======
+>>>>>>> v3.18
 
 1. Control Interfaces
 
@@ -392,6 +395,9 @@ is again deprecated and ts[2] holds a hardware timestamp if set.
 
 
 3. Hardware Timestamping configuration: SIOCSHWTSTAMP and SIOCGHWTSTAMP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Hardware time stamping must also be initialized for each device driver
@@ -423,11 +429,17 @@ space is responsible to ensure that multiple processes don't interfere
 with each other and that the settings are reset.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Any process can read the actual configuration by passing this
 structure to ioctl(SIOCGHWTSTAMP) in the same way.  However, this has
 not been implemented in all drivers.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* possible values for hwtstamp_config->tx_type */
 enum {
@@ -467,6 +479,7 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 DEVICE IMPLEMENTATION
 
@@ -474,12 +487,17 @@ A driver which supports hardware time stamping must support the
 SIOCSHWTSTAMP ioctl and update the supplied struct hwtstamp_config with
 the actual values as described in the section on SIOCSHWTSTAMP.
 =======
+=======
+>>>>>>> v3.18
 3.1 Hardware Timestamping Implementation: Device Drivers
 
 A driver which supports hardware time stamping must support the
 SIOCSHWTSTAMP ioctl and update the supplied struct hwtstamp_config with
 the actual values as described in the section on SIOCSHWTSTAMP.  It
 should also support SIOCGHWTSTAMP.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Time stamps for received packets must be stored in the skb. To get a pointer
@@ -492,7 +510,10 @@ struct skb_shared_hwtstamps {
 	 */
 	ktime_t	hwtstamp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_t	syststamp; /* hwtstamp transformed to system time base */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -512,6 +533,12 @@ Time stamps for outgoing packets are to be generated as follows:
   do that. A driver must never touch sk_buff::tstamp! It is used to store
   software generated time stamps by the network subsystem.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- Driver should call skb_tx_timestamp() as close to passing sk_buff to hardware
+  as possible. skb_tx_timestamp() provides a software time stamp if requested
+  and hardware timestamping is not possible (SKBTX_IN_PROGRESS not set).
+>>>>>>> v3.18
 =======
 - Driver should call skb_tx_timestamp() as close to passing sk_buff to hardware
   as possible. skb_tx_timestamp() provides a software time stamp if requested
@@ -528,8 +555,11 @@ Time stamps for outgoing packets are to be generated as follows:
   software time stamping and therefore could lead to unexpected deltas
   between time stamps.
 <<<<<<< HEAD
+<<<<<<< HEAD
 - If the driver did not set the SKBTX_IN_PROGRESS flag (see above), then
   dev_hard_start_xmit() checks whether software time stamping
   is wanted as fallback and potentially generates the time stamp.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

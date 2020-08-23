@@ -20,6 +20,10 @@
 #include <linux/device.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -59,6 +63,7 @@
 #include <mach/regs-gpio.h>
 #include <mach/regs-lcd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <plat/clock.h>
 #include <plat/cpu.h>
@@ -68,12 +73,17 @@
 #include <plat/pm.h>
 #include <plat/regs-serial.h>
 =======
+=======
+>>>>>>> v3.18
 #include <mach/gpio-samsung.h>
 
 #include <plat/cpu.h>
 #include <plat/devs.h>
 #include <plat/gpio-cfg.h>
 #include <plat/pm.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <plat/samsung-time.h>
 
@@ -87,11 +97,17 @@
 #define H1940_LATCH_BIT(x)	(1 << ((x) + 16 - S3C_GPIO_END))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define S3C24XX_PLL_MDIV_SHIFT         (12)
 #define S3C24XX_PLL_PDIV_SHIFT         (4)
 #define S3C24XX_PLL_SDIV_SHIFT         (0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct map_desc h1940_iodesc[] __initdata = {
 	[0] = {
@@ -525,6 +541,10 @@ static struct platform_pwm_backlight_data backlight_data = {
 	/* tcnt = 0x31 */
 	.pwm_period_ns  = 36296,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio    = -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio    = -1,
 >>>>>>> v3.18
@@ -537,7 +557,11 @@ static struct platform_device h1940_backlight = {
 	.name = "pwm-backlight",
 	.dev  = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.parent = &s3c_device_timer[0].dev,
+=======
+		.parent = &samsung_device_pwm.dev,
+>>>>>>> v3.18
 =======
 		.parent = &samsung_device_pwm.dev,
 >>>>>>> v3.18
@@ -661,7 +685,11 @@ static struct platform_device *h1940_devices[] __initdata = {
 	&s3c_device_sdi,
 	&s3c_device_rtc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&s3c_device_timer[0],
+=======
+	&samsung_device_pwm,
+>>>>>>> v3.18
 =======
 	&samsung_device_pwm,
 >>>>>>> v3.18
@@ -677,7 +705,10 @@ static void __init h1940_map_io(void)
 {
 	s3c24xx_init_io(h1940_iodesc, ARRAY_SIZE(h1940_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s3c24xx_init_uarts(h1940_uartcfgs, ARRAY_SIZE(h1940_uartcfgs));
@@ -696,13 +727,19 @@ static void __init h1940_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init h1940_init_time(void)
 {
 	s3c2410_init_clocks(12000000);
 	samsung_timer_init();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* H1940 and RX3715 need to reserve this for suspend */
 static void __init h1940_reserve(void)
@@ -782,8 +819,12 @@ MACHINE_START(H1940, "IPAQ-H1940")
 	.init_irq	= s3c2410_init_irq,
 	.init_machine	= h1940_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= samsung_timer_init,
 	.restart	= s3c2410_restart,
+=======
+	.init_time	= h1940_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= h1940_init_time,
 >>>>>>> v3.18

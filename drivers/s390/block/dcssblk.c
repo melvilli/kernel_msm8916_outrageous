@@ -305,12 +305,15 @@ dcssblk_load_segment(char *name, struct segment_info **seg_info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dcssblk_unregister_callback(struct device *dev)
 {
 	device_unregister(dev);
 	put_device(dev);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -401,8 +404,11 @@ removeseg:
 	dev_info->gd->queue = NULL;
 	put_disk(dev_info->gd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = device_schedule_callback(dev, dcssblk_unregister_callback);
 =======
+=======
+>>>>>>> v3.18
 	up_write(&dcssblk_devices_sem);
 
 	if (device_remove_file_self(dev, attr)) {
@@ -410,6 +416,9 @@ removeseg:
 		put_device(dev);
 	}
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	up_write(&dcssblk_devices_sem);
@@ -607,7 +616,11 @@ dcssblk_add_store(struct device *dev, struct device_attribute *attr, const char 
 	dev_info->end = dcssblk_find_highest_addr(dev_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_name(&dev_info->dev, dev_info->segment_name);
+=======
+	dev_set_name(&dev_info->dev, "%s", dev_info->segment_name);
+>>>>>>> v3.18
 =======
 	dev_set_name(&dev_info->dev, "%s", dev_info->segment_name);
 >>>>>>> v3.18
@@ -826,7 +839,12 @@ dcssblk_make_request(struct request_queue *q, struct bio *bio)
 {
 	struct dcssblk_dev_info *dev_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bvec;
+=======
+	struct bio_vec bvec;
+	struct bvec_iter iter;
+>>>>>>> v3.18
 =======
 	struct bio_vec bvec;
 	struct bvec_iter iter;
@@ -836,7 +854,10 @@ dcssblk_make_request(struct request_queue *q, struct bio *bio)
 	unsigned long source_addr;
 	unsigned long bytes_done;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -845,7 +866,12 @@ dcssblk_make_request(struct request_queue *q, struct bio *bio)
 	if (dev_info == NULL)
 		goto fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((bio->bi_sector & 7) != 0 || (bio->bi_size & 4095) != 0)
+=======
+	if ((bio->bi_iter.bi_sector & 7) != 0 ||
+	    (bio->bi_iter.bi_size & 4095) != 0)
+>>>>>>> v3.18
 =======
 	if ((bio->bi_iter.bi_sector & 7) != 0 ||
 	    (bio->bi_iter.bi_size & 4095) != 0)
@@ -873,6 +899,7 @@ dcssblk_make_request(struct request_queue *q, struct bio *bio)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	index = (bio->bi_sector >> 3);
 	bio_for_each_segment(bvec, bio, i) {
 		page_addr = (unsigned long)
@@ -880,17 +907,23 @@ dcssblk_make_request(struct request_queue *q, struct bio *bio)
 		source_addr = dev_info->start + (index<<12) + bytes_done;
 		if (unlikely((page_addr & 4095) != 0) || (bvec->bv_len & 4095) != 0)
 =======
+=======
+>>>>>>> v3.18
 	index = (bio->bi_iter.bi_sector >> 3);
 	bio_for_each_segment(bvec, bio, iter) {
 		page_addr = (unsigned long)
 			page_address(bvec.bv_page) + bvec.bv_offset;
 		source_addr = dev_info->start + (index<<12) + bytes_done;
 		if (unlikely((page_addr & 4095) != 0) || (bvec.bv_len & 4095) != 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			// More paranoia.
 			goto fail;
 		if (bio_data_dir(bio) == READ) {
 			memcpy((void*)page_addr, (void*)source_addr,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				bvec->bv_len);
 		} else {
@@ -899,12 +932,17 @@ dcssblk_make_request(struct request_queue *q, struct bio *bio)
 		}
 		bytes_done += bvec->bv_len;
 =======
+=======
+>>>>>>> v3.18
 				bvec.bv_len);
 		} else {
 			memcpy((void*)source_addr, (void*)page_addr,
 				bvec.bv_len);
 		}
 		bytes_done += bvec.bv_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	bio_endio(bio, 0);

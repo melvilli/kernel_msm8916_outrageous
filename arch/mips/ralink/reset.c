@@ -11,6 +11,11 @@
 #include <linux/pm.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/reset-controller.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/reset-controller.h>
@@ -25,7 +30,10 @@
 #define RSTCTL_RESET_SYSTEM     BIT(0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ralink_assert_device(struct reset_controller_dev *rcdev,
 				unsigned long id)
 {
@@ -86,6 +94,9 @@ void ralink_rst_init(void)
 		reset_controller_register(&reset_dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ralink_restart(char *command)
 {

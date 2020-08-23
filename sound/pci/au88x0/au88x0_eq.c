@@ -846,7 +846,11 @@ snd_vortex_peaks_get(struct snd_kcontrol *kcontrol, struct snd_ctl_elem_value *u
 	vortex_Eqlzr_GetAllPeaks(vortex, peaks, &count);
 	if (count != 20) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "vortex: peak count error 20 != %d \n", count);
+=======
+		pr_err( "vortex: peak count error 20 != %d \n", count);
+>>>>>>> v3.18
 =======
 		pr_err( "vortex: peak count error 20 != %d \n", count);
 >>>>>>> v3.18

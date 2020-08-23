@@ -27,6 +27,12 @@ static inline int xt_ct_target(struct sk_buff *skb, struct nf_conn *ct)
 		return XT_CONTINUE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* special case the untracked ct : we want the percpu object */
+	if (!ct)
+		ct = nf_ct_untracked_get();
+>>>>>>> v3.18
 =======
 	/* special case the untracked ct : we want the percpu object */
 	if (!ct)
@@ -193,8 +199,12 @@ static int xt_ct_tg_check(const struct xt_tgchk_param *par,
 
 	if (info->flags & XT_CT_NOTRACK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ct = nf_ct_untracked_get();
 		atomic_inc(&ct->ct_general.use);
+=======
+		ct = NULL;
+>>>>>>> v3.18
 =======
 		ct = NULL;
 >>>>>>> v3.18
@@ -220,13 +230,19 @@ static int xt_ct_tg_check(const struct xt_tgchk_param *par,
 	if ((info->ct_events || info->exp_events) &&
 	    !nf_ct_ecache_ext_add(ct, info->ct_events, info->exp_events,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  GFP_KERNEL))
 		goto err3;
 =======
+=======
+>>>>>>> v3.18
 				  GFP_KERNEL)) {
 		ret = -EINVAL;
 		goto err3;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (info->helper[0]) {
@@ -242,12 +258,16 @@ static int xt_ct_tg_check(const struct xt_tgchk_param *par,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__set_bit(IPS_TEMPLATE_BIT, &ct->status);
 	__set_bit(IPS_CONFIRMED_BIT, &ct->status);
 
 	/* Overload tuple linked list to put us in template list. */
 	hlist_nulls_add_head_rcu(&ct->tuplehash[IP_CT_DIR_ORIGINAL].hnnode,
 				 &par->net->ct.tmpl);
+=======
+	nf_conntrack_tmpl_insert(par->net, ct);
+>>>>>>> v3.18
 =======
 	nf_conntrack_tmpl_insert(par->net, ct);
 >>>>>>> v3.18
@@ -333,7 +353,11 @@ static void xt_ct_tg_destroy(const struct xt_tgdtor_param *par,
 	struct nf_conn_help *help;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!nf_ct_is_untracked(ct)) {
+=======
+	if (ct && !nf_ct_is_untracked(ct)) {
+>>>>>>> v3.18
 =======
 	if (ct && !nf_ct_is_untracked(ct)) {
 >>>>>>> v3.18
@@ -345,8 +369,13 @@ static void xt_ct_tg_destroy(const struct xt_tgdtor_param *par,
 
 		xt_ct_destroy_timeout(ct);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	nf_ct_put(info->ct);
+=======
+		nf_ct_put(info->ct);
+	}
+>>>>>>> v3.18
 =======
 		nf_ct_put(info->ct);
 	}

@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_AVR32_SOCKIOS_H
 #define __ASM_AVR32_SOCKIOS_H
+=======
+#ifndef _UAPI__ASM_AVR32_SOCKIOS_H
+#define _UAPI__ASM_AVR32_SOCKIOS_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI__ASM_AVR32_SOCKIOS_H
 #define _UAPI__ASM_AVR32_SOCKIOS_H
@@ -16,7 +21,11 @@
 #define SIOCGSTAMPNS	0x8907		/* Get stamp (timespec) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_AVR32_SOCKIOS_H */
+=======
+#endif /* _UAPI__ASM_AVR32_SOCKIOS_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI__ASM_AVR32_SOCKIOS_H */
 >>>>>>> v3.18

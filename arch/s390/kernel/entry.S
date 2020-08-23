@@ -11,6 +11,10 @@
 #include <linux/init.h>
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/processor.h>
+>>>>>>> v3.18
 =======
 #include <asm/processor.h>
 >>>>>>> v3.18
@@ -23,6 +27,10 @@
 #include <asm/page.h>
 #include <asm/sigp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/irq.h>
+>>>>>>> v3.18
 =======
 #include <asm/irq.h>
 >>>>>>> v3.18
@@ -45,6 +53,7 @@ __PT_R14     =	__PT_GPRS + 56
 __PT_R15     =	__PT_GPRS + 60
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _TIF_WORK_SVC = (_TIF_SIGPENDING | _TIF_NOTIFY_RESUME | _TIF_NEED_RESCHED | \
 		 _TIF_MCCK_PENDING | _TIF_PER_TRAP )
 _TIF_WORK_INT = (_TIF_SIGPENDING | _TIF_NOTIFY_RESUME | _TIF_NEED_RESCHED | \
@@ -54,18 +63,26 @@ _TIF_TRACE    = (_TIF_SYSCALL_TRACE | _TIF_SYSCALL_AUDIT | _TIF_SECCOMP | \
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 STACK_SHIFT = PAGE_SHIFT + THREAD_ORDER
 STACK_SIZE  = 1 << STACK_SHIFT
 STACK_INIT  = STACK_SIZE - STACK_FRAME_OVERHEAD - __PT_SIZE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 _TIF_WORK	= (_TIF_SIGPENDING | _TIF_NOTIFY_RESUME | _TIF_NEED_RESCHED)
 _TIF_TRACE	= (_TIF_SYSCALL_TRACE | _TIF_SYSCALL_AUDIT | _TIF_SECCOMP | \
 		   _TIF_SYSCALL_TRACEPOINT)
 _CIF_WORK	= (_CIF_MCCK_PENDING | _CIF_ASCE)
 _PIF_WORK	= (_PIF_PER_TRAP)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BASED(name) name-system_call(%r13)
 
@@ -179,11 +196,15 @@ ENTRY(__switch_to)
 	mvc	__LC_CURRENT_PID(4,%r0),__TASK_pid(%r3)	# store pid of next
 	l	%r15,__THREAD_ksp(%r3)		# load kernel stack of next
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm	__TI_flags+3(%r4),_TIF_MCCK_PENDING # machine check pending?
 	jz	0f
 	ni	__TI_flags+3(%r4),255-_TIF_MCCK_PENDING	# clear flag in prev
 	oi	__TI_flags+3(%r5),_TIF_MCCK_PENDING	# set it in next
 0:	lm	%r6,%r15,__SF_GPRS(%r15)	# load gprs of next task
+=======
+	lm	%r6,%r15,__SF_GPRS(%r15)	# load gprs of next task
+>>>>>>> v3.18
 =======
 	lm	%r6,%r15,__SF_GPRS(%r15)	# load gprs of next task
 >>>>>>> v3.18
@@ -202,6 +223,10 @@ sysc_stm:
 	l	%r12,__LC_THREAD_INFO
 	l	%r13,__LC_SVC_NEW_PSW+4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lhi	%r14,_PIF_SYSCALL
+>>>>>>> v3.18
 =======
 	lhi	%r14,_PIF_SYSCALL
 >>>>>>> v3.18
@@ -215,8 +240,13 @@ sysc_vtime:
 	mvc	__PT_PSW(8,%r11),__LC_SVC_OLD_PSW
 	mvc	__PT_INT_CODE(4,%r11),__LC_SVC_ILC
 <<<<<<< HEAD
+<<<<<<< HEAD
 sysc_do_svc:
 	oi	__TI_flags+3(%r12),_TIF_SYSCALL
+=======
+	st	%r14,__PT_FLAGS(%r11)
+sysc_do_svc:
+>>>>>>> v3.18
 =======
 	st	%r14,__PT_FLAGS(%r11)
 sysc_do_svc:
@@ -237,7 +267,11 @@ sysc_nr_ok:
 	st	%r7,STACK_FRAME_OVERHEAD(%r15)
 	l	%r9,0(%r8,%r10)			# get system call addr.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm	__TI_flags+2(%r12),_TIF_TRACE >> 8
+=======
+	tm	__TI_flags+3(%r12),_TIF_TRACE
+>>>>>>> v3.18
 =======
 	tm	__TI_flags+3(%r12),_TIF_TRACE
 >>>>>>> v3.18
@@ -251,16 +285,22 @@ sysc_tif:
 	tm	__PT_PSW+1(%r11),0x01		# returning to user ?
 	jno	sysc_restore
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm	__TI_flags+3(%r12),_TIF_WORK_SVC
 	jnz	sysc_work			# check for work
 	ni	__TI_flags+3(%r12),255-_TIF_SYSCALL
 =======
+=======
+>>>>>>> v3.18
 	tm	__PT_FLAGS+3(%r11),_PIF_WORK
 	jnz	sysc_work
 	tm	__TI_flags+3(%r12),_TIF_WORK
 	jnz	sysc_work			# check for thread work
 	tm	__LC_CPU_FLAGS+3,_CIF_WORK
 	jnz	sysc_work
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 sysc_restore:
 	mvc	__LC_RETURN_PSW(8),__PT_PSW(%r11)
@@ -274,17 +314,23 @@ sysc_done:
 #
 sysc_work:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm	__TI_flags+3(%r12),_TIF_MCCK_PENDING
 	jo	sysc_mcck_pending
 	tm	__TI_flags+3(%r12),_TIF_NEED_RESCHED
 	jo	sysc_reschedule
 	tm	__TI_flags+3(%r12),_TIF_PER_TRAP
 =======
+=======
+>>>>>>> v3.18
 	tm	__LC_CPU_FLAGS+3,_CIF_MCCK_PENDING
 	jo	sysc_mcck_pending
 	tm	__TI_flags+3(%r12),_TIF_NEED_RESCHED
 	jo	sysc_reschedule
 	tm	__PT_FLAGS+3(%r11),_PIF_PER_TRAP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	jo	sysc_singlestep
 	tm	__TI_flags+3(%r12),_TIF_SIGPENDING
@@ -292,6 +338,11 @@ sysc_work:
 	tm	__TI_flags+3(%r12),_TIF_NOTIFY_RESUME
 	jo	sysc_notify_resume
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tm	__LC_CPU_FLAGS+3,_CIF_ASCE
+	jo	sysc_uaccess
+>>>>>>> v3.18
 =======
 	tm	__LC_CPU_FLAGS+3,_CIF_ASCE
 	jo	sysc_uaccess
@@ -308,7 +359,11 @@ sysc_reschedule:
 
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 # _TIF_MCCK_PENDING is set, call handler
+=======
+# _CIF_MCCK_PENDING is set, call handler
+>>>>>>> v3.18
 =======
 # _CIF_MCCK_PENDING is set, call handler
 >>>>>>> v3.18
@@ -320,7 +375,10 @@ sysc_mcck_pending:
 
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # _CIF_ASCE is set, load user space asce
 #
 sysc_uaccess:
@@ -329,6 +387,9 @@ sysc_uaccess:
 	j	sysc_return
 
 #
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # _TIF_SIGPENDING is set, call do_signal
 #
@@ -337,7 +398,11 @@ sysc_sigpending:
 	l	%r1,BASED(.Ldo_signal)
 	basr	%r14,%r1		# call do_signal
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm	__TI_flags+3(%r12),_TIF_SYSCALL
+=======
+	tm	__PT_FLAGS+3(%r11),_PIF_SYSCALL
+>>>>>>> v3.18
 =======
 	tm	__PT_FLAGS+3(%r11),_PIF_SYSCALL
 >>>>>>> v3.18
@@ -362,15 +427,21 @@ sysc_notify_resume:
 
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 # _TIF_PER_TRAP is set, call do_per_trap
 #
 sysc_singlestep:
 	ni	__TI_flags+3(%r12),255-_TIF_PER_TRAP
 =======
+=======
+>>>>>>> v3.18
 # _PIF_PER_TRAP is set, call do_per_trap
 #
 sysc_singlestep:
 	ni	__PT_FLAGS+3(%r11),255-_PIF_PER_TRAP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lr	%r2,%r11		# pass pointer to pt_regs
 	l	%r1,BASED(.Ldo_per_trap)
@@ -402,7 +473,11 @@ sysc_tracego:
 	st	%r2,__PT_R2(%r11)	# store return value
 sysc_tracenogo:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm	__TI_flags+2(%r12),_TIF_TRACE >> 8
+=======
+	tm	__TI_flags+3(%r12),_TIF_TRACE
+>>>>>>> v3.18
 =======
 	tm	__TI_flags+3(%r12),_TIF_TRACE
 >>>>>>> v3.18
@@ -460,6 +535,10 @@ ENTRY(pgm_check_handler)
 	mvc	__PT_INT_CODE(4,%r11),__LC_PGM_ILC
 	mvc	__PT_INT_PARM_LONG(4,%r11),__LC_TRANS_EXC_CODE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xc	__PT_FLAGS(4,%r11),__PT_FLAGS(%r11)
+>>>>>>> v3.18
 =======
 	xc	__PT_FLAGS(4,%r11),__PT_FLAGS(%r11)
 >>>>>>> v3.18
@@ -469,15 +548,21 @@ ENTRY(pgm_check_handler)
 	tmh	%r8,0x0001		# kernel per event ?
 	jz	pgm_kprobe
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oi	__TI_flags+3(%r12),_TIF_PER_TRAP
 	mvc	__THREAD_per_address(4,%r1),__LC_PER_ADDRESS
 	mvc	__THREAD_per_cause(2,%r1),__LC_PER_CAUSE
 	mvc	__THREAD_per_paid(1,%r1),__LC_PER_PAID
 =======
+=======
+>>>>>>> v3.18
 	oi	__PT_FLAGS+3(%r11),_PIF_PER_TRAP
 	mvc	__THREAD_per_address(4,%r1),__LC_PER_ADDRESS
 	mvc	__THREAD_per_cause(2,%r1),__LC_PER_CODE
 	mvc	__THREAD_per_paid(1,%r1),__LC_PER_ACCESS_ID
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 0:	REENABLE_IRQS
 	xc	__SF_BACKCHAIN(4,%r15),__SF_BACKCHAIN(%r15)
@@ -507,9 +592,15 @@ pgm_kprobe:
 #
 pgm_svcper:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oi	__TI_flags+3(%r12),_TIF_PER_TRAP
 	mvc	__LC_RETURN_PSW(4),__LC_SVC_NEW_PSW
 	mvc	__LC_RETURN_PSW+4(4),BASED(.Lsysc_per)
+=======
+	mvc	__LC_RETURN_PSW(4),__LC_SVC_NEW_PSW
+	mvc	__LC_RETURN_PSW+4(4),BASED(.Lsysc_per)
+	lhi	%r14,_PIF_SYSCALL | _PIF_PER_TRAP
+>>>>>>> v3.18
 =======
 	mvc	__LC_RETURN_PSW(4),__LC_SVC_NEW_PSW
 	mvc	__LC_RETURN_PSW+4(4),BASED(.Lsysc_per)
@@ -537,12 +628,15 @@ io_skip:
 	mvc	__PT_R8(32,%r11),__LC_SAVE_AREA_ASYNC
 	stm	%r8,%r9,__PT_PSW(%r11)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TRACE_IRQS_OFF
 	xc	__SF_BACKCHAIN(4,%r15),__SF_BACKCHAIN(%r15)
 	l	%r1,BASED(.Ldo_IRQ)
 	lr	%r2,%r11		# pass pointer to pt_regs
 	basr	%r14,%r1		# call do_IRQ
 =======
+=======
+>>>>>>> v3.18
 	mvc	__PT_INT_CODE(12,%r11),__LC_SUBCHANNEL_ID
 	xc	__PT_FLAGS(4,%r11),__PT_FLAGS(%r11)
 	TRACE_IRQS_OFF
@@ -562,19 +656,28 @@ io_call:
 	jz	io_return
 	mvc	__PT_INT_CODE(12,%r11),__LC_SUBCHANNEL_ID
 	j	io_loop
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 io_return:
 	LOCKDEP_SYS_EXIT
 	TRACE_IRQS_ON
 io_tif:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm	__TI_flags+3(%r12),_TIF_WORK_INT
 	jnz	io_work			# there is work to do (signals etc.)
 =======
+=======
+>>>>>>> v3.18
 	tm	__TI_flags+3(%r12),_TIF_WORK
 	jnz	io_work			# there is work to do (signals etc.)
 	tm	__LC_CPU_FLAGS+3,_CIF_WORK
 	jnz	io_work
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 io_restore:
 	mvc	__LC_RETURN_PSW(8),__PT_PSW(%r11)
@@ -586,7 +689,11 @@ io_done:
 #
 # There is work todo, find out in which context we have been interrupted:
 <<<<<<< HEAD
+<<<<<<< HEAD
 # 1) if we return to user space we can do all _TIF_WORK_INT work
+=======
+# 1) if we return to user space we can do all _TIF_WORK work
+>>>>>>> v3.18
 =======
 # 1) if we return to user space we can do all _TIF_WORK work
 >>>>>>> v3.18
@@ -633,11 +740,17 @@ io_work_user:
 #
 # One of the work bits is on. Find out which one.
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Checked are: _TIF_SIGPENDING, _TIF_NOTIFY_RESUME, _TIF_NEED_RESCHED
 #		and _TIF_MCCK_PENDING
 #
 io_work_tif:
 	tm	__TI_flags+3(%r12),_TIF_MCCK_PENDING
+=======
+#
+io_work_tif:
+	tm	__LC_CPU_FLAGS+3(%r12),_CIF_MCCK_PENDING
+>>>>>>> v3.18
 =======
 #
 io_work_tif:
@@ -651,17 +764,23 @@ io_work_tif:
 	tm	__TI_flags+3(%r12),_TIF_NOTIFY_RESUME
 	jo	io_notify_resume
 <<<<<<< HEAD
+<<<<<<< HEAD
 	j	io_return		# beware of critical section cleanup
 
 #
 # _TIF_MCCK_PENDING is set, call handler
 =======
+=======
+>>>>>>> v3.18
 	tm	__LC_CPU_FLAGS+3,_CIF_ASCE
 	jo	io_uaccess
 	j	io_return		# beware of critical section cleanup
 
 #
 # _CIF_MCCK_PENDING is set, call handler
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #
 io_mcck_pending:
@@ -673,7 +792,10 @@ io_mcck_pending:
 
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # _CIF_ASCE is set, load user space asce
 #
 io_uaccess:
@@ -682,6 +804,9 @@ io_uaccess:
 	j	io_return
 
 #
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # _TIF_NEED_RESCHED is set, call schedule
 #
@@ -740,6 +865,7 @@ ext_skip:
 	mvc	__PT_R8(32,%r11),__LC_SAVE_AREA_ASYNC
 	stm	%r8,%r9,__PT_PSW(%r11)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TRACE_IRQS_OFF
 	lr	%r2,%r11		# pass pointer to pt_regs
 	l	%r3,__LC_EXT_CPU_ADDR	# get cpu address + interruption code
@@ -747,6 +873,8 @@ ext_skip:
 	l	%r1,BASED(.Ldo_extint)
 	basr	%r14,%r1		# call do_extint
 =======
+=======
+>>>>>>> v3.18
 	mvc	__PT_INT_CODE(4,%r11),__LC_EXT_CPU_ADDR
 	mvc	__PT_INT_PARM(4,%r11),__LC_EXT_PARAMS
 	xc	__PT_FLAGS(4,%r11),__PT_FLAGS(%r11)
@@ -755,6 +883,9 @@ ext_skip:
 	lr	%r2,%r11		# pass pointer to pt_regs
 	lhi	%r3,EXT_INTERRUPT
 	basr	%r14,%r1		# call do_IRQ
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	j	io_return
 
@@ -816,6 +947,10 @@ mcck_skip:
 	mvc	__PT_R8(32,%r11),__LC_GPREGS_SAVE_AREA+32
 	stm	%r8,%r9,__PT_PSW(%r11)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xc	__PT_FLAGS(4,%r11),__PT_FLAGS(%r11)
+>>>>>>> v3.18
 =======
 	xc	__PT_FLAGS(4,%r11),__PT_FLAGS(%r11)
 >>>>>>> v3.18
@@ -832,7 +967,11 @@ mcck_skip:
 	lr	%r15,%r1
 	ssm	__LC_PGM_NEW_PSW	# turn dat on, keep irqs off
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tm	__TI_flags+3(%r12),_TIF_MCCK_PENDING
+=======
+	tm	__LC_CPU_FLAGS+3,_CIF_MCCK_PENDING
+>>>>>>> v3.18
 =======
 	tm	__LC_CPU_FLAGS+3,_CIF_MCCK_PENDING
 >>>>>>> v3.18
@@ -989,6 +1128,11 @@ cleanup_system_call:
 	mvc	__PT_PSW(8,%r9),__LC_SVC_OLD_PSW
 	mvc	__PT_INT_CODE(4,%r9),__LC_SVC_ILC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xc	__PT_FLAGS(4,%r9),__PT_FLAGS(%r9)
+	mvi	__PT_FLAGS+3(%r9),_PIF_SYSCALL
+>>>>>>> v3.18
 =======
 	xc	__PT_FLAGS(4,%r9),__PT_FLAGS(%r9)
 	mvi	__PT_FLAGS+3(%r9),_PIF_SYSCALL
@@ -1062,7 +1206,11 @@ cleanup_idle:
 	mvc	__LC_LAST_UPDATE_TIMER(8),__TIMER_IDLE_EXIT(%r2)
 	# prepare return psw
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n	%r8,BASED(cleanup_idle_wait)	# clear wait state bit
+=======
+	n	%r8,BASED(cleanup_idle_wait)	# clear irq & wait state bits
+>>>>>>> v3.18
 =======
 	n	%r8,BASED(cleanup_idle_wait)	# clear irq & wait state bits
 >>>>>>> v3.18
@@ -1072,7 +1220,11 @@ cleanup_idle_insn:
 	.long	psw_idle_lpsw + 0x80000000
 cleanup_idle_wait:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long	0xfffdffff
+=======
+	.long	0xfcfdffff
+>>>>>>> v3.18
 =======
 	.long	0xfcfdffff
 >>>>>>> v3.18
@@ -1093,7 +1245,10 @@ cleanup_idle_wait:
 .Lhandle_mcck:		.long	s390_handle_mcck
 .Ldo_IRQ:		.long	do_IRQ
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Ldo_extint:		.long	do_extint
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 .Ldo_signal:		.long	do_signal

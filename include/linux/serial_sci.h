@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Generic header for SuperH SCI(F) (used by sh/sh64/h8300 and related parts)
+=======
+ * Generic header for SuperH (H)SCI(F) (used by sh/sh64 and related parts)
+>>>>>>> v3.18
 =======
  * Generic header for SuperH (H)SCI(F) (used by sh/sh64 and related parts)
 >>>>>>> v3.18
@@ -14,6 +18,7 @@
 
 #define SCIx_NOT_SUPPORTED	(-1)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum {
 	SCBRR_ALGO_1,		/* ((clk + 16 * bps) / (16 * bps) - 1) */
@@ -82,6 +87,8 @@ enum {
 	SCIx_NR_FNS,
 };
 =======
+=======
+>>>>>>> v3.18
 /* SCSMR (Serial Mode Register) */
 #define SCSMR_CHR	(1 << 6)	/* 7-bit Character Length */
 #define SCSMR_PE	(1 << 5)	/* Parity Enable */
@@ -135,6 +142,9 @@ enum {
 
 /* HSSRR HSCIF */
 #define HSCIF_SRE	0x8000		/* Sampling Rate Register Enable */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum {
@@ -151,6 +161,10 @@ enum {
 	SCIx_SH4_SCIF_FIFODATA_REGTYPE,
 	SCIx_SH7705_SCIF_REGTYPE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SCIx_HSCIF_REGTYPE,
+>>>>>>> v3.18
 =======
 	SCIx_HSCIF_REGTYPE,
 >>>>>>> v3.18
@@ -158,6 +172,7 @@ enum {
 	SCIx_NR_REGTYPES,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SCIx_IRQ_MUXED(irq)		\
 {					\
@@ -174,16 +189,21 @@ enum {
 	 !(port)->cfg->irqs[SCIx_RXI_IRQ])
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * SCI register subset common for all port types.
  * Not all registers will exist on all parts.
  */
 enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCSMR, SCBRR, SCSCR, SCxSR,
 	SCFCR, SCFDR, SCxTDR, SCxRDR,
 	SCLSR, SCTFDR, SCRFDR, SCSPTR,
 =======
+=======
+>>>>>>> v3.18
 	SCSMR,				/* Serial Mode Register */
 	SCBRR,				/* Bit Rate Register */
 	SCSCR,				/* Serial Control Register */
@@ -197,6 +217,9 @@ enum {
 	SCRFDR,				/* Receive FIFO Data Count Register */
 	SCSPTR,				/* Serial Port Register */
 	HSSRR,				/* Sampling Rate Register */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	SCIx_NR_REGS,
@@ -218,6 +241,7 @@ struct plat_sci_port_ops {
  */
 struct plat_sci_port {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long	mapbase;		/* resource base */
 	unsigned int	irqs[SCIx_NR_IRQS];	/* ERI, RXI, TXI, BRI */
 	unsigned int	gpios[SCIx_NR_FNS];	/* SCK, RXD, TXD, CTS, RTS */
@@ -227,11 +251,16 @@ struct plat_sci_port {
 
 	unsigned int	scbrr_algo_id;		/* SCBRR calculation algo */
 =======
+=======
+>>>>>>> v3.18
 	unsigned int	type;			/* SCI / SCIF / IRDA / HSCIF */
 	upf_t		flags;			/* UPF_* flags */
 	unsigned long	capabilities;		/* Port features/capabilities */
 
 	unsigned int	sampling_rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int	scscr;			/* SCSCR initialization */
 
@@ -239,9 +268,12 @@ struct plat_sci_port {
 	 * Platform overrides if necessary, defaults otherwise.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		overrun_bit;
 	unsigned int	error_mask;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int		port_reg;

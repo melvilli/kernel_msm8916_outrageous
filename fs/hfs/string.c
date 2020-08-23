@@ -52,8 +52,12 @@ static unsigned char caseorder[256] = {
  * Hash a string to an integer in a case-independent way
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hfs_hash_dentry(const struct dentry *dentry, const struct inode *inode,
 		struct qstr *this)
+=======
+int hfs_hash_dentry(const struct dentry *dentry, struct qstr *this)
+>>>>>>> v3.18
 =======
 int hfs_hash_dentry(const struct dentry *dentry, struct qstr *this)
 >>>>>>> v3.18
@@ -98,8 +102,12 @@ int hfs_strcmp(const unsigned char *s1, unsigned int len1,
  * return 1 on failure and 0 on success
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hfs_compare_dentry(const struct dentry *parent, const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
+=======
+int hfs_compare_dentry(const struct dentry *parent, const struct dentry *dentry,
+>>>>>>> v3.18
 =======
 int hfs_compare_dentry(const struct dentry *parent, const struct dentry *dentry,
 >>>>>>> v3.18

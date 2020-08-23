@@ -1,7 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* sound/soc/samsung/s3c-i2c-v2.c
  *
  * ALSA Soc Audio Layer - I2S core for newer Samsung SoCs.
+=======
+/* ALSA Soc Audio Layer - I2S core for newer Samsung SoCs.
+>>>>>>> v3.18
 =======
 /* ALSA Soc Audio Layer - I2S core for newer Samsung SoCs.
 >>>>>>> v3.18
@@ -29,8 +33,11 @@
 #include <sound/pcm_params.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/dma.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "regs-i2s-v2.h"
@@ -41,11 +48,15 @@
 
 #if defined(CONFIG_CPU_S3C2412) || defined(CONFIG_CPU_S3C2413) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	|| defined(CONFIG_CPU_S5PV210)
 #define S3C_IIS_V2_SUPPORTED
 #endif
 
 #ifdef CONFIG_PLAT_S3C64XX
+=======
+	|| defined(CONFIG_ARCH_S3C64XX) || defined(CONFIG_CPU_S5PV210)
+>>>>>>> v3.18
 =======
 	|| defined(CONFIG_ARCH_S3C64XX) || defined(CONFIG_CPU_S5PV210)
 >>>>>>> v3.18
@@ -340,6 +351,7 @@ static int s3c_i2sv2_hw_params(struct snd_pcm_substream *substream,
 	iismod &= ~S3C64XX_IISMOD_BLC_MASK;
 	/* Sample size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S8:
 		iismod |= S3C64XX_IISMOD_BLC_8BIT;
@@ -348,6 +360,8 @@ static int s3c_i2sv2_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S24_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 8:
 		iismod |= S3C64XX_IISMOD_BLC_8BIT;
@@ -355,6 +369,9 @@ static int s3c_i2sv2_hw_params(struct snd_pcm_substream *substream,
 	case 16:
 		break;
 	case 24:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		iismod |= S3C64XX_IISMOD_BLC_24BIT;
 		break;
@@ -420,8 +437,11 @@ static int s3c2412_i2s_trigger(struct snd_pcm_substream *substream, int cmd,
 	unsigned long irqs;
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s3c_dma_params *dma_data =
 		snd_soc_dai_get_dma_data(rtd->cpu_dai, substream);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -455,6 +475,7 @@ static int s3c2412_i2s_trigger(struct snd_pcm_substream *substream, int cmd,
 		local_irq_restore(irqs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Load the next buffer to DMA to meet the reqirement
 		 * of the auto reload mechanism of S3C24XX.
@@ -462,6 +483,8 @@ static int s3c2412_i2s_trigger(struct snd_pcm_substream *substream, int cmd,
 		 */
 		s3c2410_dma_ctrl(dma_data->channel, S3C2410_DMAOP_STARTED);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -678,12 +701,15 @@ int s3c_i2sv2_probe(struct snd_soc_dai *dai,
 	snd_soc_dai_set_drvdata(dai, i2s);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2s->regs = ioremap(base, 0x100);
 	if (i2s->regs == NULL) {
 		dev_err(dev, "cannot ioremap registers\n");
 		return -ENXIO;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	i2s->iis_pclk = clk_get(dev, "iis");
@@ -763,15 +789,21 @@ static int s3c2412_i2s_resume(struct snd_soc_dai *dai)
 
 int s3c_i2sv2_register_component(struct device *dev, int id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   const struct snd_soc_component_driver *cmp_drv,
 			   struct snd_soc_dai_driver *dai_drv)
 {
 	struct snd_soc_dai_ops *ops = drv->ops;
 =======
+=======
+>>>>>>> v3.18
 			   struct snd_soc_component_driver *cmp_drv,
 			   struct snd_soc_dai_driver *dai_drv)
 {
 	struct snd_soc_dai_ops *ops = (struct snd_soc_dai_ops *)dai_drv->ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ops->trigger = s3c2412_i2s_trigger;
@@ -786,15 +818,21 @@ int s3c_i2sv2_register_component(struct device *dev, int id,
 		ops->delay = s3c2412_i2s_delay;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drv->suspend = s3c2412_i2s_suspend;
 	drv->resume = s3c2412_i2s_resume;
 
 	return snd_soc_register_component(dev, cmp_drv, dai_drv, 1);
 =======
+=======
+>>>>>>> v3.18
 	dai_drv->suspend = s3c2412_i2s_suspend;
 	dai_drv->resume = s3c2412_i2s_resume;
 
 	return devm_snd_soc_register_component(dev, cmp_drv, dai_drv, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(s3c_i2sv2_register_component);

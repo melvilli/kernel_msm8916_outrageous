@@ -32,7 +32,11 @@ int show_unhandled_signals = 1;
  * Allocate space for the signal frame
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __user * get_sigframe(struct k_sigaction *ka, unsigned long sp,
+=======
+void __user *get_sigframe(struct ksignal *ksig, unsigned long sp,
+>>>>>>> v3.18
 =======
 void __user *get_sigframe(struct ksignal *ksig, unsigned long sp,
 >>>>>>> v3.18
@@ -43,6 +47,7 @@ void __user *get_sigframe(struct ksignal *ksig, unsigned long sp,
         /* Default to using normal stack */
         oldsp = get_clean_sp(sp, is_32);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Check for alt stack */
 	if ((ka->sa.sa_flags & SA_ONSTACK) &&
@@ -50,6 +55,9 @@ void __user *get_sigframe(struct ksignal *ksig, unsigned long sp,
 		oldsp = (current->sas_ss_sp + current->sas_ss_size);
 
 	/* Get aligned frame */
+=======
+	oldsp = sigsp(oldsp, ksig);
+>>>>>>> v3.18
 =======
 	oldsp = sigsp(oldsp, ksig);
 >>>>>>> v3.18
@@ -114,6 +122,7 @@ static void check_syscall_restart(struct pt_regs *regs, struct k_sigaction *ka,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_signal(struct pt_regs *regs)
 {
 	sigset_t *oldset = sigmask_to_save();
@@ -134,6 +143,8 @@ static int do_signal(struct pt_regs *regs)
 		regs->trap = 0;
 		return 0;               /* no signals delivered */
 =======
+=======
+>>>>>>> v3.18
 static void do_signal(struct pt_regs *regs)
 {
 	sigset_t *oldset = sigmask_to_save();
@@ -151,6 +162,9 @@ static void do_signal(struct pt_regs *regs)
 		restore_saved_sigmask();
 		regs->trap = 0;
 		return;               /* no signals delivered */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -163,7 +177,11 @@ static void do_signal(struct pt_regs *regs)
 	if (current->thread.hw_brk.address &&
 		current->thread.hw_brk.type)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_breakpoint(&current->thread.hw_brk);
+=======
+		__set_breakpoint(&current->thread.hw_brk);
+>>>>>>> v3.18
 =======
 		__set_breakpoint(&current->thread.hw_brk);
 >>>>>>> v3.18
@@ -172,6 +190,7 @@ static void do_signal(struct pt_regs *regs)
 	thread_change_pc(current, regs);
 
 	if (is32) {
+<<<<<<< HEAD
 <<<<<<< HEAD
         	if (ka.sa.sa_flags & SA_SIGINFO)
 			ret = handle_rt_signal32(signr, &ka, &info, oldset,
@@ -191,6 +210,8 @@ static void do_signal(struct pt_regs *regs)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
         	if (ksig.ka.sa.sa_flags & SA_SIGINFO)
 			ret = handle_rt_signal32(&ksig, oldset, regs);
 		else
@@ -201,6 +222,9 @@ static void do_signal(struct pt_regs *regs)
 
 	regs->trap = 0;
 	signal_setup_done(ret, &ksig, test_thread_flag(TIF_SINGLESTEP));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -249,8 +273,12 @@ unsigned long get_tm_stackpointer(struct pt_regs *regs)
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 	if (MSR_TM_ACTIVE(regs->msr)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tm_enable();
 		tm_reclaim(&current->thread, regs->msr, TM_CAUSE_SIGNAL);
+=======
+		tm_reclaim_current(TM_CAUSE_SIGNAL);
+>>>>>>> v3.18
 =======
 		tm_reclaim_current(TM_CAUSE_SIGNAL);
 >>>>>>> v3.18

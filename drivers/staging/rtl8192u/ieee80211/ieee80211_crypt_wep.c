@@ -39,7 +39,11 @@ struct prism2_wep_data {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void * prism2_wep_init(int keyidx)
+=======
+static void *prism2_wep_init(int keyidx)
+>>>>>>> v3.18
 =======
 static void *prism2_wep_init(int keyidx)
 >>>>>>> v3.18
@@ -258,7 +262,11 @@ static int prism2_wep_get_key(void *key, int len, u8 *seq, void *priv)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char * prism2_wep_print_stats(char *p, void *priv)
+=======
+static char *prism2_wep_print_stats(char *p, void *priv)
+>>>>>>> v3.18
 =======
 static char *prism2_wep_print_stats(char *p, void *priv)
 >>>>>>> v3.18
@@ -299,7 +307,11 @@ void __exit ieee80211_crypto_wep_exit(void)
 void ieee80211_wep_null(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 //	printk("============>%s()\n", __FUNCTION__);
+=======
+//	printk("============>%s()\n", __func__);
+>>>>>>> v3.18
 =======
 //	printk("============>%s()\n", __func__);
 >>>>>>> v3.18

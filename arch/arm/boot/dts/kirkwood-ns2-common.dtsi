@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "kirkwood.dtsi"
 /include/ "kirkwood-6281.dtsi"
+=======
+#include "kirkwood.dtsi"
+#include "kirkwood-6281.dtsi"
+>>>>>>> v3.18
 =======
 #include "kirkwood.dtsi"
 #include "kirkwood-6281.dtsi"
@@ -9,6 +14,7 @@
 / {
 	chosen {
 		bootargs = "console=ttyS0,115200n8";
+<<<<<<< HEAD
 <<<<<<< HEAD
 	};
 
@@ -19,11 +25,16 @@
 			pinctrl-names = "default";
 
 =======
+=======
+>>>>>>> v3.18
 		stdout-path = &uart0;
 	};
 
 	ocp@f1000000 {
 		pinctrl: pin-controller@10000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pmx_ns2_sata0: pmx-ns2-sata0 {
 				marvell,pins = "mpp21";
@@ -46,7 +57,11 @@
 				#address-cells = <1>;
 				#size-cells = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				compatible = "mx25l4005a";
+=======
+				compatible = "mxicy,mx25l4005a";
+>>>>>>> v3.18
 =======
 				compatible = "mxicy,mx25l4005a";
 >>>>>>> v3.18
@@ -66,7 +81,11 @@
 
 			eeprom@50 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				compatible = "at,24c04";
+=======
+				compatible = "atmel,24c04";
+>>>>>>> v3.18
 =======
 				compatible = "atmel,24c04";
 >>>>>>> v3.18
@@ -84,8 +103,13 @@
 		button@1 {
 			label = "Power push button";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <116>;
 			gpios = <&gpio1 0 0>;
+=======
+			linux,code = <KEY_POWER>;
+			gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_POWER>;
 			gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>;
@@ -99,7 +123,11 @@
 		red-fail {
 			label = "ns2:red:fail";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio0 12 0>;
+=======
+			gpios = <&gpio0 12 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio0 12 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -109,10 +137,13 @@
 	gpio_poweroff {
 		compatible = "gpio-poweroff";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpios = <&gpio0 31 0>;
 	};
 
 =======
+=======
+>>>>>>> v3.18
 		gpios = <&gpio0 31 GPIO_ACTIVE_HIGH>;
 	};
 
@@ -131,5 +162,8 @@
 	ethernet0-port@0 {
 		phy-handle = <&ethphy0>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

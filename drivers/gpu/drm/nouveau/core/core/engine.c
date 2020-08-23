@@ -43,12 +43,15 @@ nouveau_engine_create_(struct nouveau_object *parent,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ( parent &&
 	    !nouveau_boolopt(nv_device(parent)->cfgopt, iname, enable)) {
 		if (!enable)
 			nv_warn(engine, "disabled, %s=1 to enable\n", iname);
 		return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	if (parent) {
 		struct nouveau_device *device = nv_device(parent);
 		int engidx = nv_engidx(nv_object(engine));
@@ -67,6 +70,9 @@ nouveau_engine_create_(struct nouveau_object *parent,
 				nv_warn(engine, "disabled, %s=1 to enable\n", iname);
 			return -ENODEV;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

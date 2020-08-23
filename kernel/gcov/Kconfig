@@ -36,7 +36,11 @@ config GCOV_PROFILE_ALL
 	bool "Profile entire Kernel"
 	depends on GCOV_KERNEL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SUPERH || S390 || X86 || PPC || MICROBLAZE
+=======
+	depends on SUPERH || S390 || X86 || PPC || MICROBLAZE || ARM || ARM64
+>>>>>>> v3.18
 =======
 	depends on SUPERH || S390 || X86 || PPC || MICROBLAZE || ARM || ARM64
 >>>>>>> v3.18
@@ -51,7 +55,10 @@ config GCOV_PROFILE_ALL
 	which are not linked to the kernel image to prevent linker errors.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 choice
 	prompt "Specify GCOV format"
 	depends on GCOV_KERNEL
@@ -82,5 +89,8 @@ config GCOV_FORMAT_4_7
 
 endchoice
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu

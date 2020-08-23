@@ -17,7 +17,10 @@
 #include <linux/pci.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/serio.h>
@@ -185,7 +188,10 @@ static void pcips2_remove(struct pci_dev *dev)
 
 	serio_unregister_port(ps2if->io);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(ps2if);

@@ -3,7 +3,11 @@ Allwinner A1X SoCs Timer Controller
 Required properties:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : should be "allwinner,sun4i-timer"
+=======
+- compatible : should be "allwinner,sun4i-a10-timer"
+>>>>>>> v3.18
 =======
 - compatible : should be "allwinner,sun4i-a10-timer"
 >>>>>>> v3.18
@@ -15,7 +19,11 @@ Example:
 
 timer {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	compatible = "allwinner,sun4i-timer";
+=======
+	compatible = "allwinner,sun4i-a10-timer";
+>>>>>>> v3.18
 =======
 	compatible = "allwinner,sun4i-a10-timer";
 >>>>>>> v3.18

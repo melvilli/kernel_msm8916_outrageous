@@ -411,13 +411,19 @@ struct fc_seq {
  * @class:        The class of service
  * @seq:          The sequence in use on this exchange
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @resp_active:  Number of tasks that are concurrently executing @resp().
  * @resp_task:    If @resp_active > 0, either the task executing @resp(), the
  *                task that has been interrupted to execute the soft-IRQ
  *                executing @resp() or NULL if more than one task is executing
  *                @resp concurrently.
  * @resp_wq:      Waitqueue for the tasks waiting on @resp_active.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @resp:         Callback for responses on this exchange
  * @destructor:   Called when destroying the exchange
@@ -451,6 +457,12 @@ struct fc_exch {
 	u32		    f_ctl;
 	struct fc_seq       seq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int		    resp_active;
+	struct task_struct  *resp_task;
+	wait_queue_head_t   resp_wq;
+>>>>>>> v3.18
 =======
 	int		    resp_active;
 	struct task_struct  *resp_task;

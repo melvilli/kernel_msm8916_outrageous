@@ -20,6 +20,10 @@
 #include <linux/input.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -60,8 +64,13 @@
 #include <asm/mach-types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
 #include <mach/regs-gpio.h>
+=======
+#include <mach/regs-gpio.h>
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/regs-gpio.h>
 #include <mach/gpio-samsung.h>
@@ -72,7 +81,10 @@
 #include <plat/gpio-cfg.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/clock.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/devs.h>
@@ -287,6 +299,10 @@ static struct platform_device *smdk6410_devices[] __initdata = {
 	&s3c_device_fb,
 	&s3c_device_ohci,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&samsung_device_pwm,
+>>>>>>> v3.18
 =======
 	&samsung_device_pwm,
 >>>>>>> v3.18
@@ -641,6 +657,10 @@ static struct samsung_bl_gpio_info smdk6410_bl_gpio_info = {
 static struct platform_pwm_backlight_data smdk6410_bl_data = {
 	.pwm_id = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio = -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio = -1,
 >>>>>>> v3.18
@@ -654,7 +674,11 @@ static void __init smdk6410_map_io(void)
 
 	s3c64xx_init_io(smdk6410_iodesc, ARRAY_SIZE(smdk6410_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(12000000);
+=======
+	s3c64xx_set_xtal_freq(12000000);
+>>>>>>> v3.18
 =======
 	s3c64xx_set_xtal_freq(12000000);
 >>>>>>> v3.18
@@ -716,9 +740,15 @@ static void __init smdk6410_machine_init(void)
 	s3c_ide_set_platdata(&smdk6410_ide_pdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	samsung_bl_set(&smdk6410_bl_gpio_info, &smdk6410_bl_data);
 
 	platform_add_devices(smdk6410_devices, ARRAY_SIZE(smdk6410_devices));
+=======
+	platform_add_devices(smdk6410_devices, ARRAY_SIZE(smdk6410_devices));
+
+	samsung_bl_set(&smdk6410_bl_gpio_info, &smdk6410_bl_data);
+>>>>>>> v3.18
 =======
 	platform_add_devices(smdk6410_devices, ARRAY_SIZE(smdk6410_devices));
 
@@ -734,7 +764,10 @@ MACHINE_START(SMDK6410, "SMDK6410")
 	.map_io		= smdk6410_map_io,
 	.init_machine	= smdk6410_machine_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_late	= s3c64xx_init_late,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= samsung_timer_init,

@@ -51,8 +51,11 @@
 #define msecs_to_loops(t) (loops_per_jiffy / 1000 * HZ * t)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MIN_OSCR_DELTA		16
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void __iomem *regbase;
@@ -86,7 +89,11 @@ static int vt8500_timer_set_next_event(unsigned long cycles,
 	writel((unsigned long)alarm, regbase + TIMER_MATCH_VAL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((signed)(alarm - clocksource.read(&clocksource)) <= MIN_OSCR_DELTA)
+=======
+	if ((signed)(alarm - clocksource.read(&clocksource)) <= 16)
+>>>>>>> v3.18
 =======
 	if ((signed)(alarm - clocksource.read(&clocksource)) <= 16)
 >>>>>>> v3.18
@@ -134,7 +141,11 @@ static irqreturn_t vt8500_timer_interrupt(int irq, void *dev_id)
 static struct irqaction irq = {
 	.name    = "vt8500_timer",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags   = IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags   = IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags   = IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -151,7 +162,10 @@ static void __init vt8500_timer_init(struct device_node *np)
 		pr_err("%s: Missing iobase description in Device Tree\n",
 								__func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		of_node_put(np);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return;
@@ -161,7 +175,10 @@ static void __init vt8500_timer_init(struct device_node *np)
 		pr_err("%s: Missing irq description in Device Tree\n",
 								__func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		of_node_put(np);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return;
@@ -182,7 +199,11 @@ static void __init vt8500_timer_init(struct device_node *np)
 							clockevent.name);
 	clockevents_config_and_register(&clockevent, VT8500_TIMER_HZ,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					MIN_OSCR_DELTA * 2, 0xf0000000);
+=======
+					4, 0xf0000000);
+>>>>>>> v3.18
 =======
 					4, 0xf0000000);
 >>>>>>> v3.18

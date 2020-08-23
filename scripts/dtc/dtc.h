@@ -67,7 +67,10 @@ typedef uint32_t cell_t;
 
 #define ALIGN(x, a)	(((x) + (a) - 1) & ~((a) - 1))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

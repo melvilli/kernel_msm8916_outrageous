@@ -39,6 +39,12 @@ extern int cu_walk_functions_at(Dwarf_Die *cu_die, Dwarf_Addr addr,
 			int (*callback)(Dwarf_Die *, void *), void *data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Ensure that this DIE is a subprogram and definition (not declaration) */
+extern bool die_is_func_def(Dwarf_Die *dw_die);
+
+>>>>>>> v3.18
 =======
 /* Ensure that this DIE is a subprogram and definition (not declaration) */
 extern bool die_is_func_def(Dwarf_Die *dw_die);
@@ -83,13 +89,19 @@ extern Dwarf_Die *die_find_realfunc(Dwarf_Die *cu_die, Dwarf_Addr addr,
 				    Dwarf_Die *die_mem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Search an inlined function including given address */
 =======
+=======
+>>>>>>> v3.18
 /* Search the top inlined function including given address */
 extern Dwarf_Die *die_find_top_inlinefunc(Dwarf_Die *sp_die, Dwarf_Addr addr,
 					  Dwarf_Die *die_mem);
 
 /* Search the deepest inlined function including given address */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern Dwarf_Die *die_find_inlinefunc(Dwarf_Die *sp_die, Dwarf_Addr addr,
 				      Dwarf_Die *die_mem);

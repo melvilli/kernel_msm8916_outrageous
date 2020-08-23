@@ -92,6 +92,10 @@ void imx_enable_cpu(int cpu, bool enable)
 	val = readl_relaxed(src_base + SRC_SCR);
 	val = enable ? val | mask : val & ~mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	val |= 1 << (BP_SRC_SCR_CORE1_RST + cpu - 1);
+>>>>>>> v3.18
 =======
 	val |= 1 << (BP_SRC_SCR_CORE1_RST + cpu - 1);
 >>>>>>> v3.18
@@ -119,6 +123,7 @@ void imx_set_cpu_arg(int cpu, u32 arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void imx_src_prepare_restart(void)
 {
 	u32 val;
@@ -134,6 +139,8 @@ void imx_src_prepare_restart(void)
 	writel_relaxed(0, src_base + SRC_GPR1);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init imx_src_init(void)

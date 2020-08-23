@@ -70,8 +70,13 @@ struct wa_notif_work {
  *
  * @_nw:	Pointer to a descriptor which has the pointer to the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 		@wa, the size of the buffer and the work queue
  * 		structure (so we can free all when done).
+=======
+ *		@wa, the size of the buffer and the work queue
+ *		structure (so we can free all when done).
+>>>>>>> v3.18
 =======
  *		@wa, the size of the buffer and the work queue
  *		structure (so we can free all when done).
@@ -99,7 +104,12 @@ static void wa_notif_dispatch(struct work_struct *ws)
 	void *itr;
 	u8 missing = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wa_notif_work *nw = container_of(ws, struct wa_notif_work, work);
+=======
+	struct wa_notif_work *nw = container_of(ws, struct wa_notif_work,
+						work);
+>>>>>>> v3.18
 =======
 	struct wa_notif_work *nw = container_of(ws, struct wa_notif_work,
 						work);
@@ -145,14 +155,20 @@ static void wa_notif_dispatch(struct work_struct *ws)
 			wa_handle_notif_xfer(wa, notif_hdr);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case DWA_NOTIF_RWAKE:
 		case DWA_NOTIF_PORTSTATUS:
 		case HWA_NOTIF_BPST_ADJ:
 =======
+=======
+>>>>>>> v3.18
 		case HWA_NOTIF_BPST_ADJ:
 			break; /* no action needed for BPST ADJ. */
 		case DWA_NOTIF_RWAKE:
 		case DWA_NOTIF_PORTSTATUS:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* FIXME: unimplemented WA NOTIFs */
 			/* fallthru */
@@ -288,7 +304,12 @@ int wa_nep_create(struct wahc *wa, struct usb_interface *iface)
 	wa->nep_buffer = kmalloc(wa->nep_buffer_size, GFP_KERNEL);
 	if (wa->nep_buffer == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev, "Unable to allocate notification's read buffer\n");
+=======
+		dev_err(dev,
+			"Unable to allocate notification's read buffer\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev,
 			"Unable to allocate notification's read buffer\n");

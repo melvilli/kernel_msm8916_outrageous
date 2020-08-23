@@ -33,6 +33,7 @@
 /* Post-execution fixups. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* No fixup needed */
 #define UPROBE_FIX_NONE		0x0
 
@@ -48,6 +49,8 @@
 #define UPROBE_FIX_RIP_AX	0x8000
 #define UPROBE_FIX_RIP_CX	0x4000
 =======
+=======
+>>>>>>> v3.18
 /* Adjust IP back to vicinity of actual insn */
 #define UPROBE_FIX_IP		0x01
 
@@ -62,6 +65,9 @@
 #define UPROBE_FIX_RIP_BX	0x20
 #define UPROBE_FIX_RIP_MASK	\
 	(UPROBE_FIX_RIP_SI | UPROBE_FIX_RIP_DI | UPROBE_FIX_RIP_BX)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	UPROBE_TRAP_NR		UINT_MAX
@@ -71,7 +77,11 @@
 #define OPCODE2(insn)		((insn)->opcode.bytes[1])
 #define OPCODE3(insn)		((insn)->opcode.bytes[2])
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MODRM_REG(insn)		X86_MODRM_REG(insn->modrm.value)
+=======
+#define MODRM_REG(insn)		X86_MODRM_REG((insn)->modrm.value)
+>>>>>>> v3.18
 =======
 #define MODRM_REG(insn)		X86_MODRM_REG((insn)->modrm.value)
 >>>>>>> v3.18
@@ -89,6 +99,10 @@
  * some versions of gcc to think only *(unsigned long*) is used.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_X86_32) || defined(CONFIG_IA32_EMULATION)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_X86_32) || defined(CONFIG_IA32_EMULATION)
 >>>>>>> v3.18
@@ -114,6 +128,7 @@ static volatile u32 good_insns_32[256 / 32] = {
 	/*      ----------------------------------------------         */
 	/*      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f         */
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* Using this for both 64-bit and 32-bit apps */
@@ -143,12 +158,17 @@ static volatile u32 good_2byte_insns[256 / 32] = {
 #ifdef CONFIG_X86_64
 /* Good-instruction tables for 64-bit apps */
 =======
+=======
+>>>>>>> v3.18
 #else
 #define good_insns_32	NULL
 #endif
 
 /* Good-instruction tables for 64-bit apps */
 #if defined(CONFIG_X86_64)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static volatile u32 good_insns_64[256 / 32] = {
 	/*      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f         */
@@ -173,8 +193,11 @@ static volatile u32 good_insns_64[256 / 32] = {
 	/*      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f         */
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 =======
+=======
+>>>>>>> v3.18
 #else
 #define good_insns_64	NULL
 #endif
@@ -202,6 +225,9 @@ static volatile u32 good_2byte_insns[256 / 32] = {
 	/*      ----------------------------------------------         */
 	/*      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f         */
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef W
 
@@ -274,6 +300,7 @@ static bool is_prefix_bad(struct insn *insn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int validate_insn_32bits(struct arch_uprobe *auprobe, struct insn *insn)
 {
 	insn_init(insn, auprobe->insn, false);
@@ -285,6 +312,8 @@ static int validate_insn_32bits(struct arch_uprobe *auprobe, struct insn *insn)
 
 	if (test_bit(OPCODE1(insn), (unsigned long *)good_insns_32))
 =======
+=======
+>>>>>>> v3.18
 static int uprobe_init_insn(struct arch_uprobe *auprobe, struct insn *insn, bool x86_64)
 {
 	u32 volatile *good_insns;
@@ -304,6 +333,9 @@ static int uprobe_init_insn(struct arch_uprobe *auprobe, struct insn *insn, bool
 		good_insns = good_insns_32;
 
 	if (test_bit(OPCODE1(insn), (unsigned long *)good_insns))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -315,6 +347,7 @@ static int uprobe_init_insn(struct arch_uprobe *auprobe, struct insn *insn, bool
 	return -ENOTSUPP;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Figure out which fixups arch_uprobe_post_xol() will need to perform, and
@@ -375,22 +408,33 @@ static void prepare_fixups(struct arch_uprobe *auprobe, struct insn *insn)
 
 #ifdef CONFIG_X86_64
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_64
 static inline bool is_64bit_mm(struct mm_struct *mm)
 {
 	return	!config_enabled(CONFIG_IA32_EMULATION) ||
 		!(mm->context.ia32_compat == TIF_IA32);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * If arch_uprobe->insn doesn't use rip-relative addressing, return
  * immediately.  Otherwise, rewrite the instruction so that it accesses
  * its memory operand indirectly through a scratch register.  Set
 <<<<<<< HEAD
+<<<<<<< HEAD
  * arch_uprobe->fixups and arch_uprobe->rip_rela_target_address
  * accordingly.  (The contents of the scratch register will be saved
  * before we single-step the modified instruction, and restored
  * afterward.)
+=======
+ * defparam->fixups accordingly. (The contents of the scratch register
+ * will be saved before we single-step the modified instruction,
+ * and restored afterward).
+>>>>>>> v3.18
 =======
  * defparam->fixups accordingly. (The contents of the scratch register
  * will be saved before we single-step the modified instruction,
@@ -407,6 +451,7 @@ static inline bool is_64bit_mm(struct mm_struct *mm)
  * Some useful facts about rip-relative instructions:
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  - There's always a modrm byte.
  *  - There's never a SIB byte.
  *  - The displacement is always 4 bytes.
@@ -422,6 +467,8 @@ handle_riprel_insn(struct arch_uprobe *auprobe, struct mm_struct *mm, struct ins
 
 	auprobe->rip_rela_target_address = 0x0;
 =======
+=======
+>>>>>>> v3.18
  *  - There's always a modrm byte with bit layout "00 reg 101".
  *  - There's never a SIB byte.
  *  - The displacement is always 4 bytes.
@@ -435,11 +482,15 @@ static void riprel_analyze(struct arch_uprobe *auprobe, struct insn *insn)
 	u8 reg;
 	u8 reg2;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!insn_rip_relative(insn))
 		return;
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * insn_rip_relative() would have decoded rex_prefix, modrm.
 	 * Clear REX.b bit (extension of MODRM.rm field):
@@ -452,6 +503,8 @@ static void riprel_analyze(struct arch_uprobe *auprobe, struct insn *insn)
 
 	/*
 =======
+=======
+>>>>>>> v3.18
 	 * insn_rip_relative() would have decoded rex_prefix, vex_prefix, modrm.
 	 * Clear REX.b bit (extension of MODRM.rm field):
 	 * we want to encode low numbered reg, not r8+.
@@ -550,12 +603,16 @@ static void riprel_analyze(struct arch_uprobe *auprobe, struct insn *insn)
 		auprobe->defparam.fixups |= UPROBE_FIX_RIP_BX;
 	}
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Point cursor at the modrm byte.  The next 4 bytes are the
 	 * displacement.  Beyond the displacement, for some instructions,
 	 * is the immediate operand.
 	 */
 	cursor = auprobe->insn + insn_offset_modrm(insn);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	insn_get_length(insn);
 
@@ -767,6 +824,8 @@ handle_riprel_post_xol(struct arch_uprobe *auprobe, struct pt_regs *regs, long *
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Change modrm from "00 reg 101" to "10 reg reg2". Example:
 	 * 89 05 disp32  mov %eax,disp32(%rip) becomes
@@ -1154,6 +1213,9 @@ int arch_uprobe_pre_xol(struct arch_uprobe *auprobe, struct pt_regs *regs)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1180,6 +1242,7 @@ bool arch_uprobe_xol_was_trapped(struct task_struct *t)
  * single-step, we single-stepped a copy of the instruction.
  *
  * This function prepares to resume execution after the single-step.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * We have to fix things up as follows:
  *
@@ -1218,6 +1281,8 @@ int arch_uprobe_post_xol(struct arch_uprobe *auprobe, struct pt_regs *regs)
 		result = adjust_ret_addr(regs->sp, correction);
 
 =======
+=======
+>>>>>>> v3.18
  */
 int arch_uprobe_post_xol(struct arch_uprobe *auprobe, struct pt_regs *regs)
 {
@@ -1242,12 +1307,16 @@ int arch_uprobe_post_xol(struct arch_uprobe *auprobe, struct pt_regs *regs)
 			send_sigtrap = false;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * arch_uprobe_pre_xol() doesn't save the state of TIF_BLOCKSTEP
 	 * so we can get an extra SIGTRAP if we do not clear TF. We need
 	 * to examine the opcode to make it right.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (utask->autask.saved_tf)
 		send_sig(SIGTRAP, current, 0);
@@ -1256,6 +1325,8 @@ int arch_uprobe_post_xol(struct arch_uprobe *auprobe, struct pt_regs *regs)
 
 	return result;
 =======
+=======
+>>>>>>> v3.18
 	if (send_sigtrap)
 		send_sig(SIGTRAP, current, 0);
 
@@ -1263,6 +1334,9 @@ int arch_uprobe_post_xol(struct arch_uprobe *auprobe, struct pt_regs *regs)
 		regs->flags &= ~X86_EFLAGS_TF;
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1298,8 +1372,13 @@ int arch_uprobe_exception_notify(struct notifier_block *self, unsigned long val,
 /*
  * This function gets called when XOL instruction either gets trapped or
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the thread has a fatal signal, so reset the instruction pointer to its
  * probed address.
+=======
+ * the thread has a fatal signal. Reset the instruction pointer to its
+ * probed address for the potential restart or for post mortem analysis.
+>>>>>>> v3.18
 =======
  * the thread has a fatal signal. Reset the instruction pointer to its
  * probed address for the potential restart or for post mortem analysis.
@@ -1310,22 +1389,29 @@ void arch_uprobe_abort_xol(struct arch_uprobe *auprobe, struct pt_regs *regs)
 	struct uprobe_task *utask = current->utask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	current->thread.trap_nr = utask->autask.saved_trap_nr;
 	handle_riprel_post_xol(auprobe, regs, NULL);
 	instruction_pointer_set(regs, utask->vaddr);
 
 =======
+=======
+>>>>>>> v3.18
 	if (auprobe->ops->abort)
 		auprobe->ops->abort(auprobe, regs);
 
 	current->thread.trap_nr = utask->autask.saved_trap_nr;
 	regs->ip = utask->vaddr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* clear TF if it was set by us in arch_uprobe_pre_xol() */
 	if (!utask->autask.saved_tf)
 		regs->flags &= ~X86_EFLAGS_TF;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Skip these instructions as per the currently known x86 ISA.
@@ -1347,10 +1433,15 @@ static bool __skip_sstep(struct arch_uprobe *auprobe, struct pt_regs *regs)
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 static bool __skip_sstep(struct arch_uprobe *auprobe, struct pt_regs *regs)
 {
 	if (auprobe->ops->emulate)
 		return auprobe->ops->emulate(auprobe, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return false;
 }
@@ -1367,6 +1458,7 @@ unsigned long
 arch_uretprobe_hijack_return_addr(unsigned long trampoline_vaddr, struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rasize, ncopied;
 	unsigned long orig_ret_vaddr = 0; /* clear high bits for 32-bit apps */
 
@@ -1374,10 +1466,15 @@ arch_uretprobe_hijack_return_addr(unsigned long trampoline_vaddr, struct pt_regs
 	ncopied = copy_from_user(&orig_ret_vaddr, (void __user *)regs->sp, rasize);
 	if (unlikely(ncopied))
 =======
+=======
+>>>>>>> v3.18
 	int rasize = sizeof_long(), nleft;
 	unsigned long orig_ret_vaddr = 0; /* clear high bits for 32-bit apps */
 
 	if (copy_from_user(&orig_ret_vaddr, (void __user *)regs->sp, rasize))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -1;
 
@@ -1386,17 +1483,23 @@ arch_uretprobe_hijack_return_addr(unsigned long trampoline_vaddr, struct pt_regs
 		return orig_ret_vaddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ncopied = copy_to_user((void __user *)regs->sp, &trampoline_vaddr, rasize);
 	if (likely(!ncopied))
 		return orig_ret_vaddr;
 
 	if (ncopied != rasize) {
 =======
+=======
+>>>>>>> v3.18
 	nleft = copy_to_user((void __user *)regs->sp, &trampoline_vaddr, rasize);
 	if (likely(!nleft))
 		return orig_ret_vaddr;
 
 	if (nleft != rasize) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_err("uprobe: return address clobbered: pid=%d, %%sp=%#lx, "
 			"%%ip=%#lx\n", current->pid, regs->sp, regs->ip);

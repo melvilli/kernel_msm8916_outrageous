@@ -19,7 +19,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -31,6 +34,10 @@
 #include <linux/input/matrix_keypad.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -108,7 +115,11 @@
 
 struct pxa27x_keypad {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa27x_keypad_platform_data *pdata;
+=======
+	const struct pxa27x_keypad_platform_data *pdata;
+>>>>>>> v3.18
 =======
 	const struct pxa27x_keypad_platform_data *pdata;
 >>>>>>> v3.18
@@ -123,6 +134,11 @@ struct pxa27x_keypad {
 	int rotary_rel_code[2];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int row_shift;
+
+>>>>>>> v3.18
 =======
 	unsigned int row_shift;
 
@@ -134,6 +150,7 @@ struct pxa27x_keypad {
 	unsigned int direct_key_mask;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void pxa27x_keypad_build_keycode(struct pxa27x_keypad *keypad)
 {
@@ -155,6 +172,8 @@ static void pxa27x_keypad_build_keycode(struct pxa27x_keypad *keypad)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static int pxa27x_keypad_matrix_key_parse_dt(struct pxa27x_keypad *keypad,
 				struct pxa27x_keypad_platform_data *pdata)
@@ -403,6 +422,9 @@ static int pxa27x_keypad_build_keycode(struct pxa27x_keypad *keypad)
 	input_dev->keycodemax = ARRAY_SIZE(keypad->keycodes);
 
 	/* For direct keys. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < pdata->direct_key_num; i++) {
 		keycode = pdata->direct_key_map[i];
@@ -446,6 +468,11 @@ static int pxa27x_keypad_build_keycode(struct pxa27x_keypad *keypad)
 
 	__clear_bit(KEY_RESERVED, input_dev->keybit);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -455,7 +482,11 @@ static int pxa27x_keypad_build_keycode(struct pxa27x_keypad *keypad)
 static void pxa27x_keypad_scan_matrix(struct pxa27x_keypad *keypad)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
+=======
+	const struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
+>>>>>>> v3.18
 =======
 	const struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
 >>>>>>> v3.18
@@ -513,7 +544,12 @@ scan:
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			code = MATRIX_SCAN_CODE(row, col, MATRIX_ROW_SHIFT);
+=======
+			code = MATRIX_SCAN_CODE(row, col, keypad->row_shift);
+
+>>>>>>> v3.18
 =======
 			code = MATRIX_SCAN_CODE(row, col, keypad->row_shift);
 
@@ -566,7 +602,11 @@ static void report_rotary_event(struct pxa27x_keypad *keypad, int r, int delta)
 static void pxa27x_keypad_scan_rotary(struct pxa27x_keypad *keypad)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
+=======
+	const struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
+>>>>>>> v3.18
 =======
 	const struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
 >>>>>>> v3.18
@@ -586,7 +626,11 @@ static void pxa27x_keypad_scan_rotary(struct pxa27x_keypad *keypad)
 static void pxa27x_keypad_scan_direct(struct pxa27x_keypad *keypad)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
+=======
+	const struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
+>>>>>>> v3.18
 =======
 	const struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
 >>>>>>> v3.18
@@ -630,7 +674,11 @@ static void pxa27x_keypad_scan_direct(struct pxa27x_keypad *keypad)
 static void clear_wakeup_event(struct pxa27x_keypad *keypad)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
+=======
+	const struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
+>>>>>>> v3.18
 =======
 	const struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
 >>>>>>> v3.18
@@ -658,7 +706,11 @@ static irqreturn_t pxa27x_keypad_irq_handler(int irq, void *dev_id)
 static void pxa27x_keypad_config(struct pxa27x_keypad *keypad)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
+=======
+	const struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
+>>>>>>> v3.18
 =======
 	const struct pxa27x_keypad_platform_data *pdata = keypad->pdata;
 >>>>>>> v3.18
@@ -729,7 +781,11 @@ static void pxa27x_keypad_close(struct input_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -777,6 +833,7 @@ static int pxa27x_keypad_resume(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct dev_pm_ops pxa27x_keypad_pm_ops = {
 	.suspend	= pxa27x_keypad_suspend,
@@ -788,6 +845,8 @@ static int pxa27x_keypad_probe(struct platform_device *pdev)
 {
 	struct pxa27x_keypad_platform_data *pdata = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 static SIMPLE_DEV_PM_OPS(pxa27x_keypad_pm_ops,
@@ -799,6 +858,9 @@ static int pxa27x_keypad_probe(struct platform_device *pdev)
 	const struct pxa27x_keypad_platform_data *pdata =
 					dev_get_platdata(&pdev->dev);
 	struct device_node *np = pdev->dev.of_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct pxa27x_keypad *keypad;
 	struct input_dev *input_dev;
@@ -806,10 +868,16 @@ static int pxa27x_keypad_probe(struct platform_device *pdev)
 	int irq, error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata == NULL) {
 		dev_err(&pdev->dev, "no platform data defined\n");
 		return -EINVAL;
 	}
+=======
+	/* Driver need build keycode from device tree or pdata */
+	if (!np && !pdata)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	/* Driver need build keycode from device tree or pdata */
 	if (!np && !pdata)
@@ -877,8 +945,11 @@ static int pxa27x_keypad_probe(struct platform_device *pdev)
 	input_set_capability(input_dev, EV_MSC, MSC_SCAN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pxa27x_keypad_build_keycode(keypad);
 =======
+=======
+>>>>>>> v3.18
 	if (pdata) {
 		error = pxa27x_keypad_build_keycode(keypad);
 	} else {
@@ -896,6 +967,9 @@ static int pxa27x_keypad_probe(struct platform_device *pdev)
 	}
 
 	keypad->row_shift = get_count_order(pdata->matrix_key_cols);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((pdata->enable_rotary0 && keypad->rotary_rel_code[0] != -1) ||
@@ -924,7 +998,11 @@ static int pxa27x_keypad_probe(struct platform_device *pdev)
 
 failed_free_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(irq, pdev);
+=======
+	free_irq(irq, keypad);
+>>>>>>> v3.18
 =======
 	free_irq(irq, keypad);
 >>>>>>> v3.18
@@ -946,7 +1024,11 @@ static int pxa27x_keypad_remove(struct platform_device *pdev)
 	struct resource *res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(keypad->irq, pdev);
+=======
+	free_irq(keypad->irq, keypad);
+>>>>>>> v3.18
 =======
 	free_irq(keypad->irq, keypad);
 >>>>>>> v3.18
@@ -959,7 +1041,10 @@ static int pxa27x_keypad_remove(struct platform_device *pdev)
 	release_mem_region(res->start, resource_size(res));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(keypad);
@@ -971,7 +1056,10 @@ static int pxa27x_keypad_remove(struct platform_device *pdev)
 MODULE_ALIAS("platform:pxa27x-keypad");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id pxa27x_keypad_dt_match[] = {
 	{ .compatible = "marvell,pxa27x-keypad" },
@@ -980,6 +1068,9 @@ static const struct of_device_id pxa27x_keypad_dt_match[] = {
 MODULE_DEVICE_TABLE(of, pxa27x_keypad_dt_match);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver pxa27x_keypad_driver = {
 	.probe		= pxa27x_keypad_probe,
@@ -987,10 +1078,16 @@ static struct platform_driver pxa27x_keypad_driver = {
 	.driver		= {
 		.name	= "pxa27x-keypad",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
 #ifdef CONFIG_PM
 		.pm	= &pxa27x_keypad_pm_ops,
 #endif
+=======
+		.of_match_table = of_match_ptr(pxa27x_keypad_dt_match),
+		.owner	= THIS_MODULE,
+		.pm	= &pxa27x_keypad_pm_ops,
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(pxa27x_keypad_dt_match),
 		.owner	= THIS_MODULE,

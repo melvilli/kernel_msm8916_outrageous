@@ -13,7 +13,11 @@
 ENTRY(__raw_writesl)
 		teq	r2, #0		@ do we have to check for the zero len?
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moveq	pc, lr
+=======
+		reteq	lr
+>>>>>>> v3.18
 =======
 		reteq	lr
 >>>>>>> v3.18
@@ -38,7 +42,11 @@ ENTRY(__raw_writesl)
 		strcs	ip, [r0, #0]
 		strne	r3, [r0, #0]
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -49,6 +57,7 @@ ENTRY(__raw_writesl)
 		blt	5f
 		bgt	6f
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 4:		mov	ip, r3, pull #16
 		ldr	r3, [r1], #4
@@ -74,6 +83,8 @@ ENTRY(__raw_writesl)
 		bne	6b
 		mov	pc, lr
 =======
+=======
+>>>>>>> v3.18
 4:		mov	ip, r3, lspull #16
 		ldr	r3, [r1], #4
 		subs	r2, r2, #1
@@ -97,5 +108,8 @@ ENTRY(__raw_writesl)
 		str	ip, [r0]
 		bne	6b
 		ret	lr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENDPROC(__raw_writesl)

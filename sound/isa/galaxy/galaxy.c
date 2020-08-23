@@ -507,6 +507,7 @@ static int snd_galaxy_probe(struct device *dev, unsigned int n)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[n], id[n], THIS_MODULE, sizeof *galaxy,
 			      &card);
 	if (err < 0)
@@ -515,11 +516,16 @@ static int snd_galaxy_probe(struct device *dev, unsigned int n)
 	snd_card_set_dev(card, dev);
 
 =======
+=======
+>>>>>>> v3.18
 	err = snd_card_new(dev, index[n], id[n], THIS_MODULE,
 			   sizeof(*galaxy), &card);
 	if (err < 0)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	card->private_free = snd_galaxy_free;
 	galaxy = card->private_data;
@@ -632,7 +638,10 @@ static int snd_galaxy_remove(struct device *dev, unsigned int n)
 {
 	snd_card_free(dev_get_drvdata(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

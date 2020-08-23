@@ -12,6 +12,12 @@
 #include <linux/fcntl.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* For _IO helpers */
+#include <linux/ioctl.h>
+
+>>>>>>> v3.18
 =======
 /* For _IO helpers */
 #include <linux/ioctl.h>
@@ -36,6 +42,11 @@
 #define TFD_SETTIME_FLAGS (TFD_TIMER_ABSTIME | TFD_TIMER_CANCEL_ON_SET)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TFD_IOC_SET_TICKS	_IOW('T', 0, u64)
+
+>>>>>>> v3.18
 =======
 #define TFD_IOC_SET_TICKS	_IOW('T', 0, u64)
 

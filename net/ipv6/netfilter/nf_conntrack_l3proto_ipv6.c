@@ -29,6 +29,10 @@
 #include <net/netfilter/nf_conntrack_core.h>
 #include <net/netfilter/nf_conntrack_zones.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netfilter/nf_conntrack_seqadj.h>
+>>>>>>> v3.18
 =======
 #include <net/netfilter/nf_conntrack_seqadj.h>
 >>>>>>> v3.18
@@ -99,7 +103,11 @@ static int ipv6_get_l4proto(const struct sk_buff *skb, unsigned int nhoff,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int ipv6_helper(unsigned int hooknum,
+=======
+static unsigned int ipv6_helper(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 =======
 static unsigned int ipv6_helper(const struct nf_hook_ops *ops,
 >>>>>>> v3.18
@@ -141,7 +149,11 @@ static unsigned int ipv6_helper(const struct nf_hook_ops *ops,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int ipv6_confirm(unsigned int hooknum,
+=======
+static unsigned int ipv6_confirm(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 =======
 static unsigned int ipv6_confirm(const struct nf_hook_ops *ops,
 >>>>>>> v3.18
@@ -171,11 +183,15 @@ static unsigned int ipv6_confirm(const struct nf_hook_ops *ops,
 	if (test_bit(IPS_SEQ_ADJUST_BIT, &ct->status) &&
 	    !nf_is_loopback_packet(skb)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		typeof(nf_nat_seq_adjust_hook) seq_adjust;
 
 		seq_adjust = rcu_dereference(nf_nat_seq_adjust_hook);
 		if (!seq_adjust ||
 		    !seq_adjust(skb, ct, ctinfo, protoff)) {
+=======
+		if (!nf_ct_seq_adjust(skb, ct, ctinfo, protoff)) {
+>>>>>>> v3.18
 =======
 		if (!nf_ct_seq_adjust(skb, ct, ctinfo, protoff)) {
 >>>>>>> v3.18
@@ -189,7 +205,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int ipv6_conntrack_in(unsigned int hooknum,
+=======
+static unsigned int ipv6_conntrack_in(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 =======
 static unsigned int ipv6_conntrack_in(const struct nf_hook_ops *ops,
 >>>>>>> v3.18
@@ -199,15 +219,21 @@ static unsigned int ipv6_conntrack_in(const struct nf_hook_ops *ops,
 				      int (*okfn)(struct sk_buff *))
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nf_conntrack_in(dev_net(in), PF_INET6, hooknum, skb);
 }
 
 static unsigned int ipv6_conntrack_local(unsigned int hooknum,
 =======
+=======
+>>>>>>> v3.18
 	return nf_conntrack_in(dev_net(in), PF_INET6, ops->hooknum, skb);
 }
 
 static unsigned int ipv6_conntrack_local(const struct nf_hook_ops *ops,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 struct sk_buff *skb,
 					 const struct net_device *in,
@@ -220,7 +246,11 @@ static unsigned int ipv6_conntrack_local(const struct nf_hook_ops *ops,
 		return NF_ACCEPT;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nf_conntrack_in(dev_net(out), PF_INET6, hooknum, skb);
+=======
+	return nf_conntrack_in(dev_net(out), PF_INET6, ops->hooknum, skb);
+>>>>>>> v3.18
 =======
 	return nf_conntrack_in(dev_net(out), PF_INET6, ops->hooknum, skb);
 >>>>>>> v3.18
@@ -282,9 +312,15 @@ ipv6_getorigdst(struct sock *sk, int optval, void __user *user, int *len)
 	struct nf_conn *ct;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tuple.src.u3.in6 = inet6->rcv_saddr;
 	tuple.src.u.tcp.port = inet->inet_sport;
 	tuple.dst.u3.in6 = inet6->daddr;
+=======
+	tuple.src.u3.in6 = sk->sk_v6_rcv_saddr;
+	tuple.src.u.tcp.port = inet->inet_sport;
+	tuple.dst.u3.in6 = sk->sk_v6_daddr;
+>>>>>>> v3.18
 =======
 	tuple.src.u3.in6 = sk->sk_v6_rcv_saddr;
 	tuple.src.u.tcp.port = inet->inet_sport;

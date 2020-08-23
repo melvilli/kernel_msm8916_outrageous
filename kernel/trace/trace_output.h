@@ -36,9 +36,12 @@ extern int __unregister_ftrace_event(struct trace_event *event);
 extern struct rw_semaphore trace_event_sem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_MEMHEX_BYTES	8
 #define HEX_CHARS		(MAX_MEMHEX_BYTES*2 + 1)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SEQ_PUT_FIELD_RET(s, x)				\
@@ -50,7 +53,10 @@ do {							\
 #define SEQ_PUT_HEX_FIELD_RET(s, x)			\
 do {							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUILD_BUG_ON(sizeof(x) > MAX_MEMHEX_BYTES);	\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!trace_seq_putmem_hex(s, &(x), sizeof(x)))	\

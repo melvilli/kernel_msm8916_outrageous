@@ -2,10 +2,13 @@
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: Should be "fsl,imx23-usbphy"
 - reg: Should contain registers location and length
 - interrupts: Should contain phy interrupt
 =======
+=======
+>>>>>>> v3.18
 - compatible: should contain:
 	* "fsl,imx23-usbphy" for imx23 and imx28
 	* "fsl,imx6q-usbphy" for imx6dq and imx6dl
@@ -16,6 +19,9 @@ Required properties:
 - reg: Should contain registers location and length
 - interrupts: Should contain phy interrupt
 - fsl,anatop: phandle for anatop register, it is only for imx6 SoC series
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
@@ -24,6 +30,10 @@ usbphy1: usbphy@020c9000 {
 	reg = <0x020c9000 0x1000>;
 	interrupts = <0 44 0x04>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fsl,anatop = <&anatop>;
+>>>>>>> v3.18
 =======
 	fsl,anatop = <&anatop>;
 >>>>>>> v3.18

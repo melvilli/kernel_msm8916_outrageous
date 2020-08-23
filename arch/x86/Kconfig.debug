@@ -60,6 +60,7 @@ config EARLY_PRINTK_DBGP
 	  unless you want to debug such a crash. You need usb debug device.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DEBUG_STACKOVERFLOW
 	bool "Check for stack overflows"
 	depends on DEBUG_KERNEL
@@ -70,6 +71,8 @@ config DEBUG_STACKOVERFLOW
 	  limit.
 	  If in doubt, say "N".
 =======
+=======
+>>>>>>> v3.18
 config EARLY_PRINTK_EFI
 	bool "Early printk via the EFI framebuffer"
 	depends on EFI && EARLY_PRINTK
@@ -79,6 +82,9 @@ config EARLY_PRINTK_EFI
 
 	  This is useful for kernel debugging when your machine crashes very
 	  early before the console code is initialized.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config X86_PTDUMP
@@ -94,7 +100,10 @@ config X86_PTDUMP
 	  If in doubt, say "N"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config EFI_PGT_DUMP
 	bool "Dump the EFI pagetable"
 	depends on EFI && X86_PTDUMP
@@ -104,6 +113,9 @@ config EFI_PGT_DUMP
 	  issues with the mapping of the EFI runtime regions into that
 	  table.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config DEBUG_RODATA
 	bool "Write protect kernel read-only data structures"
@@ -147,7 +159,10 @@ config DOUBLEFAULT
 	default y
 	bool "Enable doublefault exception handler" if EXPERT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86_32
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -213,6 +228,10 @@ config X86_DECODER_SELFTEST
 	bool "x86 instruction decoder selftest"
 	depends on DEBUG_KERNEL && KPROBES
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on !COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on !COMPILE_TEST
 >>>>>>> v3.18
@@ -336,7 +355,10 @@ config DEBUG_NMI_SELFTEST
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config X86_DEBUG_STATIC_CPU_HAS
 	bool "Debug alternatives"
 	depends on DEBUG_KERNEL
@@ -347,5 +369,8 @@ config X86_DEBUG_STATIC_CPU_HAS
 
 	  If unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu

@@ -6,6 +6,7 @@
 #include <net/inet_common.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  	__udp4_lib_rcv(struct sk_buff *, struct udp_table *, int );
 extern void 	__udp4_lib_err(struct sk_buff *, u32, struct udp_table *);
 
@@ -32,6 +33,8 @@ extern void	udp_destroy_sock(struct sock *sk);
 #ifdef CONFIG_PROC_FS
 extern int	udp4_seq_show(struct seq_file *seq, void *v);
 =======
+=======
+>>>>>>> v3.18
 int __udp4_lib_rcv(struct sk_buff *, struct udp_table *, int);
 void __udp4_lib_err(struct sk_buff *, u32, struct udp_table *);
 
@@ -57,6 +60,9 @@ void udp_destroy_sock(struct sock *sk);
 
 #ifdef CONFIG_PROC_FS
 int udp4_seq_show(struct seq_file *seq, void *v);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #endif	/* _UDP4_IMPL_H */

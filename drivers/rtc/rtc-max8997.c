@@ -105,7 +105,11 @@ static int max8997_rtc_tm_to_data(struct rtc_time *tm, u8 *data)
 	data[RTC_DATE] = tm->tm_mday;
 	data[RTC_MONTH] = tm->tm_mon + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data[RTC_YEAR] = tm->tm_year > 100 ? (tm->tm_year - 100) : 0 ;
+=======
+	data[RTC_YEAR] = tm->tm_year > 100 ? (tm->tm_year - 100) : 0;
+>>>>>>> v3.18
 =======
 	data[RTC_YEAR] = tm->tm_year > 100 ? (tm->tm_year - 100) : 0;
 >>>>>>> v3.18
@@ -512,11 +516,14 @@ err_out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max8997_rtc_remove(struct platform_device *pdev)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void max8997_rtc_shutdown(struct platform_device *pdev)
@@ -539,7 +546,10 @@ static struct platform_driver max8997_rtc_driver = {
 	},
 	.probe		= max8997_rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= max8997_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.shutdown	= max8997_rtc_shutdown,

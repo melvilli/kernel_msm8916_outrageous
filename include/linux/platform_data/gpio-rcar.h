@@ -18,6 +18,7 @@
 
 struct gpio_rcar_config {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int gpio_base;
 	unsigned int irq_base;
 	unsigned int number_of_pins;
@@ -25,6 +26,8 @@ struct gpio_rcar_config {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	int gpio_base;
 	unsigned int irq_base;
 	unsigned int number_of_pins;
@@ -34,5 +37,8 @@ struct gpio_rcar_config {
 
 #define RCAR_GP_PIN(bank, pin)		(((bank) * 32) + (pin))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __GPIO_RCAR_H__ */

@@ -39,8 +39,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_index(struct device *cd,
 			 struct device_attribute *attr, char *buf)
+=======
+static ssize_t index_show(struct device *cd,
+			  struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t index_show(struct device *cd,
 			  struct device_attribute *attr, char *buf)
@@ -51,14 +56,20 @@ static ssize_t index_show(struct device *cd,
 	return sprintf(buf, "%i\n", vdev->index);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t show_debug(struct device *cd,
 			 struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(index);
 
 static ssize_t debug_show(struct device *cd,
 			  struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct video_device *vdev = to_video_device(cd);
@@ -67,8 +78,13 @@ static ssize_t debug_show(struct device *cd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t set_debug(struct device *cd, struct device_attribute *attr,
 		   const char *buf, size_t len)
+=======
+static ssize_t debug_store(struct device *cd, struct device_attribute *attr,
+			  const char *buf, size_t len)
+>>>>>>> v3.18
 =======
 static ssize_t debug_store(struct device *cd, struct device_attribute *attr,
 			  const char *buf, size_t len)
@@ -86,8 +102,14 @@ static ssize_t debug_store(struct device *cd, struct device_attribute *attr,
 	return len;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t show_name(struct device *cd,
+=======
+static DEVICE_ATTR_RW(debug);
+
+static ssize_t name_show(struct device *cd,
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RW(debug);
 
@@ -100,6 +122,7 @@ static ssize_t name_show(struct device *cd,
 	return sprintf(buf, "%.*s\n", (int)sizeof(vdev->name), vdev->name);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute video_device_attrs[] = {
 	__ATTR(name, S_IRUGO, show_name, NULL),
@@ -108,6 +131,8 @@ static struct device_attribute video_device_attrs[] = {
 	__ATTR_NULL
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(name);
 
 static struct attribute *video_device_attrs[] = {
@@ -117,6 +142,9 @@ static struct attribute *video_device_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(video_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -253,7 +281,11 @@ static void v4l2_device_release(struct device *cd)
 static struct class video_class = {
 	.name = VIDEO_NAME,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs = video_device_attrs,
+=======
+	.dev_groups = video_device_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups = video_device_groups,
 >>>>>>> v3.18
@@ -371,7 +403,11 @@ static unsigned int v4l2_poll(struct file *filp, struct poll_table_struct *poll)
 	if (video_is_registered(vdev))
 		res = vdev->fops->poll(filp, poll);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vdev->debug)
+=======
+	if (vdev->debug > 2)
+>>>>>>> v3.18
 =======
 	if (vdev->debug > 2)
 >>>>>>> v3.18
@@ -539,8 +575,13 @@ static const struct file_operations v4l2_fops = {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * get_index - assign stream index number based on parent device
  * @vdev: video_device to assign index number to, vdev->parent should be assigned
+=======
+ * get_index - assign stream index number based on v4l2_dev
+ * @vdev: video_device to assign index number to, vdev->v4l2_dev should be assigned
+>>>>>>> v3.18
 =======
  * get_index - assign stream index number based on v4l2_dev
  * @vdev: video_device to assign index number to, vdev->v4l2_dev should be assigned
@@ -563,10 +604,13 @@ static int get_index(struct video_device *vdev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Some drivers do not set the parent. In that case always return 0. */
 	if (vdev->parent == NULL)
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bitmap_zero(used, VIDEO_NUM_DEVICES);
@@ -574,7 +618,11 @@ static int get_index(struct video_device *vdev)
 	for (i = 0; i < VIDEO_NUM_DEVICES; i++) {
 		if (video_device[i] != NULL &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    video_device[i]->parent == vdev->parent) {
+=======
+		    video_device[i]->v4l2_dev == vdev->v4l2_dev) {
+>>>>>>> v3.18
 =======
 		    video_device[i]->v4l2_dev == vdev->v4l2_dev) {
 >>>>>>> v3.18
@@ -610,6 +658,10 @@ static void determine_valid_ioctls(struct video_device *vdev)
 	bool is_vbi = vdev->vfl_type == VFL_TYPE_VBI;
 	bool is_radio = vdev->vfl_type == VFL_TYPE_RADIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool is_sdr = vdev->vfl_type == VFL_TYPE_SDR;
+>>>>>>> v3.18
 =======
 	bool is_sdr = vdev->vfl_type == VFL_TYPE_SDR;
 >>>>>>> v3.18
@@ -622,6 +674,7 @@ static void determine_valid_ioctls(struct video_device *vdev)
 
 	SET_VALID_IOCTL(ops, VIDIOC_QUERYCAP, vidioc_querycap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ops->vidioc_g_priority ||
 			test_bit(V4L2_FL_USE_FH_PRIO, &vdev->flags))
 		set_bit(_IOC_NR(VIDIOC_G_PRIORITY), valid_ioctls);
@@ -631,10 +684,15 @@ static void determine_valid_ioctls(struct video_device *vdev)
 	SET_VALID_IOCTL(ops, VIDIOC_STREAMON, vidioc_streamon);
 	SET_VALID_IOCTL(ops, VIDIOC_STREAMOFF, vidioc_streamoff);
 =======
+=======
+>>>>>>> v3.18
 	if (ops->vidioc_g_priority)
 		set_bit(_IOC_NR(VIDIOC_G_PRIORITY), valid_ioctls);
 	if (ops->vidioc_s_priority)
 		set_bit(_IOC_NR(VIDIOC_S_PRIORITY), valid_ioctls);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Note: the control handler can also be passed through the filehandle,
 	   and that can't be tested here. If the bit for these control ioctls
@@ -643,6 +701,11 @@ static void determine_valid_ioctls(struct video_device *vdev)
 	if (vdev->ctrl_handler || ops->vidioc_queryctrl)
 		set_bit(_IOC_NR(VIDIOC_QUERYCTRL), valid_ioctls);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (vdev->ctrl_handler || ops->vidioc_query_ext_ctrl)
+		set_bit(_IOC_NR(VIDIOC_QUERY_EXT_CTRL), valid_ioctls);
+>>>>>>> v3.18
 =======
 	if (vdev->ctrl_handler || ops->vidioc_query_ext_ctrl)
 		set_bit(_IOC_NR(VIDIOC_QUERY_EXT_CTRL), valid_ioctls);
@@ -668,7 +731,10 @@ static void determine_valid_ioctls(struct video_device *vdev)
 	set_bit(_IOC_NR(VIDIOC_DBG_S_REGISTER), valid_ioctls);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_VALID_IOCTL(ops, VIDIOC_DBG_G_CHIP_IDENT, vidioc_g_chip_ident);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* yes, really vidioc_subscribe_event */
@@ -738,10 +804,13 @@ static void determine_valid_ioctls(struct video_device *vdev)
 			set_bit(_IOC_NR(VIDIOC_TRY_FMT), valid_ioctls);
 		SET_VALID_IOCTL(ops, VIDIOC_G_SLICED_VBI_CAP, vidioc_g_sliced_vbi_cap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	if (!is_radio) {
 		/* ioctls valid for video or vbi */
 =======
+=======
+>>>>>>> v3.18
 	} else if (is_sdr) {
 		/* SDR specific ioctls */
 		if (ops->vidioc_enum_fmt_sdr_cap)
@@ -756,6 +825,9 @@ static void determine_valid_ioctls(struct video_device *vdev)
 
 	if (is_vid || is_vbi || is_sdr) {
 		/* ioctls valid for video, vbi or sdr */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		SET_VALID_IOCTL(ops, VIDIOC_REQBUFS, vidioc_reqbufs);
 		SET_VALID_IOCTL(ops, VIDIOC_QUERYBUF, vidioc_querybuf);
@@ -765,12 +837,15 @@ static void determine_valid_ioctls(struct video_device *vdev)
 		SET_VALID_IOCTL(ops, VIDIOC_CREATE_BUFS, vidioc_create_bufs);
 		SET_VALID_IOCTL(ops, VIDIOC_PREPARE_BUF, vidioc_prepare_buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ops->vidioc_s_std)
 			set_bit(_IOC_NR(VIDIOC_ENUMSTD), valid_ioctls);
 		if (ops->vidioc_g_std || vdev->current_norm)
 			set_bit(_IOC_NR(VIDIOC_G_STD), valid_ioctls);
 		SET_VALID_IOCTL(ops, VIDIOC_S_STD, vidioc_s_std);
 =======
+=======
+>>>>>>> v3.18
 		SET_VALID_IOCTL(ops, VIDIOC_STREAMON, vidioc_streamon);
 		SET_VALID_IOCTL(ops, VIDIOC_STREAMOFF, vidioc_streamoff);
 	}
@@ -781,6 +856,9 @@ static void determine_valid_ioctls(struct video_device *vdev)
 			set_bit(_IOC_NR(VIDIOC_ENUMSTD), valid_ioctls);
 		SET_VALID_IOCTL(ops, VIDIOC_S_STD, vidioc_s_std);
 		SET_VALID_IOCTL(ops, VIDIOC_G_STD, vidioc_g_std);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (is_rx) {
 			SET_VALID_IOCTL(ops, VIDIOC_QUERYSTD, vidioc_querystd);
@@ -792,6 +870,10 @@ static void determine_valid_ioctls(struct video_device *vdev)
 			SET_VALID_IOCTL(ops, VIDIOC_S_AUDIO, vidioc_s_audio);
 			SET_VALID_IOCTL(ops, VIDIOC_QUERY_DV_TIMINGS, vidioc_query_dv_timings);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			SET_VALID_IOCTL(ops, VIDIOC_S_EDID, vidioc_s_edid);
+>>>>>>> v3.18
 =======
 			SET_VALID_IOCTL(ops, VIDIOC_S_EDID, vidioc_s_edid);
 >>>>>>> v3.18
@@ -814,7 +896,11 @@ static void determine_valid_ioctls(struct video_device *vdev)
 			set_bit(_IOC_NR(VIDIOC_CROPCAP), valid_ioctls);
 		if (ops->vidioc_g_parm || (vdev->vfl_type == VFL_TYPE_GRABBER &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 					(ops->vidioc_g_std || vdev->current_norm)))
+=======
+					ops->vidioc_g_std))
+>>>>>>> v3.18
 =======
 					ops->vidioc_g_std))
 >>>>>>> v3.18
@@ -825,6 +911,7 @@ static void determine_valid_ioctls(struct video_device *vdev)
 		SET_VALID_IOCTL(ops, VIDIOC_ENUM_DV_TIMINGS, vidioc_enum_dv_timings);
 		SET_VALID_IOCTL(ops, VIDIOC_DV_TIMINGS_CAP, vidioc_dv_timings_cap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		/* ioctls valid for radio */
 		SET_VALID_IOCTL(ops, VIDIOC_DQBUF, vidioc_dqbuf);
@@ -832,10 +919,15 @@ static void determine_valid_ioctls(struct video_device *vdev)
 	if (is_tx) {
 		/* transmitter only ioctls */
 =======
+=======
+>>>>>>> v3.18
 		SET_VALID_IOCTL(ops, VIDIOC_G_EDID, vidioc_g_edid);
 	}
 	if (is_tx && (is_radio || is_sdr)) {
 		/* radio transmitter only ioctls */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		SET_VALID_IOCTL(ops, VIDIOC_G_MODULATOR, vidioc_g_modulator);
 		SET_VALID_IOCTL(ops, VIDIOC_S_MODULATOR, vidioc_s_modulator);
@@ -883,6 +975,11 @@ static void determine_valid_ioctls(struct video_device *vdev)
  *
  *	%VFL_TYPE_SUBDEV - A subdevice
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ *	%VFL_TYPE_SDR - Software Defined Radio
+>>>>>>> v3.18
 =======
  *
  *	%VFL_TYPE_SDR - Software Defined Radio
@@ -905,6 +1002,12 @@ int __video_register_device(struct video_device *vdev, int type, int nr,
 	if (WARN_ON(!vdev->release))
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* the v4l2_dev pointer MUST be present */
+	if (WARN_ON(!vdev->v4l2_dev))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	/* the v4l2_dev pointer MUST be present */
 	if (WARN_ON(!vdev->v4l2_dev))
@@ -930,11 +1033,17 @@ int __video_register_device(struct video_device *vdev, int type, int nr,
 		name_base = "v4l-subdev";
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case VFL_TYPE_SDR:
 		/* Use device name 'swradio' because 'sdr' was already taken. */
 		name_base = "swradio";
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		printk(KERN_ERR "%s called with unknown type: %d\n",
@@ -944,6 +1053,7 @@ int __video_register_device(struct video_device *vdev, int type, int nr,
 
 	vdev->vfl_type = type;
 	vdev->cdev = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (vdev->v4l2_dev) {
 		if (vdev->v4l2_dev->dev)
@@ -956,6 +1066,8 @@ int __video_register_device(struct video_device *vdev, int type, int nr,
 			vdev->prio = &vdev->v4l2_dev->prio;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (vdev->dev_parent == NULL)
 		vdev->dev_parent = vdev->v4l2_dev->dev;
 	if (vdev->ctrl_handler == NULL)
@@ -964,6 +1076,9 @@ int __video_register_device(struct video_device *vdev, int type, int nr,
 	   prio state. */
 	if (vdev->prio == NULL)
 		vdev->prio = &vdev->v4l2_dev->prio;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Part 2: find a free minor, device node number and device index. */
@@ -1026,6 +1141,10 @@ int __video_register_device(struct video_device *vdev, int type, int nr,
 	WARN_ON(video_device[vdev->minor] != NULL);
 	vdev->index = get_index(vdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	video_device[vdev->minor] = vdev;
+>>>>>>> v3.18
 =======
 	video_device[vdev->minor] = vdev;
 >>>>>>> v3.18
@@ -1054,8 +1173,12 @@ int __video_register_device(struct video_device *vdev, int type, int nr,
 	vdev->dev.class = &video_class;
 	vdev->dev.devt = MKDEV(VIDEO_MAJOR, vdev->minor);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vdev->parent)
 		vdev->dev.parent = vdev->parent;
+=======
+	vdev->dev.parent = vdev->dev_parent;
+>>>>>>> v3.18
 =======
 	vdev->dev.parent = vdev->dev_parent;
 >>>>>>> v3.18
@@ -1096,9 +1219,12 @@ int __video_register_device(struct video_device *vdev, int type, int nr,
 	/* Part 6: Activate this minor. The char device can now be used. */
 	set_bit(V4L2_FL_REGISTERED, &vdev->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&videodev_lock);
 	video_device[vdev->minor] = vdev;
 	mutex_unlock(&videodev_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1109,6 +1235,10 @@ cleanup:
 	if (vdev->cdev)
 		cdev_del(vdev->cdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	video_device[vdev->minor] = NULL;
+>>>>>>> v3.18
 =======
 	video_device[vdev->minor] = NULL;
 >>>>>>> v3.18

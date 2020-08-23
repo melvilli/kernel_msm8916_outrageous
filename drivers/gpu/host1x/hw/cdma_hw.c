@@ -21,15 +21,21 @@
 #include <linux/dma-mapping.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "cdma.h"
 #include "channel.h"
 #include "dev.h"
 #include "debug.h"
 =======
+=======
+>>>>>>> v3.18
 #include "../cdma.h"
 #include "../channel.h"
 #include "../dev.h"
 #include "../debug.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -52,7 +58,11 @@ static void cdma_timeout_cpu_incr(struct host1x_cdma *cdma, u32 getptr,
 
 	for (i = 0; i < syncpt_incrs; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		host1x_syncpt_cpu_incr(cdma->timeout.syncpt);
+=======
+		host1x_syncpt_incr(cdma->timeout.syncpt);
+>>>>>>> v3.18
 =======
 		host1x_syncpt_incr(cdma->timeout.syncpt);
 >>>>>>> v3.18
@@ -66,8 +76,13 @@ static void cdma_timeout_cpu_incr(struct host1x_cdma *cdma, u32 getptr,
 		*(p++) = HOST1X_OPCODE_NOP;
 		*(p++) = HOST1X_OPCODE_NOP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(host1x->dev, "%s: NOP at 0x%x\n", __func__,
 			pb->phys + getptr);
+=======
+		dev_dbg(host1x->dev, "%s: NOP at %#llx\n", __func__,
+			(u64)pb->phys + getptr);
+>>>>>>> v3.18
 =======
 		dev_dbg(host1x->dev, "%s: NOP at %#llx\n", __func__,
 			(u64)pb->phys + getptr);

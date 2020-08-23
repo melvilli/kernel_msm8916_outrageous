@@ -23,6 +23,7 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sh_intc.h>
 #include <linux/irqchip.h>
 #include <linux/irqchip/arm-gic.h>
@@ -33,6 +34,8 @@
 #include <asm/mach/arch.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/irqchip.h>
 #include <linux/irqchip/arm-gic.h>
 
@@ -43,6 +46,9 @@
 #include "irqs.h"
 #include "sh73a0.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	UNUSED = 0,

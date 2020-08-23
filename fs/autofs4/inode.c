@@ -57,6 +57,7 @@ void autofs4_kill_sb(struct super_block *sb)
 	 * deactivate_super.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!sbi)
 		goto out_kill_sb;
 
@@ -70,6 +71,8 @@ out_kill_sb:
 	DPRINTK("shutting down");
 	kill_litter_super(sb);
 =======
+=======
+>>>>>>> v3.18
 	if (sbi) {
 		/* Free wait queues, close pipe */
 		autofs4_catatonic_mode(sbi);
@@ -80,6 +83,9 @@ out_kill_sb:
 	kill_litter_super(sb);
 	if (sbi)
 		kfree_rcu(sbi, rcu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -99,7 +105,11 @@ static int autofs4_show_options(struct seq_file *m, struct dentry *root)
 		seq_printf(m, ",gid=%u",
 			from_kgid_munged(&init_user_ns, root_inode->i_gid));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(m, ",pgrp=%d", sbi->oz_pgrp);
+=======
+	seq_printf(m, ",pgrp=%d", pid_vnr(sbi->oz_pgrp));
+>>>>>>> v3.18
 =======
 	seq_printf(m, ",pgrp=%d", pid_vnr(sbi->oz_pgrp));
 >>>>>>> v3.18
@@ -147,7 +157,12 @@ static const match_table_t tokens = {
 
 static int parse_options(char *options, int *pipefd, kuid_t *uid, kgid_t *gid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pid_t *pgrp, unsigned int *type, int *minproto, int *maxproto)
+=======
+			 int *pgrp, bool *pgrp_set, unsigned int *type,
+			 int *minproto, int *maxproto)
+>>>>>>> v3.18
 =======
 			 int *pgrp, bool *pgrp_set, unsigned int *type,
 			 int *minproto, int *maxproto)
@@ -160,7 +175,10 @@ static int parse_options(char *options, int *pipefd, kuid_t *uid, kgid_t *gid,
 	*uid = current_uid();
 	*gid = current_gid();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*pgrp = task_pgrp_nr(current);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -202,6 +220,10 @@ static int parse_options(char *options, int *pipefd, kuid_t *uid, kgid_t *gid,
 				return 1;
 			*pgrp = option;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			*pgrp_set = true;
+>>>>>>> v3.18
 =======
 			*pgrp_set = true;
 >>>>>>> v3.18
@@ -241,11 +263,14 @@ int autofs4_fill_super(struct super_block *s, void *data, int silent)
 	struct autofs_sb_info *sbi;
 	struct autofs_info *ino;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	sbi = kzalloc(sizeof(*sbi), GFP_KERNEL);
 	if (!sbi)
 		goto fail_unlock;
 =======
+=======
+>>>>>>> v3.18
 	int pgrp = 0;
 	bool pgrp_set = false;
 	int ret = -EINVAL;
@@ -253,6 +278,9 @@ int autofs4_fill_super(struct super_block *s, void *data, int silent)
 	sbi = kzalloc(sizeof(*sbi), GFP_KERNEL);
 	if (!sbi)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	DPRINTK("starting up, sbi = %p",sbi);
 
@@ -263,7 +291,11 @@ int autofs4_fill_super(struct super_block *s, void *data, int silent)
 	sbi->catatonic = 1;
 	sbi->exp_timeout = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sbi->oz_pgrp = task_pgrp_nr(current);
+=======
+	sbi->oz_pgrp = NULL;
+>>>>>>> v3.18
 =======
 	sbi->oz_pgrp = NULL;
 >>>>>>> v3.18
@@ -292,13 +324,19 @@ int autofs4_fill_super(struct super_block *s, void *data, int silent)
 	 */
 	ino = autofs4_new_ino(sbi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ino)
 		goto fail_free;
 =======
+=======
+>>>>>>> v3.18
 	if (!ino) {
 		ret = -ENOMEM;
 		goto fail_free;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	root_inode = autofs4_get_inode(s, S_IFDIR | 0755);
 	root = d_make_root(root_inode);
@@ -311,8 +349,13 @@ int autofs4_fill_super(struct super_block *s, void *data, int silent)
 	/* Can this call block? */
 	if (parse_options(data, &pipefd, &root_inode->i_uid, &root_inode->i_gid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				&sbi->oz_pgrp, &sbi->type, &sbi->min_proto,
 				&sbi->max_proto)) {
+=======
+			  &pgrp, &pgrp_set, &sbi->type, &sbi->min_proto,
+			  &sbi->max_proto)) {
+>>>>>>> v3.18
 =======
 			  &pgrp, &pgrp_set, &sbi->type, &sbi->min_proto,
 			  &sbi->max_proto)) {
@@ -322,7 +365,10 @@ int autofs4_fill_super(struct super_block *s, void *data, int silent)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pgrp_set) {
 		sbi->oz_pgrp = find_get_pid(pgrp);
 		if (!sbi->oz_pgrp) {
@@ -334,6 +380,9 @@ int autofs4_fill_super(struct super_block *s, void *data, int silent)
 		sbi->oz_pgrp = get_task_pid(current, PIDTYPE_PGID);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (autofs_type_trigger(sbi->type))
 		__managed_dentry_set_managed(root);
@@ -359,9 +408,15 @@ int autofs4_fill_super(struct super_block *s, void *data, int silent)
 	sbi->sub_version = AUTOFS_PROTO_SUBVERSION;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DPRINTK("pipe fd = %d, pgrp = %u", pipefd, sbi->oz_pgrp);
 	pipe = fget(pipefd);
 	
+=======
+	DPRINTK("pipe fd = %d, pgrp = %u", pipefd, pid_nr(sbi->oz_pgrp));
+	pipe = fget(pipefd);
+
+>>>>>>> v3.18
 =======
 	DPRINTK("pipe fd = %d, pgrp = %u", pipefd, pid_nr(sbi->oz_pgrp));
 	pipe = fget(pipefd);
@@ -372,7 +427,12 @@ int autofs4_fill_super(struct super_block *s, void *data, int silent)
 		goto fail_dput;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (autofs_prepare_pipe(pipe) < 0)
+=======
+	ret = autofs_prepare_pipe(pipe);
+	if (ret < 0)
+>>>>>>> v3.18
 =======
 	ret = autofs_prepare_pipe(pipe);
 	if (ret < 0)
@@ -402,15 +462,21 @@ fail_ino:
 	kfree(ino);
 fail_free:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(sbi);
 	s->s_fs_info = NULL;
 fail_unlock:
 	return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	put_pid(sbi->oz_pgrp);
 	kfree(sbi);
 	s->s_fs_info = NULL;
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

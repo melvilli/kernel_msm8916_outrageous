@@ -37,8 +37,13 @@ static inline void fill_ldt(struct desc_struct *desc, const struct user_desc *in
 extern struct desc_ptr idt_descr;
 extern gate_desc idt_table[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct desc_ptr nmi_idt_descr;
 extern gate_desc nmi_idt_table[];
+=======
+extern struct desc_ptr debug_idt_descr;
+extern gate_desc debug_idt_table[];
+>>>>>>> v3.18
 =======
 extern struct desc_ptr debug_idt_descr;
 extern gate_desc debug_idt_table[];
@@ -257,8 +262,12 @@ static inline void native_load_tls(struct thread_struct *t, unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This intentionally ignores lm, since 32-bit apps don't have that field. */
 #define LDT_empty(info)					\
+=======
+#define _LDT_empty(info)				\
+>>>>>>> v3.18
 =======
 #define _LDT_empty(info)				\
 >>>>>>> v3.18
@@ -271,6 +280,7 @@ static inline void native_load_tls(struct thread_struct *t, unsigned int cpu)
 	 (info)->seg_not_present	== 1	&&	\
 	 (info)->useable		== 0)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Lots of programs expect an all-zero user_desc to mean "no segment at all". */
 static inline bool LDT_zero(const struct user_desc *info)
@@ -285,11 +295,16 @@ static inline bool LDT_zero(const struct user_desc *info)
 		info->useable		== 0);
 }
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_64
 #define LDT_empty(info) (_LDT_empty(info) && ((info)->lm == 0))
 #else
 #define LDT_empty(info) (_LDT_empty(info))
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void clear_LDT(void)
@@ -342,11 +357,14 @@ static inline void set_nmi_gate(int gate, void *addr)
 
 	pack_gate(&s, GATE_INTERRUPT, (unsigned long)addr, 0, 0, __KERNEL_CS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	write_idt_entry(nmi_idt_table, gate, &s);
 }
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	write_idt_entry(debug_idt_table, gate, &s);
 }
 #endif
@@ -379,6 +397,9 @@ static inline void write_trace_idt_entry(int entry, const gate_desc *gate)
 #define _trace_set_gate(gate, type, addr, dpl, ist, seg)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void _set_gate(int gate, unsigned type, void *addr,
 			     unsigned dpl, unsigned ist, unsigned seg)
@@ -392,6 +413,10 @@ static inline void _set_gate(int gate, unsigned type, void *addr,
 	 */
 	write_idt_entry(idt_table, gate, &s);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	write_trace_idt_entry(gate, &s);
+>>>>>>> v3.18
 =======
 	write_trace_idt_entry(gate, &s);
 >>>>>>> v3.18
@@ -404,12 +429,15 @@ static inline void _set_gate(int gate, unsigned type, void *addr,
  * IDT being write-protected.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void set_intr_gate(unsigned int n, void *addr)
 {
 	BUG_ON((unsigned)n > 0xFF);
 	_set_gate(n, GATE_INTERRUPT, addr, 0, 0, __KERNEL_CS);
 }
 =======
+=======
+>>>>>>> v3.18
 #define set_intr_gate(n, addr)						\
 	do {								\
 		BUG_ON((unsigned)n > 0xFF);				\
@@ -418,6 +446,9 @@ static inline void set_intr_gate(unsigned int n, void *addr)
 		_trace_set_gate(n, GATE_INTERRUPT, (void *)trace_##addr,\
 				0, 0, __KERNEL_CS);			\
 	} while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int first_system_vector;
@@ -436,17 +467,23 @@ static inline void alloc_system_vector(int vector)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void alloc_intr_gate(unsigned int n, void *addr)
 {
 	alloc_system_vector(n);
 	set_intr_gate(n, addr);
 }
 =======
+=======
+>>>>>>> v3.18
 #define alloc_intr_gate(n, addr)				\
 	do {							\
 		alloc_system_vector(n);				\
 		set_intr_gate(n, addr);				\
 	} while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -489,7 +526,10 @@ static inline void set_system_intr_gate_ist(int n, void *addr, unsigned ist)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_64
 DECLARE_PER_CPU(u32, debug_idt_ctr);
 static inline bool is_debug_idt_enabled(void)
@@ -556,5 +596,8 @@ static inline void load_current_idt(void)
 	else
 		load_idt((const struct desc_ptr *)&idt_descr);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_X86_DESC_H */

@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
    comedi/drivers/c6xdigio.c
 
    Hardware driver for Mechatronic Systems Inc. C6x_DIGIO DSP daughter card.
@@ -36,6 +37,8 @@ http://robot0.ge.uiuc.edu/~spong/mecha/
 
 */
 =======
+=======
+>>>>>>> v3.18
  * c6xdigio.c
  * Hardware driver for Mechatronic Systems Inc. C6x_DIGIO DSP daughter card.
  * http://web.archive.org/web/%2A/http://robot0.ge.uiuc.edu/~spong/mecha/
@@ -65,6 +68,9 @@ http://robot0.ge.uiuc.edu/~spong/mecha/
  * Configuration Options:
  *	[0] - base address
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/kernel.h>
@@ -73,8 +79,11 @@ http://robot0.ge.uiuc.edu/~spong/mecha/
 #include <linux/mm.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ioport.h>
 #include <linux/delay.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -85,6 +94,7 @@ http://robot0.ge.uiuc.edu/~spong/mecha/
 
 #include "../comedidev.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u8 ReadByteFromHwPort(unsigned long addr)
 {
@@ -432,6 +442,8 @@ static void board_init(struct comedi_device *dev)
 	C6X_encResetAll(dev->iobase);
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * Register I/O map
  */
@@ -620,6 +632,9 @@ static void c6xdigio_init(struct comedi_device *dev)
 	c6xdigio_write_data(dev, 0x6c, 0x80);
 	c6xdigio_write_data(dev, 0x68, 0x00);
 	c6xdigio_write_data(dev, 0x00, 0x80);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -643,7 +658,11 @@ static int c6xdigio_attach(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = comedi_request_region(dev, it->options[0], C6XDIGIO_SIZE);
+=======
+	ret = comedi_request_region(dev, it->options[0], 0x03);
+>>>>>>> v3.18
 =======
 	ret = comedi_request_region(dev, it->options[0], 0x03);
 >>>>>>> v3.18
@@ -659,6 +678,7 @@ static int c6xdigio_attach(struct comedi_device *dev,
 
 	s = &dev->subdevices[0];
 	/* pwm output subdevice */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	s->type = COMEDI_SUBD_AO;	/*  Not sure what to put here */
 	s->subdev_flags = SDF_WRITEABLE;
@@ -694,6 +714,8 @@ static int c6xdigio_attach(struct comedi_device *dev,
 	/*  will not be connected when device driver is loaded. */
 	board_init(dev);
 =======
+=======
+>>>>>>> v3.18
 	s->type		= COMEDI_SUBD_PWM;
 	s->subdev_flags	= SDF_WRITEABLE;
 	s->n_chan	= 2;
@@ -714,6 +736,9 @@ static int c6xdigio_attach(struct comedi_device *dev,
 	/*  I will call this init anyway but more than likely the DSP board */
 	/*  will not be connected when device driver is loaded. */
 	c6xdigio_init(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -735,7 +760,11 @@ module_comedi_driver(c6xdigio_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("Comedi driver for the C6x_DIGIO DSP daughter card");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Comedi driver for the C6x_DIGIO DSP daughter card");
 >>>>>>> v3.18

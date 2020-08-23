@@ -5,7 +5,10 @@
 static struct callback_head work_exited; /* all we need is ->next == NULL */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * task_work_add - ask the @task to execute @work->func()
  * @task: the task which should run the callback
@@ -23,6 +26,9 @@ static struct callback_head work_exited; /* all we need is ->next == NULL */
  * RETURNS:
  * 0 if succeeds or -ESRCH.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 task_work_add(struct task_struct *task, struct callback_head *work, bool notify)
@@ -42,7 +48,10 @@ task_work_add(struct task_struct *task, struct callback_head *work, bool notify)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * task_work_cancel - cancel a pending work added by task_work_add()
  * @task: the task which should execute the work
@@ -54,13 +63,20 @@ task_work_add(struct task_struct *task, struct callback_head *work, bool notify)
  * RETURNS:
  * The found work or NULL if not found.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct callback_head *
 task_work_cancel(struct task_struct *task, task_work_func_t func)
 {
 	struct callback_head **pprev = &task->task_works;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct callback_head *work = NULL;
+=======
+	struct callback_head *work;
+>>>>>>> v3.18
 =======
 	struct callback_head *work;
 >>>>>>> v3.18
@@ -74,7 +90,11 @@ task_work_cancel(struct task_struct *task, task_work_func_t func)
 	raw_spin_lock_irqsave(&task->pi_lock, flags);
 	while ((work = ACCESS_ONCE(*pprev))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		read_barrier_depends();
+=======
+		smp_read_barrier_depends();
+>>>>>>> v3.18
 =======
 		smp_read_barrier_depends();
 >>>>>>> v3.18
@@ -89,7 +109,10 @@ task_work_cancel(struct task_struct *task, task_work_func_t func)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * task_work_run - execute the works added by task_work_add()
  *
@@ -98,6 +121,9 @@ task_work_cancel(struct task_struct *task, task_work_func_t func)
  * it exits. In the latter case task_work_add() can no longer add the
  * new work after task_work_run() returns.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void task_work_run(void)
 {

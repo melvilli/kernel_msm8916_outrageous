@@ -127,8 +127,13 @@ static const struct prot_bits section_bits[] = {
 		.set	= "USR",
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.mask	= PMD_SECT_RDONLY,
 		.val	= PMD_SECT_RDONLY,
+=======
+		.mask	= L_PMD_SECT_RDONLY,
+		.val	= L_PMD_SECT_RDONLY,
+>>>>>>> v3.18
 =======
 		.mask	= L_PMD_SECT_RDONLY,
 		.val	= L_PMD_SECT_RDONLY,

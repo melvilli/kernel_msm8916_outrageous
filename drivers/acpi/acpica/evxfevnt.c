@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,7 +50,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -333,8 +342,14 @@ ACPI_EXPORT_SYMBOL(acpi_clear_event)
 acpi_status acpi_get_event_status(u32 event, acpi_event_status * event_status)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_status status = AE_OK;
 	u32 value;
+=======
+	acpi_status status;
+	acpi_event_status local_event_status = 0;
+	u32 in_byte;
+>>>>>>> v3.18
 =======
 	acpi_status status;
 	acpi_event_status local_event_status = 0;
@@ -353,6 +368,7 @@ acpi_status acpi_get_event_status(u32 event, acpi_event_status * event_status)
 		return_ACPI_STATUS(AE_BAD_PARAMETER);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Get the status of the requested fixed event */
 
@@ -378,6 +394,8 @@ acpi_status acpi_get_event_status(u32 event, acpi_event_status * event_status)
 
 	return_ACPI_STATUS(status);
 =======
+=======
+>>>>>>> v3.18
 	/* Fixed event currently can be dispatched? */
 
 	if (acpi_gbl_fixed_event_handlers[event].handler) {
@@ -412,6 +430,9 @@ acpi_status acpi_get_event_status(u32 event, acpi_event_status * event_status)
 
 	(*event_status) = local_event_status;
 	return_ACPI_STATUS(AE_OK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

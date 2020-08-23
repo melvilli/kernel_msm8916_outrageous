@@ -451,7 +451,11 @@ static int tag_chunk(struct inode *inode, struct audit_tree *tree)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void audit_log_remove_rule(struct audit_krule *rule)
+=======
+static void audit_tree_log_remove_rule(struct audit_krule *rule)
+>>>>>>> v3.18
 =======
 static void audit_tree_log_remove_rule(struct audit_krule *rule)
 >>>>>>> v3.18
@@ -463,7 +467,11 @@ static void audit_tree_log_remove_rule(struct audit_krule *rule)
 		return;
 	audit_log_format(ab, "op=");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_log_string(ab, "remove rule");
+=======
+	audit_log_string(ab, "remove_rule");
+>>>>>>> v3.18
 =======
 	audit_log_string(ab, "remove_rule");
 >>>>>>> v3.18
@@ -486,7 +494,11 @@ static void kill_rules(struct audit_tree *tree)
 		if (rule->tree) {
 			/* not a half-baked one */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			audit_log_remove_rule(rule);
+=======
+			audit_tree_log_remove_rule(rule);
+>>>>>>> v3.18
 =======
 			audit_tree_log_remove_rule(rule);
 >>>>>>> v3.18
@@ -926,6 +938,7 @@ static void evict_chunk(struct audit_chunk *chunk)
 
 static int audit_tree_handle_event(struct fsnotify_group *group,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   struct fsnotify_mark *inode_mark,
 				   struct fsnotify_mark *vfsmonut_mark,
 				   struct fsnotify_event *event)
@@ -933,6 +946,8 @@ static int audit_tree_handle_event(struct fsnotify_group *group,
 	BUG();
 	return -EOPNOTSUPP;
 =======
+=======
+>>>>>>> v3.18
 				   struct inode *to_tell,
 				   struct fsnotify_mark *inode_mark,
 				   struct fsnotify_mark *vfsmount_mark,
@@ -940,6 +955,9 @@ static int audit_tree_handle_event(struct fsnotify_group *group,
 				   const unsigned char *file_name, u32 cookie)
 {
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -957,6 +975,7 @@ static void audit_tree_freeing_mark(struct fsnotify_mark *entry, struct fsnotify
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool audit_tree_send_event(struct fsnotify_group *group, struct inode *inode,
 				  struct fsnotify_mark *inode_mark,
 				  struct fsnotify_mark *vfsmount_mark,
@@ -970,6 +989,10 @@ static const struct fsnotify_ops audit_tree_ops = {
 	.should_send_event = audit_tree_send_event,
 	.free_group_priv = NULL,
 	.free_event_priv = NULL,
+=======
+static const struct fsnotify_ops audit_tree_ops = {
+	.handle_event = audit_tree_handle_event,
+>>>>>>> v3.18
 =======
 static const struct fsnotify_ops audit_tree_ops = {
 	.handle_event = audit_tree_handle_event,

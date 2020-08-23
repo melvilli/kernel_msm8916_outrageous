@@ -281,8 +281,11 @@
 #define __NR_kcmp		343
 #define __NR_finit_module	344
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NR_syscalls 345
 =======
+=======
+>>>>>>> v3.18
 #define __NR_sched_setattr	345
 #define __NR_sched_getattr	346
 #define __NR_renameat2		347
@@ -291,6 +294,9 @@
 #define __NR_memfd_create	350
 #define __NR_bpf		351
 #define NR_syscalls 352
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* 

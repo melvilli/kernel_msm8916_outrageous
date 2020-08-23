@@ -29,6 +29,10 @@
 
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -40,6 +44,7 @@
 
 #include <linux/console.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <drm/drm_crtc_helper.h>
 
@@ -155,6 +160,8 @@ extern int intel_agp_enabled;
 	.driver_data = (unsigned long) info }
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pm_runtime.h>
 #include <drm/drm_crtc_helper.h>
 
@@ -180,12 +187,21 @@ static struct drm_driver driver;
 
 #define IVB_CURSOR_OFFSETS \
 	.cursor_offsets = { CURSOR_A_OFFSET, IVB_CURSOR_B_OFFSET, IVB_CURSOR_C_OFFSET }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct intel_device_info intel_i830_info = {
 	.gen = 2, .is_mobile = 1, .cursor_needs_physical = 1, .num_pipes = 2,
 	.has_overlay = 1, .overlay_needs_physical = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ring_mask = RENDER_RING,
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	.ring_mask = RENDER_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
@@ -197,6 +213,12 @@ static const struct intel_device_info intel_845g_info = {
 	.gen = 2, .num_pipes = 1,
 	.has_overlay = 1, .overlay_needs_physical = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ring_mask = RENDER_RING,
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	.ring_mask = RENDER_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
@@ -209,11 +231,17 @@ static const struct intel_device_info intel_i85x_info = {
 	.cursor_needs_physical = 1,
 	.has_overlay = 1, .overlay_needs_physical = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.has_fbc = 1,
 	.ring_mask = RENDER_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
 	CURSOR_OFFSETS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -221,6 +249,12 @@ static const struct intel_device_info intel_i865g_info = {
 	.gen = 2, .num_pipes = 1,
 	.has_overlay = 1, .overlay_needs_physical = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ring_mask = RENDER_RING,
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	.ring_mask = RENDER_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
@@ -232,6 +266,12 @@ static const struct intel_device_info intel_i915g_info = {
 	.gen = 3, .is_i915g = 1, .cursor_needs_physical = 1, .num_pipes = 2,
 	.has_overlay = 1, .overlay_needs_physical = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ring_mask = RENDER_RING,
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	.ring_mask = RENDER_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
@@ -244,17 +284,29 @@ static const struct intel_device_info intel_i915gm_info = {
 	.has_overlay = 1, .overlay_needs_physical = 1,
 	.supports_tv = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.has_fbc = 1,
 	.ring_mask = RENDER_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
 	CURSOR_OFFSETS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 static const struct intel_device_info intel_i945g_info = {
 	.gen = 3, .has_hotplug = 1, .cursor_needs_physical = 1, .num_pipes = 2,
 	.has_overlay = 1, .overlay_needs_physical = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ring_mask = RENDER_RING,
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	.ring_mask = RENDER_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
@@ -267,11 +319,17 @@ static const struct intel_device_info intel_i945gm_info = {
 	.has_overlay = 1, .overlay_needs_physical = 1,
 	.supports_tv = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.has_fbc = 1,
 	.ring_mask = RENDER_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
 	CURSOR_OFFSETS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -280,6 +338,12 @@ static const struct intel_device_info intel_i965g_info = {
 	.has_hotplug = 1,
 	.has_overlay = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ring_mask = RENDER_RING,
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	.ring_mask = RENDER_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
@@ -293,6 +357,12 @@ static const struct intel_device_info intel_i965gm_info = {
 	.has_overlay = 1,
 	.supports_tv = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ring_mask = RENDER_RING,
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	.ring_mask = RENDER_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
@@ -305,6 +375,12 @@ static const struct intel_device_info intel_g33_info = {
 	.need_gfx_hws = 1, .has_hotplug = 1,
 	.has_overlay = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ring_mask = RENDER_RING,
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	.ring_mask = RENDER_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
@@ -316,7 +392,13 @@ static const struct intel_device_info intel_g45_info = {
 	.gen = 4, .is_g4x = 1, .need_gfx_hws = 1, .num_pipes = 2,
 	.has_pipe_cxsr = 1, .has_hotplug = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.has_bsd_ring = 1,
+=======
+	.ring_mask = RENDER_RING | BSD_RING,
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	.ring_mask = RENDER_RING | BSD_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
@@ -330,7 +412,13 @@ static const struct intel_device_info intel_gm45_info = {
 	.has_pipe_cxsr = 1, .has_hotplug = 1,
 	.supports_tv = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.has_bsd_ring = 1,
+=======
+	.ring_mask = RENDER_RING | BSD_RING,
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	.ring_mask = RENDER_RING | BSD_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
@@ -343,6 +431,11 @@ static const struct intel_device_info intel_pineview_info = {
 	.need_gfx_hws = 1, .has_hotplug = 1,
 	.has_overlay = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	GEN_DEFAULT_PIPEOFFSETS,
 	CURSOR_OFFSETS,
@@ -353,7 +446,13 @@ static const struct intel_device_info intel_ironlake_d_info = {
 	.gen = 5, .num_pipes = 2,
 	.need_gfx_hws = 1, .has_hotplug = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.has_bsd_ring = 1,
+=======
+	.ring_mask = RENDER_RING | BSD_RING,
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	.ring_mask = RENDER_RING | BSD_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
@@ -366,7 +465,13 @@ static const struct intel_device_info intel_ironlake_m_info = {
 	.need_gfx_hws = 1, .has_hotplug = 1,
 	.has_fbc = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.has_bsd_ring = 1,
+=======
+	.ring_mask = RENDER_RING | BSD_RING,
+	GEN_DEFAULT_PIPEOFFSETS,
+	CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	.ring_mask = RENDER_RING | BSD_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
@@ -378,16 +483,22 @@ static const struct intel_device_info intel_sandybridge_d_info = {
 	.gen = 6, .num_pipes = 2,
 	.need_gfx_hws = 1, .has_hotplug = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.has_bsd_ring = 1,
 	.has_blt_ring = 1,
 	.has_llc = 1,
 	.has_force_wake = 1,
 =======
+=======
+>>>>>>> v3.18
 	.has_fbc = 1,
 	.ring_mask = RENDER_RING | BSD_RING | BLT_RING,
 	.has_llc = 1,
 	GEN_DEFAULT_PIPEOFFSETS,
 	CURSOR_OFFSETS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -396,21 +507,28 @@ static const struct intel_device_info intel_sandybridge_m_info = {
 	.need_gfx_hws = 1, .has_hotplug = 1,
 	.has_fbc = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.has_bsd_ring = 1,
 	.has_blt_ring = 1,
 	.has_llc = 1,
 	.has_force_wake = 1,
 =======
+=======
+>>>>>>> v3.18
 	.ring_mask = RENDER_RING | BSD_RING | BLT_RING,
 	.has_llc = 1,
 	GEN_DEFAULT_PIPEOFFSETS,
 	CURSOR_OFFSETS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 #define GEN7_FEATURES  \
 	.gen = 7, .num_pipes = 3, \
 	.need_gfx_hws = 1, .has_hotplug = 1, \
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.has_bsd_ring = 1, \
 	.has_blt_ring = 1, \
@@ -421,11 +539,21 @@ static const struct intel_device_info intel_sandybridge_m_info = {
 	.ring_mask = RENDER_RING | BSD_RING | BLT_RING, \
 	.has_llc = 1
 >>>>>>> v3.18
+=======
+	.has_fbc = 1, \
+	.ring_mask = RENDER_RING | BSD_RING | BLT_RING, \
+	.has_llc = 1
+>>>>>>> v3.18
 
 static const struct intel_device_info intel_ivybridge_d_info = {
 	GEN7_FEATURES,
 	.is_ivybridge = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	GEN_DEFAULT_PIPEOFFSETS,
+	IVB_CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	GEN_DEFAULT_PIPEOFFSETS,
 	IVB_CURSOR_OFFSETS,
@@ -437,6 +565,11 @@ static const struct intel_device_info intel_ivybridge_m_info = {
 	.is_ivybridge = 1,
 	.is_mobile = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	GEN_DEFAULT_PIPEOFFSETS,
+	IVB_CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	GEN_DEFAULT_PIPEOFFSETS,
 	IVB_CURSOR_OFFSETS,
@@ -448,6 +581,11 @@ static const struct intel_device_info intel_ivybridge_q_info = {
 	.is_ivybridge = 1,
 	.num_pipes = 0, /* legal, last one wins */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	GEN_DEFAULT_PIPEOFFSETS,
+	IVB_CURSOR_OFFSETS,
+>>>>>>> v3.18
 =======
 	GEN_DEFAULT_PIPEOFFSETS,
 	IVB_CURSOR_OFFSETS,
@@ -461,12 +599,18 @@ static const struct intel_device_info intel_valleyview_m_info = {
 	.is_valleyview = 1,
 	.display_mmio_offset = VLV_DISPLAY_BASE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.has_llc = 0, /* legal, last one wins */
 =======
+=======
+>>>>>>> v3.18
 	.has_fbc = 0, /* legal, last one wins */
 	.has_llc = 0, /* legal, last one wins */
 	GEN_DEFAULT_PIPEOFFSETS,
 	CURSOR_OFFSETS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -476,12 +620,18 @@ static const struct intel_device_info intel_valleyview_d_info = {
 	.is_valleyview = 1,
 	.display_mmio_offset = VLV_DISPLAY_BASE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.has_llc = 0, /* legal, last one wins */
 =======
+=======
+>>>>>>> v3.18
 	.has_fbc = 0, /* legal, last one wins */
 	.has_llc = 0, /* legal, last one wins */
 	GEN_DEFAULT_PIPEOFFSETS,
 	CURSOR_OFFSETS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -489,12 +639,18 @@ static const struct intel_device_info intel_haswell_d_info = {
 	GEN7_FEATURES,
 	.is_haswell = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.has_ddi = 1,
 	.has_fpga_dbg = 1,
 	.ring_mask = RENDER_RING | BSD_RING | BLT_RING | VEBOX_RING,
 	GEN_DEFAULT_PIPEOFFSETS,
 	IVB_CURSOR_OFFSETS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -502,6 +658,7 @@ static const struct intel_device_info intel_haswell_m_info = {
 	GEN7_FEATURES,
 	.is_haswell = 1,
 	.is_mobile = 1,
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -618,6 +775,8 @@ static const struct pci_device_id pciidlist[] = {		/* aka */
 	INTEL_VGA_DEVICE(0x0157, &intel_valleyview_m_info),
 	INTEL_VGA_DEVICE(0x0155, &intel_valleyview_d_info),
 =======
+=======
+>>>>>>> v3.18
 	.has_ddi = 1,
 	.has_fpga_dbg = 1,
 	.ring_mask = RENDER_RING | BSD_RING | BLT_RING | VEBOX_RING,
@@ -724,6 +883,9 @@ static const struct intel_device_info intel_cherryview_info = {
 
 static const struct pci_device_id pciidlist[] = {		/* aka */
 	INTEL_PCI_IDS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{0, 0, 0}
 };
@@ -736,7 +898,11 @@ void intel_detect_pch(struct drm_device *dev)
 {
 	struct drm_i915_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev *pch;
+=======
+	struct pci_dev *pch = NULL;
+>>>>>>> v3.18
 =======
 	struct pci_dev *pch = NULL;
 >>>>>>> v3.18
@@ -747,7 +913,10 @@ void intel_detect_pch(struct drm_device *dev)
 	if (INTEL_INFO(dev)->num_pipes == 0) {
 		dev_priv->pch_type = PCH_NOP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_priv->num_pch_pll = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return;
@@ -759,6 +928,7 @@ void intel_detect_pch(struct drm_device *dev)
 	 * need to expose ISA bridge to let driver know the real hardware
 	 * underneath. This is a requirement from virtualization team.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 */
 	pch = pci_get_class(PCI_CLASS_BRIDGE_ISA << 8, NULL);
 	if (pch) {
@@ -766,6 +936,8 @@ void intel_detect_pch(struct drm_device *dev)
 			unsigned short id;
 			id = pch->device & INTEL_PCH_DEVICE_ID_MASK;
 =======
+=======
+>>>>>>> v3.18
 	 *
 	 * In some virtualized environments (e.g. XEN), there is irrelevant
 	 * ISA bridge in the system. To work reliably, we should scan trhough
@@ -775,13 +947,19 @@ void intel_detect_pch(struct drm_device *dev)
 	while ((pch = pci_get_class(PCI_CLASS_BRIDGE_ISA << 8, pch))) {
 		if (pch->vendor == PCI_VENDOR_ID_INTEL) {
 			unsigned short id = pch->device & INTEL_PCH_DEVICE_ID_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev_priv->pch_id = id;
 
 			if (id == INTEL_PCH_IBX_DEVICE_ID_TYPE) {
 				dev_priv->pch_type = PCH_IBX;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_priv->num_pch_pll = 2;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				DRM_DEBUG_KMS("Found Ibex Peak PCH\n");
@@ -789,7 +967,10 @@ void intel_detect_pch(struct drm_device *dev)
 			} else if (id == INTEL_PCH_CPT_DEVICE_ID_TYPE) {
 				dev_priv->pch_type = PCH_CPT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_priv->num_pch_pll = 2;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				DRM_DEBUG_KMS("Found CougarPoint PCH\n");
@@ -797,6 +978,7 @@ void intel_detect_pch(struct drm_device *dev)
 			} else if (id == INTEL_PCH_PPT_DEVICE_ID_TYPE) {
 				/* PantherPoint is CPT compatible */
 				dev_priv->pch_type = PCH_CPT;
+<<<<<<< HEAD
 <<<<<<< HEAD
 				dev_priv->num_pch_pll = 2;
 				DRM_DEBUG_KMS("Found PatherPoint PCH\n");
@@ -819,6 +1001,8 @@ void intel_detect_pch(struct drm_device *dev)
 		pci_dev_put(pch);
 	}
 =======
+=======
+>>>>>>> v3.18
 				DRM_DEBUG_KMS("Found PantherPoint PCH\n");
 				WARN_ON(!(IS_GEN6(dev) || IS_IVYBRIDGE(dev)));
 			} else if (id == INTEL_PCH_LPT_DEVICE_ID_TYPE) {
@@ -847,6 +1031,9 @@ void intel_detect_pch(struct drm_device *dev)
 		DRM_DEBUG_KMS("No PCH found.\n");
 
 	pci_dev_put(pch);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -854,11 +1041,14 @@ bool i915_semaphore_is_enabled(struct drm_device *dev)
 {
 	if (INTEL_INFO(dev)->gen < 6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 
 	if (i915_semaphores >= 0)
 		return i915_semaphores;
 =======
+=======
+>>>>>>> v3.18
 		return false;
 
 	if (i915.semaphores >= 0)
@@ -871,6 +1061,9 @@ bool i915_semaphore_is_enabled(struct drm_device *dev)
 	/* Until we get further testing... */
 	if (IS_GEN8(dev))
 		return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_INTEL_IOMMU
@@ -880,10 +1073,13 @@ bool i915_semaphore_is_enabled(struct drm_device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	return true;
 }
 
@@ -921,12 +1117,19 @@ static int intel_suspend_complete(struct drm_i915_private *dev_priv);
 static int intel_resume_prepare(struct drm_i915_private *dev_priv,
 				bool rpm_resume);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int i915_drm_freeze(struct drm_device *dev)
 {
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	struct drm_crtc *crtc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_power_t opregion_target_state;
+>>>>>>> v3.18
 =======
 	pci_power_t opregion_target_state;
 >>>>>>> v3.18
@@ -937,7 +1140,13 @@ static int i915_drm_freeze(struct drm_device *dev)
 	mutex_unlock(&dev_priv->modeset_restore_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	intel_set_power_well(dev, true);
+=======
+	/* We do a lot of poking in a lot of registers, make sure they work
+	 * properly. */
+	intel_display_set_init_power(dev_priv, true);
+>>>>>>> v3.18
 =======
 	/* We do a lot of poking in a lot of registers, make sure they work
 	 * properly. */
@@ -951,7 +1160,13 @@ static int i915_drm_freeze(struct drm_device *dev)
 	/* If KMS is active, we do the leavevt stuff here */
 	if (drm_core_check_feature(dev, DRIVER_MODESET)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int error = i915_gem_idle(dev);
+=======
+		int error;
+
+		error = i915_gem_suspend(dev);
+>>>>>>> v3.18
 =======
 		int error;
 
@@ -963,6 +1178,7 @@ static int i915_drm_freeze(struct drm_device *dev)
 			return error;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		cancel_delayed_work_sync(&dev_priv->rps.delayed_resume_work);
 
@@ -984,6 +1200,8 @@ static int i915_drm_freeze(struct drm_device *dev)
 	intel_fbdev_set_suspend(dev, 1);
 	console_unlock();
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Disable CRTCs directly since we want to preserve sw state
 		 * for _thaw. Also, power gate the CRTC power wells.
@@ -1026,6 +1244,9 @@ static int i915_drm_freeze(struct drm_device *dev)
 	dev_priv->suspend_count++;
 
 	intel_display_set_init_power(dev_priv, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1062,6 +1283,7 @@ int i915_suspend(struct drm_device *dev, pm_message_t state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void intel_console_resume(struct work_struct *work)
 {
 	struct drm_i915_private *dev_priv =
@@ -1097,6 +1319,8 @@ static int __i915_drm_thaw(struct drm_device *dev)
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	int error = 0;
 =======
+=======
+>>>>>>> v3.18
 static int i915_drm_thaw_early(struct drm_device *dev)
 {
 	struct drm_i915_private *dev_priv = dev->dev_private;
@@ -1123,6 +1347,9 @@ static int __i915_drm_thaw(struct drm_device *dev, bool restore_gtt_mappings)
 		i915_gem_restore_gtt_mappings(dev);
 		mutex_unlock(&dev->struct_mutex);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	i915_restore_state(dev);
@@ -1131,6 +1358,7 @@ static int __i915_drm_thaw(struct drm_device *dev, bool restore_gtt_mappings)
 	/* KMS EnterVT equivalent */
 	if (drm_core_check_feature(dev, DRIVER_MODESET)) {
 		intel_init_pch_refclk(dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		mutex_lock(&dev->struct_mutex);
@@ -1145,6 +1373,8 @@ static int __i915_drm_thaw(struct drm_device *dev, bool restore_gtt_mappings)
 		intel_modeset_init_hw(dev);
 
 =======
+=======
+>>>>>>> v3.18
 		drm_mode_config_reset(dev);
 
 		mutex_lock(&dev->struct_mutex);
@@ -1167,6 +1397,9 @@ static int __i915_drm_thaw(struct drm_device *dev, bool restore_gtt_mappings)
 		}
 
 		intel_dp_mst_resume(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		drm_modeset_lock_all(dev);
 		intel_modeset_setup_hw_state(dev, true);
@@ -1180,9 +1413,14 @@ static int __i915_drm_thaw(struct drm_device *dev, bool restore_gtt_mappings)
 		 * */
 		intel_hpd_init(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_priv->enable_hotplug_processing = true;
 		/* Config may have changed between suspend and resume */
 		intel_resume_hotplug(dev);
+=======
+		/* Config may have changed between suspend and resume */
+		drm_helper_hpd_irq_event(dev);
+>>>>>>> v3.18
 =======
 		/* Config may have changed between suspend and resume */
 		drm_helper_hpd_irq_event(dev);
@@ -1191,6 +1429,7 @@ static int __i915_drm_thaw(struct drm_device *dev, bool restore_gtt_mappings)
 
 	intel_opregion_init(dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * The console lock can be pretty contented on resume due
@@ -1206,22 +1445,32 @@ static int __i915_drm_thaw(struct drm_device *dev, bool restore_gtt_mappings)
 =======
 	intel_fbdev_set_suspend(dev, FBINFO_STATE_RUNNING, false);
 >>>>>>> v3.18
+=======
+	intel_fbdev_set_suspend(dev, FBINFO_STATE_RUNNING, false);
+>>>>>>> v3.18
 
 	mutex_lock(&dev_priv->modeset_restore_lock);
 	dev_priv->modeset_restore = MODESET_DONE;
 	mutex_unlock(&dev_priv->modeset_restore_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return error;
 =======
+=======
+>>>>>>> v3.18
 
 	intel_opregion_notify_adapter(dev, PCI_D0);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int i915_drm_thaw(struct drm_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int error = 0;
 
@@ -1247,6 +1496,8 @@ int i915_resume(struct drm_device *dev)
 		return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	if (drm_core_check_feature(dev, DRIVER_MODESET))
 		i915_check_and_clear_faults(dev);
 
@@ -1267,12 +1518,16 @@ static int i915_resume_early(struct drm_device *dev)
 	 * FIXME: This should be solved with a special hdmi sink device or
 	 * similar so that power domains can be employed.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pci_enable_device(dev->pdev))
 		return -EIO;
 
 	pci_set_master(dev->pdev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	intel_gt_sanitize(dev);
 
@@ -1450,6 +1705,8 @@ int intel_gpu_reset(struct drm_device *dev)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	return i915_drm_thaw_early(dev);
 }
 
@@ -1477,6 +1734,9 @@ static int i915_resume_legacy(struct drm_device *dev)
 	i915_resume(dev);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1498,16 +1758,22 @@ static int i915_resume_legacy(struct drm_device *dev)
 int i915_reset(struct drm_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_i915_private_t *dev_priv = dev->dev_private;
 	int ret;
 
 	if (!i915_try_reset)
 =======
+=======
+>>>>>>> v3.18
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	bool simulated;
 	int ret;
 
 	if (!i915.reset)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -1515,6 +1781,7 @@ int i915_reset(struct drm_device *dev)
 
 	i915_gem_reset(dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = -ENODEV;
 	if (get_seconds() - dev_priv->gpu_error.last_reset < 5)
@@ -1526,6 +1793,8 @@ int i915_reset(struct drm_device *dev)
 	if (ret) {
 		DRM_ERROR("Failed to reset chip.\n");
 =======
+=======
+>>>>>>> v3.18
 	simulated = dev_priv->gpu_error.stop_rings != 0;
 
 	ret = intel_gpu_reset(dev);
@@ -1543,6 +1812,9 @@ int i915_reset(struct drm_device *dev)
 
 	if (ret) {
 		DRM_ERROR("Failed to reset chip: %i\n", ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mutex_unlock(&dev->struct_mutex);
 		return ret;
@@ -1563,6 +1835,7 @@ int i915_reset(struct drm_device *dev)
 	 * switched away).
 	 */
 	if (drm_core_check_feature(dev, DRIVER_MODESET) ||
+<<<<<<< HEAD
 <<<<<<< HEAD
 			!dev_priv->mm.suspended) {
 		struct intel_ring_buffer *ring;
@@ -1594,6 +1867,8 @@ int i915_reset(struct drm_device *dev)
 		drm_irq_install(dev);
 		intel_hpd_init(dev);
 =======
+=======
+>>>>>>> v3.18
 			!dev_priv->ums.mm_suspended) {
 		dev_priv->ums.mm_suspended = 0;
 
@@ -1624,6 +1899,9 @@ int i915_reset(struct drm_device *dev)
 		 */
 		if (INTEL_INFO(dev)->gen > 5)
 			intel_reset_gt_powersave(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		mutex_unlock(&dev->struct_mutex);
@@ -1638,17 +1916,23 @@ static int i915_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		(struct intel_device_info *) ent->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (intel_info->is_valleyview)
 		if(!i915_preliminary_hw_support) {
 			DRM_ERROR("Preliminary hardware support disabled\n");
 			return -ENODEV;
 		}
 =======
+=======
+>>>>>>> v3.18
 	if (IS_PRELIMINARY_HW(intel_info) && !i915.preliminary_hw_support) {
 		DRM_INFO("This hardware requires preliminary hardware support.\n"
 			 "See CONFIG_DRM_I915_PRELIMINARY_HW_SUPPORT, and/or modparam preliminary_hw_support\n");
 		return -ENODEV;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Only bind to function 0 of the device. Early generations
@@ -1659,6 +1943,7 @@ static int i915_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	if (PCI_FUNC(pdev->devfn))
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* We've managed to ship a kms-enabled ddx that shipped with an XvMC
 	 * implementation for gen3 (and only gen3) that used legacy drm maps
@@ -1671,6 +1956,9 @@ static int i915_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		DRM_ERROR("drm/i915 can't work without intel_agp module!\n");
 		return -ENODEV;
 	}
+=======
+	driver.driver_features &= ~(DRIVER_USE_AGP);
+>>>>>>> v3.18
 =======
 	driver.driver_features &= ~(DRIVER_USE_AGP);
 >>>>>>> v3.18
@@ -1691,7 +1979,10 @@ static int i915_pm_suspend(struct device *dev)
 	struct pci_dev *pdev = to_pci_dev(dev);
 	struct drm_device *drm_dev = pci_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int error;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1704,6 +1995,7 @@ static int i915_pm_suspend(struct device *dev)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = i915_drm_freeze(drm_dev);
 	if (error)
 		return error;
@@ -1713,6 +2005,8 @@ static int i915_pm_suspend(struct device *dev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	return i915_drm_freeze(drm_dev);
 }
 
@@ -1753,6 +2047,9 @@ static int i915_pm_resume_early(struct device *dev)
 	struct drm_device *drm_dev = pci_get_drvdata(pdev);
 
 	return i915_resume_early(drm_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1778,7 +2075,10 @@ static int i915_pm_freeze(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int i915_pm_freeze_late(struct device *dev)
 {
 	struct pci_dev *pdev = to_pci_dev(dev);
@@ -1796,6 +2096,9 @@ static int i915_pm_thaw_early(struct device *dev)
 	return i915_drm_thaw_early(drm_dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int i915_pm_thaw(struct device *dev)
 {
@@ -1814,6 +2117,7 @@ static int i915_pm_poweroff(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct dev_pm_ops i915_pm_ops = {
 	.suspend = i915_pm_suspend,
 	.resume = i915_pm_resume,
@@ -1822,6 +2126,8 @@ static const struct dev_pm_ops i915_pm_ops = {
 	.poweroff = i915_pm_poweroff,
 	.restore = i915_pm_resume,
 =======
+=======
+>>>>>>> v3.18
 static int hsw_suspend_complete(struct drm_i915_private *dev_priv)
 {
 	hsw_enable_pc8(dev_priv);
@@ -2390,6 +2696,9 @@ static const struct dev_pm_ops i915_pm_ops = {
 	.restore = i915_pm_resume,
 	.runtime_suspend = intel_runtime_suspend,
 	.runtime_resume = intel_runtime_resume,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2407,7 +2716,10 @@ static const struct file_operations i915_driver_fops = {
 	.mmap = drm_gem_mmap,
 	.poll = drm_poll,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fasync = drm_fasync,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.read = drm_read,
@@ -2423,8 +2735,14 @@ static struct drm_driver driver = {
 	 */
 	.driver_features =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    DRIVER_USE_AGP | DRIVER_REQUIRE_AGP | /* DRIVER_USE_MTRR |*/
 	    DRIVER_HAVE_IRQ | DRIVER_IRQ_SHARED | DRIVER_GEM | DRIVER_PRIME,
+=======
+	    DRIVER_USE_AGP |
+	    DRIVER_HAVE_IRQ | DRIVER_IRQ_SHARED | DRIVER_GEM | DRIVER_PRIME |
+	    DRIVER_RENDER,
+>>>>>>> v3.18
 =======
 	    DRIVER_USE_AGP |
 	    DRIVER_HAVE_IRQ | DRIVER_IRQ_SHARED | DRIVER_GEM | DRIVER_PRIME |
@@ -2437,16 +2755,22 @@ static struct drm_driver driver = {
 	.preclose = i915_driver_preclose,
 	.postclose = i915_driver_postclose,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Used in place of i915_pm_ops for non-DRIVER_MODESET */
 	.suspend = i915_suspend,
 	.resume = i915_resume,
 =======
+=======
+>>>>>>> v3.18
 	.set_busid = drm_pci_set_busid,
 
 	/* Used in place of i915_pm_ops for non-DRIVER_MODESET */
 	.suspend = i915_suspend,
 	.resume = i915_resume_legacy,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.device_is_agp = i915_driver_device_is_agp,
@@ -2457,7 +2781,10 @@ static struct drm_driver driver = {
 	.debugfs_cleanup = i915_debugfs_cleanup,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.gem_init_object = i915_gem_init_object,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.gem_free_object = i915_gem_free_object,
@@ -2471,7 +2798,11 @@ static struct drm_driver driver = {
 	.dumb_create = i915_gem_dumb_create,
 	.dumb_map_offset = i915_gem_mmap_gtt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dumb_destroy = i915_gem_dumb_destroy,
+=======
+	.dumb_destroy = drm_gem_dumb_destroy,
+>>>>>>> v3.18
 =======
 	.dumb_destroy = drm_gem_dumb_destroy,
 >>>>>>> v3.18
@@ -2508,6 +2839,7 @@ static int __init i915_init(void)
 	 */
 #if defined(CONFIG_DRM_I915_KMS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (i915_modeset != 0)
 		driver.driver_features |= DRIVER_MODESET;
 #endif
@@ -2522,6 +2854,8 @@ static int __init i915_init(void)
 	if (!(driver.driver_features & DRIVER_MODESET))
 		driver.get_vblank_timestamp = NULL;
 =======
+=======
+>>>>>>> v3.18
 	if (i915.modeset != 0)
 		driver.driver_features |= DRIVER_MODESET;
 #endif
@@ -2541,6 +2875,9 @@ static int __init i915_init(void)
 		return 0;
 #endif
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return drm_pci_init(&driver, &i915_pci_driver);
@@ -2549,12 +2886,18 @@ static int __init i915_init(void)
 static void __exit i915_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_DRM_I915_UMS
 	if (!(driver.driver_features & DRIVER_MODESET))
 		return; /* Never loaded a driver. */
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	drm_pci_exit(&driver, &i915_pci_driver);
 }
@@ -2562,6 +2905,7 @@ static void __exit i915_exit(void)
 module_init(i915_init);
 module_exit(i915_exit);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 MODULE_AUTHOR(DRIVER_AUTHOR);
 MODULE_DESCRIPTION(DRIVER_DESC);
@@ -2700,9 +3044,14 @@ int i915_reg_read_ioctl(struct drm_device *dev,
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 MODULE_AUTHOR("Tungsten Graphics, Inc.");
 MODULE_AUTHOR("Intel Corporation");
 
 MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL and additional rights");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

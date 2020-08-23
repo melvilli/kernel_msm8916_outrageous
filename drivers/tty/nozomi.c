@@ -524,7 +524,11 @@ static u32 write_mem32(void __iomem *mem_addr_start, const u32 *buf,
 
 /* Setup pointers to different channels and also setup buffer sizes. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void setup_memory(struct nozomi *dc)
+=======
+static void nozomi_setup_memory(struct nozomi *dc)
+>>>>>>> v3.18
 =======
 static void nozomi_setup_memory(struct nozomi *dc)
 >>>>>>> v3.18
@@ -676,7 +680,11 @@ static int nozomi_read_config_table(struct nozomi *dc)
 		DBG1("Second phase, configuring card");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		setup_memory(dc);
+=======
+		nozomi_setup_memory(dc);
+>>>>>>> v3.18
 =======
 		nozomi_setup_memory(dc);
 >>>>>>> v3.18
@@ -714,7 +722,11 @@ static int nozomi_read_config_table(struct nozomi *dc)
 
 		/* Here we should disable all I/O over F32. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		setup_memory(dc);
+=======
+		nozomi_setup_memory(dc);
+>>>>>>> v3.18
 =======
 		nozomi_setup_memory(dc);
 >>>>>>> v3.18
@@ -836,7 +848,11 @@ static int receive_data(enum port_type index, struct nozomi *dc)
 	int i, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = __le32_to_cpu(readl(addr));
+=======
+	read_mem32((u32 *) &size, addr, 4);
+>>>>>>> v3.18
 =======
 	read_mem32((u32 *) &size, addr, 4);
 >>>>>>> v3.18
@@ -976,7 +992,11 @@ static int receive_flow_control(struct nozomi *dc)
 			"ERROR: flow control received for non-existing port\n");
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -1046,7 +1066,11 @@ static enum ctrl_port_type port2ctrl(enum port_type port,
 			"ERROR: send flow control " \
 			"received for non-existing port\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -1830,7 +1854,11 @@ static int ntty_ioctl(struct tty_struct *tty,
 		DBG1("ERR: 0x%08X, %d", cmd, cmd);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18

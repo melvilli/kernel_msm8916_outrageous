@@ -11,6 +11,11 @@
 #define __my_cpu_offset S390_lowcore.percpu_offset
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_64BIT
+
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_64BIT
 
@@ -21,12 +26,15 @@
  * generate external references.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SMP) && defined(CONFIG_64BIT) && defined(MODULE)
 #define ARCH_NEEDS_WEAK_PER_CPU
 #endif
 
 #define arch_this_cpu_to_op(pcp, val, op)				\
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_SMP) && defined(MODULE)
 #define ARCH_NEEDS_WEAK_PER_CPU
 #endif
@@ -36,6 +44,9 @@
  * disabling and enabling interrupts like the generic variant would do.
  */
 #define arch_this_cpu_to_op_simple(pcp, val, op)			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ({									\
 	typedef typeof(pcp) pcp_op_T__;					\
@@ -43,7 +54,11 @@
 	pcp_op_T__ *ptr__;						\
 	preempt_disable();						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptr__ = __this_cpu_ptr(&(pcp));					\
+=======
+	ptr__ = raw_cpu_ptr(&(pcp));					\
+>>>>>>> v3.18
 =======
 	ptr__ = raw_cpu_ptr(&(pcp));					\
 >>>>>>> v3.18
@@ -51,6 +66,7 @@
 	do {								\
 		old__ = prev__;						\
 		new__ = old__ op (val);					\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		switch (sizeof(*ptr__)) {				\
 		case 8:							\
@@ -62,11 +78,15 @@
 =======
 		prev__ = cmpxchg(ptr__, old__, new__);			\
 >>>>>>> v3.18
+=======
+		prev__ = cmpxchg(ptr__, old__, new__);			\
+>>>>>>> v3.18
 	} while (prev__ != old__);					\
 	preempt_enable();						\
 	new__;								\
 })
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define this_cpu_add_1(pcp, val) arch_this_cpu_to_op(pcp, val, +)
 #define this_cpu_add_2(pcp, val) arch_this_cpu_to_op(pcp, val, +)
@@ -93,6 +113,8 @@
 #define this_cpu_xor_4(pcp, val) arch_this_cpu_to_op(pcp, val, ^)
 #define this_cpu_xor_8(pcp, val) arch_this_cpu_to_op(pcp, val, ^)
 =======
+=======
+>>>>>>> v3.18
 #define this_cpu_add_1(pcp, val)	arch_this_cpu_to_op_simple(pcp, val, +)
 #define this_cpu_add_2(pcp, val)	arch_this_cpu_to_op_simple(pcp, val, +)
 #define this_cpu_add_return_1(pcp, val) arch_this_cpu_to_op_simple(pcp, val, +)
@@ -182,6 +204,9 @@
 #define this_cpu_or_8(pcp, val)		arch_this_cpu_to_op(pcp, val, "laog")
 
 #endif /* CONFIG_HAVE_MARCH_Z196_FEATURES */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define arch_this_cpu_cmpxchg(pcp, oval, nval)				\
@@ -191,6 +216,7 @@
 	pcp_op_T__ *ptr__;						\
 	preempt_disable();						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptr__ = __this_cpu_ptr(&(pcp));					\
 	switch (sizeof(*ptr__)) {					\
 	case 8:								\
@@ -199,6 +225,10 @@
 	default:							\
 		ret__ = cmpxchg(ptr__, oval, nval);			\
 	}								\
+=======
+	ptr__ = raw_cpu_ptr(&(pcp));					\
+	ret__ = cmpxchg(ptr__, oval, nval);				\
+>>>>>>> v3.18
 =======
 	ptr__ = raw_cpu_ptr(&(pcp));					\
 	ret__ = cmpxchg(ptr__, oval, nval);				\
@@ -218,7 +248,11 @@
 	typeof(pcp) ret__;						\
 	preempt_disable();						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptr__ = __this_cpu_ptr(&(pcp));					\
+=======
+	ptr__ = raw_cpu_ptr(&(pcp));					\
+>>>>>>> v3.18
 =======
 	ptr__ = raw_cpu_ptr(&(pcp));					\
 >>>>>>> v3.18
@@ -231,9 +265,13 @@
 #define this_cpu_xchg_2(pcp, nval) arch_this_cpu_xchg(pcp, nval)
 #define this_cpu_xchg_4(pcp, nval) arch_this_cpu_xchg(pcp, nval)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_64BIT
 #define this_cpu_xchg_8(pcp, nval) arch_this_cpu_xchg(pcp, nval)
 #endif
+=======
+#define this_cpu_xchg_8(pcp, nval) arch_this_cpu_xchg(pcp, nval)
+>>>>>>> v3.18
 =======
 #define this_cpu_xchg_8(pcp, nval) arch_this_cpu_xchg(pcp, nval)
 >>>>>>> v3.18
@@ -247,8 +285,13 @@
 	int ret__;							\
 	preempt_disable();						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p1__ = __this_cpu_ptr(&(pcp1));					\
 	p2__ = __this_cpu_ptr(&(pcp2));					\
+=======
+	p1__ = raw_cpu_ptr(&(pcp1));					\
+	p2__ = raw_cpu_ptr(&(pcp2));					\
+>>>>>>> v3.18
 =======
 	p1__ = raw_cpu_ptr(&(pcp1));					\
 	p2__ = raw_cpu_ptr(&(pcp2));					\
@@ -260,9 +303,15 @@
 
 #define this_cpu_cmpxchg_double_4 arch_this_cpu_cmpxchg_double
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_64BIT
 #define this_cpu_cmpxchg_double_8 arch_this_cpu_cmpxchg_double
 #endif
+=======
+#define this_cpu_cmpxchg_double_8 arch_this_cpu_cmpxchg_double
+
+#endif /* CONFIG_64BIT */
+>>>>>>> v3.18
 =======
 #define this_cpu_cmpxchg_double_8 arch_this_cpu_cmpxchg_double
 

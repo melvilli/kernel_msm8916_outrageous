@@ -22,7 +22,11 @@ obj-$(CONFIG_MIPS_ALCHEMY)	+= pci-alchemy.o
 obj-$(CONFIG_SOC_AR71XX)	+= pci-ar71xx.o
 obj-$(CONFIG_PCI_AR724X)	+= pci-ar724x.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+obj-$(CONFIG_MIPS_PCI_VIRTIO)	+= pci-virtio-guest.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MIPS_PCI_VIRTIO)	+= pci-virtio-guest.o
 >>>>>>> v3.18
@@ -34,7 +38,12 @@ obj-$(CONFIG_MIPS_COBALT)	+= fixup-cobalt.o
 obj-$(CONFIG_LEMOTE_FULOONG2E)	+= fixup-fuloong2e.o ops-loongson2.o
 obj-$(CONFIG_LEMOTE_MACH2F)	+= fixup-lemote2f.o ops-loongson2.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MIPS_MALTA)	+= fixup-malta.o
+=======
+obj-$(CONFIG_LOONGSON_MACH3X)	+= fixup-loongson3.o ops-loongson3.o
+obj-$(CONFIG_MIPS_MALTA)	+= fixup-malta.o pci-malta.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_LOONGSON_MACH3X)	+= fixup-loongson3.o ops-loongson3.o
 obj-$(CONFIG_MIPS_MALTA)	+= fixup-malta.o pci-malta.o
@@ -51,6 +60,10 @@ obj-$(CONFIG_SNI_RM)		+= fixup-sni.o ops-sni.o
 obj-$(CONFIG_LANTIQ)		+= fixup-lantiq.o
 obj-$(CONFIG_PCI_LANTIQ)	+= pci-lantiq.o ops-lantiq.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SOC_RT3883)	+= pci-rt3883.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SOC_RT3883)	+= pci-rt3883.o
 >>>>>>> v3.18
@@ -66,9 +79,14 @@ obj-$(CONFIG_TOSHIBA_RBTX4938)	+= fixup-rbtx4938.o
 obj-$(CONFIG_VICTOR_MPC30X)	+= fixup-mpc30x.o
 obj-$(CONFIG_ZAO_CAPCELLA)	+= fixup-capcella.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_WR_PPMC)		+= fixup-wrppmc.o
 obj-$(CONFIG_MIKROTIK_RB532)	+= pci-rc32434.o ops-rc32434.o fixup-rc32434.o
 obj-$(CONFIG_CPU_CAVIUM_OCTEON) += pci-octeon.o pcie-octeon.o
+=======
+obj-$(CONFIG_MIKROTIK_RB532)	+= pci-rc32434.o ops-rc32434.o fixup-rc32434.o
+obj-$(CONFIG_CAVIUM_OCTEON_SOC) += pci-octeon.o pcie-octeon.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MIKROTIK_RB532)	+= pci-rc32434.o ops-rc32434.o fixup-rc32434.o
 obj-$(CONFIG_CAVIUM_OCTEON_SOC) += pci-octeon.o pcie-octeon.o
@@ -78,7 +96,12 @@ obj-$(CONFIG_CPU_XLP)		+= pci-xlp.o
 
 ifdef CONFIG_PCI_MSI
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_CPU_CAVIUM_OCTEON) += msi-octeon.o
+=======
+obj-$(CONFIG_CAVIUM_OCTEON_SOC) += msi-octeon.o
+obj-$(CONFIG_CPU_XLP)		+= msi-xlp.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_CAVIUM_OCTEON_SOC) += msi-octeon.o
 obj-$(CONFIG_CPU_XLP)		+= msi-xlp.o

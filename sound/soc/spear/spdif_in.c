@@ -19,6 +19,10 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/dmaengine_pcm.h>
+>>>>>>> v3.18
 =======
 #include <sound/dmaengine_pcm.h>
 >>>>>>> v3.18
@@ -29,6 +33,10 @@
 #include <sound/spear_spdif.h>
 #include "spdif_in_regs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "spear_pcm.h"
+>>>>>>> v3.18
 =======
 #include "spear_pcm.h"
 >>>>>>> v3.18
@@ -46,6 +54,11 @@ struct spdif_in_dev {
 	void (*reset_perip)(void);
 	int irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_dmaengine_dai_dma_data dma_params_rx;
+	struct snd_dmaengine_pcm_config config;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data dma_params_rx;
 	struct snd_dmaengine_pcm_config config;
@@ -63,6 +76,7 @@ static void spdif_in_configure(struct spdif_in_dev *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int spdif_in_startup(struct snd_pcm_substream *substream,
 		struct snd_soc_dai *cpu_dai)
 {
@@ -73,6 +87,8 @@ static int spdif_in_startup(struct snd_pcm_substream *substream,
 
 	snd_soc_dai_set_dma_data(cpu_dai, substream, (void *)&host->dma_params);
 =======
+=======
+>>>>>>> v3.18
 static int spdif_in_dai_probe(struct snd_soc_dai *dai)
 {
 	struct spdif_in_dev *host = snd_soc_dai_get_drvdata(dai);
@@ -80,6 +96,9 @@ static int spdif_in_dai_probe(struct snd_soc_dai *dai)
 	host->dma_params_rx.filter_data = &host->dma_params;
 	dai->capture_dma_data = &host->dma_params_rx;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -94,7 +113,10 @@ static void spdif_in_shutdown(struct snd_pcm_substream *substream,
 
 	writel(0x0, host->io_base + SPDIF_IN_IRQ_MASK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dai_set_dma_data(dai, substream, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -178,7 +200,10 @@ static int spdif_in_trigger(struct snd_pcm_substream *substream, int cmd,
 
 static struct snd_soc_dai_ops spdif_in_dai_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.startup	= spdif_in_startup,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.shutdown	= spdif_in_shutdown,
@@ -187,7 +212,12 @@ static struct snd_soc_dai_ops spdif_in_dai_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_soc_dai_driver spdif_in_dai = {
+=======
+static struct snd_soc_dai_driver spdif_in_dai = {
+	.probe = spdif_in_dai_probe,
+>>>>>>> v3.18
 =======
 static struct snd_soc_dai_driver spdif_in_dai = {
 	.probe = spdif_in_dai_probe,
@@ -270,7 +300,11 @@ static int spdif_in_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->clk = clk_get(&pdev->dev, NULL);
+=======
+	host->clk = devm_clk_get(&pdev->dev, NULL);
+>>>>>>> v3.18
 =======
 	host->clk = devm_clk_get(&pdev->dev, NULL);
 >>>>>>> v3.18
@@ -287,7 +321,10 @@ static int spdif_in_probe(struct platform_device *pdev)
 	host->dma_params.max_burst = 16;
 	host->dma_params.addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->dma_params.filter = pdata->filter;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	host->reset_perip = pdata->reset_perip;
@@ -299,13 +336,17 @@ static int spdif_in_probe(struct platform_device *pdev)
 			"spdif-in", host);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_put(host->clk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		dev_warn(&pdev->dev, "request_irq failed\n");
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = snd_soc_register_component(&pdev->dev, &spdif_in_component,
 					 &spdif_in_dai, 1);
@@ -334,6 +375,8 @@ static struct platform_driver spdif_in_driver = {
 	.probe		= spdif_in_probe,
 	.remove		= spdif_in_remove,
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_snd_soc_register_component(&pdev->dev, &spdif_in_component,
 					      &spdif_in_dai, 1);
 	if (ret)
@@ -345,6 +388,9 @@ static struct platform_driver spdif_in_driver = {
 
 static struct platform_driver spdif_in_driver = {
 	.probe		= spdif_in_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.driver		= {
 		.name	= "spdif-in",

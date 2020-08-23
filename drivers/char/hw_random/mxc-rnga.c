@@ -165,7 +165,13 @@ static int __init mxc_rnga_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_prepare_enable(mxc_rng->clk);
+=======
+	err = clk_prepare_enable(mxc_rng->clk);
+	if (err)
+		goto out;
+>>>>>>> v3.18
 =======
 	err = clk_prepare_enable(mxc_rng->clk);
 	if (err)

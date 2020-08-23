@@ -49,6 +49,11 @@ void *nilfs_palloc_block_get_entry(const struct inode *, __u64,
 				   const struct buffer_head *, void *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int nilfs_palloc_count_max_entries(struct inode *, u64, u64 *);
+
+>>>>>>> v3.18
 =======
 int nilfs_palloc_count_max_entries(struct inode *, u64, u64 *);
 

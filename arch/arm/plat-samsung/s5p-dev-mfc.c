@@ -18,6 +18,7 @@
 #include <linux/of.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/map.h>
 #include <mach/irqs.h>
 #include <plat/devs.h>
@@ -62,6 +63,8 @@ struct platform_device s5p_device_mfc_r = {
 		.coherent_dma_mask	= DMA_BIT_MASK(32),
 	},
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device s5p_device_mfc_l;
 static struct platform_device s5p_device_mfc_r;
 
@@ -71,6 +74,9 @@ struct s5p_mfc_dt_meminfo {
 	unsigned long	roff;
 	unsigned long	rsize;
 	char		*compatible;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -83,7 +89,12 @@ struct s5p_mfc_reserved_mem {
 static struct s5p_mfc_reserved_mem s5p_mfc_mem[2] __initdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init s5p_mfc_reserve_mem(phys_addr_t rbase, unsigned int rsize,
+=======
+
+static void __init s5p_mfc_reserve_mem(phys_addr_t rbase, unsigned int rsize,
+>>>>>>> v3.18
 =======
 
 static void __init s5p_mfc_reserve_mem(phys_addr_t rbase, unsigned int rsize,
@@ -110,6 +121,7 @@ static void __init s5p_mfc_reserve_mem(phys_addr_t rbase, unsigned int rsize,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init s5p_mfc_memory_init(void)
 {
@@ -138,19 +150,28 @@ int __init s5p_fdt_find_mfc_mem(unsigned long node, const char *uname,
 	unsigned long len;
 	struct s5p_mfc_dt_meminfo *mfc_mem = data;
 =======
+=======
+>>>>>>> v3.18
 int __init s5p_fdt_alloc_mfc_mem(unsigned long node, const char *uname,
 				int depth, void *data)
 {
 	const __be32 *prop;
 	int len;
 	struct s5p_mfc_dt_meminfo mfc_mem;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!data)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!of_flat_dt_is_compatible(node, mfc_mem->compatible))
+=======
+	if (!of_flat_dt_is_compatible(node, data))
+>>>>>>> v3.18
 =======
 	if (!of_flat_dt_is_compatible(node, data))
 >>>>>>> v3.18
@@ -161,8 +182,13 @@ int __init s5p_fdt_alloc_mfc_mem(unsigned long node, const char *uname,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfc_mem->loff = be32_to_cpu(prop[0]);
 	mfc_mem->lsize = be32_to_cpu(prop[1]);
+=======
+	mfc_mem.loff = be32_to_cpu(prop[0]);
+	mfc_mem.lsize = be32_to_cpu(prop[1]);
+>>>>>>> v3.18
 =======
 	mfc_mem.loff = be32_to_cpu(prop[0]);
 	mfc_mem.lsize = be32_to_cpu(prop[1]);
@@ -173,6 +199,7 @@ int __init s5p_fdt_alloc_mfc_mem(unsigned long node, const char *uname,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfc_mem->roff = be32_to_cpu(prop[0]);
 	mfc_mem->rsize = be32_to_cpu(prop[1]);
 
@@ -180,6 +207,8 @@ int __init s5p_fdt_alloc_mfc_mem(unsigned long node, const char *uname,
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	mfc_mem.roff = be32_to_cpu(prop[0]);
 	mfc_mem.rsize = be32_to_cpu(prop[1]);
 
@@ -188,4 +217,7 @@ int __init s5p_fdt_alloc_mfc_mem(unsigned long node, const char *uname,
 
 	return 1;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

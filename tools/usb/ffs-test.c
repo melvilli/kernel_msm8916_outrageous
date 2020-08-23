@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ffs-test.c.c -- user mode filesystem api for usb composite function
+=======
+ * ffs-test.c -- user mode filesystem api for usb composite function
+>>>>>>> v3.18
 =======
  * ffs-test.c -- user mode filesystem api for usb composite function
 >>>>>>> v3.18
@@ -34,6 +38,10 @@
 #include <pthread.h>
 #include <stdarg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <stdbool.h>
+>>>>>>> v3.18
 =======
 #include <stdbool.h>
 >>>>>>> v3.18
@@ -115,7 +123,13 @@ static void _msg(unsigned level, const char *fmt, ...)
 
 static const struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_functionfs_descs_head header;
+=======
+	struct usb_functionfs_descs_head_v2 header;
+	__le32 fs_count;
+	__le32 hs_count;
+>>>>>>> v3.18
 =======
 	struct usb_functionfs_descs_head_v2 header;
 	__le32 fs_count;
@@ -129,18 +143,24 @@ static const struct {
 } __attribute__((packed)) descriptors = {
 	.header = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.magic = cpu_to_le32(FUNCTIONFS_DESCRIPTORS_MAGIC),
 		.length = cpu_to_le32(sizeof descriptors),
 		.fs_count = cpu_to_le32(3),
 		.hs_count = cpu_to_le32(3),
 	},
 =======
+=======
+>>>>>>> v3.18
 		.magic = cpu_to_le32(FUNCTIONFS_DESCRIPTORS_MAGIC_V2),
 		.flags = cpu_to_le32(FUNCTIONFS_HAS_FS_DESC |
 				     FUNCTIONFS_HAS_HS_DESC),
 		.length = cpu_to_le32(sizeof descriptors),
 	},
 	.fs_count = cpu_to_le32(3),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.fs_descs = {
 		.intf = {
@@ -166,6 +186,10 @@ static const struct {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.hs_count = cpu_to_le32(3),
+>>>>>>> v3.18
 =======
 	.hs_count = cpu_to_le32(3),
 >>>>>>> v3.18
@@ -196,7 +220,10 @@ static const struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static size_t descs_to_legacy(void **legacy, const void *descriptors_v2)
 {
 	const unsigned char *descs_end, *descs_start;
@@ -280,6 +307,9 @@ static size_t descs_to_legacy(void **legacy, const void *descriptors_v2)
 	return length;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define STR_INTERFACE_ "Source/Sink"
@@ -601,6 +631,7 @@ ep0_consume(struct thread *ignore, const void *buf, size_t nbytes)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ep0_init(struct thread *t)
 {
 	ssize_t ret;
@@ -608,6 +639,8 @@ static void ep0_init(struct thread *t)
 	info("%s: writing descriptors\n", t->filename);
 	ret = write(t->fd, &descriptors, sizeof descriptors);
 =======
+=======
+>>>>>>> v3.18
 static void ep0_init(struct thread *t, bool legacy_descriptors)
 {
 	void *legacy;
@@ -631,6 +664,9 @@ legacy:
 			free(legacy);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	die_on(ret < 0, "%s: write: descriptors", t->filename);
 
@@ -643,6 +679,7 @@ legacy:
 /******************** Main **************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int main(void)
 {
 	unsigned i;
@@ -652,6 +689,8 @@ int main(void)
 	init_thread(threads);
 	ep0_init(threads);
 =======
+=======
+>>>>>>> v3.18
 int main(int argc, char **argv)
 {
 	bool legacy_descriptors;
@@ -661,6 +700,9 @@ int main(int argc, char **argv)
 
 	init_thread(threads);
 	ep0_init(threads, legacy_descriptors);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 1; i < sizeof threads / sizeof *threads; ++i)

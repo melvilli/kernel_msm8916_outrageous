@@ -17,9 +17,15 @@
 #include <linux/of_platform.h>
 #include <linux/of_gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
 #include <linux/err.h>
 #include <linux/of.h>
+=======
+#include <linux/err.h>
+#include <linux/of.h>
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 #include <linux/of.h>
@@ -30,7 +36,10 @@
 #include "../w1_int.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u8 w1_gpio_set_pullup(void *data, int delay)
 {
 	struct w1_gpio_platform_data *pdata = data;
@@ -51,6 +60,9 @@ static u8 w1_gpio_set_pullup(void *data, int delay)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void w1_gpio_write_bit_dir(void *data, u8 bit)
 {
@@ -87,8 +99,14 @@ MODULE_DEVICE_TABLE(of, w1_gpio_dt_ids);
 static int w1_gpio_probe_dt(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w1_gpio_platform_data *pdata = pdev->dev.platform_data;
 	struct device_node *np = pdev->dev.of_node;
+=======
+	struct w1_gpio_platform_data *pdata = dev_get_platdata(&pdev->dev);
+	struct device_node *np = pdev->dev.of_node;
+	int gpio;
+>>>>>>> v3.18
 =======
 	struct w1_gpio_platform_data *pdata = dev_get_platdata(&pdev->dev);
 	struct device_node *np = pdev->dev.of_node;
@@ -103,9 +121,12 @@ static int w1_gpio_probe_dt(struct platform_device *pdev)
 		pdata->is_open_drain = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata->pin = of_get_gpio(np, 0);
 	pdata->ext_pullup_enable_pin = of_get_gpio(np, 1);
 =======
+=======
+>>>>>>> v3.18
 	gpio = of_get_gpio(np, 0);
 	if (gpio < 0) {
 		if (gpio != -EPROBE_DEFER)
@@ -123,6 +144,9 @@ static int w1_gpio_probe_dt(struct platform_device *pdev)
 	/* ignore other errors as the pullup gpio is optional */
 	pdata->ext_pullup_enable_pin = gpio;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pdev->dev.platform_data = pdata;
 
@@ -133,6 +157,7 @@ static int w1_gpio_probe(struct platform_device *pdev)
 {
 	struct w1_bus_master *master;
 	struct w1_gpio_platform_data *pdata;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pinctrl *pinctrl;
 	int err;
@@ -151,6 +176,8 @@ static int w1_gpio_probe(struct platform_device *pdev)
 
 	pdata = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	if (of_have_populated_dt()) {
@@ -160,6 +187,9 @@ static int w1_gpio_probe(struct platform_device *pdev)
 	}
 
 	pdata = dev_get_platdata(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!pdata) {
@@ -168,7 +198,12 @@ static int w1_gpio_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master = kzalloc(sizeof(struct w1_bus_master), GFP_KERNEL);
+=======
+	master = devm_kzalloc(&pdev->dev, sizeof(struct w1_bus_master),
+			GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	master = devm_kzalloc(&pdev->dev, sizeof(struct w1_bus_master),
 			GFP_KERNEL);
@@ -178,6 +213,7 @@ static int w1_gpio_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = gpio_request(pdata->pin, "w1");
 	if (err) {
@@ -193,6 +229,8 @@ static int w1_gpio_probe(struct platform_device *pdev)
 					"(ext_pullup_enable_pin) failed\n");
 			goto free_gpio;
 =======
+=======
+>>>>>>> v3.18
 	err = devm_gpio_request(&pdev->dev, pdata->pin, "w1");
 	if (err) {
 		dev_err(&pdev->dev, "gpio_request (pin) failed\n");
@@ -207,6 +245,9 @@ static int w1_gpio_probe(struct platform_device *pdev)
 			dev_err(&pdev->dev, "gpio_request_one "
 					"(ext_pullup_enable_pin) failed\n");
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -221,6 +262,10 @@ static int w1_gpio_probe(struct platform_device *pdev)
 		gpio_direction_input(pdata->pin);
 		master->write_bit = w1_gpio_write_bit_dir;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		master->set_pullup = w1_gpio_set_pullup;
+>>>>>>> v3.18
 =======
 		master->set_pullup = w1_gpio_set_pullup;
 >>>>>>> v3.18
@@ -230,7 +275,11 @@ static int w1_gpio_probe(struct platform_device *pdev)
 	if (err) {
 		dev_err(&pdev->dev, "w1_add_master device failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto free_gpio_ext_pu;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -246,6 +295,7 @@ static int w1_gpio_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
  free_gpio_ext_pu:
 	if (gpio_is_valid(pdata->ext_pullup_enable_pin))
@@ -258,13 +308,19 @@ static int w1_gpio_probe(struct platform_device *pdev)
 	return err;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int w1_gpio_remove(struct platform_device *pdev)
 {
 	struct w1_bus_master *master = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w1_gpio_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct w1_gpio_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct w1_gpio_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -277,8 +333,11 @@ static int w1_gpio_remove(struct platform_device *pdev)
 
 	w1_remove_master_device(master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_free(pdata->pin);
 	kfree(master);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -290,7 +349,11 @@ static int w1_gpio_remove(struct platform_device *pdev)
 static int w1_gpio_suspend(struct platform_device *pdev, pm_message_t state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w1_gpio_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct w1_gpio_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct w1_gpio_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -304,7 +367,11 @@ static int w1_gpio_suspend(struct platform_device *pdev, pm_message_t state)
 static int w1_gpio_resume(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct w1_gpio_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct w1_gpio_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct w1_gpio_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

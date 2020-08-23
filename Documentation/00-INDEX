@@ -30,6 +30,11 @@ DMA-ISA-LPC.txt
 DMA-attributes.txt
 	- listing of the various possible attributes a DMA region can have
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+dmatest.txt
+	- how to compile, configure and use the dmatest system.
+>>>>>>> v3.18
 =======
 dmatest.txt
 	- how to compile, configure and use the dmatest system.
@@ -46,7 +51,11 @@ IRQ-affinity.txt
 	- how to select which CPU(s) handle which interrupt events on SMP.
 IRQ-domain.txt
 <<<<<<< HEAD
+<<<<<<< HEAD
 	- info on inerrupt numbering and setting up IRQ domains.
+=======
+	- info on interrupt numbering and setting up IRQ domains.
+>>>>>>> v3.18
 =======
 	- info on interrupt numbering and setting up IRQ domains.
 >>>>>>> v3.18
@@ -87,6 +96,11 @@ arm/
 arm64/
 	- directory with info about Linux on the 64 bit ARM architecture.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+assoc_array.txt
+	- generic associative array intro.
+>>>>>>> v3.18
 =======
 assoc_array.txt
 	- generic associative array intro.
@@ -102,8 +116,13 @@ bad_memory.txt
 basic_profiling.txt
 	- basic instructions for those who wants to profile Linux kernel.
 <<<<<<< HEAD
+<<<<<<< HEAD
 bif-framework.txt
 	- information about MIPI-BIF support in the Linux kernel.
+=======
+bcache.txt
+	- Block-layer cache on fast SSDs to improve slow (raid) I/O performance.
+>>>>>>> v3.18
 =======
 bcache.txt
 	- Block-layer cache on fast SSDs to improve slow (raid) I/O performance.
@@ -193,6 +212,11 @@ early-userspace/
 edac.txt
 	- information on EDAC - Error Detection And Correction
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+efi-stub.txt
+	- How to use the EFI boot stub to bypass GRUB or elilo on EFI systems.
+>>>>>>> v3.18
 =======
 efi-stub.txt
 	- How to use the EFI boot stub to bypass GRUB or elilo on EFI systems.
@@ -214,6 +238,11 @@ firmware_class/
 flexible-arrays.txt
 	- how to make use of flexible sized arrays in linux
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+fmc/
+	- information about the FMC bus abstraction
+>>>>>>> v3.18
 =======
 fmc/
 	- information about the FMC bus abstraction
@@ -225,8 +254,13 @@ futex-requeue-pi.txt
 gcov.txt
 	- use of GCC's coverage testing tool "gcov" with the Linux kernel
 <<<<<<< HEAD
+<<<<<<< HEAD
 gpio.txt
 	- overview of GPIO (General Purpose Input/Output) access conventions.
+=======
+gpio/
+	- gpio related documentation
+>>>>>>> v3.18
 =======
 gpio/
 	- gpio related documentation
@@ -290,6 +324,11 @@ kernel-docs.txt
 kernel-parameters.txt
 	- summary listing of command line / boot prompt args for the kernel.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+kernel-per-CPU-kthreads.txt
+	- List of all per-CPU kthreads and how they introduce jitter.
+>>>>>>> v3.18
 =======
 kernel-per-CPU-kthreads.txt
 	- List of all per-CPU kthreads and how they introduce jitter.
@@ -317,6 +356,11 @@ local_ops.txt
 lockdep-design.txt
 	- documentation on the runtime locking correctness validator.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+locking/
+	- directory with info about kernel locking primitives
+>>>>>>> v3.18
 =======
 locking/
 	- directory with info about kernel locking primitives
@@ -344,8 +388,11 @@ memory-devices/
 memory-hotplug.txt
 	- Hotpluggable memory support, how to use and current status.
 <<<<<<< HEAD
+<<<<<<< HEAD
 memory.txt
 	- info on typical Linux memory problems.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 metag/
@@ -359,6 +406,11 @@ mmc/
 mn10300/
 	- directory with info about the mn10300 architecture port
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+module-signing.txt
+	- Kernel module signing for increased security when loading modules.
+>>>>>>> v3.18
 =======
 module-signing.txt
 	- Kernel module signing for increased security when loading modules.
@@ -396,6 +448,11 @@ pcmcia/
 percpu-rw-semaphore.txt
 	- RCU based read-write semaphore optimized for locking for reading
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+phy.txt
+	- Description of the generic PHY framework.
+>>>>>>> v3.18
 =======
 phy.txt
 	- Description of the generic PHY framework.
@@ -459,8 +516,11 @@ serial-console.txt
 sgi-ioc4.txt
 	- description of the SGI IOC4 PCI (multi function) device.
 <<<<<<< HEAD
+<<<<<<< HEAD
 sgi-visws.txt
 	- short blurb on the SGI Visual Workstations.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 sh/
@@ -492,6 +552,11 @@ sysrq.txt
 target/
 	- directory with info on generating TCM v4 fabric .ko modules
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+this_cpu_ops.txt
+	- List rationale behind and the way to use this_cpu operations.
+>>>>>>> v3.18
 =======
 this_cpu_ops.txt
 	- List rationale behind and the way to use this_cpu operations.
@@ -535,6 +600,11 @@ wimax/
 workqueue.txt
 	- information on the Concurrency Managed Workqueue implementation
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ww-mutex-design.txt
+	- Intro to Mutex wait/would deadlock handling.s
+>>>>>>> v3.18
 =======
 ww-mutex-design.txt
 	- Intro to Mutex wait/would deadlock handling.s

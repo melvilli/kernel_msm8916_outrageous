@@ -264,7 +264,12 @@ static int pxa_gpio_direction_output(struct gpio_chip *chip,
 static int pxa_gpio_get(struct gpio_chip *chip, unsigned offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return readl_relaxed(gpio_chip_base(chip) + GPLR_OFFSET) & (1 << offset);
+=======
+	u32 gplr = readl_relaxed(gpio_chip_base(chip) + GPLR_OFFSET);
+	return !!(gplr & (1 << offset));
+>>>>>>> v3.18
 =======
 	u32 gplr = readl_relaxed(gpio_chip_base(chip) + GPLR_OFFSET);
 	return !!(gplr & (1 << offset));
@@ -503,7 +508,11 @@ static int pxa_gpio_nums(struct platform_device *pdev)
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id pxa_gpio_dt_ids[] = {
+=======
+static const struct of_device_id pxa_gpio_dt_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id pxa_gpio_dt_ids[] = {
 >>>>>>> v3.18
@@ -534,8 +543,13 @@ const struct irq_domain_ops pxa_irq_domain_ops = {
 static int pxa_gpio_probe_dt(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, nr_gpios;
 	struct device_node *prev, *next, *np = pdev->dev.of_node;
+=======
+	int ret = 0, nr_gpios;
+	struct device_node *np = pdev->dev.of_node;
+>>>>>>> v3.18
 =======
 	int ret = 0, nr_gpios;
 	struct device_node *np = pdev->dev.of_node;
@@ -552,6 +566,7 @@ static int pxa_gpio_probe_dt(struct platform_device *pdev)
 	gpio_type = gpio_id->type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	next = of_get_next_child(np, NULL);
 	prev = next;
 	if (!next) {
@@ -562,6 +577,8 @@ static int pxa_gpio_probe_dt(struct platform_device *pdev)
 	of_node_put(prev);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	nr_gpios = gpio_id->gpio_nums;
 	pxa_last_gpio = nr_gpios - 1;
 
@@ -569,6 +586,10 @@ static int pxa_gpio_probe_dt(struct platform_device *pdev)
 	if (irq_base < 0) {
 		dev_err(&pdev->dev, "Failed to allocate IRQ numbers\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ret = irq_base;
+>>>>>>> v3.18
 =======
 		ret = irq_base;
 >>>>>>> v3.18
@@ -677,12 +698,18 @@ static int pxa_gpio_probe(struct platform_device *pdev)
 			set_irq_flags(irq, IRQF_VALID | IRQF_PROBE);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		if (irq0 > 0)
 			irq_set_chained_handler(irq0, pxa_gpio_demux_handler);
 		if (irq1 > 0)
 			irq_set_chained_handler(irq1, pxa_gpio_demux_handler);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

@@ -2,7 +2,10 @@
 #define _ASM_X86_BUG_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define HAVE_ARCH_BUG
@@ -37,8 +40,11 @@ do {								\
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* !CONFIG_BUG */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm-generic/bug.h>

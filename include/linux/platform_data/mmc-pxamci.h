@@ -13,7 +13,11 @@ struct pxamci_platform_data {
 	int (*init)(struct device *, irq_handler_t , void *);
 	int (*get_ro)(struct device *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*setpower)(struct device *, unsigned int);
+=======
+	int (*setpower)(struct device *, unsigned int);
+>>>>>>> v3.18
 =======
 	int (*setpower)(struct device *, unsigned int);
 >>>>>>> v3.18

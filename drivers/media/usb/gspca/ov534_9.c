@@ -60,6 +60,10 @@ enum sensors {
 	SENSOR_OV971x,		/* ov9712 */
 	SENSOR_OV562x,		/* ov5621 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SENSOR_OV361x,		/* ov3610 */
+>>>>>>> v3.18
 =======
 	SENSOR_OV361x,		/* ov3610 */
 >>>>>>> v3.18
@@ -111,7 +115,10 @@ static const struct v4l2_pix_format ov562x_mode[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum ov361x {
 	ov361x_2048 = 0,
 	ov361x_1600,
@@ -380,6 +387,9 @@ static const u8 ov361x_bridge_start_160[][2] = {
 	{0x1d, 0x1e},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const u8 bridge_init[][2] = {
 	{0x88, 0xf8},
@@ -1174,7 +1184,11 @@ static int sccb_check_status(struct gspca_dev *gspca_dev)
 
 	for (i = 0; i < 5; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		msleep(10);
+=======
+		msleep(20);
+>>>>>>> v3.18
 =======
 		msleep(20);
 >>>>>>> v3.18
@@ -1501,7 +1515,10 @@ static int sd_init(struct gspca_dev *gspca_dev)
 				ARRAY_SIZE(ov562x_init_2));
 		reg_w(gspca_dev, 0xe0, 0x00);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else if ((sensor_id & 0xfff0) == 0x3610) {
 		sd->sensor = SENSOR_OV361x;
 		gspca_dev->cam.cam_mode = ov361x_mode;
@@ -1509,6 +1526,9 @@ static int sd_init(struct gspca_dev *gspca_dev)
 		reg_w(gspca_dev, 0xe7, 0x3a);
 		reg_w(gspca_dev, 0xf1, 0x60);
 		sccb_write(gspca_dev, 0x12, 0x80);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		pr_err("Unknown sensor %04x", sensor_id);
@@ -1519,7 +1539,10 @@ static int sd_init(struct gspca_dev *gspca_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int sd_start_ov361x(struct gspca_dev *gspca_dev)
 {
 	sccb_write(gspca_dev, 0x12, 0x80);
@@ -1567,6 +1590,9 @@ static int sd_start_ov361x(struct gspca_dev *gspca_dev)
 	return gspca_dev->usb_err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sd_start(struct gspca_dev *gspca_dev)
 {
@@ -1577,6 +1603,11 @@ static int sd_start(struct gspca_dev *gspca_dev)
 	if (sd->sensor == SENSOR_OV562x)
 		return gspca_dev->usb_err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (sd->sensor == SENSOR_OV361x)
+		return sd_start_ov361x(gspca_dev);
+>>>>>>> v3.18
 =======
 	if (sd->sensor == SENSOR_OV361x)
 		return sd_start_ov361x(gspca_dev);
@@ -1635,12 +1666,18 @@ static int sd_start(struct gspca_dev *gspca_dev)
 static void sd_stopN(struct gspca_dev *gspca_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (((struct sd *)gspca_dev)->sensor == SENSOR_OV361x) {
 		reg_w(gspca_dev, 0xe0, 0x01); /* stop transfer */
 		/* reg_w(gspca_dev, 0x31, 0x09); */
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reg_w(gspca_dev, 0xe0, 0x01);
 	set_led(gspca_dev, 0);
@@ -1778,6 +1815,11 @@ static int sd_init_controls(struct gspca_dev *gspca_dev)
 	if (sd->sensor == SENSOR_OV971x)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (sd->sensor == SENSOR_OV361x)
+		return 0;
+>>>>>>> v3.18
 =======
 	if (sd->sensor == SENSOR_OV361x)
 		return 0;

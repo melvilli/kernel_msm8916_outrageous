@@ -95,7 +95,11 @@ static inline int is_slot66mhz(struct slot *slot)
  * Returns pointer to the head of the SMBIOS tables (or %NULL).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __iomem * detect_SMBIOS_pointer(void __iomem *begin, void __iomem *end)
+=======
+static void __iomem *detect_SMBIOS_pointer(void __iomem *begin, void __iomem *end)
+>>>>>>> v3.18
 =======
 static void __iomem *detect_SMBIOS_pointer(void __iomem *begin, void __iomem *end)
 >>>>>>> v3.18
@@ -136,7 +140,11 @@ static void __iomem *detect_SMBIOS_pointer(void __iomem *begin, void __iomem *en
  * For unexpected switch opens
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_SERR(struct controller * ctrl)
+=======
+static int init_SERR(struct controller *ctrl)
+>>>>>>> v3.18
 =======
 static int init_SERR(struct controller *ctrl)
 >>>>>>> v3.18
@@ -300,7 +308,11 @@ static void release_slot(struct hotplug_slot *hotplug_slot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ctrl_slot_cleanup (struct controller * ctrl)
+=======
+static int ctrl_slot_cleanup (struct controller *ctrl)
+>>>>>>> v3.18
 =======
 static int ctrl_slot_cleanup (struct controller *ctrl)
 >>>>>>> v3.18
@@ -719,8 +731,12 @@ static int ctrl_slot_setup(struct controller *ctrl,
 			get_presence_status(ctrl, slot);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dbg("registering bus %d, dev %d, number %d, "
 				"ctrl->slot_device_offset %d, slot %d\n",
+=======
+		dbg("registering bus %d, dev %d, number %d, ctrl->slot_device_offset %d, slot %d\n",
+>>>>>>> v3.18
 =======
 		dbg("registering bus %d, dev %d, number %d, ctrl->slot_device_offset %d, slot %d\n",
 >>>>>>> v3.18
@@ -854,8 +870,12 @@ static int cpqhpc_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	bus = pdev->subordinate;
 	if (!bus) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_notice(&pdev->dev, "the device is not a bridge, "
 				"skipping\n");
+=======
+		dev_notice(&pdev->dev, "the device is not a bridge, skipping\n");
+>>>>>>> v3.18
 =======
 		dev_notice(&pdev->dev, "the device is not a bridge, skipping\n");
 >>>>>>> v3.18
@@ -883,15 +903,21 @@ static int cpqhpc_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check for the proper subsystem ID's
 	 * Intel uses a different SSID programming model than Compaq.
 	 * For Intel, each SSID bit identifies a PHP capability.
 	 * Also Intel HPC's may have RID=0.
 =======
+=======
+>>>>>>> v3.18
 	/* Check for the proper subsystem IDs
 	 * Intel uses a different SSID programming model than Compaq.
 	 * For Intel, each SSID bit identifies a PHP capability.
 	 * Also Intel HPCs may have RID=0.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	if ((pdev->revision <= 2) && (vendor_id != PCI_VENDOR_ID_INTEL)) {
@@ -948,7 +974,11 @@ static int cpqhpc_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (bus_cap & 20) {
+=======
+			if (bus_cap & 0x20) {
+>>>>>>> v3.18
 =======
 			if (bus_cap & 0x20) {
 >>>>>>> v3.18
@@ -957,7 +987,11 @@ static int cpqhpc_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (bus_cap & 10) {
+=======
+			if (bus_cap & 0x10) {
+>>>>>>> v3.18
 =======
 			if (bus_cap & 0x10) {
 >>>>>>> v3.18
@@ -1134,9 +1168,14 @@ static int cpqhpc_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	/* initialize our threads if they haven't already been started up */
 	rc = one_time_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc) {
 		goto err_free_bus;
 	}
+=======
+	if (rc)
+		goto err_free_bus;
+>>>>>>> v3.18
 =======
 	if (rc)
 		goto err_free_bus;

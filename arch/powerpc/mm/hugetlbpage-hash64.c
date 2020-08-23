@@ -82,7 +82,11 @@ int __hash_page_huge(unsigned long ea, unsigned long access, unsigned long vsid,
 
 		if (ppc_md.hpte_updatepp(slot, rflags, vpn, mmu_psize,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 ssize, local) == -1)
+=======
+					 mmu_psize, ssize, local) == -1)
+>>>>>>> v3.18
 =======
 					 mmu_psize, ssize, local) == -1)
 >>>>>>> v3.18
@@ -104,11 +108,17 @@ int __hash_page_huge(unsigned long ea, unsigned long access, unsigned long vsid,
 		rflags |= (new_pte & (_PAGE_WRITETHRU | _PAGE_NO_CACHE |
 				      _PAGE_COHERENT | _PAGE_GUARDED));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * enable the memory coherence always
 		 */
 		rflags |= HPTE_R_M;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		slot = hpte_insert_repeating(hash, vpn, pa, rflags, 0,

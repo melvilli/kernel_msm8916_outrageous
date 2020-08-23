@@ -25,6 +25,10 @@
 
 #include "priv.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <subdev/fuse.h>
+>>>>>>> v3.18
 =======
 #include <subdev/fuse.h>
 >>>>>>> v3.18
@@ -37,8 +41,11 @@ int
 nv84_temp_get(struct nouveau_therm *therm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nv_rd32(therm, 0x20400);
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_fuse *fuse = nouveau_fuse(therm);
 
 	if (nv_ro32(fuse, 0x1a8) == 1)
@@ -58,6 +65,9 @@ nv84_sensor_setup(struct nouveau_therm *therm)
 		nv_mask(therm, 0x2000c, 0x80000003, 0x00000000);
 		mdelay(20); /* wait for the temperature to stabilize */
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -153,7 +163,11 @@ nv84_therm_intr(struct nouveau_subdev *subdev)
 	spin_lock_irqsave(&priv->sensor.alarm_program_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	intr = nv_rd32(therm, 0x20100);
+=======
+	intr = nv_rd32(therm, 0x20100) & 0x3ff;
+>>>>>>> v3.18
 =======
 	intr = nv_rd32(therm, 0x20100) & 0x3ff;
 >>>>>>> v3.18
@@ -202,7 +216,10 @@ nv84_therm_intr(struct nouveau_subdev *subdev)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 nv84_therm_init(struct nouveau_object *object)
 {
 	struct nv84_therm_priv *priv = (void *)object;
@@ -218,6 +235,9 @@ nv84_therm_init(struct nouveau_object *object)
 }
 
 static int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nv84_therm_ctor(struct nouveau_object *parent,
 		struct nouveau_object *engine,
@@ -258,7 +278,10 @@ nv84_therm_ctor(struct nouveau_object *parent,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int
 nv84_therm_fini(struct nouveau_object *object, bool suspend)
 {
@@ -272,6 +295,9 @@ nv84_therm_fini(struct nouveau_object *object, bool suspend)
 	return _nouveau_therm_fini(object, suspend);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nouveau_oclass
 nv84_therm_oclass = {
@@ -280,8 +306,13 @@ nv84_therm_oclass = {
 		.ctor = nv84_therm_ctor,
 		.dtor = _nouveau_therm_dtor,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.init = _nouveau_therm_init,
 		.fini = _nouveau_therm_fini,
+=======
+		.init = nv84_therm_init,
+		.fini = nv84_therm_fini,
+>>>>>>> v3.18
 =======
 		.init = nv84_therm_init,
 		.fini = nv84_therm_fini,

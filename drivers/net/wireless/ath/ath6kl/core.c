@@ -46,9 +46,15 @@ module_param(recovery_enable, uint, 0644);
 module_param(heart_beat_poll, uint, 0644);
 MODULE_PARM_DESC(recovery_enable, "Enable recovery from firmware error");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_PARM_DESC(heart_beat_poll, "Enable fw error detection periodic"   \
 		 "polling. This also specifies the polling interval in"  \
 		 "msecs. Set reocvery_enable for this to be effective");
+=======
+MODULE_PARM_DESC(heart_beat_poll,
+		 "Enable fw error detection periodic polling in msecs - Also set recovery_enable for this to be effective");
+
+>>>>>>> v3.18
 =======
 MODULE_PARM_DESC(heart_beat_poll,
 		 "Enable fw error detection periodic polling in msecs - Also set recovery_enable for this to be effective");
@@ -130,7 +136,10 @@ int ath6kl_core_init(struct ath6kl *ar, enum ath6kl_htc_type htc_type)
 	/* FIXME: we should free all firmwares in the error cases below */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Backwards compatibility support for older ar6004 firmware images
 	 * which do not set these feature flags.
@@ -147,6 +156,9 @@ int ath6kl_core_init(struct ath6kl *ar, enum ath6kl_htc_type htc_type)
 				  ar->fw_capabilities);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Indicate that WMI is enabled (although not ready yet) */
 	set_bit(WMI_ENABLED, &ar->flag);

@@ -19,9 +19,12 @@ sensor incorporates a band-gap type temperature sensor,
 and lower limit values.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Limits can be set through the Overtemperature Shutdown register and
 Hysteresis register.
 =======
+=======
+>>>>>>> v3.18
 The LM77 implements 3 limits: low (temp1_min), high (temp1_max) and
 critical (temp1_crit.) It also implements an hysteresis mechanism which
 applies to all 3 limits. The relative difference is stored in a single
@@ -40,4 +43,7 @@ This implementation detail implies the following:
   temp1_crit_hyst and temp1_crit into the chip, and the same relative
   hysteresis applies automatically to the low and high limits.
 * The limits should be set before the hysteresis.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

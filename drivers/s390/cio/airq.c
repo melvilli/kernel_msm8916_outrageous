@@ -10,16 +10,22 @@
 
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/rcupdate.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/irq.h>
 #include <linux/kernel_stat.h>
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/rculist.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/airq.h>
@@ -27,6 +33,7 @@
 
 #include "cio.h"
 #include "cio_debug.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define NR_AIRQS		32
@@ -159,6 +166,8 @@ void do_adapter_IO(u8 isc)
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 #include "ioasm.h"
 
 static DEFINE_SPINLOCK(airq_lists_lock);
@@ -411,4 +420,7 @@ unsigned long airq_iv_scan(struct airq_iv *iv, unsigned long start,
 	return bit;
 }
 EXPORT_SYMBOL(airq_iv_scan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

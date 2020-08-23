@@ -31,6 +31,10 @@
 #define DBG_BITMAP	0x00000040
 #define DBG_ATTR_MOD	0x00000080
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DBG_ACL_MOD	0x00000100
+>>>>>>> v3.18
 =======
 #define DBG_ACL_MOD	0x00000100
 >>>>>>> v3.18
@@ -131,7 +135,10 @@ struct hfs_bnode {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Attributes file states
  */
 #define HFSPLUS_EMPTY_ATTR_TREE		0
@@ -140,6 +147,9 @@ struct hfs_bnode {
 #define HFSPLUS_FAILED_ATTR_TREE	3
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * HFS+ superblock info (built from Volume Header on disk)
  */
@@ -156,6 +166,10 @@ struct hfsplus_sb_info {
 	struct hfs_btree *cat_tree;
 	struct hfs_btree *attr_tree;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_t attr_tree_state;
+>>>>>>> v3.18
 =======
 	atomic_t attr_tree_state;
 >>>>>>> v3.18
@@ -252,6 +266,10 @@ struct hfsplus_inode_info {
 	sector_t fs_blocks;
 	u8 userflags;		/* BSD user file flags */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 subfolders;		/* Subfolder count (HFSX only) */
+>>>>>>> v3.18
 =======
 	u32 subfolders;		/* Subfolder count (HFSX only) */
 >>>>>>> v3.18
@@ -380,6 +398,7 @@ typedef int (*search_strategy_t)(struct hfs_bnode *,
 
 /* attributes.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hfsplus_create_attr_tree_cache(void);
 void hfsplus_destroy_attr_tree_cache(void);
 hfsplus_attr_entry *hfsplus_alloc_attr_entry(void);
@@ -465,6 +484,8 @@ int hfsplus_rename_cat(u32, struct inode *, struct qstr *,
 		       struct inode *, struct qstr *);
 void hfsplus_cat_set_perms(struct inode *inode, struct hfsplus_perm *perms);
 =======
+=======
+>>>>>>> v3.18
 int __init hfsplus_create_attr_tree_cache(void);
 void hfsplus_destroy_attr_tree_cache(void);
 int hfsplus_attr_bin_cmp_key(const hfsplus_btree_key *k1,
@@ -551,6 +572,9 @@ int hfsplus_create_cat(u32 cnid, struct inode *dir, struct qstr *str,
 int hfsplus_delete_cat(u32 cnid, struct inode *dir, struct qstr *str);
 int hfsplus_rename_cat(u32 cnid, struct inode *src_dir, struct qstr *src_name,
 		       struct inode *dst_dir, struct qstr *dst_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* dir.c */
@@ -558,6 +582,7 @@ extern const struct inode_operations hfsplus_dir_inode_operations;
 extern const struct file_operations hfsplus_dir_operations;
 
 /* extents.c */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int hfsplus_ext_cmp_key(const hfsplus_btree_key *, const hfsplus_btree_key *);
 int hfsplus_ext_write_extent(struct inode *);
@@ -567,6 +592,8 @@ int hfsplus_free_fork(struct super_block *, u32,
 int hfsplus_file_extend(struct inode *);
 void hfsplus_file_truncate(struct inode *);
 =======
+=======
+>>>>>>> v3.18
 int hfsplus_ext_cmp_key(const hfsplus_btree_key *k1,
 			const hfsplus_btree_key *k2);
 int hfsplus_ext_write_extent(struct inode *inode);
@@ -576,6 +603,9 @@ int hfsplus_free_fork(struct super_block *sb, u32 cnid,
 		      struct hfsplus_fork_raw *fork, int type);
 int hfsplus_file_extend(struct inode *inode, bool zeroout);
 void hfsplus_file_truncate(struct inode *inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* inode.c */
@@ -584,6 +614,7 @@ extern const struct address_space_operations hfsplus_btree_aops;
 extern const struct dentry_operations hfsplus_dentry_operations;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void hfsplus_inode_read_fork(struct inode *, struct hfsplus_fork_raw *);
 void hfsplus_inode_write_fork(struct inode *, struct hfsplus_fork_raw *);
 int hfsplus_cat_read_inode(struct inode *, struct hfs_find_data *);
@@ -591,6 +622,8 @@ int hfsplus_cat_write_inode(struct inode *);
 struct inode *hfsplus_new_inode(struct super_block *, umode_t);
 void hfsplus_delete_inode(struct inode *);
 =======
+=======
+>>>>>>> v3.18
 struct inode *hfsplus_new_inode(struct super_block *sb, umode_t mode);
 void hfsplus_delete_inode(struct inode *inode);
 void hfsplus_inode_read_fork(struct inode *inode,
@@ -599,6 +632,9 @@ void hfsplus_inode_write_fork(struct inode *inode,
 			      struct hfsplus_fork_raw *fork);
 int hfsplus_cat_read_inode(struct inode *inode, struct hfs_find_data *fd);
 int hfsplus_cat_write_inode(struct inode *inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int hfsplus_file_fsync(struct file *file, loff_t start, loff_t end,
 		       int datasync);
@@ -608,6 +644,7 @@ long hfsplus_ioctl(struct file *filp, unsigned int cmd, unsigned long arg);
 
 /* options.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hfsplus_parse_options(char *, struct hfsplus_sb_info *);
 int hfsplus_parse_options_remount(char *input, int *force);
 void hfsplus_fill_defaults(struct hfsplus_sb_info *);
@@ -616,6 +653,8 @@ int hfsplus_show_options(struct seq_file *, struct dentry *);
 /* super.c */
 struct inode *hfsplus_iget(struct super_block *, unsigned long);
 =======
+=======
+>>>>>>> v3.18
 void hfsplus_fill_defaults(struct hfsplus_sb_info *opts);
 int hfsplus_parse_options_remount(char *input, int *force);
 int hfsplus_parse_options(char *input, struct hfsplus_sb_info *sbi);
@@ -627,6 +666,9 @@ int hfs_part_find(struct super_block *sb, sector_t *part_start,
 
 /* super.c */
 struct inode *hfsplus_iget(struct super_block *sb, unsigned long ino);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void hfsplus_mark_mdb_dirty(struct super_block *sb);
 
@@ -636,6 +678,7 @@ extern u16 hfsplus_decompose_table[];
 extern u16 hfsplus_compose_table[];
 
 /* unicode.c */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int hfsplus_strcasecmp(const struct hfsplus_unistr *,
 		const struct hfsplus_unistr *);
@@ -658,6 +701,8 @@ int hfs_part_find(struct super_block *, sector_t *, sector_t *);
 int hfsplus_submit_bio(struct super_block *sb, sector_t sector,
 		void *buf, void **data, int rw);
 =======
+=======
+>>>>>>> v3.18
 int hfsplus_strcasecmp(const struct hfsplus_unistr *s1,
 		       const struct hfsplus_unistr *s2);
 int hfsplus_strcmp(const struct hfsplus_unistr *s1,
@@ -675,6 +720,9 @@ int hfsplus_compare_dentry(const struct dentry *parent,
 int hfsplus_submit_bio(struct super_block *sb, sector_t sector, void *buf,
 		       void **data, int rw);
 int hfsplus_read_wrapper(struct super_block *sb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* time macros */

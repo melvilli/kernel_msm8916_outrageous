@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2012 Coraid, Inc.  See COPYING for GPL terms. */
+=======
+/* Copyright (c) 2013 Coraid, Inc.  See COPYING for GPL terms. */
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2013 Coraid, Inc.  See COPYING for GPL terms. */
 >>>>>>> v3.18
@@ -57,7 +61,11 @@ static struct sk_buff_head skbtxq;
 /* enters with txlock held */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 tx(void) __must_hold(&txlock)
+=======
+tx(int id) __must_hold(&txlock)
+>>>>>>> v3.18
 =======
 tx(int id) __must_hold(&txlock)
 >>>>>>> v3.18
@@ -214,7 +222,12 @@ aoenet_init(void)
 	kts.fn = tx;
 	kts.waitq = &txwq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kts.name = "aoe_tx";
+=======
+	kts.id = 0;
+	snprintf(kts.name, sizeof(kts.name), "aoe_tx%d", kts.id);
+>>>>>>> v3.18
 =======
 	kts.id = 0;
 	snprintf(kts.name, sizeof(kts.name), "aoe_tx%d", kts.id);

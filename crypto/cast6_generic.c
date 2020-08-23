@@ -292,8 +292,12 @@ module_exit(cast6_mod_fini);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Cast6 Cipher Algorithm");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("cast6");
 MODULE_ALIAS_CRYPTO("cast6-generic");
+=======
+MODULE_ALIAS("cast6");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("cast6");
 >>>>>>> v3.18

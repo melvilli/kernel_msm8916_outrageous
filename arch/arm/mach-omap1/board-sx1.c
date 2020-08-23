@@ -38,7 +38,10 @@
 #include <mach/mux.h>
 #include <linux/omap-dma.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/irda.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <mach/tc.h>
@@ -49,7 +52,10 @@
 
 #include "common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dma.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -235,6 +241,7 @@ static struct platform_device sx1_kp_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*----------- IRDA -------------------------*/
 
 static struct omap_irda_config sx1_irda_data = {
@@ -268,6 +275,8 @@ static struct platform_device sx1_irda_device = {
 	.resource	= sx1_irda_resources,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*----------- MTD -------------------------*/
@@ -311,6 +320,7 @@ static struct physmap_flash_data sx1_flash_data = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SX1_OLD_FLASH
 /* MTD Intel StrataFlash - old flashes */
 static struct resource sx1_old_flash_resource[] = {
@@ -338,6 +348,8 @@ static struct platform_device sx1_flash_device = {
 #else
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* MTD Intel 4000 flash - new flashes */
 static struct resource sx1_new_flash_resource = {
 	.start		= OMAP_CS0_PHYS,
@@ -355,7 +367,10 @@ static struct platform_device sx1_flash_device = {
 	.resource	= &sx1_new_flash_resource,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -382,7 +397,10 @@ static struct platform_device *sx1_devices[] __initdata = {
 	&sx1_flash_device,
 	&sx1_kp_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&sx1_irda_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

@@ -35,8 +35,13 @@ static struct snd_line6_pcm *dev2pcm(struct device *dev)
 	"read" request on "impulse_volume" special file.
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pcm_get_impulse_volume(struct device *dev,
 				      struct device_attribute *attr, char *buf)
+=======
+static ssize_t impulse_volume_show(struct device *dev,
+				   struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t impulse_volume_show(struct device *dev,
 				   struct device_attribute *attr, char *buf)
@@ -49,9 +54,15 @@ static ssize_t impulse_volume_show(struct device *dev,
 	"write" request on "impulse_volume" special file.
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pcm_set_impulse_volume(struct device *dev,
 				      struct device_attribute *attr,
 				      const char *buf, size_t count)
+=======
+static ssize_t impulse_volume_store(struct device *dev,
+				    struct device_attribute *attr,
+				    const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t impulse_volume_store(struct device *dev,
 				    struct device_attribute *attr,
@@ -76,6 +87,10 @@ static ssize_t impulse_volume_store(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RW(impulse_volume);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RW(impulse_volume);
 >>>>>>> v3.18
@@ -84,8 +99,13 @@ static DEVICE_ATTR_RW(impulse_volume);
 	"read" request on "impulse_period" special file.
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pcm_get_impulse_period(struct device *dev,
 				      struct device_attribute *attr, char *buf)
+=======
+static ssize_t impulse_period_show(struct device *dev,
+				   struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t impulse_period_show(struct device *dev,
 				   struct device_attribute *attr, char *buf)
@@ -98,9 +118,15 @@ static ssize_t impulse_period_show(struct device *dev,
 	"write" request on "impulse_period" special file.
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pcm_set_impulse_period(struct device *dev,
 				      struct device_attribute *attr,
 				      const char *buf, size_t count)
+=======
+static ssize_t impulse_period_store(struct device *dev,
+				    struct device_attribute *attr,
+				    const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t impulse_period_store(struct device *dev,
 				    struct device_attribute *attr,
@@ -118,11 +144,15 @@ static ssize_t impulse_period_store(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEVICE_ATTR(impulse_volume, S_IWUSR | S_IRUGO, pcm_get_impulse_volume,
 		   pcm_set_impulse_volume);
 static DEVICE_ATTR(impulse_period, S_IWUSR | S_IRUGO, pcm_get_impulse_period,
 		   pcm_set_impulse_period);
+=======
+static DEVICE_ATTR_RW(impulse_period);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RW(impulse_period);
 >>>>>>> v3.18
@@ -138,12 +168,15 @@ static bool test_flags(unsigned long flags0, unsigned long flags1,
 int line6_pcm_acquire(struct snd_line6_pcm *line6pcm, int channels)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags_old =
 	    __sync_fetch_and_or(&line6pcm->flags, channels);
 	unsigned long flags_new = flags_old | channels;
 	unsigned long flags_final = flags_old;
 	int err = 0;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags_old, flags_new, flags_final;
 	int err;
 
@@ -153,6 +186,9 @@ int line6_pcm_acquire(struct snd_line6_pcm *line6pcm, int channels)
 	} while (cmpxchg(&line6pcm->flags, flags_old, flags_new) != flags_old);
 
 	flags_final = flags_old;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	line6pcm->prev_fbuf = NULL;
@@ -240,16 +276,22 @@ pcm_acquire_error:
 int line6_pcm_release(struct snd_line6_pcm *line6pcm, int channels)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags_old =
 	    __sync_fetch_and_and(&line6pcm->flags, ~channels);
 	unsigned long flags_new = flags_old & ~channels;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags_old, flags_new;
 
 	do {
 		flags_old = ACCESS_ONCE(line6pcm->flags);
 		flags_new = flags_old & ~channels;
 	} while (cmpxchg(&line6pcm->flags, flags_old, flags_new) != flags_old);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (test_flags(flags_new, flags_old, LINE6_BITS_CAPTURE_STREAM))
@@ -484,6 +526,10 @@ int line6_init_pcm(struct usb_line6 *line6,
 	case LINE6_DEVID_PODXTPRO:
 	case LINE6_DEVID_PODHD300:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case LINE6_DEVID_PODHD400:
+>>>>>>> v3.18
 =======
 	case LINE6_DEVID_PODHD400:
 >>>>>>> v3.18
@@ -526,7 +572,11 @@ int line6_init_pcm(struct usb_line6 *line6,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	line6pcm = kzalloc(sizeof(struct snd_line6_pcm), GFP_KERNEL);
+=======
+	line6pcm = kzalloc(sizeof(*line6pcm), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	line6pcm = kzalloc(sizeof(*line6pcm), GFP_KERNEL);
 >>>>>>> v3.18
@@ -556,8 +606,11 @@ int line6_init_pcm(struct usb_line6 *line6,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(line6->card, line6->ifcdev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = snd_line6_new_pcm(line6pcm);

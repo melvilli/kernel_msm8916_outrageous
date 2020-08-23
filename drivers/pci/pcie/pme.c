@@ -42,20 +42,30 @@ static int __init pcie_pme_setup(char *str)
 __setup("pcie_pme=", pcie_pme_setup);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum pme_suspend_level {
 	PME_SUSPEND_NONE = 0,
 	PME_SUSPEND_WAKEUP,
 	PME_SUSPEND_NOIRQ,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pcie_pme_service_data {
 	spinlock_t lock;
 	struct pcie_device *srv;
 	struct work_struct work;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool noirq; /* Don't enable the PME interrupt used by this service. */
+=======
+	enum pme_suspend_level suspend_level;
+>>>>>>> v3.18
 =======
 	enum pme_suspend_level suspend_level;
 >>>>>>> v3.18
@@ -213,8 +223,12 @@ static void pcie_pme_handle_request(struct pci_dev *port, u16 req_id)
 		 * used devfn different from zero.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&port->dev, "PME interrupt generated for "
 			"non-existent device %02x:%02x.%d\n",
+=======
+		dev_dbg(&port->dev, "PME interrupt generated for non-existent device %02x:%02x.%d\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(&port->dev, "PME interrupt generated for non-existent device %02x:%02x.%d\n",
 >>>>>>> v3.18
@@ -242,7 +256,11 @@ static void pcie_pme_work_fn(struct work_struct *work)
 
 	for (;;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (data->noirq)
+=======
+		if (data->suspend_level != PME_SUSPEND_NONE)
+>>>>>>> v3.18
 =======
 		if (data->suspend_level != PME_SUSPEND_NONE)
 >>>>>>> v3.18
@@ -273,7 +291,11 @@ static void pcie_pme_work_fn(struct work_struct *work)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!data->noirq)
+=======
+	if (data->suspend_level == PME_SUSPEND_NONE)
+>>>>>>> v3.18
 =======
 	if (data->suspend_level == PME_SUSPEND_NONE)
 >>>>>>> v3.18
@@ -394,7 +416,10 @@ static int pcie_pme_probe(struct pcie_device *srv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool pcie_pme_check_wakeup(struct pci_bus *bus)
 {
 	struct pci_dev *dev;
@@ -410,6 +435,9 @@ static bool pcie_pme_check_wakeup(struct pci_bus *bus)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * pcie_pme_suspend - Suspend PCIe PME service device.
@@ -420,12 +448,15 @@ static int pcie_pme_suspend(struct pcie_device *srv)
 	struct pcie_pme_service_data *data = get_service_data(srv);
 	struct pci_dev *port = srv->port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_lock_irq(&data->lock);
 	pcie_pme_interrupt_enable(port, false);
 	pcie_clear_root_pme_status(port);
 	data->noirq = true;
 =======
+=======
+>>>>>>> v3.18
 	bool wakeup;
 	int ret;
 
@@ -448,6 +479,9 @@ static int pcie_pme_suspend(struct pcie_device *srv)
 		pcie_clear_root_pme_status(port);
 		data->suspend_level = PME_SUSPEND_NOIRQ;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irq(&data->lock);
 
@@ -464,6 +498,7 @@ static int pcie_pme_resume(struct pcie_device *srv)
 {
 	struct pcie_pme_service_data *data = get_service_data(srv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev *port = srv->port;
 
 	spin_lock_irq(&data->lock);
@@ -471,6 +506,8 @@ static int pcie_pme_resume(struct pcie_device *srv)
 	pcie_clear_root_pme_status(port);
 	pcie_pme_interrupt_enable(port, true);
 =======
+=======
+>>>>>>> v3.18
 
 	spin_lock_irq(&data->lock);
 	if (data->suspend_level == PME_SUSPEND_NOIRQ) {
@@ -482,6 +519,9 @@ static int pcie_pme_resume(struct pcie_device *srv)
 		disable_irq_wake(srv->irq);
 	}
 	data->suspend_level = PME_SUSPEND_NONE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irq(&data->lock);
 
@@ -491,7 +531,11 @@ static int pcie_pme_resume(struct pcie_device *srv)
 /**
  * pcie_pme_remove - Prepare PCIe PME service device for removal.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @srv - PCIe service device to resume.
+=======
+ * @srv - PCIe service device to remove.
+>>>>>>> v3.18
 =======
  * @srv - PCIe service device to remove.
 >>>>>>> v3.18
@@ -506,8 +550,13 @@ static void pcie_pme_remove(struct pcie_device *srv)
 static struct pcie_port_service_driver pcie_pme_driver = {
 	.name		= "pcie_pme",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.port_type 	= PCI_EXP_TYPE_ROOT_PORT,
 	.service 	= PCIE_PORT_SERVICE_PME,
+=======
+	.port_type	= PCI_EXP_TYPE_ROOT_PORT,
+	.service	= PCIE_PORT_SERVICE_PME,
+>>>>>>> v3.18
 =======
 	.port_type	= PCI_EXP_TYPE_ROOT_PORT,
 	.service	= PCIE_PORT_SERVICE_PME,

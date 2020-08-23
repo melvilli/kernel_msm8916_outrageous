@@ -11,6 +11,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/irqs.h>
+
+>>>>>>> v3.18
 =======
 #include <mach/irqs.h>
 

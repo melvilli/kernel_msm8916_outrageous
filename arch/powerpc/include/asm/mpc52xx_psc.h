@@ -300,7 +300,10 @@ struct mpc512x_psc_fifo {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct mpc5125_psc {
 	u8		mr1;			/* PSC + 0x00 */
 	u8		reserved0[3];
@@ -350,5 +353,8 @@ struct mpc5125_psc {
 	u8		reserved15[4];	/* make eq. sizeof(mpc52xx_psc) */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif  /* __ASM_MPC52xx_PSC_H__ */

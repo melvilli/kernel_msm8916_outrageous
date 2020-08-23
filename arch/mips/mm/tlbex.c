@@ -27,15 +27,21 @@
 #include <linux/smp.h>
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/cache.h>
 
 #include <asm/cacheflush.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/cache.h>
 
 #include <asm/cacheflush.h>
 #include <asm/cpu-type.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/pgtable.h>
 #include <asm/war.h>
@@ -93,6 +99,10 @@ static int use_bbit_insns(void)
 	case CPU_CAVIUM_OCTEON_PLUS:
 	case CPU_CAVIUM_OCTEON2:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CPU_CAVIUM_OCTEON3:
+>>>>>>> v3.18
 =======
 	case CPU_CAVIUM_OCTEON3:
 >>>>>>> v3.18
@@ -107,6 +117,10 @@ static int use_lwx_insns(void)
 	switch (current_cpu_type()) {
 	case CPU_CAVIUM_OCTEON2:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CPU_CAVIUM_OCTEON3:
+>>>>>>> v3.18
 =======
 	case CPU_CAVIUM_OCTEON3:
 >>>>>>> v3.18
@@ -152,7 +166,11 @@ static int scratchpad_offset(int i)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit m4kc_tlbp_war(void)
+=======
+static int m4kc_tlbp_war(void)
+>>>>>>> v3.18
 =======
 static int m4kc_tlbp_war(void)
 >>>>>>> v3.18
@@ -201,11 +219,17 @@ UASM_L_LA(_tlb_huge_update)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinitdata hazard_instance;
 
 static void __cpuinit uasm_bgezl_hazard(u32 **p,
 					struct uasm_reloc **r,
 					int instance)
+=======
+static int hazard_instance;
+
+static void uasm_bgezl_hazard(u32 **p, struct uasm_reloc **r, int instance)
+>>>>>>> v3.18
 =======
 static int hazard_instance;
 
@@ -222,9 +246,13 @@ static void uasm_bgezl_hazard(u32 **p, struct uasm_reloc **r, int instance)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit uasm_bgezl_label(struct uasm_label **l,
 				       u32 **p,
 				       int instance)
+=======
+static void uasm_bgezl_label(struct uasm_label **l, u32 **p, int instance)
+>>>>>>> v3.18
 =======
 static void uasm_bgezl_label(struct uasm_label **l, u32 **p, int instance)
 >>>>>>> v3.18
@@ -325,6 +353,7 @@ static inline void dump_handler(const char *symbol, const u32 *handler, int coun
  * over anything important on overflow before we panic.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 tlb_handler[128] __cpuinitdata;
 
 /* simply assume worst case size for labels and relocs */
@@ -337,6 +366,8 @@ static unsigned int kscratch_used_mask __cpuinitdata;
 
 static int __cpuinit allocate_kscratch(void)
 =======
+=======
+>>>>>>> v3.18
 static u32 tlb_handler[128];
 
 /* simply assume worst case size for labels and relocs */
@@ -359,6 +390,9 @@ static inline int __maybe_unused c0_kscratch(void)
 }
 
 static int allocate_kscratch(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int r;
@@ -377,6 +411,7 @@ static int allocate_kscratch(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int scratch_reg __cpuinitdata;
 static int pgd_reg __cpuinitdata;
 enum vmalloc64_mode {not_refill, refill_scratch, refill_noscratch};
@@ -393,6 +428,8 @@ static struct work_registers __cpuinit build_get_work_registers(u32 **p)
 		/* Save in CPU local C0_KScratch? */
 		UASM_i_MTC0(p, 1, 31, scratch_reg);
 =======
+=======
+>>>>>>> v3.18
 static int scratch_reg;
 static int pgd_reg;
 enum vmalloc64_mode {not_refill, refill_scratch, refill_noscratch};
@@ -404,6 +441,9 @@ static struct work_registers build_get_work_registers(u32 **p)
 	if (scratch_reg >= 0) {
 		/* Save in CPU local C0_KScratch? */
 		UASM_i_MTC0(p, 1, c0_kscratch(), scratch_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		r.r1 = K0;
 		r.r2 = K1;
@@ -412,6 +452,7 @@ static struct work_registers build_get_work_registers(u32 **p)
 	}
 
 	if (num_possible_cpus() > 1) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_PGD_C0_CONTEXT
 		smp_processor_id_shift = 51;
@@ -437,6 +478,11 @@ static struct work_registers build_get_work_registers(u32 **p)
 		UASM_i_CPUID_MFC0(p, K0, SMP_CPUID_REG);
 		UASM_i_SRL_SAFE(p, K0, K0, SMP_CPUID_REGSHIFT);
 >>>>>>> v3.18
+=======
+		/* Get smp_processor_id */
+		UASM_i_CPUID_MFC0(p, K0, SMP_CPUID_REG);
+		UASM_i_SRL_SAFE(p, K0, K0, SMP_CPUID_REGSHIFT);
+>>>>>>> v3.18
 
 		/* handler_reg_save index in K0 */
 		UASM_i_SLL(p, K0, K0, ilog2(sizeof(struct tlb_reg_save)));
@@ -457,15 +503,21 @@ static struct work_registers build_get_work_registers(u32 **p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit build_restore_work_registers(u32 **p)
 {
 	if (scratch_reg > 0) {
 		UASM_i_MFC0(p, 1, 31, scratch_reg);
 =======
+=======
+>>>>>>> v3.18
 static void build_restore_work_registers(u32 **p)
 {
 	if (scratch_reg >= 0) {
 		UASM_i_MFC0(p, 1, c0_kscratch(), scratch_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -489,7 +541,11 @@ extern unsigned long pgd_current[];
  * The R3000 TLB handler is simple.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit build_r3000_tlb_refill_handler(void)
+=======
+static void build_r3000_tlb_refill_handler(void)
+>>>>>>> v3.18
 =======
 static void build_r3000_tlb_refill_handler(void)
 >>>>>>> v3.18
@@ -526,6 +582,10 @@ static void build_r3000_tlb_refill_handler(void)
 
 	memcpy((void *)ebase, tlb_handler, 0x80);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	local_flush_icache_range(ebase, ebase + 0x80);
+>>>>>>> v3.18
 =======
 	local_flush_icache_range(ebase, ebase + 0x80);
 >>>>>>> v3.18
@@ -542,7 +602,11 @@ static void build_r3000_tlb_refill_handler(void)
  * then we relocate it to the final handler layout as needed.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 final_handler[64] __cpuinitdata;
+=======
+static u32 final_handler[64];
+>>>>>>> v3.18
 =======
 static u32 final_handler[64];
 >>>>>>> v3.18
@@ -570,7 +634,11 @@ static u32 final_handler[64];
  * As if we MIPS hackers wouldn't know how to nop pipelines happy ...
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit __maybe_unused build_tlb_probe_entry(u32 **p)
+=======
+static void __maybe_unused build_tlb_probe_entry(u32 **p)
+>>>>>>> v3.18
 =======
 static void __maybe_unused build_tlb_probe_entry(u32 **p)
 >>>>>>> v3.18
@@ -598,9 +666,15 @@ static void __maybe_unused build_tlb_probe_entry(u32 **p)
 enum tlb_write_entry { tlb_random, tlb_indexed };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit build_tlb_write_entry(u32 **p, struct uasm_label **l,
 					 struct uasm_reloc **r,
 					 enum tlb_write_entry wmode)
+=======
+static void build_tlb_write_entry(u32 **p, struct uasm_label **l,
+				  struct uasm_reloc **r,
+				  enum tlb_write_entry wmode)
+>>>>>>> v3.18
 =======
 static void build_tlb_write_entry(u32 **p, struct uasm_label **l,
 				  struct uasm_reloc **r,
@@ -624,11 +698,17 @@ static void build_tlb_write_entry(u32 **p, struct uasm_label **l,
 		case CPU_M14KC:
 		case CPU_74K:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case CPU_1074K:
 		case CPU_PROAPTIV:
 		case CPU_P5600:
 		case CPU_M5150:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -700,6 +780,10 @@ static void build_tlb_write_entry(u32 **p, struct uasm_label **l,
 	case CPU_BMIPS5000:
 	case CPU_LOONGSON2:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CPU_LOONGSON3:
+>>>>>>> v3.18
 =======
 	case CPU_LOONGSON3:
 >>>>>>> v3.18
@@ -746,7 +830,11 @@ static void build_tlb_write_entry(u32 **p, struct uasm_label **l,
 	default:
 		panic("No TLB refill handler yet (CPU type: %d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      current_cpu_data.cputype);
+=======
+		      current_cpu_type());
+>>>>>>> v3.18
 =======
 		      current_cpu_type());
 >>>>>>> v3.18
@@ -755,8 +843,13 @@ static void build_tlb_write_entry(u32 **p, struct uasm_label **l,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit __maybe_unused void build_convert_pte_to_entrylo(u32 **p,
 								  unsigned int reg)
+=======
+static __maybe_unused void build_convert_pte_to_entrylo(u32 **p,
+							unsigned int reg)
+>>>>>>> v3.18
 =======
 static __maybe_unused void build_convert_pte_to_entrylo(u32 **p,
 							unsigned int reg)
@@ -776,11 +869,17 @@ static __maybe_unused void build_convert_pte_to_entrylo(u32 **p,
 #ifdef CONFIG_MIPS_HUGE_TLB_SUPPORT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void build_restore_pagemask(u32 **p,
 					     struct uasm_reloc **r,
 					     unsigned int tmp,
 					     enum label_id lid,
 					     int restore_scratch)
+=======
+static void build_restore_pagemask(u32 **p, struct uasm_reloc **r,
+				   unsigned int tmp, enum label_id lid,
+				   int restore_scratch)
+>>>>>>> v3.18
 =======
 static void build_restore_pagemask(u32 **p, struct uasm_reloc **r,
 				   unsigned int tmp, enum label_id lid,
@@ -803,8 +902,13 @@ static void build_restore_pagemask(u32 **p, struct uasm_reloc **r,
 			uasm_il_b(p, r, lid);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (scratch_reg > 0)
 			UASM_i_MFC0(p, 1, 31, scratch_reg);
+=======
+		if (scratch_reg >= 0)
+			UASM_i_MFC0(p, 1, c0_kscratch(), scratch_reg);
+>>>>>>> v3.18
 =======
 		if (scratch_reg >= 0)
 			UASM_i_MFC0(p, 1, c0_kscratch(), scratch_reg);
@@ -830,6 +934,7 @@ static void build_restore_pagemask(u32 **p, struct uasm_reloc **r,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void build_huge_tlb_write_entry(u32 **p,
 						 struct uasm_label **l,
 						 struct uasm_reloc **r,
@@ -837,11 +942,16 @@ static __cpuinit void build_huge_tlb_write_entry(u32 **p,
 						 enum tlb_write_entry wmode,
 						 int restore_scratch)
 =======
+=======
+>>>>>>> v3.18
 static void build_huge_tlb_write_entry(u32 **p, struct uasm_label **l,
 				       struct uasm_reloc **r,
 				       unsigned int tmp,
 				       enum tlb_write_entry wmode,
 				       int restore_scratch)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* Set huge page tlb entry size */
@@ -858,9 +968,15 @@ static void build_huge_tlb_write_entry(u32 **p, struct uasm_label **l,
  * Check if Huge PTE is present, if so then jump to LABEL.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
 build_is_huge_pte(u32 **p, struct uasm_reloc **r, unsigned int tmp,
 		unsigned int pmd, int lid)
+=======
+static void
+build_is_huge_pte(u32 **p, struct uasm_reloc **r, unsigned int tmp,
+		  unsigned int pmd, int lid)
+>>>>>>> v3.18
 =======
 static void
 build_is_huge_pte(u32 **p, struct uasm_reloc **r, unsigned int tmp,
@@ -877,9 +993,14 @@ build_is_huge_pte(u32 **p, struct uasm_reloc **r, unsigned int tmp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void build_huge_update_entries(u32 **p,
 						unsigned int pte,
 						unsigned int tmp)
+=======
+static void build_huge_update_entries(u32 **p, unsigned int pte,
+				      unsigned int tmp)
+>>>>>>> v3.18
 =======
 static void build_huge_update_entries(u32 **p, unsigned int pte,
 				      unsigned int tmp)
@@ -914,16 +1035,22 @@ static void build_huge_update_entries(u32 **p, unsigned int pte,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void build_huge_handler_tail(u32 **p,
 					      struct uasm_reloc **r,
 					      struct uasm_label **l,
 					      unsigned int pte,
 					      unsigned int ptr)
 =======
+=======
+>>>>>>> v3.18
 static void build_huge_handler_tail(u32 **p, struct uasm_reloc **r,
 				    struct uasm_label **l,
 				    unsigned int pte,
 				    unsigned int ptr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 #ifdef CONFIG_SMP
@@ -944,7 +1071,11 @@ static void build_huge_handler_tail(u32 **p, struct uasm_reloc **r,
  * TMP will be clobbered, PTR will hold the pmd entry.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -979,17 +1110,23 @@ build_get_pmde64(u32 **p, struct uasm_label **l, struct uasm_reloc **r,
 	/* No uasm_i_nop needed here, since the next insn doesn't touch TMP. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_PGD_C0_CONTEXT
 	if (pgd_reg != -1) {
 		/* pgd is in pgd_reg */
 		UASM_i_MFC0(p, ptr, 31, pgd_reg);
 	} else {
 =======
+=======
+>>>>>>> v3.18
 	if (pgd_reg != -1) {
 		/* pgd is in pgd_reg */
 		UASM_i_MFC0(p, ptr, c0_kscratch(), pgd_reg);
 	} else {
 #if defined(CONFIG_MIPS_PGD_C0_CONTEXT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * &pgd << 11 stored in CONTEXT [23..63].
@@ -1002,6 +1139,7 @@ build_get_pmde64(u32 **p, struct uasm_label **l, struct uasm_reloc **r,
 		/* 1 0	1 0 1  << 6  xkphys cached */
 		uasm_i_ori(p, ptr, ptr, 0x540);
 		uasm_i_drotr(p, ptr, ptr, 11);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 #elif defined(CONFIG_SMP)
@@ -1028,6 +1166,8 @@ build_get_pmde64(u32 **p, struct uasm_label **l, struct uasm_reloc **r,
 	uasm_i_ld(p, ptr, uasm_rel_lo(pgdc), ptr);
 #endif
 =======
+=======
+>>>>>>> v3.18
 #elif defined(CONFIG_SMP)
 		UASM_i_CPUID_MFC0(p, ptr, SMP_CPUID_REG);
 		uasm_i_dsrl_safe(p, ptr, ptr, SMP_CPUID_PTRSHIFT);
@@ -1040,6 +1180,9 @@ build_get_pmde64(u32 **p, struct uasm_label **l, struct uasm_reloc **r,
 		uasm_i_ld(p, ptr, uasm_rel_lo(pgdc), ptr);
 #endif
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	uasm_l_vmalloc_done(l, *p);
@@ -1063,7 +1206,11 @@ build_get_pmde64(u32 **p, struct uasm_label **l, struct uasm_reloc **r,
  * PTR will hold the pgd for vmalloc.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -1121,8 +1268,13 @@ build_get_pgd_vmalloc64(u32 **p, struct uasm_label **l, struct uasm_reloc **r,
 
 		if (mode == refill_scratch) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (scratch_reg > 0)
 				UASM_i_MFC0(p, 1, 31, scratch_reg);
+=======
+			if (scratch_reg >= 0)
+				UASM_i_MFC0(p, 1, c0_kscratch(), scratch_reg);
+>>>>>>> v3.18
 =======
 			if (scratch_reg >= 0)
 				UASM_i_MFC0(p, 1, c0_kscratch(), scratch_reg);
@@ -1141,6 +1293,7 @@ build_get_pgd_vmalloc64(u32 **p, struct uasm_label **l, struct uasm_reloc **r,
  * TMP and PTR are scratch.
  * TMP will be clobbered, PTR will hold the pgd entry.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __cpuinit __maybe_unused
 build_get_pgde32(u32 **p, unsigned int tmp, unsigned int ptr)
@@ -1171,6 +1324,8 @@ build_get_pgde32(u32 **p, unsigned int tmp, unsigned int ptr)
 	uasm_i_mfc0(p, tmp, C0_BADVADDR); /* get faulting address */
 	uasm_i_lw(p, ptr, uasm_rel_lo(pgdc), ptr);
 =======
+=======
+>>>>>>> v3.18
 static void __maybe_unused
 build_get_pgde32(u32 **p, unsigned int tmp, unsigned int ptr)
 {
@@ -1193,6 +1348,9 @@ build_get_pgde32(u32 **p, unsigned int tmp, unsigned int ptr)
 		uasm_i_mfc0(p, tmp, C0_BADVADDR); /* get faulting address */
 		uasm_i_lw(p, ptr, uasm_rel_lo(pgdc), ptr);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uasm_i_srl(p, tmp, tmp, PGDIR_SHIFT); /* get pgd only bits */
 	uasm_i_sll(p, tmp, tmp, PGD_T_LOG2);
@@ -1202,7 +1360,11 @@ build_get_pgde32(u32 **p, unsigned int tmp, unsigned int ptr)
 #endif /* !CONFIG_64BIT */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit build_adjust_context(u32 **p, unsigned int ctx)
+=======
+static void build_adjust_context(u32 **p, unsigned int ctx)
+>>>>>>> v3.18
 =======
 static void build_adjust_context(u32 **p, unsigned int ctx)
 >>>>>>> v3.18
@@ -1232,7 +1394,11 @@ static void build_adjust_context(u32 **p, unsigned int ctx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit build_get_ptep(u32 **p, unsigned int tmp, unsigned int ptr)
+=======
+static void build_get_ptep(u32 **p, unsigned int tmp, unsigned int ptr)
+>>>>>>> v3.18
 =======
 static void build_get_ptep(u32 **p, unsigned int tmp, unsigned int ptr)
 >>>>>>> v3.18
@@ -1261,8 +1427,12 @@ static void build_get_ptep(u32 **p, unsigned int tmp, unsigned int ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit build_update_entries(u32 **p, unsigned int tmp,
 					unsigned int ptep)
+=======
+static void build_update_entries(u32 **p, unsigned int tmp, unsigned int ptep)
+>>>>>>> v3.18
 =======
 static void build_update_entries(u32 **p, unsigned int tmp, unsigned int ptep)
 >>>>>>> v3.18
@@ -1328,15 +1498,21 @@ struct mips_huge_tlb_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mips_huge_tlb_info __cpuinit
 build_fast_tlb_refill_handler (u32 **p, struct uasm_label **l,
 			       struct uasm_reloc **r, unsigned int tmp,
 			       unsigned int ptr, int c0_scratch)
 =======
+=======
+>>>>>>> v3.18
 static struct mips_huge_tlb_info
 build_fast_tlb_refill_handler (u32 **p, struct uasm_label **l,
 			       struct uasm_reloc **r, unsigned int tmp,
 			       unsigned int ptr, int c0_scratch_reg)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct mips_huge_tlb_info rv;
@@ -1353,6 +1529,7 @@ build_fast_tlb_refill_handler (u32 **p, struct uasm_label **l,
 
 		if (pgd_reg != -1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			UASM_i_MFC0(p, ptr, 31, pgd_reg);
 		else
 			UASM_i_MFC0(p, ptr, C0_CONTEXT);
@@ -1360,12 +1537,17 @@ build_fast_tlb_refill_handler (u32 **p, struct uasm_label **l,
 		if (c0_scratch >= 0)
 			UASM_i_MTC0(p, scratch, 31, c0_scratch);
 =======
+=======
+>>>>>>> v3.18
 			UASM_i_MFC0(p, ptr, c0_kscratch(), pgd_reg);
 		else
 			UASM_i_MFC0(p, ptr, C0_CONTEXT);
 
 		if (c0_scratch_reg >= 0)
 			UASM_i_MTC0(p, scratch, c0_kscratch(), c0_scratch_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else
 			UASM_i_SW(p, scratch, scratchpad_offset(0), 0);
@@ -1382,7 +1564,11 @@ build_fast_tlb_refill_handler (u32 **p, struct uasm_label **l,
 	} else {
 		if (pgd_reg != -1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			UASM_i_MFC0(p, ptr, 31, pgd_reg);
+=======
+			UASM_i_MFC0(p, ptr, c0_kscratch(), pgd_reg);
+>>>>>>> v3.18
 =======
 			UASM_i_MFC0(p, ptr, c0_kscratch(), pgd_reg);
 >>>>>>> v3.18
@@ -1392,8 +1578,13 @@ build_fast_tlb_refill_handler (u32 **p, struct uasm_label **l,
 		UASM_i_MFC0(p, tmp, C0_BADVADDR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (c0_scratch >= 0)
 			UASM_i_MTC0(p, scratch, 31, c0_scratch);
+=======
+		if (c0_scratch_reg >= 0)
+			UASM_i_MTC0(p, scratch, c0_kscratch(), c0_scratch_reg);
+>>>>>>> v3.18
 =======
 		if (c0_scratch_reg >= 0)
 			UASM_i_MTC0(p, scratch, c0_kscratch(), c0_scratch_reg);
@@ -1503,8 +1694,13 @@ build_fast_tlb_refill_handler (u32 **p, struct uasm_label **l,
 	UASM_i_MTC0(p, odd, C0_ENTRYLO1); /* load it */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c0_scratch >= 0) {
 		UASM_i_MFC0(p, scratch, 31, c0_scratch);
+=======
+	if (c0_scratch_reg >= 0) {
+		UASM_i_MFC0(p, scratch, c0_kscratch(), c0_scratch_reg);
+>>>>>>> v3.18
 =======
 	if (c0_scratch_reg >= 0) {
 		UASM_i_MFC0(p, scratch, c0_kscratch(), c0_scratch_reg);
@@ -1537,7 +1733,11 @@ build_fast_tlb_refill_handler (u32 **p, struct uasm_label **l,
 #define MIPS64_REFILL_INSNS 32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit build_r4000_tlb_refill_handler(void)
+=======
+static void build_r4000_tlb_refill_handler(void)
+>>>>>>> v3.18
 =======
 static void build_r4000_tlb_refill_handler(void)
 >>>>>>> v3.18
@@ -1556,7 +1756,11 @@ static void build_r4000_tlb_refill_handler(void)
 	memset(final_handler, 0, sizeof(final_handler));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((scratch_reg > 0 || scratchpad_available()) && use_bbit_insns()) {
+=======
+	if (IS_ENABLED(CONFIG_64BIT) && (scratch_reg >= 0 || scratchpad_available()) && use_bbit_insns()) {
+>>>>>>> v3.18
 =======
 	if (IS_ENABLED(CONFIG_64BIT) && (scratch_reg >= 0 || scratchpad_available()) && use_bbit_insns()) {
 >>>>>>> v3.18
@@ -1621,6 +1825,7 @@ static void build_r4000_tlb_refill_handler(void)
 	 * need three, with the second nop'ed and the third being
 	 * unused.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Loongson2 ebase is different than r4k, we have more space */
 #if defined(CONFIG_32BIT) || defined(CONFIG_CPU_LOONGSON2)
@@ -1712,6 +1917,8 @@ static void build_r4000_tlb_refill_handler(void)
 	}
 #endif /* CONFIG_64BIT */
 =======
+=======
+>>>>>>> v3.18
 	switch (boot_cpu_type()) {
 	default:
 		if (sizeof(long) == 4) {
@@ -1806,6 +2013,9 @@ static void build_r4000_tlb_refill_handler(void)
 		}
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	uasm_resolve_relocs(relocs, labels);
@@ -1814,6 +2024,10 @@ static void build_r4000_tlb_refill_handler(void)
 
 	memcpy((void *)ebase, final_handler, 0x100);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	local_flush_icache_range(ebase, ebase + 0x100);
+>>>>>>> v3.18
 =======
 	local_flush_icache_range(ebase, ebase + 0x100);
 >>>>>>> v3.18
@@ -1821,6 +2035,7 @@ static void build_r4000_tlb_refill_handler(void)
 	dump_handler("r4000_tlb_refill", (u32 *)ebase, 64);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * 128 instructions for the fastpath handler is generous and should
@@ -1850,6 +2065,8 @@ static void __cpuinit build_r4000_setup_pgd(void)
 
 	if (pgd_reg == -1) {
 =======
+=======
+>>>>>>> v3.18
 extern u32 handle_tlbl[], handle_tlbl_end[];
 extern u32 handle_tlbs[], handle_tlbs_end[];
 extern u32 handle_tlbm[], handle_tlbm_end[];
@@ -1878,6 +2095,9 @@ static void build_setup_pgd(void)
 		struct uasm_label *l = labels;
 		struct uasm_reloc *r = relocs;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* PGD << 11 in c0_Context */
 		/*
@@ -1899,6 +2119,7 @@ static void build_setup_pgd(void)
 		/* PGD in c0_KScratch */
 		uasm_i_jr(&p, 31);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		UASM_i_MTC0(&p, a0, 31, pgd_reg);
 	}
 	if (p - tlbmiss_handler_setup_pgd_array > ARRAY_SIZE(tlbmiss_handler_setup_pgd_array))
@@ -1915,6 +2136,8 @@ static void build_setup_pgd(void)
 
 static void __cpuinit
 =======
+=======
+>>>>>>> v3.18
 		UASM_i_MTC0(&p, a0, c0_kscratch(), pgd_reg);
 	}
 #else
@@ -1949,6 +2172,9 @@ static void __cpuinit
 }
 
 static void
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 iPTE_LW(u32 **p, unsigned int pte, unsigned int ptr)
 {
@@ -1970,7 +2196,11 @@ iPTE_LW(u32 **p, unsigned int pte, unsigned int ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -2034,7 +2264,11 @@ iPTE_SW(u32 **p, struct uasm_reloc **r, unsigned int pte, unsigned int ptr,
  * with it's original value.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -2066,7 +2300,11 @@ build_pte_present(u32 **p, struct uasm_reloc **r,
 
 /* Make PTE valid, store result in PTR. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -2083,7 +2321,11 @@ build_make_valid(u32 **p, struct uasm_reloc **r, unsigned int pte,
  * restore PTE with value from PTR when done.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -2107,7 +2349,11 @@ build_pte_writable(u32 **p, struct uasm_reloc **r,
  * at PTR.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -2125,7 +2371,11 @@ build_make_write(u32 **p, struct uasm_reloc **r, unsigned int pte,
  * restore PTE with value from PTR when done.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -2158,7 +2408,11 @@ build_pte_modifiable(u32 **p, struct uasm_reloc **r,
  * Then it returns.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -2178,7 +2432,11 @@ build_r3000_pte_reload_tlbwi(u32 **p, unsigned int pte, unsigned int tmp)
  * kseg2 access, i.e. without refill.  Then it returns.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -2200,7 +2458,11 @@ build_r3000_tlb_reload_write(u32 **p, struct uasm_label **l,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -2224,6 +2486,7 @@ build_r3000_tlbchange_handler_head(u32 **p, unsigned int pte,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit build_r3000_tlb_load_handler(void)
 {
 	u32 *p = handle_tlbl;
@@ -2232,6 +2495,8 @@ static void __cpuinit build_r3000_tlb_load_handler(void)
 
 	memset(handle_tlbl, 0, sizeof(handle_tlbl));
 =======
+=======
+>>>>>>> v3.18
 static void build_r3000_tlb_load_handler(void)
 {
 	u32 *p = handle_tlbl;
@@ -2240,6 +2505,9 @@ static void build_r3000_tlb_load_handler(void)
 	struct uasm_reloc *r = relocs;
 
 	memset(handle_tlbl, 0, handle_tlbl_size * sizeof(handle_tlbl[0]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memset(labels, 0, sizeof(labels));
 	memset(relocs, 0, sizeof(relocs));
@@ -2255,7 +2523,11 @@ static void build_r3000_tlb_load_handler(void)
 	uasm_i_nop(&p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((p - handle_tlbl) > FASTPATH_SIZE)
+=======
+	if (p >= handle_tlbl_end)
+>>>>>>> v3.18
 =======
 	if (p >= handle_tlbl_end)
 >>>>>>> v3.18
@@ -2265,6 +2537,7 @@ static void build_r3000_tlb_load_handler(void)
 	pr_debug("Wrote TLB load handler fastpath (%u instructions).\n",
 		 (unsigned int)(p - handle_tlbl));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dump_handler("r3000_tlb_load", handle_tlbl, ARRAY_SIZE(handle_tlbl));
 }
@@ -2277,6 +2550,8 @@ static void __cpuinit build_r3000_tlb_store_handler(void)
 
 	memset(handle_tlbs, 0, sizeof(handle_tlbs));
 =======
+=======
+>>>>>>> v3.18
 	dump_handler("r3000_tlb_load", handle_tlbl, handle_tlbl_size);
 }
 
@@ -2288,6 +2563,9 @@ static void build_r3000_tlb_store_handler(void)
 	struct uasm_reloc *r = relocs;
 
 	memset(handle_tlbs, 0, handle_tlbs_size * sizeof(handle_tlbs[0]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memset(labels, 0, sizeof(labels));
 	memset(relocs, 0, sizeof(relocs));
@@ -2303,7 +2581,11 @@ static void build_r3000_tlb_store_handler(void)
 	uasm_i_nop(&p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((p - handle_tlbs) > FASTPATH_SIZE)
+=======
+	if (p >= handle_tlbs_end)
+>>>>>>> v3.18
 =======
 	if (p >= handle_tlbs_end)
 >>>>>>> v3.18
@@ -2313,6 +2595,7 @@ static void build_r3000_tlb_store_handler(void)
 	pr_debug("Wrote TLB store handler fastpath (%u instructions).\n",
 		 (unsigned int)(p - handle_tlbs));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dump_handler("r3000_tlb_store", handle_tlbs, ARRAY_SIZE(handle_tlbs));
 }
@@ -2325,6 +2608,8 @@ static void __cpuinit build_r3000_tlb_modify_handler(void)
 
 	memset(handle_tlbm, 0, sizeof(handle_tlbm));
 =======
+=======
+>>>>>>> v3.18
 	dump_handler("r3000_tlb_store", handle_tlbs, handle_tlbs_size);
 }
 
@@ -2336,6 +2621,9 @@ static void build_r3000_tlb_modify_handler(void)
 	struct uasm_reloc *r = relocs;
 
 	memset(handle_tlbm, 0, handle_tlbm_size * sizeof(handle_tlbm[0]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memset(labels, 0, sizeof(labels));
 	memset(relocs, 0, sizeof(relocs));
@@ -2351,7 +2639,11 @@ static void build_r3000_tlb_modify_handler(void)
 	uasm_i_nop(&p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((p - handle_tlbm) > FASTPATH_SIZE)
+=======
+	if (p >= handle_tlbm_end)
+>>>>>>> v3.18
 =======
 	if (p >= handle_tlbm_end)
 >>>>>>> v3.18
@@ -2362,7 +2654,11 @@ static void build_r3000_tlb_modify_handler(void)
 		 (unsigned int)(p - handle_tlbm));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dump_handler("r3000_tlb_modify", handle_tlbm, ARRAY_SIZE(handle_tlbm));
+=======
+	dump_handler("r3000_tlb_modify", handle_tlbm, handle_tlbm_size);
+>>>>>>> v3.18
 =======
 	dump_handler("r3000_tlb_modify", handle_tlbm, handle_tlbm_size);
 >>>>>>> v3.18
@@ -2373,7 +2669,11 @@ static void build_r3000_tlb_modify_handler(void)
  * R4000 style TLB load/store/modify handlers.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct work_registers __cpuinit
+=======
+static struct work_registers
+>>>>>>> v3.18
 =======
 static struct work_registers
 >>>>>>> v3.18
@@ -2408,6 +2708,7 @@ build_r4000_tlbchange_handler_head(u32 **p, struct uasm_label **l,
 #endif
 	iPTE_LW(p, wr.r1, wr.r2); /* get even pte */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!m4kc_tlbp_war())
 		build_tlb_probe_entry(p);
 	return wr;
@@ -2415,6 +2716,8 @@ build_r4000_tlbchange_handler_head(u32 **p, struct uasm_label **l,
 
 static void __cpuinit
 =======
+=======
+>>>>>>> v3.18
 	if (!m4kc_tlbp_war()) {
 		build_tlb_probe_entry(p);
 		if (cpu_has_htw) {
@@ -2429,6 +2732,9 @@ static void __cpuinit
 }
 
 static void
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 build_r4000_tlbchange_handler_tail(u32 **p, struct uasm_label **l,
 				   struct uasm_reloc **r, unsigned int tmp,
@@ -2448,21 +2754,31 @@ build_r4000_tlbchange_handler_tail(u32 **p, struct uasm_label **l,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit build_r4000_tlb_load_handler(void)
 {
 	u32 *p = handle_tlbl;
 =======
+=======
+>>>>>>> v3.18
 static void build_r4000_tlb_load_handler(void)
 {
 	u32 *p = handle_tlbl;
 	const int handle_tlbl_size = handle_tlbl_end - handle_tlbl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct uasm_label *l = labels;
 	struct uasm_reloc *r = relocs;
 	struct work_registers wr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(handle_tlbl, 0, sizeof(handle_tlbl));
+=======
+	memset(handle_tlbl, 0, handle_tlbl_size * sizeof(handle_tlbl[0]));
+>>>>>>> v3.18
 =======
 	memset(handle_tlbl, 0, handle_tlbl_size * sizeof(handle_tlbl[0]));
 >>>>>>> v3.18
@@ -2489,7 +2805,11 @@ static void build_r4000_tlb_load_handler(void)
 		build_tlb_probe_entry(&p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_has_rixi) {
+=======
+	if (cpu_has_rixi && !cpu_has_rixiex) {
+>>>>>>> v3.18
 =======
 	if (cpu_has_rixi && !cpu_has_rixiex) {
 >>>>>>> v3.18
@@ -2508,7 +2828,10 @@ static void build_r4000_tlb_load_handler(void)
 
 		uasm_i_tlbr(&p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		switch (current_cpu_type()) {
 		default:
@@ -2522,6 +2845,9 @@ static void build_r4000_tlb_load_handler(void)
 			}
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Examine  entrylo 0 or 1 based on ptr. */
 		if (use_bbit_insns()) {
@@ -2563,7 +2889,11 @@ static void build_r4000_tlb_load_handler(void)
 	build_tlb_probe_entry(&p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_has_rixi) {
+=======
+	if (cpu_has_rixi && !cpu_has_rixiex) {
+>>>>>>> v3.18
 =======
 	if (cpu_has_rixi && !cpu_has_rixiex) {
 >>>>>>> v3.18
@@ -2582,7 +2912,10 @@ static void build_r4000_tlb_load_handler(void)
 
 		uasm_i_tlbr(&p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		switch (current_cpu_type()) {
 		default:
@@ -2596,6 +2929,9 @@ static void build_r4000_tlb_load_handler(void)
 			}
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Examine  entrylo 0 or 1 based on ptr. */
 		if (use_bbit_insns()) {
@@ -2645,7 +2981,11 @@ static void build_r4000_tlb_load_handler(void)
 	uasm_i_nop(&p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((p - handle_tlbl) > FASTPATH_SIZE)
+=======
+	if (p >= handle_tlbl_end)
+>>>>>>> v3.18
 =======
 	if (p >= handle_tlbl_end)
 >>>>>>> v3.18
@@ -2656,6 +2996,7 @@ static void build_r4000_tlb_load_handler(void)
 		 (unsigned int)(p - handle_tlbl));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dump_handler("r4000_tlb_load", handle_tlbl, ARRAY_SIZE(handle_tlbl));
 }
 
@@ -2663,6 +3004,8 @@ static void __cpuinit build_r4000_tlb_store_handler(void)
 {
 	u32 *p = handle_tlbs;
 =======
+=======
+>>>>>>> v3.18
 	dump_handler("r4000_tlb_load", handle_tlbl, handle_tlbl_size);
 }
 
@@ -2670,13 +3013,20 @@ static void build_r4000_tlb_store_handler(void)
 {
 	u32 *p = handle_tlbs;
 	const int handle_tlbs_size = handle_tlbs_end - handle_tlbs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct uasm_label *l = labels;
 	struct uasm_reloc *r = relocs;
 	struct work_registers wr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(handle_tlbs, 0, sizeof(handle_tlbs));
+=======
+	memset(handle_tlbs, 0, handle_tlbs_size * sizeof(handle_tlbs[0]));
+>>>>>>> v3.18
 =======
 	memset(handle_tlbs, 0, handle_tlbs_size * sizeof(handle_tlbs[0]));
 >>>>>>> v3.18
@@ -2717,7 +3067,11 @@ static void build_r4000_tlb_store_handler(void)
 	uasm_i_nop(&p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((p - handle_tlbs) > FASTPATH_SIZE)
+=======
+	if (p >= handle_tlbs_end)
+>>>>>>> v3.18
 =======
 	if (p >= handle_tlbs_end)
 >>>>>>> v3.18
@@ -2728,6 +3082,7 @@ static void build_r4000_tlb_store_handler(void)
 		 (unsigned int)(p - handle_tlbs));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dump_handler("r4000_tlb_store", handle_tlbs, ARRAY_SIZE(handle_tlbs));
 }
 
@@ -2735,6 +3090,8 @@ static void __cpuinit build_r4000_tlb_modify_handler(void)
 {
 	u32 *p = handle_tlbm;
 =======
+=======
+>>>>>>> v3.18
 	dump_handler("r4000_tlb_store", handle_tlbs, handle_tlbs_size);
 }
 
@@ -2742,13 +3099,20 @@ static void build_r4000_tlb_modify_handler(void)
 {
 	u32 *p = handle_tlbm;
 	const int handle_tlbm_size = handle_tlbm_end - handle_tlbm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct uasm_label *l = labels;
 	struct uasm_reloc *r = relocs;
 	struct work_registers wr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(handle_tlbm, 0, sizeof(handle_tlbm));
+=======
+	memset(handle_tlbm, 0, handle_tlbm_size * sizeof(handle_tlbm[0]));
+>>>>>>> v3.18
 =======
 	memset(handle_tlbm, 0, handle_tlbm_size * sizeof(handle_tlbm[0]));
 >>>>>>> v3.18
@@ -2790,7 +3154,11 @@ static void build_r4000_tlb_modify_handler(void)
 	uasm_i_nop(&p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((p - handle_tlbm) > FASTPATH_SIZE)
+=======
+	if (p >= handle_tlbm_end)
+>>>>>>> v3.18
 =======
 	if (p >= handle_tlbm_end)
 >>>>>>> v3.18
@@ -2801,11 +3169,14 @@ static void build_r4000_tlb_modify_handler(void)
 		 (unsigned int)(p - handle_tlbm));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dump_handler("r4000_tlb_modify", handle_tlbm, ARRAY_SIZE(handle_tlbm));
 }
 
 void __cpuinit build_tlb_refill_handler(void)
 =======
+=======
+>>>>>>> v3.18
 	dump_handler("r4000_tlb_modify", handle_tlbm, handle_tlbm_size);
 }
 
@@ -2910,6 +3281,9 @@ static void config_htw_params(void)
 }
 
 void build_tlb_refill_handler(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/*
@@ -2940,15 +3314,21 @@ void build_tlb_refill_handler(void)
 			if (!cpu_has_local_ebase)
 				build_r3000_tlb_refill_handler();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			build_r3000_tlb_load_handler();
 			build_r3000_tlb_store_handler();
 			build_r3000_tlb_modify_handler();
 =======
+=======
+>>>>>>> v3.18
 			build_setup_pgd();
 			build_r3000_tlb_load_handler();
 			build_r3000_tlb_store_handler();
 			build_r3000_tlb_modify_handler();
 			flush_tlb_handlers();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			run_once++;
 		}
@@ -2970,9 +3350,13 @@ void build_tlb_refill_handler(void)
 		if (!run_once) {
 			scratch_reg = allocate_kscratch();
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_PGD_C0_CONTEXT
 			build_r4000_setup_pgd();
 #endif
+=======
+			build_setup_pgd();
+>>>>>>> v3.18
 =======
 			build_setup_pgd();
 >>>>>>> v3.18
@@ -2982,6 +3366,10 @@ void build_tlb_refill_handler(void)
 			if (!cpu_has_local_ebase)
 				build_r4000_tlb_refill_handler();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			flush_tlb_handlers();
+>>>>>>> v3.18
 =======
 			flush_tlb_handlers();
 >>>>>>> v3.18
@@ -2989,6 +3377,7 @@ void build_tlb_refill_handler(void)
 		}
 		if (cpu_has_local_ebase)
 			build_r4000_tlb_refill_handler();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 }
@@ -3006,9 +3395,14 @@ void __cpuinit flush_tlb_handlers(void)
 			   (unsigned long)tlbmiss_handler_setup_pgd_array + sizeof(handle_tlbm));
 #endif
 =======
+=======
+>>>>>>> v3.18
 		if (cpu_has_htw)
 			config_htw_params();
 
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

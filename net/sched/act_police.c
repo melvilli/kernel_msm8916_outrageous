@@ -42,6 +42,7 @@ struct tcf_police {
 
 #define POL_TAB_MASK     15
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_common *tcf_police_ht[POL_TAB_MASK + 1];
 static u32 police_idx_gen;
 static DEFINE_RWLOCK(police_lock);
@@ -51,6 +52,8 @@ static struct tcf_hashinfo police_hash_info = {
 	.hmask	=	POL_TAB_MASK,
 	.lock	=	&police_lock,
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -71,6 +74,11 @@ static int tcf_act_police_walker(struct sk_buff *skb, struct netlink_callback *c
 			      int type, struct tc_action *a)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tcf_hashinfo *hinfo = a->ops->hinfo;
+	struct hlist_head *head;
+>>>>>>> v3.18
 =======
 	struct tcf_hashinfo *hinfo = a->ops->hinfo;
 	struct hlist_head *head;
@@ -80,7 +88,11 @@ static int tcf_act_police_walker(struct sk_buff *skb, struct netlink_callback *c
 	struct nlattr *nest;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_lock_bh(&police_lock);
+=======
+	spin_lock_bh(&hinfo->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&hinfo->lock);
 >>>>>>> v3.18
@@ -89,9 +101,15 @@ static int tcf_act_police_walker(struct sk_buff *skb, struct netlink_callback *c
 
 	for (i = 0; i < (POL_TAB_MASK + 1); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p = tcf_police_ht[tcf_hash(i, POL_TAB_MASK)];
 
 		for (; p; p = p->tcfc_next) {
+=======
+		head = &hinfo->htab[tcf_hash(i, POL_TAB_MASK)];
+
+		hlist_for_each_entry_rcu(p, head, tcfc_head) {
+>>>>>>> v3.18
 =======
 		head = &hinfo->htab[tcf_hash(i, POL_TAB_MASK)];
 
@@ -120,7 +138,11 @@ static int tcf_act_police_walker(struct sk_buff *skb, struct netlink_callback *c
 	}
 done:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_unlock_bh(&police_lock);
+=======
+	spin_unlock_bh(&hinfo->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&hinfo->lock);
 >>>>>>> v3.18
@@ -133,6 +155,7 @@ nla_put_failure:
 	goto done;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void tcf_police_destroy(struct tcf_police *p)
 {
@@ -159,6 +182,8 @@ static void tcf_police_destroy(struct tcf_police *p)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct nla_policy police_policy[TCA_POLICE_MAX + 1] = {
 	[TCA_POLICE_RATE]	= { .len = TC_RTAB_SIZE },
 	[TCA_POLICE_PEAKRATE]	= { .len = TC_RTAB_SIZE },
@@ -177,6 +202,10 @@ static int tcf_act_police_locate(struct net *net, struct nlattr *nla,
 	struct tcf_police *police;
 	struct qdisc_rate_table *R_tab = NULL, *P_tab = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tcf_hashinfo *hinfo = a->ops->hinfo;
+>>>>>>> v3.18
 =======
 	struct tcf_hashinfo *hinfo = a->ops->hinfo;
 >>>>>>> v3.18
@@ -198,6 +227,7 @@ static int tcf_act_police_locate(struct net *net, struct nlattr *nla,
 
 	if (parm->index) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct tcf_common *pc;
 
 		pc = tcf_hash_lookup(parm->index, &police_hash_info);
@@ -212,6 +242,8 @@ static int tcf_act_police_locate(struct net *net, struct nlattr *nla,
 				goto override;
 			return ret;
 =======
+=======
+>>>>>>> v3.18
 		if (tcf_hash_search(a, parm->index)) {
 			police = to_police(a->priv);
 			if (bind) {
@@ -223,6 +255,9 @@ static int tcf_act_police_locate(struct net *net, struct nlattr *nla,
 				goto override;
 			/* not replacing */
 			return -EEXIST;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -253,7 +288,11 @@ override:
 	spin_lock_bh(&police->tcf_lock);
 	if (est) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = gen_replace_estimator(&police->tcf_bstats,
+=======
+		err = gen_replace_estimator(&police->tcf_bstats, NULL,
+>>>>>>> v3.18
 =======
 		err = gen_replace_estimator(&police->tcf_bstats, NULL,
 >>>>>>> v3.18
@@ -279,7 +318,11 @@ override:
 	if (R_tab) {
 		police->rate_present = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psched_ratecfg_precompute(&police->rate, &R_tab->rate);
+=======
+		psched_ratecfg_precompute(&police->rate, &R_tab->rate, 0);
+>>>>>>> v3.18
 =======
 		psched_ratecfg_precompute(&police->rate, &R_tab->rate, 0);
 >>>>>>> v3.18
@@ -290,7 +333,11 @@ override:
 	if (P_tab) {
 		police->peak_present = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psched_ratecfg_precompute(&police->peak, &P_tab->rate);
+=======
+		psched_ratecfg_precompute(&police->peak, &P_tab->rate, 0);
+>>>>>>> v3.18
 =======
 		psched_ratecfg_precompute(&police->peak, &P_tab->rate, 0);
 >>>>>>> v3.18
@@ -318,6 +365,7 @@ override:
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	police->tcfp_t_c = ktime_to_ns(ktime_get());
 	police->tcf_index = parm->index ? parm->index :
 		tcf_hash_new_index(&police_idx_gen, &police_hash_info);
@@ -327,6 +375,8 @@ override:
 	tcf_police_ht[h] = &police->common;
 	write_unlock_bh(&police_lock);
 =======
+=======
+>>>>>>> v3.18
 	police->tcfp_t_c = ktime_get_ns();
 	police->tcf_index = parm->index ? parm->index :
 		tcf_hash_new_index(hinfo);
@@ -334,6 +384,9 @@ override:
 	spin_lock_bh(&hinfo->lock);
 	hlist_add_head(&police->tcf_head, &hinfo->htab[h]);
 	spin_unlock_bh(&hinfo->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	a->priv = police;
@@ -343,10 +396,15 @@ failure_unlock:
 	spin_unlock_bh(&police->tcf_lock);
 failure:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (P_tab)
 		qdisc_put_rtab(P_tab);
 	if (R_tab)
 		qdisc_put_rtab(R_tab);
+=======
+	qdisc_put_rtab(P_tab);
+	qdisc_put_rtab(R_tab);
+>>>>>>> v3.18
 =======
 	qdisc_put_rtab(P_tab);
 	qdisc_put_rtab(R_tab);
@@ -356,6 +414,7 @@ failure:
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int tcf_act_police_cleanup(struct tc_action *a, int bind)
 {
@@ -375,6 +434,8 @@ static int tcf_act_police_cleanup(struct tc_action *a, int bind)
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int tcf_act_police(struct sk_buff *skb, const struct tc_action *a,
@@ -405,7 +466,11 @@ static int tcf_act_police(struct sk_buff *skb, const struct tc_action *a,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		now = ktime_to_ns(ktime_get());
+=======
+		now = ktime_get_ns();
+>>>>>>> v3.18
 =======
 		now = ktime_get_ns();
 >>>>>>> v3.18
@@ -478,6 +543,7 @@ MODULE_LICENSE("GPL");
 static struct tc_action_ops act_police_ops = {
 	.kind		=	"police",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.hinfo		=	&police_hash_info,
 	.type		=	TCA_ID_POLICE,
 	.capab		=	TCA_CAP_NONE,
@@ -487,10 +553,15 @@ static struct tc_action_ops act_police_ops = {
 	.cleanup	=	tcf_act_police_cleanup,
 	.lookup		=	tcf_hash_search,
 =======
+=======
+>>>>>>> v3.18
 	.type		=	TCA_ID_POLICE,
 	.owner		=	THIS_MODULE,
 	.act		=	tcf_act_police,
 	.dump		=	tcf_act_police_dump,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.init		=	tcf_act_police_locate,
 	.walk		=	tcf_act_police_walker
@@ -500,7 +571,11 @@ static int __init
 police_init_module(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return tcf_register_action(&act_police_ops);
+=======
+	return tcf_register_action(&act_police_ops, POL_TAB_MASK);
+>>>>>>> v3.18
 =======
 	return tcf_register_action(&act_police_ops, POL_TAB_MASK);
 >>>>>>> v3.18

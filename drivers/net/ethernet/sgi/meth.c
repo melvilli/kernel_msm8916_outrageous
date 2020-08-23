@@ -11,7 +11,10 @@
 #include <linux/delay.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -216,9 +219,14 @@ static int meth_init_tx_ring(struct meth_private *priv)
 {
 	/* Init TX ring */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->tx_ring = dma_alloc_coherent(NULL, TX_RING_BUFFER_SIZE,
 	                                   &priv->tx_ring_dma,
 					   GFP_ATOMIC | __GFP_ZERO);
+=======
+	priv->tx_ring = dma_zalloc_coherent(NULL, TX_RING_BUFFER_SIZE,
+					    &priv->tx_ring_dma, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	priv->tx_ring = dma_zalloc_coherent(NULL, TX_RING_BUFFER_SIZE,
 					    &priv->tx_ring_dma, GFP_ATOMIC);
@@ -849,7 +857,11 @@ static int meth_probe(struct platform_device *pdev)
 	dev->irq		= MACE_ETHERNET_IRQ;
 	dev->base_addr		= (unsigned long)&mace->eth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, o2meth_eaddr, 6);
+=======
+	memcpy(dev->dev_addr, o2meth_eaddr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(dev->dev_addr, o2meth_eaddr, ETH_ALEN);
 >>>>>>> v3.18
@@ -876,7 +888,10 @@ static int __exit meth_remove(struct platform_device *pdev)
 	unregister_netdev(dev);
 	free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

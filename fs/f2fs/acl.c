@@ -63,7 +63,11 @@ static struct posix_acl *f2fs_acl_from_disk(const char *value, size_t size)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acl = posix_acl_alloc(count, GFP_NOFS);
+=======
+	acl = posix_acl_alloc(count, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	acl = posix_acl_alloc(count, GFP_KERNEL);
 >>>>>>> v3.18
@@ -114,8 +118,12 @@ fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *f2fs_acl_to_disk(struct f2fs_sb_info *sbi,
 				const struct posix_acl *acl, size_t *size)
+=======
+static void *f2fs_acl_to_disk(const struct posix_acl *acl, size_t *size)
+>>>>>>> v3.18
 =======
 static void *f2fs_acl_to_disk(const struct posix_acl *acl, size_t *size)
 >>>>>>> v3.18
@@ -125,9 +133,14 @@ static void *f2fs_acl_to_disk(const struct posix_acl *acl, size_t *size)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f2fs_acl = f2fs_kmalloc(sbi, sizeof(struct f2fs_acl_header) +
 			acl->a_count * sizeof(struct f2fs_acl_entry),
 			GFP_NOFS);
+=======
+	f2fs_acl = kmalloc(sizeof(struct f2fs_acl_header) + acl->a_count *
+			sizeof(struct f2fs_acl_entry), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	f2fs_acl = kmalloc(sizeof(struct f2fs_acl_header) + acl->a_count *
 			sizeof(struct f2fs_acl_entry), GFP_KERNEL);
@@ -178,10 +191,15 @@ fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct posix_acl *__f2fs_get_acl(struct inode *inode, int type,
 						struct page *dpage)
 {
 	struct f2fs_sb_info *sbi = F2FS_SB(inode->i_sb);
+=======
+struct posix_acl *f2fs_get_acl(struct inode *inode, int type)
+{
+>>>>>>> v3.18
 =======
 struct posix_acl *f2fs_get_acl(struct inode *inode, int type)
 {
@@ -191,6 +209,7 @@ struct posix_acl *f2fs_get_acl(struct inode *inode, int type)
 	struct posix_acl *acl;
 	int retval;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!test_opt(sbi, POSIX_ACL))
 		return NULL;
@@ -210,6 +229,8 @@ struct posix_acl *f2fs_get_acl(struct inode *inode, int type)
 		retval = f2fs_getxattr(inode, name_index, "", value,
 							retval, dpage);
 =======
+=======
+>>>>>>> v3.18
 	if (type == ACL_TYPE_ACCESS)
 		name_index = F2FS_XATTR_INDEX_POSIX_ACL_ACCESS;
 
@@ -219,6 +240,9 @@ struct posix_acl *f2fs_get_acl(struct inode *inode, int type)
 		if (!value)
 			return ERR_PTR(-ENOMEM);
 		retval = f2fs_getxattr(inode, name_index, "", value, retval);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -237,6 +261,7 @@ struct posix_acl *f2fs_get_acl(struct inode *inode, int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct posix_acl *f2fs_get_acl(struct inode *inode, int type)
 {
 	return __f2fs_get_acl(inode, type, NULL);
@@ -247,16 +272,22 @@ static int f2fs_set_acl(struct inode *inode, int type,
 {
 	struct f2fs_sb_info *sbi = F2FS_SB(inode->i_sb);
 =======
+=======
+>>>>>>> v3.18
 static int __f2fs_set_acl(struct inode *inode, int type,
 			struct posix_acl *acl, struct page *ipage)
 {
 	struct f2fs_inode_info *fi = F2FS_I(inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int name_index;
 	void *value = NULL;
 	size_t size = 0;
 	int error;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!test_opt(sbi, POSIX_ACL))
 		return 0;
@@ -272,6 +303,8 @@ static int __f2fs_set_acl(struct inode *inode, int type,
 				return error;
 			set_acl_inode(inode, inode->i_mode);
 =======
+=======
+>>>>>>> v3.18
 	switch (type) {
 	case ACL_TYPE_ACCESS:
 		name_index = F2FS_XATTR_INDEX_POSIX_ACL_ACCESS;
@@ -282,6 +315,9 @@ static int __f2fs_set_acl(struct inode *inode, int type,
 			set_acl_inode(fi, inode->i_mode);
 			if (error == 0)
 				acl = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -297,6 +333,7 @@ static int __f2fs_set_acl(struct inode *inode, int type,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f2fs_mark_inode_dirty_sync(inode, true);
 
 	if (acl) {
@@ -305,11 +342,16 @@ static int __f2fs_set_acl(struct inode *inode, int type,
 			clear_inode_flag(inode, FI_ACL_MODE);
 			return PTR_ERR(value);
 =======
+=======
+>>>>>>> v3.18
 	if (acl) {
 		value = f2fs_acl_to_disk(acl, &size);
 		if (IS_ERR(value)) {
 			cond_clear_inode_flag(fi, FI_ACL_MODE);
 			return (int)PTR_ERR(value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -320,6 +362,7 @@ static int __f2fs_set_acl(struct inode *inode, int type,
 	if (!error)
 		set_cached_acl(inode, type, acl);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clear_inode_flag(inode, FI_ACL_MODE);
 	return error;
@@ -480,6 +523,8 @@ const struct xattr_handler f2fs_xattr_acl_access_handler = {
 	.set = f2fs_xattr_set_acl,
 };
 =======
+=======
+>>>>>>> v3.18
 	cond_clear_inode_flag(fi, FI_ACL_MODE);
 	return error;
 }
@@ -512,4 +557,7 @@ int f2fs_init_acl(struct inode *inode, struct inode *dir, struct page *ipage)
 
 	return error;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

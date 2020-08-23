@@ -29,6 +29,7 @@ extern int rio_mport_chk_dev_access(struct rio_mport *mport, u16 destid,
 				    u8 hopcount);
 extern int rio_create_sysfs_dev_files(struct rio_dev *rdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int rio_std_route_add_entry(struct rio_mport *mport, u16 destid,
 				   u8 hopcount, u16 table, u16 route_destid,
 				   u8 route_port);
@@ -76,6 +77,8 @@ extern struct rio_switch_ops __end_rio_switch_ops[];
 	DECLARE_RIO_SWITCH_SECTION(.rio_switch_ops, vid##did, \
 			vid, did, init_hook)
 =======
+=======
+>>>>>>> v3.18
 extern int rio_lock_device(struct rio_mport *port, u16 destid,
 			u8 hopcount, int wait_ms);
 extern int rio_unlock_device(struct rio_mport *port, u16 destid, u8 hopcount);
@@ -99,6 +102,9 @@ extern int rio_mport_scan(int mport_id);
 extern const struct attribute_group *rio_dev_groups[];
 extern const struct attribute_group *rio_bus_groups[];
 extern const struct attribute_group *rio_mport_groups[];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define RIO_GET_DID(size, x)	(size ? (x & 0xffff) : ((x & 0x00ff0000) >> 16))

@@ -196,7 +196,12 @@ static struct net_device * __init nfeth_probe(int unit)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!nf_call(nfEtherID + XIF_GET_MAC, unit, mac, ETH_ALEN))
+=======
+	if (!nf_call(nfEtherID + XIF_GET_MAC, unit, virt_to_phys(mac),
+		     ETH_ALEN))
+>>>>>>> v3.18
 =======
 	if (!nf_call(nfEtherID + XIF_GET_MAC, unit, virt_to_phys(mac),
 		     ETH_ALEN))
@@ -223,9 +228,15 @@ static struct net_device * __init nfeth_probe(int unit)
 
 	nf_call(nfEtherID + XIF_GET_IPHOST, unit,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		host_ip, sizeof(host_ip));
 	nf_call(nfEtherID + XIF_GET_IPATARI, unit,
 		local_ip, sizeof(local_ip));
+=======
+		virt_to_phys(host_ip), sizeof(host_ip));
+	nf_call(nfEtherID + XIF_GET_IPATARI, unit,
+		virt_to_phys(local_ip), sizeof(local_ip));
+>>>>>>> v3.18
 =======
 		virt_to_phys(host_ip), sizeof(host_ip));
 	nf_call(nfEtherID + XIF_GET_IPATARI, unit,

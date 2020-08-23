@@ -26,7 +26,10 @@
 #include <linux/bsg-lib.h>
 #include <linux/idr.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/list.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <net/tcp.h>
@@ -310,24 +313,33 @@ show_##type##_##name(struct device *dev, struct device_attribute *attr,	\
 static ISCSI_IFACE_ATTR(type, name, S_IRUGO, show_##type##_##name, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* generic read only ipvi4 attribute */
 =======
+=======
+>>>>>>> v3.18
 #define iscsi_iface_attr(type, name, param)				\
 	iscsi_iface_attr_show(type, name, ISCSI_IFACE_PARAM, param)	\
 static ISCSI_IFACE_ATTR(type, name, S_IRUGO, show_##type##_##name, NULL);
 
 /* generic read only ipv4 attribute */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 iscsi_iface_net_attr(ipv4_iface, ipaddress, ISCSI_NET_PARAM_IPV4_ADDR);
 iscsi_iface_net_attr(ipv4_iface, gateway, ISCSI_NET_PARAM_IPV4_GW);
 iscsi_iface_net_attr(ipv4_iface, subnet, ISCSI_NET_PARAM_IPV4_SUBNET);
 iscsi_iface_net_attr(ipv4_iface, bootproto, ISCSI_NET_PARAM_IPV4_BOOTPROTO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* generic read only ipv6 attribute */
 iscsi_iface_net_attr(ipv6_iface, ipaddress, ISCSI_NET_PARAM_IPV6_ADDR);
 iscsi_iface_net_attr(ipv6_iface, link_local_addr, ISCSI_NET_PARAM_IPV6_LINKLOCAL);
 =======
+=======
+>>>>>>> v3.18
 iscsi_iface_net_attr(ipv4_iface, dhcp_dns_address_en,
 		     ISCSI_NET_PARAM_IPV4_DHCP_DNS_ADDR_EN);
 iscsi_iface_net_attr(ipv4_iface, dhcp_slp_da_info_en,
@@ -358,6 +370,9 @@ iscsi_iface_net_attr(ipv4_iface, ttl, ISCSI_NET_PARAM_IPV4_TTL);
 iscsi_iface_net_attr(ipv6_iface, ipaddress, ISCSI_NET_PARAM_IPV6_ADDR);
 iscsi_iface_net_attr(ipv6_iface, link_local_addr,
 		     ISCSI_NET_PARAM_IPV6_LINKLOCAL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 iscsi_iface_net_attr(ipv6_iface, router_addr, ISCSI_NET_PARAM_IPV6_ROUTER);
 iscsi_iface_net_attr(ipv6_iface, ipaddr_autocfg,
@@ -365,7 +380,10 @@ iscsi_iface_net_attr(ipv6_iface, ipaddr_autocfg,
 iscsi_iface_net_attr(ipv6_iface, link_local_autocfg,
 		     ISCSI_NET_PARAM_IPV6_LINKLOCAL_AUTOCFG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 iscsi_iface_net_attr(ipv6_iface, link_local_state,
 		     ISCSI_NET_PARAM_IPV6_LINKLOCAL_STATE);
 iscsi_iface_net_attr(ipv6_iface, router_state,
@@ -387,6 +405,9 @@ iscsi_iface_net_attr(ipv6_iface, dup_addr_detect_cnt,
 		     ISCSI_NET_PARAM_IPV6_DUP_ADDR_DETECT_CNT);
 iscsi_iface_net_attr(ipv6_iface, router_adv_link_mtu,
 		     ISCSI_NET_PARAM_IPV6_RTR_ADV_LINK_MTU);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* common read only iface attribute */
@@ -397,7 +418,10 @@ iscsi_iface_net_attr(iface, vlan_enabled, ISCSI_NET_PARAM_VLAN_ENABLED);
 iscsi_iface_net_attr(iface, mtu, ISCSI_NET_PARAM_MTU);
 iscsi_iface_net_attr(iface, port, ISCSI_NET_PARAM_PORT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 iscsi_iface_net_attr(iface, ipaddress_state, ISCSI_NET_PARAM_IPADDR_STATE);
 iscsi_iface_net_attr(iface, delayed_ack_en, ISCSI_NET_PARAM_DELAYED_ACK_EN);
 iscsi_iface_net_attr(iface, tcp_nagle_disable,
@@ -432,6 +456,9 @@ iscsi_iface_attr(iface, discovery_logout,
 iscsi_iface_attr(iface, strict_login_comp_en,
 		 ISCSI_IFACE_PARAM_STRICT_LOGIN_COMP_EN);
 iscsi_iface_attr(iface, initiator_name, ISCSI_IFACE_PARAM_INITIATOR_NAME);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static umode_t iscsi_iface_attr_is_visible(struct kobject *kobj,
@@ -442,6 +469,10 @@ static umode_t iscsi_iface_attr_is_visible(struct kobject *kobj,
 	struct iscsi_transport *t = iface->transport;
 	int param;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int param_type;
+>>>>>>> v3.18
 =======
 	int param_type;
 >>>>>>> v3.18
@@ -459,7 +490,10 @@ static umode_t iscsi_iface_attr_is_visible(struct kobject *kobj,
 	else if (attr == &dev_attr_iface_port.attr)
 		param = ISCSI_NET_PARAM_PORT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	else if (attr == &dev_attr_iface_ipaddress_state.attr)
 		param = ISCSI_NET_PARAM_IPADDR_STATE;
 	else if (attr == &dev_attr_iface_delayed_ack_en.attr)
@@ -514,6 +548,9 @@ static umode_t iscsi_iface_attr_is_visible(struct kobject *kobj,
 		param = ISCSI_IFACE_PARAM_STRICT_LOGIN_COMP_EN;
 	else if (attr == &dev_attr_iface_initiator_name.attr)
 		param = ISCSI_IFACE_PARAM_INITIATOR_NAME;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else if (iface->iface_type == ISCSI_IFACE_TYPE_IPV4) {
 		if (attr == &dev_attr_ipv4_iface_ipaddress.attr)
@@ -525,7 +562,10 @@ static umode_t iscsi_iface_attr_is_visible(struct kobject *kobj,
 		else if (attr == &dev_attr_ipv4_iface_bootproto.attr)
 			param = ISCSI_NET_PARAM_IPV4_BOOTPROTO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		else if (attr ==
 			 &dev_attr_ipv4_iface_dhcp_dns_address_en.attr)
 			param = ISCSI_NET_PARAM_IPV4_DHCP_DNS_ADDR_EN;
@@ -562,6 +602,9 @@ static umode_t iscsi_iface_attr_is_visible(struct kobject *kobj,
 			param = ISCSI_NET_PARAM_IPV4_IN_FORWARD_EN;
 		else if (attr == &dev_attr_ipv4_iface_ttl.attr)
 			param = ISCSI_NET_PARAM_IPV4_TTL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else
 			return 0;
@@ -577,7 +620,10 @@ static umode_t iscsi_iface_attr_is_visible(struct kobject *kobj,
 		else if (attr == &dev_attr_ipv6_iface_link_local_autocfg.attr)
 			param = ISCSI_NET_PARAM_IPV6_LINKLOCAL_AUTOCFG;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		else if (attr == &dev_attr_ipv6_iface_link_local_state.attr)
 			param = ISCSI_NET_PARAM_IPV6_LINKLOCAL_STATE;
 		else if (attr == &dev_attr_ipv6_iface_router_state.attr)
@@ -603,6 +649,9 @@ static umode_t iscsi_iface_attr_is_visible(struct kobject *kobj,
 			param = ISCSI_NET_PARAM_IPV6_DUP_ADDR_DETECT_CNT;
 		else if (attr == &dev_attr_ipv6_iface_router_adv_link_mtu.attr)
 			param = ISCSI_NET_PARAM_IPV6_RTR_ADV_LINK_MTU;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else
 			return 0;
@@ -612,8 +661,11 @@ static umode_t iscsi_iface_attr_is_visible(struct kobject *kobj,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return t->attr_is_visible(ISCSI_NET_PARAM, param);
 =======
+=======
+>>>>>>> v3.18
 	switch (param) {
 	case ISCSI_IFACE_PARAM_DEF_TASKMGMT_TMO:
 	case ISCSI_IFACE_PARAM_HDRDGST_EN:
@@ -640,6 +692,9 @@ static umode_t iscsi_iface_attr_is_visible(struct kobject *kobj,
 	}
 
 	return t->attr_is_visible(param_type, param);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -660,7 +715,10 @@ static struct attribute *iscsi_iface_attrs[] = {
 	&dev_attr_iface_mtu.attr,
 	&dev_attr_iface_port.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	&dev_attr_iface_ipaddress_state.attr,
 	&dev_attr_iface_delayed_ack_en.attr,
 	&dev_attr_iface_tcp_nagle_disable.attr,
@@ -714,6 +772,9 @@ static struct attribute *iscsi_iface_attrs[] = {
 	&dev_attr_ipv6_iface_nd_stale_tmo.attr,
 	&dev_attr_ipv6_iface_dup_addr_detect_cnt.attr,
 	&dev_attr_ipv6_iface_router_adv_link_mtu.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NULL,
 };
@@ -724,7 +785,10 @@ static struct attribute_group iscsi_iface_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* convert iscsi_ipaddress_state values to ascii string name */
 static const struct {
 	enum iscsi_ipaddress_state	value;
@@ -780,6 +844,9 @@ char *iscsi_get_router_state_name(enum iscsi_router_state router_state)
 }
 EXPORT_SYMBOL_GPL(iscsi_get_router_state_name);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct iscsi_iface *
 iscsi_create_iface(struct Scsi_Host *shost, struct iscsi_transport *transport,
@@ -1269,7 +1336,11 @@ struct bus_type iscsi_flashnode_bus = {
  *
  * Returns:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  pointer to allocated flashnode sess on sucess
+=======
+ *  pointer to allocated flashnode sess on success
+>>>>>>> v3.18
 =======
  *  pointer to allocated flashnode sess on success
 >>>>>>> v3.18
@@ -1471,7 +1542,11 @@ static int iscsi_iter_destroy_flashnode_conn_fn(struct device *dev, void *data)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * iscsi_destroy_flashnode_sess - destory flashnode session entry
+=======
+ * iscsi_destroy_flashnode_sess - destroy flashnode session entry
+>>>>>>> v3.18
 =======
  * iscsi_destroy_flashnode_sess - destroy flashnode session entry
 >>>>>>> v3.18
@@ -1505,7 +1580,11 @@ static int iscsi_iter_destroy_flashnode_fn(struct device *dev, void *data)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * iscsi_destroy_all_flashnode - destory all flashnode session entries
+=======
+ * iscsi_destroy_all_flashnode - destroy all flashnode session entries
+>>>>>>> v3.18
 =======
  * iscsi_destroy_all_flashnode - destroy all flashnode session entries
 >>>>>>> v3.18
@@ -1836,7 +1915,11 @@ struct iscsi_scan_data {
 	unsigned int channel;
 	unsigned int id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int lun;
+=======
+	u64 lun;
+>>>>>>> v3.18
 =======
 	u64 lun;
 >>>>>>> v3.18
@@ -1887,7 +1970,11 @@ user_scan_exit:
 
 static int iscsi_user_scan(struct Scsi_Host *shost, uint channel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   uint id, uint lun)
+=======
+			   uint id, u64 lun)
+>>>>>>> v3.18
 =======
 			   uint id, u64 lun)
 >>>>>>> v3.18
@@ -3123,7 +3210,11 @@ iscsi_get_chap(struct iscsi_transport *transport, struct nlmsghdr *nlh)
 		evchap->u.get_chap.chap_tbl_idx = ev->u.get_chap.chap_tbl_idx;
 		evchap->u.get_chap.num_entries = ev->u.get_chap.num_entries;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buf = (char *) ((char *)evchap + sizeof(*evchap));
+=======
+		buf = (char *)evchap + sizeof(*evchap);
+>>>>>>> v3.18
 =======
 		buf = (char *)evchap + sizeof(*evchap);
 >>>>>>> v3.18
@@ -3146,7 +3237,10 @@ exit_get_chap:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int iscsi_set_chap(struct iscsi_transport *transport,
 			  struct iscsi_uevent *ev, uint32_t len)
 {
@@ -3169,6 +3263,9 @@ static int iscsi_set_chap(struct iscsi_transport *transport,
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int iscsi_delete_chap(struct iscsi_transport *transport,
 			     struct iscsi_uevent *ev)
@@ -3487,7 +3584,10 @@ exit_logout_sid:
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 iscsi_get_host_stats(struct iscsi_transport *transport, struct nlmsghdr *nlh)
 {
 	struct iscsi_uevent *ev = nlmsg_data(nlh);
@@ -3559,6 +3659,9 @@ exit_host_stats:
 
 
 static int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 iscsi_if_recv_msg(struct sk_buff *skb, struct nlmsghdr *nlh, uint32_t *group)
 {
@@ -3735,7 +3838,10 @@ iscsi_if_recv_msg(struct sk_buff *skb, struct nlmsghdr *nlh, uint32_t *group)
 		err = iscsi_logout_flashnode_sid(transport, ev);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case ISCSI_UEVENT_SET_CHAP:
 		err = iscsi_set_chap(transport, ev,
 				     nlmsg_attrlen(nlh, sizeof(*ev)));
@@ -3743,6 +3849,9 @@ iscsi_if_recv_msg(struct sk_buff *skb, struct nlmsghdr *nlh, uint32_t *group)
 	case ISCSI_UEVENT_GET_HOST_STATS:
 		err = iscsi_get_host_stats(transport, nlh);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		err = -ENOSYS;
@@ -3837,7 +3946,10 @@ iscsi_conn_attr(persistent_address, ISCSI_PARAM_PERSISTENT_ADDRESS);
 iscsi_conn_attr(ping_tmo, ISCSI_PARAM_PING_TMO);
 iscsi_conn_attr(recv_tmo, ISCSI_PARAM_RECV_TMO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 iscsi_conn_attr(local_port, ISCSI_PARAM_LOCAL_PORT);
 iscsi_conn_attr(statsn, ISCSI_PARAM_STATSN);
 iscsi_conn_attr(keepalive_tmo, ISCSI_PARAM_KEEPALIVE_TMO);
@@ -3856,6 +3968,9 @@ iscsi_conn_attr(tcp_xmit_wsf, ISCSI_PARAM_TCP_XMIT_WSF);
 iscsi_conn_attr(tcp_recv_wsf, ISCSI_PARAM_TCP_RECV_WSF);
 iscsi_conn_attr(local_ipaddr, ISCSI_PARAM_LOCAL_IPADDR);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define iscsi_conn_ep_attr_show(param)					\
@@ -3910,7 +4025,10 @@ static struct attribute *iscsi_conn_attrs[] = {
 	&dev_attr_conn_ping_tmo.attr,
 	&dev_attr_conn_recv_tmo.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	&dev_attr_conn_local_port.attr,
 	&dev_attr_conn_statsn.attr,
 	&dev_attr_conn_keepalive_tmo.attr,
@@ -3928,6 +4046,9 @@ static struct attribute *iscsi_conn_attrs[] = {
 	&dev_attr_conn_tcp_xmit_wsf.attr,
 	&dev_attr_conn_tcp_recv_wsf.attr,
 	&dev_attr_conn_local_ipaddr.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NULL,
 };
@@ -3967,7 +4088,10 @@ static umode_t iscsi_conn_attr_is_visible(struct kobject *kobj,
 	else if (attr == &dev_attr_conn_recv_tmo.attr)
 		param = ISCSI_PARAM_RECV_TMO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	else if (attr == &dev_attr_conn_local_port.attr)
 		param = ISCSI_PARAM_LOCAL_PORT;
 	else if (attr == &dev_attr_conn_statsn.attr)
@@ -4002,6 +4126,9 @@ static umode_t iscsi_conn_attr_is_visible(struct kobject *kobj,
 		param = ISCSI_PARAM_TCP_RECV_WSF;
 	else if (attr == &dev_attr_conn_local_ipaddr.attr)
 		param = ISCSI_PARAM_LOCAL_IPADDR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else {
 		WARN_ONCE(1, "Invalid conn attr");
@@ -4061,7 +4188,10 @@ iscsi_session_attr(ifacename, ISCSI_PARAM_IFACE_NAME, 0);
 iscsi_session_attr(initiatorname, ISCSI_PARAM_INITIATOR_NAME, 0);
 iscsi_session_attr(targetalias, ISCSI_PARAM_TARGET_ALIAS, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 iscsi_session_attr(boot_root, ISCSI_PARAM_BOOT_ROOT, 0);
 iscsi_session_attr(boot_nic, ISCSI_PARAM_BOOT_NIC, 0);
 iscsi_session_attr(boot_target, ISCSI_PARAM_BOOT_TARGET, 0);
@@ -4080,6 +4210,9 @@ iscsi_session_attr(tsid, ISCSI_PARAM_TSID, 0);
 iscsi_session_attr(def_taskmgmt_tmo, ISCSI_PARAM_DEF_TASKMGMT_TMO, 0);
 iscsi_session_attr(discovery_parent_idx, ISCSI_PARAM_DISCOVERY_PARENT_IDX, 0);
 iscsi_session_attr(discovery_parent_type, ISCSI_PARAM_DISCOVERY_PARENT_TYPE, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t
@@ -4177,6 +4310,12 @@ static struct attribute *iscsi_session_attrs[] = {
 	&dev_attr_sess_initiatorname.attr,
 	&dev_attr_sess_targetalias.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&dev_attr_sess_boot_root.attr,
+	&dev_attr_sess_boot_nic.attr,
+	&dev_attr_sess_boot_target.attr,
+>>>>>>> v3.18
 =======
 	&dev_attr_sess_boot_root.attr,
 	&dev_attr_sess_boot_nic.attr,
@@ -4189,7 +4328,10 @@ static struct attribute *iscsi_session_attrs[] = {
 	&dev_attr_sess_chap_in_idx.attr,
 	&dev_attr_priv_sess_target_id.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	&dev_attr_sess_auto_snd_tgt_disable.attr,
 	&dev_attr_sess_discovery_session.attr,
 	&dev_attr_sess_portal_type.attr,
@@ -4204,6 +4346,9 @@ static struct attribute *iscsi_session_attrs[] = {
 	&dev_attr_sess_def_taskmgmt_tmo.attr,
 	&dev_attr_sess_discovery_parent_idx.attr,
 	&dev_attr_sess_discovery_parent_type.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NULL,
 };
@@ -4263,7 +4408,10 @@ static umode_t iscsi_session_attr_is_visible(struct kobject *kobj,
 	else if (attr == &dev_attr_sess_targetalias.attr)
 		param = ISCSI_PARAM_TARGET_ALIAS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	else if (attr == &dev_attr_sess_boot_root.attr)
 		param = ISCSI_PARAM_BOOT_ROOT;
 	else if (attr == &dev_attr_sess_boot_nic.attr)
@@ -4298,6 +4446,9 @@ static umode_t iscsi_session_attr_is_visible(struct kobject *kobj,
 		param = ISCSI_PARAM_DISCOVERY_PARENT_IDX;
 	else if (attr == &dev_attr_sess_discovery_parent_type.attr)
 		param = ISCSI_PARAM_DISCOVERY_PARENT_TYPE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else if (attr == &dev_attr_priv_sess_recovery_tmo.attr)
 		return S_IRUGO | S_IWUSR;

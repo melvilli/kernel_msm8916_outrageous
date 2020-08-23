@@ -30,6 +30,10 @@
 #include <linux/platform_data/clk-realview.h>
 #include <linux/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+>>>>>>> v3.18
 =======
 #include <linux/memblock.h>
 >>>>>>> v3.18
@@ -330,8 +334,12 @@ static void __init realview_pbx_timer_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void realview_pbx_fixup(struct tag *tags, char **from,
 			       struct meminfo *meminfo)
+=======
+static void realview_pbx_fixup(struct tag *tags, char **from)
+>>>>>>> v3.18
 =======
 static void realview_pbx_fixup(struct tag *tags, char **from)
 >>>>>>> v3.18
@@ -341,6 +349,7 @@ static void realview_pbx_fixup(struct tag *tags, char **from)
 	 * Memory configuration with SPARSEMEM enabled on RealView PBX (see
 	 * asm/mach/memory.h for more information).
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	meminfo->bank[0].start = 0;
 	meminfo->bank[0].size = SZ_256M;
@@ -352,12 +361,17 @@ static void realview_pbx_fixup(struct tag *tags, char **from)
 #else
 	realview_fixup(tags, from, meminfo);
 =======
+=======
+>>>>>>> v3.18
 
 	memblock_add(0, SZ_256M);
 	memblock_add(0x20000000, SZ_512M);
 	memblock_add(0x80000000, SZ_256M);
 #else
 	realview_fixup(tags, from);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 }
@@ -388,8 +402,13 @@ static void __init realview_pbx_init(void)
 
 		/* set RAM latencies to 1 cycle for eASIC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		writel(0, l2x0_base + L2X0_TAG_LATENCY_CTRL);
 		writel(0, l2x0_base + L2X0_DATA_LATENCY_CTRL);
+=======
+		writel(0, l2x0_base + L310_TAG_LATENCY_CTRL);
+		writel(0, l2x0_base + L310_DATA_LATENCY_CTRL);
+>>>>>>> v3.18
 =======
 		writel(0, l2x0_base + L310_TAG_LATENCY_CTRL);
 		writel(0, l2x0_base + L310_DATA_LATENCY_CTRL);
@@ -408,6 +427,10 @@ static void __init realview_pbx_init(void)
 	platform_device_register(&realview_i2c_device);
 	platform_device_register(&realview_cf_device);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	platform_device_register(&realview_leds_device);
+>>>>>>> v3.18
 =======
 	platform_device_register(&realview_leds_device);
 >>>>>>> v3.18

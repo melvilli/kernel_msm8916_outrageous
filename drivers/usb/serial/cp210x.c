@@ -57,7 +57,10 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x08e6, 0x5501) }, /* Gemalto Prox-PU/CU contactless smartcard reader */
 	{ USB_DEVICE(0x08FD, 0x000A) }, /* Digianswer A/S , ZigBee/802.15.4 MAC Device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x0908, 0x01FF) }, /* Siemens RUGGEDCOM USB Serial Console */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x0BED, 0x1100) }, /* MEI (TM) Cashflow-SC Bill/Voucher Acceptor */
@@ -102,7 +105,10 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x10C4, 0x81AD) }, /* INSYS USB Modem */
 	{ USB_DEVICE(0x10C4, 0x81C8) }, /* Lipowsky Industrie Elektronik GmbH, Baby-JTAG */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x10C4, 0x81D7) }, /* IAI Corp. RCB-CV-USB USB to RS485 Adaptor */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x10C4, 0x81E2) }, /* Lipowsky Industrie Elektronik GmbH, Baby-LIN */
@@ -115,7 +121,10 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x10C4, 0x8281) }, /* Nanotec Plug & Drive */
 	{ USB_DEVICE(0x10C4, 0x8293) }, /* Telegesis ETRX2USB */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x10C4, 0x82F4) }, /* Starizona MicroTouch */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x10C4, 0x82F9) }, /* Procyon AVS */
@@ -128,7 +137,10 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x10C4, 0x846E) }, /* BEI USB Sensor Interface (VCP) */
 	{ USB_DEVICE(0x10C4, 0x8477) }, /* Balluff RFID */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x10C4, 0x84B6) }, /* Starizona Hyperion */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x10C4, 0x85EA) }, /* AC-Services IBUS-IF */
@@ -136,6 +148,7 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x10C4, 0x85F8) }, /* Virtenio Preon32 */
 	{ USB_DEVICE(0x10C4, 0x8664) }, /* AC-Services CAN-IF */
 	{ USB_DEVICE(0x10C4, 0x8665) }, /* AC-Services OBD-IF */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ USB_DEVICE(0x10C4, 0x8856) },	/* CEL EM357 ZigBee USB Stick - LR */
 	{ USB_DEVICE(0x10C4, 0x8857) },	/* CEL EM357 ZigBee USB Stick */
@@ -149,6 +162,8 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x10C4, 0xEA61) }, /* Silicon Labs factory default */
 	{ USB_DEVICE(0x10C4, 0xEA70) }, /* Silicon Labs factory default */
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x10C4, 0x8875) }, /* CEL MeshConnect USB Stick */
 	{ USB_DEVICE(0x10C4, 0x88A4) }, /* MMB Networks ZigBee USB Device */
 	{ USB_DEVICE(0x10C4, 0x88A5) }, /* Planet Innovation Ingeni ZigBee USB Device */
@@ -157,6 +172,9 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x10C4, 0xEA61) }, /* Silicon Labs factory default */
 	{ USB_DEVICE(0x10C4, 0xEA70) }, /* Silicon Labs factory default */
 	{ USB_DEVICE(0x10C4, 0xEA80) }, /* Silicon Labs factory default */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x10C4, 0xEA71) }, /* Infinity GPS-MIC-1 Radio Monophone */
 	{ USB_DEVICE(0x10C4, 0xF001) }, /* Elan Digital Systems USBscope50 */
@@ -166,8 +184,11 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x10C5, 0xEA61) }, /* Silicon Labs MobiData GPRS USB Modem */
 	{ USB_DEVICE(0x10CE, 0xEA6A) }, /* Silicon Labs MobiData GPRS USB Modem 100EU */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x12B8, 0xEC60) }, /* Link G4 ECU */
 	{ USB_DEVICE(0x12B8, 0xEC62) }, /* Link G4+ ECU */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x13AD, 0x9999) }, /* Baltech card reader */
@@ -180,8 +201,11 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x166A, 0x0401) }, /* Clipsal L51xx C-Bus Architectural Dimmer */
 	{ USB_DEVICE(0x166A, 0x0101) }, /* Clipsal 5560884 C-Bus Multi-room Audio Matrix Switcher */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x16C0, 0x09B0) }, /* Lunatico Seletek */
 	{ USB_DEVICE(0x16C0, 0x09B1) }, /* Lunatico Seletek */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x16D6, 0x0001) }, /* Jablotron serial interface */
@@ -195,11 +219,14 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x1843, 0x0200) }, /* Vaisala USB Instrument Cable */
 	{ USB_DEVICE(0x18EF, 0xE00F) }, /* ELV USB-I2C-Interface */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x18EF, 0xE025) }, /* ELV Marble Sound Board 1 */
 	{ USB_DEVICE(0x1901, 0x0190) }, /* GE B850 CP2105 Recorder interface */
 	{ USB_DEVICE(0x1901, 0x0193) }, /* GE B650 CP2104 PMC interface */
 	{ USB_DEVICE(0x1901, 0x0194) },	/* GE Healthcare Remote Alarm Box */
 	{ USB_DEVICE(0x19CF, 0x3000) }, /* Parrot NMEA GPS Flight Recorder */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x1ADB, 0x0001) }, /* Schweitzer Engineering C662 Cable */
@@ -229,7 +256,10 @@ static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x1FB9, 0x0700) }, /* Lake Shore Model 737 VSM Controller */
 	{ USB_DEVICE(0x1FB9, 0x0701) }, /* Lake Shore Model 776 Hall Matrix */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x2626, 0xEA60) }, /* Aruba Networks 7xxx USB Serial Console */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x3195, 0xF190) }, /* Link Instruments MSO-19 */
@@ -364,10 +394,15 @@ static int cp210x_get_config(struct usb_serial_port *port, u8 request,
 
 	buf = kcalloc(length, sizeof(__le32), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!buf) {
 		dev_err(&port->dev, "%s - out of memory.\n", __func__);
 		return -ENOMEM;
 	}
+=======
+	if (!buf)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!buf)
 		return -ENOMEM;
@@ -416,10 +451,15 @@ static int cp210x_set_config(struct usb_serial_port *port, u8 request,
 
 	buf = kmalloc(length * sizeof(__le32), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!buf) {
 		dev_err(&port->dev, "%s - out of memory.\n", __func__);
 		return -ENOMEM;
 	}
+=======
+	if (!buf)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!buf)
 		return -ENOMEM;
@@ -739,11 +779,14 @@ static void cp210x_set_termios(struct tty_struct *tty,
 	unsigned int modem_ctl[4];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(dev, "%s - port %d\n", __func__, port->number);
 
 	if (!tty)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cflag = tty->termios.c_cflag;
@@ -842,7 +885,11 @@ static void cp210x_set_termios(struct tty_struct *tty,
 			modem_ctl[0] &= ~0x7B;
 			modem_ctl[0] |= 0x01;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			modem_ctl[1] = 0x40;
+=======
+			modem_ctl[1] |= 0x40;
+>>>>>>> v3.18
 =======
 			modem_ctl[1] |= 0x40;
 >>>>>>> v3.18
@@ -906,9 +953,13 @@ static int cp210x_tiocmget(struct tty_struct *tty)
 	int result;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = cp210x_get_config(port, CP210X_GET_MDMSTS, &control, 1);
 	if (result)
 		return result;
+=======
+	cp210x_get_config(port, CP210X_GET_MDMSTS, &control, 1);
+>>>>>>> v3.18
 =======
 	cp210x_get_config(port, CP210X_GET_MDMSTS, &control, 1);
 >>>>>>> v3.18
@@ -945,9 +996,12 @@ static int cp210x_startup(struct usb_serial *serial)
 	struct cp210x_serial_private *spriv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* cp210x buffers behave strangely unless device is reset */
 	usb_reset_device(serial->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spriv = kzalloc(sizeof(*spriv), GFP_KERNEL);

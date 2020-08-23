@@ -52,9 +52,15 @@ done:
  * hfs_readdir
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode *inode = file_inode(filp);
+=======
+static int hfs_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 =======
 static int hfs_readdir(struct file *file, struct dir_context *ctx)
 {
@@ -69,7 +75,11 @@ static int hfs_readdir(struct file *file, struct dir_context *ctx)
 	u16 type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (filp->f_pos >= inode->i_size)
+=======
+	if (ctx->pos >= inode->i_size)
+>>>>>>> v3.18
 =======
 	if (ctx->pos >= inode->i_size)
 >>>>>>> v3.18
@@ -84,6 +94,7 @@ static int hfs_readdir(struct file *file, struct dir_context *ctx)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch ((u32)filp->f_pos) {
 	case 0:
 		/* This is completely artificial... */
@@ -93,6 +104,8 @@ static int hfs_readdir(struct file *file, struct dir_context *ctx)
 		/* fall through */
 	case 1:
 =======
+=======
+>>>>>>> v3.18
 	if (ctx->pos == 0) {
 		/* This is completely artificial... */
 		if (!dir_emit_dot(file, ctx))
@@ -100,6 +113,9 @@ static int hfs_readdir(struct file *file, struct dir_context *ctx)
 		ctx->pos = 1;
 	}
 	if (ctx->pos == 1) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (fd.entrylength > sizeof(entry) || fd.entrylength < 0) {
 			err = -EIO;
@@ -118,6 +134,7 @@ static int hfs_readdir(struct file *file, struct dir_context *ctx)
 		//	goto out;
 		//}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (filldir(dirent, "..", 2, 1,
 			    be32_to_cpu(entry.thread.ParID), DT_DIR))
 			goto out;
@@ -131,6 +148,8 @@ static int hfs_readdir(struct file *file, struct dir_context *ctx)
 			goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 		if (!dir_emit(ctx, "..", 2,
 			    be32_to_cpu(entry.thread.ParID), DT_DIR))
 			goto out;
@@ -141,6 +160,9 @@ static int hfs_readdir(struct file *file, struct dir_context *ctx)
 	err = hfs_brec_goto(&fd, ctx->pos - 1);
 	if (err)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (;;) {
@@ -165,7 +187,11 @@ static int hfs_readdir(struct file *file, struct dir_context *ctx)
 				goto out;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (filldir(dirent, strbuf, len, filp->f_pos,
+=======
+			if (!dir_emit(ctx, strbuf, len,
+>>>>>>> v3.18
 =======
 			if (!dir_emit(ctx, strbuf, len,
 >>>>>>> v3.18
@@ -178,7 +204,11 @@ static int hfs_readdir(struct file *file, struct dir_context *ctx)
 				goto out;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (filldir(dirent, strbuf, len, filp->f_pos,
+=======
+			if (!dir_emit(ctx, strbuf, len,
+>>>>>>> v3.18
 =======
 			if (!dir_emit(ctx, strbuf, len,
 >>>>>>> v3.18
@@ -190,8 +220,13 @@ static int hfs_readdir(struct file *file, struct dir_context *ctx)
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		filp->f_pos++;
 		if (filp->f_pos >= inode->i_size)
+=======
+		ctx->pos++;
+		if (ctx->pos >= inode->i_size)
+>>>>>>> v3.18
 =======
 		ctx->pos++;
 		if (ctx->pos >= inode->i_size)
@@ -202,7 +237,11 @@ static int hfs_readdir(struct file *file, struct dir_context *ctx)
 			goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rd = filp->private_data;
+=======
+	rd = file->private_data;
+>>>>>>> v3.18
 =======
 	rd = file->private_data;
 >>>>>>> v3.18
@@ -213,8 +252,13 @@ static int hfs_readdir(struct file *file, struct dir_context *ctx)
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		filp->private_data = rd;
 		rd->file = filp;
+=======
+		file->private_data = rd;
+		rd->file = file;
+>>>>>>> v3.18
 =======
 		file->private_data = rd;
 		rd->file = file;
@@ -362,7 +406,11 @@ static int hfs_rename(struct inode *old_dir, struct dentry *old_dentry,
 const struct file_operations hfs_dir_operations = {
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= hfs_readdir,
+=======
+	.iterate	= hfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= hfs_readdir,
 >>>>>>> v3.18

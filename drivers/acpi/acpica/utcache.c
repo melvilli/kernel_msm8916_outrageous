@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -70,7 +74,11 @@ acpi_status
 acpi_os_create_cache(char *cache_name,
 		     u16 object_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     u16 max_depth, struct acpi_memory_list ** return_cache)
+=======
+		     u16 max_depth, struct acpi_memory_list **return_cache)
+>>>>>>> v3.18
 =======
 		     u16 max_depth, struct acpi_memory_list **return_cache)
 >>>>>>> v3.18
@@ -257,7 +265,11 @@ void *acpi_os_acquire_object(struct acpi_memory_list *cache)
 
 	if (!cache) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (NULL);
+=======
+		return_PTR(NULL);
+>>>>>>> v3.18
 =======
 		return_PTR(NULL);
 >>>>>>> v3.18
@@ -266,7 +278,11 @@ void *acpi_os_acquire_object(struct acpi_memory_list *cache)
 	status = acpi_ut_acquire_mutex(ACPI_MTX_CACHES);
 	if (ACPI_FAILURE(status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (NULL);
+=======
+		return_PTR(NULL);
+>>>>>>> v3.18
 =======
 		return_PTR(NULL);
 >>>>>>> v3.18
@@ -293,7 +309,11 @@ void *acpi_os_acquire_object(struct acpi_memory_list *cache)
 		status = acpi_ut_release_mutex(ACPI_MTX_CACHES);
 		if (ACPI_FAILURE(status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return (NULL);
+=======
+			return_PTR(NULL);
+>>>>>>> v3.18
 =======
 			return_PTR(NULL);
 >>>>>>> v3.18
@@ -320,7 +340,11 @@ void *acpi_os_acquire_object(struct acpi_memory_list *cache)
 		status = acpi_ut_release_mutex(ACPI_MTX_CACHES);
 		if (ACPI_FAILURE(status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return (NULL);
+=======
+			return_PTR(NULL);
+>>>>>>> v3.18
 =======
 			return_PTR(NULL);
 >>>>>>> v3.18
@@ -329,17 +353,23 @@ void *acpi_os_acquire_object(struct acpi_memory_list *cache)
 		object = ACPI_ALLOCATE_ZEROED(cache->object_size);
 		if (!object) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return (NULL);
 		}
 	}
 
 	return (object);
 =======
+=======
+>>>>>>> v3.18
 			return_PTR(NULL);
 		}
 	}
 
 	return_PTR(object);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif				/* ACPI_USE_LOCAL_CACHE */

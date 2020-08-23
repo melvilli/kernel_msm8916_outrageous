@@ -39,7 +39,11 @@ extern int *_fw_envp;
 extern void fw_init_cmdline(void);
 extern char *fw_getcmdline(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern fw_memblock_t *fw_getmdesc(void);
+=======
+extern fw_memblock_t *fw_getmdesc(int);
+>>>>>>> v3.18
 =======
 extern fw_memblock_t *fw_getmdesc(int);
 >>>>>>> v3.18

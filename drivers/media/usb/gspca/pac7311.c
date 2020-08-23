@@ -327,7 +327,11 @@ static void setexposure(struct gspca_dev *gspca_dev, s32 val)
 	 */
 	reg_w(gspca_dev, 0xff, 0x01);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gspca_dev->width != 640 && val <= 3)
+=======
+	if (gspca_dev->pixfmt.width != 640 && val <= 3)
+>>>>>>> v3.18
 =======
 	if (gspca_dev->pixfmt.width != 640 && val <= 3)
 >>>>>>> v3.18
@@ -342,7 +346,11 @@ static void setexposure(struct gspca_dev *gspca_dev, s32 val)
 	 * bandwidth.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gspca_dev->width == 640 && val == 2)
+=======
+	if (gspca_dev->pixfmt.width == 640 && val == 2)
+>>>>>>> v3.18
 =======
 	if (gspca_dev->pixfmt.width == 640 && val == 2)
 >>>>>>> v3.18
@@ -624,7 +632,11 @@ static void sd_pkt_scan(struct gspca_dev *gspca_dev,
 		/* Start the new frame with the jpeg header */
 		pac_start_frame(gspca_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gspca_dev->height, gspca_dev->width);
+=======
+			gspca_dev->pixfmt.height, gspca_dev->pixfmt.width);
+>>>>>>> v3.18
 =======
 			gspca_dev->pixfmt.height, gspca_dev->pixfmt.width);
 >>>>>>> v3.18

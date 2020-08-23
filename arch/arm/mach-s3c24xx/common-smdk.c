@@ -38,8 +38,13 @@
 
 #include <mach/regs-gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/leds-s3c24xx.h>
 
+=======
+#include <mach/gpio-samsung.h>
+#include <linux/platform_data/leds-s3c24xx.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 #include <linux/platform_data/leds-s3c24xx.h>

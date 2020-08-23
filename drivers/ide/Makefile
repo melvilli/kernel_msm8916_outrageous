@@ -79,8 +79,11 @@ obj-$(CONFIG_BLK_DEV_CMD640)		+= cmd640.o
 obj-$(CONFIG_BLK_DEV_IDE_PMAC)		+= pmac.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_IDE_H8300)			+= ide-h8300.o
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_IDE_GENERIC)		+= ide-generic.o

@@ -53,7 +53,11 @@ struct sk_buff *ieee802154_nl_create(int flags, u8 req)
 	spin_lock_irqsave(&ieee802154_seq_lock, f);
 	hdr = genlmsg_put(msg, 0, ieee802154_seq_num++,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			&nl802154_family, flags, req);
+=======
+			  &nl802154_family, flags, req);
+>>>>>>> v3.18
 =======
 			  &nl802154_family, flags, req);
 >>>>>>> v3.18
@@ -75,7 +79,11 @@ int ieee802154_nl_mcast(struct sk_buff *msg, unsigned int group)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return genlmsg_multicast(msg, 0, group, GFP_ATOMIC);
+=======
+	return genlmsg_multicast(&nl802154_family, msg, 0, group, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	return genlmsg_multicast(&nl802154_family, msg, 0, group, GFP_ATOMIC);
 >>>>>>> v3.18
@@ -95,7 +103,11 @@ struct sk_buff *ieee802154_nl_new_reply(struct genl_info *info,
 
 	hdr = genlmsg_put_reply(msg, info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			&nl802154_family, flags, req);
+=======
+				&nl802154_family, flags, req);
+>>>>>>> v3.18
 =======
 				&nl802154_family, flags, req);
 >>>>>>> v3.18
@@ -122,6 +134,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init ieee802154_nl_init(void)
 {
 	int rc;
@@ -144,6 +157,8 @@ fail:
 	genl_unregister_family(&nl802154_family);
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 static const struct genl_ops ieee8021154_ops[] = {
 	/* see nl-phy.c */
 	IEEE802154_DUMP(IEEE802154_LIST_PHY, ieee802154_list_phy,
@@ -192,6 +207,9 @@ int __init ieee802154_nl_init(void)
 	return genl_register_family_with_ops_groups(&nl802154_family,
 						    ieee8021154_ops,
 						    ieee802154_mcgrps);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -200,6 +218,9 @@ void __exit ieee802154_nl_exit(void)
 	genl_unregister_family(&nl802154_family);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

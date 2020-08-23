@@ -27,6 +27,12 @@
 #include <asm/xen/hypercall.h>
 #include "../pci/pci.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PCI_MMCONFIG
+#include <asm/pci_x86.h>
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PCI_MMCONFIG
 #include <asm/pci_x86.h>
@@ -45,12 +51,15 @@ static int xen_add_device(struct device *dev)
 
 	if (pci_seg_supported) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct physdev_pci_device_add add = {
 			.seg = pci_domain_nr(pci_dev->bus),
 			.bus = pci_dev->bus->number,
 			.devfn = pci_dev->devfn
 		};
 =======
+=======
+>>>>>>> v3.18
 		struct {
 			struct physdev_pci_device_add add;
 			uint32_t pxm;
@@ -61,6 +70,9 @@ static int xen_add_device(struct device *dev)
 		};
 		struct physdev_pci_device_add *add = &add_ext.add;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_ACPI
 		acpi_handle handle;
@@ -68,6 +80,7 @@ static int xen_add_device(struct device *dev)
 
 #ifdef CONFIG_PCI_IOV
 		if (pci_dev->is_virtfn) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			add.flags = XEN_PCI_DEV_VIRTFN;
 			add.physfn.bus = physfn->bus->number;
@@ -85,6 +98,8 @@ static int xen_add_device(struct device *dev)
 		if (!handle && pci_dev->is_virtfn)
 			handle = DEVICE_ACPI_HANDLE(physfn->bus->bridge);
 =======
+=======
+>>>>>>> v3.18
 			add->flags = XEN_PCI_DEV_VIRTFN;
 			add->physfn.bus = physfn->bus->number;
 			add->physfn.devfn = physfn->devfn;
@@ -100,6 +115,9 @@ static int xen_add_device(struct device *dev)
 #ifdef CONFIG_PCI_IOV
 		if (!handle && pci_dev->is_virtfn)
 			handle = ACPI_HANDLE(physfn->bus->bridge);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 		if (handle) {
@@ -112,8 +130,13 @@ static int xen_add_device(struct device *dev)
 							       NULL, &pxm);
 				if (ACPI_SUCCESS(status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					add.optarr[0] = pxm;
 					add.flags |= XEN_PCI_DEV_PXM;
+=======
+					add->optarr[0] = pxm;
+					add->flags |= XEN_PCI_DEV_PXM;
+>>>>>>> v3.18
 =======
 					add->optarr[0] = pxm;
 					add->flags |= XEN_PCI_DEV_PXM;
@@ -126,7 +149,11 @@ static int xen_add_device(struct device *dev)
 #endif /* CONFIG_ACPI */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		r = HYPERVISOR_physdev_op(PHYSDEVOP_pci_device_add, &add);
+=======
+		r = HYPERVISOR_physdev_op(PHYSDEVOP_pci_device_add, add);
+>>>>>>> v3.18
 =======
 		r = HYPERVISOR_physdev_op(PHYSDEVOP_pci_device_add, add);
 >>>>>>> v3.18
@@ -239,7 +266,10 @@ static int __init register_xen_pci_notifier(void)
 
 arch_initcall(register_xen_pci_notifier);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PCI_MMCONFIG
 static int __init xen_mcfg_late(void)
@@ -286,4 +316,7 @@ static int __init xen_mcfg_late(void)
  */
 subsys_initcall_sync(xen_mcfg_late);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

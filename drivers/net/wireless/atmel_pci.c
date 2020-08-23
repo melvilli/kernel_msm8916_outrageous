@@ -16,8 +16,13 @@
 
     You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
     along with Atmel wireless lan drivers; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+    along with Atmel wireless lan drivers; if not, see
+    <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
     along with Atmel wireless lan drivers; if not, see
     <http://www.gnu.org/licenses/>.
@@ -28,7 +33,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/netdevice.h>
@@ -40,7 +48,11 @@ MODULE_LICENSE("GPL");
 MODULE_SUPPORTED_DEVICE("Atmel at76c506 PCI wireless cards");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(card_ids) = {
+=======
+static const struct pci_device_id card_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id card_ids[] = {
 >>>>>>> v3.18

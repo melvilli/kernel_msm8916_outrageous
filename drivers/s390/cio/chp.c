@@ -258,17 +258,23 @@ static ssize_t chp_status_write(struct device *dev,
 		return count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strnicmp(cmd, "on", 2) || !strcmp(cmd, "1")) {
 		mutex_lock(&cp->lock);
 		error = s390_vary_chpid(cp->chpid, 1);
 		mutex_unlock(&cp->lock);
 	} else if (!strnicmp(cmd, "off", 3) || !strcmp(cmd, "0")) {
 =======
+=======
+>>>>>>> v3.18
 	if (!strncasecmp(cmd, "on", 2) || !strcmp(cmd, "1")) {
 		mutex_lock(&cp->lock);
 		error = s390_vary_chpid(cp->chpid, 1);
 		mutex_unlock(&cp->lock);
 	} else if (!strncasecmp(cmd, "off", 3) || !strcmp(cmd, "0")) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mutex_lock(&cp->lock);
 		error = s390_vary_chpid(cp->chpid, 0);
@@ -518,7 +524,11 @@ out:
  * data associated with the given channel-path ID. Return %NULL on error.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *chp_get_chp_desc(struct chp_id chpid)
+=======
+struct channel_path_desc *chp_get_chp_desc(struct chp_id chpid)
+>>>>>>> v3.18
 =======
 struct channel_path_desc *chp_get_chp_desc(struct chp_id chpid)
 >>>>>>> v3.18

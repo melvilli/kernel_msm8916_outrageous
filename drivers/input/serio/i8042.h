@@ -42,6 +42,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Status register bits.
  */
 
@@ -66,6 +67,8 @@
 #define I8042_CTR_XLATE		0x40
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Return codes.

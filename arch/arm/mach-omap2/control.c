@@ -45,6 +45,7 @@ struct omap3_scratchpad {
 
 struct omap3_scratchpad_prcm_block {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 prm_clksrc_ctrl;
 	u32 prm_clksel;
 	u32 cm_clksel_core;
@@ -58,6 +59,10 @@ struct omap3_scratchpad_prcm_block {
 	u32 cm_autoidle_pll_mpu;
 	u32 cm_clksel1_pll_mpu;
 	u32 cm_clksel2_pll_mpu;
+=======
+	u32 prm_contents[2];
+	u32 cm_contents[11];
+>>>>>>> v3.18
 =======
 	u32 prm_contents[2];
 	u32 cm_contents[11];
@@ -167,7 +172,11 @@ void __iomem *omap_ctrl_base_get(void)
 u8 omap_ctrl_readb(u16 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readb(OMAP_CTRL_REGADDR(offset));
+=======
+	return readb_relaxed(OMAP_CTRL_REGADDR(offset));
+>>>>>>> v3.18
 =======
 	return readb_relaxed(OMAP_CTRL_REGADDR(offset));
 >>>>>>> v3.18
@@ -176,7 +185,11 @@ u8 omap_ctrl_readb(u16 offset)
 u16 omap_ctrl_readw(u16 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readw(OMAP_CTRL_REGADDR(offset));
+=======
+	return readw_relaxed(OMAP_CTRL_REGADDR(offset));
+>>>>>>> v3.18
 =======
 	return readw_relaxed(OMAP_CTRL_REGADDR(offset));
 >>>>>>> v3.18
@@ -185,7 +198,11 @@ u16 omap_ctrl_readw(u16 offset)
 u32 omap_ctrl_readl(u16 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(OMAP_CTRL_REGADDR(offset));
+=======
+	return readl_relaxed(OMAP_CTRL_REGADDR(offset));
+>>>>>>> v3.18
 =======
 	return readl_relaxed(OMAP_CTRL_REGADDR(offset));
 >>>>>>> v3.18
@@ -194,7 +211,11 @@ u32 omap_ctrl_readl(u16 offset)
 void omap_ctrl_writeb(u8 val, u16 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writeb(val, OMAP_CTRL_REGADDR(offset));
+=======
+	writeb_relaxed(val, OMAP_CTRL_REGADDR(offset));
+>>>>>>> v3.18
 =======
 	writeb_relaxed(val, OMAP_CTRL_REGADDR(offset));
 >>>>>>> v3.18
@@ -203,7 +224,11 @@ void omap_ctrl_writeb(u8 val, u16 offset)
 void omap_ctrl_writew(u16 val, u16 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writew(val, OMAP_CTRL_REGADDR(offset));
+=======
+	writew_relaxed(val, OMAP_CTRL_REGADDR(offset));
+>>>>>>> v3.18
 =======
 	writew_relaxed(val, OMAP_CTRL_REGADDR(offset));
 >>>>>>> v3.18
@@ -212,7 +237,11 @@ void omap_ctrl_writew(u16 val, u16 offset)
 void omap_ctrl_writel(u32 val, u16 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, OMAP_CTRL_REGADDR(offset));
+=======
+	writel_relaxed(val, OMAP_CTRL_REGADDR(offset));
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, OMAP_CTRL_REGADDR(offset));
 >>>>>>> v3.18
@@ -228,7 +257,11 @@ void omap_ctrl_writel(u32 val, u16 offset)
 u32 omap4_ctrl_pad_readl(u16 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readl(OMAP4_CTRL_PAD_REGADDR(offset));
+=======
+	return readl_relaxed(OMAP4_CTRL_PAD_REGADDR(offset));
+>>>>>>> v3.18
 =======
 	return readl_relaxed(OMAP4_CTRL_PAD_REGADDR(offset));
 >>>>>>> v3.18
@@ -237,7 +270,11 @@ u32 omap4_ctrl_pad_readl(u16 offset)
 void omap4_ctrl_pad_writel(u32 val, u16 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, OMAP4_CTRL_PAD_REGADDR(offset));
+=======
+	writel_relaxed(val, OMAP4_CTRL_PAD_REGADDR(offset));
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, OMAP4_CTRL_PAD_REGADDR(offset));
 >>>>>>> v3.18
@@ -270,7 +307,11 @@ void omap3_ctrl_write_boot_mode(u8 bootmode)
 	 * XXX This should use some omap_ctrl_writel()-type function
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(l, OMAP2_L4_IO_ADDRESS(OMAP343X_SCRATCHPAD + 4));
+=======
+	writel_relaxed(l, OMAP2_L4_IO_ADDRESS(OMAP343X_SCRATCHPAD + 4));
+>>>>>>> v3.18
 =======
 	writel_relaxed(l, OMAP2_L4_IO_ADDRESS(OMAP343X_SCRATCHPAD + 4));
 >>>>>>> v3.18
@@ -291,6 +332,10 @@ void omap_ctrl_write_dsp_boot_addr(u32 bootaddr)
 		     cpu_is_omap34xx() ? OMAP343X_CONTROL_IVA2_BOOTADDR :
 		     cpu_is_omap44xx() ? OMAP4_CTRL_MODULE_CORE_DSP_BOOTADDR :
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		     soc_is_omap54xx() ? OMAP4_CTRL_MODULE_CORE_DSP_BOOTADDR :
+>>>>>>> v3.18
 =======
 		     soc_is_omap54xx() ? OMAP4_CTRL_MODULE_CORE_DSP_BOOTADDR :
 >>>>>>> v3.18
@@ -336,6 +381,7 @@ void omap3_clear_scratchpad_contents(void)
 	void __iomem *v_addr;
 	u32 offset = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v_addr = OMAP2_L4_IO_ADDRESS(OMAP343X_SCRATCHPAD_ROM);
 	if (omap2_prm_read_mod_reg(OMAP3430_GR_MOD, OMAP3_PRM_RSTST_OFFSET) &
 	    OMAP3430_GLOBAL_COLD_RST_MASK) {
@@ -345,11 +391,16 @@ void omap3_clear_scratchpad_contents(void)
 					   OMAP3430_GR_MOD,
 					   OMAP3_PRM_RSTST_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 
 	v_addr = OMAP2_L4_IO_ADDRESS(OMAP343X_SCRATCHPAD_ROM);
 	if (omap3xxx_prm_clear_global_cold_reset()) {
 		for ( ; offset <= max_offset; offset += 0x4)
 			writel_relaxed(0x0, (v_addr + offset));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -395,6 +446,7 @@ void omap3_save_scratchpad_contents(void)
 
 	/* Populate the PRCM block contents */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prcm_block_contents.prm_clksrc_ctrl =
 		omap2_prm_read_mod_reg(OMAP3430_GR_MOD,
 				       OMAP3_PRM_CLKSRC_CTRL_OFFSET);
@@ -429,6 +481,11 @@ void omap3_save_scratchpad_contents(void)
 			omap2_cm_read_mod_reg(MPU_MOD, OMAP3430_CM_CLKSEL1_PLL);
 	prcm_block_contents.cm_clksel2_pll_mpu =
 			omap2_cm_read_mod_reg(MPU_MOD, OMAP3430_CM_CLKSEL2_PLL);
+=======
+	omap3_prm_save_scratchpad_contents(prcm_block_contents.prm_contents);
+	omap3_cm_save_scratchpad_contents(prcm_block_contents.cm_contents);
+
+>>>>>>> v3.18
 =======
 	omap3_prm_save_scratchpad_contents(prcm_block_contents.prm_contents);
 	omap3_cm_save_scratchpad_contents(prcm_block_contents.cm_contents);
@@ -569,7 +626,10 @@ void omap3_control_save_context(void)
 	control_context.padconf_sys_nirq =
 		omap_ctrl_readl(OMAP343X_CONTROL_PADCONF_SYSNIRQ);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -630,7 +690,10 @@ void omap3_control_restore_context(void)
 	omap_ctrl_writel(control_context.padconf_sys_nirq,
 			 OMAP343X_CONTROL_PADCONF_SYSNIRQ);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -670,7 +733,10 @@ int omap3_ctrl_save_padconf(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * omap3_ctrl_set_iva_bootmode_idle - sets the IVA2 bootmode to idle
  *
@@ -723,5 +789,8 @@ void __init omap3_ctrl_init(void)
 
 	omap3_ctrl_setup_d2d_padconf();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_ARCH_OMAP3 && CONFIG_PM */

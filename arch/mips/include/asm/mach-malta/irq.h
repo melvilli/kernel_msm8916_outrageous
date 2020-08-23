@@ -3,6 +3,10 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GIC_NUM_INTRS (24 + NR_CPUS * 2)
+>>>>>>> v3.18
 =======
 #define GIC_NUM_INTRS (24 + NR_CPUS * 2)
 >>>>>>> v3.18

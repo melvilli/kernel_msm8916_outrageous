@@ -39,6 +39,10 @@
 #define Q_XQUOTARM	XQM_CMD(6)	/* free disk space used by dquots */
 #define Q_XQUOTASYNC	XQM_CMD(7)	/* delalloc flush, updates dquots */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define Q_XGETQSTATV	XQM_CMD(8)	/* newer version of get quota */
+>>>>>>> v3.18
 =======
 #define Q_XGETQSTATV	XQM_CMD(8)	/* newer version of get quota */
 >>>>>>> v3.18
@@ -168,7 +172,10 @@ typedef struct fs_quota_stat {
 } fs_quota_stat_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * fs_quota_statv is used by Q_XGETQSTATV for a given file system. It provides
  * a centralized way to get meta information about the quota subsystem. eg.
@@ -215,5 +222,8 @@ struct fs_quota_statv {
 	__u64			qs_pad2[8];	/* for future proofing */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* _LINUX_DQBLK_XFS_H */

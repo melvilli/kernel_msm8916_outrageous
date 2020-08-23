@@ -109,7 +109,10 @@
 #define CS8427_SISPOL		(1<<1)	/* ICLK clock polarity, 0 = rising edge of ISCLK, 1 = falling edge of ISCLK */
 #define CS8427_SILRPOL		(1<<0)	/* ILRCK clock polarity, 0 = SDIN data left channel when ILRCK is high, 1 = SDIN right when ILRCK is high */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CS8427_BITWIDTH_MASK	0xCF
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -191,6 +194,7 @@
 #define CS8427_VER8427A		0x71
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* possible address cs8427 can take
  * based on the below combinations the upper four bits of 7bit
  * address will be fixed for 0010b, abd lower 3 bits will decide
@@ -224,6 +228,11 @@ struct snd_pcm_substream;
 
 int snd_cs8427_init(struct snd_i2c_bus *bus, struct snd_i2c_device *device);
 >>>>>>> v3.18
+=======
+struct snd_pcm_substream;
+
+int snd_cs8427_init(struct snd_i2c_bus *bus, struct snd_i2c_device *device);
+>>>>>>> v3.18
 int snd_cs8427_create(struct snd_i2c_bus *bus, unsigned char addr,
 		      unsigned int reset_timeout, struct snd_i2c_device **r_cs8427);
 int snd_cs8427_reg_write(struct snd_i2c_device *device, unsigned char reg,
@@ -234,6 +243,10 @@ int snd_cs8427_iec958_build(struct snd_i2c_device *cs8427,
 int snd_cs8427_iec958_active(struct snd_i2c_device *cs8427, int active);
 int snd_cs8427_iec958_pcm(struct snd_i2c_device *cs8427, unsigned int rate);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

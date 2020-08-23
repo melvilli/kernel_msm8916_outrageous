@@ -34,6 +34,10 @@
 #include <asm/sigframe.h>
 #include <asm/syscalls.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/vdso.h>
+>>>>>>> v3.18
 =======
 #include <asm/vdso.h>
 >>>>>>> v3.18
@@ -157,6 +161,7 @@ static inline void __user *get_sigframe(struct k_sigaction *ka,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 			   sigset_t *set, struct pt_regs *regs)
 {
@@ -170,6 +175,8 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 		goto give_sigsegv;
 =======
+=======
+>>>>>>> v3.18
 static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 			  struct pt_regs *regs)
 {
@@ -182,6 +189,9 @@ static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 		goto err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	usig = current_thread_info()->exec_domain
@@ -192,6 +202,7 @@ static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 
 	/* Always write at least the signal number for the stack backtracer. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_SIGINFO) {
 		/* At sigreturn time, restore the callee-save registers too. */
 		err |= copy_siginfo_to_user(&frame->info, info);
@@ -199,12 +210,17 @@ static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 	} else {
 		err |= __put_user(info->si_signo, &frame->info.si_signo);
 =======
+=======
+>>>>>>> v3.18
 	if (ksig->ka.sa.sa_flags & SA_SIGINFO) {
 		/* At sigreturn time, restore the callee-save registers too. */
 		err |= copy_siginfo_to_user(&frame->info, &ksig->info);
 		regs->flags |= PT_FLAGS_RESTORE_REGS;
 	} else {
 		err |= __put_user(ksig->info.si_signo, &frame->info.si_signo);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -217,17 +233,23 @@ static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 	err |= __copy_to_user(&frame->uc.uc_sigmask, set, sizeof(*set));
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto give_sigsegv;
 
 	restorer = VDSO_BASE;
 	if (ka->sa.sa_flags & SA_RESTORER)
 		restorer = (unsigned long) ka->sa.sa_restorer;
 =======
+=======
+>>>>>>> v3.18
 		goto err;
 
 	restorer = VDSO_SYM(&__vdso_rt_sigreturn);
 	if (ksig->ka.sa.sa_flags & SA_RESTORER)
 		restorer = (unsigned long) ksig->ka.sa.sa_restorer;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -238,7 +260,11 @@ static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 	 * since some things rely on this (e.g. glibc's debug/segfault.c).
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->pc = (unsigned long) ka->sa.sa_handler;
+=======
+	regs->pc = (unsigned long) ksig->ka.sa.sa_handler;
+>>>>>>> v3.18
 =======
 	regs->pc = (unsigned long) ksig->ka.sa.sa_handler;
 >>>>>>> v3.18
@@ -252,8 +278,14 @@ static int setup_rt_frame(struct ksignal *ksig, sigset_t *set,
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 give_sigsegv:
 	signal_fault("bad setup frame", regs, frame, sig);
+=======
+err:
+	trace_unhandled_signal("bad sigreturn frame", regs,
+			      (unsigned long)frame, SIGSEGV);
+>>>>>>> v3.18
 =======
 err:
 	trace_unhandled_signal("bad sigreturn frame", regs,
@@ -267,9 +299,13 @@ err:
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void handle_signal(unsigned long sig, siginfo_t *info,
 			 struct k_sigaction *ka,
 			 struct pt_regs *regs)
+=======
+static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -288,7 +324,11 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 
 		case -ERESTARTSYS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(ka->sa.sa_flags & SA_RESTART)) {
+=======
+			if (!(ksig->ka.sa.sa_flags & SA_RESTART)) {
+>>>>>>> v3.18
 =======
 			if (!(ksig->ka.sa.sa_flags & SA_RESTART)) {
 >>>>>>> v3.18
@@ -308,6 +348,7 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 #ifdef CONFIG_COMPAT
 	if (is_compat_task())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = compat_setup_rt_frame(sig, ka, info, oldset, regs);
 	else
 #endif
@@ -317,12 +358,17 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	signal_delivered(sig, info, ka, regs,
 			test_thread_flag(TIF_SINGLESTEP));
 =======
+=======
+>>>>>>> v3.18
 		ret = compat_setup_rt_frame(ksig, oldset, regs);
 	else
 #endif
 		ret = setup_rt_frame(ksig, oldset, regs);
 
 	signal_setup_done(ret, ksig, test_thread_flag(TIF_SINGLESTEP));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -334,9 +380,13 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 void do_signal(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	siginfo_t info;
 	int signr;
 	struct k_sigaction ka;
+=======
+	struct ksignal ksig;
+>>>>>>> v3.18
 =======
 	struct ksignal ksig;
 >>>>>>> v3.18
@@ -349,10 +399,16 @@ void do_signal(struct pt_regs *regs)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	signr = get_signal_to_deliver(&info, &ka, regs, NULL);
 	if (signr > 0) {
 		/* Whee! Actually deliver the signal.  */
 		handle_signal(signr, &info, &ka, regs);
+=======
+	if (get_signal(&ksig)) {
+		/* Whee! Actually deliver the signal.  */
+		handle_signal(&ksig, regs);
+>>>>>>> v3.18
 =======
 	if (get_signal(&ksig)) {
 		/* Whee! Actually deliver the signal.  */
@@ -394,6 +450,7 @@ int show_unhandled_signals = 1;
 static int __init crashinfo(char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long val;
 	const char *word;
 
@@ -403,6 +460,8 @@ static int __init crashinfo(char *str)
 		return 0;
 	show_unhandled_signals = val;
 =======
+=======
+>>>>>>> v3.18
 	const char *word;
 
 	if (*str == '\0')
@@ -410,6 +469,9 @@ static int __init crashinfo(char *str)
 	else if (*str != '=' || kstrtoint(++str, 0, &show_unhandled_signals) != 0)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (show_unhandled_signals) {
 	case 0:

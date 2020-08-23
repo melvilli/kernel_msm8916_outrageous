@@ -93,6 +93,7 @@ mcount:
 	 nop
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_DYNAMIC_FTRACE
 	mov.l	.Lfunction_trace_stop, r0
 	mov.l	@r0, r0
@@ -100,6 +101,8 @@ mcount:
 	bf	ftrace_stub
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	MCOUNT_ENTER()
@@ -178,11 +181,14 @@ ftrace_graph_call:
 	.globl ftrace_caller
 ftrace_caller:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov.l	.Lfunction_trace_stop, r0
 	mov.l	@r0, r0
 	tst	r0, r0
 	bf	ftrace_stub
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	MCOUNT_ENTER()
@@ -203,8 +209,11 @@ ftrace_call:
 
 	.align 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lfunction_trace_stop:
 	.long	function_trace_stop
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -227,12 +236,16 @@ ftrace_stub:
 	.globl	ftrace_graph_caller
 ftrace_graph_caller:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov.l	2f, r0
 	mov.l	@r0, r0
 	tst	r0, r0
 	bt	1f
 
 	mov.l	3f, r1
+=======
+	mov.l	2f, r1
+>>>>>>> v3.18
 =======
 	mov.l	2f, r1
 >>>>>>> v3.18
@@ -256,8 +269,12 @@ ftrace_graph_caller:
 
 	.align 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 2:	.long	function_trace_stop
 3:	.long	skip_trace
+=======
+2:	.long	skip_trace
+>>>>>>> v3.18
 =======
 2:	.long	skip_trace
 >>>>>>> v3.18

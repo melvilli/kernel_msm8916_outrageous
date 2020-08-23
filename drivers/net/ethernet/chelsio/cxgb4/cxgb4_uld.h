@@ -2,7 +2,11 @@
  * This file is part of the Chelsio T4 Ethernet driver for Linux.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2003-2010 Chelsio Communications, Inc. All rights reserved.
+=======
+ * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
 >>>>>>> v3.18
@@ -136,8 +140,11 @@ static inline void *lookup_atid(const struct tid_info *t, unsigned int atid)
 static inline void *lookup_stid(const struct tid_info *t, unsigned int stid)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stid -= t->stid_base;
 =======
+=======
+>>>>>>> v3.18
 	/* Is it a server filter TID? */
 	if (t->nsftids && (stid >= t->sftid_base)) {
 		stid -= t->sftid_base;
@@ -146,6 +153,9 @@ static inline void *lookup_stid(const struct tid_info *t, unsigned int stid)
 		stid -= t->stid_base;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return stid < (t->nstids + t->nsftids) ? t->stid_tab[stid].data : NULL;
 }
@@ -170,12 +180,18 @@ int cxgb4_create_server(const struct net_device *dev, unsigned int stid,
 			__be32 sip, __be16 sport, __be16 vlan,
 			unsigned int queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int cxgb4_create_server6(const struct net_device *dev, unsigned int stid,
 			 const struct in6_addr *sip, __be16 sport,
 			 unsigned int queue);
 int cxgb4_remove_server(const struct net_device *dev, unsigned int stid,
 			unsigned int queue, bool ipv6);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int cxgb4_create_server_filter(const struct net_device *dev, unsigned int stid,
 			       __be32 sip, __be16 sport, __be16 vlan,
@@ -184,11 +200,17 @@ int cxgb4_create_server_filter(const struct net_device *dev, unsigned int stid,
 int cxgb4_remove_server_filter(const struct net_device *dev, unsigned int stid,
 			       unsigned int queue, bool ipv6);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int cxgb4_clip_get(const struct net_device *dev, const struct in6_addr *lip);
 int cxgb4_clip_release(const struct net_device *dev,
 		       const struct in6_addr *lip);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void set_wr_txq(struct sk_buff *skb, int prio, int queue)
 {
@@ -251,13 +273,19 @@ struct cxgb4_lld_info {
 	const unsigned short *mtus;          /* MTU table */
 	const unsigned short *rxq_ids;       /* the ULD's Rx queue ids */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short nrxq;                 /* # of Rx queues */
 	unsigned short ntxq;                 /* # of Tx queues */
 =======
+=======
+>>>>>>> v3.18
 	const unsigned short *ciq_ids;       /* the ULD's concentrator IQ ids */
 	unsigned short nrxq;                 /* # of Rx queues */
 	unsigned short ntxq;                 /* # of Tx queues */
 	unsigned short nciq;		     /* # of concentrator IQ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char nchan:4;               /* # of channels */
 	unsigned char nports:4;              /* # of ports */
@@ -267,6 +295,10 @@ struct cxgb4_lld_info {
 	unsigned int fw_vers;                /* FW version */
 	unsigned int iscsi_iolen;            /* iSCSI max I/O length */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int cclk_ps;                /* Core clock period in psec */
+>>>>>>> v3.18
 =======
 	unsigned int cclk_ps;                /* Core clock period in psec */
 >>>>>>> v3.18
@@ -279,11 +311,14 @@ struct cxgb4_lld_info {
 	void __iomem *db_reg;                /* address of kernel doorbell */
 	int dbfifo_int_thresh;		     /* doorbell fifo int threshold */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int sge_pktshift;           /* Padding between CPL and */
 					     /*	packet data */
 	bool enable_fw_ofld_conn;            /* Enable connection through fw */
 					     /* WR */
 =======
+=======
+>>>>>>> v3.18
 	unsigned int sge_ingpadboundary;     /* SGE ingress padding boundary */
 	unsigned int sge_egrstatuspagesize;  /* SGE egress status page size */
 	unsigned int sge_pktshift;           /* Padding between CPL and */
@@ -294,6 +329,9 @@ struct cxgb4_lld_info {
 	unsigned int max_ordird_qp;          /* Max ORD/IRD depth per RDMA QP */
 	unsigned int max_ird_adapter;        /* Max IRD memory per adapter */
 	bool ulptx_memwrite_dsgl;            /* use of T5 DSGL allowed */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -316,12 +354,18 @@ unsigned int cxgb4_port_idx(const struct net_device *dev);
 unsigned int cxgb4_best_mtu(const unsigned short *mtus, unsigned short mtu,
 			    unsigned int *idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 unsigned int cxgb4_best_aligned_mtu(const unsigned short *mtus,
 				    unsigned short header_size,
 				    unsigned short data_size_max,
 				    unsigned short data_size_align,
 				    unsigned int *mtu_idxp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void cxgb4_get_tcp_stats(struct pci_dev *pdev, struct tp_tcp_stats *v4,
 			 struct tp_tcp_stats *v6);
@@ -334,6 +378,11 @@ int cxgb4_flush_eq_cache(struct net_device *dev);
 void cxgb4_disable_db_coalescing(struct net_device *dev);
 void cxgb4_enable_db_coalescing(struct net_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int cxgb4_read_tpte(struct net_device *dev, u32 stag, __be32 *tpte);
+u64 cxgb4_read_sge_timestamp(struct net_device *dev);
+>>>>>>> v3.18
 =======
 int cxgb4_read_tpte(struct net_device *dev, u32 stag, __be32 *tpte);
 u64 cxgb4_read_sge_timestamp(struct net_device *dev);

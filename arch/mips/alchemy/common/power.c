@@ -30,7 +30,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pm.h>
@@ -59,6 +62,7 @@ static void save_core_regs(void)
 {
 	/* Clocks and PLLs. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sleep_sys_clocks[0] = au_readl(SYS_FREQCTRL0);
 	sleep_sys_clocks[1] = au_readl(SYS_FREQCTRL1);
 	sleep_sys_clocks[2] = au_readl(SYS_CLKSRC);
@@ -82,6 +86,8 @@ static void save_core_regs(void)
 	sleep_static_memctlr[3][1] = au_readl(MEM_STTIME3);
 	sleep_static_memctlr[3][2] = au_readl(MEM_STADDR3);
 =======
+=======
+>>>>>>> v3.18
 	sleep_sys_clocks[0] = alchemy_rdsys(AU1000_SYS_FREQCTRL0);
 	sleep_sys_clocks[1] = alchemy_rdsys(AU1000_SYS_FREQCTRL1);
 	sleep_sys_clocks[2] = alchemy_rdsys(AU1000_SYS_CLKSRC);
@@ -104,6 +110,9 @@ static void save_core_regs(void)
 	sleep_static_memctlr[3][0] = alchemy_rdsmem(AU1000_MEM_STCFG3);
 	sleep_static_memctlr[3][1] = alchemy_rdsmem(AU1000_MEM_STTIME3);
 	sleep_static_memctlr[3][2] = alchemy_rdsmem(AU1000_MEM_STADDR3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -114,6 +123,7 @@ static void restore_core_regs(void)
 	 * one of those Au1000 with a write-only PLL, where we dont
 	 * have a valid value)
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	au_writel(sleep_sys_clocks[0], SYS_FREQCTRL0);
 	au_writel(sleep_sys_clocks[1], SYS_FREQCTRL1);
@@ -140,6 +150,8 @@ static void restore_core_regs(void)
 	au_writel(sleep_static_memctlr[3][1], MEM_STTIME3);
 	au_writel(sleep_static_memctlr[3][2], MEM_STADDR3);
 =======
+=======
+>>>>>>> v3.18
 	alchemy_wrsys(sleep_sys_clocks[0], AU1000_SYS_FREQCTRL0);
 	alchemy_wrsys(sleep_sys_clocks[1], AU1000_SYS_FREQCTRL1);
 	alchemy_wrsys(sleep_sys_clocks[2], AU1000_SYS_CLKSRC);
@@ -162,6 +174,9 @@ static void restore_core_regs(void)
 	alchemy_wrsmem(sleep_static_memctlr[3][0], AU1000_MEM_STCFG3);
 	alchemy_wrsmem(sleep_static_memctlr[3][1], AU1000_MEM_STTIME3);
 	alchemy_wrsmem(sleep_static_memctlr[3][2], AU1000_MEM_STADDR3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

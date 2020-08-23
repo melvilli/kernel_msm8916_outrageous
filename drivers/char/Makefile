@@ -10,15 +10,21 @@ obj-$(CONFIG_VIRTIO_CONSOLE)	+= virtio_console.o
 obj-$(CONFIG_RAW_DRIVER)	+= raw.o
 obj-$(CONFIG_SGI_SNSC)		+= snsc.o snsc_event.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MSPEC)		+= mspec.o
 obj-$(CONFIG_MMTIMER)		+= mmtimer.o
 obj-$(CONFIG_UV_MMTIMER)	+= uv_mmtimer.o
 obj-$(CONFIG_VIOTAPE)		+= viotape.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_MSM_SMD_PKT)	+= msm_smd_pkt.o
 obj-$(CONFIG_MSPEC)		+= mspec.o
 obj-$(CONFIG_MMTIMER)		+= mmtimer.o
 obj-$(CONFIG_UV_MMTIMER)	+= uv_mmtimer.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_IBM_BSR)		+= bsr.o
 obj-$(CONFIG_SGI_MBCS)		+= mbcs.o
@@ -57,7 +63,11 @@ obj-$(CONFIG_TELCLOCK)		+= tlclk.o
 
 obj-$(CONFIG_MWAVE)		+= mwave/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_AGP)		+= agp/
+=======
+obj-y				+= agp/
+>>>>>>> v3.18
 =======
 obj-y				+= agp/
 >>>>>>> v3.18
@@ -73,6 +83,7 @@ js-rtc-y = rtc.o
 
 obj-$(CONFIG_TILE_SROM)		+= tile-srom.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_DIAG_CHAR)		+= diag/
 obj-$(CONFIG_MSM_ADSPRPC)       += adsprpc.o
 ifdef CONFIG_COMPAT
@@ -80,6 +91,9 @@ obj-$(CONFIG_MSM_ADSPRPC)       += adsprpc_compat.o
 endif
 obj-$(CONFIG_MSM_RDBG)       += rdbg.o
 obj-$(CONFIG_MSM_SMD_PKT)       += msm_smd_pkt.o
+=======
+obj-$(CONFIG_XILLYBUS)		+= xillybus/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_XILLYBUS)		+= xillybus/
 >>>>>>> v3.18

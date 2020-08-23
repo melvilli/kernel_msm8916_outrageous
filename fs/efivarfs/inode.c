@@ -16,8 +16,12 @@
 
 struct inode *efivarfs_get_inode(struct super_block *sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const struct inode *dir, int mode,
 				dev_t dev, bool is_removable)
+=======
+				const struct inode *dir, int mode, dev_t dev)
+>>>>>>> v3.18
 =======
 				const struct inode *dir, int mode, dev_t dev)
 >>>>>>> v3.18
@@ -29,7 +33,10 @@ struct inode *efivarfs_get_inode(struct super_block *sb,
 		inode->i_mode = mode;
 		inode->i_atime = inode->i_mtime = inode->i_ctime = CURRENT_TIME;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inode->i_flags = is_removable ? 0 : S_IMMUTABLE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		switch (mode & S_IFMT) {
@@ -112,10 +119,16 @@ static int efivarfs_create(struct inode *dir, struct dentry *dentry,
 			  umode_t mode, bool excl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode = NULL;
 	struct efivar_entry *var;
 	int namelen, i = 0, err = 0;
 	bool is_removable = false;
+=======
+	struct inode *inode;
+	struct efivar_entry *var;
+	int namelen, i = 0, err = 0;
+>>>>>>> v3.18
 =======
 	struct inode *inode;
 	struct efivar_entry *var;
@@ -126,11 +139,14 @@ static int efivarfs_create(struct inode *dir, struct dentry *dentry,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	var = kzalloc(sizeof(struct efivar_entry), GFP_KERNEL);
 	if (!var)
 		return -ENOMEM;
 
 =======
+=======
+>>>>>>> v3.18
 	inode = efivarfs_get_inode(dir->i_sb, dir, mode, 0);
 	if (!inode)
 		return -ENOMEM;
@@ -141,6 +157,9 @@ static int efivarfs_create(struct inode *dir, struct dentry *dentry,
 		goto out;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* length of the variable name itself: remove GUID and separator */
 	namelen = dentry->d_name.len - EFI_VARIABLE_GUID_LEN - 1;
@@ -148,6 +167,7 @@ static int efivarfs_create(struct inode *dir, struct dentry *dentry,
 	efivarfs_hex_to_guid(dentry->d_name.name + namelen + 1,
 			&var->var.VendorGuid);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (efivar_variable_is_removable(var->var.VendorGuid,
 					 dentry->d_name.name, namelen))
@@ -159,6 +179,8 @@ static int efivarfs_create(struct inode *dir, struct dentry *dentry,
 		goto out;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < namelen; i++)
@@ -175,8 +197,12 @@ out:
 	if (err) {
 		kfree(var);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (inode)
 			iput(inode);
+=======
+		iput(inode);
+>>>>>>> v3.18
 =======
 		iput(inode);
 >>>>>>> v3.18
@@ -197,6 +223,7 @@ static int efivarfs_unlink(struct inode *dir, struct dentry *dentry)
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Handle negative dentry.
  */
@@ -211,6 +238,10 @@ static struct dentry *efivarfs_lookup(struct inode *dir, struct dentry *dentry,
 
 const struct inode_operations efivarfs_dir_inode_operations = {
 	.lookup = efivarfs_lookup,
+=======
+const struct inode_operations efivarfs_dir_inode_operations = {
+	.lookup = simple_lookup,
+>>>>>>> v3.18
 =======
 const struct inode_operations efivarfs_dir_inode_operations = {
 	.lookup = simple_lookup,

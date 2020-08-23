@@ -19,6 +19,11 @@
 #include <linux/slab.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "power.h"
+
+>>>>>>> v3.18
 =======
 #include "power.h"
 

@@ -9,7 +9,11 @@
  *
  * 2008-02-13	initial version
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 		eric miao <eric.miao@marvell.com>
+=======
+ *		eric miao <eric.miao@marvell.com>
+>>>>>>> v3.18
 =======
  *		eric miao <eric.miao@marvell.com>
 >>>>>>> v3.18
@@ -24,6 +28,10 @@
 #include <linux/io.h>
 #include <linux/pwm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
@@ -133,7 +141,10 @@ static struct pwm_ops pxa_pwm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 /*
  * Device tree users must create one device instance for each PWM channel.
@@ -174,6 +185,9 @@ pxa_pwm_of_xlate(struct pwm_chip *pc, const struct of_phandle_args *args)
 	return pwm;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pwm_probe(struct platform_device *pdev)
 {
@@ -183,12 +197,15 @@ static int pwm_probe(struct platform_device *pdev)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pwm = devm_kzalloc(&pdev->dev, sizeof(*pwm), GFP_KERNEL);
 	if (pwm == NULL) {
 		dev_err(&pdev->dev, "failed to allocate memory\n");
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_OF) && id == NULL)
 		id = pxa_pwm_get_id_dt(&pdev->dev);
 
@@ -198,6 +215,9 @@ static int pwm_probe(struct platform_device *pdev)
 	pwm = devm_kzalloc(&pdev->dev, sizeof(*pwm), GFP_KERNEL);
 	if (pwm == NULL)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pwm->clk = devm_clk_get(&pdev->dev, NULL);
@@ -210,12 +230,18 @@ static int pwm_probe(struct platform_device *pdev)
 	pwm->chip.npwm = (id->driver_data & HAS_SECONDARY_PWM) ? 2 : 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_OF)) {
 		pwm->chip.of_xlate = pxa_pwm_of_xlate;
 		pwm->chip.of_pwm_n_cells = 1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	pwm->mmio_base = devm_ioremap_resource(&pdev->dev, r);
@@ -248,6 +274,10 @@ static struct platform_driver pwm_driver = {
 		.name	= "pxa25x-pwm",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = pwm_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = pwm_of_match,
 >>>>>>> v3.18
@@ -257,6 +287,7 @@ static struct platform_driver pwm_driver = {
 	.id_table	= pwm_id_table,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init pwm_init(void)
 {
@@ -269,6 +300,9 @@ static void __exit pwm_exit(void)
 	platform_driver_unregister(&pwm_driver);
 }
 module_exit(pwm_exit);
+=======
+module_platform_driver(pwm_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(pwm_driver);
 >>>>>>> v3.18

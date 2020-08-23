@@ -15,6 +15,11 @@
 #include <linux/kernel.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_fdt.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_fdt.h>
@@ -125,9 +130,15 @@ define_machine(pdm360ng) {
 	.name			= "PDM360NG",
 	.probe			= pdm360ng_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.setup_arch		= mpc512x_setup_diu,
 	.init			= pdm360ng_init,
 	.init_early		= mpc512x_init_diu,
+=======
+	.setup_arch		= mpc512x_setup_arch,
+	.init			= pdm360ng_init,
+	.init_early		= mpc512x_init_early,
+>>>>>>> v3.18
 =======
 	.setup_arch		= mpc512x_setup_arch,
 	.init			= pdm360ng_init,

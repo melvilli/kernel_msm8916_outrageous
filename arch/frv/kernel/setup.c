@@ -105,8 +105,11 @@ unsigned long __initdata __sdram_old_base;
 unsigned long __initdata num_mappedpages;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cpuinfo_frv __nongprelbss boot_cpu_data;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 char __initdata command_line[COMMAND_LINE_SIZE];
@@ -713,7 +716,11 @@ static void __init reserve_dma_coherent(void)
  * calibrate the delay loop
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit calibrate_delay(void)
+=======
+void calibrate_delay(void)
+>>>>>>> v3.18
 =======
 void calibrate_delay(void)
 >>>>>>> v3.18
@@ -743,7 +750,11 @@ static void __init parse_cmdline_early(char *cmdline)
 		 * out from the SDRAM controller mask register
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!memcmp(cmdline, "mem=", 4)) {
+=======
+		if (!strncmp(cmdline, "mem=", 4)) {
+>>>>>>> v3.18
 =======
 		if (!strncmp(cmdline, "mem=", 4)) {
 >>>>>>> v3.18
@@ -888,6 +899,10 @@ static void __init setup_linux_memory(void)
 {
 	unsigned long bootmap_size, low_top_pfn, kstart, kend, high_mem;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long physpages;
+>>>>>>> v3.18
 =======
 	unsigned long physpages;
 >>>>>>> v3.18
@@ -909,6 +924,7 @@ static void __init setup_linux_memory(void)
 
 	/* pass the memory that the kernel can immediately use over to the bootmem allocator */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max_mapnr = num_physpages = (memory_end - memory_start) >> PAGE_SHIFT;
 	low_top_pfn = (KERNEL_LOWMEM_END - KERNEL_LOWMEM_START) >> PAGE_SHIFT;
 	high_mem = 0;
@@ -923,6 +939,8 @@ static void __init setup_linux_memory(void)
 	else {
 		low_top_pfn = num_physpages;
 =======
+=======
+>>>>>>> v3.18
 	max_mapnr = physpages = (memory_end - memory_start) >> PAGE_SHIFT;
 	low_top_pfn = (KERNEL_LOWMEM_END - KERNEL_LOWMEM_START) >> PAGE_SHIFT;
 	high_mem = 0;
@@ -936,6 +954,9 @@ static void __init setup_linux_memory(void)
 	}
 	else {
 		low_top_pfn = physpages;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1011,7 +1032,11 @@ static void __init setup_uclinux_memory(void)
 
 	high_memory = (void *) (memory_end & PAGE_MASK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max_mapnr = num_physpages = ((unsigned long) high_memory - PAGE_OFFSET) >> PAGE_SHIFT;
+=======
+	max_mapnr = ((unsigned long) high_memory - PAGE_OFFSET) >> PAGE_SHIFT;
+>>>>>>> v3.18
 =======
 	max_mapnr = ((unsigned long) high_memory - PAGE_OFFSET) >> PAGE_SHIFT;
 >>>>>>> v3.18

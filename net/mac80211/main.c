@@ -3,6 +3,10 @@
  * Copyright 2005-2006, Devicescape Software, Inc.
  * Copyright 2006-2007	Jiri Benc <jbenc@suse.cz>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright 2013-2014  Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright 2013-2014  Intel Mobile Communications GmbH
 >>>>>>> v3.18
@@ -107,6 +111,7 @@ static u32 ieee80211_hw_conf_chan(struct ieee80211_local *local)
 	offchannel_flag = local->hw.conf.flags & IEEE80211_CONF_OFFCHANNEL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (local->scan_channel) {
 		chandef.chan = local->scan_channel;
 		/* If scanning on oper channel, use whatever channel-type
@@ -118,6 +123,10 @@ static u32 ieee80211_hw_conf_chan(struct ieee80211_local *local)
 			chandef.width = NL80211_CHAN_WIDTH_20_NOHT;
 			chandef.center_freq1 = chandef.chan->center_freq;
 		}
+=======
+	if (local->scan_chandef.chan) {
+		chandef = local->scan_chandef;
+>>>>>>> v3.18
 =======
 	if (local->scan_chandef.chan) {
 		chandef = local->scan_chandef;
@@ -161,7 +170,11 @@ static u32 ieee80211_hw_conf_chan(struct ieee80211_local *local)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	power = chandef.chan->max_power;
+=======
+	power = ieee80211_chandef_max_power(&chandef);
+>>>>>>> v3.18
 =======
 	power = ieee80211_chandef_max_power(&chandef);
 >>>>>>> v3.18
@@ -224,7 +237,11 @@ void ieee80211_bss_info_change_notify(struct ieee80211_sub_if_data *sdata,
 	struct ieee80211_local *local = sdata->local;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!changed)
+=======
+	if (!changed || sdata->vif.type == NL80211_IFTYPE_AP_VLAN)
+>>>>>>> v3.18
 =======
 	if (!changed || sdata->vif.type == NL80211_IFTYPE_AP_VLAN)
 >>>>>>> v3.18
@@ -275,13 +292,17 @@ static void ieee80211_restart_work(struct work_struct *work)
 	struct ieee80211_local *local =
 		container_of(work, struct ieee80211_local, restart_work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_sub_if_data *sdata;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	/* wait for scan work complete */
 	flush_workqueue(local->workqueue);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&local->mtx);
 	WARN(test_bit(SCAN_HW_SCANNING, &local->scanning) ||
@@ -294,10 +315,15 @@ static void ieee80211_restart_work(struct work_struct *work)
 	list_for_each_entry(sdata, &local->interfaces, list)
 		flush_delayed_work(&sdata->dec_tailroom_needed_wk);
 =======
+=======
+>>>>>>> v3.18
 	WARN(test_bit(SCAN_HW_SCANNING, &local->scanning),
 	     "%s called with hardware scan in progress\n", __func__);
 
 	rtnl_lock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ieee80211_scan_cancel(local);
 	ieee80211_reconfig(local);
@@ -316,7 +342,12 @@ void ieee80211_restart_hw(struct ieee80211_hw *hw)
 	/* use this reason, ieee80211_reconfig will unblock it */
 	ieee80211_stop_queues_by_reason(hw, IEEE80211_MAX_QUEUE_MAP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IEEE80211_QUEUE_STOP_REASON_SUSPEND);
+=======
+					IEEE80211_QUEUE_STOP_REASON_SUSPEND,
+					false);
+>>>>>>> v3.18
 =======
 					IEEE80211_QUEUE_STOP_REASON_SUSPEND,
 					false);
@@ -369,7 +400,11 @@ static int ieee80211_ifa_changed(struct notifier_block *nb,
 
 	ifmgd = &sdata->u.mgd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&ifmgd->mtx);
+=======
+	sdata_lock(sdata);
+>>>>>>> v3.18
 =======
 	sdata_lock(sdata);
 >>>>>>> v3.18
@@ -391,9 +426,15 @@ static int ieee80211_ifa_changed(struct notifier_block *nb,
 						 BSS_CHANGED_ARP_FILTER);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&ifmgd->mtx);
 
 	return NOTIFY_DONE;
+=======
+	sdata_unlock(sdata);
+
+	return NOTIFY_OK;
+>>>>>>> v3.18
 =======
 	sdata_unlock(sdata);
 
@@ -430,7 +471,11 @@ static int ieee80211_ifa6_changed(struct notifier_block *nb,
 	drv_ipv6_addr_change(local, sdata, idev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return NOTIFY_DONE;
+=======
+	return NOTIFY_OK;
+>>>>>>> v3.18
 =======
 	return NOTIFY_OK;
 >>>>>>> v3.18
@@ -509,7 +554,13 @@ static const struct ieee80211_ht_cap mac80211_ht_capa_mod_mask = {
 				IEEE80211_HT_CAP_MAX_AMSDU |
 				IEEE80211_HT_CAP_SGI_20 |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				IEEE80211_HT_CAP_SGI_40),
+=======
+				IEEE80211_HT_CAP_SGI_40 |
+				IEEE80211_HT_CAP_LDPC_CODING |
+				IEEE80211_HT_CAP_40MHZ_INTOLERANT),
+>>>>>>> v3.18
 =======
 				IEEE80211_HT_CAP_SGI_40 |
 				IEEE80211_HT_CAP_LDPC_CODING |
@@ -718,6 +769,7 @@ struct ieee80211_hw *ieee80211_alloc_hw(size_t priv_data_len,
 EXPORT_SYMBOL(ieee80211_alloc_hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ieee80211_register_hw(struct ieee80211_hw *hw)
 {
 	struct ieee80211_local *local = hw_to_local(hw);
@@ -728,6 +780,8 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 	netdev_features_t feature_whitelist;
 	struct cfg80211_chan_def dflt_chandef = {};
 =======
+=======
+>>>>>>> v3.18
 static int ieee80211_init_cipher_suites(struct ieee80211_local *local)
 {
 	bool have_wep = !(IS_ERR(local->wep_tx_tfm) ||
@@ -736,6 +790,9 @@ static int ieee80211_init_cipher_suites(struct ieee80211_local *local)
 	const struct ieee80211_cipher_scheme *cs = local->hw.cipher_schemes;
 	int n_suites = 0, r = 0, w = 0;
 	u32 *suites;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	static const u32 cipher_suites[] = {
 		/* keep WEP first, it may be removed below */
@@ -749,7 +806,10 @@ static int ieee80211_init_cipher_suites(struct ieee80211_local *local)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Driver specifies the ciphers, we have nothing to do... */
 	if (local->hw.wiphy->cipher_suites && have_wep)
 		return 0;
@@ -837,6 +897,9 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 	netdev_features_t feature_whitelist;
 	struct cfg80211_chan_def dflt_chandef = {};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (hw->flags & IEEE80211_HW_QUEUE_CONTROL &&
 	    (local->hw.offchannel_tx_hw_queue == IEEE80211_INVAL_HW_QUEUE ||
@@ -845,8 +908,12 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 
 #ifdef CONFIG_PM
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((hw->wiphy->wowlan.flags || hw->wiphy->wowlan.n_patterns) &&
 	    (!local->ops->suspend || !local->ops->resume))
+=======
+	if (hw->wiphy->wowlan && (!local->ops->suspend || !local->ops->resume))
+>>>>>>> v3.18
 =======
 	if (hw->wiphy->wowlan && (!local->ops->suspend || !local->ops->resume))
 >>>>>>> v3.18
@@ -937,6 +1004,7 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local->int_scan_req = kzalloc(sizeof(*local->int_scan_req) +
 				      sizeof(void *) * channels, GFP_KERNEL);
 	if (!local->int_scan_req)
@@ -948,6 +1016,8 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 		local->int_scan_req->rates[band] = (u32) -1;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* if low-level driver supports AP, we also support VLAN */
@@ -974,7 +1044,10 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	local->int_scan_req = kzalloc(sizeof(*local->int_scan_req) +
 				      sizeof(void *) * channels, GFP_KERNEL);
 	if (!local->int_scan_req)
@@ -986,6 +1059,9 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 		local->int_scan_req->rates[band] = (u32) -1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef CONFIG_MAC80211_MESH
 	/* mesh depends on Kconfig, but drivers should set it if they want */
@@ -1001,11 +1077,14 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 	local->hw.wiphy->flags |= WIPHY_FLAG_CONTROL_PORT_PROTOCOL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (local->hw.flags & IEEE80211_HW_SIGNAL_DBM)
 		local->hw.wiphy->signal_type = CFG80211_SIGNAL_TYPE_MBM;
 	else if (local->hw.flags & IEEE80211_HW_SIGNAL_UNSPEC)
 		local->hw.wiphy->signal_type = CFG80211_SIGNAL_TYPE_UNSPEC;
 =======
+=======
+>>>>>>> v3.18
 	if (local->hw.flags & IEEE80211_HW_SIGNAL_DBM) {
 		local->hw.wiphy->signal_type = CFG80211_SIGNAL_TYPE_MBM;
 	} else if (local->hw.flags & IEEE80211_HW_SIGNAL_UNSPEC) {
@@ -1015,6 +1094,9 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 			goto fail_wiphy_register;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	WARN((local->hw.flags & IEEE80211_HW_SUPPORTS_UAPSD)
@@ -1052,6 +1134,7 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 	if (local->hw.wiphy->max_scan_ie_len)
 		local->hw.wiphy->max_scan_ie_len -= local->scan_ies_len;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Set up cipher suites unless driver already did */
 	if (!local->hw.wiphy->cipher_suites) {
@@ -1091,21 +1174,29 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	WARN_ON(!ieee80211_cs_list_valid(local->hw.cipher_schemes,
 					 local->hw.n_cipher_schemes));
 
 	result = ieee80211_init_cipher_suites(local);
 	if (result < 0)
 		goto fail_wiphy_register;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!local->ops->remain_on_channel)
 		local->hw.wiphy->max_remain_on_channel_duration = 5000;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (local->ops->sched_scan_start)
 		local->hw.wiphy->flags |= WIPHY_FLAG_SUPPORTS_SCHED_SCAN;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* mac80211 based drivers don't support internal TDLS setup */
@@ -1113,6 +1204,11 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 		local->hw.wiphy->flags |= WIPHY_FLAG_TDLS_EXTERNAL_SETUP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	local->hw.wiphy->max_num_csa_counters = IEEE80211_MAX_CSA_COUNTERS_NUM;
+
+>>>>>>> v3.18
 =======
 	local->hw.wiphy->max_num_csa_counters = IEEE80211_MAX_CSA_COUNTERS_NUM;
 
@@ -1130,7 +1226,11 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 
 	local->workqueue =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		alloc_ordered_workqueue(wiphy_name(local->hw.wiphy), 0);
+=======
+		alloc_ordered_workqueue("%s", 0, wiphy_name(local->hw.wiphy));
+>>>>>>> v3.18
 =======
 		alloc_ordered_workqueue("%s", 0, wiphy_name(local->hw.wiphy));
 >>>>>>> v3.18
@@ -1166,6 +1266,11 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 			    result);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	local->hw.conf.flags = IEEE80211_CONF_IDLE;
+
+>>>>>>> v3.18
 =======
 	local->hw.conf.flags = IEEE80211_CONF_IDLE;
 
@@ -1249,7 +1354,10 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 EXPORT_SYMBOL(ieee80211_register_hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void ieee80211_napi_add(struct ieee80211_hw *hw, struct napi_struct *napi,
 			struct net_device *napi_dev,
 			int (*poll)(struct napi_struct *, int),
@@ -1262,6 +1370,9 @@ void ieee80211_napi_add(struct ieee80211_hw *hw, struct napi_struct *napi,
 }
 EXPORT_SYMBOL_GPL(ieee80211_napi_add);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ieee80211_unregister_hw(struct ieee80211_hw *hw)
 {
@@ -1293,6 +1404,10 @@ void ieee80211_unregister_hw(struct ieee80211_hw *hw)
 	cancel_work_sync(&local->restart_work);
 	cancel_work_sync(&local->reconfig_filter);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	flush_work(&local->sched_scan_stopped_work);
+>>>>>>> v3.18
 =======
 	flush_work(&local->sched_scan_stopped_work);
 >>>>>>> v3.18
@@ -1337,6 +1452,11 @@ void ieee80211_free_hw(struct ieee80211_hw *hw)
 	idr_destroy(&local->ack_status_frames);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(rcu_access_pointer(local->tx_latency));
+
+>>>>>>> v3.18
 =======
 	kfree(rcu_access_pointer(local->tx_latency));
 
@@ -1363,10 +1483,13 @@ static int __init ieee80211_init(void)
 		goto err_minstrel;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = rc80211_pid_init();
 	if (ret)
 		goto err_pid;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = ieee80211_iface_init();
@@ -1376,8 +1499,11 @@ static int __init ieee80211_init(void)
 	return 0;
  err_netdev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc80211_pid_exit();
  err_pid:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rc80211_minstrel_ht_exit();
@@ -1390,7 +1516,10 @@ static int __init ieee80211_init(void)
 static void __exit ieee80211_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc80211_pid_exit();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rc80211_minstrel_ht_exit();

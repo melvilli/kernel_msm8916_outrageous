@@ -28,7 +28,11 @@
 #define PCI_HOST_ENABLE_CMD PCI_COMMAND_SERR | PCI_COMMAND_PARITY | PCI_COMMAND_MASTER | PCI_COMMAND_MEMORY
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id xilinx_pci_match[] = {
+=======
+static const struct of_device_id xilinx_pci_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id xilinx_pci_match[] = {
 >>>>>>> v3.18

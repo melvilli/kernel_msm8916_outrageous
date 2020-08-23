@@ -2,13 +2,19 @@ TI Real Time Clock
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: "ti,da830-rtc"
 =======
+=======
+>>>>>>> v3.18
 - compatible:
 	- "ti,da830-rtc"  - for RTC IP used similar to that on DA8xx SoC family.
 	- "ti,am3352-rtc" - for RTC IP used similar to that on AM335x SoC family.
 			    This RTC IP has special WAKE-EN Register to enable
 			    Wakeup generation for event Alarm.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - reg: Address range of rtc register set
 - interrupts: rtc timer, alarm interrupts in order

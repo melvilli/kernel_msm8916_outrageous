@@ -155,7 +155,12 @@ int copy_siginfo_to_user32(compat_siginfo_t __user *to, const siginfo_t *from)
 		 err |= __put_user(from->si_tid, &to->si_tid);
 		 err |= __put_user(from->si_overrun, &to->si_overrun);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 err |= __put_user(from->si_int, &to->si_int);
+=======
+		 err |= __put_user((compat_uptr_t)(unsigned long)from->si_ptr,
+				   &to->si_ptr);
+>>>>>>> v3.18
 =======
 		 err |= __put_user((compat_uptr_t)(unsigned long)from->si_ptr,
 				   &to->si_ptr);
@@ -174,8 +179,12 @@ int copy_siginfo_to_user32(compat_siginfo_t __user *to, const siginfo_t *from)
 		 * so check explicitely for the right codes here.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (from->si_signo == SIGBUS &&
 		    (from->si_code == BUS_MCEERR_AR || from->si_code == BUS_MCEERR_AO))
+=======
+		if (from->si_code == BUS_MCEERR_AR || from->si_code == BUS_MCEERR_AO)
+>>>>>>> v3.18
 =======
 		if (from->si_code == BUS_MCEERR_AR || from->si_code == BUS_MCEERR_AO)
 >>>>>>> v3.18
@@ -194,6 +203,7 @@ int copy_siginfo_to_user32(compat_siginfo_t __user *to, const siginfo_t *from)
 		err |= __put_user(from->si_pid, &to->si_pid);
 		err |= __put_user(from->si_uid, &to->si_uid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err |= __put_user(from->si_int, &to->si_int);
 		break;
 #ifdef __ARCH_SIGSYS
@@ -204,6 +214,10 @@ int copy_siginfo_to_user32(compat_siginfo_t __user *to, const siginfo_t *from)
 		err |= __put_user(from->si_arch, &to->si_arch);
 		break;
 #endif
+=======
+		err |= __put_user((compat_uptr_t)(unsigned long)from->si_ptr, &to->si_ptr);
+		break;
+>>>>>>> v3.18
 =======
 		err |= __put_user((compat_uptr_t)(unsigned long)from->si_ptr, &to->si_ptr);
 		break;
@@ -219,6 +233,11 @@ int copy_siginfo_to_user32(compat_siginfo_t __user *to, const siginfo_t *from)
 int copy_siginfo_from_user32(siginfo_t *to, compat_siginfo_t __user *from)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(to, 0, sizeof *to);
+
+>>>>>>> v3.18
 =======
 	memset(to, 0, sizeof *to);
 
@@ -233,6 +252,7 @@ int copy_siginfo_from_user32(siginfo_t *to, compat_siginfo_t __user *from)
 
 /*
  * VFP save/restore code.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * We have to be careful with endianness, since the fpsimd context-switch
@@ -256,6 +276,9 @@ union __fpsimd_vreg {
 =======
  */
 >>>>>>> v3.18
+=======
+ */
+>>>>>>> v3.18
 static int compat_preserve_vfp_context(struct compat_vfp_sigframe __user *frame)
 {
 	struct fpsimd_state *fpsimd = &current->thread.fpsimd_state;
@@ -263,7 +286,11 @@ static int compat_preserve_vfp_context(struct compat_vfp_sigframe __user *frame)
 	compat_ulong_t size = VFP_STORAGE_SIZE;
 	compat_ulong_t fpscr, fpexc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, err = 0;
+=======
+	int err = 0;
+>>>>>>> v3.18
 =======
 	int err = 0;
 >>>>>>> v3.18
@@ -283,6 +310,7 @@ static int compat_preserve_vfp_context(struct compat_vfp_sigframe __user *frame)
 	 * Now copy the FP registers. Since the registers are packed,
 	 * we can copy the prefix we want (V0-V15) as it is.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 */
 	for (i = 0; i < ARRAY_SIZE(frame->ufp.fpregs); i += 2) {
 		union __fpsimd_vreg vreg = {
@@ -293,10 +321,15 @@ static int compat_preserve_vfp_context(struct compat_vfp_sigframe __user *frame)
 		__put_user_error(vreg.hi, &frame->ufp.fpregs[i + 1], err);
 	}
 =======
+=======
+>>>>>>> v3.18
 	 * FIXME: Won't work if big endian.
 	 */
 	err |= __copy_to_user(&frame->ufp.fpregs, fpsimd->vregs,
 			      sizeof(frame->ufp.fpregs));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Create an AArch32 fpscr from the fpsr and the fpcr. */
@@ -323,7 +356,11 @@ static int compat_restore_vfp_context(struct compat_vfp_sigframe __user *frame)
 	compat_ulong_t size = VFP_STORAGE_SIZE;
 	compat_ulong_t fpscr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, err = 0;
+=======
+	int err = 0;
+>>>>>>> v3.18
 =======
 	int err = 0;
 >>>>>>> v3.18
@@ -337,6 +374,7 @@ static int compat_restore_vfp_context(struct compat_vfp_sigframe __user *frame)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Copy the FP registers into the start of the fpsimd_state. */
 	for (i = 0; i < ARRAY_SIZE(frame->ufp.fpregs); i += 2) {
 		union __fpsimd_vreg vreg;
@@ -346,12 +384,17 @@ static int compat_restore_vfp_context(struct compat_vfp_sigframe __user *frame)
 		fpsimd.vregs[i >> 1] = vreg.raw;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Copy the FP registers into the start of the fpsimd_state.
 	 * FIXME: Won't work if big endian.
 	 */
 	err |= __copy_from_user(fpsimd.vregs, frame->ufp.fpregs,
 				sizeof(frame->ufp.fpregs));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Extract the fpsr and the fpcr from the fpscr */
@@ -486,6 +529,7 @@ badframe:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __user *compat_get_sigframe(struct k_sigaction *ka,
 					struct pt_regs *regs,
 					int framesize)
@@ -501,6 +545,8 @@ static void __user *compat_get_sigframe(struct k_sigaction *ka,
 
 	/*
 =======
+=======
+>>>>>>> v3.18
 static void __user *compat_get_sigframe(struct ksignal *ksig,
 					struct pt_regs *regs,
 					int framesize)
@@ -509,6 +555,9 @@ static void __user *compat_get_sigframe(struct ksignal *ksig,
 	void __user *frame;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * ATPCS B01 mandates 8-byte alignment
 	 */
@@ -610,7 +659,11 @@ static int compat_setup_sigframe(struct compat_sigframe __user *sf,
  * 32-bit signal handling routines called from signal.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int compat_setup_rt_frame(int usig, struct k_sigaction *ka, siginfo_t *info,
+=======
+int compat_setup_rt_frame(int usig, struct ksignal *ksig,
+>>>>>>> v3.18
 =======
 int compat_setup_rt_frame(int usig, struct ksignal *ksig,
 >>>>>>> v3.18
@@ -620,7 +673,11 @@ int compat_setup_rt_frame(int usig, struct ksignal *ksig,
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame = compat_get_sigframe(ka, regs, sizeof(*frame));
+=======
+	frame = compat_get_sigframe(ksig, regs, sizeof(*frame));
+>>>>>>> v3.18
 =======
 	frame = compat_get_sigframe(ksig, regs, sizeof(*frame));
 >>>>>>> v3.18
@@ -629,7 +686,11 @@ int compat_setup_rt_frame(int usig, struct ksignal *ksig,
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err |= copy_siginfo_to_user32(&frame->info, info);
+=======
+	err |= copy_siginfo_to_user32(&frame->info, &ksig->info);
+>>>>>>> v3.18
 =======
 	err |= copy_siginfo_to_user32(&frame->info, &ksig->info);
 >>>>>>> v3.18
@@ -643,7 +704,11 @@ int compat_setup_rt_frame(int usig, struct ksignal *ksig,
 
 	if (err == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compat_setup_return(regs, ka, frame->sig.retcode, frame, usig);
+=======
+		compat_setup_return(regs, &ksig->ka, frame->sig.retcode, frame, usig);
+>>>>>>> v3.18
 =======
 		compat_setup_return(regs, &ksig->ka, frame->sig.retcode, frame, usig);
 >>>>>>> v3.18
@@ -655,7 +720,11 @@ int compat_setup_rt_frame(int usig, struct ksignal *ksig,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int compat_setup_frame(int usig, struct k_sigaction *ka, sigset_t *set,
+=======
+int compat_setup_frame(int usig, struct ksignal *ksig, sigset_t *set,
+>>>>>>> v3.18
 =======
 int compat_setup_frame(int usig, struct ksignal *ksig, sigset_t *set,
 >>>>>>> v3.18
@@ -665,7 +734,11 @@ int compat_setup_frame(int usig, struct ksignal *ksig, sigset_t *set,
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame = compat_get_sigframe(ka, regs, sizeof(*frame));
+=======
+	frame = compat_get_sigframe(ksig, regs, sizeof(*frame));
+>>>>>>> v3.18
 =======
 	frame = compat_get_sigframe(ksig, regs, sizeof(*frame));
 >>>>>>> v3.18
@@ -678,7 +751,11 @@ int compat_setup_frame(int usig, struct ksignal *ksig, sigset_t *set,
 	err |= compat_setup_sigframe(frame, regs, set);
 	if (err == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compat_setup_return(regs, ka, frame->retcode, frame, usig);
+=======
+		compat_setup_return(regs, &ksig->ka, frame->retcode, frame, usig);
+>>>>>>> v3.18
 =======
 		compat_setup_return(regs, &ksig->ka, frame->retcode, frame, usig);
 >>>>>>> v3.18

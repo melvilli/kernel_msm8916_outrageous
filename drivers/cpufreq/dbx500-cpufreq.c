@@ -20,6 +20,7 @@ static struct cpufreq_frequency_table *freq_table;
 static struct clk *armss_clk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct freq_attr *dbx500_cpufreq_attr[] = {
 	&cpufreq_freq_attr_scaling_available_freqs,
 	NULL,
@@ -82,16 +83,22 @@ static unsigned int dbx500_cpufreq_getspeed(unsigned int cpu)
 
 	return freq_table[i].frequency;
 =======
+=======
+>>>>>>> v3.18
 static int dbx500_cpufreq_target(struct cpufreq_policy *policy,
 				unsigned int index)
 {
 	/* update armss clk frequency */
 	return clk_set_rate(armss_clk, freq_table[index].frequency * 1000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int dbx500_cpufreq_init(struct cpufreq_policy *policy)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int res;
 
@@ -131,6 +138,8 @@ static struct cpufreq_driver dbx500_cpufreq_driver = {
 	.name   = "DBX500",
 	.attr   = dbx500_cpufreq_attr,
 =======
+=======
+>>>>>>> v3.18
 	policy->clk = armss_clk;
 	return cpufreq_generic_init(policy, freq_table, 20 * 1000);
 }
@@ -144,13 +153,20 @@ static struct cpufreq_driver dbx500_cpufreq_driver = {
 	.init   = dbx500_cpufreq_init,
 	.name   = "DBX500",
 	.attr   = cpufreq_generic_attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static int dbx500_cpufreq_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i = 0;
+=======
+	struct cpufreq_frequency_table *pos;
+>>>>>>> v3.18
 =======
 	struct cpufreq_frequency_table *pos;
 >>>>>>> v3.18
@@ -169,10 +185,15 @@ static int dbx500_cpufreq_probe(struct platform_device *pdev)
 
 	pr_info("dbx500-cpufreq: Available frequencies:\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (freq_table[i].frequency != CPUFREQ_TABLE_END) {
 		pr_info("  %d Mhz\n", freq_table[i].frequency/1000);
 		i++;
 	}
+=======
+	cpufreq_for_each_entry(pos, freq_table)
+		pr_info("  %d Mhz\n", pos->frequency / 1000);
+>>>>>>> v3.18
 =======
 	cpufreq_for_each_entry(pos, freq_table)
 		pr_info("  %d Mhz\n", pos->frequency / 1000);

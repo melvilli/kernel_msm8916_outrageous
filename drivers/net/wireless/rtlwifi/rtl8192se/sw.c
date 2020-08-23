@@ -88,11 +88,16 @@ static void rtl92se_fw_cb(const struct firmware *firmware, void *context)
 {
 	struct ieee80211_hw *hw = context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtl_pci_priv *pcipriv = rtl_pcipriv(hw);
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_pci *rtlpci = rtl_pcidev(pcipriv);
 	struct rt_firmware *pfirmware = NULL;
 	int err;
+=======
+	struct rtl_priv *rtlpriv = rtl_priv(hw);
+	struct rt_firmware *pfirmware = NULL;
+>>>>>>> v3.18
 =======
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rt_firmware *pfirmware = NULL;
@@ -118,6 +123,7 @@ static void rtl92se_fw_cb(const struct firmware *firmware, void *context)
 	pfirmware->sz_fw_tmpbufferlen = firmware->size;
 	release_firmware(firmware);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	err = ieee80211_register_hw(hw);
 	if (err) {
@@ -132,6 +138,8 @@ static void rtl92se_fw_cb(const struct firmware *firmware, void *context)
 
 	/*init rfkill */
 	rtl_init_rfkill(hw);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -235,8 +243,13 @@ static int rtl92s_init_sw_vars(struct ieee80211_hw *hw)
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtlpriv->max_fw_size = RTL8190_MAX_RAW_FIRMWARE_CODE_SIZE;
 
+=======
+	rtlpriv->max_fw_size = RTL8190_MAX_FIRMWARE_CODE_SIZE*2 +
+			       sizeof(struct fw_hdr);
+>>>>>>> v3.18
 =======
 	rtlpriv->max_fw_size = RTL8190_MAX_FIRMWARE_CODE_SIZE*2 +
 			       sizeof(struct fw_hdr);
@@ -267,7 +280,10 @@ static void rtl92s_deinit_sw_vars(struct ieee80211_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool rtl92se_is_tx_desc_closed(struct ieee80211_hw *hw, u8 hw_queue,
 				      u16 index)
 {
@@ -281,6 +297,9 @@ static bool rtl92se_is_tx_desc_closed(struct ieee80211_hw *hw, u8 hw_queue,
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct rtl_hal_ops rtl8192se_hal_ops = {
 	.init_sw_vars = rtl92s_init_sw_vars,
@@ -316,6 +335,10 @@ static struct rtl_hal_ops rtl8192se_hal_ops = {
 	.set_desc = rtl92se_set_desc,
 	.get_desc = rtl92se_get_desc,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.is_tx_desc_closed = rtl92se_is_tx_desc_closed,
+>>>>>>> v3.18
 =======
 	.is_tx_desc_closed = rtl92se_is_tx_desc_closed,
 >>>>>>> v3.18
@@ -324,7 +347,10 @@ static struct rtl_hal_ops rtl8192se_hal_ops = {
 	.set_key = rtl92se_set_key,
 	.init_sw_leds = rtl92se_init_sw_leds,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.allow_all_destaddr = rtl92se_allow_all_destaddr,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.get_bbreg = rtl92s_phy_query_bb_reg,
@@ -332,6 +358,10 @@ static struct rtl_hal_ops rtl8192se_hal_ops = {
 	.get_rfreg = rtl92s_phy_query_rf_reg,
 	.set_rfreg = rtl92s_phy_set_rf_reg,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_btc_status = rtl_btc_status_false,
+>>>>>>> v3.18
 =======
 	.get_btc_status = rtl_btc_status_false,
 >>>>>>> v3.18
@@ -364,6 +394,11 @@ static struct rtl_hal_cfg rtl92se_hal_cfg = {
 	.maps[MAC_RCR_ACF] = RCR_ACF,
 	.maps[MAC_RCR_AAP] = RCR_AAP,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.maps[MAC_HIMR] = INTA_MASK,
+	.maps[MAC_HIMRE] = INTA_MASK + 4,
+>>>>>>> v3.18
 =======
 	.maps[MAC_HIMR] = INTA_MASK,
 	.maps[MAC_HIMRE] = INTA_MASK + 4,

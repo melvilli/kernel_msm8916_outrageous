@@ -29,7 +29,10 @@
 #ifdef __powerpc64__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Size of redzone that userspace is allowed to use below the stack
  * pointer.  This is 288 in the 64-bit big-endian ELF ABI, and 512 in
@@ -42,13 +45,20 @@
 #define USER_REDZONE_SIZE	512
 #define KERNEL_REDZONE_SIZE	288
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define STACK_FRAME_OVERHEAD	112	/* size of minimum stack frame */
 #define STACK_FRAME_LR_SAVE	2	/* Location of LR in stack frame */
 #define STACK_FRAME_REGS_MARKER	ASM_CONST(0x7265677368657265)
 #define STACK_INT_FRAME_SIZE	(sizeof(struct pt_regs) + \
 <<<<<<< HEAD
+<<<<<<< HEAD
 					STACK_FRAME_OVERHEAD + 288)
+=======
+				 STACK_FRAME_OVERHEAD + KERNEL_REDZONE_SIZE)
+>>>>>>> v3.18
 =======
 				 STACK_FRAME_OVERHEAD + KERNEL_REDZONE_SIZE)
 >>>>>>> v3.18
@@ -67,6 +77,11 @@
 #else /* __powerpc64__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define USER_REDZONE_SIZE	0
+#define KERNEL_REDZONE_SIZE	0
+>>>>>>> v3.18
 =======
 #define USER_REDZONE_SIZE	0
 #define KERNEL_REDZONE_SIZE	0

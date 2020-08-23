@@ -60,17 +60,23 @@ static struct resource *bootmem_resource_free;
 static DEFINE_SPINLOCK(bootmem_resource_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *r_next(struct seq_file *m, void *v, loff_t *pos)
 {
 	struct resource *p = v;
 	(*pos)++;
 =======
+=======
+>>>>>>> v3.18
 static struct resource *next_resource(struct resource *p, bool sibling_only)
 {
 	/* Caller wants to traverse through siblings only */
 	if (sibling_only)
 		return p->sibling;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (p->child)
 		return p->child;
@@ -80,7 +86,10 @@ static struct resource *next_resource(struct resource *p, bool sibling_only)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void *r_next(struct seq_file *m, void *v, loff_t *pos)
 {
 	struct resource *p = v;
@@ -88,6 +97,9 @@ static void *r_next(struct seq_file *m, void *v, loff_t *pos)
 	return (void *)next_resource(p, false);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PROC_FS
 
@@ -173,7 +185,11 @@ static int __init ioresources_init(void)
 {
 	proc_create("ioports", 0, NULL, &proc_ioports_operations);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	proc_create("iomem", S_IRUSR, NULL, &proc_iomem_operations);
+=======
+	proc_create("iomem", 0, NULL, &proc_iomem_operations);
+>>>>>>> v3.18
 =======
 	proc_create("iomem", 0, NULL, &proc_iomem_operations);
 >>>>>>> v3.18
@@ -331,6 +347,7 @@ EXPORT_SYMBOL(request_resource);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * locate_resource - locate an already reserved I/O or memory resource
  * @root: root resource descriptor
  * @search: resource descriptor to be located
@@ -351,6 +368,8 @@ EXPORT_SYMBOL(locate_resource);
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * release_resource - release a previously reserved resource
  * @old: resource pointer
  */
@@ -367,6 +386,7 @@ int release_resource(struct resource *old)
 EXPORT_SYMBOL(release_resource);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !defined(CONFIG_ARCH_HAS_WALK_MEMORY)
 /*
  * Finds the lowest memory reosurce exists within [res->start.res->end)
@@ -378,6 +398,8 @@ static int find_next_system_ram(struct resource *res, char *name)
 	resource_size_t start, end;
 	struct resource *p;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Finds the lowest iomem reosurce exists with-in [res->start.res->end)
  * the caller must specify res->start, res->end, res->flags and "name".
@@ -391,6 +413,9 @@ static int find_next_iomem_res(struct resource *res, char *name,
 	resource_size_t start, end;
 	struct resource *p;
 	bool sibling_only = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	BUG_ON(!res);
@@ -400,16 +425,22 @@ static int find_next_iomem_res(struct resource *res, char *name,
 	BUG_ON(start >= end);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_lock(&resource_lock);
 	for (p = iomem_resource.child; p ; p = p->sibling) {
 		/* system ram is just marked as IORESOURCE_MEM */
 =======
+=======
+>>>>>>> v3.18
 	if (first_level_children_only)
 		sibling_only = true;
 
 	read_lock(&resource_lock);
 
 	for (p = iomem_resource.child; p; p = next_resource(p, sibling_only)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (p->flags != res->flags)
 			continue;
@@ -423,6 +454,10 @@ static int find_next_iomem_res(struct resource *res, char *name,
 			break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -439,7 +474,10 @@ static int find_next_iomem_res(struct resource *res, char *name,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Walks through iomem resources and calls func() with matching resource
  * ranges. This walks through whole tree and not just first level children.
  * All the memory ranges which overlap start,end and also match flags and
@@ -504,6 +542,9 @@ int walk_system_ram_res(u64 start, u64 end, void *arg,
 #if !defined(CONFIG_ARCH_HAS_WALK_MEMORY)
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This function calls callback against all memory range of "System RAM"
  * which are marked as IORESOURCE_MEM and IORESOUCE_BUSY.
@@ -523,6 +564,7 @@ int walk_system_ram_range(unsigned long start_pfn, unsigned long nr_pages,
 	orig_end = res.end;
 	while ((res.start < res.end) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(find_next_system_ram(&res, "System RAM") >= 0)) {
 		pfn = (res.start + PAGE_SIZE - 1) >> PAGE_SHIFT;
 		if (res.end + 1 <= 0)
@@ -534,15 +576,24 @@ int walk_system_ram_range(unsigned long start_pfn, unsigned long nr_pages,
 		pfn = (res.start + PAGE_SIZE - 1) >> PAGE_SHIFT;
 		end_pfn = (res.end + 1) >> PAGE_SHIFT;
 >>>>>>> v3.18
+=======
+		(find_next_iomem_res(&res, "System RAM", true) >= 0)) {
+		pfn = (res.start + PAGE_SIZE - 1) >> PAGE_SHIFT;
+		end_pfn = (res.end + 1) >> PAGE_SHIFT;
+>>>>>>> v3.18
 		if (end_pfn > pfn)
 			ret = (*func)(pfn, end_pfn - pfn, arg);
 		if (ret)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (res.end + 1 > res.start)
 			res.start = res.end + 1;
 		else
 			res.start = res.end;
+=======
+		res.start = res.end + 1;
+>>>>>>> v3.18
 =======
 		res.start = res.end + 1;
 >>>>>>> v3.18
@@ -566,7 +617,10 @@ int __weak page_is_ram(unsigned long pfn)
 	return walk_system_ram_range(pfn, 1, NULL, __is_ram) == 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(page_is_ram);
 
 /*
@@ -604,6 +658,9 @@ int region_is_ram(resource_size_t start, unsigned long size)
 	read_unlock(&resource_lock);
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void __weak arch_remove_reservations(struct resource *avail)
@@ -628,11 +685,14 @@ static void resource_clip(struct resource *res, resource_size_t min,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool resource_contains(struct resource *res1, struct resource *res2)
 {
 	return res1->start <= res2->start && res1->end >= res2->end;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -648,7 +708,10 @@ static int __find_resource(struct resource *root, struct resource *old,
 	struct resource tmp = *new, avail, alloc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp.flags = new->flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tmp.start = root->start;
@@ -674,16 +737,22 @@ static int __find_resource(struct resource *root, struct resource *old,
 
 		/* Check for overflow after ALIGN() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		avail = *new;
 		avail.start = ALIGN(tmp.start, constraint->align);
 		avail.end = tmp.end;
 		if (avail.start >= tmp.start) {
 =======
+=======
+>>>>>>> v3.18
 		avail.start = ALIGN(tmp.start, constraint->align);
 		avail.end = tmp.end;
 		avail.flags = new->flags & ~IORESOURCE_UNSET;
 		if (avail.start >= tmp.start) {
 			alloc.flags = avail.flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			alloc.start = constraint->alignf(constraint->alignf_data, &avail,
 					size, constraint->align);
@@ -726,7 +795,11 @@ static int find_resource(struct resource *root, struct resource *new,
  * @constraint: the size and alignment constraints to be met.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int reallocate_resource(struct resource *root, struct resource *old,
+=======
+static int reallocate_resource(struct resource *root, struct resource *old,
+>>>>>>> v3.18
 =======
 static int reallocate_resource(struct resource *root, struct resource *old,
 >>>>>>> v3.18
@@ -1164,8 +1237,13 @@ struct resource * __request_region(struct resource *parent,
 	res->start = start;
 	res->end = start + n - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res->flags = IORESOURCE_BUSY;
 	res->flags |= flags;
+=======
+	res->flags = resource_type(parent);
+	res->flags |= IORESOURCE_BUSY | flags;
+>>>>>>> v3.18
 =======
 	res->flags = resource_type(parent);
 	res->flags |= IORESOURCE_BUSY | flags;
@@ -1181,10 +1259,16 @@ struct resource * __request_region(struct resource *parent,
 			break;
 		if (conflict != parent) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(conflict->flags & IORESOURCE_BUSY)) {
 				parent = conflict;
 				continue;
 			}
+=======
+			parent = conflict;
+			if (!(conflict->flags & IORESOURCE_BUSY))
+				continue;
+>>>>>>> v3.18
 =======
 			parent = conflict;
 			if (!(conflict->flags & IORESOURCE_BUSY))
@@ -1396,7 +1480,10 @@ int release_mem_region_adjustable(struct resource *parent,
  * Managed region resource
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void devm_resource_release(struct device *dev, void *ptr)
 {
 	struct resource **r = ptr;
@@ -1467,6 +1554,9 @@ void devm_release_resource(struct device *dev, struct resource *new)
 }
 EXPORT_SYMBOL(devm_release_resource);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct region_devres {
 	struct resource *parent;
@@ -1592,6 +1682,7 @@ int iomem_map_sanity_check(resource_size_t addr, unsigned long size)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "resource map sanity check conflict: "
 		       "0x%llx 0x%llx 0x%llx 0x%llx %s\n",
 		       (unsigned long long)addr,
@@ -1600,10 +1691,15 @@ int iomem_map_sanity_check(resource_size_t addr, unsigned long size)
 		       (unsigned long long)p->end,
 		       p->name);
 =======
+=======
+>>>>>>> v3.18
 		printk(KERN_WARNING "resource sanity check: requesting [mem %#010llx-%#010llx], which spans more than %s %pR\n",
 		       (unsigned long long)addr,
 		       (unsigned long long)(addr + size - 1),
 		       p->name, p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = -1;
 		break;

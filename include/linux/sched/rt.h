@@ -2,6 +2,7 @@
 #define _SCHED_RT_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Priority of a process goes from 0..MAX_PRIO-1, valid RT
  * priority is 0..MAX_RT_PRIO-1, and SCHED_NORMAL/SCHED_BATCH
@@ -23,6 +24,9 @@
 =======
 #include <linux/sched/prio.h>
 >>>>>>> v3.18
+=======
+#include <linux/sched/prio.h>
+>>>>>>> v3.18
 
 static inline int rt_prio(int prio)
 {
@@ -40,6 +44,11 @@ static inline int rt_task(struct task_struct *p)
 extern int rt_mutex_getprio(struct task_struct *p);
 extern void rt_mutex_setprio(struct task_struct *p, int prio);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int rt_mutex_check_prio(struct task_struct *task, int newprio);
+extern struct task_struct *rt_mutex_get_top_task(struct task_struct *task);
+>>>>>>> v3.18
 =======
 extern int rt_mutex_check_prio(struct task_struct *task, int newprio);
 extern struct task_struct *rt_mutex_get_top_task(struct task_struct *task);
@@ -55,7 +64,10 @@ static inline int rt_mutex_getprio(struct task_struct *p)
 	return p->normal_prio;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline int rt_mutex_check_prio(struct task_struct *task, int newprio)
 {
@@ -66,6 +78,9 @@ static inline struct task_struct *rt_mutex_get_top_task(struct task_struct *task
 {
 	return NULL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # define rt_mutex_adjust_pi(p)		do { } while (0)
 static inline bool tsk_is_pi_blocked(struct task_struct *tsk)

@@ -20,6 +20,7 @@
 struct device;
 struct ata_port_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct ahci_platform_data {
 	int (*init)(struct device *dev, void __iomem *addr);
@@ -31,6 +32,8 @@ struct ahci_platform_data {
 	unsigned int mask_port_map;
 };
 =======
+=======
+>>>>>>> v3.18
 struct ahci_host_priv;
 struct platform_device;
 
@@ -48,6 +51,9 @@ int ahci_platform_suspend_host(struct device *dev);
 int ahci_platform_resume_host(struct device *dev);
 int ahci_platform_suspend(struct device *dev);
 int ahci_platform_resume(struct device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _AHCI_PLATFORM_H */

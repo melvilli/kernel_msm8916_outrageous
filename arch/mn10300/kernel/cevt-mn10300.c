@@ -114,7 +114,11 @@ int __init init_clockevents(void)
 
 	iact = &per_cpu(timer_irq, cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iact->flags = IRQF_DISABLED | IRQF_SHARED | IRQF_TIMER;
+=======
+	iact->flags = IRQF_SHARED | IRQF_TIMER;
+>>>>>>> v3.18
 =======
 	iact->flags = IRQF_SHARED | IRQF_TIMER;
 >>>>>>> v3.18

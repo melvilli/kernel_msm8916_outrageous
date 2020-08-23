@@ -20,6 +20,7 @@
  * option) any later version.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/types.h>
 #include <linux/kernel.h>
@@ -40,6 +41,8 @@
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/dma-mapping.h>
 #include <linux/fsl_devices.h>
@@ -59,6 +62,9 @@
 #include <linux/spi/spi.h>
 #include <linux/spi/spi_bitbang.h>
 #include <linux/types.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "spi-fsl-lib.h"
@@ -81,7 +87,11 @@ static struct fsl_spi_match_data of_fsl_spi_grlib_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id of_fsl_spi_match[] = {
+=======
+static const struct of_device_id of_fsl_spi_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id of_fsl_spi_match[] = {
 >>>>>>> v3.18
@@ -266,12 +276,15 @@ static int fsl_spi_setup_transfer(struct spi_device *spi,
 		bits_per_word = spi->bits_per_word;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Make sure its a bit width we support [4..16, 32] */
 	if ((bits_per_word < 4)
 	    || ((bits_per_word > 16) && (bits_per_word != 32))
 	    || (bits_per_word > mpc8xxx_spi->max_bits_per_word))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!hz)
@@ -369,7 +382,11 @@ static int fsl_spi_bufs(struct spi_device *spi, struct spi_transfer *t,
 	mpc8xxx_spi->rx = t->rx_buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(mpc8xxx_spi->done);
+=======
+	reinit_completion(&mpc8xxx_spi->done);
+>>>>>>> v3.18
 =======
 	reinit_completion(&mpc8xxx_spi->done);
 >>>>>>> v3.18
@@ -396,7 +413,11 @@ static void fsl_spi_do_one_msg(struct spi_message *m)
 {
 	struct spi_device *spi = m->spi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_transfer *t;
+=======
+	struct spi_transfer *t, *first;
+>>>>>>> v3.18
 =======
 	struct spi_transfer *t, *first;
 >>>>>>> v3.18
@@ -404,6 +425,7 @@ static void fsl_spi_do_one_msg(struct spi_message *m)
 	const int nsecs = 50;
 	int status;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cs_change = 1;
 	status = 0;
@@ -413,6 +435,8 @@ static void fsl_spi_do_one_msg(struct spi_message *m)
 			status = -EINVAL;
 
 =======
+=======
+>>>>>>> v3.18
 	/* Don't allow changes if CS is active */
 	first = list_first_entry(&m->transfers, struct spi_transfer,
 			transfer_list);
@@ -430,6 +454,9 @@ static void fsl_spi_do_one_msg(struct spi_message *m)
 	status = -EINVAL;
 	list_for_each_entry(t, &m->transfers, transfer_list) {
 		if (t->bits_per_word || t->speed_hz) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (cs_change)
 				status = fsl_spi_setup_transfer(spi, t);
@@ -462,7 +489,12 @@ static void fsl_spi_do_one_msg(struct spi_message *m)
 
 	m->status = status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	m->complete(m->context);
+=======
+	if (m->complete)
+		m->complete(m->context);
+>>>>>>> v3.18
 =======
 	if (m->complete)
 		m->complete(m->context);
@@ -483,7 +515,11 @@ static int fsl_spi_setup(struct spi_device *spi)
 	int retval;
 	u32 hw_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_mpc8xxx_cs	*cs = spi->controller_state;
+=======
+	struct spi_mpc8xxx_cs *cs = spi_get_ctldata(spi);
+>>>>>>> v3.18
 =======
 	struct spi_mpc8xxx_cs *cs = spi_get_ctldata(spi);
 >>>>>>> v3.18
@@ -493,15 +529,21 @@ static int fsl_spi_setup(struct spi_device *spi)
 
 	if (!cs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cs = kzalloc(sizeof *cs, GFP_KERNEL);
 		if (!cs)
 			return -ENOMEM;
 		spi->controller_state = cs;
 =======
+=======
+>>>>>>> v3.18
 		cs = kzalloc(sizeof(*cs), GFP_KERNEL);
 		if (!cs)
 			return -ENOMEM;
 		spi_set_ctldata(spi, cs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	mpc8xxx_spi = spi_master_get_devdata(spi->master);
@@ -565,10 +607,13 @@ static void fsl_spi_cleanup(struct spi_device *spi)
 {
 	struct mpc8xxx_spi *mpc8xxx_spi = spi_master_get_devdata(spi->master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (mpc8xxx_spi->type == TYPE_GRLIB && gpio_is_valid(spi->cs_gpio))
 		gpio_free(spi->cs_gpio);
 =======
+=======
+>>>>>>> v3.18
 	struct spi_mpc8xxx_cs *cs = spi_get_ctldata(spi);
 
 	if (mpc8xxx_spi->type == TYPE_GRLIB && gpio_is_valid(spi->cs_gpio))
@@ -576,6 +621,9 @@ static void fsl_spi_cleanup(struct spi_device *spi)
 
 	kfree(cs);
 	spi_set_ctldata(spi, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -658,7 +706,11 @@ static void fsl_spi_grlib_cs_control(struct spi_device *spi, bool on)
 static void fsl_spi_grlib_probe(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_spi_platform_data *pdata = dev->platform_data;
+=======
+	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -688,7 +740,11 @@ static struct spi_master * fsl_spi_probe(struct device *dev,
 		struct resource *mem, unsigned int irq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_spi_platform_data *pdata = dev->platform_data;
+=======
+	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -733,11 +789,17 @@ static struct spi_master * fsl_spi_probe(struct device *dev,
 		fsl_spi_grlib_probe(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	master->bits_per_word_mask =
 		(SPI_BPW_RANGE_MASK(4, 16) | SPI_BPW_MASK(32)) &
 		SPI_BPW_RANGE_MASK(1, mpc8xxx_spi->max_bits_per_word);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (mpc8xxx_spi->flags & SPI_QE_CPU_MODE)
 		mpc8xxx_spi->set_shifts = fsl_spi_qe_cpu_set_shifts;
@@ -799,7 +861,12 @@ static void fsl_spi_cs_control(struct spi_device *spi, bool on)
 {
 	struct device *dev = spi->dev.parent->parent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mpc8xxx_spi_probe_info *pinfo = to_of_pinfo(dev->platform_data);
+=======
+	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
+	struct mpc8xxx_spi_probe_info *pinfo = to_of_pinfo(pdata);
+>>>>>>> v3.18
 =======
 	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
 	struct mpc8xxx_spi_probe_info *pinfo = to_of_pinfo(pdata);
@@ -815,7 +882,11 @@ static int of_fsl_spi_get_chipselects(struct device *dev)
 {
 	struct device_node *np = dev->of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_spi_platform_data *pdata = dev->platform_data;
+=======
+	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -898,7 +969,11 @@ err_alloc_flags:
 static int of_fsl_spi_free_chipselects(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_spi_platform_data *pdata = dev->platform_data;
+=======
+	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct fsl_spi_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -965,7 +1040,11 @@ err:
 static int of_fsl_spi_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_master *master = dev_get_drvdata(&ofdev->dev);
+=======
+	struct spi_master *master = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct spi_master *master = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -1005,7 +1084,11 @@ static int plat_mpc8xxx_spi_probe(struct platform_device *pdev)
 	struct spi_master *master;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdev->dev.platform_data)
+=======
+	if (!dev_get_platdata(&pdev->dev))
+>>>>>>> v3.18
 =======
 	if (!dev_get_platdata(&pdev->dev))
 >>>>>>> v3.18
@@ -1021,7 +1104,11 @@ static int plat_mpc8xxx_spi_probe(struct platform_device *pdev)
 
 	master = fsl_spi_probe(&pdev->dev, mem, irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(master);
+=======
+	return PTR_ERR_OR_ZERO(master);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(master);
 >>>>>>> v3.18

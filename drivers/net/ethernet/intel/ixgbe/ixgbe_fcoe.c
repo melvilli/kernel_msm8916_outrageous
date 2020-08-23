@@ -2,7 +2,11 @@
 
   Intel 10 Gigabit PCI Express Linux driver
 <<<<<<< HEAD
+<<<<<<< HEAD
   Copyright(c) 1999 - 2013 Intel Corporation.
+=======
+  Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
   Copyright(c) 1999 - 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -25,6 +29,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -75,7 +83,11 @@ static inline void ixgbe_fcoe_clear_ddp(struct ixgbe_fcoe_ddp *ddp)
 int ixgbe_fcoe_ddp_put(struct net_device *netdev, u16 xid)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int len = 0;
+=======
+	int len;
+>>>>>>> v3.18
 =======
 	int len;
 >>>>>>> v3.18
@@ -86,15 +98,21 @@ int ixgbe_fcoe_ddp_put(struct net_device *netdev, u16 xid)
 
 	if (!netdev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_ddp_put;
 
 	if (xid >= IXGBE_FCOE_DDP_MAX)
 		goto out_ddp_put;
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 
 	if (xid >= IXGBE_FCOE_DDP_MAX)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	adapter = netdev_priv(netdev);
@@ -102,7 +120,11 @@ int ixgbe_fcoe_ddp_put(struct net_device *netdev, u16 xid)
 	ddp = &fcoe->ddp[xid];
 	if (!ddp->udl)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_ddp_put;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -137,7 +159,10 @@ int ixgbe_fcoe_ddp_put(struct net_device *netdev, u16 xid)
 	ixgbe_fcoe_clear_ddp(ddp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_ddp_put:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return len;
@@ -420,7 +445,11 @@ int ixgbe_fcoe_ddp(struct ixgbe_adapter *adapter,
 
 	if (xid >= IXGBE_FCOE_DDP_MAX)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto ddp_out;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -429,7 +458,11 @@ int ixgbe_fcoe_ddp(struct ixgbe_adapter *adapter,
 	ddp = &fcoe->ddp[xid];
 	if (!ddp->udl)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto ddp_out;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -438,17 +471,23 @@ int ixgbe_fcoe_ddp(struct ixgbe_adapter *adapter,
 					      IXGBE_RXDADV_ERR_FCERR);
 	if (ddp_err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto ddp_out;
 
 	switch (ixgbe_test_staterr(rx_desc, IXGBE_RXDADV_STAT_FCSTAT)) {
 	/* return 0 to bypass going to ULD for DDPed data */
 	case __constant_cpu_to_le32(IXGBE_RXDADV_STAT_FCSTAT_DDP):
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 
 	switch (ixgbe_test_staterr(rx_desc, IXGBE_RXDADV_STAT_FCSTAT)) {
 	/* return 0 to bypass going to ULD for DDPed data */
 	case cpu_to_le32(IXGBE_RXDADV_STAT_FCSTAT_DDP):
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* update length of DDPed data */
 		ddp->len = le32_to_cpu(rx_desc->wb.lower.hi_dword.rss);
@@ -456,7 +495,11 @@ int ixgbe_fcoe_ddp(struct ixgbe_adapter *adapter,
 		break;
 	/* unmap the sg list when FCPRSP is received */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case __constant_cpu_to_le32(IXGBE_RXDADV_STAT_FCSTAT_FCPRSP):
+=======
+	case cpu_to_le32(IXGBE_RXDADV_STAT_FCSTAT_FCPRSP):
+>>>>>>> v3.18
 =======
 	case cpu_to_le32(IXGBE_RXDADV_STAT_FCSTAT_FCPRSP):
 >>>>>>> v3.18
@@ -468,7 +511,11 @@ int ixgbe_fcoe_ddp(struct ixgbe_adapter *adapter,
 		/* fall through */
 	/* if DDP length is present pass it through to ULD */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case __constant_cpu_to_le32(IXGBE_RXDADV_STAT_FCSTAT_NODDP):
+=======
+	case cpu_to_le32(IXGBE_RXDADV_STAT_FCSTAT_NODDP):
+>>>>>>> v3.18
 =======
 	case cpu_to_le32(IXGBE_RXDADV_STAT_FCSTAT_NODDP):
 >>>>>>> v3.18
@@ -479,7 +526,11 @@ int ixgbe_fcoe_ddp(struct ixgbe_adapter *adapter,
 		break;
 	/* no match will return as an error */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case __constant_cpu_to_le32(IXGBE_RXDADV_STAT_FCSTAT_NOMTCH):
+=======
+	case cpu_to_le32(IXGBE_RXDADV_STAT_FCSTAT_NOMTCH):
+>>>>>>> v3.18
 =======
 	case cpu_to_le32(IXGBE_RXDADV_STAT_FCSTAT_NOMTCH):
 >>>>>>> v3.18
@@ -501,7 +552,11 @@ int ixgbe_fcoe_ddp(struct ixgbe_adapter *adapter,
 		crc->fcoe_eof = FC_EOF_T;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 ddp_out:
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -644,7 +699,11 @@ static int ixgbe_fcoe_dma_pool_alloc(struct ixgbe_fcoe *fcoe,
 	char pool_name[32];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snprintf(pool_name, 32, "ixgbe_fcoe_ddp_%d", cpu);
+=======
+	snprintf(pool_name, 32, "ixgbe_fcoe_ddp_%u", cpu);
+>>>>>>> v3.18
 =======
 	snprintf(pool_name, 32, "ixgbe_fcoe_ddp_%u", cpu);
 >>>>>>> v3.18
@@ -940,7 +999,10 @@ int ixgbe_fcoe_disable(struct net_device *netdev)
 int ixgbe_fcoe_get_wwn(struct net_device *netdev, u64 *wwn, int type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 prefix = 0xffff;
@@ -968,9 +1030,15 @@ int ixgbe_fcoe_get_wwn(struct net_device *netdev, u64 *wwn, int type)
 		       ((u64) mac->san_addr[4] << 8)  |
 		       ((u64) mac->san_addr[5]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = 0;
 	}
 	return rc;
+=======
+		return 0;
+	}
+	return -EINVAL;
+>>>>>>> v3.18
 =======
 		return 0;
 	}

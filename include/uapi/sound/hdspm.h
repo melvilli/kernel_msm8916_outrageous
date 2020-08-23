@@ -112,7 +112,11 @@ struct hdspm_ltc {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SNDRV_HDSPM_IOCTL_GET_LTC _IOR('H', 0x46, struct hdspm_mixer_ioctl)
+=======
+#define SNDRV_HDSPM_IOCTL_GET_LTC _IOR('H', 0x46, struct hdspm_ltc)
+>>>>>>> v3.18
 =======
 #define SNDRV_HDSPM_IOCTL_GET_LTC _IOR('H', 0x46, struct hdspm_ltc)
 >>>>>>> v3.18

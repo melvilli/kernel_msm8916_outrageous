@@ -62,7 +62,11 @@
 #include <linux/timer.h>	/* For timer related operations */
 #include <linux/jiffies.h>	/* For jiffies stuff */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>	/* For MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR) */
+=======
+#include <linux/miscdevice.h>	/* For struct miscdevice */
+>>>>>>> v3.18
 =======
 #include <linux/miscdevice.h>	/* For struct miscdevice */
 >>>>>>> v3.18
@@ -1016,7 +1020,10 @@ MODULE_DESCRIPTION("Berkshire ISA-PC Watchdog driver");
 MODULE_VERSION(WATCHDOG_VERSION);
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
 MODULE_ALIAS_MISCDEV(TEMP_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

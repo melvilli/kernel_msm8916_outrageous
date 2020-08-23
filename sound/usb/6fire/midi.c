@@ -42,8 +42,14 @@ static void usb6fire_midi_out_handler(struct urb *urb)
 			ret = usb_submit_urb(urb, GFP_ATOMIC);
 			if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk(KERN_ERR PREFIX "midi out urb "
 						"submit failed: %d\n", ret);
+=======
+				dev_err(&urb->dev->dev,
+					"midi out urb submit failed: %d\n",
+					ret);
+>>>>>>> v3.18
 =======
 				dev_err(&urb->dev->dev,
 					"midi out urb submit failed: %d\n",
@@ -101,8 +107,14 @@ static void usb6fire_midi_out_trigger(
 			ret = usb_submit_urb(urb, GFP_ATOMIC);
 			if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk(KERN_ERR PREFIX "midi out urb "
 						"submit failed: %d\n", ret);
+=======
+				dev_err(&urb->dev->dev,
+					"midi out urb submit failed: %d\n",
+					ret);
+>>>>>>> v3.18
 =======
 				dev_err(&urb->dev->dev,
 					"midi out urb submit failed: %d\n",
@@ -194,7 +206,11 @@ int usb6fire_midi_init(struct sfire_chip *chip)
 		kfree(rt->out_buffer);
 		kfree(rt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR PREFIX "unable to create midi.\n");
+=======
+		dev_err(&chip->dev->dev, "unable to create midi.\n");
+>>>>>>> v3.18
 =======
 		dev_err(&chip->dev->dev, "unable to create midi.\n");
 >>>>>>> v3.18

@@ -8,7 +8,12 @@
  * option) any later version.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
+=======
+#include "skeleton.dtsi"
+#include <dt-bindings/interrupt-controller/irq.h>
+>>>>>>> v3.18
 =======
 #include "skeleton.dtsi"
 #include <dt-bindings/interrupt-controller/irq.h>
@@ -43,7 +48,11 @@
 			pinctrl-single,bit-per-mux;
 			pinctrl-single,register-width = <32>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pinctrl-single,function-mask = <0xffffffff>;
+=======
+			pinctrl-single,function-mask = <0xf>;
+>>>>>>> v3.18
 =======
 			pinctrl-single,function-mask = <0xf>;
 >>>>>>> v3.18
@@ -135,7 +144,10 @@
 				>;
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			mdio_pins: pinmux_mdio_pins {
 				pinctrl-single,bits = <
 					/* MDIO_CLK, MDIO_D */
@@ -165,13 +177,19 @@
 			reg =	<0x0 0x10000>;
 			interrupts = <11 13 12>;
 			#dma-cells = <1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 		serial0: serial@1c42000 {
 			compatible = "ns16550a";
 			reg = <0x42000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clock-frequency = <150000000>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			reg-shift = <2>;
@@ -182,7 +200,10 @@
 			compatible = "ns16550a";
 			reg = <0x10c000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clock-frequency = <150000000>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			reg-shift = <2>;
@@ -193,7 +214,10 @@
 			compatible = "ns16550a";
 			reg = <0x10d000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clock-frequency = <150000000>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			reg-shift = <2>;
@@ -267,7 +291,10 @@
 			status = "disabled";
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		mdio: mdio@1e24000 {
 			compatible = "ti,davinci_mdio";
 			#address-cells = <1>;
@@ -314,6 +341,9 @@
 				<&edma0 0>;
 			dma-names = "tx", "rx";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 	nand_cs3@62000000 {

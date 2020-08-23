@@ -7,6 +7,7 @@
  *	    Sebastian Andrzej Siewior <bigeasy@linutronix.de>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -36,6 +37,8 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 =======
+=======
+>>>>>>> v3.18
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2  of
  * the License as published by the Free Software Foundation.
@@ -44,6 +47,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -52,7 +58,12 @@
 
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include "trace.h"
+#include "debug.h"
+>>>>>>> v3.18
 =======
 #include "trace.h"
 #include "debug.h"
@@ -62,6 +73,12 @@
 static inline u32 dwc3_readl(void __iomem *base, u32 offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 offs = offset - DWC3_GLOBALS_REGS_START;
+	u32 value;
+
+>>>>>>> v3.18
 =======
 	u32 offs = offset - DWC3_GLOBALS_REGS_START;
 	u32 value;
@@ -73,8 +90,11 @@ static inline u32 dwc3_readl(void __iomem *base, u32 offset)
 	 * However, the offsets are given starting from xHCI address space.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return readl(base + (offset - DWC3_GLOBALS_REGS_START));
 =======
+=======
+>>>>>>> v3.18
 	value = readl(base + offs);
 
 	/*
@@ -86,12 +106,20 @@ static inline u32 dwc3_readl(void __iomem *base, u32 offset)
 			base - DWC3_GLOBALS_REGS_START + offset, value);
 
 	return value;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void dwc3_writel(void __iomem *base, u32 offset, u32 value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 offs = offset - DWC3_GLOBALS_REGS_START;
+
+>>>>>>> v3.18
 =======
 	u32 offs = offset - DWC3_GLOBALS_REGS_START;
 
@@ -102,8 +130,11 @@ static inline void dwc3_writel(void __iomem *base, u32 offset, u32 value)
 	 * However, the offsets are given starting from xHCI address space.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(value, base + (offset - DWC3_GLOBALS_REGS_START));
 =======
+=======
+>>>>>>> v3.18
 	writel(value, base + offs);
 
 	/*
@@ -113,6 +144,9 @@ static inline void dwc3_writel(void __iomem *base, u32 offset, u32 value)
 	 */
 	dwc3_trace(trace_dwc3_writel, "addr %p value %08x",
 			base - DWC3_GLOBALS_REGS_START + offset, value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

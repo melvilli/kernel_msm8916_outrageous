@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -107,7 +111,10 @@ static void acpi_ut_free_gpe_lists(void)
 #endif				/* !ACPI_REDUCED_HARDWARE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*******************************************************************************
  *
  * FUNCTION:    acpi_ut_init_globals
@@ -253,6 +260,9 @@ acpi_status acpi_ut_init_globals(void)
 	return_ACPI_STATUS(AE_OK);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /******************************************************************************
  *

@@ -12,6 +12,7 @@
 #include "error.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SPRINTFCAT(str, format, param, max_alloc)		\
 {								\
 	char *tmp;						\
@@ -100,6 +101,8 @@ static void report_ccb_status(u32 status, char *outstr)
 			   cha_id, sizeof("ff"));
 	}
 =======
+=======
+>>>>>>> v3.18
 static const struct {
 	u8 value;
 	const char *error_text;
@@ -229,12 +232,16 @@ static void report_ccb_status(struct device *jrdev, const u32 status,
 		cha_str = cha_id_list[cha_id];
 	else
 		snprintf(cha_err_code, sizeof(cha_err_code), "%02x", cha_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((cha_id << JRSTA_CCBERR_CHAID_SHIFT) == JRSTA_CCBERR_CHAID_RNG &&
 	    err_id < ARRAY_SIZE(rng_err_id_list) &&
 	    strlen(rng_err_id_list[err_id])) {
 		/* RNG-only error */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		SPRINTFCAT(outstr, "%s", rng_err_id_list[err_id],
 			   strlen(rng_err_id_list[err_id]));
@@ -386,6 +393,8 @@ char *caam_jr_strstatus(char *outstr, u32 status)
 		void (*report_ssed)(u32 status, char *outstr);
 		char *error;
 =======
+=======
+>>>>>>> v3.18
 		err_str = rng_err_id_list[err_id];
 	} else if (err_id < ARRAY_SIZE(err_id_list))
 		err_str = err_id_list[err_id];
@@ -454,6 +463,9 @@ void caam_jr_strstatus(struct device *jrdev, u32 status)
 		void (*report_ssed)(struct device *jrdev, const u32 status,
 				    const char *error);
 		const char *error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} status_src[] = {
 		{ NULL, "No error" },
@@ -467,6 +479,7 @@ void caam_jr_strstatus(struct device *jrdev, u32 status)
 	};
 	u32 ssrc = status >> JRSTA_SSRC_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	sprintf(outstr, "%s: ", status_src[ssrc].error);
 
@@ -475,6 +488,8 @@ void caam_jr_strstatus(struct device *jrdev, u32 status)
 
 	return outstr;
 =======
+=======
+>>>>>>> v3.18
 	const char *error = status_src[ssrc].error;
 
 	/*
@@ -486,6 +501,9 @@ void caam_jr_strstatus(struct device *jrdev, u32 status)
 		dev_err(jrdev, "%08x: %s: \n", status, status_src[ssrc].error);
 	else
 		status_src[ssrc].report_ssed(jrdev, status, error);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(caam_jr_strstatus);

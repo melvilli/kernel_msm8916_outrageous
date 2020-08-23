@@ -11,6 +11,7 @@
 #include <linux/init.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/pci-aspm.h>
 #include <acpi/acpi.h>
@@ -21,11 +22,17 @@
 #include <linux/module.h>
 #include <linux/pci-aspm.h>
 >>>>>>> v3.18
+=======
+#include <linux/pci_hotplug.h>
+#include <linux/module.h>
+#include <linux/pci-aspm.h>
+>>>>>>> v3.18
 #include <linux/pci-acpi.h>
 #include <linux/pm_runtime.h>
 #include <linux/pm_qos.h>
 #include "pci.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * pci_acpi_wake_bus - Wake-up notification handler for root buses.
@@ -54,6 +61,8 @@ static void pci_acpi_wake_dev(acpi_handle handle, u32 event, void *context)
 	if (event != ACPI_NOTIFY_DEVICE_WAKE || !pci_dev)
 		return;
 =======
+=======
+>>>>>>> v3.18
 phys_addr_t acpi_pci_root_get_mcfg_addr(acpi_handle handle)
 {
 	acpi_status status = AE_NOT_EXIST;
@@ -341,6 +350,9 @@ static void pci_acpi_wake_dev(struct work_struct *work)
 
 	context = container_of(work, struct acpi_device_wakeup_context, work);
 	pci_dev = to_pci_dev(context->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pci_dev->pme_poll)
@@ -365,6 +377,7 @@ static void pci_acpi_wake_dev(struct work_struct *work)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pci_acpi_add_bus_pm_notifier - Register PM notifier for given PCI bus.
  * @dev: ACPI device to add the notifier for.
  * @pci_bus: PCI bus to walk checking for PME status if an event is signaled.
@@ -383,12 +396,17 @@ acpi_status pci_acpi_remove_bus_pm_notifier(struct acpi_device *dev)
 {
 	return acpi_remove_pm_notifier(dev, pci_acpi_wake_bus);
 =======
+=======
+>>>>>>> v3.18
  * pci_acpi_add_bus_pm_notifier - Register PM notifier for root PCI bus.
  * @dev: PCI root bridge ACPI device.
  */
 acpi_status pci_acpi_add_bus_pm_notifier(struct acpi_device *dev)
 {
 	return acpi_add_pm_notifier(dev, NULL, pci_acpi_wake_bus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -400,6 +418,7 @@ acpi_status pci_acpi_add_bus_pm_notifier(struct acpi_device *dev)
 acpi_status pci_acpi_add_pm_notifier(struct acpi_device *dev,
 				     struct pci_dev *pci_dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return acpi_add_pm_notifier(dev, pci_acpi_wake_dev, pci_dev);
 }
@@ -428,6 +447,9 @@ phys_addr_t acpi_pci_root_get_mcfg_addr(acpi_handle handle)
 =======
 	return acpi_add_pm_notifier(dev, &pci_dev->dev, pci_acpi_wake_dev);
 >>>>>>> v3.18
+=======
+	return acpi_add_pm_notifier(dev, &pci_dev->dev, pci_acpi_wake_dev);
+>>>>>>> v3.18
 }
 
 /*
@@ -451,7 +473,11 @@ phys_addr_t acpi_pci_root_get_mcfg_addr(acpi_handle handle)
  *	choose from highest power _SxD to lowest power _SxW
  * else // no _PRW at S-state x
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	choose highest power _SxD or any lower power
+=======
+ *	choose highest power _SxD or any lower power
+>>>>>>> v3.18
 =======
  *	choose highest power _SxD or any lower power
 >>>>>>> v3.18
@@ -487,9 +513,14 @@ static pci_power_t acpi_pci_choose_state(struct pci_dev *pdev)
 static bool acpi_pci_power_manageable(struct pci_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle handle = DEVICE_ACPI_HANDLE(&dev->dev);
 
 	return handle ? acpi_bus_power_manageable(handle) : false;
+=======
+	struct acpi_device *adev = ACPI_COMPANION(&dev->dev);
+	return adev ? acpi_device_power_manageable(adev) : false;
+>>>>>>> v3.18
 =======
 	struct acpi_device *adev = ACPI_COMPANION(&dev->dev);
 	return adev ? acpi_device_power_manageable(adev) : false;
@@ -499,8 +530,12 @@ static bool acpi_pci_power_manageable(struct pci_dev *dev)
 static int acpi_pci_set_power_state(struct pci_dev *dev, pci_power_t state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle handle = DEVICE_ACPI_HANDLE(&dev->dev);
 	acpi_handle tmp;
+=======
+	struct acpi_device *adev = ACPI_COMPANION(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct acpi_device *adev = ACPI_COMPANION(&dev->dev);
 >>>>>>> v3.18
@@ -509,8 +544,13 @@ static int acpi_pci_set_power_state(struct pci_dev *dev, pci_power_t state)
 		[PCI_D1] = ACPI_STATE_D1,
 		[PCI_D2] = ACPI_STATE_D2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		[PCI_D3hot] = ACPI_STATE_D3,
 		[PCI_D3cold] = ACPI_STATE_D3
+=======
+		[PCI_D3hot] = ACPI_STATE_D3_COLD,
+		[PCI_D3cold] = ACPI_STATE_D3_COLD,
+>>>>>>> v3.18
 =======
 		[PCI_D3hot] = ACPI_STATE_D3_COLD,
 		[PCI_D3cold] = ACPI_STATE_D3_COLD,
@@ -520,7 +560,11 @@ static int acpi_pci_set_power_state(struct pci_dev *dev, pci_power_t state)
 
 	/* If the ACPI device has _EJ0, ignore the device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!handle || ACPI_SUCCESS(acpi_get_handle(handle, "_EJ0", &tmp)))
+=======
+	if (!adev || acpi_has_method(adev->handle, "_EJ0"))
+>>>>>>> v3.18
 =======
 	if (!adev || acpi_has_method(adev->handle, "_EJ0"))
 >>>>>>> v3.18
@@ -538,6 +582,7 @@ static int acpi_pci_set_power_state(struct pci_dev *dev, pci_power_t state)
 	case PCI_D2:
 	case PCI_D3hot:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = acpi_bus_set_power(handle, state_conv[state]);
 	}
 
@@ -545,12 +590,17 @@ static int acpi_pci_set_power_state(struct pci_dev *dev, pci_power_t state)
 		dev_info(&dev->dev, "power state changed by ACPI to %s\n",
 			 pci_power_name(state));
 =======
+=======
+>>>>>>> v3.18
 		error = acpi_device_set_power(adev, state_conv[state]);
 	}
 
 	if (!error)
 		dev_dbg(&dev->dev, "power state changed by ACPI to %s\n",
 			 acpi_power_state_string(state_conv[state]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return error;
@@ -559,9 +609,14 @@ static int acpi_pci_set_power_state(struct pci_dev *dev, pci_power_t state)
 static bool acpi_pci_can_wakeup(struct pci_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle handle = DEVICE_ACPI_HANDLE(&dev->dev);
 
 	return handle ? acpi_bus_can_wakeup(handle) : false;
+=======
+	struct acpi_device *adev = ACPI_COMPANION(&dev->dev);
+	return adev ? acpi_device_can_wakeup(adev) : false;
+>>>>>>> v3.18
 =======
 	struct acpi_device *adev = ACPI_COMPANION(&dev->dev);
 	return adev ? acpi_device_can_wakeup(adev) : false;
@@ -636,6 +691,7 @@ static struct pci_platform_pm_ops acpi_pci_platform_pm = {
 void acpi_pci_add_bus(struct pci_bus *bus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle handle = NULL;
 
 	if (bus->bridge)
@@ -646,22 +702,31 @@ void acpi_pci_add_bus(struct pci_bus *bus)
 	acpi_pci_slot_enumerate(bus, handle);
 	acpiphp_enumerate_slots(bus, handle);
 =======
+=======
+>>>>>>> v3.18
 	if (acpi_pci_disabled || !bus->bridge)
 		return;
 
 	acpi_pci_slot_enumerate(bus);
 	acpiphp_enumerate_slots(bus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void acpi_pci_remove_bus(struct pci_bus *bus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * bus->bridge->acpi_node.handle has already been reset to NULL
 	 * when acpi_pci_remove_bus() is called, so don't check ACPI handle.
 	 */
 	if (acpi_pci_disabled)
+=======
+	if (acpi_pci_disabled || !bus->bridge)
+>>>>>>> v3.18
 =======
 	if (acpi_pci_disabled || !bus->bridge)
 >>>>>>> v3.18
@@ -672,6 +737,7 @@ void acpi_pci_remove_bus(struct pci_bus *bus)
 }
 
 /* ACPI bus type */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int acpi_pci_find_device(struct device *dev, acpi_handle *handle)
 {
@@ -693,6 +759,8 @@ static int acpi_pci_find_device(struct device *dev, acpi_handle *handle)
 		return -ENODEV;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static struct acpi_device *acpi_pci_find_companion(struct device *dev)
 {
 	struct pci_dev *pci_dev = to_pci_dev(dev);
@@ -704,6 +772,9 @@ static struct acpi_device *acpi_pci_find_companion(struct device *dev)
 	addr = (PCI_SLOT(pci_dev->devfn) << 16) | PCI_FUNC(pci_dev->devfn);
 	return acpi_find_child_device(ACPI_COMPANION(dev->parent), addr,
 				      check_children);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -711,11 +782,14 @@ static void pci_acpi_setup(struct device *dev)
 {
 	struct pci_dev *pci_dev = to_pci_dev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle handle = ACPI_HANDLE(dev);
 	struct acpi_device *adev;
 
 	if (acpi_bus_get_device(handle, &adev) || !adev->wakeup.flags.valid)
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_device *adev = ACPI_COMPANION(dev);
 
 	if (!adev)
@@ -723,14 +797,20 @@ static void pci_acpi_setup(struct device *dev)
 
 	pci_acpi_add_pm_notifier(adev, pci_dev);
 	if (!adev->wakeup.flags.valid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
 	device_set_wakeup_capable(dev, true);
 	acpi_pci_sleep_wake(pci_dev, false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pci_acpi_add_pm_notifier(adev, pci_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (adev->wakeup.flags.run_wake)
@@ -740,6 +820,7 @@ static void pci_acpi_setup(struct device *dev)
 static void pci_acpi_cleanup(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle handle = ACPI_HANDLE(dev);
 	struct acpi_device *adev;
 
@@ -748,6 +829,8 @@ static void pci_acpi_cleanup(struct device *dev)
 		device_set_run_wake(dev, false);
 		pci_acpi_remove_pm_notifier(adev);
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_device *adev = ACPI_COMPANION(dev);
 
 	if (!adev)
@@ -757,6 +840,9 @@ static void pci_acpi_cleanup(struct device *dev)
 	if (adev->wakeup.flags.valid) {
 		device_set_wakeup_capable(dev, false);
 		device_set_run_wake(dev, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -764,7 +850,11 @@ static void pci_acpi_cleanup(struct device *dev)
 static bool pci_acpi_bus_match(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dev->bus == &pci_bus_type;
+=======
+	return dev_is_pci(dev);
+>>>>>>> v3.18
 =======
 	return dev_is_pci(dev);
 >>>>>>> v3.18
@@ -774,7 +864,11 @@ static struct acpi_bus_type acpi_pci_bus = {
 	.name = "PCI",
 	.match = pci_acpi_bus_match,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.find_device = acpi_pci_find_device,
+=======
+	.find_companion = acpi_pci_find_companion,
+>>>>>>> v3.18
 =======
 	.find_companion = acpi_pci_find_companion,
 >>>>>>> v3.18
@@ -788,7 +882,11 @@ static int __init acpi_pci_init(void)
 
 	if (acpi_gbl_FADT.boot_flags & ACPI_FADT_NO_MSI) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO"ACPI FADT declares the system doesn't support MSI, so disable it\n");
+=======
+		pr_info("ACPI FADT declares the system doesn't support MSI, so disable it\n");
+>>>>>>> v3.18
 =======
 		pr_info("ACPI FADT declares the system doesn't support MSI, so disable it\n");
 >>>>>>> v3.18
@@ -797,7 +895,11 @@ static int __init acpi_pci_init(void)
 
 	if (acpi_gbl_FADT.boot_flags & ACPI_FADT_NO_ASPM) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO"ACPI FADT declares the system doesn't support PCIe ASPM, so disable it\n");
+=======
+		pr_info("ACPI FADT declares the system doesn't support PCIe ASPM, so disable it\n");
+>>>>>>> v3.18
 =======
 		pr_info("ACPI FADT declares the system doesn't support PCIe ASPM, so disable it\n");
 >>>>>>> v3.18

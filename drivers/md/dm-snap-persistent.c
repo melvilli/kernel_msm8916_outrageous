@@ -14,6 +14,10 @@
 #include <linux/slab.h>
 #include <linux/dm-io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "dm-bufio.h"
+>>>>>>> v3.18
 =======
 #include "dm-bufio.h"
 >>>>>>> v3.18
@@ -22,6 +26,11 @@
 #define DM_CHUNK_SIZE_DEFAULT_SECTORS 32	/* 16KB */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DM_PREFETCH_CHUNKS		12
+
+>>>>>>> v3.18
 =======
 #define DM_PREFETCH_CHUNKS		12
 
@@ -267,6 +276,10 @@ static int chunk_io(struct pstore *ps, void *area, chunk_t chunk, int rw,
 	queue_work(ps->metadata_wq, &req.work);
 	flush_workqueue(ps->metadata_wq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	destroy_work_on_stack(&req.work);
+>>>>>>> v3.18
 =======
 	destroy_work_on_stack(&req.work);
 >>>>>>> v3.18
@@ -415,6 +428,7 @@ static int write_header(struct pstore *ps)
  * Access functions for the disk exceptions, these do the endian conversions.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct disk_exception *get_exception(struct pstore *ps, uint32_t index)
 {
 	BUG_ON(index >= ps->exceptions_per_area);
@@ -427,6 +441,8 @@ static void read_exception(struct pstore *ps,
 {
 	struct disk_exception *de = get_exception(ps, index);
 =======
+=======
+>>>>>>> v3.18
 static struct disk_exception *get_exception(struct pstore *ps, void *ps_area,
 					    uint32_t index)
 {
@@ -439,6 +455,9 @@ static void read_exception(struct pstore *ps, void *ps_area,
 			   uint32_t index, struct core_exception *result)
 {
 	struct disk_exception *de = get_exception(ps, ps_area, index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* copy it */
@@ -450,7 +469,11 @@ static void write_exception(struct pstore *ps,
 			    uint32_t index, struct core_exception *e)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct disk_exception *de = get_exception(ps, index);
+=======
+	struct disk_exception *de = get_exception(ps, ps->area, index);
+>>>>>>> v3.18
 =======
 	struct disk_exception *de = get_exception(ps, ps->area, index);
 >>>>>>> v3.18
@@ -463,7 +486,11 @@ static void write_exception(struct pstore *ps,
 static void clear_exception(struct pstore *ps, uint32_t index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct disk_exception *de = get_exception(ps, index);
+=======
+	struct disk_exception *de = get_exception(ps, ps->area, index);
+>>>>>>> v3.18
 =======
 	struct disk_exception *de = get_exception(ps, ps->area, index);
 >>>>>>> v3.18
@@ -479,7 +506,11 @@ static void clear_exception(struct pstore *ps, uint32_t index)
  * filled.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int insert_exceptions(struct pstore *ps,
+=======
+static int insert_exceptions(struct pstore *ps, void *ps_area,
+>>>>>>> v3.18
 =======
 static int insert_exceptions(struct pstore *ps, void *ps_area,
 >>>>>>> v3.18
@@ -497,7 +528,11 @@ static int insert_exceptions(struct pstore *ps, void *ps_area,
 
 	for (i = 0; i < ps->exceptions_per_area; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		read_exception(ps, i, &e);
+=======
+		read_exception(ps, ps_area, i, &e);
+>>>>>>> v3.18
 =======
 		read_exception(ps, ps_area, i, &e);
 >>>>>>> v3.18
@@ -538,7 +573,10 @@ static int read_exceptions(struct pstore *ps,
 {
 	int r, full = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct dm_bufio_client *client;
 	chunk_t prefetch_area = 0;
 
@@ -553,6 +591,9 @@ static int read_exceptions(struct pstore *ps,
 	 * Setup for one current buffer + desired readahead buffers.
 	 */
 	dm_bufio_set_minimum_buffers(client, 1 + DM_PREFETCH_CHUNKS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -560,6 +601,7 @@ static int read_exceptions(struct pstore *ps,
 	 * we find a partially full area.
 	 */
 	for (ps->current_area = 0; full; ps->current_area++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		r = area_io(ps, READ);
 		if (r)
@@ -569,6 +611,8 @@ static int read_exceptions(struct pstore *ps,
 		if (r)
 			return r;
 =======
+=======
+>>>>>>> v3.18
 		struct dm_buffer *bp;
 		void *area;
 		chunk_t chunk;
@@ -606,6 +650,9 @@ static int read_exceptions(struct pstore *ps,
 
 		if (unlikely(r))
 			goto ret_destroy_bufio;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -614,14 +661,20 @@ static int read_exceptions(struct pstore *ps,
 	skip_metadata(ps);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	r = 0;
 
 ret_destroy_bufio:
 	dm_bufio_client_destroy(client);
 
 	return r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -757,7 +810,11 @@ static int persistent_prepare_exception(struct dm_exception_store *store,
 
 static void persistent_commit_exception(struct dm_exception_store *store,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					struct dm_exception *e, int valid,
+=======
+					struct dm_exception *e,
+>>>>>>> v3.18
 =======
 					struct dm_exception *e,
 >>>>>>> v3.18
@@ -770,9 +827,12 @@ static void persistent_commit_exception(struct dm_exception_store *store,
 	struct commit_callback *cb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!valid)
 		ps->valid = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ce.old_chunk = e->old_chunk;
@@ -854,7 +914,11 @@ static int persistent_prepare_merge(struct dm_exception_store *store,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_exception(ps, ps->current_committed - 1, &ce);
+=======
+	read_exception(ps, ps->area, ps->current_committed - 1, &ce);
+>>>>>>> v3.18
 =======
 	read_exception(ps, ps->area, ps->current_committed - 1, &ce);
 >>>>>>> v3.18
@@ -868,8 +932,13 @@ static int persistent_prepare_merge(struct dm_exception_store *store,
 	for (nr_consecutive = 1; nr_consecutive < ps->current_committed;
 	     nr_consecutive++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		read_exception(ps, ps->current_committed - 1 - nr_consecutive,
 			       &ce);
+=======
+		read_exception(ps, ps->area,
+			       ps->current_committed - 1 - nr_consecutive, &ce);
+>>>>>>> v3.18
 =======
 		read_exception(ps, ps->area,
 			       ps->current_committed - 1 - nr_consecutive, &ce);

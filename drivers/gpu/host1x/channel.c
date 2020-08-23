@@ -44,6 +44,10 @@ int host1x_job_submit(struct host1x_job *job)
 	return host1x_hw_channel_submit(host, job);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(host1x_job_submit);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(host1x_job_submit);
 >>>>>>> v3.18
@@ -65,6 +69,10 @@ struct host1x_channel *host1x_channel_get(struct host1x_channel *channel)
 	return err ? NULL : channel;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(host1x_channel_get);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(host1x_channel_get);
 >>>>>>> v3.18
@@ -85,6 +93,10 @@ void host1x_channel_put(struct host1x_channel *channel)
 	mutex_unlock(&channel->reflock);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(host1x_channel_put);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(host1x_channel_put);
 >>>>>>> v3.18
@@ -128,6 +140,10 @@ fail:
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(host1x_channel_request);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(host1x_channel_request);
 >>>>>>> v3.18
@@ -141,6 +157,10 @@ void host1x_channel_free(struct host1x_channel *channel)
 	kfree(channel);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(host1x_channel_free);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(host1x_channel_free);
 >>>>>>> v3.18

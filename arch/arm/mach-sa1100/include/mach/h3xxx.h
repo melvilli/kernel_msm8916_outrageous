@@ -14,6 +14,11 @@
 #define _INCLUDE_H3XXX_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "hardware.h" /* Gives GPIO_MAX */
+
+>>>>>>> v3.18
 =======
 #include "hardware.h" /* Gives GPIO_MAX */
 
@@ -83,6 +88,7 @@
 #define H3600_EGPIO_LVDD_ON		(H3XXX_EGPIO_BASE + 15) /* enable 9V and -6.5V to LCD. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct gpio_default_state {
 	int gpio;
 	int mode;
@@ -94,6 +100,8 @@ struct gpio_default_state {
 #define GPIO_MODE_OUT1	1
 
 void h3xxx_init_gpio(struct gpio_default_state *s, size_t n);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init h3xxx_map_io(void);

@@ -23,7 +23,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -130,8 +133,14 @@ static ssize_t als_sensing_range_store(struct device *dev,
 	unsigned long val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 10, &val))
 		return -EINVAL;
+=======
+	ret_val = kstrtoul(buf, 10, &val);
+	if (ret_val)
+		return ret_val;
+>>>>>>> v3.18
 =======
 	ret_val = kstrtoul(buf, 10, &val);
 	if (ret_val)

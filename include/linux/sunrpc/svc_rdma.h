@@ -116,7 +116,10 @@ struct svc_rdma_fastreg_mr {
 };
 struct svc_rdma_req_map {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct svc_rdma_fastreg_mr *frmr;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long count;
@@ -124,9 +127,15 @@ struct svc_rdma_req_map {
 		struct kvec sge[RPCSVC_MAXPAGES];
 		struct svc_rdma_chunk_sge ch[RPCSVC_MAXPAGES];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 };
 #define RDMACTXT_F_FAST_UNREG	1
+=======
+		unsigned long lkey[RPCSVC_MAXPAGES];
+	};
+};
+>>>>>>> v3.18
 =======
 		unsigned long lkey[RPCSVC_MAXPAGES];
 	};
@@ -185,8 +194,12 @@ struct svcxprt_rdma {
 #define RPCRDMA_ORD             (64/4)
 #define RPCRDMA_SQ_DEPTH_MULT   8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RPCRDMA_MAX_THREADS     16
 #define RPCRDMA_MAX_REQUESTS    16
+=======
+#define RPCRDMA_MAX_REQUESTS    32
+>>>>>>> v3.18
 =======
 #define RPCRDMA_MAX_REQUESTS    32
 >>>>>>> v3.18

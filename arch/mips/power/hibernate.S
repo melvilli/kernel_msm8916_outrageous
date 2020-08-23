@@ -31,8 +31,11 @@ END(swsusp_arch_suspend)
 
 LEAF(swsusp_arch_resume)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Avoid TLB mismatch during and after kernel resume */
 	jal local_flush_tlb_all
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	PTR_L t0, restore_pblist
@@ -49,6 +52,10 @@ LEAF(swsusp_arch_resume)
 	PTR_L t0, PBE_NEXT(t0)
 	bnez t0, 0b
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	jal local_flush_tlb_all /* Avoid TLB mismatch after kernel resume */
+>>>>>>> v3.18
 =======
 	jal local_flush_tlb_all /* Avoid TLB mismatch after kernel resume */
 >>>>>>> v3.18

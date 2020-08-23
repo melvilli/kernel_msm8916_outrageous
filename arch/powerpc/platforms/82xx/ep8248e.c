@@ -299,7 +299,11 @@ static void __init ep8248e_setup_arch(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static  __initdata struct of_device_id of_bus_ids[] = {
+=======
+static const struct of_device_id of_bus_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id of_bus_ids[] __initconst = {
 >>>>>>> v3.18

@@ -797,7 +797,11 @@ static void __exit act2000_exit(void)
 	while (card) {
 		unregister_card(card);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		del_timer(&card->ptimer);
+=======
+		del_timer_sync(&card->ptimer);
+>>>>>>> v3.18
 =======
 		del_timer_sync(&card->ptimer);
 >>>>>>> v3.18

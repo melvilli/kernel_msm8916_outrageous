@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (c) 2000-2012 LSI Corporation.
+=======
+ *  Copyright (c) 2000-2014 LSI Corporation.
+>>>>>>> v3.18
 =======
  *  Copyright (c) 2000-2014 LSI Corporation.
 >>>>>>> v3.18
@@ -11,7 +15,11 @@
  *  Creation Date:  October 11, 2006
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  mpi2_ioc.h Version:  02.00.21
+=======
+ *  mpi2_ioc.h Version:  02.00.23
+>>>>>>> v3.18
 =======
  *  mpi2_ioc.h Version:  02.00.23
 >>>>>>> v3.18
@@ -127,7 +135,10 @@
  *                      Marked MPI2_PM_CONTROL_FEATURE_PCIE_LINK as obsolete.
  *  03-29-12  02.00.21  Added a product specific range to event values.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *  07-26-12  02.00.22  Added MPI2_IOCFACTS_EXCEPT_PARTIAL_MEMORY_FAILURE.
  *                      Added ElapsedSeconds field to
  *                      MPI2_EVENT_DATA_IR_OPERATION_STATUS.
@@ -136,6 +147,9 @@
  *                      Added MPI2_IOCFACTS_CAPABILITY_RDPQ_ARRAY_CAPABLE.
  *                      Added MPI2_FW_DOWNLOAD_ITYPE_PUBLIC_KEY.
  *                      Added Encrypted Hash Extended Image.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *  --------------------------------------------------------------------------
  */
@@ -194,6 +208,12 @@ typedef struct _MPI2_IOC_INIT_REQUEST
 #define MPI2_WHOINIT_MANUFACTURER               (0x05)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* MsgFlags */
+#define MPI2_IOCINIT_MSGFLAG_RDPQ_ARRAY_MODE    (0x01)
+
+>>>>>>> v3.18
 =======
 /* MsgFlags */
 #define MPI2_IOCINIT_MSGFLAG_RDPQ_ARRAY_MODE    (0x01)
@@ -212,10 +232,13 @@ typedef struct _MPI2_IOC_INIT_REQUEST
 #define MPI2_IOCINIT_HDRVERSION_DEV_SHIFT       (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* minimum depth for the Reply Descriptor Post Queue */
 #define MPI2_RDPQ_DEPTH_MIN                     (16)
 
 =======
+=======
+>>>>>>> v3.18
 /* minimum depth for a Reply Descriptor Post Queue */
 #define MPI2_RDPQ_DEPTH_MIN                     (16)
 
@@ -227,6 +250,9 @@ typedef struct _MPI2_IOC_INIT_RDPQ_ARRAY_ENTRY {
 } MPI2_IOC_INIT_RDPQ_ARRAY_ENTRY,
 MPI2_POINTER PTR_MPI2_IOC_INIT_RDPQ_ARRAY_ENTRY,
 Mpi2IOCInitRDPQArrayEntry, MPI2_POINTER pMpi2IOCInitRDPQArrayEntry;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* IOCInit Reply message */
@@ -324,6 +350,10 @@ typedef struct _MPI2_IOC_FACTS_REPLY
 
 /* IOCExceptions */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MPI2_IOCFACTS_EXCEPT_PARTIAL_MEMORY_FAILURE     (0x0200)
+>>>>>>> v3.18
 =======
 #define MPI2_IOCFACTS_EXCEPT_PARTIAL_MEMORY_FAILURE     (0x0200)
 >>>>>>> v3.18
@@ -347,6 +377,10 @@ typedef struct _MPI2_IOC_FACTS_REPLY
 
 /* IOCCapabilities */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MPI2_IOCFACTS_CAPABILITY_RDPQ_ARRAY_CAPABLE     (0x00040000)
+>>>>>>> v3.18
 =======
 #define MPI2_IOCFACTS_CAPABILITY_RDPQ_ARRAY_CAPABLE     (0x00040000)
 >>>>>>> v3.18
@@ -672,7 +706,11 @@ typedef struct _MPI2_EVENT_DATA_IR_OPERATION_STATUS
     U8                      PercentComplete;            /* 0x05 */
     U16                     Reserved2;                  /* 0x06 */
 <<<<<<< HEAD
+<<<<<<< HEAD
     U32                     Resereved3;                 /* 0x08 */
+=======
+	U32                     ElapsedSeconds;             /* 0x08 */
+>>>>>>> v3.18
 =======
 	U32                     ElapsedSeconds;             /* 0x08 */
 >>>>>>> v3.18
@@ -1201,6 +1239,10 @@ typedef struct _MPI2_FW_DOWNLOAD_REQUEST
 #define MPI2_FW_DOWNLOAD_ITYPE_COMPLETE             (0x0A)
 #define MPI2_FW_DOWNLOAD_ITYPE_COMMON_BOOT_BLOCK    (0x0B)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MPI2_FW_DOWNLOAD_ITYPE_PUBLIC_KEY           (0x0C)
+>>>>>>> v3.18
 =======
 #define MPI2_FW_DOWNLOAD_ITYPE_PUBLIC_KEY           (0x0C)
 >>>>>>> v3.18
@@ -1431,6 +1473,7 @@ typedef struct _MPI2_EXT_IMAGE_HEADER
 
 /* defines for the ImageType field */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MPI2_EXT_IMAGE_TYPE_UNSPECIFIED				(0x00)
 #define MPI2_EXT_IMAGE_TYPE_FW						(0x01)
 #define MPI2_EXT_IMAGE_TYPE_NVDATA					(0x03)
@@ -1440,6 +1483,8 @@ typedef struct _MPI2_EXT_IMAGE_HEADER
 #define MPI2_EXT_IMAGE_TYPE_SUPPORTED_DEVICES		(0x07)
 #define MPI2_EXT_IMAGE_TYPE_MEGARAID				(0x08)
 =======
+=======
+>>>>>>> v3.18
 #define MPI2_EXT_IMAGE_TYPE_UNSPECIFIED             (0x00)
 #define MPI2_EXT_IMAGE_TYPE_FW                      (0x01)
 #define MPI2_EXT_IMAGE_TYPE_NVDATA                  (0x03)
@@ -1449,6 +1494,9 @@ typedef struct _MPI2_EXT_IMAGE_HEADER
 #define MPI2_EXT_IMAGE_TYPE_SUPPORTED_DEVICES       (0x07)
 #define MPI2_EXT_IMAGE_TYPE_MEGARAID                (0x08)
 #define MPI2_EXT_IMAGE_TYPE_ENCRYPTED_HASH          (0x09)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MPI2_EXT_IMAGE_TYPE_MIN_PRODUCT_SPECIFIC    (0x80)
 #define MPI2_EXT_IMAGE_TYPE_MAX_PRODUCT_SPECIFIC    (0xFF)
@@ -1619,7 +1667,10 @@ typedef struct _MPI2_INIT_IMAGE_FOOTER
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Encrypted Hash Extended Image Data */
 
 typedef struct _MPI25_ENCRYPTED_HASH_ENTRY {
@@ -1653,6 +1704,9 @@ typedef struct _MPI25_ENCRYPTED_HASH_DATA {
 } MPI25_ENCRYPTED_HASH_DATA, MPI2_POINTER PTR_MPI25_ENCRYPTED_HASH_DATA,
 Mpi25EncryptedHashData_t, MPI2_POINTER pMpi25EncryptedHashData_t;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /****************************************************************************
 *  PowerManagementControl message

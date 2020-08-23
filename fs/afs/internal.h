@@ -76,6 +76,10 @@ struct afs_call {
 	const struct afs_wait_mode *wait_mode;	/* completion wait mode */
 	wait_queue_head_t	waitq;		/* processes awaiting completion */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*async_workfn)(struct afs_call *call); /* asynchronous work function */
+>>>>>>> v3.18
 =======
 	void (*async_workfn)(struct afs_call *call); /* asynchronous work function */
 >>>>>>> v3.18
@@ -200,7 +204,10 @@ struct afs_cell {
 	struct key		*anonymous_key;	/* anonymous user key for this cell */
 	struct list_head	proc_link;	/* /proc cell list link */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct proc_dir_entry	*proc_dir;	/* /proc dir for this cell */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_AFS_FSCACHE
@@ -755,8 +762,12 @@ extern int afs_writepage(struct page *, struct writeback_control *);
 extern int afs_writepages(struct address_space *, struct writeback_control *);
 extern void afs_pages_written_back(struct afs_vnode *, struct afs_call *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern ssize_t afs_file_write(struct kiocb *, const struct iovec *,
 			      unsigned long, loff_t);
+=======
+extern ssize_t afs_file_write(struct kiocb *, struct iov_iter *);
+>>>>>>> v3.18
 =======
 extern ssize_t afs_file_write(struct kiocb *, struct iov_iter *);
 >>>>>>> v3.18

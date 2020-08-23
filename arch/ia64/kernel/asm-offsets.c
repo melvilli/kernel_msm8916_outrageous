@@ -17,9 +17,12 @@
 #include <asm/mca.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/xen/interface.h>
 #include <asm/xen/hypervisor.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "../kernel/sigframe.h"
@@ -294,6 +297,7 @@ void foo(void)
 		offsetof (struct itc_jitter_data_t, itc_lastcycle));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_XEN
 	BLANK();
 
@@ -323,6 +327,8 @@ void foo(void)
 	DEFINE_MAPPED_REG_OFS(XSI_ITC_OFFSET_OFS, itc_offset);
 	DEFINE_MAPPED_REG_OFS(XSI_ITC_LAST_OFS, itc_last);
 #endif /* CONFIG_XEN */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

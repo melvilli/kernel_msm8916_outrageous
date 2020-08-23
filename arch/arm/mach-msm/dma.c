@@ -1,10 +1,16 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * linux/arch/arm/mach-msm/dma.c
  *
  * Copyright (C) 2007 Google, Inc.
  * Copyright (c) 2008-2010, 2012, 2013, 2015 The Linux Foundation. All
  * rights reserved.
+=======
+/* linux/arch/arm/mach-msm/dma.c
+ *
+ * Copyright (C) 2007 Google, Inc.
+>>>>>>> v3.18
 =======
 /* linux/arch/arm/mach-msm/dma.c
  *
@@ -26,6 +32,7 @@
 #include <linux/err.h>
 #include <linux/io.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/platform_device.h>
@@ -222,6 +229,8 @@ static struct msm_dmov_conf dmov_conf[] = {
 #define DMOV_IRQ_TO_ADM(irq) 0
 #endif
 =======
+=======
+>>>>>>> v3.18
 #include <linux/completion.h>
 #include <linux/module.h>
 #include <mach/dma.h>
@@ -253,6 +262,9 @@ static struct msm_dmov_conf dmov_conf[] = {
 #define DMOV_ISR              DMOV_SD_AARM(0x380, 0)
 
 #define DMOV_CONFIG(ch)       DMOV_SD_AARM(0x300, ch)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum {
@@ -262,12 +274,18 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_SPINLOCK(msm_dmov_lock);
 static struct clk *msm_dmov_clk;
 static unsigned int channel_active;
 static struct list_head ready_commands[MSM_DMOV_CHANNEL_COUNT];
 static struct list_head active_commands[MSM_DMOV_CHANNEL_COUNT];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned int msm_dmov_print_mask = MSM_DMOV_PRINT_ERRORS;
 
@@ -283,6 +301,7 @@ unsigned int msm_dmov_print_mask = MSM_DMOV_PRINT_ERRORS;
 #define PRINT_FLOW(format, args...) \
 	MSM_DMOV_DPRINTF(MSM_DMOV_PRINT_FLOW, format, args);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int msm_dmov_clk_on(int adm)
 {
@@ -550,6 +569,8 @@ void msm_dmov_flush(unsigned int id, int graceful)
 }
 EXPORT_SYMBOL(msm_dmov_flush);
 =======
+=======
+>>>>>>> v3.18
 void msm_dmov_stop_cmd(unsigned id, struct msm_dmov_cmd *cmd, int graceful)
 {
 	writel((graceful << 31), DMOV_FLUSH0(id));
@@ -594,6 +615,9 @@ void msm_dmov_enqueue_cmd(unsigned id, struct msm_dmov_cmd *cmd)
 	spin_unlock_irqrestore(&msm_dmov_lock, irq_flags);
 }
 EXPORT_SYMBOL_GPL(msm_dmov_enqueue_cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct msm_dmov_exec_cmdptr_cmd {
@@ -610,8 +634,12 @@ dmov_exec_cmdptr_complete_func(struct msm_dmov_cmd *_cmd,
 			       struct msm_dmov_errdata *err)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct msm_dmov_exec_cmdptr_cmd *cmd =
 		container_of(_cmd, struct msm_dmov_exec_cmdptr_cmd, dmov_cmd);
+=======
+	struct msm_dmov_exec_cmdptr_cmd *cmd = container_of(_cmd, struct msm_dmov_exec_cmdptr_cmd, dmov_cmd);
+>>>>>>> v3.18
 =======
 	struct msm_dmov_exec_cmdptr_cmd *cmd = container_of(_cmd, struct msm_dmov_exec_cmdptr_cmd, dmov_cmd);
 >>>>>>> v3.18
@@ -631,6 +659,7 @@ int msm_dmov_exec_cmd(unsigned id, unsigned int cmdptr)
 	cmd.dmov_cmd.cmdptr = cmdptr;
 	cmd.dmov_cmd.complete_func = dmov_exec_cmdptr_complete_func;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd.dmov_cmd.exec_func = NULL;
 	cmd.id = id;
 	cmd.result = 0;
@@ -646,6 +675,8 @@ int msm_dmov_exec_cmd(unsigned id, unsigned int cmdptr)
 			id, cmd.err.flush[0], cmd.err.flush[1],
 			cmd.err.flush[2], cmd.err.flush[3]);
 =======
+=======
+>>>>>>> v3.18
 	cmd.dmov_cmd.execute_func = NULL;
 	cmd.id = id;
 	init_completion(&cmd.complete);
@@ -657,12 +688,16 @@ int msm_dmov_exec_cmd(unsigned id, unsigned int cmdptr)
 		PRINT_ERROR("dmov_exec_cmdptr(%d): ERROR, result: %x\n", id, cmd.result);
 		PRINT_ERROR("dmov_exec_cmdptr(%d):  flush: %x %x %x %x\n",
 			id, cmd.err.flush[0], cmd.err.flush[1], cmd.err.flush[2], cmd.err.flush[3]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EIO;
 	}
 	PRINT_FLOW("dmov_exec_cmdptr(%d, %x) done\n", id, cmdptr);
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL(msm_dmov_exec_cmd);
 
@@ -693,6 +728,8 @@ static irqreturn_t msm_dmov_isr(int irq, void *dev_id)
 	/* read and clear isr */
 	int_status = readl_relaxed(DMOV_REG(DMOV_ISR, adm));
 =======
+=======
+>>>>>>> v3.18
 
 
 static irqreturn_t msm_datamover_irq_handler(int irq, void *dev_id)
@@ -706,11 +743,15 @@ static irqreturn_t msm_datamover_irq_handler(int irq, void *dev_id)
 	spin_lock_irqsave(&msm_dmov_lock, irq_flags);
 
 	int_status = readl(DMOV_ISR); /* read and clear interrupt */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	PRINT_FLOW("msm_datamover_irq_handler: DMOV_ISR %x\n", int_status);
 
 	while (int_status) {
 		mask = int_status & -int_status;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ch = fls(mask) - 1;
 		id = DMOV_CHAN_ADM_TO_ID(ch, adm);
@@ -750,6 +791,8 @@ static irqreturn_t msm_datamover_irq_handler(int irq, void *dev_id)
 					cmd->complete_func(cmd, ch_result,
 								 NULL);
 =======
+=======
+>>>>>>> v3.18
 		id = fls(mask) - 1;
 		PRINT_FLOW("msm_datamover_irq_handler %08x %08x id %d\n", int_status, mask, id);
 		int_status &= ~mask;
@@ -777,12 +820,16 @@ static irqreturn_t msm_datamover_irq_handler(int irq, void *dev_id)
 					list_del(&cmd->list);
 					dsb();
 					cmd->complete_func(cmd, ch_result, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
 			if (ch_result & DMOV_RSLT_FLUSH) {
 				struct msm_dmov_errdata errdata;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				fill_errdata(&errdata, ch, adm);
 				PRINT_FLOW("msm_datamover_irq_handler id %d,"\
@@ -795,6 +842,8 @@ static irqreturn_t msm_datamover_irq_handler(int irq, void *dev_id)
 					cmd->complete_func(cmd, ch_result,
 								&errdata);
 =======
+=======
+>>>>>>> v3.18
 				errdata.flush[0] = readl(DMOV_FLUSH0(id));
 				errdata.flush[1] = readl(DMOV_FLUSH1(id));
 				errdata.flush[2] = readl(DMOV_FLUSH2(id));
@@ -807,12 +856,16 @@ static irqreturn_t msm_datamover_irq_handler(int irq, void *dev_id)
 					list_del(&cmd->list);
 					dsb();
 					cmd->complete_func(cmd, ch_result, &errdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
 			if (ch_result & DMOV_RSLT_ERROR) {
 				struct msm_dmov_errdata errdata;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				fill_errdata(&errdata, ch, adm);
 
@@ -1071,6 +1124,8 @@ static int __init msm_init_datamover(void)
 }
 arch_initcall(msm_init_datamover);
 =======
+=======
+>>>>>>> v3.18
 				errdata.flush[0] = readl(DMOV_FLUSH0(id));
 				errdata.flush[1] = readl(DMOV_FLUSH1(id));
 				errdata.flush[2] = readl(DMOV_FLUSH2(id));
@@ -1137,4 +1192,7 @@ static int __init msm_init_datamover(void)
 	return 0;
 }
 module_init(msm_init_datamover);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -6,6 +6,10 @@ obj-$(CONFIG_QNX6FS_FS) += qnx6.o
 
 qnx6-objs := inode.o dir.o namei.o super_mmi.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ccflags-$(CONFIG_QNX6FS_DEBUG)	+= -DDEBUG
+>>>>>>> v3.18
 =======
 ccflags-$(CONFIG_QNX6FS_DEBUG)	+= -DDEBUG
 >>>>>>> v3.18

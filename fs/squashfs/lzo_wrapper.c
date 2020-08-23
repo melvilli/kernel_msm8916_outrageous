@@ -32,6 +32,10 @@
 #include "squashfs.h"
 #include "decompressor.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "page_actor.h"
+>>>>>>> v3.18
 =======
 #include "page_actor.h"
 >>>>>>> v3.18
@@ -42,7 +46,11 @@ struct squashfs_lzo {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *lzo_init(struct squashfs_sb_info *msblk, void *buff, int len)
+=======
+static void *lzo_init(struct squashfs_sb_info *msblk, void *buff)
+>>>>>>> v3.18
 =======
 static void *lzo_init(struct squashfs_sb_info *msblk, void *buff)
 >>>>>>> v3.18
@@ -83,6 +91,7 @@ static void lzo_free(void *strm)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int lzo_uncompress(struct squashfs_sb_info *msblk, void **buffer,
 	struct buffer_head **bh, int b, int offset, int length, int srclength,
 	int pages)
@@ -100,6 +109,8 @@ static int lzo_uncompress(struct squashfs_sb_info *msblk, void **buffer,
 			goto block_release;
 
 =======
+=======
+>>>>>>> v3.18
 static int lzo_uncompress(struct squashfs_sb_info *msblk, void *strm,
 	struct buffer_head **bh, int b, int offset, int length,
 	struct squashfs_page_actor *output)
@@ -110,6 +121,9 @@ static int lzo_uncompress(struct squashfs_sb_info *msblk, void *strm,
 	size_t out_len = output->length;
 
 	for (i = 0; i < b; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		avail = min(bytes, msblk->devblksize - offset);
 		memcpy(buff, bh[i]->b_data + offset, avail);
@@ -125,6 +139,7 @@ static int lzo_uncompress(struct squashfs_sb_info *msblk, void *strm,
 		goto failed;
 
 	res = bytes = (int)out_len;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0, buff = stream->output; bytes && i < pages; i++) {
 		avail = min_t(int, bytes, PAGE_CACHE_SIZE);
@@ -145,6 +160,8 @@ failed:
 
 	ERROR("lzo decompression failed, data probably corrupt\n");
 =======
+=======
+>>>>>>> v3.18
 	data = squashfs_first_page(output);
 	buff = stream->output;
 	while (data) {
@@ -163,6 +180,9 @@ failed:
 	return res;
 
 failed:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return -EIO;
 }

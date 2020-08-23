@@ -8,9 +8,13 @@
  *  http://people.redhat.com/mingo/cfs-scheduler/tools/pipe-test-1m.c
  * Ported to perf by Hitoshi Mitake <mitake@dcl.info.waseda.ac.jp>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  */
 
+=======
+ */
+>>>>>>> v3.18
 =======
  */
 >>>>>>> v3.18
@@ -33,6 +37,7 @@
 #include <sys/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LOOPS_DEFAULT 1000000
 static int loops = LOOPS_DEFAULT;
 
@@ -40,6 +45,8 @@ static const struct option options[] = {
 	OPT_INTEGER('l', "loop", &loops,
 		    "Specify number of loops"),
 =======
+=======
+>>>>>>> v3.18
 #include <pthread.h>
 
 struct thread_data {
@@ -58,6 +65,9 @@ static bool			threaded;
 static const struct option options[] = {
 	OPT_INTEGER('l', "loop",	&loops,		"Specify number of loops"),
 	OPT_BOOLEAN('T', "threaded",	&threaded,	"Specify threads/process based task setup"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	OPT_END()
 };
@@ -68,6 +78,7 @@ static const char * const bench_sched_pipe_usage[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bench_sched_pipe(int argc, const char **argv,
 		     const char *prefix __maybe_unused)
 {
@@ -76,6 +87,8 @@ int bench_sched_pipe(int argc, const char **argv,
 	struct timeval start, stop, diff;
 	unsigned long long result_usec = 0;
 =======
+=======
+>>>>>>> v3.18
 static void *worker_thread(void *__tdata)
 {
 	struct thread_data *td = __tdata;
@@ -107,6 +120,9 @@ int bench_sched_pipe(int argc, const char **argv, const char *prefix __maybe_unu
 	unsigned long long result_usec = 0;
 	int nr_threads = 2;
 	int t;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -118,8 +134,12 @@ int bench_sched_pipe(int argc, const char **argv, const char *prefix __maybe_unu
 	pid_t pid, retpid __maybe_unused;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	argc = parse_options(argc, argv, options,
 			     bench_sched_pipe_usage, 0);
+=======
+	argc = parse_options(argc, argv, options, bench_sched_pipe_usage, 0);
+>>>>>>> v3.18
 =======
 	argc = parse_options(argc, argv, options, bench_sched_pipe_usage, 0);
 >>>>>>> v3.18
@@ -127,6 +147,7 @@ int bench_sched_pipe(int argc, const char **argv, const char *prefix __maybe_unu
 	BUG_ON(pipe(pipe_1));
 	BUG_ON(pipe(pipe_2));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pid = fork();
 	assert(pid >= 0);
@@ -160,6 +181,8 @@ int bench_sched_pipe(int argc, const char **argv, const char *prefix __maybe_unu
 		printf("# Executed %d pipe operations between two tasks\n\n",
 			loops);
 =======
+=======
+>>>>>>> v3.18
 	gettimeofday(&start, NULL);
 
 	for (t = 0; t < nr_threads; t++) {
@@ -215,6 +238,9 @@ int bench_sched_pipe(int argc, const char **argv, const char *prefix __maybe_unu
 	case BENCH_FORMAT_DEFAULT:
 		printf("# Executed %d pipe operations between two %s\n\n",
 			loops, threaded ? "threads" : "processes");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		result_usec = diff.tv_sec * 1000000;

@@ -41,6 +41,11 @@ struct v4l2_ioctl_ops {
 	int (*vidioc_enum_fmt_vid_out_mplane)(struct file *file, void *fh,
 					      struct v4l2_fmtdesc *f);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*vidioc_enum_fmt_sdr_cap)     (struct file *file, void *fh,
+					    struct v4l2_fmtdesc *f);
+>>>>>>> v3.18
 =======
 	int (*vidioc_enum_fmt_sdr_cap)     (struct file *file, void *fh,
 					    struct v4l2_fmtdesc *f);
@@ -68,8 +73,14 @@ struct v4l2_ioctl_ops {
 	int (*vidioc_g_fmt_vid_out_mplane)(struct file *file, void *fh,
 					   struct v4l2_format *f);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*vidioc_g_fmt_type_private)(struct file *file, void *fh,
 					struct v4l2_format *f);
+=======
+	int (*vidioc_g_fmt_sdr_cap)    (struct file *file, void *fh,
+					struct v4l2_format *f);
+
+>>>>>>> v3.18
 =======
 	int (*vidioc_g_fmt_sdr_cap)    (struct file *file, void *fh,
 					struct v4l2_format *f);
@@ -97,6 +108,11 @@ struct v4l2_ioctl_ops {
 	int (*vidioc_s_fmt_vid_out_mplane)(struct file *file, void *fh,
 					   struct v4l2_format *f);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*vidioc_s_fmt_sdr_cap)    (struct file *file, void *fh,
+					struct v4l2_format *f);
+>>>>>>> v3.18
 =======
 	int (*vidioc_s_fmt_sdr_cap)    (struct file *file, void *fh,
 					struct v4l2_format *f);
@@ -124,6 +140,11 @@ struct v4l2_ioctl_ops {
 	int (*vidioc_try_fmt_vid_out_mplane)(struct file *file, void *fh,
 					     struct v4l2_format *f);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*vidioc_try_fmt_sdr_cap)    (struct file *file, void *fh,
+					  struct v4l2_format *f);
+>>>>>>> v3.18
 =======
 	int (*vidioc_try_fmt_sdr_cap)    (struct file *file, void *fh,
 					  struct v4l2_format *f);
@@ -173,6 +194,11 @@ struct v4l2_ioctl_ops {
 	int (*vidioc_queryctrl)        (struct file *file, void *fh,
 					struct v4l2_queryctrl *a);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*vidioc_query_ext_ctrl)   (struct file *file, void *fh,
+					struct v4l2_query_ext_ctrl *a);
+>>>>>>> v3.18
 =======
 	int (*vidioc_query_ext_ctrl)   (struct file *file, void *fh,
 					struct v4l2_query_ext_ctrl *a);
@@ -275,8 +301,11 @@ struct v4l2_ioctl_ops {
 					struct v4l2_dbg_chip_info *chip);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*vidioc_g_chip_ident)     (struct file *file, void *fh,
 					struct v4l2_dbg_chip_ident *chip);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -298,6 +327,11 @@ struct v4l2_ioctl_ops {
 	int (*vidioc_dv_timings_cap) (struct file *file, void *fh,
 				    struct v4l2_dv_timings_cap *cap);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*vidioc_g_edid) (struct file *file, void *fh, struct v4l2_edid *edid);
+	int (*vidioc_s_edid) (struct file *file, void *fh, struct v4l2_edid *edid);
+>>>>>>> v3.18
 =======
 	int (*vidioc_g_edid) (struct file *file, void *fh, struct v4l2_edid *edid);
 	int (*vidioc_s_edid) (struct file *file, void *fh, struct v4l2_edid *edid);

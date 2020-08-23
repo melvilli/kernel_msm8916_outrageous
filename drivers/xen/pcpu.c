@@ -32,6 +32,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "xen_cpu: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "xen_cpu: " fmt
 
@@ -44,6 +49,10 @@
 
 #include <xen/xen.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <xen/acpi.h>
+>>>>>>> v3.18
 =======
 #include <xen/acpi.h>
 >>>>>>> v3.18
@@ -54,7 +63,10 @@
 #include <asm/xen/hypercall.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XEN_PCPU "xen_cpu: "
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -255,8 +267,12 @@ static struct pcpu *create_and_register_pcpu(struct xenpf_pcpuinfo *info)
 	err = register_pcpu(pcpu);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning(XEN_PCPU "Failed to register pcpu%u\n",
 			   info->xen_cpuid);
+=======
+		pr_warn("Failed to register pcpu%u\n", info->xen_cpuid);
+>>>>>>> v3.18
 =======
 		pr_warn("Failed to register pcpu%u\n", info->xen_cpuid);
 >>>>>>> v3.18
@@ -395,7 +411,11 @@ static int __init xen_pcpu_init(void)
 				      "xen-pcpu", NULL);
 	if (irq < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning(XEN_PCPU "Failed to bind pcpu virq\n");
+=======
+		pr_warn("Failed to bind pcpu virq\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Failed to bind pcpu virq\n");
 >>>>>>> v3.18
@@ -405,7 +425,11 @@ static int __init xen_pcpu_init(void)
 	ret = subsys_system_register(&xen_pcpu_subsys, NULL);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning(XEN_PCPU "Failed to register pcpu subsys\n");
+=======
+		pr_warn("Failed to register pcpu subsys\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Failed to register pcpu subsys\n");
 >>>>>>> v3.18
@@ -415,7 +439,11 @@ static int __init xen_pcpu_init(void)
 	ret = xen_sync_pcpus();
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning(XEN_PCPU "Failed to sync pcpu info\n");
+=======
+		pr_warn("Failed to sync pcpu info\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Failed to sync pcpu info\n");
 >>>>>>> v3.18

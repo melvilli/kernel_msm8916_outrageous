@@ -30,6 +30,10 @@
 
 #include <mach/hardware.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18
@@ -38,6 +42,10 @@
 
 #include <mach/regs-s3c2443-clock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/rtc-core.h>
+>>>>>>> v3.18
 =======
 #include <mach/rtc-core.h>
 >>>>>>> v3.18
@@ -51,7 +59,10 @@
 #include <plat/nand-core.h>
 #include <plat/adc-core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/rtc-core.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/spi-core.h>
@@ -72,6 +83,7 @@ static struct device s3c2443_dev = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void s3c2443_restart(enum reboot_mode mode, const char *cmd)
 {
 	if (mode == REBOOT_SOFT)
@@ -80,6 +92,8 @@ void s3c2443_restart(enum reboot_mode mode, const char *cmd)
 	__raw_writel(S3C2443_SWRST_RESET, S3C2443_SWRST);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int __init s3c2443_init(void)

@@ -54,13 +54,19 @@ EXPORT_SYMBOL(ewma_init);
 struct ewma *ewma_add(struct ewma *avg, unsigned long val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	avg->internal = avg->internal  ?
 		(((avg->internal << avg->weight) - avg->internal) +
 =======
+=======
+>>>>>>> v3.18
 	unsigned long internal = ACCESS_ONCE(avg->internal);
 
 	ACCESS_ONCE(avg->internal) = internal ?
 		(((internal << avg->weight) - internal) +
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			(val << avg->factor)) >> avg->weight :
 		(val << avg->factor);

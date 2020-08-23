@@ -20,6 +20,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -35,6 +40,11 @@
 #include <linux/slab.h>
 #include <linux/security.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/net_namespace.h>
+#include <net/sock.h>
+>>>>>>> v3.18
 =======
 #include <net/net_namespace.h>
 #include <net/sock.h>
@@ -78,7 +88,10 @@ static struct list_head audit_rules_list[AUDIT_NR_FILTERS] = {
 DEFINE_MUTEX(audit_filter_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void audit_free_lsm_field(struct audit_field *f)
 {
 	switch (f->type) {
@@ -97,6 +110,9 @@ static void audit_free_lsm_field(struct audit_field *f)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void audit_free_rule(struct audit_entry *e)
 {
@@ -108,11 +124,16 @@ static inline void audit_free_rule(struct audit_entry *e)
 		audit_put_watch(erule->watch);
 	if (erule->fields)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < erule->field_count; i++) {
 			struct audit_field *f = &erule->fields[i];
 			kfree(f->lsm_str);
 			security_audit_rule_free(f->lsm_rule);
 		}
+=======
+		for (i = 0; i < erule->field_count; i++)
+			audit_free_lsm_field(&erule->fields[i]);
+>>>>>>> v3.18
 =======
 		for (i = 0; i < erule->field_count; i++)
 			audit_free_lsm_field(&erule->fields[i]);
@@ -139,7 +160,11 @@ static inline struct audit_entry *audit_init_entry(u32 field_count)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fields = kzalloc(sizeof(*fields) * field_count, GFP_KERNEL);
+=======
+	fields = kcalloc(field_count, sizeof(*fields), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	fields = kcalloc(field_count, sizeof(*fields), GFP_KERNEL);
 >>>>>>> v3.18
@@ -185,7 +210,11 @@ static inline int audit_to_inode(struct audit_krule *krule,
 {
 	if (krule->listnr != AUDIT_FILTER_EXIT ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    krule->watch || krule->inode_f || krule->tree ||
+=======
+	    krule->inode_f || krule->watch || krule->tree ||
+>>>>>>> v3.18
 =======
 	    krule->inode_f || krule->watch || krule->tree ||
 >>>>>>> v3.18
@@ -201,7 +230,11 @@ static __u32 *classes[AUDIT_SYSCALL_CLASSES];
 int __init audit_register_class(int class, unsigned *list)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 *p = kzalloc(AUDIT_BITMASK_SIZE * sizeof(__u32), GFP_KERNEL);
+=======
+	__u32 *p = kcalloc(AUDIT_BITMASK_SIZE, sizeof(__u32), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	__u32 *p = kcalloc(AUDIT_BITMASK_SIZE, sizeof(__u32), GFP_KERNEL);
 >>>>>>> v3.18
@@ -273,7 +306,11 @@ static int audit_match_signal(struct audit_entry *entry)
 
 /* Common user-space to kernel rule translation. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct audit_entry *audit_to_entry_common(struct audit_rule *rule)
+=======
+static inline struct audit_entry *audit_to_entry_common(struct audit_rule_data *rule)
+>>>>>>> v3.18
 =======
 static inline struct audit_entry *audit_to_entry_common(struct audit_rule_data *rule)
 >>>>>>> v3.18
@@ -300,7 +337,11 @@ static inline struct audit_entry *audit_to_entry_common(struct audit_rule_data *
 	}
 	if (unlikely(rule->action == AUDIT_POSSIBLE)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "AUDIT_POSSIBLE is deprecated\n");
+=======
+		pr_err("AUDIT_POSSIBLE is deprecated\n");
+>>>>>>> v3.18
 =======
 		pr_err("AUDIT_POSSIBLE is deprecated\n");
 >>>>>>> v3.18
@@ -400,6 +441,10 @@ static int audit_field_valid(struct audit_entry *entry, struct audit_field *f)
 	case AUDIT_EXIT:
 	case AUDIT_SUCCESS:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case AUDIT_INODE:
+>>>>>>> v3.18
 =======
 	case AUDIT_INODE:
 >>>>>>> v3.18
@@ -461,7 +506,11 @@ static struct audit_entry *audit_data_to_entry(struct audit_rule_data *data,
 	char *str;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	entry = audit_to_entry_common((struct audit_rule *)data);
+=======
+	entry = audit_to_entry_common(data);
+>>>>>>> v3.18
 =======
 	entry = audit_to_entry_common(data);
 >>>>>>> v3.18
@@ -482,6 +531,7 @@ static struct audit_entry *audit_data_to_entry(struct audit_rule_data *data,
 		f->type = data->fields[i];
 		f->val = data->values[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		f->uid = INVALID_UID;
 		f->gid = INVALID_GID;
 		f->lsm_str = NULL;
@@ -494,12 +544,20 @@ static struct audit_entry *audit_data_to_entry(struct audit_rule_data *data,
 		/* Support legacy tests for a valid loginuid */
 		if ((f->type == AUDIT_LOGINUID) && (f->val == AUDIT_UID_UNSET)) {
 >>>>>>> v3.18
+=======
+
+		/* Support legacy tests for a valid loginuid */
+		if ((f->type == AUDIT_LOGINUID) && (f->val == AUDIT_UID_UNSET)) {
+>>>>>>> v3.18
 			f->type = AUDIT_LOGINUID_SET;
 			f->val = 0;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if ((f->type == AUDIT_PID) || (f->type == AUDIT_PPID)) {
 			struct pid *pid;
 			rcu_read_lock();
@@ -513,6 +571,9 @@ static struct audit_entry *audit_data_to_entry(struct audit_rule_data *data,
 			rcu_read_unlock();
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = audit_field_valid(entry, f);
 		if (err)
@@ -563,8 +624,13 @@ static struct audit_entry *audit_data_to_entry(struct audit_rule_data *data,
 			 * become valid after a policy reload. */
 			if (err == -EINVAL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_WARNING "audit rule for LSM "
 				       "\'%s\' is invalid\n",  str);
+=======
+				pr_warn("audit rule for LSM \'%s\' is invalid\n",
+					str);
+>>>>>>> v3.18
 =======
 				pr_warn("audit rule for LSM \'%s\' is invalid\n",
 					str);
@@ -798,8 +864,13 @@ static inline int audit_dupe_lsm_field(struct audit_field *df,
 	 * become valid after a policy reload. */
 	if (ret == -EINVAL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "audit rule for LSM \'%s\' is "
 		       "invalid\n", df->lsm_str);
+=======
+		pr_warn("audit rule for LSM \'%s\' is invalid\n",
+			df->lsm_str);
+>>>>>>> v3.18
 =======
 		pr_warn("audit rule for LSM \'%s\' is invalid\n",
 			df->lsm_str);
@@ -962,13 +1033,19 @@ static inline int audit_add_rule(struct audit_entry *entry)
 		if (err) {
 			mutex_unlock(&audit_filter_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * normally audit_add_tree_rule() will free it
 			 * on failure
 			 */
 			if (tree)
 				audit_put_tree(tree);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto error;
 		}
@@ -1071,7 +1148,11 @@ out:
 
 /* List rules using struct audit_rule_data. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void audit_list_rules(int pid, int seq, struct sk_buff_head *q)
+=======
+static void audit_list_rules(__u32 portid, int seq, struct sk_buff_head *q)
+>>>>>>> v3.18
 =======
 static void audit_list_rules(__u32 portid, int seq, struct sk_buff_head *q)
 >>>>>>> v3.18
@@ -1090,8 +1171,14 @@ static void audit_list_rules(__u32 portid, int seq, struct sk_buff_head *q)
 			if (unlikely(!data))
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			skb = audit_make_reply(pid, seq, AUDIT_LIST_RULES, 0, 1,
 					 data, sizeof(*data) + data->buflen);
+=======
+			skb = audit_make_reply(portid, seq, AUDIT_LIST_RULES,
+					       0, 1, data,
+					       sizeof(*data) + data->buflen);
+>>>>>>> v3.18
 =======
 			skb = audit_make_reply(portid, seq, AUDIT_LIST_RULES,
 					       0, 1, data,
@@ -1103,7 +1190,11 @@ static void audit_list_rules(__u32 portid, int seq, struct sk_buff_head *q)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb = audit_make_reply(pid, seq, AUDIT_LIST_RULES, 1, 1, NULL, 0);
+=======
+	skb = audit_make_reply(portid, seq, AUDIT_LIST_RULES, 1, 1, NULL, 0);
+>>>>>>> v3.18
 =======
 	skb = audit_make_reply(portid, seq, AUDIT_LIST_RULES, 1, 1, NULL, 0);
 >>>>>>> v3.18
@@ -1117,7 +1208,11 @@ static void audit_log_rule_change(char *action, struct audit_krule *rule, int re
 	struct audit_buffer *ab;
 	uid_t loginuid = from_kuid(&init_user_ns, audit_get_loginuid(current));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 sessionid = audit_get_sessionid(current);
+=======
+	unsigned int sessionid = audit_get_sessionid(current);
+>>>>>>> v3.18
 =======
 	unsigned int sessionid = audit_get_sessionid(current);
 >>>>>>> v3.18
@@ -1139,9 +1234,15 @@ static void audit_log_rule_change(char *action, struct audit_krule *rule, int re
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * audit_receive_filter - apply all rules to the specified message type
  * @type: audit message type
  * @pid: target pid for netlink audit messages
+=======
+ * audit_rule_change - apply all rules to the specified message type
+ * @type: audit message type
+ * @portid: target port id for netlink audit messages
+>>>>>>> v3.18
 =======
  * audit_rule_change - apply all rules to the specified message type
  * @type: audit message type
@@ -1151,6 +1252,7 @@ static void audit_log_rule_change(char *action, struct audit_krule *rule, int re
  * @data: payload data
  * @datasz: size of payload data
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int audit_receive_filter(int type, int pid, int seq, void *data, size_t datasz)
 {
@@ -1206,6 +1308,8 @@ int audit_receive_filter(int type, int pid, int seq, void *data, size_t datasz)
 	default:
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 int audit_rule_change(int type, __u32 portid, int seq, void *data,
 			size_t datasz)
 {
@@ -1271,6 +1375,9 @@ int audit_list_rules_send(struct sk_buff *request_skb, int seq)
 		skb_queue_purge(&dest->q);
 		kfree(dest);
 		err = PTR_ERR(tsk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1413,6 +1520,10 @@ static int audit_filter_user_rules(struct audit_krule *rule, int type,
 	for (i = 0; i < rule->field_count; i++) {
 		struct audit_field *f = &rule->fields[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pid_t pid;
+>>>>>>> v3.18
 =======
 		pid_t pid;
 >>>>>>> v3.18
@@ -1422,7 +1533,12 @@ static int audit_filter_user_rules(struct audit_krule *rule, int type,
 		switch (f->type) {
 		case AUDIT_PID:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			result = audit_comparator(task_pid_vnr(current), f->op, f->val);
+=======
+			pid = task_pid_nr(current);
+			result = audit_comparator(pid, f->op, f->val);
+>>>>>>> v3.18
 =======
 			pid = task_pid_nr(current);
 			result = audit_comparator(pid, f->op, f->val);
@@ -1476,6 +1592,7 @@ int audit_filter_user(int type)
 	enum audit_state state = AUDIT_DISABLED;
 	struct audit_entry *e;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 1;
 
 	rcu_read_lock();
@@ -1483,6 +1600,8 @@ int audit_filter_user(int type)
 		if (audit_filter_user_rules(&e->rule, type, &state)) {
 			if (state == AUDIT_DISABLED)
 =======
+=======
+>>>>>>> v3.18
 	int rc, ret;
 
 	ret = 1; /* Audit by default */
@@ -1492,6 +1611,9 @@ int audit_filter_user(int type)
 		rc = audit_filter_user_rules(&e->rule, type, &state);
 		if (rc) {
 			if (rc > 0 && state == AUDIT_DISABLED)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ret = 0;
 			break;
@@ -1500,7 +1622,11 @@ int audit_filter_user(int type)
 	rcu_read_unlock();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret; /* Audit by default */
+=======
+	return ret;
+>>>>>>> v3.18
 =======
 	return ret;
 >>>>>>> v3.18

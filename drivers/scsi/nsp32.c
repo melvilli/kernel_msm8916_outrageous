@@ -916,7 +916,11 @@ static int nsp32_queuecommand_lck(struct scsi_cmnd *SCpnt, void (*done)(struct s
 
 	nsp32_dbg(NSP32_DEBUG_QUEUECOMMAND,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  "enter. target: 0x%x LUN: 0x%x cmnd: 0x%x cmndlen: 0x%x "
+=======
+		  "enter. target: 0x%x LUN: 0x%llx cmnd: 0x%x cmndlen: 0x%x "
+>>>>>>> v3.18
 =======
 		  "enter. target: 0x%x LUN: 0x%llx cmnd: 0x%x cmndlen: 0x%x "
 >>>>>>> v3.18
@@ -935,7 +939,11 @@ static int nsp32_queuecommand_lck(struct scsi_cmnd *SCpnt, void (*done)(struct s
 	/* check target ID is not same as this initiator ID */
 	if (scmd_id(SCpnt) == SCpnt->device->host->this_id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nsp32_dbg(NSP32_DEBUG_QUEUECOMMAND, "terget==host???");
+=======
+		nsp32_dbg(NSP32_DEBUG_QUEUECOMMAND, "target==host???");
+>>>>>>> v3.18
 =======
 		nsp32_dbg(NSP32_DEBUG_QUEUECOMMAND, "target==host???");
 >>>>>>> v3.18

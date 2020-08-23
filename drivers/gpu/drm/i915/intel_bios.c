@@ -50,6 +50,7 @@ find_section(struct bdb_header *bdb, int section_id)
 
 	/* walk the sections looking for section_id */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (index < total) {
 		current_id = *(base + index);
 		index++;
@@ -58,6 +59,8 @@ find_section(struct bdb_header *bdb, int section_id)
 		if (current_id == section_id)
 			return base + index;
 =======
+=======
+>>>>>>> v3.18
 	while (index + 3 < total) {
 		current_id = *(base + index);
 		index++;
@@ -71,6 +74,9 @@ find_section(struct bdb_header *bdb, int section_id)
 		if (current_id == section_id)
 			return base + index;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		index += current_size;
 	}
@@ -223,7 +229,11 @@ parse_lfp_panel_data(struct drm_i915_private *dev_priv,
 	const struct lvds_fp_timing *fp_timing;
 	struct drm_display_mode *panel_fixed_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, downclock;
+=======
+	int i, downclock, drrs_mode;
+>>>>>>> v3.18
 =======
 	int i, downclock, drrs_mode;
 >>>>>>> v3.18
@@ -233,7 +243,11 @@ parse_lfp_panel_data(struct drm_i915_private *dev_priv,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->lvds_dither = lvds_options->pixel_dither;
+=======
+	dev_priv->vbt.lvds_dither = lvds_options->pixel_dither;
+>>>>>>> v3.18
 =======
 	dev_priv->vbt.lvds_dither = lvds_options->pixel_dither;
 >>>>>>> v3.18
@@ -243,7 +257,10 @@ parse_lfp_panel_data(struct drm_i915_private *dev_priv,
 	panel_type = lvds_options->panel_type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	drrs_mode = (lvds_options->dps_panel_type_bits
 				>> (panel_type * 2)) & MODE_MASK;
 	/*
@@ -266,6 +283,9 @@ parse_lfp_panel_data(struct drm_i915_private *dev_priv,
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lvds_lfp_data = find_section(bdb, BDB_LVDS_LFP_DATA);
 	if (!lvds_lfp_data)
@@ -276,7 +296,11 @@ parse_lfp_panel_data(struct drm_i915_private *dev_priv,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->lvds_vbt = 1;
+=======
+	dev_priv->vbt.lvds_vbt = 1;
+>>>>>>> v3.18
 =======
 	dev_priv->vbt.lvds_vbt = 1;
 >>>>>>> v3.18
@@ -292,7 +316,11 @@ parse_lfp_panel_data(struct drm_i915_private *dev_priv,
 	fill_detail_timing_data(panel_fixed_mode, panel_dvo_timing);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->lfp_lvds_vbt_mode = panel_fixed_mode;
+=======
+	dev_priv->vbt.lfp_lvds_vbt_mode = panel_fixed_mode;
+>>>>>>> v3.18
 =======
 	dev_priv->vbt.lfp_lvds_vbt_mode = panel_fixed_mode;
 >>>>>>> v3.18
@@ -317,7 +345,11 @@ parse_lfp_panel_data(struct drm_i915_private *dev_priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (downclock < panel_dvo_timing->clock && i915_lvds_downclock) {
+=======
+	if (downclock < panel_dvo_timing->clock && i915.lvds_downclock) {
+>>>>>>> v3.18
 =======
 	if (downclock < panel_dvo_timing->clock && i915.lvds_downclock) {
 >>>>>>> v3.18
@@ -336,9 +368,15 @@ parse_lfp_panel_data(struct drm_i915_private *dev_priv,
 		if (fp_timing->x_res == panel_fixed_mode->hdisplay &&
 		    fp_timing->y_res == panel_fixed_mode->vdisplay) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_priv->bios_lvds_val = fp_timing->lvds_reg_val;
 			DRM_DEBUG_KMS("VBT initial LVDS value %x\n",
 				      dev_priv->bios_lvds_val);
+=======
+			dev_priv->vbt.bios_lvds_val = fp_timing->lvds_reg_val;
+			DRM_DEBUG_KMS("VBT initial LVDS value %x\n",
+				      dev_priv->vbt.bios_lvds_val);
+>>>>>>> v3.18
 =======
 			dev_priv->vbt.bios_lvds_val = fp_timing->lvds_reg_val;
 			DRM_DEBUG_KMS("VBT initial LVDS value %x\n",
@@ -349,7 +387,10 @@ parse_lfp_panel_data(struct drm_i915_private *dev_priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 parse_lfp_backlight(struct drm_i915_private *dev_priv, struct bdb_header *bdb)
 {
@@ -386,6 +427,9 @@ parse_lfp_backlight(struct drm_i915_private *dev_priv, struct bdb_header *bdb)
 		      backlight_data->level[panel_type]);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Try to find sdvo panel data */
 static void
@@ -397,7 +441,11 @@ parse_sdvo_panel_data(struct drm_i915_private *dev_priv,
 	int index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	index = i915_vbt_sdvo_panel_type;
+=======
+	index = i915.vbt_sdvo_panel_type;
+>>>>>>> v3.18
 =======
 	index = i915.vbt_sdvo_panel_type;
 >>>>>>> v3.18
@@ -427,7 +475,11 @@ parse_sdvo_panel_data(struct drm_i915_private *dev_priv,
 	fill_detail_timing_data(panel_fixed_mode, dvo_timing + index);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->sdvo_lvds_vbt_mode = panel_fixed_mode;
+=======
+	dev_priv->vbt.sdvo_lvds_vbt_mode = panel_fixed_mode;
+>>>>>>> v3.18
 =======
 	dev_priv->vbt.sdvo_lvds_vbt_mode = panel_fixed_mode;
 >>>>>>> v3.18
@@ -442,6 +494,7 @@ static int intel_bios_ssc_frequency(struct drm_device *dev,
 	switch (INTEL_INFO(dev)->gen) {
 	case 2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return alternate ? 66 : 48;
 	case 3:
 	case 4:
@@ -449,12 +502,17 @@ static int intel_bios_ssc_frequency(struct drm_device *dev,
 	default:
 		return alternate ? 100 : 120;
 =======
+=======
+>>>>>>> v3.18
 		return alternate ? 66667 : 48000;
 	case 3:
 	case 4:
 		return alternate ? 100000 : 96000;
 	default:
 		return alternate ? 100000 : 120000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -468,6 +526,7 @@ parse_general_features(struct drm_i915_private *dev_priv,
 
 	general = find_section(bdb, BDB_GENERAL_FEATURES);
 	if (general) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_priv->int_tv_support = general->int_tv_support;
 		dev_priv->int_crt_support = general->int_crt_support;
@@ -484,6 +543,8 @@ parse_general_features(struct drm_i915_private *dev_priv,
 			      dev_priv->display_clock_mode,
 			      dev_priv->fdi_rx_polarity_inverted);
 =======
+=======
+>>>>>>> v3.18
 		dev_priv->vbt.int_tv_support = general->int_tv_support;
 		dev_priv->vbt.int_crt_support = general->int_crt_support;
 		dev_priv->vbt.lvds_use_ssc = general->enable_ssc;
@@ -498,6 +559,9 @@ parse_general_features(struct drm_i915_private *dev_priv,
 			      dev_priv->vbt.lvds_ssc_freq,
 			      dev_priv->vbt.display_clock_mode,
 			      dev_priv->vbt.fdi_rx_polarity_inverted);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -516,7 +580,11 @@ parse_general_definitions(struct drm_i915_private *dev_priv,
 			DRM_DEBUG_KMS("crt_ddc_bus_pin: %d\n", bus_pin);
 			if (intel_gmbus_is_port_valid(bus_pin))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_priv->crt_ddc_pin = bus_pin;
+=======
+				dev_priv->vbt.crt_ddc_pin = bus_pin;
+>>>>>>> v3.18
 =======
 				dev_priv->vbt.crt_ddc_pin = bus_pin;
 >>>>>>> v3.18
@@ -534,7 +602,11 @@ parse_sdvo_device_mapping(struct drm_i915_private *dev_priv,
 	struct sdvo_device_mapping *p_mapping;
 	struct bdb_general_definitions *p_defs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct child_device_config *p_child;
+=======
+	union child_device_config *p_child;
+>>>>>>> v3.18
 =======
 	union child_device_config *p_child;
 >>>>>>> v3.18
@@ -565,6 +637,7 @@ parse_sdvo_device_mapping(struct drm_i915_private *dev_priv,
 	for (i = 0; i < child_device_num; i++) {
 		p_child = &(p_defs->devices[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!p_child->device_type) {
 			/* skip the device block if device type is invalid */
 			continue;
@@ -572,12 +645,17 @@ parse_sdvo_device_mapping(struct drm_i915_private *dev_priv,
 		if (p_child->slave_addr != SLAVE_ADDR1 &&
 			p_child->slave_addr != SLAVE_ADDR2) {
 =======
+=======
+>>>>>>> v3.18
 		if (!p_child->old.device_type) {
 			/* skip the device block if device type is invalid */
 			continue;
 		}
 		if (p_child->old.slave_addr != SLAVE_ADDR1 &&
 			p_child->old.slave_addr != SLAVE_ADDR2) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * If the slave address is neither 0x70 nor 0x72,
@@ -586,8 +664,13 @@ parse_sdvo_device_mapping(struct drm_i915_private *dev_priv,
 			continue;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (p_child->dvo_port != DEVICE_PORT_DVOB &&
 			p_child->dvo_port != DEVICE_PORT_DVOC) {
+=======
+		if (p_child->old.dvo_port != DEVICE_PORT_DVOB &&
+			p_child->old.dvo_port != DEVICE_PORT_DVOC) {
+>>>>>>> v3.18
 =======
 		if (p_child->old.dvo_port != DEVICE_PORT_DVOB &&
 			p_child->old.dvo_port != DEVICE_PORT_DVOC) {
@@ -598,6 +681,7 @@ parse_sdvo_device_mapping(struct drm_i915_private *dev_priv,
 		}
 		DRM_DEBUG_KMS("the SDVO device with slave addr %2x is found on"
 				" %s port\n",
+<<<<<<< HEAD
 <<<<<<< HEAD
 				p_child->slave_addr,
 				(p_child->dvo_port == DEVICE_PORT_DVOB) ?
@@ -610,6 +694,8 @@ parse_sdvo_device_mapping(struct drm_i915_private *dev_priv,
 			p_mapping->ddc_pin = p_child->ddc_pin;
 			p_mapping->i2c_pin = p_child->i2c_pin;
 =======
+=======
+>>>>>>> v3.18
 				p_child->old.slave_addr,
 				(p_child->old.dvo_port == DEVICE_PORT_DVOB) ?
 					"SDVOB" : "SDVOC");
@@ -620,6 +706,9 @@ parse_sdvo_device_mapping(struct drm_i915_private *dev_priv,
 			p_mapping->dvo_wiring = p_child->old.dvo_wiring;
 			p_mapping->ddc_pin = p_child->old.ddc_pin;
 			p_mapping->i2c_pin = p_child->old.i2c_pin;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			p_mapping->initialized = 1;
 			DRM_DEBUG_KMS("SDVO device: dvo=%x, addr=%x, wiring=%d, ddc_pin=%d, i2c_pin=%d\n",
@@ -633,7 +722,11 @@ parse_sdvo_device_mapping(struct drm_i915_private *dev_priv,
 					 "two SDVO device.\n");
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (p_child->slave2_addr) {
+=======
+		if (p_child->old.slave2_addr) {
+>>>>>>> v3.18
 =======
 		if (p_child->old.slave2_addr) {
 >>>>>>> v3.18
@@ -657,7 +750,10 @@ parse_driver_features(struct drm_i915_private *dev_priv,
 		       struct bdb_header *bdb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_device *dev = dev_priv->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct bdb_driver_features *driver;
@@ -667,6 +763,7 @@ parse_driver_features(struct drm_i915_private *dev_priv,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (SUPPORTS_EDP(dev) &&
 	    driver->lvds_config == BDB_DRIVER_FEATURE_EDP)
 		dev_priv->edp.support = 1;
@@ -674,6 +771,8 @@ parse_driver_features(struct drm_i915_private *dev_priv,
 	if (driver->dual_frequency)
 		dev_priv->render_reclock_avail = true;
 =======
+=======
+>>>>>>> v3.18
 	if (driver->lvds_config == BDB_DRIVER_FEATURE_EDP)
 		dev_priv->vbt.edp_support = 1;
 
@@ -689,6 +788,9 @@ parse_driver_features(struct drm_i915_private *dev_priv,
 	 */
 	if (!driver->drrs_enabled)
 		dev_priv->vbt.drrs_type = DRRS_NOT_SUPPORTED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -702,7 +804,11 @@ parse_edp(struct drm_i915_private *dev_priv, struct bdb_header *bdb)
 	edp = find_section(bdb, BDB_EDP);
 	if (!edp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (SUPPORTS_EDP(dev_priv->dev) && dev_priv->edp.support)
+=======
+		if (dev_priv->vbt.edp_support)
+>>>>>>> v3.18
 =======
 		if (dev_priv->vbt.edp_support)
 >>>>>>> v3.18
@@ -713,6 +819,7 @@ parse_edp(struct drm_i915_private *dev_priv, struct bdb_header *bdb)
 	switch ((edp->color_depth >> (panel_type * 2)) & 3) {
 	case EDP_18BPP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_priv->edp.bpp = 18;
 		break;
 	case EDP_24BPP:
@@ -721,6 +828,8 @@ parse_edp(struct drm_i915_private *dev_priv, struct bdb_header *bdb)
 	case EDP_30BPP:
 		dev_priv->edp.bpp = 30;
 =======
+=======
+>>>>>>> v3.18
 		dev_priv->vbt.edp_bpp = 18;
 		break;
 	case EDP_24BPP:
@@ -728,6 +837,9 @@ parse_edp(struct drm_i915_private *dev_priv, struct bdb_header *bdb)
 		break;
 	case EDP_30BPP:
 		dev_priv->vbt.edp_bpp = 30;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -736,6 +848,7 @@ parse_edp(struct drm_i915_private *dev_priv, struct bdb_header *bdb)
 	edp_pps = &edp->power_seqs[panel_type];
 	edp_link_params = &edp->link_params[panel_type];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_priv->edp.pps = *edp_pps;
 
@@ -780,6 +893,8 @@ parse_edp(struct drm_i915_private *dev_priv, struct bdb_header *bdb)
 	case 3:
 		dev_priv->edp.vswing = DP_TRAIN_VOLTAGE_SWING_1200;
 =======
+=======
+>>>>>>> v3.18
 	dev_priv->vbt.edp_pps = *edp_pps;
 
 	switch (edp_link_params->rate) {
@@ -846,13 +961,19 @@ parse_edp(struct drm_i915_private *dev_priv, struct bdb_header *bdb)
 	default:
 		DRM_DEBUG_KMS("VBT has unknown eDP voltage swing value %u\n",
 			      edp_link_params->vswing);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u8 *goto_next_sequence(u8 *data, int *size)
 {
 	u16 len;
@@ -1191,6 +1312,9 @@ static void parse_ddi_ports(struct drm_i915_private *dev_priv,
 		parse_ddi_port(dev_priv, port, bdb);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void
 parse_device_mapping(struct drm_i915_private *dev_priv,
@@ -1198,7 +1322,11 @@ parse_device_mapping(struct drm_i915_private *dev_priv,
 {
 	struct bdb_general_definitions *p_defs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct child_device_config *p_child, *child_dev_ptr;
+=======
+	union child_device_config *p_child, *child_dev_ptr;
+>>>>>>> v3.18
 =======
 	union child_device_config *p_child, *child_dev_ptr;
 >>>>>>> v3.18
@@ -1230,7 +1358,11 @@ parse_device_mapping(struct drm_i915_private *dev_priv,
 	for (i = 0; i < child_device_num; i++) {
 		p_child = &(p_defs->devices[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!p_child->device_type) {
+=======
+		if (!p_child->common.device_type) {
+>>>>>>> v3.18
 =======
 		if (!p_child->common.device_type) {
 >>>>>>> v3.18
@@ -1244,8 +1376,13 @@ parse_device_mapping(struct drm_i915_private *dev_priv,
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->child_dev = kcalloc(count, sizeof(*p_child), GFP_KERNEL);
 	if (!dev_priv->child_dev) {
+=======
+	dev_priv->vbt.child_dev = kcalloc(count, sizeof(*p_child), GFP_KERNEL);
+	if (!dev_priv->vbt.child_dev) {
+>>>>>>> v3.18
 =======
 	dev_priv->vbt.child_dev = kcalloc(count, sizeof(*p_child), GFP_KERNEL);
 	if (!dev_priv->vbt.child_dev) {
@@ -1254,6 +1391,7 @@ parse_device_mapping(struct drm_i915_private *dev_priv,
 		return;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_priv->child_dev_num = count;
 	count = 0;
@@ -1265,6 +1403,8 @@ parse_device_mapping(struct drm_i915_private *dev_priv,
 		}
 		child_dev_ptr = dev_priv->child_dev + count;
 =======
+=======
+>>>>>>> v3.18
 	dev_priv->vbt.child_dev_num = count;
 	count = 0;
 	for (i = 0; i < child_device_num; i++) {
@@ -1283,6 +1423,9 @@ parse_device_mapping(struct drm_i915_private *dev_priv,
 		}
 
 		child_dev_ptr = dev_priv->vbt.child_dev + count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		count++;
 		memcpy((void *)child_dev_ptr, (void *)p_child,
@@ -1295,6 +1438,7 @@ static void
 init_vbt_defaults(struct drm_i915_private *dev_priv)
 {
 	struct drm_device *dev = dev_priv->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	dev_priv->crt_ddc_pin = GMBUS_PORT_VGADDC;
@@ -1315,6 +1459,8 @@ init_vbt_defaults(struct drm_i915_private *dev_priv)
 	dev_priv->lvds_ssc_freq = intel_bios_ssc_frequency(dev, 1);
 	DRM_DEBUG_KMS("Set default to SSC at %dMHz\n", dev_priv->lvds_ssc_freq);
 =======
+=======
+>>>>>>> v3.18
 	enum port port;
 
 	dev_priv->vbt.crt_ddc_pin = GMBUS_PORT_VGADDC;
@@ -1353,6 +1499,9 @@ init_vbt_defaults(struct drm_i915_private *dev_priv)
 		info->supports_hdmi = info->supports_dvi;
 		info->supports_dp = (port != PORT_E);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1377,7 +1526,10 @@ static const struct dmi_system_id intel_no_opregion_vbt[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct bdb_header *validate_vbt(char *base, size_t size,
 				       struct vbt_header *vbt,
 				       const char *source)
@@ -1418,6 +1570,9 @@ static struct bdb_header *validate_vbt(char *base, size_t size,
 	return bdb;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * intel_parse_bios - find VBT and initialize settings from the BIOS
@@ -1443,6 +1598,7 @@ intel_parse_bios(struct drm_device *dev)
 
 	/* XXX Should this validation be moved to intel_opregion.c? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dmi_check_system(intel_no_opregion_vbt) && dev_priv->opregion.vbt) {
 		struct vbt_header *vbt = dev_priv->opregion.vbt;
 		if (memcmp(vbt->signature, "$VBT", 4) == 0) {
@@ -1458,6 +1614,8 @@ intel_parse_bios(struct drm_device *dev)
 		size_t size;
 		int i;
 =======
+=======
+>>>>>>> v3.18
 	if (!dmi_check_system(intel_no_opregion_vbt) && dev_priv->opregion.vbt)
 		bdb = validate_vbt((char *)dev_priv->opregion.header, OPREGION_SIZE,
 				   (struct vbt_header *)dev_priv->opregion.vbt,
@@ -1465,6 +1623,9 @@ intel_parse_bios(struct drm_device *dev)
 
 	if (bdb == NULL) {
 		size_t i, size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		bios = pci_map_rom(pdev, &size);
@@ -1474,18 +1635,25 @@ intel_parse_bios(struct drm_device *dev)
 		/* Scour memory looking for the VBT signature */
 		for (i = 0; i + 4 < size; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!memcmp(bios + i, "$VBT", 4)) {
 				vbt = (struct vbt_header *)(bios + i);
 =======
+=======
+>>>>>>> v3.18
 			if (memcmp(bios + i, "$VBT", 4) == 0) {
 				bdb = validate_vbt(bios, size,
 						   (struct vbt_header *)(bios + i),
 						   "PCI ROM");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			}
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!vbt) {
 			DRM_DEBUG_DRIVER("VBT signature missing\n");
@@ -1495,10 +1663,15 @@ intel_parse_bios(struct drm_device *dev)
 
 		bdb = (struct bdb_header *)(bios + i + vbt->bdb_offset);
 =======
+=======
+>>>>>>> v3.18
 		if (!bdb) {
 			pci_unmap_rom(pdev, bios);
 			return -1;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1507,6 +1680,10 @@ intel_parse_bios(struct drm_device *dev)
 	parse_general_definitions(dev_priv, bdb);
 	parse_lfp_panel_data(dev_priv, bdb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	parse_lfp_backlight(dev_priv, bdb);
+>>>>>>> v3.18
 =======
 	parse_lfp_backlight(dev_priv, bdb);
 >>>>>>> v3.18
@@ -1516,6 +1693,11 @@ intel_parse_bios(struct drm_device *dev)
 	parse_driver_features(dev_priv, bdb);
 	parse_edp(dev_priv, bdb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	parse_mipi(dev_priv, bdb);
+	parse_ddi_ports(dev_priv, bdb);
+>>>>>>> v3.18
 =======
 	parse_mipi(dev_priv, bdb);
 	parse_ddi_ports(dev_priv, bdb);

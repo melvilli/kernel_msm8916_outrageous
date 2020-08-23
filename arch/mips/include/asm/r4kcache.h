@@ -16,14 +16,20 @@
 #include <asm/cacheops.h>
 #include <asm/cpu-features.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mipsmtregs.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/cpu-type.h>
 #include <asm/mipsmtregs.h>
 #include <asm/uaccess.h> /* for segment_eq() */
 
 extern void (*r4k_blast_dcache)(void);
 extern void (*r4k_blast_icache)(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -44,7 +50,11 @@ extern void (*r4k_blast_icache)(void);
 	"	.set	push					\n"	\
 	"	.set	noreorder				\n"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"	.set	mips3\n\t				\n"	\
+=======
+	"	.set	arch=r4000				\n"	\
+>>>>>>> v3.18
 =======
 	"	.set	arch=r4000				\n"	\
 >>>>>>> v3.18
@@ -55,16 +65,22 @@ extern void (*r4k_blast_icache)(void);
 
 #ifdef CONFIG_MIPS_MT
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Temporary hacks for SMTC debug. Optionally force single-threaded
  * execution during I-cache flushes.
  */
 
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Optionally force single-threaded execution during I-cache flushes.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PROTECT_CACHE_FLUSHES 1
 
@@ -183,8 +199,11 @@ static inline void flush_icache_line(unsigned long addr)
 {
 	__iflush_prologue
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cache_op(Hit_Invalidate_I, addr);
 =======
+=======
+>>>>>>> v3.18
 	switch (boot_cpu_type()) {
 	case CPU_LOONGSON2:
 		cache_op(Hit_Invalidate_I_Loongson2, addr);
@@ -194,6 +213,9 @@ static inline void flush_icache_line(unsigned long addr)
 		cache_op(Hit_Invalidate_I, addr);
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__iflush_epilogue
 }
@@ -227,7 +249,11 @@ static inline void flush_scache_line(unsigned long addr)
 	"	.set	push			\n"		\
 	"	.set	noreorder		\n"		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"	.set	mips3			\n"		\
+=======
+	"	.set	arch=r4000		\n"		\
+>>>>>>> v3.18
 =======
 	"	.set	arch=r4000		\n"		\
 >>>>>>> v3.18
@@ -240,7 +266,10 @@ static inline void flush_scache_line(unsigned long addr)
 	: "i" (op), "r" (addr))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define protected_cachee_op(op,addr)				\
 	__asm__ __volatile__(					\
 	"	.set	push			\n"		\
@@ -255,6 +284,9 @@ static inline void flush_scache_line(unsigned long addr)
 	:							\
 	: "i" (op), "r" (addr))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The next two are for badland addresses like signal trampolines.
@@ -262,8 +294,11 @@ static inline void flush_scache_line(unsigned long addr)
 static inline void protected_flush_icache_line(unsigned long addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	protected_cache_op(Hit_Invalidate_I, addr);
 =======
+=======
+>>>>>>> v3.18
 	switch (boot_cpu_type()) {
 	case CPU_LOONGSON2:
 		protected_cache_op(Hit_Invalidate_I_Loongson2, addr);
@@ -277,6 +312,9 @@ static inline void protected_flush_icache_line(unsigned long addr)
 #endif
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -289,13 +327,19 @@ static inline void protected_flush_icache_line(unsigned long addr)
 static inline void protected_writeback_dcache_line(unsigned long addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	protected_cache_op(Hit_Writeback_Inv_D, addr);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EVA
 	protected_cachee_op(Hit_Writeback_Inv_D, addr);
 #else
 	protected_cache_op(Hit_Writeback_Inv_D, addr);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -417,10 +461,13 @@ static inline void invalidate_tcache_page(unsigned long addr)
 		  "i" (op));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* build blast_xxx, blast_xxx_page, blast_xxx_page_indexed */
 #define __BUILD_BLAST_CACHE(pfx, desc, indexop, hitop, lsize) \
 static inline void blast_##pfx##cache##lsize(void)			\
 =======
+=======
+>>>>>>> v3.18
 /*
  * Perform the cache operation specified by op using a user mode virtual
  * address while in kernel mode.
@@ -509,6 +556,9 @@ static inline void blast_##pfx##cache##lsize(void)			\
 /* build blast_xxx, blast_xxx_page, blast_xxx_page_indexed */
 #define __BUILD_BLAST_CACHE(pfx, desc, indexop, hitop, lsize, extra)	\
 static inline void extra##blast_##pfx##cache##lsize(void)		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {									\
 	unsigned long start = INDEX_BASE;				\
@@ -528,7 +578,11 @@ static inline void extra##blast_##pfx##cache##lsize(void)		\
 }									\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void blast_##pfx##cache##lsize##_page(unsigned long page) \
+=======
+static inline void extra##blast_##pfx##cache##lsize##_page(unsigned long page) \
+>>>>>>> v3.18
 =======
 static inline void extra##blast_##pfx##cache##lsize##_page(unsigned long page) \
 >>>>>>> v3.18
@@ -547,7 +601,11 @@ static inline void extra##blast_##pfx##cache##lsize##_page(unsigned long page) \
 }									\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void blast_##pfx##cache##lsize##_page_indexed(unsigned long page) \
+=======
+static inline void extra##blast_##pfx##cache##lsize##_page_indexed(unsigned long page) \
+>>>>>>> v3.18
 =======
 static inline void extra##blast_##pfx##cache##lsize##_page_indexed(unsigned long page) \
 >>>>>>> v3.18
@@ -569,6 +627,7 @@ static inline void extra##blast_##pfx##cache##lsize##_page_indexed(unsigned long
 	__##pfx##flush_epilogue						\
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 __BUILD_BLAST_CACHE(d, dcache, Index_Writeback_Inv_D, Hit_Writeback_Inv_D, 16)
 __BUILD_BLAST_CACHE(i, icache, Index_Invalidate_I, Hit_Invalidate_I, 16)
@@ -592,6 +651,8 @@ __BUILD_BLAST_CACHE(inv_s, scache, Index_Writeback_Inv_SD, Hit_Invalidate_SD, 12
 #define __BUILD_BLAST_CACHE_RANGE(pfx, desc, hitop, prot) \
 static inline void prot##blast_##pfx##cache##_range(unsigned long start, \
 =======
+=======
+>>>>>>> v3.18
 __BUILD_BLAST_CACHE(d, dcache, Index_Writeback_Inv_D, Hit_Writeback_Inv_D, 16, )
 __BUILD_BLAST_CACHE(i, icache, Index_Invalidate_I, Hit_Invalidate_I, 16, )
 __BUILD_BLAST_CACHE(s, scache, Index_Writeback_Inv_SD, Hit_Writeback_Inv_SD, 16, )
@@ -642,6 +703,9 @@ __BUILD_BLAST_USER_CACHE(i, icache, Index_Invalidate_I, Hit_Invalidate_I, 64)
 /* build blast_xxx_range, protected_blast_xxx_range */
 #define __BUILD_BLAST_CACHE_RANGE(pfx, desc, hitop, prot, extra)	\
 static inline void prot##extra##blast_##pfx##cache##_range(unsigned long start, \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						    unsigned long end)	\
 {									\
@@ -662,6 +726,7 @@ static inline void prot##extra##blast_##pfx##cache##_range(unsigned long start, 
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __BUILD_BLAST_CACHE_RANGE(d, dcache, Hit_Writeback_Inv_D, protected_)
 __BUILD_BLAST_CACHE_RANGE(s, scache, Hit_Writeback_Inv_SD, protected_)
 __BUILD_BLAST_CACHE_RANGE(i, icache, Hit_Invalidate_I, protected_)
@@ -671,6 +736,8 @@ __BUILD_BLAST_CACHE_RANGE(s, scache, Hit_Writeback_Inv_SD, )
 __BUILD_BLAST_CACHE_RANGE(inv_d, dcache, Hit_Invalidate_D, )
 __BUILD_BLAST_CACHE_RANGE(inv_s, scache, Hit_Invalidate_SD, )
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_EVA
 
 __BUILD_BLAST_CACHE_RANGE(d, dcache, Hit_Writeback_Inv_D, protected_, )
@@ -720,6 +787,9 @@ __BUILD_BLAST_CACHE_RANGE(s, scache, Hit_Writeback_Inv_SD, , )
 /* blast_inv_dcache_range */
 __BUILD_BLAST_CACHE_RANGE(inv_d, dcache, Hit_Invalidate_D, , )
 __BUILD_BLAST_CACHE_RANGE(inv_s, scache, Hit_Invalidate_SD, , )
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ASM_R4KCACHE_H */

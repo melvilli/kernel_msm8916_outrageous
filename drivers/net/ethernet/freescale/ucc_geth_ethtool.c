@@ -17,7 +17,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/errno.h>
@@ -422,7 +425,11 @@ static const struct ethtool_ops uec_ethtool_ops = {
 void uec_set_ethtool_ops(struct net_device *netdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &uec_ethtool_ops);
+=======
+	netdev->ethtool_ops = &uec_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &uec_ethtool_ops;
 >>>>>>> v3.18

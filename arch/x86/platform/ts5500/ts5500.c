@@ -2,7 +2,11 @@
  * Technologic Systems TS-5500 Single Board Computer support
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2013 Savoir-faire Linux Inc.
+=======
+ * Copyright (C) 2013-2014 Savoir-faire Linux Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013-2014 Savoir-faire Linux Inc.
 >>>>>>> v3.18
@@ -20,8 +24,13 @@
  * Documentation/ABI/testing/sysfs-platform-ts5500.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This code actually supports the TS-5500 platform, but it may be extended to
  * support similar Technologic Systems x86-based platforms, such as the TS-5600.
+=======
+ * This code may be extended to support similar x86-based platforms.
+ * Actually, the TS-5500 and TS-5400 are supported.
+>>>>>>> v3.18
 =======
  * This code may be extended to support similar x86-based platforms.
  * Actually, the TS-5500 and TS-5400 are supported.
@@ -42,6 +51,10 @@
 #define TS5500_PRODUCT_CODE_ADDR	0x74
 #define TS5500_PRODUCT_CODE		0x60	/* TS-5500 product code */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TS5400_PRODUCT_CODE		0x40	/* TS-5400 product code */
+>>>>>>> v3.18
 =======
 #define TS5400_PRODUCT_CODE		0x40	/* TS-5400 product code */
 >>>>>>> v3.18
@@ -80,6 +93,10 @@
 /**
  * struct ts5500_sbc - TS-5500 board description
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @name:	Board model name.
+>>>>>>> v3.18
 =======
  * @name:	Board model name.
 >>>>>>> v3.18
@@ -93,6 +110,10 @@
  */
 struct ts5500_sbc {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *name;
+>>>>>>> v3.18
 =======
 	const char *name;
 >>>>>>> v3.18
@@ -110,7 +131,11 @@ static const struct {
 	const char * const string;
 	const ssize_t offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } ts5500_signatures[] __initdata = {
+=======
+} ts5500_signatures[] __initconst = {
+>>>>>>> v3.18
 =======
 } ts5500_signatures[] __initconst = {
 >>>>>>> v3.18
@@ -148,6 +173,7 @@ static int __init ts5500_detect_config(struct ts5500_sbc *sbc)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = inb(TS5500_PRODUCT_CODE_ADDR);
 	if (tmp != TS5500_PRODUCT_CODE) {
 		pr_err("This platform is not a TS-5500 (found ID 0x%x)\n", tmp);
@@ -156,6 +182,8 @@ static int __init ts5500_detect_config(struct ts5500_sbc *sbc)
 	}
 	sbc->id = tmp;
 =======
+=======
+>>>>>>> v3.18
 	sbc->id = inb(TS5500_PRODUCT_CODE_ADDR);
 	if (sbc->id == TS5500_PRODUCT_CODE) {
 		sbc->name = "TS-5500";
@@ -166,6 +194,9 @@ static int __init ts5500_detect_config(struct ts5500_sbc *sbc)
 		ret = -ENODEV;
 		goto cleanup;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tmp = inb(TS5500_SRAM_RS485_ADC_ADDR);
@@ -185,6 +216,7 @@ cleanup:
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t ts5500_show_id(struct device *dev,
 			      struct device_attribute *attr, char *buf)
@@ -229,6 +261,8 @@ static DEVICE_ATTR(itr, S_IRUGO, ts5500_show_itr, NULL);
 static struct attribute *ts5500_attributes[] = {
 	&dev_attr_id.attr,
 =======
+=======
+>>>>>>> v3.18
 static ssize_t name_show(struct device *dev, struct device_attribute *attr,
 		char *buf)
 {
@@ -275,6 +309,9 @@ TS5500_ATTR_BOOL(itr);
 static struct attribute *ts5500_attributes[] = {
 	&dev_attr_id.attr,
 	&dev_attr_name.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&dev_attr_jumpers.attr,
 	&dev_attr_sram.attr,
@@ -399,6 +436,7 @@ static int __init ts5500_init(void)
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ts5500_dio1_pdev.dev.parent = &pdev->dev;
 	if (platform_device_register(&ts5500_dio1_pdev))
 		dev_warn(&pdev->dev, "DIO1 block registration failed\n");
@@ -406,6 +444,8 @@ static int __init ts5500_init(void)
 	if (platform_device_register(&ts5500_dio2_pdev))
 		dev_warn(&pdev->dev, "DIO2 block registration failed\n");
 =======
+=======
+>>>>>>> v3.18
 	if (sbc->id == TS5500_PRODUCT_CODE) {
 		ts5500_dio1_pdev.dev.parent = &pdev->dev;
 		if (platform_device_register(&ts5500_dio1_pdev))
@@ -414,6 +454,9 @@ static int __init ts5500_init(void)
 		if (platform_device_register(&ts5500_dio2_pdev))
 			dev_warn(&pdev->dev, "DIO2 block registration failed\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (led_classdev_register(&pdev->dev, &ts5500_led_cdev))

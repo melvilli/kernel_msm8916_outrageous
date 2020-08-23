@@ -2,7 +2,11 @@
  * Wacom Penabled Driver for I2C
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2011 Tatsunosuke Tobita, Wacom.
+=======
+ * Copyright (c) 2011 - 2013 Tatsunosuke Tobita, Wacom.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2011 - 2013 Tatsunosuke Tobita, Wacom.
 >>>>>>> v3.18
@@ -32,7 +36,10 @@
 #define WACOM_CMD_THROW1	0x00
 #define WACOM_QUERY_SIZE	19
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WACOM_RETRY_CNT		100
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -48,6 +55,11 @@ struct wacom_i2c {
 	struct input_dev *input;
 	u8 data[WACOM_QUERY_SIZE];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool prox;
+	int tool;
+>>>>>>> v3.18
 =======
 	bool prox;
 	int tool;
@@ -125,10 +137,13 @@ static irqreturn_t wacom_i2c_irq(int irq, void *dev_id)
 	pressure = le16_to_cpup((__le16 *)&data[8]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input_report_key(input, BTN_TOUCH, tsw || ers);
 	input_report_key(input, BTN_TOOL_PEN, tsw);
 	input_report_key(input, BTN_TOOL_RUBBER, ers);
 =======
+=======
+>>>>>>> v3.18
 	if (!wac_i2c->prox)
 		wac_i2c->tool = (data[3] & 0x0c) ?
 			BTN_TOOL_RUBBER : BTN_TOOL_PEN;
@@ -137,6 +152,9 @@ static irqreturn_t wacom_i2c_irq(int irq, void *dev_id)
 
 	input_report_key(input, BTN_TOUCH, tsw || ers);
 	input_report_key(input, wac_i2c->tool, wac_i2c->prox);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	input_report_key(input, BTN_STYLUS, f1);
 	input_report_key(input, BTN_STYLUS2, f2);

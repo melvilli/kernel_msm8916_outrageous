@@ -17,11 +17,14 @@
 #include <linux/of.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define SYS_CTRL_CLK_DIVIDER_CTRL_OFFSET    0x0
 #define SYS_CTRL_CLK_DIVIDER_VALUE_OFFSET   0xC
 #define SYS_CTRL_CLK_DIVIDER_MASK	    0x3F
 =======
+=======
+>>>>>>> v3.18
 #include <linux/mvebu-pmsu.h>
 #include <asm/smp_plat.h>
 
@@ -35,6 +38,9 @@
 
 #define PMU_DFS_RATIO_SHIFT 16
 #define PMU_DFS_RATIO_MASK  0x3F
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MAX_CPU	    4
@@ -45,6 +51,10 @@ struct cpu_clk {
 	const char *parent_name;
 	void __iomem *reg_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem *pmu_dfs;
+>>>>>>> v3.18
 =======
 	void __iomem *pmu_dfs;
 >>>>>>> v3.18
@@ -83,8 +93,14 @@ static long clk_cpu_round_rate(struct clk_hw *hwclk, unsigned long rate,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int clk_cpu_set_rate(struct clk_hw *hwclk, unsigned long rate,
 			    unsigned long parent_rate)
+=======
+static int clk_cpu_off_set_rate(struct clk_hw *hwclk, unsigned long rate,
+				unsigned long parent_rate)
+
+>>>>>>> v3.18
 =======
 static int clk_cpu_off_set_rate(struct clk_hw *hwclk, unsigned long rate,
 				unsigned long parent_rate)
@@ -122,7 +138,10 @@ static int clk_cpu_off_set_rate(struct clk_hw *hwclk, unsigned long rate,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int clk_cpu_on_set_rate(struct clk_hw *hwclk, unsigned long rate,
 			       unsigned long parent_rate)
 {
@@ -175,6 +194,9 @@ static int clk_cpu_set_rate(struct clk_hw *hwclk, unsigned long rate,
 		return clk_cpu_off_set_rate(hwclk, rate, parent_rate);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct clk_ops cpu_ops = {
 	.recalc_rate = clk_cpu_recalc_rate,
@@ -183,16 +205,22 @@ static const struct clk_ops cpu_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init of_cpu_clk_setup(struct device_node *node)
 {
 	struct cpu_clk *cpuclk;
 	void __iomem *clock_complex_base = of_iomap(node, 0);
 =======
+=======
+>>>>>>> v3.18
 static void __init of_cpu_clk_setup(struct device_node *node)
 {
 	struct cpu_clk *cpuclk;
 	void __iomem *clock_complex_base = of_iomap(node, 0);
 	void __iomem *pmu_dfs_base = of_iomap(node, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ncpus = 0;
 	struct device_node *dn;
@@ -204,11 +232,17 @@ static void __init of_cpu_clk_setup(struct device_node *node)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pmu_dfs_base == NULL)
 		pr_warn("%s: pmu-dfs base register not set, dynamic frequency scaling not available\n",
 			__func__);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for_each_node_by_type(dn, "cpu")
 		ncpus++;
@@ -216,7 +250,11 @@ static void __init of_cpu_clk_setup(struct device_node *node)
 	cpuclk = kzalloc(ncpus * sizeof(*cpuclk), GFP_KERNEL);
 	if (WARN_ON(!cpuclk))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto cpuclk_out;
+>>>>>>> v3.18
 =======
 		goto cpuclk_out;
 >>>>>>> v3.18
@@ -247,6 +285,11 @@ static void __init of_cpu_clk_setup(struct device_node *node)
 		cpuclk[cpu].cpu = cpu;
 		cpuclk[cpu].reg_base = clock_complex_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (pmu_dfs_base)
+			cpuclk[cpu].pmu_dfs = pmu_dfs_base + 4 * cpu;
+>>>>>>> v3.18
 =======
 		if (pmu_dfs_base)
 			cpuclk[cpu].pmu_dfs = pmu_dfs_base + 4 * cpu;
@@ -276,6 +319,11 @@ bail_out:
 clks_out:
 	kfree(cpuclk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+cpuclk_out:
+	iounmap(clock_complex_base);
+>>>>>>> v3.18
 =======
 cpuclk_out:
 	iounmap(clock_complex_base);

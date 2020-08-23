@@ -1,12 +1,18 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* cnic.h: Broadcom CNIC core network driver.
  *
  * Copyright (c) 2006-2011 Broadcom Corporation
 =======
+=======
+>>>>>>> v3.18
 /* cnic.h: QLogic CNIC core network driver.
  *
  * Copyright (c) 2006-2014 Broadcom Corporation
  * Copyright (c) 2014 QLogic Corporation
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -194,6 +200,11 @@ struct kcq_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define UIO_USE_TX_DOORBELL 0x017855DB
+
+>>>>>>> v3.18
 =======
 #define UIO_USE_TX_DOORBELL 0x017855DB
 
@@ -316,8 +327,11 @@ struct cnic_local {
 	u32			chip_id;
 	int			func;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			pfid;
 	u8			port_mode;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -380,6 +394,7 @@ struct bnx2x_bd_chain_next {
 #define BNX2X_FCOE_L5_CID_BASE		MAX_ISCSI_TBL_SZ
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BNX2X_CHIP_NUM_57710		0x164e
 #define BNX2X_CHIP_NUM_57711		0x164f
 #define BNX2X_CHIP_NUM_57711E		0x1650
@@ -424,6 +439,9 @@ struct bnx2x_bd_chain_next {
 =======
 #define BNX2X_CHIP_IS_E2_PLUS(bp) (CHIP_IS_E2(bp) || CHIP_IS_E3(bp))
 >>>>>>> v3.18
+=======
+#define BNX2X_CHIP_IS_E2_PLUS(bp) (CHIP_IS_E2(bp) || CHIP_IS_E3(bp))
+>>>>>>> v3.18
 
 #define BNX2X_RX_DESC_CNT		(BNX2_PAGE_SIZE / \
 					 sizeof(struct eth_rx_bd))
@@ -459,6 +477,7 @@ struct bnx2x_bd_chain_next {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CNIC_PORT(cp)			((cp)->pfid & 1)
 #define CNIC_FUNC(cp)			((cp)->func)
 #define CNIC_PATH(cp)			(!BNX2X_CHIP_IS_E2_PLUS(cp->chip_id) ? \
@@ -485,6 +504,8 @@ struct bnx2x_bd_chain_next {
 	(BNX2X_CHIP_IS_E2_PLUS((cp)->chip_id) &&		\
 	 !((cp)->ethdev->drv_state & CNIC_DRV_STATE_NO_FCOE))
 =======
+=======
+>>>>>>> v3.18
 #define CNIC_FUNC(cp)			((cp)->func)
 
 #define BNX2X_HW_CID(bp, x)		((BP_PORT(bp) << 23) | \
@@ -505,6 +526,9 @@ struct bnx2x_bd_chain_next {
 
 #define CNIC_SUPPORTS_FCOE(cp)						\
 	(BNX2X_CHIP_IS_E2_PLUS(bp) && !NO_FCOE(bp))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define CNIC_RAMROD_TMO			(HZ / 4)

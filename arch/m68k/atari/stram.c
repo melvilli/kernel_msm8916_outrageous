@@ -22,6 +22,10 @@
 #include <linux/blkdev.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ioport.h>
+>>>>>>> v3.18
 =======
 #include <linux/ioport.h>
 >>>>>>> v3.18
@@ -52,6 +56,10 @@ static struct resource stram_pool = {
 static unsigned long pool_size = 1024*1024;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static unsigned long stram_virt_offset;
+>>>>>>> v3.18
 =======
 static unsigned long stram_virt_offset;
 >>>>>>> v3.18
@@ -76,7 +84,10 @@ void __init atari_stram_init(void)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *stram_start;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -85,8 +96,12 @@ void __init atari_stram_init(void)
 	 * (then ST-RAM is the first memory block at virtual 0x0)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stram_start = phys_to_virt(0);
 	kernel_in_stram = (stram_start == 0);
+=======
+	kernel_in_stram = (m68k_memory[0].addr == 0);
+>>>>>>> v3.18
 =======
 	kernel_in_stram = (m68k_memory[0].addr == 0);
 >>>>>>> v3.18
@@ -104,6 +119,7 @@ void __init atari_stram_init(void)
 
 /*
  * This function is called from setup_arch() to reserve the pages needed for
+<<<<<<< HEAD
 <<<<<<< HEAD
  * ST-RAM management.
  */
@@ -124,6 +140,8 @@ void __init atari_stram_reserve_pages(void *start_mem)
 		 pool_size, &stram_pool);
 }
 =======
+=======
+>>>>>>> v3.18
  * ST-RAM management, if the kernel resides in ST-RAM.
  */
 void __init atari_stram_reserve_pages(void *start_mem)
@@ -180,6 +198,9 @@ unsigned long atari_stram_to_phys(void *virt)
 	return (unsigned long)(virt - stram_virt_offset);
 }
 EXPORT_SYMBOL(atari_stram_to_phys);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -209,7 +230,11 @@ void *atari_stram_alloc(unsigned long size, const char *owner)
 
 	pr_debug("atari_stram_alloc: returning %pR\n", res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (void *)res->start;
+=======
+	return atari_stram_to_virt(res->start);
+>>>>>>> v3.18
 =======
 	return atari_stram_to_virt(res->start);
 >>>>>>> v3.18
@@ -220,7 +245,11 @@ EXPORT_SYMBOL(atari_stram_alloc);
 void atari_stram_free(void *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long start = (unsigned long)addr;
+=======
+	unsigned long start = atari_stram_to_phys(addr);
+>>>>>>> v3.18
 =======
 	unsigned long start = atari_stram_to_phys(addr);
 >>>>>>> v3.18

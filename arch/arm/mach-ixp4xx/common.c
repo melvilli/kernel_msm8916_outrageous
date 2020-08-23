@@ -24,7 +24,10 @@
 #include <linux/bitops.h>
 #include <linux/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/timex.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/clocksource.h>
@@ -34,8 +37,13 @@
 #include <linux/gpio.h>
 #include <linux/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sched_clock.h>
 
+=======
+#include <linux/pci.h>
+#include <linux/sched_clock.h>
+>>>>>>> v3.18
 =======
 #include <linux/pci.h>
 #include <linux/sched_clock.h>
@@ -49,7 +57,10 @@
 #include <asm/irq.h>
 #include <asm/system_misc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/mach/map.h>
@@ -57,7 +68,10 @@
 #include <asm/mach/time.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IXP4XX_TIMER_FREQ 66666000
 
 /*
@@ -69,6 +83,9 @@
 				       (IXP4XX_OST_RELOAD_MASK + 1) * HZ) * \
 			(IXP4XX_OST_RELOAD_MASK + 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init ixp4xx_clocksource_init(void);
 static void __init ixp4xx_clockevent_init(void);
@@ -107,7 +124,10 @@ void __init ixp4xx_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * GPIO-functions
  */
@@ -146,6 +166,9 @@ static void gpio_line_set(u8 line, int value)
 	else if (value == IXP4XX_GPIO_LOW)
 	    *IXP4XX_GPIO_GPOUTR &= ~(1 << line);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*************************************************************************
@@ -184,6 +207,7 @@ static int ixp4xx_gpio_to_irq(struct gpio_chip *chip, unsigned gpio)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int irq_to_gpio(unsigned int irq)
 {
 	int gpio = (irq < 32) ? irq2gpio[irq] : -EINVAL;
@@ -195,6 +219,8 @@ int irq_to_gpio(unsigned int irq)
 }
 EXPORT_SYMBOL(irq_to_gpio);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ixp4xx_set_irq_type(struct irq_data *d, unsigned int type)
@@ -355,7 +381,11 @@ static irqreturn_t ixp4xx_timer_interrupt(int irq, void *dev_id)
 static struct irqaction ixp4xx_timer_irq = {
 	.name		= "timer1",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -522,7 +552,11 @@ void __init ixp4xx_sys_init(void)
  * sched_clock()
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 notrace ixp4xx_read_sched_clock(void)
+=======
+static u64 notrace ixp4xx_read_sched_clock(void)
+>>>>>>> v3.18
 =======
 static u64 notrace ixp4xx_read_sched_clock(void)
 >>>>>>> v3.18
@@ -544,7 +578,11 @@ EXPORT_SYMBOL(ixp4xx_timer_freq);
 static void __init ixp4xx_clocksource_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_sched_clock(ixp4xx_read_sched_clock, 32, ixp4xx_timer_freq);
+=======
+	sched_clock_register(ixp4xx_read_sched_clock, 32, ixp4xx_timer_freq);
+>>>>>>> v3.18
 =======
 	sched_clock_register(ixp4xx_read_sched_clock, 32, ixp4xx_timer_freq);
 >>>>>>> v3.18
@@ -575,7 +613,11 @@ static void ixp4xx_set_mode(enum clock_event_mode mode,
 	switch (mode) {
 	case CLOCK_EVT_MODE_PERIODIC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		osrt = LATCH & ~IXP4XX_OST_RELOAD_MASK;
+=======
+		osrt = IXP4XX_LATCH & ~IXP4XX_OST_RELOAD_MASK;
+>>>>>>> v3.18
 =======
 		osrt = IXP4XX_LATCH & ~IXP4XX_OST_RELOAD_MASK;
 >>>>>>> v3.18
@@ -619,7 +661,11 @@ static void __init ixp4xx_clockevent_init(void)
 void ixp4xx_restart(enum reboot_mode mode, const char *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ( 1 && mode == REBOOT_SOFT) {
+=======
+	if (mode == REBOOT_SOFT) {
+>>>>>>> v3.18
 =======
 	if (mode == REBOOT_SOFT) {
 >>>>>>> v3.18
@@ -641,7 +687,10 @@ void ixp4xx_restart(enum reboot_mode mode, const char *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI
 static int ixp4xx_needs_bounce(struct device *dev, dma_addr_t dma_addr, size_t size)
 {
@@ -690,6 +739,9 @@ int dma_set_coherent_mask(struct device *dev, u64 mask)
 }
 EXPORT_SYMBOL(dma_set_coherent_mask);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_IXP4XX_INDIRECT_PCI
 /*
@@ -714,6 +766,7 @@ static void ixp4xx_iounmap(void __iomem *addr)
 		__iounmap(addr);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void __init ixp4xx_init_early(void)
 {
@@ -724,6 +777,8 @@ void __init ixp4xx_init_early(void)
 void __init ixp4xx_init_early(void) {}
 #endif
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 void __init ixp4xx_init_early(void)
@@ -737,4 +792,7 @@ void __init ixp4xx_init_early(void)
 	arch_iounmap = ixp4xx_iounmap;
 #endif
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

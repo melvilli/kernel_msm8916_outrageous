@@ -111,8 +111,11 @@ static void __init am3517_crane_i2c_init(void)
 static void __init am3517_crane_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	omap3_mux_init(board_mux, OMAP_PACKAGE_CBB);
@@ -148,7 +151,10 @@ MACHINE_START(CRANEBOARD, "AM3517/05 CRANEBOARD")
 	.init_early	= am35xx_init_early,
 	.init_irq	= omap3_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= am3517_crane_init,

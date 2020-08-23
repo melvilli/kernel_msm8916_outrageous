@@ -12,11 +12,14 @@
 #include <linux/ethtool.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define QLCNIC_MAX_TX_QUEUES		1
 #define RSS_HASHTYPE_IP_TCP		0x3
 #define QLC_83XX_FW_MBX_CMD		0
 =======
+=======
+>>>>>>> v3.18
 #include <linux/aer.h>
 
 static void __qlcnic_83xx_process_aen(struct qlcnic_adapter *);
@@ -69,6 +72,9 @@ static void qlcnic_83xx_get_beacon_state(struct qlcnic_adapter *);
 #define QLC_83XX_1G_CAPABLE	 BIT_10
 #define QLC_83XX_10G_CAPABLE	 BIT_11
 #define QLC_83XX_AUTONEG_ENABLE	 BIT_15
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct qlcnic_mailbox_metadata qlcnic_83xx_mbx_tbl[] = {
@@ -90,7 +96,11 @@ static const struct qlcnic_mailbox_metadata qlcnic_83xx_mbx_tbl[] = {
 	{QLCNIC_CMD_READ_MAX_LRO, 4, 2},
 	{QLCNIC_CMD_MAC_ADDRESS, 4, 3},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{QLCNIC_CMD_GET_PCI_INFO, 1, 66},
+=======
+	{QLCNIC_CMD_GET_PCI_INFO, 1, 129},
+>>>>>>> v3.18
 =======
 	{QLCNIC_CMD_GET_PCI_INFO, 1, 129},
 >>>>>>> v3.18
@@ -119,6 +129,7 @@ static const struct qlcnic_mailbox_metadata qlcnic_83xx_mbx_tbl[] = {
 	{QLCNIC_CMD_GET_LINK_STATUS, 2, 4},
 	{QLCNIC_CMD_IDC_ACK, 5, 1},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{QLCNIC_CMD_INIT_NIC_FUNC, 2, 1},
 	{QLCNIC_CMD_STOP_NIC_FUNC, 2, 1},
 	{QLCNIC_CMD_SET_LED_CONFIG, 5, 1},
@@ -127,6 +138,8 @@ static const struct qlcnic_mailbox_metadata qlcnic_83xx_mbx_tbl[] = {
 	{QLCNIC_CMD_CONFIG_VPORT, 4, 4},
 	{QLCNIC_CMD_BC_EVENT_SETUP, 2, 1},
 =======
+=======
+>>>>>>> v3.18
 	{QLCNIC_CMD_INIT_NIC_FUNC, 3, 1},
 	{QLCNIC_CMD_STOP_NIC_FUNC, 2, 1},
 	{QLCNIC_CMD_SET_LED_CONFIG, 5, 1},
@@ -138,6 +151,9 @@ static const struct qlcnic_mailbox_metadata qlcnic_83xx_mbx_tbl[] = {
 	{QLCNIC_CMD_DCB_QUERY_CAP, 1, 2},
 	{QLCNIC_CMD_DCB_QUERY_PARAM, 1, 50},
 	{QLCNIC_CMD_SET_INGRESS_ENCAP, 2, 1},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -222,7 +238,11 @@ static struct qlcnic_hardware_ops qlcnic_83xx_hw_ops = {
 	.setup_intr			= qlcnic_83xx_setup_intr,
 	.alloc_mbx_args			= qlcnic_83xx_alloc_mbx_args,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mbx_cmd			= qlcnic_83xx_mbx_op,
+=======
+	.mbx_cmd			= qlcnic_83xx_issue_cmd,
+>>>>>>> v3.18
 =======
 	.mbx_cmd			= qlcnic_83xx_issue_cmd,
 >>>>>>> v3.18
@@ -250,8 +270,11 @@ static struct qlcnic_hardware_ops qlcnic_83xx_hw_ops = {
 	.change_l2_filter		= qlcnic_83xx_change_l2_filter,
 	.get_board_info			= qlcnic_83xx_get_port_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.free_mac_list			= qlcnic_82xx_free_mac_list,
 =======
+=======
+>>>>>>> v3.18
 	.set_mac_filter_count		= qlcnic_83xx_set_mac_filter_count,
 	.free_mac_list			= qlcnic_82xx_free_mac_list,
 	.io_error_detected		= qlcnic_83xx_io_error_detected,
@@ -268,6 +291,9 @@ static struct qlcnic_hardware_ops qlcnic_83xx_hw_ops = {
 	.get_cap_size			= qlcnic_83xx_get_cap_size,
 	.set_sys_info			= qlcnic_83xx_set_sys_info,
 	.store_cap_mask			= qlcnic_83xx_store_cap_mask,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -281,6 +307,11 @@ static struct qlcnic_nic_template qlcnic_83xx_ops = {
 	.config_ipaddr		= qlcnic_83xx_config_ipaddr,
 	.clear_legacy_intr	= qlcnic_83xx_clear_legacy_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.shutdown		= qlcnic_83xx_shutdown,
+	.resume			= qlcnic_83xx_resume,
+>>>>>>> v3.18
 =======
 	.shutdown		= qlcnic_83xx_shutdown,
 	.resume			= qlcnic_83xx_resume,
@@ -326,6 +357,7 @@ static int __qlcnic_set_win_base(struct qlcnic_adapter *adapter, u32 addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_83xx_rd_reg_indirect(struct qlcnic_adapter *adapter, ulong addr)
 {
 	int ret;
@@ -338,6 +370,8 @@ int qlcnic_83xx_rd_reg_indirect(struct qlcnic_adapter *adapter, ulong addr)
 		dev_err(&adapter->pdev->dev,
 			"%s failed, addr = 0x%x\n", __func__, (int)addr);
 =======
+=======
+>>>>>>> v3.18
 int qlcnic_83xx_rd_reg_indirect(struct qlcnic_adapter *adapter, ulong addr,
 				int *err)
 {
@@ -349,6 +383,9 @@ int qlcnic_83xx_rd_reg_indirect(struct qlcnic_adapter *adapter, ulong addr,
 	} else {
 		dev_err(&adapter->pdev->dev,
 			"%s failed, addr = 0x%lx\n", __func__, addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EIO;
 	}
@@ -373,6 +410,7 @@ int qlcnic_83xx_wrt_reg_indirect(struct qlcnic_adapter *adapter, ulong addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_83xx_setup_intr(struct qlcnic_adapter *adapter, u8 num_intr)
 {
 	int err, i, num_msix;
@@ -383,6 +421,8 @@ int qlcnic_83xx_setup_intr(struct qlcnic_adapter *adapter, u8 num_intr)
 	num_msix = rounddown_pow_of_two(min_t(int, num_online_cpus(),
 					      num_intr));
 =======
+=======
+>>>>>>> v3.18
 static void qlcnic_83xx_enable_legacy(struct qlcnic_adapter *adapter)
 {
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
@@ -401,11 +441,15 @@ static int qlcnic_83xx_calculate_msix_vector(struct qlcnic_adapter *adapter)
 
 	num_msix = adapter->drv_sds_rings;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* account for AEN interrupt MSI-X based interrupts */
 	num_msix += 1;
 
 	if (!(adapter->flags & QLCNIC_TX_INTR_SHARED))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		num_msix += adapter->max_drv_tx_rings;
 
@@ -420,6 +464,8 @@ static int qlcnic_83xx_calculate_msix_vector(struct qlcnic_adapter *adapter)
 		num_msix = 1;
 	}
 =======
+=======
+>>>>>>> v3.18
 		num_msix += adapter->drv_tx_rings;
 
 	return num_msix;
@@ -453,12 +499,16 @@ int qlcnic_83xx_setup_intr(struct qlcnic_adapter *adapter)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* setup interrupt mapping table for fw */
 	ahw->intr_tbl = vzalloc(num_msix *
 				sizeof(struct qlcnic_intrpt_config));
 	if (!ahw->intr_tbl)
 		return -ENOMEM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!(adapter->flags & QLCNIC_MSIX_ENABLED)) {
 		/* MSI-X enablement failed, use legacy interrupt */
@@ -468,6 +518,8 @@ int qlcnic_83xx_setup_intr(struct qlcnic_adapter *adapter)
 		adapter->msix_entries[0].vector = adapter->pdev->irq;
 		dev_info(&adapter->pdev->dev, "using legacy interrupt\n");
 =======
+=======
+>>>>>>> v3.18
 
 	if (!(adapter->flags & QLCNIC_MSIX_ENABLED)) {
 		if (adapter->ahw->pci_func >= QLC_MAX_LEGACY_FUNC_SUPP) {
@@ -477,6 +529,9 @@ int qlcnic_83xx_setup_intr(struct qlcnic_adapter *adapter)
 		}
 
 		qlcnic_83xx_enable_legacy(adapter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -489,21 +544,28 @@ int qlcnic_83xx_setup_intr(struct qlcnic_adapter *adapter)
 		ahw->intr_tbl[i].src = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 inline void qlcnic_83xx_clear_legacy_intr_mask(struct qlcnic_adapter *adapter)
 =======
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
 
 static inline void qlcnic_83xx_clear_legacy_intr_mask(struct qlcnic_adapter *adapter)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	writel(0, adapter->tgt_mask_reg);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Enable MSI-x and INT-x interrupts */
 void qlcnic_83xx_enable_intr(struct qlcnic_adapter *adapter,
@@ -521,6 +583,8 @@ void qlcnic_83xx_disable_intr(struct qlcnic_adapter *adapter,
 
 inline void qlcnic_83xx_enable_legacy_msix_mbx_intr(struct qlcnic_adapter
 =======
+=======
+>>>>>>> v3.18
 static inline void qlcnic_83xx_set_legacy_intr_mask(struct qlcnic_adapter *adapter)
 {
 	if (adapter->tgt_mask_reg)
@@ -528,6 +592,9 @@ static inline void qlcnic_83xx_set_legacy_intr_mask(struct qlcnic_adapter *adapt
 }
 
 static inline void qlcnic_83xx_enable_legacy_msix_mbx_intr(struct qlcnic_adapter
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						    *adapter)
 {
@@ -556,11 +623,17 @@ static inline void qlcnic_83xx_get_mbx_data(struct qlcnic_adapter *adapter,
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (cmd->op_type == QLC_83XX_MBX_POST_BC_OP)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < cmd->rsp.num; i++)
 		cmd->rsp.arg[i] = readl(QLCNIC_MBX_FW(adapter->ahw, i));
@@ -599,6 +672,7 @@ irqreturn_t qlcnic_83xx_clear_legacy_intr(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void qlcnic_83xx_poll_process_aen(struct qlcnic_adapter *adapter)
 {
 	u32 resp, event;
@@ -607,6 +681,8 @@ static void qlcnic_83xx_poll_process_aen(struct qlcnic_adapter *adapter)
 	spin_lock_irqsave(&adapter->ahw->mbx_lock, flags);
 
 =======
+=======
+>>>>>>> v3.18
 static inline void qlcnic_83xx_notify_mbx_response(struct qlcnic_mailbox *mbx)
 {
 	atomic_set(&mbx->rsp_status, QLC_83XX_MBX_RESPONSE_ARRIVED);
@@ -620,12 +696,16 @@ static void qlcnic_83xx_poll_process_aen(struct qlcnic_adapter *adapter)
 	unsigned long flags;
 
 	spin_lock_irqsave(&mbx->aen_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	resp = QLCRDX(adapter->ahw, QLCNIC_FW_MBX_CTRL);
 	if (!(resp & QLCNIC_SET_OWNER))
 		goto out;
 
 	event = readl(QLCNIC_MBX_FW(adapter->ahw, 0));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (event &  QLCNIC_MBX_ASYNC_EVENT)
 		__qlcnic_83xx_process_aen(adapter);
@@ -634,6 +714,8 @@ out:
 	qlcnic_83xx_enable_legacy_msix_mbx_intr(adapter);
 	spin_unlock_irqrestore(&adapter->ahw->mbx_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	if (event &  QLCNIC_MBX_ASYNC_EVENT) {
 		__qlcnic_83xx_process_aen(adapter);
 	} else {
@@ -643,6 +725,9 @@ out:
 out:
 	qlcnic_83xx_enable_legacy_msix_mbx_intr(adapter);
 	spin_unlock_irqrestore(&mbx->aen_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -658,8 +743,14 @@ irqreturn_t qlcnic_83xx_intr(int irq, void *data)
 	qlcnic_83xx_poll_process_aen(adapter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ahw->diag_test == QLCNIC_INTERRUPT_TEST) {
 		ahw->diag_cnt++;
+=======
+	if (ahw->diag_test) {
+		if (ahw->diag_test == QLCNIC_INTERRUPT_TEST)
+			ahw->diag_cnt++;
+>>>>>>> v3.18
 =======
 	if (ahw->diag_test) {
 		if (ahw->diag_test == QLCNIC_INTERRUPT_TEST)
@@ -693,7 +784,11 @@ irqreturn_t qlcnic_83xx_tmp_intr(int irq, void *data)
 done:
 	adapter->ahw->diag_cnt++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_83xx_enable_intr(adapter, sds_ring);
+=======
+	qlcnic_enable_sds_intr(adapter, sds_ring);
+>>>>>>> v3.18
 =======
 	qlcnic_enable_sds_intr(adapter, sds_ring);
 >>>>>>> v3.18
@@ -706,6 +801,12 @@ void qlcnic_83xx_free_mbx_intr(struct qlcnic_adapter *adapter)
 	u32 num_msix;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!(adapter->flags & QLCNIC_MSIX_ENABLED))
+		qlcnic_83xx_set_legacy_intr_mask(adapter);
+
+>>>>>>> v3.18
 =======
 	if (!(adapter->flags & QLCNIC_MSIX_ENABLED))
 		qlcnic_83xx_set_legacy_intr_mask(adapter);
@@ -720,14 +821,20 @@ void qlcnic_83xx_free_mbx_intr(struct qlcnic_adapter *adapter)
 
 	msleep(20);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	synchronize_irq(adapter->msix_entries[num_msix].vector);
 	free_irq(adapter->msix_entries[num_msix].vector, adapter);
 =======
+=======
+>>>>>>> v3.18
 
 	if (adapter->msix_entries) {
 		synchronize_irq(adapter->msix_entries[num_msix].vector);
 		free_irq(adapter->msix_entries[num_msix].vector, adapter);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -736,7 +843,10 @@ int qlcnic_83xx_setup_mbx_intr(struct qlcnic_adapter *adapter)
 	irq_handler_t handler;
 	u32 val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[32];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int err = 0;
@@ -750,9 +860,13 @@ int qlcnic_83xx_setup_mbx_intr(struct qlcnic_adapter *adapter)
 		handler = qlcnic_83xx_handle_aen;
 		val = adapter->msix_entries[adapter->ahw->num_msix - 1].vector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snprintf(name, (IFNAMSIZ + 4),
 			 "%s[%s]", "qlcnic", "aen");
 		err = request_irq(val, handler, flags, name, adapter);
+=======
+		err = request_irq(val, handler, flags, "qlcnic-MB", adapter);
+>>>>>>> v3.18
 =======
 		err = request_irq(val, handler, flags, "qlcnic-MB", adapter);
 >>>>>>> v3.18
@@ -775,7 +889,11 @@ int qlcnic_83xx_setup_mbx_intr(struct qlcnic_adapter *adapter)
 
 	/* Enable mailbox interrupt */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_83xx_enable_mbx_intrpt(adapter);
+=======
+	qlcnic_83xx_enable_mbx_interrupt(adapter);
+>>>>>>> v3.18
 =======
 	qlcnic_83xx_enable_mbx_interrupt(adapter);
 >>>>>>> v3.18
@@ -825,7 +943,11 @@ void qlcnic_83xx_read_crb(struct qlcnic_adapter *adapter, char *buf,
 			  loff_t offset, size_t size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 >>>>>>> v3.18
@@ -839,7 +961,11 @@ void qlcnic_83xx_read_crb(struct qlcnic_adapter *adapter, char *buf,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = qlcnic_83xx_rd_reg_indirect(adapter, (u32) offset);
+=======
+	data = QLCRD32(adapter, (u32) offset, &ret);
+>>>>>>> v3.18
 =======
 	data = QLCRD32(adapter, (u32) offset, &ret);
 >>>>>>> v3.18
@@ -852,7 +978,10 @@ void qlcnic_83xx_read_crb(struct qlcnic_adapter *adapter, char *buf,
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memcpy(buf, &data, size);
@@ -870,6 +999,10 @@ void qlcnic_83xx_write_crb(struct qlcnic_adapter *adapter, char *buf,
 int qlcnic_83xx_get_port_info(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct qlcnic_hardware_context *ahw = adapter->ahw;
+>>>>>>> v3.18
 =======
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 >>>>>>> v3.18
@@ -881,6 +1014,7 @@ int qlcnic_83xx_get_port_info(struct qlcnic_adapter *adapter)
 			"Get Port Info failed\n");
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (QLC_83XX_SFP_10G_CAPABLE(adapter->ahw->port_config))
 			adapter->ahw->port_type = QLCNIC_XGBE;
 		else
@@ -889,6 +1023,8 @@ int qlcnic_83xx_get_port_info(struct qlcnic_adapter *adapter)
 		if (QLC_83XX_AUTONEG(adapter->ahw->port_config))
 			adapter->ahw->link_autoneg = AUTONEG_ENABLE;
 =======
+=======
+>>>>>>> v3.18
 
 		if (ahw->port_config & QLC_83XX_10G_CAPABLE) {
 			ahw->port_type = QLCNIC_XGBE;
@@ -903,14 +1039,20 @@ int qlcnic_83xx_get_port_info(struct qlcnic_adapter *adapter)
 		if (QLC_83XX_AUTONEG(ahw->port_config))
 			ahw->link_autoneg = AUTONEG_ENABLE;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return status;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qlcnic_83xx_enable_mbx_intrpt(struct qlcnic_adapter *adapter)
 =======
+=======
+>>>>>>> v3.18
 static void qlcnic_83xx_set_mac_filter_count(struct qlcnic_adapter *adapter)
 {
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
@@ -928,6 +1070,9 @@ static void qlcnic_83xx_set_mac_filter_count(struct qlcnic_adapter *adapter)
 }
 
 void qlcnic_83xx_enable_mbx_interrupt(struct qlcnic_adapter *adapter)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 val;
@@ -983,12 +1128,15 @@ static void qlcnic_83xx_handle_idc_comp_aen(struct qlcnic_adapter *adapter,
 					    u32 data[]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void qlcnic_dump_mbx(struct qlcnic_adapter *adapter,
 			    struct qlcnic_cmd_args *cmd)
 {
 	int i;
 
 =======
+=======
+>>>>>>> v3.18
 void qlcnic_dump_mbx(struct qlcnic_adapter *adapter,
 		     struct qlcnic_cmd_args *cmd)
 {
@@ -997,6 +1145,9 @@ void qlcnic_dump_mbx(struct qlcnic_adapter *adapter,
 	if (cmd->op_type == QLC_83XX_MBX_POST_BC_OP)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_info(&adapter->pdev->dev,
 		 "Host MBX regs(%d)\n", cmd->req.num);
@@ -1016,6 +1167,7 @@ void qlcnic_dump_mbx(struct qlcnic_adapter *adapter,
 	pr_info("\n");
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Mailbox response for mac rcode */
 u32 qlcnic_83xx_mac_rcode(struct qlcnic_adapter *adapter)
@@ -1132,6 +1284,8 @@ out:
 	spin_unlock_irqrestore(&adapter->ahw->mbx_lock, flags);
 	return rsp;
 =======
+=======
+>>>>>>> v3.18
 static void qlcnic_83xx_poll_for_mbx_completion(struct qlcnic_adapter *adapter,
 						struct qlcnic_cmd_args *cmd)
 {
@@ -1202,6 +1356,9 @@ int qlcnic_83xx_issue_cmd(struct qlcnic_adapter *adapter,
 	}
 
 	return cmd->rsp_opcode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1213,6 +1370,10 @@ int qlcnic_83xx_alloc_mbx_args(struct qlcnic_cmd_args *mbx,
 	const struct qlcnic_mailbox_metadata *mbx_tbl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(mbx, 0, sizeof(struct qlcnic_cmd_args));
+>>>>>>> v3.18
 =======
 	memset(mbx, 0, sizeof(struct qlcnic_cmd_args));
 >>>>>>> v3.18
@@ -1239,10 +1400,13 @@ int qlcnic_83xx_alloc_mbx_args(struct qlcnic_cmd_args *mbx,
 			temp = adapter->ahw->fw_hal_version << 29;
 			mbx->req.arg[0] = (type | (mbx->req.num << 16) | temp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 			mbx->cmd_op = type;
 			return 0;
 		}
@@ -1250,6 +1414,9 @@ int qlcnic_83xx_alloc_mbx_args(struct qlcnic_cmd_args *mbx,
 
 	dev_err(&adapter->pdev->dev, "%s: Invalid mailbox command opcode 0x%x\n",
 		__func__, type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return -EINVAL;
 }
@@ -1262,7 +1429,13 @@ void qlcnic_83xx_idc_aen_work(struct work_struct *work)
 
 	adapter = container_of(work, struct qlcnic_adapter, idc_aen_work.work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_IDC_ACK);
+=======
+	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_IDC_ACK);
+	if (err)
+		return;
+>>>>>>> v3.18
 =======
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_IDC_ACK);
 	if (err)
@@ -1289,17 +1462,23 @@ static void qlcnic_83xx_handle_idc_comp_aen(struct qlcnic_adapter *adapter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __qlcnic_83xx_process_aen(struct qlcnic_adapter *adapter)
 {
 	u32 event[QLC_83XX_MBX_AEN_CNT];
 	int i;
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 =======
+=======
+>>>>>>> v3.18
 static void __qlcnic_83xx_process_aen(struct qlcnic_adapter *adapter)
 {
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	u32 event[QLC_83XX_MBX_AEN_CNT];
 	int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < QLC_83XX_MBX_AEN_CNT; i++)
@@ -1321,6 +1500,10 @@ static void __qlcnic_83xx_process_aen(struct qlcnic_adapter *adapter)
 		break;
 	case QLCNIC_MBX_TIME_EXTEND_EVENT:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ahw->extend_lb_time = event[1] >> 8 & 0xf;
+>>>>>>> v3.18
 =======
 		ahw->extend_lb_time = event[1] >> 8 & 0xf;
 >>>>>>> v3.18
@@ -1337,6 +1520,12 @@ static void __qlcnic_83xx_process_aen(struct qlcnic_adapter *adapter)
 			 QLCNIC_MBX_RSP(event[0]));
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case QLCNIC_MBX_DCBX_CONFIG_CHANGE_EVENT:
+		qlcnic_dcb_aen_handler(adapter->dcb, (void *)&event[1]);
+		break;
+>>>>>>> v3.18
 =======
 	case QLCNIC_MBX_DCBX_CONFIG_CHANGE_EVENT:
 		qlcnic_dcb_aen_handler(adapter->dcb, (void *)&event[1]);
@@ -1354,6 +1543,7 @@ static void __qlcnic_83xx_process_aen(struct qlcnic_adapter *adapter)
 static void qlcnic_83xx_process_aen(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	u32 resp, event;
 	unsigned long flags;
@@ -1369,6 +1559,8 @@ static void qlcnic_83xx_process_aen(struct qlcnic_adapter *adapter)
 
 	spin_unlock_irqrestore(&ahw->mbx_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	u32 resp, event, rsp_status = QLC_83XX_MBX_RESPONSE_ARRIVED;
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	struct qlcnic_mailbox *mbx = ahw->mailbox;
@@ -1386,6 +1578,9 @@ static void qlcnic_83xx_process_aen(struct qlcnic_adapter *adapter)
 		}
 	}
 	spin_unlock_irqrestore(&mbx->aen_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1410,6 +1605,10 @@ void qlcnic_83xx_enable_mbx_poll(struct qlcnic_adapter *adapter)
 
 	INIT_DELAYED_WORK(&adapter->mbx_poll_work, qlcnic_83xx_mbx_poll_work);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	queue_delayed_work(adapter->qlcnic_wq, &adapter->mbx_poll_work, 0);
+>>>>>>> v3.18
 =======
 	queue_delayed_work(adapter->qlcnic_wq, &adapter->mbx_poll_work, 0);
 >>>>>>> v3.18
@@ -1438,7 +1637,11 @@ static int qlcnic_83xx_add_rings(struct qlcnic_adapter *adapter)
 	sds_mbx_size = sizeof(struct qlcnic_sds_mbx);
 	context_id = recv_ctx->context_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_sds = (adapter->max_sds_rings - QLCNIC_MAX_RING_SETS);
+=======
+	num_sds = adapter->drv_sds_rings - QLCNIC_MAX_SDS_RINGS;
+>>>>>>> v3.18
 =======
 	num_sds = adapter->drv_sds_rings - QLCNIC_MAX_SDS_RINGS;
 >>>>>>> v3.18
@@ -1449,7 +1652,11 @@ static int qlcnic_83xx_add_rings(struct qlcnic_adapter *adapter)
 	/* set up status rings, mbx 2-81 */
 	index = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 8; i < adapter->max_sds_rings; i++) {
+=======
+	for (i = 8; i < adapter->drv_sds_rings; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 8; i < adapter->drv_sds_rings; i++) {
 >>>>>>> v3.18
@@ -1488,7 +1695,11 @@ static int qlcnic_83xx_add_rings(struct qlcnic_adapter *adapter)
 	index = 0;
 	/* status descriptor ring */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 8; i < adapter->max_sds_rings; i++) {
+=======
+	for (i = 8; i < adapter->drv_sds_rings; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 8; i < adapter->drv_sds_rings; i++) {
 >>>>>>> v3.18
@@ -1550,15 +1761,21 @@ int qlcnic_83xx_create_rx_ctx(struct qlcnic_adapter *adapter)
 	num_rds = adapter->max_rds_rings;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (adapter->max_sds_rings <= QLCNIC_MAX_RING_SETS)
 		num_sds = adapter->max_sds_rings;
 	else
 		num_sds = QLCNIC_MAX_RING_SETS;
 =======
+=======
+>>>>>>> v3.18
 	if (adapter->drv_sds_rings <= QLCNIC_MAX_SDS_RINGS)
 		num_sds = adapter->drv_sds_rings;
 	else
 		num_sds = QLCNIC_MAX_SDS_RINGS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sds_mbx_size = sizeof(struct qlcnic_sds_mbx);
@@ -1570,13 +1787,19 @@ int qlcnic_83xx_create_rx_ctx(struct qlcnic_adapter *adapter)
 
 	/* set mailbox hdr and capabilities */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter,
 			      QLCNIC_CMD_CREATE_RX_CTX);
 =======
+=======
+>>>>>>> v3.18
 	err = qlcnic_alloc_mbx_args(&cmd, adapter,
 				    QLCNIC_CMD_CREATE_RX_CTX);
 	if (err)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (qlcnic_sriov_pf_check(adapter) || qlcnic_sriov_vf_check(adapter))
@@ -1666,7 +1889,11 @@ int qlcnic_83xx_create_rx_ctx(struct qlcnic_adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (adapter->max_sds_rings > QLCNIC_MAX_RING_SETS)
+=======
+	if (adapter->drv_sds_rings > QLCNIC_MAX_SDS_RINGS)
+>>>>>>> v3.18
 =======
 	if (adapter->drv_sds_rings > QLCNIC_MAX_SDS_RINGS)
 >>>>>>> v3.18
@@ -1726,9 +1953,15 @@ int qlcnic_83xx_create_tx_ctx(struct qlcnic_adapter *adapter,
 	if (adapter->flags & QLCNIC_MSIX_ENABLED) {
 		if (!(adapter->flags & QLCNIC_TX_INTR_SHARED))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			msix_vector = adapter->max_sds_rings + ring;
 		else
 			msix_vector = adapter->max_sds_rings - 1;
+=======
+			msix_vector = adapter->drv_sds_rings + ring;
+		else
+			msix_vector = adapter->drv_sds_rings - 1;
+>>>>>>> v3.18
 =======
 			msix_vector = adapter->drv_sds_rings + ring;
 		else
@@ -1746,7 +1979,13 @@ int qlcnic_83xx_create_tx_ctx(struct qlcnic_adapter *adapter,
 	mbx.src = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CREATE_TX_CTX);
+=======
+	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CREATE_TX_CTX);
+	if (err)
+		return err;
+>>>>>>> v3.18
 =======
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CREATE_TX_CTX);
 	if (err)
@@ -1761,7 +2000,12 @@ int qlcnic_83xx_create_tx_ctx(struct qlcnic_adapter *adapter,
 
 	cmd.req.arg[1] = QLCNIC_CAP0_LEGACY_CONTEXT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd.req.arg[5] = QLCNIC_MAX_TX_QUEUES | temp;
+=======
+	cmd.req.arg[5] = QLCNIC_SINGLE_RING | temp;
+
+>>>>>>> v3.18
 =======
 	cmd.req.arg[5] = QLCNIC_SINGLE_RING | temp;
 
@@ -1772,8 +2016,13 @@ int qlcnic_83xx_create_tx_ctx(struct qlcnic_adapter *adapter,
 	err = qlcnic_issue_cmd(adapter, &cmd);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&adapter->pdev->dev,
 			"Failed to create Tx ctx in firmware 0x%x\n", err);
+=======
+		netdev_err(adapter->netdev,
+			   "Failed to create Tx ctx in firmware 0x%x\n", err);
+>>>>>>> v3.18
 =======
 		netdev_err(adapter->netdev,
 			   "Failed to create Tx ctx in firmware 0x%x\n", err);
@@ -1786,18 +2035,24 @@ int qlcnic_83xx_create_tx_ctx(struct qlcnic_adapter *adapter,
 	if ((adapter->flags & QLCNIC_MSIX_ENABLED) &&
 	    !(adapter->flags & QLCNIC_TX_INTR_SHARED)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		intr_mask = ahw->intr_tbl[adapter->max_sds_rings + ring].src;
 		tx->crb_intr_mask = ahw->pci_base0 + intr_mask;
 	}
 	dev_info(&adapter->pdev->dev, "Tx Context[0x%x] Created, state:0x%x\n",
 		 tx->ctx_id, mbx_out->state);
 =======
+=======
+>>>>>>> v3.18
 		intr_mask = ahw->intr_tbl[adapter->drv_sds_rings + ring].src;
 		tx->crb_intr_mask = ahw->pci_base0 + intr_mask;
 	}
 	netdev_info(adapter->netdev,
 		    "Tx Context[0x%x] Created, state:0x%x\n",
 		    tx->ctx_id, mbx_out->state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	qlcnic_free_mbx_args(&cmd);
@@ -1806,7 +2061,11 @@ out:
 
 static int qlcnic_83xx_diag_alloc_res(struct net_device *netdev, int test,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      int num_sds_ring)
+=======
+				      u8 num_sds_ring)
+>>>>>>> v3.18
 =======
 				      u8 num_sds_ring)
 >>>>>>> v3.18
@@ -1826,7 +2085,11 @@ static int qlcnic_83xx_diag_alloc_res(struct net_device *netdev, int test,
 	qlcnic_detach(adapter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter->max_sds_rings = 1;
+=======
+	adapter->drv_sds_rings = QLCNIC_SINGLE_RING;
+>>>>>>> v3.18
 =======
 	adapter->drv_sds_rings = QLCNIC_SINGLE_RING;
 >>>>>>> v3.18
@@ -1844,7 +2107,11 @@ static int qlcnic_83xx_diag_alloc_res(struct net_device *netdev, int test,
 		qlcnic_detach(adapter);
 		if (adapter_state == QLCNIC_ADAPTER_UP_MAGIC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			adapter->max_sds_rings = num_sds_ring;
+=======
+			adapter->drv_sds_rings = num_sds_ring;
+>>>>>>> v3.18
 =======
 			adapter->drv_sds_rings = num_sds_ring;
 >>>>>>> v3.18
@@ -1861,9 +2128,15 @@ static int qlcnic_83xx_diag_alloc_res(struct net_device *netdev, int test,
 
 	if (adapter->ahw->diag_test == QLCNIC_INTERRUPT_TEST) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (ring = 0; ring < adapter->max_sds_rings; ring++) {
 			sds_ring = &adapter->recv_ctx->sds_rings[ring];
 			qlcnic_83xx_enable_intr(adapter, sds_ring);
+=======
+		for (ring = 0; ring < adapter->drv_sds_rings; ring++) {
+			sds_ring = &adapter->recv_ctx->sds_rings[ring];
+			qlcnic_enable_sds_intr(adapter, sds_ring);
+>>>>>>> v3.18
 =======
 		for (ring = 0; ring < adapter->drv_sds_rings; ring++) {
 			sds_ring = &adapter->recv_ctx->sds_rings[ring];
@@ -1874,9 +2147,12 @@ static int qlcnic_83xx_diag_alloc_res(struct net_device *netdev, int test,
 
 	if (adapter->ahw->diag_test == QLCNIC_LOOPBACK_TEST) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* disable and free mailbox interrupt */
 		if (!(adapter->flags & QLCNIC_MSIX_ENABLED))
 			qlcnic_83xx_free_mbx_intr(adapter);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		adapter->ahw->loopback_state = 0;
@@ -1888,6 +2164,7 @@ static int qlcnic_83xx_diag_alloc_res(struct net_device *netdev, int test,
 }
 
 static void qlcnic_83xx_diag_free_res(struct net_device *netdev,
+<<<<<<< HEAD
 <<<<<<< HEAD
 					int max_sds_rings)
 {
@@ -1901,6 +2178,8 @@ static void qlcnic_83xx_diag_free_res(struct net_device *netdev,
 			sds_ring = &adapter->recv_ctx->sds_rings[ring];
 			qlcnic_83xx_disable_intr(adapter, sds_ring);
 =======
+=======
+>>>>>>> v3.18
 				      u8 drv_sds_rings)
 {
 	struct qlcnic_adapter *adapter = netdev_priv(netdev);
@@ -1913,6 +2192,9 @@ static void qlcnic_83xx_diag_free_res(struct net_device *netdev,
 			sds_ring = &adapter->recv_ctx->sds_rings[ring];
 			if (adapter->flags & QLCNIC_MSIX_ENABLED)
 				qlcnic_disable_sds_intr(adapter, sds_ring);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1920,6 +2202,7 @@ static void qlcnic_83xx_diag_free_res(struct net_device *netdev,
 	qlcnic_fw_destroy_ctx(adapter);
 	qlcnic_detach(adapter);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (adapter->ahw->diag_test == QLCNIC_LOOPBACK_TEST) {
 		if (!(adapter->flags & QLCNIC_MSIX_ENABLED)) {
@@ -1938,6 +2221,10 @@ static void qlcnic_83xx_diag_free_res(struct net_device *netdev,
 	adapter->ahw->diag_test = 0;
 	adapter->drv_sds_rings = drv_sds_rings;
 >>>>>>> v3.18
+=======
+	adapter->ahw->diag_test = 0;
+	adapter->drv_sds_rings = drv_sds_rings;
+>>>>>>> v3.18
 
 	if (qlcnic_attach(adapter))
 		goto out;
@@ -1945,6 +2232,10 @@ static void qlcnic_83xx_diag_free_res(struct net_device *netdev,
 	if (netif_running(netdev))
 		__qlcnic_up(adapter, netdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1953,7 +2244,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void qlcnic_83xx_get_beacon_state(struct qlcnic_adapter *adapter)
 {
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
@@ -1981,6 +2275,9 @@ static void qlcnic_83xx_get_beacon_state(struct qlcnic_adapter *adapter)
 	return;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int qlcnic_83xx_config_led(struct qlcnic_adapter *adapter, u32 state,
 			   u32 beacon)
@@ -1992,14 +2289,20 @@ int qlcnic_83xx_config_led(struct qlcnic_adapter *adapter, u32 state,
 	if (state) {
 		/* Get LED configuration */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qlcnic_alloc_mbx_args(&cmd, adapter,
 				      QLCNIC_CMD_GET_LED_CONFIG);
 =======
+=======
+>>>>>>> v3.18
 		status = qlcnic_alloc_mbx_args(&cmd, adapter,
 					       QLCNIC_CMD_GET_LED_CONFIG);
 		if (status)
 			return status;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = qlcnic_issue_cmd(adapter, &cmd);
 		if (status) {
@@ -2015,14 +2318,20 @@ int qlcnic_83xx_config_led(struct qlcnic_adapter *adapter, u32 state,
 		mbx_in = (LSW(QLC_83XX_LED_CONFIG) << 16) |
 			  LSW(QLC_83XX_LED_CONFIG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qlcnic_alloc_mbx_args(&cmd, adapter,
 				      QLCNIC_CMD_SET_LED_CONFIG);
 =======
+=======
+>>>>>>> v3.18
 		status = qlcnic_alloc_mbx_args(&cmd, adapter,
 					       QLCNIC_CMD_SET_LED_CONFIG);
 		if (status)
 			return status;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cmd.req.arg[1] = mbx_in;
 		cmd.req.arg[2] = mbx_in;
@@ -2041,14 +2350,20 @@ mbx_err:
 	} else {
 		/* Restoring default LED configuration */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qlcnic_alloc_mbx_args(&cmd, adapter,
 				      QLCNIC_CMD_SET_LED_CONFIG);
 =======
+=======
+>>>>>>> v3.18
 		status = qlcnic_alloc_mbx_args(&cmd, adapter,
 					       QLCNIC_CMD_SET_LED_CONFIG);
 		if (status)
 			return status;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cmd.req.arg[1] = adapter->ahw->mbox_reg[0];
 		cmd.req.arg[2] = adapter->ahw->mbox_reg[1];
@@ -2110,8 +2425,12 @@ int  qlcnic_83xx_set_led(struct net_device *netdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qlcnic_83xx_register_nic_idc_func(struct qlcnic_adapter *adapter,
 				       int enable)
+=======
+void qlcnic_83xx_initialize_nic(struct qlcnic_adapter *adapter, int enable)
+>>>>>>> v3.18
 =======
 void qlcnic_83xx_initialize_nic(struct qlcnic_adapter *adapter, int enable)
 >>>>>>> v3.18
@@ -2123,6 +2442,7 @@ void qlcnic_83xx_initialize_nic(struct qlcnic_adapter *adapter, int enable)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (enable) {
 		qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_INIT_NIC_FUNC);
 		cmd.req.arg[1] = BIT_0 | BIT_31;
@@ -2131,6 +2451,8 @@ void qlcnic_83xx_initialize_nic(struct qlcnic_adapter *adapter, int enable)
 		cmd.req.arg[1] = BIT_0 | BIT_31;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (enable)
 		status = qlcnic_alloc_mbx_args(&cmd, adapter,
 					       QLCNIC_CMD_INIT_NIC_FUNC);
@@ -2146,6 +2468,9 @@ void qlcnic_83xx_initialize_nic(struct qlcnic_adapter *adapter, int enable)
 	if (adapter->dcb)
 		cmd.req.arg[1] |= QLC_REGISTER_DCB_AEN;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = qlcnic_issue_cmd(adapter, &cmd);
 	if (status)
@@ -2157,7 +2482,11 @@ void qlcnic_83xx_initialize_nic(struct qlcnic_adapter *adapter, int enable)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_83xx_set_port_config(struct qlcnic_adapter *adapter)
+=======
+static int qlcnic_83xx_set_port_config(struct qlcnic_adapter *adapter)
+>>>>>>> v3.18
 =======
 static int qlcnic_83xx_set_port_config(struct qlcnic_adapter *adapter)
 >>>>>>> v3.18
@@ -2166,12 +2495,18 @@ static int qlcnic_83xx_set_port_config(struct qlcnic_adapter *adapter)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_SET_PORT_CONFIG);
 =======
+=======
+>>>>>>> v3.18
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_SET_PORT_CONFIG);
 	if (err)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmd.req.arg[1] = adapter->ahw->port_config;
 	err = qlcnic_issue_cmd(adapter, &cmd);
@@ -2182,7 +2517,11 @@ static int qlcnic_83xx_set_port_config(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_83xx_get_port_config(struct qlcnic_adapter *adapter)
+=======
+static int qlcnic_83xx_get_port_config(struct qlcnic_adapter *adapter)
+>>>>>>> v3.18
 =======
 static int qlcnic_83xx_get_port_config(struct qlcnic_adapter *adapter)
 >>>>>>> v3.18
@@ -2191,12 +2530,18 @@ static int qlcnic_83xx_get_port_config(struct qlcnic_adapter *adapter)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_GET_PORT_CONFIG);
 =======
+=======
+>>>>>>> v3.18
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_GET_PORT_CONFIG);
 	if (err)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = qlcnic_issue_cmd(adapter, &cmd);
 	if (err)
@@ -2214,12 +2559,18 @@ int qlcnic_83xx_setup_link_event(struct qlcnic_adapter *adapter, int enable)
 	struct qlcnic_cmd_args cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_GET_LINK_EVENT);
 =======
+=======
+>>>>>>> v3.18
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_GET_LINK_EVENT);
 	if (err)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	temp = adapter->recv_ctx->context_id << 16;
 	cmd.req.arg[1] = (enable ? 1 : 0) | BIT_8 | temp;
@@ -2236,7 +2587,13 @@ static void qlcnic_83xx_set_interface_id_promisc(struct qlcnic_adapter *adapter,
 {
 	if (qlcnic_sriov_pf_check(adapter)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qlcnic_pf_set_interface_id_promisc(adapter, interface_id);
+=======
+		qlcnic_alloc_lb_filters_mem(adapter);
+		qlcnic_pf_set_interface_id_promisc(adapter, interface_id);
+		adapter->rx_mac_learn = true;
+>>>>>>> v3.18
 =======
 		qlcnic_alloc_lb_filters_mem(adapter);
 		qlcnic_pf_set_interface_id_promisc(adapter, interface_id);
@@ -2251,9 +2608,15 @@ static void qlcnic_83xx_set_interface_id_promisc(struct qlcnic_adapter *adapter,
 int qlcnic_83xx_nic_set_promisc(struct qlcnic_adapter *adapter, u32 mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 	u32 temp = 0;
 	struct qlcnic_cmd_args cmd;
+=======
+	struct qlcnic_cmd_args *cmd = NULL;
+	u32 temp = 0;
+	int err;
+>>>>>>> v3.18
 =======
 	struct qlcnic_cmd_args *cmd = NULL;
 	u32 temp = 0;
@@ -2263,6 +2626,7 @@ int qlcnic_83xx_nic_set_promisc(struct qlcnic_adapter *adapter, u32 mode)
 	if (adapter->recv_ctx->state == QLCNIC_HOST_CTX_STATE_FREED)
 		return -EIO;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CONFIGURE_MAC_RX_MODE);
 	qlcnic_83xx_set_interface_id_promisc(adapter, &temp);
@@ -2274,6 +2638,8 @@ int qlcnic_83xx_nic_set_promisc(struct qlcnic_adapter *adapter, u32 mode)
 
 	qlcnic_free_mbx_args(&cmd);
 =======
+=======
+>>>>>>> v3.18
 	cmd = kzalloc(sizeof(*cmd), GFP_ATOMIC);
 	if (!cmd)
 		return -ENOMEM;
@@ -2298,6 +2664,9 @@ int qlcnic_83xx_nic_set_promisc(struct qlcnic_adapter *adapter, u32 mode)
 
 out:
 	kfree(cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -2306,6 +2675,7 @@ int qlcnic_83xx_loopback_test(struct net_device *netdev, u8 mode)
 {
 	struct qlcnic_adapter *adapter = netdev_priv(netdev);
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret = 0, loop = 0, max_sds_rings = adapter->max_sds_rings;
 
@@ -2323,6 +2693,8 @@ int qlcnic_83xx_loopback_test(struct net_device *netdev, u8 mode)
 	ret = qlcnic_83xx_diag_alloc_res(netdev, QLCNIC_LOOPBACK_TEST,
 					 max_sds_rings);
 =======
+=======
+>>>>>>> v3.18
 	u8 drv_sds_rings = adapter->drv_sds_rings;
 	u8 drv_tx_rings = adapter->drv_tx_rings;
 	int ret = 0, loop = 0;
@@ -2348,6 +2720,9 @@ int qlcnic_83xx_loopback_test(struct net_device *netdev, u8 mode)
 
 	ret = qlcnic_83xx_diag_alloc_res(netdev, QLCNIC_LOOPBACK_TEST,
 					 drv_sds_rings);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		goto fail_diag_alloc;
@@ -2359,6 +2734,7 @@ int qlcnic_83xx_loopback_test(struct net_device *netdev, u8 mode)
 	/* Poll for link up event before running traffic */
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		msleep(500);
 		if (!(adapter->flags & QLCNIC_MSIX_ENABLED))
 			qlcnic_83xx_process_aen(adapter);
@@ -2368,6 +2744,8 @@ int qlcnic_83xx_loopback_test(struct net_device *netdev, u8 mode)
 				 "Firmware didn't sent link up event to loopback request\n");
 			ret = -QLCNIC_FW_NOT_RESPOND;
 =======
+=======
+>>>>>>> v3.18
 		msleep(QLC_83XX_LB_MSLEEP_COUNT);
 
 		if (test_bit(__QLCNIC_RESETTING, &adapter->state)) {
@@ -2380,12 +2758,16 @@ int qlcnic_83xx_loopback_test(struct net_device *netdev, u8 mode)
 			netdev_info(netdev,
 				    "Firmware didn't sent link up event to loopback request\n");
 			ret = -ETIMEDOUT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			qlcnic_83xx_clear_lb_mode(adapter, mode);
 			goto free_diag_res;
 		}
 	} while ((adapter->ahw->linkup && ahw->has_link_events) != 1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Make sure carrier is off and queue is stopped during loopback */
 	if (netif_running(netdev)) {
@@ -2395,11 +2777,14 @@ int qlcnic_83xx_loopback_test(struct net_device *netdev, u8 mode)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	ret = qlcnic_do_lb_test(adapter, mode);
 
 	qlcnic_83xx_clear_lb_mode(adapter, mode);
 
 free_diag_res:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	qlcnic_83xx_diag_free_res(netdev, max_sds_rings);
 
@@ -2416,6 +2801,8 @@ int qlcnic_83xx_set_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 	u32 config;
 
 =======
+=======
+>>>>>>> v3.18
 	qlcnic_83xx_diag_free_res(netdev, drv_sds_rings);
 
 fail_diag_alloc:
@@ -2447,6 +2834,9 @@ static int qlcnic_83xx_set_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 
 	ahw->extend_lb_time = 0;
 	max_wait_count = QLC_83XX_LB_WAIT_COUNT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = qlcnic_83xx_get_port_config(adapter);
 	if (status)
@@ -2454,7 +2844,10 @@ static int qlcnic_83xx_set_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 
 	config = ahw->port_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Check if port is already in loopback mode */
 	if ((config & QLC_83XX_CFG_LOOPBACK_HSS) ||
@@ -2464,6 +2857,9 @@ static int qlcnic_83xx_set_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 		return -EINPROGRESS;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_bit(QLC_83XX_IDC_COMP_AEN, &ahw->idc.status);
 
@@ -2475,9 +2871,15 @@ static int qlcnic_83xx_set_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 	status = qlcnic_83xx_set_port_config(adapter);
 	if (status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&adapter->pdev->dev,
 			"Failed to Set Loopback Mode = 0x%x.\n",
 			ahw->port_config);
+=======
+		netdev_err(netdev,
+			   "Failed to Set Loopback Mode = 0x%x.\n",
+			   ahw->port_config);
+>>>>>>> v3.18
 =======
 		netdev_err(netdev,
 			   "Failed to Set Loopback Mode = 0x%x.\n",
@@ -2491,6 +2893,7 @@ static int qlcnic_83xx_set_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 	/* Wait for Link and IDC Completion AEN */
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		msleep(300);
 		if (!(adapter->flags & QLCNIC_MSIX_ENABLED))
 			qlcnic_83xx_process_aen(adapter);
@@ -2502,6 +2905,8 @@ static int qlcnic_83xx_set_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 			qlcnic_83xx_clear_lb_mode(adapter, mode);
 			return -EIO;
 =======
+=======
+>>>>>>> v3.18
 		msleep(QLC_83XX_LB_MSLEEP_COUNT);
 
 		if (test_bit(__QLCNIC_RESETTING, &adapter->state)) {
@@ -2521,6 +2926,9 @@ static int qlcnic_83xx_set_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 			clear_bit(QLC_83XX_IDC_COMP_AEN, &ahw->idc.status);
 			qlcnic_83xx_clear_lb_mode(adapter, mode);
 			return -ETIMEDOUT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} while (test_bit(QLC_83XX_IDC_COMP_AEN, &ahw->idc.status));
@@ -2531,6 +2939,7 @@ static int qlcnic_83xx_set_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_83xx_clear_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 {
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
@@ -2538,6 +2947,8 @@ int qlcnic_83xx_clear_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 	u32 config = ahw->port_config;
 
 =======
+=======
+>>>>>>> v3.18
 static int qlcnic_83xx_clear_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 {
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
@@ -2547,6 +2958,9 @@ static int qlcnic_83xx_clear_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 
 	ahw->extend_lb_time = 0;
 	max_wait_count = QLC_83XX_LB_WAIT_COUNT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_bit(QLC_83XX_IDC_COMP_AEN, &ahw->idc.status);
 	if (mode == QLCNIC_ILB_MODE)
@@ -2557,9 +2971,15 @@ static int qlcnic_83xx_clear_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 	status = qlcnic_83xx_set_port_config(adapter);
 	if (status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&adapter->pdev->dev,
 			"Failed to Clear Loopback Mode = 0x%x.\n",
 			ahw->port_config);
+=======
+		netdev_err(netdev,
+			   "Failed to Clear Loopback Mode = 0x%x.\n",
+			   ahw->port_config);
+>>>>>>> v3.18
 =======
 		netdev_err(netdev,
 			   "Failed to Clear Loopback Mode = 0x%x.\n",
@@ -2573,6 +2993,7 @@ static int qlcnic_83xx_clear_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 	/* Wait for Link and IDC Completion AEN */
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		msleep(300);
 		if (!(adapter->flags & QLCNIC_MSIX_ENABLED))
 			qlcnic_83xx_process_aen(adapter);
@@ -2583,6 +3004,8 @@ static int qlcnic_83xx_clear_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 			clear_bit(QLC_83XX_IDC_COMP_AEN, &ahw->idc.status);
 			return -EIO;
 =======
+=======
+>>>>>>> v3.18
 		msleep(QLC_83XX_LB_MSLEEP_COUNT);
 
 		if (test_bit(__QLCNIC_RESETTING, &adapter->state)) {
@@ -2601,6 +3024,9 @@ static int qlcnic_83xx_clear_lb_mode(struct qlcnic_adapter *adapter, u8 mode)
 				   __func__);
 			clear_bit(QLC_83XX_IDC_COMP_AEN, &ahw->idc.status);
 			return -ETIMEDOUT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} while (test_bit(QLC_83XX_IDC_COMP_AEN, &ahw->idc.status));
@@ -2629,13 +3055,19 @@ void qlcnic_83xx_config_ipaddr(struct qlcnic_adapter *adapter, __be32 ip,
 	struct qlcnic_cmd_args cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CONFIGURE_IP_ADDR);
 =======
+=======
+>>>>>>> v3.18
 	err = qlcnic_alloc_mbx_args(&cmd, adapter,
 				    QLCNIC_CMD_CONFIGURE_IP_ADDR);
 	if (err)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	qlcnic_83xx_set_interface_id_ipaddr(adapter, &temp);
 
@@ -2676,12 +3108,18 @@ int qlcnic_83xx_config_hw_lro(struct qlcnic_adapter *adapter, int mode)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CONFIGURE_HW_LRO);
 =======
+=======
+>>>>>>> v3.18
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CONFIGURE_HW_LRO);
 	if (err)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	temp = adapter->recv_ctx->context_id << 16;
 	arg1 = lro_bit_mask | temp;
@@ -2705,8 +3143,14 @@ int qlcnic_83xx_config_rss(struct qlcnic_adapter *adapter, int enable)
 			    0x255b0ec26d5a56daULL };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CONFIGURE_RSS);
 
+=======
+	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CONFIGURE_RSS);
+	if (err)
+		return err;
+>>>>>>> v3.18
 =======
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CONFIGURE_RSS);
 	if (err)
@@ -2754,25 +3198,34 @@ int qlcnic_83xx_sre_macaddr_change(struct qlcnic_adapter *adapter, u8 *addr,
 				   u16 vlan_id, u8 op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 	u32 *buf, temp = 0;
 	struct qlcnic_cmd_args cmd;
 	struct qlcnic_macvlan_mbx mv;
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_cmd_args *cmd = NULL;
 	struct qlcnic_macvlan_mbx mv;
 	u32 *buf, temp = 0;
 	int err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (adapter->recv_ctx->state == QLCNIC_HOST_CTX_STATE_FREED)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CONFIG_MAC_VLAN);
 	if (err)
 		return err;
 =======
+=======
+>>>>>>> v3.18
 	cmd = kzalloc(sizeof(*cmd), GFP_ATOMIC);
 	if (!cmd)
 		return -ENOMEM;
@@ -2782,6 +3235,9 @@ int qlcnic_83xx_sre_macaddr_change(struct qlcnic_adapter *adapter, u8 *addr,
 		goto out;
 
 	cmd->type = QLC_83XX_MBX_CMD_NO_WAIT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (vlan_id)
@@ -2789,9 +3245,15 @@ int qlcnic_83xx_sre_macaddr_change(struct qlcnic_adapter *adapter, u8 *addr,
 		     QLCNIC_MAC_VLAN_ADD : QLCNIC_MAC_VLAN_DEL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd.req.arg[1] = op | (1 << 8);
 	qlcnic_83xx_set_interface_id_macaddr(adapter, &temp);
 	cmd.req.arg[1] |= temp;
+=======
+	cmd->req.arg[1] = op | (1 << 8);
+	qlcnic_83xx_set_interface_id_macaddr(adapter, &temp);
+	cmd->req.arg[1] |= temp;
+>>>>>>> v3.18
 =======
 	cmd->req.arg[1] = op | (1 << 8);
 	qlcnic_83xx_set_interface_id_macaddr(adapter, &temp);
@@ -2805,6 +3267,7 @@ int qlcnic_83xx_sre_macaddr_change(struct qlcnic_adapter *adapter, u8 *addr,
 	mv.mac_addr4 = addr[4];
 	mv.mac_addr5 = addr[5];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf = &cmd.req.arg[2];
 	memcpy(buf, &mv, sizeof(struct qlcnic_macvlan_mbx));
 	err = qlcnic_issue_cmd(adapter, &cmd);
@@ -2814,6 +3277,8 @@ int qlcnic_83xx_sre_macaddr_change(struct qlcnic_adapter *adapter, u8 *addr,
 			((op == 1) ? "add " : "delete "), err);
 	qlcnic_free_mbx_args(&cmd);
 =======
+=======
+>>>>>>> v3.18
 	buf = &cmd->req.arg[2];
 	memcpy(buf, &mv, sizeof(struct qlcnic_macvlan_mbx));
 	err = qlcnic_issue_cmd(adapter, cmd);
@@ -2823,6 +3288,9 @@ int qlcnic_83xx_sre_macaddr_change(struct qlcnic_adapter *adapter, u8 *addr,
 	qlcnic_free_mbx_args(cmd);
 out:
 	kfree(cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -2836,8 +3304,13 @@ void qlcnic_83xx_change_l2_filter(struct qlcnic_adapter *adapter, u64 *addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qlcnic_83xx_configure_mac(struct qlcnic_adapter *adapter, u8 *mac,
 			       u8 type, struct qlcnic_cmd_args *cmd)
+=======
+static void qlcnic_83xx_configure_mac(struct qlcnic_adapter *adapter, u8 *mac,
+				      u8 type, struct qlcnic_cmd_args *cmd)
+>>>>>>> v3.18
 =======
 static void qlcnic_83xx_configure_mac(struct qlcnic_adapter *adapter, u8 *mac,
 				      u8 type, struct qlcnic_cmd_args *cmd)
@@ -2854,7 +3327,12 @@ static void qlcnic_83xx_configure_mac(struct qlcnic_adapter *adapter, u8 *mac,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_83xx_get_mac_address(struct qlcnic_adapter *adapter, u8 *mac)
+=======
+int qlcnic_83xx_get_mac_address(struct qlcnic_adapter *adapter, u8 *mac,
+				u8 function)
+>>>>>>> v3.18
 =======
 int qlcnic_83xx_get_mac_address(struct qlcnic_adapter *adapter, u8 *mac,
 				u8 function)
@@ -2865,13 +3343,19 @@ int qlcnic_83xx_get_mac_address(struct qlcnic_adapter *adapter, u8 *mac,
 	u32 mac_low, mac_high;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_MAC_ADDRESS);
 =======
+=======
+>>>>>>> v3.18
 	function = 0;
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_MAC_ADDRESS);
 	if (err)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	qlcnic_83xx_configure_mac(adapter, mac, QLCNIC_GET_CURRENT_MAC, &cmd);
 	err = qlcnic_issue_cmd(adapter, &cmd);
@@ -2893,6 +3377,7 @@ int qlcnic_83xx_get_mac_address(struct qlcnic_adapter *adapter, u8 *mac,
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void qlcnic_83xx_config_intr_coal(struct qlcnic_adapter *adapter)
 {
@@ -2923,6 +3408,8 @@ void qlcnic_83xx_config_intr_coal(struct qlcnic_adapter *adapter)
 			 "Failed to send interrupt coalescence parameters\n");
 	qlcnic_free_mbx_args(&cmd);
 =======
+=======
+>>>>>>> v3.18
 static int qlcnic_83xx_set_rx_intr_coal(struct qlcnic_adapter *adapter)
 {
 	struct qlcnic_nic_intr_coalesce *coal = &adapter->ahw->coal;
@@ -3047,12 +3534,16 @@ int qlcnic_83xx_config_intr_coal(struct qlcnic_adapter *adapter,
 	}
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void qlcnic_83xx_handle_link_aen(struct qlcnic_adapter *adapter,
 					u32 data[])
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 link_status, duplex;
 	/* link speed */
@@ -3077,6 +3568,8 @@ irqreturn_t qlcnic_83xx_handle_aen(int irq, void *data)
 
 	spin_lock_irqsave(&adapter->ahw->mbx_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	u8 link_status, duplex;
 	/* link speed */
@@ -3109,6 +3602,9 @@ static irqreturn_t qlcnic_83xx_handle_aen(int irq, void *data)
 
 	mbx = adapter->ahw->mailbox;
 	spin_lock_irqsave(&mbx->aen_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	resp = QLCRDX(adapter->ahw, QLCNIC_FW_MBX_CTRL);
 	if (!(resp & QLCNIC_SET_OWNER))
@@ -3117,6 +3613,7 @@ static irqreturn_t qlcnic_83xx_handle_aen(int irq, void *data)
 	event = readl(QLCNIC_MBX_FW(adapter->ahw, 0));
 	if (event &  QLCNIC_MBX_ASYNC_EVENT)
 		__qlcnic_83xx_process_aen(adapter);
+<<<<<<< HEAD
 <<<<<<< HEAD
 out:
 	mask = QLCRDX(adapter->ahw, QLCNIC_DEF_INT_MASK);
@@ -3154,6 +3651,8 @@ int qlcnic_enable_eswitch(struct qlcnic_adapter *adapter, u8 port, u8 enable)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	else
 		qlcnic_83xx_notify_mbx_response(mbx);
 
@@ -3164,6 +3663,9 @@ out:
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int qlcnic_83xx_set_nic_info(struct qlcnic_adapter *adapter,
 			     struct qlcnic_info *nic)
@@ -3179,12 +3681,18 @@ int qlcnic_83xx_set_nic_info(struct qlcnic_adapter *adapter,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_SET_NIC_INFO);
 =======
+=======
+>>>>>>> v3.18
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_SET_NIC_INFO);
 	if (err)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmd.req.arg[1] = (nic->pci_func << 16);
 	cmd.req.arg[2] = 0x1 << 16;
@@ -3217,6 +3725,7 @@ int qlcnic_83xx_get_nic_info(struct qlcnic_adapter *adapter,
 	u8 op = 0;
 	struct qlcnic_cmd_args cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_GET_NIC_INFO);
 	if (func_id != adapter->ahw->pci_func) {
@@ -3225,6 +3734,8 @@ int qlcnic_83xx_get_nic_info(struct qlcnic_adapter *adapter,
 	} else {
 		cmd.req.arg[1] = adapter->ahw->pci_func << 16;
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_GET_NIC_INFO);
@@ -3236,6 +3747,9 @@ int qlcnic_83xx_get_nic_info(struct qlcnic_adapter *adapter,
 		cmd.req.arg[1] = op | BIT_31 | temp;
 	} else {
 		cmd.req.arg[1] = ahw->pci_func << 16;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	err = qlcnic_issue_cmd(adapter, &cmd);
@@ -3265,6 +3779,12 @@ int qlcnic_83xx_get_nic_info(struct qlcnic_adapter *adapter,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memcpy(ahw->extra_capability, &cmd.rsp.arg[16],
+	       sizeof(ahw->extra_capability));
+
+>>>>>>> v3.18
 =======
 	memcpy(ahw->extra_capability, &cmd.rsp.arg[16],
 	       sizeof(ahw->extra_capability));
@@ -3275,6 +3795,7 @@ out:
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int qlcnic_83xx_get_pci_info(struct qlcnic_adapter *adapter,
 			     struct qlcnic_pci_info *pci_info)
@@ -3300,6 +3821,8 @@ int qlcnic_83xx_get_pci_info(struct qlcnic_adapter *adapter,
 			if (pci_info->type == QLCNIC_TYPE_NIC)
 				adapter->ahw->act_pci_func++;
 =======
+=======
+>>>>>>> v3.18
 int qlcnic_get_pci_func_type(struct qlcnic_adapter *adapter, u16 type,
 			     u16 *nic, u16 *fcoe, u16 *iscsi)
 {
@@ -3355,6 +3878,9 @@ int qlcnic_83xx_get_pci_info(struct qlcnic_adapter *adapter,
 			pci_info->type = cmd.rsp.arg[i] & 0xFFFF;
 			err = qlcnic_get_pci_func_type(adapter, pci_info->type,
 						       &nic, &fcoe, &iscsi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			temp = (cmd.rsp.arg[i] & 0xFFFF0000) >> 16;
 			pci_info->default_port = temp;
@@ -3367,6 +3893,7 @@ int qlcnic_83xx_get_pci_info(struct qlcnic_adapter *adapter,
 			i++;
 			memcpy(pci_info->mac + sizeof(u32), &cmd.rsp.arg[i], 2);
 			i = i + 3;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 			dev_info(&adapter->pdev->dev, "%s:\n"
@@ -3384,6 +3911,8 @@ int qlcnic_83xx_get_pci_info(struct qlcnic_adapter *adapter,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		}
 	} else {
 		dev_err(dev, "Failed to get PCI Info, error = %d\n", err);
@@ -3397,6 +3926,9 @@ int qlcnic_83xx_get_pci_info(struct qlcnic_adapter *adapter,
 			__func__, ahw->total_nic_func, ahw->total_pci_func);
 		err = -EIO;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	qlcnic_free_mbx_args(&cmd);
 
@@ -3412,12 +3944,18 @@ int qlcnic_83xx_config_intrpt(struct qlcnic_adapter *adapter, bool op_type)
 
 	max_ints = adapter->ahw->num_msix - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CONFIG_INTRPT);
 =======
+=======
+>>>>>>> v3.18
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_CONFIG_INTRPT);
 	if (err)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmd.req.arg[1] = max_ints;
 
@@ -3498,9 +4036,15 @@ int qlcnic_83xx_lockless_flash_read32(struct qlcnic_adapter *adapter,
 				      int count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, ret;
 	u32 word, range, flash_offset, addr = flash_addr;
 	ulong indirect_add, direct_window;
+=======
+	u32 word, range, flash_offset, addr = flash_addr, ret;
+	ulong indirect_add, direct_window;
+	int i, err = 0;
+>>>>>>> v3.18
 =======
 	u32 word, range, flash_offset, addr = flash_addr, ret;
 	ulong indirect_add, direct_window;
@@ -3515,7 +4059,11 @@ int qlcnic_83xx_lockless_flash_read32(struct qlcnic_adapter *adapter,
 
 	qlcnic_83xx_wrt_reg_indirect(adapter, QLC_83XX_FLASH_DIRECT_WINDOW,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     (addr));
+=======
+				     (addr & 0xFFFF0000));
+>>>>>>> v3.18
 =======
 				     (addr & 0xFFFF0000));
 >>>>>>> v3.18
@@ -3528,10 +4076,16 @@ int qlcnic_83xx_lockless_flash_read32(struct qlcnic_adapter *adapter,
 		for (i = 0; i < count; i++) {
 			indirect_add = QLC_83XX_FLASH_DIRECT_DATA(addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = qlcnic_83xx_rd_reg_indirect(adapter,
 							  indirect_add);
 			if (ret == -EIO)
 				return -EIO;
+=======
+			ret = QLCRD32(adapter, indirect_add, &err);
+			if (err == -EIO)
+				return err;
+>>>>>>> v3.18
 =======
 			ret = QLCRD32(adapter, indirect_add, &err);
 			if (err == -EIO)
@@ -3558,10 +4112,16 @@ int qlcnic_83xx_lockless_flash_read32(struct qlcnic_adapter *adapter,
 		for (i = 0; i < count; i++) {
 			indirect_add = QLC_83XX_FLASH_DIRECT_DATA(addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = qlcnic_83xx_rd_reg_indirect(adapter,
 							  indirect_add);
 			if (ret == -EIO)
 				return -EIO;
+=======
+			ret = QLCRD32(adapter, indirect_add, &err);
+			if (err == -EIO)
+				return err;
+>>>>>>> v3.18
 =======
 			ret = QLCRD32(adapter, indirect_add, &err);
 			if (err == -EIO)
@@ -3583,11 +4143,14 @@ static int qlcnic_83xx_poll_flash_status_reg(struct qlcnic_adapter *adapter)
 	u32 status;
 	int retries = QLC_83XX_FLASH_READ_RETRY_COUNT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	do {
 		status = qlcnic_83xx_rd_reg_indirect(adapter,
 						     QLC_83XX_FLASH_STATUS);
 =======
+=======
+>>>>>>> v3.18
 	int err = 0;
 
 	do {
@@ -3595,13 +4158,20 @@ static int qlcnic_83xx_poll_flash_status_reg(struct qlcnic_adapter *adapter)
 		if (err == -EIO)
 			return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if ((status & QLC_83XX_FLASH_STATUS_READY) ==
 		    QLC_83XX_FLASH_STATUS_READY)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		msleep(QLC_83XX_FLASH_STATUS_REG_POLL_DELAY);
+=======
+		usleep_range(1000, 1100);
+>>>>>>> v3.18
 =======
 		usleep_range(1000, 1100);
 >>>>>>> v3.18
@@ -3652,7 +4222,12 @@ int qlcnic_83xx_disable_flash_write(struct qlcnic_adapter *adapter)
 int qlcnic_83xx_read_flash_mfg_id(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, mfg_id;
+=======
+	int ret, err = 0;
+	u32 mfg_id;
+>>>>>>> v3.18
 =======
 	int ret, err = 0;
 	u32 mfg_id;
@@ -3672,15 +4247,21 @@ int qlcnic_83xx_read_flash_mfg_id(struct qlcnic_adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfg_id = qlcnic_83xx_rd_reg_indirect(adapter, QLC_83XX_FLASH_RDDATA);
 	if (mfg_id == -EIO)
 		return -EIO;
 =======
+=======
+>>>>>>> v3.18
 	mfg_id = QLCRD32(adapter, QLC_83XX_FLASH_RDDATA, &err);
 	if (err == -EIO) {
 		qlcnic_83xx_unlock_flash(adapter);
 		return err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	adapter->flash_mfg_id = (mfg_id & 0xFF);
@@ -3704,7 +4285,11 @@ int qlcnic_83xx_read_flash_descriptor_table(struct qlcnic_adapter *adapter)
 						(u8 *)&adapter->ahw->fdt,
 						count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	qlcnic_swap32_buffer((u32 *)&adapter->ahw->fdt, count);
+>>>>>>> v3.18
 =======
 	qlcnic_swap32_buffer((u32 *)&adapter->ahw->fdt, count);
 >>>>>>> v3.18
@@ -3743,7 +4328,11 @@ int qlcnic_83xx_erase_flash_sector(struct qlcnic_adapter *adapter,
 	addr1 = (sector_start_addr & 0xFF) << 16;
 	addr2 = (sector_start_addr & 0xFF0000) >> 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reversed_addr = addr1 | addr2;
+=======
+	reversed_addr = addr1 | addr2 | (sector_start_addr & 0xFF00);
+>>>>>>> v3.18
 =======
 	reversed_addr = addr1 | addr2 | (sector_start_addr & 0xFF00);
 >>>>>>> v3.18
@@ -3807,7 +4396,11 @@ int qlcnic_83xx_flash_bulk_write(struct qlcnic_adapter *adapter, u32 addr,
 {
 	u32 temp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = -EIO;
+=======
+	int ret = -EIO, err = 0;
+>>>>>>> v3.18
 =======
 	int ret = -EIO, err = 0;
 >>>>>>> v3.18
@@ -3820,13 +4413,19 @@ int qlcnic_83xx_flash_bulk_write(struct qlcnic_adapter *adapter, u32 addr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	temp = qlcnic_83xx_rd_reg_indirect(adapter,
 					   QLC_83XX_FLASH_SPI_CONTROL);
 =======
+=======
+>>>>>>> v3.18
 	temp = QLCRD32(adapter, QLC_83XX_FLASH_SPI_CONTROL, &err);
 	if (err == -EIO)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	qlcnic_83xx_wrt_reg_indirect(adapter, QLC_83XX_FLASH_SPI_CONTROL,
 				     (temp | QLC_83XX_FLASH_SPI_CTRL));
@@ -3877,25 +4476,37 @@ int qlcnic_83xx_flash_bulk_write(struct qlcnic_adapter *adapter, u32 addr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = qlcnic_83xx_rd_reg_indirect(adapter, QLC_83XX_FLASH_SPI_STATUS);
 =======
+=======
+>>>>>>> v3.18
 	ret = QLCRD32(adapter, QLC_83XX_FLASH_SPI_STATUS, &err);
 	if (err == -EIO)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((ret & QLC_83XX_FLASH_SPI_CTRL) == QLC_83XX_FLASH_SPI_CTRL) {
 		dev_err(&adapter->pdev->dev, "%s: failed at %d\n",
 			__func__, __LINE__);
 		/* Operation failed, clear error bit */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		temp = qlcnic_83xx_rd_reg_indirect(adapter,
 						   QLC_83XX_FLASH_SPI_CONTROL);
 =======
+=======
+>>>>>>> v3.18
 		temp = QLCRD32(adapter, QLC_83XX_FLASH_SPI_CONTROL, &err);
 		if (err == -EIO)
 			return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		qlcnic_83xx_wrt_reg_indirect(adapter,
 					     QLC_83XX_FLASH_SPI_CONTROL,
@@ -4014,7 +4625,11 @@ void qlcnic_83xx_unlock_driver(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_83xx_ms_mem_write128(struct qlcnic_adapter *adapter, u64 addr,
+=======
+int qlcnic_ms_mem_write128(struct qlcnic_adapter *adapter, u64 addr,
+>>>>>>> v3.18
 =======
 int qlcnic_ms_mem_write128(struct qlcnic_adapter *adapter, u64 addr,
 >>>>>>> v3.18
@@ -4029,7 +4644,11 @@ int qlcnic_ms_mem_write128(struct qlcnic_adapter *adapter, u64 addr,
 
 	mutex_lock(&adapter->ahw->mem_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_83xx_wrt_reg_indirect(adapter, QLCNIC_MS_ADDR_HI, 0);
+=======
+	qlcnic_ind_wr(adapter, QLCNIC_MS_ADDR_HI, 0);
+>>>>>>> v3.18
 =======
 	qlcnic_ind_wr(adapter, QLCNIC_MS_ADDR_HI, 0);
 >>>>>>> v3.18
@@ -4043,6 +4662,7 @@ int qlcnic_ms_mem_write128(struct qlcnic_adapter *adapter, u64 addr,
 			return -EIO;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		qlcnic_83xx_wrt_reg_indirect(adapter, QLCNIC_MS_ADDR_LO, addr);
 		qlcnic_83xx_wrt_reg_indirect(adapter, QLCNIC_MS_WRTDATA_LO,
@@ -4062,6 +4682,8 @@ int qlcnic_ms_mem_write128(struct qlcnic_adapter *adapter, u64 addr,
 			temp = qlcnic_83xx_rd_reg_indirect(adapter,
 							   QLCNIC_MS_CTRL);
 =======
+=======
+>>>>>>> v3.18
 		qlcnic_ind_wr(adapter, QLCNIC_MS_ADDR_LO, addr);
 		qlcnic_ind_wr(adapter, QLCNIC_MS_WRTDATA_LO, *data++);
 		qlcnic_ind_wr(adapter, QLCNIC_MS_WRTDATA_HI, *data++);
@@ -4073,6 +4695,9 @@ int qlcnic_ms_mem_write128(struct qlcnic_adapter *adapter, u64 addr,
 		for (j = 0; j < MAX_CTL_CHECK; j++) {
 			temp = qlcnic_ind_rd(adapter, QLCNIC_MS_CTRL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if ((temp & TA_CTL_BUSY) == 0)
 				break;
@@ -4096,9 +4721,15 @@ int qlcnic_83xx_flash_read32(struct qlcnic_adapter *adapter, u32 flash_addr,
 			     u8 *p_data, int count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, ret;
 	u32 word, addr = flash_addr;
 	ulong  indirect_addr;
+=======
+	u32 word, addr = flash_addr, ret;
+	ulong  indirect_addr;
+	int i, err = 0;
+>>>>>>> v3.18
 =======
 	u32 word, addr = flash_addr, ret;
 	ulong  indirect_addr;
@@ -4124,15 +4755,21 @@ int qlcnic_83xx_flash_read32(struct qlcnic_adapter *adapter, u32 flash_addr,
 
 		indirect_addr = QLC_83XX_FLASH_DIRECT_DATA(addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = qlcnic_83xx_rd_reg_indirect(adapter,
 						  indirect_addr);
 		if (ret == -EIO)
 			return -EIO;
 =======
+=======
+>>>>>>> v3.18
 		ret = QLCRD32(adapter, indirect_addr, &err);
 		if (err == -EIO)
 			return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		word = ret;
 		*(u32 *)p_data  = word;
@@ -4164,13 +4801,19 @@ int qlcnic_83xx_test_link(struct qlcnic_adapter *adapter)
 		return config;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_GET_LINK_STATUS);
 =======
+=======
+>>>>>>> v3.18
 
 	err = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_GET_LINK_STATUS);
 	if (err)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = qlcnic_issue_cmd(adapter, &cmd);
 	if (err) {
@@ -4198,6 +4841,7 @@ int qlcnic_83xx_test_link(struct qlcnic_adapter *adapter)
 		}
 		config = cmd.rsp.arg[3];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (QLC_83XX_SFP_PRESENT(config)) {
 			switch (ahw->module_type) {
 			case LINKEVENT_MODULE_OPTICAL_UNKNOWN:
@@ -4215,6 +4859,8 @@ int qlcnic_83xx_test_link(struct qlcnic_adapter *adapter)
 				ahw->supported_type = PORT_OTHER;
 			}
 =======
+=======
+>>>>>>> v3.18
 		switch (QLC_83XX_SFP_MODULE_TYPE(config)) {
 		case QLC_83XX_MODULE_FIBRE_10GBASE_LRM:
 		case QLC_83XX_MODULE_FIBRE_10GBASE_LR:
@@ -4242,6 +4888,9 @@ int qlcnic_83xx_test_link(struct qlcnic_adapter *adapter)
 		default:
 			ahw->supported_type = PORT_OTHER;
 			ahw->port_type = QLCNIC_XGBE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		if (config & 1)
@@ -4256,6 +4905,7 @@ int qlcnic_83xx_get_settings(struct qlcnic_adapter *adapter,
 			     struct ethtool_cmd *ecmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 config = 0;
 	int status = 0;
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
@@ -4266,6 +4916,8 @@ int qlcnic_83xx_get_settings(struct qlcnic_adapter *adapter,
 	config = qlcnic_83xx_test_link(adapter);
 	ahw->module_type = QLC_83XX_SFP_MODULE_TYPE(config);
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	u32 config = 0;
 	int status = 0;
@@ -4278,6 +4930,9 @@ int qlcnic_83xx_get_settings(struct qlcnic_adapter *adapter,
 		ahw->module_type = QLC_83XX_SFP_MODULE_TYPE(config);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* hard code until there is a way to get it from flash */
 	ahw->board_type = QLCNIC_BRDTYPE_83XX_10G;
@@ -4292,6 +4947,7 @@ int qlcnic_83xx_get_settings(struct qlcnic_adapter *adapter,
 		ecmd->autoneg = AUTONEG_DISABLE;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ahw->port_type == QLCNIC_XGBE) {
 		ecmd->supported = SUPPORTED_1000baseT_Full;
@@ -4308,6 +4964,8 @@ int qlcnic_83xx_get_settings(struct qlcnic_adapter *adapter,
 				     ADVERTISED_1000baseT_Half |
 				     ADVERTISED_1000baseT_Full);
 =======
+=======
+>>>>>>> v3.18
 	ecmd->supported = (SUPPORTED_10baseT_Full |
 			   SUPPORTED_100baseT_Full |
 			   SUPPORTED_1000baseT_Full |
@@ -4343,6 +5001,9 @@ int qlcnic_83xx_get_settings(struct qlcnic_adapter *adapter,
 			break;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4360,13 +5021,19 @@ int qlcnic_83xx_get_settings(struct qlcnic_adapter *adapter,
 		ecmd->transceiver = XCVR_INTERNAL;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case PORT_DA:
 		ecmd->supported |= SUPPORTED_FIBRE;
 		ecmd->advertising |= ADVERTISED_FIBRE;
 		ecmd->port = PORT_DA;
 		ecmd->transceiver = XCVR_EXTERNAL;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		ecmd->supported |= SUPPORTED_FIBRE;
@@ -4382,6 +5049,7 @@ int qlcnic_83xx_get_settings(struct qlcnic_adapter *adapter,
 int qlcnic_83xx_set_settings(struct qlcnic_adapter *adapter,
 			     struct ethtool_cmd *ecmd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int status = 0;
 	u32 config = adapter->ahw->port_config;
@@ -4413,6 +5081,8 @@ int qlcnic_83xx_set_settings(struct qlcnic_adapter *adapter,
 		adapter->ahw->port_config = config;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	u32 config = adapter->ahw->port_config;
 	int status = 0;
@@ -4467,6 +5137,9 @@ int qlcnic_83xx_set_settings(struct qlcnic_adapter *adapter,
 		ahw->port_config = config;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
@@ -4547,7 +5220,13 @@ void qlcnic_83xx_get_stats(struct qlcnic_adapter *adapter, u64 *data)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_GET_STATISTICS);
+=======
+	ret = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_GET_STATISTICS);
+	if (ret)
+		return;
+>>>>>>> v3.18
 =======
 	ret = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_GET_STATISTICS);
 	if (ret)
@@ -4601,6 +5280,7 @@ int qlcnic_83xx_reg_test(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_83xx_get_regs_len(struct qlcnic_adapter *adapter)
 {
 	return (ARRAY_SIZE(qlcnic_83xx_ext_reg_tbl) *
@@ -4608,12 +5288,17 @@ int qlcnic_83xx_get_regs_len(struct qlcnic_adapter *adapter)
 		(ARRAY_SIZE(qlcnic_83xx_reg_tbl) +
 		sizeof(adapter->ahw->reg_tbl));
 =======
+=======
+>>>>>>> v3.18
 inline int qlcnic_83xx_get_regs_len(struct qlcnic_adapter *adapter)
 {
 	return (ARRAY_SIZE(qlcnic_83xx_ext_reg_tbl) *
 		sizeof(*adapter->ahw->ext_reg_tbl)) +
 		(ARRAY_SIZE(qlcnic_83xx_reg_tbl) *
 		sizeof(*adapter->ahw->reg_tbl));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4636,6 +5321,7 @@ int qlcnic_83xx_interrupt_test(struct net_device *netdev)
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	struct qlcnic_cmd_args cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 data;
 	u16 intrpt_id, id;
 	u8 val;
@@ -4647,6 +5333,8 @@ int qlcnic_83xx_interrupt_test(struct net_device *netdev)
 	ret = qlcnic_83xx_diag_alloc_res(netdev, QLCNIC_INTERRUPT_TEST,
 					 max_sds_rings);
 =======
+=======
+>>>>>>> v3.18
 	u8 val, drv_sds_rings = adapter->drv_sds_rings;
 	u8 drv_tx_rings = adapter->drv_tx_rings;
 	u32 data;
@@ -4665,13 +5353,22 @@ int qlcnic_83xx_interrupt_test(struct net_device *netdev)
 
 	ret = qlcnic_83xx_diag_alloc_res(netdev, QLCNIC_INTERRUPT_TEST,
 					 drv_sds_rings);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		goto fail_diag_irq;
 
 	ahw->diag_cnt = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_INTRPT_TEST);
+=======
+	ret = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_INTRPT_TEST);
+	if (ret)
+		goto fail_diag_irq;
+>>>>>>> v3.18
 =======
 	ret = qlcnic_alloc_mbx_args(&cmd, adapter, QLCNIC_CMD_INTRPT_TEST);
 	if (ret)
@@ -4707,18 +5404,24 @@ int qlcnic_83xx_interrupt_test(struct net_device *netdev)
 done:
 	qlcnic_free_mbx_args(&cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_83xx_diag_free_res(netdev, max_sds_rings);
 
 fail_diag_irq:
 	adapter->max_sds_rings = max_sds_rings;
 	clear_bit(__QLCNIC_RESETTING, &adapter->state);
 =======
+=======
+>>>>>>> v3.18
 	qlcnic_83xx_diag_free_res(netdev, drv_sds_rings);
 
 fail_diag_irq:
 	adapter->drv_sds_rings = drv_sds_rings;
 	adapter->drv_tx_rings = drv_tx_rings;
 	qlcnic_release_diag_lock(adapter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -4739,11 +5442,14 @@ void qlcnic_83xx_get_pauseparam(struct qlcnic_adapter *adapter,
 	config = ahw->port_config;
 	if (config & QLC_83XX_CFG_STD_PAUSE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (config & QLC_83XX_CFG_STD_TX_PAUSE)
 			pause->tx_pause = 1;
 		if (config & QLC_83XX_CFG_STD_RX_PAUSE)
 			pause->rx_pause = 1;
 =======
+=======
+>>>>>>> v3.18
 		switch (MSW(config)) {
 		case QLC_83XX_TX_PAUSE:
 			pause->tx_pause = 1;
@@ -4759,6 +5465,9 @@ void qlcnic_83xx_get_pauseparam(struct qlcnic_adapter *adapter,
 			pause->tx_pause = 1;
 			pause->rx_pause = 1;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4803,7 +5512,12 @@ int qlcnic_83xx_set_pauseparam(struct qlcnic_adapter *adapter,
 		ahw->port_config |= QLC_83XX_CFG_STD_TX_PAUSE;
 	} else if (!pause->rx_pause && !pause->tx_pause) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ahw->port_config &= ~QLC_83XX_CFG_STD_TX_RX_PAUSE;
+=======
+		ahw->port_config &= ~(QLC_83XX_CFG_STD_TX_RX_PAUSE |
+				      QLC_83XX_CFG_STD_PAUSE);
+>>>>>>> v3.18
 =======
 		ahw->port_config &= ~(QLC_83XX_CFG_STD_TX_RX_PAUSE |
 				      QLC_83XX_CFG_STD_PAUSE);
@@ -4821,7 +5535,12 @@ int qlcnic_83xx_set_pauseparam(struct qlcnic_adapter *adapter,
 static int qlcnic_83xx_read_flash_status_reg(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret, err = 0;
+	u32 temp;
+>>>>>>> v3.18
 =======
 	int ret, err = 0;
 	u32 temp;
@@ -4836,14 +5555,20 @@ static int qlcnic_83xx_read_flash_status_reg(struct qlcnic_adapter *adapter)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = qlcnic_83xx_rd_reg_indirect(adapter, QLC_83XX_FLASH_RDDATA);
 	return ret & 0xFF;
 =======
+=======
+>>>>>>> v3.18
 	temp = QLCRD32(adapter, QLC_83XX_FLASH_RDDATA, &err);
 	if (err == -EIO)
 		return err;
 
 	return temp & 0xFF;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4860,7 +5585,10 @@ int qlcnic_83xx_flash_test(struct qlcnic_adapter *adapter)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int qlcnic_83xx_shutdown(struct pci_dev *pdev)
 {
@@ -5290,4 +6018,7 @@ static void qlcnic_83xx_io_resume(struct pci_dev *pdev)
 	if (test_and_clear_bit(__QLCNIC_AER, &adapter->state))
 		qlcnic_83xx_aer_start_poll_work(adapter);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

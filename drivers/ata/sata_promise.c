@@ -3,7 +3,11 @@
  *
  *  Maintained by:  Tejun Heo <tj@kernel.org>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *		    Mikael Pettersson <mikpe@it.uu.se>
+=======
+ *		    Mikael Pettersson
+>>>>>>> v3.18
 =======
  *		    Mikael Pettersson
 >>>>>>> v3.18
@@ -40,7 +44,10 @@
 #include <linux/gfp.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>

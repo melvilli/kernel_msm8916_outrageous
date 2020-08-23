@@ -211,7 +211,11 @@ struct pxa168fb_mach_info aspenite_lcd_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int aspenite_matrix_key_map[] = {
+=======
+static const unsigned int aspenite_matrix_key_map[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int aspenite_matrix_key_map[] = {
 >>>>>>> v3.18
@@ -224,6 +228,7 @@ static const unsigned int aspenite_matrix_key_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data aspenite_keypad_info __initdata = {
 	.matrix_key_rows	= 5,
 	.matrix_key_cols	= 8,
@@ -234,6 +239,8 @@ static struct pxa27x_keypad_platform_data aspenite_keypad_info __initdata = {
 
 #if defined(CONFIG_USB_EHCI_MV)
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data aspenite_matrix_keymap_data = {
 	.keymap			= aspenite_matrix_key_map,
 	.keymap_size		= ARRAY_SIZE(aspenite_matrix_key_map),
@@ -247,6 +254,9 @@ static struct pxa27x_keypad_platform_data aspenite_keypad_info __initdata = {
 };
 
 #if IS_ENABLED(CONFIG_USB_EHCI_MV)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct mv_usb_platform_data pxa168_sph_pdata = {
 	.mode           = MV_USB_MODE_HOST,
@@ -275,7 +285,11 @@ static void __init common_init(void)
 	platform_device_register(&smc91x_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_USB_EHCI_MV)
+=======
+#if IS_ENABLED(CONFIG_USB_EHCI_MV)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_EHCI_MV)
 >>>>>>> v3.18

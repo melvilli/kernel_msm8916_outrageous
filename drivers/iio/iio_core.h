@@ -31,16 +31,22 @@ int __iio_add_chan_devattr(const char *postfix,
 						size_t len),
 			   u64 mask,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   bool generic,
 			   struct device *dev,
 			   struct list_head *attr_list);
 =======
+=======
+>>>>>>> v3.18
 			   enum iio_shared_by shared_by,
 			   struct device *dev,
 			   struct list_head *attr_list);
 void iio_free_chan_devattr_list(struct list_head *attr_list);
 
 ssize_t iio_format_value(char *buf, unsigned int type, int size, int *vals);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Event interface flags */
@@ -59,6 +65,12 @@ ssize_t iio_buffer_read_first_n_outer(struct file *filp, char __user *buf,
 #define iio_buffer_read_first_n_outer_addr (&iio_buffer_read_first_n_outer)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void iio_disable_all_buffers(struct iio_dev *indio_dev);
+void iio_buffer_wakeup_poll(struct iio_dev *indio_dev);
+
+>>>>>>> v3.18
 =======
 void iio_disable_all_buffers(struct iio_dev *indio_dev);
 void iio_buffer_wakeup_poll(struct iio_dev *indio_dev);
@@ -70,6 +82,12 @@ void iio_buffer_wakeup_poll(struct iio_dev *indio_dev);
 #define iio_buffer_read_first_n_outer_addr NULL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void iio_disable_all_buffers(struct iio_dev *indio_dev) {}
+static inline void iio_buffer_wakeup_poll(struct iio_dev *indio_dev) {}
+
+>>>>>>> v3.18
 =======
 static inline void iio_disable_all_buffers(struct iio_dev *indio_dev) {}
 static inline void iio_buffer_wakeup_poll(struct iio_dev *indio_dev) {}
@@ -80,6 +98,10 @@ static inline void iio_buffer_wakeup_poll(struct iio_dev *indio_dev) {}
 int iio_device_register_eventset(struct iio_dev *indio_dev);
 void iio_device_unregister_eventset(struct iio_dev *indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void iio_device_wakeup_eventset(struct iio_dev *indio_dev);
+>>>>>>> v3.18
 =======
 void iio_device_wakeup_eventset(struct iio_dev *indio_dev);
 >>>>>>> v3.18

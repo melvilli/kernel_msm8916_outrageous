@@ -72,7 +72,11 @@ static int netlink_send(int s, struct cn_msg *msg)
 	nlh->nlmsg_pid = getpid();
 	nlh->nlmsg_type = NLMSG_DONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nlh->nlmsg_len = NLMSG_LENGTH(size - sizeof(*nlh));
+=======
+	nlh->nlmsg_len = size;
+>>>>>>> v3.18
 =======
 	nlh->nlmsg_len = size;
 >>>>>>> v3.18

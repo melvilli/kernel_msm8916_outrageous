@@ -46,8 +46,13 @@
 #include <linux/platform_device.h>
 #include <linux/thermal.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/acpi.h>
+#include <linux/dmi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 #include <linux/dmi.h>
@@ -190,7 +195,10 @@ struct asus_wmi {
 	struct input_dev *inputdev;
 	struct backlight_device *backlight_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_device;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct platform_device *platform_device;
@@ -277,7 +285,11 @@ static int asus_wmi_evaluate_method(u32 method_id, u32 arg0, u32 arg1,
 	acpi_status status;
 	union acpi_object *obj;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 tmp;
+=======
+	u32 tmp = 0;
+>>>>>>> v3.18
 =======
 	u32 tmp = 0;
 >>>>>>> v3.18
@@ -292,8 +304,11 @@ static int asus_wmi_evaluate_method(u32 method_id, u32 arg0, u32 arg1,
 	if (obj && obj->type == ACPI_TYPE_INTEGER)
 		tmp = (u32) obj->integer.value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		tmp = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -574,7 +589,11 @@ static int asus_wmi_led_init(struct asus_wmi *asus)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wlan_led_presence(asus)) {
+=======
+	if (wlan_led_presence(asus) && (asus->driver->quirks->wapf > 0)) {
+>>>>>>> v3.18
 =======
 	if (wlan_led_presence(asus) && (asus->driver->quirks->wapf > 0)) {
 >>>>>>> v3.18
@@ -626,6 +645,10 @@ static void asus_rfkill_hotplug(struct asus_wmi *asus)
 
 	mutex_lock(&asus->hotplug_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 >>>>>>> v3.18
@@ -667,8 +690,12 @@ static void asus_rfkill_hotplug(struct asus_wmi *asus)
 			if (dev) {
 				pci_bus_assign_resources(bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (pci_bus_add_device(dev))
 					pr_err("Unable to hotplug wifi\n");
+=======
+				pci_bus_add_device(dev);
+>>>>>>> v3.18
 =======
 				pci_bus_add_device(dev);
 >>>>>>> v3.18
@@ -684,6 +711,10 @@ static void asus_rfkill_hotplug(struct asus_wmi *asus)
 
 out_unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_unlock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pci_unlock_rescan_remove();
 >>>>>>> v3.18
@@ -918,7 +949,12 @@ static int asus_new_rfkill(struct asus_wmi *asus,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev_id == ASUS_WMI_DEVID_WLAN)
+=======
+	if ((dev_id == ASUS_WMI_DEVID_WLAN) &&
+			(asus->driver->quirks->wapf > 0))
+>>>>>>> v3.18
 =======
 	if ((dev_id == ASUS_WMI_DEVID_WLAN) &&
 			(asus->driver->quirks->wapf > 0))
@@ -1082,7 +1118,11 @@ static ssize_t asus_hwmon_pwm1(struct device *dev,
 		value = 255;
 	else if (value != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Unknown fan speed %#x", value);
+=======
+		pr_err("Unknown fan speed %#x\n", value);
+>>>>>>> v3.18
 =======
 		pr_err("Unknown fan speed %#x\n", value);
 >>>>>>> v3.18
@@ -1111,6 +1151,7 @@ static ssize_t asus_hwmon_temp1(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static SENSOR_DEVICE_ATTR(pwm1, S_IRUGO, asus_hwmon_pwm1, NULL, 0);
 static SENSOR_DEVICE_ATTR(temp1_input, S_IRUGO, asus_hwmon_temp1, NULL, 0);
 
@@ -1126,12 +1167,17 @@ static struct attribute *hwmon_attributes[] = {
 	&sensor_dev_attr_temp1_input.dev_attr.attr,
 	&sensor_dev_attr_name.dev_attr.attr,
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(pwm1, S_IRUGO, asus_hwmon_pwm1, NULL);
 static DEVICE_ATTR(temp1_input, S_IRUGO, asus_hwmon_temp1, NULL);
 
 static struct attribute *hwmon_attributes[] = {
 	&dev_attr_pwm1.attr,
 	&dev_attr_temp1_input.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NULL
 };
@@ -1147,9 +1193,15 @@ static umode_t asus_hwmon_sysfs_is_visible(struct kobject *kobj,
 	u32 value = ASUS_WMI_UNSUPPORTED_METHOD;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (attr == &sensor_dev_attr_pwm1.dev_attr.attr)
 		dev_id = ASUS_WMI_DEVID_FAN_CTRL;
 	else if (attr == &sensor_dev_attr_temp1_input.dev_attr.attr)
+=======
+	if (attr == &dev_attr_pwm1.attr)
+		dev_id = ASUS_WMI_DEVID_FAN_CTRL;
+	else if (attr == &dev_attr_temp1_input.attr)
+>>>>>>> v3.18
 =======
 	if (attr == &dev_attr_pwm1.attr)
 		dev_id = ASUS_WMI_DEVID_FAN_CTRL;
@@ -1190,6 +1242,7 @@ static struct attribute_group hwmon_attribute_group = {
 	.attrs = hwmon_attributes
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void asus_wmi_hwmon_exit(struct asus_wmi *asus)
 {
@@ -1205,24 +1258,34 @@ static void asus_wmi_hwmon_exit(struct asus_wmi *asus)
 =======
 __ATTRIBUTE_GROUPS(hwmon_attribute);
 >>>>>>> v3.18
+=======
+__ATTRIBUTE_GROUPS(hwmon_attribute);
+>>>>>>> v3.18
 
 static int asus_wmi_hwmon_init(struct asus_wmi *asus)
 {
 	struct device *hwmon;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int result;
 
 	hwmon = hwmon_device_register(&asus->platform_device->dev);
 =======
+=======
+>>>>>>> v3.18
 
 	hwmon = hwmon_device_register_with_groups(&asus->platform_device->dev,
 						  "asus", asus,
 						  hwmon_attribute_groups);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(hwmon)) {
 		pr_err("Could not register asus hwmon device\n");
 		return PTR_ERR(hwmon);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_set_drvdata(hwmon, asus);
 	asus->hwmon_device = hwmon;
@@ -1230,6 +1293,9 @@ static int asus_wmi_hwmon_init(struct asus_wmi *asus)
 	if (result)
 		asus_wmi_hwmon_exit(asus);
 	return result;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1366,10 +1432,14 @@ static int asus_wmi_backlight_init(struct asus_wmi *asus)
 
 	max = read_brightness_max(asus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (max == -ENODEV)
 		max = 0;
 	else if (max < 0)
+=======
+	if (max < 0)
+>>>>>>> v3.18
 =======
 	if (max < 0)
 >>>>>>> v3.18
@@ -1632,17 +1702,23 @@ static int asus_wmi_platform_init(struct asus_wmi *asus)
 	/* INIT enable hotkeys on some models */
 	if (!asus_wmi_evaluate_method(ASUS_WMI_METHODID_INIT, 0, 0, &rv))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("Initialization: %#x", rv);
 
 	/* We don't know yet what to do with this version... */
 	if (!asus_wmi_evaluate_method(ASUS_WMI_METHODID_SPEC, 0, 0x9, &rv)) {
 		pr_info("BIOS WMI version: %d.%d", rv >> 16, rv & 0xFF);
 =======
+=======
+>>>>>>> v3.18
 		pr_info("Initialization: %#x\n", rv);
 
 	/* We don't know yet what to do with this version... */
 	if (!asus_wmi_evaluate_method(ASUS_WMI_METHODID_SPEC, 0, 0x9, &rv)) {
 		pr_info("BIOS WMI version: %d.%d\n", rv >> 16, rv & 0xFF);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		asus->spec = rv;
 	}
@@ -1655,7 +1731,11 @@ static int asus_wmi_platform_init(struct asus_wmi *asus)
 	 */
 	if (!asus_wmi_evaluate_method(ASUS_WMI_METHODID_SFUN, 0, 0, &rv)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("SFUN value: %#x", rv);
+=======
+		pr_info("SFUN value: %#x\n", rv);
+>>>>>>> v3.18
 =======
 		pr_info("SFUN value: %#x\n", rv);
 >>>>>>> v3.18
@@ -1799,7 +1879,11 @@ static int asus_wmi_debugfs_init(struct asus_wmi *asus)
 	asus->debug.root = debugfs_create_dir(asus->driver->name, NULL);
 	if (!asus->debug.root) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("failed to create debugfs directory");
+=======
+		pr_err("failed to create debugfs directory\n");
+>>>>>>> v3.18
 =======
 		pr_err("failed to create debugfs directory\n");
 >>>>>>> v3.18
@@ -1850,6 +1934,10 @@ static int asus_wmi_add(struct platform_device *pdev)
 	struct asus_wmi_driver *wdrv = to_asus_wmi_driver(pdrv);
 	struct asus_wmi *asus;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *chassis_type;
+>>>>>>> v3.18
 =======
 	const char *chassis_type;
 >>>>>>> v3.18
@@ -1890,12 +1978,18 @@ static int asus_wmi_add(struct platform_device *pdev)
 		goto fail_rfkill;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Some Asus desktop boards export an acpi-video backlight interface,
 	   stop this from showing up */
 	chassis_type = dmi_get_system_info(DMI_CHASSIS_TYPE);
 	if (chassis_type && !strcmp(chassis_type, "3"))
 		acpi_video_dmi_promote_vendor();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (asus->driver->quirks->wmi_backlight_power)
 		acpi_video_dmi_promote_vendor();
@@ -1936,7 +2030,10 @@ fail_rfkill:
 	asus_wmi_led_exit(asus);
 fail_leds:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asus_wmi_hwmon_exit(asus);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 fail_hwmon:
@@ -1957,7 +2054,10 @@ static int asus_wmi_remove(struct platform_device *device)
 	asus_wmi_backlight_exit(asus);
 	asus_wmi_input_exit(asus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asus_wmi_hwmon_exit(asus);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	asus_wmi_led_exit(asus);
@@ -2094,17 +2194,23 @@ static int __init asus_wmi_init(void)
 {
 	if (!wmi_has_guid(ASUS_WMI_MGMT_GUID)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("Asus Management GUID not found");
 		return -ENODEV;
 	}
 
 	pr_info("ASUS WMI generic driver loaded");
 =======
+=======
+>>>>>>> v3.18
 		pr_info("Asus Management GUID not found\n");
 		return -ENODEV;
 	}
 
 	pr_info("ASUS WMI generic driver loaded\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2112,7 +2218,11 @@ static int __init asus_wmi_init(void)
 static void __exit asus_wmi_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("ASUS WMI generic driver unloaded");
+=======
+	pr_info("ASUS WMI generic driver unloaded\n");
+>>>>>>> v3.18
 =======
 	pr_info("ASUS WMI generic driver unloaded\n");
 >>>>>>> v3.18

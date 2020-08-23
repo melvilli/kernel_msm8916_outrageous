@@ -40,6 +40,7 @@
 #include <asm/gic.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ipi_call_function(unsigned int cpu)
 {
 	pr_debug("CPU%d: %s cpu %d status %08x\n",
@@ -96,6 +97,11 @@ static void cmp_init_secondary(void)
 {
 	struct cpuinfo_mips *c __maybe_unused = &current_cpu_data;
 >>>>>>> v3.18
+=======
+static void cmp_init_secondary(void)
+{
+	struct cpuinfo_mips *c __maybe_unused = &current_cpu_data;
+>>>>>>> v3.18
 
 	/* Assume GIC is present */
 	change_c0_status(ST0_IM, STATUSF_IP3 | STATUSF_IP4 | STATUSF_IP6 |
@@ -104,6 +110,7 @@ static void cmp_init_secondary(void)
 	/* Enable per-cpu interrupts: platform specific */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c->core = (read_c0_ebase() >> 1) & 0x1ff;
 #if defined(CONFIG_MIPS_MT_SMP) || defined(CONFIG_MIPS_MT_SMTC)
 	c->vpe_id = (read_c0_tcbind() >> TCBIND_CURVPE_SHIFT) & TCBIND_CURVPE;
@@ -111,10 +118,15 @@ static void cmp_init_secondary(void)
 #ifdef CONFIG_MIPS_MT_SMTC
 	c->tc_id  = (read_c0_tcbind() & TCBIND_CURTC) >> TCBIND_CURTC_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MIPS_MT_SMP
 	if (cpu_has_mipsmt)
 		c->vpe_id = (read_c0_tcbind() >> TCBIND_CURVPE_SHIFT) &
 			TCBIND_CURVPE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 }
@@ -136,11 +148,14 @@ static void cmp_smp_finish(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cmp_cpus_done(void)
 {
 	pr_debug("SMPCMP: CPU%d: %s\n", smp_processor_id(), __func__);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -194,16 +209,22 @@ void __init cmp_smp_setup(void)
 
 	if (cpu_has_mipsmt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned int nvpe, mvpconf0 = read_c0_mvpconf0();
 
 		nvpe = ((mvpconf0 & MVPCONF0_PTC) >> MVPCONF0_PTC_SHIFT) + 1;
 =======
+=======
+>>>>>>> v3.18
 		unsigned int nvpe = 1;
 #ifdef CONFIG_MIPS_MT_SMP
 		unsigned int mvpconf0 = read_c0_mvpconf0();
 
 		nvpe = ((mvpconf0 & MVPCONF0_PVPE) >> MVPCONF0_PVPE_SHIFT) + 1;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		smp_num_siblings = nvpe;
 	}
@@ -216,6 +237,10 @@ void __init cmp_prepare_cpus(unsigned int max_cpus)
 		 smp_processor_id(), __func__, max_cpus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_MIPS_MT
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_MIPS_MT
 >>>>>>> v3.18
@@ -224,6 +249,7 @@ void __init cmp_prepare_cpus(unsigned int max_cpus)
 	 * some per-cpu
 	 */
 	mips_mt_set_cpuoptions();
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -234,6 +260,8 @@ struct plat_smp_ops cmp_smp_ops = {
 	.smp_finish		= cmp_smp_finish,
 	.cpus_done		= cmp_cpus_done,
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 }
@@ -243,6 +271,9 @@ struct plat_smp_ops cmp_smp_ops = {
 	.send_ipi_mask		= gic_send_ipi_mask,
 	.init_secondary		= cmp_init_secondary,
 	.smp_finish		= cmp_smp_finish,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.boot_secondary		= cmp_boot_secondary,
 	.smp_setup		= cmp_smp_setup,

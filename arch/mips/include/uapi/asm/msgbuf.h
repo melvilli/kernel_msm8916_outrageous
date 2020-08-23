@@ -15,6 +15,7 @@
 struct msqid64_ds {
 	struct ipc64_perm msg_perm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_32BIT) && !defined(CONFIG_CPU_LITTLE_ENDIAN)
 	unsigned long	__unused1;
 #endif
@@ -35,6 +36,8 @@ struct msqid64_ds {
 	__kernel_time_t msg_ctime;	/* last change time */
 #if defined(CONFIG_32BIT) && defined(CONFIG_CPU_LITTLE_ENDIAN)
 =======
+=======
+>>>>>>> v3.18
 #if !defined(__mips64) && defined(__MIPSEB__)
 	unsigned long	__unused1;
 #endif
@@ -54,6 +57,9 @@ struct msqid64_ds {
 #endif
 	__kernel_time_t msg_ctime;	/* last change time */
 #if !defined(__mips64) && defined(__MIPSEL__)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long	__unused3;
 #endif

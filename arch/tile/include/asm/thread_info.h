@@ -40,12 +40,18 @@ struct thread_info {
 	struct single_step_state *step_state;	/* single step state
 						   (if non-zero) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int			align_ctl;	/* controls unaligned access */
 #ifdef __tilegx__
 	unsigned long		unalign_jit_tmp[4]; /* temp r0..r3 storage */
 	void __user		*unalign_jit_base; /* unalign fixup JIT base */
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -65,6 +71,10 @@ struct thread_info {
 	},					\
 	.step_state	= NULL,			\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.align_ctl	= 0,			\
+>>>>>>> v3.18
 =======
 	.align_ctl	= 0,			\
 >>>>>>> v3.18
@@ -101,7 +111,11 @@ register unsigned long stack_pointer __asm__("sp");
 extern void smp_nap(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Enable interrupts racelessly and nap forever: helper for cpu_idle(). */
+=======
+/* Enable interrupts racelessly and nap forever: helper for arch_cpu_idle(). */
+>>>>>>> v3.18
 =======
 /* Enable interrupts racelessly and nap forever: helper for arch_cpu_idle(). */
 >>>>>>> v3.18
@@ -124,8 +138,11 @@ extern void _cpu_idle(void);
 #endif /* !__ASSEMBLY__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x10000000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -145,6 +162,10 @@ extern void _cpu_idle(void);
 #define TIF_NOTIFY_RESUME	8	/* callback before returning to user */
 #define TIF_SYSCALL_TRACEPOINT	9	/* syscall tracepoint instrumentation */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TIF_POLLING_NRFLAG	10	/* idle is polling for TIF_NEED_RESCHED */
+>>>>>>> v3.18
 =======
 #define TIF_POLLING_NRFLAG	10	/* idle is polling for TIF_NEED_RESCHED */
 >>>>>>> v3.18
@@ -160,6 +181,10 @@ extern void _cpu_idle(void);
 #define _TIF_NOTIFY_RESUME	(1<<TIF_NOTIFY_RESUME)
 #define _TIF_SYSCALL_TRACEPOINT	(1<<TIF_SYSCALL_TRACEPOINT)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define _TIF_POLLING_NRFLAG	(1<<TIF_POLLING_NRFLAG)
+>>>>>>> v3.18
 =======
 #define _TIF_POLLING_NRFLAG	(1<<TIF_POLLING_NRFLAG)
 >>>>>>> v3.18
@@ -186,7 +211,10 @@ extern void _cpu_idle(void);
 #define TS_COMPAT		0x0001	/* 32-bit compatibility mode */
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TS_POLLING		0x0004	/* in idle loop but not sleeping */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define TS_RESTORE_SIGMASK	0x0008	/* restore signal mask in do_signal */

@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2012 Coraid, Inc.  See COPYING for GPL terms. */
 #define VERSION "81"
+=======
+/* Copyright (c) 2013 Coraid, Inc.  See COPYING for GPL terms. */
+#define VERSION "85"
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2013 Coraid, Inc.  See COPYING for GPL terms. */
 #define VERSION "85"
@@ -106,11 +111,16 @@ enum {
 struct buf {
 	ulong nframesout;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ulong resid;
 	ulong bv_resid;
 	sector_t sector;
 	struct bio *bio;
 	struct bio_vec *bv;
+=======
+	struct bio *bio;
+	struct bvec_iter iter;
+>>>>>>> v3.18
 =======
 	struct bio *bio;
 	struct bvec_iter iter;
@@ -131,6 +141,7 @@ struct frame {
 	ulong waited_total;
 	struct aoetgt *t;		/* parent target I belong to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sector_t lba;
 	struct sk_buff *skb;		/* command skb freed on module exit */
 	struct sk_buff *r_skb;		/* response skb for async processing */
@@ -139,10 +150,15 @@ struct frame {
 	ulong bcnt;
 	ulong bv_off;
 =======
+=======
+>>>>>>> v3.18
 	struct sk_buff *skb;		/* command skb freed on module exit */
 	struct sk_buff *r_skb;		/* response skb for async processing */
 	struct buf *buf;
 	struct bvec_iter iter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char flags;
 };
@@ -187,6 +203,10 @@ struct aoedev {
 	struct work_struct work;/* disk create work struct */
 	struct gendisk *gd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dentry *debugfs;
+>>>>>>> v3.18
 =======
 	struct dentry *debugfs;
 >>>>>>> v3.18
@@ -218,15 +238,21 @@ struct ktstate {
 	struct task_struct *task;
 	wait_queue_head_t *waitq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*fn) (void);
 	char *name;
 	spinlock_t *lock;
 =======
+=======
+>>>>>>> v3.18
 	int (*fn) (int);
 	char name[12];
 	spinlock_t *lock;
 	int id;
 	int active;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -234,6 +260,10 @@ int aoeblk_init(void);
 void aoeblk_exit(void);
 void aoeblk_gdalloc(void *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void aoedisk_rm_debugfs(struct aoedev *d);
+>>>>>>> v3.18
 =======
 void aoedisk_rm_debugfs(struct aoedev *d);
 >>>>>>> v3.18
@@ -256,6 +286,10 @@ struct sk_buff *aoecmd_ata_id(struct aoedev *);
 void aoe_freetframe(struct frame *);
 void aoe_flush_iocq(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void aoe_flush_iocq_by_index(int);
+>>>>>>> v3.18
 =======
 void aoe_flush_iocq_by_index(int);
 >>>>>>> v3.18

@@ -42,7 +42,11 @@ struct vdev_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void vq_notify(struct virtqueue *vq)
+=======
+bool vq_notify(struct virtqueue *vq)
+>>>>>>> v3.18
 =======
 bool vq_notify(struct virtqueue *vq)
 >>>>>>> v3.18
@@ -53,6 +57,10 @@ bool vq_notify(struct virtqueue *vq)
 	r = write(info->kick, &v, sizeof v);
 	assert(r == sizeof v);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return true;
+>>>>>>> v3.18
 =======
 	return true;
 >>>>>>> v3.18
@@ -180,7 +188,12 @@ static void run_test(struct vdev_info *dev, struct vq_info *vq,
 				if (likely(r == 0)) {
 					++started;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					virtqueue_kick(vq->vq);
+=======
+					if (unlikely(!virtqueue_kick(vq->vq)))
+						r = -1;
+>>>>>>> v3.18
 =======
 					if (unlikely(!virtqueue_kick(vq->vq)))
 						r = -1;

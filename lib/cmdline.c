@@ -23,7 +23,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_range(char **str, int *pint, int n)
+=======
+static int get_range(char **str, int *pint)
+>>>>>>> v3.18
 =======
 static int get_range(char **str, int *pint)
 >>>>>>> v3.18
@@ -34,7 +38,11 @@ static int get_range(char **str, int *pint)
 	upper_range = simple_strtol((*str), NULL, 0);
 	inc_counter = upper_range - *pint;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (x = *pint; n && x < upper_range; x++, n--)
+=======
+	for (x = *pint; x < upper_range; x++)
+>>>>>>> v3.18
 =======
 	for (x = *pint; x < upper_range; x++)
 >>>>>>> v3.18
@@ -58,7 +66,11 @@ static int get_range(char **str, int *pint)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int get_option (char **str, int *pint)
+=======
+int get_option(char **str, int *pint)
+>>>>>>> v3.18
 =======
 int get_option(char **str, int *pint)
 >>>>>>> v3.18
@@ -68,7 +80,11 @@ int get_option(char **str, int *pint)
 	if (!cur || !(*cur))
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*pint = simple_strtol (cur, str, 0);
+=======
+	*pint = simple_strtol(cur, str, 0);
+>>>>>>> v3.18
 =======
 	*pint = simple_strtol(cur, str, 0);
 >>>>>>> v3.18
@@ -84,6 +100,10 @@ int get_option(char **str, int *pint)
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(get_option);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(get_option);
 >>>>>>> v3.18
@@ -105,7 +125,11 @@ EXPORT_SYMBOL(get_option);
  *	completely parseable).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -115,7 +139,11 @@ char *get_options(const char *str, int nints, int *ints)
 
 	while (i < nints) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		res = get_option ((char **)&str, ints + i);
+=======
+		res = get_option((char **)&str, ints + i);
+>>>>>>> v3.18
 =======
 		res = get_option((char **)&str, ints + i);
 >>>>>>> v3.18
@@ -124,7 +152,11 @@ char *get_options(const char *str, int nints, int *ints)
 		if (res == 3) {
 			int range_nums;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			range_nums = get_range((char **)&str, ints + i, nints - i);
+=======
+			range_nums = get_range((char **)&str, ints + i);
+>>>>>>> v3.18
 =======
 			range_nums = get_range((char **)&str, ints + i);
 >>>>>>> v3.18
@@ -145,6 +177,10 @@ char *get_options(const char *str, int nints, int *ints)
 	return (char *)str;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(get_options);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(get_options);
 >>>>>>> v3.18
@@ -156,11 +192,15 @@ EXPORT_SYMBOL(get_options);
  *
  *	Parses a string into a number.  The number stored at @ptr is
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	potentially suffixed with %K (for kilobytes, or 1024 bytes),
  *	%M (for megabytes, or 1048576 bytes), or %G (for gigabytes, or
  *	1073741824).  If the number is suffixed with K, M, or G, then
  *	the return value is the number multiplied by one kilobyte, one
  *	megabyte, or one gigabyte, respectively.
+=======
+ *	potentially suffixed with K, M, G, T, P, E.
+>>>>>>> v3.18
 =======
  *	potentially suffixed with K, M, G, T, P, E.
 >>>>>>> v3.18
@@ -174,7 +214,10 @@ unsigned long long memparse(const char *ptr, char **retptr)
 
 	switch (*endptr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 'E':
 	case 'e':
 		ret <<= 10;
@@ -184,6 +227,9 @@ unsigned long long memparse(const char *ptr, char **retptr)
 	case 'T':
 	case 't':
 		ret <<= 10;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 'G':
 	case 'g':
@@ -205,12 +251,15 @@ unsigned long long memparse(const char *ptr, char **retptr)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 EXPORT_SYMBOL(memparse);
 EXPORT_SYMBOL(get_option);
 EXPORT_SYMBOL(get_options);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(memparse);
 
 /**
@@ -241,4 +290,7 @@ bool parse_option_str(const char *str, const char *option)
 
 	return false;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

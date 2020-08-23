@@ -138,7 +138,11 @@ static void __init copy_bootdata(char *real_mode_data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init x86_64_start_kernel(char * real_mode_data)
+=======
+asmlinkage __visible void __init x86_64_start_kernel(char * real_mode_data)
+>>>>>>> v3.18
 =======
 asmlinkage __visible void __init x86_64_start_kernel(char * real_mode_data)
 >>>>>>> v3.18
@@ -167,7 +171,11 @@ asmlinkage __visible void __init x86_64_start_kernel(char * real_mode_data)
 
 	for (i = 0; i < NUM_EXCEPTION_VECTORS; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_intr_gate(i, &early_idt_handler_array[i]);
+=======
+		set_intr_gate(i, early_idt_handlers[i]);
+>>>>>>> v3.18
 =======
 		set_intr_gate(i, early_idt_handlers[i]);
 >>>>>>> v3.18
@@ -181,7 +189,11 @@ asmlinkage __visible void __init x86_64_start_kernel(char * real_mode_data)
 	load_ucode_bsp();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (console_loglevel == 10)
+=======
+	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
+>>>>>>> v3.18
 =======
 	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
 >>>>>>> v3.18

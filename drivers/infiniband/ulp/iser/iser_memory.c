@@ -1,7 +1,11 @@
 /*
  * Copyright (c) 2004, 2005, 2006 Voltaire, Inc. All rights reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013 Mellanox Technologies. All rights reserved.
+=======
+ * Copyright (c) 2013-2014 Mellanox Technologies. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2013-2014 Mellanox Technologies. All rights reserved.
 >>>>>>> v3.18
@@ -50,6 +54,7 @@
  */
 static int iser_start_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					enum iser_data_dir cmd_dir)
 {
 	int dma_nents;
@@ -58,6 +63,8 @@ static int iser_start_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 	struct iser_data_buf *data = &iser_task->data[cmd_dir];
 	unsigned long  cmd_data_len = data->data_len;
 =======
+=======
+>>>>>>> v3.18
 					struct iser_data_buf *data,
 					struct iser_data_buf *data_copy,
 					enum iser_data_dir cmd_dir)
@@ -71,6 +78,9 @@ static int iser_start_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 
 	for_each_sg(sgl, sg, data->size, i)
 		cmd_data_len += ib_sg_dma_len(dev, sg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (cmd_data_len > ISER_KMALLOC_THRESHOLD)
@@ -82,7 +92,11 @@ static int iser_start_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 	if (mem == NULL) {
 		iser_err("Failed to allocate mem size %d %d for copying sglist\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 data->size,(int)cmd_data_len);
+=======
+			 data->size, (int)cmd_data_len);
+>>>>>>> v3.18
 =======
 			 data->size, (int)cmd_data_len);
 >>>>>>> v3.18
@@ -92,16 +106,22 @@ static int iser_start_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 	if (cmd_dir == ISER_DIR_OUT) {
 		/* copy the unaligned sg the buffer which is used for RDMA */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct scatterlist *sgl = (struct scatterlist *)data->buf;
 		struct scatterlist *sg;
 		int i;
 		char *p, *from;
 
 =======
+=======
+>>>>>>> v3.18
 		int i;
 		char *p, *from;
 
 		sgl = (struct scatterlist *)data->buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		p = mem;
 		for_each_sg(sgl, sg, data->size, i) {
@@ -115,6 +135,7 @@ static int iser_start_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sg_init_one(&iser_task->data_copy[cmd_dir].sg_single, mem, cmd_data_len);
 	iser_task->data_copy[cmd_dir].buf  =
 		&iser_task->data_copy[cmd_dir].sg_single;
@@ -127,19 +148,30 @@ static int iser_start_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 				  &iser_task->data_copy[cmd_dir].sg_single,
 				  1,
 =======
+=======
+>>>>>>> v3.18
 	sg_init_one(&data_copy->sg_single, mem, cmd_data_len);
 	data_copy->buf = &data_copy->sg_single;
 	data_copy->size = 1;
 	data_copy->copy_buf = mem;
 
 	dma_nents = ib_dma_map_sg(dev, &data_copy->sg_single, 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  (cmd_dir == ISER_DIR_OUT) ?
 				  DMA_TO_DEVICE : DMA_FROM_DEVICE);
 	BUG_ON(dma_nents == 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iser_task->data_copy[cmd_dir].dma_nents = dma_nents;
+=======
+	data_copy->dma_nents = dma_nents;
+	data_copy->data_len = cmd_data_len;
+
+>>>>>>> v3.18
 =======
 	data_copy->dma_nents = dma_nents;
 	data_copy->data_len = cmd_data_len;
@@ -151,6 +183,7 @@ static int iser_start_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 /**
  * iser_finalize_rdma_unaligned_sg
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void iser_finalize_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 				     enum iser_data_dir         cmd_dir)
@@ -164,6 +197,8 @@ void iser_finalize_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 
 	ib_dma_unmap_sg(dev, &mem_copy->sg_single, 1,
 =======
+=======
+>>>>>>> v3.18
 
 void iser_finalize_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 				     struct iser_data_buf *data,
@@ -176,6 +211,9 @@ void iser_finalize_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 	dev = iser_task->iser_conn->ib_conn.device->ib_device;
 
 	ib_dma_unmap_sg(dev, &data_copy->sg_single, 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			(cmd_dir == ISER_DIR_OUT) ?
 			DMA_TO_DEVICE : DMA_FROM_DEVICE);
@@ -189,15 +227,21 @@ void iser_finalize_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 
 		/* copy back read RDMA to unaligned sg */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mem	= mem_copy->copy_buf;
 
 		sgl	= (struct scatterlist *)iser_task->data[ISER_DIR_IN].buf;
 		sg_size = iser_task->data[ISER_DIR_IN].size;
 =======
+=======
+>>>>>>> v3.18
 		mem = data_copy->copy_buf;
 
 		sgl = (struct scatterlist *)data->buf;
 		sg_size = data->size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		p = mem;
@@ -212,6 +256,7 @@ void iser_finalize_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd_data_len = iser_task->data[cmd_dir].data_len;
 
 	if (cmd_data_len > ISER_KMALLOC_THRESHOLD)
@@ -222,6 +267,8 @@ void iser_finalize_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 
 	mem_copy->copy_buf = NULL;
 =======
+=======
+>>>>>>> v3.18
 	cmd_data_len = data->data_len;
 
 	if (cmd_data_len > ISER_KMALLOC_THRESHOLD)
@@ -231,6 +278,9 @@ void iser_finalize_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 		kfree(data_copy->copy_buf);
 
 	data_copy->copy_buf = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -251,8 +301,13 @@ void iser_finalize_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
 
 static int iser_sg_to_page_vec(struct iser_data_buf *data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       struct iser_page_vec *page_vec,
 			       struct ib_device *ibdev)
+=======
+			       struct ib_device *ibdev, u64 *pages,
+			       int *offset, int *data_size)
+>>>>>>> v3.18
 =======
 			       struct ib_device *ibdev, u64 *pages,
 			       int *offset, int *data_size)
@@ -266,7 +321,11 @@ static int iser_sg_to_page_vec(struct iser_data_buf *data,
 
 	/* compute the offset of first element */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	page_vec->offset = (u64) sgl[0].offset & ~MASK_4K;
+=======
+	*offset = (u64) sgl[0].offset & ~MASK_4K;
+>>>>>>> v3.18
 =======
 	*offset = (u64) sgl[0].offset & ~MASK_4K;
 >>>>>>> v3.18
@@ -294,7 +353,11 @@ static int iser_sg_to_page_vec(struct iser_data_buf *data,
 		page = chunk_start & MASK_4K;
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			page_vec->pages[cur_page++] = page;
+=======
+			pages[cur_page++] = page;
+>>>>>>> v3.18
 =======
 			pages[cur_page++] = page;
 >>>>>>> v3.18
@@ -303,8 +366,14 @@ static int iser_sg_to_page_vec(struct iser_data_buf *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	page_vec->data_size = total_sz;
 	iser_dbg("page_vec->data_size:%d cur_page %d\n", page_vec->data_size,cur_page);
+=======
+	*data_size = total_sz;
+	iser_dbg("page_vec->data_size:%d cur_page %d\n",
+		 *data_size, cur_page);
+>>>>>>> v3.18
 =======
 	*data_size = total_sz;
 	iser_dbg("page_vec->data_size:%d cur_page %d\n",
@@ -367,11 +436,16 @@ static void iser_data_buf_dump(struct iser_data_buf *data,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iser_debug_level == 0)
 		return;
 
 	for_each_sg(sgl, sg, data->dma_nents, i)
 		iser_warn("sg[%d] dma_addr:0x%lX page:0x%p "
+=======
+	for_each_sg(sgl, sg, data->dma_nents, i)
+		iser_dbg("sg[%d] dma_addr:0x%lX page:0x%p "
+>>>>>>> v3.18
 =======
 	for_each_sg(sgl, sg, data->dma_nents, i)
 		iser_dbg("sg[%d] dma_addr:0x%lX page:0x%p "
@@ -403,13 +477,19 @@ static void iser_page_vec_build(struct iser_data_buf *data,
 
 	iser_dbg("Translating sg sz: %d\n", data->dma_nents);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	page_vec_len = iser_sg_to_page_vec(data, page_vec, ibdev);
 	iser_dbg("sg len %d page_vec_len %d\n", data->dma_nents,page_vec_len);
 =======
+=======
+>>>>>>> v3.18
 	page_vec_len = iser_sg_to_page_vec(data, ibdev, page_vec->pages,
 					   &page_vec->offset,
 					   &page_vec->data_size);
 	iser_dbg("sg len %d page_vec_len %d\n", data->dma_nents, page_vec_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	page_vec->length = page_vec_len;
@@ -431,7 +511,11 @@ int iser_dma_map_task_data(struct iscsi_iser_task *iser_task,
 
 	iser_task->dir[iser_dir] = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = iser_task->iser_conn->ib_conn->device->ib_device;
+=======
+	dev = iser_task->iser_conn->ib_conn.device->ib_device;
+>>>>>>> v3.18
 =======
 	dev = iser_task->iser_conn->ib_conn.device->ib_device;
 >>>>>>> v3.18
@@ -444,6 +528,7 @@ int iser_dma_map_task_data(struct iscsi_iser_task *iser_task,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void iser_dma_unmap_task_data(struct iscsi_iser_task *iser_task)
 {
@@ -475,6 +560,8 @@ int iser_reg_rdma_mem(struct iscsi_iser_task *iser_task,
 	struct iscsi_conn    *iscsi_conn = iser_task->iser_conn->iscsi_conn;
 	struct iser_conn     *ib_conn = iser_task->iser_conn->ib_conn;
 =======
+=======
+>>>>>>> v3.18
 void iser_dma_unmap_task_data(struct iscsi_iser_task *iser_task,
 			      struct iser_data_buf *data)
 {
@@ -521,6 +608,9 @@ int iser_reg_rdma_mem_fmr(struct iscsi_iser_task *iser_task,
 			  enum iser_data_dir cmd_dir)
 {
 	struct ib_conn *ib_conn = &iser_task->iser_conn->ib_conn;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct iser_device   *device = ib_conn->device;
 	struct ib_device     *ibdev = device->ib_device;
@@ -534,6 +624,7 @@ int iser_reg_rdma_mem_fmr(struct iscsi_iser_task *iser_task,
 	regd_buf = &iser_task->rdma_regd[cmd_dir];
 
 	aligned_len = iser_data_buf_aligned_len(mem, ibdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (aligned_len != mem->dma_nents ||
 	    (!ib_conn->fmr_pool && mem->dma_nents > 1)) {
@@ -550,6 +641,8 @@ int iser_reg_rdma_mem_fmr(struct iscsi_iser_task *iser_task,
 		if (iser_start_rdma_unaligned_sg(iser_task, cmd_dir) != 0)
 				return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	if (aligned_len != mem->dma_nents) {
 		err = fall_to_bounce_buf(iser_task, ibdev, mem,
 					 &iser_task->data_copy[cmd_dir],
@@ -558,6 +651,9 @@ int iser_reg_rdma_mem_fmr(struct iscsi_iser_task *iser_task,
 			iser_err("failed to allocate bounce buffer\n");
 			return err;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mem = &iser_task->data_copy[cmd_dir];
 	}
@@ -571,7 +667,11 @@ int iser_reg_rdma_mem_fmr(struct iscsi_iser_task *iser_task,
 		regd_buf->reg.len  = ib_sg_dma_len(ibdev, &sg[0]);
 		regd_buf->reg.va   = ib_sg_dma_address(ibdev, &sg[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		regd_buf->reg.is_fmr = 0;
+=======
+		regd_buf->reg.is_mr = 0;
+>>>>>>> v3.18
 =======
 		regd_buf->reg.is_mr = 0;
 >>>>>>> v3.18
@@ -584,8 +684,14 @@ int iser_reg_rdma_mem_fmr(struct iscsi_iser_task *iser_task,
 			 (unsigned long)regd_buf->reg.len);
 	} else { /* use FMR for multiple dma entries */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iser_page_vec_build(mem, ib_conn->page_vec, ibdev);
 		err = iser_reg_page_vec(ib_conn, ib_conn->page_vec, &regd_buf->reg);
+=======
+		iser_page_vec_build(mem, ib_conn->fmr.page_vec, ibdev);
+		err = iser_reg_page_vec(ib_conn, ib_conn->fmr.page_vec,
+					&regd_buf->reg);
+>>>>>>> v3.18
 =======
 		iser_page_vec_build(mem, ib_conn->fmr.page_vec, ibdev);
 		err = iser_reg_page_vec(ib_conn, ib_conn->fmr.page_vec,
@@ -598,18 +704,24 @@ int iser_reg_rdma_mem_fmr(struct iscsi_iser_task *iser_task,
 				 ntoh24(iser_task->desc.iscsi_header.dlength));
 			iser_err("page_vec: data_size = 0x%x, length = %d, offset = 0x%x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 ib_conn->page_vec->data_size, ib_conn->page_vec->length,
 				 ib_conn->page_vec->offset);
 			for (i=0 ; i<ib_conn->page_vec->length ; i++)
 				iser_err("page_vec[%d] = 0x%llx\n", i,
 					 (unsigned long long) ib_conn->page_vec->pages[i]);
 =======
+=======
+>>>>>>> v3.18
 				 ib_conn->fmr.page_vec->data_size,
 				 ib_conn->fmr.page_vec->length,
 				 ib_conn->fmr.page_vec->offset);
 			for (i = 0; i < ib_conn->fmr.page_vec->length; i++)
 				iser_err("page_vec[%d] = 0x%llx\n", i,
 					 (unsigned long long)ib_conn->fmr.page_vec->pages[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		if (err)
@@ -618,7 +730,10 @@ int iser_reg_rdma_mem_fmr(struct iscsi_iser_task *iser_task,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline void
 iser_set_dif_domain(struct scsi_cmnd *sc, struct ib_sig_attrs *sig_attrs,
@@ -975,4 +1090,7 @@ err_reg:
 
 	return err;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

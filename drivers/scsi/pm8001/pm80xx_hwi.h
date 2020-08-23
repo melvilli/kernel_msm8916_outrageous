@@ -169,12 +169,18 @@
 #define LINKRATE_30			(0x02 << 8)
 #define LINKRATE_60			(0x06 << 8)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define LINKRATE_120			(0x08 << 8)
 
 /* phy_profile */
 #define SAS_PHY_ANALOG_SETTINGS_PAGE	0x04
 #define PHY_DWORD_LENGTH		0xC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Thermal related */
@@ -219,6 +225,11 @@
 #define SAS_COPNRJT_RTRY_TMO            128
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* for phy state */
+#define PHY_STATE_LINK_UP_SPCV		0x2
+>>>>>>> v3.18
 =======
 /* for phy state */
 #define PHY_STATE_LINK_UP_SPCV		0x2
@@ -1237,15 +1248,21 @@ typedef struct SASProtocolTimerConfig SASProtocolTimerConfig_t;
 /* MSGU CONFIGURATION TABLE*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SPCv_MSGU_CFG_TABLE_UPDATE		0x01
 #define SPCv_MSGU_CFG_TABLE_RESET		0x02
 #define SPCv_MSGU_CFG_TABLE_FREEZE		0x04
 #define SPCv_MSGU_CFG_TABLE_UNFREEZE		0x08
 =======
+=======
+>>>>>>> v3.18
 #define SPCv_MSGU_CFG_TABLE_UPDATE		0x001
 #define SPCv_MSGU_CFG_TABLE_RESET		0x002
 #define SPCv_MSGU_CFG_TABLE_FREEZE		0x004
 #define SPCv_MSGU_CFG_TABLE_UNFREEZE		0x008
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MSGU_IBDB_SET				0x00
 #define MSGU_HOST_INT_STATUS			0x08
@@ -1541,6 +1558,11 @@ typedef struct SASProtocolTimerConfig SASProtocolTimerConfig_t;
 #define DEVREG_FAILURE_DEVICE_TYPE_NOT_VALID		0x07
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define MEMBASE_II_SHIFT_REGISTER       0x1010
+>>>>>>> v3.18
 =======
 
 #define MEMBASE_II_SHIFT_REGISTER       0x1010

@@ -401,7 +401,10 @@ unsigned int speedstep_get_freqs(enum speedstep_processor processor,
 	pr_debug("previous speed is %u\n", prev_speed);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_disable();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	local_irq_save(flags);
@@ -469,8 +472,11 @@ unsigned int speedstep_get_freqs(enum speedstep_processor processor,
 out:
 	local_irq_restore(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_enable();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;

@@ -12,8 +12,11 @@
 #include <linux/clk-provider.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/syscon.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 
 /* APP side SYSCON registers */
@@ -357,6 +360,9 @@
 #define U300_SYSCON_C2OAR_PCM_I2S0_CORE_CLK			(0x0002)
 #define U300_SYSCON_C2OAR_PCM_I2S0_CLK				(0x0001)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -733,7 +739,10 @@ syscon_clk_register(struct device *dev, const char *name,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define U300_CLK_TYPE_SLOW 0
 #define U300_CLK_TYPE_FAST 1
 #define U300_CLK_TYPE_REST 2
@@ -941,6 +950,9 @@ static void __init of_u300_syscon_clk_init(struct device_node *np)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct clk_mclk - U300 MCLK clock (MMC/SD clock)
@@ -1147,11 +1159,14 @@ mclk_clk_register(struct device *dev, const char *name,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init u300_clk_init(void __iomem *base)
 {
 	u16 val;
 	struct clk *clk;
 =======
+=======
+>>>>>>> v3.18
 static void __init of_u300_syscon_mclk_init(struct device_node *np)
 {
 	struct clk *clk = ERR_PTR(-EINVAL);
@@ -1188,6 +1203,9 @@ static const struct of_device_id u300_clk_match[] __initconst = {
 void __init u300_clk_init(void __iomem *base)
 {
 	u16 val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	syscon_vbase = base;
@@ -1205,6 +1223,7 @@ void __init u300_clk_init(void __iomem *base)
 	val |= U300_SYSCON_PMCR_PWR_MGNT_ENABLE;
 	writew(val, syscon_vbase + U300_SYSCON_PMCR);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* These are always available (RTC and PLL13) */
 	clk = clk_register_fixed_rate(NULL, "app_32_clk", NULL,
@@ -1339,6 +1358,9 @@ void __init u300_clk_init(void __iomem *base)
 	/* Then this special MMC/SD clock */
 	clk = mclk_clk_register(NULL, "mmc_clk", "mmc_p_clk", false);
 	clk_register_clkdev(clk, NULL, "mmci");
+=======
+	of_clk_init(u300_clk_match);
+>>>>>>> v3.18
 =======
 	of_clk_init(u300_clk_match);
 >>>>>>> v3.18

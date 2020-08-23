@@ -7,7 +7,10 @@
 #include <linux/slab.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/cpumask.h>
@@ -331,6 +334,12 @@ static int iterate_cpu(struct cpuinfo_tree *t, unsigned int root_index)
 	case SUN4V_CHIP_NIAGARA4:
 	case SUN4V_CHIP_NIAGARA5:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case SUN4V_CHIP_SPARC_M6:
+	case SUN4V_CHIP_SPARC_M7:
+	case SUN4V_CHIP_SPARC64X:
+>>>>>>> v3.18
 =======
 	case SUN4V_CHIP_SPARC_M6:
 	case SUN4V_CHIP_SPARC_M7:

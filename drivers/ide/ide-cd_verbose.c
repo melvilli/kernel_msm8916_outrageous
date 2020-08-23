@@ -10,7 +10,13 @@
 #include <linux/blkdev.h>
 #include <linux/cdrom.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <scsi/scsi.h>
+=======
+#include <linux/ide.h>
+#include <scsi/scsi.h>
+#include "ide-cd.h"
+>>>>>>> v3.18
 =======
 #include <linux/ide.h>
 #include <scsi/scsi.h>

@@ -5,6 +5,7 @@
  * separate lines either by holding them low, or by pulsing them
  * with modulated width.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The modulation can be varied in a simple pattern to produce a blink or
  * double-blink.
  *
@@ -77,6 +78,8 @@
  * and a 'setup' callback which is called once the GPiOs are available.
  *
 =======
+=======
+>>>>>>> v3.18
  * The modulation can be varied in a simple pattern to produce a
  * blink or double-blink.
  *
@@ -158,6 +161,9 @@
  * The "reg" determines the output number and "compatible" determines
  * whether it is an LED or a GPIO.  "linux,default-trigger" can set a
  * default trigger.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -277,6 +283,7 @@ static int choose_times(int msec, int *c1p, int *c2p)
 {
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Choose two timecodes which add to 'msec' as near as possible.
 	 * The first returned is the 'on' or 'off' time.  The second is to be
 	 * used as a 'fade-on' or 'fade-off' time.  If 'msec' is even,
@@ -289,6 +296,8 @@ static int choose_times(int msec, int *c1p, int *c2p)
 	 * the first pair so there is more change-time visible (i.e. it is
 	 * softer).
 =======
+=======
+>>>>>>> v3.18
 	 * Choose two timecodes which add to 'msec' as near as
 	 * possible.  The first returned is the 'on' or 'off' time.
 	 * The second is to be used as a 'fade-on' or 'fade-off' time.
@@ -301,6 +310,9 @@ static int choose_times(int msec, int *c1p, int *c2p)
 	 * If two possibilities are equally good (e.g. 512+0,
 	 * 256+256), choose the first pair so there is more
 	 * change-time visible (i.e. it is softer).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	int c1, c2;
@@ -355,8 +367,13 @@ static int choose_times(int msec, int *c1p, int *c2p)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Update the register file with the appropriate 3-bit state for
  * the given led.
+=======
+ * Update the register file with the appropriate 3-bit state for the
+ * given led.
+>>>>>>> v3.18
 =======
  * Update the register file with the appropriate 3-bit state for the
  * given led.
@@ -379,9 +396,15 @@ static void set_select(struct tca6507_chip *tca, int led, int val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Update the register file with the appropriate 4-bit code for
  * one bank or other.  This can be used for timers, for levels, or
  * for initialisation.
+=======
+/* Update the register file with the appropriate 4-bit code for one
+ * bank or other.  This can be used for timers, for levels, or for
+ * initialization.
+>>>>>>> v3.18
 =======
 /* Update the register file with the appropriate 4-bit code for one
  * bank or other.  This can be used for timers, for levels, or for
@@ -420,7 +443,11 @@ static void set_level(struct tca6507_chip *tca, int bank, int level)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Record all relevant time code for a given bank */
+=======
+/* Record all relevant time codes for a given bank */
+>>>>>>> v3.18
 =======
 /* Record all relevant time codes for a given bank */
 >>>>>>> v3.18
@@ -432,7 +459,12 @@ static void set_times(struct tca6507_chip *tca, int bank)
 	result = choose_times(tca->bank[bank].ontime, &c1, &c2);
 	dev_dbg(&tca->client->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"Chose on  times %d(%d) %d(%d) for %dms\n", c1, time_codes[c1],
+=======
+		"Chose on  times %d(%d) %d(%d) for %dms\n",
+		c1, time_codes[c1],
+>>>>>>> v3.18
 =======
 		"Chose on  times %d(%d) %d(%d) for %dms\n",
 		c1, time_codes[c1],
@@ -445,7 +477,12 @@ static void set_times(struct tca6507_chip *tca, int bank)
 	result = choose_times(tca->bank[bank].offtime, &c1, &c2);
 	dev_dbg(&tca->client->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"Chose off times %d(%d) %d(%d) for %dms\n", c1, time_codes[c1],
+=======
+		"Chose off times %d(%d) %d(%d) for %dms\n",
+		c1, time_codes[c1],
+>>>>>>> v3.18
 =======
 		"Chose off times %d(%d) %d(%d) for %dms\n",
 		c1, time_codes[c1],
@@ -498,7 +535,12 @@ static void led_release(struct tca6507_led *led)
 static int led_prepare(struct tca6507_led *led)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Assign this led to a bank, configuring that bank if necessary. */
+=======
+	/* Assign this led to a bank, configuring that bank if
+	 * necessary. */
+>>>>>>> v3.18
 =======
 	/* Assign this led to a bank, configuring that bank if
 	 * necessary. */
@@ -519,15 +561,21 @@ static int led_prepare(struct tca6507_led *led)
 	if (led->ontime == 0 || led->offtime == 0) {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Just set the brightness, choosing first usable bank.
 		 * If none perfect, choose best.
 		 * Count backwards so we check MASTER bank first
 		 * to avoid wasting a timer.
 =======
+=======
+>>>>>>> v3.18
 		 * Just set the brightness, choosing first usable
 		 * bank.  If none perfect, choose best.  Count
 		 * backwards so we check MASTER bank first to avoid
 		 * wasting a timer.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		int best = -1;/* full-on */
@@ -570,9 +618,15 @@ static int led_prepare(struct tca6507_led *led)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * We have on/off time so we need to try to allocate a timing bank.
 	 * First check if times are compatible with hardware and give up if
 	 * not.
+=======
+	 * We have on/off time so we need to try to allocate a timing
+	 * bank.  First check if times are compatible with hardware
+	 * and give up if not.
+>>>>>>> v3.18
 =======
 	 * We have on/off time so we need to try to allocate a timing
 	 * bank.  First check if times are compatible with hardware
@@ -666,8 +720,13 @@ static int led_assign(struct tca6507_led *led)
 	if (err) {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Can only fail on timer setup.  In that case we need to
 		 * re-establish as steady level.
+=======
+		 * Can only fail on timer setup.  In that case we need
+		 * to re-establish as steady level.
+>>>>>>> v3.18
 =======
 		 * Can only fail on timer setup.  In that case we need
 		 * to re-establish as steady level.
@@ -742,8 +801,13 @@ static void tca6507_gpio_set_value(struct gpio_chip *gc,
 	spin_lock_irqsave(&tca->lock, flags);
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * 'OFF' is floating high, and 'ON' is pulled down, so it has the
 	 * inverse sense of 'val'.
+=======
+	 * 'OFF' is floating high, and 'ON' is pulled down, so it has
+	 * the inverse sense of 'val'.
+>>>>>>> v3.18
 =======
 	 * 'OFF' is floating high, and 'ON' is pulled down, so it has
 	 * the inverse sense of 'val'.
@@ -791,6 +855,12 @@ static int tca6507_probe_gpios(struct i2c_client *client,
 	tca->gpio.set = tca6507_gpio_set_value;
 	tca->gpio.dev = &client->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_OF_GPIO
+	tca->gpio.of_node = of_node_get(client->dev.of_node);
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_OF_GPIO
 	tca->gpio.of_node = of_node_get(client->dev.of_node);
@@ -809,11 +879,16 @@ static int tca6507_probe_gpios(struct i2c_client *client,
 static void tca6507_remove_gpio(struct tca6507_chip *tca)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tca->gpio.ngpio) {
 		int err = gpiochip_remove(&tca->gpio);
 		dev_err(&tca->client->dev, "%s failed, %d\n",
 			"gpiochip_remove()", err);
 	}
+=======
+	if (tca->gpio.ngpio)
+		gpiochip_remove(&tca->gpio);
+>>>>>>> v3.18
 =======
 	if (tca->gpio.ngpio)
 		gpiochip_remove(&tca->gpio);
@@ -846,7 +921,11 @@ tca6507_led_dt_init(struct i2c_client *client)
 
 	tca_leds = devm_kzalloc(&client->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sizeof(struct led_info) * count, GFP_KERNEL);
+=======
+			sizeof(struct led_info) * NUM_LEDS, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 			sizeof(struct led_info) * NUM_LEDS, GFP_KERNEL);
 >>>>>>> v3.18
@@ -863,15 +942,21 @@ tca6507_led_dt_init(struct i2c_client *client)
 		led.default_trigger =
 			of_get_property(child, "linux,default-trigger", NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		ret = of_property_read_u32(child, "reg", &reg);
 		if (ret != 0)
 =======
+=======
+>>>>>>> v3.18
 		led.flags = 0;
 		if (of_property_match_string(child, "compatible", "gpio") >= 0)
 			led.flags |= TCA6507_MAKE_GPIO;
 		ret = of_property_read_u32(child, "reg", &reg);
 		if (ret != 0 || reg < 0 || reg >= NUM_LEDS)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 
@@ -884,13 +969,19 @@ tca6507_led_dt_init(struct i2c_client *client)
 
 	pdata->leds.leds = tca_leds;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata->leds.num_leds = count;
 
 =======
+=======
+>>>>>>> v3.18
 	pdata->leds.num_leds = NUM_LEDS;
 #ifdef CONFIG_GPIOLIB
 	pdata->gpio_base = -1;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pdata;
 }
@@ -920,7 +1011,11 @@ static int tca6507_probe(struct i2c_client *client,
 
 	adapter = to_i2c_adapter(client->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = client->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18

@@ -57,7 +57,10 @@ int mlx4_SET_VLAN_FLTR(struct mlx4_dev *dev, struct mlx4_en_priv *priv)
 
 	filter = mailbox->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(filter, 0, sizeof(*filter));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = VLAN_FLTR_SIZE - 1; i >= 0; i--) {
@@ -85,7 +88,10 @@ int mlx4_en_QUERY_PORT(struct mlx4_en_dev *mdev, u8 port)
 	if (IS_ERR(mailbox))
 		return PTR_ERR(mailbox);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(mailbox->buf, 0, sizeof(*qport_context));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = mlx4_cmd_box(mdev->dev, 0, mailbox->dma, port, 0,
@@ -134,7 +140,10 @@ int mlx4_en_DUMP_ETH_STATS(struct mlx4_en_dev *mdev, u8 port, u8 reset)
 	if (IS_ERR(mailbox))
 		return PTR_ERR(mailbox);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(mailbox->buf, 0, sizeof(*mlx4_en_stats));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = mlx4_cmd_box(mdev->dev, 0, mailbox->dma, in_mod, 0,
@@ -153,26 +162,35 @@ int mlx4_en_DUMP_ETH_STATS(struct mlx4_en_dev *mdev, u8 port, u8 reset)
 	priv->port_stats.rx_chksum_none = 0;
 	for (i = 0; i < priv->rx_ring_num; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		stats->rx_packets += priv->rx_ring[i].packets;
 		stats->rx_bytes += priv->rx_ring[i].bytes;
 		priv->port_stats.rx_chksum_good += priv->rx_ring[i].csum_ok;
 		priv->port_stats.rx_chksum_none += priv->rx_ring[i].csum_none;
 =======
+=======
+>>>>>>> v3.18
 		stats->rx_packets += priv->rx_ring[i]->packets;
 		stats->rx_bytes += priv->rx_ring[i]->bytes;
 		priv->port_stats.rx_chksum_good += priv->rx_ring[i]->csum_ok;
 		priv->port_stats.rx_chksum_none += priv->rx_ring[i]->csum_none;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	stats->tx_packets = 0;
 	stats->tx_bytes = 0;
 	priv->port_stats.tx_chksum_offload = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < priv->tx_ring_num; i++) {
 		stats->tx_packets += priv->tx_ring[i].packets;
 		stats->tx_bytes += priv->tx_ring[i].bytes;
 		priv->port_stats.tx_chksum_offload += priv->tx_ring[i].tx_csum;
 =======
+=======
+>>>>>>> v3.18
 	priv->port_stats.queue_stopped = 0;
 	priv->port_stats.wake_queue = 0;
 	priv->port_stats.tso_packets = 0;
@@ -188,6 +206,9 @@ int mlx4_en_DUMP_ETH_STATS(struct mlx4_en_dev *mdev, u8 port, u8 reset)
 		priv->port_stats.wake_queue        += ring->wake_queue;
 		priv->port_stats.tso_packets       += ring->tso_packets;
 		priv->port_stats.xmit_more         += ring->xmit_more;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

@@ -106,7 +106,11 @@ MODULE_PARM_DESC(dxr_enable, "Enable DXR support for Terratec DMX6FIRE.");
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_ice1712_ids) = {
+=======
+static const struct pci_device_id snd_ice1712_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_ice1712_ids[] = {
 >>>>>>> v3.18
@@ -399,7 +403,11 @@ int snd_ice1712_init_cs8427(struct snd_ice1712 *ice, int addr)
 		(ice->cs8427_timeout * HZ) / 1000, &ice->cs8427);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "CS8427 initialization failed\n");
+=======
+		dev_err(ice->card->dev, "CS8427 initialization failed\n");
+>>>>>>> v3.18
 =======
 		dev_err(ice->card->dev, "CS8427 initialization failed\n");
 >>>>>>> v3.18
@@ -476,7 +484,11 @@ static irqreturn_t snd_ice1712_interrupt(int irq, void *dev_id)
 			struct snd_pcm_substream *substream;
 			pbkstatus = inw(ICEDS(ice, INTSTAT));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* printk(KERN_DEBUG "pbkstatus = 0x%x\n", pbkstatus); */
+=======
+			/* dev_dbg(ice->card->dev, "pbkstatus = 0x%x\n", pbkstatus); */
+>>>>>>> v3.18
 =======
 			/* dev_dbg(ice->card->dev, "pbkstatus = 0x%x\n", pbkstatus); */
 >>>>>>> v3.18
@@ -919,7 +931,12 @@ static int snd_ice1712_pcm(struct snd_ice1712 *ice, int device, struct snd_pcm *
 		*rpcm = pcm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING "Consumer PCM code does not work well at the moment --jk\n");
+=======
+	dev_warn(ice->card->dev,
+		 "Consumer PCM code does not work well at the moment --jk\n");
+>>>>>>> v3.18
 =======
 	dev_warn(ice->card->dev,
 		 "Consumer PCM code does not work well at the moment --jk\n");
@@ -1068,6 +1085,11 @@ __out:
 	if (!force && old == val)
 		goto __out;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	ice->cur_rate = rate;
+>>>>>>> v3.18
 =======
 
 	ice->cur_rate = rate;
@@ -1562,7 +1584,12 @@ static int snd_ice1712_ac97_mixer(struct snd_ice1712 *ice)
 		err = snd_ac97_mixer(pbus, &ac97, &ice->ac97);
 		if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "ice1712: cannot initialize ac97 for consumer, skipped\n");
+=======
+			dev_warn(ice->card->dev,
+				 "cannot initialize ac97 for consumer, skipped\n");
+>>>>>>> v3.18
 =======
 			dev_warn(ice->card->dev,
 				 "cannot initialize ac97 for consumer, skipped\n");
@@ -1585,7 +1612,12 @@ static int snd_ice1712_ac97_mixer(struct snd_ice1712 *ice)
 		err = snd_ac97_mixer(pbus, &ac97, &ice->ac97);
 		if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "ice1712: cannot initialize pro ac97, skipped\n");
+=======
+			dev_warn(ice->card->dev,
+				 "cannot initialize pro ac97, skipped\n");
+>>>>>>> v3.18
 =======
 			dev_warn(ice->card->dev,
 				 "cannot initialize pro ac97, skipped\n");
@@ -2370,7 +2402,12 @@ static int snd_ice1712_read_eeprom(struct snd_ice1712 *ice,
 			ice->eeprom.subvendor = ((unsigned int)swab16(vendor) << 16) | swab16(device);
 			if (ice->eeprom.subvendor == 0 || ice->eeprom.subvendor == (unsigned int)-1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "ice1712: No valid ID is found\n");
+=======
+				dev_err(ice->card->dev,
+					"No valid ID is found\n");
+>>>>>>> v3.18
 =======
 				dev_err(ice->card->dev,
 					"No valid ID is found\n");
@@ -2383,7 +2420,12 @@ static int snd_ice1712_read_eeprom(struct snd_ice1712 *ice,
 		for (c = *tbl; c->subvendor; c++) {
 			if (modelname && c->model && !strcmp(modelname, c->model)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_INFO "ice1712: Using board model %s\n", c->name);
+=======
+				dev_info(ice->card->dev,
+					 "Using board model %s\n", c->name);
+>>>>>>> v3.18
 =======
 				dev_info(ice->card->dev,
 					 "Using board model %s\n", c->name);
@@ -2395,7 +2437,11 @@ static int snd_ice1712_read_eeprom(struct snd_ice1712 *ice,
 				goto found;
 			/* if the EEPROM is given by the driver, use it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd("using the defined eeprom..\n");
+=======
+			dev_dbg(ice->card->dev, "using the defined eeprom..\n");
+>>>>>>> v3.18
 =======
 			dev_dbg(ice->card->dev, "using the defined eeprom..\n");
 >>>>>>> v3.18
@@ -2406,7 +2452,11 @@ static int snd_ice1712_read_eeprom(struct snd_ice1712 *ice,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING "ice1712: No matching model found for ID 0x%x\n",
+=======
+	dev_warn(ice->card->dev, "No matching model found for ID 0x%x\n",
+>>>>>>> v3.18
 =======
 	dev_warn(ice->card->dev, "No matching model found for ID 0x%x\n",
 >>>>>>> v3.18
@@ -2418,7 +2468,12 @@ static int snd_ice1712_read_eeprom(struct snd_ice1712 *ice,
 		ice->eeprom.size = 32; /* FIXME: any cards without the correct size? */
 	else if (ice->eeprom.size > 32) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "invalid EEPROM (size = %i)\n", ice->eeprom.size);
+=======
+		dev_err(ice->card->dev,
+			"invalid EEPROM (size = %i)\n", ice->eeprom.size);
+>>>>>>> v3.18
 =======
 		dev_err(ice->card->dev,
 			"invalid EEPROM (size = %i)\n", ice->eeprom.size);
@@ -2428,7 +2483,11 @@ static int snd_ice1712_read_eeprom(struct snd_ice1712 *ice,
 	ice->eeprom.version = snd_ice1712_read_i2c(ice, dev, 0x05);
 	if (ice->eeprom.version != 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "invalid EEPROM version %i\n",
+=======
+		dev_err(ice->card->dev, "invalid EEPROM version %i\n",
+>>>>>>> v3.18
 =======
 		dev_err(ice->card->dev, "invalid EEPROM version %i\n",
 >>>>>>> v3.18
@@ -2493,7 +2552,10 @@ static int snd_ice1712_chip_init(struct snd_ice1712 *ice)
 	}
 	snd_ice1712_set_pro_rate(ice, 48000, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* unmask used interrupts */
 	outb(((ice->eeprom.data[ICE_EEP1_CODEC] & ICE1712_CFG_2xMPU401) == 0 ?
 	      ICE1712_IRQ_MPU2 : 0) |
@@ -2501,6 +2563,9 @@ static int snd_ice1712_chip_init(struct snd_ice1712 *ice)
 	      ICE1712_IRQ_PBKDS | ICE1712_IRQ_CONCAP | ICE1712_IRQ_CONPBK : 0),
 	     ICEREG(ice, IRQMASK));
 	outb(0x00, ICEMT(ice, IRQ));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2583,7 +2648,11 @@ static int snd_ice1712_free(struct snd_ice1712 *ice)
 		goto __hw_end;
 	/* mask all interrupts */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outb(0xc0, ICEMT(ice, IRQ));
+=======
+	outb(ICE1712_MULTI_CAPTURE | ICE1712_MULTI_PLAYBACK, ICEMT(ice, IRQ));
+>>>>>>> v3.18
 =======
 	outb(ICE1712_MULTI_CAPTURE | ICE1712_MULTI_PLAYBACK, ICEMT(ice, IRQ));
 >>>>>>> v3.18
@@ -2632,7 +2701,12 @@ static int snd_ice1712_create(struct snd_card *card,
 	if (pci_set_dma_mask(pci, DMA_BIT_MASK(28)) < 0 ||
 	    pci_set_consistent_dma_mask(pci, DMA_BIT_MASK(28)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "architecture does not support 28bit PCI busmaster DMA\n");
+=======
+		dev_err(card->dev,
+			"architecture does not support 28bit PCI busmaster DMA\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev,
 			"architecture does not support 28bit PCI busmaster DMA\n");
@@ -2673,6 +2747,10 @@ static int snd_ice1712_create(struct snd_card *card,
 	ice->irq = -1;
 	pci_set_master(pci);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* disable legacy emulation */
+>>>>>>> v3.18
 =======
 	/* disable legacy emulation */
 >>>>>>> v3.18
@@ -2697,7 +2775,11 @@ static int snd_ice1712_create(struct snd_card *card,
 	if (request_irq(pci->irq, snd_ice1712_interrupt, IRQF_SHARED,
 			KBUILD_MODNAME, ice)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to grab IRQ %d\n", pci->irq);
+=======
+		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
 >>>>>>> v3.18
@@ -2717,6 +2799,7 @@ static int snd_ice1712_create(struct snd_card *card,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* unmask used interrupts */
 	outb(((ice->eeprom.data[ICE_EEP1_CODEC] & ICE1712_CFG_2xMPU401) == 0 ?
 	      ICE1712_IRQ_MPU2 : 0) |
@@ -2727,6 +2810,8 @@ static int snd_ice1712_create(struct snd_card *card,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	err = snd_device_new(card, SNDRV_DEV_LOWLEVEL, ice, &ops);
 	if (err < 0) {
 		snd_ice1712_free(ice);
@@ -2734,8 +2819,11 @@ static int snd_ice1712_create(struct snd_card *card,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*r_ice1712 = ice;
@@ -2768,7 +2856,12 @@ static int snd_ice1712_probe(struct pci_dev *pci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -2910,10 +3003,13 @@ static void snd_ice1712_remove(struct pci_dev *pci)
 		ice->card_info->chip_exit(ice);
 	snd_card_free(card);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
 }
 
 =======
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PM_SLEEP
@@ -3012,6 +3108,9 @@ static SIMPLE_DEV_PM_OPS(snd_ice1712_pm, snd_ice1712_suspend, snd_ice1712_resume
 #define SND_VT1712_PM_OPS	NULL
 #endif /* CONFIG_PM_SLEEP */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct pci_driver ice1712_driver = {
 	.name = KBUILD_MODNAME,
@@ -3019,6 +3118,12 @@ static struct pci_driver ice1712_driver = {
 	.probe = snd_ice1712_probe,
 	.remove = snd_ice1712_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.driver = {
+		.pm = SND_VT1712_PM_OPS,
+	},
+>>>>>>> v3.18
 =======
 	.driver = {
 		.pm = SND_VT1712_PM_OPS,

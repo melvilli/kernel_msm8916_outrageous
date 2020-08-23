@@ -37,7 +37,10 @@ enum iio_chan_info_enum {
 	IIO_CHAN_INFO_HARDWAREGAIN,
 	IIO_CHAN_INFO_HYSTERESIS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IIO_CHAN_INFO_INT_TIME,
 };
 
@@ -46,6 +49,9 @@ enum iio_shared_by {
 	IIO_SHARED_BY_TYPE,
 	IIO_SHARED_BY_DIR,
 	IIO_SHARED_BY_ALL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -69,7 +75,11 @@ struct iio_dev;
 struct iio_chan_spec_ext_info {
 	const char *name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool shared;
+=======
+	enum iio_shared_by shared;
+>>>>>>> v3.18
 =======
 	enum iio_shared_by shared;
 >>>>>>> v3.18
@@ -141,7 +151,11 @@ ssize_t iio_enum_write(struct iio_dev *indio_dev,
 { \
 	.name = (_name "_available"), \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shared = true, \
+=======
+	.shared = IIO_SHARED_BY_TYPE, \
+>>>>>>> v3.18
 =======
 	.shared = IIO_SHARED_BY_TYPE, \
 >>>>>>> v3.18
@@ -151,7 +165,10 @@ ssize_t iio_enum_write(struct iio_dev *indio_dev,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct iio_event_spec - specification for a channel event
  * @type:		    Type of the event
  * @dir:		    Direction of the event
@@ -175,6 +192,9 @@ struct iio_event_spec {
 };
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * struct iio_chan_spec - specification of a single channel
  * @type:		What type of measurement is the channel making.
@@ -192,6 +212,7 @@ struct iio_event_spec {
  *					realbits.
  *			endianness:	little or big endian
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @info_mask:		What information is to be exported about this channel.
  *			This includes calibbias, scale etc.
  * @info_mask_separate: What information is to be exported that is specific to
@@ -200,6 +221,8 @@ struct iio_event_spec {
 *			by all channels of the same type.
  * @event_mask:		What events can this channel produce.
 =======
+=======
+>>>>>>> v3.18
  *			repeat:		Number of times real/storage bits
  *					repeats. When the repeat element is
  *					more than 1, then the type element in
@@ -217,6 +240,9 @@ struct iio_event_spec {
  * @event_spec:		Array of events which should be registered for this
  *			channel.
  * @num_event_specs:	Size of the event_spec array.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @ext_info:		Array of extended info attributes for this channel.
  *			The array is NULL terminated, the last element should
@@ -250,6 +276,7 @@ struct iio_chan_spec {
 		u8	storagebits;
 		u8	shift;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		enum iio_endian endianness;
 	} scan_type;
 	long			info_mask;
@@ -257,6 +284,8 @@ struct iio_chan_spec {
 	long			info_mask_shared_by_type;
 	long			event_mask;
 =======
+=======
+>>>>>>> v3.18
 		u8	repeat;
 		enum iio_endian endianness;
 	} scan_type;
@@ -266,6 +295,9 @@ struct iio_chan_spec {
 	long			info_mask_shared_by_all;
 	const struct iio_event_spec *event_spec;
 	unsigned int		num_event_specs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct iio_chan_spec_ext_info *ext_info;
 	const char		*extend_name;
@@ -290,6 +322,7 @@ static inline bool iio_channel_has_info(const struct iio_chan_spec *chan,
 {
 	return (chan->info_mask_separate & BIT(type)) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       (chan->info_mask_shared_by_type & BIT(type));
 }
 
@@ -300,6 +333,8 @@ static inline bool iio_channel_has_info(const struct iio_chan_spec *chan,
 	{ .type = IIO_TIMESTAMP, .channel = -1,				\
 			.scan_index = _si, .scan_type = IIO_ST('s', 64, 64, 0) }
 =======
+=======
+>>>>>>> v3.18
 		(chan->info_mask_shared_by_type & BIT(type)) |
 		(chan->info_mask_shared_by_dir & BIT(type)) |
 		(chan->info_mask_shared_by_all & BIT(type));
@@ -315,6 +350,9 @@ static inline bool iio_channel_has_info(const struct iio_chan_spec *chan,
 		.storagebits = 64,					\
 		},							\
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -322,6 +360,7 @@ static inline bool iio_channel_has_info(const struct iio_chan_spec *chan,
  **/
 static inline s64 iio_get_time_ns(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct timespec ts;
 	/*
@@ -331,6 +370,9 @@ static inline s64 iio_get_time_ns(void)
 	ktime_get_real_ts(&ts);
 
 	return timespec_to_ns(&ts);
+=======
+	return ktime_get_real_ns();
+>>>>>>> v3.18
 =======
 	return ktime_get_real_ns();
 >>>>>>> v3.18
@@ -345,6 +387,11 @@ static inline s64 iio_get_time_ns(void)
 	(INDIO_BUFFER_TRIGGERED | INDIO_BUFFER_HARDWARE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define INDIO_MAX_RAW_ELEMENTS		4
+
+>>>>>>> v3.18
 =======
 #define INDIO_MAX_RAW_ELEMENTS		4
 
@@ -364,7 +411,10 @@ struct iio_dev;
  *			type of value returned by the device. val and val2 will
  *			contain the elements making up the returned value.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @read_raw_multi:	function to return values from the device.
  *			mask specifies which value. Note 0 means a reading of
  *			the channel in question.  Return value will specify the
@@ -373,6 +423,9 @@ struct iio_dev;
  *			max_len specifies maximum number of elements
  *			vals pointer can contain. val_len is used to return
  *			length of valid elements in vals.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @write_raw:		function to write a value to the device.
  *			Parameters are the same as for read_raw.
@@ -382,10 +435,15 @@ struct iio_dev;
  * @read_event_config:	find out if the event is enabled.
  * @write_event_config:	set if the event is enabled.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @read_event_value:	read a value associated with the event. Meaning
  *			is event dependant. event_code specifies which event.
  * @write_event_value:	write the value associated with the event.
  *			Meaning is event dependent.
+=======
+ * @read_event_value:	read a configuration value associated with the event.
+ * @write_event_value:	write a configuration value for the event.
+>>>>>>> v3.18
 =======
  * @read_event_value:	read a configuration value associated with the event.
  * @write_event_value:	write a configuration value for the event.
@@ -408,7 +466,10 @@ struct iio_info {
 			long mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int (*read_raw_multi)(struct iio_dev *indio_dev,
 			struct iio_chan_spec const *chan,
 			int max_len,
@@ -416,6 +477,9 @@ struct iio_info {
 			int *val_len,
 			long mask);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int (*write_raw)(struct iio_dev *indio_dev,
 			 struct iio_chan_spec const *chan,
@@ -428,6 +492,7 @@ struct iio_info {
 			 long mask);
 
 	int (*read_event_config)(struct iio_dev *indio_dev,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				 u64 event_code);
 
@@ -442,6 +507,8 @@ struct iio_info {
 				 u64 event_code,
 				 int val);
 =======
+=======
+>>>>>>> v3.18
 				 const struct iio_chan_spec *chan,
 				 enum iio_event_type type,
 				 enum iio_event_direction dir);
@@ -464,6 +531,9 @@ struct iio_info {
 				 enum iio_event_direction dir,
 				 enum iio_event_info info, int val, int val2);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int (*validate_trigger)(struct iio_dev *indio_dev,
 				struct iio_trigger *trig);
@@ -575,6 +645,7 @@ struct iio_dev {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * iio_find_channel_from_si() - get channel from its scan index
  * @indio_dev:		device
@@ -602,12 +673,17 @@ void iio_device_unregister(struct iio_dev *indio_dev);
  * @timestamp:		When the event occurred
  **/
 =======
+=======
+>>>>>>> v3.18
 const struct iio_chan_spec
 *iio_find_channel_from_si(struct iio_dev *indio_dev, int si);
 int iio_device_register(struct iio_dev *indio_dev);
 void iio_device_unregister(struct iio_dev *indio_dev);
 int devm_iio_device_register(struct device *dev, struct iio_dev *indio_dev);
 void devm_iio_device_unregister(struct device *dev, struct iio_dev *indio_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int iio_push_event(struct iio_dev *indio_dev, u64 ev_code, s64 timestamp);
 
@@ -622,7 +698,11 @@ static inline void iio_device_put(struct iio_dev *indio_dev)
 	if (indio_dev)
 		put_device(&indio_dev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -677,10 +757,13 @@ static inline void *iio_device_get_drvdata(struct iio_dev *indio_dev)
 /* Can we make this smaller? */
 #define IIO_ALIGN L1_CACHE_BYTES
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * iio_device_alloc() - allocate an iio_dev from a driver
  * @sizeof_priv: 	Space to allocate for private structure.
  **/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct iio_dev *iio_device_alloc(int sizeof_priv);
@@ -697,18 +780,24 @@ static inline struct iio_dev *iio_priv_to_dev(void *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * iio_device_free() - free an iio_dev from a driver
  * @indio_dev: 		the iio_dev associated with the device
  **/
 void iio_device_free(struct iio_dev *indio_dev);
 =======
+=======
+>>>>>>> v3.18
 void iio_device_free(struct iio_dev *indio_dev);
 struct iio_dev *devm_iio_device_alloc(struct device *dev, int sizeof_priv);
 void devm_iio_device_free(struct device *dev, struct iio_dev *indio_dev);
 struct iio_trigger *devm_iio_trigger_alloc(struct device *dev,
 						const char *fmt, ...);
 void devm_iio_trigger_free(struct device *dev, struct iio_trigger *iio_trig);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -720,7 +809,11 @@ static inline bool iio_buffer_enabled(struct iio_dev *indio_dev)
 	return indio_dev->currentmode
 		& (INDIO_BUFFER_TRIGGERED | INDIO_BUFFER_HARDWARE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -734,7 +827,11 @@ static inline struct dentry *iio_get_debugfs_dentry(struct iio_dev *indio_dev)
 {
 	return indio_dev->debugfs_dentry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -743,7 +840,11 @@ static inline struct dentry *iio_get_debugfs_dentry(struct iio_dev *indio_dev)
 {
 	return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -762,6 +863,7 @@ int iio_str_to_fixpoint(const char *str, int fract_mult, int *integer,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * IIO_RAD_TO_DEGREE() - Convert rad to degree
  * @rad: A value in rad
  *
@@ -773,6 +875,8 @@ int iio_str_to_fixpoint(const char *str, int fract_mult, int *integer,
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * IIO_G_TO_M_S_2() - Convert g to meter / second**2
  * @g: A value in g
  *
@@ -780,6 +884,7 @@ int iio_str_to_fixpoint(const char *str, int fract_mult, int *integer,
  */
 #define IIO_G_TO_M_S_2(g) ((g) * 980665ULL / 100000ULL)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * IIO_M_S_2_TO_G() - Convert meter / second**2 to g
@@ -789,6 +894,8 @@ int iio_str_to_fixpoint(const char *str, int fract_mult, int *integer,
  */
 #define IIO_M_S_2_TO_G(ms2) (((ms2) * 100000ULL + 980665ULL / 2) / 980665ULL)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _INDUSTRIAL_IO_H_ */

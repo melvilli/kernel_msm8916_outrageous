@@ -103,7 +103,11 @@ typedef struct capi_manufacturer_cmd {
 /*
  * member contr is input for
 <<<<<<< HEAD
+<<<<<<< HEAD
  * CAPI_GET_MANUFACTURER, CAPI_VERSION, CAPI_GET_SERIAL
+=======
+ * CAPI_GET_MANUFACTURER, CAPI_GET_VERSION, CAPI_GET_SERIAL
+>>>>>>> v3.18
 =======
  * CAPI_GET_MANUFACTURER, CAPI_GET_VERSION, CAPI_GET_SERIAL
 >>>>>>> v3.18

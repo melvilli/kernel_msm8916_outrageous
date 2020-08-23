@@ -312,6 +312,10 @@ static ssize_t c2port_show_name(struct device *dev,
 	return sprintf(buf, "%s\n", c2dev->name);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(name, 0444, c2port_show_name, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(name, 0444, c2port_show_name, NULL);
 >>>>>>> v3.18
@@ -325,6 +329,10 @@ static ssize_t c2port_show_flash_blocks_num(struct device *dev,
 	return sprintf(buf, "%d\n", ops->blocks_num);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(flash_blocks_num, 0444, c2port_show_flash_blocks_num, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(flash_blocks_num, 0444, c2port_show_flash_blocks_num, NULL);
 >>>>>>> v3.18
@@ -338,6 +346,10 @@ static ssize_t c2port_show_flash_block_size(struct device *dev,
 	return sprintf(buf, "%d\n", ops->block_size);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(flash_block_size, 0444, c2port_show_flash_block_size, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(flash_block_size, 0444, c2port_show_flash_block_size, NULL);
 >>>>>>> v3.18
@@ -351,14 +363,20 @@ static ssize_t c2port_show_flash_size(struct device *dev,
 	return sprintf(buf, "%d\n", ops->blocks_num * ops->block_size);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t c2port_show_access(struct device *dev,
 				struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(flash_size, 0444, c2port_show_flash_size, NULL);
 
 static ssize_t access_show(struct device *dev, struct device_attribute *attr,
 			   char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct c2port_device *c2dev = dev_get_drvdata(dev);
@@ -367,9 +385,14 @@ static ssize_t access_show(struct device *dev, struct device_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t c2port_store_access(struct device *dev,
 				struct device_attribute *attr,
 				const char *buf, size_t count)
+=======
+static ssize_t access_store(struct device *dev, struct device_attribute *attr,
+			    const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t access_store(struct device *dev, struct device_attribute *attr,
 			    const char *buf, size_t count)
@@ -400,6 +423,10 @@ static ssize_t access_store(struct device *dev, struct device_attribute *attr,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RW(access);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RW(access);
 >>>>>>> v3.18
@@ -424,6 +451,10 @@ static ssize_t c2port_store_reset(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(reset, 0200, NULL, c2port_store_reset);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(reset, 0200, NULL, c2port_store_reset);
 >>>>>>> v3.18
@@ -464,6 +495,10 @@ static ssize_t c2port_show_dev_id(struct device *dev,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(dev_id, 0444, c2port_show_dev_id, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(dev_id, 0444, c2port_show_dev_id, NULL);
 >>>>>>> v3.18
@@ -504,6 +539,10 @@ static ssize_t c2port_show_rev_id(struct device *dev,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(rev_id, 0444, c2port_show_rev_id, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(rev_id, 0444, c2port_show_rev_id, NULL);
 >>>>>>> v3.18
@@ -577,6 +616,11 @@ static ssize_t c2port_store_flash_access(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(flash_access, 0644, c2port_show_flash_access,
+		   c2port_store_flash_access);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(flash_access, 0644, c2port_show_flash_access,
 		   c2port_store_flash_access);
@@ -662,6 +706,10 @@ static ssize_t c2port_store_flash_erase(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(flash_erase, 0200, NULL, c2port_store_flash_erase);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(flash_erase, 0200, NULL, c2port_store_flash_erase);
 >>>>>>> v3.18
@@ -896,6 +944,12 @@ static ssize_t c2port_write_flash_data(struct file *filp, struct kobject *kobj,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* size is computed at run-time */
+static BIN_ATTR(flash_data, 0644, c2port_read_flash_data,
+		c2port_write_flash_data, 0);
+>>>>>>> v3.18
 =======
 /* size is computed at run-time */
 static BIN_ATTR(flash_data, 0644, c2port_read_flash_data,
@@ -905,6 +959,7 @@ static BIN_ATTR(flash_data, 0644, c2port_read_flash_data,
 /*
  * Class attributes
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static struct device_attribute c2port_attrs[] = {
@@ -932,6 +987,8 @@ static struct bin_attribute c2port_bin_attrs = {
 	.write	= c2port_write_flash_data,
 	/* .size is computed at run-time */
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *c2port_attrs[] = {
 	&dev_attr_name.attr,
 	&dev_attr_flash_blocks_num.attr,
@@ -959,6 +1016,9 @@ static const struct attribute_group c2port_group = {
 static const struct attribute_group *c2port_groups[] = {
 	&c2port_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -993,6 +1053,11 @@ struct c2port_device *c2port_device_register(char *name,
 	c2dev->id = ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bin_attr_flash_data.size = ops->blocks_num * ops->block_size;
+
+>>>>>>> v3.18
 =======
 	bin_attr_flash_data.size = ops->blocks_num * ops->block_size;
 
@@ -1010,12 +1075,15 @@ struct c2port_device *c2port_device_register(char *name,
 	mutex_init(&c2dev->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Create binary file */
 	c2port_bin_attrs.size = ops->blocks_num * ops->block_size;
 	ret = device_create_bin_file(c2dev->dev, &c2port_bin_attrs);
 	if (unlikely(ret))
 		goto error_device_create_bin_file;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* By default C2 port access is off */
@@ -1031,9 +1099,12 @@ struct c2port_device *c2port_device_register(char *name,
 	return c2dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_device_create_bin_file:
 	device_destroy(c2port_class, 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 error_device_create:
@@ -1056,7 +1127,10 @@ void c2port_device_unregister(struct c2port_device *c2dev)
 	dev_info(c2dev->dev, "C2 port %s removed\n", c2dev->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_remove_bin_file(c2dev->dev, &c2port_bin_attrs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irq(&c2port_idr_lock);
@@ -1084,7 +1158,11 @@ static int __init c2port_init(void)
 		return PTR_ERR(c2port_class);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c2port_class->dev_attrs = c2port_attrs;
+=======
+	c2port_class->dev_groups = c2port_groups;
+>>>>>>> v3.18
 =======
 	c2port_class->dev_groups = c2port_groups;
 >>>>>>> v3.18

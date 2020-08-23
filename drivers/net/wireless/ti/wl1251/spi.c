@@ -24,10 +24,13 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/crc7.h>
 #include <linux/spi/spi.h>
 #include <linux/wl12xx.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/swab.h>
 #include <linux/crc7.h>
 #include <linux/spi/spi.h>
@@ -36,6 +39,9 @@
 #include <linux/of.h>
 #include <linux/of_gpio.h>
 #include <linux/regulator/consumer.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "wl1251.h"
@@ -91,22 +97,29 @@ static void wl1251_spi_reset(struct wl1251 *wl)
 static void wl1251_spi_wake(struct wl1251 *wl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 crc[WSPI_INIT_CMD_CRC_LEN], *cmd;
 	struct spi_transfer t;
 	struct spi_message m;
 
 	cmd = kzalloc(WSPI_INIT_CMD_LEN, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	struct spi_transfer t;
 	struct spi_message m;
 	u8 *cmd = kzalloc(WSPI_INIT_CMD_LEN, GFP_KERNEL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!cmd) {
 		wl1251_error("could not allocate cmd for spi init");
 		return;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memset(crc, 0, sizeof(crc));
 	memset(&t, 0, sizeof(t));
@@ -141,6 +154,8 @@ static void wl1251_spi_wake(struct wl1251 *wl)
 	cmd[4] |= crc7(0, crc, WSPI_INIT_CMD_CRC_LEN) << 1;
 	cmd[4] |= WSPI_INIT_CMD_END;
 =======
+=======
+>>>>>>> v3.18
 	memset(&t, 0, sizeof(t));
 	spi_message_init(&m);
 
@@ -170,6 +185,9 @@ static void wl1251_spi_wake(struct wl1251 *wl)
 	 */
 	__swab32s((u32 *)cmd);
 	__swab32s((u32 *)cmd+1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	t.tx_buf = cmd;
@@ -273,8 +291,13 @@ static void wl1251_spi_disable_irq(struct wl1251 *wl)
 static int wl1251_spi_set_power(struct wl1251 *wl, bool enable)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wl->set_power)
 		wl->set_power(enable);
+=======
+	if (gpio_is_valid(wl->power_gpio))
+		gpio_set_value(wl->power_gpio, enable);
+>>>>>>> v3.18
 =======
 	if (gpio_is_valid(wl->power_gpio))
 		gpio_set_value(wl->power_gpio, enable);
@@ -295,7 +318,12 @@ static const struct wl1251_if_operations wl1251_spi_ops = {
 static int wl1251_spi_probe(struct spi_device *spi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wl12xx_platform_data *pdata;
+=======
+	struct wl1251_platform_data *pdata = dev_get_platdata(&spi->dev);
+	struct device_node *np = spi->dev.of_node;
+>>>>>>> v3.18
 =======
 	struct wl1251_platform_data *pdata = dev_get_platdata(&spi->dev);
 	struct device_node *np = spi->dev.of_node;
@@ -305,8 +333,12 @@ static int wl1251_spi_probe(struct spi_device *spi)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = spi->dev.platform_data;
 	if (!pdata) {
+=======
+	if (!np && !pdata) {
+>>>>>>> v3.18
 =======
 	if (!np && !pdata) {
 >>>>>>> v3.18
@@ -327,7 +359,12 @@ static int wl1251_spi_probe(struct spi_device *spi)
 
 	/* This is the only SPI value that we need to set here, the rest
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * comes from the board-peripherals file */
+=======
+	 * comes from the board-peripherals file
+	 */
+>>>>>>> v3.18
 =======
 	 * comes from the board-peripherals file
 	 */
@@ -341,11 +378,14 @@ static int wl1251_spi_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wl->set_power = pdata->set_power;
 	if (!wl->set_power) {
 		wl1251_error("set power function missing in platform data");
 		return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	if (np) {
 		wl->use_eeprom = of_property_read_bool(np, "ti,wl1251-has-eeprom");
 		wl->power_gpio = of_get_named_gpio(np, "ti,power-gpio", 0);
@@ -370,12 +410,16 @@ static int wl1251_spi_probe(struct spi_device *spi)
 		wl1251_error("set power gpio missing in platform data");
 		ret = -ENODEV;
 		goto out_free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	wl->irq = spi->irq;
 	if (wl->irq < 0) {
 		wl1251_error("irq missing in platform data");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -ENODEV;
 	}
@@ -385,6 +429,8 @@ static int wl1251_spi_probe(struct spi_device *spi)
 	irq_set_status_flags(wl->irq, IRQ_NOAUTOEN);
 	ret = request_irq(wl->irq, wl1251_irq, 0, DRIVER_NAME, wl);
 =======
+=======
+>>>>>>> v3.18
 		ret = -ENODEV;
 		goto out_free;
 	}
@@ -392,6 +438,9 @@ static int wl1251_spi_probe(struct spi_device *spi)
 	irq_set_status_flags(wl->irq, IRQ_NOAUTOEN);
 	ret = devm_request_irq(&spi->dev, wl->irq, wl1251_irq, 0,
 							DRIVER_NAME, wl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0) {
 		wl1251_error("request_irq() failed: %d", ret);
@@ -400,6 +449,7 @@ static int wl1251_spi_probe(struct spi_device *spi)
 
 	irq_set_irq_type(wl->irq, IRQ_TYPE_EDGE_RISING);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = wl1251_init_ieee80211(wl);
 	if (ret)
@@ -412,6 +462,8 @@ static int wl1251_spi_probe(struct spi_device *spi)
 
  out_free:
 =======
+=======
+>>>>>>> v3.18
 	wl->vio = devm_regulator_get(&spi->dev, "vio");
 	if (IS_ERR(wl->vio)) {
 		ret = PTR_ERR(wl->vio);
@@ -432,6 +484,9 @@ static int wl1251_spi_probe(struct spi_device *spi)
 disable_regulator:
 	regulator_disable(wl->vio);
 out_free:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ieee80211_free_hw(hw);
 
@@ -443,8 +498,13 @@ static int wl1251_spi_remove(struct spi_device *spi)
 	struct wl1251 *wl = spi_get_drvdata(spi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(wl->irq, wl);
 	wl1251_free_hw(wl);
+=======
+	wl1251_free_hw(wl);
+	regulator_disable(wl->vio);
+>>>>>>> v3.18
 =======
 	wl1251_free_hw(wl);
 	regulator_disable(wl->vio);
@@ -463,6 +523,7 @@ static struct spi_driver wl1251_spi_driver = {
 	.remove		= wl1251_spi_remove,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init wl1251_spi_init(void)
 {
@@ -487,6 +548,9 @@ static void __exit wl1251_spi_exit(void)
 
 module_init(wl1251_spi_init);
 module_exit(wl1251_spi_exit);
+=======
+module_spi_driver(wl1251_spi_driver);
+>>>>>>> v3.18
 =======
 module_spi_driver(wl1251_spi_driver);
 >>>>>>> v3.18

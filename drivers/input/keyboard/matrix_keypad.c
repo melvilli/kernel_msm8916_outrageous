@@ -3,7 +3,10 @@
  *
  *  Copyright (c) 2008 Marek Vasut <marek.vasut@gmail.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (c) 2012, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -19,7 +22,10 @@
 #include <linux/delay.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/input.h>
@@ -44,7 +50,11 @@ struct matrix_keypad {
 	uint32_t last_key_state[MATRIX_MAX_COLS];
 	struct delayed_work work;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex lock;
+=======
+	spinlock_t lock;
+>>>>>>> v3.18
 =======
 	spinlock_t lock;
 >>>>>>> v3.18
@@ -177,16 +187,22 @@ static void matrix_keypad_scan(struct work_struct *work)
 	activate_all_cols(pdata, true);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&keypad->lock);
 	keypad->scan_pending = false;
 	enable_row_irqs(keypad);
 	mutex_unlock(&keypad->lock);
 =======
+=======
+>>>>>>> v3.18
 	/* Enable IRQs again */
 	spin_lock_irq(&keypad->lock);
 	keypad->scan_pending = false;
 	enable_row_irqs(keypad);
 	spin_unlock_irq(&keypad->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -194,8 +210,14 @@ static irqreturn_t matrix_keypad_interrupt(int irq, void *id)
 {
 	struct matrix_keypad *keypad = id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mutex_lock(&keypad->lock);
+=======
+	unsigned long flags;
+
+	spin_lock_irqsave(&keypad->lock, flags);
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 
@@ -217,7 +239,11 @@ static irqreturn_t matrix_keypad_interrupt(int irq, void *id)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&keypad->lock);
+=======
+	spin_unlock_irqrestore(&keypad->lock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&keypad->lock, flags);
 >>>>>>> v3.18
@@ -361,7 +387,11 @@ static int matrix_keypad_init_gpio(struct platform_device *pdev,
 
 	if (pdata->clustered_irq > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = request_irq(pdata->clustered_irq,
+=======
+		err = request_any_context_irq(pdata->clustered_irq,
+>>>>>>> v3.18
 =======
 		err = request_any_context_irq(pdata->clustered_irq,
 >>>>>>> v3.18
@@ -376,11 +406,17 @@ static int matrix_keypad_init_gpio(struct platform_device *pdev,
 	} else {
 		for (i = 0; i < pdata->num_row_gpios; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = request_threaded_irq(
 					gpio_to_irq(pdata->row_gpios[i]),
 					NULL,
 					matrix_keypad_interrupt,
 					IRQF_DISABLED | IRQF_ONESHOT |
+=======
+			err = request_any_context_irq(
+					gpio_to_irq(pdata->row_gpios[i]),
+					matrix_keypad_interrupt,
+>>>>>>> v3.18
 =======
 			err = request_any_context_irq(
 					gpio_to_irq(pdata->row_gpios[i]),
@@ -537,7 +573,11 @@ static int matrix_keypad_probe(struct platform_device *pdev)
 	keypad->stopped = true;
 	INIT_DELAYED_WORK(&keypad->work, matrix_keypad_scan);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&keypad->lock);
+=======
+	spin_lock_init(&keypad->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&keypad->lock);
 >>>>>>> v3.18
@@ -591,12 +631,18 @@ static int matrix_keypad_remove(struct platform_device *pdev)
 
 	matrix_keypad_free_gpio(keypad);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_destroy(&keypad->lock);
 	input_unregister_device(keypad->input_dev);
 	kfree(keypad);
 
 	platform_set_drvdata(pdev, NULL);
 
+=======
+	input_unregister_device(keypad->input_dev);
+	kfree(keypad);
+
+>>>>>>> v3.18
 =======
 	input_unregister_device(keypad->input_dev);
 	kfree(keypad);

@@ -25,15 +25,21 @@
 #include "include/audit.h"
 #include "include/context.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "include/match.h"
 #include "include/policy.h"
 #include "include/policy_unpack.h"
 #include "include/sid.h"
 =======
+=======
+>>>>>>> v3.18
 #include "include/crypto.h"
 #include "include/match.h"
 #include "include/policy.h"
 #include "include/policy_unpack.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -298,6 +304,12 @@ static int unpack_strdup(struct aa_ext *e, char **string, const char *name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DFA_VALID_PERM_MASK		0xffffffff
+#define DFA_VALID_PERM2_MASK		0xffffffff
+
+>>>>>>> v3.18
 =======
 #define DFA_VALID_PERM_MASK		0xffffffff
 #define DFA_VALID_PERM2_MASK		0xffffffff
@@ -345,13 +357,19 @@ static struct aa_dfa *unpack_dfa(struct aa_ext *e)
 		 * The dfa is aligned with in the blob to 8 bytes
 		 * from the beginning of the stream.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 */
 		size_t sz = blob - (char *)e->start;
 =======
+=======
+>>>>>>> v3.18
 		 * alignment adjust needed by dfa unpack
 		 */
 		size_t sz = blob - (char *) e->start -
 			((e->pos - e->start) & 7);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		size_t pad = ALIGN(sz, 8) - sz;
 		int flags = TO_ACCEPT1_FLAG(YYTD_DATA32) |
@@ -509,6 +527,12 @@ static struct aa_profile *unpack_profile(struct aa_ext *e)
 	(void) unpack_str(e, &profile->rename, "rename");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* attachment string is optional */
+	(void) unpack_str(e, &profile->attach, "attach");
+
+>>>>>>> v3.18
 =======
 	/* attachment string is optional */
 	(void) unpack_str(e, &profile->attach, "attach");
@@ -534,6 +558,7 @@ static struct aa_profile *unpack_profile(struct aa_ext *e)
 	if (!unpack_u32(e, &tmp, NULL))
 		goto fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tmp)
 		profile->flags |= PFLAG_HAT;
 	if (!unpack_u32(e, &tmp, NULL))
@@ -541,6 +566,8 @@ static struct aa_profile *unpack_profile(struct aa_ext *e)
 	if (tmp)
 		profile->mode = APPARMOR_COMPLAIN;
 =======
+=======
+>>>>>>> v3.18
 	if (tmp & PACKED_FLAG_HAT)
 		profile->flags |= PFLAG_HAT;
 	if (!unpack_u32(e, &tmp, NULL))
@@ -551,6 +578,9 @@ static struct aa_profile *unpack_profile(struct aa_ext *e)
 		profile->mode = APPARMOR_KILL;
 	else if (tmp == PACKED_MODE_UNCONFINED)
 		profile->mode = APPARMOR_UNCONFINED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!unpack_u32(e, &tmp, NULL))
 		goto fail;
@@ -611,9 +641,12 @@ static struct aa_profile *unpack_profile(struct aa_ext *e)
 			profile->policy.dfa = NULL;
 			goto fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (!profile->policy.dfa) {
 			error = -EPROTO;
 			goto fail;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -658,7 +691,11 @@ fail:
 		name = "unknown";
 	audit_iface(profile, name, "failed to unpack profile", e, error);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aa_put_profile(profile);
+=======
+	aa_free_profile(profile);
+>>>>>>> v3.18
 =======
 	aa_free_profile(profile);
 >>>>>>> v3.18
@@ -670,6 +707,10 @@ fail:
  * verify_head - unpack serialized stream header
  * @e: serialized data read head (NOT NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @required: whether the header is required or optional
+>>>>>>> v3.18
 =======
  * @required: whether the header is required or optional
 >>>>>>> v3.18
@@ -677,6 +718,7 @@ fail:
  *
  * Returns: error or 0 if header is good
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int verify_header(struct aa_ext *e, const char **ns)
 {
@@ -698,6 +740,8 @@ static int verify_header(struct aa_ext *e, const char **ns)
 	if (!unpack_str(e, ns, "namespace"))
 		*ns = NULL;
 =======
+=======
+>>>>>>> v3.18
 static int verify_header(struct aa_ext *e, int required, const char **ns)
 {
 	int error = -EPROTONOSUPPORT;
@@ -728,6 +772,9 @@ static int verify_header(struct aa_ext *e, int required, const char **ns)
 		else if (!*ns)
 			*ns = name;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -739,7 +786,11 @@ static bool verify_xindex(int xindex, int table_size)
 	xtype = xindex & AA_X_TYPE_MASK;
 	index = xindex & AA_X_INDEX_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xtype == AA_X_TABLE && index >= table_size)
+=======
+	if (xtype == AA_X_TABLE && index > table_size)
+>>>>>>> v3.18
 =======
 	if (xtype == AA_X_TABLE && index > table_size)
 >>>>>>> v3.18
@@ -782,6 +833,7 @@ static int verify_profile(struct aa_profile *profile)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * aa_unpack - unpack packed binary profile data loaded from user space
  * @udata: user data copied to kmem  (NOT NULL)
@@ -795,6 +847,8 @@ static int verify_profile(struct aa_profile *profile)
 struct aa_profile *aa_unpack(void *udata, size_t size, const char **ns)
 {
 =======
+=======
+>>>>>>> v3.18
 void aa_load_ent_free(struct aa_load_ent *ent)
 {
 	if (ent) {
@@ -829,6 +883,9 @@ struct aa_load_ent *aa_load_ent_alloc(void)
 int aa_unpack(void *udata, size_t size, struct list_head *lh, const char **ns)
 {
 	struct aa_load_ent *tmp, *ent;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct aa_profile *profile = NULL;
 	int error;
@@ -838,6 +895,7 @@ int aa_unpack(void *udata, size_t size, struct list_head *lh, const char **ns)
 		.pos = udata,
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	error = verify_header(&e, ns);
 	if (error)
@@ -856,6 +914,8 @@ int aa_unpack(void *udata, size_t size, struct list_head *lh, const char **ns)
 	/* return refcount */
 	return profile;
 =======
+=======
+>>>>>>> v3.18
 	*ns = NULL;
 	while (e.pos < e.end) {
 		void *start;
@@ -901,5 +961,8 @@ fail:
 	}
 
 	return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -33,8 +33,14 @@
 #include "squashfs.h"
 #include "decompressor.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void *zlib_init(struct squashfs_sb_info *dummy, void *buff, int len)
+=======
+#include "page_actor.h"
+
+static void *zlib_init(struct squashfs_sb_info *dummy, void *buff)
+>>>>>>> v3.18
 =======
 #include "page_actor.h"
 
@@ -68,6 +74,7 @@ static void zlib_free(void *strm)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int zlib_uncompress(struct squashfs_sb_info *msblk, void **buffer,
 	struct buffer_head **bh, int b, int offset, int length, int srclength,
 	int pages)
@@ -80,6 +87,8 @@ static int zlib_uncompress(struct squashfs_sb_info *msblk, void **buffer,
 
 	stream->avail_out = 0;
 =======
+=======
+>>>>>>> v3.18
 static int zlib_uncompress(struct squashfs_sb_info *msblk, void *strm,
 	struct buffer_head **bh, int b, int offset, int length,
 	struct squashfs_page_actor *output)
@@ -89,6 +98,9 @@ static int zlib_uncompress(struct squashfs_sb_info *msblk, void *strm,
 
 	stream->avail_out = PAGE_CACHE_SIZE;
 	stream->next_out = squashfs_first_page(output);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	stream->avail_in = 0;
 
@@ -97,10 +109,13 @@ static int zlib_uncompress(struct squashfs_sb_info *msblk, void *strm,
 			int avail = min(length, msblk->devblksize - offset);
 			length -= avail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			wait_on_buffer(bh[k]);
 			if (!buffer_uptodate(bh[k]))
 				goto release_mutex;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			stream->next_in = bh[k]->b_data + offset;
@@ -109,14 +124,20 @@ static int zlib_uncompress(struct squashfs_sb_info *msblk, void *strm,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (stream->avail_out == 0 && page < pages) {
 			stream->next_out = buffer[page++];
 			stream->avail_out = PAGE_CACHE_SIZE;
 =======
+=======
+>>>>>>> v3.18
 		if (stream->avail_out == 0) {
 			stream->next_out = squashfs_next_page(output);
 			if (stream->next_out != NULL)
 				stream->avail_out = PAGE_CACHE_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -124,10 +145,15 @@ static int zlib_uncompress(struct squashfs_sb_info *msblk, void *strm,
 			zlib_err = zlib_inflateInit(stream);
 			if (zlib_err != Z_OK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ERROR("zlib_inflateInit returned unexpected "
 					"result 0x%x, srclength %d\n",
 					zlib_err, srclength);
 				goto release_mutex;
+=======
+				squashfs_finish_page(output);
+				goto out;
+>>>>>>> v3.18
 =======
 				squashfs_finish_page(output);
 				goto out;
@@ -142,6 +168,7 @@ static int zlib_uncompress(struct squashfs_sb_info *msblk, void *strm,
 			put_bh(bh[k++]);
 	} while (zlib_err == Z_OK);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (zlib_err != Z_STREAM_END) {
 		ERROR("zlib_inflate error, data probably corrupt\n");
@@ -167,6 +194,8 @@ release_mutex:
 	mutex_unlock(&msblk->read_data_mutex);
 
 =======
+=======
+>>>>>>> v3.18
 	squashfs_finish_page(output);
 
 	if (zlib_err != Z_STREAM_END)
@@ -182,6 +211,9 @@ release_mutex:
 	return stream->total_out;
 
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (; k < b; k++)
 		put_bh(bh[k]);

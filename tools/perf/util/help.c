@@ -23,8 +23,13 @@ static void clean_cmdnames(struct cmdnames *cmds)
 
 	for (i = 0; i < cmds->cnt; ++i)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(cmds->names[i]);
 	free(cmds->names);
+=======
+		zfree(&cmds->names[i]);
+	zfree(&cmds->names);
+>>>>>>> v3.18
 =======
 		zfree(&cmds->names[i]);
 	zfree(&cmds->names);
@@ -269,9 +274,14 @@ static void add_cmd_list(struct cmdnames *cmds, struct cmdnames *old)
 	for (i = 0; i < old->cnt; i++)
 		cmds->names[cmds->cnt++] = old->names[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(old->names);
 	old->cnt = 0;
 	old->names = NULL;
+=======
+	zfree(&old->names);
+	old->cnt = 0;
+>>>>>>> v3.18
 =======
 	zfree(&old->names);
 	old->cnt = 0;

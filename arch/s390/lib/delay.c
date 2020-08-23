@@ -44,9 +44,14 @@ static void __udelay_disabled(unsigned long long usecs)
 	do {
 		set_clock_comparator(end);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vtime_stop_cpu();
 		local_irq_disable();
 	} while (get_tod_clock() < end);
+=======
+		enabled_wait();
+	} while (get_tod_clock_fast() < end);
+>>>>>>> v3.18
 =======
 		enabled_wait();
 	} while (get_tod_clock_fast() < end);
@@ -62,7 +67,11 @@ static void __udelay_enabled(unsigned long long usecs)
 	u64 clock_saved, end;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	end = get_tod_clock() + (usecs << 12);
+=======
+	end = get_tod_clock_fast() + (usecs << 12);
+>>>>>>> v3.18
 =======
 	end = get_tod_clock_fast() + (usecs << 12);
 >>>>>>> v3.18
@@ -73,16 +82,22 @@ static void __udelay_enabled(unsigned long long usecs)
 			set_clock_comparator(end);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vtime_stop_cpu();
 		local_irq_disable();
 		if (clock_saved)
 			local_tick_enable(clock_saved);
 	} while (get_tod_clock() < end);
 =======
+=======
+>>>>>>> v3.18
 		enabled_wait();
 		if (clock_saved)
 			local_tick_enable(clock_saved);
 	} while (get_tod_clock_fast() < end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -128,8 +143,13 @@ void udelay_simple(unsigned long long usecs)
 	u64 end;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	end = get_tod_clock() + (usecs << 12);
 	while (get_tod_clock() < end)
+=======
+	end = get_tod_clock_fast() + (usecs << 12);
+	while (get_tod_clock_fast() < end)
+>>>>>>> v3.18
 =======
 	end = get_tod_clock_fast() + (usecs << 12);
 	while (get_tod_clock_fast() < end)
@@ -144,15 +164,21 @@ void __ndelay(unsigned long long nsecs)
 	nsecs <<= 9;
 	do_div(nsecs, 125);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	end = get_tod_clock() + nsecs;
 	if (nsecs & ~0xfffUL)
 		__udelay(nsecs >> 12);
 	while (get_tod_clock() < end)
 =======
+=======
+>>>>>>> v3.18
 	end = get_tod_clock_fast() + nsecs;
 	if (nsecs & ~0xfffUL)
 		__udelay(nsecs >> 12);
 	while (get_tod_clock_fast() < end)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		barrier();
 }

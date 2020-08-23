@@ -310,9 +310,14 @@ static struct uvc_control_info uvc_ctrls[] = {
 		.index		= 12,
 		.size		= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags		= UVC_CTRL_FLAG_SET_CUR | UVC_CTRL_FLAG_GET_MIN
 				| UVC_CTRL_FLAG_GET_MAX | UVC_CTRL_FLAG_GET_RES
 				| UVC_CTRL_FLAG_GET_DEF
+=======
+		.flags		= UVC_CTRL_FLAG_SET_CUR
+				| UVC_CTRL_FLAG_GET_RANGE
+>>>>>>> v3.18
 =======
 		.flags		= UVC_CTRL_FLAG_SET_CUR
 				| UVC_CTRL_FLAG_GET_RANGE
@@ -397,7 +402,10 @@ static void uvc_ctrl_set_zoom(struct uvc_control_mapping *mapping,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static __s32 uvc_ctrl_get_rel_speed(struct uvc_control_mapping *mapping,
 	__u8 query, const __u8 *data)
 {
@@ -427,6 +435,9 @@ static void uvc_ctrl_set_rel_speed(struct uvc_control_mapping *mapping,
 	data[first+1] = min_t(int, abs(value), 0xff);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct uvc_control_mapping uvc_ctrl_mappings[] = {
 	{
@@ -702,7 +713,11 @@ static struct uvc_control_mapping uvc_ctrl_mappings[] = {
 		.offset		= 0,
 		.v4l2_type	= V4L2_CTRL_TYPE_INTEGER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.data_type	= UVC_CTRL_DATA_TYPE_UNSIGNED,
+=======
+		.data_type	= UVC_CTRL_DATA_TYPE_SIGNED,
+>>>>>>> v3.18
 =======
 		.data_type	= UVC_CTRL_DATA_TYPE_SIGNED,
 >>>>>>> v3.18
@@ -716,8 +731,11 @@ static struct uvc_control_mapping uvc_ctrl_mappings[] = {
 		.offset		= 32,
 		.v4l2_type	= V4L2_CTRL_TYPE_INTEGER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.data_type	= UVC_CTRL_DATA_TYPE_UNSIGNED,
 =======
+=======
+>>>>>>> v3.18
 		.data_type	= UVC_CTRL_DATA_TYPE_SIGNED,
 	},
 	{
@@ -743,6 +761,9 @@ static struct uvc_control_mapping uvc_ctrl_mappings[] = {
 		.data_type	= UVC_CTRL_DATA_TYPE_SIGNED,
 		.get		= uvc_ctrl_get_rel_speed,
 		.set		= uvc_ctrl_set_rel_speed,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{
@@ -1865,7 +1886,11 @@ done:
  *   Exposure Time).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int uvc_ctrl_resume_device(struct uvc_device *dev)
+=======
+int uvc_ctrl_restore_values(struct uvc_device *dev)
+>>>>>>> v3.18
 =======
 int uvc_ctrl_restore_values(struct uvc_device *dev)
 >>>>>>> v3.18
@@ -2013,9 +2038,12 @@ int uvc_ctrl_add_mapping(struct uvc_video_chain *chain,
 		return -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ctrl->info.size < mapping->size)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (mutex_lock_interruptible(&chain->ctrl_mutex))

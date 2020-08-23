@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2007 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2007 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -74,6 +84,10 @@
 #define __iwl_op_mode_h__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/netdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/netdevice.h>
 >>>>>>> v3.18
@@ -108,7 +122,11 @@ struct iwl_cfg;
  *	   capabilities advertized by the fw file (in TLV format).
  *	2) The driver layer starts the op_mode (ops->start)
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	3) The op_mode registers registers mac80211
+=======
+ *	3) The op_mode registers mac80211
+>>>>>>> v3.18
 =======
  *	3) The op_mode registers mac80211
 >>>>>>> v3.18
@@ -131,14 +149,20 @@ struct iwl_cfg;
  *	May sleep
  * @rx: Rx notification to the op_mode. rxb is the Rx buffer itself. Cmd is the
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	HCMD the this Rx responds to.
  *	This callback may sleep, it is called from a threaded IRQ handler.
 =======
+=======
+>>>>>>> v3.18
  *	HCMD this Rx responds to. Can't sleep.
  * @napi_add: NAPI initialisation. The transport is fully responsible for NAPI,
  *	but the higher layers need to know about it (in particular mac80211 to
  *	to able to call the right NAPI RX functions); this function is needed
  *	to eventually call netif_napi_add() with higher layer involvement.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @queue_full: notifies that a HW queue is full.
  *	Must be atomic and called with BH disabled.
@@ -146,7 +170,12 @@ struct iwl_cfg;
  *	Must be atomic and called with BH disabled.
  * @hw_rf_kill:notifies of a change in the HW rf kill switch. True means that
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	the radio is killed. May sleep.
+=======
+ *	the radio is killed. Return %true if the device should be stopped by
+ *	the transport immediately after the call. May sleep.
+>>>>>>> v3.18
 =======
  *	the radio is killed. Return %true if the device should be stopped by
  *	the transport immediately after the call. May sleep.
@@ -163,6 +192,11 @@ struct iwl_cfg;
  *	May sleep
  * @wimax_active: invoked when WiMax becomes active. May sleep
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @enter_d0i3: configure the fw to enter d0i3. May sleep.
+ * @exit_d0i3: configure the fw to exit d0i3. May sleep.
+>>>>>>> v3.18
 =======
  * @enter_d0i3: configure the fw to enter d0i3. May sleep.
  * @exit_d0i3: configure the fw to exit d0i3. May sleep.
@@ -177,10 +211,13 @@ struct iwl_op_mode_ops {
 	int (*rx)(struct iwl_op_mode *op_mode, struct iwl_rx_cmd_buffer *rxb,
 		  struct iwl_device_cmd *cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*queue_full)(struct iwl_op_mode *op_mode, int queue);
 	void (*queue_not_full)(struct iwl_op_mode *op_mode, int queue);
 	void (*hw_rf_kill)(struct iwl_op_mode *op_mode, bool state);
 =======
+=======
+>>>>>>> v3.18
 	void (*napi_add)(struct iwl_op_mode *op_mode,
 			 struct napi_struct *napi,
 			 struct net_device *napi_dev,
@@ -189,6 +226,9 @@ struct iwl_op_mode_ops {
 	void (*queue_full)(struct iwl_op_mode *op_mode, int queue);
 	void (*queue_not_full)(struct iwl_op_mode *op_mode, int queue);
 	bool (*hw_rf_kill)(struct iwl_op_mode *op_mode, bool state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void (*free_skb)(struct iwl_op_mode *op_mode, struct sk_buff *skb);
 	void (*nic_error)(struct iwl_op_mode *op_mode);
@@ -196,6 +236,11 @@ struct iwl_op_mode_ops {
 	void (*nic_config)(struct iwl_op_mode *op_mode);
 	void (*wimax_active)(struct iwl_op_mode *op_mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*enter_d0i3)(struct iwl_op_mode *op_mode);
+	int (*exit_d0i3)(struct iwl_op_mode *op_mode);
+>>>>>>> v3.18
 =======
 	int (*enter_d0i3)(struct iwl_op_mode *op_mode);
 	int (*exit_d0i3)(struct iwl_op_mode *op_mode);
@@ -208,6 +253,7 @@ void iwl_opmode_deregister(const char *name);
 /**
  * struct iwl_op_mode - operational mode
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * This holds an implementation of the mac80211 / fw API.
  *
@@ -217,12 +263,17 @@ struct iwl_op_mode {
 	const struct iwl_op_mode_ops *ops;
 	const struct iwl_trans *trans;
 =======
+=======
+>>>>>>> v3.18
  * @ops: pointer to its own ops
  *
  * This holds an implementation of the mac80211 / fw API.
  */
 struct iwl_op_mode {
 	const struct iwl_op_mode_ops *ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	char op_mode_specific[0] __aligned(sizeof(void *));
@@ -239,7 +290,10 @@ static inline int iwl_op_mode_rx(struct iwl_op_mode *op_mode,
 				  struct iwl_device_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return op_mode->ops->rx(op_mode, rxb, cmd);
@@ -258,17 +312,23 @@ static inline void iwl_op_mode_queue_not_full(struct iwl_op_mode *op_mode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void iwl_op_mode_hw_rf_kill(struct iwl_op_mode *op_mode,
 					  bool state)
 {
 	might_sleep();
 	op_mode->ops->hw_rf_kill(op_mode, state);
 =======
+=======
+>>>>>>> v3.18
 static inline bool __must_check
 iwl_op_mode_hw_rf_kill(struct iwl_op_mode *op_mode, bool state)
 {
 	might_sleep();
 	return op_mode->ops->hw_rf_kill(op_mode, state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -301,7 +361,10 @@ static inline void iwl_op_mode_wimax_active(struct iwl_op_mode *op_mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int iwl_op_mode_enter_d0i3(struct iwl_op_mode *op_mode)
 {
 	might_sleep();
@@ -331,5 +394,8 @@ static inline void iwl_op_mode_napi_add(struct iwl_op_mode *op_mode,
 	op_mode->ops->napi_add(op_mode, napi, napi_dev, poll, weight);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __iwl_op_mode_h__ */

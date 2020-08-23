@@ -26,7 +26,12 @@ befs_check_inode(struct super_block *sb, befs_inode * raw_inode,
 	if (magic1 != BEFS_INODE_MAGIC1) {
 		befs_error(sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   "Inode has a bad magic header - inode = %lu", inode);
+=======
+			   "Inode has a bad magic header - inode = %lu",
+			   (unsigned long)inode);
+>>>>>>> v3.18
 =======
 			   "Inode has a bad magic header - inode = %lu",
 			   (unsigned long)inode);
@@ -40,8 +45,13 @@ befs_check_inode(struct super_block *sb, befs_inode * raw_inode,
 	if (inode != iaddr2blockno(sb, &ino_num)) {
 		befs_error(sb, "inode blocknr field disagrees with vfs "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   "VFS: %lu, Inode %lu",
 			   inode, iaddr2blockno(sb, &ino_num));
+=======
+			   "VFS: %lu, Inode %lu", (unsigned long)
+			   inode, (unsigned long)iaddr2blockno(sb, &ino_num));
+>>>>>>> v3.18
 =======
 			   "VFS: %lu, Inode %lu", (unsigned long)
 			   inode, (unsigned long)iaddr2blockno(sb, &ino_num));
@@ -55,7 +65,12 @@ befs_check_inode(struct super_block *sb, befs_inode * raw_inode,
 
 	if (!(flags & BEFS_INODE_IN_USE)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		befs_error(sb, "inode is not used - inode = %lu", inode);
+=======
+		befs_error(sb, "inode is not used - inode = %lu",
+			   (unsigned long)inode);
+>>>>>>> v3.18
 =======
 		befs_error(sb, "inode is not used - inode = %lu",
 			   (unsigned long)inode);

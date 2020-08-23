@@ -41,6 +41,10 @@
 #define VIRTIO_BLK_F_TOPOLOGY	10	/* Topology information is available */
 #define VIRTIO_BLK_F_CONFIG_WCE	11	/* Writeback mode available in config */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define VIRTIO_BLK_F_MQ		12	/* support more than one vq */
+>>>>>>> v3.18
 =======
 #define VIRTIO_BLK_F_MQ		12	/* support more than one vq */
 >>>>>>> v3.18
@@ -82,11 +86,17 @@ struct virtio_blk_config {
 	/* writeback mode (if VIRTIO_BLK_F_CONFIG_WCE) */
 	__u8 wce;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	__u8 unused;
 
 	/* number of vqs, only available when VIRTIO_BLK_F_MQ is set */
 	__u16 num_queues;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__((packed));
 

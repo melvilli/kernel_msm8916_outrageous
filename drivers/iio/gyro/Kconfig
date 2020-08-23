@@ -2,6 +2,11 @@
 # IIO Digital Gyroscope Sensor drivers configuration
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# When adding new entries keep the list in alphabetical order
+
+>>>>>>> v3.18
 =======
 # When adding new entries keep the list in alphabetical order
 
@@ -16,7 +21,10 @@ config ADIS16080
 	  Rate Gyroscope with SPI.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ADIS16130
 	tristate "Analog Devices ADIS16130 High Precision Angular Rate Sensor driver"
 	depends on SPI
@@ -24,6 +32,9 @@ config ADIS16130
 	  Say yes here to build support for Analog Devices ADIS16130 High Precision
 	  Angular Rate Sensor driver.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ADIS16136
 	tristate "Analog devices ADIS16136 and similar gyroscopes driver"
@@ -35,7 +46,10 @@ config ADIS16136
 	  ADIS16136 gyroscope devices.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ADIS16260
 	tristate "Analog Devices ADIS16260 Digital Gyroscope Sensor SPI driver"
 	depends on SPI
@@ -48,6 +62,9 @@ config ADIS16260
 	  This driver can also be built as a module.  If so, the module
 	  will be called adis16260.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ADXRS450
 	tristate "Analog Devices ADXRS450/3 Digital Output Gyroscope SPI driver"
@@ -60,7 +77,10 @@ config ADXRS450
 	  will be called adxrs450.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BMG160
 	tristate "BOSCH BMG160 Gyro Sensor"
 	depends on I2C
@@ -72,6 +92,9 @@ config BMG160
 	  This driver can also be built as a module.  If so, the module
 	  will be called bmg160.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HID_SENSOR_GYRO_3D
 	depends on HID_SENSOR_HUB
@@ -92,7 +115,10 @@ config IIO_ST_GYRO_3AXIS
 	select IIO_ST_GYRO_SPI_3AXIS if (SPI_MASTER)
 	select IIO_TRIGGERED_BUFFER if (IIO_BUFFER)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select IIO_ST_GYRO_BUFFER if (IIO_TRIGGERED_BUFFER)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -100,8 +126,13 @@ config IIO_ST_GYRO_3AXIS
 	  L3G4200D, LSM330DL, L3GD20, LSM330DLC, L3G4IS, LSM330.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  This driver can also be built as a module. If so, will be created
 	  these modules:
+=======
+	  This driver can also be built as a module. If so, these modules
+	  will be created:
+>>>>>>> v3.18
 =======
 	  This driver can also be built as a module. If so, these modules
 	  will be created:

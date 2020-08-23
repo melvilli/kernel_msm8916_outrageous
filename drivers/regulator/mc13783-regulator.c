@@ -259,6 +259,7 @@ static struct mc13xxx_regulator mc13783_regulators[] = {
 	MC13783_FIXED_DEFINE(REG, VAUDIO, REGULATORMODE0, mc13783_vaudio_val),
 	MC13783_FIXED_DEFINE(REG, VIOHI, REGULATORMODE0, mc13783_viohi_val),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MC13783_DEFINE_REGU(VIOLO, REGULATORMODE0, REGULATORSETTING0,	\
 			    mc13783_violo_val),
 	MC13783_DEFINE_REGU(VDIG, REGULATORMODE0, REGULATORSETTING0,	\
@@ -288,6 +289,8 @@ static struct mc13xxx_regulator mc13783_regulators[] = {
 			    mc13783_vmmc_val),
 	MC13783_DEFINE_REGU(VMMC2, REGULATORMODE1, REGULATORSETTING1,	\
 =======
+=======
+>>>>>>> v3.18
 	MC13783_DEFINE_REGU(VIOLO, REGULATORMODE0, REGULATORSETTING0,
 			    mc13783_violo_val),
 	MC13783_DEFINE_REGU(VDIG, REGULATORMODE0, REGULATORSETTING0,
@@ -316,6 +319,9 @@ static struct mc13xxx_regulator mc13783_regulators[] = {
 	MC13783_DEFINE_REGU(VMMC1, REGULATORMODE1, REGULATORSETTING1,
 			    mc13783_vmmc_val),
 	MC13783_DEFINE_REGU(VMMC2, REGULATORMODE1, REGULATORSETTING1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    mc13783_vmmc_val),
 	MC13783_GPO_DEFINE(REG, GPO1, POWERMISC, mc13783_gpo_val),
@@ -432,7 +438,11 @@ static int mc13783_regulator_probe(struct platform_device *pdev)
 	struct mc13xxx_regulator_init_data *mc13xxx_data;
 	struct regulator_config config = { };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, ret, num_regulators;
+=======
+	int i, num_regulators;
+>>>>>>> v3.18
 =======
 	int i, num_regulators;
 >>>>>>> v3.18
@@ -480,6 +490,7 @@ static int mc13783_regulator_probe(struct platform_device *pdev)
 		config.of_node = node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->regulators[i] = regulator_register(desc, &config);
 		if (IS_ERR(priv->regulators[i])) {
 			dev_err(&pdev->dev, "failed to register regulator %s\n",
@@ -487,17 +498,23 @@ static int mc13783_regulator_probe(struct platform_device *pdev)
 			ret = PTR_ERR(priv->regulators[i]);
 			goto err;
 =======
+=======
+>>>>>>> v3.18
 		priv->regulators[i] = devm_regulator_register(&pdev->dev, desc,
 							      &config);
 		if (IS_ERR(priv->regulators[i])) {
 			dev_err(&pdev->dev, "failed to register regulator %s\n",
 				mc13783_regulators[i].desc.name);
 			return PTR_ERR(priv->regulators[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 err:
 	while (--i >= 0)
@@ -519,6 +536,8 @@ static int mc13783_regulator_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver mc13783_regulator_driver = {
@@ -527,7 +546,10 @@ static struct platform_driver mc13783_regulator_driver = {
 		.owner	= THIS_MODULE,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= mc13783_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.probe		= mc13783_regulator_probe,

@@ -50,7 +50,11 @@ void xics_update_irq_servers(void)
 	struct device_node *np;
 	u32 ilen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *ireg;
+=======
+	const __be32 *ireg;
+>>>>>>> v3.18
 =======
 	const __be32 *ireg;
 >>>>>>> v3.18
@@ -80,8 +84,13 @@ void xics_update_irq_servers(void)
 	 */
 	for (j = 0; j < i; j += 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ireg[j] == hcpuid) {
 			xics_default_distrib_server = ireg[j+1];
+=======
+		if (be32_to_cpu(ireg[j]) == hcpuid) {
+			xics_default_distrib_server = be32_to_cpu(ireg[j+1]);
+>>>>>>> v3.18
 =======
 		if (be32_to_cpu(ireg[j]) == hcpuid) {
 			xics_default_distrib_server = be32_to_cpu(ireg[j+1]);
@@ -393,7 +402,11 @@ static void __init xics_get_server_size(void)
 {
 	struct device_node *np;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *isize;
+=======
+	const __be32 *isize;
+>>>>>>> v3.18
 =======
 	const __be32 *isize;
 >>>>>>> v3.18
@@ -408,7 +421,11 @@ static void __init xics_get_server_size(void)
 	if (!isize)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xics_interrupt_server_size = *isize;
+=======
+	xics_interrupt_server_size = be32_to_cpu(*isize);
+>>>>>>> v3.18
 =======
 	xics_interrupt_server_size = be32_to_cpu(*isize);
 >>>>>>> v3.18

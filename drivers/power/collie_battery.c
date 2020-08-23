@@ -288,7 +288,11 @@ static struct gpio collie_batt_gpios[] = {
 
 #ifdef CONFIG_PM
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int collie_bat_suspend(struct ucb1x00_dev *dev, pm_message_t state)
+=======
+static int collie_bat_suspend(struct ucb1x00_dev *dev)
+>>>>>>> v3.18
 =======
 static int collie_bat_suspend(struct ucb1x00_dev *dev)
 >>>>>>> v3.18

@@ -42,8 +42,11 @@
 #include <linux/input.h>
 #include <linux/input/sparse-keymap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <acpi/acpi_drivers.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <acpi/video.h>
@@ -102,7 +105,11 @@ enum acer_wmi_event_ids {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct key_entry acer_wmi_keymap[] = {
+=======
+static const struct key_entry acer_wmi_keymap[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct key_entry acer_wmi_keymap[] __initconst = {
 >>>>>>> v3.18
@@ -304,7 +311,11 @@ struct quirk_entry {
 static struct quirk_entry *quirks;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void set_quirks(void)
+=======
+static void __init set_quirks(void)
+>>>>>>> v3.18
 =======
 static void __init set_quirks(void)
 >>>>>>> v3.18
@@ -320,7 +331,11 @@ static void __init set_quirks(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dmi_matched(const struct dmi_system_id *dmi)
+=======
+static int __init dmi_matched(const struct dmi_system_id *dmi)
+>>>>>>> v3.18
 =======
 static int __init dmi_matched(const struct dmi_system_id *dmi)
 >>>>>>> v3.18
@@ -355,7 +370,11 @@ static struct quirk_entry quirk_lenovo_ideapad_s205 = {
 
 /* The Aspire One has a dummy ACPI-WMI interface - disable it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dmi_system_id acer_blacklist[] = {
+=======
+static const struct dmi_system_id acer_blacklist[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct dmi_system_id acer_blacklist[] __initconst = {
 >>>>>>> v3.18
@@ -377,7 +396,11 @@ static const struct dmi_system_id acer_blacklist[] __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dmi_system_id acer_quirks[] = {
+=======
+static const struct dmi_system_id acer_quirks[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct dmi_system_id acer_quirks[] __initconst = {
 >>>>>>> v3.18
@@ -556,7 +579,12 @@ static const struct dmi_system_id acer_quirks[] __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int video_set_backlight_video_vendor(const struct dmi_system_id *d)
+=======
+static int __init
+video_set_backlight_video_vendor(const struct dmi_system_id *d)
+>>>>>>> v3.18
 =======
 static int __init
 video_set_backlight_video_vendor(const struct dmi_system_id *d)
@@ -568,7 +596,11 @@ video_set_backlight_video_vendor(const struct dmi_system_id *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct dmi_system_id video_vendor_dmi_table[] = {
+=======
+static const struct dmi_system_id video_vendor_dmi_table[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct dmi_system_id video_vendor_dmi_table[] __initconst = {
 >>>>>>> v3.18
@@ -606,7 +638,10 @@ static const struct dmi_system_id video_vendor_dmi_table[] __initconst = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.callback = video_set_backlight_video_vendor,
 		.ident = "Acer Aspire 5741",
 		.matches = {
@@ -615,6 +650,9 @@ static const struct dmi_system_id video_vendor_dmi_table[] __initconst = {
 		},
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Note no video_set_backlight_video_vendor, we must use the
@@ -631,7 +669,11 @@ static const struct dmi_system_id video_vendor_dmi_table[] __initconst = {
 
 /* Find which quirks are needed for a particular vendor/ model pair */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void find_quirks(void)
+=======
+static void __init find_quirks(void)
+>>>>>>> v3.18
 =======
 static void __init find_quirks(void)
 >>>>>>> v3.18
@@ -802,7 +844,11 @@ static acpi_status AMW0_set_u32(u32 value, u32 cap)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static acpi_status AMW0_find_mailled(void)
+=======
+static acpi_status __init AMW0_find_mailled(void)
+>>>>>>> v3.18
 =======
 static acpi_status __init AMW0_find_mailled(void)
 >>>>>>> v3.18
@@ -838,9 +884,15 @@ static acpi_status __init AMW0_find_mailled(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int AMW0_set_cap_acpi_check_device_found;
 
 static acpi_status AMW0_set_cap_acpi_check_device_cb(acpi_handle handle,
+=======
+static int AMW0_set_cap_acpi_check_device_found __initdata;
+
+static acpi_status __init AMW0_set_cap_acpi_check_device_cb(acpi_handle handle,
+>>>>>>> v3.18
 =======
 static int AMW0_set_cap_acpi_check_device_found __initdata;
 
@@ -853,7 +905,11 @@ static acpi_status __init AMW0_set_cap_acpi_check_device_cb(acpi_handle handle,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct acpi_device_id norfkill_ids[] = {
+=======
+static const struct acpi_device_id norfkill_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct acpi_device_id norfkill_ids[] __initconst = {
 >>>>>>> v3.18
@@ -865,7 +921,11 @@ static const struct acpi_device_id norfkill_ids[] __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int AMW0_set_cap_acpi_check_device(void)
+=======
+static int __init AMW0_set_cap_acpi_check_device(void)
+>>>>>>> v3.18
 =======
 static int __init AMW0_set_cap_acpi_check_device(void)
 >>>>>>> v3.18
@@ -879,7 +939,11 @@ static int __init AMW0_set_cap_acpi_check_device(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static acpi_status AMW0_set_capabilities(void)
+=======
+static acpi_status __init AMW0_set_capabilities(void)
+>>>>>>> v3.18
 =======
 static acpi_status __init AMW0_set_capabilities(void)
 >>>>>>> v3.18
@@ -1259,7 +1323,11 @@ static acpi_status wmid_v2_set_u32(u32 value, u32 cap)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void type_aa_dmi_decode(const struct dmi_header *header, void *dummy)
+=======
+static void __init type_aa_dmi_decode(const struct dmi_header *header, void *d)
+>>>>>>> v3.18
 =======
 static void __init type_aa_dmi_decode(const struct dmi_header *header, void *d)
 >>>>>>> v3.18
@@ -1288,7 +1356,11 @@ static void __init type_aa_dmi_decode(const struct dmi_header *header, void *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static acpi_status WMID_set_capabilities(void)
+=======
+static acpi_status __init WMID_set_capabilities(void)
+>>>>>>> v3.18
 =======
 static acpi_status __init WMID_set_capabilities(void)
 >>>>>>> v3.18
@@ -1741,7 +1813,11 @@ static ssize_t show_bool_threeg(struct device *dev,
 	acpi_status status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("This threeg sysfs will be removed in 2012 - used by: %s\n",
+=======
+	pr_info("This threeg sysfs will be removed in 2014 - used by: %s\n",
+>>>>>>> v3.18
 =======
 	pr_info("This threeg sysfs will be removed in 2014 - used by: %s\n",
 >>>>>>> v3.18
@@ -1758,7 +1834,11 @@ static ssize_t set_bool_threeg(struct device *dev,
 	u32 tmp = simple_strtoul(buf, NULL, 10);
 	acpi_status status = set_u32(tmp, ACER_CAP_THREEG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("This threeg sysfs will be removed in 2012 - used by: %s\n",
+=======
+	pr_info("This threeg sysfs will be removed in 2014 - used by: %s\n",
+>>>>>>> v3.18
 =======
 	pr_info("This threeg sysfs will be removed in 2014 - used by: %s\n",
 >>>>>>> v3.18
@@ -1774,7 +1854,11 @@ static ssize_t show_interface(struct device *dev, struct device_attribute *attr,
 	char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("This interface sysfs will be removed in 2012 - used by: %s\n",
+=======
+	pr_info("This interface sysfs will be removed in 2014 - used by: %s\n",
+>>>>>>> v3.18
 =======
 	pr_info("This interface sysfs will be removed in 2014 - used by: %s\n",
 >>>>>>> v3.18
@@ -1872,7 +1956,11 @@ static void acer_wmi_notify(u32 value, void *context)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static acpi_status
+=======
+static acpi_status __init
+>>>>>>> v3.18
 =======
 static acpi_status __init
 >>>>>>> v3.18
@@ -1910,7 +1998,11 @@ wmid3_set_lm_mode(struct lm_input_params *params,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int acer_wmi_enable_ec_raw(void)
+=======
+static int __init acer_wmi_enable_ec_raw(void)
+>>>>>>> v3.18
 =======
 static int __init acer_wmi_enable_ec_raw(void)
 >>>>>>> v3.18
@@ -1937,7 +2029,11 @@ static int __init acer_wmi_enable_ec_raw(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int acer_wmi_enable_lm(void)
+=======
+static int __init acer_wmi_enable_lm(void)
+>>>>>>> v3.18
 =======
 static int __init acer_wmi_enable_lm(void)
 >>>>>>> v3.18
@@ -1962,6 +2058,7 @@ static int __init acer_wmi_enable_lm(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACER_WMID_ACCEL_HID	"BST0001"
 
 static acpi_status __init acer_wmi_get_handle_cb(acpi_handle ah, u32 level,
@@ -1981,11 +2078,16 @@ static acpi_status __init acer_wmi_get_handle_cb(acpi_handle ah, u32 level,
 
 	return AE_CTRL_TERMINATE;
 =======
+=======
+>>>>>>> v3.18
 static acpi_status __init acer_wmi_get_handle_cb(acpi_handle ah, u32 level,
 						void *ctx, void **retval)
 {
 	*(acpi_handle *)retval = ah;
 	return AE_OK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2001,7 +2103,12 @@ static int __init acer_wmi_get_handle(const char *name, const char *prop,
 	status = acpi_get_devices(prop, acer_wmi_get_handle_cb,
 					(void *)name, &handle);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ACPI_SUCCESS(status) && handle) {
+=======
+
+	if (ACPI_SUCCESS(status)) {
+>>>>>>> v3.18
 =======
 
 	if (ACPI_SUCCESS(status)) {
@@ -2018,7 +2125,11 @@ static int __init acer_wmi_accel_setup(void)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = acer_wmi_get_handle("SENR", ACER_WMID_ACCEL_HID, &gsensor_handle);
+=======
+	err = acer_wmi_get_handle("SENR", "BST0001", &gsensor_handle);
+>>>>>>> v3.18
 =======
 	err = acer_wmi_get_handle("SENR", "BST0001", &gsensor_handle);
 >>>>>>> v3.18
@@ -2179,6 +2290,10 @@ static int acer_platform_remove(struct platform_device *device)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -2223,11 +2338,17 @@ static int acer_resume(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 #define acer_suspend	NULL
 #define acer_resume	NULL
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static SIMPLE_DEV_PM_OPS(acer_pm, acer_suspend, acer_resume);
@@ -2267,7 +2388,11 @@ static int remove_sysfs(struct platform_device *device)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int create_sysfs(void)
+=======
+static int __init create_sysfs(void)
+>>>>>>> v3.18
 =======
 static int __init create_sysfs(void)
 >>>>>>> v3.18
@@ -2300,7 +2425,11 @@ static void remove_debugfs(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int create_debugfs(void)
+=======
+static int __init create_debugfs(void)
+>>>>>>> v3.18
 =======
 static int __init create_debugfs(void)
 >>>>>>> v3.18
@@ -2391,7 +2520,11 @@ static int __init acer_wmi_init(void)
 	} else {
 		pr_info("Disabling ACPI video driver\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_video_unregister();
+=======
+		acpi_video_unregister_backlight();
+>>>>>>> v3.18
 =======
 		acpi_video_unregister_backlight();
 >>>>>>> v3.18
@@ -2416,16 +2549,22 @@ static int __init acer_wmi_init(void)
 		if (err)
 			return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = acer_wmi_accel_setup();
 		if (err && err != -ENODEV)
 			pr_warn("Cannot enable accelerometer\n");
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	acer_wmi_accel_setup();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = platform_driver_register(&acer_platform_driver);
 	if (err) {

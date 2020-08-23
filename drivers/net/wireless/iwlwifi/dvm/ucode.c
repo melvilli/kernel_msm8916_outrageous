@@ -3,7 +3,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -33,7 +37,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -140,8 +147,13 @@ int iwl_init_alive_start(struct iwl_priv *priv)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->cfg->bt_params &&
 	    priv->cfg->bt_params->advanced_bt_coexist) {
+=======
+	if (priv->lib->bt_params &&
+	    priv->lib->bt_params->advanced_bt_coexist) {
+>>>>>>> v3.18
 =======
 	if (priv->lib->bt_params &&
 	    priv->lib->bt_params->advanced_bt_coexist) {
@@ -168,8 +180,13 @@ int iwl_init_alive_start(struct iwl_priv *priv)
 	 * so prepare the value now.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->cfg->need_temp_offset_calib) {
 		if (priv->cfg->temp_offset_v2)
+=======
+	if (priv->lib->need_temp_offset_calib) {
+		if (priv->lib->temp_offset_v2)
+>>>>>>> v3.18
 =======
 	if (priv->lib->need_temp_offset_calib) {
 		if (priv->lib->temp_offset_v2)
@@ -191,7 +208,11 @@ static int iwl_send_wimax_coex(struct iwl_priv *priv)
 
 	return iwl_dvm_send_cmd_pdu(priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				COEX_PRIORITY_TABLE_CMD, CMD_SYNC,
+=======
+				COEX_PRIORITY_TABLE_CMD, 0,
+>>>>>>> v3.18
 =======
 				COEX_PRIORITY_TABLE_CMD, 0,
 >>>>>>> v3.18
@@ -228,7 +249,11 @@ void iwl_send_prio_tbl(struct iwl_priv *priv)
 		sizeof(iwl_bt_prio_tbl));
 	if (iwl_dvm_send_cmd_pdu(priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				REPLY_BT_COEX_PRIO_TABLE, CMD_SYNC,
+=======
+				REPLY_BT_COEX_PRIO_TABLE, 0,
+>>>>>>> v3.18
 =======
 				REPLY_BT_COEX_PRIO_TABLE, 0,
 >>>>>>> v3.18
@@ -245,7 +270,11 @@ int iwl_send_bt_env(struct iwl_priv *priv, u8 action, u8 type)
 	env_cmd.type = type;
 	ret = iwl_dvm_send_cmd_pdu(priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       REPLY_BT_COEX_PROT_ENV, CMD_SYNC,
+=======
+			       REPLY_BT_COEX_PROT_ENV, 0,
+>>>>>>> v3.18
 =======
 			       REPLY_BT_COEX_PROT_ENV, 0,
 >>>>>>> v3.18
@@ -307,7 +336,11 @@ static int iwl_alive_notify(struct iwl_priv *priv)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!priv->cfg->no_xtal_calib) {
+=======
+	if (!priv->lib->no_xtal_calib) {
+>>>>>>> v3.18
 =======
 	if (!priv->lib->no_xtal_calib) {
 >>>>>>> v3.18
@@ -364,6 +397,7 @@ int iwl_load_ucode_wait_alive(struct iwl_priv *priv,
 	static const u8 alive_cmd[] = { REPLY_ALIVE };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	old_type = priv->cur_ucode;
 	priv->cur_ucode = ucode_type;
 	fw = iwl_get_ucode_image(priv, ucode_type);
@@ -374,6 +408,8 @@ int iwl_load_ucode_wait_alive(struct iwl_priv *priv,
 		return -EINVAL;
 
 =======
+=======
+>>>>>>> v3.18
 	fw = iwl_get_ucode_image(priv, ucode_type);
 	if (WARN_ON(!fw))
 		return -EINVAL;
@@ -382,6 +418,9 @@ int iwl_load_ucode_wait_alive(struct iwl_priv *priv,
 	priv->cur_ucode = ucode_type;
 	priv->ucode_loaded = false;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iwl_init_notification_wait(&priv->notif_wait, &alive_wait,
 				   alive_cmd, ARRAY_SIZE(alive_cmd),
@@ -435,7 +474,10 @@ static bool iwlagn_wait_calib(struct iwl_notif_wait_data *notif_wait,
 	struct iwl_priv *priv = data;
 	struct iwl_calib_hdr *hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -446,12 +488,17 @@ static bool iwlagn_wait_calib(struct iwl_notif_wait_data *notif_wait,
 
 	hdr = (struct iwl_calib_hdr *)pkt->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len = le32_to_cpu(pkt->len_n_flags) & FH_RSCSR_FRAME_SIZE_MSK;
 
 	/* reduce the size by the length field itself */
 	len -= sizeof(__le32);
 
 	if (iwl_calib_set(priv, hdr, len))
+=======
+
+	if (iwl_calib_set(priv, hdr, iwl_rx_packet_payload_len(pkt)))
+>>>>>>> v3.18
 =======
 
 	if (iwl_calib_set(priv, hdr, iwl_rx_packet_payload_len(pkt)))
@@ -478,6 +525,12 @@ int iwl_run_init_ucode(struct iwl_priv *priv)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (priv->init_ucode_run)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (priv->init_ucode_run)
 		return 0;
@@ -503,6 +556,11 @@ int iwl_run_init_ucode(struct iwl_priv *priv)
 	ret = iwl_wait_notification(&priv->notif_wait, &calib_wait,
 					UCODE_CALIB_TIMEOUT);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!ret)
+		priv->init_ucode_run = true;
+>>>>>>> v3.18
 =======
 	if (!ret)
 		priv->init_ucode_run = true;

@@ -13,6 +13,10 @@
 #include <linux/acpi.h>
 #include <linux/pci_ids.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/i915_drm.h>
+>>>>>>> v3.18
 =======
 #include <drm/i915_drm.h>
 >>>>>>> v3.18
@@ -21,6 +25,10 @@
 #include <asm/io_apic.h>
 #include <asm/apic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/hpet.h>
+>>>>>>> v3.18
 =======
 #include <asm/hpet.h>
 >>>>>>> v3.18
@@ -222,7 +230,10 @@ static void __init intel_remapping_check(int num, int slot, int func)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Systems with Intel graphics controllers set aside memory exclusively
  * for gfx driver use.  This memory is not marked in the E820 as reserved
@@ -574,6 +585,9 @@ static void __init force_disable_hpet(int num, int slot, int func)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define QFLAG_APPLY_ONCE 	0x1
 #define QFLAG_APPLIED		0x2
@@ -611,7 +625,10 @@ static struct chipset early_qrk[] __initdata = {
 	{ PCI_VENDOR_ID_INTEL, 0x3406, PCI_CLASS_BRIDGE_HOST,
 	  PCI_BASE_CLASS_BRIDGE, 0, intel_remapping_check },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{ PCI_VENDOR_ID_INTEL, PCI_ANY_ID, PCI_CLASS_DISPLAY_VGA, PCI_ANY_ID,
 	  QFLAG_APPLY_ONCE, intel_graphics_stolen },
 	/*
@@ -620,6 +637,9 @@ static struct chipset early_qrk[] __initdata = {
 	 */
 	{ PCI_VENDOR_ID_INTEL, 0x0f00,
 		PCI_CLASS_BRIDGE_HOST, PCI_ANY_ID, 0, force_disable_hpet},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };

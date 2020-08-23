@@ -46,7 +46,10 @@ CONFIG_CONNECTOR=m
 CONFIG_BLK_DEV_LOOP=m
 CONFIG_SCSI=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_SCSI_TGT=m
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_BLK_DEV_SD=y

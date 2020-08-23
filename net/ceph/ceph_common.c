@@ -16,6 +16,10 @@
 #include <linux/statfs.h>
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/vmalloc.h>
+>>>>>>> v3.18
 =======
 #include <linux/vmalloc.h>
 >>>>>>> v3.18
@@ -76,6 +80,11 @@ const char *ceph_msg_type_name(int type)
 	case CEPH_MSG_STATFS: return "statfs";
 	case CEPH_MSG_STATFS_REPLY: return "statfs_reply";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CEPH_MSG_MON_GET_VERSION: return "mon_get_version";
+	case CEPH_MSG_MON_GET_VERSION_REPLY: return "mon_get_version_reply";
+>>>>>>> v3.18
 =======
 	case CEPH_MSG_MON_GET_VERSION: return "mon_get_version";
 	case CEPH_MSG_MON_GET_VERSION_REPLY: return "mon_get_version_reply";
@@ -180,7 +189,10 @@ int ceph_compare_options(struct ceph_options *new_opt,
 EXPORT_SYMBOL(ceph_compare_options);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void *ceph_kvmalloc(size_t size, gfp_t flags)
 {
 	if (size <= (PAGE_SIZE << PAGE_ALLOC_COSTLY_ORDER)) {
@@ -200,6 +212,9 @@ void ceph_kvfree(const void *ptr)
 		kfree(ptr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int parse_fsid(const char *str, struct ceph_fsid *fsid)
@@ -303,6 +318,7 @@ static int get_secret(struct ceph_crypto_key *dst, const char *name) {
 		switch (key_err) {
 		case -ENOKEY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("ceph: Mount failed due to key not found: %s\n", name);
 			break;
 		case -EKEYEXPIRED:
@@ -315,6 +331,8 @@ static int get_secret(struct ceph_crypto_key *dst, const char *name) {
 			pr_warning("ceph: Mount failed due to unknown key error"
 			       " %d: %s\n", key_err, name);
 =======
+=======
+>>>>>>> v3.18
 			pr_warn("ceph: Mount failed due to key not found: %s\n",
 				name);
 			break;
@@ -329,6 +347,9 @@ static int get_secret(struct ceph_crypto_key *dst, const char *name) {
 		default:
 			pr_warn("ceph: Mount failed due to unknown key error %d: %s\n",
 				key_err, name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		err = -EPERM;
@@ -460,7 +481,11 @@ ceph_parse_options(char *options, const char *dev_name,
 			/* misc */
 		case Opt_osdtimeout:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("ignoring deprecated osdtimeout option\n");
+=======
+			pr_warn("ignoring deprecated osdtimeout option\n");
+>>>>>>> v3.18
 =======
 			pr_warn("ignoring deprecated osdtimeout option\n");
 >>>>>>> v3.18
@@ -514,8 +539,13 @@ EXPORT_SYMBOL(ceph_client_id);
  */
 struct ceph_client *ceph_create_client(struct ceph_options *opt, void *private,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       unsigned int supported_features,
 				       unsigned int required_features)
+=======
+				       u64 supported_features,
+				       u64 required_features)
+>>>>>>> v3.18
 =======
 				       u64 supported_features,
 				       u64 required_features)

@@ -126,7 +126,11 @@ long ia64_pal_vp_create(u64 *vpd, u64 *host_iva, u64 *opt_handler)
 static  DEFINE_SPINLOCK(vp_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_arch_hardware_enable(void *garbage)
+=======
+int kvm_arch_hardware_enable(void)
+>>>>>>> v3.18
 =======
 int kvm_arch_hardware_enable(void)
 >>>>>>> v3.18
@@ -165,7 +169,11 @@ int kvm_arch_hardware_enable(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_arch_hardware_disable(void *garbage)
+=======
+void kvm_arch_hardware_disable(void)
+>>>>>>> v3.18
 =======
 void kvm_arch_hardware_disable(void)
 >>>>>>> v3.18
@@ -199,7 +207,11 @@ void kvm_arch_check_processor_compat(void *rtn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_dev_ioctl_check_extension(long ext)
+=======
+int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
+>>>>>>> v3.18
 =======
 int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
 >>>>>>> v3.18
@@ -212,6 +224,10 @@ int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
 	case KVM_CAP_MP_STATE:
 	case KVM_CAP_IRQ_INJECT_STATUS:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case KVM_CAP_IOAPIC_POLARITY_IGNORED:
+>>>>>>> v3.18
 =======
 	case KVM_CAP_IOAPIC_POLARITY_IGNORED:
 >>>>>>> v3.18
@@ -719,7 +735,11 @@ out:
 	srcu_read_unlock(&vcpu->kvm->srcu, idx);
 	if (r > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kvm_resched(vcpu);
+=======
+		cond_resched();
+>>>>>>> v3.18
 =======
 		cond_resched();
 >>>>>>> v3.18
@@ -1384,10 +1404,13 @@ static void kvm_release_vm_pages(struct kvm *kvm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_arch_sync_events(struct kvm *kvm)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void kvm_arch_destroy_vm(struct kvm *kvm)
@@ -1399,10 +1422,13 @@ void kvm_arch_destroy_vm(struct kvm *kvm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_arch_vcpu_put(struct kvm_vcpu *vcpu)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void kvm_arch_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
@@ -1494,7 +1520,10 @@ void kvm_arch_vcpu_uninit(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 long kvm_arch_vcpu_ioctl(struct file *filp,
@@ -1580,12 +1609,17 @@ int kvm_arch_vcpu_fault(struct kvm_vcpu *vcpu, struct vm_fault *vmf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_arch_free_memslot(struct kvm_memory_slot *free,
 			   struct kvm_memory_slot *dont)
 {
 }
 
 int kvm_arch_create_memslot(struct kvm_memory_slot *slot, unsigned long npages)
+=======
+int kvm_arch_create_memslot(struct kvm *kvm, struct kvm_memory_slot *slot,
+			    unsigned long npages)
+>>>>>>> v3.18
 =======
 int kvm_arch_create_memslot(struct kvm *kvm, struct kvm_memory_slot *slot,
 			    unsigned long npages)
@@ -1610,7 +1644,11 @@ int kvm_arch_prepare_memory_region(struct kvm *kvm,
 	for (i = 0; i < npages; i++) {
 		pfn = gfn_to_pfn(kvm, base_gfn + i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!kvm_is_mmio_pfn(pfn)) {
+=======
+		if (!kvm_is_reserved_pfn(pfn)) {
+>>>>>>> v3.18
 =======
 		if (!kvm_is_reserved_pfn(pfn)) {
 >>>>>>> v3.18
@@ -1630,6 +1668,7 @@ int kvm_arch_prepare_memory_region(struct kvm *kvm,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_arch_commit_memory_region(struct kvm *kvm,
 		struct kvm_userspace_memory_region *mem,
 		const struct kvm_memory_slot *old,
@@ -1638,6 +1677,8 @@ void kvm_arch_commit_memory_region(struct kvm *kvm,
 	return;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void kvm_arch_flush_shadow_all(struct kvm *kvm)
@@ -1889,10 +1930,13 @@ int kvm_arch_hardware_setup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_arch_hardware_unsetup(void)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int kvm_apic_set_irq(struct kvm_vcpu *vcpu, struct kvm_lapic_irq *irq)

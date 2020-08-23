@@ -14,6 +14,7 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/reboot.h>
 
 void __iomem *sirfsoc_rstc_base;
@@ -51,6 +52,8 @@ int sirfsoc_reset_device(struct device *dev)
 
 	if (of_property_read_u32(dev->of_node, "reset-bit", &reset_bit))
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/reboot.h>
 #include <linux/reset-controller.h>
@@ -68,11 +71,15 @@ static int sirfsoc_reset_module(struct reset_controller_dev *rcdev,
 	u32 reset_bit = sw_reset_idx;
 
 	if (reset_bit >= SIRFSOC_RSTBIT_NUM)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
 	mutex_lock(&rstc_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (of_device_is_compatible(dev->of_node, "sirf,prima2-rstc")) {
 		/*
@@ -86,6 +93,8 @@ static int sirfsoc_reset_module(struct reset_controller_dev *rcdev,
 		msleep(10);
 		writel(readl(sirfsoc_rstc_base + (reset_bit / 32) * 4) & ~reset_bit,
 =======
+=======
+>>>>>>> v3.18
 	if (of_device_is_compatible(rcdev->of_node, "sirf,prima2-rstc")) {
 		/*
 		 * Writing 1 to this bit resets corresponding block.
@@ -100,11 +109,15 @@ static int sirfsoc_reset_module(struct reset_controller_dev *rcdev,
 		msleep(20);
 		writel(readl(sirfsoc_rstc_base +
 			(reset_bit / 32) * 4) & ~(1 << reset_bit),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sirfsoc_rstc_base + (reset_bit / 32) * 4);
 	} else {
 		/*
 		 * For MARCO and POLO
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 * Writing 1 to SET register resets corresponding block. Writing 1 to CLEAR
 		 * register de-asserts reset signal of the corresponding block.
@@ -115,6 +128,8 @@ static int sirfsoc_reset_module(struct reset_controller_dev *rcdev,
 		msleep(10);
 		writel(reset_bit, sirfsoc_rstc_base + (reset_bit / 32) * 8 + 4);
 =======
+=======
+>>>>>>> v3.18
 		 * Writing 1 to SET register resets corresponding block.
 		 * Writing 1 to CLEAR register de-asserts reset signal of the
 		 * corresponding block.
@@ -126,6 +141,9 @@ static int sirfsoc_reset_module(struct reset_controller_dev *rcdev,
 		msleep(20);
 		writel(1 << reset_bit,
 			sirfsoc_rstc_base + (reset_bit / 32) * 8 + 4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -135,6 +153,7 @@ static int sirfsoc_reset_module(struct reset_controller_dev *rcdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIRFSOC_SYS_RST_BIT  BIT(31)
 
 void sirfsoc_restart(enum reboot_mode mode, const char *cmd)
@@ -142,6 +161,8 @@ void sirfsoc_restart(enum reboot_mode mode, const char *cmd)
 	writel(SIRFSOC_SYS_RST_BIT, sirfsoc_rstc_base);
 }
 =======
+=======
+>>>>>>> v3.18
 static struct reset_control_ops sirfsoc_rstc_ops = {
 	.reset = sirfsoc_reset_module,
 };
@@ -196,4 +217,7 @@ static int __init sirfsoc_rstc_init(void)
 	return platform_driver_register(&sirfsoc_rstc_driver);
 }
 subsys_initcall(sirfsoc_rstc_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

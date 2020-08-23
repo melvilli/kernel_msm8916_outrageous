@@ -41,6 +41,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -51,6 +52,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -73,6 +76,11 @@
 #include <linux/vmalloc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/dma-iommu.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/dma-iommu.h>
 
@@ -299,15 +307,21 @@ static int isp_xclk_init(struct isp_device *isp)
 	unsigned int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < ARRAY_SIZE(isp->xclks); ++i) {
 		struct isp_xclk *xclk = &isp->xclks[i];
 		struct clk *clk;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(isp->xclks); ++i)
 		isp->xclks[i].clk = ERR_PTR(-EINVAL);
 
 	for (i = 0; i < ARRAY_SIZE(isp->xclks); ++i) {
 		struct isp_xclk *xclk = &isp->xclks[i];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		xclk->isp = isp;
@@ -322,11 +336,14 @@ static int isp_xclk_init(struct isp_device *isp)
 
 		xclk->hw.init = &init;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		clk = devm_clk_register(isp->dev, &xclk->hw);
 		if (IS_ERR(clk))
 			return PTR_ERR(clk);
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * The first argument is NULL in order to avoid circular
 		 * reference, as this driver takes reference on the
@@ -336,6 +353,9 @@ static int isp_xclk_init(struct isp_device *isp)
 		xclk->clk = clk_register(NULL, &xclk->hw);
 		if (IS_ERR(xclk->clk))
 			return PTR_ERR(xclk->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (pdata->xclks[i].con_id == NULL &&
@@ -349,7 +369,11 @@ static int isp_xclk_init(struct isp_device *isp)
 		xclk->lookup->con_id = pdata->xclks[i].con_id;
 		xclk->lookup->dev_id = pdata->xclks[i].dev_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xclk->lookup->clk = clk;
+=======
+		xclk->lookup->clk = xclk->clk;
+>>>>>>> v3.18
 =======
 		xclk->lookup->clk = xclk->clk;
 >>>>>>> v3.18
@@ -368,6 +392,12 @@ static void isp_xclk_cleanup(struct isp_device *isp)
 		struct isp_xclk *xclk = &isp->xclks[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (!IS_ERR(xclk->clk))
+			clk_unregister(xclk->clk);
+
+>>>>>>> v3.18
 =======
 		if (!IS_ERR(xclk->clk))
 			clk_unregister(xclk->clk);
@@ -420,7 +450,11 @@ static void isp_disable_interrupts(struct isp_device *isp)
  * @idle: Consider idle state.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Set the power settings for the ISP and SBL bus and cConfigure the HS/VS
+=======
+ * Set the power settings for the ISP and SBL bus and configure the HS/VS
+>>>>>>> v3.18
 =======
  * Set the power settings for the ISP and SBL bus and configure the HS/VS
 >>>>>>> v3.18
@@ -621,9 +655,12 @@ static void isp_isr_sbl(struct isp_device *isp)
  *
  * Handles the corresponding callback if plugged in.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Returns IRQ_HANDLED when IRQ was correctly handled, or IRQ_NONE when the
  * IRQ wasn't handled.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -838,9 +875,15 @@ int omap3isp_pipeline_pm_use(struct media_entity *entity, int use)
 /*
  * isp_pipeline_link_notify - Link management notification callback
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @source: Pad at the start of the link
  * @sink: Pad at the end of the link
  * @flags: New link flags that will be applied
+=======
+ * @link: The link
+ * @flags: New link flags that will be applied
+ * @notification: The link's state change notification type (MEDIA_DEV_NOTIFY_*)
+>>>>>>> v3.18
 =======
  * @link: The link
  * @flags: New link flags that will be applied
@@ -855,6 +898,7 @@ int omap3isp_pipeline_pm_use(struct media_entity *entity, int use)
  * off is assumed to never fail. This function will not fail for disconnection
  * events.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int isp_pipeline_link_notify(struct media_pad *source,
 				    struct media_pad *sink, u32 flags)
@@ -880,6 +924,8 @@ static int isp_pipeline_link_notify(struct media_pad *source,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static int isp_pipeline_link_notify(struct media_link *link, u32 flags,
 				    unsigned int notification)
 {
@@ -912,6 +958,9 @@ static int isp_pipeline_link_notify(struct media_link *link, u32 flags,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -941,6 +990,7 @@ static int isp_pipeline_enable(struct isp_pipeline *pipe,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If the preview engine crashed it might not respond to read/write
 	 * operations on the L4 bus. This would result in a bus fault and a
 	 * kernel oops. Refuse to start streaming in that case. This check must
@@ -951,12 +1001,17 @@ static int isp_pipeline_enable(struct isp_pipeline *pipe,
 	if ((pipe->entities & isp->crashed) &
 	    (1U << isp->isp_prev.subdev.entity.id))
 =======
+=======
+>>>>>>> v3.18
 	/* Refuse to start streaming if an entity included in the pipeline has
 	 * crashed. This check must be performed before the loop below to avoid
 	 * starting entities if the pipeline won't start anyway (those entities
 	 * would then likely fail to stop, making the problem worse).
 	 */
 	if (pipe->entities & isp->crashed)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EIO;
 
@@ -973,7 +1028,11 @@ static int isp_pipeline_enable(struct isp_pipeline *pipe,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pad = media_entity_remote_source(pad);
+=======
+		pad = media_entity_remote_pad(pad);
+>>>>>>> v3.18
 =======
 		pad = media_entity_remote_pad(pad);
 >>>>>>> v3.18
@@ -1067,7 +1126,11 @@ static int isp_pipeline_disable(struct isp_pipeline *pipe)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pad = media_entity_remote_source(pad);
+=======
+		pad = media_entity_remote_pad(pad);
+>>>>>>> v3.18
 =======
 		pad = media_entity_remote_pad(pad);
 >>>>>>> v3.18
@@ -1088,6 +1151,7 @@ static int isp_pipeline_disable(struct isp_pipeline *pipe)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		v4l2_subdev_call(subdev, video, s_stream, 0);
 
 		if (subdev == &isp->isp_res.subdev)
@@ -1107,6 +1171,8 @@ static int isp_pipeline_disable(struct isp_pipeline *pipe)
 			 */
 			isp->crashed |= 1U << subdev->entity.id;
 =======
+=======
+>>>>>>> v3.18
 		ret = v4l2_subdev_call(subdev, video, s_stream, 0);
 
 		if (subdev == &isp->isp_res.subdev)
@@ -1133,6 +1199,9 @@ static int isp_pipeline_disable(struct isp_pipeline *pipe)
 			isp->stop_failure = true;
 			if (subdev == &isp->isp_prev.subdev)
 				isp->crashed |= 1U << subdev->entity.id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			failure = -ETIMEDOUT;
 		}
@@ -1171,7 +1240,10 @@ int omap3isp_pipeline_set_stream(struct isp_pipeline *pipe,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * omap3isp_pipeline_cancel_stream - Cancel stream on a pipeline
  * @pipe: ISP pipeline
  *
@@ -1189,6 +1261,9 @@ void omap3isp_pipeline_cancel_stream(struct isp_pipeline *pipe)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * isp_pipeline_resume - Resume streaming on a pipeline
  * @pipe: ISP pipeline
@@ -1236,7 +1311,11 @@ static int isp_pipeline_is_last(struct media_entity *me)
 	if (pipe->stream_state == ISP_PIPELINE_STREAM_STOPPED)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pad = media_entity_remote_source(&pipe->output->pad);
+=======
+	pad = media_entity_remote_pad(&pipe->output->pad);
+>>>>>>> v3.18
 =======
 	pad = media_entity_remote_pad(&pipe->output->pad);
 >>>>>>> v3.18
@@ -1346,6 +1425,10 @@ static int isp_reset(struct isp_device *isp)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	isp->stop_failure = false;
+>>>>>>> v3.18
 =======
 	isp->stop_failure = false;
 >>>>>>> v3.18
@@ -1517,9 +1600,15 @@ int omap3isp_module_sync_idle(struct media_entity *me, wait_queue_head_t *wait,
 		struct isp_video *video = pipe->output;
 		unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_irqsave(&video->queue->irqlock, flags);
 		if (video->dmaqueue_flags & ISP_VIDEO_DMAQUEUE_UNDERRUN) {
 			spin_unlock_irqrestore(&video->queue->irqlock, flags);
+=======
+		spin_lock_irqsave(&video->irqlock, flags);
+		if (video->dmaqueue_flags & ISP_VIDEO_DMAQUEUE_UNDERRUN) {
+			spin_unlock_irqrestore(&video->irqlock, flags);
+>>>>>>> v3.18
 =======
 		spin_lock_irqsave(&video->irqlock, flags);
 		if (video->dmaqueue_flags & ISP_VIDEO_DMAQUEUE_UNDERRUN) {
@@ -1530,7 +1619,11 @@ int omap3isp_module_sync_idle(struct media_entity *me, wait_queue_head_t *wait,
 			return 0;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_irqrestore(&video->queue->irqlock, flags);
+=======
+		spin_unlock_irqrestore(&video->irqlock, flags);
+>>>>>>> v3.18
 =======
 		spin_unlock_irqrestore(&video->irqlock, flags);
 >>>>>>> v3.18
@@ -1547,7 +1640,11 @@ int omap3isp_module_sync_idle(struct media_entity *me, wait_queue_head_t *wait,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * omap3isp_module_sync_is_stopped - Helper to verify if module was stopping
+=======
+ * omap3isp_module_sync_is_stopping - Helper to verify if module was stopping
+>>>>>>> v3.18
 =======
  * omap3isp_module_sync_is_stopping - Helper to verify if module was stopping
 >>>>>>> v3.18
@@ -1759,7 +1856,11 @@ struct isp_device *omap3isp_get(struct isp_device *isp)
  * power-down all submodules, disable clocks and free temporary buffers.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void omap3isp_put(struct isp_device *isp)
+=======
+static void __omap3isp_put(struct isp_device *isp, bool save_ctx)
+>>>>>>> v3.18
 =======
 static void __omap3isp_put(struct isp_device *isp, bool save_ctx)
 >>>>>>> v3.18
@@ -1772,7 +1873,11 @@ static void __omap3isp_put(struct isp_device *isp, bool save_ctx)
 	if (--isp->ref_count == 0) {
 		isp_disable_interrupts(isp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (isp->domain) {
+=======
+		if (save_ctx) {
+>>>>>>> v3.18
 =======
 		if (save_ctx) {
 >>>>>>> v3.18
@@ -1783,7 +1888,11 @@ static void __omap3isp_put(struct isp_device *isp, bool save_ctx)
 		 * only way to recover from such conditions.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (isp->crashed)
+=======
+		if (isp->crashed || isp->stop_failure)
+>>>>>>> v3.18
 =======
 		if (isp->crashed || isp->stop_failure)
 >>>>>>> v3.18
@@ -1794,12 +1903,18 @@ static void __omap3isp_put(struct isp_device *isp, bool save_ctx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void omap3isp_put(struct isp_device *isp)
 {
 	__omap3isp_put(isp, true);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* --------------------------------------------------------------------------
  * Platform device driver
@@ -1859,7 +1974,11 @@ void omap3isp_print_status(struct isp_device *isp)
  * resume(), and the the pipelines are restarted in complete().
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * TODO: PM dependencies between the ISP and sensors are not modeled explicitly
+=======
+ * TODO: PM dependencies between the ISP and sensors are not modelled explicitly
+>>>>>>> v3.18
 =======
  * TODO: PM dependencies between the ISP and sensors are not modelled explicitly
 >>>>>>> v3.18
@@ -2278,7 +2397,10 @@ error_csiphy:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void isp_detach_iommu(struct isp_device *isp)
 {
 	arm_iommu_release_mapping(isp->mapping);
@@ -2334,6 +2456,9 @@ error:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * isp_remove - Remove ISP platform device
@@ -2351,10 +2476,15 @@ static int isp_remove(struct platform_device *pdev)
 
 	__omap3isp_get(isp, false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iommu_detach_device(isp->domain, &pdev->dev);
 	iommu_domain_free(isp->domain);
 	isp->domain = NULL;
 	omap3isp_put(isp);
+=======
+	isp_detach_iommu(isp);
+	__omap3isp_put(isp, false);
+>>>>>>> v3.18
 =======
 	isp_detach_iommu(isp);
 	__omap3isp_put(isp, false);
@@ -2372,6 +2502,7 @@ static int isp_map_mem_resource(struct platform_device *pdev,
 	/* request the mem region for the camera registers */
 
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, res);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!mem) {
 		dev_err(isp->dev, "no mem resource?\n");
@@ -2396,6 +2527,8 @@ static int isp_map_mem_resource(struct platform_device *pdev,
 		return -ENODEV;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	/* map the region */
 	isp->mmio_base[res] = devm_ioremap_resource(isp->dev, mem);
@@ -2403,6 +2536,9 @@ static int isp_map_mem_resource(struct platform_device *pdev,
 		return PTR_ERR(isp->mmio_base[res]);
 
 	isp->mmio_base_phys[res] = mem->start;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2445,9 +2581,15 @@ static int isp_probe(struct platform_device *pdev)
 	isp->ref_count = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	isp->raw_dmamask = DMA_BIT_MASK(32);
 	isp->dev->dma_mask = &isp->raw_dmamask;
 	isp->dev->coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	ret = dma_coerce_mask_and_coherent(isp->dev, DMA_BIT_MASK(32));
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = dma_coerce_mask_and_coherent(isp->dev, DMA_BIT_MASK(32));
 	if (ret)
@@ -2517,6 +2659,7 @@ static int isp_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	isp->domain = iommu_domain_alloc(pdev->dev.bus);
 	if (!isp->domain) {
 		dev_err(isp->dev, "can't alloc iommu domain\n");
@@ -2532,6 +2675,8 @@ static int isp_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	/* IOMMU */
 	ret = isp_attach_iommu(isp);
 	if (ret < 0) {
@@ -2539,6 +2684,9 @@ static int isp_probe(struct platform_device *pdev)
 		goto error_isp;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Interrupt */
 	isp->irq_num = platform_get_irq(pdev, 0);
@@ -2546,7 +2694,11 @@ static int isp_probe(struct platform_device *pdev)
 		dev_err(isp->dev, "No IRQ resource\n");
 		ret = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto detach_dev;
+=======
+		goto error_iommu;
+>>>>>>> v3.18
 =======
 		goto error_iommu;
 >>>>>>> v3.18
@@ -2557,7 +2709,11 @@ static int isp_probe(struct platform_device *pdev)
 		dev_err(isp->dev, "Unable to request IRQ\n");
 		ret = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto detach_dev;
+=======
+		goto error_iommu;
+>>>>>>> v3.18
 =======
 		goto error_iommu;
 >>>>>>> v3.18
@@ -2567,7 +2723,11 @@ static int isp_probe(struct platform_device *pdev)
 	ret = isp_initialize_modules(isp);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto detach_dev;
+=======
+		goto error_iommu;
+>>>>>>> v3.18
 =======
 		goto error_iommu;
 >>>>>>> v3.18
@@ -2584,6 +2744,7 @@ static int isp_probe(struct platform_device *pdev)
 error_modules:
 	isp_cleanup_modules(isp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 detach_dev:
 	iommu_detach_device(isp->domain, &pdev->dev);
 free_domain:
@@ -2596,12 +2757,17 @@ error:
 	platform_set_drvdata(pdev, NULL);
 
 =======
+=======
+>>>>>>> v3.18
 error_iommu:
 	isp_detach_iommu(isp);
 error_isp:
 	isp_xclk_cleanup(isp);
 	__omap3isp_put(isp, false);
 error:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_destroy(&isp->isp_mutex);
 

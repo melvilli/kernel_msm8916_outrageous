@@ -67,7 +67,11 @@ struct snd_cs5530 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_cs5530_ids) = {
+=======
+static const struct pci_device_id snd_cs5530_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_cs5530_ids[] = {
 >>>>>>> v3.18
@@ -96,7 +100,10 @@ static void snd_cs5530_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -169,9 +176,15 @@ static int snd_cs5530_create(struct snd_card *card,
 
 	if (map & (1<<2))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "CS5530: XpressAudio at 0x%lx\n", sb_base);
 	else {
 		printk(KERN_ERR "Could not find XpressAudio!\n");
+=======
+		dev_info(card->dev, "XpressAudio at 0x%lx\n", sb_base);
+	else {
+		dev_err(card->dev, "Could not find XpressAudio!\n");
+>>>>>>> v3.18
 =======
 		dev_info(card->dev, "XpressAudio at 0x%lx\n", sb_base);
 	else {
@@ -183,9 +196,15 @@ static int snd_cs5530_create(struct snd_card *card,
 
 	if (map & (1<<5))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "CS5530: MPU at 0x300\n");
 	else if (map & (1<<6))
 		printk(KERN_INFO "CS5530: MPU at 0x330\n");
+=======
+		dev_info(card->dev, "MPU at 0x300\n");
+	else if (map & (1<<6))
+		dev_info(card->dev, "MPU at 0x330\n");
+>>>>>>> v3.18
 =======
 		dev_info(card->dev, "MPU at 0x300\n");
 	else if (map & (1<<6))
@@ -203,7 +222,11 @@ static int snd_cs5530_create(struct snd_card *card,
 		dma16 = 7;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "CS5530: No 16bit DMA enabled\n");
+=======
+		dev_err(card->dev, "No 16bit DMA enabled\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "No 16bit DMA enabled\n");
 >>>>>>> v3.18
@@ -219,7 +242,11 @@ static int snd_cs5530_create(struct snd_card *card,
 		dma8 = 3;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "CS5530: No 8bit DMA enabled\n");
+=======
+		dev_err(card->dev, "No 8bit DMA enabled\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "No 8bit DMA enabled\n");
 >>>>>>> v3.18
@@ -237,7 +264,11 @@ static int snd_cs5530_create(struct snd_card *card,
 		irq = 10;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "CS5530: SoundBlaster IRQ not set\n");
+=======
+		dev_err(card->dev, "SoundBlaster IRQ not set\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "SoundBlaster IRQ not set\n");
 >>>>>>> v3.18
@@ -246,8 +277,12 @@ static int snd_cs5530_create(struct snd_card *card,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "CS5530: IRQ: %d DMA8: %d DMA16: %d\n", irq, dma8, 
 									dma16);
+=======
+	dev_info(card->dev, "IRQ: %d DMA8: %d DMA16: %d\n", irq, dma8, dma16);
+>>>>>>> v3.18
 =======
 	dev_info(card->dev, "IRQ: %d DMA8: %d DMA16: %d\n", irq, dma8, dma16);
 >>>>>>> v3.18
@@ -256,7 +291,11 @@ static int snd_cs5530_create(struct snd_card *card,
 						dma16, SB_HW_CS5530, &chip->sb);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "CS5530: Could not create SoundBlaster\n");
+=======
+		dev_err(card->dev, "Could not create SoundBlaster\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "Could not create SoundBlaster\n");
 >>>>>>> v3.18
@@ -267,7 +306,11 @@ static int snd_cs5530_create(struct snd_card *card,
 	err = snd_sb16dsp_pcm(chip->sb, 0, &chip->sb->pcm);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "CS5530: Could not create PCM\n");
+=======
+		dev_err(card->dev, "Could not create PCM\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "Could not create PCM\n");
 >>>>>>> v3.18
@@ -278,7 +321,11 @@ static int snd_cs5530_create(struct snd_card *card,
 	err = snd_sbmixer_new(chip->sb);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "CS5530: Could not create Mixer\n");
+=======
+		dev_err(card->dev, "Could not create Mixer\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "Could not create Mixer\n");
 >>>>>>> v3.18
@@ -293,7 +340,10 @@ static int snd_cs5530_create(struct snd_card *card,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*rchip = chip;
@@ -316,7 +366,12 @@ static int snd_cs5530_probe(struct pci_dev *pci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);

@@ -27,18 +27,24 @@
 #include <linux/kdebug.h>
 #include <linux/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/cacheflush.h>
 #include <asm/sections.h>
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/hardirq.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/hardirq.h>
 #include <asm/cacheflush.h>
 #include <asm/sections.h>
 #include <asm/dis.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 DEFINE_PER_CPU(struct kprobe *, current_kprobe);
@@ -46,6 +52,7 @@ DEFINE_PER_CPU(struct kprobe_ctlblk, kprobe_ctlblk);
 
 struct kretprobe_blackpoint kretprobe_blacklist[] = { };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __kprobes is_prohibited_opcode(kprobe_opcode_t *insn)
 {
@@ -126,6 +133,8 @@ static int __kprobes get_fixup_type(kprobe_opcode_t *insn)
 	}
 	return fixup;
 =======
+=======
+>>>>>>> v3.18
 DEFINE_INSN_CACHE_OPS(dmainsn);
 
 static void *alloc_dmainsn_page(void)
@@ -209,6 +218,9 @@ static void __kprobes s390_free_insn_slot(struct kprobe *p)
 	else
 		free_insn_slot(p->ainsn.insn, 0);
 	p->ainsn.insn = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -216,6 +228,7 @@ int __kprobes arch_prepare_kprobe(struct kprobe *p)
 {
 	if ((unsigned long) p->addr & 0x01)
 		return -EINVAL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* Make sure the probe isn't going on a difficult instruction */
@@ -226,6 +239,8 @@ int __kprobes arch_prepare_kprobe(struct kprobe *p)
 	memcpy(p->ainsn.insn, p->addr, ((p->opcode >> 14) + 3) & -2);
 
 =======
+=======
+>>>>>>> v3.18
 	/* Make sure the probe isn't going on a difficult instruction */
 	if (probe_is_prohibited_opcode(p->addr))
 		return -EINVAL;
@@ -233,6 +248,9 @@ int __kprobes arch_prepare_kprobe(struct kprobe *p)
 		return -ENOMEM;
 	p->opcode = *p->addr;
 	copy_instruction(p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -275,6 +293,10 @@ void __kprobes arch_disarm_kprobe(struct kprobe *p)
 void __kprobes arch_remove_kprobe(struct kprobe *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	s390_free_insn_slot(p);
+>>>>>>> v3.18
 =======
 	s390_free_insn_slot(p);
 >>>>>>> v3.18
@@ -322,9 +344,15 @@ static void __kprobes disable_singlestep(struct kprobe_ctlblk *kcb,
 static void __kprobes push_kprobe(struct kprobe_ctlblk *kcb, struct kprobe *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kcb->prev_kprobe.kp = __get_cpu_var(current_kprobe);
 	kcb->prev_kprobe.status = kcb->kprobe_status;
 	__get_cpu_var(current_kprobe) = p;
+=======
+	kcb->prev_kprobe.kp = __this_cpu_read(current_kprobe);
+	kcb->prev_kprobe.status = kcb->kprobe_status;
+	__this_cpu_write(current_kprobe, p);
+>>>>>>> v3.18
 =======
 	kcb->prev_kprobe.kp = __this_cpu_read(current_kprobe);
 	kcb->prev_kprobe.status = kcb->kprobe_status;
@@ -340,7 +368,11 @@ static void __kprobes push_kprobe(struct kprobe_ctlblk *kcb, struct kprobe *p)
 static void __kprobes pop_kprobe(struct kprobe_ctlblk *kcb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(current_kprobe) = kcb->prev_kprobe.kp;
+=======
+	__this_cpu_write(current_kprobe, kcb->prev_kprobe.kp);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(current_kprobe, kcb->prev_kprobe.kp);
 >>>>>>> v3.18
@@ -425,7 +457,11 @@ static int __kprobes kprobe_handler(struct pt_regs *regs)
 		return 1;
 	} else if (kprobe_running()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p = __get_cpu_var(current_kprobe);
+=======
+		p = __this_cpu_read(current_kprobe);
+>>>>>>> v3.18
 =======
 		p = __this_cpu_read(current_kprobe);
 >>>>>>> v3.18
@@ -575,7 +611,11 @@ static void __kprobes resume_execution(struct kprobe *p, struct pt_regs *regs)
 	struct kprobe_ctlblk *kcb = get_kprobe_ctlblk();
 	unsigned long ip = regs->psw.addr & PSW_ADDR_INSN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int fixup = get_fixup_type(p->ainsn.insn);
+=======
+	int fixup = probe_get_fixup_type(p->ainsn.insn);
+>>>>>>> v3.18
 =======
 	int fixup = probe_get_fixup_type(p->ainsn.insn);
 >>>>>>> v3.18
@@ -585,7 +625,11 @@ static void __kprobes resume_execution(struct kprobe *p, struct pt_regs *regs)
 
 	if (fixup & FIXUP_BRANCH_NOT_TAKEN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int ilen = ((p->ainsn.insn[0] >> 14) + 3) & -2;
+=======
+		int ilen = insn_length(p->ainsn.insn[0] >> 8);
+>>>>>>> v3.18
 =======
 		int ilen = insn_length(p->ainsn.insn[0] >> 8);
 >>>>>>> v3.18
@@ -658,7 +702,11 @@ static int __kprobes kprobe_trap_handler(struct pt_regs *regs, int trapnr)
 		/*
 		 * We increment the nmissed count for accounting,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * we can also use npre/npostfault count for accouting
+=======
+		 * we can also use npre/npostfault count for accounting
+>>>>>>> v3.18
 =======
 		 * we can also use npre/npostfault count for accounting
 >>>>>>> v3.18
@@ -771,11 +819,14 @@ void __kprobes jprobe_return(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __used __kprobes jprobe_return_end(void)
 {
 	asm volatile("bcr 0,0");
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int __kprobes longjmp_break_handler(struct kprobe *p, struct pt_regs *regs)

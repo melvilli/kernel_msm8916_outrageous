@@ -91,7 +91,10 @@ struct cpu_spec {
 	 * pass up (not CPU originated) */
 	int		(*machine_check)(struct pt_regs *regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Processor specific early machine check handler which is
@@ -104,6 +107,9 @@ struct cpu_spec {
 	 */
 	void		(*flush_tlb)(unsigned long inval_selector);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -193,6 +199,10 @@ extern const char *powerpc_base_platform;
 #define CPU_FTR_DAWR			LONG_ASM_CONST(0x0400000000000000)
 #define CPU_FTR_DABRX			LONG_ASM_CONST(0x0800000000000000)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CPU_FTR_PMAO_BUG		LONG_ASM_CONST(0x1000000000000000)
+>>>>>>> v3.18
 =======
 #define CPU_FTR_PMAO_BUG		LONG_ASM_CONST(0x1000000000000000)
 >>>>>>> v3.18
@@ -202,8 +212,12 @@ extern const char *powerpc_base_platform;
 #define CPU_FTR_PPCAS_ARCH_V2	(CPU_FTR_NOEXECUTE | CPU_FTR_NODSISRALIGN)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MMU_FTR_PPCAS_ARCH_V2 	(MMU_FTR_SLB | MMU_FTR_TLBIEL | \
 				 MMU_FTR_16M_PAGE)
+=======
+#define MMU_FTR_PPCAS_ARCH_V2 	(MMU_FTR_TLBIEL | MMU_FTR_16M_PAGE)
+>>>>>>> v3.18
 =======
 #define MMU_FTR_PPCAS_ARCH_V2 	(MMU_FTR_TLBIEL | MMU_FTR_16M_PAGE)
 >>>>>>> v3.18
@@ -279,10 +293,13 @@ extern const char *powerpc_base_platform;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CLASSIC_PPC (!defined(CONFIG_8xx) && !defined(CONFIG_4xx) && \
 		     !defined(CONFIG_POWER3) && !defined(CONFIG_POWER4) && \
 		     !defined(CONFIG_BOOKE))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define CPU_FTRS_PPC601	(CPU_FTR_COMMON | CPU_FTR_601 | \
@@ -398,6 +415,7 @@ extern const char *powerpc_base_platform;
 	    CPU_FTR_L2CSR | CPU_FTR_LWSYNC | CPU_FTR_NOEXECUTE | \
 	    CPU_FTR_DBELL | CPU_FTR_DEBUG_LVL_EXC | CPU_FTR_EMB_HV)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CPU_FTRS_E5500	(CPU_FTR_USE_TB | CPU_FTR_NODSISRALIGN | \
 	    CPU_FTR_L2CSR | CPU_FTR_LWSYNC | CPU_FTR_NOEXECUTE | \
 	    CPU_FTR_DBELL | CPU_FTR_POPCNTB | CPU_FTR_POPCNTD | \
@@ -415,6 +433,8 @@ extern const char *powerpc_base_platform;
 	    CPU_FTR_IABR | \
 	    CPU_FTR_MMCRA | CPU_FTR_CTRL)
 =======
+=======
+>>>>>>> v3.18
 /*
  * e5500/e6500 erratum A-006958 is a timebase bug that can use the
  * same workaround as CPU_FTR_CELL_TB_BUG.
@@ -431,6 +451,9 @@ extern const char *powerpc_base_platform;
 #define CPU_FTRS_GENERIC_32	(CPU_FTR_COMMON | CPU_FTR_NODSISRALIGN)
 
 /* 64-bit CPUs */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CPU_FTRS_POWER4	(CPU_FTR_USE_TB | CPU_FTR_LWSYNC | \
 	    CPU_FTR_PPCAS_ARCH_V2 | CPU_FTR_CTRL | \
@@ -474,6 +497,11 @@ extern const char *powerpc_base_platform;
 	    CPU_FTR_DBELL | CPU_FTR_HAS_PPR | CPU_FTR_DAWR | \
 	    CPU_FTR_ARCH_207S | CPU_FTR_TM_COMP)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CPU_FTRS_POWER8E (CPU_FTRS_POWER8 | CPU_FTR_PMAO_BUG)
+#define CPU_FTRS_POWER8_DD1 (CPU_FTRS_POWER8 & ~CPU_FTR_DBELL)
+>>>>>>> v3.18
 =======
 #define CPU_FTRS_POWER8E (CPU_FTRS_POWER8 | CPU_FTR_PMAO_BUG)
 #define CPU_FTRS_POWER8_DD1 (CPU_FTRS_POWER8 & ~CPU_FTR_DBELL)
@@ -498,22 +526,32 @@ extern const char *powerpc_base_platform;
 #else
 #define CPU_FTRS_POSSIBLE	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (CPU_FTRS_POWER3 | CPU_FTRS_RS64 | CPU_FTRS_POWER4 |	\
 	    CPU_FTRS_PPC970 | CPU_FTRS_POWER5 | CPU_FTRS_POWER6 |	\
 	    CPU_FTRS_POWER7 | CPU_FTRS_POWER8 | CPU_FTRS_CELL |		\
 	    CPU_FTRS_PA6T | CPU_FTR_VSX)
 =======
+=======
+>>>>>>> v3.18
 	    (CPU_FTRS_POWER4 | CPU_FTRS_PPC970 | CPU_FTRS_POWER5 | \
 	     CPU_FTRS_POWER6 | CPU_FTRS_POWER7 | CPU_FTRS_POWER8E | \
 	     CPU_FTRS_POWER8 | CPU_FTRS_POWER8_DD1 | CPU_FTRS_CELL | \
 	     CPU_FTRS_PA6T | CPU_FTR_VSX)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #else
 enum {
 	CPU_FTRS_POSSIBLE =
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CLASSIC_PPC
+=======
+#ifdef CONFIG_PPC_BOOK3S_32
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PPC_BOOK3S_32
 >>>>>>> v3.18
@@ -560,21 +598,31 @@ enum {
 #else
 #define CPU_FTRS_ALWAYS		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (CPU_FTRS_POWER3 & CPU_FTRS_RS64 & CPU_FTRS_POWER4 &	\
 	    CPU_FTRS_PPC970 & CPU_FTRS_POWER5 & CPU_FTRS_POWER6 &	\
 	    CPU_FTRS_POWER7 & CPU_FTRS_CELL & CPU_FTRS_PA6T & CPU_FTRS_POSSIBLE)
 =======
+=======
+>>>>>>> v3.18
 	    (CPU_FTRS_POWER4 & CPU_FTRS_PPC970 & CPU_FTRS_POWER5 & \
 	     CPU_FTRS_POWER6 & CPU_FTRS_POWER7 & CPU_FTRS_CELL & \
 	     CPU_FTRS_PA6T & CPU_FTRS_POWER8 & CPU_FTRS_POWER8E & \
 	     CPU_FTRS_POWER8_DD1 & CPU_FTRS_POSSIBLE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #else
 enum {
 	CPU_FTRS_ALWAYS =
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CLASSIC_PPC
+=======
+#ifdef CONFIG_PPC_BOOK3S_32
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PPC_BOOK3S_32
 >>>>>>> v3.18

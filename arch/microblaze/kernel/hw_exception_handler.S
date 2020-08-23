@@ -148,6 +148,7 @@
 
 	/* Shift right instruction depending on available configuration */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	#if CONFIG_XILINX_MICROBLAZE0_USE_BARREL > 0
 	#define BSRLI(rD, rA, imm)	\
 		bsrli rD, rA, imm
@@ -156,11 +157,20 @@
 =======
 	#if CONFIG_XILINX_MICROBLAZE0_USE_BARREL == 0
 >>>>>>> v3.18
+=======
+	#if CONFIG_XILINX_MICROBLAZE0_USE_BARREL == 0
+>>>>>>> v3.18
 	/* Only the used shift constants defined here - add more if needed */
 	#define BSRLI2(rD, rA)				\
 		srl rD, rA;		/* << 1 */	\
 		srl rD, rD;		/* << 2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	#define BSRLI4(rD, rA)		\
+		BSRLI2(rD, rA);		\
+		BSRLI2(rD, rD)
+>>>>>>> v3.18
 =======
 	#define BSRLI4(rD, rA)		\
 		BSRLI2(rD, rA);		\
@@ -181,8 +191,11 @@
 		BSRLI10(rD, rA);	\
 		BSRLI10(rD, rD)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	#endif
 =======
+=======
+>>>>>>> v3.18
 
 	.macro	bsrli, rD, rA, IMM
 	.if (\IMM) == 2
@@ -210,6 +223,9 @@
 	.endm
 	#endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_MMU */
 
@@ -234,8 +250,13 @@
  *
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * STACK FRAME STRUCTURE (for NO_MMU)
  * ---------------------------------
+=======
+ * STACK FRAME STRUCTURE (for CONFIG_MMU=n)
+ * ----------------------------------------
+>>>>>>> v3.18
 =======
  * STACK FRAME STRUCTURE (for CONFIG_MMU=n)
  * ----------------------------------------
@@ -650,7 +671,11 @@ ex_handler_done:
 		tophys(r4,r4)
 		/* Create L1 (pgdir/pmd) address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BSRLI(r5,r3, PGDIR_SHIFT - 2)
+=======
+		bsrli	r5, r3, PGDIR_SHIFT - 2
+>>>>>>> v3.18
 =======
 		bsrli	r5, r3, PGDIR_SHIFT - 2
 >>>>>>> v3.18
@@ -663,7 +688,11 @@ ex_handler_done:
 
 		tophys(r5,r5)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BSRLI(r6,r3,PTE_SHIFT) /* Compute PTE address */
+=======
+		bsrli	r6, r3, PTE_SHIFT /* Compute PTE address */
+>>>>>>> v3.18
 =======
 		bsrli	r6, r3, PTE_SHIFT /* Compute PTE address */
 >>>>>>> v3.18
@@ -759,7 +788,11 @@ ex_handler_done:
 		tophys(r4,r4)
 		/* Create L1 (pgdir/pmd) address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BSRLI(r5,r3, PGDIR_SHIFT - 2)
+=======
+		bsrli	r5, r3, PGDIR_SHIFT - 2
+>>>>>>> v3.18
 =======
 		bsrli	r5, r3, PGDIR_SHIFT - 2
 >>>>>>> v3.18
@@ -772,7 +805,11 @@ ex_handler_done:
 
 		tophys(r5,r5)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BSRLI(r6,r3,PTE_SHIFT) /* Compute PTE address */
+=======
+		bsrli	r6, r3, PTE_SHIFT /* Compute PTE address */
+>>>>>>> v3.18
 =======
 		bsrli	r6, r3, PTE_SHIFT /* Compute PTE address */
 >>>>>>> v3.18
@@ -838,7 +875,11 @@ ex_handler_done:
 		tophys(r4,r4)
 		/* Create L1 (pgdir/pmd) address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BSRLI(r5,r3, PGDIR_SHIFT - 2)
+=======
+		bsrli	r5, r3, PGDIR_SHIFT - 2
+>>>>>>> v3.18
 =======
 		bsrli	r5, r3, PGDIR_SHIFT - 2
 >>>>>>> v3.18
@@ -851,7 +892,11 @@ ex_handler_done:
 
 		tophys(r5,r5)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BSRLI(r6,r3,PTE_SHIFT) /* Compute PTE address */
+=======
+		bsrli	r6, r3, PTE_SHIFT /* Compute PTE address */
+>>>>>>> v3.18
 =======
 		bsrli	r6, r3, PTE_SHIFT /* Compute PTE address */
 >>>>>>> v3.18
@@ -992,7 +1037,11 @@ ex_handler_done:
 _unaligned_data_exception:
 	andi	r8, r3, 0x3E0;	/* Mask and extract the register operand */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BSRLI(r8,r8,2);		/* r8 >> 2 = register operand * 8 */
+=======
+	bsrli   r8, r8, 2;		/* r8 >> 2 = register operand * 8 */
+>>>>>>> v3.18
 =======
 	bsrli   r8, r8, 2;		/* r8 >> 2 = register operand * 8 */
 >>>>>>> v3.18

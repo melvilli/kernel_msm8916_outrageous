@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -104,6 +108,10 @@ acpi_ex_convert_to_integer(union acpi_operand_object *obj_desc,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -126,7 +134,10 @@ acpi_ex_convert_to_integer(union acpi_operand_object *obj_desc,
 	switch (obj_desc->common.type) {
 	case ACPI_TYPE_STRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -173,6 +184,10 @@ acpi_ex_convert_to_integer(union acpi_operand_object *obj_desc,
 
 		/* No other types can get here */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -229,7 +244,10 @@ acpi_ex_convert_to_buffer(union acpi_operand_object *obj_desc,
 
 	case ACPI_TYPE_INTEGER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -252,7 +270,10 @@ acpi_ex_convert_to_buffer(union acpi_operand_object *obj_desc,
 
 	case ACPI_TYPE_STRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -280,6 +301,10 @@ acpi_ex_convert_to_buffer(union acpi_operand_object *obj_desc,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -330,6 +355,10 @@ acpi_ex_convert_to_ascii(u64 integer, u16 base, u8 *string, u8 data_width)
 		switch (data_width) {
 		case 1:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -338,6 +367,10 @@ acpi_ex_convert_to_ascii(u64 integer, u16 base, u8 *string, u8 data_width)
 
 		case 4:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -347,6 +380,10 @@ acpi_ex_convert_to_ascii(u64 integer, u16 base, u8 *string, u8 data_width)
 		case 8:
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -584,6 +621,10 @@ acpi_ex_convert_to_string(union acpi_operand_object * obj_desc,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -641,6 +682,10 @@ acpi_ex_convert_to_target_type(acpi_object_type destination_type,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -695,6 +740,10 @@ acpi_ex_convert_to_target_type(acpi_object_type destination_type,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -714,6 +763,10 @@ acpi_ex_convert_to_target_type(acpi_object_type destination_type,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -6,7 +6,11 @@
 #include <linux/time.h>
 #include <linux/kernel_stat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/cputime.h>
+=======
+#include <linux/cputime.h>
+>>>>>>> v3.18
 =======
 #include <linux/cputime.h>
 >>>>>>> v3.18
@@ -25,8 +29,12 @@ static int uptime_proc_show(struct seq_file *m, void *v)
 		idletime += (__force u64) kcpustat_cpu(i).cpustat[CPUTIME_IDLE];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_posix_clock_monotonic_gettime(&uptime);
 	monotonic_to_bootbased(&uptime);
+=======
+	get_monotonic_boottime(&uptime);
+>>>>>>> v3.18
 =======
 	get_monotonic_boottime(&uptime);
 >>>>>>> v3.18
@@ -59,7 +67,11 @@ static int __init proc_uptime_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(proc_uptime_init);
+=======
+fs_initcall(proc_uptime_init);
+>>>>>>> v3.18
 =======
 fs_initcall(proc_uptime_init);
 >>>>>>> v3.18

@@ -27,8 +27,11 @@
 #include <media/rc-map.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct rc_map_table ati_x10[] = {
 =======
+=======
+>>>>>>> v3.18
 /*
  * Intended usage comments below are from vendor-supplied
  * Source: ATI REMOTE WONDER™ Installation Guide
@@ -65,6 +68,9 @@ static struct rc_map_table ati_x10[] = {
 	 * has problems with keycodes greater than 255, so avoid those high
 	 * keycodes in default maps.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0x0d, KEY_1 },
 	{ 0x0e, KEY_2 },
@@ -75,6 +81,7 @@ static struct rc_map_table ati_x10[] = {
 	{ 0x13, KEY_7 },
 	{ 0x14, KEY_8 },
 	{ 0x15, KEY_9 },
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ 0x17, KEY_0 },
 	{ 0x00, KEY_A },
@@ -117,6 +124,8 @@ static struct rc_map_table ati_x10[] = {
 	{ 0x2f, KEY_END },        /* END */
 	{ 0x30, KEY_SELECT },     /* SELECT */
 =======
+=======
+>>>>>>> v3.18
 	{ 0x16, KEY_MENU },       /* "menu": DVD root menu */
 				  /* KEY_NUMERIC_STAR? */
 	{ 0x17, KEY_0 },
@@ -156,6 +165,9 @@ static struct rc_map_table ati_x10[] = {
 	{ 0x2e, KEY_HOME },       /* TOP */
 	{ 0x2f, KEY_END },        /* END */
 	{ 0x30, KEY_SELECT },     /* SELECT  (X11 warning: 0x161) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

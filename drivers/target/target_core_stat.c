@@ -5,7 +5,11 @@
  * target_core_mib.c code
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (c) Copyright 2006-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2006-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2006-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -37,7 +41,10 @@
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/blkdev.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/configfs.h>
@@ -222,7 +229,12 @@ static ssize_t target_stat_scsi_tgt_dev_show_attr_resets(
 		container_of(sgrps, struct se_device, dev_stat_grps);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snprintf(page, PAGE_SIZE, "%u\n", dev->num_resets);
+=======
+	return snprintf(page, PAGE_SIZE, "%lu\n",
+			atomic_long_read(&dev->num_resets));
+>>>>>>> v3.18
 =======
 	return snprintf(page, PAGE_SIZE, "%lu\n",
 			atomic_long_read(&dev->num_resets));
@@ -410,8 +422,13 @@ static ssize_t target_stat_scsi_lu_show_attr_num_cmds(
 
 	/* scsiLuNumCommands */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snprintf(page, PAGE_SIZE, "%llu\n",
 			(unsigned long long)dev->num_cmds);
+=======
+	return snprintf(page, PAGE_SIZE, "%lu\n",
+			atomic_long_read(&dev->num_cmds));
+>>>>>>> v3.18
 =======
 	return snprintf(page, PAGE_SIZE, "%lu\n",
 			atomic_long_read(&dev->num_cmds));
@@ -427,7 +444,12 @@ static ssize_t target_stat_scsi_lu_show_attr_read_mbytes(
 
 	/* scsiLuReadMegaBytes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snprintf(page, PAGE_SIZE, "%u\n", (u32)(dev->read_bytes >> 20));
+=======
+	return snprintf(page, PAGE_SIZE, "%lu\n",
+			atomic_long_read(&dev->read_bytes) >> 20);
+>>>>>>> v3.18
 =======
 	return snprintf(page, PAGE_SIZE, "%lu\n",
 			atomic_long_read(&dev->read_bytes) >> 20);
@@ -443,7 +465,12 @@ static ssize_t target_stat_scsi_lu_show_attr_write_mbytes(
 
 	/* scsiLuWrittenMegaBytes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snprintf(page, PAGE_SIZE, "%u\n", (u32)(dev->write_bytes >> 20));
+=======
+	return snprintf(page, PAGE_SIZE, "%lu\n",
+			atomic_long_read(&dev->write_bytes) >> 20);
+>>>>>>> v3.18
 =======
 	return snprintf(page, PAGE_SIZE, "%lu\n",
 			atomic_long_read(&dev->write_bytes) >> 20);
@@ -459,7 +486,11 @@ static ssize_t target_stat_scsi_lu_show_attr_resets(
 
 	/* scsiLuInResets */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snprintf(page, PAGE_SIZE, "%u\n", dev->num_resets);
+=======
+	return snprintf(page, PAGE_SIZE, "%lu\n", atomic_long_read(&dev->num_resets));
+>>>>>>> v3.18
 =======
 	return snprintf(page, PAGE_SIZE, "%lu\n", atomic_long_read(&dev->num_resets));
 >>>>>>> v3.18

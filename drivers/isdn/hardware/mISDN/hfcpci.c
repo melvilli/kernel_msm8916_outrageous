@@ -1308,17 +1308,23 @@ mode_hfcpci(struct bchannel *bch, int bc, int protocol)
 		if (fifo2 & 2) {
 			hc->hw.fifo_en &= ~HFCPCI_FIFOEN_B2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hc->hw.int_m1 &= ~(HFCPCI_INTS_B2TRANS +
 					   HFCPCI_INTS_B2REC);
 		} else {
 			hc->hw.fifo_en &= ~HFCPCI_FIFOEN_B1;
 			hc->hw.int_m1 &= ~(HFCPCI_INTS_B1TRANS +
 =======
+=======
+>>>>>>> v3.18
 			hc->hw.int_m1 &= ~(HFCPCI_INTS_B2TRANS |
 					   HFCPCI_INTS_B2REC);
 		} else {
 			hc->hw.fifo_en &= ~HFCPCI_FIFOEN_B1;
 			hc->hw.int_m1 &= ~(HFCPCI_INTS_B1TRANS |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					   HFCPCI_INTS_B1REC);
 		}
@@ -1355,7 +1361,11 @@ mode_hfcpci(struct bchannel *bch, int bc, int protocol)
 			hc->hw.fifo_en |= HFCPCI_FIFOEN_B2;
 			if (!tics)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				hc->hw.int_m1 |= (HFCPCI_INTS_B2TRANS +
+=======
+				hc->hw.int_m1 |= (HFCPCI_INTS_B2TRANS |
+>>>>>>> v3.18
 =======
 				hc->hw.int_m1 |= (HFCPCI_INTS_B2TRANS |
 >>>>>>> v3.18
@@ -1366,7 +1376,11 @@ mode_hfcpci(struct bchannel *bch, int bc, int protocol)
 			hc->hw.fifo_en |= HFCPCI_FIFOEN_B1;
 			if (!tics)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				hc->hw.int_m1 |= (HFCPCI_INTS_B1TRANS +
+=======
+				hc->hw.int_m1 |= (HFCPCI_INTS_B1TRANS |
+>>>>>>> v3.18
 =======
 				hc->hw.int_m1 |= (HFCPCI_INTS_B1TRANS |
 >>>>>>> v3.18
@@ -1392,7 +1406,11 @@ mode_hfcpci(struct bchannel *bch, int bc, int protocol)
 			hc->hw.last_bfifo_cnt[1] = 0;
 			hc->hw.fifo_en |= HFCPCI_FIFOEN_B2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hc->hw.int_m1 |= (HFCPCI_INTS_B2TRANS +
+=======
+			hc->hw.int_m1 |= (HFCPCI_INTS_B2TRANS |
+>>>>>>> v3.18
 =======
 			hc->hw.int_m1 |= (HFCPCI_INTS_B2TRANS |
 >>>>>>> v3.18
@@ -1403,7 +1421,11 @@ mode_hfcpci(struct bchannel *bch, int bc, int protocol)
 			hc->hw.last_bfifo_cnt[0] = 0;
 			hc->hw.fifo_en |= HFCPCI_FIFOEN_B1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hc->hw.int_m1 |= (HFCPCI_INTS_B1TRANS +
+=======
+			hc->hw.int_m1 |= (HFCPCI_INTS_B1TRANS |
+>>>>>>> v3.18
 =======
 			hc->hw.int_m1 |= (HFCPCI_INTS_B1TRANS |
 >>>>>>> v3.18

@@ -40,13 +40,19 @@ menuconfig BT
 	  more information, see <http://www.bluez.org/>.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BT_6LOWPAN
 	tristate "Bluetooth 6LoWPAN support"
 	depends on BT && 6LOWPAN
 	help
 	  IPv6 compression over Bluetooth Low Energy.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "net/bluetooth/rfcomm/Kconfig"
 

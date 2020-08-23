@@ -78,7 +78,10 @@ static struct sh_eth_plat_data sh7757_eth0_pdata = {
 	.phy = 1,
 	.edmac_endian = EDMAC_LITTLE_ENDIAN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.register_type = SH_ETH_REG_FAST_SH4,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.set_mdio_gate = sh7757_eth_set_mdio_gate,
@@ -86,7 +89,11 @@ static struct sh_eth_plat_data sh7757_eth0_pdata = {
 
 static struct platform_device sh7757_eth0_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "sh-eth",
+=======
+	.name		= "sh7757-ether",
+>>>>>>> v3.18
 =======
 	.name		= "sh7757-ether",
 >>>>>>> v3.18
@@ -114,7 +121,10 @@ static struct sh_eth_plat_data sh7757_eth1_pdata = {
 	.phy = 1,
 	.edmac_endian = EDMAC_LITTLE_ENDIAN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.register_type = SH_ETH_REG_FAST_SH4,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.set_mdio_gate = sh7757_eth_set_mdio_gate,
@@ -122,7 +132,11 @@ static struct sh_eth_plat_data sh7757_eth1_pdata = {
 
 static struct platform_device sh7757_eth1_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "sh-eth",
+=======
+	.name		= "sh7757-ether",
+>>>>>>> v3.18
 =======
 	.name		= "sh7757-ether",
 >>>>>>> v3.18
@@ -166,7 +180,10 @@ static struct sh_eth_plat_data sh7757_eth_giga0_pdata = {
 	.phy = 18,
 	.edmac_endian = EDMAC_LITTLE_ENDIAN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.register_type = SH_ETH_REG_GIGABIT,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.set_mdio_gate = sh7757_eth_giga_set_mdio_gate,
@@ -175,7 +192,11 @@ static struct sh_eth_plat_data sh7757_eth_giga0_pdata = {
 
 static struct platform_device sh7757_eth_giga0_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "sh-eth",
+=======
+	.name		= "sh7757-gether",
+>>>>>>> v3.18
 =======
 	.name		= "sh7757-gether",
 >>>>>>> v3.18
@@ -208,7 +229,10 @@ static struct sh_eth_plat_data sh7757_eth_giga1_pdata = {
 	.phy = 19,
 	.edmac_endian = EDMAC_LITTLE_ENDIAN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.register_type = SH_ETH_REG_GIGABIT,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.set_mdio_gate = sh7757_eth_giga_set_mdio_gate,
@@ -217,7 +241,11 @@ static struct sh_eth_plat_data sh7757_eth_giga1_pdata = {
 
 static struct platform_device sh7757_eth_giga1_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "sh-eth",
+=======
+	.name		= "sh7757-gether",
+>>>>>>> v3.18
 =======
 	.name		= "sh7757-gether",
 >>>>>>> v3.18
@@ -285,7 +313,11 @@ static struct resource sdhi_resources[] = {
 	[0] = {
 		.start  = 0xffe50000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.end    = 0xffe501ff,
+=======
+		.end    = 0xffe500ff,
+>>>>>>> v3.18
 =======
 		.end    = 0xffe500ff,
 >>>>>>> v3.18

@@ -68,7 +68,10 @@
 #include <linux/errno.h>
 #include <linux/gfp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/tty.h>
@@ -96,6 +99,7 @@ MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __u16 vendor;		/* no default */
 static __u16 product;		/* no default */
 module_param(vendor, ushort, 0);
@@ -103,6 +107,8 @@ MODULE_PARM_DESC(vendor, "User specified USB idVendor (required)");
 module_param(product, ushort, 0);
 MODULE_PARM_DESC(product, "User specified USB idProduct (required)");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 module_param(safe, bool, 0);
@@ -139,7 +145,11 @@ MODULE_PARM_DESC(padded, "Pad to full wMaxPacketSize On/Off");
 	.bInterfaceSubClass = (isc),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct usb_device_id id_table[] = {
+=======
+static const struct usb_device_id id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct usb_device_id id_table[] = {
 >>>>>>> v3.18
@@ -151,8 +161,11 @@ static const struct usb_device_id id_table[] = {
 	{MY_USB_DEVICE(0x4dd, 0x8004, CDC_DEVICE_CLASS, LINEO_INTERFACE_CLASS, LINEO_INTERFACE_SUBCLASS_SAFESERIAL)},	/* Collie */
 	{MY_USB_DEVICE(0x5f9, 0xffff, CDC_DEVICE_CLASS, LINEO_INTERFACE_CLASS, LINEO_INTERFACE_SUBCLASS_SAFESERIAL)},	/* Sharp tmp */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* extra null entry for module vendor/produc parameters */
 	{MY_USB_DEVICE(0, 0, CDC_DEVICE_CLASS, LINEO_INTERFACE_CLASS, LINEO_INTERFACE_SUBCLASS_SAFESERIAL)},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{}			/* terminating entry  */
@@ -229,11 +242,14 @@ static void safe_process_read_urb(struct urb *urb)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (length < 2) {
 		dev_err(&port->dev, "malformed packet\n");
 		return;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fcs = fcs_compute10(data, length, CRC10_INITFCS);
@@ -294,8 +310,11 @@ static int safe_prepare_write_buffer(struct usb_serial_port *port,
 static int safe_startup(struct usb_serial *serial)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (serial->interface->cur_altsetting->desc.bInterfaceProtocol) {
 =======
+=======
+>>>>>>> v3.18
 	struct usb_interface_descriptor	*desc;
 
 	if (serial->dev->descriptor.bDeviceClass != CDC_DEVICE_CLASS)
@@ -309,6 +328,9 @@ static int safe_startup(struct usb_serial *serial)
 		return -ENODEV;
 
 	switch (desc->bInterfaceProtocol) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case LINEO_SAFESERIAL_CRC:
 		break;
@@ -338,6 +360,7 @@ static struct usb_serial_driver * const serial_drivers[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init safe_init(void)
 {
 	int i;
@@ -365,6 +388,9 @@ static void __exit safe_exit(void)
 
 module_init(safe_init);
 module_exit(safe_exit);
+=======
+module_usb_serial_driver(serial_drivers, id_table);
+>>>>>>> v3.18
 =======
 module_usb_serial_driver(serial_drivers, id_table);
 >>>>>>> v3.18

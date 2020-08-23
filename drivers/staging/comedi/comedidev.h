@@ -15,6 +15,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
@@ -22,11 +23,14 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 */
 
 #ifndef _COMEDIDEV_H
 #define _COMEDIDEV_H
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -53,6 +57,8 @@
 } while (0)
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/dma-mapping.h>
 #include <linux/mutex.h>
 #include <linux/spinlock_types.h>
@@ -61,6 +67,9 @@
 
 #include "comedi.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define COMEDI_VERSION(a, b, c) (((a) << 16) + ((b) << 8) + (c))
 #define COMEDI_VERSION_CODE COMEDI_VERSION(COMEDI_MAJORVERSION, \
@@ -92,6 +101,7 @@ struct comedi_subdevice {
 	const unsigned int *maxdata_list;	/* list is channel specific */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int flags;
 	const unsigned int *flaglist;
 
@@ -99,11 +109,14 @@ struct comedi_subdevice {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	const struct comedi_lrange *range_table;
 	const struct comedi_lrange *const *range_table_list;
 
 	unsigned int *chanlist;	/* driver-owned chanlist (not used) */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int (*insn_read) (struct comedi_device *, struct comedi_subdevice *,
 			  struct comedi_insn *, unsigned int *);
@@ -131,6 +144,8 @@ struct comedi_subdevice {
 		       void *data, unsigned int num_bytes,
 		       unsigned int start_chan_index);
 =======
+=======
+>>>>>>> v3.18
 	int (*insn_read)(struct comedi_device *, struct comedi_subdevice *,
 			 struct comedi_insn *, unsigned int *);
 	int (*insn_write)(struct comedi_device *, struct comedi_subdevice *,
@@ -152,6 +167,9 @@ struct comedi_subdevice {
 	void (*munge)(struct comedi_device *dev, struct comedi_subdevice *s,
 		      void *data, unsigned int num_bytes,
 		      unsigned int start_chan_index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	enum dma_data_direction async_dma_dir;
 
@@ -160,6 +178,11 @@ struct comedi_subdevice {
 	struct device *class_dev;
 	int minor;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	unsigned int *readback;
+>>>>>>> v3.18
 =======
 
 	unsigned int *readback;
@@ -171,6 +194,7 @@ struct comedi_buf_page {
 	dma_addr_t dma_addr;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct comedi_async {
 	struct comedi_subdevice *subdevice;
@@ -221,6 +245,8 @@ struct comedi_async {
 	int (*inttrig) (struct comedi_device *dev, struct comedi_subdevice *s,
 			unsigned int x);
 =======
+=======
+>>>>>>> v3.18
 struct comedi_buf_map {
 	struct device *dma_hw_dev;
 	struct comedi_buf_page *page_list;
@@ -335,6 +361,9 @@ struct comedi_async {
 	unsigned int cb_mask;
 	int (*inttrig)(struct comedi_device *dev, struct comedi_subdevice *s,
 		       unsigned int x);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -344,9 +373,15 @@ struct comedi_driver {
 	const char *driver_name;
 	struct module *module;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*attach) (struct comedi_device *, struct comedi_devconfig *);
 	void (*detach) (struct comedi_device *);
 	int (*auto_attach) (struct comedi_device *, unsigned long);
+=======
+	int (*attach)(struct comedi_device *, struct comedi_devconfig *);
+	void (*detach)(struct comedi_device *);
+	int (*auto_attach)(struct comedi_device *, unsigned long);
+>>>>>>> v3.18
 =======
 	int (*attach)(struct comedi_device *, struct comedi_devconfig *);
 	void (*detach)(struct comedi_device *);
@@ -368,6 +403,10 @@ struct comedi_device {
 	struct device *class_dev;
 	int minor;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int detach_count;
+>>>>>>> v3.18
 =======
 	unsigned int detach_count;
 >>>>>>> v3.18
@@ -380,16 +419,22 @@ struct comedi_device {
 	const void *board_ptr;
 	bool attached:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool in_request_module:1;
 	bool ioenabled:1;
 	spinlock_t spinlock;
 	struct mutex mutex;
 =======
+=======
+>>>>>>> v3.18
 	bool ioenabled:1;
 	spinlock_t spinlock;
 	struct mutex mutex;
 	struct rw_semaphore attach_lock;
 	struct kref refcount;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int n_subdevices;
@@ -397,6 +442,10 @@ struct comedi_device {
 
 	/* dumb */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem *mmio;
+>>>>>>> v3.18
 =======
 	void __iomem *mmio;
 >>>>>>> v3.18
@@ -409,6 +458,7 @@ struct comedi_device {
 
 	struct fasync_struct *async_queue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int (*open) (struct comedi_device *dev);
 	void (*close) (struct comedi_device *dev);
@@ -426,10 +476,15 @@ static const int comedi_debug;
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	int (*open)(struct comedi_device *dev);
 	void (*close)(struct comedi_device *dev);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * function prototypes
@@ -437,7 +492,10 @@ static const int comedi_debug;
 
 void comedi_event(struct comedi_device *dev, struct comedi_subdevice *s);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void comedi_error(const struct comedi_device *dev, const char *s);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -449,17 +507,23 @@ enum comedi_minor_bits {
 	COMEDI_SUBDEVICE_MINOR_MASK = 0xf0
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const unsigned COMEDI_SUBDEVICE_MINOR_SHIFT = 4;
 static const unsigned COMEDI_SUBDEVICE_MINOR_OFFSET = 1;
 
 struct comedi_device *comedi_dev_from_minor(unsigned minor);
 =======
+=======
+>>>>>>> v3.18
 
 static const unsigned COMEDI_SUBDEVICE_MINOR_SHIFT = 4;
 static const unsigned COMEDI_SUBDEVICE_MINOR_OFFSET = 1;
 
 struct comedi_device *comedi_dev_get_from_minor(unsigned minor);
 int comedi_dev_put(struct comedi_device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void init_polling(void);
@@ -470,7 +534,10 @@ void stop_polling(struct comedi_device *);
 /* subdevice runflags */
 enum subdevice_runflags {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SRF_USER = 0x00000001,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SRF_RT = 0x00000002,
@@ -478,7 +545,12 @@ enum subdevice_runflags {
 	 * command was started */
 	SRF_ERROR = 0x00000004,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SRF_RUNNING = 0x08000000
+=======
+	SRF_RUNNING = 0x08000000,
+	SRF_FREE_SPRIV = 0x80000000,	/* free s->private on detach */
+>>>>>>> v3.18
 =======
 	SRF_RUNNING = 0x08000000,
 	SRF_FREE_SPRIV = 0x80000000,	/* free s->private on detach */
@@ -488,6 +560,11 @@ enum subdevice_runflags {
 bool comedi_is_subdevice_running(struct comedi_subdevice *s);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void *comedi_alloc_spriv(struct comedi_subdevice *s, size_t size);
+
+>>>>>>> v3.18
 =======
 void *comedi_alloc_spriv(struct comedi_subdevice *s, size_t size);
 
@@ -530,8 +607,11 @@ struct comedi_lrange {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* some silly little inline functions */
 =======
+=======
+>>>>>>> v3.18
 static inline bool comedi_range_is_bipolar(struct comedi_subdevice *s,
 					   unsigned int range)
 {
@@ -577,6 +657,9 @@ static inline unsigned int comedi_offset_munge(struct comedi_subdevice *s,
 {
 	return val ^ s->maxdata ^ (s->maxdata >> 1);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline unsigned int bytes_per_sample(const struct comedi_subdevice *subd)
@@ -584,8 +667,13 @@ static inline unsigned int bytes_per_sample(const struct comedi_subdevice *subd)
 	if (subd->subdev_flags & SDF_LSAMPL)
 		return sizeof(unsigned int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		return sizeof(short);
+=======
+
+	return sizeof(short);
+>>>>>>> v3.18
 =======
 
 	return sizeof(short);
@@ -600,6 +688,7 @@ static inline unsigned int bytes_per_sample(const struct comedi_subdevice *subd)
  */
 int comedi_set_hw_dev(struct comedi_device *dev, struct device *hw_dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 unsigned int comedi_buf_write_alloc(struct comedi_async *, unsigned int);
 unsigned int comedi_buf_write_free(struct comedi_async *, unsigned int);
@@ -622,6 +711,8 @@ int comedi_alloc_subdevices(struct comedi_device *, int);
 
 void comedi_spriv_free(struct comedi_device *, int subdev_num);
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned int comedi_buf_n_bytes_ready(struct comedi_subdevice *s)
 {
 	return s->async->buf_write_count - s->async->buf_read_count;
@@ -682,6 +773,9 @@ int comedi_load_firmware(struct comedi_device *, struct device *,
 				   const u8 *data, size_t size,
 				   unsigned long context),
 			 unsigned long context);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int __comedi_request_region(struct comedi_device *,
@@ -696,7 +790,11 @@ void comedi_auto_unconfig(struct device *);
 
 int comedi_driver_register(struct comedi_driver *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int comedi_driver_unregister(struct comedi_driver *);
+=======
+void comedi_driver_unregister(struct comedi_driver *);
+>>>>>>> v3.18
 =======
 void comedi_driver_unregister(struct comedi_driver *);
 >>>>>>> v3.18
@@ -723,7 +821,10 @@ void comedi_driver_unregister(struct comedi_driver *);
 #define PCI_VENDOR_ID_KOLTER		0x1001
 #define PCI_VENDOR_ID_ICP		0x104c
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_VENDOR_ID_AMCC		0x10e8
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PCI_VENDOR_ID_DT		0x1116
@@ -731,6 +832,10 @@ void comedi_driver_unregister(struct comedi_driver *);
 #define PCI_VENDOR_ID_CONTEC		0x1221
 #define PCI_VENDOR_ID_RTD		0x1435
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCI_VENDOR_ID_HUMUSOFT		0x186c
+>>>>>>> v3.18
 =======
 #define PCI_VENDOR_ID_HUMUSOFT		0x186c
 >>>>>>> v3.18
@@ -743,6 +848,10 @@ struct pci_dev *comedi_to_pci_dev(struct comedi_device *);
 int comedi_pci_enable(struct comedi_device *);
 void comedi_pci_disable(struct comedi_device *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void comedi_pci_detach(struct comedi_device *);
+>>>>>>> v3.18
 =======
 void comedi_pci_detach(struct comedi_device *);
 >>>>>>> v3.18
@@ -791,11 +900,17 @@ static inline void comedi_pci_disable(struct comedi_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void comedi_pci_detach(struct comedi_device *dev)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_COMEDI_PCI_DRIVERS */
 
@@ -817,9 +932,15 @@ void comedi_pcmcia_auto_unconfig(struct pcmcia_device *);
 
 int comedi_pcmcia_driver_register(struct comedi_driver *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					struct pcmcia_driver *);
 void comedi_pcmcia_driver_unregister(struct comedi_driver *,
 					struct pcmcia_driver *);
+=======
+				  struct pcmcia_driver *);
+void comedi_pcmcia_driver_unregister(struct comedi_driver *,
+				     struct pcmcia_driver *);
+>>>>>>> v3.18
 =======
 				  struct pcmcia_driver *);
 void comedi_pcmcia_driver_unregister(struct comedi_driver *,
@@ -851,6 +972,10 @@ struct usb_interface;
 
 struct usb_interface *comedi_to_usb_interface(struct comedi_device *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct usb_device *comedi_to_usb_dev(struct comedi_device *);
+>>>>>>> v3.18
 =======
 struct usb_device *comedi_to_usb_dev(struct comedi_device *);
 >>>>>>> v3.18

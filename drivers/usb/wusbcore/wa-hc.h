@@ -37,7 +37,11 @@
  *  hcd        glue with the USB API Host Controller Interface API.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  nep        Notification EndPoint managent: collect notifications
+=======
+ *  nep        Notification EndPoint management: collect notifications
+>>>>>>> v3.18
 =======
  *  nep        Notification EndPoint management: collect notifications
 >>>>>>> v3.18
@@ -69,7 +73,11 @@
  * Note much of the activity is difficult to follow. For example a
  * device connect goes to devconnect, which will cause the "fake" root
 <<<<<<< HEAD
+<<<<<<< HEAD
  * hub port to show a connect and stop there. Then khubd will notice
+=======
+ * hub port to show a connect and stop there. Then hub_wq will notice
+>>>>>>> v3.18
 =======
  * hub port to show a connect and stop there. Then hub_wq will notice
 >>>>>>> v3.18
@@ -100,6 +108,10 @@ struct wusbhc;
 struct wahc;
 extern void wa_urb_enqueue_run(struct work_struct *ws);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void wa_process_errored_transfers_run(struct work_struct *ws);
+>>>>>>> v3.18
 =======
 extern void wa_process_errored_transfers_run(struct work_struct *ws);
 >>>>>>> v3.18
@@ -129,6 +141,10 @@ struct wa_rpipe {
 	spinlock_t seg_lock;
 	struct list_head seg_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head list_node;
+>>>>>>> v3.18
 =======
 	struct list_head list_node;
 >>>>>>> v3.18
@@ -138,7 +154,10 @@ struct wa_rpipe {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum wa_dti_state {
 	WA_DTI_TRANSFER_RESULT_PENDING,
 	WA_DTI_ISOC_PACKET_STATUS_PENDING,
@@ -165,6 +184,9 @@ enum wa_vendor_specific_requests {
 };
 
 #define WA_MAX_BUF_IN_URBS	4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * Instance of a HWA Host Controller
@@ -175,7 +197,11 @@ enum wa_vendor_specific_requests {
  * @wa_descr  Can be accessed without locking because it is in
  *            the same area where the device descriptors were
 <<<<<<< HEAD
+<<<<<<< HEAD
  *            read, so it is guaranteed to exist umodified while
+=======
+ *            read, so it is guaranteed to exist unmodified while
+>>>>>>> v3.18
 =======
  *            read, so it is guaranteed to exist unmodified while
 >>>>>>> v3.18
@@ -202,8 +228,13 @@ enum wa_vendor_specific_requests {
  *
  * FIXME: this needs to be layered up: a wusbhc layer (for sharing
 <<<<<<< HEAD
+<<<<<<< HEAD
  *        comonalities with WHCI), a wa layer (for sharing
  *        comonalities with DWA-RC).
+=======
+ *        commonalities with WHCI), a wa layer (for sharing
+ *        commonalities with DWA-RC).
+>>>>>>> v3.18
 =======
  *        commonalities with WHCI), a wa layer (for sharing
  *        commonalities with DWA-RC).
@@ -232,6 +263,7 @@ struct wahc {
 	u16 rpipes;
 	unsigned long *rpipe_bm;	/* rpipe usage bitmap */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t rpipe_bm_lock;	/* protect rpipe_bm */
 	struct mutex rpipe_mutex;	/* assigning resources to endpoints */
 
@@ -241,6 +273,8 @@ struct wahc {
 	struct wa_xfer_result *xfer_result; /* real size = dti_ep maxpktsize */
 	size_t xfer_result_size;
 =======
+=======
+>>>>>>> v3.18
 	struct list_head rpipe_delayed_list;	/* delayed RPIPES. */
 	spinlock_t rpipe_lock;	/* protect rpipe_bm and delayed list */
 	struct mutex rpipe_mutex;	/* assigning resources to endpoints */
@@ -263,12 +297,16 @@ struct wahc {
 	size_t dti_buf_size;
 
 	unsigned long dto_in_use;	/* protect dto endoint serialization */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s32 status;			/* For reading status */
 
 	struct list_head xfer_list;
 	struct list_head xfer_delayed_list;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spinlock_t xfer_list_lock;
 	struct work_struct xfer_work;
@@ -279,6 +317,8 @@ struct wahc {
 extern int wa_create(struct wahc *wa, struct usb_interface *iface);
 extern void __wa_destroy(struct wahc *wa);
 =======
+=======
+>>>>>>> v3.18
 	struct list_head xfer_errored_list;
 	/*
 	 * lock for the above xfer lists.  Can be taken while a xfer->lock is
@@ -297,6 +337,9 @@ extern int wa_create(struct wahc *wa, struct usb_interface *iface,
 	kernel_ulong_t);
 extern void __wa_destroy(struct wahc *wa);
 extern int wa_dti_start(struct wahc *wa);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void wa_reset_all(struct wahc *wa);
 
@@ -333,7 +376,12 @@ static inline void wa_nep_disarm(struct wahc *wa)
 static inline void wa_rpipe_init(struct wahc *wa)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&wa->rpipe_bm_lock);
+=======
+	INIT_LIST_HEAD(&wa->rpipe_delayed_list);
+	spin_lock_init(&wa->rpipe_lock);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&wa->rpipe_delayed_list);
 	spin_lock_init(&wa->rpipe_lock);
@@ -344,24 +392,33 @@ static inline void wa_rpipe_init(struct wahc *wa)
 static inline void wa_init(struct wahc *wa)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	edc_init(&wa->nep_edc);
 	atomic_set(&wa->notifs_queued, 0);
 =======
+=======
+>>>>>>> v3.18
 	int index;
 
 	edc_init(&wa->nep_edc);
 	atomic_set(&wa->notifs_queued, 0);
 	wa->dti_state = WA_DTI_TRANSFER_RESULT_PENDING;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wa_rpipe_init(wa);
 	edc_init(&wa->dti_edc);
 	INIT_LIST_HEAD(&wa->xfer_list);
 	INIT_LIST_HEAD(&wa->xfer_delayed_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&wa->xfer_list_lock);
 	INIT_WORK(&wa->xfer_work, wa_urb_enqueue_run);
 	atomic_set(&wa->xfer_id_count, 1);
 =======
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&wa->xfer_errored_list);
 	spin_lock_init(&wa->xfer_list_lock);
 	INIT_WORK(&wa->xfer_enqueue_work, wa_urb_enqueue_run);
@@ -372,6 +429,9 @@ static inline void wa_init(struct wahc *wa)
 	for (index = 0; index < WA_MAX_BUF_IN_URBS; ++index)
 		usb_init_urb(&(wa->buf_in_urbs[index]));
 	wa->active_buf_in_urbs = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -396,6 +456,11 @@ static inline void rpipe_put(struct wa_rpipe *rpipe)
 }
 extern void rpipe_ep_disable(struct wahc *, struct usb_host_endpoint *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void rpipe_clear_feature_stalled(struct wahc *,
+			struct usb_host_endpoint *);
+>>>>>>> v3.18
 =======
 extern void rpipe_clear_feature_stalled(struct wahc *,
 			struct usb_host_endpoint *);
@@ -421,7 +486,11 @@ static inline int rpipe_avail_inc(struct wa_rpipe *rpipe)
 extern int wa_urb_enqueue(struct wahc *, struct usb_host_endpoint *,
 			  struct urb *, gfp_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int wa_urb_dequeue(struct wahc *, struct urb *);
+=======
+extern int wa_urb_dequeue(struct wahc *, struct urb *, int);
+>>>>>>> v3.18
 =======
 extern int wa_urb_dequeue(struct wahc *, struct urb *, int);
 >>>>>>> v3.18
@@ -438,7 +507,11 @@ extern void wa_handle_notif_xfer(struct wahc *, struct wa_notif_hdr *);
  *        something.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * FIXME: has to go away in favour of an 'struct' hcd based sollution
+=======
+ * FIXME: has to go away in favour of a 'struct' hcd based solution
+>>>>>>> v3.18
 =======
  * FIXME: has to go away in favour of a 'struct' hcd based solution
 >>>>>>> v3.18
@@ -463,7 +536,11 @@ static inline int __wa_feature(struct wahc *wa, unsigned op, u16 feature)
 			feature,
 			wa->usb_iface->cur_altsetting->desc.bInterfaceNumber,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			NULL, 0, 1000 /* FIXME: arbitrary */);
+=======
+			NULL, 0, USB_CTRL_SET_TIMEOUT);
+>>>>>>> v3.18
 =======
 			NULL, 0, USB_CTRL_SET_TIMEOUT);
 >>>>>>> v3.18
@@ -501,8 +578,12 @@ s32 __wa_get_status(struct wahc *wa)
 		USB_DIR_IN | USB_TYPE_CLASS | USB_RECIP_INTERFACE,
 		0, wa->usb_iface->cur_altsetting->desc.bInterfaceNumber,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		&wa->status, sizeof(wa->status),
 		1000 /* FIXME: arbitrary */);
+=======
+		&wa->status, sizeof(wa->status), USB_CTRL_GET_TIMEOUT);
+>>>>>>> v3.18
 =======
 		&wa->status, sizeof(wa->status), USB_CTRL_GET_TIMEOUT);
 >>>>>>> v3.18

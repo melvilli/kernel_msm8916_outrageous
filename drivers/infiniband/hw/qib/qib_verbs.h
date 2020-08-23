@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012 Intel Corporation.  All rights reserved.
+=======
+ * Copyright (c) 2012, 2013 Intel Corporation.  All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2012, 2013 Intel Corporation.  All rights reserved.
 >>>>>>> v3.18
@@ -46,6 +50,10 @@
 #include <linux/kref.h>
 #include <linux/workqueue.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kthread.h>
+>>>>>>> v3.18
 =======
 #include <linux/kthread.h>
 >>>>>>> v3.18
@@ -158,7 +166,11 @@ struct ib_reth {
 	__be32 rkey;
 	__be32 length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -169,7 +181,11 @@ struct ib_atomic_eth {
 	__be64 swap_data;
 	__be64 compare_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -194,7 +210,11 @@ struct qib_other_headers {
 		struct ib_atomic_eth atomic_eth;
 	} u;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -215,7 +235,11 @@ struct qib_ib_header {
 		struct qib_other_headers oth;
 	} u;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -224,7 +248,11 @@ struct qib_pio_header {
 	__le32 pbc[2];
 	struct qib_ib_header hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -296,7 +324,12 @@ struct qib_cq_wc {
 struct qib_cq {
 	struct ib_cq ibcq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct comptask;
+=======
+	struct kthread_work comptask;
+	struct qib_devdata *dd;
+>>>>>>> v3.18
 =======
 	struct kthread_work comptask;
 	struct qib_devdata *dd;
@@ -679,8 +712,11 @@ struct qib_qpn_table {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_LKEY_TABLE_BITS 23
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct qib_lkey_table {
@@ -697,7 +733,10 @@ struct qib_opcode_stats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct qib_opcode_stats_perctx {
 	struct qib_opcode_stats stats[128];
 };
@@ -709,6 +748,9 @@ struct qib_pma_counters {
 	u64 n_multicast_rcv;    /* total multicast packets received */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qib_ibport {
 	struct qib_qp __rcu *qp0;
@@ -727,16 +769,22 @@ struct qib_ibport {
 	__be64 guids[QIB_GUIDS_PER_PORT	- 1];	/* writable GUIDs */
 	u64 tid;		/* TID for traps */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 n_unicast_xmit;     /* total unicast packets sent */
 	u64 n_unicast_rcv;      /* total unicast packets received */
 	u64 n_multicast_xmit;   /* total multicast packets sent */
 	u64 n_multicast_rcv;    /* total multicast packets received */
 =======
+=======
+>>>>>>> v3.18
 	struct qib_pma_counters __percpu *pmastats;
 	u64 z_unicast_xmit;     /* starting count for PMA */
 	u64 z_unicast_rcv;      /* starting count for PMA */
 	u64 z_multicast_xmit;   /* starting count for PMA */
 	u64 z_multicast_rcv;    /* starting count for PMA */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u64 z_symbol_error_counter;             /* starting count for PMA */
 	u64 z_link_error_recovery_counter;      /* starting count for PMA */
@@ -785,7 +833,10 @@ struct qib_ibport {
 	u8 sl_to_vl[16];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qib_opcode_stats opstats[128];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -832,11 +883,17 @@ struct qib_ibdev {
 	u32 n_mcast_grps_allocated; /* number of mcast groups allocated */
 	spinlock_t n_mcast_grps_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 	/* per HCA debugfs */
 	struct dentry *qib_ibdev_dbg;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -903,8 +960,11 @@ static inline int qib_send_ok(struct qib_qp *qp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct workqueue_struct *qib_cq_wq;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -984,7 +1044,10 @@ void qib_init_qpn_table(struct qib_devdata *dd, struct qib_qpn_table *qpt);
 void qib_free_qpn_table(struct qib_qpn_table *qpt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 
 struct qib_qp_iter;
@@ -997,6 +1060,9 @@ void qib_qp_iter_print(struct seq_file *s, struct qib_qp_iter *iter);
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void qib_get_credit(struct qib_qp *qp, u32 aeth);
 
@@ -1061,11 +1127,17 @@ int qib_query_srq(struct ib_srq *ibsrq, struct ib_srq_attr *attr);
 int qib_destroy_srq(struct ib_srq *ibsrq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int qib_cq_init(struct qib_devdata *dd);
 
 void qib_cq_exit(struct qib_devdata *dd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void qib_cq_enter(struct qib_cq *cq, struct ib_wc *entry, int sig);
 

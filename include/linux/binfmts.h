@@ -32,7 +32,11 @@ struct linux_binprm {
 	unsigned int taso:1;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int recursion_depth;
+=======
+	unsigned int recursion_depth; /* only for search_binary_handler() */
+>>>>>>> v3.18
 =======
 	unsigned int recursion_depth; /* only for search_binary_handler() */
 >>>>>>> v3.18
@@ -49,7 +53,10 @@ struct linux_binprm {
 	unsigned interp_data;
 	unsigned long loader, exec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char tcomm[TASK_COMM_LEN];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -64,7 +71,11 @@ struct linux_binprm {
 /* Function parameter for binfmt->coredump */
 struct coredump_params {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	siginfo_t *siginfo;
+=======
+	const siginfo_t *siginfo;
+>>>>>>> v3.18
 =======
 	const siginfo_t *siginfo;
 >>>>>>> v3.18
@@ -73,6 +84,10 @@ struct coredump_params {
 	unsigned long limit;
 	unsigned long mm_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	loff_t written;
+>>>>>>> v3.18
 =======
 	loff_t written;
 >>>>>>> v3.18
@@ -130,7 +145,10 @@ extern int prepare_bprm_creds(struct linux_binprm *bprm);
 extern void install_exec_creds(struct linux_binprm *bprm);
 extern void set_binfmt(struct linux_binfmt *new);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void free_bprm(struct linux_binprm *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern ssize_t read_code(struct file *, unsigned long, loff_t, size_t);

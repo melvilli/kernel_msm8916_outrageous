@@ -33,6 +33,11 @@ struct vm_area_struct;
 #define PAGE_KERNEL	__pgprot(_PAGE_PRESENT | __READABLE | __WRITEABLE | \
 				 _PAGE_GLOBAL | _page_cachable_default)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PAGE_KERNEL_NC	__pgprot(_PAGE_PRESENT | __READABLE | __WRITEABLE | \
+				 _PAGE_GLOBAL | _CACHE_CACHABLE_NONCOHERENT)
+>>>>>>> v3.18
 =======
 #define PAGE_KERNEL_NC	__pgprot(_PAGE_PRESENT | __READABLE | __WRITEABLE | \
 				 _PAGE_GLOBAL | _CACHE_CACHABLE_NONCOHERENT)
@@ -101,7 +106,10 @@ extern void paging_init(void);
 #define pmd_page_vaddr(pmd)	pmd_val(pmd)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define htw_stop()							\
 do {									\
 	if (cpu_has_htw)						\
@@ -130,6 +138,9 @@ do {									\
 extern void set_pte_at(struct mm_struct *mm, unsigned long addr, pte_t *ptep,
 	pte_t pteval);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(CONFIG_64BIT_PHYS_ADDR) && defined(CONFIG_CPU_MIPS32)
 
@@ -155,7 +166,10 @@ static inline void set_pte(pte_t *ptep, pte_t pte)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define set_pte_at(mm, addr, ptep, pteval) set_pte(ptep, pteval)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -169,6 +183,10 @@ static inline void pte_clear(struct mm_struct *mm, unsigned long addr, pte_t *pt
 
 	set_pte_at(mm, addr, ptep, null);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	htw_reset();
+>>>>>>> v3.18
 =======
 	htw_reset();
 >>>>>>> v3.18
@@ -193,6 +211,7 @@ static inline void set_pte(pte_t *ptep, pte_t pteval)
 		 * Make sure the buddy is global too (if it's !none,
 		 * it better already be global)
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_SMP
 		/*
@@ -232,11 +251,16 @@ static inline void set_pte(pte_t *ptep, pte_t pteval)
 }
 #define set_pte_at(mm, addr, ptep, pteval) set_pte(ptep, pteval)
 =======
+=======
+>>>>>>> v3.18
 		if (pte_none(*buddy))
 			pte_val(*buddy) = pte_val(*buddy) | _PAGE_GLOBAL;
 	}
 #endif
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void pte_clear(struct mm_struct *mm, unsigned long addr, pte_t *ptep)
@@ -249,6 +273,10 @@ static inline void pte_clear(struct mm_struct *mm, unsigned long addr, pte_t *pt
 #endif
 		set_pte_at(mm, addr, ptep, __pte(0));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	htw_reset();
+>>>>>>> v3.18
 =======
 	htw_reset();
 >>>>>>> v3.18
@@ -423,7 +451,10 @@ static inline pgprot_t pgprot_noncached(pgprot_t _prot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline pgprot_t pgprot_writecombine(pgprot_t _prot)
 {
 	unsigned long prot = pgprot_val(_prot);
@@ -434,6 +465,9 @@ static inline pgprot_t pgprot_writecombine(pgprot_t _prot)
 	return __pgprot(prot);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Conversion functions: convert a page and protection to a page entry,
@@ -461,8 +495,11 @@ static inline pte_t pte_modify(pte_t pte, pgprot_t newprot)
 extern void __update_tlb(struct vm_area_struct *vma, unsigned long address,
 	pte_t pte);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __update_cache(struct vm_area_struct *vma, unsigned long address,
 	pte_t pte);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -472,7 +509,10 @@ static inline void update_mmu_cache(struct vm_area_struct *vma,
 	pte_t pte = *ptep;
 	__update_tlb(vma, address, pte);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__update_cache(vma, address, pte);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

@@ -17,7 +17,11 @@
 #include <asm/xen/interface.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int xen_create_contiguous_region(unsigned long vstart, unsigned int order,
+=======
+int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
+>>>>>>> v3.18
 =======
 int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
 >>>>>>> v3.18
@@ -29,7 +33,11 @@ int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
 
 	/* we assume that dom0 is mapped 1:1 for now */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*dma_handle = virt_to_phys(pstart);
+=======
+	*dma_handle = pstart;
+>>>>>>> v3.18
 =======
 	*dma_handle = pstart;
 >>>>>>> v3.18
@@ -38,7 +46,11 @@ int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
 EXPORT_SYMBOL_GPL(xen_create_contiguous_region);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xen_destroy_contiguous_region(unsigned long vstart, unsigned int order)
+=======
+void xen_destroy_contiguous_region(phys_addr_t pstart, unsigned int order)
+>>>>>>> v3.18
 =======
 void xen_destroy_contiguous_region(phys_addr_t pstart, unsigned int order)
 >>>>>>> v3.18
@@ -64,6 +76,10 @@ static struct dma_map_ops xen_swiotlb_dma_ops = {
 	.unmap_page = xen_swiotlb_unmap_page,
 	.dma_supported = xen_swiotlb_dma_supported,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_dma_mask = xen_swiotlb_set_dma_mask,
+>>>>>>> v3.18
 =======
 	.set_dma_mask = xen_swiotlb_set_dma_mask,
 >>>>>>> v3.18

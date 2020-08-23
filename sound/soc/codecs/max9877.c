@@ -15,6 +15,10 @@
 #include <linux/init.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -23,6 +27,7 @@
 
 #include "max9877.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct i2c_client *i2c;
 
@@ -184,6 +189,8 @@ static int max9877_set_osc_mode(struct snd_kcontrol *kcontrol,
 	return 1;
 }
 =======
+=======
+>>>>>>> v3.18
 static struct regmap *regmap;
 
 static struct reg_default max9877_regs[] = {
@@ -193,6 +200,9 @@ static struct reg_default max9877_regs[] = {
 	{ 3, 0x00 },
 	{ 4, 0x49 },
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const unsigned int max9877_pgain_tlv[] = {
@@ -228,6 +238,7 @@ static const char *max9877_osc_mode[] = {
 };
 
 static const struct soc_enum max9877_enum[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	SOC_ENUM_SINGLE_EXT(ARRAY_SIZE(max9877_out_mode), max9877_out_mode),
 	SOC_ENUM_SINGLE_EXT(ARRAY_SIZE(max9877_osc_mode), max9877_osc_mode),
@@ -275,6 +286,8 @@ int max9877_add_controls(struct snd_soc_codec *codec)
 }
 EXPORT_SYMBOL_GPL(max9877_add_controls);
 =======
+=======
+>>>>>>> v3.18
 	SOC_ENUM_SINGLE(MAX9877_OUTPUT_MODE, 0, ARRAY_SIZE(max9877_out_mode),
 			max9877_out_mode),
 	SOC_ENUM_SINGLE(MAX9877_OUTPUT_MODE, MAX9877_OSC_OFFSET,
@@ -353,11 +366,15 @@ static const struct regmap_config max9877_regmap = {
 	.num_reg_defaults = ARRAY_SIZE(max9877_regs),
 	.cache_type = REGCACHE_RBTREE,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int max9877_i2c_probe(struct i2c_client *client,
 			     const struct i2c_device_id *id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	i2c = client;
 
@@ -365,6 +382,8 @@ static int max9877_i2c_probe(struct i2c_client *client,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	regmap = devm_regmap_init_i2c(client, &max9877_regmap);
@@ -376,13 +395,20 @@ static int max9877_i2c_probe(struct i2c_client *client,
 		regmap_write(regmap, max9877_regs[i].reg, max9877_regs[i].def);
 
 	return snd_soc_register_codec(&client->dev, &max9877_codec, NULL, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int max9877_i2c_remove(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c = NULL;
+=======
+	snd_soc_unregister_codec(&client->dev);
+>>>>>>> v3.18
 =======
 	snd_soc_unregister_codec(&client->dev);
 >>>>>>> v3.18

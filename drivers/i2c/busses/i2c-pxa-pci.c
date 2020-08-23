@@ -149,7 +149,11 @@ static void ce4100_i2c_remove(struct pci_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ce4100_i2c_devices) = {
+=======
+static const struct pci_device_id ce4100_i2c_devices[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ce4100_i2c_devices[] = {
 >>>>>>> v3.18

@@ -56,7 +56,11 @@ static int __init afs_get_client_UUID(void)
 	afs_uuid.time_mid = uuidtime >> 32;
 	afs_uuid.time_hi_and_version = (uuidtime >> 48) & AFS_UUID_TIMEHI_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	afs_uuid.time_hi_and_version = AFS_UUID_VERSION_TIME;
+=======
+	afs_uuid.time_hi_and_version |= AFS_UUID_VERSION_TIME;
+>>>>>>> v3.18
 =======
 	afs_uuid.time_hi_and_version |= AFS_UUID_VERSION_TIME;
 >>>>>>> v3.18
@@ -66,7 +70,11 @@ static int __init afs_get_client_UUID(void)
 	afs_uuid.clock_seq_hi_and_reserved =
 		(clockseq >> 8) & AFS_UUID_CLOCKHI_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	afs_uuid.clock_seq_hi_and_reserved = AFS_UUID_VARIANT_STD;
+=======
+	afs_uuid.clock_seq_hi_and_reserved |= AFS_UUID_VARIANT_STD;
+>>>>>>> v3.18
 =======
 	afs_uuid.clock_seq_hi_and_reserved |= AFS_UUID_VARIANT_STD;
 >>>>>>> v3.18

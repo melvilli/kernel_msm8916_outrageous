@@ -34,8 +34,13 @@
 #define FIMC_IS_DRV_NAME		"exynos4-fimc-is"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FIMC_IS_FW_FILENAME		"fimc_is_fw.bin"
 #define FIMC_IS_SETFILE_6A3		"setfile.bin"
+=======
+#define FIMC_IS_FW_FILENAME		"exynos4_fimc_is_fw.bin"
+#define FIMC_IS_SETFILE_6A3		"exynos4_s5k6a3_setfile.bin"
+>>>>>>> v3.18
 =======
 #define FIMC_IS_FW_FILENAME		"exynos4_fimc_is_fw.bin"
 #define FIMC_IS_SETFILE_6A3		"exynos4_s5k6a3_setfile.bin"
@@ -45,7 +50,11 @@
 #define FIMC_IS_POWER_ON_TIMEOUT	1000 /* us */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FIMC_IS_SENSOR_NUM		2
+=======
+#define FIMC_IS_SENSORS_NUM		2
+>>>>>>> v3.18
 =======
 #define FIMC_IS_SENSORS_NUM		2
 >>>>>>> v3.18
@@ -235,8 +244,12 @@ struct chain_config {
 	struct fd_param		fd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long		p_region_index1;
 	unsigned long		p_region_index2;
+=======
+	unsigned long		p_region_index[2];
+>>>>>>> v3.18
 =======
 	unsigned long		p_region_index[2];
 >>>>>>> v3.18
@@ -268,7 +281,11 @@ struct fimc_is {
 
 	struct fimc_isp			isp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fimc_is_sensor		*sensor;
+=======
+	struct fimc_is_sensor		sensor[FIMC_IS_SENSORS_NUM];
+>>>>>>> v3.18
 =======
 	struct fimc_is_sensor		sensor[FIMC_IS_SENSORS_NUM];
 >>>>>>> v3.18
@@ -311,12 +328,18 @@ static inline struct fimc_is *fimc_isp_to_is(struct fimc_isp *isp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct chain_config *__get_curr_is_config(struct fimc_is *is)
 {
 	return &is->config[is->config_index];
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void fimc_is_mem_barrier(void)
 {
@@ -328,10 +351,14 @@ static inline void fimc_is_set_param_bit(struct fimc_is *is, int num)
 	struct chain_config *cfg = &is->config[is->config_index];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (num >= 32)
 		set_bit(num - 32, &cfg->p_region_index2);
 	else
 		set_bit(num, &cfg->p_region_index1);
+=======
+	set_bit(num, &cfg->p_region_index[0]);
+>>>>>>> v3.18
 =======
 	set_bit(num, &cfg->p_region_index[0]);
 >>>>>>> v3.18

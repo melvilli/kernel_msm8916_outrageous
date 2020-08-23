@@ -76,7 +76,11 @@ minstrel_sort_best_tp_rates(struct minstrel_sta_info *mi, int i, u8 *tp_list)
 	int j = MAX_THR_RATES;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (j > 0 && mi->r[i].cur_tp > mi->r[tp_list[j - 1]].cur_tp)
+=======
+	while (j > 0 && mi->r[i].stats.cur_tp > mi->r[tp_list[j - 1]].stats.cur_tp)
+>>>>>>> v3.18
 =======
 	while (j > 0 && mi->r[i].stats.cur_tp > mi->r[tp_list[j - 1]].stats.cur_tp)
 >>>>>>> v3.18
@@ -97,7 +101,11 @@ minstrel_set_rate(struct minstrel_sta_info *mi, struct ieee80211_sta_rates *rate
 	ratetbl->rate[offset].count = r->adjusted_retry_count;
 	ratetbl->rate[offset].count_cts = r->retry_count_cts;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ratetbl->rate[offset].count_rts = r->retry_count_rtscts;
+=======
+	ratetbl->rate[offset].count_rts = r->stats.retry_count_rtscts;
+>>>>>>> v3.18
 =======
 	ratetbl->rate[offset].count_rts = r->stats.retry_count_rtscts;
 >>>>>>> v3.18
@@ -144,7 +152,11 @@ minstrel_update_stats(struct minstrel_priv *mp, struct minstrel_sta_info *mi)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0; i < MAX_THR_RATES; i++)
+=======
+	for (i = 0; i < MAX_THR_RATES; i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < MAX_THR_RATES; i++)
 >>>>>>> v3.18
@@ -153,6 +165,10 @@ minstrel_update_stats(struct minstrel_priv *mp, struct minstrel_sta_info *mi)
 	for (i = 0; i < mi->n_rates; i++) {
 		struct minstrel_rate *mr = &mi->r[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct minstrel_rate_stats *mrs = &mi->r[i].stats;
+>>>>>>> v3.18
 =======
 		struct minstrel_rate_stats *mrs = &mi->r[i].stats;
 >>>>>>> v3.18
@@ -161,6 +177,7 @@ minstrel_update_stats(struct minstrel_priv *mp, struct minstrel_sta_info *mi)
 		if (!usecs)
 			usecs = 1000000;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (unlikely(mr->attempts > 0)) {
 			mr->sample_skipped = 0;
@@ -190,6 +207,8 @@ minstrel_update_stats(struct minstrel_priv *mp, struct minstrel_sta_info *mi)
 		    mr->probability < MINSTREL_FRAC(10, 100)) {
 			mr->adjusted_retry_count = mr->retry_count >> 1;
 =======
+=======
+>>>>>>> v3.18
 		if (unlikely(mrs->attempts > 0)) {
 			mrs->sample_skipped = 0;
 			mrs->cur_prob = MINSTREL_FRAC(mrs->success,
@@ -218,6 +237,9 @@ minstrel_update_stats(struct minstrel_priv *mp, struct minstrel_sta_info *mi)
 		if (mrs->probability > MINSTREL_FRAC(95, 100) ||
 		    mrs->probability < MINSTREL_FRAC(10, 100)) {
 			mr->adjusted_retry_count = mrs->retry_count >> 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (mr->adjusted_retry_count > 2)
 				mr->adjusted_retry_count = 2;
@@ -225,7 +247,11 @@ minstrel_update_stats(struct minstrel_priv *mp, struct minstrel_sta_info *mi)
 		} else {
 			mr->sample_limit = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mr->adjusted_retry_count = mr->retry_count;
+=======
+			mr->adjusted_retry_count = mrs->retry_count;
+>>>>>>> v3.18
 =======
 			mr->adjusted_retry_count = mrs->retry_count;
 >>>>>>> v3.18
@@ -242,17 +268,23 @@ minstrel_update_stats(struct minstrel_priv *mp, struct minstrel_sta_info *mi)
 		 * (2) if all success probabilities < 95%, the rate with
 		 * highest success probability is choosen as max_prob_rate */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mr->probability >= MINSTREL_FRAC(95,100)) {
 			if (mr->cur_tp >= mi->r[tmp_prob_rate].cur_tp)
 				tmp_prob_rate = i;
 		} else {
 			if (mr->probability >= mi->r[tmp_prob_rate].probability)
 =======
+=======
+>>>>>>> v3.18
 		if (mrs->probability >= MINSTREL_FRAC(95, 100)) {
 			if (mrs->cur_tp >= mi->r[tmp_prob_rate].stats.cur_tp)
 				tmp_prob_rate = i;
 		} else {
 			if (mrs->probability >= mi->r[tmp_prob_rate].stats.probability)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				tmp_prob_rate = i;
 		}
@@ -263,7 +295,10 @@ minstrel_update_stats(struct minstrel_priv *mp, struct minstrel_sta_info *mi)
 	mi->max_prob_rate = tmp_prob_rate;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MAC80211_DEBUGFS
 	/* use fixed index if set */
 	if (mp->fixed_rate_idx != -1) {
@@ -273,6 +308,9 @@ minstrel_update_stats(struct minstrel_priv *mp, struct minstrel_sta_info *mi)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Reset update timer */
 	mi->stats_update = jiffies;
@@ -283,7 +321,11 @@ minstrel_update_stats(struct minstrel_priv *mp, struct minstrel_sta_info *mi)
 static void
 minstrel_tx_status(void *priv, struct ieee80211_supported_band *sband,
 <<<<<<< HEAD
+<<<<<<< HEAD
                    struct ieee80211_sta *sta, void *priv_sta,
+=======
+		   struct ieee80211_sta *sta, void *priv_sta,
+>>>>>>> v3.18
 =======
 		   struct ieee80211_sta *sta, void *priv_sta,
 >>>>>>> v3.18
@@ -307,6 +349,7 @@ minstrel_tx_status(void *priv, struct ieee80211_supported_band *sband,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mi->r[ndx].attempts += ar[i].count;
 
 		if ((i != IEEE80211_TX_MAX_RATES - 1) && (ar[i + 1].idx < 0))
@@ -316,6 +359,8 @@ minstrel_tx_status(void *priv, struct ieee80211_supported_band *sband,
 	if ((info->flags & IEEE80211_TX_CTL_RATE_CTRL_PROBE) && (i >= 0))
 		mi->sample_count++;
 =======
+=======
+>>>>>>> v3.18
 		mi->r[ndx].stats.attempts += ar[i].count;
 
 		if ((i != IEEE80211_TX_MAX_RATES - 1) && (ar[i + 1].idx < 0))
@@ -324,6 +369,9 @@ minstrel_tx_status(void *priv, struct ieee80211_supported_band *sband,
 
 	if ((info->flags & IEEE80211_TX_CTL_RATE_CTRL_PROBE) && (i >= 0))
 		mi->sample_packets++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (mi->sample_deferred > 0)
@@ -338,7 +386,11 @@ minstrel_tx_status(void *priv, struct ieee80211_supported_band *sband,
 static inline unsigned int
 minstrel_get_retry_count(struct minstrel_rate *mr,
 <<<<<<< HEAD
+<<<<<<< HEAD
                          struct ieee80211_tx_info *info)
+=======
+			 struct ieee80211_tx_info *info)
+>>>>>>> v3.18
 =======
 			 struct ieee80211_tx_info *info)
 >>>>>>> v3.18
@@ -347,7 +399,11 @@ minstrel_get_retry_count(struct minstrel_rate *mr,
 
 	if (info->control.use_rts)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retry = max(2U, min(mr->retry_count_rtscts, retry));
+=======
+		retry = max(2U, min(mr->stats.retry_count_rtscts, retry));
+>>>>>>> v3.18
 =======
 		retry = max(2U, min(mr->stats.retry_count_rtscts, retry));
 >>>>>>> v3.18
@@ -403,11 +459,14 @@ minstrel_get_rate(void *priv, struct ieee80211_sta *sta,
 
 	/* increase sum packet counter */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mi->packet_count++;
 
 	delta = (mi->packet_count * sampling_ratio / 100) -
 			(mi->sample_count + mi->sample_deferred / 2);
 =======
+=======
+>>>>>>> v3.18
 	mi->total_packets++;
 
 #ifdef CONFIG_MAC80211_DEBUGFS
@@ -417,6 +476,9 @@ minstrel_get_rate(void *priv, struct ieee80211_sta *sta,
 
 	delta = (mi->total_packets * sampling_ratio / 100) -
 			(mi->sample_packets + mi->sample_deferred / 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* delta < 0: no sampling required */
@@ -426,15 +488,21 @@ minstrel_get_rate(void *priv, struct ieee80211_sta *sta,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mi->packet_count >= 10000) {
 		mi->sample_deferred = 0;
 		mi->sample_count = 0;
 		mi->packet_count = 0;
 =======
+=======
+>>>>>>> v3.18
 	if (mi->total_packets >= 10000) {
 		mi->sample_deferred = 0;
 		mi->sample_packets = 0;
 		mi->total_packets = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (delta > mi->n_rates * 2) {
 		/* With multi-rate retry, not every planned sample
@@ -447,7 +515,11 @@ minstrel_get_rate(void *priv, struct ieee80211_sta *sta,
 		 * out lots of sampling frames, which would result
 		 * in a large throughput loss. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mi->sample_count += (delta - mi->n_rates * 2);
+=======
+		mi->sample_packets += (delta - mi->n_rates * 2);
+>>>>>>> v3.18
 =======
 		mi->sample_packets += (delta - mi->n_rates * 2);
 >>>>>>> v3.18
@@ -465,7 +537,11 @@ minstrel_get_rate(void *priv, struct ieee80211_sta *sta,
 	if (mrr_capable &&
 	    msr->perfect_tx_time > mr->perfect_tx_time &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    msr->sample_skipped < 20) {
+=======
+	    msr->stats.sample_skipped < 20) {
+>>>>>>> v3.18
 =======
 	    msr->stats.sample_skipped < 20) {
 >>>>>>> v3.18
@@ -483,7 +559,11 @@ minstrel_get_rate(void *priv, struct ieee80211_sta *sta,
 			return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mi->sample_count++;
+=======
+		mi->sample_packets++;
+>>>>>>> v3.18
 =======
 		mi->sample_packets++;
 >>>>>>> v3.18
@@ -496,7 +576,11 @@ minstrel_get_rate(void *priv, struct ieee80211_sta *sta,
 	 * to use it, as this only wastes precious airtime */
 	if (!mrr_capable &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   (mi->r[ndx].probability > MINSTREL_FRAC(95, 100)))
+=======
+	   (mi->r[ndx].stats.probability > MINSTREL_FRAC(95, 100)))
+>>>>>>> v3.18
 =======
 	   (mi->r[ndx].stats.probability > MINSTREL_FRAC(95, 100)))
 >>>>>>> v3.18
@@ -513,6 +597,7 @@ static void
 calc_rate_durations(enum ieee80211_band band,
 		    struct minstrel_rate *d,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    struct ieee80211_rate *rate)
 {
 	int erp = !!(rate->flags & IEEE80211_RATE_ERP_G);
@@ -522,6 +607,8 @@ calc_rate_durations(enum ieee80211_band band,
 	d->ack_time = ieee80211_frame_duration(band, 10,
 			rate->bitrate, erp, 1);
 =======
+=======
+>>>>>>> v3.18
 		    struct ieee80211_rate *rate,
 		    struct cfg80211_chan_def *chandef)
 {
@@ -534,6 +621,9 @@ calc_rate_durations(enum ieee80211_band band,
 	d->ack_time = ieee80211_frame_duration(band, 10,
 			DIV_ROUND_UP(rate->bitrate, 1 << shift), erp, 1,
 			shift);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -549,10 +639,16 @@ init_sample_table(struct minstrel_sta_info *mi)
 
 	for (col = 0; col < SAMPLE_COLUMNS; col++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < mi->n_rates; i++) {
 			get_random_bytes(rnd, sizeof(rnd));
 			new_idx = (i + rnd[i & 7]) % mi->n_rates;
 
+=======
+		prandom_bytes(rnd, sizeof(rnd));
+		for (i = 0; i < mi->n_rates; i++) {
+			new_idx = (i + rnd[i & 7]) % mi->n_rates;
+>>>>>>> v3.18
 =======
 		prandom_bytes(rnd, sizeof(rnd));
 		for (i = 0; i < mi->n_rates; i++) {
@@ -569,7 +665,12 @@ init_sample_table(struct minstrel_sta_info *mi)
 static void
 minstrel_rate_init(void *priv, struct ieee80211_supported_band *sband,
 <<<<<<< HEAD
+<<<<<<< HEAD
                struct ieee80211_sta *sta, void *priv_sta)
+=======
+		   struct cfg80211_chan_def *chandef,
+		   struct ieee80211_sta *sta, void *priv_sta)
+>>>>>>> v3.18
 =======
 		   struct cfg80211_chan_def *chandef,
 		   struct ieee80211_sta *sta, void *priv_sta)
@@ -581,6 +682,10 @@ minstrel_rate_init(void *priv, struct ieee80211_supported_band *sband,
 	unsigned int i, n = 0;
 	unsigned int t_slot = 9; /* FIXME: get real slot time */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 rate_flags;
+>>>>>>> v3.18
 =======
 	u32 rate_flags;
 >>>>>>> v3.18
@@ -591,19 +696,26 @@ minstrel_rate_init(void *priv, struct ieee80211_supported_band *sband,
 	mi->sp_ack_dur = ieee80211_frame_duration(sband->band, 10,
 				ctl_rate->bitrate,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				!!(ctl_rate->flags & IEEE80211_RATE_ERP_G), 1);
 
 =======
+=======
+>>>>>>> v3.18
 				!!(ctl_rate->flags & IEEE80211_RATE_ERP_G), 1,
 				ieee80211_chandef_get_shift(chandef));
 
 	rate_flags = ieee80211_chandef_rate_flags(&mp->hw->conf.chandef);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memset(mi->max_tp_rate, 0, sizeof(mi->max_tp_rate));
 	mi->max_prob_rate = 0;
 
 	for (i = 0; i < sband->n_bitrates; i++) {
 		struct minstrel_rate *mr = &mi->r[n];
+<<<<<<< HEAD
 <<<<<<< HEAD
 		unsigned int tx_time = 0, tx_time_cts = 0, tx_time_rtscts = 0;
 		unsigned int tx_time_single;
@@ -618,6 +730,8 @@ minstrel_rate_init(void *priv, struct ieee80211_supported_band *sband,
 		mr->bitrate = sband->bitrates[i].bitrate / 5;
 		calc_rate_durations(sband->band, mr, &sband->bitrates[i]);
 =======
+=======
+>>>>>>> v3.18
 		struct minstrel_rate_stats *mrs = &mi->r[n].stats;
 		unsigned int tx_time = 0, tx_time_cts = 0, tx_time_rtscts = 0;
 		unsigned int tx_time_single;
@@ -639,15 +753,24 @@ minstrel_rate_init(void *priv, struct ieee80211_supported_band *sband,
 					   (1 << shift) * 5);
 		calc_rate_durations(sband->band, mr, &sband->bitrates[i],
 				    chandef);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* calculate maximum number of retransmissions before
 		 * fallback (based on maximum segment size) */
 		mr->sample_limit = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mr->retry_count = 1;
 		mr->retry_count_cts = 1;
 		mr->retry_count_rtscts = 1;
+=======
+		mrs->retry_count = 1;
+		mr->retry_count_cts = 1;
+		mrs->retry_count_rtscts = 1;
+>>>>>>> v3.18
 =======
 		mrs->retry_count = 1;
 		mr->retry_count_cts = 1;
@@ -670,6 +793,7 @@ minstrel_rate_init(void *priv, struct ieee80211_supported_band *sband,
 				mr->retry_count_cts++;
 			if ((tx_time_rtscts < mp->segment_size) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 				(mr->retry_count_rtscts < mp->max_retry))
 				mr->retry_count_rtscts++;
 		} while ((tx_time < mp->segment_size) &&
@@ -678,6 +802,8 @@ minstrel_rate_init(void *priv, struct ieee80211_supported_band *sband,
 		if (!(sband->bitrates[i].flags & IEEE80211_RATE_ERP_G))
 			mr->retry_count_cts = mr->retry_count;
 =======
+=======
+>>>>>>> v3.18
 				(mrs->retry_count_rtscts < mp->max_retry))
 				mrs->retry_count_rtscts++;
 		} while ((tx_time < mp->segment_size) &&
@@ -685,6 +811,9 @@ minstrel_rate_init(void *priv, struct ieee80211_supported_band *sband,
 		mr->adjusted_retry_count = mrs->retry_count;
 		if (!(sband->bitrates[i].flags & IEEE80211_RATE_ERP_G))
 			mr->retry_count_cts = mrs->retry_count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -754,6 +883,10 @@ minstrel_init_cck_rates(struct minstrel_priv *mp)
 	static const int bitrates[4] = { 10, 20, 55, 110 };
 	struct ieee80211_supported_band *sband;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 rate_flags = ieee80211_chandef_rate_flags(&mp->hw->conf.chandef);
+>>>>>>> v3.18
 =======
 	u32 rate_flags = ieee80211_chandef_rate_flags(&mp->hw->conf.chandef);
 >>>>>>> v3.18
@@ -770,6 +903,12 @@ minstrel_init_cck_rates(struct minstrel_priv *mp)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if ((rate_flags & sband->bitrates[i].flags) != rate_flags)
+			continue;
+
+>>>>>>> v3.18
 =======
 		if ((rate_flags & sband->bitrates[i].flags) != rate_flags)
 			continue;
@@ -842,8 +981,11 @@ minstrel_free(void *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rate_control_ops mac80211_minstrel = {
 =======
+=======
+>>>>>>> v3.18
 static u32 minstrel_get_expected_throughput(void *priv_sta)
 {
 	struct minstrel_sta_info *mi = priv_sta;
@@ -856,6 +998,9 @@ static u32 minstrel_get_expected_throughput(void *priv_sta)
 }
 
 const struct rate_control_ops mac80211_minstrel = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.name = "minstrel",
 	.tx_status = minstrel_tx_status,
@@ -870,6 +1015,10 @@ const struct rate_control_ops mac80211_minstrel = {
 	.remove_sta_debugfs = minstrel_remove_sta_debugfs,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_expected_throughput = minstrel_get_expected_throughput,
+>>>>>>> v3.18
 =======
 	.get_expected_throughput = minstrel_get_expected_throughput,
 >>>>>>> v3.18

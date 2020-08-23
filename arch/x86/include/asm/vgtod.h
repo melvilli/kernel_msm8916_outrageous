@@ -2,6 +2,7 @@
 #define _ASM_X86_VGTOD_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/vsyscall.h>
 #include <linux/clocksource.h>
 
@@ -29,6 +30,8 @@ struct vsyscall_gtod_data {
 extern struct vsyscall_gtod_data vsyscall_gtod_data;
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/compiler.h>
 #include <linux/clocksource.h>
 
@@ -98,5 +101,8 @@ static inline void gtod_write_end(struct vsyscall_gtod_data *s)
 	++s->seq;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_X86_VGTOD_H */

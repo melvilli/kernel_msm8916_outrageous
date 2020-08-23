@@ -26,6 +26,11 @@
 #define TEGRA_CLK_RESET_VIRT (TEGRA_CLK_RESET_BASE - IO_PPSB_PHYS \
 					+ IO_PPSB_VIRT)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TEGRA_APB_MISC_VIRT (TEGRA_APB_MISC_BASE - IO_APB_PHYS \
+					+ IO_APB_VIRT)
+>>>>>>> v3.18
 =======
 #define TEGRA_APB_MISC_VIRT (TEGRA_APB_MISC_BASE - IO_APB_PHYS \
 					+ IO_APB_VIRT)
@@ -45,8 +50,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __ASSEMBLY__
 =======
+=======
+>>>>>>> v3.18
 /* flag of tegra_disable_clean_inv_dcache to do LoUIS or all */
 #define TEGRA_FLUSH_CACHE_LOUIS	0
 #define TEGRA_FLUSH_CACHE_ALL	1
@@ -60,6 +68,9 @@
 	bmi	1001b
 .endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* returns the offset of the flow controller halt register for a cpu */
 .macro cpu_to_halt_reg rd, rcpu
@@ -92,7 +103,10 @@
 .endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Marco to check CPU part num */
 .macro check_cpu_part_num part_num, tmp1, tmp2
 	mrc	p15, 0, \tmp1, c0, c0, 0
@@ -101,6 +115,9 @@
 	cmp	\tmp1, \tmp2
 .endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Macro to exit SMP coherency. */
 .macro exit_smp, tmp1, tmp2
@@ -108,6 +125,7 @@
 	bic	\tmp1, \tmp1, #(1<<6) | (1<<0)	@ clear ACTLR.SMP | ACTLR.FW
 	mcr	p15, 0, \tmp1, c1, c0, 1	@ ACTLR
 	isb
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpu_id	\tmp1
 	mov	\tmp1, \tmp1, lsl #2
@@ -150,6 +168,8 @@ exit_l2_resume:
 .endm
 #endif /* CONFIG_CACHE_L2X0 */
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_ARM_SCU
 	check_cpu_part_num 0xc09, \tmp1, \tmp2
 	mrceq	p15, 0, \tmp1, c0, c0, 5
@@ -172,6 +192,9 @@ exit_l2_resume:
 	mov	\tmp1, \tmp1, lsr #8
 .endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 void tegra_pen_lock(void);
@@ -179,7 +202,11 @@ void tegra_pen_unlock(void);
 void tegra_resume(void);
 int tegra_sleep_cpu_finish(unsigned long);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tegra_disable_clean_inv_dcache(void);
+=======
+void tegra_disable_clean_inv_dcache(u32 flag);
+>>>>>>> v3.18
 =======
 void tegra_disable_clean_inv_dcache(u32 flag);
 >>>>>>> v3.18
@@ -188,9 +215,12 @@ void tegra_disable_clean_inv_dcache(u32 flag);
 void tegra20_hotplug_shutdown(void);
 void tegra30_hotplug_shutdown(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tegra_hotplug_init(void);
 #else
 static inline void tegra_hotplug_init(void) {}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

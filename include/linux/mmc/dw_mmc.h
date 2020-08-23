@@ -16,6 +16,10 @@
 
 #include <linux/scatterlist.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mmc/core.h>
+>>>>>>> v3.18
 =======
 #include <linux/mmc/core.h>
 >>>>>>> v3.18
@@ -30,6 +34,11 @@ enum dw_mci_state {
 	STATE_SENDING_STOP,
 	STATE_DATA_ERROR,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	STATE_SENDING_CMD11,
+	STATE_WAITING_CMD11_DONE,
+>>>>>>> v3.18
 =======
 	STATE_SENDING_CMD11,
 	STATE_WAITING_CMD11_DONE,
@@ -139,6 +148,12 @@ struct dw_mci {
 	struct mmc_command	*cmd;
 	struct mmc_data		*data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mmc_command	stop_abort;
+	unsigned int		prev_blksz;
+	unsigned char		timing;
+>>>>>>> v3.18
 =======
 	struct mmc_command	stop_abort;
 	unsigned int		prev_blksz;
@@ -200,7 +215,11 @@ struct dw_mci {
 	u32			quirks;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator	*vmmc;	/* Power regulator */
+=======
+	bool			vqmmc_enabled;
+>>>>>>> v3.18
 =======
 	bool			vqmmc_enabled;
 >>>>>>> v3.18
@@ -229,6 +248,11 @@ struct dw_mci_dma_ops {
 /* Unreliable card detection */
 #define DW_MCI_QUIRK_BROKEN_CARD_DETECTION	BIT(3)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* No write protect */
+#define DW_MCI_QUIRK_NO_WRITE_PROTECT		BIT(4)
+>>>>>>> v3.18
 =======
 /* No write protect */
 #define DW_MCI_QUIRK_NO_WRITE_PROTECT		BIT(4)
@@ -269,6 +293,7 @@ struct dw_mci_board {
 	u32 detect_delay_ms;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*init)(u32 slot_id, irq_handler_t , void *);
 	int (*get_ro)(u32 slot_id);
 	int (*get_cd)(u32 slot_id);
@@ -283,6 +308,8 @@ struct dw_mci_board {
 	void (*exit)(u32 slot_id);
 	void (*select_slot)(u32 slot_id);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dw_mci_dma_ops *dma_ops;

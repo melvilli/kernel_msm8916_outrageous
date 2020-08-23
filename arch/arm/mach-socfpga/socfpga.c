@@ -15,8 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/dw_apb_timer.h>
 #include <linux/clk-provider.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/irqchip.h>
@@ -35,8 +38,12 @@ void __iomem *socfpga_scu_base_addr = ((void __iomem *)(SOCFPGA_SCU_VIRT_BASE));
 void __iomem *sys_manager_base_addr;
 void __iomem *rst_manager_base_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __iomem *clk_mgr_base_addr;
 unsigned long cpu1start_addr;
+=======
+unsigned long socfpga_cpu1start_addr;
+>>>>>>> v3.18
 =======
 unsigned long socfpga_cpu1start_addr;
 >>>>>>> v3.18
@@ -81,7 +88,11 @@ void __init socfpga_sysmgr_init(void)
 
 	if (of_property_read_u32(np, "cpu1-start-addr",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(u32 *) &cpu1start_addr))
+=======
+			(u32 *) &socfpga_cpu1start_addr))
+>>>>>>> v3.18
 =======
 			(u32 *) &socfpga_cpu1start_addr))
 >>>>>>> v3.18
@@ -92,9 +103,12 @@ void __init socfpga_sysmgr_init(void)
 	np = of_find_compatible_node(NULL, NULL, "altr,rst-mgr");
 	rst_manager_base_addr = of_iomap(np, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	np = of_find_compatible_node(NULL, NULL, "altr,clk-mgr");
 	clk_mgr_base_addr = of_iomap(np, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -119,6 +133,7 @@ static void socfpga_cyclone5_restart(enum reboot_mode mode, const char *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init socfpga_cyclone5_init(void)
 {
 	l2x0_of_init(0, ~0UL);
@@ -129,6 +144,8 @@ static void __init socfpga_cyclone5_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const char *altera_dt_match[] = {
 	"altr,socfpga",
 	NULL
@@ -136,17 +153,23 @@ static const char *altera_dt_match[] = {
 
 DT_MACHINE_START(SOCFPGA, "Altera SOCFPGA")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.smp		= smp_ops(socfpga_smp_ops),
 	.map_io		= socfpga_map_io,
 	.init_irq	= socfpga_init_irq,
 	.init_time	= dw_apb_timer_init,
 	.init_machine	= socfpga_cyclone5_init,
 =======
+=======
+>>>>>>> v3.18
 	.l2c_aux_val	= 0,
 	.l2c_aux_mask	= ~0,
 	.smp		= smp_ops(socfpga_smp_ops),
 	.map_io		= socfpga_map_io,
 	.init_irq	= socfpga_init_irq,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.restart	= socfpga_cyclone5_restart,
 	.dt_compat	= altera_dt_match,

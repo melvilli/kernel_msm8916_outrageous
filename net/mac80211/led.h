@@ -14,7 +14,11 @@
 #ifdef CONFIG_MAC80211_LEDS
 void ieee80211_led_rx(struct ieee80211_local *local);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ieee80211_led_tx(struct ieee80211_local *local, int q);
+=======
+void ieee80211_led_tx(struct ieee80211_local *local);
+>>>>>>> v3.18
 =======
 void ieee80211_led_tx(struct ieee80211_local *local);
 >>>>>>> v3.18
@@ -32,7 +36,11 @@ static inline void ieee80211_led_rx(struct ieee80211_local *local)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void ieee80211_led_tx(struct ieee80211_local *local, int q)
+=======
+static inline void ieee80211_led_tx(struct ieee80211_local *local)
+>>>>>>> v3.18
 =======
 static inline void ieee80211_led_tx(struct ieee80211_local *local)
 >>>>>>> v3.18

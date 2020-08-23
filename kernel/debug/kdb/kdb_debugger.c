@@ -70,12 +70,18 @@ int kdb_stub(struct kgdb_state *ks)
 		reason = KDB_REASON_KEYBOARD;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (in_nmi())
 =======
+=======
+>>>>>>> v3.18
 	if (ks->err_code == KDB_REASON_SYSTEM_NMI && ks->signo == SIGTRAP)
 		reason = KDB_REASON_SYSTEM_NMI;
 
 	else if (in_nmi())
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		reason = KDB_REASON_NMI;
 

@@ -61,8 +61,13 @@ static void __init cnb20le_res(u8 bus, u8 slot, u8 func)
 	word2 = read_pci_config_16(bus, slot, func, 0xc6);
 	if (word1 != word2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		res.start = (word1 << 16) | 0x0000;
 		res.end   = (word2 << 16) | 0xffff;
+=======
+		res.start = ((resource_size_t) word1 << 16) | 0x0000;
+		res.end   = ((resource_size_t) word2 << 16) | 0xffff;
+>>>>>>> v3.18
 =======
 		res.start = ((resource_size_t) word1 << 16) | 0x0000;
 		res.end   = ((resource_size_t) word2 << 16) | 0xffff;

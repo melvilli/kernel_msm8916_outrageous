@@ -10,9 +10,12 @@
 #define INTERN_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define JOBR_UNASSIGNED 0
 #define JOBR_ASSIGNED 1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Currently comes from Kconfig param as a ^2 (driver-required) */
@@ -44,8 +47,13 @@ struct caam_jrentry_info {
 /* Private sub-storage for a single JobR */
 struct caam_drv_private_jr {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *parentdev;	/* points back to controller dev */
 	struct platform_device *jr_pdev;/* points to platform device for JR */
+=======
+	struct list_head	list_node;	/* Job Ring device list */
+	struct device		*dev;
+>>>>>>> v3.18
 =======
 	struct list_head	list_node;	/* Job Ring device list */
 	struct device		*dev;
@@ -55,7 +63,13 @@ struct caam_drv_private_jr {
 	struct tasklet_struct irqtask;
 	int irq;			/* One per queue */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int assign;			/* busy/free */
+=======
+
+	/* Number of scatterlist crypt transforms active on the JobR */
+	atomic_t tfm_count ____cacheline_aligned;
+>>>>>>> v3.18
 =======
 
 	/* Number of scatterlist crypt transforms active on the JobR */
@@ -82,6 +96,7 @@ struct caam_drv_private {
 
 	struct device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device **jrdev; /* Alloc'ed array per sub-device */
 	spinlock_t jr_alloc_lock;
 	struct platform_device *pdev;
@@ -92,6 +107,8 @@ struct caam_drv_private {
 	struct caam_assurance *ac;
 	struct caam_queue_if *qi; /* QI control region */
 =======
+=======
+>>>>>>> v3.18
 	struct platform_device **jrpdev; /* Alloc'ed array per sub-device */
 	struct platform_device *pdev;
 
@@ -101,6 +118,9 @@ struct caam_drv_private {
 	struct caam_assurance __iomem *assure;
 	struct caam_queue_if __iomem *qi; /* QI control region */
 	struct caam_job_ring __iomem *jr[4];	/* JobR's register space */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -111,6 +131,7 @@ struct caam_drv_private {
 	u8 qi_present;		/* Nonzero if QI present in device */
 	int secvio_irq;		/* Security violation interrupt number */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* which jr allocated to scatterlist crypto */
 	atomic_t tfm_count ____cacheline_aligned;
@@ -119,6 +140,8 @@ struct caam_drv_private {
 	/* list of registered hash algorithms (mk generic context handle?) */
 	struct list_head hash_list;
 =======
+=======
+>>>>>>> v3.18
 	int virt_en;		/* Virtualization enabled in CAAM */
 
 #define	RNG4_MAX_HANDLES 2
@@ -126,6 +149,9 @@ struct caam_drv_private {
 	u32 rng4_sh_init;	/* This bitmap shows which of the State
 				   Handles of the RNG4 block are initialized
 				   by this driver */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*

@@ -13,6 +13,10 @@
 #include <linux/smp.h>
 #include <asm/cpu-info.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu-type.h>
 >>>>>>> v3.18
@@ -38,7 +42,11 @@ static int op_mips_setup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int op_mips_create_files(struct super_block *sb, struct dentry *root)
+=======
+static int op_mips_create_files(struct dentry *root)
+>>>>>>> v3.18
 =======
 static int op_mips_create_files(struct dentry *root)
 >>>>>>> v3.18
@@ -51,6 +59,7 @@ static int op_mips_create_files(struct dentry *root)
 
 		snprintf(buf, sizeof buf, "%d", i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dir = oprofilefs_mkdir(sb, root, buf);
 
 		oprofilefs_create_ulong(sb, dir, "enabled", &ctr[i].enabled);
@@ -62,6 +71,8 @@ static int op_mips_create_files(struct dentry *root)
 		/* Dummy.  */
 		oprofilefs_create_ulong(sb, dir, "unit_mask", &ctr[i].unit_mask);
 =======
+=======
+>>>>>>> v3.18
 		dir = oprofilefs_mkdir(root, buf);
 
 		oprofilefs_create_ulong(dir, "enabled", &ctr[i].enabled);
@@ -72,6 +83,9 @@ static int op_mips_create_files(struct dentry *root)
 		oprofilefs_create_ulong(dir, "exl", &ctr[i].exl);
 		/* Dummy.  */
 		oprofilefs_create_ulong(dir, "unit_mask", &ctr[i].unit_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -107,12 +121,18 @@ int __init oprofile_arch_init(struct oprofile_operations *ops)
 	case CPU_1004K:
 	case CPU_74K:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CPU_1074K:
 	case CPU_INTERAPTIV:
 	case CPU_PROAPTIV:
 	case CPU_P5600:
 	case CPU_M5150:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CPU_LOONGSON1:
 	case CPU_SB1:

@@ -15,9 +15,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston,
  * MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -739,6 +743,12 @@ enum {
 #define NETXEN_NIC_REG(X)	(NIC_CRB_BASE+(X))
 #define NETXEN_NIC_REG_2(X)	(NIC_CRB_BASE_2+(X))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NETXEN_INTR_MODE_REG	NETXEN_NIC_REG(0x44)
+#define NETXEN_MSI_MODE		0x1
+#define NETXEN_INTX_MODE	0x2
+>>>>>>> v3.18
 =======
 #define NETXEN_INTR_MODE_REG	NETXEN_NIC_REG(0x44)
 #define NETXEN_MSI_MODE		0x1
@@ -966,6 +976,10 @@ enum {
 #define NX_CRB_DEV_REF_COUNT		(NETXEN_CAM_RAM(0x138))
 #define NX_CRB_DEV_STATE		(NETXEN_CAM_RAM(0x140))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NETXEN_ULA_KEY			(NETXEN_CAM_RAM(0x178))
+>>>>>>> v3.18
 =======
 #define NETXEN_ULA_KEY			(NETXEN_CAM_RAM(0x178))
 >>>>>>> v3.18

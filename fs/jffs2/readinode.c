@@ -544,6 +544,7 @@ static int jffs2_build_inode_fragtree(struct jffs2_sb_info *c,
 static void jffs2_free_tmp_dnode_info_list(struct rb_root *list)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rb_node *this;
 	struct jffs2_tmp_dnode_info *tn;
 
@@ -572,6 +573,8 @@ static void jffs2_free_tmp_dnode_info_list(struct rb_root *list)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct jffs2_tmp_dnode_info *tn, *next;
 
 	rbtree_postorder_for_each_entry_safe(tn, next, list, rb) {
@@ -579,6 +582,9 @@ static void jffs2_free_tmp_dnode_info_list(struct rb_root *list)
 			jffs2_free_tmp_dnode_info(tn);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*list = RB_ROOT;
 }

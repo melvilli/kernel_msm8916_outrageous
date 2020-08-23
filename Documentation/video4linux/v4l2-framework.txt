@@ -35,11 +35,17 @@ need and this same framework should make it much easier to refactor
 common code into utility functions shared by all drivers.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 A good example to look at as a reference is the v4l2-pci-skeleton.c
 source that is available in this directory. It is a skeleton driver for
 a PCI capture card, and demonstrates how to use the V4L2 driver
 framework. It can be used as a template for real PCI video capture driver.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Structure of a driver
@@ -254,7 +260,10 @@ It looks like this:
 
 struct v4l2_subdev_core_ops {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*g_chip_ident)(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int (*log_status)(struct v4l2_subdev *sd);
@@ -337,9 +346,12 @@ sink of the link. Subdev drivers are also free to use this function to
 perform the checks mentioned above in addition to their own checks.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 A device (bridge) driver needs to register the v4l2_subdev with the
 v4l2_device:
 =======
+=======
+>>>>>>> v3.18
 There are currently two ways to register subdevices with the V4L2 core. The
 first (traditional) possibility is to have subdevices registered by bridge
 drivers. This can be done when the bridge driver has the complete information
@@ -361,6 +373,9 @@ run-time bridge-subdevice interaction is in both cases the same.
 
 In the synchronous case a device (bridge) driver needs to register the
 v4l2_subdev with the v4l2_device:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int err = v4l2_device_register_subdev(v4l2_dev, sd);
@@ -381,6 +396,7 @@ Afterwards the subdev module can be unloaded and sd->dev == NULL.
 You can call an ops function either directly:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = sd->ops->core->g_chip_ident(sd, &chip);
 
 but it is better and easier to use this macro:
@@ -395,6 +411,8 @@ It is also possible to call all or a subset of the sub-devices:
 
 	v4l2_device_call_all(v4l2_dev, 0, core, g_chip_ident, &chip);
 =======
+=======
+>>>>>>> v3.18
 	err = sd->ops->core->g_std(sd, &norm);
 
 but it is better and easier to use this macro:
@@ -408,13 +426,20 @@ NULL, or the actual result of the subdev->ops->core->g_std ops.
 It is also possible to call all or a subset of the sub-devices:
 
 	v4l2_device_call_all(v4l2_dev, 0, core, g_std, &norm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Any subdev that does not support this ops is skipped and error results are
 ignored. If you want to check for errors use this:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = v4l2_device_call_until_err(v4l2_dev, 0, core, g_chip_ident, &chip);
+=======
+	err = v4l2_device_call_until_err(v4l2_dev, 0, core, g_std, &norm);
+>>>>>>> v3.18
 =======
 	err = v4l2_device_call_until_err(v4l2_dev, 0, core, g_std, &norm);
 >>>>>>> v3.18
@@ -449,7 +474,10 @@ up the device, but once the subdev is registered it is completely transparent.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 In the asynchronous case subdevice probing can be invoked independently of the
 bridge driver availability. The subdevice driver then has to verify whether all
 the requirements for a successful probing are satisfied. This can include a
@@ -474,6 +502,9 @@ called. When a subdevice is removed from the system the .unbind() method is
 called. All three callbacks are optional.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 V4L2 sub-device userspace API
 -----------------------------
@@ -657,10 +688,13 @@ The default video_device_release() callback just calls kfree to free the
 allocated memory.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 You should also set these fields:
 
 - v4l2_dev: set to the v4l2_device parent device.
 =======
+=======
+>>>>>>> v3.18
 There is also a video_device_release_empty() function that does nothing
 (is empty) and can be used if the struct is embedded and there is nothing
 to do when it is released.
@@ -668,6 +702,9 @@ to do when it is released.
 You should also set these fields:
 
 - v4l2_dev: must be set to the v4l2_device parent device.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - name: set to something descriptive and unique.
@@ -706,7 +743,11 @@ You should also set these fields:
   then you can point it to your own struct v4l2_prio_state.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - parent: you only set this if v4l2_device was registered with NULL as
+=======
+- dev_parent: you only set this if v4l2_device was registered with NULL as
+>>>>>>> v3.18
 =======
 - dev_parent: you only set this if v4l2_device was registered with NULL as
 >>>>>>> v3.18
@@ -714,6 +755,7 @@ You should also set these fields:
   device has multiple PCI devices that all share the same v4l2_device core.
 
   The cx88 driver is an example of this: one core v4l2_device struct, but
+<<<<<<< HEAD
 <<<<<<< HEAD
   it is used by both an raw video PCI device (cx8800) and a MPEG PCI device
   (cx8802). Since the v4l2_device cannot be associated with a particular
@@ -725,11 +767,16 @@ You should also set these fields:
   v4l2_fh. Eventually this flag will disappear once all drivers use the core
   priority handling. But for now it has to be set explicitly.
 =======
+=======
+>>>>>>> v3.18
   it is used by both a raw video PCI device (cx8800) and a MPEG PCI device
   (cx8802). Since the v4l2_device cannot be associated with two PCI devices
   at the same time it is setup without a parent device. But when the struct
   video_device is initialized you *do* know which parent PCI device to use and
   so you set dev_device to the correct PCI device.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 If you use v4l2_ioctl_ops, then you should set .unlocked_ioctl to video_ioctl2
@@ -825,6 +872,10 @@ VFL_TYPE_GRABBER: videoX for video input/output devices
 VFL_TYPE_VBI: vbiX for vertical blank data (i.e. closed captions, teletext)
 VFL_TYPE_RADIO: radioX for radio tuners
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+VFL_TYPE_SDR: swradioX for Software Defined Radio tuners
+>>>>>>> v3.18
 =======
 VFL_TYPE_SDR: swradioX for Software Defined Radio tuners
 >>>>>>> v3.18
@@ -965,8 +1016,12 @@ struct v4l2_fh
 struct v4l2_fh provides a way to easily keep file handle specific data
 that is used by the V4L2 framework. New drivers must use struct v4l2_fh
 <<<<<<< HEAD
+<<<<<<< HEAD
 since it is also used to implement priority handling (VIDIOC_G/S_PRIORITY)
 if the video_device flag V4L2_FL_USE_FH_PRIO is also set.
+=======
+since it is also used to implement priority handling (VIDIOC_G/S_PRIORITY).
+>>>>>>> v3.18
 =======
 since it is also used to implement priority handling (VIDIOC_G/S_PRIORITY).
 >>>>>>> v3.18
@@ -1173,7 +1228,10 @@ available event type is 'class base + 1'.
 An example on how the V4L2 events may be used can be found in the OMAP
 3 ISP driver (drivers/media/platform/omap3isp).
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 
 V4L2 clocks
@@ -1200,4 +1258,7 @@ methods.
 
 It is expected that once the CCF becomes available on all relevant
 architectures this API will be removed.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

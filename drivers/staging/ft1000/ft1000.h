@@ -1,6 +1,11 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Common structures and definitions for FT1000 Flarion Flash OFDM PCMCIA and USB devices
+=======
+ * Common structures and definitions for FT1000 Flarion Flash OFDM PCMCIA and
+ * USB devices.
+>>>>>>> v3.18
 =======
  * Common structures and definitions for FT1000 Flarion Flash OFDM PCMCIA and
  * USB devices.
@@ -22,6 +27,7 @@
 #define MAGNEMITE_ID	0x1a01	/* ASIC ID for Magnemite */
 
 /* MEMORY MAP common to both ELECTRABUZZ and MAGNEMITE */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	FT1000_REG_DPRAM_ADDR	0x000E	/* DPADR - Dual Port Ram Indirect Address Register */
 #define	FT1000_REG_SUP_CTRL	0x0020	/* HCTR - Host Control Register */
@@ -56,6 +62,8 @@
 #define FT1000_REG_MAG_DPDATAL	0x0010	/* DPDATAL - Dual Port RAM Indirect Data Register low-word (16-bits) */
 #define FT1000_REG_MAG_DPDATAH	0x0012	/* DPDATAH - Dual Port RAM Indirect Data Register high-word (16-bits) */
 =======
+=======
+>>>>>>> v3.18
 #define	FT1000_REG_DPRAM_ADDR	0x000E	/* DPADR - Dual Port Ram Indirect
 					 * Address Register
 					 */
@@ -120,6 +128,9 @@
 #define FT1000_REG_MAG_DPDATAH	0x0012	/* DPDATAH - Dual Port RAM Indirect Data
 					 * Register high-word (16-bits)
 					 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	FT1000_REG_MAG_WATERMARK 0x002c	/* WMARK - Watermark Register */
 #define FT1000_REG_MAG_VERSION	0x0030	/* LLC Version */
@@ -130,7 +141,13 @@
 #define FT1000_FIFO_LEN		0x07FC	/* total length for DSP FIFO tracking */
 #define FT1000_HI_HO		0x07FE	/* heartbeat with HI/HO */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FT1000_DSP_STATUS	0x0FFE	/* dsp status - non-zero is a request to reset dsp */
+=======
+#define FT1000_DSP_STATUS	0x0FFE	/* dsp status - non-zero is a request
+					 * to reset dsp
+					 */
+>>>>>>> v3.18
 =======
 #define FT1000_DSP_STATUS	0x0FFE	/* dsp status - non-zero is a request
 					 * to reset dsp
@@ -145,6 +162,7 @@
 #define FT1000_DSP_TIMER3	0x1FF6	/* Timer Field from Basestation */
 
 /* Reserved Dual Port RAM offsets for Magnemite */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define FT1000_DPRAM_MAG_TX_BASE	0x0000	/* Host to PC Card Messaging Area */
 #define FT1000_DPRAM_MAG_RX_BASE	0x0200	/* PC Card to Host Messaging Area */
@@ -167,6 +185,8 @@
 #define FT1000_MAG_DSP_TIMER2_INDX	0x1
 #define FT1000_MAG_DSP_TIMER3		0x3FD	/* Timer Field from Basestation */
 =======
+=======
+>>>>>>> v3.18
 #define FT1000_DPRAM_MAG_TX_BASE	0x0000	/* Host to PC Card
 						 * Messaging Area
 						 */
@@ -209,6 +229,9 @@
 #define FT1000_MAG_DSP_TIMER3		0x3FD	/* Timer Field from
 						 * Basestation
 						 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FT1000_MAG_DSP_TIMER3_INDX	0x0
 #define FT1000_MAG_TOTAL_LEN		0x200
@@ -223,6 +246,7 @@
 
 /* FT1000 to Host Doorbell assignments */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FT1000_DB_DPRAM_RX	0x0001	/* this value indicates that DSP has data for host in DPRAM */
 #define FT1000_DB_DNLD_RX	0x0002	/* Downloader handshake doorbell */
 #define FT1000_ASIC_RESET_REQ	0x0004	/* DSP requesting host to reset the ASIC */
@@ -235,6 +259,8 @@
 #define FT1000_ASIC_RESET_DSP	0x0400	/* Responds to FT1000_ASIC_RESET_REQ */
 #define FT1000_DB_HB		0x1000	/* Indicates that supervisor has a heartbeat message for DSP. */
 =======
+=======
+>>>>>>> v3.18
 #define FT1000_DB_DPRAM_RX	0x0001	/* this value indicates that DSP
 					 * has data for host in DPRAM
 					 */
@@ -256,6 +282,9 @@
 #define FT1000_DB_HB		0x1000	/* Indicates that supervisor has a
 					 * heartbeat message for DSP.
 					 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define hi			0x6869	/* PC Card heartbeat values */
@@ -263,15 +292,21 @@
 
 /* Magnemite specific defines */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define hi_mag			0x6968	/* Byte swap hi to avoid additional system call */
 #define ho_mag			0x6f68	/* Byte swap ho to avoid additional system call */
 =======
+=======
+>>>>>>> v3.18
 #define hi_mag			0x6968	/* Byte swap hi to avoid
 					 * additional system call
 					 */
 #define ho_mag			0x6f68	/* Byte swap ho to avoid
 					 * additional system call
 					 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Bit field definitions for Host Interrupt Status Register */
@@ -290,6 +325,7 @@
 #define ISR_MASK_WATERMARK	0x0008	/* Watermark interrupt mask */
 #define ISR_MASK_ALL		0xffff	/* Mask all interrupts */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Default interrupt mask (Enable Doorbell pending and Packet available interrupts) */
 #define ISR_DEFAULT_MASK	0x7ff9
 
@@ -298,6 +334,8 @@
 					/* (0 = out of reset 1 = reset) */
 #define ASIC_RESET_BIT		0x0002	/* Bit field to control ASIC reset state */
 =======
+=======
+>>>>>>> v3.18
 /* Default interrupt mask
  * (Enable Doorbell pending and Packet available interrupts)
  */
@@ -311,6 +349,9 @@
 #define ASIC_RESET_BIT		0x0002	/* Bit field to control
 					 * ASIC reset state
 					 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					/* (0 = out of reset 1 = reset) */
 #define DSP_UNENCRYPTED		0x0004
@@ -368,7 +409,13 @@ struct pseudo_hdr {
 					/*    Host = 0x10 */
 					/*    Dsp  = 0x20 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char	destination;	/* hardware destination id (refer to source) */
+=======
+	unsigned char	destination;	/* hardware destination id
+					 * (refer to source)
+					 */
+>>>>>>> v3.18
 =======
 	unsigned char	destination;	/* hardware destination id
 					 * (refer to source)
@@ -383,7 +430,13 @@ struct pseudo_hdr {
 					/*    Dsp Loader = 0xa0 */
 					/*    Dsp MIP = 0xb0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char	portsrc;	/* software source port id (refer to portdest) */
+=======
+	unsigned char	portsrc;	/* software source port id
+					 * (refer to portdest)
+					 */
+>>>>>>> v3.18
 =======
 	unsigned char	portsrc;	/* software source port id
 					 * (refer to portdest)
@@ -467,8 +520,11 @@ struct ft1000_info {
 		u32 MagRec[MAX_DSP_SESS_REC/2];
 	} DSPSess;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct proc_dir_entry *ft1000_proc_dir;
 	char netdevname[IFNAMSIZ];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

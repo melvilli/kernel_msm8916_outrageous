@@ -87,9 +87,14 @@ static void drain_midi_queue(int dev)
 
 	if (midi_devs[dev]->buffer_status != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (!signal_pending(current) && midi_devs[dev]->buffer_status(dev)) 
 			interruptible_sleep_on_timeout(&midi_sleeper[dev],
 						       HZ/10);
+=======
+		wait_event_interruptible_timeout(midi_sleeper[dev],
+				!midi_devs[dev]->buffer_status(dev), HZ/10);
+>>>>>>> v3.18
 =======
 		wait_event_interruptible_timeout(midi_sleeper[dev],
 				!midi_devs[dev]->buffer_status(dev), HZ/10);
@@ -239,8 +244,13 @@ void MIDIbuf_release(int dev, struct file *file)
 							 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (!signal_pending(current) && DATA_AVAIL(midi_out_buf[dev]))
 			  interruptible_sleep_on(&midi_sleeper[dev]);
+=======
+		wait_event_interruptible(midi_sleeper[dev],
+					 !DATA_AVAIL(midi_out_buf[dev]));
+>>>>>>> v3.18
 =======
 		wait_event_interruptible(midi_sleeper[dev],
 					 !DATA_AVAIL(midi_out_buf[dev]));
@@ -293,8 +303,13 @@ int MIDIbuf_write(int dev, struct file *file, const char __user *buf, int count)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interruptible_sleep_on(&midi_sleeper[dev]);
 			if (signal_pending(current)) 
+=======
+			if (wait_event_interruptible(midi_sleeper[dev],
+						SPACE_AVAIL(midi_out_buf[dev])))
+>>>>>>> v3.18
 =======
 			if (wait_event_interruptible(midi_sleeper[dev],
 						SPACE_AVAIL(midi_out_buf[dev])))
@@ -341,8 +356,14 @@ int MIDIbuf_read(int dev, struct file *file, char __user *buf, int count)
 			goto out;
  		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interruptible_sleep_on_timeout(&input_sleeper[dev],
 					       parms[dev].prech_timeout);
+=======
+		wait_event_interruptible_timeout(input_sleeper[dev],
+						 DATA_AVAIL(midi_in_buf[dev]),
+						 parms[dev].prech_timeout);
+>>>>>>> v3.18
 =======
 		wait_event_interruptible_timeout(input_sleeper[dev],
 						 DATA_AVAIL(midi_in_buf[dev]),

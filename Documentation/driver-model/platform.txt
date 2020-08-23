@@ -49,7 +49,11 @@ struct platform_driver {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Note that probe() should general verify that the specified device hardware
+=======
+Note that probe() should in general verify that the specified device hardware
+>>>>>>> v3.18
 =======
 Note that probe() should in general verify that the specified device hardware
 >>>>>>> v3.18

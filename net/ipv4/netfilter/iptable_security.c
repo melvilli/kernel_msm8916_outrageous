@@ -38,7 +38,11 @@ static const struct xt_table security_table = {
 
 static unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 iptable_security_hook(unsigned int hook, struct sk_buff *skb,
+=======
+iptable_security_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
+>>>>>>> v3.18
 =======
 iptable_security_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
 >>>>>>> v3.18
@@ -49,7 +53,11 @@ iptable_security_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
 	const struct net *net;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hook == NF_INET_LOCAL_OUT &&
+=======
+	if (ops->hooknum == NF_INET_LOCAL_OUT &&
+>>>>>>> v3.18
 =======
 	if (ops->hooknum == NF_INET_LOCAL_OUT &&
 >>>>>>> v3.18
@@ -60,7 +68,12 @@ iptable_security_hook(const struct nf_hook_ops *ops, struct sk_buff *skb,
 
 	net = dev_net((in != NULL) ? in : out);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ipt_do_table(skb, hook, in, out, net->ipv4.iptable_security);
+=======
+	return ipt_do_table(skb, ops->hooknum, in, out,
+			    net->ipv4.iptable_security);
+>>>>>>> v3.18
 =======
 	return ipt_do_table(skb, ops->hooknum, in, out,
 			    net->ipv4.iptable_security);
@@ -80,7 +93,11 @@ static int __net_init iptable_security_net_init(struct net *net)
 		ipt_register_table(net, &security_table, repl);
 	kfree(repl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(net->ipv4.iptable_security);
+=======
+	return PTR_ERR_OR_ZERO(net->ipv4.iptable_security);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(net->ipv4.iptable_security);
 >>>>>>> v3.18

@@ -3,7 +3,10 @@
  *
  * Copyright (C) 2011 Google, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2011-2014,2017, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -28,9 +31,12 @@
 #include <linux/mutex.h>
 #include <linux/rbtree.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/seq_file.h>
 
 #include "msm_ion_priv.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/sched.h>
@@ -101,11 +107,15 @@ void ion_buffer_destroy(struct ion_buffer *buffer);
  * struct ion_heap_ops - ops to operate on a given heap
  * @allocate:		allocate memory
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @free:		free memory. Will be called with
  *			ION_PRIV_FLAG_SHRINKER_FREE set in buffer flags when
  *			called from a shrinker. In that case, the pages being
  *			free'd must be truly free'd back to the system, not put
  *			in a page pool or otherwise cached.
+=======
+ * @free:		free memory
+>>>>>>> v3.18
 =======
  * @free:		free memory
 >>>>>>> v3.18
@@ -117,7 +127,10 @@ void ion_buffer_destroy(struct ion_buffer *buffer);
  * @unmap_kernel	unmap memory to the kernel
  * @map_user		map memory to userspace
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @unmap_user		unmap memory to userspace
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -129,6 +142,7 @@ void ion_buffer_destroy(struct ion_buffer *buffer);
  * system, not put in a page pool or otherwise cached.
  */
 struct ion_heap_ops {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int (*allocate) (struct ion_heap *heap,
 			 struct ion_buffer *buffer, unsigned long len,
@@ -148,6 +162,8 @@ struct ion_heap_ops {
 	int (*print_debug)(struct ion_heap *heap, struct seq_file *s,
 			   const struct list_head *mem_map);
 =======
+=======
+>>>>>>> v3.18
 	int (*allocate)(struct ion_heap *heap,
 			struct ion_buffer *buffer, unsigned long len,
 			unsigned long align, unsigned long flags);
@@ -162,6 +178,9 @@ struct ion_heap_ops {
 	int (*map_user)(struct ion_heap *mapper, struct ion_buffer *buffer,
 			struct vm_area_struct *vma);
 	int (*shrink)(struct ion_heap *heap, gfp_t gfp_mask, int nr_to_scan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -182,7 +201,10 @@ struct ion_heap_ops {
 #define ION_PRIV_FLAG_SHRINKER_FREE (1 << 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -198,7 +220,10 @@ struct ion_heap_ops {
  * @name:		used for debugging
  * @shrinker:		a shrinker for the heap
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @priv:		private heap data
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @free_list:		free list head if deferred free is used
@@ -224,7 +249,10 @@ struct ion_heap {
 	const char *name;
 	struct shrinker shrinker;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *priv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head free_list;
@@ -233,9 +261,14 @@ struct ion_heap {
 	wait_queue_head_t waitqueue;
 	struct task_struct *task;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*debug_show)(struct ion_heap *heap, struct seq_file *, void *);
 	atomic_t total_allocated;
 	atomic_t total_handles;
+=======
+
+	int (*debug_show)(struct ion_heap *heap, struct seq_file *, void *);
+>>>>>>> v3.18
 =======
 
 	int (*debug_show)(struct ion_heap *heap, struct seq_file *, void *);
@@ -284,12 +317,15 @@ void ion_device_destroy(struct ion_device *dev);
 void ion_device_add_heap(struct ion_device *dev, struct ion_heap *heap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pages_mem {
 	struct page **pages;
 	u32 size;
 	void (*free_fn) (const void *);
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -302,12 +338,16 @@ int ion_heap_map_user(struct ion_heap *, struct ion_buffer *,
 			struct vm_area_struct *);
 int ion_heap_buffer_zero(struct ion_buffer *buffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int msm_ion_heap_high_order_page_zero(struct page *page, int order);
 int msm_ion_heap_buffer_zero(struct ion_buffer *buffer);
 int msm_ion_heap_pages_zero(struct page **pages, int num_pages);
 int msm_ion_heap_alloc_pages_mem(struct pages_mem *pages_mem);
 void msm_ion_heap_free_pages_mem(struct pages_mem *pages_mem);
+=======
+int ion_heap_pages_zero(struct page *page, size_t size, pgprot_t pgprot);
+>>>>>>> v3.18
 =======
 int ion_heap_pages_zero(struct page *page, size_t size, pgprot_t pgprot);
 >>>>>>> v3.18
@@ -355,7 +395,11 @@ size_t ion_heap_freelist_drain(struct ion_heap *heap, size_t size);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ion_heap_freelist_drain_from_shrinker - drain the deferred free
+=======
+ * ion_heap_freelist_shrink - drain the deferred free
+>>>>>>> v3.18
 =======
  * ion_heap_freelist_shrink - drain the deferred free
 >>>>>>> v3.18
@@ -375,15 +419,21 @@ size_t ion_heap_freelist_drain(struct ion_heap *heap, size_t size);
  * genuinely free'd back to the system. If you're free'ing from a
  * shrinker you probably want to use this. Note that this relies on
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the heap.ops.free callback honoring the
  * ION_PRIV_FLAG_SHRINKER_FREE flag.
  */
 size_t ion_heap_freelist_drain_from_shrinker(struct ion_heap *heap,
 =======
+=======
+>>>>>>> v3.18
  * the heap.ops.free callback honoring the ION_PRIV_FLAG_SHRINKER_FREE
  * flag.
  */
 size_t ion_heap_freelist_shrink(struct ion_heap *heap,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					size_t size);
 
@@ -468,7 +518,11 @@ struct ion_page_pool {
 struct ion_page_pool *ion_page_pool_create(gfp_t gfp_mask, unsigned int order);
 void ion_page_pool_destroy(struct ion_page_pool *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *ion_page_pool_alloc(struct ion_page_pool *, bool *from_pool);
+=======
+struct page *ion_page_pool_alloc(struct ion_page_pool *);
+>>>>>>> v3.18
 =======
 struct page *ion_page_pool_alloc(struct ion_page_pool *);
 >>>>>>> v3.18
@@ -496,6 +550,7 @@ void ion_pages_sync_for_device(struct device *dev, struct page *page,
 		size_t size, enum dma_data_direction dir);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ion_walk_heaps(struct ion_client *client, int heap_id,
 			enum ion_heap_type type, void *data,
 			int (*f)(struct ion_heap *heap, void *data));
@@ -505,6 +560,8 @@ struct ion_handle *ion_handle_get_by_id(struct ion_client *client,
 
 int ion_handle_put(struct ion_handle *handle);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ION_PRIV_H */

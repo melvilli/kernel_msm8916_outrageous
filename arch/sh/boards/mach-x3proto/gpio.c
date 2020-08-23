@@ -129,10 +129,15 @@ int __init x3proto_gpio_setup(void)
 
 err_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = gpiochip_remove(&x3proto_gpio_chip);
 	if (unlikely(ret))
 		pr_err("Failed deregistering GPIO\n");
 
+=======
+	gpiochip_remove(&x3proto_gpio_chip);
+	ret = 0;
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&x3proto_gpio_chip);
 	ret = 0;

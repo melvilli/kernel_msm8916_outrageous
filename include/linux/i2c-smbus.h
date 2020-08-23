@@ -2,7 +2,11 @@
  * i2c-smbus.h - SMBus extensions to the I2C protocol
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2010 Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2010 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2010 Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

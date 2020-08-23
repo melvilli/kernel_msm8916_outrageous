@@ -98,6 +98,7 @@ void lruvec_init(struct lruvec *lruvec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NUMA_BALANCING) && !defined(LAST_NID_NOT_IN_PAGE_FLAGS)
 int page_nid_xchg_last(struct page *page, int nid)
 {
@@ -114,6 +115,8 @@ int page_nid_xchg_last(struct page *page, int nid)
 
 	return last_nid;
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_NUMA_BALANCING) && !defined(LAST_CPUPID_NOT_IN_PAGE_FLAGS)
 int page_cpupid_xchg_last(struct page *page, int cpupid)
 {
@@ -129,6 +132,9 @@ int page_cpupid_xchg_last(struct page *page, int cpupid)
 	} while (unlikely(cmpxchg(&page->flags, old_flags, flags) != old_flags));
 
 	return last_cpupid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif

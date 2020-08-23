@@ -12,6 +12,10 @@
 #include <linux/sysfs.h>
 #include <linux/iio/iio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kref.h>
+>>>>>>> v3.18
 =======
 #include <linux/kref.h>
 >>>>>>> v3.18
@@ -25,6 +29,11 @@ struct iio_buffer;
  * @store_to:		actually store stuff to the buffer
  * @read_first_n:	try to get a specified number of bytes (must exist)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @data_available:	indicates whether data for reading from the buffer is
+ *			available.
+>>>>>>> v3.18
 =======
  * @data_available:	indicates whether data for reading from the buffer is
  *			available.
@@ -36,6 +45,11 @@ struct iio_buffer;
  * @get_length:		get number of datums in buffer
  * @set_length:		set number of datums in buffer
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @release:		called when the last reference to the buffer is dropped,
+ *			should free all resources allocated by the buffer.
+>>>>>>> v3.18
 =======
  * @release:		called when the last reference to the buffer is dropped,
  *			should free all resources allocated by the buffer.
@@ -51,16 +65,22 @@ struct iio_buffer;
  **/
 struct iio_buffer_access_funcs {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*store_to)(struct iio_buffer *buffer, u8 *data);
 	int (*read_first_n)(struct iio_buffer *buffer,
 			    size_t n,
 			    char __user *buf);
 =======
+=======
+>>>>>>> v3.18
 	int (*store_to)(struct iio_buffer *buffer, const void *data);
 	int (*read_first_n)(struct iio_buffer *buffer,
 			    size_t n,
 			    char __user *buf);
 	bool (*data_available)(struct iio_buffer *buffer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int (*request_update)(struct iio_buffer *buffer);
@@ -70,6 +90,11 @@ struct iio_buffer_access_funcs {
 	int (*get_length)(struct iio_buffer *buffer);
 	int (*set_length)(struct iio_buffer *buffer, int length);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	void (*release)(struct iio_buffer *buffer);
+>>>>>>> v3.18
 =======
 
 	void (*release)(struct iio_buffer *buffer);
@@ -95,6 +120,10 @@ struct iio_buffer_access_funcs {
  * @demux_bounce:	[INTERN] buffer for doing gather from incoming scan.
  * @buffer_list:	[INTERN] entry in the devices list of current buffers.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @ref:		[INTERN] reference count of the buffer.
+>>>>>>> v3.18
 =======
  * @ref:		[INTERN] reference count of the buffer.
 >>>>>>> v3.18
@@ -113,8 +142,14 @@ struct iio_buffer {
 	const struct attribute_group *attrs;
 	struct list_head			demux_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char				*demux_bounce;
 	struct list_head			buffer_list;
+=======
+	void					*demux_bounce;
+	struct list_head			buffer_list;
+	struct kref				ref;
+>>>>>>> v3.18
 =======
 	void					*demux_bounce;
 	struct list_head			buffer_list;
@@ -158,8 +193,11 @@ int iio_scan_mask_set(struct iio_dev *indio_dev,
  * @data:		Full scan.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int iio_push_to_buffers(struct iio_dev *indio_dev, unsigned char *data);
 =======
+=======
+>>>>>>> v3.18
 int iio_push_to_buffers(struct iio_dev *indio_dev, const void *data);
 
 /*
@@ -186,6 +224,9 @@ static inline int iio_push_to_buffers_with_timestamp(struct iio_dev *indio_dev,
 
 	return iio_push_to_buffers(indio_dev, data);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int iio_update_demux(struct iio_dev *indio_dev);
@@ -241,12 +282,15 @@ ssize_t iio_buffer_show_enable(struct device *dev,
 					   iio_buffer_store_enable)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int iio_sw_buffer_preenable(struct iio_dev *indio_dev);
 
 bool iio_validate_scan_mask_onehot(struct iio_dev *indio_dev,
 	const unsigned long *mask);
 
 =======
+=======
+>>>>>>> v3.18
 bool iio_validate_scan_mask_onehot(struct iio_dev *indio_dev,
 	const unsigned long *mask);
 
@@ -268,6 +312,9 @@ static inline void iio_device_attach_buffer(struct iio_dev *indio_dev,
 	indio_dev->buffer = iio_buffer_get(buffer);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* CONFIG_IIO_BUFFER */
 
@@ -282,6 +329,12 @@ static inline void iio_buffer_unregister(struct iio_dev *indio_dev)
 {}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void iio_buffer_get(struct iio_buffer *buffer) {}
+static inline void iio_buffer_put(struct iio_buffer *buffer) {}
+
+>>>>>>> v3.18
 =======
 static inline void iio_buffer_get(struct iio_buffer *buffer) {}
 static inline void iio_buffer_put(struct iio_buffer *buffer) {}

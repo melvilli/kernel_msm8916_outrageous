@@ -15,10 +15,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -31,7 +34,10 @@
 #include <linux/interrupt.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/err.h>
@@ -40,6 +46,10 @@
 #include <linux/io.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
@@ -151,11 +161,17 @@ struct sh_mobile_i2c_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct sh_mobile_dt_config {
 	int clks_per_count;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IIC_FLAG_HAS_ICIC67	(1 << 0)
 
@@ -213,7 +229,11 @@ static void iic_set_clr(struct sh_mobile_i2c_data *pd, int offs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 sh_mobile_i2c_iccl(unsigned long count_khz, u32 tLOW, u32 tf, int offset)
+=======
+static u32 sh_mobile_i2c_iccl(unsigned long count_khz, u32 tLOW, u32 tf)
+>>>>>>> v3.18
 =======
 static u32 sh_mobile_i2c_iccl(unsigned long count_khz, u32 tLOW, u32 tf)
 >>>>>>> v3.18
@@ -229,15 +249,21 @@ static u32 sh_mobile_i2c_iccl(unsigned long count_khz, u32 tLOW, u32 tf)
 	 * should be 0.3 us, for safety.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (((count_khz * (tLOW + tf)) + 5000) / 10000) + offset;
 }
 
 static u32 sh_mobile_i2c_icch(unsigned long count_khz, u32 tHIGH, u32 tf, int offset)
 =======
+=======
+>>>>>>> v3.18
 	return (((count_khz * (tLOW + tf)) + 5000) / 10000);
 }
 
 static u32 sh_mobile_i2c_icch(unsigned long count_khz, u32 tHIGH, u32 tf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/*
@@ -255,6 +281,7 @@ static u32 sh_mobile_i2c_icch(unsigned long count_khz, u32 tHIGH, u32 tf)
 	 * condition, in order to meet both tHIGH and tHD;STA specs.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (((count_khz * (tHIGH + tf)) + 5000) / 10000) + offset;
 }
 
@@ -268,6 +295,8 @@ static void sh_mobile_i2c_init(struct sh_mobile_i2c_data *pd)
 	clk_enable(pd->clk);
 	i2c_clk_khz = clk_get_rate(pd->clk) / 1000;
 =======
+=======
+>>>>>>> v3.18
 	return (((count_khz * (tHIGH + tf)) + 5000) / 10000);
 }
 
@@ -281,6 +310,9 @@ static int sh_mobile_i2c_init(struct sh_mobile_i2c_data *pd)
 	clk_prepare_enable(pd->clk);
 	i2c_clk_khz = clk_get_rate(pd->clk) / 1000;
 	clk_disable_unprepare(pd->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c_clk_khz /= pd->clks_per_count;
 
@@ -289,13 +321,17 @@ static int sh_mobile_i2c_init(struct sh_mobile_i2c_data *pd)
 		tHIGH	= 40;	/* tHD;STA = tHIGH = 4.0 us */
 		tf	= 3;	/* tf = 0.3 us */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		offset	= 0;	/* No offset */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else if (pd->bus_speed == FAST_MODE) {
 		tLOW	= 13;	/* tLOW = 1.3 us */
 		tHIGH	= 6;	/* tHD;STA = tHIGH = 0.6 us */
 		tf	= 3;	/* tf = 0.3 us */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		offset	= 0;	/* No offset */
 	} else {
@@ -308,6 +344,8 @@ static int sh_mobile_i2c_init(struct sh_mobile_i2c_data *pd)
 	/* one more bit of ICCL in ICIC */
 	if ((pd->iccl > 0xff) && (pd->flags & IIC_FLAG_HAS_ICIC67))
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		dev_err(pd->dev, "unrecognized bus speed %lu Hz\n",
 			pd->bus_speed);
@@ -326,15 +364,23 @@ static int sh_mobile_i2c_init(struct sh_mobile_i2c_data *pd)
 
 	/* one more bit of ICCL in ICIC */
 	if (pd->iccl & 0x100)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pd->icic |= ICIC_ICCLB8;
 	else
 		pd->icic &= ~ICIC_ICCLB8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pd->icch = sh_mobile_i2c_icch(i2c_clk_khz, tHIGH, tf, offset);
 	/* one more bit of ICCH in ICIC */
 	if ((pd->icch > 0xff) && (pd->flags & IIC_FLAG_HAS_ICIC67))
+=======
+	/* one more bit of ICCH in ICIC */
+	if (pd->icch & 0x100)
+>>>>>>> v3.18
 =======
 	/* one more bit of ICCH in ICIC */
 	if (pd->icch & 0x100)
@@ -344,8 +390,12 @@ static int sh_mobile_i2c_init(struct sh_mobile_i2c_data *pd)
 		pd->icic &= ~ICIC_ICCHB8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	clk_disable(pd->clk);
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -356,7 +406,11 @@ static void activate_ch(struct sh_mobile_i2c_data *pd)
 	/* Wake up device and enable clock */
 	pm_runtime_get_sync(pd->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(pd->clk);
+=======
+	clk_prepare_enable(pd->clk);
+>>>>>>> v3.18
 =======
 	clk_prepare_enable(pd->clk);
 >>>>>>> v3.18
@@ -383,7 +437,11 @@ static void deactivate_ch(struct sh_mobile_i2c_data *pd)
 
 	/* Disable clock and mark device as idle */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(pd->clk);
+=======
+	clk_disable_unprepare(pd->clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(pd->clk);
 >>>>>>> v3.18
@@ -403,7 +461,11 @@ static unsigned char i2c_op(struct sh_mobile_i2c_data *pd,
 	switch (op) {
 	case OP_START: /* issue start and trigger DTE interrupt */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iic_wr(pd, ICCR, 0x94);
+=======
+		iic_wr(pd, ICCR, ICCR_ICE | ICCR_TRS | ICCR_BBSY);
+>>>>>>> v3.18
 =======
 		iic_wr(pd, ICCR, ICCR_ICE | ICCR_TRS | ICCR_BBSY);
 >>>>>>> v3.18
@@ -418,16 +480,22 @@ static unsigned char i2c_op(struct sh_mobile_i2c_data *pd,
 	case OP_TX_STOP: /* write data and issue a stop afterwards */
 		iic_wr(pd, ICDR, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iic_wr(pd, ICCR, pd->send_stop ? 0x90 : 0x94);
 		break;
 	case OP_TX_TO_RX: /* select read mode */
 		iic_wr(pd, ICCR, 0x81);
 =======
+=======
+>>>>>>> v3.18
 		iic_wr(pd, ICCR, pd->send_stop ? ICCR_ICE | ICCR_TRS
 					       : ICCR_ICE | ICCR_TRS | ICCR_BBSY);
 		break;
 	case OP_TX_TO_RX: /* select read mode */
 		iic_wr(pd, ICCR, ICCR_ICE | ICCR_SCP);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case OP_RX: /* just read data */
@@ -437,7 +505,11 @@ static unsigned char i2c_op(struct sh_mobile_i2c_data *pd,
 		iic_wr(pd, ICIC,
 		       ICIC_DTEE | ICIC_WAITE | ICIC_ALE | ICIC_TACKE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iic_wr(pd, ICCR, 0xc0);
+=======
+		iic_wr(pd, ICCR, ICCR_ICE | ICCR_RACK);
+>>>>>>> v3.18
 =======
 		iic_wr(pd, ICCR, ICCR_ICE | ICCR_RACK);
 >>>>>>> v3.18
@@ -447,7 +519,11 @@ static unsigned char i2c_op(struct sh_mobile_i2c_data *pd,
 		       ICIC_DTEE | ICIC_WAITE | ICIC_ALE | ICIC_TACKE);
 		ret = iic_rd(pd, ICDR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iic_wr(pd, ICCR, 0xc0);
+=======
+		iic_wr(pd, ICCR, ICCR_ICE | ICCR_RACK);
+>>>>>>> v3.18
 =======
 		iic_wr(pd, ICCR, ICCR_ICE | ICCR_RACK);
 >>>>>>> v3.18
@@ -586,7 +662,11 @@ static int start_ch(struct sh_mobile_i2c_data *pd, struct i2c_msg *usr_msg,
 	if (usr_msg->len == 0 && (usr_msg->flags & I2C_M_RD)) {
 		dev_err(pd->dev, "Unsupported zero length i2c read\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EIO;
+=======
+		return -EOPNOTSUPP;
+>>>>>>> v3.18
 =======
 		return -EOPNOTSUPP;
 >>>>>>> v3.18
@@ -625,7 +705,11 @@ static int poll_dte(struct sh_mobile_i2c_data *pd)
 
 		if (val & ICSR_TACK)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -EIO;
+=======
+			return -ENXIO;
+>>>>>>> v3.18
 =======
 			return -ENXIO;
 >>>>>>> v3.18
@@ -634,12 +718,16 @@ static int poll_dte(struct sh_mobile_i2c_data *pd)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!i) {
 		dev_warn(pd->dev, "Timeout polling for DTE!\n");
 		return -ETIMEDOUT;
 	}
 
 	return 0;
+=======
+	return i ? 0 : -ETIMEDOUT;
+>>>>>>> v3.18
 =======
 	return i ? 0 : -ETIMEDOUT;
 >>>>>>> v3.18
@@ -661,14 +749,20 @@ static int poll_busy(struct sh_mobile_i2c_data *pd)
 		if (!(val & ICSR_BUSY)) {
 			/* handle missing acknowledge and arbitration lost */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((val | pd->sr) & (ICSR_TACK | ICSR_AL))
 				return -EIO;
 =======
+=======
+>>>>>>> v3.18
 			val |= pd->sr;
 			if (val & ICSR_TACK)
 				return -ENXIO;
 			if (val & ICSR_AL)
 				return -EAGAIN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -677,12 +771,16 @@ static int poll_busy(struct sh_mobile_i2c_data *pd)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!i) {
 		dev_err(pd->dev, "Polling timed out\n");
 		return -ETIMEDOUT;
 	}
 
 	return 0;
+=======
+	return i ? 0 : -ETIMEDOUT;
+>>>>>>> v3.18
 =======
 	return i ? 0 : -ETIMEDOUT;
 >>>>>>> v3.18
@@ -748,6 +846,7 @@ static struct i2c_algorithm sh_mobile_i2c_algorithm = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sh_mobile_i2c_hook_irqs(struct platform_device *dev, int hook)
 {
 	struct resource *res;
@@ -763,6 +862,8 @@ static int sh_mobile_i2c_hook_irqs(struct platform_device *dev, int hook)
 
 				goto rollback;
 =======
+=======
+>>>>>>> v3.18
 static const struct sh_mobile_dt_config default_dt_config = {
 	.clks_per_count = 1,
 };
@@ -795,12 +896,16 @@ static int sh_mobile_i2c_hook_irqs(struct platform_device *dev)
 			if (ret) {
 				dev_err(&dev->dev, "cannot request IRQ %pa\n", &n);
 				return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
 		k++;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (hook)
 		return k > 0 ? 0 : -ENOENT;
@@ -822,10 +927,14 @@ static int sh_mobile_i2c_hook_irqs(struct platform_device *dev)
 =======
 	return k > 0 ? 0 : -ENOENT;
 >>>>>>> v3.18
+=======
+	return k > 0 ? 0 : -ENOENT;
+>>>>>>> v3.18
 }
 
 static int sh_mobile_i2c_probe(struct platform_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct i2c_sh_mobile_platform_data *pdata = dev->dev.platform_data;
 	struct sh_mobile_i2c_data *pd;
@@ -853,6 +962,8 @@ static int sh_mobile_i2c_probe(struct platform_device *dev)
 		goto err_clk;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct i2c_sh_mobile_platform_data *pdata = dev_get_platdata(&dev->dev);
 	struct sh_mobile_i2c_data *pd;
 	struct i2c_adapter *adap;
@@ -873,12 +984,16 @@ static int sh_mobile_i2c_probe(struct platform_device *dev)
 	ret = sh_mobile_i2c_hook_irqs(dev);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pd->dev = &dev->dev;
 	platform_set_drvdata(dev, pd);
 
 	res = platform_get_resource(dev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (res == NULL) {
 		dev_err(&dev->dev, "cannot find IO resource\n");
@@ -903,6 +1018,8 @@ static int sh_mobile_i2c_probe(struct platform_device *dev)
 	if (pdata && pdata->clks_per_count)
 		pd->clks_per_count = pdata->clks_per_count;
 =======
+=======
+>>>>>>> v3.18
 
 	pd->reg = devm_ioremap_resource(&dev->dev, res);
 	if (IS_ERR(pd->reg))
@@ -930,23 +1047,32 @@ static int sh_mobile_i2c_probe(struct platform_device *dev)
 		if (pdata && pdata->clks_per_count)
 			pd->clks_per_count = pdata->clks_per_count;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* The IIC blocks on SH-Mobile ARM processors
 	 * come with two new bits in ICIC.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (size > 0x17)
 		pd->flags |= IIC_FLAG_HAS_ICIC67;
 
 	sh_mobile_i2c_init(pd);
 =======
+=======
+>>>>>>> v3.18
 	if (resource_size(res) > 0x17)
 		pd->flags |= IIC_FLAG_HAS_ICIC67;
 
 	ret = sh_mobile_i2c_init(pd);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Enable Runtime PM for this device.
@@ -982,6 +1108,7 @@ static int sh_mobile_i2c_probe(struct platform_device *dev)
 	if (ret < 0) {
 		dev_err(&dev->dev, "cannot add numbered adapter\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_all;
 	}
 
@@ -1002,6 +1129,8 @@ static int sh_mobile_i2c_probe(struct platform_device *dev)
 	kfree(pd);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -1010,6 +1139,9 @@ static int sh_mobile_i2c_probe(struct platform_device *dev)
 		 adap->nr, pd->bus_speed, pd->iccl, pd->icch);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1019,11 +1151,15 @@ static int sh_mobile_i2c_remove(struct platform_device *dev)
 
 	i2c_del_adapter(&pd->adap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(pd->reg);
 	sh_mobile_i2c_hook_irqs(dev, 0);
 	clk_put(pd->clk);
 	pm_runtime_disable(&dev->dev);
 	kfree(pd);
+=======
+	pm_runtime_disable(&dev->dev);
+>>>>>>> v3.18
 =======
 	pm_runtime_disable(&dev->dev);
 >>>>>>> v3.18
@@ -1048,12 +1184,15 @@ static const struct dev_pm_ops sh_mobile_i2c_dev_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id sh_mobile_i2c_dt_ids[] = {
 	{ .compatible = "renesas,rmobile-iic", },
 	{},
 };
 MODULE_DEVICE_TABLE(of, sh_mobile_i2c_dt_ids);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver sh_mobile_i2c_driver = {

@@ -18,13 +18,19 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <errno.h>
 #include <fcntl.h>
 =======
+=======
+>>>>>>> v3.18
 #define _GNU_SOURCE
 #include <errno.h>
 #include <fcntl.h>
 #include <inttypes.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <math.h>
 #include <signal.h>
@@ -53,7 +59,12 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* When glibc offers the syscall, this will go away. */
+=======
+/* clock_adjtime is not available in GLIBC < 2.14 */
+#if !__GLIBC_PREREQ(2, 14)
+>>>>>>> v3.18
 =======
 /* clock_adjtime is not available in GLIBC < 2.14 */
 #if !__GLIBC_PREREQ(2, 14)
@@ -64,6 +75,10 @@ static int clock_adjtime(clockid_t id, struct timex *tx)
 	return syscall(__NR_clock_adjtime, id, tx);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -117,12 +132,18 @@ static long ppb_to_scaled_ppm(int ppb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int64_t pctns(struct ptp_clock_time *t)
 {
 	return t->sec * 1000000000LL + t->nsec;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void usage(char *progname)
 {
@@ -137,7 +158,10 @@ static void usage(char *progname)
 		" -g         get the ptp clock time\n"
 		" -h         prints this message\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		" -i val     index for event/trigger\n"
 		" -k val     measure the time offset between system and phc clock\n"
 		"            for 'val' times (Maximum 25)\n"
@@ -148,13 +172,21 @@ static void usage(char *progname)
 		"            0 - none\n"
 		"            1 - external time stamp\n"
 		"            2 - periodic output\n"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		" -p val     enable output with a period of 'val' nanoseconds\n"
 		" -P val     enable or disable (val=1|0) the system clock PPS\n"
 		" -s         set the ptp clock time from the system time\n"
 		" -S         set the system time from the ptp clock time\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		" -t val     shift the ptp clock time by 'val' seconds\n",
+=======
+		" -t val     shift the ptp clock time by 'val' seconds\n"
+		" -T val     set the ptp clock time to 'val' seconds\n",
+>>>>>>> v3.18
 =======
 		" -t val     shift the ptp clock time by 'val' seconds\n"
 		" -T val     set the ptp clock time to 'val' seconds\n",
@@ -169,6 +201,10 @@ int main(int argc, char *argv[])
 	struct ptp_extts_request extts_request;
 	struct ptp_perout_request perout_request;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ptp_pin_desc desc;
+>>>>>>> v3.18
 =======
 	struct ptp_pin_desc desc;
 >>>>>>> v3.18
@@ -180,15 +216,21 @@ int main(int argc, char *argv[])
 	struct sigevent sigevent;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *progname;
 	int c, cnt, fd;
 =======
+=======
+>>>>>>> v3.18
 	struct ptp_clock_time *pct;
 	struct ptp_sys_offset *sysoff;
 
 
 	char *progname;
 	int i, c, cnt, fd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	char *device = DEVICE;
@@ -198,6 +240,7 @@ int main(int argc, char *argv[])
 	int capabilities = 0;
 	int extts = 0;
 	int gettime = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int oneshot = 0;
 	int periodic = 0;
@@ -209,6 +252,8 @@ int main(int argc, char *argv[])
 	progname = progname ? 1+progname : argv[0];
 	while (EOF != (c = getopt(argc, argv, "a:A:cd:e:f:ghp:P:sSt:v"))) {
 =======
+=======
+>>>>>>> v3.18
 	int index = 0;
 	int list_pins = 0;
 	int oneshot = 0;
@@ -227,6 +272,9 @@ int main(int argc, char *argv[])
 	progname = strrchr(argv[0], '/');
 	progname = progname ? 1+progname : argv[0];
 	while (EOF != (c = getopt(argc, argv, "a:A:cd:e:f:ghi:k:lL:p:P:sSt:T:v"))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		switch (c) {
 		case 'a':
@@ -251,7 +299,10 @@ int main(int argc, char *argv[])
 			gettime = 1;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 'i':
 			index = atoi(optarg);
 			break;
@@ -269,6 +320,9 @@ int main(int argc, char *argv[])
 				return -1;
 			}
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case 'p':
 			perout = atoi(optarg);
@@ -286,11 +340,17 @@ int main(int argc, char *argv[])
 			adjtime = atoi(optarg);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 'T':
 			settime = 3;
 			seconds = atoi(optarg);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case 'h':
 			usage(progname);
@@ -324,7 +384,12 @@ int main(int argc, char *argv[])
 			       "  %d external time stamp channels\n"
 			       "  %d programmable periodic signals\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       "  %d pulse per second\n",
+=======
+			       "  %d pulse per second\n"
+			       "  %d programmable pins\n",
+>>>>>>> v3.18
 =======
 			       "  %d pulse per second\n"
 			       "  %d programmable pins\n",
@@ -334,7 +399,12 @@ int main(int argc, char *argv[])
 			       caps.n_ext_ts,
 			       caps.n_per_out,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       caps.pps);
+=======
+			       caps.pps,
+			       caps.n_pins);
+>>>>>>> v3.18
 =======
 			       caps.pps,
 			       caps.n_pins);
@@ -393,10 +463,13 @@ int main(int argc, char *argv[])
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (extts) {
 		memset(&extts_request, 0, sizeof(extts_request));
 		extts_request.index = 0;
 =======
+=======
+>>>>>>> v3.18
 	if (settime == 3) {
 		ts.tv_sec = seconds;
 		ts.tv_nsec = 0;
@@ -410,6 +483,9 @@ int main(int argc, char *argv[])
 	if (extts) {
 		memset(&extts_request, 0, sizeof(extts_request));
 		extts_request.index = index;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		extts_request.flags = PTP_ENABLE_FEATURE;
 		if (ioctl(fd, PTP_EXTTS_REQUEST, &extts_request)) {
@@ -436,7 +512,10 @@ int main(int argc, char *argv[])
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (list_pins) {
 		int n_pins = 0;
 		if (ioctl(fd, PTP_CLOCK_GETCAPS, &caps)) {
@@ -455,6 +534,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (oneshot) {
 		install_handler(SIGALRM, handle_alarm);
@@ -506,7 +588,11 @@ int main(int argc, char *argv[])
 		}
 		memset(&perout_request, 0, sizeof(perout_request));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		perout_request.index = 0;
+=======
+		perout_request.index = index;
+>>>>>>> v3.18
 =======
 		perout_request.index = index;
 >>>>>>> v3.18
@@ -522,7 +608,10 @@ int main(int argc, char *argv[])
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pin_index >= 0) {
 		memset(&desc, 0, sizeof(desc));
 		desc.index = pin_index;
@@ -535,6 +624,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pps != -1) {
 		int enable = pps ? 1 : 0;
@@ -546,7 +638,10 @@ int main(int argc, char *argv[])
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pct_offset) {
 		if (n_samples <= 0 || n_samples > 25) {
 			puts("n_samples should be between 1 and 25");
@@ -588,6 +683,9 @@ int main(int argc, char *argv[])
 		free(sysoff);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	close(fd);
 	return 0;

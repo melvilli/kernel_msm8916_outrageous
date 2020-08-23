@@ -51,9 +51,12 @@ struct ntb_transport_qp;
 struct ntb_client {
 	struct device_driver driver;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*probe) (struct pci_dev *pdev);
 	void (*remove) (struct pci_dev *pdev);
 =======
+=======
+>>>>>>> v3.18
 	int (*probe)(struct pci_dev *pdev);
 	void (*remove)(struct pci_dev *pdev);
 };
@@ -61,6 +64,9 @@ struct ntb_client {
 enum {
 	NTB_LINK_DOWN = 0,
 	NTB_LINK_UP,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -71,17 +77,23 @@ void ntb_unregister_client_dev(char *device_name);
 
 struct ntb_queue_handlers {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*rx_handler) (struct ntb_transport_qp *qp, void *qp_data,
 			    void *data, int len);
 	void (*tx_handler) (struct ntb_transport_qp *qp, void *qp_data,
 			    void *data, int len);
 	void (*event_handler) (void *data, int status);
 =======
+=======
+>>>>>>> v3.18
 	void (*rx_handler)(struct ntb_transport_qp *qp, void *qp_data,
 			   void *data, int len);
 	void (*tx_handler)(struct ntb_transport_qp *qp, void *qp_data,
 			   void *data, int len);
 	void (*event_handler)(void *data, int status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

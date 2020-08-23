@@ -4,7 +4,11 @@
  *
  * This code is based on drivers/scsi/mpt3sas/mpt3sas_ctl.c
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012  LSI Corporation
+=======
+ * Copyright (C) 2012-2014  LSI Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2014  LSI Corporation
 >>>>>>> v3.18
@@ -985,7 +989,11 @@ _ctl_do_mpt_command(struct MPT3SAS_ADAPTER *ioc, struct mpt3_ioctl_command karg,
 			    le16_to_cpu(mpi_request->FunctionDependent1), 0, 0,
 			    0, MPI2_SCSITASKMGMT_TASKTYPE_TARGET_RESET, 0, 30,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    0, TM_MUTEX_ON);
+=======
+			    TM_MUTEX_ON);
+>>>>>>> v3.18
 =======
 			    TM_MUTEX_ON);
 >>>>>>> v3.18

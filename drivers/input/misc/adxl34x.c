@@ -9,7 +9,10 @@
 
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -162,7 +165,11 @@
 /* ORIENT ADXL346 only */
 #define ADXL346_2D_VALID		(1 << 6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ADXL346_2D_ORIENT(x)		(((x) & 0x3) >> 4)
+=======
+#define ADXL346_2D_ORIENT(x)		(((x) & 0x30) >> 4)
+>>>>>>> v3.18
 =======
 #define ADXL346_2D_ORIENT(x)		(((x) & 0x30) >> 4)
 >>>>>>> v3.18
@@ -722,7 +729,11 @@ struct adxl34x *adxl34x_probe(struct device *dev, int irq,
 	ac->fifo_delay = fifo_delay_default;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = dev->platform_data;
+=======
+	pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(dev);
 >>>>>>> v3.18

@@ -257,21 +257,28 @@ static void nilfs_set_de_type(struct nilfs_dir_entry *de, struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nilfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	loff_t pos = filp->f_pos;
 	struct inode *inode = file_inode(filp);
 =======
+=======
+>>>>>>> v3.18
 static int nilfs_readdir(struct file *file, struct dir_context *ctx)
 {
 	loff_t pos = ctx->pos;
 	struct inode *inode = file_inode(file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct super_block *sb = inode->i_sb;
 	unsigned int offset = pos & ~PAGE_CACHE_MASK;
 	unsigned long n = pos >> PAGE_CACHE_SHIFT;
 	unsigned long npages = dir_pages(inode);
 /*	unsigned chunk_mask = ~(nilfs_chunk_size(inode)-1); */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned char *types = NULL;
 	int ret;
@@ -280,6 +287,11 @@ static int nilfs_readdir(struct file *file, struct dir_context *ctx)
 		goto success;
 
 	types = nilfs_filetype_table;
+=======
+
+	if (pos > inode->i_size - NILFS_DIR_REC_LEN(1))
+		return 0;
+>>>>>>> v3.18
 =======
 
 	if (pos > inode->i_size - NILFS_DIR_REC_LEN(1))
@@ -295,9 +307,14 @@ static int nilfs_readdir(struct file *file, struct dir_context *ctx)
 			nilfs_error(sb, __func__, "bad page in #%lu",
 				    inode->i_ino);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos += PAGE_CACHE_SIZE - offset;
 			ret = -EIO;
 			goto done;
+=======
+			ctx->pos += PAGE_CACHE_SIZE - offset;
+			return -EIO;
+>>>>>>> v3.18
 =======
 			ctx->pos += PAGE_CACHE_SIZE - offset;
 			return -EIO;
@@ -311,6 +328,7 @@ static int nilfs_readdir(struct file *file, struct dir_context *ctx)
 			if (de->rec_len == 0) {
 				nilfs_error(sb, __func__,
 					    "zero-length directory entry");
+<<<<<<< HEAD
 <<<<<<< HEAD
 				ret = -EIO;
 				nilfs_put_page(page);
@@ -342,6 +360,8 @@ success:
 done:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 				nilfs_put_page(page);
 				return -EIO;
 			}
@@ -364,6 +384,9 @@ done:
 		nilfs_put_page(page);
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -722,7 +745,11 @@ const struct file_operations nilfs_dir_operations = {
 	.llseek		= generic_file_llseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= nilfs_readdir,
+=======
+	.iterate	= nilfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= nilfs_readdir,
 >>>>>>> v3.18

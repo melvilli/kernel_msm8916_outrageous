@@ -64,6 +64,7 @@ struct mld2_query {
 #define mld2q_resv1		mld2q_hdr.icmp6_dataun.un_data16[1]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Max Response Code */
 #define MLDV2_MASK(value, nb) ((nb)>=32 ? (value) : ((1<<(nb))-1) & (value))
 #define MLDV2_EXP(thresh, nbmant, nbexp, value) \
@@ -73,6 +74,8 @@ struct mld2_query {
 
 #define MLDV2_MRC(value) MLDV2_EXP(0x8000, 12, 3, value)
 =======
+=======
+>>>>>>> v3.18
 /* RFC3810, 5.1.3. Maximum Response Code:
  *
  * If Maximum Response Code >= 32768, Maximum Response Code represents a
@@ -119,6 +122,9 @@ static inline unsigned long mldv2_mrc(const struct mld2_query *mlh2)
 
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

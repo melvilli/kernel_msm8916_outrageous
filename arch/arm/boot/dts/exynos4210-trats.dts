@@ -14,17 +14,23 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "exynos4210.dtsi"
 
 / {
 	model = "Samsung Trats based on Exynos4210";
 	compatible = "samsung,trats", "samsung,exynos4210";
 =======
+=======
+>>>>>>> v3.18
 #include "exynos4210.dtsi"
 
 / {
 	model = "Samsung Trats based on Exynos4210";
 	compatible = "samsung,trats", "samsung,exynos4210", "samsung,exynos4";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memory {
@@ -39,6 +45,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vemmc_reg: voltage-regulator@0 {
 	        compatible = "regulator-fixed";
 		regulator-name = "VMEM_VDD_2.8V";
@@ -47,6 +54,8 @@
 		gpio = <&gpk0 2 0>;
 		enable-active-high;
 =======
+=======
+>>>>>>> v3.18
 	regulators {
 		compatible = "simple-bus";
 
@@ -109,6 +118,9 @@
 		vusb_d-supply = <&vusb_reg>;
 		vusb_a-supply = <&vusbdac_reg>;
 		status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -122,11 +134,17 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	exynos-usbphy@125B0000 {
 		status = "okay";
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	serial@13800000 {
 		status = "okay";
@@ -178,6 +196,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tsp_reg: voltage-regulator {
 		compatible = "regulator-fixed";
 		regulator-name = "TSP_FIXED_VOLTAGES";
@@ -187,6 +206,8 @@
 		enable-active-high;
 	};
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	i2c@13890000 {
@@ -302,13 +323,19 @@
 				};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				vtcam_reg: LDO12 {
 				     regulator-name = "VT_CAM_1.8V";
 				     regulator-min-microvolt = <1800000>;
 				     regulator-max-microvolt = <1800000>;
 				};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				vcclcd_reg: LDO13 {
 				     regulator-name = "VCC_3.3V_LCD";
@@ -337,14 +364,20 @@
 
 				varm_breg: BUCK1 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     regulator-name = "VARM_1.2V_C210";
 =======
+=======
+>>>>>>> v3.18
 				     /*
 				      * HACK: The real name is VARM_1.2V_C210,
 				      * but exynos-cpufreq does not support
 				      * DT-based regulator lookup yet.
 				      */
 				     regulator-name = "vdd_arm";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				     regulator-min-microvolt = <900000>;
 				     regulator-max-microvolt = <1350000>;
@@ -403,7 +436,10 @@
 		};
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	dsi_0: dsi@11C80000 {
 		vddcore-supply = <&vusb_reg>;
@@ -487,5 +523,8 @@
 			status = "okay";
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

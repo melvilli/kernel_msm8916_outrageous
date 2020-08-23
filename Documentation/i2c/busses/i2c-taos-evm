@@ -1,7 +1,11 @@
 Kernel driver i2c-taos-evm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Author: Jean Delvare <khali@linux-fr.org>
+=======
+Author: Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
 Author: Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

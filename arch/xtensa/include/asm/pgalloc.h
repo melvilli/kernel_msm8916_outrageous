@@ -39,6 +39,7 @@ static inline void pgd_free(struct mm_struct *mm, pgd_t *pgd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Use a slab cache for the pte pages (see also sparc64 implementation) */
 
 extern struct kmem_cache *pgtable_cache;
@@ -48,6 +49,8 @@ static inline pte_t *pte_alloc_one_kernel(struct mm_struct *mm,
 {
 	return kmem_cache_alloc(pgtable_cache, GFP_KERNEL|__GFP_REPEAT);
 =======
+=======
+>>>>>>> v3.18
 static inline pte_t *pte_alloc_one_kernel(struct mm_struct *mm,
 					 unsigned long address)
 {
@@ -60,6 +63,9 @@ static inline pte_t *pte_alloc_one_kernel(struct mm_struct *mm,
 	for (i = 0; i < 1024; i++)
 		pte_clear(NULL, 0, ptep + i);
 	return ptep;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -67,11 +73,14 @@ static inline pgtable_t pte_alloc_one(struct mm_struct *mm,
 					unsigned long addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct page *page;
 
 	page = virt_to_page(pte_alloc_one_kernel(mm, addr));
 	pgtable_page_ctor(page);
 =======
+=======
+>>>>>>> v3.18
 	pte_t *pte;
 	struct page *page;
 
@@ -83,6 +92,9 @@ static inline pgtable_t pte_alloc_one(struct mm_struct *mm,
 		__free_page(page);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return page;
 }
@@ -90,7 +102,11 @@ static inline pgtable_t pte_alloc_one(struct mm_struct *mm,
 static inline void pte_free_kernel(struct mm_struct *mm, pte_t *pte)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kmem_cache_free(pgtable_cache, pte);
+=======
+	free_page((unsigned long)pte);
+>>>>>>> v3.18
 =======
 	free_page((unsigned long)pte);
 >>>>>>> v3.18
@@ -100,7 +116,11 @@ static inline void pte_free(struct mm_struct *mm, pgtable_t pte)
 {
 	pgtable_page_dtor(pte);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kmem_cache_free(pgtable_cache, page_address(pte));
+=======
+	__free_page(pte);
+>>>>>>> v3.18
 =======
 	__free_page(pte);
 >>>>>>> v3.18

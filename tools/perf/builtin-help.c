@@ -12,6 +12,10 @@
 #include "util/run-command.h"
 #include "util/help.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util/debug.h"
+>>>>>>> v3.18
 =======
 #include "util/debug.h"
 >>>>>>> v3.18
@@ -107,6 +111,11 @@ static int check_emacsclient_version(void)
 static void exec_woman_emacs(const char *path, const char *page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+
+>>>>>>> v3.18
 =======
 	char sbuf[STRERR_BUFSIZE];
 
@@ -120,7 +129,12 @@ static void exec_woman_emacs(const char *path, const char *page)
 		strbuf_addf(&man_page, "(woman \"%s\")", page);
 		execlp(path, "emacsclient", "-e", man_page.buf, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		warning("failed to exec '%s': %s", path, strerror(errno));
+=======
+		warning("failed to exec '%s': %s", path,
+			strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 		warning("failed to exec '%s': %s", path,
 			strerror_r(errno, sbuf, sizeof(sbuf)));
@@ -132,15 +146,21 @@ static void exec_man_konqueror(const char *path, const char *page)
 {
 	const char *display = getenv("DISPLAY");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (display && *display) {
 		struct strbuf man_page = STRBUF_INIT;
 		const char *filename = "kfmclient";
 =======
+=======
+>>>>>>> v3.18
 
 	if (display && *display) {
 		struct strbuf man_page = STRBUF_INIT;
 		const char *filename = "kfmclient";
 		char sbuf[STRERR_BUFSIZE];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* It's simpler to launch konqueror using kfmclient. */
@@ -161,7 +181,12 @@ static void exec_man_konqueror(const char *path, const char *page)
 		strbuf_addf(&man_page, "man:%s(1)", page);
 		execlp(path, filename, "newTab", man_page.buf, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		warning("failed to exec '%s': %s", path, strerror(errno));
+=======
+		warning("failed to exec '%s': %s", path,
+			strerror_r(errno, sbuf, sizeof(sbuf)));
+>>>>>>> v3.18
 =======
 		warning("failed to exec '%s': %s", path,
 			strerror_r(errno, sbuf, sizeof(sbuf)));
@@ -172,11 +197,14 @@ static void exec_man_konqueror(const char *path, const char *page)
 static void exec_man_man(const char *path, const char *page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!path)
 		path = "man";
 	execlp(path, "man", page, NULL);
 	warning("failed to exec '%s': %s", path, strerror(errno));
 =======
+=======
+>>>>>>> v3.18
 	char sbuf[STRERR_BUFSIZE];
 
 	if (!path)
@@ -184,6 +212,9 @@ static void exec_man_man(const char *path, const char *page)
 	execlp(path, "man", page, NULL);
 	warning("failed to exec '%s': %s", path,
 		strerror_r(errno, sbuf, sizeof(sbuf)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -191,16 +222,22 @@ static void exec_man_cmd(const char *cmd, const char *page)
 {
 	struct strbuf shell_cmd = STRBUF_INIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strbuf_addf(&shell_cmd, "%s %s", cmd, page);
 	execl("/bin/sh", "sh", "-c", shell_cmd.buf, NULL);
 	warning("failed to exec '%s': %s", cmd, strerror(errno));
 =======
+=======
+>>>>>>> v3.18
 	char sbuf[STRERR_BUFSIZE];
 
 	strbuf_addf(&shell_cmd, "%s %s", cmd, page);
 	execl("/bin/sh", "sh", "-c", shell_cmd.buf, NULL);
 	warning("failed to exec '%s': %s", cmd,
 		strerror_r(errno, sbuf, sizeof(sbuf)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

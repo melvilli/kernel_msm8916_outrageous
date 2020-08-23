@@ -9,7 +9,10 @@
  */
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irq.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -17,7 +20,10 @@
 #include <linux/errno.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irqdomain.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/clk.h>
@@ -25,11 +31,17 @@
 #include <linux/platform_device.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/list.h>
 #include <linux/slab.h>
 #include <linux/pinctrl/consumer.h>
 #include <linux/pinctrl/pinconf-generic.h>
 #include <linux/platform_data/pinctrl-coh901.h>
+=======
+#include <linux/slab.h>
+#include <linux/pinctrl/consumer.h>
+#include <linux/pinctrl/pinconf-generic.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 #include <linux/pinctrl/consumer.h>
@@ -71,6 +83,7 @@
 
 /* 8 bits per port, no version has more than 7 ports */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define U300_GPIO_PINS_PER_PORT 8
 #define U300_GPIO_MAX (U300_GPIO_PINS_PER_PORT * 7)
 
@@ -78,6 +91,8 @@ struct u300_gpio {
 	struct gpio_chip chip;
 	struct list_head port_list;
 =======
+=======
+>>>>>>> v3.18
 #define U300_GPIO_NUM_PORTS 7
 #define U300_GPIO_PINS_PER_PORT 8
 #define U300_GPIO_MAX (U300_GPIO_PINS_PER_PORT * U300_GPIO_NUM_PORTS)
@@ -93,6 +108,9 @@ struct u300_gpio_port {
 struct u300_gpio {
 	struct gpio_chip chip;
 	struct u300_gpio_port ports[U300_GPIO_NUM_PORTS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct clk *clk;
 	void __iomem *base;
@@ -109,6 +127,7 @@ struct u300_gpio {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct u300_gpio_port {
 	struct list_head node;
 	struct u300_gpio *gpio;
@@ -119,6 +138,8 @@ struct u300_gpio_port {
 	u8 toggle_edge_mode;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -145,9 +166,12 @@ struct u300_gpio_confdata {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* BS335 has seven ports of 8 bits each = GPIO pins 0..55 */
 #define BS335_GPIO_NUM_PORTS 7
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define U300_FLOATING_INPUT { \
@@ -173,7 +197,11 @@ struct u300_gpio_confdata {
 /* Initial configuration */
 static const struct __initconst u300_gpio_confdata
 <<<<<<< HEAD
+<<<<<<< HEAD
 bs335_gpio_config[BS335_GPIO_NUM_PORTS][U300_GPIO_PINS_PER_PORT] = {
+=======
+bs335_gpio_config[U300_GPIO_NUM_PORTS][U300_GPIO_PINS_PER_PORT] = {
+>>>>>>> v3.18
 =======
 bs335_gpio_config[U300_GPIO_NUM_PORTS][U300_GPIO_PINS_PER_PORT] = {
 >>>>>>> v3.18
@@ -352,6 +380,7 @@ static int u300_gpio_direction_output(struct gpio_chip *chip, unsigned offset,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int u300_gpio_to_irq(struct gpio_chip *chip, unsigned offset)
 {
 	struct u300_gpio *gpio = to_u300_gpio(chip);
@@ -385,6 +414,8 @@ static int u300_gpio_to_irq(struct gpio_chip *chip, unsigned offset)
 	return retirq;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Returning -EINVAL means "supported but not available" */
@@ -508,7 +539,10 @@ static struct gpio_chip u300_gpio_chip = {
 	.direction_input	= u300_gpio_direction_input,
 	.direction_output	= u300_gpio_direction_output,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.to_irq			= u300_gpio_to_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -535,14 +569,20 @@ static void u300_toggle_trigger(struct u300_gpio *gpio, unsigned offset)
 static int u300_gpio_irq_type(struct irq_data *d, unsigned trigger)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct u300_gpio_port *port = irq_data_get_irq_chip_data(d);
 	struct u300_gpio *gpio = port->gpio;
 	int offset = (port->number << 3) + d->hwirq;
 =======
+=======
+>>>>>>> v3.18
 	struct gpio_chip *chip = irq_data_get_irq_chip_data(d);
 	struct u300_gpio *gpio = to_u300_gpio(chip);
 	struct u300_gpio_port *port = &gpio->ports[d->hwirq >> 3];
 	int offset = d->hwirq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 val;
 
@@ -578,14 +618,20 @@ static int u300_gpio_irq_type(struct irq_data *d, unsigned trigger)
 static void u300_gpio_irq_enable(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct u300_gpio_port *port = irq_data_get_irq_chip_data(d);
 	struct u300_gpio *gpio = port->gpio;
 	int offset = (port->number << 3) + d->hwirq;
 =======
+=======
+>>>>>>> v3.18
 	struct gpio_chip *chip = irq_data_get_irq_chip_data(d);
 	struct u300_gpio *gpio = to_u300_gpio(chip);
 	struct u300_gpio_port *port = &gpio->ports[d->hwirq >> 3];
 	int offset = d->hwirq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 val;
 	unsigned long flags;
@@ -601,9 +647,15 @@ static void u300_gpio_irq_enable(struct irq_data *d)
 static void u300_gpio_irq_disable(struct irq_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct u300_gpio_port *port = irq_data_get_irq_chip_data(d);
 	struct u300_gpio *gpio = port->gpio;
 	int offset = (port->number << 3) + d->hwirq;
+=======
+	struct gpio_chip *chip = irq_data_get_irq_chip_data(d);
+	struct u300_gpio *gpio = to_u300_gpio(chip);
+	int offset = d->hwirq;
+>>>>>>> v3.18
 =======
 	struct gpio_chip *chip = irq_data_get_irq_chip_data(d);
 	struct u300_gpio *gpio = to_u300_gpio(chip);
@@ -624,13 +676,17 @@ static struct irq_chip u300_gpio_irqchip = {
 	.irq_disable		= u300_gpio_irq_disable,
 	.irq_set_type		= u300_gpio_irq_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
 
 static void u300_gpio_irq_handler(unsigned irq, struct irq_desc *desc)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct u300_gpio_port *port = irq_get_handler_data(irq);
 	struct u300_gpio *gpio = port->gpio;
@@ -639,6 +695,8 @@ static void u300_gpio_irq_handler(unsigned irq, struct irq_desc *desc)
 
 	desc->irq_data.chip->irq_ack(&desc->irq_data);
 =======
+=======
+>>>>>>> v3.18
 	struct irq_chip *parent_chip = irq_get_chip(irq);
 	struct gpio_chip *chip = irq_get_handler_data(irq);
 	struct u300_gpio *gpio = to_u300_gpio(chip);
@@ -648,6 +706,9 @@ static void u300_gpio_irq_handler(unsigned irq, struct irq_desc *desc)
 
 	chained_irq_enter(parent_chip, desc);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Read event register */
 	val = readl(U300_PIN_REG(pinoffset, iev));
@@ -662,8 +723,13 @@ static void u300_gpio_irq_handler(unsigned irq, struct irq_desc *desc)
 
 		for_each_set_bit(irqoffset, &val, U300_GPIO_PINS_PER_PORT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int pin_irq = irq_find_mapping(port->domain, irqoffset);
 			int offset = pinoffset + irqoffset;
+=======
+			int offset = pinoffset + irqoffset;
+			int pin_irq = irq_find_mapping(chip->irqdomain, offset);
+>>>>>>> v3.18
 =======
 			int offset = pinoffset + irqoffset;
 			int pin_irq = irq_find_mapping(chip->irqdomain, offset);
@@ -682,7 +748,11 @@ static void u300_gpio_irq_handler(unsigned irq, struct irq_desc *desc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	desc->irq_data.chip->irq_unmask(&desc->irq_data);
+=======
+	chained_irq_exit(parent_chip, desc);
+>>>>>>> v3.18
 =======
 	chained_irq_exit(parent_chip, desc);
 >>>>>>> v3.18
@@ -721,8 +791,12 @@ static void __init u300_gpio_init_pin(struct u300_gpio *gpio,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init u300_gpio_init_coh901571(struct u300_gpio *gpio,
 				     struct u300_gpio_platform *plat)
+=======
+static void __init u300_gpio_init_coh901571(struct u300_gpio *gpio)
+>>>>>>> v3.18
 =======
 static void __init u300_gpio_init_coh901571(struct u300_gpio *gpio)
 >>>>>>> v3.18
@@ -731,7 +805,11 @@ static void __init u300_gpio_init_coh901571(struct u300_gpio *gpio)
 
 	/* Write default config and values to all pins */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < plat->ports; i++) {
+=======
+	for (i = 0; i < U300_GPIO_NUM_PORTS; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < U300_GPIO_NUM_PORTS; i++) {
 >>>>>>> v3.18
@@ -745,6 +823,7 @@ static void __init u300_gpio_init_coh901571(struct u300_gpio *gpio)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void u300_gpio_free_ports(struct u300_gpio *gpio)
 {
@@ -760,6 +839,8 @@ static inline void u300_gpio_free_ports(struct u300_gpio *gpio)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -795,7 +876,10 @@ static struct coh901_pinpair coh901_pintable[] = {
 static int __init u300_gpio_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct u300_gpio_platform *plat = dev_get_platdata(&pdev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct u300_gpio *gpio;
@@ -812,9 +896,15 @@ static int __init u300_gpio_probe(struct platform_device *pdev)
 
 	gpio->chip = u300_gpio_chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio->chip.ngpio = plat->ports * U300_GPIO_PINS_PER_PORT;
 	gpio->chip.dev = &pdev->dev;
 	gpio->chip.base = plat->gpio_base;
+=======
+	gpio->chip.ngpio = U300_GPIO_NUM_PORTS * U300_GPIO_PINS_PER_PORT;
+	gpio->chip.dev = &pdev->dev;
+	gpio->chip.base = 0;
+>>>>>>> v3.18
 =======
 	gpio->chip.ngpio = U300_GPIO_NUM_PORTS * U300_GPIO_PINS_PER_PORT;
 	gpio->chip.dev = &pdev->dev;
@@ -861,6 +951,7 @@ static int __init u300_gpio_probe(struct platform_device *pdev)
 	writel(U300_GPIO_CR_BLOCK_CLKRQ_ENABLE,
 	       gpio->base + U300_GPIO_CR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u300_gpio_init_coh901571(gpio, plat);
 
 	/* Add each port with its IRQ separately */
@@ -875,6 +966,8 @@ static int __init u300_gpio_probe(struct platform_device *pdev)
 			goto err_no_port;
 		}
 =======
+=======
+>>>>>>> v3.18
 	u300_gpio_init_coh901571(gpio);
 
 #ifdef CONFIG_OF_GPIO
@@ -899,12 +992,16 @@ static int __init u300_gpio_probe(struct platform_device *pdev)
 	/* Add each port with its IRQ separately */
 	for (portno = 0 ; portno < U300_GPIO_NUM_PORTS; portno++) {
 		struct u300_gpio_port *port = &gpio->ports[portno];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		snprintf(port->name, 8, "gpio%d", portno);
 		port->number = portno;
 		port->gpio = gpio;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		port->irq = platform_get_irq_byname(pdev,
 						    port->name);
@@ -951,6 +1048,8 @@ static int __init u300_gpio_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		port->irq = platform_get_irq(pdev, portno);
 
 		gpiochip_set_chained_irqchip(&gpio->chip,
@@ -963,6 +1062,9 @@ static int __init u300_gpio_probe(struct platform_device *pdev)
 	}
 	dev_dbg(gpio->dev, "initialized %d GPIO ports\n", portno);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Add pinctrl pin ranges, the pin controller must be registered
@@ -983,12 +1085,18 @@ static int __init u300_gpio_probe(struct platform_device *pdev)
 
 err_no_range:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpiochip_remove(&gpio->chip))
 		dev_err(&pdev->dev, "failed to remove gpio chip\n");
 err_no_chip:
 err_no_domain:
 err_no_port:
 	u300_gpio_free_ports(gpio);
+=======
+err_no_irqchip:
+	gpiochip_remove(&gpio->chip);
+err_no_chip:
+>>>>>>> v3.18
 =======
 err_no_irqchip:
 	gpiochip_remove(&gpio->chip);
@@ -1003,13 +1111,17 @@ static int __exit u300_gpio_remove(struct platform_device *pdev)
 {
 	struct u300_gpio *gpio = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	/* Turn off the GPIO block */
 	writel(0x00000000U, gpio->base + U300_GPIO_CR);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = gpiochip_remove(&gpio->chip);
 	if (err < 0) {
@@ -1026,6 +1138,8 @@ static struct platform_driver u300_gpio_driver = {
 	.driver		= {
 		.name	= "u300-gpio",
 =======
+=======
+>>>>>>> v3.18
 	gpiochip_remove(&gpio->chip);
 	clk_disable_unprepare(gpio->clk);
 	return 0;
@@ -1040,6 +1154,9 @@ static struct platform_driver u300_gpio_driver = {
 	.driver		= {
 		.name	= "u300-gpio",
 		.of_match_table = u300_gpio_match,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.remove		= __exit_p(u300_gpio_remove),

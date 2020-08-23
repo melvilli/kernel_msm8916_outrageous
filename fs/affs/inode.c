@@ -15,7 +15,10 @@
 
 extern const struct inode_operations affs_symlink_inode_operations;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct timezone sys_tz;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -24,7 +27,10 @@ struct inode *affs_iget(struct super_block *sb, unsigned long ino)
 	struct affs_sb_info	*sbi = AFFS_SB(sb);
 	struct buffer_head	*bh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct affs_head	*head;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct affs_tail	*tail;
@@ -41,7 +47,11 @@ struct inode *affs_iget(struct super_block *sb, unsigned long ino)
 		return inode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: affs_iget(%lu)\n", inode->i_ino);
+=======
+	pr_debug("affs_iget(%lu)\n", inode->i_ino);
+>>>>>>> v3.18
 =======
 	pr_debug("affs_iget(%lu)\n", inode->i_ino);
 >>>>>>> v3.18
@@ -60,7 +70,10 @@ struct inode *affs_iget(struct super_block *sb, unsigned long ino)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	head = AFFS_HEAD(bh);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tail = AFFS_TAIL(sb, bh);
@@ -189,7 +202,11 @@ affs_write_inode(struct inode *inode, struct writeback_control *wbc)
 	gid_t			 gid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: write_inode(%lu)\n",inode->i_ino);
+=======
+	pr_debug("write_inode(%lu)\n", inode->i_ino);
+>>>>>>> v3.18
 =======
 	pr_debug("write_inode(%lu)\n", inode->i_ino);
 >>>>>>> v3.18
@@ -238,7 +255,11 @@ affs_notify_change(struct dentry *dentry, struct iattr *attr)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: notify_change(%lu,0x%x)\n",inode->i_ino,attr->ia_valid);
+=======
+	pr_debug("notify_change(%lu,0x%x)\n", inode->i_ino, attr->ia_valid);
+>>>>>>> v3.18
 =======
 	pr_debug("notify_change(%lu,0x%x)\n", inode->i_ino, attr->ia_valid);
 >>>>>>> v3.18
@@ -280,8 +301,14 @@ affs_evict_inode(struct inode *inode)
 {
 	unsigned long cache_page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: evict_inode(ino=%lu, nlink=%u)\n", inode->i_ino, inode->i_nlink);
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	pr_debug("evict_inode(ino=%lu, nlink=%u)\n",
+		 inode->i_ino, inode->i_nlink);
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	pr_debug("evict_inode(ino=%lu, nlink=%u)\n",
 		 inode->i_ino, inode->i_nlink);
@@ -299,7 +326,11 @@ affs_evict_inode(struct inode *inode)
 	cache_page = (unsigned long)AFFS_I(inode)->i_lc;
 	if (cache_page) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("AFFS: freeing ext cache\n");
+=======
+		pr_debug("freeing ext cache\n");
+>>>>>>> v3.18
 =======
 		pr_debug("freeing ext cache\n");
 >>>>>>> v3.18
@@ -382,7 +413,12 @@ affs_add_entry(struct inode *dir, struct inode *inode, struct dentry *dentry, s3
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: add_entry(dir=%u, inode=%u, \"%*s\", type=%d)\n", (u32)dir->i_ino,
+=======
+	pr_debug("%s(dir=%u, inode=%u, \"%*s\", type=%d)\n",
+		 __func__, (u32)dir->i_ino,
+>>>>>>> v3.18
 =======
 	pr_debug("%s(dir=%u, inode=%u, \"%*s\", type=%d)\n",
 		 __func__, (u32)dir->i_ino,

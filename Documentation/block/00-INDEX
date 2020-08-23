@@ -7,6 +7,11 @@ capability.txt
 cfq-iosched.txt
 	- CFQ IO scheduler tunables
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+cmdline-partition.txt
+	- how to specify block device partitions on kernel command line
+>>>>>>> v3.18
 =======
 cmdline-partition.txt
 	- how to specify block device partitions on kernel command line
@@ -18,6 +23,11 @@ deadline-iosched.txt
 ioprio.txt
 	- Block io priorities (in CFQ scheduler)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+null_blk.txt
+	- Null block for block-layer benchmarking.
+>>>>>>> v3.18
 =======
 null_blk.txt
 	- Null block for block-layer benchmarking.

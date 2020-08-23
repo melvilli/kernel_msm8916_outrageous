@@ -89,11 +89,15 @@ test_delete()
 	fi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rm $file 2>/dev/null
 	if [ $? -ne 0 ]; then
 		chattr -i $file
 		rm $file
 	fi
+=======
+	rm $file
+>>>>>>> v3.18
 =======
 	rm $file
 >>>>>>> v3.18
@@ -120,7 +124,10 @@ test_zero_size_delete()
 	fi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chattr -i $file
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	printf "$attrs" > $file
@@ -154,11 +161,15 @@ test_valid_filenames()
 			ret=1
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rm $file 2>/dev/null
 			if [ $? -ne 0 ]; then
 				chattr -i $file
 				rm $file
 			fi
+=======
+			rm $file
+>>>>>>> v3.18
 =======
 			rm $file
 >>>>>>> v3.18
@@ -195,11 +206,15 @@ test_invalid_filenames()
 		if [ -e $file ]; then
 			echo "Creating $file should have failed" >&2
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rm $file 2>/dev/null
 			if [ $? -ne 0 ]; then
 				chattr -i $file
 				rm $file
 			fi
+=======
+			rm $file
+>>>>>>> v3.18
 =======
 			rm $file
 >>>>>>> v3.18

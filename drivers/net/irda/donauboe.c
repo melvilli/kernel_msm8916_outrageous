@@ -185,7 +185,11 @@
 #define CONFIG0H_DMA_ON CONFIG0H_DMA_ON_NORX | OBOE_CONFIG0H_ENRX
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(toshoboe_pci_tbl) = {
+=======
+static const struct pci_device_id toshoboe_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id toshoboe_pci_tbl[] = {
 >>>>>>> v3.18
@@ -1357,7 +1361,11 @@ toshoboe_net_open (struct net_device *dev)
 
   rc = request_irq (self->io.irq, toshoboe_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
                     IRQF_SHARED | IRQF_DISABLED, dev->name, self);
+=======
+                    IRQF_SHARED, dev->name, self);
+>>>>>>> v3.18
 =======
                     IRQF_SHARED, dev->name, self);
 >>>>>>> v3.18
@@ -1497,7 +1505,11 @@ toshoboe_close (struct pci_dev *pci_dev)
 {
   int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
   struct toshoboe_cb *self = (struct toshoboe_cb*)pci_get_drvdata(pci_dev);
+=======
+  struct toshoboe_cb *self = pci_get_drvdata(pci_dev);
+>>>>>>> v3.18
 =======
   struct toshoboe_cb *self = pci_get_drvdata(pci_dev);
 >>>>>>> v3.18
@@ -1572,7 +1584,11 @@ toshoboe_open (struct pci_dev *pci_dev, const struct pci_device_id *pdid)
   self->io.fir_ext = OBOE_IO_EXTENT;
   self->io.irq = pci_dev->irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
   self->io.irqflags = IRQF_SHARED | IRQF_DISABLED;
+=======
+  self->io.irqflags = IRQF_SHARED;
+>>>>>>> v3.18
 =======
   self->io.irqflags = IRQF_SHARED;
 >>>>>>> v3.18
@@ -1713,7 +1729,11 @@ static int
 toshoboe_gotosleep (struct pci_dev *pci_dev, pm_message_t crap)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   struct toshoboe_cb *self = (struct toshoboe_cb*)pci_get_drvdata(pci_dev);
+=======
+  struct toshoboe_cb *self = pci_get_drvdata(pci_dev);
+>>>>>>> v3.18
 =======
   struct toshoboe_cb *self = pci_get_drvdata(pci_dev);
 >>>>>>> v3.18
@@ -1746,7 +1766,11 @@ static int
 toshoboe_wakeup (struct pci_dev *pci_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   struct toshoboe_cb *self = (struct toshoboe_cb*)pci_get_drvdata(pci_dev);
+=======
+  struct toshoboe_cb *self = pci_get_drvdata(pci_dev);
+>>>>>>> v3.18
 =======
   struct toshoboe_cb *self = pci_get_drvdata(pci_dev);
 >>>>>>> v3.18
@@ -1780,6 +1804,7 @@ static struct pci_driver donauboe_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init
 donauboe_init (void)
 {
@@ -1794,6 +1819,9 @@ donauboe_cleanup (void)
 
 module_init(donauboe_init);
 module_exit(donauboe_cleanup);
+=======
+module_pci_driver(donauboe_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(donauboe_pci_driver);
 >>>>>>> v3.18

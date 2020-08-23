@@ -41,6 +41,10 @@ obj-$(CONFIG_WINDFARM_RM31)     += windfarm_fcu_controls.o \
 				   windfarm_lm75_sensor.o \
 				   windfarm_lm87_sensor.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				   windfarm_max6690_sensor.o \
+>>>>>>> v3.18
 =======
 				   windfarm_max6690_sensor.o \
 >>>>>>> v3.18

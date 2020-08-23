@@ -20,6 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -31,12 +32,17 @@
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
  * Please send any bug reports or fixes you make to the
  * email address(es):
  *    lksctp developers <linux-sctp@vger.kernel.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Written or modified by:
@@ -46,16 +52,22 @@
  *    Ryan Layer            <rmlayer@us.ibm.com>
  *    Sridhar Samudrala     <sri@us.ibm.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
  */
 
 =======
+=======
+>>>>>>> v3.18
  */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <net/sctp/structs.h>
 #include <net/sctp/sctp.h>
@@ -70,12 +82,18 @@ static int sack_timer_max = 500;
 static int addr_scope_max = 3; /* check sctp_scope_policy_t in include/net/sctp/constants.h for max entries */
 static int rwnd_scale_max = 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int rto_alpha_min = 0;
 static int rto_beta_min = 0;
 static int rto_alpha_max = 1000;
 static int rto_beta_max = 1000;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned long max_autoclose_min = 0;
 static unsigned long max_autoclose_max =
@@ -87,11 +105,14 @@ extern int sysctl_sctp_rmem[3];
 extern int sysctl_sctp_wmem[3];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_sctp_do_hmac_alg(ctl_table *ctl,
 				int write,
 				void __user *buffer, size_t *lenp,
 				loff_t *ppos);
 =======
+=======
+>>>>>>> v3.18
 static int proc_sctp_do_hmac_alg(struct ctl_table *ctl, int write,
 				void __user *buffer, size_t *lenp,
 				loff_t *ppos);
@@ -104,13 +125,20 @@ static int proc_sctp_do_rto_max(struct ctl_table *ctl, int write,
 static int proc_sctp_do_alpha_beta(struct ctl_table *ctl, int write,
 				   void __user *buffer, size_t *lenp,
 				   loff_t *ppos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int proc_sctp_do_auth(struct ctl_table *ctl, int write,
 			     void __user *buffer, size_t *lenp,
 			     loff_t *ppos);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table sctp_table[] = {
+=======
+static struct ctl_table sctp_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table sctp_table[] = {
 >>>>>>> v3.18
@@ -140,7 +168,11 @@ static struct ctl_table sctp_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table sctp_net_table[] = {
+=======
+static struct ctl_table sctp_net_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table sctp_net_table[] = {
 >>>>>>> v3.18
@@ -159,9 +191,15 @@ static struct ctl_table sctp_net_table[] = {
 		.maxlen		= sizeof(unsigned int),
 		.mode		= 0644,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.proc_handler	= proc_dointvec_minmax,
 		.extra1         = &one,
 		.extra2         = &timer_max
+=======
+		.proc_handler	= proc_sctp_do_rto_min,
+		.extra1         = &one,
+		.extra2         = &init_net.sctp.rto_max
+>>>>>>> v3.18
 =======
 		.proc_handler	= proc_sctp_do_rto_min,
 		.extra1         = &one,
@@ -174,8 +212,13 @@ static struct ctl_table sctp_net_table[] = {
 		.maxlen		= sizeof(unsigned int),
 		.mode		= 0644,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.proc_handler	= proc_dointvec_minmax,
 		.extra1         = &one,
+=======
+		.proc_handler	= proc_sctp_do_rto_max,
+		.extra1         = &init_net.sctp.rto_min,
+>>>>>>> v3.18
 =======
 		.proc_handler	= proc_sctp_do_rto_max,
 		.extra1         = &init_net.sctp.rto_min,
@@ -187,13 +230,19 @@ static struct ctl_table sctp_net_table[] = {
 		.data		= &init_net.sctp.rto_alpha,
 		.maxlen		= sizeof(int),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.mode		= 0444,
 		.proc_handler	= proc_dointvec,
 =======
+=======
+>>>>>>> v3.18
 		.mode		= 0644,
 		.proc_handler	= proc_sctp_do_alpha_beta,
 		.extra1		= &rto_alpha_min,
 		.extra2		= &rto_alpha_max,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{
@@ -201,13 +250,19 @@ static struct ctl_table sctp_net_table[] = {
 		.data		= &init_net.sctp.rto_beta,
 		.maxlen		= sizeof(int),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.mode		= 0444,
 		.proc_handler	= proc_dointvec,
 =======
+=======
+>>>>>>> v3.18
 		.mode		= 0644,
 		.proc_handler	= proc_sctp_do_alpha_beta,
 		.extra1		= &rto_beta_min,
 		.extra2		= &rto_beta_max,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{
@@ -229,6 +284,10 @@ static struct ctl_table sctp_net_table[] = {
 	{
 		.procname	= "cookie_hmac_alg",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.data		= &init_net.sctp.sctp_hmac_alg,
+>>>>>>> v3.18
 =======
 		.data		= &init_net.sctp.sctp_hmac_alg,
 >>>>>>> v3.18
@@ -380,8 +439,12 @@ static struct ctl_table sctp_net_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_sctp_do_hmac_alg(ctl_table *ctl,
 				int write,
+=======
+static int proc_sctp_do_hmac_alg(struct ctl_table *ctl, int write,
+>>>>>>> v3.18
 =======
 static int proc_sctp_do_hmac_alg(struct ctl_table *ctl, int write,
 >>>>>>> v3.18
@@ -390,17 +453,23 @@ static int proc_sctp_do_hmac_alg(struct ctl_table *ctl, int write,
 {
 	struct net *net = current->nsproxy->net_ns;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char tmp[8];
 	ctl_table tbl;
 	int ret;
 	int changed = 0;
 	char *none = "none";
 =======
+=======
+>>>>>>> v3.18
 	struct ctl_table tbl;
 	bool changed = false;
 	char *none = "none";
 	char tmp[8];
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(&tbl, 0, sizeof(struct ctl_table));
@@ -408,7 +477,11 @@ static int proc_sctp_do_hmac_alg(struct ctl_table *ctl, int write,
 	if (write) {
 		tbl.data = tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tbl.maxlen = 8;
+=======
+		tbl.maxlen = sizeof(tmp);
+>>>>>>> v3.18
 =======
 		tbl.maxlen = sizeof(tmp);
 >>>>>>> v3.18
@@ -416,6 +489,7 @@ static int proc_sctp_do_hmac_alg(struct ctl_table *ctl, int write,
 		tbl.data = net->sctp.sctp_hmac_alg ? : none;
 		tbl.maxlen = strlen(tbl.data);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = proc_dostring(&tbl, write, buffer, lenp, ppos);
 
@@ -425,6 +499,8 @@ static int proc_sctp_do_hmac_alg(struct ctl_table *ctl, int write,
 			net->sctp.sctp_hmac_alg = "md5";
 			changed = 1;
 =======
+=======
+>>>>>>> v3.18
 
 	ret = proc_dostring(&tbl, write, buffer, lenp, ppos);
 	if (write && ret == 0) {
@@ -432,6 +508,9 @@ static int proc_sctp_do_hmac_alg(struct ctl_table *ctl, int write,
 		if (!strncmp(tmp, "md5", 3)) {
 			net->sctp.sctp_hmac_alg = "md5";
 			changed = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 #endif
@@ -439,7 +518,11 @@ static int proc_sctp_do_hmac_alg(struct ctl_table *ctl, int write,
 		if (!strncmp(tmp, "sha1", 4)) {
 			net->sctp.sctp_hmac_alg = "sha1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			changed = 1;
+=======
+			changed = true;
+>>>>>>> v3.18
 =======
 			changed = true;
 >>>>>>> v3.18
@@ -448,9 +531,14 @@ static int proc_sctp_do_hmac_alg(struct ctl_table *ctl, int write,
 		if (!strncmp(tmp, "none", 4)) {
 			net->sctp.sctp_hmac_alg = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			changed = 1;
 		}
 
+=======
+			changed = true;
+		}
+>>>>>>> v3.18
 =======
 			changed = true;
 		}
@@ -463,7 +551,10 @@ static int proc_sctp_do_hmac_alg(struct ctl_table *ctl, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int proc_sctp_do_rto_min(struct ctl_table *ctl, int write,
 				void __user *buffer, size_t *lenp,
 				loff_t *ppos)
@@ -533,6 +624,9 @@ static int proc_sctp_do_alpha_beta(struct ctl_table *ctl, int write,
 	return proc_dointvec_minmax(ctl, write, buffer, lenp, ppos);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int proc_sctp_do_auth(struct ctl_table *ctl, int write,
 			     void __user *buffer, size_t *lenp,
@@ -578,11 +672,17 @@ int sctp_sysctl_net_register(struct net *net)
 
 	net->sctp.sysctl_header = register_net_sysctl(net, "net/sctp", table);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (net->sctp.sysctl_header == NULL) {
 		kfree(table);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -597,7 +697,11 @@ void sctp_sysctl_net_unregister(struct net *net)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ctl_table_header * sctp_sysctl_header;
+=======
+static struct ctl_table_header *sctp_sysctl_header;
+>>>>>>> v3.18
 =======
 static struct ctl_table_header *sctp_sysctl_header;
 >>>>>>> v3.18

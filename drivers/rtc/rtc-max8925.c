@@ -269,7 +269,11 @@ static int max8925_rtc_probe(struct platform_device *pdev)
 		dev_err(chip->dev, "Failed to request IRQ: #%d: %d\n",
 			info->irq, ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -287,6 +291,7 @@ static int max8925_rtc_probe(struct platform_device *pdev)
 	if (IS_ERR(info->rtc_dev)) {
 		dev_err(&pdev->dev, "Failed to register RTC device: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err;
 	}
 
@@ -300,10 +305,15 @@ static int max8925_rtc_remove(struct platform_device *pdev)
 {
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -338,7 +348,10 @@ static struct platform_driver max8925_rtc_driver = {
 	},
 	.probe		= max8925_rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= max8925_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

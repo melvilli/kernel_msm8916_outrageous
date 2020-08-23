@@ -4,7 +4,11 @@ You can pass the following kernel command line options to sm501 videoframebuffer
 
 	sm501fb.bpp=	SM501 Display driver:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			Specifiy bits-per-pixel if not specified by 'mode'
+=======
+			Specify bits-per-pixel if not specified by 'mode'
+>>>>>>> v3.18
 =======
 			Specify bits-per-pixel if not specified by 'mode'
 >>>>>>> v3.18

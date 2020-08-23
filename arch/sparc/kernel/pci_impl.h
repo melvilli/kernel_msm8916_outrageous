@@ -49,8 +49,13 @@ struct sparc64_msiq_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void sparc64_pbm_msi_init(struct pci_pbm_info *pbm,
 				 const struct sparc64_msiq_ops *ops);
+=======
+void sparc64_pbm_msi_init(struct pci_pbm_info *pbm,
+			  const struct sparc64_msiq_ops *ops);
+>>>>>>> v3.18
 =======
 void sparc64_pbm_msi_init(struct pci_pbm_info *pbm,
 			  const struct sparc64_msiq_ops *ops);
@@ -164,6 +169,7 @@ extern int pci_num_pbms;
 
 /* PCI bus scanning and fixup support. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void pci_get_pbm_props(struct pci_pbm_info *pbm);
 extern struct pci_bus *pci_scan_one_pbm(struct pci_pbm_info *pbm,
 					struct device *parent);
@@ -182,6 +188,8 @@ extern void pci_config_write8(u8 *addr, u8 val);
 extern void pci_config_write16(u16 *addr, u16 val);
 extern void pci_config_write32(u32 *addr, u32 val);
 =======
+=======
+>>>>>>> v3.18
 void pci_get_pbm_props(struct pci_pbm_info *pbm);
 struct pci_bus *pci_scan_one_pbm(struct pci_pbm_info *pbm,
 				 struct device *parent);
@@ -199,6 +207,9 @@ void pci_config_read32(u32 *addr, u32 *ret);
 void pci_config_write8(u8 *addr, u8 val);
 void pci_config_write16(u16 *addr, u16 val);
 void pci_config_write32(u32 *addr, u32 val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct pci_ops sun4u_pci_ops;

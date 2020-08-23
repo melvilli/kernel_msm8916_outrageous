@@ -12,8 +12,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __USB_IDS_H__
 #define __USB_IDS_H__
+=======
+#ifndef __GDM72XX_USB_IDS_H__
+#define __GDM72XX_USB_IDS_H__
+>>>>>>> v3.18
 =======
 #ifndef __GDM72XX_USB_IDS_H__
 #define __GDM72XX_USB_IDS_H__
@@ -35,7 +40,11 @@
 
 #define EMERGENCY_PID		0x720f
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BL_PID_MASK			0xffc0
+=======
+#define BL_PID_MASK		0xffc0
+>>>>>>> v3.18
 =======
 #define BL_PID_MASK		0xffc0
 >>>>>>> v3.18
@@ -89,7 +98,11 @@ static const struct usb_device_id id_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __USB_IDS_H__ */
+=======
+#endif /* __GDM72XX_USB_IDS_H__ */
+>>>>>>> v3.18
 =======
 #endif /* __GDM72XX_USB_IDS_H__ */
 >>>>>>> v3.18

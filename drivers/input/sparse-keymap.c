@@ -237,7 +237,11 @@ EXPORT_SYMBOL(sparse_keymap_setup);
  * NOTE: It is safe to cal this function while input device is
  * still registered (however the drivers should care not to try to
 <<<<<<< HEAD
+<<<<<<< HEAD
  * use freed keymap and thus have to shut off interrups/polling
+=======
+ * use freed keymap and thus have to shut off interrupts/polling
+>>>>>>> v3.18
 =======
  * use freed keymap and thus have to shut off interrupts/polling
 >>>>>>> v3.18

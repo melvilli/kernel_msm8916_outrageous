@@ -8,6 +8,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) fmt
 
@@ -46,7 +51,11 @@ int amiga_partition(struct parsed_partitions *state)
 		if (!data) {
 			if (warn_no_part)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("Dev %s: unable to read RDB block %d\n",
+=======
+				pr_err("Dev %s: unable to read RDB block %d\n",
+>>>>>>> v3.18
 =======
 				pr_err("Dev %s: unable to read RDB block %d\n",
 >>>>>>> v3.18
@@ -67,6 +76,7 @@ int amiga_partition(struct parsed_partitions *state)
 		if (checksum_block((__be32 *)data,
 				be32_to_cpu(rdb->rdb_SummedLongs) & 0x7F)==0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("Warning: Trashed word at 0xd0 in block %d "
 				"ignored in checksum calculation\n",blk);
 			break;
@@ -74,12 +84,17 @@ int amiga_partition(struct parsed_partitions *state)
 
 		printk("Dev %s: RDB in block %d has bad checksum\n",
 =======
+=======
+>>>>>>> v3.18
 			pr_err("Trashed word at 0xd0 in block %d ignored in checksum calculation\n",
 			       blk);
 			break;
 		}
 
 		pr_err("Dev %s: RDB in block %d has bad checksum\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       bdevname(state->bdev, b), blk);
 	}
@@ -102,7 +117,11 @@ int amiga_partition(struct parsed_partitions *state)
 		if (!data) {
 			if (warn_no_part)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("Dev %s: unable to read partition block %d\n",
+=======
+				pr_err("Dev %s: unable to read partition block %d\n",
+>>>>>>> v3.18
 =======
 				pr_err("Dev %s: unable to read partition block %d\n",
 >>>>>>> v3.18

@@ -167,7 +167,11 @@ static int sn_set_msi_irq_affinity(struct irq_data *data,
 	unsigned int cpu, irq = data->irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu = cpumask_first(cpu_mask);
+=======
+	cpu = cpumask_first_and(cpu_mask, cpu_online_mask);
+>>>>>>> v3.18
 =======
 	cpu = cpumask_first_and(cpu_mask, cpu_online_mask);
 >>>>>>> v3.18
@@ -180,8 +184,13 @@ static int sn_set_msi_irq_affinity(struct irq_data *data,
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_cached_msi_msg(irq, &msg);
         sn_pdev = (struct pcidev_info *)sn_irq_info->irq_pciioinfo;
+=======
+	__get_cached_msi_msg(data->msi_desc, &msg);
+	sn_pdev = (struct pcidev_info *)sn_irq_info->irq_pciioinfo;
+>>>>>>> v3.18
 =======
 	__get_cached_msi_msg(data->msi_desc, &msg);
 	sn_pdev = (struct pcidev_info *)sn_irq_info->irq_pciioinfo;

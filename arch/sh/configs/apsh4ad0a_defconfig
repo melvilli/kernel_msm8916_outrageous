@@ -94,7 +94,10 @@ CONFIG_FONT_8x16=y
 CONFIG_LOGO=y
 CONFIG_USB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEBUG=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_USB_MON=y

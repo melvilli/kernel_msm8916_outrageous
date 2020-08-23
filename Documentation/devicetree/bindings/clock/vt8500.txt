@@ -9,6 +9,11 @@ Required properties:
 	"via,vt8500-pll-clock" - for a VT8500/WM8505 PLL clock
 	"wm,wm8650-pll-clock" - for a WM8650 PLL clock
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	"wm,wm8750-pll-clock" - for a WM8750 PLL clock
+	"wm,wm8850-pll-clock" - for a WM8850 PLL clock
+>>>>>>> v3.18
 =======
 	"wm,wm8750-pll-clock" - for a WM8750 PLL clock
 	"wm,wm8850-pll-clock" - for a WM8850 PLL clock

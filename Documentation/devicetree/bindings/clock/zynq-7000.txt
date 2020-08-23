@@ -7,6 +7,7 @@ See clock_bindings.txt for more information on the generic clock bindings.
 See Chapter 25 of Zynq TRM for more information about Zynq clocks.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 == PLLs ==
 
 Used to describe the ARM_PLL, DDR_PLL, and IO_PLL.
@@ -54,6 +55,8 @@ Example:
 		clock-output-names = "uart0_ref_clk",
 				     "uart1_ref_clk";
 =======
+=======
+>>>>>>> v3.18
 == Clock Controller ==
 The clock controller is a logical abstraction of Zynq's clock tree. It reads
 required input clock frequencies from the devicetree and acts as clock provider
@@ -155,5 +158,8 @@ Example:
 		# optional props
 		clocks = <&clkc 16>, <&clk_foo>;
 		clock-names = "gem1_emio_clk", "can_mio_clk_23";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};

@@ -23,6 +23,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/falcon.h>
 #include <core/class.h>
 #include <core/enum.h>
@@ -31,6 +32,8 @@
 #include <engine/copy.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <engine/falcon.h>
 #include <engine/fifo.h>
 #include <engine/copy.h>
@@ -38,6 +41,9 @@
 #include <core/enum.h>
 #include <core/enum.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "fuc/nvc0.fuc.h"
 
@@ -114,9 +120,12 @@ nvc0_copy0_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_rd32(parent, 0x022500) & 0x00000100)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = nouveau_falcon_create(parent, engine, oclass, 0x104000, true,
@@ -145,9 +154,12 @@ nvc0_copy1_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_rd32(parent, 0x022500) & 0x00000200)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = nouveau_falcon_create(parent, engine, oclass, 0x105000, true,

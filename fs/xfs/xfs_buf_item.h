@@ -19,6 +19,7 @@
 #define	__XFS_BUF_ITEM_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern kmem_zone_t	*xfs_buf_item_zone;
 
 /*
@@ -119,6 +120,11 @@ xfs_blft_from_flags(struct xfs_buf_log_format *blf)
 
 /* buf log item flags */
 >>>>>>> v3.18
+=======
+/* kernel only definitions */
+
+/* buf log item flags */
+>>>>>>> v3.18
 #define	XFS_BLI_HOLD		0x01
 #define	XFS_BLI_DIRTY		0x02
 #define	XFS_BLI_STALE		0x04
@@ -127,6 +133,10 @@ xfs_blft_from_flags(struct xfs_buf_log_format *blf)
 #define XFS_BLI_STALE_INODE	0x20
 #define	XFS_BLI_INODE_BUF	0x40
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	XFS_BLI_ORDERED		0x80
+>>>>>>> v3.18
 =======
 #define	XFS_BLI_ORDERED		0x80
 >>>>>>> v3.18
@@ -139,16 +149,22 @@ xfs_blft_from_flags(struct xfs_buf_log_format *blf)
 	{ XFS_BLI_INODE_ALLOC_BUF, "INODE_ALLOC" }, \
 	{ XFS_BLI_STALE_INODE,	"STALE_INODE" }, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ XFS_BLI_INODE_BUF,	"INODE_BUF" }
 
 
 #ifdef __KERNEL__
 
 =======
+=======
+>>>>>>> v3.18
 	{ XFS_BLI_INODE_BUF,	"INODE_BUF" }, \
 	{ XFS_BLI_ORDERED,	"ORDERED" }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct xfs_buf;
 struct xfs_mount;
@@ -181,11 +197,15 @@ void	xfs_buf_iodone_callbacks(struct xfs_buf *);
 void	xfs_buf_iodone(struct xfs_buf *, struct xfs_log_item *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void	xfs_trans_buf_set_type(struct xfs_trans *, struct xfs_buf *,
 			       enum xfs_blft);
 void	xfs_trans_buf_copy_type(struct xfs_buf *dst_bp, struct xfs_buf *src_bp);
 
 #endif	/* __KERNEL__ */
+=======
+extern kmem_zone_t	*xfs_buf_item_zone;
+>>>>>>> v3.18
 =======
 extern kmem_zone_t	*xfs_buf_item_zone;
 >>>>>>> v3.18

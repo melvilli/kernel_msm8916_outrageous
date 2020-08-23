@@ -30,6 +30,10 @@
 #include <linux/list.h>
 #include <net/sock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/tcp_states.h>
+>>>>>>> v3.18
 =======
 #include <net/tcp_states.h>
 >>>>>>> v3.18
@@ -40,7 +44,11 @@
 #include <linux/atomic.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 >>>>>>> v3.18
@@ -50,7 +58,10 @@
 #define NFQNL_QMAX_DEFAULT 1024
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* We're using struct nlattr which has 16bit nla_len. Note that nla_len
  * includes the header length. Thus, the maximum packet length that we
  * support is 65531 bytes. We send truncated packets if the specified length
@@ -59,6 +70,9 @@
  */
 #define NFQNL_MAX_COPY_RANGE (0xffff - NLA_HDRLEN)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nfqnl_instance {
 	struct hlist_node hlist;		/* global list of queues */
@@ -142,7 +156,11 @@ instance_create(struct nfnl_queue_net *q, u_int16_t queue_num,
 	inst->peer_portid = portid;
 	inst->queue_maxlen = NFQNL_QMAX_DEFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inst->copy_range = 0xffff;
+=======
+	inst->copy_range = NFQNL_MAX_COPY_RANGE;
+>>>>>>> v3.18
 =======
 	inst->copy_range = NFQNL_MAX_COPY_RANGE;
 >>>>>>> v3.18
@@ -252,6 +270,7 @@ nfqnl_flush(struct nfqnl_instance *queue, nfqnl_cmpfn cmpfn, unsigned long data)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfqnl_zcopy(struct sk_buff *to, struct sk_buff *from, int len, int hlen)
 {
 	int i, j = 0;
@@ -309,12 +328,22 @@ static int nfqnl_put_packet_info(struct sk_buff *nlskb, struct sk_buff *packet)
 nfqnl_put_packet_info(struct sk_buff *nlskb, struct sk_buff *packet,
 		      bool csum_verify)
 >>>>>>> v3.18
+=======
+nfqnl_put_packet_info(struct sk_buff *nlskb, struct sk_buff *packet,
+		      bool csum_verify)
+>>>>>>> v3.18
 {
 	__u32 flags = 0;
 
 	if (packet->ip_summed == CHECKSUM_PARTIAL)
 		flags = NFQA_SKB_CSUMNOTREADY;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else if (csum_verify)
+		flags = NFQA_SKB_CSUM_NOTVERIFIED;
+
+>>>>>>> v3.18
 =======
 	else if (csum_verify)
 		flags = NFQA_SKB_CSUM_NOTVERIFIED;
@@ -327,9 +356,12 @@ nfqnl_put_packet_info(struct sk_buff *nlskb, struct sk_buff *packet,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sk_buff *
 nfqnl_build_packet_message(struct nfqnl_instance *queue,
 =======
+=======
+>>>>>>> v3.18
 static int nfqnl_put_sk_uidgid(struct sk_buff *skb, struct sock *sk)
 {
 	const struct cred *cred;
@@ -357,6 +389,9 @@ nla_put_failure:
 
 static struct sk_buff *
 nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			   struct nf_queue_entry *entry,
 			   __be32 **packet_id_ptr)
@@ -364,7 +399,11 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 	size_t size;
 	size_t data_len = 0, cap_len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int hlen = 0;
+=======
+	unsigned int hlen = 0;
+>>>>>>> v3.18
 =======
 	unsigned int hlen = 0;
 >>>>>>> v3.18
@@ -379,6 +418,10 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 	struct nf_conn *ct = NULL;
 	enum ip_conntrack_info uninitialized_var(ctinfo);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool csum_verify;
+>>>>>>> v3.18
 =======
 	bool csum_verify;
 >>>>>>> v3.18
@@ -388,7 +431,11 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 		+ nla_total_size(sizeof(u_int32_t))	/* ifindex */
 		+ nla_total_size(sizeof(u_int32_t))	/* ifindex */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 >>>>>>> v3.18
@@ -404,13 +451,19 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 		size += nla_total_size(sizeof(struct nfqnl_msg_packet_timestamp));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (entry->hook <= NF_INET_FORWARD ||
 	   (entry->hook == NF_INET_POST_ROUTING && entskb->sk == NULL))
 		csum_verify = !skb_csum_unnecessary(entskb);
 	else
 		csum_verify = false;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	outdev = entry->outdev;
 
@@ -427,6 +480,7 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 
 		data_len = ACCESS_ONCE(queue->copy_range);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (data_len == 0 || data_len > entskb->len)
 			data_len = entskb->len;
 
@@ -440,11 +494,16 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 			hlen = entskb->len;
 		hlen = min_t(int, data_len, hlen);
 =======
+=======
+>>>>>>> v3.18
 		if (data_len > entskb->len)
 			data_len = entskb->len;
 
 		hlen = skb_zerocopy_headlen(entskb);
 		hlen = min_t(unsigned int, hlen, data_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		size += sizeof(struct nlattr) + hlen;
 		cap_len = entskb->len;
@@ -455,14 +514,20 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 		ct = nfqnl_ct_get(entskb, &size, &ctinfo);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb = nfnetlink_alloc_skb(&init_net, size, queue->peer_portid,
 =======
+=======
+>>>>>>> v3.18
 	if (queue->flags & NFQA_CFG_F_UID_GID) {
 		size +=  (nla_total_size(sizeof(u_int32_t))	/* uid */
 			+ nla_total_size(sizeof(u_int32_t)));	/* gid */
 	}
 
 	skb = nfnetlink_alloc_skb(net, size, queue->peer_portid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  GFP_ATOMIC);
 	if (!skb) {
@@ -492,7 +557,11 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 	indev = entry->indev;
 	if (indev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_BRIDGE_NETFILTER
+=======
+#if !IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 =======
 #if !IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 >>>>>>> v3.18
@@ -526,7 +595,11 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 
 	if (outdev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_BRIDGE_NETFILTER
+=======
+#if !IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 =======
 #if !IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 >>>>>>> v3.18
@@ -566,12 +639,18 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 	    entskb->mac_header != entskb->network_header) {
 		struct nfqnl_msg_packet_hw phw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int len = dev_parse_header(entskb, phw.hw_addr);
 =======
+=======
+>>>>>>> v3.18
 		int len;
 
 		memset(&phw, 0, sizeof(phw));
 		len = dev_parse_header(entskb, phw.hw_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (len) {
 			phw.hw_addrlen = htons(len);
@@ -591,6 +670,7 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ct && nfqnl_ct_put(skb, ct, ctinfo) < 0)
 		goto nla_put_failure;
 
@@ -599,6 +679,8 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 
 	if (nfqnl_put_packet_info(skb, entskb))
 =======
+=======
+>>>>>>> v3.18
 	if ((queue->flags & NFQA_CFG_F_UID_GID) && entskb->sk &&
 	    nfqnl_put_sk_uidgid(skb, entskb->sk) < 0)
 		goto nla_put_failure;
@@ -611,6 +693,9 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 		goto nla_put_failure;
 
 	if (nfqnl_put_packet_info(skb, entskb, csum_verify))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto nla_put_failure;
 
@@ -625,7 +710,11 @@ nfqnl_build_packet_message(struct net *net, struct nfqnl_instance *queue,
 		nla->nla_len = nla_attr_size(data_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (nfqnl_zcopy(skb, entskb, data_len, hlen))
+=======
+		if (skb_zerocopy(skb, entskb, data_len, hlen))
+>>>>>>> v3.18
 =======
 		if (skb_zerocopy(skb, entskb, data_len, hlen))
 >>>>>>> v3.18
@@ -652,7 +741,11 @@ __nfqnl_enqueue_packet(struct net *net, struct nfqnl_instance *queue,
 	int failopen = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nskb = nfqnl_build_packet_message(queue, entry, &packet_id_ptr);
+=======
+	nskb = nfqnl_build_packet_message(net, queue, entry, &packet_id_ptr);
+>>>>>>> v3.18
 =======
 	nskb = nfqnl_build_packet_message(net, queue, entry, &packet_id_ptr);
 >>>>>>> v3.18
@@ -663,10 +756,13 @@ __nfqnl_enqueue_packet(struct net *net, struct nfqnl_instance *queue,
 	spin_lock_bh(&queue->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!queue->peer_portid) {
 		err = -EINVAL;
 		goto err_out_free_nskb;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (queue->queue_total >= queue->queue_maxlen) {
@@ -718,7 +814,11 @@ nf_queue_entry_dup(struct nf_queue_entry *e)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 >>>>>>> v3.18
@@ -818,7 +918,11 @@ nfqnl_enqueue_packet(struct nf_queue_entry *entry, unsigned int queuenum)
 	 * mean 'ignore this hook'.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(segs))
+=======
+	if (IS_ERR_OR_NULL(segs))
+>>>>>>> v3.18
 =======
 	if (IS_ERR_OR_NULL(segs))
 >>>>>>> v3.18
@@ -896,6 +1000,7 @@ nfqnl_set_mode(struct nfqnl_instance *queue,
 	case NFQNL_COPY_PACKET:
 		queue->copy_mode = mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* We're using struct nlattr which has 16bit nla_len. Note that
 		 * nla_len includes the header length. Thus, the maximum packet
 		 * length that we support is 65531 bytes. We send truncated
@@ -903,6 +1008,10 @@ nfqnl_set_mode(struct nfqnl_instance *queue,
 		 */
 		if (range > 0xffff - NLA_HDRLEN)
 			queue->copy_range = 0xffff - NLA_HDRLEN;
+=======
+		if (range == 0 || range > NFQNL_MAX_COPY_RANGE)
+			queue->copy_range = NFQNL_MAX_COPY_RANGE;
+>>>>>>> v3.18
 =======
 		if (range == 0 || range > NFQNL_MAX_COPY_RANGE)
 			queue->copy_range = NFQNL_MAX_COPY_RANGE;
@@ -930,7 +1039,11 @@ dev_cmp(struct nf_queue_entry *entry, unsigned long ifindex)
 		if (entry->outdev->ifindex == ifindex)
 			return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 >>>>>>> v3.18
@@ -974,7 +1087,11 @@ nfqnl_rcv_dev_event(struct notifier_block *this,
 		    unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -1026,6 +1143,10 @@ static const struct nla_policy nfqa_verdict_policy[NFQA_MAX+1] = {
 	[NFQA_PAYLOAD]		= { .type = NLA_UNSPEC },
 	[NFQA_CT]		= { .type = NLA_UNSPEC },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[NFQA_EXP]		= { .type = NLA_UNSPEC },
+>>>>>>> v3.18
 =======
 	[NFQA_EXP]		= { .type = NLA_UNSPEC },
 >>>>>>> v3.18
@@ -1158,10 +1279,13 @@ nfqnl_recv_verdict(struct sock *ctnl, struct sk_buff *skb,
 		return -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_lock();
 	if (nfqa[NFQA_CT] && (queue->flags & NFQA_CFG_F_CONNTRACK))
 		ct = nfqnl_ct_parse(entry->skb, nfqa[NFQA_CT], &ctinfo);
 =======
+=======
+>>>>>>> v3.18
 	if (nfqa[NFQA_CT]) {
 		ct = nfqnl_ct_parse(entry->skb, nfqa[NFQA_CT], &ctinfo);
 		if (ct && nfqa[NFQA_EXP]) {
@@ -1170,6 +1294,9 @@ nfqnl_recv_verdict(struct sock *ctnl, struct sk_buff *skb,
 					    nlmsg_report(nlh));
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (nfqa[NFQA_PAYLOAD]) {
@@ -1182,9 +1309,14 @@ nfqnl_recv_verdict(struct sock *ctnl, struct sk_buff *skb,
 
 		if (ct)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nfqnl_ct_seq_adjust(skb, ct, ctinfo, diff);
 	}
 	rcu_read_unlock();
+=======
+			nfqnl_ct_seq_adjust(entry->skb, ct, ctinfo, diff);
+	}
+>>>>>>> v3.18
 =======
 			nfqnl_ct_seq_adjust(entry->skb, ct, ctinfo, diff);
 	}

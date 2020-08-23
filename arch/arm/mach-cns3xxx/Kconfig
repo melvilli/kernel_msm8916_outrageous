@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_CNS3XXX
 	bool "Cavium Networks CNS3XXX family" if ARCH_MULTI_V6
 	select ARM_GIC
@@ -11,13 +12,22 @@ menuconfig ARCH_CNS3XXX
 	bool "Cavium Networks CNS3XXX family" if ARCH_MULTI_V6
 	select ARM_GIC
 >>>>>>> v3.18
+=======
+menuconfig ARCH_CNS3XXX
+	bool "Cavium Networks CNS3XXX family" if ARCH_MULTI_V6
+	select ARM_GIC
+>>>>>>> v3.18
 	select PCI_DOMAINS if PCI
 	help
 	  Support for Cavium Networks CNS3XXX platform.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 menu "CNS3XXX platform type"
 	depends on ARCH_CNS3XXX
+=======
+if ARCH_CNS3XXX
+>>>>>>> v3.18
 =======
 if ARCH_CNS3XXX
 >>>>>>> v3.18
@@ -32,7 +42,11 @@ config MACH_CNS3420VB
 	  for USB, USB-OTG, MMC/SD/SDIO, SATA, PCI-E, etc.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endmenu
+=======
+endif
+>>>>>>> v3.18
 =======
 endif
 >>>>>>> v3.18

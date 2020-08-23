@@ -52,8 +52,13 @@ static LIST_HEAD(slot_list);
 	do {							\
 		if (debug)					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk (KERN_DEBUG "%s: " format "\n",	\
 				MY_NAME , ## arg); 		\
+=======
+			printk(KERN_DEBUG "%s: " format "\n",	\
+				MY_NAME , ## arg);		\
+>>>>>>> v3.18
 =======
 			printk(KERN_DEBUG "%s: " format "\n",	\
 				MY_NAME , ## arg);		\
@@ -134,6 +139,7 @@ static int set_attention_status(struct hotplug_slot *hotplug_slot, u8 status)
 
 	switch (status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case 0:
 			/*
 			 * Fill in code here to turn light off
@@ -147,6 +153,8 @@ static int set_attention_status(struct hotplug_slot *hotplug_slot, u8 status)
 			 */
 			break;
 =======
+=======
+>>>>>>> v3.18
 	case 0:
 		/*
 		 * Fill in code here to turn light off
@@ -159,6 +167,9 @@ static int set_attention_status(struct hotplug_slot *hotplug_slot, u8 status)
 		 * Fill in code here to turn light on
 		 */
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -174,6 +185,7 @@ static int hardware_test(struct hotplug_slot *hotplug_slot, u32 value)
 
 	switch (value) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case 0:
 			/* Specify a test here */
 			break;
@@ -181,12 +193,17 @@ static int hardware_test(struct hotplug_slot *hotplug_slot, u32 value)
 			/* Specify another test here */
 			break;
 =======
+=======
+>>>>>>> v3.18
 	case 0:
 		/* Specify a test here */
 		break;
 	case 1:
 		/* Specify another test here */
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -317,7 +334,11 @@ static int __init init_slots(void)
 		make_slot_name(slot);
 		hotplug_slot->ops = &skel_hotplug_slot_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -330,7 +351,11 @@ static int __init init_slots(void)
 		get_latch_status(hotplug_slot, &info->latch_status);
 		get_adapter_status(hotplug_slot, &info->adapter_status);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -374,7 +399,11 @@ static void __exit cleanup_slots(void)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

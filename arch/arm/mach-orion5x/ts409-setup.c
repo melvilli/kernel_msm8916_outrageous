@@ -278,13 +278,19 @@ static void __init qnap_ts409_init(void)
 	 * Configure peripherals.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mvebu_mbus_add_window("devbus-boot", QNAP_TS409_NOR_BOOT_BASE,
 			      QNAP_TS409_NOR_BOOT_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	mvebu_mbus_add_window_by_id(ORION_MBUS_DEVBUS_BOOT_TARGET,
 				    ORION_MBUS_DEVBUS_BOOT_ATTR,
 				    QNAP_TS409_NOR_BOOT_BASE,
 				    QNAP_TS409_NOR_BOOT_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register(&qnap_ts409_nor_flash);
 
@@ -308,7 +314,11 @@ static void __init qnap_ts409_init(void)
 	}
 	if (qnap_ts409_i2c_rtc.irq == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("qnap_ts409_init: failed to get RTC IRQ\n");
+=======
+		pr_warn("qnap_ts409_init: failed to get RTC IRQ\n");
+>>>>>>> v3.18
 =======
 		pr_warn("qnap_ts409_init: failed to get RTC IRQ\n");
 >>>>>>> v3.18

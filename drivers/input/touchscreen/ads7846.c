@@ -20,7 +20,10 @@
 #include <linux/types.h>
 #include <linux/hwmon.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/err.h>
@@ -31,6 +34,12 @@
 #include <linux/slab.h>
 #include <linux/pm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_gpio.h>
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_gpio.h>
@@ -108,8 +117,12 @@ struct ads7846 {
 	struct regulator	*reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_HWMON) || defined(CONFIG_HWMON_MODULE)
 	struct attribute_group	*attr_group;
+=======
+#if IS_ENABLED(CONFIG_HWMON)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_HWMON)
 >>>>>>> v3.18
@@ -432,7 +445,11 @@ static int ads7845_read12_ser(struct device *dev, unsigned command)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_HWMON) || defined(CONFIG_HWMON_MODULE)
+=======
+#if IS_ENABLED(CONFIG_HWMON)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_HWMON)
 >>>>>>> v3.18
@@ -442,7 +459,11 @@ name ## _show(struct device *dev, struct device_attribute *attr, char *buf) \
 { \
 	struct ads7846 *ts = dev_get_drvdata(dev); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssize_t v = ads7846_read12_ser(dev, \
+=======
+	ssize_t v = ads7846_read12_ser(&ts->spi->dev, \
+>>>>>>> v3.18
 =======
 	ssize_t v = ads7846_read12_ser(&ts->spi->dev, \
 >>>>>>> v3.18
@@ -498,6 +519,7 @@ SHOW(in0_input, vaux, vaux_adjust)
 SHOW(in1_input, vbatt, vbatt_adjust)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *ads7846_attributes[] = {
 	&dev_attr_temp0.attr,
 	&dev_attr_temp1.attr,
@@ -535,6 +557,8 @@ static int ads784x_hwmon_register(struct spi_device *spi, struct ads7846 *ts)
 	int err;
 
 =======
+=======
+>>>>>>> v3.18
 static umode_t ads7846_is_visible(struct kobject *kobj, struct attribute *attr,
 				  int index)
 {
@@ -565,6 +589,9 @@ __ATTRIBUTE_GROUPS(ads7846_attr);
 
 static int ads784x_hwmon_register(struct spi_device *spi, struct ads7846 *ts)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* hwmon sensors need a reference voltage */
 	switch (ts->model) {
@@ -586,6 +613,7 @@ static int ads784x_hwmon_register(struct spi_device *spi, struct ads7846 *ts)
 		break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* different chips have different sensor groups */
 	switch (ts->model) {
@@ -615,11 +643,16 @@ static int ads784x_hwmon_register(struct spi_device *spi, struct ads7846 *ts)
 
 	ts->hwmon = hwmon;
 =======
+=======
+>>>>>>> v3.18
 	ts->hwmon = hwmon_device_register_with_groups(&spi->dev, spi->modalias,
 						      ts, ads7846_attr_groups);
 	if (IS_ERR(ts->hwmon))
 		return PTR_ERR(ts->hwmon);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -628,10 +661,15 @@ static void ads784x_hwmon_unregister(struct spi_device *spi,
 				     struct ads7846 *ts)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ts->hwmon) {
 		sysfs_remove_group(&spi->dev.kobj, ts->attr_group);
 		hwmon_device_unregister(ts->hwmon);
 	}
+=======
+	if (ts->hwmon)
+		hwmon_device_unregister(ts->hwmon);
+>>>>>>> v3.18
 =======
 	if (ts->hwmon)
 		hwmon_device_unregister(ts->hwmon);
@@ -765,7 +803,10 @@ static int ads7846_no_filter(void *ads, int data_idx, int *val)
 static int ads7846_get_value(struct ads7846 *ts, struct spi_message *m)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int value;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct spi_transfer *t =
@@ -773,7 +814,11 @@ static int ads7846_get_value(struct ads7846 *ts, struct spi_message *m)
 
 	if (ts->model == 7845) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		value = be16_to_cpup((__be16 *)&(((char *)t->rx_buf)[1]));
+=======
+		return be16_to_cpup((__be16 *)&(((char*)t->rx_buf)[1])) >> 3;
+>>>>>>> v3.18
 =======
 		return be16_to_cpup((__be16 *)&(((char*)t->rx_buf)[1])) >> 3;
 >>>>>>> v3.18
@@ -783,11 +828,16 @@ static int ads7846_get_value(struct ads7846 *ts, struct spi_message *m)
 		 * padding; built from two 8 bit values written msb-first.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		value = be16_to_cpup((__be16 *)t->rx_buf);
 	}
 
 	/* enforce ADC output is 12 bits width */
 	return (value >> 3) & 0xfff;
+=======
+		return be16_to_cpup((__be16 *)t->rx_buf) >> 3;
+	}
+>>>>>>> v3.18
 =======
 		return be16_to_cpup((__be16 *)t->rx_buf) >> 3;
 	}
@@ -819,7 +869,11 @@ static void ads7846_read_state(struct ads7846 *ts)
 		error = spi_sync(ts->spi, m);
 		if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(&ts->spi->dev, "spi_async --> %d\n", error);
+=======
+			dev_err(&ts->spi->dev, "spi_sync --> %d\n", error);
+>>>>>>> v3.18
 =======
 			dev_err(&ts->spi->dev, "spi_sync --> %d\n", error);
 >>>>>>> v3.18
@@ -1049,9 +1103,15 @@ static SIMPLE_DEV_PM_OPS(ads7846_pm, ads7846_suspend, ads7846_resume);
 
 static int ads7846_setup_pendown(struct spi_device *spi,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   struct ads7846 *ts)
 {
 	struct ads7846_platform_data *pdata = spi->dev.platform_data;
+=======
+				 struct ads7846 *ts,
+				 const struct ads7846_platform_data *pdata)
+{
+>>>>>>> v3.18
 =======
 				 struct ads7846 *ts,
 				 const struct ads7846_platform_data *pdata)
@@ -1097,7 +1157,11 @@ static int ads7846_setup_pendown(struct spi_device *spi,
  */
 static void ads7846_setup_spi_msg(struct ads7846 *ts,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const struct ads7846_platform_data *pdata)
+=======
+				  const struct ads7846_platform_data *pdata)
+>>>>>>> v3.18
 =======
 				  const struct ads7846_platform_data *pdata)
 >>>>>>> v3.18
@@ -1299,6 +1363,7 @@ static void ads7846_setup_spi_msg(struct ads7846 *ts,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ads7846_probe(struct spi_device *spi)
 {
 	struct ads7846 *ts;
@@ -1306,6 +1371,8 @@ static int ads7846_probe(struct spi_device *spi)
 	struct input_dev *input_dev;
 	struct ads7846_platform_data *pdata = spi->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id ads7846_dt_ids[] = {
 	{ .compatible = "ti,tsc2046",	.data = (void *) 7846 },
@@ -1390,12 +1457,16 @@ static int ads7846_probe(struct spi_device *spi)
 	struct ads7846 *ts;
 	struct ads7846_packet *packet;
 	struct input_dev *input_dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long irq_flags;
 	int err;
 
 	if (!spi->irq) {
 		dev_dbg(&spi->dev, "no IRQ?\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -ENODEV;
 	}
@@ -1406,12 +1477,19 @@ static int ads7846_probe(struct spi_device *spi)
 =======
 		return -EINVAL;
 >>>>>>> v3.18
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 	}
 
 	/* don't exceed max specified sample rate */
 	if (spi->max_speed_hz > (125000 * SAMPLE_BITS)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&spi->dev, "f(sample) %d KHz?\n",
+=======
+		dev_err(&spi->dev, "f(sample) %d KHz?\n",
+>>>>>>> v3.18
 =======
 		dev_err(&spi->dev, "f(sample) %d KHz?\n",
 >>>>>>> v3.18
@@ -1420,7 +1498,12 @@ static int ads7846_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We'd set TX word size 8 bits and RX word size to 13 bits ... except
+=======
+	/*
+	 * We'd set TX word size 8 bits and RX word size to 13 bits ... except
+>>>>>>> v3.18
 =======
 	/*
 	 * We'd set TX word size 8 bits and RX word size to 13 bits ... except
@@ -1448,8 +1531,11 @@ static int ads7846_probe(struct spi_device *spi)
 	ts->spi = spi;
 	ts->input = input_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ts->vref_mv = pdata->vref_mv;
 	ts->swap_xy = pdata->swap_xy;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1457,7 +1543,10 @@ static int ads7846_probe(struct spi_device *spi)
 	init_waitqueue_head(&ts->wait);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pdata = dev_get_platdata(&spi->dev);
 	if (!pdata) {
 		pdata = ads7846_probe_dt(&spi->dev);
@@ -1467,6 +1556,9 @@ static int ads7846_probe(struct spi_device *spi)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ts->model = pdata->model ? : 7846;
 	ts->vref_delay_usecs = pdata->vref_delay_usecs ? : 100;
@@ -1474,6 +1566,12 @@ static int ads7846_probe(struct spi_device *spi)
 	ts->pressure_max = pdata->pressure_max ? : ~0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ts->vref_mv = pdata->vref_mv;
+	ts->swap_xy = pdata->swap_xy;
+
+>>>>>>> v3.18
 =======
 	ts->vref_mv = pdata->vref_mv;
 	ts->swap_xy = pdata->swap_xy;
@@ -1500,7 +1598,11 @@ static int ads7846_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = ads7846_setup_pendown(spi, ts);
+=======
+	err = ads7846_setup_pendown(spi, ts, pdata);
+>>>>>>> v3.18
 =======
 	err = ads7846_setup_pendown(spi, ts, pdata);
 >>>>>>> v3.18
@@ -1593,7 +1695,10 @@ static int ads7846_probe(struct spi_device *spi)
 	device_init_wakeup(&spi->dev, pdata->wakeup);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If device does not carry platform data we must have allocated it
 	 * when parsing DT data.
@@ -1601,6 +1706,9 @@ static int ads7846_probe(struct spi_device *spi)
 	if (!dev_get_platdata(&spi->dev))
 		devm_kfree(&spi->dev, (void *)pdata);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -1670,6 +1778,10 @@ static struct spi_driver ads7846_driver = {
 		.owner	= THIS_MODULE,
 		.pm	= &ads7846_pm,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(ads7846_dt_ids),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(ads7846_dt_ids),
 >>>>>>> v3.18

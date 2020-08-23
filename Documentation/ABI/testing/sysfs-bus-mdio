@@ -8,7 +8,10 @@ Description:
 		This ID is used to match the device with the appropriate
 		driver.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 What:		/sys/bus/mdio_bus/devices/.../phy_interface
 Date:		February 2014
@@ -29,4 +32,7 @@ Description:
 		device has had any "fixup" workaround running on it, encoded as
 		a boolean. This information is provided to help troubleshooting
 		PHY configurations.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

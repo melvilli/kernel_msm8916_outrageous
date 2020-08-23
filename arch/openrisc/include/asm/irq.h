@@ -25,6 +25,11 @@
 #define NO_IRQ		(-1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void set_handle_irq(void (*handle_irq)(struct pt_regs *));
+
+>>>>>>> v3.18
 =======
 extern void set_handle_irq(void (*handle_irq)(struct pt_regs *));
 

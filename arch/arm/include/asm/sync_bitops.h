@@ -3,7 +3,10 @@
 
 #include <asm/bitops.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/system.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

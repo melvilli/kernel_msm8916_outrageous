@@ -1522,11 +1522,15 @@ static int cosa_reset_and_read_id(struct cosa_data *cosa, char *idstring)
 	cosa_getdata8(cosa);
 	cosa_putstatus(cosa, SR_RST);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef MODULE
 	msleep(500);
 #else
 	udelay(5*100000);
 #endif
+=======
+	msleep(500);
+>>>>>>> v3.18
 =======
 	msleep(500);
 >>>>>>> v3.18

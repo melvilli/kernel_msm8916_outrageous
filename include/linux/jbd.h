@@ -28,7 +28,10 @@
 #include <linux/journal-head.h>
 #include <linux/stddef.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/bit_spinlock.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mutex.h>
@@ -62,6 +65,7 @@
 extern u8 journal_enable_debug;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define jbd_debug(n, f, a...)						\
 	do {								\
 		if ((n) <= journal_enable_debug) {			\
@@ -73,6 +77,8 @@ extern u8 journal_enable_debug;
 #else
 #define jbd_debug(f, a...)	/**/
 =======
+=======
+>>>>>>> v3.18
 void __jbd_debug(int level, const char *file, const char *func,
 		 unsigned int line, const char *fmt, ...);
 
@@ -80,6 +86,9 @@ void __jbd_debug(int level, const char *file, const char *func,
 	__jbd_debug((n), __FILE__, __func__, __LINE__, (fmt), ##a)
 #else
 #define jbd_debug(n, fmt, a...)    /**/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -92,7 +101,11 @@ static inline void jbd_free(void *ptr, size_t size)
 {
 	free_pages((unsigned long)ptr, get_order(size));
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> v3.18
 =======
 }
 >>>>>>> v3.18
@@ -262,7 +275,10 @@ typedef struct journal_superblock_s
 #include <linux/fs.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 enum jbd_state_bits {
 	BH_JBD			/* Has an attached ext3 journal_head */
@@ -288,6 +304,9 @@ BUFFER_FNS(RevokeValid, revokevalid)
 TAS_BUFFER_FNS(RevokeValid, revokevalid)
 BUFFER_FNS(Freed, freed)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/jbd_common.h>
 
@@ -886,7 +905,11 @@ extern int	 journal_forget (handle_t *, struct buffer_head *);
 extern void	 journal_sync_buffer (struct buffer_head *);
 extern void	 journal_invalidatepage(journal_t *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct page *, unsigned long);
+=======
+				struct page *, unsigned int, unsigned int);
+>>>>>>> v3.18
 =======
 				struct page *, unsigned int, unsigned int);
 >>>>>>> v3.18

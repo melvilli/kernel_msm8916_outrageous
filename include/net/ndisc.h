@@ -111,8 +111,13 @@ struct ndisc_options {
 #define NDISC_OPT_SPACE(len) (((len)+2+7)&~7)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct ndisc_options *ndisc_parse_options(u8 *opt, int opt_len,
 						 struct ndisc_options *ndopts);
+=======
+struct ndisc_options *ndisc_parse_options(u8 *opt, int opt_len,
+					  struct ndisc_options *ndopts);
+>>>>>>> v3.18
 =======
 struct ndisc_options *ndisc_parse_options(u8 *opt, int opt_len,
 					  struct ndisc_options *ndopts);
@@ -195,6 +200,7 @@ static inline struct neighbour *__ipv6_neigh_lookup(struct net_device *dev, cons
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int			ndisc_init(void);
 extern int			ndisc_late_init(void);
 
@@ -219,6 +225,8 @@ extern void			ndisc_send_redirect(struct sk_buff *skb,
 extern int			ndisc_mc_map(const struct in6_addr *addr, char *buf,
 					     struct net_device *dev, int dir);
 =======
+=======
+>>>>>>> v3.18
 int ndisc_init(void);
 int ndisc_late_init(void);
 
@@ -242,12 +250,16 @@ void ndisc_send_redirect(struct sk_buff *skb, const struct in6_addr *target);
 
 int ndisc_mc_map(const struct in6_addr *addr, char *buf, struct net_device *dev,
 		 int dir);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /*
  *	IGMP
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int			igmp6_init(void);
 
@@ -266,6 +278,8 @@ extern int 			ndisc_ifinfo_sysctl_change(struct ctl_table *ctl,
 							   loff_t *ppos);
 int ndisc_ifinfo_sysctl_strategy(ctl_table *ctl,
 =======
+=======
+>>>>>>> v3.18
 int igmp6_init(void);
 
 void igmp6_cleanup(void);
@@ -279,14 +293,21 @@ int igmp6_event_report(struct sk_buff *skb);
 int ndisc_ifinfo_sysctl_change(struct ctl_table *ctl, int write,
 			       void __user *buffer, size_t *lenp, loff_t *ppos);
 int ndisc_ifinfo_sysctl_strategy(struct ctl_table *ctl,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 void __user *oldval, size_t __user *oldlenp,
 				 void __user *newval, size_t newlen);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void 			inet6_ifinfo_notify(int event,
 						    struct inet6_dev *idev);
+=======
+void inet6_ifinfo_notify(int event, struct inet6_dev *idev);
+>>>>>>> v3.18
 =======
 void inet6_ifinfo_notify(int event, struct inet6_dev *idev);
 >>>>>>> v3.18

@@ -27,11 +27,14 @@
 #include <core/client.h>
 #include <core/option.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <core/class.h>
 
 #include <engine/device.h>
 =======
+=======
+>>>>>>> v3.18
 #include <nvif/unpack.h>
 #include <nvif/class.h>
 
@@ -40,6 +43,9 @@
 
 #include "priv.h"
 #include "acpi.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static DEFINE_MUTEX(nv_devices_mutex);
@@ -61,10 +67,13 @@ nouveau_device_find(u64 name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******************************************************************************
  * nouveau_devobj (0x0080): class implementation
  *****************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 int
 nouveau_device_list(u64 *name, int size)
 {
@@ -83,12 +92,16 @@ nouveau_device_list(u64 *name, int size)
  * nouveau_devobj (0x0080): class implementation
  *****************************************************************************/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nouveau_devobj {
 	struct nouveau_parent base;
 	struct nouveau_object *subdev[NVDEV_SUBDEV_NR];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const u64 disable_map[] = {
 	[NVDEV_SUBDEV_VBIOS]	= NV_DEVICE_DISABLE_VBIOS,
@@ -127,6 +140,8 @@ static const u64 disable_map[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 static int
 nouveau_devobj_info(struct nouveau_object *object, void *data, u32 size)
 {
@@ -322,6 +337,9 @@ nouveau_devobj_oclass_super = {
 	}
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nouveau_devobj_ctor(struct nouveau_object *parent,
@@ -330,23 +348,30 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 		    struct nouveau_object **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_client *client = nv_client(parent);
 	struct nouveau_device *device;
 	struct nouveau_devobj *devobj;
 	struct nv_device_class *args = data;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct nv_device_v0 v0;
 	} *args = data;
 	struct nouveau_client *client = nv_client(parent);
 	struct nouveau_device *device;
 	struct nouveau_devobj *devobj;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 boot0, strap;
 	u64 disable, mmio_base, mmio_size;
 	void __iomem *map;
 	int ret, i, c;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (size < sizeof(struct nv_device_class))
 		return -EINVAL;
@@ -356,6 +381,8 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 	if (args->device != ~0) {
 		device = nouveau_device_find(args->device);
 =======
+=======
+>>>>>>> v3.18
 	nv_ioctl(parent, "create device size %d\n", size);
 	if (nvif_unpack(args->v0, 0, 0, false)) {
 		nv_ioctl(parent, "create device v%d device %016llx "
@@ -373,28 +400,38 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 	device = nv_device(client->device);
 	if (args->v0.device != ~0) {
 		device = nouveau_device_find(args->v0.device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!device)
 			return -ENODEV;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nouveau_parent_create(parent, nv_object(device), oclass, 0, NULL,
 				    (1ULL << NVDEV_ENGINE_DMAOBJ) |
 				    (1ULL << NVDEV_ENGINE_FIFO) |
 				    (1ULL << NVDEV_ENGINE_DISP), &devobj);
 =======
+=======
+>>>>>>> v3.18
 	ret = nouveau_parent_create(parent, nv_object(device), oclass, 0,
 				    nouveau_control_oclass,
 				    (1ULL << NVDEV_ENGINE_DMAOBJ) |
 				    (1ULL << NVDEV_ENGINE_FIFO) |
 				    (1ULL << NVDEV_ENGINE_DISP) |
 				    (1ULL << NVDEV_ENGINE_PERFMON), &devobj);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*pobject = nv_object(devobj);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mmio_base = pci_resource_start(device->pdev, 0);
 	mmio_size = pci_resource_len(device->pdev, 0);
@@ -404,6 +441,8 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 	for (i = 0; i < NVDEV_SUBDEV_NR; i++) {
 		if (args->disable & disable_map[i])
 =======
+=======
+>>>>>>> v3.18
 	mmio_base = nv_device_resource_start(device, 0);
 	mmio_size = nv_device_resource_len(device, 0);
 
@@ -411,13 +450,20 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 	disable = args->v0.debug0;
 	for (i = 0; i < NVDEV_SUBDEV_NR; i++) {
 		if (args->v0.disable & disable_map[i])
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			disable |= (1ULL << i);
 	}
 
 	/* identify the chipset, and determine classes of subdev/engines */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(args->disable & NV_DEVICE_DISABLE_IDENTIFY) &&
+=======
+	if (!(args->v0.disable & NV_DEVICE_V0_DISABLE_IDENTIFY) &&
+>>>>>>> v3.18
 =======
 	if (!(args->v0.disable & NV_DEVICE_V0_DISABLE_IDENTIFY) &&
 >>>>>>> v3.18
@@ -441,6 +487,7 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 
 		/* determine chipset and derive architecture from it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((boot0 & 0x0f000000) > 0) {
 			device->chipset = (boot0 & 0xff00000) >> 20;
 			switch (device->chipset & 0xf0) {
@@ -458,6 +505,8 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 			case 0xe0:
 			case 0xf0: device->card_type = NV_E0; break;
 =======
+=======
+>>>>>>> v3.18
 		if ((boot0 & 0x1f000000) > 0) {
 			device->chipset = (boot0 & 0x1ff00000) >> 20;
 			switch (device->chipset & 0x1f0) {
@@ -482,6 +531,9 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 			case 0x0f0:
 			case 0x100: device->card_type = NV_E0; break;
 			case 0x110: device->card_type = GM100; break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			default:
 				break;
@@ -498,7 +550,12 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 		switch (device->card_type) {
 		case NV_04: ret = nv04_identify(device); break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case NV_10: ret = nv10_identify(device); break;
+=======
+		case NV_10:
+		case NV_11: ret = nv10_identify(device); break;
+>>>>>>> v3.18
 =======
 		case NV_10:
 		case NV_11: ret = nv10_identify(device); break;
@@ -508,9 +565,15 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 		case NV_40: ret = nv40_identify(device); break;
 		case NV_50: ret = nv50_identify(device); break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case NV_C0:
 		case NV_D0: ret = nvc0_identify(device); break;
 		case NV_E0: ret = nve0_identify(device); break;
+=======
+		case NV_C0: ret = nvc0_identify(device); break;
+		case NV_E0: ret = nve0_identify(device); break;
+		case GM100: ret = gm100_identify(device); break;
+>>>>>>> v3.18
 =======
 		case NV_C0: ret = nvc0_identify(device); break;
 		case NV_E0: ret = nve0_identify(device); break;
@@ -533,7 +596,11 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 
 		/* determine frequency of timing crystal */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ( device->chipset < 0x17 ||
+=======
+		if ( device->card_type <= NV_10 || device->chipset < 0x17 ||
+>>>>>>> v3.18
 =======
 		if ( device->card_type <= NV_10 || device->chipset < 0x17 ||
 >>>>>>> v3.18
@@ -553,7 +620,11 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(args->disable & NV_DEVICE_DISABLE_MMIO) &&
+=======
+	if (!(args->v0.disable & NV_DEVICE_V0_DISABLE_MMIO) &&
+>>>>>>> v3.18
 =======
 	if (!(args->v0.disable & NV_DEVICE_V0_DISABLE_MMIO) &&
 >>>>>>> v3.18
@@ -585,6 +656,11 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 			return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		device->subdev[i] = devobj->subdev[i];
+
+>>>>>>> v3.18
 =======
 		device->subdev[i] = devobj->subdev[i];
 
@@ -615,6 +691,7 @@ nouveau_devobj_ctor(struct nouveau_object *parent,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void
 nouveau_devobj_dtor(struct nouveau_object *object)
@@ -666,12 +743,15 @@ nouveau_devobj_wr32(struct nouveau_object *object, u64 addr, u32 data)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct nouveau_ofuncs
 nouveau_devobj_ofuncs = {
 	.ctor = nouveau_devobj_ctor,
 	.dtor = nouveau_devobj_dtor,
 	.init = _nouveau_parent_init,
 	.fini = _nouveau_parent_fini,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.rd08 = nouveau_devobj_rd08,
 	.rd16 = nouveau_devobj_rd16,
@@ -682,12 +762,19 @@ nouveau_devobj_ofuncs = {
 =======
 	.mthd = nouveau_devobj_mthd,
 >>>>>>> v3.18
+=======
+	.mthd = nouveau_devobj_mthd,
+>>>>>>> v3.18
 };
 
 /******************************************************************************
  * nouveau_device: engine functions
  *****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -699,7 +786,10 @@ nouveau_device_sclass[] = {
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 nouveau_device_event_ctor(struct nouveau_object *object, void *data, u32 size,
 			  struct nvkm_notify *notify)
 {
@@ -718,6 +808,9 @@ nouveau_device_event_func = {
 };
 
 static int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau_device_fini(struct nouveau_object *object, bool suspend)
 {
@@ -736,7 +829,11 @@ nouveau_device_fini(struct nouveau_object *object, bool suspend)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = 0;
+=======
+	ret = nvkm_acpi_fini(device, suspend);
+>>>>>>> v3.18
 =======
 	ret = nvkm_acpi_fini(device, suspend);
 >>>>>>> v3.18
@@ -761,13 +858,19 @@ nouveau_device_init(struct nouveau_object *object)
 	struct nouveau_device *device = (void *)object;
 	struct nouveau_object *subdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, i;
 =======
+=======
+>>>>>>> v3.18
 	int ret, i = 0;
 
 	ret = nvkm_acpi_init(device);
 	if (ret)
 		goto fail;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < NVDEV_SUBDEV_NR; i++) {
@@ -792,6 +895,11 @@ fail:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ret)
+		nvkm_acpi_fini(device, false);
+>>>>>>> v3.18
 =======
 	if (ret)
 		nvkm_acpi_fini(device, false);
@@ -805,6 +913,11 @@ nouveau_device_dtor(struct nouveau_object *object)
 	struct nouveau_device *device = (void *)object;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nvkm_event_fini(&device->event);
+
+>>>>>>> v3.18
 =======
 	nvkm_event_fini(&device->event);
 
@@ -820,7 +933,10 @@ nouveau_device_dtor(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 resource_size_t
 nv_device_resource_start(struct nouveau_device *device, unsigned int bar)
 {
@@ -862,6 +978,9 @@ nv_device_get_irq(struct nouveau_device *device, bool stall)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct nouveau_oclass
 nouveau_device_oclass = {
@@ -875,8 +994,13 @@ nouveau_device_oclass = {
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nouveau_device_create_(struct pci_dev *pdev, u64 name, const char *sname,
 		       const char *cfg, const char *dbg,
+=======
+nouveau_device_create_(void *dev, enum nv_bus_type type, u64 name,
+		       const char *sname, const char *cfg, const char *dbg,
+>>>>>>> v3.18
 =======
 nouveau_device_create_(void *dev, enum nv_bus_type type, u64 name,
 		       const char *sname, const char *cfg, const char *dbg,
@@ -899,8 +1023,11 @@ nouveau_device_create_(void *dev, enum nv_bus_type type, u64 name,
 		goto done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device->pdev = pdev;
 =======
+=======
+>>>>>>> v3.18
 	switch (type) {
 	case NOUVEAU_BUS_PCI:
 		device->pdev = dev;
@@ -909,6 +1036,9 @@ nouveau_device_create_(void *dev, enum nv_bus_type type, u64 name,
 		device->platformdev = dev;
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	device->handle = name;
 	device->cfgopt = cfg;
@@ -919,6 +1049,12 @@ nouveau_device_create_(void *dev, enum nv_bus_type type, u64 name,
 	nv_engine(device)->sclass = nouveau_device_sclass;
 	list_add(&device->head, &nv_devices);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	ret = nvkm_event_init(&nouveau_device_event_func, 1, 1,
+			      &device->event);
+>>>>>>> v3.18
 =======
 
 	ret = nvkm_event_init(&nouveau_device_event_func, 1, 1,

@@ -25,7 +25,10 @@
 struct rpcsec_gss_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* auth_cred ac_flags bits */
 enum {
 	RPC_CRED_NO_CRKEY_TIMEOUT = 0, /* underlying cred has no key timeout */
@@ -34,6 +37,9 @@ enum {
 					key will expire soon */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Work around the lack of a VFS credential */
 struct auth_cred {
@@ -42,6 +48,10 @@ struct auth_cred {
 	struct group_info *group_info;
 	const char *principal;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long ac_flags;
+>>>>>>> v3.18
 =======
 	unsigned long ac_flags;
 >>>>>>> v3.18
@@ -103,9 +113,12 @@ struct rpc_auth {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Flags for rpcauth_lookupcred() */
 #define RPCAUTH_LOOKUP_NEW		0x01	/* Accept an uninitialised cred */
 =======
+=======
+>>>>>>> v3.18
 struct rpc_auth_create_args {
 	rpc_authflavor_t pseudoflavor;
 	const char *target_name;
@@ -114,6 +127,9 @@ struct rpc_auth_create_args {
 /* Flags for rpcauth_lookupcred() */
 #define RPCAUTH_LOOKUP_NEW		0x01	/* Accept an uninitialised cred */
 #define RPCAUTH_LOOKUP_RCU		0x02	/* lock-less lookup */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -124,7 +140,11 @@ struct rpc_authops {
 	rpc_authflavor_t	au_flavor;	/* flavor (RPC_AUTH_*) */
 	char *			au_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rpc_auth *	(*create)(struct rpc_clnt *, rpc_authflavor_t);
+=======
+	struct rpc_auth *	(*create)(struct rpc_auth_create_args *, struct rpc_clnt *);
+>>>>>>> v3.18
 =======
 	struct rpc_auth *	(*create)(struct rpc_auth_create_args *, struct rpc_clnt *);
 >>>>>>> v3.18
@@ -133,8 +153,11 @@ struct rpc_authops {
 	struct rpc_cred *	(*lookup_cred)(struct rpc_auth *, struct auth_cred *, int);
 	struct rpc_cred *	(*crcreate)(struct rpc_auth*, struct auth_cred *, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			(*pipes_create)(struct rpc_auth *);
 	void			(*pipes_destroy)(struct rpc_auth *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int			(*list_pseudoflavors)(rpc_authflavor_t *, int);
@@ -142,6 +165,11 @@ struct rpc_authops {
 	int			(*flavor2info)(rpc_authflavor_t,
 						struct rpcsec_gss_info *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			(*key_timeout)(struct rpc_auth *,
+						struct rpc_cred *);
+>>>>>>> v3.18
 =======
 	int			(*key_timeout)(struct rpc_auth *,
 						struct rpc_cred *);
@@ -163,6 +191,12 @@ struct rpc_credops {
 	int			(*crunwrap_resp)(struct rpc_task *, kxdrdproc_t,
 						void *, __be32 *, void *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			(*crkey_timeout)(struct rpc_cred *);
+	bool			(*crkey_to_expire)(struct rpc_cred *);
+	char *			(*crstringify_acceptor)(struct rpc_cred *);
+>>>>>>> v3.18
 =======
 	int			(*crkey_timeout)(struct rpc_cred *);
 	bool			(*crkey_to_expire)(struct rpc_cred *);
@@ -182,17 +216,23 @@ void 			rpc_destroy_authunix(void);
 
 struct rpc_cred *	rpc_lookup_cred(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rpc_cred *	rpc_lookup_machine_cred(const char *service_name);
 int			rpcauth_register(const struct rpc_authops *);
 int			rpcauth_unregister(const struct rpc_authops *);
 struct rpc_auth *	rpcauth_create(rpc_authflavor_t, struct rpc_clnt *);
 =======
+=======
+>>>>>>> v3.18
 struct rpc_cred *	rpc_lookup_cred_nonblock(void);
 struct rpc_cred *	rpc_lookup_machine_cred(const char *service_name);
 int			rpcauth_register(const struct rpc_authops *);
 int			rpcauth_unregister(const struct rpc_authops *);
 struct rpc_auth *	rpcauth_create(struct rpc_auth_create_args *,
 				struct rpc_clnt *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void			rpcauth_release(struct rpc_auth *);
 rpc_authflavor_t	rpcauth_get_pseudoflavor(rpc_authflavor_t,
@@ -216,11 +256,17 @@ int			rpcauth_init_credcache(struct rpc_auth *);
 void			rpcauth_destroy_credcache(struct rpc_auth *);
 void			rpcauth_clear_credcache(struct rpc_cred_cache *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int			rpcauth_key_timeout_notify(struct rpc_auth *,
 						struct rpc_cred *);
 bool			rpcauth_cred_key_to_expire(struct rpc_cred *);
 char *			rpcauth_stringify_acceptor(struct rpc_cred *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline

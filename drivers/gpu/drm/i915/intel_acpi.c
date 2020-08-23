@@ -7,8 +7,11 @@
 #include <linux/acpi.h>
 #include <linux/vga_switcheroo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_drivers.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <drm/drmP.h>
@@ -16,8 +19,11 @@
 
 #define INTEL_DSM_REVISION_ID 1 /* For Calpella anyway... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define INTEL_DSM_FN_SUPPORTED_FUNCTIONS 0 /* No args */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define INTEL_DSM_FN_PLATFORM_MUX_INFO 1 /* No args */
@@ -34,6 +40,7 @@ static const u8 intel_dsm_guid[] = {
 	0x0f, 0x13, 0x17, 0xb0, 0x1c, 0x2c
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int intel_dsm(acpi_handle handle, int func, int arg)
 {
@@ -91,6 +98,8 @@ static int intel_dsm(acpi_handle handle, int func, int arg)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static char *intel_dsm_port_name(u8 id)
 {
 	switch (id) {
@@ -146,6 +155,7 @@ static char *intel_dsm_mux_type(u8 type)
 static void intel_dsm_platform_mux_info(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_buffer output = { ACPI_ALLOCATE_BUFFER, NULL };
 	struct acpi_object_list input;
 	union acpi_object params[4];
@@ -198,6 +208,8 @@ static void intel_dsm_platform_mux_info(void)
 out:
 	kfree(output.pointer);
 =======
+=======
+>>>>>>> v3.18
 	int i;
 	union acpi_object *pkg, *connector_count;
 
@@ -229,11 +241,15 @@ out:
 	}
 
 	ACPI_FREE(pkg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static bool intel_dsm_pci_probe(struct pci_dev *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	acpi_handle dhandle, intel_handle;
 	acpi_status status;
@@ -246,6 +262,8 @@ static bool intel_dsm_pci_probe(struct pci_dev *pdev)
 	status = acpi_get_handle(dhandle, "_DSM", &intel_handle);
 	if (ACPI_FAILURE(status)) {
 =======
+=======
+>>>>>>> v3.18
 	acpi_handle dhandle;
 
 	dhandle = ACPI_HANDLE(&pdev->dev);
@@ -254,11 +272,15 @@ static bool intel_dsm_pci_probe(struct pci_dev *pdev)
 
 	if (!acpi_check_dsm(dhandle, intel_dsm_guid, INTEL_DSM_REVISION_ID,
 			    1 << INTEL_DSM_FN_PLATFORM_MUX_INFO)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		DRM_DEBUG_KMS("no _DSM method for intel device\n");
 		return false;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = intel_dsm(dhandle, INTEL_DSM_FN_SUPPORTED_FUNCTIONS, 0);
 	if (ret < 0) {
@@ -269,6 +291,11 @@ static bool intel_dsm_pci_probe(struct pci_dev *pdev)
 	intel_dsm_priv.dhandle = dhandle;
 
 	intel_dsm_platform_mux_info();
+=======
+	intel_dsm_priv.dhandle = dhandle;
+	intel_dsm_platform_mux_info();
+
+>>>>>>> v3.18
 =======
 	intel_dsm_priv.dhandle = dhandle;
 	intel_dsm_platform_mux_info();

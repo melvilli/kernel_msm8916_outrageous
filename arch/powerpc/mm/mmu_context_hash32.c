@@ -3,7 +3,11 @@
  * PowerPC implementations where the MMU substantially follows the
  * architecture specification.  This includes the 6xx, 7xx, 7xxx,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 8260, and POWER3 implementations but excludes the 8xx and 4xx.
+=======
+ * and 8260 implementations but excludes the 8xx and 4xx.
+>>>>>>> v3.18
 =======
  * and 8260 implementations but excludes the 8xx and 4xx.
 >>>>>>> v3.18

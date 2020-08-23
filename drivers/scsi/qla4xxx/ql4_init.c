@@ -1,7 +1,11 @@
 /*
  * QLogic iSCSI HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2012 QLogic Corporation
+=======
+ * Copyright (c)  2003-2013 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2013 QLogic Corporation
 >>>>>>> v3.18
@@ -112,7 +116,11 @@ int qla4xxx_init_rings(struct scsi_qla_host *ha)
 		writel(0,
 		    (unsigned long  __iomem *)&ha->qla4_82xx_reg->rsp_q_out);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (is_qla8032(ha)) {
+=======
+	} else if (is_qla8032(ha) || is_qla8042(ha)) {
+>>>>>>> v3.18
 =======
 	} else if (is_qla8032(ha) || is_qla8042(ha)) {
 >>>>>>> v3.18
@@ -291,7 +299,10 @@ qla4xxx_wait_for_ip_config(struct scsi_qla_host *ha)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int qla4_80xx_is_minidump_dma_capable(struct scsi_qla_host *ha,
 		struct qla4_8xxx_minidump_template_hdr *md_hdr)
 {
@@ -311,6 +322,9 @@ static int qla4_80xx_is_minidump_dma_capable(struct scsi_qla_host *ha,
 	return rval;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * qla4xxx_alloc_fw_dump - Allocate memory for minidump data.
@@ -325,6 +339,10 @@ void qla4xxx_alloc_fw_dump(struct scsi_qla_host *ha)
 	dma_addr_t md_tmp_dma;
 	struct qla4_8xxx_minidump_template_hdr *md_hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int dma_capable;
+>>>>>>> v3.18
 =======
 	int dma_capable;
 >>>>>>> v3.18
@@ -349,13 +367,19 @@ void qla4xxx_alloc_fw_dump(struct scsi_qla_host *ha)
 	md_tmp = dma_alloc_coherent(&ha->pdev->dev, ha->fw_dump_tmplt_size,
 				    &md_tmp_dma, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!md_tmp) {
 		ql4_printk(KERN_INFO, ha,
 			   "scsi%ld: Failed to allocate DMA memory\n",
 			   ha->host_no);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Request template */
@@ -370,6 +394,7 @@ void qla4xxx_alloc_fw_dump(struct scsi_qla_host *ha)
 	md_hdr = (struct qla4_8xxx_minidump_template_hdr *)md_tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	capture_debug_level = md_hdr->capture_debug_level;
 
 	/* Get capture mask based on module loadtime setting. */
@@ -378,6 +403,8 @@ void qla4xxx_alloc_fw_dump(struct scsi_qla_host *ha)
 	else
 		ha->fw_dump_capture_mask = capture_debug_level;
 =======
+=======
+>>>>>>> v3.18
 	dma_capable = qla4_80xx_is_minidump_dma_capable(ha, md_hdr);
 
 	capture_debug_level = md_hdr->capture_debug_level;
@@ -391,6 +418,9 @@ void qla4xxx_alloc_fw_dump(struct scsi_qla_host *ha)
 			ql4_printk(KERN_INFO, ha, "Falling back to default capture mask, as PEX DMA is not supported\n");
 		ha->fw_dump_capture_mask = capture_debug_level;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	md_hdr->driver_capture_mask = ha->fw_dump_capture_mask;
@@ -924,6 +954,11 @@ int qla4xxx_start_firmware(struct scsi_qla_host *ha)
 		if (test_and_clear_bit(AF_GET_CRASH_RECORD, &ha->flags))
 			qla4xxx_get_crash_record(ha);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		qla4xxx_init_rings(ha);
+>>>>>>> v3.18
 =======
 
 		qla4xxx_init_rings(ha);
@@ -1005,7 +1040,11 @@ int qla4xxx_initialize_adapter(struct scsi_qla_host *ha, int is_reset)
 	 * enabled via isp_ops->enable_intrs.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_qla8032(ha))
+=======
+	if (is_qla8032(ha) || is_qla8042(ha))
+>>>>>>> v3.18
 =======
 	if (is_qla8032(ha) || is_qla8042(ha))
 >>>>>>> v3.18
@@ -1028,6 +1067,7 @@ int qla4xxx_initialize_adapter(struct scsi_qla_host *ha, int is_reset)
 
 	set_bit(AF_ONLINE, &ha->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 exit_init_hba:
 	if (is_qla80XX(ha) && (status == QLA_ERROR)) {
 		/* Since interrupts are registered in start_firmware for
@@ -1035,6 +1075,10 @@ exit_init_hba:
 		qla4xxx_free_irqs(ha);
 	}
 
+=======
+
+exit_init_hba:
+>>>>>>> v3.18
 =======
 
 exit_init_hba:

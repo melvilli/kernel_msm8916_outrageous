@@ -51,7 +51,10 @@
 #include <media/v4l2-ioctl.h>
 #include <media/v4l2-event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/tvaudio.h>
@@ -1131,9 +1134,15 @@ bttv_crop_calc_limits(struct bttv_crop *c)
 	} else {
 		c->min_scaled_width =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(max(48, c->rect.width >> 4) + 3) & ~3;
 		c->min_scaled_height =
 			max(32, c->rect.height >> 4);
+=======
+			(max_t(unsigned int, 48, c->rect.width >> 4) + 3) & ~3;
+		c->min_scaled_height =
+			max_t(unsigned int, 32, c->rect.height >> 4);
+>>>>>>> v3.18
 =======
 			(max_t(unsigned int, 48, c->rect.width >> 4) + 3) & ~3;
 		c->min_scaled_height =
@@ -1193,7 +1202,11 @@ set_tvnorm(struct bttv *btv, unsigned int norm)
 	}
 	id = tvnorm->v4l2_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bttv_call_all(btv, core, s_std, id);
+=======
+	bttv_call_all(btv, video, s_std, id);
+>>>>>>> v3.18
 =======
 	bttv_call_all(btv, video, s_std, id);
 >>>>>>> v3.18
@@ -1546,7 +1559,10 @@ bttv_switch_overlay(struct bttv *btv, struct bttv_fh *fh,
 	struct bttv_buffer *old;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int retval = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1569,7 +1585,11 @@ bttv_switch_overlay(struct bttv *btv, struct bttv_fh *fh,
 		free_btres_lock(btv,fh,RESOURCE_OVERLAY);
 	dprintk("switch_overlay: done\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return retval;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1782,9 +1802,15 @@ static int bttv_querystd(struct file *file, void *f, v4l2_std_id *id)
 
 	if (btread(BT848_DSTATUS) & BT848_DSTATUS_NUML)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*id = V4L2_STD_625_50;
 	else
 		*id = V4L2_STD_525_60;
+=======
+		*id &= V4L2_STD_625_50;
+	else
+		*id &= V4L2_STD_525_60;
+>>>>>>> v3.18
 =======
 		*id &= V4L2_STD_625_50;
 	else
@@ -1934,6 +1960,7 @@ static int bttv_log_status(struct file *file, void *f)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bttv_g_chip_ident(struct file *file, void *f, struct v4l2_dbg_chip_ident *chip)
 {
 	struct bttv_fh *fh  = f;
@@ -1958,6 +1985,8 @@ static int bttv_g_chip_ident(struct file *file, void *f, struct v4l2_dbg_chip_id
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int bttv_g_register(struct file *file, void *f,
 					struct v4l2_dbg_register *reg)
@@ -1965,6 +1994,7 @@ static int bttv_g_register(struct file *file, void *f,
 	struct bttv_fh *fh = f;
 	struct bttv *btv = fh->btv;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
@@ -1976,6 +2006,8 @@ static int bttv_g_register(struct file *file, void *f,
 		return 0;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* bt848 has a 12-bit register space */
@@ -1993,6 +2025,7 @@ static int bttv_s_register(struct file *file, void *f,
 	struct bttv *btv = fh->btv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 
@@ -2003,6 +2036,8 @@ static int bttv_s_register(struct file *file, void *f,
 		return 0;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* bt848 has a 12-bit register space */
@@ -2103,7 +2138,11 @@ limit_scaled_size_lock       (struct bttv_fh *               fh,
 		   than crop.rect we adjust the crop.rect as required
 		   by the V4L2 spec, hence cropcap.bounds are our limit. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		max_width = min(b->width, (__s32) MAX_HACTIVE);
+=======
+		max_width = min_t(unsigned int, b->width, MAX_HACTIVE);
+>>>>>>> v3.18
 =======
 		max_width = min_t(unsigned int, b->width, MAX_HACTIVE);
 >>>>>>> v3.18
@@ -2416,6 +2455,7 @@ static int bttv_g_fmt_vid_overlay(struct file *file, void *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bttv_get_width_mask_vid_cap(const struct bttv_format *fmt,
 					unsigned int *width_mask,
 					unsigned int *width_bias)
@@ -2431,6 +2471,8 @@ static void bttv_get_width_mask_vid_cap(const struct bttv_format *fmt,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int bttv_try_fmt_vid_cap(struct file *file, void *priv,
 						struct v4l2_format *f)
 {
@@ -2441,7 +2483,10 @@ static int bttv_try_fmt_vid_cap(struct file *file, void *priv,
 	__s32 width, height;
 	__s32 height2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int width_mask, width_bias;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int rc;
@@ -2477,9 +2522,15 @@ static int bttv_try_fmt_vid_cap(struct file *file, void *priv,
 	height = f->fmt.pix.height;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bttv_get_width_mask_vid_cap(fmt, &width_mask, &width_bias);
 	rc = limit_scaled_size_lock(fh, &width, &height, field,
 			       width_mask, width_bias,
+=======
+	rc = limit_scaled_size_lock(fh, &width, &height, field,
+			       /* width_mask: 4 pixels */ ~3,
+			       /* width_bias: nearest */ 2,
+>>>>>>> v3.18
 =======
 	rc = limit_scaled_size_lock(fh, &width, &height, field,
 			       /* width_mask: 4 pixels */ ~3,
@@ -2518,7 +2569,10 @@ static int bttv_s_fmt_vid_cap(struct file *file, void *priv,
 	struct bttv *btv = fh->btv;
 	__s32 width, height;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int width_mask, width_bias;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	enum v4l2_field field;
@@ -2536,10 +2590,16 @@ static int bttv_s_fmt_vid_cap(struct file *file, void *priv,
 	field = f->fmt.pix.field;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fmt = format_by_fourcc(f->fmt.pix.pixelformat);
 	bttv_get_width_mask_vid_cap(fmt, &width_mask, &width_bias);
 	retval = limit_scaled_size_lock(fh, &width, &height, f->fmt.pix.field,
 			       width_mask, width_bias,
+=======
+	retval = limit_scaled_size_lock(fh, &width, &height, f->fmt.pix.field,
+			       /* width_mask: 4 pixels */ ~3,
+			       /* width_bias: nearest */ 2,
+>>>>>>> v3.18
 =======
 	retval = limit_scaled_size_lock(fh, &width, &height, f->fmt.pix.field,
 			       /* width_mask: 4 pixels */ ~3,
@@ -2553,6 +2613,11 @@ static int bttv_s_fmt_vid_cap(struct file *file, void *priv,
 	f->fmt.pix.field = field;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fmt = format_by_fourcc(f->fmt.pix.pixelformat);
+
+>>>>>>> v3.18
 =======
 	fmt = format_by_fourcc(f->fmt.pix.pixelformat);
 
@@ -3289,7 +3354,10 @@ static const struct v4l2_ioctl_ops bttv_ioctl_ops = {
 	.vidioc_subscribe_event		= v4l2_ctrl_subscribe_event,
 	.vidioc_unsubscribe_event	= v4l2_event_unsubscribe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident		= bttv_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -3393,7 +3461,13 @@ static ssize_t radio_read(struct file *file, char __user *data,
 	struct bttv *btv = fh->btv;
 	struct saa6588_command cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd.block_count = count/3;
+=======
+
+	cmd.block_count = count / 3;
+	cmd.nonblocking = file->f_flags & O_NONBLOCK;
+>>>>>>> v3.18
 =======
 
 	cmd.block_count = count / 3;
@@ -3987,7 +4061,11 @@ static irqreturn_t bttv_irq(int irq, void *dev_id)
 				btwrite(btread(BT848_INT_MASK) & (-1 ^ BT848_INT_GPINT),
 						BT848_INT_MASK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			};
+=======
+			}
+>>>>>>> v3.18
 =======
 			}
 >>>>>>> v3.18
@@ -4021,7 +4099,10 @@ static struct video_device *vdev_init(struct bttv *btv,
 	vfd->release = video_device_release;
 	vfd->debug   = bttv_debug;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vfd->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	video_set_drvdata(vfd, btv);
@@ -4226,7 +4307,11 @@ static int bttv_probe(struct pci_dev *dev, const struct pci_device_id *pci_id)
 	btwrite(0, BT848_INT_MASK);
 	result = request_irq(btv->c.pci->irq, bttv_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    IRQF_SHARED | IRQF_DISABLED, btv->c.v4l2_dev.name, (void *)btv);
+=======
+	    IRQF_SHARED, btv->c.v4l2_dev.name, (void *)btv);
+>>>>>>> v3.18
 =======
 	    IRQF_SHARED, btv->c.v4l2_dev.name, (void *)btv);
 >>>>>>> v3.18

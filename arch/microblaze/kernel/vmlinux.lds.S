@@ -52,6 +52,10 @@ SECTIONS {
 	RODATA
 	EXCEPTION_TABLE(16)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NOTES
+>>>>>>> v3.18
 =======
 	NOTES
 >>>>>>> v3.18

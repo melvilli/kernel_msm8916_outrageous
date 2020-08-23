@@ -20,7 +20,10 @@ pci_alloc_consistent(struct pci_dev *hwdev, size_t size,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void *
 pci_zalloc_consistent(struct pci_dev *hwdev, size_t size,
 		      dma_addr_t *dma_handle)
@@ -29,6 +32,9 @@ pci_zalloc_consistent(struct pci_dev *hwdev, size_t size,
 				   size, dma_handle, GFP_ATOMIC);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void
 pci_free_consistent(struct pci_dev *hwdev, size_t size,

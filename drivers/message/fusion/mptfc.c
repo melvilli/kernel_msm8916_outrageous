@@ -205,7 +205,11 @@ mptfc_block_error_handler(struct scsi_cmnd *SCpnt,
 		spin_unlock_irqrestore(shost->host_lock, flags);
 		dfcprintk (ioc, printk(MYIOC_s_DEBUG_FMT
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"mptfc_block_error_handler.%d: %d:%d, port status is "
+=======
+			"mptfc_block_error_handler.%d: %d:%llu, port status is "
+>>>>>>> v3.18
 =======
 			"mptfc_block_error_handler.%d: %d:%llu, port status is "
 >>>>>>> v3.18
@@ -223,7 +227,11 @@ mptfc_block_error_handler(struct scsi_cmnd *SCpnt,
 	 || ioc->active == 0) {
 		dfcprintk (ioc, printk(MYIOC_s_DEBUG_FMT
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"%s.%d: %d:%d, failing recovery, "
+=======
+			"%s.%d: %d:%llu, failing recovery, "
+>>>>>>> v3.18
 =======
 			"%s.%d: %d:%llu, failing recovery, "
 >>>>>>> v3.18
@@ -235,7 +243,11 @@ mptfc_block_error_handler(struct scsi_cmnd *SCpnt,
 	}
 	dfcprintk (ioc, printk(MYIOC_s_DEBUG_FMT
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"%s.%d: %d:%d, executing recovery.\n", caller,
+=======
+		"%s.%d: %d:%llu, executing recovery.\n", caller,
+>>>>>>> v3.18
 =======
 		"%s.%d: %d:%llu, executing recovery.\n", caller,
 >>>>>>> v3.18
@@ -538,8 +550,12 @@ mptfc_target_destroy(struct scsi_target *starget)
 			ri->starget = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (starget->hostdata)
 		kfree(starget->hostdata);
+=======
+	kfree(starget->hostdata);
+>>>>>>> v3.18
 =======
 	kfree(starget->hostdata);
 >>>>>>> v3.18
@@ -666,7 +682,11 @@ mptfc_slave_alloc(struct scsi_device *sdev)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 mptfc_qcmd_lck(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *))
+=======
+mptfc_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
+>>>>>>> v3.18
 =======
 mptfc_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
 >>>>>>> v3.18
@@ -679,7 +699,11 @@ mptfc_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
 	if (!vdevice || !vdevice->vtarget) {
 		SCpnt->result = DID_NO_CONNECT << 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		done(SCpnt);
+=======
+		SCpnt->scsi_done(SCpnt);
+>>>>>>> v3.18
 =======
 		SCpnt->scsi_done(SCpnt);
 >>>>>>> v3.18
@@ -690,7 +714,11 @@ mptfc_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
 	if (unlikely(err)) {
 		SCpnt->result = err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		done(SCpnt);
+=======
+		SCpnt->scsi_done(SCpnt);
+>>>>>>> v3.18
 =======
 		SCpnt->scsi_done(SCpnt);
 >>>>>>> v3.18
@@ -702,6 +730,7 @@ mptfc_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
 	if (unlikely(!ri)) {
 		SCpnt->result = DID_IMM_RETRY << 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		done(SCpnt);
 		return 0;
 	}
@@ -712,6 +741,8 @@ mptfc_qcmd(struct Scsi_Host *shost, struct scsi_cmnd *SCpnt)
 static DEF_SCSI_QCMD(mptfc_qcmd)
 
 =======
+=======
+>>>>>>> v3.18
 		SCpnt->scsi_done(SCpnt);
 		return 0;
 	}
@@ -719,6 +750,9 @@ static DEF_SCSI_QCMD(mptfc_qcmd)
 	return mptscsih_qcmd(SCpnt);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *	mptfc_display_port_link_speed - displaying link speed

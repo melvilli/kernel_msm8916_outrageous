@@ -480,7 +480,10 @@
 #define RSZ_TYP_C_SHIFT			1
 #define RSZ_LPF_INT_MASK		0x3f
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RSZ_LPF_INT_MASK		0x3f
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RSZ_LPF_INT_C_SHIFT		6

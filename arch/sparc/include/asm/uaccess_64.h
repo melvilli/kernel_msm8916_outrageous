@@ -77,8 +77,13 @@ struct exception_table_entry {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __ret_efault(void);
 extern void __retl_efault(void);
+=======
+void __ret_efault(void);
+void __retl_efault(void);
+>>>>>>> v3.18
 =======
 void __ret_efault(void);
 void __retl_efault(void);
@@ -140,7 +145,11 @@ __asm__ __volatile__(							\
 	 "i" (-EFAULT))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __put_user_bad(void);
+=======
+int __put_user_bad(void);
+>>>>>>> v3.18
 =======
 int __put_user_bad(void);
 >>>>>>> v3.18
@@ -214,6 +223,7 @@ __asm__ __volatile__(							\
        : "=r" (x) : "r" (__m(addr)), "i" (retval))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __get_user_bad(void);
 
 extern unsigned long __must_check ___copy_from_user(void *to,
@@ -222,6 +232,8 @@ extern unsigned long __must_check ___copy_from_user(void *to,
 extern unsigned long copy_from_user_fixup(void *to, const void __user *from,
 					  unsigned long size);
 =======
+=======
+>>>>>>> v3.18
 int __get_user_bad(void);
 
 unsigned long __must_check ___copy_from_user(void *to,
@@ -229,6 +241,9 @@ unsigned long __must_check ___copy_from_user(void *to,
 					     unsigned long size);
 unsigned long copy_from_user_fixup(void *to, const void __user *from,
 				   unsigned long size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned long __must_check
 copy_from_user(void *to, const void __user *from, unsigned long size)
@@ -243,17 +258,23 @@ copy_from_user(void *to, const void __user *from, unsigned long size)
 #define __copy_from_user copy_from_user
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long __must_check ___copy_to_user(void __user *to,
 						  const void *from,
 						  unsigned long size);
 extern unsigned long copy_to_user_fixup(void __user *to, const void *from,
 					unsigned long size);
 =======
+=======
+>>>>>>> v3.18
 unsigned long __must_check ___copy_to_user(void __user *to,
 					   const void *from,
 					   unsigned long size);
 unsigned long copy_to_user_fixup(void __user *to, const void *from,
 				 unsigned long size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned long __must_check
 copy_to_user(void __user *to, const void *from, unsigned long size)
@@ -267,17 +288,23 @@ copy_to_user(void __user *to, const void *from, unsigned long size)
 #define __copy_to_user copy_to_user
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long __must_check ___copy_in_user(void __user *to,
 						  const void __user *from,
 						  unsigned long size);
 extern unsigned long copy_in_user_fixup(void __user *to, void __user *from,
 					unsigned long size);
 =======
+=======
+>>>>>>> v3.18
 unsigned long __must_check ___copy_in_user(void __user *to,
 					   const void __user *from,
 					   unsigned long size);
 unsigned long copy_in_user_fixup(void __user *to, void __user *from,
 				 unsigned long size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned long __must_check
 copy_in_user(void __user *to, void __user *from, unsigned long size)
@@ -291,6 +318,7 @@ copy_in_user(void __user *to, void __user *from, unsigned long size)
 #define __copy_in_user copy_in_user
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long __must_check __clear_user(void __user *, unsigned long);
 
 #define clear_user __clear_user
@@ -298,12 +326,17 @@ extern unsigned long __must_check __clear_user(void __user *, unsigned long);
 extern __must_check long strlen_user(const char __user *str);
 extern __must_check long strnlen_user(const char __user *str, long n);
 =======
+=======
+>>>>>>> v3.18
 unsigned long __must_check __clear_user(void __user *, unsigned long);
 
 #define clear_user __clear_user
 
 __must_check long strlen_user(const char __user *str);
 __must_check long strnlen_user(const char __user *str, long n);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define __copy_to_user_inatomic __copy_to_user
@@ -311,9 +344,15 @@ __must_check long strnlen_user(const char __user *str, long n);
 
 struct pt_regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long compute_effective_address(struct pt_regs *,
 					       unsigned int insn,
 					       unsigned int rd);
+=======
+unsigned long compute_effective_address(struct pt_regs *,
+					unsigned int insn,
+					unsigned int rd);
+>>>>>>> v3.18
 =======
 unsigned long compute_effective_address(struct pt_regs *,
 					unsigned int insn,

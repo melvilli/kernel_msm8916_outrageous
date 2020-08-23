@@ -26,7 +26,12 @@ static inline void rep_nop(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define cpu_relax()	rep_nop()
+=======
+#define cpu_relax()		rep_nop()
+#define cpu_relax_lowlatency()	cpu_relax()
+>>>>>>> v3.18
 =======
 #define cpu_relax()		rep_nop()
 #define cpu_relax_lowlatency()	cpu_relax()

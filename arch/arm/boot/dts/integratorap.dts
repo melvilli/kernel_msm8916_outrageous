@@ -9,6 +9,10 @@
 	model = "ARM Integrator/AP";
 	compatible = "arm,integrator-ap";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dma-ranges = <0x80000000 0x0 0x80000000>;
+>>>>>>> v3.18
 =======
 	dma-ranges = <0x80000000 0x0 0x80000000>;
 >>>>>>> v3.18
@@ -23,10 +27,13 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	syscon {
 		/* AP system controller registers */
 		reg = <0x11000000 0x100>;
 =======
+=======
+>>>>>>> v3.18
 	/* 24 MHz chrystal on the core module */
 	xtal24mhz: xtal24mhz@24M {
 		#clock-cells = <0>;
@@ -55,12 +62,19 @@
 		interrupt-parent = <&pic>;
 		/* These are the logical module IRQs */
 		interrupts = <9>, <10>, <11>, <12>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
 	timer0: timer@13000000 {
 		compatible = "arm,integrator-timer";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&xtal24mhz>;
+>>>>>>> v3.18
 =======
 		clocks = <&xtal24mhz>;
 >>>>>>> v3.18
@@ -69,6 +83,10 @@
 	timer1: timer@13000100 {
 		compatible = "arm,integrator-timer";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&xtal24mhz>;
+>>>>>>> v3.18
 =======
 		clocks = <&xtal24mhz>;
 >>>>>>> v3.18
@@ -77,6 +95,10 @@
 	timer2: timer@13000200 {
 		compatible = "arm,integrator-timer";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&xtal24mhz>;
+>>>>>>> v3.18
 =======
 		clocks = <&xtal24mhz>;
 >>>>>>> v3.18
@@ -87,7 +109,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pci: pciv3@62000000 {
 		compatible = "v3,v360epc-pci";
 		#interrupt-cells = <1>;
@@ -129,6 +154,9 @@
 		>;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fpga {
 		/*
@@ -140,6 +168,11 @@
 			compatible = "arm,pl030", "arm,primecell";
 			arm,primecell-periphid = <0x00041030>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&pclk>;
+			clock-names = "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&pclk>;
 			clock-names = "apb_pclk";
@@ -150,6 +183,11 @@
 			compatible = "arm,pl010", "arm,primecell";
 			arm,primecell-periphid = <0x00041010>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&uartclk>, <&pclk>;
+			clock-names = "uartclk", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&uartclk>, <&pclk>;
 			clock-names = "uartclk", "apb_pclk";
@@ -160,6 +198,11 @@
 			compatible = "arm,pl010", "arm,primecell";
 			arm,primecell-periphid = <0x00041010>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&uartclk>, <&pclk>;
+			clock-names = "uartclk", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&uartclk>, <&pclk>;
 			clock-names = "uartclk", "apb_pclk";
@@ -170,6 +213,11 @@
 			compatible = "arm,pl050", "arm,primecell";
 			arm,primecell-periphid = <0x00041050>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&xtal24mhz>, <&pclk>;
+			clock-names = "KMIREFCLK", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&xtal24mhz>, <&pclk>;
 			clock-names = "KMIREFCLK", "apb_pclk";
@@ -180,6 +228,11 @@
 			compatible = "arm,pl050", "arm,primecell";
 			arm,primecell-periphid = <0x00041050>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clocks = <&xtal24mhz>, <&pclk>;
+			clock-names = "KMIREFCLK", "apb_pclk";
+>>>>>>> v3.18
 =======
 			clocks = <&xtal24mhz>, <&pclk>;
 			clock-names = "KMIREFCLK", "apb_pclk";

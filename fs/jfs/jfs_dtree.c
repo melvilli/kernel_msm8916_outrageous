@@ -125,6 +125,7 @@ struct dtsplit {
 
 /* get page buffer for specified block address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DT_GETPAGE(IP, BN, MP, SIZE, P, RC)\
 {\
 	BT_GETPAGE(IP, BN, MP, dtpage_t, SIZE, P, RC, i_dtroot)\
@@ -141,6 +142,8 @@ struct dtsplit {
 	}\
 }
 =======
+=======
+>>>>>>> v3.18
 #define DT_GETPAGE(IP, BN, MP, SIZE, P, RC)				\
 do {									\
 	BT_GETPAGE(IP, BN, MP, dtpage_t, SIZE, P, RC, i_dtroot);	\
@@ -156,6 +159,9 @@ do {									\
 		}							\
 	}								\
 } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* for consistency */
@@ -795,7 +801,11 @@ int dtSearch(struct inode *ip, struct component_name * key, ino_t * data,
 			 * chkdsk will fix it.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(sb, "stack overrun in dtSearch!");
+=======
+			jfs_error(sb, "stack overrun!\n");
+>>>>>>> v3.18
 =======
 			jfs_error(sb, "stack overrun!\n");
 >>>>>>> v3.18
@@ -3025,9 +3035,15 @@ static inline struct jfs_dirent *next_jfs_dirent(struct jfs_dirent *dirent)
  *	of next jfs_readdir()/dtRead()
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int jfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode *ip = file_inode(filp);
+=======
+int jfs_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct inode *ip = file_inode(file);
+>>>>>>> v3.18
 =======
 int jfs_readdir(struct file *file, struct dir_context *ctx)
 {
@@ -3062,7 +3078,11 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 	static int unique_pos = 2;	/* If we can't fix broken index */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (filp->f_pos == DIREND)
+=======
+	if (ctx->pos == DIREND)
+>>>>>>> v3.18
 =======
 	if (ctx->pos == DIREND)
 >>>>>>> v3.18
@@ -3078,6 +3098,7 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 		do_index = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dir_index = (u32) filp->f_pos;
 
 		/*
@@ -3085,12 +3106,17 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 		 * the value we return to the vfs is one greater than the
 		 * one we use internally.
 =======
+=======
+>>>>>>> v3.18
 		dir_index = (u32) ctx->pos;
 
 		/*
 		 * NFSv4 reserves cookies 1 and 2 for . and .. so the value
 		 * we return to the vfs is one greater than the one we use
 		 * internally.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		if (dir_index)
@@ -3103,7 +3129,11 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 			    (dir_index >= JFS_IP(ip)->next_index)) {
 				/* Stale position.  Directory has shrunk */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				filp->f_pos = DIREND;
+=======
+				ctx->pos = DIREND;
+>>>>>>> v3.18
 =======
 				ctx->pos = DIREND;
 >>>>>>> v3.18
@@ -3113,7 +3143,11 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 			rc = read_index(ip, dir_index, &dirtab_slot);
 			if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				filp->f_pos = DIREND;
+=======
+				ctx->pos = DIREND;
+>>>>>>> v3.18
 =======
 				ctx->pos = DIREND;
 >>>>>>> v3.18
@@ -3124,7 +3158,11 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 					jfs_err("jfs_readdir detected "
 						   "infinite loop!");
 <<<<<<< HEAD
+<<<<<<< HEAD
 					filp->f_pos = DIREND;
+=======
+					ctx->pos = DIREND;
+>>>>>>> v3.18
 =======
 					ctx->pos = DIREND;
 >>>>>>> v3.18
@@ -3133,7 +3171,11 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 				dir_index = le32_to_cpu(dirtab_slot.addr2);
 				if (dir_index == -1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					filp->f_pos = DIREND;
+=======
+					ctx->pos = DIREND;
+>>>>>>> v3.18
 =======
 					ctx->pos = DIREND;
 >>>>>>> v3.18
@@ -3146,7 +3188,11 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 			DT_GETPAGE(ip, bn, mp, PSIZE, p, rc);
 			if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				filp->f_pos = DIREND;
+=======
+				ctx->pos = DIREND;
+>>>>>>> v3.18
 =======
 				ctx->pos = DIREND;
 >>>>>>> v3.18
@@ -3156,7 +3202,11 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 				jfs_err("jfs_readdir: bad index table");
 				DT_PUTPAGE(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				filp->f_pos = DIREND;
+=======
+				ctx->pos = DIREND;
+>>>>>>> v3.18
 =======
 				ctx->pos = DIREND;
 >>>>>>> v3.18
@@ -3168,9 +3218,14 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 				 * self "."
 				 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				filp->f_pos = 1;
 				if (filldir(dirent, ".", 1, 1, ip->i_ino,
 					    DT_DIR))
+=======
+				ctx->pos = 1;
+				if (!dir_emit(ctx, ".", 1, ip->i_ino, DT_DIR))
+>>>>>>> v3.18
 =======
 				ctx->pos = 1;
 				if (!dir_emit(ctx, ".", 1, ip->i_ino, DT_DIR))
@@ -3181,8 +3236,13 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 			 * parent ".."
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos = 2;
 			if (filldir(dirent, "..", 2, 2, PARENT(ip), DT_DIR))
+=======
+			ctx->pos = 2;
+			if (!dir_emit(ctx, "..", 2, PARENT(ip), DT_DIR))
+>>>>>>> v3.18
 =======
 			ctx->pos = 2;
 			if (!dir_emit(ctx, "..", 2, PARENT(ip), DT_DIR))
@@ -3194,7 +3254,11 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 			 */
 			if (dtEmpty(ip)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				filp->f_pos = DIREND;
+=======
+				ctx->pos = DIREND;
+>>>>>>> v3.18
 =======
 				ctx->pos = DIREND;
 >>>>>>> v3.18
@@ -3216,6 +3280,7 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 		 * pn = index = -1:	No more entries
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dtpos = filp->f_pos;
 		if (dtpos < 2) {
 			/* build "." entry */
@@ -3227,6 +3292,8 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 			dtoffset->index = 2;
 			filp->f_pos = dtpos;
 =======
+=======
+>>>>>>> v3.18
 		dtpos = ctx->pos;
 		if (dtpos < 2) {
 			/* build "." entry */
@@ -3235,6 +3302,9 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 				return 0;
 			dtoffset->index = 2;
 			ctx->pos = dtpos;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -3242,9 +3312,13 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 			if (dtoffset->index == 2) {
 				/* build ".." entry */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 				if (filldir(dirent, "..", 2, filp->f_pos,
 					    PARENT(ip), DT_DIR))
+=======
+				if (!dir_emit(ctx, "..", 2, PARENT(ip), DT_DIR))
+>>>>>>> v3.18
 =======
 				if (!dir_emit(ctx, "..", 2, PARENT(ip), DT_DIR))
 >>>>>>> v3.18
@@ -3255,6 +3329,7 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 			}
 			dtoffset->pn = 1;
 			dtoffset->index = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			filp->f_pos = dtpos;
 		}
@@ -3269,6 +3344,8 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 				"from dtReadNext", rc);
 			filp->f_pos = DIREND;
 =======
+=======
+>>>>>>> v3.18
 			ctx->pos = dtpos;
 		}
 
@@ -3281,6 +3358,9 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 			jfs_err("jfs_readdir: unexpected rc = %d "
 				"from dtReadNext", rc);
 			ctx->pos = DIREND;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 0;
 		}
@@ -3290,7 +3370,11 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 		/* offset beyond directory eof ? */
 		if (bn < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos = DIREND;
+=======
+			ctx->pos = DIREND;
+>>>>>>> v3.18
 =======
 			ctx->pos = DIREND;
 >>>>>>> v3.18
@@ -3303,7 +3387,11 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 		DT_PUTPAGE(mp);
 		jfs_warn("jfs_readdir: __get_free_page failed!");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		filp->f_pos = DIREND;
+=======
+		ctx->pos = DIREND;
+>>>>>>> v3.18
 =======
 		ctx->pos = DIREND;
 >>>>>>> v3.18
@@ -3385,8 +3473,12 @@ int jfs_readdir(struct file *file, struct dir_context *ctx)
 				if (d_namleft == 0) {
 					jfs_error(ip->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  "JFS:Dtree error: ino = "
 						  "%ld, bn=%Ld, index = %d",
+=======
+						  "JFS:Dtree error: ino = %ld, bn=%lld, index = %d\n",
+>>>>>>> v3.18
 =======
 						  "JFS:Dtree error: ino = %ld, bn=%lld, index = %d\n",
 >>>>>>> v3.18
@@ -3432,9 +3524,15 @@ skip_one:
 		jfs_dirent = (struct jfs_dirent *) dirent_buf;
 		while (jfs_dirents--) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos = jfs_dirent->position;
 			if (filldir(dirent, jfs_dirent->name,
 				    jfs_dirent->name_len, filp->f_pos,
+=======
+			ctx->pos = jfs_dirent->position;
+			if (!dir_emit(ctx, jfs_dirent->name,
+				    jfs_dirent->name_len,
+>>>>>>> v3.18
 =======
 			ctx->pos = jfs_dirent->position;
 			if (!dir_emit(ctx, jfs_dirent->name,
@@ -3452,7 +3550,11 @@ skip_one:
 
 		if (!overflow && (bn == 0)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos = DIREND;
+=======
+			ctx->pos = DIREND;
+>>>>>>> v3.18
 =======
 			ctx->pos = DIREND;
 >>>>>>> v3.18
@@ -3520,7 +3622,11 @@ static int dtReadFirst(struct inode *ip, struct btstack * btstack)
 		if (BT_STACK_FULL(btstack)) {
 			DT_PUTPAGE(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(ip->i_sb, "dtReadFirst: btstack overrun");
+=======
+			jfs_error(ip->i_sb, "btstack overrun\n");
+>>>>>>> v3.18
 =======
 			jfs_error(ip->i_sb, "btstack overrun\n");
 >>>>>>> v3.18

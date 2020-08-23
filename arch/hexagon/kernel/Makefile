@@ -16,6 +16,11 @@ obj-$(CONFIG_HAS_DMA) += dma.o
 
 obj-$(CONFIG_STACKTRACE) += stacktrace.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+obj-$(CONFIG_VGA_CONSOLE) += screen_info.o
+>>>>>>> v3.18
 =======
 
 obj-$(CONFIG_VGA_CONSOLE) += screen_info.o

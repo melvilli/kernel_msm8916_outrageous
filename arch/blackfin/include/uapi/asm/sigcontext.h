@@ -5,8 +5,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _ASM_BLACKFIN_SIGCONTEXT_H
 #define _ASM_BLACKFIN_SIGCONTEXT_H
+=======
+#ifndef _UAPI_ASM_BLACKFIN_SIGCONTEXT_H
+#define _UAPI_ASM_BLACKFIN_SIGCONTEXT_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI_ASM_BLACKFIN_SIGCONTEXT_H
 #define _UAPI_ASM_BLACKFIN_SIGCONTEXT_H
@@ -64,7 +69,11 @@ struct sigcontext {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif /* _UAPI_ASM_BLACKFIN_SIGCONTEXT_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI_ASM_BLACKFIN_SIGCONTEXT_H */
 >>>>>>> v3.18

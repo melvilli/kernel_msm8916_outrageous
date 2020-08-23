@@ -97,10 +97,13 @@ MODULE_PARM_DESC(dvb_mfe_wait_time, "Wait up to <mfe_wait_time> seconds on open(
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DVB_FE_NO_EXIT	0
 #define DVB_FE_NORMAL_EXIT	1
 #define DVB_FE_DEVICE_REMOVED	2
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static DEFINE_MUTEX(frontend_mutex);
@@ -117,7 +120,10 @@ struct dvb_frontend_private {
 	struct task_struct *thread;
 	unsigned long release_jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int exit;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int wakeup;
@@ -572,7 +578,11 @@ static int dvb_frontend_is_exiting(struct dvb_frontend *fe)
 	struct dvb_frontend_private *fepriv = fe->frontend_priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fepriv->exit != DVB_FE_NO_EXIT)
+=======
+	if (fe->exit != DVB_FE_NO_EXIT)
+>>>>>>> v3.18
 =======
 	if (fe->exit != DVB_FE_NO_EXIT)
 >>>>>>> v3.18
@@ -640,7 +650,11 @@ restart:
 			if (!down_interruptible(&fepriv->sem))
 				semheld = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fepriv->exit = DVB_FE_NORMAL_EXIT;
+=======
+			fe->exit = DVB_FE_NORMAL_EXIT;
+>>>>>>> v3.18
 =======
 			fe->exit = DVB_FE_NORMAL_EXIT;
 >>>>>>> v3.18
@@ -754,9 +768,15 @@ restart:
 	fepriv->thread = NULL;
 	if (kthread_should_stop())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fepriv->exit = DVB_FE_DEVICE_REMOVED;
 	else
 		fepriv->exit = DVB_FE_NO_EXIT;
+=======
+		fe->exit = DVB_FE_DEVICE_REMOVED;
+	else
+		fe->exit = DVB_FE_NO_EXIT;
+>>>>>>> v3.18
 =======
 		fe->exit = DVB_FE_DEVICE_REMOVED;
 	else
@@ -777,7 +797,12 @@ static void dvb_frontend_stop(struct dvb_frontend *fe)
 	dev_dbg(fe->dvb->device, "%s:\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fepriv->exit = DVB_FE_NORMAL_EXIT;
+=======
+	if (fe->exit != DVB_FE_DEVICE_REMOVED)
+		fe->exit = DVB_FE_NORMAL_EXIT;
+>>>>>>> v3.18
 =======
 	if (fe->exit != DVB_FE_DEVICE_REMOVED)
 		fe->exit = DVB_FE_NORMAL_EXIT;
@@ -852,7 +877,11 @@ static int dvb_frontend_start(struct dvb_frontend *fe)
 
 	if (fepriv->thread) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fepriv->exit == DVB_FE_NO_EXIT)
+=======
+		if (fe->exit == DVB_FE_NO_EXIT)
+>>>>>>> v3.18
 =======
 		if (fe->exit == DVB_FE_NO_EXIT)
 >>>>>>> v3.18
@@ -868,7 +897,11 @@ static int dvb_frontend_start(struct dvb_frontend *fe)
 
 	fepriv->state = FESTATE_IDLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fepriv->exit = DVB_FE_NO_EXIT;
+=======
+	fe->exit = DVB_FE_NO_EXIT;
+>>>>>>> v3.18
 =======
 	fe->exit = DVB_FE_NO_EXIT;
 >>>>>>> v3.18
@@ -1000,12 +1033,18 @@ static int dvb_frontend_clear_cache(struct dvb_frontend *fe)
 		c->modulation = VSB_8;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case SYS_ISDBS:
 		c->symbol_rate = 28860000;
 		c->rolloff = ROLLOFF_35;
 		c->bandwidth_hz = c->symbol_rate / 100 * 135;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		c->modulation = QAM_AUTO;
@@ -1321,7 +1360,11 @@ static int dtv_property_process_get(struct dvb_frontend *fe,
 	case DTV_ENUM_DELSYS:
 		ncaps = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (fe->ops.delsys[ncaps] && ncaps < MAX_DELSYS) {
+=======
+		while (ncaps < MAX_DELSYS && fe->ops.delsys[ncaps]) {
+>>>>>>> v3.18
 =======
 		while (ncaps < MAX_DELSYS && fe->ops.delsys[ncaps]) {
 >>>>>>> v3.18
@@ -1642,7 +1685,11 @@ static int dvbv5_set_delivery_system(struct dvb_frontend *fe,
 	 */
 	ncaps = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (fe->ops.delsys[ncaps] && ncaps < MAX_DELSYS) {
+=======
+	while (ncaps < MAX_DELSYS && fe->ops.delsys[ncaps]) {
+>>>>>>> v3.18
 =======
 	while (ncaps < MAX_DELSYS && fe->ops.delsys[ncaps]) {
 >>>>>>> v3.18
@@ -1678,7 +1725,11 @@ static int dvbv5_set_delivery_system(struct dvb_frontend *fe,
 	*/
 	ncaps = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (fe->ops.delsys[ncaps] && ncaps < MAX_DELSYS) {
+=======
+	while (ncaps < MAX_DELSYS && fe->ops.delsys[ncaps]) {
+>>>>>>> v3.18
 =======
 	while (ncaps < MAX_DELSYS && fe->ops.delsys[ncaps]) {
 >>>>>>> v3.18
@@ -1757,7 +1808,11 @@ static int dvbv3_set_delivery_system(struct dvb_frontend *fe)
 	 */
 	ncaps = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (fe->ops.delsys[ncaps] && ncaps < MAX_DELSYS) {
+=======
+	while (ncaps < MAX_DELSYS && fe->ops.delsys[ncaps]) {
+>>>>>>> v3.18
 =======
 	while (ncaps < MAX_DELSYS && fe->ops.delsys[ncaps]) {
 >>>>>>> v3.18
@@ -1940,6 +1995,11 @@ static int dtv_property_process_set(struct dvb_frontend *fe,
 		if (fe->ops.set_lna)
 			r = fe->ops.set_lna(fe);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (r < 0)
+			c->lna = LNA_AUTO;
+>>>>>>> v3.18
 =======
 		if (r < 0)
 			c->lna = LNA_AUTO;
@@ -1967,7 +2027,11 @@ static int dvb_frontend_ioctl(struct file *file,
 		return -ERESTARTSYS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fepriv->exit != DVB_FE_NO_EXIT) {
+=======
+	if (fe->exit != DVB_FE_NO_EXIT) {
+>>>>>>> v3.18
 =======
 	if (fe->exit != DVB_FE_NO_EXIT) {
 >>>>>>> v3.18
@@ -2003,7 +2067,11 @@ static int dvb_frontend_ioctl_properties(struct file *file,
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dtv_properties *tvps = NULL;
+=======
+	struct dtv_properties *tvps = parg;
+>>>>>>> v3.18
 =======
 	struct dtv_properties *tvps = parg;
 >>>>>>> v3.18
@@ -2013,9 +2081,13 @@ static int dvb_frontend_ioctl_properties(struct file *file,
 	dev_dbg(fe->dvb->device, "%s:\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(cmd == FE_SET_PROPERTY) {
 		tvps = (struct dtv_properties __user *)parg;
 
+=======
+	if (cmd == FE_SET_PROPERTY) {
+>>>>>>> v3.18
 =======
 	if (cmd == FE_SET_PROPERTY) {
 >>>>>>> v3.18
@@ -2034,7 +2106,12 @@ static int dvb_frontend_ioctl_properties(struct file *file,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (copy_from_user(tvp, tvps->props, tvps->num * sizeof(struct dtv_property))) {
+=======
+		if (copy_from_user(tvp, (void __user *)tvps->props,
+				   tvps->num * sizeof(struct dtv_property))) {
+>>>>>>> v3.18
 =======
 		if (copy_from_user(tvp, (void __user *)tvps->props,
 				   tvps->num * sizeof(struct dtv_property))) {
@@ -2054,10 +2131,14 @@ static int dvb_frontend_ioctl_properties(struct file *file,
 			dev_dbg(fe->dvb->device, "%s: Property cache is full, tuning\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 	if(cmd == FE_GET_PROPERTY) {
 		tvps = (struct dtv_properties __user *)parg;
 
+=======
+	} else if (cmd == FE_GET_PROPERTY) {
+>>>>>>> v3.18
 =======
 	} else if (cmd == FE_GET_PROPERTY) {
 >>>>>>> v3.18
@@ -2076,7 +2157,12 @@ static int dvb_frontend_ioctl_properties(struct file *file,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (copy_from_user(tvp, tvps->props, tvps->num * sizeof(struct dtv_property))) {
+=======
+		if (copy_from_user(tvp, (void __user *)tvps->props,
+				   tvps->num * sizeof(struct dtv_property))) {
+>>>>>>> v3.18
 =======
 		if (copy_from_user(tvp, (void __user *)tvps->props,
 				   tvps->num * sizeof(struct dtv_property))) {
@@ -2103,7 +2189,12 @@ static int dvb_frontend_ioctl_properties(struct file *file,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (copy_to_user(tvps->props, tvp, tvps->num * sizeof(struct dtv_property))) {
+=======
+		if (copy_to_user((void __user *)tvps->props, tvp,
+				 tvps->num * sizeof(struct dtv_property))) {
+>>>>>>> v3.18
 =======
 		if (copy_to_user((void __user *)tvps->props, tvp,
 				 tvps->num * sizeof(struct dtv_property))) {
@@ -2168,7 +2259,10 @@ static int dtv_set_frontend(struct dvb_frontend *fe)
 		rolloff = 113;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case SYS_DVBS:
 	case SYS_TURBO:
 	case SYS_ISDBS:
@@ -2187,6 +2281,9 @@ static int dtv_set_frontend(struct dvb_frontend *fe)
 			rolloff = 135;
 		}
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
@@ -2310,9 +2407,15 @@ static int dvb_frontend_ioctl_legacy(struct file *file,
 				 __func__, c->delivery_system, fe->ops.info.type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Set CAN_INVERSION_AUTO bit on in other than oneshot mode */
 		if (!(fepriv->tune_mode_flags & FE_TUNE_MODE_ONESHOT))
 			info->caps |= FE_CAN_INVERSION_AUTO;
+=======
+		/* Force the CAN_INVERSION_AUTO bit on. If the frontend doesn't
+		 * do it, it is done for it. */
+		info->caps |= FE_CAN_INVERSION_AUTO;
+>>>>>>> v3.18
 =======
 		/* Force the CAN_INVERSION_AUTO bit on. If the frontend doesn't
 		 * do it, it is done for it. */
@@ -2543,7 +2646,11 @@ static int dvb_frontend_open(struct inode *inode, struct file *file)
 
 	dev_dbg(fe->dvb->device, "%s:\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fepriv->exit == DVB_FE_DEVICE_REMOVED)
+=======
+	if (fe->exit == DVB_FE_DEVICE_REMOVED)
+>>>>>>> v3.18
 =======
 	if (fe->exit == DVB_FE_DEVICE_REMOVED)
 >>>>>>> v3.18
@@ -2652,7 +2759,11 @@ static int dvb_frontend_release(struct inode *inode, struct file *file)
 	if (dvbdev->users == -1) {
 		wake_up(&fepriv->wait_queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fepriv->exit != DVB_FE_NO_EXIT)
+=======
+		if (fe->exit != DVB_FE_NO_EXIT)
+>>>>>>> v3.18
 =======
 		if (fe->exit != DVB_FE_NO_EXIT)
 >>>>>>> v3.18
@@ -2681,7 +2792,13 @@ int dvb_frontend_suspend(struct dvb_frontend *fe)
 			fe->id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fe->ops.tuner_ops.sleep)
+=======
+	if (fe->ops.tuner_ops.suspend)
+		ret = fe->ops.tuner_ops.suspend(fe);
+	else if (fe->ops.tuner_ops.sleep)
+>>>>>>> v3.18
 =======
 	if (fe->ops.tuner_ops.suspend)
 		ret = fe->ops.tuner_ops.suspend(fe);
@@ -2705,6 +2822,7 @@ int dvb_frontend_resume(struct dvb_frontend *fe)
 			fe->id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fe->ops.init)
 		ret = fe->ops.init(fe);
 
@@ -2712,6 +2830,8 @@ int dvb_frontend_resume(struct dvb_frontend *fe)
 		ret = fe->ops.tuner_ops.init(fe);
 
 =======
+=======
+>>>>>>> v3.18
 	fe->exit = DVB_FE_DEVICE_RESUME;
 	if (fe->ops.init)
 		ret = fe->ops.init(fe);
@@ -2722,6 +2842,9 @@ int dvb_frontend_resume(struct dvb_frontend *fe)
 		ret = fe->ops.tuner_ops.init(fe);
 
 	fe->exit = DVB_FE_NO_EXIT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fepriv->state = FESTATE_RETUNE;
 	dvb_frontend_wakeup(fe);
@@ -2812,6 +2935,7 @@ void dvb_frontend_detach(struct dvb_frontend* fe)
 	if (fe->ops.release_sec) {
 		fe->ops.release_sec(fe);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		symbol_put_addr(fe->ops.release_sec);
 	}
 	if (fe->ops.tuner_ops.release) {
@@ -2822,6 +2946,8 @@ void dvb_frontend_detach(struct dvb_frontend* fe)
 		fe->ops.analog_ops.release(fe);
 		symbol_put_addr(fe->ops.analog_ops.release);
 =======
+=======
+>>>>>>> v3.18
 		dvb_detach(fe->ops.release_sec);
 	}
 	if (fe->ops.tuner_ops.release) {
@@ -2831,13 +2957,20 @@ void dvb_frontend_detach(struct dvb_frontend* fe)
 	if (fe->ops.analog_ops.release) {
 		fe->ops.analog_ops.release(fe);
 		dvb_detach(fe->ops.analog_ops.release);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	ptr = (void*)fe->ops.release;
 	if (ptr) {
 		fe->ops.release(fe);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		symbol_put_addr(ptr);
+=======
+		dvb_detach(ptr);
+>>>>>>> v3.18
 =======
 		dvb_detach(ptr);
 >>>>>>> v3.18

@@ -216,7 +216,10 @@ struct bfa_ioc_hwif {
 	bool		(*ioc_sync_complete)	(struct bfa_ioc *ioc);
 	bool		(*ioc_lpu_read_stat)	(struct bfa_ioc *ioc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	void		(*ioc_set_fwstate)	(struct bfa_ioc *ioc,
 					enum bfi_ioc_state fwstate);
 	enum bfi_ioc_state (*ioc_get_fwstate) (struct bfa_ioc *ioc);
@@ -224,6 +227,9 @@ struct bfa_ioc_hwif {
 					enum bfi_ioc_state fwstate);
 	enum bfi_ioc_state (*ioc_get_alt_fwstate) (struct bfa_ioc *ioc);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -233,6 +239,11 @@ struct bfa_ioc_hwif {
 #define bfa_ioc_portid(__ioc)		((__ioc)->port_id)
 #define bfa_ioc_asic_gen(__ioc)		((__ioc)->asic_gen)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define bfa_ioc_is_default(__ioc)	\
+	(bfa_ioc_pcifn(__ioc) == bfa_ioc_portid(__ioc))
+>>>>>>> v3.18
 =======
 #define bfa_ioc_is_default(__ioc)	\
 	(bfa_ioc_pcifn(__ioc) == bfa_ioc_portid(__ioc))
@@ -305,6 +316,10 @@ bool bfa_nw_ioc_is_disabled(struct bfa_ioc *ioc);
 bool bfa_nw_ioc_is_operational(struct bfa_ioc *ioc);
 void bfa_nw_ioc_get_attr(struct bfa_ioc *ioc, struct bfa_ioc_attr *ioc_attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+enum bfa_status bfa_nw_ioc_fwsig_invalidate(struct bfa_ioc *ioc);
+>>>>>>> v3.18
 =======
 enum bfa_status bfa_nw_ioc_fwsig_invalidate(struct bfa_ioc *ioc);
 >>>>>>> v3.18

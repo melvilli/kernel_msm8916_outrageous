@@ -673,6 +673,10 @@ enum {
 
 #define QLCNIC_MAX_MC_COUNT		38
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLCNIC_MAX_UC_COUNT		512
+>>>>>>> v3.18
 =======
 #define QLCNIC_MAX_UC_COUNT		512
 >>>>>>> v3.18
@@ -702,7 +706,10 @@ struct qlcnic_legacy_intr_set {
 
 #define QLCNIC_MSIX_BASE	0x132110
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QLCNIC_MAX_PCI_FUNC	8
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define QLCNIC_MAX_VLAN_FILTERS	64

@@ -1,7 +1,10 @@
 #include <linux/bitops.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -12,6 +15,7 @@
 
 #include "cpu.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_X86_OOSTORE
 
@@ -245,6 +249,8 @@ static void __cpuinit winchip2_protect_mcr(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define ACE_PRESENT	(1 << 6)
 #define ACE_ENABLED	(1 << 7)
 #define ACE_FCR		(1 << 28)	/* MSR_VIA_FCR */
@@ -254,7 +260,11 @@ static void __cpuinit winchip2_protect_mcr(void)
 #define RNG_ENABLE	(1 << 6)	/* MSR_VIA_RNG */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit init_c3(struct cpuinfo_x86 *c)
+=======
+static void init_c3(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void init_c3(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -329,7 +339,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit early_init_centaur(struct cpuinfo_x86 *c)
+=======
+static void early_init_centaur(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void early_init_centaur(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -352,7 +366,11 @@ static void early_init_centaur(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit init_centaur(struct cpuinfo_x86 *c)
+=======
+static void init_centaur(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void init_centaur(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -382,6 +400,7 @@ static void init_centaur(struct cpuinfo_x86 *c)
 			printk(KERN_NOTICE "Disabling bugged TSC.\n");
 			clear_cpu_cap(c, X86_FEATURE_TSC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_OOSTORE
 			centaur_create_optimal_mcr();
 			/*
@@ -396,6 +415,8 @@ static void init_centaur(struct cpuinfo_x86 *c)
 			 */
 			wrmsr(MSR_IDT_MCR_CTRL, 0x01F0001F, 0);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			break;
@@ -415,6 +436,7 @@ static void init_centaur(struct cpuinfo_x86 *c)
 				  E2MMX|EAMD3D;
 			fcr_clr = DPDC;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_OOSTORE
 			winchip2_unprotect_mcr();
 			winchip2_create_optimal_mcr();
@@ -431,12 +453,15 @@ static void init_centaur(struct cpuinfo_x86 *c)
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 			break;
 		case 9:
 			name = "3";
 			fcr_set = ECX8|DSMC|DTLOCK|EMMX|EBRPRED|ERETSTK|
 				  E2MMX|EAMD3D;
 			fcr_clr = DPDC;
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_X86_OOSTORE
 			winchip2_unprotect_mcr();
@@ -452,6 +477,8 @@ static void init_centaur(struct cpuinfo_x86 *c)
 			wrmsr(MSR_IDT_MCR_CTRL, lo, hi);
 			winchip2_protect_mcr();
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			break;
@@ -496,15 +523,21 @@ static void init_centaur(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int __cpuinit
 centaur_size_cache(struct cpuinfo_x86 *c, unsigned int size)
 {
 #ifdef CONFIG_X86_32
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_32
 static unsigned int
 centaur_size_cache(struct cpuinfo_x86 *c, unsigned int size)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* VIA C3 CPUs (670-68F) need further shifting. */
 	if ((c->x86 == 6) && ((c->x86_model == 7) || (c->x86_model == 8)))
@@ -519,24 +552,36 @@ centaur_size_cache(struct cpuinfo_x86 *c, unsigned int size)
 				(c->x86_mask == 1) && (size == 65))
 		size -= 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 	return size;
 }
 
 static const struct cpu_dev __cpuinitconst centaur_cpu_dev = {
 =======
+=======
+>>>>>>> v3.18
 	return size;
 }
 #endif
 
 static const struct cpu_dev centaur_cpu_dev = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.c_vendor	= "Centaur",
 	.c_ident	= { "CentaurHauls" },
 	.c_early_init	= early_init_centaur,
 	.c_init		= init_centaur,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.c_size_cache	= centaur_size_cache,
+=======
+#ifdef CONFIG_X86_32
+	.legacy_cache_size = centaur_size_cache,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_X86_32
 	.legacy_cache_size = centaur_size_cache,

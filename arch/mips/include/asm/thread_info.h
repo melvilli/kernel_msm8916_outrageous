@@ -93,8 +93,11 @@ static inline struct thread_info *current_thread_info(void)
 #define STACK_WARN	(THREAD_SIZE / 8)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x10000000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -113,6 +116,7 @@ static inline struct thread_info *current_thread_info(void)
 #define TIF_USEDFPU		16	/* FPU was used by this task this quantum (SMP) */
 #define TIF_MEMDIE		18	/* is terminating due to OOM killer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIF_FIXADE		20	/* Fix address errors in software */
 #define TIF_LOGADE		21	/* Log address errors to syslog */
 #define TIF_32BIT_REGS		22	/* also implies 16/32 fprs */
@@ -120,6 +124,8 @@ static inline struct thread_info *current_thread_info(void)
 #define TIF_FPUBOUND		24	/* thread bound to FPU-full CPU set */
 #define TIF_LOAD_WATCH		25	/* If set, load watch registers */
 =======
+=======
+>>>>>>> v3.18
 #define TIF_NOHZ		19	/* in adaptive nohz mode */
 #define TIF_FIXADE		20	/* Fix address errors in software */
 #define TIF_LOGADE		21	/* Log address errors to syslog */
@@ -131,6 +137,9 @@ static inline struct thread_info *current_thread_info(void)
 #define TIF_32BIT_FPREGS	27	/* 32-bit floating point registers */
 #define TIF_USEDMSA		29	/* MSA has been used this quantum */
 #define TIF_MSA_CTX_LIVE	30	/* MSA context must be preserved */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TIF_SYSCALL_TRACE	31	/* syscall trace active */
 
@@ -142,6 +151,10 @@ static inline struct thread_info *current_thread_info(void)
 #define _TIF_NOTIFY_RESUME	(1<<TIF_NOTIFY_RESUME)
 #define _TIF_USEDFPU		(1<<TIF_USEDFPU)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define _TIF_NOHZ		(1<<TIF_NOHZ)
+>>>>>>> v3.18
 =======
 #define _TIF_NOHZ		(1<<TIF_NOHZ)
 >>>>>>> v3.18
@@ -152,12 +165,15 @@ static inline struct thread_info *current_thread_info(void)
 #define _TIF_FPUBOUND		(1<<TIF_FPUBOUND)
 #define _TIF_LOAD_WATCH		(1<<TIF_LOAD_WATCH)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define _TIF_WORK_SYSCALL_ENTRY	(_TIF_SYSCALL_TRACE | _TIF_SYSCALL_AUDIT | _TIF_SECCOMP)
 
 /* work to do in syscall_trace_leave() */
 #define _TIF_WORK_SYSCALL_EXIT	(_TIF_SYSCALL_TRACE | _TIF_SYSCALL_AUDIT)
 =======
+=======
+>>>>>>> v3.18
 #define _TIF_32BIT_FPREGS	(1<<TIF_32BIT_FPREGS)
 #define _TIF_USEDMSA		(1<<TIF_USEDMSA)
 #define _TIF_MSA_CTX_LIVE	(1<<TIF_MSA_CTX_LIVE)
@@ -170,6 +186,9 @@ static inline struct thread_info *current_thread_info(void)
 /* work to do in syscall_trace_leave() */
 #define _TIF_WORK_SYSCALL_EXIT	(_TIF_NOHZ | _TIF_SYSCALL_TRACE |	\
 				 _TIF_SYSCALL_AUDIT | _TIF_SYSCALL_TRACEPOINT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* work to do on interrupt/exception return */
@@ -177,11 +196,14 @@ static inline struct thread_info *current_thread_info(void)
 	(_TIF_SIGPENDING | _TIF_NEED_RESCHED | _TIF_NOTIFY_RESUME)
 /* work to do on any return to u-space */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _TIF_ALLWORK_MASK	(_TIF_WORK_MASK | _TIF_WORK_SYSCALL_EXIT)
 
 #endif /* __KERNEL__ */
 
 =======
+=======
+>>>>>>> v3.18
 #define _TIF_ALLWORK_MASK	(_TIF_NOHZ | _TIF_WORK_MASK |		\
 				 _TIF_WORK_SYSCALL_EXIT |		\
 				 _TIF_SYSCALL_TRACEPOINT)
@@ -210,5 +232,8 @@ static inline struct thread_info *current_thread_info(void)
 #define UASM_i_CPUID_MFC0	UASM_i_MFC0
 
 #endif /* __KERNEL__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_THREAD_INFO_H */

@@ -15,6 +15,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio.h>
 >>>>>>> v3.18
@@ -23,6 +27,10 @@
 #include <linux/mfd/core.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irqdomain.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqdomain.h>
 >>>>>>> v3.18
@@ -147,7 +155,10 @@ static struct regmap_irq_chip wm8994_irq_chip = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void wm8994_edge_irq_enable(struct irq_data *data)
 {
 }
@@ -197,13 +208,20 @@ static struct irq_domain_ops wm8994_edge_irq_ops = {
 	.xlate	= irq_domain_xlate_twocell,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int wm8994_irq_init(struct wm8994 *wm8994)
 {
 	int ret;
 	unsigned long irqflags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm8994_pdata *pdata = wm8994->dev->platform_data;
+=======
+	struct wm8994_pdata *pdata = dev_get_platdata(wm8994->dev);
+>>>>>>> v3.18
 =======
 	struct wm8994_pdata *pdata = dev_get_platdata(wm8994->dev);
 >>>>>>> v3.18
@@ -221,11 +239,14 @@ int wm8994_irq_init(struct wm8994 *wm8994)
 		irqflags = pdata->irq_flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = regmap_add_irq_chip(wm8994->regmap, wm8994->irq,
 				  irqflags,
 				  wm8994->irq_base, &wm8994_irq_chip,
 				  &wm8994->irq_data);
 =======
+=======
+>>>>>>> v3.18
 	/* use a GPIO for edge triggered controllers */
 	if (irqflags & (IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING)) {
 		if (gpio_to_irq(pdata->irq_gpio) != wm8994->irq) {
@@ -271,6 +292,9 @@ int wm8994_irq_init(struct wm8994 *wm8994)
 					  &wm8994->irq_data);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret != 0) {
 		dev_err(wm8994->dev, "Failed to register IRQ chip: %d\n", ret);
@@ -283,6 +307,10 @@ int wm8994_irq_init(struct wm8994 *wm8994)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(wm8994_irq_init);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(wm8994_irq_init);
 >>>>>>> v3.18
@@ -292,6 +320,10 @@ void wm8994_irq_exit(struct wm8994 *wm8994)
 	regmap_del_irq_chip(wm8994->irq, wm8994->irq_data);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(wm8994_irq_exit);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(wm8994_irq_exit);
 >>>>>>> v3.18

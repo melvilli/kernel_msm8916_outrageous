@@ -126,7 +126,11 @@ static void _rtl92ce_query_rxphystatus(struct ieee80211_hw *hw,
 	bool is_cck_rate;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	is_cck_rate = RX_HAL_IS_CCK_RATE(pdesc);
+=======
+	is_cck_rate = RX_HAL_IS_CCK_RATE(pdesc->rxmcs);
+>>>>>>> v3.18
 =======
 	is_cck_rate = RX_HAL_IS_CCK_RATE(pdesc->rxmcs);
 >>>>>>> v3.18
@@ -366,7 +370,11 @@ bool rtl92ce_rx_query_desc(struct ieee80211_hw *hw,
 	stats->is_ht = (bool)GET_RX_DESC_RXHT(pdesc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stats->is_cck = RX_HAL_IS_CCK_RATE(pdesc);
+=======
+	stats->is_cck = RX_HAL_IS_CCK_RATE(pdesc->rxmcs);
+>>>>>>> v3.18
 =======
 	stats->is_cck = RX_HAL_IS_CCK_RATE(pdesc->rxmcs);
 >>>>>>> v3.18
@@ -398,11 +406,15 @@ bool rtl92ce_rx_query_desc(struct ieee80211_hw *hw,
 	 */
 	if (stats->decrypted) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!hdr) {
 			/* In testing, hdr was NULL here */
 			return false;
 		}
 		if ((ieee80211_is_robust_mgmt_frame(hdr)) &&
+=======
+		if ((_ieee80211_is_robust_mgmt_frame(hdr)) &&
+>>>>>>> v3.18
 =======
 		if ((_ieee80211_is_robust_mgmt_frame(hdr)) &&
 >>>>>>> v3.18
@@ -433,7 +445,10 @@ bool rtl92ce_rx_query_desc(struct ieee80211_hw *hw,
 	/*rx_status->qual = stats->signal; */
 	rx_status->signal = stats->recvsignalpower + 10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*rx_status->noise = -stats->noise; */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -443,7 +458,11 @@ bool rtl92ce_rx_query_desc(struct ieee80211_hw *hw,
 void rtl92ce_tx_fill_desc(struct ieee80211_hw *hw,
 			  struct ieee80211_hdr *hdr, u8 *pdesc_tx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct ieee80211_tx_info *info,
+=======
+			  u8 *pbd_desc_tx, struct ieee80211_tx_info *info,
+>>>>>>> v3.18
 =======
 			  u8 *pbd_desc_tx, struct ieee80211_tx_info *info,
 >>>>>>> v3.18
@@ -687,7 +706,12 @@ void rtl92ce_tx_fill_cmddesc(struct ieee80211_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl92ce_set_desc(u8 *pdesc, bool istx, u8 desc_name, u8 *val)
+=======
+void rtl92ce_set_desc(struct ieee80211_hw *hw, u8 *pdesc, bool istx,
+		      u8 desc_name, u8 *val)
+>>>>>>> v3.18
 =======
 void rtl92ce_set_desc(struct ieee80211_hw *hw, u8 *pdesc, bool istx,
 		      u8 desc_name, u8 *val)
@@ -757,6 +781,12 @@ u32 rtl92ce_get_desc(u8 *p_desc, bool istx, u8 desc_name)
 			ret = GET_RX_DESC_PKT_LEN(pdesc);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case HW_DESC_RXBUFF_ADDR:
+			ret = GET_RX_STATUS_DESC_BUFF_ADDR(pdesc);
+			break;
+>>>>>>> v3.18
 =======
 		case HW_DESC_RXBUFF_ADDR:
 			ret = GET_RX_STATUS_DESC_BUFF_ADDR(pdesc);

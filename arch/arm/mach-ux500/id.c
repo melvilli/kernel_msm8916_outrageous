@@ -22,17 +22,23 @@
 struct dbx500_asic_id dbx500_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int ux500_read_asicid(phys_addr_t addr)
 {
 	phys_addr_t base = addr & ~0xfff;
 	struct map_desc desc = {
 		.virtual	= UX500_VIRT_ROM,
 =======
+=======
+>>>>>>> v3.18
 static unsigned int __init ux500_read_asicid(phys_addr_t addr)
 {
 	phys_addr_t base = addr & ~0xfff;
 	struct map_desc desc = {
 		.virtual	= (unsigned long)UX500_VIRT_ROM,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.pfn		= __phys_to_pfn(base),
 		.length		= SZ_16K,
@@ -46,7 +52,11 @@ static unsigned int __init ux500_read_asicid(phys_addr_t addr)
 	flush_cache_all();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return readl(IOMEM(UX500_VIRT_ROM + (addr & 0xfff)));
+=======
+	return readl(UX500_VIRT_ROM + (addr & 0xfff));
+>>>>>>> v3.18
 =======
 	return readl(UX500_VIRT_ROM + (addr & 0xfff));
 >>>>>>> v3.18

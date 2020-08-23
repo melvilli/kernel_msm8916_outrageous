@@ -64,7 +64,11 @@ static int __init vdso_setup(char *s)
 		vdso_enabled = 0;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = strict_strtoul(s, 0, &val);
+=======
+		rc = kstrtoul(s, 0, &val);
+>>>>>>> v3.18
 =======
 		rc = kstrtoul(s, 0, &val);
 >>>>>>> v3.18
@@ -89,8 +93,12 @@ struct vdso_data *vdso_data = &vdso_data_store.data;
 static void vdso_init_data(struct vdso_data *vd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vd->ectg_available =
 		s390_user_mode != HOME_SPACE_MODE && test_facility(31);
+=======
+	vd->ectg_available = test_facility(31);
+>>>>>>> v3.18
 =======
 	vd->ectg_available = test_facility(31);
 >>>>>>> v3.18
@@ -111,7 +119,11 @@ int vdso_alloc_per_cpu(struct _lowcore *lowcore)
 	lowcore->vdso_per_cpu_data = __LC_PASTE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (s390_user_mode == HOME_SPACE_MODE || !vdso_enabled)
+=======
+	if (!vdso_enabled)
+>>>>>>> v3.18
 =======
 	if (!vdso_enabled)
 >>>>>>> v3.18
@@ -126,17 +138,23 @@ int vdso_alloc_per_cpu(struct _lowcore *lowcore)
 	clear_table((unsigned long *) segment_table, _SEGMENT_ENTRY_EMPTY,
 		    PAGE_SIZE << SEGMENT_ORDER);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_table((unsigned long *) page_table, _PAGE_TYPE_EMPTY,
 		    256*sizeof(unsigned long));
 
 	*(unsigned long *) segment_table = _SEGMENT_ENTRY + page_table;
 	*(unsigned long *) page_table = _PAGE_RO + page_frame;
 =======
+=======
+>>>>>>> v3.18
 	clear_table((unsigned long *) page_table, _PAGE_INVALID,
 		    256*sizeof(unsigned long));
 
 	*(unsigned long *) segment_table = _SEGMENT_ENTRY + page_table;
 	*(unsigned long *) page_table = _PAGE_PROTECT + page_frame;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	psal = (u32 *) (page_table + 256*sizeof(unsigned long));
@@ -147,7 +165,11 @@ int vdso_alloc_per_cpu(struct _lowcore *lowcore)
 
 	lowcore->paste[4] = (u32)(addr_t) psal;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psal[0] = 0x20000000;
+=======
+	psal[0] = 0x02000000;
+>>>>>>> v3.18
 =======
 	psal[0] = 0x02000000;
 >>>>>>> v3.18
@@ -172,7 +194,11 @@ void vdso_free_per_cpu(struct _lowcore *lowcore)
 	u32 *psal, *aste;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (s390_user_mode == HOME_SPACE_MODE || !vdso_enabled)
+=======
+	if (!vdso_enabled)
+>>>>>>> v3.18
 =======
 	if (!vdso_enabled)
 >>>>>>> v3.18
@@ -194,7 +220,11 @@ static void vdso_init_cr5(void)
 	unsigned long cr5;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (s390_user_mode == HOME_SPACE_MODE || !vdso_enabled)
+=======
+	if (!vdso_enabled)
+>>>>>>> v3.18
 =======
 	if (!vdso_enabled)
 >>>>>>> v3.18
@@ -350,6 +380,7 @@ static int __init vdso_init(void)
 }
 early_initcall(vdso_init);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int in_gate_area_no_mm(unsigned long addr)
 {
@@ -365,5 +396,7 @@ struct vm_area_struct *get_gate_vma(struct mm_struct *mm)
 {
 	return NULL;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

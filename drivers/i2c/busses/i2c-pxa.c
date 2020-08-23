@@ -32,7 +32,10 @@
 #include <linux/of.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -114,6 +117,11 @@ MODULE_DEVICE_TABLE(platform, i2c_pxa_id_table);
 #define ICR_UR		(1 << 14)	   /* unit reset */
 #define ICR_FM		(1 << 15)	   /* fast mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ICR_HS		(1 << 16)	   /* High Speed mode */
+#define ICR_GPIOEN	(1 << 19)	   /* enable GPIO mode for SCL in HS */
+>>>>>>> v3.18
 =======
 #define ICR_HS		(1 << 16)	   /* High Speed mode */
 #define ICR_GPIOEN	(1 << 19)	   /* enable GPIO mode for SCL in HS */
@@ -164,11 +172,17 @@ struct pxa_i2c {
 	unsigned int		use_pio :1;
 	unsigned int		fast_mode :1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		high_mode:1;
 	unsigned char		master_code;
 	unsigned long		rate;
 	bool			highmode_enter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -475,6 +489,10 @@ static void i2c_pxa_reset(struct pxa_i2c *i2c)
 	/* set control register values */
 	writel(I2C_ICR_INIT | (i2c->fast_mode ? ICR_FM : 0), _ICR(i2c));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	writel(readl(_ICR(i2c)) | (i2c->high_mode ? ICR_HS : 0), _ICR(i2c));
+>>>>>>> v3.18
 =======
 	writel(readl(_ICR(i2c)) | (i2c->high_mode ? ICR_HS : 0), _ICR(i2c));
 >>>>>>> v3.18
@@ -700,7 +718,10 @@ static int i2c_pxa_pio_set_master(struct pxa_i2c *i2c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * PXA I2C send master code
  * 1. Load master code to IDBR and send it.
@@ -729,6 +750,9 @@ static int i2c_pxa_send_mastercode(struct pxa_i2c *i2c)
 	return (timeout == 0) ? I2C_RETRY : 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int i2c_pxa_do_pio_xfer(struct pxa_i2c *i2c,
 			       struct i2c_msg *msg, int num)
@@ -794,7 +818,10 @@ static int i2c_pxa_do_xfer(struct pxa_i2c *i2c, struct i2c_msg *msg, int num)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (i2c->high_mode) {
 		ret = i2c_pxa_send_mastercode(i2c);
 		if (ret) {
@@ -803,6 +830,9 @@ static int i2c_pxa_do_xfer(struct pxa_i2c *i2c, struct i2c_msg *msg, int num)
 			}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irq(&i2c->lock);
 
@@ -1052,7 +1082,11 @@ static irqreturn_t i2c_pxa_handler(int this_irq, void *dev_id)
 		if (isr & ISR_IRF)
 			i2c_pxa_slave_rxfull(i2c, isr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (i2c->msg) {
+=======
+	} else if (i2c->msg && (!i2c->highmode_enter)) {
+>>>>>>> v3.18
 =======
 	} else if (i2c->msg && (!i2c->highmode_enter)) {
 >>>>>>> v3.18
@@ -1061,6 +1095,12 @@ static irqreturn_t i2c_pxa_handler(int this_irq, void *dev_id)
 		if (isr & ISR_IRF)
 			i2c_pxa_irq_rxfull(i2c, isr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	} else if ((isr & ISR_ITE) && i2c->highmode_enter) {
+		i2c->highmode_enter = false;
+		wake_up(&i2c->wait);
+>>>>>>> v3.18
 =======
 	} else if ((isr & ISR_ITE) && i2c->highmode_enter) {
 		i2c->highmode_enter = false;
@@ -1111,7 +1151,11 @@ static const struct i2c_algorithm i2c_pxa_pio_algorithm = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id i2c_pxa_dt_ids[] = {
+=======
+static const struct of_device_id i2c_pxa_dt_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id i2c_pxa_dt_ids[] = {
 >>>>>>> v3.18
@@ -1148,7 +1192,11 @@ static int i2c_pxa_probe_pdata(struct platform_device *pdev,
 			       enum pxa_i2c_types *i2c_types)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_pxa_platform_data *plat = pdev->dev.platform_data;
+=======
+	struct i2c_pxa_platform_data *plat = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct i2c_pxa_platform_data *plat = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1159,12 +1207,18 @@ static int i2c_pxa_probe_pdata(struct platform_device *pdev,
 		i2c->use_pio = plat->use_pio;
 		i2c->fast_mode = plat->fast_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		i2c->high_mode = plat->high_mode;
 		i2c->master_code = plat->master_code;
 		if (!i2c->master_code)
 			i2c->master_code = 0xe;
 		i2c->rate = plat->rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -1173,7 +1227,11 @@ static int i2c_pxa_probe_pdata(struct platform_device *pdev,
 static int i2c_pxa_probe(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_pxa_platform_data *plat = dev->dev.platform_data;
+=======
+	struct i2c_pxa_platform_data *plat = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct i2c_pxa_platform_data *plat = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -1243,6 +1301,10 @@ static int i2c_pxa_probe(struct platform_device *dev)
 
 	i2c->slave_addr = I2C_PXA_SLAVE_ADDR;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	i2c->highmode_enter = false;
+>>>>>>> v3.18
 =======
 	i2c->highmode_enter = false;
 >>>>>>> v3.18
@@ -1256,8 +1318,11 @@ static int i2c_pxa_probe(struct platform_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(i2c->clk);
 =======
+=======
+>>>>>>> v3.18
 	if (i2c->high_mode) {
 		if (i2c->rate) {
 			clk_set_rate(i2c->clk, i2c->rate);
@@ -1269,6 +1334,9 @@ static int i2c_pxa_probe(struct platform_device *dev)
 	}
 
 	clk_prepare_enable(i2c->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (i2c->use_pio) {
@@ -1295,7 +1363,10 @@ static int i2c_pxa_probe(struct platform_device *dev)
 		goto eadapt;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_i2c_register_devices(&i2c->adap);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1315,7 +1386,11 @@ eadapt:
 		free_irq(irq, i2c);
 ereqirq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(i2c->clk);
+=======
+	clk_disable_unprepare(i2c->clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(i2c->clk);
 >>>>>>> v3.18
@@ -1338,7 +1413,11 @@ static int i2c_pxa_remove(struct platform_device *dev)
 		free_irq(i2c->irq, i2c);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(i2c->clk);
+=======
+	clk_disable_unprepare(i2c->clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(i2c->clk);
 >>>>>>> v3.18

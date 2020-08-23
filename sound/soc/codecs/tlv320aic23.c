@@ -24,7 +24,11 @@
 #include <linux/delay.h>
 #include <linux/pm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c.h>
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -42,6 +46,7 @@
  * AIC23 register cache
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const u16 tlv320aic23_reg[] = {
 	0x0097, 0x0097, 0x00F9, 0x00F9,	/* 0 */
 	0x001A, 0x0004, 0x0007, 0x0001,	/* 4 */
@@ -55,6 +60,8 @@ static const char *deemph_text[] = {"None", "32Khz", "44.1Khz", "48Khz"};
 static const struct soc_enum rec_src_enum =
 	SOC_ENUM_SINGLE(TLV320AIC23_ANLG, 2, 2, rec_src_text);
 =======
+=======
+>>>>>>> v3.18
 static const struct reg_default tlv320aic23_reg[] = {
 	{  0, 0x0097 },
 	{  1, 0x0097 },
@@ -84,21 +91,30 @@ static const char *deemph_text[] = {"None", "32Khz", "44.1Khz", "48Khz"};
 
 static SOC_ENUM_SINGLE_DECL(rec_src_enum,
 			    TLV320AIC23_ANLG, 2, rec_src_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new tlv320aic23_rec_src_mux_controls =
 SOC_DAPM_ENUM("Input Select", rec_src_enum);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum tlv320aic23_rec_src =
 	SOC_ENUM_SINGLE(TLV320AIC23_ANLG, 2, 2, rec_src_text);
 static const struct soc_enum tlv320aic23_deemph =
 	SOC_ENUM_SINGLE(TLV320AIC23_DIGT, 1, 4, deemph_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(tlv320aic23_rec_src,
 			    TLV320AIC23_ANLG, 2, rec_src_text);
 static SOC_ENUM_SINGLE_DECL(tlv320aic23_deemph,
 			    TLV320AIC23_DIGT, 1, deemph_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const DECLARE_TLV_DB_SCALE(out_gain_tlv, -12100, 100, 0);
@@ -109,7 +125,11 @@ static int snd_soc_tlv320aic23_put_volsw(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -136,7 +156,11 @@ static int snd_soc_tlv320aic23_get_volsw(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -223,7 +247,11 @@ static const struct snd_soc_dapm_route tlv320aic23_intercon[] = {
 /* AIC23 driver data */
 struct aic23 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum snd_soc_control_type control_type;
+=======
+	struct regmap *regmap;
+>>>>>>> v3.18
 =======
 	struct regmap *regmap;
 >>>>>>> v3.18
@@ -403,6 +431,7 @@ static int tlv320aic23_hw_params(struct snd_pcm_substream *substream,
 	iface_reg = snd_soc_read(codec, TLV320AIC23_DIGT_FMT) & ~(0x03 << 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -414,6 +443,8 @@ static int tlv320aic23_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -424,6 +455,9 @@ static int tlv320aic23_hw_params(struct snd_pcm_substream *substream,
 		iface_reg |= (0x02 << 2);
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		iface_reg |= (0x03 << 2);
 		break;
@@ -452,7 +486,11 @@ static void tlv320aic23_shutdown(struct snd_pcm_substream *substream,
 
 	/* deactivate */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!codec->active) {
+=======
+	if (!snd_soc_codec_is_active(codec)) {
+>>>>>>> v3.18
 =======
 	if (!snd_soc_codec_is_active(codec)) {
 >>>>>>> v3.18
@@ -605,7 +643,13 @@ static int tlv320aic23_suspend(struct snd_soc_codec *codec)
 static int tlv320aic23_resume(struct snd_soc_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_cache_sync(codec);
+=======
+	struct aic23 *aic23 = snd_soc_codec_get_drvdata(codec);
+	regcache_mark_dirty(aic23->regmap);
+	regcache_sync(aic23->regmap);
+>>>>>>> v3.18
 =======
 	struct aic23 *aic23 = snd_soc_codec_get_drvdata(codec);
 	regcache_mark_dirty(aic23->regmap);
@@ -616,6 +660,7 @@ static int tlv320aic23_resume(struct snd_soc_codec *codec)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int tlv320aic23_probe(struct snd_soc_codec *codec)
 {
@@ -642,11 +687,16 @@ static int tlv320aic23_probe(struct snd_soc_codec *codec)
 	snd_soc_cache_write(codec, 0x0E, 0);
 
 =======
+=======
+>>>>>>> v3.18
 static int tlv320aic23_codec_probe(struct snd_soc_codec *codec)
 {
 	/* Reset codec */
 	snd_soc_write(codec, TLV320AIC23_RESET, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* power on device */
 	tlv320aic23_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
@@ -673,9 +723,12 @@ static int tlv320aic23_codec_probe(struct snd_soc_codec *codec)
 	snd_soc_write(codec, TLV320AIC23_ACTIVE, 0x1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_add_codec_controls(codec, tlv320aic23_snd_controls,
 				ARRAY_SIZE(tlv320aic23_snd_controls));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -689,10 +742,14 @@ static int tlv320aic23_remove(struct snd_soc_codec *codec)
 
 static struct snd_soc_codec_driver soc_codec_dev_tlv320aic23 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.reg_cache_size = ARRAY_SIZE(tlv320aic23_reg),
 	.reg_word_size = sizeof(u16),
 	.reg_cache_default = tlv320aic23_reg,
 	.probe = tlv320aic23_probe,
+=======
+	.probe = tlv320aic23_codec_probe,
+>>>>>>> v3.18
 =======
 	.probe = tlv320aic23_codec_probe,
 >>>>>>> v3.18
@@ -701,6 +758,11 @@ static struct snd_soc_codec_driver soc_codec_dev_tlv320aic23 = {
 	.resume = tlv320aic23_resume,
 	.set_bias_level = tlv320aic23_set_bias_level,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.controls = tlv320aic23_snd_controls,
+	.num_controls = ARRAY_SIZE(tlv320aic23_snd_controls),
+>>>>>>> v3.18
 =======
 	.controls = tlv320aic23_snd_controls,
 	.num_controls = ARRAY_SIZE(tlv320aic23_snd_controls),
@@ -711,6 +773,7 @@ static struct snd_soc_codec_driver soc_codec_dev_tlv320aic23 = {
 	.num_dapm_routes = ARRAY_SIZE(tlv320aic23_intercon),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
 /*
@@ -783,6 +846,8 @@ static void __exit tlv320aic23_exit(void)
 }
 module_exit(tlv320aic23_exit);
 =======
+=======
+>>>>>>> v3.18
 int tlv320aic23_probe(struct device *dev, struct regmap *regmap)
 {
 	struct aic23 *aic23;
@@ -802,6 +867,9 @@ int tlv320aic23_probe(struct device *dev, struct regmap *regmap)
 				      &tlv320aic23_dai, 1);
 }
 EXPORT_SYMBOL(tlv320aic23_probe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_DESCRIPTION("ASoC TLV320AIC23 codec driver");

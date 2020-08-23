@@ -36,10 +36,13 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fat_default_codepage = CONFIG_FAT_DEFAULT_CODEPAGE;
 static char fat_default_iocharset[] = CONFIG_FAT_DEFAULT_IOCHARSET;
 
 =======
+=======
+>>>>>>> v3.18
 #define KB_IN_SECTORS 2
 
 /*
@@ -105,6 +108,9 @@ static struct fat_floppy_defaults {
 	.fat_length = 2,
 },
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int fat_add_cluster(struct inode *inode)
@@ -216,7 +222,11 @@ static void fat_write_failed(struct address_space *mapping, loff_t to)
 
 	if (to > inode->i_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_pagecache(inode, to, inode->i_size);
+=======
+		truncate_pagecache(inode, inode->i_size);
+>>>>>>> v3.18
 =======
 		truncate_pagecache(inode, inode->i_size);
 >>>>>>> v3.18
@@ -258,8 +268,13 @@ static int fat_write_end(struct file *file, struct address_space *mapping,
 
 static ssize_t fat_direct_IO(int rw, struct kiocb *iocb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     const struct iovec *iov,
 			     loff_t offset, unsigned long nr_segs)
+=======
+			     struct iov_iter *iter,
+			     loff_t offset)
+>>>>>>> v3.18
 =======
 			     struct iov_iter *iter,
 			     loff_t offset)
@@ -269,6 +284,10 @@ static ssize_t fat_direct_IO(int rw, struct kiocb *iocb,
 	struct address_space *mapping = file->f_mapping;
 	struct inode *inode = mapping->host;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	size_t count = iov_iter_count(iter);
+>>>>>>> v3.18
 =======
 	size_t count = iov_iter_count(iter);
 >>>>>>> v3.18
@@ -285,7 +304,11 @@ static ssize_t fat_direct_IO(int rw, struct kiocb *iocb,
 		 * Return 0, and fallback to normal buffered write.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		loff_t size = offset + iov_length(iov, nr_segs);
+=======
+		loff_t size = offset + count;
+>>>>>>> v3.18
 =======
 		loff_t size = offset + count;
 >>>>>>> v3.18
@@ -298,10 +321,16 @@ static ssize_t fat_direct_IO(int rw, struct kiocb *iocb,
 	 * condition of fat_get_block() and ->truncate().
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = blockdev_direct_IO(rw, iocb, inode, iov, offset, nr_segs,
 				 fat_get_block);
 	if (ret < 0 && (rw & WRITE))
 		fat_write_failed(mapping, offset + iov_length(iov, nr_segs));
+=======
+	ret = blockdev_direct_IO(rw, iocb, inode, iter, offset, fat_get_block);
+	if (ret < 0 && (rw & WRITE))
+		fat_write_failed(mapping, offset + count);
+>>>>>>> v3.18
 =======
 	ret = blockdev_direct_IO(rw, iocb, inode, iter, offset, fat_get_block);
 	if (ret < 0 && (rw & WRITE))
@@ -451,7 +480,11 @@ struct inode *fat_iget(struct super_block *sb, loff_t i_pos)
 static int is_exec(unsigned char *extension)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char *exe_extensions = "EXECOMBAT", *walk;
+=======
+	unsigned char exe_extensions[] = "EXECOMBAT", *walk;
+>>>>>>> v3.18
 =======
 	unsigned char exe_extensions[] = "EXECOMBAT", *walk;
 >>>>>>> v3.18
@@ -586,7 +619,11 @@ EXPORT_SYMBOL_GPL(fat_build_inode);
 static void fat_evict_inode(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -648,7 +685,10 @@ static void fat_set_state(struct super_block *sb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void delayed_free(struct rcu_head *p)
 {
 	struct msdos_sb_info *sbi = container_of(p, struct msdos_sb_info, rcu);
@@ -659,6 +699,9 @@ static void delayed_free(struct rcu_head *p)
 	kfree(sbi);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void fat_put_super(struct super_block *sb)
 {
@@ -670,6 +713,7 @@ static void fat_put_super(struct super_block *sb)
 	iput(sbi->fat_inode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unload_nls(sbi->nls_disk);
 	unload_nls(sbi->nls_io);
 
@@ -678,6 +722,9 @@ static void fat_put_super(struct super_block *sb)
 
 	sb->s_fs_info = NULL;
 	kfree(sbi);
+=======
+	call_rcu(&sbi->rcu, delayed_free);
+>>>>>>> v3.18
 =======
 	call_rcu(&sbi->rcu, delayed_free);
 >>>>>>> v3.18
@@ -749,6 +796,11 @@ static int fat_remount(struct super_block *sb, int *flags, char *data)
 	*flags |= MS_NODIRATIME | (sbi->options.isvfat ? 0 : MS_NOATIME);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 
@@ -970,6 +1022,11 @@ static int fat_show_options(struct seq_file *m, struct dentry *root)
 	if (opts->discard)
 		seq_puts(m, ",discard");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (opts->dos1xfloppy)
+		seq_puts(m, ",dos1xfloppy");
+>>>>>>> v3.18
 =======
 	if (opts->dos1xfloppy)
 		seq_puts(m, ",dos1xfloppy");
@@ -989,7 +1046,11 @@ enum {
 	Opt_obsolete, Opt_flush, Opt_tz_utc, Opt_rodir, Opt_err_cont,
 	Opt_err_panic, Opt_err_ro, Opt_discard, Opt_nfs, Opt_time_offset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Opt_nfs_stale_rw, Opt_nfs_nostale_ro, Opt_err,
+=======
+	Opt_nfs_stale_rw, Opt_nfs_nostale_ro, Opt_err, Opt_dos1xfloppy,
+>>>>>>> v3.18
 =======
 	Opt_nfs_stale_rw, Opt_nfs_nostale_ro, Opt_err, Opt_dos1xfloppy,
 >>>>>>> v3.18
@@ -1026,6 +1087,10 @@ static const match_table_t fat_tokens = {
 	{Opt_nfs_stale_rw, "nfs=stale_rw"},
 	{Opt_nfs_nostale_ro, "nfs=nostale_ro"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{Opt_dos1xfloppy, "dos1xfloppy"},
+>>>>>>> v3.18
 =======
 	{Opt_dos1xfloppy, "dos1xfloppy"},
 >>>>>>> v3.18
@@ -1232,6 +1297,12 @@ static int parse_options(struct super_block *sb, char *options, int is_vfat,
 			opts->nfs = FAT_NFS_NOSTALE_RO;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case Opt_dos1xfloppy:
+			opts->dos1xfloppy = 1;
+			break;
+>>>>>>> v3.18
 =======
 		case Opt_dos1xfloppy:
 			opts->dos1xfloppy = 1;
@@ -1334,6 +1405,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void fat_dummy_inode_init(struct inode *inode)
 {
 	/* Initialize this dummy inode to work as no-op. */
@@ -1344,6 +1416,8 @@ static void fat_dummy_inode_init(struct inode *inode)
 	MSDOS_I(inode)->i_pos = 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int fat_read_root(struct inode *inode)
@@ -1396,7 +1470,10 @@ static unsigned long calc_fat_clusters(struct super_block *sb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool fat_bpb_is_zero(struct fat_boot_sector *b)
 {
 	if (get_unaligned_le16(&b->sector_size))
@@ -1560,6 +1637,9 @@ out:
 	return error;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Read the super block of an MS-DOS FS.
@@ -1571,8 +1651,12 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 	struct inode *fsinfo_inode = NULL;
 	struct buffer_head *bh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fat_boot_sector *b;
 	struct fat_boot_bsx *bsx;
+=======
+	struct fat_bios_param_block bpb;
+>>>>>>> v3.18
 =======
 	struct fat_bios_param_block bpb;
 >>>>>>> v3.18
@@ -1581,7 +1665,10 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 	u32 total_sectors, total_clusters, fat_clusters, rootdir_sectors;
 	int debug;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int media;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	long error;
@@ -1620,6 +1707,7 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 		goto out_fail;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	b = (struct fat_boot_sector *) bh->b_data;
 	if (!b->reserved) {
@@ -1676,6 +1764,8 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 	if (logical_sector_size > sb->s_blocksize) {
 		brelse(bh);
 =======
+=======
+>>>>>>> v3.18
 	error = fat_read_bpb(sb, (struct fat_boot_sector *)bh->b_data, silent,
 		&bpb);
 	if (error == -EINVAL && sbi->options.dos1xfloppy)
@@ -1700,6 +1790,9 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 
 	if (logical_sector_size > sb->s_blocksize) {
 		struct buffer_head *bh_resize;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!sb_set_blocksize(sb, logical_sector_size)) {
@@ -1708,13 +1801,19 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 			goto out_fail;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bh = sb_bread(sb, 0);
 		if (bh == NULL) {
 =======
+=======
+>>>>>>> v3.18
 
 		/* Verify that the larger boot sector is fully readable */
 		bh_resize = sb_bread(sb, 0);
 		if (bh_resize == NULL) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			fat_msg(sb, KERN_ERR, "unable to read boot sector"
 			       " (logical sector size = %lu)",
@@ -1722,7 +1821,11 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 			goto out_fail;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		b = (struct fat_boot_sector *) bh->b_data;
+=======
+		brelse(bh_resize);
+>>>>>>> v3.18
 =======
 		brelse(bh_resize);
 >>>>>>> v3.18
@@ -1732,15 +1835,21 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 	sbi->cluster_size = sb->s_blocksize * sbi->sec_per_clus;
 	sbi->cluster_bits = ffs(sbi->cluster_size) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sbi->fats = b->fats;
 	sbi->fat_bits = 0;		/* Don't know yet */
 	sbi->fat_start = le16_to_cpu(b->reserved);
 	sbi->fat_length = le16_to_cpu(b->fat_length);
 =======
+=======
+>>>>>>> v3.18
 	sbi->fats = bpb.fat_fats;
 	sbi->fat_bits = 0;		/* Don't know yet */
 	sbi->fat_start = bpb.fat_reserved;
 	sbi->fat_length = bpb.fat_fat_length;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sbi->root_cluster = 0;
 	sbi->free_clusters = -1;	/* Don't know yet */
@@ -1749,7 +1858,11 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 	sb->s_maxbytes = 0xffffffff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!sbi->fat_length && b->fat32.length) {
+=======
+	if (!sbi->fat_length && bpb.fat32_length) {
+>>>>>>> v3.18
 =======
 	if (!sbi->fat_length && bpb.fat32_length) {
 >>>>>>> v3.18
@@ -1759,17 +1872,23 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 		/* Must be FAT32 */
 		sbi->fat_bits = 32;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sbi->fat_length = le32_to_cpu(b->fat32.length);
 		sbi->root_cluster = le32_to_cpu(b->fat32.root_cluster);
 
 		/* MC - if info_sector is 0, don't multiply by 0 */
 		sbi->fsinfo_sector = le16_to_cpu(b->fat32.info_sector);
 =======
+=======
+>>>>>>> v3.18
 		sbi->fat_length = bpb.fat32_length;
 		sbi->root_cluster = bpb.fat32_root_cluster;
 
 		/* MC - if info_sector is 0, don't multiply by 0 */
 		sbi->fsinfo_sector = bpb.fat32_info_sector;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (sbi->fsinfo_sector == 0)
 			sbi->fsinfo_sector = 1;
@@ -1779,12 +1898,18 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 			fat_msg(sb, KERN_ERR, "bread failed, FSINFO block"
 			       " (sector = %lu)", sbi->fsinfo_sector);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			brelse(bh);
 			goto out_fail;
 		}
 
 		bsx = (struct fat_boot_bsx *)(bh->b_data + FAT32_BSX_OFFSET);
 
+=======
+			goto out_fail;
+		}
+
+>>>>>>> v3.18
 =======
 			goto out_fail;
 		}
@@ -1806,6 +1931,7 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 
 		brelse(fsinfo_bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		bsx = (struct fat_boot_bsx *)(bh->b_data + FAT16_BSX_OFFSET);
 	}
@@ -1814,6 +1940,8 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 	sbi->vol_id = (((u32)bsx->vol_id[0]) | ((u32)bsx->vol_id[1] << 8) |
 		((u32)bsx->vol_id[2] << 16) | ((u32)bsx->vol_id[3] << 24));
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	/* interpret volume ID as a little endian 32 bit integer */
@@ -1821,6 +1949,9 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 		sbi->vol_id = bpb.fat32_vol_id;
 	else /* fat 16 or 12 */
 		sbi->vol_id = bpb.fat16_vol_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sbi->dir_per_block = sb->s_blocksize / sizeof(struct msdos_dir_entry);
@@ -1828,7 +1959,11 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 
 	sbi->dir_start = sbi->fat_start + sbi->fats * sbi->fat_length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sbi->dir_entries = get_unaligned_le16(&b->dir_entries);
+=======
+	sbi->dir_entries = bpb.fat_dir_entries;
+>>>>>>> v3.18
 =======
 	sbi->dir_entries = bpb.fat_dir_entries;
 >>>>>>> v3.18
@@ -1837,7 +1972,10 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 			fat_msg(sb, KERN_ERR, "bogus directory-entries per block"
 			       " (%u)", sbi->dir_entries);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brelse(bh);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto out_invalid;
@@ -1847,9 +1985,15 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 		* sizeof(struct msdos_dir_entry) / sb->s_blocksize;
 	sbi->data_start = sbi->dir_start + rootdir_sectors;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	total_sectors = get_unaligned_le16(&b->sectors);
 	if (total_sectors == 0)
 		total_sectors = le32_to_cpu(b->total_sect);
+=======
+	total_sectors = bpb.fat_sectors;
+	if (total_sectors == 0)
+		total_sectors = bpb.fat_total_sect;
+>>>>>>> v3.18
 =======
 	total_sectors = bpb.fat_sectors;
 	if (total_sectors == 0)
@@ -1864,9 +2008,15 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 	/* some OSes set FAT_STATE_DIRTY and clean it on unmount. */
 	if (sbi->fat_bits == 32)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sbi->dirty = b->fat32.state & FAT_STATE_DIRTY;
 	else /* fat 16 or 12 */
 		sbi->dirty = b->fat16.state & FAT_STATE_DIRTY;
+=======
+		sbi->dirty = bpb.fat32_state & FAT_STATE_DIRTY;
+	else /* fat 16 or 12 */
+		sbi->dirty = bpb.fat16_state & FAT_STATE_DIRTY;
+>>>>>>> v3.18
 =======
 		sbi->dirty = bpb.fat32_state & FAT_STATE_DIRTY;
 	else /* fat 16 or 12 */
@@ -1881,7 +2031,10 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 			fat_msg(sb, KERN_ERR, "count of clusters too big (%u)",
 			       total_clusters);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brelse(bh);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto out_invalid;
@@ -1897,8 +2050,11 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 		sbi->prev_free = FAT_START_ENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	brelse(bh);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* set up enough so that it can read an inode */
@@ -1937,7 +2093,11 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 	if (!fat_inode)
 		goto out_fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fat_dummy_inode_init(fat_inode);
+=======
+	MSDOS_I(fat_inode)->i_pos = 0;
+>>>>>>> v3.18
 =======
 	MSDOS_I(fat_inode)->i_pos = 0;
 >>>>>>> v3.18
@@ -1947,7 +2107,10 @@ int fat_fill_super(struct super_block *sb, void *data, int silent, int isvfat,
 	if (!fsinfo_inode)
 		goto out_fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fat_dummy_inode_init(fsinfo_inode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fsinfo_inode->i_ino = MSDOS_FSINFO_INO;

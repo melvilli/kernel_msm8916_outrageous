@@ -7,9 +7,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/linkage.h>
 
 ARC_ENTRY strlen
+=======
+#include <linux/linkage.h>
+
+ENTRY(strlen)
+>>>>>>> v3.18
 =======
 #include <linux/linkage.h>
 
@@ -87,7 +93,11 @@ ENTRY(strlen)
 	b.d	.Lend
 	sub_s.ne r1,r1,r1
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_EXIT strlen
+=======
+END(strlen)
+>>>>>>> v3.18
 =======
 END(strlen)
 >>>>>>> v3.18

@@ -230,6 +230,7 @@ extern int hfs_part_find(struct super_block *, sector_t *, sector_t *);
 extern const struct dentry_operations hfs_dentry_operations;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int hfs_hash_dentry(const struct dentry *, const struct inode *,
 		struct qstr *);
 extern int hfs_strcmp(const unsigned char *, unsigned int,
@@ -238,10 +239,15 @@ extern int hfs_compare_dentry(const struct dentry *parent,
 		const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
 =======
+=======
+>>>>>>> v3.18
 extern int hfs_hash_dentry(const struct dentry *, struct qstr *);
 extern int hfs_strcmp(const unsigned char *, unsigned int,
 		      const unsigned char *, unsigned int);
 extern int hfs_compare_dentry(const struct dentry *parent, const struct dentry *dentry,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		unsigned int len, const char *str, const struct qstr *name);
 
@@ -253,8 +259,11 @@ extern int hfs_mac2asc(struct super_block *, char *, const struct hfs_name *);
 extern void hfs_mark_mdb_dirty(struct super_block *sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct timezone sys_tz;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

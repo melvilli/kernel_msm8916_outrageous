@@ -30,7 +30,10 @@
 #define BRCMF_ARP_OL_PEER_AUTO_REPLY	0x00000008
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	BRCMF_BSS_INFO_VERSION	109 /* curr ver of brcmf_bss_info_le struct */
 #define BRCMF_BSS_RSSI_ON_CHANNEL	0x0002
 
@@ -118,6 +121,9 @@ enum brcmf_join_pref_types {
 	BRCMF_JOIN_PREF_BAND,
 	BRCMF_JOIN_PREF_RSSI_DELTA,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum brcmf_fil_p2p_if_types {
@@ -160,7 +166,10 @@ struct brcmf_fil_bss_enable_le {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct brcmf_fil_bwcap_le {
 	__le32 band;
 	__le32 bw_cap;
@@ -489,5 +498,8 @@ struct brcmf_rx_mgmt_data {
 	__be32	rate;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* FWIL_TYPES_H_ */

@@ -16,11 +16,17 @@
 		rval; \
 	})
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define mtdcrx(rn, val) \
 	({	\
 		asm volatile("mtdcrx %0,%1" : : "r"(rn), "r" (val)); \
 	})
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* 440GP/440GX SDRAM controller DCRs */

@@ -46,7 +46,11 @@ udelay:
 	srwi	r4,r4,16
 	cmpwi	0,r4,1		/* 601 ? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bne	.udelay_not_601
+=======
+	bne	.Ludelay_not_601
+>>>>>>> v3.18
 =======
 	bne	.Ludelay_not_601
 >>>>>>> v3.18
@@ -59,7 +63,11 @@ udelay:
 	blr
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .udelay_not_601:
+=======
+.Ludelay_not_601:
+>>>>>>> v3.18
 =======
 .Ludelay_not_601:
 >>>>>>> v3.18
@@ -80,10 +88,13 @@ udelay:
 	addi	r4,r4,-1
 	divw	r4,r4,r5	/* BUS ticks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 1:	mftbu	r5
 	mftb	r6
 	mftbu	r7
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_8xx
 1:	mftbu	r5
 	mftb	r6
@@ -93,11 +104,15 @@ udelay:
 	mfspr	r6, SPRN_TBRL
 	mfspr	r7, SPRN_TBRU
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmpw	0,r5,r7
 	bne	1b		/* Get [synced] base time */
 	addc	r9,r6,r4	/* Compute end time */
 	addze	r8,r5
+<<<<<<< HEAD
 <<<<<<< HEAD
 2:	mftbu	r5
 	cmpw	0,r5,r8
@@ -105,6 +120,8 @@ udelay:
 	bgt	3f
 	mftb	r6
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_8xx
 2:	mftbu	r5
 #else
@@ -118,6 +135,9 @@ udelay:
 #else
 	mfspr	r6, SPRN_TBRL
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmpw	0,r6,r9
 	blt	2b

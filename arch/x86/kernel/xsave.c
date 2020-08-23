@@ -9,6 +9,10 @@
 #include <linux/bootmem.h>
 #include <linux/compat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/cpu.h>
+>>>>>>> v3.18
 =======
 #include <linux/cpu.h>
 >>>>>>> v3.18
@@ -29,7 +33,13 @@ struct xsave_struct *init_xstate_buf;
 
 static struct _fpx_sw_bytes fx_sw_reserved, fx_sw_reserved_ia32;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int *xstate_offsets, *xstate_sizes, xstate_features;
+=======
+static unsigned int *xstate_offsets, *xstate_sizes;
+static unsigned int xstate_comp_offsets[sizeof(pcntxt_mask)*8];
+static unsigned int xstate_features;
+>>>>>>> v3.18
 =======
 static unsigned int *xstate_offsets, *xstate_sizes;
 static unsigned int xstate_comp_offsets[sizeof(pcntxt_mask)*8];
@@ -254,7 +264,11 @@ int save_xstate_sig(void __user *buf, void __user *buf_fx, int size)
 		return -EACCES;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!HAVE_HWFP)
+=======
+	if (!static_cpu_has(X86_FEATURE_FPU))
+>>>>>>> v3.18
 =======
 	if (!static_cpu_has(X86_FEATURE_FPU))
 >>>>>>> v3.18
@@ -296,7 +310,11 @@ sanitize_restored_xstate(struct task_struct *tsk,
 	if (use_xsave()) {
 		/* These bits must be zero. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xsave_hdr->reserved1[0] = xsave_hdr->reserved1[1] = 0;
+=======
+		memset(xsave_hdr->reserved, 0, 48);
+>>>>>>> v3.18
 =======
 		memset(xsave_hdr->reserved, 0, 48);
 >>>>>>> v3.18
@@ -367,16 +385,22 @@ int __restore_xstate_sig(void __user *buf, void __user *buf_fx, int size)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!HAVE_HWFP) {
 		return fpregs_soft_set(current, NULL,
 				       0, sizeof(struct user_i387_ia32_struct),
 				       NULL, buf) != 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!static_cpu_has(X86_FEATURE_FPU))
 		return fpregs_soft_set(current, NULL,
 				       0, sizeof(struct user_i387_ia32_struct),
 				       NULL, buf) != 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (use_xsave()) {
@@ -402,7 +426,11 @@ int __restore_xstate_sig(void __user *buf, void __user *buf_fx, int size)
 		 * header. Sanitize the copied state etc.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct fpu *fpu = &tsk->thread.fpu;
+=======
+		struct xsave_struct *xsave = &tsk->thread.fpu.state->xsave;
+>>>>>>> v3.18
 =======
 		struct xsave_struct *xsave = &tsk->thread.fpu.state->xsave;
 >>>>>>> v3.18
@@ -420,6 +448,7 @@ int __restore_xstate_sig(void __user *buf, void __user *buf_fx, int size)
 		drop_fpu(tsk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (__copy_from_user(&fpu->state->xsave, buf_fx, state_size) ||
 		    __copy_from_user(&env, buf, sizeof(env))) {
 			fpu_finit(fpu);
@@ -430,6 +459,8 @@ int __restore_xstate_sig(void __user *buf, void __user *buf_fx, int size)
 
 		set_used_math();
 =======
+=======
+>>>>>>> v3.18
 		if (__copy_from_user(xsave, buf_fx, state_size) ||
 		    __copy_from_user(&env, buf, sizeof(env))) {
 			err = -1;
@@ -438,6 +469,9 @@ int __restore_xstate_sig(void __user *buf, void __user *buf_fx, int size)
 			set_used_math();
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (use_eager_fpu()) {
 			preempt_disable();
@@ -523,7 +557,10 @@ static void __init setup_xstate_features(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * This function sets up offsets and sizes of all extended states in
  * xsave area. This supports both standard format and compacted format
  * of the xsave aread.
@@ -570,6 +607,9 @@ void setup_xstate_comp(void)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * setup the xstate image representing the init state
  */
@@ -589,11 +629,14 @@ static void __init setup_init_fpu_buf(void)
 	setup_xstate_features();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Init all the features state with header_bv being 0x0
 	 */
 	xrstor_state(init_xstate_buf, -1);
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_has_xsaves) {
 		init_xstate_buf->xsave_hdr.xcomp_bv =
 						(u64)1 << 63 | pcntxt_mask;
@@ -604,13 +647,20 @@ static void __init setup_init_fpu_buf(void)
 	 * Init all the features state with header_bv being 0x0
 	 */
 	xrstor_state_booting(init_xstate_buf, -1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Dump the init state again. This is to identify the init state
 	 * of any feature which is not represented by all zero's.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xsave_state(init_xstate_buf, -1);
+=======
+	xsave_state_booting(init_xstate_buf, -1);
+>>>>>>> v3.18
 =======
 	xsave_state_booting(init_xstate_buf, -1);
 >>>>>>> v3.18
@@ -630,7 +680,10 @@ static int __init eager_fpu_setup(char *s)
 __setup("eagerfpu=", eager_fpu_setup);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Calculate total size of enabled xstates in XCR0/pcntxt_mask.
@@ -655,6 +708,9 @@ static void __init init_xstate_size(void)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Enable and initialize the xsave feature.
@@ -688,8 +744,12 @@ static void __init xstate_enable_boot_cpu(void)
 	 * Recompute the context size for enabled features
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuid_count(XSTATE_CPUID, 0, &eax, &ebx, &ecx, &edx);
 	xstate_size = ebx;
+=======
+	init_xstate_size();
+>>>>>>> v3.18
 =======
 	init_xstate_size();
 >>>>>>> v3.18
@@ -703,9 +763,12 @@ static void __init xstate_enable_boot_cpu(void)
 		eagerfpu = ENABLE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("enabled xstate_bv 0x%llx, cntxt size 0x%x\n",
 		pcntxt_mask, xstate_size);
 =======
+=======
+>>>>>>> v3.18
 	if (pcntxt_mask & XSTATE_EAGER) {
 		if (eagerfpu == DISABLE) {
 			pr_err("eagerfpu not present, disabling some xstate features: 0x%llx\n",
@@ -719,6 +782,9 @@ static void __init xstate_enable_boot_cpu(void)
 	pr_info("enabled xstate_bv 0x%llx, cntxt size 0x%x using %s\n",
 		pcntxt_mask, xstate_size,
 		cpu_has_xsaves ? "compacted form" : "standard form");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -730,7 +796,11 @@ static void __init xstate_enable_boot_cpu(void)
  * overrides for the section checks.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit xsave_init(void)
+=======
+void xsave_init(void)
+>>>>>>> v3.18
 =======
 void xsave_init(void)
 >>>>>>> v3.18
@@ -755,7 +825,11 @@ static inline void __init eager_fpu_init_bp(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit eager_fpu_init(void)
+=======
+void eager_fpu_init(void)
+>>>>>>> v3.18
 =======
 void eager_fpu_init(void)
 >>>>>>> v3.18
@@ -790,7 +864,10 @@ void eager_fpu_init(void)
 		fxrstor_checking(&init_xstate_buf->i387);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Given the xsave area and a state inside, this function returns the
@@ -814,4 +891,7 @@ void *get_xsave_addr(struct xsave_struct *xsave, int xstate)
 
 	return (void *)xsave + xstate_comp_offsets[feature];
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

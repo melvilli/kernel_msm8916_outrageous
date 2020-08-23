@@ -205,7 +205,10 @@ static int ad5380_read_raw(struct iio_dev *indio_dev,
 {
 	struct ad5380_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long scale_uv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -229,10 +232,16 @@ static int ad5380_read_raw(struct iio_dev *indio_dev,
 		return IIO_VAL_INT;
 	case IIO_CHAN_INFO_SCALE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scale_uv = ((2 * st->vref) >> chan->scan_type.realbits) * 100;
 		*val =  scale_uv / 100000;
 		*val2 = (scale_uv % 100000) * 10;
 		return IIO_VAL_INT_PLUS_MICRO;
+=======
+		*val = 2 * st->vref;
+		*val2 = chan->scan_type.realbits;
+		return IIO_VAL_FRACTIONAL_LOG2;
+>>>>>>> v3.18
 =======
 		*val = 2 * st->vref;
 		*val2 = chan->scan_type.realbits;
@@ -257,13 +266,19 @@ static struct iio_chan_spec_ext_info ad5380_ext_info[] = {
 		.read = ad5380_read_dac_powerdown,
 		.write = ad5380_write_dac_powerdown,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	IIO_ENUM("powerdown_mode", true, &ad5380_powerdown_mode_enum),
 =======
+=======
+>>>>>>> v3.18
 		.shared = IIO_SEPARATE,
 	},
 	IIO_ENUM("powerdown_mode", IIO_SHARED_BY_TYPE,
 		 &ad5380_powerdown_mode_enum),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	IIO_ENUM_AVAILABLE("powerdown_mode", &ad5380_powerdown_mode_enum),
 	{ },
@@ -278,14 +293,20 @@ static struct iio_chan_spec_ext_info ad5380_ext_info[] = {
 		BIT(IIO_CHAN_INFO_CALIBBIAS),			\
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE),	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_type = IIO_ST('u', (_bits), 16, 14 - (_bits)),	\
 =======
+=======
+>>>>>>> v3.18
 	.scan_type = {						\
 		.sign = 'u',					\
 		.realbits = (_bits),				\
 		.storagebits =  16,				\
 		.shift = 14 - (_bits),				\
 	},							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ext_info = ad5380_ext_info,				\
 }
@@ -295,7 +316,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(14),
 		.num_channels = 40,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 1250000,
+=======
+		.int_vref = 1250,
+>>>>>>> v3.18
 =======
 		.int_vref = 1250,
 >>>>>>> v3.18
@@ -304,7 +329,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(14),
 		.num_channels = 40,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 2500000,
+=======
+		.int_vref = 2500,
+>>>>>>> v3.18
 =======
 		.int_vref = 2500,
 >>>>>>> v3.18
@@ -313,7 +342,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(12),
 		.num_channels = 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 1250000,
+=======
+		.int_vref = 1250,
+>>>>>>> v3.18
 =======
 		.int_vref = 1250,
 >>>>>>> v3.18
@@ -322,7 +355,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(12),
 		.num_channels = 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 2500000,
+=======
+		.int_vref = 2500,
+>>>>>>> v3.18
 =======
 		.int_vref = 2500,
 >>>>>>> v3.18
@@ -331,7 +368,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(14),
 		.num_channels = 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 1250000,
+=======
+		.int_vref = 1250,
+>>>>>>> v3.18
 =======
 		.int_vref = 1250,
 >>>>>>> v3.18
@@ -340,7 +381,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(14),
 		.num_channels = 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 2500000,
+=======
+		.int_vref = 2500,
+>>>>>>> v3.18
 =======
 		.int_vref = 2500,
 >>>>>>> v3.18
@@ -349,7 +394,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(12),
 		.num_channels = 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 1250000,
+=======
+		.int_vref = 1250,
+>>>>>>> v3.18
 =======
 		.int_vref = 1250,
 >>>>>>> v3.18
@@ -358,7 +407,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(12),
 		.num_channels = 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 2500000,
+=======
+		.int_vref = 2500,
+>>>>>>> v3.18
 =======
 		.int_vref = 2500,
 >>>>>>> v3.18
@@ -367,7 +420,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(14),
 		.num_channels = 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 1250000,
+=======
+		.int_vref = 1250,
+>>>>>>> v3.18
 =======
 		.int_vref = 1250,
 >>>>>>> v3.18
@@ -376,7 +433,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(14),
 		.num_channels = 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 2500000,
+=======
+		.int_vref = 2500,
+>>>>>>> v3.18
 =======
 		.int_vref = 2500,
 >>>>>>> v3.18
@@ -385,7 +446,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(12),
 		.num_channels = 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 1250000,
+=======
+		.int_vref = 1250,
+>>>>>>> v3.18
 =======
 		.int_vref = 1250,
 >>>>>>> v3.18
@@ -394,7 +459,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(12),
 		.num_channels = 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 2500000,
+=======
+		.int_vref = 2500,
+>>>>>>> v3.18
 =======
 		.int_vref = 2500,
 >>>>>>> v3.18
@@ -403,7 +472,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(14),
 		.num_channels = 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 1250000,
+=======
+		.int_vref = 1250,
+>>>>>>> v3.18
 =======
 		.int_vref = 1250,
 >>>>>>> v3.18
@@ -412,7 +485,11 @@ static const struct ad5380_chip_info ad5380_chip_info_tbl[] = {
 		.channel_template = AD5380_CHANNEL(14),
 		.num_channels = 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.int_vref = 2500000,
+=======
+		.int_vref = 2500,
+>>>>>>> v3.18
 =======
 		.int_vref = 2500,
 >>>>>>> v3.18
@@ -451,16 +528,22 @@ static int ad5380_probe(struct device *dev, struct regmap *regmap,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		dev_err(dev, "Failed to allocate iio device\n");
 		ret = -ENOMEM;
 		goto error_out;
 =======
+=======
+>>>>>>> v3.18
 	indio_dev = devm_iio_device_alloc(dev, sizeof(*st));
 	if (indio_dev == NULL) {
 		dev_err(dev, "Failed to allocate iio device\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -480,6 +563,7 @@ static int ad5380_probe(struct device *dev, struct regmap *regmap,
 	if (ret) {
 		dev_err(dev, "Failed to allocate channel spec: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free;
 	}
 
@@ -488,6 +572,8 @@ static int ad5380_probe(struct device *dev, struct regmap *regmap,
 
 	st->vref_reg = regulator_get(dev, "vref");
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -495,6 +581,9 @@ static int ad5380_probe(struct device *dev, struct regmap *regmap,
 		ctrl |= AD5380_CTRL_INT_VREF_2V5;
 
 	st->vref_reg = devm_regulator_get(dev, "vref");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!IS_ERR(st->vref_reg)) {
 		ret = regulator_enable(st->vref_reg);
@@ -509,7 +598,11 @@ static int ad5380_probe(struct device *dev, struct regmap *regmap,
 			goto error_disable_reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		st->vref = ret;
+=======
+		st->vref = ret / 1000;
+>>>>>>> v3.18
 =======
 		st->vref = ret / 1000;
 >>>>>>> v3.18
@@ -537,6 +630,7 @@ error_disable_reg:
 		regulator_disable(st->vref_reg);
 error_free_reg:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR(st->vref_reg))
 		regulator_put(st->vref_reg);
 
@@ -544,6 +638,9 @@ error_free_reg:
 error_free:
 	iio_device_free(indio_dev);
 error_out:
+=======
+	kfree(indio_dev->channels);
+>>>>>>> v3.18
 =======
 	kfree(indio_dev->channels);
 >>>>>>> v3.18
@@ -563,11 +660,16 @@ static int ad5380_remove(struct device *dev)
 	if (!IS_ERR(st->vref_reg)) {
 		regulator_disable(st->vref_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		regulator_put(st->vref_reg);
 	}
 
 	iio_device_free(indio_dev);
 
+=======
+	}
+
+>>>>>>> v3.18
 =======
 	}
 

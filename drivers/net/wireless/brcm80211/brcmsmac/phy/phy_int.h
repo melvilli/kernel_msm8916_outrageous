@@ -911,6 +911,7 @@ struct lcnphy_radio_regs {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u16 read_phy_reg(struct brcms_phy *pi, u16 addr);
 extern void write_phy_reg(struct brcms_phy *pi, u16 addr, u16 val);
 extern void and_phy_reg(struct brcms_phy *pi, u16 addr, u16 val);
@@ -1019,6 +1020,8 @@ extern void wlc_2064_vco_cal(struct brcms_phy *pi);
 
 extern void wlc_phy_txpower_recalc_target(struct brcms_phy *pi);
 =======
+=======
+>>>>>>> v3.18
 u16 read_phy_reg(struct brcms_phy *pi, u16 addr);
 void write_phy_reg(struct brcms_phy *pi, u16 addr, u16 val);
 void and_phy_reg(struct brcms_phy *pi, u16 addr, u16 val);
@@ -1116,6 +1119,9 @@ void wlc_lcnphy_epa_switch(struct brcms_phy *pi, bool mode);
 void wlc_2064_vco_cal(struct brcms_phy *pi);
 
 void wlc_phy_txpower_recalc_target(struct brcms_phy *pi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define LCNPHY_TBL_ID_PAPDCOMPDELTATBL	0x18
@@ -1130,6 +1136,7 @@ void wlc_phy_txpower_recalc_target(struct brcms_phy *pi);
 
 #define LCNPHY_TX_PWR_CTRL_TEMPBASED	0xE001
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void wlc_lcnphy_write_table(struct brcms_phy *pi,
 				   const struct phytbl_info *pti);
@@ -1152,6 +1159,8 @@ extern void wlc_lcnphy_tx_power_adjustment(struct brcms_phy_pub *ppi);
 
 extern s32 wlc_lcnphy_rx_signal_power(struct brcms_phy *pi, s32 gain_index);
 =======
+=======
+>>>>>>> v3.18
 void wlc_lcnphy_write_table(struct brcms_phy *pi,
 			    const struct phytbl_info *pti);
 void wlc_lcnphy_read_table(struct brcms_phy *pi, struct phytbl_info *pti);
@@ -1170,6 +1179,9 @@ void wlc_lcnphy_get_tssi(struct brcms_phy *pi, s8 *ofdm_pwr, s8 *cck_pwr);
 void wlc_lcnphy_tx_power_adjustment(struct brcms_phy_pub *ppi);
 
 s32 wlc_lcnphy_rx_signal_power(struct brcms_phy *pi, s32 gain_index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define NPHY_MAX_HPVGA1_INDEX		10
@@ -1182,9 +1194,14 @@ struct phy_iq_est {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void wlc_phy_stay_in_carriersearch_nphy(struct brcms_phy *pi,
 					       bool enable);
 extern void wlc_nphy_deaf_mode(struct brcms_phy *pi, bool mode);
+=======
+void wlc_phy_stay_in_carriersearch_nphy(struct brcms_phy *pi, bool enable);
+void wlc_nphy_deaf_mode(struct brcms_phy *pi, bool mode);
+>>>>>>> v3.18
 =======
 void wlc_phy_stay_in_carriersearch_nphy(struct brcms_phy *pi, bool enable);
 void wlc_nphy_deaf_mode(struct brcms_phy *pi, bool mode);
@@ -1203,15 +1220,21 @@ void wlc_nphy_deaf_mode(struct brcms_phy *pi, bool mode);
 	wlc_phy_table_data_write((pi), (w), (v))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void wlc_phy_table_read_nphy(struct brcms_phy *pi, u32, u32 l, u32 o,
 				    u32 w, void *d);
 extern void wlc_phy_table_write_nphy(struct brcms_phy *pi, u32, u32, u32,
 				     u32, const void *);
 =======
+=======
+>>>>>>> v3.18
 void wlc_phy_table_read_nphy(struct brcms_phy *pi, u32, u32 l, u32 o, u32 w,
 			     void *d);
 void wlc_phy_table_write_nphy(struct brcms_phy *pi, u32, u32, u32, u32,
 			      const void *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	PHY_IPA(pi) \
@@ -1222,6 +1245,7 @@ void wlc_phy_table_write_nphy(struct brcms_phy *pi, u32, u32, u32, u32,
 	if (NREV_LT((pi)->pubpi.phy_rev, 3)) \
 		(void)bcma_read32(pi->d11core, D11REGOFFS(maccontrol))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void wlc_phy_cal_perical_nphy_run(struct brcms_phy *pi, u8 caltype);
 extern void wlc_phy_aci_reset_nphy(struct brcms_phy *pi);
@@ -1281,6 +1305,8 @@ extern void wlc_phy_radio205x_vcocal_nphy(struct brcms_phy *pi);
 extern int wlc_phy_rssi_compute_nphy(struct brcms_phy *pi,
 				     struct d11rxhdr *rxh);
 =======
+=======
+>>>>>>> v3.18
 void wlc_phy_cal_perical_nphy_run(struct brcms_phy *pi, u8 caltype);
 void wlc_phy_aci_reset_nphy(struct brcms_phy *pi);
 void wlc_phy_pa_override_nphy(struct brcms_phy *pi, bool en);
@@ -1333,11 +1359,15 @@ void wlc_phy_est_tonepwr_nphy(struct brcms_phy *pi, s32 *qdBm_pwrbuf,
 void wlc_phy_radio205x_vcocal_nphy(struct brcms_phy *pi);
 
 int wlc_phy_rssi_compute_nphy(struct brcms_phy *pi, struct d11rxhdr *rxh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define NPHY_TESTPATTERN_BPHY_EVM   0
 #define NPHY_TESTPATTERN_BPHY_RFCS  1
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void wlc_phy_nphy_tkip_rifs_war(struct brcms_phy *pi, u8 rifs);
 
@@ -1348,6 +1378,8 @@ extern s8 wlc_phy_upd_rssi_offset(struct brcms_phy *pi, s8 rssi,
 
 extern bool wlc_phy_n_txpower_ipa_ison(struct brcms_phy *pih);
 =======
+=======
+>>>>>>> v3.18
 void wlc_phy_nphy_tkip_rifs_war(struct brcms_phy *pi, u8 rifs);
 
 void wlc_phy_get_pwrdet_offsets(struct brcms_phy *pi, s8 *cckoffset,
@@ -1355,5 +1387,8 @@ void wlc_phy_get_pwrdet_offsets(struct brcms_phy *pi, s8 *cckoffset,
 s8 wlc_phy_upd_rssi_offset(struct brcms_phy *pi, s8 rssi, u16 chanspec);
 
 bool wlc_phy_n_txpower_ipa_ison(struct brcms_phy *pih);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* _BRCM_PHY_INT_H_ */

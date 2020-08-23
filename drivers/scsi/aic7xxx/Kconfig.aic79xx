@@ -71,7 +71,11 @@ config AIC79XX_DEBUG_MASK
 	help
 	Bit mask of debug options that is only valid if the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CONFIG_AIC79XX_DEBUG_ENBLE option is enabled.  The bits in this mask
+=======
+	CONFIG_AIC79XX_DEBUG_ENABLE option is enabled.  The bits in this mask
+>>>>>>> v3.18
 =======
 	CONFIG_AIC79XX_DEBUG_ENABLE option is enabled.  The bits in this mask
 >>>>>>> v3.18

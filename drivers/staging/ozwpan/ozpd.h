@@ -7,6 +7,10 @@
 #define _OZPD_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/interrupt.h>
+>>>>>>> v3.18
 =======
 #include <linux/interrupt.h>
 >>>>>>> v3.18
@@ -26,12 +30,18 @@
 #define OZ_TIMER_STOP		3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  *External spinlock variable
  */
 extern spinlock_t g_polling_lock;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Data structure that hold information on a frame for transmisson. This is
  * built when the frame is first transmitted and is used to rebuild the frame
@@ -60,8 +70,13 @@ struct oz_farewell {
 	u8 ep_num;
 	u8 index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 report[1];
 	u8 len;
+=======
+	u8 len;
+	u8 report[0];
+>>>>>>> v3.18
 =======
 	u8 len;
 	u8 report[0];
@@ -86,6 +101,7 @@ struct oz_pd {
 	u32		last_rx_pkt_num;
 	u32		last_tx_pkt_num;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32		trigger_pkt_num;
 	unsigned long	pulse_time_j;
 	unsigned long	timeout_time_j;
@@ -99,6 +115,8 @@ struct oz_pd {
 	int		max_tx_size;
 	u8		heartbeat_requested;
 =======
+=======
+>>>>>>> v3.18
 	struct timespec last_rx_timestamp;
 	u32		trigger_pkt_num;
 	unsigned long	pulse_time;
@@ -109,6 +127,9 @@ struct oz_pd {
 	void		*app_ctx[OZ_NB_APPS];
 	spinlock_t	app_lock[OZ_NB_APPS];
 	int		max_tx_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8		mode;
 	u8		ms_per_isoc;
@@ -117,8 +138,11 @@ struct oz_pd {
 	int		nb_queued_frames;
 	int		nb_queued_isoc_frames;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *tx_pool;
 	int		tx_pool_count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spinlock_t	tx_frame_lock;
@@ -129,13 +153,19 @@ struct oz_pd {
 	struct list_head stream_list;
 	struct net_device *net_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct hrtimer  heartbeat;
 	struct hrtimer  timeout;
 	u8      timeout_type;
 	struct tasklet_struct   heartbeat_tasklet;
 	struct tasklet_struct   timeout_tasklet;
 	struct work_struct workitem;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -163,6 +193,12 @@ void oz_apps_init(void);
 void oz_apps_term(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct kmem_cache *oz_elt_info_cache;
+extern struct kmem_cache *oz_tx_frame_cache;
+
+>>>>>>> v3.18
 =======
 extern struct kmem_cache *oz_elt_info_cache;
 extern struct kmem_cache *oz_tx_frame_cache;

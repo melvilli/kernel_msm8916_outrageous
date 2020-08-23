@@ -9,6 +9,10 @@
 #include <asm/dwarf2.h>
 #include <asm/calling.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/asm.h>
+>>>>>>> v3.18
 =======
 #include <asm/asm.h>
 >>>>>>> v3.18
@@ -30,6 +34,10 @@
 	jmp  restore
 	CFI_ENDPROC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	_ASM_NOKPROBE(\name)
+>>>>>>> v3.18
 =======
 	_ASM_NOKPROBE(\name)
 >>>>>>> v3.18
@@ -45,7 +53,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PREEMPT
 	THUNK ___preempt_schedule, preempt_schedule
 #ifdef CONFIG_CONTEXT_TRACKING
@@ -53,6 +64,9 @@
 #endif
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* SAVE_ARGS below is used only for the .cfi directives it contains. */
 	CFI_STARTPROC
@@ -62,6 +76,10 @@ restore:
 	ret
 	CFI_ENDPROC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	_ASM_NOKPROBE(restore)
+>>>>>>> v3.18
 =======
 	_ASM_NOKPROBE(restore)
 >>>>>>> v3.18

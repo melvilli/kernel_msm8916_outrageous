@@ -38,6 +38,10 @@
 
 #include <mach/hardware.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18
@@ -47,7 +51,10 @@
 #include <mach/regs-clock.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/clock.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/cpu.h>
@@ -59,6 +66,7 @@
 
 #include "common.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* S3C2442 extended clock support */
 
@@ -171,6 +179,8 @@ static __init int s3c2442_clk_init(void)
 arch_initcall(s3c2442_clk_init);
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct device s3c2442_dev = {

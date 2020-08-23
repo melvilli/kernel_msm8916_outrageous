@@ -49,7 +49,10 @@
 #include <linux/types.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -195,8 +198,13 @@ static inline int mcs_setup_transceiver_vishay(struct mcs_cb *mcs)
 
 	ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error:
 		return ret;
+=======
+error:
+	return ret;
+>>>>>>> v3.18
 =======
 error:
 	return ret;
@@ -510,14 +518,20 @@ static inline int mcs_setup_urbs(struct mcs_cb *mcs)
 
 	mcs->rx_urb = usb_alloc_urb(0, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mcs->rx_urb)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!mcs->rx_urb) {
 		usb_free_urb(mcs->tx_urb);
 		mcs->tx_urb = NULL;
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1;
@@ -660,9 +674,15 @@ static int mcs_speed_change(struct mcs_cb *mcs)
 
 	mcs->speed = mcs->new_speed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error:
 		mcs->new_speed = 0;
 		return ret;
+=======
+error:
+	mcs->new_speed = 0;
+	return ret;
+>>>>>>> v3.18
 =======
 error:
 	mcs->new_speed = 0;
@@ -761,7 +781,11 @@ static int mcs_net_open(struct net_device *netdev)
 	ret = mcs_receive_start(mcs);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error3;
+=======
+		goto error4;
+>>>>>>> v3.18
 =======
 		goto error4;
 >>>>>>> v3.18
@@ -770,6 +794,7 @@ static int mcs_net_open(struct net_device *netdev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error3:
 		irlap_close(mcs->irlap);
 	error2:
@@ -777,6 +802,8 @@ static int mcs_net_open(struct net_device *netdev)
 	error1:
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 error4:
 	usb_free_urb(mcs->rx_urb);
 	usb_free_urb(mcs->tx_urb);
@@ -786,6 +813,9 @@ error2:
 	kfree_skb(mcs->rx_buff.skb);
 error1:
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -985,17 +1015,23 @@ static int mcs_probe(struct usb_interface *intf,
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error2:
 		free_netdev(ndev);
 
 	error1:
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 error2:
 	free_netdev(ndev);
 
 error1:
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

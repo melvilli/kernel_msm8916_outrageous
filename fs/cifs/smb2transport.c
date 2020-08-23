@@ -40,7 +40,10 @@
 #include "smb2glob.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 smb2_crypto_shash_allocate(struct TCP_Server_Info *server)
 {
@@ -134,6 +137,9 @@ smb2_find_smb_ses(struct smb2_hdr *smb2hdr, struct TCP_Server_Info *server)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 smb2_calc_signature(struct smb_rqst *rqst, struct TCP_Server_Info *server)
@@ -145,7 +151,10 @@ smb2_calc_signature(struct smb_rqst *rqst, struct TCP_Server_Info *server)
 	int n_vec = rqst->rq_nvec;
 	struct smb2_hdr *smb2_pdu = (struct smb2_hdr *)iov[0].iov_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct cifs_ses *ses;
 
 	ses = smb2_find_smb_ses(smb2_pdu, server);
@@ -153,15 +162,21 @@ smb2_calc_signature(struct smb_rqst *rqst, struct TCP_Server_Info *server)
 		cifs_dbg(VFS, "%s: Could not find session\n", __func__);
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(smb2_signature, 0x0, SMB2_HMACSHA256_SIZE);
 	memset(smb2_pdu->Signature, 0x0, SMB2_SIGNATURE_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = crypto_shash_setkey(server->secmech.hmacsha256,
 		server->session_key.response, SMB2_NTLMV2_SESSKEY_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	rc = smb2_crypto_shash_allocate(server);
 	if (rc) {
 		cifs_dbg(VFS, "%s: shah256 alloc failed\n", __func__);
@@ -170,6 +185,9 @@ smb2_calc_signature(struct smb_rqst *rqst, struct TCP_Server_Info *server)
 
 	rc = crypto_shash_setkey(server->secmech.hmacsha256,
 		ses->auth_key.response, SMB2_NTLMV2_SESSKEY_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc) {
 		cifs_dbg(VFS, "%s: Could not update with response\n", __func__);
@@ -179,7 +197,11 @@ smb2_calc_signature(struct smb_rqst *rqst, struct TCP_Server_Info *server)
 	rc = crypto_shash_init(&server->secmech.sdeschmacsha256->shash);
 	if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cifs_dbg(VFS, "%s: Could not init md5\n", __func__);
+=======
+		cifs_dbg(VFS, "%s: Could not init sha256", __func__);
+>>>>>>> v3.18
 =======
 		cifs_dbg(VFS, "%s: Could not init sha256", __func__);
 >>>>>>> v3.18
@@ -239,11 +261,14 @@ smb2_calc_signature(struct smb_rqst *rqst, struct TCP_Server_Info *server)
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 smb3_calc_signature(struct smb_rqst *rqst, struct TCP_Server_Info *server)
 {
 	cifs_dbg(FYI, "smb3 signatures not supported yet\n");
 	return -EOPNOTSUPP;
 =======
+=======
+>>>>>>> v3.18
 generate_smb3signingkey(struct cifs_ses *ses)
 {
 	unsigned char zero = 0x0;
@@ -412,6 +437,9 @@ smb3_calc_signature(struct smb_rqst *rqst, struct TCP_Server_Info *server)
 	memcpy(smb2_pdu->Signature, sigptr, SMB2_SIGNATURE_SIZE);
 
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -445,6 +473,10 @@ smb2_verify_signature(struct smb_rqst *rqst, struct TCP_Server_Info *server)
 
 	if ((smb2_pdu->Command == SMB2_NEGOTIATE) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	    (smb2_pdu->Command == SMB2_SESSION_SETUP) ||
+>>>>>>> v3.18
 =======
 	    (smb2_pdu->Command == SMB2_SESSION_SETUP) ||
 >>>>>>> v3.18
@@ -492,14 +524,20 @@ static inline void
 smb2_seq_num_into_buf(struct TCP_Server_Info *server, struct smb2_hdr *hdr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hdr->MessageId = get_next_mid(server);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int i, num = le16_to_cpu(hdr->CreditCharge);
 
 	hdr->MessageId = get_next_mid64(server);
 	/* skip message numbers according to CreditCharge field */
 	for (i = 1; i < num; i++)
 		get_next_mid(server);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -551,8 +589,12 @@ smb2_get_mid_entry(struct cifs_ses *ses, struct smb2_hdr *buf,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ses->status != CifsGood) {
 		/* check if SMB2 session is bad because we are setting it up */
+=======
+	if (ses->status == CifsNew) {
+>>>>>>> v3.18
 =======
 	if (ses->status == CifsNew) {
 >>>>>>> v3.18
@@ -562,7 +604,10 @@ smb2_get_mid_entry(struct cifs_ses *ses, struct smb2_hdr *buf,
 		/* else ok - we are setting up session */
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (ses->status == CifsExiting) {
 		if (buf->Command != SMB2_LOGOFF)
@@ -570,6 +615,9 @@ smb2_get_mid_entry(struct cifs_ses *ses, struct smb2_hdr *buf,
 		/* else ok - we are shutting down the session */
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*mid = smb2_mid_entry_alloc(buf, ses->server);
 	if (*mid == NULL)
@@ -595,8 +643,12 @@ smb2_check_receive(struct mid_q_entry *mid, struct TCP_Server_Info *server,
 	dump_smb(mid->resp_buf, min_t(u32, 80, len));
 	/* convert the length into a more usable form */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((len > 24) &&
 	    (server->sec_mode & (SECMODE_SIGN_REQUIRED|SECMODE_SIGN_ENABLED))) {
+=======
+	if (len > 24 && server->sign) {
+>>>>>>> v3.18
 =======
 	if (len > 24 && server->sign) {
 >>>>>>> v3.18

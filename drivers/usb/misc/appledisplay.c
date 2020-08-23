@@ -82,6 +82,10 @@ struct appledisplay {
 	int button_pressed;
 	spinlock_t lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex sysfslock;		/* concurrent read and write */
+>>>>>>> v3.18
 =======
 	struct mutex sysfslock;		/* concurrent read and write */
 >>>>>>> v3.18
@@ -115,7 +119,11 @@ static void appledisplay_complete(struct urb *urb)
 		return;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(dev, "%s - nonzero urb status received: %d/n",
+=======
+		dev_dbg(dev, "%s - nonzero urb status received: %d\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(dev, "%s - nonzero urb status received: %d\n",
 >>>>>>> v3.18
@@ -153,6 +161,10 @@ static int appledisplay_bl_update_status(struct backlight_device *bd)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&pdata->sysfslock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&pdata->sysfslock);
 >>>>>>> v3.18
@@ -169,7 +181,12 @@ static int appledisplay_bl_update_status(struct backlight_device *bd)
 		pdata->msgdata, 2,
 		ACD_USB_TIMEOUT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	mutex_unlock(&pdata->sysfslock);
+	
+>>>>>>> v3.18
 =======
 	mutex_unlock(&pdata->sysfslock);
 	
@@ -181,8 +198,14 @@ static int appledisplay_bl_get_brightness(struct backlight_device *bd)
 {
 	struct appledisplay *pdata = bl_get_data(bd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int retval;
 
+=======
+	int retval, brightness;
+
+	mutex_lock(&pdata->sysfslock);
+>>>>>>> v3.18
 =======
 	int retval, brightness;
 
@@ -198,6 +221,11 @@ static int appledisplay_bl_get_brightness(struct backlight_device *bd)
 		pdata->msgdata, 2,
 		ACD_USB_TIMEOUT);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	brightness = pdata->msgdata[1];
+	mutex_unlock(&pdata->sysfslock);
+>>>>>>> v3.18
 =======
 	brightness = pdata->msgdata[1];
 	mutex_unlock(&pdata->sysfslock);
@@ -207,7 +235,11 @@ static int appledisplay_bl_get_brightness(struct backlight_device *bd)
 		return retval;
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return pdata->msgdata[1];
+=======
+		return brightness;
+>>>>>>> v3.18
 =======
 		return brightness;
 >>>>>>> v3.18
@@ -274,6 +306,10 @@ static int appledisplay_probe(struct usb_interface *iface,
 	spin_lock_init(&pdata->lock);
 	INIT_DELAYED_WORK(&pdata->work, appledisplay_work);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&pdata->sysfslock);
+>>>>>>> v3.18
 =======
 	mutex_init(&pdata->sysfslock);
 >>>>>>> v3.18

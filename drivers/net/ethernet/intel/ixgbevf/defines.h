@@ -184,6 +184,10 @@ typedef u32 ixgbe_link_speed;
 #define IXGBE_TXD_CMD_VLE    0x40000000 /* Add VLAN tag */
 #define IXGBE_TXD_STAT_DD    0x00000001 /* Descriptor Done */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IXGBE_TXD_CMD	     (IXGBE_TXD_CMD_EOP | IXGBE_TXD_CMD_RS)
+>>>>>>> v3.18
 =======
 #define IXGBE_TXD_CMD	     (IXGBE_TXD_CMD_EOP | IXGBE_TXD_CMD_RS)
 >>>>>>> v3.18
@@ -282,7 +286,10 @@ struct ixgbe_adv_tx_context_desc {
 #define IXGBE_ERR_INVALID_ARGUMENT              -3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Transmit Config masks */
 #define IXGBE_TXDCTL_ENABLE		0x02000000 /* Ena specific Tx Queue */
 #define IXGBE_TXDCTL_SWFLSH		0x04000000 /* Tx Desc. wr-bk flushing */
@@ -300,5 +307,8 @@ struct ixgbe_adv_tx_context_desc {
 #define IXGBE_DCA_TXCTRL_DESC_WRO_EN	(1 << 11) /* Tx Desc writeback RO bit */
 #define IXGBE_DCA_TXCTRL_DATA_RRO_EN	(1 << 13) /* Tx rd data Relax Order */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _IXGBEVF_DEFINES_H_ */

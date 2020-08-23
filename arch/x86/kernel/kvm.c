@@ -35,6 +35,11 @@
 #include <linux/slab.h>
 #include <linux/kprobes.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/debugfs.h>
+#include <linux/nmi.h>
+>>>>>>> v3.18
 =======
 #include <linux/debugfs.h>
 #include <linux/nmi.h>
@@ -165,8 +170,13 @@ void kvm_async_pf_task_wait(u32 token)
 			rcu_irq_exit();
 			native_safe_halt();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			local_irq_disable();
 			rcu_irq_enter();
+=======
+			rcu_irq_enter();
+			local_irq_disable();
+>>>>>>> v3.18
 =======
 			rcu_irq_enter();
 			local_irq_disable();
@@ -253,9 +263,15 @@ u32 kvm_read_and_reset_pf_reason(void)
 	u32 reason = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__get_cpu_var(apf_reason).enabled) {
 		reason = __get_cpu_var(apf_reason).reason;
 		__get_cpu_var(apf_reason).reason = 0;
+=======
+	if (__this_cpu_read(apf_reason.enabled)) {
+		reason = __this_cpu_read(apf_reason.reason);
+		__this_cpu_write(apf_reason.reason, 0);
+>>>>>>> v3.18
 =======
 	if (__this_cpu_read(apf_reason.enabled)) {
 		reason = __this_cpu_read(apf_reason.reason);
@@ -267,8 +283,14 @@ u32 kvm_read_and_reset_pf_reason(void)
 }
 EXPORT_SYMBOL_GPL(kvm_read_and_reset_pf_reason);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 dotraplinkage void __kprobes
+=======
+NOKPROBE_SYMBOL(kvm_read_and_reset_pf_reason);
+
+dotraplinkage void
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(kvm_read_and_reset_pf_reason);
 
@@ -281,7 +303,11 @@ do_async_page_fault(struct pt_regs *regs, unsigned long error_code)
 	switch (kvm_read_and_reset_pf_reason()) {
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		do_page_fault(regs, error_code);
+=======
+		trace_do_page_fault(regs, error_code);
+>>>>>>> v3.18
 =======
 		trace_do_page_fault(regs, error_code);
 >>>>>>> v3.18
@@ -302,6 +328,10 @@ do_async_page_fault(struct pt_regs *regs, unsigned long error_code)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+NOKPROBE_SYMBOL(do_async_page_fault);
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(do_async_page_fault);
 >>>>>>> v3.18
@@ -309,6 +339,7 @@ NOKPROBE_SYMBOL(do_async_page_fault);
 static void __init paravirt_ops_setup(void)
 {
 	pv_info.name = "KVM";
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/*
@@ -318,6 +349,9 @@ static void __init paravirt_ops_setup(void)
 	 * missing.
 	 */
 	pv_info.paravirt_enabled = 0;
+=======
+	pv_info.paravirt_enabled = 1;
+>>>>>>> v3.18
 =======
 	pv_info.paravirt_enabled = 1;
 >>>>>>> v3.18
@@ -357,7 +391,11 @@ static void kvm_guest_apic_eoi_write(u32 reg, u32 val)
 	 * An optimization barrier is implied in apic write.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__test_and_clear_bit(KVM_PV_EOI_BIT, &__get_cpu_var(kvm_apic_eoi)))
+=======
+	if (__test_and_clear_bit(KVM_PV_EOI_BIT, this_cpu_ptr(&kvm_apic_eoi)))
+>>>>>>> v3.18
 =======
 	if (__test_and_clear_bit(KVM_PV_EOI_BIT, this_cpu_ptr(&kvm_apic_eoi)))
 >>>>>>> v3.18
@@ -366,7 +404,11 @@ static void kvm_guest_apic_eoi_write(u32 reg, u32 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit kvm_guest_cpu_init(void)
+=======
+void kvm_guest_cpu_init(void)
+>>>>>>> v3.18
 =======
 void kvm_guest_cpu_init(void)
 >>>>>>> v3.18
@@ -376,7 +418,11 @@ void kvm_guest_cpu_init(void)
 
 	if (kvm_para_has_feature(KVM_FEATURE_ASYNC_PF) && kvmapf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u64 pa = slow_virt_to_phys(&__get_cpu_var(apf_reason));
+=======
+		u64 pa = slow_virt_to_phys(this_cpu_ptr(&apf_reason));
+>>>>>>> v3.18
 =======
 		u64 pa = slow_virt_to_phys(this_cpu_ptr(&apf_reason));
 >>>>>>> v3.18
@@ -386,7 +432,11 @@ void kvm_guest_cpu_init(void)
 #endif
 		wrmsrl(MSR_KVM_ASYNC_PF_EN, pa | KVM_ASYNC_PF_ENABLED);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__get_cpu_var(apf_reason).enabled = 1;
+=======
+		__this_cpu_write(apf_reason.enabled, 1);
+>>>>>>> v3.18
 =======
 		__this_cpu_write(apf_reason.enabled, 1);
 >>>>>>> v3.18
@@ -399,8 +449,13 @@ void kvm_guest_cpu_init(void)
 		/* Size alignment is implied but just to make it explicit. */
 		BUILD_BUG_ON(__alignof__(kvm_apic_eoi) < 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__get_cpu_var(kvm_apic_eoi) = 0;
 		pa = slow_virt_to_phys(&__get_cpu_var(kvm_apic_eoi))
+=======
+		__this_cpu_write(kvm_apic_eoi, 0);
+		pa = slow_virt_to_phys(this_cpu_ptr(&kvm_apic_eoi))
+>>>>>>> v3.18
 =======
 		__this_cpu_write(kvm_apic_eoi, 0);
 		pa = slow_virt_to_phys(this_cpu_ptr(&kvm_apic_eoi))
@@ -416,17 +471,23 @@ void kvm_guest_cpu_init(void)
 static void kvm_pv_disable_apf(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!__get_cpu_var(apf_reason).enabled)
 		return;
 
 	wrmsrl(MSR_KVM_ASYNC_PF_EN, 0);
 	__get_cpu_var(apf_reason).enabled = 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!__this_cpu_read(apf_reason.enabled))
 		return;
 
 	wrmsrl(MSR_KVM_ASYNC_PF_EN, 0);
 	__this_cpu_write(apf_reason.enabled, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	printk(KERN_INFO"Unregister pv shared memory for cpu %d\n",
@@ -487,6 +548,7 @@ void kvm_disable_steal_time(void)
 static void __init kvm_smp_prepare_boot_cpu(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(kvm_register_clock("primary cpu clock"));
 	kvm_guest_cpu_init();
 	native_smp_prepare_boot_cpu();
@@ -494,12 +556,17 @@ static void __init kvm_smp_prepare_boot_cpu(void)
 
 static void __cpuinit kvm_guest_cpu_online(void *dummy)
 =======
+=======
+>>>>>>> v3.18
 	kvm_guest_cpu_init();
 	native_smp_prepare_boot_cpu();
 	kvm_spinlock_init();
 }
 
 static void kvm_guest_cpu_online(void *dummy)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	kvm_guest_cpu_init();
@@ -515,8 +582,13 @@ static void kvm_guest_cpu_offline(void *dummy)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit kvm_cpu_notify(struct notifier_block *self,
 				    unsigned long action, void *hcpu)
+=======
+static int kvm_cpu_notify(struct notifier_block *self, unsigned long action,
+			  void *hcpu)
+>>>>>>> v3.18
 =======
 static int kvm_cpu_notify(struct notifier_block *self, unsigned long action,
 			  void *hcpu)
@@ -540,7 +612,11 @@ static int kvm_cpu_notify(struct notifier_block *self, unsigned long action,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata kvm_cpu_notifier = {
+=======
+static struct notifier_block kvm_cpu_notifier = {
+>>>>>>> v3.18
 =======
 static struct notifier_block kvm_cpu_notifier = {
 >>>>>>> v3.18
@@ -551,7 +627,11 @@ static struct notifier_block kvm_cpu_notifier = {
 static void __init kvm_apf_trap_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_intr_gate(14, &async_page_fault);
+=======
+	set_intr_gate(14, async_page_fault);
+>>>>>>> v3.18
 =======
 	set_intr_gate(14, async_page_fault);
 >>>>>>> v3.18
@@ -589,6 +669,7 @@ void __init kvm_guest_init(void)
 	kvm_guest_cpu_init();
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static bool __init kvm_detect(void)
@@ -597,6 +678,8 @@ static bool __init kvm_detect(void)
 		return false;
 	return true;
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Hard lockup detection is enabled by default. Disable it, as guests
@@ -641,6 +724,9 @@ unsigned int kvm_arch_para_features(void)
 static uint32_t __init kvm_detect(void)
 {
 	return kvm_cpuid_base();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -663,7 +749,10 @@ static __init int activate_jump_labels(void)
 }
 arch_initcall(activate_jump_labels);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PARAVIRT_SPINLOCKS
 
@@ -935,4 +1024,7 @@ static __init int kvm_spinlock_init_jump(void)
 early_initcall(kvm_spinlock_init_jump);
 
 #endif	/* CONFIG_PARAVIRT_SPINLOCKS */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

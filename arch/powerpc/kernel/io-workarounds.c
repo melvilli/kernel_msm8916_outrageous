@@ -54,13 +54,19 @@ static struct iowa_bus *iowa_pci_find(unsigned long vaddr, unsigned long paddr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iowa_bus *iowa_mem_find_bus(const PCI_IO_ADDR addr)
 {
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_INDIRECT_MMIO
 struct iowa_bus *iowa_mem_find_bus(const PCI_IO_ADDR addr)
 {
 	unsigned hugepage_shift;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct iowa_bus *bus;
 	int token;
@@ -78,12 +84,15 @@ struct iowa_bus *iowa_mem_find_bus(const PCI_IO_ADDR addr)
 			return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ptep = find_linux_pte(init_mm.pgd, vaddr);
 		if (ptep == NULL)
 			paddr = 0;
 		else
 			paddr = pte_pfn(*ptep) << PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 		ptep = find_linux_pte_or_hugepte(init_mm.pgd, vaddr,
 						 &hugepage_shift);
 		if (ptep == NULL)
@@ -95,6 +104,9 @@ struct iowa_bus *iowa_mem_find_bus(const PCI_IO_ADDR addr)
 			WARN_ON(hugepage_shift);
 			paddr = pte_pfn(*ptep) << PAGE_SHIFT;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bus = iowa_pci_find(vaddr, paddr);
 
@@ -105,8 +117,11 @@ struct iowa_bus *iowa_mem_find_bus(const PCI_IO_ADDR addr)
 	return bus;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #else /* CONFIG_PPC_INDIRECT_MMIO */
 struct iowa_bus *iowa_mem_find_bus(const PCI_IO_ADDR addr)
 {
@@ -115,6 +130,9 @@ struct iowa_bus *iowa_mem_find_bus(const PCI_IO_ADDR addr)
 #endif /* !CONFIG_PPC_INDIRECT_MMIO */
 
 #ifdef CONFIG_PPC_INDIRECT_PIO
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct iowa_bus *iowa_pio_find_bus(unsigned long port)
 {
@@ -122,14 +140,20 @@ struct iowa_bus *iowa_pio_find_bus(unsigned long port)
 	return iowa_pci_find(vaddr, 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #else
 struct iowa_bus *iowa_pio_find_bus(unsigned long port)
 {
 	return NULL;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DEF_PCI_AC_RET(name, ret, at, al, space, aa)		\
@@ -172,6 +196,10 @@ static const struct ppc_pci_io iowa_pci_io = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PPC_INDIRECT_MMIO
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PPC_INDIRECT_MMIO
 >>>>>>> v3.18
@@ -190,6 +218,12 @@ static void __iomem *iowa_ioremap(phys_addr_t addr, unsigned long size,
 	return res;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else /* CONFIG_PPC_INDIRECT_MMIO */
+#define iowa_ioremap NULL
+#endif /* !CONFIG_PPC_INDIRECT_MMIO */
+>>>>>>> v3.18
 =======
 #else /* CONFIG_PPC_INDIRECT_MMIO */
 #define iowa_ioremap NULL

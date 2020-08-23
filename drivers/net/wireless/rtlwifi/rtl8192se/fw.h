@@ -337,7 +337,10 @@ enum fw_h2c_cmd {
 	H2C_WOWLAN_UPDATE_IV_CMD,			/*50*/
 	H2C_TMP4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MAX_H2CCMD					/*52*/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

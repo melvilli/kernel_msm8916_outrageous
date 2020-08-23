@@ -88,8 +88,12 @@ int nf_ct_gre_keymap_add(struct nf_conn *ct, enum ip_conntrack_dir dir,
 void nf_ct_gre_keymap_destroy(struct nf_conn *ct);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void nf_ct_gre_keymap_flush(struct net *net);
 extern void nf_nat_need_gre(void);
+=======
+void nf_nat_need_gre(void);
+>>>>>>> v3.18
 =======
 void nf_nat_need_gre(void);
 >>>>>>> v3.18

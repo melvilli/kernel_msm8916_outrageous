@@ -12,12 +12,18 @@
 #define _ASM_GICREGS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bitmap.h>
 #include <linux/threads.h>
 
 #include <irq.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef	GICISBYTELITTLEENDIAN
 
@@ -28,8 +34,11 @@
 #define GIC_TRIG_LEVEL			0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GIC_NUM_INTRS			(24 + NR_CPUS * 2)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MSK(n) ((1 << (n)) - 1)
@@ -52,6 +61,7 @@
 #define GICREAD(reg, data)	((data) = (reg), (data) = le32_to_cpu(data))
 #define GICWRITE(reg, data)	((reg) = cpu_to_le32(data))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GICBIS(reg, bits)			\
 	({unsigned int data;			\
 		GICREAD(reg, data);		\
@@ -65,6 +75,8 @@
 #define GICBIS(reg, bits)	((reg) |= (bits))
 #endif
 =======
+=======
+>>>>>>> v3.18
 #else
 #define GICREAD(reg, data)	((data) = (reg))
 #define GICWRITE(reg, data)	((reg) = (data))
@@ -76,6 +88,9 @@
 		data |= ((bits) & (mask));	\
 		GICWRITE((reg), data);		\
 	} while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -193,7 +208,12 @@
 #define GIC_SET_POLARITY(intr, pol) \
 	GICBIS(GIC_REG_ADDR(SHARED, GIC_SH_SET_POLARITY_OFS + \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		GIC_INTR_OFS(intr)), (pol) << GIC_INTR_BIT(intr))
+=======
+		GIC_INTR_OFS(intr)), (1 << GIC_INTR_BIT(intr)), \
+		(pol) << GIC_INTR_BIT(intr))
+>>>>>>> v3.18
 =======
 		GIC_INTR_OFS(intr)), (1 << GIC_INTR_BIT(intr)), \
 		(pol) << GIC_INTR_BIT(intr))
@@ -204,7 +224,12 @@
 #define GIC_SET_TRIGGER(intr, trig) \
 	GICBIS(GIC_REG_ADDR(SHARED, GIC_SH_SET_TRIGGER_OFS + \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		GIC_INTR_OFS(intr)), (trig) << GIC_INTR_BIT(intr))
+=======
+		GIC_INTR_OFS(intr)), (1 << GIC_INTR_BIT(intr)), \
+		(trig) << GIC_INTR_BIT(intr))
+>>>>>>> v3.18
 =======
 		GIC_INTR_OFS(intr)), (1 << GIC_INTR_BIT(intr)), \
 		(trig) << GIC_INTR_BIT(intr))
@@ -339,6 +364,7 @@
 		 GIC_SH_MAP_TO_VPE_REG_BIT(vpe))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct gic_pcpu_mask {
 	DECLARE_BITMAP(pcpu_mask, GIC_NUM_INTRS);
 };
@@ -353,6 +379,8 @@ struct gic_intrmask_regs {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Interrupt Meta-data specification. The ipiflag helps
  * in building ipi_map.
@@ -365,8 +393,12 @@ struct gic_intr_map {
 	unsigned int trigtype;	/* Trigger  : Edge/Levl */
 	unsigned int flags;	/* Misc flags	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GIC_FLAG_IPI	       0x01
 #define GIC_FLAG_TRANSPARENT   0x02
+=======
+#define GIC_FLAG_TRANSPARENT   0x01
+>>>>>>> v3.18
 =======
 #define GIC_FLAG_TRANSPARENT   0x01
 >>>>>>> v3.18
@@ -390,7 +422,11 @@ struct gic_shared_intr_map {
 #define GIC_CPU_INT3		3 /* .		      */
 #define GIC_CPU_INT4		4 /* .		      */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GIC_CPU_INT5		5 /* Core Interrupt 5 */
+=======
+#define GIC_CPU_INT5		5 /* Core Interrupt 7 */
+>>>>>>> v3.18
 =======
 #define GIC_CPU_INT5		5 /* Core Interrupt 7 */
 >>>>>>> v3.18
@@ -424,6 +460,10 @@ extern cycle_t gic_read_count(void);
 extern cycle_t gic_read_compare(void);
 extern void gic_write_compare(cycle_t cnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void gic_write_cpu_compare(cycle_t cnt, int cpu);
+>>>>>>> v3.18
 =======
 extern void gic_write_cpu_compare(cycle_t cnt, int cpu);
 >>>>>>> v3.18
@@ -433,6 +473,10 @@ extern unsigned int plat_ipi_resched_int_xlate(unsigned int);
 extern void gic_bind_eic_interrupt(int irq, int set);
 extern unsigned int gic_get_timer_pending(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void gic_get_int_mask(unsigned long *dst, const unsigned long *src);
+>>>>>>> v3.18
 =======
 extern void gic_get_int_mask(unsigned long *dst, const unsigned long *src);
 >>>>>>> v3.18

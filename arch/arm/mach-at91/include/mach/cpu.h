@@ -37,7 +37,11 @@
 #define ARCH_ID_AT91R40008	0x44000840
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARCH_ID_SAMA5D3		0x8A5C07C0
+=======
+#define ARCH_ID_SAMA5		0x8A5C07C0
+>>>>>>> v3.18
 =======
 #define ARCH_ID_SAMA5		0x8A5C07C0
 >>>>>>> v3.18
@@ -54,6 +58,10 @@
 #define ARCH_EXID_AT91SAM9X25	0x00000004
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ARCH_EXID_SAMA5D3	0x00004300
+>>>>>>> v3.18
 =======
 #define ARCH_EXID_SAMA5D3	0x00004300
 >>>>>>> v3.18
@@ -62,7 +70,10 @@
 #define ARCH_EXID_SAMA5D34	0x00414301
 #define ARCH_EXID_SAMA5D35	0x00584300
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ARCH_EXID_SAMA5D36	0x00004301
 
 #define ARCH_EXID_SAMA5D4	0x00000007
@@ -70,6 +81,9 @@
 #define ARCH_EXID_SAMA5D42	0x00000002
 #define ARCH_EXID_SAMA5D43	0x00000003
 #define ARCH_EXID_SAMA5D44	0x00000004
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ARCH_FAMILY_AT91X92	0x09200000
@@ -104,6 +118,12 @@ enum at91_soc_type {
 	AT91_SOC_SAMA5D3,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* SAMA5D4 */
+	AT91_SOC_SAMA5D4,
+
+>>>>>>> v3.18
 =======
 	/* SAMA5D4 */
 	AT91_SOC_SAMA5D4,
@@ -130,13 +150,19 @@ enum at91_soc_subtype {
 	/* SAMA5D3 */
 	AT91_SOC_SAMA5D31, AT91_SOC_SAMA5D33, AT91_SOC_SAMA5D34,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	AT91_SOC_SAMA5D35,
 =======
+=======
+>>>>>>> v3.18
 	AT91_SOC_SAMA5D35, AT91_SOC_SAMA5D36,
 
 	/* SAMA5D4 */
 	AT91_SOC_SAMA5D41, AT91_SOC_SAMA5D42, AT91_SOC_SAMA5D43,
 	AT91_SOC_SAMA5D44,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* No subtype for this SoC */
@@ -243,13 +269,19 @@ static inline int at91_soc_is_detected(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SOC_SAMA5D4
 #define cpu_is_sama5d4()	(at91_soc_initdata.type == AT91_SOC_SAMA5D4)
 #else
 #define cpu_is_sama5d4()	(0)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Since this is ARM, we will never run on any AVR32 CPU. But these

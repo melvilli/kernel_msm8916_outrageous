@@ -13,6 +13,10 @@
 #include <linux/module.h>
 #include <linux/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk/at91_pmc.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk/at91_pmc.h>
 >>>>>>> v3.18
@@ -23,9 +27,15 @@
 #include <asm/system_misc.h>
 #include <mach/at91rm9200.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/at91_pmc.h>
 #include <mach/at91_st.h>
 #include <mach/cpu.h>
+=======
+#include <mach/at91_st.h>
+#include <mach/cpu.h>
+#include <mach/hardware.h>
+>>>>>>> v3.18
 =======
 #include <mach/at91_st.h>
 #include <mach/cpu.h>
@@ -36,15 +46,21 @@
 #include "soc.h"
 #include "generic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "clock.h"
 #include "sam9_smc.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include "sam9_smc.h"
 #include "pm.h"
 
 #if defined(CONFIG_OLD_CLK_AT91)
 #include "clock.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* --------------------------------------------------------------------
  *  Clocks
@@ -294,6 +310,12 @@ static void __init at91rm9200_register_clocks(void)
 	clk_register(&pck3);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else
+#define at91rm9200_register_clocks NULL
+#endif
+>>>>>>> v3.18
 =======
 #else
 #define at91rm9200_register_clocks NULL
@@ -352,6 +374,10 @@ static void __init at91rm9200_ioremap_registers(void)
 	at91rm9200_ioremap_st(AT91RM9200_BASE_ST);
 	at91_ioremap_ramc(0, AT91RM9200_BASE_MC, 256);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	at91_pm_set_standby(at91rm9200_standby);
+>>>>>>> v3.18
 =======
 	at91_pm_set_standby(at91rm9200_standby);
 >>>>>>> v3.18
@@ -362,10 +388,13 @@ static void __init at91rm9200_initialize(void)
 	arm_pm_idle = at91rm9200_idle;
 	arm_pm_restart = at91rm9200_restart;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	at91_extern_irq = (1 << AT91RM9200_ID_IRQ0) | (1 << AT91RM9200_ID_IRQ1)
 			| (1 << AT91RM9200_ID_IRQ2) | (1 << AT91RM9200_ID_IRQ3)
 			| (1 << AT91RM9200_ID_IRQ4) | (1 << AT91RM9200_ID_IRQ5)
 			| (1 << AT91RM9200_ID_IRQ6);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -421,11 +450,17 @@ AT91_SOC_START(at91rm9200)
 	.map_io = at91rm9200_map_io,
 	.default_irq_priority = at91rm9200_default_irq_priority,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.extern_irq = (1 << AT91RM9200_ID_IRQ0) | (1 << AT91RM9200_ID_IRQ1)
 		    | (1 << AT91RM9200_ID_IRQ2) | (1 << AT91RM9200_ID_IRQ3)
 		    | (1 << AT91RM9200_ID_IRQ4) | (1 << AT91RM9200_ID_IRQ5)
 		    | (1 << AT91RM9200_ID_IRQ6),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ioremap_registers = at91rm9200_ioremap_registers,
 	.register_clocks = at91rm9200_register_clocks,

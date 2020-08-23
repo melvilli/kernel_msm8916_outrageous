@@ -943,7 +943,10 @@ int nilfs_cpfile_read(struct super_block *sb, size_t cpsize,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cpsize > sb->s_blocksize) {
 		printk(KERN_ERR
 		       "NILFS: too large checkpoint size: %zu bytes.\n",
@@ -956,6 +959,9 @@ int nilfs_cpfile_read(struct super_block *sb, size_t cpsize,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpfile = nilfs_iget_locked(sb, NULL, NILFS_CPFILE_INO);
 	if (unlikely(!cpfile))

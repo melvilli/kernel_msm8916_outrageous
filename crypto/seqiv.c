@@ -101,7 +101,11 @@ static int seqiv_givencrypt(struct skcipher_givcrypt_request *req)
 	struct seqiv_ctx *ctx = crypto_ablkcipher_ctx(geniv);
 	struct ablkcipher_request *subreq = skcipher_givcrypt_reqctx(req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crypto_completion_t complete;
+=======
+	crypto_completion_t compl;
+>>>>>>> v3.18
 =======
 	crypto_completion_t compl;
 >>>>>>> v3.18
@@ -113,7 +117,11 @@ static int seqiv_givencrypt(struct skcipher_givcrypt_request *req)
 	ablkcipher_request_set_tfm(subreq, skcipher_geniv_cipher(geniv));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	complete = req->creq.base.complete;
+=======
+	compl = req->creq.base.complete;
+>>>>>>> v3.18
 =======
 	compl = req->creq.base.complete;
 >>>>>>> v3.18
@@ -131,17 +139,23 @@ static int seqiv_givencrypt(struct skcipher_givcrypt_request *req)
 			return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		complete = seqiv_complete;
 		data = req;
 	}
 
 	ablkcipher_request_set_callback(subreq, req->creq.base.flags, complete,
 =======
+=======
+>>>>>>> v3.18
 		compl = seqiv_complete;
 		data = req;
 	}
 
 	ablkcipher_request_set_callback(subreq, req->creq.base.flags, compl,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					data);
 	ablkcipher_request_set_crypt(subreq, req->creq.src, req->creq.dst,
@@ -163,7 +177,11 @@ static int seqiv_aead_givencrypt(struct aead_givcrypt_request *req)
 	struct aead_request *areq = &req->areq;
 	struct aead_request *subreq = aead_givcrypt_reqctx(req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crypto_completion_t complete;
+=======
+	crypto_completion_t compl;
+>>>>>>> v3.18
 =======
 	crypto_completion_t compl;
 >>>>>>> v3.18
@@ -175,7 +193,11 @@ static int seqiv_aead_givencrypt(struct aead_givcrypt_request *req)
 	aead_request_set_tfm(subreq, aead_geniv_base(geniv));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	complete = areq->base.complete;
+=======
+	compl = areq->base.complete;
+>>>>>>> v3.18
 =======
 	compl = areq->base.complete;
 >>>>>>> v3.18
@@ -193,17 +215,23 @@ static int seqiv_aead_givencrypt(struct aead_givcrypt_request *req)
 			return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		complete = seqiv_aead_complete;
 		data = req;
 	}
 
 	aead_request_set_callback(subreq, areq->base.flags, complete, data);
 =======
+=======
+>>>>>>> v3.18
 		compl = seqiv_aead_complete;
 		data = req;
 	}
 
 	aead_request_set_callback(subreq, areq->base.flags, compl, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	aead_request_set_crypt(subreq, areq->src, areq->dst, areq->cryptlen,
 			       info);
@@ -395,6 +423,9 @@ module_exit(seqiv_module_exit);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Sequence Number IV Generator");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("seqiv");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

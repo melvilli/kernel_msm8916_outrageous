@@ -114,6 +114,7 @@ module_param_named(pio, b43_modparam_pio, int, 0644);
 MODULE_PARM_DESC(pio, "Use PIO accesses by default: 0=DMA, 1=PIO");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_B43_BCMA
 static const struct bcma_device_id b43_bcma_tbl[] = {
 	BCMA_CORE(BCMA_MANUF_BCM, BCMA_CORE_80211, 0x11, BCMA_ANY_CLASS),
@@ -123,6 +124,8 @@ static const struct bcma_device_id b43_bcma_tbl[] = {
 #endif
 	BCMA_CORE(BCMA_MANUF_BCM, BCMA_CORE_80211, 0x1D, BCMA_ANY_CLASS),
 =======
+=======
+>>>>>>> v3.18
 static int modparam_allhwsupport = !IS_ENABLED(CONFIG_BRCMSMAC);
 module_param_named(allhwsupport, modparam_allhwsupport, int, 0444);
 MODULE_PARM_DESC(allhwsupport, "Enable support for all hardware (even it if overlaps with the brcmsmac driver)");
@@ -137,6 +140,9 @@ static const struct bcma_device_id b43_bcma_tbl[] = {
 	BCMA_CORE(BCMA_MANUF_BCM, BCMA_CORE_80211, 0x1E, BCMA_ANY_CLASS),
 	BCMA_CORE(BCMA_MANUF_BCM, BCMA_CORE_80211, 0x28, BCMA_ANY_CLASS),
 	BCMA_CORE(BCMA_MANUF_BCM, BCMA_CORE_80211, 0x2A, BCMA_ANY_CLASS),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BCMA_CORETABLE_END
 };
@@ -198,7 +204,11 @@ static struct ieee80211_rate __b43_ratetable[] = {
 #define b43_g_ratetable_size	12
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CHAN4G(_channel, _freq, _flags) {			\
+=======
+#define CHAN2G(_channel, _freq, _flags) {			\
+>>>>>>> v3.18
 =======
 #define CHAN2G(_channel, _freq, _flags) {			\
 >>>>>>> v3.18
@@ -210,6 +220,7 @@ static struct ieee80211_rate __b43_ratetable[] = {
 	.max_power		= 30,				\
 }
 static struct ieee80211_channel b43_2ghz_chantable[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	CHAN4G(1, 2412, 0),
 	CHAN4G(2, 2417, 0),
@@ -229,6 +240,8 @@ static struct ieee80211_channel b43_2ghz_chantable[] = {
 #undef CHAN4G
 
 =======
+=======
+>>>>>>> v3.18
 	CHAN2G(1, 2412, 0),
 	CHAN2G(2, 2417, 0),
 	CHAN2G(3, 2422, 0),
@@ -257,6 +270,9 @@ static struct ieee80211_channel b43_2ghz_chantable[] = {
 	.max_antenna_gain	= 0,				\
 	.max_power		= 30,				\
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CHAN5G(_channel, _flags) {				\
 	.band			= IEEE80211_BAND_5GHZ,		\
@@ -268,7 +284,10 @@ static struct ieee80211_channel b43_2ghz_chantable[] = {
 }
 static struct ieee80211_channel b43_5ghz_nphy_chantable[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	CHAN4G(184, 0),		CHAN4G(186, 0),
 	CHAN4G(188, 0),		CHAN4G(190, 0),
 	CHAN4G(192, 0),		CHAN4G(194, 0),
@@ -281,6 +300,9 @@ static struct ieee80211_channel b43_5ghz_nphy_chantable[] = {
 	CHAN4G(220, 0),		CHAN4G(222, 0),
 	CHAN4G(224, 0),		CHAN4G(226, 0),
 	CHAN4G(228, 0),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CHAN5G(32, 0),		CHAN5G(34, 0),
 	CHAN5G(36, 0),		CHAN5G(38, 0),
@@ -326,6 +348,7 @@ static struct ieee80211_channel b43_5ghz_nphy_chantable[] = {
 	CHAN5G(174, 0),		CHAN5G(176, 0),
 	CHAN5G(178, 0),		CHAN5G(180, 0),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CHAN5G(182, 0),		CHAN5G(184, 0),
 	CHAN5G(186, 0),		CHAN5G(188, 0),
 	CHAN5G(190, 0),		CHAN5G(192, 0),
@@ -339,6 +362,8 @@ static struct ieee80211_channel b43_5ghz_nphy_chantable[] = {
 	CHAN5G(222, 0),		CHAN5G(224, 0),
 	CHAN5G(226, 0),		CHAN5G(228, 0),
 =======
+=======
+>>>>>>> v3.18
 	CHAN5G(182, 0),
 };
 
@@ -348,6 +373,9 @@ static struct ieee80211_channel b43_5ghz_nphy_chantable_limited[] = {
 	CHAN5G(149, 0),		CHAN5G(153, 0),
 	CHAN5G(157, 0),		CHAN5G(161, 0),
 	CHAN5G(165, 0),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -373,6 +401,10 @@ static struct ieee80211_channel b43_5ghz_aphy_chantable[] = {
 	CHAN5G(216, 0),
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#undef CHAN4G
+>>>>>>> v3.18
 =======
 #undef CHAN4G
 >>>>>>> v3.18
@@ -387,7 +419,10 @@ static struct ieee80211_supported_band b43_band_5GHz_nphy = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct ieee80211_supported_band b43_band_5GHz_nphy_limited = {
 	.band		= IEEE80211_BAND_5GHZ,
 	.channels	= b43_5ghz_nphy_chantable_limited,
@@ -396,6 +431,9 @@ static struct ieee80211_supported_band b43_band_5GHz_nphy_limited = {
 	.n_bitrates	= b43_a_ratetable_size,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct ieee80211_supported_band b43_band_5GHz_aphy = {
 	.band		= IEEE80211_BAND_5GHZ,
@@ -414,7 +452,10 @@ static struct ieee80211_supported_band b43_band_2GHz = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct ieee80211_supported_band b43_band_2ghz_limited = {
 	.band		= IEEE80211_BAND_2GHZ,
 	.channels	= b43_2ghz_chantable,
@@ -423,6 +464,9 @@ static struct ieee80211_supported_band b43_band_2ghz_limited = {
 	.n_bitrates	= b43_g_ratetable_size,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void b43_wireless_core_exit(struct b43_wldev *dev);
 static int b43_wireless_core_init(struct b43_wldev *dev);
@@ -1267,7 +1311,10 @@ void b43_power_saving_ctl_bits(struct b43_wldev *dev, unsigned int ps_flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* http://bcm-v4.sipsolutions.net/802.11/PHY/BmacCorePllReset */
 void b43_wireless_core_phy_pll_reset(struct b43_wldev *dev)
 {
@@ -1298,6 +1345,9 @@ void b43_wireless_core_phy_pll_reset(struct b43_wldev *dev)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_B43_BCMA
 static void b43_bcma_phy_reset(struct b43_wldev *dev)
@@ -1311,6 +1361,7 @@ static void b43_bcma_phy_reset(struct b43_wldev *dev)
 	bcma_awrite32(dev->dev->bdev, BCMA_IOCTL, flags);
 	udelay(2);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Take PHY out of reset */
 	flags = bcma_aread32(dev->dev->bdev, BCMA_IOCTL);
@@ -1327,6 +1378,9 @@ static void b43_bcma_phy_reset(struct b43_wldev *dev)
 =======
 	b43_phy_take_out_of_reset(dev);
 >>>>>>> v3.18
+=======
+	b43_phy_take_out_of_reset(dev);
+>>>>>>> v3.18
 }
 
 static void b43_bcma_wireless_core_reset(struct b43_wldev *dev, bool gmode)
@@ -1336,9 +1390,12 @@ static void b43_bcma_wireless_core_reset(struct b43_wldev *dev, bool gmode)
 	u32 status = B43_BCMA_CLKCTLST_80211_PLL_ST |
 		     B43_BCMA_CLKCTLST_PHY_PLL_ST;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	b43_device_enable(dev, B43_BCMA_IOCTL_PHY_CLKEN);
 =======
+=======
+>>>>>>> v3.18
 	u32 flags;
 
 	flags = B43_BCMA_IOCTL_PHY_CLKEN;
@@ -1346,6 +1403,9 @@ static void b43_bcma_wireless_core_reset(struct b43_wldev *dev, bool gmode)
 		flags |= B43_BCMA_IOCTL_GMODE;
 	b43_device_enable(dev, flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bcma_core_set_clockmode(dev->dev->bdev, BCMA_CLKMODE_FAST);
 	b43_bcma_phy_reset(dev);
@@ -1354,10 +1414,16 @@ static void b43_bcma_wireless_core_reset(struct b43_wldev *dev, bool gmode)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void b43_ssb_wireless_core_reset(struct b43_wldev *dev, bool gmode)
 {
 	struct ssb_device *sdev = dev->dev->sdev;
 	u32 tmslow;
+=======
+#ifdef CONFIG_B43_SSB
+static void b43_ssb_wireless_core_reset(struct b43_wldev *dev, bool gmode)
+{
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_B43_SSB
 static void b43_ssb_wireless_core_reset(struct b43_wldev *dev, bool gmode)
@@ -1375,6 +1441,7 @@ static void b43_ssb_wireless_core_reset(struct b43_wldev *dev, bool gmode)
 	msleep(2);		/* Wait for the PLL to turn on. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Now take the PHY out of Reset again */
 	tmslow = ssb_read32(sdev, SSB_TMSLOW);
 	tmslow |= SSB_TMSLOW_FGC;
@@ -1387,6 +1454,11 @@ static void b43_ssb_wireless_core_reset(struct b43_wldev *dev, bool gmode)
 	ssb_read32(sdev, SSB_TMSLOW);	/* flush */
 	msleep(1);
 }
+=======
+	b43_phy_take_out_of_reset(dev);
+}
+#endif
+>>>>>>> v3.18
 =======
 	b43_phy_take_out_of_reset(dev);
 }
@@ -1712,7 +1784,11 @@ static void b43_write_beacon_template(struct b43_wldev *dev,
 
 	bcn = (const struct ieee80211_mgmt *)(dev->wl->current_beacon->data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len = min((size_t) dev->wl->current_beacon->len,
+=======
+	len = min_t(size_t, dev->wl->current_beacon->len,
+>>>>>>> v3.18
 =======
 	len = min_t(size_t, dev->wl->current_beacon->len,
 >>>>>>> v3.18
@@ -2374,6 +2450,10 @@ err_format:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* http://bcm-v4.sipsolutions.net/802.11/Init/Firmware */
+>>>>>>> v3.18
 =======
 /* http://bcm-v4.sipsolutions.net/802.11/Init/Firmware */
 >>>>>>> v3.18
@@ -2381,6 +2461,7 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 {
 	struct b43_wldev *dev = ctx->dev;
 	struct b43_firmware *fw = &ctx->dev->fw;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const u8 rev = ctx->dev->dev->core_rev;
 	const char *filename;
@@ -2425,6 +2506,8 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct b43_phy *phy = &dev->phy;
 	const u8 rev = ctx->dev->dev->core_rev;
 	const char *filename;
@@ -2496,6 +2579,9 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 	}
 	if (!filename)
 		goto err_no_ucode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = b43_do_request_fw(ctx, filename, &fw->ucode, true);
 	if (err)
@@ -2518,6 +2604,7 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 		goto err_load;
 
 	/* Get initvals */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (dev->phy.type) {
 	case B43_PHYTYPE_A:
@@ -2556,6 +2643,8 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 		else
 			goto err_no_initvals;
 =======
+=======
+>>>>>>> v3.18
 	filename = NULL;
 	switch (dev->phy.type) {
 	case B43_PHYTYPE_G:
@@ -2587,14 +2676,22 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 			filename = "lp0initvals14";
 		else if (rev == 13)
 			filename = "lp0initvals13";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case B43_PHYTYPE_HT:
 		if (rev == 29)
 			filename = "ht0initvals29";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else
 			goto err_no_initvals;
+=======
+		else if (rev == 26)
+			filename = "ht0initvals26";
+>>>>>>> v3.18
 =======
 		else if (rev == 26)
 			filename = "ht0initvals26";
@@ -2604,6 +2701,7 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 		if (rev == 24)
 			filename = "lcn0initvals24";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else
 			goto err_no_initvals;
 		break;
@@ -2611,6 +2709,8 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 		goto err_no_initvals;
 	}
 =======
+=======
+>>>>>>> v3.18
 		break;
 	case B43_PHYTYPE_LCN40:
 		if (rev == 33)
@@ -2625,12 +2725,16 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 	}
 	if (!filename)
 		goto err_no_initvals;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = b43_do_request_fw(ctx, filename, &fw->initvals, false);
 	if (err)
 		goto err_load;
 
 	/* Get bandswitch initvals */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (dev->phy.type) {
 	case B43_PHYTYPE_A:
@@ -2671,6 +2775,8 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 		else
 			goto err_no_initvals;
 =======
+=======
+>>>>>>> v3.18
 	filename = NULL;
 	switch (dev->phy.type) {
 	case B43_PHYTYPE_G:
@@ -2702,14 +2808,22 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 			filename = "lp0bsinitvals14";
 		else if (rev == 13)
 			filename = "lp0bsinitvals13";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case B43_PHYTYPE_HT:
 		if (rev == 29)
 			filename = "ht0bsinitvals29";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else
 			goto err_no_initvals;
+=======
+		else if (rev == 26)
+			filename = "ht0bsinitvals26";
+>>>>>>> v3.18
 =======
 		else if (rev == 26)
 			filename = "ht0bsinitvals26";
@@ -2719,6 +2833,7 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 		if (rev == 24)
 			filename = "lcn0bsinitvals24";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else
 			goto err_no_initvals;
 		break;
@@ -2726,6 +2841,8 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 		goto err_no_initvals;
 	}
 =======
+=======
+>>>>>>> v3.18
 		break;
 	case B43_PHYTYPE_LCN40:
 		if (rev == 33)
@@ -2740,6 +2857,9 @@ static int b43_try_request_fw(struct b43_request_fw_context *ctx)
 	}
 	if (!filename)
 		goto err_no_initvals;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = b43_do_request_fw(ctx, filename, &fw->initvals_band, false);
 	if (err)
@@ -3061,13 +3181,17 @@ static int b43_upload_initvals(struct b43_wldev *dev)
 	const struct b43_iv *ivals;
 	size_t count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	hdr = (const struct b43_fw_header *)(fw->initvals.data->data);
 	ivals = (const struct b43_iv *)(fw->initvals.data->data + hdr_len);
 	count = be32_to_cpu(hdr->size);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = b43_write_initvals(dev, ivals, count,
 				 fw->initvals.data->size - hdr_len);
@@ -3086,6 +3210,8 @@ out:
 
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	return b43_write_initvals(dev, ivals, count,
 				 fw->initvals.data->size - hdr_len);
 }
@@ -3106,6 +3232,9 @@ static int b43_upload_initvals_band(struct b43_wldev *dev)
 	count = be32_to_cpu(hdr->size);
 	return b43_write_initvals(dev, ivals, count,
 				  fw->initvals_band.data->size - hdr_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3113,6 +3242,11 @@ static int b43_upload_initvals_band(struct b43_wldev *dev)
  * http://bcm-specs.sipsolutions.net/GPIO
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#ifdef CONFIG_B43_SSB
+>>>>>>> v3.18
 =======
 
 #ifdef CONFIG_B43_SSB
@@ -3128,11 +3262,14 @@ static struct ssb_device *b43_ssb_gpio_dev(struct b43_wldev *dev)
 #endif
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int b43_gpio_init(struct b43_wldev *dev)
 {
 	struct ssb_device *gpiodev;
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 static int b43_gpio_init(struct b43_wldev *dev)
@@ -3140,6 +3277,9 @@ static int b43_gpio_init(struct b43_wldev *dev)
 #ifdef CONFIG_B43_SSB
 	struct ssb_device *gpiodev;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 mask, set;
 
@@ -3200,7 +3340,13 @@ static int b43_gpio_init(struct b43_wldev *dev)
 static void b43_gpio_cleanup(struct b43_wldev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ssb_device *gpiodev;
+=======
+#ifdef CONFIG_B43_SSB
+	struct ssb_device *gpiodev;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_B43_SSB
 	struct ssb_device *gpiodev;
@@ -3315,7 +3461,10 @@ void b43_mac_phy_clock_set(struct b43_wldev *dev, bool on)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* brcms_b_switch_macfreq */
 void b43_mac_switch_freq(struct b43_wldev *dev, u8 spurmode)
 {
@@ -3371,6 +3520,9 @@ void b43_mac_switch_freq(struct b43_wldev *dev, u8 spurmode)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void b43_adjust_opmode(struct b43_wldev *dev)
 {
@@ -3459,6 +3611,10 @@ static void b43_rate_memory_init(struct b43_wldev *dev)
 	case B43_PHYTYPE_LCN:
 		b43_rate_memory_write(dev, B43_OFDM_RATE_6MB, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		b43_rate_memory_write(dev, B43_OFDM_RATE_9MB, 1);
+>>>>>>> v3.18
 =======
 		b43_rate_memory_write(dev, B43_OFDM_RATE_9MB, 1);
 >>>>>>> v3.18
@@ -3552,11 +3708,17 @@ static int b43_chip_init(struct b43_wldev *dev)
 		goto err_gpio_clean;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = b43_upload_initvals_band(dev);
 	if (err)
 		goto err_gpio_clean;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Turn the Analog on and initialize the PHY. */
 	phy->ops->switch_analog(dev, 1);
@@ -4158,6 +4320,7 @@ static void b43_op_set_tsf(struct ieee80211_hw *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void b43_put_phy_into_reset(struct b43_wldev *dev)
 {
 	u32 tmp;
@@ -4191,6 +4354,8 @@ static void b43_put_phy_into_reset(struct b43_wldev *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const char *band_to_string(enum ieee80211_band band)
 {
 	switch (band) {
@@ -4206,6 +4371,7 @@ static const char *band_to_string(enum ieee80211_band band)
 }
 
 /* Expects wl->mutex locked */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int b43_switch_band(struct b43_wl *wl, struct ieee80211_channel *chan)
 {
@@ -4296,6 +4462,8 @@ init_failure:
 	wl->current_dev = NULL;
 	return err;
 =======
+=======
+>>>>>>> v3.18
 static int b43_switch_band(struct b43_wldev *dev,
 			   struct ieee80211_channel *chan)
 {
@@ -4371,6 +4539,9 @@ static void b43_set_beacon_listen_interval(struct b43_wldev *dev, u16 interval)
 {
 	interval = min_t(u16, interval, (u16)0xFF);
 	b43_shm_write16(dev, B43_SHM_SHARED, B43_SHM_SH_BCN_LI, interval);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4393,6 +4564,7 @@ static void b43_set_retry_limits(struct b43_wldev *dev,
 static int b43_op_config(struct ieee80211_hw *hw, u32 changed)
 {
 	struct b43_wl *wl = hw_to_b43_wl(hw);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct b43_wldev *dev;
 	struct b43_phy *phy;
@@ -4427,6 +4599,8 @@ static int b43_op_config(struct ieee80211_hw *hw, u32 changed)
 
 	b43_mac_suspend(dev);
 =======
+=======
+>>>>>>> v3.18
 	struct b43_wldev *dev = wl->current_dev;
 	struct b43_phy *phy = &dev->phy;
 	struct ieee80211_conf *conf = &hw->conf;
@@ -4453,6 +4627,9 @@ static int b43_op_config(struct ieee80211_hw *hw, u32 changed)
 		 */
 		b43_switch_channel(dev, phy->channel);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (changed & IEEE80211_CONF_CHANGE_RETRY_LIMITS)
@@ -4463,11 +4640,14 @@ static int b43_op_config(struct ieee80211_hw *hw, u32 changed)
 		goto out_mac_enable;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Switch to the requested channel.
 	 * The firmware takes care of races with the TX handler. */
 	if (conf->chandef.chan->hw_value != phy->channel)
 		b43_switch_channel(dev, conf->chandef.chan->hw_value);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev->wl->radiotap_enabled = !!(conf->flags & IEEE80211_CONF_MONITOR);
@@ -4506,12 +4686,17 @@ static int b43_op_config(struct ieee80211_hw *hw, u32 changed)
 out_mac_enable:
 	b43_mac_enable(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_unlock_mutex:
 	mutex_unlock(&wl->mutex);
 
 	if (wl->vif && reload_bss)
 		b43_op_bss_info_changed(hw, wl->vif, &wl->vif->bss_conf, ~0);
 
+=======
+	mutex_unlock(&wl->mutex);
+
+>>>>>>> v3.18
 =======
 	mutex_unlock(&wl->mutex);
 
@@ -4942,6 +5127,10 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 {
 	struct b43_phy *phy = &dev->phy;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const u8 core_rev = dev->dev->core_rev;
+>>>>>>> v3.18
 =======
 	const u8 core_rev = dev->dev->core_rev;
 >>>>>>> v3.18
@@ -4951,8 +5140,14 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 	u8 phy_rev;
 	u16 radio_manuf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 radio_ver;
 	u16 radio_rev;
+=======
+	u16 radio_id;
+	u16 radio_rev;
+	u8 radio_ver;
+>>>>>>> v3.18
 =======
 	u16 radio_id;
 	u16 radio_rev;
@@ -4966,6 +5161,7 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 	phy_type = (tmp & B43_PHYVER_TYPE) >> B43_PHYVER_TYPE_SHIFT;
 	phy_rev = (tmp & B43_PHYVER_VERSION);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (phy_type) {
 	case B43_PHYTYPE_A:
 		if (phy_rev >= 4)
@@ -4977,6 +5173,8 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 			unsupported = 1;
 		break;
 =======
+=======
+>>>>>>> v3.18
 
 	/* LCNXN is continuation of N which run out of revisions */
 	if (phy_type == B43_PHYTYPE_LCNXN) {
@@ -4986,20 +5184,29 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 
 	switch (phy_type) {
 #ifdef CONFIG_B43_PHY_G
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case B43_PHYTYPE_G:
 		if (phy_rev > 9)
 			unsupported = 1;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_B43_PHY_N
 	case B43_PHYTYPE_N:
 		if (phy_rev > 9)
 =======
+=======
+>>>>>>> v3.18
 #endif
 #ifdef CONFIG_B43_PHY_N
 	case B43_PHYTYPE_N:
 		if (phy_rev >= 19)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			unsupported = 1;
 		break;
@@ -5036,6 +5243,7 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 
 	/* Get RADIO versioning */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->dev->core_rev >= 24) {
 		u16 radio24[3];
 
@@ -5051,6 +5259,8 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 		radio_ver = (radio24[2] << 8) | radio24[1];
 		radio_rev = (radio24[0] & 0xF);
 =======
+=======
+>>>>>>> v3.18
 	if (core_rev == 40 || core_rev == 42) {
 		radio_manuf = 0x17F;
 
@@ -5073,6 +5283,9 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 		radio_id = (radio24[2] << 8) | radio24[1];
 		radio_rev = (radio24[0] & 0xF);
 		radio_ver = (radio24[0] & 0xF0) >> 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		if (dev->dev->chip_id == 0x4317) {
@@ -5083,6 +5296,7 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 			else
 				tmp = 0x5205017F;
 		} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			b43_write16(dev, B43_MMIO_RADIO_CONTROL,
 				    B43_RADIOCTL_ID);
@@ -5096,6 +5310,8 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 		radio_ver = (tmp & 0x0FFFF000) >> 12;
 		radio_rev = (tmp & 0xF0000000) >> 28;
 =======
+=======
+>>>>>>> v3.18
 			b43_write16f(dev, B43_MMIO_RADIO_CONTROL,
 				     B43_RADIOCTL_ID);
 			tmp = b43_read16(dev, B43_MMIO_RADIO_DATA_LOW);
@@ -5107,6 +5323,9 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 		radio_id = (tmp & 0x0FFFF000) >> 12;
 		radio_rev = (tmp & 0xF0000000) >> 28;
 		radio_ver = 0; /* Probably not available on old hw */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -5115,7 +5334,11 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 	switch (phy_type) {
 	case B43_PHYTYPE_A:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (radio_ver != 0x2060)
+=======
+		if (radio_id != 0x2060)
+>>>>>>> v3.18
 =======
 		if (radio_id != 0x2060)
 >>>>>>> v3.18
@@ -5126,6 +5349,7 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 			unsupported = 1;
 		break;
 	case B43_PHYTYPE_B:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ((radio_ver & 0xFFF0) != 0x2050)
 			unsupported = 1;
@@ -5149,6 +5373,8 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 	case B43_PHYTYPE_LCN:
 		if (radio_ver != 0x2064)
 =======
+=======
+>>>>>>> v3.18
 		if ((radio_id & 0xFFF0) != 0x2050)
 			unsupported = 1;
 		break;
@@ -5174,6 +5400,9 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 		break;
 	case B43_PHYTYPE_LCN:
 		if (radio_id != 0x2064)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			unsupported = 1;
 		break;
@@ -5181,6 +5410,7 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 		B43_WARN_ON(1);
 	}
 	if (unsupported) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		b43err(dev->wl, "FOUND UNSUPPORTED RADIO "
 		       "(Manuf 0x%X, Version 0x%X, Revision %u)\n",
@@ -5193,6 +5423,8 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 	phy->radio_manuf = radio_manuf;
 	phy->radio_ver = radio_ver;
 =======
+=======
+>>>>>>> v3.18
 		b43err(dev->wl,
 		       "FOUND UNSUPPORTED RADIO (Manuf 0x%X, ID 0x%X, Revision %u, Version %u)\n",
 		       radio_manuf, radio_id, radio_rev, radio_ver);
@@ -5205,6 +5437,9 @@ static int b43_phy_versioning(struct b43_wldev *dev)
 	/* FIXME: b43 treats "id" as "ver" and ignores the real "ver" */
 	phy->radio_manuf = radio_manuf;
 	phy->radio_ver = radio_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	phy->radio_rev = radio_rev;
 
@@ -5288,15 +5523,21 @@ static void b43_imcfglo_timeouts_workaround(struct b43_wldev *dev)
 	u32 tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->dev->bus_type != B43_BUS_SSB)
 		return;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_B43_SSB
 	if (dev->dev->bus_type != B43_BUS_SSB)
 		return;
 #else
 	return;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bus = dev->dev->sdev->bus;
@@ -5362,7 +5603,10 @@ static void b43_wireless_core_exit(struct b43_wldev *dev)
 		      B43_MACCTL_PSM_JMP0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	switch (dev->dev->bus_type) {
 #ifdef CONFIG_B43_BCMA
 	case B43_BUS_BCMA:
@@ -5376,6 +5620,9 @@ static void b43_wireless_core_exit(struct b43_wldev *dev)
 #endif
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b43_dma_free(dev);
 	b43_pio_free(dev);
@@ -5417,6 +5664,10 @@ static int b43_wireless_core_init(struct b43_wldev *dev)
 		bcma_core_pci_irq_ctl(&dev->dev->bdev->bus->drv_pci[0],
 				      dev->dev->bdev, true);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		bcma_core_pci_up(dev->dev->bdev->bus);
+>>>>>>> v3.18
 =======
 		bcma_core_pci_up(dev->dev->bdev->bus);
 >>>>>>> v3.18
@@ -5459,7 +5710,11 @@ static int b43_wireless_core_init(struct b43_wldev *dev)
 	if (sprom->boardflags_lo & B43_BFL_XTAL_NOSLOW)
 		hf |= B43_HF_DSCRQ; /* Disable slowclock requests from ucode. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SSB_DRIVER_PCICORE
+=======
+#if defined(CONFIG_B43_SSB) && defined(CONFIG_SSB_DRIVER_PCICORE)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_B43_SSB) && defined(CONFIG_SSB_DRIVER_PCICORE)
 >>>>>>> v3.18
@@ -5472,7 +5727,10 @@ static int b43_wireless_core_init(struct b43_wldev *dev)
 	b43_hf_write(dev, hf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* tell the ucode MAC capabilities */
 	if (dev->dev->core_rev >= 13) {
 		u32 mac_hw_cap = b43_read32(dev, B43_MMIO_MAC_HW_CAP);
@@ -5483,6 +5741,9 @@ static int b43_wireless_core_init(struct b43_wldev *dev)
 				(mac_hw_cap >> 16) & 0xffff);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b43_set_retry_limits(dev, B43_DEFAULT_SHORT_RETRY_LIMIT,
 			     B43_DEFAULT_LONG_RETRY_LIMIT);
@@ -5507,11 +5768,17 @@ static int b43_wireless_core_init(struct b43_wldev *dev)
 	b43_shm_write16(dev, B43_SHM_SCRATCH, B43_SHM_SC_MAXCONT, 0x3FF);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* write phytype and phyvers */
 	b43_shm_write16(dev, B43_SHM_SHARED, B43_SHM_SH_PHYTYPE, phy->type);
 	b43_shm_write16(dev, B43_SHM_SHARED, B43_SHM_SH_PHYVER, phy->rev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (b43_bus_host_is_pcmcia(dev->dev) ||
 	    b43_bus_host_is_sdio(dev->dev)) {
@@ -5849,6 +6116,7 @@ static int b43_setup_bands(struct b43_wldev *dev,
 {
 	struct ieee80211_hw *hw = dev->wl->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (have_2ghz_phy)
 		hw->wiphy->bands[IEEE80211_BAND_2GHZ] = &b43_band_2GHz;
@@ -5856,6 +6124,8 @@ static int b43_setup_bands(struct b43_wldev *dev,
 		if (have_5ghz_phy)
 			hw->wiphy->bands[IEEE80211_BAND_5GHZ] = &b43_band_5GHz_nphy;
 =======
+=======
+>>>>>>> v3.18
 	struct b43_phy *phy = &dev->phy;
 	bool limited_2g;
 	bool limited_5g;
@@ -5874,6 +6144,9 @@ static int b43_setup_bands(struct b43_wldev *dev,
 			hw->wiphy->bands[IEEE80211_BAND_5GHZ] = limited_5g ?
 				&b43_band_5GHz_nphy_limited :
 				&b43_band_5GHz_nphy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		if (have_5ghz_phy)
@@ -5895,11 +6168,14 @@ static void b43_wireless_core_detach(struct b43_wldev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int b43_wireless_core_attach(struct b43_wldev *dev)
 {
 	struct b43_wl *wl = dev->wl;
 	struct pci_dev *pdev = NULL;
 =======
+=======
+>>>>>>> v3.18
 static void b43_supported_bands(struct b43_wldev *dev, bool *have_2ghz_phy,
 				bool *have_5ghz_phy)
 {
@@ -5976,6 +6252,9 @@ static int b43_wireless_core_attach(struct b43_wldev *dev)
 {
 	struct b43_wl *wl = dev->wl;
 	struct b43_phy *phy = &dev->phy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err;
 	u32 tmp;
@@ -5989,12 +6268,15 @@ static int b43_wireless_core_attach(struct b43_wldev *dev)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_B43_SSB
 	if (dev->dev->bus_type == B43_BUS_SSB &&
 	    dev->dev->sdev->bus->bustype == SSB_BUSTYPE_PCI)
 		pdev = dev->dev->sdev->bus->host_pci;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = b43_bus_powerup(dev, 0);
@@ -6004,7 +6286,13 @@ static int b43_wireless_core_attach(struct b43_wldev *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Get the PHY type. */
+=======
+	phy->do_full_init = true;
+
+	/* Try to guess supported bands for the first init needs */
+>>>>>>> v3.18
 =======
 	phy->do_full_init = true;
 
@@ -6031,6 +6319,7 @@ static int b43_wireless_core_attach(struct b43_wldev *dev)
 	}
 
 	dev->phy.gmode = have_2ghz_phy;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev->phy.radio_on = true;
 	b43_wireless_core_reset(dev, dev->phy.gmode);
@@ -6078,6 +6367,8 @@ static int b43_wireless_core_attach(struct b43_wldev *dev)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	b43_wireless_core_reset(dev, dev->phy.gmode);
 
 	/* Get the PHY type. */
@@ -6105,6 +6396,9 @@ static int b43_wireless_core_attach(struct b43_wldev *dev)
 		err = -EOPNOTSUPP;
 		goto err_powerdown;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = b43_phy_allocate(dev);
@@ -6154,7 +6448,10 @@ static void b43_one_core_detach(struct b43_bus_dev *dev)
 	b43_wireless_core_detach(wldev);
 	list_del(&wldev->list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wl->nr_devs--;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	b43_bus_set_wldev(dev, NULL);
@@ -6182,8 +6479,11 @@ static int b43_one_core_attach(struct b43_bus_dev *dev, struct b43_wl *wl)
 		goto err_kfree_wldev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add(&wldev->list, &wl->devlist);
 	wl->nr_devs++;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	b43_bus_set_wldev(dev, wldev);
@@ -6204,6 +6504,10 @@ static int b43_one_core_attach(struct b43_bus_dev *dev, struct b43_wl *wl)
 	(pdev->subsystem_device == _subdevice)				)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_B43_SSB
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_B43_SSB
 >>>>>>> v3.18
@@ -6239,6 +6543,10 @@ static void b43_wireless_exit(struct b43_bus_dev *dev, struct b43_wl *wl)
 	ieee80211_free_hw(hw);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -6284,7 +6592,10 @@ static struct b43_wl *b43_wireless_init(struct b43_bus_dev *dev)
 	mutex_init(&wl->mutex);
 	spin_lock_init(&wl->hardirq_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&wl->devlist);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INIT_WORK(&wl->beacon_update_trigger, b43_beacon_update_trigger_work);
@@ -6312,13 +6623,19 @@ static int b43_bcma_probe(struct bcma_device *core)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!modparam_allhwsupport &&
 	    (core->id.rev == 0x17 || core->id.rev == 0x18)) {
 		pr_err("Support for cores revisions 0x17 and 0x18 disabled by module param allhwsupport=0. Try b43.allhwsupport=1\n");
 		return -ENOTSUPP;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev = b43_bus_dev_bcma_init(core);
 	if (!dev)
@@ -6390,7 +6707,10 @@ int b43_ssb_probe(struct ssb_device *sdev, const struct ssb_device_id *id)
 	struct b43_wl *wl;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int first = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -6399,6 +6719,7 @@ int b43_ssb_probe(struct ssb_device *sdev, const struct ssb_device_id *id)
 		return -ENOMEM;
 
 	wl = ssb_get_devtypedata(sdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!wl) {
 		/* Probing the first core. Must setup common struct b43_wl */
@@ -6416,6 +6737,8 @@ int b43_ssb_probe(struct ssb_device *sdev, const struct ssb_device_id *id)
 	if (err)
 		goto err_wireless_exit;
 =======
+=======
+>>>>>>> v3.18
 	if (wl) {
 		b43err(NULL, "Dual-core devices are not supported\n");
 		err = -ENOTSUPP;
@@ -6435,12 +6758,16 @@ int b43_ssb_probe(struct ssb_device *sdev, const struct ssb_device_id *id)
 	err = b43_one_core_attach(dev, wl);
 	if (err)
 		goto err_ssb_wireless_exit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* setup and start work to load firmware */
 	INIT_WORK(&wl->firmware_load, b43_request_firmware);
 	schedule_work(&wl->firmware_load);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
       out:
 	return err;
@@ -6449,12 +6776,17 @@ int b43_ssb_probe(struct ssb_device *sdev, const struct ssb_device_id *id)
 	if (first)
 		b43_wireless_exit(dev, wl);
 =======
+=======
+>>>>>>> v3.18
 	return err;
 
 err_ssb_wireless_exit:
 	b43_wireless_exit(dev, wl);
 err_ssb_kfree_dev:
 	kfree(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -6484,6 +6816,7 @@ static void b43_ssb_remove(struct ssb_device *sdev)
 	b43_rng_exit(wl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (list_empty(&wl->devlist)) {
 		b43_leds_unregister(wl);
 		/* Last core on the chip unregistered.
@@ -6491,6 +6824,10 @@ static void b43_ssb_remove(struct ssb_device *sdev)
 		 */
 		b43_wireless_exit(dev, wl);
 	}
+=======
+	b43_leds_unregister(wl);
+	b43_wireless_exit(dev, wl);
+>>>>>>> v3.18
 =======
 	b43_leds_unregister(wl);
 	b43_wireless_exit(dev, wl);

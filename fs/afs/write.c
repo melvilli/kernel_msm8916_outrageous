@@ -626,6 +626,7 @@ void afs_pages_written_back(struct afs_vnode *vnode, struct afs_call *call)
  * write to an AFS file
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t afs_file_write(struct kiocb *iocb, const struct iovec *iov,
 		       unsigned long nr_segs, loff_t pos)
 {
@@ -636,6 +637,8 @@ ssize_t afs_file_write(struct kiocb *iocb, const struct iovec *iov,
 	_enter("{%x.%u},{%zu},%lu,",
 	       vnode->fid.vid, vnode->fid.vnode, count, nr_segs);
 =======
+=======
+>>>>>>> v3.18
 ssize_t afs_file_write(struct kiocb *iocb, struct iov_iter *from)
 {
 	struct afs_vnode *vnode = AFS_FS_I(file_inode(iocb->ki_filp));
@@ -644,6 +647,9 @@ ssize_t afs_file_write(struct kiocb *iocb, struct iov_iter *from)
 
 	_enter("{%x.%u},{%zu},",
 	       vnode->fid.vid, vnode->fid.vnode, count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (IS_SWAPFILE(&vnode->vfs_inode)) {
@@ -656,7 +662,11 @@ ssize_t afs_file_write(struct kiocb *iocb, struct iov_iter *from)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = generic_file_aio_write(iocb, iov, nr_segs, pos);
+=======
+	result = generic_file_write_iter(iocb, from);
+>>>>>>> v3.18
 =======
 	result = generic_file_write_iter(iocb, from);
 >>>>>>> v3.18

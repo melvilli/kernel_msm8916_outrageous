@@ -21,8 +21,12 @@
 #include <linux/io.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern void __iomem *sregs_base;
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -285,6 +289,10 @@ static __init struct clk *hb_clk_init(struct device_node *node, const struct clk
 	const char *parent_name;
 	struct clk_init_data init;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node *srnp;
+>>>>>>> v3.18
 =======
 	struct device_node *srnp;
 >>>>>>> v3.18
@@ -299,13 +307,19 @@ static __init struct clk *hb_clk_init(struct device_node *node, const struct clk
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hb_clk->reg = sregs_base + reg;
 =======
+=======
+>>>>>>> v3.18
 	/* Map system registers */
 	srnp = of_find_compatible_node(NULL, NULL, "calxeda,hb-sregs");
 	hb_clk->reg = of_iomap(srnp, 0);
 	BUG_ON(!hb_clk->reg);
 	hb_clk->reg += reg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	of_property_read_string(node, "clock-output-names", &clk_name);

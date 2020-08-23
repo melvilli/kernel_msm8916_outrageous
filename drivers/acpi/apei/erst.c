@@ -40,7 +40,12 @@
 #include "apei-internal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ERST_PFX "ERST: "
+=======
+#undef pr_fmt
+#define pr_fmt(fmt) "ERST: " fmt
+>>>>>>> v3.18
 =======
 #undef pr_fmt
 #define pr_fmt(fmt) "ERST: " fmt
@@ -115,8 +120,12 @@ static int erst_timedout(u64 *t, u64 spin_unit)
 {
 	if ((s64)*t < spin_unit) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning(FW_WARN ERST_PFX
 			   "Firmware does not respond in time\n");
+=======
+		pr_warn(FW_WARN "Firmware does not respond in time.\n");
+>>>>>>> v3.18
 =======
 		pr_warn(FW_WARN "Firmware does not respond in time.\n");
 >>>>>>> v3.18
@@ -196,8 +205,13 @@ static int erst_exec_stall(struct apei_exec_context *ctx,
 	if (ctx->value > FIRMWARE_MAX_STALL) {
 		if (!in_nmi())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning(FW_WARN ERST_PFX
 			"Too long stall time for stall instruction: %llx.\n",
+=======
+			pr_warn(FW_WARN
+			"Too long stall time for stall instruction: 0x%llx.\n",
+>>>>>>> v3.18
 =======
 			pr_warn(FW_WARN
 			"Too long stall time for stall instruction: 0x%llx.\n",
@@ -221,8 +235,13 @@ static int erst_exec_stall_while_true(struct apei_exec_context *ctx,
 	if (ctx->var1 > FIRMWARE_MAX_STALL) {
 		if (!in_nmi())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning(FW_WARN ERST_PFX
 		"Too long stall time for stall while true instruction: %llx.\n",
+=======
+			pr_warn(FW_WARN
+		"Too long stall time for stall while true instruction: 0x%llx.\n",
+>>>>>>> v3.18
 =======
 			pr_warn(FW_WARN
 		"Too long stall time for stall while true instruction: 0x%llx.\n",
@@ -291,8 +310,12 @@ static int erst_exec_move_data(struct apei_exec_context *ctx,
 	/* ioremap does not work in interrupt context */
 	if (in_interrupt()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning(ERST_PFX
 			   "MOVE_DATA can not be used in interrupt context");
+=======
+		pr_warn("MOVE_DATA can not be used in interrupt context.\n");
+>>>>>>> v3.18
 =======
 		pr_warn("MOVE_DATA can not be used in interrupt context.\n");
 >>>>>>> v3.18
@@ -308,13 +331,19 @@ static int erst_exec_move_data(struct apei_exec_context *ctx,
 		return -ENOMEM;
 	dst = ioremap(ctx->dst_base + offset, ctx->var2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dst)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	if (!dst) {
 		iounmap(src);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memmove(dst, src, ctx->var2);
@@ -553,8 +582,12 @@ retry:
 		if (new_size <= erst_record_id_cache.size) {
 			if (printk_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warning(FW_WARN ERST_PFX
 					   "too many record ID!\n");
+=======
+				pr_warn(FW_WARN "too many record IDs!\n");
+>>>>>>> v3.18
 =======
 				pr_warn(FW_WARN "too many record IDs!\n");
 >>>>>>> v3.18
@@ -646,7 +679,11 @@ static void __erst_record_id_cache_compact(void)
 			continue;
 		if (wpos != i)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(&entries[wpos], &entries[i], sizeof(entries[i]));
+=======
+			entries[wpos] = entries[i];
+>>>>>>> v3.18
 =======
 			entries[wpos] = entries[i];
 >>>>>>> v3.18
@@ -798,8 +835,12 @@ static void pr_unimpl_nvram(void)
 {
 	if (printk_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning(ERST_PFX
 		"NVRAM ERST Log Address Range is not implemented yet\n");
+=======
+		pr_warn("NVRAM ERST Log Address Range not implemented yet.\n");
+>>>>>>> v3.18
 =======
 		pr_warn("NVRAM ERST Log Address Range not implemented yet.\n");
 >>>>>>> v3.18
@@ -976,9 +1017,15 @@ static int erst_close_pstore(struct pstore_info *psi);
 static ssize_t erst_reader(u64 *id, enum pstore_type_id *type, int *count,
 			   struct timespec *time, char **buf,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   struct pstore_info *psi);
 static int erst_writer(enum pstore_type_id type, enum kmsg_dump_reason reason,
 		       u64 *id, unsigned int part, int count,
+=======
+			   bool *compressed, struct pstore_info *psi);
+static int erst_writer(enum pstore_type_id type, enum kmsg_dump_reason reason,
+		       u64 *id, unsigned int part, int count, bool compressed,
+>>>>>>> v3.18
 =======
 			   bool *compressed, struct pstore_info *psi);
 static int erst_writer(enum pstore_type_id type, enum kmsg_dump_reason reason,
@@ -992,6 +1039,10 @@ static struct pstore_info erst_info = {
 	.owner		= THIS_MODULE,
 	.name		= "erst",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags		= PSTORE_FLAGS_FRAGILE,
+>>>>>>> v3.18
 =======
 	.flags		= PSTORE_FLAGS_FRAGILE,
 >>>>>>> v3.18
@@ -1009,6 +1060,12 @@ static struct pstore_info erst_info = {
 	UUID_LE(0xc197e04e, 0xd545, 0x4a70, 0x9c, 0x17, 0xa5, 0x54,	\
 		0x94, 0x19, 0xeb, 0x12)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CPER_SECTION_TYPE_DMESG_Z					\
+	UUID_LE(0x4f118707, 0x04dd, 0x4055, 0xb5, 0xdd, 0x95, 0x6d,	\
+		0x34, 0xdd, 0xfa, 0xc6)
+>>>>>>> v3.18
 =======
 #define CPER_SECTION_TYPE_DMESG_Z					\
 	UUID_LE(0x4f118707, 0x04dd, 0x4055, 0xb5, 0xdd, 0x95, 0x6d,	\
@@ -1048,7 +1105,11 @@ static int erst_close_pstore(struct pstore_info *psi)
 static ssize_t erst_reader(u64 *id, enum pstore_type_id *type, int *count,
 			   struct timespec *time, char **buf,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   struct pstore_info *psi)
+=======
+			   bool *compressed, struct pstore_info *psi)
+>>>>>>> v3.18
 =======
 			   bool *compressed, struct pstore_info *psi)
 >>>>>>> v3.18
@@ -1097,14 +1158,20 @@ skip:
 	memcpy(*buf, rcd->data, len - sizeof(*rcd));
 	*id = record_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (uuid_le_cmp(rcd->sec_hdr.section_type,
 =======
+=======
+>>>>>>> v3.18
 	*compressed = false;
 	if (uuid_le_cmp(rcd->sec_hdr.section_type,
 			CPER_SECTION_TYPE_DMESG_Z) == 0) {
 		*type = PSTORE_TYPE_DMESG;
 		*compressed = true;
 	} else if (uuid_le_cmp(rcd->sec_hdr.section_type,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			CPER_SECTION_TYPE_DMESG) == 0)
 		*type = PSTORE_TYPE_DMESG;
@@ -1127,7 +1194,11 @@ out:
 
 static int erst_writer(enum pstore_type_id type, enum kmsg_dump_reason reason,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       u64 *id, unsigned int part, int count,
+=======
+		       u64 *id, unsigned int part, int count, bool compressed,
+>>>>>>> v3.18
 =======
 		       u64 *id, unsigned int part, int count, bool compressed,
 >>>>>>> v3.18
@@ -1161,12 +1232,18 @@ static int erst_writer(enum pstore_type_id type, enum kmsg_dump_reason reason,
 	switch (type) {
 	case PSTORE_TYPE_DMESG:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcd->sec_hdr.section_type = CPER_SECTION_TYPE_DMESG;
 =======
+=======
+>>>>>>> v3.18
 		if (compressed)
 			rcd->sec_hdr.section_type = CPER_SECTION_TYPE_DMESG_Z;
 		else
 			rcd->sec_hdr.section_type = CPER_SECTION_TYPE_DMESG;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case PSTORE_TYPE_MCE:
@@ -1203,7 +1280,11 @@ static int __init erst_init(void)
 
 	if (erst_disable) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info(ERST_PFX
+=======
+		pr_info(
+>>>>>>> v3.18
 =======
 		pr_info(
 >>>>>>> v3.18
@@ -1218,7 +1299,11 @@ static int __init erst_init(void)
 	else if (ACPI_FAILURE(status)) {
 		const char *msg = acpi_format_exception(status);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err(ERST_PFX "Failed to get table, %s\n", msg);
+=======
+		pr_err("Failed to get table, %s\n", msg);
+>>>>>>> v3.18
 =======
 		pr_err("Failed to get table, %s\n", msg);
 >>>>>>> v3.18
@@ -1229,7 +1314,11 @@ static int __init erst_init(void)
 	rc = erst_check_table(erst_tab);
 	if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err(FW_BUG ERST_PFX "ERST table is invalid\n");
+=======
+		pr_err(FW_BUG "ERST table is invalid.\n");
+>>>>>>> v3.18
 =======
 		pr_err(FW_BUG "ERST table is invalid.\n");
 >>>>>>> v3.18
@@ -1251,6 +1340,7 @@ static int __init erst_init(void)
 	if (rc) {
 		if (rc == -ENODEV)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_info(ERST_PFX
 	"The corresponding hardware device or firmware implementation "
 	"is not available.\n");
@@ -1258,11 +1348,16 @@ static int __init erst_init(void)
 			pr_err(ERST_PFX
 			       "Failed to get Error Log Address Range.\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_info(
 	"The corresponding hardware device or firmware implementation "
 	"is not available.\n");
 		else
 			pr_err("Failed to get Error Log Address Range.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err_unmap_reg;
 	}
@@ -1270,10 +1365,16 @@ static int __init erst_init(void)
 	r = request_mem_region(erst_erange.base, erst_erange.size, "APEI ERST");
 	if (!r) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err(ERST_PFX
 		"Can not request iomem region <0x%16llx-0x%16llx> for ERST.\n",
 		(unsigned long long)erst_erange.base,
 		(unsigned long long)erst_erange.base + erst_erange.size);
+=======
+		pr_err("Can not request [mem %#010llx-%#010llx] for ERST.\n",
+		       (unsigned long long)erst_erange.base,
+		       (unsigned long long)erst_erange.base + erst_erange.size - 1);
+>>>>>>> v3.18
 =======
 		pr_err("Can not request [mem %#010llx-%#010llx] for ERST.\n",
 		       (unsigned long long)erst_erange.base,
@@ -1289,6 +1390,12 @@ static int __init erst_init(void)
 		goto err_release_erange;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pr_info(
+	"Error Record Serialization Table (ERST) support is initialized.\n");
+
+>>>>>>> v3.18
 =======
 	pr_info(
 	"Error Record Serialization Table (ERST) support is initialized.\n");
@@ -1301,6 +1408,7 @@ static int __init erst_init(void)
 		erst_info.bufsize = erst_erange.size -
 				    sizeof(struct cper_pstore_record);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pstore_register(&erst_info)) {
 			pr_info(ERST_PFX "Could not register with persistent store\n");
 			kfree(buf);
@@ -1310,6 +1418,8 @@ static int __init erst_init(void)
 	pr_info(ERST_PFX
 	"Error Record Serialization Table (ERST) support is initialized.\n");
 =======
+=======
+>>>>>>> v3.18
 		rc = pstore_register(&erst_info);
 		if (rc) {
 			if (rc != -EPERM)
@@ -1323,6 +1433,9 @@ static int __init erst_init(void)
 		pr_err(
 		"Failed to allocate %lld bytes for persistent store error log.\n",
 		erst_erange.size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

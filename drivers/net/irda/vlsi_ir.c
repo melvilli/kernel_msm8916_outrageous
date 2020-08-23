@@ -16,9 +16,13 @@
  *
  *	You should have received a copy of the GNU General Public License 
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	along with this program; if not, write to the Free Software 
  *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
  *	MA 02111-1307 USA
+=======
+ *	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *	along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -65,7 +69,11 @@ MODULE_LICENSE("GPL");
 static /* const */ char drivername[] = DRIVER_NAME;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(vlsi_irda_table) = {
+=======
+static const struct pci_device_id vlsi_irda_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id vlsi_irda_table[] = {
 >>>>>>> v3.18
@@ -335,12 +343,17 @@ static void vlsi_proc_ring(struct seq_file *seq, struct vlsi_ring *r)
 				h, (unsigned)rd_get_status(rd), j);
 		if (j > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(seq, "   data:");
 			if (j > 20)
 				j = 20;
 			for (i = 0; i < j; i++)
 				seq_printf(seq, " %02x", (unsigned)((unsigned char *)rd->buf)[i]);
 			seq_printf(seq, "\n");
+=======
+			seq_printf(seq, "   data: %*ph\n",
+				   min_t(unsigned, j, 20), rd->buf);
+>>>>>>> v3.18
 =======
 			seq_printf(seq, "   data: %*ph\n",
 				   min_t(unsigned, j, 20), rd->buf);
@@ -501,7 +514,12 @@ static int vlsi_create_hwif(vlsi_irda_dev_t *idev)
 	idev->busaddr = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ringarea = pci_alloc_consistent(idev->pdev, HW_RING_AREA_SIZE, &idev->busaddr);
+=======
+	ringarea = pci_zalloc_consistent(idev->pdev, HW_RING_AREA_SIZE,
+					 &idev->busaddr);
+>>>>>>> v3.18
 =======
 	ringarea = pci_zalloc_consistent(idev->pdev, HW_RING_AREA_SIZE,
 					 &idev->busaddr);
@@ -512,7 +530,10 @@ static int vlsi_create_hwif(vlsi_irda_dev_t *idev)
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(ringarea, 0, HW_RING_AREA_SIZE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -565,7 +586,11 @@ static int vlsi_process_rx(struct vlsi_ring *r, struct ring_descr *rd)
 	struct sk_buff	*skb;
 	int		ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *ndev = (struct net_device *)pci_get_drvdata(r->pdev);
+=======
+	struct net_device *ndev = pci_get_drvdata(r->pdev);
+>>>>>>> v3.18
 =======
 	struct net_device *ndev = pci_get_drvdata(r->pdev);
 >>>>>>> v3.18
@@ -1721,7 +1746,10 @@ out_disable:
 	pci_disable_device(pdev);
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return -ENODEV;
@@ -1750,8 +1778,11 @@ static void vlsi_irda_remove(struct pci_dev *pdev)
 	free_netdev(ndev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	IRDA_MESSAGE("%s: %s removed\n", drivername, pci_name(pdev));

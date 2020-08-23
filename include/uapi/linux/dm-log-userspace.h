@@ -202,12 +202,15 @@
  *
  * Payload-to-userspace:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	None.
  * Payload-to-kernel:
  *	None.
  *
  * No incoming or outgoing payload.  Simply flush log state to disk.
 =======
+=======
+>>>>>>> v3.18
  *	If the 'integrated_flush' directive is present in the constructor
  *	table, the payload is as same as DM_ULOG_MARK_REGION:
  *		uint64_t [] - region(s) to mark
@@ -220,6 +223,9 @@
  * log, mark region requests are carried as payload in the flush request.
  * Piggybacking the mark requests in this way allows for fewer communications
  * between kernel and userspace.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * When the request has been processed, user-space must return the
@@ -401,9 +407,12 @@
  *	            device name that is to be registered with DM via
  *	            'dm_get_device'.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 #define DM_ULOG_REQUEST_VERSION 2
 =======
+=======
+>>>>>>> v3.18
  *	version 3:  DM_ULOG_FLUSH is capable of carrying payload for marking
  *		    regions.  This "integrated flush" reduces the number of
  *		    requests between the kernel and userspace by effectively
@@ -413,6 +422,9 @@
  *		    userspace versions.
  */
 #define DM_ULOG_REQUEST_VERSION 3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct dm_ulog_request {

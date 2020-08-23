@@ -65,12 +65,18 @@ static unsigned long mmap_rnd(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned long mmap_base_legacy(void)
 {
 	return TASK_UNMAPPED_BASE + mmap_rnd();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned long mmap_base(void)
 {
@@ -98,7 +104,11 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
 	 */
 	if (mmap_is_legacy()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mm->mmap_base = TASK_UNMAPPED_BASE;
+=======
+		mm->mmap_base = mmap_base_legacy();
+>>>>>>> v3.18
 =======
 		mm->mmap_base = mmap_base_legacy();
 >>>>>>> v3.18
@@ -114,8 +124,11 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
 int s390_mmap_check(unsigned long addr, unsigned long len, unsigned long flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (is_compat_task() || (TASK_SIZE >= (1UL << 53)))
@@ -123,12 +136,17 @@ int s390_mmap_check(unsigned long addr, unsigned long len, unsigned long flags)
 	if (!(flags & MAP_FIXED))
 		addr = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((addr + len) >= TASK_SIZE) {
 		rc = crst_table_upgrade(current->mm, 1UL << 53);
 		if (rc)
 			return rc;
 		update_mm(current->mm, current);
 	}
+=======
+	if ((addr + len) >= TASK_SIZE)
+		return crst_table_upgrade(current->mm, 1UL << 53);
+>>>>>>> v3.18
 =======
 	if ((addr + len) >= TASK_SIZE)
 		return crst_table_upgrade(current->mm, 1UL << 53);
@@ -153,7 +171,10 @@ s390_get_unmapped_area(struct file *filp, unsigned long addr,
 		if (rc)
 			return (unsigned long) rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		update_mm(mm, current);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		area = arch_get_unmapped_area(filp, addr, len, pgoff, flags);
@@ -179,7 +200,10 @@ s390_get_unmapped_area_topdown(struct file *filp, const unsigned long addr,
 		if (rc)
 			return (unsigned long) rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		update_mm(mm, current);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		area = arch_get_unmapped_area_topdown(filp, addr, len,
@@ -199,7 +223,11 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
 	 */
 	if (mmap_is_legacy()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mm->mmap_base = TASK_UNMAPPED_BASE;
+=======
+		mm->mmap_base = mmap_base_legacy();
+>>>>>>> v3.18
 =======
 		mm->mmap_base = mmap_base_legacy();
 >>>>>>> v3.18

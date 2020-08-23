@@ -9,7 +9,10 @@ bool nouveau_boolopt(const char *optstr, const char *opt, bool value);
 int nouveau_dbgopt(const char *optstr, const char *sub);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* compares unterminated string 'str' with zero-terminated string 'cmp' */
 static inline int
 strncasecmpz(const char *str, const char *cmp, size_t len)
@@ -19,5 +22,8 @@ strncasecmpz(const char *str, const char *cmp, size_t len)
 	return strncasecmp(str, cmp, len);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

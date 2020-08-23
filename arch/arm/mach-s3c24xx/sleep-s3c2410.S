@@ -26,6 +26,10 @@
 
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -36,7 +40,10 @@
 #include <mach/regs-gpio.h>
 #include <mach/regs-clock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -74,7 +81,11 @@ s3c2410_do_sleep:
 	streq	r9, [r6]			@ CPU sleep
 1:	beq	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r14
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

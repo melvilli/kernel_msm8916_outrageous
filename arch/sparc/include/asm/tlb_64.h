@@ -9,7 +9,11 @@
 
 #ifdef CONFIG_SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void smp_flush_tlb_pending(struct mm_struct *,
+=======
+void smp_flush_tlb_pending(struct mm_struct *,
+>>>>>>> v3.18
 =======
 void smp_flush_tlb_pending(struct mm_struct *,
 >>>>>>> v3.18
@@ -18,7 +22,11 @@ void smp_flush_tlb_pending(struct mm_struct *,
 
 #ifdef CONFIG_SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void smp_flush_tlb_mm(struct mm_struct *mm);
+=======
+void smp_flush_tlb_mm(struct mm_struct *mm);
+>>>>>>> v3.18
 =======
 void smp_flush_tlb_mm(struct mm_struct *mm);
 >>>>>>> v3.18
@@ -28,8 +36,13 @@ void smp_flush_tlb_mm(struct mm_struct *mm);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __flush_tlb_pending(unsigned long, unsigned long, unsigned long *);
 extern void flush_tlb_pending(void);
+=======
+void __flush_tlb_pending(unsigned long, unsigned long, unsigned long *);
+void flush_tlb_pending(void);
+>>>>>>> v3.18
 =======
 void __flush_tlb_pending(unsigned long, unsigned long, unsigned long *);
 void flush_tlb_pending(void);

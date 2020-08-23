@@ -155,7 +155,11 @@ extra_header_fields:
 	.quad	0				# ImageBase
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long	0x20				# SectionAlignment
+=======
+	.long	CONFIG_PHYSICAL_ALIGN		# SectionAlignment
+>>>>>>> v3.18
 =======
 	.long	CONFIG_PHYSICAL_ALIGN		# SectionAlignment
 >>>>>>> v3.18
@@ -306,7 +310,11 @@ _start:
 
 		.ascii	"HdrS"		# header signature
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.word	0x020c		# header version number (>= 0x0105)
+=======
+		.word	0x020d		# header version number (>= 0x0105)
+>>>>>>> v3.18
 =======
 		.word	0x020d		# header version number (>= 0x0105)
 >>>>>>> v3.18
@@ -377,7 +385,11 @@ cmd_line_ptr:	.long	0		# (Header version 0x0202 or later)
 					# low memory 0x10000 or higher.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ramdisk_max:	.long 0x7fffffff
+=======
+initrd_addr_max: .long 0x7fffffff
+>>>>>>> v3.18
 =======
 initrd_addr_max: .long 0x7fffffff
 >>>>>>> v3.18
@@ -414,11 +426,14 @@ xloadflags:
 
 #ifdef CONFIG_EFI_STUB
 <<<<<<< HEAD
+<<<<<<< HEAD
 # ifdef CONFIG_X86_64
 #  define XLF23 XLF_EFI_HANDOVER_64		/* 64-bit EFI handover ok */
 # else
 #  define XLF23 XLF_EFI_HANDOVER_32		/* 32-bit EFI handover ok */
 =======
+=======
+>>>>>>> v3.18
 # ifdef CONFIG_EFI_MIXED
 #  define XLF23 (XLF_EFI_HANDOVER_32|XLF_EFI_HANDOVER_64)
 # else
@@ -427,14 +442,20 @@ xloadflags:
 #  else
 #   define XLF23 XLF_EFI_HANDOVER_32		/* 32-bit EFI handover ok */
 #  endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # endif
 #else
 # define XLF23 0
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.word XLF0 | XLF1 | XLF23
 =======
+=======
+>>>>>>> v3.18
 
 #if defined(CONFIG_X86_64) && defined(CONFIG_EFI) && defined(CONFIG_KEXEC)
 # define XLF4 XLF_EFI_KEXEC
@@ -443,6 +464,9 @@ xloadflags:
 #endif
 
 			.word XLF0 | XLF1 | XLF23 | XLF4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 cmdline_size:   .long   COMMAND_LINE_SIZE-1     #length of the command line,
@@ -472,6 +496,7 @@ pref_address:		.quad LOAD_PHYSICAL_ADDR	# preferred load addr
 #endif
 init_size:		.long INIT_SIZE		# kernel initialization size
 <<<<<<< HEAD
+<<<<<<< HEAD
 handover_offset:
 #ifdef CONFIG_EFI_STUB
   			.long 0x30		# offset to the handover
@@ -479,6 +504,9 @@ handover_offset:
 #else
 			.long 0
 #endif
+=======
+handover_offset:	.long 0			# Filled in by build.c
+>>>>>>> v3.18
 =======
 handover_offset:	.long 0			# Filled in by build.c
 >>>>>>> v3.18

@@ -36,16 +36,22 @@
 #include <linux/acpi.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
 #include <acpi/apei.h>
 
 #define PREFIX "ACPI: "
 =======
+=======
+>>>>>>> v3.18
 #include <linux/dmi.h>
 #include <acpi/apei.h>	/* for acpi_hest_init() */
 
 #include "internal.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define _COMPONENT		ACPI_PCI_COMPONENT
@@ -57,11 +63,14 @@ static int acpi_pci_root_add(struct acpi_device *device,
 static void acpi_pci_root_remove(struct acpi_device *device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_PCIE_REQ_SUPPORT (OSC_EXT_PCI_CONFIG_SUPPORT \
 				| OSC_ACTIVE_STATE_PWR_SUPPORT \
 				| OSC_CLOCK_PWR_CAPABILITY_SUPPORT \
 				| OSC_MSI_SUPPORT)
 =======
+=======
+>>>>>>> v3.18
 static int acpi_pci_root_scan_dependent(struct acpi_device *adev)
 {
 	acpiphp_check_host_bridge(adev);
@@ -72,6 +81,9 @@ static int acpi_pci_root_scan_dependent(struct acpi_device *adev)
 				| OSC_PCI_ASPM_SUPPORT \
 				| OSC_PCI_CLOCK_PM_SUPPORT \
 				| OSC_PCI_MSI_SUPPORT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct acpi_device_id root_device_ids[] = {
@@ -85,6 +97,7 @@ static struct acpi_scan_handler pci_root_handler = {
 	.detach = acpi_pci_root_remove,
 	.hotplug = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ignore = true,
 	},
 };
@@ -94,11 +107,16 @@ static DEFINE_MUTEX(acpi_pci_root_lock);
 static LIST_HEAD(acpi_pci_roots);
 
 =======
+=======
+>>>>>>> v3.18
 		.enabled = true,
 		.scan_dependent = acpi_pci_root_scan_dependent,
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEFINE_MUTEX(osc_lock);
 
@@ -132,6 +150,7 @@ get_root_bridge_busnr_callback(struct acpi_resource *resource, void *data)
 	struct resource *res = data;
 	struct acpi_resource_address64 address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (resource->type != ACPI_RESOURCE_TYPE_ADDRESS16 &&
 	    resource->type != ACPI_RESOURCE_TYPE_ADDRESS32 &&
@@ -140,12 +159,17 @@ get_root_bridge_busnr_callback(struct acpi_resource *resource, void *data)
 
 	acpi_resource_to_address64(resource, &address);
 =======
+=======
+>>>>>>> v3.18
 	acpi_status status;
 
 	status = acpi_resource_to_address64(resource, &address);
 	if (ACPI_FAILURE(status))
 		return AE_OK;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((address.address_length > 0) &&
 	    (address.resource_type == ACPI_BUS_NUMBER_RANGE)) {
@@ -173,7 +197,10 @@ static acpi_status try_get_root_bridge_busnr(acpi_handle handle,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct pci_osc_bit_struct {
 	u32 bit;
 	char *desc;
@@ -223,6 +250,9 @@ static void decode_osc_control(struct acpi_pci_root *root, char *msg, u32 word)
 			ARRAY_SIZE(pci_osc_control_bit));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u8 pci_osc_uuid_str[] = "33DB4D5B-1FF7-401C-9657-7441C03DD766";
 
@@ -256,6 +286,7 @@ static acpi_status acpi_pci_query_osc(struct acpi_pci_root *root,
 	support |= root->osc_support_set;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	capbuf[OSC_QUERY_TYPE] = OSC_QUERY_ENABLE;
 	capbuf[OSC_SUPPORT_TYPE] = support;
 	if (control) {
@@ -265,6 +296,8 @@ static acpi_status acpi_pci_query_osc(struct acpi_pci_root *root,
 		/* Run _OSC query only with existing controls. */
 		capbuf[OSC_CONTROL_TYPE] = root->osc_control_set;
 =======
+=======
+>>>>>>> v3.18
 	capbuf[OSC_QUERY_DWORD] = OSC_QUERY_ENABLE;
 	capbuf[OSC_SUPPORT_DWORD] = support;
 	if (control) {
@@ -273,6 +306,9 @@ static acpi_status acpi_pci_query_osc(struct acpi_pci_root *root,
 	} else {
 		/* Run _OSC query only with existing controls. */
 		capbuf[OSC_CONTROL_DWORD] = root->osc_control_set;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -289,11 +325,15 @@ static acpi_status acpi_pci_osc_support(struct acpi_pci_root *root, u32 flags)
 {
 	acpi_status status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle tmp;
 
 	status = acpi_get_handle(root->device->handle, "_OSC", &tmp);
 	if (ACPI_FAILURE(status))
 		return status;
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -429,9 +469,14 @@ acpi_status acpi_pci_osc_control_set(acpi_handle handle, u32 *mask, u32 req)
 {
 	struct acpi_pci_root *root;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_status status;
 	u32 ctrl, capbuf[3];
 	acpi_handle tmp;
+=======
+	acpi_status status = AE_OK;
+	u32 ctrl, capbuf[3];
+>>>>>>> v3.18
 =======
 	acpi_status status = AE_OK;
 	u32 ctrl, capbuf[3];
@@ -449,10 +494,13 @@ acpi_status acpi_pci_osc_control_set(acpi_handle handle, u32 *mask, u32 req)
 		return AE_NOT_EXIST;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_get_handle(handle, "_OSC", &tmp);
 	if (ACPI_FAILURE(status))
 		return status;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&osc_lock);
@@ -470,6 +518,11 @@ acpi_status acpi_pci_osc_control_set(acpi_handle handle, u32 *mask, u32 req)
 		if (ctrl == *mask)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		decode_osc_control(root, "platform does not support",
+				   ctrl & ~(*mask));
+>>>>>>> v3.18
 =======
 		decode_osc_control(root, "platform does not support",
 				   ctrl & ~(*mask));
@@ -479,6 +532,11 @@ acpi_status acpi_pci_osc_control_set(acpi_handle handle, u32 *mask, u32 req)
 
 	if ((ctrl & req) != req) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		decode_osc_control(root, "not requesting control; platform does not support",
+				   req & ~(ctrl));
+>>>>>>> v3.18
 =======
 		decode_osc_control(root, "not requesting control; platform does not support",
 				   req & ~(ctrl));
@@ -488,9 +546,15 @@ acpi_status acpi_pci_osc_control_set(acpi_handle handle, u32 *mask, u32 req)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	capbuf[OSC_QUERY_TYPE] = 0;
 	capbuf[OSC_SUPPORT_TYPE] = root->osc_support_set;
 	capbuf[OSC_CONTROL_TYPE] = ctrl;
+=======
+	capbuf[OSC_QUERY_DWORD] = 0;
+	capbuf[OSC_SUPPORT_DWORD] = root->osc_support_set;
+	capbuf[OSC_CONTROL_DWORD] = ctrl;
+>>>>>>> v3.18
 =======
 	capbuf[OSC_QUERY_DWORD] = 0;
 	capbuf[OSC_SUPPORT_DWORD] = root->osc_support_set;
@@ -506,7 +570,10 @@ out:
 EXPORT_SYMBOL(acpi_pci_osc_control_set);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void negotiate_os_control(struct acpi_pci_root *root, int *no_aspm,
 				 int *clear_aspm)
 {
@@ -601,6 +668,9 @@ static void negotiate_os_control(struct acpi_pci_root *root, int *no_aspm,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int acpi_pci_root_add(struct acpi_device *device,
 			     const struct acpi_device_id *not_used)
@@ -610,8 +680,13 @@ static int acpi_pci_root_add(struct acpi_device *device,
 	int result;
 	struct acpi_pci_root *root;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 flags, base_flags;
 	bool no_aspm = false, clear_aspm = false;
+=======
+	acpi_handle handle = device->handle;
+	int no_aspm = 0, clear_aspm = 0;
+>>>>>>> v3.18
 =======
 	acpi_handle handle = device->handle;
 	int no_aspm = 0, clear_aspm = 0;
@@ -623,15 +698,21 @@ static int acpi_pci_root_add(struct acpi_device *device,
 
 	segment = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_evaluate_integer(device->handle, METHOD_NAME__SEG, NULL,
 				       &segment);
 	if (ACPI_FAILURE(status) && status != AE_NOT_FOUND) {
 		printk(KERN_ERR PREFIX "can't evaluate _SEG\n");
 =======
+=======
+>>>>>>> v3.18
 	status = acpi_evaluate_integer(handle, METHOD_NAME__SEG, NULL,
 				       &segment);
 	if (ACPI_FAILURE(status) && status != AE_NOT_FOUND) {
 		dev_err(&device->dev,  "can't evaluate _SEG\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		result = -ENODEV;
 		goto end;
@@ -640,7 +721,11 @@ static int acpi_pci_root_add(struct acpi_device *device,
 	/* Check _CRS first, then _BBN.  If no _BBN, default to zero. */
 	root->secondary.flags = IORESOURCE_BUS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = try_get_root_bridge_busnr(device->handle, &root->secondary);
+=======
+	status = try_get_root_bridge_busnr(handle, &root->secondary);
+>>>>>>> v3.18
 =======
 	status = try_get_root_bridge_busnr(handle, &root->secondary);
 >>>>>>> v3.18
@@ -653,9 +738,15 @@ static int acpi_pci_root_add(struct acpi_device *device,
 		 */
 		root->secondary.end = 0xFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING FW_BUG PREFIX
 		       "no secondary bus range in _CRS\n");
 		status = acpi_evaluate_integer(device->handle, METHOD_NAME__BBN,
+=======
+		dev_warn(&device->dev,
+			 FW_BUG "no secondary bus range in _CRS\n");
+		status = acpi_evaluate_integer(handle, METHOD_NAME__BBN,
+>>>>>>> v3.18
 =======
 		dev_warn(&device->dev,
 			 FW_BUG "no secondary bus range in _CRS\n");
@@ -668,7 +759,11 @@ static int acpi_pci_root_add(struct acpi_device *device,
 			root->secondary.start = 0;
 		else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PREFIX "can't evaluate _BBN\n");
+=======
+			dev_err(&device->dev, "can't evaluate _BBN\n");
+>>>>>>> v3.18
 =======
 			dev_err(&device->dev, "can't evaluate _BBN\n");
 >>>>>>> v3.18
@@ -678,7 +773,10 @@ static int acpi_pci_root_add(struct acpi_device *device,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&root->node);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	root->device = device;
@@ -687,6 +785,7 @@ static int acpi_pci_root_add(struct acpi_device *device,
 	strcpy(acpi_device_class(device), ACPI_PCI_ROOT_CLASS);
 	device->driver_data = root;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	printk(KERN_INFO PREFIX "%s [%s] (domain %04x %pR)\n",
 	       acpi_device_name(device), acpi_device_bid(device),
@@ -774,6 +873,8 @@ static int acpi_pci_root_add(struct acpi_device *device,
 			 "(_OSC support mask: 0x%02x)\n", flags);
 	}
 =======
+=======
+>>>>>>> v3.18
 	pr_info(PREFIX "%s [%s] (domain %04x %pR)\n",
 	       acpi_device_name(device), acpi_device_bid(device),
 	       root->segment, &root->secondary);
@@ -781,6 +882,9 @@ static int acpi_pci_root_add(struct acpi_device *device,
 	root->mcfg_addr = acpi_pci_root_get_mcfg_addr(handle);
 
 	negotiate_os_control(root, &no_aspm, &clear_aspm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -800,6 +904,10 @@ static int acpi_pci_root_add(struct acpi_device *device,
 			"Bus %04x:%02x not present in PCI namespace\n",
 			root->segment, (unsigned int)root->secondary.start);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		device->driver_data = NULL;
+>>>>>>> v3.18
 =======
 		device->driver_data = NULL;
 >>>>>>> v3.18
@@ -815,7 +923,11 @@ static int acpi_pci_root_add(struct acpi_device *device,
 		pcie_no_aspm();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_acpi_add_bus_pm_notifier(device, root->bus);
+=======
+	pci_acpi_add_bus_pm_notifier(device);
+>>>>>>> v3.18
 =======
 	pci_acpi_add_bus_pm_notifier(device);
 >>>>>>> v3.18
@@ -824,6 +936,7 @@ static int acpi_pci_root_add(struct acpi_device *device,
 
 	if (system_state != SYSTEM_BOOTING) {
 		pcibios_resource_survey_bus(root->bus);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pci_assign_unassigned_bus_resources(root->bus);
 	}
@@ -834,12 +947,17 @@ static int acpi_pci_root_add(struct acpi_device *device,
 
 	pci_bus_add_devices(root->bus);
 =======
+=======
+>>>>>>> v3.18
 		pci_assign_unassigned_root_bus_resources(root->bus);
 	}
 
 	pci_lock_rescan_remove();
 	pci_bus_add_devices(root->bus);
 	pci_unlock_rescan_remove();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 1;
 
@@ -853,6 +971,11 @@ static void acpi_pci_root_remove(struct acpi_device *device)
 	struct acpi_pci_root *root = acpi_driver_data(device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 
@@ -865,9 +988,14 @@ static void acpi_pci_root_remove(struct acpi_device *device)
 	pci_remove_root_bus(root->bus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&acpi_pci_root_lock);
 	list_del(&root->node);
 	mutex_unlock(&acpi_pci_root_lock);
+=======
+	pci_unlock_rescan_remove();
+
+>>>>>>> v3.18
 =======
 	pci_unlock_rescan_remove();
 
@@ -878,6 +1006,7 @@ static void acpi_pci_root_remove(struct acpi_device *device)
 void __init acpi_pci_root_init(void)
 {
 	acpi_hest_init();
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (!acpi_pci_disabled) {
@@ -1025,10 +1154,15 @@ void __init acpi_pci_root_hp_init(void)
 
 	printk(KERN_DEBUG "Found %d acpi root devices\n", num);
 =======
+=======
+>>>>>>> v3.18
 	if (acpi_pci_disabled)
 		return;
 
 	pci_acpi_crs_quirks();
 	acpi_scan_add_handler_with_hotplug(&pci_root_handler, "pci_root");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

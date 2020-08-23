@@ -2,7 +2,11 @@
  * net/tipc/bcast.c: TIPC broadcast code
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2004-2006, Ericsson AB
+=======
+ * Copyright (c) 2004-2006, 2014, Ericsson AB
+>>>>>>> v3.18
 =======
  * Copyright (c) 2004-2006, 2014, Ericsson AB
 >>>>>>> v3.18
@@ -42,6 +46,7 @@
 #include "core.h"
 #include "link.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "port.h"
 #include "bcast.h"
 #include "name_distr.h"
@@ -50,6 +55,8 @@
 
 #define BCLINK_WIN_DEFAULT 20		/* bcast link window size (default) */
 =======
+=======
+>>>>>>> v3.18
 #include "socket.h"
 #include "msg.h"
 #include "bcast.h"
@@ -58,6 +65,9 @@
 #define	MAX_PKT_DEFAULT_MCAST	1500	/* bcast link max packet size (fixed) */
 #define	BCLINK_WIN_DEFAULT	20	/* bcast link window size (default) */
 #define	BCBEARER		MAX_BEARERS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -87,7 +97,11 @@ struct tipc_bcbearer_pair {
  * to avoid consuming potentially limited stack space through the use of
  * large local variables within multicast routines.  Concurrent access is
 <<<<<<< HEAD
+<<<<<<< HEAD
  * prevented through use of the spinlock "bc_lock".
+=======
+ * prevented through use of the spinlock "bclink_lock".
+>>>>>>> v3.18
 =======
  * prevented through use of the spinlock "bclink_lock".
 >>>>>>> v3.18
@@ -104,13 +118,19 @@ struct tipc_bcbearer {
 /**
  * struct tipc_bclink - link used for broadcast messages
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link: (non-standard) broadcast link structure
  * @node: (non-standard) node structure representing b'cast link's peer node
 =======
+=======
+>>>>>>> v3.18
  * @lock: spinlock governing access to structure
  * @link: (non-standard) broadcast link structure
  * @node: (non-standard) node structure representing b'cast link's peer node
  * @flags: represent bclink states
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @bcast_nodes: map of broadcast-capable nodes
  * @retransmit_to: node that most recently requested a retransmit
@@ -119,18 +139,25 @@ struct tipc_bcbearer {
  */
 struct tipc_bclink {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tipc_link link;
 	struct tipc_node node;
 =======
+=======
+>>>>>>> v3.18
 	spinlock_t lock;
 	struct tipc_link link;
 	struct tipc_node node;
 	unsigned int flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct tipc_node_map bcast_nodes;
 	struct tipc_node *retransmit_to;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct tipc_bcbearer bcast_bearer;
 static struct tipc_bclink bcast_link;
@@ -145,6 +172,11 @@ static struct tipc_bcbearer *bcbearer;
 static struct tipc_bclink *bclink;
 static struct tipc_link *bcl;
 >>>>>>> v3.18
+=======
+static struct tipc_bcbearer *bcbearer;
+static struct tipc_bclink *bclink;
+static struct tipc_link *bcl;
+>>>>>>> v3.18
 
 const char tipc_bclink_name[] = "broadcast-link";
 
@@ -152,7 +184,10 @@ static void tipc_nmap_diff(struct tipc_node_map *nm_a,
 			   struct tipc_node_map *nm_b,
 			   struct tipc_node_map *nm_diff);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void tipc_nmap_add(struct tipc_node_map *nm_ptr, u32 node);
 static void tipc_nmap_remove(struct tipc_node_map *nm_ptr, u32 node);
 
@@ -189,6 +224,9 @@ void tipc_bclink_set_flags(unsigned int flags)
 {
 	bclink->flags |= flags;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static u32 bcbuf_acks(struct sk_buff *buf)
@@ -209,9 +247,15 @@ static void bcbuf_decr_acks(struct sk_buff *buf)
 void tipc_bclink_add_node(u32 addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&bc_lock);
 	tipc_nmap_add(&bclink->bcast_nodes, addr);
 	spin_unlock_bh(&bc_lock);
+=======
+	tipc_bclink_lock();
+	tipc_nmap_add(&bclink->bcast_nodes, addr);
+	tipc_bclink_unlock();
+>>>>>>> v3.18
 =======
 	tipc_bclink_lock();
 	tipc_nmap_add(&bclink->bcast_nodes, addr);
@@ -222,9 +266,15 @@ void tipc_bclink_add_node(u32 addr)
 void tipc_bclink_remove_node(u32 addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&bc_lock);
 	tipc_nmap_remove(&bclink->bcast_nodes, addr);
 	spin_unlock_bh(&bc_lock);
+=======
+	tipc_bclink_lock();
+	tipc_nmap_remove(&bclink->bcast_nodes, addr);
+	tipc_bclink_unlock();
+>>>>>>> v3.18
 =======
 	tipc_bclink_lock();
 	tipc_nmap_remove(&bclink->bcast_nodes, addr);
@@ -256,7 +306,11 @@ static void bclink_update_last_sent(struct tipc_node *node, u32 seqno)
  * tipc_bclink_retransmit_to - get most recent node to request retransmission
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Called with bc_lock locked
+=======
+ * Called with bclink_lock locked
+>>>>>>> v3.18
 =======
  * Called with bclink_lock locked
 >>>>>>> v3.18
@@ -272,7 +326,11 @@ struct tipc_node *tipc_bclink_retransmit_to(void)
  * @to: sequence number of last packet to retransmit
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Called with bc_lock locked
+=======
+ * Called with bclink_lock locked
+>>>>>>> v3.18
 =======
  * Called with bclink_lock locked
 >>>>>>> v3.18
@@ -289,7 +347,10 @@ static void bclink_retransmit_pkt(u32 after, u32 to)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * tipc_bclink_wakeup_users - wake up pending users
  *
  * Called with no locks taken
@@ -301,13 +362,20 @@ void tipc_bclink_wakeup_users(void)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * tipc_bclink_acknowledge - handle acknowledgement of broadcast packets
  * @n_ptr: node that sent acknowledgement info
  * @acked: broadcast sequence # that has been acknowledged
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Node is locked, bc_lock unlocked.
+=======
+ * Node is locked, bclink_lock unlocked.
+>>>>>>> v3.18
 =======
  * Node is locked, bclink_lock unlocked.
 >>>>>>> v3.18
@@ -319,8 +387,12 @@ void tipc_bclink_acknowledge(struct tipc_node *n_ptr, u32 acked)
 	unsigned int released = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&bc_lock);
 
+=======
+	tipc_bclink_lock();
+>>>>>>> v3.18
 =======
 	tipc_bclink_lock();
 >>>>>>> v3.18
@@ -385,16 +457,22 @@ void tipc_bclink_acknowledge(struct tipc_node *n_ptr, u32 acked)
 		bclink_set_last_sent();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(released && !list_empty(&bcl->waiting_ports)))
 		tipc_link_wakeup_ports(bcl, 0);
 exit:
 	spin_unlock_bh(&bc_lock);
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(released && !skb_queue_empty(&bcl->waiting_sks)))
 		n_ptr->action_flags |= TIPC_WAKEUP_BCAST_USERS;
 
 exit:
 	tipc_bclink_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -402,7 +480,11 @@ exit:
  * tipc_bclink_update_link_state - update broadcast link state
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * tipc_net_lock and node lock set
+=======
+ * RCU and node lock set
+>>>>>>> v3.18
 =======
  * RCU and node lock set
 >>>>>>> v3.18
@@ -453,15 +535,21 @@ void tipc_bclink_update_link_state(struct tipc_node *n_ptr, u32 last_sent)
 				 : n_ptr->bclink.last_sent);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&bc_lock);
 		tipc_bearer_send(&bcbearer->bearer, buf, NULL);
 		bcl->stats.sent_nacks++;
 		spin_unlock_bh(&bc_lock);
 =======
+=======
+>>>>>>> v3.18
 		tipc_bclink_lock();
 		tipc_bearer_send(MAX_BEARERS, buf, NULL);
 		bcl->stats.sent_nacks++;
 		tipc_bclink_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree_skb(buf);
 
@@ -475,8 +563,11 @@ void tipc_bclink_update_link_state(struct tipc_node *n_ptr, u32 last_sent)
  * Delay any upcoming NACK by this node if another node has already
  * requested the first message this node is going to ask for.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Only tipc_net_lock set.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -497,6 +588,7 @@ static void bclink_peek_nack(struct tipc_msg *msg)
 	tipc_node_unlock(n_ptr);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * tipc_bclink_send_msg - broadcast a packet to all nodes in cluster
@@ -523,6 +615,8 @@ exit:
 	spin_unlock_bh(&bc_lock);
 	return res;
 =======
+=======
+>>>>>>> v3.18
 /* tipc_bclink_xmit - broadcast buffer chain to all nodes in cluster
  *                    and to identified node local sockets
  * @buf: chain of buffers containing message
@@ -567,6 +661,9 @@ int tipc_bclink_xmit(struct sk_buff *buf)
 		kfree_skb(clbuf);
 
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -574,7 +671,11 @@ int tipc_bclink_xmit(struct sk_buff *buf)
  * bclink_accept_pkt - accept an incoming, in-sequence broadcast packet
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Called with both sending node's lock and bc_lock taken.
+=======
+ * Called with both sending node's lock and bclink_lock taken.
+>>>>>>> v3.18
 =======
  * Called with both sending node's lock and bclink_lock taken.
 >>>>>>> v3.18
@@ -593,9 +694,14 @@ static void bclink_accept_pkt(struct tipc_node *node, u32 seqno)
 
 	if (((seqno - tipc_own_addr) % TIPC_MIN_LINK_WIN) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tipc_link_send_proto_msg(
 			node->active_links[node->addr & 1],
 			STATE_MSG, 0, 0, 0, 0, 0);
+=======
+		tipc_link_proto_xmit(node->active_links[node->addr & 1],
+				     STATE_MSG, 0, 0, 0, 0, 0);
+>>>>>>> v3.18
 =======
 		tipc_link_proto_xmit(node->active_links[node->addr & 1],
 				     STATE_MSG, 0, 0, 0, 0, 0);
@@ -606,17 +712,23 @@ static void bclink_accept_pkt(struct tipc_node *node, u32 seqno)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * tipc_bclink_recv_pkt - receive a broadcast packet, and deliver upwards
  *
  * tipc_net_lock is read_locked, no other locks set
  */
 void tipc_bclink_recv_pkt(struct sk_buff *buf)
 =======
+=======
+>>>>>>> v3.18
  * tipc_bclink_rcv - receive a broadcast packet, and deliver upwards
  *
  * RCU is locked, no other locks set
  */
 void tipc_bclink_rcv(struct sk_buff *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct tipc_msg *msg = buf_msg(buf);
@@ -624,7 +736,11 @@ void tipc_bclink_rcv(struct sk_buff *buf)
 	u32 next_in;
 	u32 seqno;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int deferred;
+=======
+	int deferred = 0;
+>>>>>>> v3.18
 =======
 	int deferred = 0;
 >>>>>>> v3.18
@@ -651,7 +767,11 @@ void tipc_bclink_rcv(struct sk_buff *buf)
 			tipc_bclink_acknowledge(node, msg_bcast_ack(msg));
 			tipc_node_unlock(node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_lock_bh(&bc_lock);
+=======
+			tipc_bclink_lock();
+>>>>>>> v3.18
 =======
 			tipc_bclink_lock();
 >>>>>>> v3.18
@@ -660,7 +780,11 @@ void tipc_bclink_rcv(struct sk_buff *buf)
 			bclink_retransmit_pkt(msg_bcgap_after(msg),
 					      msg_bcgap_to(msg));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_unlock_bh(&bc_lock);
+=======
+			tipc_bclink_unlock();
+>>>>>>> v3.18
 =======
 			tipc_bclink_unlock();
 >>>>>>> v3.18
@@ -681,6 +805,7 @@ receive:
 		/* Deliver message to destination */
 
 		if (likely(msg_isdata(msg))) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			spin_lock_bh(&bc_lock);
 			bclink_accept_pkt(node, seqno);
@@ -722,6 +847,8 @@ receive:
 			bclink_accept_pkt(node, seqno);
 			spin_unlock_bh(&bc_lock);
 =======
+=======
+>>>>>>> v3.18
 			tipc_bclink_lock();
 			bclink_accept_pkt(node, seqno);
 			tipc_bclink_unlock();
@@ -763,6 +890,9 @@ receive:
 			tipc_bclink_lock();
 			bclink_accept_pkt(node, seqno);
 			tipc_bclink_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			tipc_node_unlock(node);
 			kfree_skb(buf);
@@ -808,10 +938,16 @@ receive:
 		bclink_update_last_sent(node, seqno);
 		buf = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		deferred = 0;
 
 	spin_lock_bh(&bc_lock);
+=======
+	}
+
+	tipc_bclink_lock();
+>>>>>>> v3.18
 =======
 	}
 
@@ -824,7 +960,11 @@ receive:
 		bcl->stats.duplicates++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&bc_lock);
+=======
+	tipc_bclink_unlock();
+>>>>>>> v3.18
 =======
 	tipc_bclink_unlock();
 >>>>>>> v3.18
@@ -852,17 +992,23 @@ u32 tipc_bclink_acks_missing(struct tipc_node *n_ptr)
  * since the broadcast link's pseudo-bearer never blocks
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tipc_bcbearer_send(struct sk_buff *buf,
 			      struct tipc_bearer *unused1,
 			      struct tipc_media_addr *unused2)
 {
 	int bp_index;
 =======
+=======
+>>>>>>> v3.18
 static int tipc_bcbearer_send(struct sk_buff *buf, struct tipc_bearer *unused1,
 			      struct tipc_media_addr *unused2)
 {
 	int bp_index;
 	struct tipc_msg *msg = buf_msg(buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Prepare broadcast link message for reliable transmission,
@@ -872,10 +1018,14 @@ static int tipc_bcbearer_send(struct sk_buff *buf, struct tipc_bearer *unused1,
 	 */
 	if (likely(!msg_non_seq(buf_msg(buf)))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct tipc_msg *msg;
 
 		bcbuf_set_acks(buf, bclink->bcast_nodes.count);
 		msg = buf_msg(buf);
+=======
+		bcbuf_set_acks(buf, bclink->bcast_nodes.count);
+>>>>>>> v3.18
 =======
 		bcbuf_set_acks(buf, bclink->bcast_nodes.count);
 >>>>>>> v3.18
@@ -896,7 +1046,12 @@ static int tipc_bcbearer_send(struct sk_buff *buf, struct tipc_bearer *unused1,
 		struct tipc_bearer *p = bcbearer->bpairs[bp_index].primary;
 		struct tipc_bearer *s = bcbearer->bpairs[bp_index].secondary;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct tipc_bearer *b = p;
+=======
+		struct tipc_bearer *bp[2] = {p, s};
+		struct tipc_bearer *b = bp[msg_link_selector(msg)];
+>>>>>>> v3.18
 =======
 		struct tipc_bearer *bp[2] = {p, s};
 		struct tipc_bearer *b = bp[msg_link_selector(msg)];
@@ -905,6 +1060,7 @@ static int tipc_bcbearer_send(struct sk_buff *buf, struct tipc_bearer *unused1,
 
 		if (!p)
 			break; /* No more bearers to try */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (tipc_bearer_blocked(p)) {
@@ -917,6 +1073,10 @@ static int tipc_bcbearer_send(struct sk_buff *buf, struct tipc_bearer *unused1,
 		if (!b)
 			b = p;
 >>>>>>> v3.18
+=======
+		if (!b)
+			b = p;
+>>>>>>> v3.18
 		tipc_nmap_diff(&bcbearer->remains, &b->nodes,
 			       &bcbearer->remains_new);
 		if (bcbearer->remains_new.count == bcbearer->remains.count)
@@ -924,6 +1084,7 @@ static int tipc_bcbearer_send(struct sk_buff *buf, struct tipc_bearer *unused1,
 
 		if (bp_index == 0) {
 			/* Use original buffer for first bearer */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			tipc_bearer_send(b, buf, &b->bcast_addr);
 		} else {
@@ -942,6 +1103,8 @@ static int tipc_bcbearer_send(struct sk_buff *buf, struct tipc_bearer *unused1,
 		}
 
 =======
+=======
+>>>>>>> v3.18
 			tipc_bearer_send(b->identity, buf, &b->bcast_addr);
 		} else {
 			/* Avoid concurrent buffer access */
@@ -951,6 +1114,9 @@ static int tipc_bcbearer_send(struct sk_buff *buf, struct tipc_bearer *unused1,
 			tipc_bearer_send(b->identity, tbuf, &b->bcast_addr);
 			kfree_skb(tbuf); /* Bearer keeps a clone */
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (bcbearer->remains_new.count == 0)
 			break; /* All targets reached */
@@ -965,6 +1131,7 @@ static int tipc_bcbearer_send(struct sk_buff *buf, struct tipc_bearer *unused1,
  * tipc_bcbearer_sort - create sets of bearer pairs used by broadcast bearer
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tipc_bcbearer_sort(void)
 {
 	struct tipc_bcbearer_pair *bp_temp = bcbearer->bpairs_temp;
@@ -974,6 +1141,8 @@ void tipc_bcbearer_sort(void)
 
 	spin_lock_bh(&bc_lock);
 =======
+=======
+>>>>>>> v3.18
 void tipc_bcbearer_sort(struct tipc_node_map *nm_ptr, u32 node, bool action)
 {
 	struct tipc_bcbearer_pair *bp_temp = bcbearer->bpairs_temp;
@@ -988,21 +1157,30 @@ void tipc_bcbearer_sort(struct tipc_node_map *nm_ptr, u32 node, bool action)
 		tipc_nmap_add(nm_ptr, node);
 	else
 		tipc_nmap_remove(nm_ptr, node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Group bearers by priority (can assume max of two per priority) */
 	memset(bp_temp, 0, sizeof(bcbearer->bpairs_temp));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (b_index = 0; b_index < MAX_BEARERS; b_index++) {
 		struct tipc_bearer *b = &tipc_bearers[b_index];
 
 		if (!b->active || !b->nodes.count)
 =======
+=======
+>>>>>>> v3.18
 	rcu_read_lock();
 	for (b_index = 0; b_index < MAX_BEARERS; b_index++) {
 		b = rcu_dereference_rtnl(bearer_list[b_index]);
 		if (!b || !b->nodes.count)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 
@@ -1012,6 +1190,10 @@ void tipc_bcbearer_sort(struct tipc_node_map *nm_ptr, u32 node, bool action)
 			bp_temp[b->priority].secondary = b;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 	rcu_read_unlock();
 >>>>>>> v3.18
@@ -1041,7 +1223,11 @@ void tipc_bcbearer_sort(struct tipc_node_map *nm_ptr, u32 node, bool action)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&bc_lock);
+=======
+	tipc_bclink_unlock();
+>>>>>>> v3.18
 =======
 	tipc_bclink_unlock();
 >>>>>>> v3.18
@@ -1057,7 +1243,11 @@ int tipc_bclink_stats(char *buf, const u32 buf_size)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&bc_lock);
+=======
+	tipc_bclink_lock();
+>>>>>>> v3.18
 =======
 	tipc_bclink_lock();
 >>>>>>> v3.18
@@ -1090,7 +1280,11 @@ int tipc_bclink_stats(char *buf, const u32 buf_size)
 			     (s->accu_queue_sz / s->queue_sz_counts) : 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&bc_lock);
+=======
+	tipc_bclink_unlock();
+>>>>>>> v3.18
 =======
 	tipc_bclink_unlock();
 >>>>>>> v3.18
@@ -1103,9 +1297,15 @@ int tipc_bclink_reset_stats(void)
 		return -ENOPROTOOPT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&bc_lock);
 	memset(&bcl->stats, 0, sizeof(bcl->stats));
 	spin_unlock_bh(&bc_lock);
+=======
+	tipc_bclink_lock();
+	memset(&bcl->stats, 0, sizeof(bcl->stats));
+	tipc_bclink_unlock();
+>>>>>>> v3.18
 =======
 	tipc_bclink_lock();
 	memset(&bcl->stats, 0, sizeof(bcl->stats));
@@ -1122,6 +1322,7 @@ int tipc_bclink_set_queue_limits(u32 limit)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&bc_lock);
 	tipc_link_set_queue_limits(bcl, limit);
 	spin_unlock_bh(&bc_lock);
@@ -1131,6 +1332,8 @@ int tipc_bclink_set_queue_limits(u32 limit)
 void tipc_bclink_init(void)
 {
 =======
+=======
+>>>>>>> v3.18
 	tipc_bclink_lock();
 	tipc_link_set_queue_limits(bcl, limit);
 	tipc_bclink_unlock();
@@ -1150,11 +1353,15 @@ int tipc_bclink_init(void)
 	}
 
 	bcl = &bclink->link;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bcbearer->bearer.media = &bcbearer->media;
 	bcbearer->media.send_msg = tipc_bcbearer_send;
 	sprintf(bcbearer->media.name, "tipc-broadcast");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	INIT_LIST_HEAD(&bcl->waiting_ports);
 	bcl->next_out_no = 1;
@@ -1167,6 +1374,8 @@ int tipc_bclink_init(void)
 	bcl->state = WORKING_WORKING;
 	strlcpy(bcl->name, tipc_bclink_name, TIPC_MAX_LINK_NAME);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_init(&bclink->lock);
 	__skb_queue_head_init(&bcl->waiting_sks);
 	bcl->next_out_no = 1;
@@ -1180,11 +1389,15 @@ int tipc_bclink_init(void)
 	bcl->state = WORKING_WORKING;
 	strlcpy(bcl->name, tipc_bclink_name, TIPC_MAX_LINK_NAME);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void tipc_bclink_stop(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_bh(&bc_lock);
 	tipc_link_stop(bcl);
@@ -1200,6 +1413,8 @@ void tipc_bclink_stop(void)
  */
 void tipc_nmap_add(struct tipc_node_map *nm_ptr, u32 node)
 =======
+=======
+>>>>>>> v3.18
 	tipc_bclink_lock();
 	tipc_link_purge_queues(bcl);
 	tipc_bclink_unlock();
@@ -1214,6 +1429,9 @@ void tipc_nmap_add(struct tipc_node_map *nm_ptr, u32 node)
  * tipc_nmap_add - add a node to a node map
  */
 static void tipc_nmap_add(struct tipc_node_map *nm_ptr, u32 node)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int n = tipc_node(node);
@@ -1230,7 +1448,11 @@ static void tipc_nmap_add(struct tipc_node_map *nm_ptr, u32 node)
  * tipc_nmap_remove - remove a node from a node map
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tipc_nmap_remove(struct tipc_node_map *nm_ptr, u32 node)
+=======
+static void tipc_nmap_remove(struct tipc_node_map *nm_ptr, u32 node)
+>>>>>>> v3.18
 =======
 static void tipc_nmap_remove(struct tipc_node_map *nm_ptr, u32 node)
 >>>>>>> v3.18

@@ -32,7 +32,10 @@
 #define	NR_RESERVED_BUFS	32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int multipath_map (struct mpconf *conf)
@@ -41,7 +44,11 @@ static int multipath_map (struct mpconf *conf)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Later we do read balancing on the read side 
+=======
+	 * Later we do read balancing on the read side
+>>>>>>> v3.18
 =======
 	 * Later we do read balancing on the read side
 >>>>>>> v3.18
@@ -76,7 +83,10 @@ static void multipath_reschedule_retry (struct multipath_bh *mp_bh)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -109,9 +119,15 @@ static void multipath_end_request(struct bio *bio, int error)
 		char b[BDEVNAME_SIZE];
 		md_error (mp_bh->mddev, rdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "multipath: %s: rescheduling sector %llu\n", 
 		       bdevname(rdev->bdev,b), 
 		       (unsigned long long)bio->bi_sector);
+=======
+		printk(KERN_ERR "multipath: %s: rescheduling sector %llu\n",
+		       bdevname(rdev->bdev,b),
+		       (unsigned long long)bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 =======
 		printk(KERN_ERR "multipath: %s: rescheduling sector %llu\n",
 		       bdevname(rdev->bdev,b),
@@ -149,7 +165,11 @@ static void multipath_make_request(struct mddev *mddev, struct bio * bio)
 
 	mp_bh->bio = *bio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mp_bh->bio.bi_sector += multipath->rdev->data_offset;
+=======
+	mp_bh->bio.bi_iter.bi_sector += multipath->rdev->data_offset;
+>>>>>>> v3.18
 =======
 	mp_bh->bio.bi_iter.bi_sector += multipath->rdev->data_offset;
 >>>>>>> v3.18
@@ -166,7 +186,11 @@ static void multipath_status (struct seq_file *seq, struct mddev *mddev)
 	struct mpconf *conf = mddev->private;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -175,7 +199,11 @@ static void multipath_status (struct seq_file *seq, struct mddev *mddev)
 	for (i = 0; i < conf->raid_disks; i++)
 		seq_printf (seq, "%s",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       conf->multipaths[i].rdev && 
+=======
+			       conf->multipaths[i].rdev &&
+>>>>>>> v3.18
 =======
 			       conf->multipaths[i].rdev &&
 >>>>>>> v3.18
@@ -224,7 +252,11 @@ static void multipath_error (struct mddev *mddev, struct md_rdev *rdev)
 		 * which has just failed.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ALERT 
+=======
+		printk(KERN_ALERT
+>>>>>>> v3.18
 =======
 		printk(KERN_ALERT
 >>>>>>> v3.18
@@ -275,7 +307,10 @@ static void print_multipath_conf (struct mpconf *conf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int multipath_add_disk(struct mddev *mddev, struct md_rdev *rdev)
@@ -361,8 +396,11 @@ abort:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -394,8 +432,13 @@ static void multipathd(struct md_thread *thread)
 
 		bio = &mp_bh->bio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio->bi_sector = mp_bh->master_bio->bi_sector;
 		
+=======
+		bio->bi_iter.bi_sector = mp_bh->master_bio->bi_iter.bi_sector;
+
+>>>>>>> v3.18
 =======
 		bio->bi_iter.bi_sector = mp_bh->master_bio->bi_iter.bi_sector;
 
@@ -405,7 +448,11 @@ static void multipathd(struct md_thread *thread)
 				" error for block %llu\n",
 				bdevname(bio->bi_bdev,b),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				(unsigned long long)bio->bi_sector);
+=======
+				(unsigned long long)bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 =======
 				(unsigned long long)bio->bi_iter.bi_sector);
 >>>>>>> v3.18
@@ -415,14 +462,20 @@ static void multipathd(struct md_thread *thread)
 				" to another IO path\n",
 				bdevname(bio->bi_bdev,b),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				(unsigned long long)bio->bi_sector);
 			*bio = *(mp_bh->master_bio);
 			bio->bi_sector += conf->multipaths[mp_bh->path].rdev->data_offset;
 =======
+=======
+>>>>>>> v3.18
 				(unsigned long long)bio->bi_iter.bi_sector);
 			*bio = *(mp_bh->master_bio);
 			bio->bi_iter.bi_sector +=
 				conf->multipaths[mp_bh->path].rdev->data_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			bio->bi_bdev = conf->multipaths[mp_bh->path].rdev->bdev;
 			bio->bi_rw |= REQ_FAILFAST_TRANSPORT;
@@ -468,7 +521,11 @@ static int multipath_run (struct mddev *mddev)
 	mddev->private = conf;
 	if (!conf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR 
+=======
+		printk(KERN_ERR
+>>>>>>> v3.18
 =======
 		printk(KERN_ERR
 >>>>>>> v3.18
@@ -481,7 +538,11 @@ static int multipath_run (struct mddev *mddev)
 				   GFP_KERNEL);
 	if (!conf->multipaths) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR 
+=======
+		printk(KERN_ERR
+>>>>>>> v3.18
 =======
 		printk(KERN_ERR
 >>>>>>> v3.18
@@ -531,7 +592,11 @@ static int multipath_run (struct mddev *mddev)
 						 sizeof(struct multipath_bh));
 	if (conf->pool == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR 
+=======
+		printk(KERN_ERR
+>>>>>>> v3.18
 =======
 		printk(KERN_ERR
 >>>>>>> v3.18
@@ -551,7 +616,11 @@ static int multipath_run (struct mddev *mddev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO 
+=======
+	printk(KERN_INFO
+>>>>>>> v3.18
 =======
 	printk(KERN_INFO
 >>>>>>> v3.18
@@ -582,7 +651,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int multipath_stop (struct mddev *mddev)

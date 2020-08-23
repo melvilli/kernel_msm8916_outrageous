@@ -3,6 +3,7 @@
 #include <linux/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const u8 crc7_syndrome_table[256];
 
 static inline u8 crc7_byte(u8 crc, u8 data)
@@ -12,6 +13,8 @@ static inline u8 crc7_byte(u8 crc, u8 data)
 
 extern u8 crc7(u8 crc, const u8 *buffer, size_t len);
 =======
+=======
+>>>>>>> v3.18
 extern const u8 crc7_be_syndrome_table[256];
 
 static inline u8 crc7_be_byte(u8 crc, u8 data)
@@ -20,6 +23,9 @@ static inline u8 crc7_be_byte(u8 crc, u8 data)
 }
 
 extern u8 crc7_be(u8 crc, const u8 *buffer, size_t len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

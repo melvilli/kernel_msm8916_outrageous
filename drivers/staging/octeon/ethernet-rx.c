@@ -30,7 +30,10 @@
 #include <linux/cpumask.h>
 #include <linux/netdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/etherdevice.h>
@@ -76,7 +79,11 @@ struct cvm_oct_core_state {
 	/*
 	 * The number of additional cores that could be processing
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * input packtes.
+=======
+	 * input packets.
+>>>>>>> v3.18
 =======
 	 * input packets.
 >>>>>>> v3.18
@@ -88,6 +95,11 @@ struct cvm_oct_core_state {
 static struct cvm_oct_core_state core_state __cacheline_aligned_in_smp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int cvm_irq_cpu;
+
+>>>>>>> v3.18
 =======
 static int cvm_irq_cpu;
 
@@ -125,11 +137,15 @@ static void cvm_oct_no_more_work(void)
 	int cpu = smp_processor_id();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * CPU zero is special.  It always has the irq enabled when
 	 * waiting for incoming packets.
 	 */
 	if (cpu == 0) {
+=======
+	if (cpu == cvm_irq_cpu) {
+>>>>>>> v3.18
 =======
 	if (cpu == cvm_irq_cpu) {
 >>>>>>> v3.18
@@ -152,6 +168,10 @@ static irqreturn_t cvm_oct_do_interrupt(int cpl, void *dev_id)
 	/* Disable the IRQ and start napi_poll. */
 	disable_irq_nosync(OCTEON_IRQ_WORKQ0 + pow_receive_group);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cvm_irq_cpu = smp_processor_id();
+>>>>>>> v3.18
 =======
 	cvm_irq_cpu = smp_processor_id();
 >>>>>>> v3.18
@@ -226,8 +246,12 @@ static inline int cvm_oct_check_rcv_error(cvmx_wqe_t *work)
 				}
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk_ratelimited("Port %d unknown preamble, packet "
 						   "dropped\n",
+=======
+				printk_ratelimited("Port %d unknown preamble, packet dropped\n",
+>>>>>>> v3.18
 =======
 				printk_ratelimited("Port %d unknown preamble, packet dropped\n",
 >>>>>>> v3.18
@@ -328,6 +352,10 @@ static int cvm_oct_napi_poll(struct napi_struct *napi, int budget)
 				cvm_oct_enable_one_cpu();
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rx_count++;
+>>>>>>> v3.18
 =======
 		rx_count++;
 >>>>>>> v3.18
@@ -365,9 +393,12 @@ static int cvm_oct_napi_poll(struct napi_struct *napi, int budget)
 			skb = dev_alloc_skb(work->len);
 			if (!skb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk_ratelimited("Port %d failed to allocate "
 						   "skbuff, packet dropped\n",
 						   work->ipprt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				cvm_oct_free_work(work);
@@ -461,7 +492,10 @@ static int cvm_oct_napi_poll(struct napi_struct *napi, int budget)
 				}
 				netif_receive_skb(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rx_count++;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			} else {
@@ -552,7 +586,11 @@ void cvm_oct_rx_initialize(void)
 		panic("No net_devices were allocated.");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (max_rx_cpus > 1  && max_rx_cpus < num_online_cpus())
+=======
+	if (max_rx_cpus >= 1 && max_rx_cpus < num_online_cpus())
+>>>>>>> v3.18
 =======
 	if (max_rx_cpus >= 1 && max_rx_cpus < num_online_cpus())
 >>>>>>> v3.18
@@ -568,7 +606,11 @@ void cvm_oct_rx_initialize(void)
 		napi_enable(&cvm_oct_napi[i].napi);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Register an IRQ hander for to receive POW interrupts */
+=======
+	/* Register an IRQ handler to receive POW interrupts */
+>>>>>>> v3.18
 =======
 	/* Register an IRQ handler to receive POW interrupts */
 >>>>>>> v3.18

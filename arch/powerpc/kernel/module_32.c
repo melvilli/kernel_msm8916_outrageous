@@ -16,6 +16,12 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -33,6 +39,7 @@
 #include <linux/bug.h>
 #include <linux/sort.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "setup.h"
 
@@ -41,6 +48,9 @@
 #else
 #define DEBUGP(fmt , ...)
 #endif
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18
@@ -133,8 +143,13 @@ static unsigned long get_plt_size(const Elf32_Ehdr *hdr,
 
 		if (sechdrs[i].sh_type == SHT_RELA) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DEBUGP("Found relocations in section %u\n", i);
 			DEBUGP("Ptr: %p.  Number: %u\n",
+=======
+			pr_debug("Found relocations in section %u\n", i);
+			pr_debug("Ptr: %p.  Number: %u\n",
+>>>>>>> v3.18
 =======
 			pr_debug("Found relocations in section %u\n", i);
 			pr_debug("Ptr: %p.  Number: %u\n",
@@ -178,7 +193,11 @@ int module_frob_arch_sections(Elf32_Ehdr *hdr,
 	}
 	if (!me->arch.core_plt_section || !me->arch.init_plt_section) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("Module doesn't contain .plt or .init.plt sections.\n");
+=======
+		pr_err("Module doesn't contain .plt or .init.plt sections.\n");
+>>>>>>> v3.18
 =======
 		pr_err("Module doesn't contain .plt or .init.plt sections.\n");
 >>>>>>> v3.18
@@ -210,7 +229,11 @@ static uint32_t do_plt_call(void *location,
 	struct ppc_plt_entry *entry;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUGP("Doing plt for call to 0x%x at 0x%x\n", val, (unsigned int)location);
+=======
+	pr_debug("Doing plt for call to 0x%x at 0x%x\n", val, (unsigned int)location);
+>>>>>>> v3.18
 =======
 	pr_debug("Doing plt for call to 0x%x at 0x%x\n", val, (unsigned int)location);
 >>>>>>> v3.18
@@ -233,7 +256,11 @@ static uint32_t do_plt_call(void *location,
 	entry->jump[3] = 0x4e800420;			/* bctr */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUGP("Initialized plt for 0x%x at %p\n", val, entry);
+=======
+	pr_debug("Initialized plt for 0x%x at %p\n", val, entry);
+>>>>>>> v3.18
 =======
 	pr_debug("Initialized plt for 0x%x at %p\n", val, entry);
 >>>>>>> v3.18
@@ -253,7 +280,11 @@ int apply_relocate_add(Elf32_Shdr *sechdrs,
 	uint32_t value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUGP("Applying ADD relocate section %u to %u\n", relsec,
+=======
+	pr_debug("Applying ADD relocate section %u to %u\n", relsec,
+>>>>>>> v3.18
 =======
 	pr_debug("Applying ADD relocate section %u to %u\n", relsec,
 >>>>>>> v3.18
@@ -301,9 +332,15 @@ int apply_relocate_add(Elf32_Shdr *sechdrs,
 
 			/* Only replace bits 2 through 26 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DEBUGP("REL24 value = %08X. location = %08X\n",
 			       value, (uint32_t)location);
 			DEBUGP("Location before: %08X.\n",
+=======
+			pr_debug("REL24 value = %08X. location = %08X\n",
+			       value, (uint32_t)location);
+			pr_debug("Location before: %08X.\n",
+>>>>>>> v3.18
 =======
 			pr_debug("REL24 value = %08X. location = %08X\n",
 			       value, (uint32_t)location);
@@ -315,9 +352,15 @@ int apply_relocate_add(Elf32_Shdr *sechdrs,
 				| ((value - (uint32_t)location)
 				   & 0x03fffffc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DEBUGP("Location after: %08X.\n",
 			       *(uint32_t *)location);
 			DEBUGP("ie. jump to %08X+%08X = %08X\n",
+=======
+			pr_debug("Location after: %08X.\n",
+			       *(uint32_t *)location);
+			pr_debug("ie. jump to %08X+%08X = %08X\n",
+>>>>>>> v3.18
 =======
 			pr_debug("Location after: %08X.\n",
 			       *(uint32_t *)location);
@@ -336,7 +379,11 @@ int apply_relocate_add(Elf32_Shdr *sechdrs,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("%s: unknown ADD relocation: %u\n",
+=======
+			pr_err("%s: unknown ADD relocation: %u\n",
+>>>>>>> v3.18
 =======
 			pr_err("%s: unknown ADD relocation: %u\n",
 >>>>>>> v3.18

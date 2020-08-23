@@ -38,7 +38,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -117,7 +120,11 @@ enum {
 
 static int sil_init_one(struct pci_dev *pdev, const struct pci_device_id *ent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -175,7 +182,11 @@ static struct pci_driver sil_pci_driver = {
 	.probe			= sil_init_one,
 	.remove			= ata_pci_remove_one,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -643,9 +654,12 @@ static void sil_dev_config(struct ata_device *dev)
 	unsigned char model_num[ATA_ID_PROD_LEN + 1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* This controller doesn't support trim */
 	dev->horkage |= ATA_HORKAGE_NOTRIM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ata_id_c_string(dev->id, model_num, ATA_ID_PROD, sizeof(model_num));
@@ -821,15 +835,21 @@ static int sil_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int sil_pci_device_resume(struct pci_dev *pdev)
 {
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int sil_pci_device_resume(struct pci_dev *pdev)
 {
 	struct ata_host *host = pci_get_drvdata(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rc;
 

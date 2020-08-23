@@ -66,7 +66,11 @@ extern u32 wl12xx_debug_level;
 
 #define wl1271_warning(fmt, arg...) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_warning(DRIVER_PREFIX "WARNING " fmt "\n", ##arg)
+=======
+	pr_warn(DRIVER_PREFIX "WARNING " fmt "\n", ##arg)
+>>>>>>> v3.18
 =======
 	pr_warn(DRIVER_PREFIX "WARNING " fmt "\n", ##arg)
 >>>>>>> v3.18

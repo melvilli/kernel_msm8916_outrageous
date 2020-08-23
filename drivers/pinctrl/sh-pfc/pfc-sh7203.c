@@ -273,8 +273,12 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const pinmux_enum_t pinmux_data[] = {
 
+=======
+static const u16 pinmux_data[] = {
+>>>>>>> v3.18
 =======
 static const u16 pinmux_data[] = {
 >>>>>>> v3.18
@@ -708,6 +712,7 @@ static const u16 pinmux_data[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sh_pfc_pin pinmux_pins[] = {
 
 	/* PA */
@@ -821,6 +826,8 @@ static struct sh_pfc_pin pinmux_pins[] = {
 	PINMUX_GPIO(GPIO_PF1, PF1_DATA),
 	PINMUX_GPIO(GPIO_PF0, PF0_DATA),
 =======
+=======
+>>>>>>> v3.18
 static const struct sh_pfc_pin pinmux_pins[] = {
 	/* PA */
 	PINMUX_GPIO(PA7),
@@ -932,6 +939,9 @@ static const struct sh_pfc_pin pinmux_pins[] = {
 	PINMUX_GPIO(PF2),
 	PINMUX_GPIO(PF1),
 	PINMUX_GPIO(PF0),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

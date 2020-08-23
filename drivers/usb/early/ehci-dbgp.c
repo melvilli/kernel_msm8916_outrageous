@@ -569,10 +569,13 @@ try_again:
 		goto err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0) {
 		dbgp_printk("Attached device is not a debug device\n");
 		goto err;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dbgp_endpoint_out = dbgp_desc.bDebugOutEndpoint;
@@ -896,7 +899,11 @@ int __init early_dbgp_init(char *s)
 	ehci_bar = (void __iomem *)__fix_to_virt(FIX_DBGP_BASE);
 	ehci_bar += bar_val & ~PAGE_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbgp_printk("ehci_bar: %pK\n", ehci_bar);
+=======
+	dbgp_printk("ehci_bar: %p\n", ehci_bar);
+>>>>>>> v3.18
 =======
 	dbgp_printk("ehci_bar: %p\n", ehci_bar);
 >>>>>>> v3.18

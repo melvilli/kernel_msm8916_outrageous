@@ -13,6 +13,10 @@
 #include <linux/clk.h>
 #include <linux/clk-provider.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -27,8 +31,11 @@
 
 #define BM_PLL_POWER		(0x1 << 12)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BM_PLL_ENABLE		(0x1 << 13)
 #define BM_PLL_BYPASS		(0x1 << 16)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define BM_PLL_LOCK		(0x1 << 31)
@@ -52,6 +59,7 @@ struct clk_pllv3 {
 
 #define to_clk_pllv3(_hw) container_of(_hw, struct clk_pllv3, hw)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int clk_pllv3_prepare(struct clk_hw *hw)
 {
@@ -98,6 +106,8 @@ static int clk_pllv3_enable(struct clk_hw *hw)
 	val |= BM_PLL_ENABLE;
 	writel_relaxed(val, pll->base);
 =======
+=======
+>>>>>>> v3.18
 static int clk_pllv3_wait_lock(struct clk_pllv3 *pll)
 {
 	unsigned long timeout = jiffies + msecs_to_jiffies(10);
@@ -135,13 +145,20 @@ static int clk_pllv3_prepare(struct clk_hw *hw)
 	ret = clk_pllv3_wait_lock(pll);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void clk_pllv3_disable(struct clk_hw *hw)
+=======
+static void clk_pllv3_unprepare(struct clk_hw *hw)
+>>>>>>> v3.18
 =======
 static void clk_pllv3_unprepare(struct clk_hw *hw)
 >>>>>>> v3.18
@@ -151,12 +168,18 @@ static void clk_pllv3_unprepare(struct clk_hw *hw)
 
 	val = readl_relaxed(pll->base);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val &= ~BM_PLL_ENABLE;
 =======
+=======
+>>>>>>> v3.18
 	if (pll->powerup_set)
 		val &= ~BM_PLL_POWER;
 	else
 		val |= BM_PLL_POWER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel_relaxed(val, pll->base);
 }
@@ -198,7 +221,11 @@ static int clk_pllv3_set_rate(struct clk_hw *hw, unsigned long rate,
 	writel_relaxed(val, pll->base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return clk_pllv3_wait_lock(pll);
+>>>>>>> v3.18
 =======
 	return clk_pllv3_wait_lock(pll);
 >>>>>>> v3.18
@@ -208,8 +235,11 @@ static const struct clk_ops clk_pllv3_ops = {
 	.prepare	= clk_pllv3_prepare,
 	.unprepare	= clk_pllv3_unprepare,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable		= clk_pllv3_enable,
 	.disable	= clk_pllv3_disable,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.recalc_rate	= clk_pllv3_recalc_rate,
@@ -261,7 +291,11 @@ static int clk_pllv3_sys_set_rate(struct clk_hw *hw, unsigned long rate,
 	writel_relaxed(val, pll->base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return clk_pllv3_wait_lock(pll);
+>>>>>>> v3.18
 =======
 	return clk_pllv3_wait_lock(pll);
 >>>>>>> v3.18
@@ -271,8 +305,11 @@ static const struct clk_ops clk_pllv3_sys_ops = {
 	.prepare	= clk_pllv3_prepare,
 	.unprepare	= clk_pllv3_unprepare,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable		= clk_pllv3_enable,
 	.disable	= clk_pllv3_disable,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.recalc_rate	= clk_pllv3_sys_recalc_rate,
@@ -342,7 +379,11 @@ static int clk_pllv3_av_set_rate(struct clk_hw *hw, unsigned long rate,
 	writel_relaxed(mfd, pll->base + PLL_DENOM_OFFSET);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return clk_pllv3_wait_lock(pll);
+>>>>>>> v3.18
 =======
 	return clk_pllv3_wait_lock(pll);
 >>>>>>> v3.18
@@ -352,8 +393,11 @@ static const struct clk_ops clk_pllv3_av_ops = {
 	.prepare	= clk_pllv3_prepare,
 	.unprepare	= clk_pllv3_unprepare,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable		= clk_pllv3_enable,
 	.disable	= clk_pllv3_disable,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.recalc_rate	= clk_pllv3_av_recalc_rate,
@@ -371,6 +415,7 @@ static const struct clk_ops clk_pllv3_enet_ops = {
 	.prepare	= clk_pllv3_prepare,
 	.unprepare	= clk_pllv3_unprepare,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable		= clk_pllv3_enable,
 	.disable	= clk_pllv3_disable,
 	.recalc_rate	= clk_pllv3_enet_recalc_rate,
@@ -383,6 +428,11 @@ static const struct clk_ops clk_pllv3_mlb_ops = {
 	.disable	= clk_pllv3_disable,
 };
 
+=======
+	.recalc_rate	= clk_pllv3_enet_recalc_rate,
+};
+
+>>>>>>> v3.18
 =======
 	.recalc_rate	= clk_pllv3_enet_recalc_rate,
 };
@@ -416,9 +466,12 @@ struct clk *imx_clk_pllv3(enum imx_pllv3_type type, const char *name,
 		ops = &clk_pllv3_enet_ops;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case IMX_PLLV3_MLB:
 		ops = &clk_pllv3_mlb_ops;
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:

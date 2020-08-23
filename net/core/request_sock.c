@@ -42,7 +42,11 @@ int reqsk_queue_alloc(struct request_sock_queue *queue,
 {
 	size_t lopt_size = sizeof(struct listen_sock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct listen_sock *lopt;
+=======
+	struct listen_sock *lopt = NULL;
+>>>>>>> v3.18
 =======
 	struct listen_sock *lopt = NULL;
 >>>>>>> v3.18
@@ -51,6 +55,7 @@ int reqsk_queue_alloc(struct request_sock_queue *queue,
 	nr_table_entries = max_t(u32, nr_table_entries, 8);
 	nr_table_entries = roundup_pow_of_two(nr_table_entries + 1);
 	lopt_size += nr_table_entries * sizeof(struct request_sock *);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (lopt_size > PAGE_SIZE)
 		lopt = vzalloc(lopt_size);
@@ -64,6 +69,8 @@ int reqsk_queue_alloc(struct request_sock_queue *queue,
 	     lopt->max_qlen_log++);
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (lopt_size <= (PAGE_SIZE << PAGE_ALLOC_COSTLY_ORDER))
 		lopt = kzalloc(lopt_size, GFP_KERNEL |
@@ -74,12 +81,19 @@ int reqsk_queue_alloc(struct request_sock_queue *queue,
 	if (!lopt)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	get_random_bytes(&lopt->hash_rnd, sizeof(lopt->hash_rnd));
 	rwlock_init(&queue->syn_wait_lock);
 	queue->rskq_accept_head = NULL;
 	lopt->nr_table_entries = nr_table_entries;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lopt->max_qlen_log = ilog2(nr_table_entries);
+>>>>>>> v3.18
 =======
 	lopt->max_qlen_log = ilog2(nr_table_entries);
 >>>>>>> v3.18
@@ -93,6 +107,7 @@ int reqsk_queue_alloc(struct request_sock_queue *queue,
 
 void __reqsk_queue_destroy(struct request_sock_queue *queue)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct listen_sock *lopt;
 	size_t lopt_size;
@@ -110,6 +125,10 @@ void __reqsk_queue_destroy(struct request_sock_queue *queue)
 		vfree(lopt);
 	else
 		kfree(lopt);
+=======
+	/* This is an error recovery path only, no locking needed */
+	kvfree(queue->listen_opt);
+>>>>>>> v3.18
 =======
 	/* This is an error recovery path only, no locking needed */
 	kvfree(queue->listen_opt);
@@ -134,8 +153,11 @@ void reqsk_queue_destroy(struct request_sock_queue *queue)
 	/* make all the listen_opt local to us */
 	struct listen_sock *lopt = reqsk_queue_yank_listen_sk(queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t lopt_size = sizeof(struct listen_sock) +
 		lopt->nr_table_entries * sizeof(struct request_sock *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -155,10 +177,14 @@ void reqsk_queue_destroy(struct request_sock_queue *queue)
 
 	WARN_ON(lopt->qlen != 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lopt_size > PAGE_SIZE)
 		vfree(lopt);
 	else
 		kfree(lopt);
+=======
+	kvfree(lopt);
+>>>>>>> v3.18
 =======
 	kvfree(lopt);
 >>>>>>> v3.18
@@ -255,7 +281,10 @@ out:
 	spin_unlock_bh(&fastopenq->lock);
 	sock_put(lsk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

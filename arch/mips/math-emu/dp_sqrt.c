@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -22,12 +25,18 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
  */
 
 
+=======
+ *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
+ */
+
+>>>>>>> v3.18
 =======
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
@@ -44,22 +53,32 @@ static const unsigned table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ieee754dp ieee754dp_sqrt(ieee754dp x)
 {
 	struct _ieee754_csr oldcsr;
 	ieee754dp y, z, t;
 =======
+=======
+>>>>>>> v3.18
 union ieee754dp ieee754dp_sqrt(union ieee754dp x)
 {
 	struct _ieee754_csr oldcsr;
 	union ieee754dp y, z, t;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned scalx, yh;
 	COMPXDP;
 
 	EXPLODEXDP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLEARCX;
+=======
+	ieee754_clearcx();
+>>>>>>> v3.18
 =======
 	ieee754_clearcx();
 >>>>>>> v3.18
@@ -69,6 +88,7 @@ union ieee754dp ieee754dp_sqrt(union ieee754dp x)
 	switch (xc) {
 	case IEEE754_CLASS_QNAN:
 		/* sqrt(Nan) = Nan */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return ieee754dp_nanxcpt(x, "sqrt");
 	case IEEE754_CLASS_SNAN:
@@ -94,6 +114,8 @@ union ieee754dp ieee754dp_sqrt(union ieee754dp x)
 			SETCX(IEEE754_INVALID_OPERATION);
 			return ieee754dp_nanxcpt(ieee754dp_indef(), "sqrt");
 =======
+=======
+>>>>>>> v3.18
 		return ieee754dp_nanxcpt(x);
 
 	case IEEE754_CLASS_SNAN:
@@ -122,6 +144,9 @@ union ieee754dp ieee754dp_sqrt(union ieee754dp x)
 			/* sqrt(-x) = Nan */
 			ieee754_setcx(IEEE754_INVALID_OPERATION);
 			return ieee754dp_nanxcpt(ieee754dp_indef());
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -132,7 +157,11 @@ union ieee754dp ieee754dp_sqrt(union ieee754dp x)
 	ieee754_csr.mx &= ~IEEE754_INEXACT;
 	ieee754_csr.sx &= ~IEEE754_INEXACT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ieee754_csr.rm = IEEE754_RN;
+=======
+	ieee754_csr.rm = FPU_CSR_RN;
+>>>>>>> v3.18
 =======
 	ieee754_csr.rm = FPU_CSR_RN;
 >>>>>>> v3.18
@@ -166,7 +195,11 @@ union ieee754dp ieee754dp_sqrt(union ieee754dp x)
 	/* t=y*y; z=t;	pt[n0]+=0x00100000; t+=z; z=(x-z)*y; */
 	z = t = ieee754dp_mul(y, y);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t.parts.bexp += 0x001;
+=======
+	t.bexp += 0x001;
+>>>>>>> v3.18
 =======
 	t.bexp += 0x001;
 >>>>>>> v3.18
@@ -176,7 +209,11 @@ union ieee754dp ieee754dp_sqrt(union ieee754dp x)
 	/* t=z/(t+x) ;	pt[n0]+=0x00100000; y+=t; */
 	t = ieee754dp_div(z, ieee754dp_add(t, x));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t.parts.bexp += 0x001;
+=======
+	t.bexp += 0x001;
+>>>>>>> v3.18
 =======
 	t.bexp += 0x001;
 >>>>>>> v3.18
@@ -186,7 +223,11 @@ union ieee754dp ieee754dp_sqrt(union ieee754dp x)
 
 	/* set RZ, clear INEX flag */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ieee754_csr.rm = IEEE754_RZ;
+=======
+	ieee754_csr.rm = FPU_CSR_RZ;
+>>>>>>> v3.18
 =======
 	ieee754_csr.rm = FPU_CSR_RZ;
 >>>>>>> v3.18
@@ -207,15 +248,21 @@ union ieee754dp ieee754dp_sqrt(union ieee754dp x)
 
 		switch (oldcsr.rm) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case IEEE754_RP:
 			y.bits += 1;
 			/* drop through */
 		case IEEE754_RN:
 =======
+=======
+>>>>>>> v3.18
 		case FPU_CSR_RU:
 			y.bits += 1;
 			/* drop through */
 		case FPU_CSR_RN:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			t.bits += 1;
 			break;
@@ -230,7 +277,11 @@ union ieee754dp ieee754dp_sqrt(union ieee754dp x)
 
 	/* py[n0]=py[n0]+scalx; ...scale back y */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	y.parts.bexp += scalx;
+=======
+	y.bexp += scalx;
+>>>>>>> v3.18
 =======
 	y.bexp += scalx;
 >>>>>>> v3.18

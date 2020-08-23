@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
 >>>>>>> v3.18
@@ -14,15 +18,19 @@
  * GNU General Public License for more details.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define pr_fmt(fmt) "%s: " fmt, __func__
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/errno.h>
 #include <linux/idr.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/of_device.h>
 #include <linux/platform_device.h>
@@ -364,6 +372,8 @@ EXPORT_SYMBOL_GPL(spmi_register_board_info);
 
 /* ------------------------------------------------------------------------- */
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/of_device.h>
@@ -442,6 +452,9 @@ void spmi_device_remove(struct spmi_device *sdev)
 	device_unregister(&sdev->dev);
 }
 EXPORT_SYMBOL_GPL(spmi_device_remove);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int
@@ -454,8 +467,13 @@ spmi_cmd(struct spmi_controller *ctrl, u8 opcode, u8 sid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int spmi_read_cmd(struct spmi_controller *ctrl,
 				u8 opcode, u8 sid, u16 addr, u8 bc, u8 *buf)
+=======
+static inline int spmi_read_cmd(struct spmi_controller *ctrl, u8 opcode,
+				u8 sid, u16 addr, u8 *buf, size_t len)
+>>>>>>> v3.18
 =======
 static inline int spmi_read_cmd(struct spmi_controller *ctrl, u8 opcode,
 				u8 sid, u16 addr, u8 *buf, size_t len)
@@ -465,22 +483,29 @@ static inline int spmi_read_cmd(struct spmi_controller *ctrl, u8 opcode,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ctrl->read_cmd(ctrl, opcode, sid, addr, bc, buf);
 }
 
 static inline int spmi_write_cmd(struct spmi_controller *ctrl,
 				u8 opcode, u8 sid, u16 addr, u8 bc, u8 *buf)
 =======
+=======
+>>>>>>> v3.18
 	return ctrl->read_cmd(ctrl, opcode, sid, addr, buf, len);
 }
 
 static inline int spmi_write_cmd(struct spmi_controller *ctrl, u8 opcode,
 				 u8 sid, u16 addr, const u8 *buf, size_t len)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (!ctrl || !ctrl->write_cmd || ctrl->dev.type != &spmi_ctrl_type)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return ctrl->write_cmd(ctrl, opcode, sid, addr, bc, buf);
 }
@@ -508,6 +533,8 @@ int spmi_register_read(struct spmi_controller *ctrl, u8 sid, u8 addr, u8 *buf)
 
 	return spmi_read_cmd(ctrl, SPMI_CMD_READ, sid, addr, 0, buf);
 =======
+=======
+>>>>>>> v3.18
 	return ctrl->write_cmd(ctrl, opcode, sid, addr, buf, len);
 }
 
@@ -527,6 +554,9 @@ int spmi_register_read(struct spmi_device *sdev, u8 addr, u8 *buf)
 
 	return spmi_read_cmd(sdev->ctrl, SPMI_CMD_READ, sdev->usid, addr,
 			     buf, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(spmi_register_read);
@@ -534,21 +564,28 @@ EXPORT_SYMBOL_GPL(spmi_register_read);
 /**
  * spmi_ext_register_read() - extended register read
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: SPMI device.
  * @sid: slave identifier.
  * @ad: slave register address (8-bit address).
  * @len: the request number of bytes to read (up to 16 bytes).
  * @buf: buffer to be populated with data from the Slave.
 =======
+=======
+>>>>>>> v3.18
  * @sdev:	SPMI device.
  * @addr:	slave register address (8-bit address).
  * @buf:	buffer to be populated with data from the Slave.
  * @len:	the request number of bytes to read (up to 16 bytes).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Reads up to 16 bytes of data from the extended register space on a
  * Slave device.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int spmi_ext_register_read(struct spmi_controller *ctrl,
 				u8 sid, u8 addr, u8 *buf, int len)
@@ -559,6 +596,8 @@ int spmi_ext_register_read(struct spmi_controller *ctrl,
 
 	return spmi_read_cmd(ctrl, SPMI_CMD_EXT_READ, sid, addr, len - 1, buf);
 =======
+=======
+>>>>>>> v3.18
 int spmi_ext_register_read(struct spmi_device *sdev, u8 addr, u8 *buf,
 			   size_t len)
 {
@@ -568,6 +607,9 @@ int spmi_ext_register_read(struct spmi_device *sdev, u8 addr, u8 *buf,
 
 	return spmi_read_cmd(sdev->ctrl, SPMI_CMD_EXT_READ, sdev->usid, addr,
 			     buf, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(spmi_ext_register_read);
@@ -575,21 +617,28 @@ EXPORT_SYMBOL_GPL(spmi_ext_register_read);
 /**
  * spmi_ext_register_readl() - extended register read long
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: SPMI device.
  * @sid: slave identifier.
  * @ad: slave register address (16-bit address).
  * @len: the request number of bytes to read (up to 8 bytes).
  * @buf: buffer to be populated with data from the Slave.
 =======
+=======
+>>>>>>> v3.18
  * @sdev:	SPMI device.
  * @addr:	slave register address (16-bit address).
  * @buf:	buffer to be populated with data from the Slave.
  * @len:	the request number of bytes to read (up to 8 bytes).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Reads up to 8 bytes of data from the extended register space on a
  * Slave device using 16-bit address.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int spmi_ext_register_readl(struct spmi_controller *ctrl,
 				u8 sid, u16 addr, u8 *buf, int len)
@@ -600,6 +649,8 @@ int spmi_ext_register_readl(struct spmi_controller *ctrl,
 
 	return spmi_read_cmd(ctrl, SPMI_CMD_EXT_READL, sid, addr, len - 1, buf);
 =======
+=======
+>>>>>>> v3.18
 int spmi_ext_register_readl(struct spmi_device *sdev, u16 addr, u8 *buf,
 			    size_t len)
 {
@@ -609,12 +660,16 @@ int spmi_ext_register_readl(struct spmi_device *sdev, u16 addr, u8 *buf,
 
 	return spmi_read_cmd(sdev->ctrl, SPMI_CMD_EXT_READL, sdev->usid, addr,
 			     buf, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(spmi_ext_register_readl);
 
 /**
  * spmi_register_write() - register write
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @dev: SPMI device.
  * @sid: slave identifier.
@@ -633,6 +688,8 @@ int spmi_register_write(struct spmi_controller *ctrl, u8 sid, u8 addr, u8 *buf)
 
 	return spmi_write_cmd(ctrl, op, sid, addr, 0, buf);
 =======
+=======
+>>>>>>> v3.18
  * @sdev:	SPMI device
  * @addr:	slave register address (5-bit address).
  * @data:	buffer containing the data to be transferred to the Slave.
@@ -647,12 +704,16 @@ int spmi_register_write(struct spmi_device *sdev, u8 addr, u8 data)
 
 	return spmi_write_cmd(sdev->ctrl, SPMI_CMD_WRITE, sdev->usid, addr,
 			      &data, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(spmi_register_write);
 
 /**
  * spmi_register_zero_write() - register zero write
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @dev: SPMI device.
  * @sid: slave identifier.
@@ -670,6 +731,8 @@ int spmi_register_zero_write(struct spmi_controller *ctrl, u8 sid, u8 data)
 
 	return spmi_write_cmd(ctrl, op, sid, 0, 0, &data);
 =======
+=======
+>>>>>>> v3.18
  * @sdev:	SPMI device.
  * @data:	the data to be written to register 0 (7-bits).
  *
@@ -679,6 +742,9 @@ int spmi_register_zero_write(struct spmi_device *sdev, u8 data)
 {
 	return spmi_write_cmd(sdev->ctrl, SPMI_CMD_ZERO_WRITE, sdev->usid, 0,
 			      &data, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(spmi_register_zero_write);
@@ -686,21 +752,28 @@ EXPORT_SYMBOL_GPL(spmi_register_zero_write);
 /**
  * spmi_ext_register_write() - extended register write
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: SPMI device.
  * @sid: slave identifier.
  * @ad: slave register address (8-bit address).
  * @buf: buffer containing the data to be transferred to the Slave.
  * @len: the request number of bytes to read (up to 16 bytes).
 =======
+=======
+>>>>>>> v3.18
  * @sdev:	SPMI device.
  * @addr:	slave register address (8-bit address).
  * @buf:	buffer containing the data to be transferred to the Slave.
  * @len:	the request number of bytes to read (up to 16 bytes).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Writes up to 16 bytes of data to the extended register space of a
  * Slave device.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int spmi_ext_register_write(struct spmi_controller *ctrl,
 				u8 sid, u8 addr, u8 *buf, int len)
@@ -713,6 +786,8 @@ int spmi_ext_register_write(struct spmi_controller *ctrl,
 
 	return spmi_write_cmd(ctrl, op, sid, addr, len - 1, buf);
 =======
+=======
+>>>>>>> v3.18
 int spmi_ext_register_write(struct spmi_device *sdev, u8 addr, const u8 *buf,
 			    size_t len)
 {
@@ -722,6 +797,9 @@ int spmi_ext_register_write(struct spmi_device *sdev, u8 addr, const u8 *buf,
 
 	return spmi_write_cmd(sdev->ctrl, SPMI_CMD_EXT_WRITE, sdev->usid, addr,
 			      buf, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(spmi_ext_register_write);
@@ -729,21 +807,28 @@ EXPORT_SYMBOL_GPL(spmi_ext_register_write);
 /**
  * spmi_ext_register_writel() - extended register write long
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: SPMI device.
  * @sid: slave identifier.
  * @ad: slave register address (16-bit address).
  * @buf: buffer containing the data to be transferred to the Slave.
  * @len: the request number of bytes to read (up to 8 bytes).
 =======
+=======
+>>>>>>> v3.18
  * @sdev:	SPMI device.
  * @addr:	slave register address (16-bit address).
  * @buf:	buffer containing the data to be transferred to the Slave.
  * @len:	the request number of bytes to read (up to 8 bytes).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Writes up to 8 bytes of data to the extended register space of a
  * Slave device using 16-bit address.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int spmi_ext_register_writel(struct spmi_controller *ctrl,
 				u8 sid, u16 addr, u8 *buf, int len)
@@ -756,6 +841,8 @@ int spmi_ext_register_writel(struct spmi_controller *ctrl,
 
 	return spmi_write_cmd(ctrl, op, sid, addr, len - 1, buf);
 =======
+=======
+>>>>>>> v3.18
 int spmi_ext_register_writel(struct spmi_device *sdev, u16 addr, const u8 *buf,
 			     size_t len)
 {
@@ -765,6 +852,9 @@ int spmi_ext_register_writel(struct spmi_device *sdev, u16 addr, const u8 *buf,
 
 	return spmi_write_cmd(sdev->ctrl, SPMI_CMD_EXT_WRITEL, sdev->usid,
 			      addr, buf, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(spmi_ext_register_writel);
@@ -772,8 +862,12 @@ EXPORT_SYMBOL_GPL(spmi_ext_register_writel);
 /**
  * spmi_command_reset() - sends RESET command to the specified slave
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: SPMI device.
  * @sid: slave identifier.
+=======
+ * @sdev:	SPMI device.
+>>>>>>> v3.18
 =======
  * @sdev:	SPMI device.
 >>>>>>> v3.18
@@ -781,6 +875,7 @@ EXPORT_SYMBOL_GPL(spmi_ext_register_writel);
  * The Reset command initializes the Slave and forces all registers to
  * their reset values. The Slave shall enter the STARTUP state after
  * receiving a Reset command.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * Returns
@@ -795,15 +890,21 @@ int spmi_command_reset(struct spmi_controller *ctrl, u8 sid)
 		return -EINVAL;
 	return spmi_cmd(ctrl, SPMI_CMD_RESET, sid);
 =======
+=======
+>>>>>>> v3.18
  */
 int spmi_command_reset(struct spmi_device *sdev)
 {
 	return spmi_cmd(sdev->ctrl, SPMI_CMD_RESET, sdev->usid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(spmi_command_reset);
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * spmi_command_sleep() - sends SLEEP command to the specified slave
  * @dev: SPMI device.
@@ -823,6 +924,8 @@ int spmi_command_sleep(struct spmi_controller *ctrl, u8 sid)
 		return -EINVAL;
 	return spmi_cmd(ctrl, SPMI_CMD_SLEEP, sid);
 =======
+=======
+>>>>>>> v3.18
  * spmi_command_sleep() - sends SLEEP command to the specified SPMI device
  * @sdev:	SPMI device.
  *
@@ -831,11 +934,15 @@ int spmi_command_sleep(struct spmi_controller *ctrl, u8 sid)
 int spmi_command_sleep(struct spmi_device *sdev)
 {
 	return spmi_cmd(sdev->ctrl, SPMI_CMD_SLEEP, sdev->usid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(spmi_command_sleep);
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * spmi_command_wakeup() - sends WAKEUP command to the specified slave
  * @dev: SPMI device.
@@ -856,6 +963,8 @@ int spmi_command_wakeup(struct spmi_controller *ctrl, u8 sid)
 		return -EINVAL;
 	return spmi_cmd(ctrl, SPMI_CMD_WAKEUP, sid);
 =======
+=======
+>>>>>>> v3.18
  * spmi_command_wakeup() - sends WAKEUP command to the specified SPMI device
  * @sdev:	SPMI device.
  *
@@ -865,11 +974,15 @@ int spmi_command_wakeup(struct spmi_controller *ctrl, u8 sid)
 int spmi_command_wakeup(struct spmi_device *sdev)
 {
 	return spmi_cmd(sdev->ctrl, SPMI_CMD_WAKEUP, sdev->usid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(spmi_command_wakeup);
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * spmi_command_shutdown() - sends SHUTDOWN command to the specified slave
  * @dev: SPMI device.
@@ -1106,6 +1219,8 @@ module_exit(spmi_exit);
 MODULE_LICENSE("GPL v2");
 MODULE_VERSION("1.0");
 =======
+=======
+>>>>>>> v3.18
  * spmi_command_shutdown() - sends SHUTDOWN command to the specified SPMI device
  * @sdev:	SPMI device.
  *
@@ -1376,6 +1491,9 @@ static int __init spmi_init(void)
 postcore_initcall(spmi_init);
 
 MODULE_LICENSE("GPL v2");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_DESCRIPTION("SPMI module");
 MODULE_ALIAS("platform:spmi");

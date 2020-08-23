@@ -20,14 +20,20 @@
 #define _ASM_SETUP_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 =======
+=======
+>>>>>>> v3.18
 #ifdef __KERNEL__
 #include <linux/init.h>
 #else
 #define __init
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm-generic/setup.h>
 

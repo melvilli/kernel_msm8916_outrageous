@@ -16,8 +16,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COMPONENT "zPCI"
 #define pr_fmt(fmt) COMPONENT ": " fmt
+=======
+#define KMSG_COMPONENT "zpci"
+#define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
+>>>>>>> v3.18
 =======
 #define KMSG_COMPONENT "zpci"
 #define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
@@ -48,6 +53,7 @@
 
 #define ZPCI_NR_DMA_SPACES		1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ZPCI_MSI_VEC_BITS		6
 #define ZPCI_NR_DEVICES			CONFIG_PCI_NR_FUNCTIONS
 
@@ -59,6 +65,8 @@ EXPORT_SYMBOL_GPL(zpci_list_lock);
 
 static struct pci_hp_callback_ops *hotplug_ops;
 =======
+=======
+>>>>>>> v3.18
 #define ZPCI_NR_DEVICES			CONFIG_PCI_NR_FUNCTIONS
 
 /* list of all detected zpci devices */
@@ -70,11 +78,15 @@ static struct irq_chip zpci_irq_chip = {
 	.irq_unmask = unmask_msi_irq,
 	.irq_mask = mask_msi_irq,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static DECLARE_BITMAP(zpci_domain, ZPCI_NR_DEVICES);
 static DEFINE_SPINLOCK(zpci_domain_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct callback {
 	irq_handler_t	handler;
@@ -108,6 +120,8 @@ static u8 *zpci_irq_si;
 static atomic_t irq_retries = ATOMIC_INIT(0);
 
 =======
+=======
+>>>>>>> v3.18
 static struct airq_iv *zpci_aisb_iv;
 static struct airq_iv *zpci_aibv[ZPCI_NR_DEVICES];
 
@@ -119,6 +133,9 @@ static struct airq_struct zpci_airq = {
 	.isc = PCI_ISC,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* I/O Map */
 static DEFINE_SPINLOCK(zpci_iomap_lock);
@@ -126,6 +143,7 @@ static DECLARE_BITMAP(zpci_iomap, ZPCI_IOMAP_MAX_ENTRIES);
 struct zpci_iomap_entry *zpci_iomap_start;
 EXPORT_SYMBOL_GPL(zpci_iomap_start);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* highest irq summary bit */
 static int __read_mostly aisb_max;
@@ -152,6 +170,10 @@ static inline struct zdev_irq_map *get_imap(unsigned int irq)
 static struct kmem_cache *zdev_fmb_cache;
 
 >>>>>>> v3.18
+=======
+static struct kmem_cache *zdev_fmb_cache;
+
+>>>>>>> v3.18
 struct zpci_dev *get_zdev(struct pci_dev *pdev)
 {
 	return (struct zpci_dev *) pdev->sysdata;
@@ -162,7 +184,11 @@ struct zpci_dev *get_zdev_by_fid(u32 fid)
 	struct zpci_dev *tmp, *zdev = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&zpci_list_lock);
+=======
+	spin_lock(&zpci_list_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&zpci_list_lock);
 >>>>>>> v3.18
@@ -172,6 +198,7 @@ struct zpci_dev *get_zdev_by_fid(u32 fid)
 			break;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_unlock(&zpci_list_lock);
 	return zdev;
@@ -183,10 +210,15 @@ bool zpci_fid_present(u32 fid)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock(&zpci_list_lock);
 	return zdev;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct zpci_dev *get_zdev_by_bus(struct pci_bus *bus)
 {
@@ -206,6 +238,7 @@ int pci_proc_domain(struct pci_bus *bus)
 EXPORT_SYMBOL_GPL(pci_proc_domain);
 
 /* Modify PCI: Register adapter interruptions */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int zpci_register_airq(struct zpci_dev *zdev, unsigned int aisb,
 			      u64 aibv)
@@ -232,6 +265,8 @@ static int zpci_register_airq(struct zpci_dev *zdev, unsigned int aisb,
 	free_page((unsigned long) fib);
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 static int zpci_set_airq(struct zpci_dev *zdev)
 {
 	u64 req = ZPCI_CREATE_REQ(zdev->fh, 0, ZPCI_MOD_FC_REG_INT);
@@ -246,6 +281,9 @@ static int zpci_set_airq(struct zpci_dev *zdev)
 	fib.aisbo = zdev->aisb & 63;
 
 	return zpci_mod_fc(req, &fib);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -259,6 +297,7 @@ struct mod_pci_args {
 static int mod_pci(struct zpci_dev *zdev, int fn, u8 dmaas, struct mod_pci_args *args)
 {
 	u64 req = ZPCI_CREATE_REQ(zdev->fh, dmaas, fn);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct zpci_fib *fib;
 	int rc;
@@ -277,6 +316,8 @@ static int mod_pci(struct zpci_dev *zdev, int fn, u8 dmaas, struct mod_pci_args 
 	free_page((unsigned long) fib);
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	struct zpci_fib fib = {0};
 
 	fib.pba = args->base;
@@ -285,6 +326,9 @@ static int mod_pci(struct zpci_dev *zdev, int fn, u8 dmaas, struct mod_pci_args 
 	fib.fmb_addr = args->fmb_addr;
 
 	return zpci_mod_fc(req, &fib);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -309,7 +353,11 @@ int zpci_unregister_ioat(struct zpci_dev *zdev, u8 dmaas)
 
 /* Modify PCI: Unregister adapter interruptions */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int zpci_unregister_airq(struct zpci_dev *zdev)
+=======
+static int zpci_clear_airq(struct zpci_dev *zdev)
+>>>>>>> v3.18
 =======
 static int zpci_clear_airq(struct zpci_dev *zdev)
 >>>>>>> v3.18
@@ -362,7 +410,11 @@ static int zpci_cfg_load(struct zpci_dev *zdev, int offset, u32 *val, u8 len)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = s390pci_load(&data, req, offset);
+=======
+	rc = zpci_load(&data, req, offset);
+>>>>>>> v3.18
 =======
 	rc = zpci_load(&data, req, offset);
 >>>>>>> v3.18
@@ -383,6 +435,7 @@ static int zpci_cfg_store(struct zpci_dev *zdev, int offset, u32 val, u8 len)
 
 	data = cpu_to_le64(data);
 	data = data >> ((8 - len) * 8);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = s390pci_store(data, req, offset);
 	return rc;
@@ -405,10 +458,15 @@ void disable_irq(unsigned int irq)
 EXPORT_SYMBOL_GPL(disable_irq);
 
 =======
+=======
+>>>>>>> v3.18
 	rc = zpci_store(data, req, offset);
 	return rc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void pcibios_fixup_bus(struct pci_bus *bus)
 {
@@ -493,6 +551,7 @@ static struct pci_ops pci_root_ops = {
 	.write = pci_write,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* store the last handled bit to implement fair scheduling of devices */
 static DEFINE_PER_CPU(unsigned long, next_sbit);
@@ -642,6 +701,8 @@ void arch_teardown_msi_irqs(struct pci_dev *pdev)
 	pr_info("%s: on pdev: %p\n", __func__, pdev);
 	zpci_teardown_msi(pdev);
 =======
+=======
+>>>>>>> v3.18
 static void zpci_irq_handler(struct airq_struct *airq)
 {
 	unsigned long si, ai;
@@ -780,6 +841,9 @@ void arch_teardown_msi_irqs(struct pci_dev *pdev)
 	zpci_aibv[zdev->aisb] = NULL;
 	airq_iv_release(zdev->aibv);
 	airq_iv_free_bit(zpci_aisb_iv, zdev->aisb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -795,6 +859,7 @@ static void zpci_map_resources(struct zpci_dev *zdev)
 			continue;
 		pdev->resource[i].start = (resource_size_t) pci_iomap(pdev, i, 0);
 		pdev->resource[i].end = pdev->resource[i].start + len - 1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pr_debug("BAR%i: -> start: %Lx  end: %Lx\n",
 			i, pdev->resource[i].start, pdev->resource[i].end);
@@ -960,6 +1025,8 @@ out_alloc:
 out_aisb:
 	kfree(bucket);
 =======
+=======
+>>>>>>> v3.18
 	}
 }
 
@@ -998,12 +1065,16 @@ static int __init zpci_irq_init(void)
 out_airq:
 	unregister_adapter_interrupt(&zpci_airq);
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
 
 static void zpci_irq_exit(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	free_page((unsigned long) bucket->alloc);
 	free_page((unsigned long) bucket->aisb);
@@ -1052,6 +1123,10 @@ static struct resource *zpci_alloc_bus_resource(unsigned long start, unsigned lo
 	airq_iv_release(zpci_aisb_iv);
 	unregister_adapter_interrupt(&zpci_airq);
 >>>>>>> v3.18
+=======
+	airq_iv_release(zpci_aisb_iv);
+	unregister_adapter_interrupt(&zpci_airq);
+>>>>>>> v3.18
 }
 
 static int zpci_alloc_iomap(struct zpci_dev *zdev)
@@ -1078,6 +1153,7 @@ static void zpci_free_iomap(struct zpci_dev *zdev, int entry)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pcibios_add_device(struct pci_dev *pdev)
 {
 	struct zpci_dev *zdev = get_zdev(pdev);
@@ -1102,6 +1178,8 @@ static int zpci_scan_bus(struct zpci_dev *zdev)
 		int entry;
 
 =======
+=======
+>>>>>>> v3.18
 static struct resource *__alloc_res(struct zpci_dev *zdev, unsigned long start,
 				    unsigned long size, unsigned long flags)
 {
@@ -1134,6 +1212,9 @@ static int zpci_setup_bus_resources(struct zpci_dev *zdev,
 		 "PCI Bus %04x:%02x", zdev->domain, ZPCI_BUS_NR);
 
 	for (i = 0; i < PCI_BAR_COUNT; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!zdev->bars[i].size)
 			continue;
@@ -1154,6 +1235,7 @@ static int zpci_setup_bus_resources(struct zpci_dev *zdev,
 		size = 1UL << zdev->bars[i].size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		res = zpci_alloc_bus_resource(addr, size, flags, zdev->domain);
 		if (IS_ERR(res)) {
 			zpci_free_iomap(zdev, entry);
@@ -1172,6 +1254,8 @@ static int zpci_setup_bus_resources(struct zpci_dev *zdev,
 }
 
 =======
+=======
+>>>>>>> v3.18
 		res = __alloc_res(zdev, addr, size, flags);
 		if (!res) {
 			zpci_free_iomap(zdev, entry);
@@ -1281,6 +1365,9 @@ struct dev_pm_ops pcibios_pm_ops = {
 };
 #endif /* CONFIG_HIBERNATE_CALLBACKS */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int zpci_alloc_domain(struct zpci_dev *zdev)
 {
@@ -1303,7 +1390,10 @@ static void zpci_free_domain(struct zpci_dev *zdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void pcibios_remove_bus(struct pci_bus *bus)
 {
 	struct zpci_dev *zdev = get_zdev_by_bus(bus);
@@ -1339,6 +1429,9 @@ static int zpci_scan_bus(struct zpci_dev *zdev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int zpci_enable_device(struct zpci_dev *zdev)
 {
@@ -1348,7 +1441,10 @@ int zpci_enable_device(struct zpci_dev *zdev)
 	if (rc)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("Enabled fh: 0x%x fid: 0x%x\n", zdev->fh, zdev->fid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1356,6 +1452,11 @@ int zpci_enable_device(struct zpci_dev *zdev)
 	if (rc)
 		goto out_dma;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	zdev->state = ZPCI_FN_STATE_ONLINE;
+>>>>>>> v3.18
 =======
 
 	zdev->state = ZPCI_FN_STATE_ONLINE;
@@ -1389,8 +1490,11 @@ int zpci_create_device(struct zpci_dev *zdev)
 		if (rc)
 			goto out_free;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		zdev->state = ZPCI_FN_STATE_ONLINE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1399,17 +1503,23 @@ int zpci_create_device(struct zpci_dev *zdev)
 		goto out_disable;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&zpci_list_lock);
 	list_add_tail(&zdev->entry, &zpci_list);
 	if (hotplug_ops)
 		hotplug_ops->create_slot(zdev);
 	mutex_unlock(&zpci_list_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&zpci_list_lock);
 	list_add_tail(&zdev->entry, &zpci_list);
 	spin_unlock(&zpci_list_lock);
 
 	zpci_init_slot(zdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1434,6 +1544,7 @@ void zpci_stop_device(struct zpci_dev *zdev)
 EXPORT_SYMBOL_GPL(zpci_stop_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int zpci_scan_device(struct zpci_dev *zdev)
 {
 	zdev->pdev = pci_scan_single_device(zdev->bus, ZPCI_DEVFN);
@@ -1455,6 +1566,8 @@ EXPORT_SYMBOL_GPL(zpci_scan_device);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline int barsize(u8 size)
 {
 	return (size) ? (1 << size) >> 10 : 0;
@@ -1462,6 +1575,7 @@ static inline int barsize(u8 size)
 
 static int zpci_mem_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	zdev_irq_cache = kmem_cache_create("PCI_IRQ_cache", sizeof(struct zdev_irq_map),
 				L1_CACHE_BYTES, SLAB_HWCACHE_ALIGN, NULL);
@@ -1473,10 +1587,15 @@ static int zpci_mem_init(void)
 	if (!zdev_fmb_cache)
 		goto error_fmb;
 =======
+=======
+>>>>>>> v3.18
 	zdev_fmb_cache = kmem_cache_create("PCI_FMB_cache", sizeof(struct zpci_fmb),
 				16, 0, NULL);
 	if (!zdev_fmb_cache)
 		goto error_zdev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* TODO: use realloc */
@@ -1489,8 +1608,11 @@ static int zpci_mem_init(void)
 error_iomap:
 	kmem_cache_destroy(zdev_fmb_cache);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_fmb:
 	kmem_cache_destroy(zdev_irq_cache);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 error_zdev:
@@ -1500,6 +1622,7 @@ error_zdev:
 static void zpci_mem_exit(void)
 {
 	kfree(zpci_iomap_start);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kmem_cache_destroy(zdev_irq_cache);
 	kmem_cache_destroy(zdev_fmb_cache);
@@ -1529,6 +1652,8 @@ char * __init pcibios_setup(char *str)
 	if (!strcmp(str, "on")) {
 		s390_pci_probe = 1;
 =======
+=======
+>>>>>>> v3.18
 	kmem_cache_destroy(zdev_fmb_cache);
 }
 
@@ -1539,6 +1664,9 @@ char * __init pcibios_setup(char *str)
 {
 	if (!strcmp(str, "off")) {
 		s390_pci_probe = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 	}
@@ -1546,12 +1674,18 @@ char * __init pcibios_setup(char *str)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool zpci_is_enabled(void)
 {
 	return s390_pci_initialized;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init pci_base_init(void)
 {
@@ -1565,6 +1699,7 @@ static int __init pci_base_init(void)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("Probing PCI hardware: PCI:%d  SID:%d  AEN:%d\n",
 		test_facility(69), test_facility(70),
 		test_facility(71));
@@ -1577,16 +1712,24 @@ static int __init pci_base_init(void)
 	if (rc)
 		goto out;
 >>>>>>> v3.18
+=======
+	rc = zpci_debug_init();
+	if (rc)
+		goto out;
+>>>>>>> v3.18
 
 	rc = zpci_mem_init();
 	if (rc)
 		goto out_mem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = zpci_msihash_init();
 	if (rc)
 		goto out_hash;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rc = zpci_irq_init();
@@ -1598,16 +1741,22 @@ static int __init pci_base_init(void)
 		goto out_dma;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = clp_find_pci_devices();
 	if (rc)
 		goto out_find;
 
 =======
+=======
+>>>>>>> v3.18
 	rc = clp_scan_pci_devices();
 	if (rc)
 		goto out_find;
 
 	s390_pci_initialized = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -1616,6 +1765,7 @@ out_find:
 out_dma:
 	zpci_irq_exit();
 out_irq:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	zpci_msihash_exit();
 out_hash:
@@ -1626,6 +1776,8 @@ out_mem:
 }
 subsys_initcall(pci_base_init);
 =======
+=======
+>>>>>>> v3.18
 	zpci_mem_exit();
 out_mem:
 	zpci_debug_exit();
@@ -1639,4 +1791,7 @@ void zpci_rescan(void)
 	if (zpci_is_enabled())
 		clp_rescan_pci_devices_simple();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

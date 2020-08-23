@@ -270,6 +270,10 @@ static struct platform_pwm_backlight_data lpd270_backlight_data = {
 	.dft_brightness	= 1,
 	.pwm_period_ns	= 78770,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio	= -1,
 >>>>>>> v3.18
@@ -420,6 +424,7 @@ static struct pxafb_mach_info *lpd270_lcd_to_use;
 static int __init lpd270_set_lcd(char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strnicmp(str, "lq057q3dc02", 11)) {
 		lpd270_lcd_to_use = &sharp_lq057q3dc02;
 	} else if (!strnicmp(str, "lq121s1dg31", 11)) {
@@ -432,6 +437,8 @@ static int __init lpd270_set_lcd(char *str)
 		lpd270_lcd_to_use = &sharp_lq10d368;
 	} else if (!strnicmp(str, "lq035q7db02-20", 14)) {
 =======
+=======
+>>>>>>> v3.18
 	if (!strncasecmp(str, "lq057q3dc02", 11)) {
 		lpd270_lcd_to_use = &sharp_lq057q3dc02;
 	} else if (!strncasecmp(str, "lq121s1dg31", 11)) {
@@ -443,6 +450,9 @@ static int __init lpd270_set_lcd(char *str)
 	} else if (!strncasecmp(str, "lq10d368", 8)) {
 		lpd270_lcd_to_use = &sharp_lq10d368;
 	} else if (!strncasecmp(str, "lq035q7db02-20", 14)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lpd270_lcd_to_use = &sharp_lq035q7db02_20;
 	} else {

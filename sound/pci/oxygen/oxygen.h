@@ -199,7 +199,11 @@ void oxygen_write_ac97_masked(struct oxygen *chip, unsigned int codec,
 			      unsigned int index, u16 data, u16 mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void oxygen_write_spi(struct oxygen *chip, u8 control, unsigned int data);
+=======
+int oxygen_write_spi(struct oxygen *chip, u8 control, unsigned int data);
+>>>>>>> v3.18
 =======
 int oxygen_write_spi(struct oxygen *chip, u8 control, unsigned int data);
 >>>>>>> v3.18

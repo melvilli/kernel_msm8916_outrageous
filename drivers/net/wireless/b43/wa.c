@@ -442,7 +442,11 @@ static void b43_wa_altagc(struct b43_wldev *dev)
 static void b43_wa_tr_ltov(struct b43_wldev *dev) /* TR Lookup Table Original Values */
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b43_gtab_write(dev, B43_GTAB_ORIGTR, 0, 0xC480);
+=======
+	b43_gtab_write(dev, B43_GTAB_ORIGTR, 0, 0x7654);
+>>>>>>> v3.18
 =======
 	b43_gtab_write(dev, B43_GTAB_ORIGTR, 0, 0x7654);
 >>>>>>> v3.18

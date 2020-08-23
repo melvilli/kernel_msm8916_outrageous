@@ -899,7 +899,11 @@ hinfo_to_cinfo(mraid_hba_info_t *hinfo, mcontroller_t *cinfo)
 /**
  * mraid_mm_register_adp - Registration routine for low level drivers
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @lld_adp	: Adapter objejct
+=======
+ * @lld_adp	: Adapter object
+>>>>>>> v3.18
 =======
  * @lld_adp	: Adapter object
 >>>>>>> v3.18

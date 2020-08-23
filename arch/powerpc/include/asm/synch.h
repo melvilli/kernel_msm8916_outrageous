@@ -45,7 +45,11 @@ static inline void isync(void)
 #define PPC_ACQUIRE_BARRIER	 "\n" stringify_in_c(__PPC_ACQUIRE_BARRIER)
 #define PPC_RELEASE_BARRIER	 stringify_in_c(LWSYNC) "\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PPC_ATOMIC_ENTRY_BARRIER "\n" stringify_in_c(sync) "\n"
+=======
+#define PPC_ATOMIC_ENTRY_BARRIER "\n" stringify_in_c(LWSYNC) "\n"
+>>>>>>> v3.18
 =======
 #define PPC_ATOMIC_ENTRY_BARRIER "\n" stringify_in_c(LWSYNC) "\n"
 >>>>>>> v3.18

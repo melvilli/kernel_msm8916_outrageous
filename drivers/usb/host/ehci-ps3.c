@@ -72,7 +72,11 @@ static const struct hc_driver ps3_ehci_hc_driver = {
 	.hcd_priv_size		= sizeof(struct ehci_hcd),
 	.irq			= ehci_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags			= HCD_MEMORY | HCD_USB2,
+=======
+	.flags			= HCD_MEMORY | HCD_USB2 | HCD_BH,
+>>>>>>> v3.18
 =======
 	.flags			= HCD_MEMORY | HCD_USB2 | HCD_BH,
 >>>>>>> v3.18
@@ -194,6 +198,10 @@ static int ps3_ehci_probe(struct ps3_system_bus_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -225,7 +233,11 @@ static int ps3_ehci_remove(struct ps3_system_bus_device *dev)
 	BUG_ON(!hcd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&dev->core, "%s:%d: regs %pK\n", __func__, __LINE__, hcd->regs);
+=======
+	dev_dbg(&dev->core, "%s:%d: regs %p\n", __func__, __LINE__, hcd->regs);
+>>>>>>> v3.18
 =======
 	dev_dbg(&dev->core, "%s:%d: regs %p\n", __func__, __LINE__, hcd->regs);
 >>>>>>> v3.18

@@ -20,7 +20,10 @@
 
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pm_runtime.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -29,6 +32,7 @@
 #include "psb_drv.h"
 #include "psb_intel_drv.h"
 #include "psb_intel_reg.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "psb_intel_display.h"
 #include "power.h"
@@ -64,6 +68,8 @@ struct psb_intel_limit_t {
 
 static const struct psb_intel_limit_t psb_intel_limits[] = {
 =======
+=======
+>>>>>>> v3.18
 #include "gma_display.h"
 #include "power.h"
 
@@ -71,6 +77,9 @@ static const struct psb_intel_limit_t psb_intel_limits[] = {
 #define INTEL_LIMIT_I9XX_LVDS	    1
 
 static const struct gma_limit_t psb_intel_limits[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{			/* INTEL_LIMIT_I9XX_SDVO_DAC */
 	 .dot = {.min = 20000, .max = 400000},
@@ -82,8 +91,13 @@ static const struct gma_limit_t psb_intel_limits[] = {
 	 .p = {.min = 5, .max = 80},
 	 .p1 = {.min = 1, .max = 8},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 .p2 = {.dot_limit = 200000,
 		.p2_slow = 10, .p2_fast = 5},
+=======
+	 .p2 = {.dot_limit = 200000, .p2_slow = 10, .p2_fast = 5},
+	 .find_pll = gma_find_best_pll,
+>>>>>>> v3.18
 =======
 	 .p2 = {.dot_limit = 200000, .p2_slow = 10, .p2_fast = 5},
 	 .find_pll = gma_find_best_pll,
@@ -102,6 +116,7 @@ static const struct gma_limit_t psb_intel_limits[] = {
 	  * is 80-224Mhz.  Prefer single channel as much as possible.
 	  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 .p2 = {.dot_limit = 112000,
 		.p2_slow = 14, .p2_fast = 7},
 	 },
@@ -113,6 +128,8 @@ static const struct psb_intel_limit_t *psb_intel_limit(struct drm_crtc *crtc)
 
 	if (psb_intel_pipe_has_type(crtc, INTEL_OUTPUT_LVDS))
 =======
+=======
+>>>>>>> v3.18
 	 .p2 = {.dot_limit = 112000, .p2_slow = 14, .p2_fast = 7},
 	 .find_pll = gma_find_best_pll,
 	 },
@@ -124,6 +141,9 @@ static const struct gma_limit_t *psb_intel_limit(struct drm_crtc *crtc,
 	const struct gma_limit_t *limit;
 
 	if (gma_pipe_has_type(crtc, INTEL_OUTPUT_LVDS))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		limit = &psb_intel_limits[INTEL_LIMIT_I9XX_LVDS];
 	else
@@ -132,7 +152,11 @@ static const struct gma_limit_t *psb_intel_limit(struct drm_crtc *crtc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void psb_intel_clock(int refclk, struct psb_intel_clock_t *clock)
+=======
+static void psb_intel_clock(int refclk, struct gma_clock_t *clock)
+>>>>>>> v3.18
 =======
 static void psb_intel_clock(int refclk, struct gma_clock_t *clock)
 >>>>>>> v3.18
@@ -144,6 +168,7 @@ static void psb_intel_clock(int refclk, struct gma_clock_t *clock)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Returns whether any output on the specified pipe is of the specified type
  */
@@ -494,6 +519,8 @@ static bool psb_intel_crtc_mode_fixup(struct drm_crtc *crtc,
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Return the pipe currently connected to the panel fitter,
  * or -1 if the panel fitter is not present or not in use
  */
@@ -519,6 +546,7 @@ static int psb_intel_crtc_mode_set(struct drm_crtc *crtc,
 	struct drm_device *dev = crtc->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 	struct drm_crtc_helper_funcs *crtc_funcs = crtc->helper_private;
 	int pipe = psb_intel_crtc->pipe;
@@ -526,12 +554,17 @@ static int psb_intel_crtc_mode_set(struct drm_crtc *crtc,
 	int refclk;
 	struct psb_intel_clock_t clock;
 =======
+=======
+>>>>>>> v3.18
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	struct drm_crtc_helper_funcs *crtc_funcs = crtc->helper_private;
 	int pipe = gma_crtc->pipe;
 	const struct psb_offset *map = &dev_priv->regmap[pipe];
 	int refclk;
 	struct gma_clock_t clock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 dpll = 0, fp = 0, dspcntr, pipeconf;
 	bool ok, is_sdvo = false;
@@ -539,14 +572,20 @@ static int psb_intel_crtc_mode_set(struct drm_crtc *crtc,
 	struct drm_mode_config *mode_config = &dev->mode_config;
 	struct drm_connector *connector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* No scan out no play */
 	if (crtc->fb == NULL) {
 =======
+=======
+>>>>>>> v3.18
 	const struct gma_limit_t *limit;
 
 	/* No scan out no play */
 	if (crtc->primary->fb == NULL) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		crtc_funcs->mode_set_base(crtc, x, y, old_fb);
 		return 0;
@@ -554,8 +593,12 @@ static int psb_intel_crtc_mode_set(struct drm_crtc *crtc,
 
 	list_for_each_entry(connector, &mode_config->connector_list, head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct psb_intel_encoder *psb_intel_encoder =
 					psb_intel_attached_encoder(connector);
+=======
+		struct gma_encoder *gma_encoder = gma_attached_encoder(connector);
+>>>>>>> v3.18
 =======
 		struct gma_encoder *gma_encoder = gma_attached_encoder(connector);
 >>>>>>> v3.18
@@ -565,7 +608,11 @@ static int psb_intel_crtc_mode_set(struct drm_crtc *crtc,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (psb_intel_encoder->type) {
+=======
+		switch (gma_encoder->type) {
+>>>>>>> v3.18
 =======
 		switch (gma_encoder->type) {
 >>>>>>> v3.18
@@ -584,11 +631,14 @@ static int psb_intel_crtc_mode_set(struct drm_crtc *crtc,
 	refclk = 96000;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ok = psb_intel_find_best_PLL(crtc, adjusted_mode->clock, refclk,
 				 &clock);
 	if (!ok) {
 		dev_err(dev->dev, "Couldn't find PLL settings for mode!\n");
 =======
+=======
+>>>>>>> v3.18
 	limit = gma_crtc->clock_funcs->limit(crtc, refclk);
 
 	ok = limit->find_pll(limit, crtc, adjusted_mode->clock, refclk,
@@ -596,6 +646,9 @@ static int psb_intel_crtc_mode_set(struct drm_crtc *crtc,
 	if (!ok) {
 		DRM_ERROR("Couldn't find PLL settings for mode! target: %d, actual: %d",
 			  adjusted_mode->clock, clock.dot);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	}
@@ -735,7 +788,11 @@ static int psb_intel_crtc_mode_set(struct drm_crtc *crtc,
 	REG_READ(map->conf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_wait_for_vblank(dev);
+=======
+	gma_wait_for_vblank(dev);
+>>>>>>> v3.18
 =======
 	gma_wait_for_vblank(dev);
 >>>>>>> v3.18
@@ -746,7 +803,11 @@ static int psb_intel_crtc_mode_set(struct drm_crtc *crtc,
 	crtc_funcs->mode_set_base(crtc, x, y, old_fb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_wait_for_vblank(dev);
+=======
+	gma_wait_for_vblank(dev);
+>>>>>>> v3.18
 =======
 	gma_wait_for_vblank(dev);
 >>>>>>> v3.18
@@ -754,6 +815,7 @@ static int psb_intel_crtc_mode_set(struct drm_crtc *crtc,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /** Loads the palette/gamma unit for the CRTC with the prepared values */
 void psb_intel_crtc_load_lut(struct drm_crtc *crtc)
@@ -1096,10 +1158,13 @@ static int psb_crtc_set_config(struct drm_mode_set *set)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Returns the clock of the currently programmed mode of the given pipe. */
 static int psb_intel_crtc_clock_get(struct drm_device *dev,
 				struct drm_crtc *crtc)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 	struct drm_psb_private *dev_priv = dev->dev_private;
@@ -1109,6 +1174,8 @@ static int psb_intel_crtc_clock_get(struct drm_device *dev,
 	u32 fp;
 	struct psb_intel_clock_t clock;
 =======
+=======
+>>>>>>> v3.18
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	struct drm_psb_private *dev_priv = dev->dev_private;
 	int pipe = gma_crtc->pipe;
@@ -1116,6 +1183,9 @@ static int psb_intel_crtc_clock_get(struct drm_device *dev,
 	u32 dpll;
 	u32 fp;
 	struct gma_clock_t clock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool is_lvds;
 	struct psb_pipe *p = &dev_priv->regs.pipe[pipe];
@@ -1187,8 +1257,13 @@ struct drm_display_mode *psb_intel_crtc_mode_get(struct drm_device *dev,
 					     struct drm_crtc *crtc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 	int pipe = psb_intel_crtc->pipe;
+=======
+	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
+	int pipe = gma_crtc->pipe;
+>>>>>>> v3.18
 =======
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	int pipe = gma_crtc->pipe;
@@ -1235,6 +1310,7 @@ struct drm_display_mode *psb_intel_crtc_mode_get(struct drm_device *dev,
 	return mode;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void psb_intel_crtc_destroy(struct drm_crtc *crtc)
 {
@@ -1289,6 +1365,8 @@ const struct drm_crtc_funcs psb_intel_crtc_funcs = {
 	.set_config = psb_crtc_set_config,
 	.destroy = psb_intel_crtc_destroy,
 =======
+=======
+>>>>>>> v3.18
 const struct drm_crtc_helper_funcs psb_intel_helper_funcs = {
 	.dpms = gma_crtc_dpms,
 	.mode_fixup = gma_crtc_mode_fixup,
@@ -1313,6 +1391,9 @@ const struct gma_clock_funcs psb_clock_funcs = {
 	.clock = psb_intel_clock,
 	.limit = psb_intel_limit,
 	.pll_is_valid = gma_pll_is_valid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1322,7 +1403,11 @@ const struct gma_clock_funcs psb_clock_funcs = {
  */
 static void psb_intel_cursor_init(struct drm_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct psb_intel_crtc *psb_intel_crtc)
+=======
+				  struct gma_crtc *gma_crtc)
+>>>>>>> v3.18
 =======
 				  struct gma_crtc *gma_crtc)
 >>>>>>> v3.18
@@ -1336,6 +1421,7 @@ static void psb_intel_cursor_init(struct drm_device *dev,
 		/* Allocate 4 pages of stolen mem for a hardware cursor. That
 		 * is enough for the 64 x 64 ARGB cursors we support.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		cursor_gt = psb_gtt_alloc_range(dev, 4 * PAGE_SIZE, "cursor", 1);
 		if (!cursor_gt) {
@@ -1353,6 +1439,8 @@ out:
 	REG_WRITE(control[psb_intel_crtc->pipe], 0);
 	REG_WRITE(base[psb_intel_crtc->pipe], 0);
 =======
+=======
+>>>>>>> v3.18
 		cursor_gt = psb_gtt_alloc_range(dev, 4 * PAGE_SIZE, "cursor", 1,
 						PAGE_SIZE);
 		if (!cursor_gt) {
@@ -1369,6 +1457,9 @@ out:
 out:
 	REG_WRITE(control[gma_crtc->pipe], 0);
 	REG_WRITE(base[gma_crtc->pipe], 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1377,7 +1468,11 @@ void psb_intel_crtc_init(struct drm_device *dev, int pipe,
 {
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc;
+=======
+	struct gma_crtc *gma_crtc;
+>>>>>>> v3.18
 =======
 	struct gma_crtc *gma_crtc;
 >>>>>>> v3.18
@@ -1386,6 +1481,7 @@ void psb_intel_crtc_init(struct drm_device *dev, int pipe,
 
 	/* We allocate a extra array of drm_connector pointers
 	 * for fbdev after the crtc */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	psb_intel_crtc =
 	    kzalloc(sizeof(struct psb_intel_crtc) +
@@ -1400,6 +1496,8 @@ void psb_intel_crtc_init(struct drm_device *dev, int pipe,
 		dev_err(dev->dev, "Crtc state error: No memory\n");
 		kfree(psb_intel_crtc);
 =======
+=======
+>>>>>>> v3.18
 	gma_crtc = kzalloc(sizeof(struct gma_crtc) +
 			(INTELFB_CONN_LIMIT * sizeof(struct drm_connector *)),
 			GFP_KERNEL);
@@ -1411,11 +1509,15 @@ void psb_intel_crtc_init(struct drm_device *dev, int pipe,
 	if (!gma_crtc->crtc_state) {
 		dev_err(dev->dev, "Crtc state error: No memory\n");
 		kfree(gma_crtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
 
 	/* Set the CRTC operations from the chip specific data */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	drm_crtc_init(dev, &psb_intel_crtc->base, dev_priv->ops->crtc_funcs);
 
@@ -1431,6 +1533,8 @@ void psb_intel_crtc_init(struct drm_device *dev, int pipe,
 		psb_intel_crtc->lut_g[i] = i;
 		psb_intel_crtc->lut_b[i] = i;
 =======
+=======
+>>>>>>> v3.18
 	drm_crtc_init(dev, &gma_crtc->base, dev_priv->ops->crtc_funcs);
 
 	/* Set the CRTC clock functions from chip specific data */
@@ -1447,11 +1551,15 @@ void psb_intel_crtc_init(struct drm_device *dev, int pipe,
 		gma_crtc->lut_r[i] = i;
 		gma_crtc->lut_g[i] = i;
 		gma_crtc->lut_b[i] = i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		r_base[i] = i << 8;
 		g_base[i] = i << 8;
 		b_base[i] = i << 8;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		psb_intel_crtc->lut_adj[i] = 0;
 	}
@@ -1505,6 +1613,8 @@ int psb_intel_get_pipe_from_crtc_id(struct drm_device *dev, void *data,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		gma_crtc->lut_adj[i] = 0;
 	}
 
@@ -1526,6 +1636,9 @@ int psb_intel_get_pipe_from_crtc_id(struct drm_device *dev, void *data,
 
 	/* Set to true so that the pipe is forced off on initial config. */
 	gma_crtc->active = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1535,8 +1648,13 @@ struct drm_crtc *psb_intel_get_crtc_from_pipe(struct drm_device *dev, int pipe)
 
 	list_for_each_entry(crtc, &dev->mode_config.crtc_list, head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 		if (psb_intel_crtc->pipe == pipe)
+=======
+		struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
+		if (gma_crtc->pipe == pipe)
+>>>>>>> v3.18
 =======
 		struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 		if (gma_crtc->pipe == pipe)
@@ -1547,7 +1665,11 @@ struct drm_crtc *psb_intel_get_crtc_from_pipe(struct drm_device *dev, int pipe)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int psb_intel_connector_clones(struct drm_device *dev, int type_mask)
+=======
+int gma_connector_clones(struct drm_device *dev, int type_mask)
+>>>>>>> v3.18
 =======
 int gma_connector_clones(struct drm_device *dev, int type_mask)
 >>>>>>> v3.18
@@ -1559,9 +1681,14 @@ int gma_connector_clones(struct drm_device *dev, int type_mask)
 	list_for_each_entry(connector, &dev->mode_config.connector_list,
 			    head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct psb_intel_encoder *psb_intel_encoder =
 					psb_intel_attached_encoder(connector);
 		if (type_mask & (1 << psb_intel_encoder->type))
+=======
+		struct gma_encoder *gma_encoder = gma_attached_encoder(connector);
+		if (type_mask & (1 << gma_encoder->type))
+>>>>>>> v3.18
 =======
 		struct gma_encoder *gma_encoder = gma_attached_encoder(connector);
 		if (type_mask & (1 << gma_encoder->type))
@@ -1571,6 +1698,7 @@ int gma_connector_clones(struct drm_device *dev, int type_mask)
 	}
 	return index_mask;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* current intel driver doesn't take advantage of encoders
@@ -1591,5 +1719,7 @@ void psb_intel_connector_attach_encoder(struct psb_intel_connector *connector,
 	drm_mode_connector_attach_encoder(&connector->base,
 					  &encoder->base);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

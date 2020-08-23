@@ -472,14 +472,20 @@ static void ath9k_htc_tx_process(struct ath9k_htc_priv *priv,
 		goto send_mac80211;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (txs->ts_flags & ATH9K_HTC_TXSTAT_ACK)
 		tx_info->flags |= IEEE80211_TX_STAT_ACK;
 =======
+=======
+>>>>>>> v3.18
 	if (txs->ts_flags & ATH9K_HTC_TXSTAT_ACK) {
 		tx_info->flags |= IEEE80211_TX_STAT_ACK;
 		if (tx_info->flags & IEEE80211_TX_CTL_AMPDU)
 			tx_info->flags |= IEEE80211_TX_STAT_AMPDU;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (txs->ts_flags & ATH9K_HTC_TXSTAT_FILT)
@@ -906,7 +912,11 @@ u32 ath9k_htc_calcrxfilter(struct ath9k_htc_priv *priv)
 		rfilt |= ATH9K_RX_FILTER_PSPOLL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->nvifs > 1)
+=======
+	if (priv->nvifs > 1 || priv->rxfilter & FIF_OTHER_BSS)
+>>>>>>> v3.18
 =======
 	if (priv->nvifs > 1 || priv->rxfilter & FIF_OTHER_BSS)
 >>>>>>> v3.18
@@ -936,6 +946,7 @@ static void ath9k_htc_opmode_init(struct ath9k_htc_priv *priv)
 
 void ath9k_host_rx_init(struct ath9k_htc_priv *priv)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ath9k_hw_rxena(priv->ah);
 	ath9k_htc_opmode_init(priv);
@@ -978,6 +989,8 @@ static void ath9k_process_rate(struct ieee80211_hw *hw,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct ath_common *common = ath9k_hw_common(priv->ah);
 	ath9k_hw_rxena(priv->ah);
 	ath9k_htc_opmode_init(priv);
@@ -1015,6 +1028,9 @@ static void rx_status_htc_to_ath(struct ath_rx_status *rx_stats,
 	rx_stats->rs_moreaggr	= rxstatus->rs_moreaggr;
 	rx_stats->rs_num_delims	= rxstatus->rs_num_delims;
 	convert_htc_flag(rx_stats, rxstatus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1028,15 +1044,21 @@ static bool ath9k_rx_prepare(struct ath9k_htc_priv *priv,
 	struct sk_buff *skb = rxbuf->skb;
 	struct ath_common *common = ath9k_hw_common(priv->ah);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_htc_rx_status *rxstatus;
 	int hdrlen, padsize;
 	int last_rssi = ATH_RSSI_DUMMY_MARKER;
 	__le16 fc;
 =======
+=======
+>>>>>>> v3.18
 	struct ath_hw *ah = common->ah;
 	struct ath_htc_rx_status *rxstatus;
 	struct ath_rx_status rx_stats;
 	bool decrypt_error = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (skb->len < HTC_RX_FRAME_HEADER_SIZE) {
@@ -1055,6 +1077,7 @@ static bool ath9k_rx_prepare(struct ath9k_htc_priv *priv,
 		goto rx_next;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ath9k_htc_err_stat_rx(priv, rxstatus);
 
@@ -1159,6 +1182,8 @@ static bool ath9k_rx_prepare(struct ath9k_htc_priv *priv,
 	return true;
 
 =======
+=======
+>>>>>>> v3.18
 	/* Get the RX status information */
 
 	memset(rx_status, 0, sizeof(struct ieee80211_rx_status));
@@ -1194,6 +1219,9 @@ static bool ath9k_rx_prepare(struct ath9k_htc_priv *priv,
 	rx_status->flag |= RX_FLAG_MACTIME_END;
 
 	return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 rx_next:
 	return false;

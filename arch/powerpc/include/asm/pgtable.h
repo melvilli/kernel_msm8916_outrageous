@@ -4,6 +4,11 @@
 
 #ifndef __ASSEMBLY__
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mmdebug.h>
+#include <linux/mmzone.h>
+>>>>>>> v3.18
 =======
 #include <linux/mmdebug.h>
 #include <linux/mmzone.h>
@@ -39,11 +44,14 @@ static inline int pte_young(pte_t pte)		{ return pte_val(pte) & _PAGE_ACCESSED; 
 static inline int pte_file(pte_t pte)		{ return pte_val(pte) & _PAGE_FILE; }
 static inline int pte_special(pte_t pte)	{ return pte_val(pte) & _PAGE_SPECIAL; }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int pte_present(pte_t pte)	{ return pte_val(pte) & _PAGE_PRESENT; }
 static inline int pte_none(pte_t pte)		{ return (pte_val(pte) & ~_PTE_NONE_MASK) == 0; }
 static inline pgprot_t pte_pgprot(pte_t pte)	{ return __pgprot(pte_val(pte) & PAGE_PROT_BITS); }
 
 =======
+=======
+>>>>>>> v3.18
 static inline int pte_none(pte_t pte)		{ return (pte_val(pte) & ~_PTE_NONE_MASK) == 0; }
 static inline pgprot_t pte_pgprot(pte_t pte)	{ return __pgprot(pte_val(pte) & PAGE_PROT_BITS); }
 
@@ -106,6 +114,9 @@ static inline int pte_present(pte_t pte)
 }
 #endif /* CONFIG_NUMA_BALANCING */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Conversion functions: convert a page and protection to a page entry,
  * and a page entry and page directory to the page they refer to.
@@ -260,6 +271,11 @@ extern unsigned long empty_zero_page[];
 extern pgd_t swapper_pg_dir[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void limit_zone_pfn(enum zone_type zone, unsigned long max_pfn);
+int dma_pfn_limit_to_zone(u64 pfn_limit);
+>>>>>>> v3.18
 =======
 void limit_zone_pfn(enum zone_type zone, unsigned long max_pfn);
 int dma_pfn_limit_to_zone(u64 pfn_limit);
@@ -293,7 +309,10 @@ extern int gup_hugepd(hugepd_t *hugepd, unsigned pdshift, unsigned long addr,
 extern int gup_hugepte(pte_t *ptep, unsigned long sz, unsigned long addr,
 		       unsigned long end, int write, struct page **pages, int *nr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_TRANSPARENT_HUGEPAGE
 #define pmd_large(pmd)		0
 #define has_transparent_hugepage() 0
@@ -321,6 +340,9 @@ static inline pte_t *lookup_linux_ptep(pgd_t *pgdir, unsigned long hva,
 
 	return ptep;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASSEMBLY__ */
 

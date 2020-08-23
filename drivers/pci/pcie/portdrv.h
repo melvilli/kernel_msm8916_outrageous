@@ -15,7 +15,11 @@
 /*
  * According to the PCI Express Base Specification 2.0, the indices of
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the MSI-X table entires used by port services must not exceed 31
+=======
+ * the MSI-X table entries used by port services must not exceed 31
+>>>>>>> v3.18
 =======
  * the MSI-X table entries used by port services must not exceed 31
 >>>>>>> v3.18

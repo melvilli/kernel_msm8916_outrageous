@@ -11,6 +11,10 @@
 /dts-v1/;
 #include "imx6dl.dtsi"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "imx6qdl-wandboard-revc1.dtsi"
+>>>>>>> v3.18
 =======
 #include "imx6qdl-wandboard-revc1.dtsi"
 >>>>>>> v3.18
@@ -23,6 +27,7 @@
 		reg = <0x10000000 0x40000000>;
 	};
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 &fec {
@@ -47,5 +52,7 @@
 	pinctrl-0 = <&pinctrl_usdhc3_2>;
 	status = "okay";
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

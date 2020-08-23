@@ -47,7 +47,11 @@
 #include <asm/io.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../sticore.h"
+=======
+#include "../fbdev/sticore.h"
+>>>>>>> v3.18
 =======
 #include "../fbdev/sticore.h"
 >>>>>>> v3.18
@@ -377,6 +381,10 @@ static const struct consw sti_con = {
 static int __init sticonsole_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    int err;
+>>>>>>> v3.18
 =======
     int err;
 >>>>>>> v3.18
@@ -391,12 +399,18 @@ static int __init sticonsole_init(void)
     if (conswitchp == &dummy_con) {
 	printk(KERN_INFO "sticon: Initializing STI text console.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return take_over_console(&sti_con, 0, MAX_NR_CONSOLES - 1, 1);
 =======
+=======
+>>>>>>> v3.18
 	console_lock();
 	err = do_take_over_console(&sti_con, 0, MAX_NR_CONSOLES - 1, 1);
 	console_unlock();
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     }
     return 0;

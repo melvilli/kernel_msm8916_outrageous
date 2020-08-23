@@ -621,7 +621,11 @@ static struct omap_mux __initdata omap3_muxmodes[] = {
 		"gpio_149", NULL, NULL, "safe_mode"),
 	_OMAP3_MUXENTRY(UART1_RX, 151,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"uart1_rx", "ss1_wake_tx", "mcbsp1_clkr", "mcspi4_clk",
+=======
+		"uart1_rx", "ssi1_wake_tx", "mcbsp1_clkr", "mcspi4_clk",
+>>>>>>> v3.18
 =======
 		"uart1_rx", "ssi1_wake_tx", "mcbsp1_clkr", "mcspi4_clk",
 >>>>>>> v3.18

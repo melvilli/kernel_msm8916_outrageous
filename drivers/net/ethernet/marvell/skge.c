@@ -83,7 +83,11 @@ module_param(debug, int, 0);
 MODULE_PARM_DESC(debug, "Debug level (0=none,...,16=all)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(skge_id_table) = {
+=======
+static const struct pci_device_id skge_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id skge_id_table[] = {
 >>>>>>> v3.18
@@ -936,31 +940,43 @@ static int skge_ring_alloc(struct skge_ring *ring, void *vaddr, u32 base)
 
 /* Allocate and setup a new buffer for receiving */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void skge_rx_setup(struct skge_port *skge, struct skge_element *e,
 			  struct sk_buff *skb, unsigned int bufsize)
 {
 	struct skge_rx_desc *rd = e->desc;
 	u64 map;
 =======
+=======
+>>>>>>> v3.18
 static int skge_rx_setup(struct skge_port *skge, struct skge_element *e,
 			 struct sk_buff *skb, unsigned int bufsize)
 {
 	struct skge_rx_desc *rd = e->desc;
 	dma_addr_t map;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	map = pci_map_single(skge->hw->pdev, skb->data, bufsize,
 			     PCI_DMA_FROMDEVICE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rd->dma_lo = map;
 	rd->dma_hi = map >> 32;
 =======
+=======
+>>>>>>> v3.18
 	if (pci_dma_mapping_error(skge->hw->pdev, map))
 		return -1;
 
 	rd->dma_lo = lower_32_bits(map);
 	rd->dma_hi = upper_32_bits(map);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	e->skb = skb;
 	rd->csum1_start = ETH_HLEN;
@@ -974,6 +990,10 @@ static int skge_rx_setup(struct skge_port *skge, struct skge_element *e,
 	dma_unmap_addr_set(e, mapaddr, map);
 	dma_unmap_len_set(e, maplen, bufsize);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1039,12 +1059,18 @@ static int skge_rx_fill(struct net_device *dev)
 
 		skb_reserve(skb, NET_IP_ALIGN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skge_rx_setup(skge, e, skb, skge->rx_buf_size);
 =======
+=======
+>>>>>>> v3.18
 		if (skge_rx_setup(skge, e, skb, skge->rx_buf_size) < 0) {
 			dev_kfree_skb(skb);
 			return -EIO;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while ((e = e->next) != ring->start);
 
@@ -1132,7 +1158,11 @@ static u16 xm_phy_read(struct skge_hw *hw, int port, u16 reg)
 	u16 v = 0;
 	if (__xm_phy_read(hw, port, reg, &v))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: phy read timed out\n", hw->dev[port]->name);
+=======
+		pr_warn("%s: phy read timed out\n", hw->dev[port]->name);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: phy read timed out\n", hw->dev[port]->name);
 >>>>>>> v3.18
@@ -1932,7 +1962,11 @@ static int gm_phy_write(struct skge_hw *hw, int port, u16 reg, u16 val)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_warning("%s: phy write timeout\n", hw->dev[port]->name);
+=======
+	pr_warn("%s: phy write timeout\n", hw->dev[port]->name);
+>>>>>>> v3.18
 =======
 	pr_warn("%s: phy write timeout\n", hw->dev[port]->name);
 >>>>>>> v3.18
@@ -1964,7 +1998,11 @@ static u16 gm_phy_read(struct skge_hw *hw, int port, u16 reg)
 	u16 v = 0;
 	if (__gm_phy_read(hw, port, reg, &v))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: phy read timeout\n", hw->dev[port]->name);
+=======
+		pr_warn("%s: phy read timeout\n", hw->dev[port]->name);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: phy read timeout\n", hw->dev[port]->name);
 >>>>>>> v3.18
@@ -2588,7 +2626,11 @@ static int skge_up(struct net_device *dev)
 	BUG_ON(skge->dma & 7);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((u64)skge->dma >> 32 != ((u64) skge->dma + skge->mem_size) >> 32) {
+=======
+	if (upper_32_bits(skge->dma) != upper_32_bits(skge->dma + skge->mem_size)) {
+>>>>>>> v3.18
 =======
 	if (upper_32_bits(skge->dma) != upper_32_bits(skge->dma + skge->mem_size)) {
 >>>>>>> v3.18
@@ -2777,7 +2819,11 @@ static netdev_tx_t skge_xmit_frame(struct sk_buff *skb,
 	int i;
 	u32 control, len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 map;
+=======
+	dma_addr_t map;
+>>>>>>> v3.18
 =======
 	dma_addr_t map;
 >>>>>>> v3.18
@@ -2795,12 +2841,15 @@ static netdev_tx_t skge_xmit_frame(struct sk_buff *skb,
 	len = skb_headlen(skb);
 	map = pci_map_single(hw->pdev, skb->data, len, PCI_DMA_TODEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_unmap_addr_set(e, mapaddr, map);
 	dma_unmap_len_set(e, maplen, len);
 
 	td->dma_lo = map;
 	td->dma_hi = map >> 32;
 =======
+=======
+>>>>>>> v3.18
 	if (pci_dma_mapping_error(hw->pdev, map))
 		goto mapping_error;
 
@@ -2809,6 +2858,9 @@ static netdev_tx_t skge_xmit_frame(struct sk_buff *skb,
 
 	td->dma_lo = lower_32_bits(map);
 	td->dma_hi = upper_32_bits(map);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (skb->ip_summed == CHECKSUM_PARTIAL) {
@@ -2841,6 +2893,11 @@ static netdev_tx_t skge_xmit_frame(struct sk_buff *skb,
 			map = skb_frag_dma_map(&hw->pdev->dev, frag, 0,
 					       skb_frag_size(frag), DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (dma_mapping_error(&hw->pdev->dev, map))
+				goto mapping_unwind;
+>>>>>>> v3.18
 =======
 			if (dma_mapping_error(&hw->pdev->dev, map))
 				goto mapping_unwind;
@@ -2852,8 +2909,13 @@ static netdev_tx_t skge_xmit_frame(struct sk_buff *skb,
 			BUG_ON(tf->control & BMU_OWN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tf->dma_lo = map;
 			tf->dma_hi = (u64) map >> 32;
+=======
+			tf->dma_lo = lower_32_bits(map);
+			tf->dma_hi = upper_32_bits(map);
+>>>>>>> v3.18
 =======
 			tf->dma_lo = lower_32_bits(map);
 			tf->dma_hi = upper_32_bits(map);
@@ -2888,7 +2950,10 @@ static netdev_tx_t skge_xmit_frame(struct sk_buff *skb,
 
 	return NETDEV_TX_OK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 mapping_unwind:
 	e = skge->tx_ring.to_use;
@@ -2909,6 +2974,9 @@ mapping_error:
 		dev_warn(&hw->pdev->dev, "%s: tx mapping error\n", dev->name);
 	dev_kfree_skb_any(skb);
 	return NETDEV_TX_OK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3141,6 +3209,7 @@ static struct sk_buff *skge_rx_get(struct net_device *dev,
 		pci_dma_sync_single_for_cpu(skge->hw->pdev,
 					    dma_unmap_addr(e, mapaddr),
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    len, PCI_DMA_FROMDEVICE);
 		skb_copy_from_linear_data(e->skb, skb->data, len);
 		pci_dma_sync_single_for_device(skge->hw->pdev,
@@ -3149,6 +3218,8 @@ static struct sk_buff *skge_rx_get(struct net_device *dev,
 		skge_rx_reuse(e, skge->rx_buf_size);
 	} else {
 =======
+=======
+>>>>>>> v3.18
 					    dma_unmap_len(e, maplen),
 					    PCI_DMA_FROMDEVICE);
 		skb_copy_from_linear_data(e->skb, skb->data, len);
@@ -3159,6 +3230,9 @@ static struct sk_buff *skge_rx_get(struct net_device *dev,
 		skge_rx_reuse(e, skge->rx_buf_size);
 	} else {
 		struct skge_element ee;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct sk_buff *nskb;
 
@@ -3166,6 +3240,7 @@ static struct sk_buff *skge_rx_get(struct net_device *dev,
 		if (!nskb)
 			goto resubmit;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pci_unmap_single(skge->hw->pdev,
 				 dma_unmap_addr(e, mapaddr),
@@ -3175,6 +3250,8 @@ static struct sk_buff *skge_rx_get(struct net_device *dev,
 		prefetch(skb->data);
 		skge_rx_setup(skge, e, nskb, skge->rx_buf_size);
 =======
+=======
+>>>>>>> v3.18
 		ee = *e;
 
 		skb = ee.skb;
@@ -3189,6 +3266,9 @@ static struct sk_buff *skge_rx_get(struct net_device *dev,
 				 dma_unmap_addr(&ee, mapaddr),
 				 dma_unmap_len(&ee, maplen),
 				 PCI_DMA_FROMDEVICE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -3256,7 +3336,11 @@ static void skge_tx_done(struct net_device *dev)
 			bytes_compl += e->skb->len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_kfree_skb(e->skb);
+=======
+			dev_consume_skb_any(e->skb);
+>>>>>>> v3.18
 =======
 			dev_consume_skb_any(e->skb);
 >>>>>>> v3.18
@@ -3836,7 +3920,11 @@ static int skge_device_event(struct notifier_block *unused,
 			     unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -4138,7 +4226,10 @@ err_out_free_regions:
 err_out_disable_pdev:
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_out:
@@ -4185,7 +4276,10 @@ static void skge_remove(struct pci_dev *pdev)
 	iounmap(hw->regs);
 	kfree(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -4299,7 +4393,10 @@ static struct dmi_system_id skge_32bit_dma_boards[] = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.ident = "FUJITSU SIEMENS A8NE-FM",
 		.matches = {
@@ -4307,6 +4404,9 @@ static struct dmi_system_id skge_32bit_dma_boards[] = {
 			DMI_MATCH(DMI_BOARD_NAME, "A8NE-FM")
 		},
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };

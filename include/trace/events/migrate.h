@@ -5,6 +5,11 @@
 #define _TRACE_MIGRATE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/tracepoint.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/tracepoint.h>
 
@@ -21,6 +26,10 @@
 	{MR_SYSCALL,		"syscall_or_cpuset"},		\
 	{MR_MEMPOLICY_MBIND,	"mempolicy_mbind"},		\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{MR_NUMA_MISPLACED,	"numa_misplaced"},		\
+>>>>>>> v3.18
 =======
 	{MR_NUMA_MISPLACED,	"numa_misplaced"},		\
 >>>>>>> v3.18
@@ -55,7 +64,10 @@ TRACE_EVENT(mm_migrate_pages,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(mm_numa_migrate_ratelimit,
 
 	TP_PROTO(struct task_struct *p, int dst_nid, unsigned long nr_pages),
@@ -82,6 +94,9 @@ TRACE_EVENT(mm_numa_migrate_ratelimit,
 		__entry->dst_nid,
 		__entry->nr_pages)
 );
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _TRACE_MIGRATE_H */
 

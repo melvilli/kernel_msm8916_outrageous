@@ -88,7 +88,11 @@ enum power_event {
 #define GMAC_ADDR_LOW(reg)	(((reg > 15) ? 0x00000804 : 0x00000044) + \
 				(reg * 8))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GMAC_MAX_PERFECT_ADDRESSES	32
+=======
+#define GMAC_MAX_PERFECT_ADDRESSES	1
+>>>>>>> v3.18
 =======
 #define GMAC_MAX_PERFECT_ADDRESSES	1
 >>>>>>> v3.18
@@ -131,11 +135,16 @@ enum power_event {
 #define GMAC_ANE_PSE_SHIFT	7
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  /* GMAC Configuration defines */
 #define GMAC_CONTROL_TC	0x01000000	/* Transmit Conf. in RGMII/SGMII */
 #define GMAC_CONTROL_WD	0x00800000	/* Disable Watchdog on receive */
 
 /* GMAC Configuration defines */
+=======
+/* GMAC Configuration defines */
+#define GMAC_CONTROL_2K 0x08000000	/* IEEE 802.3as 2K packets */
+>>>>>>> v3.18
 =======
 /* GMAC Configuration defines */
 #define GMAC_CONTROL_2K 0x08000000	/* IEEE 802.3as 2K packets */
@@ -166,7 +175,11 @@ enum inter_frame_gap {
 
 #define GMAC_CORE_INIT (GMAC_CONTROL_JD | GMAC_CONTROL_PS | GMAC_CONTROL_ACS | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			GMAC_CONTROL_JE | GMAC_CONTROL_BE)
+=======
+			GMAC_CONTROL_BE | GMAC_CONTROL_DCRS)
+>>>>>>> v3.18
 =======
 			GMAC_CONTROL_BE | GMAC_CONTROL_DCRS)
 >>>>>>> v3.18
@@ -278,6 +291,10 @@ enum rtc_control {
 #define GMAC_MMC_TX_INTR   0x108
 #define GMAC_MMC_RX_CSUM_OFFLOAD   0x208
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GMAC_EXTHASH_BASE  0x500
+>>>>>>> v3.18
 =======
 #define GMAC_EXTHASH_BASE  0x500
 >>>>>>> v3.18

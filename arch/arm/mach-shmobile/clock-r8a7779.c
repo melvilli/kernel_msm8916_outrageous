@@ -24,14 +24,20 @@
 #include <linux/sh_clk.h>
 #include <linux/clkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/clock.h>
 #include <mach/common.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/sh_timer.h>
 
 #include "clock.h"
 #include "common.h"
 #include "r8a7779.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -56,13 +62,17 @@
 #define MD(nr)	BIT(nr)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FRQMR		IOMEM(0xffc80014)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MSTPCR0		IOMEM(0xffc80030)
 #define MSTPCR1		IOMEM(0xffc80034)
 #define MSTPCR3		IOMEM(0xffc8003c)
 #define MSTPSR1		IOMEM(0xffc80044)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MSTPSR4		IOMEM(0xffc80048)
 #define MSTPSR6		IOMEM(0xffc8004c)
@@ -73,6 +83,8 @@
 
 #define MODEMR		0xffcc0020
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -127,7 +139,13 @@ static struct clk *main_clks[] = {
 
 enum { MSTP323, MSTP322, MSTP321, MSTP320,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MSTP115, MSTP114,
+=======
+	MSTP120,
+	MSTP116, MSTP115, MSTP114,
+	MSTP110, MSTP109, MSTP108,
+>>>>>>> v3.18
 =======
 	MSTP120,
 	MSTP116, MSTP115, MSTP114,
@@ -146,12 +164,15 @@ static struct clk mstp_clks[MSTP_NR] = {
 	[MSTP321] = SH_CLK_MSTP32(&clkp_clk, MSTPCR3, 21, 0), /* SDHI2 */
 	[MSTP320] = SH_CLK_MSTP32(&clkp_clk, MSTPCR3, 20, 0), /* SDHI3 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[MSTP115] = SH_CLK_MSTP32(&clkp_clk, MSTPCR1, 15, 0), /* SATA */
 	[MSTP114] = SH_CLK_MSTP32(&clkp_clk, MSTPCR1, 14, 0), /* Ether */
 	[MSTP103] = SH_CLK_MSTP32(&clks_clk, MSTPCR1,  3, 0), /* DU */
 	[MSTP101] = SH_CLK_MSTP32(&clkp_clk, MSTPCR1,  1, 0), /* USB2 */
 	[MSTP100] = SH_CLK_MSTP32(&clkp_clk, MSTPCR1,  0, 0), /* USB0/1 */
 =======
+=======
+>>>>>>> v3.18
 	[MSTP120] = SH_CLK_MSTP32_STS(&clks_clk, MSTPCR1, 20, MSTPSR1, 0), /* VIN3 */
 	[MSTP116] = SH_CLK_MSTP32_STS(&clkp_clk, MSTPCR1, 16, MSTPSR1, 0), /* PCIe */
 	[MSTP115] = SH_CLK_MSTP32_STS(&clkp_clk, MSTPCR1, 15, MSTPSR1, 0), /* SATA */
@@ -162,6 +183,9 @@ static struct clk mstp_clks[MSTP_NR] = {
 	[MSTP103] = SH_CLK_MSTP32_STS(&clks_clk, MSTPCR1,  3, MSTPSR1, 0), /* DU */
 	[MSTP101] = SH_CLK_MSTP32_STS(&clkp_clk, MSTPCR1,  1, MSTPSR1, 0), /* USB2 */
 	[MSTP100] = SH_CLK_MSTP32_STS(&clkp_clk, MSTPCR1,  0, MSTPSR1, 0), /* USB0/1 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[MSTP030] = SH_CLK_MSTP32(&clkp_clk, MSTPCR0, 30, 0), /* I2C0 */
 	[MSTP029] = SH_CLK_MSTP32(&clkp_clk, MSTPCR0, 29, 0), /* I2C1 */
@@ -195,10 +219,13 @@ static struct clk_lookup lookups[] = {
 
 	/* MSTP32 clocks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLKDEV_DEV_ID("sata_rcar", &mstp_clks[MSTP115]), /* SATA */
 	CLKDEV_DEV_ID("fc600000.sata", &mstp_clks[MSTP115]), /* SATA w/DT */
 	CLKDEV_DEV_ID("sh-eth", &mstp_clks[MSTP114]), /* Ether */
 =======
+=======
+>>>>>>> v3.18
 	CLKDEV_DEV_ID("r8a7779-vin.3", &mstp_clks[MSTP120]), /* VIN3 */
 	CLKDEV_DEV_ID("rcar-pcie", &mstp_clks[MSTP116]), /* PCIe */
 	CLKDEV_DEV_ID("sata_rcar", &mstp_clks[MSTP115]), /* SATA */
@@ -207,11 +234,15 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("r8a7779-vin.0", &mstp_clks[MSTP110]), /* VIN0 */
 	CLKDEV_DEV_ID("r8a7779-vin.1", &mstp_clks[MSTP109]), /* VIN1 */
 	CLKDEV_DEV_ID("r8a7779-vin.2", &mstp_clks[MSTP108]), /* VIN2 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CLKDEV_DEV_ID("ehci-platform.1", &mstp_clks[MSTP101]), /* USB EHCI port2 */
 	CLKDEV_DEV_ID("ohci-platform.1", &mstp_clks[MSTP101]), /* USB OHCI port2 */
 	CLKDEV_DEV_ID("ehci-platform.0", &mstp_clks[MSTP100]), /* USB EHCI port0/1 */
 	CLKDEV_DEV_ID("ohci-platform.0", &mstp_clks[MSTP100]), /* USB OHCI port0/1 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	CLKDEV_DEV_ID("sh_tmu.0", &mstp_clks[MSTP016]), /* TMU00 */
 	CLKDEV_DEV_ID("sh_tmu.1", &mstp_clks[MSTP016]), /* TMU01 */
@@ -221,6 +252,8 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("i2c-rcar.2", &mstp_clks[MSTP028]), /* I2C2 */
 	CLKDEV_DEV_ID("i2c-rcar.3", &mstp_clks[MSTP027]), /* I2C3 */
 =======
+=======
+>>>>>>> v3.18
 	CLKDEV_ICK_ID("fck", "sh-tmu.0", &mstp_clks[MSTP016]), /* TMU0 */
 	CLKDEV_DEV_ID("i2c-rcar.0", &mstp_clks[MSTP030]), /* I2C0 */
 	CLKDEV_DEV_ID("ffc70000.i2c", &mstp_clks[MSTP030]), /* I2C0 */
@@ -230,6 +263,9 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("ffc72000.i2c", &mstp_clks[MSTP028]), /* I2C2 */
 	CLKDEV_DEV_ID("i2c-rcar.3", &mstp_clks[MSTP027]), /* I2C3 */
 	CLKDEV_DEV_ID("ffc73000.i2c", &mstp_clks[MSTP027]), /* I2C3 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CLKDEV_DEV_ID("sh-sci.0", &mstp_clks[MSTP026]), /* SCIF0 */
 	CLKDEV_DEV_ID("sh-sci.1", &mstp_clks[MSTP025]), /* SCIF1 */
@@ -239,6 +275,7 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("sh-sci.5", &mstp_clks[MSTP021]), /* SCIF6 */
 	CLKDEV_DEV_ID("sh-hspi.0", &mstp_clks[MSTP007]), /* HSPI0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLKDEV_DEV_ID("sh-hspi.1", &mstp_clks[MSTP007]), /* HSPI1 */
 	CLKDEV_DEV_ID("sh-hspi.2", &mstp_clks[MSTP007]), /* HSPI2 */
 	CLKDEV_DEV_ID("sh_mobile_sdhi.0", &mstp_clks[MSTP323]), /* SDHI0 */
@@ -247,6 +284,8 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("sh_mobile_sdhi.3", &mstp_clks[MSTP320]), /* SDHI3 */
 	CLKDEV_DEV_ID("rcar-du.0", &mstp_clks[MSTP103]), /* DU */
 =======
+=======
+>>>>>>> v3.18
 	CLKDEV_DEV_ID("fffc7000.spi", &mstp_clks[MSTP007]), /* HSPI0 */
 	CLKDEV_DEV_ID("sh-hspi.1", &mstp_clks[MSTP007]), /* HSPI1 */
 	CLKDEV_DEV_ID("fffc8000.spi", &mstp_clks[MSTP007]), /* HSPI1 */
@@ -261,11 +300,15 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("sh_mobile_sdhi.3", &mstp_clks[MSTP320]), /* SDHI3 */
 	CLKDEV_DEV_ID("ffe4f000.sd", &mstp_clks[MSTP320]), /* SDHI3 */
 	CLKDEV_DEV_ID("rcar-du-r8a7779", &mstp_clks[MSTP103]), /* DU */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 void __init r8a7779_clock_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void __iomem *modemr = ioremap_nocache(MODEMR, PAGE_SIZE);
 	u32 mode;
@@ -275,6 +318,11 @@ void __init r8a7779_clock_init(void)
 	mode = ioread32(modemr);
 	iounmap(modemr);
 
+=======
+	u32 mode = r8a7779_read_mode_pins();
+	int k, ret = 0;
+
+>>>>>>> v3.18
 =======
 	u32 mode = r8a7779_read_mode_pins();
 	int k, ret = 0;
@@ -334,7 +382,10 @@ void __init r8a7779_clock_init(void)
 		panic("failed to setup r8a7779 clocks\n");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* do nothing for !CONFIG_SMP or !CONFIG_HAVE_TWD */
 void __init __weak r8a7779_register_twd(void) { }
@@ -345,4 +396,7 @@ void __init r8a7779_earlytimer_init(void)
 	r8a7779_register_twd();
 	shmobile_earlytimer_init();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

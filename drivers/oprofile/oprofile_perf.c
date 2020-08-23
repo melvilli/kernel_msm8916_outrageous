@@ -139,7 +139,11 @@ static void op_perf_stop(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int oprofile_perf_create_files(struct super_block *sb, struct dentry *root)
+=======
+static int oprofile_perf_create_files(struct dentry *root)
+>>>>>>> v3.18
 =======
 static int oprofile_perf_create_files(struct dentry *root)
 >>>>>>> v3.18
@@ -152,6 +156,7 @@ static int oprofile_perf_create_files(struct dentry *root)
 
 		snprintf(buf, sizeof buf, "%d", i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dir = oprofilefs_mkdir(sb, root, buf);
 		oprofilefs_create_ulong(sb, dir, "enabled", &counter_config[i].enabled);
 		oprofilefs_create_ulong(sb, dir, "event", &counter_config[i].event);
@@ -160,6 +165,8 @@ static int oprofile_perf_create_files(struct dentry *root)
 		oprofilefs_create_ulong(sb, dir, "kernel", &counter_config[i].kernel);
 		oprofilefs_create_ulong(sb, dir, "user", &counter_config[i].user);
 =======
+=======
+>>>>>>> v3.18
 		dir = oprofilefs_mkdir(root, buf);
 		oprofilefs_create_ulong(dir, "enabled", &counter_config[i].enabled);
 		oprofilefs_create_ulong(dir, "event", &counter_config[i].event);
@@ -167,6 +174,9 @@ static int oprofile_perf_create_files(struct dentry *root)
 		oprofilefs_create_ulong(dir, "unit_mask", &counter_config[i].unit_mask);
 		oprofilefs_create_ulong(dir, "kernel", &counter_config[i].kernel);
 		oprofilefs_create_ulong(dir, "user", &counter_config[i].user);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

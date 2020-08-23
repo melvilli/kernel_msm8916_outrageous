@@ -8,6 +8,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -21,6 +25,10 @@
 #include <linux/vmalloc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/dma-coherence.h>
+>>>>>>> v3.18
 =======
 #include <asm/dma-coherence.h>
 >>>>>>> v3.18
@@ -372,6 +380,10 @@ static int alchemy_pci_probe(struct platform_device *pdev)
 	unsigned long val;
 	struct resource *r;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *c;
+>>>>>>> v3.18
 =======
 	struct clk *c;
 >>>>>>> v3.18
@@ -405,7 +417,10 @@ static int alchemy_pci_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	c = clk_get(&pdev->dev, "pci_clko");
 	if (IS_ERR(c)) {
 		dev_err(&pdev->dev, "unable to find PCI clock\n");
@@ -419,13 +434,20 @@ static int alchemy_pci_probe(struct platform_device *pdev)
 		goto out6;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ctx->regs = ioremap_nocache(r->start, resource_size(r));
 	if (!ctx->regs) {
 		dev_err(&pdev->dev, "cannot map pci regs\n");
 		ret = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out2;
+=======
+		goto out5;
+>>>>>>> v3.18
 =======
 		goto out5;
 >>>>>>> v3.18
@@ -444,10 +466,16 @@ static int alchemy_pci_probe(struct platform_device *pdev)
 	ctx->alchemy_pci_ctrl.io_map_base = (unsigned long)virt_io;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_DMA_NONCOHERENT
 	/* Au1500 revisions older than AD have borked coherent PCI */
 	if ((alchemy_get_cputype() == ALCHEMY_CPU_AU1500) &&
 	    (read_c0_prid() < 0x01030202)) {
+=======
+	/* Au1500 revisions older than AD have borked coherent PCI */
+	if ((alchemy_get_cputype() == ALCHEMY_CPU_AU1500) &&
+	    (read_c0_prid() < 0x01030202) && !coherentio) {
+>>>>>>> v3.18
 =======
 	/* Au1500 revisions older than AD have borked coherent PCI */
 	if ((alchemy_get_cputype() == ALCHEMY_CPU_AU1500) &&
@@ -460,7 +488,10 @@ static int alchemy_pci_probe(struct platform_device *pdev)
 		dev_info(&pdev->dev, "non-coherent PCI on Au1500 AA/AB/AC\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -508,6 +539,12 @@ static int alchemy_pci_probe(struct platform_device *pdev)
 	register_pci_controller(&ctx->alchemy_pci_ctrl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev_info(&pdev->dev, "PCI controller at %ld MHz\n",
+		 clk_get_rate(c) / 1000000);
+
+>>>>>>> v3.18
 =======
 	dev_info(&pdev->dev, "PCI controller at %ld MHz\n",
 		 clk_get_rate(c) / 1000000);
@@ -520,11 +557,17 @@ out4:
 out3:
 	iounmap(ctx->regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 out5:
 	clk_disable_unprepare(c);
 out6:
 	clk_put(c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out2:
 	release_mem_region(r->start, resource_size(r));

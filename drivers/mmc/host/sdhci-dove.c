@@ -22,7 +22,10 @@
 #include <linux/clk.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gpio.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>
@@ -30,7 +33,10 @@
 #include <linux/module.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_gpio.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -38,6 +44,7 @@
 
 struct sdhci_dove_priv {
 	struct clk *clk;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int gpio_cd;
 };
@@ -50,6 +57,10 @@ static irqreturn_t sdhci_dove_carddetect_irq(int irq, void *data)
 	return IRQ_HANDLED;
 }
 
+=======
+};
+
+>>>>>>> v3.18
 =======
 };
 
@@ -72,8 +83,11 @@ static u16 sdhci_dove_readw(struct sdhci_host *host, int reg)
 static u32 sdhci_dove_readl(struct sdhci_host *host, int reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
 	struct sdhci_dove_priv *priv = pltfm_host->priv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 ret;
@@ -86,6 +100,7 @@ static u32 sdhci_dove_readl(struct sdhci_host *host, int reg)
 		ret &= ~SDHCI_CAN_VDD_300;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SDHCI_PRESENT_STATE:
 		if (gpio_is_valid(priv->gpio_cd)) {
 			if (gpio_get_value(priv->gpio_cd) == 0)
@@ -96,6 +111,8 @@ static u32 sdhci_dove_readl(struct sdhci_host *host, int reg)
 		break;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	}
 	return ret;
 }
@@ -104,11 +121,17 @@ static const struct sdhci_ops sdhci_dove_ops = {
 	.read_w	= sdhci_dove_readw,
 	.read_l	= sdhci_dove_readl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.set_clock = sdhci_set_clock,
 	.set_bus_width = sdhci_set_bus_width,
 	.reset = sdhci_reset,
 	.set_uhs_signaling = sdhci_set_uhs_signaling,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -138,6 +161,7 @@ static int sdhci_dove_probe(struct platform_device *pdev)
 	priv->clk = devm_clk_get(&pdev->dev, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->dev.of_node) {
 		priv->gpio_cd = of_get_named_gpio(pdev->dev.of_node,
 						  "cd-gpios", 0);
@@ -165,6 +189,11 @@ static int sdhci_dove_probe(struct platform_device *pdev)
 	if (IS_ERR(host))
 		return PTR_ERR(host);
 >>>>>>> v3.18
+=======
+	host = sdhci_pltfm_init(pdev, &sdhci_dove_pdata, 0);
+	if (IS_ERR(host))
+		return PTR_ERR(host);
+>>>>>>> v3.18
 
 	pltfm_host = sdhci_priv(host);
 	pltfm_host->priv = priv;
@@ -173,7 +202,13 @@ static int sdhci_dove_probe(struct platform_device *pdev)
 		clk_prepare_enable(priv->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sdhci_get_of_property(pdev);
+=======
+	ret = mmc_of_parse(host->mmc);
+	if (ret)
+		goto err_sdhci_add;
+>>>>>>> v3.18
 =======
 	ret = mmc_of_parse(host->mmc);
 	if (ret)
@@ -184,6 +219,7 @@ static int sdhci_dove_probe(struct platform_device *pdev)
 	if (ret)
 		goto err_sdhci_add;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * We must request the IRQ after sdhci_add_host(), as the tasklet only
@@ -209,14 +245,21 @@ err_request_irq:
 	return 0;
 
 >>>>>>> v3.18
+=======
+	return 0;
+
+>>>>>>> v3.18
 err_sdhci_add:
 	if (!IS_ERR(priv->clk))
 		clk_disable_unprepare(priv->clk);
 	sdhci_pltfm_free(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_sdhci_pltfm_init:
 	if (gpio_is_valid(priv->gpio_cd))
 		gpio_free(priv->gpio_cd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -231,11 +274,14 @@ static int sdhci_dove_remove(struct platform_device *pdev)
 	sdhci_pltfm_unregister(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpio_is_valid(priv->gpio_cd)) {
 		free_irq(gpio_to_irq(priv->gpio_cd), host);
 		gpio_free(priv->gpio_cd);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!IS_ERR(priv->clk))
@@ -254,9 +300,14 @@ static struct platform_driver sdhci_dove_driver = {
 	.driver		= {
 		.name	= "sdhci-dove",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
 		.pm	= SDHCI_PLTFM_PMOPS,
 		.of_match_table = of_match_ptr(sdhci_dove_of_match_table),
+=======
+		.pm	= SDHCI_PLTFM_PMOPS,
+		.of_match_table = sdhci_dove_of_match_table,
+>>>>>>> v3.18
 =======
 		.pm	= SDHCI_PLTFM_PMOPS,
 		.of_match_table = sdhci_dove_of_match_table,

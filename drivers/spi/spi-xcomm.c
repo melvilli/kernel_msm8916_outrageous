@@ -9,7 +9,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -78,6 +81,7 @@ static int spi_xcomm_setup_transfer(struct spi_xcomm *spi_xcomm,
 	struct spi_device *spi, struct spi_transfer *t, unsigned int *settings)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int speed;
 
 	if ((t->bits_per_word && t->bits_per_word != 8) || t->len > 62)
@@ -88,6 +92,8 @@ static int spi_xcomm_setup_transfer(struct spi_xcomm *spi_xcomm,
 	if (speed != spi_xcomm->current_speed) {
 		unsigned int divider = DIV_ROUND_UP(SPI_XCOMM_CLOCK, speed);
 =======
+=======
+>>>>>>> v3.18
 	if (t->len > 62)
 		return -EINVAL;
 
@@ -95,6 +101,9 @@ static int spi_xcomm_setup_transfer(struct spi_xcomm *spi_xcomm,
 		unsigned int divider;
 
 		divider = DIV_ROUND_UP(SPI_XCOMM_CLOCK, t->speed_hz);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (divider >= 64)
 			*settings |= SPI_XCOMM_SETTINGS_CLOCK_DIV_64;
@@ -104,7 +113,11 @@ static int spi_xcomm_setup_transfer(struct spi_xcomm *spi_xcomm,
 			*settings |= SPI_XCOMM_SETTINGS_CLOCK_DIV_4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spi_xcomm->current_speed = speed;
+=======
+		spi_xcomm->current_speed = t->speed_hz;
+>>>>>>> v3.18
 =======
 		spi_xcomm->current_speed = t->speed_hz;
 >>>>>>> v3.18
@@ -166,8 +179,11 @@ static int spi_xcomm_transfer_one(struct spi_master *master,
 	bool is_last;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	is_first = true;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spi_xcomm_chipselect(spi_xcomm, spi, true);
@@ -230,6 +246,7 @@ static int spi_xcomm_transfer_one(struct spi_master *master,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int spi_xcomm_setup(struct spi_device *spi)
 {
 	if (spi->bits_per_word != 8)
@@ -238,6 +255,8 @@ static int spi_xcomm_setup(struct spi_device *spi)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int spi_xcomm_probe(struct i2c_client *i2c,
@@ -257,8 +276,13 @@ static int spi_xcomm_probe(struct i2c_client *i2c,
 	master->num_chipselect = 16;
 	master->mode_bits = SPI_CPHA | SPI_CPOL | SPI_3WIRE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->flags = SPI_MASTER_HALF_DUPLEX;
 	master->setup = spi_xcomm_setup;
+=======
+	master->bits_per_word_mask = SPI_BPW_MASK(8);
+	master->flags = SPI_MASTER_HALF_DUPLEX;
+>>>>>>> v3.18
 =======
 	master->bits_per_word_mask = SPI_BPW_MASK(8);
 	master->flags = SPI_MASTER_HALF_DUPLEX;
@@ -268,7 +292,11 @@ static int spi_xcomm_probe(struct i2c_client *i2c,
 	i2c_set_clientdata(i2c, master);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = spi_register_master(master);
+=======
+	ret = devm_spi_register_master(&i2c->dev, master);
+>>>>>>> v3.18
 =======
 	ret = devm_spi_register_master(&i2c->dev, master);
 >>>>>>> v3.18
@@ -279,6 +307,7 @@ static int spi_xcomm_probe(struct i2c_client *i2c,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int spi_xcomm_remove(struct i2c_client *i2c)
 {
 	struct spi_master *master = i2c_get_clientdata(i2c);
@@ -288,6 +317,8 @@ static int spi_xcomm_remove(struct i2c_client *i2c)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct i2c_device_id spi_xcomm_ids[] = {
@@ -303,7 +334,10 @@ static struct i2c_driver spi_xcomm_driver = {
 	.id_table	= spi_xcomm_ids,
 	.probe		= spi_xcomm_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= spi_xcomm_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

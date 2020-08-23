@@ -79,6 +79,10 @@ TRACE_EVENT(brcmf_hexdump,
 	TP_STRUCT__entry(
 		__field(unsigned long, len)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__field(unsigned long, addr)
+>>>>>>> v3.18
 =======
 		__field(unsigned long, addr)
 >>>>>>> v3.18
@@ -87,10 +91,13 @@ TRACE_EVENT(brcmf_hexdump,
 	TP_fast_assign(
 		__entry->len = len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(__get_dynamic_array(hdata), data, len);
 	),
 	TP_printk("hexdump [length=%lu]", __entry->len)
 =======
+=======
+>>>>>>> v3.18
 		__entry->addr = (unsigned long)data;
 		memcpy(__get_dynamic_array(hdata), data, len);
 	),
@@ -144,6 +151,9 @@ TRACE_EVENT(brcmf_sdpcm_hdr,
 	TP_printk("sdpcm: %s len %u, seq %d",
 		  __entry->dir == SDPCM_RX ? "RX" : "TX",
 		  __entry->len, ((u8 *)__get_dynamic_array(hdr))[4])
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 

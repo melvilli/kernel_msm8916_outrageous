@@ -14,8 +14,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, you can access it online at
+ * http://www.gnu.org/licenses/gpl-2.0.html.
+>>>>>>> v3.18
 =======
  * along with this program; if not, you can access it online at
  * http://www.gnu.org/licenses/gpl-2.0.html.
@@ -94,7 +99,10 @@ struct rcu_dynticks {
 	int dynticks_nmi_nesting;   /* Track NMI nesting level. */
 	atomic_t dynticks;	    /* Even value for idle, else odd. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NO_HZ_FULL_SYSIDLE
 	long long dynticks_idle_nesting;
 				    /* irq/process nesting level from idle. */
@@ -103,6 +111,9 @@ struct rcu_dynticks {
 	unsigned long dynticks_idle_jiffies;
 				    /* End of last non-NMI non-idle period. */
 #endif /* #ifdef CONFIG_NO_HZ_FULL_SYSIDLE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_RCU_FAST_NO_HZ
 	bool all_lazy;		    /* Are all CPU's CBs lazy? */
@@ -181,7 +192,10 @@ struct rcu_node {
 				/*  are blocking the current grace period, */
 				/*  there can be no such task. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct completion boost_completion;
 				/* Used to ensure that the rt_mutex used */
 				/*  to carry out the boosting is fully */
@@ -190,6 +204,9 @@ struct rcu_node {
 	struct rt_mutex boost_mtx;
 				/* Used only for the priority-boosting */
 				/*  side effect, not as a lock. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long boost_time;
 				/* When to start boosting (jiffies). */
@@ -272,7 +289,10 @@ struct rcu_data {
 	bool		qs_pending;	/* Core waits for quiesc state. */
 	bool		beenonline;	/* CPU online at least once. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool		preemptible;	/* Preemptible RCU? */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct rcu_node *mynode;	/* This CPU's leaf of hierarchy */
@@ -331,6 +351,12 @@ struct rcu_data {
 	unsigned long dynticks_fqs;	/* Kicked due to dynticks idle. */
 	unsigned long offline_fqs;	/* Kicked due to being offline. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long cond_resched_completed;
+					/* Grace period that needs help */
+					/*  from cond_resched(). */
+>>>>>>> v3.18
 =======
 	unsigned long cond_resched_completed;
 					/* Grace period that needs help */
@@ -346,6 +372,10 @@ struct rcu_data {
 	unsigned long n_rp_gp_completed;
 	unsigned long n_rp_gp_started;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long n_rp_nocb_defer_wakeup;
+>>>>>>> v3.18
 =======
 	unsigned long n_rp_nocb_defer_wakeup;
 >>>>>>> v3.18
@@ -364,18 +394,27 @@ struct rcu_data {
 	atomic_long_t nocb_q_count;	/* # CBs waiting for kthread */
 	atomic_long_t nocb_q_count_lazy; /*  (approximate). */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct rcu_head *nocb_follower_head; /* CBs ready to invoke. */
 	struct rcu_head **nocb_follower_tail;
 	atomic_long_t nocb_follower_count; /* # CBs ready to invoke. */
 	atomic_long_t nocb_follower_count_lazy; /*  (approximate). */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int nocb_p_count;		/* # CBs being invoked by kthread */
 	int nocb_p_count_lazy;		/*  (approximate). */
 	wait_queue_head_t nocb_wq;	/* For nocb kthreads to sleep on. */
 	struct task_struct *nocb_kthread;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int nocb_defer_wakeup;		/* Defer wakeup of nocb_kthread. */
 
 	/* The following fields are used by the leader, hence own cacheline. */
@@ -391,6 +430,9 @@ struct rcu_data {
 	/* The following fields are used by the follower, hence new cachline. */
 	struct rcu_data *nocb_leader ____cacheline_internodealigned_in_smp;
 					/* Leader CPU takes GP-end wakeups. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* #ifdef CONFIG_RCU_NOCB_CPU */
 
@@ -411,6 +453,7 @@ struct rcu_data {
 #define RCU_SIGNAL_INIT		RCU_SAVE_DYNTICK
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RCU_JIFFIES_TILL_FORCE_QS	 3	/* for rsp->jiffies_force_qs */
 
 #define RCU_STALL_RAT_DELAY		2	/* Allow other CPUs time */
@@ -418,6 +461,8 @@ struct rcu_data {
 						/*  scheduling clock irq */
 						/*  before ratting on them. */
 =======
+=======
+>>>>>>> v3.18
 /* Values for nocb_defer_wakeup field in struct rcu_data. */
 #define RCU_NOGP_WAKE_NOT	0
 #define RCU_NOGP_WAKE		1
@@ -434,6 +479,9 @@ struct rcu_data {
 #define RCU_STALL_RAT_DELAY	2	/* Allow other CPUs time to take */
 					/*  at least one scheduling clock */
 					/*  irq before ratting on them. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define rcu_wait(cond)							\
@@ -463,6 +511,10 @@ struct rcu_state {
 	u32 levelcnt[MAX_RCU_LVLS + 1];		/* # nodes in each level. */
 	u8 levelspread[RCU_NUM_LVLS];		/* kids/node in each level. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 flavor_mask;				/* bit in flavor mask. */
+>>>>>>> v3.18
 =======
 	u8 flavor_mask;				/* bit in flavor mask. */
 >>>>>>> v3.18
@@ -480,7 +532,12 @@ struct rcu_state {
 	struct task_struct *gp_kthread;		/* Task for grace periods. */
 	wait_queue_head_t gp_wq;		/* Where GP task waits. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int gp_flags;				/* Commands for GP task. */
+=======
+	short gp_flags;				/* Commands for GP task. */
+	short gp_state;				/* GP kthread sleep state. */
+>>>>>>> v3.18
 =======
 	short gp_flags;				/* Commands for GP task. */
 	short gp_state;				/* GP kthread sleep state. */
@@ -532,6 +589,7 @@ struct rcu_state {
 	unsigned long gp_start;			/* Time at which GP started, */
 						/*  but in jiffies. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long gp_activity;		/* Time of last GP kthread */
 						/*  activity in jiffies. */
 	unsigned long jiffies_stall;		/* Time at which to check */
@@ -542,6 +600,8 @@ struct rcu_state {
 						/*  jiffies. */
 	char *name;				/* Name of structure. */
 =======
+=======
+>>>>>>> v3.18
 	unsigned long jiffies_stall;		/* Time at which to check */
 						/*  for CPU stalls. */
 	unsigned long jiffies_resched;		/* Time at which to resched */
@@ -549,6 +609,9 @@ struct rcu_state {
 	unsigned long gp_max;			/* Maximum GP duration in */
 						/*  jiffies. */
 	const char *name;			/* Name of structure. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char abbr;				/* Abbreviated name. */
 	struct list_head flavors;		/* List of RCU flavors. */
@@ -559,12 +622,18 @@ struct rcu_state {
 #define RCU_GP_FLAG_FQS  0x2	/* Need grace-period quiescent-state forcing. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Values for rcu_state structure's gp_flags field. */
 #define RCU_GP_WAIT_INIT 0	/* Initial state. */
 #define RCU_GP_WAIT_GPS  1	/* Wait for grace-period start. */
 #define RCU_GP_WAIT_FQS  2	/* Wait for force-quiescent-state time. */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct list_head rcu_struct_flavors;
 
@@ -633,16 +702,22 @@ static bool rcu_is_callbacks_kthread(void);
 #ifdef CONFIG_RCU_BOOST
 static void rcu_preempt_do_callbacks(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit rcu_spawn_one_boost_kthread(struct rcu_state *rsp,
 						 struct rcu_node *rnp);
 #endif /* #ifdef CONFIG_RCU_BOOST */
 static void __cpuinit rcu_prepare_kthreads(int cpu);
 =======
+=======
+>>>>>>> v3.18
 static int rcu_spawn_one_boost_kthread(struct rcu_state *rsp,
 						 struct rcu_node *rnp);
 #endif /* #ifdef CONFIG_RCU_BOOST */
 static void __init rcu_spawn_boost_kthreads(void);
 static void rcu_prepare_kthreads(int cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void rcu_cleanup_after_idle(int cpu);
 static void rcu_prepare_for_idle(int cpu);
@@ -653,6 +728,10 @@ static void print_cpu_stall_info_end(void);
 static void zero_cpu_stall_ticks(struct rcu_data *rdp);
 static void increment_cpu_stall_ticks(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static bool rcu_nocb_cpu_needs_barrier(struct rcu_state *rsp, int cpu);
+>>>>>>> v3.18
 =======
 static bool rcu_nocb_cpu_needs_barrier(struct rcu_state *rsp, int cpu);
 >>>>>>> v3.18
@@ -660,6 +739,7 @@ static void rcu_nocb_gp_set(struct rcu_node *rnp, int nrq);
 static void rcu_nocb_gp_cleanup(struct rcu_state *rsp, struct rcu_node *rnp);
 static void rcu_init_one_nocb(struct rcu_node *rnp);
 static bool __call_rcu_nocb(struct rcu_data *rdp, struct rcu_head *rhp,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			    bool lazy);
 static bool rcu_nocb_adopt_orphan_cbs(struct rcu_state *rsp,
@@ -670,6 +750,8 @@ static void rcu_kick_nohz_cpu(int cpu);
 static bool init_nocb_callback_list(struct rcu_data *rdp);
 static void rcu_bind_gp_kthread(void);
 =======
+=======
+>>>>>>> v3.18
 			    bool lazy, unsigned long flags);
 static bool rcu_nocb_adopt_orphan_cbs(struct rcu_state *rsp,
 				      struct rcu_data *rdp,
@@ -697,6 +779,9 @@ static bool rcu_nohz_full_cpu(struct rcu_state *rsp);
 static void rcu_dynticks_task_enter(void);
 static void rcu_dynticks_task_exit(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* #ifndef RCU_TREE_NONCORE */
 
@@ -706,9 +791,12 @@ static void rcu_dynticks_task_exit(void);
 static inline void rcu_nocb_q_lengths(struct rcu_data *rdp, long *ql, long *qll)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ql = atomic_long_read(&rdp->nocb_q_count) + rdp->nocb_p_count;
 	*qll = atomic_long_read(&rdp->nocb_q_count_lazy) + rdp->nocb_p_count_lazy;
 =======
+=======
+>>>>>>> v3.18
 	*ql = atomic_long_read(&rdp->nocb_q_count) +
 	      rdp->nocb_p_count +
 	      atomic_long_read(&rdp->nocb_follower_count) +
@@ -717,6 +805,9 @@ static inline void rcu_nocb_q_lengths(struct rcu_data *rdp, long *ql, long *qll)
 	       rdp->nocb_p_count_lazy +
 	       atomic_long_read(&rdp->nocb_follower_count_lazy) +
 	       rdp->nocb_p_count_lazy + rdp->nocb_gp_count_lazy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #else /* #ifdef CONFIG_RCU_NOCB_CPU */

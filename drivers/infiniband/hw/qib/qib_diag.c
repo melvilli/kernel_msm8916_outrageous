@@ -547,7 +547,11 @@ static ssize_t qib_diagpkt_write(struct file *fp,
 {
 	u32 __iomem *piobuf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 plen, clen, pbufn;
+=======
+	u32 plen, pbufn, maxlen_reserve;
+>>>>>>> v3.18
 =======
 	u32 plen, pbufn, maxlen_reserve;
 >>>>>>> v3.18
@@ -595,6 +599,7 @@ static ssize_t qib_diagpkt_write(struct file *fp,
 	ppd = &dd->pport[dp.port - 1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* need total length before first word written */
 	/* +1 word is for the qword padding */
 	plen = sizeof(u32) + dp.len;
@@ -605,6 +610,8 @@ static ssize_t qib_diagpkt_write(struct file *fp,
 		goto bail;      /* before writing pbc */
 	}
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * need total length before first word written, plus 2 Dwords. One Dword
 	 * is for padding so we get the full user data when not aligned on
@@ -619,6 +626,9 @@ static ssize_t qib_diagpkt_write(struct file *fp,
 
 	plen = sizeof(u32) + dp.len;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tmpbuf = vmalloc(plen);
 	if (!tmpbuf) {
@@ -660,17 +670,23 @@ static ssize_t qib_diagpkt_write(struct file *fp,
 	if (dd->flags & QIB_PIO_FLUSH_WC) {
 		qib_flush_wc();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qib_pio_copy(piobuf + 2, tmpbuf, clen - 1);
 		qib_flush_wc();
 		__raw_writel(tmpbuf[clen - 1], piobuf + clen + 1);
 	} else
 		qib_pio_copy(piobuf + 2, tmpbuf, clen);
 =======
+=======
+>>>>>>> v3.18
 		qib_pio_copy(piobuf + 2, tmpbuf, plen - 1);
 		qib_flush_wc();
 		__raw_writel(tmpbuf[plen - 1], piobuf + plen + 1);
 	} else
 		qib_pio_copy(piobuf + 2, tmpbuf, plen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (dd->flags & QIB_USE_SPCL_TRIG) {
@@ -719,6 +735,7 @@ int qib_register_observer(struct qib_devdata *dd,
 {
 	struct diag_observer_list_elt *olp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = -EINVAL;
 
 	if (!dd || !op)
@@ -742,6 +759,8 @@ int qib_register_observer(struct qib_devdata *dd,
 bail:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	if (!dd || !op)
@@ -759,6 +778,9 @@ bail:
 	spin_unlock_irqrestore(&dd->qib_diag_trans_lock, flags);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

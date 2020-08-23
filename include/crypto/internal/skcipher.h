@@ -82,8 +82,12 @@ static inline struct skcipher_givcrypt_request *skcipher_dequeue_givcrypt(
 	struct crypto_queue *queue)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __crypto_dequeue_request(
 		queue, offsetof(struct skcipher_givcrypt_request, creq.base));
+=======
+	return skcipher_givcrypt_cast(crypto_dequeue_request(queue));
+>>>>>>> v3.18
 =======
 	return skcipher_givcrypt_cast(crypto_dequeue_request(queue));
 >>>>>>> v3.18

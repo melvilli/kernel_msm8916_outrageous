@@ -135,6 +135,12 @@ struct wm8994_priv {
 	struct wm8994_micdet micdet[2];
 	struct delayed_work mic_work;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct delayed_work open_circuit_work;
+	struct delayed_work mic_complete_work;
+	u16 mic_status;
+>>>>>>> v3.18
 =======
 	struct delayed_work open_circuit_work;
 	struct delayed_work mic_complete_work;

@@ -30,6 +30,7 @@ EXPORT_SYMBOL(inet_csk_timer_bug_msg);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * This struct holds the first and last local port number.
  */
@@ -45,10 +46,14 @@ void inet_get_local_port_range(int *low, int *high)
 =======
 void inet_get_local_port_range(struct net *net, int *low, int *high)
 >>>>>>> v3.18
+=======
+void inet_get_local_port_range(struct net *net, int *low, int *high)
+>>>>>>> v3.18
 {
 	unsigned int seq;
 
 	do {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		seq = read_seqbegin(&sysctl_local_ports.lock);
 
@@ -56,11 +61,16 @@ void inet_get_local_port_range(struct net *net, int *low, int *high)
 		*high = sysctl_local_ports.range[1];
 	} while (read_seqretry(&sysctl_local_ports.lock, seq));
 =======
+=======
+>>>>>>> v3.18
 		seq = read_seqbegin(&net->ipv4.ip_local_ports.lock);
 
 		*low = net->ipv4.ip_local_ports.range[0];
 		*high = net->ipv4.ip_local_ports.range[1];
 	} while (read_seqretry(&net->ipv4.ip_local_ports.lock, seq));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(inet_get_local_port_range);
@@ -92,9 +102,15 @@ int inet_csk_bind_conflict(const struct sock *sk,
 			    (sk2->sk_state != TCP_TIME_WAIT &&
 			     !uid_eq(uid, sock_i_uid(sk2))))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const __be32 sk2_rcv_saddr = sk_rcv_saddr(sk2);
 				if (!sk2_rcv_saddr || !sk_rcv_saddr(sk) ||
 				    sk2_rcv_saddr == sk_rcv_saddr(sk))
+=======
+
+				if (!sk2->sk_rcv_saddr || !sk->sk_rcv_saddr ||
+				    sk2->sk_rcv_saddr == sk->sk_rcv_saddr)
+>>>>>>> v3.18
 =======
 
 				if (!sk2->sk_rcv_saddr || !sk->sk_rcv_saddr ||
@@ -105,10 +121,16 @@ int inet_csk_bind_conflict(const struct sock *sk,
 			if (!relax && reuse && sk2->sk_reuse &&
 			    sk2->sk_state != TCP_LISTEN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const __be32 sk2_rcv_saddr = sk_rcv_saddr(sk2);
 
 				if (!sk2_rcv_saddr || !sk_rcv_saddr(sk) ||
 				    sk2_rcv_saddr == sk_rcv_saddr(sk))
+=======
+
+				if (!sk2->sk_rcv_saddr || !sk->sk_rcv_saddr ||
+				    sk2->sk_rcv_saddr == sk->sk_rcv_saddr)
+>>>>>>> v3.18
 =======
 
 				if (!sk2->sk_rcv_saddr || !sk->sk_rcv_saddr ||
@@ -141,6 +163,7 @@ int inet_csk_get_port(struct sock *sk, unsigned short snum)
 
 again:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inet_get_local_port_range(&low, &high);
 		remaining = (high - low) + 1;
 		smallest_rover = rover = net_random() % remaining + low;
@@ -149,6 +172,8 @@ again:
 		do {
 			if (inet_is_reserved_local_port(rover))
 =======
+=======
+>>>>>>> v3.18
 		inet_get_local_port_range(net, &low, &high);
 		remaining = (high - low) + 1;
 		smallest_rover = rover = prandom_u32() % remaining + low;
@@ -156,6 +181,9 @@ again:
 		smallest_size = -1;
 		do {
 			if (inet_is_local_reserved_port(net, rover))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				goto next_nolock;
 			head = &hashinfo->bhash[inet_bhashfn(net, rover,
@@ -456,9 +484,14 @@ struct dst_entry *inet_csk_route_req(struct sock *sk,
 			   sk->sk_protocol,
 			   flags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   (opt && opt->opt.srr) ? opt->opt.faddr : ireq->rmt_addr,
 			   ireq->loc_addr, ireq->rmt_port, inet_sk(sk)->inet_sport,
 			   sock_i_uid(sk));
+=======
+			   (opt && opt->opt.srr) ? opt->opt.faddr : ireq->ir_rmt_addr,
+			   ireq->ir_loc_addr, ireq->ir_rmt_port, inet_sk(sk)->inet_sport);
+>>>>>>> v3.18
 =======
 			   (opt && opt->opt.srr) ? opt->opt.faddr : ireq->ir_rmt_addr,
 			   ireq->ir_loc_addr, ireq->ir_rmt_port, inet_sk(sk)->inet_sport);
@@ -498,9 +531,14 @@ struct dst_entry *inet_csk_route_child_sock(struct sock *sk,
 			   RT_CONN_FLAGS(sk), RT_SCOPE_UNIVERSE,
 			   sk->sk_protocol, inet_sk_flowi_flags(sk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   (opt && opt->opt.srr) ? opt->opt.faddr : ireq->rmt_addr,
 			   ireq->loc_addr, ireq->rmt_port, inet_sk(sk)->inet_sport,
 			   sock_i_uid(sk));
+=======
+			   (opt && opt->opt.srr) ? opt->opt.faddr : ireq->ir_rmt_addr,
+			   ireq->ir_loc_addr, ireq->ir_rmt_port, inet_sk(sk)->inet_sport);
+>>>>>>> v3.18
 =======
 			   (opt && opt->opt.srr) ? opt->opt.faddr : ireq->ir_rmt_addr,
 			   ireq->ir_loc_addr, ireq->ir_rmt_port, inet_sk(sk)->inet_sport);
@@ -551,9 +589,15 @@ struct request_sock *inet_csk_search_req(const struct sock *sk,
 		const struct inet_request_sock *ireq = inet_rsk(req);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ireq->rmt_port == rport &&
 		    ireq->rmt_addr == raddr &&
 		    ireq->loc_addr == laddr &&
+=======
+		if (ireq->ir_rmt_port == rport &&
+		    ireq->ir_rmt_addr == raddr &&
+		    ireq->ir_loc_addr == laddr &&
+>>>>>>> v3.18
 =======
 		if (ireq->ir_rmt_port == rport &&
 		    ireq->ir_rmt_addr == raddr &&
@@ -576,7 +620,12 @@ void inet_csk_reqsk_queue_hash_add(struct sock *sk, struct request_sock *req,
 	struct inet_connection_sock *icsk = inet_csk(sk);
 	struct listen_sock *lopt = icsk->icsk_accept_queue.listen_opt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 h = inet_synq_hash(inet_rsk(req)->rmt_addr, inet_rsk(req)->rmt_port,
+=======
+	const u32 h = inet_synq_hash(inet_rsk(req)->ir_rmt_addr,
+				     inet_rsk(req)->ir_rmt_port,
+>>>>>>> v3.18
 =======
 	const u32 h = inet_synq_hash(inet_rsk(req)->ir_rmt_addr,
 				     inet_rsk(req)->ir_rmt_port,
@@ -741,6 +790,7 @@ struct sock *inet_csk_clone_lock(const struct sock *sk,
 		newicsk->icsk_bind_hash = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inet_sk(newsk)->inet_dport = inet_rsk(req)->rmt_port;
 		inet_sk(newsk)->inet_num = ntohs(inet_rsk(req)->loc_port);
 		inet_sk(newsk)->inet_sport = inet_rsk(req)->loc_port;
@@ -753,6 +803,8 @@ struct sock *inet_csk_clone_lock(const struct sock *sk,
 		inet_sk(newsk)->mc_list = NULL;
 
 =======
+=======
+>>>>>>> v3.18
 		inet_sk(newsk)->inet_dport = inet_rsk(req)->ir_rmt_port;
 		inet_sk(newsk)->inet_num = inet_rsk(req)->ir_num;
 		inet_sk(newsk)->inet_sport = htons(inet_rsk(req)->ir_num);
@@ -760,6 +812,9 @@ struct sock *inet_csk_clone_lock(const struct sock *sk,
 
 		newsk->sk_mark = inet_rsk(req)->ir_mark;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		newicsk->icsk_retransmits = 0;
 		newicsk->icsk_backoff	  = 0;

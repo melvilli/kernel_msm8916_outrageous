@@ -169,7 +169,11 @@ void snd_seq_device_load_drivers(void)
 /*
  * register a sequencer device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * card = card info (NULL allowed)
+=======
+ * card = card info
+>>>>>>> v3.18
 =======
  * card = card info
 >>>>>>> v3.18
@@ -330,7 +334,11 @@ int snd_seq_device_register_driver(char *id, struct snd_seq_dev_ops *entry,
 	}
 	if (ops->driver & DRIVER_LOADED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_WARNING "driver_register: driver '%s' already exists\n", id);
+=======
+		pr_warn("ALSA: seq: driver_register: driver '%s' already exists\n", id);
+>>>>>>> v3.18
 =======
 		pr_warn("ALSA: seq: driver_register: driver '%s' already exists\n", id);
 >>>>>>> v3.18
@@ -407,7 +415,11 @@ int snd_seq_device_unregister_driver(char *id)
 	if (! (ops->driver & DRIVER_LOADED) ||
 	    (ops->driver & DRIVER_LOCKED)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "driver_unregister: cannot unload driver '%s': status=%x\n",
+=======
+		pr_err("ALSA: seq: driver_unregister: cannot unload driver '%s': status=%x\n",
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq: driver_unregister: cannot unload driver '%s': status=%x\n",
 >>>>>>> v3.18
@@ -426,7 +438,11 @@ int snd_seq_device_unregister_driver(char *id)
 	ops->driver = 0;
 	if (ops->num_init_devices > 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "free_driver: init_devices > 0!! (%d)\n",
+=======
+		pr_err("ALSA: seq: free_driver: init_devices > 0!! (%d)\n",
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq: free_driver: init_devices > 0!! (%d)\n",
 >>>>>>> v3.18
@@ -476,7 +492,11 @@ static int init_device(struct snd_seq_device *dev, struct ops_list *ops)
 		return 0; /* already initialized */
 	if (ops->argsize != dev->argsize) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "incompatible device '%s' for plug-in '%s' (%d %d)\n",
+=======
+		pr_err("ALSA: seq: incompatible device '%s' for plug-in '%s' (%d %d)\n",
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq: incompatible device '%s' for plug-in '%s' (%d %d)\n",
 >>>>>>> v3.18
@@ -488,7 +508,11 @@ static int init_device(struct snd_seq_device *dev, struct ops_list *ops)
 		ops->num_init_devices++;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "init_device failed: %s: %s\n",
+=======
+		pr_err("ALSA: seq: init_device failed: %s: %s\n",
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq: init_device failed: %s: %s\n",
 >>>>>>> v3.18
@@ -511,7 +535,11 @@ static int free_device(struct snd_seq_device *dev, struct ops_list *ops)
 		return 0; /* not registered */
 	if (ops->argsize != dev->argsize) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "incompatible device '%s' for plug-in '%s' (%d %d)\n",
+=======
+		pr_err("ALSA: seq: incompatible device '%s' for plug-in '%s' (%d %d)\n",
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq: incompatible device '%s' for plug-in '%s' (%d %d)\n",
 >>>>>>> v3.18
@@ -524,7 +552,11 @@ static int free_device(struct snd_seq_device *dev, struct ops_list *ops)
 		ops->num_init_devices--;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "free_device failed: %s: %s\n",
+=======
+		pr_err("ALSA: seq: free_device failed: %s: %s\n",
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq: free_device failed: %s: %s\n",
 >>>>>>> v3.18
@@ -592,7 +624,11 @@ static void __exit alsa_seq_device_exit(void)
 #endif
 	if (num_ops)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "drivers not released (%d)\n", num_ops);
+=======
+		pr_err("ALSA: seq: drivers not released (%d)\n", num_ops);
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq: drivers not released (%d)\n", num_ops);
 >>>>>>> v3.18

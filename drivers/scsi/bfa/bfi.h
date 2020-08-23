@@ -47,6 +47,10 @@
 #define	BFI_FLASH_CHUNK_SZ			256	/*  Flash chunk size */
 #define	BFI_FLASH_CHUNK_SZ_WORDS	(BFI_FLASH_CHUNK_SZ/sizeof(u32))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BFI_FLASH_IMAGE_SZ		0x100000
+>>>>>>> v3.18
 =======
 #define BFI_FLASH_IMAGE_SZ		0x100000
 >>>>>>> v3.18
@@ -269,6 +273,10 @@ struct bfi_ioc_getattr_req_s {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BFI_IOC_ATTR_UUID_SZ	16
+>>>>>>> v3.18
 =======
 #define BFI_IOC_ATTR_UUID_SZ	16
 >>>>>>> v3.18
@@ -301,6 +309,10 @@ struct bfi_ioc_attr_s {
 	u8	mfg_month;	/* manufacturing month */
 	u16	mfg_year;	/* manufacturing year */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8	uuid[BFI_IOC_ATTR_UUID_SZ];	/*!< chinook uuid */
+>>>>>>> v3.18
 =======
 	u8	uuid[BFI_IOC_ATTR_UUID_SZ];	/*!< chinook uuid */
 >>>>>>> v3.18
@@ -335,8 +347,11 @@ struct bfi_ioc_getattr_reply_s {
 
 #define BFI_IOC_FW_SIGNATURE	(0xbfadbfad)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BFI_IOC_MD5SUM_SZ	4
 =======
+=======
+>>>>>>> v3.18
 #define BFA_IOC_FW_INV_SIGN	(0xdeaddead)
 #define BFI_IOC_MD5SUM_SZ	4
 
@@ -360,6 +375,9 @@ struct bfi_ioc_fwver_s {
 #endif
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct bfi_ioc_image_hdr_s {
 	u32	signature;	/* constant signature		*/
@@ -370,11 +388,14 @@ struct bfi_ioc_image_hdr_s {
 	u32	exec;		/* exec vector			*/
 	u32	bootenv;	/* fimware boot env		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32	rsvd_b[4];
 	u32	md5sum[BFI_IOC_MD5SUM_SZ];
 };
 
 =======
+=======
+>>>>>>> v3.18
 	u32	rsvd_b[2];
 	struct bfi_ioc_fwver_s	fwver;
 	u32	md5sum[BFI_IOC_MD5SUM_SZ];
@@ -387,6 +408,9 @@ enum bfi_ioc_img_ver_cmp_e {
 	BFI_IOC_IMG_VER_BETTER
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BFI_FWBOOT_DEVMODE_OFF		4
 #define BFI_FWBOOT_TYPE_OFF		8
@@ -398,13 +422,19 @@ enum bfi_ioc_img_ver_cmp_e {
 	 ((u32)(__p1_mode)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum bfi_fwboot_type {
 	BFI_FWBOOT_TYPE_NORMAL  = 0,
 	BFI_FWBOOT_TYPE_FLASH   = 1,
 	BFI_FWBOOT_TYPE_MEMTEST = 2,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BFI_FWBOOT_TYPE_NORMAL	0
 #define BFI_FWBOOT_TYPE_MEMTEST	2
@@ -437,11 +467,17 @@ enum bfi_ioc_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BFA_IOC_CB_JOIN_SH	16
 #define BFA_IOC_CB_FWSTATE_MASK	0x0000ffff
 #define BFA_IOC_CB_JOIN_MASK	0xffff0000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BFI_IOC_ENDIAN_SIG  0x12345678
 
@@ -1043,6 +1079,10 @@ enum bfi_diag_i2h {
 	BFI_DIAG_I2H_QTEST      = BFA_I2HM(BFI_DIAG_H2I_QTEST),
 	BFI_DIAG_I2H_DPORT	= BFA_I2HM(BFI_DIAG_H2I_DPORT),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BFI_DIAG_I2H_DPORT_SCN	= BFA_I2HM(8),
+>>>>>>> v3.18
 =======
 	BFI_DIAG_I2H_DPORT_SCN	= BFA_I2HM(8),
 >>>>>>> v3.18
@@ -1138,7 +1178,10 @@ enum bfi_dport_req {
 	BFI_DPORT_DISABLE	= 0,	/* disable dport request	*/
 	BFI_DPORT_ENABLE	= 1,	/* enable dport request		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	BFI_DPORT_START		= 2,	/* start dport request	*/
 	BFI_DPORT_SHOW		= 3,	/* show dport request	*/
 	BFI_DPORT_DYN_DISABLE	= 4,	/* disable dynamic dport request */
@@ -1154,11 +1197,15 @@ enum bfi_dport_scn {
 	BFI_DPORT_SCN_SUBTESTSTART	= 7,
 	BFI_DPORT_SCN_TESTSKIP		= 8,
 	BFI_DPORT_SCN_DDPORT_DISABLED	= 9,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 struct bfi_diag_dport_req_s {
 	struct bfi_mhdr_s	mh;	/* 4 bytes                      */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8			req;    /* request 1: enable 0: disable */
 	u8			status; /* reply status			*/
@@ -1167,6 +1214,8 @@ struct bfi_diag_dport_req_s {
 };
 #define bfi_diag_dport_rsp_t struct bfi_diag_dport_req_s
 =======
+=======
+>>>>>>> v3.18
 	u8			req;	/* request 1: enable 0: disable	*/
 	u8			rsvd[3];
 	u32			lpcnt;
@@ -1216,6 +1265,9 @@ union bfi_diag_dport_msg_u {
 	struct bfi_diag_dport_rsp_s	rsp;
 	struct bfi_diag_dport_scn_s	scn;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1335,7 +1387,13 @@ struct bfi_fru_write_req_s {
 	struct bfi_mhdr_s	mh;	/* Common msg header */
 	u8			last;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8			rsv[3];
+=======
+	u8			rsv_1[3];
+	u8			trfr_cmpl;
+	u8			rsv_2[3];
+>>>>>>> v3.18
 =======
 	u8			rsv_1[3];
 	u8			trfr_cmpl;

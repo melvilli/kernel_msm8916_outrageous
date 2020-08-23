@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -18,12 +22,16 @@
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 *******************************************************************************/
+=======
+*/
+>>>>>>> v3.18
 =======
 */
 >>>>>>> v3.18
@@ -57,6 +65,10 @@ TODO:
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -122,7 +134,11 @@ TODO:
 struct pci1723_private {
 	unsigned char da_range[8];	/* D/A output range for each channel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	short ao_data[8];	/* data output buffer */
+=======
+	unsigned short ao_data[8];	/* data output buffer */
+>>>>>>> v3.18
 =======
 	unsigned short ao_data[8];	/* data output buffer */
 >>>>>>> v3.18
@@ -182,16 +198,22 @@ static int pci1723_ao_write_winsn(struct comedi_device *dev,
 {
 	struct pci1723_private *devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int n, chan;
 	chan = CR_CHAN(insn->chanspec);
 
 	for (n = 0; n < insn->n; n++) {
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned int chan = CR_CHAN(insn->chanspec);
 	int n;
 
 	for (n = 0; n < insn->n; n++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		devpriv->ao_data[chan] = data[n];
 		outw(data[n], dev->iobase + PCI1723_DA(chan));
@@ -207,6 +229,7 @@ static int pci1723_dio_insn_config(struct comedi_device *dev,
 				   struct comedi_subdevice *s,
 				   struct comedi_insn *insn, unsigned int *data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int mask;
 	unsigned int bits;
@@ -256,6 +279,8 @@ static int pci1723_dio_insn_bits(struct comedi_device *dev,
 	}
 	data[1] = inw(dev->iobase + PCI1723_READ_DIGITAL_INPUT_DATA);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int chan = CR_CHAN(insn->chanspec);
 	unsigned int mask;
 	unsigned short mode;
@@ -291,6 +316,9 @@ static int pci1723_dio_insn_bits(struct comedi_device *dev,
 
 	data[1] = inw(dev->iobase + PCI1723_READ_DIGITAL_INPUT_DATA);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return insn->n;
 }
@@ -304,10 +332,16 @@ static int pci1723_auto_attach(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -365,8 +399,11 @@ static int pci1723_auto_attach(struct comedi_device *dev,
 	pci1723_reset(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(dev->class_dev, "%s attached\n", dev->board_name);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -377,7 +414,11 @@ static void pci1723_detach(struct comedi_device *dev)
 	if (dev->iobase)
 		pci1723_reset(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comedi_pci_disable(dev);
+=======
+	comedi_pci_detach(dev);
+>>>>>>> v3.18
 =======
 	comedi_pci_detach(dev);
 >>>>>>> v3.18
@@ -398,7 +439,11 @@ static int adv_pci1723_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(adv_pci1723_pci_table) = {
+=======
+static const struct pci_device_id adv_pci1723_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id adv_pci1723_pci_table[] = {
 >>>>>>> v3.18

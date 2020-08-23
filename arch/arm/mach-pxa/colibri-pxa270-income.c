@@ -190,6 +190,10 @@ static struct platform_pwm_backlight_data income_backlight_data = {
 	.dft_brightness	= 0x1ff,
 	.pwm_period_ns	= 1000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio	= -1,
 >>>>>>> v3.18

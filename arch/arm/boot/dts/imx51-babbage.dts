@@ -18,16 +18,23 @@
 	compatible = "fsl,imx51-babbage", "fsl,imx51";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	chosen {
 		stdout-path = &uart1;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memory {
 		reg = <0x90000000 0x20000000>;
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	display@di0 {
 		compatible = "fsl,imx-parallel-display";
@@ -44,6 +51,8 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_ipu_disp2_1>;
 =======
+=======
+>>>>>>> v3.18
 	clocks {
 		ckih1 {
 			clock-frequency = <22579200>;
@@ -115,11 +124,15 @@
 				remote-endpoint = <&ipu_di1_disp1>;
 			};
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
 	gpio-keys {
 		compatible = "gpio-keys";
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		power {
@@ -127,6 +140,8 @@
 			gpios = <&gpio2 21 0>;
 			linux,code = <116>; /* KEY_POWER */
 =======
+=======
+>>>>>>> v3.18
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_gpio_keys>;
 
@@ -134,13 +149,19 @@
 			label = "Power Button";
 			gpios = <&gpio2 21 GPIO_ACTIVE_HIGH>;
 			linux,code = <KEY_POWER>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			gpio-key,wakeup;
 		};
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	leds {
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
@@ -182,6 +203,9 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sound {
 		compatible = "fsl,imx51-babbage-sgtl5000",
@@ -196,6 +220,7 @@
 		mux-int-port = <2>;
 		mux-ext-port = <3>;
 	};
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -220,6 +245,8 @@
 	pinctrl-0 = <&pinctrl_uart3_1>;
 	fsl,uart-has-rtscts;
 =======
+=======
+>>>>>>> v3.18
 
 	usbphy {
 		#address-cells = <1>;
@@ -238,12 +265,16 @@
 &audmux {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_audmux>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = "okay";
 };
 
 &ecspi1 {
 	pinctrl-names = "default";
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_ecspi1_1>;
 	fsl,spi-num-chipselects = <2>;
@@ -259,6 +290,8 @@
 		interrupt-parent = <&gpio1>;
 		interrupts = <8 0x4>;
 =======
+=======
+>>>>>>> v3.18
 	pinctrl-0 = <&pinctrl_ecspi1>;
 	fsl,spi-num-chipselects = <2>;
 	cs-gpios = <&gpio4 24 GPIO_ACTIVE_HIGH>,
@@ -275,6 +308,9 @@
 		interrupt-parent = <&gpio1>;
 		interrupts = <8 IRQ_TYPE_LEVEL_HIGH>;
 		fsl,mc13xxx-uses-rtc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		regulators {
@@ -386,6 +422,7 @@
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 &ssi2 {
 	fsl,mode = "i2s-slave";
 	status = "okay";
@@ -421,6 +458,8 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart2_1>;
 =======
+=======
+>>>>>>> v3.18
 &esdhc1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_esdhc1>;
@@ -449,6 +488,9 @@
 &i2c1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = "okay";
 };
@@ -456,7 +498,11 @@
 &i2c2 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_i2c2_1>;
+=======
+	pinctrl-0 = <&pinctrl_i2c2>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_i2c2>;
 >>>>>>> v3.18
@@ -465,19 +511,26 @@
 	sgtl5000: codec@0a {
 		compatible = "fsl,sgtl5000";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg = <0x0a>;
 		clock-frequency = <26000000>;
 =======
+=======
+>>>>>>> v3.18
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_clkcodec>;
 		reg = <0x0a>;
 		clocks = <&clk_26M>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		VDDA-supply = <&vdig_reg>;
 		VDDIO-supply = <&vvideo_reg>;
 	};
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 &audmux {
 	pinctrl-names = "default";
@@ -514,6 +567,8 @@
 	status = "okay";
 };
 =======
+=======
+>>>>>>> v3.18
 &ipu_di0_disp0 {
 	remote-endpoint = <&display0_in>;
 };
@@ -819,4 +874,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

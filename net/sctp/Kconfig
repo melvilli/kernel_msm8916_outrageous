@@ -31,7 +31,12 @@ menuconfig IP_SCTP
 
 	  To compile this protocol support as a module, choose M here: the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  module will be called sctp.
+=======
+	  module will be called sctp. Debug messages are handeled by the
+	  kernel's dynamic debugging framework.
+>>>>>>> v3.18
 =======
 	  module will be called sctp. Debug messages are handeled by the
 	  kernel's dynamic debugging framework.
@@ -54,6 +59,7 @@ config NET_SCTPPROBE
         module will be called sctp_probe.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SCTP_DBG_MSG
 	bool "SCTP: Debug messages"
 	help
@@ -62,6 +68,8 @@ config SCTP_DBG_MSG
 	  If unsure, say N.  However, if you are running into problems, use 
 	  this option to gather detailed trace information
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SCTP_DBG_OBJCNT

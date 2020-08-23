@@ -14,7 +14,10 @@ cflags-$(CONFIG_SIBYTE_BCM112X) +=					\
 		-DSIBYTE_HDR_FEATURES=SIBYTE_HDR_FMASK_1250_112x_ALL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 platform-$(CONFIG_SIBYTE_SB1250)	+= sibyte/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 cflags-$(CONFIG_SIBYTE_SB1250)	+=					\
@@ -35,7 +38,12 @@ cflags-$(CONFIG_SIBYTE_BCM1x80) +=					\
 # Sibyte BCM91125C (CRhone) board
 # Sibyte BCM91125E (Rhone) board
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Sibyte SWARM board
+=======
+# Sibyte BCM91250A (SWARM) board
+# Sibyte BCM91250C2 (LittleSur) board
+>>>>>>> v3.18
 =======
 # Sibyte BCM91250A (SWARM) board
 # Sibyte BCM91250C2 (LittleSur) board
@@ -50,6 +58,10 @@ load-$(CONFIG_SIBYTE_SENTOSA)	:= 0xffffffff80100000
 load-$(CONFIG_SIBYTE_SWARM)	:= 0xffffffff80100000
 load-$(CONFIG_SIBYTE_BIGSUR)	:= 0xffffffff80100000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+load-$(CONFIG_SIBYTE_LITTLESUR) := 0xffffffff80100000
+>>>>>>> v3.18
 =======
 load-$(CONFIG_SIBYTE_LITTLESUR) := 0xffffffff80100000
 >>>>>>> v3.18

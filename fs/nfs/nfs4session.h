@@ -9,7 +9,11 @@
 
 /* maximum number of slots to use */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NFS4_DEF_SLOT_TABLE_SIZE (16U)
+=======
+#define NFS4_DEF_SLOT_TABLE_SIZE (64U)
+>>>>>>> v3.18
 =======
 #define NFS4_DEF_SLOT_TABLE_SIZE (64U)
 >>>>>>> v3.18
@@ -71,9 +75,12 @@ struct nfs4_session {
 	struct nfs4_slot_table		bc_slot_table;
 	struct nfs_client		*clp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Create session arguments */
 	unsigned int			fc_target_max_rqst_sz;
 	unsigned int			fc_target_max_resp_sz;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -83,11 +90,14 @@ enum nfs4_session_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NFS_V4_1)
 extern struct nfs4_slot *nfs4_alloc_slot(struct nfs4_slot_table *tbl);
 extern void nfs4_free_slot(struct nfs4_slot_table *tbl, struct nfs4_slot *slot);
 
 =======
+=======
+>>>>>>> v3.18
 extern int nfs4_setup_slot_table(struct nfs4_slot_table *tbl,
 		unsigned int max_reqs, const char *queue);
 extern void nfs4_shutdown_slot_table(struct nfs4_slot_table *tbl);
@@ -104,6 +114,9 @@ static inline bool nfs4_slot_tbl_draining(struct nfs4_slot_table *tbl)
 }
 
 #if defined(CONFIG_NFS_V4_1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void nfs41_set_target_slotid(struct nfs4_slot_table *tbl,
 		u32 target_highest_slotid);
@@ -115,6 +128,7 @@ extern int nfs4_setup_session_slot_tables(struct nfs4_session *ses);
 
 extern struct nfs4_session *nfs4_alloc_session(struct nfs_client *clp);
 extern void nfs4_destroy_session(struct nfs4_session *session);
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int nfs4_init_session(struct nfs_server *server);
 extern int nfs4_init_ds_session(struct nfs_client *, unsigned long);
@@ -130,6 +144,11 @@ bool nfs41_wake_and_assign_slot(struct nfs4_slot_table *tbl,
 		struct nfs4_slot *slot);
 void nfs41_wake_slot_table(struct nfs4_slot_table *tbl);
 
+=======
+extern int nfs4_init_session(struct nfs_client *clp);
+extern int nfs4_init_ds_session(struct nfs_client *, unsigned long);
+
+>>>>>>> v3.18
 =======
 extern int nfs4_init_session(struct nfs_client *clp);
 extern int nfs4_init_ds_session(struct nfs_client *, unsigned long);
@@ -153,10 +172,13 @@ static inline int nfs4_has_persistent_session(const struct nfs_client *clp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* defined(CONFIG_NFS_V4_1) */
 
 static inline int nfs4_init_session(struct nfs_server *server)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CRC32
 /*
  * nfs_session_id_hash - calculate the crc32 hash for the session id
@@ -170,6 +192,9 @@ static inline int nfs4_init_session(struct nfs_server *server)
 #else /* defined(CONFIG_NFS_V4_1) */
 
 static inline int nfs4_init_session(struct nfs_client *clp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return 0;

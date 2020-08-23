@@ -28,7 +28,11 @@
 #include <media/v4l2-mem2mem.h>
 #include <media/v4l2-mediabus.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/s5p_fimc.h>
+=======
+#include <media/exynos-fimc.h>
+>>>>>>> v3.18
 =======
 #include <media/exynos-fimc.h>
 >>>>>>> v3.18
@@ -53,6 +57,11 @@
 #define FIMC_DEF_HEIGHT_ALIGN	2
 #define FIMC_DEF_HOR_OFFS_ALIGN	1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FIMC_DEFAULT_WIDTH	640
+#define FIMC_DEFAULT_HEIGHT	480
+>>>>>>> v3.18
 =======
 #define FIMC_DEFAULT_WIDTH	640
 #define FIMC_DEFAULT_HEIGHT	480
@@ -293,8 +302,13 @@ struct fimc_m2m_device {
  * struct fimc_vid_cap - camera capture device information
  * @ctx: hardware context data
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @vfd: video device node for camera capture mode
  * @subdev: subdev exposing the FIMC processing block
+=======
+ * @subdev: subdev exposing the FIMC processing block
+ * @ve: exynos video device entity structure
+>>>>>>> v3.18
 =======
  * @subdev: subdev exposing the FIMC processing block
  * @ve: exynos video device entity structure
@@ -313,22 +327,33 @@ struct fimc_m2m_device {
  * @reqbufs_count: the number of buffers requested in REQBUFS ioctl
  * @input_index: input (camera sensor) index
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @refcnt: driver's private reference counter
  * @input: capture input type, grp_id of the attached subdev
  * @user_subdev_api: true if subdevs are not configured by the host driver
 =======
+=======
+>>>>>>> v3.18
  * @input: capture input type, grp_id of the attached subdev
  * @user_subdev_api: true if subdevs are not configured by the host driver
  * @inh_sensor_ctrls: a flag indicating v4l2 controls are inherited from
  * 		      an image sensor subdev
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct fimc_vid_cap {
 	struct fimc_ctx			*ctx;
 	struct vb2_alloc_ctx		*alloc_ctx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct video_device		vfd;
 	struct v4l2_subdev		subdev;
+=======
+	struct v4l2_subdev		subdev;
+	struct exynos_video_entity	ve;
+>>>>>>> v3.18
 =======
 	struct v4l2_subdev		subdev;
 	struct exynos_video_entity	ve;
@@ -348,9 +373,15 @@ struct fimc_vid_cap {
 	bool				streaming;
 	int				input_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int				refcnt;
 	u32				input;
 	bool				user_subdev_api;
+=======
+	u32				input;
+	bool				user_subdev_api;
+	bool				inh_sensor_ctrls;
+>>>>>>> v3.18
 =======
 	u32				input;
 	bool				user_subdev_api;
@@ -467,8 +498,11 @@ struct fimc_dev {
 	unsigned long			state;
 	struct vb2_alloc_ctx		*alloc_ctx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fimc_pipeline		pipeline;
 	const struct fimc_pipeline_ops	*pipeline_ops;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -516,7 +550,10 @@ struct fimc_ctrls {
  * @state:		flags to keep track of user configuration
  * @fimc_dev:		the FIMC device this context applies to
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @m2m_ctx:		memory-to-memory device context
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @fh:			v4l2 file handle
@@ -540,7 +577,10 @@ struct fimc_ctx {
 	u32			state;
 	struct fimc_dev		*fimc_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct v4l2_m2m_ctx	*m2m_ctx;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct v4l2_fh		fh;
@@ -662,8 +702,11 @@ static inline struct fimc_frame *ctx_get_frame(struct fimc_ctx *ctx,
 int fimc_vidioc_enum_fmt_mplane(struct file *file, void *priv,
 				struct v4l2_fmtdesc *f);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __fimc_vidioc_querycap(struct device *dev, struct v4l2_capability *cap,
 						unsigned int caps);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int fimc_ctrls_create(struct fimc_ctx *ctx);

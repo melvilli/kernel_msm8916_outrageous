@@ -16,9 +16,15 @@ config IEEE802154_FAKEHARD
 	---help---
 	  Say Y here to enable the fake driver that serves as an example
 <<<<<<< HEAD
+<<<<<<< HEAD
           of HardMAC device driver.
 
           This driver can also be built as a module. To do so say M here.
+=======
+	  of HardMAC device driver.
+
+	  This driver can also be built as a module. To do so say M here.
+>>>>>>> v3.18
 =======
 	  of HardMAC device driver.
 
@@ -38,6 +44,7 @@ config IEEE802154_FAKELB
 
 config IEEE802154_AT86RF230
 <<<<<<< HEAD
+<<<<<<< HEAD
         depends on IEEE802154_DRIVERS && MAC802154
         tristate "AT86RF230/231 transceiver driver"
         depends on SPI
@@ -53,6 +60,8 @@ config IEEE802154_MRF24J40
          This driver can also be built as a module. To do so, say M here.
          the module will be called 'mrf24j40'.
 =======
+=======
+>>>>>>> v3.18
 	depends on IEEE802154_DRIVERS && MAC802154
 	tristate "AT86RF230/231/233/212 transceiver driver"
 	depends on SPI
@@ -85,4 +94,7 @@ config IEEE802154_CC2520
 
 	  This driver can also be built as a module. To do so, say M here.
 	  the module will be called 'cc2520'.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

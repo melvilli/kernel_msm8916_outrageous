@@ -31,8 +31,11 @@ MODULE_LICENSE("GPL");
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dump_imap(const char *prefix, struct super_block *s);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct inode *bfs_iget(struct super_block *sb, unsigned long ino)
@@ -44,7 +47,11 @@ struct inode *bfs_iget(struct super_block *sb, unsigned long ino)
 
 	inode = iget_locked(sb, ino);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(inode))
+=======
+	if (!inode)
+>>>>>>> v3.18
 =======
 	if (!inode)
 >>>>>>> v3.18
@@ -180,7 +187,11 @@ static void bfs_evict_inode(struct inode *inode)
 	dprintf("ino=%08lx\n", ino);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -206,7 +217,11 @@ static void bfs_evict_inode(struct inode *inode)
 		info->si_freei++;
 		clear_bit(ino, info->si_imap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dump_imap("delete_inode", s);
+=======
+		bfs_dump_imap("delete_inode", s);
+>>>>>>> v3.18
 =======
 		bfs_dump_imap("delete_inode", s);
 >>>>>>> v3.18
@@ -282,7 +297,11 @@ static void init_once(void *foo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_inodecache(void)
+=======
+static int __init init_inodecache(void)
+>>>>>>> v3.18
 =======
 static int __init init_inodecache(void)
 >>>>>>> v3.18
@@ -317,7 +336,11 @@ static const struct super_operations bfs_sops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dump_imap(const char *prefix, struct super_block *s)
+=======
+void bfs_dump_imap(const char *prefix, struct super_block *s)
+>>>>>>> v3.18
 =======
 void bfs_dump_imap(const char *prefix, struct super_block *s)
 >>>>>>> v3.18
@@ -467,7 +490,11 @@ static int bfs_fill_super(struct super_block *s, void *data, int silent)
 	brelse(bh);
 	brelse(sbh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dump_imap("read_super", s);
+=======
+	bfs_dump_imap("read_super", s);
+>>>>>>> v3.18
 =======
 	bfs_dump_imap("read_super", s);
 >>>>>>> v3.18

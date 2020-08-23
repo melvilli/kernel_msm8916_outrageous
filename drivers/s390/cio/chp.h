@@ -61,7 +61,11 @@ int chp_get_status(struct chp_id chpid);
 u8 chp_get_sch_opm(struct subchannel *sch);
 int chp_is_registered(struct chp_id chpid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *chp_get_chp_desc(struct chp_id chpid);
+=======
+struct channel_path_desc *chp_get_chp_desc(struct chp_id chpid);
+>>>>>>> v3.18
 =======
 struct channel_path_desc *chp_get_chp_desc(struct chp_id chpid);
 >>>>>>> v3.18

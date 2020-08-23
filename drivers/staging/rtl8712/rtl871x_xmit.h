@@ -234,9 +234,15 @@ struct	xmit_priv {
 	u8	txirp_cnt;
 	struct tasklet_struct xmit_tasklet;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_workitem xmit_pipe4_reset_wi;
 	_workitem xmit_pipe6_reset_wi;
 	_workitem xmit_piped_reset_wi;
+=======
+	struct work_struct xmit_pipe4_reset_wi;
+	struct work_struct xmit_pipe6_reset_wi;
+	struct work_struct xmit_piped_reset_wi;
+>>>>>>> v3.18
 =======
 	struct work_struct xmit_pipe4_reset_wi;
 	struct work_struct xmit_pipe6_reset_wi;

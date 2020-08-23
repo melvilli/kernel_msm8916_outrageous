@@ -35,6 +35,10 @@
 #include "../trace-event.h"
 #include "../evsel.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../debug.h"
+>>>>>>> v3.18
 =======
 #include "../debug.h"
 >>>>>>> v3.18
@@ -199,8 +203,12 @@ static void define_event_symbols(struct event_format *event,
 		break;
 	case PRINT_FIELD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cur_field_name)
 			free(cur_field_name);
+=======
+		free(cur_field_name);
+>>>>>>> v3.18
 =======
 		free(cur_field_name);
 >>>>>>> v3.18
@@ -225,6 +233,10 @@ static void define_event_symbols(struct event_format *event,
 	case PRINT_DYNAMIC_ARRAY:
 	case PRINT_STRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case PRINT_BITMASK:
+>>>>>>> v3.18
 =======
 	case PRINT_BITMASK:
 >>>>>>> v3.18
@@ -270,11 +282,17 @@ static inline struct event_format *find_cache_event(struct perf_evsel *evsel)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void perl_process_tracepoint(union perf_event *perf_event __maybe_unused,
 				    struct perf_sample *sample,
 				    struct perf_evsel *evsel,
 				    struct machine *machine __maybe_unused,
 				    struct addr_location *al)
+=======
+static void perl_process_tracepoint(struct perf_sample *sample,
+				    struct perf_evsel *evsel,
+				    struct thread *thread)
+>>>>>>> v3.18
 =======
 static void perl_process_tracepoint(struct perf_sample *sample,
 				    struct perf_evsel *evsel,
@@ -291,8 +309,12 @@ static void perl_process_tracepoint(struct perf_sample *sample,
 	void *data = sample->raw_data;
 	unsigned long long nsecs = sample->time;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct thread *thread = al->thread;
 	char *comm = thread->comm;
+=======
+	const char *comm = thread__comm_str(thread);
+>>>>>>> v3.18
 =======
 	const char *comm = thread__comm_str(thread);
 >>>>>>> v3.18
@@ -372,9 +394,13 @@ static void perl_process_tracepoint(struct perf_sample *sample,
 static void perl_process_event_generic(union perf_event *event,
 				       struct perf_sample *sample,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       struct perf_evsel *evsel,
 				       struct machine *machine __maybe_unused,
 				       struct addr_location *al __maybe_unused)
+=======
+				       struct perf_evsel *evsel)
+>>>>>>> v3.18
 =======
 				       struct perf_evsel *evsel)
 >>>>>>> v3.18
@@ -403,17 +429,23 @@ static void perl_process_event(union perf_event *event,
 			       struct perf_sample *sample,
 			       struct perf_evsel *evsel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       struct machine *machine,
 			       struct addr_location *al)
 {
 	perl_process_tracepoint(event, sample, evsel, machine, al);
 	perl_process_event_generic(event, sample, evsel, machine, al);
 =======
+=======
+>>>>>>> v3.18
 			       struct thread *thread,
 			       struct addr_location *al __maybe_unused)
 {
 	perl_process_tracepoint(sample, evsel, thread);
 	perl_process_event_generic(event, sample, evsel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -471,12 +503,18 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int perl_flush_script(void)
 {
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Stop trace script
@@ -680,6 +718,10 @@ struct scripting_ops perl_scripting_ops = {
 	.name = "Perl",
 	.start_script = perl_start_script,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flush_script = perl_flush_script,
+>>>>>>> v3.18
 =======
 	.flush_script = perl_flush_script,
 >>>>>>> v3.18

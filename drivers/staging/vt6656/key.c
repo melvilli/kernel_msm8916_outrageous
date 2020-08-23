@@ -27,11 +27,14 @@
  *
  * Functions:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      KeyvInitTable - Init Key management table
  *      KeybGetKey - Get Key from table
  *      KeybSetKey - Set Key to table
  *      KeybRemoveKey - Remove Key from table
  *      KeybGetTransmitKey - Get Transmit Key from table
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -40,6 +43,7 @@
  */
 
 #include "mac.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "tmacro.h"
 #include "key.h"
@@ -739,6 +743,8 @@ int KeybSetAllGroupKey(struct vnt_private *pDevice, PSKeyManagement pTable,
     }
     return (true);
 =======
+=======
+>>>>>>> v3.18
 #include "key.h"
 #include "usbpipe.h"
 
@@ -883,5 +889,8 @@ int vnt_set_keys(struct ieee80211_hw *hw, struct ieee80211_sta *sta,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

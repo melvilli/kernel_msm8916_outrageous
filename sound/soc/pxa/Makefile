@@ -24,8 +24,11 @@ snd-soc-spitz-objs := spitz.o
 snd-soc-em-x270-objs := em-x270.o
 snd-soc-palm27x-objs := palm27x.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 snd-soc-saarb-objs := saarb.o
 snd-soc-tavorevb3-objs := tavorevb3.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 snd-soc-zylonite-objs := zylonite.o
@@ -52,8 +55,11 @@ obj-$(CONFIG_SND_PXA2XX_SOC_MAGICIAN) += snd-soc-magician.o
 obj-$(CONFIG_SND_PXA2XX_SOC_MIOA701) += snd-soc-mioa701.o
 obj-$(CONFIG_SND_PXA2XX_SOC_Z2) += snd-soc-z2.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SND_SOC_SAARB) += snd-soc-saarb.o
 obj-$(CONFIG_SND_SOC_TAVOREVB3) += snd-soc-tavorevb3.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_SND_SOC_ZYLONITE) += snd-soc-zylonite.o

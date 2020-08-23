@@ -62,7 +62,10 @@
 #include <media/v4l2-device.h>
 #include <media/v4l2-ctrls.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -116,10 +119,13 @@ EXPORT_SYMBOL(v4l2_ctrl_check);
 
 /* Fill in a struct v4l2_queryctrl */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int v4l2_ctrl_query_fill(struct v4l2_queryctrl *qctrl, s32 min, s32 max, s32 step, s32 def)
 {
 	const char *name;
 =======
+=======
+>>>>>>> v3.18
 int v4l2_ctrl_query_fill(struct v4l2_queryctrl *qctrl, s32 _min, s32 _max, s32 _step, s32 _def)
 {
 	const char *name;
@@ -127,6 +133,9 @@ int v4l2_ctrl_query_fill(struct v4l2_queryctrl *qctrl, s32 _min, s32 _max, s32 _
 	s64 max = _max;
 	u64 step = _step;
 	s64 def = _def;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	v4l2_ctrl_fill(qctrl->id, &name, &qctrl->type,
@@ -241,6 +250,7 @@ u32 v4l2_ctrl_next(const u32 * const * ctrl_classes, u32 id)
 EXPORT_SYMBOL(v4l2_ctrl_next);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int v4l2_chip_match_host(const struct v4l2_dbg_match *match)
 {
 	switch (match->type) {
@@ -302,6 +312,11 @@ EXPORT_SYMBOL(v4l2_chip_ident_i2c_client);
 
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
+=======
+/* I2C Helper functions */
+
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 
 void v4l2_i2c_subdev_init(struct v4l2_subdev *sd, struct i2c_client *client,
 		const struct v4l2_subdev_ops *ops)
@@ -310,7 +325,12 @@ void v4l2_i2c_subdev_init(struct v4l2_subdev *sd, struct i2c_client *client,
 	sd->flags |= V4L2_SUBDEV_FL_IS_I2C;
 	/* the owner is the same as the i2c_client's driver owner */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sd->owner = client->driver->driver.owner;
+=======
+	sd->owner = client->dev.driver->owner;
+	sd->dev = &client->dev;
+>>>>>>> v3.18
 =======
 	sd->owner = client->dev.driver->owner;
 	sd->dev = &client->dev;
@@ -321,7 +341,11 @@ void v4l2_i2c_subdev_init(struct v4l2_subdev *sd, struct i2c_client *client,
 	/* initialize name */
 	snprintf(sd->name, sizeof(sd->name), "%s %d-%04x",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		client->driver->driver.name, i2c_adapter_id(client->adapter),
+=======
+		client->dev.driver->name, i2c_adapter_id(client->adapter),
+>>>>>>> v3.18
 =======
 		client->dev.driver->name, i2c_adapter_id(client->adapter),
 >>>>>>> v3.18
@@ -330,8 +354,11 @@ void v4l2_i2c_subdev_init(struct v4l2_subdev *sd, struct i2c_client *client,
 EXPORT_SYMBOL_GPL(v4l2_i2c_subdev_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Load an i2c sub-device. */
@@ -361,17 +388,23 @@ struct v4l2_subdev *v4l2_i2c_new_subdev_board(struct v4l2_device *v4l2_dev,
 	   want to use the i2c device, so explicitly loading the module
 	   is the best alternative. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (client == NULL || client->driver == NULL)
 		goto error;
 
 	/* Lock the module so we can safely get the v4l2_subdev pointer */
 	if (!try_module_get(client->driver->driver.owner))
 =======
+=======
+>>>>>>> v3.18
 	if (client == NULL || client->dev.driver == NULL)
 		goto error;
 
 	/* Lock the module so we can safely get the v4l2_subdev pointer */
 	if (!try_module_get(client->dev.driver->owner))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto error;
 	sd = i2c_get_clientdata(client);
@@ -382,7 +415,11 @@ struct v4l2_subdev *v4l2_i2c_new_subdev_board(struct v4l2_device *v4l2_dev,
 		sd = NULL;
 	/* Decrease the module use count to match the first try_module_get. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	module_put(client->driver->driver.owner);
+=======
+	module_put(client->dev.driver->owner);
+>>>>>>> v3.18
 =======
 	module_put(client->dev.driver->owner);
 >>>>>>> v3.18
@@ -470,6 +507,10 @@ void v4l2_spi_subdev_init(struct v4l2_subdev *sd, struct spi_device *spi,
 	/* the owner is the same as the spi_device's driver owner */
 	sd->owner = spi->dev.driver->owner;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sd->dev = &spi->dev;
+>>>>>>> v3.18
 =======
 	sd->dev = &spi->dev;
 >>>>>>> v3.18
@@ -593,6 +634,7 @@ void v4l_bound_align_image(u32 *w, unsigned int wmin, unsigned int wmax,
 }
 EXPORT_SYMBOL_GPL(v4l_bound_align_image);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * v4l_match_dv_timings - check if two timings match
@@ -951,6 +993,8 @@ struct v4l2_fract v4l2_calc_aspect_ratio(u8 hor_landscape, u8 vert_portrait)
 }
 EXPORT_SYMBOL_GPL(v4l2_calc_aspect_ratio);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 const struct v4l2_frmsize_discrete *v4l2_find_nearest_format(

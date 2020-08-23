@@ -20,6 +20,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/cpuidle.h>
@@ -38,6 +39,8 @@
 #include "irq.h"
 #include "flowctrl.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk/tegra.h>
 #include <linux/clockchips.h>
 #include <linux/cpuidle.h>
@@ -55,6 +58,9 @@
 #include "irq.h"
 #include "pm.h"
 #include "sleep.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PM_SLEEP
@@ -198,7 +204,10 @@ static int tegra20_idle_lp2_coupled(struct cpuidle_device *dev,
 				    int index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 cpu = is_smp() ? cpu_logical_map(dev->cpu) : dev->cpu;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool entered_lp2 = false;
@@ -217,15 +226,21 @@ static int tegra20_idle_lp2_coupled(struct cpuidle_device *dev,
 	local_fiq_disable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tegra_set_cpu_in_lp2(cpu);
 	cpu_pm_enter();
 
 	if (cpu == 0)
 =======
+=======
+>>>>>>> v3.18
 	tegra_set_cpu_in_lp2();
 	cpu_pm_enter();
 
 	if (dev->cpu == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		entered_lp2 = tegra20_cpu_cluster_power_down(dev, drv, index);
 	else
@@ -233,7 +248,11 @@ static int tegra20_idle_lp2_coupled(struct cpuidle_device *dev,
 
 	cpu_pm_exit();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tegra_clear_cpu_in_lp2(cpu);
+=======
+	tegra_clear_cpu_in_lp2();
+>>>>>>> v3.18
 =======
 	tegra_clear_cpu_in_lp2();
 >>>>>>> v3.18
@@ -247,12 +266,15 @@ static int tegra20_idle_lp2_coupled(struct cpuidle_device *dev,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init tegra20_cpuidle_init(void)
 {
 #ifdef CONFIG_PM_SLEEP
 	tegra_tear_down_cpu = tegra20_tear_down_cpu;
 #endif
 =======
+=======
+>>>>>>> v3.18
 /*
  * Tegra20 HW appears to have a bug such that PCIe device interrupts, whether
  * they are legacy IRQs or MSI, are lost when LP2 is enabled. To work around
@@ -267,6 +289,9 @@ void tegra20_cpuidle_pcie_irqs_in_use(void)
 
 int __init tegra20_cpuidle_init(void)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return cpuidle_register(&tegra_idle_driver, cpu_possible_mask);
 }

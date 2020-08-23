@@ -31,7 +31,11 @@
 #include <asm/mpc52xx.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id mpc5200_gpio_ids[] __initdata = {
+=======
+static const struct of_device_id mpc5200_gpio_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc5200_gpio_ids[] __initconst = {
 >>>>>>> v3.18

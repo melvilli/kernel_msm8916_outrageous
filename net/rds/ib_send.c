@@ -299,7 +299,11 @@ void rds_ib_send_cq_comp_handler(struct ib_cq *cq, void *context)
 
 		if (wc.wr_id == RDS_IB_ACK_WR_ID) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ic->i_ack_queued + HZ/2 < jiffies)
+=======
+			if (time_after(jiffies, ic->i_ack_queued + HZ/2))
+>>>>>>> v3.18
 =======
 			if (time_after(jiffies, ic->i_ack_queued + HZ/2))
 >>>>>>> v3.18
@@ -320,7 +324,11 @@ void rds_ib_send_cq_comp_handler(struct ib_cq *cq, void *context)
 			rm = rds_ib_send_unmap_op(ic, send, wc.status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (send->s_queued + HZ/2 < jiffies)
+=======
+			if (time_after(jiffies, send->s_queued + HZ/2))
+>>>>>>> v3.18
 =======
 			if (time_after(jiffies, send->s_queued + HZ/2))
 >>>>>>> v3.18

@@ -36,6 +36,11 @@
 #include <linux/export.h>
 #include <drm/drmP.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_edid.h>
+#include "drm_internal.h"
+>>>>>>> v3.18
 =======
 #include <drm/drm_edid.h>
 #include "drm_internal.h"
@@ -48,7 +53,11 @@
  **************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct drm_info_list drm_debugfs_list[] = {
+=======
+static const struct drm_info_list drm_debugfs_list[] = {
+>>>>>>> v3.18
 =======
 static const struct drm_info_list drm_debugfs_list[] = {
 >>>>>>> v3.18
@@ -58,9 +67,13 @@ static const struct drm_info_list drm_debugfs_list[] = {
 	{"bufs", drm_bufs_info, 0},
 	{"gem_names", drm_gem_name_info, DRIVER_GEM},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if DRM_DEBUG_CODE
 	{"vma", drm_vma_info, 0},
 #endif
+=======
+	{"vma", drm_vma_info, 0},
+>>>>>>> v3.18
 =======
 	{"vma", drm_vma_info, 0},
 >>>>>>> v3.18
@@ -98,7 +111,11 @@ static const struct file_operations drm_debugfs_fops = {
  * gdm_debugfs_lists in the given root directory.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_debugfs_create_files(struct drm_info_list *files, int count,
+=======
+int drm_debugfs_create_files(const struct drm_info_list *files, int count,
+>>>>>>> v3.18
 =======
 int drm_debugfs_create_files(const struct drm_info_list *files, int count,
 >>>>>>> v3.18
@@ -206,7 +223,11 @@ int drm_debugfs_init(struct drm_minor *minor, int minor_id,
  * Remove all debugfs entries created by debugfs_init().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_debugfs_remove_files(struct drm_info_list *files, int count,
+=======
+int drm_debugfs_remove_files(const struct drm_info_list *files, int count,
+>>>>>>> v3.18
 =======
 int drm_debugfs_remove_files(const struct drm_info_list *files, int count,
 >>>>>>> v3.18
@@ -259,7 +280,10 @@ int drm_debugfs_cleanup(struct drm_minor *minor)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int connector_show(struct seq_file *m, void *data)
 {
 	struct drm_connector *connector = m->private;
@@ -441,6 +465,9 @@ void drm_debugfs_connector_remove(struct drm_connector *connector)
 	connector->debugfs_entry = NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_DEBUG_FS */
 

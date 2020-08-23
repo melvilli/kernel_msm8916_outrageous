@@ -24,7 +24,11 @@ struct proc_dir_entry;
 #ifdef CONFIG_HARDWALL
 void proc_tile_hardwall_init(struct proc_dir_entry *root);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int proc_pid_hardwall(struct task_struct *task, char *buffer);
+=======
+int proc_pid_hardwall(struct seq_file *m, struct pid_namespace *ns, struct pid *pid, struct task_struct *task);
+>>>>>>> v3.18
 =======
 int proc_pid_hardwall(struct seq_file *m, struct pid_namespace *ns, struct pid *pid, struct task_struct *task);
 >>>>>>> v3.18

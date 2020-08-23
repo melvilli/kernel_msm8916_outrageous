@@ -36,12 +36,15 @@
 #include <linux/module.h>
 #include <linux/v4l2-mediabus.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <media/v4l2-device.h>
 #include <media/v4l2-common.h>
 #include <media/v4l2-mediabus.h>
 #include <media/v4l2-chip-ident.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_graph.h>
 
@@ -50,6 +53,9 @@
 #include <media/v4l2-common.h>
 #include <media/v4l2-mediabus.h>
 #include <media/v4l2-of.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
 #include <media/tvp514x.h>
@@ -135,6 +141,11 @@ struct tvp514x_decoder {
 	struct media_pad pad;
 	struct v4l2_mbus_framefmt format;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	struct tvp514x_reg *int_seq;
+>>>>>>> v3.18
 =======
 
 	struct tvp514x_reg *int_seq;
@@ -560,8 +571,11 @@ static int tvp514x_querystd(struct v4l2_subdev *sd, v4l2_std_id *std_id)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*std_id = V4L2_STD_UNKNOWN;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* To query the standard the TVP514x must power on the ADCs. */
@@ -573,13 +587,19 @@ static int tvp514x_querystd(struct v4l2_subdev *sd, v4l2_std_id *std_id)
 	/* query the current standard */
 	current_std = tvp514x_query_current_std(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (current_std == STD_INVALID)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (current_std == STD_INVALID) {
 		*std_id = V4L2_STD_UNKNOWN;
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	input_sel = decoder->input;
@@ -622,17 +642,23 @@ static int tvp514x_querystd(struct v4l2_subdev *sd, v4l2_std_id *std_id)
 	/* check whether signal is locked */
 	sync_lock_status = tvp514x_read_reg(sd, REG_STATUS1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lock_mask != (sync_lock_status & lock_mask))
 		return 0;	/* No input detected */
 
 	*std_id = decoder->std_list[current_std].standard.id;
 =======
+=======
+>>>>>>> v3.18
 	if (lock_mask != (sync_lock_status & lock_mask)) {
 		*std_id = V4L2_STD_UNKNOWN;
 		return 0;	/* No input detected */
 	}
 
 	*std_id &= decoder->std_list[current_std].standard.id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	v4l2_dbg(1, debug, sd, "Current STD: %s\n",
@@ -898,7 +924,10 @@ static int tvp514x_s_stream(struct v4l2_subdev *sd, int enable)
 {
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct tvp514x_decoder *decoder = to_decoder(sd);
@@ -921,11 +950,16 @@ static int tvp514x_s_stream(struct v4l2_subdev *sd, int enable)
 	case 1:
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct tvp514x_reg *int_seq = (struct tvp514x_reg *)
 				client->driver->id_table->driver_data;
 
 		/* Power Up Sequence */
 		err = tvp514x_write_regs(sd, int_seq);
+=======
+		/* Power Up Sequence */
+		err = tvp514x_write_regs(sd, decoder->int_seq);
+>>>>>>> v3.18
 =======
 		/* Power Up Sequence */
 		err = tvp514x_write_regs(sd, decoder->int_seq);
@@ -1051,15 +1085,21 @@ static const struct v4l2_subdev_core_ops tvp514x_core_ops = {
 	.queryctrl = v4l2_subdev_queryctrl,
 	.querymenu = v4l2_subdev_querymenu,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.s_std = tvp514x_s_std,
 };
 
 static const struct v4l2_subdev_video_ops tvp514x_video_ops = {
 =======
+=======
+>>>>>>> v3.18
 };
 
 static const struct v4l2_subdev_video_ops tvp514x_video_ops = {
 	.s_std = tvp514x_s_std,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.s_routing = tvp514x_s_routing,
 	.querystd = tvp514x_querystd,
@@ -1106,7 +1146,10 @@ static struct tvp514x_decoder tvp514x_dev = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct tvp514x_platform_data *
 tvp514x_get_pdata(struct i2c_client *client)
 {
@@ -1143,6 +1186,9 @@ done:
 	return pdata;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * tvp514x_probe() - decoder driver i2c probe handler
@@ -1156,6 +1202,10 @@ static int
 tvp514x_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tvp514x_platform_data *pdata = tvp514x_get_pdata(client);
+>>>>>>> v3.18
 =======
 	struct tvp514x_platform_data *pdata = tvp514x_get_pdata(client);
 >>>>>>> v3.18
@@ -1164,23 +1214,32 @@ tvp514x_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pdata == NULL) {
 		dev_err(&client->dev, "No platform data\n");
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Check if the adapter supports the needed features */
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_BYTE_DATA))
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!client->dev.platform_data) {
 		v4l2_err(client, "No platform data!!\n");
 		return -ENODEV;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	decoder = devm_kzalloc(&client->dev, sizeof(*decoder), GFP_KERNEL);
@@ -1194,13 +1253,19 @@ tvp514x_probe(struct i2c_client *client, const struct i2c_device_id *id)
 			sizeof(tvp514x_reg_list_default));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Copy board specific information here */
 	decoder->pdata = client->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	decoder->int_seq = (struct tvp514x_reg *)id->driver_data;
 
 	/* Copy board specific information here */
 	decoder->pdata = pdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/**
@@ -1221,7 +1286,10 @@ tvp514x_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	sd = &decoder->sd;
 	v4l2_i2c_subdev_init(sd, client, &tvp514x_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strlcpy(sd->name, TVP514X_MODULE_NAME, sizeof(sd->name));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1235,7 +1303,10 @@ tvp514x_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		v4l2_err(sd, "%s decoder driver failed to register !!\n",
 			 sd->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(decoder);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return ret;
@@ -1256,6 +1327,7 @@ tvp514x_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	if (decoder->hdl.error) {
 		ret = decoder->hdl.error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		v4l2_ctrl_handler_free(&decoder->hdl);
 		return ret;
@@ -1267,6 +1339,8 @@ tvp514x_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 		goto done;
 	}
 	v4l2_ctrl_handler_setup(&decoder->hdl);
@@ -1283,6 +1357,9 @@ done:
 #endif
 	}
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1299,6 +1376,10 @@ static int tvp514x_remove(struct i2c_client *client)
 	struct tvp514x_decoder *decoder = to_decoder(sd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l2_async_unregister_subdev(&decoder->sd);
+>>>>>>> v3.18
 =======
 	v4l2_async_unregister_subdev(&decoder->sd);
 >>>>>>> v3.18
@@ -1372,9 +1453,12 @@ static const struct i2c_device_id tvp514x_id[] = {
 MODULE_DEVICE_TABLE(i2c, tvp514x_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct i2c_driver tvp514x_driver = {
 	.driver = {
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_OF)
 static const struct of_device_id tvp514x_of_match[] = {
 	{ .compatible = "ti,tvp5146", },
@@ -1389,6 +1473,9 @@ MODULE_DEVICE_TABLE(of, tvp514x_of_match);
 static struct i2c_driver tvp514x_driver = {
 	.driver = {
 		.of_match_table = of_match_ptr(tvp514x_of_match),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.owner = THIS_MODULE,
 		.name = TVP514X_MODULE_NAME,

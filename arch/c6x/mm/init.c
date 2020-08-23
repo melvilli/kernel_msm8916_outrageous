@@ -59,10 +59,13 @@ void __init paging_init(void)
 void __init mem_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int codek, datak;
 	unsigned long tmp;
 	unsigned long len = memory_end - memory_start;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	high_memory = (void *)(memory_end & PAGE_MASK);
@@ -70,6 +73,7 @@ void __init mem_init(void)
 	/* this will put all memory onto the freelists */
 	free_all_bootmem();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	codek = (_etext - _stext) >> 10;
 	datak = (_end - _sdata) >> 10;
@@ -80,13 +84,20 @@ void __init mem_init(void)
 =======
 	mem_init_print_info(NULL);
 >>>>>>> v3.18
+=======
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_BLK_DEV_INITRD
 void __init free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, -1, "initrd");
 >>>>>>> v3.18
@@ -96,7 +107,11 @@ void __init free_initrd_mem(unsigned long start, unsigned long end)
 void __init free_initmem(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 =======
 	free_initmem_default(-1);
 >>>>>>> v3.18

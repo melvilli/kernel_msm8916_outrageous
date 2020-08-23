@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (C) 2010-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2010-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
 =======
 /* Copyright (C) 2010-2014 B.A.T.M.A.N. contributors:
 >>>>>>> v3.18
@@ -17,9 +21,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -35,6 +43,11 @@ void batadv_debugfs_destroy(void);
 int batadv_debugfs_add_meshif(struct net_device *dev);
 void batadv_debugfs_del_meshif(struct net_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int batadv_debugfs_add_hardif(struct batadv_hard_iface *hard_iface);
+void batadv_debugfs_del_hardif(struct batadv_hard_iface *hard_iface);
+>>>>>>> v3.18
 =======
 int batadv_debugfs_add_hardif(struct batadv_hard_iface *hard_iface);
 void batadv_debugfs_del_hardif(struct batadv_hard_iface *hard_iface);

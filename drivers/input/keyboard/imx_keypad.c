@@ -14,7 +14,10 @@
 #include <linux/device.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/input/matrix_keypad.h>
@@ -420,7 +423,11 @@ open_err:
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id imx_keypad_of_match[] = {
+=======
+static const struct of_device_id imx_keypad_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id imx_keypad_of_match[] = {
 >>>>>>> v3.18
@@ -433,7 +440,12 @@ MODULE_DEVICE_TABLE(of, imx_keypad_of_match);
 static int imx_keypad_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct matrix_keymap_data *keymap_data = pdev->dev.platform_data;
+=======
+	const struct matrix_keymap_data *keymap_data =
+			dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	const struct matrix_keymap_data *keymap_data =
 			dev_get_platdata(&pdev->dev);
@@ -452,6 +464,7 @@ static int imx_keypad_probe(struct platform_device *pdev)
 	if (irq < 0) {
 		dev_err(&pdev->dev, "no irq defined in platform data\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
 	}
 
@@ -459,6 +472,9 @@ static int imx_keypad_probe(struct platform_device *pdev)
 	if (res == NULL) {
 		dev_err(&pdev->dev, "no I/O memory defined in platform data\n");
 		return -EINVAL;
+=======
+		return irq;
+>>>>>>> v3.18
 =======
 		return irq;
 >>>>>>> v3.18
@@ -472,7 +488,11 @@ static int imx_keypad_probe(struct platform_device *pdev)
 
 	keypad = devm_kzalloc(&pdev->dev, sizeof(struct imx_keypad),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     GFP_KERNEL);
+=======
+			      GFP_KERNEL);
+>>>>>>> v3.18
 =======
 			      GFP_KERNEL);
 >>>>>>> v3.18
@@ -489,6 +509,10 @@ static int imx_keypad_probe(struct platform_device *pdev)
 		    imx_keypad_check_for_events, (unsigned long) keypad);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 >>>>>>> v3.18
@@ -561,8 +585,12 @@ static int imx_keypad_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
 static int imx_kbd_suspend(struct device *dev)
+=======
+static int __maybe_unused imx_kbd_suspend(struct device *dev)
+>>>>>>> v3.18
 =======
 static int __maybe_unused imx_kbd_suspend(struct device *dev)
 >>>>>>> v3.18
@@ -586,7 +614,11 @@ static int __maybe_unused imx_kbd_suspend(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int imx_kbd_resume(struct device *dev)
+=======
+static int __maybe_unused imx_kbd_resume(struct device *dev)
+>>>>>>> v3.18
 =======
 static int __maybe_unused imx_kbd_resume(struct device *dev)
 >>>>>>> v3.18
@@ -613,7 +645,10 @@ err_clk:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -16,13 +16,17 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/err.h>
 #include <linux/errno.h>
 #include <linux/module.h>
 #include <linux/device.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/mutex.h>
@@ -345,6 +349,8 @@ static int m25p80_read(struct mtd_info *mtd, loff_t from, size_t len,
 	pr_debug("%s: %s from 0x%08x, len %zd\n", dev_name(&flash->spi->dev),
 			__func__, (u32)from, len);
 =======
+=======
+>>>>>>> v3.18
 
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/partitions.h>
@@ -461,11 +467,15 @@ static int m25p80_read(struct spi_nor *nor, loff_t from, size_t len,
 	ret = nor->wait_till_ready(nor);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spi_message_init(&m);
 	memset(t, 0, (sizeof t));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* NOTE:
 	 * OPCODE_FAST_READ (if available) is faster.
@@ -1019,6 +1029,8 @@ static const struct spi_device_id *jedec_probe(struct spi_device *spi)
 
 
 =======
+=======
+>>>>>>> v3.18
 	flash->command[0] = nor->read_opcode;
 	m25p_addr2cmd(nor, from, flash->command);
 
@@ -1064,6 +1076,9 @@ static int m25p80_erase(struct spi_nor *nor, loff_t offset)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * board specific setup should have ensured the SPI clock used here
@@ -1072,6 +1087,7 @@ static int m25p80_erase(struct spi_nor *nor, loff_t offset)
  */
 static int m25p_probe(struct spi_device *spi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct spi_device_id	*id = spi_get_device_id(spi);
 	struct flash_platform_data	*data;
@@ -1244,6 +1260,8 @@ static int m25p_probe(struct spi_device *spi)
 	 * use readonly partitions for writeprotected sectors (BP2..BP0).
 	 */
 =======
+=======
+>>>>>>> v3.18
 	struct mtd_part_parser_data	ppdata;
 	struct flash_platform_data	*data;
 	struct m25p *flash;
@@ -1299,6 +1317,9 @@ static int m25p_probe(struct spi_device *spi)
 
 	ppdata.of_node = spi->dev.of_node;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return mtd_device_parse_register(&flash->mtd, NULL, &ppdata,
 			data ? data->parts : NULL,
@@ -1308,6 +1329,7 @@ static int m25p_probe(struct spi_device *spi)
 
 static int m25p_remove(struct spi_device *spi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct m25p	*flash = dev_get_drvdata(&spi->dev);
 	int		status;
@@ -1323,6 +1345,8 @@ static int m25p_remove(struct spi_device *spi)
 
 
 =======
+=======
+>>>>>>> v3.18
 	struct m25p	*flash = spi_get_drvdata(spi);
 
 	/* Clean up MTD stuff. */
@@ -1380,6 +1404,9 @@ static const struct spi_device_id m25p_ids[] = {
 MODULE_DEVICE_TABLE(spi, m25p_ids);
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct spi_driver m25p80_driver = {
 	.driver = {

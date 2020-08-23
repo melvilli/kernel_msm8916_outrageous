@@ -5,7 +5,11 @@
  * specific functions.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (c) Copyright 2003-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2003-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2003-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -96,6 +100,10 @@ static int iblock_configure_device(struct se_device *dev)
 	struct request_queue *q;
 	struct block_device *bd = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct blk_integrity *bi;
+>>>>>>> v3.18
 =======
 	struct blk_integrity *bi;
 >>>>>>> v3.18
@@ -131,7 +139,11 @@ static int iblock_configure_device(struct se_device *dev)
 
 	dev->dev_attrib.hw_block_size = bdev_logical_block_size(bd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->dev_attrib.hw_max_sectors = queue_max_hw_sectors(q);
+=======
+	dev->dev_attrib.hw_max_sectors = UINT_MAX;
+>>>>>>> v3.18
 =======
 	dev->dev_attrib.hw_max_sectors = UINT_MAX;
 >>>>>>> v3.18
@@ -168,9 +180,12 @@ static int iblock_configure_device(struct se_device *dev)
 		dev->dev_attrib.is_nonrot = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	bi = bdev_get_integrity(bd);
 	if (bi) {
 		struct bio_set *bs = ib_dev->ibd_bio_set;
@@ -205,6 +220,9 @@ static int iblock_configure_device(struct se_device *dev)
 
 out_blkdev_put:
 	blkdev_put(ib_dev->ibd_bd, FMODE_WRITE|FMODE_READ|FMODE_EXCL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_free_bioset:
 	bioset_free(ib_dev->ibd_bio_set);
@@ -222,6 +240,10 @@ static void iblock_free_device(struct se_device *dev)
 	if (ib_dev->ibd_bio_set != NULL)
 		bioset_free(ib_dev->ibd_bio_set);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -373,7 +395,11 @@ iblock_get_bio(struct se_cmd *cmd, sector_t lba, u32 sg_num)
 	bio->bi_private = cmd;
 	bio->bi_end_io = &iblock_bio_done;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_sector = lba;
+=======
+	bio->bi_iter.bi_sector = lba;
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_sector = lba;
 >>>>>>> v3.18
@@ -594,15 +620,21 @@ static ssize_t iblock_set_configfs_dev_params(struct se_device *dev,
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = strict_strtoul(arg_p, 0, &tmp_readonly);
 			kfree(arg_p);
 			if (ret < 0) {
 				pr_err("strict_strtoul() failed for"
 =======
+=======
+>>>>>>> v3.18
 			ret = kstrtoul(arg_p, 0, &tmp_readonly);
 			kfree(arg_p);
 			if (ret < 0) {
 				pr_err("kstrtoul() failed for"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						" readonly=\n");
 				goto out;
@@ -651,6 +683,7 @@ static ssize_t iblock_show_configfs_dev_params(struct se_device *dev, char *b)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static sense_reason_t
 iblock_execute_rw(struct se_cmd *cmd)
 {
@@ -661,6 +694,8 @@ iblock_execute_rw(struct se_cmd *cmd)
 	struct iblock_req *ibr;
 	struct bio *bio;
 =======
+=======
+>>>>>>> v3.18
 static int
 iblock_alloc_bip(struct se_cmd *cmd, struct bio *bio)
 {
@@ -713,6 +748,9 @@ iblock_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 	struct se_device *dev = cmd->se_dev;
 	struct iblock_req *ibr;
 	struct bio *bio, *bio_start;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct bio_list list;
 	struct scatterlist *sg;
@@ -777,6 +815,10 @@ iblock_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 		goto fail_free_ibr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bio_start = bio;
+>>>>>>> v3.18
 =======
 	bio_start = bio;
 >>>>>>> v3.18
@@ -814,13 +856,19 @@ iblock_execute_rw(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cmd->prot_type) {
 		int rc = iblock_alloc_bip(cmd, bio_start);
 		if (rc)
 			goto fail_put_bios;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iblock_submit_bios(&list, rw);
 	iblock_complete_cmd(cmd);
@@ -845,7 +893,10 @@ static sector_t iblock_get_blocks(struct se_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static sector_t iblock_get_alignment_offset_lbas(struct se_device *dev)
 {
 	struct iblock_dev *ib_dev = IBLOCK_DEV(dev);
@@ -885,6 +936,9 @@ static unsigned int iblock_get_io_opt(struct se_device *dev)
 	return bdev_io_opt(bd);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct sbc_ops iblock_sbc_ops = {
 	.execute_rw		= iblock_execute_rw,
@@ -901,7 +955,11 @@ iblock_parse_cdb(struct se_cmd *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool iblock_get_write_cache(struct se_device *dev)
+=======
+static bool iblock_get_write_cache(struct se_device *dev)
+>>>>>>> v3.18
 =======
 static bool iblock_get_write_cache(struct se_device *dev)
 >>>>>>> v3.18
@@ -930,11 +988,17 @@ static struct se_subsystem_api iblock_template = {
 	.get_device_type	= sbc_get_device_type,
 	.get_blocks		= iblock_get_blocks,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.get_alignment_offset_lbas = iblock_get_alignment_offset_lbas,
 	.get_lbppbe		= iblock_get_lbppbe,
 	.get_io_min		= iblock_get_io_min,
 	.get_io_opt		= iblock_get_io_opt,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.get_write_cache	= iblock_get_write_cache,
 };

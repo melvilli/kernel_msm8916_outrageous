@@ -81,7 +81,11 @@ struct irq_remap_ops {
 
 	/* Setup interrupt remapping for an HPET MSI */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*setup_hpet_msi)(unsigned int, unsigned int);
+=======
+	int (*alloc_hpet_msi)(unsigned int, unsigned int);
+>>>>>>> v3.18
 =======
 	int (*alloc_hpet_msi)(unsigned int, unsigned int);
 >>>>>>> v3.18

@@ -24,7 +24,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	clocks {
 		slow_xtal {
 			clock-frequency = <32768>;
@@ -35,6 +38,9 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ahb {
 		apb {
@@ -42,7 +48,11 @@
 				1wire_cm {
 					pinctrl_1wire_cm: 1wire_cm-0 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 						atmel,pins = <1 18 0x0 0x2>; /* PB18 multidrive, conflicts with led */
+=======
+						atmel,pins = <AT91_PIOB 18 AT91_PERIPH_GPIO AT91_PINCTRL_MULTI_DRIVE>; /* PB18 multidrive, conflicts with led */
+>>>>>>> v3.18
 =======
 						atmel,pins = <AT91_PIOB 18 AT91_PERIPH_GPIO AT91_PINCTRL_MULTI_DRIVE>; /* PB18 multidrive, conflicts with led */
 >>>>>>> v3.18
@@ -93,7 +103,11 @@
 		pb18 {
 			label = "pb18";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 18 1>;
+=======
+			gpios = <&pioB 18 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 18 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -103,7 +117,11 @@
 		pd21 {
 			label = "pd21";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioD 21 0>;
+=======
+			gpios = <&pioD 21 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioD 21 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -113,7 +131,11 @@
 	1wire_cm {
 		compatible = "w1-gpio";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpios = <&pioB 18 0>;
+=======
+		gpios = <&pioB 18 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 		gpios = <&pioB 18 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18

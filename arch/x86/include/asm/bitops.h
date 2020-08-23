@@ -15,7 +15,10 @@
 #include <linux/compiler.h>
 #include <asm/alternative.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <asm/rmwcc.h>
 #include <asm/barrier.h>
 
@@ -26,6 +29,9 @@
 #else
 # error "Unexpected BITS_PER_LONG"
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define BIT_64(n)			(U64_C(1) << (n))
@@ -73,7 +79,11 @@
  */
 static __always_inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 set_bit(unsigned int nr, volatile unsigned long *addr)
+=======
+set_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 =======
 set_bit(long nr, volatile unsigned long *addr)
 >>>>>>> v3.18
@@ -99,7 +109,11 @@ set_bit(long nr, volatile unsigned long *addr)
  * may be that only one operation succeeds.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __set_bit(int nr, volatile unsigned long *addr)
+=======
+static inline void __set_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 =======
 static inline void __set_bit(long nr, volatile unsigned long *addr)
 >>>>>>> v3.18
@@ -115,17 +129,23 @@ static inline void __set_bit(long nr, volatile unsigned long *addr)
  * clear_bit() is atomic and may not be reordered.  However, it does
  * not contain a memory barrier, so if it is used for locking purposes,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * you should call smp_mb__before_clear_bit() and/or smp_mb__after_clear_bit()
  * in order to ensure changes are visible on other processors.
  */
 static __always_inline void
 clear_bit(int nr, volatile unsigned long *addr)
 =======
+=======
+>>>>>>> v3.18
  * you should call smp_mb__before_atomic() and/or smp_mb__after_atomic()
  * in order to ensure changes are visible on other processors.
  */
 static __always_inline void
 clear_bit(long nr, volatile unsigned long *addr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (IS_IMMEDIATE(nr)) {
@@ -148,7 +168,11 @@ clear_bit(long nr, volatile unsigned long *addr)
  * operation. It can be used for an unlock.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void clear_bit_unlock(unsigned nr, volatile unsigned long *addr)
+=======
+static inline void clear_bit_unlock(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 =======
 static inline void clear_bit_unlock(long nr, volatile unsigned long *addr)
 >>>>>>> v3.18
@@ -158,7 +182,11 @@ static inline void clear_bit_unlock(long nr, volatile unsigned long *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __clear_bit(int nr, volatile unsigned long *addr)
+=======
+static inline void __clear_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 =======
 static inline void __clear_bit(long nr, volatile unsigned long *addr)
 >>>>>>> v3.18
@@ -179,7 +207,11 @@ static inline void __clear_bit(long nr, volatile unsigned long *addr)
  * older loads. Same principle as spin_unlock.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __clear_bit_unlock(unsigned nr, volatile unsigned long *addr)
+=======
+static inline void __clear_bit_unlock(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 =======
 static inline void __clear_bit_unlock(long nr, volatile unsigned long *addr)
 >>>>>>> v3.18
@@ -189,9 +221,12 @@ static inline void __clear_bit_unlock(long nr, volatile unsigned long *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smp_mb__before_clear_bit()	barrier()
 #define smp_mb__after_clear_bit()	barrier()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -204,7 +239,11 @@ static inline void __clear_bit_unlock(long nr, volatile unsigned long *addr)
  * may be that only one operation succeeds.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __change_bit(int nr, volatile unsigned long *addr)
+=======
+static inline void __change_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 =======
 static inline void __change_bit(long nr, volatile unsigned long *addr)
 >>>>>>> v3.18
@@ -222,7 +261,11 @@ static inline void __change_bit(long nr, volatile unsigned long *addr)
  * restricted to acting on a single-word quantity.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void change_bit(int nr, volatile unsigned long *addr)
+=======
+static inline void change_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 =======
 static inline void change_bit(long nr, volatile unsigned long *addr)
 >>>>>>> v3.18
@@ -247,6 +290,7 @@ static inline void change_bit(long nr, volatile unsigned long *addr)
  * It also implies a memory barrier.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int test_and_set_bit(int nr, volatile unsigned long *addr)
 {
 	int oldbit;
@@ -255,6 +299,11 @@ static inline int test_and_set_bit(int nr, volatile unsigned long *addr)
 		     "sbb %0,%0" : "=r" (oldbit), ADDR : "Ir" (nr) : "memory");
 
 	return oldbit;
+=======
+static inline int test_and_set_bit(long nr, volatile unsigned long *addr)
+{
+	GEN_BINARY_RMWcc(LOCK_PREFIX "bts", *addr, "Ir", nr, "%0", "c");
+>>>>>>> v3.18
 =======
 static inline int test_and_set_bit(long nr, volatile unsigned long *addr)
 {
@@ -271,7 +320,11 @@ static inline int test_and_set_bit(long nr, volatile unsigned long *addr)
  */
 static __always_inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 test_and_set_bit_lock(int nr, volatile unsigned long *addr)
+=======
+test_and_set_bit_lock(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 =======
 test_and_set_bit_lock(long nr, volatile unsigned long *addr)
 >>>>>>> v3.18
@@ -289,7 +342,11 @@ test_and_set_bit_lock(long nr, volatile unsigned long *addr)
  * but actually fail.  You must protect multiple accesses with a lock.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __test_and_set_bit(int nr, volatile unsigned long *addr)
+=======
+static inline int __test_and_set_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 =======
 static inline int __test_and_set_bit(long nr, volatile unsigned long *addr)
 >>>>>>> v3.18
@@ -312,6 +369,7 @@ static inline int __test_and_set_bit(long nr, volatile unsigned long *addr)
  * It also implies a memory barrier.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int test_and_clear_bit(int nr, volatile unsigned long *addr)
 {
 	int oldbit;
@@ -321,6 +379,11 @@ static inline int test_and_clear_bit(int nr, volatile unsigned long *addr)
 		     : "=r" (oldbit), ADDR : "Ir" (nr) : "memory");
 
 	return oldbit;
+=======
+static inline int test_and_clear_bit(long nr, volatile unsigned long *addr)
+{
+	GEN_BINARY_RMWcc(LOCK_PREFIX "btr", *addr, "Ir", nr, "%0", "c");
+>>>>>>> v3.18
 =======
 static inline int test_and_clear_bit(long nr, volatile unsigned long *addr)
 {
@@ -345,7 +408,11 @@ static inline int test_and_clear_bit(long nr, volatile unsigned long *addr)
  * this without also updating arch/x86/kernel/kvm.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __test_and_clear_bit(int nr, volatile unsigned long *addr)
+=======
+static inline int __test_and_clear_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 =======
 static inline int __test_and_clear_bit(long nr, volatile unsigned long *addr)
 >>>>>>> v3.18
@@ -361,7 +428,11 @@ static inline int __test_and_clear_bit(long nr, volatile unsigned long *addr)
 
 /* WARNING: non atomic and it can be reordered! */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __test_and_change_bit(int nr, volatile unsigned long *addr)
+=======
+static inline int __test_and_change_bit(long nr, volatile unsigned long *addr)
+>>>>>>> v3.18
 =======
 static inline int __test_and_change_bit(long nr, volatile unsigned long *addr)
 >>>>>>> v3.18
@@ -385,6 +456,7 @@ static inline int __test_and_change_bit(long nr, volatile unsigned long *addr)
  * It also implies a memory barrier.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int test_and_change_bit(int nr, volatile unsigned long *addr)
 {
 	int oldbit;
@@ -404,6 +476,8 @@ static __always_inline int constant_test_bit(unsigned int nr, const volatile uns
 
 static inline int variable_test_bit(int nr, volatile const unsigned long *addr)
 =======
+=======
+>>>>>>> v3.18
 static inline int test_and_change_bit(long nr, volatile unsigned long *addr)
 {
 	GEN_BINARY_RMWcc(LOCK_PREFIX "btc", *addr, "Ir", nr, "%0", "c");
@@ -416,6 +490,9 @@ static __always_inline int constant_test_bit(long nr, const volatile unsigned lo
 }
 
 static inline int variable_test_bit(long nr, volatile const unsigned long *addr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int oldbit;
@@ -603,8 +680,11 @@ static __always_inline int fls64(__u64 x)
 #include <asm-generic/bitops/sched.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARCH_HAS_FAST_MULTIPLIER 1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/arch_hweight.h>

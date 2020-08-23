@@ -76,7 +76,11 @@ tsb_miss_page_table_walk:
 	andn		%g5, 0x7, %g5
 	sllx		%g7, %g6, %g7
 <<<<<<< HEAD
+<<<<<<< HEAD
 	srlx		%g4, HPAGE_SHIFT, %g6
+=======
+	srlx		%g4, REAL_HPAGE_SHIFT, %g6
+>>>>>>> v3.18
 =======
 	srlx		%g4, REAL_HPAGE_SHIFT, %g6
 >>>>>>> v3.18
@@ -167,15 +171,21 @@ tsb_miss_page_table_walk_sun4v_fastpath:
 	.previous
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdpr	%tl, %g3
 	cmp	%g3, 1
 	bne,pn	%xcc, winfix_trampoline
 	 nop
 =======
+=======
+>>>>>>> v3.18
 	rdpr	%tl, %g7
 	cmp	%g7, 1
 	bne,pn	%xcc, winfix_trampoline
 	 mov	%g3, %g4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ba,pt	%xcc, etrap
 	 rd	%pc, %g7

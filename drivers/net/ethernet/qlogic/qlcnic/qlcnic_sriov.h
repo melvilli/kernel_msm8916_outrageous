@@ -53,6 +53,10 @@ enum qlcnic_bc_commands {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLCNIC_83XX_SRIOV_VF_MAX_MAC 2
+>>>>>>> v3.18
 =======
 #define QLCNIC_83XX_SRIOV_VF_MAX_MAC 2
 >>>>>>> v3.18
@@ -131,14 +135,20 @@ struct qlcnic_vport {
 	u16			max_tx_bw;
 	u16			min_tx_bw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8			vlan_mode;
 	u16			vlan;
 	u8			qos;
 =======
+=======
+>>>>>>> v3.18
 	u16			pvid;
 	u8			vlan_mode;
 	u8			qos;
 	bool			spoofchk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8			mac[6];
 };
@@ -148,6 +158,11 @@ struct qlcnic_vf_info {
 	u16				rx_ctx_id;
 	u16				tx_ctx_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16				*sriov_vlans;
+	int				num_vlan;
+>>>>>>> v3.18
 =======
 	u16				*sriov_vlans;
 	int				num_vlan;
@@ -165,6 +180,10 @@ struct qlcnic_vf_info {
 	struct qlcnic_adapter		*adapter;
 	struct qlcnic_vport		*vp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t			vlan_list_lock;	/* Lock for VLAN list */
+>>>>>>> v3.18
 =======
 	spinlock_t			vlan_list_lock;	/* Lock for VLAN list */
 >>>>>>> v3.18
@@ -175,6 +194,10 @@ struct qlcnic_async_work_list {
 	struct work_struct	work;
 	void			*ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct qlcnic_cmd_args	*cmd;
+>>>>>>> v3.18
 =======
 	struct qlcnic_cmd_args	*cmd;
 >>>>>>> v3.18
@@ -209,7 +232,10 @@ int qlcnic_sriov_vf_init(struct qlcnic_adapter *, int);
 void qlcnic_sriov_vf_set_ops(struct qlcnic_adapter *);
 int qlcnic_sriov_func_to_index(struct qlcnic_adapter *, u8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_sriov_channel_cfg_cmd(struct qlcnic_adapter *, u8);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void qlcnic_sriov_handle_bc_event(struct qlcnic_adapter *, u32);
@@ -222,7 +248,10 @@ int qlcnic_sriov_get_vf_vport_info(struct qlcnic_adapter *,
 				   struct qlcnic_info *, u16);
 int qlcnic_sriov_cfg_vf_guest_vlan(struct qlcnic_adapter *, u16, u8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void qlcnic_sriov_free_vlans(struct qlcnic_adapter *);
 void qlcnic_sriov_alloc_vlans(struct qlcnic_adapter *);
 bool qlcnic_sriov_check_any_vlan(struct qlcnic_vf_info *);
@@ -230,6 +259,9 @@ void qlcnic_sriov_del_vlan_id(struct qlcnic_sriov *,
 			      struct qlcnic_vf_info *, u16);
 void qlcnic_sriov_add_vlan_id(struct qlcnic_sriov *,
 			      struct qlcnic_vf_info *, u16);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline bool qlcnic_sriov_enable_check(struct qlcnic_adapter *adapter)
@@ -259,16 +291,22 @@ void qlcnic_sriov_pf_reset(struct qlcnic_adapter *);
 int qlcnic_sriov_pf_reinit(struct qlcnic_adapter *);
 int qlcnic_sriov_set_vf_mac(struct net_device *, int, u8 *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_sriov_set_vf_tx_rate(struct net_device *, int, int);
 int qlcnic_sriov_get_vf_config(struct net_device *, int ,
 			       struct ifla_vf_info *);
 int qlcnic_sriov_set_vf_vlan(struct net_device *, int, u16, u8);
 =======
+=======
+>>>>>>> v3.18
 int qlcnic_sriov_set_vf_tx_rate(struct net_device *, int, int, int);
 int qlcnic_sriov_get_vf_config(struct net_device *, int ,
 			       struct ifla_vf_info *);
 int qlcnic_sriov_set_vf_vlan(struct net_device *, int, u16, u8);
 int qlcnic_sriov_set_vf_spoofchk(struct net_device *, int, bool);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline void qlcnic_sriov_pf_disable(struct qlcnic_adapter *adapter) {}

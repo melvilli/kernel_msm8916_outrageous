@@ -19,7 +19,10 @@
  */
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irqchip.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -27,12 +30,15 @@
 #include <linux/platform_data/irq-renesas-irqc.h>
 #include <linux/serial_sci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/common.h>
 #include <mach/irqs.h>
 #include <mach/r8a73a4.h>
 #include <asm/mach/arch.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/sh_dma.h>
 #include <linux/sh_timer.h>
 
@@ -43,6 +49,9 @@
 #include "irqs.h"
 #include "r8a73a4.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct resource pfc_resources[] = {
 	DEFINE_RES_MEM(0xe6050000, 0x9000),
@@ -54,6 +63,7 @@ void __init r8a73a4_pinmux_init(void)
 					ARRAY_SIZE(pfc_resources));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SCIF_COMMON(scif_type, baseaddr, irq)			\
 	.type		= scif_type,				\
@@ -91,6 +101,8 @@ static inline void r8a73a4_register_scif(int idx)
 				      sizeof(struct plat_sci_port));
 }
 =======
+=======
+>>>>>>> v3.18
 #define R8A73A4_SCIF(scif_type, _scscr, index, baseaddr, irq)	\
 static struct plat_sci_port scif##index##_platform_data = {	\
 	.type		= scif_type,				\
@@ -124,6 +136,9 @@ R8A73A4_SCIFB(5, 0xe6cf0000, gic_spi(151)); /* SCIFB3 */
 					  ARRAY_SIZE(scif##index##_resources), \
 					  &scif##index##_platform_data,	       \
 					  sizeof(scif##index##_platform_data))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct renesas_irqc_config irqc0_data = {
@@ -202,7 +217,11 @@ static const struct resource irqc1_resources[] = {
 
 #define r8a73a4_register_irqc(idx)					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_register_resndata(&platform_bus, "renesas_irqc", \
+=======
+	platform_device_register_resndata(NULL, "renesas_irqc", 	\
+>>>>>>> v3.18
 =======
 	platform_device_register_resndata(NULL, "renesas_irqc", 	\
 >>>>>>> v3.18
@@ -226,6 +245,7 @@ static const struct resource thermal0_resources[] = {
 					ARRAY_SIZE(thermal0_resources))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init r8a73a4_add_standard_devices(void)
 {
 	r8a73a4_register_scif(SCIFA0);
@@ -245,6 +265,8 @@ void __init r8a73a4_add_standard_devices_dt(void)
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
 }
 =======
+=======
+>>>>>>> v3.18
 static struct sh_timer_config cmt1_platform_data = {
 	.channels_mask = 0xff,
 };
@@ -370,6 +392,9 @@ void __init r8a73a4_add_standard_devices(void)
 }
 
 #ifdef CONFIG_USE_OF
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char *r8a73a4_boards_compat_dt[] __initdata = {
@@ -379,9 +404,14 @@ static const char *r8a73a4_boards_compat_dt[] __initdata = {
 
 DT_MACHINE_START(R8A73A4_DT, "Generic R8A73A4 (Flattened Device Tree)")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	= irqchip_init,
 	.init_machine	= r8a73a4_add_standard_devices_dt,
 	.init_time	= shmobile_timer_init,
+=======
+	.init_early	= shmobile_init_delay,
+	.init_late	= shmobile_init_late,
+>>>>>>> v3.18
 =======
 	.init_early	= shmobile_init_delay,
 	.init_late	= shmobile_init_late,

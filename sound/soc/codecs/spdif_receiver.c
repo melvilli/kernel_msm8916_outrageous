@@ -22,6 +22,7 @@
 #include <sound/pcm.h>
 #include <sound/initval.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define STUB_RATES	SNDRV_PCM_RATE_8000_192000
 #define STUB_FORMATS	(SNDRV_PCM_FMTBIT_S16_LE | \
@@ -29,6 +30,8 @@
 
 static struct snd_soc_codec_driver soc_codec_spdif_dir;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 
 static const struct snd_soc_dapm_widget dir_widgets[] = {
@@ -51,6 +54,9 @@ static struct snd_soc_codec_driver soc_codec_spdif_dir = {
 	.dapm_routes = dir_routes,
 	.num_dapm_routes = ARRAY_SIZE(dir_routes),
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct snd_soc_dai_driver dir_stub_dai = {
@@ -77,7 +83,10 @@ static int spdif_dir_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id spdif_dir_dt_ids[] = {
 	{ .compatible = "linux,spdif-dir", },
@@ -86,6 +95,9 @@ static const struct of_device_id spdif_dir_dt_ids[] = {
 MODULE_DEVICE_TABLE(of, spdif_dir_dt_ids);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver spdif_dir_driver = {
 	.probe		= spdif_dir_probe,
@@ -94,6 +106,10 @@ static struct platform_driver spdif_dir_driver = {
 		.name	= "spdif-dir",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(spdif_dir_dt_ids),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(spdif_dir_dt_ids),
 >>>>>>> v3.18

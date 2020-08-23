@@ -31,7 +31,11 @@ void sk_stream_write_space(struct sock *sk)
 	struct socket_wq *wq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sk_stream_wspace(sk) >= sk_stream_min_wspace(sk) && sock) {
+=======
+	if (sk_stream_is_writeable(sk) && sock) {
+>>>>>>> v3.18
 =======
 	if (sk_stream_is_writeable(sk) && sock) {
 >>>>>>> v3.18
@@ -127,7 +131,11 @@ int sk_stream_wait_memory(struct sock *sk, long *timeo_p)
 
 	if (sk_stream_memory_free(sk))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		current_timeo = vm_wait = (net_random() % (HZ / 5)) + 2;
+=======
+		current_timeo = vm_wait = (prandom_u32() % (HZ / 5)) + 2;
+>>>>>>> v3.18
 =======
 		current_timeo = vm_wait = (prandom_u32() % (HZ / 5)) + 2;
 >>>>>>> v3.18

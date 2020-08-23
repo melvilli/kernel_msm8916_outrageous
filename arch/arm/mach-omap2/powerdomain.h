@@ -22,8 +22,11 @@
 #include <linux/spinlock.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "voltage.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Powerdomain basic power states */
@@ -45,6 +48,10 @@
 #define PWRSTS_RET_ON		(PWRSTS_RET | PWRSTS_ON)
 #define PWRSTS_OFF_RET_ON	(PWRSTS_OFF_RET | PWRSTS_ON)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PWRSTS_INA_ON		(PWRSTS_INACTIVE | PWRSTS_ON)
+>>>>>>> v3.18
 =======
 #define PWRSTS_INA_ON		(PWRSTS_INACTIVE | PWRSTS_ON)
 >>>>>>> v3.18
@@ -83,6 +90,10 @@
 struct clockdomain;
 struct powerdomain;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct voltagedomain;
+>>>>>>> v3.18
 =======
 struct voltagedomain;
 >>>>>>> v3.18
@@ -178,6 +189,10 @@ struct powerdomain {
  * @pwrdm_set_lowpwrstchange: Enable pd transitions from a shallow to deep sleep
  * @pwrdm_wait_transition: Wait for a pd state transition to complete
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @pwrdm_has_voltdm: Check if a voltdm association is needed
+>>>>>>> v3.18
 =======
  * @pwrdm_has_voltdm: Check if a voltdm association is needed
 >>>>>>> v3.18
@@ -212,6 +227,10 @@ struct pwrdm_ops {
 	int	(*pwrdm_set_lowpwrstchange)(struct powerdomain *pwrdm);
 	int	(*pwrdm_wait_transition)(struct powerdomain *pwrdm);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int	(*pwrdm_has_voltdm)(void);
+>>>>>>> v3.18
 =======
 	int	(*pwrdm_has_voltdm)(void);
 >>>>>>> v3.18
@@ -238,6 +257,12 @@ struct voltagedomain *pwrdm_get_voltdm(struct powerdomain *pwrdm);
 int pwrdm_get_mem_bank_count(struct powerdomain *pwrdm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+u8 pwrdm_get_valid_lp_state(struct powerdomain *pwrdm,
+			    bool is_logic_state, u8 req_state);
+
+>>>>>>> v3.18
 =======
 u8 pwrdm_get_valid_lp_state(struct powerdomain *pwrdm,
 			    bool is_logic_state, u8 req_state);
@@ -279,6 +304,12 @@ extern void omap3xxx_powerdomains_init(void);
 extern void am33xx_powerdomains_init(void);
 extern void omap44xx_powerdomains_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void omap54xx_powerdomains_init(void);
+extern void dra7xx_powerdomains_init(void);
+void am43xx_powerdomains_init(void);
+>>>>>>> v3.18
 =======
 extern void omap54xx_powerdomains_init(void);
 extern void dra7xx_powerdomains_init(void);

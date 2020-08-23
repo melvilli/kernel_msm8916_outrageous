@@ -282,7 +282,10 @@ enum vnic_devcmd_cmd {
 	CMD_CONFIG_INFO_GET     = _CMDC(_CMD_DIR_RW, _CMD_VTYPE_ALL, 44),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* INT13 API: (u64)a0=paddr to vnic_int13_params struct
 	 *            (u32)a1=INT13_CMD_xxx
 	 */
@@ -296,13 +299,21 @@ enum vnic_devcmd_cmd {
 	 */
 	CMD_SET_DEFAULT_VLAN = _CMDC(_CMD_DIR_RW, _CMD_VTYPE_ALL, 46),
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* init_prov_info2:
 	 * Variant of CMD_INIT_PROV_INFO, where it will not try to enable
 	 * the vnic until CMD_ENABLE2 is issued.
 	 *     (u64)a0=paddr of vnic_devcmd_provinfo
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *     (u32)a1=sizeof provision info */
+=======
+	 *     (u32)a1=sizeof provision info
+	 */
+>>>>>>> v3.18
 =======
 	 *     (u32)a1=sizeof provision info
 	 */
@@ -361,6 +372,7 @@ enum vnic_devcmd_cmd {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * cmd_set_mac_addr
 	 *	set mac address
 	 * in:
@@ -372,6 +384,8 @@ enum vnic_devcmd_cmd {
 
 /* CMD_ENABLE2 flags */
 =======
+=======
+>>>>>>> v3.18
 	 * Set the predefined mac address as default
 	 * in:
 	 *   (u48)a0 = mac addr
@@ -423,6 +437,9 @@ enum vnic_devcmd_cmd {
 
 /* CMD_ENABLE2 flags */
 #define CMD_ENABLE2_STANDBY 0x0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CMD_ENABLE2_ACTIVE  0x1
 
@@ -440,6 +457,12 @@ enum vnic_devcmd_cmd {
 #define CMD_PFILTER_ALL_MULTICAST	0x10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Commands for CMD_QP_ENABLE/CM_QP_DISABLE */
+#define CMD_QP_RQWQ                     0x0
+
+>>>>>>> v3.18
 =======
 /* Commands for CMD_QP_ENABLE/CM_QP_DISABLE */
 #define CMD_QP_RQWQ                     0x0
@@ -472,6 +495,10 @@ enum vnic_devcmd_error {
 	ERR_ENOTSUPPORTED = 11,
 	ERR_EINPROGRESS = 12,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ERR_MAX
+>>>>>>> v3.18
 =======
 	ERR_MAX
 >>>>>>> v3.18
@@ -521,7 +548,10 @@ struct vnic_devcmd_provinfo {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* These are used in flags field of different filters to denote
  * valid fields used.
  */
@@ -636,6 +666,9 @@ enum {
 	CLSF_DEL = 1,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Writing cmd register causes STAT_BUSY to get set in status register.

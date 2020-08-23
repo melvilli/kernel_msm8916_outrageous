@@ -108,8 +108,13 @@ struct	pwrctrl_priv {
 	uint bSleep; /* sleep -> active is different from active -> sleep. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_workitem SetPSModeWorkItem;
 	_workitem rpwm_workitem;
+=======
+	struct work_struct SetPSModeWorkItem;
+	struct work_struct rpwm_workitem;
+>>>>>>> v3.18
 =======
 	struct work_struct SetPSModeWorkItem;
 	struct work_struct rpwm_workitem;

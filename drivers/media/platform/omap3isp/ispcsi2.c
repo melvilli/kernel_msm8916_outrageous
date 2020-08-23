@@ -13,6 +13,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,6 +24,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -577,7 +580,11 @@ static int csi2_configure(struct isp_csi2_device *csi2)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pad = media_entity_remote_source(&csi2->pads[CSI2_PAD_SINK]);
+=======
+	pad = media_entity_remote_pad(&csi2->pads[CSI2_PAD_SINK]);
+>>>>>>> v3.18
 =======
 	pad = media_entity_remote_pad(&csi2->pads[CSI2_PAD_SINK]);
 >>>>>>> v3.18
@@ -703,7 +710,11 @@ static void csi2_isr_buffer(struct isp_csi2_device *csi2)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	csi2_set_outaddr(csi2, buffer->isp_addr);
+=======
+	csi2_set_outaddr(csi2, buffer->dma);
+>>>>>>> v3.18
 =======
 	csi2_set_outaddr(csi2, buffer->dma);
 >>>>>>> v3.18
@@ -824,7 +835,11 @@ static int csi2_queue(struct isp_video *video, struct isp_buffer *buffer)
 	struct isp_csi2_device *csi2 = &isp->isp_csi2a;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	csi2_set_outaddr(csi2, buffer->isp_addr);
+=======
+	csi2_set_outaddr(csi2, buffer->dma);
+>>>>>>> v3.18
 =======
 	csi2_set_outaddr(csi2, buffer->dma);
 >>>>>>> v3.18
@@ -1261,7 +1276,12 @@ static int csi2_init_entities(struct isp_csi2_device *csi2)
 
 	pads[CSI2_PAD_SOURCE].flags = MEDIA_PAD_FL_SOURCE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pads[CSI2_PAD_SINK].flags = MEDIA_PAD_FL_SINK;
+=======
+	pads[CSI2_PAD_SINK].flags = MEDIA_PAD_FL_SINK
+				    | MEDIA_PAD_FL_MUST_CONNECT;
+>>>>>>> v3.18
 =======
 	pads[CSI2_PAD_SINK].flags = MEDIA_PAD_FL_SINK
 				    | MEDIA_PAD_FL_MUST_CONNECT;

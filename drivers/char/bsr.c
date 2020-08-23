@@ -22,6 +22,10 @@
 #include <linux/kernel.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -100,6 +104,10 @@ bsr_size_show(struct device *dev, struct device_attribute *attr, char *buf)
 	return sprintf(buf, "%u\n", bsr_dev->bsr_bytes);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(bsr_size);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(bsr_size);
 >>>>>>> v3.18
@@ -111,19 +119,26 @@ bsr_stride_show(struct device *dev, struct device_attribute *attr, char *buf)
 	return sprintf(buf, "%u\n", bsr_dev->bsr_stride);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t
 bsr_len_show(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(bsr_stride);
 
 static ssize_t
 bsr_length_show(struct device *dev, struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct bsr_dev *bsr_dev = dev_get_drvdata(dev);
 	return sprintf(buf, "%llu\n", bsr_dev->bsr_len);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static struct device_attribute bsr_dev_attrs[] = {
@@ -133,6 +148,8 @@ static struct device_attribute bsr_dev_attrs[] = {
 	__ATTR_NULL
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(bsr_length);
 
 static struct attribute *bsr_dev_attrs[] = {
@@ -142,6 +159,9 @@ static struct attribute *bsr_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(bsr_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int bsr_mmap(struct file *filp, struct vm_area_struct *vma)
@@ -282,7 +302,11 @@ static int bsr_add_node(struct device_node *bn)
 
 		cur->bsr_device = device_create(bsr_class, NULL, cur->bsr_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						cur, cur->bsr_name);
+=======
+						cur, "%s", cur->bsr_name);
+>>>>>>> v3.18
 =======
 						cur, "%s", cur->bsr_name);
 >>>>>>> v3.18
@@ -340,7 +364,11 @@ static int __init bsr_init(void)
 		goto out_err_1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bsr_class->dev_attrs = bsr_dev_attrs;
+=======
+	bsr_class->dev_groups = bsr_dev_groups;
+>>>>>>> v3.18
 =======
 	bsr_class->dev_groups = bsr_dev_groups;
 >>>>>>> v3.18

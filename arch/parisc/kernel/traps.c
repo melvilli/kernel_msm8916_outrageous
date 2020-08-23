@@ -26,6 +26,10 @@
 #include <linux/console.h>
 #include <linux/bug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ratelimit.h>
+>>>>>>> v3.18
 =======
 #include <linux/ratelimit.h>
 >>>>>>> v3.18
@@ -47,9 +51,12 @@
 #include "../math-emu/math-emu.h"	/* for handle_fpe() */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PRINT_USER_FAULTS /* (turn this on if you want user faults to be */
 			  /*  dumped to the console via printk)          */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if defined(CONFIG_SMP) || defined(CONFIG_DEBUG_SPINLOCK)
@@ -168,7 +175,10 @@ void show_regs(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_RATELIMIT_STATE(_hppa_rs,
 	DEFAULT_RATELIMIT_INTERVAL, DEFAULT_RATELIMIT_BURST);
 
@@ -180,6 +190,9 @@ static DEFINE_RATELIMIT_STATE(_hppa_rs,
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void do_show_stack(struct unwind_frame_info *info)
 {
@@ -251,6 +264,7 @@ void die_if_kernel(char *str, struct pt_regs *regs, long err)
 			return; /* STFU */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_CRIT "%s (pid %d): %s (code %ld) at " RFMT "\n",
 			current->comm, task_pid_nr(current), str, err, regs->iaoq[0]);
 #ifdef PRINT_USER_FAULTS
@@ -258,10 +272,15 @@ void die_if_kernel(char *str, struct pt_regs *regs, long err)
 		show_regs(regs);
 #endif
 =======
+=======
+>>>>>>> v3.18
 		parisc_printk_ratelimited(1, regs,
 			KERN_CRIT "%s (pid %d): %s (code %ld) at " RFMT "\n",
 			current->comm, task_pid_nr(current), str, err, regs->iaoq[0]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -320,11 +339,14 @@ void die_if_kernel(char *str, struct pt_regs *regs, long err)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int syscall_ipi(int (*syscall) (struct pt_regs *), struct pt_regs *regs)
 {
 	return syscall(regs);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* gdb uses break 4,8 */
@@ -358,6 +380,7 @@ static void handle_break(struct pt_regs *regs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef PRINT_USER_FAULTS
 	if (unlikely(iir != GDB_BREAK_INSN)) {
 		printk(KERN_DEBUG "break %d,%d: pid=%d command='%s'\n",
@@ -367,11 +390,16 @@ static void handle_break(struct pt_regs *regs)
 	}
 #endif
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(iir != GDB_BREAK_INSN))
 		parisc_printk_ratelimited(0, regs,
 			KERN_DEBUG "break %d,%d: pid=%d command='%s'\n",
 			iir & 31, (iir>>13) & ((1<<13)-1),
 			task_pid_nr(current), current->comm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* send standard GDB signal */
@@ -803,11 +831,17 @@ void notrace handle_interruption(int code, struct pt_regs *regs)
 	default:
 		if (user_mode(regs)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef PRINT_USER_FAULTS
 			printk(KERN_DEBUG "\nhandle_interruption() pid=%d command='%s'\n",
 			    task_pid_nr(current), current->comm);
 			show_regs(regs);
 #endif
+=======
+			parisc_printk_ratelimited(0, regs, KERN_DEBUG
+				"handle_interruption() pid=%d command='%s'\n",
+				task_pid_nr(current), current->comm);
+>>>>>>> v3.18
 =======
 			parisc_printk_ratelimited(0, regs, KERN_DEBUG
 				"handle_interruption() pid=%d command='%s'\n",
@@ -830,6 +864,7 @@ void notrace handle_interruption(int code, struct pt_regs *regs)
 	if (user_mode(regs)) {
 	    if ((fault_space >> SPACEID_SHIFT) != (regs->sr[7] >> SPACEID_SHIFT)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef PRINT_USER_FAULTS
 		if (fault_space == 0)
 			printk(KERN_DEBUG "User Fault on Kernel Space ");
@@ -841,10 +876,15 @@ void notrace handle_interruption(int code, struct pt_regs *regs)
 		show_regs(regs);
 #endif
 =======
+=======
+>>>>>>> v3.18
 		parisc_printk_ratelimited(0, regs, KERN_DEBUG
 				"User fault %d on space 0x%08lx, pid=%d command='%s'\n",
 				code, fault_space,
 				task_pid_nr(current), current->comm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		si.si_signo = SIGSEGV;
 		si.si_errno = 0;
@@ -864,9 +904,12 @@ void notrace handle_interruption(int code, struct pt_regs *regs)
 	    if (fault_space == 0 && !in_atomic())
 	    {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Clean up and return if in exception table. */
 		if (fixup_exception(regs))
 			return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		pdc_chassis_send_status(PDC_CHASSIS_DIRECT_PANIC);

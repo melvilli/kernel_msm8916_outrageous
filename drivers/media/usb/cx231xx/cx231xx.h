@@ -73,6 +73,12 @@
 #define CX231XX_BOARD_ELGATO_VIDEO_CAPTURE_V2 16
 #define CX231XX_BOARD_OTG102 17
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CX231XX_BOARD_KWORLD_UB445_USB_HYBRID 18
+#define CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx 19
+#define CX231XX_BOARD_HAUPPAUGE_930C_HD_1114xx 20
+>>>>>>> v3.18
 =======
 #define CX231XX_BOARD_KWORLD_UB445_USB_HYBRID 18
 #define CX231XX_BOARD_HAUPPAUGE_930C_HD_1113xx 19
@@ -952,7 +958,11 @@ int cx231xx_enum_input(struct file *file, void *priv,
 int cx231xx_g_input(struct file *file, void *priv, unsigned int *i);
 int cx231xx_s_input(struct file *file, void *priv, unsigned int i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cx231xx_g_chip_ident(struct file *file, void *fh, struct v4l2_dbg_chip_ident *chip);
+=======
+int cx231xx_g_chip_info(struct file *file, void *fh, struct v4l2_dbg_chip_info *chip);
+>>>>>>> v3.18
 =======
 int cx231xx_g_chip_info(struct file *file, void *fh, struct v4l2_dbg_chip_info *chip);
 >>>>>>> v3.18

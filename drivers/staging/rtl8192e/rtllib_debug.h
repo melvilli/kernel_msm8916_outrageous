@@ -3,7 +3,11 @@
  *
  * Based on the r8180 driver, which is:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2004-2005 Andrea Merello <andreamrl@tiscali.it>, et al.
+=======
+ * Copyright 2004-2005 Andrea Merello <andrea.merello@gmail.com>, et al.
+>>>>>>> v3.18
 =======
  * Copyright 2004-2005 Andrea Merello <andrea.merello@gmail.com>, et al.
 >>>>>>> v3.18
@@ -80,6 +84,7 @@ do {			\
 		printk(KERN_DEBUG DRV_NAME ":" x "\n" , \
 		       ##args);\
 <<<<<<< HEAD
+<<<<<<< HEAD
 } while (0);
 
 #define assert(expr) \
@@ -88,6 +93,8 @@ do {			\
 		#expr, __FILE__, __func__, __LINE__);	  \
 	}
 =======
+=======
+>>>>>>> v3.18
 } while (0)
 
 #define assert(expr) \
@@ -97,6 +104,9 @@ do {	\
 		#expr, __FILE__, __func__, __LINE__);	  \
 	}	\
 } while (0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

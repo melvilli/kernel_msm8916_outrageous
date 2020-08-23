@@ -54,8 +54,12 @@ static void print_prot(struct seq_file *m, unsigned int pr, int level)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(m, "%s", pr & _PAGE_RO ? "RO " : "RW ");
 	seq_printf(m, "%s", pr & _PAGE_CO ? "CO " : "   ");
+=======
+	seq_printf(m, "%s", pr & _PAGE_PROTECT ? "RO " : "RW ");
+>>>>>>> v3.18
 =======
 	seq_printf(m, "%s", pr & _PAGE_PROTECT ? "RO " : "RW ");
 >>>>>>> v3.18
@@ -110,6 +114,7 @@ static void note_page(struct seq_file *m, struct pg_state *st,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The actual page table walker functions. In order to keep the implementation
  * of print_prot() short, we only check and pass _PAGE_INVALID and _PAGE_RO
  * flags to note_page() if a region, segment or page table entry is invalid or
@@ -117,12 +122,17 @@ static void note_page(struct seq_file *m, struct pg_state *st,
  * After all it's just a hint that the current level being walked contains an
  * invalid or read-only entry.
 =======
+=======
+>>>>>>> v3.18
  * The actual page table walker functions. In order to keep the
  * implementation of print_prot() short, we only check and pass
  * _PAGE_INVALID and _PAGE_PROTECT flags to note_page() if a region,
  * segment or page table entry is invalid or read-only.
  * After all it's just a hint that the current level being walked
  * contains an invalid or read-only entry.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static void walk_pte_level(struct seq_file *m, struct pg_state *st,
@@ -136,7 +146,11 @@ static void walk_pte_level(struct seq_file *m, struct pg_state *st,
 		st->current_address = addr;
 		pte = pte_offset_kernel(pmd, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prot = pte_val(*pte) & (_PAGE_RO | _PAGE_INVALID);
+=======
+		prot = pte_val(*pte) & (_PAGE_PROTECT | _PAGE_INVALID);
+>>>>>>> v3.18
 =======
 		prot = pte_val(*pte) & (_PAGE_PROTECT | _PAGE_INVALID);
 >>>>>>> v3.18
@@ -147,7 +161,11 @@ static void walk_pte_level(struct seq_file *m, struct pg_state *st,
 
 #ifdef CONFIG_64BIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PMD_PROT_MASK (_SEGMENT_ENTRY_RO | _SEGMENT_ENTRY_CO)
+=======
+#define _PMD_PROT_MASK _SEGMENT_ENTRY_PROTECT
+>>>>>>> v3.18
 =======
 #define _PMD_PROT_MASK _SEGMENT_ENTRY_PROTECT
 >>>>>>> v3.18
@@ -179,7 +197,11 @@ static void walk_pmd_level(struct seq_file *m, struct pg_state *st,
 
 #ifdef CONFIG_64BIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PUD_PROT_MASK (_REGION3_ENTRY_RO | _REGION3_ENTRY_CO)
+=======
+#define _PUD_PROT_MASK _REGION3_ENTRY_RO
+>>>>>>> v3.18
 =======
 #define _PUD_PROT_MASK _REGION3_ENTRY_RO
 >>>>>>> v3.18

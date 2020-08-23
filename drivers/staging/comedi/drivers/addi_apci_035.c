@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -22,7 +26,11 @@ static const struct addi_board apci035_boardtypes[] = {
 		.i_IorangeBase1		= APCI035_ADDRESS_RANGE,
 		.i_PCIEeprom		= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pc_EepromChip		= ADDIDATA_S5920,
+=======
+		.pc_EepromChip		= "S5920",
+>>>>>>> v3.18
 =======
 		.pc_EepromChip		= "S5920",
 >>>>>>> v3.18
@@ -35,6 +43,7 @@ static const struct addi_board apci035_boardtypes[] = {
 		.ui_MinAcquisitiontimeNs = 10000,
 		.ui_MinDelaytimeNs	= 100000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.interrupt		= v_APCI035_Interrupt,
 		.reset			= i_APCI035_Reset,
 		.ai_config		= i_APCI035_ConfigAnalogInput,
@@ -43,6 +52,8 @@ static const struct addi_board apci035_boardtypes[] = {
 		.timer_write		= i_APCI035_StartStopWriteTimerWatchdog,
 		.timer_read		= i_APCI035_ReadTimerWatchdog,
 =======
+=======
+>>>>>>> v3.18
 		.interrupt		= apci035_interrupt,
 		.reset			= apci035_reset,
 		.ai_config		= apci035_ai_config,
@@ -50,6 +61,9 @@ static const struct addi_board apci035_boardtypes[] = {
 		.timer_config		= apci035_timer_config,
 		.timer_write		= apci035_timer_write,
 		.timer_read		= apci035_timer_read,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -76,7 +90,11 @@ static int apci035_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci035_pci_table) = {
+=======
+static const struct pci_device_id apci035_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id apci035_pci_table[] = {
 >>>>>>> v3.18

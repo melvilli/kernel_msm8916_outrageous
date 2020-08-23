@@ -24,7 +24,13 @@
  * iio_simple_dummy_read_event_config() - is event enabled?
  * @indio_dev: the device instance data
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @event_code: event code of the event being queried
+=======
+ * @chan: channel for the event whose state is being queried
+ * @type: type of the event whose state is being queried
+ * @dir: direction of the vent whose state is being queried
+>>>>>>> v3.18
 =======
  * @chan: channel for the event whose state is being queried
  * @type: type of the event whose state is being queried
@@ -36,7 +42,13 @@
  */
 int iio_simple_dummy_read_event_config(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       u64 event_code)
+=======
+				       const struct iio_chan_spec *chan,
+				       enum iio_event_type type,
+				       enum iio_event_direction dir)
+>>>>>>> v3.18
 =======
 				       const struct iio_chan_spec *chan,
 				       enum iio_event_type type,
@@ -52,7 +64,13 @@ int iio_simple_dummy_read_event_config(struct iio_dev *indio_dev,
  * iio_simple_dummy_write_event_config() - set whether event is enabled
  * @indio_dev: the device instance data
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @event_code: event code of event being enabled/disabled
+=======
+ * @chan: channel for the event whose state is being set
+ * @type: type of the event whose state is being set
+ * @dir: direction of the vent whose state is being set
+>>>>>>> v3.18
 =======
  * @chan: channel for the event whose state is being set
  * @type: type of the event whose state is being set
@@ -66,7 +84,13 @@ int iio_simple_dummy_read_event_config(struct iio_dev *indio_dev,
  */
 int iio_simple_dummy_write_event_config(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					u64 event_code,
+=======
+					const struct iio_chan_spec *chan,
+					enum iio_event_type type,
+					enum iio_event_direction dir,
+>>>>>>> v3.18
 =======
 					const struct iio_chan_spec *chan,
 					enum iio_event_type type,
@@ -81,6 +105,7 @@ int iio_simple_dummy_write_event_config(struct iio_dev *indio_dev,
 	 * how this is done when multiple events exist.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (IIO_EVENT_CODE_EXTRACT_CHAN_TYPE(event_code)) {
 	case IIO_VOLTAGE:
 		switch (IIO_EVENT_CODE_EXTRACT_TYPE(event_code)) {
@@ -88,11 +113,16 @@ int iio_simple_dummy_write_event_config(struct iio_dev *indio_dev,
 			if (IIO_EVENT_CODE_EXTRACT_DIR(event_code) ==
 			    IIO_EV_DIR_RISING)
 =======
+=======
+>>>>>>> v3.18
 	switch (chan->type) {
 	case IIO_VOLTAGE:
 		switch (type) {
 		case IIO_EV_TYPE_THRESH:
 			if (dir == IIO_EV_DIR_RISING)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				st->event_en = state;
 			else
@@ -112,12 +142,18 @@ int iio_simple_dummy_write_event_config(struct iio_dev *indio_dev,
  * iio_simple_dummy_read_event_value() - get value associated with event
  * @indio_dev: device instance specific data
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @event_code: event code for the event whose value is being queried
 =======
+=======
+>>>>>>> v3.18
  * @chan: channel for the event whose value is being read
  * @type: type of the event whose value is being read
  * @dir: direction of the vent whose value is being read
  * @info: info type of the event whose value is being read
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @val: value for the event code.
  *
@@ -129,14 +165,20 @@ int iio_simple_dummy_write_event_config(struct iio_dev *indio_dev,
  */
 int iio_simple_dummy_read_event_value(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      u64 event_code,
 				      int *val)
 =======
+=======
+>>>>>>> v3.18
 				      const struct iio_chan_spec *chan,
 				      enum iio_event_type type,
 				      enum iio_event_direction dir,
 					  enum iio_event_info info,
 				      int *val, int *val2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct iio_dummy_state *st = iio_priv(indio_dev);
@@ -144,7 +186,11 @@ int iio_simple_dummy_read_event_value(struct iio_dev *indio_dev,
 	*val = st->event_val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return IIO_VAL_INT;
+>>>>>>> v3.18
 =======
 	return IIO_VAL_INT;
 >>>>>>> v3.18
@@ -154,6 +200,7 @@ int iio_simple_dummy_read_event_value(struct iio_dev *indio_dev,
  * iio_simple_dummy_write_event_value() - set value associate with event
  * @indio_dev: device instance specific data
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @event_code: event code for the event whose value is being set
  * @val: the value to be set.
  */
@@ -161,6 +208,8 @@ int iio_simple_dummy_write_event_value(struct iio_dev *indio_dev,
 				       u64 event_code,
 				       int val)
 =======
+=======
+>>>>>>> v3.18
  * @chan: channel for the event whose value is being set
  * @type: type of the event whose value is being set
  * @dir: direction of the vent whose value is being set
@@ -173,6 +222,9 @@ int iio_simple_dummy_write_event_value(struct iio_dev *indio_dev,
 				       enum iio_event_direction dir,
 					   enum iio_event_info info,
 				       int val, int val2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct iio_dummy_state *st = iio_priv(indio_dev);
@@ -196,6 +248,10 @@ static irqreturn_t iio_simple_dummy_event_handler(int irq, void *private)
 {
 	struct iio_dev *indio_dev = private;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

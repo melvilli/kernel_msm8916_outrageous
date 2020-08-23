@@ -55,6 +55,11 @@
 #define SMB2_NTLMV2_SESSKEY_SIZE (16)
 #define SMB2_HMACSHA256_SIZE (32)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SMB2_CMACAES_SIZE (16)
+#define SMB3_SIGNKEY_SIZE (16)
+>>>>>>> v3.18
 =======
 #define SMB2_CMACAES_SIZE (16)
 #define SMB3_SIGNKEY_SIZE (16)

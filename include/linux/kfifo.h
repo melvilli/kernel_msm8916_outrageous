@@ -2,7 +2,11 @@
  * A generic kernel FIFO implementation
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2009/2010 Stefani Seibold <stefani@seibold.net>
+=======
+ * Copyright (C) 2013 Stefani Seibold <stefani@seibold.net>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013 Stefani Seibold <stefani@seibold.net>
 >>>>>>> v3.18
@@ -72,14 +76,20 @@ struct __kfifo {
 		struct __kfifo	kfifo; \
 		datatype	*type; \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char		(*rectype)[recsize]; \
 		ptrtype		*ptr; \
 		const ptrtype	*ptr_const; \
 =======
+=======
+>>>>>>> v3.18
 		const datatype	*const_type; \
 		char		(*rectype)[recsize]; \
 		ptrtype		*ptr; \
 		ptrtype const	*ptr_const; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -398,6 +408,7 @@ __kfifo_int_must_check_helper( \
 ({ \
 	typeof((fifo) + 1) __tmp = (fifo); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	typeof((val) + 1) __val = (val); \
 	unsigned int __ret; \
 	const size_t __recsize = sizeof(*__tmp->rectype); \
@@ -409,12 +420,17 @@ __kfifo_int_must_check_helper( \
 	if (__recsize) \
 		__ret = __kfifo_in_r(__kfifo, __val, sizeof(*__val), \
 =======
+=======
+>>>>>>> v3.18
 	typeof(*__tmp->const_type) __val = (val); \
 	unsigned int __ret; \
 	size_t __recsize = sizeof(*__tmp->rectype); \
 	struct __kfifo *__kfifo = &__tmp->kfifo; \
 	if (__recsize) \
 		__ret = __kfifo_in_r(__kfifo, &__val, sizeof(__val), \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			__recsize); \
 	else { \
@@ -425,7 +441,11 @@ __kfifo_int_must_check_helper( \
 			(__tmp->buf) \
 			)[__kfifo->in & __tmp->kfifo.mask] = \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				*(typeof(__tmp->type))__val; \
+=======
+				(typeof(*__tmp->type))__val; \
+>>>>>>> v3.18
 =======
 				(typeof(*__tmp->type))__val; \
 >>>>>>> v3.18
@@ -440,7 +460,11 @@ __kfifo_int_must_check_helper( \
  * kfifo_get - get data from the fifo
  * @fifo: address of the fifo to be used
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @val: the var where to store the data to be added
+=======
+ * @val: address where to store the data
+>>>>>>> v3.18
 =======
  * @val: address where to store the data
 >>>>>>> v3.18
@@ -457,6 +481,7 @@ __kfifo_uint_must_check_helper( \
 ({ \
 	typeof((fifo) + 1) __tmp = (fifo); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	typeof((val) + 1) __val = (val); \
 	unsigned int __ret; \
 	const size_t __recsize = sizeof(*__tmp->rectype); \
@@ -464,10 +489,15 @@ __kfifo_uint_must_check_helper( \
 	if (0) \
 		__val = (typeof(__tmp->ptr))0; \
 =======
+=======
+>>>>>>> v3.18
 	typeof(__tmp->ptr) __val = (val); \
 	unsigned int __ret; \
 	const size_t __recsize = sizeof(*__tmp->rectype); \
 	struct __kfifo *__kfifo = &__tmp->kfifo; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (__recsize) \
 		__ret = __kfifo_out_r(__kfifo, __val, sizeof(*__val), \
@@ -492,7 +522,11 @@ __kfifo_uint_must_check_helper( \
  * kfifo_peek - get data from the fifo without removing
  * @fifo: address of the fifo to be used
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @val: the var where to store the data to be added
+=======
+ * @val: address where to store the data
+>>>>>>> v3.18
 =======
  * @val: address where to store the data
 >>>>>>> v3.18
@@ -509,6 +543,7 @@ __kfifo_uint_must_check_helper( \
 ({ \
 	typeof((fifo) + 1) __tmp = (fifo); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	typeof((val) + 1) __val = (val); \
 	unsigned int __ret; \
 	const size_t __recsize = sizeof(*__tmp->rectype); \
@@ -516,10 +551,15 @@ __kfifo_uint_must_check_helper( \
 	if (0) \
 		__val = (typeof(__tmp->ptr))NULL; \
 =======
+=======
+>>>>>>> v3.18
 	typeof(__tmp->ptr) __val = (val); \
 	unsigned int __ret; \
 	const size_t __recsize = sizeof(*__tmp->rectype); \
 	struct __kfifo *__kfifo = &__tmp->kfifo; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (__recsize) \
 		__ret = __kfifo_out_peek_r(__kfifo, __val, sizeof(*__val), \
@@ -555,6 +595,7 @@ __kfifo_uint_must_check_helper( \
 ({ \
 	typeof((fifo) + 1) __tmp = (fifo); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	typeof((buf) + 1) __buf = (buf); \
 	unsigned long __n = (n); \
 	const size_t __recsize = sizeof(*__tmp->rectype); \
@@ -564,10 +605,15 @@ __kfifo_uint_must_check_helper( \
 		__dummy = (typeof(__buf))NULL; \
 	} \
 =======
+=======
+>>>>>>> v3.18
 	typeof(__tmp->ptr_const) __buf = (buf); \
 	unsigned long __n = (n); \
 	const size_t __recsize = sizeof(*__tmp->rectype); \
 	struct __kfifo *__kfifo = &__tmp->kfifo; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	(__recsize) ?\
 	__kfifo_in_r(__kfifo, __buf, __n, __recsize) : \
@@ -615,6 +661,7 @@ __kfifo_uint_must_check_helper( \
 ({ \
 	typeof((fifo) + 1) __tmp = (fifo); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	typeof((buf) + 1) __buf = (buf); \
 	unsigned long __n = (n); \
 	const size_t __recsize = sizeof(*__tmp->rectype); \
@@ -624,10 +671,15 @@ __kfifo_uint_must_check_helper( \
 		__buf = __dummy; \
 	} \
 =======
+=======
+>>>>>>> v3.18
 	typeof(__tmp->ptr) __buf = (buf); \
 	unsigned long __n = (n); \
 	const size_t __recsize = sizeof(*__tmp->rectype); \
 	struct __kfifo *__kfifo = &__tmp->kfifo; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	(__recsize) ?\
 	__kfifo_out_r(__kfifo, __buf, __n, __recsize) : \
@@ -798,7 +850,11 @@ __kfifo_uint_must_check_helper( \
  * kfifo_dma_out_finish - finish a DMA OUT operation
  * @fifo: address of the fifo to be used
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @len: number of bytes transferd
+=======
+ * @len: number of bytes transferred
+>>>>>>> v3.18
 =======
  * @len: number of bytes transferred
 >>>>>>> v3.18
@@ -838,6 +894,7 @@ __kfifo_uint_must_check_helper( \
 ({ \
 	typeof((fifo) + 1) __tmp = (fifo); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	typeof((buf) + 1) __buf = (buf); \
 	unsigned long __n = (n); \
 	const size_t __recsize = sizeof(*__tmp->rectype); \
@@ -847,10 +904,15 @@ __kfifo_uint_must_check_helper( \
 		__buf = __dummy; \
 	} \
 =======
+=======
+>>>>>>> v3.18
 	typeof(__tmp->ptr) __buf = (buf); \
 	unsigned long __n = (n); \
 	const size_t __recsize = sizeof(*__tmp->rectype); \
 	struct __kfifo *__kfifo = &__tmp->kfifo; \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	(__recsize) ? \
 	__kfifo_out_peek_r(__kfifo, __buf, __n, __recsize) : \

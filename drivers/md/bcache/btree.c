@@ -24,12 +24,15 @@
 #include "btree.h"
 #include "debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "request.h"
 
 #include <linux/slab.h>
 #include <linux/bitops.h>
 #include <linux/hash.h>
 =======
+=======
+>>>>>>> v3.18
 #include "extents.h"
 
 #include <linux/slab.h>
@@ -37,6 +40,9 @@
 #include <linux/freezer.h>
 #include <linux/hash.h>
 #include <linux/kthread.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/prefetch.h>
 #include <linux/random.h>
@@ -77,8 +83,11 @@
  * obvious.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Make sure all allocations get charged to the root cgroup
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Plugging?
@@ -87,8 +96,11 @@
  * bucket to the next whole sector
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Also lookup by cgroup in get_open_bucket()
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Superblock needs to be fleshed out for multiple cache devices
@@ -104,6 +116,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char * const op_types[] = {
 	"insert", "replace"
 };
@@ -115,6 +128,8 @@ static const char *op_type(struct btree_op *op)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define MAX_NEED_GC		64
 #define MAX_SAVE_PRIO		72
 
@@ -123,6 +138,7 @@ static const char *op_type(struct btree_op *op)
 #define PTR_HASH(c, k)							\
 	(((k)->ptr[0] >> c->bucket_bits) | PTR_GEN(k, 0))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct workqueue_struct *bch_gc_wq;
 static struct workqueue_struct *btree_io_wq;
@@ -134,6 +150,8 @@ void bch_btree_op_init_stack(struct btree_op *op)
 	op->lock = -1;
 	bch_keylist_init(&op->keys);
 =======
+=======
+>>>>>>> v3.18
 #define insert_lock(s, b)	((b)->level <= (s)->lock)
 
 /*
@@ -212,17 +230,23 @@ static void bch_btree_init_next(struct btree *b)
 		bch_bset_init_next(&b->keys, write_block(b),
 				   bset_magic(&b->c->sb));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /* Btree key manipulation */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bkey_put(struct cache_set *c, struct bkey *k, int level)
 {
 	if ((level && KEY_OFFSET(k)) || !level)
 		__bkey_put(c, k);
 =======
+=======
+>>>>>>> v3.18
 void bkey_put(struct cache_set *c, struct bkey *k)
 {
 	unsigned i;
@@ -230,6 +254,9 @@ void bkey_put(struct cache_set *c, struct bkey *k)
 	for (i = 0; i < KEY_PTRS(k); i++)
 		if (ptr_available(c, k, i))
 			atomic_dec_bug(&PTR_BUCKET(c, k, i)->pin);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -239,7 +266,11 @@ static uint64_t btree_csum_set(struct btree *b, struct bset *i)
 {
 	uint64_t crc = b->key.ptr[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *data = (void *) i + 8, *end = end(i);
+=======
+	void *data = (void *) i + 8, *end = bset_bkey_last(i);
+>>>>>>> v3.18
 =======
 	void *data = (void *) i + 8, *end = bset_bkey_last(i);
 >>>>>>> v3.18
@@ -248,6 +279,7 @@ static uint64_t btree_csum_set(struct btree *b, struct bset *i)
 	return crc ^ 0xffffffffffffffffULL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void btree_bio_endio(struct bio *bio, int error)
 {
@@ -292,6 +324,8 @@ void bch_btree_read_done(struct closure *cl)
 	for (;
 	     b->written < btree_blocks(b) && i->seq == b->sets[0].data->seq;
 =======
+=======
+>>>>>>> v3.18
 void bch_btree_node_read_done(struct btree *b)
 {
 	const char *err = "bad btree header";
@@ -311,6 +345,9 @@ void bch_btree_node_read_done(struct btree *b)
 
 	for (;
 	     b->written < btree_blocks(b) && i->seq == b->keys.set[0].data->seq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	     i = write_block(b)) {
 		err = "unsupported bset version";
@@ -319,18 +356,24 @@ void bch_btree_node_read_done(struct btree *b)
 
 		err = "bad btree header";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (b->written + set_blocks(i, b->c) > btree_blocks(b))
 			goto err;
 
 		err = "bad magic";
 		if (i->magic != bset_magic(b->c))
 =======
+=======
+>>>>>>> v3.18
 		if (b->written + set_blocks(i, block_bytes(b->c)) >
 		    btree_blocks(b))
 			goto err;
 
 		err = "bad magic";
 		if (i->magic != bset_magic(&b->c->sb))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto err;
 
@@ -348,6 +391,7 @@ void bch_btree_node_read_done(struct btree *b)
 
 		err = "empty set";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (i != b->sets[0].data && !i->keys)
 			goto err;
 
@@ -355,17 +399,23 @@ void bch_btree_node_read_done(struct btree *b)
 
 		b->written += set_blocks(i, b->c);
 =======
+=======
+>>>>>>> v3.18
 		if (i != b->keys.set[0].data && !i->keys)
 			goto err;
 
 		bch_btree_iter_push(iter, i->start, bset_bkey_last(i));
 
 		b->written += set_blocks(i, block_bytes(b->c));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	err = "corrupted btree";
 	for (i = write_block(b);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	     index(i, b) < btree_blocks(b);
 	     i = ((void *) i) + block_bytes(b->c))
@@ -423,6 +473,8 @@ void bch_btree_read(struct btree *b)
 
 	continue_at(&b->io.cl, bch_btree_read_done, system_wq);
 =======
+=======
+>>>>>>> v3.18
 	     bset_sector_offset(&b->keys, i) < KEY_SIZE(&b->key);
 	     i = ((void *) i) + block_bytes(b->c))
 		if (i->seq == b->keys.set[0].data->seq)
@@ -492,6 +544,9 @@ static void bch_btree_node_read(struct btree *b)
 err:
 	bch_cache_set_error(b->c, "io error reading bucket %zu",
 			    PTR_BUCKET_NR(b->c, &b->key, 0));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -500,7 +555,11 @@ static void btree_complete_write(struct btree *b, struct btree_write *w)
 	if (w->prio_blocked &&
 	    !atomic_sub_return(w->prio_blocked, &b->c->prio_blocked))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wake_up(&b->c->alloc_wait);
+=======
+		wake_up_allocators(b->c);
+>>>>>>> v3.18
 =======
 		wake_up_allocators(b->c);
 >>>>>>> v3.18
@@ -510,6 +569,7 @@ static void btree_complete_write(struct btree *b, struct btree_write *w)
 		__closure_wake_up(&b->c->journal.wait);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (w->owner)
 		closure_put(w->owner);
@@ -523,6 +583,8 @@ static void __btree_write_done(struct closure *cl)
 {
 	struct btree *b = container_of(cl, struct btree, io.cl);
 =======
+=======
+>>>>>>> v3.18
 	w->prio_blocked	= 0;
 	w->journal	= NULL;
 }
@@ -537,6 +599,9 @@ static void btree_node_write_unlock(struct closure *cl)
 static void __btree_node_write_done(struct closure *cl)
 {
 	struct btree *b = container_of(cl, struct btree, io);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct btree_write *w = btree_prev_write(b);
 
@@ -545,6 +610,7 @@ static void __btree_node_write_done(struct closure *cl)
 	btree_complete_write(b, w);
 
 	if (btree_node_dirty(b))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		queue_delayed_work(btree_io_wq, &b->work,
 				   msecs_to_jiffies(30000));
@@ -569,6 +635,8 @@ static void do_btree_write(struct btree *b)
 	struct closure *cl = &b->io.cl;
 	struct bset *i = b->sets[b->nsets].data;
 =======
+=======
+>>>>>>> v3.18
 		schedule_delayed_work(&b->work, 30 * HZ);
 
 	closure_return_with_destructor(cl, btree_node_write_unlock);
@@ -602,6 +670,9 @@ static void do_btree_node_write(struct btree *b)
 {
 	struct closure *cl = &b->io;
 	struct bset *i = btree_bset_last(b);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BKEY_PADDED(key) k;
 
@@ -609,10 +680,13 @@ static void do_btree_node_write(struct btree *b)
 	i->csum		= btree_csum_set(b, i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	btree_bio_init(b);
 	b->bio->bi_rw	= REQ_META|WRITE_SYNC|REQ_FUA;
 	b->bio->bi_size	= set_blocks(i, b->c) * block_bytes(b->c);
 =======
+=======
+>>>>>>> v3.18
 	BUG_ON(b->bio);
 	b->bio = bch_bbio_alloc(b->c);
 
@@ -620,6 +694,9 @@ static void do_btree_node_write(struct btree *b)
 	b->bio->bi_private	= cl;
 	b->bio->bi_rw		= REQ_META|WRITE_SYNC|REQ_FUA;
 	b->bio->bi_iter.bi_size	= roundup(set_bytes(i), block_bytes(b->c));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bch_bio_map(b->bio, i);
 
@@ -640,19 +717,26 @@ static void do_btree_node_write(struct btree *b)
 
 	bkey_copy(&k.key, &b->key);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_PTR_OFFSET(&k.key, 0, PTR_OFFSET(&k.key, 0) + bset_offset(b, i));
 
 	if (!bch_bio_alloc_pages(b->bio, GFP_NOIO)) {
 =======
+=======
+>>>>>>> v3.18
 	SET_PTR_OFFSET(&k.key, 0, PTR_OFFSET(&k.key, 0) +
 		       bset_sector_offset(&b->keys, i));
 
 	if (!bio_alloc_pages(b->bio, __GFP_NOWARN|GFP_NOWAIT)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		int j;
 		struct bio_vec *bv;
 		void *base = (void *) ((unsigned long) i & ~(PAGE_SIZE - 1));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		bio_for_each_segment(bv, b->bio, j)
 			memcpy(page_address(bv->bv_page),
@@ -663,6 +747,8 @@ static void do_btree_node_write(struct btree *b)
 
 		continue_at(cl, btree_write_done, NULL);
 =======
+=======
+>>>>>>> v3.18
 		bio_for_each_segment_all(bv, b->bio, j)
 			memcpy(page_address(bv->bv_page),
 			       base + j * PAGE_SIZE, PAGE_SIZE);
@@ -670,11 +756,15 @@ static void do_btree_node_write(struct btree *b)
 		bch_submit_bbio(b->bio, b->c, &k.key, 0);
 
 		continue_at(cl, btree_node_write_done, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		b->bio->bi_vcnt = 0;
 		bch_bio_map(b->bio, i);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		trace_bcache_btree_write(b->bio);
 		bch_submit_bbio(b->bio, b->c, &k.key, 0);
@@ -747,6 +837,8 @@ void bch_btree_write(struct btree *b, bool now, struct btree_op *op)
 		if (w->journal &&
 		    journal_pin_cmp(b->c, w, op)) {
 =======
+=======
+>>>>>>> v3.18
 		bch_submit_bbio(b->bio, b->c, &k.key, 0);
 
 		closure_sync(cl);
@@ -844,6 +936,9 @@ static void bch_btree_leaf_dirty(struct btree *b, atomic_t *journal_ref)
 	if (journal_ref) {
 		if (w->journal &&
 		    journal_pin_cmp(b->c, w->journal, journal_ref)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			atomic_dec_bug(w->journal);
 			w->journal = NULL;
@@ -851,7 +946,11 @@ static void bch_btree_leaf_dirty(struct btree *b, atomic_t *journal_ref)
 
 		if (!w->journal) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			w->journal = op->journal;
+=======
+			w->journal = journal_ref;
+>>>>>>> v3.18
 =======
 			w->journal = journal_ref;
 >>>>>>> v3.18
@@ -859,6 +958,7 @@ static void bch_btree_leaf_dirty(struct btree *b, atomic_t *journal_ref)
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (current->bio_list)
 		return;
@@ -878,10 +978,15 @@ static void bch_btree_leaf_dirty(struct btree *b, atomic_t *journal_ref)
 	}
 	BUG_ON(!b->written);
 =======
+=======
+>>>>>>> v3.18
 	/* Force write if set is too big */
 	if (set_bytes(i) > PAGE_SIZE - 48 &&
 	    !current->bio_list)
 		bch_btree_node_write(b, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -890,6 +995,7 @@ static void bch_btree_leaf_dirty(struct btree *b, atomic_t *journal_ref)
  * mca -> memory cache
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void mca_reinit(struct btree *b)
 {
@@ -939,6 +1045,8 @@ static void mca_data_free(struct btree *b)
 	list_move(&b->list, &b->c->btree_cache_freed);
 	b->c->bucket_cache_used--;
 =======
+=======
+>>>>>>> v3.18
 #define mca_reserve(c)	(((c->root && c->root->level)		\
 			  ? c->root->level : 1) * 8 + 16)
 #define mca_can_free(c)						\
@@ -952,6 +1060,9 @@ static void mca_data_free(struct btree *b)
 
 	b->c->btree_cache_used--;
 	list_move(&b->list, &b->c->btree_cache_freed);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -971,6 +1082,7 @@ static unsigned btree_order(struct bkey *k)
 
 static void mca_data_alloc(struct btree *b, struct bkey *k, gfp_t gfp)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct bset_tree *t = b->sets;
 	BUG_ON(t->data);
@@ -1001,6 +1113,8 @@ static void mca_data_alloc(struct btree *b, struct bkey *k, gfp_t gfp)
 err:
 	mca_data_free(b);
 =======
+=======
+>>>>>>> v3.18
 	if (!bch_btree_keys_alloc(&b->keys,
 				  max_t(unsigned,
 					ilog2(b->c->btree_pages),
@@ -1011,6 +1125,9 @@ err:
 	} else {
 		list_move(&b->list, &b->c->btree_cache_freed);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1024,17 +1141,23 @@ static struct btree *mca_bucket_alloc(struct cache_set *c,
 	init_rwsem(&b->lock);
 	lockdep_set_novalidate_class(&b->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&b->list);
 	INIT_DELAYED_WORK(&b->work, btree_write_work);
 	b->c = c;
 	closure_init_unlocked(&b->io);
 =======
+=======
+>>>>>>> v3.18
 	mutex_init(&b->write_lock);
 	lockdep_set_novalidate_class(&b->write_lock);
 	INIT_LIST_HEAD(&b->list);
 	INIT_DELAYED_WORK(&b->work, btree_node_write_work);
 	b->c = c;
 	sema_init(&b->io_mutex, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mca_data_alloc(b, k, gfp);
@@ -1042,20 +1165,27 @@ static struct btree *mca_bucket_alloc(struct cache_set *c,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mca_reap(struct btree *b, struct closure *cl, unsigned min_order)
 {
 =======
+=======
+>>>>>>> v3.18
 static int mca_reap(struct btree *b, unsigned min_order, bool flush)
 {
 	struct closure cl;
 
 	closure_init_stack(&cl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lockdep_assert_held(&b->c->bucket_lock);
 
 	if (!down_write_trylock(&b->lock))
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (b->page_order < min_order) {
 		rw_unlock(true, b);
@@ -1083,6 +1213,8 @@ static int mca_reap(struct btree *b, unsigned min_order, bool flush)
 
 static int bch_mca_shrink(struct shrinker *shrink, struct shrink_control *sc)
 =======
+=======
+>>>>>>> v3.18
 	BUG_ON(btree_node_dirty(b) && !b->keys.set[0].data);
 
 	if (b->keys.page_order < min_order)
@@ -1116,11 +1248,15 @@ out_unlock:
 
 static unsigned long bch_mca_scan(struct shrinker *shrink,
 				  struct shrink_control *sc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct cache_set *c = container_of(shrink, struct cache_set, shrink);
 	struct btree *b, *t;
 	unsigned long i, nr = sc->nr_to_scan;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (c->shrinker_disabled)
@@ -1136,6 +1272,8 @@ static unsigned long bch_mca_scan(struct shrinker *shrink,
 	if (!nr)
 		return mca_can_free(c) * c->btree_pages;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long freed = 0;
 
 	if (c->shrinker_disabled)
@@ -1143,6 +1281,9 @@ static unsigned long bch_mca_scan(struct shrinker *shrink,
 
 	if (c->btree_cache_alloc_lock)
 		return SHRINK_STOP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Return -1 if we can't do anything right now */
@@ -1152,7 +1293,10 @@ static unsigned long bch_mca_scan(struct shrinker *shrink,
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * It's _really_ critical that we don't free too many btree nodes - we
 	 * have to always leave ourselves a reserve. The reserve is how we
@@ -1160,12 +1304,16 @@ static unsigned long bch_mca_scan(struct shrinker *shrink,
 	 * succeed, so that inserting keys into the btree can always succeed and
 	 * IO can always make forward progress:
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nr /= c->btree_pages;
 	nr = min_t(unsigned long, nr, mca_can_free(c));
 
 	i = 0;
 	list_for_each_entry_safe(b, t, &c->btree_cache_freeable, list) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!nr)
 			break;
@@ -1187,6 +1335,8 @@ static unsigned long bch_mca_scan(struct shrinker *shrink,
 
 	for (i = 0; nr && i < c->bucket_cache_used; i++) {
 =======
+=======
+>>>>>>> v3.18
 		if (freed >= nr)
 			break;
 
@@ -1202,11 +1352,15 @@ static unsigned long bch_mca_scan(struct shrinker *shrink,
 		if (list_empty(&c->btree_cache))
 			goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		b = list_first_entry(&c->btree_cache, struct btree, list);
 		list_rotate_left(&c->btree_cache);
 
 		if (!b->accessed &&
+<<<<<<< HEAD
 <<<<<<< HEAD
 		    !mca_reap(b, NULL, 0)) {
 			mca_bucket_free(b);
@@ -1214,21 +1368,29 @@ static unsigned long bch_mca_scan(struct shrinker *shrink,
 			rw_unlock(true, b);
 			--nr;
 =======
+=======
+>>>>>>> v3.18
 		    !mca_reap(b, 0, false)) {
 			mca_bucket_free(b);
 			mca_data_free(b);
 			rw_unlock(true, b);
 			freed++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else
 			b->accessed = 0;
 	}
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nr = mca_can_free(c) * c->btree_pages;
 	mutex_unlock(&c->bucket_lock);
 	return nr;
 =======
+=======
+>>>>>>> v3.18
 	mutex_unlock(&c->bucket_lock);
 	return freed;
 }
@@ -1245,6 +1407,9 @@ static unsigned long bch_mca_count(struct shrinker *shrink,
 		return 0;
 
 	return mca_can_free(c) * c->btree_pages;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1263,6 +1428,11 @@ void bch_btree_cache_free(struct cache_set *c)
 	if (c->verify_data)
 		list_move(&c->verify_data->list, &c->btree_cache);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	free_pages((unsigned long) c->verify_ondisk, ilog2(bucket_pages(c)));
+>>>>>>> v3.18
 =======
 
 	free_pages((unsigned long) c->verify_ondisk, ilog2(bucket_pages(c)));
@@ -1298,12 +1468,18 @@ int bch_btree_cache_alloc(struct cache_set *c)
 	unsigned i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* XXX: doesn't check for errors */
 
 	closure_init_unlocked(&c->gc);
 
 	for (i = 0; i < mca_reserve(c); i++)
 		mca_bucket_alloc(c, &ZERO_KEY, GFP_KERNEL);
+=======
+	for (i = 0; i < mca_reserve(c); i++)
+		if (!mca_bucket_alloc(c, &ZERO_KEY, GFP_KERNEL))
+			return -ENOMEM;
+>>>>>>> v3.18
 =======
 	for (i = 0; i < mca_reserve(c); i++)
 		if (!mca_bucket_alloc(c, &ZERO_KEY, GFP_KERNEL))
@@ -1317,11 +1493,14 @@ int bch_btree_cache_alloc(struct cache_set *c)
 	mutex_init(&c->verify_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c->verify_data = mca_bucket_alloc(c, &ZERO_KEY, GFP_KERNEL);
 
 	if (c->verify_data &&
 	    c->verify_data->sets[0].data)
 =======
+=======
+>>>>>>> v3.18
 	c->verify_ondisk = (void *)
 		__get_free_pages(GFP_KERNEL, ilog2(bucket_pages(c)));
 
@@ -1329,6 +1508,9 @@ int bch_btree_cache_alloc(struct cache_set *c)
 
 	if (c->verify_data &&
 	    c->verify_data->keys.set->data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		list_del_init(&c->verify_data->list);
 	else
@@ -1336,7 +1518,12 @@ int bch_btree_cache_alloc(struct cache_set *c)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c->shrink.shrink = bch_mca_shrink;
+=======
+	c->shrink.count_objects = bch_mca_count;
+	c->shrink.scan_objects = bch_mca_scan;
+>>>>>>> v3.18
 =======
 	c->shrink.count_objects = bch_mca_count;
 	c->shrink.scan_objects = bch_mca_scan;
@@ -1369,6 +1556,7 @@ out:
 	return b;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct btree *mca_cannibalize(struct cache_set *c, struct bkey *k,
 				     int level, struct closure *cl)
@@ -1416,6 +1604,8 @@ retry:
 
 	return ERR_PTR(ret);
 =======
+=======
+>>>>>>> v3.18
 static int mca_cannibalize_lock(struct cache_set *c, struct btree_op *op)
 {
 	struct task_struct *old;
@@ -1451,6 +1641,9 @@ static struct btree *mca_cannibalize(struct cache_set *c, struct btree_op *op,
 
 	WARN(1, "btree cache cannibalize failed\n");
 	return ERR_PTR(-ENOMEM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1460,6 +1653,7 @@ static struct btree *mca_cannibalize(struct cache_set *c, struct btree_op *op,
  * cannibalize_bucket() will take. This means every time we unlock the root of
  * the btree, we need to release this lock if we have it held.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void bch_cannibalize_unlock(struct cache_set *c, struct closure *cl)
 {
@@ -1476,6 +1670,8 @@ static struct btree *mca_alloc(struct cache_set *c, struct bkey *k,
 	struct btree *b;
 
 =======
+=======
+>>>>>>> v3.18
 static void bch_cannibalize_unlock(struct cache_set *c)
 {
 	if (c->btree_cache_alloc_lock == current) {
@@ -1491,6 +1687,9 @@ static struct btree *mca_alloc(struct cache_set *c, struct btree_op *op,
 
 	BUG_ON(current->bio_list);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lockdep_assert_held(&c->bucket_lock);
 
@@ -1502,7 +1701,11 @@ static struct btree *mca_alloc(struct cache_set *c, struct btree_op *op,
 	 */
 	list_for_each_entry(b, &c->btree_cache_freeable, list)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!mca_reap(b, NULL, btree_order(k)))
+=======
+		if (!mca_reap(b, btree_order(k), false))
+>>>>>>> v3.18
 =======
 		if (!mca_reap(b, btree_order(k), false))
 >>>>>>> v3.18
@@ -1513,9 +1716,15 @@ static struct btree *mca_alloc(struct cache_set *c, struct btree_op *op,
 	 */
 	list_for_each_entry(b, &c->btree_cache_freed, list)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!mca_reap(b, NULL, 0)) {
 			mca_data_alloc(b, k, __GFP_NOWARN|GFP_NOIO);
 			if (!b->sets[0].data)
+=======
+		if (!mca_reap(b, 0, false)) {
+			mca_data_alloc(b, k, __GFP_NOWARN|GFP_NOIO);
+			if (!b->keys.set[0].data)
+>>>>>>> v3.18
 =======
 		if (!mca_reap(b, 0, false)) {
 			mca_data_alloc(b, k, __GFP_NOWARN|GFP_NOIO);
@@ -1532,15 +1741,21 @@ static struct btree *mca_alloc(struct cache_set *c, struct btree_op *op,
 
 	BUG_ON(!down_write_trylock(&b->lock));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!b->sets->data)
 		goto err;
 out:
 	BUG_ON(!closure_is_unlocked(&b->io.cl));
 =======
+=======
+>>>>>>> v3.18
 	if (!b->keys.set->data)
 		goto err;
 out:
 	BUG_ON(b->io_mutex.count != 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bkey_copy(&b->key, k);
@@ -1550,10 +1765,13 @@ out:
 
 	lock_set_subclass(&b->lock.dep_map, level + 1, _THIS_IP_);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b->level	= level;
 
 	mca_reinit(b);
 =======
+=======
+>>>>>>> v3.18
 	b->parent	= (void *) ~0UL;
 	b->flags	= 0;
 	b->written	= 0;
@@ -1565,6 +1783,9 @@ out:
 	else
 		bch_btree_keys_init(&b->keys, &bch_btree_keys_ops,
 				    &b->c->expensive_debug_checks);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return b;
@@ -1573,7 +1794,11 @@ err:
 		rw_unlock(true, b);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b = mca_cannibalize(c, k, level, cl);
+=======
+	b = mca_cannibalize(c, op, k);
+>>>>>>> v3.18
 =======
 	b = mca_cannibalize(c, op, k);
 >>>>>>> v3.18
@@ -1588,8 +1813,12 @@ err:
  * in from disk if necessary.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If IO is necessary, it uses the closure embedded in struct btree_op to wait;
  * if that closure is in non blocking mode, will return -EAGAIN.
+=======
+ * If IO is necessary and running under generic_make_request, returns -EAGAIN.
+>>>>>>> v3.18
 =======
  * If IO is necessary and running under generic_make_request, returns -EAGAIN.
 >>>>>>> v3.18
@@ -1598,17 +1827,23 @@ err:
  * level and op->lock.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct btree *bch_btree_node_get(struct cache_set *c, struct bkey *k,
 				 int level, struct btree_op *op)
 {
 	int i = 0;
 	bool write = level <= op->lock;
 =======
+=======
+>>>>>>> v3.18
 struct btree *bch_btree_node_get(struct cache_set *c, struct btree_op *op,
 				 struct bkey *k, int level, bool write,
 				 struct btree *parent)
 {
 	int i = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct btree *b;
 
@@ -1618,14 +1853,20 @@ retry:
 
 	if (!b) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock(&c->bucket_lock);
 		b = mca_alloc(c, k, level, &op->cl);
 =======
+=======
+>>>>>>> v3.18
 		if (current->bio_list)
 			return ERR_PTR(-EAGAIN);
 
 		mutex_lock(&c->bucket_lock);
 		b = mca_alloc(c, op, k, level);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mutex_unlock(&c->bucket_lock);
 
@@ -1635,7 +1876,11 @@ retry:
 			return b;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bch_btree_read(b);
+=======
+		bch_btree_node_read(b);
+>>>>>>> v3.18
 =======
 		bch_btree_node_read(b);
 >>>>>>> v3.18
@@ -1651,6 +1896,7 @@ retry:
 		BUG_ON(b->level != level);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	b->accessed = 1;
 
@@ -1673,6 +1919,9 @@ retry:
 		BUG_ON(!b->written);
 =======
 	b->parent = parent;
+=======
+	b->parent = parent;
+>>>>>>> v3.18
 	b->accessed = 1;
 
 	for (; i <= b->keys.nsets && b->keys.set[i].size; i++) {
@@ -1689,11 +1938,15 @@ retry:
 	}
 
 	BUG_ON(!b->written);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return b;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void btree_node_prefetch(struct cache_set *c, struct bkey *k, int level)
 {
@@ -1706,6 +1959,8 @@ static void btree_node_prefetch(struct cache_set *c, struct bkey *k, int level)
 	if (!IS_ERR_OR_NULL(b)) {
 		bch_btree_read(b);
 =======
+=======
+>>>>>>> v3.18
 static void btree_node_prefetch(struct btree *parent, struct bkey *k)
 {
 	struct btree *b;
@@ -1717,6 +1972,9 @@ static void btree_node_prefetch(struct btree *parent, struct bkey *k)
 	if (!IS_ERR_OR_NULL(b)) {
 		b->parent = parent;
 		bch_btree_node_read(b);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rw_unlock(true, b);
 	}
@@ -1724,6 +1982,7 @@ static void btree_node_prefetch(struct btree *parent, struct bkey *k)
 
 /* Btree alloc */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void btree_node_free(struct btree *b, struct btree_op *op)
 {
@@ -1737,6 +1996,8 @@ static void btree_node_free(struct btree *b, struct btree_op *op)
 	BUG_ON(b == b->c->root);
 	pr_debug("bucket %s", pbtree(b));
 =======
+=======
+>>>>>>> v3.18
 static void btree_node_free(struct btree *b)
 {
 	trace_bcache_btree_node_free(b);
@@ -1744,12 +2005,16 @@ static void btree_node_free(struct btree *b)
 	BUG_ON(b == b->c->root);
 
 	mutex_lock(&b->write_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (btree_node_dirty(b))
 		btree_complete_write(b, btree_current_write(b));
 	clear_bit(BTREE_NODE_dirty, &b->flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (b->prio_blocked &&
 	    !atomic_sub_return(b->prio_blocked, &b->c->prio_blocked))
@@ -1759,10 +2024,14 @@ static void btree_node_free(struct btree *b)
 =======
 	mutex_unlock(&b->write_lock);
 >>>>>>> v3.18
+=======
+	mutex_unlock(&b->write_lock);
+>>>>>>> v3.18
 
 	cancel_delayed_work(&b->work);
 
 	mutex_lock(&b->c->bucket_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	for (i = 0; i < KEY_PTRS(&b->key); i++) {
@@ -1774,14 +2043,22 @@ static void btree_node_free(struct btree *b)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	bch_bucket_free(b->c, &b->key);
 	mca_bucket_free(b);
 	mutex_unlock(&b->c->bucket_lock);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct btree *bch_btree_node_alloc(struct cache_set *c, int level,
 				   struct closure *cl)
+=======
+struct btree *__bch_btree_node_alloc(struct cache_set *c, struct btree_op *op,
+				     int level, bool wait,
+				     struct btree *parent)
+>>>>>>> v3.18
 =======
 struct btree *__bch_btree_node_alloc(struct cache_set *c, struct btree_op *op,
 				     int level, bool wait,
@@ -1794,6 +2071,7 @@ struct btree *__bch_btree_node_alloc(struct cache_set *c, struct btree_op *op,
 	mutex_lock(&c->bucket_lock);
 retry:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__bch_bucket_alloc_set(c, WATERMARK_METADATA, &k.key, 1, cl))
 		goto err;
 
@@ -1801,6 +2079,8 @@ retry:
 
 	b = mca_alloc(c, &k.key, level, cl);
 =======
+=======
+>>>>>>> v3.18
 	if (__bch_bucket_alloc_set(c, RESERVE_BTREE, &k.key, 1, wait))
 		goto err;
 
@@ -1808,6 +2088,9 @@ retry:
 	SET_KEY_SIZE(&k.key, c->btree_pages * PAGE_SECTORS);
 
 	b = mca_alloc(c, op, &k.key, level);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(b))
 		goto err_free;
@@ -1815,6 +2098,7 @@ retry:
 	if (!b) {
 		cache_bug(c,
 			"Tried to allocate bucket that was in btree cache");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__bkey_put(c, &k.key);
 		goto retry;
@@ -1841,6 +2125,8 @@ static struct btree *btree_node_alloc_replacement(struct btree *b,
 	if (!IS_ERR_OR_NULL(n))
 		bch_btree_sort_into(b, n);
 =======
+=======
+>>>>>>> v3.18
 		goto retry;
 	}
 
@@ -1878,16 +2164,22 @@ static struct btree *btree_node_alloc_replacement(struct btree *b,
 		bkey_copy_key(&n->key, &b->key);
 		mutex_unlock(&n->write_lock);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return n;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Garbage collection */
 
 uint8_t __bch_btree_mark_key(struct cache_set *c, int level, struct bkey *k)
 =======
+=======
+>>>>>>> v3.18
 static void make_btree_freeing_key(struct btree *b, struct bkey *k)
 {
 	unsigned i;
@@ -1933,6 +2225,9 @@ static int btree_check_reserve(struct btree *b, struct btree_op *op)
 
 static uint8_t __bch_btree_mark_key(struct cache_set *c, int level,
 				    struct bkey *k)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	uint8_t stale = 0;
@@ -1954,8 +2249,13 @@ static uint8_t __bch_btree_mark_key(struct cache_set *c, int level,
 		g = PTR_BUCKET(c, k, i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (gen_after(g->gc_gen, PTR_GEN(k, i)))
 			g->gc_gen = PTR_GEN(k, i);
+=======
+		if (gen_after(g->last_gc, PTR_GEN(k, i)))
+			g->last_gc = PTR_GEN(k, i);
+>>>>>>> v3.18
 =======
 		if (gen_after(g->last_gc, PTR_GEN(k, i)))
 			g->last_gc = PTR_GEN(k, i);
@@ -1976,6 +2276,11 @@ static uint8_t __bch_btree_mark_key(struct cache_set *c, int level,
 		else if (KEY_DIRTY(k))
 			SET_GC_MARK(g, GC_MARK_DIRTY);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		else if (!GC_MARK(g))
+			SET_GC_MARK(g, GC_MARK_RECLAIMABLE);
+>>>>>>> v3.18
 =======
 		else if (!GC_MARK(g))
 			SET_GC_MARK(g, GC_MARK_RECLAIMABLE);
@@ -1985,7 +2290,11 @@ static uint8_t __bch_btree_mark_key(struct cache_set *c, int level,
 		SET_GC_SECTORS_USED(g, min_t(unsigned,
 					     GC_SECTORS_USED(g) + KEY_SIZE(k),
 <<<<<<< HEAD
+<<<<<<< HEAD
 					     (1 << 14) - 1));
+=======
+					     MAX_GC_SECTORS_USED));
+>>>>>>> v3.18
 =======
 					     MAX_GC_SECTORS_USED));
 >>>>>>> v3.18
@@ -1999,6 +2308,7 @@ static uint8_t __bch_btree_mark_key(struct cache_set *c, int level,
 #define btree_mark_key(b, k)	__bch_btree_mark_key(b->c, b->level, k)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int btree_gc_mark_node(struct btree *b, unsigned *keys,
 			      struct gc_stat *gc)
 {
@@ -2006,6 +2316,8 @@ static int btree_gc_mark_node(struct btree *b, unsigned *keys,
 	unsigned last_dev = -1;
 	struct bcache_device *d = NULL;
 =======
+=======
+>>>>>>> v3.18
 void bch_initial_mark_key(struct cache_set *c, int level, struct bkey *k)
 {
 	unsigned i;
@@ -2030,6 +2342,9 @@ static bool btree_gc_mark_node(struct btree *b, struct gc_stat *gc)
 {
 	uint8_t stale = 0;
 	unsigned keys = 0, good_keys = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct bkey *k;
 	struct btree_iter iter;
@@ -2037,6 +2352,7 @@ static bool btree_gc_mark_node(struct btree *b, struct gc_stat *gc)
 
 	gc->nodes++;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for_each_key_filter(b, k, &iter, bch_ptr_invalid) {
 		if (last_dev != KEY_INODE(k)) {
@@ -2123,6 +2439,8 @@ static void btree_gc_coalesce(struct btree *b, struct btree_op *op,
 
 	while (nodes < GC_MERGE_NODES && r[nodes].b)
 =======
+=======
+>>>>>>> v3.18
 	for_each_key_filter(&b->keys, k, &iter, bch_ptr_invalid) {
 		stale = max(stale, btree_mark_key(b, k));
 		keys++;
@@ -2183,12 +2501,16 @@ static int btree_gc_coalesce(struct btree *b, struct btree_op *op,
 	closure_init_stack(&cl);
 
 	while (nodes < GC_MERGE_NODES && !IS_ERR_OR_NULL(r[nodes].b))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		keys += r[nodes++].keys;
 
 	blocks = btree_default_blocks(b->c) * 2 / 3;
 
 	if (nodes < 2 ||
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    __set_blocks(b->sets[0].data, keys, b->c) > blocks * (nodes - 1))
 		return;
@@ -2205,6 +2527,8 @@ static int btree_gc_coalesce(struct btree *b, struct btree_op *op,
 		struct bset *n1 = r[i].b->sets->data;
 		struct bset *n2 = r[i - 1].b->sets->data;
 =======
+=======
+>>>>>>> v3.18
 	    __set_blocks(b->keys.set[0].data, keys,
 			 block_bytes(b->c)) > blocks * (nodes - 1))
 		return 0;
@@ -2230,14 +2554,20 @@ static int btree_gc_coalesce(struct btree *b, struct btree_op *op,
 	for (i = nodes - 1; i > 0; --i) {
 		struct bset *n1 = btree_bset_first(new_nodes[i]);
 		struct bset *n2 = btree_bset_first(new_nodes[i - 1]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct bkey *k, *last = NULL;
 
 		keys = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (i == 1) {
 =======
+=======
+>>>>>>> v3.18
 		if (i > 1) {
 			for (k = n2->start;
 			     k < bset_bkey_last(n2);
@@ -2251,6 +2581,9 @@ static int btree_gc_coalesce(struct btree *b, struct btree_op *op,
 				keys += bkey_u64s(k);
 			}
 		} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * Last node we're not getting rid of - we're getting
@@ -2260,6 +2593,7 @@ static int btree_gc_coalesce(struct btree *b, struct btree_op *op,
 			 * length keys (shouldn't be possible in practice,
 			 * though)
 			 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (__set_blocks(n1, n1->keys + r->keys,
 					 b->c) > btree_blocks(r[i].b))
@@ -2381,6 +2715,8 @@ static int btree_gc_recurse(struct btree *b, struct btree_op *op,
 		cond_resched();
 #if 0
 =======
+=======
+>>>>>>> v3.18
 			if (__set_blocks(n1, n1->keys + n2->keys,
 					 block_bytes(b->c)) >
 			    btree_blocks(new_nodes[i]))
@@ -2588,11 +2924,15 @@ static int btree_gc_recurse(struct btree *b, struct btree_op *op,
 		memmove(r + 1, r, sizeof(r[0]) * (GC_MERGE_NODES - 1));
 		r->b = NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (need_resched()) {
 			ret = -EAGAIN;
 			break;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 	}
@@ -2604,6 +2944,8 @@ static int btree_gc_recurse(struct btree *b, struct btree_op *op,
 	if (!b->written)
 		bch_btree_sort(b);
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	for (i = r; i < r + ARRAY_SIZE(r); i++)
@@ -2614,6 +2956,9 @@ static int btree_gc_recurse(struct btree *b, struct btree_op *op,
 			mutex_unlock(&i->b->write_lock);
 			rw_unlock(true, i->b);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -2623,6 +2968,7 @@ static int bch_btree_gc_root(struct btree *b, struct btree_op *op,
 			     struct closure *writes, struct gc_stat *gc)
 {
 	struct btree *n = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned keys = 0;
 	int ret = 0, stale = btree_gc_mark_node(b, &keys, gc);
@@ -2650,6 +2996,8 @@ static int bch_btree_gc_root(struct btree *b, struct btree_op *op,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 	bool should_rewrite;
 
@@ -2678,6 +3026,9 @@ static int bch_btree_gc_root(struct btree *b, struct btree_op *op,
 
 	bkey_copy_key(&b->c->gc_done, &b->key);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -2687,7 +3038,10 @@ static void btree_gc_start(struct cache_set *c)
 	struct cache *ca;
 	struct bucket *b;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcache_device **d;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned i;
@@ -2703,9 +3057,15 @@ static void btree_gc_start(struct cache_set *c)
 	for_each_cache(ca, c, i)
 		for_each_bucket(b, ca) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			b->gc_gen = b->gen;
 			if (!atomic_read(&b->pin)) {
 				SET_GC_MARK(b, GC_MARK_RECLAIMABLE);
+=======
+			b->last_gc = b->gen;
+			if (!atomic_read(&b->pin)) {
+				SET_GC_MARK(b, 0);
+>>>>>>> v3.18
 =======
 			b->last_gc = b->gen;
 			if (!atomic_read(&b->pin)) {
@@ -2715,6 +3075,7 @@ static void btree_gc_start(struct cache_set *c)
 			}
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (d = c->devices;
 	     d < c->devices + c->nr_uuids;
@@ -2727,17 +3088,25 @@ static void btree_gc_start(struct cache_set *c)
 
 size_t bch_btree_gc_finish(struct cache_set *c)
 =======
+=======
+>>>>>>> v3.18
 	mutex_unlock(&c->bucket_lock);
 }
 
 static size_t bch_btree_gc_finish(struct cache_set *c)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	size_t available = 0;
 	struct bucket *b;
 	struct cache *ca;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bcache_device **d;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned i;
@@ -2749,6 +3118,7 @@ static size_t bch_btree_gc_finish(struct cache_set *c)
 	c->need_gc	= 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c->root)
 		for (i = 0; i < KEY_PTRS(&c->root->key); i++)
 			SET_GC_MARK(PTR_BUCKET(c, &c->root->key, i),
@@ -2756,12 +3126,17 @@ static size_t bch_btree_gc_finish(struct cache_set *c)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	for (i = 0; i < KEY_PTRS(&c->uuid_bucket); i++)
 		SET_GC_MARK(PTR_BUCKET(c, &c->uuid_bucket, i),
 			    GC_MARK_METADATA);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* don't reclaim buckets to which writeback keys point */
 	rcu_read_lock();
 	for (i = 0; i < c->nr_uuids; i++) {
@@ -2784,6 +3159,9 @@ static size_t bch_btree_gc_finish(struct cache_set *c)
 	}
 	rcu_read_unlock();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for_each_cache(ca, c, i) {
 		uint64_t *i;
@@ -2798,6 +3176,7 @@ static size_t bch_btree_gc_finish(struct cache_set *c)
 			SET_GC_MARK(ca->buckets + *i, GC_MARK_METADATA);
 
 		for_each_bucket(b, ca) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			b->last_gc	= b->gc_gen;
 			c->need_gc	= max(c->need_gc, bucket_gc_gen(b));
@@ -2827,6 +3206,8 @@ static size_t bch_btree_gc_finish(struct cache_set *c)
 					(*d)->sectors_dirty_gc);
 		}
 =======
+=======
+>>>>>>> v3.18
 			c->need_gc	= max(c->need_gc, bucket_gc_gen(b));
 
 			if (atomic_read(&b->pin))
@@ -2838,6 +3219,9 @@ static size_t bch_btree_gc_finish(struct cache_set *c)
 				available++;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&c->bucket_lock);
@@ -2845,9 +3229,14 @@ static size_t bch_btree_gc_finish(struct cache_set *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bch_btree_gc(struct closure *cl)
 {
 	struct cache_set *c = container_of(cl, struct cache_set, gc.cl);
+=======
+static void bch_btree_gc(struct cache_set *c)
+{
+>>>>>>> v3.18
 =======
 static void bch_btree_gc(struct cache_set *c)
 {
@@ -2857,6 +3246,7 @@ static void bch_btree_gc(struct cache_set *c)
 	struct gc_stat stats;
 	struct closure writes;
 	struct btree_op op;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	uint64_t start_time = local_clock();
@@ -2887,6 +3277,8 @@ static void bch_btree_gc(struct cache_set *c)
 
 	available = bch_btree_gc_finish(c);
 =======
+=======
+>>>>>>> v3.18
 	uint64_t start_time = local_clock();
 
 	trace_bcache_gc_start(c);
@@ -2907,11 +3299,15 @@ static void bch_btree_gc(struct cache_set *c)
 
 	available = bch_btree_gc_finish(c);
 	wake_up_allocators(c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bch_time_stats_update(&c->btree_gc_time, start_time);
 
 	stats.key_bytes *= sizeof(uint64_t);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	stats.dirty	<<= 9;
 	stats.data	<<= 9;
@@ -2978,6 +3374,8 @@ static int bch_btree_check_recurse(struct btree *b, struct btree_op *op,
 			k = p;
 		}
 =======
+=======
+>>>>>>> v3.18
 	stats.data	<<= 9;
 	stats.in_use	= (c->nbuckets - available) * 100 / c->nbuckets;
 	memcpy(&c->gc_stats, &stats, sizeof(struct gc_stat));
@@ -3014,12 +3412,16 @@ again:
 
 		try_to_freeze();
 		schedule();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int bch_btree_check(struct cache_set *c, struct btree_op *op)
 {
@@ -3355,6 +3757,19 @@ int bch_gc_thread_start(struct cache_set *c)
 }
 
 /* Initial partial gc */
+=======
+int bch_gc_thread_start(struct cache_set *c)
+{
+	c->gc_thread = kthread_create(bch_gc_thread, c, "bcache_gc");
+	if (IS_ERR(c->gc_thread))
+		return PTR_ERR(c->gc_thread);
+
+	set_task_state(c->gc_thread, TASK_INTERRUPTIBLE);
+	return 0;
+}
+
+/* Initial partial gc */
+>>>>>>> v3.18
 
 static int bch_btree_check_recurse(struct btree *b, struct btree_op *op)
 {
@@ -3533,11 +3948,15 @@ static int btree_split(struct btree *b, struct btree_op *op,
 
 	split = set_blocks(btree_bset_first(n1),
 			   block_bytes(n1->c)) > (btree_blocks(b) * 4) / 5;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (split) {
 		unsigned keys = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		n2 = bch_btree_node_alloc(b->c, b->level, &op->cl);
 		if (IS_ERR(n2))
@@ -3546,6 +3965,8 @@ static int btree_split(struct btree *b, struct btree_op *op,
 		if (root) {
 			n3 = bch_btree_node_alloc(b->c, b->level + 1, &op->cl);
 =======
+=======
+>>>>>>> v3.18
 		trace_bcache_btree_node_split(b, btree_bset_first(n1)->keys);
 
 		n2 = bch_btree_node_alloc(b->c, op, b->level, b->parent);
@@ -3554,11 +3975,15 @@ static int btree_split(struct btree *b, struct btree_op *op,
 
 		if (!b->parent) {
 			n3 = bch_btree_node_alloc(b->c, op, b->level + 1, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (IS_ERR(n3))
 				goto err_free2;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		bch_btree_insert_keys(n1, op);
 
@@ -3622,6 +4047,8 @@ static int btree_split(struct btree *b, struct btree_op *op,
 	rw_unlock(true, n1);
 	btree_node_free(b, op);
 =======
+=======
+>>>>>>> v3.18
 		mutex_lock(&n1->write_lock);
 		mutex_lock(&n2->write_lock);
 
@@ -3691,12 +4118,16 @@ static int btree_split(struct btree *b, struct btree_op *op,
 
 	btree_node_free(b);
 	rw_unlock(true, n1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bch_time_stats_update(&b->c->btree_split_time, start_time);
 
 	return 0;
 err_free2:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__bkey_put(n2->c, &n2->key);
 	btree_node_free(n2, op);
@@ -3707,6 +4138,8 @@ err_free1:
 	rw_unlock(true, n1);
 err:
 =======
+=======
+>>>>>>> v3.18
 	bkey_put(b->c, &n2->key);
 	btree_node_free(n2);
 	rw_unlock(true, n2);
@@ -3717,12 +4150,16 @@ err_free1:
 err:
 	WARN(1, "bcache: btree split failed (level %u)", b->level);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (n3 == ERR_PTR(-EAGAIN) ||
 	    n2 == ERR_PTR(-EAGAIN) ||
 	    n1 == ERR_PTR(-EAGAIN))
 		return -EAGAIN;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pr_warn("couldn't split");
 	return -ENOMEM;
@@ -3835,6 +4272,8 @@ int bch_btree_insert(struct btree_op *op, struct cache_set *c)
 		atomic_dec_bug(op->journal);
 	op->journal = NULL;
 =======
+=======
+>>>>>>> v3.18
 	return -ENOMEM;
 }
 
@@ -3981,6 +4420,9 @@ int bch_btree_insert(struct cache_set *c, struct keylist *keys,
 	} else if (op.op.insert_collision)
 		ret = -ESRCH;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -3993,6 +4435,11 @@ void bch_btree_set_root(struct btree *b)
 	closure_init_stack(&cl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_bcache_btree_set_root(b);
+
+>>>>>>> v3.18
 =======
 	trace_bcache_btree_set_root(b);
 
@@ -4007,6 +4454,7 @@ void bch_btree_set_root(struct btree *b)
 	mutex_unlock(&b->c->bucket_lock);
 
 	b->c->root = b;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__bkey_put(b->c, &b->key);
 
@@ -4139,6 +4587,8 @@ int bch_btree_search_recurse(struct btree *b, struct btree_op *op)
 	} while (!ret &&
 		 !op->lookup_done);
 =======
+=======
+>>>>>>> v3.18
 
 	bch_journal_meta(b->c, &cl);
 	closure_sync(&cl);
@@ -4204,19 +4654,28 @@ static int bch_btree_map_keys_recurse(struct btree *b, struct btree_op *op,
 	if (!b->level && (flags & MAP_END_KEY))
 		ret = fn(op, b, &KEY(KEY_INODE(&b->key),
 				     KEY_OFFSET(&b->key), 0));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int bch_btree_map_keys(struct btree_op *op, struct cache_set *c,
 		       struct bkey *from, btree_map_keys_fn *fn, int flags)
 {
 	return btree_root(map_keys_recurse, c, op, from, fn, flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Keybuf code */
 
@@ -4236,6 +4695,7 @@ static inline int keybuf_nonoverlapping_cmp(struct keybuf_key *l,
 	return clamp_t(int64_t, bkey_cmp(&l->key, &r->key), -1, 1);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int bch_btree_refill_keybuf(struct btree *b, struct btree_op *op,
 				   struct keybuf *buf, struct bkey *end)
@@ -4313,6 +4773,8 @@ void bch_refill_keybuf(struct cache_set *c, struct keybuf *buf,
 		 KEY_INODE(&start), KEY_OFFSET(&start),
 		 KEY_INODE(&buf->last_scanned), KEY_OFFSET(&buf->last_scanned));
 =======
+=======
+>>>>>>> v3.18
 struct refill {
 	struct btree_op	op;
 	unsigned	nr_found;
@@ -4386,6 +4848,9 @@ void bch_refill_keybuf(struct cache_set *c, struct keybuf *buf,
 			     KEY_INODE(&start), KEY_OFFSET(&start),
 			     KEY_INODE(&buf->last_scanned),
 			     KEY_OFFSET(&buf->last_scanned));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock(&buf->lock);
@@ -4465,8 +4930,14 @@ struct keybuf_key *bch_keybuf_next(struct keybuf *buf)
 
 struct keybuf_key *bch_keybuf_next_rescan(struct cache_set *c,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					     struct keybuf *buf,
 					     struct bkey *end)
+=======
+					  struct keybuf *buf,
+					  struct bkey *end,
+					  keybuf_pred_fn *pred)
+>>>>>>> v3.18
 =======
 					  struct keybuf *buf,
 					  struct bkey *end,
@@ -4486,7 +4957,11 @@ struct keybuf_key *bch_keybuf_next_rescan(struct cache_set *c,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bch_refill_keybuf(c, buf, end);
+=======
+		bch_refill_keybuf(c, buf, end, pred);
+>>>>>>> v3.18
 =======
 		bch_refill_keybuf(c, buf, end, pred);
 >>>>>>> v3.18
@@ -4496,9 +4971,14 @@ struct keybuf_key *bch_keybuf_next_rescan(struct cache_set *c,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bch_keybuf_init(struct keybuf *buf, keybuf_pred_fn *fn)
 {
 	buf->key_predicate	= fn;
+=======
+void bch_keybuf_init(struct keybuf *buf)
+{
+>>>>>>> v3.18
 =======
 void bch_keybuf_init(struct keybuf *buf)
 {
@@ -4509,6 +4989,7 @@ void bch_keybuf_init(struct keybuf *buf)
 	spin_lock_init(&buf->lock);
 	array_allocator_init(&buf->freelist);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void bch_btree_exit(void)
@@ -4527,5 +5008,7 @@ int __init bch_btree_init(void)
 
 	return 0;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

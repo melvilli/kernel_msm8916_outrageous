@@ -59,11 +59,14 @@ config PCI_QUIRKS
 	def_bool n
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config S390
 	def_bool y
 	select ARCH_DISCARD_MEMBLOCK
 	select ARCH_HAS_ATOMIC64_DEC_IF_POSITIVE
 =======
+=======
+>>>>>>> v3.18
 config ARCH_SUPPORTS_UPROBES
 	def_bool 64BIT
 
@@ -71,6 +74,9 @@ config S390
 	def_bool y
 	select ARCH_HAS_ATOMIC64_DEC_IF_POSITIVE
 	select ARCH_HAS_DEBUG_STRICT_USER_COPY_CHECKS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select ARCH_HAVE_NMI_SAFE_CMPXCHG
 	select ARCH_INLINE_READ_LOCK
@@ -102,6 +108,7 @@ config S390
 	select ARCH_INLINE_WRITE_UNLOCK_IRQ
 	select ARCH_INLINE_WRITE_UNLOCK_IRQRESTORE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAS_DEBUG_STRICT_USER_COPY_CHECKS
 	select ARCH_SAVE_PAGE_KEYS if HIBERNATION
 	select ARCH_WANT_IPC_PARSE_VERSION
@@ -115,6 +122,8 @@ config S390
 	select HAVE_ARCH_JUMP_LABEL if !MARCH_G5
 	select HAVE_ARCH_MUTEX_CPU_RELAX
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_SAVE_PAGE_KEYS if HIBERNATION
 	select ARCH_SUPPORTS_ATOMIC_RMW
 	select ARCH_USE_CMPXCHG_LOCKREF
@@ -130,6 +139,9 @@ config S390
 	select HAVE_ALIGNED_STRUCT_PAGE if SLUB
 	select HAVE_ARCH_AUDITSYSCALL
 	select HAVE_ARCH_JUMP_LABEL if !MARCH_G5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HAVE_ARCH_SECCOMP_FILTER
 	select HAVE_ARCH_TRACEHOOK
@@ -140,6 +152,7 @@ config S390
 	select HAVE_C_RECORDMCOUNT
 	select HAVE_DEBUG_KMEMLEAK
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_DYNAMIC_FTRACE
 	select HAVE_FTRACE_MCOUNT_RECORD
 	select HAVE_FUNCTION_GRAPH_TRACER
@@ -149,6 +162,8 @@ config S390
 	select HAVE_KERNEL_BZIP2
 	select HAVE_KERNEL_GZIP
 =======
+=======
+>>>>>>> v3.18
 	select HAVE_DYNAMIC_FTRACE if 64BIT
 	select HAVE_DYNAMIC_FTRACE_WITH_REGS if 64BIT
 	select HAVE_FTRACE_MCOUNT_RECORD
@@ -158,6 +173,9 @@ config S390
 	select HAVE_KERNEL_BZIP2
 	select HAVE_KERNEL_GZIP
 	select HAVE_KERNEL_LZ4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HAVE_KERNEL_LZMA
 	select HAVE_KERNEL_LZO
@@ -168,6 +186,10 @@ config S390
 	select HAVE_MEMBLOCK
 	select HAVE_MEMBLOCK_NODE_MAP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_MEMBLOCK_PHYS_MAP
+>>>>>>> v3.18
 =======
 	select HAVE_MEMBLOCK_PHYS_MAP
 >>>>>>> v3.18
@@ -179,6 +201,7 @@ config S390
 	select HAVE_UID16 if 32BIT
 	select HAVE_VIRT_CPU_ACCOUNTING
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select VIRT_TO_BUS
 	select INIT_ALL_POSSIBLE
 	select KTIME_SCALAR if 32BIT
@@ -188,6 +211,8 @@ config S390
 	select SYSCTL_EXCEPTION_TRACE
 	select VIRT_CPU_ACCOUNTING
 =======
+=======
+>>>>>>> v3.18
 	select MODULES_USE_ELF_RELA
 	select NO_BOOTMEM
 	select OLD_SIGACTION
@@ -197,6 +222,9 @@ config S390
 	select VIRT_CPU_ACCOUNTING
 	select VIRT_TO_BUS
 	select ARCH_HAS_SG_CHAIN
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SCHED_OMIT_FRAME_POINTER
@@ -293,7 +321,10 @@ config MARCH_ZEC12
 endchoice
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MARCH_G5_TUNE
 	def_bool TUNE_G5 || MARCH_G5 && TUNE_DEFAULT
 
@@ -355,6 +386,9 @@ config TUNE_ZEC12
 
 endchoice
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config 64BIT
 	def_bool y
@@ -394,15 +428,21 @@ config SMP
 	  you have a system with more than one CPU, say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  If you say N here, the kernel will run on single and multiprocessor
 	  machines, but will use only one CPU of a multiprocessor machine. If
 	  you say Y here, the kernel will run on many, but not all,
 	  singleprocessor machines. On a singleprocessor machine, the kernel
 =======
+=======
+>>>>>>> v3.18
 	  If you say N here, the kernel will run on uni- and multiprocessor
 	  machines, but will use only one CPU of a multiprocessor machine. If
 	  you say Y here, the kernel will run on many, but not all,
 	  uniprocessor machines. On a uniprocessor machine, the kernel
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  will run faster if you say N here.
 
@@ -413,8 +453,13 @@ config SMP
 
 config NR_CPUS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int "Maximum number of CPUs (2-64)"
 	range 2 64
+=======
+	int "Maximum number of CPUs (2-256)"
+	range 2 256
+>>>>>>> v3.18
 =======
 	int "Maximum number of CPUs (2-256)"
 	range 2 256
@@ -425,7 +470,11 @@ config NR_CPUS
 	help
 	  This allows you to specify the maximum number of CPUs which this
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  kernel will support.  The maximum supported value is 64 and the
+=======
+	  kernel will support. The maximum supported value is 256 and the
+>>>>>>> v3.18
 =======
 	  kernel will support. The maximum supported value is 256 and the
 >>>>>>> v3.18
@@ -439,7 +488,10 @@ config HOTPLUG_CPU
 	prompt "Support for hot-pluggable CPUs"
 	depends on SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HOTPLUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -495,11 +547,17 @@ config ARCH_ENABLE_MEMORY_HOTREMOVE
 	def_bool y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ARCH_ENABLE_SPLIT_PMD_PTLOCK
 	def_bool y
 	depends on 64BIT
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config FORCE_MAX_ZONEORDER
 	int
@@ -575,9 +633,14 @@ config QDIO
 menuconfig PCI
 	bool "PCI support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default n
 	depends on 64BIT
 	select ARCH_SUPPORTS_MSI
+=======
+	depends on 64BIT
+	select HAVE_DMA_ATTRS
+>>>>>>> v3.18
 =======
 	depends on 64BIT
 	select HAVE_DMA_ATTRS
@@ -597,7 +660,10 @@ config PCI_NR_FUNCTIONS
 	  this kernel will support.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PCI_NR_MSI
 	int "Maximum number of MSI interrupts (64-32768)"
 	range 64 32768
@@ -608,6 +674,9 @@ config PCI_NR_MSI
 	  too few drivers will fail to allocate MSI interrupts for all
 	  PCI devices.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "drivers/pci/Kconfig"
 source "drivers/pci/pcie/Kconfig"
@@ -632,9 +701,12 @@ config NEED_SG_DMA_LENGTH
 	def_bool PCI
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HAVE_DMA_ATTRS
 	def_bool PCI
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config NEED_DMA_MAP_STATE
@@ -689,6 +761,7 @@ config CRASH_DUMP
 	  into a specially reserved region and then later executed after
 	  a crash by kdump/kexec.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  For more details see Documentation/kdump/kdump.txt
 
 config ZFCPDUMP
@@ -698,6 +771,11 @@ config ZFCPDUMP
 	help
 	  Select this option if you want to build an zfcpdump enabled kernel.
 	  Refer to <file:Documentation/s390/zfcpdump.txt> for more details on this.
+=======
+	  Refer to <file:Documentation/s390/zfcpdump.txt> for more details on this.
+	  This option also enables s390 zfcpdump.
+	  See also <file:Documentation/s390/zfcpdump.txt>
+>>>>>>> v3.18
 =======
 	  Refer to <file:Documentation/s390/zfcpdump.txt> for more details on this.
 	  This option also enables s390 zfcpdump.
@@ -885,6 +963,10 @@ config S390_GUEST
 	prompt "s390 support for virtio devices"
 	depends on 64BIT
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select TTY
+>>>>>>> v3.18
 =======
 	select TTY
 >>>>>>> v3.18

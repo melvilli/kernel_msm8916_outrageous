@@ -5,8 +5,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#define DOT11D_MAX_CHNL_NUM 83
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef struct _CHNL_TXPOWER_TRIPLE {
@@ -14,7 +17,11 @@ typedef struct _CHNL_TXPOWER_TRIPLE {
 	u8  NumChnls;
 	u8  MaxTxPowerInDbm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }CHNL_TXPOWER_TRIPLE, *PCHNL_TXPOWER_TRIPLE;
+=======
+} CHNL_TXPOWER_TRIPLE, *PCHNL_TXPOWER_TRIPLE;
+>>>>>>> v3.18
 =======
 } CHNL_TXPOWER_TRIPLE, *PCHNL_TXPOWER_TRIPLE;
 >>>>>>> v3.18
@@ -23,6 +30,7 @@ typedef enum _DOT11D_STATE {
 	DOT11D_STATE_NONE = 0,
 	DOT11D_STATE_LEARNED,
 	DOT11D_STATE_DONE,
+<<<<<<< HEAD
 <<<<<<< HEAD
 }DOT11D_STATE;
 
@@ -49,6 +57,8 @@ typedef struct _RT_DOT11D_INFO {
 
 #define IS_DOT11D_ENABLE(__pIeeeDev) GET_DOT11D_INFO(__pIeeeDev)->bEnabled
 =======
+=======
+>>>>>>> v3.18
 } DOT11D_STATE;
 
 typedef struct _RT_DOT11D_INFO {
@@ -76,6 +86,9 @@ typedef struct _RT_DOT11D_INFO {
 #define GET_DOT11D_INFO(__pIeeeDev) ((PRT_DOT11D_INFO)((__pIeeeDev)->pDot11dInfo))
 
 #define IS_DOT11D_ENABLE(__pIeeeDev) (GET_DOT11D_INFO(__pIeeeDev)->bEnabled)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IS_COUNTRY_IE_VALID(__pIeeeDev) (GET_DOT11D_INFO(__pIeeeDev)->CountryIeLen > 0)
 
@@ -89,9 +102,15 @@ typedef struct _RT_DOT11D_INFO {
 
 #define CIE_WATCHDOG_TH 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GET_CIE_WATCHDOG(__pIeeeDev) GET_DOT11D_INFO(__pIeeeDev)->CountryIeWatchdog
 #define RESET_CIE_WATCHDOG(__pIeeeDev) GET_CIE_WATCHDOG(__pIeeeDev) = 0
 #define UPDATE_CIE_WATCHDOG(__pIeeeDev) ++GET_CIE_WATCHDOG(__pIeeeDev)
+=======
+#define GET_CIE_WATCHDOG(__pIeeeDev) (GET_DOT11D_INFO(__pIeeeDev)->CountryIeWatchdog)
+#define RESET_CIE_WATCHDOG(__pIeeeDev) GET_CIE_WATCHDOG(__pIeeeDev) = 0
+#define UPDATE_CIE_WATCHDOG(__pIeeeDev) (++GET_CIE_WATCHDOG(__pIeeeDev))
+>>>>>>> v3.18
 =======
 #define GET_CIE_WATCHDOG(__pIeeeDev) (GET_DOT11D_INFO(__pIeeeDev)->CountryIeWatchdog)
 #define RESET_CIE_WATCHDOG(__pIeeeDev) GET_CIE_WATCHDOG(__pIeeeDev) = 0
@@ -115,9 +134,15 @@ void
 Dot11d_UpdateCountryIe(
 	struct ieee80211_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *		pTaddr,
 	u16	CoutryIeLen,
 	u8 * pCoutryIe
+=======
+	u8 *pTaddr,
+	u16 CoutryIeLen,
+	u8 *pCoutryIe
+>>>>>>> v3.18
 =======
 	u8 *pTaddr,
 	u16 CoutryIeLen,
@@ -134,30 +159,42 @@ DOT11D_GetMaxTxPwrInDbm(
 void
 DOT11D_ScanComplete(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_device * dev
 	);
 
 int IsLegalChannel(
 	struct ieee80211_device * dev,
 =======
+=======
+>>>>>>> v3.18
 	struct ieee80211_device *dev
 	);
 
 int IsLegalChannel(
 	struct ieee80211_device *dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 channel
 );
 
 int ToLegalChannel(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_device * dev,
 	u8 channel
 );
 #endif // #ifndef __INC_DOT11D_H
 =======
+=======
+>>>>>>> v3.18
 	struct ieee80211_device *dev,
 	u8 channel
 );
 #endif /* #ifndef __INC_DOT11D_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -2,15 +2,21 @@
 #define __ASM_SPARC_SYSCALL_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/sched.h>
 #include <asm/ptrace.h>
 =======
+=======
+>>>>>>> v3.18
 #include <uapi/linux/audit.h>
 #include <linux/kernel.h>
 #include <linux/sched.h>
 #include <asm/ptrace.h>
 #include <asm/thread_info.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -133,11 +139,17 @@ static inline void syscall_set_arguments(struct task_struct *task,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int syscall_get_arch(void)
 {
 	return is_32bit_task() ? AUDIT_ARCH_SPARC : AUDIT_ARCH_SPARC64;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_SPARC_SYSCALL_H */

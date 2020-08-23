@@ -20,10 +20,13 @@
 #include "common.h"
 #include "cpuidle.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "crm-regs-imx5.h"
 #include "hardware.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include "hardware.h"
 
 #define MXC_CCM_CLPCR			0x54
@@ -44,6 +47,9 @@
 
 #define MXC_SRPGCR_PCR			1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The WAIT_UNCLOCKED_POWER_OFF state only requires <= 500ns to exit.
@@ -56,7 +62,10 @@
 #define IMX5_DEFAULT_CPU_IDLE_STATE WAIT_UNCLOCKED_POWER_OFF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct imx5_pm_data {
 	phys_addr_t cortex_addr;
 	phys_addr_t gpc_addr;
@@ -81,6 +90,9 @@ void __init imx5_pm_set_ccm_base(void __iomem *base)
 	ccm_base = base;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * set cpu low power mode before WFI instruction. This function is called
@@ -94,6 +106,7 @@ static void mx5_cpu_lp_set(enum mxc_cpu_pwr_mode mode)
 
 	/* always allow platform to issue a deep sleep mode request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	plat_lpc = __raw_readl(MXC_CORTEXA8_PLAT_LPC) &
 	    ~(MXC_CORTEXA8_PLAT_LPC_DSM);
 	ccm_clpcr = __raw_readl(MXC_CCM_CLPCR) & ~(MXC_CCM_CLPCR_LPM_MASK);
@@ -101,6 +114,8 @@ static void mx5_cpu_lp_set(enum mxc_cpu_pwr_mode mode)
 	empgc0 = __raw_readl(MXC_SRPG_EMPGC0_SRPGCR) & ~(MXC_SRPGCR_PCR);
 	empgc1 = __raw_readl(MXC_SRPG_EMPGC1_SRPGCR) & ~(MXC_SRPGCR_PCR);
 =======
+=======
+>>>>>>> v3.18
 	plat_lpc = __raw_readl(cortex_base + MXC_CORTEXA8_PLAT_LPC) &
 	    ~(MXC_CORTEXA8_PLAT_LPC_DSM);
 	ccm_clpcr = __raw_readl(ccm_base + MXC_CCM_CLPCR) &
@@ -111,6 +126,9 @@ static void mx5_cpu_lp_set(enum mxc_cpu_pwr_mode mode)
 		 ~(MXC_SRPGCR_PCR);
 	empgc1 = __raw_readl(gpc_base + MXC_SRPG_EMPGC1_SRPGCR) &
 		 ~(MXC_SRPGCR_PCR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (mode) {
@@ -146,15 +164,21 @@ static void mx5_cpu_lp_set(enum mxc_cpu_pwr_mode mode)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(plat_lpc, MXC_CORTEXA8_PLAT_LPC);
 	__raw_writel(ccm_clpcr, MXC_CCM_CLPCR);
 	__raw_writel(arm_srpgcr, MXC_SRPG_ARM_SRPGCR);
 	__raw_writel(arm_srpgcr, MXC_SRPG_NEON_SRPGCR);
 =======
+=======
+>>>>>>> v3.18
 	__raw_writel(plat_lpc, cortex_base + MXC_CORTEXA8_PLAT_LPC);
 	__raw_writel(ccm_clpcr, ccm_base + MXC_CCM_CLPCR);
 	__raw_writel(arm_srpgcr, gpc_base + MXC_SRPG_ARM_SRPGCR);
 	__raw_writel(arm_srpgcr, gpc_base + MXC_SRPG_NEON_SRPGCR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (stop_mode) {
@@ -162,8 +186,13 @@ static void mx5_cpu_lp_set(enum mxc_cpu_pwr_mode mode)
 		empgc1 |= MXC_SRPGCR_PCR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__raw_writel(empgc0, MXC_SRPG_EMPGC0_SRPGCR);
 		__raw_writel(empgc1, MXC_SRPG_EMPGC1_SRPGCR);
+=======
+		__raw_writel(empgc0, gpc_base + MXC_SRPG_EMPGC0_SRPGCR);
+		__raw_writel(empgc1, gpc_base + MXC_SRPG_EMPGC1_SRPGCR);
+>>>>>>> v3.18
 =======
 		__raw_writel(empgc0, gpc_base + MXC_SRPG_EMPGC0_SRPGCR);
 		__raw_writel(empgc1, gpc_base + MXC_SRPG_EMPGC1_SRPGCR);
@@ -190,8 +219,13 @@ static int mx5_suspend_enter(suspend_state_t state)
 
 		/*clear the EMPGC0/1 bits */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__raw_writel(0, MXC_SRPG_EMPGC0_SRPGCR);
 		__raw_writel(0, MXC_SRPG_EMPGC1_SRPGCR);
+=======
+		__raw_writel(0, gpc_base + MXC_SRPG_EMPGC0_SRPGCR);
+		__raw_writel(0, gpc_base + MXC_SRPG_EMPGC1_SRPGCR);
+>>>>>>> v3.18
 =======
 		__raw_writel(0, gpc_base + MXC_SRPG_EMPGC0_SRPGCR);
 		__raw_writel(0, gpc_base + MXC_SRPG_EMPGC1_SRPGCR);
@@ -230,7 +264,11 @@ static void imx5_pm_idle(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init imx5_pm_common_init(void)
+=======
+static int __init imx5_pm_common_init(const struct imx5_pm_data *data)
+>>>>>>> v3.18
 =======
 static int __init imx5_pm_common_init(const struct imx5_pm_data *data)
 >>>>>>> v3.18
@@ -248,11 +286,14 @@ static int __init imx5_pm_common_init(const struct imx5_pm_data *data)
 	arm_pm_idle = imx5_pm_idle;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set the registers to the default cpu idle state. */
 	mx5_cpu_lp_set(IMX5_DEFAULT_CPU_IDLE_STATE);
 
 	return imx5_cpuidle_init();
 =======
+=======
+>>>>>>> v3.18
 	cortex_base = ioremap(data->cortex_addr, SZ_16K);
 	gpc_base = ioremap(data->gpc_addr, SZ_16K);
 	WARN_ON(!ccm_base || !cortex_base || !gpc_base);
@@ -267,15 +308,22 @@ static int __init imx5_pm_common_init(const struct imx5_pm_data *data)
 	suspend_set_ops(&mx5_suspend_ops);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void __init imx51_pm_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = imx5_pm_common_init();
 	if (!ret)
 		suspend_set_ops(&mx5_suspend_ops);
+=======
+	imx5_pm_common_init(&imx51_pm_data);
+>>>>>>> v3.18
 =======
 	imx5_pm_common_init(&imx51_pm_data);
 >>>>>>> v3.18
@@ -284,7 +332,11 @@ void __init imx51_pm_init(void)
 void __init imx53_pm_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	imx5_pm_common_init();
+=======
+	imx5_pm_common_init(&imx53_pm_data);
+>>>>>>> v3.18
 =======
 	imx5_pm_common_init(&imx53_pm_data);
 >>>>>>> v3.18

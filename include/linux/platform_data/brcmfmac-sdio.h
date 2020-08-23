@@ -91,7 +91,10 @@ void __init brcmfmac_init_pdata(void)
  * used for registering the irq using request_irq function.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * broken_sg_support: flag for broken sg list support of SDIO host controller.
  * Set this to true if the SDIO host controller has higher align requirement
  * than 32 bytes for each scatterlist item.
@@ -100,6 +103,9 @@ void __init brcmfmac_init_pdata(void)
  *
  * sd_sgentry_align: length alignment requirement for each sg entry
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * power_on: This function is called by the brcmfmac when the module gets
  * loaded. This can be particularly useful for low power devices. The platform
@@ -128,6 +134,12 @@ struct brcmfmac_sdio_platform_data {
 	unsigned int oob_irq_nr;
 	unsigned long oob_irq_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool broken_sg_support;
+	unsigned short sd_head_align;
+	unsigned short sd_sgentry_align;
+>>>>>>> v3.18
 =======
 	bool broken_sg_support;
 	unsigned short sd_head_align;

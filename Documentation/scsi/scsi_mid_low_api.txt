@@ -883,14 +883,20 @@ Details:
  *      Calling context: kernel thread
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      Notes: Invoked from scsi_eh thread. No other commands will be
  *      queued on current host during eh.
 =======
+=======
+>>>>>>> v3.18
  *      Notes: If 'no_async_abort' is defined this callback
  *  	will be invoked from scsi_eh thread. No other commands
  *	will then be queued on current host during eh.
  *	Otherwise it will be called whenever scsi_times_out()
  *      is called due to a command timeout.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  *      Optionally defined in: LLD
@@ -1266,6 +1272,11 @@ of interest:
     use_clustering - 1=>SCSI commands in mid level's queue can be merged,
                      0=>disallow SCSI command merging
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    no_async_abort - 1=>Asynchronous aborts are not supported
+                     0=>Timed-out commands will be aborted asynchronously
+>>>>>>> v3.18
 =======
     no_async_abort - 1=>Asynchronous aborts are not supported
                      0=>Timed-out commands will be aborted asynchronously

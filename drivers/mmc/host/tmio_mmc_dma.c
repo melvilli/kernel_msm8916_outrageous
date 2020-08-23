@@ -29,10 +29,15 @@ void tmio_mmc_enable_dma(struct tmio_mmc_host *host, bool enable)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SUPERH) || defined(CONFIG_ARCH_SHMOBILE)
 	/* Switch DMA mode on or off - SuperH specific? */
 	sd_ctrl_write16(host, CTL_DMA_ENABLE, enable ? 2 : 0);
 #endif
+=======
+	if (host->pdata->flags & TMIO_MMC_HAVE_CTL_DMA_REG)
+		sd_ctrl_write16(host, CTL_DMA_ENABLE, enable ? 2 : 0);
+>>>>>>> v3.18
 =======
 	if (host->pdata->flags & TMIO_MMC_HAVE_CTL_DMA_REG)
 		sd_ctrl_write16(host, CTL_DMA_ENABLE, enable ? 2 : 0);
@@ -267,6 +272,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* It might be necessary to make filter MFD specific */
 static bool tmio_mmc_filter(struct dma_chan *chan, void *arg)
 {
@@ -284,6 +290,8 @@ void tmio_mmc_request_dma(struct tmio_mmc_host *host, struct tmio_mmc_data *pdat
 	if (!host->chan_tx && !host->chan_rx) {
 		dma_cap_mask_t mask;
 =======
+=======
+>>>>>>> v3.18
 void tmio_mmc_request_dma(struct tmio_mmc_host *host, struct tmio_mmc_data *pdata)
 {
 	/* We can only either use DMA for both Tx and Rx or not use it at all */
@@ -300,14 +308,23 @@ void tmio_mmc_request_dma(struct tmio_mmc_host *host, struct tmio_mmc_data *pdat
 
 		if (!res)
 			return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		dma_cap_zero(mask);
 		dma_cap_set(DMA_SLAVE, mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		host->chan_tx = dma_request_channel(mask, tmio_mmc_filter,
 						    pdata->dma->chan_priv_tx);
+=======
+		host->chan_tx = dma_request_slave_channel_compat(mask,
+					pdata->dma->filter, pdata->dma->chan_priv_tx,
+					&host->pdev->dev, "tx");
+>>>>>>> v3.18
 =======
 		host->chan_tx = dma_request_slave_channel_compat(mask,
 					pdata->dma->filter, pdata->dma->chan_priv_tx,
@@ -320,9 +337,12 @@ void tmio_mmc_request_dma(struct tmio_mmc_host *host, struct tmio_mmc_data *pdat
 			return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		host->chan_rx = dma_request_channel(mask, tmio_mmc_filter,
 						    pdata->dma->chan_priv_rx);
 =======
+=======
+>>>>>>> v3.18
 		if (pdata->dma->chan_priv_tx)
 			cfg.slave_id = pdata->dma->slave_id_tx;
 		cfg.direction = DMA_MEM_TO_DEV;
@@ -336,6 +356,9 @@ void tmio_mmc_request_dma(struct tmio_mmc_host *host, struct tmio_mmc_data *pdat
 		host->chan_rx = dma_request_slave_channel_compat(mask,
 					pdata->dma->filter, pdata->dma->chan_priv_rx,
 					&host->pdev->dev, "rx");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_dbg(&host->pdev->dev, "%s: RX: got channel %p\n", __func__,
 			host->chan_rx);
@@ -344,7 +367,10 @@ void tmio_mmc_request_dma(struct tmio_mmc_host *host, struct tmio_mmc_data *pdat
 			goto ereqrx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (pdata->dma->chan_priv_rx)
 			cfg.slave_id = pdata->dma->slave_id_rx;
 		cfg.direction = DMA_DEV_TO_MEM;
@@ -355,6 +381,9 @@ void tmio_mmc_request_dma(struct tmio_mmc_host *host, struct tmio_mmc_data *pdat
 		if (ret < 0)
 			goto ecfgrx;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		host->bounce_buf = (u8 *)__get_free_page(GFP_KERNEL | GFP_DMA);
 		if (!host->bounce_buf)
@@ -370,15 +399,21 @@ void tmio_mmc_request_dma(struct tmio_mmc_host *host, struct tmio_mmc_data *pdat
 
 ebouncebuf:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_release_channel(host->chan_rx);
 	host->chan_rx = NULL;
 ereqrx:
 =======
+=======
+>>>>>>> v3.18
 ecfgrx:
 	dma_release_channel(host->chan_rx);
 	host->chan_rx = NULL;
 ereqrx:
 ecfgtx:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dma_release_channel(host->chan_tx);
 	host->chan_tx = NULL;

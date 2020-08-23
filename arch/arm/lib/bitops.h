@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -15,12 +19,18 @@ UNWIND(	.fnstart	)
 	mov	r0, r0, lsr #5
 	add	r1, r1, r0, lsl #2	@ Get word offset
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if __LINUX_ARM_ARCH__ >= 7 && defined(CONFIG_SMP)
 	.arch_extension	mp
 	ALT_SMP(W(pldw)	[r1])
 	ALT_UP(W(nop))
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mov	r3, r2, lsl r3
 1:	ldrex	r2, [r1]
@@ -45,12 +55,18 @@ UNWIND(	.fnstart	)
 	mov	r3, r2, lsl r3		@ create mask
 	smp_dmb
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if __LINUX_ARM_ARCH__ >= 7 && defined(CONFIG_SMP)
 	.arch_extension	mp
 	ALT_SMP(W(pldw)	[r1])
 	ALT_UP(W(nop))
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 1:	ldrex	r2, [r1]
 	ands	r0, r2, r3		@ save old value of bit
@@ -81,7 +97,11 @@ UNWIND(	.fnstart	)
 	str	r2, [r1, r0, lsl #2]
 	restore_irqs ip
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -113,7 +133,11 @@ UNWIND(	.fnstart	)
 	moveq	r0, #0
 	restore_irqs ip
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

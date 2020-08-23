@@ -21,7 +21,13 @@
 static void __init imx27_dt_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct platform_device_info devinfo = { .name = "cpufreq-cpu0", };
+=======
+	struct platform_device_info devinfo = { .name = "cpufreq-dt", };
+
+	mxc_arch_reset_init_dt();
+>>>>>>> v3.18
 =======
 	struct platform_device_info devinfo = { .name = "cpufreq-dt", };
 
@@ -39,6 +45,7 @@ static const char * const imx27_dt_board_compat[] __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init imx27_timer_init(void)
 {
 	mx27_clocks_init_dt();
@@ -46,13 +53,18 @@ static void __init imx27_timer_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 DT_MACHINE_START(IMX27_DT, "Freescale i.MX27 (Device Tree Support)")
 	.map_io		= mx27_map_io,
 	.init_early	= imx27_init_early,
 	.init_irq	= mx27_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= imx27_handle_irq,
 	.init_time	= imx27_timer_init,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= imx27_dt_init,

@@ -25,8 +25,14 @@ int line6_init_audio(struct usb_line6 *line6)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
 			      THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(line6->ifcdev,
+			   SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
+			   THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(line6->ifcdev,
 			   SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,

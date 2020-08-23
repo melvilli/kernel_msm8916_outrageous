@@ -18,7 +18,11 @@
  * sh64_tlb_init - Perform initial setup for the DTLB and ITLB.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit sh64_tlb_init(void)
+=======
+int sh64_tlb_init(void)
+>>>>>>> v3.18
 =======
 int sh64_tlb_init(void)
 >>>>>>> v3.18

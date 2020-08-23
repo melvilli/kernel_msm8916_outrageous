@@ -37,14 +37,20 @@
 #include <linux/console.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pm_runtime.h>
 #include <linux/vga_switcheroo.h>
 #include <drm/drm_gem.h>
 
 #include "drm_crtc_helper.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * KMS wrapper.
@@ -83,6 +89,7 @@
  *   2.32.0 - new info request for rings working
  *   2.33.0 - Add SI tiling mode array query
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 #define KMS_DRIVER_MAJOR	2
 #define KMS_DRIVER_MINOR	33
@@ -91,6 +98,8 @@ int radeon_driver_load_kms(struct drm_device *dev, unsigned long flags);
 int radeon_driver_unload_kms(struct drm_device *dev);
 int radeon_driver_firstopen_kms(struct drm_device *dev);
 =======
+=======
+>>>>>>> v3.18
  *   2.34.0 - Add CIK tiling mode array query
  *   2.35.0 - Add CIK macrotile mode array query
  *   2.36.0 - Fix CIK DCE tiling setup
@@ -106,6 +115,9 @@ int radeon_driver_firstopen_kms(struct drm_device *dev);
 #define KMS_DRIVER_PATCHLEVEL	0
 int radeon_driver_load_kms(struct drm_device *dev, unsigned long flags);
 int radeon_driver_unload_kms(struct drm_device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void radeon_driver_lastclose_kms(struct drm_device *dev);
 int radeon_driver_open_kms(struct drm_device *dev, struct drm_file *file_priv);
@@ -114,8 +126,13 @@ void radeon_driver_postclose_kms(struct drm_device *dev,
 void radeon_driver_preclose_kms(struct drm_device *dev,
 				struct drm_file *file_priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int radeon_suspend_kms(struct drm_device *dev, pm_message_t state);
 int radeon_resume_kms(struct drm_device *dev);
+=======
+int radeon_suspend_kms(struct drm_device *dev, bool suspend, bool fbcon);
+int radeon_resume_kms(struct drm_device *dev, bool resume, bool fbcon);
+>>>>>>> v3.18
 =======
 int radeon_suspend_kms(struct drm_device *dev, bool suspend, bool fbcon);
 int radeon_resume_kms(struct drm_device *dev, bool resume, bool fbcon);
@@ -131,10 +148,14 @@ void radeon_driver_irq_preinstall_kms(struct drm_device *dev);
 int radeon_driver_irq_postinstall_kms(struct drm_device *dev);
 void radeon_driver_irq_uninstall_kms(struct drm_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t radeon_driver_irq_handler_kms(DRM_IRQ_ARGS);
 int radeon_dma_ioctl_kms(struct drm_device *dev, void *data,
 			 struct drm_file *file_priv);
 int radeon_gem_object_init(struct drm_gem_object *obj);
+=======
+irqreturn_t radeon_driver_irq_handler_kms(int irq, void *arg);
+>>>>>>> v3.18
 =======
 irqreturn_t radeon_driver_irq_handler_kms(int irq, void *arg);
 >>>>>>> v3.18
@@ -144,10 +165,13 @@ int radeon_gem_object_open(struct drm_gem_object *obj,
 void radeon_gem_object_close(struct drm_gem_object *obj,
 				struct drm_file *file_priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int radeon_get_crtc_scanoutpos(struct drm_device *dev, int crtc,
 				      int *vpos, int *hpos);
 extern struct drm_ioctl_desc radeon_ioctls_kms[];
 =======
+=======
+>>>>>>> v3.18
 struct dma_buf *radeon_gem_prime_export(struct drm_device *dev,
 					struct drm_gem_object *gobj,
 					int flags);
@@ -157,6 +181,9 @@ extern int radeon_get_crtc_scanoutpos(struct drm_device *dev, int crtc,
 				      ktime_t *etime);
 extern bool radeon_is_px(struct drm_device *dev);
 extern const struct drm_ioctl_desc radeon_ioctls_kms[];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int radeon_max_kms_ioctl;
 int radeon_mmap(struct file *filp, struct vm_area_struct *vma);
@@ -167,6 +194,7 @@ int radeon_mode_dumb_create(struct drm_file *file_priv,
 			    struct drm_device *dev,
 			    struct drm_mode_create_dumb *args);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int radeon_mode_dumb_destroy(struct drm_file *file_priv,
 			     struct drm_device *dev,
 			     uint32_t handle);
@@ -176,6 +204,8 @@ struct drm_gem_object *radeon_gem_prime_import_sg_table(struct drm_device *dev,
 							struct sg_table *sg);
 int radeon_gem_prime_pin(struct drm_gem_object *obj);
 =======
+=======
+>>>>>>> v3.18
 struct sg_table *radeon_gem_prime_get_sg_table(struct drm_gem_object *obj);
 struct drm_gem_object *radeon_gem_prime_import_sg_table(struct drm_device *dev,
 							struct dma_buf_attachment *,
@@ -183,6 +213,9 @@ struct drm_gem_object *radeon_gem_prime_import_sg_table(struct drm_device *dev,
 int radeon_gem_prime_pin(struct drm_gem_object *obj);
 void radeon_gem_prime_unpin(struct drm_gem_object *obj);
 struct reservation_object *radeon_gem_prime_res_obj(struct drm_gem_object *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void *radeon_gem_prime_vmap(struct drm_gem_object *obj);
 void radeon_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr);
@@ -210,7 +243,11 @@ int radeon_r4xx_atom = 0;
 int radeon_agpmode = 0;
 int radeon_vram_limit = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 int radeon_gart_size = 512; /* default gart size */
+=======
+int radeon_gart_size = -1; /* auto */
+>>>>>>> v3.18
 =======
 int radeon_gart_size = -1; /* auto */
 >>>>>>> v3.18
@@ -219,7 +256,11 @@ int radeon_testing = 0;
 int radeon_connector_table = 0;
 int radeon_tv = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 int radeon_audio = 0;
+=======
+int radeon_audio = -1;
+>>>>>>> v3.18
 =======
 int radeon_audio = -1;
 >>>>>>> v3.18
@@ -230,7 +271,10 @@ int radeon_msi = -1;
 int radeon_lockup_timeout = 10000;
 int radeon_fastfb = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int radeon_dpm = -1;
 int radeon_aspm = -1;
 int radeon_runtime_pm = -1;
@@ -241,6 +285,9 @@ int radeon_deep_color = 0;
 int radeon_use_pflipirq = 2;
 int radeon_bapm = -1;
 int radeon_backlight = -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_PARM_DESC(no_wb, "Disable AGP writeback for scratch registers");
@@ -256,7 +303,11 @@ MODULE_PARM_DESC(r4xx_atom, "Enable ATOMBIOS modesetting for R4xx");
 module_param_named(r4xx_atom, radeon_r4xx_atom, int, 0444);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_PARM_DESC(vramlimit, "Restrict VRAM for testing");
+=======
+MODULE_PARM_DESC(vramlimit, "Restrict VRAM for testing, in megabytes");
+>>>>>>> v3.18
 =======
 MODULE_PARM_DESC(vramlimit, "Restrict VRAM for testing, in megabytes");
 >>>>>>> v3.18
@@ -266,7 +317,11 @@ MODULE_PARM_DESC(agpmode, "AGP Mode (-1 == PCI)");
 module_param_named(agpmode, radeon_agpmode, int, 0444);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_PARM_DESC(gartsize, "Size of PCIE/IGP gart to setup in megabytes (32, 64, etc)");
+=======
+MODULE_PARM_DESC(gartsize, "Size of PCIE/IGP gart to setup in megabytes (32, 64, etc., -1 = auto)");
+>>>>>>> v3.18
 =======
 MODULE_PARM_DESC(gartsize, "Size of PCIE/IGP gart to setup in megabytes (32, 64, etc., -1 = auto)");
 >>>>>>> v3.18
@@ -285,7 +340,11 @@ MODULE_PARM_DESC(tv, "TV enable (0 = disable)");
 module_param_named(tv, radeon_tv, int, 0444);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_PARM_DESC(audio, "Audio enable (1 = enable)");
+=======
+MODULE_PARM_DESC(audio, "Audio enable (-1 = auto, 0 = disable, 1 = enable)");
+>>>>>>> v3.18
 =======
 MODULE_PARM_DESC(audio, "Audio enable (-1 = auto, 0 = disable, 1 = enable)");
 >>>>>>> v3.18
@@ -310,7 +369,10 @@ MODULE_PARM_DESC(fastfb, "Direct FB access for IGP chips (0 = disable, 1 = enabl
 module_param_named(fastfb, radeon_fastfb, int, 0444);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 MODULE_PARM_DESC(dpm, "DPM support (1 = enable, 0 = disable, -1 = auto)");
 module_param_named(dpm, radeon_dpm, int, 0444);
 
@@ -341,6 +403,9 @@ module_param_named(bapm, radeon_bapm, int, 0444);
 MODULE_PARM_DESC(backlight, "backlight support (1 = enable, 0 = disable, -1 = auto)");
 module_param_named(backlight, radeon_backlight, int, 0444);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct pci_device_id pciidlist[] = {
 	radeon_PCI_IDS
@@ -379,6 +444,10 @@ static int radeon_resume(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -388,9 +457,14 @@ static const struct file_operations radeon_driver_old_fops = {
 	.release = drm_release,
 	.unlocked_ioctl = drm_ioctl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mmap = drm_mmap,
 	.poll = drm_poll,
 	.fasync = drm_fasync,
+=======
+	.mmap = drm_legacy_mmap,
+	.poll = drm_poll,
+>>>>>>> v3.18
 =======
 	.mmap = drm_legacy_mmap,
 	.poll = drm_poll,
@@ -405,7 +479,11 @@ static const struct file_operations radeon_driver_old_fops = {
 static struct drm_driver driver_old = {
 	.driver_features =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    DRIVER_USE_AGP | DRIVER_USE_MTRR | DRIVER_PCI_DMA | DRIVER_SG |
+=======
+	    DRIVER_USE_AGP | DRIVER_PCI_DMA | DRIVER_SG |
+>>>>>>> v3.18
 =======
 	    DRIVER_USE_AGP | DRIVER_PCI_DMA | DRIVER_SG |
 >>>>>>> v3.18
@@ -418,6 +496,10 @@ static struct drm_driver driver_old = {
 	.postclose = radeon_driver_postclose,
 	.lastclose = radeon_driver_lastclose,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_busid = drm_pci_set_busid,
+>>>>>>> v3.18
 =======
 	.set_busid = drm_pci_set_busid,
 >>>>>>> v3.18
@@ -491,6 +573,7 @@ radeon_pci_remove(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 radeon_pci_suspend(struct pci_dev *pdev, pm_message_t state)
 {
@@ -506,6 +589,8 @@ radeon_pci_resume(struct pci_dev *pdev)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static int radeon_pmops_suspend(struct device *dev)
 {
 	struct pci_dev *pdev = to_pci_dev(dev);
@@ -638,16 +723,25 @@ static const struct dev_pm_ops radeon_pm_ops = {
 	.runtime_idle = radeon_pmops_runtime_idle,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct file_operations radeon_driver_kms_fops = {
 	.owner = THIS_MODULE,
 	.open = drm_open,
 	.release = drm_release,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.unlocked_ioctl = drm_ioctl,
 	.mmap = radeon_mmap,
 	.poll = drm_poll,
 	.fasync = drm_fasync,
+=======
+	.unlocked_ioctl = radeon_drm_ioctl,
+	.mmap = radeon_mmap,
+	.poll = drm_poll,
+>>>>>>> v3.18
 =======
 	.unlocked_ioctl = radeon_drm_ioctl,
 	.mmap = radeon_mmap,
@@ -662,6 +756,7 @@ static const struct file_operations radeon_driver_kms_fops = {
 static struct drm_driver kms_driver = {
 	.driver_features =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    DRIVER_USE_AGP | DRIVER_USE_MTRR | DRIVER_PCI_DMA | DRIVER_SG |
 	    DRIVER_HAVE_IRQ | DRIVER_HAVE_DMA | DRIVER_IRQ_SHARED | DRIVER_GEM |
 	    DRIVER_PRIME,
@@ -669,19 +764,29 @@ static struct drm_driver kms_driver = {
 	.load = radeon_driver_load_kms,
 	.firstopen = radeon_driver_firstopen_kms,
 =======
+=======
+>>>>>>> v3.18
 	    DRIVER_USE_AGP |
 	    DRIVER_HAVE_IRQ | DRIVER_IRQ_SHARED | DRIVER_GEM |
 	    DRIVER_PRIME | DRIVER_RENDER,
 	.load = radeon_driver_load_kms,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = radeon_driver_open_kms,
 	.preclose = radeon_driver_preclose_kms,
 	.postclose = radeon_driver_postclose_kms,
 	.lastclose = radeon_driver_lastclose_kms,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.unload = radeon_driver_unload_kms,
 	.suspend = radeon_suspend_kms,
 	.resume = radeon_resume_kms,
+=======
+	.set_busid = drm_pci_set_busid,
+	.unload = radeon_driver_unload_kms,
+>>>>>>> v3.18
 =======
 	.set_busid = drm_pci_set_busid,
 	.unload = radeon_driver_unload_kms,
@@ -701,6 +806,7 @@ static struct drm_driver kms_driver = {
 	.irq_handler = radeon_driver_irq_handler_kms,
 	.ioctls = radeon_ioctls_kms,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.gem_init_object = radeon_gem_object_init,
 	.gem_free_object = radeon_gem_object_free,
 	.gem_open_object = radeon_gem_object_open,
@@ -710,27 +816,38 @@ static struct drm_driver kms_driver = {
 	.dumb_map_offset = radeon_mode_dumb_mmap,
 	.dumb_destroy = radeon_mode_dumb_destroy,
 =======
+=======
+>>>>>>> v3.18
 	.gem_free_object = radeon_gem_object_free,
 	.gem_open_object = radeon_gem_object_open,
 	.gem_close_object = radeon_gem_object_close,
 	.dumb_create = radeon_mode_dumb_create,
 	.dumb_map_offset = radeon_mode_dumb_mmap,
 	.dumb_destroy = drm_gem_dumb_destroy,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.fops = &radeon_driver_kms_fops,
 
 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.gem_prime_export = drm_gem_prime_export,
 	.gem_prime_import = drm_gem_prime_import,
 	.gem_prime_pin = radeon_gem_prime_pin,
 =======
+=======
+>>>>>>> v3.18
 	.gem_prime_export = radeon_gem_prime_export,
 	.gem_prime_import = drm_gem_prime_import,
 	.gem_prime_pin = radeon_gem_prime_pin,
 	.gem_prime_unpin = radeon_gem_prime_unpin,
 	.gem_prime_res_obj = radeon_gem_prime_res_obj,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.gem_prime_get_sg_table = radeon_gem_prime_get_sg_table,
 	.gem_prime_import_sg_table = radeon_gem_prime_import_sg_table,
@@ -761,8 +878,12 @@ static struct pci_driver radeon_kms_pci_driver = {
 	.probe = radeon_pci_probe,
 	.remove = radeon_pci_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend = radeon_pci_suspend,
 	.resume = radeon_pci_resume,
+=======
+	.driver.pm = &radeon_pm_ops,
+>>>>>>> v3.18
 =======
 	.driver.pm = &radeon_pm_ops,
 >>>>>>> v3.18

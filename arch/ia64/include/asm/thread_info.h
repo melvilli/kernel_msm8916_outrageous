@@ -12,9 +12,12 @@
 #include <asm/ptrace.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE_BIT 30
 #define PREEMPT_ACTIVE	(1 << PREEMPT_ACTIVE_BIT)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef __ASSEMBLY__
@@ -114,6 +117,10 @@ struct thread_info {
 #define TIF_DB_DISABLED		19	/* debug trap disabled for fsyscall */
 #define TIF_RESTORE_RSE		21	/* user RBS is newer than kernel RBS */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TIF_POLLING_NRFLAG	22	/* idle is polling for TIF_NEED_RESCHED */
+>>>>>>> v3.18
 =======
 #define TIF_POLLING_NRFLAG	22	/* idle is polling for TIF_NEED_RESCHED */
 >>>>>>> v3.18
@@ -129,6 +136,10 @@ struct thread_info {
 #define _TIF_DB_DISABLED	(1 << TIF_DB_DISABLED)
 #define _TIF_RESTORE_RSE	(1 << TIF_RESTORE_RSE)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define _TIF_POLLING_NRFLAG	(1 << TIF_POLLING_NRFLAG)
+>>>>>>> v3.18
 =======
 #define _TIF_POLLING_NRFLAG	(1 << TIF_POLLING_NRFLAG)
 >>>>>>> v3.18
@@ -140,7 +151,10 @@ struct thread_info {
 #define TIF_WORK_MASK		(TIF_ALLWORK_MASK&~(_TIF_SYSCALL_TRACE|_TIF_SYSCALL_AUDIT))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TS_POLLING		1 	/* true if in idle loop and not sleeping */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define TS_RESTORE_SIGMASK	2	/* restore signal mask in do_signal() */

@@ -457,7 +457,11 @@ int hpux_sysfs(int opcode, unsigned long arg1, unsigned long arg2)
 
 		/* String could be altered by userspace after strlen_user() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fsname[len] = '\0';
+=======
+		fsname[len - 1] = '\0';
+>>>>>>> v3.18
 =======
 		fsname[len - 1] = '\0';
 >>>>>>> v3.18

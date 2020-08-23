@@ -27,6 +27,7 @@ extern struct cpu_topology_s390 cpu_topology[NR_CPUS];
 #define mc_capable() 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline const struct cpumask *cpu_coregroup_mask(int cpu)
 {
 	return &cpu_topology[cpu].core_mask;
@@ -39,12 +40,18 @@ static inline const struct cpumask *cpu_book_mask(int cpu)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int topology_cpu_init(struct cpu *);
 int topology_set_cpu_management(int fc);
 void topology_schedule_update(void);
 void store_topology(struct sysinfo_15_1_x *info);
 void topology_expect_change(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+const struct cpumask *cpu_coregroup_mask(int cpu);
+>>>>>>> v3.18
 =======
 const struct cpumask *cpu_coregroup_mask(int cpu);
 >>>>>>> v3.18
@@ -72,8 +79,11 @@ static inline void s390_init_cpu_topology(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SD_BOOK_INIT	SD_CPU_INIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm-generic/topology.h>

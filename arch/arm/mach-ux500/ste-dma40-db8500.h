@@ -13,6 +13,7 @@
 #define DB8500_DMA_NR_DEV 64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum dma_src_dev_type {
 	DB8500_DMA_DEV0_SPI0_RX = 0,
 	DB8500_DMA_DEV1_SD_MMC0_RX = 1,
@@ -141,6 +142,8 @@ enum dma_dest_dev_type {
 	DB8500_DMA_DEV62_CAC0_TX_HAC0_TX = 62,
 	DB8500_DMA_DEV63_HAC0_TX = 63,
 =======
+=======
+>>>>>>> v3.18
 /*
  * Unless otherwise specified, all channels numbers are used for
  * TX & RX, and can be used for either source or destination
@@ -209,6 +212,9 @@ enum dma_dev_type {
 	DB8500_DMA_DEV61_CAC0 = 61,
 	DB8500_DMA_DEV62_CAC0_TX_HAC0_TX = 62,		/* TX only */
 	DB8500_DMA_DEV63_HAC0_TX = 63,			/* TX only */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -86,7 +86,12 @@ nv50_i2c_port_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 
 	ret = nouveau_i2c_port_create(parent, engine, oclass, index,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     &nouveau_i2c_bit_algo, &port);
+=======
+				      &nouveau_i2c_bit_algo, &nv50_i2c_func,
+				      &port);
+>>>>>>> v3.18
 =======
 				      &nouveau_i2c_bit_algo, &nv50_i2c_func,
 				      &port);
@@ -99,7 +104,10 @@ nv50_i2c_port_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port->base.func = &nv50_i2c_func;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	port->state = 0x00000007;
@@ -130,6 +138,7 @@ nv50_i2c_sclass[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 nv50_i2c_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	      struct nouveau_oclass *oclass, void *data, u32 size,
@@ -152,18 +161,29 @@ nv50_i2c_oclass = {
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv50_i2c_ctor,
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_oclass *
 nv50_i2c_oclass = &(struct nouveau_i2c_impl) {
 	.base.handle = NV_SUBDEV(I2C, 0x50),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = _nouveau_i2c_ctor,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.dtor = _nouveau_i2c_dtor,
 		.init = _nouveau_i2c_init,
 		.fini = _nouveau_i2c_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.sclass = nv50_i2c_sclass,
+	.pad_x = &nv04_i2c_pad_oclass,
+}.base;
+>>>>>>> v3.18
 =======
 	.sclass = nv50_i2c_sclass,
 	.pad_x = &nv04_i2c_pad_oclass,

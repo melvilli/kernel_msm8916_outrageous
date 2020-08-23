@@ -151,7 +151,10 @@ gss_verify_mic_v2(struct krb5_ctx *ctx,
 				      .data = cksumdata};
 	s32 now;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 seqnum;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 *ptr = read_token->data;
@@ -201,14 +204,20 @@ gss_verify_mic_v2(struct krb5_ctx *ctx,
 		return GSS_S_CONTEXT_EXPIRED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* do sequencing checks */
 
 	seqnum = be64_to_cpup((__be64 *)ptr + 8);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * NOTE: the sequence number at ptr + 8 is skipped, rpcsec_gss
 	 * doesn't want it checked; see page 6 of rfc 2203.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return GSS_S_COMPLETE;

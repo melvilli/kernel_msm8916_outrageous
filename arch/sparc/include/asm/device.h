@@ -20,7 +20,11 @@ struct dev_archdata {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void of_propagate_archdata(struct platform_device *bus);
+=======
+void of_propagate_archdata(struct platform_device *bus);
+>>>>>>> v3.18
 =======
 void of_propagate_archdata(struct platform_device *bus);
 >>>>>>> v3.18

@@ -550,7 +550,11 @@ static void redo_fd_request(struct request_queue *q)
 			err = floppy_read_sectors(fs, blk_rq_pos(req),
 						  blk_rq_cur_sectors(req),
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  req->buffer);
+=======
+						  bio_data(req->bio));
+>>>>>>> v3.18
 =======
 						  bio_data(req->bio));
 >>>>>>> v3.18
@@ -898,7 +902,11 @@ static int swim_probe(struct platform_device *dev)
 	swim_base = ioremap(res->start, resource_size(res));
 	if (!swim_base) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
+=======
+		ret = -ENOMEM;
+>>>>>>> v3.18
 =======
 		ret = -ENOMEM;
 >>>>>>> v3.18
@@ -933,7 +941,10 @@ static int swim_probe(struct platform_device *dev)
 
 out_kfree:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(swd);
@@ -974,7 +985,10 @@ static int swim_remove(struct platform_device *dev)
 		release_mem_region(res->start, resource_size(res));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(swd);

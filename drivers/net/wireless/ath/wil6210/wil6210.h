@@ -24,6 +24,10 @@
 #include "wil_platform.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool no_fw_recovery;
+>>>>>>> v3.18
 =======
 extern bool no_fw_recovery;
 >>>>>>> v3.18
@@ -57,7 +61,13 @@ static inline u32 WIL_GET_BITS(u32 x, int b0, int b1)
 #define WIL6210_MAX_CID		(8) /* HW limit */
 #define WIL6210_NAPI_BUDGET	(16) /* arbitrary */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WIL6210_ITR_TRSH	(10000) /* arbitrary - about 15 IRQs/msec */
+=======
+/* Max supported by wil6210 value for interrupt threshold is 5sec. */
+#define WIL6210_ITR_TRSH_MAX (5000000)
+#define WIL6210_ITR_TRSH_DEFAULT	(300) /* usec */
+>>>>>>> v3.18
 =======
 /* Max supported by wil6210 value for interrupt threshold is 5sec. */
 #define WIL6210_ITR_TRSH_MAX (5000000)
@@ -388,13 +398,19 @@ struct wil_sta_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum {
 	fw_recovery_idle = 0,
 	fw_recovery_pending = 1,
 	fw_recovery_running = 2,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct wil6210_priv {
 	struct pci_dev *pdev;
@@ -407,19 +423,29 @@ struct wil6210_priv {
 	struct wil_board *board;
 	u8 n_mids; /* number of additional MIDs as reported by FW */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int recovery_count; /* num of FW recovery attempts in a short time */
 	unsigned long last_fw_recovery; /* jiffies of last fw recovery */
 =======
+=======
+>>>>>>> v3.18
 	u32 recovery_count; /* num of FW recovery attempts in a short time */
 	u32 recovery_state; /* FW recovery state machine */
 	unsigned long last_fw_recovery; /* jiffies of last fw recovery */
 	wait_queue_head_t wq; /* for all wait_event() use */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* profile */
 	u32 monitor_flags;
 	u32 secure_pcp; /* create secure PCP? */
 	int sinfo_gen;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 itr_trsh;
+>>>>>>> v3.18
 =======
 	u32 itr_trsh;
 >>>>>>> v3.18
@@ -482,9 +508,15 @@ struct wil6210_priv {
 #define wil_to_pcie_dev(i) (&i->pdev->dev)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wil_dbg_trace(struct wil6210_priv *wil, const char *fmt, ...);
 int wil_err(struct wil6210_priv *wil, const char *fmt, ...);
 int wil_info(struct wil6210_priv *wil, const char *fmt, ...);
+=======
+void wil_dbg_trace(struct wil6210_priv *wil, const char *fmt, ...);
+void wil_err(struct wil6210_priv *wil, const char *fmt, ...);
+void wil_info(struct wil6210_priv *wil, const char *fmt, ...);
+>>>>>>> v3.18
 =======
 void wil_dbg_trace(struct wil6210_priv *wil, const char *fmt, ...);
 void wil_err(struct wil6210_priv *wil, const char *fmt, ...);
@@ -513,6 +545,7 @@ void wil_info(struct wil6210_priv *wil, const char *fmt, ...);
 					prefix_type, rowsize,	\
 					groupsize, buf, len, ascii)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static inline void wil_hex_dump_txrx(const char *prefix_str,
 				  int prefix_type, int rowsize, int groupsize,
@@ -527,6 +560,8 @@ static inline void wil_hex_dump_wmi(const char *prefix_str,
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 #else /* defined(CONFIG_DYNAMIC_DEBUG) */
 static inline
 void wil_hex_dump_txrx(const char *prefix_str, int prefix_type, int rowsize,
@@ -540,6 +575,9 @@ void wil_hex_dump_wmi(const char *prefix_str, int prefix_type, int rowsize,
 {
 }
 #endif /* defined(CONFIG_DYNAMIC_DEBUG) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void wil_memcpy_fromio_32(void *dst, const volatile void __iomem *src,
@@ -555,7 +593,13 @@ int wil_priv_init(struct wil6210_priv *wil);
 void wil_priv_deinit(struct wil6210_priv *wil);
 int wil_reset(struct wil6210_priv *wil);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void wil_fw_error_recovery(struct wil6210_priv *wil);
+=======
+void wil_set_itr_trsh(struct wil6210_priv *wil);
+void wil_fw_error_recovery(struct wil6210_priv *wil);
+void wil_set_recovery_state(struct wil6210_priv *wil, int state);
+>>>>>>> v3.18
 =======
 void wil_set_itr_trsh(struct wil6210_priv *wil);
 void wil_fw_error_recovery(struct wil6210_priv *wil);
@@ -570,8 +614,13 @@ int __wil_down(struct wil6210_priv *wil);
 void wil_mbox_ring_le2cpus(struct wil6210_mbox_ring *r);
 int wil_find_cid(struct wil6210_priv *wil, const u8 *mac);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void __iomem *wmi_buffer_block(struct wil6210_priv *wil, __le32 ptr, u32 size);
+=======
+void wil_set_ethtoolops(struct net_device *ndev);
+
+>>>>>>> v3.18
 =======
 void wil_set_ethtoolops(struct net_device *ndev);
 
@@ -611,9 +660,13 @@ void wil_disable_irq(struct wil6210_priv *wil);
 void wil_enable_irq(struct wil6210_priv *wil);
 int wil_cfg80211_mgmt_tx(struct wiphy *wiphy, struct wireless_dev *wdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct ieee80211_channel *chan, bool offchan,
 			 unsigned int wait, const u8 *buf, size_t len,
 			 bool no_cck, bool dont_wait_for_ack,
+=======
+			 struct cfg80211_mgmt_tx_params *params,
+>>>>>>> v3.18
 =======
 			 struct cfg80211_mgmt_tx_params *params,
 >>>>>>> v3.18
@@ -631,7 +684,11 @@ int wmi_set_mac_address(struct wil6210_priv *wil, void *addr);
 int wmi_pcp_start(struct wil6210_priv *wil, int bi, u8 wmi_nettype, u8 chan);
 int wmi_pcp_stop(struct wil6210_priv *wil);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void wil6210_disconnect(struct wil6210_priv *wil, void *bssid);
+=======
+void wil6210_disconnect(struct wil6210_priv *wil, const u8 *bssid);
+>>>>>>> v3.18
 =======
 void wil6210_disconnect(struct wil6210_priv *wil, const u8 *bssid);
 >>>>>>> v3.18
@@ -655,7 +712,13 @@ void wil6210_unmask_irq_rx(struct wil6210_priv *wil);
 int wil_iftype_nl2wmi(enum nl80211_iftype type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wil_request_firmware(struct wil6210_priv *wil, const char *name);
+=======
+int wil_ioctl(struct wil6210_priv *wil, void __user *data, int cmd);
+int wil_request_firmware(struct wil6210_priv *wil, const char *name);
+
+>>>>>>> v3.18
 =======
 int wil_ioctl(struct wil6210_priv *wil, void __user *data, int cmd);
 int wil_request_firmware(struct wil6210_priv *wil, const char *name);

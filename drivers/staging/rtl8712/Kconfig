@@ -5,7 +5,10 @@ config R8712U
 	select WEXT_PRIV
 	select FW_LOADER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default N
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -16,7 +19,10 @@ config R8712_TX_AGGR
 	bool "Realtek RTL8712U Transmit Aggregation code"
 	depends on R8712U && BROKEN
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default N
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---

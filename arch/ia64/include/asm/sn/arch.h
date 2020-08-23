@@ -58,7 +58,11 @@ struct sn_hub_info_s {
 };
 DECLARE_PER_CPU(struct sn_hub_info_s, __sn_hub_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define sn_hub_info 	(&__get_cpu_var(__sn_hub_info))
+=======
+#define sn_hub_info 	this_cpu_ptr(&__sn_hub_info)
+>>>>>>> v3.18
 =======
 #define sn_hub_info 	this_cpu_ptr(&__sn_hub_info)
 >>>>>>> v3.18
@@ -77,7 +81,11 @@ DECLARE_PER_CPU(struct sn_hub_info_s, __sn_hub_info);
  */
 DECLARE_PER_CPU(short, __sn_cnodeid_to_nasid[MAX_COMPACT_NODES]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define sn_cnodeid_to_nasid	(&__get_cpu_var(__sn_cnodeid_to_nasid[0]))
+=======
+#define sn_cnodeid_to_nasid	this_cpu_ptr(&__sn_cnodeid_to_nasid[0])
+>>>>>>> v3.18
 =======
 #define sn_cnodeid_to_nasid	this_cpu_ptr(&__sn_cnodeid_to_nasid[0])
 >>>>>>> v3.18

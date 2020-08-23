@@ -14,7 +14,10 @@ Would be nice
    similar interfaces.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 MXS LRADC driver:
 This is a classic MFD device as it combines the following subdevices
  - touchscreen controller (input subsystem related device)
@@ -26,6 +29,9 @@ At least the battery voltage and die temperature feature is required in-kernel
 by a driver of the SoC's battery charging unit to avoid any damage to the
 silicon and the battery.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 TSL2561
 Would be nice

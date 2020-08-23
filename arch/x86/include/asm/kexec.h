@@ -24,6 +24,12 @@
 #include <asm/page.h>
 #include <asm/ptrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/bootparam.h>
+
+struct kimage;
+>>>>>>> v3.18
 =======
 #include <asm/bootparam.h>
 
@@ -68,11 +74,17 @@ struct kimage;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Memory to backup during crash kdump */
 #define KEXEC_BACKUP_SRC_START	(0UL)
 #define KEXEC_BACKUP_SRC_END	(640 * 1024UL)	/* 640K */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * CPU does not save ss and sp on stack if execution is already
@@ -174,7 +186,10 @@ struct kimage_arch {
 	pmd_t *pmd;
 	pte_t *pte;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Details of backup region */
 	unsigned long backup_src_start;
 	unsigned long backup_src_sz;
@@ -213,6 +228,9 @@ struct kexec_entry64_regs {
 	uint64_t r14;
 	uint64_t r15;
 	uint64_t rip;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #endif

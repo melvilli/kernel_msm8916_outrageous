@@ -80,7 +80,11 @@ struct rpc_task {
 	unsigned short		tk_timeouts;	/* maj timeouts */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef RPC_DEBUG
+=======
+#if defined(RPC_DEBUG) || defined(RPC_TRACEPOINTS)
+>>>>>>> v3.18
 =======
 #if defined(RPC_DEBUG) || defined(RPC_TRACEPOINTS)
 >>>>>>> v3.18
@@ -93,6 +97,7 @@ struct rpc_task {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* support walking a list of tasks on a wait queue */
 #define	task_for_each(task, pos, head) \
 	list_for_each(pos, head) \
@@ -102,6 +107,8 @@ struct rpc_task {
 	if (!list_empty(head) &&  \
 	    ((task=list_entry((head)->next, struct rpc_task, u.tk_wait.list)),1))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef void			(*rpc_action)(struct rpc_task *);
@@ -139,6 +146,10 @@ struct rpc_task_setup {
 #define RPC_TASK_TIMEOUT	0x1000		/* fail with ETIMEDOUT on timeout */
 #define RPC_TASK_NOCONNECT	0x2000		/* return ENOTCONN if not connected */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RPC_TASK_NO_RETRANS_TIMEOUT	0x4000		/* wait forever for a reply */
+>>>>>>> v3.18
 =======
 #define RPC_TASK_NO_RETRANS_TIMEOUT	0x4000		/* wait forever for a reply */
 >>>>>>> v3.18
@@ -251,7 +262,10 @@ struct rpc_task *rpc_wake_up_first(struct rpc_wait_queue *,
 					void *);
 void		rpc_wake_up_status(struct rpc_wait_queue *, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int		rpc_queue_empty(struct rpc_wait_queue *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void		rpc_delay(struct rpc_task *, unsigned long);
@@ -260,7 +274,11 @@ void		rpc_free(void *);
 int		rpciod_up(void);
 void		rpciod_down(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int		__rpc_wait_for_completion_task(struct rpc_task *task, int (*)(void *));
+=======
+int		__rpc_wait_for_completion_task(struct rpc_task *task, wait_bit_action_f *);
+>>>>>>> v3.18
 =======
 int		__rpc_wait_for_completion_task(struct rpc_task *task, wait_bit_action_f *);
 >>>>>>> v3.18
@@ -279,6 +297,7 @@ static inline int rpc_wait_for_completion_task(struct rpc_task *task)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void rpc_task_set_priority(struct rpc_task *task, unsigned char prio)
 {
 	task->tk_priority = prio - RPC_PRIORITY_LOW;
@@ -289,6 +308,8 @@ static inline int rpc_task_has_priority(struct rpc_task *task, unsigned char pri
 	return (task->tk_priority + RPC_PRIORITY_LOW == prio);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if defined(RPC_DEBUG) || defined (RPC_TRACEPOINTS)

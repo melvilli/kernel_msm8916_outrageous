@@ -97,8 +97,12 @@
 #include <linux/workqueue.h>
 #include <net/sock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "af_vsock.h"
+=======
+#include <net/af_vsock.h>
+>>>>>>> v3.18
 =======
 #include <net/af_vsock.h>
 >>>>>>> v3.18
@@ -149,7 +153,11 @@ EXPORT_SYMBOL_GPL(vm_sockets_get_local_cid);
  * vsock_bind_table[VSOCK_HASH_SIZE - 1] are for bound sockets and
  * vsock_bind_table[VSOCK_HASH_SIZE] is for unbound sockets.  The hash function
 <<<<<<< HEAD
+<<<<<<< HEAD
  * mods with VSOCK_HASH_SIZE - 1 to ensure this.
+=======
+ * mods with VSOCK_HASH_SIZE to ensure this.
+>>>>>>> v3.18
 =======
  * mods with VSOCK_HASH_SIZE to ensure this.
 >>>>>>> v3.18
@@ -158,7 +166,11 @@ EXPORT_SYMBOL_GPL(vm_sockets_get_local_cid);
 #define MAX_PORT_RETRIES        24
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VSOCK_HASH(addr)        ((addr)->svm_port % (VSOCK_HASH_SIZE - 1))
+=======
+#define VSOCK_HASH(addr)        ((addr)->svm_port % VSOCK_HASH_SIZE)
+>>>>>>> v3.18
 =======
 #define VSOCK_HASH(addr)        ((addr)->svm_port % VSOCK_HASH_SIZE)
 >>>>>>> v3.18
@@ -168,7 +180,11 @@ EXPORT_SYMBOL_GPL(vm_sockets_get_local_cid);
 /* XXX This can probably be implemented in a better way. */
 #define VSOCK_CONN_HASH(src, dst)				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(((src)->svm_cid ^ (dst)->svm_port) % (VSOCK_HASH_SIZE - 1))
+=======
+	(((src)->svm_cid ^ (dst)->svm_port) % VSOCK_HASH_SIZE)
+>>>>>>> v3.18
 =======
 	(((src)->svm_cid ^ (dst)->svm_port) % VSOCK_HASH_SIZE)
 >>>>>>> v3.18
@@ -182,7 +198,10 @@ static struct list_head vsock_connected_table[VSOCK_HASH_SIZE];
 static DEFINE_SPINLOCK(vsock_table_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Autobind this socket to the local address if necessary. */
 static int vsock_auto_bind(struct vsock_sock *vsk)
 {
@@ -195,6 +214,9 @@ static int vsock_auto_bind(struct vsock_sock *vsk)
 	return __vsock_bind(sk, &local_addr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void vsock_init_tables(void)
 {
@@ -367,7 +389,11 @@ void vsock_for_each_connected_socket(void (*fn)(struct sock *sk))
 		struct vsock_sock *vsk;
 		list_for_each_entry(vsk, &vsock_connected_table[i],
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    connected_table);
+=======
+				    connected_table)
+>>>>>>> v3.18
 =======
 				    connected_table)
 >>>>>>> v3.18
@@ -992,6 +1018,7 @@ static int vsock_dgram_sendmsg(struct kiocb *kiocb, struct socket *sock,
 	lock_sock(sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!vsock_addr_bound(&vsk->local_addr)) {
 		struct sockaddr_vm local_addr;
 
@@ -1002,10 +1029,15 @@ static int vsock_dgram_sendmsg(struct kiocb *kiocb, struct socket *sock,
 
 	}
 =======
+=======
+>>>>>>> v3.18
 	err = vsock_auto_bind(vsk);
 	if (err)
 		goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* If the provided message contains an address, use that.  Otherwise
@@ -1081,6 +1113,7 @@ static int vsock_dgram_connect(struct socket *sock,
 	lock_sock(sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!vsock_addr_bound(&vsk->local_addr)) {
 		struct sockaddr_vm local_addr;
 
@@ -1090,6 +1123,11 @@ static int vsock_dgram_connect(struct socket *sock,
 			goto out;
 
 	}
+=======
+	err = vsock_auto_bind(vsk);
+	if (err)
+		goto out;
+>>>>>>> v3.18
 =======
 	err = vsock_auto_bind(vsk);
 	if (err)
@@ -1212,6 +1250,7 @@ static int vsock_stream_connect(struct socket *sock, struct sockaddr *addr,
 		       sizeof(vsk->remote_addr));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Autobind this socket to the local address if necessary. */
 		if (!vsock_addr_bound(&vsk->local_addr)) {
 			struct sockaddr_vm local_addr;
@@ -1223,6 +1262,11 @@ static int vsock_stream_connect(struct socket *sock, struct sockaddr *addr,
 				goto out;
 
 		}
+=======
+		err = vsock_auto_bind(vsk);
+		if (err)
+			goto out;
+>>>>>>> v3.18
 =======
 		err = vsock_auto_bind(vsk);
 		if (err)
@@ -1859,9 +1903,12 @@ vsock_stream_recvmsg(struct kiocb *kiocb,
 		err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (copied > 0)
 		err = copied;
 =======
+=======
+>>>>>>> v3.18
 	if (copied > 0) {
 		/* We only do these additional bookkeeping/notification steps
 		 * if we actually copied something out of the queue pair
@@ -1883,6 +1930,9 @@ vsock_stream_recvmsg(struct kiocb *kiocb,
 		}
 		err = copied;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out_wait:
@@ -1993,10 +2043,13 @@ static struct miscdevice vsock_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __vsock_core_init(void)
 {
 	int err;
 =======
+=======
+>>>>>>> v3.18
 int __vsock_core_init(const struct vsock_transport *t, struct module *owner)
 {
 	int err = mutex_lock_interruptible(&vsock_register_mutex);
@@ -2014,6 +2067,9 @@ int __vsock_core_init(const struct vsock_transport *t, struct module *owner)
 	 */
 	vsock_proto.owner = owner;
 	transport = t;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	vsock_init_tables();
@@ -2039,6 +2095,10 @@ int __vsock_core_init(const struct vsock_transport *t, struct module *owner)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&vsock_register_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&vsock_register_mutex);
 >>>>>>> v3.18
@@ -2048,6 +2108,7 @@ err_unregister_proto:
 	proto_unregister(&vsock_proto);
 err_misc_deregister:
 	misc_deregister(&vsock_device);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return err;
 }
@@ -2074,12 +2135,17 @@ out:
 }
 EXPORT_SYMBOL_GPL(vsock_core_init);
 =======
+=======
+>>>>>>> v3.18
 	transport = NULL;
 err_busy:
 	mutex_unlock(&vsock_register_mutex);
 	return err;
 }
 EXPORT_SYMBOL_GPL(__vsock_core_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void vsock_core_exit(void)
@@ -2101,7 +2167,11 @@ EXPORT_SYMBOL_GPL(vsock_core_exit);
 MODULE_AUTHOR("VMware, Inc.");
 MODULE_DESCRIPTION("VMware Virtual Socket Family");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_VERSION("1.0.0.0-k");
+=======
+MODULE_VERSION("1.0.1.0-k");
+>>>>>>> v3.18
 =======
 MODULE_VERSION("1.0.1.0-k");
 >>>>>>> v3.18

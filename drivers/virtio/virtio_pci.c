@@ -58,9 +58,12 @@ struct virtio_pci_device
 	unsigned msix_used_vectors;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Status saved during hibernate/restore */
 	u8 saved_status;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Whether we have vector per vq */
@@ -95,7 +98,11 @@ struct virtio_pci_vq_info
 
 /* Qumranet donated their vendor ID for devices 0x1000 thru 0x10FF. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(virtio_pci_id_table) = {
+=======
+static const struct pci_device_id virtio_pci_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id virtio_pci_id_table[] = {
 >>>>>>> v3.18
@@ -205,7 +212,11 @@ static void vp_reset(struct virtio_device *vdev)
 
 /* the notify function used when creating a virt queue */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void vp_notify(struct virtqueue *vq)
+=======
+static bool vp_notify(struct virtqueue *vq)
+>>>>>>> v3.18
 =======
 static bool vp_notify(struct virtqueue *vq)
 >>>>>>> v3.18
@@ -216,6 +227,10 @@ static bool vp_notify(struct virtqueue *vq)
 	 * signal the other end */
 	iowrite16(vq->index, vp_dev->ioaddr + VIRTIO_PCI_QUEUE_NOTIFY);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return true;
+>>>>>>> v3.18
 =======
 	return true;
 >>>>>>> v3.18
@@ -226,12 +241,17 @@ static irqreturn_t vp_config_changed(int irq, void *opaque)
 {
 	struct virtio_pci_device *vp_dev = opaque;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct virtio_driver *drv;
 	drv = container_of(vp_dev->vdev.dev.driver,
 			   struct virtio_driver, driver);
 
 	if (drv && drv->config_changed)
 		drv->config_changed(&vp_dev->vdev);
+=======
+
+	virtio_config_changed(&vp_dev->vdev);
+>>>>>>> v3.18
 =======
 
 	virtio_config_changed(&vp_dev->vdev);
@@ -310,9 +330,15 @@ static void vp_free_vectors(struct virtio_device *vdev)
 		pci_disable_msix(vp_dev->pci_dev);
 		vp_dev->msix_enabled = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vp_dev->msix_vectors = 0;
 	}
 
+=======
+	}
+
+	vp_dev->msix_vectors = 0;
+>>>>>>> v3.18
 =======
 	}
 
@@ -336,6 +362,11 @@ static int vp_request_msix_vectors(struct virtio_device *vdev, int nvectors,
 	int err = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vp_dev->msix_vectors = nvectors;
+
+>>>>>>> v3.18
 =======
 	vp_dev->msix_vectors = nvectors;
 
@@ -362,6 +393,7 @@ static int vp_request_msix_vectors(struct virtio_device *vdev, int nvectors,
 		vp_dev->msix_entries[i].entry = i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* pci_enable_msix returns positive if we can't get this many. */
 	err = pci_enable_msix(vp_dev->pci_dev, vp_dev->msix_entries, nvectors);
 	if (err > 0)
@@ -370,10 +402,15 @@ static int vp_request_msix_vectors(struct virtio_device *vdev, int nvectors,
 		goto error;
 	vp_dev->msix_vectors = nvectors;
 =======
+=======
+>>>>>>> v3.18
 	err = pci_enable_msix_exact(vp_dev->pci_dev,
 				    vp_dev->msix_entries, nvectors);
 	if (err)
 		goto error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vp_dev->msix_enabled = 1;
 
@@ -779,7 +816,10 @@ static int virtio_pci_probe(struct pci_dev *pci_dev,
 
 out_set_drvdata:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_iounmap(pci_dev, vp_dev->ioaddr);
@@ -800,7 +840,10 @@ static void virtio_pci_remove(struct pci_dev *pci_dev)
 
 	vp_del_vqs(&vp_dev->vdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_iounmap(pci_dev, vp_dev->ioaddr);
@@ -810,7 +853,11 @@ static void virtio_pci_remove(struct pci_dev *pci_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -818,6 +865,7 @@ static int virtio_pci_freeze(struct device *dev)
 {
 	struct pci_dev *pci_dev = to_pci_dev(dev);
 	struct virtio_pci_device *vp_dev = pci_get_drvdata(pci_dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct virtio_driver *drv;
 	int ret;
@@ -834,6 +882,11 @@ static int virtio_pci_freeze(struct device *dev)
 
 	ret = virtio_device_freeze(&vp_dev->vdev);
 >>>>>>> v3.18
+=======
+	int ret;
+
+	ret = virtio_device_freeze(&vp_dev->vdev);
+>>>>>>> v3.18
 
 	if (!ret)
 		pci_disable_device(pci_dev);
@@ -844,6 +897,7 @@ static int virtio_pci_restore(struct device *dev)
 {
 	struct pci_dev *pci_dev = to_pci_dev(dev);
 	struct virtio_pci_device *vp_dev = pci_get_drvdata(pci_dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct virtio_driver *drv;
 	unsigned status = 0;
@@ -856,11 +910,16 @@ static int virtio_pci_restore(struct device *dev)
 	int ret;
 
 >>>>>>> v3.18
+=======
+	int ret;
+
+>>>>>>> v3.18
 	ret = pci_enable_device(pci_dev);
 	if (ret)
 		return ret;
 
 	pci_set_master(pci_dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* We always start by resetting the device, in case a previous
 	 * driver messed it up. */
@@ -901,6 +960,9 @@ static int virtio_pci_restore(struct device *dev)
 =======
 	return virtio_device_restore(&vp_dev->vdev);
 >>>>>>> v3.18
+=======
+	return virtio_device_restore(&vp_dev->vdev);
+>>>>>>> v3.18
 }
 
 static const struct dev_pm_ops virtio_pci_pm_ops = {
@@ -914,7 +976,11 @@ static struct pci_driver virtio_pci_driver = {
 	.probe		= virtio_pci_probe,
 	.remove		= virtio_pci_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18

@@ -111,8 +111,13 @@ static int hp680bl_probe(struct platform_device *pdev)
 	props.type = BACKLIGHT_RAW;
 	props.max_brightness = HP680_MAX_INTENSITY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bd = backlight_device_register("hp680-bl", &pdev->dev, NULL,
 				       &hp680bl_ops, &props);
+=======
+	bd = devm_backlight_device_register(&pdev->dev, "hp680-bl", &pdev->dev,
+					NULL, &hp680bl_ops, &props);
+>>>>>>> v3.18
 =======
 	bd = devm_backlight_device_register(&pdev->dev, "hp680-bl", &pdev->dev,
 					NULL, &hp680bl_ops, &props);
@@ -137,8 +142,11 @@ static int hp680bl_remove(struct platform_device *pdev)
 	hp680bl_send_intensity(bd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	backlight_device_unregister(bd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

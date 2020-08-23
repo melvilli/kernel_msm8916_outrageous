@@ -20,6 +20,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/init.h>
 #include <linux/of_platform.h>
@@ -40,6 +41,11 @@ static void __init tb10x_platform_init(void)
 #include <asm/mach_desc.h>
 
 >>>>>>> v3.18
+=======
+#include <linux/init.h>
+#include <asm/mach_desc.h>
+
+>>>>>>> v3.18
 static const char *tb10x_compat[] __initdata = {
 	"abilis,arc-tb10x",
 	NULL,
@@ -48,7 +54,10 @@ static const char *tb10x_compat[] __initdata = {
 MACHINE_START(TB10x, "tb10x")
 	.dt_compat	= tb10x_compat,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_machine	= tb10x_platform_init,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MACHINE_END

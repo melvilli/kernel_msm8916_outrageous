@@ -20,9 +20,15 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/platform_device.h>
 #include <linux/gpio.h>
+=======
+#include <linux/platform_device.h>
+#include <linux/gpio.h>
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_device.h>
 #include <linux/gpio.h>
@@ -121,7 +127,11 @@ spi_to_pdata(const struct spi_device *spi)
 static inline void setsck(const struct spi_device *spi, int is_on)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_set_value(SPI_SCK_GPIO, is_on);
+=======
+	gpio_set_value_cansleep(SPI_SCK_GPIO, is_on);
+>>>>>>> v3.18
 =======
 	gpio_set_value_cansleep(SPI_SCK_GPIO, is_on);
 >>>>>>> v3.18
@@ -130,7 +140,11 @@ static inline void setsck(const struct spi_device *spi, int is_on)
 static inline void setmosi(const struct spi_device *spi, int is_on)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_set_value(SPI_MOSI_GPIO, is_on);
+=======
+	gpio_set_value_cansleep(SPI_MOSI_GPIO, is_on);
+>>>>>>> v3.18
 =======
 	gpio_set_value_cansleep(SPI_MOSI_GPIO, is_on);
 >>>>>>> v3.18
@@ -139,7 +153,11 @@ static inline void setmosi(const struct spi_device *spi, int is_on)
 static inline int getmiso(const struct spi_device *spi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return !!gpio_get_value(SPI_MISO_GPIO);
+=======
+	return !!gpio_get_value_cansleep(SPI_MISO_GPIO);
+>>>>>>> v3.18
 =======
 	return !!gpio_get_value_cansleep(SPI_MISO_GPIO);
 >>>>>>> v3.18
@@ -247,7 +265,11 @@ static void spi_gpio_chipselect(struct spi_device *spi, int is_active)
 	if (cs != SPI_GPIO_NO_CHIPSELECT) {
 		/* SPI is normally active-low */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpio_set_value(cs, (spi->mode & SPI_CS_HIGH) ? is_active : !is_active);
+=======
+		gpio_set_value_cansleep(cs, (spi->mode & SPI_CS_HIGH) ? is_active : !is_active);
+>>>>>>> v3.18
 =======
 		gpio_set_value_cansleep(cs, (spi->mode & SPI_CS_HIGH) ? is_active : !is_active);
 >>>>>>> v3.18
@@ -262,9 +284,12 @@ static int spi_gpio_setup(struct spi_device *spi)
 	struct device_node	*np = spi->master->dev.of_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (spi->bits_per_word > 32)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (np) {
@@ -278,7 +303,11 @@ static int spi_gpio_setup(struct spi_device *spi)
 		 * ... otherwise, take it from spi->controller_data
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cs = (unsigned int) spi->controller_data;
+=======
+		cs = (unsigned int)(uintptr_t) spi->controller_data;
+>>>>>>> v3.18
 =======
 		cs = (unsigned int)(uintptr_t) spi->controller_data;
 >>>>>>> v3.18
@@ -373,7 +402,11 @@ done:
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id spi_gpio_dt_ids[] = {
+=======
+static const struct of_device_id spi_gpio_dt_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id spi_gpio_dt_ids[] = {
 >>>>>>> v3.18
@@ -457,7 +490,11 @@ static int spi_gpio_probe(struct platform_device *pdev)
 		use_of = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -484,6 +521,10 @@ static int spi_gpio_probe(struct platform_device *pdev)
 		spi_gpio->pdata = *pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(1, 32);
+>>>>>>> v3.18
 =======
 	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(1, 32);
 >>>>>>> v3.18
@@ -511,7 +552,11 @@ static int spi_gpio_probe(struct platform_device *pdev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_gpio->bitbang.master = spi_master_get(master);
+=======
+	spi_gpio->bitbang.master = master;
+>>>>>>> v3.18
 =======
 	spi_gpio->bitbang.master = master;
 >>>>>>> v3.18
@@ -534,7 +579,10 @@ static int spi_gpio_probe(struct platform_device *pdev)
 	status = spi_bitbang_start(&spi_gpio->bitbang);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spi_master_put(spi_gpio->bitbang.master);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 gpio_free:
@@ -554,6 +602,7 @@ static int spi_gpio_remove(struct platform_device *pdev)
 	struct spi_gpio			*spi_gpio;
 	struct spi_gpio_platform_data	*pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int				status;
 
 	spi_gpio = platform_get_drvdata(pdev);
@@ -565,12 +614,17 @@ static int spi_gpio_remove(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 
 	spi_gpio = platform_get_drvdata(pdev);
 	pdata = dev_get_platdata(&pdev->dev);
 
 	/* stop() unregisters child devices too */
 	spi_bitbang_stop(&spi_gpio->bitbang);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (SPI_MISO_GPIO != SPI_GPIO_NO_MISO)
@@ -579,8 +633,14 @@ static int spi_gpio_remove(struct platform_device *pdev)
 		gpio_free(SPI_MOSI_GPIO);
 	gpio_free(SPI_SCK_GPIO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return status;
+=======
+	spi_master_put(spi_gpio->bitbang.master);
+
+	return 0;
+>>>>>>> v3.18
 =======
 	spi_master_put(spi_gpio->bitbang.master);
 

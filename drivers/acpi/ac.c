@@ -35,14 +35,20 @@
 #include <linux/seq_file.h>
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/power_supply.h>
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/power_supply.h>
 #include <linux/acpi.h>
 #include "battery.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PREFIX "ACPI: "
@@ -63,11 +69,14 @@ MODULE_DESCRIPTION("ACPI AC Adapter Driver");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ACPI_PROCFS_POWER
 extern struct proc_dir_entry *acpi_lock_ac_dir(void);
 extern void *acpi_unlock_ac_dir(struct proc_dir_entry *acpi_ac_dir);
 static int acpi_ac_open_fs(struct inode *inode, struct file *file);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -87,7 +96,10 @@ static int acpi_ac_resume(struct device *dev);
 static SIMPLE_DEV_PM_OPS(acpi_ac_pm, NULL, acpi_ac_resume);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ACPI_PROCFS_POWER
 extern struct proc_dir_entry *acpi_lock_ac_dir(void);
 extern void *acpi_unlock_ac_dir(struct proc_dir_entry *acpi_ac_dir);
@@ -95,6 +107,9 @@ static int acpi_ac_open_fs(struct inode *inode, struct file *file);
 #endif
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ac_sleep_before_get_state_ms;
 
@@ -116,6 +131,10 @@ struct acpi_ac {
 	struct acpi_device * device;
 	unsigned long long state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct notifier_block battery_nb;
+>>>>>>> v3.18
 =======
 	struct notifier_block battery_nb;
 >>>>>>> v3.18
@@ -142,6 +161,7 @@ static int acpi_ac_get_state(struct acpi_ac *ac)
 	acpi_status status = AE_OK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!ac)
 		return -EINVAL;
@@ -150,6 +170,8 @@ static int acpi_ac_get_state(struct acpi_ac *ac)
 	if (ACPI_FAILURE(status)) {
 		ACPI_EXCEPTION((AE_INFO, status, "Error reading AC Adapter state"));
 =======
+=======
+>>>>>>> v3.18
 	if (!ac)
 		return -EINVAL;
 
@@ -158,6 +180,9 @@ static int acpi_ac_get_state(struct acpi_ac *ac)
 	if (ACPI_FAILURE(status)) {
 		ACPI_EXCEPTION((AE_INFO, status,
 				"Error reading AC Adapter state"));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ac->state = ACPI_AC_STATUS_UNKNOWN;
 		return -ENODEV;
@@ -237,7 +262,11 @@ static int acpi_ac_open_fs(struct inode *inode, struct file *file)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int acpi_ac_add_fs(struct acpi_device *device)
+=======
+static int acpi_ac_add_fs(struct acpi_ac *ac)
+>>>>>>> v3.18
 =======
 static int acpi_ac_add_fs(struct acpi_ac *ac)
 >>>>>>> v3.18
@@ -247,15 +276,21 @@ static int acpi_ac_add_fs(struct acpi_ac *ac)
 	printk(KERN_WARNING PREFIX "Deprecated procfs I/F for AC is loaded,"
 			" please retry with CONFIG_ACPI_PROCFS_POWER cleared\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!acpi_device_dir(device)) {
 		acpi_device_dir(device) = proc_mkdir(acpi_device_bid(device),
 						     acpi_ac_dir);
 		if (!acpi_device_dir(device))
 =======
+=======
+>>>>>>> v3.18
 	if (!acpi_device_dir(ac->device)) {
 		acpi_device_dir(ac->device) =
 			proc_mkdir(acpi_device_bid(ac->device), acpi_ac_dir);
 		if (!acpi_device_dir(ac->device))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -ENODEV;
 	}
@@ -263,8 +298,13 @@ static int acpi_ac_add_fs(struct acpi_ac *ac)
 	/* 'state' [R] */
 	entry = proc_create_data(ACPI_AC_FILE_STATE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 S_IRUGO, acpi_device_dir(device),
 				 &acpi_ac_fops, acpi_driver_data(device));
+=======
+				 S_IRUGO, acpi_device_dir(ac->device),
+				 &acpi_ac_fops, ac);
+>>>>>>> v3.18
 =======
 				 S_IRUGO, acpi_device_dir(ac->device),
 				 &acpi_ac_fops, ac);
@@ -275,6 +315,7 @@ static int acpi_ac_add_fs(struct acpi_ac *ac)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int acpi_ac_remove_fs(struct acpi_device *device)
 {
 
@@ -284,6 +325,8 @@ static int acpi_ac_remove_fs(struct acpi_device *device)
 		remove_proc_entry(acpi_device_bid(device), acpi_ac_dir);
 		acpi_device_dir(device) = NULL;
 =======
+=======
+>>>>>>> v3.18
 static int acpi_ac_remove_fs(struct acpi_ac *ac)
 {
 
@@ -292,6 +335,9 @@ static int acpi_ac_remove_fs(struct acpi_ac *ac)
 				  acpi_device_dir(ac->device));
 		remove_proc_entry(acpi_device_bid(ac->device), acpi_ac_dir);
 		acpi_device_dir(ac->device) = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -308,7 +354,10 @@ static void acpi_ac_notify(struct acpi_device *device, u32 event)
 	struct acpi_ac *ac = acpi_driver_data(device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!ac)
@@ -333,7 +382,10 @@ static void acpi_ac_notify(struct acpi_device *device, u32 event)
 
 		acpi_ac_get_state(ac);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_bus_generate_proc_event(device, event, (u32) ac->state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		acpi_bus_generate_netlink_event(device->pnp.device_class,
@@ -347,7 +399,10 @@ static void acpi_ac_notify(struct acpi_device *device, u32 event)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int acpi_ac_battery_notify(struct notifier_block *nb,
 				  unsigned long action, void *data)
 {
@@ -368,6 +423,9 @@ static int acpi_ac_battery_notify(struct notifier_block *nb,
 	return NOTIFY_OK;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int thinkpad_e530_quirk(const struct dmi_system_id *d)
 {
@@ -410,6 +468,7 @@ static int acpi_ac_add(struct acpi_device *device)
 		goto end;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ACPI_PROCFS_POWER
 	result = acpi_ac_add_fs(device);
 #endif
@@ -417,12 +476,17 @@ static int acpi_ac_add(struct acpi_device *device)
 		goto end;
 	ac->charger.name = acpi_device_bid(device);
 =======
+=======
+>>>>>>> v3.18
 	ac->charger.name = acpi_device_bid(device);
 #ifdef CONFIG_ACPI_PROCFS_POWER
 	result = acpi_ac_add_fs(ac);
 	if (result)
 		goto end;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ac->charger.type = POWER_SUPPLY_TYPE_MAINS;
 	ac->charger.properties = ac_props;
@@ -437,17 +501,23 @@ static int acpi_ac_add(struct acpi_device *device)
 	       ac->state ? "on-line" : "off-line");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       end:
 	if (result) {
 #ifdef CONFIG_ACPI_PROCFS_POWER
 		acpi_ac_remove_fs(device);
 =======
+=======
+>>>>>>> v3.18
 	ac->battery_nb.notifier_call = acpi_ac_battery_notify;
 	register_acpi_notifier(&ac->battery_nb);
 end:
 	if (result) {
 #ifdef CONFIG_ACPI_PROCFS_POWER
 		acpi_ac_remove_fs(ac);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 		kfree(ac);
@@ -478,6 +548,11 @@ static int acpi_ac_resume(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else
+#define acpi_ac_resume NULL
+>>>>>>> v3.18
 =======
 #else
 #define acpi_ac_resume NULL
@@ -497,13 +572,19 @@ static int acpi_ac_remove(struct acpi_device *device)
 	if (ac->charger.dev)
 		power_supply_unregister(&ac->charger);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ACPI_PROCFS_POWER
 	acpi_ac_remove_fs(device);
 =======
+=======
+>>>>>>> v3.18
 	unregister_acpi_notifier(&ac->battery_nb);
 
 #ifdef CONFIG_ACPI_PROCFS_POWER
 	acpi_ac_remove_fs(ac);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -526,6 +607,10 @@ static int __init acpi_ac_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -543,6 +628,7 @@ static int __init acpi_ac_init(void)
 static void __exit acpi_ac_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	acpi_bus_unregister_driver(&acpi_ac_driver);
 
@@ -554,11 +640,16 @@ static void __exit acpi_ac_exit(void)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	acpi_bus_unregister_driver(&acpi_ac_driver);
 #ifdef CONFIG_ACPI_PROCFS_POWER
 	acpi_unlock_ac_dir(acpi_ac_dir);
 #endif
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 module_init(acpi_ac_init);
 module_exit(acpi_ac_exit);

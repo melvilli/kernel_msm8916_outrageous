@@ -47,27 +47,37 @@ static struct page *pq_scribble_page;
  */
 static __async_inline struct dma_async_tx_descriptor *
 <<<<<<< HEAD
+<<<<<<< HEAD
 do_async_gen_syndrome(struct dma_chan *chan, struct page **blocks,
 		      const unsigned char *scfs, unsigned int offset, int disks,
 		      size_t len, dma_addr_t *dma_src,
 =======
+=======
+>>>>>>> v3.18
 do_async_gen_syndrome(struct dma_chan *chan,
 		      const unsigned char *scfs, int disks,
 		      struct dmaengine_unmap_data *unmap,
 		      enum dma_ctrl_flags dma_flags,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		      struct async_submit_ctl *submit)
 {
 	struct dma_async_tx_descriptor *tx = NULL;
 	struct dma_device *dma = chan->device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum dma_ctrl_flags dma_flags = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	enum async_tx_flags flags_orig = submit->flags;
 	dma_async_tx_callback cb_fn_orig = submit->cb_fn;
 	dma_async_tx_callback cb_param_orig = submit->cb_param;
 	int src_cnt = disks - 2;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned char coefs[src_cnt];
 	unsigned short pq_src_cnt;
@@ -101,12 +111,17 @@ do_async_gen_syndrome(struct dma_chan *chan,
 	}
 	src_cnt = idx;
 =======
+=======
+>>>>>>> v3.18
 	unsigned short pq_src_cnt;
 	dma_addr_t dma_dest[2];
 	int src_off = 0;
 
 	if (submit->flags & ASYNC_TX_FENCE)
 		dma_flags |= DMA_PREP_FENCE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (src_cnt > 0) {
@@ -120,6 +135,7 @@ do_async_gen_syndrome(struct dma_chan *chan,
 			submit->flags &= ~ASYNC_TX_ACK;
 			submit->flags |= ASYNC_TX_FENCE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dma_flags |= DMA_COMPL_SKIP_DEST_UNMAP;
 			submit->cb_fn = NULL;
 			submit->cb_param = NULL;
@@ -130,11 +146,17 @@ do_async_gen_syndrome(struct dma_chan *chan,
 			submit->cb_param = NULL;
 		} else {
 >>>>>>> v3.18
+=======
+			submit->cb_fn = NULL;
+			submit->cb_param = NULL;
+		} else {
+>>>>>>> v3.18
 			submit->cb_fn = cb_fn_orig;
 			submit->cb_param = cb_param_orig;
 			if (cb_fn_orig)
 				dma_flags |= DMA_PREP_INTERRUPT;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (submit->flags & ASYNC_TX_FENCE)
 			dma_flags |= DMA_PREP_FENCE;
@@ -149,6 +171,8 @@ do_async_gen_syndrome(struct dma_chan *chan,
 						     pq_src_cnt,
 						     &coefs[src_off], len,
 =======
+=======
+>>>>>>> v3.18
 
 		/* Drivers force forward progress in case they can not provide
 		 * a descriptor
@@ -160,6 +184,9 @@ do_async_gen_syndrome(struct dma_chan *chan,
 						     &unmap->addr[src_off],
 						     pq_src_cnt,
 						     &scfs[src_off], unmap->len,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						     dma_flags);
 			if (likely(tx))
@@ -169,6 +196,10 @@ do_async_gen_syndrome(struct dma_chan *chan,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dma_set_unmap(tx, unmap);
+>>>>>>> v3.18
 =======
 		dma_set_unmap(tx, unmap);
 >>>>>>> v3.18
@@ -232,10 +263,13 @@ do_sync_gen_syndrome(struct page **blocks, unsigned int offset, int disks,
  * in the synchronous path and omitted in the hardware-asynchronous
  * path.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * 'blocks' note: if submit->scribble is NULL then the contents of
  * 'blocks' may be overwritten to perform address conversions
  * (dma_map_page() or page_address()).
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -248,6 +282,7 @@ async_gen_syndrome(struct page **blocks, unsigned int offset, int disks,
 						      &P(blocks, disks), 2,
 						      blocks, src_cnt, len);
 	struct dma_device *device = chan ? chan->device : NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dma_addr_t *dma_src = NULL;
 
@@ -270,6 +305,8 @@ async_gen_syndrome(struct page **blocks, unsigned int offset, int disks,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct dmaengine_unmap_data *unmap = NULL;
 
 	BUG_ON(disks > 255 || !(P(blocks, disks) || Q(blocks, disks)));
@@ -333,6 +370,9 @@ async_gen_syndrome(struct page **blocks, unsigned int offset, int disks,
 
 	dmaengine_unmap_put(unmap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* run the pq synchronously */
 	pr_debug("%s: (sync) disks: %d len: %zu\n", __func__, disks, len);
@@ -390,6 +430,7 @@ async_syndrome_val(struct page **blocks, unsigned int offset, int disks,
 	unsigned char coefs[disks-2];
 	enum dma_ctrl_flags dma_flags = submit->cb_fn ? DMA_PREP_INTERRUPT : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_addr_t *dma_src = NULL;
 	int src_cnt = 0;
 
@@ -435,6 +476,8 @@ async_syndrome_val(struct page **blocks, unsigned int offset, int disks,
 		for (;;) {
 			tx = device->device_prep_dma_pq_val(chan, pq, dma_src,
 =======
+=======
+>>>>>>> v3.18
 	struct dmaengine_unmap_data *unmap = NULL;
 
 	BUG_ON(disks < 4);
@@ -489,6 +532,9 @@ async_syndrome_val(struct page **blocks, unsigned int offset, int disks,
 		for (;;) {
 			tx = device->device_prep_dma_pq_val(chan, pq,
 							    unmap->addr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 							    src_cnt,
 							    coefs,
@@ -500,6 +546,11 @@ async_syndrome_val(struct page **blocks, unsigned int offset, int disks,
 			dma_async_issue_pending(chan);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		dma_set_unmap(tx, unmap);
+>>>>>>> v3.18
 =======
 
 		dma_set_unmap(tx, unmap);

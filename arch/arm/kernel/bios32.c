@@ -20,7 +20,11 @@ static int debug_pci;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * We can't use pci_find_device() here since we are
+=======
+ * We can't use pci_get_device() here since we are
+>>>>>>> v3.18
 =======
  * We can't use pci_get_device() here since we are
 >>>>>>> v3.18
@@ -62,6 +66,7 @@ static void pcibios_bus_report_status(struct pci_bus *bus, u_int status_mask, in
 void pcibios_report_status(u_int status_mask, int warn)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *l;
 
 	list_for_each(l, &pci_root_buses) {
@@ -70,10 +75,15 @@ void pcibios_report_status(u_int status_mask, int warn)
 		pcibios_bus_report_status(bus, status_mask, warn);
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct pci_bus *bus;
 
 	list_for_each_entry(bus, &pci_root_buses, node)
 		pcibios_bus_report_status(bus, status_mask, warn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -375,7 +385,10 @@ void pcibios_fixup_bus(struct pci_bus *bus)
 EXPORT_SYMBOL(pcibios_fixup_bus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void pcibios_add_bus(struct pci_bus *bus)
 {
 	struct pci_sys_data *sys = bus->sysdata;
@@ -390,6 +403,9 @@ void pcibios_remove_bus(struct pci_bus *bus)
 		sys->remove_bus(bus);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Swizzle the device pin each time we cross a bridge.  If a platform does
@@ -474,7 +490,12 @@ static int pcibios_init_resources(int busnr, struct pci_sys_data *sys)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pcibios_init_hw(struct hw_pci *hw, struct list_head *head)
+=======
+static void pcibios_init_hw(struct device *parent, struct hw_pci *hw,
+			    struct list_head *head)
+>>>>>>> v3.18
 =======
 static void pcibios_init_hw(struct device *parent, struct hw_pci *hw,
 			    struct list_head *head)
@@ -497,6 +518,11 @@ static void pcibios_init_hw(struct device *parent, struct hw_pci *hw,
 		sys->map_irq = hw->map_irq;
 		sys->align_resource = hw->align_resource;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		sys->add_bus = hw->add_bus;
+		sys->remove_bus = hw->remove_bus;
+>>>>>>> v3.18
 =======
 		sys->add_bus = hw->add_bus;
 		sys->remove_bus = hw->remove_bus;
@@ -519,7 +545,11 @@ static void pcibios_init_hw(struct device *parent, struct hw_pci *hw,
 				sys->bus = hw->scan(nr, sys);
 			else
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sys->bus = pci_scan_root_bus(NULL, sys->busnr,
+=======
+				sys->bus = pci_scan_root_bus(parent, sys->busnr,
+>>>>>>> v3.18
 =======
 				sys->bus = pci_scan_root_bus(parent, sys->busnr,
 >>>>>>> v3.18
@@ -540,7 +570,11 @@ static void pcibios_init_hw(struct device *parent, struct hw_pci *hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pci_common_init(struct hw_pci *hw)
+=======
+void pci_common_init_dev(struct device *parent, struct hw_pci *hw)
+>>>>>>> v3.18
 =======
 void pci_common_init_dev(struct device *parent, struct hw_pci *hw)
 >>>>>>> v3.18
@@ -552,7 +586,11 @@ void pci_common_init_dev(struct device *parent, struct hw_pci *hw)
 	if (hw->preinit)
 		hw->preinit();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcibios_init_hw(hw, &head);
+=======
+	pcibios_init_hw(parent, hw, &head);
+>>>>>>> v3.18
 =======
 	pcibios_init_hw(parent, hw, &head);
 >>>>>>> v3.18
@@ -575,11 +613,14 @@ void pci_common_init_dev(struct device *parent, struct hw_pci *hw)
 			 */
 			pci_bus_assign_resources(bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			/*
 			 * Enable bridges
 			 */
 			pci_enable_bridges(bus);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -590,7 +631,10 @@ void pci_common_init_dev(struct device *parent, struct hw_pci *hw)
 		pci_bus_add_devices(bus);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	list_for_each_entry(sys, &head, node) {
 		struct pci_bus *bus = sys->bus;
@@ -603,6 +647,9 @@ void pci_common_init_dev(struct device *parent, struct hw_pci *hw)
 				pcie_bus_configure_settings(child);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -665,6 +712,7 @@ resource_size_t pcibios_align_resource(void *data, const struct resource *res,
 int pcibios_enable_device(struct pci_dev *dev, int mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 cmd, old_cmd;
 	int idx;
 	struct resource *r;
@@ -701,10 +749,15 @@ int pcibios_enable_device(struct pci_dev *dev, int mask)
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (pci_has_flag(PCI_PROBE_ONLY))
 		return 0;
 
 	return pci_enable_resources(dev, mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

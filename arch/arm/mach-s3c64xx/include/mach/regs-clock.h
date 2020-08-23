@@ -16,6 +16,7 @@
 #define __PLAT_REGS_CLOCK_H __FILE__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S3C_CLKREG(x)		(S3C_VA_SYS + (x))
 
 #define S3C_APLL_LOCK		S3C_CLKREG(0x00)
@@ -107,6 +108,8 @@
 #define S3C_CLKCON_PCLK_RTC		(1<<6)
 #define S3C_CLKCON_PCLK_WDT		(1<<5)
 =======
+=======
+>>>>>>> v3.18
 /*
  * FIXME: Remove remaining definitions
  */
@@ -118,11 +121,15 @@
 #define S3C_MEM_SYS_CFG		S3C_CLKREG(0x120)
 
 /* PCLK GATE Registers */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define S3C_CLKCON_PCLK_UART3		(1<<4)
 #define S3C_CLKCON_PCLK_UART2		(1<<3)
 #define S3C_CLKCON_PCLK_UART1		(1<<2)
 #define S3C_CLKCON_PCLK_UART0		(1<<1)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define S3C_CLKCON_PCLK_MFC		(1<<0)
 
@@ -169,6 +176,8 @@
 #define S3C6400_CLKSRC_MPLL_MOUT_SHIFT	(1)
 #define S3C6400_CLKSRC_EPLL_MOUT_SHIFT	(2)
 #define S3C6400_CLKSRC_MFC		(1 << 4)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -26,6 +26,10 @@
 #include <net/netfilter/nf_nat_helper.h>
 #include <net/netfilter/nf_conntrack_helper.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netfilter/nf_conntrack_seqadj.h>
+>>>>>>> v3.18
 =======
 #include <net/netfilter/nf_conntrack_seqadj.h>
 >>>>>>> v3.18
@@ -130,7 +134,12 @@ hash_by_src(const struct net *net, u16 zone,
 	hash = jhash2((u32 *)&tuple->src, sizeof(tuple->src) / sizeof(u32),
 		      tuple->dst.protonum ^ zone ^ nf_conntrack_hash_rnd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ((u64)hash * net->ct.nat_htable_size) >> 32;
+=======
+
+	return reciprocal_scale(hash, net->ct.nat_htable_size);
+>>>>>>> v3.18
 =======
 
 	return reciprocal_scale(hash, net->ct.nat_htable_size);
@@ -283,7 +292,11 @@ find_best_ips_proto(u16 zone, struct nf_conntrack_tuple *tuple,
 
 		var_ipp->all[i] = (__force __u32)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			htonl(minip + (((u64)j * dist) >> 32));
+=======
+			htonl(minip + reciprocal_scale(j, dist));
+>>>>>>> v3.18
 =======
 			htonl(minip + reciprocal_scale(j, dist));
 >>>>>>> v3.18
@@ -328,7 +341,11 @@ get_unique_tuple(struct nf_conntrack_tuple *tuple,
 	 */
 	if (maniptype == NF_NAT_MANIP_SRC &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !(range->flags & NF_NAT_RANGE_PROTO_RANDOM)) {
+=======
+	    !(range->flags & NF_NAT_RANGE_PROTO_RANDOM_ALL)) {
+>>>>>>> v3.18
 =======
 	    !(range->flags & NF_NAT_RANGE_PROTO_RANDOM_ALL)) {
 >>>>>>> v3.18
@@ -356,7 +373,11 @@ get_unique_tuple(struct nf_conntrack_tuple *tuple,
 
 	/* Only bother mapping if it's not already in range and unique */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(range->flags & NF_NAT_RANGE_PROTO_RANDOM)) {
+=======
+	if (!(range->flags & NF_NAT_RANGE_PROTO_RANDOM_ALL)) {
+>>>>>>> v3.18
 =======
 	if (!(range->flags & NF_NAT_RANGE_PROTO_RANDOM_ALL)) {
 >>>>>>> v3.18
@@ -379,7 +400,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct nf_conn_nat *nf_ct_nat_ext_add(struct nf_conn *ct)
 {
 	struct nf_conn_nat *nat = nfct_nat(ct);
@@ -393,6 +417,9 @@ struct nf_conn_nat *nf_ct_nat_ext_add(struct nf_conn *ct)
 }
 EXPORT_SYMBOL_GPL(nf_ct_nat_ext_add);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned int
 nf_nat_setup_info(struct nf_conn *ct,
@@ -405,6 +432,7 @@ nf_nat_setup_info(struct nf_conn *ct,
 
 	/* nat helper or nfctnetlink also setup binding */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nat = nfct_nat(ct);
 	if (!nat) {
 		nat = nf_ct_ext_add(ct, NF_CT_EXT_NAT, GFP_ATOMIC);
@@ -413,6 +441,11 @@ nf_nat_setup_info(struct nf_conn *ct,
 			return NF_ACCEPT;
 		}
 	}
+=======
+	nat = nf_ct_nat_ext_add(ct);
+	if (nat == NULL)
+		return NF_ACCEPT;
+>>>>>>> v3.18
 =======
 	nat = nf_ct_nat_ext_add(ct);
 	if (nat == NULL)
@@ -446,6 +479,12 @@ nf_nat_setup_info(struct nf_conn *ct,
 		else
 			ct->status |= IPS_DST_NAT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		if (nfct_help(ct))
+			nfct_seqadj_ext_add(ct);
+>>>>>>> v3.18
 =======
 
 		if (nfct_help(ct))
@@ -478,7 +517,10 @@ nf_nat_setup_info(struct nf_conn *ct,
 EXPORT_SYMBOL(nf_nat_setup_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned int
 __nf_nat_alloc_null_binding(struct nf_conn *ct, enum nf_nat_manip_type manip)
 {
@@ -505,6 +547,9 @@ nf_nat_alloc_null_binding(struct nf_conn *ct, unsigned int hooknum)
 }
 EXPORT_SYMBOL_GPL(nf_nat_alloc_null_binding);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Do packet manipulations according to nf_nat_setup_info. */
 unsigned int nf_nat_packet(struct nf_conn *ct,
@@ -609,7 +654,11 @@ static void nf_nat_l4proto_clean(u8 l3proto, u8 l4proto)
 	rtnl_lock();
 	for_each_net(net)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nf_ct_iterate_cleanup(net, nf_nat_proto_remove, &clean);
+=======
+		nf_ct_iterate_cleanup(net, nf_nat_proto_remove, &clean, 0, 0);
+>>>>>>> v3.18
 =======
 		nf_ct_iterate_cleanup(net, nf_nat_proto_remove, &clean, 0, 0);
 >>>>>>> v3.18
@@ -627,7 +676,11 @@ static void nf_nat_l3proto_clean(u8 l3proto)
 
 	for_each_net(net)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nf_ct_iterate_cleanup(net, nf_nat_proto_remove, &clean);
+=======
+		nf_ct_iterate_cleanup(net, nf_nat_proto_remove, &clean, 0, 0);
+>>>>>>> v3.18
 =======
 		nf_ct_iterate_cleanup(net, nf_nat_proto_remove, &clean, 0, 0);
 >>>>>>> v3.18
@@ -759,7 +812,11 @@ static struct nf_ct_ext_type nat_extend __read_mostly = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_NF_CT_NETLINK) || defined(CONFIG_NF_CT_NETLINK_MODULE)
+=======
+#if IS_ENABLED(CONFIG_NF_CT_NETLINK)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_NF_CT_NETLINK)
 >>>>>>> v3.18
@@ -802,9 +859,15 @@ static const struct nla_policy nat_nla_policy[CTA_NAT_MAX+1] = {
 static int
 nfnetlink_parse_nat(const struct nlattr *nat,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    const struct nf_conn *ct, struct nf_nat_range *range)
 {
 	const struct nf_nat_l3proto *l3proto;
+=======
+		    const struct nf_conn *ct, struct nf_nat_range *range,
+		    const struct nf_nat_l3proto *l3proto)
+{
+>>>>>>> v3.18
 =======
 		    const struct nf_conn *ct, struct nf_nat_range *range,
 		    const struct nf_nat_l3proto *l3proto)
@@ -819,6 +882,7 @@ nfnetlink_parse_nat(const struct nlattr *nat,
 	if (err < 0)
 		return err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rcu_read_lock();
 	l3proto = __nf_nat_l3proto_find(nf_ct_l3num(ct));
@@ -840,6 +904,8 @@ out:
 }
 
 =======
+=======
+>>>>>>> v3.18
 	err = l3proto->nlattr_to_range(tb, range);
 	if (err < 0)
 		return err;
@@ -851,6 +917,9 @@ out:
 }
 
 /* This function is called under rcu_read_lock() */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nfnetlink_parse_nat_setup(struct nf_conn *ct,
@@ -858,6 +927,7 @@ nfnetlink_parse_nat_setup(struct nf_conn *ct,
 			  const struct nlattr *attr)
 {
 	struct nf_nat_range range;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int err;
 
@@ -867,6 +937,8 @@ nfnetlink_parse_nat_setup(struct nf_conn *ct,
 	if (nf_nat_initialized(ct, manip))
 		return -EEXIST;
 =======
+=======
+>>>>>>> v3.18
 	const struct nf_nat_l3proto *l3proto;
 	int err;
 
@@ -890,6 +962,9 @@ nfnetlink_parse_nat_setup(struct nf_conn *ct,
 	err = nfnetlink_parse_nat(attr, ct, &range, l3proto);
 	if (err < 0)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return nf_nat_setup_info(ct, &range, manip);
@@ -919,7 +994,11 @@ static void __net_exit nf_nat_net_exit(struct net *net)
 	struct nf_nat_proto_clean clean = {};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf_ct_iterate_cleanup(net, nf_nat_proto_clean, &clean);
+=======
+	nf_ct_iterate_cleanup(net, nf_nat_proto_clean, &clean, 0, 0);
+>>>>>>> v3.18
 =======
 	nf_ct_iterate_cleanup(net, nf_nat_proto_clean, &clean, 0, 0);
 >>>>>>> v3.18
@@ -938,10 +1017,13 @@ static struct nf_ct_helper_expectfn follow_master_nat = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct nfq_ct_nat_hook nfq_ct_nat = {
 	.seq_adjust	= nf_nat_tcp_seq_adjust,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __init nf_nat_init(void)
@@ -964,6 +1046,7 @@ static int __init nf_nat_init(void)
 	nf_ct_untracked_status_or(IPS_NAT_DONE_MASK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(nf_nat_seq_adjust_hook != NULL);
 	RCU_INIT_POINTER(nf_nat_seq_adjust_hook, nf_nat_seq_adjust);
 	BUG_ON(nfnetlink_parse_nat_setup_hook != NULL);
@@ -972,6 +1055,11 @@ static int __init nf_nat_init(void)
 	BUG_ON(nf_ct_nat_offset != NULL);
 	RCU_INIT_POINTER(nf_ct_nat_offset, nf_nat_get_offset);
 	RCU_INIT_POINTER(nfq_ct_nat_hook, &nfq_ct_nat);
+=======
+	BUG_ON(nfnetlink_parse_nat_setup_hook != NULL);
+	RCU_INIT_POINTER(nfnetlink_parse_nat_setup_hook,
+			   nfnetlink_parse_nat_setup);
+>>>>>>> v3.18
 =======
 	BUG_ON(nfnetlink_parse_nat_setup_hook != NULL);
 	RCU_INIT_POINTER(nfnetlink_parse_nat_setup_hook,
@@ -996,6 +1084,7 @@ static void __exit nf_nat_cleanup(void)
 	nf_ct_extend_unregister(&nat_extend);
 	nf_ct_helper_expectfn_unregister(&follow_master_nat);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RCU_INIT_POINTER(nf_nat_seq_adjust_hook, NULL);
 	RCU_INIT_POINTER(nfnetlink_parse_nat_setup_hook, NULL);
 	RCU_INIT_POINTER(nf_ct_nat_offset, NULL);
@@ -1006,10 +1095,15 @@ static void __exit nf_nat_cleanup(void)
 	synchronize_rcu();
 
 =======
+=======
+>>>>>>> v3.18
 	RCU_INIT_POINTER(nfnetlink_parse_nat_setup_hook, NULL);
 #ifdef CONFIG_XFRM
 	RCU_INIT_POINTER(nf_nat_decode_session_hook, NULL);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < NFPROTO_NUMPROTO; i++)
 		kfree(nf_nat_l4protos[i]);

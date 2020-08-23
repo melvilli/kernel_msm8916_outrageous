@@ -204,8 +204,12 @@ static int uda134x_hw_params(struct snd_pcm_substream *substream,
 	struct snd_soc_dai *dai)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct snd_soc_codec *codec = rtd->codec;
+=======
+	struct snd_soc_codec *codec = dai->codec;
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = dai->codec;
 >>>>>>> v3.18
@@ -249,6 +253,7 @@ static int uda134x_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SND_SOC_DAIFMT_RIGHT_J:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch (params_format(params)) {
 		case SNDRV_PCM_FORMAT_S16_LE:
 			hw_params |= (1<<1);
@@ -258,6 +263,8 @@ static int uda134x_hw_params(struct snd_pcm_substream *substream,
 			break;
 		case SNDRV_PCM_FORMAT_S20_3LE:
 =======
+=======
+>>>>>>> v3.18
 		switch (params_width(params)) {
 		case 16:
 			hw_params |= (1<<1);
@@ -266,6 +273,9 @@ static int uda134x_hw_params(struct snd_pcm_substream *substream,
 			hw_params |= (1<<2);
 			break;
 		case 20:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			hw_params |= ((1<<2) | (1<<1));
 			break;
@@ -341,7 +351,10 @@ static int uda134x_set_bias_level(struct snd_soc_codec *codec,
 				  enum snd_soc_bias_level level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 reg;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct uda134x_platform_data *pd = codec->control_data;
@@ -352,6 +365,7 @@ static int uda134x_set_bias_level(struct snd_soc_codec *codec,
 
 	switch (level) {
 	case SND_SOC_BIAS_ON:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* ADC, DAC on */
 		switch (pd->model) {
@@ -372,6 +386,8 @@ static int uda134x_set_bias_level(struct snd_soc_codec *codec,
 		}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		break;
 	case SND_SOC_BIAS_PREPARE:
 		/* power on */
@@ -383,6 +399,7 @@ static int uda134x_set_bias_level(struct snd_soc_codec *codec,
 		}
 		break;
 	case SND_SOC_BIAS_STANDBY:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* ADC, DAC power off */
 		switch (pd->model) {
@@ -401,6 +418,8 @@ static int uda134x_set_bias_level(struct snd_soc_codec *codec,
 			       "unsupported model %d\n", pd->model);
 			return -EINVAL;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -475,7 +494,10 @@ SOC_SINGLE("DC Filter Enable Switch", UDA134X_STATUS0, 0, 1, 0),
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* UDA1341 has the DAC/ADC power down in STATUS1 */
 static const struct snd_soc_dapm_widget uda1341_dapm_widgets[] = {
 	SND_SOC_DAPM_DAC("DAC", "Playback", UDA134X_STATUS1, 0, 0),
@@ -507,6 +529,9 @@ static const struct snd_soc_dapm_route uda134x_dapm_routes[] = {
 	{ "VOUTR", NULL, "DAC" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct snd_soc_dai_ops uda134x_dai_ops = {
 	.startup	= uda134x_startup,
@@ -543,7 +568,13 @@ static int uda134x_soc_probe(struct snd_soc_codec *codec)
 {
 	struct uda134x_priv *uda134x;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uda134x_platform_data *pd = codec->card->dev->platform_data;
+=======
+	struct uda134x_platform_data *pd = codec->component.card->dev->platform_data;
+	const struct snd_soc_dapm_widget *widgets;
+	unsigned num_widgets;
+>>>>>>> v3.18
 =======
 	struct uda134x_platform_data *pd = codec->component.card->dev->platform_data;
 	const struct snd_soc_dapm_widget *widgets;
@@ -591,7 +622,10 @@ static int uda134x_soc_probe(struct snd_soc_codec *codec)
 		uda134x_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pd->model == UDA134X_UDA1341) {
 		widgets = uda1341_dapm_widgets;
 		num_widgets = ARRAY_SIZE(uda1341_dapm_widgets);
@@ -608,6 +642,9 @@ static int uda134x_soc_probe(struct snd_soc_codec *codec)
 		return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (pd->model) {
 	case UDA134X_UDA1340:
@@ -683,11 +720,17 @@ static struct snd_soc_codec_driver soc_codec_dev_uda134x = {
 	.write = uda134x_write,
 	.set_bias_level = uda134x_set_bias_level,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.dapm_widgets = uda134x_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(uda134x_dapm_widgets),
 	.dapm_routes = uda134x_dapm_routes,
 	.num_dapm_routes = ARRAY_SIZE(uda134x_dapm_routes),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

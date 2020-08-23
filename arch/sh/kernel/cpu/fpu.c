@@ -45,7 +45,11 @@ void __fpu_state_restore(void)
 
 	task_thread_info(tsk)->status |= TS_USEDFPU;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tsk->fpu_counter++;
+=======
+	tsk->thread.fpu_counter++;
+>>>>>>> v3.18
 =======
 	tsk->thread.fpu_counter++;
 >>>>>>> v3.18

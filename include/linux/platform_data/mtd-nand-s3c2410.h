@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* arch/arm/mach-s3c2410/include/mach/nand.h
  *
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -15,6 +19,12 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef __MTD_NAND_S3C2410_H
+#define __MTD_NAND_S3C2410_H
+
+>>>>>>> v3.18
 =======
 #ifndef __MTD_NAND_S3C2410_H
 #define __MTD_NAND_S3C2410_H
@@ -76,6 +86,11 @@ struct s3c2410_platform_nand {
 */
 extern void s3c_nand_set_platdata(struct s3c2410_platform_nand *nand);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#endif /*__MTD_NAND_S3C2410_H */
+>>>>>>> v3.18
 =======
 
 #endif /*__MTD_NAND_S3C2410_H */

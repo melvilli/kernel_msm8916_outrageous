@@ -313,6 +313,10 @@ static int __init insert_device(struct pnp_bios_node *node)
 	struct pnp_dev *dev;
 	char id[8];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int error;
+>>>>>>> v3.18
 =======
 	int error;
 >>>>>>> v3.18
@@ -322,7 +326,11 @@ static int __init insert_device(struct pnp_bios_node *node)
 		dev = list_entry(pos, struct pnp_dev, protocol_list);
 		if (dev->number == node->handle)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -1;
+=======
+			return -EEXIST;
+>>>>>>> v3.18
 =======
 			return -EEXIST;
 >>>>>>> v3.18
@@ -332,7 +340,11 @@ static int __init insert_device(struct pnp_bios_node *node)
 	dev = pnp_alloc_dev(&pnpbios_protocol, node->handle, id);
 	if (!dev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -1;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -355,14 +367,20 @@ static int __init insert_device(struct pnp_bios_node *node)
 		pnp_init_resources(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pnp_add_device(dev);
 =======
+=======
+>>>>>>> v3.18
 	error = pnp_add_device(dev);
 	if (error) {
 		put_device(&dev->dev);
 		return error;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pnpbios_interface_attach_device(node);
 

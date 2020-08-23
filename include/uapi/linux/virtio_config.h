@@ -52,6 +52,12 @@
 #define VIRTIO_F_NOTIFY_ON_EMPTY	24
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Can the device handle any descriptor layout? */
+#define VIRTIO_F_ANY_LAYOUT		27
+
+>>>>>>> v3.18
 =======
 /* Can the device handle any descriptor layout? */
 #define VIRTIO_F_ANY_LAYOUT		27

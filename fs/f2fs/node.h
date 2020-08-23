@@ -10,6 +10,7 @@
  */
 /* start node id of a node block dedicated to the given node id */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	START_NID(nid) (((nid) / NAT_ENTRY_PER_BLOCK) * NAT_ENTRY_PER_BLOCK)
 
 /* node block offset on the NAT area dedicated to the given start node id */
@@ -21,6 +22,8 @@
 
 #define DEF_RA_NID_PAGES	0	/* # of nid pages to be readaheaded */
 =======
+=======
+>>>>>>> v3.18
 #define	START_NID(nid) ((nid / NAT_ENTRY_PER_BLOCK) * NAT_ENTRY_PER_BLOCK)
 
 /* node block offset on the NAT area dedicated to the given start node id */
@@ -28,12 +31,16 @@
 
 /* # of pages to perform readahead before building free nids */
 #define FREE_NID_PAGES 4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* maximum readahead size for node during getting data blocks */
 #define MAX_RA_NODE		128
 
 /* control the memory footprint threshold (10MB per 1GB ram) */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define DEF_RAM_THRESHOLD	1
 
@@ -46,15 +53,21 @@
 #define NATVEC_SIZE	64
 #define SETVEC_SIZE	32
 =======
+=======
+>>>>>>> v3.18
 #define DEF_RAM_THRESHOLD	10
 
 /* vector size for gang look-up from nat cache that consists of radix tree */
 #define NATVEC_SIZE	64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* return value for read_node_page */
 #define LOCKED_PAGE	1
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* For flag in struct node_info */
 enum {
@@ -66,6 +79,8 @@ enum {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * For node information
  */
@@ -75,8 +90,11 @@ struct node_info {
 	block_t	blk_addr;	/* block address of the node */
 	unsigned char version;	/* version of the node */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char flag;	/* for node information bits */
 =======
+=======
+>>>>>>> v3.18
 };
 
 enum {
@@ -84,11 +102,15 @@ enum {
 	HAS_FSYNCED_INODE,	/* is the inode fsynced before? */
 	HAS_LAST_FSYNC,		/* has the latest node fsync mark? */
 	IS_DIRTY,		/* this nat entry is dirty? */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 struct nat_entry {
 	struct list_head list;	/* for clean or dirty nat list */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct node_info ni;	/* in-memory node information */
 };
@@ -114,6 +136,8 @@ static inline void copy_node_info(struct node_info *dst,
 	/* should not copy flag here */
 }
 =======
+=======
+>>>>>>> v3.18
 	unsigned char flag;	/* for node information bits */
 	struct node_info ni;	/* in-memory node information */
 };
@@ -128,6 +152,9 @@ static inline void copy_node_info(struct node_info *dst,
 #define nat_set_version(nat, v)		(nat->ni.version = v)
 
 #define inc_node_version(version)	(++version)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void set_nat_flag(struct nat_entry *ne,
@@ -136,9 +163,15 @@ static inline void set_nat_flag(struct nat_entry *ne,
 	unsigned char mask = 0x01 << type;
 	if (set)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ne->ni.flag |= mask;
 	else
 		ne->ni.flag &= ~mask;
+=======
+		ne->flag |= mask;
+	else
+		ne->flag &= ~mask;
+>>>>>>> v3.18
 =======
 		ne->flag |= mask;
 	else
@@ -150,7 +183,11 @@ static inline bool get_nat_flag(struct nat_entry *ne, unsigned int type)
 {
 	unsigned char mask = 0x01 << type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ne->ni.flag & mask;
+=======
+	return ne->flag & mask;
+>>>>>>> v3.18
 =======
 	return ne->flag & mask;
 >>>>>>> v3.18
@@ -181,6 +218,7 @@ static inline void raw_nat_from_node_info(struct f2fs_nat_entry *raw_ne,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool excess_dirty_nats(struct f2fs_sb_info *sbi)
 {
 	return NM_I(sbi)->dirty_nat_cnt >= NM_I(sbi)->max_nid *
@@ -200,10 +238,15 @@ enum mem_type {
 	EXTENT_CACHE,	/* indicates extent cache */
 	BASE_CHECK,	/* check kernel status */
 =======
+=======
+>>>>>>> v3.18
 enum mem_type {
 	FREE_NIDS,	/* indicates the free nid list */
 	NAT_ENTRIES,	/* indicates the cached nat entry */
 	DIRTY_DENTS	/* indicates dirty dentry pages */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -234,6 +277,7 @@ static inline void next_free_nid(struct f2fs_sb_info *sbi, nid_t *nid)
 	struct free_nid *fnid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&nm_i->nid_list_lock);
 	if (nm_i->nid_cnt[FREE_NID_LIST] <= 0) {
 		spin_unlock(&nm_i->nid_list_lock);
@@ -244,6 +288,8 @@ static inline void next_free_nid(struct f2fs_sb_info *sbi, nid_t *nid)
 	*nid = fnid->nid;
 	spin_unlock(&nm_i->nid_list_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&nm_i->free_nid_list_lock);
 	if (nm_i->fcnt <= 0) {
 		spin_unlock(&nm_i->free_nid_list_lock);
@@ -252,6 +298,9 @@ static inline void next_free_nid(struct f2fs_sb_info *sbi, nid_t *nid)
 	fnid = list_entry(nm_i->free_nid_list.next, struct free_nid, list);
 	*nid = fnid->nid;
 	spin_unlock(&nm_i->free_nid_list_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -262,12 +311,15 @@ static inline void get_nat_bitmap(struct f2fs_sb_info *sbi, void *addr)
 {
 	struct f2fs_nm_info *nm_i = NM_I(sbi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_F2FS_CHECK_FS
 	if (memcmp(nm_i->nat_bitmap, nm_i->nat_bitmap_mir,
 						nm_i->bitmap_size))
 		f2fs_bug_on(sbi, 1);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memcpy(addr, nm_i->nat_bitmap, nm_i->bitmap_size);
@@ -278,6 +330,7 @@ static inline pgoff_t current_nat_addr(struct f2fs_sb_info *sbi, nid_t start)
 	struct f2fs_nm_info *nm_i = NM_I(sbi);
 	pgoff_t block_off;
 	pgoff_t block_addr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/*
@@ -291,6 +344,8 @@ static inline pgoff_t current_nat_addr(struct f2fs_sb_info *sbi, nid_t start)
 		(block_off << 1) -
 		(block_off & (sbi->blocks_per_seg - 1)));
 =======
+=======
+>>>>>>> v3.18
 	int seg_off;
 
 	block_off = NAT_BLOCK_OFFSET(start);
@@ -299,6 +354,9 @@ static inline pgoff_t current_nat_addr(struct f2fs_sb_info *sbi, nid_t start)
 	block_addr = (pgoff_t)(nm_i->nat_blkaddr +
 		(seg_off << sbi->log_blocks_per_seg << 1) +
 		(block_off & ((1 << sbi->log_blocks_per_seg) - 1)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (f2fs_test_bit(block_off, nm_i->nat_bitmap))
@@ -314,13 +372,19 @@ static inline pgoff_t next_nat_addr(struct f2fs_sb_info *sbi,
 
 	block_addr -= nm_i->nat_blkaddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	block_addr ^= 1 << sbi->log_blocks_per_seg;
 =======
+=======
+>>>>>>> v3.18
 	if ((block_addr >> sbi->log_blocks_per_seg) % 2)
 		block_addr -= sbi->blocks_per_seg;
 	else
 		block_addr += sbi->blocks_per_seg;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return block_addr + nm_i->nat_blkaddr;
 }
@@ -329,6 +393,7 @@ static inline void set_to_next_nat(struct f2fs_nm_info *nm_i, nid_t start_nid)
 {
 	unsigned int block_off = NAT_BLOCK_OFFSET(start_nid);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	f2fs_change_bit(block_off, nm_i->nat_bitmap);
 #ifdef CONFIG_F2FS_CHECK_FS
@@ -366,10 +431,15 @@ static inline block_t next_blkaddr_of_node(struct page *node_page)
 	struct f2fs_node *rn = F2FS_NODE(node_page);
 	return le32_to_cpu(rn->footer.next_blkaddr);
 =======
+=======
+>>>>>>> v3.18
 	if (f2fs_test_bit(block_off, nm_i->nat_bitmap))
 		f2fs_clear_bit(block_off, nm_i->nat_bitmap);
 	else
 		f2fs_set_bit(block_off, nm_i->nat_bitmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -377,6 +447,7 @@ static inline void fill_node_footer(struct page *page, nid_t nid,
 				nid_t ino, unsigned int ofs, bool reset)
 {
 	struct f2fs_node *rn = F2FS_NODE(page);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int old_flag = 0;
 
@@ -392,11 +463,16 @@ static inline void fill_node_footer(struct page *page, nid_t nid,
 	rn->footer.flag = cpu_to_le32((ofs << OFFSET_BIT_SHIFT) |
 					(old_flag & OFFSET_BIT_MASK));
 =======
+=======
+>>>>>>> v3.18
 	if (reset)
 		memset(rn, 0, sizeof(*rn));
 	rn->footer.nid = cpu_to_le32(nid);
 	rn->footer.ino = cpu_to_le32(ino);
 	rn->footer.flag = cpu_to_le32(ofs << OFFSET_BIT_SHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -411,6 +487,7 @@ static inline void fill_node_footer_blkaddr(struct page *page, block_t blkaddr)
 {
 	struct f2fs_checkpoint *ckpt = F2FS_CKPT(F2FS_P_SB(page));
 	struct f2fs_node *rn = F2FS_NODE(page);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__u64 cp_ver = cur_cp_version(ckpt);
 
@@ -431,6 +508,8 @@ static inline bool is_recoverable_dnode(struct page *page)
 
 	return cp_ver == cpver_of_node(page);
 =======
+=======
+>>>>>>> v3.18
 
 	rn->footer.cp_ver = ckpt->checkpoint_ver;
 	rn->footer.next_blkaddr = cpu_to_le32(blkaddr);
@@ -465,6 +544,9 @@ static inline block_t next_blkaddr_of_node(struct page *node_page)
 {
 	struct f2fs_node *rn = F2FS_NODE(node_page);
 	return le32_to_cpu(rn->footer.next_blkaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -495,7 +577,11 @@ static inline bool IS_DNODE(struct page *node_page)
 
 	if (f2fs_has_xattr_block(ofs))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return true;
+=======
+		return false;
+>>>>>>> v3.18
 =======
 		return false;
 >>>>>>> v3.18
@@ -512,17 +598,23 @@ static inline bool IS_DNODE(struct page *node_page)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int set_nid(struct page *p, int off, nid_t nid, bool i)
 {
 	struct f2fs_node *rn = F2FS_NODE(p);
 
 	f2fs_wait_on_page_writeback(p, NODE, true);
 =======
+=======
+>>>>>>> v3.18
 static inline void set_nid(struct page *p, int off, nid_t nid, bool i)
 {
 	struct f2fs_node *rn = F2FS_NODE(p);
 
 	f2fs_wait_on_page_writeback(p, NODE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (i)
@@ -530,7 +622,11 @@ static inline void set_nid(struct page *p, int off, nid_t nid, bool i)
 	else
 		rn->in.nid[off] = cpu_to_le32(nid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return set_page_dirty(p);
+=======
+	set_page_dirty(p);
+>>>>>>> v3.18
 =======
 	set_page_dirty(p);
 >>>>>>> v3.18
@@ -552,7 +648,10 @@ static inline nid_t get_nid(struct page *p, int off, bool i)
  *  - Mark cold data pages in page cache
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int is_file(struct inode *inode, int type)
 {
 	return F2FS_I(inode)->i_advise & type;
@@ -575,6 +674,9 @@ static inline void clear_file(struct inode *inode, int type)
 #define file_clear_cold(inode)	clear_file(inode, FADVISE_COLD_BIT)
 #define file_got_pino(inode)	clear_file(inode, FADVISE_LOST_PINO_BIT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int is_cold_data(struct page *page)
 {
@@ -602,6 +704,7 @@ static inline int is_node(struct page *page, int type)
 #define is_dent_dnode(page)	is_node(page, DENT_BIT_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int is_inline_node(struct page *page)
 {
 	return PageChecked(page);
@@ -617,6 +720,8 @@ static inline void clear_inline_node(struct page *page)
 	ClearPageChecked(page);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void set_cold_node(struct inode *inode, struct page *page)

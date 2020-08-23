@@ -237,7 +237,11 @@ static int si3054_init(struct hda_codec *codec)
 
 	if((val&SI3054_MEI_READY) != SI3054_MEI_READY) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "si3054: cannot initialize. EXT MID = %04x\n", val);
+=======
+		codec_err(codec, "si3054: cannot initialize. EXT MID = %04x\n", val);
+>>>>>>> v3.18
 =======
 		codec_err(codec, "si3054: cannot initialize. EXT MID = %04x\n", val);
 >>>>>>> v3.18
@@ -252,7 +256,12 @@ static int si3054_init(struct hda_codec *codec)
 
 	if((GET_REG(codec,SI3054_LINE_STATUS) & (1<<6)) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("Link Frame Detect(FDT) is not ready (line status: %04x)\n",
+=======
+		codec_dbg(codec,
+			  "Link Frame Detect(FDT) is not ready (line status: %04x)\n",
+>>>>>>> v3.18
 =======
 		codec_dbg(codec,
 			  "Link Frame Detect(FDT) is not ready (line status: %04x)\n",

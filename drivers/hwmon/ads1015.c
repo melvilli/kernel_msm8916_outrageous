@@ -47,9 +47,12 @@ static const unsigned int fullscale_table[8] = {
 
 /* Data rates in samples per second */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const unsigned int data_rate_table[8] = {
 	128, 250, 490, 920, 1600, 2400, 3300, 3300 };
 =======
+=======
+>>>>>>> v3.18
 static const unsigned int data_rate_table_1015[8] = {
 	128, 250, 490, 920, 1600, 2400, 3300, 3300
 };
@@ -57,6 +60,9 @@ static const unsigned int data_rate_table_1015[8] = {
 static const unsigned int data_rate_table_1115[8] = {
 	8, 16, 32, 64, 128, 250, 475, 860
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ADS1015_DEFAULT_CHANNELS 0xff
@@ -64,18 +70,28 @@ static const unsigned int data_rate_table_1115[8] = {
 #define ADS1015_DEFAULT_DATA_RATE 4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum ads1015_chips {
 	ads1015,
 	ads1115,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ads1015_data {
 	struct device *hwmon_dev;
 	struct mutex update_lock; /* mutex protect updates */
 	struct ads1015_channel_data channel_data[ADS1015_CHANNELS];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ads1015_chips id;
+>>>>>>> v3.18
 =======
 	enum ads1015_chips id;
 >>>>>>> v3.18
@@ -89,6 +105,11 @@ static int ads1015_read_adc(struct i2c_client *client, unsigned int channel)
 	unsigned int data_rate = data->channel_data[channel].data_rate;
 	unsigned int conversion_time_ms;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const unsigned int * const rate_table = data->id == ads1115 ?
+		data_rate_table_1115 : data_rate_table_1015;
+>>>>>>> v3.18
 =======
 	const unsigned int * const rate_table = data->id == ads1115 ?
 		data_rate_table_1115 : data_rate_table_1015;
@@ -103,7 +124,11 @@ static int ads1015_read_adc(struct i2c_client *client, unsigned int channel)
 		goto err_unlock;
 	config = res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	conversion_time_ms = DIV_ROUND_UP(1000, data_rate_table[data_rate]);
+=======
+	conversion_time_ms = DIV_ROUND_UP(1000, rate_table[data_rate]);
+>>>>>>> v3.18
 =======
 	conversion_time_ms = DIV_ROUND_UP(1000, rate_table[data_rate]);
 >>>>>>> v3.18
@@ -145,8 +170,14 @@ static int ads1015_reg_to_mv(struct i2c_client *client, unsigned int channel,
 	unsigned int pga = data->channel_data[channel].pga;
 	int fullscale = fullscale_table[pga];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return DIV_ROUND_CLOSEST(reg * fullscale, 0x7ff0);
+=======
+	const unsigned mask = data->id == ads1115 ? 0x7fff : 0x7ff0;
+
+	return DIV_ROUND_CLOSEST(reg * fullscale, mask);
+>>>>>>> v3.18
 =======
 	const unsigned mask = data->id == ads1115 ? 0x7fff : 0x7ff0;
 
@@ -208,8 +239,12 @@ static int ads1015_get_channels_config_of(struct i2c_client *client)
 
 	for_each_child_of_node(client->dev.of_node, node) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const __be32 *property;
 		int len;
+=======
+		u32 pval;
+>>>>>>> v3.18
 =======
 		u32 pval;
 >>>>>>> v3.18
@@ -218,8 +253,12 @@ static int ads1015_get_channels_config_of(struct i2c_client *client)
 		unsigned int data_rate = ADS1015_DEFAULT_DATA_RATE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		property = of_get_property(node, "reg", &len);
 		if (!property || len != sizeof(int)) {
+=======
+		if (of_property_read_u32(node, "reg", &pval)) {
+>>>>>>> v3.18
 =======
 		if (of_property_read_u32(node, "reg", &pval)) {
 >>>>>>> v3.18
@@ -229,7 +268,11 @@ static int ads1015_get_channels_config_of(struct i2c_client *client)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		channel = be32_to_cpup(property);
+=======
+		channel = pval;
+>>>>>>> v3.18
 =======
 		channel = pval;
 >>>>>>> v3.18
@@ -241,6 +284,7 @@ static int ads1015_get_channels_config_of(struct i2c_client *client)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		property = of_get_property(node, "ti,gain", &len);
 		if (property && len == sizeof(int)) {
 			pga = be32_to_cpup(property);
@@ -248,10 +292,15 @@ static int ads1015_get_channels_config_of(struct i2c_client *client)
 				dev_err(&client->dev,
 					"invalid gain on %s\n",
 =======
+=======
+>>>>>>> v3.18
 		if (!of_property_read_u32(node, "ti,gain", &pval)) {
 			pga = pval;
 			if (pga > 6) {
 				dev_err(&client->dev, "invalid gain on %s\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					node->full_name);
 				return -EINVAL;
@@ -259,9 +308,14 @@ static int ads1015_get_channels_config_of(struct i2c_client *client)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		property = of_get_property(node, "ti,datarate", &len);
 		if (property && len == sizeof(int)) {
 			data_rate = be32_to_cpup(property);
+=======
+		if (!of_property_read_u32(node, "ti,datarate", &pval)) {
+			data_rate = pval;
+>>>>>>> v3.18
 =======
 		if (!of_property_read_u32(node, "ti,datarate", &pval)) {
 			data_rate = pval;
@@ -321,7 +375,11 @@ static int ads1015_probe(struct i2c_client *client,
 	if (!data)
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	data->id = id->driver_data;
+>>>>>>> v3.18
 =======
 	data->id = id->driver_data;
 >>>>>>> v3.18
@@ -354,7 +412,12 @@ exit_remove:
 
 static const struct i2c_device_id ads1015_id[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "ads1015", 0 },
+=======
+	{ "ads1015",  ads1015},
+	{ "ads1115",  ads1115},
+>>>>>>> v3.18
 =======
 	{ "ads1015",  ads1015},
 	{ "ads1115",  ads1115},

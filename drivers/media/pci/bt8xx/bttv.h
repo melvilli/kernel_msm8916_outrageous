@@ -186,12 +186,18 @@
 #define BTTV_BOARD_TVT_TD3116		   0xa0
 #define BTTV_BOARD_APOSONIC_WDVR           0xa1
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BTTV_BOARD_ADLINK_MPG24            0xa2
 #define BTTV_BOARD_BT848_CAP_14            0xa3
 #define BTTV_BOARD_CYBERVISION_CV06        0xa4
 #define BTTV_BOARD_KWORLD_VSTREAM_XPERT    0xa5
 #define BTTV_BOARD_PCI_8604PW              0xa6
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* more card-specific defines */
@@ -241,6 +247,10 @@ struct tvcard {
 #define PLL_28   1
 #define PLL_35   2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PLL_14   3
+>>>>>>> v3.18
 =======
 #define PLL_14   3
 >>>>>>> v3.18

@@ -128,7 +128,10 @@ struct fs_struct *copy_fs_struct(struct fs_struct *old)
 	return fs;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(copy_fs_struct);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -166,7 +169,11 @@ struct fs_struct init_fs = {
 	.users		= 1,
 	.lock		= __SPIN_LOCK_UNLOCKED(init_fs.lock),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.seq		= SEQCNT_ZERO,
+=======
+	.seq		= SEQCNT_ZERO(init_fs.seq),
+>>>>>>> v3.18
 =======
 	.seq		= SEQCNT_ZERO(init_fs.seq),
 >>>>>>> v3.18

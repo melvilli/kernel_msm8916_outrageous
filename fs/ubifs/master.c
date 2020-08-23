@@ -83,7 +83,11 @@ out:
 
 out_dump:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("unexpected node type %d master LEB %d:%d", c->vi.ubi_num,
+=======
+	ubifs_err("unexpected node type %d master LEB %d:%d",
+>>>>>>> v3.18
 =======
 	ubifs_err("unexpected node type %d master LEB %d:%d",
 >>>>>>> v3.18
@@ -245,8 +249,12 @@ static int validate_master(const struct ubifs_info *c)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("bad master node at offset %d error %d", c->vi.ubi_num,
 			c->mst_offs, err);
+=======
+	ubifs_err("bad master node at offset %d error %d", c->mst_offs, err);
+>>>>>>> v3.18
 =======
 	ubifs_err("bad master node at offset %d error %d", c->mst_offs, err);
 >>>>>>> v3.18
@@ -326,7 +334,11 @@ int ubifs_read_master(struct ubifs_info *c)
 		if (c->leb_cnt < old_leb_cnt ||
 		    c->leb_cnt < UBIFS_MIN_LEB_CNT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("bad leb_cnt on master node", c->vi.ubi_num);
+=======
+			ubifs_err("bad leb_cnt on master node");
+>>>>>>> v3.18
 =======
 			ubifs_err("bad leb_cnt on master node");
 >>>>>>> v3.18

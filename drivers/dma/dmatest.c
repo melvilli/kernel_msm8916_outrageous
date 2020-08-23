@@ -9,6 +9,11 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -24,6 +29,7 @@
 #include <linux/random.h>
 #include <linux/slab.h>
 #include <linux/wait.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/ctype.h>
 #include <linux/debugfs.h>
@@ -45,6 +51,8 @@ MODULE_PARM_DESC(device, "Bus ID of the DMA Engine to test (default: any)");
 static unsigned int threads_per_chan = 1;
 module_param(threads_per_chan, uint, S_IRUGO);
 =======
+=======
+>>>>>>> v3.18
 
 static unsigned int test_buf_size = 16384;
 module_param(test_buf_size, uint, S_IRUGO | S_IWUSR);
@@ -62,13 +70,20 @@ MODULE_PARM_DESC(device, "Bus ID of the DMA Engine to test (default: any)");
 
 static unsigned int threads_per_chan = 1;
 module_param(threads_per_chan, uint, S_IRUGO | S_IWUSR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_PARM_DESC(threads_per_chan,
 		"Number of threads to start per channel (default: 1)");
 
 static unsigned int max_channels;
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param(max_channels, uint, S_IRUGO);
+=======
+module_param(max_channels, uint, S_IRUGO | S_IWUSR);
+>>>>>>> v3.18
 =======
 module_param(max_channels, uint, S_IRUGO | S_IWUSR);
 >>>>>>> v3.18
@@ -77,7 +92,11 @@ MODULE_PARM_DESC(max_channels,
 
 static unsigned int iterations;
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param(iterations, uint, S_IRUGO);
+=======
+module_param(iterations, uint, S_IRUGO | S_IWUSR);
+>>>>>>> v3.18
 =======
 module_param(iterations, uint, S_IRUGO | S_IWUSR);
 >>>>>>> v3.18
@@ -86,7 +105,11 @@ MODULE_PARM_DESC(iterations,
 
 static unsigned int xor_sources = 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param(xor_sources, uint, S_IRUGO);
+=======
+module_param(xor_sources, uint, S_IRUGO | S_IWUSR);
+>>>>>>> v3.18
 =======
 module_param(xor_sources, uint, S_IRUGO | S_IWUSR);
 >>>>>>> v3.18
@@ -95,7 +118,11 @@ MODULE_PARM_DESC(xor_sources,
 
 static unsigned int pq_sources = 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param(pq_sources, uint, S_IRUGO);
+=======
+module_param(pq_sources, uint, S_IRUGO | S_IWUSR);
+>>>>>>> v3.18
 =======
 module_param(pq_sources, uint, S_IRUGO | S_IWUSR);
 >>>>>>> v3.18
@@ -104,11 +131,14 @@ MODULE_PARM_DESC(pq_sources,
 
 static int timeout = 3000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param(timeout, uint, S_IRUGO);
 MODULE_PARM_DESC(timeout, "Transfer Timeout in msec (default: 3000), "
 		 "Pass -1 for infinite timeout");
 
 =======
+=======
+>>>>>>> v3.18
 module_param(timeout, uint, S_IRUGO | S_IWUSR);
 MODULE_PARM_DESC(timeout, "Transfer Timeout in msec (default: 3000), "
 		 "Pass -1 for infinite timeout");
@@ -175,6 +205,9 @@ static bool dmatest_run;
 module_param_cb(run, &run_ops, &dmatest_run, S_IRUGO | S_IWUSR);
 MODULE_PARM_DESC(run, "Run the test (default: false)");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Maximum amount of mismatched bytes in buffer to print */
 #define MAX_ERROR_COUNT		32
@@ -196,6 +229,7 @@ MODULE_PARM_DESC(run, "Run the test (default: false)");
 #define PATTERN_OVERWRITE	0x20
 #define PATTERN_COUNT_MASK	0x1f
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum dmatest_error_type {
 	DMATEST_ET_OK,
@@ -249,6 +283,8 @@ struct dmatest_info;
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct dmatest_thread {
 	struct list_head	node;
 	struct dmatest_info	*info;
@@ -266,6 +302,7 @@ struct dmatest_chan {
 	struct list_head	threads;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * struct dmatest_params - test parameters.
@@ -316,6 +353,8 @@ struct dmatest_info {
 
 static struct dmatest_info test_info;
 =======
+=======
+>>>>>>> v3.18
 static DECLARE_WAIT_QUEUE_HEAD(thread_wait);
 static bool wait;
 
@@ -352,6 +391,9 @@ static struct kernel_param_ops wait_ops = {
 };
 module_param_cb(wait, &wait_ops, &wait, S_IRUGO);
 MODULE_PARM_DESC(wait, "Wait for tests to complete (default: false)");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static bool dmatest_match_channel(struct dmatest_params *params,
@@ -375,7 +417,11 @@ static unsigned long dmatest_random(void)
 	unsigned long buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_random_bytes(&buf, sizeof(buf));
+=======
+	prandom_bytes(&buf, sizeof(buf));
+>>>>>>> v3.18
 =======
 	prandom_bytes(&buf, sizeof(buf));
 >>>>>>> v3.18
@@ -418,10 +464,13 @@ static void dmatest_init_dsts(u8 **bufs, unsigned int start, unsigned int len,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int dmatest_verify(struct dmatest_verify_result *vr, u8 **bufs,
 		unsigned int start, unsigned int end, unsigned int counter,
 		u8 pattern, bool is_srcbuf)
 =======
+=======
+>>>>>>> v3.18
 static void dmatest_mismatch(u8 actual, u8 pattern, unsigned int index,
 		unsigned int counter, bool is_srcbuf)
 {
@@ -447,6 +496,9 @@ static void dmatest_mismatch(u8 actual, u8 pattern, unsigned int index,
 static unsigned int dmatest_verify(u8 **bufs, unsigned int start,
 		unsigned int end, unsigned int counter, u8 pattern,
 		bool is_srcbuf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned int i;
@@ -456,7 +508,10 @@ static unsigned int dmatest_verify(u8 **bufs, unsigned int start,
 	u8 *buf;
 	unsigned int counter_orig = counter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dmatest_verify_buffer *vb;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -467,12 +522,18 @@ static unsigned int dmatest_verify(u8 **bufs, unsigned int start,
 			expected = pattern | (~counter & PATTERN_COUNT_MASK);
 			if (actual != expected) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (error_count < MAX_ERROR_COUNT && vr) {
 					vb = &vr->data[error_count];
 					vb->index = i;
 					vb->expected = expected;
 					vb->actual = actual;
 				}
+=======
+				if (error_count < MAX_ERROR_COUNT)
+					dmatest_mismatch(actual, pattern, i,
+							 counter, is_srcbuf);
+>>>>>>> v3.18
 =======
 				if (error_count < MAX_ERROR_COUNT)
 					dmatest_mismatch(actual, pattern, i,
@@ -486,7 +547,11 @@ static unsigned int dmatest_verify(u8 **bufs, unsigned int start,
 
 	if (error_count > MAX_ERROR_COUNT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: %u errors suppressed\n",
+=======
+		pr_warn("%s: %u errors suppressed\n",
+>>>>>>> v3.18
 =======
 		pr_warn("%s: %u errors suppressed\n",
 >>>>>>> v3.18
@@ -510,6 +575,7 @@ static void dmatest_callback(void *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void unmap_src(struct device *dev, dma_addr_t *addr, size_t len,
 			     unsigned int count)
 {
@@ -526,6 +592,8 @@ static inline void unmap_dst(struct device *dev, dma_addr_t *addr, size_t len,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static unsigned int min_odd(unsigned int x, unsigned int y)
 {
 	unsigned int val = min(x, y);
@@ -533,6 +601,7 @@ static unsigned int min_odd(unsigned int x, unsigned int y)
 	return val % 2 ? val : val - 1;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static char *verify_result_get_one(struct dmatest_verify_result *vr,
 		unsigned int i)
@@ -697,6 +766,8 @@ static struct dmatest_result *result_init(struct dmatest_info *info,
 	}
 	return r;
 =======
+=======
+>>>>>>> v3.18
 static void result(const char *err, unsigned int n, unsigned int src_off,
 		   unsigned int dst_off, unsigned int len, unsigned long data)
 {
@@ -740,6 +811,9 @@ static unsigned long long dmatest_persec(s64 runtime, unsigned int val)
 static unsigned long long dmatest_KBs(s64 runtime, unsigned long long len)
 {
 	return dmatest_persec(runtime, len >> 10);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -767,7 +841,10 @@ static int dmatest_func(void *data)
 	struct dma_chan		*chan;
 	struct dma_device	*dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char		*thread_name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int		src_off, dst_off, len;
@@ -783,14 +860,20 @@ static int dmatest_func(void *data)
 	int			dst_cnt;
 	int			i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dmatest_result	*result;
 
 	thread_name = current->comm;
 =======
+=======
+>>>>>>> v3.18
 	ktime_t			ktime;
 	s64			runtime = 0;
 	unsigned long long	total_len = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_freezable();
 
@@ -822,10 +905,13 @@ static int dmatest_func(void *data)
 		goto err_thread_type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = result_init(info, thread_name);
 	if (!result)
 		goto err_srcs;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	thread->srcs = kcalloc(src_cnt+1, sizeof(u8 *), GFP_KERNEL);
@@ -852,6 +938,7 @@ static int dmatest_func(void *data)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * src buffers are freed by the DMAEngine code with dma_unmap_single()
 	 * dst buffers are freed by ourselves below
 	 */
@@ -864,6 +951,8 @@ static int dmatest_func(void *data)
 		dma_addr_t dma_srcs[src_cnt];
 		dma_addr_t dma_dsts[dst_cnt];
 =======
+=======
+>>>>>>> v3.18
 	 * src and dst buffers are freed by ourselves below
 	 */
 	flags = DMA_CTRL_ACK | DMA_PREP_INTERRUPT;
@@ -875,6 +964,9 @@ static int dmatest_func(void *data)
 		struct dmaengine_unmap_data *um;
 		dma_addr_t srcs[src_cnt];
 		dma_addr_t *dsts;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		u8 align = 0;
 
@@ -894,6 +986,7 @@ static int dmatest_func(void *data)
 			break;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		len = dmatest_random() % params->buf_size + 1;
 		len = (len >> align) << align;
@@ -942,6 +1035,8 @@ static int dmatest_func(void *data)
 				continue;
 			}
 =======
+=======
+>>>>>>> v3.18
 		if (params->noverify) {
 			len = params->buf_size;
 			src_off = 0;
@@ -1014,11 +1109,15 @@ static int dmatest_func(void *data)
 				continue;
 			}
 			um->bidi_cnt++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
 		if (thread->type == DMA_MEMCPY)
 			tx = dev->device_prep_dma_memcpy(chan,
+<<<<<<< HEAD
 <<<<<<< HEAD
 							 dma_dsts[0] + dst_off,
 							 dma_srcs[0], len,
@@ -1028,12 +1127,17 @@ static int dmatest_func(void *data)
 						      dma_dsts[0] + dst_off,
 						      dma_srcs, src_cnt,
 =======
+=======
+>>>>>>> v3.18
 							 dsts[0] + dst_off,
 							 srcs[0], len, flags);
 		else if (thread->type == DMA_XOR)
 			tx = dev->device_prep_dma_xor(chan,
 						      dsts[0] + dst_off,
 						      srcs, src_cnt,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						      len, flags);
 		else if (thread->type == DMA_PQ) {
@@ -1041,8 +1145,13 @@ static int dmatest_func(void *data)
 
 			for (i = 0; i < dst_cnt; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dma_pq[i] = dma_dsts[i] + dst_off;
 			tx = dev->device_prep_dma_pq(chan, dma_pq, dma_srcs,
+=======
+				dma_pq[i] = dsts[i] + dst_off;
+			tx = dev->device_prep_dma_pq(chan, dma_pq, srcs,
+>>>>>>> v3.18
 =======
 				dma_pq[i] = dsts[i] + dst_off;
 			tx = dev->device_prep_dma_pq(chan, dma_pq, srcs,
@@ -1053,12 +1162,18 @@ static int dmatest_func(void *data)
 
 		if (!tx) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unmap_src(dev->dev, dma_srcs, len, src_cnt);
 			unmap_dst(dev->dev, dma_dsts, params->buf_size,
 				  dst_cnt);
 			thread_result_add(info, result, DMATEST_ET_PREP,
 					  total_tests, src_off, dst_off,
 					  len, 0);
+=======
+			dmaengine_unmap_put(um);
+			result("prep error", total_tests, src_off,
+			       dst_off, len, ret);
+>>>>>>> v3.18
 =======
 			dmaengine_unmap_put(um);
 			result("prep error", total_tests, src_off,
@@ -1076,9 +1191,15 @@ static int dmatest_func(void *data)
 
 		if (dma_submit_error(cookie)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			thread_result_add(info, result, DMATEST_ET_SUBMIT,
 					  total_tests, src_off, dst_off,
 					  len, cookie);
+=======
+			dmaengine_unmap_put(um);
+			result("submit error", total_tests, src_off,
+			       dst_off, len, ret);
+>>>>>>> v3.18
 =======
 			dmaengine_unmap_put(um);
 			result("submit error", total_tests, src_off,
@@ -1105,6 +1226,7 @@ static int dmatest_func(void *data)
 			 * leave it dangling.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			thread_result_add(info, result, DMATEST_ET_TIMEOUT,
 					  total_tests, src_off, dst_off,
 					  len, 0);
@@ -1117,6 +1239,8 @@ static int dmatest_func(void *data)
 					  total_tests, src_off, dst_off,
 					  len, status);
 =======
+=======
+>>>>>>> v3.18
 			dmaengine_unmap_put(um);
 			result("test timed out", total_tests, src_off, dst_off,
 			       len, 0);
@@ -1128,11 +1252,15 @@ static int dmatest_func(void *data)
 			       "completion error status" :
 			       "completion busy status", total_tests, src_off,
 			       dst_off, len, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			failed_tests++;
 			continue;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Unmap by myself (see DMA_COMPL_SKIP_DEST_UNMAP above) */
 		unmap_dst(dev->dev, dma_dsts, params->buf_size, dst_cnt);
@@ -1183,6 +1311,8 @@ err_dsts:
 		kfree(thread->srcs[i]);
 err_srcbuf:
 =======
+=======
+>>>>>>> v3.18
 		dmaengine_unmap_put(um);
 
 		if (params->noverify) {
@@ -1231,19 +1361,28 @@ err_dsts:
 err_srcbuf:
 	for (i = 0; thread->srcs[i]; i++)
 		kfree(thread->srcs[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(thread->srcs);
 err_srcs:
 	kfree(pq_coefs);
 err_thread_type:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_notice("%s: terminating after %u tests, %u failures (status %d)\n",
 			thread_name, total_tests, failed_tests, ret);
 =======
+=======
+>>>>>>> v3.18
 	pr_info("%s: summary %u tests, %u failures %llu iops %llu KB/s (%d)\n",
 		current->comm, total_tests, failed_tests,
 		dmatest_persec(runtime, total_tests),
 		dmatest_KBs(runtime, total_len), ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* terminate all transfers on specified channels */
@@ -1252,12 +1391,16 @@ err_thread_type:
 
 	thread->done = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (params->iterations > 0)
 		while (!kthread_should_stop()) {
 			DECLARE_WAIT_QUEUE_HEAD_ONSTACK(wait_dmatest_exit);
 			interruptible_sleep_on(&wait_dmatest_exit);
 		}
+=======
+	wake_up(&thread_wait);
+>>>>>>> v3.18
 =======
 	wake_up(&thread_wait);
 >>>>>>> v3.18
@@ -1274,14 +1417,20 @@ static void dmatest_cleanup_channel(struct dmatest_chan *dtc)
 	list_for_each_entry_safe(thread, _thread, &dtc->threads, node) {
 		ret = kthread_stop(thread->task);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("dmatest: thread %s exited with status %d\n",
 				thread->task->comm, ret);
 		list_del(&thread->node);
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("thread %s exited with status %d\n",
 			 thread->task->comm, ret);
 		list_del(&thread->node);
 		put_task_struct(thread->task);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree(thread);
 	}
@@ -1314,9 +1463,14 @@ static int dmatest_add_threads(struct dmatest_info *info,
 		thread = kzalloc(sizeof(struct dmatest_thread), GFP_KERNEL);
 		if (!thread) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("dmatest: No memory for %s-%s%u\n",
 				   dma_chan_name(chan), op, i);
 
+=======
+			pr_warn("No memory for %s-%s%u\n",
+				dma_chan_name(chan), op, i);
+>>>>>>> v3.18
 =======
 			pr_warn("No memory for %s-%s%u\n",
 				dma_chan_name(chan), op, i);
@@ -1328,17 +1482,23 @@ static int dmatest_add_threads(struct dmatest_info *info,
 		thread->type = type;
 		smp_wmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		thread->task = kthread_run(dmatest_func, thread, "%s-%s%u",
 				dma_chan_name(chan), op, i);
 		if (IS_ERR(thread->task)) {
 			pr_warning("dmatest: Failed to run thread %s-%s%u\n",
 					dma_chan_name(chan), op, i);
 =======
+=======
+>>>>>>> v3.18
 		thread->task = kthread_create(dmatest_func, thread, "%s-%s%u",
 				dma_chan_name(chan), op, i);
 		if (IS_ERR(thread->task)) {
 			pr_warn("Failed to create thread %s-%s%u\n",
 				dma_chan_name(chan), op, i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			kfree(thread);
 			break;
@@ -1346,8 +1506,14 @@ static int dmatest_add_threads(struct dmatest_info *info,
 
 		/* srcbuf and dstbuf are allocated by the thread itself */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		list_add_tail(&thread->node, &dtc->threads);
+=======
+		get_task_struct(thread->task);
+		list_add_tail(&thread->node, &dtc->threads);
+		wake_up_process(thread->task);
+>>>>>>> v3.18
 =======
 		get_task_struct(thread->task);
 		list_add_tail(&thread->node, &dtc->threads);
@@ -1369,7 +1535,11 @@ static int dmatest_add_channel(struct dmatest_info *info,
 	dtc = kmalloc(sizeof(struct dmatest_chan), GFP_KERNEL);
 	if (!dtc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("dmatest: No memory for %s\n", dma_chan_name(chan));
+=======
+		pr_warn("No memory for %s\n", dma_chan_name(chan));
+>>>>>>> v3.18
 =======
 		pr_warn("No memory for %s\n", dma_chan_name(chan));
 >>>>>>> v3.18
@@ -1393,7 +1563,11 @@ static int dmatest_add_channel(struct dmatest_info *info,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("dmatest: Started %u threads using %s\n",
+=======
+	pr_info("Started %u threads using %s\n",
+>>>>>>> v3.18
 =======
 	pr_info("Started %u threads using %s\n",
 >>>>>>> v3.18
@@ -1417,6 +1591,7 @@ static bool filter(struct dma_chan *chan, void *param)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __run_threaded_test(struct dmatest_info *info)
 {
 	dma_cap_mask_t mask;
@@ -1432,6 +1607,8 @@ static int __run_threaded_test(struct dmatest_info *info)
 			err = dmatest_add_channel(info, chan);
 			if (err) {
 =======
+=======
+>>>>>>> v3.18
 static void request_channels(struct dmatest_info *info,
 			     enum dma_transaction_type type)
 {
@@ -1446,6 +1623,9 @@ static void request_channels(struct dmatest_info *info,
 		chan = dma_request_channel(mask, filter, params);
 		if (chan) {
 			if (dmatest_add_channel(info, chan)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				dma_release_channel(chan);
 				break; /* add_channel failed, punt */
@@ -1456,6 +1636,7 @@ static void request_channels(struct dmatest_info *info,
 		    info->nr_channels >= params->max_channels)
 			break; /* we have all we need */
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return err;
 }
@@ -1474,6 +1655,8 @@ static int run_threaded_test(struct dmatest_info *info)
 
 static void __stop_threaded_test(struct dmatest_info *info)
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void run_threaded_test(struct dmatest_info *info)
@@ -1498,6 +1681,9 @@ static void run_threaded_test(struct dmatest_info *info)
 }
 
 static void stop_threaded_test(struct dmatest_info *info)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct dmatest_chan *dtc, *_dtc;
@@ -1508,7 +1694,11 @@ static void stop_threaded_test(struct dmatest_info *info)
 		chan = dtc->chan;
 		dmatest_cleanup_channel(dtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("dmatest: dropped channel %s\n", dma_chan_name(chan));
+=======
+		pr_debug("dropped channel %s\n", dma_chan_name(chan));
+>>>>>>> v3.18
 =======
 		pr_debug("dropped channel %s\n", dma_chan_name(chan));
 >>>>>>> v3.18
@@ -1518,6 +1708,7 @@ static void stop_threaded_test(struct dmatest_info *info)
 	info->nr_channels = 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void stop_threaded_test(struct dmatest_info *info)
 {
@@ -1800,6 +1991,8 @@ err_node:
 err_root:
 	pr_err("dmatest: Failed to initialize debugfs\n");
 =======
+=======
+>>>>>>> v3.18
 static void restart_threaded_test(struct dmatest_info *info, bool run)
 {
 	/* we might be called early to set run=, defer running until all
@@ -1850,6 +2043,9 @@ static int dmatest_run_set(const char *val, const struct kernel_param *kp)
 
 	mutex_unlock(&info->lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1858,6 +2054,7 @@ static int __init dmatest_init(void)
 {
 	struct dmatest_info *info = &test_info;
 	struct dmatest_params *params = &info->params;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -1890,6 +2087,8 @@ static int __init dmatest_init(void)
 	return run_threaded_test(info);
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 	if (dmatest_run) {
 		mutex_lock(&info->lock);
@@ -1906,6 +2105,9 @@ static int __init dmatest_init(void)
 	info->did_init = true;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 /* when compiled-in wait for drivers to load first */
@@ -1916,9 +2118,15 @@ static void __exit dmatest_exit(void)
 	struct dmatest_info *info = &test_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debugfs_remove_recursive(info->root);
 	stop_threaded_test(info);
 	result_free(info, NULL);
+=======
+	mutex_lock(&info->lock);
+	stop_threaded_test(info);
+	mutex_unlock(&info->lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&info->lock);
 	stop_threaded_test(info);

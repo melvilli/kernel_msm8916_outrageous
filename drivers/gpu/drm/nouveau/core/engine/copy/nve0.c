@@ -25,7 +25,10 @@
 #include <core/os.h>
 #include <core/enum.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <core/engctx.h>
@@ -71,7 +74,10 @@ nve0_copy_cclass = {
  ******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 nve0_copy_intr(struct nouveau_subdev *subdev)
 {
@@ -85,6 +91,9 @@ nve0_copy_intr(struct nouveau_subdev *subdev)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nve0_copy0_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
@@ -95,9 +104,12 @@ nve0_copy0_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_rd32(parent, 0x022500) & 0x00000100)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = nouveau_engine_create(parent, engine, oclass, true,
@@ -108,6 +120,10 @@ nve0_copy0_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 
 	nv_subdev(priv)->unit = 0x00000040;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nv_subdev(priv)->intr = nve0_copy_intr;
+>>>>>>> v3.18
 =======
 	nv_subdev(priv)->intr = nve0_copy_intr;
 >>>>>>> v3.18
@@ -125,9 +141,12 @@ nve0_copy1_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nv_rd32(parent, 0x022500) & 0x00000200)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = nouveau_engine_create(parent, engine, oclass, true,
@@ -138,7 +157,10 @@ nve0_copy1_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 
 	nv_subdev(priv)->unit = 0x00000080;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	nv_subdev(priv)->intr = nve0_copy_intr;
 	nv_engine(priv)->cclass = &nve0_copy_cclass;
 	nv_engine(priv)->sclass = nve0_copy_sclass;
@@ -161,6 +183,9 @@ nve0_copy2_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 
 	nv_subdev(priv)->unit = 0x00200000;
 	nv_subdev(priv)->intr = nve0_copy_intr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nv_engine(priv)->cclass = &nve0_copy_cclass;
 	nv_engine(priv)->sclass = nve0_copy_sclass;
@@ -189,7 +214,10 @@ nve0_copy1_oclass = {
 	},
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 struct nouveau_oclass
 nve0_copy2_oclass = {
@@ -201,4 +229,7 @@ nve0_copy2_oclass = {
 		.fini = _nouveau_engine_fini,
 	},
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

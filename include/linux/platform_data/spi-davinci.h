@@ -20,7 +20,11 @@
 #define __ARCH_ARM_DAVINCI_SPI_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/edma.h>
+=======
+#include <linux/platform_data/edma.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/edma.h>
 >>>>>>> v3.18

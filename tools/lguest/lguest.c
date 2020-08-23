@@ -43,6 +43,7 @@
 #include <grp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/virtio_config.h>
 #include <linux/virtio_net.h>
 #include <linux/virtio_blk.h>
@@ -52,10 +53,15 @@
 #include <asm/bootparam.h>
 #include "../../include/linux/lguest_launcher.h"
 =======
+=======
+>>>>>>> v3.18
 #ifndef VIRTIO_F_ANY_LAYOUT
 #define VIRTIO_F_ANY_LAYOUT		27
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*L:110
  * We can ignore the 43 include files we need for this program, but I do want
@@ -73,7 +79,10 @@ typedef uint8_t u8;
 /*:*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/virtio_config.h>
 #include <linux/virtio_net.h>
 #include <linux/virtio_blk.h>
@@ -83,6 +92,9 @@ typedef uint8_t u8;
 #include <asm/bootparam.h>
 #include "../../include/linux/lguest_launcher.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BRIDGE_PFX "bridge:"
 #ifndef SIOCBRADDIF
@@ -197,7 +209,12 @@ static struct termios orig_term;
  */
 #define wmb() __asm__ __volatile__("" : : : "memory")
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define mb() __asm__ __volatile__("" : : : "memory")
+=======
+#define rmb() __asm__ __volatile__("lock; addl $0,0(%%esp)" : : : "memory")
+#define mb() __asm__ __volatile__("lock; addl $0,0(%%esp)" : : : "memory")
+>>>>>>> v3.18
 =======
 #define rmb() __asm__ __volatile__("lock; addl $0,0(%%esp)" : : : "memory")
 #define mb() __asm__ __volatile__("lock; addl $0,0(%%esp)" : : : "memory")
@@ -701,13 +718,19 @@ static unsigned wait_for_vq_desc(struct virtqueue *vq,
 		     last_avail, vq->vring.avail->idx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* 
 	 * Make sure we read the descriptor number *after* we read the ring
 	 * update; don't let the cpu or compiler change the order.
 	 */
 	rmb();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Grab the next descriptor number they're advertising, and increment
@@ -729,13 +752,19 @@ static unsigned wait_for_vq_desc(struct virtqueue *vq,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * We have to read the descriptor after we read the descriptor number,
 	 * but there's a data dependency there so the CPU shouldn't reorder
 	 * that: no rmb() required.
 	 */
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * If this is an indirect entry, then this buffer contains a descriptor
 	 * table which we handle as if it's any normal descriptor chain.
@@ -1573,6 +1602,11 @@ static void setup_tun_net(char *arg)
 	/* We handle indirect ring entries */
 	add_feature(dev, VIRTIO_RING_F_INDIRECT_DESC);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* We're compliant with the damn spec. */
+	add_feature(dev, VIRTIO_F_ANY_LAYOUT);
+>>>>>>> v3.18
 =======
 	/* We're compliant with the damn spec. */
 	add_feature(dev, VIRTIO_F_ANY_LAYOUT);

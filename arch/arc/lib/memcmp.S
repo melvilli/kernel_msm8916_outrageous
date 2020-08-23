@@ -7,7 +7,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/linkage.h>
+=======
+#include <linux/linkage.h>
+>>>>>>> v3.18
 =======
 #include <linux/linkage.h>
 >>>>>>> v3.18
@@ -21,7 +25,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_ENTRY memcmp
+=======
+ENTRY(memcmp)
+>>>>>>> v3.18
 =======
 ENTRY(memcmp)
 >>>>>>> v3.18
@@ -130,7 +138,11 @@ ENTRY(memcmp)
 	j_s.d	[blink]
 	mov	r0,0
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_EXIT memcmp
+=======
+END(memcmp)
+>>>>>>> v3.18
 =======
 END(memcmp)
 >>>>>>> v3.18

@@ -30,6 +30,7 @@
 #include "core.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit socfpga_boot_secondary(unsigned int cpu, struct task_struct *idle)
 {
 	int trampoline_size = &secondary_trampoline_end - &secondary_trampoline;
@@ -40,6 +41,8 @@ static int __cpuinit socfpga_boot_secondary(unsigned int cpu, struct task_struct
 		__raw_writel(virt_to_phys(socfpga_secondary_startup),
 			(sys_manager_base_addr + (cpu1start_addr & 0x000000ff)));
 =======
+=======
+>>>>>>> v3.18
 static int socfpga_boot_secondary(unsigned int cpu, struct task_struct *idle)
 {
 	int trampoline_size = &secondary_trampoline_end - &secondary_trampoline;
@@ -49,6 +52,9 @@ static int socfpga_boot_secondary(unsigned int cpu, struct task_struct *idle)
 
 		__raw_writel(virt_to_phys(socfpga_secondary_startup),
 			(sys_manager_base_addr + (socfpga_cpu1start_addr & 0x000000ff)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		flush_cache_all();

@@ -175,7 +175,11 @@ alpha_core_agp_setup(void)
 	 * Build a fake pci_dev struct
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev = alloc_pci_dev();
+=======
+	pdev = pci_alloc_dev(NULL);
+>>>>>>> v3.18
 =======
 	pdev = pci_alloc_dev(NULL);
 >>>>>>> v3.18

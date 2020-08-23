@@ -5,7 +5,11 @@
  *			  Mike Albon <malbon@openwrt.org>
  * Copyright © 2009-2010  Daniel Dickinson <openwrt@cshore.neomailbox.net>
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright © 2011-2012  Jonas Gorski <jonas.gorski@gmail.com>
+=======
+ * Copyright © 2011-2013  Jonas Gorski <jonas.gorski@gmail.com>
+>>>>>>> v3.18
 =======
  * Copyright © 2011-2013  Jonas Gorski <jonas.gorski@gmail.com>
 >>>>>>> v3.18
@@ -32,6 +36,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sizes.h>
+>>>>>>> v3.18
 =======
 #include <linux/sizes.h>
 >>>>>>> v3.18
@@ -41,6 +49,10 @@
 #include <linux/mtd/partitions.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/mach-bcm63xx/bcm63xx_nvram.h>
+>>>>>>> v3.18
 =======
 #include <asm/mach-bcm63xx/bcm63xx_nvram.h>
 >>>>>>> v3.18
@@ -50,7 +62,11 @@
 #define BCM63XX_EXTENDED_SIZE	0xBFC00000	/* Extended flash address */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BCM63XX_CFE_BLOCK_SIZE	0x10000		/* always at least 64KiB */
+=======
+#define BCM63XX_CFE_BLOCK_SIZE	SZ_64K		/* always at least 64KiB */
+>>>>>>> v3.18
 =======
 #define BCM63XX_CFE_BLOCK_SIZE	SZ_64K		/* always at least 64KiB */
 >>>>>>> v3.18
@@ -107,7 +123,12 @@ static int bcm63xx_parse_cfe_partitions(struct mtd_info *master,
 
 	cfelen = cfe_erasesize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvramlen = cfe_erasesize;
+=======
+	nvramlen = bcm63xx_nvram_get_psi_size() * SZ_1K;
+	nvramlen = roundup(nvramlen, cfe_erasesize);
+>>>>>>> v3.18
 =======
 	nvramlen = bcm63xx_nvram_get_psi_size() * SZ_1K;
 	nvramlen = roundup(nvramlen, cfe_erasesize);
@@ -240,7 +261,12 @@ static struct mtd_part_parser bcm63xx_cfe_parser = {
 static int __init bcm63xx_cfe_parser_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return register_mtd_parser(&bcm63xx_cfe_parser);
+=======
+	register_mtd_parser(&bcm63xx_cfe_parser);
+	return 0;
+>>>>>>> v3.18
 =======
 	register_mtd_parser(&bcm63xx_cfe_parser);
 	return 0;

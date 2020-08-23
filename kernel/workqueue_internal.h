@@ -38,6 +38,11 @@ struct worker {
 	struct worker_pool	*pool;		/* I: the associated pool */
 						/* L: for rescuers */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head	node;		/* A: anchored at pool->workers */
+						/* A: runs through worker->node */
+>>>>>>> v3.18
 =======
 	struct list_head	node;		/* A: anchored at pool->workers */
 						/* A: runs through worker->node */
@@ -70,7 +75,11 @@ static inline struct worker *current_wq_worker(void)
 /*
  * Scheduler hooks for concurrency managed workqueue.  Only to be used from
 <<<<<<< HEAD
+<<<<<<< HEAD
  * sched.c and workqueue.c.
+=======
+ * sched/core.c and workqueue.c.
+>>>>>>> v3.18
 =======
  * sched/core.c and workqueue.c.
 >>>>>>> v3.18

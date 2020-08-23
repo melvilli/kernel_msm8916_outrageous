@@ -25,6 +25,7 @@
 #define COOKIEMASK (((__u32)1 << COOKIEBITS) - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Table must be sorted. */
 static __u16 const msstab[] = {
 	64,
@@ -46,6 +47,8 @@ static __u16 const msstab[] = {
 #define COUNTER_TRIES 4
 
 =======
+=======
+>>>>>>> v3.18
 static u32 syncookie6_secret[2][16-4+SHA_DIGEST_WORDS] __read_mostly;
 
 /* RFC 2460, Section 8.3:
@@ -63,6 +66,9 @@ static __u16 const msstab[] = {
 	9000 - 60,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct sock *get_cookie_sock(struct sock *sk, struct sk_buff *skb,
 					   struct request_sock *req,
@@ -87,6 +93,7 @@ static u32 cookie_hash(const struct in6_addr *saddr, const struct in6_addr *dadd
 		       __be16 sport, __be16 dport, u32 count, int c)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 *tmp = __get_cpu_var(ipv6_cookie_scratch);
 
 	/*
@@ -96,6 +103,8 @@ static u32 cookie_hash(const struct in6_addr *saddr, const struct in6_addr *dadd
 	 */
 	memcpy(tmp + 10, syncookie_secret[c], 44);
 =======
+=======
+>>>>>>> v3.18
 	__u32 *tmp;
 
 	net_get_random_once(syncookie6_secret, sizeof(syncookie6_secret));
@@ -108,6 +117,9 @@ static u32 cookie_hash(const struct in6_addr *saddr, const struct in6_addr *dadd
 	 * and overwrite the digest with the secret
 	 */
 	memcpy(tmp + 10, syncookie6_secret[c], 44);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memcpy(tmp, saddr, 16);
 	memcpy(tmp + 4, daddr, 16);
@@ -122,8 +134,14 @@ static __u32 secure_tcp_syn_cookie(const struct in6_addr *saddr,
 				   const struct in6_addr *daddr,
 				   __be16 sport, __be16 dport, __u32 sseq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   __u32 count, __u32 data)
 {
+=======
+				   __u32 data)
+{
+	u32 count = tcp_cookie_time();
+>>>>>>> v3.18
 =======
 				   __u32 data)
 {
@@ -138,10 +156,16 @@ static __u32 secure_tcp_syn_cookie(const struct in6_addr *saddr,
 static __u32 check_tcp_syn_cookie(__u32 cookie, const struct in6_addr *saddr,
 				  const struct in6_addr *daddr, __be16 sport,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  __be16 dport, __u32 sseq, __u32 count,
 				  __u32 maxdiff)
 {
 	__u32 diff;
+=======
+				  __be16 dport, __u32 sseq)
+{
+	__u32 diff, count = tcp_cookie_time();
+>>>>>>> v3.18
 =======
 				  __be16 dport, __u32 sseq)
 {
@@ -152,7 +176,11 @@ static __u32 check_tcp_syn_cookie(__u32 cookie, const struct in6_addr *saddr,
 
 	diff = (count - (cookie >> COOKIEBITS)) & ((__u32) -1 >> COOKIEBITS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (diff >= maxdiff)
+=======
+	if (diff >= MAX_SYNCOOKIE_AGE)
+>>>>>>> v3.18
 =======
 	if (diff >= MAX_SYNCOOKIE_AGE)
 >>>>>>> v3.18
@@ -164,6 +192,7 @@ static __u32 check_tcp_syn_cookie(__u32 cookie, const struct in6_addr *saddr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __u32 cookie_v6_init_sequence(struct sock *sk, const struct sk_buff *skb, __u16 *mssp)
 {
 	const struct ipv6hdr *iph = ipv6_hdr(skb);
@@ -174,12 +203,17 @@ __u32 cookie_v6_init_sequence(struct sock *sk, const struct sk_buff *skb, __u16 
 	tcp_synq_overflow(sk);
 
 =======
+=======
+>>>>>>> v3.18
 u32 __cookie_v6_init_sequence(const struct ipv6hdr *iph,
 			      const struct tcphdr *th, __u16 *mssp)
 {
 	int mssind;
 	const __u16 mss = *mssp;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (mssind = ARRAY_SIZE(msstab) - 1; mssind ; mssind--)
 		if (mss >= msstab[mssind])
@@ -187,6 +221,7 @@ u32 __cookie_v6_init_sequence(const struct ipv6hdr *iph,
 
 	*mssp = msstab[mssind];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	NET_INC_STATS_BH(sock_net(sk), LINUX_MIB_SYNCOOKIESSENT);
 
@@ -207,6 +242,8 @@ static inline int cookie_check(const struct sk_buff *skb, __u32 cookie)
 	return mssind < ARRAY_SIZE(msstab) ? msstab[mssind] : 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	return secure_tcp_syn_cookie(&iph->saddr, &iph->daddr, th->source,
 				     th->dest, ntohl(th->seq), mssind);
 }
@@ -233,6 +270,9 @@ int __cookie_v6_check(const struct ipv6hdr *iph, const struct tcphdr *th,
 	return mssind < ARRAY_SIZE(msstab) ? msstab[mssind] : 0;
 }
 EXPORT_SYMBOL_GPL(__cookie_v6_check);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct sock *cookie_v6_check(struct sock *sk, struct sk_buff *skb)
@@ -240,7 +280,10 @@ struct sock *cookie_v6_check(struct sock *sk, struct sk_buff *skb)
 	struct tcp_options_received tcp_opt;
 	struct inet_request_sock *ireq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inet6_request_sock *ireq6;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct tcp_request_sock *treq;
@@ -260,7 +303,11 @@ struct sock *cookie_v6_check(struct sock *sk, struct sk_buff *skb)
 
 	if (tcp_synq_no_recent_overflow(sk) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(mss = cookie_check(skb, cookie)) == 0) {
+=======
+		(mss = __cookie_v6_check(ipv6_hdr(skb), th, cookie)) == 0) {
+>>>>>>> v3.18
 =======
 		(mss = __cookie_v6_check(ipv6_hdr(skb), th, cookie)) == 0) {
 >>>>>>> v3.18
@@ -279,7 +326,11 @@ struct sock *cookie_v6_check(struct sock *sk, struct sk_buff *skb)
 
 	ret = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req = inet6_reqsk_alloc(&tcp6_request_sock_ops);
+=======
+	req = inet_reqsk_alloc(&tcp6_request_sock_ops);
+>>>>>>> v3.18
 =======
 	req = inet_reqsk_alloc(&tcp6_request_sock_ops);
 >>>>>>> v3.18
@@ -288,7 +339,10 @@ struct sock *cookie_v6_check(struct sock *sk, struct sk_buff *skb)
 
 	ireq = inet_rsk(req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ireq6 = inet6_rsk(req);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	treq = tcp_rsk(req);
@@ -298,6 +352,7 @@ struct sock *cookie_v6_check(struct sock *sk, struct sk_buff *skb)
 		goto out_free;
 
 	req->mss = mss;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ireq->rmt_port = th->source;
 	ireq->loc_port = th->dest;
@@ -316,6 +371,8 @@ struct sock *cookie_v6_check(struct sock *sk, struct sk_buff *skb)
 	    ipv6_addr_type(&ireq6->rmt_addr) & IPV6_ADDR_LINKLOCAL)
 		ireq6->iif = inet6_iif(skb);
 =======
+=======
+>>>>>>> v3.18
 	ireq->ir_rmt_port = th->source;
 	ireq->ir_num = ntohs(th->dest);
 	ireq->ir_v6_rmt_addr = ipv6_hdr(skb)->saddr;
@@ -332,6 +389,9 @@ struct sock *cookie_v6_check(struct sock *sk, struct sk_buff *skb)
 	if (!sk->sk_bound_dev_if &&
 	    ipv6_addr_type(&ireq->ir_v6_rmt_addr) & IPV6_ADDR_LINKLOCAL)
 		ireq->ir_iif = tcp_v6_iif(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ireq->ir_mark = inet_request_mark(sk, skb);
@@ -359,6 +419,7 @@ struct sock *cookie_v6_check(struct sock *sk, struct sk_buff *skb)
 		memset(&fl6, 0, sizeof(fl6));
 		fl6.flowi6_proto = IPPROTO_TCP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fl6.daddr = ireq6->rmt_addr;
 		final_p = fl6_update_dst(&fl6, rcu_dereference(np->opt), &final);
 		fl6.saddr = ireq6->loc_addr;
@@ -371,6 +432,8 @@ struct sock *cookie_v6_check(struct sock *sk, struct sk_buff *skb)
 
 		dst = ip6_dst_lookup_flow(sk, &fl6, final_p, false);
 =======
+=======
+>>>>>>> v3.18
 		fl6.daddr = ireq->ir_v6_rmt_addr;
 		final_p = fl6_update_dst(&fl6, np->opt, &final);
 		fl6.saddr = ireq->ir_v6_loc_addr;
@@ -381,6 +444,9 @@ struct sock *cookie_v6_check(struct sock *sk, struct sk_buff *skb)
 		security_req_classify_flow(req, flowi6_to_flowi(&fl6));
 
 		dst = ip6_dst_lookup_flow(sk, &fl6, final_p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (IS_ERR(dst))
 			goto out_free;

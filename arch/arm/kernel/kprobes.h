@@ -20,6 +20,11 @@
 #define _ARM_KERNEL_KPROBES_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "probes.h"
+
+>>>>>>> v3.18
 =======
 #include "probes.h"
 
@@ -32,6 +37,7 @@
 #define KPROBE_THUMB16_BREAKPOINT_INSTRUCTION	0xde18
 #define KPROBE_THUMB32_BREAKPOINT_INSTRUCTION	0xf7f0a018
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 enum kprobe_insn {
@@ -432,6 +438,8 @@ int kprobe_decode_insn(kprobe_opcode_t insn, struct arch_specific_insn *asi,
 
 
 =======
+=======
+>>>>>>> v3.18
 enum probes_insn __kprobes
 kprobe_decode_ldmstm(kprobe_opcode_t insn, struct arch_probes_insn *asi,
 		const struct decode_header *h);
@@ -452,5 +460,8 @@ extern const union decode_action kprobes_arm_actions[];
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ARM_KERNEL_KPROBES_H */

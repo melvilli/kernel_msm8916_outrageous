@@ -268,7 +268,11 @@ static __init void leon_patch(void)
 
 struct tt_entry *sparc_ttable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pt_regs fake_swapper_regs;
+=======
+static struct pt_regs fake_swapper_regs;
+>>>>>>> v3.18
 =======
 static struct pt_regs fake_swapper_regs;
 >>>>>>> v3.18
@@ -370,7 +374,11 @@ void __init setup_arch(char **cmdline_p)
 	prom_setsync(prom_sync_me);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if((boot_flags&BOOTME_DEBUG) && (linux_dbvec!=0) && 
+=======
+	if((boot_flags & BOOTME_DEBUG) && (linux_dbvec != NULL) &&
+>>>>>>> v3.18
 =======
 	if((boot_flags & BOOTME_DEBUG) && (linux_dbvec != NULL) &&
 >>>>>>> v3.18

@@ -108,7 +108,11 @@ struct resource_table *rproc_find_rsc_table(struct rproc *rproc,
 static inline
 struct resource_table *rproc_find_loaded_rsc_table(struct rproc *rproc,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 const struct firmware *fw)
+=======
+						const struct firmware *fw)
+>>>>>>> v3.18
 =======
 						const struct firmware *fw)
 >>>>>>> v3.18
@@ -117,7 +121,11 @@ struct resource_table *rproc_find_loaded_rsc_table(struct rproc *rproc,
 		return rproc->fw_ops->find_loaded_rsc_table(rproc, fw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         return NULL;
+=======
+	return NULL;
+>>>>>>> v3.18
 =======
 	return NULL;
 >>>>>>> v3.18

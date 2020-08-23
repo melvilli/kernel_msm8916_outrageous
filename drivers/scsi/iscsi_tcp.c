@@ -117,6 +117,10 @@ static inline int iscsi_sw_sk_state_check(struct sock *sk)
 
 	if ((sk->sk_state == TCP_CLOSE_WAIT || sk->sk_state == TCP_CLOSE) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	    (conn->session->state != ISCSI_STATE_LOGGING_OUT) &&
+>>>>>>> v3.18
 =======
 	    (conn->session->state != ISCSI_STATE_LOGGING_OUT) &&
 >>>>>>> v3.18
@@ -129,7 +133,11 @@ static inline int iscsi_sw_sk_state_check(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void iscsi_sw_tcp_data_ready(struct sock *sk, int flag)
+=======
+static void iscsi_sw_tcp_data_ready(struct sock *sk)
+>>>>>>> v3.18
 =======
 static void iscsi_sw_tcp_data_ready(struct sock *sk)
 >>>>>>> v3.18
@@ -252,7 +260,11 @@ iscsi_sw_tcp_conn_restore_callbacks(struct iscsi_conn *conn)
 	sk->sk_state_change = tcp_sw_conn->old_state_change;
 	sk->sk_write_space  = tcp_sw_conn->old_write_space;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk->sk_no_check	 = 0;
+=======
+	sk->sk_no_check_tx = 0;
+>>>>>>> v3.18
 =======
 	sk->sk_no_check_tx = 0;
 >>>>>>> v3.18
@@ -605,9 +617,15 @@ static void iscsi_sw_tcp_release_conn(struct iscsi_conn *conn)
 	sock_put(sock->sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
 	tcp_sw_conn->sock = NULL;
 	spin_unlock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+	tcp_sw_conn->sock = NULL;
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 	tcp_sw_conn->sock = NULL;
@@ -681,15 +699,21 @@ iscsi_sw_tcp_conn_bind(struct iscsi_cls_session *cls_session,
 		goto free_socket;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
 	/* bind iSCSI connection and socket */
 	tcp_sw_conn->sock = sock;
 	spin_unlock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&session->frwd_lock);
 	/* bind iSCSI connection and socket */
 	tcp_sw_conn->sock = sock;
 	spin_unlock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* setup Socket parameters */
@@ -751,6 +775,7 @@ static int iscsi_sw_tcp_conn_get_param(struct iscsi_cls_conn *cls_conn,
 	case ISCSI_PARAM_CONN_PORT:
 	case ISCSI_PARAM_CONN_ADDRESS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&conn->session->lock);
 		if (!tcp_sw_conn || !tcp_sw_conn->sock) {
 			spin_unlock_bh(&conn->session->lock);
@@ -760,6 +785,8 @@ static int iscsi_sw_tcp_conn_get_param(struct iscsi_cls_conn *cls_conn,
 					(struct sockaddr *)&addr, &len);
 		spin_unlock_bh(&conn->session->lock);
 =======
+=======
+>>>>>>> v3.18
 	case ISCSI_PARAM_LOCAL_PORT:
 		spin_lock_bh(&conn->session->frwd_lock);
 		if (!tcp_sw_conn || !tcp_sw_conn->sock) {
@@ -773,6 +800,9 @@ static int iscsi_sw_tcp_conn_get_param(struct iscsi_cls_conn *cls_conn,
 			rc = kernel_getpeername(tcp_sw_conn->sock,
 						(struct sockaddr *)&addr, &len);
 		spin_unlock_bh(&conn->session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rc)
 			return rc;
@@ -800,11 +830,14 @@ static int iscsi_sw_tcp_host_get_param(struct Scsi_Host *shost,
 	switch (param) {
 	case ISCSI_HOST_PARAM_IPADDRESS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&session->lock);
 		conn = session->leadconn;
 		if (!conn) {
 			spin_unlock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 		if (!session)
 			return -ENOTCONN;
 
@@ -812,6 +845,9 @@ static int iscsi_sw_tcp_host_get_param(struct Scsi_Host *shost,
 		conn = session->leadconn;
 		if (!conn) {
 			spin_unlock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -ENOTCONN;
 		}
@@ -820,7 +856,11 @@ static int iscsi_sw_tcp_host_get_param(struct Scsi_Host *shost,
 		tcp_sw_conn = tcp_conn->dd_data;
 		if (!tcp_sw_conn->sock) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_unlock_bh(&session->lock);
+=======
+			spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 			spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -830,7 +870,11 @@ static int iscsi_sw_tcp_host_get_param(struct Scsi_Host *shost,
 		rc = kernel_getsockname(tcp_sw_conn->sock,
 					(struct sockaddr *)&addr, &len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&session->lock);
+=======
+		spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -951,6 +995,10 @@ static umode_t iscsi_sw_tcp_attr_is_visible(int param_type, int param)
 		case ISCSI_PARAM_CONN_ADDRESS:
 		case ISCSI_PARAM_CONN_PORT:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case ISCSI_PARAM_LOCAL_PORT:
+>>>>>>> v3.18
 =======
 		case ISCSI_PARAM_LOCAL_PORT:
 >>>>>>> v3.18

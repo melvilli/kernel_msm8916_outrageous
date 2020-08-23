@@ -60,14 +60,20 @@
 #define _LINUX_SFI_ACPI_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SFI
 #include <acpi/acpi.h>		/* struct acpi_table_header */
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/acpi.h>
 #include <linux/sfi.h>
 
 #ifdef CONFIG_SFI
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int sfi_acpi_table_parse(char *signature, char *oem_id,
 				char *oem_table_id,
@@ -83,7 +89,10 @@ static inline int __init acpi_sfi_table_parse(char *signature,
 }
 #else /* !CONFIG_SFI */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int sfi_acpi_table_parse(char *signature, char *oem_id,

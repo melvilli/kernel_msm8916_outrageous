@@ -124,6 +124,11 @@ int __init main(int argc, char **argv, char **envp)
 	setup_env_path();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	setsid();
+
+>>>>>>> v3.18
 =======
 	setsid();
 
@@ -155,6 +160,10 @@ int __init main(int argc, char **argv, char **envp)
 
 	do_uml_initcalls();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	change_sig(SIGPIPE, 0);
+>>>>>>> v3.18
 =======
 	change_sig(SIGPIPE, 0);
 >>>>>>> v3.18

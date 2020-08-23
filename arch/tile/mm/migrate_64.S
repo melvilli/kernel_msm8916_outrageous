@@ -124,7 +124,11 @@ STD_ENTRY(flush_and_install_context)
 	{
 	 move r8, zero  /* asidcount */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 jal hv_flush_remote
+=======
+	 jal _hv_flush_remote
+>>>>>>> v3.18
 =======
 	 jal _hv_flush_remote
 >>>>>>> v3.18
@@ -141,7 +145,11 @@ STD_ENTRY(flush_and_install_context)
 	 moveli r3, HV_CTX_DIRECTIO | CTX_PAGE_FLAG
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jal hv_install_context
+=======
+	jal _hv_install_context
+>>>>>>> v3.18
 =======
 	jal _hv_install_context
 >>>>>>> v3.18

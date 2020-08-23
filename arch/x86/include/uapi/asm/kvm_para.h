@@ -24,6 +24,10 @@
 #define KVM_FEATURE_STEAL_TIME		5
 #define KVM_FEATURE_PV_EOI		6
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KVM_FEATURE_PV_UNHALT		7
+>>>>>>> v3.18
 =======
 #define KVM_FEATURE_PV_UNHALT		7
 >>>>>>> v3.18

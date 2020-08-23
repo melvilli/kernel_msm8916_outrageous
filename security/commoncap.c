@@ -32,10 +32,13 @@
 #include <linux/personality.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ANDROID_PARANOID_NETWORK
 #include <linux/android_aid.h>
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -86,6 +89,7 @@ int cap_capable(const struct cred *cred, struct user_namespace *targ_ns,
 	struct user_namespace *ns = targ_ns;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ANDROID_PARANOID_NETWORK
 	if (cap == CAP_NET_RAW && in_egroup_p(AID_NET_RAW))
 		return 0;
@@ -93,6 +97,8 @@ int cap_capable(const struct cred *cred, struct user_namespace *targ_ns,
 		return 0;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* See if cred has the capability in the target user namespace
@@ -160,7 +166,10 @@ int cap_ptrace_access_check(struct task_struct *child, unsigned int mode)
 	int ret = 0;
 	const struct cred *cred, *child_cred;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const kernel_cap_t *caller_caps;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -168,12 +177,17 @@ int cap_ptrace_access_check(struct task_struct *child, unsigned int mode)
 	cred = current_cred();
 	child_cred = __task_cred(child);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mode & PTRACE_MODE_FSCREDS)
 		caller_caps = &cred->cap_effective;
 	else
 		caller_caps = &cred->cap_permitted;
 	if (cred->user_ns == child_cred->user_ns &&
 	    cap_issubset(child_cred->cap_permitted, *caller_caps))
+=======
+	if (cred->user_ns == child_cred->user_ns &&
+	    cap_issubset(child_cred->cap_permitted, cred->cap_permitted))
+>>>>>>> v3.18
 =======
 	if (cred->user_ns == child_cred->user_ns &&
 	    cap_issubset(child_cred->cap_permitted, cred->cap_permitted))
@@ -303,6 +317,7 @@ int cap_capset(struct cred *new,
 	new->cap_inheritable = *inheritable;
 	new->cap_permitted   = *permitted;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * Mask off ambient bits that are no longer both permitted and
@@ -313,6 +328,8 @@ int cap_capset(struct cred *new,
 						       *inheritable));
 	if (WARN_ON(!cap_ambient_invariant_ok(new)))
 		return -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -396,7 +413,10 @@ static inline int bprm_caps_from_vfs_caps(struct cpu_vfs_cap_data *caps,
 		/*
 		 * pP' = (X & fP) | (pI & fI)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * The addition of pA' is handled later.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		 */
@@ -531,6 +551,7 @@ int cap_bprm_set_creds(struct linux_binprm *bprm)
 	const struct cred *old = current_cred();
 	struct cred *new = bprm->cred;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool effective, has_cap = false, is_setid;
 	int ret;
 	kuid_t root_uid;
@@ -539,10 +560,15 @@ int cap_bprm_set_creds(struct linux_binprm *bprm)
 		return -EPERM;
 
 =======
+=======
+>>>>>>> v3.18
 	bool effective, has_cap = false;
 	int ret;
 	kuid_t root_uid;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	effective = false;
 	ret = get_file_caps(bprm, &effective, &has_cap);
@@ -589,9 +615,14 @@ skip:
 	 * In addition, if NO_NEW_PRIVS, then ensure we get no new privs.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	is_setid = !uid_eq(new->euid, old->uid) || !gid_eq(new->egid, old->gid);
 
 	if ((is_setid ||
+=======
+	if ((!uid_eq(new->euid, old->uid) ||
+	     !gid_eq(new->egid, old->gid) ||
+>>>>>>> v3.18
 =======
 	if ((!uid_eq(new->euid, old->uid) ||
 	     !gid_eq(new->egid, old->gid) ||
@@ -611,6 +642,7 @@ skip:
 	new->suid = new->fsuid = new->euid;
 	new->sgid = new->fsgid = new->egid;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* File caps or setid cancels ambient. */
 	if (has_cap || is_setid)
@@ -635,10 +667,15 @@ skip:
 		return -EPERM;
 
 =======
+=======
+>>>>>>> v3.18
 	if (effective)
 		new->cap_effective = new->cap_permitted;
 	else
 		cap_clear(new->cap_effective);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bprm->cap_effective = effective;
 
@@ -655,7 +692,11 @@ skip:
 	 * that is interesting information to audit.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cap_issubset(new->cap_effective, new->cap_ambient)) {
+=======
+	if (!cap_isclear(new->cap_effective)) {
+>>>>>>> v3.18
 =======
 	if (!cap_isclear(new->cap_effective)) {
 >>>>>>> v3.18
@@ -670,10 +711,13 @@ skip:
 
 	new->securebits &= ~issecure_mask(SECURE_KEEP_CAPS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (WARN_ON(!cap_ambient_invariant_ok(new)))
 		return -EPERM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -698,7 +742,11 @@ int cap_bprm_secureexec(struct linux_binprm *bprm)
 		if (bprm->cap_effective)
 			return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!cap_issubset(cred->cap_permitted, cred->cap_ambient))
+=======
+		if (!cap_isclear(cred->cap_permitted))
+>>>>>>> v3.18
 =======
 		if (!cap_isclear(cred->cap_permitted))
 >>>>>>> v3.18
@@ -804,6 +852,7 @@ static inline void cap_emulate_setxuid(struct cred *new, const struct cred *old)
 	    (!uid_eq(new->uid, root_uid) &&
 	     !uid_eq(new->euid, root_uid) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     !uid_eq(new->suid, root_uid))) {
 		if (!issecure(SECURE_KEEP_CAPS)) {
 			cap_clear(new->cap_permitted);
@@ -817,10 +866,15 @@ static inline void cap_emulate_setxuid(struct cred *new, const struct cred *old)
 		 */
 		cap_clear(new->cap_ambient);
 =======
+=======
+>>>>>>> v3.18
 	     !uid_eq(new->suid, root_uid)) &&
 	    !issecure(SECURE_KEEP_CAPS)) {
 		cap_clear(new->cap_permitted);
 		cap_clear(new->cap_effective);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (uid_eq(old->euid, root_uid) && !uid_eq(new->euid, root_uid))
@@ -890,7 +944,11 @@ int cap_task_fix_setuid(struct cred *new, const struct cred *old, int flags)
 static int cap_safe_nice(struct task_struct *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int is_subset;
+=======
+	int is_subset, ret = 0;
+>>>>>>> v3.18
 =======
 	int is_subset, ret = 0;
 >>>>>>> v3.18
@@ -899,17 +957,23 @@ static int cap_safe_nice(struct task_struct *p)
 	is_subset = cap_issubset(__task_cred(p)->cap_permitted,
 				 current_cred()->cap_permitted);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_unlock();
 
 	if (!is_subset && !capable(CAP_SYS_NICE))
 		return -EPERM;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!is_subset && !ns_capable(__task_cred(p)->user_ns, CAP_SYS_NICE))
 		ret = -EPERM;
 	rcu_read_unlock();
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1064,6 +1128,7 @@ int cap_task_prctl(int option, unsigned long arg2, unsigned long arg3,
 		return commit_creds(new);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case PR_CAP_AMBIENT:
 		if (arg2 == PR_CAP_AMBIENT_CLEAR_ALL) {
 			if (arg3 | arg4 | arg5)
@@ -1101,6 +1166,8 @@ int cap_task_prctl(int option, unsigned long arg2, unsigned long arg3,
 			return commit_creds(new);
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:

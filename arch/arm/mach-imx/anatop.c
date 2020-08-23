@@ -17,6 +17,10 @@
 #include <linux/regmap.h>
 #include "common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "hardware.h"
+>>>>>>> v3.18
 =======
 #include "hardware.h"
 >>>>>>> v3.18
@@ -31,6 +35,10 @@
 #define ANADIG_USB2_CHRG_DETECT	0x210
 #define ANADIG_DIGPROG		0x260
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ANADIG_DIGPROG_IMX6SL	0x280
+>>>>>>> v3.18
 =======
 #define ANADIG_DIGPROG_IMX6SL	0x280
 >>>>>>> v3.18
@@ -75,7 +83,11 @@ void imx_anatop_post_resume(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void imx_anatop_usb_chrg_detect_disable(void)
+=======
+static void imx_anatop_usb_chrg_detect_disable(void)
+>>>>>>> v3.18
 =======
 static void imx_anatop_usb_chrg_detect_disable(void)
 >>>>>>> v3.18
@@ -89,6 +101,7 @@ static void imx_anatop_usb_chrg_detect_disable(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 imx_anatop_get_digprog(void)
 {
 	struct device_node *np;
@@ -98,6 +111,8 @@ u32 imx_anatop_get_digprog(void)
 	if (digprog)
 		return digprog;
 =======
+=======
+>>>>>>> v3.18
 void __init imx_init_revision_from_anatop(void)
 {
 	struct device_node *np;
@@ -105,16 +120,22 @@ void __init imx_init_revision_from_anatop(void)
 	unsigned int revision;
 	u32 digprog;
 	u16 offset = ANADIG_DIGPROG;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	np = of_find_compatible_node(NULL, NULL, "fsl,imx6q-anatop");
 	anatop_base = of_iomap(np, 0);
 	WARN_ON(!anatop_base);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	digprog = readl_relaxed(anatop_base + ANADIG_DIGPROG);
 
 	return digprog;
 =======
+=======
+>>>>>>> v3.18
 	if (of_device_is_compatible(np, "fsl,imx6sl-anatop"))
 		offset = ANADIG_DIGPROG_IMX6SL;
 	digprog = readl_relaxed(anatop_base + offset);
@@ -149,6 +170,9 @@ void __init imx_init_revision_from_anatop(void)
 
 	mxc_set_cpu_type(digprog >> 16 & 0xff);
 	imx_set_soc_revision(revision);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -160,6 +184,11 @@ void __init imx_anatop_init(void)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	imx_anatop_usb_chrg_detect_disable();
+>>>>>>> v3.18
 =======
 
 	imx_anatop_usb_chrg_detect_disable();

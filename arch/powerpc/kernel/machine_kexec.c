@@ -19,6 +19,10 @@
 
 #include <asm/machdep.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/pgalloc.h>
+>>>>>>> v3.18
 =======
 #include <asm/pgalloc.h>
 >>>>>>> v3.18
@@ -80,7 +84,10 @@ void arch_crash_save_vmcoreinfo(void)
 	VMCOREINFO_SYMBOL(contig_page_data);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_PPC64) && defined(CONFIG_SPARSEMEM_VMEMMAP)
 	VMCOREINFO_SYMBOL(vmemmap_list);
 	VMCOREINFO_SYMBOL(mmu_vmemmap_psize);
@@ -92,6 +99,9 @@ void arch_crash_save_vmcoreinfo(void)
 	VMCOREINFO_STRUCT_SIZE(mmu_psize_def);
 	VMCOREINFO_OFFSET(mmu_psize_def, shift);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -155,7 +165,11 @@ void __init reserve_crashkernel(void)
 		 * itself and some stacks to be in the first segment.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		crashk_res.start = min(0x80000000ULL, (ppc64_rma_size / 2));
+=======
+		crashk_res.start = min(0x8000000ULL, (ppc64_rma_size / 2));
+>>>>>>> v3.18
 =======
 		crashk_res.start = min(0x8000000ULL, (ppc64_rma_size / 2));
 >>>>>>> v3.18
@@ -207,7 +221,13 @@ int overlaps_crashkernel(unsigned long start, unsigned long size)
 /* Values we need to export to the second kernel via the device tree. */
 static phys_addr_t kernel_end;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static phys_addr_t crashk_size;
+=======
+static phys_addr_t crashk_base;
+static phys_addr_t crashk_size;
+static unsigned long long mem_limit;
+>>>>>>> v3.18
 =======
 static phys_addr_t crashk_base;
 static phys_addr_t crashk_size;
@@ -224,7 +244,11 @@ static struct property crashk_base_prop = {
 	.name = "linux,crashkernel-base",
 	.length = sizeof(phys_addr_t),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.value = &crashk_res.start,
+=======
+	.value = &crashk_base
+>>>>>>> v3.18
 =======
 	.value = &crashk_base
 >>>>>>> v3.18
@@ -240,15 +264,21 @@ static struct property memory_limit_prop = {
 	.name = "linux,memory-limit",
 	.length = sizeof(unsigned long long),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.value = &memory_limit,
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.value = &mem_limit,
 };
 
 #define cpu_to_be_ulong	__PASTE(cpu_to_be, BITS_PER_LONG)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init export_crashk_values(struct device_node *node)
 {
@@ -266,8 +296,14 @@ static void __init export_crashk_values(struct device_node *node)
 
 	if (crashk_res.start != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		of_add_property(node, &crashk_base_prop);
 		crashk_size = resource_size(&crashk_res);
+=======
+		crashk_base = cpu_to_be_ulong(crashk_res.start),
+		of_add_property(node, &crashk_base_prop);
+		crashk_size = cpu_to_be_ulong(resource_size(&crashk_res));
+>>>>>>> v3.18
 =======
 		crashk_base = cpu_to_be_ulong(crashk_res.start),
 		of_add_property(node, &crashk_base_prop);
@@ -281,6 +317,10 @@ static void __init export_crashk_values(struct device_node *node)
 	 * crash regions to the actual memory used.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mem_limit = cpu_to_be_ulong(memory_limit);
+>>>>>>> v3.18
 =======
 	mem_limit = cpu_to_be_ulong(memory_limit);
 >>>>>>> v3.18
@@ -303,7 +343,11 @@ static int __init kexec_setup(void)
 
 	/* information needed by userspace when using default_machine_kexec */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kernel_end = __pa(_end);
+=======
+	kernel_end = cpu_to_be_ulong(__pa(_end));
+>>>>>>> v3.18
 =======
 	kernel_end = cpu_to_be_ulong(__pa(_end));
 >>>>>>> v3.18

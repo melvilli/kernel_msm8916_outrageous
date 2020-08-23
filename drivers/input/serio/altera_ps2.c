@@ -13,7 +13,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/input.h>
@@ -42,7 +45,11 @@ static irqreturn_t altera_ps2_rxint(int irq, void *dev_id)
 	struct ps2if *ps2if = dev_id;
 	unsigned int status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int handled = IRQ_NONE;
+=======
+	irqreturn_t handled = IRQ_NONE;
+>>>>>>> v3.18
 =======
 	irqreturn_t handled = IRQ_NONE;
 >>>>>>> v3.18
@@ -83,7 +90,11 @@ static void altera_ps2_close(struct serio *io)
 	struct ps2if *ps2if = io->port_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(0, ps2if->base); /* disable rx irq */
+=======
+	writel(0, ps2if->base + 4); /* disable rx irq */
+>>>>>>> v3.18
 =======
 	writel(0, ps2if->base + 4); /* disable rx irq */
 >>>>>>> v3.18
@@ -175,7 +186,10 @@ static int altera_ps2_remove(struct platform_device *pdev)
 	struct ps2if *ps2if = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	serio_unregister_port(ps2if->io);
@@ -192,6 +206,10 @@ static int altera_ps2_remove(struct platform_device *pdev)
 static const struct of_device_id altera_ps2_match[] = {
 	{ .compatible = "ALTR,ps2-1.0", },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible = "altr,ps2-1.0", },
+>>>>>>> v3.18
 =======
 	{ .compatible = "altr,ps2-1.0", },
 >>>>>>> v3.18

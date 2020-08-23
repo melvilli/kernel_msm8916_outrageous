@@ -94,6 +94,7 @@ static int pcie_port_resume_noirq(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM_RUNTIME
 struct d3cold_info {
 	bool no_d3cold;
@@ -167,6 +168,8 @@ static int pcie_port_runtime_idle(struct device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct dev_pm_ops pcie_portdrv_pm_ops = {
 	.suspend	= pcie_port_device_suspend,
 	.resume		= pcie_port_device_resume,
@@ -176,9 +179,12 @@ static const struct dev_pm_ops pcie_portdrv_pm_ops = {
 	.restore	= pcie_port_device_resume,
 	.resume_noirq	= pcie_port_resume_noirq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.runtime_suspend = pcie_port_runtime_suspend,
 	.runtime_resume = pcie_port_runtime_resume,
 	.runtime_idle	= pcie_port_runtime_idle,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -210,10 +216,13 @@ static int pcie_portdrv_probe(struct pci_dev *dev,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev->irq && dev->pin) {
 		dev_warn(&dev->dev, "device [%04x:%04x] has invalid IRQ; "
 			 "check vendor BIOS\n", dev->vendor, dev->device);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	status = pcie_port_device_register(dev);
@@ -399,9 +408,15 @@ static struct pci_driver pcie_portdriver = {
 	.remove		= pcie_portdrv_remove,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.err_handler 	= &pcie_portdrv_err_handler,
 
 	.driver.pm 	= PCIE_PORTDRV_PM_OPS,
+=======
+	.err_handler	= &pcie_portdrv_err_handler,
+
+	.driver.pm	= PCIE_PORTDRV_PM_OPS,
+>>>>>>> v3.18
 =======
 	.err_handler	= &pcie_portdrv_err_handler,
 
@@ -413,7 +428,11 @@ static int __init dmi_pcie_pme_disable_msi(const struct dmi_system_id *d)
 {
 	pr_notice("%s detected: will not use MSI for PCIe PME signaling\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			d->ident);
+=======
+		  d->ident);
+>>>>>>> v3.18
 =======
 		  d->ident);
 >>>>>>> v3.18
@@ -431,7 +450,11 @@ static struct dmi_system_id __initdata pcie_portdrv_dmi_table[] = {
 	 .matches = {
 		     DMI_MATCH(DMI_SYS_VENDOR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     		"MICRO-STAR INTERNATIONAL CO., LTD"),
+=======
+				"MICRO-STAR INTERNATIONAL CO., LTD"),
+>>>>>>> v3.18
 =======
 				"MICRO-STAR INTERNATIONAL CO., LTD"),
 >>>>>>> v3.18

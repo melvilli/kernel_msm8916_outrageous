@@ -35,6 +35,10 @@
 
 #include <xen/interface/xen.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <xen/interface/sched.h>
+>>>>>>> v3.18
 =======
 #include <xen/interface/sched.h>
 >>>>>>> v3.18
@@ -55,7 +59,10 @@ int HYPERVISOR_tmem_op(void *arg);
 int HYPERVISOR_multicall(struct multicall_entry *calls, uint32_t nr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int
 HYPERVISOR_suspend(unsigned long start_info_mfn)
 {
@@ -65,6 +72,9 @@ HYPERVISOR_suspend(unsigned long start_info_mfn)
 	return HYPERVISOR_sched_op(SCHEDOP_shutdown, &r);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void
 MULTI_update_va_mapping(struct multicall_entry *mcl, unsigned long va,

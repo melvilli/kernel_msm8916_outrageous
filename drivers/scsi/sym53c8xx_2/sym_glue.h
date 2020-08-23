@@ -175,7 +175,11 @@ struct sym_slcb {
 struct sym_shcb {
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *  Chip and controller indentification.
+=======
+	 *  Chip and controller identification.
+>>>>>>> v3.18
 =======
 	 *  Chip and controller identification.
 >>>>>>> v3.18

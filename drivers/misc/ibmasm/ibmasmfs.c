@@ -150,8 +150,12 @@ static struct inode *ibmasmfs_make_inode(struct super_block *sb, int mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dentry *ibmasmfs_create_file (struct super_block *sb,
 			struct dentry *parent,
+=======
+static struct dentry *ibmasmfs_create_file(struct dentry *parent,
+>>>>>>> v3.18
 =======
 static struct dentry *ibmasmfs_create_file(struct dentry *parent,
 >>>>>>> v3.18
@@ -168,7 +172,11 @@ static struct dentry *ibmasmfs_create_file(struct dentry *parent,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inode = ibmasmfs_make_inode(sb, S_IFREG | mode);
+=======
+	inode = ibmasmfs_make_inode(parent->d_sb, S_IFREG | mode);
+>>>>>>> v3.18
 =======
 	inode = ibmasmfs_make_inode(parent->d_sb, S_IFREG | mode);
 >>>>>>> v3.18
@@ -185,8 +193,12 @@ static struct dentry *ibmasmfs_create_file(struct dentry *parent,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dentry *ibmasmfs_create_dir (struct super_block *sb,
 				struct dentry *parent,
+=======
+static struct dentry *ibmasmfs_create_dir(struct dentry *parent,
+>>>>>>> v3.18
 =======
 static struct dentry *ibmasmfs_create_dir(struct dentry *parent,
 >>>>>>> v3.18
@@ -200,7 +212,11 @@ static struct dentry *ibmasmfs_create_dir(struct dentry *parent,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inode = ibmasmfs_make_inode(sb, S_IFDIR | 0500);
+=======
+	inode = ibmasmfs_make_inode(parent->d_sb, S_IFDIR | 0500);
+>>>>>>> v3.18
 =======
 	inode = ibmasmfs_make_inode(parent->d_sb, S_IFDIR | 0500);
 >>>>>>> v3.18
@@ -629,6 +645,7 @@ static void ibmasmfs_create_files (struct super_block *sb)
 		struct dentry *remote_dir;
 		sp = list_entry(entry, struct service_processor, node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dir = ibmasmfs_create_dir(sb, sb->s_root, sp->dirname);
 		if (!dir)
 			continue;
@@ -645,6 +662,8 @@ static void ibmasmfs_create_files (struct super_block *sb)
 		ibmasmfs_create_file(sb, remote_dir, "height", &remote_settings_fops, (void *)display_height(sp), S_IRUSR|S_IWUSR);
 		ibmasmfs_create_file(sb, remote_dir, "depth", &remote_settings_fops, (void *)display_depth(sp), S_IRUSR|S_IWUSR);
 =======
+=======
+>>>>>>> v3.18
 		dir = ibmasmfs_create_dir(sb->s_root, sp->dirname);
 		if (!dir)
 			continue;
@@ -660,6 +679,9 @@ static void ibmasmfs_create_files (struct super_block *sb)
 		ibmasmfs_create_file(remote_dir, "width", &remote_settings_fops, (void *)display_width(sp), S_IRUSR|S_IWUSR);
 		ibmasmfs_create_file(remote_dir, "height", &remote_settings_fops, (void *)display_height(sp), S_IRUSR|S_IWUSR);
 		ibmasmfs_create_file(remote_dir, "depth", &remote_settings_fops, (void *)display_depth(sp), S_IRUSR|S_IWUSR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

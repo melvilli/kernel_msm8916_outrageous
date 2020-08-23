@@ -28,6 +28,10 @@
 #include <linux/log2.h>
 #include <linux/cleancache.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/namei.h>
+>>>>>>> v3.18
 =======
 #include <linux/namei.h>
 >>>>>>> v3.18
@@ -179,12 +183,18 @@ static void ext3_handle_error(struct super_block *sb)
 		ext3_msg(sb, KERN_CRIT,
 			"error: remounting filesystem read-only");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Make sure updated value of ->s_mount_state will be visible
 		 * before ->s_flags update.
 		 */
 		smp_wmb();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sb->s_flags |= MS_RDONLY;
 	}
@@ -304,9 +314,12 @@ void ext3_abort(struct super_block *sb, const char *function,
 		"error: remounting filesystem read-only");
 	EXT3_SB(sb)->s_mount_state |= EXT3_ERROR_FS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sb->s_flags |= MS_RDONLY;
 	set_opt(EXT3_SB(sb)->s_mount_opt, ABORT);
 =======
+=======
+>>>>>>> v3.18
 	set_opt(EXT3_SB(sb)->s_mount_opt, ABORT);
 	/*
 	 * Make sure updated value of ->s_mount_state will be visible
@@ -315,6 +328,9 @@ void ext3_abort(struct super_block *sb, const char *function,
 	smp_wmb();
 	sb->s_flags |= MS_RDONLY;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (EXT3_SB(sb)->s_journal)
 		journal_abort(EXT3_SB(sb)->s_journal, -EIO);
@@ -453,7 +469,11 @@ static void ext3_put_super (struct super_block * sb)
 	brelse(sbi->s_sbh);
 #ifdef CONFIG_QUOTA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < MAXQUOTAS; i++)
+=======
+	for (i = 0; i < EXT3_MAXQUOTAS; i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < EXT3_MAXQUOTAS; i++)
 >>>>>>> v3.18
@@ -543,7 +563,11 @@ static void init_once(void *foo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_inodecache(void)
+=======
+static int __init init_inodecache(void)
+>>>>>>> v3.18
 =======
 static int __init init_inodecache(void)
 >>>>>>> v3.18
@@ -840,6 +864,10 @@ enum {
 	Opt_reservation, Opt_noreservation, Opt_noload, Opt_nobh, Opt_bh,
 	Opt_commit, Opt_journal_update, Opt_journal_inum, Opt_journal_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	Opt_journal_path,
+>>>>>>> v3.18
 =======
 	Opt_journal_path,
 >>>>>>> v3.18
@@ -885,6 +913,10 @@ static const match_table_t tokens = {
 	{Opt_journal_inum, "journal=%u"},
 	{Opt_journal_dev, "journal_dev=%u"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{Opt_journal_path, "journal_path=%s"},
+>>>>>>> v3.18
 =======
 	{Opt_journal_path, "journal_path=%s"},
 >>>>>>> v3.18
@@ -1004,12 +1036,18 @@ static int parse_options (char *options, struct super_block *sb,
 	kuid_t uid;
 	kgid_t gid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	char *journal_path;
 	struct inode *journal_inode;
 	struct path path;
 	int error;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_QUOTA
 	int qfmt;
@@ -1166,7 +1204,10 @@ static int parse_options (char *options, struct super_block *sb,
 			*journal_devnum = option;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case Opt_journal_path:
 			if (is_remount) {
 				ext3_msg(sb, KERN_ERR, "error: cannot specify "
@@ -1202,6 +1243,9 @@ static int parse_options (char *options, struct super_block *sb,
 			path_put(&path);
 			kfree(journal_path);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case Opt_noload:
 			set_opt (sbi->s_mount_opt, NOLOAD);
@@ -1580,7 +1624,11 @@ static void ext3_orphan_cleanup (struct super_block * sb,
 	sb->s_flags |= MS_ACTIVE;
 	/* Turn on quotas so that they are updated correctly */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < MAXQUOTAS; i++) {
+=======
+	for (i = 0; i < EXT3_MAXQUOTAS; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < EXT3_MAXQUOTAS; i++) {
 >>>>>>> v3.18
@@ -1635,7 +1683,11 @@ static void ext3_orphan_cleanup (struct super_block * sb,
 #ifdef CONFIG_QUOTA
 	/* Turn quotas off */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < MAXQUOTAS; i++) {
+=======
+	for (i = 0; i < EXT3_MAXQUOTAS; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < EXT3_MAXQUOTAS; i++) {
 >>>>>>> v3.18
@@ -2072,6 +2124,7 @@ static int ext3_fill_super (struct super_block *sb, void *data, int silent)
 	}
 	err = percpu_counter_init(&sbi->s_freeblocks_counter,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ext3_count_free_blocks(sb));
 	if (!err) {
 		err = percpu_counter_init(&sbi->s_freeinodes_counter,
@@ -2081,6 +2134,8 @@ static int ext3_fill_super (struct super_block *sb, void *data, int silent)
 		err = percpu_counter_init(&sbi->s_dirs_counter,
 				ext3_count_dirs(sb));
 =======
+=======
+>>>>>>> v3.18
 			ext3_count_free_blocks(sb), GFP_KERNEL);
 	if (!err) {
 		err = percpu_counter_init(&sbi->s_freeinodes_counter,
@@ -2089,6 +2144,9 @@ static int ext3_fill_super (struct super_block *sb, void *data, int silent)
 	if (!err) {
 		err = percpu_counter_init(&sbi->s_dirs_counter,
 				ext3_count_dirs(sb), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (err) {
@@ -2183,7 +2241,11 @@ failed_mount2:
 failed_mount:
 #ifdef CONFIG_QUOTA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < MAXQUOTAS; i++)
+=======
+	for (i = 0; i < EXT3_MAXQUOTAS; i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < EXT3_MAXQUOTAS; i++)
 >>>>>>> v3.18
@@ -2697,6 +2759,11 @@ static int ext3_remount (struct super_block * sb, int * flags, char * data)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 
@@ -2710,7 +2777,11 @@ static int ext3_remount (struct super_block * sb, int * flags, char * data)
 #ifdef CONFIG_QUOTA
 	old_opts.s_jquota_fmt = sbi->s_jquota_fmt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < MAXQUOTAS; i++)
+=======
+	for (i = 0; i < EXT3_MAXQUOTAS; i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < EXT3_MAXQUOTAS; i++)
 >>>>>>> v3.18
@@ -2818,7 +2889,11 @@ static int ext3_remount (struct super_block * sb, int * flags, char * data)
 #ifdef CONFIG_QUOTA
 	/* Release old quota file names */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < MAXQUOTAS; i++)
+=======
+	for (i = 0; i < EXT3_MAXQUOTAS; i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < EXT3_MAXQUOTAS; i++)
 >>>>>>> v3.18
@@ -2836,7 +2911,11 @@ restore_opts:
 #ifdef CONFIG_QUOTA
 	sbi->s_jquota_fmt = old_opts.s_jquota_fmt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < MAXQUOTAS; i++) {
+=======
+	for (i = 0; i < EXT3_MAXQUOTAS; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < EXT3_MAXQUOTAS; i++) {
 >>>>>>> v3.18
@@ -2890,12 +2969,18 @@ static int ext3_statfs (struct dentry * dentry, struct kstatfs * buf)
 		 */
 		overhead += ngroups * (2 + sbi->s_itb_per_group);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* Add the internal journal blocks as well */
 		if (sbi->s_journal && !sbi->journal_bdev)
 			overhead += sbi->s_journal->j_maxlen;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sbi->s_overhead_last = overhead;
 		smp_wmb();

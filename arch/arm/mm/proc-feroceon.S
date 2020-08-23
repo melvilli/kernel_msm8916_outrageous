@@ -70,7 +70,11 @@ ENTRY(cpu_feroceon_proc_init)
 	sub	r2, r2, #(1 << 5)
 	stmia	r1, {r2, r3}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -91,7 +95,11 @@ ENTRY(cpu_feroceon_proc_fin)
 	bic	r0, r0, #0x000e			@ ............wca.
 	mcr	p15, 0, r0, c1, c0, 0		@ disable caches
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -119,7 +127,11 @@ ENTRY(cpu_feroceon_reset)
 	bic	ip, ip, #0x1100			@ ...i...s........
 	mcr	p15, 0, ip, c1, c0, 0		@ ctrl register
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r0
+=======
+	ret	r0
+>>>>>>> v3.18
 =======
 	ret	r0
 >>>>>>> v3.18
@@ -137,7 +149,11 @@ ENTRY(cpu_feroceon_do_idle)
 	mcr	p15, 0, r0, c7, c10, 4		@ Drain write buffer
 	mcr	p15, 0, r0, c7, c0, 4		@ Wait for interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -151,7 +167,11 @@ ENTRY(feroceon_flush_icache_all)
 	mov	r0, #0
 	mcr	p15, 0, r0, c7, c5, 0		@ invalidate I cache
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -190,7 +210,11 @@ __flush_whole_cache:
 	mcrne	p15, 0, ip, c7, c5, 0		@ invalidate I cache
 	mcrne	p15, 0, ip, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -223,7 +247,11 @@ ENTRY(feroceon_flush_user_cache_range)
 	mov	ip, #0
 	mcrne	p15, 0, ip, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -262,7 +290,11 @@ ENTRY(feroceon_coherent_user_range)
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 	mov	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -287,7 +319,11 @@ ENTRY(feroceon_flush_kern_dcache_area)
 	mcr	p15, 0, r0, c7, c5, 0		@ invalidate I cache
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -305,7 +341,11 @@ ENTRY(feroceon_range_flush_kern_dcache_area)
 	mcr	p15, 0, r0, c7, c5, 0		@ invalidate I cache
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -336,7 +376,11 @@ feroceon_dma_inv_range:
 	blo	1b
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -356,7 +400,11 @@ feroceon_range_dma_inv_range:
 	mcr	p15, 5, r1, c15, c14, 1		@ D inv range top
 	msr	cpsr_c, r2			@ restore interrupts
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -380,7 +428,11 @@ feroceon_dma_clean_range:
 	blo	1b
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -397,7 +449,11 @@ feroceon_range_dma_clean_range:
 	msr	cpsr_c, r2			@ restore interrupts
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -419,7 +475,11 @@ ENTRY(feroceon_dma_flush_range)
 	blo	1b
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -436,7 +496,11 @@ ENTRY(feroceon_range_dma_flush_range)
 	msr	cpsr_c, r2			@ restore interrupts
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -477,7 +541,11 @@ ENDPROC(feroceon_range_dma_map_area)
  */
 ENTRY(feroceon_dma_unmap_area)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -530,7 +598,11 @@ ENTRY(cpu_feroceon_dcache_clean_area)
 #endif
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -563,9 +635,15 @@ ENTRY(cpu_feroceon_switch_mm)
 	mcr	p15, 0, r0, c2, c0, 0		@ load page table pointer
 	mcr	p15, 0, ip, c8, c7, 0		@ invalidate I & D TLBs
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r2
 #else
 	mov	pc, lr
+=======
+	ret	r2
+#else
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	r2
 #else
@@ -591,10 +669,13 @@ ENTRY(cpu_feroceon_set_pte_ext)
 	mcr	p15, 0, r0, c7, c10, 4		@ drain WB
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
 
 	__CPUINIT
 =======
+=======
+>>>>>>> v3.18
 	ret	lr
 
 /* Suspend/resume support: taken from arch/arm/mm/proc-arm926.S */
@@ -622,6 +703,9 @@ ENTRY(cpu_feroceon_do_resume)
 	b	cpu_resume_mmu
 ENDPROC(cpu_feroceon_do_resume)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.type	__feroceon_setup, #function
@@ -639,7 +723,11 @@ __feroceon_setup:
 	bic	r0, r0, r5
 	orr	r0, r0, r6
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

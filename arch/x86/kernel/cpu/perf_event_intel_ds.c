@@ -13,6 +13,10 @@
 #define BTS_BUFFER_SIZE		(PAGE_SIZE << 4)
 #define PEBS_BUFFER_SIZE	PAGE_SIZE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PEBS_FIXUP_SIZE		PAGE_SIZE
+>>>>>>> v3.18
 =======
 #define PEBS_FIXUP_SIZE		PAGE_SIZE
 >>>>>>> v3.18
@@ -55,8 +59,12 @@ union intel_x86_pebs_dse {
 #define SNOOP_NONE_MISS (P(SNOOP, NONE) | P(SNOOP, MISS))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Version for Sandy Bridge and later */
 static u64 pebs_data_source[] = {
+=======
+static const u64 pebs_data_source[] = {
+>>>>>>> v3.18
 =======
 static const u64 pebs_data_source[] = {
 >>>>>>> v3.18
@@ -79,6 +87,7 @@ static const u64 pebs_data_source[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Patch up minor differences in the bits */
 void __init intel_pmu_pebs_data_source_nhm(void)
 {
@@ -87,6 +96,8 @@ void __init intel_pmu_pebs_data_source_nhm(void)
 	pebs_data_source[0x07] = OP_LH | P(LVL, L3)  | P(SNOOP, HITM);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static u64 precise_store_data(u64 status)
@@ -128,7 +139,10 @@ static u64 precise_store_data(u64 status)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u64 precise_datala_hsw(struct perf_event *event, u64 status)
 {
 	union perf_mem_data_src dse;
@@ -157,6 +171,9 @@ static u64 precise_datala_hsw(struct perf_event *event, u64 status)
 	return dse.val;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u64 load_latency_data(u64 status)
 {
@@ -217,7 +234,10 @@ struct pebs_record_nhm {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Same as pebs_record_nhm, with two additional fields.
  */
@@ -248,6 +268,9 @@ union hsw_tsx_tuning {
 
 #define PEBS_HSW_TSX_FLAGS	0xff00000000ULL
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void init_debug_store_on_cpu(int cpu)
 {
@@ -270,6 +293,11 @@ void fini_debug_store_on_cpu(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEFINE_PER_CPU(void *, insn_buffer);
+
+>>>>>>> v3.18
 =======
 static DEFINE_PER_CPU(void *, insn_buffer);
 
@@ -280,7 +308,11 @@ static int alloc_pebs_buffer(int cpu)
 	int node = cpu_to_node(cpu);
 	int max, thresh = 1; /* always use a single PEBS record */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *buffer;
+=======
+	void *buffer, *ibuffer;
+>>>>>>> v3.18
 =======
 	void *buffer, *ibuffer;
 >>>>>>> v3.18
@@ -289,11 +321,14 @@ static int alloc_pebs_buffer(int cpu)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buffer = kmalloc_node(PEBS_BUFFER_SIZE, GFP_KERNEL | __GFP_ZERO, node);
 	if (unlikely(!buffer))
 		return -ENOMEM;
 
 =======
+=======
+>>>>>>> v3.18
 	buffer = kzalloc_node(PEBS_BUFFER_SIZE, GFP_KERNEL, node);
 	if (unlikely(!buffer))
 		return -ENOMEM;
@@ -311,6 +346,9 @@ static int alloc_pebs_buffer(int cpu)
 		per_cpu(insn_buffer, cpu) = ibuffer;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	max = PEBS_BUFFER_SIZE / x86_pmu.pebs_record_size;
 
@@ -333,6 +371,12 @@ static void release_pebs_buffer(int cpu)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(per_cpu(insn_buffer, cpu));
+	per_cpu(insn_buffer, cpu) = NULL;
+
+>>>>>>> v3.18
 =======
 	kfree(per_cpu(insn_buffer, cpu));
 	per_cpu(insn_buffer, cpu) = NULL;
@@ -353,15 +397,21 @@ static int alloc_bts_buffer(int cpu)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buffer = kmalloc_node(BTS_BUFFER_SIZE, GFP_KERNEL | __GFP_ZERO, node);
 	if (unlikely(!buffer))
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	buffer = kzalloc_node(BTS_BUFFER_SIZE, GFP_KERNEL | __GFP_NOWARN, node);
 	if (unlikely(!buffer)) {
 		WARN_ONCE(1, "%s: BTS buffer allocation failure\n", __func__);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	max = BTS_BUFFER_SIZE / BTS_RECORD_SIZE;
@@ -394,7 +444,11 @@ static int alloc_ds_buffer(int cpu)
 	struct debug_store *ds;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ds = kmalloc_node(sizeof(*ds), GFP_KERNEL | __GFP_ZERO, node);
+=======
+	ds = kzalloc_node(sizeof(*ds), GFP_KERNEL, node);
+>>>>>>> v3.18
 =======
 	ds = kzalloc_node(sizeof(*ds), GFP_KERNEL, node);
 >>>>>>> v3.18
@@ -527,7 +581,11 @@ void intel_pmu_enable_bts(u64 config)
 void intel_pmu_disable_bts(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -548,7 +606,11 @@ void intel_pmu_disable_bts(void)
 int intel_pmu_drain_bts_buffer(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -628,7 +690,10 @@ struct event_constraint intel_atom_pebs_event_constraints[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct event_constraint intel_slm_pebs_event_constraints[] = {
 	/* UOPS_RETIRED.ALL, inv=1, cmask=16 (cycles:p). */
 	INTEL_FLAGS_EVENT_CONSTRAINT(0x108001c2, 0xf),
@@ -637,6 +702,9 @@ struct event_constraint intel_slm_pebs_event_constraints[] = {
 	EVENT_CONSTRAINT_END
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct event_constraint intel_nehalem_pebs_event_constraints[] = {
 	INTEL_PLD_CONSTRAINT(0x100b, 0xf),      /* MEM_INST_RETIRED.* */
@@ -671,6 +739,7 @@ struct event_constraint intel_westmere_pebs_event_constraints[] = {
 struct event_constraint intel_snb_pebs_event_constraints[] = {
 	INTEL_UEVENT_CONSTRAINT(0x01c0, 0x2), /* INST_RETIRED.PRECDIST */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INTEL_UEVENT_CONSTRAINT(0x01c2, 0xf), /* UOPS_RETIRED.ALL */
 	INTEL_UEVENT_CONSTRAINT(0x02c2, 0xf), /* UOPS_RETIRED.RETIRE_SLOTS */
 	INTEL_EVENT_CONSTRAINT(0xc4, 0xf),    /* BR_INST_RETIRED.* */
@@ -682,18 +751,24 @@ struct event_constraint intel_snb_pebs_event_constraints[] = {
 	INTEL_EVENT_CONSTRAINT(0xd2, 0xf),    /* MEM_LOAD_UOPS_LLC_HIT_RETIRED.* */
 	INTEL_UEVENT_CONSTRAINT(0x02d4, 0xf), /* MEM_LOAD_UOPS_MISC_RETIRED.LLC_MISS */
 =======
+=======
+>>>>>>> v3.18
 	INTEL_PLD_CONSTRAINT(0x01cd, 0x8),    /* MEM_TRANS_RETIRED.LAT_ABOVE_THR */
 	INTEL_PST_CONSTRAINT(0x02cd, 0x8),    /* MEM_TRANS_RETIRED.PRECISE_STORES */
 	/* UOPS_RETIRED.ALL, inv=1, cmask=16 (cycles:p). */
 	INTEL_FLAGS_EVENT_CONSTRAINT(0x108001c2, 0xf),
 	/* Allow all events as PEBS with no flags */
 	INTEL_ALL_EVENT_CONSTRAINT(0, 0xf),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	EVENT_CONSTRAINT_END
 };
 
 struct event_constraint intel_ivb_pebs_event_constraints[] = {
         INTEL_UEVENT_CONSTRAINT(0x01c0, 0x2), /* INST_RETIRED.PRECDIST */
+<<<<<<< HEAD
 <<<<<<< HEAD
         INTEL_UEVENT_CONSTRAINT(0x01c2, 0xf), /* UOPS_RETIRED.ALL */
         INTEL_UEVENT_CONSTRAINT(0x02c2, 0xf), /* UOPS_RETIRED.RETIRE_SLOTS */
@@ -709,6 +784,8 @@ struct event_constraint intel_ivb_pebs_event_constraints[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
         INTEL_PLD_CONSTRAINT(0x01cd, 0x8),    /* MEM_TRANS_RETIRED.LAT_ABOVE_THR */
 	INTEL_PST_CONSTRAINT(0x02cd, 0x8),    /* MEM_TRANS_RETIRED.PRECISE_STORES */
 	/* UOPS_RETIRED.ALL, inv=1, cmask=16 (cycles:p). */
@@ -739,6 +816,9 @@ struct event_constraint intel_hsw_pebs_event_constraints[] = {
 	EVENT_CONSTRAINT_END
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct event_constraint *intel_pebs_constraints(struct perf_event *event)
 {
@@ -762,7 +842,11 @@ struct event_constraint *intel_pebs_constraints(struct perf_event *event)
 void intel_pmu_pebs_enable(struct perf_event *event)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -781,11 +865,14 @@ void intel_pmu_pebs_enable(struct perf_event *event)
 void intel_pmu_pebs_disable(struct perf_event *event)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
 	struct hw_perf_event *hwc = &event->hw;
 
 	cpuc->pebs_enabled &= ~(1ULL << hwc->idx);
 =======
+=======
+>>>>>>> v3.18
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 	struct hw_perf_event *hwc = &event->hw;
 
@@ -796,6 +883,9 @@ void intel_pmu_pebs_disable(struct perf_event *event)
 	else if (event->hw.constraint->flags & PERF_X86_EVENT_PEBS_ST)
 		cpuc->pebs_enabled &= ~(1ULL << 63);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cpuc->enabled)
 		wrmsrl(MSR_IA32_PEBS_ENABLE, cpuc->pebs_enabled);
@@ -806,7 +896,11 @@ void intel_pmu_pebs_disable(struct perf_event *event)
 void intel_pmu_pebs_enable_all(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -818,7 +912,11 @@ void intel_pmu_pebs_enable_all(void)
 void intel_pmu_pebs_disable_all(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -830,7 +928,11 @@ void intel_pmu_pebs_disable_all(void)
 static int intel_pmu_pebs_fixup_ip(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -839,6 +941,10 @@ static int intel_pmu_pebs_fixup_ip(struct pt_regs *regs)
 	unsigned long ip = regs->ip;
 	int is_64bit = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void *kaddr;
+>>>>>>> v3.18
 =======
 	void *kaddr;
 >>>>>>> v3.18
@@ -866,7 +972,11 @@ static int intel_pmu_pebs_fixup_ip(struct pt_regs *regs)
 	 * the basic block is larger than 1 page (sanity)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((ip - to) > PAGE_SIZE)
+=======
+	if ((ip - to) > PEBS_FIXUP_SIZE)
+>>>>>>> v3.18
 =======
 	if ((ip - to) > PEBS_FIXUP_SIZE)
 >>>>>>> v3.18
@@ -880,6 +990,7 @@ static int intel_pmu_pebs_fixup_ip(struct pt_regs *regs)
 		return 1;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	do {
 		struct insn insn;
@@ -898,6 +1009,8 @@ static int intel_pmu_pebs_fixup_ip(struct pt_regs *regs)
 		} else
 			kaddr = (void *)to;
 =======
+=======
+>>>>>>> v3.18
 	if (!kernel_ip(ip)) {
 		int size, bytes;
 		u8 *buf = this_cpu_read(insn_buffer);
@@ -916,6 +1029,9 @@ static int intel_pmu_pebs_fixup_ip(struct pt_regs *regs)
 		struct insn insn;
 
 		old_to = to;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_X86_64
@@ -924,7 +1040,13 @@ static int intel_pmu_pebs_fixup_ip(struct pt_regs *regs)
 		insn_init(&insn, kaddr, is_64bit);
 		insn_get_length(&insn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		to += insn.length;
+=======
+
+		to += insn.length;
+		kaddr += insn.length;
+>>>>>>> v3.18
 =======
 
 		to += insn.length;
@@ -945,6 +1067,7 @@ static int intel_pmu_pebs_fixup_ip(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __intel_pmu_pebs_event(struct perf_event *event,
 				   struct pt_regs *iregs, void *__pebs)
 {
@@ -959,6 +1082,8 @@ static void __intel_pmu_pebs_event(struct perf_event *event,
 	u64 sample_type;
 	int fll, fst;
 =======
+=======
+>>>>>>> v3.18
 static inline u64 intel_hsw_weight(struct pebs_record_hsw *pebs)
 {
 	if (pebs->tsx_tuning) {
@@ -996,25 +1121,35 @@ static void __intel_pmu_pebs_event(struct perf_event *event,
 	u64 sample_type;
 	int fll, fst, dsrc;
 	int fl = event->hw.flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!intel_pmu_save_and_restart(event))
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fll = event->hw.flags & PERF_X86_EVENT_PEBS_LDLAT;
 	fst = event->hw.flags & PERF_X86_EVENT_PEBS_ST;
 =======
+=======
+>>>>>>> v3.18
 	sample_type = event->attr.sample_type;
 	dsrc = sample_type & PERF_SAMPLE_DATA_SRC;
 
 	fll = fl & PERF_X86_EVENT_PEBS_LDLAT;
 	fst = fl & (PERF_X86_EVENT_PEBS_ST | PERF_X86_EVENT_PEBS_HSW_PREC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	perf_sample_data_init(&data, 0, event->hw.last_period);
 
 	data.period = event->hw.last_period;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sample_type = event->attr.sample_type;
 
@@ -1041,6 +1176,8 @@ static void __intel_pmu_pebs_event(struct perf_event *event,
 				data.data_src.val = precise_store_data(pebs->dse);
 		}
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Use latency for weight (only avail with PEBS-LL)
@@ -1060,6 +1197,9 @@ static void __intel_pmu_pebs_event(struct perf_event *event,
 		else if (fst)
 			val = precise_store_data(pebs->dse);
 		data.data_src.val = val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1080,19 +1220,28 @@ static void __intel_pmu_pebs_event(struct perf_event *event,
 	regs.sp = pebs->sp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (event->attr.precise_ip > 1 && intel_pmu_pebs_fixup_ip(&regs))
 =======
+=======
+>>>>>>> v3.18
 	if (event->attr.precise_ip > 1 && x86_pmu.intel_cap.pebs_format >= 2) {
 		regs.ip = pebs->real_ip;
 		regs.flags |= PERF_EFLAGS_EXACT;
 	} else if (event->attr.precise_ip > 1 && intel_pmu_pebs_fixup_ip(&regs))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		regs.flags |= PERF_EFLAGS_EXACT;
 	else
 		regs.flags &= ~PERF_EFLAGS_EXACT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if ((sample_type & PERF_SAMPLE_ADDR) &&
 	    x86_pmu.intel_cap.pebs_format >= 1)
 		data.addr = pebs->dla;
@@ -1106,6 +1255,9 @@ static void __intel_pmu_pebs_event(struct perf_event *event,
 			data.txn = intel_hsw_transaction(pebs);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (has_branch_stack(event))
 		data.br_stack = &cpuc->lbr_stack;
@@ -1117,7 +1269,11 @@ static void __intel_pmu_pebs_event(struct perf_event *event,
 static void intel_pmu_drain_pebs_core(struct pt_regs *iregs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
+=======
+	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+>>>>>>> v3.18
 =======
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 >>>>>>> v3.18
@@ -1162,6 +1318,7 @@ static void intel_pmu_drain_pebs_core(struct pt_regs *iregs)
 static void intel_pmu_drain_pebs_nhm(struct pt_regs *iregs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpu_hw_events *cpuc = &__get_cpu_var(cpu_hw_events);
 	struct debug_store *ds = cpuc->ds;
 	struct pebs_record_nhm *at, *top;
@@ -1169,12 +1326,17 @@ static void intel_pmu_drain_pebs_nhm(struct pt_regs *iregs)
 	u64 status = 0;
 	int bit, n;
 =======
+=======
+>>>>>>> v3.18
 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
 	struct debug_store *ds = cpuc->ds;
 	struct perf_event *event = NULL;
 	void *at, *top;
 	u64 status = 0;
 	int bit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!x86_pmu.pebs_active)
@@ -1186,8 +1348,12 @@ static void intel_pmu_drain_pebs_nhm(struct pt_regs *iregs)
 	ds->pebs_index = ds->pebs_buffer_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n = top - at;
 	if (n <= 0)
+=======
+	if (unlikely(at > top))
+>>>>>>> v3.18
 =======
 	if (unlikely(at > top))
 >>>>>>> v3.18
@@ -1198,11 +1364,14 @@ static void intel_pmu_drain_pebs_nhm(struct pt_regs *iregs)
 	 * set a reset value.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ONCE(n > x86_pmu.max_pebs_events, "Unexpected number of pebs records %d\n", n);
 
 	for ( ; at < top; at++) {
 		for_each_set_bit(bit, (unsigned long *)&at->status, x86_pmu.max_pebs_events) {
 =======
+=======
+>>>>>>> v3.18
 	WARN_ONCE(top - at > x86_pmu.max_pebs_events * x86_pmu.pebs_record_size,
 		  "Unexpected number of pebs records %ld\n",
 		  (long)(top - at) / x86_pmu.pebs_record_size);
@@ -1212,6 +1381,9 @@ static void intel_pmu_drain_pebs_nhm(struct pt_regs *iregs)
 
 		for_each_set_bit(bit, (unsigned long *)&p->status,
 				 x86_pmu.max_pebs_events) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			event = cpuc->events[bit];
 			if (!test_bit(bit, cpuc->active_mask))
@@ -1240,7 +1412,11 @@ static void intel_pmu_drain_pebs_nhm(struct pt_regs *iregs)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void intel_ds_init(void)
+=======
+void __init intel_ds_init(void)
+>>>>>>> v3.18
 =======
 void __init intel_ds_init(void)
 >>>>>>> v3.18
@@ -1271,13 +1447,19 @@ void __init intel_ds_init(void)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 2:
 			pr_cont("PEBS fmt2%c, ", pebs_type);
 			x86_pmu.pebs_record_size = sizeof(struct pebs_record_hsw);
 			x86_pmu.drain_pebs = intel_pmu_drain_pebs_nhm;
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			printk(KERN_CONT "no PEBS fmt%d%c, ", format, pebs_type);

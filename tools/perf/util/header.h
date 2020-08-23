@@ -5,15 +5,21 @@
 #include <sys/types.h>
 #include <stdbool.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "types.h"
 #include "event.h"
 
 #include <linux/bitmap.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bitmap.h>
 #include <linux/types.h>
 #include "event.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum {
@@ -42,12 +48,18 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum perf_header_version {
 	PERF_HEADER_VERSION_1,
 	PERF_HEADER_VERSION_2,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct perf_file_section {
 	u64 offset;
@@ -61,6 +73,10 @@ struct perf_file_header {
 	struct perf_file_section	attrs;
 	struct perf_file_section	data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* event_types is ignored */
+>>>>>>> v3.18
 =======
 	/* event_types is ignored */
 >>>>>>> v3.18
@@ -91,6 +107,7 @@ struct perf_session_env {
 
 	int			nr_cmdline;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char			*cmdline;
 	int			nr_sibling_cores;
 	char			*sibling_cores;
@@ -114,6 +131,8 @@ struct perf_header {
 	DECLARE_BITMAP(adds_features, HEADER_FEAT_BITS);
 	struct perf_session_env env;
 =======
+=======
+>>>>>>> v3.18
 	int			nr_sibling_cores;
 	int			nr_sibling_threads;
 	int			nr_numa_nodes;
@@ -134,6 +153,9 @@ struct perf_header {
 	u64				feat_offset;
 	DECLARE_BITMAP(adds_features, HEADER_FEAT_BITS);
 	struct perf_session_env 	env;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -141,7 +163,11 @@ struct perf_evlist;
 struct perf_session;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int perf_session__read_header(struct perf_session *session, int fd);
+=======
+int perf_session__read_header(struct perf_session *session);
+>>>>>>> v3.18
 =======
 int perf_session__read_header(struct perf_session *session);
 >>>>>>> v3.18
@@ -151,9 +177,12 @@ int perf_session__write_header(struct perf_session *session,
 int perf_header__write_pipe(int fd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int perf_header__push_event(u64 id, const char *name);
 char *perf_header__find_event(u64 id);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void perf_header__set_feat(struct perf_header *header, int feat);
@@ -181,6 +210,7 @@ int perf_event__synthesize_attrs(struct perf_tool *tool,
 				 struct perf_session *session,
 				 perf_event__handler_t process);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int perf_event__process_attr(union perf_event *event, struct perf_evlist **pevlist);
 
 int perf_event__synthesize_event_type(struct perf_tool *tool,
@@ -196,12 +226,21 @@ int perf_event__process_event_type(struct perf_tool *tool,
 int perf_event__process_attr(struct perf_tool *tool, union perf_event *event,
 			     struct perf_evlist **pevlist);
 >>>>>>> v3.18
+=======
+int perf_event__process_attr(struct perf_tool *tool, union perf_event *event,
+			     struct perf_evlist **pevlist);
+>>>>>>> v3.18
 
 int perf_event__synthesize_tracing_data(struct perf_tool *tool,
 					int fd, struct perf_evlist *evlist,
 					perf_event__handler_t process);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int perf_event__process_tracing_data(union perf_event *event,
+=======
+int perf_event__process_tracing_data(struct perf_tool *tool,
+				     union perf_event *event,
+>>>>>>> v3.18
 =======
 int perf_event__process_tracing_data(struct perf_tool *tool,
 				     union perf_event *event,
@@ -218,6 +257,11 @@ int perf_event__process_build_id(struct perf_tool *tool,
 bool is_perf_magic(u64 magic);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int dsos__hit_all(struct perf_session *session);
+
+>>>>>>> v3.18
 =======
 int dsos__hit_all(struct perf_session *session);
 

@@ -51,6 +51,7 @@ xfs_bulkstat(
 	int		*done);		/* 1 if there are more stats to get */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
 xfs_bulkstat_single(
 	xfs_mount_t		*mp,
@@ -58,6 +59,8 @@ xfs_bulkstat_single(
 	char			__user *buffer,
 	int			*done);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef int (*bulkstat_one_fmt_pf)(  /* used size in bytes or negative error */

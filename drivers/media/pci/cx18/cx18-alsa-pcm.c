@@ -81,7 +81,11 @@ void cx18_alsa_announce_pcm_data(struct snd_cx18_card *cxsc, u8 *pcm_data,
 	int length;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("cx18 alsa announce ptr=%p data=%p num_bytes=%zd\n", cxsc,
+=======
+	dprintk("cx18 alsa announce ptr=%p data=%p num_bytes=%zu\n", cxsc,
+>>>>>>> v3.18
 =======
 	dprintk("cx18 alsa announce ptr=%p data=%p num_bytes=%zu\n", cxsc,
 >>>>>>> v3.18

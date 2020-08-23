@@ -51,6 +51,10 @@ struct cpufreq_cooling_device {
 	unsigned int cpufreq_val;
 	struct cpumask allowed_cpus;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head node;
+>>>>>>> v3.18
 =======
 	struct list_head node;
 >>>>>>> v3.18
@@ -61,9 +65,13 @@ static DEFINE_MUTEX(cooling_cpufreq_lock);
 static unsigned int cpufreq_dev_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* notify_table passes value to the CPUFREQ_ADJUST callback function. */
 #define NOTIFY_INVALID NULL
 static struct cpufreq_cooling_device *notify_device;
+=======
+static LIST_HEAD(cpufreq_dev_list);
+>>>>>>> v3.18
 =======
 static LIST_HEAD(cpufreq_dev_list);
 >>>>>>> v3.18
@@ -153,17 +161,23 @@ static int get_property(unsigned int cpu, unsigned long input,
 			enum cpufreq_cooling_property property)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, j;
 	unsigned long max_level = 0, level = 0;
 	unsigned int freq = CPUFREQ_ENTRY_INVALID;
 	int descend = -1;
 	struct cpufreq_frequency_table *table =
 =======
+=======
+>>>>>>> v3.18
 	int i;
 	unsigned long max_level = 0, level = 0;
 	unsigned int freq = CPUFREQ_ENTRY_INVALID;
 	int descend = -1;
 	struct cpufreq_frequency_table *pos, *table =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					cpufreq_frequency_get_table(cpu);
 
@@ -173,6 +187,7 @@ static int get_property(unsigned int cpu, unsigned long input,
 	if (!table)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; table[i].frequency != CPUFREQ_TABLE_END; i++) {
 		/* ignore invalid entries */
@@ -192,6 +207,8 @@ static int get_property(unsigned int cpu, unsigned long input,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	cpufreq_for_each_valid_entry(pos, table) {
 		/* ignore duplicate entry */
 		if (freq == pos->frequency)
@@ -212,6 +229,9 @@ static int get_property(unsigned int cpu, unsigned long input,
 	/* max_level is an index, not a counter */
 	max_level--;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* get max level */
 	if (property == GET_MAXL) {
@@ -220,6 +240,7 @@ static int get_property(unsigned int cpu, unsigned long input,
 	}
 
 	if (property == GET_FREQ)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		level = descend ? input : (max_level - input - 1);
 
@@ -242,6 +263,8 @@ static int get_property(unsigned int cpu, unsigned long input,
 		}
 		if (property == GET_FREQ && level == j) {
 =======
+=======
+>>>>>>> v3.18
 		level = descend ? input : (max_level - input);
 
 	i = 0;
@@ -259,13 +282,20 @@ static int get_property(unsigned int cpu, unsigned long input,
 			return 0;
 		}
 		if (property == GET_FREQ && level == i) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* get frequency by level */
 			*output = freq;
 			return 0;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		j++;
+=======
+		i++;
+>>>>>>> v3.18
 =======
 		i++;
 >>>>>>> v3.18
@@ -351,7 +381,10 @@ static int cpufreq_apply_cooling(struct cpufreq_cooling_device *cpufreq_device,
 	cpufreq_device->cpufreq_state = cooling_state;
 	cpufreq_device->cpufreq_val = clip_freq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	notify_device = cpufreq_device;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -361,8 +394,11 @@ static int cpufreq_apply_cooling(struct cpufreq_cooling_device *cpufreq_device,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	notify_device = NOTIFY_INVALID;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -375,7 +411,11 @@ static int cpufreq_apply_cooling(struct cpufreq_cooling_device *cpufreq_device,
  * @data: callback-specific data
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Callback to highjack the notification on cpufreq policy transition.
+=======
+ * Callback to hijack the notification on cpufreq policy transition.
+>>>>>>> v3.18
 =======
  * Callback to hijack the notification on cpufreq policy transition.
 >>>>>>> v3.18
@@ -389,6 +429,7 @@ static int cpufreq_thermal_notifier(struct notifier_block *nb,
 {
 	struct cpufreq_policy *policy = data;
 	unsigned long max_freq = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (event != CPUFREQ_ADJUST || notify_device == NOTIFY_INVALID)
@@ -404,6 +445,8 @@ static int cpufreq_thermal_notifier(struct notifier_block *nb,
 	if (policy->max != max_freq)
 		cpufreq_verify_within_limits(policy, 0, max_freq);
 =======
+=======
+>>>>>>> v3.18
 	struct cpufreq_cooling_device *cpufreq_dev;
 
 	if (event != CPUFREQ_ADJUST)
@@ -426,6 +469,9 @@ static int cpufreq_thermal_notifier(struct notifier_block *nb,
 			cpufreq_verify_within_limits(policy, 0, max_freq);
 	}
 	mutex_unlock(&cooling_cpufreq_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -514,7 +560,12 @@ static struct notifier_block thermal_cpufreq_notifier_block = {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * cpufreq_cooling_register - function to create cpufreq cooling device.
+=======
+ * __cpufreq_cooling_register - helper function to create cpufreq cooling device
+ * @np: a valid struct device_node to the cooling device device tree node
+>>>>>>> v3.18
 =======
  * __cpufreq_cooling_register - helper function to create cpufreq cooling device
  * @np: a valid struct device_node to the cooling device device tree node
@@ -524,7 +575,12 @@ static struct notifier_block thermal_cpufreq_notifier_block = {
  * This interface function registers the cpufreq cooling device with the name
  * "thermal-cpufreq-%x". This api can support multiple instances of cpufreq
 <<<<<<< HEAD
+<<<<<<< HEAD
  * cooling devices.
+=======
+ * cooling devices. It also gives the opportunity to link the cooling device
+ * with a device tree node, in order to bind it via the thermal DT code.
+>>>>>>> v3.18
 =======
  * cooling devices. It also gives the opportunity to link the cooling device
  * with a device tree node, in order to bind it via the thermal DT code.
@@ -534,8 +590,14 @@ static struct notifier_block thermal_cpufreq_notifier_block = {
  * on failure, it returns a corresponding ERR_PTR().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct thermal_cooling_device *
 cpufreq_cooling_register(const struct cpumask *clip_cpus)
+=======
+static struct thermal_cooling_device *
+__cpufreq_cooling_register(struct device_node *np,
+			   const struct cpumask *clip_cpus)
+>>>>>>> v3.18
 =======
 static struct thermal_cooling_device *
 __cpufreq_cooling_register(struct device_node *np,
@@ -580,6 +642,7 @@ __cpufreq_cooling_register(struct device_node *np,
 		 cpufreq_dev->id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cool_dev = thermal_cooling_device_register(dev_name, cpufreq_dev,
 						   &cpufreq_cooling_ops);
 	if (!cool_dev) {
@@ -587,12 +650,17 @@ __cpufreq_cooling_register(struct device_node *np,
 		kfree(cpufreq_dev);
 		return ERR_PTR(-EINVAL);
 =======
+=======
+>>>>>>> v3.18
 	cool_dev = thermal_of_cooling_device_register(np, dev_name, cpufreq_dev,
 						      &cpufreq_cooling_ops);
 	if (IS_ERR(cool_dev)) {
 		release_idr(&cpufreq_idr, cpufreq_dev->id);
 		kfree(cpufreq_dev);
 		return cool_dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	cpufreq_dev->cool_dev = cool_dev;
@@ -605,6 +673,10 @@ __cpufreq_cooling_register(struct device_node *np,
 					  CPUFREQ_POLICY_NOTIFIER);
 	cpufreq_dev_count++;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	list_add(&cpufreq_dev->node, &cpufreq_dev_list);
+>>>>>>> v3.18
 =======
 	list_add(&cpufreq_dev->node, &cpufreq_dev_list);
 >>>>>>> v3.18
@@ -614,10 +686,13 @@ __cpufreq_cooling_register(struct device_node *np,
 	return cool_dev;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(cpufreq_cooling_register);
 
 /**
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * cpufreq_cooling_register - function to create cpufreq cooling device.
@@ -662,6 +737,9 @@ of_cpufreq_cooling_register(struct device_node *np,
 EXPORT_SYMBOL_GPL(of_cpufreq_cooling_register);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * cpufreq_cooling_unregister - function to remove cpufreq cooling device.
  * @cdev: thermal cooling device pointer.
@@ -671,10 +749,13 @@ EXPORT_SYMBOL_GPL(of_cpufreq_cooling_register);
 void cpufreq_cooling_unregister(struct thermal_cooling_device *cdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpufreq_cooling_device *cpufreq_dev = cdev->devdata;
 
 	mutex_lock(&cooling_cpufreq_lock);
 =======
+=======
+>>>>>>> v3.18
 	struct cpufreq_cooling_device *cpufreq_dev;
 
 	if (!cdev)
@@ -683,6 +764,9 @@ void cpufreq_cooling_unregister(struct thermal_cooling_device *cdev)
 	cpufreq_dev = cdev->devdata;
 	mutex_lock(&cooling_cpufreq_lock);
 	list_del(&cpufreq_dev->node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpufreq_dev_count--;
 

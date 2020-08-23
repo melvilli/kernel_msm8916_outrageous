@@ -35,7 +35,11 @@ typedef asmlinkage void (*sys_call_ptr_t)(void);
 extern asmlinkage void sys_ni_syscall(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const sys_call_ptr_t sys_call_table[] ____cacheline_aligned = {
+=======
+const sys_call_ptr_t sys_call_table[] __cacheline_aligned = {
+>>>>>>> v3.18
 =======
 const sys_call_ptr_t sys_call_table[] __cacheline_aligned = {
 >>>>>>> v3.18

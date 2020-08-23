@@ -16,7 +16,11 @@
 #include <asm/disasm.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_KGDB) || defined(CONFIG_ARC_MISALIGN_ACCESS) || \
+=======
+#if defined(CONFIG_KGDB) || defined(CONFIG_ARC_EMUL_UNALIGNED) || \
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_KGDB) || defined(CONFIG_ARC_EMUL_UNALIGNED) || \
 >>>>>>> v3.18
@@ -540,7 +544,11 @@ int __kprobes disasm_next_pc(unsigned long pc, struct pt_regs *regs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_KGDB || CONFIG_ARC_MISALIGN_ACCESS || CONFIG_KPROBES */
+=======
+#endif /* CONFIG_KGDB || CONFIG_ARC_EMUL_UNALIGNED || CONFIG_KPROBES */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_KGDB || CONFIG_ARC_EMUL_UNALIGNED || CONFIG_KPROBES */
 >>>>>>> v3.18

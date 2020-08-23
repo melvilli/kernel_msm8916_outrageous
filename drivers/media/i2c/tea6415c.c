@@ -34,7 +34,10 @@
 #include <linux/i2c.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "tea6415c.h"
@@ -123,6 +126,7 @@ static int tea6415c_s_routing(struct v4l2_subdev *sd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tea6415c_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -140,13 +144,20 @@ static const struct v4l2_subdev_core_ops tea6415c_core_ops = {
 /* ----------------------------------------------------------------------- */
 
 >>>>>>> v3.18
+=======
+/* ----------------------------------------------------------------------- */
+
+>>>>>>> v3.18
 static const struct v4l2_subdev_video_ops tea6415c_video_ops = {
 	.s_routing = tea6415c_s_routing,
 };
 
 static const struct v4l2_subdev_ops tea6415c_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.core = &tea6415c_core_ops,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.video = &tea6415c_video_ops,
@@ -164,7 +175,11 @@ static int tea6415c_probe(struct i2c_client *client,
 	v4l_info(client, "chip found @ 0x%x (%s)\n",
 			client->addr << 1, client->adapter->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sd = kzalloc(sizeof(struct v4l2_subdev), GFP_KERNEL);
+=======
+	sd = devm_kzalloc(&client->dev, sizeof(*sd), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	sd = devm_kzalloc(&client->dev, sizeof(*sd), GFP_KERNEL);
 >>>>>>> v3.18
@@ -180,7 +195,10 @@ static int tea6415c_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(sd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

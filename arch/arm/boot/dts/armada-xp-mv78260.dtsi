@@ -14,7 +14,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "armada-xp.dtsi"
+=======
+#include "armada-xp.dtsi"
+>>>>>>> v3.18
 =======
 #include "armada-xp.dtsi"
 >>>>>>> v3.18
@@ -28,6 +32,10 @@
 		gpio1 = &gpio1;
 		gpio2 = &gpio2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		eth3 = &eth3;
+>>>>>>> v3.18
 =======
 		eth3 = &eth3;
 >>>>>>> v3.18
@@ -37,6 +45,10 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		enable-method = "marvell,armada-xp-smp";
+>>>>>>> v3.18
 =======
 		enable-method = "marvell,armada-xp-smp";
 >>>>>>> v3.18
@@ -47,6 +59,10 @@
 			reg = <0>;
 			clocks = <&cpuclk 0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clock-latency = <1000000>;
+>>>>>>> v3.18
 =======
 			clock-latency = <1000000>;
 >>>>>>> v3.18
@@ -58,6 +74,10 @@
 			reg = <1>;
 			clocks = <&cpuclk 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clock-latency = <1000000>;
+>>>>>>> v3.18
 =======
 			clock-latency = <1000000>;
 >>>>>>> v3.18
@@ -66,7 +86,10 @@
 
 	soc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * MV78260 has 3 PCIe units Gen2.0: Two units can be
 		 * configured as x4 or quad x1 lanes. One unit is
@@ -268,6 +291,9 @@
 			};
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		internal-regs {
 			pinctrl {
@@ -289,7 +315,11 @@
 				#gpio-cells = <2>;
 				interrupt-controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				#interrupts-cells = <2>;
+=======
+				#interrupt-cells = <2>;
+>>>>>>> v3.18
 =======
 				#interrupt-cells = <2>;
 >>>>>>> v3.18
@@ -304,7 +334,11 @@
 				#gpio-cells = <2>;
 				interrupt-controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				#interrupts-cells = <2>;
+=======
+				#interrupt-cells = <2>;
+>>>>>>> v3.18
 =======
 				#interrupt-cells = <2>;
 >>>>>>> v3.18
@@ -319,6 +353,7 @@
 				#gpio-cells = <2>;
 				interrupt-controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				#interrupts-cells = <2>;
 				interrupts = <91>;
 			};
@@ -327,6 +362,8 @@
 				compatible = "marvell,armada-370-neta";
 				reg = <0x34000 0x2500>;
 =======
+=======
+>>>>>>> v3.18
 				#interrupt-cells = <2>;
 				interrupts = <91>;
 			};
@@ -334,11 +371,15 @@
 			eth3: ethernet@34000 {
 				compatible = "marvell,armada-370-neta";
 				reg = <0x34000 0x4000>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				interrupts = <14>;
 				clocks = <&gateclk 1>;
 				status = "disabled";
 			};
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 			/*
@@ -512,6 +553,8 @@
 					status = "disabled";
 				};
 			};
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		};

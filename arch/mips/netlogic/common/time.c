@@ -46,6 +46,10 @@
 #include <asm/netlogic/xlp-hal/iomap.h>
 #include <asm/netlogic/xlp-hal/xlp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/netlogic/xlp-hal/sys.h>
+>>>>>>> v3.18
 =======
 #include <asm/netlogic/xlp-hal/sys.h>
 >>>>>>> v3.18
@@ -59,7 +63,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int __cpuinit get_c0_compare_int(void)
+=======
+unsigned int get_c0_compare_int(void)
+>>>>>>> v3.18
 =======
 unsigned int get_c0_compare_int(void)
 >>>>>>> v3.18
@@ -90,6 +98,10 @@ static void nlm_init_pic_timer(void)
 {
 	uint64_t picbase = nlm_get_node(0)->picbase;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 picfreq;
+>>>>>>> v3.18
 =======
 	u32 picfreq;
 >>>>>>> v3.18
@@ -104,7 +116,13 @@ static void nlm_init_pic_timer(void)
 	}
 	csrc_pic.rating = 1000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clocksource_register_hz(&csrc_pic, PIC_CLK_HZ);
+=======
+	picfreq = pic_timer_freq();
+	clocksource_register_hz(&csrc_pic, picfreq);
+	pr_info("PIC clock source added, frequency %d\n", picfreq);
+>>>>>>> v3.18
 =======
 	picfreq = pic_timer_freq();
 	clocksource_register_hz(&csrc_pic, picfreq);

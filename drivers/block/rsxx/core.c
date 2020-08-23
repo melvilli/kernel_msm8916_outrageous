@@ -32,6 +32,11 @@
 #include <linux/bitops.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/debugfs.h>
+#include <linux/seq_file.h>
+>>>>>>> v3.18
 =======
 #include <linux/debugfs.h>
 #include <linux/seq_file.h>
@@ -45,8 +50,14 @@
 
 #define NO_LEGACY 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 MODULE_DESCRIPTION("IBM FlashSystem 70/80 PCIe SSD Device Driver");
+=======
+#define SYNC_START_TIMEOUT (10 * 60) /* 10 minutes */
+
+MODULE_DESCRIPTION("IBM Flash Adapter 900GB Full Height Device Driver");
+>>>>>>> v3.18
 =======
 #define SYNC_START_TIMEOUT (10 * 60) /* 10 minutes */
 
@@ -61,10 +72,13 @@ module_param(force_legacy, uint, 0444);
 MODULE_PARM_DESC(force_legacy, "Force the use of legacy type PCI interrupts");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_IDA(rsxx_disk_ida);
 static DEFINE_SPINLOCK(rsxx_ida_lock);
 
 =======
+=======
+>>>>>>> v3.18
 static unsigned int sync_start = 1;
 module_param(sync_start, uint, 0444);
 MODULE_PARM_DESC(sync_start, "On by Default: Driver load will not complete "
@@ -292,6 +306,9 @@ failed_debugfs_dir:
 	card->debugfs_dir = NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*----------------- Interrupt Control & Handling -------------------*/
 
@@ -405,7 +422,12 @@ static irqreturn_t rsxx_isr(int irq, void *pdata)
 
 		if (isr & CR_INTR_CREG) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			schedule_work(&card->creg_ctrl.done_work);
+=======
+			queue_work(card->creg_ctrl.creg_wq,
+				   &card->creg_ctrl.done_work);
+>>>>>>> v3.18
 =======
 			queue_work(card->creg_ctrl.creg_wq,
 				   &card->creg_ctrl.done_work);
@@ -415,7 +437,11 @@ static irqreturn_t rsxx_isr(int irq, void *pdata)
 
 		if (isr & CR_INTR_EVENT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			schedule_work(&card->event_work);
+=======
+			queue_work(card->event_wq, &card->event_work);
+>>>>>>> v3.18
 =======
 			queue_work(card->event_wq, &card->event_work);
 >>>>>>> v3.18
@@ -580,7 +606,11 @@ static int rsxx_eeh_frozen(struct pci_dev *dev)
 	int st;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_warn(&dev->dev, "IBM FlashSystem PCI: preparing for slot reset.\n");
+=======
+	dev_warn(&dev->dev, "IBM Flash Adapter PCI: preparing for slot reset.\n");
+>>>>>>> v3.18
 =======
 	dev_warn(&dev->dev, "IBM Flash Adapter PCI: preparing for slot reset.\n");
 >>>>>>> v3.18
@@ -622,6 +652,7 @@ static void rsxx_eeh_failure(struct pci_dev *dev)
 	struct rsxx_cardinfo *card = pci_get_drvdata(dev);
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dev_err(&dev->dev, "IBM FlashSystem PCI: disabling failed card.\n");
 
@@ -632,6 +663,8 @@ static void rsxx_eeh_failure(struct pci_dev *dev)
 
 	rsxx_eeh_cancel_dmas(card);
 =======
+=======
+>>>>>>> v3.18
 	int cnt = 0;
 
 	dev_err(&dev->dev, "IBM Flash Adapter PCI: disabling failed card.\n");
@@ -653,6 +686,9 @@ static void rsxx_eeh_failure(struct pci_dev *dev)
 				"Freed %d queued DMAs on channel %d\n",
 				cnt, card->ctrl[i].id);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -711,7 +747,11 @@ static pci_ers_result_t rsxx_slot_reset(struct pci_dev *dev)
 
 	dev_warn(&dev->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"IBM FlashSystem PCI: recovering from slot reset.\n");
+=======
+		"IBM Flash Adapter PCI: recovering from slot reset.\n");
+>>>>>>> v3.18
 =======
 		"IBM Flash Adapter PCI: recovering from slot reset.\n");
 >>>>>>> v3.18
@@ -743,10 +783,13 @@ static pci_ers_result_t rsxx_slot_reset(struct pci_dev *dev)
 	card->eeh_state = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st = rsxx_eeh_remap_dmas(card);
 	if (st)
 		goto failed_remap_dmas;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&card->irq_lock, flags);
@@ -771,7 +814,11 @@ static pci_ers_result_t rsxx_slot_reset(struct pci_dev *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(&dev->dev, "IBM FlashSystem PCI: recovery complete.\n");
+=======
+	dev_info(&dev->dev, "IBM Flash Adapter PCI: recovery complete.\n");
+>>>>>>> v3.18
 =======
 	dev_info(&dev->dev, "IBM Flash Adapter PCI: recovery complete.\n");
 >>>>>>> v3.18
@@ -780,7 +827,10 @@ static pci_ers_result_t rsxx_slot_reset(struct pci_dev *dev)
 
 failed_hw_buffers_init:
 <<<<<<< HEAD
+<<<<<<< HEAD
 failed_remap_dmas:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < card->n_targets; i++) {
@@ -821,6 +871,10 @@ static int rsxx_pci_probe(struct pci_dev *dev,
 	struct rsxx_cardinfo *card;
 	int st;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int sync_timeout;
+>>>>>>> v3.18
 =======
 	unsigned int sync_timeout;
 >>>>>>> v3.18
@@ -898,7 +952,11 @@ static int rsxx_pci_probe(struct pci_dev *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st = request_irq(dev->irq, rsxx_isr, IRQF_DISABLED | IRQF_SHARED,
+=======
+	st = request_irq(dev->irq, rsxx_isr, IRQF_SHARED,
+>>>>>>> v3.18
 =======
 	st = request_irq(dev->irq, rsxx_isr, IRQF_SHARED,
 >>>>>>> v3.18
@@ -911,13 +969,19 @@ static int rsxx_pci_probe(struct pci_dev *dev,
 
 	/************* Setup Processor Command Interface *************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rsxx_creg_setup(card);
 =======
+=======
+>>>>>>> v3.18
 	st = rsxx_creg_setup(card);
 	if (st) {
 		dev_err(CARD_TO_DEV(card), "Failed to setup creg interface.\n");
 		goto failed_creg_setup;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_irq(&card->irq_lock);
@@ -959,13 +1023,19 @@ static int rsxx_pci_probe(struct pci_dev *dev,
 
 	/************* Setup Card Event Handler *************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	card->event_wq = create_singlethread_workqueue(DRIVER_NAME"_event");
 	if (!card->event_wq) {
 		dev_err(CARD_TO_DEV(card), "Failed card event setup.\n");
 		goto failed_event_handler;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_WORK(&card->event_work, card_event_handler);
 
@@ -994,7 +1064,10 @@ static int rsxx_pci_probe(struct pci_dev *dev,
 			dev_crit(CARD_TO_DEV(card),
 				"Failed issuing card startup\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (sync_start) {
 			sync_timeout = SYNC_START_TIMEOUT;
 
@@ -1022,6 +1095,9 @@ static int rsxx_pci_probe(struct pci_dev *dev,
 					card->size8 = 0;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (card->state == CARD_STATE_GOOD ||
 		   card->state == CARD_STATE_RD_ONLY_FAULT) {
@@ -1033,6 +1109,7 @@ static int rsxx_pci_probe(struct pci_dev *dev,
 	rsxx_attach_dev(card);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 failed_create_dev:
@@ -1040,6 +1117,8 @@ failed_create_dev:
 failed_dma_setup:
 failed_compatiblity_check:
 =======
+=======
+>>>>>>> v3.18
 	/************* Setup Debugfs *************/
 	rsxx_debugfs_dev_new(card);
 
@@ -1055,6 +1134,9 @@ failed_compatiblity_check:
 	destroy_workqueue(card->creg_ctrl.creg_wq);
 	card->creg_ctrl.creg_wq = NULL;
 failed_creg_setup:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irq(&card->irq_lock);
 	rsxx_disable_ier_and_isr(card, CR_INTR_ALL);
@@ -1122,6 +1204,11 @@ static void rsxx_pci_remove(struct pci_dev *dev)
 	card->halt = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	debugfs_remove_recursive(card->debugfs_dir);
+
+>>>>>>> v3.18
 =======
 	debugfs_remove_recursive(card->debugfs_dir);
 
@@ -1175,7 +1262,11 @@ static const struct pci_error_handlers rsxx_err_handler = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(rsxx_pci_ids) = {
+=======
+static const struct pci_device_id rsxx_pci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id rsxx_pci_ids[] = {
 >>>>>>> v3.18

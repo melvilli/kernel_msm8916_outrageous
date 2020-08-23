@@ -22,7 +22,11 @@ lock_waits = {} # long-lived stats on (tid,lock) blockage elapsed time
 process_names = {} # long-lived pid-to-execname mapping
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 def syscalls__sys_enter_futex(event, ctxt, cpu, s, ns, tid, comm,
+=======
+def syscalls__sys_enter_futex(event, ctxt, cpu, s, ns, tid, comm, callchain,
+>>>>>>> v3.18
 =======
 def syscalls__sys_enter_futex(event, ctxt, cpu, s, ns, tid, comm, callchain,
 >>>>>>> v3.18
@@ -36,7 +40,11 @@ def syscalls__sys_enter_futex(event, ctxt, cpu, s, ns, tid, comm, callchain,
 	thread_blocktime[tid] = nsecs(s, ns)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 def syscalls__sys_exit_futex(event, ctxt, cpu, s, ns, tid, comm,
+=======
+def syscalls__sys_exit_futex(event, ctxt, cpu, s, ns, tid, comm, callchain,
+>>>>>>> v3.18
 =======
 def syscalls__sys_exit_futex(event, ctxt, cpu, s, ns, tid, comm, callchain,
 >>>>>>> v3.18

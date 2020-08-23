@@ -74,12 +74,16 @@ struct page *ksm_might_need_to_copy(struct page *page,
 			struct vm_area_struct *vma, unsigned long address);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int page_referenced_ksm(struct page *page,
 			struct mem_cgroup *memcg, unsigned long *vm_flags);
 int try_to_unmap_ksm(struct page *page,
 			enum ttu_flags flags, struct vm_area_struct *vma);
 int rmap_walk_ksm(struct page *page, int (*rmap_one)(struct page *,
 		  struct vm_area_struct *, unsigned long, void *), void *arg);
+=======
+int rmap_walk_ksm(struct page *page, struct rmap_walk_control *rwc);
+>>>>>>> v3.18
 =======
 int rmap_walk_ksm(struct page *page, struct rmap_walk_control *rwc);
 >>>>>>> v3.18
@@ -121,6 +125,7 @@ static inline int page_referenced_ksm(struct page *page,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int try_to_unmap_ksm(struct page *page,
 			enum ttu_flags flags, struct vm_area_struct *target_vma)
 {
@@ -129,6 +134,10 @@ static inline int try_to_unmap_ksm(struct page *page,
 
 static inline int rmap_walk_ksm(struct page *page, int (*rmap_one)(struct page*,
 		struct vm_area_struct *, unsigned long, void *), void *arg)
+=======
+static inline int rmap_walk_ksm(struct page *page,
+			struct rmap_walk_control *rwc)
+>>>>>>> v3.18
 =======
 static inline int rmap_walk_ksm(struct page *page,
 			struct rmap_walk_control *rwc)

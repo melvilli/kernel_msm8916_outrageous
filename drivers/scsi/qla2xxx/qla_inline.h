@@ -1,7 +1,11 @@
 /*
  * QLogic Fibre Channel HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2013 QLogic Corporation
+=======
+ * Copyright (c)  2003-2014 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2014 QLogic Corporation
 >>>>>>> v3.18
@@ -10,6 +14,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "qla_target.h"
+>>>>>>> v3.18
 =======
 #include "qla_target.h"
 >>>>>>> v3.18
@@ -68,7 +76,11 @@ qla2x00_poll(struct rsp_que *rsp)
 	struct qla_hw_data *ha = rsp->hw;
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_QLA82XX(ha))
+=======
+	if (IS_P3P_TYPE(ha))
+>>>>>>> v3.18
 =======
 	if (IS_P3P_TYPE(ha))
 >>>>>>> v3.18
@@ -96,7 +108,11 @@ host_to_adap(uint8_t *src, uint8_t *dst, uint32_t bsize)
 {
 	uint32_t *isrc = (uint32_t *) src;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t *odest = (uint32_t *) dst;
+=======
+	__le32 *odest = (__le32 *) dst;
+>>>>>>> v3.18
 =======
 	__le32 *odest = (__le32 *) dst;
 >>>>>>> v3.18
@@ -145,7 +161,12 @@ qla2x00_clear_loop_id(fc_port_t *fcport) {
 
 static inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 qla2x00_clean_dsd_pool(struct qla_hw_data *ha, srb_t *sp)
+=======
+qla2x00_clean_dsd_pool(struct qla_hw_data *ha, srb_t *sp,
+	struct qla_tgt_cmd *tc)
+>>>>>>> v3.18
 =======
 qla2x00_clean_dsd_pool(struct qla_hw_data *ha, srb_t *sp,
 	struct qla_tgt_cmd *tc)
@@ -155,8 +176,11 @@ qla2x00_clean_dsd_pool(struct qla_hw_data *ha, srb_t *sp,
 	struct crc_context *ctx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctx = (struct crc_context *)GET_CMD_CTX_SP(sp);
 =======
+=======
+>>>>>>> v3.18
 	if (sp)
 		ctx = (struct crc_context *)GET_CMD_CTX_SP(sp);
 	else if (tc)
@@ -165,6 +189,9 @@ qla2x00_clean_dsd_pool(struct qla_hw_data *ha, srb_t *sp,
 		BUG();
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* clean up allocated prev pool */
@@ -294,6 +321,7 @@ qla2x00_gid_list_size(struct qla_hw_data *ha)
 
 static inline void
 <<<<<<< HEAD
+<<<<<<< HEAD
 qla2x00_do_host_ramp_up(scsi_qla_host_t *vha)
 {
 	if (vha->hw->cfg_lun_q_depth >= ql2xmaxqdepth)
@@ -315,6 +343,8 @@ qla2x00_do_host_ramp_up(scsi_qla_host_t *vha)
 static inline void
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 qla2x00_handle_mbx_completion(struct qla_hw_data *ha, int status)
 {
 	if (test_bit(MBX_INTR_WAIT, &ha->mbx_cmd_flags) &&
@@ -325,7 +355,10 @@ qla2x00_handle_mbx_completion(struct qla_hw_data *ha, int status)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline void
 qla2x00_set_retry_delay_timestamp(fc_port_t *fcport, uint16_t retry_delay)
@@ -334,4 +367,7 @@ qla2x00_set_retry_delay_timestamp(fc_port_t *fcport, uint16_t retry_delay)
 		fcport->retry_delay_timestamp = jiffies +
 		    (retry_delay * HZ / 10);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

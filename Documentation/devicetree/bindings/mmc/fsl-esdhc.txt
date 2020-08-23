@@ -20,6 +20,12 @@ Optional properties:
   - sdhci,auto-cmd12: specifies that a controller can only handle auto
     CMD12.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  - voltage-ranges : two cells are required, first cell specifies minimum
+    slot voltage (mV), second cell specifies maximum slot voltage (mV).
+    Several ranges could be specified.
+>>>>>>> v3.18
 =======
   - voltage-ranges : two cells are required, first cell specifies minimum
     slot voltage (mV), second cell specifies maximum slot voltage (mV).
@@ -36,6 +42,10 @@ sdhci@2e000 {
 	/* Filled in by U-Boot */
 	clock-frequency = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	voltage-ranges = <3300 3300>;
+>>>>>>> v3.18
 =======
 	voltage-ranges = <3300 3300>;
 >>>>>>> v3.18

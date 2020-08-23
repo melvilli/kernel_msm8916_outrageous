@@ -233,6 +233,7 @@ static int lms501kf03_power_on(struct lms501kf03 *lcd)
 		dev_err(lcd->dev, "power_on is NULL.\n");
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		pd->power_on(lcd->ld, 1);
 		msleep(pd->power_on_delay);
@@ -247,6 +248,8 @@ static int lms501kf03_power_on(struct lms501kf03 *lcd)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	pd->power_on(lcd->ld, 1);
@@ -260,6 +263,9 @@ static int lms501kf03_power_on(struct lms501kf03 *lcd)
 	pd->reset(lcd->ld);
 	msleep(pd->reset_delay);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = lms501kf03_ldi_init(lcd);
 	if (ret) {
@@ -361,7 +367,11 @@ static int lms501kf03_probe(struct spi_device *spi)
 	lcd->dev = &spi->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd->lcd_pd = spi->dev.platform_data;
+=======
+	lcd->lcd_pd = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	lcd->lcd_pd = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -371,8 +381,13 @@ static int lms501kf03_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld = lcd_device_register("lms501kf03", &spi->dev, lcd,
 				&lms501kf03_lcd_ops);
+=======
+	ld = devm_lcd_device_register(&spi->dev, "lms501kf03", &spi->dev, lcd,
+					&lms501kf03_lcd_ops);
+>>>>>>> v3.18
 =======
 	ld = devm_lcd_device_register(&spi->dev, "lms501kf03", &spi->dev, lcd,
 					&lms501kf03_lcd_ops);
@@ -408,8 +423,11 @@ static int lms501kf03_remove(struct spi_device *spi)
 
 	lms501kf03_power(lcd, FB_BLANK_POWERDOWN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_device_unregister(lcd->ld);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

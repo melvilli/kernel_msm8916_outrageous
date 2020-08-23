@@ -32,7 +32,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -66,7 +69,11 @@ static void check_hw_pbc(struct _adapter *padapter)
 	tmp1byte = r8712_read8(padapter, GPIO_CTRL);
 	if (tmp1byte == 0xff)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -299,8 +306,12 @@ static struct cmd_obj *cmd_hdl_filter(struct _adapter *padapter,
 static u8 check_cmd_fifo(struct _adapter *padapter, uint sz)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 res = _SUCCESS;
 	return res;
+=======
+	return _SUCCESS;
+>>>>>>> v3.18
 =======
 	return _SUCCESS;
 >>>>>>> v3.18
@@ -340,7 +351,11 @@ int r8712_cmd_thread(void *context)
 	struct	cmd_priv	*pcmdpriv = &(padapter->cmdpriv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	thread_enter(padapter);
+=======
+	allow_signal(SIGTERM);
+>>>>>>> v3.18
 =======
 	allow_signal(SIGTERM);
 >>>>>>> v3.18
@@ -368,8 +383,14 @@ _next:
 						    &padapter->dvobjpriv;
 			u8 blnPending = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pcmdpriv->cmd_issued_cnt++;
 			cmdsz = _RND8((pcmd->cmdsz)); /* _RND8	*/
+=======
+
+			pcmdpriv->cmd_issued_cnt++;
+			cmdsz = round_up(pcmd->cmdsz, 8);
+>>>>>>> v3.18
 =======
 
 			pcmdpriv->cmd_issued_cnt++;
@@ -403,7 +424,11 @@ _next:
 					       (pcmd->cmdcode << 16) |
 					       (pcmdpriv->cmd_seq << 24));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pcmdbuf += 2 ; /* 8 bytes alignment */
+=======
+			pcmdbuf += 2; /* 8 bytes alignment */
+>>>>>>> v3.18
 =======
 			pcmdbuf += 2; /* 8 bytes alignment */
 >>>>>>> v3.18
@@ -438,7 +463,11 @@ _next:
 			}
 			r8712_free_cmd_obj(pcmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (_queue_empty(&(pcmdpriv->cmd_queue))) {
+=======
+			if (list_empty(&pcmdpriv->cmd_queue.queue)) {
+>>>>>>> v3.18
 =======
 			if (list_empty(&pcmdpriv->cmd_queue.queue)) {
 >>>>>>> v3.18
@@ -500,6 +529,7 @@ void r8712_event_handle(struct _adapter *padapter, uint *peventbuf)
 	if (pevt_priv->event_seq > 127)
 		pevt_priv->event_seq = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	peventbuf = peventbuf + 2; /* move to event content, 8 bytes alignment */
 	if (peventbuf) {
 		event_callback = wlanevents[evt_code].event_callback;
@@ -507,11 +537,16 @@ void r8712_event_handle(struct _adapter *padapter, uint *peventbuf)
 			event_callback(padapter, (u8 *)peventbuf);
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* move to event content, 8 bytes alignment */
 	peventbuf = peventbuf + 2;
 	event_callback = wlanevents[evt_code].event_callback;
 	if (event_callback)
 		event_callback(padapter, (u8 *)peventbuf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pevt_priv->evt_done_cnt++;
 _abort_event_:

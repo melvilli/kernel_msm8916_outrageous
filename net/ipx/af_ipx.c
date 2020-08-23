@@ -53,6 +53,7 @@
 #include <net/psnap.h>
 #include <net/sock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/tcp_states.h>
 
 #include <asm/uaccess.h>
@@ -66,12 +67,17 @@ extern void ipx_unregister_sysctl(void);
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #include <net/datalink.h>
 #include <net/tcp_states.h>
 #include <net/net_namespace.h>
 
 #include <asm/uaccess.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Configuration Variables */
 static unsigned char ipxcfg_max_hops = 16;
@@ -94,6 +100,7 @@ struct ipx_interface *ipx_primary_net;
 struct ipx_interface *ipx_internal_net;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ipxrtr_add_route(__be32 network, struct ipx_interface *intrfc,
 			    unsigned char *node);
 extern void ipxrtr_del_routes(struct ipx_interface *intrfc);
@@ -103,6 +110,8 @@ extern int ipxrtr_route_skb(struct sk_buff *skb);
 extern struct ipx_route *ipxrtr_lookup(__be32 net);
 extern int ipxrtr_ioctl(unsigned int cmd, void __user *arg);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct ipx_interface *ipx_interfaces_head(void)
@@ -343,7 +352,11 @@ static int ipxitf_device_event(struct notifier_block *notifier,
 				unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -1200,16 +1213,22 @@ static int ipxitf_ioctl(unsigned int cmd, void __user *arg)
 		memcpy(sipx->sipx_node, ipxif->if_node,
 			sizeof(sipx->sipx_node));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = 0;
 		if (copy_to_user(arg, &ifr, sizeof(ifr)))
 			rc = -EFAULT;
 		ipxitf_put(ipxif);
 =======
+=======
+>>>>>>> v3.18
 		rc = -EFAULT;
 		if (copy_to_user(arg, &ifr, sizeof(ifr)))
 			break;
 		ipxitf_put(ipxif);
 		rc = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -1392,7 +1411,11 @@ static int ipx_create(struct net *net, struct socket *sock, int protocol,
 	sk_refcnt_debug_inc(sk);
 	sock_init_data(sock, sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk->sk_no_check = 1;		/* Checksum off by default */
+=======
+	sk->sk_no_check_tx = 1;		/* Checksum off by default */
+>>>>>>> v3.18
 =======
 	sk->sk_no_check_tx = 1;		/* Checksum off by default */
 >>>>>>> v3.18
@@ -1411,6 +1434,10 @@ static int ipx_release(struct socket *sock)
 
 	lock_sock(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sk->sk_shutdown = SHUTDOWN_MASK;
+>>>>>>> v3.18
 =======
 	sk->sk_shutdown = SHUTDOWN_MASK;
 >>>>>>> v3.18
@@ -1739,7 +1766,11 @@ static int ipx_sendmsg(struct kiocb *iocb, struct socket *sock,
 	struct sock *sk = sock->sk;
 	struct ipx_sock *ipxs = ipx_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_ipx *usipx = (struct sockaddr_ipx *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_ipx *, usipx, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_ipx *, usipx, msg->msg_name);
 >>>>>>> v3.18
@@ -1810,7 +1841,11 @@ static int ipx_recvmsg(struct kiocb *iocb, struct socket *sock,
 	struct sock *sk = sock->sk;
 	struct ipx_sock *ipxs = ipx_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_ipx *sipx = (struct sockaddr_ipx *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_ipx *, sipx, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_ipx *, sipx, msg->msg_name);
 >>>>>>> v3.18
@@ -1849,14 +1884,20 @@ static int ipx_recvmsg(struct kiocb *iocb, struct socket *sock,
 	skb = skb_recv_datagram(sk, flags & ~MSG_DONTWAIT,
 				flags & MSG_DONTWAIT, &rc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!skb)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (!skb) {
 		if (rc == -EAGAIN && (sk->sk_shutdown & RCV_SHUTDOWN))
 			rc = 0;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ipx 	= ipx_hdr(skb);
@@ -1989,7 +2030,10 @@ static int ipx_compat_ioctl(struct socket *sock, unsigned int cmd, unsigned long
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ipx_shutdown(struct socket *sock, int mode)
 {
 	struct sock *sk = sock->sk;
@@ -2010,6 +2054,9 @@ static int ipx_shutdown(struct socket *sock, int mode)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -2038,7 +2085,11 @@ static const struct proto_ops ipx_dgram_ops = {
 #endif
 	.listen		= sock_no_listen,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shutdown	= sock_no_shutdown, /* FIXME: support shutdown */
+=======
+	.shutdown	= ipx_shutdown,
+>>>>>>> v3.18
 =======
 	.shutdown	= ipx_shutdown,
 >>>>>>> v3.18
@@ -2065,9 +2116,12 @@ static struct notifier_block ipx_dev_notifier = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct datalink_proto *make_EII_client(void);
 extern void destroy_EII_client(struct datalink_proto *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const unsigned char ipx_8022_type = 0xE0;

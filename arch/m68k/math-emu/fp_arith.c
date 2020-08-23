@@ -520,7 +520,11 @@ static void fp_roundint(struct fp_ext *dest, int mode)
 			break;
 		case 0x401e:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(oldmant.m32[1] >= 0))
+=======
+			if (oldmant.m32[1] & 0x80000000)
+>>>>>>> v3.18
 =======
 			if (oldmant.m32[1] & 0x80000000)
 >>>>>>> v3.18

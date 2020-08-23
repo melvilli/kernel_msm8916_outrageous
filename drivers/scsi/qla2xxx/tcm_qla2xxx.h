@@ -5,14 +5,20 @@
 /* length of ASCII WWPNs including pad */
 #define TCM_QLA2XXX_NAMELEN	32
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* lenth of ASCII NPIV 'WWPN+WWNN' including pad */
 #define TCM_QLA2XXX_NPIV_NAMELEN 66
 =======
+=======
+>>>>>>> v3.18
 /*
  * Number of pre-allocated per-session tags, based upon the worst-case
  * per port number of iocbs
  */
 #define TCM_QLA2XXX_DEFAULT_TAGS 2088
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "qla_target.h"
@@ -38,6 +44,10 @@ struct tcm_qla2xxx_tpg_attrib {
 	int demo_mode_write_protect;
 	int prod_mode_write_protect;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int demo_mode_login_only;
+>>>>>>> v3.18
 =======
 	int demo_mode_login_only;
 >>>>>>> v3.18
@@ -55,16 +65,22 @@ struct tcm_qla2xxx_tpg {
 	/* Returned by tcm_qla2xxx_make_tpg() */
 	struct se_portal_group se_tpg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 #define QLA_TPG_ATTRIB(tpg)	(&(tpg)->tpg_attrib)
 
 =======
+=======
+>>>>>>> v3.18
 	/* Items for dealing with configfs_depend_item */
 	struct completion tpg_base_comp;
 	struct work_struct tpg_base_work;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct tcm_qla2xxx_fc_loopid {
 	struct se_node_acl *se_nacl;
@@ -84,8 +100,11 @@ struct tcm_qla2xxx_lport {
 	/* ASCII formatted naa WWPN for VPD page 83 etc */
 	char lport_naa_name[TCM_QLA2XXX_NAMELEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ASCII formatted WWPN+WWNN for NPIV FC Target Lport */
 	char lport_npiv_name[TCM_QLA2XXX_NPIV_NAMELEN];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* map for fc_port pointers in 24-bit FC Port ID space */
@@ -95,12 +114,17 @@ struct tcm_qla2xxx_lport {
 	/* Pointer to struct scsi_qla_host from qla2xxx LLD */
 	struct scsi_qla_host *qla_vha;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Pointer to struct scsi_qla_host for NPIV VP from qla2xxx LLD */
 	struct scsi_qla_host *qla_npiv_vp;
 	/* Pointer to struct qla_tgt pointer */
 	struct qla_tgt lport_qla_tgt;
 	/* Pointer to struct fc_vport for NPIV vport from libfc */
 	struct fc_vport *npiv_vport;
+=======
+	/* Pointer to struct qla_tgt pointer */
+	struct qla_tgt lport_qla_tgt;
+>>>>>>> v3.18
 =======
 	/* Pointer to struct qla_tgt pointer */
 	struct qla_tgt lport_qla_tgt;

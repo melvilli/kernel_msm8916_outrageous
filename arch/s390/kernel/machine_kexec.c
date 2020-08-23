@@ -26,6 +26,10 @@
 #include <asm/asm-offsets.h>
 #include <asm/os_info.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/switch_to.h>
+>>>>>>> v3.18
 =======
 #include <asm/switch_to.h>
 >>>>>>> v3.18
@@ -48,7 +52,11 @@ static void add_elf_notes(int cpu)
 	memcpy((void *) (4608UL + sa->pref_reg), sa, sizeof(*sa));
 	ptr = (u64 *) per_cpu_ptr(crash_notes, cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptr = fill_cpu_elf_notes(ptr, sa);
+=======
+	ptr = fill_cpu_elf_notes(ptr, sa, NULL);
+>>>>>>> v3.18
 =======
 	ptr = fill_cpu_elf_notes(ptr, sa, NULL);
 >>>>>>> v3.18
@@ -59,12 +67,15 @@ static void add_elf_notes(int cpu)
  * Initialize CPU ELF notes
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void setup_regs(void)
 {
 	unsigned long sa = S390_lowcore.prefixreg_save_area + SAVE_AREA_BASE;
 	int cpu, this_cpu;
 
 =======
+=======
+>>>>>>> v3.18
 static void setup_regs(void)
 {
 	unsigned long sa = S390_lowcore.prefixreg_save_area + SAVE_AREA_BASE;
@@ -73,6 +84,9 @@ static void setup_regs(void)
 
 	/* Get lowcore pointer from store status of this CPU (absolute zero) */
 	lc = (struct _lowcore *)(unsigned long)S390_lowcore.prefixreg_save_area;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	this_cpu = smp_find_processor_id(stap());
 	add_elf_notes(this_cpu);
@@ -84,6 +98,11 @@ static void setup_regs(void)
 		add_elf_notes(cpu);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (MACHINE_HAS_VX)
+		save_vx_regs_safe((void *) lc->vector_save_area_addr);
+>>>>>>> v3.18
 =======
 	if (MACHINE_HAS_VX)
 		save_vx_regs_safe((void *) lc->vector_save_area_addr);

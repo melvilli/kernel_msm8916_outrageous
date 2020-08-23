@@ -396,7 +396,11 @@ static int phantom_probe(struct pci_dev *pdev,
 	ioread32(pht->caddr + PHN_IRQCTL); /* PCI posting */
 	retval = request_irq(pdev->irq, phantom_isr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_SHARED | IRQF_DISABLED, "phantom", pht);
+=======
+			IRQF_SHARED, "phantom", pht);
+>>>>>>> v3.18
 =======
 			IRQF_SHARED, "phantom", pht);
 >>>>>>> v3.18

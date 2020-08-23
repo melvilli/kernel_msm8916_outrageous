@@ -36,7 +36,10 @@
 #include <linux/namei.h>
 #include <linux/bio.h>		/* struct bio */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/buffer_head.h>	/* various write calls */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/prefetch.h>
@@ -53,6 +56,7 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Andy Adamson <andros@citi.umich.edu>");
 MODULE_DESCRIPTION("The NFSv4.1 pNFS Block layout driver");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void print_page(struct page *page)
 {
@@ -89,6 +93,8 @@ static int is_writable(struct pnfs_block_extent *be, sector_t isect)
 	return (be->be_state == PNFS_BLOCK_READWRITE_DATA ||
 		be->be_state == PNFS_BLOCK_INVALID_DATA);
 =======
+=======
+>>>>>>> v3.18
 static bool is_hole(struct pnfs_block_extent *be)
 {
 	switch (be->be_state) {
@@ -99,6 +105,9 @@ static bool is_hole(struct pnfs_block_extent *be)
 	default:
 		return false;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -108,9 +117,14 @@ static bool is_hole(struct pnfs_block_extent *be)
 struct parallel_io {
 	struct kref refcnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*pnfs_callback) (void *data, int num_se);
 	void *data;
 	int bse_count;
+=======
+	void (*pnfs_callback) (void *data);
+	void *data;
+>>>>>>> v3.18
 =======
 	void (*pnfs_callback) (void *data);
 	void *data;
@@ -126,7 +140,10 @@ static inline struct parallel_io *alloc_parallel(void *data)
 		rv->data = data;
 		kref_init(&rv->refcnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rv->bse_count = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -144,7 +161,11 @@ static void destroy_parallel(struct kref *kref)
 
 	dprintk("%s enter\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->pnfs_callback(p->data, p->bse_count);
+=======
+	p->pnfs_callback(p->data);
+>>>>>>> v3.18
 =======
 	p->pnfs_callback(p->data);
 >>>>>>> v3.18
@@ -163,8 +184,13 @@ bl_submit_bio(int rw, struct bio *bio)
 		get_parallel(bio->bi_private);
 		dprintk("%s submitting %s bio %u@%llu\n", __func__,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rw == READ ? "read" : "write",
 			bio->bi_size, (unsigned long long)bio->bi_sector);
+=======
+			rw == READ ? "read" : "write", bio->bi_iter.bi_size,
+			(unsigned long long)bio->bi_iter.bi_sector);
+>>>>>>> v3.18
 =======
 			rw == READ ? "read" : "write", bio->bi_iter.bi_size,
 			(unsigned long long)bio->bi_iter.bi_sector);
@@ -175,10 +201,16 @@ bl_submit_bio(int rw, struct bio *bio)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct bio *bl_alloc_init_bio(int npg, sector_t isect,
 				     struct pnfs_block_extent *be,
 				     void (*end_io)(struct bio *, int err),
 				     struct parallel_io *par)
+=======
+static struct bio *
+bl_alloc_init_bio(int npg, struct block_device *bdev, sector_t disk_sector,
+		void (*end_io)(struct bio *, int err), struct parallel_io *par)
+>>>>>>> v3.18
 =======
 static struct bio *
 bl_alloc_init_bio(int npg, struct block_device *bdev, sector_t disk_sector,
@@ -196,8 +228,13 @@ bl_alloc_init_bio(int npg, struct block_device *bdev, sector_t disk_sector,
 
 	if (bio) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio->bi_sector = isect - be->be_f_offset + be->be_v_offset;
 		bio->bi_bdev = be->be_mdev;
+=======
+		bio->bi_iter.bi_sector = disk_sector;
+		bio->bi_bdev = bdev;
+>>>>>>> v3.18
 =======
 		bio->bi_iter.bi_sector = disk_sector;
 		bio->bi_bdev = bdev;
@@ -208,6 +245,7 @@ bl_alloc_init_bio(int npg, struct block_device *bdev, sector_t disk_sector,
 	return bio;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct bio *do_add_page_to_bio(struct bio *bio, int npg, int rw,
 				      sector_t isect, struct page *page,
@@ -227,6 +265,8 @@ retry:
 	}
 	if (bio_add_page(bio, page, len, offset) < len) {
 =======
+=======
+>>>>>>> v3.18
 static struct bio *
 do_add_page_to_bio(struct bio *bio, int npg, int rw, sector_t isect,
 		struct page *page, struct pnfs_block_dev_map *map,
@@ -268,6 +308,9 @@ retry:
 			return ERR_PTR(-ENOMEM);
 	}
 	if (bio_add_page(bio, page, *len, offset) < *len) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bio = bl_submit_bio(rw, bio);
 		goto retry;
@@ -275,6 +318,7 @@ retry:
 	return bio;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct bio *bl_add_page_to_bio(struct bio *bio, int npg, int rw,
 				      sector_t isect, struct page *page,
@@ -305,12 +349,17 @@ static void bl_end_io_read(struct bio *bio, int err)
 		struct nfs_read_data *rdata = par->data;
 		struct nfs_pgio_header *header = rdata->header;
 =======
+=======
+>>>>>>> v3.18
 static void bl_end_io_read(struct bio *bio, int err)
 {
 	struct parallel_io *par = bio->bi_private;
 
 	if (err) {
 		struct nfs_pgio_header *header = par->data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!header->pnfs_error)
@@ -318,6 +367,10 @@ static void bl_end_io_read(struct bio *bio, int err)
 		pnfs_set_lo_fail(header->lseg);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -328,6 +381,7 @@ static void bl_end_io_read(struct bio *bio, int err)
 static void bl_read_cleanup(struct work_struct *work)
 {
 	struct rpc_task *task;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct nfs_read_data *rdata;
 	dprintk("%s enter\n", __func__);
@@ -398,6 +452,8 @@ bl_read_pagelist(struct nfs_read_data *rdata)
 		if (is_dio) {
 			pg_offset = f_offset & ~PAGE_CACHE_MASK;
 =======
+=======
+>>>>>>> v3.18
 	struct nfs_pgio_header *hdr;
 	dprintk("%s enter\n", __func__);
 	task = container_of(work, struct rpc_task, u.tk_work);
@@ -461,11 +517,15 @@ bl_read_pagelist(struct nfs_pgio_header *header)
 
 		pg_offset = f_offset & ~PAGE_CACHE_MASK;
 		if (is_dio) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (pg_offset + bytes_left > PAGE_CACHE_SIZE)
 				pg_len = PAGE_CACHE_SIZE - pg_offset;
 			else
 				pg_len = bytes_left;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 			f_offset += pg_len;
@@ -479,6 +539,8 @@ bl_read_pagelist(struct nfs_pgio_header *header)
 		hole = is_hole(be, isect);
 		if (hole && !cow_read) {
 =======
+=======
+>>>>>>> v3.18
 		} else {
 			BUG_ON(pg_offset != 0);
 			pg_len = PAGE_CACHE_SIZE;
@@ -488,11 +550,15 @@ bl_read_pagelist(struct nfs_pgio_header *header)
 		extent_length -= (pg_offset >> SECTOR_SHIFT);
 
 		if (is_hole(&be)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			bio = bl_submit_bio(READ, bio);
 			/* Fill hole w/ zeroes w/o accessing device */
 			dprintk("%s Zeroing page for hole\n", __func__);
 			zero_user_segment(pages[i], pg_offset, pg_len);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			print_page(pages[i]);
 			SetPageUptodate(pages[i]);
@@ -506,6 +572,8 @@ bl_read_pagelist(struct nfs_pgio_header *header)
 						 bl_end_io_read, par,
 						 pg_offset, pg_len);
 =======
+=======
+>>>>>>> v3.18
 
 			/* invalidate map */
 			map.start = NFS4_MAX_UINT64;
@@ -516,6 +584,9 @@ bl_read_pagelist(struct nfs_pgio_header *header)
 						 isect, pages[i], &map, &be,
 						 bl_end_io_read, par,
 						 pg_offset, &pg_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (IS_ERR(bio)) {
 				header->pnfs_error = PTR_ERR(bio);
@@ -524,6 +595,7 @@ bl_read_pagelist(struct nfs_pgio_header *header)
 			}
 		}
 		isect += (pg_len >> SECTOR_SHIFT);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		extent_length -= PAGE_CACHE_SECTORS;
 	}
@@ -600,6 +672,8 @@ static void bl_end_io_write_zero(struct bio *bio, int err)
 	bio_put(bio);
 	put_parallel(par);
 =======
+=======
+>>>>>>> v3.18
 		extent_length -= (pg_len >> SECTOR_SHIFT);
 		f_offset += pg_len;
 		bytes_left -= pg_len;
@@ -615,6 +689,9 @@ out:
 	blk_finish_plug(&plug);
 	put_parallel(par);
 	return PNFS_ATTEMPTED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -623,8 +700,12 @@ static void bl_end_io_write(struct bio *bio, int err)
 	struct parallel_io *par = bio->bi_private;
 	const int uptodate = test_bit(BIO_UPTODATE, &bio->bi_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfs_write_data *data = par->data;
 	struct nfs_pgio_header *header = data->header;
+=======
+	struct nfs_pgio_header *header = par->data;
+>>>>>>> v3.18
 =======
 	struct nfs_pgio_header *header = par->data;
 >>>>>>> v3.18
@@ -643,6 +724,7 @@ static void bl_end_io_write(struct bio *bio, int err)
  */
 static void bl_write_cleanup(struct work_struct *work)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct rpc_task *task;
 	struct nfs_write_data *wdata;
@@ -1089,6 +1171,8 @@ next_page:
 					 bl_end_io_write, par,
 					 pg_offset, pg_len);
 =======
+=======
+>>>>>>> v3.18
 	struct rpc_task *task = container_of(work, struct rpc_task, u.tk_work);
 	struct nfs_pgio_header *hdr =
 			container_of(task, struct nfs_pgio_header, task);
@@ -1171,12 +1255,16 @@ bl_write_pagelist(struct nfs_pgio_header *header, int sync)
 					 WRITE, isect, pages[i], &map, &be,
 					 bl_end_io_write, par,
 					 0, &pg_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (IS_ERR(bio)) {
 			header->pnfs_error = PTR_ERR(bio);
 			bio = NULL;
 			goto out;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		offset += saved_len;
 		count -= saved_len;
@@ -1248,6 +1336,8 @@ release_inval_marks(struct pnfs_inval_markings *marks)
 	}
 	return;
 =======
+=======
+>>>>>>> v3.18
 
 		offset += pg_len;
 		count -= pg_len;
@@ -1261,6 +1351,9 @@ out:
 	blk_finish_plug(&plug);
 	put_parallel(par);
 	return PNFS_ATTEMPTED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1268,11 +1361,14 @@ static void bl_free_layout_hdr(struct pnfs_layout_hdr *lo)
 {
 	struct pnfs_block_layout *bl = BLK_LO2EXT(lo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dprintk("%s enter\n", __func__);
 	release_extents(bl, NULL);
 	release_inval_marks(&bl->bl_inval);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	dprintk("%s enter\n", __func__);
@@ -1280,6 +1376,9 @@ static void bl_free_layout_hdr(struct pnfs_layout_hdr *lo)
 	err = ext_tree_remove(bl, true, 0, LLONG_MAX);
 	WARN_ON(err);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(bl);
 }
@@ -1294,6 +1393,7 @@ static struct pnfs_layout_hdr *bl_alloc_layout_hdr(struct inode *inode,
 	if (!bl)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&bl->bl_ext_lock);
 	INIT_LIST_HEAD(&bl->bl_extents[0]);
 	INIT_LIST_HEAD(&bl->bl_extents[1]);
@@ -1303,11 +1403,16 @@ static struct pnfs_layout_hdr *bl_alloc_layout_hdr(struct inode *inode,
 	bl->bl_blocksize = NFS_SERVER(inode)->pnfs_blksize >> SECTOR_SHIFT;
 	BL_INIT_INVAL_MARKS(&bl->bl_inval, bl->bl_blocksize);
 =======
+=======
+>>>>>>> v3.18
 
 	bl->bl_ext_rw = RB_ROOT;
 	bl->bl_ext_ro = RB_ROOT;
 	spin_lock_init(&bl->bl_ext_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return &bl->bl_layout;
 }
@@ -1318,6 +1423,7 @@ static void bl_free_lseg(struct pnfs_layout_segment *lseg)
 	kfree(lseg);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* We pretty much ignore lseg, and store all data layout wide, so we
  * can correctly merge.
@@ -1510,6 +1616,8 @@ bl_clear_layoutdriver(struct nfs_server *server)
 	free_blk_mountid(b_mt_id);
 	dprintk("%s RETURNS\n", __func__);
 =======
+=======
+>>>>>>> v3.18
 /* Tracks info needed to ensure extents in layout obey constraints of spec */
 struct layout_verification {
 	u32 mode;	/* R or RW */
@@ -1779,17 +1887,23 @@ bl_set_layoutdriver(struct nfs_server *server, const struct nfs_fh *fh)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 is_aligned_req(struct nfs_page *req, unsigned int alignment)
 {
 	return IS_ALIGNED(req->wb_offset, alignment) &&
 	       IS_ALIGNED(req->wb_bytes, alignment);
 =======
+=======
+>>>>>>> v3.18
 is_aligned_req(struct nfs_pageio_descriptor *pgio,
 		struct nfs_page *req, unsigned int alignment)
 {
@@ -1818,12 +1932,16 @@ is_aligned_req(struct nfs_pageio_descriptor *pgio,
 	}
 
 	return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void
 bl_pg_init_read(struct nfs_pageio_descriptor *pgio, struct nfs_page *req)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (pgio->pg_dreq != NULL &&
 	    !is_aligned_req(req, SECTOR_SIZE))
@@ -1841,6 +1959,8 @@ bl_pg_test_read(struct nfs_pageio_descriptor *pgio, struct nfs_page *prev,
 		return false;
 
 =======
+=======
+>>>>>>> v3.18
 	if (!is_aligned_req(pgio, req, SECTOR_SIZE)) {
 		nfs_pageio_reset_read_mds(pgio);
 		return;
@@ -1859,6 +1979,9 @@ bl_pg_test_read(struct nfs_pageio_descriptor *pgio, struct nfs_page *prev,
 {
 	if (!is_aligned_req(pgio, req, SECTOR_SIZE))
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pnfs_generic_pg_test(pgio, prev, req);
 }
@@ -1877,7 +2000,11 @@ static u64 pnfs_num_cont_bytes(struct inode *inode, pgoff_t idx)
 	if (end != NFS_I(inode)->npages) {
 		rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		end = radix_tree_next_hole(&mapping->page_tree, idx + 1, ULONG_MAX);
+=======
+		end = page_cache_next_hole(mapping, idx + 1, ULONG_MAX);
+>>>>>>> v3.18
 =======
 		end = page_cache_next_hole(mapping, idx + 1, ULONG_MAX);
 >>>>>>> v3.18
@@ -1893,6 +2020,7 @@ static u64 pnfs_num_cont_bytes(struct inode *inode, pgoff_t idx)
 static void
 bl_pg_init_write(struct nfs_pageio_descriptor *pgio, struct nfs_page *req)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (pgio->pg_dreq != NULL &&
 	    !is_aligned_req(req, PAGE_CACHE_SIZE)) {
@@ -1918,6 +2046,8 @@ bl_pg_test_write(struct nfs_pageio_descriptor *pgio, struct nfs_page *prev,
 		return false;
 
 =======
+=======
+>>>>>>> v3.18
 	u64 wb_size;
 
 	if (!is_aligned_req(pgio, req, PAGE_SIZE)) {
@@ -1944,6 +2074,9 @@ bl_pg_test_write(struct nfs_pageio_descriptor *pgio, struct nfs_page *prev,
 {
 	if (!is_aligned_req(pgio, req, PAGE_SIZE))
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pnfs_generic_pg_test(pgio, prev, req);
 }
@@ -1965,6 +2098,11 @@ static struct pnfs_layoutdriver_type blocklayout_type = {
 	.name				= "LAYOUT_BLOCK_VOLUME",
 	.owner				= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags				= PNFS_LAYOUTRET_ON_SETATTR |
+					  PNFS_READ_WHOLE_PAGE,
+>>>>>>> v3.18
 =======
 	.flags				= PNFS_LAYOUTRET_ON_SETATTR |
 					  PNFS_READ_WHOLE_PAGE,
@@ -1976,22 +2114,29 @@ static struct pnfs_layoutdriver_type blocklayout_type = {
 	.alloc_lseg			= bl_alloc_lseg,
 	.free_lseg			= bl_free_lseg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.encode_layoutcommit		= bl_encode_layoutcommit,
 	.cleanup_layoutcommit		= bl_cleanup_layoutcommit,
 	.set_layoutdriver		= bl_set_layoutdriver,
 	.clear_layoutdriver		= bl_clear_layoutdriver,
 =======
+=======
+>>>>>>> v3.18
 	.return_range			= bl_return_range,
 	.prepare_layoutcommit		= bl_prepare_layoutcommit,
 	.cleanup_layoutcommit		= bl_cleanup_layoutcommit,
 	.set_layoutdriver		= bl_set_layoutdriver,
 	.alloc_deviceid_node		= bl_alloc_deviceid_node,
 	.free_deviceid_node		= bl_free_deviceid_node,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.pg_read_ops			= &bl_pg_read_ops,
 	.pg_write_ops			= &bl_pg_write_ops,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct rpc_pipe_ops bl_upcall_ops = {
 	.upcall		= rpc_pipe_generic_upcall,
@@ -2121,6 +2266,8 @@ static struct pernet_operations nfs4blocklayout_net_ops = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int __init nfs4blocklayout_init(void)
 {
 	int ret;
@@ -2130,6 +2277,7 @@ static int __init nfs4blocklayout_init(void)
 	ret = pnfs_register_layoutdriver(&blocklayout_type);
 	if (ret)
 		goto out;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	ret = rpc_pipefs_notifier_register(&nfs4blocklayout_block);
@@ -2146,6 +2294,8 @@ out_notifier:
 out_remove:
 	pnfs_unregister_layoutdriver(&blocklayout_type);
 =======
+=======
+>>>>>>> v3.18
 	ret = bl_init_pipefs();
 	if (ret)
 		goto out_unregister;
@@ -2154,6 +2304,9 @@ out_remove:
 out_unregister:
 	pnfs_unregister_layoutdriver(&blocklayout_type);
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -2164,8 +2317,12 @@ static void __exit nfs4blocklayout_exit(void)
 	       __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rpc_pipefs_notifier_unregister(&nfs4blocklayout_block);
 	unregister_pernet_subsys(&nfs4blocklayout_net_ops);
+=======
+	bl_cleanup_pipefs();
+>>>>>>> v3.18
 =======
 	bl_cleanup_pipefs();
 >>>>>>> v3.18

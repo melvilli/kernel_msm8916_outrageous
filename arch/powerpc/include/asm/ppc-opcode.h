@@ -82,7 +82,10 @@
 #define	__REGA0_R31	31
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* opcode and xopcode for instructions */
 #define OP_TRAP 3
 #define OP_TRAP_64 2
@@ -130,6 +133,9 @@
 #define OP_STH  44
 #define OP_STHU 45
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* sorted alphabetically */
 #define PPC_INST_BHRBE			0x7c00025c
@@ -143,6 +149,10 @@
 #define PPC_INST_ISEL_MASK		0xfc00003e
 #define PPC_INST_LDARX			0x7c0000a8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PPC_INST_LOGMPP			0x7c0007e4
+>>>>>>> v3.18
 =======
 #define PPC_INST_LOGMPP			0x7c0007e4
 >>>>>>> v3.18
@@ -151,6 +161,11 @@
 #define PPC_INST_LWARX			0x7c000028
 #define PPC_INST_LWSYNC			0x7c2004ac
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PPC_INST_SYNC			0x7c0004ac
+#define PPC_INST_SYNC_MASK		0xfc0007fe
+>>>>>>> v3.18
 =======
 #define PPC_INST_SYNC			0x7c0004ac
 #define PPC_INST_SYNC_MASK		0xfc0007fe
@@ -161,13 +176,19 @@
 #define PPC_INST_MFSPR_PVR		0x7c1f42a6
 #define PPC_INST_MFSPR_PVR_MASK		0xfc1fffff
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PPC_INST_MSGSND			0x7c00019c
 #define PPC_INST_MSGSNDP		0x7c00011c
 =======
+=======
+>>>>>>> v3.18
 #define PPC_INST_MFTMR			0x7c0002dc
 #define PPC_INST_MSGSND			0x7c00019c
 #define PPC_INST_MSGSNDP		0x7c00011c
 #define PPC_INST_MTTMR			0x7c0003dc
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PPC_INST_NOP			0x60000000
 #define PPC_INST_POPCNTB		0x7c0000f4
@@ -201,6 +222,10 @@
 #define PPC_INST_TLBSRX_DOT		0x7c0006a5
 #define PPC_INST_XXLOR			0xf0000510
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PPC_INST_XXSWAPD		0xf0000250
+>>>>>>> v3.18
 =======
 #define PPC_INST_XXSWAPD		0xf0000250
 >>>>>>> v3.18
@@ -224,6 +249,10 @@
 #define PPC_INST_LD			0xe8000000
 #define PPC_INST_LHZ			0xa0000000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PPC_INST_LHBRX			0x7c00062c
+>>>>>>> v3.18
 =======
 #define PPC_INST_LHBRX			0x7c00062c
 >>>>>>> v3.18
@@ -246,7 +275,11 @@
 #define PPC_INST_MULHWU			0x7c000016
 #define PPC_INST_MULLI			0x1c000000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PPC_INST_DIVWU			0x7c0003d6
+=======
+#define PPC_INST_DIVWU			0x7c000396
+>>>>>>> v3.18
 =======
 #define PPC_INST_DIVWU			0x7c000396
 >>>>>>> v3.18
@@ -303,7 +336,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* POWER8 Micro Partition Prefetch (MPP) parameters */
 /* Address mask is common for LOGMPP instruction and MPPR SPR */
 #define PPC_MPPE_ADDRESS_MASK 0xffffffffc000
@@ -318,6 +354,9 @@
 #define PPC_LOGMPP_LOG_L2L3 (0x01ULL << 54)
 #define PPC_LOGMPP_LOG_ABORT (0x03ULL << 54)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Deal with instructions that older assemblers aren't aware of */
 #define	PPC_DCBAL(a, b)		stringify_in_c(.long PPC_INST_DCBAL | \
@@ -328,6 +367,11 @@
 					___PPC_RT(t) | ___PPC_RA(a) | \
 					___PPC_RB(b) | __PPC_EH(eh))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PPC_LOGMPP(b)		stringify_in_c(.long PPC_INST_LOGMPP | \
+					__PPC_RB(b))
+>>>>>>> v3.18
 =======
 #define PPC_LOGMPP(b)		stringify_in_c(.long PPC_INST_LOGMPP | \
 					__PPC_RB(b))
@@ -398,6 +442,11 @@
 #define XXLOR(t, a, b)		stringify_in_c(.long PPC_INST_XXLOR | \
 					       VSX_XX3((t), a, b))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define XXSWAPD(t, a)		stringify_in_c(.long PPC_INST_XXSWAPD | \
+					       VSX_XX3((t), a, a))
+>>>>>>> v3.18
 =======
 #define XXSWAPD(t, a)		stringify_in_c(.long PPC_INST_XXSWAPD | \
 					       VSX_XX3((t), a, a))
@@ -422,7 +471,10 @@
 					       | __PPC_RA(r))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* book3e thread control instructions */
 #define TMRN(x)			((((x) & 0x1f) << 16) | (((x) & 0x3e0) << 6))
 #define MTTMR(tmr, r)		stringify_in_c(.long PPC_INST_MTTMR | \
@@ -430,5 +482,8 @@
 #define MFTMR(tmr, r)		stringify_in_c(.long PPC_INST_MFTMR | \
 					       TMRN(tmr) | ___PPC_RT(r))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_POWERPC_PPC_OPCODE_H */

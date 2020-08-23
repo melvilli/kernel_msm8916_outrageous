@@ -10,6 +10,7 @@
 #include <linux/linkage.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	__CPUINIT
 	.arch	armv7-a
@@ -28,6 +29,8 @@ ENTRY(secondary_trampoline)
 	bx	r1
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/memory.h>
 
 	.arch	armv7-a
@@ -48,6 +51,9 @@ ENTRY(secondary_trampoline)
 	.align
 1:	.long	.
 	.long	socfpga_cpu1start_addr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENTRY(secondary_trampoline_end)
 

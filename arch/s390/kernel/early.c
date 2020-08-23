@@ -207,6 +207,10 @@ static noinline __init void clear_bss_section(void)
 static noinline __init void init_kernel_storage_key(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if PAGE_DEFAULT_KEY
+>>>>>>> v3.18
 =======
 #if PAGE_DEFAULT_KEY
 >>>>>>> v3.18
@@ -218,6 +222,10 @@ static noinline __init void init_kernel_storage_key(void)
 		page_set_storage_key(init_pfn << PAGE_SHIFT,
 				     PAGE_DEFAULT_KEY, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -265,6 +273,10 @@ static void early_pgm_check_handler(void)
 {
 	const struct exception_table_entry *fixup;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long cr0, cr0_new;
+>>>>>>> v3.18
 =======
 	unsigned long cr0, cr0_new;
 >>>>>>> v3.18
@@ -275,14 +287,20 @@ static void early_pgm_check_handler(void)
 	if (!fixup)
 		disabled_wait(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	S390_lowcore.program_old_psw.addr = extable_fixup(fixup)|PSW_ADDR_AMODE;
 =======
+=======
+>>>>>>> v3.18
 	/* Disable low address protection before storing into lowcore. */
 	__ctl_store(cr0, 0, 0);
 	cr0_new = cr0 & ~(1UL << 28);
 	__ctl_load(cr0_new, 0, 0);
 	S390_lowcore.program_old_psw.addr = extable_fixup(fixup)|PSW_ADDR_AMODE;
 	__ctl_load(cr0, 0, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -400,8 +418,11 @@ static __init void detect_machine_facilities(void)
 	if (test_facility(3))
 		S390_lowcore.machine_flags |= MACHINE_FLAG_IDTE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_facility(27))
 		S390_lowcore.machine_flags |= MACHINE_FLAG_MVCOS;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (test_facility(40))
@@ -409,13 +430,19 @@ static __init void detect_machine_facilities(void)
 	if (test_facility(50) && test_facility(73))
 		S390_lowcore.machine_flags |= MACHINE_FLAG_TE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_facility(66))
 		S390_lowcore.machine_flags |= MACHINE_FLAG_RRBM;
 =======
+=======
+>>>>>>> v3.18
 	if (test_facility(51))
 		S390_lowcore.machine_flags |= MACHINE_FLAG_TLB_LC;
 	if (test_facility(129))
 		S390_lowcore.machine_flags |= MACHINE_FLAG_VX;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 }
@@ -513,7 +540,11 @@ void __init startup_init(void)
 	detect_machine_facilities();
 	setup_topology();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sclp_facilities_detect();
+=======
+	sclp_early_detect();
+>>>>>>> v3.18
 =======
 	sclp_early_detect();
 >>>>>>> v3.18

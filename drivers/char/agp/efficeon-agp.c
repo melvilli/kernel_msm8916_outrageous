@@ -129,7 +129,10 @@ static void efficeon_cleanup(void)
 static int efficeon_configure(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 temp2;
@@ -145,8 +148,13 @@ static int efficeon_configure(void)
 
 	/* address to map to */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
 						    AGP_APERTURE_BAR);

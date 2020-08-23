@@ -47,7 +47,10 @@
 #include "hw.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* The order of these strings must match the order of the fields in
  * struct alx_hw_stats
  * See hw.h
@@ -126,6 +129,9 @@ static u32 alx_get_supported_speeds(struct alx_hw *hw)
 
 	return supported;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int alx_get_settings(struct net_device *netdev, struct ethtool_cmd *ecmd)
@@ -133,6 +139,7 @@ static int alx_get_settings(struct net_device *netdev, struct ethtool_cmd *ecmd)
 	struct alx_priv *alx = netdev_priv(netdev);
 	struct alx_hw *hw = &alx->hw;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ecmd->supported = SUPPORTED_10baseT_Half |
 			  SUPPORTED_10baseT_Full |
@@ -144,6 +151,8 @@ static int alx_get_settings(struct net_device *netdev, struct ethtool_cmd *ecmd)
 	if (alx_hw_giga(hw))
 		ecmd->supported |= SUPPORTED_1000baseT_Full;
 =======
+=======
+>>>>>>> v3.18
 	ecmd->supported = SUPPORTED_Autoneg |
 			  SUPPORTED_TP |
 			  SUPPORTED_Pause |
@@ -151,6 +160,9 @@ static int alx_get_settings(struct net_device *netdev, struct ethtool_cmd *ecmd)
 	if (alx_hw_giga(hw))
 		ecmd->supported |= SUPPORTED_1000baseT_Full;
 	ecmd->supported |= alx_get_supported_speeds(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ecmd->advertising = ADVERTISED_TP;
@@ -160,6 +172,10 @@ static int alx_get_settings(struct net_device *netdev, struct ethtool_cmd *ecmd)
 	ecmd->port = PORT_TP;
 	ecmd->phy_address = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -181,6 +197,7 @@ static int alx_get_settings(struct net_device *netdev, struct ethtool_cmd *ecmd)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hw->link_speed != SPEED_UNKNOWN) {
 		ethtool_cmd_speed_set(ecmd,
 				      hw->link_speed - hw->link_speed % 10);
@@ -189,6 +206,10 @@ static int alx_get_settings(struct net_device *netdev, struct ethtool_cmd *ecmd)
 		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
 		ecmd->duplex = DUPLEX_UNKNOWN;
 	}
+=======
+	ethtool_cmd_speed_set(ecmd, hw->link_speed);
+	ecmd->duplex = hw->duplex;
+>>>>>>> v3.18
 =======
 	ethtool_cmd_speed_set(ecmd, hw->link_speed);
 	ecmd->duplex = hw->duplex;
@@ -206,6 +227,7 @@ static int alx_set_settings(struct net_device *netdev, struct ethtool_cmd *ecmd)
 	ASSERT_RTNL();
 
 	if (ecmd->autoneg == AUTONEG_ENABLE) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ecmd->advertising & ADVERTISED_1000baseT_Half)
 			return -EINVAL;
@@ -230,6 +252,8 @@ static int alx_set_settings(struct net_device *netdev, struct ethtool_cmd *ecmd)
 			return -EINVAL;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (ecmd->advertising & ~alx_get_supported_speeds(hw))
 			return -EINVAL;
 		adv_cfg = ecmd->advertising | ADVERTISED_Autoneg;
@@ -239,6 +263,9 @@ static int alx_set_settings(struct net_device *netdev, struct ethtool_cmd *ecmd)
 
 		if (!adv_cfg || adv_cfg == ADVERTISED_1000baseT_Full)
 			return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -252,6 +279,7 @@ static void alx_get_pauseparam(struct net_device *netdev,
 	struct alx_priv *alx = netdev_priv(netdev);
 	struct alx_hw *hw = &alx->hw;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (hw->flowctrl & ALX_FC_ANEG &&
 	    hw->adv_cfg & ADVERTISED_Autoneg)
@@ -269,10 +297,15 @@ static void alx_get_pauseparam(struct net_device *netdev,
 	else
 		pause->rx_pause = 0;
 =======
+=======
+>>>>>>> v3.18
 	pause->autoneg = !!(hw->flowctrl & ALX_FC_ANEG &&
 			    hw->adv_cfg & ADVERTISED_Autoneg);
 	pause->tx_pause = !!(hw->flowctrl & ALX_FC_TX);
 	pause->rx_pause = !!(hw->flowctrl & ALX_FC_RX);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -307,7 +340,12 @@ static int alx_set_pauseparam(struct net_device *netdev,
 	if (reconfig_phy) {
 		err = alx_setup_speed_duplex(hw, hw->adv_cfg, fc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return err;
+=======
+		if (err)
+			return err;
+>>>>>>> v3.18
 =======
 		if (err)
 			return err;
@@ -338,7 +376,12 @@ static void alx_set_msglevel(struct net_device *netdev, u32 data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void alx_get_wol(struct net_device *netdev, struct ethtool_wolinfo *wol)
+=======
+static void alx_get_ethtool_stats(struct net_device *netdev,
+				  struct ethtool_stats *estats, u64 *data)
+>>>>>>> v3.18
 =======
 static void alx_get_ethtool_stats(struct net_device *netdev,
 				  struct ethtool_stats *estats, u64 *data)
@@ -347,6 +390,7 @@ static void alx_get_ethtool_stats(struct net_device *netdev,
 	struct alx_priv *alx = netdev_priv(netdev);
 	struct alx_hw *hw = &alx->hw;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	wol->supported = WAKE_MAGIC | WAKE_PHY;
 	wol->wolopts = 0;
@@ -387,6 +431,8 @@ static void alx_get_drvinfo(struct net_device *netdev,
 	strlcpy(drvinfo->bus_info, pci_name(alx->hw.pdev),
 		sizeof(drvinfo->bus_info));
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&alx->stats_lock);
 
 	alx_update_hw_stats(hw);
@@ -417,6 +463,9 @@ static int alx_get_sset_count(struct net_device *netdev, int sset)
 	default:
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -426,6 +475,7 @@ const struct ethtool_ops alx_ethtool_ops = {
 	.get_pauseparam	= alx_get_pauseparam,
 	.set_pauseparam	= alx_set_pauseparam,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_drvinfo	= alx_get_drvinfo,
 	.get_msglevel	= alx_get_msglevel,
 	.set_msglevel	= alx_set_msglevel,
@@ -433,11 +483,16 @@ const struct ethtool_ops alx_ethtool_ops = {
 	.set_wol	= alx_set_wol,
 	.get_link	= ethtool_op_get_link,
 =======
+=======
+>>>>>>> v3.18
 	.get_msglevel	= alx_get_msglevel,
 	.set_msglevel	= alx_set_msglevel,
 	.get_link	= ethtool_op_get_link,
 	.get_strings	= alx_get_strings,
 	.get_sset_count	= alx_get_sset_count,
 	.get_ethtool_stats	= alx_get_ethtool_stats,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

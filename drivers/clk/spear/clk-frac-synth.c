@@ -117,7 +117,11 @@ static int clk_frac_set_rate(struct clk_hw *hw, unsigned long drate,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct clk_ops clk_frac_ops = {
+=======
+static struct clk_ops clk_frac_ops = {
+>>>>>>> v3.18
 =======
 static struct clk_ops clk_frac_ops = {
 >>>>>>> v3.18

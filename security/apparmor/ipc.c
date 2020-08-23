@@ -55,7 +55,10 @@ static int aa_audit_ptrace(struct aa_profile *profile,
 /**
  * aa_may_ptrace - test if tracer task can trace the tracee
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @tracer_task: task who will do the tracing  (NOT NULL)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @tracer: profile of the task doing the tracing  (NOT NULL)
@@ -65,8 +68,13 @@ static int aa_audit_ptrace(struct aa_profile *profile,
  * Returns: %0 else error code if permission denied or error
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int aa_may_ptrace(struct task_struct *tracer_task, struct aa_profile *tracer,
 		  struct aa_profile *tracee, unsigned int mode)
+=======
+int aa_may_ptrace(struct aa_profile *tracer, struct aa_profile *tracee,
+		  unsigned int mode)
+>>>>>>> v3.18
 =======
 int aa_may_ptrace(struct aa_profile *tracer, struct aa_profile *tracee,
 		  unsigned int mode)
@@ -81,7 +89,11 @@ int aa_may_ptrace(struct aa_profile *tracer, struct aa_profile *tracee,
 		return 0;
 	/* log this capability request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return aa_capable(tracer_task, tracer, CAP_SYS_PTRACE, 1);
+=======
+	return aa_capable(tracer, CAP_SYS_PTRACE, 1);
+>>>>>>> v3.18
 =======
 	return aa_capable(tracer, CAP_SYS_PTRACE, 1);
 >>>>>>> v3.18
@@ -108,6 +120,7 @@ int aa_ptrace(struct task_struct *tracer, struct task_struct *tracee,
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct aa_profile *tracer_p;
 	/* cred released below */
 	const struct cred *cred = get_task_cred(tracer);
@@ -126,6 +139,8 @@ int aa_ptrace(struct task_struct *tracer, struct task_struct *tracee,
 	}
 	put_cred(cred);
 =======
+=======
+>>>>>>> v3.18
 	struct aa_profile *tracer_p = aa_get_task_profile(tracer);
 	int error = 0;
 
@@ -138,6 +153,9 @@ int aa_ptrace(struct task_struct *tracer, struct task_struct *tracee,
 		aa_put_profile(tracee_p);
 	}
 	aa_put_profile(tracer_p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return error;

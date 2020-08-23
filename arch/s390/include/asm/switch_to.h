@@ -9,6 +9,7 @@
 
 #include <linux/thread_info.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern struct task_struct *__switch_to(void *, void *);
 extern void update_per_regs(struct task_struct *task);
@@ -66,6 +67,8 @@ static inline void restore_fp_regs(s390_fp_regs *fpregs)
 		"	ld	15,%O0+128(%R0)\n"
 		: : "Q" (*fpregs));
 =======
+=======
+>>>>>>> v3.18
 #include <asm/ptrace.h>
 
 extern struct task_struct *__switch_to(void *, void *);
@@ -214,13 +217,22 @@ static inline void restore_fp_vx_regs(struct task_struct *task)
 	else
 #endif
 	restore_fp_regs(task->thread.fp_regs.fprs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void save_access_regs(unsigned int *acrs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asm volatile("stam 0,15,%0" : "=Q" (*acrs));
+=======
+	typedef struct { int _[NUM_ACRS]; } acrstype;
+
+	asm volatile("stam 0,15,%0" : "=Q" (*(acrstype *)acrs));
+>>>>>>> v3.18
 =======
 	typedef struct { int _[NUM_ACRS]; } acrstype;
 
@@ -231,7 +243,13 @@ static inline void save_access_regs(unsigned int *acrs)
 static inline void restore_access_regs(unsigned int *acrs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asm volatile("lam 0,15,%0" : : "Q" (*acrs));
+=======
+	typedef struct { int _[NUM_ACRS]; } acrstype;
+
+	asm volatile("lam 0,15,%0" : : "Q" (*(acrstype *)acrs));
+>>>>>>> v3.18
 =======
 	typedef struct { int _[NUM_ACRS]; } acrstype;
 
@@ -242,7 +260,12 @@ static inline void restore_access_regs(unsigned int *acrs)
 #define switch_to(prev,next,last) do {					\
 	if (prev->mm) {							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		save_fp_regs(&prev->thread.fp_regs);			\
+=======
+		save_fp_ctl(&prev->thread.fp_regs.fpc);			\
+		save_fp_vx_regs(prev);					\
+>>>>>>> v3.18
 =======
 		save_fp_ctl(&prev->thread.fp_regs.fpc);			\
 		save_fp_vx_regs(prev);					\
@@ -252,26 +275,35 @@ static inline void restore_access_regs(unsigned int *acrs)
 	}								\
 	if (next->mm) {							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		restore_fp_regs(&next->thread.fp_regs);			\
 		restore_access_regs(&next->thread.acrs[0]);		\
 		restore_ri_cb(next->thread.ri_cb, prev->thread.ri_cb);	\
 		update_per_regs(next);					\
 =======
+=======
+>>>>>>> v3.18
 		update_cr_regs(next);					\
 		restore_fp_ctl(&next->thread.fp_regs.fpc);		\
 		restore_fp_vx_regs(next);				\
 		restore_access_regs(&next->thread.acrs[0]);		\
 		restore_ri_cb(next->thread.ri_cb, prev->thread.ri_cb);	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}								\
 	prev = __switch_to(prev,next);					\
 } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define finish_arch_switch(prev) do {					     \
 	set_fs(current->thread.mm_segment);				     \
 } while (0)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __ASM_SWITCH_TO_H */

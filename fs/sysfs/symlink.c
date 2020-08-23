@@ -12,6 +12,7 @@
 
 #include <linux/fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gfp.h>
 #include <linux/mount.h>
 #include <linux/module.h>
@@ -21,11 +22,16 @@
 #include <linux/module.h>
 #include <linux/kobject.h>
 >>>>>>> v3.18
+=======
+#include <linux/module.h>
+#include <linux/kobject.h>
+>>>>>>> v3.18
 #include <linux/mutex.h>
 #include <linux/security.h>
 
 #include "sysfs.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int sysfs_do_create_link_sd(struct sysfs_dirent *parent_sd,
 				   struct kobject *target,
@@ -91,6 +97,8 @@ static int sysfs_do_create_link_sd(struct sysfs_dirent *parent_sd,
 	sysfs_put(sd);
 	return error;
 =======
+=======
+>>>>>>> v3.18
 static int sysfs_do_create_link_sd(struct kernfs_node *parent,
 				   struct kobject *target_kobj,
 				   const char *name, int warn)
@@ -123,11 +131,15 @@ static int sysfs_do_create_link_sd(struct kernfs_node *parent,
 	if (warn && PTR_ERR(kn) == -EEXIST)
 		sysfs_warn_dup(parent, name);
 	return PTR_ERR(kn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  *	sysfs_create_link_sd - create symlink to a given object.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *	@sd:		directory we're creating the link in.
  *	@target:	object we're pointing to.
@@ -138,6 +150,8 @@ int sysfs_create_link_sd(struct sysfs_dirent *sd, struct kobject *target,
 {
 	return sysfs_do_create_link_sd(sd, target, name, 1);
 =======
+=======
+>>>>>>> v3.18
  *	@kn:		directory we're creating the link in.
  *	@target:	object we're pointing to.
  *	@name:		name of the symlink.
@@ -146,12 +160,16 @@ int sysfs_create_link_sd(struct kernfs_node *kn, struct kobject *target,
 			 const char *name)
 {
 	return sysfs_do_create_link_sd(kn, target, name, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int sysfs_do_create_link(struct kobject *kobj, struct kobject *target,
 				const char *name, int warn)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sysfs_dirent *parent_sd = NULL;
 
@@ -165,6 +183,8 @@ static int sysfs_do_create_link(struct kobject *kobj, struct kobject *target,
 
 	return sysfs_do_create_link_sd(parent_sd, target, name, warn);
 =======
+=======
+>>>>>>> v3.18
 	struct kernfs_node *parent = NULL;
 
 	if (!kobj)
@@ -176,6 +196,9 @@ static int sysfs_do_create_link(struct kobject *kobj, struct kobject *target,
 		return -EFAULT;
 
 	return sysfs_do_create_link_sd(parent, target, name, warn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -191,6 +214,10 @@ int sysfs_create_link(struct kobject *kobj, struct kobject *target,
 	return sysfs_do_create_link(kobj, target, name, 1);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(sysfs_create_link);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(sysfs_create_link);
 >>>>>>> v3.18
@@ -224,12 +251,15 @@ void sysfs_delete_link(struct kobject *kobj, struct kobject *targ,
 {
 	const void *ns = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&sysfs_assoc_lock);
 	if (targ->sd && sysfs_ns_type(kobj->sd))
 		ns = targ->sd->s_ns;
 	spin_unlock(&sysfs_assoc_lock);
 	sysfs_hash_and_remove(kobj->sd, ns, name);
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * We don't own @target and it may be removed at any time.
@@ -241,6 +271,9 @@ void sysfs_delete_link(struct kobject *kobj, struct kobject *targ,
 		ns = targ->sd->ns;
 	spin_unlock(&sysfs_symlink_target_lock);
 	kernfs_remove_by_name_ns(kobj->sd, name, ns);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -249,6 +282,7 @@ void sysfs_delete_link(struct kobject *kobj, struct kobject *targ,
  *	@kobj:	object we're acting for.
  *	@name:	name of the symlink to remove.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void sysfs_remove_link(struct kobject * kobj, const char * name)
@@ -266,6 +300,8 @@ void sysfs_remove_link(struct kobject * kobj, const char * name)
 /**
  *	sysfs_rename_link - rename symlink in object's directory.
 =======
+=======
+>>>>>>> v3.18
 void sysfs_remove_link(struct kobject *kobj, const char *name)
 {
 	struct kernfs_node *parent = NULL;
@@ -281,11 +317,15 @@ EXPORT_SYMBOL_GPL(sysfs_remove_link);
 
 /**
  *	sysfs_rename_link_ns - rename symlink in object's directory.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	@kobj:	object we're acting for.
  *	@targ:	object we're pointing to.
  *	@old:	previous name of the symlink.
  *	@new:	new name of the symlink.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  *	A helper function for the common rename symlink idiom.
@@ -427,6 +467,8 @@ EXPORT_SYMBOL_GPL(sysfs_create_link);
 EXPORT_SYMBOL_GPL(sysfs_remove_link);
 EXPORT_SYMBOL_GPL(sysfs_rename_link);
 =======
+=======
+>>>>>>> v3.18
  *	@new_ns: new namespace of the symlink.
  *
  *	A helper function for the common rename symlink idiom.
@@ -464,4 +506,7 @@ out:
 	return result;
 }
 EXPORT_SYMBOL_GPL(sysfs_rename_link_ns);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -97,7 +97,10 @@ static void __dlm_print_lock(struct dlm_lock *lock)
 void __dlm_print_one_lock_resource(struct dlm_lock_resource *res)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *iter2;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dlm_lock *lock;
@@ -122,6 +125,7 @@ void __dlm_print_one_lock_resource(struct dlm_lock_resource *res)
 	dlm_print_lockres_refmap(res);
 	printk("  granted queue:\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each(iter2, &res->granted) {
 		lock = list_entry(iter2, struct dlm_lock, list);
 		__dlm_print_lock(lock);
@@ -135,6 +139,8 @@ void __dlm_print_one_lock_resource(struct dlm_lock_resource *res)
 	list_for_each(iter2, &res->blocked) {
 		lock = list_entry(iter2, struct dlm_lock, list);
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry(lock, &res->granted, list) {
 		__dlm_print_lock(lock);
 	}
@@ -144,6 +150,9 @@ void __dlm_print_one_lock_resource(struct dlm_lock_resource *res)
 	}
 	printk("  blocked queue:\n");
 	list_for_each_entry(lock, &res->blocked, list) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__dlm_print_lock(lock);
 	}
@@ -358,7 +367,11 @@ void dlm_print_one_mle(struct dlm_master_list_entry *mle)
 #ifdef CONFIG_DEBUG_FS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dentry *dlm_debugfs_root = NULL;
+=======
+static struct dentry *dlm_debugfs_root;
+>>>>>>> v3.18
 =======
 static struct dentry *dlm_debugfs_root;
 >>>>>>> v3.18
@@ -466,7 +479,10 @@ static int debug_mle_print(struct dlm_ctxt *dlm, char *buf, int len)
 	struct dlm_master_list_entry *mle;
 	struct hlist_head *bucket;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hlist_node *list;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i, out = 0;
@@ -479,9 +495,13 @@ static int debug_mle_print(struct dlm_ctxt *dlm, char *buf, int len)
 	for (i = 0; i < DLM_HASH_BUCKETS; i++) {
 		bucket = dlm_master_hash(dlm, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hlist_for_each(list, bucket) {
 			mle = hlist_entry(list, struct dlm_master_list_entry,
 					  master_hash_node);
+=======
+		hlist_for_each_entry(mle, bucket, master_hash_node) {
+>>>>>>> v3.18
 =======
 		hlist_for_each_entry(mle, bucket, master_hash_node) {
 >>>>>>> v3.18
@@ -681,6 +701,7 @@ static int debug_lockres_open(struct inode *inode, struct file *file)
 {
 	struct dlm_ctxt *dlm = inode->i_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = -ENOMEM;
 	struct seq_file *seq;
 	struct debug_lockres *dl = NULL;
@@ -707,6 +728,8 @@ static int debug_lockres_open(struct inode *inode, struct file *file)
 	seq = file->private_data;
 	seq->private = dl;
 =======
+=======
+>>>>>>> v3.18
 	struct debug_lockres *dl;
 	void *buf;
 
@@ -720,6 +743,9 @@ static int debug_lockres_open(struct inode *inode, struct file *file)
 
 	dl->dl_len = PAGE_SIZE;
 	dl->dl_buf = buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dlm_grab(dlm);
@@ -727,18 +753,24 @@ static int debug_lockres_open(struct inode *inode, struct file *file)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 bail:
 	if (dl)
 		kfree(dl->dl_buf);
 	kfree(dl);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 bailfree:
 	kfree(buf);
 bail:
 	mlog_errno(-ENOMEM);
 	return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

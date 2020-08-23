@@ -58,7 +58,10 @@ static const struct iio_dummy_accel_calibscale dummy_scales[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IIO_SIMPLE_DUMMY_EVENTS
 
 /*
@@ -73,6 +76,9 @@ static const struct iio_event_spec iio_dummy_event = {
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * iio_dummy_channels - Description of available channels
@@ -108,12 +114,18 @@ static const struct iio_chan_spec iio_dummy_channels[] = {
 		 */
 		BIT(IIO_CHAN_INFO_SCALE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * sampling_frequency
 		 * The frequency in Hz at which the channels are sampled
 		 */
 		.info_mask_shared_by_dir = BIT(IIO_CHAN_INFO_SAMP_FREQ),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* The ordering of elements in the buffer via an enum */
 		.scan_index = voltage0,
@@ -125,12 +137,17 @@ static const struct iio_chan_spec iio_dummy_channels[] = {
 		},
 #ifdef CONFIG_IIO_SIMPLE_DUMMY_EVENTS
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * simple event - triggered when value rises above
 		 * a threshold
 		 */
 		.event_mask = IIO_EV_BIT(IIO_EV_TYPE_THRESH,
 					 IIO_EV_DIR_RISING),
+=======
+		.event_spec = &iio_dummy_event,
+		.num_event_specs = 1,
+>>>>>>> v3.18
 =======
 		.event_spec = &iio_dummy_event,
 		.num_event_specs = 1,
@@ -161,11 +178,17 @@ static const struct iio_chan_spec iio_dummy_channels[] = {
 		 */
 		.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * sampling_frequency
 		 * The frequency in Hz at which the channels are sampled
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.scan_index = diffvoltage1m2,
 		.scan_type = { /* Description of storage in buffer */
@@ -185,6 +208,10 @@ static const struct iio_chan_spec iio_dummy_channels[] = {
 		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
 		.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.info_mask_shared_by_dir = BIT(IIO_CHAN_INFO_SAMP_FREQ),
+>>>>>>> v3.18
 =======
 		.info_mask_shared_by_dir = BIT(IIO_CHAN_INFO_SAMP_FREQ),
 >>>>>>> v3.18
@@ -215,6 +242,10 @@ static const struct iio_chan_spec iio_dummy_channels[] = {
 		BIT(IIO_CHAN_INFO_CALIBSCALE) |
 		BIT(IIO_CHAN_INFO_CALIBBIAS),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.info_mask_shared_by_dir = BIT(IIO_CHAN_INFO_SAMP_FREQ),
+>>>>>>> v3.18
 =======
 		.info_mask_shared_by_dir = BIT(IIO_CHAN_INFO_SAMP_FREQ),
 >>>>>>> v3.18
@@ -318,12 +349,18 @@ static int iio_dummy_read_raw(struct iio_dev *indio_dev,
 		ret = IIO_VAL_INT_PLUS_MICRO;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case IIO_CHAN_INFO_SAMP_FREQ:
 		*val = 3;
 		*val2 = 33;
 		ret = IIO_VAL_INT_PLUS_NANO;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
@@ -508,7 +545,12 @@ static int iio_dummy_probe(int index)
 	 * number of channels by 1.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iio_simple_dummy_configure_buffer(indio_dev, iio_dummy_channels, 5);
+=======
+	ret = iio_simple_dummy_configure_buffer(indio_dev,
+						iio_dummy_channels, 5);
+>>>>>>> v3.18
 =======
 	ret = iio_simple_dummy_configure_buffer(indio_dev,
 						iio_dummy_channels, 5);
@@ -582,6 +624,10 @@ static __init int iio_dummy_init(void)
 {
 	int i, ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -613,6 +659,10 @@ static __exit void iio_dummy_exit(void)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

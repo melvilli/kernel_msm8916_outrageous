@@ -47,7 +47,11 @@ static int via_driver_open(struct drm_device *dev, struct drm_file *file)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void via_driver_postclose(struct drm_device *dev, struct drm_file *file)
+=======
+static void via_driver_postclose(struct drm_device *dev, struct drm_file *file)
+>>>>>>> v3.18
 =======
 static void via_driver_postclose(struct drm_device *dev, struct drm_file *file)
 >>>>>>> v3.18
@@ -67,9 +71,14 @@ static const struct file_operations via_driver_fops = {
 	.release = drm_release,
 	.unlocked_ioctl = drm_ioctl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mmap = drm_mmap,
 	.poll = drm_poll,
 	.fasync = drm_fasync,
+=======
+	.mmap = drm_legacy_mmap,
+	.poll = drm_poll,
+>>>>>>> v3.18
 =======
 	.mmap = drm_legacy_mmap,
 	.poll = drm_poll,
@@ -83,7 +92,11 @@ static const struct file_operations via_driver_fops = {
 static struct drm_driver driver = {
 	.driver_features =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    DRIVER_USE_AGP | DRIVER_USE_MTRR | DRIVER_HAVE_IRQ |
+=======
+	    DRIVER_USE_AGP | DRIVER_HAVE_IRQ |
+>>>>>>> v3.18
 =======
 	    DRIVER_USE_AGP | DRIVER_HAVE_IRQ |
 >>>>>>> v3.18
@@ -94,6 +107,10 @@ static struct drm_driver driver = {
 	.preclose = via_reclaim_buffers_locked,
 	.postclose = via_driver_postclose,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_busid = drm_pci_set_busid,
+>>>>>>> v3.18
 =======
 	.set_busid = drm_pci_set_busid,
 >>>>>>> v3.18

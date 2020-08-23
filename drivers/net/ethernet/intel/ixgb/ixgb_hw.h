@@ -760,6 +760,7 @@ struct ixgb_hw_stats {
 
 /* Function Prototypes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool ixgb_adapter_stop(struct ixgb_hw *hw);
 extern bool ixgb_init_hw(struct ixgb_hw *hw);
 extern bool ixgb_adapter_start(struct ixgb_hw *hw);
@@ -782,6 +783,8 @@ extern void ixgb_write_vfta(struct ixgb_hw *hw,
 				 u32 offset,
 				 u32 value);
 =======
+=======
+>>>>>>> v3.18
 bool ixgb_adapter_stop(struct ixgb_hw *hw);
 bool ixgb_init_hw(struct ixgb_hw *hw);
 bool ixgb_adapter_start(struct ixgb_hw *hw);
@@ -796,6 +799,9 @@ void ixgb_mc_addr_list_update(struct ixgb_hw *hw, u8 *mc_addr_list,
 
 /* Vfta functions */
 void ixgb_write_vfta(struct ixgb_hw *hw, u32 offset, u32 value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Access functions to eeprom data */

@@ -29,6 +29,11 @@
 
 #include <asm/bootinfo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/bootinfo-vme.h>
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 =======
 #include <asm/bootinfo-vme.h>
 #include <asm/byteorder.h>
@@ -56,9 +61,15 @@ static irq_handler_t tick_handler;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bvme6000_parse_bootinfo(const struct bi_record *bi)
 {
 	if (bi->tag == BI_VME_TYPE)
+=======
+int __init bvme6000_parse_bootinfo(const struct bi_record *bi)
+{
+	if (be16_to_cpu(bi->tag) == BI_VME_TYPE)
+>>>>>>> v3.18
 =======
 int __init bvme6000_parse_bootinfo(const struct bi_record *bi)
 {

@@ -642,8 +642,12 @@ alloc_scq(struct idt77252_dev *card, int class)
 	if (!scq)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scq->base = pci_alloc_consistent(card->pcidev, SCQ_SIZE,
 					 &scq->paddr);
+=======
+	scq->base = pci_zalloc_consistent(card->pcidev, SCQ_SIZE, &scq->paddr);
+>>>>>>> v3.18
 =======
 	scq->base = pci_zalloc_consistent(card->pcidev, SCQ_SIZE, &scq->paddr);
 >>>>>>> v3.18
@@ -652,7 +656,10 @@ alloc_scq(struct idt77252_dev *card, int class)
 		return NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(scq->base, 0, SCQ_SIZE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -980,8 +987,13 @@ init_rsq(struct idt77252_dev *card)
 	struct rsq_entry *rsqe;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	card->rsq.base = pci_alloc_consistent(card->pcidev, RSQSIZE,
 					      &card->rsq.paddr);
+=======
+	card->rsq.base = pci_zalloc_consistent(card->pcidev, RSQSIZE,
+					       &card->rsq.paddr);
+>>>>>>> v3.18
 =======
 	card->rsq.base = pci_zalloc_consistent(card->pcidev, RSQSIZE,
 					       &card->rsq.paddr);
@@ -991,7 +1003,10 @@ init_rsq(struct idt77252_dev *card)
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(card->rsq.base, 0, RSQSIZE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2567,6 +2582,7 @@ done:
 		while (atomic_read(&vc->scq->used) > 0) {
 			timeout = msleep_interruptible(timeout);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!timeout)
 				break;
 		}
@@ -2574,12 +2590,17 @@ done:
 			printk("%s: SCQ drain timeout: %u used\n",
 			       card->name, atomic_read(&vc->scq->used));
 =======
+=======
+>>>>>>> v3.18
 			if (!timeout) {
 				pr_warn("%s: SCQ drain timeout: %u used\n",
 					card->name, atomic_read(&vc->scq->used));
 				break;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		writel(TCMDQ_HALT | vc->index, SAR_REG_TCMDQ);
@@ -3425,8 +3446,14 @@ static int init_card(struct atm_dev *dev)
 
 	/* Initialize RAW Cell Handle Register  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	card->raw_cell_hnd = pci_alloc_consistent(card->pcidev, 2 * sizeof(u32),
 						  &card->raw_cell_paddr);
+=======
+	card->raw_cell_hnd = pci_zalloc_consistent(card->pcidev,
+						   2 * sizeof(u32),
+						   &card->raw_cell_paddr);
+>>>>>>> v3.18
 =======
 	card->raw_cell_hnd = pci_zalloc_consistent(card->pcidev,
 						   2 * sizeof(u32),
@@ -3438,7 +3465,10 @@ static int init_card(struct atm_dev *dev)
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(card->raw_cell_hnd, 0, 2 * sizeof(u32));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	writel(card->raw_cell_paddr, SAR_REG_RAWHND);

@@ -749,7 +749,11 @@ const struct seq_operations cpuinfo_op = {
 static char brandname[MAX_BRANDS][128];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char * __cpuinit
+=======
+static char *
+>>>>>>> v3.18
 =======
 static char *
 >>>>>>> v3.18
@@ -783,7 +787,11 @@ get_model_name(__u8 family, __u8 model)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -859,7 +867,11 @@ identify_cpu (struct cpuinfo_ia64 *c)
  * 3. the minimum of the cache stride sizes for "clflush_cache_range()".
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -928,15 +940,21 @@ get_cache_info(void)
  * as a 'CPU state barrier', nothing should get across.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit
 cpu_init (void)
 {
 	extern void __cpuinit ia64_mmu_init (void *);
 =======
+=======
+>>>>>>> v3.18
 void
 cpu_init (void)
 {
 	extern void ia64_mmu_init(void *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	static unsigned long max_num_phys_stacked = IA64_NUM_PHYS_STACK_REG;
 	unsigned long num_phys_stacked;
@@ -1083,6 +1101,10 @@ static int __init run_dmi_scan(void)
 {
 	dmi_scan_machine();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dmi_memdev_walk();
+>>>>>>> v3.18
 =======
 	dmi_memdev_walk();
 >>>>>>> v3.18

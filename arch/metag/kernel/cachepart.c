@@ -56,7 +56,11 @@ unsigned int get_global_icache_size(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int get_thread_cache_size(unsigned int cache, int thread_id)
+=======
+static int get_thread_cache_size(unsigned int cache, int thread_id)
+>>>>>>> v3.18
 =======
 static int get_thread_cache_size(unsigned int cache, int thread_id)
 >>>>>>> v3.18
@@ -99,7 +103,11 @@ static int get_thread_cache_size(unsigned int cache, int thread_id)
 void check_for_cache_aliasing(int thread_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int thread_cache_size;
+=======
+	int thread_cache_size;
+>>>>>>> v3.18
 =======
 	int thread_cache_size;
 >>>>>>> v3.18
@@ -109,7 +117,11 @@ void check_for_cache_aliasing(int thread_id)
 				get_thread_cache_size(cache_type, thread_id);
 		if (thread_cache_size < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_emerg("Can't read %s cache size", \
+=======
+			pr_emerg("Can't read %s cache size\n",
+>>>>>>> v3.18
 =======
 			pr_emerg("Can't read %s cache size\n",
 >>>>>>> v3.18
@@ -118,6 +130,7 @@ void check_for_cache_aliasing(int thread_id)
 			/* Cache is off. No need to check for aliasing */
 			continue;
 		if (thread_cache_size / CACHE_ASSOCIATIVITY > PAGE_SIZE) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			pr_emerg("Cache aliasing detected in %s on Thread %d",
 				 cache_type ? "DCACHE" : "ICACHE", thread_id);
@@ -130,6 +143,8 @@ void check_for_cache_aliasing(int thread_id)
 				thread_cache_size);
 			pr_warn("Page Size: %lu bytes", PAGE_SIZE);
 =======
+=======
+>>>>>>> v3.18
 			pr_emerg("Potential cache aliasing detected in %s on Thread %d\n",
 				 cache_type ? "DCACHE" : "ICACHE", thread_id);
 			pr_warn("Total %s size: %u bytes\n",
@@ -141,6 +156,9 @@ void check_for_cache_aliasing(int thread_id)
 				thread_cache_size);
 			pr_warn("Page Size: %lu bytes\n", PAGE_SIZE);
 			panic("Potential cache aliasing detected");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}

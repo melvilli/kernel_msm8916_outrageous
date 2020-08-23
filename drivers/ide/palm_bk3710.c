@@ -192,7 +192,11 @@ static void palm_bk3710_set_dma_mode(ide_hwif_t *hwif, ide_drive_t *drive)
 {
 	int is_slave = drive->dn & 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *base = (void *)hwif->dma_base;
+=======
+	void __iomem *base = (void __iomem *)hwif->dma_base;
+>>>>>>> v3.18
 =======
 	void __iomem *base = (void __iomem *)hwif->dma_base;
 >>>>>>> v3.18
@@ -214,7 +218,11 @@ static void palm_bk3710_set_pio_mode(ide_hwif_t *hwif, ide_drive_t *drive)
 	int is_slave = drive->dn & 1;
 	ide_drive_t *mate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *base = (void *)hwif->dma_base;
+=======
+	void __iomem *base = (void __iomem *)hwif->dma_base;
+>>>>>>> v3.18
 =======
 	void __iomem *base = (void __iomem *)hwif->dma_base;
 >>>>>>> v3.18

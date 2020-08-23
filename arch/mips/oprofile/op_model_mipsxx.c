@@ -167,7 +167,11 @@ static void mipsxx_reg_setup(struct op_counter_config *ctr)
 		if (ctr[i].exl)
 			reg.control[i] |= M_PERFCTL_EXL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (current_cpu_type() == CPU_XLR)
+=======
+		if (boot_cpu_type() == CPU_XLR)
+>>>>>>> v3.18
 =======
 		if (boot_cpu_type() == CPU_XLR)
 >>>>>>> v3.18
@@ -377,6 +381,10 @@ static int __init mipsxx_init(void)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CPU_1074K:
+>>>>>>> v3.18
 =======
 	case CPU_1074K:
 >>>>>>> v3.18
@@ -385,7 +393,10 @@ static int __init mipsxx_init(void)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CPU_INTERAPTIV:
 		op_model_mipsxx_ops.cpu_type = "mips/interAptiv";
 		break;
@@ -402,6 +413,9 @@ static int __init mipsxx_init(void)
 		op_model_mipsxx_ops.cpu_type = "mips/M5150";
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CPU_5KC:
 		op_model_mipsxx_ops.cpu_type = "mips/5K";

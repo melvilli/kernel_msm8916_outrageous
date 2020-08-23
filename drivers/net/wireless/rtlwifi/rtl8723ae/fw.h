@@ -25,8 +25,12 @@
  * Larry Finger <Larry.Finger@lwfinger.net>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  ****************************************************************************
  */
+=======
+ *****************************************************************************/
+>>>>>>> v3.18
 =======
  *****************************************************************************/
 >>>>>>> v3.18
@@ -34,6 +38,7 @@
 #ifndef __RTL92C__FW__H__
 #define __RTL92C__FW__H__
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define FW_8192C_START_ADDRESS			0x1000
 #define FW_8192C_END_ADDRESS			0x3FFF
@@ -82,6 +87,8 @@ enum rtl8192c_h2c_cmd {
 	MAX_H2CCMD
 };
 =======
+=======
+>>>>>>> v3.18
 #define FW_8192C_SIZE					0x3000
 #define FW_8192C_START_ADDRESS			0x1000
 #define FW_8192C_END_ADDRESS			0x3FFF
@@ -94,6 +101,9 @@ enum rtl8192c_h2c_cmd {
 	(_pfwhdr->signature&0xFFFF) == 0x2302)
 
 #define pagenum_128(_len)	(u32)(((_len)>>7) + ((_len)&0x7F ? 1 : 0))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SET_H2CCMD_PWRMODE_PARM_MODE(__ph2ccmd, __val)			\
@@ -112,6 +122,7 @@ enum rtl8192c_h2c_cmd {
 	SET_BITS_TO_LE_1BYTE((__ph2ccmd)+2, 0, 8, __val)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rtl8723ae_download_fw(struct ieee80211_hw *hw);
 void rtl8723ae_fill_h2c_cmd(struct ieee80211_hw *hw, u8 element_id,
 			    u32 cmd_len, u8 *p_cmdbuffer);
@@ -122,11 +133,16 @@ void rtl8723ae_set_fw_joinbss_report_cmd(struct ieee80211_hw *hw, u8 mstatus);
 void rtl8723ae_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state);
 
 =======
+=======
+>>>>>>> v3.18
 void rtl8723e_fill_h2c_cmd(struct ieee80211_hw *hw, u8 element_id,
 			   u32 cmd_len, u8 *p_cmdbuffer);
 void rtl8723e_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode);
 void rtl8723e_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool b_dl_finished);
 void rtl8723e_set_fw_joinbss_report_cmd(struct ieee80211_hw *hw, u8 mstatus);
 void rtl8723e_set_p2p_ps_offload_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

@@ -1,6 +1,11 @@
 00-INDEX
 	- this file
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+README.buddha
+	- Amiga Buddha and Catweasel IDE Driver
+>>>>>>> v3.18
 =======
 README.buddha
 	- Amiga Buddha and Catweasel IDE Driver

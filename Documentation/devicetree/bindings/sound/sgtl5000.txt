@@ -6,7 +6,10 @@ Required properties:
 - reg : the I2C address of the device
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - clocks : the clock provider of SYS_MCLK
 
 - VDDA-supply : the regulator provider of VDDA
@@ -17,6 +20,9 @@ Optional properties:
 
 - VDDD-supply : the regulator provider of VDDD
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 
@@ -24,6 +30,12 @@ codec: sgtl5000@0a {
 	compatible = "fsl,sgtl5000";
 	reg = <0x0a>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clocks = <&clks 150>;
+	VDDA-supply = <&reg_3p3v>;
+	VDDIO-supply = <&reg_3p3v>;
+>>>>>>> v3.18
 =======
 	clocks = <&clks 150>;
 	VDDA-supply = <&reg_3p3v>;

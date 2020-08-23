@@ -44,7 +44,11 @@
 #define	EUSERS		68	/* Too many users */
 #define	EDQUOT		69	/* Quota exceeded */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	ESTALE		70	/* Stale NFS file handle */
+=======
+#define	ESTALE		70	/* Stale file handle */
+>>>>>>> v3.18
 =======
 #define	ESTALE		70	/* Stale file handle */
 >>>>>>> v3.18

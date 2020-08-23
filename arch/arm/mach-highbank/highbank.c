@@ -18,20 +18,27 @@
 #include <linux/clocksource.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/irq.h>
 #include <linux/irqchip.h>
 #include <linux/irqdomain.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/input.h>
 #include <linux/io.h>
 #include <linux/irqchip.h>
 #include <linux/pl320-ipc.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
 #include <linux/of_address.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/smp.h>
 #include <linux/amba/bus.h>
@@ -45,6 +52,8 @@
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/reboot.h>
 #include <linux/amba/bus.h>
 #include <linux/platform_device.h>
@@ -53,6 +62,9 @@
 #include <asm/hardware/cache-l2x0.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "core.h"
@@ -72,6 +84,7 @@ static void __init highbank_scu_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HB_JUMP_TABLE_PHYS(cpu)		(0x40 + (0x10 * (cpu)))
 #define HB_JUMP_TABLE_VIRT(cpu)		phys_to_virt(HB_JUMP_TABLE_PHYS(cpu))
 
@@ -90,6 +103,8 @@ static void highbank_l2x0_disable(void)
 	/* Disable PL310 L2 Cache controller */
 	highbank_smc1(0x102, 0x0);
 =======
+=======
+>>>>>>> v3.18
 
 static void highbank_l2c310_write_sec(unsigned long val, unsigned reg)
 {
@@ -98,6 +113,9 @@ static void highbank_l2c310_write_sec(unsigned long val, unsigned reg)
 	else
 		WARN_ONCE(1, "Highbank L2C310: ignoring write to reg 0x%x\n",
 			  reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -107,6 +125,7 @@ static void __init highbank_init_irq(void)
 
 	if (of_find_compatible_node(NULL, NULL, "arm,cortex-a9"))
 		highbank_scu_map_io();
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* Enable PL310 L2 Cache controller */
@@ -132,6 +151,8 @@ static void __init highbank_timer_init(void)
 	clocksource_of_init();
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static void highbank_power_off(void)
@@ -148,6 +169,10 @@ static int highbank_platform_notifier(struct notifier_block *nb,
 	struct resource *res;
 	int reg = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 val;
+>>>>>>> v3.18
 =======
 	u32 val;
 >>>>>>> v3.18
@@ -178,15 +203,21 @@ static int highbank_platform_notifier(struct notifier_block *nb,
 
 	if (of_property_read_bool(dev->of_node, "dma-coherent")) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		writel(0xff31, sregs_base + reg);
 		set_dma_ops(dev, &arm_coherent_dma_ops);
 	} else
 		writel(0, sregs_base + reg);
 =======
+=======
+>>>>>>> v3.18
 		val = readl(sregs_base + reg);
 		writel(val | 0xff01, sregs_base + reg);
 		set_dma_ops(dev, &arm_coherent_dma_ops);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return NOTIFY_OK;
@@ -201,9 +232,12 @@ static struct notifier_block highbank_platform_nb = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init highbank_init(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device highbank_cpuidle_device = {
 	.name = "cpuidle-calxeda",
 };
@@ -235,6 +269,9 @@ static void __init highbank_init(void)
 	sregs_base = of_iomap(np, 0);
 	WARN_ON(!sregs_base);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pm_power_off = highbank_power_off;
 	highbank_pm_init();
@@ -243,14 +280,20 @@ static void __init highbank_init(void)
 	bus_register_notifier(&amba_bustype, &highbank_amba_nb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
 =======
+=======
+>>>>>>> v3.18
 	pl320_ipc_register_notifier(&hb_keys_nb);
 
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
 
 	if (psci_ops.cpu_suspend)
 		platform_device_register(&highbank_cpuidle_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -262,11 +305,14 @@ static const char *highbank_match[] __initconst = {
 
 DT_MACHINE_START(HIGHBANK, "Highbank")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.smp		= smp_ops(highbank_smp_ops),
 	.map_io		= debug_ll_io_init,
 	.init_irq	= highbank_init_irq,
 	.init_time	= highbank_timer_init,
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_ZONE_DMA) && defined(CONFIG_ARM_LPAE)
 	.dma_zone_size	= (4ULL * SZ_1G),
 #endif
@@ -274,6 +320,9 @@ DT_MACHINE_START(HIGHBANK, "Highbank")
 	.l2c_aux_mask	= ~0,
 	.l2c_write_sec	= highbank_l2c310_write_sec,
 	.init_irq	= highbank_init_irq,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.init_machine	= highbank_init,
 	.dt_compat	= highbank_match,

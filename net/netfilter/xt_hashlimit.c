@@ -105,7 +105,11 @@ struct xt_hashlimit_htable {
 	u_int32_t rnd;			/* random seed for hash */
 	unsigned int count;		/* number entries in table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timer_list timer;	/* timer for gc */
+=======
+	struct delayed_work gc_work;
+>>>>>>> v3.18
 =======
 	struct delayed_work gc_work;
 >>>>>>> v3.18
@@ -140,7 +144,11 @@ hash_dst(const struct xt_hashlimit_htable *ht, const struct dsthash_dst *dst)
 	 * but using a multiply, less expensive than a divide
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ((u64)hash * ht->cfg.size) >> 32;
+=======
+	return reciprocal_scale(hash, ht->cfg.size);
+>>>>>>> v3.18
 =======
 	return reciprocal_scale(hash, ht->cfg.size);
 >>>>>>> v3.18
@@ -222,7 +230,11 @@ dsthash_free(struct xt_hashlimit_htable *ht, struct dsthash_ent *ent)
 	ht->count--;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void htable_gc(unsigned long htlong);
+=======
+static void htable_gc(struct work_struct *work);
+>>>>>>> v3.18
 =======
 static void htable_gc(struct work_struct *work);
 >>>>>>> v3.18
@@ -286,9 +298,15 @@ static int htable_create(struct net *net, struct xt_hashlimit_mtinfo1 *minfo,
 	hinfo->net = net;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_timer(&hinfo->timer, htable_gc, (unsigned long)hinfo);
 	hinfo->timer.expires = jiffies + msecs_to_jiffies(hinfo->cfg.gc_interval);
 	add_timer(&hinfo->timer);
+=======
+	INIT_DEFERRABLE_WORK(&hinfo->gc_work, htable_gc);
+	queue_delayed_work(system_power_efficient_wq, &hinfo->gc_work,
+			   msecs_to_jiffies(hinfo->cfg.gc_interval));
+>>>>>>> v3.18
 =======
 	INIT_DEFERRABLE_WORK(&hinfo->gc_work, htable_gc);
 	queue_delayed_work(system_power_efficient_wq, &hinfo->gc_work,
@@ -319,22 +337,29 @@ static void htable_selective_cleanup(struct xt_hashlimit_htable *ht,
 	unsigned int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* lock hash table and iterate over it */
 	spin_lock_bh(&ht->lock);
 	for (i = 0; i < ht->cfg.size; i++) {
 		struct dsthash_ent *dh;
 		struct hlist_node *n;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ht->cfg.size; i++) {
 		struct dsthash_ent *dh;
 		struct hlist_node *n;
 
 		spin_lock_bh(&ht->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		hlist_for_each_entry_safe(dh, n, &ht->hash[i], node) {
 			if ((*select)(ht, dh))
 				dsthash_free(ht, dh);
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 	spin_unlock_bh(&ht->lock);
@@ -354,6 +379,8 @@ static void htable_gc(unsigned long htlong)
 
 static void htable_destroy(struct xt_hashlimit_htable *hinfo)
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock_bh(&ht->lock);
 		cond_resched();
 	}
@@ -372,14 +399,20 @@ static void htable_gc(struct work_struct *work)
 }
 
 static void htable_remove_proc_entry(struct xt_hashlimit_htable *hinfo)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct hashlimit_net *hashlimit_net = hashlimit_pernet(hinfo->net);
 	struct proc_dir_entry *parent;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer_sync(&hinfo->timer);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (hinfo->family == NFPROTO_IPV4)
@@ -388,10 +421,13 @@ static void htable_remove_proc_entry(struct xt_hashlimit_htable *hinfo)
 		parent = hashlimit_net->ip6t_hashlimit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(parent != NULL)
 		remove_proc_entry(hinfo->name, parent);
 
 =======
+=======
+>>>>>>> v3.18
 	if (parent != NULL)
 		remove_proc_entry(hinfo->name, parent);
 }
@@ -400,6 +436,9 @@ static void htable_destroy(struct xt_hashlimit_htable *hinfo)
 {
 	cancel_delayed_work_sync(&hinfo->gc_work);
 	htable_remove_proc_entry(hinfo);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	htable_selective_cleanup(hinfo, select_all);
 	kfree(hinfo->name);
@@ -945,6 +984,7 @@ static void __net_exit hashlimit_proc_net_exit(struct net *net)
 {
 	struct xt_hashlimit_htable *hinfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct proc_dir_entry *pde;
 	struct hashlimit_net *hashlimit_net = hashlimit_pernet(net);
 
@@ -961,6 +1001,8 @@ static void __net_exit hashlimit_proc_net_exit(struct net *net)
 		remove_proc_entry(hinfo->name, pde);
 
 =======
+=======
+>>>>>>> v3.18
 	struct hashlimit_net *hashlimit_net = hashlimit_pernet(net);
 
 	/* hashlimit_net_exit() is called before hashlimit_mt_destroy().
@@ -970,6 +1012,9 @@ static void __net_exit hashlimit_proc_net_exit(struct net *net)
 	mutex_lock(&hashlimit_mutex);
 	hlist_for_each_entry(hinfo, &hashlimit_net->htables, node)
 		htable_remove_proc_entry(hinfo);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hashlimit_net->ipt_hashlimit = NULL;
 	hashlimit_net->ip6t_hashlimit = NULL;
@@ -1019,7 +1064,11 @@ static int __init hashlimit_mt_init(void)
 					    NULL);
 	if (!hashlimit_cachep) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("unable to create slab cache\n");
+=======
+		pr_warn("unable to create slab cache\n");
+>>>>>>> v3.18
 =======
 		pr_warn("unable to create slab cache\n");
 >>>>>>> v3.18

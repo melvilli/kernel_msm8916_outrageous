@@ -17,13 +17,19 @@
 #define FS_ENET_PD_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/string.h>
 #include <linux/of_mdio.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/string.h>
 #include <linux/of_mdio.h>
 #include <linux/if_ether.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/types.h>
 
@@ -143,9 +149,14 @@ struct fs_platform_info {
 
 	int rx_ring, tx_ring;	/* number of buffers on rx     */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 macaddr[6];	/* mac address                 */
 	int rx_copybreak;	/* limit we copy small frames  */
 	int use_napi;		/* use NAPI                    */
+=======
+	__u8 macaddr[ETH_ALEN];	/* mac address                 */
+	int rx_copybreak;	/* limit we copy small frames  */
+>>>>>>> v3.18
 =======
 	__u8 macaddr[ETH_ALEN];	/* mac address                 */
 	int rx_copybreak;	/* limit we copy small frames  */
@@ -155,6 +166,11 @@ struct fs_platform_info {
 	int use_rmii;		/* use RMII mode 	       */
 	int has_phy;            /* if the network is phy container as well...*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	struct clk *clk_per;	/* 'per' clock for register access */
+>>>>>>> v3.18
 =======
 
 	struct clk *clk_per;	/* 'per' clock for register access */

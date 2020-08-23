@@ -25,6 +25,10 @@ struct board_info {
 	unsigned int	has_enet0:1;
 	unsigned int	has_enet1:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int	has_enetsw:1;
+>>>>>>> v3.18
 =======
 	unsigned int	has_enetsw:1;
 >>>>>>> v3.18
@@ -41,6 +45,10 @@ struct board_info {
 	struct bcm63xx_enet_platform_data enet0;
 	struct bcm63xx_enet_platform_data enet1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct bcm63xx_enetsw_platform_data enetsw;
+>>>>>>> v3.18
 =======
 	struct bcm63xx_enetsw_platform_data enetsw;
 >>>>>>> v3.18
@@ -54,13 +62,19 @@ struct board_info {
 	/* GPIO LEDs */
 	struct gpio_led leds[5];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* External PHY reset GPIO */
 	unsigned int ephy_reset_gpio;
 
 	/* External PHY reset GPIO flags from gpio.h */
 	unsigned long ephy_reset_gpio_flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -197,6 +197,7 @@ int clk_rate_table_find(struct clk *clk,
 			unsigned long rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 
 	for (i = 0; freq_table[i].frequency != CPUFREQ_TABLE_END; i++) {
@@ -209,11 +210,16 @@ int clk_rate_table_find(struct clk *clk,
 			return i;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct cpufreq_frequency_table *pos;
 
 	cpufreq_for_each_valid_entry(pos, freq_table)
 		if (pos->frequency == rate)
 			return pos - freq_table;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return -ENOENT;
@@ -584,11 +590,15 @@ long clk_round_parent(struct clk *clk, unsigned long target,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (freq = parent->freq_table; freq->frequency != CPUFREQ_TABLE_END;
 	     freq++) {
 		if (freq->frequency == CPUFREQ_ENTRY_INVALID)
 			continue;
 
+=======
+	cpufreq_for_each_valid_entry(freq, parent->freq_table) {
+>>>>>>> v3.18
 =======
 	cpufreq_for_each_valid_entry(freq, parent->freq_table) {
 >>>>>>> v3.18

@@ -1791,8 +1791,11 @@ static void stex_remove(struct pci_dev *pdev)
 	scsi_remove_host(hba->host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	stex_hba_stop(hba);

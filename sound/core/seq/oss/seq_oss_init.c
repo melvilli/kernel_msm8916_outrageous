@@ -93,7 +93,10 @@ snd_seq_oss_create_client(void)
 
 	system_client = rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("new client = %d\n", rc));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -194,10 +197,16 @@ snd_seq_oss_open(struct file *file, int level)
 	dp = kzalloc(sizeof(*dp), GFP_KERNEL);
 	if (!dp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "can't malloc device info\n");
 		return -ENOMEM;
 	}
 	debug_printk(("oss_open: dp = %p\n", dp));
+=======
+		pr_err("ALSA: seq_oss: can't malloc device info\n");
+		return -ENOMEM;
+	}
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq_oss: can't malloc device info\n");
 		return -ENOMEM;
@@ -216,7 +225,11 @@ snd_seq_oss_open(struct file *file, int level)
 	dp->index = i;
 	if (i >= SNDRV_SEQ_OSS_MAX_CLIENTS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "too many applications\n");
+=======
+		pr_err("ALSA: seq_oss: too many applications\n");
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq_oss: too many applications\n");
 >>>>>>> v3.18
@@ -230,7 +243,11 @@ snd_seq_oss_open(struct file *file, int level)
 
 	if (dp->synth_opened == 0 && dp->max_mididev == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* snd_printk(KERN_ERR "no device found\n"); */
+=======
+		/* pr_err("ALSA: seq_oss: no device found\n"); */
+>>>>>>> v3.18
 =======
 		/* pr_err("ALSA: seq_oss: no device found\n"); */
 >>>>>>> v3.18
@@ -239,6 +256,7 @@ snd_seq_oss_open(struct file *file, int level)
 	}
 
 	/* create port */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	debug_printk(("create new port\n"));
 	rc = create_port(dp);
@@ -249,12 +267,20 @@ snd_seq_oss_open(struct file *file, int level)
 	if (rc < 0) {
 		pr_err("ALSA: seq_oss: can't create port\n");
 >>>>>>> v3.18
+=======
+	rc = create_port(dp);
+	if (rc < 0) {
+		pr_err("ALSA: seq_oss: can't create port\n");
+>>>>>>> v3.18
 		goto _error;
 	}
 
 	/* allocate queue */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("allocate queue\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rc = alloc_seq_queue(dp);
@@ -274,7 +300,10 @@ snd_seq_oss_open(struct file *file, int level)
 
 	/* initialize read queue */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("initialize read queue\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (is_read_mode(dp->file_mode)) {
@@ -287,7 +316,10 @@ snd_seq_oss_open(struct file *file, int level)
 
 	/* initialize write queue */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("initialize write queue\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (is_write_mode(dp->file_mode)) {
@@ -300,6 +332,7 @@ snd_seq_oss_open(struct file *file, int level)
 
 	/* initialize timer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("initialize timer\n"));
 	dp->timer = snd_seq_oss_timer_new(dp);
 	if (!dp->timer) {
@@ -309,12 +342,17 @@ snd_seq_oss_open(struct file *file, int level)
 	}
 	debug_printk(("timer initialized\n"));
 =======
+=======
+>>>>>>> v3.18
 	dp->timer = snd_seq_oss_timer_new(dp);
 	if (!dp->timer) {
 		pr_err("ALSA: seq_oss: can't alloc timer\n");
 		rc = -ENOMEM;
 		goto _error;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set private data pointer */
@@ -330,7 +368,10 @@ snd_seq_oss_open(struct file *file, int level)
 	num_clients++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("open done\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -392,7 +433,10 @@ create_port(struct seq_oss_devinfo *dp)
 
 	dp->port = port.addr.port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("new port = %d\n", port.addr.port));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -411,7 +455,10 @@ delete_port(struct seq_oss_devinfo *dp)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("delete_port %i\n", dp->port));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return snd_seq_event_port_detach(dp->cseq, dp->port);
@@ -452,7 +499,11 @@ delete_seq_queue(int queue)
 	rc = call_ctl(SNDRV_SEQ_IOCTL_DELETE_QUEUE, &qinfo);
 	if (rc < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "seq-oss: unable to delete queue %d (%d)\n", queue, rc);
+=======
+		pr_err("ALSA: seq_oss: unable to delete queue %d (%d)\n", queue, rc);
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: seq_oss: unable to delete queue %d (%d)\n", queue, rc);
 >>>>>>> v3.18
@@ -493,10 +544,15 @@ snd_seq_oss_release(struct seq_oss_devinfo *dp)
 	num_clients--;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("resetting..\n"));
 	snd_seq_oss_reset(dp);
 
 	debug_printk(("cleaning up..\n"));
+=======
+	snd_seq_oss_reset(dp);
+
+>>>>>>> v3.18
 =======
 	snd_seq_oss_reset(dp);
 
@@ -506,7 +562,10 @@ snd_seq_oss_release(struct seq_oss_devinfo *dp)
 
 	/* clear slot */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_printk(("releasing resource..\n"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	queue = dp->queue;
@@ -514,9 +573,12 @@ snd_seq_oss_release(struct seq_oss_devinfo *dp)
 		delete_port(dp);
 	delete_seq_queue(queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	debug_printk(("release done\n"));
 =======
+=======
+>>>>>>> v3.18
 }
 
 
@@ -533,6 +595,9 @@ snd_seq_oss_drain_write(struct seq_oss_devinfo *dp)
 		while (snd_seq_oss_writeq_sync(dp->writeq))
 			;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

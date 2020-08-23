@@ -34,7 +34,10 @@
 #define __BASEBAND_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "tether.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "device.h"
@@ -85,6 +88,7 @@
 #define TOP_RATE_1M         0x00100000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int
 BBuGetFrameTime(
      u8 byPreambleType,
@@ -112,6 +116,8 @@ void BBvSetDeepSleep(struct vnt_private *);
 void BBvExitDeepSleep(struct vnt_private *);
 void BBvUpdatePreEDThreshold(struct vnt_private *, int bScanning);
 =======
+=======
+>>>>>>> v3.18
 /* Length, Service, and Signal fields of Phy for Tx */
 struct vnt_phy_field {
 	u8 signal;
@@ -132,6 +138,9 @@ int vnt_vt3184_init(struct vnt_private *);
 void vnt_set_deep_sleep(struct vnt_private *);
 void vnt_exit_deep_sleep(struct vnt_private *);
 void vnt_update_pre_ed_threshold(struct vnt_private *, int scanning);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __BASEBAND_H__ */

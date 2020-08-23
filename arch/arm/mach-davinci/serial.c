@@ -71,6 +71,7 @@ static void __init davinci_serial_reset(struct plat_serial8250_port *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Enable UART clock and obtain its rate */
 int __init davinci_serial_setup_clk(unsigned instance, unsigned int *rate)
 {
@@ -102,18 +103,24 @@ int __init davinci_serial_init(struct davinci_uart_config *info)
 	struct device *dev = &soc_info->serial_dev->dev;
 	struct plat_serial8250_port *p = dev->platform_data;
 =======
+=======
+>>>>>>> v3.18
 int __init davinci_serial_init(struct platform_device *serial_dev)
 {
 	int i, ret = 0;
 	struct device *dev;
 	struct plat_serial8250_port *p;
 	struct clk *clk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * Make sure the serial ports are muxed on at this point.
 	 * You have to mux them off in device drivers later on if not needed.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; p->flags; i++, p++) {
 		if (!(info->enabled_uarts & (1 << i)))
@@ -124,6 +131,8 @@ int __init davinci_serial_init(struct platform_device *serial_dev)
 			continue;
 
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; serial_dev[i].dev.platform_data != NULL; i++) {
 		dev = &serial_dev[i].dev;
 		p = dev->platform_data;
@@ -143,6 +152,9 @@ int __init davinci_serial_init(struct platform_device *serial_dev)
 
 		p->uartclk = clk_get_rate(clk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!p->membase && p->mapbase) {
 			p->membase = ioremap(p->mapbase, SZ_4K);
@@ -157,8 +169,12 @@ int __init davinci_serial_init(struct platform_device *serial_dev)
 			davinci_serial_reset(p);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return platform_device_register(soc_info->serial_dev);
+=======
+	return ret;
+>>>>>>> v3.18
 =======
 	return ret;
 >>>>>>> v3.18

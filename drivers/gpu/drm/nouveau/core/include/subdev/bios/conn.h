@@ -17,6 +17,10 @@ enum dcb_connector_type {
 	DCB_CONNECTOR_HDMI_0 = 0x60,
 	DCB_CONNECTOR_HDMI_1 = 0x61,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DCB_CONNECTOR_HDMI_C = 0x63,
+>>>>>>> v3.18
 =======
 	DCB_CONNECTOR_HDMI_C = 0x63,
 >>>>>>> v3.18
@@ -26,9 +30,12 @@ enum dcb_connector_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 dcb_conntab(struct nouveau_bios *bios, u8 *ver, u8 *hdr, u8 *cnt, u8 *len);
 u16 dcb_conn(struct nouveau_bios *bios, u8 idx, u8 *ver, u8 *len);
 =======
+=======
+>>>>>>> v3.18
 struct nvbios_connT {
 };
 
@@ -49,6 +56,9 @@ struct nvbios_connE {
 u32 nvbios_connEe(struct nouveau_bios *bios, u8 idx, u8 *ver, u8 *hdr);
 u32 nvbios_connEp(struct nouveau_bios *bios, u8 idx, u8 *ver, u8 *hdr,
 		  struct nvbios_connE *info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

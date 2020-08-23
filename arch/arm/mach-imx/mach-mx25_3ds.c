@@ -40,6 +40,10 @@
 #include "common.h"
 #include "devices-imx25.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 =======
 #include "ehci.h"
 >>>>>>> v3.18
@@ -254,7 +258,11 @@ static void __init mx25pdk_init(void)
 
 	gpio_request_one(MX25PDK_CAN_PWDN, GPIOF_OUT_INIT_LOW, "can-pwdn");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	imx25_add_flexcan0(NULL);
+=======
+	imx25_add_flexcan0();
+>>>>>>> v3.18
 =======
 	imx25_add_flexcan0();
 >>>>>>> v3.18
@@ -272,7 +280,10 @@ MACHINE_START(MX25_3DS, "Freescale MX25PDK (3DS)")
 	.init_early = imx25_init_early,
 	.init_irq = mx25_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx25_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= mx25pdk_timer_init,

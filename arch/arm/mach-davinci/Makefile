@@ -6,7 +6,11 @@
 # Common objects
 obj-y 			:= time.o clock.o serial.o psc.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   dma.o usb.o common.o sram.o aemif.o
+=======
+			   usb.o common.o sram.o aemif.o
+>>>>>>> v3.18
 =======
 			   usb.o common.o sram.o aemif.o
 >>>>>>> v3.18
@@ -21,7 +25,10 @@ obj-$(CONFIG_ARCH_DAVINCI_DM365)	+= dm365.o devices.o
 obj-$(CONFIG_ARCH_DAVINCI_DA830)        += da830.o devices-da8xx.o
 obj-$(CONFIG_ARCH_DAVINCI_DA850)        += da850.o devices-da8xx.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ARCH_DAVINCI_TNETV107X)    += tnetv107x.o devices-tnetv107x.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -40,7 +47,10 @@ obj-$(CONFIG_MACH_DAVINCI_DM365_EVM)	+= board-dm365-evm.o
 obj-$(CONFIG_MACH_DAVINCI_DA830_EVM)	+= board-da830-evm.o
 obj-$(CONFIG_MACH_DAVINCI_DA850_EVM)	+= board-da850-evm.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MACH_TNETV107X)		+= board-tnetv107x-evm.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_MACH_MITYOMAPL138)		+= board-mityomapl138.o

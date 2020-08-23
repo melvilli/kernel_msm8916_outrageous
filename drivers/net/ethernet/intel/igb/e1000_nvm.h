@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -48,6 +51,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _E1000_NVM_H_
@@ -59,7 +65,11 @@ s32  igb_read_mac_addr(struct e1000_hw *hw);
 s32  igb_read_part_num(struct e1000_hw *hw, u32 *part_num);
 s32  igb_read_part_string(struct e1000_hw *hw, u8 *part_num,
 <<<<<<< HEAD
+<<<<<<< HEAD
                           u32 part_num_size);
+=======
+			  u32 part_num_size);
+>>>>>>> v3.18
 =======
 			  u32 part_num_size);
 >>>>>>> v3.18
@@ -74,6 +84,10 @@ struct e1000_fw_version {
 	u16 eep_major;
 	u16 eep_minor;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 eep_build;
+>>>>>>> v3.18
 =======
 	u16 eep_build;
 >>>>>>> v3.18

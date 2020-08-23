@@ -5,10 +5,13 @@
 
 struct netns_frags {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			nqueues;
 	struct list_head	lru_list;
 	spinlock_t		lru_lock;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* The percpu_counter "mem" need to be cacheline aligned.
@@ -22,6 +25,7 @@ struct netns_frags {
 	int			low_thresh;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct inet_frag_queue {
 	spinlock_t		lock;
@@ -43,6 +47,8 @@ struct inet_frag_queue {
 	u16			max_size;
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * fragment queue flags
  *
@@ -86,6 +92,9 @@ struct inet_frag_queue {
 	int			meat;
 	__u8			flags;
 	u16			max_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct netns_frags	*net;
 };
@@ -98,7 +107,11 @@ struct inet_frag_queue {
  *	       struct frag_queue))
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INETFRAGS_MAXDEPTH		128
+=======
+#define INETFRAGS_MAXDEPTH	128
+>>>>>>> v3.18
 =======
 #define INETFRAGS_MAXDEPTH	128
 >>>>>>> v3.18
@@ -110,6 +123,7 @@ struct inet_frag_bucket {
 
 struct inet_frags {
 	struct inet_frag_bucket	hash[INETFRAGS_HASHSZ];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* This rwlock is a global lock (seperate per IPv4, IPv6 and
 	 * netfilter). Important to keep this on a seperate cacheline.
@@ -132,6 +146,8 @@ struct inet_frags {
 
 void inet_frags_init(struct inet_frags *);
 =======
+=======
+>>>>>>> v3.18
 
 	struct work_struct	frags_work;
 	unsigned int next_bucket;
@@ -161,6 +177,9 @@ void inet_frags_init(struct inet_frags *);
 };
 
 int inet_frags_init(struct inet_frags *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void inet_frags_fini(struct inet_frags *);
 
@@ -169,6 +188,7 @@ void inet_frags_exit_net(struct netns_frags *nf, struct inet_frags *f);
 
 void inet_frag_kill(struct inet_frag_queue *q, struct inet_frags *f);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void inet_frag_destroy(struct inet_frag_queue *q,
 				struct inet_frags *f, int *work);
 int inet_frag_evictor(struct netns_frags *nf, struct inet_frags *f, bool force);
@@ -176,10 +196,15 @@ struct inet_frag_queue *inet_frag_find(struct netns_frags *nf,
 		struct inet_frags *f, void *key, unsigned int hash)
 	__releases(&f->lock);
 =======
+=======
+>>>>>>> v3.18
 void inet_frag_destroy(struct inet_frag_queue *q, struct inet_frags *f);
 struct inet_frag_queue *inet_frag_find(struct netns_frags *nf,
 		struct inet_frags *f, void *key, unsigned int hash);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void inet_frag_maybe_warn_overflow(struct inet_frag_queue *q,
 				   const char *prefix);
@@ -188,7 +213,11 @@ static inline void inet_frag_put(struct inet_frag_queue *q, struct inet_frags *f
 {
 	if (atomic_dec_and_test(&q->refcnt))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inet_frag_destroy(q, f, NULL);
+=======
+		inet_frag_destroy(q, f);
+>>>>>>> v3.18
 =======
 		inet_frag_destroy(q, f);
 >>>>>>> v3.18
@@ -221,6 +250,7 @@ static inline void add_frag_mem_limit(struct inet_frag_queue *q, int i)
 static inline void init_frag_mem_limit(struct netns_frags *nf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	percpu_counter_init(&nf->mem, 0);
 }
 
@@ -228,12 +258,17 @@ static inline int sum_frag_mem_limit(struct netns_frags *nf)
 {
 	int res;
 =======
+=======
+>>>>>>> v3.18
 	percpu_counter_init(&nf->mem, 0, GFP_KERNEL);
 }
 
 static inline unsigned int sum_frag_mem_limit(struct netns_frags *nf)
 {
 	unsigned int res;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	local_bh_disable();
@@ -243,6 +278,7 @@ static inline unsigned int sum_frag_mem_limit(struct netns_frags *nf)
 	return res;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void inet_frag_lru_move(struct inet_frag_queue *q)
 {
@@ -269,6 +305,8 @@ static inline void inet_frag_lru_add(struct netns_frags *nf,
 	spin_unlock(&nf->lru_lock);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* RFC 3168 support :

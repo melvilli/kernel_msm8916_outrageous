@@ -14,6 +14,10 @@
 extern int imx5_cpuidle_init(void);
 extern int imx6q_cpuidle_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int imx6sl_cpuidle_init(void);
+>>>>>>> v3.18
 =======
 extern int imx6sl_cpuidle_init(void);
 >>>>>>> v3.18
@@ -27,10 +31,16 @@ static inline int imx6q_cpuidle_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int imx6sl_cpuidle_init(void)
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

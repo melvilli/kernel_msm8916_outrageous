@@ -1,6 +1,10 @@
 wlcore-objs		= main.o cmd.o io.o event.o tx.o rx.o ps.o acx.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  boot.o init.o debugfs.o scan.o
+=======
+			  boot.o init.o debugfs.o scan.o sysfs.o vendor_cmd.o
+>>>>>>> v3.18
 =======
 			  boot.o init.o debugfs.o scan.o sysfs.o vendor_cmd.o
 >>>>>>> v3.18

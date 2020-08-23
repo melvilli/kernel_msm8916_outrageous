@@ -12,6 +12,10 @@
 #include <linux/init.h>
 #include <linux/ftrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/syscalls.h>
+>>>>>>> v3.18
 =======
 #include <linux/syscalls.h>
 >>>>>>> v3.18
@@ -20,7 +24,13 @@
 #include <asm/asm-offsets.h>
 #include <asm/cacheflush.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uasm.h>
+=======
+#include <asm/syscall.h>
+#include <asm/uasm.h>
+#include <asm/unistd.h>
+>>>>>>> v3.18
 =======
 #include <asm/syscall.h>
 #include <asm/uasm.h>
@@ -71,7 +81,11 @@ static inline int in_kernel_space(unsigned long ip)
 
 static unsigned int insn_jal_ftrace_caller __read_mostly;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int insn_lui_v1_hi16_mcount __read_mostly;
+=======
+static unsigned int insn_la_mcount[2] __read_mostly;
+>>>>>>> v3.18
 =======
 static unsigned int insn_la_mcount[2] __read_mostly;
 >>>>>>> v3.18
@@ -83,15 +97,21 @@ static inline void ftrace_dyn_arch_init_insns(void)
 	unsigned int v1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* lui v1, hi16_mcount */
 	v1 = 3;
 	buf = (u32 *)&insn_lui_v1_hi16_mcount;
 	UASM_i_LA_mostly(&buf, v1, MCOUNT_ADDR);
 =======
+=======
+>>>>>>> v3.18
 	/* la v1, _mcount */
 	v1 = 3;
 	buf = (u32 *)&insn_la_mcount[0];
 	UASM_i_LA(&buf, v1, MCOUNT_ADDR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* jal (ftrace_caller + 8), jump over the first two instruction */
@@ -109,6 +129,10 @@ static int ftrace_modify_code(unsigned long ip, unsigned int new_code)
 {
 	int faulted;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mm_segment_t old_fs;
+>>>>>>> v3.18
 =======
 	mm_segment_t old_fs;
 >>>>>>> v3.18
@@ -120,12 +144,18 @@ static int ftrace_modify_code(unsigned long ip, unsigned int new_code)
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_icache_range(ip, ip + 8);
 =======
+=======
+>>>>>>> v3.18
 	old_fs = get_fs();
 	set_fs(get_ds());
 	flush_icache_range(ip, ip + 8);
 	set_fs(old_fs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -137,6 +167,10 @@ static int ftrace_modify_code_2(unsigned long ip, unsigned int new_code1,
 {
 	int faulted;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mm_segment_t old_fs;
+>>>>>>> v3.18
 =======
 	mm_segment_t old_fs;
 >>>>>>> v3.18
@@ -145,6 +179,10 @@ static int ftrace_modify_code_2(unsigned long ip, unsigned int new_code1,
 	if (unlikely(faulted))
 		return -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -153,8 +191,11 @@ static int ftrace_modify_code_2(unsigned long ip, unsigned int new_code1,
 	if (unlikely(faulted))
 		return -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_icache_range(ip, ip + 8); /* original ip + 12 */
 =======
+=======
+>>>>>>> v3.18
 
 	ip -= 4;
 	old_fs = get_fs();
@@ -186,6 +227,9 @@ static int ftrace_modify_code_2r(unsigned long ip, unsigned int new_code1,
 	flush_icache_range(ip, ip + 8);
 	set_fs(old_fs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -199,6 +243,10 @@ static int ftrace_modify_code_2r(unsigned long ip, unsigned int new_code1,
  * move at, ra
  * jal _mcount		--> nop
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *  sub sp, sp, 8	--> nop  (CONFIG_32BIT)
+>>>>>>> v3.18
 =======
  *  sub sp, sp, 8	--> nop  (CONFIG_32BIT)
 >>>>>>> v3.18
@@ -209,7 +257,11 @@ static int ftrace_modify_code_2r(unsigned long ip, unsigned int new_code1,
  *
  * lui v1, hi_16bit_of_mcount	     --> b 1f (0x10000005)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * addiu v1, v1, low_16bit_of_mcount
+=======
+ * addiu v1, v1, low_16bit_of_mcount --> nop  (CONFIG_32BIT)
+>>>>>>> v3.18
 =======
  * addiu v1, v1, low_16bit_of_mcount --> nop  (CONFIG_32BIT)
 >>>>>>> v3.18
@@ -222,7 +274,11 @@ static int ftrace_modify_code_2r(unsigned long ip, unsigned int new_code1,
  *
  * lui v1, hi_16bit_of_mcount	     --> b 1f (0x10000004)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * addiu v1, v1, low_16bit_of_mcount
+=======
+ * addiu v1, v1, low_16bit_of_mcount --> nop  (CONFIG_32BIT)
+>>>>>>> v3.18
 =======
  * addiu v1, v1, low_16bit_of_mcount --> nop  (CONFIG_32BIT)
 >>>>>>> v3.18
@@ -265,11 +321,14 @@ int ftrace_make_call(struct dyn_ftrace *rec, unsigned long addr)
 	unsigned long ip = rec->ip;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new = in_kernel_space(ip) ? insn_jal_ftrace_caller :
 		insn_lui_v1_hi16_mcount;
 
 	return ftrace_modify_code(ip, new);
 =======
+=======
+>>>>>>> v3.18
 	new = in_kernel_space(ip) ? insn_jal_ftrace_caller : insn_la_mcount[0];
 
 #ifdef CONFIG_64BIT
@@ -278,6 +337,9 @@ int ftrace_make_call(struct dyn_ftrace *rec, unsigned long addr)
 	return ftrace_modify_code_2r(ip, new, in_kernel_space(ip) ?
 						INSN_NOP : insn_la_mcount[1]);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -293,7 +355,11 @@ int ftrace_update_ftrace_func(ftrace_func_t func)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init ftrace_dyn_arch_init(void *data)
+=======
+int __init ftrace_dyn_arch_init(void)
+>>>>>>> v3.18
 =======
 int __init ftrace_dyn_arch_init(void)
 >>>>>>> v3.18
@@ -305,9 +371,12 @@ int __init ftrace_dyn_arch_init(void)
 	ftrace_modify_code(MCOUNT_ADDR, INSN_NOP);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The return code is retured via data */
 	*(unsigned long *)data = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -404,6 +473,12 @@ void prepare_ftrace_return(unsigned long *parent_ra_addr, unsigned long self_ra,
 	int faulted, insns;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (unlikely(ftrace_graph_is_dead()))
+		return;
+
+>>>>>>> v3.18
 =======
 	if (unlikely(ftrace_graph_is_dead()))
 		return;
@@ -475,7 +550,10 @@ out:
 }
 #endif	/* CONFIG_FUNCTION_GRAPH_TRACER */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_FTRACE_SYSCALLS
 
@@ -506,4 +584,7 @@ unsigned long __init arch_syscall_addr(int nr)
 #endif
 
 #endif /* CONFIG_FTRACE_SYSCALLS */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

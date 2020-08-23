@@ -43,6 +43,7 @@
 #include <linux/pm_runtime.h>
 #include <linux/sysfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
 #include "sleep.h"
@@ -51,10 +52,15 @@
 #define PREFIX "ACPI: "
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/acpi.h>
 #include "sleep.h"
 #include "internal.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define _COMPONENT			ACPI_POWER_COMPONENT
 ACPI_MODULE_NAME("power");
@@ -67,6 +73,7 @@ ACPI_MODULE_NAME("power");
 #define ACPI_POWER_RESOURCE_STATE_UNKNOWN 0xFF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct acpi_power_dependent_device {
 	struct list_head node;
 	struct acpi_device *adev;
@@ -77,6 +84,11 @@ struct acpi_power_resource {
 	struct acpi_device device;
 	struct list_head list_node;
 	struct list_head dependent;
+=======
+struct acpi_power_resource {
+	struct acpi_device device;
+	struct list_head list_node;
+>>>>>>> v3.18
 =======
 struct acpi_power_resource {
 	struct acpi_device device;
@@ -225,7 +237,10 @@ static int acpi_power_get_list_state(struct list_head *list, int *state)
 
 	/* The state of the list is 'on' IFF all resources are 'on'. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cur_state = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	list_for_each_entry(entry, list, node) {
@@ -250,6 +265,7 @@ static int acpi_power_get_list_state(struct list_head *list, int *state)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void acpi_power_resume_dependent(struct work_struct *work)
 {
@@ -279,6 +295,8 @@ static void acpi_power_resume_dependent(struct work_struct *work)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int __acpi_power_on(struct acpi_power_resource *resource)
 {
 	acpi_status status = AE_OK;
@@ -300,6 +318,7 @@ static int acpi_power_on_unlocked(struct acpi_power_resource *resource)
 	if (resource->ref_count++) {
 		ACPI_DEBUG_PRINT((ACPI_DB_INFO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "Power resource [%s] already on",
 				  resource->name));
 	} else {
@@ -313,12 +332,17 @@ static int acpi_power_on_unlocked(struct acpi_power_resource *resource)
 				schedule_work(&dep->work);
 		}
 =======
+=======
+>>>>>>> v3.18
 				  "Power resource [%s] already on\n",
 				  resource->name));
 	} else {
 		result = __acpi_power_on(resource);
 		if (result)
 			resource->ref_count--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return result;
@@ -355,7 +379,11 @@ static int acpi_power_off_unlocked(struct acpi_power_resource *resource)
 	if (!resource->ref_count) {
 		ACPI_DEBUG_PRINT((ACPI_DB_INFO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "Power resource [%s] already off",
+=======
+				  "Power resource [%s] already off\n",
+>>>>>>> v3.18
 =======
 				  "Power resource [%s] already off\n",
 >>>>>>> v3.18
@@ -424,6 +452,7 @@ static int acpi_power_on_list(struct list_head *list)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void acpi_power_add_dependent(struct acpi_power_resource *resource,
 				     struct acpi_device *adev)
 {
@@ -470,6 +499,8 @@ static void acpi_power_remove_dependent(struct acpi_power_resource *resource,
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct attribute *attrs[] = {
@@ -561,8 +592,11 @@ static void acpi_power_expose_hide(struct acpi_device *adev,
 void acpi_power_add_remove_device(struct acpi_device *adev, bool add)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_device_power_state *ps;
 	struct acpi_power_resource_entry *entry;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int state;
@@ -575,6 +609,7 @@ void acpi_power_add_remove_device(struct acpi_device *adev, bool add)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ps = &adev->power.states[ACPI_STATE_D0];
 	list_for_each_entry(entry, &ps->resources, node) {
 		struct acpi_power_resource *resource = entry->resource;
@@ -585,6 +620,8 @@ void acpi_power_add_remove_device(struct acpi_device *adev, bool add)
 			acpi_power_remove_dependent(resource, adev);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (state = ACPI_STATE_D0; state <= ACPI_STATE_D3_HOT; state++)
@@ -680,9 +717,13 @@ int acpi_device_sleep_wake(struct acpi_device *dev,
 
 	/* Execute _PSW */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arg_list.count = 1;
 	in_arg[0].integer.value = enable;
 	status = acpi_evaluate_object(dev->handle, "_PSW", &arg_list, NULL);
+=======
+	status = acpi_execute_simple_method(dev->handle, "_PSW", enable);
+>>>>>>> v3.18
 =======
 	status = acpi_execute_simple_method(dev->handle, "_PSW", enable);
 >>>>>>> v3.18
@@ -833,7 +874,11 @@ int acpi_power_get_inferred_state(struct acpi_device *device, int *state)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*state = ACPI_STATE_D3;
+=======
+	*state = ACPI_STATE_D3_COLD;
+>>>>>>> v3.18
 =======
 	*state = ACPI_STATE_D3_COLD;
 >>>>>>> v3.18
@@ -935,7 +980,10 @@ int acpi_add_power_resource(acpi_handle handle)
 				ACPI_STA_DEFAULT);
 	mutex_init(&resource->resource_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&resource->dependent);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&resource->list_node);
@@ -992,13 +1040,19 @@ void acpi_resume_power_resources(void)
 
 		result = acpi_power_get_state(resource->device.handle, &state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (result)
 			continue;
 =======
+=======
+>>>>>>> v3.18
 		if (result) {
 			mutex_unlock(&resource->resource_lock);
 			continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (state == ACPI_POWER_RESOURCE_STATE_OFF

@@ -8,6 +8,11 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * See Documentation/mtd/nand/pxa3xx-nand.txt for more details.
+>>>>>>> v3.18
 =======
  *
  * See Documentation/mtd/nand/pxa3xx-nand.txt for more details.
@@ -30,9 +35,12 @@
 #include <linux/of.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/dma.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_mtd.h>
 
 #if defined(CONFIG_ARCH_PXA) || defined(CONFIG_ARCH_MMP)
@@ -43,6 +51,9 @@
 #include <mach/dma.h>
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/platform_data/mtd-nand-pxa3xx.h>
 
@@ -51,7 +62,10 @@
 #define PAGE_CHUNK_SIZE		(2048)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Define a buffer size for the initial command that detects the flash device:
  * STATUS, READID and PARAM. The largest of these is the PARAM command,
@@ -59,6 +73,9 @@
  */
 #define INIT_BUFFER_SIZE	256
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* registers and bit definitions */
 #define NDCR		(0x00) /* Control register */
@@ -69,6 +86,10 @@
 #define NDBDR0		(0x1C) /* Bad Block Register 0 */
 #define NDBDR1		(0x20) /* Bad Block Register 1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NDECCCTRL	(0x28) /* ECC control */
+>>>>>>> v3.18
 =======
 #define NDECCCTRL	(0x28) /* ECC control */
 >>>>>>> v3.18
@@ -99,6 +120,12 @@
 
 #define NDSR_MASK		(0xfff)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NDSR_ERR_CNT_OFF	(16)
+#define NDSR_ERR_CNT_MASK       (0x1f)
+#define NDSR_ERR_CNT(sr)	((sr >> NDSR_ERR_CNT_OFF) & NDSR_ERR_CNT_MASK)
+>>>>>>> v3.18
 =======
 #define NDSR_ERR_CNT_OFF	(16)
 #define NDSR_ERR_CNT_MASK       (0x1f)
@@ -113,8 +140,13 @@
 #define NDSR_CS0_BBD		(0x1 << 6)
 #define NDSR_CS1_BBD		(0x1 << 5)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NDSR_DBERR		(0x1 << 4)
 #define NDSR_SBERR		(0x1 << 3)
+=======
+#define NDSR_UNCORERR		(0x1 << 4)
+#define NDSR_CORERR		(0x1 << 3)
+>>>>>>> v3.18
 =======
 #define NDSR_UNCORERR		(0x1 << 4)
 #define NDSR_CORERR		(0x1 << 3)
@@ -124,16 +156,22 @@
 #define NDSR_WRCMDREQ		(0x1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NDCB0_ST_ROW_EN         (0x1 << 26)
 #define NDCB0_AUTO_RS		(0x1 << 25)
 #define NDCB0_CSEL		(0x1 << 24)
 =======
+=======
+>>>>>>> v3.18
 #define NDCB0_LEN_OVRD		(0x1 << 28)
 #define NDCB0_ST_ROW_EN         (0x1 << 26)
 #define NDCB0_AUTO_RS		(0x1 << 25)
 #define NDCB0_CSEL		(0x1 << 24)
 #define NDCB0_EXT_CMD_TYPE_MASK	(0x7 << 29)
 #define NDCB0_EXT_CMD_TYPE(x)	(((x) << 29) & NDCB0_EXT_CMD_TYPE_MASK)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define NDCB0_CMD_TYPE_MASK	(0x7 << 21)
 #define NDCB0_CMD_TYPE(x)	(((x) << 21) & NDCB0_CMD_TYPE_MASK)
@@ -146,6 +184,7 @@
 #define NDCB0_ADDR_CYC_SHIFT	(16)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* macros for registers read/write */
 #define nand_writel(info, off, val)	\
 	__raw_writel((val), (info)->mmio_base + (off))
@@ -153,6 +192,8 @@
 #define nand_readl(info, off)		\
 	__raw_readl((info)->mmio_base + (off))
 =======
+=======
+>>>>>>> v3.18
 #define EXT_CMD_TYPE_DISPATCH	6 /* Command dispatch */
 #define EXT_CMD_TYPE_NAKED_RW	5 /* Naked read or Naked write */
 #define EXT_CMD_TYPE_READ	4 /* Read */
@@ -167,6 +208,9 @@
 
 #define nand_readl(info, off)		\
 	readl_relaxed((info)->mmio_base + (off))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* error code and state */
@@ -175,9 +219,15 @@ enum {
 	ERR_DMABUSERR	= -1,
 	ERR_SENDCMD	= -2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ERR_DBERR	= -3,
 	ERR_BBERR	= -4,
 	ERR_SBERR	= -5,
+=======
+	ERR_UNCORERR	= -3,
+	ERR_BBERR	= -4,
+	ERR_CORERR	= -5,
+>>>>>>> v3.18
 =======
 	ERR_UNCORERR	= -3,
 	ERR_BBERR	= -4,
@@ -199,10 +249,13 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pxa3xx_nand_host {
 	struct nand_chip	chip;
 	struct pxa3xx_nand_cmdset *cmdset;
 =======
+=======
+>>>>>>> v3.18
 enum pxa3xx_nand_variant {
 	PXA3XX_NAND_VARIANT_PXA,
 	PXA3XX_NAND_VARIANT_ARMADA370,
@@ -210,13 +263,19 @@ enum pxa3xx_nand_variant {
 
 struct pxa3xx_nand_host {
 	struct nand_chip	chip;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mtd_info         *mtd;
 	void			*info_data;
 
 	/* page size of attached chip */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		page_size;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int			use_ecc;
@@ -228,10 +287,13 @@ struct pxa3xx_nand_host {
 	size_t			read_id_bytes;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* cached register value */
 	uint32_t		reg_ndcr;
 	uint32_t		ndtr0cs0;
 	uint32_t		ndtr1cs0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -244,11 +306,14 @@ struct pxa3xx_nand_info {
 	void __iomem		*mmio_base;
 	unsigned long		mmio_phys;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct completion	cmd_complete;
 
 	unsigned int 		buf_start;
 	unsigned int		buf_count;
 =======
+=======
+>>>>>>> v3.18
 	struct completion	cmd_complete, dev_ready;
 
 	unsigned int 		buf_start;
@@ -256,6 +321,9 @@ struct pxa3xx_nand_info {
 	unsigned int		buf_size;
 	unsigned int		data_buff_pos;
 	unsigned int		oob_buff_pos;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* DMA information */
@@ -273,6 +341,7 @@ struct pxa3xx_nand_info {
 	unsigned int		state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			cs;
 	int			use_ecc;	/* use HW ECC ? */
 	int			use_dma;	/* use DMA ? */
@@ -284,6 +353,8 @@ struct pxa3xx_nand_info {
 	int 			retcode;
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * This driver supports NFCv1 (as found in PXA SoC)
 	 * and NFCv2 (as found in Armada 370/XP SoC).
@@ -311,12 +382,19 @@ struct pxa3xx_nand_info {
 	uint32_t		ndtr0cs0;
 	uint32_t		ndtr1cs0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* generated NDCBx register values */
 	uint32_t		ndcb0;
 	uint32_t		ndcb1;
 	uint32_t		ndcb2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t		ndcb3;
+>>>>>>> v3.18
 =======
 	uint32_t		ndcb3;
 >>>>>>> v3.18
@@ -326,6 +404,7 @@ static bool use_dma = 1;
 module_param(use_dma, bool, 0444);
 MODULE_PARM_DESC(use_dma, "enable DMA for data transferring to/from NAND HW");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Default NAND flash controller configuration setup by the
@@ -344,6 +423,8 @@ static struct pxa3xx_nand_cmdset default_cmdset = {
 	.lock_status	= 0x007A,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct pxa3xx_nand_timing timing[] = {
@@ -366,12 +447,15 @@ static struct pxa3xx_nand_flash builtin_flash_types[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Define a default flash type setting serve as flash detecting only */
 #define DEFAULT_FLASH_TYPE (&builtin_flash_types[0])
 
 const char *mtd_names[] = {"pxa3xx_nand-0", "pxa3xx_nand-1", NULL};
 
 =======
+=======
+>>>>>>> v3.18
 static u8 bbt_pattern[] = {'M', 'V', 'B', 'b', 't', '0' };
 static u8 bbt_mirror_pattern[] = {'1', 't', 'b', 'B', 'V', 'M' };
 
@@ -433,6 +517,9 @@ static struct nand_ecclayout ecc_layout_4KB_bch8bit = {
 /* Define a default flash type setting serve as flash detecting only */
 #define DEFAULT_FLASH_TYPE (&builtin_flash_types[0])
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define NDTR0_tCH(c)	(min((c), 7) << 19)
 #define NDTR0_tCS(c)	(min((c), 7) << 16)
@@ -449,7 +536,10 @@ static struct nand_ecclayout ecc_layout_4KB_bch8bit = {
 #define ns2cycle(ns, clk)	(int)((ns) * (clk / 1000000) / 1000)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id pxa3xx_nand_dt_ids[] = {
 	{
 		.compatible = "marvell,pxa3xx-nand",
@@ -473,6 +563,9 @@ pxa3xx_nand_get_variant(struct platform_device *pdev)
 	return (enum pxa3xx_nand_variant)of_id->data;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void pxa3xx_nand_set_timing(struct pxa3xx_nand_host *host,
 				   const struct pxa3xx_nand_timing *t)
@@ -493,8 +586,13 @@ static void pxa3xx_nand_set_timing(struct pxa3xx_nand_host *host,
 		NDTR1_tAR(ns2cycle(t->tAR, nand_clk));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->ndtr0cs0 = ndtr0;
 	host->ndtr1cs0 = ndtr1;
+=======
+	info->ndtr0cs0 = ndtr0;
+	info->ndtr1cs0 = ndtr1;
+>>>>>>> v3.18
 =======
 	info->ndtr0cs0 = ndtr0;
 	info->ndtr1cs0 = ndtr1;
@@ -503,6 +601,7 @@ static void pxa3xx_nand_set_timing(struct pxa3xx_nand_host *host,
 	nand_writel(info, NDTR1CS0, ndtr1);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void pxa3xx_set_datasize(struct pxa3xx_nand_info *info)
 {
@@ -524,6 +623,8 @@ static void pxa3xx_set_datasize(struct pxa3xx_nand_info *info)
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 /*
  * Set the data and OOB size, depending on the selected
  * spare and ECC configuration.
@@ -541,6 +642,9 @@ static void pxa3xx_set_datasize(struct pxa3xx_nand_info *info,
 	info->oob_size = info->spare_size;
 	if (!info->use_ecc)
 		info->oob_size += info->ecc_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -553,6 +657,7 @@ static void pxa3xx_set_datasize(struct pxa3xx_nand_info *info,
 static void pxa3xx_nand_start(struct pxa3xx_nand_info *info)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa3xx_nand_host *host = info->host[info->cs];
 	uint32_t ndcr;
 
@@ -560,6 +665,8 @@ static void pxa3xx_nand_start(struct pxa3xx_nand_info *info)
 	ndcr |= info->use_ecc ? NDCR_ECC_EN : 0;
 	ndcr |= info->use_dma ? NDCR_DMA_EN : 0;
 =======
+=======
+>>>>>>> v3.18
 	uint32_t ndcr;
 
 	ndcr = info->reg_ndcr;
@@ -584,6 +691,9 @@ static void pxa3xx_nand_start(struct pxa3xx_nand_info *info)
 	else
 		ndcr &= ~NDCR_SPARE_EN;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ndcr |= NDCR_ND_RUN;
 
@@ -614,7 +724,12 @@ static void pxa3xx_nand_stop(struct pxa3xx_nand_info *info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void enable_int(struct pxa3xx_nand_info *info, uint32_t int_mask)
+=======
+static void __maybe_unused
+enable_int(struct pxa3xx_nand_info *info, uint32_t int_mask)
+>>>>>>> v3.18
 =======
 static void __maybe_unused
 enable_int(struct pxa3xx_nand_info *info, uint32_t int_mask)
@@ -637,6 +752,7 @@ static void disable_int(struct pxa3xx_nand_info *info, uint32_t int_mask)
 static void handle_data_pio(struct pxa3xx_nand_info *info)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (info->state) {
 	case STATE_PIO_WRITING:
 		__raw_writesl(info->mmio_base + NDDB, info->data_buff,
@@ -652,6 +768,8 @@ static void handle_data_pio(struct pxa3xx_nand_info *info)
 			__raw_readsl(info->mmio_base + NDDB, info->oob_buff,
 					DIV_ROUND_UP(info->oob_size, 4));
 =======
+=======
+>>>>>>> v3.18
 	unsigned int do_bytes = min(info->data_size, info->chunk_size);
 
 	switch (info->state) {
@@ -674,6 +792,9 @@ static void handle_data_pio(struct pxa3xx_nand_info *info)
 			__raw_readsl(info->mmio_base + NDDB,
 				     info->oob_buff + info->oob_buff_pos,
 				     DIV_ROUND_UP(info->oob_size, 4));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -682,9 +803,12 @@ static void handle_data_pio(struct pxa3xx_nand_info *info)
 		BUG();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	/* Update buffer pointers for multi-page read/write */
 	info->data_buff_pos += do_bytes;
@@ -693,6 +817,9 @@ static void handle_data_pio(struct pxa3xx_nand_info *info)
 }
 
 #ifdef ARCH_HAS_DMA
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void start_data_dma(struct pxa3xx_nand_info *info)
 {
@@ -741,18 +868,28 @@ static void pxa3xx_nand_data_dma_irq(int channel, void *data)
 	nand_writel(info, NDSR, NDSR_WRDREQ | NDSR_RDDREQ);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 static void start_data_dma(struct pxa3xx_nand_info *info)
 {}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static irqreturn_t pxa3xx_nand_irq(int irq, void *devid)
 {
 	struct pxa3xx_nand_info *info = devid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int status, is_completed = 0;
+=======
+	unsigned int status, is_completed = 0, is_ready = 0;
+>>>>>>> v3.18
 =======
 	unsigned int status, is_completed = 0, is_ready = 0;
 >>>>>>> v3.18
@@ -769,11 +906,14 @@ static irqreturn_t pxa3xx_nand_irq(int irq, void *devid)
 	status = nand_readl(info, NDSR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status & NDSR_DBERR)
 		info->retcode = ERR_DBERR;
 	if (status & NDSR_SBERR)
 		info->retcode = ERR_SBERR;
 =======
+=======
+>>>>>>> v3.18
 	if (status & NDSR_UNCORERR)
 		info->retcode = ERR_UNCORERR;
 	if (status & NDSR_CORERR) {
@@ -793,6 +933,9 @@ static irqreturn_t pxa3xx_nand_irq(int irq, void *devid)
 					   info->max_bitflips,
 					   info->ecc_err_cnt);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (status & (NDSR_RDDREQ | NDSR_WRDREQ)) {
 		/* whether use dma to transfer data */
@@ -814,8 +957,13 @@ static irqreturn_t pxa3xx_nand_irq(int irq, void *devid)
 	}
 	if (status & ready) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		info->is_ready = 1;
 		info->state = STATE_READY;
+=======
+		info->state = STATE_READY;
+		is_ready = 1;
+>>>>>>> v3.18
 =======
 		info->state = STATE_READY;
 		is_ready = 1;
@@ -827,10 +975,13 @@ static irqreturn_t pxa3xx_nand_irq(int irq, void *devid)
 		status &= ~NDSR_WRCMDREQ;
 		info->state = STATE_CMD_HANDLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nand_writel(info, NDCB0, info->ndcb0);
 		nand_writel(info, NDCB0, info->ndcb1);
 		nand_writel(info, NDCB0, info->ndcb2);
 =======
+=======
+>>>>>>> v3.18
 
 		/*
 		 * Command buffer registers NDCB{0-2} (and optionally NDCB3)
@@ -847,6 +998,9 @@ static irqreturn_t pxa3xx_nand_irq(int irq, void *devid)
 		/* NDCB3 register is available in NFCv2 (Armada 370/XP SoC) */
 		if (info->variant == PXA3XX_NAND_VARIANT_ARMADA370)
 			nand_writel(info, NDCB0, info->ndcb3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -855,6 +1009,11 @@ static irqreturn_t pxa3xx_nand_irq(int irq, void *devid)
 	if (is_completed)
 		complete(&info->cmd_complete);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (is_ready)
+		complete(&info->dev_ready);
+>>>>>>> v3.18
 =======
 	if (is_ready)
 		complete(&info->dev_ready);
@@ -872,6 +1031,7 @@ static inline int is_buf_blank(uint8_t *buf, size_t len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int prepare_command_pool(struct pxa3xx_nand_info *info, int command,
 		uint16_t column, int page_addr)
 {
@@ -885,6 +1045,8 @@ static int prepare_command_pool(struct pxa3xx_nand_info *info, int command,
 	addr_cycle = 0;
 	exec_cmd = 1;
 =======
+=======
+>>>>>>> v3.18
 static void set_command_address(struct pxa3xx_nand_info *info,
 		unsigned int page_size, uint16_t column, int page_addr)
 {
@@ -909,12 +1071,16 @@ static void prepare_start_command(struct pxa3xx_nand_info *info, int command)
 {
 	struct pxa3xx_nand_host *host = info->host[info->cs];
 	struct mtd_info *mtd = host->mtd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* reset data and oob column point to handle data */
 	info->buf_start		= 0;
 	info->buf_count		= 0;
 	info->oob_size		= 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	info->use_ecc		= 0;
 	info->is_ready		= 0;
@@ -924,6 +1090,8 @@ static void prepare_start_command(struct pxa3xx_nand_info *info, int command)
 	else
 		info->ndcb0 = 0;
 =======
+=======
+>>>>>>> v3.18
 	info->data_buff_pos	= 0;
 	info->oob_buff_pos	= 0;
 	info->use_ecc		= 0;
@@ -932,6 +1100,9 @@ static void prepare_start_command(struct pxa3xx_nand_info *info, int command)
 	info->ecc_err_cnt	= 0;
 	info->ndcb3		= 0;
 	info->need_wait		= 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (command) {
@@ -940,15 +1111,21 @@ static void prepare_start_command(struct pxa3xx_nand_info *info, int command)
 		info->use_ecc = 1;
 	case NAND_CMD_READOOB:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pxa3xx_set_datasize(info);
 		break;
 	case NAND_CMD_SEQIN:
 		exec_cmd = 0;
 =======
+=======
+>>>>>>> v3.18
 		pxa3xx_set_datasize(info, mtd);
 		break;
 	case NAND_CMD_PARAM:
 		info->use_spare = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -958,7 +1135,10 @@ static void prepare_start_command(struct pxa3xx_nand_info *info, int command)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If we are about to issue a read command, or about to set
 	 * the write address, then clean the data buffer.
@@ -993,6 +1173,9 @@ static int prepare_set_command(struct pxa3xx_nand_info *info, int command,
 	if (command == NAND_CMD_SEQIN)
 		exec_cmd = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	addr_cycle = NDCB0_ADDR_CYC(host->row_addr_cycles
 				    + host->col_addr_cycles);
@@ -1000,6 +1183,7 @@ static int prepare_set_command(struct pxa3xx_nand_info *info, int command,
 	switch (command) {
 	case NAND_CMD_READOOB:
 	case NAND_CMD_READ0:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		cmd = host->cmdset->read1;
 		if (command == NAND_CMD_READOOB)
@@ -1038,6 +1222,8 @@ static int prepare_set_command(struct pxa3xx_nand_info *info, int command,
 		memset(info->data_buff, 0xFF, info->buf_count);
 
 =======
+=======
+>>>>>>> v3.18
 		info->buf_start = column;
 		info->ndcb0 |= NDCB0_CMD_TYPE(0)
 				| addr_cycle
@@ -1082,6 +1268,9 @@ static int prepare_set_command(struct pxa3xx_nand_info *info, int command,
 			info->data_size = 0;
 			exec_cmd = 1;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -1092,6 +1281,7 @@ static int prepare_set_command(struct pxa3xx_nand_info *info, int command,
 			break;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		cmd = host->cmdset->program;
 		info->ndcb0 |= NDCB0_CMD_TYPE(0x1)
@@ -1109,6 +1299,8 @@ static int prepare_set_command(struct pxa3xx_nand_info *info, int command,
 				| NDCB0_ADDR_CYC(1)
 				| cmd;
 =======
+=======
+>>>>>>> v3.18
 		/* Second command setting for large pages */
 		if (mtd->writesize > PAGE_CHUNK_SIZE) {
 			/*
@@ -1162,11 +1354,15 @@ static int prepare_set_command(struct pxa3xx_nand_info *info, int command,
 				| NDCB0_ADDR_CYC(1)
 				| command;
 		info->ndcb1 = (column & 0xFF);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		info->data_size = 8;
 		break;
 	case NAND_CMD_STATUS:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		cmd = host->cmdset->read_status;
 		info->buf_count = 1;
@@ -1174,10 +1370,15 @@ static int prepare_set_command(struct pxa3xx_nand_info *info, int command,
 				| NDCB0_ADDR_CYC(1)
 				| cmd;
 =======
+=======
+>>>>>>> v3.18
 		info->buf_count = 1;
 		info->ndcb0 |= NDCB0_CMD_TYPE(4)
 				| NDCB0_ADDR_CYC(1)
 				| command;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		info->data_size = 8;
@@ -1185,7 +1386,10 @@ static int prepare_set_command(struct pxa3xx_nand_info *info, int command,
 
 	case NAND_CMD_ERASE1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cmd = host->cmdset->erase;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		info->ndcb0 |= NDCB0_CMD_TYPE(2)
@@ -1193,7 +1397,12 @@ static int prepare_set_command(struct pxa3xx_nand_info *info, int command,
 				| NDCB0_ADDR_CYC(3)
 				| NDCB0_DBC
 <<<<<<< HEAD
+<<<<<<< HEAD
 				| cmd;
+=======
+				| (NAND_CMD_ERASE2 << 8)
+				| NAND_CMD_ERASE1;
+>>>>>>> v3.18
 =======
 				| (NAND_CMD_ERASE2 << 8)
 				| NAND_CMD_ERASE1;
@@ -1204,9 +1413,14 @@ static int prepare_set_command(struct pxa3xx_nand_info *info, int command,
 		break;
 	case NAND_CMD_RESET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cmd = host->cmdset->reset;
 		info->ndcb0 |= NDCB0_CMD_TYPE(5)
 				| cmd;
+=======
+		info->ndcb0 |= NDCB0_CMD_TYPE(5)
+				| command;
+>>>>>>> v3.18
 =======
 		info->ndcb0 |= NDCB0_CMD_TYPE(5)
 				| command;
@@ -1229,8 +1443,13 @@ static int prepare_set_command(struct pxa3xx_nand_info *info, int command,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pxa3xx_nand_cmdfunc(struct mtd_info *mtd, unsigned command,
 				int column, int page_addr)
+=======
+static void nand_cmdfunc(struct mtd_info *mtd, unsigned command,
+			 int column, int page_addr)
+>>>>>>> v3.18
 =======
 static void nand_cmdfunc(struct mtd_info *mtd, unsigned command,
 			 int column, int page_addr)
@@ -1246,7 +1465,11 @@ static void nand_cmdfunc(struct mtd_info *mtd, unsigned command,
 	 * for indexing a word-oriented device
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (host->reg_ndcr & NDCR_DWIDTH_M)
+=======
+	if (info->reg_ndcr & NDCR_DWIDTH_M)
+>>>>>>> v3.18
 =======
 	if (info->reg_ndcr & NDCR_DWIDTH_M)
 >>>>>>> v3.18
@@ -1260,6 +1483,7 @@ static void nand_cmdfunc(struct mtd_info *mtd, unsigned command,
 	if (info->cs != host->cs) {
 		info->cs = host->cs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nand_writel(info, NDTR0CS0, host->ndtr0cs0);
 		nand_writel(info, NDTR1CS0, host->ndtr1cs0);
 	}
@@ -1269,6 +1493,8 @@ static void nand_cmdfunc(struct mtd_info *mtd, unsigned command,
 	if (exec_cmd) {
 		init_completion(&info->cmd_complete);
 =======
+=======
+>>>>>>> v3.18
 		nand_writel(info, NDTR0CS0, info->ndtr0cs0);
 		nand_writel(info, NDTR1CS0, info->ndtr1cs0);
 	}
@@ -1282,6 +1508,9 @@ static void nand_cmdfunc(struct mtd_info *mtd, unsigned command,
 		init_completion(&info->cmd_complete);
 		init_completion(&info->dev_ready);
 		info->need_wait = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pxa3xx_nand_start(info);
 
@@ -1297,7 +1526,10 @@ static void nand_cmdfunc(struct mtd_info *mtd, unsigned command,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void nand_cmdfunc_extended(struct mtd_info *mtd,
 				  const unsigned command,
 				  int column, int page_addr)
@@ -1409,6 +1641,9 @@ static void nand_cmdfunc_extended(struct mtd_info *mtd,
 	info->state = STATE_IDLE;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pxa3xx_nand_write_page_hwecc(struct mtd_info *mtd,
 		struct nand_chip *chip, const uint8_t *buf, int oob_required)
@@ -1430,6 +1665,7 @@ static int pxa3xx_nand_read_page_hwecc(struct mtd_info *mtd,
 	chip->read_buf(mtd, chip->oob_poi, mtd->oobsize);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (info->retcode == ERR_SBERR) {
 		switch (info->use_ecc) {
 		case 1:
@@ -1445,6 +1681,8 @@ static int pxa3xx_nand_read_page_hwecc(struct mtd_info *mtd,
 		 * 0, which is different from the ECC information within
 		 * OOB, ignore such double bit errors
 =======
+=======
+>>>>>>> v3.18
 	if (info->retcode == ERR_CORERR && info->use_ecc) {
 		mtd->ecc_stats.corrected += info->ecc_err_cnt;
 
@@ -1453,6 +1691,9 @@ static int pxa3xx_nand_read_page_hwecc(struct mtd_info *mtd,
 		 * for blank page (all 0xff), HW will calculate its ECC as
 		 * 0, which is different from the ECC information within
 		 * OOB, ignore such uncorrectable errors
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		if (is_buf_blank(buf, mtd->writesize))
@@ -1462,7 +1703,11 @@ static int pxa3xx_nand_read_page_hwecc(struct mtd_info *mtd,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return info->max_bitflips;
+>>>>>>> v3.18
 =======
 	return info->max_bitflips;
 >>>>>>> v3.18
@@ -1525,7 +1770,10 @@ static int pxa3xx_nand_waitfunc(struct mtd_info *mtd, struct nand_chip *this)
 	struct pxa3xx_nand_host *host = mtd->priv;
 	struct pxa3xx_nand_info *info = host->info_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	if (info->need_wait) {
@@ -1537,12 +1785,16 @@ static int pxa3xx_nand_waitfunc(struct mtd_info *mtd, struct nand_chip *this)
 			return NAND_STATUS_FAIL;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* pxa3xx_nand_send_command has waited for command complete */
 	if (this->state == FL_WRITING || this->state == FL_ERASING) {
 		if (info->retcode == ERR_NONE)
 			return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		else {
 			/*
@@ -1555,11 +1807,16 @@ static int pxa3xx_nand_waitfunc(struct mtd_info *mtd, struct nand_chip *this)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		else
 			return NAND_STATUS_FAIL;
 	}
 
 	return NAND_STATUS_READY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1568,7 +1825,11 @@ static int pxa3xx_nand_config_flash(struct pxa3xx_nand_info *info,
 {
 	struct platform_device *pdev = info->pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa3xx_nand_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct pxa3xx_nand_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct pxa3xx_nand_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1587,8 +1848,11 @@ static int pxa3xx_nand_config_flash(struct pxa3xx_nand_info *info,
 
 	/* calculate flash information */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->cmdset = &default_cmdset;
 	host->page_size = f->page_size;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	host->read_id_bytes = (f->page_size == 2048) ? 4 : 2;
@@ -1612,7 +1876,11 @@ static int pxa3xx_nand_config_flash(struct pxa3xx_nand_info *info,
 	ndcr |= NDCR_SPARE_EN; /* enable spare by default */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->reg_ndcr = ndcr;
+=======
+	info->reg_ndcr = ndcr;
+>>>>>>> v3.18
 =======
 	info->reg_ndcr = ndcr;
 >>>>>>> v3.18
@@ -1631,6 +1899,7 @@ static int pxa3xx_nand_detect_config(struct pxa3xx_nand_info *info)
 	uint32_t ndcr = nand_readl(info, NDCR);
 
 	if (ndcr & NDCR_PAGE_SZ) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		host->page_size = 2048;
 		host->read_id_bytes = 4;
@@ -1662,6 +1931,8 @@ static int pxa3xx_nand_init_buff(struct pxa3xx_nand_info *info)
 	if (use_dma == 0) {
 		info->data_buff = kmalloc(MAX_BUFF_SIZE, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 		/* Controller's FIFO size */
 		info->chunk_size = 2048;
 		host->read_id_bytes = 4;
@@ -1685,6 +1956,9 @@ static int pxa3xx_nand_init_buff(struct pxa3xx_nand_info *info)
 
 	if (use_dma == 0) {
 		info->data_buff = kmalloc(info->buf_size, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (info->data_buff == NULL)
 			return -ENOMEM;
@@ -1692,7 +1966,11 @@ static int pxa3xx_nand_init_buff(struct pxa3xx_nand_info *info)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->data_buff = dma_alloc_coherent(&pdev->dev, MAX_BUFF_SIZE,
+=======
+	info->data_buff = dma_alloc_coherent(&pdev->dev, info->buf_size,
+>>>>>>> v3.18
 =======
 	info->data_buff = dma_alloc_coherent(&pdev->dev, info->buf_size,
 >>>>>>> v3.18
@@ -1710,7 +1988,11 @@ static int pxa3xx_nand_init_buff(struct pxa3xx_nand_info *info)
 	if (info->data_dma_ch < 0) {
 		dev_err(&pdev->dev, "failed to request data dma\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_free_coherent(&pdev->dev, MAX_BUFF_SIZE,
+=======
+		dma_free_coherent(&pdev->dev, info->buf_size,
+>>>>>>> v3.18
 =======
 		dma_free_coherent(&pdev->dev, info->buf_size,
 >>>>>>> v3.18
@@ -1718,6 +2000,7 @@ static int pxa3xx_nand_init_buff(struct pxa3xx_nand_info *info)
 		return info->data_dma_ch;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 }
@@ -1728,6 +2011,8 @@ static int pxa3xx_nand_sensing(struct pxa3xx_nand_info *info)
 	int ret;
 	mtd = info->host[info->cs]->mtd;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Now that DMA buffers are allocated we turn on
 	 * DMA proper for I/O operations.
@@ -1771,6 +2056,9 @@ static int pxa3xx_nand_sensing(struct pxa3xx_nand_info *info)
 	mtd = info->host[info->cs]->mtd;
 	chip = mtd->priv;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* use the common timing to make a try */
 	ret = pxa3xx_nand_config_flash(info, &builtin_flash_types[0]);
@@ -1778,12 +2066,15 @@ static int pxa3xx_nand_sensing(struct pxa3xx_nand_info *info)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pxa3xx_nand_cmdfunc(mtd, NAND_CMD_RESET, 0, 0);
 	if (info->is_ready)
 		return 0;
 
 	return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	chip->cmdfunc(mtd, NAND_CMD_RESET, 0, 0);
 	ret = chip->waitfunc(mtd, chip);
 	if (ret & NAND_STATUS_FAIL)
@@ -1859,6 +2150,9 @@ static int pxa_ecc_init(struct pxa3xx_nand_info *info,
 	dev_info(&info->pdev->dev, "ECC strength %d, ECC step size %d\n",
 		 ecc->strength, ecc->size);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1868,7 +2162,11 @@ static int pxa3xx_nand_scan(struct mtd_info *mtd)
 	struct pxa3xx_nand_info *info = host->info_data;
 	struct platform_device *pdev = info->pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa3xx_nand_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct pxa3xx_nand_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct pxa3xx_nand_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1879,6 +2177,10 @@ static int pxa3xx_nand_scan(struct mtd_info *mtd)
 	uint64_t chipsize;
 	int i, ret, num;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint16_t ecc_strength, ecc_step;
+>>>>>>> v3.18
 =======
 	uint16_t ecc_strength, ecc_step;
 >>>>>>> v3.18
@@ -1941,6 +2243,7 @@ static int pxa3xx_nand_scan(struct mtd_info *mtd)
 	def = pxa3xx_flash_ids;
 KEEP_CONFIG:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->ecc.mode = NAND_ECC_HW;
 	chip->ecc.size = host->page_size;
 	chip->ecc.strength = 1;
@@ -1951,6 +2254,8 @@ KEEP_CONFIG:
 	if (nand_scan_ident(mtd, 1, def))
 		return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	if (info->reg_ndcr & NDCR_DWIDTH_M)
 		chip->options |= NAND_BUSWIDTH_16;
 
@@ -2006,6 +2311,9 @@ KEEP_CONFIG:
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* calculate addressing information */
 	if (mtd->writesize >= 2048)
@@ -2014,8 +2322,11 @@ KEEP_CONFIG:
 		host->col_addr_cycles = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->oob_buff = info->data_buff + mtd->writesize;
 =======
+=======
+>>>>>>> v3.18
 	/* release the initial buffer */
 	kfree(info->data_buff);
 
@@ -2026,14 +2337,20 @@ KEEP_CONFIG:
 		return ret;
 	info->oob_buff = info->data_buff + mtd->writesize;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((mtd->size >> chip->page_shift) > 65536)
 		host->row_addr_cycles = 3;
 	else
 		host->row_addr_cycles = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mtd->name = mtd_names[0];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return nand_scan_tail(mtd);
@@ -2050,6 +2367,7 @@ static int alloc_nand_resource(struct platform_device *pdev)
 	int ret, irq, cs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
 	info = kzalloc(sizeof(*info) + (sizeof(*mtd) +
 		       sizeof(*host)) * pdata->num_cs, GFP_KERNEL);
@@ -2060,6 +2378,8 @@ static int alloc_nand_resource(struct platform_device *pdev)
 
 	info->pdev = pdev;
 =======
+=======
+>>>>>>> v3.18
 	pdata = dev_get_platdata(&pdev->dev);
 	info = devm_kzalloc(&pdev->dev, sizeof(*info) + (sizeof(*mtd) +
 			    sizeof(*host)) * pdata->num_cs, GFP_KERNEL);
@@ -2068,6 +2388,9 @@ static int alloc_nand_resource(struct platform_device *pdev)
 
 	info->pdev = pdev;
 	info->variant = pxa3xx_nand_get_variant(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (cs = 0; cs < pdata->num_cs; cs++) {
 		mtd = (struct mtd_info *)((unsigned int)&info[1] +
@@ -2087,7 +2410,10 @@ static int alloc_nand_resource(struct platform_device *pdev)
 		chip->waitfunc		= pxa3xx_nand_waitfunc;
 		chip->select_chip	= pxa3xx_nand_select_chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chip->cmdfunc		= pxa3xx_nand_cmdfunc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		chip->read_word		= pxa3xx_nand_read_word;
@@ -2095,6 +2421,11 @@ static int alloc_nand_resource(struct platform_device *pdev)
 		chip->read_buf		= pxa3xx_nand_read_buf;
 		chip->write_buf		= pxa3xx_nand_write_buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		chip->options		|= NAND_NO_SUBPAGE_WRITE;
+		chip->cmdfunc		= nand_cmdfunc;
+>>>>>>> v3.18
 =======
 		chip->options		|= NAND_NO_SUBPAGE_WRITE;
 		chip->cmdfunc		= nand_cmdfunc;
@@ -2103,6 +2434,7 @@ static int alloc_nand_resource(struct platform_device *pdev)
 
 	spin_lock_init(&chip->controller->lock);
 	init_waitqueue_head(&chip->controller->wq);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	info->clk = clk_get(&pdev->dev, NULL);
 	if (IS_ERR(info->clk)) {
@@ -2137,6 +2469,8 @@ static int alloc_nand_resource(struct platform_device *pdev)
 		}
 		info->drcmr_cmd = r->start;
 =======
+=======
+>>>>>>> v3.18
 	info->clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(info->clk)) {
 		dev_err(&pdev->dev, "failed to get nand clock\n");
@@ -2175,6 +2509,9 @@ static int alloc_nand_resource(struct platform_device *pdev)
 			}
 			info->drcmr_cmd = r->start;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2182,6 +2519,7 @@ static int alloc_nand_resource(struct platform_device *pdev)
 	if (irq < 0) {
 		dev_err(&pdev->dev, "no IRQ resource defined\n");
 		ret = -ENXIO;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail_put_clk;
 	}
@@ -2212,6 +2550,8 @@ static int alloc_nand_resource(struct platform_device *pdev)
 	if (ret)
 		goto fail_free_io;
 =======
+=======
+>>>>>>> v3.18
 		goto fail_disable_clk;
 	}
 
@@ -2230,14 +2570,21 @@ static int alloc_nand_resource(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto fail_disable_clk;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* initialize all interrupts to be disabled */
 	disable_int(info, NDSR_MASK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_irq(irq, pxa3xx_nand_irq, IRQF_DISABLED,
 			  pdev->name, info);
+=======
+	ret = request_irq(irq, pxa3xx_nand_irq, 0, pdev->name, info);
+>>>>>>> v3.18
 =======
 	ret = request_irq(irq, pxa3xx_nand_irq, 0, pdev->name, info);
 >>>>>>> v3.18
@@ -2252,6 +2599,7 @@ static int alloc_nand_resource(struct platform_device *pdev)
 
 fail_free_buf:
 	free_irq(irq, info);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (use_dma) {
 		pxa_free_dma(info->data_dma_ch);
@@ -2273,6 +2621,11 @@ fail_free_mtd:
 fail_disable_clk:
 	clk_disable_unprepare(info->clk);
 >>>>>>> v3.18
+=======
+	kfree(info->data_buff);
+fail_disable_clk:
+	clk_disable_unprepare(info->clk);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -2281,7 +2634,10 @@ static int pxa3xx_nand_remove(struct platform_device *pdev)
 	struct pxa3xx_nand_info *info = platform_get_drvdata(pdev);
 	struct pxa3xx_nand_platform_data *pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *r;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int irq, cs;
@@ -2290,8 +2646,12 @@ static int pxa3xx_nand_remove(struct platform_device *pdev)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
 	platform_set_drvdata(pdev, NULL);
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -2299,6 +2659,7 @@ static int pxa3xx_nand_remove(struct platform_device *pdev)
 	irq = platform_get_irq(pdev, 0);
 	if (irq >= 0)
 		free_irq(irq, info);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (use_dma) {
 		pxa_free_dma(info->data_dma_ch);
@@ -2328,6 +2689,8 @@ static struct of_device_id pxa3xx_nand_dt_ids[] = {
 MODULE_DEVICE_TABLE(of, i2c_pxa_dt_ids);
 
 =======
+=======
+>>>>>>> v3.18
 	pxa3xx_nand_free_buff(info);
 
 	clk_disable_unprepare(info->clk);
@@ -2337,6 +2700,9 @@ MODULE_DEVICE_TABLE(of, i2c_pxa_dt_ids);
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pxa3xx_nand_probe_dt(struct platform_device *pdev)
 {
@@ -2358,7 +2724,10 @@ static int pxa3xx_nand_probe_dt(struct platform_device *pdev)
 		pdata->keep_config = 1;
 	of_property_read_u32(np, "num-cs", &pdata->num_cs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pdata->flash_bbt = of_get_nand_on_flash_bbt(np);
 
 	pdata->ecc_strength = of_get_nand_ecc_strength(np);
@@ -2368,6 +2737,9 @@ static int pxa3xx_nand_probe_dt(struct platform_device *pdev)
 	pdata->ecc_step_size = of_get_nand_ecc_step_size(np);
 	if (pdata->ecc_step_size < 0)
 		pdata->ecc_step_size = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pdev->dev.platform_data = pdata;
@@ -2375,12 +2747,15 @@ static int pxa3xx_nand_probe_dt(struct platform_device *pdev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static inline int pxa3xx_nand_probe_dt(struct platform_device *pdev)
 {
 	return 0;
 }
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2392,7 +2767,10 @@ static int pxa3xx_nand_probe(struct platform_device *pdev)
 	int ret, cs, probe_success;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef ARCH_HAS_DMA
 	if (use_dma) {
 		use_dma = 0;
@@ -2400,13 +2778,20 @@ static int pxa3xx_nand_probe(struct platform_device *pdev)
 			 "This platform can't do DMA on this device\n");
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = pxa3xx_nand_probe_dt(pdev);
 	if (ret)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -2425,9 +2810,12 @@ static int pxa3xx_nand_probe(struct platform_device *pdev)
 	probe_success = 0;
 	for (cs = 0; cs < pdata->num_cs; cs++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		info->cs = cs;
 		ret = pxa3xx_nand_scan(info->host[cs]->mtd);
 =======
+=======
+>>>>>>> v3.18
 		struct mtd_info *mtd = info->host[cs]->mtd;
 
 		/*
@@ -2438,6 +2826,9 @@ static int pxa3xx_nand_probe(struct platform_device *pdev)
 		mtd->name = "pxa3xx_nand-0";
 		info->cs = cs;
 		ret = pxa3xx_nand_scan(mtd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret) {
 			dev_warn(&pdev->dev, "failed to scan nand at cs %d\n",
@@ -2447,7 +2838,11 @@ static int pxa3xx_nand_probe(struct platform_device *pdev)
 
 		ppdata.of_node = pdev->dev.of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = mtd_device_parse_register(info->host[cs]->mtd, NULL,
+=======
+		ret = mtd_device_parse_register(mtd, NULL,
+>>>>>>> v3.18
 =======
 		ret = mtd_device_parse_register(mtd, NULL,
 >>>>>>> v3.18
@@ -2474,7 +2869,11 @@ static int pxa3xx_nand_suspend(struct platform_device *pdev, pm_message_t state)
 	int cs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -2499,7 +2898,11 @@ static int pxa3xx_nand_resume(struct platform_device *pdev)
 	int cs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -2536,7 +2939,11 @@ static struct platform_driver pxa3xx_nand_driver = {
 	.driver = {
 		.name	= "pxa3xx-nand",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(pxa3xx_nand_dt_ids),
+=======
+		.of_match_table = pxa3xx_nand_dt_ids,
+>>>>>>> v3.18
 =======
 		.of_match_table = pxa3xx_nand_dt_ids,
 >>>>>>> v3.18

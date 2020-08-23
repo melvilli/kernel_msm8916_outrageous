@@ -20,6 +20,11 @@
 #include <linux/regulator/driver.h>
 #include <linux/regulator/machine.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/regulator/of_regulator.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/regulator/of_regulator.h>
@@ -452,6 +457,12 @@ static int da9055_gpio_init(struct da9055_regulator *regulator,
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!pdata)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (!pdata)
 		return 0;
@@ -542,7 +553,10 @@ static inline struct da9055_regulator_info *find_regulator_info(int id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static struct of_regulator_match da9055_reg_matches[] = {
 	{ .name = "BUCK1", },
@@ -596,6 +610,9 @@ static inline int da9055_regulator_dt_init(struct platform_device *pdev,
 }
 #endif /* CONFIG_OF */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int da9055_regulator_probe(struct platform_device *pdev)
 {
@@ -603,12 +620,18 @@ static int da9055_regulator_probe(struct platform_device *pdev)
 	struct da9055_regulator *regulator;
 	struct da9055 *da9055 = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct da9055_pdata *pdata = da9055->dev->platform_data;
 	int ret, irq;
 
 	if (pdata == NULL || pdata->regulators[pdev->id] == NULL)
 		return -ENODEV;
 
+=======
+	struct da9055_pdata *pdata = dev_get_platdata(da9055->dev);
+	int ret, irq;
+
+>>>>>>> v3.18
 =======
 	struct da9055_pdata *pdata = dev_get_platdata(da9055->dev);
 	int ret, irq;
@@ -631,9 +654,12 @@ static int da9055_regulator_probe(struct platform_device *pdev)
 	config.regmap = da9055->regmap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata && pdata->regulators)
 		config.init_data = pdata->regulators[pdev->id];
 =======
+=======
+>>>>>>> v3.18
 	if (pdata && pdata->regulators) {
 		config.init_data = pdata->regulators[pdev->id];
 	} else {
@@ -642,12 +668,16 @@ static int da9055_regulator_probe(struct platform_device *pdev)
 		if (ret < 0)
 			return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = da9055_gpio_init(regulator, &config, pdata, pdev->id);
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	regulator->rdev = regulator_register(&regulator->info->reg_desc,
 					     &config);
@@ -657,6 +687,8 @@ static int da9055_regulator_probe(struct platform_device *pdev)
 		ret = PTR_ERR(regulator->rdev);
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	regulator->rdev = devm_regulator_register(&pdev->dev,
 						  &regulator->info->reg_desc,
 						  &config);
@@ -664,6 +696,9 @@ static int da9055_regulator_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Failed to register regulator %s\n",
 			regulator->info->reg_desc.name);
 		return PTR_ERR(regulator->rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -671,7 +706,13 @@ static int da9055_regulator_probe(struct platform_device *pdev)
 	if (pdev->id == DA9055_ID_LDO5 || pdev->id ==  DA9055_ID_LDO6) {
 		irq = platform_get_irq_byname(pdev, "REGULATOR");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq = regmap_irq_get_virq(da9055->irq_data, irq);
+=======
+		if (irq < 0)
+			return irq;
+
+>>>>>>> v3.18
 =======
 		if (irq < 0)
 			return irq;
@@ -689,7 +730,11 @@ static int da9055_regulator_probe(struct platform_device *pdev)
 				"Failed to request Regulator IRQ %d: %d\n",
 				irq, ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto err_regulator;
+=======
+				return ret;
+>>>>>>> v3.18
 =======
 				return ret;
 >>>>>>> v3.18
@@ -700,6 +745,7 @@ static int da9055_regulator_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, regulator);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err_regulator:
@@ -716,12 +762,17 @@ static int da9055_regulator_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver da9055_regulator_driver = {
 	.probe = da9055_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = da9055_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver = {

@@ -104,6 +104,10 @@ static void record_compound(struct string_list **keyw,
 %token ASM_PHRASE
 %token ATTRIBUTE_PHRASE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+%token TYPEOF_PHRASE
+>>>>>>> v3.18
 =======
 %token TYPEOF_PHRASE
 >>>>>>> v3.18
@@ -225,8 +229,13 @@ type_specifier:
 	simple_type_specifier
 	| cvar_qualifier
 <<<<<<< HEAD
+<<<<<<< HEAD
 	| TYPEOF_KEYW '(' decl_specifier_seq '*' ')'
 	| TYPEOF_KEYW '(' decl_specifier_seq ')'
+=======
+	| TYPEOF_KEYW '(' parameter_declaration ')'
+	| TYPEOF_PHRASE
+>>>>>>> v3.18
 =======
 	| TYPEOF_KEYW '(' parameter_declaration ')'
 	| TYPEOF_PHRASE

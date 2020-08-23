@@ -29,6 +29,7 @@ static const struct xt_table nf_nat_ipv4_table = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int alloc_null_binding(struct nf_conn *ct, unsigned int hooknum)
 {
 	/* Force range to this IP; let proto decide mapping for
@@ -248,6 +249,8 @@ nf_nat_ipv4_local_fn(unsigned int hooknum,
 	}
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static unsigned int iptable_nat_do_chain(const struct nf_hook_ops *ops,
 					 struct sk_buff *skb,
 					 const struct net_device *in,
@@ -293,6 +296,9 @@ static unsigned int iptable_nat_ipv4_local_fn(const struct nf_hook_ops *ops,
 					      int (*okfn)(struct sk_buff *))
 {
 	return nf_nat_ipv4_local_fn(ops, skb, in, out, iptable_nat_do_chain);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -300,7 +306,11 @@ static struct nf_hook_ops nf_nat_ipv4_ops[] __read_mostly = {
 	/* Before packet filtering, change destination */
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.hook		= nf_nat_ipv4_in,
+=======
+		.hook		= iptable_nat_ipv4_in,
+>>>>>>> v3.18
 =======
 		.hook		= iptable_nat_ipv4_in,
 >>>>>>> v3.18
@@ -312,7 +322,11 @@ static struct nf_hook_ops nf_nat_ipv4_ops[] __read_mostly = {
 	/* After packet filtering, change source */
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.hook		= nf_nat_ipv4_out,
+=======
+		.hook		= iptable_nat_ipv4_out,
+>>>>>>> v3.18
 =======
 		.hook		= iptable_nat_ipv4_out,
 >>>>>>> v3.18
@@ -324,7 +338,11 @@ static struct nf_hook_ops nf_nat_ipv4_ops[] __read_mostly = {
 	/* Before packet filtering, change destination */
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.hook		= nf_nat_ipv4_local_fn,
+=======
+		.hook		= iptable_nat_ipv4_local_fn,
+>>>>>>> v3.18
 =======
 		.hook		= iptable_nat_ipv4_local_fn,
 >>>>>>> v3.18
@@ -336,7 +354,11 @@ static struct nf_hook_ops nf_nat_ipv4_ops[] __read_mostly = {
 	/* After packet filtering, change source */
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.hook		= nf_nat_ipv4_fn,
+=======
+		.hook		= iptable_nat_ipv4_fn,
+>>>>>>> v3.18
 =======
 		.hook		= iptable_nat_ipv4_fn,
 >>>>>>> v3.18
@@ -357,7 +379,11 @@ static int __net_init iptable_nat_net_init(struct net *net)
 	net->ipv4.nat_table = ipt_register_table(net, &nf_nat_ipv4_table, repl);
 	kfree(repl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(net->ipv4.nat_table);
+=======
+	return PTR_ERR_OR_ZERO(net->ipv4.nat_table);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(net->ipv4.nat_table);
 >>>>>>> v3.18

@@ -10,6 +10,7 @@
 #include "xattr.h"
 #include "acl.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
 
 static int reiserfs_set_acl(struct reiserfs_transaction_handle *th,
@@ -45,6 +46,8 @@ posix_acl_set(struct dentry *dentry, const char *name, const void *value,
 	/* Pessimism: We can't assume that anything from the xattr root up
 	 * has been created. */
 =======
+=======
+>>>>>>> v3.18
 #include <linux/uaccess.h>
 
 static int __reiserfs_set_acl(struct reiserfs_transaction_handle *th,
@@ -65,6 +68,9 @@ reiserfs_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 	 * Pessimism: We can't assume that anything from the xattr root up
 	 * has been created.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	jcreate_blocks = reiserfs_xattr_jcreate_nblocks(inode) +
@@ -72,6 +78,7 @@ reiserfs_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 
 	reiserfs_write_lock(inode->i_sb);
 	error = journal_begin(&th, inode->i_sb, jcreate_blocks);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (error == 0) {
 		error = reiserfs_set_acl(&th, inode, type, acl);
@@ -104,6 +111,8 @@ posix_acl_get(struct dentry *dentry, const char *name, void *buffer,
 	error = posix_acl_to_xattr(&init_user_ns, acl, buffer, size);
 	posix_acl_release(acl);
 =======
+=======
+>>>>>>> v3.18
 	reiserfs_write_unlock(inode->i_sb);
 	if (error == 0) {
 		error = __reiserfs_set_acl(&th, inode, type, acl);
@@ -113,6 +122,9 @@ posix_acl_get(struct dentry *dentry, const char *name, void *buffer,
 		if (error2)
 			error = error2;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return error;
@@ -122,7 +134,11 @@ posix_acl_get(struct dentry *dentry, const char *name, void *buffer,
  * Convert from filesystem to in-memory representation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct posix_acl *posix_acl_from_disk(const void *value, size_t size)
+=======
+static struct posix_acl *reiserfs_posix_acl_from_disk(const void *value, size_t size)
+>>>>>>> v3.18
 =======
 static struct posix_acl *reiserfs_posix_acl_from_disk(const void *value, size_t size)
 >>>>>>> v3.18
@@ -188,7 +204,11 @@ static struct posix_acl *reiserfs_posix_acl_from_disk(const void *value, size_t 
 	return acl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       fail:
+=======
+fail:
+>>>>>>> v3.18
 =======
 fail:
 >>>>>>> v3.18
@@ -200,7 +220,11 @@ fail:
  * Convert from in-memory to filesystem representation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *posix_acl_to_disk(const struct posix_acl *acl, size_t * size)
+=======
+static void *reiserfs_posix_acl_to_disk(const struct posix_acl *acl, size_t * size)
+>>>>>>> v3.18
 =======
 static void *reiserfs_posix_acl_to_disk(const struct posix_acl *acl, size_t * size)
 >>>>>>> v3.18
@@ -249,7 +273,11 @@ static void *reiserfs_posix_acl_to_disk(const struct posix_acl *acl, size_t * si
 	return (char *)ext_acl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       fail:
+=======
+fail:
+>>>>>>> v3.18
 =======
 fail:
 >>>>>>> v3.18
@@ -271,10 +299,13 @@ struct posix_acl *reiserfs_get_acl(struct inode *inode, int type)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acl = get_cached_acl(inode, type);
 	if (acl != ACL_NOT_CACHED)
 		return acl;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (type) {
@@ -304,20 +335,30 @@ struct posix_acl *reiserfs_get_acl(struct inode *inode, int type)
 	retval = reiserfs_xattr_get(inode, name, value, size);
 	if (retval == -ENODATA || retval == -ENOSYS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* This shouldn't actually happen as it should have
 		   been caught above.. but just in case */
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * This shouldn't actually happen as it should have
 		 * been caught above.. but just in case
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		acl = NULL;
 	} else if (retval < 0) {
 		acl = ERR_PTR(retval);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acl = posix_acl_from_disk(value, retval);
+=======
+		acl = reiserfs_posix_acl_from_disk(value, retval);
+>>>>>>> v3.18
 =======
 		acl = reiserfs_posix_acl_from_disk(value, retval);
 >>>>>>> v3.18
@@ -337,7 +378,11 @@ struct posix_acl *reiserfs_get_acl(struct inode *inode, int type)
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 reiserfs_set_acl(struct reiserfs_transaction_handle *th, struct inode *inode,
+=======
+__reiserfs_set_acl(struct reiserfs_transaction_handle *th, struct inode *inode,
+>>>>>>> v3.18
 =======
 __reiserfs_set_acl(struct reiserfs_transaction_handle *th, struct inode *inode,
 >>>>>>> v3.18
@@ -349,9 +394,12 @@ __reiserfs_set_acl(struct reiserfs_transaction_handle *th, struct inode *inode,
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (S_ISLNK(inode->i_mode))
 		return -EOPNOTSUPP;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (type) {
@@ -359,11 +407,14 @@ __reiserfs_set_acl(struct reiserfs_transaction_handle *th, struct inode *inode,
 		name = POSIX_ACL_XATTR_ACCESS;
 		if (acl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = posix_acl_update_mode(inode,
 				&inode->i_mode, &acl);
 			if (error)
 				return error;
 =======
+=======
+>>>>>>> v3.18
 			error = posix_acl_equiv_mode(acl, &inode->i_mode);
 			if (error < 0)
 				return error;
@@ -371,6 +422,9 @@ __reiserfs_set_acl(struct reiserfs_transaction_handle *th, struct inode *inode,
 				if (error == 0)
 					acl = NULL;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -385,7 +439,11 @@ __reiserfs_set_acl(struct reiserfs_transaction_handle *th, struct inode *inode,
 
 	if (acl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		value = posix_acl_to_disk(acl, &size);
+=======
+		value = reiserfs_posix_acl_to_disk(acl, &size);
+>>>>>>> v3.18
 =======
 		value = reiserfs_posix_acl_to_disk(acl, &size);
 >>>>>>> v3.18
@@ -418,13 +476,19 @@ __reiserfs_set_acl(struct reiserfs_transaction_handle *th, struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* dir->i_mutex: locked,
  * inode is new and not released into the wild yet */
 =======
+=======
+>>>>>>> v3.18
 /*
  * dir->i_mutex: locked,
  * inode is new and not released into the wild yet
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 reiserfs_inherit_default_acl(struct reiserfs_transaction_handle *th,
@@ -432,7 +496,11 @@ reiserfs_inherit_default_acl(struct reiserfs_transaction_handle *th,
 			     struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct posix_acl *acl;
+=======
+	struct posix_acl *default_acl, *acl;
+>>>>>>> v3.18
 =======
 	struct posix_acl *default_acl, *acl;
 >>>>>>> v3.18
@@ -443,6 +511,7 @@ reiserfs_inherit_default_acl(struct reiserfs_transaction_handle *th,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ACLs can only be used on "new" objects, so if it's an old object
 	 * there is nothing to inherit from */
 	if (get_inode_sd_version(dir) == STAT_DATA_V1)
@@ -452,6 +521,8 @@ reiserfs_inherit_default_acl(struct reiserfs_transaction_handle *th,
 	 * would be useless since permissions are ignored, and a pain because
 	 * it introduces locking cycles */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * ACLs can only be used on "new" objects, so if it's an old object
 	 * there is nothing to inherit from
@@ -464,12 +535,16 @@ reiserfs_inherit_default_acl(struct reiserfs_transaction_handle *th,
 	 * would be useless since permissions are ignored, and a pain because
 	 * it introduces locking cycles
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_PRIVATE(dir)) {
 		inode->i_flags |= S_PRIVATE;
 		goto apply_umask;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	acl = reiserfs_get_acl(dir, ACL_TYPE_DEFAULT);
 	if (IS_ERR(acl))
@@ -503,6 +578,8 @@ reiserfs_inherit_default_acl(struct reiserfs_transaction_handle *th,
 
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	err = posix_acl_create(dir, &inode->i_mode, &default_acl, &acl);
 	if (err)
 		return err;
@@ -525,6 +602,9 @@ apply_umask:
 	/* no ACL, apply umask */
 	inode->i_mode &= ~current_umask();
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -569,6 +649,7 @@ int reiserfs_cache_default_acl(struct inode *inode)
 	return nblocks;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int reiserfs_acl_chmod(struct inode *inode)
 {
@@ -655,6 +736,8 @@ const struct xattr_handler reiserfs_posix_acl_default_handler = {
 	.list = posix_acl_default_list,
 };
 =======
+=======
+>>>>>>> v3.18
 /*
  * Called under i_mutex
  */
@@ -668,4 +751,7 @@ int reiserfs_acl_chmod(struct inode *inode)
 
 	return posix_acl_chmod(inode, inode->i_mode);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

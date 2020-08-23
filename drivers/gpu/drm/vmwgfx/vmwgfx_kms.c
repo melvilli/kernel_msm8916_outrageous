@@ -41,7 +41,11 @@ struct vmw_clip_rect {
  * results in @out_rects and the number of passed rects in @out_num.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void vmw_clip_cliprects(struct drm_clip_rect *rects,
+=======
+static void vmw_clip_cliprects(struct drm_clip_rect *rects,
+>>>>>>> v3.18
 =======
 static void vmw_clip_cliprects(struct drm_clip_rect *rects,
 >>>>>>> v3.18
@@ -80,6 +84,10 @@ void vmw_display_unit_cleanup(struct vmw_display_unit *du)
 	if (du->cursor_dmabuf)
 		vmw_dmabuf_unreference(&du->cursor_dmabuf);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	drm_connector_unregister(&du->connector);
+>>>>>>> v3.18
 =======
 	drm_connector_unregister(&du->connector);
 >>>>>>> v3.18
@@ -144,7 +152,11 @@ int vmw_cursor_update_dmabuf(struct vmw_private *dev_priv,
 	kmap_num = (width*height*4 + PAGE_SIZE - 1) >> PAGE_SHIFT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_bo_reserve(&dmabuf->base, true, false, false, 0);
+=======
+	ret = ttm_bo_reserve(&dmabuf->base, true, false, false, NULL);
+>>>>>>> v3.18
 =======
 	ret = ttm_bo_reserve(&dmabuf->base, true, false, false, NULL);
 >>>>>>> v3.18
@@ -187,7 +199,10 @@ int vmw_du_crtc_cursor_set(struct drm_crtc *crtc, struct drm_file *file_priv,
 {
 	struct vmw_private *dev_priv = vmw_priv(crtc->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ttm_object_file *tfile = vmw_fpriv(file_priv)->tfile;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct vmw_display_unit *du = vmw_crtc_to_du(crtc);
@@ -203,7 +218,11 @@ int vmw_du_crtc_cursor_set(struct drm_crtc *crtc, struct drm_file *file_priv,
 	 * which is protected by any looks.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&crtc->mutex);
+=======
+	drm_modeset_unlock_crtc(crtc);
+>>>>>>> v3.18
 =======
 	drm_modeset_unlock_crtc(crtc);
 >>>>>>> v3.18
@@ -217,6 +236,11 @@ int vmw_du_crtc_cursor_set(struct drm_crtc *crtc, struct drm_file *file_priv,
 
 	if (handle) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct ttm_object_file *tfile = vmw_fpriv(file_priv)->tfile;
+
+>>>>>>> v3.18
 =======
 		struct ttm_object_file *tfile = vmw_fpriv(file_priv)->tfile;
 
@@ -275,7 +299,11 @@ int vmw_du_crtc_cursor_set(struct drm_crtc *crtc, struct drm_file *file_priv,
 out:
 	drm_modeset_unlock_all(dev_priv->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&crtc->mutex);
+=======
+	drm_modeset_lock_crtc(crtc);
+>>>>>>> v3.18
 =======
 	drm_modeset_lock_crtc(crtc);
 >>>>>>> v3.18
@@ -300,7 +328,11 @@ int vmw_du_crtc_cursor_move(struct drm_crtc *crtc, int x, int y)
 	 * which is protected by any looks.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&crtc->mutex);
+=======
+	drm_modeset_unlock_crtc(crtc);
+>>>>>>> v3.18
 =======
 	drm_modeset_unlock_crtc(crtc);
 >>>>>>> v3.18
@@ -312,7 +344,11 @@ int vmw_du_crtc_cursor_move(struct drm_crtc *crtc, int x, int y)
 
 	drm_modeset_unlock_all(dev_priv->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&crtc->mutex);
+=======
+	drm_modeset_lock_crtc(crtc);
+>>>>>>> v3.18
 =======
 	drm_modeset_lock_crtc(crtc);
 >>>>>>> v3.18
@@ -378,7 +414,11 @@ void vmw_kms_cursor_snoop(struct vmw_surface *srf,
 	kmap_num = (64*64*4) >> PAGE_SHIFT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_bo_reserve(bo, true, false, false, 0);
+=======
+	ret = ttm_bo_reserve(bo, true, false, false, NULL);
+>>>>>>> v3.18
 =======
 	ret = ttm_bo_reserve(bo, true, false, false, NULL);
 >>>>>>> v3.18
@@ -462,7 +502,11 @@ struct vmw_framebuffer_surface {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void vmw_framebuffer_surface_destroy(struct drm_framebuffer *framebuffer)
+=======
+static void vmw_framebuffer_surface_destroy(struct drm_framebuffer *framebuffer)
+>>>>>>> v3.18
 =======
 static void vmw_framebuffer_surface_destroy(struct drm_framebuffer *framebuffer)
 >>>>>>> v3.18
@@ -511,7 +555,11 @@ static int do_surface_dirty_sou(struct vmw_private *dev_priv,
 	list_for_each_entry(crtc, &dev_priv->dev->mode_config.crtc_list,
 			    head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (crtc->fb != &framebuffer->base)
+=======
+		if (crtc->primary->fb != &framebuffer->base)
+>>>>>>> v3.18
 =======
 		if (crtc->primary->fb != &framebuffer->base)
 >>>>>>> v3.18
@@ -636,7 +684,11 @@ out_free_tmp:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vmw_framebuffer_surface_dirty(struct drm_framebuffer *framebuffer,
+=======
+static int vmw_framebuffer_surface_dirty(struct drm_framebuffer *framebuffer,
+>>>>>>> v3.18
 =======
 static int vmw_framebuffer_surface_dirty(struct drm_framebuffer *framebuffer,
 >>>>>>> v3.18
@@ -647,7 +699,10 @@ static int vmw_framebuffer_surface_dirty(struct drm_framebuffer *framebuffer,
 {
 	struct vmw_private *dev_priv = vmw_priv(framebuffer->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_master *vmaster = vmw_master(file_priv->master);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct vmw_framebuffer_surface *vfbs =
@@ -663,10 +718,13 @@ static int vmw_framebuffer_surface_dirty(struct drm_framebuffer *framebuffer,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_read_lock(&vmaster->lock, true);
 	if (unlikely(ret != 0))
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	drm_modeset_lock_all(dev_priv->dev);
 
 	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
@@ -674,6 +732,9 @@ static int vmw_framebuffer_surface_dirty(struct drm_framebuffer *framebuffer,
 		drm_modeset_unlock_all(dev_priv->dev);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!num_clips) {
@@ -692,12 +753,18 @@ static int vmw_framebuffer_surface_dirty(struct drm_framebuffer *framebuffer,
 				   clips, num_clips, inc, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_read_unlock(&vmaster->lock);
 =======
+=======
+>>>>>>> v3.18
 	ttm_read_unlock(&dev_priv->reservation_sem);
 
 	drm_modeset_unlock_all(dev_priv->dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -736,9 +803,15 @@ static int vmw_kms_new_framebuffer_surface(struct vmw_private *dev_priv,
 	if (unlikely(surface->mip_levels[0] != 1 ||
 		     surface->num_sizes != 1 ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     surface->sizes[0].width < mode_cmd->width ||
 		     surface->sizes[0].height < mode_cmd->height ||
 		     surface->sizes[0].depth != 1)) {
+=======
+		     surface->base_size.width < mode_cmd->width ||
+		     surface->base_size.height < mode_cmd->height ||
+		     surface->base_size.depth != 1)) {
+>>>>>>> v3.18
 =======
 		     surface->base_size.width < mode_cmd->width ||
 		     surface->base_size.height < mode_cmd->height ||
@@ -831,7 +904,11 @@ struct vmw_framebuffer_dmabuf {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void vmw_framebuffer_dmabuf_destroy(struct drm_framebuffer *framebuffer)
+=======
+static void vmw_framebuffer_dmabuf_destroy(struct drm_framebuffer *framebuffer)
+>>>>>>> v3.18
 =======
 static void vmw_framebuffer_dmabuf_destroy(struct drm_framebuffer *framebuffer)
 >>>>>>> v3.18
@@ -957,7 +1034,11 @@ static int do_dmabuf_dirty_sou(struct drm_file *file_priv,
 	num_units = 0;
 	list_for_each_entry(crtc, &dev_priv->dev->mode_config.crtc_list, head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (crtc->fb != &framebuffer->base)
+=======
+		if (crtc->primary->fb != &framebuffer->base)
+>>>>>>> v3.18
 =======
 		if (crtc->primary->fb != &framebuffer->base)
 >>>>>>> v3.18
@@ -1025,7 +1106,11 @@ static int do_dmabuf_dirty_sou(struct drm_file *file_priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vmw_framebuffer_dmabuf_dirty(struct drm_framebuffer *framebuffer,
+=======
+static int vmw_framebuffer_dmabuf_dirty(struct drm_framebuffer *framebuffer,
+>>>>>>> v3.18
 =======
 static int vmw_framebuffer_dmabuf_dirty(struct drm_framebuffer *framebuffer,
 >>>>>>> v3.18
@@ -1036,7 +1121,10 @@ static int vmw_framebuffer_dmabuf_dirty(struct drm_framebuffer *framebuffer,
 {
 	struct vmw_private *dev_priv = vmw_priv(framebuffer->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_master *vmaster = vmw_master(file_priv->master);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct vmw_framebuffer_dmabuf *vfbd =
@@ -1045,10 +1133,13 @@ static int vmw_framebuffer_dmabuf_dirty(struct drm_framebuffer *framebuffer,
 	int ret, increment = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_read_lock(&vmaster->lock, true);
 	if (unlikely(ret != 0))
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	drm_modeset_lock_all(dev_priv->dev);
 
 	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
@@ -1056,6 +1147,9 @@ static int vmw_framebuffer_dmabuf_dirty(struct drm_framebuffer *framebuffer,
 		drm_modeset_unlock_all(dev_priv->dev);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!num_clips) {
@@ -1080,12 +1174,18 @@ static int vmw_framebuffer_dmabuf_dirty(struct drm_framebuffer *framebuffer,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_read_unlock(&vmaster->lock);
 =======
+=======
+>>>>>>> v3.18
 	ttm_read_unlock(&dev_priv->reservation_sem);
 
 	drm_modeset_unlock_all(dev_priv->dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1340,7 +1440,11 @@ int vmw_kms_present(struct vmw_private *dev_priv,
 	num_units = 0;
 	list_for_each_entry(crtc, &dev_priv->dev->mode_config.crtc_list, head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (crtc->fb != &vfb->base)
+=======
+		if (crtc->primary->fb != &vfb->base)
+>>>>>>> v3.18
 =======
 		if (crtc->primary->fb != &vfb->base)
 >>>>>>> v3.18
@@ -1481,7 +1585,11 @@ int vmw_kms_readback(struct vmw_private *dev_priv,
 	num_units = 0;
 	list_for_each_entry(crtc, &dev_priv->dev->mode_config.crtc_list, head) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (crtc->fb != &vfb->base)
+=======
+		if (crtc->primary->fb != &vfb->base)
+>>>>>>> v3.18
 =======
 		if (crtc->primary->fb != &vfb->base)
 >>>>>>> v3.18
@@ -1606,7 +1714,10 @@ int vmw_kms_cursor_bypass_ioctl(struct drm_device *dev, void *data,
 	struct drm_vmw_cursor_bypass_arg *arg = data;
 	struct vmw_display_unit *du;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_mode_object *obj;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct drm_crtc *crtc;
@@ -1627,6 +1738,7 @@ int vmw_kms_cursor_bypass_ioctl(struct drm_device *dev, void *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	obj = drm_mode_object_find(dev, arg->crtc_id, DRM_MODE_OBJECT_CRTC);
 	if (!obj) {
 		ret = -EINVAL;
@@ -1635,12 +1747,17 @@ int vmw_kms_cursor_bypass_ioctl(struct drm_device *dev, void *data,
 
 	crtc = obj_to_crtc(obj);
 =======
+=======
+>>>>>>> v3.18
 	crtc = drm_crtc_find(dev, arg->crtc_id);
 	if (!crtc) {
 		ret = -ENOENT;
 		goto out;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	du = vmw_crtc_to_du(crtc);
 
@@ -1760,7 +1877,11 @@ bool vmw_kms_validate_mode_vram(struct vmw_private *dev_priv,
 				uint32_t height)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ((u64) pitch * (u64) height) < (u64) dev_priv->vram_size;
+=======
+	return ((u64) pitch * (u64) height) < (u64) dev_priv->prim_bb_mem;
+>>>>>>> v3.18
 =======
 	return ((u64) pitch * (u64) height) < (u64) dev_priv->prim_bb_mem;
 >>>>>>> v3.18
@@ -1796,7 +1917,11 @@ void vmw_disable_vblank(struct drm_device *dev, int crtc)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vmw_du_update_layout(struct vmw_private *dev_priv, unsigned num,
+=======
+static int vmw_du_update_layout(struct vmw_private *dev_priv, unsigned num,
+>>>>>>> v3.18
 =======
 static int vmw_du_update_layout(struct vmw_private *dev_priv, unsigned num,
 >>>>>>> v3.18
@@ -1844,16 +1969,22 @@ static int vmw_du_update_layout(struct vmw_private *dev_priv, unsigned num,
 int vmw_du_page_flip(struct drm_crtc *crtc,
 		     struct drm_framebuffer *fb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     struct drm_pending_vblank_event *event)
 {
 	struct vmw_private *dev_priv = vmw_priv(crtc->dev);
 	struct drm_framebuffer *old_fb = crtc->fb;
 =======
+=======
+>>>>>>> v3.18
 		     struct drm_pending_vblank_event *event,
 		     uint32_t page_flip_flags)
 {
 	struct vmw_private *dev_priv = vmw_priv(crtc->dev);
 	struct drm_framebuffer *old_fb = crtc->primary->fb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct vmw_framebuffer *vfb = vmw_framebuffer_to_vfb(fb);
 	struct drm_file *file_priv ;
@@ -1873,7 +2004,11 @@ int vmw_du_page_flip(struct drm_crtc *crtc,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crtc->fb = fb;
+=======
+	crtc->primary->fb = fb;
+>>>>>>> v3.18
 =======
 	crtc->primary->fb = fb;
 >>>>>>> v3.18
@@ -1917,7 +2052,11 @@ int vmw_du_page_flip(struct drm_crtc *crtc,
 
 out_no_fence:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crtc->fb = old_fb;
+=======
+	crtc->primary->fb = old_fb;
+>>>>>>> v3.18
 =======
 	crtc->primary->fb = old_fb;
 >>>>>>> v3.18
@@ -2092,7 +2231,10 @@ int vmw_du_connector_fill_modes(struct drm_connector *connector,
 	};
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32 assumed_bpp = 2;
 
 	/*
@@ -2101,6 +2243,9 @@ int vmw_du_connector_fill_modes(struct drm_connector *connector,
 	 */
 	if (dev_priv->sou_priv)
 		assumed_bpp = 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Add preferred mode */
@@ -2113,8 +2258,14 @@ int vmw_du_connector_fill_modes(struct drm_connector *connector,
 		vmw_guess_mode_timing(mode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vmw_kms_validate_mode_vram(dev_priv, mode->hdisplay * 2,
 					       mode->vdisplay)) {
+=======
+		if (vmw_kms_validate_mode_vram(dev_priv,
+						mode->hdisplay * assumed_bpp,
+						mode->vdisplay)) {
+>>>>>>> v3.18
 =======
 		if (vmw_kms_validate_mode_vram(dev_priv,
 						mode->hdisplay * assumed_bpp,
@@ -2142,7 +2293,12 @@ int vmw_du_connector_fill_modes(struct drm_connector *connector,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!vmw_kms_validate_mode_vram(dev_priv, bmode->hdisplay * 2,
+=======
+		if (!vmw_kms_validate_mode_vram(dev_priv,
+						bmode->hdisplay * assumed_bpp,
+>>>>>>> v3.18
 =======
 		if (!vmw_kms_validate_mode_vram(dev_priv,
 						bmode->hdisplay * assumed_bpp,
@@ -2163,7 +2319,11 @@ int vmw_du_connector_fill_modes(struct drm_connector *connector,
 		list_move(&du->pref_mode->head, &connector->probed_modes);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_mode_connector_list_update(connector);
+=======
+	drm_mode_connector_list_update(connector, true);
+>>>>>>> v3.18
 =======
 	drm_mode_connector_list_update(connector, true);
 >>>>>>> v3.18
@@ -2186,7 +2346,10 @@ int vmw_kms_update_layout_ioctl(struct drm_device *dev, void *data,
 	struct drm_vmw_update_layout_arg *arg =
 		(struct drm_vmw_update_layout_arg *)data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vmw_master *vmaster = vmw_master(file_priv->master);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void __user *user_rects;
@@ -2197,7 +2360,11 @@ int vmw_kms_update_layout_ioctl(struct drm_device *dev, void *data,
 	struct drm_mode_config *mode_config = &dev->mode_config;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ttm_read_lock(&vmaster->lock, true);
+=======
+	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
+>>>>>>> v3.18
 =======
 	ret = ttm_read_lock(&dev_priv->reservation_sem, true);
 >>>>>>> v3.18
@@ -2243,7 +2410,11 @@ out_free:
 	kfree(rects);
 out_unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ttm_read_unlock(&vmaster->lock);
+=======
+	ttm_read_unlock(&dev_priv->reservation_sem);
+>>>>>>> v3.18
 =======
 	ttm_read_unlock(&dev_priv->reservation_sem);
 >>>>>>> v3.18

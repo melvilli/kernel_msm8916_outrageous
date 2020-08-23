@@ -499,7 +499,10 @@ void invert_screen(struct vc_data *vc, int offset, int count, int viewed)
 	if (DO_UPDATE(vc))
 		do_update_region(vc, (unsigned long) p, count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	notify_update(vc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -519,7 +522,10 @@ void complement_pos(struct vc_data *vc, int offset)
 		if (DO_UPDATE(vc))
 			vc->vc_sw->con_putc(vc, old, oldy, oldx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		notify_update(vc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -540,8 +546,13 @@ void complement_pos(struct vc_data *vc, int offset)
 			vc->vc_sw->con_putc(vc, new, oldy, oldx);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		notify_update(vc);
 	}
+=======
+	}
+
+>>>>>>> v3.18
 =======
 	}
 
@@ -749,7 +760,11 @@ static void visual_init(struct vc_data *vc, int num, int init)
 	vc->vc_display_fg = &master_display_fg;
 	vc->vc_uni_pagedir_loc = &vc->vc_uni_pagedir;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vc->vc_uni_pagedir = 0;
+=======
+	vc->vc_uni_pagedir = NULL;
+>>>>>>> v3.18
 =======
 	vc->vc_uni_pagedir = NULL;
 >>>>>>> v3.18
@@ -846,7 +861,11 @@ static inline int resize_screen(struct vc_data *vc, int width, int height,
  *	information and perform any necessary signal handling.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Caller must hold the console semaphore. Takes the termios mutex and
+=======
+ *	Caller must hold the console semaphore. Takes the termios rwsem and
+>>>>>>> v3.18
 =======
  *	Caller must hold the console semaphore. Takes the termios rwsem and
 >>>>>>> v3.18
@@ -883,8 +902,11 @@ static int vc_do_resize(struct tty_struct *tty, struct vc_data *vc,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_screen_size > (4 << 20))
 		return -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	newscreen = kmalloc(new_screen_size, GFP_USER);
@@ -892,9 +914,12 @@ static int vc_do_resize(struct tty_struct *tty, struct vc_data *vc,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vc == sel_cons)
 		clear_selection();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	old_rows = vc->vc_rows;
@@ -1005,7 +1030,11 @@ int vc_resize(struct vc_data *vc, unsigned int cols, unsigned int rows)
  *
  *	Takes the console sem and the called methods then take the tty
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	termios_mutex and the tty ctrl_lock in that order.
+=======
+ *	termios_rwsem and the tty ctrl_lock in that order.
+>>>>>>> v3.18
 =======
  *	termios_rwsem and the tty ctrl_lock in that order.
 >>>>>>> v3.18
@@ -1199,7 +1228,11 @@ static void csi_J(struct vc_data *vc, int vpar)
 		case 3: /* erase scroll-back buffer (and whole display) */
 			scr_memsetw(vc->vc_screenbuf, vc->vc_video_erase_char,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    vc->vc_screenbuf_size);
+=======
+				    vc->vc_screenbuf_size >> 1);
+>>>>>>> v3.18
 =======
 				    vc->vc_screenbuf_size >> 1);
 >>>>>>> v3.18
@@ -1272,7 +1305,10 @@ static void default_attr(struct vc_data *vc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct rgb { u8 r; u8 g; u8 b; };
 
 struct rgb rgb_from_256(int i)
@@ -1319,6 +1355,9 @@ static void rgb_background(struct vc_data *vc, struct rgb c)
 		| (c.r&0x80) >> 1 | (c.g&0x80) >> 2 | (c.b&0x80) >> 3;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* console_lock is held */
 static void csi_m(struct vc_data *vc)
@@ -1392,6 +1431,7 @@ static void csi_m(struct vc_data *vc)
 				vc->vc_reverse = 0;
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case 38: /* ANSI X3.64-1979 (SCO-ish?)
 				  * Enables underscore, white foreground
 				  * with white underscore (Linux - use
@@ -1408,6 +1448,8 @@ static void csi_m(struct vc_data *vc)
 				vc->vc_color = (vc->vc_def_color & 0x0f) | (vc->vc_color & 0xf0);
 				vc->vc_underline = 0;
 =======
+=======
+>>>>>>> v3.18
 			case 38: /* ITU T.416
 				  * Higher colour modes.
 				  * They break the usual properties of SGR codes
@@ -1457,6 +1499,9 @@ static void csi_m(struct vc_data *vc)
 				break;
 			case 39:
 				vc->vc_color = (vc->vc_def_color & 0x0f) | (vc->vc_color & 0xf0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			case 49:
@@ -1723,9 +1768,15 @@ static void restore_cur(struct vc_data *vc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum { ESnormal, ESesc, ESsquare, ESgetpars, ESgotpars, ESfunckey,
 	EShash, ESsetG0, ESsetG1, ESpercent, ESignore, ESnonstd,
 	ESpalette };
+=======
+enum { ESnormal, ESesc, ESsquare, ESgetpars, ESfunckey,
+	EShash, ESsetG0, ESsetG1, ESpercent, ESignore, ESnonstd,
+	ESpalette, ESosc };
+>>>>>>> v3.18
 =======
 enum { ESnormal, ESesc, ESsquare, ESgetpars, ESfunckey,
 	EShash, ESsetG0, ESsetG1, ESpercent, ESignore, ESnonstd,
@@ -1791,6 +1842,11 @@ static void do_con_trol(struct tty_struct *tty, struct vc_data *vc, int c)
 	 *  of an escape sequence.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (vc->vc_state == ESosc && c>=8 && c<=13) /* ... except for OSC */
+		return;
+>>>>>>> v3.18
 =======
 	if (vc->vc_state == ESosc && c>=8 && c<=13) /* ... except for OSC */
 		return;
@@ -1800,7 +1856,13 @@ static void do_con_trol(struct tty_struct *tty, struct vc_data *vc, int c)
 		return;
 	case 7:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vc->vc_bell_duration)
+=======
+		if (vc->vc_state == ESosc)
+			vc->vc_state = ESnormal;
+		else if (vc->vc_bell_duration)
+>>>>>>> v3.18
 =======
 		if (vc->vc_state == ESosc)
 			vc->vc_state = ESnormal;
@@ -1917,7 +1979,13 @@ static void do_con_trol(struct tty_struct *tty, struct vc_data *vc, int c)
 			reset_palette(vc);
 			vc->vc_state = ESnormal;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
+=======
+		} else if (c>='0' && c<='9')
+			vc->vc_state = ESosc;
+		else
+>>>>>>> v3.18
 =======
 		} else if (c>='0' && c<='9')
 			vc->vc_state = ESosc;
@@ -1963,9 +2031,13 @@ static void do_con_trol(struct tty_struct *tty, struct vc_data *vc, int c)
 			vc->vc_par[vc->vc_npar] += c - '0';
 			return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
 			vc->vc_state = ESgotpars;
 	case ESgotpars:
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -2183,6 +2255,11 @@ static void do_con_trol(struct tty_struct *tty, struct vc_data *vc, int c)
 		vc->vc_state = ESnormal;
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ESosc:
+		return;
+>>>>>>> v3.18
 =======
 	case ESosc:
 		return;
@@ -2768,7 +2845,11 @@ int tioclinux(struct tty_struct *tty, unsigned long arg)
 	 */
 			data = vt_get_shift_state();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = put_user(data, p);
+=======
+			ret = __put_user(data, p);
+>>>>>>> v3.18
 =======
 			ret = __put_user(data, p);
 >>>>>>> v3.18
@@ -2778,7 +2859,11 @@ int tioclinux(struct tty_struct *tty, unsigned long arg)
 			data = mouse_reporting();
 			console_unlock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = put_user(data, p);
+=======
+			ret = __put_user(data, p);
+>>>>>>> v3.18
 =======
 			ret = __put_user(data, p);
 >>>>>>> v3.18
@@ -2791,7 +2876,11 @@ int tioclinux(struct tty_struct *tty, unsigned long arg)
 		case TIOCL_GETKMSGREDIRECT:
 			data = vt_get_kmsg_redirect();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = put_user(data, p);
+=======
+			ret = __put_user(data, p);
+>>>>>>> v3.18
 =======
 			ret = __put_user(data, p);
 >>>>>>> v3.18
@@ -2997,13 +3086,19 @@ static void con_shutdown(struct tty_struct *tty)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int default_italic_color    = 2; // green (ASCII)
 static int default_underline_color = 3; // cyan (ASCII)
 =======
+=======
+>>>>>>> v3.18
 static int default_color           = 7; /* white */
 static int default_italic_color    = 2; // green (ASCII)
 static int default_underline_color = 3; // cyan (ASCII)
 module_param_named(color, default_color, int, S_IRUGO | S_IWUSR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 module_param_named(italic, default_italic_color, int, S_IRUGO | S_IWUSR);
 module_param_named(underline, default_underline_color, int, S_IRUGO | S_IWUSR);
@@ -3027,7 +3122,11 @@ static void vc_init(struct vc_data *vc, unsigned int rows,
 		vc->vc_palette[k++] = default_blu[j] ;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vc->vc_def_color       = 0x07;   /* white */
+=======
+	vc->vc_def_color       = default_color;
+>>>>>>> v3.18
 =======
 	vc->vc_def_color       = default_color;
 >>>>>>> v3.18
@@ -3285,6 +3384,7 @@ err:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bind_con_driver(const struct consw *csw, int first, int last,
 			   int deflt)
 {
@@ -3296,6 +3396,8 @@ static int bind_con_driver(const struct consw *csw, int first, int last,
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VT_HW_CONSOLE_BINDING
@@ -3315,6 +3417,7 @@ static int con_is_graphics(const struct consw *csw, int first, int last)
 	return retval;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * unbind_con_driver - unbind a console driver
@@ -3344,6 +3447,8 @@ int unbind_con_driver(const struct consw *csw, int first, int last, int deflt)
 }
 EXPORT_SYMBOL(unbind_con_driver);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* unlocked version of unbind_con_driver() */
@@ -3380,8 +3485,12 @@ int do_unbind_con_driver(const struct consw *csw, int first, int last, int deflt
 		con_back = &registered_con_driver[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (con_back->con &&
 		    !(con_back->flag & CON_DRIVER_FLAG_MODULE)) {
+=======
+		if (con_back->con && con_back->con != csw) {
+>>>>>>> v3.18
 =======
 		if (con_back->con && con_back->con != csw) {
 >>>>>>> v3.18
@@ -3471,14 +3580,20 @@ static int vt_bind(struct con_driver *con)
 			deflt = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (first != -1)
 			bind_con_driver(csw, first, last, deflt);
 =======
+=======
+>>>>>>> v3.18
 		if (first != -1) {
 			console_lock();
 			do_bind_con_driver(csw, first, last, deflt);
 			console_unlock();
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		first = -1;
@@ -3495,6 +3610,10 @@ static int vt_unbind(struct con_driver *con)
 	const struct consw *csw = NULL;
 	int i, more = 1, first = -1, last = -1, deflt = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -3522,9 +3641,12 @@ static int vt_unbind(struct con_driver *con)
 			deflt = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (first != -1)
 			unbind_con_driver(csw, first, last, deflt);
 =======
+=======
+>>>>>>> v3.18
 		if (first != -1) {
 			console_lock();
 			ret = do_unbind_con_driver(csw, first, last, deflt);
@@ -3532,6 +3654,9 @@ static int vt_unbind(struct con_driver *con)
 			if (ret != 0)
 				return ret;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		first = -1;
@@ -3761,10 +3886,16 @@ static int do_register_con_driver(const struct consw *csw, int first, int last)
 
 	desc = csw->con_startup();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!desc) {
 		retval = -ENODEV;
 		goto err;
 	}
+=======
+
+	if (!desc)
+		goto err;
+>>>>>>> v3.18
 =======
 
 	if (!desc)
@@ -3812,6 +3943,7 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * register_con_driver - register console driver to console layer
  * @csw: console driver
@@ -3840,6 +3972,11 @@ EXPORT_SYMBOL(register_con_driver);
 /**
  * do_unregister_con_driver - unregister console driver from console layer
 >>>>>>> v3.18
+=======
+
+/**
+ * do_unregister_con_driver - unregister console driver from console layer
+>>>>>>> v3.18
  * @csw: console driver
  *
  * DESCRIPTION: All drivers that registers to the console layer must
@@ -3849,6 +3986,7 @@ EXPORT_SYMBOL(register_con_driver);
  *
  * The driver must unbind first prior to unregistration.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int unregister_con_driver(const struct consw *csw)
 {
@@ -3869,6 +4007,8 @@ int do_unregister_con_driver(const struct consw *csw)
 	if (con_is_bound(csw))
 		goto err;
 =======
+=======
+>>>>>>> v3.18
 int do_unregister_con_driver(const struct consw *csw)
 {
 	int i;
@@ -3879,6 +4019,9 @@ int do_unregister_con_driver(const struct consw *csw)
 
 	if (csw == conswitchp)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < MAX_NR_CON_DRIVER; i++) {
@@ -3886,7 +4029,11 @@ int do_unregister_con_driver(const struct consw *csw)
 
 		if (con_driver->con == csw &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    con_driver->flag & CON_DRIVER_FLAG_MODULE) {
+=======
+		    con_driver->flag & CON_DRIVER_FLAG_INIT) {
+>>>>>>> v3.18
 =======
 		    con_driver->flag & CON_DRIVER_FLAG_INIT) {
 >>>>>>> v3.18
@@ -3901,6 +4048,7 @@ int do_unregister_con_driver(const struct consw *csw)
 			con_driver->first = 0;
 			con_driver->last = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			retval = 0;
 			break;
 		}
@@ -3908,11 +4056,16 @@ int do_unregister_con_driver(const struct consw *csw)
 err:
 	return retval;
 =======
+=======
+>>>>>>> v3.18
 			return 0;
 		}
 	}
 
 	return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(do_unregister_con_driver);
@@ -3923,7 +4076,11 @@ EXPORT_SYMBOL_GPL(do_unregister_con_driver);
  *	and become default driver for newly opened ones.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	take_over_console is basically a register followed by unbind
+=======
+ *	do_take_over_console is basically a register followed by unbind
+>>>>>>> v3.18
 =======
  *	do_take_over_console is basically a register followed by unbind
 >>>>>>> v3.18
@@ -3947,6 +4104,7 @@ int do_take_over_console(const struct consw *csw, int first, int last, int deflt
 }
 EXPORT_SYMBOL_GPL(do_take_over_console);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  *	If we support more console drivers, this function is used
@@ -3974,6 +4132,8 @@ int take_over_console(const struct consw *csw, int first, int last, int deflt)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /*
  * give_up_console is a wrapper to unregister_con_driver. It will only
@@ -3982,7 +4142,13 @@ int take_over_console(const struct consw *csw, int first, int last, int deflt)
 void give_up_console(const struct consw *csw)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_con_driver(csw);
+=======
+	console_lock();
+	do_unregister_con_driver(csw);
+	console_unlock();
+>>>>>>> v3.18
 =======
 	console_lock();
 	do_unregister_con_driver(csw);
@@ -4544,7 +4710,10 @@ EXPORT_SYMBOL(vc_cons);
 EXPORT_SYMBOL(global_cursor_default);
 #ifndef VT_SINGLE_DRIVER
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(take_over_console);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(give_up_console);

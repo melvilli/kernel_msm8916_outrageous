@@ -2,8 +2,14 @@
  *  acpi_ipmi.c - ACPI IPMI opregion
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2010 Intel Corporation
  *  Copyright (C) 2010 Zhao Yakui <yakui.zhao@intel.com>
+=======
+ *  Copyright (C) 2010, 2013 Intel Corporation
+ *    Author: Zhao Yakui <yakui.zhao@intel.com>
+ *            Lv Zheng <lv.zheng@intel.com>
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2010, 2013 Intel Corporation
  *    Author: Zhao Yakui <yakui.zhao@intel.com>
@@ -30,6 +36,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/init.h>
@@ -51,6 +58,11 @@
 #include <linux/acpi.h>
 #include <linux/ipmi.h>
 >>>>>>> v3.18
+=======
+#include <linux/module.h>
+#include <linux/acpi.h>
+#include <linux/ipmi.h>
+>>>>>>> v3.18
 #include <linux/spinlock.h>
 
 MODULE_AUTHOR("Zhao Yakui");
@@ -58,8 +70,11 @@ MODULE_DESCRIPTION("ACPI IPMI Opregion driver");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IPMI_FLAGS_HANDLER_INSTALL	0
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ACPI_IPMI_OK			0
@@ -67,7 +82,12 @@ MODULE_LICENSE("GPL");
 #define ACPI_IPMI_UNKNOWN		0x07
 /* the IPMI timeout is 5s */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IPMI_TIMEOUT			(5 * HZ)
+=======
+#define IPMI_TIMEOUT			(5000)
+#define ACPI_IPMI_MAX_MSG_LENGTH	64
+>>>>>>> v3.18
 =======
 #define IPMI_TIMEOUT			(5000)
 #define ACPI_IPMI_MAX_MSG_LENGTH	64
@@ -76,6 +96,7 @@ MODULE_LICENSE("GPL");
 struct acpi_ipmi_device {
 	/* the device list attached to driver_data.ipmi_devices */
 	struct list_head head;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* the IPMI request message list */
 	struct list_head tx_msg_list;
@@ -95,6 +116,8 @@ struct ipmi_driver_data {
 	struct ipmi_user_hndl	ipmi_hndlrs;
 	struct mutex		ipmi_lock;
 =======
+=======
+>>>>>>> v3.18
 
 	/* the IPMI request message list */
 	struct list_head tx_msg_list;
@@ -123,12 +146,19 @@ struct ipmi_driver_data {
 	 * to this selected global IPMI system interface.
 	 */
 	struct acpi_ipmi_device *selected_smi;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 struct acpi_ipmi_msg {
 	struct list_head head;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -142,6 +172,7 @@ struct acpi_ipmi_msg {
 	struct ipmi_addr addr;
 	long tx_msgid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* it is used to track whether the IPMI message is finished */
 	struct completion tx_complete;
 	struct kernel_ipmi_msg tx_message;
@@ -153,6 +184,8 @@ struct acpi_ipmi_msg {
 	int	rx_len;
 	struct acpi_ipmi_device *device;
 =======
+=======
+>>>>>>> v3.18
 
 	/* it is used to track whether the IPMI message is finished */
 	struct completion tx_complete;
@@ -166,6 +199,9 @@ struct acpi_ipmi_msg {
 
 	struct acpi_ipmi_device *device;
 	struct kref kref;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -174,7 +210,11 @@ struct acpi_ipmi_buffer {
 	u8 status;
 	u8 length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 data[64];
+=======
+	u8 data[ACPI_IPMI_MAX_MSG_LENGTH];
+>>>>>>> v3.18
 =======
 	u8 data[ACPI_IPMI_MAX_MSG_LENGTH];
 >>>>>>> v3.18
@@ -184,8 +224,11 @@ static void ipmi_register_bmc(int iface, struct device *dev);
 static void ipmi_bmc_gone(int iface);
 static void ipmi_msg_handler(struct ipmi_recv_msg *msg, void *user_msg_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void acpi_add_ipmi_device(struct acpi_ipmi_device *ipmi_device);
 static void acpi_remove_ipmi_device(struct acpi_ipmi_device *ipmi_device);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -199,6 +242,7 @@ static struct ipmi_driver_data driver_data = {
 	.ipmi_hndlrs = {
 		.ipmi_recv_hndl = ipmi_msg_handler,
 	},
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -224,6 +268,8 @@ static void acpi_format_ipmi_msg(struct acpi_ipmi_msg *tx_msg,
 				acpi_physical_address address,
 				acpi_integer *value)
 =======
+=======
+>>>>>>> v3.18
 	.ipmi_lock = __MUTEX_INITIALIZER(driver_data.ipmi_lock)
 };
 
@@ -360,6 +406,9 @@ static void acpi_ipmi_msg_put(struct acpi_ipmi_msg *tx_msg)
 static int acpi_format_ipmi_request(struct acpi_ipmi_msg *tx_msg,
 				    acpi_physical_address address,
 				    acpi_integer *value)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kernel_ipmi_msg *msg;
@@ -369,6 +418,10 @@ static int acpi_format_ipmi_request(struct acpi_ipmi_msg *tx_msg,
 
 	msg = &tx_msg->tx_message;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -379,7 +432,12 @@ static int acpi_format_ipmi_request(struct acpi_ipmi_msg *tx_msg,
 	msg->netfn = IPMI_OP_RGN_NETFN(address);
 	msg->cmd = IPMI_OP_RGN_CMD(address);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msg->data = tx_msg->tx_data;
+=======
+	msg->data = tx_msg->data;
+
+>>>>>>> v3.18
 =======
 	msg->data = tx_msg->data;
 
@@ -390,10 +448,13 @@ static int acpi_format_ipmi_request(struct acpi_ipmi_msg *tx_msg,
 	 */
 	buffer = (struct acpi_ipmi_buffer *)value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* copy the tx message data */
 	msg->data_len = buffer->length;
 	memcpy(tx_msg->tx_data, buffer->data, msg->data_len);
 =======
+=======
+>>>>>>> v3.18
 
 	/* copy the tx message data */
 	if (buffer->length > ACPI_IPMI_MAX_MSG_LENGTH) {
@@ -405,6 +466,9 @@ static int acpi_format_ipmi_request(struct acpi_ipmi_msg *tx_msg,
 	msg->data_len = buffer->length;
 	memcpy(tx_msg->data, buffer->data, msg->data_len);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * now the default type is SYSTEM_INTERFACE and channel type is BMC.
@@ -420,6 +484,10 @@ static int acpi_format_ipmi_request(struct acpi_ipmi_msg *tx_msg,
 	/* Get the msgid */
 	device = tx_msg->device;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -428,17 +496,23 @@ static int acpi_format_ipmi_request(struct acpi_ipmi_msg *tx_msg,
 	tx_msg->tx_msgid = device->curr_msgid;
 	spin_unlock_irqrestore(&device->tx_msg_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static void acpi_format_ipmi_response(struct acpi_ipmi_msg *msg,
 		acpi_integer *value, int rem_time)
 =======
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
 
 static void acpi_format_ipmi_response(struct acpi_ipmi_msg *msg,
 				      acpi_integer *value)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct acpi_ipmi_buffer *buffer;
@@ -448,6 +522,7 @@ static void acpi_format_ipmi_response(struct acpi_ipmi_msg *msg,
 	 * IPMI message returned by IPMI command.
 	 */
 	buffer = (struct acpi_ipmi_buffer *)value;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!rem_time && !msg->msg_done) {
 		buffer->status = ACPI_IPMI_TIMEOUT;
@@ -463,6 +538,8 @@ static void acpi_format_ipmi_response(struct acpi_ipmi_msg *msg,
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * If the flag of msg_done is not set, it means that the IPMI command is
@@ -472,11 +549,15 @@ static void acpi_format_ipmi_response(struct acpi_ipmi_msg *msg,
 	if (msg->msg_done != ACPI_IPMI_OK)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * If the IPMI response message is obtained correctly, the status code
 	 * will be ACPI_IPMI_OK
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	buffer->status = ACPI_IPMI_OK;
 	buffer->length = msg->rx_len;
@@ -485,10 +566,15 @@ static void acpi_format_ipmi_response(struct acpi_ipmi_msg *msg,
 	buffer->length = msg->rx_len;
 	memcpy(buffer->data, msg->data, msg->rx_len);
 >>>>>>> v3.18
+=======
+	buffer->length = msg->rx_len;
+	memcpy(buffer->data, msg->data, msg->rx_len);
+>>>>>>> v3.18
 }
 
 static void ipmi_flush_tx_msg(struct acpi_ipmi_device *ipmi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct acpi_ipmi_msg *tx_msg, *temp;
 	int count = HZ / 10;
@@ -508,6 +594,8 @@ static void ipmi_flush_tx_msg(struct acpi_ipmi_device *ipmi)
 	if (!list_empty(&ipmi->tx_msg_list))
 		dev_warn(&pnp_dev->dev, "tx msg list is not NULL\n");
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_ipmi_msg *tx_msg;
 	unsigned long flags;
 
@@ -554,12 +642,16 @@ static void ipmi_cancel_tx_msg(struct acpi_ipmi_device *ipmi,
 
 	if (msg_found)
 		acpi_ipmi_msg_put(tx_msg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void ipmi_msg_handler(struct ipmi_recv_msg *msg, void *user_msg_data)
 {
 	struct acpi_ipmi_device *ipmi_device = user_msg_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int msg_found = 0;
 	struct acpi_ipmi_msg *tx_msg;
@@ -599,6 +691,8 @@ static void ipmi_msg_handler(struct ipmi_recv_msg *msg, void *user_msg_data)
 	ipmi_free_recv_msg(msg);
 };
 =======
+=======
+>>>>>>> v3.18
 	bool msg_found = false;
 	struct acpi_ipmi_msg *tx_msg, *temp;
 	struct device *dev = ipmi_device->dev;
@@ -658,14 +752,20 @@ out_comp:
 out_msg:
 	ipmi_free_recv_msg(msg);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void ipmi_register_bmc(int iface, struct device *dev)
 {
 	struct acpi_ipmi_device *ipmi_device, *temp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pnp_dev *pnp_dev;
 	ipmi_user_t		user;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int err;
@@ -673,6 +773,7 @@ static void ipmi_register_bmc(int iface, struct device *dev)
 	acpi_handle handle;
 
 	err = ipmi_get_smi_info(iface, &smi_data);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (err)
@@ -685,6 +786,8 @@ static void ipmi_register_bmc(int iface, struct device *dev)
 
 	handle = smi_data.addr_info.acpi_info.acpi_handle;
 =======
+=======
+>>>>>>> v3.18
 	if (err)
 		return;
 
@@ -699,6 +802,9 @@ static void ipmi_register_bmc(int iface, struct device *dev)
 		dev_warn(smi_data.dev, "Can't create IPMI user interface\n");
 		goto err_ref;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&driver_data.ipmi_lock);
@@ -708,6 +814,7 @@ static void ipmi_register_bmc(int iface, struct device *dev)
 		 * to the device list, don't add it again.
 		 */
 		if (temp->handle == handle)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			goto out;
 	}
@@ -738,6 +845,8 @@ static void ipmi_register_bmc(int iface, struct device *dev)
 out:
 	mutex_unlock(&driver_data.ipmi_lock);
 =======
+=======
+>>>>>>> v3.18
 			goto err_lock;
 	}
 	if (!driver_data.selected_smi)
@@ -752,6 +861,9 @@ err_lock:
 	mutex_unlock(&driver_data.ipmi_lock);
 	ipmi_dev_release(ipmi_device);
 err_ref:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	put_device(smi_data.dev);
 	return;
@@ -760,6 +872,7 @@ err_ref:
 static void ipmi_bmc_gone(int iface)
 {
 	struct acpi_ipmi_device *ipmi_device, *temp;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	mutex_lock(&driver_data.ipmi_lock);
@@ -779,6 +892,8 @@ static void ipmi_bmc_gone(int iface)
  *			Address Space Management
  * -------------------------------------------------------------------------- */
 =======
+=======
+>>>>>>> v3.18
 	bool dev_found = false;
 
 	mutex_lock(&driver_data.ipmi_lock);
@@ -802,6 +917,9 @@ static void ipmi_bmc_gone(int iface)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This is the IPMI opregion space handler.
@@ -816,6 +934,7 @@ static void ipmi_bmc_gone(int iface)
  * @handler_context: IPMI device context.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static acpi_status
 acpi_ipmi_space_handler(u32 function, acpi_physical_address address,
@@ -828,6 +947,8 @@ acpi_ipmi_space_handler(u32 function, acpi_physical_address address,
 	acpi_status status;
 	unsigned long flags;
 =======
+=======
+>>>>>>> v3.18
 static acpi_status
 acpi_ipmi_space_handler(u32 function, acpi_physical_address address,
 			u32 bits, acpi_integer *value,
@@ -839,6 +960,9 @@ acpi_ipmi_space_handler(u32 function, acpi_physical_address address,
 	acpi_status status;
 	unsigned long flags;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * IPMI opregion message.
@@ -849,6 +973,7 @@ acpi_ipmi_space_handler(u32 function, acpi_physical_address address,
 	if ((function & ACPI_IO_MASK) == ACPI_READ)
 		return AE_TYPE;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!ipmi_device->user_interface)
 		return AE_NOT_EXIST;
@@ -956,6 +1081,8 @@ static int __init acpi_ipmi_init(void)
 
 	result = ipmi_smi_watcher_register(&driver_data.bmc_events);
 =======
+=======
+>>>>>>> v3.18
 	tx_msg = ipmi_msg_alloc();
 	if (!tx_msg)
 		return AE_NOT_EXIST;
@@ -1018,6 +1145,9 @@ static int __init acpi_ipmi_init(void)
 	result = ipmi_smi_watcher_register(&driver_data.bmc_events);
 	if (result)
 		pr_err("Can't register IPMI system interface watcher\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return result;
@@ -1026,7 +1156,11 @@ static int __init acpi_ipmi_init(void)
 static void __exit acpi_ipmi_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_ipmi_device *ipmi_device, *temp;
+=======
+	struct acpi_ipmi_device *ipmi_device;
+>>>>>>> v3.18
 =======
 	struct acpi_ipmi_device *ipmi_device;
 >>>>>>> v3.18
@@ -1044,6 +1178,7 @@ static void __exit acpi_ipmi_exit(void)
 	 */
 	mutex_lock(&driver_data.ipmi_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_safe(ipmi_device, temp,
 				&driver_data.ipmi_devices, head) {
 		acpi_remove_ipmi_device(ipmi_device);
@@ -1052,6 +1187,8 @@ static void __exit acpi_ipmi_exit(void)
 	}
 	mutex_unlock(&driver_data.ipmi_lock);
 =======
+=======
+>>>>>>> v3.18
 	while (!list_empty(&driver_data.ipmi_devices)) {
 		ipmi_device = list_first_entry(&driver_data.ipmi_devices,
 					       struct acpi_ipmi_device,
@@ -1068,6 +1205,9 @@ static void __exit acpi_ipmi_exit(void)
 	acpi_remove_address_space_handler(ACPI_ROOT_OBJECT,
 					  ACPI_ADR_SPACE_IPMI,
 					  &acpi_ipmi_space_handler);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

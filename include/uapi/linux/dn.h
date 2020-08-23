@@ -2,7 +2,13 @@
 #define _LINUX_DN_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/types.h>
+=======
+#include <linux/ioctl.h>
+#include <linux/types.h>
+#include <linux/if_ether.h>
+>>>>>>> v3.18
 =======
 #include <linux/ioctl.h>
 #include <linux/types.h>
@@ -127,7 +133,11 @@ struct linkinfo_dn {
  */
 union etheraddress {
 <<<<<<< HEAD
+<<<<<<< HEAD
         __u8 dne_addr[6];             /* Full ethernet address */
+=======
+        __u8 dne_addr[ETH_ALEN];      /* Full ethernet address */
+>>>>>>> v3.18
 =======
         __u8 dne_addr[ETH_ALEN];      /* Full ethernet address */
 >>>>>>> v3.18

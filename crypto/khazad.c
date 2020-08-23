@@ -881,6 +881,9 @@ module_exit(khazad_mod_fini);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Khazad Cryptographic Algorithm");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("khazad");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -269,7 +269,11 @@ struct kim_data_s {
 	struct chip_version version;
 	unsigned char ldisc_install;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char dev_name[UART_DEV_NAME_LEN];
+=======
+	unsigned char dev_name[UART_DEV_NAME_LEN + 1];
+>>>>>>> v3.18
 =======
 	unsigned char dev_name[UART_DEV_NAME_LEN + 1];
 >>>>>>> v3.18

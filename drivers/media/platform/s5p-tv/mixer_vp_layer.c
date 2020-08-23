@@ -198,7 +198,11 @@ static void mxr_vp_fix_geometry(struct mxr_layer *layer,
 		src->full_height = clamp(src->full_height,
 			src->height + src->y_offset, 8192U);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18

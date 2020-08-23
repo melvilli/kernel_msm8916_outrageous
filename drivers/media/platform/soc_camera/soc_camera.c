@@ -22,6 +22,7 @@
 #include <linux/init.h>
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mutex.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
@@ -38,6 +39,8 @@
 #include <media/videobuf2-core.h>
 #include <media/soc_mediabus.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/platform_device.h>
@@ -56,6 +59,9 @@
 #include <media/v4l2-of.h>
 #include <media/videobuf-core.h>
 #include <media/videobuf2-core.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Default to VGA resolution */
@@ -67,6 +73,7 @@
 	 (icd)->vb_vidq.streaming :			\
 	 vb2_is_streaming(&(icd)->vb2_vidq))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static LIST_HEAD(hosts);
 static LIST_HEAD(devices);
@@ -80,6 +87,8 @@ int soc_camera_power_on(struct device *dev, struct soc_camera_subdev_desc *ssdd)
 		dev_err(dev, "Cannot enable regulators\n");
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 #define MAP_MAX_NUM 32
 static DECLARE_BITMAP(device_map, MAP_MAX_NUM);
 static LIST_HEAD(hosts);
@@ -123,6 +132,9 @@ int soc_camera_power_on(struct device *dev, struct soc_camera_subdev_desc *ssdd,
 	if (ret < 0) {
 		dev_err(dev, "Cannot enable regulators\n");
 		goto eregenable;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -132,12 +144,15 @@ int soc_camera_power_on(struct device *dev, struct soc_camera_subdev_desc *ssdd,
 			dev_err(dev,
 				"Platform failed to power-on the camera.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			regulator_bulk_disable(ssdd->num_regulators,
 					       ssdd->regulators);
 		}
 	}
 
 =======
+=======
+>>>>>>> v3.18
 			goto epwron;
 		}
 	}
@@ -151,13 +166,21 @@ eregenable:
 	if (clock_toggle)
 		v4l2_clk_disable(clk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
 EXPORT_SYMBOL(soc_camera_power_on);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int soc_camera_power_off(struct device *dev, struct soc_camera_subdev_desc *ssdd)
+=======
+int soc_camera_power_off(struct device *dev, struct soc_camera_subdev_desc *ssdd,
+			 struct v4l2_clk *clk)
+>>>>>>> v3.18
 =======
 int soc_camera_power_off(struct device *dev, struct soc_camera_subdev_desc *ssdd,
 			 struct v4l2_clk *clk)
@@ -176,8 +199,13 @@ int soc_camera_power_off(struct device *dev, struct soc_camera_subdev_desc *ssdd
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = regulator_bulk_disable(ssdd->num_regulators,
 				     ssdd->regulators);
+=======
+	err = regulator_bulk_disable(ssdd->sd_pdata.num_regulators,
+				     ssdd->sd_pdata.regulators);
+>>>>>>> v3.18
 =======
 	err = regulator_bulk_disable(ssdd->sd_pdata.num_regulators,
 				     ssdd->sd_pdata.regulators);
@@ -188,6 +216,12 @@ int soc_camera_power_off(struct device *dev, struct soc_camera_subdev_desc *ssdd
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (clk && (!ssdd->unbalanced_power || test_and_clear_bit(0, &ssdd->clock_state)))
+		v4l2_clk_disable(clk);
+
+>>>>>>> v3.18
 =======
 	if (clk && (!ssdd->unbalanced_power || test_and_clear_bit(0, &ssdd->clock_state)))
 		v4l2_clk_disable(clk);
@@ -198,7 +232,10 @@ int soc_camera_power_off(struct device *dev, struct soc_camera_subdev_desc *ssdd
 EXPORT_SYMBOL(soc_camera_power_off);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int soc_camera_power_init(struct device *dev, struct soc_camera_subdev_desc *ssdd)
 {
 	/* Should not have any effect in synchronous case */
@@ -207,6 +244,9 @@ int soc_camera_power_init(struct device *dev, struct soc_camera_subdev_desc *ssd
 }
 EXPORT_SYMBOL(soc_camera_power_init);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __soc_camera_power_on(struct soc_camera_device *icd)
 {
@@ -346,7 +386,10 @@ static int soc_camera_enum_input(struct file *file, void *priv,
 	/* default is camera */
 	inp->type = V4L2_INPUT_TYPE_CAMERA;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inp->std  = V4L2_STD_UNKNOWN;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	strcpy(inp->name, "Camera");
@@ -375,7 +418,11 @@ static int soc_camera_s_std(struct file *file, void *priv, v4l2_std_id a)
 	struct v4l2_subdev *sd = soc_camera_to_subdev(icd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return v4l2_subdev_call(sd, core, s_std, a);
+=======
+	return v4l2_subdev_call(sd, video, s_std, a);
+>>>>>>> v3.18
 =======
 	return v4l2_subdev_call(sd, video, s_std, a);
 >>>>>>> v3.18
@@ -387,7 +434,11 @@ static int soc_camera_g_std(struct file *file, void *priv, v4l2_std_id *a)
 	struct v4l2_subdev *sd = soc_camera_to_subdev(icd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return v4l2_subdev_call(sd, core, g_std, a);
+=======
+	return v4l2_subdev_call(sd, video, g_std, a);
+>>>>>>> v3.18
 =======
 	return v4l2_subdev_call(sd, video, g_std, a);
 >>>>>>> v3.18
@@ -505,7 +556,10 @@ static int soc_camera_prepare_buf(struct file *file, void *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int soc_camera_expbuf(struct file *file, void *priv,
 			     struct v4l2_exportbuffer *p)
 {
@@ -522,6 +576,9 @@ static int soc_camera_expbuf(struct file *file, void *priv,
 		return vb2_expbuf(&icd->vb2_vidq, p);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Always entered with .host_lock held */
 static int soc_camera_init_user_formats(struct soc_camera_device *icd)
@@ -646,7 +703,10 @@ static int soc_camera_set_fmt(struct soc_camera_device *icd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int soc_camera_add_device(struct soc_camera_device *icd)
 {
 	struct soc_camera_host *ici = to_soc_camera_host(icd->parent);
@@ -699,6 +759,9 @@ static void soc_camera_remove_device(struct soc_camera_device *icd)
 	ici->icd = NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int soc_camera_open(struct file *file)
 {
@@ -721,7 +784,11 @@ static int soc_camera_open(struct file *file)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	icd = dev_get_drvdata(vdev->parent);
+=======
+	icd = video_get_drvdata(vdev);
+>>>>>>> v3.18
 =======
 	icd = video_get_drvdata(vdev);
 >>>>>>> v3.18
@@ -768,7 +835,11 @@ static int soc_camera_open(struct file *file)
 			sdesc->subdev_desc.reset(icd->pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = ici->ops->add(icd);
+=======
+		ret = soc_camera_add_device(icd);
+>>>>>>> v3.18
 =======
 		ret = soc_camera_add_device(icd);
 >>>>>>> v3.18
@@ -814,8 +885,13 @@ static int soc_camera_open(struct file *file)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * First four errors are entered with the .host_lock held
 	 * and use_count == 1
+=======
+	 * All errors are entered with the .host_lock held, first four also
+	 * with use_count == 1
+>>>>>>> v3.18
 =======
 	 * All errors are entered with the .host_lock held, first four also
 	 * with use_count == 1
@@ -828,7 +904,11 @@ eresume:
 	__soc_camera_power_off(icd);
 epower:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ici->ops->remove(icd);
+=======
+	soc_camera_remove_device(icd);
+>>>>>>> v3.18
 =======
 	soc_camera_remove_device(icd);
 >>>>>>> v3.18
@@ -858,7 +938,11 @@ static int soc_camera_close(struct file *file)
 		__soc_camera_power_off(icd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ici->ops->remove(icd);
+=======
+		soc_camera_remove_device(icd);
+>>>>>>> v3.18
 =======
 		soc_camera_remove_device(icd);
 >>>>>>> v3.18
@@ -1253,6 +1337,7 @@ static int soc_camera_s_parm(struct file *file, void *fh,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int soc_camera_g_chip_ident(struct file *file, void *fh,
 				   struct v4l2_dbg_chip_ident *id)
 {
@@ -1324,6 +1409,8 @@ static int soc_camera_init_i2c(struct soc_camera_device *icd,
 	if (!subdev)
 		goto ei2cnd;
 =======
+=======
+>>>>>>> v3.18
 static int soc_camera_probe(struct soc_camera_host *ici,
 			    struct soc_camera_device *icd);
 
@@ -1558,6 +1645,9 @@ static int soc_camera_i2c_init(struct soc_camera_device *icd,
 		ret = -ENODEV;
 		goto ei2cnd;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	client = v4l2_get_subdevdata(subdev);
@@ -1567,6 +1657,7 @@ static int soc_camera_i2c_init(struct soc_camera_device *icd,
 
 	return 0;
 ei2cnd:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	i2c_put_adapter(adap);
 ei2cga:
@@ -1602,6 +1693,8 @@ static int soc_camera_probe(struct soc_camera_device *icd)
 	struct v4l2_subdev *sd;
 	struct v4l2_mbus_framefmt mf;
 =======
+=======
+>>>>>>> v3.18
 	v4l2_clk_unregister(icd->clk);
 	icd->clk = NULL;
 eclkreg:
@@ -1933,6 +2026,9 @@ static int soc_camera_probe(struct soc_camera_host *ici,
 	struct soc_camera_desc *sdesc = to_soc_camera_desc(icd);
 	struct soc_camera_host_desc *shd = &sdesc->host_desc;
 	struct device *control = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -1950,6 +2046,7 @@ static int soc_camera_probe(struct soc_camera_host *ici,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The camera could have been already on, try to reset */
 	if (ssdd->reset)
 		ssdd->reset(icd->pdev);
@@ -1962,11 +2059,14 @@ static int soc_camera_probe(struct soc_camera_host *ici,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Must have icd->vdev before registering the device */
 	ret = video_dev_create(icd);
 	if (ret < 0)
 		goto evdc;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Non-i2c cameras, e.g., soc_camera_platform, have no board_info */
 	if (shd->board_info) {
@@ -1978,6 +2078,8 @@ static int soc_camera_probe(struct soc_camera_host *ici,
 		goto eadddev;
 	} else {
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * ..._video_start() will create a device node, video_register_device()
 	 * itself is protected against concurrent open() calls, but we also have
@@ -1999,6 +2101,9 @@ static int soc_camera_probe(struct soc_camera_host *ici,
 		if (ret < 0)
 			goto eadd;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (shd->module_name)
 			ret = request_module(shd->module_name);
@@ -2020,6 +2125,7 @@ static int soc_camera_probe(struct soc_camera_host *ici,
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sd = soc_camera_to_subdev(icd);
 	sd->grp_id = soc_camera_grp_id(icd);
@@ -2082,6 +2188,8 @@ evdc:
 	mutex_unlock(&ici->host_lock);
 eadd:
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&ici->host_lock);
 	ret = soc_camera_probe_finish(icd);
 	mutex_unlock(&ici->host_lock);
@@ -2110,6 +2218,9 @@ eadd:
 		icd->vdev = NULL;
 	}
 evdc:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	v4l2_ctrl_handler_free(&icd->ctrl_handler);
 	return ret;
@@ -2118,7 +2229,13 @@ evdc:
 /*
  * This is called on device_unregister, which only means we have to disconnect
 <<<<<<< HEAD
+<<<<<<< HEAD
  * from the host, but not remove ourselves from the device list
+=======
+ * from the host, but not remove ourselves from the device list. With
+ * asynchronous client probing this can also be called without
+ * soc_camera_probe_finish() having run. Careful with clean up.
+>>>>>>> v3.18
 =======
  * from the host, but not remove ourselves from the device list. With
  * asynchronous client probing this can also be called without
@@ -2131,8 +2248,11 @@ static int soc_camera_remove(struct soc_camera_device *icd)
 	struct video_device *vdev = icd->vdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!icd->parent);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	v4l2_ctrl_handler_free(&icd->ctrl_handler);
@@ -2143,14 +2263,20 @@ static int soc_camera_remove(struct soc_camera_device *icd)
 
 	if (sdesc->host_desc.board_info) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		soc_camera_free_i2c(icd);
 	} else {
 		struct device_driver *drv = to_soc_camera_control(icd)->driver;
 =======
+=======
+>>>>>>> v3.18
 		soc_camera_i2c_free(icd);
 	} else {
 		struct device *dev = to_soc_camera_control(icd);
 		struct device_driver *drv = dev ? dev->driver : NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (drv) {
 			sdesc->host_desc.del_device(icd);
@@ -2158,8 +2284,11 @@ static int soc_camera_remove(struct soc_camera_device *icd)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	soc_camera_free_user_formats(icd);
 =======
+=======
+>>>>>>> v3.18
 
 	if (icd->num_user_formats)
 		soc_camera_free_user_formats(icd);
@@ -2172,6 +2301,9 @@ static int soc_camera_remove(struct soc_camera_device *icd)
 
 	if (icd->sasc)
 		platform_device_unregister(icd->sasc->pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2249,8 +2381,13 @@ int soc_camera_host_register(struct soc_camera_host *ici)
 	      !ici->ops->reqbufs) &&
 	     !ici->ops->init_videobuf2) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !ici->ops->add ||
 	    !ici->ops->remove ||
+=======
+	    !ici->ops->clock_start ||
+	    !ici->ops->clock_stop ||
+>>>>>>> v3.18
 =======
 	    !ici->ops->clock_start ||
 	    !ici->ops->clock_stop ||
@@ -2289,8 +2426,11 @@ int soc_camera_host_register(struct soc_camera_host *ici)
 
 	mutex_init(&ici->host_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scan_add_host(ici);
 =======
+=======
+>>>>>>> v3.18
 	mutex_init(&ici->clk_lock);
 
 	if (ici->v4l2_dev.dev->of_node)
@@ -2305,6 +2445,9 @@ int soc_camera_host_register(struct soc_camera_host *ici)
 	else
 		/* Legacy: static platform devices from board data */
 		scan_add_host(ici);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2319,6 +2462,7 @@ EXPORT_SYMBOL(soc_camera_host_register);
 void soc_camera_host_unregister(struct soc_camera_host *ici)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct soc_camera_device *icd;
 
 	mutex_lock(&list_lock);
@@ -2327,6 +2471,8 @@ void soc_camera_host_unregister(struct soc_camera_host *ici)
 	list_for_each_entry(icd, &devices, list)
 		if (icd->iface == ici->nr && to_soc_camera_control(icd))
 =======
+=======
+>>>>>>> v3.18
 	struct soc_camera_device *icd, *tmp;
 	struct soc_camera_async_client *sasc;
 	LIST_HEAD(notifiers);
@@ -2351,6 +2497,9 @@ void soc_camera_host_unregister(struct soc_camera_host *ici)
 
 	list_for_each_entry_safe(icd, tmp, &devices, list)
 		if (icd->iface == ici->nr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			soc_camera_remove(icd);
 
@@ -2367,6 +2516,10 @@ static int soc_camera_device_register(struct soc_camera_device *icd)
 	int num = -1, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&list_lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&list_lock);
 >>>>>>> v3.18
@@ -2382,7 +2535,11 @@ static int soc_camera_device_register(struct soc_camera_device *icd)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (num < 0)
+=======
+	if (num < 0) {
+>>>>>>> v3.18
 =======
 	if (num < 0) {
 >>>>>>> v3.18
@@ -2391,7 +2548,13 @@ static int soc_camera_device_register(struct soc_camera_device *icd)
 		 * man, stay reasonable...
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
+=======
+		mutex_unlock(&list_lock);
+		return -ENOMEM;
+	}
+>>>>>>> v3.18
 =======
 		mutex_unlock(&list_lock);
 		return -ENOMEM;
@@ -2403,8 +2566,11 @@ static int soc_camera_device_register(struct soc_camera_device *icd)
 	icd->host_priv		= NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add_tail(&icd->list, &devices);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Dynamically allocated devices set the bit earlier, but it doesn't hurt setting
 	 * it again
@@ -2420,6 +2586,9 @@ static int soc_camera_device_register(struct soc_camera_device *icd)
 	set_bit(i, device_map);
 	list_add_tail(&icd->list, &devices);
 	mutex_unlock(&list_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2444,6 +2613,10 @@ static const struct v4l2_ioctl_ops soc_camera_ioctl_ops = {
 	.vidioc_create_bufs	 = soc_camera_create_bufs,
 	.vidioc_prepare_buf	 = soc_camera_prepare_buf,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.vidioc_expbuf		 = soc_camera_expbuf,
+>>>>>>> v3.18
 =======
 	.vidioc_expbuf		 = soc_camera_expbuf,
 >>>>>>> v3.18
@@ -2457,11 +2630,14 @@ static const struct v4l2_ioctl_ops soc_camera_ioctl_ops = {
 	.vidioc_g_parm		 = soc_camera_g_parm,
 	.vidioc_s_parm		 = soc_camera_s_parm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident     = soc_camera_g_chip_ident,
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.vidioc_g_register	 = soc_camera_g_register,
 	.vidioc_s_register	 = soc_camera_s_register,
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -2477,6 +2653,7 @@ static int video_dev_create(struct soc_camera_device *icd)
 	strlcpy(vdev->name, ici->drv_name, sizeof(vdev->name));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vdev->parent		= icd->pdev;
 	vdev->current_norm	= V4L2_STD_UNKNOWN;
 	vdev->fops		= &soc_camera_fops;
@@ -2484,10 +2661,15 @@ static int video_dev_create(struct soc_camera_device *icd)
 	vdev->release		= video_device_release;
 	vdev->tvnorms		= V4L2_STD_UNKNOWN;
 =======
+=======
+>>>>>>> v3.18
 	vdev->v4l2_dev		= &ici->v4l2_dev;
 	vdev->fops		= &soc_camera_fops;
 	vdev->ioctl_ops		= &soc_camera_ioctl_ops;
 	vdev->release		= video_device_release;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vdev->ctrl_handler	= &icd->ctrl_handler;
 	vdev->lock		= &ici->host_lock;
@@ -2509,7 +2691,10 @@ static int soc_camera_video_start(struct soc_camera_device *icd)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	video_set_drvdata(icd->vdev, icd);
 	if (icd->vdev->tvnorms == 0) {
 		/* disable the STD API if there are no tvnorms defined */
@@ -2517,6 +2702,9 @@ static int soc_camera_video_start(struct soc_camera_device *icd)
 		v4l2_disable_ioctl(icd->vdev, VIDIOC_S_STD);
 		v4l2_disable_ioctl(icd->vdev, VIDIOC_ENUMSTD);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = video_register_device(icd->vdev, VFL_TYPE_GRABBER, -1);
 	if (ret < 0) {
@@ -2545,9 +2733,12 @@ static int soc_camera_pdrv_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = devm_regulator_bulk_get(&pdev->dev, ssdd->num_regulators,
 				      ssdd->regulators);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * In the asynchronous case ssdd->num_regulators == 0 yet, so, the below
 	 * regulator allocation is a dummy. They are actually requested by the
@@ -2557,6 +2748,9 @@ static int soc_camera_pdrv_probe(struct platform_device *pdev)
 	 */
 	ret = devm_regulator_bulk_get(&pdev->dev, ssdd->sd_pdata.num_regulators,
 				      ssdd->sd_pdata.regulators);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;
@@ -2581,6 +2775,10 @@ static int soc_camera_pdrv_remove(struct platform_device *pdev)
 {
 	struct soc_camera_device *icd = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -2589,8 +2787,11 @@ static int soc_camera_pdrv_remove(struct platform_device *pdev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_del(&icd->list);
 =======
+=======
+>>>>>>> v3.18
 	i = pdev->id;
 	if (i < 0)
 		i = 0;
@@ -2605,6 +2806,9 @@ static int soc_camera_pdrv_remove(struct platform_device *pdev)
 		clear_bit(i, device_map);
 		list_del(&icd->list);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

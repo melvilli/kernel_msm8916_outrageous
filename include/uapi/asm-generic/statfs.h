@@ -14,7 +14,11 @@
 #ifndef __statfs_word
 #if __BITS_PER_LONG == 64
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __statfs_word long
+=======
+#define __statfs_word __kernel_long_t
+>>>>>>> v3.18
 =======
 #define __statfs_word __kernel_long_t
 >>>>>>> v3.18

@@ -17,6 +17,10 @@
 #include <linux/interrupt.h>
 #include <linux/eventfd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/msi.h>
+>>>>>>> v3.18
 =======
 #include <linux/msi.h>
 >>>>>>> v3.18
@@ -135,8 +139,13 @@ static int virqfd_enable(struct vfio_pci_device *vdev,
 			 void *data, struct virqfd **pvirqfd, int fd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file *file = NULL;
 	struct eventfd_ctx *ctx = NULL;
+=======
+	struct fd irqfd;
+	struct eventfd_ctx *ctx;
+>>>>>>> v3.18
 =======
 	struct fd irqfd;
 	struct eventfd_ctx *ctx;
@@ -159,6 +168,7 @@ static int virqfd_enable(struct vfio_pci_device *vdev,
 	INIT_WORK(&virqfd->inject, virqfd_inject);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file = eventfd_fget(fd);
 	if (IS_ERR(file)) {
 		ret = PTR_ERR(file);
@@ -170,6 +180,8 @@ static int virqfd_enable(struct vfio_pci_device *vdev,
 		ret = PTR_ERR(ctx);
 		goto fail;
 =======
+=======
+>>>>>>> v3.18
 	irqfd = fdget(fd);
 	if (!irqfd.file) {
 		ret = -EBADF;
@@ -180,6 +192,9 @@ static int virqfd_enable(struct vfio_pci_device *vdev,
 	if (IS_ERR(ctx)) {
 		ret = PTR_ERR(ctx);
 		goto err_ctx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -197,7 +212,11 @@ static int virqfd_enable(struct vfio_pci_device *vdev,
 		spin_unlock_irq(&vdev->irqlock);
 		ret = -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail;
+=======
+		goto err_busy;
+>>>>>>> v3.18
 =======
 		goto err_busy;
 >>>>>>> v3.18
@@ -214,7 +233,11 @@ static int virqfd_enable(struct vfio_pci_device *vdev,
 	init_poll_funcptr(&virqfd->pt, virqfd_ptable_queue_proc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	events = file->f_op->poll(file, &virqfd->pt);
+=======
+	events = irqfd.file->f_op->poll(irqfd.file, &virqfd->pt);
+>>>>>>> v3.18
 =======
 	events = irqfd.file->f_op->poll(irqfd.file, &virqfd->pt);
 >>>>>>> v3.18
@@ -233,6 +256,7 @@ static int virqfd_enable(struct vfio_pci_device *vdev,
 	 * otherwise we might race against the POLLHUP.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fput(file);
 
 	return 0;
@@ -245,6 +269,8 @@ fail:
 		fput(file);
 
 =======
+=======
+>>>>>>> v3.18
 	fdput(irqfd);
 
 	return 0;
@@ -253,6 +279,9 @@ err_busy:
 err_ctx:
 	fdput(irqfd);
 err_fd:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(virqfd);
 
@@ -510,7 +539,11 @@ static int vfio_msi_enable(struct vfio_pci_device *vdev, int nvec, bool msix)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vdev->ctx = kcalloc(nvec, sizeof(struct vfio_pci_irq_ctx), GFP_KERNEL);
+=======
+	vdev->ctx = kzalloc(nvec * sizeof(struct vfio_pci_irq_ctx), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	vdev->ctx = kzalloc(nvec * sizeof(struct vfio_pci_irq_ctx), GFP_KERNEL);
 >>>>>>> v3.18
@@ -531,13 +564,19 @@ static int vfio_msi_enable(struct vfio_pci_device *vdev, int nvec, bool msix)
 			vdev->msix[i].entry = i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = pci_enable_msix(pdev, vdev->msix, nvec);
 		if (ret) {
 =======
+=======
+>>>>>>> v3.18
 		ret = pci_enable_msix_range(pdev, vdev->msix, 1, nvec);
 		if (ret < nvec) {
 			if (ret > 0)
 				pci_disable_msix(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			kfree(vdev->msix);
 			kfree(vdev->ctx);
@@ -545,13 +584,19 @@ static int vfio_msi_enable(struct vfio_pci_device *vdev, int nvec, bool msix)
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = pci_enable_msi_block(pdev, nvec);
 		if (ret) {
 =======
+=======
+>>>>>>> v3.18
 		ret = pci_enable_msi_range(pdev, 1, nvec);
 		if (ret < nvec) {
 			if (ret > 0)
 				pci_disable_msi(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			kfree(vdev->ctx);
 			return ret;
@@ -607,7 +652,10 @@ static int vfio_msi_set_vector_signal(struct vfio_pci_device *vdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The MSIx vector table resides in device memory which may be cleared
 	 * via backdoor resets. We don't allow direct access to the vector
@@ -622,6 +670,9 @@ static int vfio_msi_set_vector_signal(struct vfio_pci_device *vdev,
 		write_msi_msg(irq, &msg);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = request_irq(irq, vfio_msihandler, 0,
 			  vdev->ctx[vector].name, trigger);
@@ -829,7 +880,10 @@ static int vfio_pci_set_err_trigger(struct vfio_pci_device *vdev,
 {
 	int32_t fd = *(int32_t *)data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev *pdev = vdev->pdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -837,6 +891,7 @@ static int vfio_pci_set_err_trigger(struct vfio_pci_device *vdev,
 	    !(flags & VFIO_IRQ_SET_DATA_TYPE_MASK))
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * device_lock synchronizes setting and checking of
@@ -869,10 +924,22 @@ static int vfio_pci_set_err_trigger(struct vfio_pci_device *vdev,
 		if (trigger && vdev->err_trigger)
 			eventfd_signal(vdev->err_trigger, 1);
 >>>>>>> v3.18
+=======
+	/* DATA_NONE/DATA_BOOL enables loopback testing */
+	if (flags & VFIO_IRQ_SET_DATA_NONE) {
+		if (vdev->err_trigger)
+			eventfd_signal(vdev->err_trigger, 1);
+		return 0;
+	} else if (flags & VFIO_IRQ_SET_DATA_BOOL) {
+		uint8_t trigger = *(uint8_t *)data;
+		if (trigger && vdev->err_trigger)
+			eventfd_signal(vdev->err_trigger, 1);
+>>>>>>> v3.18
 		return 0;
 	}
 
 	/* Handle SET_DATA_EVENTFD */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (fd == -1) {
@@ -887,6 +954,12 @@ static int vfio_pci_set_err_trigger(struct vfio_pci_device *vdev,
 			eventfd_ctx_put(vdev->err_trigger);
 		vdev->err_trigger = NULL;
 >>>>>>> v3.18
+=======
+	if (fd == -1) {
+		if (vdev->err_trigger)
+			eventfd_ctx_put(vdev->err_trigger);
+		vdev->err_trigger = NULL;
+>>>>>>> v3.18
 		return 0;
 	} else if (fd >= 0) {
 		struct eventfd_ctx *efdctx;
@@ -894,11 +967,17 @@ static int vfio_pci_set_err_trigger(struct vfio_pci_device *vdev,
 		if (IS_ERR(efdctx))
 			return PTR_ERR(efdctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		device_lock(&pdev->dev);
 		if (vdev->err_trigger)
 			eventfd_ctx_put(vdev->err_trigger);
 		vdev->err_trigger = efdctx;
 		device_unlock(&pdev->dev);
+=======
+		if (vdev->err_trigger)
+			eventfd_ctx_put(vdev->err_trigger);
+		vdev->err_trigger = efdctx;
+>>>>>>> v3.18
 =======
 		if (vdev->err_trigger)
 			eventfd_ctx_put(vdev->err_trigger);

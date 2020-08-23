@@ -48,6 +48,10 @@ static struct plat_serial8250_port uart8250_data[] = {
 	SMC_PORT(0x3F8, 4),
 	SMC_PORT(0x2F8, 3),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_MIPS_CMP
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_MIPS_CMP
 >>>>>>> v3.18
@@ -60,6 +64,10 @@ static struct plat_serial8250_port uart8250_data[] = {
 		.regshift	= 3,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

@@ -201,6 +201,10 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id id)
 
 	port->encodernorm = saa7164_tvnorms[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	port->std = id;
+>>>>>>> v3.18
 =======
 	port->std = id;
 >>>>>>> v3.18
@@ -216,7 +220,10 @@ static int vidioc_s_std(struct file *file, void *priv, v4l2_std_id id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vidioc_g_std(struct file *file, void *priv, v4l2_std_id *id)
 {
 	struct saa7164_encoder_fh *fh = file->private_data;
@@ -226,6 +233,9 @@ static int vidioc_g_std(struct file *file, void *priv, v4l2_std_id *id)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int vidioc_enum_input(struct file *file, void *priv,
 	struct v4l2_input *i)
@@ -1253,6 +1263,10 @@ static const struct v4l2_file_operations vbi_fops = {
 static const struct v4l2_ioctl_ops vbi_ioctl_ops = {
 	.vidioc_s_std		 = vidioc_s_std,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.vidioc_g_std		 = vidioc_g_std,
+>>>>>>> v3.18
 =======
 	.vidioc_g_std		 = vidioc_g_std,
 >>>>>>> v3.18
@@ -1275,6 +1289,7 @@ static const struct v4l2_ioctl_ops vbi_ioctl_ops = {
 	.vidioc_try_ext_ctrls	 = vidioc_try_ext_ctrls,
 	.vidioc_queryctrl	 = vidioc_queryctrl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0
 	.vidioc_g_chip_ident	 = saa7164_g_chip_ident,
 #endif
@@ -1284,6 +1299,8 @@ static const struct v4l2_ioctl_ops vbi_ioctl_ops = {
 	.vidioc_s_register	 = saa7164_s_register,
 #endif
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.vidioc_g_fmt_vbi_cap	 = saa7164_vbi_fmt,
@@ -1298,7 +1315,10 @@ static struct video_device saa7164_vbi_template = {
 	.minor         = -1,
 	.tvnorms       = SAA7164_NORMS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.current_norm  = V4L2_STD_NTSC_M,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1323,7 +1343,11 @@ static struct video_device *saa7164_vbi_alloc(
 		type, saa7164_boards[dev->board].name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vfd->parent  = &pci->dev;
+=======
+	vfd->v4l2_dev  = &dev->v4l2_dev;
+>>>>>>> v3.18
 =======
 	vfd->v4l2_dev  = &dev->v4l2_dev;
 >>>>>>> v3.18
@@ -1364,6 +1388,10 @@ int saa7164_vbi_register(struct saa7164_port *port)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	port->std = V4L2_STD_NTSC_M;
+>>>>>>> v3.18
 =======
 	port->std = V4L2_STD_NTSC_M;
 >>>>>>> v3.18

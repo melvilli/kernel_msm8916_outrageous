@@ -320,7 +320,11 @@ static void sunzilog_kbdms_receive_chars(struct uart_sunzilog_port *up,
 #endif
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -708,6 +712,11 @@ static void sunzilog_start_tx(struct uart_port *port)
 		struct circ_buf *xmit = &port->state->xmit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (uart_circ_empty(xmit))
+			return;
+>>>>>>> v3.18
 =======
 		if (uart_circ_empty(xmit))
 			return;
@@ -907,7 +916,11 @@ sunzilog_convert_to_zs(struct uart_sunzilog_port *up, unsigned int cflag,
 		up->parity_mask = 0xff;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -929,7 +942,11 @@ sunzilog_convert_to_zs(struct uart_sunzilog_port *up, unsigned int cflag,
 	if (iflag & INPCK)
 		up->port.read_status_mask |= CRC_ERR | PAR_ERR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iflag & (BRKINT | PARMRK))
+=======
+	if (iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -1213,6 +1230,7 @@ sunzilog_console_write(struct console *con, const char *s, unsigned int count)
 	int locked = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_irq_save(flags);
 	if (up->port.sysrq) {
 		locked = 0;
@@ -1221,10 +1239,15 @@ sunzilog_console_write(struct console *con, const char *s, unsigned int count)
 	} else
 		spin_lock(&up->port.lock);
 =======
+=======
+>>>>>>> v3.18
 	if (up->port.sysrq || oops_in_progress)
 		locked = spin_trylock_irqsave(&up->port.lock, flags);
 	else
 		spin_lock_irqsave(&up->port.lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	uart_console_write(&up->port, s, count, sunzilog_putchar);
@@ -1232,8 +1255,12 @@ sunzilog_console_write(struct console *con, const char *s, unsigned int count)
 
 	if (locked)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock(&up->port.lock);
 	local_irq_restore(flags);
+=======
+		spin_unlock_irqrestore(&up->port.lock, flags);
+>>>>>>> v3.18
 =======
 		spin_unlock_irqrestore(&up->port.lock, flags);
 >>>>>>> v3.18
@@ -1268,7 +1295,11 @@ static int __init sunzilog_console_setup(struct console *con, char *options)
 	case B19200: baud = 19200; break;
 	case B38400: baud = 38400; break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -1528,7 +1559,11 @@ static int zs_probe(struct platform_device *op)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, &up[0]);
+=======
+	platform_set_drvdata(op, &up[0]);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, &up[0]);
 >>>>>>> v3.18
@@ -1549,7 +1584,11 @@ static void zs_remove_one(struct uart_sunzilog_port *up)
 static int zs_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uart_sunzilog_port *up = dev_get_drvdata(&op->dev);
+=======
+	struct uart_sunzilog_port *up = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct uart_sunzilog_port *up = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -1562,8 +1601,11 @@ static int zs_remove(struct platform_device *op)
 	of_iounmap(&op->resource[0], regs, sizeof(struct zilog_layout));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

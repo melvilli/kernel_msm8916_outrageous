@@ -1,7 +1,12 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2010 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2013 Solarflare Communications Inc.
@@ -16,6 +21,7 @@
 #define EFX_FILTER_H
 
 #include <linux/types.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /**
@@ -44,6 +50,8 @@ enum efx_filter_type {
 	EFX_FILTER_TYPE_COUNT,		/* number of specific types */
 	EFX_FILTER_UNSPEC = 0xf,
 =======
+=======
+>>>>>>> v3.18
 #include <linux/if_ether.h>
 #include <asm/byteorder.h>
 
@@ -87,6 +95,9 @@ enum efx_filter_match_flags {
 	EFX_FILTER_MATCH_OUTER_VID =	0x0100,
 	EFX_FILTER_MATCH_IP_PROTO =	0x0200,
 	EFX_FILTER_MATCH_LOC_MAC_IG =	0x0400,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -94,6 +105,12 @@ enum efx_filter_match_flags {
  * enum efx_filter_priority - priority of a hardware filter specification
  * @EFX_FILTER_PRI_HINT: Performance hint
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @EFX_FILTER_PRI_AUTO: Automatic filter based on device address list
+ *	or hardware requirements.  This may only be used by the filter
+ *	implementation for each NIC type.
+>>>>>>> v3.18
 =======
  * @EFX_FILTER_PRI_AUTO: Automatic filter based on device address list
  *	or hardware requirements.  This may only be used by the filter
@@ -106,6 +123,10 @@ enum efx_filter_match_flags {
 enum efx_filter_priority {
 	EFX_FILTER_PRI_HINT = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	EFX_FILTER_PRI_AUTO,
+>>>>>>> v3.18
 =======
 	EFX_FILTER_PRI_AUTO,
 >>>>>>> v3.18
@@ -123,12 +144,18 @@ enum efx_filter_priority {
  * @EFX_FILTER_FLAG_RX_SCATTER: Enable DMA scatter on the receiving
  *	queue.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @EFX_FILTER_FLAG_RX_OVER_AUTO: Indicates a filter that is
  *	overriding an automatic filter (priority
  *	%EFX_FILTER_PRI_AUTO).  This may only be set by the filter
  *	implementation for each type.  A removal request will restore
  *	the automatic filter in its place.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @EFX_FILTER_FLAG_RX: Filter is for RX
  * @EFX_FILTER_FLAG_TX: Filter is for TX
@@ -137,6 +164,10 @@ enum efx_filter_flags {
 	EFX_FILTER_FLAG_RX_RSS = 0x01,
 	EFX_FILTER_FLAG_RX_SCATTER = 0x02,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	EFX_FILTER_FLAG_RX_OVER_AUTO = 0x04,
+>>>>>>> v3.18
 =======
 	EFX_FILTER_FLAG_RX_OVER_AUTO = 0x04,
 >>>>>>> v3.18
@@ -146,6 +177,7 @@ enum efx_filter_flags {
 
 /**
  * struct efx_filter_spec - specification for a hardware filter
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @type: Type of match to be performed, from &enum efx_filter_type
  * @priority: Priority of the filter, from &enum efx_filter_priority
@@ -167,6 +199,8 @@ struct efx_filter_spec {
 	u16	dmaq_id;
 	u32	data[3];
 =======
+=======
+>>>>>>> v3.18
  * @match_flags: Match type flags, from &enum efx_filter_match_flags
  * @priority: Priority of the filter, from &enum efx_filter_priority
  * @flags: Miscellaneous flags, from &enum efx_filter_flags
@@ -217,6 +251,9 @@ struct efx_filter_spec {
 enum {
 	EFX_FILTER_RSS_CONTEXT_DEFAULT = 0xffffffff,
 	EFX_FILTER_RX_DMAQ_ID_DROP = 0xfff
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -226,14 +263,20 @@ static inline void efx_filter_init_rx(struct efx_filter_spec *spec,
 				      unsigned rxq_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spec->type = EFX_FILTER_UNSPEC;
 	spec->priority = priority;
 	spec->flags = EFX_FILTER_FLAG_RX | flags;
 =======
+=======
+>>>>>>> v3.18
 	memset(spec, 0, sizeof(*spec));
 	spec->priority = priority;
 	spec->flags = EFX_FILTER_FLAG_RX | flags;
 	spec->rss_context = EFX_FILTER_RSS_CONTEXT_DEFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spec->dmaq_id = rxq_id;
 }
@@ -242,7 +285,11 @@ static inline void efx_filter_init_tx(struct efx_filter_spec *spec,
 				      unsigned txq_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spec->type = EFX_FILTER_UNSPEC;
+=======
+	memset(spec, 0, sizeof(*spec));
+>>>>>>> v3.18
 =======
 	memset(spec, 0, sizeof(*spec));
 >>>>>>> v3.18
@@ -251,6 +298,7 @@ static inline void efx_filter_init_tx(struct efx_filter_spec *spec,
 	spec->dmaq_id = txq_id;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int efx_filter_set_ipv4_local(struct efx_filter_spec *spec, u8 proto,
 				     __be32 host, __be16 port);
@@ -269,6 +317,8 @@ extern int efx_filter_get_eth_local(const struct efx_filter_spec *spec,
 extern int efx_filter_set_uc_def(struct efx_filter_spec *spec);
 extern int efx_filter_set_mc_def(struct efx_filter_spec *spec);
 =======
+=======
+>>>>>>> v3.18
 /**
  * efx_filter_set_ipv4_local - specify IPv4 host, transport protocol and port
  * @spec: Specification to initialise
@@ -317,13 +367,19 @@ efx_filter_set_ipv4_full(struct efx_filter_spec *spec, u8 proto,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	EFX_FILTER_VID_UNSPEC = 0xffff,
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * efx_filter_set_eth_local - specify local Ethernet address and/or VID
  * @spec: Specification to initialise
@@ -368,5 +424,8 @@ static inline int efx_filter_set_mc_def(struct efx_filter_spec *spec)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* EFX_FILTER_H */

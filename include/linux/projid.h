@@ -19,8 +19,11 @@ extern struct user_namespace init_user_ns;
 typedef __kernel_uid32_t projid_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_UIDGID_STRICT_TYPE_CHECKS
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef struct {
@@ -35,6 +38,7 @@ static inline projid_t __kprojid_val(kprojid_t projid)
 #define KPROJIDT_INIT(value) (kprojid_t){ value }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 
 typedef projid_t kprojid_t;
@@ -48,6 +52,8 @@ static inline projid_t __kprojid_val(kprojid_t projid)
 
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define INVALID_PROJID KPROJIDT_INIT(-1)

@@ -192,10 +192,13 @@ static __inline__ int arch_write_can_lock(arch_rwlock_t *rw)
 #define arch_write_lock_flags(lock, flags) arch_write_lock(lock)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define arch_spin_relax(lock)	cpu_relax()
 #define arch_read_relax(lock)	cpu_relax()
 #define arch_write_relax(lock)	cpu_relax()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __ASM_SPINLOCK_H */

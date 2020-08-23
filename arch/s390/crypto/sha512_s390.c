@@ -87,7 +87,11 @@ static struct shash_alg sha512_alg = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("sha512");
+=======
+MODULE_ALIAS("sha512");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("sha512");
 >>>>>>> v3.18
@@ -131,7 +135,11 @@ static struct shash_alg sha384_alg = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("sha384");
+=======
+MODULE_ALIAS("sha384");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("sha384");
 >>>>>>> v3.18

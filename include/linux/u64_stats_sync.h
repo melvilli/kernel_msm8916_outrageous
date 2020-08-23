@@ -28,8 +28,13 @@
  *     read partial values)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 7) For softirq uses, readers can use u64_stats_fetch_begin_bh() and
  *    u64_stats_fetch_retry_bh() helpers
+=======
+ * 7) For irq and softirq uses, readers can use u64_stats_fetch_begin_irq() and
+ *    u64_stats_fetch_retry_irq() helpers
+>>>>>>> v3.18
 =======
  * 7) For irq and softirq uses, readers can use u64_stats_fetch_begin_irq() and
  *    u64_stats_fetch_retry_irq() helpers
@@ -73,7 +78,10 @@ struct u64_stats_sync {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #if BITS_PER_LONG == 32 && defined(CONFIG_SMP)
 # define u64_stats_init(syncp)	seqcount_init(syncp.seq)
@@ -81,6 +89,9 @@ struct u64_stats_sync {
 # define u64_stats_init(syncp)	do { } while (0)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void u64_stats_update_begin(struct u64_stats_sync *syncp)
 {
@@ -123,6 +134,7 @@ static inline bool u64_stats_fetch_retry(const struct u64_stats_sync *syncp,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * In case softirq handlers can update u64 counters, readers can use following helpers
  * - SMP 32bit arches use seqcount protection, irq safe.
  * - UP 32bit must disable BH.
@@ -130,12 +142,17 @@ static inline bool u64_stats_fetch_retry(const struct u64_stats_sync *syncp,
  */
 static inline unsigned int u64_stats_fetch_begin_bh(const struct u64_stats_sync *syncp)
 =======
+=======
+>>>>>>> v3.18
  * In case irq handlers can update u64 counters, readers can use following helpers
  * - SMP 32bit arches use seqcount protection, irq safe.
  * - UP 32bit must disable irqs.
  * - 64bit have no problem atomically reading u64 values, irq safe.
  */
 static inline unsigned int u64_stats_fetch_begin_irq(const struct u64_stats_sync *syncp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 #if BITS_PER_LONG==32 && defined(CONFIG_SMP)
@@ -143,7 +160,11 @@ static inline unsigned int u64_stats_fetch_begin_irq(const struct u64_stats_sync
 #else
 #if BITS_PER_LONG==32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_bh_disable();
+=======
+	local_irq_disable();
+>>>>>>> v3.18
 =======
 	local_irq_disable();
 >>>>>>> v3.18
@@ -153,7 +174,11 @@ static inline unsigned int u64_stats_fetch_begin_irq(const struct u64_stats_sync
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool u64_stats_fetch_retry_bh(const struct u64_stats_sync *syncp,
+=======
+static inline bool u64_stats_fetch_retry_irq(const struct u64_stats_sync *syncp,
+>>>>>>> v3.18
 =======
 static inline bool u64_stats_fetch_retry_irq(const struct u64_stats_sync *syncp,
 >>>>>>> v3.18
@@ -164,7 +189,11 @@ static inline bool u64_stats_fetch_retry_irq(const struct u64_stats_sync *syncp,
 #else
 #if BITS_PER_LONG==32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_bh_enable();
+=======
+	local_irq_enable();
+>>>>>>> v3.18
 =======
 	local_irq_enable();
 >>>>>>> v3.18

@@ -145,8 +145,11 @@ int kgdb_arch_handle_exception(int exception_vector, int signo,
 static int kgdb_brk_fn(struct pt_regs *regs, unsigned int instr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (user_mode(regs))
 		return -1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kgdb_handle_exception(1, SIGTRAP, 0, regs);
@@ -157,8 +160,11 @@ static int kgdb_brk_fn(struct pt_regs *regs, unsigned int instr)
 static int kgdb_compiled_brk_fn(struct pt_regs *regs, unsigned int instr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (user_mode(regs))
 		return -1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	compiled_break = 1;
@@ -171,6 +177,11 @@ static struct undef_hook kgdb_brkpt_hook = {
 	.instr_mask		= 0xffffffff,
 	.instr_val		= KGDB_BREAKINST,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cpsr_mask		= MODE_MASK,
+	.cpsr_val		= SVC_MODE,
+>>>>>>> v3.18
 =======
 	.cpsr_mask		= MODE_MASK,
 	.cpsr_val		= SVC_MODE,
@@ -182,6 +193,11 @@ static struct undef_hook kgdb_compiled_brkpt_hook = {
 	.instr_mask		= 0xffffffff,
 	.instr_val		= KGDB_COMPILED_BREAK,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cpsr_mask		= MODE_MASK,
+	.cpsr_val		= SVC_MODE,
+>>>>>>> v3.18
 =======
 	.cpsr_mask		= MODE_MASK,
 	.cpsr_val		= SVC_MODE,

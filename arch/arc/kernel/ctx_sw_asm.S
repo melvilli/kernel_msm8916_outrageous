@@ -11,15 +11,21 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/entry.h>       /* For the SAVE_* macros */
 #include <asm/asm-offsets.h>
 #include <asm/linkage.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/linkage.h>
 #include <asm/entry.h>       /* For the SAVE_* macros */
 #include <asm/asm-offsets.h>
 
 #define KSP_WORD_OFF 	((TASK_THREAD + THREAD_KSP) / 4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ;################### Low Level Context Switch ##########################
@@ -37,9 +43,12 @@ __switch_to:
 
 	/* Save the now KSP in task->thread.ksp */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st.as  sp, [r0, (TASK_THREAD + THREAD_KSP)/4]
 
 =======
+=======
+>>>>>>> v3.18
 #if KSP_WORD_OFF  <= 255
 	st.as  sp, [r0, KSP_WORD_OFF]
 #else
@@ -47,6 +56,9 @@ __switch_to:
 	add2	r24, r0, KSP_WORD_OFF
 	st	sp, [r24]
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	* Return last task in r0 (return reg)
@@ -74,7 +86,11 @@ __switch_to:
 	j       [blink]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ARC_EXIT __switch_to
+=======
+END(__switch_to)
+>>>>>>> v3.18
 =======
 END(__switch_to)
 >>>>>>> v3.18

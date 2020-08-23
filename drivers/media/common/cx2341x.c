@@ -1491,6 +1491,10 @@ static struct v4l2_ctrl *cx2341x_ctrl_new_custom(struct v4l2_ctrl_handler *hdl,
 	struct v4l2_ctrl_config cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(&cfg, 0, sizeof(cfg));
+>>>>>>> v3.18
 =======
 	memset(&cfg, 0, sizeof(cfg));
 >>>>>>> v3.18

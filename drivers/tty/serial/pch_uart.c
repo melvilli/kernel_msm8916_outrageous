@@ -233,7 +233,11 @@ struct eg20t_port {
 	struct pci_dev *pdev;
 	int fifo_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int uartclk;
+=======
+	unsigned int uartclk;
+>>>>>>> v3.18
 =======
 	unsigned int uartclk;
 >>>>>>> v3.18
@@ -262,6 +266,11 @@ struct eg20t_port {
 
 	struct dentry	*debugfs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IRQ_NAME_SIZE 17
+	char				irq_name[IRQ_NAME_SIZE];
+>>>>>>> v3.18
 =======
 #define IRQ_NAME_SIZE 17
 	char				irq_name[IRQ_NAME_SIZE];
@@ -383,11 +392,14 @@ static const struct file_operations port_regs_ops = {
 #endif	/* CONFIG_DEBUG_FS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Return UART clock, checking for board specific clocks. */
 static int pch_uart_get_uartclk(void)
 {
 	const char *cmp;
 =======
+=======
+>>>>>>> v3.18
 static struct dmi_system_id pch_uart_dmi_table[] = {
 	{
 		.ident = "CM-iTC",
@@ -437,11 +449,15 @@ static struct dmi_system_id pch_uart_dmi_table[] = {
 static unsigned int pch_uart_get_uartclk(void)
 {
 	const struct dmi_system_id *d;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (user_uartclk)
 		return user_uartclk;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cmp = dmi_get_system_info(DMI_BOARD_NAME);
 	if (cmp && strstr(cmp, "CM-iTC"))
@@ -469,6 +485,11 @@ static unsigned int pch_uart_get_uartclk(void)
 	if (d)
 		return (unsigned long)d->driver_data;
 >>>>>>> v3.18
+=======
+	d = dmi_first_match(pch_uart_dmi_table);
+	if (d)
+		return (unsigned long)d->driver_data;
+>>>>>>> v3.18
 
 	return DEFAULT_UARTCLK;
 }
@@ -490,7 +511,11 @@ static void pch_uart_hal_disable_interrupt(struct eg20t_port *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pch_uart_hal_set_line(struct eg20t_port *priv, int baud,
+=======
+static int pch_uart_hal_set_line(struct eg20t_port *priv, unsigned int baud,
+>>>>>>> v3.18
 =======
 static int pch_uart_hal_set_line(struct eg20t_port *priv, unsigned int baud,
 >>>>>>> v3.18
@@ -529,7 +554,11 @@ static int pch_uart_hal_set_line(struct eg20t_port *priv, unsigned int baud,
 	lcr |= stb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(priv->port.dev, "%s:baud = %d, div = %04x, lcr = %02x (%lu)\n",
+=======
+	dev_dbg(priv->port.dev, "%s:baud = %u, div = %04x, lcr = %02x (%lu)\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(priv->port.dev, "%s:baud = %u, div = %04x, lcr = %02x (%lu)\n",
 >>>>>>> v3.18
@@ -716,13 +745,17 @@ static int pop_tx_x(struct eg20t_port *priv, unsigned char *buf)
 static int dma_push_rx(struct eg20t_port *priv, int size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tty_struct *tty;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int room;
 	struct uart_port *port = &priv->port;
 	struct tty_port *tport = &port->state->port;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	port = &priv->port;
 	tty = tty_port_tty_get(tport);
@@ -733,6 +766,8 @@ static int dma_push_rx(struct eg20t_port *priv, int size)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	room = tty_buffer_request_room(tport, size);
 
 	if (room < size)
@@ -740,7 +775,11 @@ static int dma_push_rx(struct eg20t_port *priv, int size)
 			 size - room);
 	if (!room)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -749,8 +788,11 @@ static int dma_push_rx(struct eg20t_port *priv, int size)
 
 	port->icount.rx += room;
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	tty_kref_put(tty);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -806,14 +848,20 @@ static void pch_request_dma(struct uart_port *port)
 	dma_cap_set(DMA_SLAVE, mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_dev = pci_get_bus_and_slot(priv->pdev->bus->number,
 				       PCI_DEVFN(0xa, 0)); /* Get DMA's dev
 								information */
 =======
+=======
+>>>>>>> v3.18
 	/* Get DMA's dev information */
 	dma_dev = pci_get_slot(priv->pdev->bus,
 			PCI_DEVFN(PCI_SLOT(priv->pdev->devfn), 0));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Set Tx DMA */
 	param = &priv->param_tx;
@@ -1124,7 +1172,11 @@ static unsigned int dma_handle_tx(struct eg20t_port *priv)
 					DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
 	if (!desc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(priv->port.dev, "%s:device_prep_slave_sg Failed\n",
+=======
+		dev_err(priv->port.dev, "%s:dmaengine_prep_slave_sg Failed\n",
+>>>>>>> v3.18
 =======
 		dev_err(priv->port.dev, "%s:dmaengine_prep_slave_sg Failed\n",
 >>>>>>> v3.18
@@ -1426,7 +1478,11 @@ static int pch_uart_startup(struct uart_port *port)
 
 	ret = request_irq(priv->port.irq, pch_uart_interrupt, IRQF_SHARED,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			KBUILD_MODNAME, priv);
+=======
+			priv->irq_name, priv);
+>>>>>>> v3.18
 =======
 			priv->irq_name, priv);
 >>>>>>> v3.18
@@ -1470,9 +1526,14 @@ static void pch_uart_set_termios(struct uart_port *port,
 				 struct ktermios *termios, struct ktermios *old)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int baud;
 	int rtn;
 	unsigned int parity, bits, stb;
+=======
+	int rtn;
+	unsigned int baud, parity, bits, stb;
+>>>>>>> v3.18
 =======
 	int rtn;
 	unsigned int baud, parity, bits, stb;
@@ -1601,11 +1662,14 @@ static int pch_uart_verify_port(struct uart_port *port,
 		return -EOPNOTSUPP;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(priv->port.dev, "PCH UART : Use DMA Mode\n");
 		if (!priv->use_dma)
 			pch_request_dma(port);
 		priv->use_dma = 1;
 =======
+=======
+>>>>>>> v3.18
 		if (!priv->use_dma) {
 			pch_request_dma(port);
 			if (priv->chan_rx)
@@ -1614,6 +1678,9 @@ static int pch_uart_verify_port(struct uart_port *port,
 		dev_info(priv->port.dev, "PCH UART: %s\n",
 				priv->use_dma ?
 				"Use DMA Mode" : "No DMA");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1621,6 +1688,10 @@ static int pch_uart_verify_port(struct uart_port *port,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_CONSOLE_POLL) || defined(CONFIG_SERIAL_PCH_UART_CONSOLE)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_CONSOLE_POLL) || defined(CONFIG_SERIAL_PCH_UART_CONSOLE)
 >>>>>>> v3.18
@@ -1655,6 +1726,10 @@ static void wait_for_xmitr(struct eg20t_port *up, int bits)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_CONSOLE_POLL || CONFIG_SERIAL_PCH_UART_CONSOLE */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_CONSOLE_POLL || CONFIG_SERIAL_PCH_UART_CONSOLE */
 >>>>>>> v3.18
@@ -1694,6 +1769,7 @@ static void pch_uart_put_poll_char(struct uart_port *port,
 	/*
 	 * Send the character out.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * If a LF, also do CR...
 	 */
 	iowrite8(c, priv->membase + PCH_UART_THR);
@@ -1701,6 +1777,10 @@ static void pch_uart_put_poll_char(struct uart_port *port,
 		wait_for_xmitr(priv, UART_LSR_THRE);
 		iowrite8(13, priv->membase + PCH_UART_THR);
 	}
+=======
+	 */
+	iowrite8(c, priv->membase + PCH_UART_THR);
+>>>>>>> v3.18
 =======
 	 */
 	iowrite8(c, priv->membase + PCH_UART_THR);
@@ -1729,7 +1809,10 @@ static struct uart_ops pch_uart_ops = {
 	.set_termios = pch_uart_set_termios,
 /*	.pm		= pch_uart_pm,		Not supported yet */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*	.set_wake	= pch_uart_set_wake,	Not supported yet */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.type = pch_uart_type,
@@ -1877,7 +1960,13 @@ static struct eg20t_port *pch_uart_init_port(struct pci_dev *pdev,
 	int port_type;
 	struct pch_uart_driver_data *board;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[32];	/* for debugfs file name */
+=======
+#ifdef CONFIG_DEBUG_FS
+	char name[32];	/* for debugfs file name */
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_DEBUG_FS
 	char name[32];	/* for debugfs file name */
@@ -1937,11 +2026,17 @@ static struct eg20t_port *pch_uart_init_port(struct pci_dev *pdev,
 	priv->trigger = PCH_UART_HAL_TRIGGER_M;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	snprintf(priv->irq_name, IRQ_NAME_SIZE,
 		 KBUILD_MODNAME ":" PCH_UART_DRIVER_DEVICE "%d",
 		 priv->port.line);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_init(&priv->port.lock);
 
@@ -1985,7 +2080,10 @@ static void pch_uart_exit_port(struct eg20t_port *priv)
 #endif
 	uart_remove_one_port(&pch_uart_driver, &priv->port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(priv->pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_page((unsigned long)priv->rxbuf.buf);
@@ -2042,7 +2140,11 @@ static int pch_uart_pci_resume(struct pci_dev *pdev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pch_uart_pci_id) = {
+=======
+static const struct pci_device_id pch_uart_pci_id[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pch_uart_pci_id[] = {
 >>>>>>> v3.18
@@ -2134,6 +2236,11 @@ module_exit(pch_uart_module_exit);
 MODULE_LICENSE("GPL v2");
 MODULE_DESCRIPTION("Intel EG20T PCH UART PCI Driver");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DEVICE_TABLE(pci, pch_uart_pci_id);
+
+>>>>>>> v3.18
 =======
 MODULE_DEVICE_TABLE(pci, pch_uart_pci_id);
 

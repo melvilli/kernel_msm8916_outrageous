@@ -565,7 +565,11 @@ int  snd_mixart_send_msg_nonblock(struct mixart_mgr *mgr, struct mixart_msg *req
 
 irqreturn_t snd_mixart_interrupt(int irq, void *dev_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_mixart_msg_tasklet(unsigned long arg);
+=======
+irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id);
+>>>>>>> v3.18
 =======
 irqreturn_t snd_mixart_threaded_irq(int irq, void *dev_id);
 >>>>>>> v3.18

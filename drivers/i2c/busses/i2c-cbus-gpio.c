@@ -20,7 +20,10 @@
 #include <linux/i2c.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -237,8 +240,14 @@ static int cbus_i2c_probe(struct platform_device *pdev)
 		chost->dat_gpio = of_get_gpio(dnode, 1);
 		chost->sel_gpio = of_get_gpio(dnode, 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (pdev->dev.platform_data) {
 		struct i2c_cbus_platform_data *pdata = pdev->dev.platform_data;
+=======
+	} else if (dev_get_platdata(&pdev->dev)) {
+		struct i2c_cbus_platform_data *pdata =
+			dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	} else if (dev_get_platdata(&pdev->dev)) {
 		struct i2c_cbus_platform_data *pdata =
@@ -255,6 +264,10 @@ static int cbus_i2c_probe(struct platform_device *pdev)
 	adapter->class		= I2C_CLASS_HWMON;
 	adapter->dev.parent	= &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	adapter->dev.of_node	= pdev->dev.of_node;
+>>>>>>> v3.18
 =======
 	adapter->dev.of_node	= pdev->dev.of_node;
 >>>>>>> v3.18
@@ -302,6 +315,10 @@ static struct platform_driver cbus_i2c_driver = {
 		.owner	= THIS_MODULE,
 		.name	= "i2c-cbus-gpio",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(i2c_cbus_dt_ids),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(i2c_cbus_dt_ids),
 >>>>>>> v3.18

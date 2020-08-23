@@ -16,8 +16,13 @@
   --------------------------------------------------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    Description:  This module will handshake with the DSP bootloader to
                  download the DSP runtime image.
+=======
+   Description: This module will handshake with the DSP bootloader to
+		download the DSP runtime image.
+>>>>>>> v3.18
 =======
    Description: This module will handshake with the DSP bootloader to
 		download the DSP runtime image.
@@ -36,8 +41,13 @@
 #include <linux/timer.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/io.h>
 #include <asm/uaccess.h>
+=======
+#include <linux/io.h>
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 #include <linux/uaccess.h>
@@ -48,12 +58,15 @@
 #include "boot.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef FT_DEBUG
 #define DEBUG(n, args...) printk(KERN_DEBUG args);
 #else
 #define DEBUG(n, args...)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define  MAX_DSP_WAIT_LOOPS      100
@@ -141,7 +154,11 @@ void card_bootload(struct net_device *dev)
 	u32 templong;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG(0, "card_bootload is called\n");
+=======
+	netdev_dbg(dev, "card_bootload is called\n");
+>>>>>>> v3.18
 =======
 	netdev_dbg(dev, "card_bootload is called\n");
 >>>>>>> v3.18
@@ -149,6 +166,7 @@ void card_bootload(struct net_device *dev)
 	pdata = (u32 *) bootimage;
 	size = sizeof(bootimage);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// check for odd word
 	if (size & 0x0003) {
@@ -161,6 +179,8 @@ void card_bootload(struct net_device *dev)
 	ft1000_write_reg(dev, FT1000_REG_DPRAM_ADDR, FT1000_DPRAM_BASE);
 	// write bytes
 =======
+=======
+>>>>>>> v3.18
 	/* check for odd word */
 	if (size & 0x0003)
 		size += 4;
@@ -171,6 +191,9 @@ void card_bootload(struct net_device *dev)
 	/* need to set i/o base address initially and hardware will autoincrement */
 	ft1000_write_reg(dev, FT1000_REG_DPRAM_ADDR, FT1000_DPRAM_BASE);
 	/* write bytes */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < (size >> 2); i++) {
 		templong = *pdata++;
@@ -205,10 +228,16 @@ u16 get_handshake(struct net_device *dev, u16 expected_value)
 			|| (handshake == HANDSHAKE_RESET_VALUE)) {
 			return handshake;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else {
 			loopcnt++;
 			mdelay(DSP_WAIT_SLEEP_TIME);
 		}
+=======
+		}
+		loopcnt++;
+		mdelay(DSP_WAIT_SLEEP_TIME);
+>>>>>>> v3.18
 =======
 		}
 		loopcnt++;
@@ -341,7 +370,11 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 	struct dsp_image_info *pDspImageInfoV6 = NULL;
 	long requested_version;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool bGoodVersion = 0;
+=======
+	bool bGoodVersion = false;
+>>>>>>> v3.18
 =======
 	bool bGoodVersion = false;
 >>>>>>> v3.18
@@ -386,16 +419,22 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 			handshake = get_handshake(dev, HANDSHAKE_DSP_BL_READY);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (handshake == HANDSHAKE_DSP_BL_READY) {
 				put_handshake(dev, HANDSHAKE_DRIVER_READY);
 			} else {
 				Status = FAILURE;
 			}
 =======
+=======
+>>>>>>> v3.18
 			if (handshake == HANDSHAKE_DSP_BL_READY)
 				put_handshake(dev, HANDSHAKE_DRIVER_READY);
 			else
 				Status = FAILURE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			uiState = STATE_BOOT_DWNLD;
@@ -439,7 +478,11 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 						break;
 					}
 <<<<<<< HEAD
+<<<<<<< HEAD
 					// Provide mutual exclusive access while reading ASIC registers.
+=======
+					/* Provide mutual exclusive access while reading ASIC registers. */
+>>>>>>> v3.18
 =======
 					/* Provide mutual exclusive access while reading ASIC registers. */
 >>>>>>> v3.18
@@ -489,7 +532,11 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 				switch (request) {
 				case REQUEST_FILE_CHECKSUM:
 <<<<<<< HEAD
+<<<<<<< HEAD
 					DEBUG(0,
+=======
+					netdev_dbg(dev,
+>>>>>>> v3.18
 =======
 					netdev_dbg(dev,
 >>>>>>> v3.18
@@ -561,7 +608,11 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 
 				case REQUEST_MAILBOX_DATA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 					// Convert length from byte count to word count. Make sure we round up.
+=======
+					/* Convert length from byte count to word count. Make sure we round up. */
+>>>>>>> v3.18
 =======
 					/* Convert length from byte count to word count. Make sure we round up. */
 >>>>>>> v3.18
@@ -570,15 +621,21 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 					put_request_value(dev, word_length);
 					pMailBoxData =
 <<<<<<< HEAD
+<<<<<<< HEAD
 						(struct drv_msg *) & info->DSPInfoBlk[0];
 					pUsData =
 						(u16 *) & pMailBoxData->data[0];
 					// Provide mutual exclusive access while reading ASIC registers.
 =======
+=======
+>>>>>>> v3.18
 						(struct drv_msg *) &info->DSPInfoBlk[0];
 					pUsData =
 						(u16 *) &pMailBoxData->data[0];
 					/* Provide mutual exclusive access while reading ASIC registers. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					spin_lock_irqsave(&info->dpram_lock,
 							  flags);
@@ -605,9 +662,15 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 							 dev->base_addr +
 							 FT1000_REG_DPRAM_ADDR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 						if (word_length & 0x01) {
 							word_length++;
 						}
+=======
+						if (word_length & 0x01)
+							word_length++;
+
+>>>>>>> v3.18
 =======
 						if (word_length & 0x01)
 							word_length++;
@@ -638,7 +701,11 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 							pFileHdr5->
 							version_data_offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					// Provide mutual exclusive access while reading ASIC registers.
+=======
+					/* Provide mutual exclusive access while reading ASIC registers. */
+>>>>>>> v3.18
 =======
 					/* Provide mutual exclusive access while reading ASIC registers. */
 >>>>>>> v3.18
@@ -729,7 +796,11 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 								pDspImageInfoV6->
 								checksum;
 <<<<<<< HEAD
+<<<<<<< HEAD
 							DEBUG(0,
+=======
+							netdev_dbg(dev,
+>>>>>>> v3.18
 =======
 							netdev_dbg(dev,
 >>>>>>> v3.18
@@ -773,6 +844,7 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 			if (pHdr->portdest == 0x80	/* DspOAM */
 				&& (pHdr->portsrc == 0x00	/* Driver */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				|| pHdr->portsrc == 0x10 /* FMM */ )) {
 				uiState = STATE_SECTION_PROV;
 			} else {
@@ -782,6 +854,8 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 					  pHdr->portsrc);
 				DEBUG(1, "\t Port Destination = 0x%2.2x\n",
 =======
+=======
+>>>>>>> v3.18
 				|| pHdr->portsrc == 0x10 /* FMM */)) {
 				uiState = STATE_SECTION_PROV;
 			} else {
@@ -790,6 +864,9 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 				netdev_dbg(dev, "\t Port Source = 0x%2.2x\n",
 					  pHdr->portsrc);
 				netdev_dbg(dev, "\t Port Destination = 0x%2.2x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					  pHdr->portdest);
 				Status = FAILURE;
@@ -803,7 +880,11 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 
 			if (pHdr->checksum == hdr_checksum(pHdr)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (pHdr->portdest != 0x80 /* Dsp OAM */ ) {
+=======
+				if (pHdr->portdest != 0x80 /* Dsp OAM */) {
+>>>>>>> v3.18
 =======
 				if (pHdr->portdest != 0x80 /* Dsp OAM */) {
 >>>>>>> v3.18
@@ -813,7 +894,11 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 				usHdrLength = ntohs(pHdr->length);	/* Byte length for PROV records */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// Get buffer for provisioning data
+=======
+				/* Get buffer for provisioning data */
+>>>>>>> v3.18
 =======
 				/* Get buffer for provisioning data */
 >>>>>>> v3.18
@@ -825,7 +910,11 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 						   (u32) (usHdrLength +
 							   sizeof(struct pseudo_hdr)));
 <<<<<<< HEAD
+<<<<<<< HEAD
 					// link provisioning data
+=======
+					/* link provisioning data */
+>>>>>>> v3.18
 =======
 					/* link provisioning data */
 >>>>>>> v3.18
@@ -839,7 +928,11 @@ int card_download(struct net_device *dev, const u8 *pFileStart,
 								  list,
 								  &info->prov_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 						// Move to next entry if available
+=======
+						/* Move to next entry if available */
+>>>>>>> v3.18
 =======
 						/* Move to next entry if available */
 >>>>>>> v3.18

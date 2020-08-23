@@ -31,6 +31,7 @@
 #define __RTL92D_RF_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void rtl92d_phy_rf6052_set_bandwidth(struct ieee80211_hw *hw,
 					    u8 bandwidth);
 extern void rtl92d_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
@@ -42,6 +43,8 @@ extern bool rtl92d_phy_enable_anotherphy(struct ieee80211_hw *hw, bool bmac0);
 extern void rtl92d_phy_powerdown_anotherphy(struct ieee80211_hw *hw,
 					    bool bmac0);
 =======
+=======
+>>>>>>> v3.18
 void rtl92d_phy_rf6052_set_bandwidth(struct ieee80211_hw *hw, u8 bandwidth);
 void rtl92d_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 				       u8 *ppowerlevel);
@@ -50,6 +53,9 @@ void rtl92d_phy_rf6052_set_ofdm_txpower(struct ieee80211_hw *hw,
 bool rtl92d_phy_rf6052_config(struct ieee80211_hw *hw);
 bool rtl92d_phy_enable_anotherphy(struct ieee80211_hw *hw, bool bmac0);
 void rtl92d_phy_powerdown_anotherphy(struct ieee80211_hw *hw, bool bmac0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

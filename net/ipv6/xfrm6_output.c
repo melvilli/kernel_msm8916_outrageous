@@ -26,7 +26,10 @@ int xfrm6_find_1stfragopt(struct xfrm_state *x, struct sk_buff *skb,
 	return ip6_find_1stfragopt(skb, prevhdr);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(xfrm6_find_1stfragopt);
@@ -38,13 +41,19 @@ static int xfrm6_local_dontfrag(struct sk_buff *skb)
 
 	if (sk) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		proto = sk->sk_protocol;
 
 =======
+=======
+>>>>>>> v3.18
 		if (sk->sk_family != AF_INET6)
 			return 0;
 
 		proto = sk->sk_protocol;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (proto == IPPROTO_UDP || proto == IPPROTO_RAW)
 			return inet6_sk(sk)->dontfrag;
@@ -65,6 +74,7 @@ static void xfrm6_local_rxpmtu(struct sk_buff *skb, u32 mtu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void xfrm6_local_error(struct sk_buff *skb, u32 mtu)
 {
 	struct flowi6 fl6;
@@ -73,6 +83,8 @@ static void xfrm6_local_error(struct sk_buff *skb, u32 mtu)
 	fl6.fl6_dport = inet_sk(sk)->inet_dport;
 	fl6.daddr = ipv6_hdr(skb)->daddr;
 =======
+=======
+>>>>>>> v3.18
 void xfrm6_local_error(struct sk_buff *skb, u32 mtu)
 {
 	struct flowi6 fl6;
@@ -82,6 +94,9 @@ void xfrm6_local_error(struct sk_buff *skb, u32 mtu)
 	hdr = skb->encapsulation ? inner_ipv6_hdr(skb) : ipv6_hdr(skb);
 	fl6.fl6_dport = inet_sk(sk)->inet_dport;
 	fl6.daddr = hdr->daddr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ipv6_local_error(sk, EMSGSIZE, &fl6, mtu);
@@ -97,7 +112,11 @@ static int xfrm6_tunnel_check_size(struct sk_buff *skb)
 		mtu = IPV6_MIN_MTU;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!skb->local_df && skb->len > mtu) {
+=======
+	if (!skb->ignore_df && skb->len > mtu) {
+>>>>>>> v3.18
 =======
 	if (!skb->ignore_df && skb->len > mtu) {
 >>>>>>> v3.18
@@ -107,7 +126,11 @@ static int xfrm6_tunnel_check_size(struct sk_buff *skb)
 			xfrm6_local_rxpmtu(skb, mtu);
 		else if (skb->sk)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			xfrm6_local_error(skb, mtu);
+=======
+			xfrm_local_error(skb, mtu);
+>>>>>>> v3.18
 =======
 			xfrm_local_error(skb, mtu);
 >>>>>>> v3.18
@@ -141,6 +164,7 @@ int xfrm6_prepare_output(struct xfrm_state *x, struct sk_buff *skb)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(IP6CB(skb), 0, sizeof(*IP6CB(skb)));
 #ifdef CONFIG_NETFILTER
 	IP6CB(skb)->flags |= IP6SKB_XFRM_TRANSFORMED;
@@ -148,6 +172,9 @@ int xfrm6_prepare_output(struct xfrm_state *x, struct sk_buff *skb)
 
 	skb->protocol = htons(ETH_P_IPV6);
 	skb->local_df = 1;
+=======
+	skb->ignore_df = 1;
+>>>>>>> v3.18
 =======
 	skb->ignore_df = 1;
 >>>>>>> v3.18
@@ -159,6 +186,12 @@ EXPORT_SYMBOL(xfrm6_prepare_output);
 int xfrm6_output_finish(struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(IP6CB(skb), 0, sizeof(*IP6CB(skb)));
+	skb->protocol = htons(ETH_P_IPV6);
+
+>>>>>>> v3.18
 =======
 	memset(IP6CB(skb), 0, sizeof(*IP6CB(skb)));
 	skb->protocol = htons(ETH_P_IPV6);
@@ -169,7 +202,10 @@ int xfrm6_output_finish(struct sk_buff *skb)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->protocol = htons(ETH_P_IPV6);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return xfrm_output(skb);
@@ -180,8 +216,11 @@ static int __xfrm6_output(struct sk_buff *skb)
 	struct dst_entry *dst = skb_dst(skb);
 	struct xfrm_state *x = dst->xfrm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int mtu = ip6_skb_dst_mtu(skb);
 =======
+=======
+>>>>>>> v3.18
 	int mtu;
 
 #ifdef CONFIG_NETFILTER
@@ -195,14 +234,22 @@ static int __xfrm6_output(struct sk_buff *skb)
 		mtu = ip6_skb_dst_mtu(skb);
 	else
 		mtu = dst_mtu(skb_dst(skb));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (skb->len > mtu && xfrm6_local_dontfrag(skb)) {
 		xfrm6_local_rxpmtu(skb, mtu);
 		return -EMSGSIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (!skb->local_df && skb->len > mtu && skb->sk) {
 		xfrm6_local_error(skb, mtu);
+=======
+	} else if (!skb->ignore_df && skb->len > mtu && skb->sk) {
+		xfrm_local_error(skb, mtu);
+>>>>>>> v3.18
 =======
 	} else if (!skb->ignore_df && skb->len > mtu && skb->sk) {
 		xfrm_local_error(skb, mtu);
@@ -219,15 +266,21 @@ static int __xfrm6_output(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int xfrm6_output(struct sk_buff *skb)
 {
 	return NF_HOOK(NFPROTO_IPV6, NF_INET_POST_ROUTING, skb, NULL,
 		       skb_dst(skb)->dev, __xfrm6_output);
 =======
+=======
+>>>>>>> v3.18
 int xfrm6_output(struct sock *sk, struct sk_buff *skb)
 {
 	return NF_HOOK_COND(NFPROTO_IPV6, NF_INET_POST_ROUTING, skb,
 			    NULL, skb_dst(skb)->dev, __xfrm6_output,
 			    !(IP6CB(skb)->flags & IP6SKB_REROUTED));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

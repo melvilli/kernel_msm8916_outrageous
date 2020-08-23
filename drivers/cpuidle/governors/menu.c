@@ -22,6 +22,7 @@
 #include <linux/module.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BUCKETS 12
 #define INTERVALS 8
 #define RESOLUTION 1024
@@ -29,6 +30,8 @@
 #define MAX_INTERESTING 50000
 #define STDDEV_THRESH 400
 =======
+=======
+>>>>>>> v3.18
 /*
  * Please note when changing the tuning values:
  * If (MAX_INTERESTING-1) * RESOLUTION > UINT_MAX, the result of
@@ -44,6 +47,9 @@
 #define RESOLUTION 1024
 #define DECAY 8
 #define MAX_INTERESTING 50000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -132,6 +138,7 @@ struct menu_device {
 	int             needs_update;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int	expected_us;
 	u64		predicted_us;
 	unsigned int	exit_us;
@@ -139,11 +146,16 @@ struct menu_device {
 	u64		correction_factor[BUCKETS];
 	u32		intervals[INTERVALS];
 =======
+=======
+>>>>>>> v3.18
 	unsigned int	next_timer_us;
 	unsigned int	predicted_us;
 	unsigned int	bucket;
 	unsigned int	correction_factor[BUCKETS];
 	unsigned int	intervals[INTERVALS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int		interval_ptr;
 };
@@ -153,14 +165,20 @@ struct menu_device {
 #define LOAD_FRAC(x) LOAD_INT(((x) & (FIXED_1-1)) * 100)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int which_bucket(unsigned int duration)
 =======
+=======
+>>>>>>> v3.18
 static inline int get_loadavg(unsigned long load)
 {
 	return LOAD_INT(load) * 10 + LOAD_FRAC(load) / 10;
 }
 
 static inline int which_bucket(unsigned int duration, unsigned long nr_iowaiters)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int bucket = 0;
@@ -172,7 +190,11 @@ static inline int which_bucket(unsigned int duration, unsigned long nr_iowaiters
 	 * E(duration)|iowait
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nr_iowait_cpu(smp_processor_id()))
+=======
+	if (nr_iowaiters)
+>>>>>>> v3.18
 =======
 	if (nr_iowaiters)
 >>>>>>> v3.18
@@ -199,6 +221,7 @@ static inline int which_bucket(unsigned int duration, unsigned long nr_iowaiters
  * the barrier to go to an expensive C state.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int performance_multiplier(void)
 {
 	int mult = 1;
@@ -206,6 +229,8 @@ static inline int performance_multiplier(void)
 	/* for IO wait tasks (per cpu!) we add 5x each */
 	mult += 10 * nr_iowait_cpu(smp_processor_id());
 =======
+=======
+>>>>>>> v3.18
 static inline int performance_multiplier(unsigned long nr_iowaiters, unsigned long load)
 {
 	int mult = 1;
@@ -216,6 +241,9 @@ static inline int performance_multiplier(unsigned long nr_iowaiters, unsigned lo
 
 	/* for IO wait tasks (per cpu!) we add 5x each */
 	mult += 10 * nr_iowaiters;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return mult;
@@ -240,6 +268,7 @@ static u64 div_round64(u64 dividend, u32 divisor)
 static void get_typical_interval(struct menu_device *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i = 0, divisor = 0;
 	uint64_t max = 0, avg = 0, stddev = 0;
 	int64_t thresh = LLONG_MAX; /* Discard outliers above this value. */
@@ -251,6 +280,8 @@ again:
 	for (i = 0; i < INTERVALS; i++) {
 		int64_t value = data->intervals[i];
 =======
+=======
+>>>>>>> v3.18
 	int i, divisor;
 	unsigned int max, thresh;
 	uint64_t avg, stddev;
@@ -265,6 +296,9 @@ again:
 	divisor = 0;
 	for (i = 0; i < INTERVALS; i++) {
 		unsigned int value = data->intervals[i];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (value <= thresh) {
 			avg += value;
@@ -274,11 +308,14 @@ again:
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_div(avg, divisor);
 
 	for (i = 0; i < INTERVALS; i++) {
 		int64_t value = data->intervals[i];
 =======
+=======
+>>>>>>> v3.18
 	if (divisor == INTERVALS)
 		avg >>= INTERVAL_SHIFT;
 	else
@@ -288,6 +325,9 @@ again:
 	stddev = 0;
 	for (i = 0; i < INTERVALS; i++) {
 		unsigned int value = data->intervals[i];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (value <= thresh) {
 			int64_t diff = value - avg;
@@ -295,9 +335,12 @@ again:
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_div(stddev, divisor);
 	stddev = int_sqrt(stddev);
 =======
+=======
+>>>>>>> v3.18
 	if (divisor == INTERVALS)
 		stddev >>= INTERVAL_SHIFT;
 	else
@@ -325,6 +368,9 @@ again:
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * If we have outliers to the upside in our distribution, discard
@@ -334,6 +380,7 @@ again:
 	 *
 	 * This can deal with workloads that have long pauses interspersed
 	 * with sporadic activity with a bunch of short pauses.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * The typical interval is obtained when standard deviation is small
@@ -350,12 +397,17 @@ again:
 		goto again;
 	}
 =======
+=======
+>>>>>>> v3.18
 	 */
 	if ((divisor * 4) <= INTERVALS * 3)
 		return;
 
 	thresh = max - 1;
 	goto again;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -367,17 +419,23 @@ again:
 static int menu_select(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct menu_device *data = &__get_cpu_var(menu_devices);
 	int latency_req = pm_qos_request(PM_QOS_CPU_DMA_LATENCY);
 	int i;
 	int multiplier;
 	struct timespec t;
 =======
+=======
+>>>>>>> v3.18
 	struct menu_device *data = this_cpu_ptr(&menu_devices);
 	int latency_req = pm_qos_request(PM_QOS_CPU_DMA_LATENCY);
 	int i;
 	unsigned int interactivity_req;
 	unsigned long nr_iowaiters, cpu_load;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (data->needs_update) {
@@ -387,7 +445,10 @@ static int menu_select(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 
 	data->last_state_idx = CPUIDLE_DRIVER_STATE_START - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->exit_us = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -396,6 +457,7 @@ static int menu_select(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 		return 0;
 
 	/* determine the expected residency time, round up */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	t = ktime_to_timespec(tick_nohz_get_sleep_length());
 	data->expected_us =
@@ -416,6 +478,8 @@ static int menu_select(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 	/* Make sure to round up for half microseconds */
 	data->predicted_us = div_round64(data->expected_us * data->correction_factor[data->bucket],
 =======
+=======
+>>>>>>> v3.18
 	data->next_timer_us = ktime_to_us(tick_nohz_get_sleep_length());
 
 	get_iowait_load(&nr_iowaiters, &cpu_load);
@@ -428,6 +492,9 @@ static int menu_select(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 	 */
 	data->predicted_us = div_round64((uint64_t)data->next_timer_us *
 					 data->correction_factor[data->bucket],
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 RESOLUTION * DECAY);
 
@@ -435,11 +502,14 @@ static int menu_select(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * We want to default to C1 (hlt), not to busy polling
 	 * unless the timer is happening really really soon.
 	 */
 	if (data->expected_us > 5 &&
 =======
+=======
+>>>>>>> v3.18
 	 * Performance multiplier defines a minimum predicted idle
 	 * duration / latency ratio. Adjust the latency limit if
 	 * necessary.
@@ -453,6 +523,9 @@ static int menu_select(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 	 * unless the timer is happening really really soon.
 	 */
 	if (data->next_timer_us > 5 &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    !drv->states[CPUIDLE_DRIVER_STATE_START].disabled &&
 		dev->states_usage[CPUIDLE_DRIVER_STATE_START].disable == 0)
@@ -473,11 +546,16 @@ static int menu_select(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 		if (s->exit_latency > latency_req)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (s->exit_latency * multiplier > data->predicted_us)
 			continue;
 
 		data->last_state_idx = i;
 		data->exit_us = s->exit_latency;
+=======
+
+		data->last_state_idx = i;
+>>>>>>> v3.18
 =======
 
 		data->last_state_idx = i;
@@ -498,7 +576,11 @@ static int menu_select(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 static void menu_reflect(struct cpuidle_device *dev, int index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct menu_device *data = &__get_cpu_var(menu_devices);
+=======
+	struct menu_device *data = this_cpu_ptr(&menu_devices);
+>>>>>>> v3.18
 =======
 	struct menu_device *data = this_cpu_ptr(&menu_devices);
 >>>>>>> v3.18
@@ -514,6 +596,7 @@ static void menu_reflect(struct cpuidle_device *dev, int index)
  */
 static void menu_update(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct menu_device *data = &__get_cpu_var(menu_devices);
 	int last_idx = data->last_state_idx;
@@ -549,6 +632,8 @@ static void menu_update(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 	if (data->expected_us > 0 && measured_us < MAX_INTERESTING)
 		new_factor += RESOLUTION * measured_us / data->expected_us;
 =======
+=======
+>>>>>>> v3.18
 	struct menu_device *data = this_cpu_ptr(&menu_devices);
 	int last_idx = data->last_state_idx;
 	struct cpuidle_state *target = &drv->states[last_idx];
@@ -592,6 +677,9 @@ static void menu_update(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 
 	if (data->next_timer_us > 0 && measured_us < MAX_INTERESTING)
 		new_factor += RESOLUTION * measured_us / data->next_timer_us;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		/*
@@ -603,15 +691,21 @@ static void menu_update(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 	/*
 	 * We don't want 0 as factor; we always want at least
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * a tiny bit of estimated time.
 	 */
 	if (new_factor == 0)
 =======
+=======
+>>>>>>> v3.18
 	 * a tiny bit of estimated time. Fortunately, due to rounding,
 	 * new_factor will stay nonzero regardless of measured_us values
 	 * and the compiler can eliminate this test as long as DECAY > 1.
 	 */
 	if (DECAY == 1 && unlikely(new_factor == 0))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		new_factor = 1;
 
@@ -619,7 +713,11 @@ static void menu_update(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 
 	/* update the repeating-pattern data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->intervals[data->interval_ptr++] = last_idle_us;
+=======
+	data->intervals[data->interval_ptr++] = measured_us;
+>>>>>>> v3.18
 =======
 	data->intervals[data->interval_ptr++] = measured_us;
 >>>>>>> v3.18
@@ -637,10 +735,13 @@ static int menu_enable_device(struct cpuidle_driver *drv,
 {
 	struct menu_device *data = &per_cpu(menu_devices, dev->cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	memset(data, 0, sizeof(struct menu_device));
 
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	memset(data, 0, sizeof(struct menu_device));
@@ -652,6 +753,9 @@ static int menu_enable_device(struct cpuidle_driver *drv,
 	for(i = 0; i < BUCKETS; i++)
 		data->correction_factor[i] = RESOLUTION * DECAY;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -674,6 +778,7 @@ static int __init init_menu(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * exit_menu - exits the governor
  */
@@ -685,6 +790,9 @@ static void __exit exit_menu(void)
 MODULE_LICENSE("GPL");
 module_init(init_menu);
 module_exit(exit_menu);
+=======
+postcore_initcall(init_menu);
+>>>>>>> v3.18
 =======
 postcore_initcall(init_menu);
 >>>>>>> v3.18

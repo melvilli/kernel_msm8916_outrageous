@@ -9,6 +9,10 @@ Required properties:
               "marvell,88f6281-pinctrl", "marvell,88f6282-pinctrl"
               "marvell,98dx4122-pinctrl"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- reg: register specifier of MPP registers
+>>>>>>> v3.18
 =======
 - reg: register specifier of MPP registers
 >>>>>>> v3.18

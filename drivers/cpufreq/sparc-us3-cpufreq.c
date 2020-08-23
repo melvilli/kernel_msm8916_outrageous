@@ -94,8 +94,12 @@ static unsigned int us3_freq_get(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void us3_set_cpu_divider_index(struct cpufreq_policy *policy,
 		unsigned int index)
+=======
+static int us3_freq_target(struct cpufreq_policy *policy, unsigned int index)
+>>>>>>> v3.18
 =======
 static int us3_freq_target(struct cpufreq_policy *policy, unsigned int index)
 >>>>>>> v3.18
@@ -134,6 +138,7 @@ static int us3_freq_target(struct cpufreq_policy *policy, unsigned int index)
 
 	set_cpus_allowed_ptr(current, &cpus_allowed);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static int us3_freq_target(struct cpufreq_policy *policy,
@@ -152,10 +157,13 @@ static int us3_freq_target(struct cpufreq_policy *policy,
 	us3_set_cpu_divider_index(policy, new_index);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int us3_freq_verify(struct cpufreq_policy *policy)
 {
@@ -163,6 +171,8 @@ static int us3_freq_verify(struct cpufreq_policy *policy)
 					      &us3_freq_table[policy->cpu].table[0]);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __init us3_freq_cpu_init(struct cpufreq_policy *policy)
@@ -185,7 +195,11 @@ static int __init us3_freq_cpu_init(struct cpufreq_policy *policy)
 	policy->cur = clock_tick;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return cpufreq_frequency_table_cpuinfo(policy, table);
+=======
+	return cpufreq_table_validate_and_show(policy, table);
+>>>>>>> v3.18
 =======
 	return cpufreq_table_validate_and_show(policy, table);
 >>>>>>> v3.18
@@ -195,7 +209,11 @@ static int us3_freq_cpu_exit(struct cpufreq_policy *policy)
 {
 	if (cpufreq_us3_driver)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		us3_set_cpu_divider_index(policy, 0);
+=======
+		us3_freq_target(policy, 0);
+>>>>>>> v3.18
 =======
 		us3_freq_target(policy, 0);
 >>>>>>> v3.18
@@ -234,8 +252,13 @@ static int __init us3_freq_init(void)
 
 		driver->init = us3_freq_cpu_init;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		driver->verify = us3_freq_verify;
 		driver->target = us3_freq_target;
+=======
+		driver->verify = cpufreq_generic_frequency_table_verify;
+		driver->target_index = us3_freq_target;
+>>>>>>> v3.18
 =======
 		driver->verify = cpufreq_generic_frequency_table_verify;
 		driver->target_index = us3_freq_target;

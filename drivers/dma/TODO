@@ -8,7 +8,10 @@ TODO for slave dma
 	- imx-sdma
 	- mxs-dma.c
 <<<<<<< HEAD
+<<<<<<< HEAD
 	- dw_dmac
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	- intel_mid_dma

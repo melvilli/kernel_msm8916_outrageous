@@ -40,7 +40,10 @@
 #include <linux/slab.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/list.h>
@@ -50,7 +53,10 @@
 #include "musb_host.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* MUSB HOST status 22-mar-2006
@@ -103,12 +109,18 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct musb *hcd_to_musb(struct usb_hcd *hcd)
 {
 	return *(struct musb **) hcd->hcd_priv;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void musb_ep_program(struct musb *musb, u8 epnum,
@@ -132,7 +144,11 @@ static void musb_h_tx_flush_fifo(struct musb_hw_ep *ep)
 			dev_dbg(musb->controller, "Host TX FIFONOTEMPTY csr: %02x\n", csr);
 		lastcsr = csr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		csr |= MUSB_TXCSR_FLUSHFIFO;
+=======
+		csr |= MUSB_TXCSR_FLUSHFIFO | MUSB_TXCSR_TXPKTRDY;
+>>>>>>> v3.18
 =======
 		csr |= MUSB_TXCSR_FLUSHFIFO | MUSB_TXCSR_TXPKTRDY;
 >>>>>>> v3.18
@@ -268,7 +284,11 @@ musb_start_urb(struct musb *musb, int is_in, struct musb_qh *qh)
 			case USB_ENDPOINT_XFER_ISOC:	s = "-iso"; break;
 			default:			s = "-intr"; break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}; s; }),
+=======
+			} s; }),
+>>>>>>> v3.18
 =======
 			} s; }),
 >>>>>>> v3.18
@@ -292,8 +312,12 @@ musb_start_urb(struct musb *musb, int is_in, struct musb_qh *qh)
 		 * or handle framecounter wrapping
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((urb->transfer_flags & URB_ISO_ASAP)
 				|| (frame >= urb->start_frame)) {
+=======
+		if (1) {	/* Always assume URB_ISO_ASAP */
+>>>>>>> v3.18
 =======
 		if (1) {	/* Always assume URB_ISO_ASAP */
 >>>>>>> v3.18
@@ -338,9 +362,15 @@ __acquires(musb->lock)
 			);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_hcd_unlink_urb_from_ep(musb_to_hcd(musb), urb);
 	spin_unlock(&musb->lock);
 	usb_hcd_giveback_urb(musb_to_hcd(musb), urb, status);
+=======
+	usb_hcd_unlink_urb_from_ep(musb->hcd, urb);
+	spin_unlock(&musb->lock);
+	usb_hcd_giveback_urb(musb->hcd, urb, status);
+>>>>>>> v3.18
 =======
 	usb_hcd_unlink_urb_from_ep(musb->hcd, urb);
 	spin_unlock(&musb->lock);
@@ -614,6 +644,7 @@ musb_rx_reinit(struct musb *musb, struct musb_qh *qh, struct musb_hw_ep *ep)
 
 	/* scrub all previous state, clearing toggle */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	csr = musb_readw(ep->regs, MUSB_RXCSR);
 	if (csr & MUSB_RXCSR_RXPKTRDY)
@@ -622,6 +653,8 @@ musb_rx_reinit(struct musb *musb, struct musb_qh *qh, struct musb_hw_ep *ep)
 
 	musb_h_flush_rxfifo(ep, MUSB_RXCSR_CLRDATATOG);
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		csr = musb_readw(ep->regs, MUSB_RXCSR);
 		if (csr & MUSB_RXCSR_RXPKTRDY)
@@ -630,6 +663,9 @@ musb_rx_reinit(struct musb *musb, struct musb_qh *qh, struct musb_hw_ep *ep)
 
 		musb_h_flush_rxfifo(ep, MUSB_RXCSR_CLRDATATOG);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* target addr and (for multipoint) hub addr/port */
@@ -668,7 +704,11 @@ static bool musb_tx_dma_program(struct dma_controller *dma,
 	u8			mode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef	CONFIG_USB_INVENTRA_DMA
+=======
+#if defined(CONFIG_USB_INVENTRA_DMA) || defined(CONFIG_USB_UX500_DMA)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_USB_INVENTRA_DMA) || defined(CONFIG_USB_UX500_DMA)
 >>>>>>> v3.18
@@ -995,6 +1035,7 @@ static void musb_bulk_nak_timeout(struct musb *musb, struct musb_hw_ep *ep,
 		dma = is_dma_capable() ? ep->rx_channel : NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Need to stop the transaction by clearing REQPKT first
 		 * then the NAK Timeout bit ref MUSBMHDRC USB 2.0 HIGH-SPEED
@@ -1004,6 +1045,11 @@ static void musb_bulk_nak_timeout(struct musb *musb, struct musb_hw_ep *ep,
 		rx_csr |= MUSB_RXCSR_H_WZC_BITS;
 		rx_csr &= ~MUSB_RXCSR_H_REQPKT;
 		musb_writew(epio, MUSB_RXCSR, rx_csr);
+=======
+		/* clear nak timeout bit */
+		rx_csr = musb_readw(epio, MUSB_RXCSR);
+		rx_csr |= MUSB_RXCSR_H_WZC_BITS;
+>>>>>>> v3.18
 =======
 		/* clear nak timeout bit */
 		rx_csr = musb_readw(epio, MUSB_RXCSR);
@@ -1240,6 +1286,12 @@ irqreturn_t musb_h_ep0_irq(struct musb *musb)
 					| MUSB_CSR0_TXPKTRDY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			/* disable ping token in status phase */
+			csr |= MUSB_CSR0_H_DIS_PING;
+
+>>>>>>> v3.18
 =======
 			/* disable ping token in status phase */
 			csr |= MUSB_CSR0_H_DIS_PING;
@@ -1355,7 +1407,11 @@ done:
 		if (dma_channel_status(dma) == MUSB_DMA_STATUS_BUSY) {
 			dma->status = MUSB_DMA_STATUS_CORE_ABORT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(void) musb->dma_controller->channel_abort(dma);
+=======
+			musb->dma_controller->channel_abort(dma);
+>>>>>>> v3.18
 =======
 			musb->dma_controller->channel_abort(dma);
 >>>>>>> v3.18
@@ -1524,7 +1580,11 @@ done:
 		length = qh->maxpacket;
 	/* Unmap the buffer so that CPU can use it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_hcd_unmap_urb_for_dma(musb_to_hcd(musb), urb);
+=======
+	usb_hcd_unmap_urb_for_dma(musb->hcd, urb);
+>>>>>>> v3.18
 =======
 	usb_hcd_unmap_urb_for_dma(musb->hcd, urb);
 >>>>>>> v3.18
@@ -1708,7 +1768,11 @@ void musb_host_rx(struct musb *musb, u8 epnum)
 		if (dma_channel_status(dma) == MUSB_DMA_STATUS_BUSY) {
 			dma->status = MUSB_DMA_STATUS_CORE_ABORT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(void) musb->dma_controller->channel_abort(dma);
+=======
+			musb->dma_controller->channel_abort(dma);
+>>>>>>> v3.18
 =======
 			musb->dma_controller->channel_abort(dma);
 >>>>>>> v3.18
@@ -1734,7 +1798,11 @@ void musb_host_rx(struct musb *musb, u8 epnum)
 	/* FIXME this is _way_ too much in-line logic for Mentor DMA */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_USB_INVENTRA_DMA
+=======
+#if !defined(CONFIG_USB_INVENTRA_DMA) && !defined(CONFIG_USB_UX500_DMA)
+>>>>>>> v3.18
 =======
 #if !defined(CONFIG_USB_INVENTRA_DMA) && !defined(CONFIG_USB_UX500_DMA)
 >>>>>>> v3.18
@@ -1747,7 +1815,11 @@ void musb_host_rx(struct musb *musb, u8 epnum)
 		if (dma_channel_status(dma) == MUSB_DMA_STATUS_BUSY) {
 			dma->status = MUSB_DMA_STATUS_CORE_ABORT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(void) musb->dma_controller->channel_abort(dma);
+=======
+			musb->dma_controller->channel_abort(dma);
+>>>>>>> v3.18
 =======
 			musb->dma_controller->channel_abort(dma);
 >>>>>>> v3.18
@@ -1774,7 +1846,12 @@ void musb_host_rx(struct musb *musb, u8 epnum)
 		musb_writew(hw_ep->regs, MUSB_RXCSR, val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_INVENTRA_DMA
+=======
+#if defined(CONFIG_USB_INVENTRA_DMA) || defined(CONFIG_USB_UX500_DMA) || \
+	defined(CONFIG_USB_TI_CPPI41_DMA)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_USB_INVENTRA_DMA) || defined(CONFIG_USB_UX500_DMA) || \
 	defined(CONFIG_USB_TI_CPPI41_DMA)
@@ -1792,6 +1869,7 @@ void musb_host_rx(struct musb *musb, u8 epnum)
 				d->status = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (++qh->iso_idx >= urb->number_of_packets)
 				done = true;
 			else
@@ -1803,6 +1881,8 @@ void musb_host_rx(struct musb *musb, u8 epnum)
 				urb->transfer_buffer_length
 			|| dma->actual_len < qh->maxpacket);
 =======
+=======
+>>>>>>> v3.18
 			if (++qh->iso_idx >= urb->number_of_packets) {
 				done = true;
 			} else {
@@ -1834,6 +1914,9 @@ void musb_host_rx(struct musb *musb, u8 epnum)
 					urb->transfer_buffer_length
 				|| dma->actual_len < qh->maxpacket
 				|| dma->rx_packet_done);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1869,7 +1952,12 @@ void musb_host_rx(struct musb *musb, u8 epnum)
 
 		/* we are expecting IN packets */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_INVENTRA_DMA
+=======
+#if defined(CONFIG_USB_INVENTRA_DMA) || defined(CONFIG_USB_UX500_DMA) || \
+	defined(CONFIG_USB_TI_CPPI41_DMA)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_USB_INVENTRA_DMA) || defined(CONFIG_USB_UX500_DMA) || \
 	defined(CONFIG_USB_TI_CPPI41_DMA)
@@ -1883,15 +1971,21 @@ void musb_host_rx(struct musb *musb, u8 epnum)
 			rx_count = musb_readw(epio, MUSB_RXCOUNT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_dbg(musb->controller, "RX%d count %d, buffer 0x%x len %d/%d\n",
 					epnum, rx_count,
 					urb->transfer_dma
 						+ urb->actual_length,
 =======
+=======
+>>>>>>> v3.18
 			dev_dbg(musb->controller, "RX%d count %d, buffer 0x%llx len %d/%d\n",
 					epnum, rx_count,
 					(unsigned long long) urb->transfer_dma
 					+ urb->actual_length,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					qh->offset,
 					urb->transfer_buffer_length);
@@ -2005,7 +2099,11 @@ void musb_host_rx(struct musb *musb, u8 epnum)
 
 			/* Unmap the buffer so that CPU can use it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			usb_hcd_unmap_urb_for_dma(musb_to_hcd(musb), urb);
+=======
+			usb_hcd_unmap_urb_for_dma(musb->hcd, urb);
+>>>>>>> v3.18
 =======
 			usb_hcd_unmap_urb_for_dma(musb->hcd, urb);
 >>>>>>> v3.18
@@ -2070,7 +2168,11 @@ static int musb_schedule(
 	int			is_in)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			idle;
+=======
+	int			idle = 0;
+>>>>>>> v3.18
 =======
 	int			idle = 0;
 >>>>>>> v3.18
@@ -2154,7 +2256,11 @@ static int musb_schedule(
 
 		/* Enable bulk RX/TX NAK timeout scheme when bulk requests are
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * multiplexed.  This scheme doen't work in high speed to full
+=======
+		 * multiplexed. This scheme does not work in high speed to full
+>>>>>>> v3.18
 =======
 		 * multiplexed. This scheme does not work in high speed to full
 >>>>>>> v3.18
@@ -2578,6 +2684,11 @@ static int musb_bus_suspend(struct usb_hcd *hcd)
 	u8		devctl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	musb_port_suspend(musb, true);
+
+>>>>>>> v3.18
 =======
 	musb_port_suspend(musb, true);
 
@@ -2612,12 +2723,15 @@ static int musb_bus_suspend(struct usb_hcd *hcd)
 static int musb_bus_resume(struct usb_hcd *hcd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* resuming child port does the work */
 	return 0;
 }
 
 
 =======
+=======
+>>>>>>> v3.18
 	struct musb *musb = hcd_to_musb(hcd);
 
 	if (musb->config &&
@@ -2627,6 +2741,9 @@ static int musb_bus_resume(struct usb_hcd *hcd)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef CONFIG_MUSB_PIO_ONLY
 
@@ -2740,15 +2857,21 @@ static void musb_unmap_urb_for_dma(struct usb_hcd *hcd, struct urb *urb)
 #endif /* !CONFIG_MUSB_PIO_ONLY */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct hc_driver musb_hc_driver = {
 	.description		= "musb-hcd",
 	.product_desc		= "MUSB HDRC host driver",
 	.hcd_priv_size		= sizeof(struct musb),
 =======
+=======
+>>>>>>> v3.18
 static const struct hc_driver musb_hc_driver = {
 	.description		= "musb-hcd",
 	.product_desc		= "MUSB HDRC host driver",
 	.hcd_priv_size		= sizeof(struct musb *),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.flags			= HCD_USB2 | HCD_MEMORY,
 
@@ -2778,7 +2901,10 @@ static const struct hc_driver musb_hc_driver = {
 	/* .hub_irq_enable	= NULL, */
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int musb_host_alloc(struct musb *musb)
 {
@@ -2845,4 +2971,7 @@ void musb_host_poke_root_hub(struct musb *musb)
 	else
 		usb_hcd_resume_root_hub(musb->hcd);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

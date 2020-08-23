@@ -16,6 +16,7 @@
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *     You should have received a copy of the GNU General Public License
  *     along with this program; if not, write to the Free Software
@@ -55,6 +56,8 @@ Manuals:	Register level:	http://www.ni.com/pdf/manuals/340698.pdf
 #include <linux/interrupt.h>
 #include <linux/slab.h>
 =======
+=======
+>>>>>>> v3.18
  */
 
 /*
@@ -90,6 +93,9 @@ Manuals:	Register level:	http://www.ni.com/pdf/manuals/340698.pdf
 #include <linux/module.h>
 #include <linux/delay.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "../comedidev.h"
@@ -113,6 +119,7 @@ Manuals:	Register level:	http://www.ni.com/pdf/manuals/340698.pdf
 #define CMO_R		0x0B	/* RO 8bit */
 #define TIC_R		0x06	/* WO 8bit */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int daq700_dio_insn_bits(struct comedi_device *dev,
 				struct comedi_subdevice *s,
@@ -129,6 +136,8 @@ static int daq700_dio_insn_bits(struct comedi_device *dev,
 	data[1] = s->state & 0xff;
 	data[1] |= inb(dev->iobase + DIO_R) << 8;
 =======
+=======
+>>>>>>> v3.18
 /* daqcard700 modes */
 #define CMD_R3_DIFF     0x04    /* diff mode */
 
@@ -159,6 +168,9 @@ static int daq700_dio_insn_bits(struct comedi_device *dev,
 	val |= inb(dev->iobase + DIO_R) << 8;
 
 	data[1] = val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
@@ -166,6 +178,7 @@ static int daq700_dio_insn_bits(struct comedi_device *dev,
 
 static int daq700_dio_insn_config(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				  struct comedi_insn *insn, unsigned int *data)
 {
@@ -183,6 +196,8 @@ static int daq700_dio_insn_config(struct comedi_device *dev,
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 				  struct comedi_insn *insn,
 				  unsigned int *data)
 {
@@ -194,13 +209,19 @@ static int daq700_dio_insn_config(struct comedi_device *dev,
 
 	/* The DIO channels are not configurable, fix the io_bits */
 	s->io_bits = 0x00ff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int daq700_ai_eoc(struct comedi_device *dev,
 			 struct comedi_subdevice *s,
 			 struct comedi_insn *insn,
@@ -219,11 +240,15 @@ static int daq700_ai_eoc(struct comedi_device *dev,
 	return -EBUSY;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int daq700_ai_rinsn(struct comedi_device *dev,
 			   struct comedi_subdevice *s,
 			   struct comedi_insn *insn, unsigned int *data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int n, i, chan;
 	int d;
@@ -232,6 +257,8 @@ static int daq700_ai_rinsn(struct comedi_device *dev,
 
 	chan = CR_CHAN(insn->chanspec);
 =======
+=======
+>>>>>>> v3.18
 	int n;
 	int d;
 	int ret;
@@ -248,6 +275,9 @@ static int daq700_ai_rinsn(struct comedi_device *dev,
 		range++;        /* convert range to hardware value */
 	outb(r3_bits | (range & 0x03), dev->iobase + CMD_R3);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* write channel to multiplexer */
 	/* set mask scan bit high to disable scanning */
@@ -260,6 +290,7 @@ static int daq700_ai_rinsn(struct comedi_device *dev,
 		/* trigger conversion with out0 L to H */
 		outb(0x00, dev->iobase + CMD_R2); /* enable ADC conversions */
 		outb(0x30, dev->iobase + CMO_R); /* mode 0 out0 L, from H */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* mode 1 out0 H, L to H, start conversion */
 		outb(0x32, dev->iobase + CMO_R);
@@ -288,6 +319,8 @@ static int daq700_ai_rinsn(struct comedi_device *dev,
 			return -ETIMEDOUT;
 		}
 =======
+=======
+>>>>>>> v3.18
 		outb(0x00, dev->iobase + ADCLEAR_R);	/* clear the ADC FIFO */
 		/* read 16bit junk from FIFO to clear */
 		inw(dev->iobase + ADFIFO_R);
@@ -299,6 +332,9 @@ static int daq700_ai_rinsn(struct comedi_device *dev,
 		if (ret)
 			return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* read data */
 		d = inw(dev->iobase + ADFIFO_R);
@@ -325,7 +361,11 @@ static int daq700_ai_rinsn(struct comedi_device *dev,
 static void daq700_ai_config(struct comedi_device *dev,
 			     struct comedi_subdevice *s)
 <<<<<<< HEAD
+<<<<<<< HEAD
 {			
+=======
+{
+>>>>>>> v3.18
 =======
 {
 >>>>>>> v3.18
@@ -367,7 +407,10 @@ static int daq700_auto_attach(struct comedi_device *dev,
 	s->insn_bits	= daq700_dio_insn_bits;
 	s->insn_config	= daq700_dio_insn_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->state	= 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s->io_bits	= 0x00ff;
@@ -375,6 +418,7 @@ static int daq700_auto_attach(struct comedi_device *dev,
 	/* DAQCard-700 ai */
 	s = &dev->subdevices[1];
 	s->type = COMEDI_SUBD_AI;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* we support single-ended (ground)  */
 	s->subdev_flags = SDF_READABLE | SDF_GROUND;
@@ -390,6 +434,8 @@ static int daq700_auto_attach(struct comedi_device *dev,
 		dev->iobase);
 
 =======
+=======
+>>>>>>> v3.18
 	s->subdev_flags = SDF_READABLE | SDF_GROUND | SDF_DIFF;
 	s->n_chan = 16;
 	s->maxdata = (1 << 12) - 1;
@@ -397,6 +443,9 @@ static int daq700_auto_attach(struct comedi_device *dev,
 	s->insn_read = daq700_ai_rinsn;
 	daq700_ai_config(dev, s);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -432,7 +481,10 @@ MODULE_AUTHOR("Fred Brooks <nsaspook@nsaspook.com>");
 MODULE_DESCRIPTION(
 	"Comedi driver for National Instruments PCMCIA DAQCard-700 DIO/AI");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_VERSION("0.2.00");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");

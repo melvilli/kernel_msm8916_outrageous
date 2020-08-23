@@ -35,6 +35,10 @@ struct hda_beep {
 	int tone;
 	hda_nid_t nid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int registered:1;
+>>>>>>> v3.18
 =======
 	unsigned int registered:1;
 >>>>>>> v3.18
@@ -50,6 +54,10 @@ int snd_hda_enable_beep_device(struct hda_codec *codec, int enable);
 int snd_hda_attach_beep_device(struct hda_codec *codec, int nid);
 void snd_hda_detach_beep_device(struct hda_codec *codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int snd_hda_register_beep_device(struct hda_codec *codec);
+>>>>>>> v3.18
 =======
 int snd_hda_register_beep_device(struct hda_codec *codec);
 >>>>>>> v3.18
@@ -62,11 +70,17 @@ static inline void snd_hda_detach_beep_device(struct hda_codec *codec)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int snd_hda_register_beep_device(struct hda_codec *codec)
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #endif

@@ -2,7 +2,10 @@ Email clients info for Linux
 ======================================================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Git
 ----------------------------------------------------------------------
 These days most developers use `git send-email` instead of regular
@@ -14,6 +17,9 @@ as raw text including all the headers.  Run `git am raw_email.txt` and
 then review the changelog with `git log`.  When that works then send
 the patch to the appropriate mailing list(s).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 General Preferences
 ----------------------------------------------------------------------
@@ -119,7 +125,11 @@ As an added bonus you can customise the message creation toolbar menu
 and put the "insert file" icon there.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Make the the composer window wide enough so that no lines wrap. As of
+=======
+Make the composer window wide enough so that no lines wrap. As of
+>>>>>>> v3.18
 =======
 Make the composer window wide enough so that no lines wrap. As of
 >>>>>>> v3.18
@@ -220,6 +230,7 @@ To beat some sense out of the internal editor, do this:
 - Edit your Thunderbird config settings so that it won't use format=flowed.
   Go to "edit->preferences->advanced->config editor" to bring up the
 <<<<<<< HEAD
+<<<<<<< HEAD
   thunderbird's registry editor, and set "mailnews.send_plaintext_flowed" to
   "false".
 
@@ -235,6 +246,8 @@ To beat some sense out of the internal editor, do this:
   and browse to where you saved the .xul file.  This adds an "Enable
   Wordwrap" entry under the Options menu of the message composer.
 =======
+=======
+>>>>>>> v3.18
   thunderbird's registry editor.
 
 - Set "mailnews.send_plaintext_flowed" to "false"
@@ -244,6 +257,9 @@ To beat some sense out of the internal editor, do this:
 - "View" > "Message Body As" > "Plain Text"
 
 - "View" > "Character Encoding" > "Unicode (UTF-8)"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

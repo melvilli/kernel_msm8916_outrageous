@@ -66,6 +66,10 @@ struct perf_event_attr;
 struct file_handle;
 struct sigaltstack;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+union bpf_attr;
+>>>>>>> v3.18
 =======
 union bpf_attr;
 >>>>>>> v3.18
@@ -103,6 +107,11 @@ union bpf_attr;
 
 #define __SC_DECL(t, a)	t a
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define __TYPE_IS_L(t)	(__same_type((t)0, 0L))
+#define __TYPE_IS_UL(t)	(__same_type((t)0, 0UL))
+>>>>>>> v3.18
 =======
 #define __TYPE_IS_L(t)	(__same_type((t)0, 0L))
 #define __TYPE_IS_UL(t)	(__same_type((t)0, 0UL))
@@ -127,12 +136,15 @@ extern struct trace_event_functions exit_syscall_print_funcs;
 	static struct ftrace_event_call __used				\
 	  event_enter_##sname = {					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name                   = "sys_enter"#sname,		\
 		.class			= &event_class_syscall_enter,	\
 		.event.funcs            = &enter_syscall_print_funcs,	\
 		.data			= (void *)&__syscall_meta_##sname,\
 		.flags			= TRACE_EVENT_FL_CAP_ANY,	\
 =======
+=======
+>>>>>>> v3.18
 		.class			= &event_class_syscall_enter,	\
 		{							\
 			.name                   = "sys_enter"#sname,	\
@@ -140,6 +152,9 @@ extern struct trace_event_functions exit_syscall_print_funcs;
 		.event.funcs            = &enter_syscall_print_funcs,	\
 		.data			= (void *)&__syscall_meta_##sname,\
 		.flags                  = TRACE_EVENT_FL_CAP_ANY,	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};								\
 	static struct ftrace_event_call __used				\
@@ -151,12 +166,15 @@ extern struct trace_event_functions exit_syscall_print_funcs;
 	static struct ftrace_event_call __used				\
 	  event_exit_##sname = {					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name                   = "sys_exit"#sname,		\
 		.class			= &event_class_syscall_exit,	\
 		.event.funcs		= &exit_syscall_print_funcs,	\
 		.data			= (void *)&__syscall_meta_##sname,\
 		.flags			= TRACE_EVENT_FL_CAP_ANY,	\
 =======
+=======
+>>>>>>> v3.18
 		.class			= &event_class_syscall_exit,	\
 		{							\
 			.name                   = "sys_exit"#sname,	\
@@ -164,6 +182,9 @@ extern struct trace_event_functions exit_syscall_print_funcs;
 		.event.funcs		= &exit_syscall_print_funcs,	\
 		.data			= (void *)&__syscall_meta_##sname,\
 		.flags                  = TRACE_EVENT_FL_CAP_ANY,	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};								\
 	static struct ftrace_event_call __used				\
@@ -215,13 +236,19 @@ extern struct trace_event_functions exit_syscall_print_funcs;
 #define __PROTECT(...) asmlinkage_protect(__VA_ARGS__)
 #define __SYSCALL_DEFINEx(x, name, ...)					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asmlinkage long sys##name(__MAP(x,__SC_DECL,__VA_ARGS__));	\
 	static inline long SYSC##name(__MAP(x,__SC_DECL,__VA_ARGS__));	\
 =======
+=======
+>>>>>>> v3.18
 	asmlinkage long sys##name(__MAP(x,__SC_DECL,__VA_ARGS__))	\
 		__attribute__((alias(__stringify(SyS##name))));		\
 	static inline long SYSC##name(__MAP(x,__SC_DECL,__VA_ARGS__));	\
 	asmlinkage long SyS##name(__MAP(x,__SC_LONG,__VA_ARGS__));	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	asmlinkage long SyS##name(__MAP(x,__SC_LONG,__VA_ARGS__))	\
 	{								\
@@ -231,14 +258,20 @@ extern struct trace_event_functions exit_syscall_print_funcs;
 		return ret;						\
 	}								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SYSCALL_ALIAS(sys##name, SyS##name);				\
 	static inline long SYSC##name(__MAP(x,__SC_DECL,__VA_ARGS__))
 
 =======
+=======
+>>>>>>> v3.18
 	static inline long SYSC##name(__MAP(x,__SC_DECL,__VA_ARGS__))
 
 asmlinkage long sys32_quotactl(unsigned int cmd, const char __user *special,
 			       qid_t id, void __user *addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 asmlinkage long sys_time(time_t __user *tloc);
 asmlinkage long sys_stime(time_t __user *tptr);
@@ -352,11 +385,17 @@ asmlinkage long sys_kexec_load(unsigned long entry, unsigned long nr_segments,
 				struct kexec_segment __user *segments,
 				unsigned long flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 asmlinkage long sys_kexec_file_load(int kernel_fd, int initrd_fd,
 				    unsigned long cmdline_len,
 				    const char __user *cmdline_ptr,
 				    unsigned long flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 asmlinkage long sys_exit(int error_code);
@@ -557,7 +596,11 @@ asmlinkage long sys_lchown(const char __user *filename,
 				uid_t user, gid_t group);
 asmlinkage long sys_fchown(unsigned int fd, uid_t user, gid_t group);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HAVE_UID16
+=======
+#ifdef CONFIG_UID16
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_UID16
 >>>>>>> v3.18
@@ -757,7 +800,11 @@ asmlinkage long sys_keyctl(int cmd, unsigned long arg2, unsigned long arg3,
 asmlinkage long sys_ioprio_set(int which, int who, int ioprio);
 asmlinkage long sys_ioprio_get(int which, int who);
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys_set_mempolicy(int mode, unsigned long __user *nmask,
+=======
+asmlinkage long sys_set_mempolicy(int mode, const unsigned long __user *nmask,
+>>>>>>> v3.18
 =======
 asmlinkage long sys_set_mempolicy(int mode, const unsigned long __user *nmask,
 >>>>>>> v3.18
@@ -773,7 +820,11 @@ asmlinkage long sys_move_pages(pid_t pid, unsigned long nr_pages,
 asmlinkage long sys_mbind(unsigned long start, unsigned long len,
 				unsigned long mode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				unsigned long __user *nmask,
+=======
+				const unsigned long __user *nmask,
+>>>>>>> v3.18
 =======
 				const unsigned long __user *nmask,
 >>>>>>> v3.18
@@ -806,6 +857,12 @@ asmlinkage long sys_linkat(int olddfd, const char __user *oldname,
 asmlinkage long sys_renameat(int olddfd, const char __user * oldname,
 			     int newdfd, const char __user * newname);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+asmlinkage long sys_renameat2(int olddfd, const char __user *oldname,
+			      int newdfd, const char __user *newname,
+			      unsigned int flags);
+>>>>>>> v3.18
 =======
 asmlinkage long sys_renameat2(int olddfd, const char __user *oldname,
 			      int newdfd, const char __user *newname,
@@ -926,10 +983,16 @@ asmlinkage long sys_finit_module(int fd, const char __user *uargs, int flags);
 asmlinkage long sys_seccomp(unsigned int op, unsigned int flags,
 			    const char __user *uargs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 asmlinkage long sys_getrandom(char __user *buf, size_t count,
 			      unsigned int flags);
 
+=======
+asmlinkage long sys_getrandom(char __user *buf, size_t count,
+			      unsigned int flags);
+asmlinkage long sys_bpf(int cmd, union bpf_attr *attr, unsigned int size);
+>>>>>>> v3.18
 =======
 asmlinkage long sys_getrandom(char __user *buf, size_t count,
 			      unsigned int flags);

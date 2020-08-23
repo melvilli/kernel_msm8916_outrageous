@@ -109,8 +109,12 @@ struct cardinfo {
 				    */
 	struct bio	*bio, *currentbio, **biotail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		current_idx;
 	sector_t	current_sector;
+=======
+	struct bvec_iter current_iter;
+>>>>>>> v3.18
 =======
 	struct bvec_iter current_iter;
 >>>>>>> v3.18
@@ -123,7 +127,11 @@ struct cardinfo {
 		int	 		cnt, headcnt;
 		struct bio		*bio, **biotail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int			idx;
+=======
+		struct bvec_iter	iter;
+>>>>>>> v3.18
 =======
 		struct bvec_iter	iter;
 >>>>>>> v3.18
@@ -353,10 +361,15 @@ static int add_bio(struct cardinfo *card)
 	int offset;
 	struct bio *bio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *vec;
 	int idx;
 	int rw;
 	int len;
+=======
+	struct bio_vec vec;
+	int rw;
+>>>>>>> v3.18
 =======
 	struct bio_vec vec;
 	int rw;
@@ -366,8 +379,12 @@ static int add_bio(struct cardinfo *card)
 	if (!bio && card->bio) {
 		card->currentbio = card->bio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		card->current_idx = card->bio->bi_idx;
 		card->current_sector = card->bio->bi_sector;
+=======
+		card->current_iter = card->bio->bi_iter;
+>>>>>>> v3.18
 =======
 		card->current_iter = card->bio->bi_iter;
 >>>>>>> v3.18
@@ -380,7 +397,10 @@ static int add_bio(struct cardinfo *card)
 	if (!bio)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idx = card->current_idx;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -389,6 +409,7 @@ static int add_bio(struct cardinfo *card)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vec = bio_iovec_idx(bio, idx);
 	len = vec->bv_len;
 	dma_handle = pci_map_page(card->dev,
@@ -396,12 +417,17 @@ static int add_bio(struct cardinfo *card)
 				  vec->bv_offset,
 				  len,
 =======
+=======
+>>>>>>> v3.18
 	vec = bio_iter_iovec(bio, card->current_iter);
 
 	dma_handle = pci_map_page(card->dev,
 				  vec.bv_page,
 				  vec.bv_offset,
 				  vec.bv_len,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  (rw == READ) ?
 				  PCI_DMA_FROMDEVICE : PCI_DMA_TODEVICE);
@@ -411,7 +437,11 @@ static int add_bio(struct cardinfo *card)
 	p->cnt++;
 	if (p->bio == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p->idx = idx;
+=======
+		p->iter = card->current_iter;
+>>>>>>> v3.18
 =======
 		p->iter = card->current_iter;
 >>>>>>> v3.18
@@ -425,8 +455,13 @@ static int add_bio(struct cardinfo *card)
 
 	desc->pci_addr = cpu_to_le64((u64)desc->data_dma_handle);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	desc->local_addr = cpu_to_le64(card->current_sector << 9);
 	desc->transfer_size = cpu_to_le32(len);
+=======
+	desc->local_addr = cpu_to_le64(card->current_iter.bi_sector << 9);
+	desc->transfer_size = cpu_to_le32(vec.bv_len);
+>>>>>>> v3.18
 =======
 	desc->local_addr = cpu_to_le64(card->current_iter.bi_sector << 9);
 	desc->transfer_size = cpu_to_le32(vec.bv_len);
@@ -446,10 +481,16 @@ static int add_bio(struct cardinfo *card)
 	desc->sem_control_bits = desc->control_bits;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	card->current_sector += (len >> 9);
 	idx++;
 	card->current_idx = idx;
 	if (idx >= bio->bi_vcnt)
+=======
+
+	bio_advance_iter(bio, &card->current_iter, vec.bv_len);
+	if (!card->current_iter.bi_size)
+>>>>>>> v3.18
 =======
 
 	bio_advance_iter(bio, &card->current_iter, vec.bv_len);
@@ -484,7 +525,11 @@ static void process_page(unsigned long data)
 		int control = le32_to_cpu(desc->sem_control_bits);
 		int last = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int idx;
+=======
+		struct bio_vec vec;
+>>>>>>> v3.18
 =======
 		struct bio_vec vec;
 >>>>>>> v3.18
@@ -493,6 +538,7 @@ static void process_page(unsigned long data)
 			control = dma_status;
 			last = 1;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		page->headcnt++;
 		idx = page->idx;
@@ -506,6 +552,8 @@ static void process_page(unsigned long data)
 		pci_unmap_page(card->dev, desc->data_dma_handle,
 			       bio_iovec_idx(bio, idx)->bv_len,
 =======
+=======
+>>>>>>> v3.18
 
 		page->headcnt++;
 		vec = bio_iter_iovec(bio, page->iter);
@@ -519,6 +567,9 @@ static void process_page(unsigned long data)
 
 		pci_unmap_page(card->dev, desc->data_dma_handle,
 			       vec.bv_len,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 (control & DMASCR_TRANSFER_READ) ?
 				PCI_DMA_TODEVICE : PCI_DMA_FROMDEVICE);
@@ -597,7 +648,12 @@ static void mm_make_request(struct request_queue *q, struct bio *bio)
 	struct cardinfo *card = q->queuedata;
 	pr_debug("mm_make_request %llu %u\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 (unsigned long long)bio->bi_sector, bio->bi_size);
+=======
+		 (unsigned long long)bio->bi_iter.bi_sector,
+		 bio->bi_iter.bi_size);
+>>>>>>> v3.18
 =======
 		 (unsigned long long)bio->bi_iter.bi_sector,
 		 bio->bi_iter.bi_size);

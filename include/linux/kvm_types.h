@@ -18,7 +18,10 @@
 #define __KVM_TYPES_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct kvm;
 struct kvm_async_pf;
 struct kvm_device_ops;
@@ -33,6 +36,9 @@ struct kvm_vcpu_init;
 
 enum kvm_mr_change;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/types.h>
 

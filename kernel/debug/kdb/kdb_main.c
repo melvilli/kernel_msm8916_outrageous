@@ -1092,7 +1092,11 @@ static void kdb_dumpregs(struct pt_regs *regs)
 {
 	int old_lvl = console_loglevel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	console_loglevel = 15;
+=======
+	console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
+>>>>>>> v3.18
 =======
 	console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
 >>>>>>> v3.18
@@ -1205,6 +1209,12 @@ static int kdb_local(kdb_reason_t reason, int error, struct pt_regs *regs,
 		kdb_dumpregs(regs);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case KDB_REASON_SYSTEM_NMI:
+		kdb_printf("due to System NonMaskable Interrupt\n");
+		break;
+>>>>>>> v3.18
 =======
 	case KDB_REASON_SYSTEM_NMI:
 		kdb_printf("due to System NonMaskable Interrupt\n");
@@ -2480,7 +2490,11 @@ static void kdb_sysinfo(struct sysinfo *val)
 {
 	struct timespec uptime;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_posix_clock_monotonic_gettime(&uptime);
+=======
+	ktime_get_ts(&uptime);
+>>>>>>> v3.18
 =======
 	ktime_get_ts(&uptime);
 >>>>>>> v3.18
@@ -2547,7 +2561,11 @@ static int kdb_summary(int argc, const char **argv)
 	kdb_printf("\nMemTotal:       %8lu kB\nMemFree:        %8lu kB\n"
 		   "Buffers:        %8lu kB\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   K(val.totalram), K(val.freeram), K(val.bufferram));
+=======
+		   val.totalram, val.freeram, val.bufferram);
+>>>>>>> v3.18
 =======
 		   val.totalram, val.freeram, val.bufferram);
 >>>>>>> v3.18

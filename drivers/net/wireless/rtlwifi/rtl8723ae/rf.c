@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -38,17 +41,23 @@
 #include "dm.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8723ae_phy_rf6052_set_bandwidth(struct ieee80211_hw *hw, u8 bandwidth)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
 =======
+=======
+>>>>>>> v3.18
 static bool _rtl8723e_phy_rf6052_config_parafile(struct ieee80211_hw *hw);
 
 void rtl8723e_phy_rf6052_set_bandwidth(struct ieee80211_hw *hw, u8 bandwidth)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_phy *rtlphy = &rtlpriv->phy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (bandwidth) {
@@ -72,17 +81,23 @@ void rtl8723e_phy_rf6052_set_bandwidth(struct ieee80211_hw *hw, u8 bandwidth)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8723ae_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 					  u8 *ppowerlevel)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
 =======
+=======
+>>>>>>> v3.18
 void rtl8723e_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 					 u8 *ppowerlevel)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_phy *rtlphy = &rtlpriv->phy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rtl_mac *mac = rtl_mac(rtl_priv(hw));
 	struct rtl_efuse *rtlefuse = rtl_efuse(rtl_priv(hw));
@@ -100,7 +115,12 @@ void rtl8723e_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 
 		if (turbo_scanoff) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			for (idx1 = RF90_PATH_A; idx1 <= RF90_PATH_B; idx1++) {
+=======
+			for (idx1 = RF90_PATH_A; idx1 <= RF90_PATH_B;
+				idx1++) {
+>>>>>>> v3.18
 =======
 			for (idx1 = RF90_PATH_A; idx1 <= RF90_PATH_B;
 				idx1++) {
@@ -115,6 +135,7 @@ void rtl8723e_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 		for (idx1 = RF90_PATH_A; idx1 <= RF90_PATH_B; idx1++) {
 			tx_agc[idx1] = ppowerlevel[idx1] |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       (ppowerlevel[idx1] << 8) |
 				       (ppowerlevel[idx1] << 16) |
 				       (ppowerlevel[idx1] << 24);
@@ -128,6 +149,8 @@ void rtl8723e_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 			tmpval = (rtlphy->mcs_offset[0][14]) +
 			    (rtlphy->mcs_offset[0][15] << 24);
 =======
+=======
+>>>>>>> v3.18
 			    (ppowerlevel[idx1] << 8) |
 			    (ppowerlevel[idx1] << 16) |
 			    (ppowerlevel[idx1] << 24);
@@ -143,6 +166,9 @@ void rtl8723e_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 			tmpval = (rtlphy->mcs_txpwrlevel_origoffset[0][14]) +
 			    (rtlphy->mcs_txpwrlevel_origoffset[0][15] <<
 			     24);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			tx_agc[RF90_PATH_B] += tmpval;
 		}
@@ -150,7 +176,11 @@ void rtl8723e_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 
 	for (idx1 = RF90_PATH_A; idx1 <= RF90_PATH_B; idx1++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ptr = (u8 *) (&(tx_agc[idx1]));
+=======
+		ptr = (u8 *)&tx_agc[idx1];
+>>>>>>> v3.18
 =======
 		ptr = (u8 *)&tx_agc[idx1];
 >>>>>>> v3.18
@@ -167,7 +197,11 @@ void rtl8723e_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 	RTPRINT(rtlpriv, FPHY, PHY_TXPWR,
 		"CCK PWR 1M (rf-A) = 0x%x (reg 0x%x)\n", tmpval,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RTXAGC_A_CCK1_MCS32);
+=======
+		 RTXAGC_A_CCK1_MCS32);
+>>>>>>> v3.18
 =======
 		 RTXAGC_A_CCK1_MCS32);
 >>>>>>> v3.18
@@ -181,7 +215,11 @@ void rtl8723e_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 	RTPRINT(rtlpriv, FPHY, PHY_TXPWR,
 		"CCK PWR 2~11M (rf-A) = 0x%x (reg 0x%x)\n", tmpval,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RTXAGC_B_CCK11_A_CCK2_11);
+=======
+		 RTXAGC_B_CCK11_A_CCK2_11);
+>>>>>>> v3.18
 =======
 		 RTXAGC_B_CCK11_A_CCK2_11);
 >>>>>>> v3.18
@@ -192,7 +230,11 @@ void rtl8723e_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 	RTPRINT(rtlpriv, FPHY, PHY_TXPWR,
 		"CCK PWR 11M (rf-B) = 0x%x (reg 0x%x)\n", tmpval,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RTXAGC_B_CCK11_A_CCK2_11);
+=======
+		 RTXAGC_B_CCK11_A_CCK2_11);
+>>>>>>> v3.18
 =======
 		 RTXAGC_B_CCK11_A_CCK2_11);
 >>>>>>> v3.18
@@ -202,6 +244,7 @@ void rtl8723e_phy_rf6052_set_cck_txpower(struct ieee80211_hw *hw,
 
 	RTPRINT(rtlpriv, FPHY, PHY_TXPWR,
 		"CCK PWR 1~5.5M (rf-B) = 0x%x (reg 0x%x)\n", tmpval,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		RTXAGC_B_CCK1_55_MCS32);
 }
@@ -215,6 +258,8 @@ static void rtl8723ae_phy_get_power_base(struct ieee80211_hw *hw,
 	struct rtl_efuse *rtlefuse = rtl_efuse(rtl_priv(hw));
 	u32 powerBase0, powerBase1;
 =======
+=======
+>>>>>>> v3.18
 		 RTXAGC_B_CCK1_55_MCS32);
 }
 
@@ -226,6 +271,9 @@ static void rtl8723e_phy_get_power_base(struct ieee80211_hw *hw,
 	struct rtl_phy *rtlphy = &rtlpriv->phy;
 	struct rtl_efuse *rtlefuse = rtl_efuse(rtl_priv(hw));
 	u32 powerbase0, powerbase1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 legacy_pwrdiff, ht20_pwrdiff;
 	u8 i, powerlevel[2];
@@ -233,6 +281,7 @@ static void rtl8723e_phy_get_power_base(struct ieee80211_hw *hw,
 	for (i = 0; i < 2; i++) {
 		powerlevel[i] = ppowerlevel[i];
 		legacy_pwrdiff = rtlefuse->txpwr_legacyhtdiff[i][channel - 1];
+<<<<<<< HEAD
 <<<<<<< HEAD
 		powerBase0 = powerlevel[i] + legacy_pwrdiff;
 
@@ -243,6 +292,8 @@ static void rtl8723e_phy_get_power_base(struct ieee80211_hw *hw,
 			" [OFDM power base index rf(%c) = 0x%x]\n",
 			((i == 0) ? 'A' : 'B'), *(ofdmbase + i));
 =======
+=======
+>>>>>>> v3.18
 		powerbase0 = powerlevel[i] + legacy_pwrdiff;
 
 		powerbase0 = (powerbase0 << 24) | (powerbase0 << 16) |
@@ -251,11 +302,15 @@ static void rtl8723e_phy_get_power_base(struct ieee80211_hw *hw,
 		RTPRINT(rtlpriv, FPHY, PHY_TXPWR,
 			" [OFDM power base index rf(%c) = 0x%x]\n",
 			 ((i == 0) ? 'A' : 'B'), *(ofdmbase + i));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	for (i = 0; i < 2; i++) {
 		if (rtlphy->current_chan_bw == HT_CHANNEL_WIDTH_20) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			ht20_pwrdiff = rtlefuse->txpwr_ht20diff[i][channel - 1];
 			powerlevel[i] += ht20_pwrdiff;
@@ -284,6 +339,8 @@ static void rtl8723ae_get_txpwr_val_by_reg(struct ieee80211_hw *hw,
 	u8 i, chnlgroup = 0, pwr_diff_limit[4];
 	u32 writeVal, customer_limit, rf;
 =======
+=======
+>>>>>>> v3.18
 			ht20_pwrdiff =
 				rtlefuse->txpwr_ht20diff[i][channel - 1];
 			powerlevel[i] += ht20_pwrdiff;
@@ -311,6 +368,9 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 	struct rtl_efuse *rtlefuse = rtl_efuse(rtl_priv(hw));
 	u8 i, chnlgroup = 0, pwr_diff_limit[4];
 	u32 writeval, customer_limit, rf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (rf = 0; rf < 2; rf++) {
@@ -318,6 +378,7 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 		case 0:
 			chnlgroup = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			writeVal = rtlphy->mcs_offset[chnlgroup]
 				   [index + (rf ? 8 : 0)] +
@@ -339,6 +400,8 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 					"writeVal(%c) = 0x%x\n",
 					((rf == 0) ? 'A' : 'B'), writeVal);
 =======
+=======
+>>>>>>> v3.18
 			writeval =
 			    rtlphy->mcs_txpwrlevel_origoffset[chnlgroup][index +
 								(rf ? 8 : 0)]
@@ -356,6 +419,9 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 				RTPRINT(rtlpriv, FPHY, PHY_TXPWR,
 					"Realtek regulatory, 40MHz, writeval(%c) = 0x%x\n",
 					((rf == 0) ? 'A' : 'B'), writeval);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			} else {
 				if (rtlphy->pwrgroup_cnt == 1)
@@ -369,7 +435,11 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 						chnlgroup = 2;
 					if (rtlphy->current_chan_bw ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    HT_CHANNEL_WIDTH_20)
+=======
+						HT_CHANNEL_WIDTH_20)
+>>>>>>> v3.18
 =======
 						HT_CHANNEL_WIDTH_20)
 >>>>>>> v3.18
@@ -378,6 +448,7 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 						chnlgroup += 4;
 				}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				writeVal = rtlphy->mcs_offset[chnlgroup]
 				    [index + (rf ? 8 : 0)] + ((index < 2) ?
@@ -397,6 +468,8 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 				"Better regulatory, writeVal(%c) = 0x%x\n",
 				((rf == 0) ? 'A' : 'B'), writeVal);
 =======
+=======
+>>>>>>> v3.18
 				writeval =
 				    rtlphy->mcs_txpwrlevel_origoffset[chnlgroup]
 				    [index + (rf ? 8 : 0)] + ((index < 2) ?
@@ -415,6 +488,9 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 			RTPRINT(rtlpriv, FPHY, PHY_TXPWR,
 				"Better regulatory, writeval(%c) = 0x%x\n",
 				((rf == 0) ? 'A' : 'B'), writeval);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case 3:
@@ -425,7 +501,12 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 					"customer's limit, 40MHz rf(%c) = 0x%x\n",
 					((rf == 0) ? 'A' : 'B'),
 <<<<<<< HEAD
+<<<<<<< HEAD
 					rtlefuse->pwrgroup_ht40[rf][channel-1]);
+=======
+					rtlefuse->pwrgroup_ht40[rf][channel -
+								     1]);
+>>>>>>> v3.18
 =======
 					rtlefuse->pwrgroup_ht40[rf][channel -
 								     1]);
@@ -435,6 +516,7 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 					"customer's limit, 20MHz rf(%c) = 0x%x\n",
 					((rf == 0) ? 'A' : 'B'),
 <<<<<<< HEAD
+<<<<<<< HEAD
 					rtlefuse->pwrgroup_ht20[rf][channel-1]);
 			}
 			for (i = 0; i < 4; i++) {
@@ -443,6 +525,8 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 					[chnlgroup][index + (rf ? 8 : 0)] &
 					(0x7f << (i * 8))) >> (i * 8));
 =======
+=======
+>>>>>>> v3.18
 					rtlefuse->pwrgroup_ht20[rf][channel -
 								     1]);
 			}
@@ -452,6 +536,9 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 					  [chnlgroup][index +
 						(rf ? 8 : 0)] & (0x7f <<
 						(i * 8))) >> (i * 8));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				if (rtlphy->current_chan_bw ==
@@ -479,6 +566,7 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 			RTPRINT(rtlpriv, FPHY, PHY_TXPWR,
 				"Customer's limit rf(%c) = 0x%x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				((rf == 0) ? 'A' : 'B'), customer_limit);
 
 			writeVal = customer_limit +
@@ -498,6 +586,8 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 				"RTK better performance, writeVal rf(%c) = 0x%x\n",
 				((rf == 0) ? 'A' : 'B'), writeVal);
 =======
+=======
+>>>>>>> v3.18
 				 ((rf == 0) ? 'A' : 'B'), customer_limit);
 
 			writeval = customer_limit +
@@ -517,11 +607,15 @@ static void get_txpower_writeval_by_reg(struct ieee80211_hw *hw,
 			RTPRINT(rtlpriv, FPHY, PHY_TXPWR,
 				"RTK better performance, writeval rf(%c) = 0x%x\n",
 				((rf == 0) ? 'A' : 'B'), writeval);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
 
 		if (rtlpriv->dm.dynamic_txhighpower_lvl == TXHIGHPWRLEVEL_BT1)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			writeVal = writeVal - 0x06060606;
 		else if (rtlpriv->dm.dynamic_txhighpower_lvl ==
@@ -537,6 +631,8 @@ static void _rtl8723ae_write_ofdm_power_reg(struct ieee80211_hw *hw,
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
 =======
+=======
+>>>>>>> v3.18
 			writeval = writeval - 0x06060606;
 		else if (rtlpriv->dm.dynamic_txhighpower_lvl ==
 			 TXHIGHPWRLEVEL_BT2)
@@ -550,6 +646,9 @@ static void _rtl8723e_write_ofdm_power_reg(struct ieee80211_hw *hw,
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_phy *rtlphy = &rtlpriv->phy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	u16 regoffset_a[6] = {
@@ -564,6 +663,7 @@ static void _rtl8723e_write_ofdm_power_reg(struct ieee80211_hw *hw,
 	};
 	u8 i, rf, pwr_val[4];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 writeVal;
 	u16 regoffset;
 
@@ -573,6 +673,8 @@ static void _rtl8723e_write_ofdm_power_reg(struct ieee80211_hw *hw,
 			pwr_val[i] = (u8) ((writeVal & (0x7f <<
 							(i * 8))) >> (i * 8));
 =======
+=======
+>>>>>>> v3.18
 	u32 writeval;
 	u16 regoffset;
 
@@ -581,13 +683,20 @@ static void _rtl8723e_write_ofdm_power_reg(struct ieee80211_hw *hw,
 		for (i = 0; i < 4; i++) {
 			pwr_val[i] = (u8)((writeval & (0x7f <<
 					   (i * 8))) >> (i * 8));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (pwr_val[i] > RF6052_MAX_TX_PWR)
 				pwr_val[i] = RF6052_MAX_TX_PWR;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		writeVal = (pwr_val[3] << 24) | (pwr_val[2] << 16) |
+=======
+		writeval = (pwr_val[3] << 24) | (pwr_val[2] << 16) |
+>>>>>>> v3.18
 =======
 		writeval = (pwr_val[3] << 24) | (pwr_val[2] << 16) |
 >>>>>>> v3.18
@@ -598,15 +707,21 @@ static void _rtl8723e_write_ofdm_power_reg(struct ieee80211_hw *hw,
 		else
 			regoffset = regoffset_b[index];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtl_set_bbreg(hw, regoffset, MASKDWORD, writeVal);
 
 		RTPRINT(rtlpriv, FPHY, PHY_TXPWR,
 			"Set 0x%x = %08x\n", regoffset, writeVal);
 =======
+=======
+>>>>>>> v3.18
 		rtl_set_bbreg(hw, regoffset, MASKDWORD, writeval);
 
 		RTPRINT(rtlpriv, FPHY, PHY_TXPWR,
 			"Set 0x%x = %08x\n", regoffset, writeval);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (((get_rf_type(rtlphy) == RF_2T2R) &&
@@ -617,7 +732,11 @@ static void _rtl8723e_write_ofdm_power_reg(struct ieee80211_hw *hw,
 		      regoffset == RTXAGC_B_MCS07_MCS04))) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			writeVal = pwr_val[3];
+=======
+			writeval = pwr_val[3];
+>>>>>>> v3.18
 =======
 			writeval = pwr_val[3];
 >>>>>>> v3.18
@@ -630,9 +749,15 @@ static void _rtl8723e_write_ofdm_power_reg(struct ieee80211_hw *hw,
 
 			for (i = 0; i < 3; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				writeVal = (writeVal > 6) ? (writeVal - 6) : 0;
 				rtl_write_byte(rtlpriv, (u32) (regoffset + i),
 					       (u8) writeVal);
+=======
+				writeval = (writeval > 6) ? (writeval - 6) : 0;
+				rtl_write_byte(rtlpriv, (u32) (regoffset + i),
+					       (u8)writeval);
+>>>>>>> v3.18
 =======
 				writeval = (writeval > 6) ? (writeval - 6) : 0;
 				rtl_write_byte(rtlpriv, (u32) (regoffset + i),
@@ -643,6 +768,7 @@ static void _rtl8723e_write_ofdm_power_reg(struct ieee80211_hw *hw,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void rtl8723ae_phy_rf6052_set_ofdm_txpower(struct ieee80211_hw *hw,
 					   u8 *ppowerlevel, u8 channel)
@@ -668,6 +794,8 @@ static bool _rtl8723ae_phy_rf6052_config_parafile(struct ieee80211_hw *hw)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
 =======
+=======
+>>>>>>> v3.18
 void rtl8723e_phy_rf6052_set_ofdm_txpower(struct ieee80211_hw *hw,
 					  u8 *ppowerlevel, u8 channel)
 {
@@ -703,6 +831,9 @@ static bool _rtl8723e_phy_rf6052_config_parafile(struct ieee80211_hw *hw)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_phy *rtlphy = &rtlpriv->phy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 u4_regvalue = 0;
 	u8 rfpath;
@@ -742,18 +873,24 @@ static bool _rtl8723e_phy_rf6052_config_parafile(struct ieee80211_hw *hw)
 		switch (rfpath) {
 		case RF90_PATH_A:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rtstatus = rtl8723ae_phy_config_rf_with_headerfile(hw,
 						(enum radio_path)rfpath);
 			break;
 		case RF90_PATH_B:
 			rtstatus = rtl8723ae_phy_config_rf_with_headerfile(hw,
 =======
+=======
+>>>>>>> v3.18
 			rtstatus = rtl8723e_phy_config_rf_with_headerfile(hw,
 						(enum radio_path)rfpath);
 			break;
 		case RF90_PATH_B:
 			rtstatus =
 			  rtl8723e_phy_config_rf_with_headerfile(hw,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						(enum radio_path)rfpath);
 			break;
@@ -763,6 +900,10 @@ static bool _rtl8723e_phy_rf6052_config_parafile(struct ieee80211_hw *hw)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -779,6 +920,10 @@ static bool _rtl8723e_phy_rf6052_config_parafile(struct ieee80211_hw *hw)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -788,6 +933,7 @@ static bool _rtl8723e_phy_rf6052_config_parafile(struct ieee80211_hw *hw)
 			return false;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	RT_TRACE(rtlpriv, COMP_INIT, DBG_TRACE, "<---\n");
 	return rtstatus;
@@ -804,6 +950,11 @@ bool rtl8723ae_phy_rf6052_config(struct ieee80211_hw *hw)
 		rtlphy->num_total_rfpath = 2;
 
 	return _rtl8723ae_phy_rf6052_config_parafile(hw);
+=======
+
+	RT_TRACE(rtlpriv, COMP_INIT, DBG_TRACE, "\n");
+	return rtstatus;
+>>>>>>> v3.18
 =======
 
 	RT_TRACE(rtlpriv, COMP_INIT, DBG_TRACE, "\n");

@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (C) 2007-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
 =======
 /* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
 >>>>>>> v3.18
@@ -17,9 +21,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -28,11 +36,17 @@
 #include <linux/crc32c.h>
 #include <linux/highmem.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/if_vlan.h>
 #include <net/ip.h>
 #include <net/ipv6.h>
 #include <net/dsfield.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "main.h"
 #include "sysfs.h"
@@ -48,17 +62,23 @@
 #include "bridge_loop_avoidance.h"
 #include "distributed-arp-table.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "vis.h"
 #include "hash.h"
 #include "bat_algo.h"
 #include "network-coding.h"
 =======
+=======
+>>>>>>> v3.18
 #include "multicast.h"
 #include "gateway_common.h"
 #include "hash.h"
 #include "bat_algo.h"
 #include "network-coding.h"
 #include "fragmentation.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -130,10 +150,13 @@ int batadv_mesh_init(struct net_device *soft_iface)
 	spin_lock_init(&bat_priv->tt.roam_list_lock);
 	spin_lock_init(&bat_priv->tt.last_changeset_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&bat_priv->gw.list_lock);
 	spin_lock_init(&bat_priv->vis.hash_lock);
 	spin_lock_init(&bat_priv->vis.list_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_init(&bat_priv->tt.commit_lock);
 	spin_lock_init(&bat_priv->gw.list_lock);
 #ifdef CONFIG_BATMAN_ADV_MCAST
@@ -142,16 +165,22 @@ int batadv_mesh_init(struct net_device *soft_iface)
 	spin_lock_init(&bat_priv->tvlv.container_list_lock);
 	spin_lock_init(&bat_priv->tvlv.handler_list_lock);
 	spin_lock_init(&bat_priv->softif_vlan_list_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	INIT_HLIST_HEAD(&bat_priv->forw_bat_list);
 	INIT_HLIST_HEAD(&bat_priv->forw_bcast_list);
 	INIT_HLIST_HEAD(&bat_priv->gw.list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&bat_priv->tt.changes_list);
 	INIT_LIST_HEAD(&bat_priv->tt.req_list);
 	INIT_LIST_HEAD(&bat_priv->tt.roam_list);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_BATMAN_ADV_MCAST
 	INIT_HLIST_HEAD(&bat_priv->mcast.want_all_unsnoopables_list);
 	INIT_HLIST_HEAD(&bat_priv->mcast.want_all_ipv4_list);
@@ -166,6 +195,9 @@ int batadv_mesh_init(struct net_device *soft_iface)
 	INIT_HLIST_HEAD(&bat_priv->tvlv.container_list);
 	INIT_HLIST_HEAD(&bat_priv->tvlv.handler_list);
 	INIT_HLIST_HEAD(&bat_priv->softif_vlan_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = batadv_originator_init(bat_priv);
@@ -177,6 +209,7 @@ int batadv_mesh_init(struct net_device *soft_iface)
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	batadv_tt_local_add(soft_iface, soft_iface->dev_addr,
 			    BATADV_NULL_IFINDEX);
 
@@ -184,6 +217,8 @@ int batadv_mesh_init(struct net_device *soft_iface)
 	if (ret < 0)
 		goto err;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = batadv_bla_init(bat_priv);
@@ -199,6 +234,12 @@ int batadv_mesh_init(struct net_device *soft_iface)
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	batadv_gw_init(bat_priv);
+	batadv_mcast_init(bat_priv);
+
+>>>>>>> v3.18
 =======
 	batadv_gw_init(bat_priv);
 	batadv_mcast_init(bat_priv);
@@ -223,8 +264,11 @@ void batadv_mesh_free(struct net_device *soft_iface)
 	batadv_purge_outstanding_packets(bat_priv, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	batadv_vis_quit(bat_priv);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	batadv_gw_node_purge(bat_priv);
@@ -233,6 +277,11 @@ void batadv_mesh_free(struct net_device *soft_iface)
 	batadv_bla_free(bat_priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	batadv_mcast_free(bat_priv);
+
+>>>>>>> v3.18
 =======
 	batadv_mcast_free(bat_priv);
 
@@ -251,6 +300,11 @@ void batadv_mesh_free(struct net_device *soft_iface)
 	batadv_originator_free(bat_priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	batadv_gw_free(bat_priv);
+
+>>>>>>> v3.18
 =======
 	batadv_gw_free(bat_priv);
 
@@ -325,7 +379,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * batadv_max_header_len - calculate maximum encapsulation overhead for a
  *  payload packet
@@ -405,6 +462,9 @@ void batadv_skb_set_priority(struct sk_buff *skb, int offset)
 	skb->priority = prio + 256;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int batadv_recv_unhandled_packet(struct sk_buff *skb,
 					struct batadv_hard_iface *recv_if)
@@ -456,15 +516,21 @@ int batadv_batman_skb_recv(struct sk_buff *skb, struct net_device *dev,
 	batadv_ogm_packet = (struct batadv_ogm_packet *)skb->data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (batadv_ogm_packet->header.version != BATADV_COMPAT_VERSION) {
 		batadv_dbg(BATADV_DBG_BATMAN, bat_priv,
 			   "Drop packet: incompatible batman version (%i)\n",
 			   batadv_ogm_packet->header.version);
 =======
+=======
+>>>>>>> v3.18
 	if (batadv_ogm_packet->version != BATADV_COMPAT_VERSION) {
 		batadv_dbg(BATADV_DBG_BATMAN, bat_priv,
 			   "Drop packet: incompatible batman version (%i)\n",
 			   batadv_ogm_packet->version);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err_free;
 	}
@@ -473,7 +539,11 @@ int batadv_batman_skb_recv(struct sk_buff *skb, struct net_device *dev,
 	 * the supplied skb. if not, we have to free the skb.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idx = batadv_ogm_packet->header.packet_type;
+=======
+	idx = batadv_ogm_packet->packet_type;
+>>>>>>> v3.18
 =======
 	idx = batadv_ogm_packet->packet_type;
 >>>>>>> v3.18
@@ -502,9 +572,12 @@ static void batadv_recv_handler_init(void)
 		batadv_rx_handler[i] = batadv_recv_unhandled_packet;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* batman icmp packet */
 	batadv_rx_handler[BATADV_ICMP] = batadv_recv_icmp_packet;
 =======
+=======
+>>>>>>> v3.18
 	for (i = BATADV_UNICAST_MIN; i <= BATADV_UNICAST_MAX; i++)
 		batadv_rx_handler[i] = batadv_recv_unhandled_unicast_packet;
 
@@ -530,11 +603,15 @@ static void batadv_recv_handler_init(void)
 	batadv_rx_handler[BATADV_BCAST] = batadv_recv_bcast_packet;
 
 	/* unicast packets ... */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* unicast with 4 addresses packet */
 	batadv_rx_handler[BATADV_UNICAST_4ADDR] = batadv_recv_unicast_packet;
 	/* unicast packet */
 	batadv_rx_handler[BATADV_UNICAST] = batadv_recv_unicast_packet;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* fragmented unicast packet */
 	batadv_rx_handler[BATADV_UNICAST_FRAG] = batadv_recv_ucast_frag_packet;
@@ -547,12 +624,17 @@ static void batadv_recv_handler_init(void)
 	/* Roaming advertisement */
 	batadv_rx_handler[BATADV_ROAM_ADV] = batadv_recv_roam_adv;
 =======
+=======
+>>>>>>> v3.18
 	/* unicast tvlv packet */
 	batadv_rx_handler[BATADV_UNICAST_TVLV] = batadv_recv_unicast_tvlv;
 	/* batman icmp packet */
 	batadv_rx_handler[BATADV_ICMP] = batadv_recv_icmp_packet;
 	/* Fragmented packets */
 	batadv_rx_handler[BATADV_UNICAST_FRAG] = batadv_recv_frag_packet;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -562,14 +644,20 @@ batadv_recv_handler_register(uint8_t packet_type,
 						 struct batadv_hard_iface *))
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (batadv_rx_handler[packet_type] != &batadv_recv_unhandled_packet)
 =======
+=======
+>>>>>>> v3.18
 	int (*curr)(struct sk_buff *,
 		    struct batadv_hard_iface *);
 	curr = batadv_rx_handler[packet_type];
 
 	if ((curr != batadv_recv_unhandled_packet) &&
 	    (curr != batadv_recv_unhandled_unicast_packet))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EBUSY;
 
@@ -617,7 +705,13 @@ int batadv_algo_register(struct batadv_algo_ops *bat_algo_ops)
 	    !bat_algo_ops->bat_primary_iface_set ||
 	    !bat_algo_ops->bat_ogm_schedule ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !bat_algo_ops->bat_ogm_emit) {
+=======
+	    !bat_algo_ops->bat_ogm_emit ||
+	    !bat_algo_ops->bat_neigh_cmp ||
+	    !bat_algo_ops->bat_neigh_is_equiv_or_better) {
+>>>>>>> v3.18
 =======
 	    !bat_algo_ops->bat_ogm_emit ||
 	    !bat_algo_ops->bat_neigh_cmp ||
@@ -694,7 +788,10 @@ __be32 batadv_skb_crc32(struct sk_buff *skb, u8 *payload_ptr)
 		consumed += len;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb_abort_seq_read(&st);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -702,7 +799,10 @@ __be32 batadv_skb_crc32(struct sk_buff *skb, u8 *payload_ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * batadv_tvlv_handler_free_ref - decrement the tvlv handler refcounter and
  *  possibly free it
@@ -1324,6 +1424,9 @@ bool batadv_vlan_ap_isola_get(struct batadv_priv *bat_priv, unsigned short vid)
 	return ap_isolation_enabled;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int batadv_param_set_ra(const char *val, const struct kernel_param *kp)
 {

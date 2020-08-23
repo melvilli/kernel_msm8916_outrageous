@@ -119,7 +119,10 @@ typedef struct sigaltstack {
 } stack_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _UAPI__ASM_AVR32_SIGNAL_H */

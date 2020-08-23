@@ -1,7 +1,11 @@
 * Maxim MAX8997 Voltage and Current Regulator
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The Maxim MAX8997 is a multi-function device which includes volatage and
+=======
+The Maxim MAX8997 is a multi-function device which includes voltage and
+>>>>>>> v3.18
 =======
 The Maxim MAX8997 is a multi-function device which includes voltage and
 >>>>>>> v3.18

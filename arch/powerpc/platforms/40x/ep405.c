@@ -50,7 +50,11 @@ static void __iomem *bcsr_regs;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __initdata struct of_device_id ep405_of_bus[] = {
+=======
+static const struct of_device_id ep405_of_bus[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id ep405_of_bus[] __initconst = {
 >>>>>>> v3.18

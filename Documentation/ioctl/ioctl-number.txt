@@ -73,6 +73,11 @@ Code  Seq#(hex)	Include File		Comments
 0x09	all	linux/raid/md_u.h
 0x10	00-0F	drivers/char/s390/vmcp.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+0x10	10-1F	arch/s390/include/uapi/sclp_ctl.h
+0x10	20-2F	arch/s390/include/uapi/asm/hypfs.h
+>>>>>>> v3.18
 =======
 0x10	10-1F	arch/s390/include/uapi/sclp_ctl.h
 0x10	20-2F	arch/s390/include/uapi/asm/hypfs.h
@@ -143,6 +148,10 @@ Code  Seq#(hex)	Include File		Comments
 'H'	C0-DF	net/bluetooth/bnep/bnep.h	conflict!
 'H'	F1	linux/hid-roccat.h	<mailto:erazor_de@users.sourceforge.net>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+'H'	F8-FA	sound/firewire.h
+>>>>>>> v3.18
 =======
 'H'	F8-FA	sound/firewire.h
 >>>>>>> v3.18
@@ -204,6 +213,10 @@ Code  Seq#(hex)	Include File		Comments
 'a'	all	linux/atm*.h, linux/sonet.h	ATM on linux
 					<http://lrcwww.epfl.ch/>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+'a'	00-0F	drivers/crypto/qat/qat_common/adf_cfg_common.h	conflict! qat driver
+>>>>>>> v3.18
 =======
 'a'	00-0F	drivers/crypto/qat/qat_common/adf_cfg_common.h	conflict! qat driver
 >>>>>>> v3.18
@@ -323,6 +336,10 @@ Code  Seq#(hex)	Include File		Comments
 0xB3	00	linux/mmc/ioctl.h
 0xC0	00-0F	linux/usb/iowarrior.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+0xCA	00-0F	uapi/misc/cxl.h
+>>>>>>> v3.18
 =======
 0xCA	00-0F	uapi/misc/cxl.h
 >>>>>>> v3.18

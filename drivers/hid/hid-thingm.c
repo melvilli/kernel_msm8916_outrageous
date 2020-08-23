@@ -2,7 +2,11 @@
  * ThingM blink(1) USB RGB LED driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2013 Savoir-faire Linux Inc.
+=======
+ * Copyright 2013-2014 Savoir-faire Linux Inc.
+>>>>>>> v3.18
 =======
  * Copyright 2013-2014 Savoir-faire Linux Inc.
 >>>>>>> v3.18
@@ -14,6 +18,7 @@
  */
 
 #include <linux/hid.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/leds.h>
 #include <linux/module.h>
@@ -56,6 +61,8 @@ static int blink1_send_command(struct blink1_data *data,
 	ret = data->hdev->hid_output_raw_report(data->hdev, buf,
 			BLINK1_CMD_SIZE, HID_FEATURE_REPORT);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/hidraw.h>
 #include <linux/leds.h>
 #include <linux/module.h>
@@ -127,11 +134,15 @@ static int thingm_send(struct thingm_device *tdev, u8 buf[REPORT_SIZE])
 
 	ret = hid_hw_raw_request(tdev->hdev, buf[0], buf, REPORT_SIZE,
 			HID_FEATURE_REPORT, HID_REQ_SET_REPORT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret < 0 ? ret : 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int blink1_update_color(struct blink1_data *data)
 {
@@ -319,6 +330,8 @@ stop:
 error:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static int thingm_recv(struct thingm_device *tdev, u8 buf[REPORT_SIZE])
 {
 	int ret;
@@ -514,11 +527,15 @@ stop:
 	hid_hw_stop(hdev);
 error:
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void thingm_remove(struct hid_device *hdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct blink1_data *data = hid_get_drvdata(hdev);
 	struct led_classdev *led = &data->led_cdev;
@@ -527,6 +544,8 @@ static void thingm_remove(struct hid_device *hdev)
 	led_classdev_unregister(led);
 	hid_hw_stop(hdev);
 =======
+=======
+>>>>>>> v3.18
 	struct thingm_device *tdev = hid_get_drvdata(hdev);
 	int i;
 
@@ -534,6 +553,9 @@ static void thingm_remove(struct hid_device *hdev)
 
 	for (i = 0; i < tdev->fwinfo->numrgb; ++i)
 		thingm_remove_rgb(tdev->rgb + i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -275,6 +275,7 @@ static struct mc13xxx_regulator mc13892_regulators[] = {
 	MC13892_FIXED_DEFINE(SWBST, SWITCHERS5, mc13892_swbst),
 	MC13892_FIXED_DEFINE(VIOHI, REGULATORMODE0, mc13892_viohi),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MC13892_DEFINE_REGU(VPLL, REGULATORMODE0, REGULATORSETTING0,	\
 		mc13892_vpll),
 	MC13892_DEFINE_REGU(VDIG, REGULATORMODE0, REGULATORSETTING0,	\
@@ -295,6 +296,8 @@ static struct mc13xxx_regulator mc13892_regulators[] = {
 		mc13892_vgen2),
 	MC13892_DEFINE_REGU(VGEN3, REGULATORMODE1, REGULATORSETTING0,	\
 =======
+=======
+>>>>>>> v3.18
 	MC13892_DEFINE_REGU(VPLL, REGULATORMODE0, REGULATORSETTING0,
 		mc13892_vpll),
 	MC13892_DEFINE_REGU(VDIG, REGULATORMODE0, REGULATORSETTING0,
@@ -314,6 +317,9 @@ static struct mc13xxx_regulator mc13892_regulators[] = {
 	MC13892_DEFINE_REGU(VGEN2, REGULATORMODE0, REGULATORSETTING0,
 		mc13892_vgen2),
 	MC13892_DEFINE_REGU(VGEN3, REGULATORMODE1, REGULATORSETTING0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mc13892_vgen3),
 	MC13892_FIXED_DEFINE(VUSB, USB1, mc13892_vusb),
@@ -499,8 +505,13 @@ static int mc13892_sw_regulator_set_voltage_sel(struct regulator_dev *rdev,
 
 	mc13xxx_lock(priv->mc13xxx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mc13xxx_reg_rmw(priv->mc13xxx, mc13892_regulators[id].vsel_reg, mask,
 			      reg_value);
+=======
+	ret = mc13xxx_reg_rmw(priv->mc13xxx, mc13892_regulators[id].vsel_reg,
+			      mask, reg_value);
+>>>>>>> v3.18
 =======
 	ret = mc13xxx_reg_rmw(priv->mc13xxx, mc13892_regulators[id].vsel_reg,
 			      mask, reg_value);
@@ -554,6 +565,10 @@ static unsigned int mc13892_vcam_get_mode(struct regulator_dev *rdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct regulator_ops mc13892_vcam_ops;
+>>>>>>> v3.18
 =======
 static struct regulator_ops mc13892_vcam_ops;
 >>>>>>> v3.18
@@ -614,17 +629,23 @@ static int mc13892_regulator_probe(struct platform_device *pdev)
 	mc13xxx_unlock(mc13892);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mc13892_regulators[MC13892_VCAM].desc.ops->set_mode
 		= mc13892_vcam_set_mode;
 	mc13892_regulators[MC13892_VCAM].desc.ops->get_mode
 		= mc13892_vcam_get_mode;
 =======
+=======
+>>>>>>> v3.18
 	/* update mc13892_vcam ops */
 	memcpy(&mc13892_vcam_ops, mc13892_regulators[MC13892_VCAM].desc.ops,
 						sizeof(struct regulator_ops));
 	mc13892_vcam_ops.set_mode = mc13892_vcam_set_mode,
 	mc13892_vcam_ops.get_mode = mc13892_vcam_get_mode,
 	mc13892_regulators[MC13892_VCAM].desc.ops = &mc13892_vcam_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mc13xxx_data = mc13xxx_parse_regulators_dt(pdev, mc13892_regulators,
@@ -652,6 +673,7 @@ static int mc13892_regulator_probe(struct platform_device *pdev)
 		config.of_node = node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->regulators[i] = regulator_register(desc, &config);
 		if (IS_ERR(priv->regulators[i])) {
 			dev_err(&pdev->dev, "failed to register regulator %s\n",
@@ -659,22 +681,30 @@ static int mc13892_regulator_probe(struct platform_device *pdev)
 			ret = PTR_ERR(priv->regulators[i]);
 			goto err;
 =======
+=======
+>>>>>>> v3.18
 		priv->regulators[i] = devm_regulator_register(&pdev->dev, desc,
 							      &config);
 		if (IS_ERR(priv->regulators[i])) {
 			dev_err(&pdev->dev, "failed to register regulator %s\n",
 				mc13892_regulators[i].desc.name);
 			return PTR_ERR(priv->regulators[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 err:
 	while (--i >= 0)
 		regulator_unregister(priv->regulators[i]);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -683,6 +713,7 @@ err_unlock:
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int mc13892_regulator_remove(struct platform_device *pdev)
 {
@@ -699,13 +730,18 @@ static int mc13892_regulator_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct platform_driver mc13892_regulator_driver = {
 	.driver	= {
 		.name	= "mc13892-regulator",
 		.owner	= THIS_MODULE,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= mc13892_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.probe	= mc13892_regulator_probe,

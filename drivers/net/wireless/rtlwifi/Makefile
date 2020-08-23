@@ -13,6 +13,7 @@ rtlwifi-objs	:=		\
 rtl8192c_common-objs +=		\
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifneq ($(CONFIG_PCI),)
 rtlwifi-objs	+= pci.o
 endif
@@ -21,11 +22,16 @@ ifneq ($(CONFIG_USB),)
 rtlwifi-objs	+= usb.o
 endif
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_RTLWIFI_PCI)	+= rtl_pci.o
 rtl_pci-objs	:=		pci.o
 
 obj-$(CONFIG_RTLWIFI_USB)	+= rtl_usb.o
 rtl_usb-objs	:=		usb.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 obj-$(CONFIG_RTL8192C_COMMON)	+= rtl8192c/
@@ -35,14 +41,20 @@ obj-$(CONFIG_RTL8192SE)		+= rtl8192se/
 obj-$(CONFIG_RTL8192DE)		+= rtl8192de/
 obj-$(CONFIG_RTL8723AE)		+= rtl8723ae/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_RTL8188EE)		+= rtl8188ee/
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_RTL8723BE)		+= rtl8723be/
 obj-$(CONFIG_RTL8188EE)		+= rtl8188ee/
 obj-$(CONFIG_RTLBTCOEXIST)	+= btcoexist/
 obj-$(CONFIG_RTL8723_COMMON)	+= rtl8723com/
 obj-$(CONFIG_RTL8821AE)		+= rtl8821ae/
 obj-$(CONFIG_RTL8192EE)		+= rtl8192ee/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ccflags-y += -D__CHECK_ENDIAN__

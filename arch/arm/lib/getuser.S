@@ -37,7 +37,11 @@ ENTRY(__get_user_1)
 1: TUSER(ldrb)	r2, [r0]
 	mov	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -61,7 +65,11 @@ rb	.req	r0
 #endif
 	mov	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -72,7 +80,11 @@ ENTRY(__get_user_4)
 4: TUSER(ldr)	r2, [r0]
 	mov	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -89,17 +101,23 @@ ENTRY(__get_user_8)
 #endif
 	mov	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
 ENDPROC(__get_user_8)
 
 #ifdef __ARMEB__
 ENTRY(__get_user_lo8)
 =======
+=======
+>>>>>>> v3.18
 	ret	lr
 ENDPROC(__get_user_8)
 
 #ifdef __ARMEB__
 ENTRY(__get_user_32t_8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	check_uaccess r0, 8, r1, r2, __get_user_bad
 #ifdef CONFIG_CPU_USE_DOMAINS
@@ -110,9 +128,12 @@ ENTRY(__get_user_32t_8)
 #endif
 	mov	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
 ENDPROC(__get_user_lo8)
 =======
+=======
+>>>>>>> v3.18
 	ret	lr
 ENDPROC(__get_user_32t_8)
 
@@ -145,6 +166,9 @@ ENTRY(__get_user_64t_4)
 	mov	r0, #0
 	ret	lr
 ENDPROC(__get_user_64t_4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -154,7 +178,11 @@ __get_user_bad:
 	mov	r2, #0
 	mov	r0, #-EFAULT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -171,11 +199,17 @@ ENDPROC(__get_user_bad8)
 #ifdef __ARMEB__
 	.long   7b, __get_user_bad
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.long	8b, __get_user_bad8
 	.long	9b, __get_user_bad8
 	.long	10b, __get_user_bad8
 	.long	11b, __get_user_bad8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 .popsection

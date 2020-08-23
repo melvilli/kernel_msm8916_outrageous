@@ -5,7 +5,11 @@
 #include <linux/signal.h>
 #include <asm/ptrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/cputime.h>
+=======
+#include <asm/idle.h>
+>>>>>>> v3.18
 =======
 #include <asm/idle.h>
 >>>>>>> v3.18
@@ -26,14 +30,20 @@ asmlinkage long do_syscall_trace_enter(struct pt_regs *regs);
 asmlinkage void do_syscall_trace_exit(struct pt_regs *regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void do_protection_exception(struct pt_regs *regs);
 void do_dat_exception(struct pt_regs *regs);
 void do_asce_exception(struct pt_regs *regs);
 =======
+=======
+>>>>>>> v3.18
 int alloc_vector_registers(struct task_struct *tsk);
 
 void do_protection_exception(struct pt_regs *regs);
 void do_dat_exception(struct pt_regs *regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void addressing_exception(struct pt_regs *regs);
@@ -56,6 +66,7 @@ void specification_exception(struct pt_regs *regs);
 void transaction_exception(struct pt_regs *regs);
 void translation_exception(struct pt_regs *regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void do_per_trap(struct pt_regs *regs);
 void syscall_trace(struct pt_regs *regs, int entryexit);
@@ -73,6 +84,8 @@ void die(struct pt_regs *regs, const char *str);
 
 void __init time_init(void);
 =======
+=======
+>>>>>>> v3.18
 void vector_exception(struct pt_regs *regs);
 
 void do_per_trap(struct pt_regs *regs);
@@ -94,12 +107,16 @@ void __init time_init(void);
 int pfn_is_nosave(unsigned long);
 void s390_early_resume(void);
 unsigned long prepare_ftrace_return(unsigned long parent, unsigned long ip);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct s390_mmap_arg_struct;
 struct fadvise64_64_args;
 struct old_sigaction;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 long sys_mmap2(struct s390_mmap_arg_struct __user  *arg);
 long sys_s390_ipc(uint call, int first, unsigned long second,
@@ -114,6 +131,10 @@ long sys_sigreturn(void);
 long sys_rt_sigreturn(void);
 long sys32_sigreturn(void);
 long sys32_rt_sigreturn(void);
+=======
+long sys_s390_personality(unsigned int personality);
+long sys_s390_runtime_instr(int command, int signum);
+>>>>>>> v3.18
 =======
 long sys_s390_personality(unsigned int personality);
 long sys_s390_runtime_instr(int command, int signum);

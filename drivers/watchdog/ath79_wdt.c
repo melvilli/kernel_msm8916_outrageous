@@ -24,7 +24,10 @@
 #include <linux/errno.h>
 #include <linux/fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>
@@ -270,7 +273,11 @@ static int ath79_wdt_probe(struct platform_device *pdev)
 		return PTR_ERR(wdt_clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = clk_enable(wdt_clk);
+=======
+	err = clk_prepare_enable(wdt_clk);
+>>>>>>> v3.18
 =======
 	err = clk_prepare_enable(wdt_clk);
 >>>>>>> v3.18
@@ -305,7 +312,11 @@ static int ath79_wdt_probe(struct platform_device *pdev)
 
 err_clk_disable:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(wdt_clk);
+=======
+	clk_disable_unprepare(wdt_clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(wdt_clk);
 >>>>>>> v3.18
@@ -316,7 +327,11 @@ static int ath79_wdt_remove(struct platform_device *pdev)
 {
 	misc_deregister(&ath79_wdt_miscdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(wdt_clk);
+=======
+	clk_disable_unprepare(wdt_clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(wdt_clk);
 >>>>>>> v3.18
@@ -355,6 +370,9 @@ MODULE_AUTHOR("Imre Kaloz <kaloz@openwrt.org");
 MODULE_LICENSE("GPL v2");
 MODULE_ALIAS("platform:" DRIVER_NAME);
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

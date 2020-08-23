@@ -24,6 +24,10 @@
 #include <asm/mach-types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18
@@ -70,10 +74,13 @@ static int h1940_startup(struct snd_pcm_substream *substream)
 	struct snd_pcm_runtime *runtime = substream->runtime;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	runtime->hw.rate_min = hw_rates.list[0];
 	runtime->hw.rate_max = hw_rates.list[hw_rates.count - 1];
 	runtime->hw.rates = SNDRV_PCM_RATE_KNOT;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return snd_pcm_hw_constraint_list(runtime, 0,
@@ -101,7 +108,11 @@ static int h1940_hw_params(struct snd_pcm_substream *substream,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&rtd->dev, "%s: rate %d is not supported\n",
+=======
+		dev_err(rtd->dev, "%s: rate %d is not supported\n",
+>>>>>>> v3.18
 =======
 		dev_err(rtd->dev, "%s: rate %d is not supported\n",
 >>>>>>> v3.18
@@ -191,12 +202,15 @@ static int h1940_uda1380_init(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_soc_codec *codec = rtd->codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 	int err;
 
 	snd_soc_dapm_enable_pin(dapm, "Headphone Jack");
 	snd_soc_dapm_enable_pin(dapm, "Speaker");
 	snd_soc_dapm_enable_pin(dapm, "Mic Jack");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -213,7 +227,10 @@ static int h1940_uda1380_init(struct snd_soc_pcm_runtime *rtd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int h1940_uda1380_card_remove(struct snd_soc_card *card)
 {
 	snd_soc_jack_free_gpios(&hp_jack, ARRAY_SIZE(hp_jack_gpios),
@@ -222,6 +239,9 @@ static int h1940_uda1380_card_remove(struct snd_soc_card *card)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* s3c24xx digital audio interface glue - connects codec <--> CPU */
 static struct snd_soc_dai_link h1940_uda1380_dai[] = {
@@ -241,6 +261,10 @@ static struct snd_soc_card h1940_asoc = {
 	.name = "h1940",
 	.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.remove = h1940_uda1380_card_remove,
+>>>>>>> v3.18
 =======
 	.remove = h1940_uda1380_card_remove,
 >>>>>>> v3.18
@@ -296,8 +320,11 @@ static void __exit h1940_exit(void)
 {
 	platform_device_unregister(s3c24xx_snd_device);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_jack_free_gpios(&hp_jack, ARRAY_SIZE(hp_jack_gpios),
 		hp_jack_gpios);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	gpio_free(S3C_GPIO_END + 9);

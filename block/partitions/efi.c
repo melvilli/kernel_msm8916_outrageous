@@ -26,6 +26,12 @@
  *
  * Changelog:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Mon August 5th, 2013 Davidlohr Bueso <davidlohr@hp.com>
+ * - detect hybrid MBRs, tighter pMBR checking & cleanups.
+ *
+>>>>>>> v3.18
 =======
  * Mon August 5th, 2013 Davidlohr Bueso <davidlohr@hp.com>
  * - detect hybrid MBRs, tighter pMBR checking & cleanups.
@@ -100,6 +106,10 @@
  *
  ************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kernel.h>
+>>>>>>> v3.18
 =======
 #include <linux/kernel.h>
 >>>>>>> v3.18
@@ -128,7 +138,11 @@ __setup("gpt", force_gpt_fn);
  * efi_crc32() - EFI version of crc32 function
  * @buf: buffer to calculate crc32 of
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @len - length of buf
+=======
+ * @len: length of buf
+>>>>>>> v3.18
 =======
  * @len: length of buf
 >>>>>>> v3.18
@@ -164,6 +178,7 @@ static u64 last_lba(struct block_device *bdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int
 pmbr_part_valid(struct partition *part)
 {
@@ -172,6 +187,8 @@ pmbr_part_valid(struct partition *part)
                 return 1;
         return 0;
 =======
+=======
+>>>>>>> v3.18
 static inline int pmbr_part_valid(gpt_mbr_record *part)
 {
 	if (part->os_type != EFI_PMBR_OSTYPE_EFI_GPT)
@@ -184,12 +201,16 @@ static inline int pmbr_part_valid(gpt_mbr_record *part)
 	return GPT_MBR_PROTECTIVE;
 invalid:
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * is_pmbr_valid(): test Protective MBR for validity
  * @mbr: pointer to a legacy mbr structure
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * Description: Returns 1 if PMBR is valid, 0 otherwise.
@@ -208,6 +229,8 @@ is_pmbr_valid(legacy_mbr *mbr)
                         return 1;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
  * @total_sectors: amount of sectors in the device
  *
  * Description: Checks for a valid protective or hybrid
@@ -274,21 +297,30 @@ check_hybrid:
 	}
 done:
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * read_lba(): Read bytes from disk, starting at given LBA
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @state
  * @lba
  * @buffer
  * @size_t
 =======
+=======
+>>>>>>> v3.18
  * @state: disk parsed partitions
  * @lba: the Logical Block Address of the partition table
  * @buffer: destination buffer
  * @count: bytes to read
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Description: Reads @count bytes from @state->bdev into @buffer.
@@ -324,8 +356,13 @@ static size_t read_lba(struct parsed_partitions *state,
 /**
  * alloc_read_gpt_entries(): reads partition entries from disk
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @state
  * @gpt - GPT header
+=======
+ * @state: disk parsed partitions
+ * @gpt: GPT header
+>>>>>>> v3.18
 =======
  * @state: disk parsed partitions
  * @gpt: GPT header
@@ -354,8 +391,12 @@ static gpt_entry *alloc_read_gpt_entries(struct parsed_partitions *state,
 
 	if (read_lba(state, le64_to_cpu(gpt->partition_entry_lba),
 <<<<<<< HEAD
+<<<<<<< HEAD
                      (u8 *) pte,
 		     count) < count) {
+=======
+			(u8 *) pte, count) < count) {
+>>>>>>> v3.18
 =======
 			(u8 *) pte, count) < count) {
 >>>>>>> v3.18
@@ -369,8 +410,13 @@ static gpt_entry *alloc_read_gpt_entries(struct parsed_partitions *state,
 /**
  * alloc_read_gpt_header(): Allocates GPT header, reads into it from disk
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @state
  * @lba is the Logical Block Address of the partition table
+=======
+ * @state: disk parsed partitions
+ * @lba: the Logical Block Address of the partition table
+>>>>>>> v3.18
 =======
  * @state: disk parsed partitions
  * @lba: the Logical Block Address of the partition table
@@ -402,15 +448,21 @@ static gpt_header *alloc_read_gpt_header(struct parsed_partitions *state,
 /**
  * is_gpt_valid() - tests one GPT header and PTEs for validity
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @state
  * @lba is the logical block address of the GPT header to test
  * @gpt is a GPT header ptr, filled on return.
  * @ptes is a PTEs ptr, filled on return.
 =======
+=======
+>>>>>>> v3.18
  * @state: disk parsed partitions
  * @lba: logical block address of the GPT header to test
  * @gpt: GPT header ptr, filled on return.
  * @ptes: PTEs ptr, filled on return.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Description: returns 1 if valid,  0 on error.
@@ -491,14 +543,20 @@ static int is_gpt_valid(struct parsed_partitions *state, u64 lba,
 		goto fail;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	if (le64_to_cpu((*gpt)->last_usable_lba) < le64_to_cpu((*gpt)->first_usable_lba)) {
 		pr_debug("GPT: last_usable_lba incorrect: %lld > %lld\n",
 			 (unsigned long long)le64_to_cpu((*gpt)->last_usable_lba),
 			 (unsigned long long)le64_to_cpu((*gpt)->first_usable_lba));
 		goto fail;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Check that sizeof_partition_entry has the correct value */
 	if (le32_to_cpu((*gpt)->sizeof_partition_entry) != sizeof(gpt_entry)) {
@@ -534,8 +592,13 @@ static int is_gpt_valid(struct parsed_partitions *state, u64 lba,
 /**
  * is_pte_valid() - tests one PTE for validity
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @pte is the pte to check
  * @lastlba is last lba of the disk
+=======
+ * @pte:pte to check
+ * @lastlba: last lba of the disk
+>>>>>>> v3.18
 =======
  * @pte:pte to check
  * @lastlba: last lba of the disk
@@ -556,14 +619,20 @@ is_pte_valid(const gpt_entry *pte, const u64 lastlba)
 /**
  * compare_gpts() - Search disk for valid GPT headers and PTEs
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @pgpt is the primary GPT header
  * @agpt is the alternate GPT header
  * @lastlba is the last LBA number
 =======
+=======
+>>>>>>> v3.18
  * @pgpt: primary GPT header
  * @agpt: alternate GPT header
  * @lastlba: last LBA number
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Description: Returns nothing.  Sanity checks pgpt and agpt fields
  * and prints warnings on discrepancies.
@@ -577,9 +646,14 @@ compare_gpts(gpt_header *pgpt, gpt_header *agpt, u64 lastlba)
 		return;
 	if (le64_to_cpu(pgpt->my_lba) != le64_to_cpu(agpt->alternate_lba)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "GPT:Primary header LBA != Alt. header alternate_lba\n");
 		printk(KERN_WARNING "GPT:%lld != %lld\n",
+=======
+		pr_warn("GPT:Primary header LBA != Alt. header alternate_lba\n");
+		pr_warn("GPT:%lld != %lld\n",
+>>>>>>> v3.18
 =======
 		pr_warn("GPT:Primary header LBA != Alt. header alternate_lba\n");
 		pr_warn("GPT:%lld != %lld\n",
@@ -590,9 +664,14 @@ compare_gpts(gpt_header *pgpt, gpt_header *agpt, u64 lastlba)
 	}
 	if (le64_to_cpu(pgpt->alternate_lba) != le64_to_cpu(agpt->my_lba)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "GPT:Primary header alternate_lba != Alt. header my_lba\n");
 		printk(KERN_WARNING "GPT:%lld != %lld\n",
+=======
+		pr_warn("GPT:Primary header alternate_lba != Alt. header my_lba\n");
+		pr_warn("GPT:%lld != %lld\n",
+>>>>>>> v3.18
 =======
 		pr_warn("GPT:Primary header alternate_lba != Alt. header my_lba\n");
 		pr_warn("GPT:%lld != %lld\n",
@@ -604,8 +683,13 @@ compare_gpts(gpt_header *pgpt, gpt_header *agpt, u64 lastlba)
 	if (le64_to_cpu(pgpt->first_usable_lba) !=
             le64_to_cpu(agpt->first_usable_lba)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "GPT:first_usable_lbas don't match.\n");
 		printk(KERN_WARNING "GPT:%lld != %lld\n",
+=======
+		pr_warn("GPT:first_usable_lbas don't match.\n");
+		pr_warn("GPT:%lld != %lld\n",
+>>>>>>> v3.18
 =======
 		pr_warn("GPT:first_usable_lbas don't match.\n");
 		pr_warn("GPT:%lld != %lld\n",
@@ -617,8 +701,13 @@ compare_gpts(gpt_header *pgpt, gpt_header *agpt, u64 lastlba)
 	if (le64_to_cpu(pgpt->last_usable_lba) !=
             le64_to_cpu(agpt->last_usable_lba)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "GPT:last_usable_lbas don't match.\n");
 		printk(KERN_WARNING "GPT:%lld != %lld\n",
+=======
+		pr_warn("GPT:last_usable_lbas don't match.\n");
+		pr_warn("GPT:%lld != %lld\n",
+>>>>>>> v3.18
 =======
 		pr_warn("GPT:last_usable_lbas don't match.\n");
 		pr_warn("GPT:%lld != %lld\n",
@@ -629,7 +718,11 @@ compare_gpts(gpt_header *pgpt, gpt_header *agpt, u64 lastlba)
 	}
 	if (efi_guidcmp(pgpt->disk_guid, agpt->disk_guid)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "GPT:disk_guids don't match.\n");
+=======
+		pr_warn("GPT:disk_guids don't match.\n");
+>>>>>>> v3.18
 =======
 		pr_warn("GPT:disk_guids don't match.\n");
 >>>>>>> v3.18
@@ -638,7 +731,11 @@ compare_gpts(gpt_header *pgpt, gpt_header *agpt, u64 lastlba)
 	if (le32_to_cpu(pgpt->num_partition_entries) !=
             le32_to_cpu(agpt->num_partition_entries)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "GPT:num_partition_entries don't match: "
+=======
+		pr_warn("GPT:num_partition_entries don't match: "
+>>>>>>> v3.18
 =======
 		pr_warn("GPT:num_partition_entries don't match: "
 >>>>>>> v3.18
@@ -650,8 +747,12 @@ compare_gpts(gpt_header *pgpt, gpt_header *agpt, u64 lastlba)
 	if (le32_to_cpu(pgpt->sizeof_partition_entry) !=
             le32_to_cpu(agpt->sizeof_partition_entry)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "GPT:sizeof_partition_entry values don't match: "
+=======
+		pr_warn("GPT:sizeof_partition_entry values don't match: "
+>>>>>>> v3.18
 =======
 		pr_warn("GPT:sizeof_partition_entry values don't match: "
 >>>>>>> v3.18
@@ -663,8 +764,12 @@ compare_gpts(gpt_header *pgpt, gpt_header *agpt, u64 lastlba)
 	if (le32_to_cpu(pgpt->partition_entry_array_crc32) !=
             le32_to_cpu(agpt->partition_entry_array_crc32)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "GPT:partition_entry_array_crc32 values don't match: "
+=======
+		pr_warn("GPT:partition_entry_array_crc32 values don't match: "
+>>>>>>> v3.18
 =======
 		pr_warn("GPT:partition_entry_array_crc32 values don't match: "
 >>>>>>> v3.18
@@ -675,9 +780,14 @@ compare_gpts(gpt_header *pgpt, gpt_header *agpt, u64 lastlba)
 	}
 	if (le64_to_cpu(pgpt->alternate_lba) != lastlba) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "GPT:Primary header thinks Alt. header is not at the end of the disk.\n");
 		printk(KERN_WARNING "GPT:%lld != %lld\n",
+=======
+		pr_warn("GPT:Primary header thinks Alt. header is not at the end of the disk.\n");
+		pr_warn("GPT:%lld != %lld\n",
+>>>>>>> v3.18
 =======
 		pr_warn("GPT:Primary header thinks Alt. header is not at the end of the disk.\n");
 		pr_warn("GPT:%lld != %lld\n",
@@ -689,9 +799,14 @@ compare_gpts(gpt_header *pgpt, gpt_header *agpt, u64 lastlba)
 
 	if (le64_to_cpu(agpt->my_lba) != lastlba) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "GPT:Alternate GPT header not at the end of the disk.\n");
 		printk(KERN_WARNING "GPT:%lld != %lld\n",
+=======
+		pr_warn("GPT:Alternate GPT header not at the end of the disk.\n");
+		pr_warn("GPT:%lld != %lld\n",
+>>>>>>> v3.18
 =======
 		pr_warn("GPT:Alternate GPT header not at the end of the disk.\n");
 		pr_warn("GPT:%lld != %lld\n",
@@ -703,8 +818,12 @@ compare_gpts(gpt_header *pgpt, gpt_header *agpt, u64 lastlba)
 
 	if (error_found)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "GPT: Use GNU Parted to correct GPT errors.\n");
+=======
+		pr_warn("GPT: Use GNU Parted to correct GPT errors.\n");
+>>>>>>> v3.18
 =======
 		pr_warn("GPT: Use GNU Parted to correct GPT errors.\n");
 >>>>>>> v3.18
@@ -714,14 +833,20 @@ compare_gpts(gpt_header *pgpt, gpt_header *agpt, u64 lastlba)
 /**
  * find_valid_gpt() - Search disk for valid GPT headers and PTEs
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @state
  * @gpt is a GPT header ptr, filled on return.
  * @ptes is a PTEs ptr, filled on return.
 =======
+=======
+>>>>>>> v3.18
  * @state: disk parsed partitions
  * @gpt: GPT header ptr, filled on return.
  * @ptes: PTEs ptr, filled on return.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Description: Returns 1 if valid, 0 on error.
  * If valid, returns pointers to newly allocated GPT header and PTEs.
@@ -741,6 +866,10 @@ static int find_valid_gpt(struct parsed_partitions *state, gpt_header **gpt,
 	gpt_entry *pptes = NULL, *aptes = NULL;
 	legacy_mbr *legacymbr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sector_t total_sectors = i_size_read(state->bdev->bd_inode) >> 9;
+>>>>>>> v3.18
 =======
 	sector_t total_sectors = i_size_read(state->bdev->bd_inode) >> 9;
 >>>>>>> v3.18
@@ -751,6 +880,7 @@ static int find_valid_gpt(struct parsed_partitions *state, gpt_header **gpt,
 
 	lastlba = last_lba(state->bdev);
         if (!force_gpt) {
+<<<<<<< HEAD
 <<<<<<< HEAD
                 /* This will be added to the EFI Spec. per Intel after v1.02. */
                 legacymbr = kzalloc(sizeof (*legacymbr), GFP_KERNEL);
@@ -764,6 +894,8 @@ static int find_valid_gpt(struct parsed_partitions *state, gpt_header **gpt,
                         goto fail;
         }
 =======
+=======
+>>>>>>> v3.18
 		/* This will be added to the EFI Spec. per Intel after v1.02. */
 		legacymbr = kzalloc(sizeof(*legacymbr), GFP_KERNEL);
 		if (!legacymbr)
@@ -780,6 +912,9 @@ static int find_valid_gpt(struct parsed_partitions *state, gpt_header **gpt,
 			 good_pmbr == GPT_MBR_PROTECTIVE ?
 						"protective" : "hybrid");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	good_pgpt = is_gpt_valid(state, GPT_PRIMARY_PARTITION_TABLE_LBA,
@@ -804,11 +939,16 @@ static int find_valid_gpt(struct parsed_partitions *state, gpt_header **gpt,
                 kfree(agpt);
                 kfree(aptes);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (!good_agpt) {
                         printk(KERN_WARNING 
 			       "Alternate GPT is invalid, "
                                "using primary GPT.\n");
                 }
+=======
+		if (!good_agpt)
+                        pr_warn("Alternate GPT is invalid, using primary GPT.\n");
+>>>>>>> v3.18
 =======
 		if (!good_agpt)
                         pr_warn("Alternate GPT is invalid, using primary GPT.\n");
@@ -821,8 +961,12 @@ static int find_valid_gpt(struct parsed_partitions *state, gpt_header **gpt,
                 kfree(pgpt);
                 kfree(pptes);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 printk(KERN_WARNING 
                        "Primary GPT is invalid, using alternate GPT.\n");
+=======
+		pr_warn("Primary GPT is invalid, using alternate GPT.\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Primary GPT is invalid, using alternate GPT.\n");
 >>>>>>> v3.18
@@ -842,7 +986,11 @@ static int find_valid_gpt(struct parsed_partitions *state, gpt_header **gpt,
 /**
  * efi_partition(struct parsed_partitions *state)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @state
+=======
+ * @state: disk parsed partitions
+>>>>>>> v3.18
 =======
  * @state: disk parsed partitions
 >>>>>>> v3.18
@@ -892,8 +1040,12 @@ int efi_partition(struct parsed_partitions *state)
 
 		/* If this is a RAID volume, tell md */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!efi_guidcmp(ptes[i].partition_type_guid,
 				 PARTITION_LINUX_RAID_GUID))
+=======
+		if (!efi_guidcmp(ptes[i].partition_type_guid, PARTITION_LINUX_RAID_GUID))
+>>>>>>> v3.18
 =======
 		if (!efi_guidcmp(ptes[i].partition_type_guid, PARTITION_LINUX_RAID_GUID))
 >>>>>>> v3.18
@@ -904,8 +1056,13 @@ int efi_partition(struct parsed_partitions *state)
 
 		/* Naively convert UTF16-LE to 7 bits. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		label_max = min(sizeof(info->volname) - 1,
 				sizeof(ptes[i].partition_name));
+=======
+		label_max = min(ARRAY_SIZE(info->volname) - 1,
+				ARRAY_SIZE(ptes[i].partition_name));
+>>>>>>> v3.18
 =======
 		label_max = min(ARRAY_SIZE(info->volname) - 1,
 				ARRAY_SIZE(ptes[i].partition_name));

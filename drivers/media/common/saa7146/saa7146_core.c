@@ -365,6 +365,12 @@ static int saa7146_init_one(struct pci_dev *pci, const struct pci_device_id *ent
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* create a nice device name */
+	sprintf(dev->name, "saa7146 (%d)", saa7146_num);
+
+>>>>>>> v3.18
 =======
 	/* create a nice device name */
 	sprintf(dev->name, "saa7146 (%d)", saa7146_num);
@@ -418,7 +424,11 @@ static int saa7146_init_one(struct pci_dev *pci, const struct pci_device_id *ent
 
 	/* request an interrupt for the saa7146 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = request_irq(pci->irq, interrupt_hw, IRQF_SHARED | IRQF_DISABLED,
+=======
+	err = request_irq(pci->irq, interrupt_hw, IRQF_SHARED,
+>>>>>>> v3.18
 =======
 	err = request_irq(pci->irq, interrupt_hw, IRQF_SHARED,
 >>>>>>> v3.18
@@ -431,6 +441,7 @@ static int saa7146_init_one(struct pci_dev *pci, const struct pci_device_id *ent
 	err = -ENOMEM;
 
 	/* get memory for various stuff */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev->d_rps0.cpu_addr = pci_alloc_consistent(pci, SAA7146_RPS_MEM,
 						    &dev->d_rps0.dma_handle);
@@ -456,6 +467,8 @@ static int saa7146_init_one(struct pci_dev *pci, const struct pci_device_id *ent
 	sprintf(dev->name, "saa7146 (%d)", saa7146_num);
 
 =======
+=======
+>>>>>>> v3.18
 	dev->d_rps0.cpu_addr = pci_zalloc_consistent(pci, SAA7146_RPS_MEM,
 						     &dev->d_rps0.dma_handle);
 	if (!dev->d_rps0.cpu_addr)
@@ -473,6 +486,9 @@ static int saa7146_init_one(struct pci_dev *pci, const struct pci_device_id *ent
 
 	/* the rest + print status message */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_info("found saa7146 @ mem %p (revision %d, irq %d) (0x%04x,0x%04x)\n",
 		dev->mem, dev->revision, pci->irq,
@@ -555,8 +571,11 @@ static void saa7146_remove_one(struct pci_dev *pdev)
 
 	dev->ext->detach(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Zero the PCI drvdata after use. */
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

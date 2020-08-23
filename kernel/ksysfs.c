@@ -19,6 +19,12 @@
 #include <linux/sched.h>
 #include <linux/capability.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+
+#include <linux/rcupdate.h>	/* rcu_expedited */
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 
@@ -41,6 +47,10 @@ static ssize_t uevent_seqnum_show(struct kobject *kobj,
 KERNEL_ATTR_RO(uevent_seqnum);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_UEVENT_HELPER
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_UEVENT_HELPER
 >>>>>>> v3.18
@@ -64,7 +74,11 @@ static ssize_t uevent_helper_store(struct kobject *kobj,
 }
 KERNEL_ATTR_RW(uevent_helper);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -128,7 +142,11 @@ static ssize_t kexec_crash_size_store(struct kobject *kobj,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &cnt))
+=======
+	if (kstrtoul(buf, 0, &cnt))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &cnt))
 >>>>>>> v3.18
@@ -145,7 +163,11 @@ static ssize_t vmcoreinfo_show(struct kobject *kobj,
 	return sprintf(buf, "%lx %x\n",
 		       paddr_vmcoreinfo_note(),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       (unsigned int)vmcoreinfo_max_size);
+=======
+		       (unsigned int)sizeof(vmcoreinfo_note));
+>>>>>>> v3.18
 =======
 		       (unsigned int)sizeof(vmcoreinfo_note));
 >>>>>>> v3.18
@@ -183,8 +205,13 @@ KERNEL_ATTR_RW(rcu_expedited);
  * Make /sys/kernel/notes give the raw contents of our kernel .notes section.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const void __start_notes __attribute__((weak));
 extern const void __stop_notes __attribute__((weak));
+=======
+extern const void __start_notes __weak;
+extern const void __stop_notes __weak;
+>>>>>>> v3.18
 =======
 extern const void __start_notes __weak;
 extern const void __stop_notes __weak;
@@ -214,7 +241,13 @@ static struct attribute * kernel_attrs[] = {
 	&fscaps_attr.attr,
 	&uevent_seqnum_attr.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&uevent_helper_attr.attr,
+=======
+#ifdef CONFIG_UEVENT_HELPER
+	&uevent_helper_attr.attr,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_UEVENT_HELPER
 	&uevent_helper_attr.attr,

@@ -263,6 +263,7 @@ __copy_from_user (void *to, const void __user *from, unsigned long count)
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long
 copy_from_user(void *to, const void __user *from, unsigned long n)
 {
@@ -273,6 +274,8 @@ copy_from_user(void *to, const void __user *from, unsigned long n)
 	return n;
 }
 =======
+=======
+>>>>>>> v3.18
 #define copy_from_user(to, from, n)							\
 ({											\
 	void *__cu_to = (to);								\
@@ -284,6 +287,9 @@ copy_from_user(void *to, const void __user *from, unsigned long n)
 		__cu_len = __copy_user((__force void __user *) __cu_to, __cu_from, __cu_len);	\
 	__cu_len;									\
 })
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define __copy_in_user(to, from, size)	__copy_user((to), (from), (size))

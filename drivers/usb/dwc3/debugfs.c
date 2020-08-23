@@ -7,6 +7,7 @@
  *	    Sebastian Andrzej Siewior <bigeasy@linutronix.de>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -39,6 +40,8 @@
 
 #include <linux/module.h>
 =======
+=======
+>>>>>>> v3.18
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2  of
  * the License as published by the Free Software Foundation.
@@ -49,6 +52,9 @@
  * GNU General Public License for more details.
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/slab.h>
@@ -74,9 +80,12 @@
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ep_event_rate(ev, c, p, dt)	\
 	((dt) ? ((c.ev - p.ev) * (MSEC_PER_SEC)) / (dt) : 0)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct debugfs_reg32 dwc3_regs[] = {
@@ -251,7 +260,10 @@ static const struct debugfs_reg32 dwc3_regs[] = {
 
 	dump_register(GHWPARAMS8),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dump_register(GFLADJ),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dump_register(DCFG),
@@ -441,7 +453,11 @@ static ssize_t dwc3_mode_write(struct file *file,
 	unsigned long		flags;
 	u32			mode = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char			buf[32] = {0};
+=======
+	char			buf[32];
+>>>>>>> v3.18
 =======
 	char			buf[32];
 >>>>>>> v3.18
@@ -525,7 +541,11 @@ static ssize_t dwc3_testmode_write(struct file *file,
 	unsigned long		flags;
 	u32			testmode = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char			buf[32] = {0};
+=======
+	char			buf[32];
+>>>>>>> v3.18
 =======
 	char			buf[32];
 >>>>>>> v3.18
@@ -636,7 +656,11 @@ static ssize_t dwc3_link_state_write(struct file *file,
 	unsigned long		flags;
 	enum dwc3_link_state	state = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char			buf[32] = {0};
+=======
+	char			buf[32];
+>>>>>>> v3.18
 =======
 	char			buf[32];
 >>>>>>> v3.18
@@ -674,6 +698,7 @@ static const struct file_operations dwc3_link_state_fops = {
 	.release		= single_release,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ep_num;
 static ssize_t dwc3_store_ep_num(struct file *file, const char __user *ubuf,
@@ -1265,6 +1290,8 @@ const struct file_operations dwc3_gadget_dbg_events_fops = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int dwc3_debugfs_init(struct dwc3 *dwc)
 {
 	struct dentry		*root;
@@ -1322,6 +1349,7 @@ int dwc3_debugfs_init(struct dwc3 *dwc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file = debugfs_create_file("trbs", S_IRUGO | S_IWUSR, root,
 			dwc, &dwc3_ep_trb_list_fops);
 	if (!file) {
@@ -1357,6 +1385,8 @@ int dwc3_debugfs_init(struct dwc3 *dwc)
 		goto err1;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -53,7 +57,11 @@
 ACPI_MODULE_NAME("rsdumpinfo")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(ACPI_DEBUG_OUTPUT) || defined(ACPI_DEBUGGER)
+=======
+#if defined(ACPI_DEBUG_OUTPUT) || defined(ACPI_DISASSEMBLER) || defined(ACPI_DEBUGGER)
+>>>>>>> v3.18
 =======
 #if defined(ACPI_DEBUG_OUTPUT) || defined(ACPI_DISASSEMBLER) || defined(ACPI_DEBUGGER)
 >>>>>>> v3.18

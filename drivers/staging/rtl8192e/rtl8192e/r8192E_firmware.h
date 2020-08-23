@@ -44,11 +44,14 @@ enum desc_packet_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum firmware_source {
 	FW_SOURCE_IMG_FILE = 0,
 	FW_SOURCE_HEADER_FILE = 1,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum firmware_status {

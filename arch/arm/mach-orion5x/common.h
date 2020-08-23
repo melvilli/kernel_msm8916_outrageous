@@ -8,7 +8,10 @@ struct mv643xx_eth_platform_data;
 struct mv_sata_platform_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ORION_MBUS_PCIE_MEM_TARGET    0x04
 #define ORION_MBUS_PCIE_MEM_ATTR      0x59
 #define ORION_MBUS_PCIE_IO_TARGET     0x04
@@ -26,6 +29,9 @@ struct mv_sata_platform_data;
 #define ORION_MBUS_SRAM_TARGET        0x09
 #define ORION_MBUS_SRAM_ATTR          0x00
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Basic Orion init functions used early by machine-setup.
@@ -68,6 +74,7 @@ struct pci_bus *orion5x_pci_sys_scan_bus(int nr, struct pci_sys_data *sys);
 int orion5x_pci_map_irq(const struct pci_dev *dev, u8 slot, u8 pin);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* board init functions for boards not fully converted to fdt */
 #ifdef CONFIG_MACH_EDMINI_V2_DT
 void edmini_v2_init(void);
@@ -80,6 +87,8 @@ struct tag;
 extern void __init tag_fixup_mem32(struct tag *, char **, struct meminfo *);
 
 =======
+=======
+>>>>>>> v3.18
 struct tag;
 extern void __init tag_fixup_mem32(struct tag *, char **);
 
@@ -89,6 +98,9 @@ extern void mss2_init(void);
 static inline void mss2_init(void) {}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*****************************************************************************
  * Helpers to access Orion registers

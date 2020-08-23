@@ -3,6 +3,10 @@ TARGETS += cpu-hotplug
 TARGETS += efivarfs
 TARGETS += kcmp
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+TARGETS += memfd
+>>>>>>> v3.18
 =======
 TARGETS += memfd
 >>>>>>> v3.18
@@ -12,8 +16,11 @@ TARGETS += mount
 TARGETS += net
 TARGETS += ptrace
 <<<<<<< HEAD
+<<<<<<< HEAD
 TARGETS += vm
 =======
+=======
+>>>>>>> v3.18
 TARGETS += timers
 TARGETS += vm
 TARGETS += powerpc
@@ -24,6 +31,9 @@ TARGETS += ftrace
 
 TARGETS_HOTPLUG = cpu-hotplug
 TARGETS_HOTPLUG += memory-hotplug
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 all:
@@ -37,7 +47,10 @@ run_tests: all
 	done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 hotplug:
 	for TARGET in $(TARGETS_HOTPLUG); do \
 		make -C $$TARGET; \
@@ -53,6 +66,9 @@ clean_hotplug:
 		make -C $$TARGET clean; \
 	done;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 clean:
 	for TARGET in $(TARGETS); do \

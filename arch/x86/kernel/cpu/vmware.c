@@ -94,7 +94,11 @@ static void __init vmware_platform_setup(void)
  * specific string when running under VMware hypervisor.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool __init vmware_platform(void)
+=======
+static uint32_t __init vmware_platform(void)
+>>>>>>> v3.18
 =======
 static uint32_t __init vmware_platform(void)
 >>>>>>> v3.18
@@ -107,6 +111,7 @@ static uint32_t __init vmware_platform(void)
 		      &hyper_vendor_id[1], &hyper_vendor_id[2]);
 		if (!memcmp(hyper_vendor_id, "VMwareVMware", 12))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return true;
 	} else if (dmi_available && dmi_name_in_serial("VMware") &&
 		   __vmware_platform())
@@ -114,12 +119,17 @@ static uint32_t __init vmware_platform(void)
 
 	return false;
 =======
+=======
+>>>>>>> v3.18
 			return CPUID_VMWARE_INFO_LEAF;
 	} else if (dmi_available && dmi_name_in_serial("VMware") &&
 		   __vmware_platform())
 		return 1;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -136,7 +146,11 @@ static uint32_t __init vmware_platform(void)
  * reliable virtual TSC that is suitable for timekeeping.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit vmware_set_cpu_features(struct cpuinfo_x86 *c)
+=======
+static void vmware_set_cpu_features(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void vmware_set_cpu_features(struct cpuinfo_x86 *c)
 >>>>>>> v3.18

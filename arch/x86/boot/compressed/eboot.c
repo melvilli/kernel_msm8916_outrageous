@@ -20,6 +20,7 @@
 static efi_system_table_t *sys_table;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void efi_char16_printk(efi_char16_t *str)
 {
 	struct efi_simple_text_output_protocol *out;
@@ -230,6 +231,8 @@ static void low_free(unsigned long size, unsigned long addr)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static struct efi_config *efi_early;
 
 #define efi_call_early(f, ...)						\
@@ -498,6 +501,9 @@ void efi_char16_printk(efi_system_table_t *table, efi_char16_t *str)
 
 #include "../../../../drivers/firmware/efi/libstub/efi-stub-helper.c"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void find_bits(unsigned long mask, u8 *pos, u8 *size)
 {
@@ -522,6 +528,7 @@ static void find_bits(unsigned long mask, u8 *pos, u8 *size)
 	*size = len;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static efi_status_t setup_efi_pci(struct boot_params *params)
 {
@@ -566,6 +573,8 @@ static efi_status_t setup_efi_pci(struct boot_params *params)
 		status = efi_call_phys3(sys_table->boottime->handle_protocol,
 					h, &pci_proto, &pci);
 =======
+=======
+>>>>>>> v3.18
 static efi_status_t
 __setup_efi_pci32(efi_pci_io_protocol_32 *pci, struct pci_setup_rom **__rom)
 {
@@ -653,6 +662,9 @@ setup_efi_pci32(struct boot_params *params, void **pci_handle,
 
 		status = efi_call_early(handle_protocol, h,
 					&pci_proto, (void **)&pci);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (status != EFI_SUCCESS)
@@ -661,6 +673,7 @@ setup_efi_pci32(struct boot_params *params, void **pci_handle,
 		if (!pci)
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_X86_64
 		status = efi_call_phys4(pci->attributes, pci,
@@ -820,6 +833,8 @@ static efi_status_t setup_gop(struct screen_info *si, efi_guid_t *proto,
 	si->pages = 1;
 
 =======
+=======
+>>>>>>> v3.18
 		status = __setup_efi_pci32(pci, &rom);
 		if (status != EFI_SUCCESS)
 			continue;
@@ -992,6 +1007,9 @@ static void
 setup_pixel_info(struct screen_info *si, u32 pixels_per_scan_line,
 		 struct efi_pixel_bitmask pixel_info, int pixel_format)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pixel_format == PIXEL_RGB_RESERVED_8BIT_PER_COLOR) {
 		si->lfb_depth = 32;
@@ -1038,7 +1056,10 @@ setup_pixel_info(struct screen_info *si, u32 pixels_per_scan_line,
 		si->rsvd_pos = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }
 
 static efi_status_t
@@ -1136,16 +1157,22 @@ setup_gop32(struct screen_info *si, efi_guid_t *proto,
 	si->pages = 1;
 
 	setup_pixel_info(si, pixels_per_scan_line, pixel_info, pixel_format);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	si->lfb_size = si->lfb_linelength * si->lfb_height;
 
 	si->capabilities |= VIDEO_CAPABILITY_SKIP_QUIRKS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 free_handle:
 	efi_call_phys1(sys_table->boottime->free_pool, gop_handle);
 =======
+=======
+>>>>>>> v3.18
 out:
 	return status;
 }
@@ -1250,11 +1277,15 @@ setup_gop64(struct screen_info *si, efi_guid_t *proto,
 
 	si->capabilities |= VIDEO_CAPABILITY_SKIP_QUIRKS;
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * See if we have Universal Graphics Adapter (UGA) protocol
  */
@@ -1315,6 +1346,8 @@ static efi_status_t setup_uga(struct screen_info *si, efi_guid_t *uga_proto,
 
 	if (!first_uga)
 =======
+=======
+>>>>>>> v3.18
  * See if we have Graphics Output Protocol
  */
 static efi_status_t setup_gop(struct screen_info *si, efi_guid_t *proto,
@@ -1464,6 +1497,9 @@ static efi_status_t setup_uga(struct screen_info *si, efi_guid_t *uga_proto,
 		status = setup_uga32(uga_handle, size, &width, &height);
 
 	if (!width && !height)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto free_handle;
 
@@ -1484,9 +1520,14 @@ static efi_status_t setup_uga(struct screen_info *si, efi_guid_t *uga_proto,
 	si->rsvd_pos = 24;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 free_handle:
 	efi_call_phys1(sys_table->boottime->free_pool, uga_handle);
+=======
+free_handle:
+	efi_call_early(free_pool, uga_handle);
+>>>>>>> v3.18
 =======
 free_handle:
 	efi_call_early(free_pool, uga_handle);
@@ -1509,9 +1550,15 @@ void setup_graphics(struct boot_params *boot_params)
 
 	size = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = efi_call_phys5(sys_table->boottime->locate_handle,
 				EFI_LOCATE_BY_PROTOCOL, &graphics_proto,
 				NULL, &size, gop_handle);
+=======
+	status = efi_call_early(locate_handle,
+				EFI_LOCATE_BY_PROTOCOL,
+				&graphics_proto, NULL, &size, gop_handle);
+>>>>>>> v3.18
 =======
 	status = efi_call_early(locate_handle,
 				EFI_LOCATE_BY_PROTOCOL,
@@ -1523,9 +1570,15 @@ void setup_graphics(struct boot_params *boot_params)
 	if (status != EFI_SUCCESS) {
 		size = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = efi_call_phys5(sys_table->boottime->locate_handle,
 					EFI_LOCATE_BY_PROTOCOL, &uga_proto,
 					NULL, &size, uga_handle);
+=======
+		status = efi_call_early(locate_handle,
+					EFI_LOCATE_BY_PROTOCOL,
+					&uga_proto, NULL, &size, uga_handle);
+>>>>>>> v3.18
 =======
 		status = efi_call_early(locate_handle,
 					EFI_LOCATE_BY_PROTOCOL,
@@ -1536,6 +1589,7 @@ void setup_graphics(struct boot_params *boot_params)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct initrd {
 	efi_file_handle_t *handle;
@@ -1776,6 +1830,8 @@ fail:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Because the x86 boot code expects to be passed a boot_params we
  * need to create one ourselves (usually the bootloader would create
@@ -1785,7 +1841,11 @@ fail:
  * returned boot_params.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct boot_params *make_boot_params(void *handle, efi_system_table_t *_table)
+=======
+struct boot_params *make_boot_params(struct efi_config *c)
+>>>>>>> v3.18
 =======
 struct boot_params *make_boot_params(struct efi_config *c)
 >>>>>>> v3.18
@@ -1796,6 +1856,7 @@ struct boot_params *make_boot_params(struct efi_config *c)
 	struct setup_header *hdr;
 	struct efi_info *efi;
 	efi_loaded_image_t *image;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void *options;
 	u32 load_options_size;
@@ -1809,6 +1870,8 @@ struct boot_params *make_boot_params(struct efi_config *c)
 
 	sys_table = _table;
 =======
+=======
+>>>>>>> v3.18
 	void *options, *handle;
 	efi_guid_t proto = LOADED_IMAGE_PROTOCOL_GUID;
 	int options_size = 0;
@@ -1823,12 +1886,16 @@ struct boot_params *make_boot_params(struct efi_config *c)
 	efi_early = c;
 	sys_table = (efi_system_table_t *)(unsigned long)efi_early->table;
 	handle = (void *)(unsigned long)efi_early->image_handle;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Check if we were booted by the EFI firmware */
 	if (sys_table->hdr.signature != EFI_SYSTEM_TABLE_SIGNATURE)
 		return NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = efi_call_phys3(sys_table->boottime->handle_protocol,
 				handle, &proto, (void *)&image);
@@ -1841,6 +1908,8 @@ struct boot_params *make_boot_params(struct efi_config *c)
 	if (status != EFI_SUCCESS) {
 		efi_printk("Failed to alloc lowmem for boot params\n");
 =======
+=======
+>>>>>>> v3.18
 	if (efi_early->is64)
 		setup_boot_services64(efi_early);
 	else
@@ -1857,6 +1926,9 @@ struct boot_params *make_boot_params(struct efi_config *c)
 			       (unsigned long *)&boot_params);
 	if (status != EFI_SUCCESS) {
 		efi_printk(sys_table, "Failed to alloc lowmem for boot params\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 	}
@@ -1882,6 +1954,7 @@ struct boot_params *make_boot_params(struct efi_config *c)
 	hdr->type_of_loader = 0x21;
 
 	/* Convert unicode cmdline to ascii */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	options = image->load_options;
 	load_options_size = image->load_options_size / 2; /* ASCII */
@@ -1918,10 +1991,15 @@ struct boot_params *make_boot_params(struct efi_config *c)
 
 	hdr->cmd_line_ptr = cmdline;
 =======
+=======
+>>>>>>> v3.18
 	cmdline_ptr = efi_convert_cmdline(sys_table, image, &options_size);
 	if (!cmdline_ptr)
 		goto fail;
 	hdr->cmd_line_ptr = (unsigned long)cmdline_ptr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hdr->ramdisk_image = 0;
@@ -1932,6 +2010,7 @@ struct boot_params *make_boot_params(struct efi_config *c)
 
 	memset(sdt, 0, sizeof(*sdt));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = handle_ramdisks(image, hdr);
 	if (status != EFI_SUCCESS)
@@ -2024,6 +2103,8 @@ get_map:
 
 		d = (efi_memory_desc_t *)(m + (i * desc_size));
 =======
+=======
+>>>>>>> v3.18
 	status = efi_parse_options(cmdline_ptr);
 	if (status != EFI_SUCCESS)
 		goto fail2;
@@ -2098,6 +2179,9 @@ static efi_status_t setup_e820(struct boot_params *params,
 		unsigned long m = efi->efi_memmap;
 
 		d = (efi_memory_desc_t *)(m + (i * efi->efi_memdesc_size));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		switch (d->type) {
 		case EFI_RESERVED_TYPE:
@@ -2135,6 +2219,7 @@ static efi_status_t setup_e820(struct boot_params *params,
 
 		/* Merge adjacent mappings */
 		if (prev && prev->type == e820_type &&
+<<<<<<< HEAD
 <<<<<<< HEAD
 		    (prev->addr + prev->size) == d->phys_addr)
 			prev->size += d->num_pages << 12;
@@ -2189,6 +2274,8 @@ static efi_status_t relocate_kernel(struct setup_header *hdr)
 	hdr->code32_start = (__u32)start;
 
 =======
+=======
+>>>>>>> v3.18
 		    (prev->addr + prev->size) == d->phys_addr) {
 			prev->size += d->num_pages << 12;
 			continue;
@@ -2331,6 +2418,9 @@ get_map:
 
 free_mem_map:
 	efi_call_early(free_pool, mem_map);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
@@ -2340,22 +2430,31 @@ free_mem_map:
  * on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct boot_params *efi_main(void *handle, efi_system_table_t *_table,
 			     struct boot_params *boot_params)
 {
 	struct desc_ptr *gdt, *idt;
 =======
+=======
+>>>>>>> v3.18
 struct boot_params *efi_main(struct efi_config *c,
 			     struct boot_params *boot_params)
 {
 	struct desc_ptr *gdt = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	efi_loaded_image_t *image;
 	struct setup_header *hdr = &boot_params->hdr;
 	efi_status_t status;
 	struct desc_struct *desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	void *handle;
 	efi_system_table_t *_table;
 	bool is64;
@@ -2365,6 +2464,9 @@ struct boot_params *efi_main(struct efi_config *c,
 	_table = (efi_system_table_t *)(unsigned long)efi_early->table;
 	handle = (void *)(unsigned long)efi_early->image_handle;
 	is64 = efi_early->is64;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sys_table = _table;
@@ -2374,17 +2476,24 @@ struct boot_params *efi_main(struct efi_config *c,
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (is64)
 		setup_boot_services64(efi_early);
 	else
 		setup_boot_services32(efi_early);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	setup_graphics(boot_params);
 
 	setup_efi_pci(boot_params);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = efi_call_phys3(sys_table->boottime->allocate_pool,
 				EFI_LOADER_DATA, sizeof(*gdt),
@@ -2392,15 +2501,21 @@ struct boot_params *efi_main(struct efi_config *c,
 	if (status != EFI_SUCCESS) {
 		efi_printk("Failed to alloc mem for gdt structure\n");
 =======
+=======
+>>>>>>> v3.18
 	status = efi_call_early(allocate_pool, EFI_LOADER_DATA,
 				sizeof(*gdt), (void **)&gdt);
 	if (status != EFI_SUCCESS) {
 		efi_printk(sys_table, "Failed to alloc mem for gdt structure\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto fail;
 	}
 
 	gdt->size = 0x800;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = low_alloc(gdt->size, 8, (unsigned long *)&gdt->address);
 	if (status != EFI_SUCCESS) {
@@ -2420,6 +2535,8 @@ struct boot_params *efi_main(struct efi_config *c,
 	idt->address = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	status = efi_low_alloc(sys_table, gdt->size, 8,
 			   (unsigned long *)&gdt->address);
 	if (status != EFI_SUCCESS) {
@@ -2427,12 +2544,16 @@ struct boot_params *efi_main(struct efi_config *c,
 		goto fail;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * If the kernel isn't already loaded at the preferred load
 	 * address, relocate it.
 	 */
 	if (hdr->pref_address != hdr->code32_start) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		status = relocate_kernel(hdr);
 
@@ -2444,6 +2565,8 @@ struct boot_params *efi_main(struct efi_config *c,
 	if (status != EFI_SUCCESS)
 		goto fail;
 =======
+=======
+>>>>>>> v3.18
 		unsigned long bzimage_addr = hdr->code32_start;
 		status = efi_relocate_kernel(sys_table, &bzimage_addr,
 					     hdr->init_size, hdr->init_size,
@@ -2463,6 +2586,9 @@ struct boot_params *efi_main(struct efi_config *c,
 		efi_printk(sys_table, "exit_boot() failed!\n");
 		goto fail;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset((char *)gdt->address, 0x0, gdt->size);
@@ -2519,6 +2645,7 @@ struct boot_params *efi_main(struct efi_config *c,
 #endif /* CONFIG_X86_64 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asm volatile ("lidt %0" : : "m" (*idt));
 	asm volatile ("lgdt %0" : : "m" (*gdt));
 
@@ -2527,12 +2654,17 @@ struct boot_params *efi_main(struct efi_config *c,
 	return boot_params;
 fail:
 =======
+=======
+>>>>>>> v3.18
 	asm volatile("cli");
 	asm volatile ("lgdt %0" : : "m" (*gdt));
 
 	return boot_params;
 fail:
 	efi_printk(sys_table, "efi_main() failed!\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NULL;
 }

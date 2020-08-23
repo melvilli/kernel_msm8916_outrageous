@@ -34,7 +34,11 @@ extern void __exit i2o_pci_exit(void);
 
 /* device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct device_attribute i2o_device_attrs[];
+=======
+extern const struct attribute_group *i2o_device_groups[];
+>>>>>>> v3.18
 =======
 extern const struct attribute_group *i2o_device_groups[];
 >>>>>>> v3.18

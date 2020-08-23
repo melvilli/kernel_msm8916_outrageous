@@ -26,7 +26,11 @@
 #include <linux/sfi.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mrst.h>
+=======
+#include <asm/intel-mid.h>
+>>>>>>> v3.18
 =======
 #include <asm/intel-mid.h>
 >>>>>>> v3.18
@@ -63,6 +67,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IPC_BASE_ADDR     0xFF11C000	/* IPC1 base register address */
 #define IPC_MAX_ADDR      0x100		/* Maximum IPC regisers */
 #define IPC_WWBUF_SIZE    20		/* IPC Write buffer Size */
@@ -70,6 +75,8 @@
 #define IPC_I2C_BASE      0xFF12B000	/* I2C control register base address */
 #define IPC_I2C_MAX_ADDR  0x10		/* Maximum I2C regisers */
 =======
+=======
+>>>>>>> v3.18
 #define IPC_WWBUF_SIZE    20		/* IPC Write buffer Size */
 #define IPC_RWBUF_SIZE    20		/* IPC Read buffer Size */
 #define IPC_IOC	          0x100		/* IPC command register IOC bit */
@@ -112,6 +119,9 @@ static struct intel_scu_ipc_pdata_t intel_scu_ipc_tangier_pdata = {
 	.i2c_len = 0x10,
 	.irq_mode = 0,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ipc_probe(struct pci_dev *dev, const struct pci_device_id *id);
@@ -122,6 +132,11 @@ struct intel_scu_ipc_dev {
 	void __iomem *ipc_base;
 	void __iomem *i2c_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct completion cmd_complete;
+	u8 irq_mode;
+>>>>>>> v3.18
 =======
 	struct completion cmd_complete;
 	u8 irq_mode;
@@ -153,11 +168,17 @@ static DEFINE_MUTEX(ipclock); /* lock used to prevent multiple call to SCU */
 static inline void ipc_command(u32 cmd) /* Send ipc command */
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ipcdev.irq_mode) {
 		reinit_completion(&ipcdev.cmd_complete);
 		writel(cmd | IPC_IOC, ipcdev.ipc_base);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel(cmd, ipcdev.ipc_base);
 }
@@ -218,7 +239,10 @@ static inline int busy_loop(void) /* Wait till scu status is busy */
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Wait till ipc ioc interrupt is received or timeout in 3 HZ */
 static inline int ipc_wait_for_interrupt(void)
 {
@@ -243,6 +267,9 @@ int intel_scu_ipc_check_status(void)
 	return ipcdev.irq_mode ? ipc_wait_for_interrupt() : busy_loop();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Read/Write power control(PMIC in Langwell, MSIC in PenWell) registers */
 static int pwr_reg_rdwr(u16 *addr, u8 *data, u32 count, u32 op, u32 id)
@@ -285,8 +312,13 @@ static int pwr_reg_rdwr(u16 *addr, u8 *data, u32 count, u32 op, u32 id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = busy_loop();
 	if (id == IPC_CMD_PCNTRL_R) { /* Read rbuf */
+=======
+	err = intel_scu_ipc_check_status();
+	if (!err && id == IPC_CMD_PCNTRL_R) { /* Read rbuf */
+>>>>>>> v3.18
 =======
 	err = intel_scu_ipc_check_status();
 	if (!err && id == IPC_CMD_PCNTRL_R) { /* Read rbuf */
@@ -485,7 +517,11 @@ int intel_scu_ipc_simple_command(int cmd, int sub)
 	}
 	ipc_command(sub << 12 | cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = busy_loop();
+=======
+	err = intel_scu_ipc_check_status();
+>>>>>>> v3.18
 =======
 	err = intel_scu_ipc_check_status();
 >>>>>>> v3.18
@@ -523,17 +559,23 @@ int intel_scu_ipc_command(int cmd, int sub, u32 *in, int inlen,
 
 	ipc_command((inlen << 16) | (sub << 12) | cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = busy_loop();
 
 	for (i = 0; i < outlen; i++)
 		*out++ = ipc_data_readl(4 * i);
 =======
+=======
+>>>>>>> v3.18
 	err = intel_scu_ipc_check_status();
 
 	if (!err) {
 		for (i = 0; i < outlen; i++)
 			*out++ = ipc_data_readl(4 * i);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&ipclock);
@@ -598,6 +640,12 @@ EXPORT_SYMBOL(intel_scu_ipc_i2c_cntrl);
 static irqreturn_t ioc(int irq, void *dev_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ipcdev.irq_mode)
+		complete(&ipcdev.cmd_complete);
+
+>>>>>>> v3.18
 =======
 	if (ipcdev.irq_mode)
 		complete(&ipcdev.cmd_complete);
@@ -618,6 +666,10 @@ static int ipc_probe(struct pci_dev *dev, const struct pci_device_id *id)
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct intel_scu_ipc_pdata_t *pdata;
+>>>>>>> v3.18
 =======
 	struct intel_scu_ipc_pdata_t *pdata;
 >>>>>>> v3.18
@@ -627,12 +679,18 @@ static int ipc_probe(struct pci_dev *dev, const struct pci_device_id *id)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ipcdev.pdev = pci_dev_get(dev);
 =======
+=======
+>>>>>>> v3.18
 	pdata = (struct intel_scu_ipc_pdata_t *)id->driver_data;
 
 	ipcdev.pdev = pci_dev_get(dev);
 	ipcdev.irq_mode = pdata->irq_mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = pci_enable_device(dev);
@@ -648,6 +706,7 @@ static int ipc_probe(struct pci_dev *dev, const struct pci_device_id *id)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(dev->irq, ioc, 0, "intel_scu_ipc", &ipcdev))
 		return -EBUSY;
 
@@ -657,6 +716,8 @@ static int ipc_probe(struct pci_dev *dev, const struct pci_device_id *id)
 
 	ipcdev.i2c_base = ioremap_nocache(IPC_I2C_BASE, IPC_I2C_MAX_ADDR);
 =======
+=======
+>>>>>>> v3.18
 	init_completion(&ipcdev.cmd_complete);
 
 	if (request_irq(dev->irq, ioc, 0, "intel_scu_ipc", &ipcdev))
@@ -667,6 +728,9 @@ static int ipc_probe(struct pci_dev *dev, const struct pci_device_id *id)
 		return -ENOMEM;
 
 	ipcdev.i2c_base = ioremap_nocache(pdata->i2c_base, pdata->i2c_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ipcdev.i2c_base) {
 		iounmap(ipcdev.ipc_base);
@@ -700,10 +764,13 @@ static void ipc_remove(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pci_ids) = {
 	{PCI_DEVICE(PCI_VENDOR_ID_INTEL, 0x082a)},
 	{ 0,}
 =======
+=======
+>>>>>>> v3.18
 static const struct pci_device_id pci_ids[] = {
 	{
 		PCI_VDEVICE(INTEL, PCI_DEVICE_ID_LINCROFT),
@@ -720,6 +787,9 @@ static const struct pci_device_id pci_ids[] = {
 	}, {
 		0,
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 MODULE_DEVICE_TABLE(pci, pci_ids);
@@ -735,7 +805,11 @@ static struct pci_driver ipc_driver = {
 static int __init intel_scu_ipc_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform = mrst_identify_cpu();
+=======
+	platform = intel_mid_identify_cpu();
+>>>>>>> v3.18
 =======
 	platform = intel_mid_identify_cpu();
 >>>>>>> v3.18

@@ -71,7 +71,10 @@ static struct inet_protosw udplite4_protosw = {
 	.prot		=  &udplite_prot,
 	.ops		=  &inet_dgram_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.no_check	=  0,		/* must checksum (RFC 3828) */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.flags		=  INET_PROTOSW_PERMANENT,

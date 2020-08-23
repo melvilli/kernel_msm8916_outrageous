@@ -201,7 +201,11 @@ static int __init init_acpi_pm_clocksource(void)
 				break;
 			printk(KERN_INFO "PM-Timer had inconsistent results:"
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       " 0x%#llx, 0x%#llx - aborting.\n",
+=======
+			       " %#llx, %#llx - aborting.\n",
+>>>>>>> v3.18
 =======
 			       " %#llx, %#llx - aborting.\n",
 >>>>>>> v3.18
@@ -212,7 +216,11 @@ static int __init init_acpi_pm_clocksource(void)
 		if (i == ACPI_PM_READ_CHECKS) {
 			printk(KERN_INFO "PM-Timer failed consistency check "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       " (0x%#llx) - aborting.\n", value1);
+=======
+			       " (%#llx) - aborting.\n", value1);
+>>>>>>> v3.18
 =======
 			       " (%#llx) - aborting.\n", value1);
 >>>>>>> v3.18

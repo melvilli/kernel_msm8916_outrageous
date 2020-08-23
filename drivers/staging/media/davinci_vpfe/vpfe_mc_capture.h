@@ -88,8 +88,11 @@ struct vpfe_fh {
 	/* Indicates whether this file handle is doing IO */
 	u8 io_allowed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Used to keep track priority of this instance */
 	enum v4l2_priority prio;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

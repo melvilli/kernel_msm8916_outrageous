@@ -792,7 +792,11 @@ static int pn_res_seq_show(struct seq_file *seq, void *v)
 		struct sock *sk = *psk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(seq, "%02X %5d %lu",
+=======
+		seq_printf(seq, "%02X %5u %lu",
+>>>>>>> v3.18
 =======
 		seq_printf(seq, "%02X %5u %lu",
 >>>>>>> v3.18

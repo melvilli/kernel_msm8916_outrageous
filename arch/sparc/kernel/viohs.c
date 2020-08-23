@@ -427,7 +427,10 @@ static int process_dreg_info(struct vio_driver_state *vio,
 		goto send_nack;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* v1.6 and higher, ACK with desired, supported mode, or NACK */
 	if (vio_version_after_eq(vio, 1, 6)) {
 		if (!(pkt->options & VIO_TX_DRING))
@@ -435,6 +438,9 @@ static int process_dreg_info(struct vio_driver_state *vio,
 		pkt->options = VIO_TX_DRING;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BUG_ON(vio->desc_buf);
 
@@ -464,14 +470,20 @@ static int process_dreg_info(struct vio_driver_state *vio,
 	pkt->dring_ident = ++dr->ident;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	viodbg(HS, "SEND DRING_REG ACK ident[%llx]\n",
 	       (unsigned long long) pkt->dring_ident);
 =======
+=======
+>>>>>>> v3.18
 	viodbg(HS, "SEND DRING_REG ACK ident[%llx] "
 	       "ndesc[%u] dsz[%u] opt[0x%x] ncookies[%u]\n",
 	       (unsigned long long) pkt->dring_ident,
 	       pkt->num_descr, pkt->descr_size, pkt->options,
 	       pkt->num_cookies);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	len = (sizeof(*pkt) +
@@ -733,7 +745,11 @@ int vio_ldc_alloc(struct vio_driver_state *vio,
 	cfg.rx_irq = vio->vdev->rx_irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp = ldc_alloc(vio->vdev->channel_id, &cfg, event_arg);
+=======
+	lp = ldc_alloc(vio->vdev->channel_id, &cfg, event_arg, vio->name);
+>>>>>>> v3.18
 =======
 	lp = ldc_alloc(vio->vdev->channel_id, &cfg, event_arg, vio->name);
 >>>>>>> v3.18
@@ -769,7 +785,11 @@ void vio_port_up(struct vio_driver_state *vio)
 	err = 0;
 	if (state == LDC_STATE_INIT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = ldc_bind(vio->lp, vio->name);
+=======
+		err = ldc_bind(vio->lp);
+>>>>>>> v3.18
 =======
 		err = ldc_bind(vio->lp);
 >>>>>>> v3.18

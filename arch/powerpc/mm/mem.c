@@ -129,7 +129,12 @@ int arch_add_memory(int nid, u64 start, u64 size)
 
 	/* this should work for most non-highmem platforms */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zone = pgdata->node_zones;
+=======
+	zone = pgdata->node_zones +
+		zone_for_memory(nid, start, size, 0);
+>>>>>>> v3.18
 =======
 	zone = pgdata->node_zones +
 		zone_for_memory(nid, start, size, 0);
@@ -145,10 +150,13 @@ int arch_remove_memory(u64 start, u64 size)
 	unsigned long nr_pages = size >> PAGE_SHIFT;
 	struct zone *zone;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	zone = page_zone(pfn_to_page(start_pfn));
 	return __remove_pages(zone, start_pfn, nr_pages);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	zone = page_zone(pfn_to_page(start_pfn));
@@ -157,6 +165,9 @@ int arch_remove_memory(u64 start, u64 size)
 		ret = ppc_md.remove_memory(start, size);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
@@ -226,7 +237,11 @@ void __init do_init_bootmem(void)
 	 * memblock_regions
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memblock_set_node(0, (phys_addr_t)ULLONG_MAX, 0);
+=======
+	memblock_set_node(0, (phys_addr_t)ULLONG_MAX, &memblock.memory, 0);
+>>>>>>> v3.18
 =======
 	memblock_set_node(0, (phys_addr_t)ULLONG_MAX, &memblock.memory, 0);
 >>>>>>> v3.18
@@ -275,7 +290,10 @@ static int __init mark_nonram_nosave(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else /* CONFIG_NEED_MULTIPLE_NODES */
 static int __init mark_nonram_nosave(void)
 {
@@ -330,6 +348,9 @@ int dma_pfn_limit_to_zone(u64 pfn_limit)
 
 	return -EPERM;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -340,7 +361,11 @@ void __init paging_init(void)
 	unsigned long long total_ram = memblock_phys_mem_size();
 	phys_addr_t top_of_ram = memblock_end_of_DRAM();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long max_zone_pfns[MAX_NR_ZONES];
+=======
+	enum zone_type top_zone;
+>>>>>>> v3.18
 =======
 	enum zone_type top_zone;
 >>>>>>> v3.18
@@ -366,6 +391,7 @@ void __init paging_init(void)
 	printk(KERN_DEBUG "Memory hole size: %ldMB\n",
 	       (long int)((top_of_ram - total_ram) >> 20));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(max_zone_pfns, 0, sizeof(max_zone_pfns));
 #ifdef CONFIG_HIGHMEM
 	max_zone_pfns[ZONE_DMA] = lowmem_end_addr >> PAGE_SHIFT;
@@ -374,6 +400,8 @@ void __init paging_init(void)
 	max_zone_pfns[ZONE_DMA] = top_of_ram >> PAGE_SHIFT;
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_HIGHMEM
 	top_zone = ZONE_HIGHMEM;
@@ -384,11 +412,15 @@ void __init paging_init(void)
 
 	limit_zone_pfn(top_zone, top_of_ram >> PAGE_SHIFT);
 	zone_limits_final = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_area_init_nodes(max_zone_pfns);
 
 	mark_nonram_nosave();
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif /* ! CONFIG_NEED_MULTIPLE_NODES */
 
@@ -402,6 +434,8 @@ void __init mem_init(void)
 	struct page *page;
 	unsigned long reservedpages = 0, codesize, initsize, datasize, bsssize;
 =======
+=======
+>>>>>>> v3.18
 
 static void __init register_page_bootmem_info(void)
 {
@@ -418,12 +452,16 @@ void __init mem_init(void)
 	 * a 4-bit field for slices.
 	 */
 	BUILD_BUG_ON(MMU_PAGE_COUNT > 16);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_SWIOTLB
 	swiotlb_init(0);
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	num_physpages = memblock_phys_mem_size() >> PAGE_SHIFT;
 	high_memory = (void *) __va(max_low_pfn * PAGE_SIZE);
@@ -454,10 +492,15 @@ void __init mem_init(void)
 	initsize = (unsigned long)&__init_end - (unsigned long)&__init_begin;
 	bsssize = (unsigned long)&__bss_stop - (unsigned long)&__bss_start;
 =======
+=======
+>>>>>>> v3.18
 	register_page_bootmem_info();
 	high_memory = (void *) __va(max_low_pfn * PAGE_SIZE);
 	set_max_mapnr(max_pfn);
 	free_all_bootmem();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_HIGHMEM
@@ -469,6 +512,7 @@ void __init mem_init(void)
 			phys_addr_t paddr = (phys_addr_t)pfn << PAGE_SHIFT;
 			struct page *page = pfn_to_page(pfn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (memblock_is_reserved(paddr))
 				continue;
 			free_highmem_page(page);
@@ -476,6 +520,11 @@ void __init mem_init(void)
 		}
 		printk(KERN_DEBUG "High memory: %luk\n",
 		       totalhigh_pages << (PAGE_SHIFT-10));
+=======
+			if (!memblock_is_reserved(paddr))
+				free_highmem_page(page);
+		}
+>>>>>>> v3.18
 =======
 			if (!memblock_is_reserved(paddr))
 				free_highmem_page(page);
@@ -494,6 +543,7 @@ void __init mem_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Memory: %luk/%luk available (%luk kernel code, "
 	       "%luk reserved, %luk data, %luk bss, %luk init)\n",
 		nr_free_pages() << (PAGE_SHIFT-10),
@@ -504,6 +554,9 @@ void __init mem_init(void)
 		bsssize >> 10,
 		initsize >> 10);
 
+=======
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 =======
 	mem_init_print_info(NULL);
 >>>>>>> v3.18
@@ -537,7 +590,11 @@ void free_initmem(void)
 void __init free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, -1, "initrd");
 >>>>>>> v3.18
@@ -642,11 +699,17 @@ void update_mmu_cache(struct vm_area_struct *vma, unsigned long address,
 {
 #ifdef CONFIG_PPC_STD_MMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We don't need to worry about _PAGE_PRESENT here because we are
 	 * called with either mm->page_table_lock held or ptl lock held
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long access = 0, trap;
 
@@ -682,7 +745,11 @@ void update_mmu_cache(struct vm_area_struct *vma, unsigned long address,
  * (eg kdump).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int add_system_ram_resources(void)
+=======
+static int __init add_system_ram_resources(void)
+>>>>>>> v3.18
 =======
 static int __init add_system_ram_resources(void)
 >>>>>>> v3.18
@@ -702,7 +769,11 @@ static int __init add_system_ram_resources(void)
 			res->start = base;
 			res->end = base + size - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			res->flags = IORESOURCE_MEM;
+=======
+			res->flags = IORESOURCE_MEM | IORESOURCE_BUSY;
+>>>>>>> v3.18
 =======
 			res->flags = IORESOURCE_MEM | IORESOURCE_BUSY;
 >>>>>>> v3.18

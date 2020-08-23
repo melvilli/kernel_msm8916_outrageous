@@ -19,6 +19,10 @@
 #include <linux/of_fdt.h>
 #include <asm/machdep.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/pgtable.h>
+>>>>>>> v3.18
 =======
 #include <asm/pgtable.h>
 >>>>>>> v3.18
@@ -49,7 +53,10 @@ static void __init qemu_e500_setup_arch(void)
 	fsl_pci_assign_primary();
 	swiotlb_detect_4g();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_FSL_PCI) && defined(CONFIG_ZONE_DMA32)
 	/*
 	 * Inbound windows don't cover the full lower 4 GiB
@@ -59,6 +66,9 @@ static void __init qemu_e500_setup_arch(void)
 	 */
 	limit_zone_pfn(ZONE_DMA32, 1UL << (31 - PAGE_SHIFT));
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mpc85xx_smp_init();
 }
@@ -83,6 +93,10 @@ define_machine(qemu_e500) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18

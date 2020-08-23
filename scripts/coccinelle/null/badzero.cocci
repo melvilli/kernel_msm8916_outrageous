@@ -11,7 +11,11 @@
 // Copyright: (C) 2012 Gilles Muller, INRIA/LiP6.  GPLv2.
 // URL: http://coccinelle.lip6.fr/
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Comments:
+=======
+// Comments: Requires Coccinelle version 1.0.0-rc20 or later
+>>>>>>> v3.18
 =======
 // Comments: Requires Coccinelle version 1.0.0-rc20 or later
 >>>>>>> v3.18
@@ -24,6 +28,10 @@ virtual report
 
 @initialize:ocaml@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+@@
+>>>>>>> v3.18
 =======
 @@
 >>>>>>> v3.18

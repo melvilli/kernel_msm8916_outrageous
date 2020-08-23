@@ -33,7 +33,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ptrace.h>
@@ -71,7 +74,11 @@
 
 static const char *if_names[] = { "auto", "10baseT", "10base2"};
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+static u32 pcnet_msg_enable;
+>>>>>>> v3.18
 =======
 static u32 pcnet_msg_enable;
 >>>>>>> v3.18
@@ -120,17 +127,23 @@ static void pcnet_detach(struct pcmcia_device *p_dev);
 /*====================================================================*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct hw_info_t {
     u_int	offset;
     u_char	a0, a1, a2;
     u_int	flags;
 } hw_info_t;
 =======
+=======
+>>>>>>> v3.18
 struct hw_info {
     u_int	offset;
     u_char	a0, a1, a2;
     u_int	flags;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DELAY_OUTPUT	0x01
@@ -149,7 +162,11 @@ struct hw_info {
 #define MII_PHYID_REG2		0x03
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static hw_info_t hw_info[] = {
+=======
+static struct hw_info hw_info[] = {
+>>>>>>> v3.18
 =======
 static struct hw_info hw_info[] = {
 >>>>>>> v3.18
@@ -217,17 +234,23 @@ static struct hw_info hw_info[] = {
 #define NR_INFO		ARRAY_SIZE(hw_info)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static hw_info_t default_info = { 0, 0, 0, 0, 0 };
 static hw_info_t dl10019_info = { 0, 0, 0, 0, IS_DL10019|HAS_MII };
 static hw_info_t dl10022_info = { 0, 0, 0, 0, IS_DL10022|HAS_MII };
 
 typedef struct pcnet_dev_t {
 =======
+=======
+>>>>>>> v3.18
 static struct hw_info default_info = { 0, 0, 0, 0, 0 };
 static struct hw_info dl10019_info = { 0, 0, 0, 0, IS_DL10019|HAS_MII };
 static struct hw_info dl10022_info = { 0, 0, 0, 0, IS_DL10022|HAS_MII };
 
 struct pcnet_dev {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct pcmcia_device	*p_dev;
     u_int		flags;
@@ -239,6 +262,7 @@ struct pcnet_dev {
     u_short		link_status;
     u_long		mii_reset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } pcnet_dev_t;
 
 static inline pcnet_dev_t *PRIV(struct net_device *dev)
@@ -246,12 +270,17 @@ static inline pcnet_dev_t *PRIV(struct net_device *dev)
 	char *p = netdev_priv(dev);
 	return (pcnet_dev_t *)(p + sizeof(struct ei_device));
 =======
+=======
+>>>>>>> v3.18
 };
 
 static inline struct pcnet_dev *PRIV(struct net_device *dev)
 {
 	char *p = netdev_priv(dev);
 	return (struct pcnet_dev *)(p + sizeof(struct ei_device));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -275,7 +304,11 @@ static const struct net_device_ops pcnet_netdev_ops = {
 static int pcnet_probe(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     pcnet_dev_t *info;
+=======
+    struct pcnet_dev *info;
+>>>>>>> v3.18
 =======
     struct pcnet_dev *info;
 >>>>>>> v3.18
@@ -285,7 +318,11 @@ static int pcnet_probe(struct pcmcia_device *link)
 
     /* Create new ethernet device */
 <<<<<<< HEAD
+<<<<<<< HEAD
     dev = __alloc_ei_netdev(sizeof(pcnet_dev_t));
+=======
+    dev = __alloc_ei_netdev(sizeof(struct pcnet_dev));
+>>>>>>> v3.18
 =======
     dev = __alloc_ei_netdev(sizeof(struct pcnet_dev));
 >>>>>>> v3.18
@@ -322,7 +359,11 @@ static void pcnet_detach(struct pcmcia_device *link)
 ======================================================================*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static hw_info_t *get_hwinfo(struct pcmcia_device *link)
+=======
+static struct hw_info *get_hwinfo(struct pcmcia_device *link)
+>>>>>>> v3.18
 =======
 static struct hw_info *get_hwinfo(struct pcmcia_device *link)
 >>>>>>> v3.18
@@ -367,7 +408,11 @@ static struct hw_info *get_hwinfo(struct pcmcia_device *link)
 ======================================================================*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static hw_info_t *get_prom(struct pcmcia_device *link)
+=======
+static struct hw_info *get_prom(struct pcmcia_device *link)
+>>>>>>> v3.18
 =======
 static struct hw_info *get_prom(struct pcmcia_device *link)
 >>>>>>> v3.18
@@ -425,7 +470,11 @@ static struct hw_info *get_prom(struct pcmcia_device *link)
 ======================================================================*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static hw_info_t *get_dl10019(struct pcmcia_device *link)
+=======
+static struct hw_info *get_dl10019(struct pcmcia_device *link)
+>>>>>>> v3.18
 =======
 static struct hw_info *get_dl10019(struct pcmcia_device *link)
 >>>>>>> v3.18
@@ -451,7 +500,11 @@ static struct hw_info *get_dl10019(struct pcmcia_device *link)
 ======================================================================*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static hw_info_t *get_ax88190(struct pcmcia_device *link)
+=======
+static struct hw_info *get_ax88190(struct pcmcia_device *link)
+>>>>>>> v3.18
 =======
 static struct hw_info *get_ax88190(struct pcmcia_device *link)
 >>>>>>> v3.18
@@ -486,7 +539,11 @@ static struct hw_info *get_ax88190(struct pcmcia_device *link)
 ======================================================================*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static hw_info_t *get_hwired(struct pcmcia_device *link)
+=======
+static struct hw_info *get_hwired(struct pcmcia_device *link)
+>>>>>>> v3.18
 =======
 static struct hw_info *get_hwired(struct pcmcia_device *link)
 >>>>>>> v3.18
@@ -555,6 +612,7 @@ static int pcnet_confcheck(struct pcmcia_device *p_dev, void *priv_data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static hw_info_t *pcnet_try_config(struct pcmcia_device *link,
 				   int *has_shmem, int try)
 {
@@ -562,12 +620,17 @@ static hw_info_t *pcnet_try_config(struct pcmcia_device *link,
 	hw_info_t *local_hw_info;
 	pcnet_dev_t *info = PRIV(dev);
 =======
+=======
+>>>>>>> v3.18
 static struct hw_info *pcnet_try_config(struct pcmcia_device *link,
 					int *has_shmem, int try)
 {
 	struct net_device *dev = link->priv;
 	struct hw_info *local_hw_info;
 	struct pcnet_dev *info = PRIV(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int priv = try;
 	int ret;
@@ -628,16 +691,22 @@ static int pcnet_config(struct pcmcia_device *link)
 {
     struct net_device *dev = link->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
     pcnet_dev_t *info = PRIV(dev);
     int start_pg, stop_pg, cm_offset;
     int has_shmem = 0;
     hw_info_t *local_hw_info;
 =======
+=======
+>>>>>>> v3.18
     struct pcnet_dev *info = PRIV(dev);
     int start_pg, stop_pg, cm_offset;
     int has_shmem = 0;
     struct hw_info *local_hw_info;
     struct ei_device *ei_local;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     dev_dbg(&link->dev, "pcnet_config\n");
@@ -689,6 +758,11 @@ static int pcnet_config(struct pcmcia_device *link)
 
     SET_NETDEV_DEV(dev, &link->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    ei_local = netdev_priv(dev);
+    ei_local->msg_enable = pcnet_msg_enable;
+>>>>>>> v3.18
 =======
     ei_local = netdev_priv(dev);
     ei_local->msg_enable = pcnet_msg_enable;
@@ -703,7 +777,11 @@ static int pcnet_config(struct pcmcia_device *link)
 	u_char id = inb(dev->base_addr + 0x1a);
 	netdev_info(dev, "NE2000 (DL100%d rev %02x): ",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       (info->flags & IS_DL10022) ? 22 : 19, id);
+=======
+		    (info->flags & IS_DL10022) ? 22 : 19, id);
+>>>>>>> v3.18
 =======
 		    (info->flags & IS_DL10022) ? 22 : 19, id);
 >>>>>>> v3.18
@@ -728,7 +806,11 @@ failed:
 static void pcnet_release(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcnet_dev_t *info = PRIV(link->priv);
+=======
+	struct pcnet_dev *info = PRIV(link->priv);
+>>>>>>> v3.18
 =======
 	struct pcnet_dev *info = PRIV(link->priv);
 >>>>>>> v3.18
@@ -929,7 +1011,11 @@ static void set_misc_reg(struct net_device *dev)
 {
     unsigned int nic_base = dev->base_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
     pcnet_dev_t *info = PRIV(dev);
+=======
+    struct pcnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct pcnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -970,7 +1056,11 @@ static void set_misc_reg(struct net_device *dev)
 static void mii_phy_probe(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     pcnet_dev_t *info = PRIV(dev);
+=======
+    struct pcnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct pcnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -999,7 +1089,11 @@ static int pcnet_open(struct net_device *dev)
 {
     int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
     pcnet_dev_t *info = PRIV(dev);
+=======
+    struct pcnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct pcnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -1036,7 +1130,11 @@ static int pcnet_open(struct net_device *dev)
 static int pcnet_close(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     pcnet_dev_t *info = PRIV(dev);
+=======
+    struct pcnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct pcnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -1091,7 +1189,11 @@ static void pcnet_reset_8390(struct net_device *dev)
 static int set_config(struct net_device *dev, struct ifmap *map)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     pcnet_dev_t *info = PRIV(dev);
+=======
+    struct pcnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct pcnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -1113,7 +1215,11 @@ static irqreturn_t ei_irq_wrapper(int irq, void *dev_id)
 {
     struct net_device *dev = dev_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
     pcnet_dev_t *info;
+=======
+    struct pcnet_dev *info;
+>>>>>>> v3.18
 =======
     struct pcnet_dev *info;
 >>>>>>> v3.18
@@ -1130,7 +1236,11 @@ static void ei_watchdog(u_long arg)
 {
     struct net_device *dev = (struct net_device *)arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
     pcnet_dev_t *info = PRIV(dev);
+=======
+    struct pcnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct pcnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -1186,9 +1296,15 @@ static void ei_watchdog(u_long arg)
 		if (p)
 		    netdev_info(dev, "autonegotiation complete: "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   "%sbaseT-%cD selected\n",
 			   ((p & 0x0180) ? "100" : "10"),
 			   ((p & 0x0140) ? 'F' : 'H'));
+=======
+				"%sbaseT-%cD selected\n",
+				((p & 0x0180) ? "100" : "10"),
+				((p & 0x0140) ? 'F' : 'H'));
+>>>>>>> v3.18
 =======
 				"%sbaseT-%cD selected\n",
 				((p & 0x0180) ? "100" : "10"),
@@ -1210,7 +1326,11 @@ static void ei_watchdog(u_long arg)
 	    info->phy_id ^= info->pna_phy ^ info->eth_phy;
 	    netdev_info(dev, "switched to %s transceiver\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   (info->phy_id == info->eth_phy) ? "ethernet" : "PNA");
+=======
+			(info->phy_id == info->eth_phy) ? "ethernet" : "PNA");
+>>>>>>> v3.18
 =======
 			(info->phy_id == info->eth_phy) ? "ethernet" : "PNA");
 >>>>>>> v3.18
@@ -1232,7 +1352,11 @@ reschedule:
 static int ei_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     pcnet_dev_t *info = PRIV(dev);
+=======
+    struct pcnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct pcnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -1265,9 +1389,15 @@ static void dma_get_8390_hdr(struct net_device *dev,
 
     if (ei_status.dmaing) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev_notice(dev, "DMAing conflict in dma_block_input."
 	       "[DMAstat:%1x][irqlock:%1x]\n",
 	       ei_status.dmaing, ei_status.irqlock);
+=======
+	netdev_err(dev, "DMAing conflict in dma_block_input."
+		   "[DMAstat:%1x][irqlock:%1x]\n",
+		   ei_status.dmaing, ei_status.irqlock);
+>>>>>>> v3.18
 =======
 	netdev_err(dev, "DMAing conflict in dma_block_input."
 		   "[DMAstat:%1x][irqlock:%1x]\n",
@@ -1302,6 +1432,7 @@ static void dma_block_input(struct net_device *dev, int count,
     int xfer_count = count;
     char *buf = skb->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     if ((ei_debug > 4) && (count != 4))
 	netdev_dbg(dev, "[bi=%d]\n", count+4);
@@ -1310,6 +1441,8 @@ static void dma_block_input(struct net_device *dev, int count,
 	       "[DMAstat:%1x][irqlock:%1x]\n",
 	       ei_status.dmaing, ei_status.irqlock);
 =======
+=======
+>>>>>>> v3.18
     struct ei_device *ei_local = netdev_priv(dev);
 
     if ((netif_msg_rx_status(ei_local)) && (count != 4))
@@ -1318,6 +1451,9 @@ static void dma_block_input(struct net_device *dev, int count,
 	netdev_err(dev, "DMAing conflict in dma_block_input."
 		   "[DMAstat:%1x][irqlock:%1x]\n",
 		   ei_status.dmaing, ei_status.irqlock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return;
     }
@@ -1337,7 +1473,12 @@ static void dma_block_input(struct net_device *dev, int count,
        encountering problems that it is still here. */
 #ifdef PCMCIA_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (ei_debug > 4) {		/* DMA termination address check... */
+=======
+      /* DMA termination address check... */
+    if (netif_msg_rx_status(ei_local)) {
+>>>>>>> v3.18
 =======
       /* DMA termination address check... */
     if (netif_msg_rx_status(ei_local)) {
@@ -1355,8 +1496,13 @@ static void dma_block_input(struct net_device *dev, int count,
 	if (tries <= 0)
 	    netdev_notice(dev, "RX transfer address mismatch,"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   "%#4.4x (expected) vs. %#4.4x (actual).\n",
 		   ring_offset + xfer_count, addr);
+=======
+			  "%#4.4x (expected) vs. %#4.4x (actual).\n",
+			  ring_offset + xfer_count, addr);
+>>>>>>> v3.18
 =======
 			  "%#4.4x (expected) vs. %#4.4x (actual).\n",
 			  ring_offset + xfer_count, addr);
@@ -1374,22 +1520,32 @@ static void dma_block_output(struct net_device *dev, int count,
 {
     unsigned int nic_base = dev->base_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
     pcnet_dev_t *info = PRIV(dev);
 #ifdef PCMCIA_DEBUG
     int retries = 0;
 =======
+=======
+>>>>>>> v3.18
     struct pcnet_dev *info = PRIV(dev);
 #ifdef PCMCIA_DEBUG
     int retries = 0;
     struct ei_device *ei_local = netdev_priv(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
     u_long dma_start;
 
 #ifdef PCMCIA_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (ei_debug > 4)
 	netdev_dbg(dev, "[bo=%d]\n", count);
+=======
+    netif_dbg(ei_local, tx_queued, dev, "[bo=%d]\n", count);
+>>>>>>> v3.18
 =======
     netif_dbg(ei_local, tx_queued, dev, "[bo=%d]\n", count);
 >>>>>>> v3.18
@@ -1402,9 +1558,15 @@ static void dma_block_output(struct net_device *dev, int count,
 	count++;
     if (ei_status.dmaing) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev_notice(dev, "DMAing conflict in dma_block_output."
 	       "[DMAstat:%1x][irqlock:%1x]\n",
 	       ei_status.dmaing, ei_status.irqlock);
+=======
+	netdev_err(dev, "DMAing conflict in dma_block_output."
+		   "[DMAstat:%1x][irqlock:%1x]\n",
+		   ei_status.dmaing, ei_status.irqlock);
+>>>>>>> v3.18
 =======
 	netdev_err(dev, "DMAing conflict in dma_block_output."
 		   "[DMAstat:%1x][irqlock:%1x]\n",
@@ -1437,7 +1599,12 @@ static void dma_block_output(struct net_device *dev, int count,
     /* This was for the ALPHA version only, but enough people have been
        encountering problems that it is still here. */
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (ei_debug > 4) {	/* DMA termination address check... */
+=======
+    /* DMA termination address check... */
+    if (netif_msg_tx_queued(ei_local)) {
+>>>>>>> v3.18
 =======
     /* DMA termination address check... */
     if (netif_msg_tx_queued(ei_local)) {
@@ -1453,8 +1620,13 @@ static void dma_block_output(struct net_device *dev, int count,
 	if (tries <= 0) {
 	    netdev_notice(dev, "Tx packet transfer address mismatch,"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   "%#4.4x (expected) vs. %#4.4x (actual).\n",
 		   (start_page << 8) + count, addr);
+=======
+			  "%#4.4x (expected) vs. %#4.4x (actual).\n",
+			  (start_page << 8) + count, addr);
+>>>>>>> v3.18
 =======
 			  "%#4.4x (expected) vs. %#4.4x (actual).\n",
 			  (start_page << 8) + count, addr);
@@ -1468,15 +1640,21 @@ static void dma_block_output(struct net_device *dev, int count,
     while ((inb_p(nic_base + EN0_ISR) & ENISR_RDC) == 0)
 	if (time_after(jiffies, dma_start + PCNET_RDC_TIMEOUT)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    netdev_notice(dev, "timeout waiting for Tx RDC.\n");
 	    pcnet_reset_8390(dev);
 	    NS8390_init(dev, 1);
 	    break;
 =======
+=======
+>>>>>>> v3.18
 		netdev_warn(dev, "timeout waiting for Tx RDC.\n");
 		pcnet_reset_8390(dev);
 		NS8390_init(dev, 1);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1596,7 +1774,11 @@ static int setup_shmem_window(struct pcmcia_device *link, int start_pg,
 {
     struct net_device *dev = link->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
     pcnet_dev_t *info = PRIV(dev);
+=======
+    struct pcnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct pcnet_dev *info = PRIV(dev);
 >>>>>>> v3.18

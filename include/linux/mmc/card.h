@@ -14,7 +14,10 @@
 #include <linux/mmc/core.h>
 #include <linux/mod_devicetable.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/notifier.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -47,7 +50,12 @@ struct mmc_csd {
 				read_misalign:1,
 				write_partial:1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				write_misalign:1;
+=======
+				write_misalign:1,
+				dsr_imp:1;
+>>>>>>> v3.18
 =======
 				write_misalign:1,
 				dsr_imp:1;
@@ -73,6 +81,10 @@ struct mmc_ext_csd {
 	u8			power_off_notification;	/* state */
 	unsigned int		hs_max_dtr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int		hs200_max_dtr;
+>>>>>>> v3.18
 =======
 	unsigned int		hs200_max_dtr;
 >>>>>>> v3.18
@@ -81,9 +93,13 @@ struct mmc_ext_csd {
 #define MMC_HIGH_DDR_MAX_DTR	52000000
 #define MMC_HS200_MAX_DTR	200000000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MMC_HS400_MAX_DTR	200000000
 	unsigned int		sectors;
 	unsigned int		card_type;
+=======
+	unsigned int		sectors;
+>>>>>>> v3.18
 =======
 	unsigned int		sectors;
 >>>>>>> v3.18
@@ -93,7 +109,11 @@ struct mmc_ext_csd {
 	unsigned int		sec_erase_mult;	/* Secure erase multiplier */
 	unsigned int		trim_timeout;		/* In milliseconds */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool			enhanced_area_en;	/* enable bit */
+=======
+	bool			partition_setting_completed;	/* enable bit */
+>>>>>>> v3.18
 =======
 	bool			partition_setting_completed;	/* enable bit */
 >>>>>>> v3.18
@@ -105,7 +125,11 @@ struct mmc_ext_csd {
 	unsigned int		hpi_cmd;		/* cmd used as HPI */
 	bool			bkops;		/* background support bit */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8			bkops_en;	/* background enable bits */
+=======
+	bool			bkops_en;	/* background enable bit */
+>>>>>>> v3.18
 =======
 	bool			bkops_en;	/* background enable bit */
 >>>>>>> v3.18
@@ -120,16 +144,22 @@ struct mmc_ext_csd {
 	u8			raw_ext_csd_structure;	/* 194 */
 	u8			raw_card_type;		/* 196 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8			raw_drive_strength;	/* 197 */
 	u8			out_of_int_time;	/* 198 */
 	u8			raw_s_a_timeout;		/* 217 */
 =======
+=======
+>>>>>>> v3.18
 	u8			out_of_int_time;	/* 198 */
 	u8			raw_pwr_cl_52_195;	/* 200 */
 	u8			raw_pwr_cl_26_195;	/* 201 */
 	u8			raw_pwr_cl_52_360;	/* 202 */
 	u8			raw_pwr_cl_26_360;	/* 203 */
 	u8			raw_s_a_timeout;	/* 217 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8			raw_hc_erase_gap_size;	/* 221 */
 	u8			raw_erase_timeout_mult;	/* 223 */
@@ -139,12 +169,18 @@ struct mmc_ext_csd {
 	u8			raw_sec_feature_support;/* 231 */
 	u8			raw_trim_mult;		/* 232 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8			raw_pwr_cl_200_195;	/* 236 */
 	u8			raw_pwr_cl_200_360;	/* 237 */
 	u8			raw_pwr_cl_ddr_52_195;	/* 238 */
 	u8			raw_pwr_cl_ddr_52_360;	/* 239 */
 	u8			raw_pwr_cl_ddr_200_360;	/* 253 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8			raw_bkops_status;	/* 246 */
 	u8			raw_sectors[4];		/* 212 - 4 bytes */
@@ -220,8 +256,12 @@ struct sdio_cccr {
 				high_power:1,
 				high_speed:1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				disable_cd:1,
 				async_intr_sup:1;
+=======
+				disable_cd:1;
+>>>>>>> v3.18
 =======
 				disable_cd:1;
 >>>>>>> v3.18
@@ -236,9 +276,15 @@ struct sdio_cis {
 
 struct mmc_host;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct sdio_func;
 struct sdio_func_tuple;
 struct mmc_queue;
+=======
+struct mmc_ios;
+struct sdio_func;
+struct sdio_func_tuple;
+>>>>>>> v3.18
 =======
 struct mmc_ios;
 struct sdio_func;
@@ -257,6 +303,7 @@ enum mmc_blk_status {
 	MMC_BLK_ECC_ERR,
 	MMC_BLK_NOMEDIUM,
 	MMC_BLK_NEW_REQUEST,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	MMC_BLK_URGENT,
 	MMC_BLK_URGENT_DONE,
@@ -292,6 +339,8 @@ struct mmc_wr_pack_stats {
 #define MMC_NUM_GP_PARTITION	4
 #define MMC_NUM_PHY_PARTITION	6
 =======
+=======
+>>>>>>> v3.18
 };
 
 /* The number of MMC physical partitions.  These consist of:
@@ -301,6 +350,9 @@ struct mmc_wr_pack_stats {
 #define MMC_NUM_BOOT_PARTITION	2
 #define MMC_NUM_GP_PARTITION	4
 #define MMC_NUM_PHY_PARTITION	7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MAX_MMC_PART_NAME_LEN	20
 
@@ -319,6 +371,7 @@ struct mmc_part {
 #define MMC_BLK_DATA_AREA_RPMB	(1<<3)
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define BKOPS_NUM_OF_SEVERITY_LEVELS	3
 #define BKOPS_SEVERITY_1_INDEX		0
@@ -378,6 +431,8 @@ struct mmc_bkops_info {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * MMC device
  */
@@ -385,6 +440,10 @@ struct mmc_card {
 	struct mmc_host		*host;		/* the host this device belongs to */
 	struct device		dev;		/* the device */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32			ocr;		/* the current OCR setting */
+>>>>>>> v3.18
 =======
 	u32			ocr;		/* the current OCR setting */
 >>>>>>> v3.18
@@ -398,6 +457,7 @@ struct mmc_card {
 #define MMC_STATE_PRESENT	(1<<0)		/* present in sysfs */
 #define MMC_STATE_READONLY	(1<<1)		/* card is read-only */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MMC_STATE_HIGHSPEED	(1<<2)		/* card is in high speed mode */
 #define MMC_STATE_BLOCKADDR	(1<<3)		/* card uses block-addressing */
 #define MMC_STATE_HIGHSPEED_DDR (1<<4)		/* card is in high speed mode */
@@ -409,11 +469,16 @@ struct mmc_card {
 #define MMC_STATE_DOING_BKOPS	(1<<10)		/* card is doing BKOPS */
 #define MMC_STATE_NEED_BKOPS	(1<<11)		/* card needs to do BKOPS */
 =======
+=======
+>>>>>>> v3.18
 #define MMC_STATE_BLOCKADDR	(1<<2)		/* card uses block-addressing */
 #define MMC_CARD_SDXC		(1<<3)		/* card is SDXC */
 #define MMC_CARD_REMOVED	(1<<4)		/* card has been removed */
 #define MMC_STATE_DOING_BKOPS	(1<<5)		/* card is doing BKOPS */
 #define MMC_STATE_SUSPENDED	(1<<6)		/* card is suspended */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int		quirks; 	/* card quirks */
 #define MMC_QUIRK_LENIENT_FN0	(1<<0)		/* allow SDIO FN0 writes outside of the VS CCCR range */
@@ -428,6 +493,7 @@ struct mmc_card {
 #define MMC_QUIRK_BLK_NO_CMD23	(1<<7)		/* Avoid CMD23 for regular multiblock */
 #define MMC_QUIRK_BROKEN_BYTE_MODE_512 (1<<8)	/* Avoid sending 512 bytes in */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MMC_QUIRK_LONG_READ_TIME (1<<9)		/* Data read time > CSD says */
 #define MMC_QUIRK_SEC_ERASE_TRIM_BROKEN (1<<10)	/* Skip secure for erase/trim */
 						/* byte mode */
@@ -438,10 +504,15 @@ struct mmc_card {
 #define MMC_QUIRK_BROKEN_DATA_TIMEOUT	(1<<13)
 #define MMC_QUIRK_CACHE_DISABLE (1 << 14)       /* prevent cache enable */
 =======
+=======
+>>>>>>> v3.18
 						/* byte mode */
 #define MMC_QUIRK_LONG_READ_TIME (1<<9)		/* Data read time > CSD says */
 #define MMC_QUIRK_SEC_ERASE_TRIM_BROKEN (1<<10)	/* Skip secure for erase/trim */
 #define MMC_QUIRK_BROKEN_IRQ_POLLING	(1<<11)	/* Polling SDIO_CCCR_INTx could create a fake interrupt */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	unsigned int		erase_size;	/* erase size in sectors */
@@ -470,6 +541,10 @@ struct mmc_card {
 
 	unsigned int		sd_bus_speed;	/* Bus Speed Mode set for the card */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int		mmc_avail_type;	/* supported device type by both host and card */
+>>>>>>> v3.18
 =======
 	unsigned int		mmc_avail_type;	/* supported device type by both host and card */
 >>>>>>> v3.18
@@ -477,6 +552,7 @@ struct mmc_card {
 	struct dentry		*debugfs_root;
 	struct mmc_part	part[MMC_NUM_PHY_PARTITION]; /* physical partitions */
 	unsigned int    nr_parts;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int	part_curr;
 
@@ -509,6 +585,11 @@ struct mmc_card {
 					~EXT_CSD_BKOPS_EN_AUTO_EN)
 
 /*
+=======
+};
+
+/*
+>>>>>>> v3.18
 =======
 };
 
@@ -551,8 +632,11 @@ struct mmc_fixup {
 	/* SDIO-specfic fields. You can use SDIO_ANY_ID here of course */
 	u16 cis_vendor, cis_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* for MMC cards */
 	unsigned int ext_csd_rev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -564,6 +648,7 @@ struct mmc_fixup {
 #define CID_OEMID_ANY ((unsigned short) -1)
 #define CID_NAME_ANY (NULL)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define EXT_CSD_REV_ANY (-1u)
 
@@ -581,11 +666,16 @@ struct mmc_fixup {
 		   _cis_vendor, _cis_device,				\
 		   _fixup, _data, _ext_csd_rev)				\
 =======
+=======
+>>>>>>> v3.18
 #define END_FIXUP { NULL }
 
 #define _FIXUP_EXT(_name, _manfid, _oemid, _rev_start, _rev_end,	\
 		   _cis_vendor, _cis_device,				\
 		   _fixup, _data)					\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{						   \
 		.name = (_name),			   \
@@ -597,6 +687,7 @@ struct mmc_fixup {
 		.cis_device = (_cis_device),		   \
 		.vendor_fixup = (_fixup),		   \
 		.data = (_data),			   \
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.ext_csd_rev = (_ext_csd_rev),		   \
 	 }
@@ -617,6 +708,8 @@ struct mmc_fixup {
 	MMC_FIXUP_REV(_name, _manfid, _oemid, 0, -1ull, _fixup, _data,	\
 		      _ext_csd_rev)
 =======
+=======
+>>>>>>> v3.18
 	 }
 
 #define MMC_FIXUP_REV(_name, _manfid, _oemid, _rev_start, _rev_end,	\
@@ -628,6 +721,9 @@ struct mmc_fixup {
 
 #define MMC_FIXUP(_name, _manfid, _oemid, _fixup, _data) \
 	MMC_FIXUP_REV(_name, _manfid, _oemid, 0, -1ull, _fixup, _data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SDIO_FIXUP(_vendor, _device, _fixup, _data)			\
@@ -635,7 +731,11 @@ struct mmc_fixup {
 		    CID_OEMID_ANY, 0, -1ull,				\
 		   _vendor, _device,					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   _fixup, _data, EXT_CSD_REV_ANY)			\
+=======
+		   _fixup, _data)					\
+>>>>>>> v3.18
 =======
 		   _fixup, _data)					\
 >>>>>>> v3.18
@@ -673,6 +773,7 @@ static inline void __maybe_unused remove_quirk(struct mmc_card *card, int data)
 #define mmc_card_present(c)	((c)->state & MMC_STATE_PRESENT)
 #define mmc_card_readonly(c)	((c)->state & MMC_STATE_READONLY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define mmc_card_highspeed(c)	((c)->state & MMC_STATE_HIGHSPEED)
 #define mmc_card_hs200(c)	((c)->state & MMC_STATE_HIGHSPEED_200)
 #define mmc_card_hs400(c)	((c)->state & MMC_STATE_HIGHSPEED_400)
@@ -699,6 +800,8 @@ static inline void __maybe_unused remove_quirk(struct mmc_card *card, int data)
 #define mmc_card_set_uhs(c) ((c)->state |= MMC_STATE_ULTRAHIGHSPEED)
 #define mmc_sd_card_set_uhs(c) ((c)->state |= MMC_STATE_ULTRAHIGHSPEED)
 =======
+=======
+>>>>>>> v3.18
 #define mmc_card_blockaddr(c)	((c)->state & MMC_STATE_BLOCKADDR)
 #define mmc_card_ext_capacity(c) ((c)->state & MMC_CARD_SDXC)
 #define mmc_card_removed(c)	((c) && ((c)->state & MMC_CARD_REMOVED))
@@ -708,14 +811,23 @@ static inline void __maybe_unused remove_quirk(struct mmc_card *card, int data)
 #define mmc_card_set_present(c)	((c)->state |= MMC_STATE_PRESENT)
 #define mmc_card_set_readonly(c) ((c)->state |= MMC_STATE_READONLY)
 #define mmc_card_set_blockaddr(c) ((c)->state |= MMC_STATE_BLOCKADDR)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define mmc_card_set_ext_capacity(c) ((c)->state |= MMC_CARD_SDXC)
 #define mmc_card_set_removed(c) ((c)->state |= MMC_CARD_REMOVED)
 #define mmc_card_set_doing_bkops(c)	((c)->state |= MMC_STATE_DOING_BKOPS)
 #define mmc_card_clr_doing_bkops(c)	((c)->state &= ~MMC_STATE_DOING_BKOPS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define mmc_card_set_need_bkops(c)	((c)->state |= MMC_STATE_NEED_BKOPS)
 #define mmc_card_clr_need_bkops(c)	((c)->state &= ~MMC_STATE_NEED_BKOPS)
+=======
+#define mmc_card_set_suspended(c) ((c)->state |= MMC_STATE_SUSPENDED)
+#define mmc_card_clr_suspended(c) ((c)->state &= ~MMC_STATE_SUSPENDED)
+
+>>>>>>> v3.18
 =======
 #define mmc_card_set_suspended(c) ((c)->state |= MMC_STATE_SUSPENDED)
 #define mmc_card_clr_suspended(c) ((c)->state &= ~MMC_STATE_SUSPENDED)
@@ -786,12 +898,18 @@ static inline int mmc_card_long_read_time(const struct mmc_card *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int mmc_card_broken_irq_polling(const struct mmc_card *c)
 {
 	return c->quirks & MMC_QUIRK_BROKEN_IRQ_POLLING;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define mmc_card_name(c)	((c)->cid.prod_name)
 #define mmc_card_id(c)		(dev_name(&(c)->dev))
@@ -820,11 +938,15 @@ extern void mmc_unregister_driver(struct mmc_driver *);
 extern void mmc_fixup_device(struct mmc_card *card,
 			     const struct mmc_fixup *table);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct mmc_wr_pack_stats *mmc_blk_get_packed_statistics(
 			struct mmc_card *card);
 extern void mmc_blk_init_packed_statistics(struct mmc_card *card);
 extern void mmc_blk_disable_wr_packing(struct mmc_queue *mq);
 extern int mmc_send_long_pon(struct mmc_card *card);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

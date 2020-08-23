@@ -121,6 +121,10 @@ static int omapbl_get_intensity(struct backlight_device *dev)
 {
 	struct omap_backlight *bl = bl_get_data(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -138,7 +142,11 @@ static int omapbl_probe(struct platform_device *pdev)
 	struct backlight_device *dev;
 	struct omap_backlight *bl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_backlight_config *pdata = pdev->dev.platform_data;
+=======
+	struct omap_backlight_config *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct omap_backlight_config *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -155,8 +163,13 @@ static int omapbl_probe(struct platform_device *pdev)
 	props.type = BACKLIGHT_RAW;
 	props.max_brightness = OMAPBL_MAX_INTENSITY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = backlight_device_register("omap-bl", &pdev->dev, bl, &omapbl_ops,
 					&props);
+=======
+	dev = devm_backlight_device_register(&pdev->dev, "omap-bl", &pdev->dev,
+					bl, &omapbl_ops, &props);
+>>>>>>> v3.18
 =======
 	dev = devm_backlight_device_register(&pdev->dev, "omap-bl", &pdev->dev,
 					bl, &omapbl_ops, &props);
@@ -184,6 +197,7 @@ static int omapbl_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int omapbl_remove(struct platform_device *pdev)
 {
 	struct backlight_device *dev = platform_get_drvdata(pdev);
@@ -195,12 +209,17 @@ static int omapbl_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static SIMPLE_DEV_PM_OPS(omapbl_pm_ops, omapbl_suspend, omapbl_resume);
 
 static struct platform_driver omapbl_driver = {
 	.probe		= omapbl_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= omapbl_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

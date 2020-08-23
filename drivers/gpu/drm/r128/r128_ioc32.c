@@ -34,6 +34,10 @@
 #include <drm/drmP.h>
 #include <drm/r128_drm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "r128_drv.h"
+>>>>>>> v3.18
 =======
 #include "r128_drv.h"
 >>>>>>> v3.18
@@ -207,7 +211,11 @@ long r128_compat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		return drm_compat_ioctl(filp, cmd, arg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nr < DRM_COMMAND_BASE + DRM_ARRAY_SIZE(r128_compat_ioctls))
+=======
+	if (nr < DRM_COMMAND_BASE + ARRAY_SIZE(r128_compat_ioctls))
+>>>>>>> v3.18
 =======
 	if (nr < DRM_COMMAND_BASE + ARRAY_SIZE(r128_compat_ioctls))
 >>>>>>> v3.18

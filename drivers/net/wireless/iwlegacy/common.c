@@ -34,7 +34,10 @@
 #include <linux/types.h>
 #include <linux/lockdep.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pci.h>
@@ -1083,6 +1086,7 @@ EXPORT_SYMBOL(il_get_channel_info);
  *
  * We calculate a sleep command based on the required latency, which
 <<<<<<< HEAD
+<<<<<<< HEAD
  * we get from mac80211. In order to handle thermal throttling, we can
  * also use pre-defined power levels.
  */
@@ -1101,6 +1105,8 @@ static void
 il_power_sleep_cam_cmd(struct il_priv *il, struct il_powertable_cmd *cmd)
 {
 =======
+=======
+>>>>>>> v3.18
  * we get from mac80211.
  */
 
@@ -1124,6 +1130,9 @@ il_build_powertable_cmd(struct il_priv *il, struct il_powertable_cmd *cmd)
 	u32 max_sleep;
 	bool skip;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memset(cmd, 0, sizeof(*cmd));
 
@@ -1131,8 +1140,11 @@ il_build_powertable_cmd(struct il_priv *il, struct il_powertable_cmd *cmd)
 		cmd->flags |= IL_POWER_PCI_PM_MSK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	D_POWER("Sleep command for CAM\n");
 =======
+=======
+>>>>>>> v3.18
 	/* if no Power Save, we are done */
 	if (il->power_data.ps_disabled)
 		return;
@@ -1181,6 +1193,9 @@ il_build_powertable_cmd(struct il_priv *il, struct il_powertable_cmd *cmd)
 	for (i = 0; i < IL_POWER_VEC_SIZE; i++)
 		if (le32_to_cpu(cmd->sleep_interval[i]) > max_sleep)
 			cmd->sleep_interval[i] = cpu_to_le32(max_sleep);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1255,7 +1270,12 @@ il_power_update_mode(struct il_priv *il, bool force)
 	struct il_powertable_cmd cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	il_power_sleep_cam_cmd(il, &cmd);
+=======
+	il_build_powertable_cmd(il, &cmd);
+
+>>>>>>> v3.18
 =======
 	il_build_powertable_cmd(il, &cmd);
 
@@ -1605,8 +1625,14 @@ il_scan_initiate(struct il_priv *il, struct ieee80211_vif *vif)
 int
 il_mac_hw_scan(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       struct cfg80211_scan_request *req)
 {
+=======
+	       struct ieee80211_scan_request *hw_req)
+{
+	struct cfg80211_scan_request *req = &hw_req->req;
+>>>>>>> v3.18
 =======
 	       struct ieee80211_scan_request *hw_req)
 {
@@ -3018,7 +3044,12 @@ il_tx_queue_alloc(struct il_priv *il, struct il_tx_queue *txq, u32 id)
 	 * not shared with device. */
 	if (id != il->cmd_queue) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		txq->skbs = kcalloc(TFD_QUEUE_SIZE_MAX, sizeof(struct skb *),
+=======
+		txq->skbs = kcalloc(TFD_QUEUE_SIZE_MAX,
+				    sizeof(struct sk_buff *),
+>>>>>>> v3.18
 =======
 		txq->skbs = kcalloc(TFD_QUEUE_SIZE_MAX,
 				    sizeof(struct sk_buff *),
@@ -3542,15 +3573,21 @@ il_init_geos(struct il_priv *il)
 		if (il_is_channel_valid(ch)) {
 			if (!(ch->flags & EEPROM_CHANNEL_IBSS))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				geo_ch->flags |= IEEE80211_CHAN_NO_IBSS;
 
 			if (!(ch->flags & EEPROM_CHANNEL_ACTIVE))
 				geo_ch->flags |= IEEE80211_CHAN_PASSIVE_SCAN;
 =======
+=======
+>>>>>>> v3.18
 				geo_ch->flags |= IEEE80211_CHAN_NO_IR;
 
 			if (!(ch->flags & EEPROM_CHANNEL_ACTIVE))
 				geo_ch->flags |= IEEE80211_CHAN_NO_IR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (ch->flags & EEPROM_CHANNEL_RADAR)
@@ -3850,15 +3887,21 @@ il_full_rxon_required(struct il_priv *il)
 	/* These items are only settable from the full RXON command */
 	CHK(!il_is_associated(il));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CHK(!ether_addr_equal(staging->bssid_addr, active->bssid_addr));
 	CHK(!ether_addr_equal(staging->node_addr, active->node_addr));
 	CHK(!ether_addr_equal(staging->wlap_bssid_addr,
 			      active->wlap_bssid_addr));
 =======
+=======
+>>>>>>> v3.18
 	CHK(!ether_addr_equal_64bits(staging->bssid_addr, active->bssid_addr));
 	CHK(!ether_addr_equal_64bits(staging->node_addr, active->node_addr));
 	CHK(!ether_addr_equal_64bits(staging->wlap_bssid_addr,
 				     active->wlap_bssid_addr));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CHK_NEQ(staging->dev_type, active->dev_type);
 	CHK_NEQ(staging->channel, active->channel);
@@ -4813,7 +4856,12 @@ out:
 EXPORT_SYMBOL(il_mac_change_interface);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void il_mac_flush(struct ieee80211_hw *hw, u32 queues, bool drop)
+=======
+void il_mac_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+		  u32 queues, bool drop)
+>>>>>>> v3.18
 =======
 void il_mac_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 		  u32 queues, bool drop)
@@ -5198,6 +5246,10 @@ set_ch_out:
 
 	if (changed & (IEEE80211_CONF_CHANGE_PS | IEEE80211_CONF_CHANGE_IDLE)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		il->power_data.ps_disabled = !(conf->flags & IEEE80211_CONF_PS);
+>>>>>>> v3.18
 =======
 		il->power_data.ps_disabled = !(conf->flags & IEEE80211_CONF_PS);
 >>>>>>> v3.18
@@ -5428,7 +5480,10 @@ il_mac_bss_info_changed(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		 * On passive channel we wait with blocked queues to see if
 		 * there is traffic on that channel. If no frame will be
 		 * received (what is very unlikely since scan detects AP on
@@ -5440,6 +5495,9 @@ il_mac_bss_info_changed(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 			il_wake_queues_by_reason(il, IL_STOP_REASON_PASSIVE);
 
 		/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * If there is currently a HW scan going on in the background,
 		 * then we need to cancel it, otherwise sometimes we are not

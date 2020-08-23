@@ -267,15 +267,21 @@ static void m32r_sio_start_tx(struct uart_port *port)
 		up->ier |= UART_IER_THRI;
 		serial_out(up, UART_IER, up->ier);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		serial_out(up, UART_TX, xmit->buf[xmit->tail]);
 		xmit->tail = (xmit->tail + 1) & (UART_XMIT_SIZE - 1);
 		up->port.icount.tx++;
 =======
+=======
+>>>>>>> v3.18
 		if (!uart_circ_empty(xmit)) {
 			serial_out(up, UART_TX, xmit->buf[xmit->tail]);
 			xmit->tail = (xmit->tail + 1) & (UART_XMIT_SIZE - 1);
 			up->port.icount.tx++;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	while((serial_in(up, UART_LSR) & UART_EMPTY) != UART_EMPTY);
@@ -377,12 +383,18 @@ static void receive_chars(struct uart_sio_port *up, int *status)
 		*status = serial_in(up, UART_LSR);
 	} while ((*status & UART_LSR_DR) && (max_count-- > 0));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_flip_buffer_push(port);
 =======
+=======
+>>>>>>> v3.18
 
 	spin_unlock(&up->port.lock);
 	tty_flip_buffer_push(port);
 	spin_lock(&up->port.lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -750,7 +762,11 @@ static void m32r_sio_set_termios(struct uart_port *port,
 	if (termios->c_iflag & INPCK)
 		up->port.read_status_mask |= UART_LSR_FE | UART_LSR_PE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18

@@ -45,8 +45,11 @@
 #include "baseband.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Static Definitions -------------------------*/
 static int msglevel = MSG_LEVEL_INFO;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*---------------------  Static Classes  ----------------------------*/
@@ -191,6 +194,7 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 	if (byRxRate == 22) {
 		pStatistic->CustomStat.ullRsr11M++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (byRSR & RSR_CRCOK) {
 			pStatistic->CustomStat.ullRsr11MCRCOk++;
 		}
@@ -264,6 +268,8 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 	} else {
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Unknown: Total[%d], CRCOK[%d]\n", (int)pStatistic->dwRsrRxPacket+1, (int)pStatistic->dwRsrCRCOk);
 =======
+=======
+>>>>>>> v3.18
 		if (byRSR & RSR_CRCOK)
 			pStatistic->CustomStat.ullRsr11MCRCOk++;
 
@@ -362,6 +368,9 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 		pr_debug("Unknown: Total[%d], CRCOK[%d]\n",
 			 (int)pStatistic->dwRsrRxPacket+1,
 			 (int)pStatistic->dwRsrCRCOk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -393,6 +402,7 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 	pStatistic->dwRsrRxOctet += cbFrameLength;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_TYPE_DATA(pbyBuffer)) {
 		pStatistic->dwRsrRxData++;
 	} else if (IS_TYPE_MGMT(pbyBuffer)) {
@@ -401,12 +411,17 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 		pStatistic->dwRsrRxControl++;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (IS_TYPE_DATA(pbyBuffer))
 		pStatistic->dwRsrRxData++;
 	else if (IS_TYPE_MGMT(pbyBuffer))
 		pStatistic->dwRsrRxManage++;
 	else if (IS_TYPE_CONTROL(pbyBuffer))
 		pStatistic->dwRsrRxControl++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (byRSR & RSR_ADDRBROAD)
@@ -419,6 +434,7 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 	if (WLAN_GET_FC_MOREFRAG(pHeader->wFrameCtl))
 		pStatistic->dwRsrRxFragment++;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cbFrameLength < ETH_ZLEN + 4) {
 		pStatistic->dwRsrRunt++;
@@ -438,6 +454,8 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 		pStatistic->dwRsrLong++;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (cbFrameLength < ETH_ZLEN + 4)
 		pStatistic->dwRsrRunt++;
 	else if (cbFrameLength == ETH_ZLEN + 4)
@@ -454,6 +472,9 @@ void STAvUpdateRDStatCounter(PSStatCounter pStatistic,
 		pStatistic->dwRsrRxFrmLen1024_1518++;
 	else if (cbFrameLength > ETH_FRAME_LEN + 4)
 		pStatistic->dwRsrLong++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -532,17 +553,23 @@ STAvUpdateTDStatCounter(
 
 	pHeader = (PWLAN_80211HDR_A4) pbyBuffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WLAN_GET_FC_TODS(pHeader->wFrameCtl) == 0) {
 		pbyDestAddr = &(pHeader->abyAddr1[0]);
 	} else {
 		pbyDestAddr = &(pHeader->abyAddr3[0]);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (WLAN_GET_FC_TODS(pHeader->wFrameCtl) == 0)
 		pbyDestAddr = &(pHeader->abyAddr1[0]);
 	else
 		pbyDestAddr = &(pHeader->abyAddr3[0]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	// increase tx packet count
 	pStatistic->dwTsrTxPacket[uIdx]++;
@@ -645,7 +672,10 @@ STAvUpdate802_11Counter(
 )
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//p802_11Counter->TransmittedFragmentCount
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	p802_11Counter->MulticastTransmittedFrameCount = (unsigned long long) (pStatistic->dwTsrBroadcast[TYPE_AC0DMA] +
@@ -657,7 +687,10 @@ STAvUpdate802_11Counter(
 	p802_11Counter->MultipleRetryCount = (unsigned long long) (pStatistic->dwTsrMoreThanOnceRetry[TYPE_AC0DMA] +
 								   pStatistic->dwTsrMoreThanOnceRetry[TYPE_TXDMA0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//p802_11Counter->FrameDuplicateCount
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	p802_11Counter->RTSSuccessCount += (unsigned long long)  (dwCounter & 0x000000ff);
@@ -665,7 +698,10 @@ STAvUpdate802_11Counter(
 	p802_11Counter->ACKFailureCount += (unsigned long long) ((dwCounter & 0x00ff0000) >> 16);
 	p802_11Counter->FCSErrorCount +=   (unsigned long long) ((dwCounter & 0xff000000) >> 24);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//p802_11Counter->ReceivedFragmentCount
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	p802_11Counter->MulticastReceivedFrameCount = (unsigned long long) (pStatistic->dwRsrBroadcast +

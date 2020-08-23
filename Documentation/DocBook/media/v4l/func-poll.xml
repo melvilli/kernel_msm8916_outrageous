@@ -30,16 +30,22 @@ to accept data for output.</para>
 
     <para>When streaming I/O has been negotiated this function waits
 <<<<<<< HEAD
+<<<<<<< HEAD
 until a buffer has been filled or displayed and can be dequeued with
 the &VIDIOC-DQBUF; ioctl. When buffers are already in the outgoing
 queue of the driver the function returns immediately.</para>
 =======
+=======
+>>>>>>> v3.18
 until a buffer has been filled by the capture device and can be dequeued
 with the &VIDIOC-DQBUF; ioctl. For output devices this function waits
 until the device is ready to accept a new buffer to be queued up with
 the &VIDIOC-QBUF; ioctl for display. When buffers are already in the outgoing
 queue of the driver (capture) or the incoming queue isn't full (display)
 the function returns immediately.</para>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     <para>On success <function>poll()</function> returns the number of
@@ -54,11 +60,14 @@ flags. When the function timed out it returns a value of zero, on
 failure it returns <returnvalue>-1</returnvalue> and the
 <varname>errno</varname> variable is set appropriately. When the
 <<<<<<< HEAD
+<<<<<<< HEAD
 application did not call &VIDIOC-QBUF; or &VIDIOC-STREAMON; yet the
 <function>poll()</function> function succeeds, but sets the
 <constant>POLLERR</constant> flag in the
 <structfield>revents</structfield> field.</para>
 =======
+=======
+>>>>>>> v3.18
 application did not call &VIDIOC-STREAMON; the
 <function>poll()</function> function succeeds, but sets the
 <constant>POLLERR</constant> flag in the
@@ -75,6 +84,9 @@ field.</para>
     <para>If an event occurred (see &VIDIOC-DQEVENT;) then
 <constant>POLLPRI</constant> will be set in the <structfield>revents</structfield>
 field and <function>poll()</function> will return.</para>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     <para>When use of the <function>read()</function> function has
@@ -87,11 +99,14 @@ may return immediately.</para>
 
     <para>When use of the <function>write()</function> function has
 <<<<<<< HEAD
+<<<<<<< HEAD
 been negotiated the <function>poll</function> function just waits
 until the driver is ready for a non-blocking
 <function>write()</function> call.</para>
 
 =======
+=======
+>>>>>>> v3.18
 been negotiated and the driver does not stream yet, the
 <function>poll</function> function starts streaming. When that fails
 it returns a <constant>POLLERR</constant> as above. Otherwise it waits
@@ -104,6 +119,9 @@ field), then <function>poll()</function> will <emphasis>not</emphasis>
 start streaming if the driver does not stream yet. This makes it
 possible to just poll for events and not for buffers.</para>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     <para>All drivers implementing the <function>read()</function> or
 <function>write()</function> function or streaming I/O must also

@@ -1275,7 +1275,11 @@ void ql_mpi_reset_work(struct work_struct *work)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ql_core_dump(qdev, qdev->mpi_coredump)) {
+=======
+	if (qdev->mpi_coredump && !ql_core_dump(qdev, qdev->mpi_coredump)) {
+>>>>>>> v3.18
 =======
 	if (qdev->mpi_coredump && !ql_core_dump(qdev, qdev->mpi_coredump)) {
 >>>>>>> v3.18

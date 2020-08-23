@@ -339,15 +339,21 @@ again:
 
 		if (!start_time) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			start_time = get_tod_clock();
 			goto again;
 		}
 		if ((get_tod_clock() - start_time) < QDIO_BUSY_BIT_PATIENCE)
 =======
+=======
+>>>>>>> v3.18
 			start_time = get_tod_clock_fast();
 			goto again;
 		}
 		if (get_tod_clock_fast() - start_time < QDIO_BUSY_BIT_PATIENCE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto again;
 	}
@@ -417,9 +423,15 @@ static inline void qdio_stop_polling(struct qdio_q *q)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void account_sbals(struct qdio_q *q, int count)
 {
 	int pos = 0;
+=======
+static inline void account_sbals(struct qdio_q *q, unsigned int count)
+{
+	int pos;
+>>>>>>> v3.18
 =======
 static inline void account_sbals(struct qdio_q *q, unsigned int count)
 {
@@ -432,8 +444,12 @@ static inline void account_sbals(struct qdio_q *q, unsigned int count)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (count >>= 1)
 		pos++;
+=======
+	pos = ilog2(count);
+>>>>>>> v3.18
 =======
 	pos = ilog2(count);
 >>>>>>> v3.18
@@ -522,7 +538,11 @@ static int get_inbound_buffer_frontier(struct qdio_q *q)
 	unsigned char state = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->timestamp = get_tod_clock();
+=======
+	q->timestamp = get_tod_clock_fast();
+>>>>>>> v3.18
 =======
 	q->timestamp = get_tod_clock_fast();
 >>>>>>> v3.18
@@ -550,7 +570,11 @@ static int get_inbound_buffer_frontier(struct qdio_q *q)
 		inbound_primed(q, count);
 		q->first_to_check = add_buf(q->first_to_check, count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (atomic_sub(count, &q->nr_buf_used) == 0)
+=======
+		if (atomic_sub_return(count, &q->nr_buf_used) == 0)
+>>>>>>> v3.18
 =======
 		if (atomic_sub_return(count, &q->nr_buf_used) == 0)
 >>>>>>> v3.18
@@ -621,7 +645,11 @@ static inline int qdio_inbound_q_done(struct qdio_q *q)
 	 * has (probably) not moved (see qdio_inbound_processing).
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_tod_clock() > q->u.in.timestamp + QDIO_INPUT_THRESHOLD) {
+=======
+	if (get_tod_clock_fast() > q->u.in.timestamp + QDIO_INPUT_THRESHOLD) {
+>>>>>>> v3.18
 =======
 	if (get_tod_clock_fast() > q->u.in.timestamp + QDIO_INPUT_THRESHOLD) {
 >>>>>>> v3.18
@@ -637,6 +665,7 @@ static inline int contains_aobs(struct qdio_q *q)
 	return !q->is_input_q && q->u.out.use_cq;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void qdio_trace_aob(struct qdio_irq *irq, struct qdio_q *q,
 				int i, struct qaob *aob)
@@ -682,6 +711,8 @@ static inline void qdio_trace_aob(struct qdio_irq *irq, struct qdio_q *q,
 	DBF_DEV_EVENT(DBF_INFO, irq, "USER2:%lx", (unsigned long) aob->user2);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void qdio_handle_aobs(struct qdio_q *q, int start, int count)
@@ -805,7 +836,11 @@ static int get_outbound_buffer_frontier(struct qdio_q *q)
 	unsigned char state = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->timestamp = get_tod_clock();
+=======
+	q->timestamp = get_tod_clock_fast();
+>>>>>>> v3.18
 =======
 	q->timestamp = get_tod_clock_fast();
 >>>>>>> v3.18
@@ -1077,7 +1112,11 @@ static void qdio_int_handler_pci(struct qdio_irq *irq_ptr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pci_out_supported(q))
+=======
+	if (!(irq_ptr->qib.ac & QIB_AC_OUTBOUND_PCI_SUPPORTED))
+>>>>>>> v3.18
 =======
 	if (!(irq_ptr->qib.ac & QIB_AC_OUTBOUND_PCI_SUPPORTED))
 >>>>>>> v3.18
@@ -1319,6 +1358,7 @@ int qdio_free(struct ccw_device *cdev)
 
 	DBF_EVENT("qfree:%4x", cdev->private->schid.sch_no);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&irq_ptr->setup_mutex);
 
 	if (irq_ptr->debug_area != NULL) {
@@ -1326,10 +1366,15 @@ int qdio_free(struct ccw_device *cdev)
 		irq_ptr->debug_area = NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	DBF_DEV_EVENT(DBF_ERR, irq_ptr, "dbf abandoned");
 	mutex_lock(&irq_ptr->setup_mutex);
 
 	irq_ptr->debug_area = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cdev->private->qdio_data = NULL;
 	mutex_unlock(&irq_ptr->setup_mutex);
@@ -1368,7 +1413,12 @@ int qdio_allocate(struct qdio_initialize *init_data)
 
 	mutex_init(&irq_ptr->setup_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qdio_allocate_dbf(init_data, irq_ptr);
+=======
+	if (qdio_allocate_dbf(init_data, irq_ptr))
+		goto out_rel;
+>>>>>>> v3.18
 =======
 	if (qdio_allocate_dbf(init_data, irq_ptr))
 		goto out_rel;
@@ -1594,7 +1644,11 @@ static int handle_inbound(struct qdio_q *q, unsigned int callflags,
 			  int bufnr, int count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int used, diff;
+=======
+	int diff;
+>>>>>>> v3.18
 =======
 	int diff;
 >>>>>>> v3.18
@@ -1631,7 +1685,11 @@ static int handle_inbound(struct qdio_q *q, unsigned int callflags,
 set:
 	count = set_buf_states(q, bufnr, SLSB_CU_INPUT_EMPTY, count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	used = atomic_add_return(count, &q->nr_buf_used) - count;
+=======
+	atomic_add(count, &q->nr_buf_used);
+>>>>>>> v3.18
 =======
 	atomic_add(count, &q->nr_buf_used);
 >>>>>>> v3.18
@@ -1857,7 +1915,10 @@ int qdio_stop_irq(struct ccw_device *cdev, int nr)
 EXPORT_SYMBOL(qdio_stop_irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * qdio_pnso_brinfo() - perform network subchannel op #0 - bridge info.
  * @schid:		Subchannel ID.
@@ -1949,6 +2010,9 @@ out:
 }
 EXPORT_SYMBOL_GPL(qdio_pnso_brinfo);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init init_QDIO(void)
 {

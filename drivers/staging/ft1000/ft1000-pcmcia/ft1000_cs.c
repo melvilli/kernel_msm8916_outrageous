@@ -96,7 +96,11 @@ static int ft1000_config(struct pcmcia_device *link)
 	ret = pcmcia_loop_config(link, ft1000_confcheck, NULL);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "ft1000: Could not configure pcmcia\n");
+=======
+		dev_err(&link->dev, "Could not configure pcmcia\n");
+>>>>>>> v3.18
 =======
 		dev_err(&link->dev, "Could not configure pcmcia\n");
 >>>>>>> v3.18
@@ -107,7 +111,11 @@ static int ft1000_config(struct pcmcia_device *link)
 	ret = pcmcia_enable_device(link);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "ft1000: could not enable pcmcia\n");
+=======
+		dev_err(&link->dev, "Could not enable pcmcia\n");
+>>>>>>> v3.18
 =======
 		dev_err(&link->dev, "Could not enable pcmcia\n");
 >>>>>>> v3.18
@@ -117,7 +125,11 @@ static int ft1000_config(struct pcmcia_device *link)
 	link->priv = init_ft1000_card(link, &ft1000_reset);
 	if (!link->priv) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "ft1000: Could not register as network device\n");
+=======
+		dev_err(&link->dev, "Could not register as network device\n");
+>>>>>>> v3.18
 =======
 		dev_err(&link->dev, "Could not register as network device\n");
 >>>>>>> v3.18

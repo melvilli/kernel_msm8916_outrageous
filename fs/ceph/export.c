@@ -9,6 +9,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * NFS export support
  *
  * NFS re-export of a ceph mount is, at present, only semireliable.
@@ -28,6 +29,8 @@
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Basic fh
  */
 struct ceph_nfs_fh {
@@ -35,6 +38,7 @@ struct ceph_nfs_fh {
 } __attribute__ ((packed));
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Larger 'connectable' fh that includes parent ino and name hash.
  * Use this whenever possible, as it works more reliably.
@@ -53,12 +57,17 @@ struct ceph_nfs_confh {
  * failure from a too-small @max_len.
  */
 =======
+=======
+>>>>>>> v3.18
  * Larger fh that includes parent ino.
  */
 struct ceph_nfs_confh {
 	u64 ino, parent_ino;
 } __attribute__ ((packed));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ceph_encode_fh(struct inode *inode, u32 *rawfh, int *max_len,
 			  struct inode *parent_inode)
@@ -69,8 +78,11 @@ static int ceph_encode_fh(struct inode *inode, u32 *rawfh, int *max_len,
 	int connected_handle_length = sizeof(*cfh)/4;
 	int handle_length = sizeof(*fh)/4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry *dentry;
 	struct dentry *parent;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -78,6 +90,7 @@ static int ceph_encode_fh(struct inode *inode, u32 *rawfh, int *max_len,
 	if (ceph_snap(inode) != CEPH_NOSNAP)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dentry = d_find_alias(inode);
 
@@ -121,6 +134,8 @@ static int ceph_encode_fh(struct inode *inode, u32 *rawfh, int *max_len,
 static struct dentry *__fh_to_dentry(struct super_block *sb,
 				     struct ceph_nfs_fh *fh, int fh_len)
 =======
+=======
+>>>>>>> v3.18
 	if (parent_inode && (*max_len < connected_handle_length)) {
 		*max_len = connected_handle_length;
 		return FILEID_INVALID;
@@ -146,6 +161,9 @@ static struct dentry *__fh_to_dentry(struct super_block *sb,
 }
 
 static struct dentry *__fh_to_dentry(struct super_block *sb, u64 ino)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ceph_mds_client *mdsc = ceph_sb_to_client(sb)->mdsc;
@@ -155,11 +173,15 @@ static struct dentry *__fh_to_dentry(struct super_block *sb, u64 ino)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fh_len < sizeof(*fh) / 4)
 		return ERR_PTR(-ESTALE);
 
 	dout("__fh_to_dentry %llx\n", fh->ino);
 	vino.ino = fh->ino;
+=======
+	vino.ino = ino;
+>>>>>>> v3.18
 =======
 	vino.ino = ino;
 >>>>>>> v3.18
@@ -187,8 +209,11 @@ static struct dentry *__fh_to_dentry(struct super_block *sb, u64 ino)
 	dentry = d_obtain_alias(inode);
 	if (IS_ERR(dentry)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("fh_to_dentry %llx -- inode %p but ENOMEM\n",
 		       fh->ino, inode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		iput(inode);
@@ -197,20 +222,27 @@ static struct dentry *__fh_to_dentry(struct super_block *sb, u64 ino)
 	err = ceph_init_dentry(dentry);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iput(inode);
 		return ERR_PTR(err);
 	}
 	dout("__fh_to_dentry %llx %p dentry %p\n", fh->ino, inode, dentry);
 =======
+=======
+>>>>>>> v3.18
 		dput(dentry);
 		return ERR_PTR(err);
 	}
 	dout("__fh_to_dentry %llx %p dentry %p\n", ino, inode, dentry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return dentry;
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * convert connectable fh to dentry
  */
@@ -260,6 +292,8 @@ static struct dentry *__cfh_to_dentry(struct super_block *sb,
 		pr_err("cfh_to_dentry %llx -- inode %p but ENOMEM\n",
 		       cfh->ino, inode);
 =======
+=======
+>>>>>>> v3.18
  * convert regular fh to dentry
  */
 static struct dentry *ceph_fh_to_dentry(struct super_block *sb,
@@ -312,6 +346,7 @@ static struct dentry *__get_parent(struct super_block *sb,
 
 	dentry = d_obtain_alias(inode);
 	if (IS_ERR(dentry)) {
+<<<<<<< HEAD
 >>>>>>> v3.18
 		iput(inode);
 		return dentry;
@@ -371,17 +406,22 @@ static struct dentry *ceph_fh_to_parent(struct super_block *sb,
 	if (IS_ERR(dentry)) {
 		pr_err("fh_to_parent %llx -- inode %p but ENOMEM\n",
 		       cfh->ino, inode);
+=======
+>>>>>>> v3.18
 		iput(inode);
 		return dentry;
 	}
 	err = ceph_init_dentry(dentry);
 	if (err < 0) {
+<<<<<<< HEAD
 		iput(inode);
 		return ERR_PTR(err);
 	}
 	dout("fh_to_parent %llx %p dentry %p\n", cfh->ino, inode, dentry);
 	return dentry;
 =======
+=======
+>>>>>>> v3.18
 		dput(dentry);
 		return ERR_PTR(err);
 	}
@@ -461,6 +501,9 @@ static int ceph_get_name(struct dentry *parent, char *name,
 
 	ceph_mdsc_put_request(req);
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -469,6 +512,11 @@ const struct export_operations ceph_export_ops = {
 	.fh_to_dentry = ceph_fh_to_dentry,
 	.fh_to_parent = ceph_fh_to_parent,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_parent = ceph_get_parent,
+	.get_name = ceph_get_name,
+>>>>>>> v3.18
 =======
 	.get_parent = ceph_get_parent,
 	.get_name = ceph_get_name,

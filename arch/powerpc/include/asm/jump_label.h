@@ -11,6 +11,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef __ASSEMBLY__
+>>>>>>> v3.18
 =======
 #ifndef __ASSEMBLY__
 >>>>>>> v3.18
@@ -47,7 +51,10 @@ struct jump_entry {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 #define ARCH_STATIC_BRANCH(LABEL, KEY)		\
 1098:	nop;					\
@@ -56,5 +63,8 @@ struct jump_entry {
 	.popsection
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_POWERPC_JUMP_LABEL_H */

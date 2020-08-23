@@ -23,7 +23,11 @@
 
 static int ad5624r_spi_write(struct spi_device *spi,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     u8 cmd, u8 addr, u16 val, u8 shift)
+=======
+			     u8 cmd, u8 addr, u16 val, u8 len)
+>>>>>>> v3.18
 =======
 			     u8 cmd, u8 addr, u16 val, u8 len)
 >>>>>>> v3.18
@@ -40,7 +44,11 @@ static int ad5624r_spi_write(struct spi_device *spi,
 	 * for the AD5664R, AD5644R, and AD5624R, respectively.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = (0 << 22) | (cmd << 19) | (addr << 16) | (val << shift);
+=======
+	data = (0 << 22) | (cmd << 19) | (addr << 16) | (val << (16 - len));
+>>>>>>> v3.18
 =======
 	data = (0 << 22) | (cmd << 19) | (addr << 16) | (val << (16 - len));
 >>>>>>> v3.18
@@ -59,6 +67,7 @@ static int ad5624r_read_raw(struct iio_dev *indio_dev,
 {
 	struct ad5624r_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long scale_uv;
 
 	switch (m) {
@@ -69,12 +78,17 @@ static int ad5624r_read_raw(struct iio_dev *indio_dev,
 		return IIO_VAL_INT_PLUS_MICRO;
 
 =======
+=======
+>>>>>>> v3.18
 
 	switch (m) {
 	case IIO_CHAN_INFO_SCALE:
 		*val = st->vref_mv;
 		*val2 = chan->scan_type.realbits;
 		return IIO_VAL_FRACTIONAL_LOG2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return -EINVAL;
@@ -88,7 +102,10 @@ static int ad5624r_write_raw(struct iio_dev *indio_dev,
 {
 	struct ad5624r_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -103,10 +120,15 @@ static int ad5624r_write_raw(struct iio_dev *indio_dev,
 				chan->scan_type.shift);
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EINVAL;
 	}
 
 	return -EINVAL;
+=======
+		return -EINVAL;
+	}
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 	}
@@ -189,13 +211,19 @@ static const struct iio_chan_spec_ext_info ad5624r_ext_info[] = {
 		.read = ad5624r_read_dac_powerdown,
 		.write = ad5624r_write_dac_powerdown,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	IIO_ENUM("powerdown_mode", true, &ad5624r_powerdown_mode_enum),
 =======
+=======
+>>>>>>> v3.18
 		.shared = IIO_SEPARATE,
 	},
 	IIO_ENUM("powerdown_mode", IIO_SHARED_BY_TYPE,
 		 &ad5624r_powerdown_mode_enum),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	IIO_ENUM_AVAILABLE("powerdown_mode", &ad5624r_powerdown_mode_enum),
 	{ },
@@ -210,14 +238,20 @@ static const struct iio_chan_spec_ext_info ad5624r_ext_info[] = {
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE), \
 	.address = (_chan), \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_type = IIO_ST('u', (_bits), 16, 16 - (_bits)), \
 =======
+=======
+>>>>>>> v3.18
 	.scan_type = { \
 		.sign = 'u', \
 		.realbits = (_bits), \
 		.storagebits = 16, \
 		.shift = 16 - (_bits), \
 	}, \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ext_info = ad5624r_ext_info, \
 }
@@ -268,6 +302,7 @@ static int ad5624r_probe(struct spi_device *spi)
 	int ret, voltage_uv = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
@@ -280,6 +315,8 @@ static int ad5624r_probe(struct spi_device *spi)
 		if (ret)
 			goto error_put_reg;
 =======
+=======
+>>>>>>> v3.18
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
 		return -ENOMEM;
@@ -289,6 +326,9 @@ static int ad5624r_probe(struct spi_device *spi)
 		ret = regulator_enable(st->reg);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ret = regulator_get_voltage(st->reg);
@@ -331,11 +371,14 @@ error_disable_reg:
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_put_reg:
 	if (!IS_ERR(st->reg))
 		regulator_put(st->reg);
 	iio_device_free(indio_dev);
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -349,11 +392,16 @@ static int ad5624r_remove(struct spi_device *spi)
 
 	iio_device_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR(st->reg)) {
 		regulator_disable(st->reg);
 		regulator_put(st->reg);
 	}
 	iio_device_free(indio_dev);
+=======
+	if (!IS_ERR(st->reg))
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);

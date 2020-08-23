@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -69,7 +73,10 @@
 #define ACPI_UNUSED_VAR __attribute__ ((unused))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Some versions of gcc implement strchr() with a buggy macro. So,
  * undef it here. Prevents error messages of this form (usually from the
@@ -81,5 +88,8 @@
 #undef strchr
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* __ACGCC_H__ */

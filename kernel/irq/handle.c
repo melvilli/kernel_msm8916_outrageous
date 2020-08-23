@@ -42,6 +42,10 @@ irqreturn_t no_action(int cpl, void *dev_id)
 	return IRQ_NONE;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(no_action);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(no_action);
 >>>>>>> v3.18
@@ -56,7 +60,11 @@ static void warn_no_thread(unsigned int irq, struct irqaction *action)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void irq_wake_thread(struct irq_desc *desc, struct irqaction *action)
+=======
+void __irq_wake_thread(struct irq_desc *desc, struct irqaction *action)
+>>>>>>> v3.18
 =======
 void __irq_wake_thread(struct irq_desc *desc, struct irqaction *action)
 >>>>>>> v3.18
@@ -166,7 +174,11 @@ handle_irq_event_percpu(struct irq_desc *desc, struct irqaction *action)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			irq_wake_thread(desc, action);
+=======
+			__irq_wake_thread(desc, action);
+>>>>>>> v3.18
 =======
 			__irq_wake_thread(desc, action);
 >>>>>>> v3.18

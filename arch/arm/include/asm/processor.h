@@ -23,6 +23,10 @@
 #include <asm/ptrace.h>
 #include <asm/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/unified.h>
+>>>>>>> v3.18
 =======
 #include <asm/unified.h>
 >>>>>>> v3.18
@@ -34,9 +38,12 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int boot_reason;
 extern unsigned int cold_boot;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct debug_info {
@@ -92,6 +99,11 @@ unsigned long get_wchan(struct task_struct *p);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency()                cpu_relax()
+
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency()                cpu_relax()
 
@@ -103,7 +115,10 @@ unsigned long get_wchan(struct task_struct *p);
 #define KSTK_ESP(tsk)	task_pt_regs(tsk)->ARM_sp
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 #define __ALT_SMP_ASM(smp, up)						\
 	"9998:	" smp "\n"						\
@@ -115,6 +130,9 @@ unsigned long get_wchan(struct task_struct *p);
 #define __ALT_SMP_ASM(smp, up)	up
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Prefetching support - only ARMv5.
@@ -126,6 +144,7 @@ static inline void prefetch(const void *ptr)
 {
 	__asm__ __volatile__(
 		"pld\t%a0"
+<<<<<<< HEAD
 <<<<<<< HEAD
 		:
 		: "p" (ptr)
@@ -139,6 +158,8 @@ static inline void prefetch(const void *ptr)
 #define spin_lock_prefetch(x) do { } while (0)
 
 =======
+=======
+>>>>>>> v3.18
 		:: "p" (ptr));
 }
 
@@ -155,6 +176,9 @@ static inline void prefetchw(const void *ptr)
 		:: "p" (ptr));
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

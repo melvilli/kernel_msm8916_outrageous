@@ -46,6 +46,10 @@
 #endif
 #include <linux/cpu_rmap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ptp_clock_kernel.h>
+>>>>>>> v3.18
 =======
 #include <linux/ptp_clock_kernel.h>
 >>>>>>> v3.18
@@ -61,8 +65,13 @@
 
 #define DRV_NAME	"mlx4_en"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_VERSION	"2.0"
 #define DRV_RELDATE	"Dec 2011"
+=======
+#define DRV_VERSION	"2.2-1"
+#define DRV_RELDATE	"Feb 2014"
+>>>>>>> v3.18
 =======
 #define DRV_VERSION	"2.2-1"
 #define DRV_RELDATE	"Feb 2014"
@@ -102,6 +111,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MLX4_EN_PRIV_FLAGS_BLUEFLAME 1
+
+>>>>>>> v3.18
 =======
 #define MLX4_EN_PRIV_FLAGS_BLUEFLAME 1
 
@@ -111,6 +125,7 @@
 /* Use the maximum between 16384 and a single page */
 #define MLX4_EN_ALLOC_SIZE	PAGE_ALIGN(16384)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MLX4_EN_ALLOC_ORDER	get_order(MLX4_EN_ALLOC_SIZE)
 
 /* Receive fragment sizes; we use at most 4 fragments (for 9600 byte MTU
@@ -119,6 +134,8 @@ enum {
 	FRAG_SZ0 = 512 - NET_IP_ALIGN,
 	FRAG_SZ1 = 1024,
 =======
+=======
+>>>>>>> v3.18
 
 #define MLX4_EN_ALLOC_PREFER_ORDER	PAGE_ALLOC_COSTLY_ORDER
 
@@ -127,6 +144,9 @@ enum {
 enum {
 	FRAG_SZ0 = 1536 - NET_IP_ALIGN,
 	FRAG_SZ1 = 4096,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	FRAG_SZ2 = 4096,
 	FRAG_SZ3 = MLX4_EN_ALLOC_SIZE
@@ -143,6 +163,10 @@ enum {
 
 #define MLX4_EN_SMALL_PKT_SIZE		64
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MLX4_EN_MIN_TX_RING_P_UP	1
+>>>>>>> v3.18
 =======
 #define MLX4_EN_MIN_TX_RING_P_UP	1
 >>>>>>> v3.18
@@ -154,6 +178,11 @@ enum {
 					 MLX4_EN_NUM_UP)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MLX4_EN_DEFAULT_TX_WORK		256
+
+>>>>>>> v3.18
 =======
 #define MLX4_EN_DEFAULT_TX_WORK		256
 
@@ -185,8 +214,11 @@ enum {
 #define MLX4_EN_TX_POLL_TIMEOUT	(HZ / 4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ETH_LLC_SNAP_SIZE	8
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SMALL_PACKET_SIZE      (256 - NET_IP_ALIGN)
@@ -223,7 +255,10 @@ enum {
 #endif /* MLX4_EN_PERF_STAT */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Constants for TX flow */
 enum {
 	MAX_INLINE = 104, /* 128 - 16 - 4 - 4 */
@@ -231,6 +266,9 @@ enum {
 	MIN_PKT_LEN = 17,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Configurables
@@ -252,6 +290,7 @@ enum cq_type {
 struct mlx4_en_tx_info {
 	struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 nr_txbb;
 	u32 nr_bytes;
 	u8 linear;
@@ -260,6 +299,8 @@ struct mlx4_en_tx_info {
 	u8 ts_requested;
 };
 =======
+=======
+>>>>>>> v3.18
 	dma_addr_t	map0_dma;
 	u32		map0_byte_count;
 	u32		nr_txbb;
@@ -270,6 +311,9 @@ struct mlx4_en_tx_info {
 	u8		ts_requested;
 	u8		nr_maps;
 } ____cacheline_aligned_in_smp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -294,6 +338,7 @@ struct mlx4_en_tx_desc {
 #define MLX4_EN_CX3_HIGH_ID	0x1005
 
 struct mlx4_en_rx_alloc {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct page *page;
 	dma_addr_t dma;
@@ -329,6 +374,8 @@ struct mlx4_en_tx_ring {
 	int hwtstamp_tx_type;
 };
 =======
+=======
+>>>>>>> v3.18
 	struct page	*page;
 	dma_addr_t	dma;
 	u32		page_offset;
@@ -376,6 +423,9 @@ struct mlx4_en_tx_ring {
 	struct netdev_queue	*tx_queue;
 	int			hwtstamp_tx_type;
 } ____cacheline_aligned_in_smp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct mlx4_en_rx_desc {
@@ -401,10 +451,13 @@ struct mlx4_en_rx_ring {
 	unsigned long bytes;
 	unsigned long packets;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long csum_ok;
 	unsigned long csum_none;
 	int hwtstamp_rx_filter;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 	unsigned long yields;
 	unsigned long misses;
@@ -414,6 +467,9 @@ struct mlx4_en_rx_ring {
 	unsigned long csum_none;
 	int hwtstamp_rx_filter;
 	cpumask_var_t affinity_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -432,7 +488,10 @@ struct mlx4_en_cq {
 	struct mlx4_cqe *buf;
 #define MLX4_EN_OPCODE_ERROR	0x1e
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_NET_RX_BUSY_POLL
 	unsigned int state;
@@ -447,6 +506,9 @@ struct mlx4_en_cq {
 	spinlock_t poll_lock; /* protects from LLS/napi conflicts */
 #endif  /* CONFIG_NET_RX_BUSY_POLL */
 	struct irq_desc *irq_desc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -462,6 +524,10 @@ struct mlx4_en_port_profile {
 	u8 tx_ppp;
 	int rss_rings;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int inline_thold;
+>>>>>>> v3.18
 =======
 	int inline_thold;
 >>>>>>> v3.18
@@ -496,6 +562,11 @@ struct mlx4_en_dev {
 	spinlock_t              uar_lock;
 	u8			mac_removed[MLX4_MAX_PORTS + 1];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rwlock_t		clock_lock;
+	u32			nominal_c_mult;
+>>>>>>> v3.18
 =======
 	rwlock_t		clock_lock;
 	u32			nominal_c_mult;
@@ -505,6 +576,11 @@ struct mlx4_en_dev {
 	unsigned long		last_overflow_check;
 	unsigned long		overflow_period;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ptp_clock	*ptp_clock;
+	struct ptp_clock_info	ptp_clock_info;
+>>>>>>> v3.18
 =======
 	struct ptp_clock	*ptp_clock;
 	struct ptp_clock_info	ptp_clock_info;
@@ -536,6 +612,10 @@ struct mlx4_en_pkt_stats {
 struct mlx4_en_port_stats {
 	unsigned long tso_packets;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long xmit_more;
+>>>>>>> v3.18
 =======
 	unsigned long xmit_more;
 >>>>>>> v3.18
@@ -547,7 +627,11 @@ struct mlx4_en_port_stats {
 	unsigned long rx_chksum_none;
 	unsigned long tx_chksum_offload;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NUM_PORT_STATS		8
+=======
+#define NUM_PORT_STATS		9
+>>>>>>> v3.18
 =======
 #define NUM_PORT_STATS		9
 >>>>>>> v3.18
@@ -575,6 +659,10 @@ struct mlx4_en_mc_list {
 	u8			addr[ETH_ALEN];
 	u64			reg_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64			tunnel_reg_id;
+>>>>>>> v3.18
 =======
 	u64			tunnel_reg_id;
 >>>>>>> v3.18
@@ -586,8 +674,11 @@ struct mlx4_en_frag_info {
 	u16 frag_stride;
 	u16 frag_align;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 last_offset;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -663,7 +754,11 @@ struct mlx4_en_priv {
 	int allocated;
 	int stride;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char prev_mac[ETH_ALEN + 2];
+=======
+	unsigned char current_mac[ETH_ALEN + 2];
+>>>>>>> v3.18
 =======
 	unsigned char current_mac[ETH_ALEN + 2];
 >>>>>>> v3.18
@@ -672,6 +767,10 @@ struct mlx4_en_priv {
 	int base_qpn;
 	int cqe_factor;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int cqe_size;
+>>>>>>> v3.18
 =======
 	int cqe_size;
 >>>>>>> v3.18
@@ -681,6 +780,10 @@ struct mlx4_en_priv {
 	u32 flags;
 	u8 num_tx_rings_p_up;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 tx_work_limit;
+>>>>>>> v3.18
 =======
 	u32 tx_work_limit;
 >>>>>>> v3.18
@@ -692,15 +795,21 @@ struct mlx4_en_priv {
 	u16 log_rx_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mlx4_en_tx_ring *tx_ring;
 	struct mlx4_en_rx_ring rx_ring[MAX_RX_RINGS];
 	struct mlx4_en_cq *tx_cq;
 	struct mlx4_en_cq rx_cq[MAX_RX_RINGS];
 =======
+=======
+>>>>>>> v3.18
 	struct mlx4_en_tx_ring **tx_ring;
 	struct mlx4_en_rx_ring *rx_ring[MAX_RX_RINGS];
 	struct mlx4_en_cq **tx_cq;
 	struct mlx4_en_cq *rx_cq[MAX_RX_RINGS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mlx4_qp drop_qp;
 	struct work_struct rx_mode_task;
@@ -709,11 +818,17 @@ struct mlx4_en_priv {
 	struct delayed_work stats_task;
 	struct delayed_work service_task;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MLX4_EN_VXLAN
 	struct work_struct vxlan_add_task;
 	struct work_struct vxlan_del_task;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mlx4_en_perf_stats pstats;
 	struct mlx4_en_pkt_stats pkstats;
@@ -741,12 +856,18 @@ struct mlx4_en_priv {
 	struct hlist_head filter_hash[1 << MLX4_EN_FILTER_HASH_SHIFT];
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	u64 tunnel_reg_id;
 	__be16 vxlan_port;
 
 	u32 pflags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -763,7 +884,10 @@ struct mlx4_mac_entry {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct mlx4_cqe *mlx4_en_get_cqe(void *buf, int idx, int cqe_sz)
 {
 	return buf + idx * cqe_sz;
@@ -878,6 +1002,9 @@ static inline bool mlx4_en_cq_busy_polling(struct mlx4_en_cq *cq)
 }
 #endif /* CONFIG_NET_RX_BUSY_POLL */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MLX4_EN_WOL_DO_MODIFY (1ULL << 63)
 
@@ -895,9 +1022,15 @@ void mlx4_en_free_resources(struct mlx4_en_priv *priv);
 int mlx4_en_alloc_resources(struct mlx4_en_priv *priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mlx4_en_create_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq *cq,
 		      int entries, int ring, enum cq_type mode);
 void mlx4_en_destroy_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq *cq);
+=======
+int mlx4_en_create_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq **pcq,
+		      int entries, int ring, enum cq_type mode, int node);
+void mlx4_en_destroy_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq **pcq);
+>>>>>>> v3.18
 =======
 int mlx4_en_create_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq **pcq,
 		      int entries, int ring, enum cq_type mode, int node);
@@ -911,6 +1044,7 @@ int mlx4_en_arm_cq(struct mlx4_en_priv *priv, struct mlx4_en_cq *cq);
 
 void mlx4_en_tx_irq(struct mlx4_cq *mcq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 mlx4_en_select_queue(struct net_device *dev, struct sk_buff *skb);
 netdev_tx_t mlx4_en_xmit(struct sk_buff *skb, struct net_device *dev);
 
@@ -918,6 +1052,8 @@ int mlx4_en_create_tx_ring(struct mlx4_en_priv *priv, struct mlx4_en_tx_ring *ri
 			   int qpn, u32 size, u16 stride);
 void mlx4_en_destroy_tx_ring(struct mlx4_en_priv *priv, struct mlx4_en_tx_ring *ring);
 =======
+=======
+>>>>>>> v3.18
 u16 mlx4_en_select_queue(struct net_device *dev, struct sk_buff *skb,
 			 void *accel_priv, select_queue_fallback_t fallback);
 netdev_tx_t mlx4_en_xmit(struct sk_buff *skb, struct net_device *dev);
@@ -928,12 +1064,16 @@ int mlx4_en_create_tx_ring(struct mlx4_en_priv *priv,
 			   int node, int queue_index);
 void mlx4_en_destroy_tx_ring(struct mlx4_en_priv *priv,
 			     struct mlx4_en_tx_ring **pring);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int mlx4_en_activate_tx_ring(struct mlx4_en_priv *priv,
 			     struct mlx4_en_tx_ring *ring,
 			     int cq, int user_prio);
 void mlx4_en_deactivate_tx_ring(struct mlx4_en_priv *priv,
 				struct mlx4_en_tx_ring *ring);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int mlx4_en_create_rx_ring(struct mlx4_en_priv *priv,
@@ -942,12 +1082,17 @@ int mlx4_en_create_rx_ring(struct mlx4_en_priv *priv,
 void mlx4_en_destroy_rx_ring(struct mlx4_en_priv *priv,
 			     struct mlx4_en_rx_ring *ring,
 =======
+=======
+>>>>>>> v3.18
 void mlx4_en_set_num_rx_rings(struct mlx4_en_dev *mdev);
 int mlx4_en_create_rx_ring(struct mlx4_en_priv *priv,
 			   struct mlx4_en_rx_ring **pring,
 			   u32 size, u16 stride, int node);
 void mlx4_en_destroy_rx_ring(struct mlx4_en_priv *priv,
 			     struct mlx4_en_rx_ring **pring,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			     u32 size, u16 stride);
 int mlx4_en_activate_rx_rings(struct mlx4_en_priv *priv);
@@ -958,6 +1103,10 @@ int mlx4_en_process_rx_cq(struct net_device *dev,
 			  int budget);
 int mlx4_en_poll_rx_cq(struct napi_struct *napi, int budget);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int mlx4_en_poll_tx_cq(struct napi_struct *napi, int budget);
+>>>>>>> v3.18
 =======
 int mlx4_en_poll_tx_cq(struct napi_struct *napi, int budget);
 >>>>>>> v3.18
@@ -991,8 +1140,12 @@ int mlx4_en_setup_tc(struct net_device *dev, u8 up);
 
 #ifdef CONFIG_RFS_ACCEL
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mlx4_en_cleanup_filters(struct mlx4_en_priv *priv,
 			     struct mlx4_en_rx_ring *rx_ring);
+=======
+void mlx4_en_cleanup_filters(struct mlx4_en_priv *priv);
+>>>>>>> v3.18
 =======
 void mlx4_en_cleanup_filters(struct mlx4_en_priv *priv);
 >>>>>>> v3.18
@@ -1001,7 +1154,10 @@ void mlx4_en_cleanup_filters(struct mlx4_en_priv *priv);
 #define MLX4_EN_NUM_SELF_TEST	5
 void mlx4_en_ex_selftest(struct net_device *dev, u32 *flags, u64 *buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 u64 mlx4_en_mac_to_u64(u8 *addr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void mlx4_en_ptp_overflow_check(struct mlx4_en_dev *mdev);
@@ -1015,6 +1171,10 @@ void mlx4_en_fill_hwtstamps(struct mlx4_en_dev *mdev,
 			    u64 timestamp);
 void mlx4_en_init_timestamp(struct mlx4_en_dev *mdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void mlx4_en_remove_timestamp(struct mlx4_en_dev *mdev);
+>>>>>>> v3.18
 =======
 void mlx4_en_remove_timestamp(struct mlx4_en_dev *mdev);
 >>>>>>> v3.18
@@ -1033,6 +1193,7 @@ extern const struct ethtool_ops mlx4_en_ethtool_ops;
  */
 
 __printf(3, 4)
+<<<<<<< HEAD
 <<<<<<< HEAD
 int en_print(const char *level, const struct mlx4_en_priv *priv,
 	     const char *format, ...);
@@ -1059,6 +1220,8 @@ do {								\
 	pr_warning("%s %s: " format, DRV_NAME,		\
 		   dev_name(&mdev->pdev->dev), ##arg)
 =======
+=======
+>>>>>>> v3.18
 void en_print(const char *level, const struct mlx4_en_priv *priv,
 	      const char *format, ...);
 
@@ -1083,6 +1246,9 @@ do {									\
 #define mlx4_warn(mdev, format, ...)					\
 	pr_warn(DRV_NAME " %s: " format,				\
 		dev_name(&(mdev)->pdev->dev), ##__VA_ARGS__)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

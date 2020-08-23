@@ -27,6 +27,7 @@ struct iio_event_data {
 #define IIO_GET_EVENT_FD_IOCTL _IOR('i', 0x90, int)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum iio_event_type {
 	IIO_EV_TYPE_THRESH,
 	IIO_EV_TYPE_MAG,
@@ -41,6 +42,8 @@ enum iio_event_direction {
 	IIO_EV_DIR_FALLING,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -64,10 +67,13 @@ enum iio_event_direction {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IIO_EV_DIR_MAX 4
 #define IIO_EV_BIT(type, direction)			\
 	(1 << (type*IIO_EV_DIR_MAX + direction))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**

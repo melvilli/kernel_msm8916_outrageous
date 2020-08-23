@@ -22,6 +22,10 @@
 #include <asm/bootinfo.h>
 #include <asm/addrspace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/prom.h>
+>>>>>>> v3.18
 =======
 #include <asm/prom.h>
 >>>>>>> v3.18
@@ -32,8 +36,11 @@ __iomem void *rt_sysc_membase;
 __iomem void *rt_memc_membase;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct boot_param_header __dtb_start;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 __iomem void *plat_of_remap_node(const char *node)
@@ -58,6 +65,7 @@ __iomem void *plat_of_remap_node(const char *node)
 
 void __init device_tree_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long base, size;
 	void *fdt_copy;
@@ -86,6 +94,9 @@ void __init device_tree_init(void)
 =======
 	unflatten_and_copy_device_tree();
 >>>>>>> v3.18
+=======
+	unflatten_and_copy_device_tree();
+>>>>>>> v3.18
 }
 
 void __init plat_mem_setup(void)
@@ -97,7 +108,11 @@ void __init plat_mem_setup(void)
 	 * parsed resulting in our memory appearing
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__dt_setup_arch(&__dtb_start);
+=======
+	__dt_setup_arch(__dtb_start);
+>>>>>>> v3.18
 =======
 	__dt_setup_arch(__dtb_start);
 >>>>>>> v3.18
@@ -120,12 +135,15 @@ static int __init plat_of_setup(void)
 		panic("device tree not present");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(of_ids[0].compatible, soc_info.compatible, len);
 	strncpy(of_ids[1].compatible, "palmbus", len);
 
 	if (of_platform_populate(NULL, of_ids, NULL, NULL))
 		panic("failed to populate DT\n");
 =======
+=======
+>>>>>>> v3.18
 	strlcpy(of_ids[0].compatible, soc_info.compatible, len);
 	strlcpy(of_ids[1].compatible, "palmbus", len);
 
@@ -134,6 +152,9 @@ static int __init plat_of_setup(void)
 
 	/* make sure ithat the reset controller is setup early */
 	ralink_rst_init();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

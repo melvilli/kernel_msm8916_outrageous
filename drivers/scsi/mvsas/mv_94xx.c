@@ -565,7 +565,11 @@ static void mvs_94xx_interrupt_enable(struct mvs_info *mvi)
 
 	tmp = mr32(MVS_GBL_CTL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp |= (IRQ_SAS_A | IRQ_SAS_B);
+=======
+	tmp |= (MVS_IRQ_SAS_A | MVS_IRQ_SAS_B);
+>>>>>>> v3.18
 =======
 	tmp |= (MVS_IRQ_SAS_A | MVS_IRQ_SAS_B);
 >>>>>>> v3.18
@@ -585,7 +589,11 @@ static void mvs_94xx_interrupt_disable(struct mvs_info *mvi)
 	tmp = mr32(MVS_GBL_CTL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp &= ~(IRQ_SAS_A | IRQ_SAS_B);
+=======
+	tmp &= ~(MVS_IRQ_SAS_A | MVS_IRQ_SAS_B);
+>>>>>>> v3.18
 =======
 	tmp &= ~(MVS_IRQ_SAS_A | MVS_IRQ_SAS_B);
 >>>>>>> v3.18
@@ -605,7 +613,11 @@ static u32 mvs_94xx_isr_status(struct mvs_info *mvi, int irq)
 		stat = mr32(MVS_GBL_INT_STAT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(stat & (IRQ_SAS_A | IRQ_SAS_B)))
+=======
+		if (!(stat & (MVS_IRQ_SAS_A | MVS_IRQ_SAS_B)))
+>>>>>>> v3.18
 =======
 		if (!(stat & (MVS_IRQ_SAS_A | MVS_IRQ_SAS_B)))
 >>>>>>> v3.18
@@ -619,8 +631,13 @@ static irqreturn_t mvs_94xx_isr(struct mvs_info *mvi, int irq, u32 stat)
 	void __iomem *regs = mvi->regs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (((stat & IRQ_SAS_A) && mvi->id == 0) ||
 			((stat & IRQ_SAS_B) && mvi->id == 1)) {
+=======
+	if (((stat & MVS_IRQ_SAS_A) && mvi->id == 0) ||
+			((stat & MVS_IRQ_SAS_B) && mvi->id == 1)) {
+>>>>>>> v3.18
 =======
 	if (((stat & MVS_IRQ_SAS_A) && mvi->id == 0) ||
 			((stat & MVS_IRQ_SAS_B) && mvi->id == 1)) {
@@ -639,7 +656,11 @@ static void mvs_94xx_command_active(struct mvs_info *mvi, u32 slot_idx)
 	u32 tmp;
 	tmp = mvs_cr32(mvi, MVS_COMMAND_ACTIVE+(slot_idx >> 3));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tmp & 1 << (slot_idx % 32)) {
+=======
+	if (tmp && 1 << (slot_idx % 32)) {
+>>>>>>> v3.18
 =======
 	if (tmp && 1 << (slot_idx % 32)) {
 >>>>>>> v3.18

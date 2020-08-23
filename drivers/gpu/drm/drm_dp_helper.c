@@ -207,7 +207,11 @@ i2c_dp_aux_prepare_bus(struct i2c_adapter *adapter)
  * @adapter: i2c adapter to register
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This registers an i2c adapater that uses dp aux channel as it's underlaying
+=======
+ * This registers an i2c adapter that uses dp aux channel as it's underlaying
+>>>>>>> v3.18
 =======
  * This registers an i2c adapter that uses dp aux channel as it's underlaying
 >>>>>>> v3.18
@@ -218,11 +222,17 @@ i2c_dp_aux_prepare_bus(struct i2c_adapter *adapter)
  * RETURNS:
  * 0 on success, -ERRNO on failure.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * IMPORTANT:
  * This interface is deprecated, please switch to the new dp aux helpers and
  * drm_dp_aux_register().
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int
@@ -240,7 +250,11 @@ EXPORT_SYMBOL(i2c_dp_aux_add_bus);
 
 /* Helpers for DP link training */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 dp_link_status(u8 link_status[DP_LINK_STATUS_SIZE], int r)
+=======
+static u8 dp_link_status(const u8 link_status[DP_LINK_STATUS_SIZE], int r)
+>>>>>>> v3.18
 =======
 static u8 dp_link_status(const u8 link_status[DP_LINK_STATUS_SIZE], int r)
 >>>>>>> v3.18
@@ -249,7 +263,11 @@ static u8 dp_link_status(const u8 link_status[DP_LINK_STATUS_SIZE], int r)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 dp_get_lane_status(u8 link_status[DP_LINK_STATUS_SIZE],
+=======
+static u8 dp_get_lane_status(const u8 link_status[DP_LINK_STATUS_SIZE],
+>>>>>>> v3.18
 =======
 static u8 dp_get_lane_status(const u8 link_status[DP_LINK_STATUS_SIZE],
 >>>>>>> v3.18
@@ -262,7 +280,11 @@ static u8 dp_get_lane_status(const u8 link_status[DP_LINK_STATUS_SIZE],
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool drm_dp_channel_eq_ok(u8 link_status[DP_LINK_STATUS_SIZE],
+=======
+bool drm_dp_channel_eq_ok(const u8 link_status[DP_LINK_STATUS_SIZE],
+>>>>>>> v3.18
 =======
 bool drm_dp_channel_eq_ok(const u8 link_status[DP_LINK_STATUS_SIZE],
 >>>>>>> v3.18
@@ -286,7 +308,11 @@ bool drm_dp_channel_eq_ok(const u8 link_status[DP_LINK_STATUS_SIZE],
 EXPORT_SYMBOL(drm_dp_channel_eq_ok);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool drm_dp_clock_recovery_ok(u8 link_status[DP_LINK_STATUS_SIZE],
+=======
+bool drm_dp_clock_recovery_ok(const u8 link_status[DP_LINK_STATUS_SIZE],
+>>>>>>> v3.18
 =======
 bool drm_dp_clock_recovery_ok(const u8 link_status[DP_LINK_STATUS_SIZE],
 >>>>>>> v3.18
@@ -305,7 +331,11 @@ bool drm_dp_clock_recovery_ok(const u8 link_status[DP_LINK_STATUS_SIZE],
 EXPORT_SYMBOL(drm_dp_clock_recovery_ok);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 drm_dp_get_adjust_request_voltage(u8 link_status[DP_LINK_STATUS_SIZE],
+=======
+u8 drm_dp_get_adjust_request_voltage(const u8 link_status[DP_LINK_STATUS_SIZE],
+>>>>>>> v3.18
 =======
 u8 drm_dp_get_adjust_request_voltage(const u8 link_status[DP_LINK_STATUS_SIZE],
 >>>>>>> v3.18
@@ -322,7 +352,11 @@ u8 drm_dp_get_adjust_request_voltage(const u8 link_status[DP_LINK_STATUS_SIZE],
 EXPORT_SYMBOL(drm_dp_get_adjust_request_voltage);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 drm_dp_get_adjust_request_pre_emphasis(u8 link_status[DP_LINK_STATUS_SIZE],
+=======
+u8 drm_dp_get_adjust_request_pre_emphasis(const u8 link_status[DP_LINK_STATUS_SIZE],
+>>>>>>> v3.18
 =======
 u8 drm_dp_get_adjust_request_pre_emphasis(const u8 link_status[DP_LINK_STATUS_SIZE],
 >>>>>>> v3.18
@@ -339,7 +373,11 @@ u8 drm_dp_get_adjust_request_pre_emphasis(const u8 link_status[DP_LINK_STATUS_SI
 EXPORT_SYMBOL(drm_dp_get_adjust_request_pre_emphasis);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drm_dp_link_train_clock_recovery_delay(u8 dpcd[DP_RECEIVER_CAP_SIZE]) {
+=======
+void drm_dp_link_train_clock_recovery_delay(const u8 dpcd[DP_RECEIVER_CAP_SIZE]) {
+>>>>>>> v3.18
 =======
 void drm_dp_link_train_clock_recovery_delay(const u8 dpcd[DP_RECEIVER_CAP_SIZE]) {
 >>>>>>> v3.18
@@ -351,7 +389,11 @@ void drm_dp_link_train_clock_recovery_delay(const u8 dpcd[DP_RECEIVER_CAP_SIZE])
 EXPORT_SYMBOL(drm_dp_link_train_clock_recovery_delay);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drm_dp_link_train_channel_eq_delay(u8 dpcd[DP_RECEIVER_CAP_SIZE]) {
+=======
+void drm_dp_link_train_channel_eq_delay(const u8 dpcd[DP_RECEIVER_CAP_SIZE]) {
+>>>>>>> v3.18
 =======
 void drm_dp_link_train_channel_eq_delay(const u8 dpcd[DP_RECEIVER_CAP_SIZE]) {
 >>>>>>> v3.18
@@ -390,7 +432,10 @@ int drm_dp_bw_code_to_link_rate(u8 link_bw)
 }
 EXPORT_SYMBOL(drm_dp_bw_code_to_link_rate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * DOC: dp helpers
@@ -809,4 +854,7 @@ void drm_dp_aux_unregister(struct drm_dp_aux *aux)
 	i2c_del_adapter(&aux->ddc);
 }
 EXPORT_SYMBOL(drm_dp_aux_unregister);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

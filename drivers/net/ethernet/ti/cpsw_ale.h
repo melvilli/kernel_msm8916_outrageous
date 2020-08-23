@@ -28,6 +28,10 @@ struct cpsw_ale {
 	struct timer_list	timer;
 	unsigned long		ageout;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			allmulti;
+>>>>>>> v3.18
 =======
 	int			allmulti;
 >>>>>>> v3.18
@@ -39,6 +43,10 @@ enum cpsw_ale_control {
 	ALE_CLEAR,
 	ALE_AGEOUT,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ALE_P0_UNI_FLOOD,
+>>>>>>> v3.18
 =======
 	ALE_P0_UNI_FLOOD,
 >>>>>>> v3.18
@@ -56,6 +64,10 @@ enum cpsw_ale_control {
 	ALE_PORT_DROP_UNKNOWN_VLAN,
 	ALE_PORT_NOLEARN,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ALE_PORT_NO_SA_UPDATE,
+>>>>>>> v3.18
 =======
 	ALE_PORT_NO_SA_UPDATE,
 >>>>>>> v3.18
@@ -91,6 +103,12 @@ enum cpsw_ale_port_state {
 #define ALE_MCAST_FWD_2			3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ALE_ENTRY_BITS		68
+#define ALE_ENTRY_WORDS	DIV_ROUND_UP(ALE_ENTRY_BITS, 32)
+
+>>>>>>> v3.18
 =======
 #define ALE_ENTRY_BITS		68
 #define ALE_ENTRY_WORDS	DIV_ROUND_UP(ALE_ENTRY_BITS, 32)
@@ -117,6 +135,10 @@ int cpsw_ale_add_vlan(struct cpsw_ale *ale, u16 vid, int port, int untag,
 			int reg_mcast, int unreg_mcast);
 int cpsw_ale_del_vlan(struct cpsw_ale *ale, u16 vid, int port);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void cpsw_ale_set_allmulti(struct cpsw_ale *ale, int allmulti);
+>>>>>>> v3.18
 =======
 void cpsw_ale_set_allmulti(struct cpsw_ale *ale, int allmulti);
 >>>>>>> v3.18
@@ -125,6 +147,10 @@ int cpsw_ale_control_get(struct cpsw_ale *ale, int port, int control);
 int cpsw_ale_control_set(struct cpsw_ale *ale, int port,
 			 int control, int value);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void cpsw_ale_dump(struct cpsw_ale *ale, u32 *data);
+>>>>>>> v3.18
 =======
 void cpsw_ale_dump(struct cpsw_ale *ale, u32 *data);
 >>>>>>> v3.18

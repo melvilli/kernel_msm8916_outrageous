@@ -83,9 +83,15 @@ static inline unsigned long perf_data_size(struct ring_buffer *rb)
 
 #define DEFINE_OUTPUT_COPY(func_name, memcpy_func)			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned int						\
 func_name(struct perf_output_handle *handle,				\
 	  const void *buf, unsigned int len)				\
+=======
+static inline unsigned long						\
+func_name(struct perf_output_handle *handle,				\
+	  const void *buf, unsigned long len)				\
+>>>>>>> v3.18
 =======
 static inline unsigned long						\
 func_name(struct perf_output_handle *handle,				\
@@ -96,9 +102,15 @@ func_name(struct perf_output_handle *handle,				\
 									\
 	do {								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		size = min_t(unsigned long, handle->size, len);		\
 									\
 		written = memcpy_func(handle->addr, buf, size);		\
+=======
+		size    = min(handle->size, len);			\
+		written = memcpy_func(handle->addr, buf, size);		\
+		written = size - written;				\
+>>>>>>> v3.18
 =======
 		size    = min(handle->size, len);			\
 		written = memcpy_func(handle->addr, buf, size);		\
@@ -123,21 +135,28 @@ func_name(struct perf_output_handle *handle,				\
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int memcpy_common(void *dst, const void *src, size_t n)
 {
 	memcpy(dst, src, n);
 	return n;
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long
 memcpy_common(void *dst, const void *src, unsigned long n)
 {
 	memcpy(dst, src, n);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 DEFINE_OUTPUT_COPY(__output_copy, memcpy_common)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MEMCPY_SKIP(dst, src, n) (n)
 
@@ -146,6 +165,8 @@ DEFINE_OUTPUT_COPY(__output_skip, MEMCPY_SKIP)
 #ifndef arch_perf_out_copy_user
 #define arch_perf_out_copy_user __copy_from_user_inatomic
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long
 memcpy_skip(void *dst, const void *src, unsigned long n)
 {
@@ -168,6 +189,9 @@ arch_perf_out_copy_user(void *dst, const void *src, unsigned long n)
 
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

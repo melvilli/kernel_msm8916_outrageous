@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2003 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -109,7 +113,11 @@ static int iwlagn_disable_bss(struct iwl_priv *priv,
 	send->filter_flags &= ~RXON_FILTER_ASSOC_MSK;
 	ret = iwl_dvm_send_cmd_pdu(priv, ctx->rxon_cmd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				CMD_SYNC, sizeof(*send), send);
+=======
+				0, sizeof(*send), send);
+>>>>>>> v3.18
 =======
 				0, sizeof(*send), send);
 >>>>>>> v3.18
@@ -143,7 +151,11 @@ static int iwlagn_disable_pan(struct iwl_priv *priv,
 	send->dev_type = RXON_DEV_TYPE_P2P;
 	ret = iwl_dvm_send_cmd_pdu(priv, ctx->rxon_cmd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				CMD_SYNC, sizeof(*send), send);
+=======
+				0, sizeof(*send), send);
+>>>>>>> v3.18
 =======
 				0, sizeof(*send), send);
 >>>>>>> v3.18
@@ -173,7 +185,11 @@ static int iwlagn_disconn_pan(struct iwl_priv *priv,
 
 	send->filter_flags &= ~RXON_FILTER_ASSOC_MSK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_dvm_send_cmd_pdu(priv, ctx->rxon_cmd, CMD_SYNC,
+=======
+	ret = iwl_dvm_send_cmd_pdu(priv, ctx->rxon_cmd, 0,
+>>>>>>> v3.18
 =======
 	ret = iwl_dvm_send_cmd_pdu(priv, ctx->rxon_cmd, 0,
 >>>>>>> v3.18
@@ -206,7 +222,11 @@ static void iwlagn_update_qos(struct iwl_priv *priv,
 		      ctx->qos_data.def_qos_parm.qos_flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_dvm_send_cmd_pdu(priv, ctx->qos_cmd, CMD_SYNC,
+=======
+	ret = iwl_dvm_send_cmd_pdu(priv, ctx->qos_cmd, 0,
+>>>>>>> v3.18
 =======
 	ret = iwl_dvm_send_cmd_pdu(priv, ctx->qos_cmd, 0,
 >>>>>>> v3.18
@@ -374,7 +394,11 @@ static int iwl_send_rxon_timing(struct iwl_priv *priv,
 
 	return iwl_dvm_send_cmd_pdu(priv, ctx->rxon_timing_cmd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				CMD_SYNC, sizeof(ctx->timing), &ctx->timing);
+=======
+				0, sizeof(ctx->timing), &ctx->timing);
+>>>>>>> v3.18
 =======
 				0, sizeof(ctx->timing), &ctx->timing);
 >>>>>>> v3.18
@@ -520,7 +544,11 @@ static int iwlagn_rxon_connect(struct iwl_priv *priv,
 	 * so we don't need to restore stations etc. after this.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_dvm_send_cmd_pdu(priv, ctx->rxon_cmd, CMD_SYNC,
+=======
+	ret = iwl_dvm_send_cmd_pdu(priv, ctx->rxon_cmd, 0,
+>>>>>>> v3.18
 =======
 	ret = iwl_dvm_send_cmd_pdu(priv, ctx->rxon_cmd, 0,
 >>>>>>> v3.18
@@ -593,11 +621,15 @@ int iwlagn_set_pan_params(struct iwl_priv *priv)
 	cmd.slots[1].type = 1; /* PAN */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->hw_roc_setup) {
 		/* both contexts must be used for this to happen */
 		slot1 = IWL_MIN_SLOT_TIME;
 		slot0 = 3000;
 	} else if (ctx_bss->vif && ctx_pan->vif) {
+=======
+	if (ctx_bss->vif && ctx_pan->vif) {
+>>>>>>> v3.18
 =======
 	if (ctx_bss->vif && ctx_pan->vif) {
 >>>>>>> v3.18
@@ -647,7 +679,11 @@ int iwlagn_set_pan_params(struct iwl_priv *priv)
 	cmd.slots[1].width = cpu_to_le16(slot1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_dvm_send_cmd_pdu(priv, REPLY_WIPAN_PARAMS, CMD_SYNC,
+=======
+	ret = iwl_dvm_send_cmd_pdu(priv, REPLY_WIPAN_PARAMS, 0,
+>>>>>>> v3.18
 =======
 	ret = iwl_dvm_send_cmd_pdu(priv, REPLY_WIPAN_PARAMS, 0,
 >>>>>>> v3.18
@@ -864,7 +900,11 @@ static int iwl_check_rxon_cmd(struct iwl_priv *priv,
 	if ((rxon->flags & (RXON_FLG_CCK_MSK | RXON_FLG_AUTO_DETECT_MSK))
 			== (RXON_FLG_CCK_MSK | RXON_FLG_AUTO_DETECT_MSK)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IWL_WARN(priv, "CCK and auto detect");
+=======
+		IWL_WARN(priv, "CCK and auto detect\n");
+>>>>>>> v3.18
 =======
 		IWL_WARN(priv, "CCK and auto detect\n");
 >>>>>>> v3.18
@@ -1440,7 +1480,11 @@ static void iwlagn_chain_noise_reset(struct iwl_priv *priv)
 		ret = iwl_dvm_send_cmd_pdu(priv,
 					REPLY_PHY_CALIBRATION_CMD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					CMD_SYNC, sizeof(cmd), &cmd);
+=======
+					0, sizeof(cmd), &cmd);
+>>>>>>> v3.18
 =======
 					0, sizeof(cmd), &cmd);
 >>>>>>> v3.18

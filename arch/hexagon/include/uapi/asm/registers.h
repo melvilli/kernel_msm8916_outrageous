@@ -7,8 +7,11 @@
 #define _ASM_REGISTERS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SP r29
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef __ASSEMBLY__
@@ -219,7 +222,11 @@ struct pt_regs {
 
 #define pt_set_rte_sp(regs, sp) do {\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pt_psp(regs) = (regs)->SP = (sp);\
+=======
+	pt_psp(regs) = (regs)->r29 = (sp);\
+>>>>>>> v3.18
 =======
 	pt_psp(regs) = (regs)->r29 = (sp);\
 >>>>>>> v3.18

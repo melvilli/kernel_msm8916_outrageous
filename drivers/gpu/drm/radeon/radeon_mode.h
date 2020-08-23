@@ -47,11 +47,17 @@ struct radeon_device;
 #define to_radeon_framebuffer(x) container_of(x, struct radeon_framebuffer, base)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define RADEON_MAX_HPD_PINS 7
 #define RADEON_MAX_CRTCS 6
 #define RADEON_MAX_AFMT_BLOCKS 7
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum radeon_rmx_type {
 	RMX_OFF,
@@ -195,17 +201,23 @@ struct radeon_i2c_chan {
 	struct i2c_adapter adapter;
 	struct drm_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union {
 		struct i2c_algo_bit_data bit;
 		struct i2c_algo_dp_aux_data dp;
 	} algo;
 	struct radeon_i2c_bus_rec rec;
 =======
+=======
+>>>>>>> v3.18
 	struct i2c_algo_bit_data bit;
 	struct radeon_i2c_bus_rec rec;
 	struct drm_dp_aux aux;
 	bool has_aux;
 	struct mutex mutex;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -241,6 +253,10 @@ struct radeon_afmt {
 	bool last_buffer_filled_status;
 	int id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct r600_audio_pin *pin;
+>>>>>>> v3.18
 =======
 	struct r600_audio_pin *pin;
 >>>>>>> v3.18
@@ -252,8 +268,13 @@ struct radeon_mode_info {
 	enum radeon_connector_table connector_table;
 	bool mode_config_initialized;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct radeon_crtc *crtcs[6];
 	struct radeon_afmt *afmt[6];
+=======
+	struct radeon_crtc *crtcs[RADEON_MAX_CRTCS];
+	struct radeon_afmt *afmt[RADEON_MAX_AFMT_BLOCKS];
+>>>>>>> v3.18
 =======
 	struct radeon_crtc *crtcs[RADEON_MAX_CRTCS];
 	struct radeon_afmt *afmt[RADEON_MAX_AFMT_BLOCKS];
@@ -271,11 +292,17 @@ struct radeon_mode_info {
 	struct drm_property *underscan_hborder_property;
 	struct drm_property *underscan_vborder_property;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* audio */
 	struct drm_property *audio_property;
 	/* FMT dithering */
 	struct drm_property *dither_property;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* hardcoded DFP edid from BIOS */
 	struct edid *bios_hardcoded_edid;
@@ -318,6 +345,10 @@ struct radeon_tv_regs {
 struct radeon_atom_ss {
 	uint16_t percentage;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint16_t percentage_divider;
+>>>>>>> v3.18
 =======
 	uint16_t percentage_divider;
 >>>>>>> v3.18
@@ -332,13 +363,19 @@ struct radeon_atom_ss {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum radeon_flip_status {
 	RADEON_FLIP_NONE,
 	RADEON_FLIP_PENDING,
 	RADEON_FLIP_SUBMITTED
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct radeon_crtc {
 	struct drm_crtc base;
@@ -352,6 +389,11 @@ struct radeon_crtc {
 	int cursor_width;
 	int cursor_height;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int max_cursor_width;
+	int max_cursor_height;
+>>>>>>> v3.18
 =======
 	int max_cursor_width;
 	int max_cursor_height;
@@ -367,8 +409,14 @@ struct radeon_crtc {
 	int pll_id;
 	/* page flipping */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct radeon_unpin_work *unpin_work;
 	int deferred_flip_completion;
+=======
+	struct workqueue_struct *flip_queue;
+	struct radeon_flip_work *flip_work;
+	enum radeon_flip_status flip_status;
+>>>>>>> v3.18
 =======
 	struct workqueue_struct *flip_queue;
 	struct radeon_flip_work *flip_work;
@@ -385,12 +433,18 @@ struct radeon_crtc {
 	struct drm_encoder *encoder;
 	struct drm_connector *connector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* for dpm */
 	u32 line_time;
 	u32 wm_low;
 	u32 wm_high;
 	struct drm_display_mode hw_mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -490,7 +544,10 @@ struct radeon_connector_atom_dig {
 	uint32_t igp_lane_info;
 	/* displayport */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct radeon_i2c_chan *dp_i2c_bus;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 dpcd[DP_RECEIVER_CAP_SIZE];
@@ -530,7 +587,10 @@ struct radeon_router {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum radeon_connector_audio {
 	RADEON_AUDIO_DISABLE = 0,
 	RADEON_AUDIO_ENABLE = 1,
@@ -542,6 +602,9 @@ enum radeon_connector_dither {
 	RADEON_FMT_DITHER_ENABLE = 1,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct radeon_connector {
 	struct drm_connector base;
@@ -562,6 +625,12 @@ struct radeon_connector {
 	struct radeon_router router;
 	struct radeon_i2c_chan *router_bus;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum radeon_connector_audio audio;
+	enum radeon_connector_dither dither;
+	int pixelclock_for_modeset;
+>>>>>>> v3.18
 =======
 	enum radeon_connector_audio audio;
 	enum radeon_connector_dither dither;
@@ -599,9 +668,12 @@ struct atom_clock_dividers {
 	u32 vco_mode;
 	u32 real_clock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	/* added for CI */
 	u32 post_divider;
 	u32 flags;
@@ -713,13 +785,19 @@ radeon_get_encoder_enum(struct drm_device *dev, uint32_t supported_device,
 			uint8_t dac);
 extern void radeon_link_encoder_connector(struct drm_device *dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern enum radeon_tv_std
 radeon_combios_get_tv_info(struct radeon_device *rdev);
 extern enum radeon_tv_std
 radeon_atombios_get_tv_info(struct radeon_device *rdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern void radeon_atombios_get_default_voltages(struct radeon_device *rdev,
 						 u16 *vddc, u16 *vddci, u16 *mvdd);
 
@@ -731,6 +809,9 @@ extern void
 radeon_atombios_connected_scratch_regs(struct drm_connector *connector,
 				       struct drm_encoder *encoder,
 				       bool connected);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct drm_connector *
@@ -743,16 +824,22 @@ extern bool radeon_dig_monitor_is_duallink(struct drm_encoder *encoder,
 extern u16 radeon_encoder_get_dp_bridge_encoder_id(struct drm_encoder *encoder);
 extern u16 radeon_connector_encoder_get_dp_bridge_encoder_id(struct drm_connector *connector);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool radeon_connector_encoder_is_hbr2(struct drm_connector *connector);
 extern bool radeon_connector_is_dp12_capable(struct drm_connector *connector);
 extern int radeon_get_monitor_bpc(struct drm_connector *connector);
 
 =======
+=======
+>>>>>>> v3.18
 extern bool radeon_connector_is_dp12_capable(struct drm_connector *connector);
 extern int radeon_get_monitor_bpc(struct drm_connector *connector);
 
 extern struct edid *radeon_connector_edid(struct drm_connector *connector);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void radeon_connector_hotplug(struct drm_connector *connector);
 extern int radeon_dp_mode_valid_helper(struct drm_connector *connector,
@@ -767,6 +854,12 @@ extern bool radeon_dp_getdpcd(struct radeon_connector *radeon_connector);
 extern int radeon_dp_get_panel_mode(struct drm_encoder *encoder,
 				    struct drm_connector *connector);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void radeon_dp_set_rx_power_state(struct drm_connector *connector,
+					 u8 power_state);
+extern void radeon_dp_aux_init(struct radeon_connector *radeon_connector);
+>>>>>>> v3.18
 =======
 extern void radeon_dp_set_rx_power_state(struct drm_connector *connector,
 					 u8 power_state);
@@ -781,8 +874,12 @@ extern void atombios_dig_transmitter_setup(struct drm_encoder *encoder,
 extern void radeon_atom_ext_encoder_setup_ddc(struct drm_encoder *encoder);
 extern struct drm_encoder *radeon_get_external_encoder(struct drm_encoder *encoder);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int radeon_dp_i2c_aux_ch(struct i2c_adapter *adapter, int mode,
 				u8 write_byte, u8 *read_byte);
+=======
+void radeon_atom_copy_swap(u8 *dst, u8 *src, u8 num_bytes, bool to_le);
+>>>>>>> v3.18
 =======
 void radeon_atom_copy_swap(u8 *dst, u8 *src, u8 num_bytes, bool to_le);
 >>>>>>> v3.18
@@ -797,9 +894,12 @@ extern void radeon_i2c_add(struct radeon_device *rdev,
 extern struct radeon_i2c_chan *radeon_i2c_lookup(struct radeon_device *rdev,
 						 struct radeon_i2c_bus_rec *i2c_bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct radeon_i2c_chan *radeon_i2c_create_dp(struct drm_device *dev,
 						    struct radeon_i2c_bus_rec *rec,
 						    const char *name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct radeon_i2c_chan *radeon_i2c_create(struct drm_device *dev,
@@ -818,7 +918,10 @@ extern void radeon_router_select_ddc_port(struct radeon_connector *radeon_connec
 extern void radeon_router_select_cd_port(struct radeon_connector *radeon_connector);
 extern bool radeon_ddc_probe(struct radeon_connector *radeon_connector, bool use_aux);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int radeon_ddc_get_modes(struct radeon_connector *radeon_connector);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -860,6 +963,10 @@ extern int atombios_get_encoder_mode(struct drm_encoder *encoder);
 extern bool atombios_set_edp_panel_power(struct drm_connector *connector, int action);
 extern void radeon_encoder_set_active_device(struct drm_encoder *encoder);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool radeon_encoder_is_digital(struct drm_encoder *encoder);
+>>>>>>> v3.18
 =======
 extern bool radeon_encoder_is_digital(struct drm_encoder *encoder);
 >>>>>>> v3.18
@@ -897,7 +1004,13 @@ extern int radeon_crtc_cursor_move(struct drm_crtc *crtc,
 
 extern int radeon_get_crtc_scanoutpos(struct drm_device *dev, int crtc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      int *vpos, int *hpos);
+=======
+				      unsigned int flags,
+				      int *vpos, int *hpos, ktime_t *stime,
+				      ktime_t *etime);
+>>>>>>> v3.18
 =======
 				      unsigned int flags,
 				      int *vpos, int *hpos, ktime_t *stime,
@@ -995,13 +1108,19 @@ void radeon_legacy_tv_mode_set(struct drm_encoder *encoder,
 			       struct drm_display_mode *adjusted_mode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* fmt blocks */
 void avivo_program_fmt(struct drm_encoder *encoder);
 void dce3_program_fmt(struct drm_encoder *encoder);
 void dce4_program_fmt(struct drm_encoder *encoder);
 void dce8_program_fmt(struct drm_encoder *encoder);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* fbdev layer */
 int radeon_fbdev_init(struct radeon_device *rdev);
@@ -1013,6 +1132,10 @@ bool radeon_fbdev_robj_is_fb(struct radeon_device *rdev, struct radeon_bo *robj)
 void radeon_fb_output_poll_changed(struct radeon_device *rdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void radeon_crtc_handle_vblank(struct radeon_device *rdev, int crtc_id);
+>>>>>>> v3.18
 =======
 void radeon_crtc_handle_vblank(struct radeon_device *rdev, int crtc_id);
 >>>>>>> v3.18

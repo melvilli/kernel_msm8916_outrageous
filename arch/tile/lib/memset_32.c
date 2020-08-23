@@ -13,6 +13,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <arch/chip.h>
 
 #include <linux/types.h>
@@ -21,10 +22,15 @@
 
 #undef memset
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 #include <linux/string.h>
 #include <linux/module.h>
 #include <arch/chip.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void *memset(void *s, int c, size_t n)
@@ -34,11 +40,15 @@ void *memset(void *s, int c, size_t n)
 	uint32_t v16, v32;
 	uint8_t *out8 = s;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !CHIP_HAS_WH64()
 	int ahead32;
 #else
 	int to_align32;
 #endif
+=======
+	int to_align32;
+>>>>>>> v3.18
 =======
 	int to_align32;
 >>>>>>> v3.18
@@ -73,6 +83,7 @@ void *memset(void *s, int c, size_t n)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !CHIP_HAS_WH64()
 	/* Use a spare issue slot to start prefetching the first cache
 	 * line early. This instruction is free as the store can be buried
@@ -88,6 +99,8 @@ void *memset(void *s, int c, size_t n)
 #endif /* !CHIP_HAS_WH64() */
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Align 'out8'. We know n >= 3 so this won't write past the end. */
@@ -110,6 +123,7 @@ void *memset(void *s, int c, size_t n)
 	/* This must be at least 8 or the following loop doesn't work. */
 #define CACHE_LINE_SIZE_IN_WORDS (CHIP_L2_LINE_SIZE() / 4)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if !CHIP_HAS_WH64()
 
@@ -197,6 +211,8 @@ void *memset(void *s, int c, size_t n)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Determine how many words we need to emit before the 'out32'
 	 * pointer becomes aligned modulo the cache line size.
 	 */
@@ -254,8 +270,11 @@ void *memset(void *s, int c, size_t n)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CHIP_HAS_WH64() */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Now handle any leftover values. */

@@ -135,7 +135,11 @@ static int whc_urb_enqueue(struct usb_hcd *usb_hcd, struct urb *urb,
 		ret = asl_urb_enqueue(whc, urb, mem_flags);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -165,7 +169,11 @@ static int whc_urb_dequeue(struct usb_hcd *usb_hcd, struct urb *urb, int status)
 		ret = asl_urb_dequeue(whc, urb, status);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -240,8 +248,11 @@ static struct hc_driver whc_hc_driver = {
 	.hub_status_data = wusbhc_rh_status_data,
 	.hub_control = wusbhc_rh_control,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.bus_suspend = wusbhc_rh_suspend,
 	.bus_resume = wusbhc_rh_resume,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.start_port_reset = wusbhc_rh_start_port_reset,
@@ -307,6 +318,10 @@ static int whc_probe(struct umc_dev *umc)
 		goto error_usb_add_hcd;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(usb_hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(usb_hcd->self.controller);
 >>>>>>> v3.18

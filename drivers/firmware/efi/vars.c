@@ -166,7 +166,10 @@ validate_ascii_string(efi_char16_t *var_name, int match, u8 *buffer,
 
 struct variable_validate {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efi_guid_t vendor;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	char *name;
@@ -174,6 +177,7 @@ struct variable_validate {
 			 unsigned long len);
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * This is the list of variables we need to validate, as well as the
@@ -311,6 +315,8 @@ efivar_variable_is_removable(efi_guid_t vendor, const char *var_name,
 }
 EXPORT_SYMBOL_GPL(efivar_variable_is_removable);
 =======
+=======
+>>>>>>> v3.18
 static const struct variable_validate variable_validate[] = {
 	{ "BootNext", validate_uint16 },
 	{ "BootOrder", validate_boot_order },
@@ -366,6 +372,9 @@ efivar_validate(efi_char16_t *var_name, u8 *data, unsigned long len)
 	return true;
 }
 EXPORT_SYMBOL_GPL(efivar_validate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static efi_status_t
@@ -464,17 +473,23 @@ static unsigned long var_name_strnsize(efi_char16_t *variable_name,
  * disable the sysfs workqueue since the firmware is buggy.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dup_variable_bug(efi_char16_t *s16, efi_guid_t *vendor_guid,
 			     unsigned long len16)
 {
 	size_t i, len8 = len16 / sizeof(efi_char16_t);
 	char *s8;
 =======
+=======
+>>>>>>> v3.18
 static void dup_variable_bug(efi_char16_t *str16, efi_guid_t *vendor_guid,
 			     unsigned long len16)
 {
 	size_t i, len8 = len16 / sizeof(efi_char16_t);
 	char *str8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -484,6 +499,7 @@ static void dup_variable_bug(efi_char16_t *str16, efi_guid_t *vendor_guid,
 	 */
 	efivar_wq_enabled = false;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	s8 = kzalloc(len8, GFP_KERNEL);
 	if (!s8)
@@ -496,6 +512,8 @@ static void dup_variable_bug(efi_char16_t *str16, efi_guid_t *vendor_guid,
 	       s8, vendor_guid);
 	kfree(s8);
 =======
+=======
+>>>>>>> v3.18
 	str8 = kzalloc(len8, GFP_KERNEL);
 	if (!str8)
 		return;
@@ -506,6 +524,9 @@ static void dup_variable_bug(efi_char16_t *str16, efi_guid_t *vendor_guid,
 	printk(KERN_WARNING "efivars: duplicate variable: %s-%pUl\n",
 	       str8, vendor_guid);
 	kfree(str8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -759,7 +780,10 @@ int efivar_entry_set(struct efivar_entry *entry, u32 attributes,
 EXPORT_SYMBOL_GPL(efivar_entry_set);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * efivar_entry_set_nonblocking - call set_variable_nonblocking()
  *
@@ -793,6 +817,9 @@ efivar_entry_set_nonblocking(efi_char16_t *name, efi_guid_t vendor,
 	return efi_status_to_err(status);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * efivar_entry_set_safe - call set_variable() if enough space in firmware
@@ -822,7 +849,10 @@ int efivar_entry_set_safe(efi_char16_t *name, efi_guid_t vendor, u32 attributes,
 		return -ENOSYS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If the EFI variable backend provides a non-blocking
 	 * ->set_variable() operation and we're in a context where we
@@ -837,6 +867,9 @@ int efivar_entry_set_safe(efi_char16_t *name, efi_guid_t vendor, u32 attributes,
 		return efivar_entry_set_nonblocking(name, vendor, attributes,
 						    size, data);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!block) {
 		if (!spin_trylock_irqsave(&__efivars->lock, flags))
@@ -900,9 +933,12 @@ struct efivar_entry *efivar_entry_find(efi_char16_t *name, efi_guid_t guid,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (remove)
 		list_del(&entry->list);
 =======
+=======
+>>>>>>> v3.18
 	if (remove) {
 		if (entry->scanning) {
 			/*
@@ -913,6 +949,9 @@ struct efivar_entry *efivar_entry_find(efi_char16_t *name, efi_guid_t guid,
 		} else
 			list_del(&entry->list);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return entry;
@@ -1027,7 +1066,11 @@ int efivar_entry_set_get_size(struct efivar_entry *entry, u32 attributes,
 	*set = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (efivar_validate(*vendor, name, data, *size) == false)
+=======
+	if (efivar_validate(name, data, *size) == false)
+>>>>>>> v3.18
 =======
 	if (efivar_validate(name, data, *size) == false)
 >>>>>>> v3.18

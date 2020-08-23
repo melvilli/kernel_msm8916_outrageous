@@ -75,7 +75,11 @@ sendmsg(struct IsdnCardState *cs, u_char his, u_char creg, u_char len,
 				t += sprintf(t, "sendmbox cnt %d", len);
 				QuickHex(t, &msg[len-i], (i > 64) ? 64 : i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				debugl1(cs, tmp);
+=======
+				debugl1(cs, "%s", tmp);
+>>>>>>> v3.18
 =======
 				debugl1(cs, "%s", tmp);
 >>>>>>> v3.18
@@ -110,7 +114,11 @@ rcv_mbox(struct IsdnCardState *cs, struct isar_reg *ireg, u_char *msg)
 				t += sprintf(t, "rcv_mbox cnt %d", ireg->clsb);
 				QuickHex(t, &msg[ireg->clsb - i], (i > 64) ? 64 : i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				debugl1(cs, tmp);
+=======
+				debugl1(cs, "%s", tmp);
+>>>>>>> v3.18
 =======
 				debugl1(cs, "%s", tmp);
 >>>>>>> v3.18
@@ -1257,7 +1265,11 @@ isar_int_main(struct IsdnCardState *cs)
 				      ireg->iis, ireg->cmsb);
 			QuickHex(tp, (u_char *)ireg->par, ireg->clsb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			debugl1(cs, debbuf);
+=======
+			debugl1(cs, "%s", debbuf);
+>>>>>>> v3.18
 =======
 			debugl1(cs, "%s", debbuf);
 >>>>>>> v3.18

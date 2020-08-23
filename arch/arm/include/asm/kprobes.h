@@ -19,7 +19,11 @@
 #include <linux/types.h>
 #include <linux/ptrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/percpu.h>
+=======
+#include <linux/notifier.h>
+>>>>>>> v3.18
 =======
 #include <linux/notifier.h>
 >>>>>>> v3.18
@@ -32,6 +36,7 @@
 #define kretprobe_blacklist_size	0
 
 typedef u32 kprobe_opcode_t;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct kprobe;
@@ -49,10 +54,15 @@ struct arch_specific_insn {
 	kprobe_insn_fn_t		*insn_fn;
 };
 =======
+=======
+>>>>>>> v3.18
 struct kprobe;
 #include <asm/probes.h>
 
 #define	arch_specific_insn	arch_probes_insn
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct prev_kprobe {

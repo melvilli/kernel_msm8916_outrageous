@@ -39,7 +39,11 @@ maps are more efficient:
 	void io_mapping_unmap_atomic(void *vaddr)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		'vaddr' must be the the value returned by the last
+=======
+		'vaddr' must be the value returned by the last
+>>>>>>> v3.18
 =======
 		'vaddr' must be the value returned by the last
 >>>>>>> v3.18

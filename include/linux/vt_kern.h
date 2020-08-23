@@ -134,8 +134,11 @@ void reset_vc(struct vc_data *vc);
 extern int do_unbind_con_driver(const struct consw *csw, int first, int last,
 			     int deflt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int unbind_con_driver(const struct consw *csw, int first, int last,
 			     int deflt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int vty_init(const struct file_operations *console_fops);

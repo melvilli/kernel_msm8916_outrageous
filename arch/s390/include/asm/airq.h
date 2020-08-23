@@ -10,11 +10,14 @@
 #define _ASM_S390_AIRQ_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef void (*adapter_int_handler_t)(void *, void *);
 
 void *s390_register_adapter_interrupt(adapter_int_handler_t, void *, u8);
 void s390_unregister_adapter_interrupt(void *, u8);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/bit_spinlock.h>
 
 struct airq_struct {
@@ -105,6 +108,9 @@ static inline unsigned long airq_iv_get_ptr(struct airq_iv *iv,
 {
 	return iv->ptr[bit];
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ASM_S390_AIRQ_H */

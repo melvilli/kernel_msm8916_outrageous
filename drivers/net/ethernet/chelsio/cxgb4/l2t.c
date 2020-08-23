@@ -2,7 +2,11 @@
  * This file is part of the Chelsio T4 Ethernet driver for Linux.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2003-2010 Chelsio Communications, Inc. All rights reserved.
+=======
+ * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
 >>>>>>> v3.18
@@ -50,6 +54,10 @@
 #include "t4_msg.h"
 #include "t4fw_api.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "t4_regs.h"
+>>>>>>> v3.18
 =======
 #include "t4_regs.h"
 >>>>>>> v3.18
@@ -162,7 +170,11 @@ static int write_l2e(struct adapter *adap, struct l2t_entry *e, int sync)
 	req->l2t_idx = htons(e->idx);
 	req->vlan = htons(e->vlan);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (e->neigh)
+=======
+	if (e->neigh && !(e->neigh->dev->flags & IFF_LOOPBACK))
+>>>>>>> v3.18
 =======
 	if (e->neigh && !(e->neigh->dev->flags & IFF_LOOPBACK))
 >>>>>>> v3.18
@@ -406,6 +418,11 @@ struct l2t_entry *cxgb4_l2t_get(struct l2t_data *d, struct neighbour *neigh,
 		spin_lock(&e->lock);          /* avoid race with t4_l2t_free */
 		e->state = L2T_STATE_RESOLVING;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (neigh->dev->flags & IFF_LOOPBACK)
+			memcpy(e->dmac, physdev->dev_addr, sizeof(e->dmac));
+>>>>>>> v3.18
 =======
 		if (neigh->dev->flags & IFF_LOOPBACK)
 			memcpy(e->dmac, physdev->dev_addr, sizeof(e->dmac));
@@ -429,7 +446,10 @@ done:
 EXPORT_SYMBOL(cxgb4_l2t_get);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 u64 cxgb4_select_ntuple(struct net_device *dev,
 			const struct l2t_entry *l2t)
 {
@@ -464,6 +484,9 @@ u64 cxgb4_select_ntuple(struct net_device *dev,
 }
 EXPORT_SYMBOL(cxgb4_select_ntuple);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Called when address resolution fails for an L2T entry to handle packets

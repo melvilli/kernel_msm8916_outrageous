@@ -33,7 +33,11 @@ config ADB_MACII
 config ADB_MACIISI
 	bool "Include Mac IIsi ADB driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ADB && MAC
+=======
+	depends on ADB && MAC && BROKEN
+>>>>>>> v3.18
 =======
 	depends on ADB && MAC && BROKEN
 >>>>>>> v3.18
@@ -108,6 +112,10 @@ config ADB_PMU_LED_IDE
 	depends on ADB_PMU_LED
 	depends on LEDS_CLASS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on IDE_GD_ATA
+>>>>>>> v3.18
 =======
 	depends on IDE_GD_ATA
 >>>>>>> v3.18

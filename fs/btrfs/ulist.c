@@ -6,8 +6,13 @@
 
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
 #include "ulist.h"
+=======
+#include "ulist.h"
+#include "ctree.h"
+>>>>>>> v3.18
 =======
 #include "ulist.h"
 #include "ctree.h"
@@ -20,10 +25,13 @@
  * It is possible to store an auxiliary value along with the key.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The implementation is preliminary and can probably be sped up
  * significantly. A first step would be to store the values in an rbtree
  * as soon as ULIST_SIZE is exceeded.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * A sample usage for ulists is the enumeration of directed graphs without
@@ -59,6 +67,7 @@
 void ulist_init(struct ulist *ulist)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ulist->nnodes = 0;
 	ulist->nodes = ulist->int_nodes;
 	ulist->nodes_alloced = ULIST_SIZE;
@@ -66,10 +75,15 @@ void ulist_init(struct ulist *ulist)
 }
 EXPORT_SYMBOL(ulist_init);
 =======
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&ulist->nodes);
 	ulist->root = RB_ROOT;
 	ulist->nnodes = 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -79,6 +93,7 @@ EXPORT_SYMBOL(ulist_init);
  * This is useful in cases where the base 'struct ulist' has been statically
  * allocated.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void ulist_fini(struct ulist *ulist)
 {
@@ -93,6 +108,8 @@ void ulist_fini(struct ulist *ulist)
 }
 EXPORT_SYMBOL(ulist_fini);
 =======
+=======
+>>>>>>> v3.18
 static void ulist_fini(struct ulist *ulist)
 {
 	struct ulist_node *node;
@@ -104,6 +121,9 @@ static void ulist_fini(struct ulist *ulist)
 	ulist->root = RB_ROOT;
 	INIT_LIST_HEAD(&ulist->nodes);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -119,7 +139,10 @@ void ulist_reinit(struct ulist *ulist)
 	ulist_init(ulist);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(ulist_reinit);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -141,7 +164,10 @@ struct ulist *ulist_alloc(gfp_t gfp_mask)
 	return ulist;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(ulist_alloc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -159,7 +185,10 @@ void ulist_free(struct ulist *ulist)
 	kfree(ulist);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(ulist_free);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -231,8 +260,14 @@ int ulist_add_merge(struct ulist *ulist, u64 val, u64 aux,
 		    u64 *old_aux, gfp_t gfp_mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 	struct ulist_node *node = NULL;
+=======
+	int ret;
+	struct ulist_node *node;
+
+>>>>>>> v3.18
 =======
 	int ret;
 	struct ulist_node *node;
@@ -244,6 +279,7 @@ int ulist_add_merge(struct ulist *ulist, u64 val, u64 aux,
 			*old_aux = node->aux;
 		return 0;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (ulist->nnodes >= ulist->nodes_alloced) {
@@ -295,6 +331,8 @@ int ulist_add_merge(struct ulist *ulist, u64 val, u64 aux,
 }
 EXPORT_SYMBOL(ulist_add);
 =======
+=======
+>>>>>>> v3.18
 	node = kmalloc(sizeof(*node), gfp_mask);
 	if (!node)
 		return -ENOMEM;
@@ -312,6 +350,9 @@ EXPORT_SYMBOL(ulist_add);
 
 	return 1;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -333,6 +374,7 @@ EXPORT_SYMBOL(ulist_add);
 struct ulist_node *ulist_next(struct ulist *ulist, struct ulist_iterator *uiter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ulist->nnodes == 0)
 		return NULL;
 	if (uiter->i < 0 || uiter->i >= ulist->nnodes)
@@ -342,6 +384,8 @@ struct ulist_node *ulist_next(struct ulist *ulist, struct ulist_iterator *uiter)
 }
 EXPORT_SYMBOL(ulist_next);
 =======
+=======
+>>>>>>> v3.18
 	struct ulist_node *node;
 
 	if (list_empty(&ulist->nodes))
@@ -364,4 +408,7 @@ EXPORT_SYMBOL(ulist_next);
 #endif
 	return node;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

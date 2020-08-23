@@ -205,8 +205,13 @@ static ssize_t store_down_threshold(struct dbs_data *dbs_data, const char *buf,
 	ret = sscanf(buf, "%u", &input);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* cannot be lower than 1 otherwise freq will not fall */
 	if (ret != 1 || input < 1 || input > 100 ||
+=======
+	/* cannot be lower than 11 otherwise freq will not fall */
+	if (ret != 1 || input < 11 || input > 100 ||
+>>>>>>> v3.18
 =======
 	/* cannot be lower than 11 otherwise freq will not fall */
 	if (ret != 1 || input < 11 || input > 100 ||

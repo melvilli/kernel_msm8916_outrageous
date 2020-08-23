@@ -112,7 +112,10 @@ enum tx3589x_block {
 
 #define TC3589x_NR_INTERNAL_IRQS	8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TC3589x_INT_GPIO(x)	(TC3589x_NR_INTERNAL_IRQS + (x))
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

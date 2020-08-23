@@ -997,7 +997,11 @@ static int __init cops_module_init(void)
 			cardname);
 	cops_dev = cops_probe(-1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(cops_dev);
+=======
+	return PTR_ERR_OR_ZERO(cops_dev);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(cops_dev);
 >>>>>>> v3.18

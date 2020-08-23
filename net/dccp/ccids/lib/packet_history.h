@@ -61,8 +61,13 @@ static inline struct tfrc_tx_hist_entry *
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  tfrc_tx_hist_add(struct tfrc_tx_hist_entry **headp, u64 seqno);
 extern void tfrc_tx_hist_purge(struct tfrc_tx_hist_entry **headp);
+=======
+int tfrc_tx_hist_add(struct tfrc_tx_hist_entry **headp, u64 seqno);
+void tfrc_tx_hist_purge(struct tfrc_tx_hist_entry **headp);
+>>>>>>> v3.18
 =======
 int tfrc_tx_hist_add(struct tfrc_tx_hist_entry **headp, u64 seqno);
 void tfrc_tx_hist_purge(struct tfrc_tx_hist_entry **headp);
@@ -145,6 +150,7 @@ static inline bool tfrc_rx_hist_loss_pending(const struct tfrc_rx_hist *h)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void tfrc_rx_hist_add_packet(struct tfrc_rx_hist *h,
 				    const struct sk_buff *skb, const u64 ndp);
 
@@ -161,6 +167,8 @@ extern u32 tfrc_rx_hist_sample_rtt(struct tfrc_rx_hist *h,
 extern int tfrc_rx_hist_alloc(struct tfrc_rx_hist *h);
 extern void tfrc_rx_hist_purge(struct tfrc_rx_hist *h);
 =======
+=======
+>>>>>>> v3.18
 void tfrc_rx_hist_add_packet(struct tfrc_rx_hist *h, const struct sk_buff *skb,
 			     const u64 ndp);
 
@@ -173,6 +181,9 @@ int tfrc_rx_handle_loss(struct tfrc_rx_hist *h, struct tfrc_loss_hist *lh,
 u32 tfrc_rx_hist_sample_rtt(struct tfrc_rx_hist *h, const struct sk_buff *skb);
 int tfrc_rx_hist_alloc(struct tfrc_rx_hist *h);
 void tfrc_rx_hist_purge(struct tfrc_rx_hist *h);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _DCCP_PKT_HIST_ */

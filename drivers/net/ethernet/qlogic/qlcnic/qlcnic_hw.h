@@ -86,15 +86,21 @@ enum qlcnic_regs {
 #define QLCNIC_CMD_BC_EVENT_SETUP		0x31
 #define	QLCNIC_CMD_CONFIG_VPORT			0x32
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QLCNIC_CMD_GET_MAC_STATS		0x37
 #define QLCNIC_CMD_SET_DRV_VER			0x38
 =======
+=======
+>>>>>>> v3.18
 #define	QLCNIC_CMD_DCB_QUERY_CAP		0x34
 #define	QLCNIC_CMD_DCB_QUERY_PARAM		0x35
 #define QLCNIC_CMD_GET_MAC_STATS		0x37
 #define QLCNIC_CMD_82XX_SET_DRV_VER		0x38
 #define QLCNIC_CMD_MQ_TX_CONFIG_INTR		0x39
 #define QLCNIC_CMD_GET_LED_STATUS		0x3C
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define QLCNIC_CMD_CONFIGURE_RSS		0x41
 #define QLCNIC_CMD_CONFIG_INTR_COAL		0x43
@@ -104,6 +110,10 @@ enum qlcnic_regs {
 #define QLCNIC_CMD_CONFIGURE_MAC_RX_MODE	0x49
 #define QLCNIC_CMD_CONFIGURE_HW_LRO		0x4A
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLCNIC_CMD_SET_INGRESS_ENCAP		0x4E
+>>>>>>> v3.18
 =======
 #define QLCNIC_CMD_SET_INGRESS_ENCAP		0x4E
 >>>>>>> v3.18
@@ -116,6 +126,10 @@ enum qlcnic_regs {
 #define QLCNIC_CMD_SET_LED_CONFIG		0x69
 #define QLCNIC_CMD_GET_LED_CONFIG		0x6A
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLCNIC_CMD_83XX_SET_DRV_VER		0x6F
+>>>>>>> v3.18
 =======
 #define QLCNIC_CMD_83XX_SET_DRV_VER		0x6F
 >>>>>>> v3.18
@@ -138,6 +152,10 @@ enum qlcnic_regs {
 #define QLCNIC_MBX_REQUEST_EVENT	0x8101
 #define QLCNIC_MBX_TIME_EXTEND_EVENT	0x8102
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLCNIC_MBX_DCBX_CONFIG_CHANGE_EVENT	0x8110
+>>>>>>> v3.18
 =======
 #define QLCNIC_MBX_DCBX_CONFIG_CHANGE_EVENT	0x8110
 >>>>>>> v3.18
@@ -162,13 +180,19 @@ struct qlcnic_mailbox_metadata {
 #define QLCNIC_MBX_ASYNC_EVENT	BIT_15
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Set HW Tx ring limit for 82xx adapter. */
 #define QLCNIC_MAX_HW_TX_RINGS		8
 #define QLCNIC_MAX_HW_VNIC_TX_RINGS	4
 #define QLCNIC_MAX_TX_RINGS		8
 #define QLCNIC_MAX_SDS_RINGS		8
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qlcnic_pci_info;
 struct qlcnic_info;
@@ -178,6 +202,7 @@ struct pci_device_id;
 struct qlcnic_host_sds_ring;
 struct qlcnic_host_tx_ring;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct qlcnic_host_tx_ring;
 struct qlcnic_hardware_context;
 struct qlcnic_adapter;
@@ -185,11 +210,16 @@ struct qlcnic_adapter;
 int qlcnic_82xx_start_firmware(struct qlcnic_adapter *);
 int qlcnic_82xx_hw_read_wx_2M(struct qlcnic_adapter *adapter, ulong);
 =======
+=======
+>>>>>>> v3.18
 struct qlcnic_hardware_context;
 struct qlcnic_adapter;
 struct qlcnic_fw_dump;
 
 int qlcnic_82xx_hw_read_wx_2M(struct qlcnic_adapter *adapter, ulong, int *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int qlcnic_82xx_hw_write_wx_2M(struct qlcnic_adapter *, ulong, u32);
 int qlcnic_82xx_config_hw_lro(struct qlcnic_adapter *adapter, int);
@@ -197,16 +227,22 @@ int qlcnic_82xx_nic_set_promisc(struct qlcnic_adapter *adapter, u32);
 int qlcnic_82xx_napi_add(struct qlcnic_adapter *adapter,
 			 struct net_device *netdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qlcnic_82xx_change_filter(struct qlcnic_adapter *adapter,
 			       u64 *uaddr, u16 vlan_id);
 void qlcnic_82xx_config_intr_coalesce(struct qlcnic_adapter *adapter);
 =======
+=======
+>>>>>>> v3.18
 void qlcnic_82xx_get_beacon_state(struct qlcnic_adapter *);
 void qlcnic_82xx_change_filter(struct qlcnic_adapter *adapter,
 			       u64 *uaddr, u16 vlan_id);
 int qlcnic_82xx_config_intr_coalesce(struct qlcnic_adapter *,
 				     struct ethtool_coalesce *);
 int qlcnic_82xx_set_rx_coalesce(struct qlcnic_adapter *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int qlcnic_82xx_config_rss(struct qlcnic_adapter *adapter, int);
 void qlcnic_82xx_config_ipaddr(struct qlcnic_adapter *adapter,
@@ -218,16 +254,22 @@ int qlcnic_82xx_set_lb_mode(struct qlcnic_adapter *, u8);
 void qlcnic_82xx_write_crb(struct qlcnic_adapter *, char *, loff_t, size_t);
 void qlcnic_82xx_read_crb(struct qlcnic_adapter *, char *, loff_t, size_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qlcnic_82xx_dev_request_reset(struct qlcnic_adapter *, u32);
 int qlcnic_82xx_setup_intr(struct qlcnic_adapter *, u8);
 irqreturn_t qlcnic_82xx_clear_legacy_intr(struct qlcnic_adapter *);
 int qlcnic_82xx_issue_cmd(struct qlcnic_adapter *adapter,
 			  struct qlcnic_cmd_args *);
 =======
+=======
+>>>>>>> v3.18
 int qlcnic_82xx_issue_cmd(struct qlcnic_adapter *adapter,
 			  struct qlcnic_cmd_args *);
 int qlcnic_82xx_mq_intrpt(struct qlcnic_adapter *, int);
 int qlcnic_82xx_config_intrpt(struct qlcnic_adapter *, u8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int qlcnic_82xx_fw_cmd_create_rx_ctx(struct qlcnic_adapter *);
 int qlcnic_82xx_fw_cmd_create_tx_ctx(struct qlcnic_adapter *,
@@ -237,7 +279,11 @@ void qlcnic_82xx_fw_cmd_del_tx_ctx(struct qlcnic_adapter *,
 				   struct qlcnic_host_tx_ring *);
 int qlcnic_82xx_sre_macaddr_change(struct qlcnic_adapter *, u8 *, u16, u8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_82xx_get_mac_address(struct qlcnic_adapter *, u8*);
+=======
+int qlcnic_82xx_get_mac_address(struct qlcnic_adapter *, u8*, u8);
+>>>>>>> v3.18
 =======
 int qlcnic_82xx_get_mac_address(struct qlcnic_adapter *, u8*, u8);
 >>>>>>> v3.18
@@ -256,7 +302,10 @@ void qlcnic_82xx_napi_enable(struct qlcnic_adapter *);
 void qlcnic_82xx_napi_disable(struct qlcnic_adapter *);
 void qlcnic_82xx_napi_del(struct qlcnic_adapter *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int qlcnic_82xx_shutdown(struct pci_dev *);
 int qlcnic_82xx_resume(struct qlcnic_adapter *);
 void qlcnic_clr_all_drv_state(struct qlcnic_adapter *adapter, u8 failed);
@@ -268,5 +317,8 @@ void qlcnic_82xx_cache_tmpl_hdr_values(struct qlcnic_fw_dump *);
 u32 qlcnic_82xx_get_cap_size(void *, int);
 void qlcnic_82xx_set_sys_info(void *, int, u32);
 void qlcnic_82xx_store_cap_mask(void *, u32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* __QLCNIC_HW_H_ */

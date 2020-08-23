@@ -8,6 +8,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NR_BANKS 16
+
+>>>>>>> v3.18
 =======
 #define NR_BANKS 16
 

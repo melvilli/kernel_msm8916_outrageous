@@ -13,7 +13,11 @@
  * consent.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+>>>>>>> v3.18
 =======
  * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
 >>>>>>> v3.18
@@ -39,8 +43,12 @@ enum {
 	 /* Execute the next command now */
 	RAMROD_EXEC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Don't add a new command and continue execution of posponed
+=======
+	/* Don't add a new command and continue execution of postponed
+>>>>>>> v3.18
 =======
 	/* Don't add a new command and continue execution of postponed
 >>>>>>> v3.18
@@ -138,8 +146,12 @@ struct bnx2x_vlan_mac_data {
 	/* Requested command: BNX2X_VLAN_MAC_XX */
 	enum bnx2x_vlan_mac_cmd cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * used to contain the data related vlan_mac_flags bits from
+=======
+	/* used to contain the data related vlan_mac_flags bits from
+>>>>>>> v3.18
 =======
 	/* used to contain the data related vlan_mac_flags bits from
 >>>>>>> v3.18
@@ -203,6 +215,7 @@ typedef struct bnx2x_exeq_elem *
 
 struct bnx2x_exe_queue_obj {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Commands pending for an execution.
 	 */
@@ -212,10 +225,15 @@ struct bnx2x_exe_queue_obj {
 	 * Commands pending for an completion.
 	 */
 =======
+=======
+>>>>>>> v3.18
 	/* Commands pending for an execution. */
 	struct list_head	exe_queue;
 
 	/* Commands pending for an completion. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head	pending_comp;
 
@@ -265,7 +283,11 @@ struct bnx2x_exe_queue_obj {
 /***************** Classification verbs: Set/Del MAC/VLAN/VLAN-MAC ************/
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Element in the VLAN_MAC registry list having all currenty configured
+=======
+ * Element in the VLAN_MAC registry list having all currently configured
+>>>>>>> v3.18
 =======
  * Element in the VLAN_MAC registry list having all currently configured
 >>>>>>> v3.18
@@ -275,8 +297,12 @@ struct bnx2x_vlan_mac_registry_elem {
 	struct list_head	link;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Used to store the cam offset used for the mac/vlan/vlan-mac.
+=======
+	/* Used to store the cam offset used for the mac/vlan/vlan-mac.
+>>>>>>> v3.18
 =======
 	/* Used to store the cam offset used for the mac/vlan/vlan-mac.
 >>>>>>> v3.18
@@ -301,7 +327,10 @@ enum {
 	BNX2X_DONT_CONSUME_CAM_CREDIT_DEST,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* When looking for matching filters, some flags are not interesting */
 #define BNX2X_VLAN_MAC_CMP_MASK	(1 << BNX2X_UC_LIST_MAC | \
 				 1 << BNX2X_ETH_MAC | \
@@ -309,6 +338,9 @@ enum {
 				 1 << BNX2X_NETQ_ETH_MAC)
 #define BNX2X_VLAN_MAC_CMP_FLAGS(flags) \
 	((flags) & BNX2X_VLAN_MAC_CMP_MASK)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct bnx2x_vlan_mac_ramrod_params {
@@ -330,13 +362,19 @@ struct bnx2x_vlan_mac_obj {
 	 */
 	struct list_head		head;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Implement a simple reader/writer lock on the head list.
 	 * all these fields should only be accessed under the exe_queue lock
 	 */
 	u8		head_reader; /* Num. of readers accessing head list */
 	bool		head_exe_request; /* Pending execution request. */
 	unsigned long	saved_ramrod_flags; /* Ramrods of pending execution */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* TODO: Add it's initialization in the init functions */
@@ -357,7 +395,11 @@ struct bnx2x_vlan_mac_obj {
 	 * @param buf buffer preallocated by caller into which elements
 	 *            will be copied. Note elements are 4-byte aligned
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *            so buffer size must be able to accomodate the
+=======
+	 *            so buffer size must be able to accommodate the
+>>>>>>> v3.18
 =======
 	 *            so buffer size must be able to accommodate the
 >>>>>>> v3.18
@@ -446,7 +488,11 @@ struct bnx2x_vlan_mac_obj {
 	 * @param p Command parameters (RAMROD_COMP_WAIT bit in
 	 *          ramrod_flags is only taken into an account)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param ppos a pointer to the cooky that should be given back in the
+=======
+	 * @param ppos a pointer to the cookie that should be given back in the
+>>>>>>> v3.18
 =======
 	 * @param ppos a pointer to the cookie that should be given back in the
 >>>>>>> v3.18
@@ -463,7 +509,11 @@ struct bnx2x_vlan_mac_obj {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Should be called on a completion arival.
+=======
+	 * Should be called on a completion arrival.
+>>>>>>> v3.18
 =======
 	 * Should be called on a completion arrival.
 >>>>>>> v3.18
@@ -501,12 +551,18 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bnx2x_set_mac_in_nig(struct bnx2x *bp,
 			  bool add, unsigned char *dev_addr, int index);
 
 /** RX_MODE verbs:DROP_ALL/ACCEPT_ALL/ACCEPT_ALL_MULTI/ACCEPT_ALL_VLAN/NORMAL */
 
 /* RX_MODE ramrod spesial flags: set in rx_mode_flags field in
+=======
+/** RX_MODE verbs:DROP_ALL/ACCEPT_ALL/ACCEPT_ALL_MULTI/ACCEPT_ALL_VLAN/NORMAL */
+
+/* RX_MODE ramrod special flags: set in rx_mode_flags field in
+>>>>>>> v3.18
 =======
 /** RX_MODE verbs:DROP_ALL/ACCEPT_ALL/ACCEPT_ALL_MULTI/ACCEPT_ALL_VLAN/NORMAL */
 
@@ -540,8 +596,12 @@ struct bnx2x_rx_mode_ramrod_params {
 	unsigned long rx_mode_flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * rdata is either a pointer to eth_filter_rules_ramrod_data(e2) or to
+=======
+	/* rdata is either a pointer to eth_filter_rules_ramrod_data(e2) or to
+>>>>>>> v3.18
 =======
 	/* rdata is either a pointer to eth_filter_rules_ramrod_data(e2) or to
 >>>>>>> v3.18
@@ -715,6 +775,7 @@ struct bnx2x_credit_pool_obj {
 	int		pool_sz;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 *  Allocate a pool table statically.
 	 *
@@ -722,11 +783,16 @@ struct bnx2x_credit_pool_obj {
 	 *
 	 *  The set bit in the table will mean that the entry is available.
 =======
+=======
+>>>>>>> v3.18
 	/* Allocate a pool table statically.
 	 *
 	 * Currently the maximum allowed size is MAX_MAC_CREDIT_E2(272)
 	 *
 	 * The set bit in the table will mean that the entry is available.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 #define BNX2X_POOL_VEC_SIZE	(MAX_MAC_CREDIT_E2 / 64)
@@ -787,6 +853,10 @@ enum {
 	BNX2X_RSS_IPV6_TCP,
 	BNX2X_RSS_IPV6_UDP,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BNX2X_RSS_GRE_INNER_HDRS,
+>>>>>>> v3.18
 =======
 	BNX2X_RSS_GRE_INNER_HDRS,
 >>>>>>> v3.18
@@ -847,13 +917,19 @@ enum {
 	BNX2X_Q_UPDATE_DEF_VLAN_EN_CHNG,
 	BNX2X_Q_UPDATE_SILENT_VLAN_REM_CHNG,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BNX2X_Q_UPDATE_SILENT_VLAN_REM
 =======
+=======
+>>>>>>> v3.18
 	BNX2X_Q_UPDATE_SILENT_VLAN_REM,
 	BNX2X_Q_UPDATE_TX_SWITCHING_CHNG,
 	BNX2X_Q_UPDATE_TX_SWITCHING,
 	BNX2X_Q_UPDATE_PTP_PKTS_CHNG,
 	BNX2X_Q_UPDATE_PTP_PKTS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -917,6 +993,10 @@ enum {
 	BNX2X_Q_FLG_SILENT_VLAN_REM,
 	BNX2X_Q_FLG_FORCE_DEFAULT_PRI,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BNX2X_Q_FLG_REFUSE_OUTBAND_VLAN,
+>>>>>>> v3.18
 =======
 	BNX2X_Q_FLG_REFUSE_OUTBAND_VLAN,
 >>>>>>> v3.18
@@ -925,7 +1005,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Queue type options: queue type may be a compination of below. */
+=======
+/* Queue type options: queue type may be a combination of below. */
+>>>>>>> v3.18
 =======
 /* Queue type options: queue type may be a combination of below. */
 >>>>>>> v3.18
@@ -945,11 +1029,17 @@ enum bnx2x_q_type {
 
 #define MAC_PAD (ALIGN(ETH_ALEN, sizeof(u32)) - ETH_ALEN)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* DMAE channel to be used by FW for timesync workaroun. A driver that sends
  * timesync-related ramrods must not use this DMAE command ID.
  */
 #define FW_DMAE_CMD_ID 6
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct bnx2x_queue_init_params {
@@ -994,7 +1084,10 @@ struct bnx2x_queue_update_params {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct bnx2x_queue_update_tpa_params {
 	dma_addr_t sge_map;
 	u8 update_ipv4;
@@ -1013,6 +1106,9 @@ struct bnx2x_queue_update_tpa_params {
 	u16 sge_pause_thr_high;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rxq_pause_params {
 	u16		bd_th_lo;
@@ -1109,6 +1205,10 @@ struct bnx2x_queue_state_params {
 	union {
 		struct bnx2x_queue_update_params	update;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct bnx2x_queue_update_tpa_params    update_tpa;
+>>>>>>> v3.18
 =======
 		struct bnx2x_queue_update_tpa_params    update_tpa;
 >>>>>>> v3.18
@@ -1131,10 +1231,16 @@ struct bnx2x_queue_sp_obj {
 	u8		func_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * number of traffic classes supported by queue.
 	 * The primary connection of the queue suppotrs the first traffic
 	 * class. Any further traffic class is suppoted by a tx-only
+=======
+	/* number of traffic classes supported by queue.
+	 * The primary connection of the queue supports the first traffic
+	 * class. Any further traffic class is supported by a tx-only
+>>>>>>> v3.18
 =======
 	/* number of traffic classes supported by queue.
 	 * The primary connection of the queue supports the first traffic
@@ -1156,7 +1262,11 @@ struct bnx2x_queue_sp_obj {
 	/* BNX2X_Q_CMD_XX bits. This object implements "one
 	 * pending" paradigm but for debug and tracing purposes it's
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * more convinient to have different bits for different
+=======
+	 * more convenient to have different bits for different
+>>>>>>> v3.18
 =======
 	 * more convenient to have different bits for different
 >>>>>>> v3.18
@@ -1203,7 +1313,10 @@ struct bnx2x_queue_sp_obj {
 
 /********************** Function state update *********************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* UPDATE command options */
 enum {
@@ -1218,6 +1331,9 @@ enum {
 	BNX2X_F_UPDATE_TUNNEL_INNER_GRE_RSS_EN,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Allowed Function states */
 enum bnx2x_func_state {
@@ -1240,6 +1356,10 @@ enum bnx2x_func_cmd {
 	BNX2X_F_CMD_TX_START,
 	BNX2X_F_CMD_SWITCH_UPDATE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BNX2X_F_CMD_SET_TIMESYNC,
+>>>>>>> v3.18
 =======
 	BNX2X_F_CMD_SET_TIMESYNC,
 >>>>>>> v3.18
@@ -1285,6 +1405,7 @@ struct bnx2x_func_start_params {
 	u8 network_cos_mode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* NVGRE classification enablement */
 	u8 nvgre_clss_en;
 
@@ -1298,6 +1419,8 @@ struct bnx2x_func_start_params {
 struct bnx2x_func_switch_update_params {
 	u8 suspend;
 =======
+=======
+>>>>>>> v3.18
 	/* TUNN_MODE_NONE/TUNN_MODE_VXLAN/TUNN_MODE_GRE */
 	u8 tunnel_mode;
 
@@ -1336,6 +1459,9 @@ struct bnx2x_func_switch_update_params {
 	u8 vlan_force_prio;
 	u8 tunnel_mode;
 	u8 gre_tunnel_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1352,6 +1478,10 @@ struct bnx2x_func_afex_viflists_params {
 	u8 func_to_clear;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1363,7 +1493,10 @@ struct bnx2x_func_tx_start_params {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct bnx2x_func_set_timesync_params {
 	/* Reset, set or keep the current drift value */
 	u8 drift_adjust_cmd;
@@ -1382,6 +1515,9 @@ struct bnx2x_func_set_timesync_params {
 	u64 offset_delta;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct bnx2x_func_state_params {
 	struct bnx2x_func_sp_obj *f_obj;
@@ -1402,6 +1538,10 @@ struct bnx2x_func_state_params {
 		struct bnx2x_func_afex_viflists_params afex_viflists;
 		struct bnx2x_func_tx_start_params tx_start;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct bnx2x_func_set_timesync_params set_timesync;
+>>>>>>> v3.18
 =======
 		struct bnx2x_func_set_timesync_params set_timesync;
 >>>>>>> v3.18
@@ -1440,7 +1580,11 @@ struct bnx2x_func_sp_obj {
 	/* BNX2X_FUNC_CMD_XX bits. This object implements "one
 	 * pending" paradigm but for debug and tracing purposes it's
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * more convinient to have different bits for different
+=======
+	 * more convenient to have different bits for different
+>>>>>>> v3.18
 =======
 	 * more convenient to have different bits for different
 >>>>>>> v3.18
@@ -1538,6 +1682,7 @@ void bnx2x_init_vlan_obj(struct bnx2x *bp,
 			 struct bnx2x_credit_pool_obj *vlans_pool);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bnx2x_init_vlan_mac_obj(struct bnx2x *bp,
 			     struct bnx2x_vlan_mac_obj *vlan_mac_obj,
 			     u8 cl_id, u32 cid, u8 func_id, void *rdata,
@@ -1549,6 +1694,8 @@ void bnx2x_init_vlan_mac_obj(struct bnx2x *bp,
 int bnx2x_config_vlan_mac(struct bnx2x *bp,
 			  struct bnx2x_vlan_mac_ramrod_params *p);
 =======
+=======
+>>>>>>> v3.18
 int bnx2x_vlan_mac_h_read_lock(struct bnx2x *bp,
 					struct bnx2x_vlan_mac_obj *o);
 void bnx2x_vlan_mac_h_read_unlock(struct bnx2x *bp,
@@ -1557,6 +1704,9 @@ int bnx2x_vlan_mac_h_write_lock(struct bnx2x *bp,
 				struct bnx2x_vlan_mac_obj *o);
 int bnx2x_config_vlan_mac(struct bnx2x *bp,
 			   struct bnx2x_vlan_mac_ramrod_params *p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int bnx2x_vlan_mac_move(struct bnx2x *bp,
@@ -1574,7 +1724,11 @@ void bnx2x_init_rx_mode_obj(struct bnx2x *bp,
  * @p: Command parameters
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Return: 0 - if operation was successfull and there is no pending completions,
+=======
+ * Return: 0 - if operation was successful and there is no pending completions,
+>>>>>>> v3.18
 =======
  * Return: 0 - if operation was successful and there is no pending completions,
 >>>>>>> v3.18
@@ -1610,7 +1764,11 @@ void bnx2x_init_mcast_obj(struct bnx2x *bp,
  * pending commands list.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Return: 0 is operation was successfull and there are no pending completions,
+=======
+ * Return: 0 is operation was successful and there are no pending completions,
+>>>>>>> v3.18
 =======
  * Return: 0 is operation was successful and there are no pending completions,
 >>>>>>> v3.18
@@ -1630,7 +1788,10 @@ void bnx2x_init_vlan_credit_pool(struct bnx2x *bp,
 				 u8 func_num);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /****************** RSS CONFIGURATION ****************/

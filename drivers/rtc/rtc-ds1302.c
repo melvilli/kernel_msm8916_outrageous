@@ -24,15 +24,21 @@
 #define	RTC_CMD_WRITE	0x80		/* Write command */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RTC_ADDR_RAM0	0x20		/* Address of RAM0 */
 #define RTC_ADDR_TCR	0x08		/* Address of trickle charge register */
 =======
+=======
+>>>>>>> v3.18
 #define	RTC_CMD_WRITE_ENABLE	0x00		/* Write enable */
 #define	RTC_CMD_WRITE_DISABLE	0x80		/* Write disable */
 
 #define RTC_ADDR_RAM0	0x20		/* Address of RAM0 */
 #define RTC_ADDR_TCR	0x08		/* Address of trickle charge register */
 #define	RTC_ADDR_CTRL	0x07		/* Address of control register */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	RTC_ADDR_YEAR	0x06		/* Address of year register */
 #define	RTC_ADDR_DAY	0x05		/* Address of day of week register */
@@ -171,6 +177,10 @@ static int ds1302_rtc_read_time(struct device *dev, struct rtc_time *tm)
 static int ds1302_rtc_set_time(struct device *dev, struct rtc_time *tm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ds1302_writebyte(RTC_ADDR_CTRL, RTC_CMD_WRITE_ENABLE);
+>>>>>>> v3.18
 =======
 	ds1302_writebyte(RTC_ADDR_CTRL, RTC_CMD_WRITE_ENABLE);
 >>>>>>> v3.18
@@ -189,6 +199,11 @@ static int ds1302_rtc_set_time(struct device *dev, struct rtc_time *tm)
 	ds1302_writebyte(RTC_ADDR_SEC, ds1302_readbyte(RTC_ADDR_SEC) & ~0x80);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ds1302_writebyte(RTC_ADDR_CTRL, RTC_CMD_WRITE_DISABLE);
+
+>>>>>>> v3.18
 =======
 	ds1302_writebyte(RTC_ADDR_CTRL, RTC_CMD_WRITE_DISABLE);
 
@@ -253,6 +268,7 @@ static int __init ds1302_rtc_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __exit ds1302_rtc_remove(struct platform_device *pdev)
 {
 	platform_set_drvdata(pdev, NULL);
@@ -262,13 +278,18 @@ static int __exit ds1302_rtc_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct platform_driver ds1302_platform_driver = {
 	.driver		= {
 		.name	= DRV_NAME,
 		.owner	= THIS_MODULE,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= __exit_p(ds1302_rtc_remove),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

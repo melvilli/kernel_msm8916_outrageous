@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -110,7 +114,11 @@ acpi_ds_create_external_region(acpi_status lookup_status,
 	 * insert the name into the namespace.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_dm_add_to_external_list(op, path, ACPI_TYPE_REGION, 0);
+=======
+	acpi_dm_add_op_to_external_list(op, path, ACPI_TYPE_REGION, 0, 0);
+>>>>>>> v3.18
 =======
 	acpi_dm_add_op_to_external_list(op, path, ACPI_TYPE_REGION, 0, 0);
 >>>>>>> v3.18
@@ -268,7 +276,11 @@ acpi_ds_create_buffer_field(union acpi_parse_object *op,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -578,6 +590,10 @@ acpi_ds_init_field_objects(union acpi_parse_object *op,
 	switch (walk_state->opcode) {
 	case AML_FIELD_OP:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -587,6 +603,10 @@ acpi_ds_init_field_objects(union acpi_parse_object *op,
 
 	case AML_BANK_FIELD_OP:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -596,6 +616,10 @@ acpi_ds_init_field_objects(union acpi_parse_object *op,
 
 	case AML_INDEX_FIELD_OP:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -605,6 +629,10 @@ acpi_ds_init_field_objects(union acpi_parse_object *op,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -53,9 +53,12 @@
 #define RX8581_CTRL_RESET	0x01 /* RESET bit */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct i2c_driver rx8581_driver;
 
 =======
+=======
+>>>>>>> v3.18
 struct rx8581 {
 	struct i2c_client	*client;
 	struct rtc_device	*rtc;
@@ -95,6 +98,9 @@ static int rx8581_write_block_data(const struct i2c_client *client, u8 command,
 	return length;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * In the routines that deal directly with the rx8581 hardware, we use
@@ -105,6 +111,10 @@ static int rx8581_get_datetime(struct i2c_client *client, struct rtc_time *tm)
 	unsigned char date[7];
 	int data, err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rx8581 *rx8581 = i2c_get_clientdata(client);
+>>>>>>> v3.18
 =======
 	struct rx8581 *rx8581 = i2c_get_clientdata(client);
 >>>>>>> v3.18
@@ -127,8 +137,12 @@ static int rx8581_get_datetime(struct i2c_client *client, struct rtc_time *tm)
 				RX8581_REG_FLAG, (data & ~RX8581_FLAG_UF));
 			if (err != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_err(&client->dev, "Unable to write device "
 					"flags\n");
+=======
+				dev_err(&client->dev, "Unable to write device flags\n");
+>>>>>>> v3.18
 =======
 				dev_err(&client->dev, "Unable to write device flags\n");
 >>>>>>> v3.18
@@ -138,7 +152,11 @@ static int rx8581_get_datetime(struct i2c_client *client, struct rtc_time *tm)
 
 		/* Now read time and date */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = i2c_smbus_read_i2c_block_data(client, RX8581_REG_SC,
+=======
+		err = rx8581->read_block_data(client, RX8581_REG_SC,
+>>>>>>> v3.18
 =======
 		err = rx8581->read_block_data(client, RX8581_REG_SC,
 >>>>>>> v3.18
@@ -195,6 +213,10 @@ static int rx8581_set_datetime(struct i2c_client *client, struct rtc_time *tm)
 	int data, err;
 	unsigned char buf[7];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rx8581 *rx8581 = i2c_get_clientdata(client);
+>>>>>>> v3.18
 =======
 	struct rx8581 *rx8581 = i2c_get_clientdata(client);
 >>>>>>> v3.18
@@ -235,7 +257,11 @@ static int rx8581_set_datetime(struct i2c_client *client, struct rtc_time *tm)
 
 	/* write register's data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = i2c_smbus_write_i2c_block_data(client, RX8581_REG_SC, 7, buf);
+=======
+	err = rx8581->write_block_data(client, RX8581_REG_SC, 7, buf);
+>>>>>>> v3.18
 =======
 	err = rx8581->write_block_data(client, RX8581_REG_SC, 7, buf);
 >>>>>>> v3.18
@@ -294,6 +320,7 @@ static int rx8581_probe(struct i2c_client *client,
 			const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtc_device *rtc;
 
 	dev_dbg(&client->dev, "%s\n", __func__);
@@ -317,6 +344,8 @@ static int rx8581_probe(struct i2c_client *client,
 static int rx8581_remove(struct i2c_client *client)
 {
 =======
+=======
+>>>>>>> v3.18
 	struct rx8581	  *rx8581;
 
 	dev_dbg(&client->dev, "%s\n", __func__);
@@ -351,6 +380,9 @@ static int rx8581_remove(struct i2c_client *client)
 		return PTR_ERR(rx8581->rtc);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -368,7 +400,10 @@ static struct i2c_driver rx8581_driver = {
 	},
 	.probe		= rx8581_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= rx8581_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= rx8581_id,

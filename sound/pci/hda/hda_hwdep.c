@@ -21,12 +21,16 @@
 #include <linux/init.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
 #include <linux/compat.h>
 #include <linux/mutex.h>
 #include <linux/ctype.h>
 #include <linux/string.h>
 #include <linux/export.h>
+=======
+#include <linux/compat.h>
+>>>>>>> v3.18
 =======
 #include <linux/compat.h>
 >>>>>>> v3.18
@@ -37,12 +41,15 @@
 #include <sound/minors.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* hint string pair */
 struct hda_hint {
 	const char *key;
 	const char *val;	/* contained in the same alloc as key */
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -113,6 +120,7 @@ static int hda_hwdep_open(struct snd_hwdep *hw, struct file *file)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void clear_hwdep_elements(struct hda_codec *codec)
 {
 	int i;
@@ -135,6 +143,8 @@ static void hwdep_free(struct snd_hwdep *hwdep)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int snd_hda_create_hwdep(struct hda_codec *codec)
 {
 	char hwname[16];
@@ -150,8 +160,13 @@ int snd_hda_create_hwdep(struct hda_codec *codec)
 	hwdep->iface = SNDRV_HWDEP_IFACE_HDA;
 	hwdep->private_data = codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hwdep->private_free = hwdep_free;
 	hwdep->exclusive = 1;
+=======
+	hwdep->exclusive = 1;
+	hwdep->groups = snd_hda_dev_attr_groups;
+>>>>>>> v3.18
 =======
 	hwdep->exclusive = 1;
 	hwdep->groups = snd_hda_dev_attr_groups;
@@ -163,6 +178,7 @@ int snd_hda_create_hwdep(struct hda_codec *codec)
 	hwdep->ops.ioctl_compat = hda_hwdep_ioctl_compat;
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_init(&codec->user_mutex);
 	snd_array_init(&codec->init_verbs, sizeof(struct hda_verb), 32);
@@ -870,9 +886,14 @@ int snd_hda_load_patch(struct hda_bus *bus, size_t fw_size, const void *fw_buf)
 EXPORT_SYMBOL_HDA(snd_hda_load_patch);
 #endif /* CONFIG_SND_HDA_PATCH_LOADER */
 =======
+=======
+>>>>>>> v3.18
 	/* link to codec */
 	hwdep->dev = &codec->dev;
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

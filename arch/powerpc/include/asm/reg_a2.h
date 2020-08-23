@@ -111,6 +111,7 @@
 #define TLB1_SR			ASM_CONST(0x0000000000000001)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_EARLY_DEBUG_WSP
 #define WSP_UART_PHYS	0xffc000c000
 /* This needs to be careful chosen to hit a !0 congruence class
@@ -120,6 +121,8 @@
 #define WSP_UART_VIRT	0xf000000000001000
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* A2 erativax attributes definitions */

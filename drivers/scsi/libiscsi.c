@@ -111,6 +111,7 @@ static void __iscsi_update_cmdsn(struct iscsi_session *session,
 
 	if (max_cmdsn != session->max_cmdsn &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !iscsi_sna_lt(max_cmdsn, session->max_cmdsn)) {
 		session->max_cmdsn = max_cmdsn;
 		/*
@@ -121,6 +122,10 @@ static void __iscsi_update_cmdsn(struct iscsi_session *session,
 		    !list_empty(&session->leadconn->mgmtqueue))
 			iscsi_conn_queue_work(session->leadconn);
 	}
+=======
+	    !iscsi_sna_lt(max_cmdsn, session->max_cmdsn))
+		session->max_cmdsn = max_cmdsn;
+>>>>>>> v3.18
 =======
 	    !iscsi_sna_lt(max_cmdsn, session->max_cmdsn))
 		session->max_cmdsn = max_cmdsn;
@@ -274,7 +279,11 @@ static int iscsi_check_tmf_restrictions(struct iscsi_task *task, int opcode)
 	struct iscsi_conn *conn = task->conn;
 	struct iscsi_tm *tmf = &conn->tmhdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int hdr_lun;
+=======
+	u64 hdr_lun;
+>>>>>>> v3.18
 =======
 	u64 hdr_lun;
 >>>>>>> v3.18
@@ -356,7 +365,11 @@ static int iscsi_prep_scsi_cmd_pdu(struct iscsi_task *task)
 	struct scsi_cmnd *sc = task->sc;
 	struct iscsi_scsi_req *hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned hdrlength, cmd_len;
+=======
+	unsigned hdrlength, cmd_len, transfer_length;
+>>>>>>> v3.18
 =======
 	unsigned hdrlength, cmd_len, transfer_length;
 >>>>>>> v3.18
@@ -409,12 +422,15 @@ static int iscsi_prep_scsi_cmd_pdu(struct iscsi_task *task)
 			return rc;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sc->sc_data_direction == DMA_TO_DEVICE) {
 		unsigned out_len = scsi_out(sc)->length;
 		struct iscsi_r2t_info *r2t = &task->unsol_r2t;
 
 		hdr->data_length = cpu_to_be32(out_len);
 =======
+=======
+>>>>>>> v3.18
 
 	if (scsi_get_prot_op(sc) != SCSI_PROT_NORMAL)
 		task->protected = true;
@@ -424,6 +440,9 @@ static int iscsi_prep_scsi_cmd_pdu(struct iscsi_task *task)
 	if (sc->sc_data_direction == DMA_TO_DEVICE) {
 		struct iscsi_r2t_info *r2t = &task->unsol_r2t;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		hdr->flags |= ISCSI_FLAG_CMD_WRITE;
 		/*
@@ -444,6 +463,7 @@ static int iscsi_prep_scsi_cmd_pdu(struct iscsi_task *task)
 
 		if (session->imm_data_en) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (out_len >= session->first_burst)
 				task->imm_count = min(session->first_burst,
 							conn->max_xmit_dlength);
@@ -451,12 +471,17 @@ static int iscsi_prep_scsi_cmd_pdu(struct iscsi_task *task)
 				task->imm_count = min(out_len,
 							conn->max_xmit_dlength);
 =======
+=======
+>>>>>>> v3.18
 			if (transfer_length >= session->first_burst)
 				task->imm_count = min(session->first_burst,
 							conn->max_xmit_dlength);
 			else
 				task->imm_count = min(transfer_length,
 						      conn->max_xmit_dlength);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			hton24(hdr->dlength, task->imm_count);
 		} else
@@ -464,7 +489,12 @@ static int iscsi_prep_scsi_cmd_pdu(struct iscsi_task *task)
 
 		if (!session->initial_r2t_en) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			r2t->data_length = min(session->first_burst, out_len) -
+=======
+			r2t->data_length = min(session->first_burst,
+					       transfer_length) -
+>>>>>>> v3.18
 =======
 			r2t->data_length = min(session->first_burst,
 					       transfer_length) -
@@ -482,7 +512,10 @@ static int iscsi_prep_scsi_cmd_pdu(struct iscsi_task *task)
 		hdr->flags |= ISCSI_FLAG_CMD_FINAL;
 		zero_data(hdr->dlength);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hdr->data_length = cpu_to_be32(scsi_in(sc)->length);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -513,7 +546,11 @@ static int iscsi_prep_scsi_cmd_pdu(struct iscsi_task *task)
 			  sc->sc_data_direction == DMA_TO_DEVICE ?
 			  "write" : "read", conn->id, sc, sc->cmnd[0],
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  task->itt, scsi_bufflen(sc),
+=======
+			  task->itt, transfer_length,
+>>>>>>> v3.18
 =======
 			  task->itt, transfer_length,
 >>>>>>> v3.18
@@ -528,7 +565,11 @@ static int iscsi_prep_scsi_cmd_pdu(struct iscsi_task *task)
  * @task: iscsi cmd task
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Must be called with session lock.
+=======
+ * Must be called with session back_lock.
+>>>>>>> v3.18
 =======
  * Must be called with session back_lock.
 >>>>>>> v3.18
@@ -586,14 +627,20 @@ void iscsi_put_task(struct iscsi_task *task)
 	struct iscsi_session *session = task->conn->session;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
 	__iscsi_put_task(task);
 	spin_unlock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 	/* regular RX path uses back_lock */
 	spin_lock_bh(&session->back_lock);
 	__iscsi_put_task(task);
 	spin_unlock_bh(&session->back_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(iscsi_put_task);
@@ -604,7 +651,11 @@ EXPORT_SYMBOL_GPL(iscsi_put_task);
  * @state: state to complete task with
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Must be called with session lock.
+=======
+ * Must be called with session back_lock.
+>>>>>>> v3.18
 =======
  * Must be called with session back_lock.
 >>>>>>> v3.18
@@ -647,7 +698,11 @@ static void iscsi_complete_task(struct iscsi_task *task, int state)
  * lower level pdu processing.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Called with session lock
+=======
+ * Called with session back_lock
+>>>>>>> v3.18
 =======
  * Called with session back_lock
 >>>>>>> v3.18
@@ -668,7 +723,11 @@ EXPORT_SYMBOL_GPL(iscsi_complete_scsi_task);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * session lock must be held and if not called for a task that is
+=======
+ * session back_lock must be held and if not called for a task that is
+>>>>>>> v3.18
 =======
  * session back_lock must be held and if not called for a task that is
 >>>>>>> v3.18
@@ -712,12 +771,18 @@ static void fail_scsi_task(struct iscsi_task *task, int err)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iscsi_complete_task(task, state);
 =======
+=======
+>>>>>>> v3.18
 	/* regular RX path uses back_lock */
 	spin_lock_bh(&conn->session->back_lock);
 	iscsi_complete_task(task, state);
 	spin_unlock_bh(&conn->session->back_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -867,12 +932,18 @@ __iscsi_conn_send_pdu(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
 
 free_task:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__iscsi_put_task(task);
 =======
+=======
+>>>>>>> v3.18
 	/* regular RX path uses back_lock */
 	spin_lock_bh(&session->back_lock);
 	__iscsi_put_task(task);
 	spin_unlock_bh(&session->back_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NULL;
 }
@@ -885,15 +956,21 @@ int iscsi_conn_send_pdu(struct iscsi_cls_conn *cls_conn, struct iscsi_hdr *hdr,
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
 	if (!__iscsi_conn_send_pdu(conn, hdr, data, data_size))
 		err = -EPERM;
 	spin_unlock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&session->frwd_lock);
 	if (!__iscsi_conn_send_pdu(conn, hdr, data, data_size))
 		err = -EPERM;
 	spin_unlock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -924,7 +1001,10 @@ static void iscsi_scsi_cmd_rsp(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
 	sc->result = (DID_OK << 16) | rhdr->cmd_status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (task->protected) {
 		sector_t sector;
 		u8 ascq;
@@ -952,6 +1032,9 @@ static void iscsi_scsi_cmd_rsp(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rhdr->response != ISCSI_STATUS_CMD_COMPLETED) {
 		sc->result = DID_ERROR << 16;
@@ -1144,7 +1227,11 @@ static int iscsi_handle_reject(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
 				  "pdu (op 0x%x itt 0x%x) rejected "
 				  "due to DataDigest error.\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  rejected_pdu.itt, opcode);
+=======
+				  opcode, rejected_pdu.itt);
+>>>>>>> v3.18
 =======
 				  opcode, rejected_pdu.itt);
 >>>>>>> v3.18
@@ -1154,7 +1241,11 @@ static int iscsi_handle_reject(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
 				  "pdu (op 0x%x itt 0x%x) rejected. Too many "
 				  "immediate commands.\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  rejected_pdu.itt, opcode);
+=======
+				  opcode, rejected_pdu.itt);
+>>>>>>> v3.18
 =======
 				  opcode, rejected_pdu.itt);
 >>>>>>> v3.18
@@ -1170,7 +1261,11 @@ static int iscsi_handle_reject(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
 			return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 if (rejected_pdu.itt == cpu_to_be32(ISCSI_RESERVED_TAG))
+=======
+		 if (rejected_pdu.itt == cpu_to_be32(ISCSI_RESERVED_TAG)) {
+>>>>>>> v3.18
 =======
 		 if (rejected_pdu.itt == cpu_to_be32(ISCSI_RESERVED_TAG)) {
 >>>>>>> v3.18
@@ -1179,10 +1274,13 @@ static int iscsi_handle_reject(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
 			 * Just resend.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iscsi_send_nopout(conn,
 					  (struct iscsi_nopin*)&rejected_pdu);
 		else {
 =======
+=======
+>>>>>>> v3.18
 			/* In RX path we are under back lock */
 			spin_unlock(&conn->session->back_lock);
 			spin_lock(&conn->session->frwd_lock);
@@ -1191,6 +1289,9 @@ static int iscsi_handle_reject(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
 			spin_unlock(&conn->session->frwd_lock);
 			spin_lock(&conn->session->back_lock);
 		} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			struct iscsi_task *task;
 			/*
@@ -1213,8 +1314,13 @@ static int iscsi_handle_reject(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
 		iscsi_conn_printk(KERN_ERR, conn,
 				  "pdu (op 0x%x itt 0x%x) rejected. Reason "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "code 0x%x\n", rejected_pdu.itt,
 				  rejected_pdu.opcode, reject->reason);
+=======
+				  "code 0x%x\n", rejected_pdu.opcode,
+				  rejected_pdu.itt, reject->reason);
+>>>>>>> v3.18
 =======
 				  "code 0x%x\n", rejected_pdu.opcode,
 				  rejected_pdu.itt, reject->reason);
@@ -1233,7 +1339,11 @@ static int iscsi_handle_reject(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
  * the LDD's itt space does not include the session age.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The session lock must be held.
+=======
+ * The session back_lock must be held.
+>>>>>>> v3.18
 =======
  * The session back_lock must be held.
 >>>>>>> v3.18
@@ -1266,7 +1376,11 @@ EXPORT_SYMBOL_GPL(iscsi_itt_to_task);
  *
  * Completes pdu processing by freeing any resources allocated at
 <<<<<<< HEAD
+<<<<<<< HEAD
  * queuecommand or send generic. session lock must be held and verify
+=======
+ * queuecommand or send generic. session back_lock must be held and verify
+>>>>>>> v3.18
 =======
  * queuecommand or send generic. session back_lock must be held and verify
 >>>>>>> v3.18
@@ -1307,14 +1421,20 @@ int __iscsi_complete_pdu(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
 				break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iscsi_send_nopout(conn, (struct iscsi_nopin*)hdr);
 =======
+=======
+>>>>>>> v3.18
 			/* In RX path we are under back lock */
 			spin_unlock(&session->back_lock);
 			spin_lock(&session->frwd_lock);
 			iscsi_send_nopout(conn, (struct iscsi_nopin*)hdr);
 			spin_unlock(&session->frwd_lock);
 			spin_lock(&session->back_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case ISCSI_OP_REJECT:
@@ -1423,9 +1543,15 @@ int iscsi_complete_pdu(struct iscsi_conn *conn, struct iscsi_hdr *hdr,
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&conn->session->lock);
 	rc = __iscsi_complete_pdu(conn, hdr, data, datalen);
 	spin_unlock(&conn->session->lock);
+=======
+	spin_lock(&conn->session->back_lock);
+	rc = __iscsi_complete_pdu(conn, hdr, data, datalen);
+	spin_unlock(&conn->session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&conn->session->back_lock);
 	rc = __iscsi_complete_pdu(conn, hdr, data, datalen);
@@ -1475,7 +1601,11 @@ EXPORT_SYMBOL_GPL(iscsi_verify_itt);
  * This should be used for cmd tasks.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The session lock must be held.
+=======
+ * The session back_lock must be held.
+>>>>>>> v3.18
 =======
  * The session back_lock must be held.
 >>>>>>> v3.18
@@ -1509,22 +1639,32 @@ void iscsi_session_failure(struct iscsi_session *session,
 	struct device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
 	conn = session->leadconn;
 	if (session->state == ISCSI_STATE_TERMINATE || !conn) {
 		spin_unlock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&session->frwd_lock);
 	conn = session->leadconn;
 	if (session->state == ISCSI_STATE_TERMINATE || !conn) {
 		spin_unlock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
 
 	dev = get_device(&conn->cls_conn->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -1548,9 +1688,15 @@ void iscsi_conn_failure(struct iscsi_conn *conn, enum iscsi_err err)
 	struct iscsi_session *session = conn->session;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
 	if (session->state == ISCSI_STATE_FAILED) {
 		spin_unlock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+	if (session->state == ISCSI_STATE_FAILED) {
+		spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 	if (session->state == ISCSI_STATE_FAILED) {
@@ -1562,7 +1708,11 @@ void iscsi_conn_failure(struct iscsi_conn *conn, enum iscsi_err err)
 	if (conn->stop_stage == 0)
 		session->state = ISCSI_STATE_FAILED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -1600,9 +1750,15 @@ static int iscsi_xmit_task(struct iscsi_conn *conn)
 
 	__iscsi_get_task(task);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&conn->session->lock);
 	rc = conn->session->tt->xmit_task(task);
 	spin_lock_bh(&conn->session->lock);
+=======
+	spin_unlock_bh(&conn->session->frwd_lock);
+	rc = conn->session->tt->xmit_task(task);
+	spin_lock_bh(&conn->session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&conn->session->frwd_lock);
 	rc = conn->session->tt->xmit_task(task);
@@ -1614,12 +1770,18 @@ static int iscsi_xmit_task(struct iscsi_conn *conn)
 		conn->task = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__iscsi_put_task(task);
 =======
+=======
+>>>>>>> v3.18
 	/* regular RX path uses back_lock */
 	spin_lock(&conn->session->back_lock);
 	__iscsi_put_task(task);
 	spin_unlock(&conn->session->back_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -1630,7 +1792,11 @@ static int iscsi_xmit_task(struct iscsi_conn *conn)
  *
  * LLDs that need to run a task from the session workqueue should call
 <<<<<<< HEAD
+<<<<<<< HEAD
  * this. The session lock must be held. This should only be called
+=======
+ * this. The session frwd_lock must be held. This should only be called
+>>>>>>> v3.18
 =======
  * this. The session frwd_lock must be held. This should only be called
 >>>>>>> v3.18
@@ -1665,15 +1831,21 @@ static int iscsi_data_xmit(struct iscsi_conn *conn)
 	int rc = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&conn->session->lock);
 	if (test_bit(ISCSI_SUSPEND_BIT, &conn->suspend_tx)) {
 		ISCSI_DBG_SESSION(conn->session, "Tx suspended!\n");
 		spin_unlock_bh(&conn->session->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&conn->session->frwd_lock);
 	if (test_bit(ISCSI_SUSPEND_BIT, &conn->suspend_tx)) {
 		ISCSI_DBG_SESSION(conn->session, "Tx suspended!\n");
 		spin_unlock_bh(&conn->session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENODATA;
 	}
@@ -1696,12 +1868,18 @@ check_mgmt:
 		list_del_init(&conn->task->running);
 		if (iscsi_prep_mgmt_task(conn, conn->task)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__iscsi_put_task(conn->task);
 =======
+=======
+>>>>>>> v3.18
 			/* regular RX path uses back_lock */
 			spin_lock_bh(&conn->session->back_lock);
 			__iscsi_put_task(conn->task);
 			spin_unlock_bh(&conn->session->back_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			conn->task = NULL;
 			continue;
@@ -1765,17 +1943,23 @@ check_mgmt:
 			goto check_mgmt;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&conn->session->lock);
 	return -ENODATA;
 
 done:
 	spin_unlock_bh(&conn->session->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_bh(&conn->session->frwd_lock);
 	return -ENODATA;
 
 done:
 	spin_unlock_bh(&conn->session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -1813,6 +1997,10 @@ static inline struct iscsi_task *iscsi_alloc_task(struct iscsi_conn *conn,
 	task->last_timeout = jiffies;
 	task->last_xfer = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	task->protected = false;
+>>>>>>> v3.18
 =======
 	task->protected = false;
 >>>>>>> v3.18
@@ -1850,7 +2038,11 @@ int iscsi_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *sc)
 	cls_session = starget_to_session(scsi_target(sc->device));
 	session = cls_session->dd_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -1940,7 +2132,11 @@ int iscsi_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *sc)
 
 	session->queued_cmdsn++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -1950,7 +2146,11 @@ prepd_reject:
 	iscsi_complete_task(task, ISCSI_TASK_REQUEUE_SCSIQ);
 reject:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -1962,7 +2162,11 @@ prepd_fault:
 	iscsi_complete_task(task, ISCSI_TASK_REQUEUE_SCSIQ);
 fault:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2014,7 +2218,11 @@ static void iscsi_tmf_timedout(unsigned long data)
 	struct iscsi_session *session = conn->session;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
+=======
+	spin_lock(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2025,7 +2233,11 @@ static void iscsi_tmf_timedout(unsigned long data)
 		wake_up(&conn->ehwait);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2042,15 +2254,21 @@ static int iscsi_exec_task_mgmt_fn(struct iscsi_conn *conn,
 				      NULL, 0);
 	if (!task) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&session->lock);
 		iscsi_conn_printk(KERN_ERR, conn, "Could not send TMF.\n");
 		iscsi_conn_failure(conn, ISCSI_ERR_CONN_FAILED);
 		spin_lock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock_bh(&session->frwd_lock);
 		iscsi_conn_printk(KERN_ERR, conn, "Could not send TMF.\n");
 		iscsi_conn_failure(conn, ISCSI_ERR_CONN_FAILED);
 		spin_lock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EPERM;
 	}
@@ -2062,7 +2280,11 @@ static int iscsi_exec_task_mgmt_fn(struct iscsi_conn *conn,
 	ISCSI_DBG_EH(session, "tmf set timeout\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2085,7 +2307,11 @@ static int iscsi_exec_task_mgmt_fn(struct iscsi_conn *conn,
 
 	mutex_lock(&session->eh_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2101,8 +2327,12 @@ static int iscsi_exec_task_mgmt_fn(struct iscsi_conn *conn,
  * thread flushed
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void fail_scsi_tasks(struct iscsi_conn *conn, unsigned lun,
 			    int error)
+=======
+static void fail_scsi_tasks(struct iscsi_conn *conn, u64 lun, int error)
+>>>>>>> v3.18
 =======
 static void fail_scsi_tasks(struct iscsi_conn *conn, u64 lun, int error)
 >>>>>>> v3.18
@@ -2130,7 +2360,11 @@ static void fail_scsi_tasks(struct iscsi_conn *conn, u64 lun, int error)
  * @conn: iscsi conn to stop queueing IO on
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This grabs the session lock to make sure no one is in
+=======
+ * This grabs the session frwd_lock to make sure no one is in
+>>>>>>> v3.18
 =======
  * This grabs the session frwd_lock to make sure no one is in
 >>>>>>> v3.18
@@ -2143,9 +2377,15 @@ static void fail_scsi_tasks(struct iscsi_conn *conn, u64 lun, int error)
 void iscsi_suspend_queue(struct iscsi_conn *conn)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&conn->session->lock);
 	set_bit(ISCSI_SUSPEND_BIT, &conn->suspend_tx);
 	spin_unlock_bh(&conn->session->lock);
+=======
+	spin_lock_bh(&conn->session->frwd_lock);
+	set_bit(ISCSI_SUSPEND_BIT, &conn->suspend_tx);
+	spin_unlock_bh(&conn->session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&conn->session->frwd_lock);
 	set_bit(ISCSI_SUSPEND_BIT, &conn->suspend_tx);
@@ -2210,7 +2450,11 @@ static enum blk_eh_timer_return iscsi_eh_cmd_timed_out(struct scsi_cmnd *sc)
 	ISCSI_DBG_EH(session, "scsi cmd %p timedout\n", sc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
+=======
+	spin_lock(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2328,7 +2572,11 @@ done:
 	if (task)
 		task->last_timeout = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2344,7 +2592,11 @@ static void iscsi_check_transport_timeouts(unsigned long data)
 	unsigned long recv_timeout, next_timeout = 0, last_recv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&session->lock);
+=======
+	spin_lock(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2365,8 +2617,13 @@ static void iscsi_check_transport_timeouts(unsigned long data)
 				  conn->ping_timeout, conn->recv_timeout,
 				  last_recv, conn->last_ping, jiffies);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock(&session->lock);
 		iscsi_conn_failure(conn, ISCSI_ERR_CONN_FAILED);
+=======
+		spin_unlock(&session->frwd_lock);
+		iscsi_conn_failure(conn, ISCSI_ERR_NOP_TIMEDOUT);
+>>>>>>> v3.18
 =======
 		spin_unlock(&session->frwd_lock);
 		iscsi_conn_failure(conn, ISCSI_ERR_NOP_TIMEDOUT);
@@ -2386,7 +2643,11 @@ static void iscsi_check_transport_timeouts(unsigned long data)
 	mod_timer(&conn->transport_timer, next_timeout);
 done:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&session->lock);
+=======
+	spin_unlock(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2420,7 +2681,11 @@ int iscsi_eh_abort(struct scsi_cmnd *sc)
 
 	mutex_lock(&session->eh_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2432,7 +2697,11 @@ int iscsi_eh_abort(struct scsi_cmnd *sc)
 		ISCSI_DBG_EH(session, "sc never reached iscsi layer or "
 				      "it completed.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&session->lock);
+=======
+		spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2447,7 +2716,11 @@ int iscsi_eh_abort(struct scsi_cmnd *sc)
 	if (!session->leadconn || session->state != ISCSI_STATE_LOGGED_IN ||
 	    sc->SCp.phase != session->age) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&session->lock);
+=======
+		spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2492,7 +2765,11 @@ int iscsi_eh_abort(struct scsi_cmnd *sc)
 	switch (conn->tmf_state) {
 	case TMF_SUCCESS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&session->lock);
+=======
+		spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2507,6 +2784,7 @@ int iscsi_eh_abort(struct scsi_cmnd *sc)
 		 * then sent more data for the cmd.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&session->lock);
 		fail_scsi_task(task, DID_ABORT);
 		conn->tmf_state = TMF_INITIAL;
@@ -2517,6 +2795,8 @@ int iscsi_eh_abort(struct scsi_cmnd *sc)
 	case TMF_TIMEDOUT:
 		spin_unlock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 		spin_lock_bh(&session->frwd_lock);
 		fail_scsi_task(task, DID_ABORT);
 		conn->tmf_state = TMF_INITIAL;
@@ -2526,6 +2806,9 @@ int iscsi_eh_abort(struct scsi_cmnd *sc)
 		goto success_unlocked;
 	case TMF_TIMEDOUT:
 		spin_unlock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		iscsi_conn_failure(conn, ISCSI_ERR_SCSI_EH_SESSION_RST);
 		goto failed_unlocked;
@@ -2546,7 +2829,11 @@ int iscsi_eh_abort(struct scsi_cmnd *sc)
 
 success:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2558,7 +2845,11 @@ success_unlocked:
 
 failed:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2592,16 +2883,22 @@ int iscsi_eh_device_reset(struct scsi_cmnd *sc)
 	session = cls_session->dd_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ISCSI_DBG_EH(session, "LU Reset [sc %p lun %u]\n", sc, sc->device->lun);
 
 	mutex_lock(&session->eh_mutex);
 	spin_lock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 	ISCSI_DBG_EH(session, "LU Reset [sc %p lun %llu]\n", sc,
 		     sc->device->lun);
 
 	mutex_lock(&session->eh_mutex);
 	spin_lock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Just check if we are not logged in. We cannot check for
@@ -2630,7 +2927,11 @@ int iscsi_eh_device_reset(struct scsi_cmnd *sc)
 		break;
 	case TMF_TIMEDOUT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&session->lock);
+=======
+		spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2643,6 +2944,7 @@ int iscsi_eh_device_reset(struct scsi_cmnd *sc)
 
 	rc = SUCCESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
 
 	iscsi_suspend_tx(conn);
@@ -2653,6 +2955,8 @@ int iscsi_eh_device_reset(struct scsi_cmnd *sc)
 	conn->tmf_state = TMF_INITIAL;
 	spin_unlock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_bh(&session->frwd_lock);
 
 	iscsi_suspend_tx(conn);
@@ -2662,6 +2966,9 @@ int iscsi_eh_device_reset(struct scsi_cmnd *sc)
 	fail_scsi_tasks(conn, sc->device->lun, DID_ERROR);
 	conn->tmf_state = TMF_INITIAL;
 	spin_unlock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iscsi_start_tx(conn);
@@ -2669,7 +2976,11 @@ int iscsi_eh_device_reset(struct scsi_cmnd *sc)
 
 unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2686,7 +2997,11 @@ void iscsi_session_recovery_timedout(struct iscsi_cls_session *cls_session)
 	struct iscsi_session *session = cls_session->dd_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2696,7 +3011,11 @@ void iscsi_session_recovery_timedout(struct iscsi_cls_session *cls_session)
 			wake_up(&session->leadconn->ehwait);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2722,7 +3041,11 @@ int iscsi_eh_session_reset(struct scsi_cmnd *sc)
 
 	mutex_lock(&session->eh_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2733,7 +3056,11 @@ failed:
 			     "%s, %s [age %d]\n", session->targetname,
 			     conn->persistent_address, session->age);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&session->lock);
+=======
+		spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2742,7 +3069,11 @@ failed:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2763,7 +3094,11 @@ failed:
 
 	mutex_lock(&session->eh_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2774,7 +3109,11 @@ failed:
 	} else
 		goto failed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2814,7 +3153,11 @@ int iscsi_eh_target_reset(struct scsi_cmnd *sc)
 
 	mutex_lock(&session->eh_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2845,7 +3188,11 @@ int iscsi_eh_target_reset(struct scsi_cmnd *sc)
 		break;
 	case TMF_TIMEDOUT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&session->lock);
+=======
+		spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 		spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -2858,6 +3205,7 @@ int iscsi_eh_target_reset(struct scsi_cmnd *sc)
 
 	rc = SUCCESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
 
 	iscsi_suspend_tx(conn);
@@ -2868,6 +3216,8 @@ int iscsi_eh_target_reset(struct scsi_cmnd *sc)
 	conn->tmf_state = TMF_INITIAL;
 	spin_unlock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_bh(&session->frwd_lock);
 
 	iscsi_suspend_tx(conn);
@@ -2877,6 +3227,9 @@ int iscsi_eh_target_reset(struct scsi_cmnd *sc)
 	fail_scsi_tasks(conn, -1, DID_ERROR);
 	conn->tmf_state = TMF_INITIAL;
 	spin_unlock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iscsi_start_tx(conn);
@@ -2884,7 +3237,11 @@ int iscsi_eh_target_reset(struct scsi_cmnd *sc)
 
 unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -3186,13 +3543,19 @@ iscsi_session_setup(struct iscsi_transport *iscsit, struct Scsi_Host *shost,
 	session->tt = iscsit;
 	session->dd_data = cls_session->dd_data + sizeof(*session);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&session->eh_mutex);
 	spin_lock_init(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 
 	mutex_init(&session->eh_mutex);
 	spin_lock_init(&session->frwd_lock);
 	spin_lock_init(&session->back_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* initialize SCSI PDU commands pool */
@@ -3255,14 +3618,20 @@ void iscsi_session_teardown(struct iscsi_cls_session *cls_session)
 	kfree(session->targetalias);
 	kfree(session->initiatorname);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(session->ifacename);
 =======
+=======
+>>>>>>> v3.18
 	kfree(session->boot_root);
 	kfree(session->boot_nic);
 	kfree(session->boot_target);
 	kfree(session->ifacename);
 	kfree(session->portal_type);
 	kfree(session->discovery_parent_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iscsi_destroy_session(cls_session);
@@ -3312,6 +3681,7 @@ iscsi_conn_setup(struct iscsi_cls_session *cls_session, int dd_size,
 
 	/* allocate login_task used for the login/text sequences */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
 	if (!kfifo_out(&session->cmdpool.queue,
                          (void*)&conn->login_task,
@@ -3321,6 +3691,8 @@ iscsi_conn_setup(struct iscsi_cls_session *cls_session, int dd_size,
 	}
 	spin_unlock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&session->frwd_lock);
 	if (!kfifo_out(&session->cmdpool.queue,
                          (void*)&conn->login_task,
@@ -3329,6 +3701,9 @@ iscsi_conn_setup(struct iscsi_cls_session *cls_session, int dd_size,
 		goto login_task_alloc_fail;
 	}
 	spin_unlock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data = (char *) __get_free_pages(GFP_KERNEL,
@@ -3367,7 +3742,11 @@ void iscsi_conn_teardown(struct iscsi_cls_conn *cls_conn)
 	del_timer_sync(&conn->transport_timer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -3380,7 +3759,11 @@ void iscsi_conn_teardown(struct iscsi_cls_conn *cls_conn)
 		wake_up(&conn->ehwait);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -3392,7 +3775,11 @@ void iscsi_conn_teardown(struct iscsi_cls_conn *cls_conn)
 	for (;;) {
 		spin_lock_irqsave(session->host->host_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!session->host->host_busy) { /* OK for ERL == 0 */
+=======
+		if (!atomic_read(&session->host->host_busy)) { /* OK for ERL == 0 */
+>>>>>>> v3.18
 =======
 		if (!atomic_read(&session->host->host_busy)) { /* OK for ERL == 0 */
 >>>>>>> v3.18
@@ -3404,7 +3791,11 @@ void iscsi_conn_teardown(struct iscsi_cls_conn *cls_conn)
 		iscsi_conn_printk(KERN_INFO, conn, "iscsi conn_destroy(): "
 				  "host_busy %d host_failed %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  session->host->host_busy,
+=======
+				  atomic_read(&session->host->host_busy),
+>>>>>>> v3.18
 =======
 				  atomic_read(&session->host->host_busy),
 >>>>>>> v3.18
@@ -3419,6 +3810,7 @@ void iscsi_conn_teardown(struct iscsi_cls_conn *cls_conn)
 	iscsi_suspend_tx(conn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
 	free_pages((unsigned long) conn->data,
 		   get_order(ISCSI_DEF_MAX_RECV_SEG_LEN));
@@ -3429,6 +3821,8 @@ void iscsi_conn_teardown(struct iscsi_cls_conn *cls_conn)
 		session->leadconn = NULL;
 	spin_unlock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&session->frwd_lock);
 	free_pages((unsigned long) conn->data,
 		   get_order(ISCSI_DEF_MAX_RECV_SEG_LEN));
@@ -3442,6 +3836,9 @@ void iscsi_conn_teardown(struct iscsi_cls_conn *cls_conn)
 	if (session->leadconn == conn)
 		session->leadconn = NULL;
 	spin_unlock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iscsi_destroy_conn(cls_conn);
@@ -3480,7 +3877,11 @@ int iscsi_conn_start(struct iscsi_cls_conn *cls_conn)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -3513,7 +3914,11 @@ int iscsi_conn_start(struct iscsi_cls_conn *cls_conn)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -3556,9 +3961,15 @@ static void iscsi_start_session_recovery(struct iscsi_session *session,
 
 	mutex_lock(&session->eh_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
 	if (conn->stop_stage == STOP_CONN_TERM) {
 		spin_unlock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+	if (conn->stop_stage == STOP_CONN_TERM) {
+		spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 	if (conn->stop_stage == STOP_CONN_TERM) {
@@ -3581,7 +3992,11 @@ static void iscsi_start_session_recovery(struct iscsi_session *session,
 	old_stop_stage = conn->stop_stage;
 	conn->stop_stage = flag;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&session->lock);
+=======
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&session->frwd_lock);
 >>>>>>> v3.18
@@ -3590,9 +4005,15 @@ static void iscsi_start_session_recovery(struct iscsi_session *session,
 	iscsi_suspend_tx(conn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
 	conn->c_stage = ISCSI_CONN_STOPPED;
 	spin_unlock_bh(&session->lock);
+=======
+	spin_lock_bh(&session->frwd_lock);
+	conn->c_stage = ISCSI_CONN_STOPPED;
+	spin_unlock_bh(&session->frwd_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&session->frwd_lock);
 	conn->c_stage = ISCSI_CONN_STOPPED;
@@ -3619,17 +4040,23 @@ static void iscsi_start_session_recovery(struct iscsi_session *session,
 	 * flush queues.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
 	fail_scsi_tasks(conn, -1, DID_TRANSPORT_DISRUPTED);
 	fail_mgmt_tasks(session, conn);
 	memset(&conn->tmhdr, 0, sizeof(conn->tmhdr));
 	spin_unlock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&session->frwd_lock);
 	fail_scsi_tasks(conn, -1, DID_TRANSPORT_DISRUPTED);
 	fail_mgmt_tasks(session, conn);
 	memset(&conn->tmhdr, 0, sizeof(conn->tmhdr));
 	spin_unlock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&session->eh_mutex);
 }
@@ -3658,15 +4085,21 @@ int iscsi_conn_bind(struct iscsi_cls_session *cls_session,
 	struct iscsi_conn *conn = cls_conn->dd_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&session->lock);
 	if (is_leading)
 		session->leadconn = conn;
 	spin_unlock_bh(&session->lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&session->frwd_lock);
 	if (is_leading)
 		session->leadconn = conn;
 	spin_unlock_bh(&session->frwd_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -3703,6 +4136,10 @@ int iscsi_set_param(struct iscsi_cls_conn *cls_conn,
 	struct iscsi_conn *conn = cls_conn->dd_data;
 	struct iscsi_session *session = conn->session;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int val;
+>>>>>>> v3.18
 =======
 	int val;
 >>>>>>> v3.18
@@ -3790,7 +4227,10 @@ int iscsi_set_param(struct iscsi_cls_conn *cls_conn,
 	case ISCSI_PARAM_INITIATOR_NAME:
 		return iscsi_switch_str_param(&session->initiatorname, buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case ISCSI_PARAM_BOOT_ROOT:
 		return iscsi_switch_str_param(&session->boot_root, buf);
 	case ISCSI_PARAM_BOOT_NIC:
@@ -3808,6 +4248,9 @@ int iscsi_set_param(struct iscsi_cls_conn *cls_conn,
 		break;
 	case ISCSI_PARAM_LOCAL_IPADDR:
 		return iscsi_switch_str_param(&conn->local_ipaddr, buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -ENOSYS;
@@ -3858,6 +4301,12 @@ int iscsi_session_get_param(struct iscsi_cls_session *cls_session,
 		len = sprintf(buf, "%d\n", session->dataseq_inorder_en);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ISCSI_PARAM_DEF_TASKMGMT_TMO:
+		len = sprintf(buf, "%d\n", session->def_taskmgmt_tmo);
+		break;
+>>>>>>> v3.18
 =======
 	case ISCSI_PARAM_DEF_TASKMGMT_TMO:
 		len = sprintf(buf, "%d\n", session->def_taskmgmt_tmo);
@@ -3894,7 +4343,10 @@ int iscsi_session_get_param(struct iscsi_cls_session *cls_session,
 		len = sprintf(buf, "%s\n", session->initiatorname);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case ISCSI_PARAM_BOOT_ROOT:
 		len = sprintf(buf, "%s\n", session->boot_root);
 		break;
@@ -3950,6 +4402,9 @@ int iscsi_session_get_param(struct iscsi_cls_session *cls_session,
 		else
 			len = sprintf(buf, "\n");
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -ENOSYS;
@@ -3987,6 +4442,10 @@ int iscsi_conn_get_addr_param(struct sockaddr_storage *addr,
 		break;
 	case ISCSI_PARAM_CONN_PORT:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ISCSI_PARAM_LOCAL_PORT:
+>>>>>>> v3.18
 =======
 	case ISCSI_PARAM_LOCAL_PORT:
 >>>>>>> v3.18
@@ -4045,7 +4504,10 @@ int iscsi_conn_get_param(struct iscsi_cls_conn *cls_conn,
 		len = sprintf(buf, "%s\n", conn->persistent_address);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case ISCSI_PARAM_STATSN:
 		len = sprintf(buf, "%u\n", conn->statsn);
 		break;
@@ -4097,6 +4559,9 @@ int iscsi_conn_get_param(struct iscsi_cls_conn *cls_conn,
 	case ISCSI_PARAM_LOCAL_IPADDR:
 		len = sprintf(buf, "%s\n", conn->local_ipaddr);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -ENOSYS;

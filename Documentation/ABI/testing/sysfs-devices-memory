@@ -62,7 +62,10 @@ Users:		hotplug memory remove tools
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 What:           /sys/devices/system/memory/memoryX/valid_zones
 Date:           July 2014
 Contact:	Zhang Zhen <zhenzhang.zhang@huawei.com>
@@ -71,6 +74,9 @@ Description:
 		read-only and is designed to show which zone this memory
 		block can be onlined to.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 What:		/sys/devices/system/memoryX/nodeY
 Date:		October 2009

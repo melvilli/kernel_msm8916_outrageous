@@ -31,10 +31,13 @@ endif
 KBUILD_CFLAGS   += -fno-asynchronous-unwind-tables
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifneq ($(CONFIG_DEBUG_EXTRA_FLAGS),"")
 KBUILD_CFLAGS   += $(CONFIG_DEBUG_EXTRA_FLAGS)
 endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 LIBGCC_PATH     := \

@@ -48,6 +48,7 @@ enum opcode {
 	insn_beq, insn_beql, insn_bgez, insn_bgezl, insn_bltz, insn_bltzl,
 	insn_bne, insn_cache, insn_daddiu, insn_daddu, insn_dins, insn_dinsm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	insn_dmfc0, insn_dmtc0, insn_drotr, insn_drotr32, insn_dsll,
 	insn_dsll32, insn_dsra, insn_dsrl, insn_dsrl32, insn_dsubu, insn_eret,
 	insn_ext, insn_ins, insn_j, insn_jal, insn_jr, insn_ld, insn_ldx,
@@ -57,6 +58,8 @@ enum opcode {
 	insn_syscall, insn_tlbp, insn_tlbr, insn_tlbwi, insn_tlbwr, insn_xor,
 	insn_xori,
 =======
+=======
+>>>>>>> v3.18
 	insn_divu, insn_dmfc0, insn_dmtc0, insn_drotr, insn_drotr32, insn_dsll,
 	insn_dsll32, insn_dsra, insn_dsrl, insn_dsrl32, insn_dsubu, insn_eret,
 	insn_ext, insn_ins, insn_j, insn_jal, insn_jalr, insn_jr, insn_lb,
@@ -67,6 +70,9 @@ enum opcode {
 	insn_srl, insn_srlv, insn_subu, insn_sw, insn_sync, insn_syscall,
 	insn_tlbp, insn_tlbr, insn_tlbwi, insn_tlbwr, insn_wait, insn_wsbh,
 	insn_xor, insn_xori, insn_yield,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -77,7 +83,11 @@ struct insn {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_rs(u32 arg)
+=======
+static inline u32 build_rs(u32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_rs(u32 arg)
 >>>>>>> v3.18
@@ -88,7 +98,11 @@ static inline u32 build_rs(u32 arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_rt(u32 arg)
+=======
+static inline u32 build_rt(u32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_rt(u32 arg)
 >>>>>>> v3.18
@@ -99,7 +113,11 @@ static inline u32 build_rt(u32 arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_rd(u32 arg)
+=======
+static inline u32 build_rd(u32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_rd(u32 arg)
 >>>>>>> v3.18
@@ -110,7 +128,11 @@ static inline u32 build_rd(u32 arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_re(u32 arg)
+=======
+static inline u32 build_re(u32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_re(u32 arg)
 >>>>>>> v3.18
@@ -121,7 +143,11 @@ static inline u32 build_re(u32 arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_simm(s32 arg)
+=======
+static inline u32 build_simm(s32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_simm(s32 arg)
 >>>>>>> v3.18
@@ -133,7 +159,11 @@ static inline u32 build_simm(s32 arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_uimm(u32 arg)
+=======
+static inline u32 build_uimm(u32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_uimm(u32 arg)
 >>>>>>> v3.18
@@ -144,7 +174,11 @@ static inline u32 build_uimm(u32 arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_scimm(u32 arg)
+=======
+static inline u32 build_scimm(u32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_scimm(u32 arg)
 >>>>>>> v3.18
@@ -156,7 +190,11 @@ static inline u32 build_scimm(u32 arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_func(u32 arg)
+=======
+static inline u32 build_func(u32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_func(u32 arg)
 >>>>>>> v3.18
@@ -167,7 +205,11 @@ static inline u32 build_func(u32 arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __uasminit u32 build_set(u32 arg)
+=======
+static inline u32 build_set(u32 arg)
+>>>>>>> v3.18
 =======
 static inline u32 build_set(u32 arg)
 >>>>>>> v3.18
@@ -178,7 +220,11 @@ static inline u32 build_set(u32 arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __uasminit build_insn(u32 **buf, enum opcode opc, ...);
+=======
+static void build_insn(u32 **buf, enum opcode opc, ...);
+>>>>>>> v3.18
 =======
 static void build_insn(u32 **buf, enum opcode opc, ...);
 >>>>>>> v3.18
@@ -191,7 +237,10 @@ Ip_u1u2u3(op)						\
 UASM_EXPORT_SYMBOL(uasm_i##op);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define I_s3s1s2(op)					\
 Ip_s3s1s2(op)						\
 {							\
@@ -199,6 +248,9 @@ Ip_s3s1s2(op)						\
 }							\
 UASM_EXPORT_SYMBOL(uasm_i##op);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define I_u2u1u3(op)					\
 Ip_u2u1u3(op)						\
@@ -208,7 +260,10 @@ Ip_u2u1u3(op)						\
 UASM_EXPORT_SYMBOL(uasm_i##op);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define I_u3u2u1(op)					\
 Ip_u3u2u1(op)						\
 {							\
@@ -216,6 +271,9 @@ Ip_u3u2u1(op)						\
 }							\
 UASM_EXPORT_SYMBOL(uasm_i##op);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define I_u3u1u2(op)					\
 Ip_u3u1u2(op)						\
@@ -274,7 +332,10 @@ Ip_u1u2(op)						\
 UASM_EXPORT_SYMBOL(uasm_i##op);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define I_u2u1(op)					\
 Ip_u1u2(op)						\
 {							\
@@ -282,6 +343,9 @@ Ip_u1u2(op)						\
 }							\
 UASM_EXPORT_SYMBOL(uasm_i##op);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define I_u1s2(op)					\
 Ip_u1s2(op)						\
@@ -321,6 +385,10 @@ I_u1u2u3(_dmtc0)
 I_u2u1s3(_daddiu)
 I_u3u1u2(_daddu)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+I_u1u2(_divu)
+>>>>>>> v3.18
 =======
 I_u1u2(_divu)
 >>>>>>> v3.18
@@ -338,14 +406,20 @@ I_u2u1msbu3(_ins)
 I_u1(_j)
 I_u1(_jal)
 <<<<<<< HEAD
+<<<<<<< HEAD
 I_u1(_jr)
 I_u2s3u1(_ld)
 =======
+=======
+>>>>>>> v3.18
 I_u2u1(_jalr)
 I_u1(_jr)
 I_u2s3u1(_lb)
 I_u2s3u1(_ld)
 I_u2s3u1(_lh)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 I_u2s3u1(_ll)
 I_u2s3u1(_lld)
@@ -353,12 +427,18 @@ I_u1s2(_lui)
 I_u2s3u1(_lw)
 I_u1u2u3(_mfc0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 I_u1u2u3(_mtc0)
 =======
+=======
+>>>>>>> v3.18
 I_u1(_mfhi)
 I_u1(_mflo)
 I_u1u2u3(_mtc0)
 I_u3u1u2(_mul)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 I_u2u1u3(_ori)
 I_u3u1u2(_or)
@@ -368,12 +448,15 @@ I_u2s3u1(_scd)
 I_u2s3u1(_sd)
 I_u2u1u3(_sll)
 <<<<<<< HEAD
+<<<<<<< HEAD
 I_u2u1u3(_sra)
 I_u2u1u3(_srl)
 I_u2u1u3(_rotr)
 I_u3u1u2(_subu)
 I_u2s3u1(_sw)
 =======
+=======
+>>>>>>> v3.18
 I_u3u2u1(_sllv)
 I_s3s1s2(_slt)
 I_u2u1s3(_sltiu)
@@ -385,20 +468,29 @@ I_u2u1u3(_rotr)
 I_u3u1u2(_subu)
 I_u2s3u1(_sw)
 I_u1(_sync)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 I_0(_tlbp)
 I_0(_tlbr)
 I_0(_tlbwi)
 I_0(_tlbwr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 I_u3u1u2(_xor)
 I_u2u1u3(_xori)
 =======
+=======
+>>>>>>> v3.18
 I_u1(_wait);
 I_u2u1(_wsbh)
 I_u3u1u2(_xor)
 I_u2u1u3(_xori)
 I_u2u1(_yield)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 I_u2u1msbu3(_dins);
 I_u2u1msb32u3(_dinsm);
@@ -411,7 +503,11 @@ I_u3u1u2(_ldx)
 #ifdef CONFIG_CPU_CAVIUM_OCTEON
 #include <asm/octeon/octeon.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit ISAFUNC(uasm_i_pref)(u32 **buf, unsigned int a, signed int b,
+=======
+void ISAFUNC(uasm_i_pref)(u32 **buf, unsigned int a, signed int b,
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_i_pref)(u32 **buf, unsigned int a, signed int b,
 >>>>>>> v3.18
@@ -433,7 +529,11 @@ I_u2s3u1(_pref)
 
 /* Handle labels. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit ISAFUNC(uasm_build_label)(struct uasm_label **lab, u32 *addr, int lid)
+=======
+void ISAFUNC(uasm_build_label)(struct uasm_label **lab, u32 *addr, int lid)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_build_label)(struct uasm_label **lab, u32 *addr, int lid)
 >>>>>>> v3.18
@@ -445,7 +545,11 @@ void ISAFUNC(uasm_build_label)(struct uasm_label **lab, u32 *addr, int lid)
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_build_label));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __uasminit ISAFUNC(uasm_in_compat_space_p)(long addr)
+=======
+int ISAFUNC(uasm_in_compat_space_p)(long addr)
+>>>>>>> v3.18
 =======
 int ISAFUNC(uasm_in_compat_space_p)(long addr)
 >>>>>>> v3.18
@@ -460,7 +564,11 @@ int ISAFUNC(uasm_in_compat_space_p)(long addr)
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_in_compat_space_p));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __uasminit uasm_rel_highest(long val)
+=======
+static int uasm_rel_highest(long val)
+>>>>>>> v3.18
 =======
 static int uasm_rel_highest(long val)
 >>>>>>> v3.18
@@ -473,7 +581,11 @@ static int uasm_rel_highest(long val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __uasminit uasm_rel_higher(long val)
+=======
+static int uasm_rel_higher(long val)
+>>>>>>> v3.18
 =======
 static int uasm_rel_higher(long val)
 >>>>>>> v3.18
@@ -486,7 +598,11 @@ static int uasm_rel_higher(long val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __uasminit ISAFUNC(uasm_rel_hi)(long val)
+=======
+int ISAFUNC(uasm_rel_hi)(long val)
+>>>>>>> v3.18
 =======
 int ISAFUNC(uasm_rel_hi)(long val)
 >>>>>>> v3.18
@@ -496,7 +612,11 @@ int ISAFUNC(uasm_rel_hi)(long val)
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_rel_hi));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __uasminit ISAFUNC(uasm_rel_lo)(long val)
+=======
+int ISAFUNC(uasm_rel_lo)(long val)
+>>>>>>> v3.18
 =======
 int ISAFUNC(uasm_rel_lo)(long val)
 >>>>>>> v3.18
@@ -506,7 +626,11 @@ int ISAFUNC(uasm_rel_lo)(long val)
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_rel_lo));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit ISAFUNC(UASM_i_LA_mostly)(u32 **buf, unsigned int rs, long addr)
+=======
+void ISAFUNC(UASM_i_LA_mostly)(u32 **buf, unsigned int rs, long addr)
+>>>>>>> v3.18
 =======
 void ISAFUNC(UASM_i_LA_mostly)(u32 **buf, unsigned int rs, long addr)
 >>>>>>> v3.18
@@ -528,7 +652,11 @@ void ISAFUNC(UASM_i_LA_mostly)(u32 **buf, unsigned int rs, long addr)
 UASM_EXPORT_SYMBOL(ISAFUNC(UASM_i_LA_mostly));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit ISAFUNC(UASM_i_LA)(u32 **buf, unsigned int rs, long addr)
+=======
+void ISAFUNC(UASM_i_LA)(u32 **buf, unsigned int rs, long addr)
+>>>>>>> v3.18
 =======
 void ISAFUNC(UASM_i_LA)(u32 **buf, unsigned int rs, long addr)
 >>>>>>> v3.18
@@ -547,8 +675,12 @@ UASM_EXPORT_SYMBOL(ISAFUNC(UASM_i_LA));
 
 /* Handle relocations. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_r_mips_pc16)(struct uasm_reloc **rel, u32 *addr, int lid)
+=======
+void ISAFUNC(uasm_r_mips_pc16)(struct uasm_reloc **rel, u32 *addr, int lid)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_r_mips_pc16)(struct uasm_reloc **rel, u32 *addr, int lid)
 >>>>>>> v3.18
@@ -561,17 +693,23 @@ void ISAFUNC(uasm_r_mips_pc16)(struct uasm_reloc **rel, u32 *addr, int lid)
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_r_mips_pc16));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __uasminit
 __resolve_relocs(struct uasm_reloc *rel, struct uasm_label *lab);
 
 void __uasminit
 ISAFUNC(uasm_resolve_relocs)(struct uasm_reloc *rel, struct uasm_label *lab)
 =======
+=======
+>>>>>>> v3.18
 static inline void __resolve_relocs(struct uasm_reloc *rel,
 				    struct uasm_label *lab);
 
 void ISAFUNC(uasm_resolve_relocs)(struct uasm_reloc *rel,
 				  struct uasm_label *lab)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct uasm_label *l;
@@ -584,8 +722,13 @@ void ISAFUNC(uasm_resolve_relocs)(struct uasm_reloc *rel,
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_resolve_relocs));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_move_relocs)(struct uasm_reloc *rel, u32 *first, u32 *end, long off)
+=======
+void ISAFUNC(uasm_move_relocs)(struct uasm_reloc *rel, u32 *first, u32 *end,
+			       long off)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_move_relocs)(struct uasm_reloc *rel, u32 *first, u32 *end,
 			       long off)
@@ -598,8 +741,13 @@ void ISAFUNC(uasm_move_relocs)(struct uasm_reloc *rel, u32 *first, u32 *end,
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_move_relocs));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_move_labels)(struct uasm_label *lab, u32 *first, u32 *end, long off)
+=======
+void ISAFUNC(uasm_move_labels)(struct uasm_label *lab, u32 *first, u32 *end,
+			       long off)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_move_labels)(struct uasm_label *lab, u32 *first, u32 *end,
 			       long off)
@@ -612,9 +760,14 @@ void ISAFUNC(uasm_move_labels)(struct uasm_label *lab, u32 *first, u32 *end,
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_move_labels));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_copy_handler)(struct uasm_reloc *rel, struct uasm_label *lab, u32 *first,
 		  u32 *end, u32 *target)
+=======
+void ISAFUNC(uasm_copy_handler)(struct uasm_reloc *rel, struct uasm_label *lab,
+				u32 *first, u32 *end, u32 *target)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_copy_handler)(struct uasm_reloc *rel, struct uasm_label *lab,
 				u32 *first, u32 *end, u32 *target)
@@ -630,7 +783,11 @@ void ISAFUNC(uasm_copy_handler)(struct uasm_reloc *rel, struct uasm_label *lab,
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_copy_handler));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __uasminit ISAFUNC(uasm_insn_has_bdelay)(struct uasm_reloc *rel, u32 *addr)
+=======
+int ISAFUNC(uasm_insn_has_bdelay)(struct uasm_reloc *rel, u32 *addr)
+>>>>>>> v3.18
 =======
 int ISAFUNC(uasm_insn_has_bdelay)(struct uasm_reloc *rel, u32 *addr)
 >>>>>>> v3.18
@@ -648,8 +805,13 @@ UASM_EXPORT_SYMBOL(ISAFUNC(uasm_insn_has_bdelay));
 
 /* Convenience functions for labeled branches. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_il_bltz)(u32 **p, struct uasm_reloc **r, unsigned int reg, int lid)
+=======
+void ISAFUNC(uasm_il_bltz)(u32 **p, struct uasm_reloc **r, unsigned int reg,
+			   int lid)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_il_bltz)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 			   int lid)
@@ -661,8 +823,12 @@ void ISAFUNC(uasm_il_bltz)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_il_bltz));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_il_b)(u32 **p, struct uasm_reloc **r, int lid)
+=======
+void ISAFUNC(uasm_il_b)(u32 **p, struct uasm_reloc **r, int lid)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_il_b)(u32 **p, struct uasm_reloc **r, int lid)
 >>>>>>> v3.18
@@ -673,9 +839,12 @@ void ISAFUNC(uasm_il_b)(u32 **p, struct uasm_reloc **r, int lid)
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_il_b));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_il_beqz)(u32 **p, struct uasm_reloc **r, unsigned int reg, int lid)
 =======
+=======
+>>>>>>> v3.18
 void ISAFUNC(uasm_il_beq)(u32 **p, struct uasm_reloc **r, unsigned int r1,
 			  unsigned int r2, int lid)
 {
@@ -686,6 +855,9 @@ UASM_EXPORT_SYMBOL(ISAFUNC(uasm_il_beq));
 
 void ISAFUNC(uasm_il_beqz)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 			   int lid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	uasm_r_mips_pc16(r, *p, lid);
@@ -694,8 +866,13 @@ void ISAFUNC(uasm_il_beqz)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_il_beqz));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_il_beqzl)(u32 **p, struct uasm_reloc **r, unsigned int reg, int lid)
+=======
+void ISAFUNC(uasm_il_beqzl)(u32 **p, struct uasm_reloc **r, unsigned int reg,
+			    int lid)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_il_beqzl)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 			    int lid)
@@ -707,9 +884,14 @@ void ISAFUNC(uasm_il_beqzl)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_il_beqzl));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_il_bne)(u32 **p, struct uasm_reloc **r, unsigned int reg1,
 	unsigned int reg2, int lid)
+=======
+void ISAFUNC(uasm_il_bne)(u32 **p, struct uasm_reloc **r, unsigned int reg1,
+			  unsigned int reg2, int lid)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_il_bne)(u32 **p, struct uasm_reloc **r, unsigned int reg1,
 			  unsigned int reg2, int lid)
@@ -721,8 +903,13 @@ void ISAFUNC(uasm_il_bne)(u32 **p, struct uasm_reloc **r, unsigned int reg1,
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_il_bne));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_il_bnez)(u32 **p, struct uasm_reloc **r, unsigned int reg, int lid)
+=======
+void ISAFUNC(uasm_il_bnez)(u32 **p, struct uasm_reloc **r, unsigned int reg,
+			   int lid)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_il_bnez)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 			   int lid)
@@ -734,8 +921,13 @@ void ISAFUNC(uasm_il_bnez)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_il_bnez));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_il_bgezl)(u32 **p, struct uasm_reloc **r, unsigned int reg, int lid)
+=======
+void ISAFUNC(uasm_il_bgezl)(u32 **p, struct uasm_reloc **r, unsigned int reg,
+			    int lid)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_il_bgezl)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 			    int lid)
@@ -747,8 +939,13 @@ void ISAFUNC(uasm_il_bgezl)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_il_bgezl));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_il_bgez)(u32 **p, struct uasm_reloc **r, unsigned int reg, int lid)
+=======
+void ISAFUNC(uasm_il_bgez)(u32 **p, struct uasm_reloc **r, unsigned int reg,
+			   int lid)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_il_bgez)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 			   int lid)
@@ -760,9 +957,14 @@ void ISAFUNC(uasm_il_bgez)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_il_bgez));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_il_bbit0)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 	      unsigned int bit, int lid)
+=======
+void ISAFUNC(uasm_il_bbit0)(u32 **p, struct uasm_reloc **r, unsigned int reg,
+			    unsigned int bit, int lid)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_il_bbit0)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 			    unsigned int bit, int lid)
@@ -774,9 +976,14 @@ void ISAFUNC(uasm_il_bbit0)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 UASM_EXPORT_SYMBOL(ISAFUNC(uasm_il_bbit0));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __uasminit
 ISAFUNC(uasm_il_bbit1)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 	      unsigned int bit, int lid)
+=======
+void ISAFUNC(uasm_il_bbit1)(u32 **p, struct uasm_reloc **r, unsigned int reg,
+			    unsigned int bit, int lid)
+>>>>>>> v3.18
 =======
 void ISAFUNC(uasm_il_bbit1)(u32 **p, struct uasm_reloc **r, unsigned int reg,
 			    unsigned int bit, int lid)

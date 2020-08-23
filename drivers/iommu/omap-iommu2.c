@@ -99,6 +99,12 @@ static int omap2_iommu_enable(struct omap_iommu *obj)
 	iommu_write_reg(obj, pa, MMU_TTB);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (obj->has_bus_err_back)
+		iommu_write_reg(obj, MMU_GP_REG_BUS_ERR_BACK_EN, MMU_GP_REG);
+
+>>>>>>> v3.18
 =======
 	if (obj->has_bus_err_back)
 		iommu_write_reg(obj, MMU_GP_REG_BUS_ERR_BACK_EN, MMU_GP_REG);

@@ -9,7 +9,11 @@
 #include "qlcnic_hw.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qlcnic_83xx_enable_vnic_mode(struct qlcnic_adapter *adapter, int lock)
+=======
+static int qlcnic_83xx_enable_vnic_mode(struct qlcnic_adapter *adapter, int lock)
+>>>>>>> v3.18
 =======
 static int qlcnic_83xx_enable_vnic_mode(struct qlcnic_adapter *adapter, int lock)
 >>>>>>> v3.18
@@ -44,15 +48,21 @@ int qlcnic_83xx_disable_vnic_mode(struct qlcnic_adapter *adapter, int lock)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qlcnic_83xx_set_vnic_opmode(struct qlcnic_adapter *adapter)
 {
 	u8 id;
 	int i, ret = -EBUSY;
 =======
+=======
+>>>>>>> v3.18
 int qlcnic_83xx_set_vnic_opmode(struct qlcnic_adapter *adapter)
 {
 	u8 id;
 	int ret = -EBUSY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 data = QLCNIC_MGMT_FUNC;
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
@@ -60,6 +70,7 @@ int qlcnic_83xx_set_vnic_opmode(struct qlcnic_adapter *adapter)
 	if (qlcnic_83xx_lock_driver(adapter))
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (qlcnic_config_npars) {
 		for (i = 0; i < ahw->act_pci_func; i++) {
@@ -76,11 +87,16 @@ int qlcnic_83xx_set_vnic_opmode(struct qlcnic_adapter *adapter)
 						ahw->pci_func);
 	}
 =======
+=======
+>>>>>>> v3.18
 	id = ahw->pci_func;
 	data = QLCRDX(adapter->ahw, QLC_83XX_DRV_OP_MODE);
 	data = (data & ~QLC_83XX_SET_FUNC_OPMODE(0x3, id)) |
 	       QLC_83XX_SET_FUNC_OPMODE(QLCNIC_MGMT_FUNC, id);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	QLCWRX(adapter->ahw, QLC_83XX_DRV_OP_MODE, data);
 
@@ -123,10 +139,13 @@ qlcnic_83xx_config_vnic_buff_descriptors(struct qlcnic_adapter *adapter)
 static int qlcnic_83xx_init_mgmt_vnic(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = -EIO;
 
 	qlcnic_83xx_get_minidump_template(adapter);
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	struct device *dev = &adapter->pdev->dev;
 	struct qlcnic_npar_info *npar;
@@ -134,13 +153,19 @@ static int qlcnic_83xx_init_mgmt_vnic(struct qlcnic_adapter *adapter)
 
 	qlcnic_83xx_get_minidump_template(adapter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(adapter->flags & QLCNIC_ADAPTER_INITIALIZED)) {
 		if (qlcnic_init_pci_info(adapter))
 			return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		npar = adapter->npars;
 
 		for (i = 0; i < ahw->total_nic_func; i++, npar++) {
@@ -153,6 +178,9 @@ static int qlcnic_83xx_init_mgmt_vnic(struct qlcnic_adapter *adapter)
 		dev_info(dev, "Max functions = %d, active functions = %d\n",
 			 ahw->max_pci_func, ahw->total_nic_func);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (qlcnic_83xx_set_vnic_opmode(adapter))
 			return err;
@@ -169,6 +197,7 @@ static int qlcnic_83xx_init_mgmt_vnic(struct qlcnic_adapter *adapter)
 
 	qlcnic_83xx_config_vnic_buff_descriptors(adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter->ahw->msix_supported = !!qlcnic_use_msi_x;
 	adapter->flags |= QLCNIC_ADAPTER_INITIALIZED;
 	qlcnic_83xx_enable_vnic_mode(adapter, 1);
@@ -176,12 +205,17 @@ static int qlcnic_83xx_init_mgmt_vnic(struct qlcnic_adapter *adapter)
 	dev_info(&adapter->pdev->dev, "HAL Version: %d, Management function\n",
 		 adapter->ahw->fw_hal_version);
 =======
+=======
+>>>>>>> v3.18
 	ahw->msix_supported = qlcnic_use_msi_x ? 1 : 0;
 	adapter->flags |= QLCNIC_ADAPTER_INITIALIZED;
 	qlcnic_83xx_enable_vnic_mode(adapter, 1);
 
 	dev_info(dev, "HAL Version: %d, Management function\n",
 		 ahw->fw_hal_version);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -250,6 +284,7 @@ int qlcnic_83xx_config_vnic_opmode(struct qlcnic_adapter *adapter)
 		priv_level = QLC_83XX_GET_FUNC_PRIVILEGE(op_mode,
 							 ahw->pci_func);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (priv_level == QLCNIC_NON_PRIV_FUNC) {
 		ahw->op_mode = QLCNIC_NON_PRIV_FUNC;
@@ -278,6 +313,8 @@ int qlcnic_83xx_config_vnic_opmode(struct qlcnic_adapter *adapter)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	switch (priv_level) {
 	case QLCNIC_NON_PRIV_FUNC:
 		ahw->op_mode = QLCNIC_NON_PRIV_FUNC;
@@ -357,4 +394,7 @@ int qlcnic_83xx_set_port_eswitch_status(struct qlcnic_adapter *adapter,
 
 	return err;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

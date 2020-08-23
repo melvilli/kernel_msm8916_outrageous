@@ -50,7 +50,10 @@
 #include <linux/uaccess.h>
 #include <linux/suspend.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pm_qos.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/unaligned.h>
@@ -222,13 +225,19 @@ static ssize_t ata_scsi_park_store(struct device *device,
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = strict_strtol(buf, 10, &input);
 	if (rc || input < -2)
 =======
+=======
+>>>>>>> v3.18
 	rc = kstrtol(buf, 10, &input);
 	if (rc)
 		return rc;
 	if (input < -2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	if (input > ATA_TMOUT_MAX_PARK) {
@@ -684,6 +693,7 @@ int ata_sas_scsi_ioctl(struct ata_port *ap, struct scsi_device *scsidev,
 		     int cmd, void __user *arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long val;
 	int rc = -EINVAL;
 	unsigned long flags;
@@ -697,6 +707,8 @@ int ata_sas_scsi_ioctl(struct ata_port *ap, struct scsi_device *scsidev,
 
 	case HDIO_SET_32BIT:
 =======
+=======
+>>>>>>> v3.18
 	int val = -EINVAL, rc = -EINVAL;
 	unsigned long flags;
 
@@ -710,6 +722,9 @@ int ata_sas_scsi_ioctl(struct ata_port *ap, struct scsi_device *scsidev,
 		return 0;
 
 	case ATA_IOC_SET_IO32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val = (unsigned long) arg;
 		rc = 0;
@@ -887,6 +902,7 @@ static void ata_to_sense_error(unsigned id, u8 drv_stat, u8 drv_err, u8 *sk,
 		{0x01, 		MEDIUM_ERROR, 0x13, 0x00}, 	// Address mark not found       Address mark not found for data field
 		/* TRK0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{0x02, 		HARDWARE_ERROR, 0x00, 0x00}, 	// Track 0 not found		  Hardware error
 		/* Abort & !ICRC */
 		{0x04, 		ABORTED_COMMAND, 0x00, 0x00}, 	// Aborted command              Aborted command
@@ -901,6 +917,8 @@ static void ata_to_sense_error(unsigned id, u8 drv_stat, u8 drv_err, u8 *sk,
 		/* BBD - block marked bad */
 		{0x80, 		MEDIUM_ERROR, 0x11, 0x04}, 	// Block marked bad		  Medium error, unrecovered read error
 =======
+=======
+>>>>>>> v3.18
 		{0x02, 		HARDWARE_ERROR, 0x00, 0x00}, 	// Track 0 not found		Hardware error
 		/* Abort: 0x04 is not translated here, see below */
 		/* Media change request */
@@ -913,6 +931,9 @@ static void ata_to_sense_error(unsigned id, u8 drv_stat, u8 drv_err, u8 *sk,
 		{0x40, 		MEDIUM_ERROR, 0x11, 0x04}, 	// Uncorrectable ECC error      Unrecovered read error
 		/* BBD - block marked bad */
 		{0x80, 		MEDIUM_ERROR, 0x11, 0x04}, 	// Block marked bad		Medium error, unrecovered read error
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		{0xFF, 0xFF, 0xFF, 0xFF}, // END mark
 	};
@@ -920,7 +941,11 @@ static void ata_to_sense_error(unsigned id, u8 drv_stat, u8 drv_err, u8 *sk,
 		/* Must be first because BUSY means no other bits valid */
 		{0x80, 		ABORTED_COMMAND, 0x47, 0x00},	// Busy, fake parity for now
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{0x20, 		HARDWARE_ERROR,  0x00, 0x00}, 	// Device fault
+=======
+		{0x20, 		HARDWARE_ERROR,  0x44, 0x00}, 	// Device fault, internal target failure
+>>>>>>> v3.18
 =======
 		{0x20, 		HARDWARE_ERROR,  0x44, 0x00}, 	// Device fault, internal target failure
 >>>>>>> v3.18
@@ -949,6 +974,7 @@ static void ata_to_sense_error(unsigned id, u8 drv_stat, u8 drv_err, u8 *sk,
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* No immediate match */
 		if (verbose)
 			printk(KERN_WARNING "ata%u: no sense translation for "
@@ -957,6 +983,8 @@ static void ata_to_sense_error(unsigned id, u8 drv_stat, u8 drv_err, u8 *sk,
 
 	/* Fall back to interpreting status bits */
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	/*
@@ -964,6 +992,9 @@ static void ata_to_sense_error(unsigned id, u8 drv_stat, u8 drv_err, u8 *sk,
 	 * has only the ABRT bit set, we decode drv_stat.  ABRT by itself
 	 * is not descriptive enough.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; stat_table[i][0] != 0xFF; i++) {
 		if (stat_table[i][0] & drv_stat) {
@@ -974,6 +1005,7 @@ static void ata_to_sense_error(unsigned id, u8 drv_stat, u8 drv_err, u8 *sk,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* No error?  Undecoded? */
 	if (verbose)
 		printk(KERN_WARNING "ata%u: no sense translation for "
@@ -982,11 +1014,16 @@ static void ata_to_sense_error(unsigned id, u8 drv_stat, u8 drv_err, u8 *sk,
 	/* We need a sensible error return here, which is tricky, and one
 	   that won't cause people to do things like return a disk wrongly */
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * We need a sensible error return here, which is tricky, and one
 	 * that won't cause people to do things like return a disk wrongly.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*sk = ABORTED_COMMAND;
 	*asc = 0x00;
@@ -2058,13 +2095,19 @@ static unsigned int ata_scsiop_inq_std(struct ata_scsi_args *args, u8 *rbuf)
 	memcpy(&rbuf[8], "ATA     ", 8);
 	ata_id_string(args->id, &rbuf[16], ATA_ID_PROD, 16);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ata_id_string(args->id, &rbuf[32], ATA_ID_FW_REV, 4);
 =======
+=======
+>>>>>>> v3.18
 
 	/* From SAT, use last 2 words from fw rev unless they are spaces */
 	ata_id_string(args->id, &rbuf[32], ATA_ID_FW_REV + 2, 4);
 	if (strncmp(&rbuf[32], "    ", 4) == 0)
 		ata_id_string(args->id, &rbuf[32], ATA_ID_FW_REV, 4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (rbuf[32] == 0 || rbuf[32] == ' ')
@@ -2583,8 +2626,12 @@ static unsigned int ata_scsiop_read_cap(struct ata_scsi_args *args, u8 *rbuf)
 		rbuf[15] = lowest_aligned;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ata_id_has_trim(args->id) &&
 		    !(dev->horkage & ATA_HORKAGE_NOTRIM)) {
+=======
+		if (ata_id_has_trim(args->id)) {
+>>>>>>> v3.18
 =======
 		if (ata_id_has_trim(args->id)) {
 >>>>>>> v3.18
@@ -2870,6 +2917,7 @@ static struct ata_device *ata_find_dev(struct ata_port *ap, int devno)
 {
 	if (!sata_pmp_attached(ap)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (likely(devno >= 0 &&
 			   devno < ata_link_max_devices(&ap->link)))
 			return &ap->link.device[devno];
@@ -2877,10 +2925,15 @@ static struct ata_device *ata_find_dev(struct ata_port *ap, int devno)
 		if (likely(devno >= 0 &&
 			   devno < ap->nr_pmp_links))
 =======
+=======
+>>>>>>> v3.18
 		if (likely(devno < ata_link_max_devices(&ap->link)))
 			return &ap->link.device[devno];
 	} else {
 		if (likely(devno < ap->nr_pmp_links))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return &ap->pmp_link[devno].device[0];
 	}
@@ -3198,6 +3251,7 @@ static unsigned int ata_scsi_write_same_xlat(struct ata_queued_cmd *qc)
 	size = ata_set_lba_range_entries(buf, 512, block, n_block);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tf->protocol = ATA_PROT_DMA;
 	tf->hob_feature = 0;
 	tf->feature = ATA_DSM_TRIM;
@@ -3205,6 +3259,8 @@ static unsigned int ata_scsi_write_same_xlat(struct ata_queued_cmd *qc)
 	tf->nsect = size / 512;
 	tf->command = ATA_CMD_DSM;
 =======
+=======
+>>>>>>> v3.18
 	if (ata_ncq_enabled(dev) && ata_fpdma_dsm_supported(dev)) {
 		/* Newer devices support queued TRIM commands */
 		tf->protocol = ATA_PROT_NCQ;
@@ -3224,6 +3280,9 @@ static unsigned int ata_scsi_write_same_xlat(struct ata_queued_cmd *qc)
 		tf->command = ATA_CMD_DSM;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tf->flags |= ATA_TFLAG_ISADDR | ATA_TFLAG_DEVICE | ATA_TFLAG_LBA48 |
 		     ATA_TFLAG_WRITE;
@@ -3788,9 +3847,12 @@ void ata_scsi_scan_host(struct ata_port *ap, int sync)
 				dev->sdev = sdev;
 				scsi_device_put(sdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (zpodd_dev_enabled(dev))
 					dev_pm_qos_expose_flags(
 							&sdev->sdev_gendev, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			} else {
@@ -3890,9 +3952,12 @@ static void ata_scsi_remove_dev(struct ata_device *dev)
 	spin_lock_irqsave(ap->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (zpodd_dev_enabled(dev))
 		zpodd_exit(dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* clearing dev->sdev is protected by host lock */
@@ -3945,6 +4010,12 @@ static void ata_scsi_handle_link_detach(struct ata_link *link)
 		spin_unlock_irqrestore(ap->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (zpodd_dev_enabled(dev))
+			zpodd_exit(dev);
+
+>>>>>>> v3.18
 =======
 		if (zpodd_dev_enabled(dev))
 			zpodd_exit(dev);
@@ -4052,7 +4123,11 @@ void ata_scsi_hotplug(struct work_struct *work)
  */
 int ata_scsi_user_scan(struct Scsi_Host *shost, unsigned int channel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       unsigned int id, unsigned int lun)
+=======
+		       unsigned int id, u64 lun)
+>>>>>>> v3.18
 =======
 		       unsigned int id, u64 lun)
 >>>>>>> v3.18

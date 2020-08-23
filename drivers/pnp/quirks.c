@@ -16,6 +16,10 @@
 #include <linux/types.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pci.h>
+>>>>>>> v3.18
 =======
 #include <linux/pci.h>
 >>>>>>> v3.18
@@ -339,7 +343,10 @@ static void quirk_amd_mmconfig_area(struct pnp_dev *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PCI
 /* Device IDs of parts that have 32KB MCH space */
 static const unsigned int mch_quirk_devices[] = {
@@ -415,6 +422,9 @@ static void quirk_intel_mch(struct pnp_dev *dev)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *  PnP Quirks
@@ -447,6 +457,12 @@ static struct pnp_fixup pnp_fixups[] = {
 	{"PNP0c01", quirk_amd_mmconfig_area},
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PCI
+	{"PNP0c02", quirk_intel_mch},
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PCI
 	{"PNP0c02", quirk_intel_mch},

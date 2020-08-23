@@ -13,8 +13,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hpfs_hash_dentry(const struct dentry *dentry, const struct inode *inode,
 		struct qstr *qstr)
+=======
+static int hpfs_hash_dentry(const struct dentry *dentry, struct qstr *qstr)
+>>>>>>> v3.18
 =======
 static int hpfs_hash_dentry(const struct dentry *dentry, struct qstr *qstr)
 >>>>>>> v3.18
@@ -40,9 +44,13 @@ static int hpfs_hash_dentry(const struct dentry *dentry, struct qstr *qstr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hpfs_compare_dentry(const struct dentry *parent,
 		const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
+=======
+static int hpfs_compare_dentry(const struct dentry *parent, const struct dentry *dentry,
+>>>>>>> v3.18
 =======
 static int hpfs_compare_dentry(const struct dentry *parent, const struct dentry *dentry,
 >>>>>>> v3.18

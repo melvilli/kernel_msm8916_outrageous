@@ -9,7 +9,10 @@
 #include <linux/cper.h>
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/acpi_io.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -130,7 +133,11 @@ struct dentry *apei_get_debugfs_dir(void);
 	     section = (void *)(section+1) + section->error_data_length)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 apei_estatus_len(struct acpi_hest_generic_status *estatus)
+=======
+static inline u32 cper_estatus_len(struct acpi_hest_generic_status *estatus)
+>>>>>>> v3.18
 =======
 static inline u32 cper_estatus_len(struct acpi_hest_generic_status *estatus)
 >>>>>>> v3.18
@@ -143,15 +150,21 @@ static inline u32 cper_estatus_len(struct acpi_hest_generic_status *estatus)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void apei_estatus_print(const char *pfx,
 			const struct acpi_hest_generic_status *estatus);
 int apei_estatus_check_header(const struct acpi_hest_generic_status *estatus);
 int apei_estatus_check(const struct acpi_hest_generic_status *estatus);
 =======
+=======
+>>>>>>> v3.18
 void cper_estatus_print(const char *pfx,
 			const struct acpi_hest_generic_status *estatus);
 int cper_estatus_check_header(const struct acpi_hest_generic_status *estatus);
 int cper_estatus_check(const struct acpi_hest_generic_status *estatus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int apei_osc_setup(void);

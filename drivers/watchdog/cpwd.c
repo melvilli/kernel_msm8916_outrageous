@@ -22,7 +22,10 @@
 #include <linux/errno.h>
 #include <linux/major.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/miscdevice.h>
@@ -625,7 +628,11 @@ static int cpwd_probe(struct platform_device *op)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, p);
+=======
+	platform_set_drvdata(op, p);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, p);
 >>>>>>> v3.18
@@ -650,7 +657,11 @@ out_free:
 static int cpwd_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpwd *p = dev_get_drvdata(&op->dev);
+=======
+	struct cpwd *p = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct cpwd *p = platform_get_drvdata(op);
 >>>>>>> v3.18

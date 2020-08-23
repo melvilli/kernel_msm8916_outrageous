@@ -3,7 +3,10 @@
  *
  * Copyright (C) 2007 ARM Limited
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2009, 2011-2012, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -21,22 +24,29 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/err.h>
 #include <linux/init.h>
 #include <linux/spinlock.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/cpu.h>
 #include <linux/err.h>
 #include <linux/init.h>
 #include <linux/smp.h>
 #include <linux/spinlock.h>
 #include <linux/log2.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/of.h>
 #include <linux/of_address.h>
 
 #include <asm/cacheflush.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <asm/hardware/cache-l2x0.h>
 #include "cache-aurora-l2.h"
@@ -78,6 +88,8 @@ static inline bool is_pl310_rev(int rev)
 
 static inline void cache_wait_way(void __iomem *reg, unsigned long mask)
 =======
+=======
+>>>>>>> v3.18
 #include <asm/cp15.h>
 #include <asm/cputype.h>
 #include <asm/hardware/cache-l2x0.h>
@@ -109,6 +121,9 @@ struct l2x0_regs l2x0_saved_regs;
  * Common code for all cache controllers.
  */
 static inline void l2c_wait_mask(void __iomem *reg, unsigned long mask)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* wait for cache operation by line or way to complete */
@@ -116,6 +131,7 @@ static inline void l2c_wait_mask(void __iomem *reg, unsigned long mask)
 		cpu_relax();
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_CACHE_PL310
 static inline void cache_wait(void __iomem *reg, unsigned long mask)
@@ -191,6 +207,8 @@ static inline void l2x0_flush_line(unsigned long addr)
 
 void l2x0_cache_sync(void)
 =======
+=======
+>>>>>>> v3.18
 /*
  * By default, we write directly to secure registers.  Platforms must
  * override this if they are running non-secure.
@@ -293,6 +311,9 @@ static inline void debug_writel(unsigned long val)
 #endif
 
 static void l2x0_cache_sync(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long flags;
@@ -302,6 +323,7 @@ static void l2x0_cache_sync(void)
 	raw_spin_unlock_irqrestore(&l2x0_lock, flags);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PL310_ERRATA_727915
 static void l2x0_for_each_set_way(void __iomem *reg)
@@ -326,10 +348,15 @@ static void __l2x0_flush_all(void)
 	writel_relaxed(l2x0_way_mask, l2x0_base + L2X0_CLEAN_INV_WAY);
 	cache_wait_way(l2x0_base + L2X0_CLEAN_INV_WAY, l2x0_way_mask);
 =======
+=======
+>>>>>>> v3.18
 static void __l2x0_flush_all(void)
 {
 	debug_writel(0x03);
 	__l2c_op_way(l2x0_base + L2X0_CLEAN_INV_WAY);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cache_sync();
 	debug_writel(0x00);
@@ -340,6 +367,7 @@ static void l2x0_flush_all(void)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PL310_ERRATA_727915
 	if (is_pl310_rev(REV_PL310_R2P0)) {
 		l2x0_for_each_set_way(l2x0_base + L2X0_CLEAN_INV_LINE_IDX);
@@ -349,12 +377,15 @@ static void l2x0_flush_all(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* clean all ways */
 	raw_spin_lock_irqsave(&l2x0_lock, flags);
 	__l2x0_flush_all();
 	raw_spin_unlock_irqrestore(&l2x0_lock, flags);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void l2x0_clean_all(void)
 {
@@ -403,6 +434,8 @@ static void l2x0_inv_range(unsigned long start, unsigned long end)
 		l2x0_flush_line(start);
 		debug_writel(0x00);
 =======
+=======
+>>>>>>> v3.18
 static void l2x0_disable(void)
 {
 	unsigned long flags;
@@ -454,6 +487,9 @@ static void l2c210_inv_range(unsigned long start, unsigned long end)
 	if (start & (CACHE_LINE_SIZE - 1)) {
 		start &= ~(CACHE_LINE_SIZE - 1);
 		writel_relaxed(start, base + L2X0_CLEAN_INV_LINE_PA);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		start += CACHE_LINE_SIZE;
 	}
@@ -461,12 +497,15 @@ static void l2c210_inv_range(unsigned long start, unsigned long end)
 	if (end & (CACHE_LINE_SIZE - 1)) {
 		end &= ~(CACHE_LINE_SIZE - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debug_writel(0x03);
 		l2x0_flush_line(end);
 		debug_writel(0x00);
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		writel_relaxed(end, base + L2X0_CLEAN_INV_LINE_PA);
 	}
 
@@ -563,13 +602,21 @@ static unsigned long l2c220_op_pa_range(void __iomem *reg, unsigned long start,
 {
 	raw_spinlock_t *lock = &l2x0_lock;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (start < end) {
 		unsigned long blk_end = start + min(end - start, 4096UL);
 
 		while (start < blk_end) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			l2x0_inv_line(start);
+=======
+			l2c_wait_mask(reg, 1);
+			writel_relaxed(start, reg);
+>>>>>>> v3.18
 =======
 			l2c_wait_mask(reg, 1);
 			writel_relaxed(start, reg);
@@ -578,6 +625,7 @@ static unsigned long l2c220_op_pa_range(void __iomem *reg, unsigned long start,
 		}
 
 		if (blk_end < end) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			raw_spin_unlock_irqrestore(&l2x0_lock, flags);
 			raw_spin_lock_irqsave(&l2x0_lock, flags);
@@ -590,6 +638,8 @@ static unsigned long l2c220_op_pa_range(void __iomem *reg, unsigned long start,
 
 static void l2x0_clean_range(unsigned long start, unsigned long end)
 =======
+=======
+>>>>>>> v3.18
 			raw_spin_unlock_irqrestore(lock, flags);
 			raw_spin_lock_irqsave(lock, flags);
 		}
@@ -599,11 +649,15 @@ static void l2x0_clean_range(unsigned long start, unsigned long end)
 }
 
 static void l2c220_inv_range(unsigned long start, unsigned long end)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	void __iomem *base = l2x0_base;
 	unsigned long flags;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((end - start) >= l2x0_size) {
 		l2x0_clean_all();
@@ -632,6 +686,8 @@ static void l2c220_inv_range(unsigned long start, unsigned long end)
 
 static void l2x0_flush_range(unsigned long start, unsigned long end)
 =======
+=======
+>>>>>>> v3.18
 	raw_spin_lock_irqsave(&l2x0_lock, flags);
 	if ((start | end) & (CACHE_LINE_SIZE - 1)) {
 		if (start & (CACHE_LINE_SIZE - 1)) {
@@ -655,14 +711,23 @@ static void l2x0_flush_range(unsigned long start, unsigned long end)
 }
 
 static void l2c220_clean_range(unsigned long start, unsigned long end)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	void __iomem *base = l2x0_base;
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((end - start) >= l2x0_size) {
 		l2x0_flush_all();
+=======
+	start &= ~(CACHE_LINE_SIZE - 1);
+	if ((end - start) >= l2x0_size) {
+		l2c220_op_way(base, L2X0_CLEAN_WAY);
+>>>>>>> v3.18
 =======
 	start &= ~(CACHE_LINE_SIZE - 1);
 	if ((end - start) >= l2x0_size) {
@@ -672,6 +737,7 @@ static void l2c220_clean_range(unsigned long start, unsigned long end)
 	}
 
 	raw_spin_lock_irqsave(&l2x0_lock, flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	start &= ~(CACHE_LINE_SIZE - 1);
 	while (start < end) {
@@ -841,6 +907,8 @@ void __init l2x0_init(void __iomem *base, u32 aux_val, u32 aux_mask)
 #ifdef CONFIG_OF
 static int l2_wt_override;
 =======
+=======
+>>>>>>> v3.18
 	flags = l2c220_op_pa_range(base + L2X0_CLEAN_LINE_PA,
 				   start, end, flags);
 	l2c_wait_mask(base + L2X0_CLEAN_INV_LINE_PA, 1);
@@ -1665,6 +1733,9 @@ static const struct l2c_init_data of_l2c310_coherent_data __initconst = {
 		.resume      = l2c310_resume,
 	},
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1765,6 +1836,7 @@ static void aurora_flush_range(unsigned long start, unsigned long end)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __init l2x0_of_setup(const struct device_node *np,
 				 u32 *aux_val, u32 *aux_mask)
@@ -2019,6 +2091,8 @@ static const struct of_device_id l2x0_ids[] __initconst = {
 	{ .compatible = "marvell,aurora-outer-cache",
 	  .data = (void *)&aurora_with_outer_data},
 =======
+=======
+>>>>>>> v3.18
 static void aurora_save(void __iomem *base)
 {
 	l2x0_saved_regs.ctrl = readl_relaxed(base + L2X0_CTRL);
@@ -2315,6 +2389,9 @@ static const struct of_device_id l2x0_ids[] __initconst = {
 	L2C_ID("marvell,tauros3-cache", of_tauros3_data),
 	/* Deprecated IDs */
 	L2C_ID("bcm,bcm11351-a2-pl310-cache", of_bcm_l2x0_data),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };
@@ -2322,14 +2399,20 @@ static const struct of_device_id l2x0_ids[] __initconst = {
 int __init l2x0_of_init(u32 aux_val, u32 aux_mask)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device_node *np;
 	const struct l2x0_of_data *data;
 	struct resource res;
 =======
+=======
+>>>>>>> v3.18
 	const struct l2c_init_data *data;
 	struct device_node *np;
 	struct resource res;
 	u32 cache_id, old_aux;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	np = of_find_matching_node(NULL, l2x0_ids);
@@ -2347,6 +2430,7 @@ int __init l2x0_of_init(u32 aux_val, u32 aux_mask)
 
 	data = of_match_node(l2x0_ids, np)->data;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* L2 configuration can only be changed if the cache is disabled */
 	if (!(readl_relaxed(l2x0_base + L2X0_CTRL) & L2X0_CTRL_EN)) {
@@ -2382,6 +2466,8 @@ void l2cc_resume(void)
 	dmb();
 }
 =======
+=======
+>>>>>>> v3.18
 	if (of_device_is_compatible(np, "arm,pl310-cache") &&
 	    of_property_read_bool(np, "arm,io-coherent"))
 		data = &of_l2c310_coherent_data;
@@ -2413,4 +2499,7 @@ void l2cc_resume(void)
 	return 0;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

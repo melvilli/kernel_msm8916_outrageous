@@ -65,7 +65,11 @@ static int __init testfunc(void)
 	/* put values into the fifo */
 	for (i = 0; i != 10; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfifo_put(&test, &i);
+=======
+		kfifo_put(&test, i);
+>>>>>>> v3.18
 =======
 		kfifo_put(&test, i);
 >>>>>>> v3.18
@@ -90,7 +94,11 @@ static int __init testfunc(void)
 
 	/* put values into the fifo until is full */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 20; kfifo_put(&test, &i); i++)
+=======
+	for (i = 20; kfifo_put(&test, i); i++)
+>>>>>>> v3.18
 =======
 	for (i = 20; kfifo_put(&test, i); i++)
 >>>>>>> v3.18

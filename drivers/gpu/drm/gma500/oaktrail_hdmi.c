@@ -156,12 +156,15 @@ static void oaktrail_hdmi_audio_disable(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void wait_for_vblank(struct drm_device *dev)
 {
 	/* Wait for 20ms, i.e. one cycle at 50hz. */
 	mdelay(20);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static unsigned int htotal_calculate(struct drm_display_mode *mode)
@@ -376,15 +379,21 @@ int oaktrail_crtc_hdmi_mode_set(struct drm_crtc *crtc,
 	REG_WRITE(PCH_PIPEBCONF, pipeconf);
 	REG_READ(PCH_PIPEBCONF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_for_vblank(dev);
 
 	REG_WRITE(dspcntr_reg, dspcntr);
 	wait_for_vblank(dev);
 =======
+=======
+>>>>>>> v3.18
 	gma_wait_for_vblank(dev);
 
 	REG_WRITE(dspcntr_reg, dspcntr);
 	gma_wait_for_vblank(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	gma_power_end(dev);
@@ -470,7 +479,11 @@ void oaktrail_crtc_hdmi_dpms(struct drm_crtc *crtc, int mode)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wait_for_vblank(dev);
+=======
+		gma_wait_for_vblank(dev);
+>>>>>>> v3.18
 =======
 		gma_wait_for_vblank(dev);
 >>>>>>> v3.18
@@ -485,7 +498,11 @@ void oaktrail_crtc_hdmi_dpms(struct drm_crtc *crtc, int mode)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psb_intel_crtc_load_lut(crtc);
+=======
+		gma_crtc_load_lut(crtc);
+>>>>>>> v3.18
 =======
 		gma_crtc_load_lut(crtc);
 >>>>>>> v3.18
@@ -548,6 +565,7 @@ static int oaktrail_hdmi_mode_valid(struct drm_connector *connector,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool oaktrail_hdmi_mode_fixup(struct drm_encoder *encoder,
 				 const struct drm_display_mode *mode,
 				 struct drm_display_mode *adjusted_mode)
@@ -555,6 +573,8 @@ static bool oaktrail_hdmi_mode_fixup(struct drm_encoder *encoder,
 	return true;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static enum drm_connector_status
@@ -636,15 +656,21 @@ static void oaktrail_hdmi_destroy(struct drm_connector *connector)
 static const struct drm_encoder_helper_funcs oaktrail_hdmi_helper_funcs = {
 	.dpms = oaktrail_hdmi_dpms,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mode_fixup = oaktrail_hdmi_mode_fixup,
 	.prepare = psb_intel_encoder_prepare,
 	.mode_set = oaktrail_hdmi_mode_set,
 	.commit = psb_intel_encoder_commit,
 =======
+=======
+>>>>>>> v3.18
 	.mode_fixup = gma_encoder_mode_fixup,
 	.prepare = gma_encoder_prepare,
 	.mode_set = oaktrail_hdmi_mode_set,
 	.commit = gma_encoder_commit,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -653,7 +679,11 @@ static const struct drm_connector_helper_funcs
 	.get_modes = oaktrail_hdmi_get_modes,
 	.mode_valid = oaktrail_hdmi_mode_valid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.best_encoder = psb_intel_best_encoder,
+=======
+	.best_encoder = gma_best_encoder,
+>>>>>>> v3.18
 =======
 	.best_encoder = gma_best_encoder,
 >>>>>>> v3.18
@@ -679,6 +709,7 @@ void oaktrail_hdmi_init(struct drm_device *dev,
 					struct psb_intel_mode_device *mode_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder;
 	struct psb_intel_connector *psb_intel_connector;
 	struct drm_connector *connector;
@@ -695,6 +726,8 @@ void oaktrail_hdmi_init(struct drm_device *dev,
 	connector = &psb_intel_connector->base;
 	encoder = &psb_intel_encoder->base;
 =======
+=======
+>>>>>>> v3.18
 	struct gma_encoder *gma_encoder;
 	struct gma_connector *gma_connector;
 	struct drm_connector *connector;
@@ -710,6 +743,9 @@ void oaktrail_hdmi_init(struct drm_device *dev,
 
 	connector = &gma_connector->base;
 	encoder = &gma_encoder->base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	drm_connector_init(dev, connector,
 			   &oaktrail_hdmi_connector_funcs,
@@ -720,10 +756,16 @@ void oaktrail_hdmi_init(struct drm_device *dev,
 			 DRM_MODE_ENCODER_TMDS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_connector_attach_encoder(psb_intel_connector,
 					   psb_intel_encoder);
 
 	psb_intel_encoder->type = INTEL_OUTPUT_HDMI;
+=======
+	gma_connector_attach_encoder(gma_connector, gma_encoder);
+
+	gma_encoder->type = INTEL_OUTPUT_HDMI;
+>>>>>>> v3.18
 =======
 	gma_connector_attach_encoder(gma_connector, gma_encoder);
 
@@ -736,7 +778,11 @@ void oaktrail_hdmi_init(struct drm_device *dev,
 	connector->interlace_allowed = false;
 	connector->doublescan_allowed = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
+=======
+	drm_connector_register(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_register(connector);
 >>>>>>> v3.18
@@ -746,15 +792,21 @@ void oaktrail_hdmi_init(struct drm_device *dev,
 
 failed_connector:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(psb_intel_encoder);
 }
 
 static DEFINE_PCI_DEVICE_TABLE(hdmi_ids) = {
 =======
+=======
+>>>>>>> v3.18
 	kfree(gma_encoder);
 }
 
 static const struct pci_device_id hdmi_ids[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, 0x080d) },
 	{ 0 }

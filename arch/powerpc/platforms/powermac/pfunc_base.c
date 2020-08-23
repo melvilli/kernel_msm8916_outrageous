@@ -5,6 +5,10 @@
 #include <linux/interrupt.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18

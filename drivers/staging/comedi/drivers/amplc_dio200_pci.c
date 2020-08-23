@@ -17,11 +17,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -229,9 +232,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
 #include <linux/interrupt.h>
 #include <linux/slab.h>
+=======
+#include <linux/module.h>
+#include <linux/pci.h>
+#include <linux/interrupt.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 #include <linux/pci.h>
@@ -243,6 +252,7 @@
 #include "amplc_dio200.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* PCI IDs */
 #define PCI_DEVICE_ID_AMPLICON_PCI272 0x000a
 #define PCI_DEVICE_ID_AMPLICON_PCI215 0x000b
@@ -250,6 +260,8 @@
 #define PCI_DEVICE_ID_AMPLICON_PCIE215 0x0012
 #define PCI_DEVICE_ID_AMPLICON_PCIE296 0x0014
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -266,6 +278,7 @@ enum dio200_pci_model {
 
 static const struct dio200_board dio200_pci_boards[] = {
 	[pci215_model] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.name = "pci215",
 		.bustype = pci_bustype,
@@ -342,6 +355,8 @@ static const struct dio200_board dio200_pci_boards[] = {
 			.has_enhancements = true,
 		},
 =======
+=======
+>>>>>>> v3.18
 		.name		= "pci215",
 		.mainbar	= 2,
 		.n_subdevs	= 5,
@@ -406,6 +421,9 @@ static const struct dio200_board dio200_pci_boards[] = {
 		.has_int_sce	= true,
 		.has_clk_gat_sce = true,
 		.is_pcie	= true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -450,8 +468,12 @@ static int dio200_pci_auto_attach(struct comedi_device *dev,
 {
 	struct pci_dev *pci_dev = comedi_to_pci_dev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dio200_board *thisboard = NULL;
 	struct dio200_private *devpriv;
+=======
+	const struct dio200_board *board = NULL;
+>>>>>>> v3.18
 =======
 	const struct dio200_board *board = NULL;
 >>>>>>> v3.18
@@ -460,22 +482,29 @@ static int dio200_pci_auto_attach(struct comedi_device *dev,
 
 	if (context_model < ARRAY_SIZE(dio200_pci_boards))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		thisboard = &dio200_pci_boards[context_model];
 	if (!thisboard)
 		return -EINVAL;
 	dev->board_ptr = thisboard;
 	dev->board_name = thisboard->name;
 =======
+=======
+>>>>>>> v3.18
 		board = &dio200_pci_boards[context_model];
 	if (!board)
 		return -EINVAL;
 	dev->board_ptr = board;
 	dev->board_name = board->name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_info(dev->class_dev, "%s: attach pci %s (%s)\n",
 		 dev->driver->driver_name, pci_name(pci_dev), dev->board_name);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
@@ -484,10 +513,13 @@ static int dio200_pci_auto_attach(struct comedi_device *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	ret = comedi_pci_enable(dev);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bar = thisboard->mainbar;
 	if (pci_resource_len(pci_dev, bar) < thisboard->mainsize) {
@@ -498,15 +530,21 @@ static int dio200_pci_auto_attach(struct comedi_device *dev,
 		devpriv->io.u.membase = pci_ioremap_bar(pci_dev, bar);
 		if (!devpriv->io.u.membase) {
 =======
+=======
+>>>>>>> v3.18
 	bar = board->mainbar;
 	if (pci_resource_flags(pci_dev, bar) & IORESOURCE_MEM) {
 		dev->mmio = pci_ioremap_bar(pci_dev, bar);
 		if (!dev->mmio) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev_err(dev->class_dev,
 				"error! cannot remap registers\n");
 			return -ENOMEM;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		devpriv->io.regtype = mmio_regtype;
 	} else {
@@ -565,6 +603,8 @@ static DEFINE_PCI_DEVICE_TABLE(dio200_pci_table) = {
 		pcie296_model
 	},
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		dev->iobase = pci_resource_start(pci_dev, bar);
 	}
@@ -591,6 +631,9 @@ static const struct pci_device_id dio200_pci_table[] = {
 	{ PCI_VDEVICE(AMPLICON, 0x0011), pcie236_model },
 	{ PCI_VDEVICE(AMPLICON, 0x0012), pcie215_model },
 	{ PCI_VDEVICE(AMPLICON, 0x0014), pcie296_model },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{0}
 };
@@ -605,15 +648,21 @@ static int dio200_pci_probe(struct pci_dev *dev, const struct pci_device_id *id)
 
 static struct pci_driver dio200_pci_pci_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name = "amplc_dio200_pci",
 	.id_table = dio200_pci_table,
 	.probe = dio200_pci_probe,
 	.remove	= comedi_pci_auto_unconfig,
 =======
+=======
+>>>>>>> v3.18
 	.name		= "amplc_dio200_pci",
 	.id_table	= dio200_pci_table,
 	.probe		= dio200_pci_probe,
 	.remove		= comedi_pci_auto_unconfig,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 module_comedi_pci_driver(dio200_pci_comedi_driver, dio200_pci_pci_driver);

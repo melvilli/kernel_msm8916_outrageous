@@ -48,9 +48,12 @@
 #endif /* __KERNEL__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int boot_reason;
 extern unsigned int cold_boot;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct debug_info {
@@ -136,6 +139,10 @@ unsigned long get_wchan(struct task_struct *p);
 
 #define cpu_relax()			barrier()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency()                cpu_relax()
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency()                cpu_relax()
 >>>>>>> v3.18
@@ -147,6 +154,7 @@ extern struct task_struct *cpu_switch_to(struct task_struct *prev,
 #define task_pt_regs(p) \
 	((struct pt_regs *)(THREAD_START_SP + task_stack_page(p)) - 1)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define KSTK_EIP(tsk)	task_pt_regs(tsk)->pc
 #ifndef CONFIG_COMPAT
@@ -162,6 +170,10 @@ extern struct task_struct *cpu_switch_to(struct task_struct *prev,
 	ptr;						\
 })
 #endif
+=======
+#define KSTK_EIP(tsk)	((unsigned long)task_pt_regs(tsk)->pc)
+#define KSTK_ESP(tsk)	user_stack_pointer(task_pt_regs(tsk))
+>>>>>>> v3.18
 =======
 #define KSTK_EIP(tsk)	((unsigned long)task_pt_regs(tsk)->pc)
 #define KSTK_ESP(tsk)	user_stack_pointer(task_pt_regs(tsk))

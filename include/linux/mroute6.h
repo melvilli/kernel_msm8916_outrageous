@@ -116,7 +116,11 @@ struct mfc6_cache {
 struct rtmsg;
 extern int ip6mr_get_route(struct net *net, struct sk_buff *skb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   struct rtmsg *rtm, int nowait, u32 portid);
+=======
+			   struct rtmsg *rtm, int nowait);
+>>>>>>> v3.18
 =======
 			   struct rtmsg *rtm, int nowait);
 >>>>>>> v3.18

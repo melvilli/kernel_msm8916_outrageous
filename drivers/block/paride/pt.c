@@ -118,7 +118,11 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int verbose = 0;
+=======
+static bool verbose = 0;
+>>>>>>> v3.18
 =======
 static bool verbose = 0;
 >>>>>>> v3.18
@@ -157,7 +161,11 @@ static int (*drives[4])[6] = {&drive0, &drive1, &drive2, &drive3};
 #include <asm/uaccess.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param(verbose, int, 0);
+=======
+module_param(verbose, bool, 0);
+>>>>>>> v3.18
 =======
 module_param(verbose, bool, 0);
 >>>>>>> v3.18

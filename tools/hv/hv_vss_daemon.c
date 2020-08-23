@@ -23,7 +23,10 @@
 #include <sys/poll.h>
 #include <sys/ioctl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/types.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <fcntl.h>
@@ -42,8 +45,11 @@
 #include <syslog.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char vss_recv_buffer[4096];
 static char vss_send_buffer[4096];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct sockaddr_nl addr;
@@ -97,6 +103,11 @@ static int vss_operate(int operation)
 		if (strcmp(ent->mnt_type, "iso9660") == 0)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (strcmp(ent->mnt_type, "vfat") == 0)
+			continue;
+>>>>>>> v3.18
 =======
 		if (strcmp(ent->mnt_type, "vfat") == 0)
 			continue;
@@ -119,6 +130,7 @@ static int vss_operate(int operation)
 static int netlink_send(int fd, struct cn_msg *msg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nlmsghdr *nlh;
 	unsigned int size;
 	struct msghdr message;
@@ -137,6 +149,8 @@ static int netlink_send(int fd, struct cn_msg *msg)
 	iov[0].iov_base = nlh;
 	iov[0].iov_len = sizeof(*nlh);
 =======
+=======
+>>>>>>> v3.18
 	struct nlmsghdr nlh = { .nlmsg_type = NLMSG_DONE };
 	unsigned int size;
 	struct msghdr message;
@@ -149,6 +163,9 @@ static int netlink_send(int fd, struct cn_msg *msg)
 
 	iov[0].iov_base = &nlh;
 	iov[0].iov_len = sizeof(nlh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iov[1].iov_base = msg;
@@ -174,6 +191,11 @@ int main(void)
 	int	op;
 	struct hv_vss_msg *vss_msg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char *vss_recv_buffer;
+	size_t vss_recv_buffer_len;
+>>>>>>> v3.18
 =======
 	char *vss_recv_buffer;
 	size_t vss_recv_buffer_len;
@@ -186,10 +208,13 @@ int main(void)
 	syslog(LOG_INFO, "VSS starting; pid is:%d", getpid());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fd = socket(AF_NETLINK, SOCK_DGRAM, NETLINK_CONNECTOR);
 	if (fd < 0) {
 		syslog(LOG_ERR, "netlink socket creation failed; error:%d", fd);
 =======
+=======
+>>>>>>> v3.18
 	vss_recv_buffer_len = NLMSG_LENGTH(0) + sizeof(struct cn_msg) + sizeof(struct hv_vss_msg);
 	vss_recv_buffer = calloc(1, vss_recv_buffer_len);
 	if (!vss_recv_buffer) {
@@ -201,6 +226,9 @@ int main(void)
 	if (fd < 0) {
 		syslog(LOG_ERR, "netlink socket creation failed; error:%d %s",
 				errno, strerror(errno));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		exit(EXIT_FAILURE);
 	}
@@ -213,7 +241,11 @@ int main(void)
 	error = bind(fd, (struct sockaddr *)&addr, sizeof(addr));
 	if (error < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		syslog(LOG_ERR, "bind failed; error:%d", error);
+=======
+		syslog(LOG_ERR, "bind failed; error:%d %s", errno, strerror(errno));
+>>>>>>> v3.18
 =======
 		syslog(LOG_ERR, "bind failed; error:%d %s", errno, strerror(errno));
 >>>>>>> v3.18
@@ -222,12 +254,15 @@ int main(void)
 	}
 	nl_group = CN_VSS_IDX;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setsockopt(fd, SOL_NETLINK, NETLINK_ADD_MEMBERSHIP, &nl_group, sizeof(nl_group));
 	/*
 	 * Register ourselves with the kernel.
 	 */
 	message = (struct cn_msg *)vss_send_buffer;
 =======
+=======
+>>>>>>> v3.18
 	if (setsockopt(fd, SOL_NETLINK, NETLINK_ADD_MEMBERSHIP, &nl_group, sizeof(nl_group)) < 0) {
 		syslog(LOG_ERR, "setsockopt failed; error:%d %s", errno, strerror(errno));
 		close(fd);
@@ -237,6 +272,9 @@ int main(void)
 	 * Register ourselves with the kernel.
 	 */
 	message = (struct cn_msg *)vss_recv_buffer;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	message->id.idx = CN_VSS_IDX;
 	message->id.val = CN_VSS_VAL;
@@ -249,7 +287,11 @@ int main(void)
 	len = netlink_send(fd, message);
 	if (len < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		syslog(LOG_ERR, "netlink_send failed; error:%d", len);
+=======
+		syslog(LOG_ERR, "netlink_send failed; error:%d %s", errno, strerror(errno));
+>>>>>>> v3.18
 =======
 		syslog(LOG_ERR, "netlink_send failed; error:%d %s", errno, strerror(errno));
 >>>>>>> v3.18
@@ -265,10 +307,13 @@ int main(void)
 		pfd.events = POLLIN;
 		pfd.revents = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		poll(&pfd, 1, -1);
 
 		len = recvfrom(fd, vss_recv_buffer, sizeof(vss_recv_buffer), 0,
 =======
+=======
+>>>>>>> v3.18
 
 		if (poll(&pfd, 1, -1) < 0) {
 			syslog(LOG_ERR, "poll failed; error:%d %s", errno, strerror(errno));
@@ -281,6 +326,9 @@ int main(void)
 		}
 
 		len = recvfrom(fd, vss_recv_buffer, vss_recv_buffer_len, 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				addr_p, &addr_l);
 
@@ -322,7 +370,12 @@ int main(void)
 		len = netlink_send(fd, incoming_cn_msg);
 		if (len < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			syslog(LOG_ERR, "net_link send failed; error:%d", len);
+=======
+			syslog(LOG_ERR, "net_link send failed; error:%d %s",
+					errno, strerror(errno));
+>>>>>>> v3.18
 =======
 			syslog(LOG_ERR, "net_link send failed; error:%d %s",
 					errno, strerror(errno));

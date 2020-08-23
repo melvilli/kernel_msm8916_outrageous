@@ -27,8 +27,12 @@
  * are really supported.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PSC_I2S_RATES (SNDRV_PCM_RATE_5512 | SNDRV_PCM_RATE_8000_192000 | \
 			SNDRV_PCM_RATE_CONTINUOUS)
+=======
+#define PSC_I2S_RATES SNDRV_PCM_RATE_CONTINUOUS
+>>>>>>> v3.18
 =======
 #define PSC_I2S_RATES SNDRV_PCM_RATE_CONTINUOUS
 >>>>>>> v3.18

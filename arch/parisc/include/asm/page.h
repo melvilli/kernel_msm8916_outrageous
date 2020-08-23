@@ -33,6 +33,7 @@ void copy_user_page(void *vto, void *vfrom, unsigned long vaddr,
 			struct page *pg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* #define CONFIG_PARISC_TMPALIAS */
 
 #ifdef CONFIG_PARISC_TMPALIAS
@@ -44,6 +45,8 @@ void copy_user_highpage(struct page *to, struct page *from,
 #define __HAVE_ARCH_COPY_USER_HIGHPAGE
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

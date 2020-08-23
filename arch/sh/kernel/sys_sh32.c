@@ -22,11 +22,16 @@
  * a pipe. It's not the way Unix traditionally does this, though.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage int sys_sh_pipe(unsigned long r4, unsigned long r5,
 	unsigned long r6, unsigned long r7,
 	struct pt_regs __regs)
 {
 	struct pt_regs *regs = RELOC_HIDE(&__regs, 0);
+=======
+asmlinkage int sys_sh_pipe(void)
+{
+>>>>>>> v3.18
 =======
 asmlinkage int sys_sh_pipe(void)
 {
@@ -37,7 +42,11 @@ asmlinkage int sys_sh_pipe(void)
 	error = do_pipe_flags(fd, 0);
 	if (!error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		regs->regs[1] = fd[1];
+=======
+		current_pt_regs()->regs[1] = fd[1];
+>>>>>>> v3.18
 =======
 		current_pt_regs()->regs[1] = fd[1];
 >>>>>>> v3.18

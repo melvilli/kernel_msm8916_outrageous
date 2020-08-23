@@ -116,7 +116,11 @@ static struct request *get_alua_req(struct scsi_device *sdev,
 	rq = blk_get_request(q, rw, GFP_NOIO);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rq) {
+=======
+	if (IS_ERR(rq)) {
+>>>>>>> v3.18
 =======
 	if (IS_ERR(rq)) {
 >>>>>>> v3.18
@@ -479,7 +483,10 @@ static int alua_check_sense(struct scsi_device *sdev,
 			 */
 			return SUCCESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (sdev->allow_restart &&
 		    sense_hdr->asc == 0x04 && sense_hdr->ascq == 0x02)
 			/*
@@ -487,6 +494,9 @@ static int alua_check_sense(struct scsi_device *sdev,
 			 * the error handler to start the motor
 			 */
 			return FAILED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case UNIT_ATTENTION:
@@ -496,12 +506,18 @@ static int alua_check_sense(struct scsi_device *sdev,
 			 */
 			return ADD_TO_MLQUEUE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (sense_hdr->asc == 0x29 && sense_hdr->ascq == 0x04)
 			/*
 			 * Device internal reset
 			 */
 			return ADD_TO_MLQUEUE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (sense_hdr->asc == 0x2a && sense_hdr->ascq == 0x01)
 			/*
@@ -540,6 +556,10 @@ static int alua_check_sense(struct scsi_device *sdev,
  * alua_rtpg - Evaluate REPORT TARGET GROUP STATES
  * @sdev: the device to be evaluated.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @wait_for_transition: if nonzero, wait ALUA_FAILOVER_TIMEOUT seconds for device to exit transitioning state
+>>>>>>> v3.18
 =======
  * @wait_for_transition: if nonzero, wait ALUA_FAILOVER_TIMEOUT seconds for device to exit transitioning state
 >>>>>>> v3.18
@@ -549,7 +569,11 @@ static int alua_check_sense(struct scsi_device *sdev,
  * found to be unusable.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int alua_rtpg(struct scsi_device *sdev, struct alua_dh_data *h)
+=======
+static int alua_rtpg(struct scsi_device *sdev, struct alua_dh_data *h, int wait_for_transition)
+>>>>>>> v3.18
 =======
 static int alua_rtpg(struct scsi_device *sdev, struct alua_dh_data *h, int wait_for_transition)
 >>>>>>> v3.18
@@ -625,7 +649,11 @@ static int alua_rtpg(struct scsi_device *sdev, struct alua_dh_data *h, int wait_
 		h->transition_tmo = ALUA_FAILOVER_TIMEOUT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (orig_transition_tmo != h->transition_tmo) {
+=======
+	if (wait_for_transition && (orig_transition_tmo != h->transition_tmo)) {
+>>>>>>> v3.18
 =======
 	if (wait_for_transition && (orig_transition_tmo != h->transition_tmo)) {
 >>>>>>> v3.18
@@ -667,6 +695,7 @@ static int alua_rtpg(struct scsi_device *sdev, struct alua_dh_data *h, int wait_
 	switch (h->state) {
 	case TPGS_STATE_TRANSITIONING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (time_before(jiffies, expiry)) {
 			/* State transition, retry */
 			interval += 2000;
@@ -676,6 +705,8 @@ static int alua_rtpg(struct scsi_device *sdev, struct alua_dh_data *h, int wait_
 		/* Transitioning time exceeded, set port to standby */
 		err = SCSI_DH_RETRY;
 =======
+=======
+>>>>>>> v3.18
 		if (wait_for_transition) {
 			if (time_before(jiffies, expiry)) {
 				/* State transition, retry */
@@ -689,6 +720,9 @@ static int alua_rtpg(struct scsi_device *sdev, struct alua_dh_data *h, int wait_
 		}
 
 		/* Transitioning time exceeded, set port to standby */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		h->state = TPGS_STATE_STANDBY;
 		break;
@@ -724,7 +758,11 @@ static int alua_initialize(struct scsi_device *sdev, struct alua_dh_data *h)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = alua_rtpg(sdev, h);
+=======
+	err = alua_rtpg(sdev, h, 0);
+>>>>>>> v3.18
 =======
 	err = alua_rtpg(sdev, h, 0);
 >>>>>>> v3.18
@@ -788,7 +826,11 @@ static int alua_activate(struct scsi_device *sdev,
 	int stpg = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = alua_rtpg(sdev, h);
+=======
+	err = alua_rtpg(sdev, h, 1);
+>>>>>>> v3.18
 =======
 	err = alua_rtpg(sdev, h, 1);
 >>>>>>> v3.18

@@ -17,6 +17,11 @@
 #define DEBUG_LL_UART_OFFSET_RS1	0x00090000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DEBUG_LL_UART_PHYS_CRX		0xb0090000
+
+>>>>>>> v3.18
 =======
 #define DEBUG_LL_UART_PHYS_CRX		0xb0090000
 
@@ -50,6 +55,7 @@
 
 		.endm
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <asm/hardware/debug-pl01x.S>
 
@@ -90,6 +96,9 @@
 		.macro	busyuart,rd,rx
 		.endm
 
+=======
+#include <debug/pl01x.S>
+>>>>>>> v3.18
 =======
 #include <debug/pl01x.S>
 >>>>>>> v3.18

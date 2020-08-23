@@ -42,8 +42,12 @@ calling one of the irq_domain_add_*() functions (each mapping method
 has a different allocator function, more on that later).  The function
 will return a pointer to the irq_domain on success.  The caller must
 <<<<<<< HEAD
+<<<<<<< HEAD
 provide the allocator function with an irq_domain_ops structure with
 the .map callback populated as a minimum.
+=======
+provide the allocator function with an irq_domain_ops structure.
+>>>>>>> v3.18
 =======
 provide the allocator function with an irq_domain_ops structure.
 >>>>>>> v3.18
@@ -146,7 +150,11 @@ system and will otherwise use a linear domain mapping. The semantics
 of this call are such that if an IRQ range is specified then
 descriptors will be allocated on-the-fly for it, and if no range is
 <<<<<<< HEAD
+<<<<<<< HEAD
 specified it will fall through to irq_domain_add_linear() which meand
+=======
+specified it will fall through to irq_domain_add_linear() which means
+>>>>>>> v3.18
 =======
 specified it will fall through to irq_domain_add_linear() which means
 >>>>>>> v3.18

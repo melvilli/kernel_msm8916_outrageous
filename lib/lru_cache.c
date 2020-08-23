@@ -170,7 +170,11 @@ out_fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void lc_free_by_index(struct lru_cache *lc, unsigned i)
+=======
+static void lc_free_by_index(struct lru_cache *lc, unsigned i)
+>>>>>>> v3.18
 =======
 static void lc_free_by_index(struct lru_cache *lc, unsigned i)
 >>>>>>> v3.18
@@ -648,14 +652,20 @@ void lc_set(struct lru_cache *lc, unsigned int enr, int index)
  * @lc: the lru cache to operate on
  * @seq: the &struct seq_file pointer to seq_printf into
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @utext: user supplied "heading" or other info
  * @detail: function pointer the user may provide to dump further details
  * of the object the lc_element is embedded in.
 =======
+=======
+>>>>>>> v3.18
  * @utext: user supplied additional "heading" or other info
  * @detail: function pointer the user may provide to dump further details
  * of the object the lc_element is embedded in. May be NULL.
  * Note: a leading space ' ' and trailing newline '\n' is implied.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void lc_seq_dump_details(struct seq_file *seq, struct lru_cache *lc, char *utext,
@@ -665,6 +675,7 @@ void lc_seq_dump_details(struct seq_file *seq, struct lru_cache *lc, char *utext
 	struct lc_element *e;
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	seq_printf(seq, "\tnn: lc_number refcnt %s\n ", utext);
 	for (i = 0; i < nr_elements; i++) {
@@ -677,6 +688,8 @@ void lc_seq_dump_details(struct seq_file *seq, struct lru_cache *lc, char *utext
 			detail(seq, e);
 		}
 =======
+=======
+>>>>>>> v3.18
 	seq_printf(seq, "\tnn: lc_number (new nr) refcnt %s\n ", utext);
 	for (i = 0; i < nr_elements; i++) {
 		e = lc_element_by_index(lc, i);
@@ -689,6 +702,9 @@ void lc_seq_dump_details(struct seq_file *seq, struct lru_cache *lc, char *utext
 		if (detail)
 			detail(seq, e);
 		seq_putc(seq, '\n');
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

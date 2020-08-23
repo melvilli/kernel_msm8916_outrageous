@@ -11,7 +11,11 @@
  */
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "da850.dtsi"
+=======
+#include "da850.dtsi"
+>>>>>>> v3.18
 =======
 #include "da850.dtsi"
 >>>>>>> v3.18

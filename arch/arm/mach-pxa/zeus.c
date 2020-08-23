@@ -27,15 +27,21 @@
 #include <linux/i2c.h>
 #include <linux/i2c/pxa-i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
 #include <linux/apm-emulation.h>
 #include <linux/can/platform/mcp251x.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/pca953x.h>
 #include <linux/apm-emulation.h>
 #include <linux/can/platform/mcp251x.h>
 #include <linux/regulator/fixed.h>
 #include <linux/regulator/machine.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/mach-types.h>
@@ -400,6 +406,7 @@ static struct pxa2xx_spi_master pxa2xx_spi_ssp3_master_info = {
 
 /* CAN bus on SPI */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int zeus_mcp2515_setup(struct spi_device *sdev)
 {
 	int err;
@@ -428,6 +435,8 @@ static struct mcp251x_platform_data zeus_mcp2515_pdata = {
 	.board_specific_setup	= zeus_mcp2515_setup,
 	.power_enable		= zeus_mcp2515_transceiver_enable,
 =======
+=======
+>>>>>>> v3.18
 static struct regulator_consumer_supply can_regulator_consumer =
 	REGULATOR_SUPPLY("vdd", "spi3.0");
 
@@ -456,6 +465,9 @@ static struct platform_device can_regulator_device = {
 
 static struct mcp251x_platform_data zeus_mcp2515_pdata = {
 	.oscillator_frequency	= 16*1000*1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -547,6 +559,7 @@ struct platform_device zeus_max6369_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_device *zeus_devices[] __initdata = {
 	&zeus_serial_device,
 	&zeus_mtd_devices[0],
@@ -560,6 +573,8 @@ static struct platform_device *zeus_devices[] __initdata = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* AC'97 */
 static pxa2xx_audio_ops_t zeus_ac97_info = {
 	.reset_gpio = 95,
@@ -570,6 +585,7 @@ static pxa2xx_audio_ops_t zeus_ac97_info = {
  * USB host
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int zeus_ohci_init(struct device *dev)
 {
@@ -600,6 +616,8 @@ static void zeus_ohci_exit(struct device *dev)
 	gpio_free(ZEUS_USB2_PWREN_GPIO);
 }
 =======
+=======
+>>>>>>> v3.18
 static struct regulator_consumer_supply zeus_ohci_regulator_supplies[] = {
 	REGULATOR_SUPPLY("vbus2", "pxa27x-ohci"),
 };
@@ -628,6 +646,9 @@ static struct platform_device zeus_ohci_regulator_device = {
 		.platform_data = &zeus_ohci_regulator_config,
 	},
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct pxaohci_platform_data zeus_ohci_platform_data = {
@@ -636,11 +657,14 @@ static struct pxaohci_platform_data zeus_ohci_platform_data = {
 	 * Polarity Low. Supply power to USB ports. */
 	.flags		= ENABLE_PORT_ALL | POWER_SENSE_LOW,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init		= zeus_ohci_init,
 	.exit		= zeus_ohci_exit,
 };
 
 =======
+=======
+>>>>>>> v3.18
 };
 
 static void zeus_register_ohci(void)
@@ -651,6 +675,9 @@ static void zeus_register_ohci(void)
 	pxa_set_ohci_info(&zeus_ohci_platform_data);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Flat Panel
@@ -760,7 +787,10 @@ static struct pxa2xx_udc_mach_info zeus_udc_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device *zeus_devices[] __initdata = {
 	&zeus_serial_device,
 	&zeus_mtd_devices[0],
@@ -774,6 +804,9 @@ static struct platform_device *zeus_devices[] __initdata = {
 	&zeus_ohci_regulator_device,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PM
 static void zeus_power_off(void)
@@ -946,7 +979,11 @@ static void __init zeus_init(void)
 	platform_add_devices(zeus_devices, ARRAY_SIZE(zeus_devices));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pxa_set_ohci_info(&zeus_ohci_platform_data);
+=======
+	zeus_register_ohci();
+>>>>>>> v3.18
 =======
 	zeus_register_ohci();
 >>>>>>> v3.18

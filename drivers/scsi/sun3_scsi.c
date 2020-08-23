@@ -4,11 +4,17 @@
  * Sun3 DMA routines added by Sam Creasey (sammy@sammy.net)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * VME support added by Sam Creasey
  *
  * TODO: modify this driver to support multiple Sun3 SCSI VME boards
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Adapted from mac_scsinew.c:
  */
@@ -53,10 +59,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * $Log: sun3_NCR5380.c,v $
  */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define AUTOSENSE
@@ -80,6 +89,7 @@
 #include <asm/machines.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NDEBUG 0
 
 #define NDEBUG_ABORT		0x00100000
@@ -88,10 +98,13 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* dma on! */
 #define REAL_DMA
 
 #include "scsi.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "initio.h"
 #include <scsi/scsi_host.h>
@@ -101,11 +114,16 @@ static void NCR5380_print(struct Scsi_Host *instance);
 
 /* #define OLDDMA */
 =======
+=======
+>>>>>>> v3.18
 #include <scsi/scsi_host.h>
 #include "sun3_scsi.h"
 #include "NCR5380.h"
 
 extern int sun3_map_test(unsigned long, char *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define USE_WRAPPER
@@ -123,13 +141,19 @@ extern int sun3_map_test(unsigned long, char *);
 /* #define SUPPORT_TAGS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	ENABLE_IRQ()	enable_irq( IRQ_SUN3_SCSI ); 
 =======
+=======
+>>>>>>> v3.18
 #ifdef SUN3_SCSI_VME
 #define ENABLE_IRQ()
 #else
 #define	ENABLE_IRQ()	enable_irq( IRQ_SUN3_SCSI ); 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -153,6 +177,11 @@ module_param(setup_hostid, int, 0);
 static struct scsi_cmnd *sun3_dma_setup_done = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	RESET_RUN_DONE
+
+>>>>>>> v3.18
 =======
 #define	RESET_RUN_DONE
 
@@ -171,10 +200,16 @@ static struct scsi_cmnd *sun3_dma_setup_done = NULL;
 static volatile unsigned char *sun3_scsi_regp;
 static volatile struct sun3_dma_regs *dregs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef OLDDMA
 static unsigned char *dmabuf = NULL; /* dma memory buffer */
 #endif
 static struct sun3_udc_regs *udc_regs = NULL;
+=======
+#ifndef SUN3_SCSI_VME
+static struct sun3_udc_regs *udc_regs = NULL;
+#endif
+>>>>>>> v3.18
 =======
 #ifndef SUN3_SCSI_VME
 static struct sun3_udc_regs *udc_regs = NULL;
@@ -200,6 +235,10 @@ static inline void sun3scsi_write(int reg, int value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef SUN3_SCSI_VME
+>>>>>>> v3.18
 =======
 #ifndef SUN3_SCSI_VME
 >>>>>>> v3.18
@@ -225,6 +264,10 @@ static inline void sun3_udc_write(unsigned short val, unsigned char reg)
 	udelay(SUN3_DMA_DELAY);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -247,6 +290,7 @@ static struct Scsi_Host *default_instance;
  */
  
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init sun3scsi_detect(struct scsi_host_template * tpnt)
 {
 	unsigned long ioaddr;
@@ -259,6 +303,8 @@ int __init sun3scsi_detect(struct scsi_host_template * tpnt)
 	case SM_SUN3|SM_3_60:
 		break;
 =======
+=======
+>>>>>>> v3.18
 static int __init sun3scsi_detect(struct scsi_host_template *tpnt)
 {
 	unsigned long ioaddr, irq;
@@ -285,6 +331,9 @@ static int __init sun3scsi_detect(struct scsi_host_template *tpnt)
 	case SM_SUN3|SM_3_60:
 		break;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	default:
@@ -295,13 +344,19 @@ static int __init sun3scsi_detect(struct scsi_host_template *tpnt)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tpnt->proc_name = "Sun3 5380 SCSI";
 =======
+=======
+>>>>>>> v3.18
 #ifdef SUN3_SCSI_VME
 	tpnt->proc_name = "Sun3 5380 VME SCSI";
 #else
 	tpnt->proc_name = "Sun3 5380 SCSI";
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* setup variables */
@@ -320,7 +375,10 @@ static int __init sun3scsi_detect(struct scsi_host_template *tpnt)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef SUN3_SCSI_VME
 	ioaddr = 0;
 	for (i = 0; addrs[i] != 0; i++) {
@@ -353,6 +411,9 @@ static int __init sun3scsi_detect(struct scsi_host_template *tpnt)
 		return 0;
 #else
 	irq = IRQ_SUN3_SCSI;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ioaddr = (unsigned long)ioremap(IOBASE_SUN3_SCSI, PAGE_SIZE);
 	sun3_scsi_regp = (unsigned char *)ioaddr;
@@ -365,11 +426,14 @@ static int __init sun3scsi_detect(struct scsi_host_template *tpnt)
 	     return 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef OLDDMA
 	if((dmabuf = dvma_malloc_align(SUN3_DVMA_BUFSIZE, 0x10000)) == NULL) {
 	     printk("SUN3 Scsi couldn't allocate DVMA memory!\n");
 	     return 0;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -386,7 +450,11 @@ static int __init sun3scsi_detect(struct scsi_host_template *tpnt)
 
         instance->io_port = (unsigned long) ioaddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	instance->irq = IRQ_SUN3_SCSI;
+=======
+	instance->irq = irq;
+>>>>>>> v3.18
 =======
 	instance->irq = irq;
 >>>>>>> v3.18
@@ -411,7 +479,12 @@ static int __init sun3scsi_detect(struct scsi_host_template *tpnt)
 	}
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("scsi%d: Sun3 5380 at port %lX irq", instance->host_no, instance->io_port);
+=======
+	pr_info("scsi%d: %s at port %lX irq", instance->host_no,
+		tpnt->proc_name, instance->io_port);
+>>>>>>> v3.18
 =======
 	pr_info("scsi%d: %s at port %lX irq", instance->host_no,
 		tpnt->proc_name, instance->io_port);
@@ -433,7 +506,10 @@ static int __init sun3scsi_detect(struct scsi_host_template *tpnt)
 	udelay(SUN3_DMA_DELAY);
 	dregs->fifo_count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef SUN3_SCSI_VME
 	dregs->fifo_count_hi = 0;
 	dregs->dma_addr_hi = 0;
@@ -443,6 +519,9 @@ static int __init sun3scsi_detect(struct scsi_host_template *tpnt)
 
 	dregs->ivect = VME_DATA24 | (instance->irq & 0xff);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	called = 1;
@@ -512,7 +591,12 @@ static void sun3_scsi_reset_boot(struct Scsi_Host *instance)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const char * sun3scsi_info (struct Scsi_Host *spnt) {
+=======
+static const char *sun3scsi_info(struct Scsi_Host *spnt)
+{
+>>>>>>> v3.18
 =======
 static const char *sun3scsi_info(struct Scsi_Host *spnt)
 {
@@ -529,11 +613,17 @@ static irqreturn_t scsi_sun3_intr(int irq, void *dummy)
 	int handled = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef SUN3_SCSI_VME
 	dregs->csr &= ~CSR_DMA_ENABLE;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if(csr & ~CSR_GOOD) {
 		if(csr & CSR_DMA_BUSERR) {
@@ -579,6 +669,7 @@ void sun3_sun3_debug (void)
 static unsigned long sun3scsi_dma_setup(void *data, unsigned long count, int write_flag)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef OLDDMA
 	if(write_flag) 
 		memcpy(dmabuf, data, count);
@@ -589,11 +680,14 @@ static unsigned long sun3scsi_dma_setup(void *data, unsigned long count, int wri
 #else
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	void *addr;
 
 	if(sun3_dma_orig_addr != NULL)
 		dvma_unmap(sun3_dma_orig_addr);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //	addr = sun3_dvma_page((unsigned long)data, (unsigned long)dmabuf);
 	addr = (void *)dvma_map((unsigned long) data, count);
@@ -602,6 +696,8 @@ static unsigned long sun3scsi_dma_setup(void *data, unsigned long count, int wri
 	sun3_dma_orig_count = count;
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef SUN3_SCSI_VME
 	addr = (void *)dvma_map_vme((unsigned long) data, count);
 #else
@@ -612,6 +708,9 @@ static unsigned long sun3scsi_dma_setup(void *data, unsigned long count, int wri
 	sun3_dma_orig_count = count;
 
 #ifndef SUN3_SCSI_VME
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dregs->fifo_count = 0;
 	sun3_udc_write(UDC_RESET, UDC_CSR);
@@ -620,6 +719,10 @@ static unsigned long sun3scsi_dma_setup(void *data, unsigned long count, int wri
 	dregs->csr &= ~CSR_FIFO;
 	dregs->csr |= CSR_FIFO;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -631,7 +734,10 @@ static unsigned long sun3scsi_dma_setup(void *data, unsigned long count, int wri
 		dregs->csr &= ~CSR_SEND;
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef SUN3_SCSI_VME
 	dregs->csr |= CSR_PACK_ENABLE;
 
@@ -643,6 +749,9 @@ static unsigned long sun3scsi_dma_setup(void *data, unsigned long count, int wri
 	dregs->fifo_count_hi = 0;
 	dregs->fifo_count = 0;
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* byte count for fifo */
 	dregs->fifo_count = count;
@@ -658,6 +767,7 @@ static unsigned long sun3scsi_dma_setup(void *data, unsigned long count, int wri
 		       default_instance->host_no, dregs->fifo_count,
 		       (unsigned int) count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		NCR5380_print(default_instance);
 	}
 
@@ -670,12 +780,17 @@ static unsigned long sun3scsi_dma_setup(void *data, unsigned long count, int wri
 	udc_regs->addr_lo = ((unsigned long)(addr) & 0xffff);
 #endif
 =======
+=======
+>>>>>>> v3.18
 		NCR5380_dprint(NDEBUG_DMA, default_instance);
 	}
 
 	/* setup udc */
 	udc_regs->addr_hi = (((unsigned long)(addr) & 0xff0000) >> 8);
 	udc_regs->addr_lo = ((unsigned long)(addr) & 0xffff);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	udc_regs->count = count/2; /* count in words */
 	udc_regs->mode_hi = UDC_MODE_HIWORD;
@@ -701,6 +816,10 @@ static unsigned long sun3scsi_dma_setup(void *data, unsigned long count, int wri
 	/* interrupt enable */
 	sun3_udc_write(UDC_INT_ENABLE, UDC_CSR);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -710,6 +829,10 @@ static unsigned long sun3scsi_dma_setup(void *data, unsigned long count, int wri
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef SUN3_SCSI_VME
+>>>>>>> v3.18
 =======
 #ifndef SUN3_SCSI_VME
 >>>>>>> v3.18
@@ -726,6 +849,10 @@ static inline unsigned long sun3scsi_dma_count(struct Scsi_Host *instance)
 	return (unsigned long) resid;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -748,9 +875,12 @@ static inline unsigned long sun3scsi_dma_xfer_len(unsigned long wanted,
 static inline int sun3scsi_dma_start(unsigned long count, unsigned char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     sun3_udc_write(UDC_CHN_START, UDC_CSR);
 =======
+=======
+>>>>>>> v3.18
 #ifdef SUN3_SCSI_VME
 	unsigned short csr;
 
@@ -768,6 +898,9 @@ static inline int sun3scsi_dma_start(unsigned long count, unsigned char *data)
 #else
     sun3_udc_write(UDC_CHN_START, UDC_CSR);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     
     return 0;
@@ -777,7 +910,11 @@ static inline int sun3scsi_dma_start(unsigned long count, unsigned char *data)
 static int sun3scsi_dma_finish(int write_flag)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short count;
+=======
+	unsigned short __maybe_unused count;
+>>>>>>> v3.18
 =======
 	unsigned short __maybe_unused count;
 >>>>>>> v3.18
@@ -786,8 +923,11 @@ static int sun3scsi_dma_finish(int write_flag)
 	
 	sun3_dma_active = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 1
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef SUN3_SCSI_VME
 	dregs->csr &= ~CSR_DMA_ENABLE;
@@ -823,6 +963,9 @@ static int sun3scsi_dma_finish(int write_flag)
 		}
 	}
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	// check to empty the fifo on a read
 	if(!write_flag) {
@@ -839,6 +982,7 @@ static int sun3scsi_dma_finish(int write_flag)
 			udelay(10);
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		
 #endif
@@ -866,6 +1010,10 @@ static int sun3scsi_dma_finish(int write_flag)
 
 	count = sun3scsi_dma_count(default_instance);
 >>>>>>> v3.18
+=======
+
+	count = sun3scsi_dma_count(default_instance);
+>>>>>>> v3.18
 
 	fifo = dregs->fifo_count;
 	last_residual = fifo;
@@ -884,11 +1032,14 @@ static int sun3scsi_dma_finish(int write_flag)
 		vaddr[-1] = (data & 0xff);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dvma_unmap(sun3_dma_orig_addr);
 	sun3_dma_orig_addr = NULL;
 #endif
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 	dvma_unmap(sun3_dma_orig_addr);
@@ -906,6 +1057,9 @@ static int sun3scsi_dma_finish(int write_flag)
 	dregs->csr &= ~CSR_SEND;
 /*	dregs->csr |= CSR_DMA_ENABLE; */
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sun3_udc_write(UDC_RESET, UDC_CSR);
 	dregs->fifo_count = 0;
@@ -915,6 +1069,10 @@ static int sun3scsi_dma_finish(int write_flag)
 	dregs->csr &= ~CSR_FIFO;
 	dregs->csr |= CSR_FIFO;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

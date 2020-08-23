@@ -31,7 +31,10 @@
 #include <linux/drbd.h>
 #include "drbd_int.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "drbd_wrappers.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -115,12 +118,15 @@ enum drbd_req_event {
 	DATA_RECEIVED, /* (remote read) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	READ_COMPLETED_WITH_ERROR,
 	READ_AHEAD_COMPLETED_WITH_ERROR,
 	WRITE_COMPLETED_WITH_ERROR,
 	ABORT_DISK_IO,
 	COMPLETED_OK,
 =======
+=======
+>>>>>>> v3.18
 	COMPLETED_OK,
 	READ_COMPLETED_WITH_ERROR,
 	READ_AHEAD_COMPLETED_WITH_ERROR,
@@ -129,6 +135,9 @@ enum drbd_req_event {
 	DISCARD_COMPLETED_WITH_ERROR,
 
 	ABORT_DISK_IO,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	RESEND,
 	FAIL_FROZEN_DISK_IO,
@@ -284,7 +293,11 @@ static inline void drbd_req_make_private_bio(struct drbd_request *req, struct bi
 /* Short lived temporary struct on the stack.
  * We could squirrel the error to be returned into
 <<<<<<< HEAD
+<<<<<<< HEAD
  * bio->bi_size, or similar. But that would be too ugly. */
+=======
+ * bio->bi_iter.bi_size, or similar. But that would be too ugly. */
+>>>>>>> v3.18
 =======
  * bio->bi_iter.bi_size, or similar. But that would be too ugly. */
 >>>>>>> v3.18
@@ -294,7 +307,11 @@ struct bio_and_error {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void start_new_tl_epoch(struct drbd_tconn *tconn);
+=======
+extern void start_new_tl_epoch(struct drbd_connection *connection);
+>>>>>>> v3.18
 =======
 extern void start_new_tl_epoch(struct drbd_connection *connection);
 >>>>>>> v3.18
@@ -304,18 +321,24 @@ extern void _req_may_be_done(struct drbd_request *req,
 extern int __req_mod(struct drbd_request *req, enum drbd_req_event what,
 		struct bio_and_error *m);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void complete_master_bio(struct drbd_conf *mdev,
 		struct bio_and_error *m);
 extern void request_timer_fn(unsigned long data);
 extern void tl_restart(struct drbd_tconn *tconn, enum drbd_req_event what);
 extern void _tl_restart(struct drbd_tconn *tconn, enum drbd_req_event what);
 =======
+=======
+>>>>>>> v3.18
 extern void complete_master_bio(struct drbd_device *device,
 		struct bio_and_error *m);
 extern void request_timer_fn(unsigned long data);
 extern void tl_restart(struct drbd_connection *connection, enum drbd_req_event what);
 extern void _tl_restart(struct drbd_connection *connection, enum drbd_req_event what);
 extern void tl_abort_disk_io(struct drbd_device *device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* this is in drbd_main.c */
@@ -326,7 +349,11 @@ extern void drbd_restart_request(struct drbd_request *req);
 static inline int _req_mod(struct drbd_request *req, enum drbd_req_event what)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drbd_conf *mdev = req->w.mdev;
+=======
+	struct drbd_device *device = req->device;
+>>>>>>> v3.18
 =======
 	struct drbd_device *device = req->device;
 >>>>>>> v3.18
@@ -337,7 +364,11 @@ static inline int _req_mod(struct drbd_request *req, enum drbd_req_event what)
 	rv = __req_mod(req, what, &m);
 	if (m.bio)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		complete_master_bio(mdev, &m);
+=======
+		complete_master_bio(device, &m);
+>>>>>>> v3.18
 =======
 		complete_master_bio(device, &m);
 >>>>>>> v3.18
@@ -354,6 +385,7 @@ static inline int req_mod(struct drbd_request *req,
 {
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drbd_conf *mdev = req->w.mdev;
 	struct bio_and_error m;
 	int rv;
@@ -365,6 +397,8 @@ static inline int req_mod(struct drbd_request *req,
 	if (m.bio)
 		complete_master_bio(mdev, &m);
 =======
+=======
+>>>>>>> v3.18
 	struct drbd_device *device = req->device;
 	struct bio_and_error m;
 	int rv;
@@ -375,6 +409,9 @@ static inline int req_mod(struct drbd_request *req,
 
 	if (m.bio)
 		complete_master_bio(device, &m);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rv;

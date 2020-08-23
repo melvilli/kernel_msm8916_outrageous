@@ -754,9 +754,15 @@ int ar9003_mci_end_reset(struct ath_hw *ah, struct ath9k_channel *chan,
 
 	if (caldata) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		caldata->done_txiqcal_once = false;
 		caldata->done_txclcal_once = false;
 		caldata->rtt_done = false;
+=======
+		clear_bit(TXIQCAL_DONE, &caldata->cal_flags);
+		clear_bit(TXCLCAL_DONE, &caldata->cal_flags);
+		clear_bit(RTT_DONE, &caldata->cal_flags);
+>>>>>>> v3.18
 =======
 		clear_bit(TXIQCAL_DONE, &caldata->cal_flags);
 		clear_bit(TXCLCAL_DONE, &caldata->cal_flags);

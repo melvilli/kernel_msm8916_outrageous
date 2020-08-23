@@ -38,7 +38,11 @@ statistic_mt(const struct sk_buff *skb, struct xt_action_param *par)
 	switch (info->mode) {
 	case XT_STATISTIC_MODE_RANDOM:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((net_random() & 0x7FFFFFFF) < info->u.random.probability)
+=======
+		if ((prandom_u32() & 0x7FFFFFFF) < info->u.random.probability)
+>>>>>>> v3.18
 =======
 		if ((prandom_u32() & 0x7FFFFFFF) < info->u.random.probability)
 >>>>>>> v3.18

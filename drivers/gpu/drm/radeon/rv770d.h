@@ -63,7 +63,10 @@
 #	define UPLL_FB_DIV_MASK				0x01FFFFFF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* pm registers */
 #define	SMC_SRAM_ADDR					0x200
 #define		SMC_SRAM_AUTO_INC_DIS				(1 << 16)
@@ -311,6 +314,9 @@
 
 #define CGTS_SM_CTRL_REG                                  0x9150
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Registers */
 #define	CB_COLOR0_BASE					0x28040
@@ -337,8 +343,13 @@
 
 #define	CP_ME_CNTL					0x86D8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define		CP_ME_HALT					(1<<28)
 #define		CP_PFP_HALT					(1<<26)
+=======
+#define		CP_ME_HALT					(1 << 28)
+#define		CP_PFP_HALT					(1 << 26)
+>>>>>>> v3.18
 =======
 #define		CP_ME_HALT					(1 << 28)
 #define		CP_PFP_HALT					(1 << 26)
@@ -413,10 +424,13 @@
 #define	GRBM_STATUS2					0x8014
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CG_CLKPIN_CNTL                                    0x660
 #       define MUX_TCLK_TO_XCLK                           (1 << 8)
 #       define XTALIN_DIVIDE                              (1 << 9)
 =======
+=======
+>>>>>>> v3.18
 #define	CG_THERMAL_CTRL					0x72C
 #define 	DPM_EVENT_SRC(x)			((x) << 0)
 #define 	DPM_EVENT_SRC_MASK			(7 << 0)
@@ -433,6 +447,9 @@
 #define		DIG_THERM_INTL_SHIFT			16
 #define 	THERM_INT_MASK_HIGH			(1 << 24)
 #define 	THERM_INT_MASK_LOW			(1 << 25)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	CG_MULT_THERMAL_STATUS				0x740
@@ -874,7 +891,11 @@
 #       define AFMT_GENERIC0_UPDATE          (1 << 2)
 #define AFMT_INFOFRAME_CONTROL0              0x760c
 <<<<<<< HEAD
+<<<<<<< HEAD
 #       define AFMT_AUDIO_INFO_SOURCE        (1 << 6) /* 0 - sound block; 1 - hmdi regs */
+=======
+#       define AFMT_AUDIO_INFO_SOURCE        (1 << 6) /* 0 - sound block; 1 - hdmi regs */
+>>>>>>> v3.18
 =======
 #       define AFMT_AUDIO_INFO_SOURCE        (1 << 6) /* 0 - sound block; 1 - hdmi regs */
 >>>>>>> v3.18
@@ -941,8 +962,11 @@
 #define D2GRPH_SECONDARY_SURFACE_ADDRESS_HIGH             0x611c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* PCIE link stuff */
 =======
+=======
+>>>>>>> v3.18
 /* PCIE indirect regs */
 #define PCIE_P_CNTL                                       0x40
 #       define P_PLL_PWRDN_IN_L1L23                       (1 << 3)
@@ -959,6 +983,9 @@
 #       define LC_L1_INACTIVITY_SHIFT                     12
 #       define LC_PMI_TO_L1_DIS                           (1 << 16)
 #       define LC_ASPM_TO_L1_DIS                          (1 << 24)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PCIE_LC_TRAINING_CNTL                             0xa1 /* PCIE_P */
 #define PCIE_LC_LINK_WIDTH_CNTL                           0xa2 /* PCIE_P */
@@ -988,6 +1015,12 @@
 #       define LC_SPEED_CHANGE_ATTEMPTS_ALLOWED_SHIFT     3
 #       define LC_CURRENT_DATA_RATE                       (1 << 11)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#       define LC_HW_VOLTAGE_IF_CONTROL(x)                ((x) << 12)
+#       define LC_HW_VOLTAGE_IF_CONTROL_MASK              (3 << 12)
+#       define LC_HW_VOLTAGE_IF_CONTROL_SHIFT             12
+>>>>>>> v3.18
 =======
 #       define LC_HW_VOLTAGE_IF_CONTROL(x)                ((x) << 12)
 #       define LC_HW_VOLTAGE_IF_CONTROL_MASK              (3 << 12)
@@ -1004,8 +1037,11 @@
 #       define SELECTABLE_DEEMPHASIS                      (1 << 6)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* UVD */
 =======
+=======
+>>>>>>> v3.18
 /*
  * PM4
  */
@@ -1021,6 +1057,9 @@
 #define UVD_GPCOM_VCPU_DATA0				0xef10
 #define UVD_GPCOM_VCPU_DATA1				0xef14
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define UVD_LMI_EXT40_ADDR				0xf498
 #define UVD_VCPU_CHIP_ID				0xf4d4
@@ -1036,6 +1075,11 @@
 #define UVD_RBC_RB_WPTR					0xf694
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define UVD_CONTEXT_ID					0xf6f4
+
+>>>>>>> v3.18
 =======
 #define UVD_CONTEXT_ID					0xf6f4
 

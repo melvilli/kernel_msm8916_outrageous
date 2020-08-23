@@ -114,7 +114,11 @@ static void remove(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pci_driver driver = {
+=======
+static struct pci_driver uio_pci_driver = {
+>>>>>>> v3.18
 =======
 static struct pci_driver uio_pci_driver = {
 >>>>>>> v3.18
@@ -124,6 +128,7 @@ static struct pci_driver uio_pci_driver = {
 	.remove = remove,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init init(void)
 {
@@ -139,6 +144,9 @@ static void __exit cleanup(void)
 module_init(init);
 module_exit(cleanup);
 
+=======
+module_pci_driver(uio_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(uio_pci_driver);
 >>>>>>> v3.18

@@ -1,7 +1,11 @@
 /* Driver for Realtek PCI-Express card reader
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2009 Realtek Semiconductor Corp. All rights reserved.
+=======
+ * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
 >>>>>>> v3.18
@@ -22,7 +26,10 @@
  * Author:
  *   Wei WANG <wei_wang@realsil.com.cn>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   No. 450, Shenhu Road, Suzhou Industry Park, Suzhou, China
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -39,9 +46,12 @@ void rts5209_init_params(struct rtsx_pcr *pcr);
 void rts5229_init_params(struct rtsx_pcr *pcr);
 void rtl8411_init_params(struct rtsx_pcr *pcr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rts5227_init_params(struct rtsx_pcr *pcr);
 void rts5249_init_params(struct rtsx_pcr *pcr);
 =======
+=======
+>>>>>>> v3.18
 void rtl8402_init_params(struct rtsx_pcr *pcr);
 void rts5227_init_params(struct rtsx_pcr *pcr);
 void rts5249_init_params(struct rtsx_pcr *pcr);
@@ -83,6 +93,9 @@ do {									\
 	pcr->ms_pull_ctl_enable_tbl  = __device##_ms_pull_ctl_enable_tbl;  \
 	pcr->ms_pull_ctl_disable_tbl = __device##_ms_pull_ctl_disable_tbl; \
 } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

@@ -32,11 +32,17 @@ struct cmos_rtc_board_info {
 	void	(*wake_off)(struct device *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32	flags;
 #define CMOS_RTC_FLAGS_NOFREQ	(1 << 0)
 	int	address_space;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8	rtc_day_alarm;		/* zero, or register index */
 	u8	rtc_mon_alarm;		/* zero, or register index */

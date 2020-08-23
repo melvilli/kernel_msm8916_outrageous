@@ -11,6 +11,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/gpio/gpio.h>
+
+>>>>>>> v3.18
 =======
 #include <dt-bindings/gpio/gpio.h>
 
@@ -20,7 +25,10 @@
 		reg = <0x10000000 0x80000000>;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	leds {
 		compatible = "gpio-leds";
@@ -64,15 +72,21 @@
 		spi-max-frequency = <20000000>;
 		reg = <0>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 &fec {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_enet_2>;
 	phy-mode = "rgmii";
 =======
+=======
+>>>>>>> v3.18
 	pinctrl-0 = <&pinctrl_enet>;
 	phy-mode = "rgmii";
 	interrupts-extended = <&gpio1 6 IRQ_TYPE_LEVEL_HIGH>,
@@ -429,6 +443,9 @@
 &spdif {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_spdif>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = "okay";
 };
@@ -436,7 +453,11 @@
 &uart4 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_uart4_1>;
+=======
+	pinctrl-0 = <&pinctrl_uart4>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_uart4>;
 >>>>>>> v3.18
@@ -445,20 +466,29 @@
 
 &usdhc3 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usdhc3_1>;
 =======
+=======
+>>>>>>> v3.18
 	pinctrl-names = "default", "state_100mhz", "state_200mhz";
 	pinctrl-0 = <&pinctrl_usdhc3>;
 	pinctrl-1 = <&pinctrl_usdhc3_100mhz>;
 	pinctrl-2 = <&pinctrl_usdhc3_200mhz>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cd-gpios = <&gpio6 15 0>;
 	wp-gpios = <&gpio1 13 0>;
 	status = "okay";
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &weim {
 	pinctrl-names = "default";
@@ -478,4 +508,7 @@
 				0x0000c000 0x1404a38e 0x00000000>;
 	};
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

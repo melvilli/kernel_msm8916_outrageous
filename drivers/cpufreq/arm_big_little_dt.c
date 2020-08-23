@@ -115,7 +115,11 @@ module_platform_driver(generic_bL_platdrv);
 MODULE_AUTHOR("Viresh Kumar <viresh.kumar@linaro.org>");
 MODULE_DESCRIPTION("Generic ARM big LITTLE cpufreq driver via DT");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_LICENSE("GPL");
+=======
+MODULE_LICENSE("GPL v2");
+>>>>>>> v3.18
 =======
 MODULE_LICENSE("GPL v2");
 >>>>>>> v3.18

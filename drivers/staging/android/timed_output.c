@@ -29,7 +29,11 @@ static atomic_t device_count;
 
 static ssize_t enable_show(struct device *dev, struct device_attribute *attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char *buf)
+=======
+			   char *buf)
+>>>>>>> v3.18
 =======
 			   char *buf)
 >>>>>>> v3.18
@@ -41,6 +45,7 @@ static ssize_t enable_show(struct device *dev, struct device_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t enable_store(
 		struct device *dev, struct device_attribute *attr,
 		const char *buf, size_t size)
@@ -50,6 +55,8 @@ static ssize_t enable_store(
 
 	if (sscanf(buf, "%d", &value) != 1)
 =======
+=======
+>>>>>>> v3.18
 static ssize_t enable_store(struct device *dev, struct device_attribute *attr,
 			    const char *buf, size_t size)
 {
@@ -59,6 +66,9 @@ static ssize_t enable_store(struct device *dev, struct device_attribute *attr,
 
 	rc = kstrtoint(buf, 0, &value);
 	if (rc != 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -67,9 +77,12 @@ static ssize_t enable_store(struct device *dev, struct device_attribute *attr,
 	return size;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEVICE_ATTR(enable, S_IRUGO | S_IWUSR, enable_show, enable_store);
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RW(enable);
 
 static struct attribute *timed_output_attrs[] = {
@@ -77,6 +90,9 @@ static struct attribute *timed_output_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(timed_output);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int create_timed_output_class(void)
@@ -87,6 +103,10 @@ static int create_timed_output_class(void)
 			return PTR_ERR(timed_output_class);
 		atomic_set(&device_count, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		timed_output_class->dev_groups = timed_output_groups;
+>>>>>>> v3.18
 =======
 		timed_output_class->dev_groups = timed_output_groups;
 >>>>>>> v3.18
@@ -109,6 +129,7 @@ int timed_output_dev_register(struct timed_output_dev *tdev)
 	tdev->index = atomic_inc_return(&device_count);
 	tdev->dev = device_create(timed_output_class, NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MKDEV(0, tdev->index), NULL, tdev->name);
 	if (IS_ERR(tdev->dev))
 		return PTR_ERR(tdev->dev);
@@ -128,6 +149,8 @@ err_create_file:
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		MKDEV(0, tdev->index), NULL, "%s", tdev->name);
 	if (IS_ERR(tdev->dev))
 		return PTR_ERR(tdev->dev);
@@ -135,6 +158,9 @@ err_create_file:
 	dev_set_drvdata(tdev->dev, tdev);
 	tdev->state = 0;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(timed_output_dev_register);
@@ -143,8 +169,11 @@ void timed_output_dev_unregister(struct timed_output_dev *tdev)
 {
 	tdev->enable(tdev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_remove_file(tdev->dev, &dev_attr_enable);
 	dev_set_drvdata(tdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	device_destroy(timed_output_class, MKDEV(0, tdev->index));

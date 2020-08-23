@@ -271,9 +271,14 @@ static void __exit tea_mod_fini(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("tea");
 MODULE_ALIAS_CRYPTO("xtea");
 MODULE_ALIAS_CRYPTO("xeta");
+=======
+MODULE_ALIAS("xtea");
+MODULE_ALIAS("xeta");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("xtea");
 MODULE_ALIAS("xeta");

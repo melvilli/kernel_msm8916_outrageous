@@ -2,7 +2,11 @@ Linux* Base Driver for the Intel(R) PRO/100 Family of Adapters
 ==============================================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 November 15, 2005
+=======
+March 15, 2011
+>>>>>>> v3.18
 =======
 March 15, 2011
 >>>>>>> v3.18
@@ -108,7 +112,11 @@ Additional Configurations
 
   As an example, if you install the e100 driver for two PRO/100 adapters
 <<<<<<< HEAD
+<<<<<<< HEAD
   (eth0 and eth1), add the following to a configuraton file in /etc/modprobe.d/
+=======
+  (eth0 and eth1), add the following to a configuration file in /etc/modprobe.d/
+>>>>>>> v3.18
 =======
   (eth0 and eth1), add the following to a configuration file in /etc/modprobe.d/
 >>>>>>> v3.18
@@ -131,7 +139,11 @@ Additional Configurations
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   Ethtool
+=======
+  ethtool
+>>>>>>> v3.18
 =======
   ethtool
 >>>>>>> v3.18

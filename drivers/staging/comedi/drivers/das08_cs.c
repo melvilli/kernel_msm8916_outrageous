@@ -17,10 +17,13 @@
     GNU General Public License for more details.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     PCMCIA support code for this driver is adapted from the dummy_cs.c
@@ -30,9 +33,12 @@
     <dahinds@users.sourceforge.net>.  Portions created by David A. Hinds
     are Copyright (C) 1999 David A. Hinds.  All Rights Reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 *****************************************************************
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -53,8 +59,12 @@ Command support does not exist, but could be added for this board.
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/delay.h>
 #include <linux/slab.h>
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -96,10 +106,16 @@ static int das08_cs_auto_attach(struct comedi_device *dev,
 	iobase = link->resource[0]->start;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -110,6 +126,7 @@ static int das08_cs_auto_attach(struct comedi_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void das08_cs_detach(struct comedi_device *dev)
 {
 	das08_common_detach(dev);
@@ -118,12 +135,18 @@ static void das08_cs_detach(struct comedi_device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct comedi_driver driver_das08_cs = {
 	.driver_name	= "das08_cs",
 	.module		= THIS_MODULE,
 	.auto_attach	= das08_cs_auto_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= das08_cs_detach,
+=======
+	.detach		= comedi_pcmcia_disable,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_pcmcia_disable,
 >>>>>>> v3.18

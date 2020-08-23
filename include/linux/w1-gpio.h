@@ -21,6 +21,10 @@ struct w1_gpio_platform_data {
 	void (*enable_external_pullup)(int enable);
 	unsigned int ext_pullup_enable_pin;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int pullup_duration;
+>>>>>>> v3.18
 =======
 	unsigned int pullup_duration;
 >>>>>>> v3.18

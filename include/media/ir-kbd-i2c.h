@@ -21,7 +21,12 @@ struct IR_i2c {
 	char                   name[32];
 	char                   phys[32];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int                    (*get_key)(struct IR_i2c*, u32*, u32*);
+=======
+	int                    (*get_key)(struct IR_i2c *ir, enum rc_type *protocol,
+					  u32 *scancode, u8 *toggle);
+>>>>>>> v3.18
 =======
 	int                    (*get_key)(struct IR_i2c *ir, enum rc_type *protocol,
 					  u32 *scancode, u8 *toggle);
@@ -50,7 +55,12 @@ struct IR_i2c_init_data {
 	 * ir_kbd_i2c's internal get_key functions
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int                    (*get_key)(struct IR_i2c*, u32*, u32*);
+=======
+	int                    (*get_key)(struct IR_i2c *ir, enum rc_type *protocol,
+					  u32 *scancode, u8 *toggle);
+>>>>>>> v3.18
 =======
 	int                    (*get_key)(struct IR_i2c *ir, enum rc_type *protocol,
 					  u32 *scancode, u8 *toggle);

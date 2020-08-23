@@ -16,6 +16,12 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -29,6 +35,10 @@
 #include <linux/ftrace.h>
 #include <linux/bug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -37,8 +47,12 @@
 #include <asm/code-patching.h>
 #include <linux/sort.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "setup.h"
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18
@@ -51,11 +65,14 @@
    this, and makes other things simpler.  Anton?
    --RR.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0
 #define DEBUGP printk
 #else
 #define DEBUGP(fmt , ...)
 =======
+=======
+>>>>>>> v3.18
 
 #if defined(_CALL_ELF) && _CALL_ELF == 2
 #define R2_STACK_OFFSET 24
@@ -111,6 +128,9 @@ static unsigned int local_entry_offset(const Elf64_Sym *sym)
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -119,6 +139,7 @@ static unsigned int local_entry_offset(const Elf64_Sym *sym)
    jump, actually, to reset r2 (TOC+0x8000). */
 struct ppc64_stub_entry
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* 28 byte jump instruction sequence (7 instructions) */
 	unsigned char jump[28];
@@ -145,6 +166,8 @@ static struct ppc64_stub_entry ppc64_stub =
 	0x4e, 0x80, 0x04, 0x20  /* bctr */
 } };
 =======
+=======
+>>>>>>> v3.18
 	/* 28 byte jump instruction sequence (7 instructions). We only
 	 * need 6 instructions on ABIv2 but we always allocate 7 so
 	 * so we don't have to modify the trampoline load instruction. */
@@ -248,6 +271,9 @@ int module_trampoline_target(struct module *mod, u32 *trampoline,
 }
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Count how many different 24-bit relocations (different symbol,
@@ -323,8 +349,13 @@ static unsigned long get_stubs_size(const Elf64_Ehdr *hdr,
 	for (i = 1; i < hdr->e_shnum; i++) {
 		if (sechdrs[i].sh_type == SHT_RELA) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DEBUGP("Found relocations in section %u\n", i);
 			DEBUGP("Ptr: %p.  Number: %lu\n",
+=======
+			pr_debug("Found relocations in section %u\n", i);
+			pr_debug("Ptr: %p.  Number: %Lu\n",
+>>>>>>> v3.18
 =======
 			pr_debug("Found relocations in section %u\n", i);
 			pr_debug("Ptr: %p.  Number: %Lu\n",
@@ -353,16 +384,22 @@ static unsigned long get_stubs_size(const Elf64_Ehdr *hdr,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUGP("Looks like a total of %lu stubs, max\n", relocs);
 	return relocs * sizeof(struct ppc64_stub_entry);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("Looks like a total of %lu stubs, max\n", relocs);
 	return relocs * sizeof(struct ppc64_stub_entry);
 }
 
 /* Still needed for ELFv2, for .TOC. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void dedotify_versions(struct modversion_info *vers,
 			      unsigned long size)
@@ -371,12 +408,15 @@ static void dedotify_versions(struct modversion_info *vers,
 
 	for (end = (void *)vers + size; vers < end; vers++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vers->name[0] == '.')
 			memmove(vers->name, vers->name+1, strlen(vers->name));
 }
 
 /* Undefined symbols which refer to .funcname, hack to funcname */
 =======
+=======
+>>>>>>> v3.18
 		if (vers->name[0] == '.') {
 			memmove(vers->name, vers->name+1, strlen(vers->name));
 #ifdef ARCH_RELOCATES_KCRCTAB
@@ -391,6 +431,9 @@ static void dedotify_versions(struct modversion_info *vers,
 }
 
 /* Undefined symbols which refer to .funcname, hack to funcname (or .TOC.) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void dedotify(Elf64_Sym *syms, unsigned int numsyms, char *strtab)
 {
@@ -401,7 +444,11 @@ static void dedotify(Elf64_Sym *syms, unsigned int numsyms, char *strtab)
 			char *name = strtab + syms[i].st_name;
 			if (name[0] == '.')
 <<<<<<< HEAD
+<<<<<<< HEAD
 				syms[i].st_name++;
+=======
+				memmove(name, name+1, strlen(name));
+>>>>>>> v3.18
 =======
 				memmove(name, name+1, strlen(name));
 >>>>>>> v3.18
@@ -410,7 +457,10 @@ static void dedotify(Elf64_Sym *syms, unsigned int numsyms, char *strtab)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static Elf64_Sym *find_dot_toc(Elf64_Shdr *sechdrs,
 			       const char *strtab,
 			       unsigned int symindex)
@@ -429,6 +479,9 @@ static Elf64_Sym *find_dot_toc(Elf64_Shdr *sechdrs,
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int module_frob_arch_sections(Elf64_Ehdr *hdr,
 			      Elf64_Shdr *sechdrs,
@@ -461,7 +514,11 @@ int module_frob_arch_sections(Elf64_Ehdr *hdr,
 
 	if (!me->arch.stubs_section) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%s: doesn't contain .stubs.\n", me->name);
+=======
+		pr_err("%s: doesn't contain .stubs.\n", me->name);
+>>>>>>> v3.18
 =======
 		pr_err("%s: doesn't contain .stubs.\n", me->name);
 >>>>>>> v3.18
@@ -499,6 +556,7 @@ static inline unsigned long my_r2(Elf64_Shdr *sechdrs, struct module *me)
 static inline int create_stub(Elf64_Shdr *sechdrs,
 			      struct ppc64_stub_entry *entry,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      struct ppc64_opd_entry *opd,
 			      struct module *me)
 {
@@ -510,17 +568,23 @@ static inline int create_stub(Elf64_Shdr *sechdrs,
 	loc1 = (Elf64_Half *)&entry->jump[2];
 	loc2 = (Elf64_Half *)&entry->jump[6];
 =======
+=======
+>>>>>>> v3.18
 			      unsigned long addr,
 			      struct module *me)
 {
 	long reladdr;
 
 	memcpy(entry->jump, ppc64_stub_insns, sizeof(ppc64_stub_insns));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Stub uses address relative to r2. */
 	reladdr = (unsigned long)entry - my_r2(sechdrs, me);
 	if (reladdr > 0x7FFFFFFF || reladdr < -(0x80000000L)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk("%s: Address %p of stub out of range of %p.\n",
 		       me->name, (void *)reladdr, (void *)my_r2);
@@ -544,6 +608,8 @@ static unsigned long stub_for_addr(Elf64_Shdr *sechdrs,
 	struct ppc64_stub_entry *stubs;
 	struct ppc64_opd_entry *opd = (void *)opdaddr;
 =======
+=======
+>>>>>>> v3.18
 		pr_err("%s: Address %p of stub out of range of %p.\n",
 		       me->name, (void *)reladdr, (void *)my_r2);
 		return 0;
@@ -563,6 +629,9 @@ static unsigned long stub_for_addr(Elf64_Shdr *sechdrs,
 				   struct module *me)
 {
 	struct ppc64_stub_entry *stubs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int i, num_stubs;
 
@@ -570,6 +639,7 @@ static unsigned long stub_for_addr(Elf64_Shdr *sechdrs,
 
 	/* Find this stub, or if that fails, the next avail. entry */
 	stubs = (void *)sechdrs[me->arch.stubs_section].sh_addr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; stubs[i].opd.funcaddr; i++) {
 		BUG_ON(i >= num_stubs);
@@ -580,6 +650,8 @@ static unsigned long stub_for_addr(Elf64_Shdr *sechdrs,
 
 	if (!create_stub(sechdrs, &stubs[i], opd, me))
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; stub_func_addr(stubs[i].funcdata); i++) {
 		BUG_ON(i >= num_stubs);
 
@@ -588,6 +660,9 @@ static unsigned long stub_for_addr(Elf64_Shdr *sechdrs,
 	}
 
 	if (!create_stub(sechdrs, &stubs[i], addr, me))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -600,18 +675,24 @@ static int restore_r2(u32 *instruction, struct module *me)
 {
 	if (*instruction != PPC_INST_NOP) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("%s: Expect noop after relocate, got %08x\n",
 		       me->name, *instruction);
 		return 0;
 	}
 	*instruction = 0xe8410028;	/* ld r2,40(r1) */
 =======
+=======
+>>>>>>> v3.18
 		pr_err("%s: Expect noop after relocate, got %08x\n",
 		       me->name, *instruction);
 		return 0;
 	}
 	/* ld r2,R2_STACK_OFFSET(r1) */
 	*instruction = 0xe8410000 | R2_STACK_OFFSET;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 1;
 }
@@ -629,9 +710,12 @@ int apply_relocate_add(Elf64_Shdr *sechdrs,
 	unsigned long value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUGP("Applying ADD relocate section %u to %u\n", relsec,
 	       sechdrs[relsec].sh_info);
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("Applying ADD relocate section %u to %u\n", relsec,
 	       sechdrs[relsec].sh_info);
 
@@ -645,6 +729,9 @@ int apply_relocate_add(Elf64_Shdr *sechdrs,
 		me->arch.toc_fixed = true;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < sechdrs[relsec].sh_size / sizeof(*rela); i++) {
 		/* This is where to make the change */
@@ -655,7 +742,11 @@ int apply_relocate_add(Elf64_Shdr *sechdrs,
 			+ ELF64_R_SYM(rela[i].r_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUGP("RELOC at %p: %li-type as %s (%lu) + %li\n",
+=======
+		pr_debug("RELOC at %p: %li-type as %s (0x%lx) + %li\n",
+>>>>>>> v3.18
 =======
 		pr_debug("RELOC at %p: %li-type as %s (0x%lx) + %li\n",
 >>>>>>> v3.18
@@ -686,7 +777,11 @@ int apply_relocate_add(Elf64_Shdr *sechdrs,
 			value -= my_r2(sechdrs, me);
 			if (value + 0x8000 > 0xffff) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("%s: bad TOC16 relocation (%lu)\n",
+=======
+				pr_err("%s: bad TOC16 relocation (0x%lx)\n",
+>>>>>>> v3.18
 =======
 				pr_err("%s: bad TOC16 relocation (0x%lx)\n",
 >>>>>>> v3.18
@@ -711,7 +806,11 @@ int apply_relocate_add(Elf64_Shdr *sechdrs,
 			value -= my_r2(sechdrs, me);
 			if ((value & 3) != 0 || value + 0x8000 > 0xffff) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("%s: bad TOC16_DS relocation (%lu)\n",
+=======
+				pr_err("%s: bad TOC16_DS relocation (0x%lx)\n",
+>>>>>>> v3.18
 =======
 				pr_err("%s: bad TOC16_DS relocation (0x%lx)\n",
 >>>>>>> v3.18
@@ -728,7 +827,11 @@ int apply_relocate_add(Elf64_Shdr *sechdrs,
 			value -= my_r2(sechdrs, me);
 			if ((value & 3) != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("%s: bad TOC16_LO_DS relocation (%lu)\n",
+=======
+				pr_err("%s: bad TOC16_LO_DS relocation (0x%lx)\n",
+>>>>>>> v3.18
 =======
 				pr_err("%s: bad TOC16_LO_DS relocation (0x%lx)\n",
 >>>>>>> v3.18
@@ -759,7 +862,12 @@ int apply_relocate_add(Elf64_Shdr *sechdrs,
 				if (!restore_r2((u32 *)location + 1, me))
 					return -ENOEXEC;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}
+=======
+			} else
+				value += local_entry_offset(sym);
+>>>>>>> v3.18
 =======
 			} else
 				value += local_entry_offset(sym);
@@ -769,7 +877,11 @@ int apply_relocate_add(Elf64_Shdr *sechdrs,
 			value -= (unsigned long)location;
 			if (value + 0x2000000 > 0x3ffffff || (value & 3) != 0){
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("%s: REL24 %li out of range!\n",
+=======
+				pr_err("%s: REL24 %li out of range!\n",
+>>>>>>> v3.18
 =======
 				pr_err("%s: REL24 %li out of range!\n",
 >>>>>>> v3.18
@@ -789,9 +901,12 @@ int apply_relocate_add(Elf64_Shdr *sechdrs,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:
 			printk("%s: Unknown ADD relocation: %lu\n",
 =======
+=======
+>>>>>>> v3.18
 		case R_PPC64_TOCSAVE:
 			/*
 			 * Marker reloc indicates we don't have to save r2.
@@ -819,6 +934,9 @@ int apply_relocate_add(Elf64_Shdr *sechdrs,
 
 		default:
 			pr_err("%s: Unknown ADD relocation: %lu\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			       me->name,
 			       (unsigned long)ELF64_R_TYPE(rela[i].r_info));

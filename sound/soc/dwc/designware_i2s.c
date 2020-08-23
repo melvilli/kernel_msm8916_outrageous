@@ -2,15 +2,21 @@
  * ALSA SoC Synopsys I2S Audio Layer
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * sound/soc/spear/designware_i2s.c
  *
  * Copyright (C) 2010 ST Microelectronics
  * Rajeev Kumar <rajeev-dlh.kumar@st.com>
 =======
+=======
+>>>>>>> v3.18
  * sound/soc/dwc/designware_i2s.c
  *
  * Copyright (C) 2010 ST Microelectronics
  * Rajeev Kumar <rajeevkumar.linux@gmail.com>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This file is licensed under the terms of the GNU General Public
@@ -108,15 +114,21 @@ static inline void i2s_clear_irqs(struct dw_i2s_dev *dev, u32 stream)
 	if (stream == SNDRV_PCM_STREAM_PLAYBACK) {
 		for (i = 0; i < 4; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			i2s_read_reg(dev->i2s_base, TOR(i));
 	} else {
 		for (i = 0; i < 4; i++)
 			i2s_read_reg(dev->i2s_base, ROR(i));
 =======
+=======
+>>>>>>> v3.18
 			i2s_write_reg(dev->i2s_base, TOR(i), 0);
 	} else {
 		for (i = 0; i < 4; i++)
 			i2s_write_reg(dev->i2s_base, ROR(i), 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -278,6 +290,7 @@ static void dw_i2s_shutdown(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dw_i2s_prepare(struct snd_pcm_substream *substream,
 			  struct snd_soc_dai *dai)
 {
@@ -291,6 +304,8 @@ static int dw_i2s_prepare(struct snd_pcm_substream *substream,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int dw_i2s_trigger(struct snd_pcm_substream *substream,
@@ -325,7 +340,10 @@ static struct snd_soc_dai_ops dw_i2s_dai_ops = {
 	.shutdown	= dw_i2s_shutdown,
 	.hw_params	= dw_i2s_hw_params,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.prepare	= dw_i2s_prepare,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.trigger	= dw_i2s_trigger,
@@ -431,7 +449,11 @@ static int dw_i2s_probe(struct platform_device *pdev)
 
 	if (cap & DWC_I2S_PLAY) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&pdev->dev, " SPEAr: play supported\n");
+=======
+		dev_dbg(&pdev->dev, " designware: play supported\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(&pdev->dev, " designware: play supported\n");
 >>>>>>> v3.18
@@ -443,7 +465,11 @@ static int dw_i2s_probe(struct platform_device *pdev)
 
 	if (cap & DWC_I2S_RECORD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&pdev->dev, "SPEAr: record supported\n");
+=======
+		dev_dbg(&pdev->dev, "designware: record supported\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(&pdev->dev, "designware: record supported\n");
 >>>>>>> v3.18
@@ -464,7 +490,11 @@ static int dw_i2s_probe(struct platform_device *pdev)
 	if (ret != 0) {
 		dev_err(&pdev->dev, "not able to register dai\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_set_drvdata;
+=======
+		goto err_clk_disable;
+>>>>>>> v3.18
 =======
 		goto err_clk_disable;
 >>>>>>> v3.18
@@ -473,8 +503,11 @@ static int dw_i2s_probe(struct platform_device *pdev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_set_drvdata:
 	dev_set_drvdata(&pdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_clk_disable:
@@ -490,7 +523,10 @@ static int dw_i2s_remove(struct platform_device *pdev)
 
 	snd_soc_unregister_component(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -511,7 +547,11 @@ static struct platform_driver dw_i2s_driver = {
 module_platform_driver(dw_i2s_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Rajeev Kumar <rajeev-dlh.kumar@st.com>");
+=======
+MODULE_AUTHOR("Rajeev Kumar <rajeevkumar.linux@gmail.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Rajeev Kumar <rajeevkumar.linux@gmail.com>");
 >>>>>>> v3.18

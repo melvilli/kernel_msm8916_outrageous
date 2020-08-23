@@ -96,7 +96,11 @@ struct thread_struct {
 /* Return saved PC of a blocked thread. */
 struct task_struct;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long thread_saved_pc(struct task_struct *);
+=======
+unsigned long thread_saved_pc(struct task_struct *);
+>>>>>>> v3.18
 =======
 unsigned long thread_saved_pc(struct task_struct *);
 >>>>>>> v3.18
@@ -199,7 +203,11 @@ do { \
 #define release_thread(tsk)		do { } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long get_wchan(struct task_struct *task);
+=======
+unsigned long get_wchan(struct task_struct *task);
+>>>>>>> v3.18
 =======
 unsigned long get_wchan(struct task_struct *task);
 >>>>>>> v3.18
@@ -225,6 +233,10 @@ unsigned long get_wchan(struct task_struct *task);
 				     ".previous"			\
 				     ::: "memory")
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency() cpu_relax()
 >>>>>>> v3.18
@@ -266,6 +278,11 @@ static inline void prefetchw(const void *x)
 #define HAVE_ARCH_PICK_MMAP_LAYOUT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int do_mathemu(struct pt_regs *regs, struct fpustate *f, bool illegal_insn_trap);
+
+>>>>>>> v3.18
 =======
 int do_mathemu(struct pt_regs *regs, struct fpustate *f, bool illegal_insn_trap);
 

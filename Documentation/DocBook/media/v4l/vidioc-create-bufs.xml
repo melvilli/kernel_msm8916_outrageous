@@ -63,6 +63,7 @@ control over buffers is required. This ioctl can be called multiple times to
 create buffers of different sizes.</para>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <para>To allocate device buffers applications initialize relevant fields of
 the <structname>v4l2_create_buffers</structname> structure. They set the
 <structfield>type</structfield> field in the
@@ -76,6 +77,8 @@ either the <constant>VIDIOC_TRY_FMT</constant> or
 <structfield>sizeimage</structfield> fields to fit their specific needs. The
 <structfield>reserved</structfield> array must be zeroed.</para>
 =======
+=======
+>>>>>>> v3.18
     <para>To allocate the device buffers applications must initialize the
 relevant fields of the <structname>v4l2_create_buffers</structname> structure.
 The <structfield>count</structfield> field must be set to the number of
@@ -99,6 +102,9 @@ larger, then the value will be used as-is. The same applies to the
 <structfield>sizeimage</structfield> field of the
 <structname>v4l2_plane_pix_format</structname> structure in the case of
 multiplanar formats.</para>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     <para>When the ioctl is called with a pointer to this structure the driver
@@ -171,9 +177,15 @@ mapped</link> I/O.</para>
 	<term><errorcode>EINVAL</errorcode></term>
 	<listitem>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <para>The buffer type (<structfield>type</structfield> field) or the
 requested I/O method (<structfield>memory</structfield>) is not
 supported.</para>
+=======
+	  <para>The buffer type (<structfield>format.type</structfield> field),
+requested I/O method (<structfield>memory</structfield>) or format
+(<structfield>format</structfield> field) is not valid.</para>
+>>>>>>> v3.18
 =======
 	  <para>The buffer type (<structfield>format.type</structfield> field),
 requested I/O method (<structfield>memory</structfield>) or format

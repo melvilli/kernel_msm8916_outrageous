@@ -2,6 +2,10 @@
 #define _AF_NETLINK_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/rhashtable.h>
+>>>>>>> v3.18
 =======
 #include <linux/rhashtable.h>
 >>>>>>> v3.18
@@ -36,6 +40,10 @@ struct netlink_sock {
 	unsigned long		*groups;
 	unsigned long		state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	size_t			max_recvmsg_len;
+>>>>>>> v3.18
 =======
 	size_t			max_recvmsg_len;
 >>>>>>> v3.18
@@ -46,7 +54,12 @@ struct netlink_sock {
 	struct mutex		cb_def_mutex;
 	void			(*netlink_rcv)(struct sk_buff *skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void			(*netlink_bind)(int group);
+=======
+	int			(*netlink_bind)(int group);
+	void			(*netlink_unbind)(int group);
+>>>>>>> v3.18
 =======
 	int			(*netlink_bind)(int group);
 	void			(*netlink_unbind)(int group);
@@ -59,6 +72,11 @@ struct netlink_sock {
 	atomic_t		mapped;
 #endif /* CONFIG_NETLINK_MMAP */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	struct rhash_head	node;
+>>>>>>> v3.18
 =======
 
 	struct rhash_head	node;
@@ -70,6 +88,7 @@ static inline struct netlink_sock *nlk_sk(struct sock *sk)
 	return container_of(sk, struct netlink_sock, sk);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct nl_portid_hash {
 	struct hlist_head	*table;
@@ -90,6 +109,10 @@ struct netlink_table {
 struct netlink_table {
 	struct rhashtable	hash;
 >>>>>>> v3.18
+=======
+struct netlink_table {
+	struct rhashtable	hash;
+>>>>>>> v3.18
 	struct hlist_head	mc_list;
 	struct listeners __rcu	*listeners;
 	unsigned int		flags;
@@ -97,7 +120,13 @@ struct netlink_table {
 	struct mutex		*cb_mutex;
 	struct module		*module;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void			(*bind)(int group);
+=======
+	int			(*bind)(int group);
+	void			(*unbind)(int group);
+	bool			(*compare)(struct net *net, struct sock *sock);
+>>>>>>> v3.18
 =======
 	int			(*bind)(int group);
 	void			(*unbind)(int group);
@@ -109,6 +138,10 @@ struct netlink_table {
 extern struct netlink_table *nl_table;
 extern rwlock_t nl_table_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct mutex nl_sk_hash_lock;
+>>>>>>> v3.18
 =======
 extern struct mutex nl_sk_hash_lock;
 >>>>>>> v3.18

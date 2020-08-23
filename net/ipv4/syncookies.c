@@ -26,6 +26,7 @@
 extern int sysctl_tcp_syncookies;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __u32 syncookie_secret[2][16-4+SHA_DIGEST_WORDS];
 EXPORT_SYMBOL(syncookie_secret);
 
@@ -35,6 +36,9 @@ static __init int init_syncookies(void)
 	return 0;
 }
 __initcall(init_syncookies);
+=======
+static u32 syncookie_secret[2][16-4+SHA_DIGEST_WORDS] __read_mostly;
+>>>>>>> v3.18
 =======
 static u32 syncookie_secret[2][16-4+SHA_DIGEST_WORDS] __read_mostly;
 >>>>>>> v3.18
@@ -49,14 +53,20 @@ static u32 cookie_hash(__be32 saddr, __be32 daddr, __be16 sport, __be16 dport,
 		       u32 count, int c)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 *tmp = __get_cpu_var(ipv4_cookie_scratch);
 
 =======
+=======
+>>>>>>> v3.18
 	__u32 *tmp;
 
 	net_get_random_once(syncookie_secret, sizeof(syncookie_secret));
 
 	tmp  = this_cpu_ptr(ipv4_cookie_scratch);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memcpy(tmp + 4, syncookie_secret[c], sizeof(syncookie_secret[c]));
 	tmp[0] = (__force u32)saddr;
@@ -102,8 +112,12 @@ __u32 cookie_init_timestamp(struct request_sock *req)
 
 static __u32 secure_tcp_syn_cookie(__be32 saddr, __be32 daddr, __be16 sport,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   __be16 dport, __u32 sseq, __u32 count,
 				   __u32 data)
+=======
+				   __be16 dport, __u32 sseq, __u32 data)
+>>>>>>> v3.18
 =======
 				   __be16 dport, __u32 sseq, __u32 data)
 >>>>>>> v3.18
@@ -119,7 +133,11 @@ static __u32 secure_tcp_syn_cookie(__be32 saddr, __be32 daddr, __be16 sport,
 	 * MSS into the second hash value.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	u32 count = tcp_cookie_time();
+>>>>>>> v3.18
 =======
 	u32 count = tcp_cookie_time();
 >>>>>>> v3.18
@@ -135,6 +153,7 @@ static __u32 secure_tcp_syn_cookie(__be32 saddr, __be32 daddr, __be16 sport,
  * range.  This must be checked by the caller.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The count value used to generate the cookie must be within
  * "maxdiff" if the current (passed-in) "count".  The return value
  * is (__u32)-1 if this test fails.
@@ -145,6 +164,8 @@ static __u32 check_tcp_syn_cookie(__u32 cookie, __be32 saddr, __be32 daddr,
 {
 	__u32 diff;
 =======
+=======
+>>>>>>> v3.18
  * The count value used to generate the cookie must be less than
  * MAX_SYNCOOKIE_AGE minutes in the past.
  * The return value (__u32)-1 if this test fails.
@@ -153,6 +174,9 @@ static __u32 check_tcp_syn_cookie(__u32 cookie, __be32 saddr, __be32 daddr,
 				  __be16 sport, __be16 dport, __u32 sseq)
 {
 	u32 diff, count = tcp_cookie_time();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Strip away the layers from the cookie */
@@ -160,8 +184,13 @@ static __u32 check_tcp_syn_cookie(__u32 cookie, __be32 saddr, __be32 daddr,
 
 	/* Cookie is now reduced to (count * 2^24) ^ (hash % 2^24) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	diff = (count - (cookie >> COOKIEBITS)) & ((__u32) - 1 >> COOKIEBITS);
 	if (diff >= maxdiff)
+=======
+	diff = (count - (cookie >> COOKIEBITS)) & ((__u32) -1 >> COOKIEBITS);
+	if (diff >= MAX_SYNCOOKIE_AGE)
+>>>>>>> v3.18
 =======
 	diff = (count - (cookie >> COOKIEBITS)) & ((__u32) -1 >> COOKIEBITS);
 	if (diff >= MAX_SYNCOOKIE_AGE)
@@ -174,6 +203,7 @@ static __u32 check_tcp_syn_cookie(__u32 cookie, __be32 saddr, __be32 daddr,
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * MSS Values are taken from the 2009 paper
  * 'Measuring TCP Maximum Segment Size' by S. Alcock and R. Nelson:
@@ -192,6 +222,8 @@ static __u16 const msstab[] = {
 	4312,
 	8960,
 =======
+=======
+>>>>>>> v3.18
  * MSS Values are chosen based on the 2011 paper
  * 'An Analysis of TCP Maximum Segement Sizes' by S. Alcock and R. Nelson.
  * Values ..
@@ -208,6 +240,9 @@ static __u16 const msstab[] = {
 	1300,
 	1440,	/* 1440, 1452: PPPoE */
 	1460,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -215,6 +250,7 @@ static __u16 const msstab[] = {
  * Generate a syncookie.  mssp points to the mss, which is returned
  * rounded down to the value encoded in the cookie.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 __u32 cookie_v4_init_sequence(struct sock *sk, struct sk_buff *skb, __u16 *mssp)
 {
@@ -226,18 +262,24 @@ __u32 cookie_v4_init_sequence(struct sock *sk, struct sk_buff *skb, __u16 *mssp)
 	tcp_synq_overflow(sk);
 
 =======
+=======
+>>>>>>> v3.18
 u32 __cookie_v4_init_sequence(const struct iphdr *iph, const struct tcphdr *th,
 			      u16 *mssp)
 {
 	int mssind;
 	const __u16 mss = *mssp;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (mssind = ARRAY_SIZE(msstab) - 1; mssind ; mssind--)
 		if (mss >= msstab[mssind])
 			break;
 	*mssp = msstab[mssind];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	NET_INC_STATS_BH(sock_net(sk), LINUX_MIB_SYNCOOKIESSENT);
 
@@ -254,6 +296,8 @@ u32 __cookie_v4_init_sequence(const struct iphdr *iph, const struct tcphdr *th,
  */
 #define COUNTER_TRIES 4
 =======
+=======
+>>>>>>> v3.18
 	return secure_tcp_syn_cookie(iph->saddr, iph->daddr,
 				     th->source, th->dest, ntohl(th->seq),
 				     mssind);
@@ -272,11 +316,15 @@ __u32 cookie_v4_init_sequence(struct sock *sk, const struct sk_buff *skb,
 	return __cookie_v4_init_sequence(iph, th, mssp);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Check if a ack sequence number is a valid syncookie.
  * Return the decoded mss if it is, or 0 if not.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline int cookie_check(struct sk_buff *skb, __u32 cookie)
 {
@@ -291,6 +339,8 @@ static inline int cookie_check(struct sk_buff *skb, __u32 cookie)
 	return mssind < ARRAY_SIZE(msstab) ? msstab[mssind] : 0;
 }
 =======
+=======
+>>>>>>> v3.18
 int __cookie_v4_check(const struct iphdr *iph, const struct tcphdr *th,
 		      u32 cookie)
 {
@@ -301,6 +351,9 @@ int __cookie_v4_check(const struct iphdr *iph, const struct tcphdr *th,
 	return mssind < ARRAY_SIZE(msstab) ? msstab[mssind] : 0;
 }
 EXPORT_SYMBOL_GPL(__cookie_v4_check);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct sock *get_cookie_sock(struct sock *sk, struct sk_buff *skb,
@@ -362,9 +415,15 @@ bool cookie_check_timestamp(struct tcp_options_received *tcp_opt,
 EXPORT_SYMBOL(cookie_check_timestamp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct sock *cookie_v4_check(struct sock *sk, struct sk_buff *skb,
 			     struct ip_options *opt)
 {
+=======
+struct sock *cookie_v4_check(struct sock *sk, struct sk_buff *skb)
+{
+	struct ip_options *opt = &TCP_SKB_CB(skb)->header.h4.opt;
+>>>>>>> v3.18
 =======
 struct sock *cookie_v4_check(struct sock *sk, struct sk_buff *skb)
 {
@@ -389,7 +448,11 @@ struct sock *cookie_v4_check(struct sock *sk, struct sk_buff *skb)
 
 	if (tcp_synq_no_recent_overflow(sk) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (mss = cookie_check(skb, cookie)) == 0) {
+=======
+	    (mss = __cookie_v4_check(ip_hdr(skb), th, cookie)) == 0) {
+>>>>>>> v3.18
 =======
 	    (mss = __cookie_v4_check(ip_hdr(skb), th, cookie)) == 0) {
 >>>>>>> v3.18
@@ -417,15 +480,21 @@ struct sock *cookie_v4_check(struct sock *sk, struct sk_buff *skb)
 	treq->snt_isn		= cookie;
 	req->mss		= mss;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ireq->loc_port		= th->dest;
 	ireq->rmt_port		= th->source;
 	ireq->loc_addr		= ip_hdr(skb)->daddr;
 	ireq->rmt_addr		= ip_hdr(skb)->saddr;
 =======
+=======
+>>>>>>> v3.18
 	ireq->ir_num		= ntohs(th->dest);
 	ireq->ir_rmt_port	= th->source;
 	ireq->ir_loc_addr	= ip_hdr(skb)->daddr;
 	ireq->ir_rmt_addr	= ip_hdr(skb)->saddr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ireq->ir_mark		= inet_request_mark(sk, skb);
 	ireq->ecn_ok		= ecn_ok;
@@ -441,6 +510,7 @@ struct sock *cookie_v4_check(struct sock *sk, struct sk_buff *skb)
 	 * the ACK carries the same options again (see RFC1122 4.2.3.8)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (opt && opt->optlen) {
 		int opt_size = sizeof(struct ip_options_rcu) + opt->optlen;
 
@@ -450,6 +520,9 @@ struct sock *cookie_v4_check(struct sock *sk, struct sk_buff *skb)
 			ireq->opt = NULL;
 		}
 	}
+=======
+	ireq->opt = tcp_v4_save_options(skb);
+>>>>>>> v3.18
 =======
 	ireq->opt = tcp_v4_save_options(skb);
 >>>>>>> v3.18
@@ -472,9 +545,14 @@ struct sock *cookie_v4_check(struct sock *sk, struct sk_buff *skb)
 			   RT_CONN_FLAGS(sk), RT_SCOPE_UNIVERSE, IPPROTO_TCP,
 			   inet_sk_flowi_flags(sk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   (opt && opt->srr) ? opt->faddr : ireq->rmt_addr,
 			   ireq->loc_addr, th->source, th->dest,
 			   sock_i_uid(sk));
+=======
+			   opt->srr ? opt->faddr : ireq->ir_rmt_addr,
+			   ireq->ir_loc_addr, th->source, th->dest);
+>>>>>>> v3.18
 =======
 			   opt->srr ? opt->faddr : ireq->ir_rmt_addr,
 			   ireq->ir_loc_addr, th->source, th->dest);

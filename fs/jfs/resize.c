@@ -531,7 +531,11 @@ int jfs_extendfs(struct super_block *sb, s64 newLVSize, int newLogSize)
 
       error_out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jfs_error(sb, "jfs_extendfs");
+=======
+	jfs_error(sb, "\n");
+>>>>>>> v3.18
 =======
 	jfs_error(sb, "\n");
 >>>>>>> v3.18

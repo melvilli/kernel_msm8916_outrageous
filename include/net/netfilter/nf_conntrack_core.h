@@ -21,6 +21,7 @@
    standalone connection tracking module, and the compatibility layer's use
    of connection tracking. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int nf_conntrack_in(struct net *net,
 				    u_int8_t pf,
 				    unsigned int hooknum,
@@ -65,6 +66,8 @@ nf_conntrack_find_get(struct net *net, u16 zone,
 
 extern int __nf_conntrack_confirm(struct sk_buff *skb);
 =======
+=======
+>>>>>>> v3.18
 unsigned int nf_conntrack_in(struct net *net, u_int8_t pf, unsigned int hooknum,
 			     struct sk_buff *skb);
 
@@ -101,6 +104,9 @@ nf_conntrack_find_get(struct net *net, u16 zone,
 		      const struct nf_conntrack_tuple *tuple);
 
 int __nf_conntrack_confirm(struct sk_buff *skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Confirm a connection: returns NF_DROP if packet must be dropped. */
@@ -124,8 +130,11 @@ print_tuple(struct seq_file *s, const struct nf_conntrack_tuple *tuple,
             const struct nf_conntrack_l4proto *proto);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern spinlock_t nf_conntrack_lock ;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_LOCKDEP
 # define CONNTRACK_LOCKS 8
 #else
@@ -134,6 +143,9 @@ extern spinlock_t nf_conntrack_lock ;
 extern spinlock_t nf_conntrack_locks[CONNTRACK_LOCKS];
 
 extern spinlock_t nf_conntrack_expect_lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _NF_CONNTRACK_CORE_H */

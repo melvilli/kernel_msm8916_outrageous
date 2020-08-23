@@ -27,9 +27,15 @@
 #include <asm/mvme147hw.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* We have 16834 bytes of RAM for the init block and buffers. This places
  * an upper limit on the number of buffers we can use. NetBSD uses 8 Rx
  * buffers and 2 Tx buffers.
+=======
+/* We have 32K of RAM for the init block and buffers. This places
+ * an upper limit on the number of buffers we can use. NetBSD uses 8 Rx
+ * buffers and 2 Tx buffers, it takes (8 + 2) * 1544 bytes.
+>>>>>>> v3.18
 =======
 /* We have 32K of RAM for the init block and buffers. This places
  * an upper limit on the number of buffers we can use. NetBSD uses 8 Rx
@@ -101,6 +107,7 @@ struct net_device * __init mvme147lance_probe(int unit)
 	dev->dma = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr=(u_long *)ETHERNET_ADDRESS;
 	address = *addr;
 	dev->dev_addr[0]=0x08;
@@ -116,6 +123,8 @@ struct net_device * __init mvme147lance_probe(int unit)
 	printk("%s: MVME147 at 0x%08lx, irq %d, "
 	       "Hardware Address %pM\n",
 =======
+=======
+>>>>>>> v3.18
 	addr = (u_long *)ETHERNET_ADDRESS;
 	address = *addr;
 	dev->dev_addr[0] = 0x08;
@@ -129,15 +138,23 @@ struct net_device * __init mvme147lance_probe(int unit)
 	dev->dev_addr[3] = address&0xff;
 
 	printk("%s: MVME147 at 0x%08lx, irq %d, Hardware Address %pM\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	       dev->name, dev->base_addr, MVME147_LANCE_IRQ,
 	       dev->dev_addr);
 
 	lp = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp->ram = __get_dma_pages(GFP_ATOMIC, 3);	/* 16K */
 	if (!lp->ram)
 	{
+=======
+	lp->ram = __get_dma_pages(GFP_ATOMIC, 3);	/* 32K */
+	if (!lp->ram) {
+>>>>>>> v3.18
 =======
 	lp->ram = __get_dma_pages(GFP_ATOMIC, 3);	/* 32K */
 	if (!lp->ram) {
@@ -148,7 +165,11 @@ struct net_device * __init mvme147lance_probe(int unit)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp->lance.name = (char*)name;                   /* discards const, shut up gcc */
+=======
+	lp->lance.name = name;
+>>>>>>> v3.18
 =======
 	lp->lance.name = name;
 >>>>>>> v3.18
@@ -199,8 +220,13 @@ static int m147lance_open(struct net_device *dev)
 		return status;
 	/* enable interrupts at board level. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	m147_pcc->lan_cntrl=0;       /* clear the interrupts (if any) */
 	m147_pcc->lan_cntrl=0x08 | 0x04;     /* Enable irq 4 */
+=======
+	m147_pcc->lan_cntrl = 0;       /* clear the interrupts (if any) */
+	m147_pcc->lan_cntrl = 0x08 | 0x04;     /* Enable irq 4 */
+>>>>>>> v3.18
 =======
 	m147_pcc->lan_cntrl = 0;       /* clear the interrupts (if any) */
 	m147_pcc->lan_cntrl = 0x08 | 0x04;     /* Enable irq 4 */
@@ -213,7 +239,11 @@ static int m147lance_close(struct net_device *dev)
 {
 	/* disable interrupts at boardlevel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	m147_pcc->lan_cntrl=0x0; /* disable interrupts */
+=======
+	m147_pcc->lan_cntrl = 0x0; /* disable interrupts */
+>>>>>>> v3.18
 =======
 	m147_pcc->lan_cntrl = 0x0; /* disable interrupts */
 >>>>>>> v3.18
@@ -229,7 +259,11 @@ int __init init_module(void)
 {
 	dev_mvme147_lance = mvme147lance_probe(-1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(dev_mvme147_lance);
+=======
+	return PTR_ERR_OR_ZERO(dev_mvme147_lance);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(dev_mvme147_lance);
 >>>>>>> v3.18

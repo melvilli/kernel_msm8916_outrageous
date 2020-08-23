@@ -103,6 +103,7 @@ EXPORT_SYMBOL(mcount);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 HAVE_FUNCTION_TRACE_MCOUNT_TEST
 -------------------------------
 
@@ -127,6 +128,8 @@ void mcount(void)
 ...
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 HAVE_FUNCTION_GRAPH_TRACER
@@ -332,8 +335,11 @@ void mcount(void)
 void ftrace_caller(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* implement HAVE_FUNCTION_TRACE_MCOUNT_TEST if you desire */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* save all state needed by the ABI (see paragraph above) */
@@ -365,11 +371,16 @@ to initialize some state, this is the time to do that.  Otherwise, this simple
 function below should be sufficient for most people:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init ftrace_dyn_arch_init(void *data)
 {
 	/* return value is done indirectly via data */
 	*(unsigned long *)data = 0;
 
+=======
+int __init ftrace_dyn_arch_init(void)
+{
+>>>>>>> v3.18
 =======
 int __init ftrace_dyn_arch_init(void)
 {

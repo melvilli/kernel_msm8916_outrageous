@@ -1,6 +1,10 @@
 /*************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
 * 	Queue.h
+=======
+* Queue.h
+>>>>>>> v3.18
 =======
 * Queue.h
 >>>>>>> v3.18
@@ -10,6 +14,7 @@
 
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define ENQUEUEPACKET(_Head, _Tail,_Packet)	\
 do						\
@@ -35,6 +40,8 @@ do						\
 }while(0)
 #endif	//__QUEUE_H__
 =======
+=======
+>>>>>>> v3.18
 #define ENQUEUEPACKET(_Head, _Tail, _Packet)	\
 do {						\
 	if (!_Head) {				\
@@ -56,4 +63,7 @@ do {						\
 	}					\
 } while (0)
 #endif /* __QUEUE_H__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

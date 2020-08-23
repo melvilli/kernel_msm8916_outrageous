@@ -45,7 +45,10 @@ struct regmap_format {
 struct regmap_async {
 	struct list_head list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct cleanup;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct regmap *map;
@@ -54,14 +57,20 @@ struct regmap_async {
 
 struct regmap {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex mutex;
 	spinlock_t spinlock;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct mutex mutex;
 		spinlock_t spinlock;
 	};
 	unsigned long spinlock_flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	regmap_lock lock;
 	regmap_unlock unlock;
@@ -75,15 +84,21 @@ struct regmap {
 	const char *name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t async_lock;
 	wait_queue_head_t async_waitq;
 	struct list_head async_list;
 =======
+=======
+>>>>>>> v3.18
 	bool async;
 	spinlock_t async_lock;
 	wait_queue_head_t async_waitq;
 	struct list_head async_list;
 	struct list_head async_free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int async_ret;
 
@@ -147,9 +162,12 @@ struct regmap {
 	u32 cache_dirty;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *cache_present;
 	unsigned int cache_present_nbits;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct reg_default *patch;
@@ -160,6 +178,10 @@ struct regmap {
 	/* if set, the device supports multi write mode */
 	bool can_multi_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -173,10 +195,13 @@ struct regcache_ops {
 	int (*init)(struct regmap *map);
 	int (*exit)(struct regmap *map);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*read)(struct regmap *map, unsigned int reg, unsigned int *value);
 	int (*write)(struct regmap *map, unsigned int reg, unsigned int value);
 	int (*sync)(struct regmap *map, unsigned int min, unsigned int max);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 	void (*debugfs_init)(struct regmap *map);
 #endif
@@ -184,6 +209,9 @@ struct regcache_ops {
 	int (*write)(struct regmap *map, unsigned int reg, unsigned int value);
 	int (*sync)(struct regmap *map, unsigned int min, unsigned int max);
 	int (*drop)(struct regmap *map, unsigned int min, unsigned int max);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -212,7 +240,10 @@ struct regmap_range_node {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct regmap_field {
 	struct regmap *regmap;
 	unsigned int mask;
@@ -224,6 +255,9 @@ struct regmap_field {
 	unsigned int id_offset;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_DEBUG_FS
 extern void regmap_debugfs_initcall(void);
@@ -245,6 +279,10 @@ int regcache_write(struct regmap *map,
 int regcache_sync(struct regmap *map);
 int regcache_sync_block(struct regmap *map, void *block,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			unsigned long *cache_present,
+>>>>>>> v3.18
 =======
 			unsigned long *cache_present,
 >>>>>>> v3.18
@@ -264,6 +302,7 @@ bool regcache_set_val(struct regmap *map, void *base, unsigned int idx,
 		      unsigned int val);
 int regcache_lookup_reg(struct regmap *map, unsigned int reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int regcache_set_reg_present(struct regmap *map, unsigned int reg);
 
 static inline bool regcache_reg_present(struct regmap *map, unsigned int reg)
@@ -281,6 +320,11 @@ int _regmap_raw_write(struct regmap *map, unsigned int reg,
 int _regmap_raw_multi_reg_write(struct regmap *map,
 				const struct reg_default *regs,
 				size_t num_regs);
+=======
+
+int _regmap_raw_write(struct regmap *map, unsigned int reg,
+		      const void *val, size_t val_len);
+>>>>>>> v3.18
 =======
 
 int _regmap_raw_write(struct regmap *map, unsigned int reg,

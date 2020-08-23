@@ -9,8 +9,13 @@
 
 struct test_node {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rb_node rb;
 	u32 key;
+=======
+	u32 key;
+	struct rb_node rb;
+>>>>>>> v3.18
 =======
 	u32 key;
 	struct rb_node rb;
@@ -120,7 +125,10 @@ static int black_path_count(struct rb_node *rb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void check_postorder_foreach(int nr_nodes)
 {
 	struct test_node *cur, *n;
@@ -141,6 +149,9 @@ static void check_postorder(int nr_nodes)
 	WARN_ON_ONCE(count != nr_nodes);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void check(int nr_nodes)
 {
@@ -165,6 +176,12 @@ static void check(int nr_nodes)
 	WARN_ON_ONCE(count != nr_nodes);
 	WARN_ON_ONCE(count < (1 << black_path_count(rb_last(&root))) - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	check_postorder(nr_nodes);
+	check_postorder_foreach(nr_nodes);
+>>>>>>> v3.18
 =======
 
 	check_postorder(nr_nodes);

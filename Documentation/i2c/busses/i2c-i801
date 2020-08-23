@@ -26,13 +26,19 @@ Supported adapters:
   * Intel Wellsburg (PCH)
   * Intel Coleto Creek (PCH)
 <<<<<<< HEAD
+<<<<<<< HEAD
   * Intel Wildcat Point-LP (PCH)
   * Intel BayTrail (SOC)
 =======
+=======
+>>>>>>> v3.18
   * Intel Wildcat Point (PCH)
   * Intel Wildcat Point-LP (PCH)
   * Intel BayTrail (SOC)
   * Intel Sunrise Point-H (PCH)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
    Datasheets: Publicly available at the Intel website
 
@@ -42,7 +48,11 @@ and the additional 'Integrated Device Function' controllers are supported.
 Authors: 
 	Mark Studebaker <mdsxyz123@yahoo.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Jean Delvare <khali@linux-fr.org>
+=======
+	Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
 	Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

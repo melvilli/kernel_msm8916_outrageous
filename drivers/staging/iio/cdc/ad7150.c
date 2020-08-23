@@ -124,7 +124,13 @@ static int ad7150_read_raw(struct iio_dev *indio_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ad7150_read_event_config(struct iio_dev *indio_dev, u64 event_code)
+=======
+static int ad7150_read_event_config(struct iio_dev *indio_dev,
+	const struct iio_chan_spec *chan, enum iio_event_type type,
+	enum iio_event_direction dir)
+>>>>>>> v3.18
 =======
 static int ad7150_read_event_config(struct iio_dev *indio_dev,
 	const struct iio_chan_spec *chan, enum iio_event_type type,
@@ -136,8 +142,11 @@ static int ad7150_read_event_config(struct iio_dev *indio_dev,
 	bool adaptive;
 	struct ad7150_chip_info *chip = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rising = !!(IIO_EVENT_CODE_EXTRACT_DIR(event_code) ==
 			IIO_EV_DIR_RISING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -148,6 +157,7 @@ static int ad7150_read_event_config(struct iio_dev *indio_dev,
 	threshtype = (ret >> 5) & 0x03;
 	adaptive = !!(ret & 0x80);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (IIO_EVENT_CODE_EXTRACT_TYPE(event_code)) {
 	case IIO_EV_TYPE_MAG_ADAPTIVE:
@@ -167,6 +177,8 @@ static int ad7150_read_event_config(struct iio_dev *indio_dev,
 		else
 			return !adaptive && (threshtype == 0x0);
 =======
+=======
+>>>>>>> v3.18
 	switch (type) {
 	case IIO_EV_TYPE_MAG_ADAPTIVE:
 		if (dir == IIO_EV_DIR_RISING)
@@ -182,6 +194,9 @@ static int ad7150_read_event_config(struct iio_dev *indio_dev,
 		return !adaptive && (threshtype == 0x0);
 	default:
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return -EINVAL;
@@ -189,7 +204,13 @@ static int ad7150_read_event_config(struct iio_dev *indio_dev,
 
 /* lock should be held */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ad7150_write_event_params(struct iio_dev *indio_dev, u64 event_code)
+=======
+static int ad7150_write_event_params(struct iio_dev *indio_dev,
+	 unsigned int chan, enum iio_event_type type,
+	 enum iio_event_direction dir)
+>>>>>>> v3.18
 =======
 static int ad7150_write_event_params(struct iio_dev *indio_dev,
 	 unsigned int chan, enum iio_event_type type,
@@ -201,21 +222,31 @@ static int ad7150_write_event_params(struct iio_dev *indio_dev,
 	u8 sens, timeout;
 	struct ad7150_chip_info *chip = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int chan = IIO_EVENT_CODE_EXTRACT_CHAN(event_code);
 	int rising = !!(IIO_EVENT_CODE_EXTRACT_DIR(event_code) ==
 			IIO_EV_DIR_RISING);
 =======
+=======
+>>>>>>> v3.18
 	int rising = (dir == IIO_EV_DIR_RISING);
 	u64 event_code;
 
 	event_code = IIO_UNMOD_EVENT_CODE(IIO_CAPACITANCE, chan, type, dir);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (event_code != chip->current_event)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (IIO_EVENT_CODE_EXTRACT_TYPE(event_code)) {
+=======
+	switch (type) {
+>>>>>>> v3.18
 =======
 	switch (type) {
 >>>>>>> v3.18
@@ -256,7 +287,12 @@ static int ad7150_write_event_params(struct iio_dev *indio_dev,
 
 static int ad7150_write_event_config(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     u64 event_code, int state)
+=======
+	const struct iio_chan_spec *chan, enum iio_event_type type,
+	enum iio_event_direction dir, int state)
+>>>>>>> v3.18
 =======
 	const struct iio_chan_spec *chan, enum iio_event_type type,
 	enum iio_event_direction dir, int state)
@@ -266,8 +302,13 @@ static int ad7150_write_event_config(struct iio_dev *indio_dev,
 	int ret;
 	struct ad7150_chip_info *chip = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rising = !!(IIO_EVENT_CODE_EXTRACT_DIR(event_code) ==
 			IIO_EV_DIR_RISING);
+=======
+	int rising = (dir == IIO_EV_DIR_RISING);
+	u64 event_code;
+>>>>>>> v3.18
 =======
 	int rising = (dir == IIO_EV_DIR_RISING);
 	u64 event_code;
@@ -278,6 +319,10 @@ static int ad7150_write_event_config(struct iio_dev *indio_dev,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	event_code = IIO_UNMOD_EVENT_CODE(chan->type, chan->channel, type, dir);
+>>>>>>> v3.18
 =======
 	event_code = IIO_UNMOD_EVENT_CODE(chan->type, chan->channel, type, dir);
 >>>>>>> v3.18
@@ -291,7 +336,11 @@ static int ad7150_write_event_config(struct iio_dev *indio_dev,
 	cfg = ret & ~((0x03 << 5) | (0x1 << 7));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (IIO_EVENT_CODE_EXTRACT_TYPE(event_code)) {
+=======
+	switch (type) {
+>>>>>>> v3.18
 =======
 	switch (type) {
 >>>>>>> v3.18
@@ -331,7 +380,11 @@ static int ad7150_write_event_config(struct iio_dev *indio_dev,
 
 	/* update control attributes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ad7150_write_event_params(indio_dev, event_code);
+=======
+	ret = ad7150_write_event_params(indio_dev, chan->channel, type, dir);
+>>>>>>> v3.18
 =======
 	ret = ad7150_write_event_params(indio_dev, chan->channel, type, dir);
 >>>>>>> v3.18
@@ -342,6 +395,7 @@ error_ret:
 }
 
 static int ad7150_read_event_value(struct iio_dev *indio_dev,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				   u64 event_code,
 				   int *val)
@@ -391,6 +445,8 @@ static int ad7150_write_event_value(struct iio_dev *indio_dev,
 	case IIO_EV_TYPE_THRESH:
 		chip->threshold[rising][chan] = val;
 =======
+=======
+>>>>>>> v3.18
 				   const struct iio_chan_spec *chan,
 				   enum iio_event_type type,
 				   enum iio_event_direction dir,
@@ -437,6 +493,9 @@ static int ad7150_write_event_value(struct iio_dev *indio_dev,
 		break;
 	case IIO_EV_TYPE_THRESH:
 		chip->threshold[rising][chan->channel] = val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -446,7 +505,11 @@ static int ad7150_write_event_value(struct iio_dev *indio_dev,
 
 	/* write back if active */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ad7150_write_event_params(indio_dev, event_code);
+=======
+	ret = ad7150_write_event_params(indio_dev, chan->channel, type, dir);
+>>>>>>> v3.18
 =======
 	ret = ad7150_write_event_params(indio_dev, chan->channel, type, dir);
 >>>>>>> v3.18
@@ -494,12 +557,15 @@ static ssize_t ad7150_store_timeout(struct device *dev,
 	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
 	int chan = IIO_EVENT_CODE_EXTRACT_CHAN(this_attr->address);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rising = !!(IIO_EVENT_CODE_EXTRACT_DIR(this_attr->address) ==
 			IIO_EV_DIR_RISING);
 	u8 data;
 	int ret;
 
 =======
+=======
+>>>>>>> v3.18
 	enum iio_event_direction dir;
 	enum iio_event_type type;
 	int rising;
@@ -510,6 +576,9 @@ static ssize_t ad7150_store_timeout(struct device *dev,
 	dir = IIO_EVENT_CODE_EXTRACT_DIR(this_attr->address);
 	rising = (dir == IIO_EV_DIR_RISING);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = kstrtou8(buf, 10, &data);
 	if (ret < 0)
@@ -517,7 +586,11 @@ static ssize_t ad7150_store_timeout(struct device *dev,
 
 	mutex_lock(&chip->state_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (IIO_EVENT_CODE_EXTRACT_TYPE(this_attr->address)) {
+=======
+	switch (type) {
+>>>>>>> v3.18
 =======
 	switch (type) {
 >>>>>>> v3.18
@@ -533,7 +606,11 @@ static ssize_t ad7150_store_timeout(struct device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ad7150_write_event_params(indio_dev, this_attr->address);
+=======
+	ret = ad7150_write_event_params(indio_dev, chan, type, dir);
+>>>>>>> v3.18
 =======
 	ret = ad7150_write_event_params(indio_dev, chan, type, dir);
 >>>>>>> v3.18
@@ -565,7 +642,10 @@ static AD7150_TIMEOUT(1, thresh_adaptive, rising, THRESH_ADAPTIVE, RISING);
 static AD7150_TIMEOUT(1, thresh_adaptive, falling, THRESH_ADAPTIVE, FALLING);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct iio_event_spec ad7150_events[] = {
 	{
 		.type = IIO_EV_TYPE_THRESH,
@@ -600,6 +680,9 @@ static const struct iio_event_spec ad7150_events[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct iio_chan_spec ad7150_channels[] = {
 	{
@@ -608,6 +691,7 @@ static const struct iio_chan_spec ad7150_channels[] = {
 		.channel = 0,
 		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) |
 		BIT(IIO_CHAN_INFO_AVERAGE_RAW),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.event_mask =
 		IIO_EV_BIT(IIO_EV_TYPE_THRESH, IIO_EV_DIR_RISING) |
@@ -620,12 +704,17 @@ static const struct iio_chan_spec ad7150_channels[] = {
 		.event_spec = ad7150_events,
 		.num_event_specs = ARRAY_SIZE(ad7150_events),
 >>>>>>> v3.18
+=======
+		.event_spec = ad7150_events,
+		.num_event_specs = ARRAY_SIZE(ad7150_events),
+>>>>>>> v3.18
 	}, {
 		.type = IIO_CAPACITANCE,
 		.indexed = 1,
 		.channel = 1,
 		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) |
 		BIT(IIO_CHAN_INFO_AVERAGE_RAW),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.event_mask =
 		IIO_EV_BIT(IIO_EV_TYPE_THRESH, IIO_EV_DIR_RISING) |
@@ -634,6 +723,10 @@ static const struct iio_chan_spec ad7150_channels[] = {
 		IIO_EV_BIT(IIO_EV_TYPE_THRESH_ADAPTIVE, IIO_EV_DIR_FALLING) |
 		IIO_EV_BIT(IIO_EV_TYPE_MAG_ADAPTIVE, IIO_EV_DIR_RISING) |
 		IIO_EV_BIT(IIO_EV_TYPE_MAG_ADAPTIVE, IIO_EV_DIR_FALLING)
+=======
+		.event_spec = ad7150_events,
+		.num_event_specs = ARRAY_SIZE(ad7150_events),
+>>>>>>> v3.18
 =======
 		.event_spec = ad7150_events,
 		.num_event_specs = ARRAY_SIZE(ad7150_events),
@@ -746,11 +839,17 @@ static int ad7150_probe(struct i2c_client *client,
 	struct iio_dev *indio_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*chip));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*chip));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*chip));
 	if (!indio_dev)
@@ -775,7 +874,11 @@ static int ad7150_probe(struct i2c_client *client,
 
 	if (client->irq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = request_threaded_irq(client->irq,
+=======
+		ret = devm_request_threaded_irq(&client->dev, client->irq,
+>>>>>>> v3.18
 =======
 		ret = devm_request_threaded_irq(&client->dev, client->irq,
 >>>>>>> v3.18
@@ -788,17 +891,23 @@ static int ad7150_probe(struct i2c_client *client,
 					   indio_dev);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto error_free_dev;
 	}
 
 	if (client->dev.platform_data) {
 		ret = request_threaded_irq(*(unsigned int *)
 =======
+=======
+>>>>>>> v3.18
 			return ret;
 	}
 
 	if (client->dev.platform_data) {
 		ret = devm_request_threaded_irq(&client->dev, *(unsigned int *)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					   client->dev.platform_data,
 					   NULL,
@@ -810,7 +919,11 @@ static int ad7150_probe(struct i2c_client *client,
 					   indio_dev);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto error_free_irq;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -819,7 +932,11 @@ static int ad7150_probe(struct i2c_client *client,
 	ret = iio_device_register(indio_dev);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_irq2;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -828,6 +945,7 @@ static int ad7150_probe(struct i2c_client *client,
 		 id->name, client->irq);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 error_free_irq2:
 	if (client->dev.platform_data)
@@ -842,6 +960,8 @@ error_ret:
 	return ret;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int ad7150_remove(struct i2c_client *client)
@@ -850,6 +970,7 @@ static int ad7150_remove(struct i2c_client *client)
 
 	iio_device_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (client->irq)
 		free_irq(client->irq, indio_dev);
 
@@ -857,6 +978,8 @@ static int ad7150_remove(struct i2c_client *client)
 		free_irq(*(unsigned int *)client->dev.platform_data, indio_dev);
 
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

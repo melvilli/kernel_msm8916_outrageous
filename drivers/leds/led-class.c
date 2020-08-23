@@ -10,6 +10,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/init.h>
@@ -34,6 +35,8 @@ static void led_update_brightness(struct led_classdev *led_cdev)
 
 static ssize_t led_brightness_show(struct device *dev,
 =======
+=======
+>>>>>>> v3.18
 #include <linux/ctype.h>
 #include <linux/device.h>
 #include <linux/err.h>
@@ -50,6 +53,9 @@ static ssize_t led_brightness_show(struct device *dev,
 static struct class *leds_class;
 
 static ssize_t brightness_show(struct device *dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct device_attribute *attr, char *buf)
 {
@@ -59,15 +65,21 @@ static ssize_t brightness_show(struct device *dev,
 	led_update_brightness(led_cdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snprintf(buf, LED_BUFF_SIZE, "%u\n", led_cdev->brightness);
 }
 
 static ssize_t led_brightness_store(struct device *dev,
 =======
+=======
+>>>>>>> v3.18
 	return sprintf(buf, "%u\n", led_cdev->brightness);
 }
 
 static ssize_t brightness_store(struct device *dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct device_attribute *attr, const char *buf, size_t size)
 {
@@ -80,6 +92,11 @@ static ssize_t brightness_store(struct device *dev,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (state == LED_OFF)
+		led_trigger_remove(led_cdev);
+>>>>>>> v3.18
 =======
 	if (state == LED_OFF)
 		led_trigger_remove(led_cdev);
@@ -88,6 +105,7 @@ static ssize_t brightness_store(struct device *dev,
 
 	return size;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static ssize_t led_max_brightness_store(struct device *dev,
@@ -126,6 +144,8 @@ static struct device_attribute led_class_attrs[] = {
 #endif
 	__ATTR_NULL,
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RW(brightness);
 
 static ssize_t max_brightness_show(struct device *dev,
@@ -164,6 +184,9 @@ static const struct attribute_group *led_groups[] = {
 	&led_trigger_group,
 #endif
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -249,7 +272,11 @@ void led_classdev_resume(struct led_classdev *led_cdev)
 EXPORT_SYMBOL_GPL(led_classdev_resume);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int led_suspend(struct device *dev, pm_message_t state)
+=======
+static int led_suspend(struct device *dev)
+>>>>>>> v3.18
 =======
 static int led_suspend(struct device *dev)
 >>>>>>> v3.18
@@ -273,12 +300,18 @@ static int led_resume(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct dev_pm_ops leds_class_dev_pm_ops = {
 	.suspend        = led_suspend,
 	.resume         = led_resume,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * led_classdev_register - register a new object of led_classdev class.
@@ -288,8 +321,14 @@ static const struct dev_pm_ops leds_class_dev_pm_ops = {
 int led_classdev_register(struct device *parent, struct led_classdev *led_cdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	led_cdev->dev = device_create(leds_class, parent, 0, led_cdev,
 				      "%s", led_cdev->name);
+=======
+	led_cdev->dev = device_create_with_groups(leds_class, parent, 0,
+					led_cdev, led_cdev->groups,
+					"%s", led_cdev->name);
+>>>>>>> v3.18
 =======
 	led_cdev->dev = device_create_with_groups(leds_class, parent, 0,
 					led_cdev, led_cdev->groups,
@@ -363,9 +402,14 @@ static int __init leds_init(void)
 	if (IS_ERR(leds_class))
 		return PTR_ERR(leds_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	leds_class->suspend = led_suspend;
 	leds_class->resume = led_resume;
 	leds_class->dev_attrs = led_class_attrs;
+=======
+	leds_class->pm = &leds_class_dev_pm_ops;
+	leds_class->dev_groups = led_groups;
+>>>>>>> v3.18
 =======
 	leds_class->pm = &leds_class_dev_pm_ops;
 	leds_class->dev_groups = led_groups;

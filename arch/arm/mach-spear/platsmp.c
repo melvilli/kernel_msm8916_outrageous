@@ -5,7 +5,11 @@
  *
  * Copyright (C) 2012 ST Microelectronics Ltd.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Shiraz Hashim <shiraz.hashim@st.com>
+=======
+ * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
+>>>>>>> v3.18
 =======
  * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
 >>>>>>> v3.18
@@ -25,7 +29,10 @@
 #include "generic.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Write pen_release in a way that is guaranteed to be visible to all
  * observers, irrespective of whether they're taking part in coherency
@@ -38,13 +45,20 @@ static void write_pen_release(int val)
 	sync_cache_w(&pen_release);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEFINE_SPINLOCK(boot_lock);
 
 static void __iomem *scu_base = IOMEM(VA_SCU_BASE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit spear13xx_secondary_init(unsigned int cpu)
+=======
+static void spear13xx_secondary_init(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void spear13xx_secondary_init(unsigned int cpu)
 >>>>>>> v3.18
@@ -54,8 +68,12 @@ static void spear13xx_secondary_init(unsigned int cpu)
 	 * pen, then head off into the C entry point
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pen_release = -1;
 	smp_wmb();
+=======
+	write_pen_release(-1);
+>>>>>>> v3.18
 =======
 	write_pen_release(-1);
 >>>>>>> v3.18
@@ -68,7 +86,11 @@ static void spear13xx_secondary_init(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit spear13xx_boot_secondary(unsigned int cpu, struct task_struct *idle)
+=======
+static int spear13xx_boot_secondary(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 static int spear13xx_boot_secondary(unsigned int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -90,9 +112,13 @@ static int spear13xx_boot_secondary(unsigned int cpu, struct task_struct *idle)
 	 * "cpu" is Linux's internal ID.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pen_release = cpu;
 	flush_cache_all();
 	outer_flush_all();
+=======
+	write_pen_release(cpu);
+>>>>>>> v3.18
 =======
 	write_pen_release(cpu);
 >>>>>>> v3.18

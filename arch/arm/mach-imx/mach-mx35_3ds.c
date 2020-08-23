@@ -51,6 +51,10 @@
 #include "common.h"
 #include "devices-imx35.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 =======
 #include "ehci.h"
 >>>>>>> v3.18
@@ -620,7 +624,10 @@ MACHINE_START(MX35_3DS, "Freescale MX35PDK")
 	.init_early = imx35_init_early,
 	.init_irq = mx35_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx35_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= mx35pdk_timer_init,

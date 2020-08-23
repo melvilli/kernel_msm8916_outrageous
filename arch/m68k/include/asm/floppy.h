@@ -86,7 +86,11 @@ static int fd_request_irq(void)
 	if(MACH_IS_Q40)
 		return request_irq(FLOPPY_IRQ, floppy_hardint,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   IRQF_DISABLED, "floppy", floppy_hardint);
+=======
+				   0, "floppy", floppy_hardint);
+>>>>>>> v3.18
 =======
 				   0, "floppy", floppy_hardint);
 >>>>>>> v3.18

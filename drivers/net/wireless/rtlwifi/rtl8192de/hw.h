@@ -56,10 +56,16 @@ void rtl92de_set_key(struct ieee80211_hw *hw, u32 key_index,
 		     bool is_wepkey, bool clear_all);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void rtl92de_write_dword_dbi(struct ieee80211_hw *hw, u16 offset,
 				    u32 value, u8 direct);
 extern u32 rtl92de_read_dword_dbi(struct ieee80211_hw *hw, u16 offset,
 				  u8 direct);
+=======
+void rtl92de_write_dword_dbi(struct ieee80211_hw *hw, u16 offset, u32 value,
+			     u8 direct);
+u32 rtl92de_read_dword_dbi(struct ieee80211_hw *hw, u16 offset, u8 direct);
+>>>>>>> v3.18
 =======
 void rtl92de_write_dword_dbi(struct ieee80211_hw *hw, u16 offset, u32 value,
 			     u8 direct);

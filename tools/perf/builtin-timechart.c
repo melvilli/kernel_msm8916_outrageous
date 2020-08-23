@@ -13,6 +13,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <traceevent/event-parse.h>
+
+>>>>>>> v3.18
 =======
 #include <traceevent/event-parse.h>
 
@@ -25,6 +30,10 @@
 #include <linux/list.h>
 #include "util/cache.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util/evlist.h"
+>>>>>>> v3.18
 =======
 #include "util/evlist.h"
 >>>>>>> v3.18
@@ -43,6 +52,11 @@
 #include "util/svghelper.h"
 #include "util/tool.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "util/data.h"
+#include "util/debug.h"
+>>>>>>> v3.18
 =======
 #include "util/data.h"
 #include "util/debug.h"
@@ -51,6 +65,7 @@
 #define SUPPORT_OLD_POWER_EVENTS 1
 #define PWR_EVENT_EXIT -1
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static unsigned int	numcpus;
@@ -72,6 +87,8 @@ struct wake_event;
 
 struct sample_wrapper;
 =======
+=======
+>>>>>>> v3.18
 struct per_pid;
 struct power_event;
 struct wake_event;
@@ -102,6 +119,9 @@ struct timechart {
 struct per_pidcomm;
 struct cpu_sample;
 struct io_sample;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -124,6 +144,10 @@ struct per_pid {
 	u64		end_time;
 	u64		total_time;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64		total_bytes;
+>>>>>>> v3.18
 =======
 	u64		total_bytes;
 >>>>>>> v3.18
@@ -141,6 +165,11 @@ struct per_pidcomm {
 	u64		end_time;
 	u64		total_time;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64		max_bytes;
+	u64		total_bytes;
+>>>>>>> v3.18
 =======
 	u64		max_bytes;
 	u64		total_bytes;
@@ -156,6 +185,10 @@ struct per_pidcomm {
 
 	struct cpu_sample *samples;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct io_sample  *io_samples;
+>>>>>>> v3.18
 =======
 	struct io_sample  *io_samples;
 >>>>>>> v3.18
@@ -181,10 +214,13 @@ struct cpu_sample {
 	int type;
 	int cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static struct per_pid *all_data;
 =======
+=======
+>>>>>>> v3.18
 	const char *backtrace;
 };
 
@@ -208,6 +244,9 @@ struct io_sample {
 	int err;
 	int merges;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define CSTATE 1
@@ -228,12 +267,18 @@ struct wake_event {
 	int wakee;
 	u64 time;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static struct power_event    *power_events;
 static struct wake_event     *wake_events;
 
 struct process_filter;
+=======
+	const char *backtrace;
+};
+
+>>>>>>> v3.18
 =======
 	const char *backtrace;
 };
@@ -249,9 +294,15 @@ static struct process_filter *process_filter;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct per_pid *find_create_pid(int pid)
 {
 	struct per_pid *cursor = all_data;
+=======
+static struct per_pid *find_create_pid(struct timechart *tchart, int pid)
+{
+	struct per_pid *cursor = tchart->all_data;
+>>>>>>> v3.18
 =======
 static struct per_pid *find_create_pid(struct timechart *tchart, int pid)
 {
@@ -267,6 +318,7 @@ static struct per_pid *find_create_pid(struct timechart *tchart, int pid)
 	assert(cursor != NULL);
 	cursor->pid = pid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cursor->next = all_data;
 	all_data = cursor;
 	return cursor;
@@ -278,6 +330,8 @@ static void pid_set_comm(int pid, char *comm)
 	struct per_pidcomm *c;
 	p = find_create_pid(pid);
 =======
+=======
+>>>>>>> v3.18
 	cursor->next = tchart->all_data;
 	tchart->all_data = cursor;
 	return cursor;
@@ -288,6 +342,9 @@ static void pid_set_comm(struct timechart *tchart, int pid, char *comm)
 	struct per_pid *p;
 	struct per_pidcomm *c;
 	p = find_create_pid(tchart, pid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	c = p->all;
 	while (c) {
@@ -311,6 +368,7 @@ static void pid_set_comm(struct timechart *tchart, int pid, char *comm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pid_fork(int pid, int ppid, u64 timestamp)
 {
 	struct per_pid *p, *pp;
@@ -323,6 +381,8 @@ static void pid_fork(int pid, int ppid, u64 timestamp)
 	p->start_time = timestamp;
 	if (p->current) {
 =======
+=======
+>>>>>>> v3.18
 static void pid_fork(struct timechart *tchart, int pid, int ppid, u64 timestamp)
 {
 	struct per_pid *p, *pp;
@@ -334,6 +394,9 @@ static void pid_fork(struct timechart *tchart, int pid, int ppid, u64 timestamp)
 
 	p->start_time = timestamp;
 	if (p->current && !p->current->start_time) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		p->current->start_time = timestamp;
 		p->current->state_since = timestamp;
@@ -341,15 +404,21 @@ static void pid_fork(struct timechart *tchart, int pid, int ppid, u64 timestamp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pid_exit(int pid, u64 timestamp)
 {
 	struct per_pid *p;
 	p = find_create_pid(pid);
 =======
+=======
+>>>>>>> v3.18
 static void pid_exit(struct timechart *tchart, int pid, u64 timestamp)
 {
 	struct per_pid *p;
 	p = find_create_pid(tchart, pid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	p->end_time = timestamp;
 	if (p->current)
@@ -357,8 +426,14 @@ static void pid_exit(struct timechart *tchart, int pid, u64 timestamp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 pid_put_sample(int pid, int type, unsigned int cpu, u64 start, u64 end)
+=======
+static void pid_put_sample(struct timechart *tchart, int pid, int type,
+			   unsigned int cpu, u64 start, u64 end,
+			   const char *backtrace)
+>>>>>>> v3.18
 =======
 static void pid_put_sample(struct timechart *tchart, int pid, int type,
 			   unsigned int cpu, u64 start, u64 end,
@@ -370,7 +445,11 @@ static void pid_put_sample(struct timechart *tchart, int pid, int type,
 	struct cpu_sample *sample;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = find_create_pid(pid);
+=======
+	p = find_create_pid(tchart, pid);
+>>>>>>> v3.18
 =======
 	p = find_create_pid(tchart, pid);
 >>>>>>> v3.18
@@ -391,6 +470,10 @@ static void pid_put_sample(struct timechart *tchart, int pid, int type,
 	sample->next = c->samples;
 	sample->cpu = cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sample->backtrace = backtrace;
+>>>>>>> v3.18
 =======
 	sample->backtrace = backtrace;
 >>>>>>> v3.18
@@ -415,7 +498,11 @@ static u64 cpus_pstate_start_times[MAX_CPUS];
 static u64 cpus_pstate_state[MAX_CPUS];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int process_comm_event(struct perf_tool *tool __maybe_unused,
+=======
+static int process_comm_event(struct perf_tool *tool,
+>>>>>>> v3.18
 =======
 static int process_comm_event(struct perf_tool *tool,
 >>>>>>> v3.18
@@ -424,23 +511,30 @@ static int process_comm_event(struct perf_tool *tool,
 			      struct machine *machine __maybe_unused)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pid_set_comm(event->comm.tid, event->comm.comm);
 	return 0;
 }
 
 static int process_fork_event(struct perf_tool *tool __maybe_unused,
 =======
+=======
+>>>>>>> v3.18
 	struct timechart *tchart = container_of(tool, struct timechart, tool);
 	pid_set_comm(tchart, event->comm.tid, event->comm.comm);
 	return 0;
 }
 
 static int process_fork_event(struct perf_tool *tool,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      union perf_event *event,
 			      struct perf_sample *sample __maybe_unused,
 			      struct machine *machine __maybe_unused)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pid_fork(event->fork.pid, event->fork.ppid, event->fork.time);
 	return 0;
@@ -448,17 +542,23 @@ static int process_fork_event(struct perf_tool *tool,
 
 static int process_exit_event(struct perf_tool *tool __maybe_unused,
 =======
+=======
+>>>>>>> v3.18
 	struct timechart *tchart = container_of(tool, struct timechart, tool);
 	pid_fork(tchart, event->fork.pid, event->fork.ppid, event->fork.time);
 	return 0;
 }
 
 static int process_exit_event(struct perf_tool *tool,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      union perf_event *event,
 			      struct perf_sample *sample __maybe_unused,
 			      struct machine *machine __maybe_unused)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pid_exit(event->fork.pid, event->fork.time);
 	return 0;
@@ -528,6 +628,8 @@ struct sched_switch {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct timechart *tchart = container_of(tool, struct timechart, tool);
 	pid_exit(tchart, event->fork.pid, event->fork.time);
 	return 0;
@@ -537,6 +639,9 @@ struct sched_switch {
 static int use_old_power_events;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void c_state_start(int cpu, u64 timestamp, int state)
 {
@@ -545,7 +650,11 @@ static void c_state_start(int cpu, u64 timestamp, int state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void c_state_end(int cpu, u64 timestamp)
+=======
+static void c_state_end(struct timechart *tchart, int cpu, u64 timestamp)
+>>>>>>> v3.18
 =======
 static void c_state_end(struct timechart *tchart, int cpu, u64 timestamp)
 >>>>>>> v3.18
@@ -561,6 +670,7 @@ static void c_state_end(struct timechart *tchart, int cpu, u64 timestamp)
 	pwr->cpu = cpu;
 	pwr->type = CSTATE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pwr->next = power_events;
 
 	power_events = pwr;
@@ -568,12 +678,17 @@ static void c_state_end(struct timechart *tchart, int cpu, u64 timestamp)
 
 static void p_state_change(int cpu, u64 timestamp, u64 new_freq)
 =======
+=======
+>>>>>>> v3.18
 	pwr->next = tchart->power_events;
 
 	tchart->power_events = pwr;
 }
 
 static void p_state_change(struct timechart *tchart, int cpu, u64 timestamp, u64 new_freq)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct power_event *pwr;
@@ -591,6 +706,7 @@ static void p_state_change(struct timechart *tchart, int cpu, u64 timestamp, u64
 	pwr->cpu = cpu;
 	pwr->type = PSTATE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pwr->next = power_events;
 
 	if (!pwr->start_time)
@@ -598,17 +714,23 @@ static void p_state_change(struct timechart *tchart, int cpu, u64 timestamp, u64
 
 	power_events = pwr;
 =======
+=======
+>>>>>>> v3.18
 	pwr->next = tchart->power_events;
 
 	if (!pwr->start_time)
 		pwr->start_time = tchart->first_time;
 
 	tchart->power_events = pwr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cpus_pstate_state[cpu] = new_freq;
 	cpus_pstate_start_times[cpu] = timestamp;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((u64)new_freq > max_freq)
 		max_freq = new_freq;
@@ -626,6 +748,8 @@ sched_wakeup(int cpu, u64 timestamp, int pid, struct trace_entry *te)
 	struct per_pid *p;
 	struct wakeup_entry *wake = (void *)te;
 =======
+=======
+>>>>>>> v3.18
 	if ((u64)new_freq > tchart->max_freq)
 		tchart->max_freq = new_freq;
 
@@ -640,6 +764,9 @@ static void sched_wakeup(struct timechart *tchart, int cpu, u64 timestamp,
 			 int waker, int wakee, u8 flags, const char *backtrace)
 {
 	struct per_pid *p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct wake_event *we = zalloc(sizeof(*we));
 
@@ -647,6 +774,7 @@ static void sched_wakeup(struct timechart *tchart, int cpu, u64 timestamp,
 		return;
 
 	we->time = timestamp;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	we->waker = pid;
 
@@ -658,6 +786,8 @@ static void sched_wakeup(struct timechart *tchart, int cpu, u64 timestamp,
 	wake_events = we;
 	p = find_create_pid(we->wakee);
 =======
+=======
+>>>>>>> v3.18
 	we->waker = waker;
 	we->backtrace = backtrace;
 
@@ -668,6 +798,9 @@ static void sched_wakeup(struct timechart *tchart, int cpu, u64 timestamp,
 	we->next = tchart->wake_events;
 	tchart->wake_events = we;
 	p = find_create_pid(tchart, we->wakee);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (p && p->current && p->current->state == TYPE_NONE) {
@@ -676,7 +809,12 @@ static void sched_wakeup(struct timechart *tchart, int cpu, u64 timestamp,
 	}
 	if (p && p->current && p->current->state == TYPE_BLOCKED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pid_put_sample(p->pid, p->current->state, cpu, p->current->state_since, timestamp);
+=======
+		pid_put_sample(tchart, p->pid, p->current->state, cpu,
+			       p->current->state_since, timestamp, NULL);
+>>>>>>> v3.18
 =======
 		pid_put_sample(tchart, p->pid, p->current->state, cpu,
 			       p->current->state_since, timestamp, NULL);
@@ -686,6 +824,7 @@ static void sched_wakeup(struct timechart *tchart, int cpu, u64 timestamp,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void sched_switch(int cpu, u64 timestamp, struct trace_entry *te)
 {
@@ -703,6 +842,8 @@ static void sched_switch(int cpu, u64 timestamp, struct trace_entry *te)
 		if (p->current->state != TYPE_NONE)
 			pid_put_sample(sw->next_pid, p->current->state, cpu, p->current->state_since, timestamp);
 =======
+=======
+>>>>>>> v3.18
 static void sched_switch(struct timechart *tchart, int cpu, u64 timestamp,
 			 int prev_pid, int next_pid, u64 prev_state,
 			 const char *backtrace)
@@ -722,6 +863,9 @@ static void sched_switch(struct timechart *tchart, int cpu, u64 timestamp,
 			pid_put_sample(tchart, next_pid, p->current->state, cpu,
 				       p->current->state_since, timestamp,
 				       backtrace);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		p->current->state_since = timestamp;
@@ -732,9 +876,15 @@ static void sched_switch(struct timechart *tchart, int cpu, u64 timestamp,
 		prev_p->current->state = TYPE_NONE;
 		prev_p->current->state_since = timestamp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sw->prev_state & 2)
 			prev_p->current->state = TYPE_BLOCKED;
 		if (sw->prev_state == 0)
+=======
+		if (prev_state & 2)
+			prev_p->current->state = TYPE_BLOCKED;
+		if (prev_state == 0)
+>>>>>>> v3.18
 =======
 		if (prev_state & 2)
 			prev_p->current->state = TYPE_BLOCKED;
@@ -744,6 +894,7 @@ static void sched_switch(struct timechart *tchart, int cpu, u64 timestamp,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int process_sample_event(struct perf_tool *tool __maybe_unused,
@@ -825,6 +976,8 @@ static int process_sample_event(struct perf_tool *tool __maybe_unused,
 }
 
 =======
+=======
+>>>>>>> v3.18
 static const char *cat_backtrace(union perf_event *event,
 				 struct perf_sample *sample,
 				 struct machine *machine)
@@ -1027,13 +1180,20 @@ process_sample_power_frequency(struct timechart *tchart,
 }
 #endif /* SUPPORT_OLD_POWER_EVENTS */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * After the last sample we need to wrap up the current C/P state
  * and close out each CPU for these.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void end_sample_processing(void)
+=======
+static void end_sample_processing(struct timechart *tchart)
+>>>>>>> v3.18
 =======
 static void end_sample_processing(struct timechart *tchart)
 >>>>>>> v3.18
@@ -1042,7 +1202,11 @@ static void end_sample_processing(struct timechart *tchart)
 	struct power_event *pwr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (cpu = 0; cpu <= numcpus; cpu++) {
+=======
+	for (cpu = 0; cpu <= tchart->numcpus; cpu++) {
+>>>>>>> v3.18
 =======
 	for (cpu = 0; cpu <= tchart->numcpus; cpu++) {
 >>>>>>> v3.18
@@ -1055,6 +1219,7 @@ static void end_sample_processing(struct timechart *tchart)
 		pwr->state = cpus_cstate_state[cpu];
 		pwr->start_time = cpus_cstate_start_times[cpu];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pwr->end_time = last_time;
 		pwr->cpu = cpu;
 		pwr->type = CSTATE;
@@ -1062,12 +1227,17 @@ static void end_sample_processing(struct timechart *tchart)
 
 		power_events = pwr;
 =======
+=======
+>>>>>>> v3.18
 		pwr->end_time = tchart->last_time;
 		pwr->cpu = cpu;
 		pwr->type = CSTATE;
 		pwr->next = tchart->power_events;
 
 		tchart->power_events = pwr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 		/* P state */
@@ -1078,6 +1248,7 @@ static void end_sample_processing(struct timechart *tchart)
 
 		pwr->state = cpus_pstate_state[cpu];
 		pwr->start_time = cpus_pstate_start_times[cpu];
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pwr->end_time = last_time;
 		pwr->cpu = cpu;
@@ -1097,6 +1268,8 @@ static void end_sample_processing(struct timechart *tchart)
  */
 static void sort_pids(void)
 =======
+=======
+>>>>>>> v3.18
 		pwr->end_time = tchart->last_time;
 		pwr->cpu = cpu;
 		pwr->type = PSTATE;
@@ -1357,6 +1530,9 @@ process_exit_poll(struct timechart *tchart,
  * Sort the pid datastructure
  */
 static void sort_pids(struct timechart *tchart)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct per_pid *new_list, *p, *cursor, *prev;
@@ -1365,9 +1541,15 @@ static void sort_pids(struct timechart *tchart)
 	new_list = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (all_data) {
 		p = all_data;
 		all_data = p->next;
+=======
+	while (tchart->all_data) {
+		p = tchart->all_data;
+		tchart->all_data = p->next;
+>>>>>>> v3.18
 =======
 	while (tchart->all_data) {
 		p = tchart->all_data;
@@ -1406,6 +1588,7 @@ static void sort_pids(struct timechart *tchart)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	all_data = new_list;
 }
 
@@ -1415,6 +1598,8 @@ static void draw_c_p_states(void)
 	struct power_event *pwr;
 	pwr = power_events;
 =======
+=======
+>>>>>>> v3.18
 	tchart->all_data = new_list;
 }
 
@@ -1423,6 +1608,9 @@ static void draw_c_p_states(struct timechart *tchart)
 {
 	struct power_event *pwr;
 	pwr = tchart->power_events;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1435,17 +1623,23 @@ static void draw_c_p_states(struct timechart *tchart)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pwr = power_events;
 	while (pwr) {
 		if (pwr->type == PSTATE) {
 			if (!pwr->state)
 				pwr->state = min_freq;
 =======
+=======
+>>>>>>> v3.18
 	pwr = tchart->power_events;
 	while (pwr) {
 		if (pwr->type == PSTATE) {
 			if (!pwr->state)
 				pwr->state = tchart->min_freq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			svg_pstate(pwr->cpu, pwr->start_time, pwr->end_time, pwr->state);
 		}
@@ -1454,7 +1648,11 @@ static void draw_c_p_states(struct timechart *tchart)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void draw_wakeups(void)
+=======
+static void draw_wakeups(struct timechart *tchart)
+>>>>>>> v3.18
 =======
 static void draw_wakeups(struct timechart *tchart)
 >>>>>>> v3.18
@@ -1464,7 +1662,11 @@ static void draw_wakeups(struct timechart *tchart)
 	struct per_pidcomm *c;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	we = wake_events;
+=======
+	we = tchart->wake_events;
+>>>>>>> v3.18
 =======
 	we = tchart->wake_events;
 >>>>>>> v3.18
@@ -1474,7 +1676,11 @@ static void draw_wakeups(struct timechart *tchart)
 
 		/* locate the column of the waker and wakee */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p = all_data;
+=======
+		p = tchart->all_data;
+>>>>>>> v3.18
 =======
 		p = tchart->all_data;
 >>>>>>> v3.18
@@ -1521,18 +1727,24 @@ static void draw_wakeups(struct timechart *tchart)
 
 		if (we->waker == -1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			svg_interrupt(we->time, to);
 		else if (from && to && abs(from - to) == 1)
 			svg_wakeline(we->time, from, to);
 		else
 			svg_partial_wakeline(we->time, from, task_from, to, task_to);
 =======
+=======
+>>>>>>> v3.18
 			svg_interrupt(we->time, to, we->backtrace);
 		else if (from && to && abs(from - to) == 1)
 			svg_wakeline(we->time, from, to, we->backtrace);
 		else
 			svg_partial_wakeline(we->time, from, task_from, to,
 					     task_to, we->backtrace);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		we = we->next;
 
@@ -1542,7 +1754,11 @@ static void draw_wakeups(struct timechart *tchart)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void draw_cpu_usage(void)
+=======
+static void draw_cpu_usage(struct timechart *tchart)
+>>>>>>> v3.18
 =======
 static void draw_cpu_usage(struct timechart *tchart)
 >>>>>>> v3.18
@@ -1551,7 +1767,11 @@ static void draw_cpu_usage(struct timechart *tchart)
 	struct per_pidcomm *c;
 	struct cpu_sample *sample;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = all_data;
+=======
+	p = tchart->all_data;
+>>>>>>> v3.18
 =======
 	p = tchart->all_data;
 >>>>>>> v3.18
@@ -1561,9 +1781,12 @@ static void draw_cpu_usage(struct timechart *tchart)
 			sample = c->samples;
 			while (sample) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (sample->type == TYPE_RUNNING)
 					svg_process(sample->cpu, sample->start_time, sample->end_time, "sample", c->comm);
 =======
+=======
+>>>>>>> v3.18
 				if (sample->type == TYPE_RUNNING) {
 					svg_process(sample->cpu,
 						    sample->start_time,
@@ -1572,6 +1795,9 @@ static void draw_cpu_usage(struct timechart *tchart)
 						    c->comm,
 						    sample->backtrace);
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				sample = sample->next;
@@ -1583,8 +1809,11 @@ static void draw_cpu_usage(struct timechart *tchart)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void draw_process_bars(void)
 =======
+=======
+>>>>>>> v3.18
 static void draw_io_bars(struct timechart *tchart)
 {
 	const char *suf;
@@ -1701,6 +1930,9 @@ static void draw_io_bars(struct timechart *tchart)
 }
 
 static void draw_process_bars(struct timechart *tchart)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct per_pid *p;
@@ -1709,9 +1941,15 @@ static void draw_process_bars(struct timechart *tchart)
 	int Y = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Y = 2 * numcpus + 2;
 
 	p = all_data;
+=======
+	Y = 2 * tchart->numcpus + 2;
+
+	p = tchart->all_data;
+>>>>>>> v3.18
 =======
 	Y = 2 * tchart->numcpus + 2;
 
@@ -1731,12 +1969,15 @@ static void draw_process_bars(struct timechart *tchart)
 			while (sample) {
 				if (sample->type == TYPE_RUNNING)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					svg_sample(Y, sample->cpu, sample->start_time, sample->end_time);
 				if (sample->type == TYPE_BLOCKED)
 					svg_box(Y, sample->start_time, sample->end_time, "blocked");
 				if (sample->type == TYPE_WAITING)
 					svg_waiting(Y, sample->start_time, sample->end_time);
 =======
+=======
+>>>>>>> v3.18
 					svg_running(Y, sample->cpu,
 						    sample->start_time,
 						    sample->end_time,
@@ -1751,6 +1992,9 @@ static void draw_process_bars(struct timechart *tchart)
 						    sample->start_time,
 						    sample->end_time,
 						    sample->backtrace);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				sample = sample->next;
 			}
@@ -1805,7 +2049,11 @@ static int passes_filter(struct per_pid *p, struct per_pidcomm *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int determine_display_tasks_filtered(void)
+=======
+static int determine_display_tasks_filtered(struct timechart *tchart)
+>>>>>>> v3.18
 =======
 static int determine_display_tasks_filtered(struct timechart *tchart)
 >>>>>>> v3.18
@@ -1814,6 +2062,7 @@ static int determine_display_tasks_filtered(struct timechart *tchart)
 	struct per_pidcomm *c;
 	int count = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	p = all_data;
 	while (p) {
@@ -1825,6 +2074,8 @@ static int determine_display_tasks_filtered(struct timechart *tchart)
 		if (p->end_time == 0)
 			p->end_time = last_time;
 =======
+=======
+>>>>>>> v3.18
 	p = tchart->all_data;
 	while (p) {
 		p->display = 0;
@@ -1834,6 +2085,9 @@ static int determine_display_tasks_filtered(struct timechart *tchart)
 		/* no exit marker, task kept running to the end */
 		if (p->end_time == 0)
 			p->end_time = tchart->last_time;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		c = p->all;
@@ -1843,7 +2097,11 @@ static int determine_display_tasks_filtered(struct timechart *tchart)
 
 			if (c->start_time == 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				c->start_time = first_time;
+=======
+				c->start_time = tchart->first_time;
+>>>>>>> v3.18
 =======
 				c->start_time = tchart->first_time;
 >>>>>>> v3.18
@@ -1856,7 +2114,11 @@ static int determine_display_tasks_filtered(struct timechart *tchart)
 
 			if (c->end_time == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				c->end_time = last_time;
+=======
+				c->end_time = tchart->last_time;
+>>>>>>> v3.18
 =======
 				c->end_time = tchart->last_time;
 >>>>>>> v3.18
@@ -1869,7 +2131,11 @@ static int determine_display_tasks_filtered(struct timechart *tchart)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int determine_display_tasks(u64 threshold)
+=======
+static int determine_display_tasks(struct timechart *tchart, u64 threshold)
+>>>>>>> v3.18
 =======
 static int determine_display_tasks(struct timechart *tchart, u64 threshold)
 >>>>>>> v3.18
@@ -1878,6 +2144,7 @@ static int determine_display_tasks(struct timechart *tchart, u64 threshold)
 	struct per_pidcomm *c;
 	int count = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (process_filter)
 		return determine_display_tasks_filtered();
@@ -1893,6 +2160,8 @@ static int determine_display_tasks(struct timechart *tchart, u64 threshold)
 			p->end_time = last_time;
 		if (p->total_time >= threshold && !power_only)
 =======
+=======
+>>>>>>> v3.18
 	p = tchart->all_data;
 	while (p) {
 		p->display = 0;
@@ -1903,6 +2172,9 @@ static int determine_display_tasks(struct timechart *tchart, u64 threshold)
 		if (p->end_time == 0)
 			p->end_time = tchart->last_time;
 		if (p->total_time >= threshold)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			p->display = 1;
 
@@ -1913,9 +2185,15 @@ static int determine_display_tasks(struct timechart *tchart, u64 threshold)
 
 			if (c->start_time == 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				c->start_time = first_time;
 
 			if (c->total_time >= threshold && !power_only) {
+=======
+				c->start_time = tchart->first_time;
+
+			if (c->total_time >= threshold) {
+>>>>>>> v3.18
 =======
 				c->start_time = tchart->first_time;
 
@@ -1927,7 +2205,11 @@ static int determine_display_tasks(struct timechart *tchart, u64 threshold)
 
 			if (c->end_time == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				c->end_time = last_time;
+=======
+				c->end_time = tchart->last_time;
+>>>>>>> v3.18
 =======
 				c->end_time = tchart->last_time;
 >>>>>>> v3.18
@@ -1939,6 +2221,7 @@ static int determine_display_tasks(struct timechart *tchart, u64 threshold)
 	return count;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -1971,6 +2254,8 @@ static void write_svg_file(const char *filename)
 	draw_c_p_states();
 	draw_wakeups();
 =======
+=======
+>>>>>>> v3.18
 static int determine_display_io_tasks(struct timechart *timechart, u64 threshold)
 {
 	struct per_pid *p;
@@ -2055,11 +2340,15 @@ static void write_svg_file(struct timechart *tchart, const char *filename)
 		if (tchart->proc_num)
 			draw_wakeups(tchart);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	svg_close();
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __cmd_timechart(const char *output_name)
 {
@@ -2077,6 +2366,8 @@ static int __cmd_timechart(const char *output_name)
 	if (session == NULL)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 static int process_header(struct perf_file_section *section __maybe_unused,
 			  struct perf_header *ph,
 			  int feat,
@@ -2189,11 +2480,15 @@ static int __cmd_timechart(struct timechart *tchart, const char *output_name)
 					    perf_data_file__fd(session->file),
 					    tchart,
 					    process_header);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!perf_session__has_traces(session, "timechart record"))
 		goto out_delete;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = perf_session__process_events(session, &perf_timechart);
 	if (ret)
@@ -2208,6 +2503,8 @@ static int __cmd_timechart(struct timechart *tchart, const char *output_name)
 	pr_info("Written %2.1f seconds of trace to %s.\n",
 		(last_time - first_time) / 1000000000.0, output_name);
 =======
+=======
+>>>>>>> v3.18
 	if (perf_session__set_tracepoints_handlers(session,
 						   power_tracepoints)) {
 		pr_err("Initializing session tracepoint handlers failed\n");
@@ -2226,12 +2523,16 @@ static int __cmd_timechart(struct timechart *tchart, const char *output_name)
 
 	pr_info("Written %2.1f seconds of trace to %s.\n",
 		(tchart->last_time - tchart->first_time) / 1000000000.0, output_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_delete:
 	perf_session__delete(session);
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __cmd_record(int argc, const char **argv)
 {
@@ -2257,6 +2558,8 @@ static int __cmd_record(int argc, const char **argv)
 	const char * const *record_args = record_new_args;
 	unsigned int record_elems = ARRAY_SIZE(record_new_args);
 =======
+=======
+>>>>>>> v3.18
 static int timechart__io_record(int argc, const char **argv)
 {
 	unsigned int rec_argc, i;
@@ -2427,12 +2730,16 @@ static int timechart__record(struct timechart *tchart, int argc, const char **ar
 		"-e", "sched:sched_switch",
 	};
 	unsigned int tasks_args_nr = ARRAY_SIZE(tasks_args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef SUPPORT_OLD_POWER_EVENTS
 	if (!is_valid_tracepoint("power:cpu_idle") &&
 	    is_valid_tracepoint("power:power_start")) {
 		use_old_power_events = 1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		record_args = record_old_args;
 		record_elems = ARRAY_SIZE(record_old_args);
@@ -2441,6 +2748,8 @@ static int timechart__record(struct timechart *tchart, int argc, const char **ar
 
 	rec_argc = record_elems + argc - 1;
 =======
+=======
+>>>>>>> v3.18
 		power_args_nr = 0;
 	} else {
 		old_power_args_nr = 0;
@@ -2462,12 +2771,16 @@ static int timechart__record(struct timechart *tchart, int argc, const char **ar
 		power_args_nr + old_power_args_nr + backtrace_args_no;
 
 	rec_argc = record_elems + argc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rec_argv = calloc(rec_argc + 1, sizeof(char *));
 
 	if (rec_argv == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < record_elems; i++)
 		rec_argv[i] = strdup(record_args[i]);
@@ -2477,6 +2790,8 @@ static int timechart__record(struct timechart *tchart, int argc, const char **ar
 
 	return cmd_record(i, rec_argv, NULL);
 =======
+=======
+>>>>>>> v3.18
 	p = rec_argv;
 	for (i = 0; i < common_args_nr; i++)
 		*p++ = strdup(common_args[i]);
@@ -2497,6 +2812,9 @@ static int timechart__record(struct timechart *tchart, int argc, const char **ar
 		*p++ = argv[j];
 
 	return cmd_record(rec_argc, rec_argv, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2510,6 +2828,7 @@ parse_process(const struct option *opt __maybe_unused, const char *arg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cmd_timechart(int argc, const char **argv,
 		  const char *prefix __maybe_unused)
 {
@@ -2520,6 +2839,8 @@ int cmd_timechart(int argc, const char **argv,
 	OPT_INTEGER('w', "width", &svg_page_width, "page width"),
 	OPT_BOOLEAN('P', "power-only", &power_only, "output power data only"),
 =======
+=======
+>>>>>>> v3.18
 static int
 parse_highlight(const struct option *opt __maybe_unused, const char *arg,
 		int __maybe_unused unset)
@@ -2587,6 +2908,9 @@ int cmd_timechart(int argc, const char **argv,
 	OPT_BOOLEAN('P', "power-only", &tchart.power_only, "output power data only"),
 	OPT_BOOLEAN('T', "tasks-only", &tchart.tasks_only,
 		    "output processes data only"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	OPT_CALLBACK('p', "process", NULL, "process",
 		      "process selector. Pass a pid or process name.",
@@ -2594,7 +2918,10 @@ int cmd_timechart(int argc, const char **argv,
 	OPT_STRING(0, "symfs", &symbol_conf.symfs, "directory",
 		    "Look for files with symbols relative to this directory"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	OPT_INTEGER('n', "proc-num", &tchart.proc_num,
 		    "min. number of tasks to print"),
 	OPT_BOOLEAN('t', "topology", &tchart.topology,
@@ -2607,6 +2934,9 @@ int cmd_timechart(int argc, const char **argv,
 	OPT_CALLBACK(0, "io-merge-dist", &tchart.merge_dist, "time",
 		     "merge events that are merge-dist us apart",
 		     parse_time),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	OPT_END()
 	};
@@ -2615,6 +2945,7 @@ int cmd_timechart(int argc, const char **argv,
 		NULL
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	argc = parse_options(argc, argv, options, timechart_usage,
 			PARSE_OPT_STOP_AT_NON_OPTION);
@@ -2630,6 +2961,8 @@ int cmd_timechart(int argc, const char **argv,
 
 	return __cmd_timechart(output_name);
 =======
+=======
+>>>>>>> v3.18
 	const struct option record_options[] = {
 	OPT_BOOLEAN('P', "power-only", &tchart.power_only, "output power data only"),
 	OPT_BOOLEAN('T', "tasks-only", &tchart.tasks_only,
@@ -2670,5 +3003,8 @@ int cmd_timechart(int argc, const char **argv,
 	setup_pager();
 
 	return __cmd_timechart(&tchart, output_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

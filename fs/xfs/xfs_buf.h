@@ -26,6 +26,10 @@
 #include <linux/buffer_head.h>
 #include <linux/uio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/list_lru.h>
+>>>>>>> v3.18
 =======
 #include <linux/list_lru.h>
 >>>>>>> v3.18
@@ -49,6 +53,10 @@ typedef enum {
 #define XBF_DONE	 (1 << 5) /* all pages in the buffer uptodate */
 #define XBF_STALE	 (1 << 6) /* buffer has been staled, do not find it */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define XBF_WRITE_FAIL	 (1 << 24)/* async writes have failed on this buffer */
+>>>>>>> v3.18
 =======
 #define XBF_WRITE_FAIL	 (1 << 24)/* async writes have failed on this buffer */
 >>>>>>> v3.18
@@ -68,7 +76,10 @@ typedef enum {
 #define _XBF_DELWRI_Q	 (1 << 22)/* buffer on a delwri queue */
 #define _XBF_COMPOUND	 (1 << 23)/* compound buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _XBF_LRU_DISPOSE (1 << 24)/* buffer being discarded */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -82,6 +93,10 @@ typedef unsigned int xfs_buf_flags_t;
 	{ XBF_DONE,		"DONE" }, \
 	{ XBF_STALE,		"STALE" }, \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ XBF_WRITE_FAIL,	"WRITE_FAIL" }, \
+>>>>>>> v3.18
 =======
 	{ XBF_WRITE_FAIL,	"WRITE_FAIL" }, \
 >>>>>>> v3.18
@@ -94,10 +109,13 @@ typedef unsigned int xfs_buf_flags_t;
 	{ _XBF_KMEM,		"KMEM" }, \
 	{ _XBF_DELWRI_Q,	"DELWRI_Q" }, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ _XBF_COMPOUND,	"COMPOUND" }, \
 	{ _XBF_LRU_DISPOSE,	"LRU_DISPOSE" }
 
 =======
+=======
+>>>>>>> v3.18
 	{ _XBF_COMPOUND,	"COMPOUND" }
 
 
@@ -119,12 +137,16 @@ typedef unsigned int xfs_buf_flags_t;
  * The latter is derived from the underlying device, and controls direct IO
  * alignment constraints.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef struct xfs_buftarg {
 	dev_t			bt_dev;
 	struct block_device	*bt_bdev;
 	struct backing_dev_info	*bt_bdi;
 	struct xfs_mount	*bt_mount;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int		bt_bsize;
 	unsigned int		bt_sshift;
@@ -136,6 +158,8 @@ typedef struct xfs_buftarg {
 	spinlock_t		bt_lru_lock;
 	unsigned int		bt_lru_nr;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		bt_meta_sectorsize;
 	size_t			bt_meta_sectormask;
 	size_t			bt_logical_sectorsize;
@@ -144,6 +168,9 @@ typedef struct xfs_buftarg {
 	/* LRU control structures */
 	struct shrinker		bt_shrinker;
 	struct list_lru		bt_lru;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } xfs_buftarg_t;
 
@@ -188,7 +215,13 @@ typedef struct xfs_buf {
 	 */
 	struct list_head	b_lru;		/* lru list */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_buf_flags_t		b_lru_flags;	/* internal lru status flags */
+=======
+	spinlock_t		b_lock;		/* internal state lock */
+	unsigned int		b_state;	/* internal state flags */
+	int			b_io_error;	/* internal IO error state */
+>>>>>>> v3.18
 =======
 	spinlock_t		b_lock;		/* internal state lock */
 	unsigned int		b_state;	/* internal state flags */
@@ -215,7 +248,11 @@ typedef struct xfs_buf {
 	unsigned int		b_page_count;	/* size of page array */
 	unsigned int		b_offset;	/* page offset in first page */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short		b_error;	/* error code on I/O */
+=======
+	int			b_error;	/* error code on I/O */
+>>>>>>> v3.18
 =======
 	int			b_error;	/* error code on I/O */
 >>>>>>> v3.18
@@ -309,9 +346,15 @@ int xfs_buf_associate_memory(struct xfs_buf *bp, void *mem, size_t length);
 struct xfs_buf *xfs_buf_get_uncached(struct xfs_buftarg *target, size_t numblks,
 				int flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct xfs_buf *xfs_buf_read_uncached(struct xfs_buftarg *target,
 				xfs_daddr_t daddr, size_t numblks, int flags,
 				const struct xfs_buf_ops *ops);
+=======
+int xfs_buf_read_uncached(struct xfs_buftarg *target, xfs_daddr_t daddr,
+			  size_t numblks, int flags, struct xfs_buf **bpp,
+			  const struct xfs_buf_ops *ops);
+>>>>>>> v3.18
 =======
 int xfs_buf_read_uncached(struct xfs_buftarg *target, xfs_daddr_t daddr,
 			  size_t numblks, int flags, struct xfs_buf **bpp,
@@ -333,6 +376,7 @@ extern void xfs_buf_unlock(xfs_buf_t *);
 /* Buffer Read and Write Routines */
 extern int xfs_bwrite(struct xfs_buf *bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern void xfsbdstrat(struct xfs_mount *, struct xfs_buf *);
 
@@ -342,11 +386,16 @@ extern void xfs_buf_ioerror_alert(struct xfs_buf *, const char *func);
 extern void xfs_buf_iorequest(xfs_buf_t *);
 extern int xfs_buf_iowait(xfs_buf_t *);
 =======
+=======
+>>>>>>> v3.18
 extern void xfs_buf_ioend(struct xfs_buf *bp);
 extern void xfs_buf_ioerror(xfs_buf_t *, int);
 extern void xfs_buf_ioerror_alert(struct xfs_buf *, const char *func);
 extern void xfs_buf_submit(struct xfs_buf *bp);
 extern int xfs_buf_submit_wait(struct xfs_buf *bp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void xfs_buf_iomove(xfs_buf_t *, size_t, size_t, void *,
 				xfs_buf_rw_t);
@@ -354,11 +403,14 @@ extern void xfs_buf_iomove(xfs_buf_t *, size_t, size_t, void *,
 	    xfs_buf_iomove((bp), (off), (len), NULL, XBRW_ZERO)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int xfs_buf_geterror(xfs_buf_t *bp)
 {
 	return bp ? bp->b_error : ENOMEM;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Buffer Utility Routines */
@@ -376,7 +428,12 @@ extern void xfs_buf_terminate(void);
 #define XFS_BUF_ZEROFLAGS(bp) \
 	((bp)->b_flags &= ~(XBF_READ|XBF_WRITE|XBF_ASYNC| \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    XBF_SYNCIO|XBF_FUA|XBF_FLUSH))
+=======
+			    XBF_SYNCIO|XBF_FUA|XBF_FLUSH| \
+			    XBF_WRITE_FAIL))
+>>>>>>> v3.18
 =======
 			    XBF_SYNCIO|XBF_FUA|XBF_FLUSH| \
 			    XBF_WRITE_FAIL))
@@ -432,7 +489,10 @@ static inline void xfs_buf_relse(xfs_buf_t *bp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int
 xfs_buf_verify_cksum(struct xfs_buf *bp, unsigned long cksum_offset)
 {
@@ -447,21 +507,30 @@ xfs_buf_update_cksum(struct xfs_buf *bp, unsigned long cksum_offset)
 			 cksum_offset);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *	Handling of buftargs.
  */
 extern xfs_buftarg_t *xfs_alloc_buftarg(struct xfs_mount *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct block_device *, int, const char *);
 extern void xfs_free_buftarg(struct xfs_mount *, struct xfs_buftarg *);
 extern void xfs_wait_buftarg(xfs_buftarg_t *);
 extern int xfs_setsize_buftarg(xfs_buftarg_t *, unsigned int, unsigned int);
 =======
+=======
+>>>>>>> v3.18
 			struct block_device *);
 extern void xfs_free_buftarg(struct xfs_mount *, struct xfs_buftarg *);
 extern void xfs_wait_buftarg(xfs_buftarg_t *);
 extern int xfs_setsize_buftarg(xfs_buftarg_t *, unsigned int);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define xfs_getsize_buftarg(buftarg)	block_size((buftarg)->bt_bdev)

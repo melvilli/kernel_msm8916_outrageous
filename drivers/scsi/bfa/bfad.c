@@ -64,9 +64,15 @@ u32	bfi_image_cb_size, bfi_image_ct_size, bfi_image_ct2_size;
 u32	*bfi_image_cb, *bfi_image_ct, *bfi_image_ct2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BFAD_FW_FILE_CB		"cbfw-3.1.0.0.bin"
 #define BFAD_FW_FILE_CT		"ctfw-3.1.0.0.bin"
 #define BFAD_FW_FILE_CT2	"ct2fw-3.1.0.0.bin"
+=======
+#define BFAD_FW_FILE_CB		"cbfw-3.2.3.0.bin"
+#define BFAD_FW_FILE_CT		"ctfw-3.2.3.0.bin"
+#define BFAD_FW_FILE_CT2	"ct2fw-3.2.3.0.bin"
+>>>>>>> v3.18
 =======
 #define BFAD_FW_FILE_CB		"cbfw-3.2.3.0.bin"
 #define BFAD_FW_FILE_CT		"ctfw-3.2.3.0.bin"
@@ -211,6 +217,10 @@ bfad_sm_created(struct bfad_s *bfad, enum bfad_sm_event event)
 {
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bfa_status_t ret;
+>>>>>>> v3.18
 =======
 	bfa_status_t ret;
 >>>>>>> v3.18
@@ -228,7 +238,11 @@ bfad_sm_created(struct bfad_s *bfad, enum bfad_sm_event event)
 			printk(KERN_WARNING "bfad%d: bfad_setup_intr failed\n",
 					bfad->inst_no);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bfa_sm_send_event(bfad, BFAD_E_INTR_INIT_FAILED);
+=======
+			bfa_sm_send_event(bfad, BFAD_E_INIT_FAILED);
+>>>>>>> v3.18
 =======
 			bfa_sm_send_event(bfad, BFAD_E_INIT_FAILED);
 >>>>>>> v3.18
@@ -257,9 +271,12 @@ bfad_sm_created(struct bfad_s *bfad, enum bfad_sm_event event)
 				"bfa %s: bfa init failed\n",
 				bfad->pci_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bfad->bfad_flags |= BFAD_HAL_INIT_FAIL;
 			bfa_sm_send_event(bfad, BFAD_E_INIT_FAILED);
 =======
+=======
+>>>>>>> v3.18
 			spin_lock_irqsave(&bfad->bfad_lock, flags);
 			bfa_fcs_init(&bfad->bfa_fcs);
 			spin_unlock_irqrestore(&bfad->bfad_lock, flags);
@@ -280,6 +297,9 @@ bfad_sm_created(struct bfad_s *bfad, enum bfad_sm_event event)
 			}
 			bfad->bfad_flags |= BFAD_HAL_INIT_FAIL;
 			bfa_sm_send_event(bfad, BFAD_E_HAL_INIT_FAILED);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -311,6 +331,7 @@ bfad_sm_initializing(struct bfad_s *bfad, enum bfad_sm_event event)
 
 		retval = bfad_start_ops(bfad);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (retval != BFA_STATUS_OK)
 			break;
 		bfa_sm_set_state(bfad, bfad_sm_operational);
@@ -318,6 +339,8 @@ bfad_sm_initializing(struct bfad_s *bfad, enum bfad_sm_event event)
 
 	case BFAD_E_INTR_INIT_FAILED:
 =======
+=======
+>>>>>>> v3.18
 		if (retval != BFA_STATUS_OK) {
 			bfa_sm_set_state(bfad, bfad_sm_failed);
 			break;
@@ -326,6 +349,9 @@ bfad_sm_initializing(struct bfad_s *bfad, enum bfad_sm_event event)
 		break;
 
 	case BFAD_E_INIT_FAILED:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bfa_sm_set_state(bfad, bfad_sm_uninit);
 		kthread_stop(bfad->bfad_tsk);
@@ -335,7 +361,11 @@ bfad_sm_initializing(struct bfad_s *bfad, enum bfad_sm_event event)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case BFAD_E_INIT_FAILED:
+=======
+	case BFAD_E_HAL_INIT_FAILED:
+>>>>>>> v3.18
 =======
 	case BFAD_E_HAL_INIT_FAILED:
 >>>>>>> v3.18
@@ -363,6 +393,7 @@ bfad_sm_failed(struct bfad_s *bfad, enum bfad_sm_event event)
 
 	case BFAD_E_STOP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bfad->bfad_flags & BFAD_CFG_PPORT_DONE)
 			bfad_uncfg_pport(bfad);
 		if (bfad->bfad_flags & BFAD_FC4_PROBE_DONE) {
@@ -370,6 +401,10 @@ bfad_sm_failed(struct bfad_s *bfad, enum bfad_sm_event event)
 			bfad->bfad_flags &= ~BFAD_FC4_PROBE_DONE;
 		}
 		bfad_stop(bfad);
+=======
+		bfa_sm_set_state(bfad, bfad_sm_fcs_exit);
+		bfa_sm_send_event(bfad, BFAD_E_FCS_EXIT_COMP);
+>>>>>>> v3.18
 =======
 		bfa_sm_set_state(bfad, bfad_sm_fcs_exit);
 		bfa_sm_send_event(bfad, BFAD_E_FCS_EXIT_COMP);
@@ -549,7 +584,11 @@ bfa_fcb_pbc_vport_create(struct bfad_s *bfad, struct bfi_pbc_vport_s pbc_vport)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vport = kzalloc(sizeof(struct bfad_vport_s), GFP_KERNEL);
+=======
+	vport = kzalloc(sizeof(struct bfad_vport_s), GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	vport = kzalloc(sizeof(struct bfad_vport_s), GFP_ATOMIC);
 >>>>>>> v3.18
@@ -828,6 +867,7 @@ bfad_pci_init(struct pci_dev *pdev, struct bfad_s *bfad)
 
 	/* Adjust PCIe Maximum Read Request Size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pcie_max_read_reqsz > 0) {
 		int pcie_cap_reg;
 		u16 pcie_dev_ctl;
@@ -872,6 +912,8 @@ bfad_pci_init(struct pci_dev *pdev, struct bfad_s *bfad)
 						pcie_dev_ctl | mask);
 			}
 =======
+=======
+>>>>>>> v3.18
 	if (pci_is_pcie(pdev) && pcie_max_read_reqsz) {
 		if (pcie_max_read_reqsz >= 128 &&
 		    pcie_max_read_reqsz <= 4096 &&
@@ -886,6 +928,9 @@ bfad_pci_init(struct pci_dev *pdev, struct bfad_s *bfad)
 			printk(KERN_WARNING "BFA[%s]: invalid "
 			       "pcie_max_read_request_size %d ignored\n",
 			       bfad->pci_name, pcie_max_read_reqsz);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -912,7 +957,10 @@ bfad_pci_uninit(struct pci_dev *pdev, struct bfad_s *bfad)
 	pci_disable_pcie_error_reporting(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -936,7 +984,11 @@ bfad_drv_init(struct bfad_s *bfad)
 			"Not enough memory to attach all Brocade HBA ports, %s",
 			"System may need more memory.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_hal_mem_alloc_failure;
+=======
+		return BFA_STATUS_FAILED;
+>>>>>>> v3.18
 =======
 		return BFA_STATUS_FAILED;
 >>>>>>> v3.18
@@ -957,13 +1009,17 @@ bfad_drv_init(struct bfad_s *bfad)
 	bfa_fcs_attach(&bfad->bfa_fcs, &bfad->bfa, bfad, BFA_FALSE);
 	bfad->bfa_fcs.fdmi_enabled = fdmi_enable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bfa_fcs_init(&bfad->bfa_fcs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&bfad->bfad_lock, flags);
 
 	bfad->bfad_flags |= BFAD_DRV_INIT_DONE;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* configure base port */
 	rc = bfad_cfg_pport(bfad, BFA_LPORT_ROLE_FCP_IM);
@@ -985,6 +1041,9 @@ out_cfg_pport_fail:
 	bfad_hal_mem_release(bfad);
 out_hal_mem_alloc_failure:
 	return BFA_STATUS_FAILED;
+=======
+	return BFA_STATUS_OK;
+>>>>>>> v3.18
 =======
 	return BFA_STATUS_OK;
 >>>>>>> v3.18
@@ -1132,6 +1191,7 @@ bfad_start_ops(struct bfad_s *bfad) {
 	spin_lock_irqsave(&bfad->bfad_lock, flags);
 	bfa_fcs_driver_info_init(&bfad->bfa_fcs, &driver_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&bfad->bfad_lock, flags);
 
 	/*
@@ -1140,6 +1200,8 @@ bfad_start_ops(struct bfad_s *bfad) {
 	 */
 	bfa_fcs_update_cfg(&bfad->bfa_fcs);
 =======
+=======
+>>>>>>> v3.18
 
 	if (bfad->bfad_flags & BFAD_CFG_PPORT_DONE)
 		bfa_fcs_update_cfg(&bfad->bfa_fcs);
@@ -1153,6 +1215,9 @@ bfad_start_ops(struct bfad_s *bfad) {
 		if (retval != BFA_STATUS_OK)
 			return BFA_STATUS_FAILED;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Setup fc host fixed attribute if the lk supports */
@@ -1165,10 +1230,13 @@ bfad_start_ops(struct bfad_s *bfad) {
 		if (bfa_sm_cmp_state(bfad, bfad_sm_initializing))
 			bfa_sm_set_state(bfad, bfad_sm_failed);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bfad_im_probe_undo(bfad);
 		bfad->bfad_flags &= ~BFAD_FC4_PROBE_DONE;
 		bfad_uncfg_pport(bfad);
 		bfad_stop(bfad);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return BFA_STATUS_FAILED;
@@ -1363,7 +1431,11 @@ int
 bfad_setup_intr(struct bfad_s *bfad)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int error = 0;
+=======
+	int error;
+>>>>>>> v3.18
 =======
 	int error;
 >>>>>>> v3.18
@@ -1381,6 +1453,7 @@ bfad_setup_intr(struct bfad_s *bfad)
 	if ((bfa_asic_id_ctc(pdev->device) && !msix_disable_ct) ||
 	   (bfa_asic_id_cb(pdev->device) && !msix_disable_cb)) {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		error = pci_enable_msix(bfad->pcidev, msix_entries, bfad->nvec);
 		if (error) {
@@ -1411,6 +1484,8 @@ bfad_setup_intr(struct bfad_s *bfad)
 				goto line_based;
 			}
 =======
+=======
+>>>>>>> v3.18
 		error = pci_enable_msix_exact(bfad->pcidev,
 					      msix_entries, bfad->nvec);
 		/* In CT1 & CT2, try to allocate just one vector */
@@ -1429,6 +1504,9 @@ bfad_setup_intr(struct bfad_s *bfad)
 			       "use line based.\n",
 				bfad->inst_no, error);
 			goto line_based;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1450,6 +1528,7 @@ bfad_setup_intr(struct bfad_s *bfad)
 		bfad->bfad_flags |= BFAD_MSIX_ON;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return error;
 	}
 
@@ -1465,6 +1544,8 @@ line_based:
 
 	return error;
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 	}
 
@@ -1477,6 +1558,9 @@ line_based:
 	bfad->bfad_flags |= BFAD_INTX_ON;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1581,7 +1665,10 @@ bfad_pci_probe(struct pci_dev *pdev, const struct pci_device_id *pid)
 
 out_bfad_sm_failure:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bfa_detach(&bfad->bfa);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bfad_hal_mem_release(bfad);
@@ -1719,7 +1806,11 @@ restart_bfa(struct bfad_s *bfad)
 		dev_printk(KERN_WARNING, &pdev->dev,
 			   "%s: bfad_setup_intr failed\n", bfad->pci_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bfa_sm_send_event(bfad, BFAD_E_INTR_INIT_FAILED);
+=======
+		bfa_sm_send_event(bfad, BFAD_E_INIT_FAILED);
+>>>>>>> v3.18
 =======
 		bfa_sm_send_event(bfad, BFAD_E_INIT_FAILED);
 >>>>>>> v3.18
@@ -1879,7 +1970,10 @@ struct pci_device_id bfad_id_table[] = {
 	},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.vendor = BFA_PCI_VENDOR_ID_BROCADE,
 		.device = BFA_PCI_DEVICE_ID_CT2_QUAD,
@@ -1888,6 +1982,9 @@ struct pci_device_id bfad_id_table[] = {
 		.class = (PCI_CLASS_SERIAL_FIBER << 8),
 		.class_mask = ~0,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{0, 0},
 };

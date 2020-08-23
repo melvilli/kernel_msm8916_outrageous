@@ -26,8 +26,12 @@
  *
  *     You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  *     along with this program; if not, write to the Free Software Foundation,
  *     Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ *     along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *     along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -51,7 +55,10 @@
 #include <linux/slab.h>
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -1039,7 +1046,10 @@ static int kaweth_probe(
 	kaweth->dev = udev;
 	kaweth->net = netdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kaweth->intf = intf;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1153,6 +1163,11 @@ err_fw:
 	dev_dbg(dev, "Initializing net device.\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kaweth->intf = intf;
+
+>>>>>>> v3.18
 =======
 	kaweth->intf = intf;
 
@@ -1188,7 +1203,11 @@ err_fw:
 	netdev->watchdog_timeo = KAWETH_TX_TIMEOUT;
 	netdev->mtu = le16_to_cpu(kaweth->configuration.segment_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &ops);
+=======
+	netdev->ethtool_ops = &ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &ops;
 >>>>>>> v3.18

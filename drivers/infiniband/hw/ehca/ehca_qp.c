@@ -1330,7 +1330,11 @@ static int internal_modify_qp(struct ib_qp *ibqp,
 	if (!smi_reset2init &&
 	    !ib_modify_qp_is_ok(qp_cur_state, qp_new_state, ibqp->qp_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				attr_mask)) {
+=======
+				attr_mask, IB_LINK_LAYER_UNSPECIFIED)) {
+>>>>>>> v3.18
 =======
 				attr_mask, IB_LINK_LAYER_UNSPECIFIED)) {
 >>>>>>> v3.18

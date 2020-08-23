@@ -18,7 +18,11 @@
 #include "trace.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wil_err(struct wil6210_priv *wil, const char *fmt, ...)
+=======
+void wil_err(struct wil6210_priv *wil, const char *fmt, ...)
+>>>>>>> v3.18
 =======
 void wil_err(struct wil6210_priv *wil, const char *fmt, ...)
 >>>>>>> v3.18
@@ -28,6 +32,7 @@ void wil_err(struct wil6210_priv *wil, const char *fmt, ...)
 		.fmt = fmt,
 	};
 	va_list args;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -42,6 +47,8 @@ void wil_err(struct wil6210_priv *wil, const char *fmt, ...)
 
 int wil_info(struct wil6210_priv *wil, const char *fmt, ...)
 =======
+=======
+>>>>>>> v3.18
 
 	va_start(args, fmt);
 	vaf.va = &args;
@@ -51,6 +58,9 @@ int wil_info(struct wil6210_priv *wil, const char *fmt, ...)
 }
 
 void wil_info(struct wil6210_priv *wil, const char *fmt, ...)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct net_device *ndev = wil_to_ndev(wil);
@@ -58,6 +68,7 @@ void wil_info(struct wil6210_priv *wil, const char *fmt, ...)
 		.fmt = fmt,
 	};
 	va_list args;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -72,6 +83,8 @@ void wil_info(struct wil6210_priv *wil, const char *fmt, ...)
 
 int wil_dbg_trace(struct wil6210_priv *wil, const char *fmt, ...)
 =======
+=======
+>>>>>>> v3.18
 
 	va_start(args, fmt);
 	vaf.va = &args;
@@ -81,6 +94,9 @@ int wil_dbg_trace(struct wil6210_priv *wil, const char *fmt, ...)
 }
 
 void wil_dbg_trace(struct wil6210_priv *wil, const char *fmt, ...)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct va_format vaf = {
@@ -93,8 +109,11 @@ void wil_dbg_trace(struct wil6210_priv *wil, const char *fmt, ...)
 	trace_wil6210_log_dbg(&vaf);
 	va_end(args);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

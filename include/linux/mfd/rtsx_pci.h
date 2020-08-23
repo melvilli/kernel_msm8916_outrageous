@@ -1,7 +1,11 @@
 /* Driver for Realtek PCI-Express card reader
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2009 Realtek Semiconductor Corp. All rights reserved.
+=======
+ * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
 >>>>>>> v3.18
@@ -22,7 +26,10 @@
  * Author:
  *   Wei WANG <wei_wang@realsil.com.cn>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   No. 450, Shenhu Road, Suzhou Industry Park, Suzhou, China
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -33,8 +40,12 @@
 #include <linux/sched.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "rtsx_common.h"
+=======
+#include <linux/mfd/rtsx_common.h>
+>>>>>>> v3.18
 =======
 #include <linux/mfd/rtsx_common.h>
 >>>>>>> v3.18
@@ -158,7 +169,11 @@
 #define DEVICE_TO_HOST		1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_PHASE		31
+=======
+#define RTSX_PHASE_MAX		32
+>>>>>>> v3.18
 =======
 #define RTSX_PHASE_MAX		32
 >>>>>>> v3.18
@@ -200,7 +215,10 @@
 #define CARD_SHARE_BAROSSA_MS		0x02
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* CARD_DRIVE_SEL */
 #define MS_DRIVE_8mA			(0x01 << 6)
 #define MMC_DRIVE_8mA			(0x01 << 4)
@@ -212,6 +230,9 @@
 						XD_DRIVE_8mA)
 #define RTSX_CARD_DRIVE_DEFAULT		(MS_DRIVE_8mA | GPIO_DRIVE_8mA)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* SD30_DRIVE_SEL */
 #define DRIVER_TYPE_A			0x05
@@ -219,11 +240,17 @@
 #define DRIVER_TYPE_C			0x02
 #define DRIVER_TYPE_D			0x01
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CFG_DRIVER_TYPE_A		0x02
 #define CFG_DRIVER_TYPE_B		0x03
 #define CFG_DRIVER_TYPE_C		0x01
 #define CFG_DRIVER_TYPE_D		0x00
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* FPDCTL */
@@ -558,11 +585,17 @@
 #define SAMPLE_VAR_CLK1			(0x02 << 4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* HOST_SLEEP_STATE */
 #define HOST_ENTER_S1			1
 #define HOST_ENTER_S3			2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MS_CFG				0xFD40
 #define MS_TPC				0xFD41
@@ -619,6 +652,10 @@
 #define CARD_PWR_CTL			0xFD50
 #define CARD_CLK_SWITCH			0xFD51
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RTL8411B_PACKAGE_MODE		0xFD51
+>>>>>>> v3.18
 =======
 #define RTL8411B_PACKAGE_MODE		0xFD51
 >>>>>>> v3.18
@@ -716,6 +753,10 @@
 #define ASPM_FORCE_CTL			0xFE57
 #define PM_CLK_FORCE_CTL		0xFE58
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FUNC_FORCE_CTL			0xFE59
+>>>>>>> v3.18
 =======
 #define FUNC_FORCE_CTL			0xFE59
 >>>>>>> v3.18
@@ -735,7 +776,10 @@
 #define DUMMY_REG_RESET_0		0xFE90
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AUTOLOAD_CFG_BASE		0xFF00
 
 #define PM_CTRL1			0xFF44
@@ -743,6 +787,9 @@
 #define PM_CTRL3			0xFF46
 #define PM_CTRL4			0xFF47
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Memory mapping */
 #define SRAM_BASE			0xE600
@@ -787,7 +834,10 @@
 #define PHY_DUM_REG			0x1F
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define LCTLR				0x80
 #define PCR_SETTING_REG1		0x724
 #define PCR_SETTING_REG2		0x814
@@ -846,6 +896,9 @@
 #define PHY_FLD4_BER_TIMER			0x000A
 #define PHY_FLD4_BER_CHK_EN			0x0001
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define rtsx_pci_init_cmd(pcr)		((pcr)->ci = 0)
 
@@ -869,6 +922,11 @@ struct pcr_ops {
 	unsigned int	(*cd_deglitch)(struct rtsx_pcr *pcr);
 	int		(*conv_clk_and_div_n)(int clk, int dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void		(*fetch_vendor_settings)(struct rtsx_pcr *pcr);
+	void		(*force_power_down)(struct rtsx_pcr *pcr, u8 pm_state);
+>>>>>>> v3.18
 =======
 	void		(*fetch_vendor_settings)(struct rtsx_pcr *pcr);
 	void		(*force_power_down)(struct rtsx_pcr *pcr, u8 pm_state);
@@ -915,7 +973,10 @@ struct rtsx_pcr {
 
 	unsigned int			cur_clock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool				ms_pmos;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool				remove_pci;
@@ -936,7 +997,10 @@ struct rtsx_pcr {
 	u8				ic_version;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8				sd30_drive_sel_1v8;
 	u8				sd30_drive_sel_3v3;
 	u8				card_drive_sel;
@@ -950,6 +1014,9 @@ struct rtsx_pcr {
 	u32				tx_initial_phase;
 	u32				rx_initial_phase;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const u32			*sd_pull_ctl_enable_tbl;
 	const u32			*sd_pull_ctl_disable_tbl;
@@ -968,7 +1035,10 @@ struct rtsx_pcr {
 #define PCI_PID(pcr)			((pcr)->pci->device)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SDR104_PHASE(val)		((val) & 0xFF)
 #define SDR50_PHASE(val)		(((val) >> 8) & 0xFF)
 #define DDR50_PHASE(val)		(((val) >> 16) & 0xFF)
@@ -981,6 +1051,9 @@ struct rtsx_pcr {
 #define SET_CLOCK_PHASE(sdr104, sdr50, ddr50)	\
 				(((ddr50) << 16) | ((sdr50) << 8) | (sdr104))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void rtsx_pci_start_run(struct rtsx_pcr *pcr);
 int rtsx_pci_write_register(struct rtsx_pcr *pcr, u16 addr, u8 mask, u8 data);
@@ -995,13 +1068,19 @@ int rtsx_pci_send_cmd(struct rtsx_pcr *pcr, int timeout);
 int rtsx_pci_transfer_data(struct rtsx_pcr *pcr, struct scatterlist *sglist,
 		int num_sg, bool read, int timeout);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int rtsx_pci_dma_map_sg(struct rtsx_pcr *pcr, struct scatterlist *sglist,
 		int num_sg, bool read);
 void rtsx_pci_dma_unmap_sg(struct rtsx_pcr *pcr, struct scatterlist *sglist,
 		int num_sg, bool read);
 int rtsx_pci_dma_transfer(struct rtsx_pcr *pcr, struct scatterlist *sglist,
 		int count, bool read, int timeout);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int rtsx_pci_read_ppbuf(struct rtsx_pcr *pcr, u8 *buf, int buf_len);
 int rtsx_pci_write_ppbuf(struct rtsx_pcr *pcr, u8 *buf, int buf_len);

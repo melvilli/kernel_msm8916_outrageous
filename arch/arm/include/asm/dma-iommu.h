@@ -14,15 +14,21 @@ struct dma_iommu_mapping {
 	struct iommu_domain	*domain;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void			*bitmap;
 	size_t			bits;
 	unsigned int		order;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long		**bitmaps;	/* array of bitmaps */
 	unsigned int		nr_bitmaps;	/* nr of elements in array */
 	unsigned int		extensions;
 	size_t			bitmap_size;	/* size of a single bitmap */
 	size_t			bits;		/* per bitmap */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dma_addr_t		base;
 
@@ -32,8 +38,12 @@ struct dma_iommu_mapping {
 
 struct dma_iommu_mapping *
 <<<<<<< HEAD
+<<<<<<< HEAD
 arm_iommu_create_mapping(struct bus_type *bus, dma_addr_t base, size_t size,
 			 int order);
+=======
+arm_iommu_create_mapping(struct bus_type *bus, dma_addr_t base, size_t size);
+>>>>>>> v3.18
 =======
 arm_iommu_create_mapping(struct bus_type *bus, dma_addr_t base, size_t size);
 >>>>>>> v3.18

@@ -37,7 +37,10 @@
 #include <linux/of_address.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/vmalloc.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -184,7 +187,11 @@ EXPORT_SYMBOL(gen_pool_create);
  * Returns 0 on success or a -ve errno on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gen_pool_add_virt(struct gen_pool *pool, u64 virt, phys_addr_t phys,
+=======
+int gen_pool_add_virt(struct gen_pool *pool, unsigned long virt, phys_addr_t phys,
+>>>>>>> v3.18
 =======
 int gen_pool_add_virt(struct gen_pool *pool, unsigned long virt, phys_addr_t phys,
 >>>>>>> v3.18
@@ -196,6 +203,7 @@ int gen_pool_add_virt(struct gen_pool *pool, unsigned long virt, phys_addr_t phy
 				BITS_TO_LONGS(nbits) * sizeof(long);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nbytes <= PAGE_SIZE)
 		chunk = kmalloc_node(nbytes, __GFP_ZERO, nid);
 	else
@@ -204,6 +212,11 @@ int gen_pool_add_virt(struct gen_pool *pool, unsigned long virt, phys_addr_t phy
 		return -ENOMEM;
 	if (nbytes > PAGE_SIZE)
 		memset(chunk, 0, nbytes);
+=======
+	chunk = kzalloc_node(nbytes, GFP_KERNEL, nid);
+	if (unlikely(chunk == NULL))
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	chunk = kzalloc_node(nbytes, GFP_KERNEL, nid);
 	if (unlikely(chunk == NULL))
@@ -231,7 +244,11 @@ EXPORT_SYMBOL(gen_pool_add_virt);
  * Returns the physical address on success, or -1 on error.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 phys_addr_t gen_pool_virt_to_phys(struct gen_pool *pool, u64 addr)
+=======
+phys_addr_t gen_pool_virt_to_phys(struct gen_pool *pool, unsigned long addr)
+>>>>>>> v3.18
 =======
 phys_addr_t gen_pool_virt_to_phys(struct gen_pool *pool, unsigned long addr)
 >>>>>>> v3.18
@@ -268,13 +285,17 @@ void gen_pool_destroy(struct gen_pool *pool)
 
 	list_for_each_safe(_chunk, _next_chunk, &pool->chunks) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int nbytes;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		chunk = list_entry(_chunk, struct gen_pool_chunk, next_chunk);
 		list_del(&chunk->next_chunk);
 
 		end_bit = chunk_size(chunk) >> order;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		nbytes = sizeof(struct gen_pool_chunk) +
 				BITS_TO_LONGS(end_bit) * sizeof(long);
@@ -286,10 +307,15 @@ void gen_pool_destroy(struct gen_pool *pool)
 		else
 			vfree(chunk);
 =======
+=======
+>>>>>>> v3.18
 		bit = find_next_bit(chunk->bits, end_bit, 0);
 		BUG_ON(bit < end_bit);
 
 		kfree(chunk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	kfree(pool);
@@ -298,6 +324,7 @@ void gen_pool_destroy(struct gen_pool *pool)
 EXPORT_SYMBOL(gen_pool_destroy);
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * gen_pool_alloc_aligned - allocate special memory from the pool
  * @pool: pool to allocate from
@@ -310,12 +337,18 @@ EXPORT_SYMBOL(gen_pool_destroy);
  * @pool: pool to allocate from
  * @size: number of bytes to allocate from the pool
 >>>>>>> v3.18
+=======
+ * gen_pool_alloc - allocate special memory from the pool
+ * @pool: pool to allocate from
+ * @size: number of bytes to allocate from the pool
+>>>>>>> v3.18
  *
  * Allocate the requested number of bytes from the specified pool.
  * Uses the pool allocation function (with first-fit algorithm by default).
  * Can not be used in NMI handler on architectures without
  * NMI-safe cmpxchg implementation.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 u64 gen_pool_alloc_aligned(struct gen_pool *pool, size_t size,
 				     unsigned alignment_order)
@@ -325,12 +358,17 @@ u64 gen_pool_alloc_aligned(struct gen_pool *pool, size_t size,
 	int order = pool->min_alloc_order;
 	int nbits, start_bit, remain;
 =======
+=======
+>>>>>>> v3.18
 unsigned long gen_pool_alloc(struct gen_pool *pool, size_t size)
 {
 	struct gen_pool_chunk *chunk;
 	unsigned long addr = 0;
 	int order = pool->min_alloc_order;
 	int nbits, start_bit = 0, end_bit, remain;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef CONFIG_ARCH_HAVE_NMI_SAFE_CMPXCHG
@@ -340,6 +378,7 @@ unsigned long gen_pool_alloc(struct gen_pool *pool, size_t size)
 	if (size == 0)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (alignment_order > order)
 		align_mask = (1 << (alignment_order - order)) - 1;
@@ -360,6 +399,8 @@ retry:
 						   chunk->start_addr >> order);
 		if (start_bit >= chunk_len)
 =======
+=======
+>>>>>>> v3.18
 	nbits = (size + (1UL << order) - 1) >> order;
 	rcu_read_lock();
 	list_for_each_entry_rcu(chunk, &pool->chunks, next_chunk) {
@@ -371,6 +412,9 @@ retry:
 		start_bit = pool->algo(chunk->bits, end_bit, start_bit, nbits,
 				pool->data);
 		if (start_bit >= end_bit)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		remain = bitmap_set_ll(chunk->bits, start_bit, nbits);
@@ -382,8 +426,13 @@ retry:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		addr = chunk->start_addr + ((u64)start_bit << order);
 		size = nbits << pool->min_alloc_order;
+=======
+		addr = chunk->start_addr + ((unsigned long)start_bit << order);
+		size = nbits << order;
+>>>>>>> v3.18
 =======
 		addr = chunk->start_addr + ((unsigned long)start_bit << order);
 		size = nbits << order;
@@ -395,8 +444,11 @@ retry:
 	return addr;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(gen_pool_alloc_aligned);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(gen_pool_alloc);
 
 /**
@@ -427,6 +479,9 @@ void *gen_pool_dma_alloc(struct gen_pool *pool, size_t size, dma_addr_t *dma)
 	return (void *)vaddr;
 }
 EXPORT_SYMBOL(gen_pool_dma_alloc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -440,7 +495,11 @@ EXPORT_SYMBOL(gen_pool_dma_alloc);
  * NMI-safe cmpxchg implementation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void gen_pool_free(struct gen_pool *pool, u64 addr, size_t size)
+=======
+void gen_pool_free(struct gen_pool *pool, unsigned long addr, size_t size)
+>>>>>>> v3.18
 =======
 void gen_pool_free(struct gen_pool *pool, unsigned long addr, size_t size)
 >>>>>>> v3.18
@@ -496,7 +555,10 @@ EXPORT_SYMBOL(gen_pool_for_each_chunk);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * addr_in_gen_pool - checks if an address falls within the range of a pool
  * @pool:	the generic memory pool
  * @start:	start address
@@ -526,6 +588,9 @@ bool addr_in_gen_pool(struct gen_pool *pool, unsigned long start,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * gen_pool_avail - get available free space of the pool
  * @pool: pool to get available free space
@@ -598,7 +663,11 @@ EXPORT_SYMBOL(gen_pool_set_algo);
  * @data: additional data - unused
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 u64 gen_pool_first_fit(unsigned long *map, unsigned long size,
+=======
+unsigned long gen_pool_first_fit(unsigned long *map, unsigned long size,
+>>>>>>> v3.18
 =======
 unsigned long gen_pool_first_fit(unsigned long *map, unsigned long size,
 >>>>>>> v3.18
@@ -610,7 +679,10 @@ EXPORT_SYMBOL(gen_pool_first_fit);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * gen_pool_first_fit_order_align - find the first available region
  * of memory matching the size requirement. The region will be aligned
  * to the order of the size specified.
@@ -631,6 +703,9 @@ unsigned long gen_pool_first_fit_order_align(unsigned long *map,
 EXPORT_SYMBOL(gen_pool_first_fit_order_align);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * gen_pool_best_fit - find the best fitting region of memory
  * macthing the size requirement (no alignment constraint)
@@ -644,7 +719,11 @@ EXPORT_SYMBOL(gen_pool_first_fit_order_align);
  * which we can allocate the memory.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 u64 gen_pool_best_fit(unsigned long *map, unsigned long size,
+=======
+unsigned long gen_pool_best_fit(unsigned long *map, unsigned long size,
+>>>>>>> v3.18
 =======
 unsigned long gen_pool_best_fit(unsigned long *map, unsigned long size,
 >>>>>>> v3.18
@@ -705,6 +784,10 @@ struct gen_pool *devm_gen_pool_create(struct device *dev, int min_alloc_order,
 	return pool;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(devm_gen_pool_create);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(devm_gen_pool_create);
 >>>>>>> v3.18
@@ -713,7 +796,10 @@ EXPORT_SYMBOL(devm_gen_pool_create);
  * dev_get_gen_pool - Obtain the gen_pool (if any) for a device
  * @dev: device to retrieve the gen_pool from
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @name: Optional name for the gen_pool, usually NULL
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -752,6 +838,10 @@ struct gen_pool *of_get_named_gen_pool(struct device_node *np,
 		return NULL;
 	pdev = of_find_device_by_node(np_pool);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	of_node_put(np_pool);
+>>>>>>> v3.18
 =======
 	of_node_put(np_pool);
 >>>>>>> v3.18

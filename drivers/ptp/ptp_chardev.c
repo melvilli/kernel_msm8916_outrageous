@@ -26,7 +26,10 @@
 #include "ptp_private.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ptp_disable_pinfunc(struct ptp_clock_info *ops,
 			       enum ptp_pin_function func, unsigned int chan)
 {
@@ -112,6 +115,9 @@ int ptp_set_pinfunc(struct ptp_clock *ptp, unsigned int pin,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ptp_open(struct posix_clock *pc, fmode_t fmode)
 {
@@ -124,6 +130,10 @@ long ptp_ioctl(struct posix_clock *pc, unsigned int cmd, unsigned long arg)
 	struct ptp_clock_request req;
 	struct ptp_sys_offset *sysoff = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ptp_pin_desc pd;
+>>>>>>> v3.18
 =======
 	struct ptp_pin_desc pd;
 >>>>>>> v3.18
@@ -133,7 +143,11 @@ long ptp_ioctl(struct posix_clock *pc, unsigned int cmd, unsigned long arg)
 	struct timespec ts;
 	int enable, err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int i;
+=======
+	unsigned int i, pin_index;
+>>>>>>> v3.18
 =======
 	unsigned int i, pin_index;
 >>>>>>> v3.18
@@ -148,6 +162,10 @@ long ptp_ioctl(struct posix_clock *pc, unsigned int cmd, unsigned long arg)
 		caps.n_per_out = ptp->info->n_per_out;
 		caps.pps = ptp->info->pps;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		caps.n_pins = ptp->info->n_pins;
+>>>>>>> v3.18
 =======
 		caps.n_pins = ptp->info->n_pins;
 >>>>>>> v3.18
@@ -227,7 +245,10 @@ long ptp_ioctl(struct posix_clock *pc, unsigned int cmd, unsigned long arg)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case PTP_PIN_GETFUNC:
 		if (copy_from_user(&pd, (void __user *)arg, sizeof(pd))) {
 			err = -EFAULT;
@@ -262,6 +283,9 @@ long ptp_ioctl(struct posix_clock *pc, unsigned int cmd, unsigned long arg)
 		mutex_unlock(&ptp->pincfg_mux);
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		err = -ENOTTY;

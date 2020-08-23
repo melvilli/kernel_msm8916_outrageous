@@ -17,6 +17,10 @@
 #include <linux/power_supply.h>
 #include <linux/platform_data/lp8727.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -486,7 +490,10 @@ static void lp8727_unregister_psy(struct lp8727_chg *pchg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static struct lp8727_chg_param
 *lp8727_parse_charge_pdata(struct device *dev, struct device_node *np)
@@ -541,6 +548,9 @@ static int lp8727_parse_dt(struct device *dev)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int lp8727_probe(struct i2c_client *cl, const struct i2c_device_id *id)
 {
@@ -551,13 +561,19 @@ static int lp8727_probe(struct i2c_client *cl, const struct i2c_device_id *id)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cl->dev.of_node) {
 		ret = lp8727_parse_dt(&cl->dev);
 		if (ret)
 			return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pchg = devm_kzalloc(&cl->dev, sizeof(*pchg), GFP_KERNEL);
 	if (!pchg)
@@ -602,13 +618,19 @@ static int lp8727_remove(struct i2c_client *cl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id lp8727_dt_ids[] = {
 	{ .compatible = "ti,lp8727", },
 	{ }
 };
 MODULE_DEVICE_TABLE(of, lp8727_dt_ids);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct i2c_device_id lp8727_ids[] = {
 	{"lp8727", 0},
@@ -620,6 +642,10 @@ static struct i2c_driver lp8727_driver = {
 	.driver = {
 		   .name = "lp8727",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		   .of_match_table = of_match_ptr(lp8727_dt_ids),
+>>>>>>> v3.18
 =======
 		   .of_match_table = of_match_ptr(lp8727_dt_ids),
 >>>>>>> v3.18

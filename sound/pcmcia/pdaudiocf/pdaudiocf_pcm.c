@@ -78,7 +78,11 @@ static int pdacf_pcm_trigger(struct snd_pcm_substream *subs, int cmd)
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&chip->reg_lock);
+=======
+	mutex_lock(&chip->reg_lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&chip->reg_lock);
 >>>>>>> v3.18
@@ -96,7 +100,11 @@ static int pdacf_pcm_trigger(struct snd_pcm_substream *subs, int cmd)
 	pdacf_reg_write(chip, PDAUDIOCF_REG_SCR, tmp);
       __end:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&chip->reg_lock);
+=======
+	mutex_unlock(&chip->reg_lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&chip->reg_lock);
 >>>>>>> v3.18
@@ -305,6 +313,10 @@ int snd_pdacf_pcm_new(struct snd_pdacf *chip)
 	pcm->private_data = chip;
 	pcm->info_flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pcm->nonatomic = true;
+>>>>>>> v3.18
 =======
 	pcm->nonatomic = true;
 >>>>>>> v3.18

@@ -1,7 +1,11 @@
 /*
  * QLogic iSCSI HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2012 QLogic Corporation
+=======
+ * Copyright (c)  2003-2013 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2013 QLogic Corporation
 >>>>>>> v3.18
@@ -259,7 +263,10 @@ struct qla83xx_minidump_entry_pollrd {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct qla8044_minidump_entry_rddfe {
 	struct qla8xxx_minidump_entry_hdr h;
 	uint32_t addr_1;
@@ -304,6 +311,9 @@ struct qla8044_minidump_entry_pollwr {
 
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* RDMUX2 Entry */
 struct qla83xx_minidump_entry_rdmux2 {
@@ -342,7 +352,10 @@ struct qla4_83xx_idc_information {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define QLA83XX_PEX_DMA_ENGINE_INDEX		8
 #define QLA83XX_PEX_DMA_BASE_ADDRESS		0x77320000
 #define QLA83XX_PEX_DMA_NUM_OFFSET		0x10000
@@ -377,5 +390,8 @@ struct qla4_83xx_pex_dma_descriptor {
 	uint8_t rsvd[24];
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

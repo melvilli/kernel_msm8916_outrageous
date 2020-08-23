@@ -37,10 +37,16 @@ struct kbd_struct {
 	unsigned char slockstate; 	/* for `sticky' Shift, Ctrl, etc. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char ledmode:2; 	/* one 2-bit value */
 #define LED_SHOW_FLAGS 0        /* traditional state */
 #define LED_SHOW_IOCTL 1        /* only change leds upon ioctl */
 #define LED_SHOW_MEM 2          /* `heartbeat': peek into memory */
+=======
+	unsigned char ledmode:1;
+#define LED_SHOW_FLAGS 0        /* traditional state */
+#define LED_SHOW_IOCTL 1        /* only change leds upon ioctl */
+>>>>>>> v3.18
 =======
 	unsigned char ledmode:1;
 #define LED_SHOW_FLAGS 0        /* traditional state */

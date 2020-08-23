@@ -8,7 +8,11 @@ or if there is a problem with the translation.
 
 Maintainer: Will Deacon <will.deacon@arm.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
 Chinese maintainer: Fu Wei <tekkamanninja@gmail.com>
+=======
+Chinese maintainer: Fu Wei <wefu@redhat.com>
+>>>>>>> v3.18
 =======
 Chinese maintainer: Fu Wei <wefu@redhat.com>
 >>>>>>> v3.18
@@ -21,9 +25,15 @@ Documentation/arm64/booting.txt 的中文翻译
 
 英文版维护者： Will Deacon <will.deacon@arm.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
 中文版维护者： 傅炜  Fu Wei <tekkamanninja@gmail.com>
 中文版翻译者： 傅炜  Fu Wei <tekkamanninja@gmail.com>
 中文版校译者： 傅炜  Fu Wei <tekkamanninja@gmail.com>
+=======
+中文版维护者： 傅炜  Fu Wei <wefu@redhat.com>
+中文版翻译者： 傅炜  Fu Wei <wefu@redhat.com>
+中文版校译者： 傅炜  Fu Wei <wefu@redhat.com>
+>>>>>>> v3.18
 =======
 中文版维护者： 傅炜  Fu Wei <wefu@redhat.com>
 中文版翻译者： 傅炜  Fu Wei <wefu@redhat.com>
@@ -75,8 +85,13 @@ RAM，或可能使用对这个设备已知的 RAM 信息，还可能使用任何
 必要性: 强制
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 设备树数据块（dtb）大小必须不大于 2 MB，且位于从内核映像起始算起第一个
 512MB 内的 2MB 边界上。这使得内核可以通过初始页表中的单个节描述符来
+=======
+设备树数据块（dtb）必须 8 字节对齐，并位于从内核映像起始算起第一个 512MB
+内，且不得跨越 2MB 对齐边界。这使得内核可以通过初始页表中的单个节描述符来
+>>>>>>> v3.18
 =======
 设备树数据块（dtb）必须 8 字节对齐，并位于从内核映像起始算起第一个 512MB
 内，且不得跨越 2MB 对齐边界。这使得内核可以通过初始页表中的单个节描述符来
@@ -100,6 +115,7 @@ AArch64 内核当前没有提供自解压代码，因此如果使用了压缩内
 必要性: 强制
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 已解压的内核映像包含一个 32 字节的头，内容如下：
 
   u32 magic	= 0x14000008;	/* 跳转到 stext, 小端 */
@@ -108,6 +124,8 @@ AArch64 内核当前没有提供自解压代码，因此如果使用了压缩内
   u64 res1	= 0;		/* 保留 */
   u64 res2	= 0;		/* 保留 */
 =======
+=======
+>>>>>>> v3.18
 已解压的内核映像包含一个 64 字节的头，内容如下：
 
   u32 code0;			/* 可执行代码 */
@@ -125,6 +143,9 @@ AArch64 内核当前没有提供自解压代码，因此如果使用了压缩内
 映像头注释：
 
 - code0/code1 负责跳转到 stext.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 映像必须位于系统 RAM 起始处的特定偏移（当前是 0x80000）。系统 RAM
@@ -154,9 +175,15 @@ AArch64 内核当前没有提供自解压代码，因此如果使用了压缩内
 
 - 架构计时器
 <<<<<<< HEAD
+<<<<<<< HEAD
   CNTFRQ 必须设定为计时器的频率。
   如果在 EL1 模式下进入内核，则 CNTHCTL_EL2 中的 EL1PCTEN (bit 0)
   必须置位。
+=======
+  CNTFRQ 必须设定为计时器的频率，且 CNTVOFF 必须设定为对所有 CPU
+  都一致的值。如果在 EL1 模式下进入内核，则 CNTHCTL_EL2 中的
+  EL1PCTEN (bit 0) 必须置位。
+>>>>>>> v3.18
 =======
   CNTFRQ 必须设定为计时器的频率，且 CNTVOFF 必须设定为对所有 CPU
   都一致的值。如果在 EL1 模式下进入内核，则 CNTHCTL_EL2 中的
@@ -173,6 +200,7 @@ AArch64 内核当前没有提供自解压代码，因此如果使用了压缩内
   在一个更高的异常级别下初始化，以防止在 未知 状态下运行。
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 引导装载程序必须在每个 CPU 处于以下状态时跳入内核入口：
 
 - 主 CPU 必须直接跳入内核映像的第一条指令。通过此 CPU 传递的设备树
@@ -182,6 +210,8 @@ AArch64 内核当前没有提供自解压代码，因此如果使用了压缩内
 
     2、‘cpu-release-addr’标识一个 64-bit、初始化为零的内存位置。
 =======
+=======
+>>>>>>> v3.18
 以上对于 CPU 模式、高速缓存、MMU、架构计时器、一致性、系统寄存器的
 必要条件描述适用于所有 CPU。所有 CPU 必须在同一异常级别跳入内核。
 
@@ -190,11 +220,15 @@ AArch64 内核当前没有提供自解压代码，因此如果使用了压缩内
 - 主 CPU 必须直接跳入内核映像的第一条指令。通过此 CPU 传递的设备树
   数据块必须在每个 CPU 节点中包含一个 ‘enable-method’ 属性，所
   支持的 enable-method 请见下文。
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   引导装载程序必须生成这些设备树属性，并在跳入内核入口之前将其插入
   数据块。
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 - 任何辅助 CPU 必须在内存保留区（通过设备树中的 /memreserve/ 域传递
   给内核）中自旋于内核之外，轮询它们的 cpu-release-addr 位置（必须
@@ -202,6 +236,8 @@ AArch64 内核当前没有提供自解压代码，因此如果使用了压缩内
   发出 sev 指令。当对 cpu-release-addr 所指位置的读取操作返回非零值
   时，CPU 必须直接跳入此值所指向的地址。
 =======
+=======
+>>>>>>> v3.18
 - enable-method 为 “spin-table” 的 CPU 必须在它们的 CPU
   节点中包含一个 ‘cpu-release-addr’ 属性。这个属性标识了一个
   64 位自然对齐且初始化为零的内存位置。
@@ -224,6 +260,9 @@ AArch64 内核当前没有提供自解压代码，因此如果使用了压缩内
   设备树必须包含一个 ‘psci’ 节点，请参考以下文档：
   Documentation/devicetree/bindings/arm/psci.txt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - 辅助 CPU 通用寄存器设置

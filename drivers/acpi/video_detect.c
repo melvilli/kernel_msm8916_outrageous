@@ -39,7 +39,11 @@
 #include <linux/pci.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREFIX "ACPI: "
+=======
+#include "internal.h"
+>>>>>>> v3.18
 =======
 #include "internal.h"
 >>>>>>> v3.18
@@ -53,6 +57,7 @@ static bool acpi_video_caps_checked;
 static acpi_status
 acpi_backlight_cap_match(acpi_handle handle, u32 level, void *context,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  void **retyurn_value)
 {
 	long *cap = context;
@@ -65,6 +70,8 @@ acpi_backlight_cap_match(acpi_handle handle, u32 level, void *context,
 		*cap |= ACPI_VIDEO_BACKLIGHT;
 		if (ACPI_FAILURE(acpi_get_handle(handle, "_BQC", &h_dummy)))
 =======
+=======
+>>>>>>> v3.18
 			  void **return_value)
 {
 	long *cap = context;
@@ -75,6 +82,9 @@ acpi_backlight_cap_match(acpi_handle handle, u32 level, void *context,
 				  "support\n"));
 		*cap |= ACPI_VIDEO_BACKLIGHT;
 		if (!acpi_has_method(handle, "_BQC"))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			printk(KERN_WARNING FW_BUG PREFIX "No _BQC method, "
 				"cannot determine initial brightness\n");
@@ -95,6 +105,7 @@ acpi_backlight_cap_match(acpi_handle handle, u32 level, void *context,
 long acpi_is_video_device(acpi_handle handle)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle h_dummy;
 	long video_caps = 0;
 
@@ -112,6 +123,8 @@ long acpi_is_video_device(acpi_handle handle)
 	    ACPI_SUCCESS(acpi_get_handle(handle, "_GPD", &h_dummy)) &&
 	    ACPI_SUCCESS(acpi_get_handle(handle, "_SPD", &h_dummy)))
 =======
+=======
+>>>>>>> v3.18
 	long video_caps = 0;
 
 	/* Is this device able to support video switching ? */
@@ -126,6 +139,9 @@ long acpi_is_video_device(acpi_handle handle)
 	if (acpi_has_method(handle, "_VPO") &&
 	    acpi_has_method(handle, "_GPD") &&
 	    acpi_has_method(handle, "_SPD"))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		video_caps |= ACPI_VIDEO_DEVICE_POSTING;
 
@@ -204,7 +220,10 @@ static struct dmi_system_id video_detect_dmi_table[] = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 	.callback = video_detect_force_vendor,
 	.ident = "Dell Inspiron 5737",
@@ -221,6 +240,9 @@ static struct dmi_system_id video_detect_dmi_table[] = {
 		DMI_MATCH(DMI_PRODUCT_VERSION, "Ideapad Z570"),
 		},
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ },
 };
@@ -288,13 +310,19 @@ static void acpi_video_caps_check(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool acpi_osi_is_win8(void)
 {
 	return acpi_gbl_osi_data >= ACPI_OSI_WIN_8;
 }
 EXPORT_SYMBOL(acpi_osi_is_win8);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Promote the vendor interface instead of the generic video module.
  * This function allow DMI blacklists to be implemented by externals

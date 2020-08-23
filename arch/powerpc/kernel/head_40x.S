@@ -823,6 +823,7 @@ finish_tlb_load:
 	b	.		/* prevent prefetch past rfi */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* extern void giveup_fpu(struct task_struct *prev)
  *
  * The PowerPC 4xx family of processors do not have an FPU, so this just
@@ -831,6 +832,8 @@ finish_tlb_load:
 _ENTRY(giveup_fpu)
 	blr
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* This is where the main kernel code starts.
@@ -942,6 +945,7 @@ initial_mmu:
 	tlbwe	r3,r0,TLB_TAG		/* Load the tag portion of the entry */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SERIAL_TEXT_DEBUG) && defined(SERIAL_DEBUG_IO_BASE)
 
 	/* Load a TLB entry for the UART, so that ppc4xx_progress() can use
@@ -961,6 +965,8 @@ initial_mmu:
 	tlbwe	r3,r0,TLB_TAG
 #endif /* CONFIG_SERIAL_DEBUG_TEXT && SERIAL_DEBUG_IO_BASE */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	isync

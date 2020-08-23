@@ -28,6 +28,10 @@
 struct saa6588_command {
 	unsigned int  block_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool          nonblocking;
+>>>>>>> v3.18
 =======
 	bool          nonblocking;
 >>>>>>> v3.18
@@ -39,7 +43,10 @@ struct saa6588_command {
 
 /* These ioctls are internal to the kernel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SAA6588_CMD_OPEN	_IOW('R', 1, int)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SAA6588_CMD_CLOSE	_IOW('R', 2, int)

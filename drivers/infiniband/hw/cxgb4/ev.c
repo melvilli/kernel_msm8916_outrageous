@@ -36,7 +36,10 @@
 #include "iw_cxgb4.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void print_tpte(struct c4iw_dev *dev, u32 stag)
 {
 	int ret;
@@ -86,6 +89,9 @@ static void dump_err_cqe(struct c4iw_dev *dev, struct t4_cqe *err_cqe)
 		print_tpte(dev, CQE_WRID_STAG(err_cqe));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void post_qp_event(struct c4iw_dev *dev, struct c4iw_cq *chp,
 			  struct c4iw_qp *qhp,
@@ -96,6 +102,7 @@ static void post_qp_event(struct c4iw_dev *dev, struct c4iw_cq *chp,
 	struct c4iw_qp_attributes attrs;
 	unsigned long flag;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((qhp->attr.state == C4IW_QP_STATE_ERROR) ||
 	    (qhp->attr.state == C4IW_QP_STATE_TERMINATE)) {
@@ -112,6 +119,9 @@ static void post_qp_event(struct c4iw_dev *dev, struct c4iw_cq *chp,
 	       CQE_QPID(err_cqe), CQE_OPCODE(err_cqe),
 	       CQE_STATUS(err_cqe), CQE_TYPE(err_cqe),
 	       CQE_WRID_HI(err_cqe), CQE_WRID_LOW(err_cqe));
+=======
+	dump_err_cqe(dev, err_cqe);
+>>>>>>> v3.18
 =======
 	dump_err_cqe(dev, err_cqe);
 >>>>>>> v3.18
@@ -249,6 +259,10 @@ int c4iw_ev_handler(struct c4iw_dev *dev, u32 qid)
 	chp = get_chp(dev, qid);
 	if (chp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		t4_clear_cq_armed(&chp->cq);
+>>>>>>> v3.18
 =======
 		t4_clear_cq_armed(&chp->cq);
 >>>>>>> v3.18

@@ -244,7 +244,11 @@ static int __fib_validate_source(struct sk_buff *skb, __be32 src, __be32 dst,
 				 int rpf, struct in_device *idev, u32 *itag)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, no_addr, accept_local;
+=======
+	int ret, no_addr;
+>>>>>>> v3.18
 =======
 	int ret, no_addr;
 >>>>>>> v3.18
@@ -263,7 +267,10 @@ static int __fib_validate_source(struct sk_buff *skb, __be32 src, __be32 dst,
 	no_addr = idev->ifa_list == NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	accept_local = IN_DEV_ACCEPT_LOCAL(idev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fl4.flowi4_mark = IN_DEV_SRC_VMARK(idev) ? skb->mark : 0;
@@ -272,17 +279,23 @@ static int __fib_validate_source(struct sk_buff *skb, __be32 src, __be32 dst,
 	if (fib_lookup(net, &fl4, &res))
 		goto last_resort;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (res.type != RTN_UNICAST) {
 		if (res.type != RTN_LOCAL || !accept_local)
 			goto e_inval;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (res.type != RTN_UNICAST &&
 	    (res.type != RTN_LOCAL || !IN_DEV_ACCEPT_LOCAL(idev)))
 		goto e_inval;
 	if (!rpf && !fib_num_tclassid_users(dev_net(dev)) &&
 	    (dev->ifindex != oif || !IN_DEV_TX_REDIRECTS(idev)))
 		goto last_resort;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fib_combine_itag(itag, &res);
 	dev_match = false;
@@ -338,6 +351,10 @@ int fib_validate_source(struct sk_buff *skb, __be32 src, __be32 dst,
 
 	if (!r && !fib_num_tclassid_users(dev_net(dev)) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	    IN_DEV_ACCEPT_LOCAL(idev) &&
+>>>>>>> v3.18
 =======
 	    IN_DEV_ACCEPT_LOCAL(idev) &&
 >>>>>>> v3.18
@@ -552,7 +569,10 @@ const struct nla_policy rtm_ipv4_policy[RTA_MAX + 1] = {
 	[RTA_MULTIPATH]		= { .len = sizeof(struct rtnexthop) },
 	[RTA_FLOW]		= { .type = NLA_U32 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[RTA_UID]		= { .type = NLA_U32 },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -684,7 +704,11 @@ static int inet_dump_fib(struct sk_buff *skb, struct netlink_callback *cb)
 	if (nlmsg_len(cb->nlh) >= sizeof(struct rtmsg) &&
 	    ((struct rtmsg *) nlmsg_data(cb->nlh))->rtm_flags & RTM_F_CLONED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ip_rt_dump(skb, cb);
+=======
+		return skb->len;
+>>>>>>> v3.18
 =======
 		return skb->len;
 >>>>>>> v3.18
@@ -841,9 +865,12 @@ void fib_del_ifaddr(struct in_ifaddr *ifa, struct in_ifaddr *iprim)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (in_dev->dead)
 		goto no_promotions;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Deletion is more complicated than add.
@@ -922,7 +949,10 @@ void fib_del_ifaddr(struct in_ifaddr *ifa, struct in_ifaddr *iprim)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 no_promotions:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!(ok & BRD_OK))
@@ -972,7 +1002,10 @@ static void nl_fib_lookup(struct fib_result_nl *frn, struct fib_table *tb)
 
 		frn->tb_id = tb->tb_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcu_read_lock();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		frn->err = fib_table_lookup(tb, &fl4, &res, FIB_LOOKUP_NOREF);
@@ -984,7 +1017,10 @@ static void nl_fib_lookup(struct fib_result_nl *frn, struct fib_table *tb)
 			frn->scope = res.scope;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcu_read_unlock();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		local_bh_enable();
@@ -1002,6 +1038,7 @@ static void nl_fib_input(struct sk_buff *skb)
 	net = sock_net(skb->sk);
 	nlh = nlmsg_hdr(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb->len < nlmsg_total_size(sizeof(*frn)) ||
 	    skb->len < nlh->nlmsg_len ||
 	    nlmsg_len(nlh) < sizeof(*frn))
@@ -1009,11 +1046,16 @@ static void nl_fib_input(struct sk_buff *skb)
 
 	skb = skb_clone(skb, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	if (skb->len < NLMSG_HDRLEN || skb->len < nlh->nlmsg_len ||
 	    nlmsg_len(nlh) < sizeof(*frn))
 		return;
 
 	skb = netlink_skb_clone(skb, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (skb == NULL)
 		return;
@@ -1092,7 +1134,11 @@ static int fib_inetaddr_event(struct notifier_block *this, unsigned long event, 
 static int fib_netdev_event(struct notifier_block *this, unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -1227,6 +1273,7 @@ static struct pernet_operations fib_net_ops = {
 void __init ip_fib_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fib_trie_init();
 
 	register_pernet_subsys(&fib_net_ops);
@@ -1238,6 +1285,8 @@ void __init ip_fib_init(void)
 	rtnl_register(PF_INET, RTM_DELROUTE, inet_rtm_delroute, NULL, NULL);
 	rtnl_register(PF_INET, RTM_GETROUTE, NULL, inet_dump_fib, NULL);
 =======
+=======
+>>>>>>> v3.18
 	rtnl_register(PF_INET, RTM_NEWROUTE, inet_rtm_newroute, NULL, NULL);
 	rtnl_register(PF_INET, RTM_DELROUTE, inet_rtm_delroute, NULL, NULL);
 	rtnl_register(PF_INET, RTM_GETROUTE, NULL, inet_dump_fib, NULL);
@@ -1247,5 +1296,8 @@ void __init ip_fib_init(void)
 	register_inetaddr_notifier(&fib_inetaddr_notifier);
 
 	fib_trie_init();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -321,9 +321,15 @@ struct gelic_eurus_cmd {
 #define GELIC_WL_PRIV_GET_PSK		(SIOCIWFIRSTPRIV + 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int gelic_wl_driver_probe(struct gelic_card *card);
 extern int gelic_wl_driver_remove(struct gelic_card *card);
 extern void gelic_wl_interrupt(struct net_device *netdev, u64 status);
+=======
+int gelic_wl_driver_probe(struct gelic_card *card);
+int gelic_wl_driver_remove(struct gelic_card *card);
+void gelic_wl_interrupt(struct net_device *netdev, u64 status);
+>>>>>>> v3.18
 =======
 int gelic_wl_driver_probe(struct gelic_card *card);
 int gelic_wl_driver_remove(struct gelic_card *card);

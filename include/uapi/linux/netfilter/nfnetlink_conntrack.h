@@ -43,13 +43,19 @@ enum ctattr_type {
 	CTA_NAT_DST,
 	CTA_TUPLE_MASTER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CTA_NAT_SEQ_ADJ_ORIG,
 	CTA_NAT_SEQ_ADJ_REPLY,
 =======
+=======
+>>>>>>> v3.18
 	CTA_SEQ_ADJ_ORIG,
 	CTA_NAT_SEQ_ADJ_ORIG	= CTA_SEQ_ADJ_ORIG,
 	CTA_SEQ_ADJ_REPLY,
 	CTA_NAT_SEQ_ADJ_REPLY	= CTA_SEQ_ADJ_REPLY,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CTA_SECMARK,		/* obsolete */
 	CTA_ZONE,
@@ -173,7 +179,10 @@ enum ctattr_protonat {
 #define CTA_PROTONAT_MAX (__CTA_PROTONAT_MAX - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum ctattr_seqadj {
 	CTA_SEQADJ_UNSPEC,
 	CTA_SEQADJ_CORRECTION_POS,
@@ -183,6 +192,9 @@ enum ctattr_seqadj {
 };
 #define CTA_SEQADJ_MAX (__CTA_SEQADJ_MAX - 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum ctattr_natseq {
 	CTA_NAT_SEQ_UNSPEC,

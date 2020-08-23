@@ -31,6 +31,10 @@ irqreturn_t pdacf_interrupt(int irq, void *dev)
 	struct snd_pdacf *chip = dev;
 	unsigned short stat;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool wake_thread = false;
+>>>>>>> v3.18
 =======
 	bool wake_thread = false;
 >>>>>>> v3.18
@@ -46,7 +50,11 @@ irqreturn_t pdacf_interrupt(int irq, void *dev)
 			snd_printk(KERN_ERR "PDAUDIOCF SRAM buffer overrun detected!\n");
 		if (chip->pcm_substream)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tasklet_schedule(&chip->tq);
+=======
+			wake_thread = true;
+>>>>>>> v3.18
 =======
 			wake_thread = true;
 >>>>>>> v3.18
@@ -56,7 +64,11 @@ irqreturn_t pdacf_interrupt(int irq, void *dev)
 	if (get_irq_regs() != NULL)
 		snd_ak4117_check_rate_and_errors(chip->ak4117, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return IRQ_HANDLED;
+=======
+	return wake_thread ? IRQ_WAKE_THREAD : IRQ_HANDLED;
+>>>>>>> v3.18
 =======
 	return wake_thread ? IRQ_WAKE_THREAD : IRQ_HANDLED;
 >>>>>>> v3.18
@@ -269,6 +281,7 @@ static void pdacf_transfer(struct snd_pdacf *chip, unsigned int size, unsigned i
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pdacf_tasklet(unsigned long private_data)
 {
 	struct snd_pdacf *chip = (struct snd_pdacf *) private_data;
@@ -280,6 +293,8 @@ void pdacf_tasklet(unsigned long private_data)
 	if (chip->pcm_substream == NULL || chip->pcm_substream->runtime == NULL || !snd_pcm_running(chip->pcm_substream))
 		return;
 =======
+=======
+>>>>>>> v3.18
 irqreturn_t pdacf_threaded_irq(int irq, void *dev)
 {
 	struct snd_pdacf *chip = dev;
@@ -290,6 +305,9 @@ irqreturn_t pdacf_threaded_irq(int irq, void *dev)
 	
 	if (chip->pcm_substream == NULL || chip->pcm_substream->runtime == NULL || !snd_pcm_running(chip->pcm_substream))
 		return IRQ_HANDLED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rdp = inw(chip->port + PDAUDIOCF_REG_RDP);
@@ -337,7 +355,11 @@ irqreturn_t pdacf_threaded_irq(int irq, void *dev)
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&chip->reg_lock);
+=======
+	mutex_lock(&chip->reg_lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&chip->reg_lock);
 >>>>>>> v3.18
@@ -346,6 +368,7 @@ irqreturn_t pdacf_threaded_irq(int irq, void *dev)
 		chip->pcm_hwptr %= chip->pcm_size;
 		chip->pcm_tdone -= chip->pcm_period;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock(&chip->reg_lock);
 		snd_pcm_period_elapsed(chip->pcm_substream);
 		spin_lock(&chip->reg_lock);
@@ -353,11 +376,16 @@ irqreturn_t pdacf_threaded_irq(int irq, void *dev)
 	spin_unlock(&chip->reg_lock);
 	/* printk(KERN_DEBUG "TASKLET: end\n"); */
 =======
+=======
+>>>>>>> v3.18
 		mutex_unlock(&chip->reg_lock);
 		snd_pcm_period_elapsed(chip->pcm_substream);
 		mutex_lock(&chip->reg_lock);
 	}
 	mutex_unlock(&chip->reg_lock);
 	return IRQ_HANDLED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

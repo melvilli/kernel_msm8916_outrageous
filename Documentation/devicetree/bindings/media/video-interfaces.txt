@@ -89,6 +89,11 @@ Optional endpoint properties
 - pclk-sample: sample data on rising (1) or falling (0) edge of the pixel clock
   signal.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- sync-on-green-active: active state of Sync-on-green (SoG) signal, 0/1 for
+  LOW/HIGH respectively.
+>>>>>>> v3.18
 =======
 - sync-on-green-active: active state of Sync-on-green (SoG) signal, 0/1 for
   LOW/HIGH respectively.

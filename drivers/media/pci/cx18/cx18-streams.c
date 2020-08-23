@@ -376,7 +376,10 @@ static int cx18_prep_dev(struct cx18 *cx, int type)
 	s->video_dev->tvnorms = V4L2_STD_ALL;
 	s->video_dev->lock = &cx->serialize_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &s->video_dev->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cx18_set_funcs(s->video_dev);

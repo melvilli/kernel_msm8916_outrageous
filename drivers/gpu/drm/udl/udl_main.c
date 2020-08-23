@@ -42,8 +42,13 @@ static int udl_parse_vendor_descriptor(struct drm_device *dev,
 				    0, desc, MAX_VENDOR_DESCRIPTOR_SIZE);
 	if (total_len > 5) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_INFO("vendor descriptor length:%x data:%*ph\n",
 			total_len, 11, desc);
+=======
+		DRM_INFO("vendor descriptor length:%x data:%11ph\n",
+			total_len, desc);
+>>>>>>> v3.18
 =======
 		DRM_INFO("vendor descriptor length:%x data:%11ph\n",
 			total_len, desc);
@@ -208,7 +213,11 @@ static int udl_alloc_urb_list(struct drm_device *dev, int count, size_t size)
 		unode->urb = urb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buf = usb_alloc_coherent(udl->ddev->usbdev, MAX_TRANSFER, GFP_KERNEL,
+=======
+		buf = usb_alloc_coherent(udl->udev, MAX_TRANSFER, GFP_KERNEL,
+>>>>>>> v3.18
 =======
 		buf = usb_alloc_coherent(udl->udev, MAX_TRANSFER, GFP_KERNEL,
 >>>>>>> v3.18
@@ -221,7 +230,11 @@ static int udl_alloc_urb_list(struct drm_device *dev, int count, size_t size)
 
 		/* urb->transfer_buffer_length set to actual before submit */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		usb_fill_bulk_urb(urb, udl->ddev->usbdev, usb_sndbulkpipe(udl->ddev->usbdev, 1),
+=======
+		usb_fill_bulk_urb(urb, udl->udev, usb_sndbulkpipe(udl->udev, 1),
+>>>>>>> v3.18
 =======
 		usb_fill_bulk_urb(urb, udl->udev, usb_sndbulkpipe(udl->udev, 1),
 >>>>>>> v3.18
@@ -296,8 +309,14 @@ int udl_submit_urb(struct drm_device *dev, struct urb *urb, size_t len)
 int udl_driver_load(struct drm_device *dev, unsigned long flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct udl_device *udl;
 	int ret;
+=======
+	struct usb_device *udev = (void*)flags;
+	struct udl_device *udl;
+	int ret = -ENOMEM;
+>>>>>>> v3.18
 =======
 	struct usb_device *udev = (void*)flags;
 	struct udl_device *udl;
@@ -310,17 +329,23 @@ int udl_driver_load(struct drm_device *dev, unsigned long flags)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	udl->ddev = dev;
 	dev->dev_private = udl;
 
 	if (!udl_parse_vendor_descriptor(dev, dev->usbdev)) {
 =======
+=======
+>>>>>>> v3.18
 	udl->udev = udev;
 	udl->ddev = dev;
 	dev->dev_private = udl;
 
 	if (!udl_parse_vendor_descriptor(dev, udl->udev)) {
 		ret = -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		DRM_ERROR("firmware not recognized. Assume incompatible device\n");
 		goto err;
@@ -328,7 +353,10 @@ int udl_driver_load(struct drm_device *dev, unsigned long flags)
 
 	if (!udl_alloc_urb_list(dev, WRITES_IN_FLIGHT, MAX_TRANSFER)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		DRM_ERROR("udl_alloc_urb_list failed\n");
@@ -338,11 +366,14 @@ int udl_driver_load(struct drm_device *dev, unsigned long flags)
 	DRM_DEBUG("\n");
 	ret = udl_modeset_init(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = udl_fbdev_init(dev);
 	return 0;
 err:
 =======
+=======
+>>>>>>> v3.18
 	if (ret)
 		goto err;
 
@@ -360,6 +391,9 @@ err_fb:
 err:
 	if (udl->urbs.count)
 		udl_free_urb_list(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(udl);
 	DRM_ERROR("%d\n", ret);
@@ -377,6 +411,11 @@ int udl_driver_unload(struct drm_device *dev)
 	struct udl_device *udl = dev->dev_private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	drm_vblank_cleanup(dev);
+
+>>>>>>> v3.18
 =======
 	drm_vblank_cleanup(dev);
 

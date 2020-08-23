@@ -30,7 +30,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -323,7 +326,11 @@ static int smc91c92_probe(struct pcmcia_device *link)
     /* The SMC91c92-specific entries in the device structure. */
     dev->netdev_ops = &smc_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
     SET_ETHTOOL_OPS(dev, &ethtool_ops);
+=======
+    dev->ethtool_ops = &ethtool_ops;
+>>>>>>> v3.18
 =======
     dev->ethtool_ops = &ethtool_ops;
 >>>>>>> v3.18
@@ -748,7 +755,11 @@ static int smc91c92_resume(struct pcmcia_device *link)
 		i = osi_load_firmware(link);
 		if (i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_err("smc91c92_cs: Failed to load firmware\n");
+=======
+			netdev_err(dev, "Failed to load firmware\n");
+>>>>>>> v3.18
 =======
 			netdev_err(dev, "Failed to load firmware\n");
 >>>>>>> v3.18
@@ -805,7 +816,11 @@ static int check_sig(struct pcmcia_device *link)
 
     if (width) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    pr_info("using 8-bit IO window\n");
+=======
+	    netdev_info(dev, "using 8-bit IO window\n");
+>>>>>>> v3.18
 =======
 	    netdev_info(dev, "using 8-bit IO window\n");
 >>>>>>> v3.18
@@ -1052,7 +1067,11 @@ static void smc_dump(struct net_device *dev)
     for (w = 0; w < 4; w++) {
 	SMC_SELECT_BANK(w);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev_printk(KERN_DEBUG, dev, "bank %d: ", w);
+=======
+	netdev_dbg(dev, "bank %d: ", w);
+>>>>>>> v3.18
 =======
 	netdev_dbg(dev, "bank %d: ", w);
 >>>>>>> v3.18
@@ -1233,8 +1252,12 @@ static netdev_tx_t smc_start_xmit(struct sk_buff *skb,
 	/* THIS SHOULD NEVER HAPPEN. */
 	dev->stats.tx_aborted_errors++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev_printk(KERN_DEBUG, dev,
 		      "Internal error -- sent packet while busy\n");
+=======
+	netdev_dbg(dev, "Internal error -- sent packet while busy\n");
+>>>>>>> v3.18
 =======
 	netdev_dbg(dev, "Internal error -- sent packet while busy\n");
 >>>>>>> v3.18
@@ -1278,7 +1301,11 @@ static netdev_tx_t smc_start_xmit(struct sk_buff *skb,
 
     /* Otherwise defer until the Tx-space-allocated interrupt. */
 <<<<<<< HEAD
+<<<<<<< HEAD
     pr_debug("%s: memory allocation deferred.\n", dev->name);
+=======
+    netdev_dbg(dev, "memory allocation deferred.\n");
+>>>>>>> v3.18
 =======
     netdev_dbg(dev, "memory allocation deferred.\n");
 >>>>>>> v3.18
@@ -1345,8 +1372,13 @@ static void smc_eph_irq(struct net_device *dev)
     SMC_SELECT_BANK(0);
     ephs = inw(ioaddr + EPH);
 <<<<<<< HEAD
+<<<<<<< HEAD
     pr_debug("%s: Ethernet protocol handler interrupt, status"
 	  " %4.4x.\n", dev->name, ephs);
+=======
+    netdev_dbg(dev, "Ethernet protocol handler interrupt, status %4.4x.\n",
+	       ephs);
+>>>>>>> v3.18
 =======
     netdev_dbg(dev, "Ethernet protocol handler interrupt, status %4.4x.\n",
 	       ephs);
@@ -1390,8 +1422,13 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
     ioaddr = dev->base_addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     pr_debug("%s: SMC91c92 interrupt %d at %#x.\n", dev->name,
 	  irq, ioaddr);
+=======
+    netdev_dbg(dev, "SMC91c92 interrupt %d at %#x.\n",
+	       irq, ioaddr);
+>>>>>>> v3.18
 =======
     netdev_dbg(dev, "SMC91c92 interrupt %d at %#x.\n",
 	       irq, ioaddr);
@@ -1404,8 +1441,13 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
 	/* The device does not exist -- the card could be off-line, or
 	   maybe it has been ejected. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s: SMC91c92 interrupt %d for non-existent"
 	      "/ejected device.\n", dev->name, irq);
+=======
+	netdev_dbg(dev, "SMC91c92 interrupt %d for non-existent/ejected device.\n",
+		   irq);
+>>>>>>> v3.18
 =======
 	netdev_dbg(dev, "SMC91c92 interrupt %d for non-existent/ejected device.\n",
 		   irq);
@@ -1423,8 +1465,13 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
     do { /* read the status flag, and mask it */
 	status = inw(ioaddr + INTERRUPT) & 0xff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s: Status is %#2.2x (mask %#2.2x).\n", dev->name,
 	      status, mask);
+=======
+	netdev_dbg(dev, "Status is %#2.2x (mask %#2.2x).\n",
+		   status, mask);
+>>>>>>> v3.18
 =======
 	netdev_dbg(dev, "Status is %#2.2x (mask %#2.2x).\n",
 		   status, mask);
@@ -1473,8 +1520,13 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
     } while (--bogus_cnt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     pr_debug("  Restoring saved registers mask %2.2x bank %4.4x"
 	  " pointer %4.4x.\n", mask, saved_bank, saved_pointer);
+=======
+    netdev_dbg(dev, "  Restoring saved registers mask %2.2x bank %4.4x pointer %4.4x.\n",
+	       mask, saved_bank, saved_pointer);
+>>>>>>> v3.18
 =======
     netdev_dbg(dev, "  Restoring saved registers mask %2.2x bank %4.4x pointer %4.4x.\n",
 	       mask, saved_bank, saved_pointer);
@@ -1486,7 +1538,11 @@ static irqreturn_t smc_interrupt(int irq, void *dev_id)
     SMC_SELECT_BANK(saved_bank);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     pr_debug("%s: Exiting interrupt IRQ%d.\n", dev->name, irq);
+=======
+    netdev_dbg(dev, "Exiting interrupt IRQ%d.\n", irq);
+>>>>>>> v3.18
 =======
     netdev_dbg(dev, "Exiting interrupt IRQ%d.\n", irq);
 >>>>>>> v3.18
@@ -1548,15 +1604,21 @@ static void smc_rx(struct net_device *dev)
     packet_length = inw(ioaddr + DATA_1) & 0x07ff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     pr_debug("%s: Receive status %4.4x length %d.\n",
 	  dev->name, rx_status, packet_length);
 
     if (!(rx_status & RS_ERRORS)) {		
 =======
+=======
+>>>>>>> v3.18
     netdev_dbg(dev, "Receive status %4.4x length %d.\n",
 	       rx_status, packet_length);
 
     if (!(rx_status & RS_ERRORS)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* do stuff to make a new packet */
 	struct sk_buff *skb;
@@ -1566,7 +1628,11 @@ static void smc_rx(struct net_device *dev)
 	
 	if (skb == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    pr_debug("%s: Low memory, packet dropped.\n", dev->name);
+=======
+	    netdev_dbg(dev, "Low memory, packet dropped.\n");
+>>>>>>> v3.18
 =======
 	    netdev_dbg(dev, "Low memory, packet dropped.\n");
 >>>>>>> v3.18
@@ -1711,7 +1777,11 @@ static void smc_reset(struct net_device *dev)
     int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     pr_debug("%s: smc91c92 reset called.\n", dev->name);
+=======
+    netdev_dbg(dev, "smc91c92 reset called.\n");
+>>>>>>> v3.18
 =======
     netdev_dbg(dev, "smc91c92 reset called.\n");
 >>>>>>> v3.18

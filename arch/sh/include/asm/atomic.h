@@ -11,16 +11,22 @@
 #include <linux/types.h>
 #include <asm/cmpxchg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define ATOMIC_INIT(i)	{ (i) }
 
 #define atomic_read(v)		(*(volatile int *)&(v)->counter)
 =======
+=======
+>>>>>>> v3.18
 #include <asm/barrier.h>
 
 #define ATOMIC_INIT(i)	{ (i) }
 
 #define atomic_read(v)		ACCESS_ONCE((v)->counter)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define atomic_set(v,i)		((v)->counter = (i))
 
@@ -71,11 +77,14 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smp_mb__before_atomic_dec()	smp_mb()
 #define smp_mb__after_atomic_dec()	smp_mb()
 #define smp_mb__before_atomic_inc()	smp_mb()
 #define smp_mb__after_atomic_inc()	smp_mb()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __ASM_SH_ATOMIC_H */

@@ -3,7 +3,11 @@
  *
  * Copyright (c) 2003-2006, Ericsson AB
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2005-2007, Wind River Systems
+=======
+ * Copyright (c) 2005-2007, 2012-2013, Wind River Systems
+>>>>>>> v3.18
 =======
  * Copyright (c) 2005-2007, 2012-2013, Wind River Systems
 >>>>>>> v3.18
@@ -42,11 +46,14 @@
 #define _TIPC_SUBSCR_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct tipc_subscription;
 
 /**
  * struct tipc_subscription - TIPC network topology subscription object
 =======
+=======
+>>>>>>> v3.18
 #include "server.h"
 
 struct tipc_subscription;
@@ -55,6 +62,9 @@ struct tipc_subscriber;
 /**
  * struct tipc_subscription - TIPC network topology subscription object
  * @subscriber: pointer to its subscriber
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @seq: name sequence associated with subscription
  * @timeout: duration of subscription (in ms)
@@ -68,6 +78,10 @@ struct tipc_subscriber;
  */
 struct tipc_subscription {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tipc_subscriber *subscriber;
+>>>>>>> v3.18
 =======
 	struct tipc_subscriber *subscriber;
 >>>>>>> v3.18
@@ -78,13 +92,17 @@ struct tipc_subscription {
 	struct list_head nameseq_list;
 	struct list_head subscription_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 server_ref;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int swap;
 	struct tipc_event evt;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int tipc_subscr_overlap(struct tipc_subscription *sub,
 			u32 found_lower,
@@ -98,12 +116,17 @@ void tipc_subscr_report_overlap(struct tipc_subscription *sub,
 				u32 node,
 				int must_report);
 =======
+=======
+>>>>>>> v3.18
 int tipc_subscr_overlap(struct tipc_subscription *sub, u32 found_lower,
 			u32 found_upper);
 
 void tipc_subscr_report_overlap(struct tipc_subscription *sub, u32 found_lower,
 				u32 found_upper, u32 event, u32 port_ref,
 				u32 node, int must);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int tipc_subscr_start(void);

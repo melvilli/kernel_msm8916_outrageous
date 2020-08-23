@@ -8,6 +8,10 @@
  *
  *  Copyright (c) 2010 CompuLab Ltd
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *  Copyright (c) 2014 Intel Corp.
+>>>>>>> v3.18
 =======
  *  Copyright (c) 2014 Intel Corp.
 >>>>>>> v3.18
@@ -22,6 +26,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; see the file COPYING.  If not, write to
@@ -29,6 +34,10 @@
  */
 
 #include <linux/init.h>
+=======
+ */
+
+>>>>>>> v3.18
 =======
  */
 
@@ -47,6 +56,7 @@
 #define GPIO_IO_SIZE	64
 #define GPIO_IO_SIZE_CENTERTON	128
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define WDTBASE		0x84
 #define WDT_IO_SIZE	64
@@ -88,6 +98,8 @@ static DEFINE_PCI_DEVICE_TABLE(lpc_sch_ids) = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_ITC_LPC) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_CENTERTON_ILB) },
 =======
+=======
+>>>>>>> v3.18
 /* Intel Quark X1000 GPIO IRQ Number */
 #define GPIO_IRQ_QUARK_X1000	9
 
@@ -137,11 +149,15 @@ static const struct pci_device_id lpc_sch_ids[] = {
 	{ PCI_VDEVICE(INTEL, PCI_DEVICE_ID_INTEL_ITC_LPC), LPC_ITC },
 	{ PCI_VDEVICE(INTEL, PCI_DEVICE_ID_INTEL_CENTERTON_ILB), LPC_CENTERTON },
 	{ PCI_VDEVICE(INTEL, PCI_DEVICE_ID_INTEL_QUARK_X1000_ILB), LPC_QUARK_X1000 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0, }
 };
 MODULE_DEVICE_TABLE(pci, lpc_sch_ids);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int lpc_sch_probe(struct pci_dev *dev,
 				const struct pci_device_id *id)
@@ -156,6 +172,8 @@ static int lpc_sch_probe(struct pci_dev *dev,
 	if (!(base_addr_cfg & (1 << 31)))
 		dev_warn(&dev->dev, "Decode of the SMBus I/O range disabled\n");
 =======
+=======
+>>>>>>> v3.18
 #define LPC_NO_RESOURCE		1
 #define LPC_SKIP_RESOURCE	2
 
@@ -173,6 +191,7 @@ static int lpc_sch_get_io(struct pci_dev *pdev, int where, const char *name,
 	if (!(base_addr_cfg & (1 << 31)))
 		dev_warn(&pdev->dev, "Decode of the %s I/O range disabled\n",
 			 name);
+<<<<<<< HEAD
 >>>>>>> v3.18
 	else
 		base_addr = (unsigned short)base_addr_cfg;
@@ -190,10 +209,13 @@ static int lpc_sch_get_io(struct pci_dev *pdev, int where, const char *name,
 	base_addr = 0;
 	if (!(base_addr_cfg & (1 << 31)))
 		dev_warn(&dev->dev, "Decode of the GPIO I/O range disabled\n");
+=======
+>>>>>>> v3.18
 	else
 		base_addr = (unsigned short)base_addr_cfg;
 
 	if (base_addr == 0) {
+<<<<<<< HEAD
 		dev_warn(&dev->dev, "I/O space for GPIO uninitialized\n");
 	} else {
 		lpc_sch_cells[cells++] = sch_gpio_cell;
@@ -226,6 +248,8 @@ static int lpc_sch_get_io(struct pci_dev *pdev, int where, const char *name,
 		return -ENODEV;
 	}
 =======
+=======
+>>>>>>> v3.18
 		dev_warn(&pdev->dev, "I/O space for %s uninitialized\n", name);
 		return LPC_SKIP_RESOURCE;
 	}
@@ -305,6 +329,9 @@ static int lpc_sch_probe(struct pci_dev *dev, const struct pci_device_id *id)
 		return ret;
 	if (ret == 0)
 		cells++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (cells == 0) {
@@ -313,9 +340,12 @@ static int lpc_sch_probe(struct pci_dev *dev, const struct pci_device_id *id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < cells; i++)
 		lpc_sch_cells[i].id = id->device;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = mfd_add_devices(&dev->dev, 0, lpc_sch_cells, cells, NULL, 0, NULL);

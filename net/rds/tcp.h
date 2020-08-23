@@ -62,7 +62,11 @@ void rds_tcp_state_change(struct sock *sk);
 int rds_tcp_listen_init(void);
 void rds_tcp_listen_stop(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rds_tcp_listen_data_ready(struct sock *sk, int bytes);
+=======
+void rds_tcp_listen_data_ready(struct sock *sk);
+>>>>>>> v3.18
 =======
 void rds_tcp_listen_data_ready(struct sock *sk);
 >>>>>>> v3.18
@@ -71,7 +75,11 @@ void rds_tcp_listen_data_ready(struct sock *sk);
 int rds_tcp_recv_init(void);
 void rds_tcp_recv_exit(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rds_tcp_data_ready(struct sock *sk, int bytes);
+=======
+void rds_tcp_data_ready(struct sock *sk);
+>>>>>>> v3.18
 =======
 void rds_tcp_data_ready(struct sock *sk);
 >>>>>>> v3.18

@@ -13,8 +13,13 @@
  * arch/mips/mach-xxx/kernel-entry-init.h when necessary.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 .macro	kernel_entry_setup
 .endm
+=======
+	.macro	kernel_entry_setup
+	.endm
+>>>>>>> v3.18
 =======
 	.macro	kernel_entry_setup
 	.endm

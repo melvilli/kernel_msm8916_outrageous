@@ -18,6 +18,7 @@ void res_counter_init(struct res_counter *counter, struct res_counter *parent)
 {
 	spin_lock_init(&counter->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	counter->limit = RESOURCE_MAX;
 	counter->soft_limit = RESOURCE_MAX;
 	counter->parent = parent;
@@ -26,6 +27,8 @@ void res_counter_init(struct res_counter *counter, struct res_counter *parent)
 int res_counter_charge_locked(struct res_counter *counter, unsigned long val,
 			      bool force)
 =======
+=======
+>>>>>>> v3.18
 	counter->limit = RES_COUNTER_MAX;
 	counter->soft_limit = RES_COUNTER_MAX;
 	counter->parent = parent;
@@ -43,6 +46,9 @@ static u64 res_counter_uncharge_locked(struct res_counter *counter,
 
 static int res_counter_charge_locked(struct res_counter *counter,
 				     unsigned long val, bool force)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret = 0;
@@ -107,6 +113,7 @@ int res_counter_charge_nofail(struct res_counter *counter, unsigned long val,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u64 res_counter_uncharge_locked(struct res_counter *counter, unsigned long val)
 {
 	if (WARN_ON(counter->usage < val))
@@ -116,6 +123,8 @@ u64 res_counter_uncharge_locked(struct res_counter *counter, unsigned long val)
 	return counter->usage;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 u64 res_counter_uncharge_until(struct res_counter *counter,
@@ -202,6 +211,7 @@ u64 res_counter_read_u64(struct res_counter *counter, int member)
 
 int res_counter_memparse_write_strategy(const char *buf,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					unsigned long long *res)
 {
 	char *end;
@@ -221,6 +231,8 @@ int res_counter_memparse_write_strategy(const char *buf,
 
 	*res = PAGE_ALIGN(*res);
 =======
+=======
+>>>>>>> v3.18
 					unsigned long long *resp)
 {
 	char *end;
@@ -249,6 +261,9 @@ int res_counter_memparse_write_strategy(const char *buf,
 
 	*resp = res;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

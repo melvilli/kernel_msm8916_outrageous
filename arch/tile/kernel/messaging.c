@@ -26,15 +26,21 @@
 static DEFINE_PER_CPU(HV_MsgState, msg_state);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit init_messaging(void)
 {
 	/* Allocate storage for messages in kernel space */
 	HV_MsgState *state = &__get_cpu_var(msg_state);
 =======
+=======
+>>>>>>> v3.18
 void init_messaging(void)
 {
 	/* Allocate storage for messages in kernel space */
 	HV_MsgState *state = this_cpu_ptr(&msg_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rc = hv_register_message_state(state);
 	if (rc != HV_OK)
@@ -76,8 +82,13 @@ void hv_message_intr(struct pt_regs *regs, int intnum)
 
 	while (1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rmi = hv_receive_message(__get_cpu_var(msg_state),
 					 (HV_VirtAddr) message,
+=======
+		HV_MsgState *state = this_cpu_ptr(&msg_state);
+		rmi = hv_receive_message(*state, (HV_VirtAddr) message,
+>>>>>>> v3.18
 =======
 		HV_MsgState *state = this_cpu_ptr(&msg_state);
 		rmi = hv_receive_message(*state, (HV_VirtAddr) message,
@@ -109,7 +120,11 @@ void hv_message_intr(struct pt_regs *regs, int intnum)
 				(struct hv_driver_cb *)him->intarg;
 			cb->callback(cb, him->intdata);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__get_cpu_var(irq_stat).irq_hv_msg_count++;
+=======
+			__this_cpu_inc(irq_stat.irq_hv_msg_count);
+>>>>>>> v3.18
 =======
 			__this_cpu_inc(irq_stat.irq_hv_msg_count);
 >>>>>>> v3.18

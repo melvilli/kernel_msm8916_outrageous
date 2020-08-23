@@ -192,6 +192,12 @@ static struct platform_device osk5912_tps_leds = {
 static int osk_tps_setup(struct i2c_client *client, void *context)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!IS_BUILTIN(CONFIG_TPS65010))
+		return -ENOSYS;
+
+>>>>>>> v3.18
 =======
 	if (!IS_BUILTIN(CONFIG_TPS65010))
 		return -ENOSYS;
@@ -307,7 +313,11 @@ static struct omap_lcd_config osk_lcd_config __initdata = {
 
 #include <linux/input.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 >>>>>>> v3.18

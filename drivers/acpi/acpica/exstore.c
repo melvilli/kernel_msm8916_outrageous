@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -124,6 +128,10 @@ acpi_ex_store(union acpi_operand_object *source_desc,
 	switch (dest_desc->common.type) {
 	case ACPI_TYPE_LOCAL_REFERENCE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -192,7 +200,10 @@ acpi_ex_store(union acpi_operand_object *source_desc,
 
 	case ACPI_REFCLASS_DEBUG:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -308,7 +319,10 @@ acpi_ex_store_object_to_index(union acpi_operand_object *source_desc,
 
 	case ACPI_TYPE_BUFFER_FIELD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -444,7 +458,10 @@ acpi_ex_store_object_to_node(union acpi_operand_object *source_desc,
 	case ACPI_TYPE_STRING:
 	case ACPI_TYPE_BUFFER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*

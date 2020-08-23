@@ -14,6 +14,7 @@
 #include "target.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int verbose;
 bool dump_trace = false, quiet = false;
 
@@ -25,6 +26,8 @@ int eprintf(int level, const char *fmt, ...)
 	if (verbose >= level) {
 		va_start(args, fmt);
 =======
+=======
+>>>>>>> v3.18
 #define NSECS_PER_SEC  1000000000ULL
 #define NSECS_PER_USEC 1000ULL
 
@@ -37,13 +40,19 @@ static int _eprintf(int level, int var, const char *fmt, va_list args)
 	int ret = 0;
 
 	if (var >= level) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (use_browser >= 1)
 			ui_helpline__vshow(fmt, args);
 		else
 			ret = vfprintf(stderr, fmt, args);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	return ret;
@@ -84,6 +93,9 @@ int eprintf_time(int level, int var, u64 t, const char *fmt, ...)
 	if (var >= level) {
 		va_start(args, fmt);
 		ret = __eprintf_time(t, fmt, args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		va_end(args);
 	}
@@ -92,7 +104,10 @@ int eprintf_time(int level, int var, u64 t, const char *fmt, ...)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Overloading libtraceevent standard info print
  * function, display with -v in perf.
@@ -107,6 +122,9 @@ void pr_stat(const char *fmt, ...)
 	eprintf(1, verbose, "\n");
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int dump_printf(const char *fmt, ...)
 {
@@ -158,7 +176,10 @@ void trace_event(union perf_event *event)
 	printf(".\n");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static struct debug_variable {
 	const char *name;
@@ -204,4 +225,7 @@ int perf_debug_option(const char *str)
 	free(s);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

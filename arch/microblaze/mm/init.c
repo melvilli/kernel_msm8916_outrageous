@@ -193,7 +193,12 @@ void __init setup_memory(void)
 		end_pfn = memblock_region_memory_end_pfn(reg);
 		memblock_set_node(start_pfn << PAGE_SHIFT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					(end_pfn - start_pfn) << PAGE_SHIFT, 0);
+=======
+				  (end_pfn - start_pfn) << PAGE_SHIFT,
+				  &memblock.memory, 0);
+>>>>>>> v3.18
 =======
 				  (end_pfn - start_pfn) << PAGE_SHIFT,
 				  &memblock.memory, 0);
@@ -233,7 +238,11 @@ void __init setup_memory(void)
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, -1, "initrd");
 >>>>>>> v3.18
@@ -243,7 +252,11 @@ void free_initrd_mem(unsigned long start, unsigned long end)
 void free_initmem(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 =======
 	free_initmem_default(-1);
 >>>>>>> v3.18
@@ -382,7 +395,11 @@ asmlinkage void __init mmu_init(void)
 		unsigned long size;
 		size = initrd_end - initrd_start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memblock_reserve(virt_to_phys(initrd_start), size);
+=======
+		memblock_reserve(__virt_to_phys(initrd_start), size);
+>>>>>>> v3.18
 =======
 		memblock_reserve(__virt_to_phys(initrd_start), size);
 >>>>>>> v3.18

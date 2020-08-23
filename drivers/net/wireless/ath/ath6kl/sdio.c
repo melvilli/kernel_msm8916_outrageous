@@ -346,6 +346,7 @@ static int ath6kl_sdio_alloc_prep_scat_req(struct ath6kl_sdio *ar_sdio,
 	struct hif_scatter_req *s_req;
 	struct bus_request *bus_req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, scat_req_sz, scat_list_sz, sg_sz, buf_sz;
 	u8 *virt_buf;
 
@@ -358,6 +359,8 @@ static int ath6kl_sdio_alloc_prep_scat_req(struct ath6kl_sdio *ar_sdio,
 		buf_sz =  2 * L1_CACHE_BYTES +
 			  ATH6KL_MAX_TRANSFER_SIZE_PER_SCATTER;
 =======
+=======
+>>>>>>> v3.18
 	int i, scat_req_sz, scat_list_sz, size;
 	u8 *virt_buf;
 
@@ -369,6 +372,9 @@ static int ath6kl_sdio_alloc_prep_scat_req(struct ath6kl_sdio *ar_sdio,
 	else
 		size =  2 * L1_CACHE_BYTES +
 			ATH6KL_MAX_TRANSFER_SIZE_PER_SCATTER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < n_scat_req; i++) {
@@ -379,7 +385,11 @@ static int ath6kl_sdio_alloc_prep_scat_req(struct ath6kl_sdio *ar_sdio,
 
 		if (virt_scat) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			virt_buf = kzalloc(buf_sz, GFP_KERNEL);
+=======
+			virt_buf = kzalloc(size, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 			virt_buf = kzalloc(size, GFP_KERNEL);
 >>>>>>> v3.18
@@ -393,7 +403,11 @@ static int ath6kl_sdio_alloc_prep_scat_req(struct ath6kl_sdio *ar_sdio,
 		} else {
 			/* allocate sglist */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			s_req->sgentries = kzalloc(sg_sz, GFP_KERNEL);
+=======
+			s_req->sgentries = kzalloc(size, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 			s_req->sgentries = kzalloc(size, GFP_KERNEL);
 >>>>>>> v3.18
@@ -448,8 +462,14 @@ static int ath6kl_sdio_read_write_sync(struct ath6kl *ar, u32 addr, u8 *buf,
 
 		bounced = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		tbuf = buf;
+=======
+	} else {
+		tbuf = buf;
+	}
+>>>>>>> v3.18
 =======
 	} else {
 		tbuf = buf;
@@ -470,9 +490,15 @@ static void __ath6kl_sdio_write_async(struct ath6kl_sdio *ar_sdio,
 				      struct bus_request *req)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (req->scat_req)
 		ath6kl_sdio_scat_rw(ar_sdio, req);
 	else {
+=======
+	if (req->scat_req) {
+		ath6kl_sdio_scat_rw(ar_sdio, req);
+	} else {
+>>>>>>> v3.18
 =======
 	if (req->scat_req) {
 		ath6kl_sdio_scat_rw(ar_sdio, req);
@@ -691,7 +717,10 @@ static void ath6kl_sdio_scatter_req_add(struct ath6kl *ar,
 
 	spin_unlock_bh(&ar_sdio->scat_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -712,9 +741,15 @@ static int ath6kl_sdio_async_rw_scatter(struct ath6kl *ar,
 		   scat_req->len, scat_req->scat_entries);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request & HIF_SYNCHRONOUS)
 		status = ath6kl_sdio_scat_rw(ar_sdio, scat_req->busrequest);
 	else {
+=======
+	if (request & HIF_SYNCHRONOUS) {
+		status = ath6kl_sdio_scat_rw(ar_sdio, scat_req->busrequest);
+	} else {
+>>>>>>> v3.18
 =======
 	if (request & HIF_SYNCHRONOUS) {
 		status = ath6kl_sdio_scat_rw(ar_sdio, scat_req->busrequest);
@@ -900,7 +935,10 @@ static int ath6kl_sdio_suspend(struct ath6kl *ar, struct cfg80211_wowlan *wow)
 	if (ar->suspend_mode == WLAN_POWER_STATE_WOW ||
 	    (!ar->suspend_mode && wow)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = ath6kl_set_sdio_pm_caps(ar);
@@ -925,7 +963,10 @@ static int ath6kl_sdio_suspend(struct ath6kl *ar, struct cfg80211_wowlan *wow)
 	if (ar->suspend_mode == WLAN_POWER_STATE_DEEP_SLEEP ||
 	    !ar->suspend_mode || try_deepsleep) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		flags = sdio_get_host_pm_caps(func);
@@ -1111,7 +1152,10 @@ static int ath6kl_sdio_bmi_credits(struct ath6kl *ar)
 	timeout = jiffies + msecs_to_jiffies(BMI_COMMUNICATION_TIMEOUT);
 	while (time_before(jiffies, timeout) && !ar->bmi.cmd_credits) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -1456,6 +1500,10 @@ static const struct sdio_device_id ath6kl_sdio_devices[] = {
 	{SDIO_DEVICE(MANUFACTURER_CODE, (MANUFACTURER_ID_AR6004_BASE | 0x0))},
 	{SDIO_DEVICE(MANUFACTURER_CODE, (MANUFACTURER_ID_AR6004_BASE | 0x1))},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{SDIO_DEVICE(MANUFACTURER_CODE, (MANUFACTURER_ID_AR6004_BASE | 0x2))},
+>>>>>>> v3.18
 =======
 	{SDIO_DEVICE(MANUFACTURER_CODE, (MANUFACTURER_ID_AR6004_BASE | 0x2))},
 >>>>>>> v3.18

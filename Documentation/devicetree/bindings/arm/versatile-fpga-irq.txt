@@ -30,10 +30,16 @@ pic: pic@14000000 {
         valid-mask = <0x003fffff>;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 Optional properties:
 - interrupts: if the FPGA IRQ controller is cascaded, i.e. if its IRQ
   output is simply connected to the input of another IRQ controller,
   then the parent IRQ shall be specified in this property.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

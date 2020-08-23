@@ -78,6 +78,10 @@ const struct consw dummy_con = {
     .con_scrolldelta =	DUMMY,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(dummy_con);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(dummy_con);
 >>>>>>> v3.18

@@ -73,6 +73,7 @@ MLX4_EN_PARM_INT(pfcrx, 0, "Priority based Flow Control policy on RX[7:0]."
 			   " Per priority bit mask");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int en_print(const char *level, const struct mlx4_en_priv *priv,
 	     const char *format, ...)
 {
@@ -80,6 +81,8 @@ int en_print(const char *level, const struct mlx4_en_priv *priv,
 	struct va_format vaf;
 	int i;
 =======
+=======
+>>>>>>> v3.18
 MLX4_EN_PARM_INT(inline_thold, MAX_INLINE,
 		 "Threshold for using inline data (range: 17-104, default: 104)");
 
@@ -91,6 +94,9 @@ void en_print(const char *level, const struct mlx4_en_priv *priv,
 {
 	va_list args;
 	struct va_format vaf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	va_start(args, format);
@@ -98,6 +104,7 @@ void en_print(const char *level, const struct mlx4_en_priv *priv,
 	vaf.fmt = format;
 	vaf.va = &args;
 	if (priv->registered)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		i = printk("%s%s: %s: %pV",
 			   level, DRV_NAME, priv->dev->name, &vaf);
@@ -109,6 +116,8 @@ void en_print(const char *level, const struct mlx4_en_priv *priv,
 
 	return i;
 =======
+=======
+>>>>>>> v3.18
 		printk("%s%s: %s: %pV",
 		       level, DRV_NAME, priv->dev->name, &vaf);
 	else
@@ -116,6 +125,9 @@ void en_print(const char *level, const struct mlx4_en_priv *priv,
 		       level, DRV_NAME, dev_name(&priv->mdev->pdev->dev),
 		       priv->port, &vaf);
 	va_end(args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -148,12 +160,15 @@ static int mlx4_en_get_profile(struct mlx4_en_dev *mdev)
 
 	params->udp_rss = udp_rss;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	params->num_tx_rings_p_up = min_t(int, num_online_cpus(),
 			MLX4_EN_MAX_TX_RING_P_UP);
 	if (params->udp_rss && !(mdev->dev->caps.flags
 					& MLX4_DEV_CAP_FLAG_UDP_RSS)) {
 		mlx4_warn(mdev, "UDP RSS is not supported on this device.\n");
 =======
+=======
+>>>>>>> v3.18
 	params->num_tx_rings_p_up = mlx4_low_memory_profile() ?
 		MLX4_EN_MIN_TX_RING_P_UP :
 		min_t(int, num_online_cpus(), MLX4_EN_MAX_TX_RING_P_UP);
@@ -161,6 +176,9 @@ static int mlx4_en_get_profile(struct mlx4_en_dev *mdev)
 	if (params->udp_rss && !(mdev->dev->caps.flags
 					& MLX4_DEV_CAP_FLAG_UDP_RSS)) {
 		mlx4_warn(mdev, "UDP RSS is not supported on this device\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		params->udp_rss = 0;
 	}
@@ -175,6 +193,10 @@ static int mlx4_en_get_profile(struct mlx4_en_dev *mdev)
 			MLX4_EN_NUM_UP;
 		params->prof[i].rss_rings = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		params->prof[i].inline_thold = inline_thold;
+>>>>>>> v3.18
 =======
 		params->prof[i].inline_thold = inline_thold;
 >>>>>>> v3.18
@@ -213,6 +235,12 @@ static void mlx4_en_event(struct mlx4_dev *dev, void *endev_ptr,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case MLX4_DEV_EVENT_SLAVE_INIT:
+	case MLX4_DEV_EVENT_SLAVE_SHUTDOWN:
+		break;
+>>>>>>> v3.18
 =======
 	case MLX4_DEV_EVENT_SLAVE_INIT:
 	case MLX4_DEV_EVENT_SLAVE_SHUTDOWN:
@@ -241,6 +269,12 @@ static void mlx4_en_remove(struct mlx4_dev *dev, void *endev_ptr)
 			mlx4_en_destroy_netdev(mdev->pndev[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (mdev->dev->caps.flags2 & MLX4_DEV_CAP_FLAG2_TS)
+		mlx4_en_remove_timestamp(mdev);
+
+>>>>>>> v3.18
 =======
 	if (mdev->dev->caps.flags2 & MLX4_DEV_CAP_FLAG2_TS)
 		mlx4_en_remove_timestamp(mdev);
@@ -289,8 +323,12 @@ static void *mlx4_en_add(struct mlx4_dev *dev)
 	mdev->LSO_support = !!(dev->caps.flags & (1 << 15));
 	if (!mdev->LSO_support)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_warn(mdev, "LSO not supported, please upgrade to later "
 				"FW version to enable LSO\n");
+=======
+		mlx4_warn(mdev, "LSO not supported, please upgrade to later FW version to enable LSO\n");
+>>>>>>> v3.18
 =======
 		mlx4_warn(mdev, "LSO not supported, please upgrade to later FW version to enable LSO\n");
 >>>>>>> v3.18
@@ -310,7 +348,11 @@ static void *mlx4_en_add(struct mlx4_dev *dev)
 	err = mlx4_en_get_profile(mdev);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(mdev, "Bad module parameters, aborting.\n");
+=======
+		mlx4_err(mdev, "Bad module parameters, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(mdev, "Bad module parameters, aborting\n");
 >>>>>>> v3.18
@@ -327,6 +369,7 @@ static void *mlx4_en_add(struct mlx4_dev *dev)
 		mlx4_en_init_timestamp(mdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_foreach_port(i, dev, MLX4_PORT_TYPE_ETH) {
 		if (!dev->caps.comp_pool) {
 			mdev->profile.prof[i].rx_ring_num =
@@ -340,6 +383,10 @@ static void *mlx4_en_add(struct mlx4_dev *dev)
 				      dev->caps.num_ports - 1 , MAX_MSIX_P_PORT - 1));
 		}
 	}
+=======
+	/* Set default number of RX rings*/
+	mlx4_en_set_num_rx_rings(mdev);
+>>>>>>> v3.18
 =======
 	/* Set default number of RX rings*/
 	mlx4_en_set_num_rx_rings(mdev);
@@ -374,7 +421,11 @@ err_mr:
 	(void) mlx4_mr_free(dev, &mdev->mr);
 err_map:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mdev->uar_map)
+=======
+	if (mdev->uar_map)
+>>>>>>> v3.18
 =======
 	if (mdev->uar_map)
 >>>>>>> v3.18
@@ -398,9 +449,12 @@ static struct mlx4_interface mlx4_en_interface = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init mlx4_en_init(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static void mlx4_en_verify_params(void)
 {
 	if (pfctx > MAX_PFC_TX) {
@@ -426,6 +480,9 @@ static int __init mlx4_en_init(void)
 {
 	mlx4_en_verify_params();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return mlx4_register_interface(&mlx4_en_interface);
 }

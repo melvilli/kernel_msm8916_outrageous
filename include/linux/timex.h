@@ -65,7 +65,10 @@
 #include <asm/timex.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef random_get_entropy
 /*
  * The random_get_entropy() function is used by the /dev/random driver
@@ -80,6 +83,9 @@
 #define random_get_entropy()	get_cycles()
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * SHIFT_PLL is used as a dampening factor to define how much we

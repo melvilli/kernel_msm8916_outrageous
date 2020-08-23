@@ -29,7 +29,11 @@
 #include <asm/grfioctl.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../sticore.h"
+=======
+#include "../fbdev/sticore.h"
+>>>>>>> v3.18
 =======
 #include "../fbdev/sticore.h"
 >>>>>>> v3.18
@@ -493,7 +497,11 @@ static int sti_init_glob_cfg(struct sti_struct *sti, unsigned long rom_address,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_FONTS
+=======
+#ifdef CONFIG_FONT_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_FONT_SUPPORT
 >>>>>>> v3.18

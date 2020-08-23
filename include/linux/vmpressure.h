@@ -8,6 +8,10 @@
 #include <linux/types.h>
 #include <linux/cgroup.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/eventfd.h>
+>>>>>>> v3.18
 =======
 #include <linux/eventfd.h>
 >>>>>>> v3.18
@@ -16,9 +20,14 @@ struct vmpressure {
 	unsigned long scanned;
 	unsigned long reclaimed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long stall;
 	/* The lock is used to keep the scanned/reclaimed above in sync. */
 	struct mutex sr_lock;
+=======
+	/* The lock is used to keep the scanned/reclaimed above in sync. */
+	struct spinlock sr_lock;
+>>>>>>> v3.18
 =======
 	/* The lock is used to keep the scanned/reclaimed above in sync. */
 	struct spinlock sr_lock;
@@ -35,8 +44,12 @@ struct vmpressure {
 struct mem_cgroup;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int vmpressure_notifier_register(struct notifier_block *nb);
 extern int vmpressure_notifier_unregister(struct notifier_block *nb);
+=======
+#ifdef CONFIG_MEMCG
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_MEMCG
 >>>>>>> v3.18
@@ -44,6 +57,7 @@ extern void vmpressure(gfp_t gfp, struct mem_cgroup *memcg,
 		       unsigned long scanned, unsigned long reclaimed);
 extern void vmpressure_prio(gfp_t gfp, struct mem_cgroup *memcg, int prio);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MEMCG
 extern void vmpressure_init(struct vmpressure *vmpr);
@@ -61,6 +75,8 @@ static inline struct vmpressure *memcg_to_vmpressure(struct mem_cgroup *memcg)
 	return NULL;
 }
 =======
+=======
+>>>>>>> v3.18
 extern void vmpressure_init(struct vmpressure *vmpr);
 extern void vmpressure_cleanup(struct vmpressure *vmpr);
 extern struct vmpressure *memcg_to_vmpressure(struct mem_cgroup *memcg);
@@ -75,6 +91,9 @@ static inline void vmpressure(gfp_t gfp, struct mem_cgroup *memcg,
 			      unsigned long scanned, unsigned long reclaimed) {}
 static inline void vmpressure_prio(gfp_t gfp, struct mem_cgroup *memcg,
 				   int prio) {}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_MEMCG */
 #endif /* __LINUX_VMPRESSURE_H */

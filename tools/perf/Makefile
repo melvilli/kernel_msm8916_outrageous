@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 include ../scripts/Makefile.include
 
 # The default target of this Makefile is...
@@ -1218,6 +1219,8 @@ clean: $(LIBTRACEEVENT)-clean $(LIBLK)-clean
 .PHONY: shell_compatibility_test please_set_SHELL_PATH_to_a_more_modern_shell
 .PHONY: .FORCE-PERF-VERSION-FILE TAGS tags cscope .FORCE-PERF-CFLAGS
 =======
+=======
+>>>>>>> v3.18
 #
 # This is a simple wrapper Makefile that calls the main Makefile.perf
 # with a -j option to do parallel builds
@@ -1308,4 +1311,7 @@ build-test:
 	$(make)
 
 .PHONY: tags TAGS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

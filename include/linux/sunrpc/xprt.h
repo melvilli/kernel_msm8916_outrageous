@@ -25,13 +25,19 @@
 #define RPC_MAX_SLOT_TABLE	RPC_MAX_SLOT_TABLE_LIMIT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define RPC_CWNDSHIFT		(8U)
 #define RPC_CWNDSCALE		(1U << RPC_CWNDSHIFT)
 #define RPC_INITCWND		RPC_CWNDSCALE
 #define RPC_MAXCWND(xprt)	((xprt)->max_reqs << RPC_CWNDSHIFT)
 #define RPCXPRT_CONGESTED(xprt) ((xprt)->cong >= (xprt)->cwnd)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This describes a timeout strategy
@@ -298,7 +304,11 @@ int			xprt_reserve_xprt_cong(struct rpc_xprt *xprt, struct rpc_task *task);
 void			xprt_alloc_slot(struct rpc_xprt *xprt, struct rpc_task *task);
 void			xprt_lock_and_alloc_slot(struct rpc_xprt *xprt, struct rpc_task *task);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int			xprt_prepare_transmit(struct rpc_task *task);
+=======
+bool			xprt_prepare_transmit(struct rpc_task *task);
+>>>>>>> v3.18
 =======
 bool			xprt_prepare_transmit(struct rpc_task *task);
 >>>>>>> v3.18
@@ -309,7 +319,10 @@ void			xprt_release_xprt(struct rpc_xprt *xprt, struct rpc_task *task);
 void			xprt_release_xprt_cong(struct rpc_xprt *xprt, struct rpc_task *task);
 void			xprt_release(struct rpc_task *task);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rpc_xprt *	xprt_get(struct rpc_xprt *xprt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void			xprt_put(struct rpc_xprt *xprt);
@@ -319,7 +332,10 @@ struct rpc_xprt *	xprt_alloc(struct net *net, size_t size,
 void			xprt_free(struct rpc_xprt *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * xprt_get - return a reference to an RPC transport.
  * @xprt: pointer to the transport
@@ -332,6 +348,9 @@ static inline struct rpc_xprt *xprt_get(struct rpc_xprt *xprt)
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline __be32 *xprt_skip_transport_header(struct rpc_xprt *xprt, __be32 *p)
 {
@@ -372,6 +391,10 @@ int			xs_swapper(struct rpc_xprt *xprt, int enable);
 #define XPRT_CONNECTION_CLOSE	(8)
 #define XPRT_CONGESTED		(9)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define XPRT_CONNECTION_REUSE	(10)
+>>>>>>> v3.18
 =======
 #define XPRT_CONNECTION_REUSE	(10)
 >>>>>>> v3.18

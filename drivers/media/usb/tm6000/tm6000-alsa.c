@@ -2,7 +2,11 @@
  *
  *  Support for audio capture for tm5600/6000/6010
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    (c) 2007-2008 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *    (c) 2007-2008 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  *    (c) 2007-2008 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -61,7 +65,11 @@ MODULE_PARM_DESC(index, "Index value for tm6000x capture interface(s).");
 
 MODULE_DESCRIPTION("ALSA driver module for tm5600/tm6000/tm6010 based TV cards");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18
@@ -440,7 +448,12 @@ static int tm6000_audio_init(struct tm6000_core *dev)
 		return -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = snd_card_create(index[devnr], "tm6000", THIS_MODULE, 0, &card);
+=======
+	rc = snd_card_new(&dev->udev->dev, index[devnr], "tm6000",
+			  THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 =======
 	rc = snd_card_new(&dev->udev->dev, index[devnr], "tm6000",
 			  THIS_MODULE, 0, &card);
@@ -459,7 +472,10 @@ static int tm6000_audio_init(struct tm6000_core *dev)
 		le16_to_cpu(dev->udev->descriptor.idProduct));
 	snd_component_add(card, component);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &dev->udev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

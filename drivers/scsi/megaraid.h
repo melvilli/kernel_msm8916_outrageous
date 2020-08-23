@@ -854,15 +854,21 @@ typedef struct {
 	u8	sglen;	/* f/w supported scatter-gather list length */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char int_cdb[MAX_COMMAND_SIZE];
 	scb_t			int_scb;
 	struct mutex		int_mtx;	/* To synchronize the internal
 						commands */
 =======
+=======
+>>>>>>> v3.18
 	scb_t			int_scb;
 	struct mutex		int_mtx;	/* To synchronize the internal
 						commands */
 	int			int_status;	/* status of internal cmd */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct completion	int_waitq;	/* wait queue for internal
 						 cmds */
@@ -1012,7 +1018,10 @@ static int mega_do_del_logdrv(adapter_t *, int);
 static void mega_get_max_sgl(adapter_t *);
 static int mega_internal_command(adapter_t *, megacmd_t *, mega_passthru *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mega_internal_done(Scsi_Cmnd *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int mega_support_cluster(adapter_t *);

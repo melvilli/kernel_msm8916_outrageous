@@ -1,7 +1,11 @@
 /*
  * Copyright © 2010 ST Microelectronics
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Shiraz Hashim <shiraz.hashim@st.com>
+=======
+ * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
+>>>>>>> v3.18
 =======
  * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
 >>>>>>> v3.18

@@ -12,7 +12,10 @@ Description:
 		the controller index: '0' for the first controller,
 		'1' for the second.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 What:		/sys/class/scsi_host/hostX/acciopath_status
 Date:		November 2013
@@ -29,4 +32,7 @@ Description:	This file contains the current status of the "SSD Smart Path"
 		the direct i/o path to physical devices.  This setting is
 		controller wide, affecting all configured logical drives on the
 		controller.  This file is readable and writable.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

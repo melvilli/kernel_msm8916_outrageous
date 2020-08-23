@@ -15,6 +15,7 @@ ramfs_nommu_expand_for_mapping(struct inode *inode, size_t newsize)
 #else
 extern int ramfs_nommu_expand_for_mapping(struct inode *inode, size_t newsize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long ramfs_nommu_get_unmapped_area(struct file *file,
 						   unsigned long addr,
 						   unsigned long len,
@@ -24,12 +25,18 @@ extern unsigned long ramfs_nommu_get_unmapped_area(struct file *file,
 extern int ramfs_nommu_mmap(struct file *file, struct vm_area_struct *vma);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #endif
 
 extern const struct file_operations ramfs_file_operations;
 extern const struct vm_operations_struct generic_file_vm_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __init init_rootfs(void);
+=======
+extern int __init init_ramfs_fs(void);
+>>>>>>> v3.18
 =======
 extern int __init init_ramfs_fs(void);
 >>>>>>> v3.18

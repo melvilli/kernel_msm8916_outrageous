@@ -40,15 +40,21 @@
 #include "be_roce.h"
 #include "ocrdma_hw.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 MODULE_VERSION(OCRDMA_ROCE_DEV_VERSION);
 MODULE_DESCRIPTION("Emulex RoCE HCA Driver");
 =======
+=======
+>>>>>>> v3.18
 #include "ocrdma_stats.h"
 #include "ocrdma_abi.h"
 
 MODULE_VERSION(OCRDMA_ROCE_DRV_VERSION);
 MODULE_DESCRIPTION(OCRDMA_ROCE_DRV_DESC " " OCRDMA_ROCE_DRV_VERSION);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_AUTHOR("Emulex Corporation");
 MODULE_LICENSE("GPL");
@@ -74,6 +80,7 @@ void ocrdma_get_guid(struct ocrdma_dev *dev, u8 *guid)
 	guid[7] = mac_addr[5];
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void ocrdma_build_sgid_mac(union ib_gid *sgid, unsigned char *mac_addr,
 				  bool is_vlan, u16 vlan_id)
@@ -104,12 +111,20 @@ static bool ocrdma_add_sgid(struct ocrdma_dev *dev, union ib_gid *new_sgid)
 {
 	int i;
 >>>>>>> v3.18
+=======
+static bool ocrdma_add_sgid(struct ocrdma_dev *dev, union ib_gid *new_sgid)
+{
+	int i;
+>>>>>>> v3.18
 	unsigned long flags;
 
 	memset(&ocrdma_zero_sgid, 0, sizeof(union ib_gid));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ocrdma_build_sgid_mac(&new_sgid, mac_addr, is_vlan, vlan_id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -119,17 +134,23 @@ static bool ocrdma_add_sgid(struct ocrdma_dev *dev, union ib_gid *new_sgid)
 			    sizeof(union ib_gid))) {
 			/* found free entry */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(&dev->sgid_tbl[i], &new_sgid,
 			       sizeof(union ib_gid));
 			spin_unlock_irqrestore(&dev->sgid_lock, flags);
 			return true;
 		} else if (!memcmp(&dev->sgid_tbl[i], &new_sgid,
 =======
+=======
+>>>>>>> v3.18
 			memcpy(&dev->sgid_tbl[i], new_sgid,
 			       sizeof(union ib_gid));
 			spin_unlock_irqrestore(&dev->sgid_lock, flags);
 			return true;
 		} else if (!memcmp(&dev->sgid_tbl[i], new_sgid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				   sizeof(union ib_gid))) {
 			/* entry already present, no addition is required. */
@@ -142,6 +163,7 @@ static bool ocrdma_add_sgid(struct ocrdma_dev *dev, union ib_gid *new_sgid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool ocrdma_del_sgid(struct ocrdma_dev *dev, unsigned char *mac_addr,
 			    bool is_vlan, u16 vlan_id)
 {
@@ -152,19 +174,28 @@ static bool ocrdma_del_sgid(struct ocrdma_dev *dev, unsigned char *mac_addr,
 
 	ocrdma_build_sgid_mac(&sgid, mac_addr, is_vlan, vlan_id);
 =======
+=======
+>>>>>>> v3.18
 static bool ocrdma_del_sgid(struct ocrdma_dev *dev, union ib_gid *sgid)
 {
 	int found = false;
 	int i;
 	unsigned long flags;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_irqsave(&dev->sgid_lock, flags);
 	/* first is default sgid, which cannot be deleted. */
 	for (i = 1; i < OCRDMA_MAX_SGID; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!memcmp(&dev->sgid_tbl[i], &sgid, sizeof(union ib_gid))) {
+=======
+		if (!memcmp(&dev->sgid_tbl[i], sgid, sizeof(union ib_gid))) {
+>>>>>>> v3.18
 =======
 		if (!memcmp(&dev->sgid_tbl[i], sgid, sizeof(union ib_gid))) {
 >>>>>>> v3.18
@@ -178,6 +209,7 @@ static bool ocrdma_del_sgid(struct ocrdma_dev *dev, union ib_gid *sgid)
 	return found;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void ocrdma_add_default_sgid(struct ocrdma_dev *dev)
 {
@@ -241,11 +273,17 @@ static int ocrdma_addr_event(unsigned long event, struct net_device *netdev,
 			     union ib_gid *gid)
 {
 >>>>>>> v3.18
+=======
+static int ocrdma_addr_event(unsigned long event, struct net_device *netdev,
+			     union ib_gid *gid)
+{
+>>>>>>> v3.18
 	struct ib_event gid_event;
 	struct ocrdma_dev *dev;
 	bool found = false;
 	bool updated = false;
 	bool is_vlan = false;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u16 vid = 0;
 
@@ -255,10 +293,15 @@ static int ocrdma_addr_event(unsigned long event, struct net_device *netdev,
 		netdev = vlan_dev_real_dev(netdev);
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	is_vlan = netdev->priv_flags & IFF_802_1Q_VLAN;
 	if (is_vlan)
 		netdev = rdma_vlan_dev_real_dev(netdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rcu_read_lock();
@@ -273,8 +316,11 @@ static int ocrdma_addr_event(unsigned long event, struct net_device *netdev,
 	if (!found)
 		return NOTIFY_DONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rdma_link_local_addr((struct in6_addr *)&ifa->addr))
 		return NOTIFY_DONE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -282,15 +328,21 @@ static int ocrdma_addr_event(unsigned long event, struct net_device *netdev,
 	switch (event) {
 	case NETDEV_UP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		updated = ocrdma_add_sgid(dev, netdev->dev_addr, is_vlan, vid);
 		break;
 	case NETDEV_DOWN:
 		updated = ocrdma_del_sgid(dev, netdev->dev_addr, is_vlan, vid);
 =======
+=======
+>>>>>>> v3.18
 		updated = ocrdma_add_sgid(dev, gid);
 		break;
 	case NETDEV_DOWN:
 		updated = ocrdma_del_sgid(dev, gid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -308,7 +360,10 @@ static int ocrdma_addr_event(unsigned long event, struct net_device *netdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ocrdma_inetaddr_event(struct notifier_block *notifier,
 				  unsigned long event, void *ptr)
 {
@@ -335,6 +390,9 @@ static int ocrdma_inet6addr_event(struct notifier_block *notifier,
 	return ocrdma_addr_event(event, netdev, gid);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct notifier_block ocrdma_inet6addr_notifier = {
 	.notifier_call = ocrdma_inet6addr_event
@@ -356,6 +414,10 @@ static int ocrdma_register_device(struct ocrdma_dev *dev)
 	       sizeof(OCRDMA_NODE_DESC));
 	dev->ibdev.owner = THIS_MODULE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev->ibdev.uverbs_abi_ver = OCRDMA_ABI_VERSION;
+>>>>>>> v3.18
 =======
 	dev->ibdev.uverbs_abi_ver = OCRDMA_ABI_VERSION;
 >>>>>>> v3.18
@@ -421,10 +483,13 @@ static int ocrdma_register_device(struct ocrdma_dev *dev)
 
 	dev->ibdev.get_dma_mr = ocrdma_get_dma_mr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->ibdev.dereg_mr = ocrdma_dereg_mr;
 	dev->ibdev.reg_user_mr = ocrdma_reg_user_mr;
 
 =======
+=======
+>>>>>>> v3.18
 	dev->ibdev.reg_phys_mr = ocrdma_reg_kernel_mr;
 	dev->ibdev.dereg_mr = ocrdma_dereg_mr;
 	dev->ibdev.reg_user_mr = ocrdma_reg_user_mr;
@@ -433,6 +498,9 @@ static int ocrdma_register_device(struct ocrdma_dev *dev)
 	dev->ibdev.alloc_fast_reg_page_list = ocrdma_alloc_frmr_page_list;
 	dev->ibdev.free_fast_reg_page_list = ocrdma_free_frmr_page_list;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* mandatory to support user space verbs consumer. */
 	dev->ibdev.alloc_ucontext = ocrdma_alloc_ucontext;
@@ -443,7 +511,11 @@ static int ocrdma_register_device(struct ocrdma_dev *dev)
 	dev->ibdev.process_mad = ocrdma_process_mad;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->nic_info.dev_family == OCRDMA_GEN2_FAMILY) {
+=======
+	if (ocrdma_get_asic_type(dev) == OCRDMA_ASIC_GEN_SKH_R) {
+>>>>>>> v3.18
 =======
 	if (ocrdma_get_asic_type(dev) == OCRDMA_ASIC_GEN_SKH_R) {
 >>>>>>> v3.18
@@ -484,19 +556,29 @@ static int ocrdma_alloc_resources(struct ocrdma_dev *dev)
 			goto alloc_err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	dev->stag_arr = kzalloc(sizeof(u64) * OCRDMA_MAX_STAG, GFP_KERNEL);
 	if (dev->stag_arr == NULL)
 		goto alloc_err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_init(&dev->av_tbl.lock);
 	spin_lock_init(&dev->flush_q_lock);
 	return 0;
 alloc_err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ocrdma_err("%s(%d) error.\n", __func__, dev->id);
+=======
+	pr_err("%s(%d) error.\n", __func__, dev->id);
+>>>>>>> v3.18
 =======
 	pr_err("%s(%d) error.\n", __func__, dev->id);
 >>>>>>> v3.18
@@ -506,6 +588,10 @@ alloc_err:
 static void ocrdma_free_resources(struct ocrdma_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(dev->stag_arr);
+>>>>>>> v3.18
 =======
 	kfree(dev->stag_arr);
 >>>>>>> v3.18
@@ -515,10 +601,13 @@ static void ocrdma_free_resources(struct ocrdma_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ocrdma_dev *ocrdma_add(struct be_dev_info *dev_info)
 {
 	int status = 0;
 =======
+=======
+>>>>>>> v3.18
 /* OCRDMA sysfs interface */
 static ssize_t show_rev(struct device *device, struct device_attribute *attr,
 			char *buf)
@@ -627,13 +716,20 @@ static void ocrdma_init_gid_table(struct ocrdma_dev *dev)
 static struct ocrdma_dev *ocrdma_add(struct be_dev_info *dev_info)
 {
 	int status = 0, i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct ocrdma_dev *dev;
 
 	dev = (struct ocrdma_dev *)ib_alloc_device(sizeof(struct ocrdma_dev));
 	if (!dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ocrdma_err("Unable to allocate ib device\n");
+=======
+		pr_err("Unable to allocate ib device\n");
+>>>>>>> v3.18
 =======
 		pr_err("Unable to allocate ib device\n");
 >>>>>>> v3.18
@@ -657,10 +753,15 @@ static struct ocrdma_dev *ocrdma_add(struct be_dev_info *dev_info)
 		goto alloc_err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = ocrdma_build_sgid_tbl(dev);
 	if (status)
 		goto alloc_err;
 
+=======
+	ocrdma_init_service_level(dev);
+	ocrdma_init_gid_table(dev);
+>>>>>>> v3.18
 =======
 	ocrdma_init_service_level(dev);
 	ocrdma_init_gid_table(dev);
@@ -670,12 +771,15 @@ static struct ocrdma_dev *ocrdma_add(struct be_dev_info *dev_info)
 		goto alloc_err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&ocrdma_devlist_lock);
 	list_add_tail_rcu(&dev->entry, &ocrdma_dev_list);
 	spin_unlock(&ocrdma_devlist_lock);
 	return dev;
 
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(ocrdma_attributes); i++)
 		if (device_create_file(&dev->ibdev.dev, ocrdma_attributes[i]))
 			goto sysfs_err;
@@ -695,6 +799,9 @@ static struct ocrdma_dev *ocrdma_add(struct be_dev_info *dev_info)
 
 sysfs_err:
 	ocrdma_remove_sysfiles(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 alloc_err:
 	ocrdma_free_resources(dev);
@@ -705,7 +812,11 @@ idr_err:
 	kfree(dev->mbx_cmd);
 	ib_dealloc_device(&dev->ibdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ocrdma_err("%s() leaving. ret=%d\n", __func__, status);
+=======
+	pr_err("%s() leaving. ret=%d\n", __func__, status);
+>>>>>>> v3.18
 =======
 	pr_err("%s() leaving. ret=%d\n", __func__, status);
 >>>>>>> v3.18
@@ -717,9 +828,12 @@ static void ocrdma_remove_free(struct rcu_head *rcu)
 	struct ocrdma_dev *dev = container_of(rcu, struct ocrdma_dev, rcu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ocrdma_free_resources(dev);
 	ocrdma_cleanup_hw(dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	idr_remove(&ocrdma_dev_id, dev->id);
@@ -733,6 +847,12 @@ static void ocrdma_remove(struct ocrdma_dev *dev)
 	 * of the registered clients.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ocrdma_rem_port_stats(dev);
+	ocrdma_remove_sysfiles(dev);
+
+>>>>>>> v3.18
 =======
 	ocrdma_rem_port_stats(dev);
 	ocrdma_remove_sysfiles(dev);
@@ -744,11 +864,17 @@ static void ocrdma_remove(struct ocrdma_dev *dev)
 	list_del_rcu(&dev->entry);
 	spin_unlock(&ocrdma_devlist_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	ocrdma_free_resources(dev);
 	ocrdma_cleanup_hw(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	call_rcu(&dev->rcu, ocrdma_remove_free);
 }
@@ -779,7 +905,11 @@ static int ocrdma_close(struct ocrdma_dev *dev)
 		for (i = 0; i < OCRDMA_MAX_QP; i++) {
 			qp = cur_qp[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (qp) {
+=======
+			if (qp && qp->ibqp.qp_type != IB_QPT_GSI) {
+>>>>>>> v3.18
 =======
 			if (qp && qp->ibqp.qp_type != IB_QPT_GSI) {
 >>>>>>> v3.18
@@ -803,13 +933,19 @@ static int ocrdma_close(struct ocrdma_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ocrdma_shutdown(struct ocrdma_dev *dev)
 {
 	ocrdma_close(dev);
 	ocrdma_remove(dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* event handling via NIC driver ensures that all the NIC specific
  * initialization done before RoCE driver notifies
@@ -825,12 +961,18 @@ static void ocrdma_event_handler(struct ocrdma_dev *dev, u32 event)
 		ocrdma_close(dev);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 =======
+=======
+>>>>>>> v3.18
 	case BE_DEV_SHUTDOWN:
 		ocrdma_shutdown(dev);
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -840,6 +982,10 @@ static struct ocrdma_driver ocrdma_drv = {
 	.remove			= ocrdma_remove,
 	.state_change_handler	= ocrdma_event_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.be_abi_version		= OCRDMA_BE_ROCE_ABI_VERSION,
+>>>>>>> v3.18
 =======
 	.be_abi_version		= OCRDMA_BE_ROCE_ABI_VERSION,
 >>>>>>> v3.18
@@ -853,23 +999,32 @@ static void ocrdma_unregister_inet6addr_notifier(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ocrdma_unregister_inetaddr_notifier(void)
 {
 	unregister_inetaddr_notifier(&ocrdma_inetaddr_notifier);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init ocrdma_init_module(void)
 {
 	int status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_IPV6)
 	status = register_inet6addr_notifier(&ocrdma_inet6addr_notifier);
 	if (status)
 		return status;
 =======
+=======
+>>>>>>> v3.18
 	ocrdma_init_debugfs();
 
 	status = register_inetaddr_notifier(&ocrdma_inetaddr_notifier);
@@ -880,15 +1035,21 @@ static int __init ocrdma_init_module(void)
 	status = register_inet6addr_notifier(&ocrdma_inet6addr_notifier);
 	if (status)
 		goto err_notifier6;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 	status = be_roce_register_driver(&ocrdma_drv);
 	if (status)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ocrdma_unregister_inet6addr_notifier();
 
 =======
+=======
+>>>>>>> v3.18
 		goto err_be_reg;
 
 	return 0;
@@ -899,6 +1060,9 @@ err_be_reg:
 err_notifier6:
 #endif
 	ocrdma_unregister_inetaddr_notifier();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
@@ -908,6 +1072,11 @@ static void __exit ocrdma_exit_module(void)
 	be_roce_unregister_driver(&ocrdma_drv);
 	ocrdma_unregister_inet6addr_notifier();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ocrdma_unregister_inetaddr_notifier();
+	ocrdma_rem_debugfs();
+>>>>>>> v3.18
 =======
 	ocrdma_unregister_inetaddr_notifier();
 	ocrdma_rem_debugfs();

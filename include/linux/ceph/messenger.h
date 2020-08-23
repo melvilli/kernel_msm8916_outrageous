@@ -2,6 +2,10 @@
 #define __FS_CEPH_MESSENGER_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/blk_types.h>
+>>>>>>> v3.18
 =======
 #include <linux/blk_types.h>
 >>>>>>> v3.18
@@ -65,8 +69,13 @@ struct ceph_messenger {
 	spinlock_t global_seq_lock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 supported_features;
 	u32 required_features;
+=======
+	u64 supported_features;
+	u64 required_features;
+>>>>>>> v3.18
 =======
 	u64 supported_features;
 	u64 required_features;
@@ -129,8 +138,12 @@ struct ceph_msg_data_cursor {
 		struct {				/* bio */
 			struct bio	*bio;		/* bio from list */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned int	vector_index;	/* vector from bio */
 			unsigned int	vector_offset;	/* bytes from vector */
+=======
+			struct bvec_iter bvec_iter;
+>>>>>>> v3.18
 =======
 			struct bvec_iter bvec_iter;
 >>>>>>> v3.18
@@ -168,7 +181,10 @@ struct ceph_msg {
 
 	struct kref kref;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool front_is_vmalloc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool more_to_follow;
@@ -209,7 +225,11 @@ struct ceph_connection {
 	struct ceph_entity_name peer_name; /* peer name */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned peer_features;
+=======
+	u64 peer_features;
+>>>>>>> v3.18
 =======
 	u64 peer_features;
 >>>>>>> v3.18
@@ -277,8 +297,13 @@ extern void ceph_msgr_flush(void);
 extern void ceph_messenger_init(struct ceph_messenger *msgr,
 			struct ceph_entity_addr *myaddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u32 supported_features,
 			u32 required_features,
+=======
+			u64 supported_features,
+			u64 required_features,
+>>>>>>> v3.18
 =======
 			u64 supported_features,
 			u64 required_features,
@@ -312,6 +337,7 @@ extern void ceph_msg_data_add_bio(struct ceph_msg *msg, struct bio *bio,
 extern struct ceph_msg *ceph_msg_new(int type, int front_len, gfp_t flags,
 				     bool can_fail);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ceph_msg_kfree(struct ceph_msg *m);
 
 
@@ -325,6 +351,11 @@ static inline void ceph_msg_put(struct ceph_msg *msg)
 {
 	kref_put(&msg->kref, ceph_msg_last_put);
 }
+=======
+
+extern struct ceph_msg *ceph_msg_get(struct ceph_msg *msg);
+extern void ceph_msg_put(struct ceph_msg *msg);
+>>>>>>> v3.18
 =======
 
 extern struct ceph_msg *ceph_msg_get(struct ceph_msg *msg);

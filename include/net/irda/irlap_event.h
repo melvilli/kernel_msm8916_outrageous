@@ -26,9 +26,13 @@
  * 
  *     You should have received a copy of the GNU General Public License 
 <<<<<<< HEAD
+<<<<<<< HEAD
  *     along with this program; if not, write to the Free Software 
  *     Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
  *     MA 02111-1307 USA
+=======
+ *     along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *     along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -131,7 +135,11 @@ void irlap_do_event(struct irlap_cb *self, IRLAP_EVENT event,
 void irlap_print_event(IRLAP_EVENT event);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int irlap_qos_negotiate(struct irlap_cb *self, struct sk_buff *skb);
+=======
+int irlap_qos_negotiate(struct irlap_cb *self, struct sk_buff *skb);
+>>>>>>> v3.18
 =======
 int irlap_qos_negotiate(struct irlap_cb *self, struct sk_buff *skb);
 >>>>>>> v3.18

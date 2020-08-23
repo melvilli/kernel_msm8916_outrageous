@@ -29,6 +29,11 @@
 #include <bcm47xx.h>
 #include <bcm47xx_nvram.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/if_ether.h>
 #include <linux/etherdevice.h>
@@ -141,7 +146,11 @@ static void nvram_read_leddc(const char *prefix, const char *name,
 
 static void nvram_read_macaddr(const char *prefix, const char *name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       u8 (*val)[6], bool fallback)
+=======
+			       u8 val[6], bool fallback)
+>>>>>>> v3.18
 =======
 			       u8 val[6], bool fallback)
 >>>>>>> v3.18
@@ -154,17 +163,23 @@ static void nvram_read_macaddr(const char *prefix, const char *name,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bcm47xx_nvram_parse_macaddr(buf, *val);
 }
 
 static void nvram_read_alpha2(const char *prefix, const char *name,
 			     char (*val)[2], bool fallback)
 =======
+=======
+>>>>>>> v3.18
 	bcm47xx_nvram_parse_macaddr(buf, val);
 }
 
 static void nvram_read_alpha2(const char *prefix, const char *name,
 			     char val[2], bool fallback)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	char buf[10];
@@ -180,7 +195,11 @@ static void nvram_read_alpha2(const char *prefix, const char *name,
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(val, buf, sizeof(val));
+=======
+	memcpy(val, buf, 2);
+>>>>>>> v3.18
 =======
 	memcpy(val, buf, 2);
 >>>>>>> v3.18
@@ -190,6 +209,10 @@ static void bcm47xx_fill_sprom_r1234589(struct ssb_sprom *sprom,
 					const char *prefix, bool fallback)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nvram_read_u16(prefix, NULL, "devid", &sprom->dev_id, 0, fallback);
+>>>>>>> v3.18
 =======
 	nvram_read_u16(prefix, NULL, "devid", &sprom->dev_id, 0, fallback);
 >>>>>>> v3.18
@@ -206,7 +229,11 @@ static void bcm47xx_fill_sprom_r1234589(struct ssb_sprom *sprom,
 	nvram_read_s8(prefix, NULL, "ag1", &sprom->antenna_gain.a1, 0,
 		      fallback);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvram_read_alpha2(prefix, "ccode", &sprom->alpha2, fallback);
+=======
+	nvram_read_alpha2(prefix, "ccode", sprom->alpha2, fallback);
+>>>>>>> v3.18
 =======
 	nvram_read_alpha2(prefix, "ccode", sprom->alpha2, fallback);
 >>>>>>> v3.18
@@ -660,11 +687,14 @@ static void bcm47xx_fill_sprom_path_r45(struct ssb_sprom *sprom,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bcm47xx_fill_sprom_ethernet(struct ssb_sprom *sprom,
 					const char *prefix, bool fallback)
 {
 	nvram_read_macaddr(prefix, "et0macaddr", &sprom->et0mac, fallback);
 =======
+=======
+>>>>>>> v3.18
 static bool bcm47xx_is_valid_mac(u8 *mac)
 {
 	return mac && !(mac[0] == 0x00 && mac[1] == 0x90 && mac[2] == 0x4c);
@@ -696,6 +726,9 @@ static void bcm47xx_fill_sprom_ethernet(struct ssb_sprom *sprom,
 					const char *prefix, bool fallback)
 {
 	nvram_read_macaddr(prefix, "et0macaddr", sprom->et0mac, fallback);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nvram_read_u8(prefix, NULL, "et0mdcport", &sprom->et0mdcport, 0,
 		      fallback);
@@ -703,7 +736,11 @@ static void bcm47xx_fill_sprom_ethernet(struct ssb_sprom *sprom,
 		      fallback);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvram_read_macaddr(prefix, "et1macaddr", &sprom->et1mac, fallback);
+=======
+	nvram_read_macaddr(prefix, "et1macaddr", sprom->et1mac, fallback);
+>>>>>>> v3.18
 =======
 	nvram_read_macaddr(prefix, "et1macaddr", sprom->et1mac, fallback);
 >>>>>>> v3.18
@@ -713,9 +750,12 @@ static void bcm47xx_fill_sprom_ethernet(struct ssb_sprom *sprom,
 		      fallback);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvram_read_macaddr(prefix, "macaddr", &sprom->il0mac, fallback);
 	nvram_read_macaddr(prefix, "il0macaddr", &sprom->il0mac, fallback);
 =======
+=======
+>>>>>>> v3.18
 	nvram_read_macaddr(prefix, "macaddr", sprom->il0mac, fallback);
 	nvram_read_macaddr(prefix, "il0macaddr", sprom->il0mac, fallback);
 
@@ -737,6 +777,9 @@ static void bcm47xx_fill_sprom_ethernet(struct ssb_sprom *sprom,
 			}
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

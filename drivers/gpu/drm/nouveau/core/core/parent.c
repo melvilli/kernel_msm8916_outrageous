@@ -50,7 +50,11 @@ nouveau_parent_sclass(struct nouveau_object *parent, u16 handle,
 	mask = nv_parent(parent)->engine;
 	while (mask) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int i = ffsll(mask) - 1;
+=======
+		int i = __ffs64(mask);
+>>>>>>> v3.18
 =======
 		int i = __ffs64(mask);
 >>>>>>> v3.18
@@ -80,7 +84,10 @@ nouveau_parent_sclass(struct nouveau_object *parent, u16 handle,
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 nouveau_parent_lclass(struct nouveau_object *parent, u32 *lclass, int size)
 {
 	struct nouveau_sclass *sclass;
@@ -114,6 +121,9 @@ nouveau_parent_lclass(struct nouveau_object *parent, u32 *lclass, int size)
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nouveau_parent_create_(struct nouveau_object *parent,
 		       struct nouveau_object *engine,

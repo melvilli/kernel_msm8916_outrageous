@@ -57,6 +57,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Atomically swap in the new signal mask, and wait for a signal.
  */
 #ifdef CONFIG_64BIT
@@ -64,6 +65,8 @@
 #endif
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Do a signal return - restore sigcontext.
@@ -89,7 +92,11 @@ restore_sigcontext(struct sigcontext __user *sc, struct pt_regs *regs)
 	err |= __copy_from_user(regs->iasq, sc->sc_iasq, sizeof(regs->iasq));
 	err |= __get_user(regs->sar, &sc->sc_sar);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(2,"restore_sigcontext: iaoq is 0x%#lx / 0x%#lx\n", 
+=======
+	DBG(2,"restore_sigcontext: iaoq is %#lx / %#lx\n",
+>>>>>>> v3.18
 =======
 	DBG(2,"restore_sigcontext: iaoq is %#lx / %#lx\n",
 >>>>>>> v3.18
@@ -242,8 +249,13 @@ setup_sigcontext(struct sigcontext __user *sc, struct pt_regs *regs, int in_sysc
 
 static long
 <<<<<<< HEAD
+<<<<<<< HEAD
 setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 	       sigset_t *set, struct pt_regs *regs, int in_syscall)
+=======
+setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs,
+	       int in_syscall)
+>>>>>>> v3.18
 =======
 setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs,
 	       int in_syscall)
@@ -261,15 +273,21 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs,
 	usp = (regs->gr[30] & ~(0x01UL));
 	/*FIXME: frame_size parameter is unused, remove it. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frame = get_sigframe(ka, usp, sizeof(*frame));
 
 	DBG(1,"SETUP_RT_FRAME: START\n");
 	DBG(1,"setup_rt_frame: frame %p info %p\n", frame, info);
 =======
+=======
+>>>>>>> v3.18
 	frame = get_sigframe(&ksig->ka, usp, sizeof(*frame));
 
 	DBG(1,"SETUP_RT_FRAME: START\n");
 	DBG(1,"setup_rt_frame: frame %p info %p\n", frame, ksig->info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	
@@ -280,7 +298,11 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs,
 	if (is_compat_task()) {
 		DBG(1,"setup_rt_frame: frame->info = 0x%p\n", &compat_frame->info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err |= copy_siginfo_to_user32(&compat_frame->info, info);
+=======
+		err |= copy_siginfo_to_user32(&compat_frame->info, &ksig->info);
+>>>>>>> v3.18
 =======
 		err |= copy_siginfo_to_user32(&compat_frame->info, &ksig->info);
 >>>>>>> v3.18
@@ -296,7 +318,11 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs,
 	{	
 		DBG(1,"setup_rt_frame: frame->info = 0x%p\n", &frame->info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err |= copy_siginfo_to_user(&frame->info, info);
+=======
+		err |= copy_siginfo_to_user(&frame->info, &ksig->info);
+>>>>>>> v3.18
 =======
 		err |= copy_siginfo_to_user(&frame->info, &ksig->info);
 >>>>>>> v3.18
@@ -310,7 +336,11 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs,
 	
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -351,9 +381,15 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs,
 
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto give_sigsegv;
 
 	haddr = A(ka->sa.sa_handler);
+=======
+		return -EFAULT;
+
+	haddr = A(ksig->ka.sa.sa_handler);
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 
@@ -371,7 +407,11 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs,
 
 			if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto give_sigsegv;
+=======
+				return -EFAULT;
+>>>>>>> v3.18
 =======
 				return -EFAULT;
 >>>>>>> v3.18
@@ -388,7 +428,11 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs,
 		
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto give_sigsegv;
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 =======
 			return -EFAULT;
 >>>>>>> v3.18
@@ -439,7 +483,11 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs,
 
 	regs->gr[2]  = rp;                /* userland return pointer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->gr[26] = sig;               /* signal number */
+=======
+	regs->gr[26] = ksig->sig;               /* signal number */
+>>>>>>> v3.18
 =======
 	regs->gr[26] = ksig->sig;               /* signal number */
 >>>>>>> v3.18
@@ -467,11 +515,14 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs,
 	       regs->iaoq[0], regs->iaoq[1], rp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
 
 give_sigsegv:
 	DBG(1,"setup_rt_frame: sending SIGSEGV\n");
 	force_sigsegv(sig, current);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -482,6 +533,7 @@ give_sigsegv:
  */	
 
 static void
+<<<<<<< HEAD
 <<<<<<< HEAD
 handle_signal(unsigned long sig, siginfo_t *info, struct k_sigaction *ka,
 		struct pt_regs *regs, int in_syscall)
@@ -498,6 +550,8 @@ handle_signal(unsigned long sig, siginfo_t *info, struct k_sigaction *ka,
 		test_thread_flag(TIF_SINGLESTEP) ||
 		test_thread_flag(TIF_BLOCKSTEP));
 =======
+=======
+>>>>>>> v3.18
 handle_signal(struct ksignal *ksig, struct pt_regs *regs, int in_syscall)
 {
 	int ret;
@@ -511,12 +565,16 @@ handle_signal(struct ksignal *ksig, struct pt_regs *regs, int in_syscall)
 
 	signal_setup_done(ret, ksig, test_thread_flag(TIF_SINGLESTEP) ||
 			  test_thread_flag(TIF_BLOCKSTEP));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	DBG(1,KERN_DEBUG "do_signal: Exit (success), regs->gr[28] = %ld\n",
 		regs->gr[28]);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Check how the syscall number gets loaded into %r20 within
@@ -569,6 +627,8 @@ static void check_syscallno_in_delay_branch(struct pt_regs *regs)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline void
 syscall_restart(struct pt_regs *regs, struct k_sigaction *ka)
 {
@@ -592,12 +652,18 @@ syscall_restart(struct pt_regs *regs, struct k_sigaction *ka)
 		/* fallthrough */
 	case -ERESTARTNOINTR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		check_syscallno_in_delay_branch(regs);
 =======
+=======
+>>>>>>> v3.18
 		/* A syscall is just a branch, so all
 		 * we have to do is fiddle the return pointer.
 		 */
 		regs->gr[31] -= 8; /* delayed branching */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -648,10 +714,13 @@ insert_restart_trampoline(struct pt_regs *regs)
 	case -ERESTARTNOHAND:
 	case -ERESTARTSYS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case -ERESTARTNOINTR:
 		check_syscallno_in_delay_branch(regs);
 		return;
 =======
+=======
+>>>>>>> v3.18
 	case -ERESTARTNOINTR: {
 		/* Hooray for delayed branching.  We don't
 		 * have to restore %r20 (the system call
@@ -661,6 +730,9 @@ insert_restart_trampoline(struct pt_regs *regs)
 		regs->gr[31] -= 8;
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
@@ -682,9 +754,13 @@ asmlinkage void
 do_signal(struct pt_regs *regs, long in_syscall)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	siginfo_t info;
 	struct k_sigaction ka;
 	int signr;
+=======
+	struct ksignal ksig;
+>>>>>>> v3.18
 =======
 	struct ksignal ksig;
 >>>>>>> v3.18
@@ -692,6 +768,7 @@ do_signal(struct pt_regs *regs, long in_syscall)
 	DBG(1,"\ndo_signal: regs=0x%p, sr7 %#lx, in_syscall=%d\n",
 	       regs, regs->sr[7], in_syscall);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	signr = get_signal_to_deliver(&info, &ka, regs, NULL);
 	DBG(3,"do_signal: signr = %d, regs->gr[28] = %ld\n", signr, regs->gr[28]); 
@@ -703,6 +780,8 @@ do_signal(struct pt_regs *regs, long in_syscall)
 
 		handle_signal(signr, &info, &ka, regs, in_syscall);
 =======
+=======
+>>>>>>> v3.18
 	if (get_signal(&ksig)) {
 		DBG(3,"do_signal: signr = %d, regs->gr[28] = %ld\n", signr, regs->gr[28]);
 		/* Restart a system call if necessary. */
@@ -710,6 +789,9 @@ do_signal(struct pt_regs *regs, long in_syscall)
 			syscall_restart(regs, &ksig.ka);
 
 		handle_signal(&ksig, regs, in_syscall);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}

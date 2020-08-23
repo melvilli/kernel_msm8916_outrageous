@@ -24,10 +24,14 @@
 #include <asm/mach/irq.h>
 #include <asm/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 #define IOP13XX_NUM_MSI_IRQS 128
 static DECLARE_BITMAP(msi_irq_in_use, IOP13XX_NUM_MSI_IRQS);
+=======
+#include <mach/irqs.h>
+>>>>>>> v3.18
 =======
 #include <mach/irqs.h>
 >>>>>>> v3.18
@@ -126,6 +130,7 @@ void __init iop13xx_msi_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Dynamic irq allocate and deallocation
  */
@@ -163,6 +168,8 @@ void arch_teardown_msi_irq(unsigned int irq)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void iop13xx_msi_nop(struct irq_data *d)
 {
 	return;
@@ -180,7 +187,11 @@ static struct irq_chip iop13xx_msi_chip = {
 int arch_setup_msi_irq(struct pci_dev *pdev, struct msi_desc *desc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int id, irq = create_irq();
+=======
+	int id, irq = irq_alloc_desc_from(IRQ_IOP13XX_MSI_0, -1);
+>>>>>>> v3.18
 =======
 	int id, irq = irq_alloc_desc_from(IRQ_IOP13XX_MSI_0, -1);
 >>>>>>> v3.18
@@ -190,12 +201,18 @@ int arch_setup_msi_irq(struct pci_dev *pdev, struct msi_desc *desc)
 		return irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (irq >= NR_IOP13XX_IRQS) {
 		irq_free_desc(irq);
 		return -ENOSPC;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	irq_set_msi_desc(irq, desc);
 
@@ -211,10 +228,16 @@ int arch_setup_msi_irq(struct pci_dev *pdev, struct msi_desc *desc)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void arch_teardown_msi_irq(unsigned int irq)
 {
 	irq_free_desc(irq);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

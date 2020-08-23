@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Routines to indentify additional cpu features that are scattered in
+=======
+ *	Routines to identify additional cpu features that are scattered in
+>>>>>>> v3.18
 =======
  *	Routines to identify additional cpu features that are scattered in
 >>>>>>> v3.18
@@ -29,7 +33,11 @@ enum cpuid_regs {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit init_scattered_cpuid_features(struct cpuinfo_x86 *c)
+=======
+void init_scattered_cpuid_features(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 void init_scattered_cpuid_features(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -39,7 +47,11 @@ void init_scattered_cpuid_features(struct cpuinfo_x86 *c)
 	const struct cpuid_bit *cb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static const struct cpuid_bit __cpuinitconst cpuid_bits[] = {
+=======
+	static const struct cpuid_bit cpuid_bits[] = {
+>>>>>>> v3.18
 =======
 	static const struct cpuid_bit cpuid_bits[] = {
 >>>>>>> v3.18
@@ -51,7 +63,10 @@ void init_scattered_cpuid_features(struct cpuinfo_x86 *c)
 		{ X86_FEATURE_APERFMPERF,	CR_ECX, 0, 0x00000006, 0 },
 		{ X86_FEATURE_EPB,		CR_ECX, 3, 0x00000006, 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{ X86_FEATURE_XSAVEOPT,		CR_EAX,	0, 0x0000000d, 1 },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		{ X86_FEATURE_HW_PSTATE,	CR_EDX, 7, 0x80000007, 0 },

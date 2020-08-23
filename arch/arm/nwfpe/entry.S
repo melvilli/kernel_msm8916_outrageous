@@ -20,7 +20,11 @@
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -97,7 +101,11 @@ emulate:
 	bl	EmulateAll		@ emulate the instruction
 	cmp	r0, #0			@ was emulation successful
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveq	pc, r4			@ no, return failure
+=======
+	reteq	r4			@ no, return failure
+>>>>>>> v3.18
 =======
 	reteq	r4			@ no, return failure
 >>>>>>> v3.18
@@ -111,7 +119,11 @@ next:
 	teqne	r2, #0x0D000000
 	teqne	r2, #0x0E000000
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movne	pc, r9			@ return ok if not a fp insn
+=======
+	retne	r9			@ return ok if not a fp insn
+>>>>>>> v3.18
 =======
 	retne	r9			@ return ok if not a fp insn
 >>>>>>> v3.18
@@ -128,7 +140,11 @@ next:
 	.pushsection .fixup,"ax"
 	.align	2
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lfix:	mov	pc, r9			@ let the user eat segfaults
+=======
+.Lfix:	ret	r9			@ let the user eat segfaults
+>>>>>>> v3.18
 =======
 .Lfix:	ret	r9			@ let the user eat segfaults
 >>>>>>> v3.18

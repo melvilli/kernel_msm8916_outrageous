@@ -21,13 +21,19 @@
 #include <linux/kernel.h>
 #include <linux/pinctrl/pinconf-generic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/irqs.h>
 #include <mach/r8a73a4.h>
 =======
+=======
+>>>>>>> v3.18
 
 #ifndef CONFIG_ARCH_MULTIPLATFORM
 #include <mach/irqs.h>
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "core.h"
@@ -35,6 +41,7 @@
 
 #define CPU_ALL_PORT(fn, pfx, sfx)					\
 	/*  Port0 - Port30 */						\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	PORT_10(fn, pfx, sfx),						\
 	PORT_10(fn, pfx##1, sfx),					\
@@ -109,6 +116,8 @@
 	/* Port320 - Port329 */						\
 	PORT_10(fn, pfx##32, sfx)
 =======
+=======
+>>>>>>> v3.18
 	PORT_10(0, fn, pfx, sfx),					\
 	PORT_10(10, fn, pfx##1, sfx),					\
 	PORT_10(20, fn, pfx##2, sfx),					\
@@ -181,6 +190,9 @@
 	PORT_1(308, fn, pfx##308, sfx),					\
 	/* Port320 - Port329 */						\
 	PORT_10(320, fn, pfx##32, sfx)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -511,10 +523,14 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PORT_DATA(pfx, sfx)	PORT_DATA_IO(pfx)
 #define PINMUX_DATA_ALL()    CPU_ALL_PORT(_PORT_DATA, , unused)
 
 static const pinmux_enum_t pinmux_data[] = {
+=======
+static const u16 pinmux_data[] = {
+>>>>>>> v3.18
 =======
 static const u16 pinmux_data[] = {
 >>>>>>> v3.18
@@ -1356,6 +1372,7 @@ static const u16 pinmux_data[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define R8A73A4_PIN(pin, cfgs)			\
 	{					\
 		.name = __stringify(PORT##pin),	\
@@ -1365,20 +1382,28 @@ static const u16 pinmux_data[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define __O	(SH_PFC_PIN_CFG_OUTPUT)
 #define __IO	(SH_PFC_PIN_CFG_INPUT | SH_PFC_PIN_CFG_OUTPUT)
 #define __PUD	(SH_PFC_PIN_CFG_PULL_DOWN | SH_PFC_PIN_CFG_PULL_UP)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define R8A73A4_PIN_IO_PU_PD(pin)       R8A73A4_PIN(pin, __IO | __PUD)
 #define R8A73A4_PIN_O(pin)              R8A73A4_PIN(pin, __O)
 
 static struct sh_pfc_pin pinmux_pins[] = {
 =======
+=======
+>>>>>>> v3.18
 #define R8A73A4_PIN_IO_PU_PD(pin)       SH_PFC_PIN_CFG(pin, __IO | __PUD)
 #define R8A73A4_PIN_O(pin)              SH_PFC_PIN_CFG(pin, __O)
 
 static const struct sh_pfc_pin pinmux_pins[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	R8A73A4_PIN_IO_PU_PD(0), R8A73A4_PIN_IO_PU_PD(1),
 	R8A73A4_PIN_IO_PU_PD(2), R8A73A4_PIN_IO_PU_PD(3),
@@ -1505,6 +1530,7 @@ static const struct sh_pfc_pin pinmux_pins[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct pinmux_range pinmux_ranges[] = {
 	{.begin = 0, .end = 30,},
 	{.begin = 32, .end = 40,},
@@ -1519,6 +1545,8 @@ static const struct pinmux_range pinmux_ranges[] = {
 	{.begin = 320, .end = 329,},
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* - IRQC ------------------------------------------------------------------- */
@@ -1588,7 +1616,10 @@ IRQC_PINS_MUX(327, 55);
 IRQC_PINS_MUX(328, 56);
 IRQC_PINS_MUX(329, 57);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* - MMCIF0 ----------------------------------------------------------------- */
 static const unsigned int mmc0_data1_pins[] = {
 	/* D[0] */
@@ -1649,6 +1680,9 @@ static const unsigned int mmc1_ctrl_pins[] = {
 static const unsigned int mmc1_ctrl_mux[] = {
 	MMCCMD1_MARK, MMCCLK1_MARK,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* - SCIFA0 ----------------------------------------------------------------- */
 static const unsigned int scifa0_data_pins[] = {
@@ -1846,7 +1880,10 @@ static const unsigned int scifb3_ctrl_b_mux[] = {
 	SCIFB3_RTS_38_MARK, SCIFB3_CTS_39_MARK,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* - SDHI0 ------------------------------------------------------------------ */
 static const unsigned int sdhi0_data1_pins[] = {
 	/* D0 */
@@ -1927,6 +1964,9 @@ static const unsigned int sdhi2_ctrl_pins[] = {
 static const unsigned int sdhi2_ctrl_mux[] = {
 	SDHICLK2_MARK, SDHICMD2_MARK,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct sh_pfc_pin_group pinmux_groups[] = {
@@ -1989,7 +2029,10 @@ static const struct sh_pfc_pin_group pinmux_groups[] = {
 	SH_PFC_PIN_GROUP(irqc_irq56),
 	SH_PFC_PIN_GROUP(irqc_irq57),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	SH_PFC_PIN_GROUP(mmc0_data1),
 	SH_PFC_PIN_GROUP(mmc0_data4),
 	SH_PFC_PIN_GROUP(mmc0_data8),
@@ -1998,6 +2041,9 @@ static const struct sh_pfc_pin_group pinmux_groups[] = {
 	SH_PFC_PIN_GROUP(mmc1_data4),
 	SH_PFC_PIN_GROUP(mmc1_data8),
 	SH_PFC_PIN_GROUP(mmc1_ctrl),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SH_PFC_PIN_GROUP(scifa0_data),
 	SH_PFC_PIN_GROUP(scifa0_clk),
@@ -2027,7 +2073,10 @@ static const struct sh_pfc_pin_group pinmux_groups[] = {
 	SH_PFC_PIN_GROUP(scifb3_clk_b),
 	SH_PFC_PIN_GROUP(scifb3_ctrl_b),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	SH_PFC_PIN_GROUP(sdhi0_data1),
 	SH_PFC_PIN_GROUP(sdhi0_data4),
 	SH_PFC_PIN_GROUP(sdhi0_ctrl),
@@ -2039,6 +2088,9 @@ static const struct sh_pfc_pin_group pinmux_groups[] = {
 	SH_PFC_PIN_GROUP(sdhi2_data1),
 	SH_PFC_PIN_GROUP(sdhi2_data4),
 	SH_PFC_PIN_GROUP(sdhi2_ctrl),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -2104,7 +2156,10 @@ static const char * const irqc_groups[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const char * const mmc0_groups[] = {
 	"mmc0_data1",
 	"mmc0_data4",
@@ -2119,6 +2174,9 @@ static const char * const mmc1_groups[] = {
 	"mmc1_ctrl",
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char * const scifa0_groups[] = {
 	"scifa0_data",
@@ -2166,9 +2224,12 @@ static const char * const scifb3_groups[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct sh_pfc_function pinmux_functions[] = {
 	SH_PFC_FUNCTION(irqc),
 =======
+=======
+>>>>>>> v3.18
 static const char * const sdhi0_groups[] = {
 	"sdhi0_data1",
 	"sdhi0_data4",
@@ -2193,6 +2254,9 @@ static const struct sh_pfc_function pinmux_functions[] = {
 	SH_PFC_FUNCTION(irqc),
 	SH_PFC_FUNCTION(mmc0),
 	SH_PFC_FUNCTION(mmc1),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SH_PFC_FUNCTION(scifa0),
 	SH_PFC_FUNCTION(scifa1),
@@ -2200,6 +2264,7 @@ static const struct sh_pfc_function pinmux_functions[] = {
 	SH_PFC_FUNCTION(scifb1),
 	SH_PFC_FUNCTION(scifb2),
 	SH_PFC_FUNCTION(scifb3),
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -2215,11 +2280,16 @@ static const struct sh_pfc_function pinmux_functions[] = {
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	SH_PFC_FUNCTION(sdhi0),
 	SH_PFC_FUNCTION(sdhi1),
 	SH_PFC_FUNCTION(sdhi2),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 	PORTCR(0, 0xe6050000),
@@ -2841,7 +2911,11 @@ static unsigned int r8a73a4_pinmux_get_bias(struct sh_pfc *pfc,
 	void __iomem *addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = pfc->window->virt + r8a73a4_portcr_offsets[pin >> 5] + pin;
+=======
+	addr = pfc->windows->virt + r8a73a4_portcr_offsets[pin >> 5] + pin;
+>>>>>>> v3.18
 =======
 	addr = pfc->windows->virt + r8a73a4_portcr_offsets[pin >> 5] + pin;
 >>>>>>> v3.18
@@ -2864,7 +2938,11 @@ static void r8a73a4_pinmux_set_bias(struct sh_pfc *pfc, unsigned int pin,
 	u32 value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = pfc->window->virt + r8a73a4_portcr_offsets[pin >> 5] + pin;
+=======
+	addr = pfc->windows->virt + r8a73a4_portcr_offsets[pin >> 5] + pin;
+>>>>>>> v3.18
 =======
 	addr = pfc->windows->virt + r8a73a4_portcr_offsets[pin >> 5] + pin;
 >>>>>>> v3.18
@@ -2883,7 +2961,11 @@ static void r8a73a4_pinmux_set_bias(struct sh_pfc *pfc, unsigned int pin,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct sh_pfc_soc_operations r8a73a4_pinmux_ops = {
+=======
+static const struct sh_pfc_soc_operations r8a73a4_pfc_ops = {
+>>>>>>> v3.18
 =======
 static const struct sh_pfc_soc_operations r8a73a4_pfc_ops = {
 >>>>>>> v3.18
@@ -2894,7 +2976,11 @@ static const struct sh_pfc_soc_operations r8a73a4_pfc_ops = {
 const struct sh_pfc_soc_info r8a73a4_pinmux_info = {
 	.name		= "r8a73a4_pfc",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ops		= &r8a73a4_pinmux_ops,
+=======
+	.ops		= &r8a73a4_pfc_ops,
+>>>>>>> v3.18
 =======
 	.ops		= &r8a73a4_pfc_ops,
 >>>>>>> v3.18
@@ -2907,9 +2993,12 @@ const struct sh_pfc_soc_info r8a73a4_pinmux_info = {
 	.nr_pins = ARRAY_SIZE(pinmux_pins),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ranges = pinmux_ranges,
 	.nr_ranges = ARRAY_SIZE(pinmux_ranges),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.groups = pinmux_groups,

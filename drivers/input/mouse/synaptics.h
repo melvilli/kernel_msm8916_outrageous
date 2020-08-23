@@ -78,12 +78,18 @@
  * 2	0x08	image sensor		image sensor tracks 5 fingers, but only
  *					reports 2.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 2	0x20	report min		query 0x0f gives min coord reported
  * 2	0x80	forcepad		forcepad is a variant of clickpad that
  *					does not have physical buttons but rather
  *					uses pressure above certain threshold to
  *					report primary clicks. Forcepads also have
  *					clickpad bit set.
+=======
+ * 2	0x01	uniform clickpad	whole clickpad moves instead of being
+ *					hinged at the top.
+ * 2	0x20	report min		query 0x0f gives min coord reported
+>>>>>>> v3.18
 =======
  * 2	0x01	uniform clickpad	whole clickpad moves instead of being
  *					hinged at the top.
@@ -98,7 +104,10 @@
 #define SYN_CAP_REDUCED_FILTERING(ex0c)	((ex0c) & 0x000400)
 #define SYN_CAP_IMAGE_SENSOR(ex0c)	((ex0c) & 0x000800)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SYN_CAP_FORCEPAD(ex0c)		((ex0c) & 0x008000)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

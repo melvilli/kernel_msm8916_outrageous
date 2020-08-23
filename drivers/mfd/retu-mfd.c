@@ -20,7 +20,10 @@
 #include <linux/i2c.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -59,7 +62,11 @@ static struct resource retu_pwrbutton_res[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell retu_devs[] = {
+=======
+static const struct mfd_cell retu_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell retu_devs[] = {
 >>>>>>> v3.18
@@ -102,7 +109,11 @@ static struct resource tahvo_usb_res[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell tahvo_devs[] = {
+=======
+static const struct mfd_cell tahvo_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell tahvo_devs[] = {
 >>>>>>> v3.18
@@ -134,7 +145,11 @@ static const struct retu_data {
 	char			*companion_name;
 	struct regmap_irq_chip	*irq_chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mfd_cell		*children;
+=======
+	const struct mfd_cell	*children;
+>>>>>>> v3.18
 =======
 	const struct mfd_cell	*children;
 >>>>>>> v3.18

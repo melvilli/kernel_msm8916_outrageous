@@ -22,9 +22,13 @@
 #include <linux/slab.h>
 #include <linux/pid_namespace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/uaccess.h>
 
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -78,7 +82,11 @@ static void init_once(void *foo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int coda_init_inodecache(void)
+=======
+int __init coda_init_inodecache(void)
+>>>>>>> v3.18
 =======
 int __init coda_init_inodecache(void)
 >>>>>>> v3.18
@@ -105,6 +113,10 @@ void coda_destroy_inodecache(void)
 static int coda_remount(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -131,7 +143,11 @@ static int get_device_index(struct coda_mount_data *data)
 
 	if (data == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("coda_read_super: Bad mount data\n");
+=======
+		pr_warn("%s: Bad mount data\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: Bad mount data\n", __func__);
 >>>>>>> v3.18
@@ -140,7 +156,11 @@ static int get_device_index(struct coda_mount_data *data)
 
 	if (data->version != CODA_MOUNT_VERSION) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("coda_read_super: Bad mount version\n");
+=======
+		pr_warn("%s: Bad mount version\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: Bad mount version\n", __func__);
 >>>>>>> v3.18
@@ -161,7 +181,11 @@ static int get_device_index(struct coda_mount_data *data)
 
 	if (idx < 0 || idx >= MAX_CODADEVS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("coda_read_super: Bad minor number\n");
+=======
+		pr_warn("%s: Bad minor number\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: Bad minor number\n", __func__);
 >>>>>>> v3.18
@@ -171,7 +195,11 @@ static int get_device_index(struct coda_mount_data *data)
 	return idx;
 Ebadf:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("coda_read_super: Bad file\n");
+=======
+	pr_warn("%s: Bad file\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_warn("%s: Bad file\n", __func__);
 >>>>>>> v3.18
@@ -196,7 +224,11 @@ static int coda_fill_super(struct super_block *sb, void *data, int silent)
 		idx = 0;
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "coda_read_super: device index: %i\n", idx);
+=======
+	pr_info("%s: device index: %i\n", __func__,  idx);
+>>>>>>> v3.18
 =======
 	pr_info("%s: device index: %i\n", __func__,  idx);
 >>>>>>> v3.18
@@ -206,7 +238,11 @@ static int coda_fill_super(struct super_block *sb, void *data, int silent)
 
 	if (!vc->vc_inuse) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("coda_read_super: No pseudo device\n");
+=======
+		pr_warn("%s: No pseudo device\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: No pseudo device\n", __func__);
 >>>>>>> v3.18
@@ -216,7 +252,11 @@ static int coda_fill_super(struct super_block *sb, void *data, int silent)
 
 	if (vc->vc_sb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("coda_read_super: Device already mounted\n");
+=======
+		pr_warn("%s: Device already mounted\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: Device already mounted\n", __func__);
 >>>>>>> v3.18
@@ -244,23 +284,30 @@ static int coda_fill_super(struct super_block *sb, void *data, int silent)
 	error = venus_rootfid(sb, &fid);
 	if ( error ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	        printk("coda_read_super: coda_get_rootfid failed with %d\n",
 		       error);
 		goto error;
 	}
 	printk("coda_read_super: rootfid is %s\n", coda_f2s(&fid));
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("%s: coda_get_rootfid failed with %d\n",
 			__func__, error);
 		goto error;
 	}
 	pr_info("%s: rootfid is %s\n", __func__, coda_f2s(&fid));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	
 	/* make root inode */
         root = coda_cnode_make(&fid, sb);
         if (IS_ERR(root)) {
 		error = PTR_ERR(root);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk("Failure of coda_cnode_make for root: error %d\n", error);
 		goto error;
@@ -269,6 +316,8 @@ static int coda_fill_super(struct super_block *sb, void *data, int silent)
 	printk("coda_read_super: rootinode is %ld dev %s\n", 
 	       root->i_ino, root->i_sb->s_id);
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("Failure of coda_cnode_make for root: error %d\n",
 			error);
 		goto error;
@@ -276,6 +325,9 @@ static int coda_fill_super(struct super_block *sb, void *data, int silent)
 
 	pr_info("%s: rootinode is %ld dev %s\n",
 		__func__, root->i_ino, root->i_sb->s_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sb->s_root = d_make_root(root);
 	if (!sb->s_root) {
@@ -304,7 +356,11 @@ static void coda_put_super(struct super_block *sb)
 	mutex_unlock(&vcp->vc_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Coda: Bye bye.\n");
+=======
+	pr_info("Bye bye.\n");
+>>>>>>> v3.18
 =======
 	pr_info("Bye bye.\n");
 >>>>>>> v3.18
@@ -313,7 +369,11 @@ static void coda_put_super(struct super_block *sb)
 static void coda_evict_inode(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -324,7 +384,11 @@ static void coda_evict_inode(struct inode *inode)
 int coda_getattr(struct vfsmount *mnt, struct dentry *dentry, struct kstat *stat)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = coda_revalidate_inode(dentry);
+=======
+	int err = coda_revalidate_inode(dentry->d_inode);
+>>>>>>> v3.18
 =======
 	int err = coda_revalidate_inode(dentry->d_inode);
 >>>>>>> v3.18

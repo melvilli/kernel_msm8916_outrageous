@@ -4,7 +4,10 @@
 config USB_WUSB
 	tristate "Enable Wireless USB extensions"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	depends on UWB
@@ -22,6 +25,10 @@ config USB_WUSB
 config USB_WUSB_CBAF
 	tristate "Support WUSB Cable Based Association (CBA)"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on USB
+>>>>>>> v3.18
 =======
 	depends on USB
 >>>>>>> v3.18

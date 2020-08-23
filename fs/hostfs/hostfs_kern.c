@@ -34,6 +34,7 @@ static inline struct hostfs_inode_info *HOSTFS_I(struct inode *inode)
 #define FILE_HOSTFS_I(file) HOSTFS_I(file_inode(file))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hostfs_d_delete(const struct dentry *dentry)
 {
 	return 1;
@@ -43,6 +44,8 @@ static const struct dentry_operations hostfs_dentry_ops = {
 	.d_delete		= hostfs_d_delete,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Changed in hostfs_args before the kernel starts running */
@@ -199,7 +202,11 @@ static struct inode *hostfs_iget(struct super_block *sb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_statfs(struct dentry *dentry, struct kstatfs *sf)
+=======
+static int hostfs_statfs(struct dentry *dentry, struct kstatfs *sf)
+>>>>>>> v3.18
 =======
 static int hostfs_statfs(struct dentry *dentry, struct kstatfs *sf)
 >>>>>>> v3.18
@@ -247,7 +254,11 @@ static struct inode *hostfs_alloc_inode(struct super_block *sb)
 static void hostfs_evict_inode(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -289,7 +300,11 @@ static const struct super_operations hostfs_sbops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_readdir(struct file *file, void *ent, filldir_t filldir)
+=======
+static int hostfs_readdir(struct file *file, struct dir_context *ctx)
+>>>>>>> v3.18
 =======
 static int hostfs_readdir(struct file *file, struct dir_context *ctx)
 >>>>>>> v3.18
@@ -308,6 +323,7 @@ static int hostfs_readdir(struct file *file, struct dir_context *ctx)
 	if (dir == NULL)
 		return -error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	next = file->f_pos;
 	while ((name = read_dir(dir, &next, &ino, &len, &type)) != NULL) {
 		error = (*filldir)(ent, name, len, file->f_pos,
@@ -315,11 +331,16 @@ static int hostfs_readdir(struct file *file, struct dir_context *ctx)
 		if (error) break;
 		file->f_pos = next;
 =======
+=======
+>>>>>>> v3.18
 	next = ctx->pos;
 	while ((name = read_dir(dir, &next, &ino, &len, &type)) != NULL) {
 		if (!dir_emit(ctx, name, len, ino, type))
 			break;
 		ctx->pos = next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	close_dir(dir);
@@ -327,7 +348,11 @@ static int hostfs_readdir(struct file *file, struct dir_context *ctx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_file_open(struct inode *ino, struct file *file)
+=======
+static int hostfs_file_open(struct inode *ino, struct file *file)
+>>>>>>> v3.18
 =======
 static int hostfs_file_open(struct inode *ino, struct file *file)
 >>>>>>> v3.18
@@ -390,8 +415,11 @@ retry:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_fsync(struct file *file, loff_t start, loff_t end, int datasync)
 =======
+=======
+>>>>>>> v3.18
 static int hostfs_file_release(struct inode *inode, struct file *file)
 {
 	filemap_write_and_wait(inode->i_mapping);
@@ -401,6 +429,9 @@ static int hostfs_file_release(struct inode *inode, struct file *file)
 
 static int hostfs_fsync(struct file *file, loff_t start, loff_t end,
 			int datasync)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct inode *inode = file->f_mapping->host;
@@ -420,6 +451,7 @@ static int hostfs_fsync(struct file *file, loff_t start, loff_t end,
 static const struct file_operations hostfs_file_fops = {
 	.llseek		= generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.splice_read	= generic_file_splice_read,
 	.aio_read	= generic_file_aio_read,
@@ -429,6 +461,8 @@ static const struct file_operations hostfs_file_fops = {
 	.open		= hostfs_file_open,
 	.release	= NULL,
 =======
+=======
+>>>>>>> v3.18
 	.read		= new_sync_read,
 	.splice_read	= generic_file_splice_read,
 	.read_iter	= generic_file_read_iter,
@@ -437,6 +471,9 @@ static const struct file_operations hostfs_file_fops = {
 	.mmap		= generic_file_mmap,
 	.open		= hostfs_file_open,
 	.release	= hostfs_file_release,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.fsync		= hostfs_fsync,
 };
@@ -444,17 +481,23 @@ static const struct file_operations hostfs_file_fops = {
 static const struct file_operations hostfs_dir_fops = {
 	.llseek		= generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= hostfs_readdir,
 	.read		= generic_read_dir,
 };
 
 int hostfs_writepage(struct page *page, struct writeback_control *wbc)
 =======
+=======
+>>>>>>> v3.18
 	.iterate	= hostfs_readdir,
 	.read		= generic_read_dir,
 };
 
 static int hostfs_writepage(struct page *page, struct writeback_control *wbc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct address_space *mapping = page->mapping;
@@ -492,7 +535,11 @@ static int hostfs_writepage(struct page *page, struct writeback_control *wbc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_readpage(struct file *file, struct page *page)
+=======
+static int hostfs_readpage(struct file *file, struct page *page)
+>>>>>>> v3.18
 =======
 static int hostfs_readpage(struct file *file, struct page *page)
 >>>>>>> v3.18
@@ -521,9 +568,15 @@ static int hostfs_readpage(struct file *file, struct page *page)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_write_begin(struct file *file, struct address_space *mapping,
 			loff_t pos, unsigned len, unsigned flags,
 			struct page **pagep, void **fsdata)
+=======
+static int hostfs_write_begin(struct file *file, struct address_space *mapping,
+			      loff_t pos, unsigned len, unsigned flags,
+			      struct page **pagep, void **fsdata)
+>>>>>>> v3.18
 =======
 static int hostfs_write_begin(struct file *file, struct address_space *mapping,
 			      loff_t pos, unsigned len, unsigned flags,
@@ -539,9 +592,15 @@ static int hostfs_write_begin(struct file *file, struct address_space *mapping,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_write_end(struct file *file, struct address_space *mapping,
 			loff_t pos, unsigned len, unsigned copied,
 			struct page *page, void *fsdata)
+=======
+static int hostfs_write_end(struct file *file, struct address_space *mapping,
+			    loff_t pos, unsigned len, unsigned copied,
+			    struct page *page, void *fsdata)
+>>>>>>> v3.18
 =======
 static int hostfs_write_end(struct file *file, struct address_space *mapping,
 			    loff_t pos, unsigned len, unsigned copied,
@@ -627,8 +686,13 @@ static int read_name(struct inode *ino, char *name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_create(struct inode *dir, struct dentry *dentry, umode_t mode,
 		  bool excl)
+=======
+static int hostfs_create(struct inode *dir, struct dentry *dentry, umode_t mode,
+			 bool excl)
+>>>>>>> v3.18
 =======
 static int hostfs_create(struct inode *dir, struct dentry *dentry, umode_t mode,
 			 bool excl)
@@ -674,8 +738,13 @@ static int hostfs_create(struct inode *dir, struct dentry *dentry, umode_t mode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dentry *hostfs_lookup(struct inode *ino, struct dentry *dentry,
 			     unsigned int flags)
+=======
+static struct dentry *hostfs_lookup(struct inode *ino, struct dentry *dentry,
+				    unsigned int flags)
+>>>>>>> v3.18
 =======
 static struct dentry *hostfs_lookup(struct inode *ino, struct dentry *dentry,
 				    unsigned int flags)
@@ -716,7 +785,12 @@ static struct dentry *hostfs_lookup(struct inode *ino, struct dentry *dentry,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_link(struct dentry *to, struct inode *ino, struct dentry *from)
+=======
+static int hostfs_link(struct dentry *to, struct inode *ino,
+		       struct dentry *from)
+>>>>>>> v3.18
 =======
 static int hostfs_link(struct dentry *to, struct inode *ino,
 		       struct dentry *from)
@@ -739,7 +813,11 @@ static int hostfs_link(struct dentry *to, struct inode *ino,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_unlink(struct inode *ino, struct dentry *dentry)
+=======
+static int hostfs_unlink(struct inode *ino, struct dentry *dentry)
+>>>>>>> v3.18
 =======
 static int hostfs_unlink(struct inode *ino, struct dentry *dentry)
 >>>>>>> v3.18
@@ -759,7 +837,12 @@ static int hostfs_unlink(struct inode *ino, struct dentry *dentry)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_symlink(struct inode *ino, struct dentry *dentry, const char *to)
+=======
+static int hostfs_symlink(struct inode *ino, struct dentry *dentry,
+			  const char *to)
+>>>>>>> v3.18
 =======
 static int hostfs_symlink(struct inode *ino, struct dentry *dentry,
 			  const char *to)
@@ -776,7 +859,11 @@ static int hostfs_symlink(struct inode *ino, struct dentry *dentry,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_mkdir(struct inode *ino, struct dentry *dentry, umode_t mode)
+=======
+static int hostfs_mkdir(struct inode *ino, struct dentry *dentry, umode_t mode)
+>>>>>>> v3.18
 =======
 static int hostfs_mkdir(struct inode *ino, struct dentry *dentry, umode_t mode)
 >>>>>>> v3.18
@@ -792,7 +879,11 @@ static int hostfs_mkdir(struct inode *ino, struct dentry *dentry, umode_t mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_rmdir(struct inode *ino, struct dentry *dentry)
+=======
+static int hostfs_rmdir(struct inode *ino, struct dentry *dentry)
+>>>>>>> v3.18
 =======
 static int hostfs_rmdir(struct inode *ino, struct dentry *dentry)
 >>>>>>> v3.18
@@ -827,7 +918,11 @@ static int hostfs_mknod(struct inode *dir, struct dentry *dentry, umode_t mode, 
 	init_special_inode(inode, mode, dev);
 	err = do_mknod(name, mode, MAJOR(dev), MINOR(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err)
+=======
+	if (!err)
+>>>>>>> v3.18
 =======
 	if (!err)
 >>>>>>> v3.18
@@ -838,6 +933,11 @@ static int hostfs_mknod(struct inode *dir, struct dentry *dentry, umode_t mode, 
 	if (err)
 		goto out_put;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (err)
+		goto out_put;
+>>>>>>> v3.18
 =======
 	if (err)
 		goto out_put;
@@ -854,6 +954,7 @@ static int hostfs_mknod(struct inode *dir, struct dentry *dentry, umode_t mode, 
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int hostfs_rename(struct inode *from_ino, struct dentry *from,
 		  struct inode *to_ino, struct dentry *to)
@@ -875,6 +976,8 @@ int hostfs_rename(struct inode *from_ino, struct dentry *from,
 
 int hostfs_permission(struct inode *ino, int desired)
 =======
+=======
+>>>>>>> v3.18
 static int hostfs_rename2(struct inode *old_dir, struct dentry *old_dentry,
 			  struct inode *new_dir, struct dentry *new_dentry,
 			  unsigned int flags)
@@ -904,6 +1007,9 @@ static int hostfs_rename2(struct inode *old_dir, struct dentry *old_dentry,
 }
 
 static int hostfs_permission(struct inode *ino, int desired)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	char *name;
@@ -931,7 +1037,11 @@ static int hostfs_permission(struct inode *ino, int desired)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hostfs_setattr(struct dentry *dentry, struct iattr *attr)
+=======
+static int hostfs_setattr(struct dentry *dentry, struct iattr *attr)
+>>>>>>> v3.18
 =======
 static int hostfs_setattr(struct dentry *dentry, struct iattr *attr)
 >>>>>>> v3.18
@@ -1017,7 +1127,11 @@ static const struct inode_operations hostfs_dir_iops = {
 	.rmdir		= hostfs_rmdir,
 	.mknod		= hostfs_mknod,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rename		= hostfs_rename,
+=======
+	.rename2	= hostfs_rename2,
+>>>>>>> v3.18
 =======
 	.rename2	= hostfs_rename2,
 >>>>>>> v3.18
@@ -1073,7 +1187,11 @@ static int hostfs_fill_sb_common(struct super_block *sb, void *d, int silent)
 	sb->s_magic = HOSTFS_SUPER_MAGIC;
 	sb->s_op = &hostfs_sbops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sb->s_d_op = &hostfs_dentry_ops;
+=======
+	sb->s_d_op = &simple_dentry_operations;
+>>>>>>> v3.18
 =======
 	sb->s_d_op = &simple_dentry_operations;
 >>>>>>> v3.18
@@ -1102,16 +1220,22 @@ static int hostfs_fill_sb_common(struct super_block *sb, void *d, int silent)
 	if (S_ISLNK(root_inode->i_mode)) {
 		char *name = follow_link(host_root_path);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (IS_ERR(name)) {
 			err = PTR_ERR(name);
 			goto out_put;
 		}
 		err = read_name(root_inode, name);
 =======
+=======
+>>>>>>> v3.18
 		if (IS_ERR(name))
 			err = PTR_ERR(name);
 		else
 			err = read_name(root_inode, name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree(name);
 		if (err)

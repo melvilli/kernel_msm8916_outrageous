@@ -283,8 +283,13 @@ static bool alx_read_macaddr(struct alx_hw *hw, u8 *addr)
 
 	/* addr should be big-endian */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*(__be32 *)(addr + 2) = cpu_to_be32(mac0);
 	*(__be16 *)addr = cpu_to_be16(mac1);
+=======
+	put_unaligned(cpu_to_be32(mac0), (__be32 *)(addr + 2));
+	put_unaligned(cpu_to_be16(mac1), (__be16 *)addr);
+>>>>>>> v3.18
 =======
 	put_unaligned(cpu_to_be32(mac0), (__be32 *)(addr + 2));
 	put_unaligned(cpu_to_be16(mac1), (__be16 *)addr);
@@ -332,6 +337,7 @@ void alx_set_macaddr(struct alx_hw *hw, const u8 *addr)
 
 	/* for example: 00-0B-6A-F6-00-DC * STAD0=6AF600DC, STAD1=000B */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = be32_to_cpu(*(__be32 *)(addr + 2));
 	alx_write_mem32(hw, ALX_STAD0, val);
 	val = be16_to_cpu(*(__be16 *)addr);
@@ -349,12 +355,17 @@ static void alx_enable_osc(struct alx_hw *hw)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	val = be32_to_cpu(get_unaligned((__be32 *)(addr + 2)));
 	alx_write_mem32(hw, ALX_STAD0, val);
 	val = be16_to_cpu(get_unaligned((__be16 *)addr));
 	alx_write_mem32(hw, ALX_STAD1, val);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void alx_reset_osc(struct alx_hw *hw, u8 rev)
 {
@@ -639,7 +650,11 @@ void alx_start_mac(struct alx_hw *hw)
 
 	mac = hw->rx_ctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hw->link_speed % 10 == DUPLEX_FULL)
+=======
+	if (hw->duplex == DUPLEX_FULL)
+>>>>>>> v3.18
 =======
 	if (hw->duplex == DUPLEX_FULL)
 >>>>>>> v3.18
@@ -648,7 +663,11 @@ void alx_start_mac(struct alx_hw *hw)
 		mac &= ~ALX_MAC_CTRL_FULLD;
 	ALX_SET_FIELD(mac, ALX_MAC_CTRL_SPEED,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      hw->link_speed >= SPEED_1000 ? ALX_MAC_CTRL_SPEED_1000 :
+=======
+		      hw->link_speed == SPEED_1000 ? ALX_MAC_CTRL_SPEED_1000 :
+>>>>>>> v3.18
 =======
 		      hw->link_speed == SPEED_1000 ? ALX_MAC_CTRL_SPEED_1000 :
 >>>>>>> v3.18
@@ -813,6 +832,7 @@ void alx_post_phy_link(struct alx_hw *hw)
 	u8 revid = alx_hw_revision(hw);
 	bool adj_th = revid == ALX_REV_B0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int speed;
 
 	if (hw->link_speed == SPEED_UNKNOWN)
@@ -821,13 +841,19 @@ void alx_post_phy_link(struct alx_hw *hw)
 		speed = hw->link_speed - hw->link_speed % 10;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	if (revid != ALX_REV_B0 && !alx_is_rev_a(revid))
 		return;
 
 	/* 1000BT/AZ, wrong cable length */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (speed != SPEED_UNKNOWN) {
+=======
+	if (hw->link_speed != SPEED_UNKNOWN) {
+>>>>>>> v3.18
 =======
 	if (hw->link_speed != SPEED_UNKNOWN) {
 >>>>>>> v3.18
@@ -838,15 +864,21 @@ void alx_post_phy_link(struct alx_hw *hw)
 		agc = ALX_GET_FIELD(phy_val, ALX_AGC_2_VGA);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((speed == SPEED_1000 &&
 		     (len > ALX_CLDCTRL6_CAB_LEN_SHORT1G ||
 		      (len == 0 && agc > ALX_AGC_LONG1G_LIMT))) ||
 		    (speed == SPEED_100 &&
 =======
+=======
+>>>>>>> v3.18
 		if ((hw->link_speed == SPEED_1000 &&
 		     (len > ALX_CLDCTRL6_CAB_LEN_SHORT1G ||
 		      (len == 0 && agc > ALX_AGC_LONG1G_LIMT))) ||
 		    (hw->link_speed == SPEED_100 &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		     (len > ALX_CLDCTRL6_CAB_LEN_SHORT100M ||
 		      (len == 0 && agc > ALX_AGC_LONG100M_LIMT)))) {
@@ -868,15 +900,21 @@ void alx_post_phy_link(struct alx_hw *hw)
 		/* threshold adjust */
 		if (adj_th && hw->lnk_patch) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (speed == SPEED_100) {
 				alx_write_phy_dbg(hw, ALX_MIIDBG_MSE16DB,
 						  ALX_MSE16DB_UP);
 			} else if (speed == SPEED_1000) {
 =======
+=======
+>>>>>>> v3.18
 			if (hw->link_speed == SPEED_100) {
 				alx_write_phy_dbg(hw, ALX_MIIDBG_MSE16DB,
 						  ALX_MSE16DB_UP);
 			} else if (hw->link_speed == SPEED_1000) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				/*
 				 * Giga link threshold, raise the tolerance of
@@ -907,6 +945,7 @@ void alx_post_phy_link(struct alx_hw *hw)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* NOTE:
@@ -970,6 +1009,8 @@ int alx_pre_suspend(struct alx_hw *hw, int speed)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 bool alx_phy_configured(struct alx_hw *hw)
 {
 	u32 cfg, hw_cfg;
@@ -985,7 +1026,11 @@ bool alx_phy_configured(struct alx_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int alx_get_phy_link(struct alx_hw *hw, int *speed)
+=======
+int alx_read_phy_link(struct alx_hw *hw)
+>>>>>>> v3.18
 =======
 int alx_read_phy_link(struct alx_hw *hw)
 >>>>>>> v3.18
@@ -1004,7 +1049,12 @@ int alx_read_phy_link(struct alx_hw *hw)
 
 	if (!(bmsr & BMSR_LSTATUS)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*speed = SPEED_UNKNOWN;
+=======
+		hw->link_speed = SPEED_UNKNOWN;
+		hw->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 =======
 		hw->link_speed = SPEED_UNKNOWN;
 		hw->duplex = DUPLEX_UNKNOWN;
@@ -1023,6 +1073,7 @@ int alx_read_phy_link(struct alx_hw *hw)
 	switch (giga & ALX_GIGA_PSSR_SPEED) {
 	case ALX_GIGA_PSSR_1000MBS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*speed = SPEED_1000;
 		break;
 	case ALX_GIGA_PSSR_100MBS:
@@ -1031,6 +1082,8 @@ int alx_read_phy_link(struct alx_hw *hw)
 	case ALX_GIGA_PSSR_10MBS:
 		*speed = SPEED_10;
 =======
+=======
+>>>>>>> v3.18
 		hw->link_speed = SPEED_1000;
 		break;
 	case ALX_GIGA_PSSR_100MBS:
@@ -1038,6 +1091,9 @@ int alx_read_phy_link(struct alx_hw *hw)
 		break;
 	case ALX_GIGA_PSSR_10MBS:
 		hw->link_speed = SPEED_10;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -1045,8 +1101,13 @@ int alx_read_phy_link(struct alx_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*speed += (giga & ALX_GIGA_PSSR_DPLX) ? DUPLEX_FULL : DUPLEX_HALF;
 	return 1;
+=======
+	hw->duplex = (giga & ALX_GIGA_PSSR_DPLX) ? DUPLEX_FULL : DUPLEX_HALF;
+	return 0;
+>>>>>>> v3.18
 =======
 	hw->duplex = (giga & ALX_GIGA_PSSR_DPLX) ? DUPLEX_FULL : DUPLEX_HALF;
 	return 0;
@@ -1065,6 +1126,7 @@ int alx_clear_phy_intr(struct alx_hw *hw)
 	return alx_read_phy_reg(hw, ALX_MII_ISR, &isr);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int alx_config_wol(struct alx_hw *hw)
 {
@@ -1086,6 +1148,8 @@ int alx_config_wol(struct alx_hw *hw)
 	return err;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void alx_disable_rss(struct alx_hw *hw)
@@ -1200,6 +1264,7 @@ void alx_configure_basic(struct alx_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 alx_speed_to_ethadv(int speed)
 {
 	switch (speed) {
@@ -1281,6 +1346,8 @@ int alx_select_powersaving_speed(struct alx_hw *hw, int *speed)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 bool alx_get_phy_info(struct alx_hw *hw)
 {
 	u16  devs1, devs2;
@@ -1301,7 +1368,10 @@ bool alx_get_phy_info(struct alx_hw *hw)
 	return true;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void alx_update_hw_stats(struct alx_hw *hw)
 {
@@ -1360,4 +1430,7 @@ void alx_update_hw_stats(struct alx_hw *hw)
 
 	hw->stats.update         += alx_read_mem32(hw, ALX_MIB_UPDATE);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

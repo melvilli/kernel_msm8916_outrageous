@@ -414,13 +414,19 @@ out:
 static DEVICE_ATTR(pattern, S_IWUSR, NULL, lm3556_indicator_pattern_store);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *lm355x_indicator_attrs[] = {
 	&dev_attr_pattern.attr,
 	NULL
 };
 ATTRIBUTE_GROUPS(lm355x_indicator);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct regmap_config lm355x_regmap = {
 	.reg_bits = 8,
@@ -433,7 +439,11 @@ static int lm355x_probe(struct i2c_client *client,
 				  const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lm355x_platform_data *pdata = client->dev.platform_data;
+=======
+	struct lm355x_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct lm355x_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -515,6 +525,12 @@ static int lm355x_probe(struct i2c_client *client,
 		chip->cdev_indicator.max_brightness = 8;
 	chip->cdev_indicator.brightness_set = lm355x_indicator_brightness_set;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* indicator pattern control only for LM3556 */
+	if (id->driver_data == CHIP_LM3556)
+		chip->cdev_indicator.groups = lm355x_indicator_groups;
+>>>>>>> v3.18
 =======
 	/* indicator pattern control only for LM3556 */
 	if (id->driver_data == CHIP_LM3556)
@@ -524,6 +540,7 @@ static int lm355x_probe(struct i2c_client *client,
 				    &client->dev, &chip->cdev_indicator);
 	if (err < 0)
 		goto err_create_indicator_file;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* indicator pattern control only for LM3554 */
 	if (id->driver_data == CHIP_LM3556) {
@@ -535,14 +552,19 @@ static int lm355x_probe(struct i2c_client *client,
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	dev_info(&client->dev, "%s is initialized\n",
 		 lm355x_name[id->driver_data]);
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_create_pattern_file:
 	led_classdev_unregister(&chip->cdev_indicator);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_create_indicator_file:
@@ -560,8 +582,11 @@ static int lm355x_remove(struct i2c_client *client)
 
 	regmap_write(chip->regmap, preg[REG_OPMODE].regno, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (chip->type == CHIP_LM3556)
 		device_remove_file(chip->cdev_indicator.dev, &dev_attr_pattern);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	led_classdev_unregister(&chip->cdev_indicator);

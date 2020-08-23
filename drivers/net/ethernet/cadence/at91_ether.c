@@ -30,7 +30,10 @@
 #include <linux/of_device.h>
 #include <linux/of_net.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -309,16 +312,22 @@ MODULE_DEVICE_TABLE(of, at91ether_dt_ids);
 static int __init at91ether_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct macb_platform_data *board_data = pdev->dev.platform_data;
 	struct resource *regs;
 	struct net_device *dev;
 	struct phy_device *phydev;
 	struct pinctrl *pinctrl;
 =======
+=======
+>>>>>>> v3.18
 	struct macb_platform_data *board_data = dev_get_platdata(&pdev->dev);
 	struct resource *regs;
 	struct net_device *dev;
 	struct phy_device *phydev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct macb *lp;
 	int res;
@@ -330,6 +339,7 @@ static int __init at91ether_probe(struct platform_device *pdev)
 		return -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
 	if (IS_ERR(pinctrl)) {
 		res = PTR_ERR(pinctrl);
@@ -339,6 +349,8 @@ static int __init at91ether_probe(struct platform_device *pdev)
 		dev_warn(&pdev->dev, "No pinctrl provided\n");
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev = alloc_etherdev(sizeof(struct macb));
@@ -367,6 +379,12 @@ static int __init at91ether_probe(struct platform_device *pdev)
 	clk_enable(lp->pclk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lp->hclk = ERR_PTR(-ENOENT);
+	lp->tx_clk = ERR_PTR(-ENOENT);
+
+>>>>>>> v3.18
 =======
 	lp->hclk = ERR_PTR(-ENOENT);
 	lp->tx_clk = ERR_PTR(-ENOENT);
@@ -379,7 +397,10 @@ static int __init at91ether_probe(struct platform_device *pdev)
 		goto err_disable_clock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ether_setup(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev->netdev_ops = &at91ether_netdev_ops;
@@ -458,7 +479,10 @@ static int at91ether_remove(struct platform_device *pdev)
 	clk_disable(lp->pclk);
 	free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

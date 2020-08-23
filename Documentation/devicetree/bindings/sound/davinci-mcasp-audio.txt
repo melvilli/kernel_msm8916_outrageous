@@ -5,6 +5,7 @@ Required properties:
 	"ti,dm646x-mcasp-audio"	: for DM646x platforms
 	"ti,da830-mcasp-audio"	: for both DA830 & DA850 platforms
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"ti,omap2-mcasp-audio"	: for OMAP2 platforms (TI81xx, AM33xx)
 
 - reg : Should contain McASP registers offset and length
@@ -17,6 +18,8 @@ Required properties:
 		serializer pin direction. (0 - INACTIVE, 1 - TX, 2 - RX)
 
 =======
+=======
+>>>>>>> v3.18
 	"ti,am33xx-mcasp-audio"	: for AM33xx platforms (AM33xx, AM43xx, TI81xx)
 	"ti,dra7-mcasp-audio"	: for DRA7xx platforms
 
@@ -37,6 +40,9 @@ Required properties:
 - dma-names: identifier string for each DMA request line in the dmas property.
 	     These strings correspond 1:1 with the ordered pairs in dmas. The dma
 	     identifiers must be "rx" and "tx".
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Optional properties:
@@ -47,7 +53,10 @@ Optional properties:
 - sram-size-playback : size of sram to be allocated during playback
 - sram-size-capture  : size of sram to be allocated during capture
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - interrupts : Interrupt numbers for McASP, currently not used by the driver
 - interrupt-names : Known interrupt names are "tx" and "rx"
 - pinctrl-0: Should specify pin control group used for this controller.
@@ -55,12 +64,16 @@ Optional properties:
   		 please refer to pinctrl-bindings.txt
 - fck_parent : Should contain a valid clock name which will be used as parent
 	       for the McASP fck
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
 
 mcasp0: mcasp0@1d00000 {
 	compatible = "ti,da830-mcasp-audio";
+<<<<<<< HEAD
 <<<<<<< HEAD
 	#address-cells = <1>;
 	#size-cells = <0>;
@@ -70,12 +83,17 @@ mcasp0: mcasp0@1d00000 {
 	tdm-slots = <2>;
 	num-serializer = <16>;
 =======
+=======
+>>>>>>> v3.18
 	reg = <0x100000 0x3000>;
 	reg-names "mpu";
 	interrupts = <82>, <83>;
 	interrupt-names = "tx", "rx";
 	op-mode = <0>;		/* MCASP_IIS_MODE */
 	tdm-slots = <2>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	serial-dir = <
 			0 0 0 0	/* 0: INACTIVE, 1: TX, 2: RX */

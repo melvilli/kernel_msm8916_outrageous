@@ -58,6 +58,12 @@ print_timer(struct seq_file *m, struct hrtimer *taddr, struct hrtimer *timer,
 	    int idx, u64 now)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_TIMER_STATS
+	char tmp[TASK_COMM_LEN + 1];
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_TIMER_STATS
 	char tmp[TASK_COMM_LEN + 1];
@@ -69,7 +75,10 @@ print_timer(struct seq_file *m, struct hrtimer *taddr, struct hrtimer *timer,
 	print_name_offset(m, timer->function);
 	SEQ_printf(m, ", S:%02lx", timer->state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TIMER_STATS
 	SEQ_printf(m, ", ");
 	print_name_offset(m, timer->start_site);
@@ -77,6 +86,9 @@ print_timer(struct seq_file *m, struct hrtimer *taddr, struct hrtimer *timer,
 	tmp[TASK_COMM_LEN] = 0;
 	SEQ_printf(m, ", %s/%d", tmp, timer->start_pid);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SEQ_printf(m, "\n");
 	SEQ_printf(m, " # expires at %Lu-%Lu nsecs [in %Ld to %Ld nsecs]\n",

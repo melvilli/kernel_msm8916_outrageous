@@ -37,6 +37,7 @@
 #include "t4fw_ri_api.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define T4_MAX_NUM_QP (1<<16)
 #define T4_MAX_NUM_CQ (1<<15)
 #define T4_MAX_NUM_PD (1<<15)
@@ -54,11 +55,16 @@
 #define T4_FW_MAJ 0
 #define T4_EQ_STATUS_ENTRIES (L1_CACHE_BYTES > 64 ? 2 : 1)
 =======
+=======
+>>>>>>> v3.18
 #define T4_MAX_NUM_PD 65536
 #define T4_MAX_MR_SIZE (~0ULL)
 #define T4_PAGESIZE_MASK 0xffff000  /* 4KB-128MB */
 #define T4_STAG_UNSET 0xffffffff
 #define T4_FW_MAJ 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define A_PCIE_MA_SYNC 0x30b4
 
@@ -93,8 +99,11 @@ struct t4_status_page {
 #define T4_MAX_FR_IMMD ((T4_SQ_NUM_BYTES - sizeof(struct fw_ri_fr_nsmr_wr) - \
 			sizeof(struct fw_ri_immd)) & ~31UL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define T4_MAX_FR_DEPTH (1024 / sizeof(u64))
 =======
+=======
+>>>>>>> v3.18
 #define T4_MAX_FR_IMMD_DEPTH (T4_MAX_FR_IMMD / sizeof(u64))
 #define T4_MAX_FR_DSGL 1024
 #define T4_MAX_FR_DSGL_DEPTH (T4_MAX_FR_DSGL / sizeof(u64))
@@ -103,6 +112,9 @@ static inline int t4_max_fr_depth(int use_dsgl)
 {
 	return use_dsgl ? T4_MAX_FR_DSGL_DEPTH : T4_MAX_FR_IMMD_DEPTH;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define T4_RQ_NUM_SLOTS 2
@@ -257,8 +269,13 @@ struct t4_cqe {
 
 /* generic accessor macros */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CQE_WRID_HI(x)		((x)->u.gen.wrid_hi)
 #define CQE_WRID_LOW(x)		((x)->u.gen.wrid_low)
+=======
+#define CQE_WRID_HI(x)		(be32_to_cpu((x)->u.gen.wrid_hi))
+#define CQE_WRID_LOW(x)		(be32_to_cpu((x)->u.gen.wrid_low))
+>>>>>>> v3.18
 =======
 #define CQE_WRID_HI(x)		(be32_to_cpu((x)->u.gen.wrid_hi))
 #define CQE_WRID_LOW(x)		(be32_to_cpu((x)->u.gen.wrid_low))
@@ -294,6 +311,12 @@ struct t4_swsqe {
 	int			signaled;
 	u16			idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int                     flushed;
+	struct timespec         host_ts;
+	u64                     sge_ts;
+>>>>>>> v3.18
 =======
 	int                     flushed;
 	struct timespec         host_ts;
@@ -322,7 +345,11 @@ struct t4_sq {
 	struct t4_swsqe *sw_sq;
 	struct t4_swsqe *oldest_read;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 udb;
+=======
+	u64 __iomem *udb;
+>>>>>>> v3.18
 =======
 	u64 __iomem *udb;
 >>>>>>> v3.18
@@ -334,7 +361,13 @@ struct t4_sq {
 	u16 pidx;
 	u16 wq_pidx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 flags;
+=======
+	u16 wq_pidx_inc;
+	u16 flags;
+	short flush_cidx;
+>>>>>>> v3.18
 =======
 	u16 wq_pidx_inc;
 	u16 flags;
@@ -345,6 +378,11 @@ struct t4_sq {
 struct t4_swrqe {
 	u64 wr_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct timespec host_ts;
+	u64 sge_ts;
+>>>>>>> v3.18
 =======
 	struct timespec host_ts;
 	u64 sge_ts;
@@ -357,7 +395,11 @@ struct t4_rq {
 	DEFINE_DMA_UNMAP_ADDR(mapping);
 	struct t4_swrqe *sw_rq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 udb;
+=======
+	u64 __iomem *udb;
+>>>>>>> v3.18
 =======
 	u64 __iomem *udb;
 >>>>>>> v3.18
@@ -372,6 +414,10 @@ struct t4_rq {
 	u16 pidx;
 	u16 wq_pidx;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 wq_pidx_inc;
+>>>>>>> v3.18
 =======
 	u16 wq_pidx_inc;
 >>>>>>> v3.18
@@ -384,6 +430,10 @@ struct t4_wq {
 	void __iomem *gts;
 	struct c4iw_rdev *rdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int flushed;
+>>>>>>> v3.18
 =======
 	int flushed;
 >>>>>>> v3.18
@@ -470,6 +520,12 @@ static inline void t4_sq_produce(struct t4_wq *wq, u8 len16)
 static inline void t4_sq_consume(struct t4_wq *wq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUG_ON(wq->sq.in_use < 1);
+	if (wq->sq.cidx == wq->sq.flush_cidx)
+		wq->sq.flush_cidx = -1;
+>>>>>>> v3.18
 =======
 	BUG_ON(wq->sq.in_use < 1);
 	if (wq->sq.cidx == wq->sq.flush_cidx)
@@ -491,6 +547,7 @@ static inline u16 t4_sq_wq_size(struct t4_wq *wq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void t4_ring_sq_db(struct t4_wq *wq, u16 inc)
 {
 	wmb();
@@ -501,6 +558,8 @@ static inline void t4_ring_rq_db(struct t4_wq *wq, u16 inc)
 {
 	wmb();
 =======
+=======
+>>>>>>> v3.18
 /* This function copies 64 byte coalesced work request to memory
  * mapped BAR2 space. For coalesced WRs, the SGE fetches data
  * from the FIFO instead of from Host.
@@ -562,6 +621,9 @@ static inline void t4_ring_rq_db(struct t4_wq *wq, u16 inc, u8 t5,
 		wmb();
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel(QID(wq->rq.qid) | PIDX(inc), wq->db);
 }
@@ -592,11 +654,17 @@ static inline int t4_wq_db_enabled(struct t4_wq *wq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum t4_cq_flags {
 	CQ_ARMED	= 1,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct t4_cq {
 	struct t4_cqe *queue;
@@ -610,6 +678,10 @@ struct t4_cq {
 	__be64 bits_type_ts;
 	u32 cqid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int vector;
+>>>>>>> v3.18
 =======
 	int vector;
 >>>>>>> v3.18
@@ -622,9 +694,12 @@ struct t4_cq {
 	u8 gen;
 	u8 error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 };
 
@@ -633,12 +708,19 @@ static inline int t4_clear_cq_armed(struct t4_cq *cq)
 	return test_and_clear_bit(CQ_ARMED, &cq->flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int t4_arm_cq(struct t4_cq *cq, int se)
 {
 	u32 val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	set_bit(CQ_ARMED, &cq->flags);
+>>>>>>> v3.18
 =======
 	set_bit(CQ_ARMED, &cq->flags);
 >>>>>>> v3.18
@@ -659,12 +741,18 @@ static inline void t4_swcq_produce(struct t4_cq *cq)
 {
 	cq->sw_in_use++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cq->sw_in_use == cq->size) {
 		PDBG("%s cxgb4 sw cq overflow cqid %u\n", __func__, cq->cqid);
 		cq->error = 1;
 		BUG_ON(1);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (++cq->sw_pidx == cq->size)
 		cq->sw_pidx = 0;
@@ -673,6 +761,10 @@ static inline void t4_swcq_produce(struct t4_cq *cq)
 static inline void t4_swcq_consume(struct t4_cq *cq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUG_ON(cq->sw_in_use < 1);
+>>>>>>> v3.18
 =======
 	BUG_ON(cq->sw_in_use < 1);
 >>>>>>> v3.18
@@ -685,7 +777,11 @@ static inline void t4_hwcq_consume(struct t4_cq *cq)
 {
 	cq->bits_type_ts = cq->queue[cq->cidx].bits_type_ts;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (++cq->cidx_inc == (cq->size >> 4)) {
+=======
+	if (++cq->cidx_inc == (cq->size >> 4) || cq->cidx_inc == CIDXINC_MASK) {
+>>>>>>> v3.18
 =======
 	if (++cq->cidx_inc == (cq->size >> 4) || cq->cidx_inc == CIDXINC_MASK) {
 >>>>>>> v3.18
@@ -722,13 +818,19 @@ static inline int t4_next_hw_cqe(struct t4_cq *cq, struct t4_cqe **cqe)
 		cq->error = 1;
 		printk(KERN_ERR MOD "cq overflow cqid %u\n", cq->cqid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (t4_valid_cqe(cq, &cq->queue[cq->cidx])) {
 =======
+=======
+>>>>>>> v3.18
 		BUG_ON(1);
 	} else if (t4_valid_cqe(cq, &cq->queue[cq->cidx])) {
 
 		/* Ensure CQE is flushed to memory */
 		rmb();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*cqe = &cq->queue[cq->cidx];
 		ret = 0;
@@ -740,13 +842,19 @@ static inline int t4_next_hw_cqe(struct t4_cq *cq, struct t4_cqe **cqe)
 static inline struct t4_cqe *t4_next_sw_cqe(struct t4_cq *cq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cq->sw_in_use == cq->size) {
 		PDBG("%s cxgb4 sw cq overflow cqid %u\n", __func__, cq->cqid);
 		cq->error = 1;
 		BUG_ON(1);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cq->sw_in_use)
 		return &cq->sw_queue[cq->sw_cidx];
@@ -777,9 +885,15 @@ static inline void t4_set_cq_in_error(struct t4_cq *cq)
 }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 struct t4_dev_status_page {
 	u8 db_off;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

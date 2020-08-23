@@ -88,7 +88,11 @@ your PCI configuration:
 	echo -n pirq=; echo `scanpci | grep T_L | cut -c56-` | sed 's/ /,/g'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 note that this script wont work if you have skipped a few slots or if your
+=======
+note that this script won't work if you have skipped a few slots or if your
+>>>>>>> v3.18
 =======
 note that this script won't work if you have skipped a few slots or if your
 >>>>>>> v3.18

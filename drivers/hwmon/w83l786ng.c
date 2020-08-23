@@ -125,7 +125,11 @@ DIV_TO_REG(long val)
 
 struct w83l786ng_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -152,6 +156,7 @@ struct w83l786ng_data {
 	u8 tolerance[2];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int w83l786ng_probe(struct i2c_client *client,
 			   const struct i2c_device_id *id);
@@ -181,6 +186,8 @@ static struct i2c_driver w83l786ng_driver = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static u8
 w83l786ng_read_value(struct i2c_client *client, u8 reg)
 {
@@ -194,7 +201,10 @@ w83l786ng_write_value(struct i2c_client *client, u8 reg, u8 value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct w83l786ng_data *w83l786ng_update_device(struct device *dev)
 {
 	struct w83l786ng_data *data = dev_get_drvdata(dev);
@@ -266,6 +276,9 @@ static struct w83l786ng_data *w83l786ng_update_device(struct device *dev)
 	return data;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* following are the sysfs callback functions */
 #define show_in_reg(reg) \
@@ -289,8 +302,13 @@ store_in_##reg(struct device *dev, struct device_attribute *attr, \
 { \
 	int nr = to_sensor_dev_attr(attr)->index; \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev); \
 	struct w83l786ng_data *data = i2c_get_clientdata(client); \
+=======
+	struct w83l786ng_data *data = dev_get_drvdata(dev); \
+	struct i2c_client *client = data->client; \
+>>>>>>> v3.18
 =======
 	struct w83l786ng_data *data = dev_get_drvdata(dev); \
 	struct i2c_client *client = data->client; \
@@ -336,7 +354,11 @@ static ssize_t show_##reg(struct device *dev, struct device_attribute *attr, \
 	struct w83l786ng_data *data = w83l786ng_update_device(dev); \
 	return sprintf(buf, "%d\n", \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		FAN_FROM_REG(data->fan[nr], DIV_FROM_REG(data->fan_div[nr]))); \
+=======
+		FAN_FROM_REG(data->reg[nr], DIV_FROM_REG(data->fan_div[nr]))); \
+>>>>>>> v3.18
 =======
 		FAN_FROM_REG(data->reg[nr], DIV_FROM_REG(data->fan_div[nr]))); \
 >>>>>>> v3.18
@@ -351,8 +373,13 @@ store_fan_min(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct w83l786ng_data *data = i2c_get_clientdata(client);
+=======
+	struct w83l786ng_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct w83l786ng_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -394,8 +421,13 @@ store_fan_div(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct w83l786ng_data *data = i2c_get_clientdata(client);
+=======
+	struct w83l786ng_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct w83l786ng_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -490,8 +522,13 @@ store_temp(struct device *dev, struct device_attribute *attr,
 	int nr = sensor_attr->nr;
 	int index = sensor_attr->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct w83l786ng_data *data = i2c_get_clientdata(client);
+=======
+	struct w83l786ng_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct w83l786ng_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -550,8 +587,13 @@ store_pwm_mode(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct w83l786ng_data *data = i2c_get_clientdata(client);
+=======
+	struct w83l786ng_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct w83l786ng_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -583,8 +625,13 @@ store_pwm(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct w83l786ng_data *data = i2c_get_clientdata(client);
+=======
+	struct w83l786ng_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct w83l786ng_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -612,8 +659,13 @@ store_pwm_enable(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct w83l786ng_data *data = i2c_get_clientdata(client);
+=======
+	struct w83l786ng_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct w83l786ng_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -673,8 +725,13 @@ store_tolerance(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct w83l786ng_data *data = i2c_get_clientdata(client);
+=======
+	struct w83l786ng_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct w83l786ng_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -734,7 +791,11 @@ static struct sensor_device_attribute sda_tolerance[] = {
 	&sda_tolerance[X].dev_attr.attr
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *w83l786ng_attributes[] = {
+=======
+static struct attribute *w83l786ng_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *w83l786ng_attrs[] = {
 >>>>>>> v3.18
@@ -753,9 +814,13 @@ static struct attribute *w83l786ng_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group w83l786ng_group = {
 	.attrs = w83l786ng_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(w83l786ng);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(w83l786ng);
 >>>>>>> v3.18
@@ -796,7 +861,10 @@ w83l786ng_detect(struct i2c_client *client, struct i2c_board_info *info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void w83l786ng_init_client(struct i2c_client *client)
 {
 	u8 tmp;
@@ -810,12 +878,16 @@ static void w83l786ng_init_client(struct i2c_client *client)
 		w83l786ng_write_value(client, W83L786NG_REG_CONFIG, tmp | 0x01);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 w83l786ng_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
 	struct device *dev = &client->dev;
 	struct w83l786ng_data *data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i, err = 0;
 	u8 reg_tmp;
@@ -827,6 +899,8 @@ w83l786ng_probe(struct i2c_client *client, const struct i2c_device_id *id)
 
 	i2c_set_clientdata(client, data);
 =======
+=======
+>>>>>>> v3.18
 	struct device *hwmon_dev;
 	int i;
 	u8 reg_tmp;
@@ -836,6 +910,9 @@ w83l786ng_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		return -ENOMEM;
 
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_init(&data->update_lock);
 
@@ -853,6 +930,7 @@ w83l786ng_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	data->fan_div[0] = reg_tmp & 0x07;
 	data->fan_div[1] = (reg_tmp >> 4) & 0x07;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register sysfs hooks */
 	err = sysfs_create_group(&client->dev.kobj, &w83l786ng_group);
@@ -970,6 +1048,8 @@ static struct w83l786ng_data *w83l786ng_update_device(struct device *dev)
 	return data;
 }
 =======
+=======
+>>>>>>> v3.18
 	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
 							   data,
 							   w83l786ng_groups);
@@ -992,6 +1072,9 @@ static struct i2c_driver w83l786ng_driver = {
 	.detect		= w83l786ng_detect,
 	.address_list	= normal_i2c,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 module_i2c_driver(w83l786ng_driver);

@@ -269,6 +269,11 @@ struct usbhs_priv {
 	 */
 	struct usbhs_fifo_info fifo_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	struct usb_phy *phy;
+>>>>>>> v3.18
 =======
 
 	struct usb_phy *phy;

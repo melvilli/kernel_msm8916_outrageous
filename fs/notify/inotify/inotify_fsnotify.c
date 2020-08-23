@@ -35,6 +35,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Check if 2 events contain the same information.  We do not compare private data
  * but at this moment that isn't a problem for any know fsnotify listeners.
  */
@@ -131,6 +132,8 @@ static int inotify_handle_event(struct fsnotify_group *group,
 		else
 			ret = PTR_ERR(added_event);
 =======
+=======
+>>>>>>> v3.18
  * Check if 2 events contain the same information.
  */
 static bool event_compare(struct fsnotify_event *old_fsn,
@@ -209,6 +212,9 @@ int inotify_handle_event(struct fsnotify_group *group,
 	if (ret) {
 		/* Our event wasn't used in the end. Free it. */
 		fsnotify_destroy_event(group, fsn_event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -216,7 +222,11 @@ int inotify_handle_event(struct fsnotify_group *group,
 		fsnotify_destroy_mark(inode_mark, group);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -227,6 +237,7 @@ static void inotify_freeing_mark(struct fsnotify_mark *fsn_mark, struct fsnotify
 	inotify_ignored_and_remove_idr(fsn_mark, group);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool inotify_should_send_event(struct fsnotify_group *group, struct inode *inode,
 				      struct fsnotify_mark *inode_mark,
@@ -244,6 +255,8 @@ static bool inotify_should_send_event(struct fsnotify_group *group, struct inode
 	return true;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -287,6 +300,7 @@ static void inotify_free_group_priv(struct fsnotify_group *group)
 	idr_for_each(&group->inotify_data.idr, idr_callback, group);
 	idr_destroy(&group->inotify_data.idr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_dec(&group->inotify_data.user->inotify_devs);
 	free_uid(group->inotify_data.user);
 }
@@ -302,6 +316,8 @@ void inotify_free_event_priv(struct fsnotify_event_private_data *fsn_event_priv)
 	fsnotify_put_group(fsn_event_priv->group);
 	kmem_cache_free(event_priv_cachep, event_priv);
 =======
+=======
+>>>>>>> v3.18
 	if (group->inotify_data.user) {
 		atomic_dec(&group->inotify_data.user->inotify_devs);
 		free_uid(group->inotify_data.user);
@@ -311,15 +327,23 @@ void inotify_free_event_priv(struct fsnotify_event_private_data *fsn_event_priv)
 static void inotify_free_event(struct fsnotify_event *fsn_event)
 {
 	kfree(INOTIFY_E(fsn_event));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 const struct fsnotify_ops inotify_fsnotify_ops = {
 	.handle_event = inotify_handle_event,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.should_send_event = inotify_should_send_event,
 	.free_group_priv = inotify_free_group_priv,
 	.free_event_priv = inotify_free_event_priv,
+=======
+	.free_group_priv = inotify_free_group_priv,
+	.free_event = inotify_free_event,
+>>>>>>> v3.18
 =======
 	.free_group_priv = inotify_free_group_priv,
 	.free_event = inotify_free_event,

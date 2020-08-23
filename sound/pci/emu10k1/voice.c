@@ -56,7 +56,11 @@ static int voice_alloc(struct snd_emu10k1 *emu, int type, int number,
 	for (i = emu->next_free_voice, j = 0; j < NUM_G ; i += number, j += number) {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "i %d j %d next free %d!\n",
+=======
+		dev_dbg(emu->card->dev, "i %d j %d next free %d!\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(emu->card->dev, "i %d j %d next free %d!\n",
 >>>>>>> v3.18
@@ -80,7 +84,11 @@ static int voice_alloc(struct snd_emu10k1 *emu, int type, int number,
 		}
 		if (!skip) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* printk(KERN_DEBUG "allocated voice %d\n", i); */
+=======
+			/* dev_dbg(emu->card->dev, "allocated voice %d\n", i); */
+>>>>>>> v3.18
 =======
 			/* dev_dbg(emu->card->dev, "allocated voice %d\n", i); */
 >>>>>>> v3.18
@@ -98,7 +106,11 @@ static int voice_alloc(struct snd_emu10k1 *emu, int type, int number,
 		voice = &emu->voices[(first_voice + i) % NUM_G];
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(kERN_DEBUG "voice alloc - %i, %i of %i\n",
+=======
+		dev_dbg(emu->card->dev, "voice alloc - %i, %i of %i\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(emu->card->dev, "voice alloc - %i, %i of %i\n",
 >>>>>>> v3.18

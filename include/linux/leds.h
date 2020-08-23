@@ -14,8 +14,13 @@
 
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/spinlock.h>
 #include <linux/rwsem.h>
+=======
+#include <linux/rwsem.h>
+#include <linux/spinlock.h>
+>>>>>>> v3.18
 =======
 #include <linux/rwsem.h>
 #include <linux/spinlock.h>
@@ -37,8 +42,13 @@ enum led_brightness {
 struct led_classdev {
 	const char		*name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			 brightness;
 	int			 max_brightness;
+=======
+	enum led_brightness	 brightness;
+	enum led_brightness	 max_brightness;
+>>>>>>> v3.18
 =======
 	enum led_brightness	 brightness;
 	enum led_brightness	 max_brightness;
@@ -74,6 +84,11 @@ struct led_classdev {
 
 	struct device		*dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct attribute_group	**groups;
+
+>>>>>>> v3.18
 =======
 	const struct attribute_group	**groups;
 
@@ -154,7 +169,10 @@ extern void led_blink_set_oneshot(struct led_classdev *led_cdev,
 extern void led_set_brightness(struct led_classdev *led_cdev,
 			       enum led_brightness brightness);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * led_update_brightness - update LED brightness
  * @led_cdev: the LED to query
@@ -165,6 +183,9 @@ extern void led_set_brightness(struct led_classdev *led_cdev,
  * Returns: 0 on success or negative error value on failure
  */
 extern int led_update_brightness(struct led_classdev *led_cdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

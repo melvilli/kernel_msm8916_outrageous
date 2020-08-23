@@ -19,7 +19,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -85,8 +88,11 @@ static int  whiteheat_firmware_attach(struct usb_serial *serial);
 
 /* function prototypes for the Connect Tech WhiteHEAT serial converter */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int whiteheat_probe(struct usb_serial *serial,
 				const struct usb_device_id *id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int  whiteheat_attach(struct usb_serial *serial);
@@ -126,7 +132,10 @@ static struct usb_serial_driver whiteheat_device = {
 	.id_table =		id_table_std,
 	.num_ports =		4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.probe =		whiteheat_probe,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.attach =		whiteheat_attach,
@@ -231,6 +240,7 @@ static int whiteheat_firmware_attach(struct usb_serial *serial)
  * Connect Tech's White Heat serial driver functions
  *****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int whiteheat_probe(struct usb_serial *serial,
 				const struct usb_device_id *id)
@@ -259,6 +269,8 @@ static int whiteheat_probe(struct usb_serial *serial,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int whiteheat_attach(struct usb_serial *serial)
@@ -332,12 +344,17 @@ static int whiteheat_attach(struct usb_serial *serial)
 	command_info = kmalloc(sizeof(struct whiteheat_command_private),
 								GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (command_info == NULL) {
 		dev_err(&serial->dev->dev,
 			"%s: Out of memory for port structures\n",
 			serial->type->description);
 		goto no_command_private;
 	}
+=======
+	if (!command_info)
+		goto no_command_private;
+>>>>>>> v3.18
 =======
 	if (!command_info)
 		goto no_command_private;
@@ -504,8 +521,11 @@ static int whiteheat_ioctl(struct tty_struct *tty,
 	void __user *user_arg = (void __user *)arg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s - cmd 0x%.4x\n", __func__, cmd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (cmd) {
@@ -513,8 +533,13 @@ static int whiteheat_ioctl(struct tty_struct *tty,
 		memset(&serstruct, 0, sizeof(serstruct));
 		serstruct.type = PORT_16654;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		serstruct.line = port->serial->minor;
 		serstruct.port = port->number;
+=======
+		serstruct.line = port->minor;
+		serstruct.port = port->port_number;
+>>>>>>> v3.18
 =======
 		serstruct.line = port->minor;
 		serstruct.port = port->port_number;
@@ -688,7 +713,11 @@ static int firm_open(struct usb_serial_port *port)
 	struct whiteheat_simple open_command;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	open_command.port = port->number - port->serial->minor + 1;
+=======
+	open_command.port = port->port_number + 1;
+>>>>>>> v3.18
 =======
 	open_command.port = port->port_number + 1;
 >>>>>>> v3.18
@@ -702,7 +731,11 @@ static int firm_close(struct usb_serial_port *port)
 	struct whiteheat_simple close_command;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	close_command.port = port->number - port->serial->minor + 1;
+=======
+	close_command.port = port->port_number + 1;
+>>>>>>> v3.18
 =======
 	close_command.port = port->port_number + 1;
 >>>>>>> v3.18
@@ -719,7 +752,11 @@ static void firm_setup_port(struct tty_struct *tty)
 	unsigned int cflag = tty->termios.c_cflag;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port_settings.port = port->number - port->serial->minor + 1;
+=======
+	port_settings.port = port->port_number + 1;
+>>>>>>> v3.18
 =======
 	port_settings.port = port->port_number + 1;
 >>>>>>> v3.18
@@ -800,7 +837,11 @@ static int firm_set_rts(struct usb_serial_port *port, __u8 onoff)
 	struct whiteheat_set_rdb rts_command;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rts_command.port = port->number - port->serial->minor + 1;
+=======
+	rts_command.port = port->port_number + 1;
+>>>>>>> v3.18
 =======
 	rts_command.port = port->port_number + 1;
 >>>>>>> v3.18
@@ -815,7 +856,11 @@ static int firm_set_dtr(struct usb_serial_port *port, __u8 onoff)
 	struct whiteheat_set_rdb dtr_command;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dtr_command.port = port->number - port->serial->minor + 1;
+=======
+	dtr_command.port = port->port_number + 1;
+>>>>>>> v3.18
 =======
 	dtr_command.port = port->port_number + 1;
 >>>>>>> v3.18
@@ -830,7 +875,11 @@ static int firm_set_break(struct usb_serial_port *port, __u8 onoff)
 	struct whiteheat_set_rdb break_command;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	break_command.port = port->number - port->serial->minor + 1;
+=======
+	break_command.port = port->port_number + 1;
+>>>>>>> v3.18
 =======
 	break_command.port = port->port_number + 1;
 >>>>>>> v3.18
@@ -845,7 +894,11 @@ static int firm_purge(struct usb_serial_port *port, __u8 rxtx)
 	struct whiteheat_purge purge_command;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	purge_command.port = port->number - port->serial->minor + 1;
+=======
+	purge_command.port = port->port_number + 1;
+>>>>>>> v3.18
 =======
 	purge_command.port = port->port_number + 1;
 >>>>>>> v3.18
@@ -860,7 +913,11 @@ static int firm_get_dtr_rts(struct usb_serial_port *port)
 	struct whiteheat_simple get_dr_command;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_dr_command.port = port->number - port->serial->minor + 1;
+=======
+	get_dr_command.port = port->port_number + 1;
+>>>>>>> v3.18
 =======
 	get_dr_command.port = port->port_number + 1;
 >>>>>>> v3.18
@@ -874,7 +931,11 @@ static int firm_report_tx_done(struct usb_serial_port *port)
 	struct whiteheat_simple close_command;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	close_command.port = port->number - port->serial->minor + 1;
+=======
+	close_command.port = port->port_number + 1;
+>>>>>>> v3.18
 =======
 	close_command.port = port->port_number + 1;
 >>>>>>> v3.18

@@ -15,7 +15,11 @@ Required property:
 Optional properties:
 - dma-channels: 	Number of DMA channels supported by the controller.
 <<<<<<< HEAD
+<<<<<<< HEAD
 - dma-requests: 	Number of DMA requests signals supported by the
+=======
+- dma-requests: 	Number of DMA request signals supported by the
+>>>>>>> v3.18
 =======
 - dma-requests: 	Number of DMA request signals supported by the
 >>>>>>> v3.18
@@ -49,7 +53,11 @@ Required property:
 			  containing DMA controller specific information. This
 			  typically contains a DMA request line number or a
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  channel number, but can contain any data that is used
+=======
+			  channel number, but can contain any data that is
+>>>>>>> v3.18
 =======
 			  channel number, but can contain any data that is
 >>>>>>> v3.18

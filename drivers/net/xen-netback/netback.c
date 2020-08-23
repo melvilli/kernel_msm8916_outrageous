@@ -38,6 +38,10 @@
 #include <linux/if_vlan.h>
 #include <linux/udp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/highmem.h>
+>>>>>>> v3.18
 =======
 #include <linux/highmem.h>
 >>>>>>> v3.18
@@ -51,6 +55,7 @@
 #include <asm/xen/hypercall.h>
 #include <asm/xen/page.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * This is the maximum slots a skb can have. If a guest sends a skb
@@ -195,6 +200,8 @@ static void make_tx_response(struct xenvif *vif,
 			     s8       st);
 static struct xen_netif_rx_response *make_rx_response(struct xenvif *vif,
 =======
+=======
+>>>>>>> v3.18
 /* Provide an option to disable split event channels at load time as
  * event channels are limited resource. Split event channels are
  * enabled by default.
@@ -239,6 +246,9 @@ static void make_tx_response(struct xenvif_queue *queue,
 static inline int tx_work_todo(struct xenvif_queue *queue);
 
 static struct xen_netif_rx_response *make_rx_response(struct xenvif_queue *queue,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					     u16      id,
 					     s8       st,
@@ -246,6 +256,7 @@ static struct xen_netif_rx_response *make_rx_response(struct xenvif_queue *queue
 					     u16      size,
 					     u16      flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline unsigned long idx_to_pfn(struct xen_netbk *netbk,
 				       u16 idx)
@@ -308,6 +319,8 @@ static int get_page_ext(struct page *pg,
 			 sizeof(struct iphdr) + MAX_IPOPTLEN + \
 			 sizeof(struct tcphdr) + MAX_TCP_OPTION_SPACE)
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long idx_to_pfn(struct xenvif_queue *queue,
 				       u16 idx)
 {
@@ -341,6 +354,9 @@ static inline struct xenvif_queue *ubuf_to_queue(const struct ubuf_info *ubuf)
  * IPv6 headers.
  */
 #define PKT_PROT_LEN 128
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static u16 frag_get_pending_idx(skb_frag_t *frag)
@@ -358,6 +374,7 @@ static inline pending_ring_idx_t pending_index(unsigned i)
 	return i & (MAX_PENDING_REQS-1);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline pending_ring_idx_t nr_pending_reqs(struct xen_netbk *netbk)
 {
@@ -401,6 +418,8 @@ int xen_netbk_must_stop_queue(struct xenvif *vif)
 
 	return xen_netbk_rx_ring_full(vif);
 =======
+=======
+>>>>>>> v3.18
 bool xenvif_rx_ring_slots_available(struct xenvif_queue *queue, int needed)
 {
 	RING_IDX prod, cons;
@@ -484,6 +503,9 @@ static void xenvif_rx_queue_drop_expired(struct xenvif_queue *queue)
 		xenvif_rx_dequeue(queue);
 		kfree_skb(skb);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -493,7 +515,12 @@ static void xenvif_rx_queue_drop_expired(struct xenvif_queue *queue)
  * bytes.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool start_new_rx_buffer(int offset, unsigned long size, int head)
+=======
+static bool start_new_rx_buffer(int offset, unsigned long size, int head,
+				bool full_coalesce)
+>>>>>>> v3.18
 =======
 static bool start_new_rx_buffer(int offset, unsigned long size, int head,
 				bool full_coalesce)
@@ -510,6 +537,10 @@ static bool start_new_rx_buffer(int offset, unsigned long size, int head,
 	 * and (ii)  there is already some data in the current buffer
 	 * and (iii) this is not the head buffer.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 * and (iv)  there is no need to fully utilize the buffers
+>>>>>>> v3.18
 =======
 	 * and (iv)  there is no need to fully utilize the buffers
 >>>>>>> v3.18
@@ -524,6 +555,11 @@ static bool start_new_rx_buffer(int offset, unsigned long size, int head,
 	 *   netfront relies on the first buffer being
 	 *   non-empty and can crash otherwise.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	 * - (iv) is needed for skbs which can use up more than MAX_SKB_FRAGS
+	 *   slot
+>>>>>>> v3.18
 =======
 	 * - (iv) is needed for skbs which can use up more than MAX_SKB_FRAGS
 	 *   slot
@@ -536,7 +572,12 @@ static bool start_new_rx_buffer(int offset, unsigned long size, int head,
 	 */
 	BUG_ON(size > MAX_BUFFER_OFFSET);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((offset + size > MAX_BUFFER_OFFSET) && offset && !head)
+=======
+	if ((offset + size > MAX_BUFFER_OFFSET) && offset && !head &&
+	    !full_coalesce)
+>>>>>>> v3.18
 =======
 	if ((offset + size > MAX_BUFFER_OFFSET) && offset && !head &&
 	    !full_coalesce)
@@ -546,6 +587,7 @@ static bool start_new_rx_buffer(int offset, unsigned long size, int head,
 	return false;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct xenvif_count_slot_state {
 	unsigned long copy_off;
@@ -636,12 +678,18 @@ unsigned int xen_netbk_count_skb_slots(struct xenvif *vif, struct sk_buff *skb)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct netrx_pending_operations {
 	unsigned copy_prod, copy_cons;
 	unsigned meta_prod, meta_cons;
 	struct gnttab_copy *copy;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct netbk_rx_meta *meta;
+=======
+	struct xenvif_rx_meta *meta;
+>>>>>>> v3.18
 =======
 	struct xenvif_rx_meta *meta;
 >>>>>>> v3.18
@@ -649,6 +697,7 @@ struct netrx_pending_operations {
 	grant_ref_t copy_gref;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct netbk_rx_meta *get_next_rx_buffer(struct xenvif *vif,
 						struct netrx_pending_operations *npo)
@@ -666,6 +715,8 @@ static struct netbk_rx_meta *get_next_rx_buffer(struct xenvif *vif,
 	npo->copy_off = 0;
 	npo->copy_gref = req.gref;
 =======
+=======
+>>>>>>> v3.18
 static struct xenvif_rx_meta *get_next_rx_buffer(struct xenvif_queue *queue,
 						 struct netrx_pending_operations *npo)
 {
@@ -682,6 +733,9 @@ static struct xenvif_rx_meta *get_next_rx_buffer(struct xenvif_queue *queue,
 
 	npo->copy_off = 0;
 	npo->copy_gref = req->gref;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return meta;
@@ -691,6 +745,7 @@ static struct xenvif_rx_meta *get_next_rx_buffer(struct xenvif_queue *queue,
  * Set up the grant operations for this fragment. If it's a flipping
  * interface, we also set up the unmap request from here.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void netbk_gop_frag_copy(struct xenvif *vif, struct sk_buff *skb,
 				struct netrx_pending_operations *npo,
@@ -707,6 +762,8 @@ static void netbk_gop_frag_copy(struct xenvif *vif, struct sk_buff *skb,
 	int foreign = get_page_ext(page, &group, &idx);
 	unsigned long bytes;
 =======
+=======
+>>>>>>> v3.18
 static void xenvif_gop_frag_copy(struct xenvif_queue *queue, struct sk_buff *skb,
 				 struct netrx_pending_operations *npo,
 				 struct page *page, unsigned long size,
@@ -718,6 +775,9 @@ static void xenvif_gop_frag_copy(struct xenvif_queue *queue, struct sk_buff *skb
 	struct xenvif_rx_meta *meta;
 	unsigned long bytes;
 	int gso_type = XEN_NETIF_GSO_TYPE_NONE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Data must not cross a page boundary. */
@@ -739,12 +799,18 @@ static void xenvif_gop_frag_copy(struct xenvif_queue *queue, struct sk_buff *skb
 			bytes = size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (start_new_rx_buffer(npo->copy_off, bytes, *head)) {
 =======
+=======
+>>>>>>> v3.18
 		if (start_new_rx_buffer(npo->copy_off,
 					bytes,
 					*head,
 					XENVIF_RX_CB(skb)->full_coalesce)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * Netfront requires there to be some data in the head
@@ -753,7 +819,11 @@ static void xenvif_gop_frag_copy(struct xenvif_queue *queue, struct sk_buff *skb
 			BUG_ON(*head);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			meta = get_next_rx_buffer(vif, npo);
+=======
+			meta = get_next_rx_buffer(queue, npo);
+>>>>>>> v3.18
 =======
 			meta = get_next_rx_buffer(queue, npo);
 >>>>>>> v3.18
@@ -764,6 +834,7 @@ static void xenvif_gop_frag_copy(struct xenvif_queue *queue, struct sk_buff *skb
 
 		copy_gop = npo->copy + npo->copy_prod++;
 		copy_gop->flags = GNTCOPY_dest_gref;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (foreign) {
 			struct xen_netbk *netbk = &xen_netbk[group];
@@ -786,6 +857,8 @@ static void xenvif_gop_frag_copy(struct xenvif_queue *queue, struct sk_buff *skb
 		copy_gop->dest.u.ref = npo->copy_gref;
 		copy_gop->len = bytes;
 =======
+=======
+>>>>>>> v3.18
 		copy_gop->len = bytes;
 
 		if (foreign_queue) {
@@ -802,6 +875,9 @@ static void xenvif_gop_frag_copy(struct xenvif_queue *queue, struct sk_buff *skb
 		copy_gop->dest.domid = queue->vif->domid;
 		copy_gop->dest.offset = npo->copy_off;
 		copy_gop->dest.u.ref = npo->copy_gref;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		npo->copy_off += bytes;
@@ -819,9 +895,12 @@ static void xenvif_gop_frag_copy(struct xenvif_queue *queue, struct sk_buff *skb
 
 		/* Leave a gap for the GSO descriptor. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (*head && skb_shinfo(skb)->gso_size && !vif->gso_prefix)
 			vif->rx.req_cons++;
 =======
+=======
+>>>>>>> v3.18
 		if (skb_is_gso(skb)) {
 			if (skb_shinfo(skb)->gso_type & SKB_GSO_TCPV4)
 				gso_type = XEN_NETIF_GSO_TYPE_TCPV4;
@@ -831,6 +910,9 @@ static void xenvif_gop_frag_copy(struct xenvif_queue *queue, struct sk_buff *skb
 
 		if (*head && ((1 << gso_type) & queue->vif->gso_mask))
 			queue->rx.req_cons++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		*head = 0; /* There must be something in this buffer now. */
@@ -840,7 +922,10 @@ static void xenvif_gop_frag_copy(struct xenvif_queue *queue, struct sk_buff *skb
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Find the grant ref for a given frag in a chain of struct ubuf_info's
  * skb: the skb itself
  * i: the frag's number
@@ -870,6 +955,9 @@ static const struct ubuf_info *xenvif_find_gref(const struct sk_buff *const skb,
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Prepare an SKB to be transmitted to the frontend.
  *
@@ -883,8 +971,14 @@ static const struct ubuf_info *xenvif_find_gref(const struct sk_buff *const skb,
  * frontend-side LRO).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int netbk_gop_skb(struct sk_buff *skb,
 			 struct netrx_pending_operations *npo)
+=======
+static int xenvif_gop_skb(struct sk_buff *skb,
+			  struct netrx_pending_operations *npo,
+			  struct xenvif_queue *queue)
+>>>>>>> v3.18
 =======
 static int xenvif_gop_skb(struct sk_buff *skb,
 			  struct netrx_pending_operations *npo,
@@ -894,6 +988,7 @@ static int xenvif_gop_skb(struct sk_buff *skb,
 	struct xenvif *vif = netdev_priv(skb->dev);
 	int nr_frags = skb_shinfo(skb)->nr_frags;
 	int i;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct xen_netif_rx_request req;
 	struct netbk_rx_meta *meta;
@@ -925,6 +1020,8 @@ static int xenvif_gop_skb(struct sk_buff *skb,
 	npo->copy_off = 0;
 	npo->copy_gref = req.gref;
 =======
+=======
+>>>>>>> v3.18
 	struct xen_netif_rx_request *req;
 	struct xenvif_rx_meta *meta;
 	unsigned char *data;
@@ -969,6 +1066,9 @@ static int xenvif_gop_skb(struct sk_buff *skb,
 	meta->id = req->id;
 	npo->copy_off = 0;
 	npo->copy_gref = req->gref;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data = skb->data;
@@ -980,18 +1080,25 @@ static int xenvif_gop_skb(struct sk_buff *skb,
 			len = skb_tail_pointer(skb) - data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netbk_gop_frag_copy(vif, skb, npo,
 				    virt_to_page(data), len, offset, &head);
 =======
+=======
+>>>>>>> v3.18
 		xenvif_gop_frag_copy(queue, skb, npo,
 				     virt_to_page(data), len, offset, &head,
 				     NULL,
 				     0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		data += len;
 	}
 
 	for (i = 0; i < nr_frags; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		netbk_gop_frag_copy(vif, skb, npo,
 				    skb_frag_page(&skb_shinfo(skb)->frags[i]),
@@ -999,6 +1106,8 @@ static int xenvif_gop_skb(struct sk_buff *skb,
 				    skb_shinfo(skb)->frags[i].page_offset,
 				    &head);
 =======
+=======
+>>>>>>> v3.18
 		/* This variable also signals whether foreign_gref has a real
 		 * value or not.
 		 */
@@ -1054,6 +1163,9 @@ static int xenvif_gop_skb(struct sk_buff *skb,
 				     &head,
 				     foreign_queue,
 				     foreign_queue ? foreign_gref : UINT_MAX);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1062,7 +1174,11 @@ static int xenvif_gop_skb(struct sk_buff *skb,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This is a twin to netbk_gop_skb.  Assume that netbk_gop_skb was
+=======
+ * This is a twin to xenvif_gop_skb.  Assume that xenvif_gop_skb was
+>>>>>>> v3.18
 =======
  * This is a twin to xenvif_gop_skb.  Assume that xenvif_gop_skb was
 >>>>>>> v3.18
@@ -1071,8 +1187,13 @@ static int xenvif_gop_skb(struct sk_buff *skb,
  * they didn't give any errors and advance over them.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int netbk_check_gop(struct xenvif *vif, int nr_meta_slots,
 			   struct netrx_pending_operations *npo)
+=======
+static int xenvif_check_gop(struct xenvif *vif, int nr_meta_slots,
+			    struct netrx_pending_operations *npo)
+>>>>>>> v3.18
 =======
 static int xenvif_check_gop(struct xenvif *vif, int nr_meta_slots,
 			    struct netrx_pending_operations *npo)
@@ -1096,9 +1217,15 @@ static int xenvif_check_gop(struct xenvif *vif, int nr_meta_slots,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void netbk_add_frag_responses(struct xenvif *vif, int status,
 				     struct netbk_rx_meta *meta,
 				     int nr_meta_slots)
+=======
+static void xenvif_add_frag_responses(struct xenvif_queue *queue, int status,
+				      struct xenvif_rx_meta *meta,
+				      int nr_meta_slots)
+>>>>>>> v3.18
 =======
 static void xenvif_add_frag_responses(struct xenvif_queue *queue, int status,
 				      struct xenvif_rx_meta *meta,
@@ -1123,7 +1250,11 @@ static void xenvif_add_frag_responses(struct xenvif_queue *queue, int status,
 
 		offset = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		make_rx_response(vif, meta[i].id, status, offset,
+=======
+		make_rx_response(queue, meta[i].id, status, offset,
+>>>>>>> v3.18
 =======
 		make_rx_response(queue, meta[i].id, status, offset,
 >>>>>>> v3.18
@@ -1131,6 +1262,7 @@ static void xenvif_add_frag_responses(struct xenvif_queue *queue, int status,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct skb_cb_overlay {
 	int meta_slots_used;
@@ -1140,6 +1272,8 @@ static void xen_netbk_rx_action(struct xen_netbk *netbk)
 {
 	struct xenvif *vif = NULL, *tmp;
 =======
+=======
+>>>>>>> v3.18
 void xenvif_kick_thread(struct xenvif_queue *queue)
 {
 	wake_up(&queue->wq);
@@ -1147,6 +1281,9 @@ void xenvif_kick_thread(struct xenvif_queue *queue)
 
 static void xenvif_rx_action(struct xenvif_queue *queue)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s8 status;
 	u16 flags;
@@ -1155,6 +1292,7 @@ static void xenvif_rx_action(struct xenvif_queue *queue)
 	struct sk_buff *skb;
 	LIST_HEAD(notify);
 	int ret;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int nr_frags;
 	int count;
@@ -1165,17 +1303,23 @@ static void xenvif_rx_action(struct xenvif_queue *queue)
 		.copy  = netbk->grant_copy_op,
 		.meta  = netbk->meta,
 =======
+=======
+>>>>>>> v3.18
 	unsigned long offset;
 	bool need_to_notify = false;
 
 	struct netrx_pending_operations npo = {
 		.copy  = queue->grant_copy_op,
 		.meta  = queue->meta,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
 	skb_queue_head_init(&rxq);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	count = 0;
 
@@ -1231,6 +1375,8 @@ static void xenvif_rx_action(struct xenvif_queue *queue)
 
 		if (sco->meta_slots_used == 1)
 =======
+=======
+>>>>>>> v3.18
 	while (xenvif_rx_ring_slots_available(queue, XEN_NETBK_RX_SLOTS_MAX)
 	       && (skb = xenvif_rx_dequeue(queue)) != NULL) {
 		RING_IDX max_slots_needed;
@@ -1324,6 +1470,9 @@ static void xenvif_rx_action(struct xenvif_queue *queue)
 					  &npo);
 
 		if (XENVIF_RX_CB(skb)->meta_slots_used == 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			flags = 0;
 		else
@@ -1336,6 +1485,7 @@ static void xenvif_rx_action(struct xenvif_queue *queue)
 			flags |= XEN_NETRXF_data_validated;
 
 		offset = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		resp = make_rx_response(vif, netbk->meta[npo.meta_cons].id,
 					status, offset,
@@ -1353,6 +1503,8 @@ static void xenvif_rx_action(struct xenvif_queue *queue)
 			gso->u.gso.size = netbk->meta[npo.meta_cons].gso_size;
 			gso->u.gso.type = XEN_NETIF_GSO_TYPE_TCPV4;
 =======
+=======
+>>>>>>> v3.18
 		resp = make_rx_response(queue, queue->meta[npo.meta_cons].id,
 					status, offset,
 					queue->meta[npo.meta_cons].size,
@@ -1369,6 +1521,9 @@ static void xenvif_rx_action(struct xenvif_queue *queue)
 
 			gso->u.gso.type = queue->meta[npo.meta_cons].gso_type;
 			gso->u.gso.size = queue->meta[npo.meta_cons].gso_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			gso->u.gso.pad = 0;
 			gso->u.gso.features = 0;
@@ -1377,6 +1532,7 @@ static void xenvif_rx_action(struct xenvif_queue *queue)
 			gso->flags = 0;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		netbk_add_frag_responses(vif, status,
 					 netbk->meta + npo.meta_cons + 1,
@@ -1500,6 +1656,8 @@ void xen_netbk_check_rx_xenvif(struct xenvif *vif)
 
 static void tx_add_credit(struct xenvif *vif)
 =======
+=======
+>>>>>>> v3.18
 		xenvif_add_frag_responses(queue, status,
 					  queue->meta + npo.meta_cons + 1,
 					  XENVIF_RX_CB(skb)->meta_slots_used);
@@ -1528,6 +1686,9 @@ void xenvif_napi_schedule_or_enable_events(struct xenvif_queue *queue)
 }
 
 static void tx_add_credit(struct xenvif_queue *queue)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long max_burst, max_credit;
@@ -1536,6 +1697,7 @@ static void tx_add_credit(struct xenvif_queue *queue)
 	 * Allow a burst big enough to transmit a jumbo packet of up to 128kB.
 	 * Otherwise the interface can seize up due to insufficient credit.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	max_burst = max(131072UL, vif->credit_bytes);
 
@@ -1546,6 +1708,8 @@ static void tx_add_credit(struct xenvif_queue *queue)
 
 	vif->remaining_credit = min(max_credit, max_burst);
 =======
+=======
+>>>>>>> v3.18
 	max_burst = RING_GET_REQUEST(&queue->tx, queue->tx.req_cons)->size;
 	max_burst = min(max_burst, 131072UL);
 	max_burst = max(max_burst, queue->credit_bytes);
@@ -1556,11 +1720,15 @@ static void tx_add_credit(struct xenvif_queue *queue)
 		max_credit = ULONG_MAX; /* wrapped: clamp to ULONG_MAX */
 
 	queue->remaining_credit = min(max_credit, max_burst);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void tx_credit_callback(unsigned long data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct xenvif *vif = (struct xenvif *)data;
 	tx_add_credit(vif);
@@ -1597,6 +1765,8 @@ static int netbk_count_requests(struct xenvif *vif,
 {
 	RING_IDX cons = vif->tx.req_cons;
 =======
+=======
+>>>>>>> v3.18
 	struct xenvif_queue *queue = (struct xenvif_queue *)data;
 	tx_add_credit(queue);
 	xenvif_napi_schedule_or_enable_events(queue);
@@ -1634,6 +1804,9 @@ static int xenvif_count_requests(struct xenvif_queue *queue,
 				 int work_to_do)
 {
 	RING_IDX cons = queue->tx.req_cons;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int slots = 0;
 	int drop_err = 0;
@@ -1647,15 +1820,21 @@ static int xenvif_count_requests(struct xenvif_queue *queue,
 
 		if (slots >= work_to_do) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			netdev_err(vif->dev,
 				   "Asked for %d slots but exceeds this limit\n",
 				   work_to_do);
 			netbk_fatal_tx_err(vif);
 =======
+=======
+>>>>>>> v3.18
 			netdev_err(queue->vif->dev,
 				   "Asked for %d slots but exceeds this limit\n",
 				   work_to_do);
 			xenvif_fatal_tx_err(queue->vif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -ENODATA;
 		}
@@ -1665,15 +1844,21 @@ static int xenvif_count_requests(struct xenvif_queue *queue,
 		 */
 		if (unlikely(slots >= fatal_skb_slots)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			netdev_err(vif->dev,
 				   "Malicious frontend using %d slots, threshold %u\n",
 				   slots, fatal_skb_slots);
 			netbk_fatal_tx_err(vif);
 =======
+=======
+>>>>>>> v3.18
 			netdev_err(queue->vif->dev,
 				   "Malicious frontend using %d slots, threshold %u\n",
 				   slots, fatal_skb_slots);
 			xenvif_fatal_tx_err(queue->vif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -E2BIG;
 		}
@@ -1688,7 +1873,11 @@ static int xenvif_count_requests(struct xenvif_queue *queue,
 		if (!drop_err && slots >= XEN_NETBK_LEGACY_SLOTS_MAX) {
 			if (net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 				netdev_dbg(vif->dev,
+=======
+				netdev_dbg(queue->vif->dev,
+>>>>>>> v3.18
 =======
 				netdev_dbg(queue->vif->dev,
 >>>>>>> v3.18
@@ -1701,7 +1890,12 @@ static int xenvif_count_requests(struct xenvif_queue *queue,
 			txp = &dropped_tx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RING_COPY_REQUEST(&vif->tx, cons + slots, txp);
+=======
+		memcpy(txp, RING_GET_REQUEST(&queue->tx, cons + slots),
+		       sizeof(*txp));
+>>>>>>> v3.18
 =======
 		memcpy(txp, RING_GET_REQUEST(&queue->tx, cons + slots),
 		       sizeof(*txp));
@@ -1719,7 +1913,11 @@ static int xenvif_count_requests(struct xenvif_queue *queue,
 		if (!drop_err && txp->size > first->size) {
 			if (net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 				netdev_dbg(vif->dev,
+=======
+				netdev_dbg(queue->vif->dev,
+>>>>>>> v3.18
 =======
 				netdev_dbg(queue->vif->dev,
 >>>>>>> v3.18
@@ -1733,9 +1931,15 @@ static int xenvif_count_requests(struct xenvif_queue *queue,
 
 		if (unlikely((txp->offset + txp->size) > PAGE_SIZE)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			netdev_err(vif->dev, "Cross page boundary, txp->offset: %x, size: %u\n",
 				 txp->offset, txp->size);
 			netbk_fatal_tx_err(vif);
+=======
+			netdev_err(queue->vif->dev, "Cross page boundary, txp->offset: %x, size: %u\n",
+				 txp->offset, txp->size);
+			xenvif_fatal_tx_err(queue->vif);
+>>>>>>> v3.18
 =======
 			netdev_err(queue->vif->dev, "Cross page boundary, txp->offset: %x, size: %u\n",
 				 txp->offset, txp->size);
@@ -1753,7 +1957,11 @@ static int xenvif_count_requests(struct xenvif_queue *queue,
 
 	if (drop_err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netbk_tx_err(vif, first, cons + slots);
+=======
+		xenvif_tx_err(queue, first, cons + slots);
+>>>>>>> v3.18
 =======
 		xenvif_tx_err(queue, first, cons + slots);
 >>>>>>> v3.18
@@ -1763,6 +1971,7 @@ static int xenvif_count_requests(struct xenvif_queue *queue,
 	return slots;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct page *xen_netbk_alloc_page(struct xen_netbk *netbk,
 					 u16 pending_idx)
@@ -1793,6 +2002,8 @@ static struct gnttab_copy *xen_netbk_get_requests(struct xen_netbk *netbk,
 	unsigned int nr_slots;
 	struct pending_tx_info *first = NULL;
 =======
+=======
+>>>>>>> v3.18
 
 struct xenvif_tx_cb {
 	u16 pending_idx;
@@ -1842,18 +2053,25 @@ static struct gnttab_map_grant_ref *xenvif_get_requests(struct xenvif_queue *que
 	int start;
 	pending_ring_idx_t index;
 	unsigned int nr_slots, frag_overflow = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* At this point shinfo->nr_frags is in fact the number of
 	 * slots, which can be as large as XEN_NETBK_LEGACY_SLOTS_MAX.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (shinfo->nr_frags > MAX_SKB_FRAGS) {
 		frag_overflow = shinfo->nr_frags - MAX_SKB_FRAGS;
 		BUG_ON(frag_overflow > MAX_SKB_FRAGS);
 		shinfo->nr_frags = MAX_SKB_FRAGS;
 	}
+<<<<<<< HEAD
 >>>>>>> v3.18
 	nr_slots = shinfo->nr_frags;
 
@@ -2002,6 +2220,13 @@ static int xen_netbk_tx_check_gop(struct xen_netbk *netbk,
 			if (unlikely(err))
 				xen_netbk_idx_release(netbk, pending_idx, XEN_NETIF_RSP_OKAY);
 =======
+=======
+	nr_slots = shinfo->nr_frags;
+
+	/* Skip first skb fragment if it is on same page as header fragment. */
+	start = (frag_get_pending_idx(&shinfo->frags[0]) == pending_idx);
+
+>>>>>>> v3.18
 	for (shinfo->nr_frags = start; shinfo->nr_frags < nr_slots;
 	     shinfo->nr_frags++, txp++, gop++) {
 		index = pending_index(queue->pending_cons++);
@@ -2127,14 +2352,20 @@ check_frags:
 					xenvif_idx_release(queue, pending_idx,
 							   XEN_NETIF_RSP_OKAY);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
 
 		/* Error on this fragment: respond to client with an error. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xen_netbk_idx_release(netbk, pending_idx, XEN_NETIF_RSP_ERROR);
 =======
+=======
+>>>>>>> v3.18
 		if (net_ratelimit())
 			netdev_dbg(queue->vif->dev,
 				   "Grant map of %d. frag failed! status: %d pending_idx: %u ref: %u\n",
@@ -2144,12 +2375,16 @@ check_frags:
 				   gop_map->ref);
 
 		xenvif_idx_release(queue, pending_idx, XEN_NETIF_RSP_ERROR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Not the first error? Preceding frags already invalidated. */
 		if (err)
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* First error: invalidate header and preceding fragments. */
 		pending_idx = *((u16 *)skb->data);
@@ -2158,6 +2393,8 @@ check_frags:
 			pending_idx = frag_get_pending_idx(&shinfo->frags[j]);
 			xen_netbk_idx_release(netbk, pending_idx, XEN_NETIF_RSP_OKAY);
 =======
+=======
+>>>>>>> v3.18
 		/* First error: if the header haven't shared a slot with the
 		 * first frag, release it as well.
 		 */
@@ -2184,6 +2421,9 @@ check_frags:
 				xenvif_idx_release(queue, pending_idx,
 						   XEN_NETIF_RSP_OKAY);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -2192,12 +2432,15 @@ check_frags:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*gopp = gop + 1;
 	return err;
 }
 
 static void xen_netbk_fill_frags(struct xen_netbk *netbk, struct sk_buff *skb)
 =======
+=======
+>>>>>>> v3.18
 	if (skb_has_frag_list(skb) && !first_shinfo) {
 		first_shinfo = skb_shinfo(skb);
 		shinfo = skb_shinfo(skb_shinfo(skb)->frag_list);
@@ -2211,12 +2454,19 @@ static void xen_netbk_fill_frags(struct xen_netbk *netbk, struct sk_buff *skb)
 }
 
 static void xenvif_fill_frags(struct xenvif_queue *queue, struct sk_buff *skb)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct skb_shared_info *shinfo = skb_shinfo(skb);
 	int nr_frags = shinfo->nr_frags;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 prev_pending_idx = INVALID_PENDING_IDX;
+>>>>>>> v3.18
 =======
 	u16 prev_pending_idx = INVALID_PENDING_IDX;
 >>>>>>> v3.18
@@ -2230,9 +2480,12 @@ static void xenvif_fill_frags(struct xenvif_queue *queue, struct sk_buff *skb)
 		pending_idx = frag_get_pending_idx(frag);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		txp = &netbk->pending_tx_info[pending_idx].req;
 		page = virt_to_page(idx_to_kaddr(netbk, pending_idx));
 =======
+=======
+>>>>>>> v3.18
 		/* If this is not the first frag, chain it to the previous*/
 		if (prev_pending_idx == INVALID_PENDING_IDX)
 			skb_shinfo(skb)->destructor_arg =
@@ -2246,12 +2499,16 @@ static void xenvif_fill_frags(struct xenvif_queue *queue, struct sk_buff *skb)
 
 		txp = &queue->pending_tx_info[pending_idx].req;
 		page = virt_to_page(idx_to_kaddr(queue, pending_idx));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__skb_fill_page_desc(skb, i, page, txp->offset, txp->size);
 		skb->len += txp->size;
 		skb->data_len += txp->size;
 		skb->truesize += txp->size;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Take an extra reference to offset xen_netbk_idx_release */
 		get_page(netbk->mmap_pages[pending_idx]);
@@ -2261,6 +2518,8 @@ static void xenvif_fill_frags(struct xenvif_queue *queue, struct sk_buff *skb)
 
 static int xen_netbk_get_extras(struct xenvif *vif,
 =======
+=======
+>>>>>>> v3.18
 		/* Take an extra reference to offset network stack's put_page */
 		get_page(queue->mmap_pages[pending_idx]);
 	}
@@ -2273,11 +2532,15 @@ static int xen_netbk_get_extras(struct xenvif *vif,
 }
 
 static int xenvif_get_extras(struct xenvif_queue *queue,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				struct xen_netif_extra_info *extras,
 				int work_to_do)
 {
 	struct xen_netif_extra_info extra;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	RING_IDX cons = vif->tx.req_cons;
 
@@ -2296,6 +2559,8 @@ static int xenvif_get_extras(struct xenvif_queue *queue,
 				   "Invalid extra type: %d\n", extra.type);
 			netbk_fatal_tx_err(vif);
 =======
+=======
+>>>>>>> v3.18
 	RING_IDX cons = queue->tx.req_cons;
 
 	do {
@@ -2313,13 +2578,20 @@ static int xenvif_get_extras(struct xenvif_queue *queue,
 			netdev_err(queue->vif->dev,
 				   "Invalid extra type: %d\n", extra.type);
 			xenvif_fatal_tx_err(queue->vif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EINVAL;
 		}
 
 		memcpy(&extras[extra.type - 1], &extra, sizeof(extra));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vif->tx.req_cons = ++cons;
+=======
+		queue->tx.req_cons = ++cons;
+>>>>>>> v3.18
 =======
 		queue->tx.req_cons = ++cons;
 >>>>>>> v3.18
@@ -2328,6 +2600,7 @@ static int xenvif_get_extras(struct xenvif_queue *queue,
 	return work_to_do;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int netbk_set_skb_gso(struct xenvif *vif,
 			     struct sk_buff *skb,
@@ -2344,6 +2617,8 @@ static int netbk_set_skb_gso(struct xenvif *vif,
 		netdev_err(vif->dev, "Bad GSO type %d.\n", gso->u.gso.type);
 		netbk_fatal_tx_err(vif);
 =======
+=======
+>>>>>>> v3.18
 static int xenvif_set_skb_gso(struct xenvif *vif,
 			      struct sk_buff *skb,
 			      struct xen_netif_extra_info *gso)
@@ -2364,11 +2639,15 @@ static int xenvif_set_skb_gso(struct xenvif *vif,
 	default:
 		netdev_err(vif->dev, "Bad GSO type %d.\n", gso->u.gso.type);
 		xenvif_fatal_tx_err(vif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	skb_shinfo(skb)->gso_size = gso->u.gso.size;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	skb_shinfo(skb)->gso_type = SKB_GSO_TCPV4;
 
@@ -2378,10 +2657,14 @@ static int xenvif_set_skb_gso(struct xenvif *vif,
 =======
 	/* gso_segs will be calculated later */
 >>>>>>> v3.18
+=======
+	/* gso_segs will be calculated later */
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int checksum_setup(struct xenvif *vif, struct sk_buff *skb)
 {
@@ -2392,11 +2675,16 @@ static int checksum_setup(struct xenvif *vif, struct sk_buff *skb)
 	/*
 	 * A GSO SKB must be CHECKSUM_PARTIAL. However some buggy
 =======
+=======
+>>>>>>> v3.18
 static int checksum_setup(struct xenvif_queue *queue, struct sk_buff *skb)
 {
 	bool recalculate_partial_csum = false;
 
 	/* A GSO SKB must be CHECKSUM_PARTIAL. However some buggy
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * peers can fail to set NETRXF_csum_blank when sending a GSO
 	 * frame. In this case force the SKB to CHECKSUM_PARTIAL and
@@ -2404,9 +2692,15 @@ static int checksum_setup(struct xenvif_queue *queue, struct sk_buff *skb)
 	 */
 	if (skb->ip_summed != CHECKSUM_PARTIAL && skb_is_gso(skb)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vif->rx_gso_checksum_fixup++;
 		skb->ip_summed = CHECKSUM_PARTIAL;
 		recalculate_partial_csum = 1;
+=======
+		queue->stats.rx_gso_checksum_fixup++;
+		skb->ip_summed = CHECKSUM_PARTIAL;
+		recalculate_partial_csum = true;
+>>>>>>> v3.18
 =======
 		queue->stats.rx_gso_checksum_fixup++;
 		skb->ip_summed = CHECKSUM_PARTIAL;
@@ -2418,6 +2712,7 @@ static int checksum_setup(struct xenvif_queue *queue, struct sk_buff *skb)
 	if (skb->ip_summed != CHECKSUM_PARTIAL)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (skb->protocol != htons(ETH_P_IP))
 		goto out;
@@ -2471,6 +2766,8 @@ static bool tx_credit_exceeded(struct xenvif *vif, unsigned size)
 	/* Timer could already be pending in rare cases. */
 	if (timer_pending(&vif->credit_timeout))
 =======
+=======
+>>>>>>> v3.18
 	return skb_checksum_setup(skb, recalculate_partial_csum);
 }
 
@@ -2482,11 +2779,15 @@ static bool tx_credit_exceeded(struct xenvif_queue *queue, unsigned size)
 
 	/* Timer could already be pending in rare cases. */
 	if (timer_pending(&queue->credit_timeout))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return true;
 
 	/* Passed the point where we can replenish credit? */
 	if (time_after_eq64(now, next_credit)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		vif->credit_window_start = now;
 		tx_add_credit(vif);
@@ -2502,6 +2803,8 @@ static bool tx_credit_exceeded(struct xenvif_queue *queue, unsigned size)
 			  next_credit);
 		vif->credit_window_start = next_credit;
 =======
+=======
+>>>>>>> v3.18
 		queue->credit_window_start = now;
 		tx_add_credit(queue);
 	}
@@ -2515,6 +2818,9 @@ static bool tx_credit_exceeded(struct xenvif_queue *queue, unsigned size)
 		mod_timer(&queue->credit_timeout,
 			  next_credit);
 		queue->credit_window_start = next_credit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		return true;
@@ -2523,6 +2829,7 @@ static bool tx_credit_exceeded(struct xenvif_queue *queue, unsigned size)
 	return false;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned xen_netbk_tx_build_gops(struct xen_netbk *netbk)
 {
@@ -2538,6 +2845,8 @@ static unsigned xen_netbk_tx_build_gops(struct xen_netbk *netbk)
 		struct xen_netif_tx_request txfrags[XEN_NETBK_LEGACY_SLOTS_MAX];
 		struct page *page;
 =======
+=======
+>>>>>>> v3.18
 static void xenvif_tx_build_gops(struct xenvif_queue *queue,
 				     int budget,
 				     unsigned *copy_ops,
@@ -2550,6 +2859,9 @@ static void xenvif_tx_build_gops(struct xenvif_queue *queue,
 	while (skb_queue_len(&queue->tx_queue) < budget) {
 		struct xen_netif_tx_request txreq;
 		struct xen_netif_tx_request txfrags[XEN_NETBK_LEGACY_SLOTS_MAX];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct xen_netif_extra_info extras[XEN_NETIF_EXTRA_TYPE_MAX-1];
 		u16 pending_idx;
@@ -2558,6 +2870,7 @@ static void xenvif_tx_build_gops(struct xenvif_queue *queue,
 		unsigned int data_len;
 		pending_ring_idx_t index;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Get a netif from the list with work to do. */
 		vif = poll_net_schedule_list(netbk);
@@ -2615,6 +2928,8 @@ static void xenvif_tx_build_gops(struct xenvif_queue *queue,
 		if (unlikely(ret < 0))
 			continue;
 =======
+=======
+>>>>>>> v3.18
 		if (queue->tx.sring->req_prod - queue->tx.req_cons >
 		    XEN_NETIF_TX_RING_SIZE) {
 			netdev_err(queue->vif->dev,
@@ -2656,26 +2971,36 @@ static void xenvif_tx_build_gops(struct xenvif_queue *queue,
 		ret = xenvif_count_requests(queue, &txreq, txfrags, work_to_do);
 		if (unlikely(ret < 0))
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		idx += ret;
 
 		if (unlikely(txreq.size < ETH_HLEN)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			netdev_dbg(vif->dev,
 				   "Bad packet size: %d\n", txreq.size);
 			netbk_tx_err(vif, &txreq, idx);
 			continue;
 =======
+=======
+>>>>>>> v3.18
 			netdev_dbg(queue->vif->dev,
 				   "Bad packet size: %d\n", txreq.size);
 			xenvif_tx_err(queue, &txreq, idx);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
 		/* No crossing a page as the payload mustn't fragment. */
 		if (unlikely((txreq.offset + txreq.size) > PAGE_SIZE)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			netdev_err(vif->dev,
 				   "txreq.offset: %x, size: %u, end: %lu\n",
@@ -2688,6 +3013,8 @@ static void xenvif_tx_build_gops(struct xenvif_queue *queue,
 		index = pending_index(netbk->pending_cons);
 		pending_idx = netbk->pending_ring[index];
 =======
+=======
+>>>>>>> v3.18
 			netdev_err(queue->vif->dev,
 				   "txreq.offset: %x, size: %u, end: %lu\n",
 				   txreq.offset, txreq.size,
@@ -2698,12 +3025,16 @@ static void xenvif_tx_build_gops(struct xenvif_queue *queue,
 
 		index = pending_index(queue->pending_cons);
 		pending_idx = queue->pending_ring[index];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		data_len = (txreq.size > PKT_PROT_LEN &&
 			    ret < XEN_NETBK_LEGACY_SLOTS_MAX) ?
 			PKT_PROT_LEN : txreq.size;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		skb = alloc_skb(data_len + NET_SKB_PAD + NET_IP_ALIGN,
 				GFP_ATOMIC | __GFP_NOWARN);
@@ -2718,6 +3049,8 @@ static void xenvif_tx_build_gops(struct xenvif_queue *queue,
 		skb_reserve(skb, NET_SKB_PAD + NET_IP_ALIGN);
 
 =======
+=======
+>>>>>>> v3.18
 		skb = xenvif_alloc_skb(data_len);
 		if (unlikely(skb == NULL)) {
 			netdev_dbg(queue->vif->dev,
@@ -2726,11 +3059,15 @@ static void xenvif_tx_build_gops(struct xenvif_queue *queue,
 			break;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (extras[XEN_NETIF_EXTRA_TYPE_GSO - 1].type) {
 			struct xen_netif_extra_info *gso;
 			gso = &extras[XEN_NETIF_EXTRA_TYPE_GSO - 1];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (netbk_set_skb_gso(vif, skb, gso)) {
 				/* Failure in netbk_set_skb_gso is fatal. */
@@ -2768,6 +3105,8 @@ static void xenvif_tx_build_gops(struct xenvif_queue *queue,
 
 		__skb_put(skb, data_len);
 =======
+=======
+>>>>>>> v3.18
 			if (xenvif_set_skb_gso(queue->vif, skb, gso)) {
 				/* Failure in xenvif_set_skb_gso is fatal. */
 				kfree_skb(skb);
@@ -2792,6 +3131,9 @@ static void xenvif_tx_build_gops(struct xenvif_queue *queue,
 		queue->tx_copy_ops[*copy_ops].flags = GNTCOPY_source_gref;
 
 		(*copy_ops)++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		skb_shinfo(skb)->nr_frags = ret;
@@ -2799,6 +3141,7 @@ static void xenvif_tx_build_gops(struct xenvif_queue *queue,
 			skb_shinfo(skb)->nr_frags++;
 			frag_set_pending_idx(&skb_shinfo(skb)->frags[0],
 					     pending_idx);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		} else {
 			frag_set_pending_idx(&skb_shinfo(skb)->frags[0],
@@ -2848,6 +3191,8 @@ static void xen_netbk_tx_submit(struct xen_netbk *netbk)
 			netdev_dbg(vif->dev, "netback grant failed.\n");
 			skb_shinfo(skb)->nr_frags = 0;
 =======
+=======
+>>>>>>> v3.18
 			xenvif_tx_create_map_op(queue, pending_idx, &txreq, gop);
 			gop++;
 		} else {
@@ -2975,6 +3320,9 @@ static int xenvif_tx_submit(struct xenvif_queue *queue)
 						skb_shinfo(skb)->frag_list;
 				skb_shinfo(nskb)->nr_frags = 0;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			kfree_skb(skb);
 			continue;
@@ -2982,9 +3330,13 @@ static int xenvif_tx_submit(struct xenvif_queue *queue)
 
 		data_len = skb->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(skb->data,
 		       (void *)(idx_to_kaddr(netbk, pending_idx)|txp->offset),
 		       data_len);
+=======
+		callback_param(queue, pending_idx).ctx = NULL;
+>>>>>>> v3.18
 =======
 		callback_param(queue, pending_idx).ctx = NULL;
 >>>>>>> v3.18
@@ -2995,7 +3347,12 @@ static int xenvif_tx_submit(struct xenvif_queue *queue)
 		} else {
 			/* Schedule a response immediately. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			xen_netbk_idx_release(netbk, pending_idx, XEN_NETIF_RSP_OKAY);
+=======
+			xenvif_idx_release(queue, pending_idx,
+					   XEN_NETIF_RSP_OKAY);
+>>>>>>> v3.18
 =======
 			xenvif_idx_release(queue, pending_idx,
 					   XEN_NETIF_RSP_OKAY);
@@ -3008,6 +3365,7 @@ static int xenvif_tx_submit(struct xenvif_queue *queue)
 			skb->ip_summed = CHECKSUM_UNNECESSARY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xen_netbk_fill_frags(netbk, skb);
 
 		/*
@@ -3017,6 +3375,8 @@ static int xenvif_tx_submit(struct xenvif_queue *queue)
 		 */
 		if (skb_headlen(skb) < PKT_PROT_LEN && skb_is_nonlinear(skb)) {
 =======
+=======
+>>>>>>> v3.18
 		xenvif_fill_frags(queue, skb);
 
 		if (unlikely(skb_has_frag_list(skb))) {
@@ -3031,11 +3391,15 @@ static int xenvif_tx_submit(struct xenvif_queue *queue)
 		}
 
 		if (skb_is_nonlinear(skb) && skb_headlen(skb) < PKT_PROT_LEN) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			int target = min_t(int, skb->len, PKT_PROT_LEN);
 			__pskb_pull_tail(skb, target - skb_headlen(skb));
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		skb->dev      = vif->dev;
 		skb->protocol = eth_type_trans(skb, skb->dev);
@@ -3045,6 +3409,8 @@ static int xenvif_tx_submit(struct xenvif_queue *queue)
 			netdev_dbg(vif->dev,
 				   "Can't setup checksum in net_tx_action\n");
 =======
+=======
+>>>>>>> v3.18
 		skb->dev      = queue->vif->dev;
 		skb->protocol = eth_type_trans(skb, skb->dev);
 		skb_reset_network_header(skb);
@@ -3055,6 +3421,9 @@ static int xenvif_tx_submit(struct xenvif_queue *queue)
 			/* We have to set this flag to trigger the callback */
 			if (skb_shinfo(skb)->destructor_arg)
 				xenvif_skb_zerocopy_prepare(queue, skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			kfree_skb(skb);
 			continue;
@@ -3062,6 +3431,7 @@ static int xenvif_tx_submit(struct xenvif_queue *queue)
 
 		skb_probe_transport_header(skb, 0);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		vif->dev->stats.rx_bytes += skb->len;
 		vif->dev->stats.rx_packets++;
@@ -3146,6 +3516,8 @@ static void make_tx_response(struct xenvif *vif,
 
 	resp = RING_GET_RESPONSE(&vif->tx, i);
 =======
+=======
+>>>>>>> v3.18
 		/* If the packet is GSO then we will have just set up the
 		 * transport header offset in checksum_setup so it's now
 		 * straightforward to calculate gso_segs.
@@ -3337,11 +3709,15 @@ static void make_tx_response(struct xenvif_queue *queue,
 	int notify;
 
 	resp = RING_GET_RESPONSE(&queue->tx, i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	resp->id     = txp->id;
 	resp->status = st;
 
 	if (txp->flags & XEN_NETTXF_extra_info)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		RING_GET_RESPONSE(&vif->tx, ++i)->status = XEN_NETIF_RSP_NULL;
 
@@ -3353,6 +3729,8 @@ static void make_tx_response(struct xenvif_queue *queue,
 
 static struct xen_netif_rx_response *make_rx_response(struct xenvif *vif,
 =======
+=======
+>>>>>>> v3.18
 		RING_GET_RESPONSE(&queue->tx, ++i)->status = XEN_NETIF_RSP_NULL;
 
 	queue->tx.rsp_prod_pvt = ++i;
@@ -3362,6 +3740,9 @@ static struct xen_netif_rx_response *make_rx_response(struct xenvif *vif,
 }
 
 static struct xen_netif_rx_response *make_rx_response(struct xenvif_queue *queue,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					     u16      id,
 					     s8       st,
@@ -3370,15 +3751,21 @@ static struct xen_netif_rx_response *make_rx_response(struct xenvif_queue *queue
 					     u16      flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RING_IDX i = vif->rx.rsp_prod_pvt;
 	struct xen_netif_rx_response *resp;
 
 	resp = RING_GET_RESPONSE(&vif->rx, i);
 =======
+=======
+>>>>>>> v3.18
 	RING_IDX i = queue->rx.rsp_prod_pvt;
 	struct xen_netif_rx_response *resp;
 
 	resp = RING_GET_RESPONSE(&queue->rx, i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	resp->offset     = offset;
 	resp->flags      = flags;
@@ -3388,7 +3775,11 @@ static struct xen_netif_rx_response *make_rx_response(struct xenvif_queue *queue
 		resp->status = (s16)st;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vif->rx.rsp_prod_pvt = ++i;
+=======
+	queue->rx.rsp_prod_pvt = ++i;
+>>>>>>> v3.18
 =======
 	queue->rx.rsp_prod_pvt = ++i;
 >>>>>>> v3.18
@@ -3396,6 +3787,7 @@ static struct xen_netif_rx_response *make_rx_response(struct xenvif_queue *queue
 	return resp;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline int rx_work_todo(struct xen_netbk *netbk)
 {
@@ -3409,6 +3801,8 @@ static inline int tx_work_todo(struct xen_netbk *netbk)
 	     < MAX_PENDING_REQS) &&
 	     !list_empty(&netbk->net_schedule_list))
 =======
+=======
+>>>>>>> v3.18
 void xenvif_idx_unmap(struct xenvif_queue *queue, u16 pending_idx)
 {
 	int ret;
@@ -3437,12 +3831,16 @@ void xenvif_idx_unmap(struct xenvif_queue *queue, u16 pending_idx)
 static inline int tx_work_todo(struct xenvif_queue *queue)
 {
 	if (likely(RING_HAS_UNCONSUMED_REQUESTS(&queue->tx)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int xen_netbk_kthread(void *data)
 {
@@ -3484,6 +3882,8 @@ int xen_netbk_map_frontend_rings(struct xenvif *vif,
 				 grant_ref_t tx_ring_ref,
 				 grant_ref_t rx_ring_ref)
 =======
+=======
+>>>>>>> v3.18
 static inline bool tx_dealloc_work_todo(struct xenvif_queue *queue)
 {
 	return queue->dealloc_cons != queue->dealloc_prod;
@@ -3502,6 +3902,9 @@ void xenvif_unmap_frontend_rings(struct xenvif_queue *queue)
 int xenvif_map_frontend_rings(struct xenvif_queue *queue,
 			      grant_ref_t tx_ring_ref,
 			      grant_ref_t rx_ring_ref)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	void *addr;
@@ -3511,9 +3914,13 @@ int xenvif_map_frontend_rings(struct xenvif_queue *queue,
 	int err = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&vif->ring_refcnt, 1);
 
 	err = xenbus_map_ring_valloc(xenvif_to_xenbus_device(vif),
+=======
+	err = xenbus_map_ring_valloc(xenvif_to_xenbus_device(queue->vif),
+>>>>>>> v3.18
 =======
 	err = xenbus_map_ring_valloc(xenvif_to_xenbus_device(queue->vif),
 >>>>>>> v3.18
@@ -3523,9 +3930,15 @@ int xenvif_map_frontend_rings(struct xenvif_queue *queue,
 
 	txs = (struct xen_netif_tx_sring *)addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BACK_RING_INIT(&vif->tx, txs, PAGE_SIZE);
 
 	err = xenbus_map_ring_valloc(xenvif_to_xenbus_device(vif),
+=======
+	BACK_RING_INIT(&queue->tx, txs, PAGE_SIZE);
+
+	err = xenbus_map_ring_valloc(xenvif_to_xenbus_device(queue->vif),
+>>>>>>> v3.18
 =======
 	BACK_RING_INIT(&queue->tx, txs, PAGE_SIZE);
 
@@ -3537,9 +3950,13 @@ int xenvif_map_frontend_rings(struct xenvif_queue *queue,
 
 	rxs = (struct xen_netif_rx_sring *)addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BACK_RING_INIT(&vif->rx, rxs, PAGE_SIZE);
 
 	vif->rx_req_cons_peek = 0;
+=======
+	BACK_RING_INIT(&queue->rx, rxs, PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	BACK_RING_INIT(&queue->rx, rxs, PAGE_SIZE);
 >>>>>>> v3.18
@@ -3547,6 +3964,7 @@ int xenvif_map_frontend_rings(struct xenvif_queue *queue,
 	return 0;
 
 err:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	xen_netbk_unmap_frontend_rings(vif);
 	return err;
@@ -3609,6 +4027,8 @@ static int __init netback_init(void)
 
 		wake_up_process(netbk->task);
 =======
+=======
+>>>>>>> v3.18
 	xenvif_unmap_frontend_rings(queue);
 	return err;
 }
@@ -3820,6 +4240,9 @@ static int __init netback_init(void)
 		pr_info("fatal_skb_slots too small (%d), bump it to XEN_NETBK_LEGACY_SLOTS_MAX (%d)\n",
 			fatal_skb_slots, XEN_NETBK_LEGACY_SLOTS_MAX);
 		fatal_skb_slots = XEN_NETBK_LEGACY_SLOTS_MAX;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -3827,6 +4250,7 @@ static int __init netback_init(void)
 	if (rc)
 		goto failed_init;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 
@@ -3844,6 +4268,8 @@ failed_init:
 	return rc;
 
 =======
+=======
+>>>>>>> v3.18
 	rx_drain_timeout_jiffies = msecs_to_jiffies(rx_drain_timeout_msecs);
 	rx_stall_timeout_jiffies = msecs_to_jiffies(rx_stall_timeout_msecs);
 
@@ -3858,13 +4284,19 @@ failed_init:
 
 failed_init:
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 module_init(netback_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __exit netback_fini(void)
 {
 #ifdef CONFIG_DEBUG_FS
@@ -3875,6 +4307,9 @@ static void __exit netback_fini(void)
 }
 module_exit(netback_fini);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_LICENSE("Dual BSD/GPL");
 MODULE_ALIAS("xen-backend:vif");

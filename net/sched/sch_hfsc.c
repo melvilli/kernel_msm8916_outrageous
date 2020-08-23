@@ -115,9 +115,15 @@ struct hfsc_class {
 	struct gnet_stats_basic_packed bstats;
 	struct gnet_stats_queue qstats;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gnet_stats_rate_est rate_est;
 	unsigned int	level;		/* class level in hierarchy */
 	struct tcf_proto *filter_list;	/* filter list */
+=======
+	struct gnet_stats_rate_est64 rate_est;
+	unsigned int	level;		/* class level in hierarchy */
+	struct tcf_proto __rcu *filter_list; /* filter list */
+>>>>>>> v3.18
 =======
 	struct gnet_stats_rate_est64 rate_est;
 	unsigned int	level;		/* class level in hierarchy */
@@ -1021,16 +1027,22 @@ hfsc_change_class(struct Qdisc *sch, u32 classid, u32 parentid,
 
 		if (tca[TCA_RATE]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = gen_replace_estimator(&cl->bstats, &cl->rate_est,
 					      qdisc_root_sleeping_lock(sch),
 					      tca[TCA_RATE]);
 =======
+=======
+>>>>>>> v3.18
 			spinlock_t *lock = qdisc_root_sleeping_lock(sch);
 
 			err = gen_replace_estimator(&cl->bstats, NULL,
 						    &cl->rate_est,
 						    lock,
 						    tca[TCA_RATE]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (err)
 				return err;
@@ -1079,7 +1091,11 @@ hfsc_change_class(struct Qdisc *sch, u32 classid, u32 parentid,
 
 	if (tca[TCA_RATE]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = gen_new_estimator(&cl->bstats, &cl->rate_est,
+=======
+		err = gen_new_estimator(&cl->bstats, NULL, &cl->rate_est,
+>>>>>>> v3.18
 =======
 		err = gen_new_estimator(&cl->bstats, NULL, &cl->rate_est,
 >>>>>>> v3.18
@@ -1181,7 +1197,11 @@ hfsc_classify(struct sk_buff *skb, struct Qdisc *sch, int *qerr)
 	*qerr = NET_XMIT_SUCCESS | __NET_XMIT_BYPASS;
 	head = &q->root;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tcf = q->root.filter_list;
+=======
+	tcf = rcu_dereference_bh(q->root.filter_list);
+>>>>>>> v3.18
 =======
 	tcf = rcu_dereference_bh(q->root.filter_list);
 >>>>>>> v3.18
@@ -1209,7 +1229,11 @@ hfsc_classify(struct sk_buff *skb, struct Qdisc *sch, int *qerr)
 
 		/* apply inner filter chain */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcf = cl->filter_list;
+=======
+		tcf = rcu_dereference_bh(cl->filter_list);
+>>>>>>> v3.18
 =======
 		tcf = rcu_dereference_bh(cl->filter_list);
 >>>>>>> v3.18
@@ -1313,7 +1337,11 @@ hfsc_unbind_tcf(struct Qdisc *sch, unsigned long arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_proto **
+=======
+static struct tcf_proto __rcu **
+>>>>>>> v3.18
 =======
 static struct tcf_proto __rcu **
 >>>>>>> v3.18
@@ -1385,8 +1413,12 @@ hfsc_dump_class(struct Qdisc *sch, unsigned long arg, struct sk_buff *skb,
 	if (hfsc_dump_curves(skb, cl) < 0)
 		goto nla_put_failure;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nla_nest_end(skb, nest);
 	return skb->len;
+=======
+	return nla_nest_end(skb, nest);
+>>>>>>> v3.18
 =======
 	return nla_nest_end(skb, nest);
 >>>>>>> v3.18
@@ -1404,7 +1436,10 @@ hfsc_dump_class_stats(struct Qdisc *sch, unsigned long arg,
 	struct tc_hfsc_stats xstats;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cl->qstats.qlen = cl->qdisc->q.qlen;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cl->qstats.backlog = cl->qdisc->qstats.backlog;
@@ -1414,9 +1449,15 @@ hfsc_dump_class_stats(struct Qdisc *sch, unsigned long arg,
 	xstats.rtwork  = cl->cl_cumul;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gnet_stats_copy_basic(d, &cl->bstats) < 0 ||
 	    gnet_stats_copy_rate_est(d, &cl->bstats, &cl->rate_est) < 0 ||
 	    gnet_stats_copy_queue(d, &cl->qstats) < 0)
+=======
+	if (gnet_stats_copy_basic(d, NULL, &cl->bstats) < 0 ||
+	    gnet_stats_copy_rate_est(d, &cl->bstats, &cl->rate_est) < 0 ||
+	    gnet_stats_copy_queue(d, NULL, &cl->qstats, cl->qdisc->q.qlen) < 0)
+>>>>>>> v3.18
 =======
 	if (gnet_stats_copy_basic(d, NULL, &cl->bstats) < 0 ||
 	    gnet_stats_copy_rate_est(d, &cl->bstats, &cl->rate_est) < 0 ||
@@ -1634,7 +1675,11 @@ hfsc_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	if (cl == NULL) {
 		if (err & __NET_XMIT_BYPASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.drops++;
+=======
+			qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -1647,7 +1692,11 @@ hfsc_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 		if (net_xmit_drop_count(err)) {
 			cl->qstats.drops++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.drops++;
+=======
+			qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -1694,7 +1743,11 @@ hfsc_dequeue(struct Qdisc *sch)
 		cl = vttree_get_minvt(&q->root, cur_time);
 		if (cl == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.overlimits++;
+=======
+			qdisc_qstats_overlimit(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_overlimit(sch);
 >>>>>>> v3.18
@@ -1753,7 +1806,11 @@ hfsc_drop(struct Qdisc *sch)
 			}
 			cl->qstats.drops++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.drops++;
+=======
+			qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_drop(sch);
 >>>>>>> v3.18

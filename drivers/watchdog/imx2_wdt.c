@@ -3,6 +3,10 @@
  *
  *  Copyright (C) 2010 Wolfram Sang, Pengutronix e.K. <w.sang@pengutronix.de>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *  Copyright (C) 2014 Freescale Semiconductor, Inc.
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2014 Freescale Semiconductor, Inc.
 >>>>>>> v3.18
@@ -25,6 +29,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/miscdevice.h>
@@ -39,6 +44,8 @@
 #include <linux/timer.h>
 #include <linux/jiffies.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/delay.h>
 #include <linux/init.h>
@@ -54,6 +61,9 @@
 #include <linux/regmap.h>
 #include <linux/timer.h>
 #include <linux/watchdog.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DRIVER_NAME "imx2-wdt"
@@ -63,6 +73,10 @@
 #define IMX2_WDT_WCR_WRE	(1 << 3)	/* -> WDOG Reset Enable */
 #define IMX2_WDT_WCR_WDE	(1 << 2)	/* -> Watchdog Enable */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IMX2_WDT_WCR_WDZST	(1 << 0)	/* -> Watchdog timer Suspend */
+>>>>>>> v3.18
 =======
 #define IMX2_WDT_WCR_WDZST	(1 << 0)	/* -> Watchdog timer Suspend */
 >>>>>>> v3.18
@@ -80,6 +94,7 @@
 #define WDOG_SEC_TO_COUNT(s)	((s * 2 - 1) << 8)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IMX2_WDT_STATUS_OPEN	0
 #define IMX2_WDT_STATUS_STARTED	1
 #define IMX2_WDT_EXPECT_CLOSE	2
@@ -94,6 +109,8 @@ static struct {
 
 static struct miscdevice imx2_wdt_miscdev;
 =======
+=======
+>>>>>>> v3.18
 struct imx2_wdt_device {
 	struct clk *clk;
 	struct regmap *regmap;
@@ -101,6 +118,9 @@ struct imx2_wdt_device {
 	struct watchdog_device wdog;
 	struct notifier_block restart_handler;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static bool nowayout = WATCHDOG_NOWAYOUT;
@@ -120,11 +140,14 @@ static const struct watchdog_info imx2_wdt_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void imx2_wdt_setup(void)
 {
 	u16 val = __raw_readw(imx2_wdt.base + IMX2_WDT_WCR);
 
 =======
+=======
+>>>>>>> v3.18
 static int imx2_restart_handler(struct notifier_block *this, unsigned long mode,
 				void *cmd)
 {
@@ -159,6 +182,9 @@ static inline void imx2_wdt_setup(struct watchdog_device *wdog)
 
 	/* Suspend timer in low power mode, write once-only */
 	val |= IMX2_WDT_WCR_WDZST;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Strip the old watchdog Time-Out value */
 	val &= ~IMX2_WDT_WCR_WT;
@@ -167,6 +193,7 @@ static inline void imx2_wdt_setup(struct watchdog_device *wdog)
 	/* Keep Watchdog Disabled */
 	val &= ~IMX2_WDT_WCR_WDE;
 	/* Set the watchdog's Time-Out value */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	val |= WDOG_SEC_TO_COUNT(imx2_wdt.timeout);
 
@@ -324,6 +351,8 @@ static struct miscdevice imx2_wdt_miscdev = {
 	.name = "watchdog",
 	.fops = &imx2_wdt_fops,
 =======
+=======
+>>>>>>> v3.18
 	val |= WDOG_SEC_TO_COUNT(wdog->timeout);
 
 	regmap_write(wdev->regmap, IMX2_WDT_WCR, val);
@@ -418,11 +447,15 @@ static struct regmap_config imx2_wdt_regmap_config = {
 	.reg_stride = 2,
 	.val_bits = 16,
 	.max_register = 0x8,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static int __init imx2_wdt_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 	struct resource *res;
@@ -460,6 +493,8 @@ fail:
 	clk_put(imx2_wdt.clk);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	struct imx2_wdt_device *wdev;
 	struct watchdog_device *wdog;
 	struct resource *res;
@@ -530,11 +565,15 @@ fail:
 		 wdog->timeout, nowayout);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int __exit imx2_wdt_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	misc_deregister(&imx2_wdt_miscdev);
 
@@ -548,6 +587,8 @@ static int __exit imx2_wdt_remove(struct platform_device *pdev)
 
 	imx2_wdt_miscdev.parent = NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct watchdog_device *wdog = platform_get_drvdata(pdev);
 	struct imx2_wdt_device *wdev = watchdog_get_drvdata(wdog);
 
@@ -560,12 +601,16 @@ static int __exit imx2_wdt_remove(struct platform_device *pdev)
 		imx2_wdt_ping(wdog);
 		dev_crit(&pdev->dev, "Device removed: Expect reboot!\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static void imx2_wdt_shutdown(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (test_bit(IMX2_WDT_STATUS_STARTED, &imx2_wdt.status)) {
 		/* we are running, we need to delete the timer but will give
@@ -577,6 +622,8 @@ static void imx2_wdt_shutdown(struct platform_device *pdev)
 		dev_crit(imx2_wdt_miscdev.parent,
 			"Device shutdown: Expect reboot!\n");
 =======
+=======
+>>>>>>> v3.18
 	struct watchdog_device *wdog = platform_get_drvdata(pdev);
 	struct imx2_wdt_device *wdev = watchdog_get_drvdata(wdog);
 
@@ -589,6 +636,9 @@ static void imx2_wdt_shutdown(struct platform_device *pdev)
 		imx2_wdt_set_timeout(wdog, IMX2_WDT_MAX_TIME);
 		imx2_wdt_ping(wdog);
 		dev_crit(&pdev->dev, "Device shutdown: Expect reboot!\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -598,6 +648,10 @@ static const struct of_device_id imx2_wdt_dt_ids[] = {
 	{ /* sentinel */ }
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DEVICE_TABLE(of, imx2_wdt_dt_ids);
+>>>>>>> v3.18
 =======
 MODULE_DEVICE_TABLE(of, imx2_wdt_dt_ids);
 >>>>>>> v3.18
@@ -618,7 +672,10 @@ MODULE_AUTHOR("Wolfram Sang");
 MODULE_DESCRIPTION("Watchdog driver for IMX2 and later");
 MODULE_LICENSE("GPL v2");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_ALIAS("platform:" DRIVER_NAME);

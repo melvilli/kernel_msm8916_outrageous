@@ -80,7 +80,11 @@
 	  </row>
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>struct &media-pad-desc;</entry>
+=======
+	    <entry>&media-pad-desc;</entry>
+>>>>>>> v3.18
 =======
 	    <entry>&media-pad-desc;</entry>
 >>>>>>> v3.18
@@ -90,7 +94,11 @@
 	  </row>
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>struct &media-link-desc;</entry>
+=======
+	    <entry>&media-link-desc;</entry>
+>>>>>>> v3.18
 =======
 	    <entry>&media-link-desc;</entry>
 >>>>>>> v3.18
@@ -143,7 +151,10 @@
 	    and are origins of links.</entry>
 	  </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  <row>
 	    <entry><constant>MEDIA_PAD_FL_MUST_CONNECT</constant></entry>
 	    <entry>If this flag is set and the pad is linked to any other
@@ -153,6 +164,9 @@
 	    enabled links even when this flag isn't set; the absence of the
 	    flag doesn't imply there is none.</entry>
 	  </row>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	</tbody>
       </tgroup>
@@ -165,7 +179,11 @@
 	<tbody valign="top">
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>struct &media-pad-desc;</entry>
+=======
+	    <entry>&media-pad-desc;</entry>
+>>>>>>> v3.18
 =======
 	    <entry>&media-pad-desc;</entry>
 >>>>>>> v3.18
@@ -174,7 +192,11 @@
 	  </row>
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>struct &media-pad-desc;</entry>
+=======
+	    <entry>&media-pad-desc;</entry>
+>>>>>>> v3.18
 =======
 	    <entry>&media-pad-desc;</entry>
 >>>>>>> v3.18

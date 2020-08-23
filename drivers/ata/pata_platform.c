@@ -14,7 +14,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -123,7 +126,11 @@ int __pata_platform_probe(struct device *dev, struct resource *io_res,
 	if (irq_res && irq_res->start > 0) {
 		irq = irq_res->start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq_flags = irq_res->flags;
+=======
+		irq_flags = irq_res->flags & IRQF_TRIGGER_MASK;
+>>>>>>> v3.18
 =======
 		irq_flags = irq_res->flags & IRQF_TRIGGER_MASK;
 >>>>>>> v3.18
@@ -188,7 +195,11 @@ static int pata_platform_probe(struct platform_device *pdev)
 	struct resource *ctl_res;
 	struct resource *irq_res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pata_platform_info *pp_info = pdev->dev.platform_data;
+=======
+	struct pata_platform_info *pp_info = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct pata_platform_info *pp_info = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -226,8 +237,11 @@ static int pata_platform_probe(struct platform_device *pdev)
 	 */
 	irq_res = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (irq_res)
 		irq_res->flags = pp_info ? pp_info->irq_flags : 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

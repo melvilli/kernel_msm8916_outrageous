@@ -35,7 +35,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -713,8 +716,13 @@ static void ep93xx_pata_dma_start(struct ata_queued_cmd *qc)
 		? drv_data->dma_tx_channel : drv_data->dma_rx_channel;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	txd = channel->device->device_prep_slave_sg(channel, qc->sg,
 		 qc->n_elem, qc->dma_dir, DMA_CTRL_ACK, NULL);
+=======
+	txd = dmaengine_prep_slave_sg(channel, qc->sg, qc->n_elem, qc->dma_dir,
+		DMA_CTRL_ACK);
+>>>>>>> v3.18
 =======
 	txd = dmaengine_prep_slave_sg(channel, qc->sg, qc->n_elem, qc->dma_dir,
 		DMA_CTRL_ACK);
@@ -925,7 +933,11 @@ static int ep93xx_pata_probe(struct platform_device *pdev)
 	struct ata_host *host;
 	struct ata_port *ap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int irq;
+=======
+	int irq;
+>>>>>>> v3.18
 =======
 	int irq;
 >>>>>>> v3.18

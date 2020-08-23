@@ -21,6 +21,10 @@
 #include <linux/init.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -36,7 +40,10 @@
 #include <asm/mach-types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <mach/regs-gpio.h>
@@ -46,7 +53,10 @@
 #include <linux/platform_data/i2c-s3c2410.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/clock.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/devs.h>
@@ -170,7 +180,10 @@ static void __init smdk2440_map_io(void)
 {
 	s3c24xx_init_io(smdk2440_iodesc, ARRAY_SIZE(smdk2440_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(16934400);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s3c24xx_init_uarts(smdk2440_uartcfgs, ARRAY_SIZE(smdk2440_uartcfgs));
@@ -178,13 +191,19 @@ static void __init smdk2440_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init smdk2440_init_time(void)
 {
 	s3c2440_init_clocks(16934400);
 	samsung_timer_init();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init smdk2440_machine_init(void)
 {
@@ -203,8 +222,12 @@ MACHINE_START(S3C2440, "SMDK2440")
 	.map_io		= smdk2440_map_io,
 	.init_machine	= smdk2440_machine_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= samsung_timer_init,
 	.restart	= s3c244x_restart,
+=======
+	.init_time	= smdk2440_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= smdk2440_init_time,
 >>>>>>> v3.18

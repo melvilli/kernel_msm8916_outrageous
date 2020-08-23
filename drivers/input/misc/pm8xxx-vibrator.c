@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2010-2011, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2010-2011, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2010-2011, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -16,7 +20,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -25,7 +32,11 @@
 #include <linux/input.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mfd/pm8xxx/core.h>
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -47,7 +58,11 @@
  * @vib_input_dev: input device supporting force feedback
  * @work: work structure to set the vibration parameters
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: device supporting force feedback
+=======
+ * @regmap: regmap for register read/write
+>>>>>>> v3.18
 =======
  * @regmap: regmap for register read/write
 >>>>>>> v3.18
@@ -60,7 +75,11 @@ struct pm8xxx_vib {
 	struct input_dev *vib_input_dev;
 	struct work_struct work;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev;
+=======
+	struct regmap *regmap;
+>>>>>>> v3.18
 =======
 	struct regmap *regmap;
 >>>>>>> v3.18
@@ -71,6 +90,7 @@ struct pm8xxx_vib {
 };
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * pm8xxx_vib_read_u8 - helper to read a byte from pmic chip
  * @vib: pointer to vibrator structure
@@ -110,6 +130,8 @@ static int pm8xxx_vib_write_u8(struct pm8xxx_vib *vib,
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * pm8xxx_vib_set - handler to start/stop vibration
  * @vib: pointer to vibrator structure
  * @on: state to set
@@ -118,7 +140,11 @@ static int pm8xxx_vib_set(struct pm8xxx_vib *vib, bool on)
 {
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 val = vib->reg_vib_drv;
+=======
+	unsigned int val = vib->reg_vib_drv;
+>>>>>>> v3.18
 =======
 	unsigned int val = vib->reg_vib_drv;
 >>>>>>> v3.18
@@ -129,7 +155,11 @@ static int pm8xxx_vib_set(struct pm8xxx_vib *vib, bool on)
 		val &= ~VIB_DRV_SEL_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = pm8xxx_vib_write_u8(vib, val, VIB_DRV);
+=======
+	rc = regmap_write(vib->regmap, VIB_DRV, val);
+>>>>>>> v3.18
 =======
 	rc = regmap_write(vib->regmap, VIB_DRV, val);
 >>>>>>> v3.18
@@ -149,9 +179,15 @@ static void pm8xxx_work_handler(struct work_struct *work)
 	struct pm8xxx_vib *vib = container_of(work, struct pm8xxx_vib, work);
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 val;
 
 	rc = pm8xxx_vib_read_u8(vib, &val, VIB_DRV);
+=======
+	unsigned int val;
+
+	rc = regmap_read(vib->regmap, VIB_DRV, &val);
+>>>>>>> v3.18
 =======
 	unsigned int val;
 
@@ -216,13 +252,17 @@ static int pm8xxx_vib_play_effect(struct input_dev *dev, void *data,
 
 static int pm8xxx_vib_probe(struct platform_device *pdev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 {
 	struct pm8xxx_vib *vib;
 	struct input_dev *input_dev;
 	int error;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 val;
 
@@ -247,6 +287,8 @@ static int pm8xxx_vib_probe(struct platform_device *pdev)
 	if (error < 0)
 		goto err_free_mem;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int val;
 
 	vib = devm_kzalloc(&pdev->dev, sizeof(*vib), GFP_KERNEL);
@@ -273,6 +315,9 @@ static int pm8xxx_vib_probe(struct platform_device *pdev)
 	error = regmap_write(vib->regmap, VIB_DRV, val);
 	if (error < 0)
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	vib->reg_vib_drv = val;
@@ -280,7 +325,10 @@ static int pm8xxx_vib_probe(struct platform_device *pdev)
 	input_dev->name = "pm8xxx_vib_ffmemless";
 	input_dev->id.version = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input_dev->dev.parent = &pdev->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	input_dev->close = pm8xxx_vib_close;
@@ -293,7 +341,11 @@ static int pm8xxx_vib_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev,
 			"couldn't register vibrator as FF device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free_mem;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -303,7 +355,11 @@ static int pm8xxx_vib_probe(struct platform_device *pdev)
 	if (error) {
 		dev_err(&pdev->dev, "couldn't register input device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_destroy_memless;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -311,6 +367,7 @@ static int pm8xxx_vib_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, vib);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err_destroy_memless:
@@ -334,6 +391,8 @@ static int pm8xxx_vib_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_PM_SLEEP
@@ -351,10 +410,13 @@ static int pm8xxx_vib_suspend(struct device *dev)
 static SIMPLE_DEV_PM_OPS(pm8xxx_vib_pm_ops, pm8xxx_vib_suspend, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_driver pm8xxx_vib_driver = {
 	.probe		= pm8xxx_vib_probe,
 	.remove		= pm8xxx_vib_remove,
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id pm8xxx_vib_id_table[] = {
 	{ .compatible = "qcom,pm8058-vib" },
 	{ .compatible = "qcom,pm8921-vib" },
@@ -364,12 +426,19 @@ MODULE_DEVICE_TABLE(of, pm8xxx_vib_id_table);
 
 static struct platform_driver pm8xxx_vib_driver = {
 	.probe		= pm8xxx_vib_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.driver		= {
 		.name	= "pm8xxx-vib",
 		.owner	= THIS_MODULE,
 		.pm	= &pm8xxx_vib_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = pm8xxx_vib_id_table,
+>>>>>>> v3.18
 =======
 		.of_match_table = pm8xxx_vib_id_table,
 >>>>>>> v3.18

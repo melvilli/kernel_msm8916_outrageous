@@ -21,6 +21,10 @@ static struct rb_node *intlist__node_new(struct rblist *rblist __maybe_unused,
 	if (node != NULL) {
 		node->i = i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		node->priv = NULL;
+>>>>>>> v3.18
 =======
 		node->priv = NULL;
 >>>>>>> v3.18
@@ -62,14 +66,20 @@ void intlist__remove(struct intlist *ilist, struct int_node *node)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct int_node *intlist__find(struct intlist *ilist, int i)
 {
 	struct int_node *node;
 =======
+=======
+>>>>>>> v3.18
 static struct int_node *__intlist__findnew(struct intlist *ilist,
 					   int i, bool create)
 {
 	struct int_node *node = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rb_node *rb_node;
 
@@ -77,14 +87,20 @@ static struct int_node *__intlist__findnew(struct intlist *ilist,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	node = NULL;
 	rb_node = rblist__find(&ilist->rblist, (void *)((long)i));
 =======
+=======
+>>>>>>> v3.18
 	if (create)
 		rb_node = rblist__findnew(&ilist->rblist, (void *)((long)i));
 	else
 		rb_node = rblist__find(&ilist->rblist, (void *)((long)i));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rb_node)
 		node = container_of(rb_node, struct int_node, rb_node);
@@ -93,7 +109,10 @@ static struct int_node *__intlist__findnew(struct intlist *ilist,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct int_node *intlist__find(struct intlist *ilist, int i)
 {
 	return __intlist__findnew(ilist, i, false);
@@ -104,6 +123,9 @@ struct int_node *intlist__findnew(struct intlist *ilist, int i)
 	return __intlist__findnew(ilist, i, true);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int intlist__parse_list(struct intlist *ilist, const char *s)
 {

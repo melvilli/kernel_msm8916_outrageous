@@ -14,6 +14,7 @@
 
 /* core.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int nf_iterate(struct list_head *head,
 				struct sk_buff *skb,
 				unsigned int hook,
@@ -36,6 +37,8 @@ extern int __init netfilter_queue_init(void);
 /* nf_log.c */
 extern int __init netfilter_log_init(void);
 =======
+=======
+>>>>>>> v3.18
 unsigned int nf_iterate(struct list_head *head, struct sk_buff *skb,
 			unsigned int hook, const struct net_device *indev,
 			const struct net_device *outdev,
@@ -51,6 +54,9 @@ int __init netfilter_queue_init(void);
 
 /* nf_log.c */
 int __init netfilter_log_init(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

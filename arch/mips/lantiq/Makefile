@@ -7,8 +7,11 @@
 obj-y := irq.o clk.o prom.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y += dts/
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_EARLY_PRINTK) += early_printk.o

@@ -95,6 +95,7 @@
  *	===================
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	dma_inv_range(start, end)
  *
  *		Invalidate (discard) the specified virtual address range.
@@ -110,6 +111,8 @@
  *		- start  - virtual start address
  *		- end    - virtual end address
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *	dma_flush_range(start, end)
@@ -134,8 +137,11 @@ struct cpu_cache_fns {
 	void (*dma_unmap_area)(const void *, size_t, int);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*dma_inv_range)(const void *, const void *);
 	void (*dma_clean_range)(const void *, const void *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void (*dma_flush_range)(const void *, const void *);
@@ -166,8 +172,11 @@ extern struct cpu_cache_fns cpu_cache;
 #define dmac_map_area			cpu_cache.dma_map_area
 #define dmac_unmap_area			cpu_cache.dma_unmap_area
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dmac_inv_range			cpu_cache.dma_inv_range
 #define dmac_clean_range		cpu_cache.dma_clean_range
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define dmac_flush_range		cpu_cache.dma_flush_range
@@ -192,8 +201,11 @@ extern void __cpuc_flush_dcache_area(void *, size_t);
 extern void dmac_map_area(const void *, size_t, int);
 extern void dmac_unmap_area(const void *, size_t, int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dmac_inv_range(const void *, const void *);
 extern void dmac_clean_range(const void *, const void *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void dmac_flush_range(const void *, const void *);
@@ -246,7 +258,11 @@ static inline void __flush_icache_all(void)
 {
 	__flush_icache_preferred();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb();
+=======
+	dsb(ishst);
+>>>>>>> v3.18
 =======
 	dsb(ishst);
 >>>>>>> v3.18
@@ -307,8 +323,12 @@ extern void flush_cache_page(struct vm_area_struct *vma, unsigned long user_addr
  * This is used for the ARM private sys_cacheflush system call.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define flush_cache_user_range(start,end) \
 	__cpuc_coherent_user_range((start) & PAGE_MASK, PAGE_ALIGN(end))
+=======
+#define flush_cache_user_range(s,e)	__cpuc_coherent_user_range(s,e)
+>>>>>>> v3.18
 =======
 #define flush_cache_user_range(s,e)	__cpuc_coherent_user_range(s,e)
 >>>>>>> v3.18
@@ -395,7 +415,11 @@ static inline void flush_cache_vmap(unsigned long start, unsigned long end)
 		 * have a DSB after cleaning the cache line.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dsb();
+=======
+		dsb(ishst);
+>>>>>>> v3.18
 =======
 		dsb(ishst);
 >>>>>>> v3.18
@@ -483,7 +507,10 @@ static inline void __sync_cache_range_r(volatile void *p, size_t size)
 #define sync_cache_r(ptr) __sync_cache_range_r(ptr, sizeof *(ptr))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Disabling cache access for one CPU in an ARMv7 SMP system is tricky.
  * To do so we must:
@@ -530,12 +557,16 @@ static inline void __sync_cache_range_r(volatile void *p, size_t size)
 	: : : "r0","r1","r2","r3","r4","r5","r6","r7", \
 	      "r9","r10","lr","memory" )
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int set_memory_ro(unsigned long addr, int numpages);
 int set_memory_rw(unsigned long addr, int numpages);
 int set_memory_x(unsigned long addr, int numpages);
 int set_memory_nx(unsigned long addr, int numpages);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_KERNEL_TEXT_RDONLY
 void set_kernel_text_ro(void);
@@ -551,6 +582,10 @@ static inline void set_kernel_text_ro(void) { }
 #define mark_addr_rdwrite(a)
 #endif
 
+=======
+void flush_uprobe_xol_access(struct page *page, unsigned long uaddr,
+			     void *kaddr, unsigned long len);
+>>>>>>> v3.18
 =======
 void flush_uprobe_xol_access(struct page *page, unsigned long uaddr,
 			     void *kaddr, unsigned long len);

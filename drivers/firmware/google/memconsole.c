@@ -16,6 +16,10 @@
 #include <linux/module.h>
 #include <linux/dmi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -46,7 +50,11 @@ struct biosmemcon_ebda {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char *memconsole_baseaddr;
+=======
+static u32 memconsole_baseaddr;
+>>>>>>> v3.18
 =======
 static u32 memconsole_baseaddr;
 >>>>>>> v3.18
@@ -57,9 +65,12 @@ static ssize_t memconsole_read(struct file *filp, struct kobject *kobp,
 			       loff_t pos, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return memory_read_from_buffer(buf, count, &pos, memconsole_baseaddr,
 				       memconsole_length);
 =======
+=======
+>>>>>>> v3.18
 	char *memconsole;
 	ssize_t ret;
 
@@ -72,6 +83,9 @@ static ssize_t memconsole_read(struct file *filp, struct kobject *kobp,
 				      memconsole_length);
 	iounmap(memconsole);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -82,21 +96,28 @@ static struct bin_attribute memconsole_bin_attr = {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void found_v1_header(struct biosmemcon_ebda *hdr)
 {
 	printk(KERN_INFO "BIOS console v1 EBDA structure found at %p\n", hdr);
 	printk(KERN_INFO "BIOS console buffer at 0x%.8x, "
 =======
+=======
+>>>>>>> v3.18
 static void __init found_v1_header(struct biosmemcon_ebda *hdr)
 {
 	pr_info("BIOS console v1 EBDA structure found at %p\n", hdr);
 	pr_info("BIOS console buffer at 0x%.8x, "
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	       "start = %d, end = %d, num = %d\n",
 	       hdr->v1.buffer_addr, hdr->v1.start,
 	       hdr->v1.end, hdr->v1.num_chars);
 
 	memconsole_length = hdr->v1.num_chars;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memconsole_baseaddr = phys_to_virt(hdr->v1.buffer_addr);
 }
@@ -106,6 +127,8 @@ static void found_v2_header(struct biosmemcon_ebda *hdr)
 	printk(KERN_INFO "BIOS console v2 EBDA structure found at %p\n", hdr);
 	printk(KERN_INFO "BIOS console buffer at 0x%.8x, "
 =======
+=======
+>>>>>>> v3.18
 	memconsole_baseaddr = hdr->v1.buffer_addr;
 }
 
@@ -113,6 +136,9 @@ static void __init found_v2_header(struct biosmemcon_ebda *hdr)
 {
 	pr_info("BIOS console v2 EBDA structure found at %p\n", hdr);
 	pr_info("BIOS console buffer at 0x%.8x, "
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	       "start = %d, end = %d, num_bytes = %d\n",
 	       hdr->v2.buffer_addr, hdr->v2.start,
@@ -120,8 +146,12 @@ static void __init found_v2_header(struct biosmemcon_ebda *hdr)
 
 	memconsole_length = hdr->v2.end - hdr->v2.start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memconsole_baseaddr = phys_to_virt(hdr->v2.buffer_addr
 					   + hdr->v2.start);
+=======
+	memconsole_baseaddr = hdr->v2.buffer_addr + hdr->v2.start;
+>>>>>>> v3.18
 =======
 	memconsole_baseaddr = hdr->v2.buffer_addr + hdr->v2.start;
 >>>>>>> v3.18
@@ -132,7 +162,11 @@ static void __init found_v2_header(struct biosmemcon_ebda *hdr)
  * set the global variables to point to it.  Return true if found.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool found_memconsole(void)
+=======
+static bool __init found_memconsole(void)
+>>>>>>> v3.18
 =======
 static bool __init found_memconsole(void)
 >>>>>>> v3.18
@@ -143,7 +177,11 @@ static bool __init found_memconsole(void)
 	address = get_bios_ebda();
 	if (!address) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "BIOS EBDA non-existent.\n");
+=======
+		pr_info("BIOS EBDA non-existent.\n");
+>>>>>>> v3.18
 =======
 		pr_info("BIOS EBDA non-existent.\n");
 >>>>>>> v3.18
@@ -175,7 +213,11 @@ static bool __init found_memconsole(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "BIOS console EBDA structure not found!\n");
+=======
+	pr_info("BIOS console EBDA structure not found!\n");
+>>>>>>> v3.18
 =======
 	pr_info("BIOS console EBDA structure not found!\n");
 >>>>>>> v3.18
@@ -196,8 +238,11 @@ MODULE_DEVICE_TABLE(dmi, memconsole_dmi_table);
 static int __init memconsole_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!dmi_check_system(memconsole_dmi_table))
@@ -208,10 +253,14 @@ static int __init memconsole_init(void)
 
 	memconsole_bin_attr.size = memconsole_length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = sysfs_create_bin_file(firmware_kobj, &memconsole_bin_attr);
 
 	return ret;
+=======
+	return sysfs_create_bin_file(firmware_kobj, &memconsole_bin_attr);
+>>>>>>> v3.18
 =======
 	return sysfs_create_bin_file(firmware_kobj, &memconsole_bin_attr);
 >>>>>>> v3.18

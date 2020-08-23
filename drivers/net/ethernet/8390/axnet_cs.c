@@ -29,7 +29,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ptrace.h>
@@ -109,16 +112,22 @@ static int ax_open(struct net_device *dev);
 static int ax_close(struct net_device *dev);
 static irqreturn_t ax_interrupt(int irq, void *dev_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*====================================================================*/
 
 typedef struct axnet_dev_t {
 =======
+=======
+>>>>>>> v3.18
 static u32 axnet_msg_enable;
 
 /*====================================================================*/
 
 struct axnet_dev {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct pcmcia_device	*p_dev;
 	caddr_t	base;
@@ -130,9 +139,15 @@ struct axnet_dev {
 	int	flags;
 	int	active_low;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } axnet_dev_t;
 
 static inline axnet_dev_t *PRIV(struct net_device *dev)
+=======
+};
+
+static inline struct axnet_dev *PRIV(struct net_device *dev)
+>>>>>>> v3.18
 =======
 };
 
@@ -159,7 +174,11 @@ static const struct net_device_ops axnet_netdev_ops = {
 static int axnet_probe(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     axnet_dev_t *info;
+=======
+    struct axnet_dev *info;
+>>>>>>> v3.18
 =======
     struct axnet_dev *info;
 >>>>>>> v3.18
@@ -169,7 +188,11 @@ static int axnet_probe(struct pcmcia_device *link)
     dev_dbg(&link->dev, "axnet_attach()\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     dev = alloc_etherdev(sizeof(struct ei_device) + sizeof(axnet_dev_t));
+=======
+    dev = alloc_etherdev(sizeof(struct ei_device) + sizeof(struct axnet_dev));
+>>>>>>> v3.18
 =======
     dev = alloc_etherdev(sizeof(struct ei_device) + sizeof(struct axnet_dev));
 >>>>>>> v3.18
@@ -178,6 +201,10 @@ static int axnet_probe(struct pcmcia_device *link)
 
     ei_local = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    ei_local->msg_enable = axnet_msg_enable;
+>>>>>>> v3.18
 =======
     ei_local->msg_enable = axnet_msg_enable;
 >>>>>>> v3.18
@@ -303,7 +330,11 @@ static int axnet_config(struct pcmcia_device *link)
 {
     struct net_device *dev = link->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
     axnet_dev_t *info = PRIV(dev);
+=======
+    struct axnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct axnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -422,7 +453,11 @@ static int axnet_resume(struct pcmcia_device *link)
 {
 	struct net_device *dev = link->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	axnet_dev_t *info = PRIV(dev);
+=======
+	struct axnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
 	struct axnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -504,7 +539,11 @@ static int axnet_open(struct net_device *dev)
 {
     int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
     axnet_dev_t *info = PRIV(dev);
+=======
+    struct axnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct axnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -538,7 +577,11 @@ static int axnet_open(struct net_device *dev)
 static int axnet_close(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     axnet_dev_t *info = PRIV(dev);
+=======
+    struct axnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct axnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -599,7 +642,11 @@ static void ei_watchdog(u_long arg)
 {
     struct net_device *dev = (struct net_device *)(arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
     axnet_dev_t *info = PRIV(dev);
+=======
+    struct axnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct axnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -659,7 +706,11 @@ reschedule:
 static int axnet_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     axnet_dev_t *info = PRIV(dev);
+=======
+    struct axnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
     struct axnet_dev *info = PRIV(dev);
 >>>>>>> v3.18
@@ -704,18 +755,24 @@ static void block_input(struct net_device *dev, int count,
 {
     unsigned int nic_base = dev->base_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
     int xfer_count = count;
     char *buf = skb->data;
 
     if ((ei_debug > 4) && (count != 4))
 	    pr_debug("%s: [bi=%d]\n", dev->name, count+4);
 =======
+=======
+>>>>>>> v3.18
     struct ei_device *ei_local = netdev_priv(dev);
     int xfer_count = count;
     char *buf = skb->data;
 
     if ((netif_msg_rx_status(ei_local)) && (count != 4))
 	netdev_dbg(dev, "[bi=%d]\n", count+4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     outb_p(ring_offset & 0xff, nic_base + EN0_RSARLO);
     outb_p(ring_offset >> 8, nic_base + EN0_RSARHI);
@@ -873,11 +930,14 @@ module_pcmcia_driver(axnet_cs_driver);
 #define ei_get_8390_hdr (ei_local->get_8390_hdr)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* use 0 for production, 1 for verification, >2 for debug */
 #ifndef ei_debug
 int ei_debug = 1;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Index to functions. */
@@ -991,16 +1051,22 @@ static void axnet_tx_timeout(struct net_device *dev)
 	spin_unlock_irqrestore(&ei_local->page_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev_printk(KERN_DEBUG, dev,
 		      "Tx timed out, %s TSR=%#2x, ISR=%#2x, t=%d.\n",
 		      (txsr & ENTSR_ABT) ? "excess collisions." :
 		      (isr) ? "lost interrupt?" : "cable problem?",
 		      txsr, isr, tickssofar);
 =======
+=======
+>>>>>>> v3.18
 	netdev_dbg(dev, "Tx timed out, %s TSR=%#2x, ISR=%#2x, t=%d.\n",
 		   (txsr & ENTSR_ABT) ? "excess collisions." :
 		   (isr) ? "lost interrupt?" : "cable problem?",
 		   txsr, isr, tickssofar);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!isr && !dev->stats.tx_packets) 
@@ -1071,24 +1137,31 @@ static netdev_tx_t axnet_start_xmit(struct sk_buff *skb,
 		output_page = ei_local->tx_start_page;
 		ei_local->tx1 = send_length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ei_debug  &&  ei_local->tx2 > 0)
 			netdev_printk(KERN_DEBUG, dev,
 				      "idle transmitter tx2=%d, lasttx=%d, txing=%d\n",
 				      ei_local->tx2, ei_local->lasttx,
 				      ei_local->txing);
 =======
+=======
+>>>>>>> v3.18
 		if ((netif_msg_tx_queued(ei_local)) &&
 		    ei_local->tx2 > 0)
 			netdev_dbg(dev,
 				   "idle transmitter tx2=%d, lasttx=%d, txing=%d\n",
 				   ei_local->tx2, ei_local->lasttx,
 				   ei_local->txing);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	else if (ei_local->tx2 == 0) 
 	{
 		output_page = ei_local->tx_start_page + TX_PAGES/2;
 		ei_local->tx2 = send_length;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ei_debug  &&  ei_local->tx1 > 0)
 			netdev_printk(KERN_DEBUG, dev,
@@ -1104,6 +1177,8 @@ static netdev_tx_t axnet_start_xmit(struct sk_buff *skb,
 				      ei_local->tx1, ei_local->tx2,
 				      ei_local->lasttx);
 =======
+=======
+>>>>>>> v3.18
 		if ((netif_msg_tx_queued(ei_local)) &&
 		    ei_local->tx1 > 0)
 			netdev_dbg(dev,
@@ -1117,6 +1192,9 @@ static netdev_tx_t axnet_start_xmit(struct sk_buff *skb,
 			  "No Tx buffers free! tx1=%d tx2=%d last=%d\n",
 			  ei_local->tx1, ei_local->tx2,
 			  ei_local->lasttx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ei_local->irqlock = 0;
 		netif_stop_queue(dev);
@@ -1222,10 +1300,16 @@ static irqreturn_t ax_interrupt(int irq, void *dev_id)
 		return IRQ_NONE;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 	if (ei_debug > 3)
 		netdev_printk(KERN_DEBUG, dev, "interrupt(isr=%#2.2x)\n",
 			      inb_p(e8390_base + EN0_ISR));
+=======
+
+	netif_dbg(ei_local, intr, dev, "interrupt(isr=%#2.2x)\n",
+		  inb_p(e8390_base + EN0_ISR));
+>>>>>>> v3.18
 =======
 
 	netif_dbg(ei_local, intr, dev, "interrupt(isr=%#2.2x)\n",
@@ -1241,9 +1325,14 @@ static irqreturn_t ax_interrupt(int irq, void *dev_id)
 	{
 		if (!netif_running(dev) || (interrupts == 0xff)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ei_debug > 1)
 				netdev_warn(dev,
 					    "interrupt from stopped card\n");
+=======
+			netif_warn(ei_local, intr, dev,
+				   "interrupt from stopped card\n");
+>>>>>>> v3.18
 =======
 			netif_warn(ei_local, intr, dev,
 				   "interrupt from stopped card\n");
@@ -1284,7 +1373,11 @@ static irqreturn_t ax_interrupt(int irq, void *dev_id)
 	}
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (interrupts && ei_debug > 3) 
+=======
+	if (interrupts && (netif_msg_intr(ei_local)))
+>>>>>>> v3.18
 =======
 	if (interrupts && (netif_msg_intr(ei_local)))
 >>>>>>> v3.18
@@ -1294,8 +1387,14 @@ static irqreturn_t ax_interrupt(int irq, void *dev_id)
 		{
 			/* 0xFF is valid for a card removal */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if(interrupts!=0xFF)
 				netdev_warn(dev, "Too much work at interrupt, status %#2.2x\n",
+=======
+			if (interrupts != 0xFF)
+				netdev_warn(dev,
+					    "Too much work at interrupt, status %#2.2x\n",
+>>>>>>> v3.18
 =======
 			if (interrupts != 0xFF)
 				netdev_warn(dev,
@@ -1340,8 +1439,12 @@ static void ei_tx_err(struct net_device *dev)
 
 #ifdef VERBOSE_ERROR_DUMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev_printk(KERN_DEBUG, dev,
 		      "transmitter error (%#2x):", txsr);
+=======
+	netdev_dbg(dev, "transmitter error (%#2x):", txsr);
+>>>>>>> v3.18
 =======
 	netdev_dbg(dev, "transmitter error (%#2x):", txsr);
 >>>>>>> v3.18
@@ -1410,9 +1513,15 @@ static void ei_tx_intr(struct net_device *dev)
 	{
 		if (ei_local->lasttx != 2  &&  ei_local->lasttx != -2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			netdev_info(dev, "%s: bogus last_tx_buffer %d, tx2=%d\n",
 				    ei_local->name, ei_local->lasttx,
 				    ei_local->tx2);
+=======
+			netdev_err(dev, "%s: bogus last_tx_buffer %d, tx2=%d\n",
+				   ei_local->name, ei_local->lasttx,
+				   ei_local->tx2);
+>>>>>>> v3.18
 =======
 			netdev_err(dev, "%s: bogus last_tx_buffer %d, tx2=%d\n",
 				   ei_local->name, ei_local->lasttx,
@@ -1495,15 +1604,21 @@ static void ei_receive(struct net_device *dev)
 		   is that some clones crash in roughly the same way.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ei_debug > 0  &&  this_frame != ei_local->current_page && (this_frame!=0x0 || rxing_page!=0xFF))
 		    netdev_err(dev, "mismatched read page pointers %2x vs %2x\n",
 			       this_frame, ei_local->current_page);
 =======
+=======
+>>>>>>> v3.18
 		if ((netif_msg_rx_err(ei_local)) &&
 		    this_frame != ei_local->current_page &&
 		    (this_frame != 0x0 || rxing_page != 0xFF))
 			netdev_err(dev, "mismatched read page pointers %2x vs %2x\n",
 				   this_frame, ei_local->current_page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		
 		if (this_frame == rxing_page)	/* Read all the frames? */
@@ -1520,16 +1635,22 @@ static void ei_receive(struct net_device *dev)
 		if (pkt_len < 60  ||  pkt_len > 1518) 
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ei_debug)
 				netdev_printk(KERN_DEBUG, dev,
 					      "bogus packet size: %d, status=%#2x nxpg=%#2x\n",
 					      rx_frame.count, rx_frame.status,
 					      rx_frame.next);
 =======
+=======
+>>>>>>> v3.18
 			netif_err(ei_local, rx_err, dev,
 				  "bogus packet size: %d, status=%#2x nxpg=%#2x\n",
 				  rx_frame.count, rx_frame.status,
 				  rx_frame.next);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev->stats.rx_errors++;
 			dev->stats.rx_length_errors++;
@@ -1542,10 +1663,16 @@ static void ei_receive(struct net_device *dev)
 			if (skb == NULL) 
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (ei_debug > 1)
 					netdev_printk(KERN_DEBUG, dev,
 						      "Couldn't allocate a sk_buff of size %d\n",
 						      pkt_len);
+=======
+				netif_err(ei_local, rx_err, dev,
+					  "Couldn't allocate a sk_buff of size %d\n",
+					  pkt_len);
+>>>>>>> v3.18
 =======
 				netif_err(ei_local, rx_err, dev,
 					  "Couldn't allocate a sk_buff of size %d\n",
@@ -1570,16 +1697,22 @@ static void ei_receive(struct net_device *dev)
 		else 
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ei_debug)
 				netdev_printk(KERN_DEBUG, dev,
 					      "bogus packet: status=%#2x nxpg=%#2x size=%d\n",
 					      rx_frame.status, rx_frame.next,
 					      rx_frame.count);
 =======
+=======
+>>>>>>> v3.18
 			netif_err(ei_local, rx_err, dev,
 				  "bogus packet: status=%#2x nxpg=%#2x size=%d\n",
 				  rx_frame.status, rx_frame.next,
 				  rx_frame.count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev->stats.rx_errors++;
 			/* NB: The NIC counts CRC, frame and missed errors. */
@@ -1615,14 +1748,20 @@ static void ei_receive(struct net_device *dev)
 static void ei_rx_overrun(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	axnet_dev_t *info = PRIV(dev);
 	long e8390_base = dev->base_addr;
 	unsigned char was_txing, must_resend = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct axnet_dev *info = PRIV(dev);
 	long e8390_base = dev->base_addr;
 	unsigned char was_txing, must_resend = 0;
 	struct ei_device *ei_local = netdev_priv(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     
 	/*
@@ -1632,9 +1771,14 @@ static void ei_rx_overrun(struct net_device *dev)
 	was_txing = inb_p(e8390_base+E8390_CMD) & E8390_TRANS;
 	outb_p(E8390_NODMA+E8390_PAGE0+E8390_STOP, e8390_base+E8390_CMD);
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 	if (ei_debug > 1)
 		netdev_printk(KERN_DEBUG, dev, "Receiver overrun\n");
+=======
+
+	netif_dbg(ei_local, rx_err, dev, "Receiver overrun\n");
+>>>>>>> v3.18
 =======
 
 	netif_dbg(ei_local, rx_err, dev, "Receiver overrun\n");
@@ -1799,7 +1943,11 @@ static void set_multicast_list(struct net_device *dev)
 static void AX88190_init(struct net_device *dev, int startp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	axnet_dev_t *info = PRIV(dev);
+=======
+	struct axnet_dev *info = PRIV(dev);
+>>>>>>> v3.18
 =======
 	struct axnet_dev *info = PRIV(dev);
 >>>>>>> v3.18

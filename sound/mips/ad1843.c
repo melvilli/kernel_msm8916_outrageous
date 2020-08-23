@@ -277,7 +277,11 @@ static void ad1843_write_multi(struct snd_ad1843 *ad1843, int argcount, ...)
 			reg = fp->reg;
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			BUG_ON(reg != fp->reg);
+=======
+			WARN_ON(reg != fp->reg);
+>>>>>>> v3.18
 =======
 			WARN_ON(reg != fp->reg);
 >>>>>>> v3.18

@@ -26,6 +26,7 @@
 
 #include <mach/h3xxx.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "generic.h"
 
@@ -61,10 +62,15 @@ void h3xxx_init_gpio(struct gpio_default_state *s, size_t n)
 
 
 =======
+=======
+>>>>>>> v3.18
 #include <mach/irqs.h>
 
 #include "generic.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * H3xxx flash support
@@ -124,10 +130,13 @@ static struct resource h3xxx_flash_resource =
  * H3xxx uart support
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void h3xxx_uart_set_mctrl(struct uart_port *port, u_int mctrl)
 {
 	if (port->mapbase == _Ser3UTCR0) {
 =======
+=======
+>>>>>>> v3.18
 static struct gpio h3xxx_uart_gpio[] = {
 	{ H3XXX_GPIO_COM_DCD,	GPIOF_IN,		"COM DCD" },
 	{ H3XXX_GPIO_COM_CTS,	GPIOF_IN,		"COM CTS" },
@@ -156,6 +165,9 @@ static void h3xxx_uart_set_mctrl(struct uart_port *port, u_int mctrl)
 	if (port->mapbase == _Ser3UTCR0) {
 		if (!h3xxx_uart_request_gpios())
 			return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio_set_value(H3XXX_GPIO_COM_RTS, !(mctrl & TIOCM_RTS));
 	}
@@ -167,6 +179,11 @@ static u_int h3xxx_uart_get_mctrl(struct uart_port *port)
 
 	if (port->mapbase == _Ser3UTCR0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (!h3xxx_uart_request_gpios())
+			return ret;
+>>>>>>> v3.18
 =======
 		if (!h3xxx_uart_request_gpios())
 			return ret;
@@ -292,10 +309,13 @@ static struct platform_device h3xxx_keys = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_device *h3xxx_devices[] = {
 	&h3xxx_egpio,
 	&h3xxx_keys,
 =======
+=======
+>>>>>>> v3.18
 static struct resource h3xxx_micro_resources[] = {
 	DEFINE_RES_MEM(0x80010000, SZ_4K),
 	DEFINE_RES_MEM(0x80020000, SZ_4K),
@@ -313,6 +333,9 @@ static struct platform_device *h3xxx_devices[] = {
 	&h3xxx_egpio,
 	&h3xxx_keys,
 	&h3xxx_micro_asic,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

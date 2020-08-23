@@ -7,6 +7,11 @@ obj-y += common.o
 
 obj-$(CONFIG_BSC9131_RDB) += bsc913x_rdb.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_BSC9132_QDS) += bsc913x_qds.o
+obj-$(CONFIG_C293_PCIE)   += c293pcie.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_BSC9132_QDS) += bsc913x_qds.o
 obj-$(CONFIG_C293_PCIE)   += c293pcie.o
@@ -22,6 +27,7 @@ obj-$(CONFIG_P1010_RDB)   += p1010rdb.o
 obj-$(CONFIG_P1022_DS)    += p1022_ds.o
 obj-$(CONFIG_P1022_RDK)   += p1022_rdk.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_P1023_RDS)   += p1023_rds.o
 obj-$(CONFIG_P2041_RDB)   += p2041_rdb.o corenet_ds.o
 obj-$(CONFIG_P3041_DS)    += p3041_ds.o corenet_ds.o
@@ -30,6 +36,11 @@ obj-$(CONFIG_P5020_DS)    += p5020_ds.o corenet_ds.o
 obj-$(CONFIG_P5040_DS)    += p5040_ds.o corenet_ds.o
 obj-$(CONFIG_T4240_QDS)   += t4240_qds.o corenet_ds.o
 obj-$(CONFIG_B4_QDS)	  += b4_qds.o corenet_ds.o
+=======
+obj-$(CONFIG_P1023_RDB)   += p1023_rdb.o
+obj-$(CONFIG_TWR_P102x)   += twr_p102x.o
+obj-$(CONFIG_CORENET_GENERIC)   += corenet_generic.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_P1023_RDB)   += p1023_rdb.o
 obj-$(CONFIG_TWR_P102x)   += twr_p102x.o

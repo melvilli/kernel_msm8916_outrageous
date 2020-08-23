@@ -10,6 +10,7 @@
 #define _ASM_ARC_TLB_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
 #include <asm/pgtable.h>
@@ -22,6 +23,8 @@
 
 #ifndef __ASSEMBLY__
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define tlb_flush(tlb)				\
@@ -60,6 +63,7 @@ do {									\
 #include <asm-generic/tlb.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARC_DBG_TLB_PARANOIA
 void tlb_paranoid_check(unsigned int pid_sw, unsigned long address);
 #else
@@ -74,6 +78,8 @@ void __init read_decode_mmu_bcr(void);
 
 #endif	/* __KERNEL__ */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ASM_ARC_TLB_H */

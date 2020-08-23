@@ -20,6 +20,10 @@
 #include <asm/processor.h>
 #include <asm/cmpxchg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -51,7 +55,11 @@
  * Atomically reads the value of @v.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_read(v)		(*(volatile int *)&(v)->counter)
+=======
+#define atomic_read(v)		ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 =======
 #define atomic_read(v)		ACCESS_ONCE((v)->counter)
 >>>>>>> v3.18
@@ -65,6 +73,7 @@
  */
 #define atomic_set(v,i)		((v)->counter = (i))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * atomic_add - add integer to atomic variable
@@ -226,6 +235,8 @@ static inline int atomic_sub_return(int i, atomic_t * v)
 #endif
 }
 =======
+=======
+>>>>>>> v3.18
 #if XCHAL_HAVE_S32C1I
 #define ATOMIC_OP(op)							\
 static inline void atomic_##op(int i, atomic_t * v)			\
@@ -316,6 +327,9 @@ ATOMIC_OPS(sub)
 #undef ATOMIC_OPS
 #undef ATOMIC_OP_RETURN
 #undef ATOMIC_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -489,12 +503,15 @@ static inline void atomic_set_mask(unsigned int mask, atomic_t *v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Atomic operations are already serializing */
 #define smp_mb__before_atomic_dec()	barrier()
 #define smp_mb__after_atomic_dec()	barrier()
 #define smp_mb__before_atomic_inc()	barrier()
 #define smp_mb__after_atomic_inc()	barrier()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __KERNEL__ */

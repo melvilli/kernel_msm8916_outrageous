@@ -116,7 +116,11 @@ struct rts51x_chip {
 	int support_auto_delink;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* used to back up the protocal choosen in probe1 phase */
+=======
+	/* used to back up the protocol chosen in probe1 phase */
+>>>>>>> v3.18
 =======
 	/* used to back up the protocol chosen in probe1 phase */
 >>>>>>> v3.18
@@ -631,6 +635,10 @@ static int config_autodelink_after_power_on(struct us_data *us)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM
 >>>>>>> v3.18
@@ -725,6 +733,10 @@ static void fw5895_init(struct us_data *us)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -938,7 +950,11 @@ static int realtek_cr_autosuspend_setup(struct us_data *us)
 	fw5895_init(us);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable autosuspend funciton of the usb device */
+=======
+	/* enable autosuspend function of the usb device */
+>>>>>>> v3.18
 =======
 	/* enable autosuspend function of the usb device */
 >>>>>>> v3.18

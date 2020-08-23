@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ccflags-$(CONFIG_DMADEVICES_DEBUG)  := -DDEBUG
 ccflags-$(CONFIG_DMADEVICES_VDEBUG) += -DVERBOSE_DEBUG
+=======
+subdir-ccflags-$(CONFIG_DMADEVICES_DEBUG)  := -DDEBUG
+subdir-ccflags-$(CONFIG_DMADEVICES_VDEBUG) += -DVERBOSE_DEBUG
+>>>>>>> v3.18
 =======
 subdir-ccflags-$(CONFIG_DMADEVICES_DEBUG)  := -DDEBUG
 subdir-ccflags-$(CONFIG_DMADEVICES_VDEBUG) += -DVERBOSE_DEBUG
@@ -12,7 +17,10 @@ obj-$(CONFIG_DMA_ACPI) += acpi-dma.o
 obj-$(CONFIG_DMA_OF) += of-dma.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_NET_DMA) += iovlock.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_INTEL_MID_DMAC) += intel_mid_dma.o
@@ -20,7 +28,10 @@ obj-$(CONFIG_DMATEST) += dmatest.o
 obj-$(CONFIG_INTEL_IOATDMA) += ioat/
 obj-$(CONFIG_INTEL_IOP_ADMA) += iop-adma.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_QCOM_SPS_DMA) += qcom-sps-dma.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_FSL_DMA) += fsldma.o
@@ -28,7 +39,11 @@ obj-$(CONFIG_MPC512X_DMA) += mpc512x_dma.o
 obj-$(CONFIG_PPC_BESTCOMM) += bestcomm/
 obj-$(CONFIG_MV_XOR) += mv_xor.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_DW_DMAC) += dw_dmac.o
+=======
+obj-$(CONFIG_DW_DMAC_CORE) += dw/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_DW_DMAC_CORE) += dw/
 >>>>>>> v3.18
@@ -47,6 +62,10 @@ obj-$(CONFIG_TI_EDMA) += edma.o
 obj-$(CONFIG_STE_DMA40) += ste_dma40.o ste_dma40_ll.o
 obj-$(CONFIG_TEGRA20_APB_DMA) += tegra20-apb-dma.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_S3C24XX_DMAC) += s3c24xx-dma.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_S3C24XX_DMAC) += s3c24xx-dma.o
 >>>>>>> v3.18
@@ -58,8 +77,11 @@ obj-$(CONFIG_DMA_SA11X0) += sa11x0-dma.o
 obj-$(CONFIG_MMP_TDMA) += mmp_tdma.o
 obj-$(CONFIG_DMA_OMAP) += omap-dma.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MMP_PDMA) += mmp_pdma.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_DMA_BCM2835) += bcm2835-dma.o
 obj-$(CONFIG_MMP_PDMA) += mmp_pdma.o
 obj-$(CONFIG_DMA_JZ4740) += dma-jz4740.o
@@ -72,4 +94,7 @@ obj-y += xilinx/
 obj-$(CONFIG_INTEL_MIC_X100_DMA) += mic_x100_dma.o
 obj-$(CONFIG_NBPFAXI_DMA) += nbpfaxi.o
 obj-$(CONFIG_DMA_SUN6I) += sun6i-dma.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

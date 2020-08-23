@@ -162,7 +162,10 @@ struct us_data {
 	int			use_last_sector_hacks;
 	int			last_sector_retries;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			sdev_autosuspend_delay;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -206,6 +209,12 @@ extern int usb_stor_probe2(struct us_data *us);
 extern void usb_stor_disconnect(struct usb_interface *intf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void usb_stor_adjust_quirks(struct usb_device *dev,
+		unsigned long *fflags);
+
+>>>>>>> v3.18
 =======
 extern void usb_stor_adjust_quirks(struct usb_device *dev,
 		unsigned long *fflags);

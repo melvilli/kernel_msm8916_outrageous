@@ -183,12 +183,15 @@ SECTIONS {
 		*(.data..gate)
 		__stop_gate_section = .;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_XEN
 		. = ALIGN(PAGE_SIZE);
 		__xen_start_gate_section = .;
 		*(.data..gate.xen)
 		__xen_stop_gate_section = .;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

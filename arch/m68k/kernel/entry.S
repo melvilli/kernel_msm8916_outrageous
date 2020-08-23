@@ -46,7 +46,11 @@
 .globl sys_call_table
 .globl __sys_fork, __sys_clone, __sys_vfork
 <<<<<<< HEAD
+<<<<<<< HEAD
 .globl ret_from_interrupt, bad_interrupt
+=======
+.globl bad_interrupt
+>>>>>>> v3.18
 =======
 .globl bad_interrupt
 >>>>>>> v3.18
@@ -280,8 +284,11 @@ ENTRY(auto_inthandler)
 	SAVE_ALL_INT
 	GET_CURRENT(%d0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movel	%d0,%a1
 	addqb	#1,%a1@(TINFO_PREEMPT+1)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					|  put exception # in d0
@@ -293,6 +300,7 @@ ENTRY(auto_inthandler)
 auto_irqhandler_fixup = . + 2
 	jsr	do_IRQ			|  process the IRQ
 	addql	#8,%sp			|  pop parameters off stack
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 ret_from_interrupt:
@@ -315,6 +323,9 @@ ret_from_last_interrupt:
 =======
 	jra	ret_from_exception
 >>>>>>> v3.18
+=======
+	jra	ret_from_exception
+>>>>>>> v3.18
 
 /* Handler for user defined interrupt vectors */
 
@@ -322,8 +333,11 @@ ENTRY(user_inthandler)
 	SAVE_ALL_INT
 	GET_CURRENT(%d0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movel	%d0,%a1
 	addqb	#1,%a1@(TINFO_PREEMPT+1)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					|  put exception # in d0
@@ -336,11 +350,15 @@ user_irqvec_fixup = . + 2
 	jsr	do_IRQ			|  process the IRQ
 	addql	#8,%sp			|  pop parameters off stack
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	movel	%curptr@(TASK_STACK),%a1
 	subqb	#1,%a1@(TINFO_PREEMPT+1)
 	jeq	ret_from_last_interrupt
 	RESTORE_ALL
+=======
+	jra	ret_from_exception
+>>>>>>> v3.18
 =======
 	jra	ret_from_exception
 >>>>>>> v3.18
@@ -351,8 +369,11 @@ ENTRY(bad_inthandler)
 	SAVE_ALL_INT
 	GET_CURRENT(%d0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movel	%d0,%a1
 	addqb	#1,%a1@(TINFO_PREEMPT+1)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -360,12 +381,16 @@ ENTRY(bad_inthandler)
 	jsr	handle_badint
 	addql	#4,%sp
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	movel	%curptr@(TASK_STACK),%a1
 	subqb	#1,%a1@(TINFO_PREEMPT+1)
 	jeq	ret_from_last_interrupt
 	RESTORE_ALL
 
+=======
+	jra	ret_from_exception
+>>>>>>> v3.18
 =======
 	jra	ret_from_exception
 >>>>>>> v3.18

@@ -12,7 +12,10 @@ else
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # How to compile the 16-bit code.  Note we always compile for -march=i386;
 # that way we can complain to the user if the CPU is insufficient.
 #
@@ -32,6 +35,9 @@ REALMODE_CFLAGS	:= $(M16_CFLAGS) -g -Os -D__KERNEL__ \
 		   $(call cc-option, -mpreferred-stack-boundary=2)
 export REALMODE_CFLAGS
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # BITS is used as extension for files which are available in a 32 bit
 # and a 64 bit version to simplify shared Makefiles.
@@ -39,11 +45,17 @@ export REALMODE_CFLAGS
 export BITS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ifdef CONFIG_X86_NEED_RELOCS
         LDFLAGS_vmlinux := --emit-relocs
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ifeq ($(CONFIG_X86_32),y)
         BITS := 32
@@ -55,6 +67,7 @@ ifeq ($(CONFIG_X86_32),y)
         KBUILD_CFLAGS += $(biarch)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         ifdef CONFIG_RELOCATABLE
                 LDFLAGS_vmlinux := --emit-relocs
         endif
@@ -64,6 +77,10 @@ ifeq ($(CONFIG_X86_32),y)
         # Don't autogenerate MMX or SSE instructions
         KBUILD_CFLAGS += -mno-mmx -mno-sse
 
+=======
+        KBUILD_CFLAGS += -msoft-float -mregparm=3 -freg-struct-return
+
+>>>>>>> v3.18
 =======
         KBUILD_CFLAGS += -msoft-float -mregparm=3 -freg-struct-return
 
@@ -92,12 +109,15 @@ else
         CHECKFLAGS += -D__x86_64__ -m64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         KBUILD_AFLAGS += -m64
         KBUILD_CFLAGS += -m64
 
         # Don't autogenerate MMX or SSE instructions
         KBUILD_CFLAGS += -mno-mmx -mno-sse
 =======
+=======
+>>>>>>> v3.18
         biarch := -m64
         KBUILD_AFLAGS += -m64
         KBUILD_CFLAGS += -m64
@@ -105,6 +125,9 @@ else
         # Don't autogenerate traditional x87 instructions
         KBUILD_CFLAGS += $(call cc-option,-mno-80387)
         KBUILD_CFLAGS += $(call cc-option,-mno-fp-ret-in-387)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	# Use -mpreferred-stack-boundary=3 if supported.
@@ -131,7 +154,11 @@ else
         # this works around some issues with generating unwind tables in older gccs
         # newer gccs do it by default
 <<<<<<< HEAD
+<<<<<<< HEAD
         KBUILD_CFLAGS += -maccumulate-outgoing-args
+=======
+        KBUILD_CFLAGS += $(call cc-option,-maccumulate-outgoing-args)
+>>>>>>> v3.18
 =======
         KBUILD_CFLAGS += $(call cc-option,-maccumulate-outgoing-args)
 >>>>>>> v3.18
@@ -179,6 +206,10 @@ cfi-sections := $(call as-instr,.cfi_sections .debug_frame,-DCONFIG_AS_CFI_SECTI
 # does binutils support specific instructions?
 asinstr := $(call as-instr,fxsaveq (%rax),-DCONFIG_AS_FXSAVEQ=1)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+asinstr += $(call as-instr,crc32l %eax$(comma)%eax,-DCONFIG_AS_CRC32=1)
+>>>>>>> v3.18
 =======
 asinstr += $(call as-instr,crc32l %eax$(comma)%eax,-DCONFIG_AS_CRC32=1)
 >>>>>>> v3.18
@@ -198,7 +229,11 @@ KBUILD_CFLAGS += -Wno-sign-compare
 KBUILD_CFLAGS += -fno-asynchronous-unwind-tables
 # prevent gcc from generating any FP code by mistake
 <<<<<<< HEAD
+<<<<<<< HEAD
 KBUILD_CFLAGS += $(call cc-option,-mno-sse -mno-mmx -mno-sse2 -mno-3dnow,)
+=======
+KBUILD_CFLAGS += -mno-sse -mno-mmx -mno-sse2 -mno-3dnow
+>>>>>>> v3.18
 =======
 KBUILD_CFLAGS += -mno-sse -mno-mmx -mno-sse2 -mno-3dnow
 >>>>>>> v3.18
@@ -217,12 +252,18 @@ archheaders:
 	$(Q)$(MAKE) $(build)=arch/x86/syscalls all
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 archprepare:
 ifeq ($(CONFIG_KEXEC_FILE),y)
 	$(Q)$(MAKE) $(build)=arch/x86/purgatory arch/x86/purgatory/kexec-purgatory.c
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ###
 # Kernel objects
@@ -288,6 +329,10 @@ archclean:
 	$(Q)$(MAKE) $(clean)=$(boot)
 	$(Q)$(MAKE) $(clean)=arch/x86/tools
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	$(Q)$(MAKE) $(clean)=arch/x86/purgatory
+>>>>>>> v3.18
 =======
 	$(Q)$(MAKE) $(clean)=arch/x86/purgatory
 >>>>>>> v3.18

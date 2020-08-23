@@ -2883,7 +2883,11 @@ bfa_ioim_good_comp_isr(struct bfa_s *bfa, struct bfi_msg_s *m)
 
 	ioim = BFA_IOIM_FROM_TAG(fcpim, iotag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(BFA_IOIM_TAG_2_ID(ioim->iotag) != iotag);
+=======
+	WARN_ON(ioim->iotag != iotag);
+>>>>>>> v3.18
 =======
 	WARN_ON(ioim->iotag != iotag);
 >>>>>>> v3.18

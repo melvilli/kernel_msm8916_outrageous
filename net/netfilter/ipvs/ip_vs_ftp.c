@@ -97,7 +97,11 @@ static int ip_vs_ftp_get_addrport(char *data, char *data_limit,
 	if (data_limit - data < plen) {
 		/* check if there is partial match */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strnicmp(data, pattern, data_limit - data) == 0)
+=======
+		if (strncasecmp(data, pattern, data_limit - data) == 0)
+>>>>>>> v3.18
 =======
 		if (strncasecmp(data, pattern, data_limit - data) == 0)
 >>>>>>> v3.18
@@ -107,7 +111,11 @@ static int ip_vs_ftp_get_addrport(char *data, char *data_limit,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strnicmp(data, pattern, plen) != 0) {
+=======
+	if (strncasecmp(data, pattern, plen) != 0) {
+>>>>>>> v3.18
 =======
 	if (strncasecmp(data, pattern, plen) != 0) {
 >>>>>>> v3.18
@@ -192,8 +200,11 @@ static int ip_vs_ftp_out(struct ip_vs_app *app, struct ip_vs_conn *cp,
 	struct net *net;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*diff = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_IP_VS_IPV6
@@ -205,6 +216,11 @@ static int ip_vs_ftp_out(struct ip_vs_app *app, struct ip_vs_conn *cp,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	*diff = 0;
+
+>>>>>>> v3.18
 =======
 	*diff = 0;
 
@@ -250,7 +266,12 @@ static int ip_vs_ftp_out(struct ip_vs_app *app, struct ip_vs_conn *cp,
 					      AF_INET, IPPROTO_TCP, &cp->caddr,
 					      0, &cp->vaddr, port, &p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			n_cp = ip_vs_conn_new(&p, &from, port,
+=======
+			/* As above, this is ipv4 only */
+			n_cp = ip_vs_conn_new(&p, AF_INET, &from, port,
+>>>>>>> v3.18
 =======
 			/* As above, this is ipv4 only */
 			n_cp = ip_vs_conn_new(&p, AF_INET, &from, port,
@@ -343,9 +364,12 @@ static int ip_vs_ftp_in(struct ip_vs_app *app, struct ip_vs_conn *cp,
 	struct net *net;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* no diff required for incoming packets */
 	*diff = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_IP_VS_IPV6
@@ -357,6 +381,12 @@ static int ip_vs_ftp_in(struct ip_vs_app *app, struct ip_vs_conn *cp,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* no diff required for incoming packets */
+	*diff = 0;
+
+>>>>>>> v3.18
 =======
 	/* no diff required for incoming packets */
 	*diff = 0;
@@ -384,7 +414,11 @@ static int ip_vs_ftp_in(struct ip_vs_app *app, struct ip_vs_conn *cp,
 
 	while (data <= data_limit - 6) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strnicmp(data, "PASV\r\n", 6) == 0) {
+=======
+		if (strncasecmp(data, "PASV\r\n", 6) == 0) {
+>>>>>>> v3.18
 =======
 		if (strncasecmp(data, "PASV\r\n", 6) == 0) {
 >>>>>>> v3.18
@@ -431,7 +465,12 @@ static int ip_vs_ftp_in(struct ip_vs_app *app, struct ip_vs_conn *cp,
 		n_cp = ip_vs_conn_in_get(&p);
 		if (!n_cp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			n_cp = ip_vs_conn_new(&p, &cp->daddr,
+=======
+			/* This is ipv4 only */
+			n_cp = ip_vs_conn_new(&p, AF_INET, &cp->daddr,
+>>>>>>> v3.18
 =======
 			/* This is ipv4 only */
 			n_cp = ip_vs_conn_new(&p, AF_INET, &cp->daddr,

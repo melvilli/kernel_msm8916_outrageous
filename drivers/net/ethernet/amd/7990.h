@@ -36,6 +36,7 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TX_RING_SIZE (1<<LANCE_LOG_TX_BUFFERS)
 #define RX_RING_SIZE (1<<LANCE_LOG_RX_BUFFERS)
 #define TX_RING_MOD_MASK (TX_RING_SIZE - 1)
@@ -56,6 +57,8 @@ struct lance_rx_desc {
 				     */
 	volatile unsigned short mblength;    /* Actual number of bytes received */
 =======
+=======
+>>>>>>> v3.18
 #define TX_RING_SIZE		(1 << LANCE_LOG_TX_BUFFERS)
 #define RX_RING_SIZE		(1 << LANCE_LOG_RX_BUFFERS)
 #define TX_RING_MOD_MASK	(TX_RING_SIZE - 1)
@@ -74,21 +77,30 @@ struct lance_rx_desc {
 	volatile short    length;	    /* This length is 2s complement (negative)!
 					     * Buffer length */
 	volatile unsigned short mblength;   /* Actual number of bytes received */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* Ditto for TMD: */
 struct lance_tx_desc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	volatile unsigned short tmd0;        /* low address of packet */
 	volatile unsigned char  tmd1_bits;   /* descriptor bits */
 	volatile unsigned char  tmd1_hadr;   /* high address of packet */
 	volatile short    length;       	    /* Length is 2s complement (negative)! */
 =======
+=======
+>>>>>>> v3.18
 	volatile unsigned short tmd0;	    /* low address of packet */
 	volatile unsigned char  tmd1_bits;  /* descriptor bits */
 	volatile unsigned char  tmd1_hadr;  /* high address of packet */
 	volatile short    length;	    /* Length is 2s complement (negative)! */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	volatile unsigned short misc;
 };
@@ -99,6 +111,7 @@ struct lance_tx_desc {
  * init block,the Tx and Rx rings and the buffers together in memory:
  */
 struct lance_init_block {
+<<<<<<< HEAD
 <<<<<<< HEAD
         volatile unsigned short mode;            /* Pre-set mode (reg. 15) */
         volatile unsigned char phys_addr[6];     /* Physical ethernet address */
@@ -122,6 +135,8 @@ struct lance_init_block {
          * in order to force alignment to an eight byte boundary.
          */
 =======
+=======
+>>>>>>> v3.18
 	volatile unsigned short mode;		/* Pre-set mode (reg. 15) */
 	volatile unsigned char phys_addr[6];	/* Physical ethernet address */
 	volatile unsigned filter[2];		/* Multicast filter (64 bits) */
@@ -143,6 +158,9 @@ struct lance_init_block {
 	/* we use this just to make the struct big enough that we can move its startaddr
 	 * in order to force alignment to an eight byte boundary.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -150,6 +168,7 @@ struct lance_init_block {
  * I'm definitely unhappy about the mechanism for allowing specific
  * drivers to add things...
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct lance_private
 {
@@ -178,6 +197,8 @@ struct lance_private
         void (*writerdp)(void *, unsigned short);
         unsigned short (*readrdp)(void *);
 =======
+=======
+>>>>>>> v3.18
 struct lance_private {
 	const char *name;
 	unsigned long base;
@@ -203,12 +224,16 @@ struct lance_private {
 	void (*writerap)(void *, unsigned short);
 	void (*writerdp)(void *, unsigned short);
 	unsigned short (*readrdp)(void *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spinlock_t devlock;
 	char tx_full;
 };
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  *              Am7990 Control and Status Registers
  */
@@ -217,17 +242,23 @@ struct lance_private {
 #define LE_CSR2         0x0002          /* IADR[23:16] (high bits reserved) */
 #define LE_CSR3         0x0003          /* Misc */
 =======
+=======
+>>>>>>> v3.18
  *		Am7990 Control and Status Registers
  */
 #define LE_CSR0		0x0000	/* LANCE Controller Status */
 #define LE_CSR1		0x0001	/* IADR[15:0] (bit0==0 ie word aligned) */
 #define LE_CSR2		0x0002	/* IADR[23:16] (high bits reserved) */
 #define LE_CSR3		0x0003	/* Misc */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  *		Bit definitions for CSR0 (LANCE Controller Status)
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define LE_C0_ERR	0x8000		/* Error = BABL | CERR | MISS | MERR */
 #define LE_C0_BABL	0x4000		/* Babble: Transmitted too many bits */
@@ -247,6 +278,8 @@ struct lance_private {
 #define LE_C0_STRT	0x0002		/* Start */
 #define LE_C0_INIT	0x0001		/* Initialize */
 =======
+=======
+>>>>>>> v3.18
 #define LE_C0_ERR	0x8000	/* Error = BABL | CERR | MISS | MERR */
 #define LE_C0_BABL	0x4000	/* Babble: Transmitted too many bits */
 #define LE_C0_CERR	0x2000	/* No Heartbeat (10BASE-T) */
@@ -264,12 +297,16 @@ struct lance_private {
 #define LE_C0_STOP	0x0004	/* Stop */
 #define LE_C0_STRT	0x0002	/* Start */
 #define LE_C0_INIT	0x0001	/* Initialize */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /*
  *		Bit definitions for CSR3
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define LE_C3_BSWP	0x0004		/* Byte Swap
 					   (on for big endian byte order) */
@@ -281,11 +318,17 @@ struct lance_private {
 #define LE_C3_ACON	0x0002	/* ALE Control (on for active low ALE) */
 #define LE_C3_BCON	0x0001	/* Byte Control */
 >>>>>>> v3.18
+=======
+#define LE_C3_BSWP	0x0004	/* Byte Swap (on for big endian byte order) */
+#define LE_C3_ACON	0x0002	/* ALE Control (on for active low ALE) */
+#define LE_C3_BCON	0x0001	/* Byte Control */
+>>>>>>> v3.18
 
 
 /*
  *		Mode Flags
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define LE_MO_PROM	0x8000		/* Promiscuous Mode */
 /* these next ones 0x4000 -- 0x0080 are not available on the LANCE 7990,
@@ -310,6 +353,8 @@ struct lance_private {
 #define LE_MO_DTX	0x0002		/* Disable Transmitter */
 #define LE_MO_DRX	0x0001		/* Disable Receiver */
 =======
+=======
+>>>>>>> v3.18
 #define LE_MO_PROM	0x8000	/* Promiscuous Mode */
 /* these next ones 0x4000 -- 0x0080 are not available on the LANCE 7990,
  * but they are in NetBSD's am7990.h, presumably for backwards-compatible chips
@@ -332,12 +377,16 @@ struct lance_private {
 #define LE_MO_LOOP	0x0004	/* Loopback Enable */
 #define LE_MO_DTX	0x0002	/* Disable Transmitter */
 #define LE_MO_DRX	0x0001	/* Disable Receiver */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /*
  *		Receive Flags
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define LE_R1_OWN	0x80		/* LANCE owns the descriptor */
 #define LE_R1_ERR	0x40		/* Error */
@@ -349,6 +398,8 @@ struct lance_private {
 #define LE_R1_EOP	0x01		/* End of Packet */
 #define LE_R1_POK       0x03		/* Packet is complete: SOP + EOP */
 =======
+=======
+>>>>>>> v3.18
 #define LE_R1_OWN	0x80	/* LANCE owns the descriptor */
 #define LE_R1_ERR	0x40	/* Error */
 #define LE_R1_FRA	0x20	/* Framing Error */
@@ -358,12 +409,16 @@ struct lance_private {
 #define LE_R1_SOP	0x02	/* Start of Packet */
 #define LE_R1_EOP	0x01	/* End of Packet */
 #define LE_R1_POK	0x03	/* Packet is complete: SOP + EOP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /*
  *		Transmit Flags
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define LE_T1_OWN	0x80		/* LANCE owns the descriptor */
 #define LE_T1_ERR	0x40		/* Error */
@@ -375,6 +430,8 @@ struct lance_private {
 #define LE_T1_EOP	0x01		/* End of Packet */
 #define LE_T1_POK	0x03		/* Packet is complete: SOP + EOP */
 =======
+=======
+>>>>>>> v3.18
 #define LE_T1_OWN	0x80	/* LANCE owns the descriptor */
 #define LE_T1_ERR	0x40	/* Error */
 #define LE_T1_RES	0x20	/* Reserved, LANCE writes this with a zero */
@@ -384,11 +441,15 @@ struct lance_private {
 #define LE_T1_SOP	0x02	/* Start of Packet */
 #define LE_T1_EOP	0x01	/* End of Packet */
 #define LE_T1_POK	0x03	/* Packet is complete: SOP + EOP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  *		Error Flags
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define LE_T3_BUF 	0x8000		/* Buffer Error */
 #define LE_T3_UFL 	0x4000		/* Underflow Error */
@@ -403,6 +464,8 @@ struct lance_private {
                         lp->tx_old+lp->tx_ring_mod_mask-lp->tx_new:\
                         lp->tx_old - lp->tx_new-1)
 =======
+=======
+>>>>>>> v3.18
 #define LE_T3_BUF	0x8000	/* Buffer Error */
 #define LE_T3_UFL	0x4000	/* Underflow Error */
 #define LE_T3_LCOL	0x1000	/* Late Collision */
@@ -415,12 +478,16 @@ struct lance_private {
 #define TX_BUFFS_AVAIL ((lp->tx_old <= lp->tx_new) ? \
 			lp->tx_old + lp->tx_ring_mod_mask - lp->tx_new : \
 			lp->tx_old - lp->tx_new - 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* The LANCE only uses 24 bit addresses. This does the obvious thing. */
 #define LANCE_ADDR(x) ((int)(x) & ~0xff000000)
 
 /* Now the prototypes we export */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int lance_open(struct net_device *dev);
 extern int lance_close (struct net_device *dev);
@@ -430,6 +497,8 @@ extern void lance_tx_timeout(struct net_device *dev);
 #ifdef CONFIG_NET_POLL_CONTROLLER
 extern void lance_poll(struct net_device *dev);
 =======
+=======
+>>>>>>> v3.18
 int lance_open(struct net_device *dev);
 int lance_close(struct net_device *dev);
 int lance_start_xmit(struct sk_buff *skb, struct net_device *dev);
@@ -437,6 +506,9 @@ void lance_set_multicast(struct net_device *dev);
 void lance_tx_timeout(struct net_device *dev);
 #ifdef CONFIG_NET_POLL_CONTROLLER
 void lance_poll(struct net_device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

@@ -5,8 +5,11 @@ and the properties used by the sdhci-pxav2 and sdhci-pxav3 drivers.
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: Should be "mrvl,pxav2-mmc" or "mrvl,pxav3-mmc".
 =======
+=======
+>>>>>>> v3.18
 - compatible: Should be "mrvl,pxav2-mmc", "mrvl,pxav3-mmc" or
   "marvell,armada-380-sdhci".
 - reg:
@@ -15,6 +18,9 @@ Required properties:
   * for "marvell,armada-380-sdhci", two register areas. The first one
     for the SDHCI registers themselves, and the second one for the
     AXI/Mbus bridge registers of the SDHCI unit.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Optional properties:
@@ -31,7 +37,10 @@ sdhci@d4280800 {
 	mrvl,clk-delay-cycles = <31>;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 sdhci@d8000 {
 	compatible = "marvell,armada-380-sdhci";
@@ -40,4 +49,7 @@ sdhci@d8000 {
 	clocks = <&gateclk 17>;
 	mrvl,clk-delay-cycles = <0x1F>;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -28,6 +28,10 @@
 
 #include <asm/opcodes.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/system_info.h>
+>>>>>>> v3.18
 =======
 #include <asm/system_info.h>
 >>>>>>> v3.18
@@ -146,6 +150,7 @@ static int emulate_swpX(unsigned int address, unsigned int *data,
 		unsigned long temp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Barrier required between accessing protected resource and
 		 * releasing a lock for it. Legacy code might not have done
@@ -154,6 +159,8 @@ static int emulate_swpX(unsigned int address, unsigned int *data,
 		 */
 		smp_mb();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (type == TYPE_SWPB)
@@ -169,6 +176,7 @@ static int emulate_swpX(unsigned int address, unsigned int *data,
 
 	if (res == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Barrier also required between acquiring a lock for a
 		 * protected resource and accessing the resource. Inserted for
@@ -176,6 +184,8 @@ static int emulate_swpX(unsigned int address, unsigned int *data,
 		 */
 		smp_mb();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (type == TYPE_SWPB)
@@ -216,7 +226,11 @@ static int swp_handler(struct pt_regs *regs, unsigned int instr)
 
 	if (current->pid != previous_pid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warn_ratelimited("\"%s\" (%ld) uses deprecated SWP{B} instruction\n",
+=======
+		pr_debug("\"%s\" (%ld) uses deprecated SWP{B} instruction\n",
+>>>>>>> v3.18
 =======
 		pr_debug("\"%s\" (%ld) uses deprecated SWP{B} instruction\n",
 >>>>>>> v3.18
@@ -281,6 +295,12 @@ static struct undef_hook swp_hook = {
 static int __init swp_emulation_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (cpu_architecture() < CPU_ARCH_ARMv7)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (cpu_architecture() < CPU_ARCH_ARMv7)
 		return 0;

@@ -27,7 +27,13 @@
 #include <core/handle.h>
 #include <core/event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+#include <nvif/unpack.h>
+#include <nvif/class.h>
+#include <nvif/event.h>
+>>>>>>> v3.18
 =======
 #include <nvif/unpack.h>
 #include <nvif/class.h>
@@ -38,7 +44,10 @@
 #include <engine/fifo.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 nouveau_fifo_event_ctor(struct nouveau_object *object, void *data, u32 size,
 			struct nvkm_notify *notify)
@@ -57,6 +66,9 @@ nouveau_fifo_event_func = {
 	.ctor = nouveau_fifo_event_ctor,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 nouveau_fifo_channel_create_(struct nouveau_object *parent,
@@ -87,8 +99,13 @@ nouveau_fifo_channel_create_(struct nouveau_object *parent,
 	dmaeng = (void *)chan->pushdma->base.engine;
 	switch (chan->pushdma->base.oclass->handle) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case NV_DMA_FROM_MEMORY_CLASS:
 	case NV_DMA_IN_MEMORY_CLASS:
+=======
+	case NV_DMA_FROM_MEMORY:
+	case NV_DMA_IN_MEMORY:
+>>>>>>> v3.18
 =======
 	case NV_DMA_FROM_MEMORY:
 	case NV_DMA_IN_MEMORY:
@@ -99,7 +116,11 @@ nouveau_fifo_channel_create_(struct nouveau_object *parent,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = dmaeng->bind(dmaeng, parent, chan->pushdma, &chan->pushgpu);
+=======
+	ret = dmaeng->bind(chan->pushdma, parent, &chan->pushgpu);
+>>>>>>> v3.18
 =======
 	ret = dmaeng->bind(chan->pushdma, parent, &chan->pushgpu);
 >>>>>>> v3.18
@@ -122,6 +143,7 @@ nouveau_fifo_channel_create_(struct nouveau_object *parent,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* map fifo control registers */
 	chan->user = ioremap(pci_resource_start(device->pdev, bar) + addr +
 			     (chan->chid * size), size);
@@ -132,10 +154,15 @@ nouveau_fifo_channel_create_(struct nouveau_object *parent,
 
 	chan->size = size;
 =======
+=======
+>>>>>>> v3.18
 	chan->addr = nv_device_resource_start(device, bar) +
 		     addr + size * chan->chid;
 	chan->size = size;
 	nvkm_event_send(&priv->cevent, 1, 0, NULL, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -147,7 +174,12 @@ nouveau_fifo_channel_destroy(struct nouveau_fifo_chan *chan)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(chan->user);
+=======
+	if (chan->user)
+		iounmap(chan->user);
+>>>>>>> v3.18
 =======
 	if (chan->user)
 		iounmap(chan->user);
@@ -170,7 +202,10 @@ _nouveau_fifo_channel_dtor(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int
 _nouveau_fifo_channel_map(struct nouveau_object *object, u64 *addr, u32 *size)
 {
@@ -180,18 +215,27 @@ _nouveau_fifo_channel_map(struct nouveau_object *object, u64 *addr, u32 *size)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 u32
 _nouveau_fifo_channel_rd32(struct nouveau_object *object, u64 addr)
 {
 	struct nouveau_fifo_chan *chan = (void *)object;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(!chan->user)) {
 		chan->user = ioremap(chan->addr, chan->size);
 		if (WARN_ON_ONCE(chan->user == NULL))
 			return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ioread32_native(chan->user + addr);
 }
@@ -201,10 +245,13 @@ _nouveau_fifo_channel_wr32(struct nouveau_object *object, u64 addr, u32 data)
 {
 	struct nouveau_fifo_chan *chan = (void *)object;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iowrite32_native(data, chan->user + addr);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(!chan->user)) {
 		chan->user = ioremap(chan->addr, chan->size);
 		if (WARN_ON_ONCE(chan->user == NULL))
@@ -257,6 +304,9 @@ _nouveau_fifo_channel_ntfy(struct nouveau_object *object, u32 type,
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nouveau_fifo_chid(struct nouveau_fifo *priv, struct nouveau_object *object)
@@ -292,8 +342,13 @@ nouveau_fifo_destroy(struct nouveau_fifo *priv)
 {
 	kfree(priv->channel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nouveau_event_destroy(&priv->uevent);
 	nouveau_event_destroy(&priv->cevent);
+=======
+	nvkm_event_fini(&priv->uevent);
+	nvkm_event_fini(&priv->cevent);
+>>>>>>> v3.18
 =======
 	nvkm_event_fini(&priv->uevent);
 	nvkm_event_fini(&priv->cevent);
@@ -323,11 +378,15 @@ nouveau_fifo_create_(struct nouveau_object *parent,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nouveau_event_create(1, &priv->cevent);
 	if (ret)
 		return ret;
 
 	ret = nouveau_event_create(1, &priv->uevent);
+=======
+	ret = nvkm_event_init(&nouveau_fifo_event_func, 1, 1, &priv->cevent);
+>>>>>>> v3.18
 =======
 	ret = nvkm_event_init(&nouveau_fifo_event_func, 1, 1, &priv->cevent);
 >>>>>>> v3.18

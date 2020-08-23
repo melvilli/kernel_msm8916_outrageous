@@ -29,20 +29,31 @@
 #include "util/session.h"
 #include "util/tool.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "arch/common.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include "util/data.h"
 #include "arch/common.h"
 
 #include <dlfcn.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/bitmap.h>
 
 struct perf_annotate {
 	struct perf_tool tool;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool	   force, use_tui, use_stdio, use_gtk;
+=======
+	struct perf_session *session;
+	bool	   use_tui, use_stdio, use_gtk;
+>>>>>>> v3.18
 =======
 	struct perf_session *session;
 	bool	   use_tui, use_stdio, use_gtk;
@@ -57,16 +68,22 @@ struct perf_annotate {
 
 static int perf_evsel__add_sample(struct perf_evsel *evsel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct perf_sample *sample,
 				  struct addr_location *al,
 				  struct perf_annotate *ann)
 {
 =======
+=======
+>>>>>>> v3.18
 				  struct perf_sample *sample __maybe_unused,
 				  struct addr_location *al,
 				  struct perf_annotate *ann)
 {
 	struct hists *hists = evsel__hists(evsel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct hist_entry *he;
 	int ret;
@@ -84,6 +101,7 @@ static int perf_evsel__add_sample(struct perf_evsel *evsel,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	he = __hists__add_entry(&evsel->hists, al, NULL, 1, 1);
 	if (he == NULL)
 		return -ENOMEM;
@@ -100,12 +118,17 @@ static int perf_evsel__add_sample(struct perf_evsel *evsel,
 	evsel->hists.stats.total_period += sample->period;
 	hists__inc_nr_events(&evsel->hists, PERF_RECORD_SAMPLE);
 =======
+=======
+>>>>>>> v3.18
 	he = __hists__add_entry(hists, al, NULL, NULL, NULL, 1, 1, 0, true);
 	if (he == NULL)
 		return -ENOMEM;
 
 	ret = hist_entry__inc_addr_samples(he, evsel->idx, al->addr);
 	hists__inc_nr_samples(hists, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -120,8 +143,12 @@ static int process_sample_event(struct perf_tool *tool,
 	struct addr_location al;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (perf_event__preprocess_sample(event, machine, &al, sample,
 					  symbol__annotate_init) < 0) {
+=======
+	if (perf_event__preprocess_sample(event, machine, &al, sample) < 0) {
+>>>>>>> v3.18
 =======
 	if (perf_event__preprocess_sample(event, machine, &al, sample) < 0) {
 >>>>>>> v3.18
@@ -151,17 +178,23 @@ static int hist_entry__tty_annotate(struct hist_entry *he,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void hists__find_annotations(struct hists *self,
 				    struct perf_evsel *evsel,
 				    struct perf_annotate *ann)
 {
 	struct rb_node *nd = rb_first(&self->entries), *next;
 =======
+=======
+>>>>>>> v3.18
 static void hists__find_annotations(struct hists *hists,
 				    struct perf_evsel *evsel,
 				    struct perf_annotate *ann)
 {
 	struct rb_node *nd = rb_first(&hists->entries), *next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int key = K_RIGHT;
 
@@ -185,9 +218,12 @@ find_next:
 		if (use_browser == 2) {
 			int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			ret = hist_entry__gtk_annotate(he, evsel, NULL);
 =======
+=======
+>>>>>>> v3.18
 			int (*annotate)(struct hist_entry *he,
 					struct perf_evsel *evsel,
 					struct hist_browser_timer *hbt);
@@ -200,6 +236,9 @@ find_next:
 			}
 
 			ret = annotate(he, evsel, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!ret || !ann->skip_missing)
 				return;
@@ -234,8 +273,12 @@ find_next:
 			 * processed this symbol.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			free(notes->src);
 			notes->src = NULL;
+=======
+			zfree(&notes->src);
+>>>>>>> v3.18
 =======
 			zfree(&notes->src);
 >>>>>>> v3.18
@@ -247,6 +290,7 @@ static int __cmd_annotate(struct perf_annotate *ann)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct perf_session *session;
 	struct perf_evsel *pos;
 	u64 total_nr_samples;
@@ -256,11 +300,16 @@ static int __cmd_annotate(struct perf_annotate *ann)
 	if (session == NULL)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	struct perf_session *session = ann->session;
 	struct perf_evsel *pos;
 	u64 total_nr_samples;
 
 	machines__set_symbol_filter(&session->machines, symbol__annotate_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ann->cpu_list) {
@@ -268,7 +317,11 @@ static int __cmd_annotate(struct perf_annotate *ann)
 					       ann->cpu_bitmap);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out_delete;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -278,7 +331,11 @@ static int __cmd_annotate(struct perf_annotate *ann)
 		ret = perf_session_env__lookup_objdump(&session->header.env);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out_delete;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -287,18 +344,24 @@ static int __cmd_annotate(struct perf_annotate *ann)
 	ret = perf_session__process_events(session, &ann->tool);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_delete;
 
 	if (dump_trace) {
 		perf_session__fprintf_nr_events(session, stdout);
 		goto out_delete;
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 
 	if (dump_trace) {
 		perf_session__fprintf_nr_events(session, stdout);
 		perf_evlist__fprintf_nr_events(session->evlist, stdout);
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -310,8 +373,13 @@ static int __cmd_annotate(struct perf_annotate *ann)
 
 	total_nr_samples = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(pos, &session->evlist->entries, node) {
 		struct hists *hists = &pos->hists;
+=======
+	evlist__for_each(session->evlist, pos) {
+		struct hists *hists = evsel__hists(pos);
+>>>>>>> v3.18
 =======
 	evlist__for_each(session->evlist, pos) {
 		struct hists *hists = evsel__hists(pos);
@@ -321,7 +389,11 @@ static int __cmd_annotate(struct perf_annotate *ann)
 		if (nr_samples > 0) {
 			total_nr_samples += nr_samples;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hists__collapse_resort(hists);
+=======
+			hists__collapse_resort(hists, NULL);
+>>>>>>> v3.18
 =======
 			hists__collapse_resort(hists, NULL);
 >>>>>>> v3.18
@@ -336,6 +408,7 @@ static int __cmd_annotate(struct perf_annotate *ann)
 	}
 
 	if (total_nr_samples == 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ui__error("The %s file has no samples!\n", session->filename);
 		goto out_delete;
@@ -358,6 +431,8 @@ out_delete:
 	 * perf_session__delete(session);
 	 */
 =======
+=======
+>>>>>>> v3.18
 		ui__error("The %s file has no samples!\n", session->file->path);
 		goto out;
 	}
@@ -375,6 +450,9 @@ out_delete:
 	}
 
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -391,6 +469,7 @@ int cmd_annotate(int argc, const char **argv, const char *prefix __maybe_unused)
 			.sample	= process_sample_event,
 			.mmap	= perf_event__process_mmap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.comm	= perf_event__process_comm,
 			.exit	= perf_event__process_exit,
 			.fork	= perf_event__process_fork,
@@ -399,6 +478,8 @@ int cmd_annotate(int argc, const char **argv, const char *prefix __maybe_unused)
 		},
 	};
 =======
+=======
+>>>>>>> v3.18
 			.mmap2	= perf_event__process_mmap2,
 			.comm	= perf_event__process_comm,
 			.exit	= perf_event__process_exit,
@@ -411,6 +492,9 @@ int cmd_annotate(int argc, const char **argv, const char *prefix __maybe_unused)
 		.path  = input_name,
 		.mode  = PERF_DATA_MODE_READ,
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct option options[] = {
 	OPT_STRING('i', "input", &input_name, "file",
@@ -420,7 +504,11 @@ int cmd_annotate(int argc, const char **argv, const char *prefix __maybe_unused)
 	OPT_STRING('s', "symbol", &annotate.sym_hist_filter, "symbol",
 		    "symbol to annotate"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OPT_BOOLEAN('f', "force", &annotate.force, "don't complain, do it"),
+=======
+	OPT_BOOLEAN('f', "force", &file.force, "don't complain, do it"),
+>>>>>>> v3.18
 =======
 	OPT_BOOLEAN('f', "force", &file.force, "don't complain, do it"),
 >>>>>>> v3.18
@@ -457,11 +545,17 @@ int cmd_annotate(int argc, const char **argv, const char *prefix __maybe_unused)
 	OPT_END()
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int ret = hists__init();
 
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	argc = parse_options(argc, argv, options, annotate_usage, 0);
@@ -476,12 +570,15 @@ int cmd_annotate(int argc, const char **argv, const char *prefix __maybe_unused)
 	setup_browser(true);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	symbol_conf.priv_size = sizeof(struct annotation);
 	symbol_conf.try_vmlinux_path = true;
 
 	if (symbol__init() < 0)
 		return -1;
 =======
+=======
+>>>>>>> v3.18
 	annotate.session = perf_session__new(&file, false, &annotate.tool);
 	if (annotate.session == NULL)
 		return -1;
@@ -492,6 +589,9 @@ int cmd_annotate(int argc, const char **argv, const char *prefix __maybe_unused)
 	ret = symbol__init(&annotate.session->header.env);
 	if (ret < 0)
 		goto out_delete;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (setup_sorting() < 0)
@@ -500,7 +600,11 @@ int cmd_annotate(int argc, const char **argv, const char *prefix __maybe_unused)
 	if (argc) {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Special case: if there's an argument left then assume tha
+=======
+		 * Special case: if there's an argument left then assume that
+>>>>>>> v3.18
 =======
 		 * Special case: if there's an argument left then assume that
 >>>>>>> v3.18
@@ -513,8 +617,11 @@ int cmd_annotate(int argc, const char **argv, const char *prefix __maybe_unused)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __cmd_annotate(&annotate);
 =======
+=======
+>>>>>>> v3.18
 	ret = __cmd_annotate(&annotate);
 
 out_delete:
@@ -531,5 +638,8 @@ out_delete:
 	 * perf_session__delete(session);
 	 */
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

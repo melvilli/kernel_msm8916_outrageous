@@ -70,7 +70,10 @@ struct dvb_frontend *drxd_attach(const struct drxd_config *config,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int drxd_config_i2c(struct dvb_frontend *, int);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

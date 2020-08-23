@@ -21,7 +21,11 @@
 #include <net/tcp_states.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
+=======
+int ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
+>>>>>>> v3.18
 =======
 int ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 >>>>>>> v3.18
@@ -44,6 +48,11 @@ int ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 	sk_dst_reset(sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lock_sock(sk);
+
+>>>>>>> v3.18
 =======
 	lock_sock(sk);
 
@@ -61,7 +70,11 @@ int ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 			      RT_CONN_FLAGS(sk), oif,
 			      sk->sk_protocol,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      inet->inet_sport, usin->sin_port, sk, true);
+=======
+			      inet->inet_sport, usin->sin_port, sk);
+>>>>>>> v3.18
 =======
 			      inet->inet_sport, usin->sin_port, sk);
 >>>>>>> v3.18
@@ -88,6 +101,10 @@ int ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 	inet->inet_dport = usin->sin_port;
 	sk->sk_state = TCP_ESTABLISHED;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	inet_set_txhash(sk);
+>>>>>>> v3.18
 =======
 	inet_set_txhash(sk);
 >>>>>>> v3.18
@@ -96,6 +113,7 @@ int ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 	sk_dst_set(sk, &rt->dst);
 	err = 0;
 out:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return err;
 }
@@ -109,6 +127,10 @@ int ip4_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 	res = __ip4_datagram_connect(sk, uaddr, addr_len);
 	release_sock(sk);
 	return res;
+=======
+	release_sock(sk);
+	return err;
+>>>>>>> v3.18
 =======
 	release_sock(sk);
 	return err;

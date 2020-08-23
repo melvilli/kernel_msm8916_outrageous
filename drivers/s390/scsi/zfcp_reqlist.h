@@ -5,7 +5,11 @@
  * requests.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright IBM Corp. 2009, 2016
+=======
+ * Copyright IBM Corp. 2009
+>>>>>>> v3.18
 =======
  * Copyright IBM Corp. 2009
 >>>>>>> v3.18
@@ -185,6 +189,7 @@ static inline void zfcp_reqlist_move(struct zfcp_reqlist *rl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * zfcp_reqlist_apply_for_all() - apply a function to every request.
  * @rl: the requestlist that contains the target requests.
@@ -213,6 +218,8 @@ zfcp_reqlist_apply_for_all(struct zfcp_reqlist *rl,
 	spin_unlock_irqrestore(&rl->lock, flags);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* ZFCP_REQLIST_H */

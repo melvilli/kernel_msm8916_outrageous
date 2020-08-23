@@ -43,6 +43,7 @@ do {								\
  *                                 from 1 to a 0 value
  *  @count: pointer of type atomic_t
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  @fail_fn: function to call if the original value was not 1
  *
  * Change the count from 1 to a value lower than 1, and call <fail_fn> if it
@@ -55,6 +56,8 @@ static inline int __mutex_fastpath_lock_retval(atomic_t *count,
 	if (unlikely(atomic_dec_return(count) < 0))
 		return fail_fn(count);
 =======
+=======
+>>>>>>> v3.18
  *
  * Change the count from 1 to a value lower than 1. This function returns 0
  * if the fastpath succeeds, or -1 otherwise.
@@ -63,6 +66,9 @@ static inline int __mutex_fastpath_lock_retval(atomic_t *count)
 {
 	if (unlikely(atomic_dec_return(count) < 0))
 		return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		return 0;
@@ -115,6 +121,7 @@ static inline int __mutex_fastpath_trylock(atomic_t *count,
 					   int (*fail_fn)(atomic_t *))
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * We have two variants here. The cmpxchg based one is the best one
 	 * because it never induce a false contention state.  It is included
@@ -133,11 +140,16 @@ static inline int __mutex_fastpath_trylock(atomic_t *count,
 	return fail_fn(count);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	/* cmpxchg because it never induces a false contention state. */
 	if (likely(atomic_cmpxchg(count, 1, 0) == 1))
 		return 1;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

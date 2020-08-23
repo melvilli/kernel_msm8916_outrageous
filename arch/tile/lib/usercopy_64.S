@@ -37,6 +37,10 @@ strnlen_user_fault:
 	ENDPROC(strnlen_user_fault)
 	.section __ex_table,"a"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.align 8
+>>>>>>> v3.18
 =======
 	.align 8
 >>>>>>> v3.18
@@ -52,6 +56,7 @@ strnlen_user_fault:
 STD_ENTRY(strncpy_from_user_asm)
 	{ beqz r2, 2f; move r3, r0 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 1:      { ld1u r4, r1; addi r1, r1, 1; addi r2, r2, -1 }
 	{ st1 r0, r4; addi r0, r0, 1 }
 	beqz r2, 2f
@@ -59,6 +64,8 @@ STD_ENTRY(strncpy_from_user_asm)
 	addi r0, r0, -1   /* don't count the trailing NUL */
 2:      { sub r0, r0, r3; jrp lr }
 =======
+=======
+>>>>>>> v3.18
 1:	{ ld1u r4, r1; addi r1, r1, 1; addi r2, r2, -1 }
 	{ st1 r0, r4; addi r0, r0, 1 }
 	beqz r4, 2f
@@ -66,6 +73,9 @@ STD_ENTRY(strncpy_from_user_asm)
 	{ sub r0, r0, r3; jrp lr }
 2:	addi r0, r0, -1   /* don't count the trailing NUL */
 	{ sub r0, r0, r3; jrp lr }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	STD_ENDPROC(strncpy_from_user_asm)
 	.pushsection .fixup,"ax"
@@ -74,6 +84,10 @@ strncpy_from_user_fault:
 	ENDPROC(strncpy_from_user_fault)
 	.section __ex_table,"a"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.align 8
+>>>>>>> v3.18
 =======
 	.align 8
 >>>>>>> v3.18
@@ -96,6 +110,10 @@ STD_ENTRY(clear_user_asm)
 2:      { move r0, r1; jrp lr }
 	.pushsection __ex_table,"a"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.align 8
+>>>>>>> v3.18
 =======
 	.align 8
 >>>>>>> v3.18
@@ -109,6 +127,10 @@ STD_ENTRY(clear_user_asm)
 	STD_ENDPROC(clear_user_asm)
 	.pushsection __ex_table,"a"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.align 8
+>>>>>>> v3.18
 =======
 	.align 8
 >>>>>>> v3.18
@@ -132,6 +154,7 @@ STD_ENTRY(flush_user_asm)
 	STD_ENDPROC(flush_user_asm)
 	.pushsection __ex_table,"a"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.quad 1b, 2b
 	.popsection
 
@@ -151,6 +174,9 @@ STD_ENTRY(inv_user_asm)
 2:      { move r0, r1; jrp lr }
 	STD_ENDPROC(inv_user_asm)
 	.pushsection __ex_table,"a"
+=======
+	.align 8
+>>>>>>> v3.18
 =======
 	.align 8
 >>>>>>> v3.18
@@ -174,6 +200,10 @@ STD_ENTRY(finv_user_asm)
 	STD_ENDPROC(finv_user_asm)
 	.pushsection __ex_table,"a"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.align 8
+>>>>>>> v3.18
 =======
 	.align 8
 >>>>>>> v3.18

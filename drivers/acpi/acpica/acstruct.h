@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -138,6 +142,12 @@ struct acpi_init_walk_info {
 	u32 object_count;
 	u32 method_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 serial_method_count;
+	u32 non_serial_method_count;
+	u32 serialized_method_count;
+>>>>>>> v3.18
 =======
 	u32 serial_method_count;
 	u32 non_serial_method_count;
@@ -189,6 +199,7 @@ union acpi_aml_operands {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Structure used to pass object evaluation parameters.
  * Purpose is to reduce CPU stack use.
  */
@@ -204,6 +215,8 @@ struct acpi_evaluate_info {
 	u8 return_object_type;
 	u8 flags;
 =======
+=======
+>>>>>>> v3.18
  * Structure used to pass object evaluation information and parameters.
  * Purpose is to reduce CPU stack use.
  */
@@ -229,20 +242,29 @@ struct acpi_evaluate_info {
 	u8 return_object_type;	/* Object type of the returned object */
 	u8 node_flags;		/* Same as Node->Flags */
 	u8 flags;		/* General flags */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* Values for Flags above */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_IGNORE_RETURN_VALUE        1
 =======
+=======
+>>>>>>> v3.18
 #define ACPI_IGNORE_RETURN_VALUE    1
 
 /* Defines for return_flags field above */
 
 #define ACPI_OBJECT_REPAIRED        1
 #define ACPI_OBJECT_WRAPPED         2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Info used by acpi_ns_initialize_devices */

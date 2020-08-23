@@ -186,6 +186,10 @@ static int snd_toneport_monitor_get(struct snd_kcontrol *kcontrol,
 {
 	struct snd_line6_pcm *line6pcm = snd_kcontrol_chip(kcontrol);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -218,6 +222,10 @@ static int snd_toneport_source_info(struct snd_kcontrol *kcontrol,
 {
 	const int size = ARRAY_SIZE(toneport_source_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -253,6 +261,7 @@ static int snd_toneport_source_put(struct snd_kcontrol *kcontrol,
 	struct usb_line6_toneport *toneport =
 	    (struct usb_line6_toneport *)line6pcm->line6;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (ucontrol->value.enumerated.item[0] == toneport->source)
 		return 0;
@@ -261,6 +270,8 @@ static int snd_toneport_source_put(struct snd_kcontrol *kcontrol,
 	toneport_send_cmd(toneport->line6.usbdev,
 			  toneport_source_info[toneport->source].code, 0x0000);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int source;
 
 	source = ucontrol->value.enumerated.item[0];
@@ -272,6 +283,9 @@ static int snd_toneport_source_put(struct snd_kcontrol *kcontrol,
 	toneport->source = source;
 	toneport_send_cmd(toneport->line6.usbdev,
 			  toneport_source_info[source].code, 0x0000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 1;
 }
@@ -281,6 +295,10 @@ static void toneport_start_pcm(unsigned long arg)
 	struct usb_line6_toneport *toneport = (struct usb_line6_toneport *)arg;
 	struct usb_line6 *line6 = &toneport->line6;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -330,6 +348,10 @@ static void toneport_setup(struct usb_line6_toneport *toneport)
 	struct usb_line6 *line6 = &toneport->line6;
 	struct usb_device *usbdev = line6->usbdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 idProduct = le16_to_cpu(usbdev->descriptor.idProduct);
+>>>>>>> v3.18
 =======
 	u16 idProduct = le16_to_cpu(usbdev->descriptor.idProduct);
 >>>>>>> v3.18
@@ -343,7 +365,11 @@ static void toneport_setup(struct usb_line6_toneport *toneport)
 
 	/* initialize source select: */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (usbdev->descriptor.idProduct) {
+=======
+	switch (le16_to_cpu(usbdev->descriptor.idProduct)) {
+>>>>>>> v3.18
 =======
 	switch (le16_to_cpu(usbdev->descriptor.idProduct)) {
 >>>>>>> v3.18
@@ -357,7 +383,11 @@ static void toneport_setup(struct usb_line6_toneport *toneport)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (toneport_has_led(usbdev->descriptor.idProduct))
+=======
+	if (toneport_has_led(idProduct))
+>>>>>>> v3.18
 =======
 	if (toneport_has_led(idProduct))
 >>>>>>> v3.18
@@ -374,6 +404,10 @@ static int toneport_try_init(struct usb_interface *interface,
 	struct usb_line6 *line6 = &toneport->line6;
 	struct usb_device *usbdev = line6->usbdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 idProduct = le16_to_cpu(usbdev->descriptor.idProduct);
+>>>>>>> v3.18
 =======
 	u16 idProduct = le16_to_cpu(usbdev->descriptor.idProduct);
 >>>>>>> v3.18
@@ -400,7 +434,11 @@ static int toneport_try_init(struct usb_interface *interface,
 
 	/* register source select control: */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (usbdev->descriptor.idProduct) {
+=======
+	switch (le16_to_cpu(usbdev->descriptor.idProduct)) {
+>>>>>>> v3.18
 =======
 	switch (le16_to_cpu(usbdev->descriptor.idProduct)) {
 >>>>>>> v3.18
@@ -425,7 +463,11 @@ static int toneport_try_init(struct usb_interface *interface,
 	line6_read_data(line6, 0x80c2, &toneport->firmware_version, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (toneport_has_led(usbdev->descriptor.idProduct)) {
+=======
+	if (toneport_has_led(idProduct)) {
+>>>>>>> v3.18
 =======
 	if (toneport_has_led(idProduct)) {
 >>>>>>> v3.18
@@ -475,6 +517,10 @@ void line6_toneport_disconnect(struct usb_interface *interface)
 {
 	struct usb_line6_toneport *toneport;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 idProduct;
+>>>>>>> v3.18
 =======
 	u16 idProduct;
 >>>>>>> v3.18
@@ -485,8 +531,14 @@ void line6_toneport_disconnect(struct usb_interface *interface)
 	toneport = usb_get_intfdata(interface);
 	del_timer_sync(&toneport->timer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (toneport_has_led(toneport->line6.usbdev->descriptor.idProduct)) {
+=======
+	idProduct = le16_to_cpu(toneport->line6.usbdev->descriptor.idProduct);
+
+	if (toneport_has_led(idProduct)) {
+>>>>>>> v3.18
 =======
 	idProduct = le16_to_cpu(toneport->line6.usbdev->descriptor.idProduct);
 

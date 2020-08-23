@@ -40,10 +40,14 @@
  * @head:           list head for thread-private list.
  * @bo:             refcounted buffer object pointer.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @reserved:       Indicates whether @bo has been reserved for validation.
  * @removed:        Indicates whether @bo has been removed from lru lists.
  * @put_count:      Number of outstanding references on bo::list_kref.
  * @old_sync_obj:   Pointer to a sync object about to be unreferenced
+=======
+ * @shared:         should the fence be added shared?
+>>>>>>> v3.18
 =======
  * @shared:         should the fence be added shared?
 >>>>>>> v3.18
@@ -53,10 +57,14 @@ struct ttm_validate_buffer {
 	struct list_head head;
 	struct ttm_buffer_object *bo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool reserved;
 	bool removed;
 	int put_count;
 	void *old_sync_obj;
+=======
+	bool shared;
+>>>>>>> v3.18
 =======
 	bool shared;
 >>>>>>> v3.18
@@ -66,6 +74,10 @@ struct ttm_validate_buffer {
  * function ttm_eu_backoff_reservation
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @ticket:   ww_acquire_ctx from reserve call
+>>>>>>> v3.18
 =======
  * @ticket:   ww_acquire_ctx from reserve call
 >>>>>>> v3.18
@@ -76,7 +88,12 @@ struct ttm_validate_buffer {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ttm_eu_backoff_reservation(struct list_head *list);
+=======
+extern void ttm_eu_backoff_reservation(struct ww_acquire_ctx *ticket,
+				       struct list_head *list);
+>>>>>>> v3.18
 =======
 extern void ttm_eu_backoff_reservation(struct ww_acquire_ctx *ticket,
 				       struct list_head *list);
@@ -86,12 +103,18 @@ extern void ttm_eu_backoff_reservation(struct ww_acquire_ctx *ticket,
  * function ttm_eu_reserve_buffers
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @list:    thread private list of ttm_validate_buffer structs.
 =======
+=======
+>>>>>>> v3.18
  * @ticket:  [out] ww_acquire_ctx filled in by call, or NULL if only
  *           non-blocking reserves should be tried.
  * @list:    thread private list of ttm_validate_buffer structs.
  * @intr:    should the wait be interruptible
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Tries to reserve bos pointed to by the list entries for validation.
@@ -105,9 +128,15 @@ extern void ttm_eu_backoff_reservation(struct ww_acquire_ctx *ticket,
  * unreserve their buffers.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This function may return -ERESTART or -EAGAIN if the calling process
  * receives a signal while waiting. In that case, no buffers on the list
  * will be reserved upon return.
+=======
+ * If intr is set to true, this function may return -ERESTARTSYS if the
+ * calling process receives a signal while waiting. In that case, no
+ * buffers on the list will be reserved upon return.
+>>>>>>> v3.18
 =======
  * If intr is set to true, this function may return -ERESTARTSYS if the
  * calling process receives a signal while waiting. In that case, no
@@ -121,7 +150,12 @@ extern void ttm_eu_backoff_reservation(struct ww_acquire_ctx *ticket,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ttm_eu_reserve_buffers(struct list_head *list);
+=======
+extern int ttm_eu_reserve_buffers(struct ww_acquire_ctx *ticket,
+				  struct list_head *list, bool intr);
+>>>>>>> v3.18
 =======
 extern int ttm_eu_reserve_buffers(struct ww_acquire_ctx *ticket,
 				  struct list_head *list, bool intr);
@@ -131,8 +165,14 @@ extern int ttm_eu_reserve_buffers(struct ww_acquire_ctx *ticket,
  * function ttm_eu_fence_buffer_objects.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @list:        thread private list of ttm_validate_buffer structs.
  * @sync_obj:    The new sync object for the buffers.
+=======
+ * @ticket:      ww_acquire_ctx from reserve call
+ * @list:        thread private list of ttm_validate_buffer structs.
+ * @fence:       The new exclusive fence for the buffers.
+>>>>>>> v3.18
 =======
  * @ticket:      ww_acquire_ctx from reserve call
  * @list:        thread private list of ttm_validate_buffer structs.
@@ -146,7 +186,13 @@ extern int ttm_eu_reserve_buffers(struct ww_acquire_ctx *ticket,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ttm_eu_fence_buffer_objects(struct list_head *list, void *sync_obj);
+=======
+extern void ttm_eu_fence_buffer_objects(struct ww_acquire_ctx *ticket,
+					struct list_head *list,
+					struct fence *fence);
+>>>>>>> v3.18
 =======
 extern void ttm_eu_fence_buffer_objects(struct ww_acquire_ctx *ticket,
 					struct list_head *list,

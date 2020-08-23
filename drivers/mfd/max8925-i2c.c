@@ -38,7 +38,11 @@ static inline int max8925_write_device(struct i2c_client *i2c,
 				       int reg, int bytes, void *src)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char buf[bytes + 1];
+=======
+	unsigned char buf[9];
+>>>>>>> v3.18
 =======
 	unsigned char buf[9];
 >>>>>>> v3.18
@@ -156,7 +160,11 @@ static int max8925_probe(struct i2c_client *client,
 				   const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct max8925_platform_data *pdata = client->dev.platform_data;
+=======
+	struct max8925_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct max8925_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -179,7 +187,12 @@ static int max8925_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip = kzalloc(sizeof(struct max8925_chip), GFP_KERNEL);
+=======
+	chip = devm_kzalloc(&client->dev,
+			    sizeof(struct max8925_chip), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	chip = devm_kzalloc(&client->dev,
 			    sizeof(struct max8925_chip), GFP_KERNEL);
@@ -222,7 +235,10 @@ static int max8925_remove(struct i2c_client *client)
 	i2c_unregister_device(chip->adc);
 	i2c_unregister_device(chip->rtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(chip);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -264,7 +280,11 @@ static struct i2c_driver max8925_driver = {
 		.owner	= THIS_MODULE,
 		.pm     = &max8925_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(max8925_dt_ids),
+=======
+		.of_match_table = max8925_dt_ids,
+>>>>>>> v3.18
 =======
 		.of_match_table = max8925_dt_ids,
 >>>>>>> v3.18
@@ -278,15 +298,21 @@ static int __init max8925_i2c_init(void)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = i2c_add_driver(&max8925_driver);
 	if (ret != 0)
 		pr_err("Failed to register MAX8925 I2C driver: %d\n", ret);
 =======
+=======
+>>>>>>> v3.18
 
 	ret = i2c_add_driver(&max8925_driver);
 	if (ret != 0)
 		pr_err("Failed to register MAX8925 I2C driver: %d\n", ret);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }

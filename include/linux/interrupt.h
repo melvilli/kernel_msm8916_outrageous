@@ -18,6 +18,10 @@
 #include <linux/atomic.h>
 #include <asm/ptrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/irq.h>
+>>>>>>> v3.18
 =======
 #include <asm/irq.h>
 >>>>>>> v3.18
@@ -162,12 +166,18 @@ devm_request_irq(struct device *dev, unsigned int irq, irq_handler_t handler,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int __must_check
 devm_request_any_context_irq(struct device *dev, unsigned int irq,
 		 irq_handler_t handler, unsigned long irqflags,
 		 const char *devname, void *dev_id);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void devm_free_irq(struct device *dev, unsigned int irq, void *dev_id);
 
@@ -195,6 +205,10 @@ extern void disable_percpu_irq(unsigned int irq);
 extern void enable_irq(unsigned int irq);
 extern void enable_percpu_irq(unsigned int irq, unsigned int type);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void irq_wake_thread(unsigned int irq, void *dev_id);
+>>>>>>> v3.18
 =======
 extern void irq_wake_thread(unsigned int irq, void *dev_id);
 >>>>>>> v3.18
@@ -203,12 +217,15 @@ extern void irq_wake_thread(unsigned int irq, void *dev_id);
 extern void suspend_device_irqs(void);
 extern void resume_device_irqs(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
 extern int check_wakeup_irqs(void);
 #else
 static inline int check_wakeup_irqs(void) { return 0; }
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * struct irq_affinity_notify - context for notification of IRQ affinity changes
@@ -229,6 +246,9 @@ struct irq_affinity_notify {
 	void (*notify)(struct irq_affinity_notify *, const cpumask_t *mask);
 	void (*release)(struct kref *ref);
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if defined(CONFIG_SMP)
@@ -243,7 +263,11 @@ extern int __irq_set_affinity(unsigned int irq, const struct cpumask *cpumask,
  * irq_set_affinity - Set the irq affinity of a given irq
  * @irq:	Interrupt to set affinity
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mask:	cpumask
+=======
+ * @cpumask:	cpumask
+>>>>>>> v3.18
 =======
  * @cpumask:	cpumask
 >>>>>>> v3.18
@@ -260,7 +284,11 @@ irq_set_affinity(unsigned int irq, const struct cpumask *cpumask)
  * irq_force_affinity - Force the irq affinity of a given irq
  * @irq:	Interrupt to set affinity
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mask:	cpumask
+=======
+ * @cpumask:	cpumask
+>>>>>>> v3.18
 =======
  * @cpumask:	cpumask
 >>>>>>> v3.18
@@ -282,6 +310,7 @@ extern int irq_select_affinity(unsigned int irq);
 
 extern int irq_set_affinity_hint(unsigned int irq, const struct cpumask *m);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * struct irq_affinity_notify - context for notification of IRQ affinity changes
@@ -313,6 +342,11 @@ extern int
 irq_set_affinity_notifier(unsigned int irq, struct irq_affinity_notify *notify);
 
 >>>>>>> v3.18
+=======
+extern int
+irq_set_affinity_notifier(unsigned int irq, struct irq_affinity_notify *notify);
+
+>>>>>>> v3.18
 #else /* CONFIG_SMP */
 
 static inline int irq_set_affinity(unsigned int irq, const struct cpumask *m)
@@ -338,13 +372,19 @@ static inline int irq_set_affinity_hint(unsigned int irq,
 	return -EINVAL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline int
 irq_set_affinity_notifier(unsigned int irq, struct irq_affinity_notify *notify)
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_SMP */
 
@@ -402,7 +442,10 @@ static inline void enable_irq_lockdep_irqrestore(unsigned int irq, unsigned long
 /* IRQ wakeup (PM) control: */
 extern int irq_set_irq_wake(unsigned int irq, unsigned int on);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int irq_read_line(unsigned int irq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -466,7 +509,11 @@ enum
  * kernel/softirq.c when adding a new softirq.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern char *softirq_to_name[NR_SOFTIRQS];
+=======
+extern const char * const softirq_to_name[NR_SOFTIRQS];
+>>>>>>> v3.18
 =======
 extern const char * const softirq_to_name[NR_SOFTIRQS];
 >>>>>>> v3.18
@@ -483,7 +530,10 @@ struct softirq_action
 asmlinkage void do_softirq(void);
 asmlinkage void __do_softirq(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef __ARCH_HAS_DO_SOFTIRQ
 void do_softirq_own_stack(void);
@@ -494,6 +544,9 @@ static inline void do_softirq_own_stack(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void open_softirq(int nr, void (*action)(struct softirq_action *));
 extern void softirq_init(void);
@@ -723,7 +776,11 @@ extern int early_irq_init(void);
 extern int arch_probe_nr_irqs(void);
 extern int arch_early_irq_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void irq_set_pending(unsigned int irq);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

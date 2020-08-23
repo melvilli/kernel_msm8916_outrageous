@@ -1,7 +1,11 @@
 /*
  *    Disk Array driver for HP Smart Array SAS controllers
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    Copyright 2000, 2009 Hewlett-Packard Development Company, L.P.
+=======
+ *    Copyright 2000, 2014 Hewlett-Packard Development Company, L.P.
+>>>>>>> v3.18
 =======
  *    Copyright 2000, 2014 Hewlett-Packard Development Company, L.P.
 >>>>>>> v3.18
@@ -51,10 +55,13 @@ struct hpsa_scsi_dev_t {
 	unsigned char model[16];        /* bytes 16-31 of inquiry data */
 	unsigned char raid_level;	/* from inquiry page 0xC1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 struct reply_pool {
 =======
+=======
+>>>>>>> v3.18
 	unsigned char volume_offline;	/* discovered via TUR or VPD */
 	u32 ioaccel_handle;
 	int offload_config;		/* I/O accel RAID offload configured */
@@ -67,14 +74,20 @@ struct reply_pool {
 };
 
 struct reply_queue_buffer {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u64 *head;
 	size_t size;
 	u8 wraparound;
 	u32 current_entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 	dma_addr_t busaddr;
 };
 
@@ -118,6 +131,9 @@ struct bmic_controller_parameters {
 	u8   reserved[356];
 };
 #pragma pack()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct ctlr_info {
@@ -132,11 +148,16 @@ struct ctlr_info {
 	struct CfgTable __iomem *cfgtable;
 	int	interrupts_enabled;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	major;
 	int 	max_commands;
 	int	commands_outstanding;
 	int 	max_outstanding; /* Debug */
 	int	usage_count;  /* number of opens all all minor devices */
+=======
+	int 	max_commands;
+	int	commands_outstanding;
+>>>>>>> v3.18
 =======
 	int 	max_commands;
 	int	commands_outstanding;
@@ -151,6 +172,10 @@ struct ctlr_info {
 	int intr_mode; /* either PERF_MODE_INT or SIMPLE_MODE_INT */
 	struct access_method access;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char hba_mode_enabled;
+>>>>>>> v3.18
 =======
 	char hba_mode_enabled;
 >>>>>>> v3.18
@@ -170,12 +195,15 @@ struct ctlr_info {
 	struct CommandList 	*cmd_pool;
 	dma_addr_t		cmd_pool_dhandle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ErrorInfo 	*errinfo_pool;
 	dma_addr_t		errinfo_pool_dhandle;
 	unsigned long  		*cmd_pool_bits;
 	int			nr_allocs;
 	int			nr_frees;
 =======
+=======
+>>>>>>> v3.18
 	struct io_accel1_cmd	*ioaccel_cmd_pool;
 	dma_addr_t		ioaccel_cmd_pool_dhandle;
 	struct io_accel2_cmd	*ioaccel2_cmd_pool;
@@ -183,6 +211,9 @@ struct ctlr_info {
 	struct ErrorInfo 	*errinfo_pool;
 	dma_addr_t		errinfo_pool_dhandle;
 	unsigned long  		*cmd_pool_bits;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			scan_finished;
 	spinlock_t		scan_lock;
@@ -201,6 +232,7 @@ struct ctlr_info {
 	unsigned long transMethod;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Performant mode completion buffers
 	 */
@@ -212,6 +244,8 @@ struct ctlr_info {
 	u32 *blockFetchTable;
 	unsigned char *hba_inquiry_data;
 =======
+=======
+>>>>>>> v3.18
 	/* cap concurrent passthrus at some reasonable maximum */
 #define HPSA_MAX_CONCURRENT_PASSTHRUS (20)
 	spinlock_t passthru_count_lock; /* protects passthru_count */
@@ -232,6 +266,9 @@ struct ctlr_info {
 	u32 fw_support;
 	int ioaccel_support;
 	int ioaccel_maxsg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u64 last_intr_timestamp;
 	u32 last_heartbeat;
@@ -239,13 +276,19 @@ struct ctlr_info {
 	u32 heartbeat_sample_interval;
 	atomic_t firmware_flash_in_progress;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 lockup_detected;
 	struct list_head lockup_list;
 =======
+=======
+>>>>>>> v3.18
 	u32 *lockup_detected;
 	struct delayed_work monitor_ctlr_work;
 	int remove_in_progress;
 	u32 fifo_recently_full;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Address of h->q[x] is passed to intr handler to know which queue */
 	u8 q[MAX_REPLY_QUEUES];
@@ -271,8 +314,11 @@ struct ctlr_info {
 #define HPSATMF_LOG_QRY_TSET    (1 << 24)
 #define HPSATMF_LOG_QRY_ASYNC   (1 << 25)
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 	u32 events;
 #define CTLR_STATE_CHANGE_EVENT				(1 << 0)
 #define CTLR_ENCLOSURE_HOT_PLUG_EVENT			(1 << 1)
@@ -300,6 +346,9 @@ struct offline_device_entry {
 	struct list_head offline_list;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define HPSA_ABORT_MSG 0
 #define HPSA_DEVICE_RESET_MSG 1
@@ -382,7 +431,10 @@ struct offline_device_entry {
 #define HPSA_INTR_ON 	1
 #define HPSA_INTR_OFF	0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Inbound Post Queue offsets for IO Accelerator Mode 2
@@ -391,6 +443,9 @@ struct offline_device_entry {
 #define IOACCEL2_INBOUND_POSTQ_64_LOW	0xd0
 #define IOACCEL2_INBOUND_POSTQ_64_HI	0xd4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
 	Send the command to the hardware
@@ -399,8 +454,11 @@ static void SA5_submit_command(struct ctlr_info *h,
 	struct CommandList *c)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&h->pdev->dev, "Sending %x, tag = %x\n", c->busaddr,
 		c->Header.Tag.lower);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	writel(c->busaddr, h->vaddr + SA5_REQUEST_PORT_OFFSET);
@@ -408,7 +466,10 @@ static void SA5_submit_command(struct ctlr_info *h,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void SA5_submit_command_no_read(struct ctlr_info *h,
 	struct CommandList *c)
 {
@@ -424,6 +485,9 @@ static void SA5_submit_command_ioaccel2(struct ctlr_info *h,
 		writel(c->busaddr, h->vaddr + SA5_REQUEST_PORT_OFFSET);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *  This card is the opposite of the other cards.
@@ -461,7 +525,11 @@ static void SA5_performant_intr_mask(struct ctlr_info *h, unsigned long val)
 static unsigned long SA5_performant_completed(struct ctlr_info *h, u8 q)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct reply_pool *rq = &h->reply_queue[q];
+=======
+	struct reply_queue_buffer *rq = &h->reply_queue[q];
+>>>>>>> v3.18
 =======
 	struct reply_queue_buffer *rq = &h->reply_queue[q];
 >>>>>>> v3.18
@@ -544,7 +612,10 @@ static bool SA5_intr_pending(struct ctlr_info *h)
 	unsigned long register_value  =
 		readl(h->vaddr + SA5_INTR_STATUS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&h->pdev->dev, "intr_pending %lx\n", register_value);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return register_value & SA5_INTR_PENDING;
@@ -566,7 +637,10 @@ static bool SA5_performant_intr_pending(struct ctlr_info *h)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SA5_IOACCEL_MODE1_INTR_STATUS_CMP_BIT    0x100
 
 static bool SA5_ioaccel_mode1_intr_pending(struct ctlr_info *h)
@@ -611,6 +685,9 @@ static unsigned long SA5_ioaccel_mode1_completed(struct ctlr_info *h, u8 q)
 	return (unsigned long) register_value;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct access_method SA5_access = {
 	SA5_submit_command,
@@ -621,7 +698,10 @@ static struct access_method SA5_access = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct access_method SA5_ioaccel_mode1_access = {
 	SA5_submit_command,
 	SA5_performant_intr_mask,
@@ -638,6 +718,9 @@ static struct access_method SA5_ioaccel_mode2_access = {
 	SA5_performant_completed,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct access_method SA5_performant_access = {
 	SA5_submit_command,
@@ -648,7 +731,10 @@ static struct access_method SA5_performant_access = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct access_method SA5_performant_access_no_read = {
 	SA5_submit_command_no_read,
 	SA5_performant_intr_mask,
@@ -657,6 +743,9 @@ static struct access_method SA5_performant_access_no_read = {
 	SA5_performant_completed,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct board_type {
 	u32	board_id;

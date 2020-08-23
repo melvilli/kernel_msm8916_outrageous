@@ -790,8 +790,13 @@ static int text_size, text_asize;
 
 struct buffer {
 <<<<<<< HEAD
+<<<<<<< HEAD
         struct buffer *parent;
         YY_BUFFER_STATE state;
+=======
+	struct buffer *parent;
+	YY_BUFFER_STATE state;
+>>>>>>> v3.18
 =======
 	struct buffer *parent;
 	YY_BUFFER_STATE state;

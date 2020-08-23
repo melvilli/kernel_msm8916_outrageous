@@ -53,7 +53,11 @@ int ieee802154_nl_assoc_indic(struct net_device *dev,
  */
 int ieee802154_nl_assoc_confirm(struct net_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u16 short_addr, u8 status);
+=======
+		__le16 short_addr, u8 status);
+>>>>>>> v3.18
 =======
 		__le16 short_addr, u8 status);
 >>>>>>> v3.18
@@ -116,8 +120,13 @@ int ieee802154_nl_scan_confirm(struct net_device *dev,
  *       operating in long addressing mode.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ieee802154_nl_beacon_indic(struct net_device *dev, u16 panid,
 		u16 coord_addr);
+=======
+int ieee802154_nl_beacon_indic(struct net_device *dev, __le16 panid,
+		__le16 coord_addr);
+>>>>>>> v3.18
 =======
 int ieee802154_nl_beacon_indic(struct net_device *dev, __le16 panid,
 		__le16 coord_addr);

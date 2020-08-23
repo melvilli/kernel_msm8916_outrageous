@@ -36,7 +36,11 @@ ENTRY(__loop_const_udelay)			@ 0 <= r0 <= 0x7fffff06
 		add	r0, r0, r1, lsr #32-6
 		movs	r0, r0, lsr #6
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moveq	pc, lr
+=======
+		reteq	lr
+>>>>>>> v3.18
 =======
 		reteq	lr
 >>>>>>> v3.18
@@ -45,6 +49,10 @@ ENTRY(__loop_const_udelay)			@ 0 <= r0 <= 0x7fffff06
  * loops = r0 * HZ * loops_per_jiffy / 1000000
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.align 3
+>>>>>>> v3.18
 =======
 		.align 3
 >>>>>>> v3.18
@@ -53,6 +61,7 @@ ENTRY(__loop_const_udelay)			@ 0 <= r0 <= 0x7fffff06
 ENTRY(__loop_delay)
 		subs	r0, r0, #1
 #if 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 		movls	pc, lr
 		subs	r0, r0, #1
@@ -72,6 +81,8 @@ ENTRY(__loop_delay)
 		bhi	__loop_delay
 		mov	pc, lr
 =======
+=======
+>>>>>>> v3.18
 		retls	lr
 		subs	r0, r0, #1
 		retls	lr
@@ -89,6 +100,9 @@ ENTRY(__loop_delay)
 #endif
 		bhi	__loop_delay
 		ret	lr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENDPROC(__loop_udelay)
 ENDPROC(__loop_const_udelay)

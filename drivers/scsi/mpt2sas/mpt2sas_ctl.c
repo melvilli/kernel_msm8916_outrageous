@@ -4,7 +4,11 @@
  *
  * This code is based on drivers/scsi/mpt2sas/mpt2_ctl.c
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2007-2012  LSI Corporation
+=======
+ * Copyright (C) 2007-2014  LSI Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2007-2014  LSI Corporation
 >>>>>>> v3.18
@@ -402,10 +406,16 @@ mpt2sas_ctl_add_to_event_log(struct MPT2SAS_ADAPTER *ioc,
  * The tasks are worked from _firmware_event_work in user context.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Return 1 meaning mf should be freed from _base_interrupt
  *        0 means the mf is freed from this function.
  */
 u8
+=======
+ * Returns void.
+ */
+void
+>>>>>>> v3.18
 =======
  * Returns void.
  */
@@ -418,9 +428,12 @@ mpt2sas_ctl_event_callback(struct MPT2SAS_ADAPTER *ioc, u8 msix_index,
 
 	mpi_reply = mpt2sas_base_get_reply_virt_addr(ioc, reply);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mpt2sas_ctl_add_to_event_log(ioc, mpi_reply);
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(!mpi_reply)) {
 		printk(MPT2SAS_ERR_FMT "mpi_reply not valid at %s:%d/%s()!\n",
 		    ioc->name, __FILE__, __LINE__, __func__);
@@ -428,6 +441,9 @@ mpt2sas_ctl_event_callback(struct MPT2SAS_ADAPTER *ioc, u8 msix_index,
 	}
 	mpt2sas_ctl_add_to_event_log(ioc, mpi_reply);
 	return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1004,7 +1020,11 @@ _ctl_do_mpt_command(struct MPT2SAS_ADAPTER *ioc, struct mpt2_ioctl_command karg,
 			    le16_to_cpu(mpi_request->FunctionDependent1), 0, 0,
 			    0, MPI2_SCSITASKMGMT_TASKTYPE_TARGET_RESET, 0, 10,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    0, TM_MUTEX_ON);
+=======
+			    TM_MUTEX_ON);
+>>>>>>> v3.18
 =======
 			    TM_MUTEX_ON);
 >>>>>>> v3.18

@@ -464,7 +464,11 @@ int ipath_modify_qp(struct ib_qp *ibqp, struct ib_qp_attr *attr,
 
 	if (!ib_modify_qp_is_ok(cur_state, new_state, ibqp->qp_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				attr_mask))
+=======
+				attr_mask, IB_LINK_LAYER_UNSPECIFIED))
+>>>>>>> v3.18
 =======
 				attr_mask, IB_LINK_LAYER_UNSPECIFIED))
 >>>>>>> v3.18

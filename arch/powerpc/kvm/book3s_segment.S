@@ -91,7 +91,10 @@ kvmppc_handler_trampoline_enter:
 
 #ifdef CONFIG_PPC_BOOK3S_64
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 BEGIN_FTR_SECTION
 	/* Save host FSCR */
 	mfspr	r8, SPRN_FSCR
@@ -101,6 +104,9 @@ BEGIN_FTR_SECTION
 	mtspr	SPRN_FSCR, r9
 END_FTR_SECTION_IFSET(CPU_FTR_ARCH_207S)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Some guests may need to have dcbz set to 32 byte length.
 	 *
@@ -174,8 +180,13 @@ kvmppc_handler_trampoline_enter_end:
 kvmppc_handler_trampoline_exit:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .global kvmppc_interrupt
 kvmppc_interrupt:
+=======
+.global kvmppc_interrupt_pr
+kvmppc_interrupt_pr:
+>>>>>>> v3.18
 =======
 .global kvmppc_interrupt_pr
 kvmppc_interrupt_pr:
@@ -273,11 +284,17 @@ BEGIN_FTR_SECTION
 	beq-	ld_last_inst
 END_FTR_SECTION_IFSET(CPU_FTR_HVMODE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 BEGIN_FTR_SECTION
 	cmpwi	r12, BOOK3S_INTERRUPT_FAC_UNAVAIL
 	beq-	ld_last_inst
 END_FTR_SECTION_IFSET(CPU_FTR_ARCH_207S)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -336,7 +353,10 @@ no_ld_last_inst:
 no_dcbz32_off:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 BEGIN_FTR_SECTION
 	/* Save guest FSCR on a FAC_UNAVAIL interrupt */
 	cmpwi	r12, BOOK3S_INTERRUPT_FAC_UNAVAIL
@@ -349,6 +369,9 @@ no_fscr_save:
 	mtspr	SPRN_FSCR, r8
 END_FTR_SECTION_IFSET(CPU_FTR_ARCH_207S)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PPC_BOOK3S_64 */
 
@@ -401,6 +424,11 @@ END_FTR_SECTION_IFSET(CPU_FTR_HVMODE)
 	cmpwi	r12, BOOK3S_INTERRUPT_PERFMON
 	beqa	BOOK3S_INTERRUPT_PERFMON
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cmpwi	r12, BOOK3S_INTERRUPT_DOORBELL
+	beqa	BOOK3S_INTERRUPT_DOORBELL
+>>>>>>> v3.18
 =======
 	cmpwi	r12, BOOK3S_INTERRUPT_DOORBELL
 	beqa	BOOK3S_INTERRUPT_DOORBELL

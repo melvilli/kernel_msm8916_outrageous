@@ -1,7 +1,11 @@
 /*
  * parse_vdso.c: Linux reference vDSO parser
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Written by Andrew Lutomirski, 2011.
+=======
+ * Written by Andrew Lutomirski, 2011-2014.
+>>>>>>> v3.18
 =======
  * Written by Andrew Lutomirski, 2011-2014.
 >>>>>>> v3.18
@@ -16,7 +20,11 @@
  * linked binaries.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This code is tested on x86_64.  In principle it should work on any 64-bit
+=======
+ * This code is tested on x86.  In principle it should work on any
+>>>>>>> v3.18
 =======
  * This code is tested on x86.  In principle it should work on any
 >>>>>>> v3.18
@@ -27,6 +35,10 @@
 #include <stdint.h>
 #include <string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <limits.h>
+>>>>>>> v3.18
 =======
 #include <limits.h>
 >>>>>>> v3.18
@@ -58,12 +70,15 @@ extern void *vdso_sym(const char *version, const char *name);
 
 /* And here's the code. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifndef __x86_64__
 # error Not yet ported to non-x86_64 architectures
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #ifndef ELF_BITS
 # if ULONG_MAX > 0xffffffffUL
 #  define ELF_BITS 64
@@ -76,6 +91,9 @@ extern void *vdso_sym(const char *version, const char *name);
 #define ELF_BITS_XFORM(bits, x) ELF_BITS_XFORM2(bits, x)
 #define ELF(x) ELF_BITS_XFORM(ELF_BITS, x)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct vdso_info
 {
@@ -87,6 +105,7 @@ static struct vdso_info
 
 	/* Symbol table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Elf64_Sym *symtab;
 	const char *symstrings;
 	Elf64_Word *bucket, *chain;
@@ -96,6 +115,8 @@ static struct vdso_info
 	Elf64_Versym *versym;
 	Elf64_Verdef *verdef;
 =======
+=======
+>>>>>>> v3.18
 	ELF(Sym) *symtab;
 	const char *symstrings;
 	ELF(Word) *bucket, *chain;
@@ -104,6 +125,9 @@ static struct vdso_info
 	/* Version table */
 	ELF(Versym) *versym;
 	ELF(Verdef) *verdef;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } vdso_info;
 
@@ -131,10 +155,13 @@ void vdso_init_from_sysinfo_ehdr(uintptr_t base)
 	vdso_info.load_addr = base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Elf64_Ehdr *hdr = (Elf64_Ehdr*)base;
 	Elf64_Phdr *pt = (Elf64_Phdr*)(vdso_info.load_addr + hdr->e_phoff);
 	Elf64_Dyn *dyn = 0;
 =======
+=======
+>>>>>>> v3.18
 	ELF(Ehdr) *hdr = (ELF(Ehdr)*)base;
 	if (hdr->e_ident[EI_CLASS] !=
 	    (ELF_BITS == 32 ? ELFCLASS32 : ELFCLASS64)) {
@@ -143,6 +170,9 @@ void vdso_init_from_sysinfo_ehdr(uintptr_t base)
 
 	ELF(Phdr) *pt = (ELF(Phdr)*)(vdso_info.load_addr + hdr->e_phoff);
 	ELF(Dyn) *dyn = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -158,7 +188,11 @@ void vdso_init_from_sysinfo_ehdr(uintptr_t base)
 				- (uintptr_t)pt[i].p_vaddr;
 		} else if (pt[i].p_type == PT_DYNAMIC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dyn = (Elf64_Dyn*)(base + pt[i].p_offset);
+=======
+			dyn = (ELF(Dyn)*)(base + pt[i].p_offset);
+>>>>>>> v3.18
 =======
 			dyn = (ELF(Dyn)*)(base + pt[i].p_offset);
 >>>>>>> v3.18
@@ -172,7 +206,11 @@ void vdso_init_from_sysinfo_ehdr(uintptr_t base)
 	 * Fish out the useful bits of the dynamic table.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Elf64_Word *hash = 0;
+=======
+	ELF(Word) *hash = 0;
+>>>>>>> v3.18
 =======
 	ELF(Word) *hash = 0;
 >>>>>>> v3.18
@@ -189,7 +227,11 @@ void vdso_init_from_sysinfo_ehdr(uintptr_t base)
 			break;
 		case DT_SYMTAB:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vdso_info.symtab = (Elf64_Sym *)
+=======
+			vdso_info.symtab = (ELF(Sym) *)
+>>>>>>> v3.18
 =======
 			vdso_info.symtab = (ELF(Sym) *)
 >>>>>>> v3.18
@@ -198,7 +240,11 @@ void vdso_init_from_sysinfo_ehdr(uintptr_t base)
 			break;
 		case DT_HASH:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hash = (Elf64_Word *)
+=======
+			hash = (ELF(Word) *)
+>>>>>>> v3.18
 =======
 			hash = (ELF(Word) *)
 >>>>>>> v3.18
@@ -207,7 +253,11 @@ void vdso_init_from_sysinfo_ehdr(uintptr_t base)
 			break;
 		case DT_VERSYM:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vdso_info.versym = (Elf64_Versym *)
+=======
+			vdso_info.versym = (ELF(Versym) *)
+>>>>>>> v3.18
 =======
 			vdso_info.versym = (ELF(Versym) *)
 >>>>>>> v3.18
@@ -216,7 +266,11 @@ void vdso_init_from_sysinfo_ehdr(uintptr_t base)
 			break;
 		case DT_VERDEF:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vdso_info.verdef = (Elf64_Verdef *)
+=======
+			vdso_info.verdef = (ELF(Verdef) *)
+>>>>>>> v3.18
 =======
 			vdso_info.verdef = (ELF(Verdef) *)
 >>>>>>> v3.18
@@ -242,8 +296,13 @@ void vdso_init_from_sysinfo_ehdr(uintptr_t base)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool vdso_match_version(Elf64_Versym ver,
 			       const char *name, Elf64_Word hash)
+=======
+static bool vdso_match_version(ELF(Versym) ver,
+			       const char *name, ELF(Word) hash)
+>>>>>>> v3.18
 =======
 static bool vdso_match_version(ELF(Versym) ver,
 			       const char *name, ELF(Word) hash)
@@ -267,7 +326,11 @@ static bool vdso_match_version(ELF(Versym) ver,
 	/* First step: find the version definition */
 	ver &= 0x7fff;  /* Apparently bit 15 means "hidden" */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Elf64_Verdef *def = vdso_info.verdef;
+=======
+	ELF(Verdef) *def = vdso_info.verdef;
+>>>>>>> v3.18
 =======
 	ELF(Verdef) *def = vdso_info.verdef;
 >>>>>>> v3.18
@@ -280,17 +343,23 @@ static bool vdso_match_version(ELF(Versym) ver,
 			return false;  /* No definition. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		def = (Elf64_Verdef *)((char *)def + def->vd_next);
 	}
 
 	/* Now figure out whether it matches. */
 	Elf64_Verdaux *aux = (Elf64_Verdaux*)((char *)def + def->vd_aux);
 =======
+=======
+>>>>>>> v3.18
 		def = (ELF(Verdef) *)((char *)def + def->vd_next);
 	}
 
 	/* Now figure out whether it matches. */
 	ELF(Verdaux) *aux = (ELF(Verdaux)*)((char *)def + def->vd_aux);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return def->vd_hash == hash
 		&& !strcmp(name, vdso_info.symstrings + aux->vda_name);
@@ -304,15 +373,21 @@ void *vdso_sym(const char *version, const char *name)
 
 	ver_hash = elf_hash(version);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Elf64_Word chain = vdso_info.bucket[elf_hash(name) % vdso_info.nbucket];
 
 	for (; chain != STN_UNDEF; chain = vdso_info.chain[chain]) {
 		Elf64_Sym *sym = &vdso_info.symtab[chain];
 =======
+=======
+>>>>>>> v3.18
 	ELF(Word) chain = vdso_info.bucket[elf_hash(name) % vdso_info.nbucket];
 
 	for (; chain != STN_UNDEF; chain = vdso_info.chain[chain]) {
 		ELF(Sym) *sym = &vdso_info.symtab[chain];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Check for a defined global or weak function w/ right name. */
@@ -341,7 +416,11 @@ void *vdso_sym(const char *version, const char *name)
 void vdso_init_from_auxv(void *auxv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Elf64_auxv_t *elf_auxv = auxv;
+=======
+	ELF(auxv_t) *elf_auxv = auxv;
+>>>>>>> v3.18
 =======
 	ELF(auxv_t) *elf_auxv = auxv;
 >>>>>>> v3.18

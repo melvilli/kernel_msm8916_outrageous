@@ -43,6 +43,7 @@ static int ir_lirc_decode(struct rc_dev *dev, struct ir_raw_event ev)
 
 	/* Packet start */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ev.reset) {
 		/* Userspace expects a long space event before the start of
 		 * the signal to use as a sync.  This may be done with repeat
@@ -55,11 +56,16 @@ static int ir_lirc_decode(struct rc_dev *dev, struct ir_raw_event ev)
 	/* Carrier reports */
 	} else if (ev.carrier_report) {
 =======
+=======
+>>>>>>> v3.18
 	if (ev.reset)
 		return 0;
 
 	/* Carrier reports */
 	if (ev.carrier_report) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sample = LIRC_FREQUENCY(ev.carrier);
 		IR_dprintk(2, "carrier report (freq: %d)\n", sample);
@@ -155,7 +161,10 @@ static ssize_t ir_lirc_transmit_ir(struct file *file, const char __user *buf,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < count; i++) {
 		if (txbuf[i] > IR_MAX_DURATION / 1000 - duration || !txbuf[i]) {
 			ret = -EINVAL;
@@ -165,13 +174,20 @@ static ssize_t ir_lirc_transmit_ir(struct file *file, const char __user *buf,
 		duration += txbuf[i];
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = dev->tx_ir(dev, txbuf, count);
 	if (ret < 0)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < ret; i++)
+=======
+	for (duration = i = 0; i < ret; i++)
+>>>>>>> v3.18
 =======
 	for (duration = i = 0; i < ret; i++)
 >>>>>>> v3.18
@@ -406,6 +422,10 @@ static int ir_lirc_register(struct rc_dev *dev)
 	drv->fops = &lirc_fops;
 	drv->dev = &dev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	drv->rdev = dev;
+>>>>>>> v3.18
 =======
 	drv->rdev = dev;
 >>>>>>> v3.18

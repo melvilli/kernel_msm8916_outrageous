@@ -32,7 +32,10 @@
 #include "dt3155v4l.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DT3155_VENDOR_ID 0x8086
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DT3155_DEVICE_ID 0x1223
@@ -267,7 +270,11 @@ dt3155_buf_prepare(struct vb2_buffer *vb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -285,7 +292,10 @@ dt3155_stop_streaming(struct vb2_queue *q)
 	spin_unlock_irq(&pd->lock);
 	msleep(45); /* irq hendler will stop the hardware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -310,7 +320,11 @@ dt3155_buf_queue(struct vb2_buffer *vb)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct vb2_ops q_ops = {
+=======
+static const struct vb2_ops q_ops = {
+>>>>>>> v3.18
 =======
 static const struct vb2_ops q_ops = {
 >>>>>>> v3.18
@@ -406,7 +420,11 @@ dt3155_open(struct file *filp)
 		}
 		pd->q->type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pd->q->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+=======
+		pd->q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+>>>>>>> v3.18
 =======
 		pd->q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
 >>>>>>> v3.18
@@ -848,7 +866,10 @@ static struct video_device dt3155_vdev = {
 	.release = video_device_release,
 	.tvnorms = DT3155_CURRENT_NORM,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.current_norm = DT3155_CURRENT_NORM,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -924,10 +945,14 @@ dt3155_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	struct dt3155_priv *pd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = dma_set_mask(&pdev->dev, DMA_BIT_MASK(32));
 	if (err)
 		return -ENODEV;
 	err = dma_set_coherent_mask(&pdev->dev, DMA_BIT_MASK(32));
+=======
+	err = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
+>>>>>>> v3.18
 =======
 	err = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
 >>>>>>> v3.18
@@ -938,13 +963,19 @@ dt3155_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		return -ENOMEM;
 	pd->vdev = video_device_alloc();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pd->vdev)
 		goto err_video_device_alloc;
 =======
+=======
+>>>>>>> v3.18
 	if (!pd->vdev) {
 		err = -ENOMEM;
 		goto err_video_device_alloc;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*pd->vdev = dt3155_vdev;
 	pci_set_drvdata(pdev, pd);    /* for use in dt3155_remove() */
@@ -1011,8 +1042,13 @@ dt3155_remove(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pci_ids) = {
 	{ PCI_DEVICE(DT3155_VENDOR_ID, DT3155_DEVICE_ID) },
+=======
+static const struct pci_device_id pci_ids[] = {
+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, DT3155_DEVICE_ID) },
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pci_ids[] = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, DT3155_DEVICE_ID) },

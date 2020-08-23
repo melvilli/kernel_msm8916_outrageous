@@ -1,7 +1,11 @@
 /*
  * QLogic Fibre Channel HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2013 QLogic Corporation
+=======
+ * Copyright (c)  2003-2014 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2014 QLogic Corporation
 >>>>>>> v3.18
@@ -11,6 +15,10 @@
 #include "qla_def.h"
 #include "qla_target.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/utsname.h>
+>>>>>>> v3.18
 =======
 #include <linux/utsname.h>
 >>>>>>> v3.18
@@ -58,6 +66,11 @@ qla2x00_prep_ms_iocb(scsi_qla_host_t *vha, uint32_t req_size, uint32_t rsp_size)
 	ms_pkt->dseg_rsp_length = ms_pkt->rsp_bytecount;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vha->qla_stats.control_requests++;
+
+>>>>>>> v3.18
 =======
 	vha->qla_stats.control_requests++;
 
@@ -101,6 +114,11 @@ qla24xx_prep_ms_iocb(scsi_qla_host_t *vha, uint32_t req_size, uint32_t rsp_size)
 	ct_pkt->vp_index = vha->vp_idx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vha->qla_stats.control_requests++;
+
+>>>>>>> v3.18
 =======
 	vha->qla_stats.control_requests++;
 
@@ -118,6 +136,7 @@ qla24xx_prep_ms_iocb(scsi_qla_host_t *vha, uint32_t req_size, uint32_t rsp_size)
  */
 static inline struct ct_sns_req *
 <<<<<<< HEAD
+<<<<<<< HEAD
 qla2x00_prep_ct_req(struct ct_sns_req *ct_req, uint16_t cmd, uint16_t rsp_size)
 {
 	memset(ct_req, 0, sizeof(struct ct_sns_pkt));
@@ -130,6 +149,8 @@ qla2x00_prep_ct_req(struct ct_sns_req *ct_req, uint16_t cmd, uint16_t rsp_size)
 
 	return (ct_req);
 =======
+=======
+>>>>>>> v3.18
 qla2x00_prep_ct_req(struct ct_sns_pkt *p, uint16_t cmd, uint16_t rsp_size)
 {
 	memset(p, 0, sizeof(struct ct_sns_pkt));
@@ -141,6 +162,9 @@ qla2x00_prep_ct_req(struct ct_sns_pkt *p, uint16_t cmd, uint16_t rsp_size)
 	p->p.req.max_rsp_size = cpu_to_be16((rsp_size - 16) / 4);
 
 	return &p->p.req;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -172,15 +196,21 @@ qla2x00_chk_ms_status(scsi_qla_host_t *vha, ms_iocb_entry_t *ms_pkt,
 			    __constant_cpu_to_be16(CT_ACCEPT_RESPONSE)) {
 				ql_dbg(ql_dbg_disc + ql_dbg_buffer, vha, 0x2077,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    "%s failed rejected request on port_id: "
 				    "%02x%02x%02x.\n", routine,
 				    vha->d_id.b.domain, vha->d_id.b.area,
 				    vha->d_id.b.al_pa);
 =======
+=======
+>>>>>>> v3.18
 				    "%s failed rejected request on port_id: %02x%02x%02x Compeltion status 0x%x, response 0x%x\n",
 				    routine, vha->d_id.b.domain,
 				    vha->d_id.b.area, vha->d_id.b.al_pa,
 				    comp_status, ct_rsp->header.response);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ql_dump_buffer(ql_dbg_disc + ql_dbg_buffer, vha,
 				    0x2078, (uint8_t *)&ct_rsp->header,
@@ -228,7 +258,11 @@ qla2x00_ga_nxt(scsi_qla_host_t *vha, fc_port_t *fcport)
 
 	/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ct_req = qla2x00_prep_ct_req(&ha->ct_sns->p.req, GA_NXT_CMD,
+=======
+	ct_req = qla2x00_prep_ct_req(ha->ct_sns, GA_NXT_CMD,
+>>>>>>> v3.18
 =======
 	ct_req = qla2x00_prep_ct_req(ha->ct_sns, GA_NXT_CMD,
 >>>>>>> v3.18
@@ -270,6 +304,7 @@ qla2x00_ga_nxt(scsi_qla_host_t *vha, fc_port_t *fcport)
 
 		ql_dbg(ql_dbg_disc, vha, 0x2063,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    "GA_NXT entry - nn %02x%02x%02x%02x%02x%02x%02x%02x "
 		    "pn %02x%02x%02x%02x%02x%02x%02x%02x "
 		    "port_id=%02x%02x%02x.\n",
@@ -281,6 +316,11 @@ qla2x00_ga_nxt(scsi_qla_host_t *vha, fc_port_t *fcport)
 		    fcport->port_name[2], fcport->port_name[3],
 		    fcport->port_name[4], fcport->port_name[5],
 		    fcport->port_name[6], fcport->port_name[7],
+=======
+		    "GA_NXT entry - nn %8phN pn %8phN "
+		    "port_id=%02x%02x%02x.\n",
+		    fcport->node_name, fcport->port_name,
+>>>>>>> v3.18
 =======
 		    "GA_NXT entry - nn %8phN pn %8phN "
 		    "port_id=%02x%02x%02x.\n",
@@ -334,8 +374,12 @@ qla2x00_gid_pt(scsi_qla_host_t *vha, sw_info_t *list)
 
 	/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ct_req = qla2x00_prep_ct_req(&ha->ct_sns->p.req, GID_PT_CMD,
 	    gid_pt_rsp_size);
+=======
+	ct_req = qla2x00_prep_ct_req(ha->ct_sns, GID_PT_CMD, gid_pt_rsp_size);
+>>>>>>> v3.18
 =======
 	ct_req = qla2x00_prep_ct_req(ha->ct_sns, GID_PT_CMD, gid_pt_rsp_size);
 >>>>>>> v3.18
@@ -413,7 +457,11 @@ qla2x00_gpn_id(scsi_qla_host_t *vha, sw_info_t *list)
 
 		/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ct_req = qla2x00_prep_ct_req(&ha->ct_sns->p.req, GPN_ID_CMD,
+=======
+		ct_req = qla2x00_prep_ct_req(ha->ct_sns, GPN_ID_CMD,
+>>>>>>> v3.18
 =======
 		ct_req = qla2x00_prep_ct_req(ha->ct_sns, GPN_ID_CMD,
 >>>>>>> v3.18
@@ -479,7 +527,11 @@ qla2x00_gnn_id(scsi_qla_host_t *vha, sw_info_t *list)
 
 		/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ct_req = qla2x00_prep_ct_req(&ha->ct_sns->p.req, GNN_ID_CMD,
+=======
+		ct_req = qla2x00_prep_ct_req(ha->ct_sns, GNN_ID_CMD,
+>>>>>>> v3.18
 =======
 		ct_req = qla2x00_prep_ct_req(ha->ct_sns, GNN_ID_CMD,
 >>>>>>> v3.18
@@ -510,6 +562,7 @@ qla2x00_gnn_id(scsi_qla_host_t *vha, sw_info_t *list)
 
 			ql_dbg(ql_dbg_disc, vha, 0x2058,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    "GID_PT entry - nn %02x%02x%02x%02x%02x%02x%02X%02x "
 			    "pn %02x%02x%02x%02x%02x%02x%02X%02x "
 			    "portid=%02x%02x%02x.\n",
@@ -521,6 +574,11 @@ qla2x00_gnn_id(scsi_qla_host_t *vha, sw_info_t *list)
 			    list[i].port_name[2], list[i].port_name[3],
 			    list[i].port_name[4], list[i].port_name[5],
 			    list[i].port_name[6], list[i].port_name[7],
+=======
+			    "GID_PT entry - nn %8phN pn %8phN "
+			    "portid=%02x%02x%02x.\n",
+			    list[i].node_name, list[i].port_name,
+>>>>>>> v3.18
 =======
 			    "GID_PT entry - nn %8phN pn %8phN "
 			    "portid=%02x%02x%02x.\n",
@@ -563,7 +621,11 @@ qla2x00_rft_id(scsi_qla_host_t *vha)
 
 	/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ct_req = qla2x00_prep_ct_req(&ha->ct_sns->p.req, RFT_ID_CMD,
+=======
+	ct_req = qla2x00_prep_ct_req(ha->ct_sns, RFT_ID_CMD,
+>>>>>>> v3.18
 =======
 	ct_req = qla2x00_prep_ct_req(ha->ct_sns, RFT_ID_CMD,
 >>>>>>> v3.18
@@ -623,7 +685,11 @@ qla2x00_rff_id(scsi_qla_host_t *vha)
 
 	/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ct_req = qla2x00_prep_ct_req(&ha->ct_sns->p.req, RFF_ID_CMD,
+=======
+	ct_req = qla2x00_prep_ct_req(ha->ct_sns, RFF_ID_CMD,
+>>>>>>> v3.18
 =======
 	ct_req = qla2x00_prep_ct_req(ha->ct_sns, RFF_ID_CMD,
 >>>>>>> v3.18
@@ -682,8 +748,12 @@ qla2x00_rnn_id(scsi_qla_host_t *vha)
 
 	/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ct_req = qla2x00_prep_ct_req(&ha->ct_sns->p.req, RNN_ID_CMD,
 	    RNN_ID_RSP_SIZE);
+=======
+	ct_req = qla2x00_prep_ct_req(ha->ct_sns, RNN_ID_CMD, RNN_ID_RSP_SIZE);
+>>>>>>> v3.18
 =======
 	ct_req = qla2x00_prep_ct_req(ha->ct_sns, RNN_ID_CMD, RNN_ID_RSP_SIZE);
 >>>>>>> v3.18
@@ -716,7 +786,11 @@ qla2x00_rnn_id(scsi_qla_host_t *vha)
 
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 qla2x00_get_sym_node_name(scsi_qla_host_t *vha, uint8_t *snn)
+=======
+qla2x00_get_sym_node_name(scsi_qla_host_t *vha, uint8_t *snn, size_t size)
+>>>>>>> v3.18
 =======
 qla2x00_get_sym_node_name(scsi_qla_host_t *vha, uint8_t *snn, size_t size)
 >>>>>>> v3.18
@@ -725,16 +799,22 @@ qla2x00_get_sym_node_name(scsi_qla_host_t *vha, uint8_t *snn, size_t size)
 
 	if (IS_QLAFX00(ha))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sprintf(snn, "%s FW:v%s DVR:v%s", ha->model_number,
 		    ha->mr.fw_version, qla2x00_version_str);
 	else
 		sprintf(snn, "%s FW:v%d.%02d.%02d DVR:v%s", ha->model_number,
 =======
+=======
+>>>>>>> v3.18
 		snprintf(snn, size, "%s FW:v%s DVR:v%s", ha->model_number,
 		    ha->mr.fw_version, qla2x00_version_str);
 	else
 		snprintf(snn, size,
 		    "%s FW:v%d.%02d.%02d DVR:v%s", ha->model_number,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    ha->fw_major_version, ha->fw_minor_version,
 		    ha->fw_subminor_version, qla2x00_version_str);
@@ -768,7 +848,11 @@ qla2x00_rsnn_nn(scsi_qla_host_t *vha)
 
 	/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ct_req = qla2x00_prep_ct_req(&ha->ct_sns->p.req, RSNN_NN_CMD,
+=======
+	ct_req = qla2x00_prep_ct_req(ha->ct_sns, RSNN_NN_CMD,
+>>>>>>> v3.18
 =======
 	ct_req = qla2x00_prep_ct_req(ha->ct_sns, RSNN_NN_CMD,
 >>>>>>> v3.18
@@ -780,7 +864,12 @@ qla2x00_rsnn_nn(scsi_qla_host_t *vha)
 
 	/* Prepare the Symbolic Node Name */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qla2x00_get_sym_node_name(vha, ct_req->req.rsnn_nn.sym_node_name);
+=======
+	qla2x00_get_sym_node_name(vha, ct_req->req.rsnn_nn.sym_node_name,
+	    sizeof(ct_req->req.rsnn_nn.sym_node_name));
+>>>>>>> v3.18
 =======
 	qla2x00_get_sym_node_name(vha, ct_req->req.rsnn_nn.sym_node_name,
 	    sizeof(ct_req->req.rsnn_nn.sym_node_name));
@@ -842,6 +931,11 @@ qla2x00_prep_sns_cmd(scsi_qla_host_t *vha, uint16_t cmd, uint16_t scmd_len,
 	sns_cmd->p.cmd.size = cpu_to_le16(wc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vha->qla_stats.control_requests++;
+
+>>>>>>> v3.18
 =======
 	vha->qla_stats.control_requests++;
 
@@ -904,6 +998,7 @@ qla2x00_sns_ga_nxt(scsi_qla_host_t *vha, fc_port_t *fcport)
 
 		ql_dbg(ql_dbg_disc, vha, 0x2061,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    "GA_NXT entry - nn %02x%02x%02x%02x%02x%02x%02x%02x "
 		    "pn %02x%02x%02x%02x%02x%02x%02x%02x "
 		    "port_id=%02x%02x%02x.\n",
@@ -915,6 +1010,11 @@ qla2x00_sns_ga_nxt(scsi_qla_host_t *vha, fc_port_t *fcport)
 		    fcport->port_name[2], fcport->port_name[3],
 		    fcport->port_name[4], fcport->port_name[5],
 		    fcport->port_name[6], fcport->port_name[7],
+=======
+		    "GA_NXT entry - nn %8phN pn %8phN "
+		    "port_id=%02x%02x%02x.\n",
+		    fcport->node_name, fcport->port_name,
+>>>>>>> v3.18
 =======
 		    "GA_NXT entry - nn %8phN pn %8phN "
 		    "port_id=%02x%02x%02x.\n",
@@ -1105,6 +1205,7 @@ qla2x00_sns_gnn_id(scsi_qla_host_t *vha, sw_info_t *list)
 
 			ql_dbg(ql_dbg_disc, vha, 0x206e,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    "GID_PT entry - nn %02x%02x%02x%02x%02x%02x%02x%02x "
 			    "pn %02x%02x%02x%02x%02x%02x%02x%02x "
 			    "port_id=%02x%02x%02x.\n",
@@ -1116,6 +1217,11 @@ qla2x00_sns_gnn_id(scsi_qla_host_t *vha, sw_info_t *list)
 			    list[i].port_name[2], list[i].port_name[3],
 			    list[i].port_name[4], list[i].port_name[5],
 			    list[i].port_name[6], list[i].port_name[7],
+=======
+			    "GID_PT entry - nn %8phN pn %8phN "
+			    "port_id=%02x%02x%02x.\n",
+			    list[i].node_name, list[i].port_name,
+>>>>>>> v3.18
 =======
 			    "GID_PT entry - nn %8phN pn %8phN "
 			    "port_id=%02x%02x%02x.\n",
@@ -1380,6 +1486,7 @@ qla2x00_update_ms_fdmi_iocb(scsi_qla_host_t *vha, uint32_t req_size)
  */
 static inline struct ct_sns_req *
 <<<<<<< HEAD
+<<<<<<< HEAD
 qla2x00_prep_ct_fdmi_req(struct ct_sns_req *ct_req, uint16_t cmd,
     uint16_t rsp_size)
 {
@@ -1393,6 +1500,8 @@ qla2x00_prep_ct_fdmi_req(struct ct_sns_req *ct_req, uint16_t cmd,
 
 	return ct_req;
 =======
+=======
+>>>>>>> v3.18
 qla2x00_prep_ct_fdmi_req(struct ct_sns_pkt *p, uint16_t cmd,
     uint16_t rsp_size)
 {
@@ -1405,6 +1514,9 @@ qla2x00_prep_ct_fdmi_req(struct ct_sns_pkt *p, uint16_t cmd,
 	p->p.req.max_rsp_size = cpu_to_be16((rsp_size - 16) / 4);
 
 	return &p->p.req;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1424,7 +1536,11 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 	struct ct_sns_req *ct_req;
 	struct ct_sns_rsp *ct_rsp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t *entries;
+=======
+	void *entries;
+>>>>>>> v3.18
 =======
 	void *entries;
 >>>>>>> v3.18
@@ -1438,8 +1554,12 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 
 	/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ct_req = qla2x00_prep_ct_fdmi_req(&ha->ct_sns->p.req, RHBA_CMD,
 	    RHBA_RSP_SIZE);
+=======
+	ct_req = qla2x00_prep_ct_fdmi_req(ha->ct_sns, RHBA_CMD, RHBA_RSP_SIZE);
+>>>>>>> v3.18
 =======
 	ct_req = qla2x00_prep_ct_fdmi_req(ha->ct_sns, RHBA_CMD, RHBA_RSP_SIZE);
 >>>>>>> v3.18
@@ -1458,7 +1578,11 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 
 	/* Nodename. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eiter = (struct ct_fdmi_hba_attr *) (entries + size);
+=======
+	eiter = entries + size;
+>>>>>>> v3.18
 =======
 	eiter = entries + size;
 >>>>>>> v3.18
@@ -1468,6 +1592,7 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 	size += 4 + WWN_SIZE;
 
 	ql_dbg(ql_dbg_disc, vha, 0x2025,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    "NodeName = %02x%02x%02x%02x%02x%02x%02x%02x.\n",
 	    eiter->a.node_name[0], eiter->a.node_name[1],
@@ -1482,6 +1607,8 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 	strncpy(eiter->a.manufacturer, QLA2XXX_MANUFACTURER, alen + 1);
 	alen += (alen & 3) ? (4 - (alen & 3)) : 4;
 =======
+=======
+>>>>>>> v3.18
 	    "NodeName = %8phN.\n", eiter->a.node_name);
 
 	/* Manufacturer. */
@@ -1491,6 +1618,9 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 	snprintf(eiter->a.manufacturer, sizeof(eiter->a.manufacturer),
 	    "%s", "QLogic Corporation");
 	alen += 4 - (alen & 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	eiter->len = cpu_to_be16(4 + alen);
 	size += 4 + alen;
@@ -1500,6 +1630,7 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 
 	/* Serial number. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eiter = (struct ct_fdmi_hba_attr *) (entries + size);
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_SERIAL_NUMBER);
 	sn = ((ha->serial0 & 0x1f) << 16) | (ha->serial2 << 8) | ha->serial1;
@@ -1507,6 +1638,8 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 	alen = strlen(eiter->a.serial_num);
 	alen += (alen & 3) ? (4 - (alen & 3)) : 4;
 =======
+=======
+>>>>>>> v3.18
 	eiter = entries + size;
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_SERIAL_NUMBER);
 	if (IS_FWI2_CAPABLE(ha))
@@ -1520,6 +1653,9 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 	}
 	alen = strlen(eiter->a.serial_num);
 	alen += 4 - (alen & 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	eiter->len = cpu_to_be16(4 + alen);
 	size += 4 + alen;
@@ -1529,18 +1665,24 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 
 	/* Model name. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eiter = (struct ct_fdmi_hba_attr *) (entries + size);
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_MODEL);
 	strcpy(eiter->a.model, ha->model_number);
 	alen = strlen(eiter->a.model);
 	alen += (alen & 3) ? (4 - (alen & 3)) : 4;
 =======
+=======
+>>>>>>> v3.18
 	eiter = entries + size;
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_MODEL);
 	snprintf(eiter->a.model, sizeof(eiter->a.model),
 	    "%s", ha->model_number);
 	alen = strlen(eiter->a.model);
 	alen += 4 - (alen & 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	eiter->len = cpu_to_be16(4 + alen);
 	size += 4 + alen;
@@ -1550,6 +1692,7 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 
 	/* Model description. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eiter = (struct ct_fdmi_hba_attr *) (entries + size);
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_MODEL_DESCRIPTION);
 	if (ha->model_desc)
@@ -1557,12 +1700,17 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 	alen = strlen(eiter->a.model_desc);
 	alen += (alen & 3) ? (4 - (alen & 3)) : 4;
 =======
+=======
+>>>>>>> v3.18
 	eiter = entries + size;
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_MODEL_DESCRIPTION);
 	snprintf(eiter->a.model_desc, sizeof(eiter->a.model_desc),
 	    "%s", ha->model_desc);
 	alen = strlen(eiter->a.model_desc);
 	alen += 4 - (alen & 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	eiter->len = cpu_to_be16(4 + alen);
 	size += 4 + alen;
@@ -1572,12 +1720,15 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 
 	/* Hardware version. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eiter = (struct ct_fdmi_hba_attr *) (entries + size);
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_HARDWARE_VERSION);
 	strcpy(eiter->a.hw_version, ha->adapter_id);
 	alen = strlen(eiter->a.hw_version);
 	alen += (alen & 3) ? (4 - (alen & 3)) : 4;
 =======
+=======
+>>>>>>> v3.18
 	eiter = entries + size;
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_HARDWARE_VERSION);
 	if (!IS_FWI2_CAPABLE(ha)) {
@@ -1595,6 +1746,9 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 	}
 	alen = strlen(eiter->a.hw_version);
 	alen += 4 - (alen & 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	eiter->len = cpu_to_be16(4 + alen);
 	size += 4 + alen;
@@ -1604,18 +1758,24 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 
 	/* Driver version. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eiter = (struct ct_fdmi_hba_attr *) (entries + size);
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_DRIVER_VERSION);
 	strcpy(eiter->a.driver_version, qla2x00_version_str);
 	alen = strlen(eiter->a.driver_version);
 	alen += (alen & 3) ? (4 - (alen & 3)) : 4;
 =======
+=======
+>>>>>>> v3.18
 	eiter = entries + size;
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_DRIVER_VERSION);
 	snprintf(eiter->a.driver_version, sizeof(eiter->a.driver_version),
 	    "%s", qla2x00_version_str);
 	alen = strlen(eiter->a.driver_version);
 	alen += 4 - (alen & 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	eiter->len = cpu_to_be16(4 + alen);
 	size += 4 + alen;
@@ -1625,18 +1785,24 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 
 	/* Option ROM version. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eiter = (struct ct_fdmi_hba_attr *) (entries + size);
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_OPTION_ROM_VERSION);
 	strcpy(eiter->a.orom_version, "0.00");
 	alen = strlen(eiter->a.orom_version);
 	alen += (alen & 3) ? (4 - (alen & 3)) : 4;
 =======
+=======
+>>>>>>> v3.18
 	eiter = entries + size;
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_OPTION_ROM_VERSION);
 	snprintf(eiter->a.orom_version, sizeof(eiter->a.orom_version),
 	    "%d.%02d", ha->bios_revision[1], ha->bios_revision[0]);
 	alen = strlen(eiter->a.orom_version);
 	alen += 4 - (alen & 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	eiter->len = cpu_to_be16(4 + alen);
 	size += 4 + alen;
@@ -1646,18 +1812,24 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 
 	/* Firmware version */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eiter = (struct ct_fdmi_hba_attr *) (entries + size);
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_FIRMWARE_VERSION);
 	ha->isp_ops->fw_version_str(vha, eiter->a.fw_version);
 	alen = strlen(eiter->a.fw_version);
 	alen += (alen & 3) ? (4 - (alen & 3)) : 4;
 =======
+=======
+>>>>>>> v3.18
 	eiter = entries + size;
 	eiter->type = __constant_cpu_to_be16(FDMI_HBA_FIRMWARE_VERSION);
 	ha->isp_ops->fw_version_str(vha, eiter->a.fw_version,
 	    sizeof(eiter->a.fw_version));
 	alen = strlen(eiter->a.fw_version);
 	alen += 4 - (alen & 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	eiter->len = cpu_to_be16(4 + alen);
 	size += 4 + alen;
@@ -1670,6 +1842,7 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 
 	ql_dbg(ql_dbg_disc, vha, 0x202e,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    "RHBA identifier = "
 	    "%02x%02x%02x%02x%02x%02x%02x%02x size=%d.\n",
 	    ct_req->req.rhba.hba_identifier[0],
@@ -1680,6 +1853,10 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 	    ct_req->req.rhba.hba_identifier[5],
 	    ct_req->req.rhba.hba_identifier[6],
 	    ct_req->req.rhba.hba_identifier[7], size);
+=======
+	    "RHBA identifier = %8phN size=%d.\n",
+	    ct_req->req.rhba.hba_identifier, size);
+>>>>>>> v3.18
 =======
 	    "RHBA identifier = %8phN size=%d.\n",
 	    ct_req->req.rhba.hba_identifier, size);
@@ -1704,12 +1881,18 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 			    "HBA already registered.\n");
 			rval = QLA_ALREADY_REGISTERED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		} else {
 			ql_dbg(ql_dbg_disc, vha, 0x20ad,
 			    "RHBA FDMI registration failed, CT Reason code: 0x%x, CT Explanation 0x%x\n",
 			    ct_rsp->header.reason_code,
 			    ct_rsp->header.explanation_code);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else {
@@ -1722,7 +1905,10 @@ qla2x00_fdmi_rhba(scsi_qla_host_t *vha)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * qla2x00_fdmi_rpa() -
  * @ha: HA context
  *
@@ -2251,6 +2437,9 @@ qla2x00_fdmiv2_rhba(scsi_qla_host_t *vha)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * qla2x00_fdmi_dhba() -
  * @ha: HA context
@@ -2273,8 +2462,12 @@ qla2x00_fdmi_dhba(scsi_qla_host_t *vha)
 
 	/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ct_req = qla2x00_prep_ct_fdmi_req(&ha->ct_sns->p.req, DHBA_CMD,
 	    DHBA_RSP_SIZE);
+=======
+	ct_req = qla2x00_prep_ct_fdmi_req(ha->ct_sns, DHBA_CMD, DHBA_RSP_SIZE);
+>>>>>>> v3.18
 =======
 	ct_req = qla2x00_prep_ct_fdmi_req(ha->ct_sns, DHBA_CMD, DHBA_RSP_SIZE);
 >>>>>>> v3.18
@@ -2285,11 +2478,15 @@ qla2x00_fdmi_dhba(scsi_qla_host_t *vha)
 
 	ql_dbg(ql_dbg_disc, vha, 0x2036,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    "DHBA portname = %02x%02x%02x%02x%02x%02x%02x%02x.\n",
 	    ct_req->req.dhba.port_name[0], ct_req->req.dhba.port_name[1],
 	    ct_req->req.dhba.port_name[2], ct_req->req.dhba.port_name[3],
 	    ct_req->req.dhba.port_name[4], ct_req->req.dhba.port_name[5],
 	    ct_req->req.dhba.port_name[6], ct_req->req.dhba.port_name[7]);
+=======
+	    "DHBA portname = %8phN.\n", ct_req->req.dhba.port_name);
+>>>>>>> v3.18
 =======
 	    "DHBA portname = %8phN.\n", ct_req->req.dhba.port_name);
 >>>>>>> v3.18
@@ -2314,7 +2511,11 @@ qla2x00_fdmi_dhba(scsi_qla_host_t *vha)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * qla2x00_fdmi_rpa() -
+=======
+ * qla2x00_fdmiv2_rpa() -
+>>>>>>> v3.18
 =======
  * qla2x00_fdmiv2_rpa() -
 >>>>>>> v3.18
@@ -2324,29 +2525,41 @@ qla2x00_fdmi_dhba(scsi_qla_host_t *vha)
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 qla2x00_fdmi_rpa(scsi_qla_host_t *vha)
 {
 	int rval, alen;
 	uint32_t size, max_frame_size;
 =======
+=======
+>>>>>>> v3.18
 qla2x00_fdmiv2_rpa(scsi_qla_host_t *vha)
 {
 	int rval, alen;
 	uint32_t size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct qla_hw_data *ha = vha->hw;
 	ms_iocb_entry_t *ms_pkt;
 	struct ct_sns_req *ct_req;
 	struct ct_sns_rsp *ct_rsp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t *entries;
 	struct ct_fdmi_port_attr *eiter;
 	struct init_cb_24xx *icb24 = (struct init_cb_24xx *)ha->init_cb;
 =======
+=======
+>>>>>>> v3.18
 	void *entries;
 	struct ct_fdmiv2_port_attr *eiter;
 	struct init_cb_24xx *icb24 = (struct init_cb_24xx *)ha->init_cb;
 	struct new_utsname *p_sysid = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Issue RPA */
@@ -2355,6 +2568,7 @@ qla2x00_fdmiv2_rpa(scsi_qla_host_t *vha)
 	ms_pkt = ha->isp_ops->prep_ms_fdmi_iocb(vha, 0, RPA_RSP_SIZE);
 
 	/* Prepare CT request */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ct_req = qla2x00_prep_ct_fdmi_req(&ha->ct_sns->p.req, RPA_CMD,
 	    RPA_RSP_SIZE);
@@ -2378,6 +2592,8 @@ qla2x00_fdmiv2_rpa(scsi_qla_host_t *vha)
 
 	ql_dbg(ql_dbg_disc, vha, 0x2039,
 =======
+=======
+>>>>>>> v3.18
 	ct_req = qla2x00_prep_ct_fdmi_req(ha->ct_sns, RPA_CMD, RPA_RSP_SIZE);
 	ct_rsp = &ha->ct_sns->p.rsp;
 
@@ -2397,12 +2613,16 @@ qla2x00_fdmiv2_rpa(scsi_qla_host_t *vha)
 	size += 4 + 32;
 
 	ql_dbg(ql_dbg_disc, vha, 0x20ba,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    "FC4_TYPES=%02x %02x.\n",
 	    eiter->a.fc4_types[2],
 	    eiter->a.fc4_types[1]);
 
 	/* Supported speed. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	eiter = (struct ct_fdmi_port_attr *) (entries + size);
 	eiter->type = __constant_cpu_to_be16(FDMI_PORT_SUPPORT_SPEED);
@@ -2462,6 +2682,8 @@ qla2x00_fdmiv2_rpa(scsi_qla_host_t *vha)
 		eiter->a.cur_speed =
 		    __constant_cpu_to_be32(FDMI_PORT_SPEED_UNKNOWN);
 =======
+=======
+>>>>>>> v3.18
 	eiter = entries + size;
 	eiter->type = cpu_to_be16(FDMI_PORT_SUPPORT_SPEED);
 	eiter->len = cpu_to_be16(4 + 4);
@@ -2529,11 +2751,15 @@ qla2x00_fdmiv2_rpa(scsi_qla_host_t *vha)
 		break;
 	default:
 		eiter->a.cur_speed = cpu_to_be32(FDMI_PORT_SPEED_UNKNOWN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
 	size += 4 + 4;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ql_dbg(ql_dbg_disc, vha, 0x203b,
 	    "Current_Speed=%x.\n", eiter->a.cur_speed);
@@ -2580,6 +2806,8 @@ qla2x00_fdmiv2_rpa(scsi_qla_host_t *vha)
 		    "HostName=%s.\n", eiter->a.host_name);
 	}
 =======
+=======
+>>>>>>> v3.18
 	ql_dbg(ql_dbg_disc, vha, 0x20bc,
 	    "Current_Speed = %x.\n", eiter->a.cur_speed);
 
@@ -2734,12 +2962,16 @@ qla2x00_fdmiv2_rpa(scsi_qla_host_t *vha)
 
 	ql_dbg(ql_dbg_disc, vha, 0x20c8,
 	    "Port Id = %x.\n", eiter->a.port_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Update MS request size. */
 	qla2x00_update_ms_fdmi_iocb(vha, size + 16);
 
 	ql_dbg(ql_dbg_disc, vha, 0x203e,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    "RPA portname= %02x%02x%02x%02x%02X%02x%02x%02x size=%d.\n",
 	    ct_req->req.rpa.port_name[0], ct_req->req.rpa.port_name[1],
@@ -2752,6 +2984,10 @@ qla2x00_fdmiv2_rpa(scsi_qla_host_t *vha)
 	    "RPA portname= %8phN size=%d.\n", ct_req->req.rpa.port_name, size);
 	ql_dump_buffer(ql_dbg_disc + ql_dbg_buffer, vha, 0x20ca,
 >>>>>>> v3.18
+=======
+	    "RPA portname= %8phN size=%d.\n", ct_req->req.rpa.port_name, size);
+	ql_dump_buffer(ql_dbg_disc + ql_dbg_buffer, vha, 0x20ca,
+>>>>>>> v3.18
 	    entries, size);
 
 	/* Execute MS IOCB */
@@ -2759,6 +2995,7 @@ qla2x00_fdmiv2_rpa(scsi_qla_host_t *vha)
 	    sizeof(ms_iocb_entry_t));
 	if (rval != QLA_SUCCESS) {
 		/*EMPTY*/
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ql_dbg(ql_dbg_disc, vha, 0x2040,
 		    "RPA issue IOCB failed (%d).\n", rval);
@@ -2769,6 +3006,8 @@ qla2x00_fdmiv2_rpa(scsi_qla_host_t *vha)
 		ql_dbg(ql_dbg_disc, vha, 0x2041,
 		    "RPA exiting nornally.\n");
 =======
+=======
+>>>>>>> v3.18
 		ql_dbg(ql_dbg_disc, vha, 0x20cb,
 		    "RPA FDMI v2 issue IOCB failed (%d).\n", rval);
 	} else if (qla2x00_chk_ms_status(vha, ms_pkt, ct_rsp, "RPA") !=
@@ -2789,6 +3028,9 @@ qla2x00_fdmiv2_rpa(scsi_qla_host_t *vha)
 	} else {
 		ql_dbg(ql_dbg_disc, vha, 0x20cc,
 		    "RPA FDMI V2 exiting normally.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2805,8 +3047,13 @@ int
 qla2x00_fdmi_register(scsi_qla_host_t *vha)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rval;
        struct qla_hw_data *ha = vha->hw;
+=======
+	int rval = QLA_FUNCTION_FAILED;
+	struct qla_hw_data *ha = vha->hw;
+>>>>>>> v3.18
 =======
 	int rval = QLA_FUNCTION_FAILED;
 	struct qla_hw_data *ha = vha->hw;
@@ -2821,7 +3068,10 @@ qla2x00_fdmi_register(scsi_qla_host_t *vha)
 		return rval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	rval = qla2x00_fdmiv2_rhba(vha);
 	if (rval) {
 		if (rval != QLA_ALREADY_REGISTERED)
@@ -2842,6 +3092,9 @@ qla2x00_fdmi_register(scsi_qla_host_t *vha)
 	goto out;
 
 try_fdmi:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rval = qla2x00_fdmi_rhba(vha);
 	if (rval) {
@@ -2858,7 +3111,11 @@ try_fdmi:
 	}
 	rval = qla2x00_fdmi_rpa(vha);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+out:
+>>>>>>> v3.18
 =======
 out:
 >>>>>>> v3.18
@@ -2893,7 +3150,11 @@ qla2x00_gfpn_id(scsi_qla_host_t *vha, sw_info_t *list)
 
 		/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ct_req = qla2x00_prep_ct_req(&ha->ct_sns->p.req, GFPN_ID_CMD,
+=======
+		ct_req = qla2x00_prep_ct_req(ha->ct_sns, GFPN_ID_CMD,
+>>>>>>> v3.18
 =======
 		ct_req = qla2x00_prep_ct_req(ha->ct_sns, GFPN_ID_CMD,
 >>>>>>> v3.18
@@ -2964,6 +3225,7 @@ qla24xx_prep_ms_fm_iocb(scsi_qla_host_t *vha, uint32_t req_size,
 
 static inline struct ct_sns_req *
 <<<<<<< HEAD
+<<<<<<< HEAD
 qla24xx_prep_ct_fm_req(struct ct_sns_req *ct_req, uint16_t cmd,
     uint16_t rsp_size)
 {
@@ -2977,6 +3239,8 @@ qla24xx_prep_ct_fm_req(struct ct_sns_req *ct_req, uint16_t cmd,
 
 	return ct_req;
 =======
+=======
+>>>>>>> v3.18
 qla24xx_prep_ct_fm_req(struct ct_sns_pkt *p, uint16_t cmd,
     uint16_t rsp_size)
 {
@@ -2989,6 +3253,9 @@ qla24xx_prep_ct_fm_req(struct ct_sns_pkt *p, uint16_t cmd,
 	p->p.req.max_rsp_size = cpu_to_be16((rsp_size - 16) / 4);
 
 	return &p->p.req;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3026,8 +3293,13 @@ qla2x00_gpsc(scsi_qla_host_t *vha, sw_info_t *list)
 
 		/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ct_req = qla24xx_prep_ct_fm_req(&ha->ct_sns->p.req,
 		    GPSC_CMD, GPSC_RSP_SIZE);
+=======
+		ct_req = qla24xx_prep_ct_fm_req(ha->ct_sns, GPSC_CMD,
+		    GPSC_RSP_SIZE);
+>>>>>>> v3.18
 =======
 		ct_req = qla24xx_prep_ct_fm_req(ha->ct_sns, GPSC_CMD,
 		    GPSC_RSP_SIZE);
@@ -3083,6 +3355,12 @@ qla2x00_gpsc(scsi_qla_host_t *vha, sw_info_t *list)
 				list[i].fp_speed = PORT_SPEED_16GB;
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			case BIT_8:
+				list[i].fp_speed = PORT_SPEED_32GB;
+				break;
+>>>>>>> v3.18
 =======
 			case BIT_8:
 				list[i].fp_speed = PORT_SPEED_32GB;
@@ -3092,6 +3370,7 @@ qla2x00_gpsc(scsi_qla_host_t *vha, sw_info_t *list)
 
 			ql_dbg(ql_dbg_disc, vha, 0x205b,
 			    "GPSC ext entry - fpn "
+<<<<<<< HEAD
 <<<<<<< HEAD
 			    "%02x%02x%02x%02x%02x%02x%02x%02x speeds=%04x "
 			    "speed=%04x.\n",
@@ -3103,6 +3382,10 @@ qla2x00_gpsc(scsi_qla_host_t *vha, sw_info_t *list)
 			    list[i].fabric_port_name[5],
 			    list[i].fabric_port_name[6],
 			    list[i].fabric_port_name[7],
+=======
+			    "%8phN speeds=%04x speed=%04x.\n",
+			    list[i].fabric_port_name,
+>>>>>>> v3.18
 =======
 			    "%8phN speeds=%04x speed=%04x.\n",
 			    list[i].fabric_port_name,
@@ -3153,7 +3436,11 @@ qla2x00_gff_id(scsi_qla_host_t *vha, sw_info_t *list)
 
 		/* Prepare CT request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ct_req = qla2x00_prep_ct_req(&ha->ct_sns->p.req, GFF_ID_CMD,
+=======
+		ct_req = qla2x00_prep_ct_req(ha->ct_sns, GFF_ID_CMD,
+>>>>>>> v3.18
 =======
 		ct_req = qla2x00_prep_ct_req(ha->ct_sns, GFF_ID_CMD,
 >>>>>>> v3.18

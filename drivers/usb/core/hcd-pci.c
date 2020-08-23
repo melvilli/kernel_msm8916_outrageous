@@ -75,6 +75,7 @@ static void for_each_companion(struct pci_dev *pdev, struct usb_hcd *hcd,
 				PCI_SLOT(companion->devfn) != slot)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/*
 		 * Companion device should be either UHCI,OHCI or EHCI host
@@ -84,6 +85,8 @@ static void for_each_companion(struct pci_dev *pdev, struct usb_hcd *hcd,
 				companion->class != CL_EHCI)
 			continue;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		companion_hcd = pci_get_drvdata(companion);
@@ -184,6 +187,11 @@ static void ehci_wait_for_companions(struct pci_dev *pdev, struct usb_hcd *hcd,
  *
  * Store this function in the HCD's struct pci_driver as probe().
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return: 0 if successful.
+>>>>>>> v3.18
 =======
  *
  * Return: 0 if successful.
@@ -208,7 +216,10 @@ int usb_hcd_pci_probe(struct pci_dev *dev, const struct pci_device_id *id)
 	if (pci_enable_device(dev) < 0)
 		return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->current_state = PCI_D0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -234,6 +245,12 @@ int usb_hcd_pci_probe(struct pci_dev *dev, const struct pci_device_id *id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	hcd->amd_resume_bug = (usb_hcd_amd_remote_wakeup_quirk(dev) &&
+			driver->flags & (HCD_USB11 | HCD_USB3)) ? 1 : 0;
+
+>>>>>>> v3.18
 =======
 	hcd->amd_resume_bug = (usb_hcd_amd_remote_wakeup_quirk(dev) &&
 			driver->flags & (HCD_USB11 | HCD_USB3)) ? 1 : 0;
@@ -304,6 +321,10 @@ int usb_hcd_pci_probe(struct pci_dev *dev, const struct pci_device_id *id)
 	if (retval != 0)
 		goto unmap_registers;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -406,6 +427,11 @@ void usb_hcd_pci_shutdown(struct pci_dev *dev)
 			hcd->driver->shutdown) {
 		hcd->driver->shutdown(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (usb_hcd_is_primary_hcd(hcd) && hcd->irq > 0)
+			free_irq(hcd->irq, hcd);
+>>>>>>> v3.18
 =======
 		if (usb_hcd_is_primary_hcd(hcd) && hcd->irq > 0)
 			free_irq(hcd->irq, hcd);

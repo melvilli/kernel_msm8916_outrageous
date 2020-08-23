@@ -23,7 +23,10 @@
  */
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/acpi_io.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "psb_drv.h"
@@ -178,11 +181,14 @@ static u32 asle_set_backlight(struct drm_device *dev, u32 bclp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void psb_intel_opregion_asle_intr(struct drm_device *dev)
 {
 	struct drm_psb_private *dev_priv = dev->dev_private;
 	struct opregion_asle *asle = dev_priv->opregion.asle;
 =======
+=======
+>>>>>>> v3.18
 static void psb_intel_opregion_asle_work(struct work_struct *work)
 {
 	struct psb_intel_opregion *opregion =
@@ -190,6 +196,9 @@ static void psb_intel_opregion_asle_work(struct work_struct *work)
 	struct drm_psb_private *dev_priv =
 		container_of(opregion, struct drm_psb_private, opregion);
 	struct opregion_asle *asle = opregion->asle;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 asle_stat = 0;
 	u32 asle_req;
@@ -205,10 +214,13 @@ static void psb_intel_opregion_asle_work(struct work_struct *work)
 
 	if (asle_req & ASLE_SET_BACKLIGHT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		asle_stat |= asle_set_backlight(dev, asle->bclp);
 
 	asle->aslc = asle_stat;
 =======
+=======
+>>>>>>> v3.18
 		asle_stat |= asle_set_backlight(dev_priv->dev, asle->bclp);
 
 	asle->aslc = asle_stat;
@@ -221,6 +233,9 @@ void psb_intel_opregion_asle_intr(struct drm_device *dev)
 
 	if (dev_priv->opregion.asle)
 		schedule_work(&dev_priv->opregion.asle_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -312,6 +327,11 @@ void psb_intel_opregion_fini(struct drm_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cancel_work_sync(&opregion->asle_work);
+
+>>>>>>> v3.18
 =======
 	cancel_work_sync(&opregion->asle_work);
 
@@ -339,6 +359,12 @@ int psb_intel_opregion_setup(struct drm_device *dev)
 		return -ENOTSUPP;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	INIT_WORK(&opregion->asle_work, psb_intel_opregion_asle_work);
+
+>>>>>>> v3.18
 =======
 
 	INIT_WORK(&opregion->asle_work, psb_intel_opregion_asle_work);

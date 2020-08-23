@@ -16,7 +16,10 @@
 #include "security.h"
 #include "conditional.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "services.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -407,6 +410,7 @@ static int cond_read_node(struct policydb *p, struct cond_node *node, void *fp)
 	struct cond_expr *expr = NULL, *last = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = next_entry(buf, fp, sizeof(u32));
 	if (rc)
 		return rc;
@@ -421,6 +425,8 @@ static int cond_read_node(struct policydb *p, struct cond_node *node, void *fp)
 	/* expr */
 	len = le32_to_cpu(buf[0]);
 =======
+=======
+>>>>>>> v3.18
 	rc = next_entry(buf, fp, sizeof(u32) * 2);
 	if (rc)
 		goto err;
@@ -429,6 +435,9 @@ static int cond_read_node(struct policydb *p, struct cond_node *node, void *fp)
 
 	/* expr */
 	len = le32_to_cpu(buf[1]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < len; i++) {
@@ -633,6 +642,7 @@ int cond_write_list(struct policydb *p, struct cond_node *list, void *fp)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void cond_compute_xperms(struct avtab *ctab, struct avtab_key *key,
 		struct extended_perms_decision *xpermd)
@@ -656,10 +666,15 @@ void cond_compute_xperms(struct avtab *ctab, struct avtab_key *key,
 void cond_compute_av(struct avtab *ctab, struct avtab_key *key,
 		struct av_decision *avd, struct extended_perms *xperms)
 =======
+=======
+>>>>>>> v3.18
 /* Determine whether additional permissions are granted by the conditional
  * av table, and if so, add them to the result
  */
 void cond_compute_av(struct avtab *ctab, struct avtab_key *key, struct av_decision *avd)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct avtab_node *node;
@@ -672,7 +687,11 @@ void cond_compute_av(struct avtab *ctab, struct avtab_key *key, struct av_decisi
 		if ((u16)(AVTAB_ALLOWED|AVTAB_ENABLED) ==
 		    (node->key.specified & (AVTAB_ALLOWED|AVTAB_ENABLED)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			avd->allowed |= node->datum.u.data;
+=======
+			avd->allowed |= node->datum.data;
+>>>>>>> v3.18
 =======
 			avd->allowed |= node->datum.data;
 >>>>>>> v3.18
@@ -684,6 +703,7 @@ void cond_compute_av(struct avtab *ctab, struct avtab_key *key, struct av_decisi
 			 * are retained (much unlike the allow and auditallow cases).
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			avd->auditdeny &= node->datum.u.data;
 		if ((u16)(AVTAB_AUDITALLOW|AVTAB_ENABLED) ==
 		    (node->key.specified & (AVTAB_AUDITALLOW|AVTAB_ENABLED)))
@@ -692,10 +712,15 @@ void cond_compute_av(struct avtab *ctab, struct avtab_key *key, struct av_decisi
 				(node->key.specified & AVTAB_XPERMS))
 			services_compute_xperms_drivers(xperms, node);
 =======
+=======
+>>>>>>> v3.18
 			avd->auditdeny &= node->datum.data;
 		if ((u16)(AVTAB_AUDITALLOW|AVTAB_ENABLED) ==
 		    (node->key.specified & (AVTAB_AUDITALLOW|AVTAB_ENABLED)))
 			avd->auditallow |= node->datum.data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return;

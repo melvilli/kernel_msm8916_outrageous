@@ -59,6 +59,7 @@ enum b43_verbosity {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Lightweight function to convert a frequency (in Mhz) to a channel number. */
 static inline u8 b43_freq_to_channel_5ghz(int freq)
@@ -94,6 +95,8 @@ static inline int b43_channel_to_freq_2ghz(u8 channel)
 	return freq;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int b43_is_cck_rate(int rate)
@@ -135,16 +138,22 @@ void b43_controller_restart(struct b43_wldev *dev, const char *reason);
 void b43_power_saving_ctl_bits(struct b43_wldev *dev, unsigned int ps_flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void b43_mac_suspend(struct b43_wldev *dev);
 void b43_mac_enable(struct b43_wldev *dev);
 void b43_mac_phy_clock_set(struct b43_wldev *dev, bool on);
 =======
+=======
+>>>>>>> v3.18
 void b43_wireless_core_phy_pll_reset(struct b43_wldev *dev);
 
 void b43_mac_suspend(struct b43_wldev *dev);
 void b43_mac_enable(struct b43_wldev *dev);
 void b43_mac_phy_clock_set(struct b43_wldev *dev, bool on);
 void b43_mac_switch_freq(struct b43_wldev *dev, u8 spurmode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

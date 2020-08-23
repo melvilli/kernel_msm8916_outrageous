@@ -3,6 +3,7 @@
 # Rewritten to use lists instead of if-statements.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Font handling
 font-objs := fonts.o
 
@@ -30,12 +31,17 @@ obj-$(CONFIG_VGA_CONSOLE)         += vgacon.o
 obj-$(CONFIG_MDA_CONSOLE)         += mdacon.o
 obj-$(CONFIG_FRAMEBUFFER_CONSOLE) += fbcon.o bitblit.o font.o softcursor.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_DUMMY_CONSOLE)       += dummycon.o
 obj-$(CONFIG_SGI_NEWPORT_CONSOLE) += newport_con.o
 obj-$(CONFIG_STI_CONSOLE)         += sticon.o sticore.o
 obj-$(CONFIG_VGA_CONSOLE)         += vgacon.o
 obj-$(CONFIG_MDA_CONSOLE)         += mdacon.o
 obj-$(CONFIG_FRAMEBUFFER_CONSOLE) += fbcon.o bitblit.o softcursor.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ifeq ($(CONFIG_FB_TILEBLITTING),y)
 obj-$(CONFIG_FRAMEBUFFER_CONSOLE)     += tileblit.o
@@ -46,11 +52,15 @@ obj-$(CONFIG_FRAMEBUFFER_CONSOLE)     += fbcon_rotate.o fbcon_cw.o fbcon_ud.o \
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_FB_STI)              += sticore.o font.o
 
 ifeq ($(CONFIG_USB_SISUSBVGA_CON),y)
 obj-$(CONFIG_USB_SISUSBVGA)           += font.o
 endif
+=======
+obj-$(CONFIG_FB_STI)              += sticore.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_FB_STI)              += sticore.o
 >>>>>>> v3.18

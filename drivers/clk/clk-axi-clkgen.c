@@ -18,6 +18,7 @@
 #include <linux/err.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AXI_CLKGEN_REG_UPDATE_ENABLE	0x04
 #define AXI_CLKGEN_REG_CLK_OUT1		0x08
 #define AXI_CLKGEN_REG_CLK_OUT2		0x0c
@@ -36,6 +37,8 @@ struct axi_clkgen {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #define AXI_CLKGEN_V1_REG_UPDATE_ENABLE	0x04
 #define AXI_CLKGEN_V1_REG_CLK_OUT1	0x08
 #define AXI_CLKGEN_V1_REG_CLK_OUT2	0x0c
@@ -105,6 +108,9 @@ static int axi_clkgen_mmcm_read(struct axi_clkgen *axi_clkgen,
 	return axi_clkgen->mmcm_ops->read(axi_clkgen, reg, val);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static uint32_t axi_clkgen_lookup_filter(unsigned int m)
 {
@@ -229,7 +235,10 @@ static void axi_clkgen_read(struct axi_clkgen *axi_clkgen,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned int axi_clkgen_v1_map_mmcm_reg(unsigned int reg)
 {
 	switch (reg) {
@@ -372,6 +381,9 @@ static const struct axi_clkgen_mmcm_ops axi_clkgen_v2_mmcm_ops = {
 	.enable = axi_clkgen_v2_mmcm_enable,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct axi_clkgen *clk_hw_to_axi_clkgen(struct clk_hw *clk_hw)
 {
@@ -402,6 +414,7 @@ static int axi_clkgen_set_rate(struct clk_hw *clk_hw,
 	lock = axi_clkgen_lookup_lock(m - 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	axi_clkgen_write(axi_clkgen, AXI_CLKGEN_REG_UPDATE_ENABLE, 0);
 
 	axi_clkgen_calc_clk_params(dout, &low, &high, &edge, &nocount);
@@ -430,6 +443,8 @@ static int axi_clkgen_set_rate(struct clk_hw *clk_hw,
 
 	axi_clkgen_write(axi_clkgen, AXI_CLKGEN_REG_UPDATE_ENABLE, 1);
 =======
+=======
+>>>>>>> v3.18
 	axi_clkgen_calc_clk_params(dout, &low, &high, &edge, &nocount);
 	axi_clkgen_mmcm_write(axi_clkgen, MMCM_REG_CLKOUT0_1,
 		(high << 6) | low, 0xefff);
@@ -453,6 +468,9 @@ static int axi_clkgen_set_rate(struct clk_hw *clk_hw,
 		(((lock >> 24) & 0x1f) << 10) | 0x3e9, 0x7fff);
 	axi_clkgen_mmcm_write(axi_clkgen, MMCM_REG_FILTER1, filter >> 16, 0x9900);
 	axi_clkgen_mmcm_write(axi_clkgen, MMCM_REG_FILTER2, filter, 0x9900);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -480,17 +498,23 @@ static unsigned long axi_clkgen_recalc_rate(struct clk_hw *clk_hw,
 	unsigned long long tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	axi_clkgen_read(axi_clkgen, AXI_CLKGEN_REG_CLK_OUT1, &reg);
 	dout = (reg & 0x3f) + ((reg >> 6) & 0x3f);
 	axi_clkgen_read(axi_clkgen, AXI_CLKGEN_REG_CLK_DIV, &reg);
 	d = (reg & 0x3f) + ((reg >> 6) & 0x3f);
 	axi_clkgen_read(axi_clkgen, AXI_CLKGEN_REG_CLK_FB1, &reg);
 =======
+=======
+>>>>>>> v3.18
 	axi_clkgen_mmcm_read(axi_clkgen, MMCM_REG_CLKOUT0_1, &reg);
 	dout = (reg & 0x3f) + ((reg >> 6) & 0x3f);
 	axi_clkgen_mmcm_read(axi_clkgen, MMCM_REG_CLK_DIV, &reg);
 	d = (reg & 0x3f) + ((reg >> 6) & 0x3f);
 	axi_clkgen_mmcm_read(axi_clkgen, MMCM_REG_CLK_FB1, &reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	m = (reg & 0x3f) + ((reg >> 6) & 0x3f);
 
@@ -507,7 +531,10 @@ static unsigned long axi_clkgen_recalc_rate(struct clk_hw *clk_hw,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int axi_clkgen_enable(struct clk_hw *clk_hw)
 {
 	struct axi_clkgen *axi_clkgen = clk_hw_to_axi_clkgen(clk_hw);
@@ -524,17 +551,23 @@ static void axi_clkgen_disable(struct clk_hw *clk_hw)
 	axi_clkgen_mmcm_enable(axi_clkgen, false);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct clk_ops axi_clkgen_ops = {
 	.recalc_rate = axi_clkgen_recalc_rate,
 	.round_rate = axi_clkgen_round_rate,
 	.set_rate = axi_clkgen_set_rate,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static int axi_clkgen_probe(struct platform_device *pdev)
 {
 =======
+=======
+>>>>>>> v3.18
 	.enable = axi_clkgen_enable,
 	.disable = axi_clkgen_disable,
 };
@@ -554,6 +587,9 @@ MODULE_DEVICE_TABLE(of, axi_clkgen_ids);
 static int axi_clkgen_probe(struct platform_device *pdev)
 {
 	const struct of_device_id *id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct axi_clkgen *axi_clkgen;
 	struct clk_init_data init;
@@ -563,7 +599,10 @@ static int axi_clkgen_probe(struct platform_device *pdev)
 	struct clk *clk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!pdev->dev.of_node)
 		return -ENODEV;
 
@@ -571,12 +610,20 @@ static int axi_clkgen_probe(struct platform_device *pdev)
 	if (!id)
 		return -ENODEV;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	axi_clkgen = devm_kzalloc(&pdev->dev, sizeof(*axi_clkgen), GFP_KERNEL);
 	if (!axi_clkgen)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	axi_clkgen->mmcm_ops = id->data;
+
+>>>>>>> v3.18
 =======
 	axi_clkgen->mmcm_ops = id->data;
 
@@ -597,17 +644,23 @@ static int axi_clkgen_probe(struct platform_device *pdev)
 	init.name = clk_name;
 	init.ops = &axi_clkgen_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init.flags = 0;
 	init.parent_names = &parent_name;
 	init.num_parents = 1;
 
 =======
+=======
+>>>>>>> v3.18
 	init.flags = CLK_SET_RATE_GATE;
 	init.parent_names = &parent_name;
 	init.num_parents = 1;
 
 	axi_clkgen_mmcm_enable(axi_clkgen, false);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	axi_clkgen->clk_hw.init = &init;
 	clk = devm_clk_register(&pdev->dev, &axi_clkgen->clk_hw);
@@ -626,6 +679,7 @@ static int axi_clkgen_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id axi_clkgen_ids[] = {
 	{ .compatible = "adi,axi-clkgen-1.00.a" },
 	{ },
@@ -636,6 +690,11 @@ static struct platform_driver axi_clkgen_driver = {
 	.driver = {
 		.name = "adi-axi-clkgen",
 		.owner = THIS_MODULE,
+=======
+static struct platform_driver axi_clkgen_driver = {
+	.driver = {
+		.name = "adi-axi-clkgen",
+>>>>>>> v3.18
 =======
 static struct platform_driver axi_clkgen_driver = {
 	.driver = {

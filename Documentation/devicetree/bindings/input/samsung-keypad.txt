@@ -26,6 +26,7 @@ Required Board Specific Properties:
   keypad controller.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - row-gpios: List of gpios used as row lines. The gpio specifier for
   this property depends on the gpio controller to which these row lines
   are connected.
@@ -34,6 +35,8 @@ Required Board Specific Properties:
   this property depends on the gpio controller to which these column
   lines are connected.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 - Keys represented as child nodes: Each key connected to the keypad
@@ -45,6 +48,12 @@ Required Board Specific Properties:
     and released.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- pinctrl-0: Should specify pin control groups used for this controller.
+- pinctrl-names: Should contain only one value - "default".
+
+>>>>>>> v3.18
 =======
 - pinctrl-0: Should specify pin control groups used for this controller.
 - pinctrl-names: Should contain only one value - "default".
@@ -66,6 +75,7 @@ Example:
 		linux,input-wakeup;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		row-gpios = <&gpx2 0 3 3 0
 			     &gpx2 1 3 3 0>;
 
@@ -77,6 +87,10 @@ Example:
 			     &gpx1 5 3 0 0
 			     &gpx1 6 3 0 0
 			     &gpx1 7 3 0 0>;
+=======
+		pinctrl-names = "default";
+		pinctrl-0 = <&keypad_rows &keypad_columns>;
+>>>>>>> v3.18
 =======
 		pinctrl-names = "default";
 		pinctrl-0 = <&keypad_rows &keypad_columns>;

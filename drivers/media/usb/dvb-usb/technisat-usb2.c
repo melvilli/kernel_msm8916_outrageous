@@ -103,7 +103,11 @@ static int technisat_usb2_i2c_access(struct usb_device *udev,
 		err("i2c RX buffer can't exceed 62 bytes (dev 0x%02x)",
 				device_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		txlen = 62;
+=======
+		rxlen = 62;
+>>>>>>> v3.18
 =======
 		rxlen = 62;
 >>>>>>> v3.18
@@ -219,15 +223,21 @@ static void technisat_usb2_frontend_reset(struct usb_device *udev)
 /* LED control */
 enum technisat_usb2_led_state {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LED_OFF,
 	LED_BLINK,
 	LED_ON,
 	LED_UNDEFINED
 =======
+=======
+>>>>>>> v3.18
 	TECH_LED_OFF,
 	TECH_LED_BLINK,
 	TECH_LED_ON,
 	TECH_LED_UNDEFINED
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -241,6 +251,7 @@ static int technisat_usb2_set_led(struct dvb_usb_device *d, int red, enum techni
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (disable_led_control && state != LED_OFF)
 		return 0;
 
@@ -250,6 +261,8 @@ static int technisat_usb2_set_led(struct dvb_usb_device *d, int red, enum techni
 		break;
 	case LED_BLINK:
 =======
+=======
+>>>>>>> v3.18
 	if (disable_led_control && state != TECH_LED_OFF)
 		return 0;
 
@@ -258,6 +271,9 @@ static int technisat_usb2_set_led(struct dvb_usb_device *d, int red, enum techni
 		led[1] = 0x82;
 		break;
 	case TECH_LED_BLINK:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		led[1] = 0x82;
 		if (red) {
@@ -274,7 +290,11 @@ static int technisat_usb2_set_led(struct dvb_usb_device *d, int red, enum techni
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case LED_OFF:
+=======
+	case TECH_LED_OFF:
+>>>>>>> v3.18
 =======
 	case TECH_LED_OFF:
 >>>>>>> v3.18
@@ -337,17 +357,23 @@ static void technisat_usb2_green_led_control(struct work_struct *work)
 
 			if (ber > 1000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				technisat_usb2_set_led(state->dev, 0, LED_BLINK);
 			else
 				technisat_usb2_set_led(state->dev, 0, LED_ON);
 		} else
 			technisat_usb2_set_led(state->dev, 0, LED_OFF);
 =======
+=======
+>>>>>>> v3.18
 				technisat_usb2_set_led(state->dev, 0, TECH_LED_BLINK);
 			else
 				technisat_usb2_set_led(state->dev, 0, TECH_LED_ON);
 		} else
 			technisat_usb2_set_led(state->dev, 0, TECH_LED_OFF);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -400,9 +426,15 @@ static int technisat_usb2_power_ctrl(struct dvb_usb_device *d, int level)
 
 	/* green led is turned off in any case - will be turned on when tuning */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	technisat_usb2_set_led(d, 0, LED_OFF);
 	/* red led is turned on all the time */
 	technisat_usb2_set_led(d, 1, LED_ON);
+=======
+	technisat_usb2_set_led(d, 0, TECH_LED_OFF);
+	/* red led is turned on all the time */
+	technisat_usb2_set_led(d, 1, TECH_LED_ON);
+>>>>>>> v3.18
 =======
 	technisat_usb2_set_led(d, 0, TECH_LED_OFF);
 	/* red led is turned on all the time */
@@ -708,7 +740,11 @@ static int technisat_usb2_rc_query(struct dvb_usb_device *d)
 
 	if (!disable_led_control)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		technisat_usb2_set_led(d, 1, LED_BLINK);
+=======
+		technisat_usb2_set_led(d, 1, TECH_LED_BLINK);
+>>>>>>> v3.18
 =======
 		technisat_usb2_set_led(d, 1, TECH_LED_BLINK);
 >>>>>>> v3.18
@@ -755,7 +791,11 @@ static struct dvb_usb_device_properties technisat_usb2_devices = {
 						.framesperurb = 32,
 						.framesize = 2048,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						.interval = 3,
+=======
+						.interval = 1,
+>>>>>>> v3.18
 =======
 						.interval = 1,
 >>>>>>> v3.18

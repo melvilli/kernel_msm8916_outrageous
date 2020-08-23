@@ -263,7 +263,11 @@ struct nm256 {
  * PCI ids
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_nm256_ids) = {
+=======
+static const struct pci_device_id snd_nm256_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_nm256_ids[] = {
 >>>>>>> v3.18
@@ -323,7 +327,12 @@ snd_nm256_write_buffer(struct nm256 *chip, void *src, int offset, int size)
 #ifdef CONFIG_SND_DEBUG
 	if (offset < 0 || offset >= chip->buffer_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "write_buffer invalid offset = %d size = %d\n",
+=======
+		dev_err(chip->card->dev,
+			"write_buffer invalid offset = %d size = %d\n",
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"write_buffer invalid offset = %d size = %d\n",
@@ -376,7 +385,12 @@ snd_nm256_load_coefficient(struct nm256 *chip, int stream, int number)
 
 	if (snd_nm256_readb(chip, poffset) & 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("NM256: Engine was enabled while loading coefficients!\n");
+=======
+		dev_dbg(chip->card->dev,
+			"NM256: Engine was enabled while loading coefficients!\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev,
 			"NM256: Engine was enabled while loading coefficients!\n");
@@ -481,7 +495,12 @@ static int snd_nm256_acquire_irq(struct nm256 *chip)
 		if (request_irq(chip->pci->irq, chip->interrupt, IRQF_SHARED,
 				KBUILD_MODNAME, chip)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "unable to grab IRQ %d\n", chip->pci->irq);
+=======
+			dev_err(chip->card->dev,
+				"unable to grab IRQ %d\n", chip->pci->irq);
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"unable to grab IRQ %d\n", chip->pci->irq);
@@ -1059,7 +1078,11 @@ snd_nm256_interrupt(int irq, void *dev_id)
 		status &= ~NM_MISC_INT_1;
 		NM_ACK_INT(chip, NM_MISC_INT_1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("NM256: Got misc interrupt #1\n");
+=======
+		dev_dbg(chip->card->dev, "NM256: Got misc interrupt #1\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev, "NM256: Got misc interrupt #1\n");
 >>>>>>> v3.18
@@ -1072,7 +1095,11 @@ snd_nm256_interrupt(int irq, void *dev_id)
 		status &= ~NM_MISC_INT_2;
 		NM_ACK_INT(chip, NM_MISC_INT_2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("NM256: Got misc interrupt #2\n");
+=======
+		dev_dbg(chip->card->dev, "NM256: Got misc interrupt #2\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev, "NM256: Got misc interrupt #2\n");
 >>>>>>> v3.18
@@ -1083,7 +1110,12 @@ snd_nm256_interrupt(int irq, void *dev_id)
 	/* Unknown interrupt. */
 	if (status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("NM256: Fire in the hole! Unknown status 0x%x\n",
+=======
+		dev_dbg(chip->card->dev,
+			"NM256: Fire in the hole! Unknown status 0x%x\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev,
 			"NM256: Fire in the hole! Unknown status 0x%x\n",
@@ -1137,7 +1169,11 @@ snd_nm256_interrupt_zx(int irq, void *dev_id)
 		status &= ~NM2_MISC_INT_1;
 		NM2_ACK_INT(chip, NM2_MISC_INT_1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("NM256: Got misc interrupt #1\n");
+=======
+		dev_dbg(chip->card->dev, "NM256: Got misc interrupt #1\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev, "NM256: Got misc interrupt #1\n");
 >>>>>>> v3.18
@@ -1149,7 +1185,11 @@ snd_nm256_interrupt_zx(int irq, void *dev_id)
 		status &= ~NM2_MISC_INT_2;
 		NM2_ACK_INT(chip, NM2_MISC_INT_2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("NM256: Got misc interrupt #2\n");
+=======
+		dev_dbg(chip->card->dev, "NM256: Got misc interrupt #2\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev, "NM256: Got misc interrupt #2\n");
 >>>>>>> v3.18
@@ -1160,7 +1200,12 @@ snd_nm256_interrupt_zx(int irq, void *dev_id)
 	/* Unknown interrupt. */
 	if (status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("NM256: Fire in the hole! Unknown status 0x%x\n",
+=======
+		dev_dbg(chip->card->dev,
+			"NM256: Fire in the hole! Unknown status 0x%x\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev,
 			"NM256: Fire in the hole! Unknown status 0x%x\n",
@@ -1291,7 +1336,11 @@ snd_nm256_ac97_write(struct snd_ac97 *ac97,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printd("nm256: ac97 codec not ready..\n");
+=======
+	dev_dbg(chip->card->dev, "nm256: ac97 codec not ready..\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev, "nm256: ac97 codec not ready..\n");
 >>>>>>> v3.18
@@ -1397,7 +1446,12 @@ snd_nm256_peek_for_sig(struct nm256 *chip)
 	temp = ioremap_nocache(chip->buffer_addr + chip->buffer_end - 0x400, 16);
 	if (temp == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Unable to scan for card signature in video RAM\n");
+=======
+		dev_err(chip->card->dev,
+			"Unable to scan for card signature in video RAM\n");
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"Unable to scan for card signature in video RAM\n");
@@ -1416,7 +1470,12 @@ snd_nm256_peek_for_sig(struct nm256 *chip)
 		    pointer < chip->buffer_size ||
 		    pointer > chip->buffer_end) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "invalid signature found: 0x%x\n", pointer);
+=======
+			dev_err(chip->card->dev,
+				"invalid signature found: 0x%x\n", pointer);
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"invalid signature found: 0x%x\n", pointer);
@@ -1426,7 +1485,12 @@ snd_nm256_peek_for_sig(struct nm256 *chip)
 		} else {
 			pointer_found = pointer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "nm256: found card signature in video RAM: 0x%x\n",
+=======
+			dev_info(chip->card->dev,
+				 "found card signature in video RAM: 0x%x\n",
+>>>>>>> v3.18
 =======
 			dev_info(chip->card->dev,
 				 "found card signature in video RAM: 0x%x\n",
@@ -1476,8 +1540,12 @@ static int nm256_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "nm256: pci_enable_device failed, "
 		       "disabling device\n");
+=======
+		dev_err(dev, "pci_enable_device failed, disabling device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_enable_device failed, disabling device\n");
 >>>>>>> v3.18
@@ -1589,7 +1657,11 @@ snd_nm256_create(struct snd_card *card, struct pci_dev *pci,
 					     card->driver);
 	if (chip->res_cport == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "memory region 0x%lx (size 0x%x) busy\n",
+=======
+		dev_err(card->dev, "memory region 0x%lx (size 0x%x) busy\n",
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "memory region 0x%lx (size 0x%x) busy\n",
 >>>>>>> v3.18
@@ -1600,7 +1672,12 @@ snd_nm256_create(struct snd_card *card, struct pci_dev *pci,
 	chip->cport = ioremap_nocache(chip->cport_addr, NM_PORT2_SIZE);
 	if (chip->cport == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to map control port %lx\n", chip->cport_addr);
+=======
+		dev_err(card->dev, "unable to map control port %lx\n",
+			chip->cport_addr);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to map control port %lx\n",
 			chip->cport_addr);
@@ -1615,6 +1692,7 @@ snd_nm256_create(struct snd_card *card, struct pci_dev *pci,
 		if ((pval & NM_PRESENCE_MASK) != NM_PRESENCE_VALUE) {
 			if (! force_ac97) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "nm256: no ac97 is found!\n");
 				printk(KERN_ERR "  force the driver to load by "
 				       "passing in the module parameter\n");
@@ -1622,6 +1700,8 @@ snd_nm256_create(struct snd_card *card, struct pci_dev *pci,
 				printk(KERN_ERR "  or try sb16, opl3sa2, or "
 				       "cs423x drivers instead.\n");
 =======
+=======
+>>>>>>> v3.18
 				dev_err(card->dev,
 					"no ac97 is found!\n");
 				dev_err(card->dev,
@@ -1630,6 +1710,9 @@ snd_nm256_create(struct snd_card *card, struct pci_dev *pci,
 					" force_ac97=1\n");
 				dev_err(card->dev,
 					"or try sb16, opl3sa2, or cs423x drivers instead.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				err = -ENXIO;
 				goto __error;
@@ -1670,7 +1753,11 @@ snd_nm256_create(struct snd_card *card, struct pci_dev *pci,
 	chip->buffer_addr += chip->buffer_start;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "nm256: Mapping port 1 from 0x%x - 0x%x\n",
+=======
+	dev_info(card->dev, "Mapping port 1 from 0x%x - 0x%x\n",
+>>>>>>> v3.18
 =======
 	dev_info(card->dev, "Mapping port 1 from 0x%x - 0x%x\n",
 >>>>>>> v3.18
@@ -1681,7 +1768,11 @@ snd_nm256_create(struct snd_card *card, struct pci_dev *pci,
 					      card->driver);
 	if (chip->res_buffer == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "nm256: buffer 0x%lx (size 0x%x) busy\n",
+=======
+		dev_err(card->dev, "buffer 0x%lx (size 0x%x) busy\n",
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "buffer 0x%lx (size 0x%x) busy\n",
 >>>>>>> v3.18
@@ -1693,7 +1784,12 @@ snd_nm256_create(struct snd_card *card, struct pci_dev *pci,
 	if (chip->buffer == NULL) {
 		err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to map ring buffer at %lx\n", chip->buffer_addr);
+=======
+		dev_err(card->dev, "unable to map ring buffer at %lx\n",
+			chip->buffer_addr);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to map ring buffer at %lx\n",
 			chip->buffer_addr);
@@ -1728,8 +1824,11 @@ snd_nm256_create(struct snd_card *card, struct pci_dev *pci,
 		goto __error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*chip_ret = chip;
@@ -1765,6 +1864,7 @@ static int snd_nm256_probe(struct pci_dev *pci,
 	q = snd_pci_quirk_lookup(pci, nm256_quirks);
 	if (q) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "nm256: Enabled quirk for %s.\n",
 			    snd_pci_quirk_name(q));
 		switch (q->value) {
@@ -1772,12 +1872,17 @@ static int snd_nm256_probe(struct pci_dev *pci,
 			printk(KERN_INFO "nm256: The device is blacklisted. "
 			       "Loading stopped\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(&pci->dev, "Enabled quirk for %s.\n",
 			    snd_pci_quirk_name(q));
 		switch (q->value) {
 		case NM_BLACKLISTED:
 			dev_info(&pci->dev,
 				 "The device is blacklisted. Loading stopped\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -ENODEV;
 		case NM_RESET_WORKAROUND_2:
@@ -1790,7 +1895,11 @@ static int snd_nm256_probe(struct pci_dev *pci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index, id, THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index, id, THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index, id, THIS_MODULE, 0, &card);
 >>>>>>> v3.18
@@ -1809,7 +1918,11 @@ static int snd_nm256_probe(struct pci_dev *pci,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "invalid device id 0x%x\n", pci->device);
+=======
+		dev_err(&pci->dev, "invalid device id 0x%x\n", pci->device);
+>>>>>>> v3.18
 =======
 		dev_err(&pci->dev, "invalid device id 0x%x\n", pci->device);
 >>>>>>> v3.18
@@ -1836,7 +1949,11 @@ static int snd_nm256_probe(struct pci_dev *pci,
 
 	if (reset_workaround) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "nm256: reset_workaround activated\n");
+=======
+		dev_dbg(&pci->dev, "reset_workaround activated\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(&pci->dev, "reset_workaround activated\n");
 >>>>>>> v3.18
@@ -1845,7 +1962,11 @@ static int snd_nm256_probe(struct pci_dev *pci,
 
 	if (reset_workaround_2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "nm256: reset_workaround_2 activated\n");
+=======
+		dev_dbg(&pci->dev, "reset_workaround_2 activated\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(&pci->dev, "reset_workaround_2 activated\n");
 >>>>>>> v3.18
@@ -1876,7 +1997,10 @@ static void snd_nm256_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

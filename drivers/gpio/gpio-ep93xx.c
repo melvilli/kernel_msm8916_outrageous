@@ -52,6 +52,7 @@ static void ep93xx_gpio_update_int_params(unsigned port)
 	BUG_ON(port > 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writeb(0, EP93XX_GPIO_REG(int_en_register_offset[port]));
 
 	__raw_writeb(gpio_int_type2[port],
@@ -62,6 +63,8 @@ static void ep93xx_gpio_update_int_params(unsigned port)
 
 	__raw_writeb(gpio_int_unmasked[port] & gpio_int_enabled[port],
 =======
+=======
+>>>>>>> v3.18
 	writeb_relaxed(0, EP93XX_GPIO_REG(int_en_register_offset[port]));
 
 	writeb_relaxed(gpio_int_type2[port],
@@ -71,6 +74,9 @@ static void ep93xx_gpio_update_int_params(unsigned port)
 		EP93XX_GPIO_REG(int_type1_register_offset[port]));
 
 	writeb(gpio_int_unmasked[port] & gpio_int_enabled[port],
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		EP93XX_GPIO_REG(int_en_register_offset[port]));
 }
@@ -87,7 +93,11 @@ static void ep93xx_gpio_int_debounce(unsigned int irq, bool enable)
 		gpio_int_debounce[port] &= ~port_mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writeb(gpio_int_debounce[port],
+=======
+	writeb(gpio_int_debounce[port],
+>>>>>>> v3.18
 =======
 	writeb(gpio_int_debounce[port],
 >>>>>>> v3.18
@@ -100,7 +110,11 @@ static void ep93xx_gpio_ab_irq_handler(unsigned int irq, struct irq_desc *desc)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = __raw_readb(EP93XX_GPIO_A_INT_STATUS);
+=======
+	status = readb(EP93XX_GPIO_A_INT_STATUS);
+>>>>>>> v3.18
 =======
 	status = readb(EP93XX_GPIO_A_INT_STATUS);
 >>>>>>> v3.18
@@ -112,7 +126,11 @@ static void ep93xx_gpio_ab_irq_handler(unsigned int irq, struct irq_desc *desc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = __raw_readb(EP93XX_GPIO_B_INT_STATUS);
+=======
+	status = readb(EP93XX_GPIO_B_INT_STATUS);
+>>>>>>> v3.18
 =======
 	status = readb(EP93XX_GPIO_B_INT_STATUS);
 >>>>>>> v3.18
@@ -149,7 +167,11 @@ static void ep93xx_gpio_irq_ack(struct irq_data *d)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writeb(port_mask, EP93XX_GPIO_REG(eoi_register_offset[port]));
+=======
+	writeb(port_mask, EP93XX_GPIO_REG(eoi_register_offset[port]));
+>>>>>>> v3.18
 =======
 	writeb(port_mask, EP93XX_GPIO_REG(eoi_register_offset[port]));
 >>>>>>> v3.18
@@ -168,7 +190,11 @@ static void ep93xx_gpio_irq_mask_ack(struct irq_data *d)
 	ep93xx_gpio_update_int_params(port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writeb(port_mask, EP93XX_GPIO_REG(eoi_register_offset[port]));
+=======
+	writeb(port_mask, EP93XX_GPIO_REG(eoi_register_offset[port]));
+>>>>>>> v3.18
 =======
 	writeb(port_mask, EP93XX_GPIO_REG(eoi_register_offset[port]));
 >>>>>>> v3.18
@@ -377,21 +403,28 @@ static int ep93xx_gpio_probe(struct platform_device *pdev)
 	struct ep93xx_gpio *ep93xx_gpio;
 	struct resource *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *mmio;
 	int i;
 	int ret;
 
 	ep93xx_gpio = kzalloc(sizeof(*ep93xx_gpio), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	int i;
 	struct device *dev = &pdev->dev;
 
 	ep93xx_gpio = devm_kzalloc(dev, sizeof(struct ep93xx_gpio), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ep93xx_gpio)
 		return -ENOMEM;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!res) {
 		ret = -ENXIO;
@@ -414,13 +447,23 @@ static int ep93xx_gpio_probe(struct platform_device *pdev)
 	if (IS_ERR(ep93xx_gpio->mmio_base))
 		return PTR_ERR(ep93xx_gpio->mmio_base);
 >>>>>>> v3.18
+=======
+	ep93xx_gpio->mmio_base = devm_ioremap_resource(dev, res);
+	if (IS_ERR(ep93xx_gpio->mmio_base))
+		return PTR_ERR(ep93xx_gpio->mmio_base);
+>>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(ep93xx_gpio_banks); i++) {
 		struct bgpio_chip *bgc = &ep93xx_gpio->bgc[i];
 		struct ep93xx_gpio_bank *bank = &ep93xx_gpio_banks[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ep93xx_gpio_add_bank(bgc, &pdev->dev, mmio, bank))
+=======
+		if (ep93xx_gpio_add_bank(bgc, &pdev->dev,
+					 ep93xx_gpio->mmio_base, bank))
+>>>>>>> v3.18
 =======
 		if (ep93xx_gpio_add_bank(bgc, &pdev->dev,
 					 ep93xx_gpio->mmio_base, bank))
@@ -433,6 +476,7 @@ static int ep93xx_gpio_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 exit_release:
 	release_mem_region(res->start, resource_size(res));
@@ -440,6 +484,8 @@ exit_free:
 	kfree(ep93xx_gpio);
 	dev_info(&pdev->dev, "%s failed with errno %d\n", __func__, ret);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

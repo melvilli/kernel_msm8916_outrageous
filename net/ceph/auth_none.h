@@ -24,7 +24,11 @@ struct ceph_auth_none_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ceph_auth_none_init(struct ceph_auth_client *ac);
+=======
+int ceph_auth_none_init(struct ceph_auth_client *ac);
+>>>>>>> v3.18
 =======
 int ceph_auth_none_init(struct ceph_auth_client *ac);
 >>>>>>> v3.18

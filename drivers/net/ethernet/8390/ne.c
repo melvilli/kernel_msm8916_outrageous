@@ -72,6 +72,10 @@ static int io[MAX_NE_CARDS];
 static int irq[MAX_NE_CARDS];
 static int bad[MAX_NE_CARDS];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static u32 ne_msg_enable;
+>>>>>>> v3.18
 =======
 static u32 ne_msg_enable;
 >>>>>>> v3.18
@@ -81,15 +85,21 @@ module_param_array(io, int, NULL, 0);
 module_param_array(irq, int, NULL, 0);
 module_param_array(bad, int, NULL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_PARM_DESC(io, "I/O base address(es),required");
 MODULE_PARM_DESC(irq, "IRQ number(s)");
 MODULE_PARM_DESC(bad, "Accept card(s) with bad signatures");
 =======
+=======
+>>>>>>> v3.18
 module_param_named(msg_enable, ne_msg_enable, uint, (S_IRUSR|S_IRGRP|S_IROTH));
 MODULE_PARM_DESC(io, "I/O base address(es),required");
 MODULE_PARM_DESC(irq, "IRQ number(s)");
 MODULE_PARM_DESC(bad, "Accept card(s) with bad signatures");
 MODULE_PARM_DESC(msg_enable, "Debug message level (see linux/netdevice.h for bitmap)");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_DESCRIPTION("NE1000/NE2000 ISA/PnP Ethernet driver");
 MODULE_LICENSE("GPL");
@@ -179,6 +189,11 @@ bad_clone_list[] __initdata = {
    defined(CONFIG_MACH_TX49XX)
 #  define DCR_VAL 0x48		/* 8-bit mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#elif defined(CONFIG_ATARI)	/* 8-bit mode on Atari, normal on Q40 */
+#  define DCR_VAL (MACH_IS_ATARI ? 0x48 : 0x49)
+>>>>>>> v3.18
 =======
 #elif defined(CONFIG_ATARI)	/* 8-bit mode on Atari, normal on Q40 */
 #  define DCR_VAL (MACH_IS_ATARI ? 0x48 : 0x49)
@@ -232,8 +247,13 @@ static int __init do_ne_probe(struct net_device *dev)
 		int ret = ne_probe1(dev, base_addr);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "ne.c: No NE*000 card found at "
 				"i/o = %#lx\n", base_addr);
+=======
+			netdev_warn(dev, "ne.c: No NE*000 card found at "
+				    "i/o = %#lx\n", base_addr);
+>>>>>>> v3.18
 =======
 			netdev_warn(dev, "ne.c: No NE*000 card found at "
 				    "i/o = %#lx\n", base_addr);
@@ -287,12 +307,15 @@ static int __init ne_probe_isapnp(struct net_device *dev)
 			dev->base_addr = pnp_port_start(idev, 0);
 			dev->irq = pnp_irq(idev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "ne.c: ISAPnP reports %s at i/o %#lx, irq %d.\n",
 				(char *) isapnp_clone_list[i].driver_data,
 				dev->base_addr, dev->irq);
 			if (ne_probe1(dev, dev->base_addr) != 0) {	/* Shouldn't happen. */
 				printk(KERN_ERR "ne.c: Probe of ISAPnP card at %#lx failed.\n", dev->base_addr);
 =======
+=======
+>>>>>>> v3.18
 			netdev_info(dev,
 				    "ne.c: ISAPnP reports %s at i/o %#lx, irq %d.\n",
 				    (char *) isapnp_clone_list[i].driver_data,
@@ -301,6 +324,9 @@ static int __init ne_probe_isapnp(struct net_device *dev)
 				netdev_err(dev,
 					   "ne.c: Probe of ISAPnP card at %#lx failed.\n",
 					   dev->base_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				pnp_device_detach(idev);
 				return -ENXIO;
@@ -327,6 +353,10 @@ static int __init ne_probe1(struct net_device *dev, unsigned long ioaddr)
 	int reg0, ret;
 	static unsigned version_printed;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ei_device *ei_local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct ei_device *ei_local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -357,15 +387,21 @@ static int __init ne_probe1(struct net_device *dev, unsigned long ioaddr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_debug  &&  version_printed++ == 0)
 		printk(KERN_INFO "%s%s", version1, version2);
 
 	printk(KERN_INFO "NE*000 ethercard probe at %#3lx:", ioaddr);
 =======
+=======
+>>>>>>> v3.18
 	if ((ne_msg_enable & NETIF_MSG_DRV) && (version_printed++ == 0))
 		netdev_info(dev, "%s%s", version1, version2);
 
 	netdev_info(dev, "NE*000 ethercard probe at %#3lx:", ioaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* A user with a poor card that fails to ack the reset, or that
@@ -388,15 +424,21 @@ static int __init ne_probe1(struct net_device *dev, unsigned long ioaddr)
 		if (time_after(jiffies, reset_start_time + 2*HZ/100)) {
 			if (bad_card) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(" (warning: no reset ack)");
 				break;
 			} else {
 				printk(" not found (no reset ack).\n");
 =======
+=======
+>>>>>>> v3.18
 				pr_cont(" (warning: no reset ack)");
 				break;
 			} else {
 				pr_cont(" not found (no reset ack).\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ret = -ENODEV;
 				goto err_out;
@@ -506,7 +548,11 @@ static int __init ne_probe1(struct net_device *dev, unsigned long ioaddr)
 		if (bad_clone_list[i].name8 == NULL)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(" not found (invalid signature %2.2x %2.2x).\n",
+=======
+			pr_cont(" not found (invalid signature %2.2x %2.2x).\n",
+>>>>>>> v3.18
 =======
 			pr_cont(" not found (invalid signature %2.2x %2.2x).\n",
 >>>>>>> v3.18
@@ -516,7 +562,11 @@ static int __init ne_probe1(struct net_device *dev, unsigned long ioaddr)
 		}
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(" not found.\n");
+=======
+		pr_cont(" not found.\n");
+>>>>>>> v3.18
 =======
 		pr_cont(" not found.\n");
 >>>>>>> v3.18
@@ -536,8 +586,13 @@ static int __init ne_probe1(struct net_device *dev, unsigned long ioaddr)
 		outb_p(0x00, ioaddr + EN0_IMR); 		/* Mask it again. */
 		dev->irq = probe_irq_off(cookie);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ei_debug > 2)
 			printk(" autoirq is %d\n", dev->irq);
+=======
+		if (netif_msg_probe(ei_local))
+			pr_cont(" autoirq is %d", dev->irq);
+>>>>>>> v3.18
 =======
 		if (netif_msg_probe(ei_local))
 			pr_cont(" autoirq is %d", dev->irq);
@@ -549,7 +604,11 @@ static int __init ne_probe1(struct net_device *dev, unsigned long ioaddr)
 
 	if (! dev->irq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(" failed to detect IRQ line.\n");
+=======
+		pr_cont(" failed to detect IRQ line.\n");
+>>>>>>> v3.18
 =======
 		pr_cont(" failed to detect IRQ line.\n");
 >>>>>>> v3.18
@@ -562,7 +621,11 @@ static int __init ne_probe1(struct net_device *dev, unsigned long ioaddr)
 	ret = request_irq(dev->irq, eip_interrupt, 0, name, dev);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk (" unable to get IRQ %d (errno=%d).\n", dev->irq, ret);
+=======
+		pr_cont(" unable to get IRQ %d (errno=%d).\n", dev->irq, ret);
+>>>>>>> v3.18
 =======
 		pr_cont(" unable to get IRQ %d (errno=%d).\n", dev->irq, ret);
 >>>>>>> v3.18
@@ -585,7 +648,11 @@ static int __init ne_probe1(struct net_device *dev, unsigned long ioaddr)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%pM\n", dev->dev_addr);
+=======
+	pr_cont("%pM\n", dev->dev_addr);
+>>>>>>> v3.18
 =======
 	pr_cont("%pM\n", dev->dev_addr);
 >>>>>>> v3.18
@@ -613,18 +680,24 @@ static int __init ne_probe1(struct net_device *dev, unsigned long ioaddr)
 	NS8390p_init(dev, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = register_netdev(dev);
 	if (ret)
 		goto out_irq;
 	printk(KERN_INFO "%s: %s found at %#lx, using IRQ %d.\n",
 	       dev->name, name, ioaddr, dev->irq);
 =======
+=======
+>>>>>>> v3.18
 	ei_local->msg_enable = ne_msg_enable;
 	ret = register_netdev(dev);
 	if (ret)
 		goto out_irq;
 	netdev_info(dev, "%s found at %#lx, using IRQ %d.\n",
 		    name, ioaddr, dev->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -642,9 +715,15 @@ static void ne_reset_8390(struct net_device *dev)
 {
 	unsigned long reset_start_time = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (ei_debug > 1)
 		printk(KERN_DEBUG "resetting the 8390 t=%ld...", jiffies);
+=======
+	struct ei_device *ei_local = netdev_priv(dev);
+
+	netif_dbg(ei_local, hw, dev, "resetting the 8390 t=%ld...\n", jiffies);
+>>>>>>> v3.18
 =======
 	struct ei_device *ei_local = netdev_priv(dev);
 
@@ -661,7 +740,11 @@ static void ne_reset_8390(struct net_device *dev)
 	while ((inb_p(NE_BASE+EN0_ISR) & ENISR_RESET) == 0)
 		if (time_after(jiffies, reset_start_time + 2*HZ/100)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "%s: ne_reset_8390() did not complete.\n", dev->name);
+=======
+			netdev_err(dev, "ne_reset_8390() did not complete.\n");
+>>>>>>> v3.18
 =======
 			netdev_err(dev, "ne_reset_8390() did not complete.\n");
 >>>>>>> v3.18
@@ -683,9 +766,15 @@ static void ne_get_8390_hdr(struct net_device *dev, struct e8390_pkt_hdr *hdr, i
 	if (ei_status.dmaing)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_EMERG "%s: DMAing conflict in ne_get_8390_hdr "
 			"[DMAstat:%d][irqlock:%d].\n",
 			dev->name, ei_status.dmaing, ei_status.irqlock);
+=======
+		netdev_err(dev, "DMAing conflict in ne_get_8390_hdr "
+			   "[DMAstat:%d][irqlock:%d].\n",
+			   ei_status.dmaing, ei_status.irqlock);
+>>>>>>> v3.18
 =======
 		netdev_err(dev, "DMAing conflict in ne_get_8390_hdr "
 			   "[DMAstat:%d][irqlock:%d].\n",
@@ -723,6 +812,10 @@ static void ne_block_input(struct net_device *dev, int count, struct sk_buff *sk
 #ifdef NE_SANITY_CHECK
 	int xfer_count = count;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ei_device *ei_local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct ei_device *ei_local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -734,9 +827,15 @@ static void ne_block_input(struct net_device *dev, int count, struct sk_buff *sk
 	if (ei_status.dmaing)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_EMERG "%s: DMAing conflict in ne_block_input "
 			"[DMAstat:%d][irqlock:%d].\n",
 			dev->name, ei_status.dmaing, ei_status.irqlock);
+=======
+		netdev_err(dev, "DMAing conflict in ne_block_input "
+			   "[DMAstat:%d][irqlock:%d].\n",
+			   ei_status.dmaing, ei_status.irqlock);
+>>>>>>> v3.18
 =======
 		netdev_err(dev, "DMAing conflict in ne_block_input "
 			   "[DMAstat:%d][irqlock:%d].\n",
@@ -772,7 +871,11 @@ static void ne_block_input(struct net_device *dev, int count, struct sk_buff *sk
 	   or 2) have noise/speed problems with your bus. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_debug > 1)
+=======
+	if (netif_msg_rx_status(ei_local))
+>>>>>>> v3.18
 =======
 	if (netif_msg_rx_status(ei_local))
 >>>>>>> v3.18
@@ -790,9 +893,15 @@ static void ne_block_input(struct net_device *dev, int count, struct sk_buff *sk
 		} while (--tries > 0);
 	 	if (tries <= 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "%s: RX transfer address mismatch,"
 				"%#4.4x (expected) vs. %#4.4x (actual).\n",
 				dev->name, ring_offset + xfer_count, addr);
+=======
+			netdev_warn(dev, "RX transfer address mismatch,"
+				    "%#4.4x (expected) vs. %#4.4x (actual).\n",
+				    ring_offset + xfer_count, addr);
+>>>>>>> v3.18
 =======
 			netdev_warn(dev, "RX transfer address mismatch,"
 				    "%#4.4x (expected) vs. %#4.4x (actual).\n",
@@ -812,6 +921,10 @@ static void ne_block_output(struct net_device *dev, int count,
 #ifdef NE_SANITY_CHECK
 	int retries = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ei_device *ei_local = netdev_priv(dev);
+>>>>>>> v3.18
 =======
 	struct ei_device *ei_local = netdev_priv(dev);
 >>>>>>> v3.18
@@ -828,9 +941,15 @@ static void ne_block_output(struct net_device *dev, int count,
 	if (ei_status.dmaing)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_EMERG "%s: DMAing conflict in ne_block_output."
 			"[DMAstat:%d][irqlock:%d]\n",
 			dev->name, ei_status.dmaing, ei_status.irqlock);
+=======
+		netdev_err(dev, "DMAing conflict in ne_block_output."
+			   "[DMAstat:%d][irqlock:%d]\n",
+			   ei_status.dmaing, ei_status.irqlock);
+>>>>>>> v3.18
 =======
 		netdev_err(dev, "DMAing conflict in ne_block_output."
 			   "[DMAstat:%d][irqlock:%d]\n",
@@ -883,7 +1002,11 @@ retry:
 	   been encountering problems so it is still here. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_debug > 1)
+=======
+	if (netif_msg_tx_queued(ei_local))
+>>>>>>> v3.18
 =======
 	if (netif_msg_tx_queued(ei_local))
 >>>>>>> v3.18
@@ -901,9 +1024,15 @@ retry:
 		if (tries <= 0)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "%s: Tx packet transfer address mismatch,"
 				"%#4.4x (expected) vs. %#4.4x (actual).\n",
 				dev->name, (start_page << 8) + count, addr);
+=======
+			netdev_warn(dev, "Tx packet transfer address mismatch,"
+				    "%#4.4x (expected) vs. %#4.4x (actual).\n",
+				    (start_page << 8) + count, addr);
+>>>>>>> v3.18
 =======
 			netdev_warn(dev, "Tx packet transfer address mismatch,"
 				    "%#4.4x (expected) vs. %#4.4x (actual).\n",
@@ -918,7 +1047,11 @@ retry:
 	while ((inb_p(nic_base + EN0_ISR) & ENISR_RDC) == 0)
 		if (time_after(jiffies, dma_start + 2*HZ/100)) {		/* 20ms */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "%s: timeout waiting for Tx RDC.\n", dev->name);
+=======
+			netdev_warn(dev, "timeout waiting for Tx RDC.\n");
+>>>>>>> v3.18
 =======
 			netdev_warn(dev, "timeout waiting for Tx RDC.\n");
 >>>>>>> v3.18
@@ -995,7 +1128,10 @@ static int ne_drv_remove(struct platform_device *pdev)
 		release_region(dev->base_addr, NE_IO_EXTENT);
 		free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1086,8 +1222,13 @@ int __init init_module(void)
 	if (retval) {
 		if (io[0] == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_NOTICE "ne.c: You must supply \"io=0xNNN\""
 				" value(s) for ISA cards.\n");
+=======
+			pr_notice("ne.c: You must supply \"io=0xNNN\""
+			       " value(s) for ISA cards.\n");
+>>>>>>> v3.18
 =======
 			pr_notice("ne.c: You must supply \"io=0xNNN\""
 			       " value(s) for ISA cards.\n");

@@ -21,6 +21,10 @@
 #include <linux/mm.h>
 #include <linux/of_fdt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_platform.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_platform.h>
 >>>>>>> v3.18
@@ -46,7 +50,10 @@
 #include <asm/mmzone.h>
 #include <asm/processor.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/prom.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/sections.h>
@@ -113,10 +120,13 @@
 extern char _heap_start[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_METAG_BUILTIN_DTB
 extern u32 __dtb_start[];
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_DA_CONSOLE
@@ -125,7 +135,11 @@ extern struct console dash_console;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct machine_desc *machine_desc __initdata;
+=======
+const struct machine_desc *machine_desc __initdata;
+>>>>>>> v3.18
 =======
 const struct machine_desc *machine_desc __initdata;
 >>>>>>> v3.18
@@ -316,6 +330,7 @@ void __init setup_arch(char **cmdline_p)
 	 * stacks easier to understand and may allow us to unmap the
 	 * bootloader at some point.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *
 	 * We need to keep the LWK handler that TBI installed in order to
 	 * be able to do inter-thread comms.
@@ -323,6 +338,11 @@ void __init setup_arch(char **cmdline_p)
 	for (i = 0; i <= TBID_SIGNUM_MAX; i++)
 		if (i != TBID_SIGNUM_LWK)
 			_pTBI->fnSigs[i] = __TBIUnExpXXX;
+=======
+	 */
+	for (i = 0; i <= TBID_SIGNUM_MAX; i++)
+		_pTBI->fnSigs[i] = __TBIUnExpXXX;
+>>>>>>> v3.18
 =======
 	 */
 	for (i = 0; i <= TBID_SIGNUM_MAX; i++)
@@ -428,9 +448,13 @@ void __init setup_arch(char **cmdline_p)
 	hwthread_id_2_cpu[hard_processor_id()] = smp_processor_id();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Copy device tree blob into non-init memory before unflattening */
 	copy_fdt();
 	unflatten_device_tree();
+=======
+	unflatten_and_copy_device_tree();
+>>>>>>> v3.18
 =======
 	unflatten_and_copy_device_tree();
 >>>>>>> v3.18
@@ -449,6 +473,12 @@ static int __init customize_machine(void)
 	if (machine_desc->init_machine)
 		machine_desc->init_machine();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else
+		of_platform_populate(NULL, of_default_bus_match_table, NULL,
+				     NULL);
+>>>>>>> v3.18
 =======
 	else
 		of_platform_populate(NULL, of_default_bus_match_table, NULL,
@@ -618,6 +648,7 @@ EXPORT_SYMBOL(pTBI_get);
 
 #if defined(CONFIG_METAG_DSP) && defined(CONFIG_METAG_FPU)
 <<<<<<< HEAD
+<<<<<<< HEAD
 char capabilites[] = "dsp fpu";
 #elif defined(CONFIG_METAG_DSP)
 char capabilites[] = "dsp";
@@ -626,6 +657,8 @@ char capabilites[] = "fpu";
 #else
 char capabilites[] = "";
 =======
+=======
+>>>>>>> v3.18
 static char capabilities[] = "dsp fpu";
 #elif defined(CONFIG_METAG_DSP)
 static char capabilities[] = "dsp";
@@ -633,6 +666,9 @@ static char capabilities[] = "dsp";
 static char capabilities[] = "fpu";
 #else
 static char capabilities[] = "";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -640,8 +676,13 @@ static struct ctl_table caps_kern_table[] = {
 	{
 		.procname	= "capabilities",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.data		= capabilites,
 		.maxlen		= sizeof(capabilites),
+=======
+		.data		= capabilities,
+		.maxlen		= sizeof(capabilities),
+>>>>>>> v3.18
 =======
 		.data		= capabilities,
 		.maxlen		= sizeof(capabilities),

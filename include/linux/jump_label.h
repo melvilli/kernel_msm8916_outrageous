@@ -9,8 +9,13 @@
  *
  * Jump labels provide an interface to generate dynamic branches using
 <<<<<<< HEAD
+<<<<<<< HEAD
  * self-modifying code. Assuming toolchain and architecture support the result
  * of a "if (static_key_false(&key))" statement is a unconditional branch (which
+=======
+ * self-modifying code. Assuming toolchain and architecture support, the result
+ * of a "if (static_key_false(&key))" statement is an unconditional branch (which
+>>>>>>> v3.18
 =======
  * self-modifying code. Assuming toolchain and architecture support, the result
  * of a "if (static_key_false(&key))" statement is an unconditional branch (which
@@ -20,6 +25,7 @@
  * However at runtime we can change the branch target using
  * static_key_slow_{inc,dec}(). These function as a 'reference' count on the key
 <<<<<<< HEAD
+<<<<<<< HEAD
  * object and for as long as there are references all branches referring to
  * that particular key will point to the (out of line) true block.
  *
@@ -27,19 +33,28 @@
  * must be considered absolute slow paths (machine wide synchronization etc.).
  * OTOH, since the affected branches are unconditional their runtime overhead
 =======
+=======
+>>>>>>> v3.18
  * object, and for as long as there are references all branches referring to
  * that particular key will point to the (out of line) true block.
  *
  * Since this relies on modifying code, the static_key_slow_{inc,dec}() functions
  * must be considered absolute slow paths (machine wide synchronization etc.).
  * OTOH, since the affected branches are unconditional, their runtime overhead
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * will be absolutely minimal, esp. in the default (off) case where the total
  * effect is a single NOP of appropriate size. The on case will patch in a jump
  * to the out-of-line block.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * When the control is directly exposed to userspace it is prudent to delay the
+=======
+ * When the control is directly exposed to userspace, it is prudent to delay the
+>>>>>>> v3.18
 =======
  * When the control is directly exposed to userspace, it is prudent to delay the
 >>>>>>> v3.18
@@ -48,7 +63,11 @@
  * static_key_slow_dec_deferred() provide for this.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Lacking toolchain and or architecture support, it falls back to a simple
+=======
+ * Lacking toolchain and or architecture support, jump labels fall back to a simple
+>>>>>>> v3.18
 =======
  * Lacking toolchain and or architecture support, jump labels fall back to a simple
 >>>>>>> v3.18
@@ -66,6 +85,7 @@
  * Not initializing the key (static data is initialized to 0s anyway) is the
  * same as using STATIC_KEY_INIT_FALSE.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
 */
 
@@ -73,6 +93,8 @@
 #include <linux/compiler.h>
 #include <linux/workqueue.h>
 =======
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/types.h>
@@ -84,6 +106,9 @@ extern bool static_key_initialized;
 #define STATIC_KEY_CHECK_USE() WARN(!static_key_initialized,		      \
 				    "%s used before call to jump_label_init", \
 				    __func__)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if defined(CC_HAVE_ASM_GOTO) && defined(CONFIG_JUMP_LABEL)
@@ -98,6 +123,7 @@ struct static_key {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct static_key_deferred {
 	struct static_key key;
 	unsigned long timeout;
@@ -107,12 +133,17 @@ struct static_key_deferred {
 # include <asm/jump_label.h>
 # define HAVE_JUMP_LABEL
 =======
+=======
+>>>>>>> v3.18
 # include <asm/jump_label.h>
 # define HAVE_JUMP_LABEL
 #else
 struct static_key {
 	atomic_t enabled;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* CC_HAVE_ASM_GOTO && CONFIG_JUMP_LABEL */
 
@@ -124,10 +155,13 @@ enum jump_label_type {
 struct module;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HAVE_JUMP_LABEL
 
 #define JUMP_LABEL_TRUE_BRANCH 1UL
 =======
+=======
+>>>>>>> v3.18
 #include <linux/atomic.h>
 
 static inline int static_key_count(struct static_key *key)
@@ -140,6 +174,9 @@ static inline int static_key_count(struct static_key *key)
 #define JUMP_LABEL_TYPE_FALSE_BRANCH	0UL
 #define JUMP_LABEL_TYPE_TRUE_BRANCH	1UL
 #define JUMP_LABEL_TYPE_MASK		1UL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static
@@ -147,7 +184,11 @@ inline struct jump_entry *jump_label_get_entries(struct static_key *key)
 {
 	return (struct jump_entry *)((unsigned long)key->entries
 <<<<<<< HEAD
+<<<<<<< HEAD
 						& ~JUMP_LABEL_TRUE_BRANCH);
+=======
+						& ~JUMP_LABEL_TYPE_MASK);
+>>>>>>> v3.18
 =======
 						& ~JUMP_LABEL_TYPE_MASK);
 >>>>>>> v3.18
@@ -156,7 +197,12 @@ inline struct jump_entry *jump_label_get_entries(struct static_key *key)
 static inline bool jump_label_get_branch_default(struct static_key *key)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((unsigned long)key->entries & JUMP_LABEL_TRUE_BRANCH)
+=======
+	if (((unsigned long)key->entries & JUMP_LABEL_TYPE_MASK) ==
+	    JUMP_LABEL_TYPE_TRUE_BRANCH)
+>>>>>>> v3.18
 =======
 	if (((unsigned long)key->entries & JUMP_LABEL_TYPE_MASK) ==
 	    JUMP_LABEL_TYPE_TRUE_BRANCH)
@@ -189,6 +235,7 @@ extern int jump_label_text_reserved(void *start, void *end);
 extern void static_key_slow_inc(struct static_key *key);
 extern void static_key_slow_dec(struct static_key *key);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void static_key_slow_dec_deferred(struct static_key_deferred *key);
 extern void jump_label_apply_nops(struct module *mod);
 extern void
@@ -219,6 +266,8 @@ static __always_inline bool static_key_false(struct static_key *key)
 {
 	if (unlikely(atomic_read(&key->enabled)) > 0)
 =======
+=======
+>>>>>>> v3.18
 extern void jump_label_apply_nops(struct module *mod);
 
 #define STATIC_KEY_INIT_TRUE ((struct static_key)		\
@@ -238,6 +287,9 @@ static __always_inline void jump_label_init(void)
 static __always_inline bool static_key_false(struct static_key *key)
 {
 	if (unlikely(static_key_count(key) > 0))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return true;
 	return false;
@@ -246,7 +298,11 @@ static __always_inline bool static_key_false(struct static_key *key)
 static __always_inline bool static_key_true(struct static_key *key)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(atomic_read(&key->enabled)) > 0)
+=======
+	if (likely(static_key_count(key) > 0))
+>>>>>>> v3.18
 =======
 	if (likely(static_key_count(key) > 0))
 >>>>>>> v3.18
@@ -257,6 +313,10 @@ static __always_inline bool static_key_true(struct static_key *key)
 static inline void static_key_slow_inc(struct static_key *key)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	STATIC_KEY_CHECK_USE();
+>>>>>>> v3.18
 =======
 	STATIC_KEY_CHECK_USE();
 >>>>>>> v3.18
@@ -265,6 +325,7 @@ static inline void static_key_slow_inc(struct static_key *key)
 
 static inline void static_key_slow_dec(struct static_key *key)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	atomic_dec(&key->enabled);
 }
@@ -275,10 +336,15 @@ static inline void static_key_slow_dec_deferred(struct static_key_deferred *key)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	STATIC_KEY_CHECK_USE();
 	atomic_dec(&key->enabled);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int jump_label_text_reserved(void *start, void *end)
 {
@@ -294,12 +360,15 @@ static inline int jump_label_apply_nops(struct module *mod)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void
 jump_label_rate_limit(struct static_key_deferred *key,
 		unsigned long rl)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define STATIC_KEY_INIT_TRUE ((struct static_key) \
@@ -314,6 +383,7 @@ jump_label_rate_limit(struct static_key_deferred *key,
 
 static inline bool static_key_enabled(struct static_key *key)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return (atomic_read(&key->enabled) > 0);
 }
@@ -332,6 +402,9 @@ static inline void static_key_disable(struct static_key *key)
 
 	if (count)
 		static_key_slow_dec(key);
+=======
+	return static_key_count(key) > 0;
+>>>>>>> v3.18
 =======
 	return static_key_count(key) > 0;
 >>>>>>> v3.18

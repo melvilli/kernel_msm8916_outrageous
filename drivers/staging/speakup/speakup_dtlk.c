@@ -68,6 +68,7 @@ static struct var_t vars[] = {
  */
 static struct kobj_attribute caps_start_attribute =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ATTR(caps_start, USER_RW, spk_var_show, spk_var_store);
 static struct kobj_attribute caps_stop_attribute =
 	__ATTR(caps_stop, USER_RW, spk_var_show, spk_var_store);
@@ -97,6 +98,8 @@ static struct kobj_attribute jiffy_delta_attribute =
 static struct kobj_attribute trigger_time_attribute =
 	__ATTR(trigger_time, ROOT_W, spk_var_show, spk_var_store);
 =======
+=======
+>>>>>>> v3.18
 	__ATTR(caps_start, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
 static struct kobj_attribute caps_stop_attribute =
 	__ATTR(caps_stop, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
@@ -125,6 +128,9 @@ static struct kobj_attribute jiffy_delta_attribute =
 	__ATTR(jiffy_delta, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
 static struct kobj_attribute trigger_time_attribute =
 	__ATTR(trigger_time, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -206,6 +212,10 @@ static void spk_out(const char ch)
 {
 	int timeout = SPK_XMITR_TIMEOUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -236,6 +246,7 @@ static void do_catch_up(struct spk_synth *synth)
 	jiffy_delta = spk_get_var(JIFFY);
 	delay_time = spk_get_var(DELAY);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
 	jiffy_delta_val = jiffy_delta->u.n.value;
 	spk_unlock(flags);
@@ -246,6 +257,8 @@ static void do_catch_up(struct spk_synth *synth)
 			speakup_info.flushing = 0;
 			spk_unlock(flags);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 	jiffy_delta_val = jiffy_delta->u.n.value;
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
@@ -255,13 +268,20 @@ static void do_catch_up(struct spk_synth *synth)
 		if (speakup_info.flushing) {
 			speakup_info.flushing = 0;
 			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			synth->flush(synth);
 			continue;
 		}
 		if (synth_buffer_empty()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spk_unlock(flags);
+=======
+			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -270,7 +290,11 @@ static void do_catch_up(struct spk_synth *synth)
 		set_current_state(TASK_INTERRUPTIBLE);
 		delay_time_val = delay_time->u.n.value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spk_unlock(flags);
+=======
+		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -280,9 +304,15 @@ static void do_catch_up(struct spk_synth *synth)
 		}
 		set_current_state(TASK_RUNNING);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spk_lock(flags);
 		ch = synth_buffer_getc();
 		spk_unlock(flags);
+=======
+		spin_lock_irqsave(&speakup_info.spinlock, flags);
+		ch = synth_buffer_getc();
+		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 		spin_lock_irqsave(&speakup_info.spinlock, flags);
 		ch = synth_buffer_getc();
@@ -294,15 +324,21 @@ static void do_catch_up(struct spk_synth *synth)
 		if ((jiffies >= jiff_max) && (ch == SPACE)) {
 			spk_out(PROCSPEECH);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spk_lock(flags);
 			delay_time_val = delay_time->u.n.value;
 			jiffy_delta_val = jiffy_delta->u.n.value;
 			spk_unlock(flags);
 =======
+=======
+>>>>>>> v3.18
 			spin_lock_irqsave(&speakup_info.spinlock, flags);
 			delay_time_val = delay_time->u.n.value;
 			jiffy_delta_val = jiffy_delta->u.n.value;
 			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			schedule_timeout(msecs_to_jiffies(delay_time_val));
 			jiff_max = jiffies + jiffy_delta_val;
@@ -315,6 +351,10 @@ static const char *synth_immediate(struct spk_synth *synth, const char *buf)
 {
 	u_char ch;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -327,7 +367,11 @@ static const char *synth_immediate(struct spk_synth *synth, const char *buf)
 		buf++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return NULL;
+>>>>>>> v3.18
 =======
 	return NULL;
 >>>>>>> v3.18
@@ -344,6 +388,10 @@ static char synth_read_tts(void)
 {
 	u_char ch;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -364,6 +412,10 @@ static struct synth_settings *synth_interrogate(struct spk_synth *synth)
 	int total, i;
 	static struct synth_settings status;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -409,6 +461,10 @@ static int synth_probe(struct spk_synth *synth)
 	int i = 0;
 	struct synth_settings *sp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

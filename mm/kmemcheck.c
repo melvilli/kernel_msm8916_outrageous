@@ -3,6 +3,10 @@
 #include <linux/mm.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "slab.h"
+>>>>>>> v3.18
 =======
 #include "slab.h"
 >>>>>>> v3.18

@@ -15,7 +15,10 @@
 #include <asm/sgidefs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * starting with binutils 2.24.51.20140729, MIPS binutils warn about mixing
  * hardfloat and softfloat object files.  The kernel build uses soft-float by
@@ -30,6 +33,9 @@
 #define SET_HARDFLOAT
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if _MIPS_SIM == _MIPS_SIM_ABI32
 

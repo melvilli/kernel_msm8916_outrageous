@@ -113,6 +113,7 @@ struct garp_port {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int	garp_register_application(struct garp_application *app);
 extern void	garp_unregister_application(struct garp_application *app);
 
@@ -128,6 +129,8 @@ extern void	garp_request_leave(const struct net_device *dev,
 				   const struct garp_application *app,
 				   const void *data, u8 len, u8 type);
 =======
+=======
+>>>>>>> v3.18
 int garp_register_application(struct garp_application *app);
 void garp_unregister_application(struct garp_application *app);
 
@@ -141,6 +144,9 @@ int garp_request_join(const struct net_device *dev,
 void garp_request_leave(const struct net_device *dev,
 			const struct garp_application *app,
 			const void *data, u8 len, u8 type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _NET_GARP_H */

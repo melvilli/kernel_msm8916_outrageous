@@ -39,7 +39,11 @@ struct mci {
 	__u32 ia :  1; /* 23 psw instruction address validity */
 	__u32 fa :  1; /* 24 failing storage address validity */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32	 :  1; /* 25 */
+=======
+	__u32 vr :  1; /* 25 vector register validity */
+>>>>>>> v3.18
 =======
 	__u32 vr :  1; /* 25 vector register validity */
 >>>>>>> v3.18

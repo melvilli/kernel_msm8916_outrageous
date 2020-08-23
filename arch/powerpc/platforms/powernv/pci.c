@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -25,6 +28,10 @@
 #include <linux/io.h>
 #include <linux/msi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/iommu.h>
+>>>>>>> v3.18
 =======
 #include <linux/iommu.h>
 >>>>>>> v3.18
@@ -41,6 +48,11 @@
 #include <asm/tce.h>
 #include <asm/firmware.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/eeh_event.h>
+#include <asm/eeh.h>
+>>>>>>> v3.18
 =======
 #include <asm/eeh_event.h>
 #include <asm/eeh.h>
@@ -57,6 +69,7 @@
 
 #ifdef CONFIG_PCI_MSI
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pnv_msi_check_device(struct pci_dev* pdev, int nvec, int type)
 {
 	struct pci_controller *hose = pci_bus_to_host(pdev->bus);
@@ -70,6 +83,8 @@ static int pnv_msi_check_device(struct pci_dev* pdev, int nvec, int type)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int pnv_setup_msi_irqs(struct pci_dev *pdev, int nvec, int type)
 {
 	struct pci_controller *hose = pci_bus_to_host(pdev->bus);
@@ -81,12 +96,18 @@ static int pnv_setup_msi_irqs(struct pci_dev *pdev, int nvec, int type)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON(!phb))
 =======
+=======
+>>>>>>> v3.18
 	if (WARN_ON(!phb) || !phb->msi_bmp.bitmap)
 		return -ENODEV;
 
 	if (pdev->no_64bit_msi && !phb->msi32_support)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENODEV;
 
@@ -129,7 +150,10 @@ static void pnv_teardown_msi_irqs(struct pci_dev *pdev)
 	struct pnv_phb *phb = hose->private_data;
 	struct msi_desc *entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_hw_number_t hwirq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -140,20 +164,27 @@ static void pnv_teardown_msi_irqs(struct pci_dev *pdev)
 		if (entry->irq == NO_IRQ)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hwirq = virq_to_hw(entry->irq);
 		irq_set_msi_desc(entry->irq, NULL);
 		irq_dispose_mapping(entry->irq);
 		msi_bitmap_free_hwirqs(&phb->msi_bmp, hwirq - phb->msi_base, 1);
 =======
+=======
+>>>>>>> v3.18
 		irq_set_msi_desc(entry->irq, NULL);
 		msi_bitmap_free_hwirqs(&phb->msi_bmp,
 			virq_to_hw(entry->irq) - phb->msi_base, 1);
 		irq_dispose_mapping(entry->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 #endif /* CONFIG_PCI_MSI */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void pnv_pci_dump_p7ioc_diag_data(struct pnv_phb *phb)
 {
@@ -227,6 +258,8 @@ static void pnv_pci_dump_phb_diag_data(struct pnv_phb *phb)
 		pr_warning("PCI %d: Can't decode this PHB diag data\n",
 			   phb->hose->global_number);
 =======
+=======
+>>>>>>> v3.18
 static void pnv_pci_dump_p7ioc_diag_data(struct pci_controller *hose,
 					 struct OpalIoPhbErrorCommon *common)
 {
@@ -434,6 +467,9 @@ void pnv_pci_dump_phb_diag_data(struct pci_controller *hose,
 	default:
 		pr_warn("%s: Unrecognized ioType %d\n",
 			__func__, be32_to_cpu(common->ioType));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -441,6 +477,7 @@ void pnv_pci_dump_phb_diag_data(struct pci_controller *hose,
 static void pnv_pci_handle_eeh_config(struct pnv_phb *phb, u32 pe_no)
 {
 	unsigned long flags, rc;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int has_diag;
 
@@ -509,6 +546,8 @@ static int pnv_pci_read_config(struct pci_bus *bus,
 		return PCIBIOS_DEVICE_NOT_FOUND;
 
 =======
+=======
+>>>>>>> v3.18
 	int has_diag, ret = 0;
 
 	spin_lock_irqsave(&phb->lock, flags);
@@ -615,6 +654,9 @@ int pnv_pci_cfg_read(struct device_node *dn,
 	u32 bdfn = (pdn->busno << 8) | pdn->devfn;
 	s64 rc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (size) {
 	case 1: {
@@ -624,6 +666,7 @@ int pnv_pci_cfg_read(struct device_node *dn,
 		break;
 	}
 	case 2: {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		u16 v16;
 		rc = opal_pci_config_read_half_word(phb->opal_id, bdfn, where,
@@ -636,6 +679,8 @@ int pnv_pci_cfg_read(struct device_node *dn,
 		rc = opal_pci_config_read_word(phb->opal_id, bdfn, where, &v32);
 		*val = (rc == OPAL_SUCCESS) ? v32 : 0xffffffff;
 =======
+=======
+>>>>>>> v3.18
 		__be16 v16;
 		rc = opal_pci_config_read_half_word(phb->opal_id, bdfn, where,
 						   &v16);
@@ -646,12 +691,16 @@ int pnv_pci_cfg_read(struct device_node *dn,
 		__be32 v32;
 		rc = opal_pci_config_read_word(phb->opal_id, bdfn, where, &v32);
 		*val = (rc == OPAL_SUCCESS) ? be32_to_cpu(v32) : 0xffffffff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
 	default:
 		return PCIBIOS_FUNC_NOT_SUPPORTED;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cfg_dbg("pnv_pci_read_config bus: %x devfn: %x +%x/%x -> %08x\n",
 		bus->number, devfn, where, size, *val);
@@ -676,6 +725,8 @@ static int pnv_pci_write_config(struct pci_bus *bus,
 	cfg_dbg("pnv_pci_write_config bus: %x devfn: %x +%x/%x -> %08x\n",
 		bus->number, devfn, where, size, val);
 =======
+=======
+>>>>>>> v3.18
 
 	cfg_dbg("%s: bus: %x devfn: %x +%x/%x -> %08x\n",
 		__func__, pdn->busno, pdn->devfn, where, size, *val);
@@ -691,6 +742,9 @@ int pnv_pci_cfg_write(struct device_node *dn,
 
 	cfg_dbg("%s: bus: %x devfn: %x +%x/%x -> %08x\n",
 		pdn->busno, pdn->devfn, where, size, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (size) {
 	case 1:
@@ -706,8 +760,11 @@ int pnv_pci_cfg_write(struct device_node *dn,
 		return PCIBIOS_FUNC_NOT_SUPPORTED;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check if the PHB got frozen due to an error (no response) */
 	pnv_pci_config_check_eeh(phb, bus, bdfn);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -715,9 +772,12 @@ int pnv_pci_cfg_write(struct device_node *dn,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pci_ops pnv_pci_ops = {
 	.read = pnv_pci_read_config,
 =======
+=======
+>>>>>>> v3.18
 #if CONFIG_EEH
 static bool pnv_pci_cfg_check(struct pci_controller *hose,
 			      struct device_node *dn)
@@ -816,6 +876,9 @@ static int pnv_pci_write_config(struct pci_bus *bus,
 
 struct pci_ops pnv_pci_ops = {
 	.read  = pnv_pci_read_config,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.write = pnv_pci_write_config,
 };
@@ -823,15 +886,21 @@ struct pci_ops pnv_pci_ops = {
 static int pnv_tce_build(struct iommu_table *tbl, long index, long npages,
 			 unsigned long uaddr, enum dma_data_direction direction,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct dma_attrs *attrs)
 {
 	u64 proto_tce;
 	u64 *tcep, *tces;
 =======
+=======
+>>>>>>> v3.18
 			 struct dma_attrs *attrs, bool rm)
 {
 	u64 proto_tce;
 	__be64 *tcep, *tces;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u64 rpn;
 
@@ -841,18 +910,24 @@ static int pnv_tce_build(struct iommu_table *tbl, long index, long npages,
 		proto_tce |= TCE_PCI_WRITE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tces = tcep = ((u64 *)tbl->it_base) + index - tbl->it_offset;
 	rpn = __pa(uaddr) >> TCE_SHIFT;
 
 	while (npages--)
 		*(tcep++) = proto_tce | (rpn++ << TCE_RPN_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 	tces = tcep = ((__be64 *)tbl->it_base) + index - tbl->it_offset;
 	rpn = __pa(uaddr) >> tbl->it_page_shift;
 
 	while (npages--)
 		*(tcep++) = cpu_to_be64(proto_tce |
 				(rpn++ << tbl->it_page_shift));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Some implementations won't cache invalid TCEs and thus may not
@@ -861,7 +936,11 @@ static int pnv_tce_build(struct iommu_table *tbl, long index, long npages,
 	 */
 	if (tbl->it_type & TCE_PCI_SWINV_CREATE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pnv_pci_ioda_tce_invalidate(tbl, tces, tcep - 1);
+=======
+		pnv_pci_ioda_tce_invalidate(tbl, tces, tcep - 1, rm);
+>>>>>>> v3.18
 =======
 		pnv_pci_ioda_tce_invalidate(tbl, tces, tcep - 1, rm);
 >>>>>>> v3.18
@@ -869,6 +948,7 @@ static int pnv_tce_build(struct iommu_table *tbl, long index, long npages,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void pnv_tce_free(struct iommu_table *tbl, long index, long npages)
 {
@@ -882,6 +962,8 @@ static void pnv_tce_free(struct iommu_table *tbl, long index, long npages)
 	if (tbl->it_type & TCE_PCI_SWINV_FREE)
 		pnv_pci_ioda_tce_invalidate(tbl, tces, tcep - 1);
 =======
+=======
+>>>>>>> v3.18
 static int pnv_tce_build_vm(struct iommu_table *tbl, long index, long npages,
 			    unsigned long uaddr,
 			    enum dma_data_direction direction,
@@ -908,6 +990,9 @@ static void pnv_tce_free(struct iommu_table *tbl, long index, long npages,
 static void pnv_tce_free_vm(struct iommu_table *tbl, long index, long npages)
 {
 	pnv_tce_free(tbl, index, npages, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -917,6 +1002,7 @@ static unsigned long pnv_tce_get(struct iommu_table *tbl, long index)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pnv_pci_setup_iommu_table(struct iommu_table *tbl,
 			       void *tce_mem, u64 tce_size,
 			       u64 dma_offset)
@@ -925,6 +1011,8 @@ void pnv_pci_setup_iommu_table(struct iommu_table *tbl,
 	tbl->it_base = (unsigned long)tce_mem;
 	tbl->it_offset = dma_offset >> IOMMU_PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 static int pnv_tce_build_rm(struct iommu_table *tbl, long index, long npages,
 			    unsigned long uaddr,
 			    enum dma_data_direction direction,
@@ -946,6 +1034,9 @@ void pnv_pci_setup_iommu_table(struct iommu_table *tbl,
 	tbl->it_base = (unsigned long)tce_mem;
 	tbl->it_page_shift = page_shift;
 	tbl->it_offset = dma_offset >> tbl->it_page_shift;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tbl->it_index = 0;
 	tbl->it_size = tce_size >> 3;
@@ -971,8 +1062,14 @@ static struct iommu_table *pnv_pci_setup_bml_iommu(struct pci_controller *hose)
 		return NULL;
 	pnv_pci_setup_iommu_table(tbl, __va(be64_to_cpup(basep)),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  be32_to_cpup(sizep), 0);
 	iommu_init_table(tbl, hose->node);
+=======
+				  be32_to_cpup(sizep), 0, IOMMU_PAGE_SHIFT_4K);
+	iommu_init_table(tbl, hose->node);
+	iommu_register_group(tbl, pci_domain_nr(hose->bus), 0);
+>>>>>>> v3.18
 =======
 				  be32_to_cpup(sizep), 0, IOMMU_PAGE_SHIFT_4K);
 	iommu_init_table(tbl, hose->node);
@@ -984,8 +1081,13 @@ static struct iommu_table *pnv_pci_setup_bml_iommu(struct pci_controller *hose)
 				 NULL);
 	if (swinvp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tbl->it_busno = swinvp[1];
 		tbl->it_index = (unsigned long)ioremap(swinvp[0], 8);
+=======
+		tbl->it_busno = be64_to_cpu(swinvp[1]);
+		tbl->it_index = (unsigned long)ioremap(be64_to_cpup(swinvp), 8);
+>>>>>>> v3.18
 =======
 		tbl->it_busno = be64_to_cpu(swinvp[1]);
 		tbl->it_index = (unsigned long)ioremap(be64_to_cpup(swinvp), 8);
@@ -1009,7 +1111,11 @@ static void pnv_pci_dma_fallback_setup(struct pci_controller *hose,
 	if (!pdn->iommu_table)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_iommu_table_base(&pdev->dev, pdn->iommu_table);
+=======
+	set_iommu_table_base_and_group(&pdev->dev, pdn->iommu_table);
+>>>>>>> v3.18
 =======
 	set_iommu_table_base_and_group(&pdev->dev, pdn->iommu_table);
 >>>>>>> v3.18
@@ -1030,7 +1136,10 @@ static void pnv_pci_dma_dev_setup(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int pnv_pci_dma_set_mask(struct pci_dev *pdev, u64 dma_mask)
 {
 	struct pci_controller *hose = pci_bus_to_host(pdev->bus);
@@ -1052,6 +1161,9 @@ u64 pnv_pci_dma_get_required_mask(struct pci_dev *pdev)
 	return __dma_get_required_mask(&pdev->dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void pnv_pci_shutdown(void)
 {
@@ -1143,13 +1255,19 @@ void __init pnv_pci_init(void)
 	/* Configure IOMMU DMA hooks */
 	ppc_md.pci_dma_dev_setup = pnv_pci_dma_dev_setup;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ppc_md.tce_build = pnv_tce_build;
 	ppc_md.tce_free = pnv_tce_free;
 =======
+=======
+>>>>>>> v3.18
 	ppc_md.tce_build = pnv_tce_build_vm;
 	ppc_md.tce_free = pnv_tce_free_vm;
 	ppc_md.tce_build_rm = pnv_tce_build_rm;
 	ppc_md.tce_free_rm = pnv_tce_free_rm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ppc_md.tce_get = pnv_tce_get;
 	ppc_md.pci_probe_mode = pnv_pci_probe_mode;
@@ -1158,7 +1276,10 @@ void __init pnv_pci_init(void)
 	/* Configure MSIs */
 #ifdef CONFIG_PCI_MSI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ppc_md.msi_check_device = pnv_msi_check_device;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ppc_md.setup_msi_irqs = pnv_setup_msi_irqs;
@@ -1166,7 +1287,10 @@ void __init pnv_pci_init(void)
 #endif
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int tce_iommu_bus_notifier(struct notifier_block *nb,
 		unsigned long action, void *data)
@@ -1195,4 +1319,7 @@ static int __init tce_iommu_bus_notifier_init(void)
 	return 0;
 }
 machine_subsys_initcall_sync(powernv, tce_iommu_bus_notifier_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

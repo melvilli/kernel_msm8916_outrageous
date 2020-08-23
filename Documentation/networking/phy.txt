@@ -49,7 +49,11 @@ The MDIO bus
    the operation is complete
  
 <<<<<<< HEAD
+<<<<<<< HEAD
  2) A reset function is necessary.  This is used to return the bus to an
+=======
+ 2) A reset function is optional.  This is used to return the bus to an
+>>>>>>> v3.18
 =======
  2) A reset function is optional.  This is used to return the bus to an
 >>>>>>> v3.18
@@ -258,6 +262,7 @@ Writing a PHY driver
  Each driver consists of a number of function pointers:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    config_init: configures PHY into a sane state after a reset.
      For instance, a Davicom PHY requires descrambling disabled.
    probe: Does any setup needed by the driver
@@ -268,6 +273,8 @@ Writing a PHY driver
    config_intr: Enable or disable interrupts
    remove: Does any driver take-down
 =======
+=======
+>>>>>>> v3.18
    soft_reset: perform a PHY software reset
    config_init: configures PHY into a sane state after a reset.
      For instance, a Davicom PHY requires descrambling disabled.
@@ -289,6 +296,9 @@ Writing a PHY driver
    get_wol: Get the Wake-on-LAN status at the PHY level
    read_mmd_indirect: Read PHY MMD indirect register
    write_mmd_indirect: Write PHY MMD indirect register
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  Of these, only config_aneg and read_status are required to be
@@ -303,8 +313,11 @@ Writing a PHY driver
  Feel free to look at the Marvell, Cicada, and Davicom drivers in
  drivers/net/phy/ for examples (the lxt and qsemi drivers have
 <<<<<<< HEAD
+<<<<<<< HEAD
  not been tested as of this writing)
 =======
+=======
+>>>>>>> v3.18
  not been tested as of this writing).
 
  The PHY's MMD register accesses are handled by the PAL framework
@@ -320,6 +333,9 @@ Writing a PHY driver
  access interfaces if overridden by the specific PHY driver. See
  the Micrel driver in drivers/net/phy/ for an example of how this
  can be implemented.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Board Fixups

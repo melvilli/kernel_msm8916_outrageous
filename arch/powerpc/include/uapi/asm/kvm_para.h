@@ -83,6 +83,11 @@ struct kvm_vcpu_arch_shared {
 #define KVM_FEATURE_MAGIC_PAGE	1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Magic page flags from host to guest */
+
+>>>>>>> v3.18
 =======
 /* Magic page flags from host to guest */
 
@@ -93,11 +98,17 @@ struct kvm_vcpu_arch_shared {
 #define KVM_MAGIC_FEAT_MAS0_TO_SPRG7	(1 << 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Magic page flags from guest to host */
 
 #define MAGIC_PAGE_FLAG_NOT_MAPPED_NX	(1 << 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UAPI__POWERPC_KVM_PARA_H__ */

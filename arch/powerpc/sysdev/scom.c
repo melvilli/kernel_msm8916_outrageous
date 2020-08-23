@@ -26,6 +26,10 @@
 #include <asm/prom.h>
 #include <asm/scom.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <asm/uaccess.h>
 >>>>>>> v3.18
@@ -58,7 +62,11 @@ scom_map_t scom_map_device(struct device_node *dev, int index)
 	struct device_node *parent;
 	unsigned int cells, size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *prop;
+=======
+	const __be32 *prop, *sprop;
+>>>>>>> v3.18
 =======
 	const __be32 *prop, *sprop;
 >>>>>>> v3.18
@@ -71,6 +79,7 @@ scom_map_t scom_map_device(struct device_node *dev, int index)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prop = of_get_property(parent, "#scom-cells", NULL);
 	cells = prop ? *prop : 1;
 
@@ -78,6 +87,8 @@ scom_map_t scom_map_device(struct device_node *dev, int index)
 	if (!prop)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We support "scom-reg" properties for adding scom registers
 	 * to a random device-tree node with an explicit scom-parent
@@ -96,6 +107,9 @@ scom_map_t scom_map_device(struct device_node *dev, int index)
 	if (!prop)
 		return NULL;
 	cells = sprop ? be32_to_cpup(sprop) : 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	size >>= 2;
 
@@ -115,6 +129,7 @@ EXPORT_SYMBOL_GPL(scom_map_device);
 #ifdef CONFIG_SCOM_DEBUGFS
 struct scom_debug_entry {
 	struct device_node *dn;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long addr;
 	scom_map_t map;
@@ -173,6 +188,8 @@ static int scom_val_get(void *data, u64 *val)
 DEFINE_SIMPLE_ATTRIBUTE(scom_val_fops, scom_val_get, scom_val_set,
 			"0x%llx\n");
 =======
+=======
+>>>>>>> v3.18
 	struct debugfs_blob_wrapper path;
 	char name[16];
 };
@@ -256,6 +273,9 @@ static const struct file_operations scom_debug_fops = {
 	.open =		simple_open,
 	.llseek =	default_llseek,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int scom_debug_init_one(struct dentry *root, struct device_node *dn,
@@ -270,11 +290,17 @@ static int scom_debug_init_one(struct dentry *root, struct device_node *dn,
 
 	ent->dn = of_node_get(dn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ent->map = SCOM_MAP_INVALID;
 	spin_lock_init(&ent->lock);
 	snprintf(ent->name, 8, "scom%d", i);
 	ent->blob.data = (void*) dn->full_name;
 	ent->blob.size = strlen(dn->full_name);
+=======
+	snprintf(ent->name, 16, "%08x", i);
+	ent->path.data = (void*) dn->full_name;
+	ent->path.size = strlen(dn->full_name);
+>>>>>>> v3.18
 =======
 	snprintf(ent->name, 16, "%08x", i);
 	ent->path.data = (void*) dn->full_name;
@@ -289,9 +315,14 @@ static int scom_debug_init_one(struct dentry *root, struct device_node *dn,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debugfs_create_file("addr", 0600, dir, ent, &scom_addr_fops);
 	debugfs_create_file("value", 0600, dir, ent, &scom_val_fops);
 	debugfs_create_blob("path", 0400, dir, &ent->blob);
+=======
+	debugfs_create_blob("devspec", 0400, dir, &ent->path);
+	debugfs_create_file("access", 0600, dir, ent, &scom_debug_fops);
+>>>>>>> v3.18
 =======
 	debugfs_create_blob("devspec", 0400, dir, &ent->path);
 	debugfs_create_file("access", 0600, dir, ent, &scom_debug_fops);
@@ -312,9 +343,12 @@ static int scom_debug_init(void)
 
 	i = rc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_node_with_property(dn, "scom-controller")
 		rc |= scom_debug_init_one(root, dn, i++);
 =======
+=======
+>>>>>>> v3.18
 	for_each_node_with_property(dn, "scom-controller") {
 		int id = of_get_ibm_chip_id(dn);
 		if (id == -1)
@@ -322,6 +356,9 @@ static int scom_debug_init(void)
 		rc |= scom_debug_init_one(root, dn, id);
 		i++;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rc;

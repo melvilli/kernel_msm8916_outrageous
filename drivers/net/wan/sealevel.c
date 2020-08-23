@@ -267,7 +267,11 @@ static __init struct slvl_board *slvl_init(int iobase, int irq,
 	   IRQ ;) - This is one driver RtLinux is made for */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(irq, z8530_interrupt, IRQF_DISABLED,
+=======
+	if (request_irq(irq, z8530_interrupt, 0,
+>>>>>>> v3.18
 =======
 	if (request_irq(irq, z8530_interrupt, 0,
 >>>>>>> v3.18

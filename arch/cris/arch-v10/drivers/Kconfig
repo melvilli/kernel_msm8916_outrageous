@@ -3,9 +3,13 @@ if ETRAX_ARCH_V10
 config ETRAX_ETHERNET
 	bool "Ethernet support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ETRAX_ARCH_V10
 	select ETHERNET
 	select NET_CORE
+=======
+	depends on ETRAX_ARCH_V10 && NETDEVICES
+>>>>>>> v3.18
 =======
 	depends on ETRAX_ARCH_V10 && NETDEVICES
 >>>>>>> v3.18
@@ -424,6 +428,7 @@ config ETRAX_USB_HOST
 	   however (depending on the requirements of timeliness).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ETRAX_USB_HOST_PORT1
 	bool "USB port 1 enabled"
 	depends on ETRAX_USB_HOST
@@ -434,6 +439,8 @@ config ETRAX_USB_HOST_PORT2
 	depends on ETRAX_USB_HOST
 	default n
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ETRAX_PTABLE_SECTOR
@@ -537,6 +544,7 @@ config ETRAX_GPIO
 	  the General configuration.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ETRAX_PA_BUTTON_BITMASK
 	hex "PA-buttons bitmask"
 	depends on ETRAX_GPIO
@@ -550,6 +558,8 @@ config ETRAX_PA_BUTTON_BITMASK
 	  If the bitmask is <> 00 a button driver will be included in the gpio
 	  driver. ETRAX general I/O support must be enabled.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ETRAX_PA_CHANGEABLE_DIR
@@ -592,6 +602,7 @@ config ETRAX_PB_CHANGEABLE_BITS
 	  Bit set = changeable.
 	  You probably want 00 here.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ETRAX_DS1302_RST_ON_GENERIC_PORT
 	bool "DS1302 RST on Generic Port"
@@ -640,6 +651,8 @@ config ETRAX_DS1302_TRICKLE_CHARGE
 	  4 = 1 diode, 8 = 2 diodes
 	  Allowed values are (increasing current): 0, 11, 10, 9, 7, 6, 5
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif

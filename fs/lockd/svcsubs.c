@@ -15,8 +15,11 @@
 #include <linux/sunrpc/svc.h>
 #include <linux/sunrpc/addr.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/nfsd/nfsfh.h>
 #include <linux/nfsd/export.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/lockd/lockd.h>
@@ -24,6 +27,10 @@
 #include <linux/module.h>
 #include <linux/mount.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/linux/nfs2.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/nfs2.h>
 >>>>>>> v3.18
@@ -177,7 +184,11 @@ nlm_traverse_locks(struct nlm_host *host, struct nlm_file *file,
 again:
 	file->f_locks = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lock_flocks(); /* protects i_flock list */
+=======
+	spin_lock(&inode->i_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&inode->i_lock);
 >>>>>>> v3.18
@@ -193,7 +204,11 @@ again:
 			struct file_lock lock = *fl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unlock_flocks();
+=======
+			spin_unlock(&inode->i_lock);
+>>>>>>> v3.18
 =======
 			spin_unlock(&inode->i_lock);
 >>>>>>> v3.18
@@ -209,7 +224,11 @@ again:
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unlock_flocks();
+=======
+	spin_unlock(&inode->i_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&inode->i_lock);
 >>>>>>> v3.18
@@ -248,6 +267,7 @@ nlm_file_inuse(struct nlm_file *file)
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lock_flocks();
 	for (fl = inode->i_flock; fl; fl = fl->fl_next) {
 		if (fl->fl_lmops == &nlmsvc_lock_operations) {
@@ -257,6 +277,8 @@ nlm_file_inuse(struct nlm_file *file)
 	}
 	unlock_flocks();
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&inode->i_lock);
 	for (fl = inode->i_flock; fl; fl = fl->fl_next) {
 		if (fl->fl_lmops == &nlmsvc_lock_operations) {
@@ -265,6 +287,9 @@ nlm_file_inuse(struct nlm_file *file)
 		}
 	}
 	spin_unlock(&inode->i_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	file->f_locks = 0;
 	return 0;

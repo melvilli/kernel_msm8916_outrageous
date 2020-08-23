@@ -225,6 +225,7 @@ static int timbgpio_probe(struct platform_device *pdev)
 {
 	int err, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gpio_chip *gc;
 	struct timbgpio *tgpio;
 	struct resource *iomem;
@@ -235,6 +236,8 @@ static int timbgpio_probe(struct platform_device *pdev)
 		err = -EINVAL;
 		goto err_mem;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &pdev->dev;
 	struct gpio_chip *gc;
 	struct timbgpio *tgpio;
@@ -245,11 +248,15 @@ static int timbgpio_probe(struct platform_device *pdev)
 	if (!pdata || pdata->nr_pins > 32) {
 		dev_err(dev, "Invalid platform data\n");
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	iomem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!iomem) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		err = -EINVAL;
 		goto err_mem;
@@ -260,6 +267,8 @@ static int timbgpio_probe(struct platform_device *pdev)
 		err = -EINVAL;
 		goto err_mem;
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev, "Unable to get resource\n");
 		return -EINVAL;
 	}
@@ -268,12 +277,16 @@ static int timbgpio_probe(struct platform_device *pdev)
 	if (!tgpio) {
 		dev_err(dev, "Memory alloc failed\n");
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	tgpio->irq_base = pdata->irq_base;
 
 	spin_lock_init(&tgpio->lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!request_mem_region(iomem->start, resource_size(iomem),
 		DRIVER_NAME)) {
@@ -286,6 +299,8 @@ static int timbgpio_probe(struct platform_device *pdev)
 		err = -ENOMEM;
 		goto err_ioremap;
 =======
+=======
+>>>>>>> v3.18
 	if (!devm_request_mem_region(dev, iomem->start, resource_size(iomem),
 				     DRIVER_NAME)) {
 		dev_err(dev, "Region already claimed\n");
@@ -296,6 +311,9 @@ static int timbgpio_probe(struct platform_device *pdev)
 	if (!tgpio->membase) {
 		dev_err(dev, "Cannot ioremap\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -313,17 +331,23 @@ static int timbgpio_probe(struct platform_device *pdev)
 	gc->base = pdata->gpio_base;
 	gc->ngpio = pdata->nr_pins;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gc->can_sleep = 0;
 
 	err = gpiochip_add(gc);
 	if (err)
 		goto err_chipadd;
 =======
+=======
+>>>>>>> v3.18
 	gc->can_sleep = false;
 
 	err = gpiochip_add(gc);
 	if (err)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	platform_set_drvdata(pdev, tgpio);
@@ -336,8 +360,13 @@ static int timbgpio_probe(struct platform_device *pdev)
 
 	for (i = 0; i < pdata->nr_pins; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq_set_chip_and_handler_name(tgpio->irq_base + i,
 			&timbgpio_irqchip, handle_simple_irq, "mux");
+=======
+		irq_set_chip_and_handler(tgpio->irq_base + i,
+			&timbgpio_irqchip, handle_simple_irq);
+>>>>>>> v3.18
 =======
 		irq_set_chip_and_handler(tgpio->irq_base + i,
 			&timbgpio_irqchip, handle_simple_irq);
@@ -353,6 +382,7 @@ static int timbgpio_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err_chipadd:
 	iounmap(tgpio->membase);
@@ -366,15 +396,22 @@ err_mem:
 	return err;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int timbgpio_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 	struct timbgpio_platform_data *pdata = pdev->dev.platform_data;
 	struct timbgpio *tgpio = platform_get_drvdata(pdev);
 	struct resource *iomem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+=======
+	struct timbgpio_platform_data *pdata = dev_get_platdata(&pdev->dev);
+	struct timbgpio *tgpio = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct timbgpio_platform_data *pdata = dev_get_platdata(&pdev->dev);
 	struct timbgpio *tgpio = platform_get_drvdata(pdev);
@@ -393,6 +430,7 @@ static int timbgpio_remove(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = gpiochip_remove(&tgpio->gpio);
 	if (err)
 		printk(KERN_ERR DRIVER_NAME": failed to remove gpio_chip\n");
@@ -402,6 +440,9 @@ static int timbgpio_remove(struct platform_device *pdev)
 	kfree(tgpio);
 
 	platform_set_drvdata(pdev, NULL);
+=======
+	gpiochip_remove(&tgpio->gpio);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&tgpio->gpio);
 >>>>>>> v3.18

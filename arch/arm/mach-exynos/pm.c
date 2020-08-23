@@ -17,7 +17,13 @@
 #include <linux/suspend.h>
 #include <linux/syscore_ops.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
+=======
+#include <linux/cpu_pm.h>
+#include <linux/io.h>
+#include <linux/irqchip/arm-gic.h>
+>>>>>>> v3.18
 =======
 #include <linux/cpu_pm.h>
 #include <linux/io.h>
@@ -29,6 +35,7 @@
 #include <asm/cacheflush.h>
 #include <asm/hardware/cache-l2x0.h>
 #include <asm/smp_scu.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #include <plat/cpu.h>
@@ -69,6 +76,8 @@ static struct sleep_save exynos4_vpll_save[] = {
 	SAVE_ITEM(EXYNOS4_VPLL_CON0),
 	SAVE_ITEM(EXYNOS4_VPLL_CON1),
 =======
+=======
+>>>>>>> v3.18
 #include <asm/suspend.h>
 
 #include <plat/pm-common.h>
@@ -88,6 +97,9 @@ static struct sleep_save exynos4_vpll_save[] = {
 struct exynos_wkup_irq {
 	unsigned int hwirq;
 	u32 mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -104,6 +116,7 @@ static struct sleep_save exynos_core_save[] = {
 	SAVE_ITEM(S5P_SROM_BC3),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* For Cortex-A9 Diagnostic and Power control register */
@@ -268,6 +281,8 @@ static __init int exynos_pm_drvinit(void)
 }
 arch_initcall(exynos_pm_drvinit);
 =======
+=======
+>>>>>>> v3.18
 /*
  * GIC wake-up support
  */
@@ -481,12 +496,16 @@ static void exynos_pm_prepare(void)
 
 	pmu_raw_writel(virt_to_phys(exynos_cpu_resume), S5P_INFORM0);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int exynos_pm_suspend(void)
 {
 	unsigned long tmp;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Setting Central Sequence Register for power down mode */
 
@@ -496,10 +515,14 @@ static int exynos_pm_suspend(void)
 =======
 	exynos_pm_central_suspend();
 >>>>>>> v3.18
+=======
+	exynos_pm_central_suspend();
+>>>>>>> v3.18
 
 	/* Setting SEQ_OPTION register */
 
 	tmp = (S5P_USE_STANDBY_WFI0 | S5P_USE_STANDBY_WFE0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__raw_writel(tmp, S5P_CENTRAL_SEQ_OPTION);
 
@@ -515,10 +538,15 @@ static int exynos_pm_suspend(void)
 		save_arm_register[1] = tmp;
 	}
 =======
+=======
+>>>>>>> v3.18
 	pmu_raw_writel(tmp, S5P_CENTRAL_SEQ_OPTION);
 
 	if (read_cpuid_part() == ARM_CPU_PART_CORTEX_A9)
 		exynos_cpu_save_register();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -526,6 +554,7 @@ static int exynos_pm_suspend(void)
 
 static void exynos_pm_resume(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long tmp;
 
@@ -568,6 +597,8 @@ static void exynos_pm_resume(void)
 	__raw_writel((1 << 28), S5P_PAD_RET_EBIA_OPTION);
 	__raw_writel((1 << 28), S5P_PAD_RET_EBIB_OPTION);
 =======
+=======
+>>>>>>> v3.18
 	if (exynos_pm_central_resume())
 		goto early_wakeup;
 
@@ -583,6 +614,9 @@ static void exynos_pm_resume(void)
 	pmu_raw_writel((1 << 28), S5P_PAD_RET_MMCB_OPTION);
 	pmu_raw_writel((1 << 28), S5P_PAD_RET_EBIA_OPTION);
 	pmu_raw_writel((1 << 28), S5P_PAD_RET_EBIB_OPTION);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (soc_is_exynos5250())
@@ -591,6 +625,7 @@ static void exynos_pm_resume(void)
 
 	s3c_pm_do_restore_core(exynos_core_save, ARRAY_SIZE(exynos_core_save));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!soc_is_exynos5250()) {
 		exynos4_restore_pll();
@@ -603,12 +638,20 @@ static void exynos_pm_resume(void)
 	if (read_cpuid_part() == ARM_CPU_PART_CORTEX_A9)
 		scu_enable(S5P_VA_SCU);
 >>>>>>> v3.18
+=======
+	if (read_cpuid_part() == ARM_CPU_PART_CORTEX_A9)
+		scu_enable(S5P_VA_SCU);
+>>>>>>> v3.18
 
 early_wakeup:
 
 	/* Clear SLEEP mode set in INFORM1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(0x0, S5P_INFORM1);
+=======
+	pmu_raw_writel(0x0, S5P_INFORM1);
+>>>>>>> v3.18
 =======
 	pmu_raw_writel(0x0, S5P_INFORM1);
 >>>>>>> v3.18
@@ -622,6 +665,7 @@ static struct syscore_ops exynos_pm_syscore_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __init int exynos_pm_syscore_init(void)
 {
 	register_syscore_ops(&exynos_pm_syscore_ops);
@@ -629,6 +673,8 @@ static __init int exynos_pm_syscore_init(void)
 }
 arch_initcall(exynos_pm_syscore_init);
 =======
+=======
+>>>>>>> v3.18
 /*
  * Suspend Ops
  */
@@ -706,4 +752,7 @@ void __init exynos_pm_init(void)
 	register_syscore_ops(&exynos_pm_syscore_ops);
 	suspend_set_ops(&exynos_suspend_ops);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -71,7 +71,11 @@ static inline void kunmap(struct page *page)
  * it.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long kmap_atomic(struct page *page)
+=======
+static inline void *kmap_atomic(struct page *page)
+>>>>>>> v3.18
 =======
 static inline void *kmap_atomic(struct page *page)
 >>>>>>> v3.18
@@ -94,7 +98,11 @@ static inline void *kmap_atomic(struct page *page)
 	local_flush_tlb_one(vaddr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return vaddr;
+=======
+	return (void *)vaddr;
+>>>>>>> v3.18
 =======
 	return (void *)vaddr;
 >>>>>>> v3.18

@@ -9,13 +9,19 @@
 struct nouveau_disp {
 	struct nouveau_engine base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_event *vblank;
 =======
+=======
+>>>>>>> v3.18
 
 	struct list_head outp;
 
 	struct nvkm_event hpd;
 	struct nvkm_event vblank;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -25,6 +31,7 @@ nouveau_disp(void *obj)
 	return (void *)nv_device(obj)->subdev[NVDEV_ENGINE_DISP];
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define nouveau_disp_create(p,e,c,h,i,x,d)                                     \
 	nouveau_disp_create_((p), (e), (c), (h), (i), (x),                     \
@@ -55,6 +62,8 @@ extern struct nouveau_oclass nvd0_disp_oclass;
 extern struct nouveau_oclass nve0_disp_oclass;
 extern struct nouveau_oclass nvf0_disp_oclass;
 =======
+=======
+>>>>>>> v3.18
 extern struct nouveau_oclass *nv04_disp_oclass;
 extern struct nouveau_oclass *nv50_disp_oclass;
 extern struct nouveau_oclass *nv84_disp_oclass;
@@ -65,6 +74,9 @@ extern struct nouveau_oclass *nvd0_disp_oclass;
 extern struct nouveau_oclass *nve0_disp_oclass;
 extern struct nouveau_oclass *nvf0_disp_oclass;
 extern struct nouveau_oclass *gm107_disp_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

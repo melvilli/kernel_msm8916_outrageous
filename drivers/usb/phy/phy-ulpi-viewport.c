@@ -13,6 +13,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/export.h>
+>>>>>>> v3.18
 =======
 #include <linux/export.h>
 >>>>>>> v3.18
@@ -40,7 +44,11 @@ static int ulpi_viewport_wait(void __iomem *view, u32 mask)
 
 		udelay(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -87,6 +95,10 @@ struct usb_phy_io_ops ulpi_viewport_access_ops = {
 	.write	= ulpi_viewport_write,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(ulpi_viewport_access_ops);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(ulpi_viewport_access_ops);
 >>>>>>> v3.18

@@ -17,6 +17,10 @@
 #include <asm/thread_info.h>
 #include <asm/asm-offsets.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -70,6 +74,11 @@
  */
 ENTRY(crunch_task_enable)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	inc_preempt_count r10, r3
+
+>>>>>>> v3.18
 =======
 	inc_preempt_count r10, r3
 
@@ -79,7 +88,11 @@ ENTRY(crunch_task_enable)
 	ldr	r1, [r8, #0x80]
 	tst	r1, #0x00800000			@ access to crunch enabled?
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movne	pc, lr				@ if so no business here
+=======
+	bne	2f				@ if so no business here
+>>>>>>> v3.18
 =======
 	bne	2f				@ if so no business here
 >>>>>>> v3.18
@@ -156,7 +169,11 @@ crunch_save:
 	teq		r0, #0				@ anything to load?
 	cfldr64eq	mvdx0, [r1, #CRUNCH_MVDX0]	@ mvdx0 was clobbered
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveq		pc, lr
+=======
+	beq		1f
+>>>>>>> v3.18
 =======
 	beq		1f
 >>>>>>> v3.18
@@ -208,14 +225,20 @@ crunch_load:
 	cfldr64		mvdx15, [r0, #CRUNCH_MVDX15]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
 =======
+=======
+>>>>>>> v3.18
 1:
 #ifdef CONFIG_PREEMPT_COUNT
 	get_thread_info r10
 #endif
 2:	dec_preempt_count r10, r3
 	ret	lr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -296,7 +319,11 @@ ENTRY(crunch_task_copy)
 	bl	crunch_save
 	msr	cpsr_c, ip			@ restore interrupt mode
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r3
+=======
+	ret	r3
+>>>>>>> v3.18
 =======
 	ret	r3
 >>>>>>> v3.18
@@ -333,7 +360,11 @@ ENTRY(crunch_task_restore)
 	bl	crunch_load
 	msr	cpsr_c, ip			@ restore interrupt mode
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r3
+=======
+	ret	r3
+>>>>>>> v3.18
 =======
 	ret	r3
 >>>>>>> v3.18

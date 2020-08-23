@@ -15,6 +15,10 @@ enum {
 	NETCONFA_RP_FILTER,
 	NETCONFA_MC_FORWARDING,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NETCONFA_PROXY_NEIGH,
+>>>>>>> v3.18
 =======
 	NETCONFA_PROXY_NEIGH,
 >>>>>>> v3.18

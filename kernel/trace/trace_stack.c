@@ -51,12 +51,15 @@ int stack_tracer_enabled;
 static int last_stack_tracer_enabled;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void
 check_stack(unsigned long ip, unsigned long *stack)
 {
 	unsigned long this_size, flags;
 	unsigned long *p, *top, *start;
 =======
+=======
+>>>>>>> v3.18
 static inline void print_max_stack(void)
 {
 	long i;
@@ -84,6 +87,9 @@ static inline void
 check_stack(unsigned long ip, unsigned long *stack)
 {
 	unsigned long this_size, flags; unsigned long *p, *top, *start;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	static int tracer_frame;
 	int frame_size = ACCESS_ONCE(tracer_frame);
@@ -115,15 +121,21 @@ check_stack(unsigned long ip, unsigned long *stack)
 	max_stack_size = this_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max_stack_trace.nr_entries	= 0;
 	max_stack_trace.skip		= 3;
 =======
+=======
+>>>>>>> v3.18
 	max_stack_trace.nr_entries = 0;
 
 	if (using_ftrace_ops_list_func())
 		max_stack_trace.skip = 4;
 	else
 		max_stack_trace.skip = 3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	save_stack_trace(&max_stack_trace);
@@ -184,12 +196,18 @@ check_stack(unsigned long ip, unsigned long *stack)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (task_stack_end_corrupted(current)) {
 		print_max_stack();
 		BUG();
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  out:
 	arch_spin_unlock(&max_stack_lock);
@@ -430,7 +448,11 @@ static const struct file_operations stack_trace_filter_fops = {
 	.read = seq_read,
 	.write = ftrace_filter_write,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.llseek = ftrace_filter_lseek,
+=======
+	.llseek = tracing_lseek,
+>>>>>>> v3.18
 =======
 	.llseek = tracing_lseek,
 >>>>>>> v3.18

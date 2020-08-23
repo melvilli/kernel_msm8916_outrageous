@@ -21,6 +21,10 @@
 #include <linux/of.h>
 #include <linux/smp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 >>>>>>> v3.18
@@ -31,6 +35,12 @@
 #include <asm/smp_plat.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void secondary_holding_pen(void);
+volatile unsigned long secondary_holding_pen_release = INVALID_HWID;
+
+>>>>>>> v3.18
 =======
 extern void secondary_holding_pen(void);
 volatile unsigned long secondary_holding_pen_release = INVALID_HWID;
@@ -73,7 +83,11 @@ static int smp_spin_table_cpu_init(struct device_node *dn, unsigned int cpu)
 static int smp_spin_table_cpu_prepare(unsigned int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void **release_addr;
+=======
+	__le64 __iomem *release_addr;
+>>>>>>> v3.18
 =======
 	__le64 __iomem *release_addr;
 >>>>>>> v3.18
@@ -82,8 +96,11 @@ static int smp_spin_table_cpu_prepare(unsigned int cpu)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_addr = __va(cpu_release_addr[cpu]);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The cpu-release-addr may or may not be inside the linear mapping.
 	 * As ioremap_cache will either give us a new mapping or reuse the
@@ -94,6 +111,9 @@ static int smp_spin_table_cpu_prepare(unsigned int cpu)
 				     sizeof(*release_addr));
 	if (!release_addr)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -104,9 +124,15 @@ static int smp_spin_table_cpu_prepare(unsigned int cpu)
 	 * the boot protocol.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	release_addr[0] = (void *) cpu_to_le64(__pa(secondary_holding_pen));
 
 	__flush_dcache_area(release_addr, sizeof(release_addr[0]));
+=======
+	writeq_relaxed(__pa(secondary_holding_pen), release_addr);
+	__flush_dcache_area((__force void *)release_addr,
+			    sizeof(*release_addr));
+>>>>>>> v3.18
 =======
 	writeq_relaxed(__pa(secondary_holding_pen), release_addr);
 	__flush_dcache_area((__force void *)release_addr,
@@ -119,6 +145,11 @@ static int smp_spin_table_cpu_prepare(unsigned int cpu)
 	sev();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	iounmap(release_addr);
+
+>>>>>>> v3.18
 =======
 	iounmap(release_addr);
 
@@ -142,7 +173,11 @@ static int smp_spin_table_cpu_boot(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct cpu_operations smp_spin_table_ops = {
+=======
+const struct cpu_operations smp_spin_table_ops = {
+>>>>>>> v3.18
 =======
 const struct cpu_operations smp_spin_table_ops = {
 >>>>>>> v3.18
@@ -152,6 +187,9 @@ const struct cpu_operations smp_spin_table_ops = {
 	.cpu_boot	= smp_spin_table_cpu_boot,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 CPU_METHOD_OF_DECLARE(spin_table, &smp_spin_table_ops);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

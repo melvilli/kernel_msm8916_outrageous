@@ -38,7 +38,11 @@ In mode 1, software that has defined application-specific relationships
 between a debugging process and its inferior (crash handlers, etc),
 prctl(PR_SET_PTRACER, pid, ...) can be used. An inferior can declare which
 <<<<<<< HEAD
+<<<<<<< HEAD
 other process (and its descendents) are allowed to call PTRACE_ATTACH
+=======
+other process (and its descendants) are allowed to call PTRACE_ATTACH
+>>>>>>> v3.18
 =======
 other process (and its descendants) are allowed to call PTRACE_ATTACH
 >>>>>>> v3.18

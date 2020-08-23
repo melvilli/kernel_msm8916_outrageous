@@ -177,7 +177,11 @@ static int rpc_parse_scope_id(struct net *net, const char *buf,
 	p = kstrndup(delim + 1, len, GFP_KERNEL);
 	if (p) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long scope_id = 0;
+=======
+		u32 scope_id = 0;
+>>>>>>> v3.18
 =======
 		u32 scope_id = 0;
 >>>>>>> v3.18
@@ -189,7 +193,11 @@ static int rpc_parse_scope_id(struct net *net, const char *buf,
 			dev_put(dev);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (strict_strtoul(p, 10, &scope_id) == 0) {
+=======
+			if (kstrtou32(p, 10, &scope_id) == 0) {
+>>>>>>> v3.18
 =======
 			if (kstrtou32(p, 10, &scope_id) == 0) {
 >>>>>>> v3.18
@@ -313,7 +321,11 @@ char *rpc_sockaddr2uaddr(const struct sockaddr *sap, gfp_t gfp_flags)
  * @salen: size of buffer
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @uaddr does not have to be '\0'-terminated, but strict_strtoul() and
+=======
+ * @uaddr does not have to be '\0'-terminated, but kstrtou8() and
+>>>>>>> v3.18
 =======
  * @uaddr does not have to be '\0'-terminated, but kstrtou8() and
 >>>>>>> v3.18
@@ -328,7 +340,11 @@ size_t rpc_uaddr2sockaddr(struct net *net, const char *uaddr,
 {
 	char *c, buf[RPCBIND_MAXUADDRLEN + sizeof('\0')];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long portlo, porthi;
+=======
+	u8 portlo, porthi;
+>>>>>>> v3.18
 =======
 	u8 portlo, porthi;
 >>>>>>> v3.18
@@ -344,9 +360,13 @@ size_t rpc_uaddr2sockaddr(struct net *net, const char *uaddr,
 	if (unlikely(c == NULL))
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(strict_strtoul(c + 1, 10, &portlo) != 0))
 		return 0;
 	if (unlikely(portlo > 255))
+=======
+	if (unlikely(kstrtou8(c + 1, 10, &portlo) != 0))
+>>>>>>> v3.18
 =======
 	if (unlikely(kstrtou8(c + 1, 10, &portlo) != 0))
 >>>>>>> v3.18
@@ -357,9 +377,13 @@ size_t rpc_uaddr2sockaddr(struct net *net, const char *uaddr,
 	if (unlikely(c == NULL))
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(strict_strtoul(c + 1, 10, &porthi) != 0))
 		return 0;
 	if (unlikely(porthi > 255))
+=======
+	if (unlikely(kstrtou8(c + 1, 10, &porthi) != 0))
+>>>>>>> v3.18
 =======
 	if (unlikely(kstrtou8(c + 1, 10, &porthi) != 0))
 >>>>>>> v3.18

@@ -138,7 +138,10 @@ static void get_htc_packet_credit_based(struct htc_target *target,
 
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			if (ep->cred_dist.credits < credits_required)
@@ -173,7 +176,10 @@ static void get_htc_packet_credit_based(struct htc_target *target,
 		list_add_tail(&packet->list, queue);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -286,7 +292,10 @@ static int htc_issue_packets(struct htc_target *target,
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -395,7 +404,10 @@ static enum htc_send_queue_result htc_try_send(struct htc_target *target,
 			list_for_each_entry_safe(packet, tmp_pkt,
 						 txq, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				ath6kl_dbg(ATH6KL_DBG_HTC,
@@ -416,7 +428,10 @@ static enum htc_send_queue_result htc_try_send(struct htc_target *target,
 						       &send_queue);
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			}
@@ -470,7 +485,10 @@ static enum htc_send_queue_result htc_try_send(struct htc_target *target,
 	 */
 	while (true) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (get_queue_depth(&ep->txq) == 0)
@@ -514,8 +532,13 @@ static enum htc_send_queue_result htc_try_send(struct htc_target *target,
 
 		spin_lock_bh(&target->tx_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	}
+=======
+	}
+
+>>>>>>> v3.18
 =======
 	}
 
@@ -1130,7 +1153,10 @@ free_skb:
 
 	return status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1204,15 +1230,21 @@ static void htc_rxctrl_complete(struct htc_target *context,
 				struct htc_packet *packet)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* TODO, can't really receive HTC control messages yet.... */
 	ath6kl_dbg(ATH6KL_DBG_HTC, "%s: invalid call function\n", __func__);
 =======
+=======
+>>>>>>> v3.18
 	struct sk_buff *skb = packet->skb;
 
 	if (packet->endpoint == ENDPOINT_0 &&
 	    packet->status == -ECANCELED &&
 	    skb != NULL)
 		dev_kfree_skb(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1294,7 +1326,10 @@ static int ath6kl_htc_pipe_conn_service(struct htc_target *target,
 
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		tx_alloc = htc_get_credit_alloc(target, conn_req->svc_id);
@@ -1725,8 +1760,11 @@ static void ath6kl_htc_pipe_activity_changed(struct htc_target *target,
 static void ath6kl_htc_pipe_flush_rx_buf(struct htc_target *target)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* TODO */
 =======
+=======
+>>>>>>> v3.18
 	struct htc_endpoint *endpoint;
 	struct htc_packet *packet, *tmp_pkt;
 	int i;
@@ -1750,6 +1788,9 @@ static void ath6kl_htc_pipe_flush_rx_buf(struct htc_target *target)
 
 		spin_unlock_bh(&target->rx_lock);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

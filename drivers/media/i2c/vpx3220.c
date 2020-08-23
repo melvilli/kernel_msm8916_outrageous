@@ -28,7 +28,10 @@
 #include <linux/videodev2.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
@@ -53,7 +56,10 @@ struct vpx3220 {
 
 	v4l2_std_id norm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ident;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int input;
@@ -304,7 +310,11 @@ static int vpx3220_status(struct v4l2_subdev *sd, u32 *pstatus, v4l2_std_id *pst
 {
 	int res = V4L2_IN_ST_NO_SIGNAL, status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_std_id std = 0;
+=======
+	v4l2_std_id std = pstd ? *pstd : V4L2_STD_ALL;
+>>>>>>> v3.18
 =======
 	v4l2_std_id std = pstd ? *pstd : V4L2_STD_ALL;
 >>>>>>> v3.18
@@ -325,17 +335,23 @@ static int vpx3220_status(struct v4l2_subdev *sd, u32 *pstatus, v4l2_std_id *pst
 		case 0x14:
 		case 0x18:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			std = V4L2_STD_PAL;
 			break;
 
 		case 0x08:
 			std = V4L2_STD_SECAM;
 =======
+=======
+>>>>>>> v3.18
 			std &= V4L2_STD_PAL;
 			break;
 
 		case 0x08:
 			std &= V4L2_STD_SECAM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -343,15 +359,21 @@ static int vpx3220_status(struct v4l2_subdev *sd, u32 *pstatus, v4l2_std_id *pst
 		case 0x0c:
 		case 0x1c:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			std = V4L2_STD_NTSC;
 			break;
 		}
 =======
+=======
+>>>>>>> v3.18
 			std &= V4L2_STD_NTSC;
 			break;
 		}
 	} else {
 		std = V4L2_STD_UNKNOWN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (pstd)
@@ -469,6 +491,7 @@ static int vpx3220_s_ctrl(struct v4l2_ctrl *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vpx3220_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct vpx3220 *decoder = to_vpx3220(sd);
@@ -479,6 +502,8 @@ static int vpx3220_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ide
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* ----------------------------------------------------------------------- */
 
 static const struct v4l2_ctrl_ops vpx3220_ctrl_ops = {
@@ -487,7 +512,10 @@ static const struct v4l2_ctrl_ops vpx3220_ctrl_ops = {
 
 static const struct v4l2_subdev_core_ops vpx3220_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = vpx3220_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init = vpx3220_init,
@@ -499,15 +527,21 @@ static const struct v4l2_subdev_core_ops vpx3220_core_ops = {
 	.queryctrl = v4l2_subdev_queryctrl,
 	.querymenu = v4l2_subdev_querymenu,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.s_std = vpx3220_s_std,
 };
 
 static const struct v4l2_subdev_video_ops vpx3220_video_ops = {
 =======
+=======
+>>>>>>> v3.18
 };
 
 static const struct v4l2_subdev_video_ops vpx3220_video_ops = {
 	.s_std = vpx3220_s_std,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.s_routing = vpx3220_s_routing,
 	.s_stream = vpx3220_s_stream,
@@ -539,7 +573,11 @@ static int vpx3220_probe(struct i2c_client *client,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	decoder = kzalloc(sizeof(struct vpx3220), GFP_KERNEL);
+=======
+	decoder = devm_kzalloc(&client->dev, sizeof(*decoder), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	decoder = devm_kzalloc(&client->dev, sizeof(*decoder), GFP_KERNEL);
 >>>>>>> v3.18
@@ -565,7 +603,10 @@ static int vpx3220_probe(struct i2c_client *client,
 
 		v4l2_ctrl_handler_free(&decoder->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(decoder);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -576,7 +617,10 @@ static int vpx3220_probe(struct i2c_client *client,
 	pn = (i2c_smbus_read_byte_data(client, 0x02) << 8) +
 		i2c_smbus_read_byte_data(client, 0x01);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	decoder->ident = V4L2_IDENT_VPX3220A;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ver == 0xec) {
@@ -587,11 +631,17 @@ static int vpx3220_probe(struct i2c_client *client,
 		case 0x4260:
 			name = "vpx3216b";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			decoder->ident = V4L2_IDENT_VPX3216B;
 			break;
 		case 0x4280:
 			name = "vpx3214c";
 			decoder->ident = V4L2_IDENT_VPX3214C;
+=======
+			break;
+		case 0x4280:
+			name = "vpx3214c";
+>>>>>>> v3.18
 =======
 			break;
 		case 0x4280:
@@ -622,7 +672,11 @@ static int vpx3220_remove(struct i2c_client *client)
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&decoder->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(decoder);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

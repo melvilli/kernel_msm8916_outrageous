@@ -12,7 +12,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -62,7 +65,11 @@ ep_matches (
 
 	/* only support ep0 for portable CONTROL traffic */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	type = desc->bmAttributes & USB_ENDPOINT_XFERTYPE_MASK;
+=======
+	type = usb_endpoint_type(desc);
+>>>>>>> v3.18
 =======
 	type = usb_endpoint_type(desc);
 >>>>>>> v3.18
@@ -137,7 +144,11 @@ ep_matches (
 	 */
 	if (desc->wMaxPacketSize == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		desc->wMaxPacketSize = cpu_to_le16(ep->maxpacket);
+=======
+		desc->wMaxPacketSize = cpu_to_le16(ep->maxpacket_limit);
+>>>>>>> v3.18
 =======
 		desc->wMaxPacketSize = cpu_to_le16(ep->maxpacket_limit);
 >>>>>>> v3.18
@@ -157,7 +168,11 @@ ep_matches (
 	case USB_ENDPOINT_XFER_ISOC:
 		/* ISO:  limit 1023 bytes full speed, 1024 high/super speed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ep->maxpacket < max)
+=======
+		if (ep->maxpacket_limit < max)
+>>>>>>> v3.18
 =======
 		if (ep->maxpacket_limit < max)
 >>>>>>> v3.18
@@ -194,7 +209,11 @@ ep_matches (
 	/* report (variable) full speed bulk maxpacket */
 	if ((USB_ENDPOINT_XFER_BULK == type) && !ep_comp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int size = ep->maxpacket;
+=======
+		int size = ep->maxpacket_limit;
+>>>>>>> v3.18
 =======
 		int size = ep->maxpacket_limit;
 >>>>>>> v3.18

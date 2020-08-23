@@ -5,11 +5,17 @@
 # Object file lists.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y			:= common.o dc21285.o dma.o isa-irq.o
 obj-m			:=
 obj-n			:=
 obj-			:=
 
+=======
+obj-y			:= common.o dma.o isa-irq.o
+
+pci-y			+= dc21285.o
+>>>>>>> v3.18
 =======
 obj-y			:= common.o dma.o isa-irq.o
 

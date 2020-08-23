@@ -38,9 +38,15 @@ SCHED_FEAT(WAKEUP_PREEMPTION, true)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Use arch dependent cpu power functions
  */
 SCHED_FEAT(ARCH_POWER, false)
+=======
+ * Use arch dependent cpu capacity functions
+ */
+SCHED_FEAT(ARCH_CAPACITY, true)
+>>>>>>> v3.18
 =======
  * Use arch dependent cpu capacity functions
  */
@@ -53,9 +59,15 @@ SCHED_FEAT(LB_BIAS, true)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Decrement CPU power based on time not spent running tasks
  */
 SCHED_FEAT(NONTASK_POWER, true)
+=======
+ * Decrement CPU capacity based on time not spent running tasks
+ */
+SCHED_FEAT(NONTASK_CAPACITY, true)
+>>>>>>> v3.18
 =======
  * Decrement CPU capacity based on time not spent running tasks
  */
@@ -76,6 +88,7 @@ SCHED_FEAT(LB_MIN, false)
  * Apply the automatic NUMA scheduling policy. Enabled automatically
  * at runtime if running on a NUMA machine. Can be controlled via
 <<<<<<< HEAD
+<<<<<<< HEAD
  * numa_balancing=. Allow PTE scanning to be forced on UMA machines
  * for debugging the core machinery.
  */
@@ -83,6 +96,8 @@ SCHED_FEAT(LB_MIN, false)
 SCHED_FEAT(NUMA,	false)
 SCHED_FEAT(NUMA_FORCE,	false)
 =======
+=======
+>>>>>>> v3.18
  * numa_balancing=
  */
 #ifdef CONFIG_NUMA_BALANCING
@@ -102,5 +117,8 @@ SCHED_FEAT(NUMA_FAVOUR_HIGHER, true)
  * due to CPU overload it is disabled by default.
  */
 SCHED_FEAT(NUMA_RESIST_LOWER, false)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

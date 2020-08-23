@@ -64,6 +64,10 @@ typedef void (o2net_post_msg_handler_func)(int status, void *data,
 #define O2NET_IDLE_TIMEOUT_MS_DEFAULT		30000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define O2NET_TCP_USER_TIMEOUT			0x7fffffff
+>>>>>>> v3.18
 =======
 #define O2NET_TCP_USER_TIMEOUT			0x7fffffff
 >>>>>>> v3.18

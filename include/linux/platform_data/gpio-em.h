@@ -6,6 +6,10 @@ struct gpio_em_config {
 	unsigned int irq_base;
 	unsigned int number_of_pins;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *pctl_name;
+>>>>>>> v3.18
 =======
 	const char *pctl_name;
 >>>>>>> v3.18

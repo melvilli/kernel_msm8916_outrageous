@@ -18,7 +18,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -73,6 +76,7 @@ struct iuu_private {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int iuu_attach(struct usb_serial *serial)
 {
 	unsigned char num_ports = serial->num_ports;
@@ -83,6 +87,8 @@ static int iuu_attach(struct usb_serial *serial)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int iuu_port_probe(struct usb_serial_port *port)
@@ -787,7 +793,11 @@ uart_enable_failed:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*  Diables the IUU UART (a.k.a. the Phoenix voiderface) */
+=======
+/*  Disables the IUU UART (a.k.a. the Phoenix voiderface) */
+>>>>>>> v3.18
 =======
 /*  Disables the IUU UART (a.k.a. the Phoenix voiderface) */
 >>>>>>> v3.18
@@ -1151,7 +1161,11 @@ static int iuu_vcc_set(struct usb_serial_port *port, unsigned int vcc)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_vcc_mode(struct device *dev,
+=======
+static ssize_t vcc_mode_show(struct device *dev,
+>>>>>>> v3.18
 =======
 static ssize_t vcc_mode_show(struct device *dev,
 >>>>>>> v3.18
@@ -1164,7 +1178,11 @@ static ssize_t vcc_mode_show(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t store_vcc_mode(struct device *dev,
+=======
+static ssize_t vcc_mode_store(struct device *dev,
+>>>>>>> v3.18
 =======
 static ssize_t vcc_mode_store(struct device *dev,
 >>>>>>> v3.18
@@ -1181,7 +1199,11 @@ static ssize_t vcc_mode_store(struct device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(dev, "%s: setting vcc_mode = %ld", __func__, v);
+=======
+	dev_dbg(dev, "%s: setting vcc_mode = %ld\n", __func__, v);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "%s: setting vcc_mode = %ld\n", __func__, v);
 >>>>>>> v3.18
@@ -1196,9 +1218,13 @@ fail_store_vcc_mode:
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEVICE_ATTR(vcc_mode, S_IRUSR | S_IWUSR, show_vcc_mode,
 	store_vcc_mode);
+=======
+static DEVICE_ATTR_RW(vcc_mode);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RW(vcc_mode);
 >>>>>>> v3.18
@@ -1236,7 +1262,10 @@ static struct usb_serial_driver iuu_device = {
 	.set_termios = iuu_set_termios,
 	.init_termios = iuu_init_termios,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.attach = iuu_attach,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.port_probe = iuu_port_probe,

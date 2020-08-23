@@ -2,8 +2,14 @@
  * marzen board support
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011  Renesas Solutions Corp.
  * Copyright (C) 2011  Magnus Damm
+=======
+ * Copyright (C) 2011, 2013  Renesas Solutions Corp.
+ * Copyright (C) 2011  Magnus Damm
+ * Copyright (C) 2013  Cogent Embedded, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011, 2013  Renesas Solutions Corp.
  * Copyright (C) 2011  Magnus Damm
@@ -35,11 +41,17 @@
 #include <linux/dma-mapping.h>
 #include <linux/pinctrl/machine.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/camera-rcar.h>
 #include <linux/platform_data/gpio-rcar.h>
 #include <linux/platform_data/rcar-du.h>
 #include <linux/platform_data/usb-rcar-phy.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/regulator/fixed.h>
 #include <linux/regulator/machine.h>
@@ -49,6 +61,7 @@
 #include <linux/mmc/host.h>
 #include <linux/mmc/sh_mobile_sdhi.h>
 #include <linux/mfd/tmio.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/usb/otg.h>
 #include <linux/usb/ehci_pdriver.h>
@@ -62,16 +75,26 @@
 
 #include <media/soc_camera.h>
 >>>>>>> v3.18
+=======
+
+#include <media/soc_camera.h>
+>>>>>>> v3.18
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/traps.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "common.h"
 #include "irqs.h"
 #include "r8a7779.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Fixed 3.3V regulator to be used by SDHI0 */
 static struct regulator_consumer_supply fixed3v3_power_consumers[] = {
@@ -86,7 +109,10 @@ static struct regulator_consumer_supply dummy_supplies[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* USB PHY */
 static struct resource usb_phy_resources[] = {
 	[0] = {
@@ -108,6 +134,9 @@ static struct platform_device usb_phy = {
 	.num_resources	= ARRAY_SIZE(usb_phy_resources),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* SMSC LAN89218 */
 static struct resource smsc911x_resources[] = {
@@ -118,7 +147,11 @@ static struct resource smsc911x_resources[] = {
 	},
 	[1] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.start		= gic_iid(0x3c), /* IRQ 1 */
+=======
+		.start		= irq_pin(1), /* IRQ 1 */
+>>>>>>> v3.18
 =======
 		.start		= irq_pin(1), /* IRQ 1 */
 >>>>>>> v3.18
@@ -158,6 +191,11 @@ static struct resource sdhi0_resources[] = {
 
 static struct sh_mobile_sdhi_info sdhi0_platform_data = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.dma_slave_tx = HPBDMA_SLAVE_SDHI0_TX,
+	.dma_slave_rx = HPBDMA_SLAVE_SDHI0_RX,
+>>>>>>> v3.18
 =======
 	.dma_slave_tx = HPBDMA_SLAVE_SDHI0_TX,
 	.dma_slave_rx = HPBDMA_SLAVE_SDHI0_RX,
@@ -208,6 +246,7 @@ static struct platform_device hspi_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* USB PHY */
 static struct resource usb_phy_resources[] = {
 	[0] = {
@@ -229,6 +268,8 @@ static struct platform_device usb_phy_device = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * DU
  *
@@ -285,11 +326,15 @@ static void __init marzen_add_du_device(void)
 	platform_device_register_full(&info);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* LEDS */
 static struct gpio_led marzen_leds[] = {
 	{
 		.name		= "led2",
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.gpio		= 157,
 		.default_state	= LEDS_GPIO_DEFSTATE_ON,
@@ -301,6 +346,8 @@ static struct gpio_led marzen_leds[] = {
 		.name		= "led4",
 		.gpio		= 159,
 =======
+=======
+>>>>>>> v3.18
 		.gpio		= RCAR_GP_PIN(4, 29),
 		.default_state	= LEDS_GPIO_DEFSTATE_ON,
 	}, {
@@ -310,6 +357,9 @@ static struct gpio_led marzen_leds[] = {
 	}, {
 		.name		= "led4",
 		.gpio		= RCAR_GP_PIN(4, 31),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.default_state	= LEDS_GPIO_DEFSTATE_ON,
 	},
@@ -328,6 +378,7 @@ static struct platform_device leds_device = {
 	},
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct platform_device *marzen_devices[] __initdata = {
 	&eth_device,
@@ -491,6 +542,8 @@ void __init marzen_init_late(void)
 
 static const struct pinctrl_map marzen_pinctrl_map[] = {
 =======
+=======
+>>>>>>> v3.18
 /* VIN */
 static struct rcar_vin_platform_data vin_platform_data __initdata = {
 	.flags	= RCAR_VIN_BT656,
@@ -561,6 +614,9 @@ static const struct pinctrl_map marzen_pinctrl_map[] = {
 				  "du1_sync_1", "du1"),
 	PIN_MAP_MUX_GROUP_DEFAULT("rcar-du-r8a7779", "pfc-r8a7779",
 				  "du1_clk_out", "du1"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* HSPI0 */
 	PIN_MAP_MUX_GROUP_DEFAULT("sh-hspi.0", "pfc-r8a7779",
@@ -579,8 +635,11 @@ static const struct pinctrl_map marzen_pinctrl_map[] = {
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_sdhi.0", "pfc-r8a7779",
 				  "sdhi0_cd", "sdhi0"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_sdhi.0", "pfc-r8a7779",
 				  "sdhi0_wp", "sdhi0"),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* SMSC */
@@ -598,7 +657,10 @@ static const struct pinctrl_map marzen_pinctrl_map[] = {
 	PIN_MAP_MUX_GROUP_DEFAULT("ehci-platform.1", "pfc-r8a7779",
 				  "usb2", "usb2"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* VIN1 */
 	PIN_MAP_MUX_GROUP_DEFAULT("r8a7779-vin.1", "pfc-r8a7779",
 				  "vin1_clk", "vin1"),
@@ -609,6 +671,9 @@ static const struct pinctrl_map marzen_pinctrl_map[] = {
 				  "vin3_clk", "vin3"),
 	PIN_MAP_MUX_GROUP_DEFAULT("r8a7779-vin.3", "pfc-r8a7779",
 				  "vin3_data8", "vin3"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -622,6 +687,7 @@ static void __init marzen_init(void)
 	pinctrl_register_mappings(marzen_pinctrl_map,
 				  ARRAY_SIZE(marzen_pinctrl_map));
 	r8a7779_pinmux_init();
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	r8a7779_add_standard_devices();
@@ -637,6 +703,8 @@ MACHINE_START(MARZEN, "marzen")
 	.init_machine	= marzen_init,
 	.init_late	= marzen_init_late,
 =======
+=======
+>>>>>>> v3.18
 	r8a7779_init_irq_extpin(1); /* IRQ1 as individual interrupt */
 
 	r8a7779_add_standard_devices();
@@ -659,6 +727,9 @@ DT_MACHINE_START(MARZEN, "marzen")
 	.init_machine	= marzen_init,
 	.init_late	= r8a7779_init_late,
 	.dt_compat	= marzen_boards_compat_dt,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.init_time	= r8a7779_earlytimer_init,
 MACHINE_END

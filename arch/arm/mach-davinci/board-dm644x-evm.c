@@ -16,7 +16,11 @@
 #include <linux/i2c.h>
 #include <linux/i2c/pcf857x.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 >>>>>>> v3.18
@@ -732,10 +736,13 @@ static struct platform_device *davinci_evm_devices[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct davinci_uart_config uart_config __initdata = {
 	.enabled_uarts = (1 << 0),
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void __init
@@ -766,10 +773,13 @@ static int davinci_phy_fixup(struct phy_device *phydev)
 static __init void davinci_evm_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clk *aemif_clk;
 	struct davinci_soc_info *soc_info = &davinci_soc_info;
 
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	struct clk *aemif_clk;
 	struct davinci_soc_info *soc_info = &davinci_soc_info;
@@ -778,6 +788,9 @@ static __init void davinci_evm_init(void)
 	if (ret)
 		pr_warn("%s: GPIO init failed: %d\n", __func__, ret);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	aemif_clk = clk_get(NULL, "aemif");
 	clk_prepare_enable(aemif_clk);
@@ -796,12 +809,18 @@ static __init void davinci_evm_init(void)
 		if (HAS_NAND) {
 			platform_device_register(&davinci_evm_nandflash_device);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			if (davinci_aemif_setup(&davinci_evm_nandflash_device))
 				pr_warn("%s: Cannot configure AEMIF.\n",
 					__func__);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			evm_leds[7].default_trigger = "nand-disk";
 			if (HAS_NOR)
@@ -819,7 +838,11 @@ static __init void davinci_evm_init(void)
 	dm644x_init_video(&dm644xevm_capture_cfg, &dm644xevm_display_cfg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	davinci_serial_init(&uart_config);
+=======
+	davinci_serial_init(dm644x_serial_device);
+>>>>>>> v3.18
 =======
 	davinci_serial_init(dm644x_serial_device);
 >>>>>>> v3.18
@@ -829,18 +852,24 @@ static __init void davinci_evm_init(void)
 	davinci_setup_usb(1000, 8);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	soc_info->emac_pdata->phy_id = DM644X_EVM_PHY_ID;
 	/* Register the fixup for PHY on DaVinci */
 	phy_register_fixup_for_uid(LXT971_PHY_ID, LXT971_PHY_MASK,
 					davinci_phy_fixup);
 
 =======
+=======
+>>>>>>> v3.18
 	if (IS_BUILTIN(CONFIG_PHYLIB)) {
 		soc_info->emac_pdata->phy_id = DM644X_EVM_PHY_ID;
 		/* Register the fixup for PHY on DaVinci */
 		phy_register_fixup_for_uid(LXT971_PHY_ID, LXT971_PHY_MASK,
 						davinci_phy_fixup);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

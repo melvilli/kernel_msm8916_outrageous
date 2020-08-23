@@ -61,7 +61,10 @@
 #include <linux/pfn.h>
 #include <linux/bsearch.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/fips.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <uapi/linux/module.h>
@@ -140,6 +143,10 @@ static int param_set_bool_enable_only(const char *val,
 
 static const struct kernel_param_ops param_ops_bool_enable_only = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags = KERNEL_PARAM_OPS_FL_NOARG,
+>>>>>>> v3.18
 =======
 	.flags = KERNEL_PARAM_OPS_FL_NOARG,
 >>>>>>> v3.18
@@ -187,9 +194,12 @@ struct load_info {
 	unsigned int num_debug;
 	bool sig_ok;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_KALLSYMS
 	unsigned long mod_kallsyms_init_off;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct {
@@ -391,9 +401,15 @@ static bool check_symbol(const struct symsearch *syms,
 			return false;
 		if (syms->licence == WILL_BE_GPL_ONLY && fsa->warn) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "Symbol %s is being used "
 			       "by a non-GPL module, which will not "
 			       "be allowed in the future\n", fsa->name);
+=======
+			pr_warn("Symbol %s is being used by a non-GPL module, "
+				"which will not be allowed in the future\n",
+				fsa->name);
+>>>>>>> v3.18
 =======
 			pr_warn("Symbol %s is being used by a non-GPL module, "
 				"which will not be allowed in the future\n",
@@ -405,6 +421,7 @@ static bool check_symbol(const struct symsearch *syms,
 #ifdef CONFIG_UNUSED_SYMBOLS
 	if (syms->unused && fsa->warn) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "Symbol %s is marked as UNUSED, "
 		       "however this module is using it.\n", fsa->name);
 		printk(KERN_WARNING
@@ -415,6 +432,8 @@ static bool check_symbol(const struct symsearch *syms,
 		       "mailinglist together with submitting your code for "
 		       "inclusion.\n");
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("Symbol %s is marked as UNUSED, however this module is "
 			"using it.\n", fsa->name);
 		pr_warn("This symbol will go away in the future.\n");
@@ -422,6 +441,9 @@ static bool check_symbol(const struct symsearch *syms,
 			"it really is, submit a report the linux kernel "
 			"mailinglist together with submitting your code for "
 			"inclusion.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 #endif
@@ -485,7 +507,11 @@ EXPORT_SYMBOL_GPL(find_symbol);
 
 /* Search for module by name: must hold module_mutex. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct module *find_module_all(const char *name,
+=======
+static struct module *find_module_all(const char *name, size_t len,
+>>>>>>> v3.18
 =======
 static struct module *find_module_all(const char *name, size_t len,
 >>>>>>> v3.18
@@ -497,7 +523,11 @@ static struct module *find_module_all(const char *name, size_t len,
 		if (!even_unformed && mod->state == MODULE_STATE_UNFORMED)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strcmp(mod->name, name) == 0)
+=======
+		if (strlen(mod->name) == len && !memcmp(mod->name, name, len))
+>>>>>>> v3.18
 =======
 		if (strlen(mod->name) == len && !memcmp(mod->name, name, len))
 >>>>>>> v3.18
@@ -509,7 +539,11 @@ static struct module *find_module_all(const char *name, size_t len,
 struct module *find_module(const char *name)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return find_module_all(name, false);
+=======
+	return find_module_all(name, strlen(name), false);
+>>>>>>> v3.18
 =======
 	return find_module_all(name, strlen(name), false);
 >>>>>>> v3.18
@@ -523,6 +557,7 @@ static inline void __percpu *mod_percpu(struct module *mod)
 	return mod->percpu;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int percpu_modalloc(struct module *mod,
 			   unsigned long size, unsigned long align)
@@ -542,6 +577,8 @@ static int percpu_modalloc(struct module *mod,
 	}
 	mod->percpu_size = size;
 =======
+=======
+>>>>>>> v3.18
 static int percpu_modalloc(struct module *mod, struct load_info *info)
 {
 	Elf_Shdr *pcpusec = &info->sechdrs[info->index.pcpu];
@@ -563,6 +600,9 @@ static int percpu_modalloc(struct module *mod, struct load_info *info)
 		return -ENOMEM;
 	}
 	mod->percpu_size = pcpusec->sh_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -629,17 +669,23 @@ static inline void __percpu *mod_percpu(struct module *mod)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int percpu_modalloc(struct module *mod,
 				  unsigned long size, unsigned long align)
 {
 	return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 static int percpu_modalloc(struct module *mod, struct load_info *info)
 {
 	/* UP modules shouldn't have this section: ENOMEM isn't quite right */
 	if (info->sechdrs[info->index.pcpu].sh_size != 0)
 		return -ENOMEM;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 static inline void percpu_modfree(struct module *mod)
@@ -671,7 +717,11 @@ static ssize_t show_modinfo_##field(struct module_attribute *mattr,   \
 			struct module_kobject *mk, char *buffer)      \
 {                                                                     \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sprintf(buffer, "%s\n", mk->mod->field);               \
+=======
+	return scnprintf(buffer, PAGE_SIZE, "%s\n", mk->mod->field);  \
+>>>>>>> v3.18
 =======
 	return scnprintf(buffer, PAGE_SIZE, "%s\n", mk->mod->field);  \
 >>>>>>> v3.18
@@ -714,9 +764,13 @@ static int module_unload_init(struct module *mod)
 
 	/* Hold reference count during initialization. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__this_cpu_write(mod->refptr->incs, 1);
 	/* Backwards compatibility macros put refcount during init. */
 	mod->waiter = current;
+=======
+	raw_cpu_write(mod->refptr->incs, 1);
+>>>>>>> v3.18
 =======
 	raw_cpu_write(mod->refptr->incs, 1);
 >>>>>>> v3.18
@@ -754,7 +808,11 @@ static int add_module_usage(struct module *a, struct module *b)
 	use = kmalloc(sizeof(*use), GFP_ATOMIC);
 	if (!use) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: out of memory loading\n", a->name);
+=======
+		pr_warn("%s: out of memory loading\n", a->name);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: out of memory loading\n", a->name);
 >>>>>>> v3.18
@@ -850,6 +908,7 @@ static int __try_stop_module(void *_sref)
 static int try_stop_module(struct module *mod, int flags, int *forced)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (flags & O_NONBLOCK) {
 		struct stopref sref = { mod, flags, forced };
 
@@ -860,6 +919,11 @@ static int try_stop_module(struct module *mod, int flags, int *forced)
 		synchronize_sched();
 		return 0;
 	}
+=======
+	struct stopref sref = { mod, flags, forced };
+
+	return stop_machine(__try_stop_module, &sref, NULL);
+>>>>>>> v3.18
 =======
 	struct stopref sref = { mod, flags, forced };
 
@@ -898,6 +962,7 @@ EXPORT_SYMBOL(module_refcount);
 static void free_module(struct module *mod);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void wait_for_zero_refcount(struct module *mod)
 {
 	/* Since we might sleep for some time, release the mutex first */
@@ -913,6 +978,8 @@ static void wait_for_zero_refcount(struct module *mod)
 	mutex_lock(&module_mutex);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 SYSCALL_DEFINE2(delete_module, const char __user *, name_user,
@@ -947,8 +1014,12 @@ SYSCALL_DEFINE2(delete_module, const char __user *, name_user,
 	/* Doing init or already dying? */
 	if (mod->state != MODULE_STATE_LIVE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* FIXME: if (force), slam module count and wake up
                    waiter --RR */
+=======
+		/* FIXME: if (force), slam module count damn the torpedoes */
+>>>>>>> v3.18
 =======
 		/* FIXME: if (force), slam module count damn the torpedoes */
 >>>>>>> v3.18
@@ -968,9 +1039,12 @@ SYSCALL_DEFINE2(delete_module, const char __user *, name_user,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set this up before setting mod->state */
 	mod->waiter = current;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Stop the machine so refcounts can't move and disable module. */
@@ -979,10 +1053,13 @@ SYSCALL_DEFINE2(delete_module, const char __user *, name_user,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Never wait if forced. */
 	if (!forced && module_refcount(mod) != 0)
 		wait_for_zero_refcount(mod);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_unlock(&module_mutex);
@@ -1048,6 +1125,7 @@ void symbol_put_addr(void *addr)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Even though we hold a reference on the module; we still need to
 	 * disable preemption in order to safely traverse the data structure.
@@ -1058,11 +1136,16 @@ void symbol_put_addr(void *addr)
 	module_put(modaddr);
 	preempt_enable();
 =======
+=======
+>>>>>>> v3.18
 	/* module_text_address is safe here: we're supposed to have reference
 	 * to module from symbol_get, so it can't go away. */
 	modaddr = __module_text_address(a);
 	BUG_ON(!modaddr);
 	module_put(modaddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(symbol_put_addr);
@@ -1115,9 +1198,12 @@ void module_put(struct module *module)
 
 		trace_module_put(module, _RET_IP_);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Maybe they're waiting for us to drop reference? */
 		if (unlikely(!module_is_live(module)))
 			wake_up_process(module->waiter);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		preempt_enable();
@@ -1161,15 +1247,21 @@ static size_t module_flags_taint(struct module *mod, char *buf)
 	if (mod->taints & (1 << TAINT_CRAP))
 		buf[l++] = 'C';
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * TAINT_FORCED_RMMOD: could be added.
 	 * TAINT_UNSAFE_SMP, TAINT_MACHINE_CHECK, TAINT_BAD_PAGE don't
 =======
+=======
+>>>>>>> v3.18
 	if (mod->taints & (1 << TAINT_UNSIGNED_MODULE))
 		buf[l++] = 'E';
 	/*
 	 * TAINT_FORCED_RMMOD: could be added.
 	 * TAINT_CPU_OUT_OF_SPEC, TAINT_MACHINE_CHECK, TAINT_BAD_PAGE don't
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * apply to modules.
 	 */
@@ -1266,8 +1358,12 @@ static int try_to_force_load(struct module *mod, const char *reason)
 #ifdef CONFIG_MODULE_FORCE_LOAD
 	if (!test_taint(TAINT_FORCED_MODULE))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: %s: kernel tainted.\n",
 		       mod->name, reason);
+=======
+		pr_warn("%s: %s: kernel tainted.\n", mod->name, reason);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: %s: kernel tainted.\n", mod->name, reason);
 >>>>>>> v3.18
@@ -1324,8 +1420,12 @@ static int check_version(Elf_Shdr *sechdrs,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING "%s: no symbol version for %s\n",
 	       mod->name, symname);
+=======
+	pr_warn("%s: no symbol version for %s\n", mod->name, symname);
+>>>>>>> v3.18
 =======
 	pr_warn("%s: no symbol version for %s\n", mod->name, symname);
 >>>>>>> v3.18
@@ -1438,8 +1538,13 @@ resolve_symbol_wait(struct module *mod,
 			|| PTR_ERR(ksym) != -EBUSY,
 					     30 * HZ) <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: gave up waiting for init of module %s.\n",
 		       mod->name, owner);
+=======
+		pr_warn("%s: gave up waiting for init of module %s.\n",
+			mod->name, owner);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: gave up waiting for init of module %s.\n",
 			mod->name, owner);
@@ -1746,7 +1851,10 @@ static void module_remove_modinfo_attrs(struct module *mod)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void mod_kobject_put(struct module *mod)
 {
 	DECLARE_COMPLETION_ONSTACK(c);
@@ -1755,6 +1863,9 @@ static void mod_kobject_put(struct module *mod)
 	wait_for_completion(&c);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mod_sysfs_init(struct module *mod)
 {
@@ -1763,8 +1874,12 @@ static int mod_sysfs_init(struct module *mod)
 
 	if (!module_sysfs_initialized) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: module sysfs not initialized\n",
 		       mod->name);
+=======
+		pr_err("%s: module sysfs not initialized\n", mod->name);
+>>>>>>> v3.18
 =======
 		pr_err("%s: module sysfs not initialized\n", mod->name);
 >>>>>>> v3.18
@@ -1775,7 +1890,11 @@ static int mod_sysfs_init(struct module *mod)
 	kobj = kset_find_obj(module_kset, mod->name);
 	if (kobj) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: module is already loaded\n", mod->name);
+=======
+		pr_err("%s: module is already loaded\n", mod->name);
+>>>>>>> v3.18
 =======
 		pr_err("%s: module is already loaded\n", mod->name);
 >>>>>>> v3.18
@@ -1792,7 +1911,11 @@ static int mod_sysfs_init(struct module *mod)
 				   "%s", mod->name);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kobject_put(&mod->mkobj.kobj);
+=======
+		mod_kobject_put(mod);
+>>>>>>> v3.18
 =======
 		mod_kobject_put(mod);
 >>>>>>> v3.18
@@ -1840,7 +1963,11 @@ out_unreg_holders:
 	kobject_put(mod->holders_dir);
 out_unreg:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kobject_put(&mod->mkobj.kobj);
+=======
+	mod_kobject_put(mod);
+>>>>>>> v3.18
 =======
 	mod_kobject_put(mod);
 >>>>>>> v3.18
@@ -1853,7 +1980,11 @@ static void mod_sysfs_fini(struct module *mod)
 	remove_notes_attrs(mod);
 	remove_sect_attrs(mod);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kobject_put(&mod->mkobj.kobj);
+=======
+	mod_kobject_put(mod);
+>>>>>>> v3.18
 =======
 	mod_kobject_put(mod);
 >>>>>>> v3.18
@@ -2021,7 +2152,11 @@ static void unset_module_init_ro_nx(struct module *mod) { }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __weak module_memfree(void *module_region)
+=======
+void __weak module_free(struct module *mod, void *module_region)
+>>>>>>> v3.18
 =======
 void __weak module_free(struct module *mod, void *module_region)
 >>>>>>> v3.18
@@ -2066,7 +2201,11 @@ static void free_module(struct module *mod)
 	/* This may be NULL, but that's OK */
 	unset_module_init_ro_nx(mod);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	module_memfree(mod->module_init);
+=======
+	module_free(mod, mod->module_init);
+>>>>>>> v3.18
 =======
 	module_free(mod, mod->module_init);
 >>>>>>> v3.18
@@ -2079,7 +2218,11 @@ static void free_module(struct module *mod)
 	/* Finally, free the core (containing the module structure) */
 	unset_module_core_ro_nx(mod);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	module_memfree(mod->module_core);
+=======
+	module_free(mod, mod->module_core);
+>>>>>>> v3.18
 =======
 	module_free(mod, mod->module_core);
 >>>>>>> v3.18
@@ -2132,8 +2275,12 @@ static int verify_export_symbols(struct module *mod)
 		for (s = arr[i].sym; s < arr[i].sym + arr[i].num; s++) {
 			if (find_symbol(s->name, &owner, NULL, true, false)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR
 				       "%s: exports duplicate symbol %s"
+=======
+				pr_err("%s: exports duplicate symbol %s"
+>>>>>>> v3.18
 =======
 				pr_err("%s: exports duplicate symbol %s"
 >>>>>>> v3.18
@@ -2162,11 +2309,17 @@ static int simplify_symbols(struct module *mod, const struct load_info *info)
 		switch (sym[i].st_shndx) {
 		case SHN_COMMON:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/* Ignore common symbols */
 			if (!strncmp(name, "__gnu_lto", 9))
 				break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* We compiled with -fno-common.  These are not
 			   supposed to happen.  */
@@ -2195,8 +2348,13 @@ static int simplify_symbols(struct module *mod, const struct load_info *info)
 				break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "%s: Unknown symbol %s (err %li)\n",
 			       mod->name, name, PTR_ERR(ksym));
+=======
+			pr_warn("%s: Unknown symbol %s (err %li)\n",
+				mod->name, name, PTR_ERR(ksym));
+>>>>>>> v3.18
 =======
 			pr_warn("%s: Unknown symbol %s (err %li)\n",
 				mod->name, name, PTR_ERR(ksym));
@@ -2355,8 +2513,13 @@ static void set_license(struct module *mod, const char *license)
 	if (!license_is_gpl_compatible(license)) {
 		if (!test_taint(TAINT_PROPRIETARY_MODULE))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "%s: module license '%s' taints "
 				"kernel.\n", mod->name, license);
+=======
+			pr_warn("%s: module license '%s' taints kernel.\n",
+				mod->name, license);
+>>>>>>> v3.18
 =======
 			pr_warn("%s: module license '%s' taints kernel.\n",
 				mod->name, license);
@@ -2548,6 +2711,7 @@ static void layout_symtab(struct module *mod, struct load_info *info)
 					 info->index.str) | INIT_OFFSET_MASK;
 	pr_debug("\t%s\n", info->secstrings + strsect->sh_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* We'll tack temporary mod_kallsyms on the end. */
 	mod->init_size = ALIGN(mod->init_size,
@@ -2566,6 +2730,10 @@ static void layout_symtab(struct module *mod, struct load_info *info)
 }
 
 >>>>>>> v3.18
+=======
+}
+
+>>>>>>> v3.18
 static void add_kallsyms(struct module *mod, const struct load_info *info)
 {
 	unsigned int i, ndst;
@@ -2574,6 +2742,7 @@ static void add_kallsyms(struct module *mod, const struct load_info *info)
 	char *s;
 	Elf_Shdr *symsec = &info->sechdrs[info->index.sym];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Set up to point into init section. */
 	mod->kallsyms = mod->module_init + info->mod_kallsyms_init_off;
@@ -2603,6 +2772,8 @@ static void add_kallsyms(struct module *mod, const struct load_info *info)
 	}
 	mod->core_kallsyms.num_symtab = ndst;
 =======
+=======
+>>>>>>> v3.18
 	mod->symtab = (void *)symsec->sh_addr;
 	mod->num_symtab = symsec->sh_size / sizeof(Elf_Sym);
 	/* Make sure we get permanent strtab: don't use info->strtab. */
@@ -2625,6 +2796,9 @@ static void add_kallsyms(struct module *mod, const struct load_info *info)
 		}
 	}
 	mod->core_num_syms = ndst;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #else
@@ -2644,8 +2818,13 @@ static void dynamic_debug_setup(struct _ddebug *debug, unsigned int num)
 #ifdef CONFIG_DYNAMIC_DEBUG
 	if (ddebug_add_module(debug, num, debug->modname))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "dynamic debug error adding module: %s\n",
 					debug->modname);
+=======
+		pr_err("dynamic debug error adding module: %s\n",
+			debug->modname);
+>>>>>>> v3.18
 =======
 		pr_err("dynamic debug error adding module: %s\n",
 			debug->modname);
@@ -2681,6 +2860,7 @@ static void *module_alloc_update_bounds(unsigned long size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_DEBUG_KMEMLEAK) && defined(CONFIG_DEBUG_MODULE_SCAN_OFF)
 static void kmemleak_load_module(const struct module *mod,
 				 const struct load_info *info)
@@ -2688,6 +2868,9 @@ static void kmemleak_load_module(const struct module *mod,
 	kmemleak_no_scan(mod->module_core);
 }
 #elif defined(CONFIG_DEBUG_KMEMLEAK)
+=======
+#ifdef CONFIG_DEBUG_KMEMLEAK
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_DEBUG_KMEMLEAK
 >>>>>>> v3.18
@@ -2719,7 +2902,11 @@ static inline void kmemleak_load_module(const struct module *mod,
 
 #ifdef CONFIG_MODULE_SIG
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int module_sig_check(struct load_info *info, int flags)
+=======
+static int module_sig_check(struct load_info *info)
+>>>>>>> v3.18
 =======
 static int module_sig_check(struct load_info *info)
 >>>>>>> v3.18
@@ -2729,12 +2916,16 @@ static int module_sig_check(struct load_info *info)
 	const void *mod = info->hdr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Require flags == 0, as a module with version information
 	 * removed is no longer the module that was signed
 	 */
 	if (flags == 0 &&
 	    info->len > markerlen &&
+=======
+	if (info->len > markerlen &&
+>>>>>>> v3.18
 =======
 	if (info->len > markerlen &&
 >>>>>>> v3.18
@@ -2751,9 +2942,12 @@ static int module_sig_check(struct load_info *info)
 
 	/* Not having a signature is only an error if we're strict. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err < 0 && fips_enabled)
 		panic("Module verification failed with error %d in FIPS mode\n",
 		      err);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (err == -ENOKEY && !sig_enforce)
@@ -2763,7 +2957,11 @@ static int module_sig_check(struct load_info *info)
 }
 #else /* !CONFIG_MODULE_SIG */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int module_sig_check(struct load_info *info, int flags)
+=======
+static int module_sig_check(struct load_info *info)
+>>>>>>> v3.18
 =======
 static int module_sig_check(struct load_info *info)
 >>>>>>> v3.18
@@ -2823,7 +3021,11 @@ static int copy_module_from_user(const void __user *umod, unsigned long len,
 static int copy_module_from_fd(int fd, struct load_info *info)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file *file;
+=======
+	struct fd f = fdget(fd);
+>>>>>>> v3.18
 =======
 	struct fd f = fdget(fd);
 >>>>>>> v3.18
@@ -2832,6 +3034,7 @@ static int copy_module_from_fd(int fd, struct load_info *info)
 	loff_t pos;
 	ssize_t bytes = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	file = fget(fd);
 	if (!file)
@@ -2843,6 +3046,8 @@ static int copy_module_from_fd(int fd, struct load_info *info)
 
 	err = vfs_getattr(&file->f_path, &stat);
 =======
+=======
+>>>>>>> v3.18
 	if (!f.file)
 		return -ENOEXEC;
 
@@ -2851,6 +3056,9 @@ static int copy_module_from_fd(int fd, struct load_info *info)
 		goto out;
 
 	err = vfs_getattr(&f.file->f_path, &stat);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		goto out;
@@ -2875,7 +3083,11 @@ static int copy_module_from_fd(int fd, struct load_info *info)
 	pos = 0;
 	while (pos < stat.size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bytes = kernel_read(file, pos, (char *)(info->hdr) + pos,
+=======
+		bytes = kernel_read(f.file, pos, (char *)(info->hdr) + pos,
+>>>>>>> v3.18
 =======
 		bytes = kernel_read(f.file, pos, (char *)(info->hdr) + pos,
 >>>>>>> v3.18
@@ -2893,7 +3105,11 @@ static int copy_module_from_fd(int fd, struct load_info *info)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fput(file);
+=======
+	fdput(f);
+>>>>>>> v3.18
 =======
 	fdput(f);
 >>>>>>> v3.18
@@ -2917,8 +3133,12 @@ static int rewrite_section_headers(struct load_info *info, int flags)
 		if (shdr->sh_type != SHT_NOBITS
 		    && info->len < shdr->sh_offset + shdr->sh_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "Module len %lu truncated\n",
 			       info->len);
+=======
+			pr_err("Module len %lu truncated\n", info->len);
+>>>>>>> v3.18
 =======
 			pr_err("Module len %lu truncated\n", info->len);
 >>>>>>> v3.18
@@ -2984,7 +3204,11 @@ static struct module *setup_load_info(struct load_info *info, int flags)
 	info->index.mod = find_sec(info, ".gnu.linkonce.this_module");
 	if (!info->index.mod) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "No module found in object\n");
+=======
+		pr_warn("No module found in object\n");
+>>>>>>> v3.18
 =======
 		pr_warn("No module found in object\n");
 >>>>>>> v3.18
@@ -2995,8 +3219,12 @@ static struct module *setup_load_info(struct load_info *info, int flags)
 
 	if (info->index.sym == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: module has no symbols (stripped?)\n",
 		       mod->name);
+=======
+		pr_warn("%s: module has no symbols (stripped?)\n", mod->name);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: module has no symbols (stripped?)\n", mod->name);
 >>>>>>> v3.18
@@ -3027,7 +3255,11 @@ static int check_modinfo(struct module *mod, struct load_info *info, int flags)
 			return err;
 	} else if (!same_magic(modmagic, vermagic, info->index.vers)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: version magic '%s' should be '%s'\n",
+=======
+		pr_err("%s: version magic '%s' should be '%s'\n",
+>>>>>>> v3.18
 =======
 		pr_err("%s: version magic '%s' should be '%s'\n",
 >>>>>>> v3.18
@@ -3041,9 +3273,14 @@ static int check_modinfo(struct module *mod, struct load_info *info, int flags)
 	if (get_modinfo(info, "staging")) {
 		add_taint_module(mod, TAINT_CRAP, LOCKDEP_STILL_OK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: module is from the staging directory,"
 		       " the quality is unknown, you have been warned.\n",
 		       mod->name);
+=======
+		pr_warn("%s: module is from the staging directory, the quality "
+			"is unknown, you have been warned.\n", mod->name);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: module is from the staging directory, the quality "
 			"is unknown, you have been warned.\n", mod->name);
@@ -3057,7 +3294,11 @@ static int check_modinfo(struct module *mod, struct load_info *info, int flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void find_module_sections(struct module *mod, struct load_info *info)
+=======
+static int find_module_sections(struct module *mod, struct load_info *info)
+>>>>>>> v3.18
 =======
 static int find_module_sections(struct module *mod, struct load_info *info)
 >>>>>>> v3.18
@@ -3091,7 +3332,10 @@ static int find_module_sections(struct module *mod, struct load_info *info)
 	mod->ctors = section_objs(info, ".ctors",
 				  sizeof(*mod->ctors), &mod->num_ctors);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!mod->ctors)
 		mod->ctors = section_objs(info, ".init_array",
 				sizeof(*mod->ctors), &mod->num_ctors);
@@ -3104,6 +3348,9 @@ static int find_module_sections(struct module *mod, struct load_info *info)
 		       mod->name);
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -3139,18 +3386,24 @@ static int find_module_sections(struct module *mod, struct load_info *info)
 
 	if (section_addr(info, "__obsparm"))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: Ignoring obsolete parameters\n",
 		       mod->name);
 
 	info->debug = section_objs(info, "__verbose",
 				   sizeof(*info->debug), &info->num_debug);
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("%s: Ignoring obsolete parameters\n", mod->name);
 
 	info->debug = section_objs(info, "__verbose",
 				   sizeof(*info->debug), &info->num_debug);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3184,7 +3437,11 @@ static int move_module(struct module *mod, struct load_info *info)
 		kmemleak_ignore(ptr);
 		if (!ptr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			module_memfree(mod->module_core);
+=======
+			module_free(mod, mod->module_core);
+>>>>>>> v3.18
 =======
 			module_free(mod, mod->module_core);
 >>>>>>> v3.18
@@ -3329,6 +3586,7 @@ static struct module *layout_and_allocate(struct load_info *info, int flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int alloc_module_percpu(struct module *mod, struct load_info *info)
 {
 	Elf_Shdr *pcpusec = &info->sechdrs[info->index.pcpu];
@@ -3341,13 +3599,20 @@ static int alloc_module_percpu(struct module *mod, struct load_info *info)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* mod is no longer valid after this! */
 static void module_deallocate(struct module *mod, struct load_info *info)
 {
 	percpu_modfree(mod);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	module_memfree(mod->module_init);
 	module_memfree(mod->module_core);
+=======
+	module_free(mod, mod->module_init);
+	module_free(mod, mod->module_core);
+>>>>>>> v3.18
 =======
 	module_free(mod, mod->module_init);
 	module_free(mod, mod->module_core);
@@ -3385,7 +3650,11 @@ static bool finished_loading(const char *name)
 
 	mutex_lock(&module_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mod = find_module_all(name, true);
+=======
+	mod = find_module_all(name, strlen(name), true);
+>>>>>>> v3.18
 =======
 	mod = find_module_all(name, strlen(name), true);
 >>>>>>> v3.18
@@ -3408,6 +3677,7 @@ static void do_mod_ctors(struct module *mod)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* For freeing module_init on success, in case kallsyms traversing */
 struct mod_initfree {
 	struct rcu_head rcu;
@@ -3423,10 +3693,13 @@ static void do_free_init(struct rcu_head *head)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* This is where the real work happens */
 static int do_init_module(struct module *mod)
 {
 	int ret = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mod_initfree *freeinit;
 
@@ -3438,6 +3711,8 @@ static int do_init_module(struct module *mod)
 	freeinit->module_init = mod->module_init;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	/*
 	 * We want to find out whether @mod uses async during init.  Clear
@@ -3445,6 +3720,7 @@ static int do_init_module(struct module *mod)
 	 */
 	current->flags &= ~PF_USED_ASYNC;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	blocking_notifier_call_chain(&module_notify_list,
 			MODULE_STATE_COMING, mod);
@@ -3463,11 +3739,14 @@ static int do_init_module(struct module *mod)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	do_mod_ctors(mod);
 	/* Start the module */
 	if (mod->init != NULL)
 		ret = do_one_initcall(mod->init);
 	if (ret < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail_free_freeinit;
 	}
@@ -3478,6 +3757,8 @@ static int do_init_module(struct module *mod)
 		       __func__, mod->name, ret,
 		       __func__);
 =======
+=======
+>>>>>>> v3.18
 		/* Init routine failed: abort.  Try to protect us from
                    buggy refcounters. */
 		mod->state = MODULE_STATE_GOING;
@@ -3494,6 +3775,9 @@ static int do_init_module(struct module *mod)
 			"follow 0/-E convention\n"
 			"%s: loading module anyway...\n",
 			__func__, mod->name, ret, __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dump_stack();
 	}
@@ -3529,22 +3813,29 @@ static int do_init_module(struct module *mod)
 	trim_init_extable(mod);
 #ifdef CONFIG_KALLSYMS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Switch to core kallsyms now init is done: kallsyms may be walking! */
 	rcu_assign_pointer(mod->kallsyms, &mod->core_kallsyms);
 #endif
 	unset_module_init_ro_nx(mod);
 =======
+=======
+>>>>>>> v3.18
 	mod->num_symtab = mod->core_num_syms;
 	mod->symtab = mod->core_symtab;
 	mod->strtab = mod->core_strtab;
 #endif
 	unset_module_init_ro_nx(mod);
 	module_free(mod, mod->module_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mod->module_init = NULL;
 	mod->init_size = 0;
 	mod->init_ro_size = 0;
 	mod->init_text_size = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * We want to free module_init, but be aware that kallsyms may be
@@ -3555,10 +3846,13 @@ static int do_init_module(struct module *mod)
 	call_rcu(&freeinit->rcu, do_free_init);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	mutex_unlock(&module_mutex);
 	wake_up_all(&module_wq);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 fail_free_freeinit:
 	kfree(freeinit);
@@ -3572,6 +3866,8 @@ fail:
 	free_module(mod);
 	wake_up_all(&module_wq);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -3599,7 +3895,12 @@ static int add_unformed_module(struct module *mod)
 again:
 	mutex_lock(&module_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((old = find_module_all(mod->name, true)) != NULL) {
+=======
+	old = find_module_all(mod->name, strlen(mod->name), true);
+	if (old != NULL) {
+>>>>>>> v3.18
 =======
 	old = find_module_all(mod->name, strlen(mod->name), true);
 	if (old != NULL) {
@@ -3641,10 +3942,13 @@ static int complete_formation(struct module *mod, struct load_info *info)
 	module_bug_finalize(info->hdr, info->sechdrs, mod);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Mark state as coming so strong_try_module_get() ignores us,
 	 * but kallsyms etc. can see us. */
 	mod->state = MODULE_STATE_COMING;
 =======
+=======
+>>>>>>> v3.18
 	/* Set RO and NX regions for core */
 	set_section_ro_nx(mod->module_core,
 				mod->core_text_size,
@@ -3665,6 +3969,9 @@ static int complete_formation(struct module *mod, struct load_info *info)
 	blocking_notifier_call_chain(&module_notify_list,
 				     MODULE_STATE_COMING, mod);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -3673,7 +3980,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int unknown_module_param_cb(char *param, char *val, const char *modname)
 {
 	/* Check for magic 'dyndbg' arg */ 
@@ -3683,6 +3993,9 @@ static int unknown_module_param_cb(char *param, char *val, const char *modname)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Allocate and load the module: note that size of section 0 is always
    zero, and we rely on this for optional sections. */
@@ -3692,8 +4005,14 @@ static int load_module(struct load_info *info, const char __user *uargs,
 	struct module *mod;
 	long err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	err = module_sig_check(info, flags);
+=======
+	char *after_dashes;
+
+	err = module_sig_check(info);
+>>>>>>> v3.18
 =======
 	char *after_dashes;
 
@@ -3722,23 +4041,33 @@ static int load_module(struct load_info *info, const char __user *uargs,
 	mod->sig_ok = info->sig_ok;
 	if (!mod->sig_ok) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk_once(KERN_NOTICE
 			    "%s: module verification failed: signature and/or"
 			    " required key missing - tainting kernel\n",
 			    mod->name);
 		add_taint_module(mod, TAINT_FORCED_MODULE, LOCKDEP_STILL_OK);
 =======
+=======
+>>>>>>> v3.18
 		pr_notice_once("%s: module verification failed: signature "
 			       "and/or  required key missing - tainting "
 			       "kernel\n", mod->name);
 		add_taint_module(mod, TAINT_UNSIGNED_MODULE, LOCKDEP_STILL_OK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 #endif
 
 	/* To avoid stressing percpu allocator, do this once we're unique. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = alloc_module_percpu(mod, info);
+=======
+	err = percpu_modalloc(mod, info);
+>>>>>>> v3.18
 =======
 	err = percpu_modalloc(mod, info);
 >>>>>>> v3.18
@@ -3753,7 +4082,13 @@ static int load_module(struct load_info *info, const char __user *uargs,
 	/* Now we've got everything in the final locations, we can
 	 * find optional sections. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	find_module_sections(mod, info);
+=======
+	err = find_module_sections(mod, info);
+	if (err)
+		goto free_unload;
+>>>>>>> v3.18
 =======
 	err = find_module_sections(mod, info);
 	if (err)
@@ -3801,11 +4136,14 @@ static int load_module(struct load_info *info, const char __user *uargs,
 
 	/* Module is ready to execute: parsing args may do that. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = parse_args(mod->name, mod->args, mod->kp, mod->num_kp,
 			 -32768, 32767, &ddebug_dyndbg_module_param_cb);
 	if (err < 0)
 		goto bug_cleanup;
 =======
+=======
+>>>>>>> v3.18
 	after_dashes = parse_args(mod->name, mod->args, mod->kp, mod->num_kp,
 				  -32768, 32767, unknown_module_param_cb);
 	if (IS_ERR(after_dashes)) {
@@ -3815,6 +4153,9 @@ static int load_module(struct load_info *info, const char __user *uargs,
 		pr_warn("%s: parameters '%s' after `--' ignored\n",
 		       mod->name, after_dashes);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Link in to syfs. */
@@ -3836,12 +4177,18 @@ static int load_module(struct load_info *info, const char __user *uargs,
 	module_bug_cleanup(mod);
 	mutex_unlock(&module_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* we can't deallocate the module until we clear memory protection */
 	unset_module_init_ro_nx(mod);
 	unset_module_core_ro_nx(mod);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  ddebug_cleanup:
 	dynamic_debug_remove(info->debug);
@@ -3921,6 +4268,7 @@ static inline int within(unsigned long addr, void *start, unsigned long size)
 static inline int is_arm_mapping_symbol(const char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return str[0] == '$' && strchr("atd", str[1])
 	       && (str[2] == '\0' || str[2] == '.');
 }
@@ -3931,12 +4279,17 @@ static const char *symname(struct mod_kallsyms *kallsyms, unsigned int symnum)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (str[0] == '.' && str[1] == 'L')
 		return true;
 	return str[0] == '$' && strchr("axtd", str[1])
 	       && (str[2] == '\0' || str[2] == '.');
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char *get_ksymbol(struct module *mod,
 			       unsigned long addr,
@@ -3946,7 +4299,10 @@ static const char *get_ksymbol(struct module *mod,
 	unsigned int i, best = 0;
 	unsigned long nextval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mod_kallsyms *kallsyms = rcu_dereference_sched(mod->kallsyms);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3959,8 +4315,13 @@ static const char *get_ksymbol(struct module *mod,
 	/* Scan for closest preceding symbol, and next symbol. (ELF
 	   starts real symbols at 1). */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 1; i < kallsyms->num_symtab; i++) {
 		if (kallsyms->symtab[i].st_shndx == SHN_UNDEF)
+=======
+	for (i = 1; i < mod->num_symtab; i++) {
+		if (mod->symtab[i].st_shndx == SHN_UNDEF)
+>>>>>>> v3.18
 =======
 	for (i = 1; i < mod->num_symtab; i++) {
 		if (mod->symtab[i].st_shndx == SHN_UNDEF)
@@ -3969,6 +4330,7 @@ static const char *get_ksymbol(struct module *mod,
 
 		/* We ignore unnamed symbols: they're uninformative
 		 * and inserted at a whim. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (*symname(kallsyms, i) == '\0'
 		    || is_arm_mapping_symbol(symname(kallsyms, i)))
@@ -3981,6 +4343,8 @@ static const char *get_ksymbol(struct module *mod,
 		    && kallsyms->symtab[i].st_value < nextval)
 			nextval = kallsyms->symtab[i].st_value;
 =======
+=======
+>>>>>>> v3.18
 		if (mod->symtab[i].st_value <= addr
 		    && mod->symtab[i].st_value > mod->symtab[best].st_value
 		    && *(mod->strtab + mod->symtab[i].st_name) != '\0'
@@ -3991,6 +4355,9 @@ static const char *get_ksymbol(struct module *mod,
 		    && *(mod->strtab + mod->symtab[i].st_name) != '\0'
 		    && !is_arm_mapping_symbol(mod->strtab + mod->symtab[i].st_name))
 			nextval = mod->symtab[i].st_value;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -3999,15 +4366,21 @@ static const char *get_ksymbol(struct module *mod,
 
 	if (size)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*size = nextval - kallsyms->symtab[best].st_value;
 	if (offset)
 		*offset = addr - kallsyms->symtab[best].st_value;
 	return symname(kallsyms, best);
 =======
+=======
+>>>>>>> v3.18
 		*size = nextval - mod->symtab[best].st_value;
 	if (offset)
 		*offset = addr - mod->symtab[best].st_value;
 	return mod->strtab + mod->symtab[best].st_name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4027,8 +4400,12 @@ const char *module_address_lookup(unsigned long addr,
 		if (mod->state == MODULE_STATE_UNFORMED)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (within_module_init(addr, mod) ||
 		    within_module_core(addr, mod)) {
+=======
+		if (within_module(addr, mod)) {
+>>>>>>> v3.18
 =======
 		if (within_module(addr, mod)) {
 >>>>>>> v3.18
@@ -4056,8 +4433,12 @@ int lookup_module_symbol_name(unsigned long addr, char *symname)
 		if (mod->state == MODULE_STATE_UNFORMED)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (within_module_init(addr, mod) ||
 		    within_module_core(addr, mod)) {
+=======
+		if (within_module(addr, mod)) {
+>>>>>>> v3.18
 =======
 		if (within_module(addr, mod)) {
 >>>>>>> v3.18
@@ -4086,8 +4467,12 @@ int lookup_module_symbol_attrs(unsigned long addr, unsigned long *size,
 		if (mod->state == MODULE_STATE_UNFORMED)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (within_module_init(addr, mod) ||
 		    within_module_core(addr, mod)) {
+=======
+		if (within_module(addr, mod)) {
+>>>>>>> v3.18
 =======
 		if (within_module(addr, mod)) {
 >>>>>>> v3.18
@@ -4117,6 +4502,7 @@ int module_get_kallsym(unsigned int symnum, unsigned long *value, char *type,
 	preempt_disable();
 	list_for_each_entry_rcu(mod, &modules, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct mod_kallsyms *kallsyms;
 
 		if (mod->state == MODULE_STATE_UNFORMED)
@@ -4127,6 +4513,8 @@ int module_get_kallsym(unsigned int symnum, unsigned long *value, char *type,
 			*type = kallsyms->symtab[symnum].st_info;
 			strlcpy(name, symname(kallsyms, symnum), KSYM_NAME_LEN);
 =======
+=======
+>>>>>>> v3.18
 		if (mod->state == MODULE_STATE_UNFORMED)
 			continue;
 		if (symnum < mod->num_symtab) {
@@ -4134,6 +4522,9 @@ int module_get_kallsym(unsigned int symnum, unsigned long *value, char *type,
 			*type = mod->symtab[symnum].st_info;
 			strlcpy(name, mod->strtab + mod->symtab[symnum].st_name,
 				KSYM_NAME_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			strlcpy(module_name, mod->name, MODULE_NAME_LEN);
 			*exported = is_exported(name, *value, mod);
@@ -4141,7 +4532,11 @@ int module_get_kallsym(unsigned int symnum, unsigned long *value, char *type,
 			return 0;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		symnum -= kallsyms->num_symtab;
+=======
+		symnum -= mod->num_symtab;
+>>>>>>> v3.18
 =======
 		symnum -= mod->num_symtab;
 >>>>>>> v3.18
@@ -4154,6 +4549,7 @@ static unsigned long mod_find_symname(struct module *mod, const char *name)
 {
 	unsigned int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mod_kallsyms *kallsyms = rcu_dereference_sched(mod->kallsyms);
 
 	for (i = 0; i < kallsyms->num_symtab; i++)
@@ -4161,11 +4557,16 @@ static unsigned long mod_find_symname(struct module *mod, const char *name)
 		    kallsyms->symtab[i].st_info != 'U')
 			return kallsyms->symtab[i].st_value;
 =======
+=======
+>>>>>>> v3.18
 
 	for (i = 0; i < mod->num_symtab; i++)
 		if (strcmp(name, mod->strtab+mod->symtab[i].st_name) == 0 &&
 		    mod->symtab[i].st_info != 'U')
 			return mod->symtab[i].st_value;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -4181,10 +4582,15 @@ unsigned long module_kallsyms_lookup_name(const char *name)
 	preempt_disable();
 	if ((colon = strchr(name, ':')) != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*colon = '\0';
 		if ((mod = find_module(name)) != NULL)
 			ret = mod_find_symname(mod, colon+1);
 		*colon = ':';
+=======
+		if ((mod = find_module_all(name, colon - name, false)) != NULL)
+			ret = mod_find_symname(mod, colon+1);
+>>>>>>> v3.18
 =======
 		if ((mod = find_module_all(name, colon - name, false)) != NULL)
 			ret = mod_find_symname(mod, colon+1);
@@ -4211,6 +4617,7 @@ int module_kallsyms_on_each_symbol(int (*fn)(void *, const char *,
 
 	list_for_each_entry(mod, &modules, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* We hold module_mutex: no need for rcu_dereference_sched */
 		struct mod_kallsyms *kallsyms = mod->kallsyms;
 
@@ -4220,11 +4627,16 @@ int module_kallsyms_on_each_symbol(int (*fn)(void *, const char *,
 			ret = fn(data, symname(kallsyms, i),
 				 mod, kallsyms->symtab[i].st_value);
 =======
+=======
+>>>>>>> v3.18
 		if (mod->state == MODULE_STATE_UNFORMED)
 			continue;
 		for (i = 0; i < mod->num_symtab; i++) {
 			ret = fn(data, mod->strtab + mod->symtab[i].st_name,
 				 mod, mod->symtab[i].st_value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ret != 0)
 				return ret;
@@ -4398,8 +4810,12 @@ struct module *__module_address(unsigned long addr)
 		if (mod->state == MODULE_STATE_UNFORMED)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (within_module_core(addr, mod)
 		    || within_module_init(addr, mod))
+=======
+		if (within_module(addr, mod))
+>>>>>>> v3.18
 =======
 		if (within_module(addr, mod))
 >>>>>>> v3.18
@@ -4461,6 +4877,7 @@ void print_modules(void)
 		if (mod->state == MODULE_STATE_UNFORMED)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(" %s%s", mod->name, module_flags(mod, buf));
 	}
 	preempt_enable();
@@ -4468,12 +4885,17 @@ void print_modules(void)
 		printk(" [last unloaded: %s]", last_unloaded_module);
 	printk("\n");
 =======
+=======
+>>>>>>> v3.18
 		pr_cont(" %s%s", mod->name, module_flags(mod, buf));
 	}
 	preempt_enable();
 	if (last_unloaded_module[0])
 		pr_cont(" [last unloaded: %s]", last_unloaded_module);
 	pr_cont("\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

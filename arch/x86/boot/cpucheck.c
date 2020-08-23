@@ -28,9 +28,14 @@
 #include <asm/required-features.h>
 #include <asm/msr-index.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct cpu_features cpu;
 static u32 cpu_vendor[3];
+=======
+#include "string.h"
+
+>>>>>>> v3.18
 =======
 #include "string.h"
 
@@ -74,6 +79,7 @@ static int is_transmeta(void)
 	       cpu_vendor[2] == A32('M', 'x', '8', '6');
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int has_fpu(void)
 {
@@ -162,6 +168,8 @@ static void get_flags(void)
 /* Returns a bitmask of which words we have error bits in */
 static int check_flags(void)
 =======
+=======
+>>>>>>> v3.18
 static int is_intel(void)
 {
 	return cpu_vendor[0] == A32('G', 'e', 'n', 'u') &&
@@ -171,6 +179,9 @@ static int is_intel(void)
 
 /* Returns a bitmask of which words we have error bits in */
 static int check_cpuflags(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 err;
@@ -205,8 +216,13 @@ int check_cpu(int *cpu_level_ptr, int *req_level_ptr, u32 **err_flags_ptr)
 		cpu.level = 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_flags();
 	err = check_flags();
+=======
+	get_cpuflags();
+	err = check_cpuflags();
+>>>>>>> v3.18
 =======
 	get_cpuflags();
 	err = check_cpuflags();
@@ -230,8 +246,13 @@ int check_cpu(int *cpu_level_ptr, int *req_level_ptr, u32 **err_flags_ptr)
 		asm("wrmsr" : : "a" (eax), "d" (edx), "c" (ecx));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		get_flags();	/* Make sure it really did something */
 		err = check_flags();
+=======
+		get_cpuflags();	/* Make sure it really did something */
+		err = check_cpuflags();
+>>>>>>> v3.18
 =======
 		get_cpuflags();	/* Make sure it really did something */
 		err = check_cpuflags();
@@ -251,7 +272,11 @@ int check_cpu(int *cpu_level_ptr, int *req_level_ptr, u32 **err_flags_ptr)
 
 		set_bit(X86_FEATURE_CX8, cpu.flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = check_flags();
+=======
+		err = check_cpuflags();
+>>>>>>> v3.18
 =======
 		err = check_cpuflags();
 >>>>>>> v3.18
@@ -270,8 +295,11 @@ int check_cpu(int *cpu_level_ptr, int *req_level_ptr, u32 **err_flags_ptr)
 		asm("wrmsr" : : "a" (eax), "d" (edx), "c" (ecx));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = check_flags();
 =======
+=======
+>>>>>>> v3.18
 		err = check_cpuflags();
 	} else if (err == 0x01 &&
 		   !(err_flags[0] & ~(1 << X86_FEATURE_PAE)) &&
@@ -286,6 +314,9 @@ int check_cpu(int *cpu_level_ptr, int *req_level_ptr, u32 **err_flags_ptr)
 		else {
 			puts("WARNING: PAE disabled. Use parameter 'forcepae' to enable at your own risk!\n");
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

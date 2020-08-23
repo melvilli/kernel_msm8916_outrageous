@@ -28,7 +28,10 @@
  *****************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "../wifi.h"
@@ -36,7 +39,13 @@
 #include "../rtl8192ce/def.h"
 #include "dm_common.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "phy_common.h"
+=======
+#include "fw_common.h"
+#include "phy_common.h"
+#include <linux/export.h>
+>>>>>>> v3.18
 =======
 #include "fw_common.h"
 #include "phy_common.h"
@@ -60,7 +69,10 @@ u32 rtl92c_phy_query_bb_reg(struct ieee80211_hw *hw, u32 regaddr, u32 bitmask)
 
 	return returnvalue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -88,7 +100,10 @@ void rtl92c_phy_set_bb_reg(struct ieee80211_hw *hw,
 		 "regaddr(%#x), bitmask(%#x), data(%#x)\n",
 		 regaddr, bitmask, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -100,7 +115,10 @@ u32 _rtl92c_phy_fw_rf_serial_read(struct ieee80211_hw *hw,
 	RT_ASSERT(false, "deprecated!\n");
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -148,15 +166,21 @@ u32 _rtl92c_phy_rf_serial_read(struct ieee80211_hw *hw,
 	mdelay(1);
 	if (rfpath == RF90_PATH_A)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rfpi_enable = (u8) rtl_get_bbreg(hw, RFPGA0_XA_HSSIPARAMETER1,
 						 BIT(8));
 	else if (rfpath == RF90_PATH_B)
 		rfpi_enable = (u8) rtl_get_bbreg(hw, RFPGA0_XB_HSSIPARAMETER1,
 =======
+=======
+>>>>>>> v3.18
 		rfpi_enable = (u8)rtl_get_bbreg(hw, RFPGA0_XA_HSSIPARAMETER1,
 						 BIT(8));
 	else if (rfpath == RF90_PATH_B)
 		rfpi_enable = (u8)rtl_get_bbreg(hw, RFPGA0_XB_HSSIPARAMETER1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						 BIT(8));
 	if (rfpi_enable)
@@ -167,7 +191,12 @@ u32 _rtl92c_phy_rf_serial_read(struct ieee80211_hw *hw,
 					 BLSSIREADBACKDATA);
 	RT_TRACE(rtlpriv, COMP_RF, DBG_TRACE, "RFR-%d Addr[0x%x]=0x%x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 rfpath, pphyreg->rf_rb, retvalue);
+=======
+					       rfpath, pphyreg->rf_rb,
+					       retvalue);
+>>>>>>> v3.18
 =======
 					       rfpath, pphyreg->rf_rb,
 					       retvalue);
@@ -196,7 +225,12 @@ void _rtl92c_phy_rf_serial_write(struct ieee80211_hw *hw,
 	rtl_set_bbreg(hw, pphyreg->rf3wire_offset, MASKDWORD, data_and_addr);
 	RT_TRACE(rtlpriv, COMP_RF, DBG_TRACE, "RFW-%d Addr[0x%x]=0x%x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 rfpath, pphyreg->rf3wire_offset, data_and_addr);
+=======
+					       rfpath, pphyreg->rf3wire_offset,
+					       data_and_addr);
+>>>>>>> v3.18
 =======
 					       rfpath, pphyreg->rf3wire_offset,
 					       data_and_addr);
@@ -210,7 +244,11 @@ u32 _rtl92c_phy_calculate_bit_shift(u32 bitmask)
 
 	for (i = 0; i <= 31; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((bitmask >> i) & 0x1)
+=======
+		if (((bitmask >> i) & 0x1) == 1)
+>>>>>>> v3.18
 =======
 		if (((bitmask >> i) & 0x1) == 1)
 >>>>>>> v3.18
@@ -250,16 +288,22 @@ bool _rtl92c_phy_bb8192c_config_parafile(struct ieee80211_hw *hw)
 	bool rtstatus;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RT_TRACE(rtlpriv, COMP_INIT, DBG_TRACE, "==>\n");
 	rtstatus = rtlpriv->cfg->ops->config_bb_with_headerfile(hw,
 						 BASEBAND_CONFIG_PHY_REG);
 	if (!rtstatus) {
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG, "Write BB Reg Fail!!\n");
 =======
+=======
+>>>>>>> v3.18
 	rtstatus = rtlpriv->cfg->ops->config_bb_with_headerfile(hw,
 						 BASEBAND_CONFIG_PHY_REG);
 	if (!rtstatus) {
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG, "Write BB Reg Fail!!");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return false;
 	}
@@ -274,7 +318,11 @@ bool _rtl92c_phy_bb8192c_config_parafile(struct ieee80211_hw *hw)
 	}
 	if (!rtstatus) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG, "BB_PG Reg Fail!!\n");
+=======
+		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG, "BB_PG Reg Fail!!");
+>>>>>>> v3.18
 =======
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG, "BB_PG Reg Fail!!");
 >>>>>>> v3.18
@@ -287,6 +335,7 @@ bool _rtl92c_phy_bb8192c_config_parafile(struct ieee80211_hw *hw)
 		return false;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtlphy->cck_high_power = (bool) (rtl_get_bbreg(hw,
 						RFPGA0_XA_HSSIPARAMETER2,
 						0x200));
@@ -294,12 +343,17 @@ bool _rtl92c_phy_bb8192c_config_parafile(struct ieee80211_hw *hw)
 	return true;
 }
 =======
+=======
+>>>>>>> v3.18
 	rtlphy->cck_high_power =
 		(bool)(rtl_get_bbreg(hw, RFPGA0_XA_HSSIPARAMETER2, 0x200));
 
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(_rtl92c_phy_bb8192c_config_parafile);
 
@@ -309,6 +363,7 @@ void _rtl92c_store_pwrIndex_diffrate_offset(struct ieee80211_hw *hw,
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int index;
 
@@ -356,6 +411,8 @@ void _rtl92c_store_pwrIndex_diffrate_offset(struct ieee80211_hw *hw,
 	if (index == 13)
 		rtlphy->pwrgroup_cnt++;
 =======
+=======
+>>>>>>> v3.18
 
 	if (regaddr == RTXAGC_A_RATE18_06) {
 		rtlphy->mcs_txpwrlevel_origoffset[rtlphy->pwrgroup_cnt][0] =
@@ -503,6 +560,9 @@ void _rtl92c_store_pwrIndex_diffrate_offset(struct ieee80211_hw *hw,
 
 		rtlphy->pwrgroup_cnt++;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(_rtl92c_store_pwrIndex_diffrate_offset);
@@ -513,6 +573,7 @@ void rtl92c_phy_get_hw_reg_originalvalue(struct ieee80211_hw *hw)
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
 
 	rtlphy->default_initialgain[0] =
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    (u8) rtl_get_bbreg(hw, ROFDM0_XAAGCCORE1, MASKBYTE0);
 	rtlphy->default_initialgain[1] =
@@ -531,6 +592,8 @@ void rtl92c_phy_get_hw_reg_originalvalue(struct ieee80211_hw *hw)
 
 	rtlphy->framesync = (u8) rtl_get_bbreg(hw,
 =======
+=======
+>>>>>>> v3.18
 	    (u8)rtl_get_bbreg(hw, ROFDM0_XAAGCCORE1, MASKBYTE0);
 	rtlphy->default_initialgain[1] =
 	    (u8)rtl_get_bbreg(hw, ROFDM0_XBAGCCORE1, MASKBYTE0);
@@ -547,6 +610,9 @@ void rtl92c_phy_get_hw_reg_originalvalue(struct ieee80211_hw *hw)
 		  rtlphy->default_initialgain[3]);
 
 	rtlphy->framesync = (u8)rtl_get_bbreg(hw,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					       ROFDM0_RXDETECTOR3, MASKBYTE0);
 	rtlphy->framesync_c34 = rtl_get_bbreg(hw,
@@ -555,7 +621,11 @@ void rtl92c_phy_get_hw_reg_originalvalue(struct ieee80211_hw *hw)
 	RT_TRACE(rtlpriv, COMP_INIT, DBG_TRACE,
 		 "Default framesync (0x%x) = 0x%x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 ROFDM0_RXDETECTOR3, rtlphy->framesync);
+=======
+		  ROFDM0_RXDETECTOR3, rtlphy->framesync);
+>>>>>>> v3.18
 =======
 		  ROFDM0_RXDETECTOR3, rtlphy->framesync);
 >>>>>>> v3.18
@@ -659,6 +729,7 @@ void rtl92c_phy_get_txpower_level(struct ieee80211_hw *hw, long *powerlevel)
 
 	txpwr_level = rtlphy->cur_cck_txpwridx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	txpwr_dbm = _rtl92c_phy_txpwr_idx_to_dbm(hw,
 						 WIRELESS_MODE_B, txpwr_level);
 	txpwr_level = rtlphy->cur_ofdm24g_txpwridx +
@@ -666,11 +737,16 @@ void rtl92c_phy_get_txpower_level(struct ieee80211_hw *hw, long *powerlevel)
 	if (_rtl92c_phy_txpwr_idx_to_dbm(hw,
 					 WIRELESS_MODE_G,
 =======
+=======
+>>>>>>> v3.18
 	txpwr_dbm = _rtl92c_phy_txpwr_idx_to_dbm(hw, WIRELESS_MODE_B,
 						 txpwr_level);
 	txpwr_level = rtlphy->cur_ofdm24g_txpwridx +
 	    rtlefuse->legacy_ht_txpowerdiff;
 	if (_rtl92c_phy_txpwr_idx_to_dbm(hw, WIRELESS_MODE_G,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 txpwr_level) > txpwr_dbm)
 		txpwr_dbm =
@@ -678,8 +754,12 @@ void rtl92c_phy_get_txpower_level(struct ieee80211_hw *hw, long *powerlevel)
 						 txpwr_level);
 	txpwr_level = rtlphy->cur_ofdm24g_txpwridx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (_rtl92c_phy_txpwr_idx_to_dbm(hw,
 					 WIRELESS_MODE_N_24G,
+=======
+	if (_rtl92c_phy_txpwr_idx_to_dbm(hw, WIRELESS_MODE_N_24G,
+>>>>>>> v3.18
 =======
 	if (_rtl92c_phy_txpwr_idx_to_dbm(hw, WIRELESS_MODE_N_24G,
 >>>>>>> v3.18
@@ -725,7 +805,10 @@ static void _rtl92c_ccxpower_index_check(struct ieee80211_hw *hw,
 	rtlphy->cur_cck_txpwridx = cckpowerlevel[0];
 	rtlphy->cur_ofdm24g_txpwridx = ofdmpowerlevel[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -734,7 +817,11 @@ void rtl92c_phy_set_txpower_level(struct ieee80211_hw *hw, u8 channel)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtl_efuse *rtlefuse = rtl_efuse(rtlpriv);
+=======
+	struct rtl_efuse *rtlefuse = rtl_efuse(rtl_priv(hw));
+>>>>>>> v3.18
 =======
 	struct rtl_efuse *rtlefuse = rtl_efuse(rtl_priv(hw));
 >>>>>>> v3.18
@@ -745,8 +832,12 @@ void rtl92c_phy_set_txpower_level(struct ieee80211_hw *hw, u8 channel)
 	_rtl92c_get_txpower_index(hw, channel,
 				  &cckpowerlevel[0], &ofdmpowerlevel[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_rtl92c_ccxpower_index_check(hw,
 				     channel, &cckpowerlevel[0],
+=======
+	_rtl92c_ccxpower_index_check(hw, channel, &cckpowerlevel[0],
+>>>>>>> v3.18
 =======
 	_rtl92c_ccxpower_index_check(hw, channel, &cckpowerlevel[0],
 >>>>>>> v3.18
@@ -765,11 +856,17 @@ bool rtl92c_phy_update_txpower_dbm(struct ieee80211_hw *hw, long power_indbm)
 	u8 idx;
 	u8 rf_path;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 ccktxpwridx = _rtl92c_phy_dbm_to_txpwr_Idx(hw,
 						      WIRELESS_MODE_B,
 						      power_indbm);
 	u8 ofdmtxpwridx = _rtl92c_phy_dbm_to_txpwr_Idx(hw,
 						       WIRELESS_MODE_N_24G,
+=======
+	u8 ccktxpwridx = _rtl92c_phy_dbm_to_txpwr_idx(hw, WIRELESS_MODE_B,
+						      power_indbm);
+	u8 ofdmtxpwridx = _rtl92c_phy_dbm_to_txpwr_idx(hw, WIRELESS_MODE_N_24G,
+>>>>>>> v3.18
 =======
 	u8 ccktxpwridx = _rtl92c_phy_dbm_to_txpwr_idx(hw, WIRELESS_MODE_B,
 						      power_indbm);
@@ -783,7 +880,11 @@ bool rtl92c_phy_update_txpower_dbm(struct ieee80211_hw *hw, long power_indbm)
 	RT_TRACE(rtlpriv, COMP_TXAGC, DBG_TRACE,
 		 "%lx dBm, ccktxpwridx = %d, ofdmtxpwridx = %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 power_indbm, ccktxpwridx, ofdmtxpwridx);
+=======
+		  power_indbm, ccktxpwridx, ofdmtxpwridx);
+>>>>>>> v3.18
 =======
 		  power_indbm, ccktxpwridx, ofdmtxpwridx);
 >>>>>>> v3.18
@@ -802,7 +903,11 @@ bool rtl92c_phy_update_txpower_dbm(struct ieee80211_hw *hw, long power_indbm)
 EXPORT_SYMBOL(rtl92c_phy_update_txpower_dbm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 _rtl92c_phy_dbm_to_txpwr_Idx(struct ieee80211_hw *hw,
+=======
+u8 _rtl92c_phy_dbm_to_txpwr_idx(struct ieee80211_hw *hw,
+>>>>>>> v3.18
 =======
 u8 _rtl92c_phy_dbm_to_txpwr_idx(struct ieee80211_hw *hw,
 >>>>>>> v3.18
@@ -827,7 +932,11 @@ u8 _rtl92c_phy_dbm_to_txpwr_idx(struct ieee80211_hw *hw,
 
 	if ((power_indbm - offset) > 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		txpwridx = (u8) ((power_indbm - offset) * 2);
+=======
+		txpwridx = (u8)((power_indbm - offset) * 2);
+>>>>>>> v3.18
 =======
 		txpwridx = (u8)((power_indbm - offset) * 2);
 >>>>>>> v3.18
@@ -840,7 +949,11 @@ u8 _rtl92c_phy_dbm_to_txpwr_idx(struct ieee80211_hw *hw,
 	return txpwridx;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(_rtl92c_phy_dbm_to_txpwr_Idx);
+=======
+EXPORT_SYMBOL(_rtl92c_phy_dbm_to_txpwr_idx);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(_rtl92c_phy_dbm_to_txpwr_idx);
 >>>>>>> v3.18
@@ -869,6 +982,7 @@ long _rtl92c_phy_txpwr_idx_to_dbm(struct ieee80211_hw *hw,
 }
 EXPORT_SYMBOL(_rtl92c_phy_txpwr_idx_to_dbm);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void rtl92c_phy_scan_operation_backup(struct ieee80211_hw *hw, u8 operation)
 {
@@ -902,6 +1016,8 @@ EXPORT_SYMBOL(rtl92c_phy_scan_operation_backup);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void rtl92c_phy_set_bw_mode(struct ieee80211_hw *hw,
 			    enum nl80211_channel_type ch_type)
 {
@@ -918,7 +1034,11 @@ void rtl92c_phy_set_bw_mode(struct ieee80211_hw *hw,
 	} else {
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_WARNING,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "FALSE driver sleep or unload\n");
+=======
+			 "false driver sleep or unload\n");
+>>>>>>> v3.18
 =======
 			 "false driver sleep or unload\n");
 >>>>>>> v3.18
@@ -955,7 +1075,11 @@ void rtl92c_phy_sw_chnl_callback(struct ieee80211_hw *hw)
 		break;
 	} while (true);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RT_TRACE(rtlpriv, COMP_SCAN, DBG_TRACE, "<==\n");
+=======
+	RT_TRACE(rtlpriv, COMP_SCAN, DBG_TRACE, "\n");
+>>>>>>> v3.18
 =======
 	RT_TRACE(rtlpriv, COMP_SCAN, DBG_TRACE, "\n");
 >>>>>>> v3.18
@@ -974,7 +1098,11 @@ u8 rtl92c_phy_sw_chnl(struct ieee80211_hw *hw)
 		return 0;
 	RT_ASSERT((rtlphy->current_channel <= 14),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  "WIRELESS_MODE_G but channel>14\n");
+=======
+		  "WIRELESS_MODE_G but channel>14");
+>>>>>>> v3.18
 =======
 		  "WIRELESS_MODE_G but channel>14");
 >>>>>>> v3.18
@@ -985,7 +1113,11 @@ u8 rtl92c_phy_sw_chnl(struct ieee80211_hw *hw)
 		rtl92c_phy_sw_chnl_callback(hw);
 		RT_TRACE(rtlpriv, COMP_CHAN, DBG_LOUD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "sw_chnl_inprogress false schedule workitem\n");
+=======
+			 "sw_chnl_inprogress false schdule workitem\n");
+>>>>>>> v3.18
 =======
 			 "sw_chnl_inprogress false schdule workitem\n");
 >>>>>>> v3.18
@@ -1000,7 +1132,11 @@ u8 rtl92c_phy_sw_chnl(struct ieee80211_hw *hw)
 EXPORT_SYMBOL(rtl92c_phy_sw_chnl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void _rtl92c_phy_sw_rf_setting(struct ieee80211_hw *hw, u8 channel)
+=======
+static void _rtl92c_phy_sw_rf_seting(struct ieee80211_hw *hw, u8 channel)
+>>>>>>> v3.18
 =======
 static void _rtl92c_phy_sw_rf_seting(struct ieee80211_hw *hw, u8 channel)
 >>>>>>> v3.18
@@ -1008,6 +1144,7 @@ static void _rtl92c_phy_sw_rf_seting(struct ieee80211_hw *hw, u8 channel)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
 	struct rtl_hal *rtlhal = rtl_hal(rtl_priv(hw));
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (IS_81xxC_VENDOR_UMC_B_CUT(rtlhal->version)) {
@@ -1021,6 +1158,8 @@ static void _rtl92c_phy_sw_rf_seting(struct ieee80211_hw *hw, u8 channel)
 			rtl_set_rfreg(hw, RF90_PATH_A, RF_RX_G1, MASKDWORD,
 				      backupRF0x1A);
 =======
+=======
+>>>>>>> v3.18
 	if (IS_81XXC_VENDOR_UMC_B_CUT(rtlhal->version)) {
 		if (channel == 6 &&
 		    rtlphy->current_chan_bw == HT_CHANNEL_WIDTH_20) {
@@ -1032,6 +1171,9 @@ static void _rtl92c_phy_sw_rf_seting(struct ieee80211_hw *hw, u8 channel)
 					     RFREG_OFFSET_MASK);
 			rtl_set_rfreg(hw, RF90_PATH_A, RF_RX_G1, MASKDWORD,
 				      backuprf0x1A);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1046,7 +1188,11 @@ static bool _rtl92c_phy_set_sw_chnl_cmdarray(struct swchnlcmd *cmdtable,
 
 	if (cmdtable == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RT_ASSERT(false, "cmdtable cannot be NULL\n");
+=======
+		RT_ASSERT(false, "cmdtable cannot be NULL.\n");
+>>>>>>> v3.18
 =======
 		RT_ASSERT(false, "cmdtable cannot be NULL.\n");
 >>>>>>> v3.18
@@ -1096,7 +1242,11 @@ bool _rtl92c_phy_sw_chnl_step_by_step(struct ieee80211_hw *hw,
 
 	RT_ASSERT((channel >= 1 && channel <= 14),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  "invalid channel for Zebra: %d\n", channel);
+=======
+		  "illegal channel for Zebra: %d\n", channel);
+>>>>>>> v3.18
 =======
 		  "illegal channel for Zebra: %d\n", channel);
 >>>>>>> v3.18
@@ -1121,11 +1271,17 @@ bool _rtl92c_phy_sw_chnl_step_by_step(struct ieee80211_hw *hw,
 			currentcmd = &postcommoncmd[*step];
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		default:
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 				 "Invalid 'stage' = %d, Check it!\n", *stage);
 			return true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1154,7 +1310,11 @@ bool _rtl92c_phy_sw_chnl_step_by_step(struct ieee80211_hw *hw,
 		case CMDID_WRITEPORT_UCHAR:
 			rtl_write_byte(rtlpriv, currentcmd->para1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       (u8) currentcmd->para2);
+=======
+				       (u8)currentcmd->para2);
+>>>>>>> v3.18
 =======
 				       (u8)currentcmd->para2);
 >>>>>>> v3.18
@@ -1170,6 +1330,7 @@ bool _rtl92c_phy_sw_chnl_step_by_step(struct ieee80211_hw *hw,
 					      RFREG_OFFSET_MASK,
 					      rtlphy->rfreg_chnlval[rfpath]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_rtl92c_phy_sw_rf_setting(hw, channel);
 			}
 			break;
@@ -1177,12 +1338,17 @@ bool _rtl92c_phy_sw_chnl_step_by_step(struct ieee80211_hw *hw,
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 				 "switch case not processed\n");
 =======
+=======
+>>>>>>> v3.18
 			}
 			_rtl92c_phy_sw_rf_seting(hw, channel);
 			break;
 		default:
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_LOUD,
 				 "switch case not process\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -1273,7 +1439,11 @@ static u8 _rtl92c_phy_path_b_iqk(struct ieee80211_hw *hw)
 
 static void _rtl92c_phy_path_a_fill_iqk_matrix(struct ieee80211_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       bool iqk_ok, long result[][8],
+=======
+					       bool b_iqk_ok, long result[][8],
+>>>>>>> v3.18
 =======
 					       bool b_iqk_ok, long result[][8],
 >>>>>>> v3.18
@@ -1285,7 +1455,11 @@ static void _rtl92c_phy_path_a_fill_iqk_matrix(struct ieee80211_hw *hw,
 	if (final_candidate == 0xFF) {
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (iqk_ok) {
+=======
+	} else if (b_iqk_ok) {
+>>>>>>> v3.18
 =======
 	} else if (b_iqk_ok) {
 >>>>>>> v3.18
@@ -1321,7 +1495,11 @@ static void _rtl92c_phy_path_a_fill_iqk_matrix(struct ieee80211_hw *hw,
 
 static void _rtl92c_phy_path_b_fill_iqk_matrix(struct ieee80211_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       bool iqk_ok, long result[][8],
+=======
+					       bool b_iqk_ok, long result[][8],
+>>>>>>> v3.18
 =======
 					       bool b_iqk_ok, long result[][8],
 >>>>>>> v3.18
@@ -1333,7 +1511,11 @@ static void _rtl92c_phy_path_b_fill_iqk_matrix(struct ieee80211_hw *hw,
 	if (final_candidate == 0xFF) {
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (iqk_ok) {
+=======
+	} else if (b_iqk_ok) {
+>>>>>>> v3.18
 =======
 	} else if (b_iqk_ok) {
 >>>>>>> v3.18
@@ -1406,7 +1588,11 @@ static void _rtl92c_phy_reload_mac_registers(struct ieee80211_hw *hw,
 
 	for (i = 0; i < (IQK_MAC_REG_NUM - 1); i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtl_write_byte(rtlpriv, macreg[i], (u8) macbackup[i]);
+=======
+		rtl_write_byte(rtlpriv, macreg[i], (u8)macbackup[i]);
+>>>>>>> v3.18
 =======
 		rtl_write_byte(rtlpriv, macreg[i], (u8)macbackup[i]);
 >>>>>>> v3.18
@@ -1436,6 +1622,7 @@ static void _rtl92c_phy_mac_setting_calibration(struct ieee80211_hw *hw,
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 i;
 
 	rtl_write_byte(rtlpriv, macreg[0], 0x3F);
@@ -1445,6 +1632,8 @@ static void _rtl92c_phy_mac_setting_calibration(struct ieee80211_hw *hw,
 			       (u8) (macbackup[i] & (~BIT(3))));
 	rtl_write_byte(rtlpriv, macreg[i], (u8) (macbackup[i] & (~BIT(5))));
 =======
+=======
+>>>>>>> v3.18
 	u32 i = 0;
 
 	rtl_write_byte(rtlpriv, macreg[i], 0x3F);
@@ -1453,6 +1642,9 @@ static void _rtl92c_phy_mac_setting_calibration(struct ieee80211_hw *hw,
 		rtl_write_byte(rtlpriv, macreg[i],
 			       (u8)(macbackup[i] & (~BIT(3))));
 	rtl_write_byte(rtlpriv, macreg[i], (u8)(macbackup[i] & (~BIT(5))));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1530,7 +1722,10 @@ static bool _rtl92c_phy_simularity_compare(struct ieee80211_hw *hw,
 		return false;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1549,6 +1744,7 @@ static void _rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw,
 		0xed8, 0xedc, 0xee0, 0xeec
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	u32 iqk_mac_reg[IQK_MAC_REG_NUM] = {
 		0x522, 0x550, 0x551, 0x040
@@ -1560,6 +1756,8 @@ static void _rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw,
 		/* dummy read */
 		rtl_get_bbreg(hw, 0x800, MASKDWORD);
 =======
+=======
+>>>>>>> v3.18
 	u32 iqk_mac_reg[IQK_MAC_REG_NUM] = {
 		0x522, 0x550, 0x551, 0x040
 	};
@@ -1568,6 +1766,9 @@ static void _rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw,
 
 	if (t == 0) {
 		bbvalue = rtl_get_bbreg(hw, 0x800, MASKDWORD);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		_rtl92c_phy_save_adda_registers(hw, adda_reg,
@@ -1578,9 +1779,15 @@ static void _rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw,
 	_rtl92c_phy_path_adda_on(hw, adda_reg, true, is2t);
 	if (t == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtlphy->rfpi_enable = (u8) rtl_get_bbreg(hw,
 						   RFPGA0_XA_HSSIPARAMETER1,
 						   BIT(8));
+=======
+		rtlphy->rfpi_enable =
+		   (u8)rtl_get_bbreg(hw, RFPGA0_XA_HSSIPARAMETER1,
+				     BIT(8));
+>>>>>>> v3.18
 =======
 		rtlphy->rfpi_enable =
 		   (u8)rtl_get_bbreg(hw, RFPGA0_XA_HSSIPARAMETER1,
@@ -1640,8 +1847,13 @@ static void _rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw,
 			if (pathb_ok == 0x03) {
 				result[t][4] = (rtl_get_bbreg(hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						      0xeb4,
 						      MASKDWORD) &
+=======
+							      0xeb4,
+							      MASKDWORD) &
+>>>>>>> v3.18
 =======
 							      0xeb4,
 							      MASKDWORD) &
@@ -1660,8 +1872,13 @@ static void _rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw,
 			} else if (i == (retrycount - 1) && pathb_ok == 0x01) {
 				result[t][4] = (rtl_get_bbreg(hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						      0xeb4,
 						      MASKDWORD) &
+=======
+							      0xeb4,
+							      MASKDWORD) &
+>>>>>>> v3.18
 =======
 							      0xeb4,
 							      MASKDWORD) &
@@ -1692,6 +1909,7 @@ static void _rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw,
 static void _rtl92c_phy_ap_calibrate(struct ieee80211_hw *hw,
 				     char delta, bool is2t)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if 0 /* This routine is deliberately dummied out for later fixes */
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
@@ -2053,6 +2271,8 @@ static void _rtl92c_phy_ap_calibrate(struct ieee80211_hw *hw,
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static void _rtl92c_phy_set_rfpath_switch(struct ieee80211_hw *hw,
@@ -2077,9 +2297,13 @@ static void _rtl92c_phy_set_rfpath_switch(struct ieee80211_hw *hw,
 		else
 			rtl_set_bbreg(hw, RFPGA0_XA_RFINTERFACEOE, 0x300, 0x1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	}
 
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -2089,7 +2313,11 @@ static void _rtl92c_phy_set_rfpath_switch(struct ieee80211_hw *hw,
 #undef IQK_DELAY_TIME
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw, bool recovery)
+=======
+void rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery)
+>>>>>>> v3.18
 =======
 void rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery)
 >>>>>>> v3.18
@@ -2101,15 +2329,21 @@ void rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery)
 	long result[4][8];
 	u8 i, final_candidate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool patha_ok, pathb_ok;
 	long reg_e94, reg_e9c, reg_ea4, reg_eb4, reg_ebc, reg_ec4, reg_tmp = 0;
 	bool is12simular, is13simular, is23simular;
 	bool start_conttx = false, singletone = false;
 =======
+=======
+>>>>>>> v3.18
 	bool b_patha_ok, b_pathb_ok;
 	long reg_e94, reg_e9c, reg_ea4, reg_eac, reg_eb4, reg_ebc, reg_ec4,
 	    reg_ecc, reg_tmp = 0;
 	bool is12simular, is13simular, is23simular;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 iqk_bb_reg[10] = {
 		ROFDM0_XARXIQIMBALANCE,
@@ -2125,7 +2359,11 @@ void rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (recovery) {
+=======
+	if (b_recovery) {
+>>>>>>> v3.18
 =======
 	if (b_recovery) {
 >>>>>>> v3.18
@@ -2135,8 +2373,11 @@ void rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (start_conttx || singletone)
 		return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < 8; i++) {
@@ -2147,8 +2388,13 @@ void rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery)
 	}
 	final_candidate = 0xff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	patha_ok = false;
 	pathb_ok = false;
+=======
+	b_patha_ok = false;
+	b_pathb_ok = false;
+>>>>>>> v3.18
 =======
 	b_patha_ok = false;
 	b_pathb_ok = false;
@@ -2199,15 +2445,21 @@ void rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery)
 		reg_e9c = result[i][1];
 		reg_ea4 = result[i][2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg_eb4 = result[i][4];
 		reg_ebc = result[i][5];
 		reg_ec4 = result[i][6];
 =======
+=======
+>>>>>>> v3.18
 		reg_eac = result[i][3];
 		reg_eb4 = result[i][4];
 		reg_ebc = result[i][5];
 		reg_ec4 = result[i][6];
 		reg_ecc = result[i][7];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (final_candidate != 0xff) {
@@ -2215,11 +2467,14 @@ void rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery)
 		rtlphy->reg_e9c = reg_e9c = result[final_candidate][1];
 		reg_ea4 = result[final_candidate][2];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtlphy->reg_eb4 = reg_eb4 = result[final_candidate][4];
 		rtlphy->reg_ebc = reg_ebc = result[final_candidate][5];
 		reg_ec4 = result[final_candidate][6];
 		patha_ok = pathb_ok = true;
 =======
+=======
+>>>>>>> v3.18
 		reg_eac = result[final_candidate][3];
 		rtlphy->reg_eb4 = reg_eb4 = result[final_candidate][4];
 		rtlphy->reg_ebc = reg_ebc = result[final_candidate][5];
@@ -2227,6 +2482,9 @@ void rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery)
 		reg_ecc = result[final_candidate][7];
 		b_patha_ok = true;
 		b_pathb_ok = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		rtlphy->reg_e94 = rtlphy->reg_eb4 = 0x100;
@@ -2234,7 +2492,11 @@ void rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery)
 	}
 	if (reg_e94 != 0) /*&&(reg_ea4 != 0) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_rtl92c_phy_path_a_fill_iqk_matrix(hw, patha_ok, result,
+=======
+		_rtl92c_phy_path_a_fill_iqk_matrix(hw, b_patha_ok, result,
+>>>>>>> v3.18
 =======
 		_rtl92c_phy_path_a_fill_iqk_matrix(hw, b_patha_ok, result,
 >>>>>>> v3.18
@@ -2243,7 +2505,11 @@ void rtl92c_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery)
 	if (IS_92C_SERIAL(rtlhal->version)) {
 		if (reg_eb4 != 0) /*&&(reg_ec4 != 0) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_rtl92c_phy_path_b_fill_iqk_matrix(hw, pathb_ok,
+=======
+			_rtl92c_phy_path_b_fill_iqk_matrix(hw, b_pathb_ok,
+>>>>>>> v3.18
 =======
 			_rtl92c_phy_path_b_fill_iqk_matrix(hw, b_pathb_ok,
 >>>>>>> v3.18
@@ -2261,10 +2527,14 @@ void rtl92c_phy_lc_calibrate(struct ieee80211_hw *hw)
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_hal *rtlhal = rtl_hal(rtl_priv(hw));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool start_conttx = false, singletone = false;
 
 	if (start_conttx || singletone)
 		return;
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2310,7 +2580,11 @@ bool rtl92c_phy_set_io_cmd(struct ieee80211_hw *hw, enum io_type iotype)
 	RT_TRACE(rtlpriv, COMP_CMD, DBG_TRACE,
 		 "-->IO Cmd(%#x), set_io_inprogress(%d)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 iotype, rtlphy->set_io_inprogress);
+=======
+		  iotype, rtlphy->set_io_inprogress);
+>>>>>>> v3.18
 =======
 		  iotype, rtlphy->set_io_inprogress);
 >>>>>>> v3.18
@@ -2318,6 +2592,7 @@ bool rtl92c_phy_set_io_cmd(struct ieee80211_hw *hw, enum io_type iotype)
 		switch (iotype) {
 		case IO_CMD_RESUME_DM_BY_SCAN:
 			RT_TRACE(rtlpriv, COMP_CMD, DBG_TRACE,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				 "[IO CMD] Resume DM after scan\n");
 			postprocessing = true;
@@ -2331,6 +2606,8 @@ bool rtl92c_phy_set_io_cmd(struct ieee80211_hw *hw, enum io_type iotype)
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_EMERG,
 				 "switch case not processed\n");
 =======
+=======
+>>>>>>> v3.18
 				 "[IO CMD] Resume DM after scan.\n");
 			postprocessing = true;
 			break;
@@ -2342,6 +2619,9 @@ bool rtl92c_phy_set_io_cmd(struct ieee80211_hw *hw, enum io_type iotype)
 		default:
 			RT_TRACE(rtlpriv, COMP_ERR, DBG_LOUD,
 				 "switch case not process\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -2354,7 +2634,11 @@ bool rtl92c_phy_set_io_cmd(struct ieee80211_hw *hw, enum io_type iotype)
 	}
 	rtl92c_phy_set_io(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RT_TRACE(rtlpriv, COMP_CMD, DBG_TRACE, "<--IO Type(%#x)\n", iotype);
+=======
+	RT_TRACE(rtlpriv, COMP_CMD, DBG_TRACE, "IO Type(%#x)\n", iotype);
+>>>>>>> v3.18
 =======
 	RT_TRACE(rtlpriv, COMP_CMD, DBG_TRACE, "IO Type(%#x)\n", iotype);
 >>>>>>> v3.18
@@ -2366,6 +2650,7 @@ void rtl92c_phy_set_io(struct ieee80211_hw *hw)
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	struct rtl_phy *rtlphy = &(rtlpriv->phy);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct dig_t dm_digtable = rtlpriv->dm_digtable;
 
@@ -2392,6 +2677,8 @@ void rtl92c_phy_set_io(struct ieee80211_hw *hw)
 	RT_TRACE(rtlpriv, COMP_CMD, DBG_TRACE, "<---(%#x)\n",
 		 rtlphy->current_io_type);
 =======
+=======
+>>>>>>> v3.18
 	struct dig_t *dm_digtable = &rtlpriv->dm_digtable;
 
 	RT_TRACE(rtlpriv, COMP_CMD, DBG_TRACE,
@@ -2416,6 +2703,9 @@ void rtl92c_phy_set_io(struct ieee80211_hw *hw)
 	rtlphy->set_io_inprogress = false;
 	RT_TRACE(rtlpriv, COMP_CMD, DBG_TRACE,
 		 "(%#x)\n", rtlphy->current_io_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(rtl92c_phy_set_io);
@@ -2457,7 +2747,11 @@ void _rtl92c_phy_set_rf_sleep(struct ieee80211_hw *hw)
 		rtl_write_byte(rtlpriv, REG_TXPAUSE, 0x00);
 		RT_TRACE(rtlpriv, COMP_POWER, DBG_TRACE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "Switch RF timeout !!!\n");
+=======
+			 "Switch RF timeout !!!.\n");
+>>>>>>> v3.18
 =======
 			 "Switch RF timeout !!!.\n");
 >>>>>>> v3.18

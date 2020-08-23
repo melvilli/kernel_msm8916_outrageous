@@ -64,7 +64,10 @@ The first parameter gives the power domain name (e.g. "mpu_pwrdm").
 The second parameter is the power domain target state.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 4. PM QoS events
 ================
 The PM QoS events are used for QoS add/update/remove request and for
@@ -96,4 +99,7 @@ The first parameter gives the device name which tries to add/update/remove
 QoS requests.
 The second parameter gives the request type (e.g. "DEV_PM_QOS_RESUME_LATENCY").
 The third parameter is value to be added/updated/removed.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

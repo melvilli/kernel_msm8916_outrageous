@@ -113,7 +113,11 @@ int ncp_symlink(struct inode *dir, struct dentry *dentry, const char *symname) {
 	unsigned int hdr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DPRINTK("ncp_symlink(dir=%p,dentry=%p,symname=%s)\n",dir,dentry,symname);
+=======
+	ncp_dbg(1, "dir=%p, dentry=%p, symname=%s\n", dir, dentry, symname);
+>>>>>>> v3.18
 =======
 	ncp_dbg(1, "dir=%p, dentry=%p, symname=%s\n", dir, dentry, symname);
 >>>>>>> v3.18

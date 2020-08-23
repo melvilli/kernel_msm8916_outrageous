@@ -30,6 +30,7 @@
 #ifdef CONFIG_PPC64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static loff_t page_map_seek( struct file *file, loff_t off, int whence)
 {
 	loff_t new;
@@ -49,6 +50,11 @@ static loff_t page_map_seek( struct file *file, loff_t off, int whence)
 	if ( new < 0 || new > PAGE_SIZE )
 		return -EINVAL;
 	return (file->f_pos = new);
+=======
+static loff_t page_map_seek(struct file *file, loff_t off, int whence)
+{
+	return fixed_size_llseek(file, off, whence, PAGE_SIZE);
+>>>>>>> v3.18
 =======
 static loff_t page_map_seek(struct file *file, loff_t off, int whence)
 {

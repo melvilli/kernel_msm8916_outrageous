@@ -18,8 +18,12 @@ See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
 <<<<<<< HEAD
+<<<<<<< HEAD
 this program; if not, write to the Free Software Foundation, Inc.,
 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -121,7 +125,11 @@ static void iodelay(int udelay)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(via_pci_tbl) = {
+=======
+static const struct pci_device_id via_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id via_pci_tbl[] = {
 >>>>>>> v3.18
@@ -219,8 +227,12 @@ static int via_init_one(struct pci_dev *pcidev, const struct pci_device_id *id)
 			pci_write_config_byte(pcidev,0x5a,0xc0);
 			WriteLPCReg(0x28, 0x70 );
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (via_ircc_open(pcidev, &info, 0x3076) == 0)
 				rc=0;
+=======
+			rc = via_ircc_open(pcidev, &info, 0x3076);
+>>>>>>> v3.18
 =======
 			rc = via_ircc_open(pcidev, &info, 0x3076);
 >>>>>>> v3.18
@@ -262,8 +274,12 @@ static int via_init_one(struct pci_dev *pcidev, const struct pci_device_id *id)
 			info.dma=FirDRQ1;
 			info.dma2=FirDRQ0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (via_ircc_open(pcidev, &info, 0x3096) == 0)
 				rc=0;
+=======
+			rc = via_ircc_open(pcidev, &info, 0x3096);
+>>>>>>> v3.18
 =======
 			rc = via_ircc_open(pcidev, &info, 0x3096);
 >>>>>>> v3.18
@@ -380,8 +396,13 @@ static int via_ircc_open(struct pci_dev *pdev, chipio_t *info, unsigned int id)
 	/* Allocate memory if needed */
 	self->rx_buff.head =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_alloc_coherent(&pdev->dev, self->rx_buff.truesize,
 				   &self->rx_buff_dma, GFP_KERNEL | __GFP_ZERO);
+=======
+		dma_zalloc_coherent(&pdev->dev, self->rx_buff.truesize,
+				    &self->rx_buff_dma, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		dma_zalloc_coherent(&pdev->dev, self->rx_buff.truesize,
 				    &self->rx_buff_dma, GFP_KERNEL);
@@ -393,8 +414,13 @@ static int via_ircc_open(struct pci_dev *pdev, chipio_t *info, unsigned int id)
 
 	self->tx_buff.head =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_alloc_coherent(&pdev->dev, self->tx_buff.truesize,
 				   &self->tx_buff_dma, GFP_KERNEL | __GFP_ZERO);
+=======
+		dma_zalloc_coherent(&pdev->dev, self->tx_buff.truesize,
+				    &self->tx_buff_dma, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		dma_zalloc_coherent(&pdev->dev, self->tx_buff.truesize,
 				    &self->tx_buff_dma, GFP_KERNEL);
@@ -437,7 +463,10 @@ static int via_ircc_open(struct pci_dev *pdev, chipio_t *info, unsigned int id)
 	release_region(self->io.fir_base, self->io.fir_ext);
  err_out1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(dev);
@@ -474,7 +503,10 @@ static void via_remove_one(struct pci_dev *pdev)
 		dma_free_coherent(&pdev->dev, self->rx_buff.truesize,
 				  self->rx_buff.head, self->rx_buff_dma);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -548,10 +580,15 @@ static void via_hw_init(struct via_ircc_cb *self)
 static int via_ircc_read_dongle_id(int iobase)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dongle_id = 9;	/* Default to IBM */
 
 	IRDA_ERROR("via-ircc: dongle probing not supported, please specify dongle_id module parameter.\n");
 	return dongle_id;
+=======
+	IRDA_ERROR("via-ircc: dongle probing not supported, please specify dongle_id module parameter.\n");
+	return 9;	/* Default to IBM */
+>>>>>>> v3.18
 =======
 	IRDA_ERROR("via-ircc: dongle probing not supported, please specify dongle_id module parameter.\n");
 	return 9;	/* Default to IBM */
@@ -969,7 +1006,10 @@ static int via_ircc_dma_xmit_complete(struct via_ircc_cb *self)
 {
 	int iobase;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = TRUE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 Tx_status;
@@ -1029,7 +1069,11 @@ F01_E*/
 	netif_wake_queue(self->netdev);
 //F01   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return TRUE;
+>>>>>>> v3.18
 =======
 	return TRUE;
 >>>>>>> v3.18

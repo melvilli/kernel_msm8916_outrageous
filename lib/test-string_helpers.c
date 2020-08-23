@@ -6,6 +6,10 @@
 #include <linux/init.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -15,7 +19,10 @@
 #include <linux/string_helpers.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static __init bool test_string_check_buf(const char *name, unsigned int flags,
 					 char *in, size_t p,
 					 char *out_real, size_t q_real,
@@ -36,6 +43,9 @@ static __init bool test_string_check_buf(const char *name, unsigned int flags,
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct test_string {
 	const char *in;
@@ -67,6 +77,7 @@ static const struct test_string strings[] __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init test_string_unescape(unsigned int flags, bool inplace)
 {
 	char in[256];
@@ -74,6 +85,8 @@ static void __init test_string_unescape(unsigned int flags, bool inplace)
 	char out_real[256];
 	int i, p = 0, q_test = 0, q_real = sizeof(out_real);
 =======
+=======
+>>>>>>> v3.18
 static void __init test_string_unescape(const char *name, unsigned int flags,
 					bool inplace)
 {
@@ -85,6 +98,9 @@ static void __init test_string_unescape(const char *name, unsigned int flags,
 
 	if (!in || !out_test || !out_real)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(strings); i++) {
@@ -119,6 +135,7 @@ static void __init test_string_unescape(const char *name, unsigned int flags,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (q_real != q_test || memcmp(out_test, out_real, q_test)) {
 		pr_warn("Test failed: flags = %u\n", flags);
 		print_hex_dump(KERN_WARNING, "Input: ",
@@ -129,6 +146,8 @@ static void __init test_string_unescape(const char *name, unsigned int flags,
 			       DUMP_PREFIX_NONE, 16, 1, out_real, q_real, true);
 	}
 =======
+=======
+>>>>>>> v3.18
 	test_string_check_buf(name, flags, in, p - 1, out_real, q_real,
 			      out_test, q_test);
 out:
@@ -348,6 +367,9 @@ static __init void test_string_escape_nomem(void)
 		return;
 
 	pr_err("Test 'escape nomem' failed: got %d instead of %d\n", ret, rc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -358,9 +380,12 @@ static int __init test_string_helpers_init(void)
 	pr_info("Running tests...\n");
 	for (i = 0; i < UNESCAPE_ANY + 1; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		test_string_unescape(i, false);
 	test_string_unescape(get_random_int() % (UNESCAPE_ANY + 1), true);
 =======
+=======
+>>>>>>> v3.18
 		test_string_unescape("unescape", i, false);
 	test_string_unescape("unescape inplace",
 			     get_random_int() % (UNESCAPE_ANY + 1), true);
@@ -374,6 +399,9 @@ static int __init test_string_helpers_init(void)
 		test_string_escape("escape 1", escape1, i, TEST_STRING_2_DICT_1);
 
 	test_string_escape_nomem();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return -EINVAL;

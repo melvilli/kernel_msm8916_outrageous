@@ -860,6 +860,7 @@ static void des_decrypt(struct crypto_tfm *tfm, u8 *dst, const u8 *src)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int des3_ede_setkey(struct crypto_tfm *tfm, const u8 *key,
 			   unsigned int keylen)
 {
@@ -868,10 +869,15 @@ static int des3_ede_setkey(struct crypto_tfm *tfm, const u8 *key,
 	u32 *expkey = dctx->expkey;
 	u32 *flags = &tfm->crt_flags;
 =======
+=======
+>>>>>>> v3.18
 int __des3_ede_setkey(u32 *expkey, u32 *flags, const u8 *key,
 		      unsigned int keylen)
 {
 	const u32 *K = (const u32 *)key;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(!((K[0] ^ K[2]) | (K[1] ^ K[3])) ||
@@ -888,7 +894,10 @@ int __des3_ede_setkey(u32 *expkey, u32 *flags, const u8 *key,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(__des3_ede_setkey);
 
 static int des3_ede_setkey(struct crypto_tfm *tfm, const u8 *key,
@@ -900,6 +909,9 @@ static int des3_ede_setkey(struct crypto_tfm *tfm, const u8 *key,
 
 	return __des3_ede_setkey(expkey, flags, key, keylen);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void des3_ede_encrypt(struct crypto_tfm *tfm, u8 *dst, const u8 *src)
@@ -967,6 +979,11 @@ static void des3_ede_decrypt(struct crypto_tfm *tfm, u8 *dst, const u8 *src)
 static struct crypto_alg des_algs[2] = { {
 	.cra_name		=	"des",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cra_driver_name	=	"des-generic",
+	.cra_priority		=	100,
+>>>>>>> v3.18
 =======
 	.cra_driver_name	=	"des-generic",
 	.cra_priority		=	100,
@@ -985,6 +1002,11 @@ static struct crypto_alg des_algs[2] = { {
 }, {
 	.cra_name		=	"des3_ede",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cra_driver_name	=	"des3_ede-generic",
+	.cra_priority		=	100,
+>>>>>>> v3.18
 =======
 	.cra_driver_name	=	"des3_ede-generic",
 	.cra_priority		=	100,
@@ -1003,6 +1025,11 @@ static struct crypto_alg des_algs[2] = { {
 } };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("des3_ede");
+
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("des3_ede");
 
@@ -1024,10 +1051,14 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("DES & Triple DES EDE Cipher Algorithms");
 MODULE_AUTHOR("Dag Arne Osvik <da@osvik.no>");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("des");
 MODULE_ALIAS_CRYPTO("des-generic");
 MODULE_ALIAS_CRYPTO("des3_ede");
 MODULE_ALIAS_CRYPTO("des3_ede-generic");
+=======
+MODULE_ALIAS("des");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("des");
 >>>>>>> v3.18

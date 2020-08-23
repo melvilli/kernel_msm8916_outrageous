@@ -1,8 +1,14 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * OMAP4 Power Management Routines
  *
  * Copyright (C) 2010-2011 Texas Instruments, Inc.
+=======
+ * OMAP4+ Power Management Routines
+ *
+ * Copyright (C) 2010-2013 Texas Instruments, Inc.
+>>>>>>> v3.18
 =======
  * OMAP4+ Power Management Routines
  *
@@ -31,16 +37,22 @@
 #include "pm.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct power_state {
 	struct powerdomain *pwrdm;
 	u32 next_state;
 =======
+=======
+>>>>>>> v3.18
 u16 pm44xx_errata;
 
 struct power_state {
 	struct powerdomain *pwrdm;
 	u32 next_state;
 	u32 next_logic_state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SUSPEND
 	u32 saved_state;
@@ -50,6 +62,11 @@ struct power_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static u32 cpu_suspend_state = PWRDM_POWER_OFF;
+
+>>>>>>> v3.18
 =======
 static u32 cpu_suspend_state = PWRDM_POWER_OFF;
 
@@ -73,7 +90,11 @@ static int omap4_pm_suspend(void)
 	list_for_each_entry(pwrst, &pwrst_list, node) {
 		omap_set_pwrdm_state(pwrst->pwrdm, pwrst->next_state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pwrdm_set_logic_retst(pwrst->pwrdm, PWRDM_POWER_OFF);
+=======
+		pwrdm_set_logic_retst(pwrst->pwrdm, pwrst->next_logic_state);
+>>>>>>> v3.18
 =======
 		pwrdm_set_logic_retst(pwrst->pwrdm, pwrst->next_logic_state);
 >>>>>>> v3.18
@@ -89,7 +110,11 @@ static int omap4_pm_suspend(void)
 	 * More details can be found in OMAP4430 TRM section 4.3.4.2.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap4_enter_lowpower(cpu_id, PWRDM_POWER_OFF);
+=======
+	omap4_enter_lowpower(cpu_id, cpu_suspend_state);
+>>>>>>> v3.18
 =======
 	omap4_enter_lowpower(cpu_id, cpu_suspend_state);
 >>>>>>> v3.18
@@ -123,6 +148,11 @@ static int omap4_pm_suspend(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#else
+#define omap4_pm_suspend NULL
+>>>>>>> v3.18
 =======
 #else
 #define omap4_pm_suspend NULL
@@ -142,14 +172,20 @@ static int __init pwrdms_setup(struct powerdomain *pwrdm, void *unused)
 	 * further down in the code path
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strncmp(pwrdm->name, "cpu", 3))
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!strncmp(pwrdm->name, "cpu", 3)) {
 		if (IS_PM44XX_ERRATUM(PM_OMAP4_CPU_OSWR_DISABLE))
 			cpu_suspend_state = PWRDM_POWER_RET;
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pwrst = kmalloc(sizeof(struct power_state), GFP_ATOMIC);
@@ -158,13 +194,19 @@ static int __init pwrdms_setup(struct powerdomain *pwrdm, void *unused)
 
 	pwrst->pwrdm = pwrdm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pwrst->next_state = PWRDM_POWER_RET;
 =======
+=======
+>>>>>>> v3.18
 	pwrst->next_state = pwrdm_get_valid_lp_state(pwrdm, false,
 						     PWRDM_POWER_RET);
 	pwrst->next_logic_state = pwrdm_get_valid_lp_state(pwrdm, true,
 							   PWRDM_POWER_OFF);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_add(&pwrst->node, &pwrst_list);
 
@@ -185,6 +227,7 @@ static void omap_default_idle(void)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * omap4_pm_init - Init routine for OMAP4 PM
  *
  * Initializes all powerdomain and clockdomain target states
@@ -196,6 +239,8 @@ int __init omap4_pm_init(void)
 	struct clockdomain *emif_clkdm, *mpuss_clkdm, *l3_1_clkdm;
 	struct clockdomain *ducati_clkdm, *l3_2_clkdm;
 =======
+=======
+>>>>>>> v3.18
  * omap4_init_static_deps - Add OMAP4 static dependencies
  *
  * Add needed static clockdomain dependencies on OMAP4 devices.
@@ -206,6 +251,9 @@ static inline int omap4_init_static_deps(void)
 	struct clockdomain *emif_clkdm, *mpuss_clkdm, *l3_1_clkdm;
 	struct clockdomain *ducati_clkdm, *l3_2_clkdm;
 	int ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (omap_rev() == OMAP4430_REV_ES1_0) {
@@ -226,7 +274,11 @@ static inline int omap4_init_static_deps(void)
 	if (ret) {
 		pr_err("Failed to setup powerdomains\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err2;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -238,11 +290,17 @@ static inline int omap4_init_static_deps(void)
 	 * expected. The hardware recommendation is to enable static
 	 * dependencies for these to avoid system lock ups or random crashes.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * The L4 wakeup depedency is added to workaround the OCP sync hardware
 	 * BUG with 32K synctimer which lead to incorrect timer value read
 	 * from the 32K counter. The BUG applies for GPTIMER1 and WDT2 which
 	 * are part of L4 wakeup clockdomain.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	mpuss_clkdm = clkdm_lookup("mpuss_clkdm");
@@ -253,7 +311,11 @@ static inline int omap4_init_static_deps(void)
 	if ((!mpuss_clkdm) || (!emif_clkdm) || (!l3_1_clkdm) ||
 		(!l3_2_clkdm) || (!ducati_clkdm))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err2;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -266,7 +328,10 @@ static inline int omap4_init_static_deps(void)
 	if (ret) {
 		pr_err("Failed to add MPUSS -> L3/EMIF/L4PER, DUCATI -> L3 wakeup dependency\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -346,6 +411,9 @@ int __init omap4_pm_init(void)
 
 	if (ret) {
 		pr_err("Failed to initialise static dependencies.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err2;
 	}
@@ -359,9 +427,13 @@ int __init omap4_pm_init(void)
 	(void) clkdm_for_each(omap_pm_clkdms_setup, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SUSPEND
 	omap_pm_suspend = omap4_pm_suspend;
 #endif
+=======
+	omap_common_suspend_init(omap4_pm_suspend);
+>>>>>>> v3.18
 =======
 	omap_common_suspend_init(omap4_pm_suspend);
 >>>>>>> v3.18
@@ -370,7 +442,12 @@ int __init omap4_pm_init(void)
 	arm_pm_idle = omap_default_idle;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap4_idle_init();
+=======
+	if (cpu_is_omap44xx())
+		omap4_idle_init();
+>>>>>>> v3.18
 =======
 	if (cpu_is_omap44xx())
 		omap4_idle_init();

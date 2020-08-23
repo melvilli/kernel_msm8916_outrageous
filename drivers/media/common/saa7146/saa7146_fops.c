@@ -312,7 +312,10 @@ static int fops_mmap(struct file *file, struct vm_area_struct * vma)
 	default:
 		BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -403,7 +406,10 @@ static ssize_t fops_read(struct file *file, char __user *data, size_t count, lof
 	default:
 		BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -430,7 +436,10 @@ static ssize_t fops_write(struct file *file, const char __user *data, size_t cou
 	default:
 		BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -530,7 +539,13 @@ int saa7146_vv_init(struct saa7146_dev* dev, struct saa7146_ext_vv *ext_vv)
 	dev->ext_vv_data = ext_vv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vv->d_clipping.cpu_addr = pci_alloc_consistent(dev->pci, SAA7146_CLIPPING_MEM, &vv->d_clipping.dma_handle);
+=======
+	vv->d_clipping.cpu_addr =
+		pci_zalloc_consistent(dev->pci, SAA7146_CLIPPING_MEM,
+				      &vv->d_clipping.dma_handle);
+>>>>>>> v3.18
 =======
 	vv->d_clipping.cpu_addr =
 		pci_zalloc_consistent(dev->pci, SAA7146_CLIPPING_MEM,
@@ -543,7 +558,10 @@ int saa7146_vv_init(struct saa7146_dev* dev, struct saa7146_ext_vv *ext_vv)
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(vv->d_clipping.cpu_addr, 0x0, SAA7146_CLIPPING_MEM);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -551,6 +569,7 @@ int saa7146_vv_init(struct saa7146_dev* dev, struct saa7146_ext_vv *ext_vv)
 	if (dev->ext_vv_data->capabilities & V4L2_CAP_VBI_CAPTURE)
 		saa7146_vbi_uops.init(dev,vv);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fmt = &vv->ov_fb.fmt;
 	fmt->width = vv->standard->h_max_out;
@@ -560,12 +579,17 @@ int saa7146_vv_init(struct saa7146_dev* dev, struct saa7146_ext_vv *ext_vv)
 	fmt->sizeimage = fmt->bytesperline * fmt->height;
 	fmt->colorspace = V4L2_COLORSPACE_SRGB;
 =======
+=======
+>>>>>>> v3.18
 	vv->ov_fb.fmt.width = vv->standard->h_max_out;
 	vv->ov_fb.fmt.height = vv->standard->v_max_out;
 	vv->ov_fb.fmt.pixelformat = V4L2_PIX_FMT_RGB565;
 	vv->ov_fb.fmt.bytesperline = 2 * vv->ov_fb.fmt.width;
 	vv->ov_fb.fmt.sizeimage = vv->ov_fb.fmt.bytesperline * vv->ov_fb.fmt.height;
 	vv->ov_fb.fmt.colorspace = V4L2_COLORSPACE_SRGB;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	fmt = &vv->video_fmt;
@@ -641,7 +665,10 @@ int saa7146_register_device(struct video_device **vid, struct saa7146_dev* dev,
 	vfd->v4l2_dev = &dev->v4l2_dev;
 	vfd->tvnorms = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vfd->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < dev->ext_vv_data->num_stds; i++)

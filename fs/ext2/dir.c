@@ -288,15 +288,21 @@ static inline void ext2_set_de_type(ext2_dirent *de, struct inode *inode)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 ext2_readdir (struct file * filp, void * dirent, filldir_t filldir)
 {
 	loff_t pos = filp->f_pos;
 	struct inode *inode = file_inode(filp);
 =======
+=======
+>>>>>>> v3.18
 ext2_readdir(struct file *file, struct dir_context *ctx)
 {
 	loff_t pos = ctx->pos;
 	struct inode *inode = file_inode(file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct super_block *sb = inode->i_sb;
 	unsigned int offset = pos & ~PAGE_CACHE_MASK;
@@ -305,7 +311,11 @@ ext2_readdir(struct file *file, struct dir_context *ctx)
 	unsigned chunk_mask = ~(ext2_chunk_size(inode)-1);
 	unsigned char *types = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int need_revalidate = filp->f_version != inode->i_version;
+=======
+	int need_revalidate = file->f_version != inode->i_version;
+>>>>>>> v3.18
 =======
 	int need_revalidate = file->f_version != inode->i_version;
 >>>>>>> v3.18
@@ -326,7 +336,11 @@ ext2_readdir(struct file *file, struct dir_context *ctx)
 				   "bad page in #%lu",
 				   inode->i_ino);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos += PAGE_CACHE_SIZE - offset;
+=======
+			ctx->pos += PAGE_CACHE_SIZE - offset;
+>>>>>>> v3.18
 =======
 			ctx->pos += PAGE_CACHE_SIZE - offset;
 >>>>>>> v3.18
@@ -337,9 +351,15 @@ ext2_readdir(struct file *file, struct dir_context *ctx)
 			if (offset) {
 				offset = ext2_validate_entry(kaddr, offset, chunk_mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				filp->f_pos = (n<<PAGE_CACHE_SHIFT) + offset;
 			}
 			filp->f_version = inode->i_version;
+=======
+				ctx->pos = (n<<PAGE_CACHE_SHIFT) + offset;
+			}
+			file->f_version = inode->i_version;
+>>>>>>> v3.18
 =======
 				ctx->pos = (n<<PAGE_CACHE_SHIFT) + offset;
 			}
@@ -358,7 +378,10 @@ ext2_readdir(struct file *file, struct dir_context *ctx)
 			}
 			if (de->inode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				int over;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				unsigned char d_type = DT_UNKNOWN;
@@ -366,6 +389,7 @@ ext2_readdir(struct file *file, struct dir_context *ctx)
 				if (types && de->file_type < EXT2_FT_MAX)
 					d_type = types[de->file_type];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				offset = (char *)de - kaddr;
 				over = filldir(dirent, de->name, de->name_len,
@@ -377,12 +401,21 @@ ext2_readdir(struct file *file, struct dir_context *ctx)
 						le32_to_cpu(de->inode),
 						d_type)) {
 >>>>>>> v3.18
+=======
+				if (!dir_emit(ctx, de->name, de->name_len,
+						le32_to_cpu(de->inode),
+						d_type)) {
+>>>>>>> v3.18
 					ext2_put_page(page);
 					return 0;
 				}
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos += ext2_rec_len_from_disk(de->rec_len);
+=======
+			ctx->pos += ext2_rec_len_from_disk(de->rec_len);
+>>>>>>> v3.18
 =======
 			ctx->pos += ext2_rec_len_from_disk(de->rec_len);
 >>>>>>> v3.18
@@ -759,7 +792,11 @@ const struct file_operations ext2_dir_operations = {
 	.llseek		= generic_file_llseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= ext2_readdir,
+=======
+	.iterate	= ext2_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= ext2_readdir,
 >>>>>>> v3.18

@@ -17,6 +17,10 @@
 
 #include <linux/platform_data/mtd-davinci-aemif.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/mtd-davinci.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/mtd-davinci.h>
 >>>>>>> v3.18
@@ -48,7 +52,10 @@
 				WSETUP(WSETUP_MAX))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned int davinci_aemif_readl(void __iomem *base, int offset)
 {
 	return readl_relaxed(base + offset);
@@ -60,6 +67,9 @@ static inline void davinci_aemif_writel(void __iomem *base,
 	writel_relaxed(value, base + offset);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * aemif_calc_rate - calculate timing data.
@@ -95,6 +105,10 @@ static int aemif_calc_rate(int wanted, unsigned long clk, int max)
  * @base: The virtual base address of the AEMIF interface
  * @cs: chip-select to program the timing values for
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @clkrate: the AEMIF clkrate
+>>>>>>> v3.18
 =======
  * @clkrate: the AEMIF clkrate
 >>>>>>> v3.18
@@ -109,8 +123,14 @@ static int aemif_calc_rate(int wanted, unsigned long clk, int max)
  * Returns 0 on success, else negative errno.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int davinci_aemif_setup_timing(struct davinci_aemif_timing *t,
 					void __iomem *base, unsigned cs)
+=======
+static int davinci_aemif_setup_timing(struct davinci_aemif_timing *t,
+					void __iomem *base, unsigned cs,
+					unsigned long clkrate)
+>>>>>>> v3.18
 =======
 static int davinci_aemif_setup_timing(struct davinci_aemif_timing *t,
 					void __iomem *base, unsigned cs,
@@ -121,8 +141,11 @@ static int davinci_aemif_setup_timing(struct davinci_aemif_timing *t,
 	int ta, rhold, rstrobe, rsetup, whold, wstrobe, wsetup;
 	unsigned offset = A1CR_OFFSET + cs * 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clk *aemif_clk;
 	unsigned long clkrate;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -130,12 +153,15 @@ static int davinci_aemif_setup_timing(struct davinci_aemif_timing *t,
 		return 0;	/* Nothing to do */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aemif_clk = clk_get(NULL, "aemif");
 	if (IS_ERR(aemif_clk))
 		return PTR_ERR(aemif_clk);
 
 	clkrate = clk_get_rate(aemif_clk);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clkrate /= 1000;	/* turn clock into kHz for ease of use */
@@ -165,8 +191,11 @@ static int davinci_aemif_setup_timing(struct davinci_aemif_timing *t,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(davinci_aemif_setup_timing);
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * davinci_aemif_setup - setup AEMIF interface by davinci_nand_pdata
@@ -247,4 +276,7 @@ err_put:
 	clk_put(clk);
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

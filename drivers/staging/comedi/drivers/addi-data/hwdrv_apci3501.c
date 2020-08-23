@@ -17,15 +17,21 @@
  *	data[3] : Reload Value
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int i_APCI3501_ConfigTimerCounterWatchdog(struct comedi_device *dev,
 						 struct comedi_subdevice *s,
 						 struct comedi_insn *insn,
 						 unsigned int *data)
 =======
+=======
+>>>>>>> v3.18
 static int apci3501_config_insn_timer(struct comedi_device *dev,
 				      struct comedi_subdevice *s,
 				      struct comedi_insn *insn,
 				      unsigned int *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct apci3501_private *devpriv = dev->private;
@@ -94,15 +100,21 @@ static int apci3501_config_insn_timer(struct comedi_device *dev,
  *		  2 Trigger
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int i_APCI3501_StartStopWriteTimerCounterWatchdog(struct comedi_device *dev,
 							 struct comedi_subdevice *s,
 							 struct comedi_insn *insn,
 							 unsigned int *data)
 =======
+=======
+>>>>>>> v3.18
 static int apci3501_write_insn_timer(struct comedi_device *dev,
 				     struct comedi_subdevice *s,
 				     struct comedi_insn *insn,
 				     unsigned int *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct apci3501_private *devpriv = dev->private;
@@ -117,11 +129,15 @@ static int apci3501_write_insn_timer(struct comedi_device *dev,
 			/* Enable the Watchdog */
 			outl(ul_Command1, dev->iobase + APCI3501_TIMER_CTRL_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 
 		else if (data[1] == 0)	/* Stop The Watchdog */
 		{
 			/* Stop The Watchdog */
+=======
+		} else if (data[1] == 0) { /* Stop The Watchdog */
+>>>>>>> v3.18
 =======
 		} else if (data[1] == 0) { /* Stop The Watchdog */
 >>>>>>> v3.18
@@ -172,15 +188,21 @@ static int apci3501_write_insn_timer(struct comedi_device *dev,
  *	data[1] : Timer Counter Watchdog Number
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int i_APCI3501_ReadTimerCounterWatchdog(struct comedi_device *dev,
 					       struct comedi_subdevice *s,
 					       struct comedi_insn *insn,
 					       unsigned int *data)
 =======
+=======
+>>>>>>> v3.18
 static int apci3501_read_insn_timer(struct comedi_device *dev,
 				    struct comedi_subdevice *s,
 				    struct comedi_insn *insn,
 				    unsigned int *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct apci3501_private *devpriv = dev->private;
@@ -198,7 +220,11 @@ static int apci3501_read_insn_timer(struct comedi_device *dev,
 	else if ((devpriv->b_TimerSelectMode != ADDIDATA_TIMER)
 		&& (devpriv->b_TimerSelectMode != ADDIDATA_WATCHDOG)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("\nIn ReadTimerCounterWatchdog :: Invalid Subdevice \n");
+=======
+		dev_err(dev->class_dev, "Invalid subdevice.\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "Invalid subdevice.\n");
 >>>>>>> v3.18

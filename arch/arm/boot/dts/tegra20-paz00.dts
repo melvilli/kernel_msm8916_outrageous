@@ -1,7 +1,12 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "tegra20.dtsi"
+=======
+#include <dt-bindings/input/input.h>
+#include "tegra20.dtsi"
+>>>>>>> v3.18
 =======
 #include <dt-bindings/input/input.h>
 #include "tegra20.dtsi"
@@ -12,7 +17,10 @@
 	compatible = "compal,paz00", "nvidia,tegra20";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	aliases {
 		rtc0 = "/i2c@7000d000/tps6586x@34";
 		rtc1 = "/rtc@7000e000";
@@ -20,15 +28,21 @@
 		serial1 = &uartc;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memory {
 		reg = <0x00000000 0x20000000>;
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host1x {
 		hdmi {
 =======
+=======
+>>>>>>> v3.18
 	host1x@50000000 {
 		dc@54200000 {
 			rgb {
@@ -39,6 +53,9 @@
 		};
 
 		hdmi@54280000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			status = "okay";
 
@@ -47,18 +64,24 @@
 
 			nvidia,ddc-i2c-bus = <&hdmi_ddc>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nvidia,hpd-gpio = <&gpio 111 0>; /* PN7 */
 		};
 	};
 
 	pinmux {
 =======
+=======
+>>>>>>> v3.18
 			nvidia,hpd-gpio = <&gpio TEGRA_GPIO(N, 7)
 				GPIO_ACTIVE_HIGH>;
 		};
 	};
 
 	pinmux@70000014 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pinctrl-names = "default";
 		pinctrl-0 = <&state_default>;
@@ -214,8 +237,13 @@
 					"rm", "sdio1", "slxk", "spdo", "uac",
 					"uda";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -225,7 +253,11 @@
 				nvidia,pins = "ck32", "ddrc", "pmca", "pmcb",
 					"pmcc", "pmcd", "pmce", "xm2c", "xm2d";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 >>>>>>> v3.18
@@ -235,8 +267,13 @@
 					"dtc", "dte", "slxa", "slxc", "slxd",
 					"spdi";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <0>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -246,8 +283,13 @@
 				nvidia,pins = "csus", "spia", "spib", "spid",
 					"spif";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <1>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -258,8 +300,13 @@
 					"kbcb", "kbcc", "kbcd", "kbce", "kbcf",
 					"spic", "spig", "uaa", "uab";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <2>;
 				nvidia,tristate = <0>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_UP>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_UP>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
@@ -269,8 +316,13 @@
 				nvidia,pins = "dta", "dtd", "owc", "sdc", "sdd",
 					"spie", "spih", "uad", "uca", "ucb";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <2>;
 				nvidia,tristate = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_UP>;
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_UP>;
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
@@ -284,17 +336,23 @@
 					"ldc", "ldi", "lhs", "lsc0", "lspi",
 					"lvs", "pmc";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,tristate = <0>;
 			};
 			conf_lc {
 				nvidia,pins = "lc", "ls";
 				nvidia,pull = <2>;
 =======
+=======
+>>>>>>> v3.18
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
 			};
 			conf_lc {
 				nvidia,pins = "lc", "ls";
 				nvidia,pull = <TEGRA_PIN_PULL_UP>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 			conf_lcsn {
@@ -303,7 +361,11 @@
 					"lpw2", "lsc1", "lsck", "lsda", "lsdi",
 					"lvp0", "lvp1", "sdb";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,tristate = <1>;
+=======
+				nvidia,tristate = <TEGRA_PIN_ENABLE>;
+>>>>>>> v3.18
 =======
 				nvidia,tristate = <TEGRA_PIN_ENABLE>;
 >>>>>>> v3.18
@@ -312,7 +374,11 @@
 				nvidia,pins = "ld17_0", "ld19_18", "ld21_20",
 					"ld23_22";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				nvidia,pull = <1>;
+=======
+				nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
+>>>>>>> v3.18
 =======
 				nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
 >>>>>>> v3.18
@@ -333,13 +399,19 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c@7000c000 {
 =======
+=======
+>>>>>>> v3.18
 	pwm: pwm@7000a000 {
 		status = "okay";
 	};
 
 	lvds_ddc: i2c@7000c000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status = "okay";
 		clock-frequency = <400000>;
@@ -358,6 +430,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvec {
 		compatible = "nvidia,nvec";
 		reg = <0x7000c500 0x100>;
@@ -370,6 +443,8 @@
 		clocks = <&tegra_car 67>, <&tegra_car 124>;
 		clock-names = "div-clk", "fast-clk";
 =======
+=======
+>>>>>>> v3.18
 	nvec@7000c500 {
 		compatible = "nvidia,nvec";
 		reg = <0x7000c500 0x100>;
@@ -384,6 +459,9 @@
 		clock-names = "div-clk", "fast-clk";
 		resets = <&tegra_car 67>;
 		reset-names = "i2c";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -395,7 +473,11 @@
 			compatible = "ti,tps6586x";
 			reg = <0x34>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 86 0x4>;
+=======
+			interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -525,9 +607,15 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pmc {
 		nvidia,invert-interrupt;
 		nvidia,suspend-mode = <2>;
+=======
+	pmc@7000e400 {
+		nvidia,invert-interrupt;
+		nvidia,suspend-mode = <1>;
+>>>>>>> v3.18
 =======
 	pmc@7000e400 {
 		nvidia,invert-interrupt;
@@ -545,10 +633,13 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb@c5004000 {
 		status = "okay";
 		nvidia,phy-reset-gpio = <&gpio 168 0>; /* gpio PV0 */
 =======
+=======
+>>>>>>> v3.18
 	usb-phy@c5000000 {
 		status = "okay";
 	};
@@ -563,6 +654,9 @@
 		status = "okay";
 		nvidia,phy-reset-gpio = <&gpio TEGRA_GPIO(V, 0)
 			GPIO_ACTIVE_LOW>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -571,8 +665,13 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb-phy@c5004400 {
 		nvidia,phy-reset-gpio = <&gpio 168 0>; /* gpio PV0 */
+=======
+	usb-phy@c5008000 {
+		status = "okay";
+>>>>>>> v3.18
 =======
 	usb-phy@c5008000 {
 		status = "okay";
@@ -582,9 +681,15 @@
 	sdhci@c8000000 {
 		status = "okay";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cd-gpios = <&gpio 173 1>; /* gpio PV5 */
 		wp-gpios = <&gpio 57 0>;  /* gpio PH1 */
 		power-gpios = <&gpio 169 0>; /* gpio PV1 */
+=======
+		cd-gpios = <&gpio TEGRA_GPIO(V, 5) GPIO_ACTIVE_LOW>;
+		wp-gpios = <&gpio TEGRA_GPIO(H, 1) GPIO_ACTIVE_HIGH>;
+		power-gpios = <&gpio TEGRA_GPIO(V, 1) GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 		cd-gpios = <&gpio TEGRA_GPIO(V, 5) GPIO_ACTIVE_LOW>;
 		wp-gpios = <&gpio TEGRA_GPIO(H, 1) GPIO_ACTIVE_HIGH>;
@@ -600,7 +705,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	backlight: backlight {
 		compatible = "pwm-backlight";
 
@@ -613,6 +721,9 @@
 		backlight-boot-off;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clocks {
 		compatible = "simple-bus";
@@ -620,7 +731,11 @@
 		#size-cells = <0>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk32k_in: clock {
+=======
+		clk32k_in: clock@0 {
+>>>>>>> v3.18
 =======
 		clk32k_in: clock@0 {
 >>>>>>> v3.18
@@ -637,8 +752,13 @@
 		power {
 			label = "Power";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio 79 1>; /* gpio PJ7, active low */
 			linux,code = <116>; /* KEY_POWER */
+=======
+			gpios = <&gpio TEGRA_GPIO(J, 7) GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_POWER>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio TEGRA_GPIO(J, 7) GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_POWER>;
@@ -653,7 +773,11 @@
 		wifi {
 			label = "wifi-led";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio 24 0>; /* gpio PD0 */
+=======
+			gpios = <&gpio TEGRA_GPIO(D, 0) GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio TEGRA_GPIO(D, 0) GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -662,7 +786,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	panel: panel {
 		compatible = "samsung,ltn101nt05", "simple-panel";
 
@@ -673,6 +800,9 @@
 		backlight = <&backlight>;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	regulators {
 		compatible = "simple-bus";
@@ -688,7 +818,10 @@
 			regulator-always-on;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		vdd_pnl_reg: regulator@1 {
 			compatible = "regulator-fixed";
@@ -699,6 +832,9 @@
 			gpio = <&gpio TEGRA_GPIO(A, 4) GPIO_ACTIVE_HIGH>;
 			enable-active-high;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -720,16 +856,22 @@
 		nvidia,audio-codec = <&alc5632>;
 		nvidia,i2s-controller = <&tegra_i2s1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nvidia,hp-det-gpios = <&gpio 178 0>; /* gpio PW2 */
 
 		clocks = <&tegra_car 112>, <&tegra_car 113>, <&tegra_car 94>;
 =======
+=======
+>>>>>>> v3.18
 		nvidia,hp-det-gpios = <&gpio TEGRA_GPIO(W, 2)
 			GPIO_ACTIVE_HIGH>;
 
 		clocks = <&tegra_car TEGRA20_CLK_PLL_A>,
 		         <&tegra_car TEGRA20_CLK_PLL_A_OUT0>,
 		         <&tegra_car TEGRA20_CLK_CDEV1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		clock-names = "pll_a", "pll_a_out0", "mclk";
 	};

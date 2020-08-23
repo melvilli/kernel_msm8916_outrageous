@@ -99,7 +99,11 @@ static struct bcache_ops r5k_sc_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit r5k_sc_init(void)
+=======
+void r5k_sc_init(void)
+>>>>>>> v3.18
 =======
 void r5k_sc_init(void)
 >>>>>>> v3.18

@@ -9,7 +9,10 @@ snd-ak4113-objs := ak4113.o
 snd-ak4xxx-adda-objs := ak4xxx-adda.o
 snd-pt2258-objs := pt2258.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 snd-tea575x-tuner-objs := tea575x-tuner.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -18,6 +21,9 @@ obj-$(CONFIG_SND_PDAUDIOCF) += snd-ak4117.o
 obj-$(CONFIG_SND_ICE1712) += snd-ak4xxx-adda.o
 obj-$(CONFIG_SND_ICE1724) += snd-ak4114.o snd-ak4113.o snd-ak4xxx-adda.o snd-pt2258.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SND_TEA575X) += snd-tea575x-tuner.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

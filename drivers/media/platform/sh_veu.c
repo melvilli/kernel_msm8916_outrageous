@@ -27,6 +27,10 @@
 #include <media/v4l2-ioctl.h>
 #include <media/v4l2-mem2mem.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/v4l2-image-sizes.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-image-sizes.h>
 >>>>>>> v3.18
@@ -140,9 +144,12 @@ enum sh_veu_fmt_idx {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VGA_WIDTH	640
 #define VGA_HEIGHT	480
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DEFAULT_IN_WIDTH	VGA_WIDTH
@@ -367,10 +374,14 @@ static int sh_veu_context_init(struct sh_veu_dev *veu)
 					 sh_veu_queue_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(veu->m2m_ctx))
 		return PTR_ERR(veu->m2m_ctx);
 
 	return 0;
+=======
+	return PTR_ERR_OR_ZERO(veu->m2m_ctx);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(veu->m2m_ctx);
 >>>>>>> v3.18
@@ -440,7 +451,10 @@ static int sh_veu_g_fmt(struct sh_veu_file *veu_file, struct v4l2_format *f)
 	pix->sizeimage		= vfmt->bytesperline * pix->height *
 		vfmt->fmt->depth / vfmt->fmt->ydepth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pix->priv		= 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_dbg(veu->dev, "%s(): type: %d, size %u @ %ux%u, fmt %x\n", __func__,
@@ -491,7 +505,10 @@ static int sh_veu_try_fmt(struct v4l2_format *f, const struct sh_veu_format *fmt
 	pix->pixelformat	= fmt->fourcc;
 	pix->colorspace		= sh_veu_4cc2cspace(pix->pixelformat);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pix->priv		= 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

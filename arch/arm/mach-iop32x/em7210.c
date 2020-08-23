@@ -24,6 +24,10 @@
 #include <linux/platform_device.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio.h>
 >>>>>>> v3.18
@@ -37,6 +41,10 @@
 #include <asm/mach-types.h>
 #include <mach/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gpio-iop32x.h"
+>>>>>>> v3.18
 =======
 #include "gpio-iop32x.h"
 >>>>>>> v3.18
@@ -184,6 +192,7 @@ static struct platform_device em7210_serial_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void em7210_power_off(void)
 {
 	*IOP3XX_GPOE &= 0xfe;
@@ -193,6 +202,8 @@ void em7210_power_off(void)
 static void __init em7210_init_machine(void)
 {
 =======
+=======
+>>>>>>> v3.18
 #define EM7210_HARDWARE_POWER 0
 
 void em7210_power_off(void)
@@ -226,6 +237,9 @@ device_initcall(em7210_request_gpios);
 static void __init em7210_init_machine(void)
 {
 	register_iop32x_gpio();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register(&em7210_serial_device);
 	platform_device_register(&iop3xx_i2c0_device);
@@ -237,9 +251,12 @@ static void __init em7210_init_machine(void)
 	i2c_register_board_info(0, em7210_i2c_devices,
 		ARRAY_SIZE(em7210_i2c_devices));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 	pm_power_off = em7210_power_off;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

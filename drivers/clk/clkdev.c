@@ -22,11 +22,14 @@
 #include <linux/of.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static LIST_HEAD(clocks);
 static DEFINE_MUTEX(clocks_mutex);
 
 #if defined(CONFIG_OF)
 =======
+=======
+>>>>>>> v3.18
 #include "clk.h"
 
 static LIST_HEAD(clocks);
@@ -59,6 +62,9 @@ struct clk *of_clk_get_by_clkspec(struct of_phandle_args *clkspec)
 	return clk;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct clk *of_clk_get(struct device_node *np, int index)
 {
@@ -75,7 +81,11 @@ struct clk *of_clk_get(struct device_node *np, int index)
 		return ERR_PTR(rc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk = of_clk_get_from_provider(&clkspec);
+=======
+	clk = of_clk_get_by_clkspec(&clkspec);
+>>>>>>> v3.18
 =======
 	clk = of_clk_get_by_clkspec(&clkspec);
 >>>>>>> v3.18
@@ -112,15 +122,21 @@ struct clk *of_clk_get_by_name(struct device_node *np, const char *name)
 		if (!IS_ERR(clk))
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (name && index >= 0)
 			return clk;
 =======
+=======
+>>>>>>> v3.18
 		else if (name && index >= 0) {
 			if (PTR_ERR(clk) != -EPROBE_DEFER)
 				pr_err("ERROR: could not get clock %s:%s(%i)\n",
 					np->full_name, name ? name : "", index);
 			return clk;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -192,7 +208,11 @@ struct clk *clk_get_sys(const char *dev_id, const char *con_id)
 	mutex_unlock(&clocks_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return cl ? cl->clk : ERR_PTR(-EPROBE_DEFER);
+=======
+	return cl ? cl->clk : ERR_PTR(-ENOENT);
+>>>>>>> v3.18
 =======
 	return cl ? cl->clk : ERR_PTR(-ENOENT);
 >>>>>>> v3.18
@@ -207,7 +227,13 @@ struct clk *clk_get(struct device *dev, const char *con_id)
 	if (dev) {
 		clk = of_clk_get_by_name(dev->of_node, con_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!IS_ERR(clk) && __clk_get(clk))
+=======
+		if (!IS_ERR(clk))
+			return clk;
+		if (PTR_ERR(clk) == -EPROBE_DEFER)
+>>>>>>> v3.18
 =======
 		if (!IS_ERR(clk))
 			return clk;
@@ -235,7 +261,11 @@ void clkdev_add(struct clk_lookup *cl)
 EXPORT_SYMBOL(clkdev_add);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void clkdev_add_table(struct clk_lookup *cl, size_t num)
+=======
+void __init clkdev_add_table(struct clk_lookup *cl, size_t num)
+>>>>>>> v3.18
 =======
 void __init clkdev_add_table(struct clk_lookup *cl, size_t num)
 >>>>>>> v3.18

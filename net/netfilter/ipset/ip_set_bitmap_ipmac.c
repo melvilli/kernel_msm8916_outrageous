@@ -26,6 +26,7 @@
 #include <linux/netfilter/ipset/ip_set_bitmap.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REVISION_MIN	0
 #define REVISION_MAX	1	/* Counter support added */
 
@@ -33,6 +34,8 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Jozsef Kadlecsik <kadlec@blackhole.kfki.hu>");
 IP_SET_MODULE_DESC("bitmap:ip,mac", REVISION_MIN, REVISION_MAX);
 =======
+=======
+>>>>>>> v3.18
 #define IPSET_TYPE_REV_MIN	0
 /*				1	   Counter support added */
 /*				2	   Comment support added */
@@ -41,6 +44,9 @@ IP_SET_MODULE_DESC("bitmap:ip,mac", REVISION_MIN, REVISION_MAX);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Jozsef Kadlecsik <kadlec@blackhole.kfki.hu>");
 IP_SET_MODULE_DESC("bitmap:ip,mac", IPSET_TYPE_REV_MIN, IPSET_TYPE_REV_MAX);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_ALIAS("ip_set_bitmap:ip,mac");
 
@@ -60,11 +66,16 @@ struct bitmap_ipmac {
 	u32 last_ip;		/* host byte order, included in range */
 	u32 elements;		/* number of max elements in the set */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 timeout;		/* timeout value */
 	struct timer_list gc;	/* garbage collector */
 	size_t memsize;		/* members size */
 	size_t dsize;		/* size of element */
 	size_t offset[IPSET_OFFSET_MAX]; /* Offsets to extensions */
+=======
+	size_t memsize;		/* members size */
+	struct timer_list gc;	/* garbage collector */
+>>>>>>> v3.18
 =======
 	size_t memsize;		/* members size */
 	struct timer_list gc;	/* garbage collector */
@@ -99,7 +110,11 @@ get_elem(void *extensions, u16 id, size_t dsize)
 static inline int
 bitmap_ipmac_do_test(const struct bitmap_ipmac_adt_elem *e,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     const struct bitmap_ipmac *map)
+=======
+		     const struct bitmap_ipmac *map, size_t dsize)
+>>>>>>> v3.18
 =======
 		     const struct bitmap_ipmac *map, size_t dsize)
 >>>>>>> v3.18
@@ -109,7 +124,11 @@ bitmap_ipmac_do_test(const struct bitmap_ipmac_adt_elem *e,
 	if (!test_bit(e->id, map->members))
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	elem = get_elem(map->extensions, e->id, map->dsize);
+=======
+	elem = get_elem(map->extensions, e->id, dsize);
+>>>>>>> v3.18
 =======
 	elem = get_elem(map->extensions, e->id, dsize);
 >>>>>>> v3.18
@@ -122,7 +141,11 @@ bitmap_ipmac_do_test(const struct bitmap_ipmac_adt_elem *e,
 
 static inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 bitmap_ipmac_gc_test(u16 id, const struct bitmap_ipmac *map)
+=======
+bitmap_ipmac_gc_test(u16 id, const struct bitmap_ipmac *map, size_t dsize)
+>>>>>>> v3.18
 =======
 bitmap_ipmac_gc_test(u16 id, const struct bitmap_ipmac *map, size_t dsize)
 >>>>>>> v3.18
@@ -132,7 +155,11 @@ bitmap_ipmac_gc_test(u16 id, const struct bitmap_ipmac *map, size_t dsize)
 	if (!test_bit(id, map->members))
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	elem = get_elem(map->extensions, id, map->dsize);
+=======
+	elem = get_elem(map->extensions, id, dsize);
+>>>>>>> v3.18
 =======
 	elem = get_elem(map->extensions, id, dsize);
 >>>>>>> v3.18
@@ -150,7 +177,11 @@ static inline int
 bitmap_ipmac_add_timeout(unsigned long *timeout,
 			 const struct bitmap_ipmac_adt_elem *e,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 const struct ip_set_ext *ext,
+=======
+			 const struct ip_set_ext *ext, struct ip_set *set,
+>>>>>>> v3.18
 =======
 			 const struct ip_set_ext *ext, struct ip_set *set,
 >>>>>>> v3.18
@@ -160,7 +191,11 @@ bitmap_ipmac_add_timeout(unsigned long *timeout,
 
 	if (mode == IPSET_ADD_START_STORED_TIMEOUT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (t == map->timeout)
+=======
+		if (t == set->timeout)
+>>>>>>> v3.18
 =======
 		if (t == set->timeout)
 >>>>>>> v3.18
@@ -183,17 +218,23 @@ bitmap_ipmac_add_timeout(unsigned long *timeout,
 static inline int
 bitmap_ipmac_do_add(const struct bitmap_ipmac_adt_elem *e,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    struct bitmap_ipmac *map, u32 flags)
 {
 	struct bitmap_ipmac_elem *elem;
 
 	elem = get_elem(map->extensions, e->id, map->dsize);
 =======
+=======
+>>>>>>> v3.18
 		    struct bitmap_ipmac *map, u32 flags, size_t dsize)
 {
 	struct bitmap_ipmac_elem *elem;
 
 	elem = get_elem(map->extensions, e->id, dsize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (test_and_set_bit(e->id, map->members)) {
 		if (elem->filled == MAC_FILLED) {
@@ -227,6 +268,7 @@ bitmap_ipmac_do_del(const struct bitmap_ipmac_adt_elem *e,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long
 ip_set_timeout_stored(struct bitmap_ipmac *map, u32 id, unsigned long *timeout)
 {
@@ -244,12 +286,17 @@ bitmap_ipmac_do_list(struct sk_buff *skb, const struct bitmap_ipmac *map,
 	const struct bitmap_ipmac_elem *elem =
 		get_elem(map->extensions, id, map->dsize);
 =======
+=======
+>>>>>>> v3.18
 static inline int
 bitmap_ipmac_do_list(struct sk_buff *skb, const struct bitmap_ipmac *map,
 		     u32 id, size_t dsize)
 {
 	const struct bitmap_ipmac_elem *elem =
 		get_elem(map->extensions, id, dsize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return nla_put_ipaddr4(skb, IPSET_ATTR_IP,
@@ -273,8 +320,13 @@ bitmap_ipmac_kadt(struct ip_set *set, const struct sk_buff *skb,
 	struct bitmap_ipmac *map = set->data;
 	ipset_adtfn adtfn = set->variant->adt[adt];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bitmap_ipmac_adt_elem e = {};
 	struct ip_set_ext ext = IP_SET_INIT_KEXT(skb, opt, map);
+=======
+	struct bitmap_ipmac_adt_elem e = { .id = 0 };
+	struct ip_set_ext ext = IP_SET_INIT_KEXT(skb, opt, set);
+>>>>>>> v3.18
 =======
 	struct bitmap_ipmac_adt_elem e = { .id = 0 };
 	struct ip_set_ext ext = IP_SET_INIT_KEXT(skb, opt, set);
@@ -307,9 +359,15 @@ bitmap_ipmac_uadt(struct ip_set *set, struct nlattr *tb[],
 	const struct bitmap_ipmac *map = set->data;
 	ipset_adtfn adtfn = set->variant->adt[adt];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bitmap_ipmac_adt_elem e = {};
 	struct ip_set_ext ext = IP_SET_INIT_UEXT(map);
 	u32 ip;
+=======
+	struct bitmap_ipmac_adt_elem e = { .id = 0 };
+	struct ip_set_ext ext = IP_SET_INIT_UEXT(set);
+	u32 ip = 0;
+>>>>>>> v3.18
 =======
 	struct bitmap_ipmac_adt_elem e = { .id = 0 };
 	struct ip_set_ext ext = IP_SET_INIT_UEXT(set);
@@ -321,12 +379,18 @@ bitmap_ipmac_uadt(struct ip_set *set, struct nlattr *tb[],
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_TIMEOUT) ||
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_PACKETS) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_BYTES)))
 =======
+=======
+>>>>>>> v3.18
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_BYTES)   ||
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_SKBMARK) ||
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_SKBPRIO) ||
 		     !ip_set_optattr_netorder(tb, IPSET_ATTR_SKBQUEUE)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -IPSET_ERR_PROTOCOL;
 
@@ -361,7 +425,11 @@ bitmap_ipmac_same_set(const struct ip_set *a, const struct ip_set *b)
 	return x->first_ip == y->first_ip &&
 	       x->last_ip == y->last_ip &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       x->timeout == y->timeout &&
+=======
+	       a->timeout == b->timeout &&
+>>>>>>> v3.18
 =======
 	       a->timeout == b->timeout &&
 >>>>>>> v3.18
@@ -370,6 +438,7 @@ bitmap_ipmac_same_set(const struct ip_set *a, const struct ip_set *b)
 
 /* Plain variant */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Timeout variant */
 
@@ -404,6 +473,8 @@ struct bitmap_ipmacct_elem {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #include "ip_set_bitmap_gen.h"
 
 /* Create bitmap:ip,mac type of sets */
@@ -413,17 +484,23 @@ init_map_ipmac(struct ip_set *set, struct bitmap_ipmac *map,
 	       u32 first_ip, u32 last_ip, u32 elements)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	map->members = ip_set_alloc((last_ip - first_ip + 1) * map->dsize);
 	if (!map->members)
 		return false;
 	if (map->dsize) {
 		map->extensions = ip_set_alloc(map->dsize * elements);
 =======
+=======
+>>>>>>> v3.18
 	map->members = ip_set_alloc(map->memsize);
 	if (!map->members)
 		return false;
 	if (set->dsize) {
 		map->extensions = ip_set_alloc(set->dsize * elements);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!map->extensions) {
 			kfree(map->members);
@@ -434,7 +511,11 @@ init_map_ipmac(struct ip_set *set, struct bitmap_ipmac *map,
 	map->last_ip = last_ip;
 	map->elements = elements;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	map->timeout = IPSET_NO_TIMEOUT;
+=======
+	set->timeout = IPSET_NO_TIMEOUT;
+>>>>>>> v3.18
 =======
 	set->timeout = IPSET_NO_TIMEOUT;
 >>>>>>> v3.18
@@ -447,15 +528,21 @@ init_map_ipmac(struct ip_set *set, struct bitmap_ipmac *map,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 bitmap_ipmac_create(struct ip_set *set, struct nlattr *tb[],
 		    u32 flags)
 {
 	u32 first_ip, last_ip, cadt_flags = 0;
 =======
+=======
+>>>>>>> v3.18
 bitmap_ipmac_create(struct net *net, struct ip_set *set, struct nlattr *tb[],
 		    u32 flags)
 {
 	u32 first_ip = 0, last_ip = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u64 elements;
 	struct bitmap_ipmac *map;
@@ -500,6 +587,7 @@ bitmap_ipmac_create(struct net *net, struct ip_set *set, struct nlattr *tb[],
 
 	map->memsize = bitmap_bytes(0, elements - 1);
 	set->variant = &bitmap_ipmac;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (tb[IPSET_ATTR_CADT_FLAGS])
 		cadt_flags = ip_set_get_h32(tb[IPSET_ATTR_CADT_FLAGS]);
@@ -553,6 +641,8 @@ bitmap_ipmac_create(struct net *net, struct ip_set *set, struct nlattr *tb[],
 		}
 		set->variant = &bitmap_ipmac;
 =======
+=======
+>>>>>>> v3.18
 	set->dsize = ip_set_elem_len(set, tb,
 				     sizeof(struct bitmap_ipmac_elem));
 	if (!init_map_ipmac(set, map, first_ip, last_ip, elements)) {
@@ -562,6 +652,9 @@ bitmap_ipmac_create(struct net *net, struct ip_set *set, struct nlattr *tb[],
 	if (tb[IPSET_ATTR_TIMEOUT]) {
 		set->timeout = ip_set_timeout_uget(tb[IPSET_ATTR_TIMEOUT]);
 		bitmap_ipmac_gc_init(set, bitmap_ipmac_gc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -574,8 +667,13 @@ static struct ip_set_type bitmap_ipmac_type = {
 	.dimension	= IPSET_DIM_TWO,
 	.family		= NFPROTO_IPV4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.revision_min	= REVISION_MIN,
 	.revision_max	= REVISION_MAX,
+=======
+	.revision_min	= IPSET_TYPE_REV_MIN,
+	.revision_max	= IPSET_TYPE_REV_MAX,
+>>>>>>> v3.18
 =======
 	.revision_min	= IPSET_TYPE_REV_MIN,
 	.revision_max	= IPSET_TYPE_REV_MAX,
@@ -597,11 +695,17 @@ static struct ip_set_type bitmap_ipmac_type = {
 		[IPSET_ATTR_BYTES]	= { .type = NLA_U64 },
 		[IPSET_ATTR_PACKETS]	= { .type = NLA_U64 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		[IPSET_ATTR_COMMENT]	= { .type = NLA_NUL_STRING },
 		[IPSET_ATTR_SKBMARK]	= { .type = NLA_U64 },
 		[IPSET_ATTR_SKBPRIO]	= { .type = NLA_U32 },
 		[IPSET_ATTR_SKBQUEUE]	= { .type = NLA_U16 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.me		= THIS_MODULE,

@@ -26,10 +26,13 @@
 
 #if defined(CONFIG_PPC_BOOK3S_64)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FUNC(name) 		GLUE(.,name)
 #elif defined(CONFIG_PPC_BOOK3S_32)
 #define FUNC(name)		name
 =======
+=======
+>>>>>>> v3.18
 #if defined(_CALL_ELF) && _CALL_ELF == 2
 #define FUNC(name) 		name
 #else
@@ -41,6 +44,9 @@
 #define FUNC(name)		name
 #define GET_SHADOW_VCPU(reg)	lwz     reg, (THREAD + THREAD_KVM_SVCPU)(r2)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PPC_BOOK3S_XX */
 
@@ -102,12 +108,15 @@ kvm_start_entry:
 
 kvm_start_lightweight:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_PPC_BOOK3S_64
 	PPC_LL	r3, VCPU_HFLAGS(r4)
 	rldicl	r3, r3, 0, 63		/* r3 &= 1 */
 	stb	r3, HSTATE_RESTORE_HID5(r13)
 =======
+=======
+>>>>>>> v3.18
 	/* Copy registers into shadow vcpu so we can access them in real mode */
 	GET_SHADOW_VCPU(r3)
 	bl	FUNC(kvmppc_copy_to_svcpu)
@@ -143,6 +152,9 @@ sprg3_little_endian:
 
 after_sprg3_load:
 	mtspr	SPRN_SPRG3, r3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PPC_BOOK3S_64 */
 
@@ -159,9 +171,12 @@ after_sprg3_load:
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .global kvmppc_handler_highmem
 kvmppc_handler_highmem:
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -173,10 +188,13 @@ kvmppc_handler_highmem:
 	 * R13      = PACA
 	 * SVCPU.*  = guest *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *
 	 */
 
 =======
+=======
+>>>>>>> v3.18
 	 * MSR.EE   = 1
 	 *
 	 */
@@ -205,6 +223,9 @@ kvmppc_handler_highmem:
 	mtspr	SPRN_SPRG_VDSO_WRITE, r3
 #endif /* CONFIG_PPC_BOOK3S_64 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* R7 = vcpu */
 	PPC_LL	r7, GPR4(r1)
@@ -230,17 +251,23 @@ kvmppc_handler_highmem:
 
 	/* Pass the exit number as 3rd argument to kvmppc_handle_exit */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mr	r5, r12
 
 	/* Restore r3 (kvm_run) and r4 (vcpu) */
 	REST_2GPRS(3, r1)
 	bl	FUNC(kvmppc_handle_exit)
 =======
+=======
+>>>>>>> v3.18
 	lwz	r5, VCPU_TRAP(r7)
 
 	/* Restore r3 (kvm_run) and r4 (vcpu) */
 	REST_2GPRS(3, r1)
 	bl	FUNC(kvmppc_handle_exit_pr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* If RESUME_GUEST, get back in the loop */

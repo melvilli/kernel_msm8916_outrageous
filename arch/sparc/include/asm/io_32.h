@@ -3,6 +3,7 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/types.h>
 #include <linux/ioport.h>  /* struct resource */
 
@@ -142,6 +143,8 @@ void insl(unsigned long addr, void *dst, unsigned long count);
 #define IO_SPACE_LIMIT 0xffffffff
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/ioport.h>  /* struct resource */
 
 #define readb_relaxed(__addr)	readb(__addr)
@@ -192,6 +195,9 @@ static inline void _memcpy_toio(volatile void __iomem *dst, const void *src,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * SBus accessors.
@@ -200,7 +206,11 @@ static inline void _memcpy_toio(volatile void __iomem *dst, const void *src,
  * We do not need to flip bytes for SBus of course.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u8 _sbus_readb(const volatile void __iomem *addr)
+=======
+static inline u8 sbus_readb(const volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline u8 sbus_readb(const volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -209,7 +219,11 @@ static inline u8 sbus_readb(const volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u16 _sbus_readw(const volatile void __iomem *addr)
+=======
+static inline u16 sbus_readw(const volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline u16 sbus_readw(const volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -218,7 +232,11 @@ static inline u16 sbus_readw(const volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 _sbus_readl(const volatile void __iomem *addr)
+=======
+static inline u32 sbus_readl(const volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline u32 sbus_readl(const volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -227,7 +245,11 @@ static inline u32 sbus_readl(const volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void _sbus_writeb(u8 b, volatile void __iomem *addr)
+=======
+static inline void sbus_writeb(u8 b, volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline void sbus_writeb(u8 b, volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -236,7 +258,11 @@ static inline void sbus_writeb(u8 b, volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void _sbus_writew(u16 w, volatile void __iomem *addr)
+=======
+static inline void sbus_writew(u16 w, volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline void sbus_writew(u16 w, volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -245,7 +271,11 @@ static inline void sbus_writew(u16 w, volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void _sbus_writel(u32 l, volatile void __iomem *addr)
+=======
+static inline void sbus_writel(u32 l, volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline void sbus_writel(u32 l, volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -253,6 +283,7 @@ static inline void sbus_writel(u32 l, volatile void __iomem *addr)
 	*(__force volatile u32 *)addr = l;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * The only reason for #define's is to hide casts to unsigned long.
@@ -269,6 +300,10 @@ static inline void sbus_memset_io(volatile void __iomem *__dst, int c, __kernel_
 static inline void sbus_memset_io(volatile void __iomem *__dst, int c,
                                   __kernel_size_t n)
 >>>>>>> v3.18
+=======
+static inline void sbus_memset_io(volatile void __iomem *__dst, int c,
+                                  __kernel_size_t n)
+>>>>>>> v3.18
 {
 	while(n--) {
 		sbus_writeb(c, __dst);
@@ -276,6 +311,7 @@ static inline void sbus_memset_io(volatile void __iomem *__dst, int c,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void
 _memset_io(volatile void __iomem *dst, int c, __kernel_size_t n)
@@ -298,6 +334,11 @@ static inline void sbus_memcpy_fromio(void *dst,
                                       const volatile void __iomem *src,
                                       __kernel_size_t n)
 >>>>>>> v3.18
+=======
+static inline void sbus_memcpy_fromio(void *dst,
+                                      const volatile void __iomem *src,
+                                      __kernel_size_t n)
+>>>>>>> v3.18
 {
 	char *d = dst;
 
@@ -308,6 +349,7 @@ static inline void sbus_memcpy_fromio(void *dst,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define sbus_memcpy_fromio(d, s, sz)	_sbus_memcpy_fromio(d, s, sz)
 
@@ -333,6 +375,11 @@ static inline void sbus_memcpy_toio(volatile void __iomem *dst,
                                     const void *src,
                                     __kernel_size_t n)
 >>>>>>> v3.18
+=======
+static inline void sbus_memcpy_toio(volatile void __iomem *dst,
+                                    const void *src,
+                                    __kernel_size_t n)
+>>>>>>> v3.18
 {
 	const char *s = src;
 	volatile void __iomem *d = dst;
@@ -344,6 +391,7 @@ static inline void sbus_memcpy_toio(volatile void __iomem *dst,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define sbus_memcpy_toio(d, s, sz)	_sbus_memcpy_toio(d, s, sz)
 
@@ -364,12 +412,15 @@ _memcpy_toio(volatile void __iomem *dst, const void *src, __kernel_size_t n)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef __KERNEL__
 
 /*
  * Bus number may be embedded in the higher bits of the physical address.
  * This is why we have no bus number argument to ioremap().
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void __iomem *ioremap(unsigned long offset, unsigned long size);
 #define ioremap_nocache(X,Y)	ioremap((X),(Y))
@@ -424,6 +475,8 @@ extern void ioport_unmap(void __iomem *);
 struct pci_dev;
 extern void pci_iounmap(struct pci_dev *dev, void __iomem *);
 =======
+=======
+>>>>>>> v3.18
 void __iomem *ioremap(unsigned long offset, unsigned long size);
 #define ioremap_nocache(X,Y)	ioremap((X),(Y))
 #define ioremap_wc(X,Y)		ioremap((X),(Y))
@@ -438,6 +491,9 @@ struct pci_dev;
 void pci_iounmap(struct pci_dev *dev, void __iomem *);
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -458,7 +514,11 @@ static inline int sbus_can_burst64(void)
 }
 struct device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void sbus_set_sbus64(struct device *, int);
+=======
+void sbus_set_sbus64(struct device *, int);
+>>>>>>> v3.18
 =======
 void sbus_set_sbus64(struct device *, int);
 >>>>>>> v3.18
@@ -467,6 +527,7 @@ void sbus_set_sbus64(struct device *, int);
 
 #define __ARCH_HAS_NO_PAGE_ZERO_MAPPED		1
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Convert a physical pointer to a virtual kernel pointer for /dev/mem
@@ -478,6 +539,8 @@ void sbus_set_sbus64(struct device *, int);
  * Convert a virtual cached pointer to an uncached pointer
  */
 #define xlate_dev_kmem_ptr(p)	p
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -77,6 +81,11 @@ acpi_buffer_to_resource(u8 *aml_buffer,
 	void *current_resource_ptr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ACPI_FUNCTION_TRACE(acpi_buffer_to_resource);
+
+>>>>>>> v3.18
 =======
 	ACPI_FUNCTION_TRACE(acpi_buffer_to_resource);
 
@@ -95,7 +104,11 @@ acpi_buffer_to_resource(u8 *aml_buffer,
 	}
 	if (ACPI_FAILURE(status)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (status);
+=======
+		return_ACPI_STATUS(status);
+>>>>>>> v3.18
 =======
 		return_ACPI_STATUS(status);
 >>>>>>> v3.18
@@ -107,7 +120,11 @@ acpi_buffer_to_resource(u8 *aml_buffer,
 	current_resource_ptr = resource;
 	if (!resource) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (AE_NO_MEMORY);
+=======
+		return_ACPI_STATUS(AE_NO_MEMORY);
+>>>>>>> v3.18
 =======
 		return_ACPI_STATUS(AE_NO_MEMORY);
 >>>>>>> v3.18
@@ -128,15 +145,21 @@ acpi_buffer_to_resource(u8 *aml_buffer,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (status);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	return_ACPI_STATUS(status);
 }
 
 ACPI_EXPORT_SYMBOL(acpi_buffer_to_resource)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*******************************************************************************
  *
@@ -156,10 +179,16 @@ ACPI_EXPORT_SYMBOL(acpi_buffer_to_resource)
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 acpi_status
 acpi_rs_create_resource_list(union acpi_operand_object *aml_buffer,
 			     struct acpi_buffer * output_buffer)
+=======
+acpi_status
+acpi_rs_create_resource_list(union acpi_operand_object *aml_buffer,
+			     struct acpi_buffer *output_buffer)
+>>>>>>> v3.18
 =======
 acpi_status
 acpi_rs_create_resource_list(union acpi_operand_object *aml_buffer,
@@ -305,6 +334,7 @@ acpi_rs_create_pci_routing_table(union acpi_operand_object *package_object,
 		user_prt->length = (sizeof(struct acpi_pci_routing_table) - 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Each element of the top-level package must also be a package */
 
 		if ((*top_object_list)->common.type != ACPI_TYPE_PACKAGE) {
@@ -320,6 +350,9 @@ acpi_rs_create_pci_routing_table(union acpi_operand_object *package_object,
 =======
 		/* Each subpackage must be of length 4 */
 >>>>>>> v3.18
+=======
+		/* Each subpackage must be of length 4 */
+>>>>>>> v3.18
 
 		if ((*top_object_list)->package.count != 4) {
 			ACPI_ERROR((AE_INFO,
@@ -330,7 +363,11 @@ acpi_rs_create_pci_routing_table(union acpi_operand_object *package_object,
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Dereference the sub-package.
+=======
+		 * Dereference the subpackage.
+>>>>>>> v3.18
 =======
 		 * Dereference the subpackage.
 >>>>>>> v3.18
@@ -343,7 +380,11 @@ acpi_rs_create_pci_routing_table(union acpi_operand_object *package_object,
 
 		obj_desc = sub_object_list[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (obj_desc->common.type != ACPI_TYPE_INTEGER) {
+=======
+		if (!obj_desc || obj_desc->common.type != ACPI_TYPE_INTEGER) {
+>>>>>>> v3.18
 =======
 		if (!obj_desc || obj_desc->common.type != ACPI_TYPE_INTEGER) {
 >>>>>>> v3.18
@@ -360,7 +401,11 @@ acpi_rs_create_pci_routing_table(union acpi_operand_object *package_object,
 
 		obj_desc = sub_object_list[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (obj_desc->common.type != ACPI_TYPE_INTEGER) {
+=======
+		if (!obj_desc || obj_desc->common.type != ACPI_TYPE_INTEGER) {
+>>>>>>> v3.18
 =======
 		if (!obj_desc || obj_desc->common.type != ACPI_TYPE_INTEGER) {
 >>>>>>> v3.18
@@ -374,6 +419,7 @@ acpi_rs_create_pci_routing_table(union acpi_operand_object *package_object,
 		user_prt->pin = (u32) obj_desc->integer.value;
 
 		/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 * If the BIOS has erroneously reversed the _PRT source_name (index 2)
 		 * and the source_index (index 3), fix it. _PRT is important enough to
@@ -391,6 +437,8 @@ acpi_rs_create_pci_routing_table(union acpi_operand_object *package_object,
 		}
 
 		/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		 * 3) Third subobject: Dereference the PRT.source_name
@@ -472,7 +520,11 @@ acpi_rs_create_pci_routing_table(union acpi_operand_object *package_object,
 
 		obj_desc = sub_object_list[3];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (obj_desc->common.type != ACPI_TYPE_INTEGER) {
+=======
+		if (!obj_desc || obj_desc->common.type != ACPI_TYPE_INTEGER) {
+>>>>>>> v3.18
 =======
 		if (!obj_desc || obj_desc->common.type != ACPI_TYPE_INTEGER) {
 >>>>>>> v3.18
@@ -500,8 +552,13 @@ acpi_rs_create_pci_routing_table(union acpi_operand_object *package_object,
  * FUNCTION:    acpi_rs_create_aml_resources
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PARAMETERS:  linked_list_buffer      - Pointer to the resource linked list
  *              output_buffer           - Pointer to the user's buffer
+=======
+ * PARAMETERS:  resource_list           - Pointer to the resource list buffer
+ *              output_buffer           - Where the AML buffer is returned
+>>>>>>> v3.18
 =======
  * PARAMETERS:  resource_list           - Pointer to the resource list buffer
  *              output_buffer           - Where the AML buffer is returned
@@ -513,9 +570,14 @@ acpi_rs_create_pci_routing_table(union acpi_operand_object *package_object,
  *              to the size buffer needed.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * DESCRIPTION: Takes the linked list of device resources and
  *              creates a bytestream to be used as input for the
  *              _SRS control method.
+=======
+ * DESCRIPTION: Converts a list of device resources to an AML bytestream
+ *              to be used as input for the _SRS control method.
+>>>>>>> v3.18
 =======
  * DESCRIPTION: Converts a list of device resources to an AML bytestream
  *              to be used as input for the _SRS control method.
@@ -525,7 +587,11 @@ acpi_rs_create_pci_routing_table(union acpi_operand_object *package_object,
 
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_rs_create_aml_resources(struct acpi_resource *linked_list_buffer,
+=======
+acpi_rs_create_aml_resources(struct acpi_buffer *resource_list,
+>>>>>>> v3.18
 =======
 acpi_rs_create_aml_resources(struct acpi_buffer *resource_list,
 >>>>>>> v3.18
@@ -536,6 +602,7 @@ acpi_rs_create_aml_resources(struct acpi_buffer *resource_list,
 
 	ACPI_FUNCTION_TRACE(rs_create_aml_resources);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO, "LinkedListBuffer = %p\n",
 			  linked_list_buffer));
@@ -548,6 +615,8 @@ acpi_rs_create_aml_resources(struct acpi_buffer *resource_list,
 	 */
 	status = acpi_rs_get_aml_length(linked_list_buffer, &aml_size_needed);
 =======
+=======
+>>>>>>> v3.18
 	/* Params already validated, no need to re-validate here */
 
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO, "ResourceList Buffer = %p\n",
@@ -558,6 +627,9 @@ acpi_rs_create_aml_resources(struct acpi_buffer *resource_list,
 	status = acpi_rs_get_aml_length(resource_list->pointer,
 					resource_list->length,
 					&aml_size_needed);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO, "AmlSizeNeeded=%X, %s\n",
@@ -576,10 +648,16 @@ acpi_rs_create_aml_resources(struct acpi_buffer *resource_list,
 	/* Do the conversion */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status =
 	    acpi_rs_convert_resources_to_aml(linked_list_buffer,
 					     aml_size_needed,
 					     output_buffer->pointer);
+=======
+	status = acpi_rs_convert_resources_to_aml(resource_list->pointer,
+						  aml_size_needed,
+						  output_buffer->pointer);
+>>>>>>> v3.18
 =======
 	status = acpi_rs_convert_resources_to_aml(resource_list->pointer,
 						  aml_size_needed,

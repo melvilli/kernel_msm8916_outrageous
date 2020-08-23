@@ -31,6 +31,7 @@
  *  4 byte FCS/CRC (frame check sequence).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FDDI_K_ALEN			6		/* Octets in one FDDI address */
 #define FDDI_K_8022_HLEN	16		/* Total octets in 802.2 header */
 #define FDDI_K_SNAP_HLEN	21		/* Total octets in 802.2 SNAP header */
@@ -62,6 +63,8 @@
 /* Define LLC and SNAP constants */
 #define FDDI_EXTENDED_SAP	0xAA
 =======
+=======
+>>>>>>> v3.18
 #define FDDI_K_ALEN		6	/* Octets in one FDDI address */
 #define FDDI_K_8022_HLEN	16	/* Total octets in 802.2 header */
 #define FDDI_K_SNAP_HLEN	21	/* Total octets in 802.2 SNAP header */
@@ -96,11 +99,15 @@
 
 /* Define LLC and SNAP constants */
 #define FDDI_EXTENDED_SAP		0xAA
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FDDI_UI_CMD			0x03
 
 /* Define 802.2 Type 1 header */
 struct fddi_8022_1_hdr {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__u8	dsap;					/* destination service access point */
 	__u8	ssap;					/* source service access point */
@@ -110,10 +117,16 @@ struct fddi_8022_1_hdr {
 	__u8	ssap;			/* source service access point */
 	__u8	ctrl;			/* control byte #1 */
 >>>>>>> v3.18
+=======
+	__u8	dsap;			/* destination service access point */
+	__u8	ssap;			/* source service access point */
+	__u8	ctrl;			/* control byte #1 */
+>>>>>>> v3.18
 } __attribute__((packed));
 
 /* Define 802.2 Type 2 header */
 struct fddi_8022_2_hdr {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__u8	dsap;					/* destination service access point */
 	__u8	ssap;					/* source service access point */
@@ -130,6 +143,8 @@ struct fddi_snap_hdr {
 	__u8	oui[FDDI_K_OUI_LEN];	/* organizational universal id */
 	__be16	ethertype;				/* packet type ID field */
 =======
+=======
+>>>>>>> v3.18
 	__u8	dsap;			/* destination service access point */
 	__u8	ssap;			/* source service access point */
 	__u8	ctrl_1;			/* control byte #1 */
@@ -143,11 +158,15 @@ struct fddi_snap_hdr {
 	__u8	ctrl;			/* always 0x03 */
 	__u8	oui[FDDI_K_OUI_LEN];	/* organizational universal id */
 	__be16	ethertype;		/* packet type ID field */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__((packed));
 
 /* Define FDDI LLC frame header */
 struct fddihdr {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__u8	fc;						/* frame control */
 	__u8	daddr[FDDI_K_ALEN];		/* destination address */
@@ -159,6 +178,8 @@ struct fddihdr {
 		struct fddi_snap_hdr		llc_snap;
 		} hdr;
 =======
+=======
+>>>>>>> v3.18
 	__u8	fc;			/* frame control */
 	__u8	daddr[FDDI_K_ALEN];	/* destination address */
 	__u8	saddr[FDDI_K_ALEN];	/* source address */
@@ -167,6 +188,9 @@ struct fddihdr {
 		struct fddi_8022_2_hdr	llc_8022_2;
 		struct fddi_snap_hdr	llc_snap;
 	} hdr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__((packed));
 

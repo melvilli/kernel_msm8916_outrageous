@@ -20,7 +20,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -225,6 +228,7 @@ static struct pci_device_id ata_generic[] = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_CENATEK,PCI_DEVICE_ID_CENATEK_IDE),
 	  .driver_data = ATA_GEN_FORCE_DMA },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * For some reason, MCP89 on MacBook 7,1 doesn't work with
 	 * ahci, use ata_generic instead.
@@ -232,6 +236,8 @@ static struct pci_device_id ata_generic[] = {
 	{ PCI_VENDOR_ID_NVIDIA, PCI_DEVICE_ID_NVIDIA_NFORCE_MCP89_SATA,
 	  PCI_VENDOR_ID_APPLE, 0xcb89,
 	  .driver_data = ATA_GEN_FORCE_DMA },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if !defined(CONFIG_PATA_TOSHIBA) && !defined(CONFIG_PATA_TOSHIBA_MODULE)
@@ -256,7 +262,11 @@ static struct pci_driver ata_generic_pci_driver = {
 	.probe 		= ata_generic_init_one,
 	.remove		= ata_pci_remove_one,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18

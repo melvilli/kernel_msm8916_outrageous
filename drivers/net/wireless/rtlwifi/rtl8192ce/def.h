@@ -115,6 +115,11 @@
 #define	GET_C2H_CMD_FEEDBACK_CCX_SEQ(__pcmdfbhdr)	\
 	LE_BITS_TO_4BYTE(((__pcmdfbhdr) + 4), 20, 12)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GET_RX_STATUS_DESC_BUFF_ADDR(__pdesc)			\
+	SHIFT_AND_MASK_LE(__pdesc + 24, 0, 32)
+>>>>>>> v3.18
 =======
 #define GET_RX_STATUS_DESC_BUFF_ADDR(__pdesc)			\
 	SHIFT_AND_MASK_LE(__pdesc + 24, 0, 32)
@@ -152,6 +157,7 @@ enum version_8192c {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CUT_VERSION_MASK		(BIT(6)|BIT(7))
 #define CHIP_VENDOR_UMC			BIT(5)
 #define CHIP_VENDOR_UMC_B_CUT		BIT(6) /* Chip version for ECO */
@@ -169,6 +175,8 @@ enum version_8192c {
 	((GET_CVID_CUT_VERSION(version) == CHIP_VENDOR_UMC_B_CUT) ?	\
 	true : false) : false)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum rtl819x_loopback_e {

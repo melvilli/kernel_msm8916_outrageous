@@ -88,7 +88,11 @@ void *amiga_chip_alloc_res(unsigned long size, struct resource *res)
 	atomic_sub(size, &chipavail);
 	pr_debug("amiga_chip_alloc_res: returning %pR\n", res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (void *)ZTWO_VADDR(res->start);
+=======
+	return ZTWO_VADDR(res->start);
+>>>>>>> v3.18
 =======
 	return ZTWO_VADDR(res->start);
 >>>>>>> v3.18

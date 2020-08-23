@@ -57,9 +57,14 @@ enum {
 	WORK_NO_COLOR		= WORK_NR_COLORS,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* special cpu IDs */
 	WORK_CPU_UNBOUND	= NR_CPUS,
 	WORK_CPU_END		= NR_CPUS + 1,
+=======
+	/* not bound to any CPU, prefer the local CPU */
+	WORK_CPU_UNBOUND	= NR_CPUS,
+>>>>>>> v3.18
 =======
 	/* not bound to any CPU, prefer the local CPU */
 	WORK_CPU_UNBOUND	= NR_CPUS,
@@ -77,8 +82,12 @@ enum {
 	WORK_OFFQ_FLAG_BASE	= WORK_STRUCT_COLOR_SHIFT,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__WORK_OFFQ_CANCELING	= WORK_OFFQ_FLAG_BASE,
 	WORK_OFFQ_CANCELING	= (1 << __WORK_OFFQ_CANCELING),
+=======
+	WORK_OFFQ_CANCELING	= (1 << WORK_OFFQ_FLAG_BASE),
+>>>>>>> v3.18
 =======
 	WORK_OFFQ_CANCELING	= (1 << WORK_OFFQ_FLAG_BASE),
 >>>>>>> v3.18
@@ -188,6 +197,7 @@ struct execute_work {
 	struct delayed_work n = __DELAYED_WORK_INITIALIZER(n, f, TIMER_DEFERRABLE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * initialize a work item's function pointer
  */
@@ -203,10 +213,15 @@ struct execute_work {
 extern void __init_work(struct work_struct *work, int onstack);
 extern void destroy_work_on_stack(struct work_struct *work);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_OBJECTS_WORK
 extern void __init_work(struct work_struct *work, int onstack);
 extern void destroy_work_on_stack(struct work_struct *work);
 extern void destroy_delayed_work_on_stack(struct delayed_work *work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned int work_static(struct work_struct *work)
 {
@@ -216,6 +231,10 @@ static inline unsigned int work_static(struct work_struct *work)
 static inline void __init_work(struct work_struct *work, int onstack) { }
 static inline void destroy_work_on_stack(struct work_struct *work) { }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void destroy_delayed_work_on_stack(struct delayed_work *work) { }
+>>>>>>> v3.18
 =======
 static inline void destroy_delayed_work_on_stack(struct delayed_work *work) { }
 >>>>>>> v3.18
@@ -239,7 +258,11 @@ static inline unsigned int work_static(struct work_struct *work) { return 0; }
 		lockdep_init_map(&(_work)->lockdep_map, #_work, &__key, 0); \
 		INIT_LIST_HEAD(&(_work)->entry);			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PREPARE_WORK((_work), (_func));				\
+=======
+		(_work)->func = (_func);				\
+>>>>>>> v3.18
 =======
 		(_work)->func = (_func);				\
 >>>>>>> v3.18
@@ -251,7 +274,11 @@ static inline unsigned int work_static(struct work_struct *work) { return 0; }
 		(_work)->data = (atomic_long_t) WORK_DATA_INIT();	\
 		INIT_LIST_HEAD(&(_work)->entry);			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PREPARE_WORK((_work), (_func));				\
+=======
+		(_work)->func = (_func);				\
+>>>>>>> v3.18
 =======
 		(_work)->func = (_func);				\
 >>>>>>> v3.18
@@ -313,6 +340,7 @@ static inline unsigned int work_static(struct work_struct *work) { return 0; }
 	work_pending(&(w)->work)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * work_clear_pending - for internal use only, mark a work item as not pending
  * @work: The work item in question
@@ -322,19 +350,25 @@ static inline unsigned int work_static(struct work_struct *work) { return 0; }
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Workqueue flags and constants.  For details, please refer to
  * Documentation/workqueue.txt.
  */
 enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WQ_NON_REENTRANT	= 1 << 0, /* guarantee non-reentrance */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	WQ_UNBOUND		= 1 << 1, /* not bound to any cpu */
 	WQ_FREEZABLE		= 1 << 2, /* freeze during suspend */
 	WQ_MEM_RECLAIM		= 1 << 3, /* may be used for memory reclaim */
 	WQ_HIGHPRI		= 1 << 4, /* high priority */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	WQ_CPU_INTENSIVE	= 1 << 5, /* cpu instensive workqueue */
 	WQ_SYSFS		= 1 << 6, /* visible in sysfs, see wq_sysfs_register() */
@@ -343,6 +377,8 @@ enum {
 	__WQ_ORDERED		= 1 << 17, /* internal: workqueue is ordered */
 	__WQ_ORDERED_EXPLICIT	= 1 << 18, /* internal: alloc_ordered_workqueue() */
 =======
+=======
+>>>>>>> v3.18
 	WQ_CPU_INTENSIVE	= 1 << 5, /* cpu intensive workqueue */
 	WQ_SYSFS		= 1 << 6, /* visible in sysfs, see wq_sysfs_register() */
 
@@ -375,6 +411,9 @@ enum {
 
 	__WQ_DRAINING		= 1 << 16, /* internal: workqueue is draining */
 	__WQ_ORDERED		= 1 << 17, /* internal: workqueue is ordered */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	WQ_MAX_ACTIVE		= 512,	  /* I like 512, better ideas? */
@@ -395,6 +434,12 @@ enum {
  * long.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * system_highpri_wq is similar to system_wq but for work items which
+ * require WQ_HIGHPRI.
+ *
+>>>>>>> v3.18
 =======
  * system_highpri_wq is similar to system_wq but for work items which
  * require WQ_HIGHPRI.
@@ -410,6 +455,7 @@ enum {
  *
  * system_freezable_wq is equivalent to system_wq except that it's
  * freezable.
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 extern struct workqueue_struct *system_wq;
@@ -431,6 +477,8 @@ static inline struct workqueue_struct * __deprecated __system_nrt_freezable_wq(v
 #define system_nrt_wq			__system_nrt_wq()
 #define system_nrt_freezable_wq		__system_nrt_freezable_wq()
 =======
+=======
+>>>>>>> v3.18
  *
  * *_power_efficient_wq are inclined towards saving power and converted
  * into WQ_UNBOUND variants if 'wq_power_efficient' is enabled; otherwise,
@@ -445,6 +493,9 @@ extern struct workqueue_struct *system_unbound_wq;
 extern struct workqueue_struct *system_freezable_wq;
 extern struct workqueue_struct *system_power_efficient_wq;
 extern struct workqueue_struct *system_freezable_power_efficient_wq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct workqueue_struct *
@@ -474,10 +525,14 @@ __alloc_workqueue_key(const char *fmt, unsigned int flags, int max_active,
 	const char *__lock_name;					\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__builtin_constant_p(fmt))					\
 		__lock_name = (fmt);					\
 	else								\
 		__lock_name = #fmt;					\
+=======
+	__lock_name = #fmt#args;					\
+>>>>>>> v3.18
 =======
 	__lock_name = #fmt#args;					\
 >>>>>>> v3.18
@@ -506,6 +561,7 @@ __alloc_workqueue_key(const char *fmt, unsigned int flags, int max_active,
  */
 #define alloc_ordered_workqueue(fmt, flags, args...)			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	alloc_workqueue(fmt, WQ_UNBOUND | __WQ_ORDERED |		\
 			__WQ_ORDERED_EXPLICIT | (flags), 1, ##args)
 
@@ -514,6 +570,8 @@ __alloc_workqueue_key(const char *fmt, unsigned int flags, int max_active,
 #define create_freezable_workqueue(name)				\
 	alloc_workqueue((name), WQ_FREEZABLE | WQ_UNBOUND | WQ_MEM_RECLAIM, 1)
 =======
+=======
+>>>>>>> v3.18
 	alloc_workqueue(fmt, WQ_UNBOUND | __WQ_ORDERED | (flags), 1, ##args)
 
 #define create_workqueue(name)						\
@@ -521,6 +579,9 @@ __alloc_workqueue_key(const char *fmt, unsigned int flags, int max_active,
 #define create_freezable_workqueue(name)				\
 	alloc_workqueue("%s", WQ_FREEZABLE | WQ_UNBOUND | WQ_MEM_RECLAIM, \
 			1, (name))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define create_singlethread_workqueue(name)				\
 	alloc_ordered_workqueue("%s", WQ_MEM_RECLAIM, name)
@@ -674,6 +735,7 @@ static inline bool keventd_up(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Like above, but uses del_timer() instead of del_timer_sync(). This means,
  * if it returns 0 the timer function may be running and the queueing is in
@@ -701,6 +763,8 @@ static inline bool __deprecated flush_delayed_work_sync(struct delayed_work *dwo
 	return flush_delayed_work(dwork);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef CONFIG_SMP

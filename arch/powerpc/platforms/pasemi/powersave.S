@@ -67,7 +67,11 @@ sleep_common:
 
 	/* Only do power savings when in astate 0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.check_astate
+=======
+	bl	check_astate
+>>>>>>> v3.18
 =======
 	bl	check_astate
 >>>>>>> v3.18

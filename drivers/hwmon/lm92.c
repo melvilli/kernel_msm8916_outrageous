@@ -1,7 +1,11 @@
 /*
  * lm92 - Hardware monitoring driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2005-2008  Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2005-2008  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2005-2008  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -39,10 +43,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -86,12 +93,18 @@ static inline int TEMP_FROM_REG(s16 reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline s16 TEMP_TO_REG(int val)
 {
 	if (val <= -60000)
 		return -60000 * 10 / 625 * 8;
 	if (val >= 160000)
 		return 160000 * 10 / 625 * 8;
+=======
+static inline s16 TEMP_TO_REG(long val)
+{
+	val = clamp_val(val, -60000, 160000);
+>>>>>>> v3.18
 =======
 static inline s16 TEMP_TO_REG(long val)
 {
@@ -107,6 +120,7 @@ static inline u8 ALARMS_FROM_REG(s16 reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Driver data (common to all clients) */
 static struct i2c_driver lm92_driver;
 
@@ -114,6 +128,8 @@ static struct i2c_driver lm92_driver;
 struct lm92_data {
 	struct device *hwmon_dev;
 =======
+=======
+>>>>>>> v3.18
 enum temp_index {
 	t_input,
 	t_crit,
@@ -134,6 +150,9 @@ static const u8 regs[t_num_regs] = {
 /* Client data (each client gets its own) */
 struct lm92_data {
 	struct i2c_client *client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mutex update_lock;
 	char valid; /* zero until following fields are valid */
@@ -141,10 +160,16 @@ struct lm92_data {
 
 	/* registers values */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s16 temp1_input, temp1_crit, temp1_min, temp1_max, temp1_hyst;
 };
 
 
+=======
+	s16 temp[t_num_regs];	/* index with enum temp_index */
+};
+
+>>>>>>> v3.18
 =======
 	s16 temp[t_num_regs];	/* index with enum temp_index */
 };
@@ -157,8 +182,14 @@ struct lm92_data {
 static struct lm92_data *lm92_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm92_data *data = i2c_get_clientdata(client);
+=======
+	struct lm92_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+	int i;
+>>>>>>> v3.18
 =======
 	struct lm92_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -170,6 +201,7 @@ static struct lm92_data *lm92_update_device(struct device *dev)
 	if (time_after(jiffies, data->last_updated + HZ)
 	 || !data->valid) {
 		dev_dbg(&client->dev, "Updating lm92 data\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		data->temp1_input = i2c_smbus_read_word_swapped(client,
 				    LM92_REG_TEMP);
@@ -183,10 +215,15 @@ static struct lm92_data *lm92_update_device(struct device *dev)
 				    LM92_REG_TEMP_HIGH);
 
 =======
+=======
+>>>>>>> v3.18
 		for (i = 0; i < t_num_regs; i++) {
 			data->temp[i] =
 				i2c_smbus_read_word_swapped(client, regs[i]);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		data->last_updated = jiffies;
 		data->valid = 1;
@@ -197,6 +234,7 @@ static struct lm92_data *lm92_update_device(struct device *dev)
 	return data;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define show_temp(value) \
 static ssize_t show_##value(struct device *dev, struct device_attribute *attr, \
@@ -261,6 +299,8 @@ static ssize_t set_temp1_crit_hyst(struct device *dev,
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm92_data *data = i2c_get_clientdata(client);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t show_temp(struct device *dev, struct device_attribute *devattr,
 			 char *buf)
 {
@@ -315,6 +355,9 @@ static ssize_t set_temp_hyst(struct device *dev,
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 	struct lm92_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	long val;
 	int err;
@@ -324,17 +367,23 @@ static ssize_t set_temp_hyst(struct device *dev,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&data->update_lock);
 	data->temp1_hyst = TEMP_FROM_REG(data->temp1_crit) - val;
 	i2c_smbus_write_word_swapped(client, LM92_REG_TEMP_HYST,
 				     TEMP_TO_REG(data->temp1_hyst));
 =======
+=======
+>>>>>>> v3.18
 	val = clamp_val(val, -120000, 220000);
 	mutex_lock(&data->update_lock);
 	 data->temp[t_hyst] =
 		TEMP_TO_REG(TEMP_FROM_REG(data->temp[attr->index]) - val);
 	i2c_smbus_write_word_swapped(client, LM92_REG_TEMP_HYST,
 				     data->temp[t_hyst]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&data->update_lock);
 	return count;
@@ -345,7 +394,11 @@ static ssize_t show_alarms(struct device *dev, struct device_attribute *attr,
 {
 	struct lm92_data *data = lm92_update_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sprintf(buf, "%d\n", ALARMS_FROM_REG(data->temp1_input));
+=======
+	return sprintf(buf, "%d\n", ALARMS_FROM_REG(data->temp[t_input]));
+>>>>>>> v3.18
 =======
 	return sprintf(buf, "%d\n", ALARMS_FROM_REG(data->temp[t_input]));
 >>>>>>> v3.18
@@ -356,6 +409,7 @@ static ssize_t show_alarm(struct device *dev, struct device_attribute *attr,
 {
 	int bitnr = to_sensor_dev_attr(attr)->index;
 	struct lm92_data *data = lm92_update_device(dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return sprintf(buf, "%d\n", (data->temp1_input >> bitnr) & 1);
 }
@@ -372,6 +426,8 @@ static DEVICE_ATTR(temp1_max, S_IWUSR | S_IRUGO, show_temp1_max,
 	set_temp1_max);
 static DEVICE_ATTR(temp1_max_hyst, S_IRUGO, show_temp1_max_hyst, NULL);
 =======
+=======
+>>>>>>> v3.18
 	return sprintf(buf, "%d\n", (data->temp[t_input] >> bitnr) & 1);
 }
 
@@ -386,6 +442,9 @@ static DEVICE_ATTR(temp1_min_hyst, S_IRUGO, show_temp_min_hyst, NULL);
 static SENSOR_DEVICE_ATTR(temp1_max, S_IWUSR | S_IRUGO, show_temp, set_temp,
 			  t_max);
 static SENSOR_DEVICE_ATTR(temp1_max_hyst, S_IRUGO, show_temp_hyst, NULL, t_max);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEVICE_ATTR(alarms, S_IRUGO, show_alarms, NULL);
 static SENSOR_DEVICE_ATTR(temp1_crit_alarm, S_IRUGO, show_alarm, NULL, 2);
@@ -393,7 +452,10 @@ static SENSOR_DEVICE_ATTR(temp1_min_alarm, S_IRUGO, show_alarm, NULL, 0);
 static SENSOR_DEVICE_ATTR(temp1_max_alarm, S_IRUGO, show_alarm, NULL, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -468,6 +530,7 @@ static int max6635_check(struct i2c_client *client)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *lm92_attributes[] = {
 	&dev_attr_temp1_input.attr,
 	&dev_attr_temp1_crit.attr,
@@ -477,6 +540,8 @@ static struct attribute *lm92_attributes[] = {
 	&dev_attr_temp1_max.attr,
 	&dev_attr_temp1_max_hyst.attr,
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *lm92_attrs[] = {
 	&sensor_dev_attr_temp1_input.dev_attr.attr,
 	&sensor_dev_attr_temp1_crit.dev_attr.attr,
@@ -485,6 +550,9 @@ static struct attribute *lm92_attrs[] = {
 	&dev_attr_temp1_min_hyst.attr,
 	&sensor_dev_attr_temp1_max.dev_attr.attr,
 	&sensor_dev_attr_temp1_max_hyst.dev_attr.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&dev_attr_alarms.attr,
 	&sensor_dev_attr_temp1_crit_alarm.dev_attr.attr,
@@ -493,10 +561,14 @@ static struct attribute *lm92_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct attribute_group lm92_group = {
 	.attrs = lm92_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(lm92);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(lm92);
 >>>>>>> v3.18
@@ -532,8 +604,13 @@ static int lm92_probe(struct i2c_client *new_client,
 		      const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lm92_data *data;
 	int err;
+=======
+	struct device *hwmon_dev;
+	struct lm92_data *data;
+>>>>>>> v3.18
 =======
 	struct device *hwmon_dev;
 	struct lm92_data *data;
@@ -545,8 +622,12 @@ static int lm92_probe(struct i2c_client *new_client,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_set_clientdata(new_client, data);
 	data->valid = 0;
+=======
+	data->client = new_client;
+>>>>>>> v3.18
 =======
 	data->client = new_client;
 >>>>>>> v3.18
@@ -555,6 +636,7 @@ static int lm92_probe(struct i2c_client *new_client,
 	/* Initialize the chipset */
 	lm92_init_client(new_client);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register sysfs hooks */
 	err = sysfs_create_group(&new_client->dev.kobj, &lm92_group);
@@ -583,10 +665,15 @@ static int lm92_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	hwmon_dev = devm_hwmon_device_register_with_groups(&new_client->dev,
 							   new_client->name,
 							   data, lm92_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -609,7 +696,10 @@ static struct i2c_driver lm92_driver = {
 	},
 	.probe		= lm92_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= lm92_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= lm92_id,
@@ -620,7 +710,11 @@ static struct i2c_driver lm92_driver = {
 module_i2c_driver(lm92_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Jean Delvare <khali@linux-fr.org>");
+=======
+MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
 >>>>>>> v3.18

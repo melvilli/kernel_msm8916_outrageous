@@ -5,7 +5,11 @@
  * Radio tuning for Maxim max2820 on RTL8180
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2007 Andrea Merello <andreamrl@tiscali.it>
+=======
+ * Copyright 2007 Andrea Merello <andrea.merello@gmail.com>
+>>>>>>> v3.18
 =======
  * Copyright 2007 Andrea Merello <andrea.merello@gmail.com>
 >>>>>>> v3.18

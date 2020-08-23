@@ -985,7 +985,11 @@ static void hp_sdc_exit(void)
 	write_unlock_irq(&hp_sdc.lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&hp_sdc.kicker);
+=======
+	del_timer_sync(&hp_sdc.kicker);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&hp_sdc.kicker);
 >>>>>>> v3.18

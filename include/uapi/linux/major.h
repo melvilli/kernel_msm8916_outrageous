@@ -55,6 +55,10 @@
 #define AZTECH_CDROM_MAJOR	29
 #define FB_MAJOR		29   /* /dev/fb* framebuffers */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MTD_BLOCK_MAJOR		31
+>>>>>>> v3.18
 =======
 #define MTD_BLOCK_MAJOR		31
 >>>>>>> v3.18
@@ -110,6 +114,10 @@
 #define IDE7_MAJOR		89
 #define IDE8_MAJOR		90
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MTD_CHAR_MAJOR		90
+>>>>>>> v3.18
 =======
 #define MTD_CHAR_MAJOR		90
 >>>>>>> v3.18

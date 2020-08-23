@@ -13,6 +13,10 @@
 #include <linux/types.h>
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ppp_defs.h>
+>>>>>>> v3.18
 =======
 #include <linux/ppp_defs.h>
 >>>>>>> v3.18

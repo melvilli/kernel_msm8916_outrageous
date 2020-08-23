@@ -24,7 +24,11 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TPACPI_VERSION "0.24"
+=======
+#define TPACPI_VERSION "0.25"
+>>>>>>> v3.18
 =======
 #define TPACPI_VERSION "0.25"
 >>>>>>> v3.18
@@ -66,7 +70,10 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/nvram.h>
@@ -81,6 +88,7 @@
 #include <linux/input.h>
 #include <linux/leds.h>
 #include <linux/rfkill.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <asm/uaccess.h>
 
@@ -97,6 +105,8 @@
 #include <linux/pci_ids.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/dmi.h>
 #include <linux/jiffies.h>
 #include <linux/workqueue.h>
@@ -107,6 +117,9 @@
 #include <sound/control.h>
 #include <sound/initval.h>
 #include <asm/uaccess.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* ThinkPad CMOS commands */
@@ -390,7 +403,11 @@ struct tpacpi_led_classdev {
 	struct work_struct work;
 	enum led_status_t new_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int led;
+=======
+	int led;
+>>>>>>> v3.18
 =======
 	int led;
 >>>>>>> v3.18
@@ -725,7 +742,10 @@ static acpi_status __init tpacpi_acpi_handle_locate_callback(acpi_handle handle,
 			u32 level, void *context, void **return_value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_device *dev;
 	if (!strcmp(context, "video")) {
 		if (acpi_bus_get_device(handle, &dev))
@@ -734,6 +754,9 @@ static acpi_status __init tpacpi_acpi_handle_locate_callback(acpi_handle handle,
 			return AE_OK;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*(acpi_handle *)return_value = handle;
 
@@ -748,15 +771,21 @@ static void __init tpacpi_acpi_handle_locate(const char *name,
 	acpi_handle device_found;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!name || !hid || !handle);
 	vdbg_printk(TPACPI_DBG_INIT,
 			"trying to locate ACPI handle for %s, using HID %s\n",
 			name, hid);
 =======
+=======
+>>>>>>> v3.18
 	BUG_ON(!name || !handle);
 	vdbg_printk(TPACPI_DBG_INIT,
 			"trying to locate ACPI handle for %s, using HID %s\n",
 			name, hid ? hid : "NULL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(&device_found, 0, sizeof(device_found));
@@ -2065,8 +2094,11 @@ static u32 hotkey_user_mask;		/* events visible to userspace */
 static u32 hotkey_acpi_mask;		/* events enabled in firmware */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int hotkey_report_mode;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static u16 *hotkey_keycode_map;
@@ -2328,10 +2360,13 @@ static void tpacpi_hotkey_send_key(unsigned int scancode)
 {
 	tpacpi_input_send_key_masked(scancode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hotkey_report_mode < 2) {
 		acpi_bus_generate_proc_event(ibm_hotkey_acpidriver.device,
 				0x80, TP_HKEY_EV_HOTKEY_BASE + scancode);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -2372,6 +2407,7 @@ static void hotkey_read_nvram(struct tp_nvram_state *n, const u32 m)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void hotkey_compare_and_issue_event(struct tp_nvram_state *oldn,
 					   struct tp_nvram_state *newn,
@@ -2421,6 +2457,8 @@ static void hotkey_compare_and_issue_event(struct tp_nvram_state *oldn,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 #define TPACPI_COMPARE_KEY(__scancode, __member) \
 do { \
 	if ((event_mask & (1 << __scancode)) && \
@@ -2470,6 +2508,9 @@ static void hotkey_compare_and_issue_event(struct tp_nvram_state *oldn,
 					   struct tp_nvram_state *newn,
 					   const u32 event_mask)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TPACPI_COMPARE_KEY(TP_ACPI_HOTKEYSCAN_THINKPAD, thinkpad_toggle);
@@ -2506,7 +2547,12 @@ static void hotkey_compare_and_issue_event(struct tp_nvram_state *oldn,
 			/* recently muted, or repeated mute keypress, or
 			 * multiple presses ending in mute */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			issue_volchange(oldn->volume_level, newn->volume_level);
+=======
+			issue_volchange(oldn->volume_level, newn->volume_level,
+				event_mask);
+>>>>>>> v3.18
 =======
 			issue_volchange(oldn->volume_level, newn->volume_level,
 				event_mask);
@@ -2521,7 +2567,12 @@ static void hotkey_compare_and_issue_event(struct tp_nvram_state *oldn,
 		}
 		if (oldn->volume_level != newn->volume_level) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			issue_volchange(oldn->volume_level, newn->volume_level);
+=======
+			issue_volchange(oldn->volume_level, newn->volume_level,
+				event_mask);
+>>>>>>> v3.18
 =======
 			issue_volchange(oldn->volume_level, newn->volume_level,
 				event_mask);
@@ -2539,7 +2590,11 @@ static void hotkey_compare_and_issue_event(struct tp_nvram_state *oldn,
 	if (oldn->brightness_level != newn->brightness_level) {
 		issue_brightnesschange(oldn->brightness_level,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       newn->brightness_level);
+=======
+				       newn->brightness_level, event_mask);
+>>>>>>> v3.18
 =======
 				       newn->brightness_level, event_mask);
 >>>>>>> v3.18
@@ -2997,6 +3052,7 @@ static void hotkey_tablet_mode_notify_change(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* sysfs hotkey report_mode -------------------------------------------- */
 static ssize_t hotkey_report_mode_show(struct device *dev,
 			   struct device_attribute *attr,
@@ -3009,6 +3065,8 @@ static ssize_t hotkey_report_mode_show(struct device *dev,
 static struct device_attribute dev_attr_hotkey_report_mode =
 	__ATTR(hotkey_report_mode, S_IRUGO, hotkey_report_mode_show, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* sysfs wakeup reason (pollable) -------------------------------------- */
@@ -3053,7 +3111,10 @@ static struct attribute *hotkey_attributes[] __initdata = {
 	&dev_attr_hotkey_bios_enabled.attr,
 	&dev_attr_hotkey_bios_mask.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&dev_attr_hotkey_report_mode.attr,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	&dev_attr_hotkey_wakeup_reason.attr,
@@ -3304,13 +3365,19 @@ static int __init hotkey_init(struct ibm_init_struct *iibm)
 
 		/* (assignments unknown, please report if found) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		KEY_UNKNOWN, KEY_UNKNOWN, KEY_UNKNOWN, KEY_UNKNOWN,
 		KEY_UNKNOWN,
 =======
+=======
+>>>>>>> v3.18
 		KEY_UNKNOWN,
 
 		/* Extra keys in use since the X240 / T440 / T540 */
 		KEY_CONFIG, KEY_SEARCH, KEY_SCALE, KEY_FILE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		},
 	};
@@ -3567,11 +3634,14 @@ static int __init hotkey_init(struct ibm_init_struct *iibm)
 		hotkey_user_mask, hotkey_acpi_mask, hotkey_source_mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg_printk(TPACPI_DBG_INIT | TPACPI_DBG_HKEY,
 			"legacy ibm/hotkey event reporting over procfs %s\n",
 			(hotkey_report_mode < 2) ?
 				"enabled" : "disabled");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tpacpi_inputdev->open = &hotkey_inputdev_open;
@@ -3586,8 +3656,11 @@ err_exit:
 	hotkey_dev_attributes = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (res < 0)? res : 1;
 =======
+=======
+>>>>>>> v3.18
 	return (res < 0) ? res : 1;
 }
 
@@ -3689,6 +3762,9 @@ static bool adaptive_keyboard_hotkey_notify_hotkey(unsigned int scancode)
 	default:
 		return false;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3712,6 +3788,11 @@ static bool hotkey_notify_hotkey(const u32 hkey,
 		}
 		return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	} else {
+		return adaptive_keyboard_hotkey_notify_hotkey(scancode);
+>>>>>>> v3.18
 =======
 	} else {
 		return adaptive_keyboard_hotkey_notify_hotkey(scancode);
@@ -3977,6 +4058,7 @@ static void hotkey_notify(struct ibm_struct *ibm, u32 event)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Legacy events */
 		if (!ignore_acpi_ev &&
 		    (send_acpi_ev || hotkey_report_mode < 2)) {
@@ -3984,6 +4066,8 @@ static void hotkey_notify(struct ibm_struct *ibm, u32 event)
 						     event, hkey);
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* netlink events */
@@ -3999,10 +4083,13 @@ static void hotkey_notify(struct ibm_struct *ibm, u32 event)
 static void hotkey_suspend(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Do these on suspend, we get the events on early resume! */
 	hotkey_wakeup_reason = TP_ACPI_WAKEUP_NONE;
 	hotkey_autosleep_ack = 0;
 =======
+=======
+>>>>>>> v3.18
 	int hkeyv;
 
 	/* Do these on suspend, we get the events on early resume! */
@@ -4019,12 +4106,20 @@ static void hotkey_suspend(void)
 			}
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void hotkey_resume(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int hkeyv;
+
+>>>>>>> v3.18
 =======
 	int hkeyv;
 
@@ -4042,7 +4137,10 @@ static void hotkey_resume(void)
 	hotkey_wakeup_hotunplug_complete_notify_change();
 	hotkey_poll_setup_safe(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* restore previous mode of adapive keyboard of X1 Carbon */
 	if (acpi_evalf(hkey_handle, &hkeyv, "MHKV", "qd")) {
@@ -4055,6 +4153,9 @@ static void hotkey_resume(void)
 			}
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4751,7 +4852,11 @@ static int __init video_init(struct ibm_init_struct *iibm)
 		video_supported);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (video_supported != TPACPI_VIDEO_NONE)? 0 : 1;
+=======
+	return (video_supported != TPACPI_VIDEO_NONE) ? 0 : 1;
+>>>>>>> v3.18
 =======
 	return (video_supported != TPACPI_VIDEO_NONE) ? 0 : 1;
 >>>>>>> v3.18
@@ -4848,7 +4953,11 @@ static int video_outputsw_set(int status)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (res)? 0 : -EIO;
+=======
+	return (res) ? 0 : -EIO;
+>>>>>>> v3.18
 =======
 	return (res) ? 0 : -EIO;
 >>>>>>> v3.18
@@ -4878,7 +4987,11 @@ static int video_autosw_get(void)
 static int video_autosw_set(int enable)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!acpi_evalf(vid_handle, NULL, "_DOS", "vd", (enable)? 1 : 0))
+=======
+	if (!acpi_evalf(vid_handle, NULL, "_DOS", "vd", (enable) ? 1 : 0))
+>>>>>>> v3.18
 =======
 	if (!acpi_evalf(vid_handle, NULL, "_DOS", "vd", (enable) ? 1 : 0))
 >>>>>>> v3.18
@@ -4917,7 +5030,11 @@ static int video_outputsw_cycle(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (res)? 0 : -EIO;
+=======
+	return (res) ? 0 : -EIO;
+>>>>>>> v3.18
 =======
 	return (res) ? 0 : -EIO;
 >>>>>>> v3.18
@@ -4928,6 +5045,7 @@ static int video_expand_toggle(void)
 	switch (video_supported) {
 	case TPACPI_VIDEO_570:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return acpi_evalf(ec_handle, NULL, "_Q17", "v")?
 			0 : -EIO;
 	case TPACPI_VIDEO_770:
@@ -4936,6 +5054,8 @@ static int video_expand_toggle(void)
 	case TPACPI_VIDEO_NEW:
 		return acpi_evalf(NULL, NULL, "\\VEXP", "v")?
 =======
+=======
+>>>>>>> v3.18
 		return acpi_evalf(ec_handle, NULL, "_Q17", "v") ?
 			0 : -EIO;
 	case TPACPI_VIDEO_770:
@@ -4943,6 +5063,9 @@ static int video_expand_toggle(void)
 			0 : -EIO;
 	case TPACPI_VIDEO_NEW:
 		return acpi_evalf(NULL, NULL, "\\VEXP", "v") ?
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			0 : -EIO;
 	default:
@@ -5088,7 +5211,11 @@ static int light_set_status(int status)
 		if (cmos_handle) {
 			rc = acpi_evalf(cmos_handle, NULL, NULL, "vd",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					(status)?
+=======
+					(status) ?
+>>>>>>> v3.18
 =======
 					(status) ?
 >>>>>>> v3.18
@@ -5097,9 +5224,15 @@ static int light_set_status(int status)
 		} else {
 			rc = acpi_evalf(lght_handle, NULL, NULL, "vd",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					(status)? 1 : 0);
 		}
 		return (rc)? 0 : -EIO;
+=======
+					(status) ? 1 : 0);
+		}
+		return (rc) ? 0 : -EIO;
+>>>>>>> v3.18
 =======
 					(status) ? 1 : 0);
 		}
@@ -5134,7 +5267,11 @@ static void light_sysfs_set(struct led_classdev *led_cdev,
 static enum led_brightness light_sysfs_get(struct led_classdev *led_cdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (light_get_status() == 1)? LED_FULL : LED_OFF;
+=======
+	return (light_get_status() == 1) ? LED_FULL : LED_OFF;
+>>>>>>> v3.18
 =======
 	return (light_get_status() == 1) ? LED_FULL : LED_OFF;
 >>>>>>> v3.18
@@ -5260,7 +5397,11 @@ static ssize_t cmos_command_store(struct device *dev,
 
 	res = issue_thinkpad_cmos_command(cmos_cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (res)? res : count;
+=======
+	return (res) ? res : count;
+>>>>>>> v3.18
 =======
 	return (res) ? res : count;
 >>>>>>> v3.18
@@ -5288,7 +5429,11 @@ static int __init cmos_init(struct ibm_init_struct *iibm)
 		return res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (cmos_handle)? 0 : 1;
+=======
+	return (cmos_handle) ? 0 : 1;
+>>>>>>> v3.18
 =======
 	return (cmos_handle) ? 0 : 1;
 >>>>>>> v3.18
@@ -5402,9 +5547,15 @@ static int led_get_status(const unsigned int led)
 				&status, "GLED", "dd", 1 << led))
 			return -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		led_s = (status == 0)?
 				TPACPI_LED_OFF :
 				((status == 1)?
+=======
+		led_s = (status == 0) ?
+				TPACPI_LED_OFF :
+				((status == 1) ?
+>>>>>>> v3.18
 =======
 		led_s = (status == 0) ?
 				TPACPI_LED_OFF :
@@ -5663,7 +5814,10 @@ static int __init led_init(struct ibm_init_struct *iibm)
 	led_supported = led_init_detect_mode();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (led_supported != TPACPI_LED_NONE) {
 		useful_leds = tpacpi_check_quirks(led_useful_qtable,
 				ARRAY_SIZE(led_useful_qtable));
@@ -5674,6 +5828,9 @@ static int __init led_init(struct ibm_init_struct *iibm)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vdbg_printk(TPACPI_DBG_INIT, "LED commands are %s, mode %d\n",
 		str_supported(led_supported), led_supported);
@@ -5689,10 +5846,16 @@ static int __init led_init(struct ibm_init_struct *iibm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	useful_leds = tpacpi_check_quirks(led_useful_qtable,
 					  ARRAY_SIZE(led_useful_qtable));
 
 	for (i = 0; i < TPACPI_LED_NUMLEDS; i++) {
+=======
+	for (i = 0; i < TPACPI_LED_NUMLEDS; i++) {
+		tpacpi_leds[i].led = -1;
+
+>>>>>>> v3.18
 =======
 	for (i = 0; i < TPACPI_LED_NUMLEDS; i++) {
 		tpacpi_leds[i].led = -1;
@@ -5756,10 +5919,13 @@ static int led_write(char *buf)
 
 	while ((cmd = next_cmd(&buf))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sscanf(cmd, "%d", &led) != 1 || led < 0 || led > 15)
 			return -EINVAL;
 
 =======
+=======
+>>>>>>> v3.18
 		if (sscanf(cmd, "%d", &led) != 1)
 			return -EINVAL;
 
@@ -5767,6 +5933,9 @@ static int led_write(char *buf)
 				tpacpi_leds[led].led < 0)
 			return -ENODEV;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (strstr(cmd, "off")) {
 			s = TPACPI_LED_OFF;
@@ -5823,7 +5992,11 @@ static int __init beep_init(struct ibm_init_struct *iibm)
 	tp_features.beep_needs_two_args = !!(quirks & TPACPI_BEEP_Q1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (beep_handle)? 0 : 1;
+=======
+	return (beep_handle) ? 0 : 1;
+>>>>>>> v3.18
 =======
 	return (beep_handle) ? 0 : 1;
 >>>>>>> v3.18
@@ -6393,7 +6566,11 @@ static int brightness_set(unsigned int value)
 	int res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (value > bright_maxlvl || value < 0)
+=======
+	if (value > bright_maxlvl)
+>>>>>>> v3.18
 =======
 	if (value > bright_maxlvl)
 >>>>>>> v3.18
@@ -6481,6 +6658,7 @@ static int __init tpacpi_query_bcl_levels(acpi_handle handle)
 	struct acpi_buffer buffer = { ACPI_ALLOCATE_BUFFER, NULL };
 	union acpi_object *obj;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
 
 	if (ACPI_SUCCESS(acpi_evaluate_object(handle, "_BCL", NULL, &buffer))) {
@@ -6489,6 +6667,8 @@ static int __init tpacpi_query_bcl_levels(acpi_handle handle)
 			pr_err("Unknown _BCL data, please report this to %s\n",
 			       TPACPI_MAIL);
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_device *device, *child;
 	int rc;
 
@@ -6506,14 +6686,21 @@ static int __init tpacpi_query_bcl_levels(acpi_handle handle)
 		if (!obj || (obj->type != ACPI_TYPE_PACKAGE)) {
 			pr_err("Unknown _BCL data, please report this to %s\n",
 				TPACPI_MAIL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			rc = 0;
 		} else {
 			rc = obj->package.count;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		return 0;
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18
@@ -6533,7 +6720,11 @@ static unsigned int __init tpacpi_check_std_acpi_brightness_support(void)
 	int bcl_levels = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tpacpi_acpi_handle_locate("video", ACPI_VIDEO_HID, &video_device);
+=======
+	tpacpi_acpi_handle_locate("video", NULL, &video_device);
+>>>>>>> v3.18
 =======
 	tpacpi_acpi_handle_locate("video", NULL, &video_device);
 >>>>>>> v3.18
@@ -6799,7 +6990,11 @@ static int brightness_write(char *buf)
 		backlight_force_update(ibm_backlight_device,
 					BACKLIGHT_UPDATE_SYSFS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (rc == -EINTR)? -ERESTARTSYS : rc;
+=======
+	return (rc == -EINTR) ? -ERESTARTSYS : rc;
+>>>>>>> v3.18
 =======
 	return (rc == -EINTR) ? -ERESTARTSYS : rc;
 >>>>>>> v3.18
@@ -6843,14 +7038,20 @@ static struct ibm_struct brightness_driver_data = {
 #define TPACPI_ALSA_MIXERNAME TPACPI_ALSA_SHRTNAME
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int alsa_index = ~((1 << (SNDRV_CARDS - 3)) - 1); /* last three slots */
 =======
+=======
+>>>>>>> v3.18
 #if SNDRV_CARDS <= 32
 #define DEFAULT_ALSA_IDX		~((1 << (SNDRV_CARDS - 3)) - 1)
 #else
 #define DEFAULT_ALSA_IDX		~((1 << (32 - 3)) - 1)
 #endif
 static int alsa_index = DEFAULT_ALSA_IDX; /* last three slots */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static char *alsa_id = "ThinkPadEC";
 static bool alsa_enable = SNDRV_DEFAULT_ENABLE1;
@@ -7140,7 +7341,11 @@ static int volume_alsa_mute_put(struct snd_kcontrol *kcontrol,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct snd_kcontrol_new volume_alsa_control_vol = {
+=======
+static struct snd_kcontrol_new volume_alsa_control_vol __initdata = {
+>>>>>>> v3.18
 =======
 static struct snd_kcontrol_new volume_alsa_control_vol __initdata = {
 >>>>>>> v3.18
@@ -7153,7 +7358,11 @@ static struct snd_kcontrol_new volume_alsa_control_vol __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct snd_kcontrol_new volume_alsa_control_mute = {
+=======
+static struct snd_kcontrol_new volume_alsa_control_mute __initdata = {
+>>>>>>> v3.18
 =======
 static struct snd_kcontrol_new volume_alsa_control_mute __initdata = {
 >>>>>>> v3.18
@@ -7199,8 +7408,14 @@ static int __init volume_create_alsa_mixer(void)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = snd_card_create(alsa_index, alsa_id, THIS_MODULE,
 			    sizeof(struct tpacpi_alsa_data), &card);
+=======
+	rc = snd_card_new(&tpacpi_pdev->dev,
+			  alsa_index, alsa_id, THIS_MODULE,
+			  sizeof(struct tpacpi_alsa_data), &card);
+>>>>>>> v3.18
 =======
 	rc = snd_card_new(&tpacpi_pdev->dev,
 			  alsa_index, alsa_id, THIS_MODULE,
@@ -7257,7 +7472,10 @@ static int __init volume_create_alsa_mixer(void)
 	data->ctl_mute_id = &ctl_mute->id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &tpacpi_pdev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rc = snd_card_register(card);
@@ -8281,7 +8499,11 @@ static ssize_t fan_pwm1_store(struct device *dev,
 
 	mutex_unlock(&fan_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (rc)? rc : count;
+=======
+	return (rc) ? rc : count;
+>>>>>>> v3.18
 =======
 	return (rc) ? rc : count;
 >>>>>>> v3.18
@@ -8803,7 +9025,10 @@ static struct ibm_struct fan_driver_data = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*************************************************************************
  * Mute LED subdriver
  */
@@ -8901,6 +9126,9 @@ static struct ibm_struct mute_led_driver_data = {
 	.resume = mute_led_resume,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /****************************************************************************
  ****************************************************************************
@@ -8966,7 +9194,11 @@ static const char * __init str_supported(int is_supported)
 	static char text_unsupported[] __initdata = "not supported";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (is_supported)? &text_unsupported[4] : &text_unsupported[0];
+=======
+	return (is_supported) ? &text_unsupported[4] : &text_unsupported[0];
+>>>>>>> v3.18
 =======
 	return (is_supported) ? &text_unsupported[4] : &text_unsupported[0];
 >>>>>>> v3.18
@@ -9091,7 +9323,11 @@ err_out:
 
 	ibm_exit(ibm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (ret < 0)? ret : 0;
+=======
+	return (ret < 0) ? ret : 0;
+>>>>>>> v3.18
 =======
 	return (ret < 0) ? ret : 0;
 >>>>>>> v3.18
@@ -9106,7 +9342,11 @@ static bool __pure __init tpacpi_is_fw_digit(const char c)
 
 /* Most models: xxyTkkWW (#.##c); Ancient 570/600 and -SL lacks (#.##c) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool __pure __init tpacpi_is_valid_fw_id(const char* const s,
+=======
+static bool __pure __init tpacpi_is_valid_fw_id(const char * const s,
+>>>>>>> v3.18
 =======
 static bool __pure __init tpacpi_is_valid_fw_id(const char * const s,
 >>>>>>> v3.18
@@ -9194,7 +9434,11 @@ static int __must_check __init get_thinkpad_model_data(
 
 	s = dmi_get_system_info(DMI_PRODUCT_VERSION);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (s && !(strnicmp(s, "ThinkPad", 8) && strnicmp(s, "Lenovo", 6))) {
+=======
+	if (s && !(strncasecmp(s, "ThinkPad", 8) && strncasecmp(s, "Lenovo", 6))) {
+>>>>>>> v3.18
 =======
 	if (s && !(strncasecmp(s, "ThinkPad", 8) && strncasecmp(s, "Lenovo", 6))) {
 >>>>>>> v3.18
@@ -9204,7 +9448,11 @@ static int __must_check __init get_thinkpad_model_data(
 	} else {
 		s = dmi_get_system_info(DMI_BIOS_VENDOR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (s && !(strnicmp(s, "Lenovo", 6))) {
+=======
+		if (s && !(strncasecmp(s, "Lenovo", 6))) {
+>>>>>>> v3.18
 =======
 		if (s && !(strncasecmp(s, "Lenovo", 6))) {
 >>>>>>> v3.18
@@ -9341,11 +9589,17 @@ static struct ibm_init_struct ibms_init[] __initdata = {
 		.data = &fan_driver_data,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.init = mute_led_init,
 		.data = &mute_led_driver_data,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -9402,11 +9656,14 @@ MODULE_PARM_DESC(brightness_enable,
 		 "Enables backlight control when 1, disables when 0");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param(hotkey_report_mode, uint, 0444);
 MODULE_PARM_DESC(hotkey_report_mode,
 		 "used for backwards compatibility with userspace, "
 		 "see documentation");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_THINKPAD_ACPI_ALSA_SUPPORT
@@ -9540,10 +9797,13 @@ static int __init thinkpad_acpi_module_init(void)
 	tpacpi_lifecycle = TPACPI_LIFE_INIT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Parameter checking */
 	if (hotkey_report_mode > 2)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Driver-level probe */
@@ -9651,7 +9911,10 @@ static int __init thinkpad_acpi_module_init(void)
 	tpacpi_inputdev = input_allocate_device();
 	if (!tpacpi_inputdev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("unable to allocate input device\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		thinkpad_acpi_module_exit();

@@ -20,6 +20,10 @@
 #include <linux/syscore_ops.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -53,8 +57,13 @@
 #include <mach/regs-gpio.h>
 #include <mach/regs-lcd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <plat/clock.h>
+=======
+#include <mach/gpio-samsung.h>
+
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 
@@ -64,7 +73,10 @@
 #include <plat/devs.h>
 #include <plat/gpio-cfg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/samsung-time.h>
@@ -535,6 +547,10 @@ static struct s3c_hwmon_pdata bast_hwmon_info = {
 
 static struct platform_device *bast_devices[] __initdata = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&s3c2410_device_dclk,
+>>>>>>> v3.18
 =======
 	&s3c2410_device_dclk,
 >>>>>>> v3.18
@@ -553,6 +569,7 @@ static struct platform_device *bast_devices[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct clk *bast_clocks[] __initdata = {
 	&s3c24xx_dclk0,
 	&s3c24xx_dclk1,
@@ -561,6 +578,8 @@ static struct clk *bast_clocks[] __initdata = {
 	&s3c24xx_uclk,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct s3c_cpufreq_board __initdata bast_cpufreq = {
@@ -576,6 +595,7 @@ static struct s3c24xx_audio_simtec_pdata __initdata bast_audio = {
 
 static void __init bast_map_io(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* initialise the clocks */
 
@@ -601,18 +621,29 @@ static void __init bast_map_io(void)
 
 	s3c24xx_init_io(bast_iodesc, ARRAY_SIZE(bast_iodesc));
 >>>>>>> v3.18
+=======
+	s3c_hwmon_set_platdata(&bast_hwmon_info);
+
+	s3c24xx_init_io(bast_iodesc, ARRAY_SIZE(bast_iodesc));
+>>>>>>> v3.18
 	s3c24xx_init_uarts(bast_uartcfgs, ARRAY_SIZE(bast_uartcfgs));
 	samsung_set_timer_source(SAMSUNG_PWM3, SAMSUNG_PWM4);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init bast_init_time(void)
 {
 	s3c2410_init_clocks(12000000);
 	samsung_timer_init();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init bast_init(void)
 {
@@ -642,8 +673,12 @@ MACHINE_START(BAST, "Simtec-BAST")
 	.init_irq	= s3c2410_init_irq,
 	.init_machine	= bast_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= samsung_timer_init,
 	.restart	= s3c2410_restart,
+=======
+	.init_time	= bast_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= bast_init_time,
 >>>>>>> v3.18

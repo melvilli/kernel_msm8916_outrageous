@@ -230,6 +230,10 @@ void flush_icache_range(unsigned long start, unsigned long end)
 	cacheop_on_each_cpu(local_flush_icache_range, (void *)&data, 1);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(flush_icache_range);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(flush_icache_range);
 >>>>>>> v3.18
@@ -290,8 +294,13 @@ void __init cpu_cache_init(void)
 	unsigned int cache_disabled = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CCR
 	cache_disabled = !(__raw_readl(CCR) & CCR_CACHE_ENABLE);
+=======
+#ifdef SH_CCR
+	cache_disabled = !(__raw_readl(SH_CCR) & CCR_CACHE_ENABLE);
+>>>>>>> v3.18
 =======
 #ifdef SH_CCR
 	cache_disabled = !(__raw_readl(SH_CCR) & CCR_CACHE_ENABLE);

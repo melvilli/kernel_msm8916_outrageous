@@ -36,7 +36,10 @@ static LIST_HEAD(tc_list);
  * atmel_tc_alloc - allocate a specified TC block
  * @block: which block to allocate
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @name: name to be associated with the iomem resource
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -44,6 +47,7 @@ static LIST_HEAD(tc_list);
  * pre-initialized struct atmel_tc is returned. The caller can access
  * the registers directly through the "regs" field.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct atmel_tc *atmel_tc_alloc(unsigned block, const char *name)
 {
@@ -94,6 +98,8 @@ fail:
 	tc = NULL;
 	goto out;
 =======
+=======
+>>>>>>> v3.18
 struct atmel_tc *atmel_tc_alloc(unsigned block)
 {
 	struct atmel_tc		*tc;
@@ -114,6 +120,9 @@ struct atmel_tc *atmel_tc_alloc(unsigned block)
 	spin_unlock(&tc_list_lock);
 
 	return pdev ? tc : NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(atmel_tc_alloc);
@@ -123,9 +132,14 @@ EXPORT_SYMBOL_GPL(atmel_tc_alloc);
  * @tc: Timer/counter block that was returned by atmel_tc_alloc()
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This reverses the effect of atmel_tc_alloc(), unmapping the I/O
  * registers, invalidating the resource returned by that routine and
  * making the TC available to other drivers.
+=======
+ * This reverses the effect of atmel_tc_alloc(), invalidating the resource
+ * returned by that routine and making the TC available to other drivers.
+>>>>>>> v3.18
 =======
  * This reverses the effect of atmel_tc_alloc(), invalidating the resource
  * returned by that routine and making the TC available to other drivers.
@@ -135,12 +149,17 @@ void atmel_tc_free(struct atmel_tc *tc)
 {
 	spin_lock(&tc_list_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tc->regs) {
 		iounmap(tc->regs);
 		release_mem_region(tc->iomem->start, resource_size(tc->iomem));
 		tc->regs = NULL;
 		tc->iomem = NULL;
 	}
+=======
+	if (tc->allocated)
+		tc->allocated = false;
+>>>>>>> v3.18
 =======
 	if (tc->allocated)
 		tc->allocated = false;
@@ -179,9 +198,14 @@ static int __init tc_probe(struct platform_device *pdev)
 	struct clk	*clk;
 	int		irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!platform_get_resource(pdev, IORESOURCE_MEM, 0))
 		return -EINVAL;
+=======
+	struct resource	*r;
+	unsigned int	i;
+>>>>>>> v3.18
 =======
 	struct resource	*r;
 	unsigned int	i;
@@ -192,7 +216,11 @@ static int __init tc_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tc = kzalloc(sizeof(struct atmel_tc), GFP_KERNEL);
+=======
+	tc = devm_kzalloc(&pdev->dev, sizeof(struct atmel_tc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	tc = devm_kzalloc(&pdev->dev, sizeof(struct atmel_tc), GFP_KERNEL);
 >>>>>>> v3.18
@@ -202,12 +230,15 @@ static int __init tc_probe(struct platform_device *pdev)
 	tc->pdev = pdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk = clk_get(&pdev->dev, "t0_clk");
 	if (IS_ERR(clk)) {
 		kfree(tc);
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	clk = devm_clk_get(&pdev->dev, "t0_clk");
 	if (IS_ERR(clk))
 		return PTR_ERR(clk);
@@ -216,6 +247,9 @@ static int __init tc_probe(struct platform_device *pdev)
 	tc->regs = devm_ioremap_resource(&pdev->dev, r);
 	if (IS_ERR(tc->regs))
 		return PTR_ERR(tc->regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Now take SoC information if available */
@@ -225,6 +259,7 @@ static int __init tc_probe(struct platform_device *pdev)
 		if (match)
 			tc->tcb_config = match->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	tc->clk[0] = clk;
@@ -233,6 +268,8 @@ static int __init tc_probe(struct platform_device *pdev)
 		tc->clk[1] = clk;
 	tc->clk[2] = clk_get(&pdev->dev, "t2_clk");
 =======
+=======
+>>>>>>> v3.18
 
 		tc->id = of_alias_get_id(tc->pdev->dev.of_node, "tcb");
 	} else {
@@ -244,6 +281,9 @@ static int __init tc_probe(struct platform_device *pdev)
 	if (IS_ERR(tc->clk[1]))
 		tc->clk[1] = clk;
 	tc->clk[2] = devm_clk_get(&pdev->dev, "t2_clk");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(tc->clk[2]))
 		tc->clk[2] = clk;
@@ -257,6 +297,12 @@ static int __init tc_probe(struct platform_device *pdev)
 		tc->irq[2] = irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	for (i = 0; i < 3; i++)
+		writel(ATMEL_TC_ALL_IRQ, tc->regs + ATMEL_TC_REG(i, IDR));
+
+>>>>>>> v3.18
 =======
 	for (i = 0; i < 3; i++)
 		writel(ATMEL_TC_ALL_IRQ, tc->regs + ATMEL_TC_REG(i, IDR));
@@ -267,10 +313,13 @@ static int __init tc_probe(struct platform_device *pdev)
 	spin_unlock(&tc_list_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	platform_set_drvdata(pdev, tc);
 
 	return 0;
@@ -285,6 +334,9 @@ static void tc_shutdown(struct platform_device *pdev)
 		writel(ATMEL_TC_ALL_IRQ, tc->regs + ATMEL_TC_REG(i, IDR));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver tc_driver = {
 	.driver = {
@@ -292,6 +344,10 @@ static struct platform_driver tc_driver = {
 		.of_match_table	= of_match_ptr(atmel_tcb_dt_ids),
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.shutdown = tc_shutdown,
+>>>>>>> v3.18
 =======
 	.shutdown = tc_shutdown,
 >>>>>>> v3.18

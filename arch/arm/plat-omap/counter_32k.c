@@ -39,9 +39,15 @@
 static void __iomem *sync32k_cnt_reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 notrace omap_32k_read_sched_clock(void)
 {
 	return sync32k_cnt_reg ? __raw_readl(sync32k_cnt_reg) : 0;
+=======
+static u64 notrace omap_32k_read_sched_clock(void)
+{
+	return sync32k_cnt_reg ? readl_relaxed(sync32k_cnt_reg) : 0;
+>>>>>>> v3.18
 =======
 static u64 notrace omap_32k_read_sched_clock(void)
 {
@@ -71,7 +77,11 @@ static void omap_read_persistent_clock(struct timespec *ts)
 
 	last_cycles = cycles;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cycles = sync32k_cnt_reg ? __raw_readl(sync32k_cnt_reg) : 0;
+=======
+	cycles = sync32k_cnt_reg ? readl_relaxed(sync32k_cnt_reg) : 0;
+>>>>>>> v3.18
 =======
 	cycles = sync32k_cnt_reg ? readl_relaxed(sync32k_cnt_reg) : 0;
 >>>>>>> v3.18
@@ -106,7 +116,11 @@ int __init omap_init_clocksource_32k(void __iomem *vbase)
 	 * to identify the version.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__raw_readl(vbase + OMAP2_32KSYNCNT_REV_OFF) &
+=======
+	if (readl_relaxed(vbase + OMAP2_32KSYNCNT_REV_OFF) &
+>>>>>>> v3.18
 =======
 	if (readl_relaxed(vbase + OMAP2_32KSYNCNT_REV_OFF) &
 >>>>>>> v3.18
@@ -130,7 +144,11 @@ int __init omap_init_clocksource_32k(void __iomem *vbase)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_sched_clock(omap_32k_read_sched_clock, 32, 32768);
+=======
+	sched_clock_register(omap_32k_read_sched_clock, 32, 32768);
+>>>>>>> v3.18
 =======
 	sched_clock_register(omap_32k_read_sched_clock, 32, 32768);
 >>>>>>> v3.18

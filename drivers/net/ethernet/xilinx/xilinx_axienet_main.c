@@ -23,7 +23,10 @@
 #include <linux/delay.h>
 #include <linux/etherdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -31,6 +34,10 @@
 #include <linux/of_mdio.h>
 #include <linux/of_platform.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -209,6 +216,7 @@ static int axienet_dma_bd_init(struct net_device *ndev)
 	 * Allocate the Tx and Rx buffer descriptors.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp->tx_bd_v = dma_alloc_coherent(ndev->dev.parent,
 					 sizeof(*lp->tx_bd_v) * TX_BD_NUM,
 					 &lp->tx_bd_p,
@@ -221,6 +229,8 @@ static int axienet_dma_bd_init(struct net_device *ndev)
 					 &lp->rx_bd_p,
 					 GFP_KERNEL | __GFP_ZERO);
 =======
+=======
+>>>>>>> v3.18
 	lp->tx_bd_v = dma_zalloc_coherent(ndev->dev.parent,
 					  sizeof(*lp->tx_bd_v) * TX_BD_NUM,
 					  &lp->tx_bd_p, GFP_KERNEL);
@@ -230,6 +240,9 @@ static int axienet_dma_bd_init(struct net_device *ndev)
 	lp->rx_bd_v = dma_zalloc_coherent(ndev->dev.parent,
 					  sizeof(*lp->rx_bd_v) * RX_BD_NUM,
 					  &lp->rx_bd_p, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!lp->rx_bd_v)
 		goto out;
@@ -623,7 +636,12 @@ static void axienet_start_xmit_done(struct net_device *ndev)
 		packets++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lp->tx_bd_ci = ++lp->tx_bd_ci % TX_BD_NUM;
+=======
+		++lp->tx_bd_ci;
+		lp->tx_bd_ci %= TX_BD_NUM;
+>>>>>>> v3.18
 =======
 		++lp->tx_bd_ci;
 		lp->tx_bd_ci %= TX_BD_NUM;
@@ -714,7 +732,12 @@ static int axienet_start_xmit(struct sk_buff *skb, struct net_device *ndev)
 
 	for (ii = 0; ii < num_frag; ii++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lp->tx_bd_tail = ++lp->tx_bd_tail % TX_BD_NUM;
+=======
+		++lp->tx_bd_tail;
+		lp->tx_bd_tail %= TX_BD_NUM;
+>>>>>>> v3.18
 =======
 		++lp->tx_bd_tail;
 		lp->tx_bd_tail %= TX_BD_NUM;
@@ -735,7 +758,12 @@ static int axienet_start_xmit(struct sk_buff *skb, struct net_device *ndev)
 	/* Start the transfer */
 	axienet_dma_out32(lp, XAXIDMA_TX_TDESC_OFFSET, tail_p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp->tx_bd_tail = ++lp->tx_bd_tail % TX_BD_NUM;
+=======
+	++lp->tx_bd_tail;
+	lp->tx_bd_tail %= TX_BD_NUM;
+>>>>>>> v3.18
 =======
 	++lp->tx_bd_tail;
 	lp->tx_bd_tail %= TX_BD_NUM;
@@ -790,7 +818,11 @@ static void axienet_recv(struct net_device *ndev)
 			}
 		} else if ((lp->features & XAE_FEATURE_PARTIAL_RX_CSUM) != 0 &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   skb->protocol == __constant_htons(ETH_P_IP) &&
+=======
+			   skb->protocol == htons(ETH_P_IP) &&
+>>>>>>> v3.18
 =======
 			   skb->protocol == htons(ETH_P_IP) &&
 >>>>>>> v3.18
@@ -816,7 +848,12 @@ static void axienet_recv(struct net_device *ndev)
 		cur_p->sw_id_offset = (u32) new_skb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lp->rx_bd_ci = ++lp->rx_bd_ci % RX_BD_NUM;
+=======
+		++lp->rx_bd_ci;
+		lp->rx_bd_ci %= RX_BD_NUM;
+>>>>>>> v3.18
 =======
 		++lp->rx_bd_ci;
 		lp->rx_bd_ci %= RX_BD_NUM;
@@ -1527,8 +1564,12 @@ static int axienet_of_probe(struct platform_device *op)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ether_setup(ndev);
 	dev_set_drvdata(&op->dev, ndev);
+=======
+	platform_set_drvdata(op, ndev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, ndev);
 >>>>>>> v3.18
@@ -1670,7 +1711,11 @@ nodev:
 static int axienet_of_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *ndev = dev_get_drvdata(&op->dev);
+=======
+	struct net_device *ndev = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct net_device *ndev = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -1680,12 +1725,18 @@ static int axienet_of_remove(struct platform_device *op)
 	unregister_netdev(ndev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lp->phy_node)
 		of_node_put(lp->phy_node);
 	lp->phy_node = NULL;
 
 	dev_set_drvdata(&op->dev, NULL);
 
+=======
+	of_node_put(lp->phy_node);
+	lp->phy_node = NULL;
+
+>>>>>>> v3.18
 =======
 	of_node_put(lp->phy_node);
 	lp->phy_node = NULL;
@@ -1704,7 +1755,10 @@ static struct platform_driver axienet_of_driver = {
 	.remove = axienet_of_remove,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 .owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		 .name = "xilinx_axienet",

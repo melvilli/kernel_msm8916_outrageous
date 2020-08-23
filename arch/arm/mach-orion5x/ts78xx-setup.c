@@ -58,7 +58,11 @@ static struct map_desc ts78xx_io_desc[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init ts78xx_map_io(void)
+=======
+static void __init ts78xx_map_io(void)
+>>>>>>> v3.18
 =======
 static void __init ts78xx_map_io(void)
 >>>>>>> v3.18
@@ -408,8 +412,13 @@ static void ts78xx_fpga_supports(void)
 		switch ((ts78xx_fpga.id >> 8) & 0xffffff) {
 		case TS7800_FPGA_MAGIC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("unrecognised FPGA revision 0x%.2x\n",
 					ts78xx_fpga.id & 0xff);
+=======
+			pr_warn("unrecognised FPGA revision 0x%.2x\n",
+				ts78xx_fpga.id & 0xff);
+>>>>>>> v3.18
 =======
 			pr_warn("unrecognised FPGA revision 0x%.2x\n",
 				ts78xx_fpga.id & 0xff);

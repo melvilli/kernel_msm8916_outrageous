@@ -30,6 +30,7 @@ void __init setup_real_mode(void)
 {
 	u16 real_mode_seg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 *rel;
 	u32 count;
 	u32 *ptr;
@@ -37,10 +38,15 @@ void __init setup_real_mode(void)
 	int i;
 	unsigned char *base;
 =======
+=======
+>>>>>>> v3.18
 	const u32 *rel;
 	u32 count;
 	unsigned char *base;
 	unsigned long phys_base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct trampoline_header *trampoline_header;
 	size_t size = PAGE_ALIGN(real_mode_blob_end - real_mode_blob);
@@ -54,6 +60,7 @@ void __init setup_real_mode(void)
 	memcpy(base, real_mode_blob, size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	real_mode_seg = __pa(base) >> 4;
 	rel = (u32 *) real_mode_relocs;
 
@@ -63,6 +70,8 @@ void __init setup_real_mode(void)
 	for (i = 0; i < count; i++) {
 		seg = (u16 *) (base + rel[i]);
 =======
+=======
+>>>>>>> v3.18
 	phys_base = __pa(base);
 	real_mode_seg = phys_base >> 4;
 
@@ -72,11 +81,15 @@ void __init setup_real_mode(void)
 	count = *rel++;
 	while (count--) {
 		u16 *seg = (u16 *) (base + *rel++);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*seg = real_mode_seg;
 	}
 
 	/* 32-bit linear relocations. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	count = rel[i];
 	rel =  &rel[i + 1];
@@ -84,10 +97,15 @@ void __init setup_real_mode(void)
 		ptr = (u32 *) (base + rel[i]);
 		*ptr += __pa(base);
 =======
+=======
+>>>>>>> v3.18
 	count = *rel++;
 	while (count--) {
 		u32 *ptr = (u32 *) (base + *rel++);
 		*ptr += phys_base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

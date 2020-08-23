@@ -46,11 +46,17 @@ EXPORT_SYMBOL_GPL(sdhci_pltfm_clk_get_max_clock);
 
 static const struct sdhci_ops sdhci_pltfm_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.set_clock = sdhci_set_clock,
 	.set_bus_width = sdhci_set_bus_width,
 	.reset = sdhci_reset,
 	.set_uhs_signaling = sdhci_set_uhs_signaling,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -123,16 +129,22 @@ EXPORT_SYMBOL_GPL(sdhci_get_of_property);
 
 struct sdhci_host *sdhci_pltfm_init(struct platform_device *pdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    const struct sdhci_pltfm_data *pdata)
 {
 	struct sdhci_host *host;
 	struct sdhci_pltfm_host *pltfm_host;
 	struct device_node *np = pdev->dev.of_node;
 =======
+=======
+>>>>>>> v3.18
 				    const struct sdhci_pltfm_data *pdata,
 				    size_t priv_size)
 {
 	struct sdhci_host *host;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct resource *iomem;
 	int ret;
@@ -147,11 +159,16 @@ struct sdhci_host *sdhci_pltfm_init(struct platform_device *pdev,
 		dev_err(&pdev->dev, "Invalid iomem size!\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Some PCI-based MFD need the parent here */
 	if (pdev->dev.parent != &platform_bus && !np)
 		host = sdhci_alloc_host(pdev->dev.parent, sizeof(*pltfm_host));
 	else
 		host = sdhci_alloc_host(&pdev->dev, sizeof(*pltfm_host));
+=======
+	host = sdhci_alloc_host(&pdev->dev,
+		sizeof(struct sdhci_pltfm_host) + priv_size);
+>>>>>>> v3.18
 =======
 	host = sdhci_alloc_host(&pdev->dev,
 		sizeof(struct sdhci_pltfm_host) + priv_size);
@@ -163,8 +180,11 @@ struct sdhci_host *sdhci_pltfm_init(struct platform_device *pdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pltfm_host = sdhci_priv(host);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	host->hw_name = dev_name(&pdev->dev);
@@ -173,14 +193,20 @@ struct sdhci_host *sdhci_pltfm_init(struct platform_device *pdev,
 	else
 		host->ops = &sdhci_pltfm_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata)
 		host->quirks = pdata->quirks;
 =======
+=======
+>>>>>>> v3.18
 	if (pdata) {
 		host->quirks = pdata->quirks;
 		host->quirks2 = pdata->quirks2;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	host->irq = platform_get_irq(pdev, 0);
 
@@ -228,7 +254,10 @@ void sdhci_pltfm_free(struct platform_device *pdev)
 	release_mem_region(iomem->start, resource_size(iomem));
 	sdhci_free_host(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -236,7 +265,12 @@ EXPORT_SYMBOL_GPL(sdhci_pltfm_free);
 
 int sdhci_pltfm_register(struct platform_device *pdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 const struct sdhci_pltfm_data *pdata)
+=======
+			const struct sdhci_pltfm_data *pdata,
+			size_t priv_size)
+>>>>>>> v3.18
 =======
 			const struct sdhci_pltfm_data *pdata,
 			size_t priv_size)
@@ -246,7 +280,11 @@ int sdhci_pltfm_register(struct platform_device *pdev,
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host = sdhci_pltfm_init(pdev, pdata);
+=======
+	host = sdhci_pltfm_init(pdev, pdata, priv_size);
+>>>>>>> v3.18
 =======
 	host = sdhci_pltfm_init(pdev, pdata, priv_size);
 >>>>>>> v3.18
@@ -277,7 +315,11 @@ EXPORT_SYMBOL_GPL(sdhci_pltfm_unregister);
 
 #ifdef CONFIG_PM
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sdhci_pltfm_suspend(struct device *dev)
+=======
+int sdhci_pltfm_suspend(struct device *dev)
+>>>>>>> v3.18
 =======
 int sdhci_pltfm_suspend(struct device *dev)
 >>>>>>> v3.18
@@ -287,8 +329,14 @@ int sdhci_pltfm_suspend(struct device *dev)
 	return sdhci_suspend_host(host);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int sdhci_pltfm_resume(struct device *dev)
+=======
+EXPORT_SYMBOL_GPL(sdhci_pltfm_suspend);
+
+int sdhci_pltfm_resume(struct device *dev)
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(sdhci_pltfm_suspend);
 
@@ -300,6 +348,10 @@ int sdhci_pltfm_resume(struct device *dev)
 	return sdhci_resume_host(host);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(sdhci_pltfm_resume);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(sdhci_pltfm_resume);
 >>>>>>> v3.18

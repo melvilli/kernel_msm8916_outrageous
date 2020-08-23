@@ -18,6 +18,11 @@
 #include <linux/sched.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KSP_WORD_OFF 	((TASK_THREAD + THREAD_KSP) / 4)
+
+>>>>>>> v3.18
 =======
 #define KSP_WORD_OFF 	((TASK_THREAD + THREAD_KSP) / 4)
 
@@ -29,10 +34,13 @@ __switch_to(struct task_struct *prev_task, struct task_struct *next_task)
 	unsigned int prev = (unsigned int)prev_task;
 	unsigned int next = (unsigned int)next_task;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int num_words_to_skip = 1;
 #ifdef CONFIG_ARC_CURR_IN_REG
 	num_words_to_skip++;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -53,12 +61,15 @@ __switch_to(struct task_struct *prev_task, struct task_struct *next_task)
 #ifndef CONFIG_ARC_CURR_IN_REG
 		"st.a    r25, [sp, -4]   \n\t"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 		"sub     sp, sp, %4      \n\t"	/* create gutter at top */
 
 		/* set ksp of outgoing task in tsk->thread.ksp */
 		"st.as   sp, [%3, %1]    \n\t"
 =======
+=======
+>>>>>>> v3.18
 #else
 		"sub     sp, sp, 4      \n\t"	/* usual r25 placeholder */
 #endif
@@ -74,6 +85,9 @@ __switch_to(struct task_struct *prev_task, struct task_struct *next_task)
 		"add2    r24, %3, %1     \n\t"
 		"st      sp, [r24]       \n\t"
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		"sync   \n\t"
@@ -103,15 +117,21 @@ __switch_to(struct task_struct *prev_task, struct task_struct *next_task)
 		/* start loading it's CALLEE reg file */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"add    sp, sp, %4     \n\t"	/* skip gutter at top */
 
 #ifndef CONFIG_ARC_CURR_IN_REG
 		"ld.ab   r25, [sp, 4]   \n\t"
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_ARC_CURR_IN_REG
 		"ld.ab   r25, [sp, 4]   \n\t"
 #else
 		"add    sp, sp, 4       \n\t"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 		"ld.ab   r24, [sp, 4]   \n\t"
@@ -134,8 +154,12 @@ __switch_to(struct task_struct *prev_task, struct task_struct *next_task)
 
 		: "=r"(tmp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		: "n"((TASK_THREAD + THREAD_KSP) / 4), "r"(next), "r"(prev),
 		  "n"(num_words_to_skip * 4)
+=======
+		: "n"(KSP_WORD_OFF), "r"(next), "r"(prev)
+>>>>>>> v3.18
 =======
 		: "n"(KSP_WORD_OFF), "r"(next), "r"(prev)
 >>>>>>> v3.18

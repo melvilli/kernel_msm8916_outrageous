@@ -26,6 +26,7 @@
 	((phydev)->drv->phy_id & ~((phydev)->drv->phy_id_mask))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define MII_BCM54XX_ECR		0x10	/* BCM54xx extended control register */
 #define MII_BCM54XX_ECR_IM	0x1000	/* Interrupt mask */
@@ -184,10 +185,13 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 MODULE_DESCRIPTION("Broadcom PHY driver");
 MODULE_AUTHOR("Maciej W. Rozycki");
 MODULE_LICENSE("GPL");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Indirect register access functions for the 1000BASE-T/100BASE-TX/10BASE-T
@@ -207,6 +211,8 @@ static int bcm54xx_shadow_write(struct phy_device *phydev, u16 shadow, u16 val)
 			 MII_BCM54XX_SHD_DATA(val));
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Indirect register access functions for the Expansion Registers */
@@ -855,7 +861,11 @@ static struct mdio_device_id __maybe_unused broadcom_tbl[] = {
 	{ PHY_ID_BCM5461, 0xfffffff0 },
 	{ PHY_ID_BCM5464, 0xfffffff0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ PHY_ID_BCM5481, 0xfffffff0 },
+=======
+	{ PHY_ID_BCM5482, 0xfffffff0 },
+>>>>>>> v3.18
 =======
 	{ PHY_ID_BCM5482, 0xfffffff0 },
 >>>>>>> v3.18

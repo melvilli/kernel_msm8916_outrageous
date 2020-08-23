@@ -4,7 +4,11 @@
 
 #define for_each_test(i, test)	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < sizeof(test) / sizeof(test[0]); i++)
+=======
+	for (i = 0; i < ARRAY_SIZE(test); i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < ARRAY_SIZE(test); i++)
 >>>>>>> v3.18

@@ -103,7 +103,11 @@ int __kprobes kprobe_handle_illslot(unsigned long pc)
 void __kprobes arch_remove_kprobe(struct kprobe *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kprobe *saved = &__get_cpu_var(saved_next_opcode);
+=======
+	struct kprobe *saved = this_cpu_ptr(&saved_next_opcode);
+>>>>>>> v3.18
 =======
 	struct kprobe *saved = this_cpu_ptr(&saved_next_opcode);
 >>>>>>> v3.18
@@ -116,7 +120,11 @@ void __kprobes arch_remove_kprobe(struct kprobe *p)
 		saved->opcode = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		saved = &__get_cpu_var(saved_next_opcode2);
+=======
+		saved = this_cpu_ptr(&saved_next_opcode2);
+>>>>>>> v3.18
 =======
 		saved = this_cpu_ptr(&saved_next_opcode2);
 >>>>>>> v3.18
@@ -138,7 +146,11 @@ static void __kprobes save_previous_kprobe(struct kprobe_ctlblk *kcb)
 static void __kprobes restore_previous_kprobe(struct kprobe_ctlblk *kcb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(current_kprobe) = kcb->prev_kprobe.kp;
+=======
+	__this_cpu_write(current_kprobe, kcb->prev_kprobe.kp);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(current_kprobe, kcb->prev_kprobe.kp);
 >>>>>>> v3.18
@@ -149,7 +161,11 @@ static void __kprobes set_current_kprobe(struct kprobe *p, struct pt_regs *regs,
 					 struct kprobe_ctlblk *kcb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(current_kprobe) = p;
+=======
+	__this_cpu_write(current_kprobe, p);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(current_kprobe, p);
 >>>>>>> v3.18
@@ -163,7 +179,11 @@ static void __kprobes set_current_kprobe(struct kprobe *p, struct pt_regs *regs,
 static void __kprobes prepare_singlestep(struct kprobe *p, struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(saved_current_opcode).addr = (kprobe_opcode_t *)regs->pc;
+=======
+	__this_cpu_write(saved_current_opcode.addr, (kprobe_opcode_t *)regs->pc);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(saved_current_opcode.addr, (kprobe_opcode_t *)regs->pc);
 >>>>>>> v3.18
@@ -174,8 +194,13 @@ static void __kprobes prepare_singlestep(struct kprobe *p, struct pt_regs *regs)
 		arch_disarm_kprobe(p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		op1 = &__get_cpu_var(saved_next_opcode);
 		op2 = &__get_cpu_var(saved_next_opcode2);
+=======
+		op1 = this_cpu_ptr(&saved_next_opcode);
+		op2 = this_cpu_ptr(&saved_next_opcode2);
+>>>>>>> v3.18
 =======
 		op1 = this_cpu_ptr(&saved_next_opcode);
 		op2 = this_cpu_ptr(&saved_next_opcode2);
@@ -275,7 +300,11 @@ static int __kprobes kprobe_handler(struct pt_regs *regs)
 			return 1;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			p = __get_cpu_var(current_kprobe);
+=======
+			p = __this_cpu_read(current_kprobe);
+>>>>>>> v3.18
 =======
 			p = __this_cpu_read(current_kprobe);
 >>>>>>> v3.18
@@ -366,9 +395,15 @@ int __kprobes trampoline_probe_handler(struct kprobe *p, struct pt_regs *regs)
 
 		if (ri->rp && ri->rp->handler) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__get_cpu_var(current_kprobe) = &ri->rp->kp;
 			ri->rp->handler(ri, regs);
 			__get_cpu_var(current_kprobe) = NULL;
+=======
+			__this_cpu_write(current_kprobe, &ri->rp->kp);
+			ri->rp->handler(ri, regs);
+			__this_cpu_write(current_kprobe, NULL);
+>>>>>>> v3.18
 =======
 			__this_cpu_write(current_kprobe, &ri->rp->kp);
 			ri->rp->handler(ri, regs);
@@ -419,7 +454,11 @@ static int __kprobes post_kprobe_handler(struct pt_regs *regs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = &__get_cpu_var(saved_next_opcode);
+=======
+	p = this_cpu_ptr(&saved_next_opcode);
+>>>>>>> v3.18
 =======
 	p = this_cpu_ptr(&saved_next_opcode);
 >>>>>>> v3.18
@@ -429,8 +468,13 @@ static int __kprobes post_kprobe_handler(struct pt_regs *regs)
 		p->opcode = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		addr = __get_cpu_var(saved_current_opcode).addr;
 		__get_cpu_var(saved_current_opcode).addr = NULL;
+=======
+		addr = __this_cpu_read(saved_current_opcode.addr);
+		__this_cpu_write(saved_current_opcode.addr, NULL);
+>>>>>>> v3.18
 =======
 		addr = __this_cpu_read(saved_current_opcode.addr);
 		__this_cpu_write(saved_current_opcode.addr, NULL);
@@ -440,7 +484,11 @@ static int __kprobes post_kprobe_handler(struct pt_regs *regs)
 		arch_arm_kprobe(p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p = &__get_cpu_var(saved_next_opcode2);
+=======
+		p = this_cpu_ptr(&saved_next_opcode2);
+>>>>>>> v3.18
 =======
 		p = this_cpu_ptr(&saved_next_opcode2);
 >>>>>>> v3.18
@@ -560,7 +608,11 @@ int __kprobes kprobe_exceptions_notify(struct notifier_block *self,
 					ret = NOTIFY_STOP;
 				} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					p = __get_cpu_var(current_kprobe);
+=======
+					p = __this_cpu_read(current_kprobe);
+>>>>>>> v3.18
 =======
 					p = __this_cpu_read(current_kprobe);
 >>>>>>> v3.18

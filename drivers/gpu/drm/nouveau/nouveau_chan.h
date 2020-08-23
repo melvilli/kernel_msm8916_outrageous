@@ -2,6 +2,7 @@
 #define __NOUVEAU_CHAN_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_cli;
 
 struct nouveau_channel {
@@ -12,6 +13,8 @@ struct nouveau_channel {
 	u32 vram;
 	u32 gart;
 =======
+=======
+>>>>>>> v3.18
 #include <nvif/object.h>
 struct nvif_device;
 
@@ -24,13 +27,20 @@ struct nouveau_channel {
 	struct nvif_object vram;
 	struct nvif_object gart;
 	struct nvif_object nvsw;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct {
 		struct nouveau_bo *buffer;
 		struct nouveau_vma vma;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 handle;
+=======
+		struct nvif_object ctxdma;
+>>>>>>> v3.18
 =======
 		struct nvif_object ctxdma;
 >>>>>>> v3.18
@@ -54,6 +64,7 @@ struct nouveau_channel {
 	u32 user_put;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_object *object;
 };
 
@@ -61,18 +72,28 @@ struct nouveau_channel {
 int  nouveau_channel_new(struct nouveau_drm *, struct nouveau_cli *,
 			 u32 parent, u32 handle, u32 arg0, u32 arg1,
 =======
+=======
+>>>>>>> v3.18
 	struct nvif_object *object;
 };
 
 
 int  nouveau_channel_new(struct nouveau_drm *, struct nvif_device *,
 			 u32 handle, u32 arg0, u32 arg1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 struct nouveau_channel **);
 void nouveau_channel_del(struct nouveau_channel **);
 int  nouveau_channel_idle(struct nouveau_channel *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int nouveau_vram_pushbuf;
+
+>>>>>>> v3.18
 =======
 extern int nouveau_vram_pushbuf;
 

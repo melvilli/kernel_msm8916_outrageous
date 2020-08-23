@@ -92,7 +92,11 @@
 * 5a) The length field is set to include the last of the fixed and fixed
 *     length fields.  It may have to be updated for optional or variable
 <<<<<<< HEAD
+<<<<<<< HEAD
 * 	length information elements.
+=======
+*	length information elements.
+>>>>>>> v3.18
 =======
 *	length information elements.
 >>>>>>> v3.18
@@ -224,6 +228,7 @@
 /* prototype structure, all IEs start with these members */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct wlan_ie {
 	u8 eid;
 	u8 len;
@@ -246,6 +251,8 @@ typedef struct wlan_ie_supp_rates {
 /*-- FH Parameter Set  ----------------------------*/
 typedef struct wlan_ie_fh_parms {
 =======
+=======
+>>>>>>> v3.18
 struct wlan_ie {
 	u8 eid;
 	u8 len;
@@ -267,6 +274,9 @@ struct wlan_ie_supp_rates {
 
 /*-- FH Parameter Set  ----------------------------*/
 struct wlan_ie_fh_parms {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 eid;
 	u8 len;
@@ -274,6 +284,7 @@ struct wlan_ie_fh_parms {
 	u8 hopset;
 	u8 hoppattern;
 	u8 hopindex;
+<<<<<<< HEAD
 <<<<<<< HEAD
 } __packed wlan_ie_fh_parms_t;
 
@@ -288,6 +299,8 @@ typedef struct wlan_ie_ds_parms {
 
 typedef struct wlan_ie_cf_parms {
 =======
+=======
+>>>>>>> v3.18
 } __packed;
 
 /*-- DS Parameter Set  ----------------------------*/
@@ -300,6 +313,9 @@ struct wlan_ie_ds_parms {
 /*-- CF Parameter Set  ----------------------------*/
 
 struct wlan_ie_cf_parms {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 eid;
 	u8 len;
@@ -308,15 +324,21 @@ struct wlan_ie_cf_parms {
 	u16 cfp_maxdur;
 	u16 cfp_durremaining;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __packed wlan_ie_cf_parms_t;
 
 /*-- TIM ------------------------------------------*/
 typedef struct wlan_ie_tim {
 =======
+=======
+>>>>>>> v3.18
 } __packed;
 
 /*-- TIM ------------------------------------------*/
 struct wlan_ie_tim {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 eid;
 	u8 len;
@@ -324,6 +346,7 @@ struct wlan_ie_tim {
 	u8 dtim_period;
 	u8 bitmap_ctl;
 	u8 virt_bm[1];
+<<<<<<< HEAD
 <<<<<<< HEAD
 } __packed wlan_ie_tim_t;
 
@@ -341,6 +364,8 @@ typedef struct wlan_ie_challenge {
 	u8 challenge[1];
 } __packed wlan_ie_challenge_t;
 =======
+=======
+>>>>>>> v3.18
 } __packed;
 
 /*-- IBSS Parameter Set ---------------------------*/
@@ -356,6 +381,9 @@ struct wlan_ie_challenge {
 	u8 len;
 	u8 challenge[1];
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*-------------------------------------------------*/
@@ -363,7 +391,11 @@ struct wlan_ie_challenge {
 
 /* prototype structure, all mgmt frame types will start with these members */
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct wlan_fr_mgmt {
+=======
+struct wlan_fr_mgmt {
+>>>>>>> v3.18
 =======
 struct wlan_fr_mgmt {
 >>>>>>> v3.18
@@ -376,15 +408,21 @@ struct wlan_fr_mgmt {
 	/*-- fixed fields -----------*/
 	/*-- info elements ----------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 } wlan_fr_mgmt_t;
 
 /*-- Beacon ---------------------------------------*/
 typedef struct wlan_fr_beacon {
 =======
+=======
+>>>>>>> v3.18
 };
 
 /*-- Beacon ---------------------------------------*/
 struct wlan_fr_beacon {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 type;
 	u16 len;
@@ -397,6 +435,7 @@ struct wlan_fr_beacon {
 	u16 *bcn_int;
 	u16 *cap_info;
 	/*-- info elements ----------*/
+<<<<<<< HEAD
 <<<<<<< HEAD
 	wlan_ie_ssid_t *ssid;
 	wlan_ie_supp_rates_t *supp_rates;
@@ -411,6 +450,8 @@ struct wlan_fr_beacon {
 /*-- IBSS ATIM ------------------------------------*/
 typedef struct wlan_fr_ibssatim {
 =======
+=======
+>>>>>>> v3.18
 	struct wlan_ie_ssid *ssid;
 	struct wlan_ie_supp_rates *supp_rates;
 	struct wlan_ie_fh_parms *fh_parms;
@@ -423,6 +464,9 @@ typedef struct wlan_fr_ibssatim {
 
 /*-- IBSS ATIM ------------------------------------*/
 struct wlan_fr_ibssatim {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 type;
 	u16 len;
@@ -437,15 +481,21 @@ struct wlan_fr_ibssatim {
 	/* this frame type has a null body */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 } wlan_fr_ibssatim_t;
 
 /*-- Disassociation -------------------------------*/
 typedef struct wlan_fr_disassoc {
 =======
+=======
+>>>>>>> v3.18
 };
 
 /*-- Disassociation -------------------------------*/
 struct wlan_fr_disassoc {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 type;
 	u16 len;
@@ -459,15 +509,21 @@ struct wlan_fr_disassoc {
 	/*-- info elements ----------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 } wlan_fr_disassoc_t;
 
 /*-- Association Request --------------------------*/
 typedef struct wlan_fr_assocreq {
 =======
+=======
+>>>>>>> v3.18
 };
 
 /*-- Association Request --------------------------*/
 struct wlan_fr_assocreq {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 type;
 	u16 len;
@@ -480,6 +536,7 @@ struct wlan_fr_assocreq {
 	u16 *listen_int;
 	/*-- info elements ----------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wlan_ie_ssid_t *ssid;
 	wlan_ie_supp_rates_t *supp_rates;
 
@@ -488,6 +545,8 @@ struct wlan_fr_assocreq {
 /*-- Association Response -------------------------*/
 typedef struct wlan_fr_assocresp {
 =======
+=======
+>>>>>>> v3.18
 	struct wlan_ie_ssid *ssid;
 	struct wlan_ie_supp_rates *supp_rates;
 
@@ -495,6 +554,9 @@ typedef struct wlan_fr_assocresp {
 
 /*-- Association Response -------------------------*/
 struct wlan_fr_assocresp {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 type;
 	u16 len;
@@ -508,6 +570,7 @@ struct wlan_fr_assocresp {
 	u16 *aid;
 	/*-- info elements ----------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wlan_ie_supp_rates_t *supp_rates;
 
 } wlan_fr_assocresp_t;
@@ -515,12 +578,17 @@ struct wlan_fr_assocresp {
 /*-- Reassociation Request ------------------------*/
 typedef struct wlan_fr_reassocreq {
 =======
+=======
+>>>>>>> v3.18
 	struct wlan_ie_supp_rates *supp_rates;
 
 };
 
 /*-- Reassociation Request ------------------------*/
 struct wlan_fr_reassocreq {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 type;
 	u16 len;
@@ -534,6 +602,7 @@ struct wlan_fr_reassocreq {
 	u8 *curr_ap;
 	/*-- info elements ----------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wlan_ie_ssid_t *ssid;
 	wlan_ie_supp_rates_t *supp_rates;
 
@@ -542,6 +611,8 @@ struct wlan_fr_reassocreq {
 /*-- Reassociation Response -----------------------*/
 typedef struct wlan_fr_reassocresp {
 =======
+=======
+>>>>>>> v3.18
 	struct wlan_ie_ssid *ssid;
 	struct wlan_ie_supp_rates *supp_rates;
 
@@ -549,6 +620,9 @@ typedef struct wlan_fr_reassocresp {
 
 /*-- Reassociation Response -----------------------*/
 struct wlan_fr_reassocresp {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 type;
 	u16 len;
@@ -562,6 +636,7 @@ struct wlan_fr_reassocresp {
 	u16 *aid;
 	/*-- info elements ----------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wlan_ie_supp_rates_t *supp_rates;
 
 } wlan_fr_reassocresp_t;
@@ -569,12 +644,17 @@ struct wlan_fr_reassocresp {
 /*-- Probe Request --------------------------------*/
 typedef struct wlan_fr_probereq {
 =======
+=======
+>>>>>>> v3.18
 	struct wlan_ie_supp_rates *supp_rates;
 
 };
 
 /*-- Probe Request --------------------------------*/
 struct wlan_fr_probereq {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 type;
 	u16 len;
@@ -585,6 +665,7 @@ struct wlan_fr_probereq {
 	/*-- fixed fields -----------*/
 	/*-- info elements ----------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wlan_ie_ssid_t *ssid;
 	wlan_ie_supp_rates_t *supp_rates;
 
@@ -593,6 +674,8 @@ struct wlan_fr_probereq {
 /*-- Probe Response -------------------------------*/
 typedef struct wlan_fr_proberesp {
 =======
+=======
+>>>>>>> v3.18
 	struct wlan_ie_ssid *ssid;
 	struct wlan_ie_supp_rates *supp_rates;
 
@@ -600,6 +683,9 @@ typedef struct wlan_fr_proberesp {
 
 /*-- Probe Response -------------------------------*/
 struct wlan_fr_proberesp {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 type;
 	u16 len;
@@ -613,6 +699,7 @@ struct wlan_fr_proberesp {
 	u16 *cap_info;
 	/*-- info elements ----------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wlan_ie_ssid_t *ssid;
 	wlan_ie_supp_rates_t *supp_rates;
 	wlan_ie_fh_parms_t *fh_parms;
@@ -624,6 +711,8 @@ struct wlan_fr_proberesp {
 /*-- Authentication -------------------------------*/
 typedef struct wlan_fr_authen {
 =======
+=======
+>>>>>>> v3.18
 	struct wlan_ie_ssid *ssid;
 	struct wlan_ie_supp_rates *supp_rates;
 	struct wlan_ie_fh_parms *fh_parms;
@@ -634,6 +723,9 @@ typedef struct wlan_fr_authen {
 
 /*-- Authentication -------------------------------*/
 struct wlan_fr_authen {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 type;
 	u16 len;
@@ -647,6 +739,7 @@ struct wlan_fr_authen {
 	u16 *status;
 	/*-- info elements ----------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wlan_ie_challenge_t *challenge;
 
 } wlan_fr_authen_t;
@@ -654,12 +747,17 @@ struct wlan_fr_authen {
 /*-- Deauthenication -----------------------------*/
 typedef struct wlan_fr_deauthen {
 =======
+=======
+>>>>>>> v3.18
 	struct wlan_ie_challenge *challenge;
 
 };
 
 /*-- Deauthenication -----------------------------*/
 struct wlan_fr_deauthen {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 type;
 	u16 len;
@@ -672,6 +770,7 @@ struct wlan_fr_deauthen {
 
 	/*-- info elements ----------*/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 } wlan_fr_deauthen_t;
 
@@ -696,6 +795,8 @@ void wlan_mgmt_decode_authen(wlan_fr_authen_t *f);
 void wlan_mgmt_encode_deauthen(wlan_fr_deauthen_t *f);
 void wlan_mgmt_decode_deauthen(wlan_fr_deauthen_t *f);
 =======
+=======
+>>>>>>> v3.18
 };
 
 void wlan_mgmt_encode_beacon(struct wlan_fr_beacon *f);
@@ -718,6 +819,9 @@ void wlan_mgmt_encode_authen(struct wlan_fr_authen *f);
 void wlan_mgmt_decode_authen(struct wlan_fr_authen *f);
 void wlan_mgmt_encode_deauthen(struct wlan_fr_deauthen *f);
 void wlan_mgmt_decode_deauthen(struct wlan_fr_deauthen *f);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _P80211MGMT_H */

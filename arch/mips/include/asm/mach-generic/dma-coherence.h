@@ -48,6 +48,7 @@ static inline int plat_dma_supported(struct device *dev, u64 mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void plat_extra_sync_for_device(struct device *dev)
 {
 }
@@ -67,6 +68,8 @@ static inline int plat_device_is_coherent(struct device *dev)
 #endif
 }
 =======
+=======
+>>>>>>> v3.18
 static inline int plat_device_is_coherent(struct device *dev)
 {
 	return coherentio;
@@ -83,6 +86,9 @@ static inline phys_addr_t dma_to_phys(struct device *dev, dma_addr_t daddr)
 	return daddr;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __ASM_MACH_GENERIC_DMA_COHERENCE_H */

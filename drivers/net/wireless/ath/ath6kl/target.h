@@ -290,7 +290,11 @@ struct host_interest {
 
 	/* test applications flags */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 hi_test_apps_related    ;                  /* 0xdc */
+=======
+	u32 hi_test_apps_related;                      /* 0xdc */
+>>>>>>> v3.18
 =======
 	u32 hi_test_apps_related;                      /* 0xdc */
 >>>>>>> v3.18

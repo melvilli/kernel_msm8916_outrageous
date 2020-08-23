@@ -962,7 +962,11 @@ static int ad9523_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 >>>>>>> v3.18
@@ -972,17 +976,23 @@ static int ad9523_probe(struct spi_device *spi)
 	st = iio_priv(indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st->reg = regulator_get(&spi->dev, "vcc");
 	if (!IS_ERR(st->reg)) {
 		ret = regulator_enable(st->reg);
 		if (ret)
 			goto error_put_reg;
 =======
+=======
+>>>>>>> v3.18
 	st->reg = devm_regulator_get(&spi->dev, "vcc");
 	if (!IS_ERR(st->reg)) {
 		ret = regulator_enable(st->reg);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1014,11 +1024,14 @@ error_disable_reg:
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_put_reg:
 	if (!IS_ERR(st->reg))
 		regulator_put(st->reg);
 
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1033,12 +1046,17 @@ static int ad9523_remove(struct spi_device *spi)
 	iio_device_unregister(indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR(st->reg)) {
 		regulator_disable(st->reg);
 		regulator_put(st->reg);
 	}
 
 	iio_device_free(indio_dev);
+=======
+	if (!IS_ERR(st->reg))
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(st->reg))
 		regulator_disable(st->reg);

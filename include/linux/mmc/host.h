@@ -16,9 +16,15 @@
 #include <linux/device.h>
 #include <linux/fault-inject.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/wakelock.h>
 
 #include <linux/mmc/core.h>
+=======
+
+#include <linux/mmc/core.h>
+#include <linux/mmc/card.h>
+>>>>>>> v3.18
 =======
 
 #include <linux/mmc/core.h>
@@ -29,8 +35,11 @@
 struct mmc_ios {
 	unsigned int	clock;			/* clock rate */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int	old_rate;       /* saved clock rate */
 	unsigned long	clk_ts;         /* time stamp of last updated clock */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned short	vdd;
@@ -54,6 +63,10 @@ struct mmc_ios {
 #define MMC_POWER_UP		1
 #define MMC_POWER_ON		2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MMC_POWER_UNDEFINED	3
+>>>>>>> v3.18
 =======
 #define MMC_POWER_UNDEFINED	3
 >>>>>>> v3.18
@@ -75,6 +88,7 @@ struct mmc_ios {
 #define MMC_TIMING_UHS_SDR104	6
 #define MMC_TIMING_UHS_DDR50	7
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MMC_TIMING_MMC_HS200	8
 #define MMC_TIMING_MMC_HS400	9
 
@@ -83,6 +97,11 @@ struct mmc_ios {
 #define MMC_1_8V_DDR_MODE	2
 #define MMC_1_2V_SDR_MODE	3
 #define MMC_1_8V_SDR_MODE	4
+=======
+#define MMC_TIMING_MMC_DDR52	8
+#define MMC_TIMING_MMC_HS200	9
+#define MMC_TIMING_MMC_HS400	10
+>>>>>>> v3.18
 =======
 #define MMC_TIMING_MMC_DDR52	8
 #define MMC_TIMING_MMC_HS200	9
@@ -104,6 +123,7 @@ struct mmc_ios {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* states to represent load on the host */
 enum mmc_load {
 	MMC_LOAD_HIGH,
@@ -111,6 +131,8 @@ enum mmc_load {
 	MMC_LOAD_LOW,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct mmc_host_ops {
@@ -170,6 +192,7 @@ struct mmc_host_ops {
 	/* The tuning command opcode value is different for SD and eMMC cards */
 	int	(*execute_tuning)(struct mmc_host *host, u32 opcode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	(*select_drive_strength)(unsigned int max_dtr, int host_drv, int card_drv);
 	void	(*hw_reset)(struct mmc_host *host);
 	void	(*card_event)(struct mmc_host *host);
@@ -179,6 +202,8 @@ struct mmc_host_ops {
 	int	(*stop_request)(struct mmc_host *host);
 	unsigned int	(*get_xfer_remain)(struct mmc_host *host);
 =======
+=======
+>>>>>>> v3.18
 
 	/* Prepare HS400 target operating frequency depending host driver */
 	int	(*prepare_hs400_tuning)(struct mmc_host *host, struct mmc_ios *ios);
@@ -192,6 +217,9 @@ struct mmc_host_ops {
 	 */
 	int	(*multi_io_quirk)(struct mmc_card *card,
 				  unsigned int direction, int blk_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -202,8 +230,11 @@ struct mmc_async_req {
 	/* active mmc request */
 	struct mmc_request	*mrq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int cmd_flags; /* copied from struct request */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -212,11 +243,14 @@ struct mmc_async_req {
 	 */
 	int (*err_check) (struct mmc_card *, struct mmc_async_req *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Reinserts request back to the block layer */
 	void (*reinsert_req) (struct mmc_async_req *);
 	/* update what part of request is not done (packed_fail_idx) */
 	int (*update_interrupted_req) (struct mmc_card *,
 			struct mmc_async_req *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -244,10 +278,14 @@ struct mmc_slot {
  * @is_done_rcv		wake up reason was done request
  * @is_new_req		wake up reason was new request
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @is_waiting_last_req	is true, when 1 request running on the bus and
  *			NULL fetched as second request. MMC_BLK_NEW_REQUEST
  *			notification will wake up mmc thread from waiting.
  * @is_urgent		wake up reason was urgent request
+=======
+ * @is_waiting_last_req	mmc context waiting for single running request
+>>>>>>> v3.18
 =======
  * @is_waiting_last_req	mmc context waiting for single running request
 >>>>>>> v3.18
@@ -259,7 +297,10 @@ struct mmc_context_info {
 	bool			is_new_req;
 	bool			is_waiting_last_req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool			is_urgent;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	wait_queue_head_t	wait;
@@ -274,12 +315,15 @@ struct mmc_supply {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum dev_state {
 	DEV_SUSPENDING = 1,
 	DEV_SUSPENDED,
 	DEV_RESUMED,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct mmc_host {
@@ -327,7 +371,11 @@ struct mmc_host {
 #define MMC_CAP_NEEDS_POLL	(1 << 5)	/* Needs polling for card-detection */
 #define MMC_CAP_8_BIT_DATA	(1 << 6)	/* Can the host do 8 bit transfers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#define MMC_CAP_AGGRESSIVE_PM	(1 << 7)	/* Suspend (e)MMC/SD at idle  */
+>>>>>>> v3.18
 =======
 #define MMC_CAP_AGGRESSIVE_PM	(1 << 7)	/* Suspend (e)MMC/SD at idle  */
 >>>>>>> v3.18
@@ -339,7 +387,10 @@ struct mmc_host {
 #define MMC_CAP_1_2V_DDR	(1 << 12)	/* can support */
 						/* DDR mode at 1.2V */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MMC_CAP_HSDDR		(MMC_CAP_1_8V_DDR | MMC_CAP_1_2V_DDR)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MMC_CAP_POWER_OFF_CARD	(1 << 13)	/* Can power off after boot */
@@ -350,6 +401,10 @@ struct mmc_host {
 #define MMC_CAP_UHS_SDR104	(1 << 18)	/* Host supports UHS SDR104 mode */
 #define MMC_CAP_UHS_DDR50	(1 << 19)	/* Host supports UHS DDR50 mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MMC_CAP_RUNTIME_RESUME	(1 << 20)	/* Resume at runtime_resume. */
+>>>>>>> v3.18
 =======
 #define MMC_CAP_RUNTIME_RESUME	(1 << 20)	/* Resume at runtime_resume. */
 >>>>>>> v3.18
@@ -363,10 +418,14 @@ struct mmc_host {
 
 #define MMC_CAP2_BOOTPART_NOACC	(1 << 0)	/* Boot partition no access */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MMC_CAP2_CACHE_CTRL	(1 << 1)	/* Allow cache control */
 #define MMC_CAP2_POWEROFF_NOTIFY (1 << 2)	/* Notify poweroff supported */
 #define MMC_CAP2_NO_MULTI_READ	(1 << 3)	/* Multiblock reads don't work */
 #define MMC_CAP2_NO_SLEEP_CMD	(1 << 4)	/* Don't allow sleep command */
+=======
+#define MMC_CAP2_FULL_PWR_CYCLE	(1 << 2)	/* Can do full power cycle */
+>>>>>>> v3.18
 =======
 #define MMC_CAP2_FULL_PWR_CYCLE	(1 << 2)	/* Can do full power cycle */
 >>>>>>> v3.18
@@ -375,8 +434,11 @@ struct mmc_host {
 #define MMC_CAP2_HS200		(MMC_CAP2_HS200_1_8V_SDR | \
 				 MMC_CAP2_HS200_1_2V_SDR)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MMC_CAP2_BROKEN_VOLTAGE	(1 << 7)	/* Use the broken voltage */
 #define MMC_CAP2_DETECT_ON_ERR	(1 << 8)	/* On I/O err check card removal */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MMC_CAP2_HC_ERASE_SZ	(1 << 9)	/* High-capacity erase size */
@@ -387,6 +449,7 @@ struct mmc_host {
 #define MMC_CAP2_PACKED_CMD	(MMC_CAP2_PACKED_RD | \
 				 MMC_CAP2_PACKED_WR)
 #define MMC_CAP2_NO_PRESCAN_POWERUP (1 << 14)	/* Don't power up before scan */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MMC_CAP2_INIT_BKOPS	    (1 << 15)	/* Need to set BKOPS_EN */
 #define MMC_CAP2_PACKED_WR_CONTROL (1 << 16) /* Allow write packing control */
@@ -407,6 +470,8 @@ struct mmc_host {
 	mmc_pm_flag_t		pm_caps;	/* supported pm features */
 
 =======
+=======
+>>>>>>> v3.18
 #define MMC_CAP2_HS400_1_8V	(1 << 15)	/* Can support HS400 1.8V */
 #define MMC_CAP2_HS400_1_2V	(1 << 16)	/* Can support HS400 1.2V */
 #define MMC_CAP2_HS400		(MMC_CAP2_HS400_1_8V | \
@@ -416,6 +481,9 @@ struct mmc_host {
 	mmc_pm_flag_t		pm_caps;	/* supported pm features */
 
 #ifdef CONFIG_MMC_CLKGATE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			clk_requests;	/* internal reference counter */
 	unsigned int		clk_delay;	/* number of MCI clk hold cycles */
@@ -427,6 +495,10 @@ struct mmc_host {
 	struct device_attribute clkgate_delay_attr;
 	unsigned long           clkgate_delay;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -439,7 +511,11 @@ struct mmc_host {
 	unsigned int		max_blk_size;	/* maximum size of one mmc block */
 	unsigned int		max_blk_count;	/* maximum number of blocks in one req */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		max_discard_to;	/* max. discard timeout in ms */
+=======
+	unsigned int		max_busy_timeout; /* max busy timeout in ms */
+>>>>>>> v3.18
 =======
 	unsigned int		max_busy_timeout; /* max busy timeout in ms */
 >>>>>>> v3.18
@@ -449,7 +525,10 @@ struct mmc_host {
 
 	struct mmc_ios		ios;		/* current io bus settings */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			ocr;		/* the current OCR setting */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -465,6 +544,11 @@ struct mmc_host {
 	int			rescan_entered;	/* used with nonremovable devices */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool			trigger_card_event; /* card_event necessary */
+
+>>>>>>> v3.18
 =======
 	bool			trigger_card_event; /* card_event necessary */
 
@@ -473,6 +557,7 @@ struct mmc_host {
 
 	wait_queue_head_t	wq;
 	struct task_struct	*claimer;	/* task that has host claimed */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct task_struct	*suspend_task;
 	int			claim_cnt;	/* "claim" nesting count */
@@ -485,6 +570,11 @@ struct mmc_host {
 
 	struct delayed_work	detect;
 >>>>>>> v3.18
+=======
+	int			claim_cnt;	/* "claim" nesting count */
+
+	struct delayed_work	detect;
+>>>>>>> v3.18
 	int			detect_change;	/* card detect flag */
 	struct mmc_slot		slot;
 
@@ -492,10 +582,13 @@ struct mmc_host {
 	unsigned int		bus_refs;	/* reference counter */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		bus_resume_flags;
 #define MMC_BUSRESUME_MANUAL_RESUME	(1 << 0)
 #define MMC_BUSRESUME_NEEDS_RESUME	(1 << 1)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int		sdio_irqs;
@@ -515,8 +608,11 @@ struct mmc_host {
 	struct dentry		*debugfs_root;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool			err_occurred;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct mmc_async_req	*areq;		/* active async req */
@@ -530,6 +626,7 @@ struct mmc_host {
 
 	unsigned int		slotno;	/* used for sdio acpi binding */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MMC_EMBEDDED_SDIO
 	struct {
@@ -578,10 +675,16 @@ struct mmc_host {
 	u32			dsr;	/* optional driver stage (DSR) value */
 
 >>>>>>> v3.18
+=======
+	int			dsr_req;	/* DSR value is valid */
+	u32			dsr;	/* optional driver stage (DSR) value */
+
+>>>>>>> v3.18
 	unsigned long		private[0] ____cacheline_aligned;
 };
 
 struct mmc_host *mmc_alloc_host(int extra, struct device *);
+<<<<<<< HEAD
 <<<<<<< HEAD
 bool mmc_host_may_gate_card(struct mmc_card *);
 int mmc_add_host(struct mmc_host *);
@@ -597,10 +700,15 @@ extern void mmc_set_embedded_sdio_data(struct mmc_host *host,
 				       int num_funcs);
 #endif
 =======
+=======
+>>>>>>> v3.18
 int mmc_add_host(struct mmc_host *);
 void mmc_remove_host(struct mmc_host *);
 void mmc_free_host(struct mmc_host *);
 int mmc_of_parse(struct mmc_host *host);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void *mmc_priv(struct mmc_host *host)
@@ -613,6 +721,7 @@ static inline void *mmc_priv(struct mmc_host *host)
 #define mmc_dev(x)	((x)->parent)
 #define mmc_classdev(x)	(&(x)->class_dev)
 #define mmc_hostname(x)	(dev_name(&(x)->class_dev))
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define mmc_bus_needs_resume(host) ((host)->bus_resume_flags & MMC_BUSRESUME_NEEDS_RESUME)
 #define mmc_bus_manual_resume(host) ((host)->bus_resume_flags & MMC_BUSRESUME_MANUAL_RESUME)
@@ -631,6 +740,8 @@ int mmc_suspend_host(struct mmc_host *);
 int mmc_resume_host(struct mmc_host *);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 int mmc_power_save_host(struct mmc_host *host);
 int mmc_power_restore_host(struct mmc_host *host);
@@ -638,6 +749,7 @@ int mmc_power_restore_host(struct mmc_host *host);
 void mmc_detect_change(struct mmc_host *, unsigned long delay);
 void mmc_request_done(struct mmc_host *, struct mmc_request *);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int mmc_cache_ctrl(struct mmc_host *, u8);
 
@@ -653,12 +765,21 @@ static inline void mmc_signal_sdio_irq(struct mmc_host *host)
 static inline void mmc_signal_sdio_irq(struct mmc_host *host)
 {
 >>>>>>> v3.18
+=======
+static inline void mmc_signal_sdio_irq(struct mmc_host *host)
+{
+>>>>>>> v3.18
 	host->ops->enable_sdio_irq(host, 0);
 	host->sdio_irq_pending = true;
 	wake_up_process(host->sdio_irq_thread);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void sdio_run_irqs(struct mmc_host *host);
+
+>>>>>>> v3.18
 =======
 void sdio_run_irqs(struct mmc_host *host);
 
@@ -669,7 +790,10 @@ int mmc_regulator_set_ocr(struct mmc_host *mmc,
 			struct regulator *supply,
 			unsigned short vdd_bit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mmc_regulator_get_supply(struct mmc_host *mmc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else
@@ -684,6 +808,7 @@ static inline int mmc_regulator_set_ocr(struct mmc_host *mmc,
 {
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static inline int mmc_regulator_get_supply(struct mmc_host *mmc)
@@ -705,6 +830,8 @@ static inline int mmc_card_is_removable(struct mmc_host *host)
 {
 	return !(host->caps & MMC_CAP_NONREMOVABLE) && mmc_assume_removable;
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 int mmc_regulator_get_supply(struct mmc_host *mmc);
@@ -714,6 +841,9 @@ int mmc_pm_notify(struct notifier_block *notify_block, unsigned long, void *);
 static inline int mmc_card_is_removable(struct mmc_host *host)
 {
 	return !(host->caps & MMC_CAP_NONREMOVABLE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -771,6 +901,7 @@ static inline unsigned int mmc_host_clk_rate(struct mmc_host *host)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int mmc_use_core_runtime_pm(struct mmc_host *host)
 {
 	return host->caps2 & MMC_CAP2_CORE_RUNTIME_PM;
@@ -780,6 +911,8 @@ static inline int mmc_use_core_pm(struct mmc_host *host)
 {
 	return host->caps2 & MMC_CAP2_CORE_PM;
 =======
+=======
+>>>>>>> v3.18
 static inline int mmc_card_hs(struct mmc_card *card)
 {
 	return card->host->ios.timing == MMC_TIMING_SD_HS ||
@@ -805,6 +938,9 @@ static inline bool mmc_card_ddr52(struct mmc_card *card)
 static inline bool mmc_card_hs400(struct mmc_card *card)
 {
 	return card->host->ios.timing == MMC_TIMING_MMC_HS400;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

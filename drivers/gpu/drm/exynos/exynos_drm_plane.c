@@ -14,14 +14,20 @@
 #include <drm/exynos_drm.h>
 #include "exynos_drm_drv.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "exynos_drm_encoder.h"
 #include "exynos_drm_fb.h"
 #include "exynos_drm_gem.h"
 =======
+=======
+>>>>>>> v3.18
 #include "exynos_drm_crtc.h"
 #include "exynos_drm_fb.h"
 #include "exynos_drm_gem.h"
 #include "exynos_drm_plane.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define to_exynos_plane(x)	container_of(x, struct exynos_plane, base)
@@ -89,8 +95,11 @@ int exynos_plane_mode_set(struct drm_plane *plane, struct drm_crtc *crtc,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("[%d] %s\n", __LINE__, __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nr = exynos_drm_fb_get_buf_cnt(fb);
@@ -99,7 +108,11 @@ int exynos_plane_mode_set(struct drm_plane *plane, struct drm_crtc *crtc,
 
 		if (!buffer) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DRM_LOG_KMS("buffer is null\n");
+=======
+			DRM_DEBUG_KMS("buffer is null\n");
+>>>>>>> v3.18
 =======
 			DRM_DEBUG_KMS("buffer is null\n");
 >>>>>>> v3.18
@@ -155,7 +168,13 @@ int exynos_plane_mode_set(struct drm_plane *plane, struct drm_crtc *crtc,
 			overlay->crtc_width, overlay->crtc_height);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	exynos_drm_fn_encoder(crtc, overlay, exynos_drm_encoder_plane_mode_set);
+=======
+	plane->crtc = crtc;
+
+	exynos_drm_crtc_plane_mode_set(crtc, overlay);
+>>>>>>> v3.18
 =======
 	plane->crtc = crtc;
 
@@ -171,8 +190,12 @@ void exynos_plane_commit(struct drm_plane *plane)
 	struct exynos_drm_overlay *overlay = &exynos_plane->overlay;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	exynos_drm_fn_encoder(plane->crtc, &overlay->zpos,
 			exynos_drm_encoder_plane_commit);
+=======
+	exynos_drm_crtc_plane_commit(plane->crtc, overlay->zpos);
+>>>>>>> v3.18
 =======
 	exynos_drm_crtc_plane_commit(plane->crtc, overlay->zpos);
 >>>>>>> v3.18
@@ -184,8 +207,11 @@ void exynos_plane_dpms(struct drm_plane *plane, int mode)
 	struct exynos_drm_overlay *overlay = &exynos_plane->overlay;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("[%d] %s\n", __LINE__, __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (mode == DRM_MODE_DPMS_ON) {
@@ -193,9 +219,13 @@ void exynos_plane_dpms(struct drm_plane *plane, int mode)
 			return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		exynos_drm_fn_encoder(plane->crtc, &overlay->zpos,
 				exynos_drm_encoder_plane_enable);
 
+=======
+		exynos_drm_crtc_plane_enable(plane->crtc, overlay->zpos);
+>>>>>>> v3.18
 =======
 		exynos_drm_crtc_plane_enable(plane->crtc, overlay->zpos);
 >>>>>>> v3.18
@@ -205,9 +235,13 @@ void exynos_plane_dpms(struct drm_plane *plane, int mode)
 			return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		exynos_drm_fn_encoder(plane->crtc, &overlay->zpos,
 				exynos_drm_encoder_plane_disable);
 
+=======
+		exynos_drm_crtc_plane_disable(plane->crtc, overlay->zpos);
+>>>>>>> v3.18
 =======
 		exynos_drm_crtc_plane_disable(plane->crtc, overlay->zpos);
 >>>>>>> v3.18
@@ -225,8 +259,11 @@ exynos_update_plane(struct drm_plane *plane, struct drm_crtc *crtc,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("[%d] %s\n", __LINE__, __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = exynos_plane_mode_set(plane, crtc, fb, crtc_x, crtc_y,
@@ -236,8 +273,11 @@ exynos_update_plane(struct drm_plane *plane, struct drm_crtc *crtc,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	plane->crtc = crtc;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	exynos_plane_commit(plane);
@@ -249,8 +289,11 @@ exynos_update_plane(struct drm_plane *plane, struct drm_crtc *crtc,
 static int exynos_disable_plane(struct drm_plane *plane)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("[%d] %s\n", __LINE__, __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	exynos_plane_dpms(plane, DRM_MODE_DPMS_OFF);
@@ -263,8 +306,11 @@ static void exynos_plane_destroy(struct drm_plane *plane)
 	struct exynos_plane *exynos_plane = to_exynos_plane(plane);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("[%d] %s\n", __LINE__, __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	exynos_disable_plane(plane);
@@ -281,8 +327,11 @@ static int exynos_plane_set_property(struct drm_plane *plane,
 	struct exynos_drm_private *dev_priv = dev->dev_private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("[%d] %s\n", __LINE__, __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (property == dev_priv->plane_zpos_property) {
@@ -307,8 +356,11 @@ static void exynos_plane_attach_zpos_property(struct drm_plane *plane)
 	struct drm_property *prop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("[%d] %s\n", __LINE__, __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	prop = dev_priv->plane_zpos_property;
@@ -326,7 +378,12 @@ static void exynos_plane_attach_zpos_property(struct drm_plane *plane)
 
 struct drm_plane *exynos_plane_init(struct drm_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    unsigned int possible_crtcs, bool priv)
+=======
+				    unsigned long possible_crtcs,
+				    enum drm_plane_type type)
+>>>>>>> v3.18
 =======
 				    unsigned long possible_crtcs,
 				    enum drm_plane_type type)
@@ -335,6 +392,7 @@ struct drm_plane *exynos_plane_init(struct drm_device *dev,
 	struct exynos_plane *exynos_plane;
 	int err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DRM_DEBUG_KMS("[%d] %s\n", __LINE__, __func__);
 
@@ -355,6 +413,8 @@ struct drm_plane *exynos_plane_init(struct drm_device *dev,
 
 	if (priv)
 =======
+=======
+>>>>>>> v3.18
 	exynos_plane = kzalloc(sizeof(struct exynos_plane), GFP_KERNEL);
 	if (!exynos_plane)
 		return ERR_PTR(-ENOMEM);
@@ -369,6 +429,9 @@ struct drm_plane *exynos_plane_init(struct drm_device *dev,
 	}
 
 	if (type == DRM_PLANE_TYPE_PRIMARY)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		exynos_plane->overlay.zpos = DEFAULT_ZPOS;
 	else

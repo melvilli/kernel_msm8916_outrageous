@@ -35,6 +35,11 @@ struct usbnet {
 	unsigned char		suspend_count;
 	unsigned char		pkt_cnt, pkt_err;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned short		rx_qlen, tx_qlen;
+	unsigned		can_dma_sg:1;
+>>>>>>> v3.18
 =======
 	unsigned short		rx_qlen, tx_qlen;
 	unsigned		can_dma_sg:1;
@@ -46,6 +51,10 @@ struct usbnet {
 	unsigned		maxpacket;
 	struct timer_list	delay;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char		*padding_pkt;
+>>>>>>> v3.18
 =======
 	const char		*padding_pkt;
 >>>>>>> v3.18
@@ -69,7 +78,11 @@ struct usbnet {
 	struct mutex		interrupt_mutex;
 	struct usb_anchor	deferred;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct	bh_w;
+=======
+	struct tasklet_struct	bh;
+>>>>>>> v3.18
 =======
 	struct tasklet_struct	bh;
 >>>>>>> v3.18
@@ -89,6 +102,10 @@ struct usbnet {
 #		define EVENT_RX_KILL	10
 #		define EVENT_LINK_CHANGE	11
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#		define EVENT_SET_RX_MODE	12
+>>>>>>> v3.18
 =======
 #		define EVENT_SET_RX_MODE	12
 >>>>>>> v3.18
@@ -163,6 +180,12 @@ struct driver_info {
 				struct sk_buff *skb, gfp_t flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* recover from timeout */
+	void	(*recover)(struct usbnet *dev);
+
+>>>>>>> v3.18
 =======
 	/* recover from timeout */
 	void	(*recover)(struct usbnet *dev);
@@ -177,6 +200,12 @@ struct driver_info {
 	void	(*indication)(struct usbnet *dev, void *ind, int indlen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* rx mode change (device changes address list filtering) */
+	void	(*set_rx_mode)(struct usbnet *dev);
+
+>>>>>>> v3.18
 =======
 	/* rx mode change (device changes address list filtering) */
 	void	(*set_rx_mode)(struct usbnet *dev);
@@ -276,7 +305,10 @@ extern void usbnet_set_msglevel(struct net_device *, u32);
 extern void usbnet_get_drvinfo(struct net_device *, struct ethtool_drvinfo *);
 extern int usbnet_nway_reset(struct net_device *net);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void usbnet_terminate_urbs(struct usbnet *dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -287,6 +319,11 @@ extern int usbnet_status_start(struct usbnet *dev, gfp_t mem_flags);
 extern void usbnet_status_stop(struct usbnet *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void usbnet_update_max_qlen(struct usbnet *dev);
+
+>>>>>>> v3.18
 =======
 extern void usbnet_update_max_qlen(struct usbnet *dev);
 

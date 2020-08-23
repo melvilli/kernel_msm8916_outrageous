@@ -142,7 +142,11 @@ void kgdb_arch_exit(void)
  * Global data
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct kgdb_arch arch_kgdb_ops = {
+=======
+struct kgdb_arch arch_kgdb_ops = {
+>>>>>>> v3.18
 =======
 struct kgdb_arch arch_kgdb_ops = {
 >>>>>>> v3.18

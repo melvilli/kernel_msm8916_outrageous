@@ -73,6 +73,9 @@ int task_current_syscall(struct task_struct *target, long *callno,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(task_current_syscall);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

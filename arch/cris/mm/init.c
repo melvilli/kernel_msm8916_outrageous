@@ -20,9 +20,12 @@ void __init
 mem_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int codesize, reservedpages, datasize, initsize;
 	unsigned long tmp;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	BUG_ON(!mem_map);
@@ -32,6 +35,7 @@ mem_init(void)
 	 *
 	 * high_memory was also set in setup.c
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	max_mapnr = num_physpages = max_low_pfn - min_low_pfn;
@@ -67,6 +71,11 @@ mem_init(void)
         free_all_bootmem();
 	mem_init_print_info(NULL);
 >>>>>>> v3.18
+=======
+	max_mapnr = max_low_pfn - min_low_pfn;
+        free_all_bootmem();
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 }
 
 /* free the pages occupied by initialization code */
@@ -75,7 +84,11 @@ void
 free_initmem(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 =======
 	free_initmem_default(-1);
 >>>>>>> v3.18

@@ -109,7 +109,10 @@ struct dlm_recovery_ctxt
 {
 	struct list_head resources;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head received;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head node_data;
@@ -336,6 +339,10 @@ struct dlm_lock_resource
 	char lvb[DLM_LVB_LEN];
 	unsigned int inflight_locks;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int inflight_assert_workers;
+>>>>>>> v3.18
 =======
 	unsigned int inflight_assert_workers;
 >>>>>>> v3.18
@@ -919,6 +926,12 @@ void dlm_lockres_grab_inflight_ref(struct dlm_ctxt *dlm,
 				   struct dlm_lock_resource *res);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void __dlm_lockres_grab_inflight_worker(struct dlm_ctxt *dlm,
+		struct dlm_lock_resource *res);
+
+>>>>>>> v3.18
 =======
 void __dlm_lockres_grab_inflight_worker(struct dlm_ctxt *dlm,
 		struct dlm_lock_resource *res);
@@ -1093,11 +1106,17 @@ static inline int dlm_lock_on_list(struct list_head *head,
 				   struct dlm_lock *lock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *iter;
 	struct dlm_lock *tmplock;
 
 	list_for_each(iter, head) {
 		tmplock = list_entry(iter, struct dlm_lock, list);
+=======
+	struct dlm_lock *tmplock;
+
+	list_for_each_entry(tmplock, head, list) {
+>>>>>>> v3.18
 =======
 	struct dlm_lock *tmplock;
 

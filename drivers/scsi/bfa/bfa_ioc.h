@@ -347,13 +347,19 @@ struct bfa_ioc_hwif_s {
 	bfa_boolean_t	(*ioc_sync_complete)	(struct bfa_ioc_s *ioc);
 	bfa_boolean_t	(*ioc_lpu_read_stat)	(struct bfa_ioc_s *ioc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	void		(*ioc_set_fwstate)	(struct bfa_ioc_s *ioc,
 					enum bfi_ioc_state fwstate);
 	enum bfi_ioc_state	(*ioc_get_fwstate)	(struct bfa_ioc_s *ioc);
 	void		(*ioc_set_alt_fwstate)	(struct bfa_ioc_s *ioc,
 					enum bfi_ioc_state fwstate);
 	enum bfi_ioc_state	(*ioc_get_alt_fwstate)	(struct bfa_ioc_s *ioc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -519,6 +525,11 @@ void bfa_flash_attach(struct bfa_flash_s *flash, struct bfa_ioc_s *ioc,
 void bfa_flash_memclaim(struct bfa_flash_s *flash,
 		u8 *dm_kva, u64 dm_pa, bfa_boolean_t mincfg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bfa_status_t    bfa_flash_raw_read(void __iomem *pci_bar_kva,
+				u32 offset, char *buf, u32 len);
+>>>>>>> v3.18
 =======
 bfa_status_t    bfa_flash_raw_read(void __iomem *pci_bar_kva,
 				u32 offset, char *buf, u32 len);
@@ -740,6 +751,10 @@ struct bfa_fru_s {
 	struct bfa_ioc_notify_s ioc_notify; /* ioc event notify */
 	struct bfa_mem_dma_s	fru_dma;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8		trfr_cmpl;
+>>>>>>> v3.18
 =======
 	u8		trfr_cmpl;
 >>>>>>> v3.18
@@ -751,7 +766,11 @@ struct bfa_fru_s {
 bfa_status_t bfa_fruvpd_update(struct bfa_fru_s *fru,
 			void *buf, u32 len, u32 offset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bfa_cb_fru_t cbfn, void *cbarg);
+=======
+			bfa_cb_fru_t cbfn, void *cbarg, u8 trfr_cmpl);
+>>>>>>> v3.18
 =======
 			bfa_cb_fru_t cbfn, void *cbarg, u8 trfr_cmpl);
 >>>>>>> v3.18
@@ -904,7 +923,11 @@ void bfa_ioc_disable(struct bfa_ioc_s *ioc);
 bfa_boolean_t bfa_ioc_intx_claim(struct bfa_ioc_s *ioc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bfa_ioc_boot(struct bfa_ioc_s *ioc, u32 boot_type,
+=======
+bfa_status_t bfa_ioc_boot(struct bfa_ioc_s *ioc, u32 boot_type,
+>>>>>>> v3.18
 =======
 bfa_status_t bfa_ioc_boot(struct bfa_ioc_s *ioc, u32 boot_type,
 >>>>>>> v3.18
@@ -939,6 +962,10 @@ bfa_status_t bfa_ioc_debug_fwtrc(struct bfa_ioc_s *ioc, void *trcdata,
 bfa_status_t bfa_ioc_debug_fwcore(struct bfa_ioc_s *ioc, void *buf,
 	u32 *offset, int *buflen);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bfa_status_t bfa_ioc_fwsig_invalidate(struct bfa_ioc_s *ioc);
+>>>>>>> v3.18
 =======
 bfa_status_t bfa_ioc_fwsig_invalidate(struct bfa_ioc_s *ioc);
 >>>>>>> v3.18
@@ -980,6 +1007,11 @@ bfa_status_t bfa_ablk_optrom_dis(struct bfa_ablk_s *ablk,
 		bfa_ablk_cbfn_t cbfn, void *cbarg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bfa_status_t bfa_ioc_flash_img_get_chnk(struct bfa_ioc_s *ioc, u32 off,
+				u32 *fwimg);
+>>>>>>> v3.18
 =======
 bfa_status_t bfa_ioc_flash_img_get_chnk(struct bfa_ioc_s *ioc, u32 off,
 				u32 *fwimg);

@@ -57,7 +57,11 @@ static int vcnl4000_measure(struct vcnl4000_data *data, u8 req_mask,
 {
 	int tries = 20;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 buf;
+=======
+	__be16 buf;
+>>>>>>> v3.18
 =======
 	__be16 buf;
 >>>>>>> v3.18
@@ -162,7 +166,11 @@ static int vcnl4000_probe(struct i2c_client *client,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*data));
+=======
+	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*data));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*data));
 >>>>>>> v3.18
@@ -176,7 +184,11 @@ static int vcnl4000_probe(struct i2c_client *client,
 	ret = i2c_smbus_read_byte_data(data->client, VCNL4000_PROD_REV);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -191,6 +203,7 @@ static int vcnl4000_probe(struct i2c_client *client,
 	indio_dev->name = VCNL4000_DRV_NAME;
 	indio_dev->modes = INDIO_DIRECT_MODE;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = iio_device_register(indio_dev);
 	if (ret < 0)
@@ -214,6 +227,9 @@ static int vcnl4000_remove(struct i2c_client *client)
 =======
 	return devm_iio_device_register(&client->dev, indio_dev);
 >>>>>>> v3.18
+=======
+	return devm_iio_device_register(&client->dev, indio_dev);
+>>>>>>> v3.18
 }
 
 static struct i2c_driver vcnl4000_driver = {
@@ -223,7 +239,10 @@ static struct i2c_driver vcnl4000_driver = {
 	},
 	.probe  = vcnl4000_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = vcnl4000_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = vcnl4000_id,

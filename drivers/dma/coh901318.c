@@ -23,6 +23,10 @@
 #include <linux/debugfs.h>
 #include <linux/platform_data/dma-coh901318.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_dma.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_dma.h>
 >>>>>>> v3.18
@@ -1343,6 +1347,7 @@ static int coh901318_debugfs_read(struct file *file, char __user *buf,
 	u64 started_channels = debugfs_dma_base->pm.started_channels;
 	int pool_count = debugfs_dma_base->pool.debugfs_pool_counter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	int ret = 0;
 	char *dev_buf;
@@ -1353,6 +1358,8 @@ static int coh901318_debugfs_read(struct file *file, char __user *buf,
 	if (dev_buf == NULL)
 		goto err_kmalloc;
 =======
+=======
+>>>>>>> v3.18
 	char *dev_buf;
 	char *tmp;
 	int ret;
@@ -1361,6 +1368,9 @@ static int coh901318_debugfs_read(struct file *file, char __user *buf,
 	dev_buf = kmalloc(4*1024, GFP_KERNEL);
 	if (dev_buf == NULL)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tmp = dev_buf;
 
@@ -1371,6 +1381,7 @@ static int coh901318_debugfs_read(struct file *file, char __user *buf,
 			tmp += sprintf(tmp, "channel %d\n", i);
 
 	tmp += sprintf(tmp, "Pool alloc nbr %d\n", pool_count);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_size = tmp  - dev_buf;
 
@@ -1393,11 +1404,16 @@ static int coh901318_debugfs_read(struct file *file, char __user *buf,
  err_kmalloc:
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 
 	ret = simple_read_from_buffer(buf, count, f_pos, dev_buf, 
 					tmp - dev_buf);
 	kfree(dev_buf);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1812,7 +1828,10 @@ bool coh901318_filter_id(struct dma_chan *chan, void *chan_id)
 EXPORT_SYMBOL(coh901318_filter_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct coh901318_filter_args {
 	struct coh901318_base *base;
 	unsigned int ch_nr;
@@ -1842,6 +1861,9 @@ static struct dma_chan *coh901318_xlate(struct of_phandle_args *dma_spec,
 
 	return dma_request_channel(cap, coh901318_filter_base_and_id, &args);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * DMA channel allocation
@@ -2198,7 +2220,11 @@ coh901318_free_chan_resources(struct dma_chan *chan)
 	spin_unlock_irqrestore(&cohc->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chan->device->device_control(chan, DMA_TERMINATE_ALL, 0);
+=======
+	dmaengine_terminate_all(chan);
+>>>>>>> v3.18
 =======
 	dmaengine_terminate_all(chan);
 >>>>>>> v3.18
@@ -2415,7 +2441,11 @@ coh901318_tx_status(struct dma_chan *chan, dma_cookie_t cookie,
 
 	ret = dma_cookie_status(chan, cookie, txstate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == DMA_SUCCESS)
+=======
+	if (ret == DMA_COMPLETE)
+>>>>>>> v3.18
 =======
 	if (ret == DMA_COMPLETE)
 >>>>>>> v3.18
@@ -2744,7 +2774,11 @@ static int __init coh901318_probe(struct platform_device *pdev)
 		return irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = devm_request_irq(&pdev->dev, irq, dma_irq_handler, IRQF_DISABLED,
+=======
+	err = devm_request_irq(&pdev->dev, irq, dma_irq_handler, 0,
+>>>>>>> v3.18
 =======
 	err = devm_request_irq(&pdev->dev, irq, dma_irq_handler, 0,
 >>>>>>> v3.18
@@ -2803,12 +2837,18 @@ static int __init coh901318_probe(struct platform_device *pdev)
 		goto err_register_memcpy;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = of_dma_controller_register(pdev->dev.of_node, coh901318_xlate,
 					 base);
 	if (err)
 		goto err_register_of_dma;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_set_drvdata(pdev, base);
 	dev_info(&pdev->dev, "Initialized COH901318 DMA on virtual base 0x%08x\n",
@@ -2817,6 +2857,11 @@ static int __init coh901318_probe(struct platform_device *pdev)
 	return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ err_register_of_dma:
+	dma_async_device_unregister(&base->dma_memcpy);
+>>>>>>> v3.18
 =======
  err_register_of_dma:
 	dma_async_device_unregister(&base->dma_memcpy);
@@ -2833,6 +2878,10 @@ static int coh901318_remove(struct platform_device *pdev)
 	struct coh901318_base *base = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	of_dma_controller_free(pdev->dev.of_node);
+>>>>>>> v3.18
 =======
 	of_dma_controller_free(pdev->dev.of_node);
 >>>>>>> v3.18
@@ -2843,11 +2892,17 @@ static int coh901318_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id coh901318_dt_match[] = {
 	{ .compatible = "stericsson,coh901318" },
 	{},
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct platform_driver coh901318_driver = {
@@ -2855,6 +2910,10 @@ static struct platform_driver coh901318_driver = {
 	.driver = {
 		.name	= "coh901318",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = coh901318_dt_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = coh901318_dt_match,
 >>>>>>> v3.18

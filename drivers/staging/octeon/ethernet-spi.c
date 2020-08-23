@@ -65,6 +65,7 @@ static irqreturn_t cvm_oct_spi_rml_interrupt(int cpl, void *dev_id)
 				pr_err("SPI1: SRX Spi4 interface down\n");
 			if (spx_int_reg.s.calerr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_err("SPI1: SRX Spi4 Calendar table "
 				       "parity error\n");
 			if (spx_int_reg.s.syncerr)
@@ -91,6 +92,8 @@ static irqreturn_t cvm_oct_spi_rml_interrupt(int cpl, void *dev_id)
 				pr_err("SPI1: SRX Abnormal packet "
 				       "termination (ERR bit)\n");
 =======
+=======
+>>>>>>> v3.18
 				pr_err("SPI1: SRX Spi4 Calendar table parity error\n");
 			if (spx_int_reg.s.syncerr)
 				pr_err("SPI1: SRX Consecutive Spi4 DIP4 errors have exceeded SPX_ERR_CTL[ERRCNT]\n");
@@ -108,6 +111,9 @@ static irqreturn_t cvm_oct_spi_rml_interrupt(int cpl, void *dev_id)
 				pr_err("SPI1: SRX Spi4 async FIFO overflow\n");
 			if (spx_int_reg.s.abnorm)
 				pr_err("SPI1: SRX Abnormal packet termination (ERR bit)\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (spx_int_reg.s.prtnxa)
 				pr_err("SPI1: SRX Port out of range\n");
@@ -119,6 +125,7 @@ static irqreturn_t cvm_oct_spi_rml_interrupt(int cpl, void *dev_id)
 
 			stx_int_reg.u64 &= cvmx_read_csr(CVMX_STXX_INT_MSK(1));
 			if (stx_int_reg.s.syncerr)
+<<<<<<< HEAD
 <<<<<<< HEAD
 				pr_err("SPI1: STX Interface encountered a "
 				       "fatal error\n");
@@ -146,6 +153,8 @@ static irqreturn_t cvm_oct_spi_rml_interrupt(int cpl, void *dev_id)
 				pr_err("SPI1: STX Calendar Table Parity "
 				       "Error Bank0\n");
 =======
+=======
+>>>>>>> v3.18
 				pr_err("SPI1: STX Interface encountered a fatal error\n");
 			if (stx_int_reg.s.frmerr)
 				pr_err("SPI1: STX FRMCNT has exceeded STX_DIP_CNT[MAXFRM]\n");
@@ -163,6 +172,9 @@ static irqreturn_t cvm_oct_spi_rml_interrupt(int cpl, void *dev_id)
 				pr_err("SPI1: STX Calendar Table Parity Error Bank1\n");
 			if (stx_int_reg.s.calpar0)
 				pr_err("SPI1: STX Calendar Table Parity Error Bank0\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -184,6 +196,7 @@ static irqreturn_t cvm_oct_spi_rml_interrupt(int cpl, void *dev_id)
 			if (spx_int_reg.s.spf)
 				pr_err("SPI0: SRX Spi4 interface down\n");
 			if (spx_int_reg.s.calerr)
+<<<<<<< HEAD
 <<<<<<< HEAD
 				pr_err("SPI0: SRX Spi4 Calendar table "
 				       "parity error\n");
@@ -211,6 +224,8 @@ static irqreturn_t cvm_oct_spi_rml_interrupt(int cpl, void *dev_id)
 				pr_err("SPI0: SRX Abnormal packet "
 				       "termination (ERR bit)\n");
 =======
+=======
+>>>>>>> v3.18
 				pr_err("SPI0: SRX Spi4 Calendar table parity error\n");
 			if (spx_int_reg.s.syncerr)
 				pr_err("SPI0: SRX Consecutive Spi4 DIP4 errors have exceeded SPX_ERR_CTL[ERRCNT]\n");
@@ -228,6 +243,9 @@ static irqreturn_t cvm_oct_spi_rml_interrupt(int cpl, void *dev_id)
 				pr_err("SPI0: SRX Spi4 async FIFO overflow\n");
 			if (spx_int_reg.s.abnorm)
 				pr_err("SPI0: SRX Abnormal packet termination (ERR bit)\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (spx_int_reg.s.prtnxa)
 				pr_err("SPI0: SRX Port out of range\n");
@@ -239,6 +257,7 @@ static irqreturn_t cvm_oct_spi_rml_interrupt(int cpl, void *dev_id)
 
 			stx_int_reg.u64 &= cvmx_read_csr(CVMX_STXX_INT_MSK(0));
 			if (stx_int_reg.s.syncerr)
+<<<<<<< HEAD
 <<<<<<< HEAD
 				pr_err("SPI0: STX Interface encountered a "
 				       "fatal error\n");
@@ -266,6 +285,8 @@ static irqreturn_t cvm_oct_spi_rml_interrupt(int cpl, void *dev_id)
 				pr_err("SPI0: STX Calendar Table Parity "
 				       "Error Bank0\n");
 =======
+=======
+>>>>>>> v3.18
 				pr_err("SPI0: STX Interface encountered a fatal error\n");
 			if (stx_int_reg.s.frmerr)
 				pr_err("SPI0: STX FRMCNT has exceeded STX_DIP_CNT[MAXFRM]\n");
@@ -283,6 +304,9 @@ static irqreturn_t cvm_oct_spi_rml_interrupt(int cpl, void *dev_id)
 				pr_err("SPI0: STX Calendar Table Parity Error Bank1\n");
 			if (stx_int_reg.s.calpar0)
 				pr_err("SPI0: STX Calendar Table Parity Error Bank0\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 

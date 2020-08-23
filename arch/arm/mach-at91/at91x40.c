@@ -20,7 +20,11 @@
 #include <mach/at91x40.h>
 #include <mach/at91_st.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/timex.h>
+=======
+#include <mach/hardware.h>
+>>>>>>> v3.18
 =======
 #include <mach/hardware.h>
 >>>>>>> v3.18
@@ -60,8 +64,11 @@ void __init at91x40_initialize(unsigned long main_clock)
 {
 	arm_pm_idle = at91x40_idle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	at91_extern_irq = (1 << AT91X40_ID_IRQ0) | (1 << AT91X40_ID_IRQ1)
 			| (1 << AT91X40_ID_IRQ2);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -94,6 +101,7 @@ static unsigned int at91x40_default_irq_priority[NR_AIC_IRQS] __initdata = {
 void __init at91x40_init_interrupts(unsigned int priority[NR_AIC_IRQS])
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!priority)
 		priority = at91x40_default_irq_priority;
 
@@ -101,6 +109,8 @@ void __init at91x40_init_interrupts(unsigned int priority[NR_AIC_IRQS])
 }
 
 =======
+=======
+>>>>>>> v3.18
 	u32  extern_irq = (1 << AT91X40_ID_IRQ0) | (1 << AT91X40_ID_IRQ1)
 			| (1 << AT91X40_ID_IRQ2);
 	if (!priority)
@@ -108,4 +118,7 @@ void __init at91x40_init_interrupts(unsigned int priority[NR_AIC_IRQS])
 
 	at91_aic_init(priority, extern_irq);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

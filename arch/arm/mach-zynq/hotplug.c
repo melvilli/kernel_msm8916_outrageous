@@ -11,6 +11,7 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/errno.h>
 #include <linux/smp.h>
@@ -103,6 +104,10 @@ void zynq_platform_cpu_die(unsigned int cpu)
 	if (spurious)
 		pr_warn("CPU%u: %u spurious wakeup calls\n", cpu, spurious);
 }
+=======
+#include <asm/proc-fns.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/proc-fns.h>
 

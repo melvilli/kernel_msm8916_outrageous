@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -130,7 +134,11 @@ static void acpi_ps_start_trace(struct acpi_evaluate_info *info)
 
 	if ((!acpi_gbl_trace_method_name) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (acpi_gbl_trace_method_name != info->resolved_node->name.integer)) {
+=======
+	    (acpi_gbl_trace_method_name != info->node->name.integer)) {
+>>>>>>> v3.18
 =======
 	    (acpi_gbl_trace_method_name != info->node->name.integer)) {
 >>>>>>> v3.18
@@ -151,7 +159,11 @@ static void acpi_ps_start_trace(struct acpi_evaluate_info *info)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18
@@ -183,7 +195,11 @@ static void acpi_ps_stop_trace(struct acpi_evaluate_info *info)
 
 	if ((!acpi_gbl_trace_method_name) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (acpi_gbl_trace_method_name != info->resolved_node->name.integer)) {
+=======
+	    (acpi_gbl_trace_method_name != info->node->name.integer)) {
+>>>>>>> v3.18
 =======
 	    (acpi_gbl_trace_method_name != info->node->name.integer)) {
 >>>>>>> v3.18
@@ -202,7 +218,11 @@ static void acpi_ps_stop_trace(struct acpi_evaluate_info *info)
 	acpi_dbg_layer = acpi_gbl_original_dbg_layer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18
@@ -247,7 +267,11 @@ acpi_status acpi_ps_execute_method(struct acpi_evaluate_info *info)
 	/* Validate the Info and method Node */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!info || !info->resolved_node) {
+=======
+	if (!info || !info->node) {
+>>>>>>> v3.18
 =======
 	if (!info || !info->node) {
 >>>>>>> v3.18
@@ -258,8 +282,12 @@ acpi_status acpi_ps_execute_method(struct acpi_evaluate_info *info)
 
 	status =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    acpi_ds_begin_method_execution(info->resolved_node, info->obj_desc,
 					   NULL);
+=======
+	    acpi_ds_begin_method_execution(info->node, info->obj_desc, NULL);
+>>>>>>> v3.18
 =======
 	    acpi_ds_begin_method_execution(info->node, info->obj_desc, NULL);
 >>>>>>> v3.18
@@ -282,8 +310,12 @@ acpi_status acpi_ps_execute_method(struct acpi_evaluate_info *info)
 	ACPI_DEBUG_PRINT((ACPI_DB_PARSE,
 			  "**** Begin Method Parse/Execute [%4.4s] **** Node=%p Obj=%p\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  info->resolved_node->name.ascii, info->resolved_node,
 			  info->obj_desc));
+=======
+			  info->node->name.ascii, info->node, info->obj_desc));
+>>>>>>> v3.18
 =======
 			  info->node->name.ascii, info->node, info->obj_desc));
 >>>>>>> v3.18
@@ -308,7 +340,11 @@ acpi_status acpi_ps_execute_method(struct acpi_evaluate_info *info)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_ds_init_aml_walk(walk_state, op, info->resolved_node,
+=======
+	status = acpi_ds_init_aml_walk(walk_state, op, info->node,
+>>>>>>> v3.18
 =======
 	status = acpi_ds_init_aml_walk(walk_state, op, info->node,
 >>>>>>> v3.18
@@ -362,7 +398,11 @@ acpi_status acpi_ps_execute_method(struct acpi_evaluate_info *info)
 	/* walk_state was deleted by parse_aml */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18

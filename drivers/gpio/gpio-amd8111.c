@@ -61,7 +61,11 @@
  * want to register another driver on the same PCI id.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pci_tbl) = {
+=======
+static const struct pci_device_id pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pci_tbl[] = {
 >>>>>>> v3.18
@@ -237,8 +241,12 @@ out:
 static void __exit amd_gpio_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = gpiochip_remove(&gp.chip);
 	WARN_ON(err);
+=======
+	gpiochip_remove(&gp.chip);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&gp.chip);
 >>>>>>> v3.18

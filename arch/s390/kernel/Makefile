@@ -29,7 +29,11 @@ CFLAGS_ptrace.o		+= -DUTS_MACHINE='"$(UTS_MACHINE)"'
 CFLAGS_sysinfo.o += -Iinclude/math-emu -Iarch/s390/math-emu -w
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y	:= bitmap.o traps.o time.o process.o base.o early.o setup.o vtime.o
+=======
+obj-y	:= traps.o time.o process.o base.o early.o setup.o idle.o vtime.o
+>>>>>>> v3.18
 =======
 obj-y	:= traps.o time.o process.o base.o early.o setup.o idle.o vtime.o
 >>>>>>> v3.18
@@ -52,6 +56,7 @@ obj-$(CONFIG_HIBERNATION)	+= suspend.o swsusp_asm64.o
 obj-$(CONFIG_AUDIT)		+= audit.o
 compat-obj-$(CONFIG_AUDIT)	+= compat_audit.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_COMPAT)		+= compat_linux.o compat_signal.o \
 					compat_wrapper.o compat_exec_domain.o \
 					$(compat-obj-y)
@@ -67,6 +72,8 @@ obj-$(CONFIG_CRASH_DUMP)	+= crash_dump.o
 ifdef CONFIG_64BIT
 obj-$(CONFIG_PERF_EVENTS)	+= perf_event.o perf_cpum_cf.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_COMPAT)		+= compat_linux.o compat_signal.o
 obj-$(CONFIG_COMPAT)		+= compat_wrapper.o $(compat-obj-y)
 
@@ -79,6 +86,9 @@ obj-$(CONFIG_UPROBES)		+= uprobes.o
 ifdef CONFIG_64BIT
 obj-$(CONFIG_PERF_EVENTS)	+= perf_event.o perf_cpum_cf.o perf_cpum_sf.o \
 						perf_cpum_cf_events.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-y				+= runtime_instr.o cache.o
 endif

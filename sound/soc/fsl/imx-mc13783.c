@@ -65,7 +65,11 @@ static struct snd_soc_dai_link imx_mc13783_dai_mc13783[] = {
 		.codec_name	 = "mc13783-codec",
 		.cpu_dai_name	 = "imx-ssi.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.platform_name	 = "imx-pcm-audio.0",
+=======
+		.platform_name	 = "imx-ssi.0",
+>>>>>>> v3.18
 =======
 		.platform_name	 = "imx-ssi.0",
 >>>>>>> v3.18
@@ -95,6 +99,10 @@ static const struct snd_soc_dapm_route imx_mc13783_routes[] = {
 static struct snd_soc_card imx_mc13783 = {
 	.name		= "imx_mc13783",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.owner		= THIS_MODULE,
+>>>>>>> v3.18
 =======
 	.owner		= THIS_MODULE,
 >>>>>>> v3.18
@@ -120,7 +128,11 @@ static int imx_mc13783_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (machine_is_mx31_3ds()) {
+=======
+	if (machine_is_mx31_3ds() || machine_is_mx31moboard()) {
+>>>>>>> v3.18
 =======
 	if (machine_is_mx31_3ds() || machine_is_mx31moboard()) {
 >>>>>>> v3.18

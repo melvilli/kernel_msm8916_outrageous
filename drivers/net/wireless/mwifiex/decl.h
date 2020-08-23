@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: generic data structures and APIs
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -31,6 +35,10 @@
 #include <linux/timer.h>
 #include <linux/ieee80211.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/linux/if_arp.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/if_arp.h>
 >>>>>>> v3.18
@@ -50,6 +58,7 @@
 #define MWIFIEX_MAX_RX_BASTREAM_SUPPORTED	16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MWIFIEX_STA_AMPDU_DEF_TXWINSIZE        16
 #define MWIFIEX_STA_AMPDU_DEF_RXWINSIZE        32
 #define MWIFIEX_UAP_AMPDU_DEF_TXWINSIZE        32
@@ -59,6 +68,8 @@
 #define MWIFIEX_11AC_UAP_AMPDU_DEF_TXWINSIZE   48
 #define MWIFIEX_11AC_UAP_AMPDU_DEF_RXWINSIZE   32
 =======
+=======
+>>>>>>> v3.18
 #define MWIFIEX_STA_AMPDU_DEF_TXWINSIZE        64
 #define MWIFIEX_STA_AMPDU_DEF_RXWINSIZE        64
 #define MWIFIEX_UAP_AMPDU_DEF_TXWINSIZE        32
@@ -67,6 +78,9 @@
 #define MWIFIEX_11AC_STA_AMPDU_DEF_RXWINSIZE   64
 #define MWIFIEX_11AC_UAP_AMPDU_DEF_TXWINSIZE   64
 #define MWIFIEX_11AC_UAP_AMPDU_DEF_RXWINSIZE   64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MWIFIEX_DEFAULT_BLOCK_ACK_TIMEOUT  0xffff
@@ -94,9 +108,12 @@
 #define MWIFIEX_BUF_FLAG_REQUEUED_PKT      BIT(0)
 #define MWIFIEX_BUF_FLAG_BRIDGED_PKT	   BIT(1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define MWIFIEX_BRIDGED_PKTS_THRESHOLD     1024
 =======
+=======
+>>>>>>> v3.18
 #define MWIFIEX_BUF_FLAG_TDLS_PKT	   BIT(2)
 
 #define MWIFIEX_BRIDGED_PKTS_THR_HIGH      1024
@@ -106,6 +123,9 @@
 #define MWIFIEX_TDLS_ENABLE_LINK              0x01
 #define MWIFIEX_TDLS_CREATE_LINK              0x02
 #define MWIFIEX_TDLS_CONFIG_LINK              0x03
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum mwifiex_bss_type {
@@ -122,7 +142,10 @@ enum mwifiex_bss_role {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum mwifiex_tdls_status {
 	TDLS_NOT_SETUP = 0,
 	TDLS_SETUP_INPROGRESS,
@@ -140,6 +163,9 @@ enum mwifiex_tdls_error_code {
 	TDLS_ERR_PEER_STA_UNREACHABLE = 25,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BSS_ROLE_BIT_MASK    BIT(0)
 
@@ -180,6 +206,10 @@ struct mwifiex_txinfo {
 	u8 bss_num;
 	u8 bss_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 pkt_len;
+>>>>>>> v3.18
 =======
 	u32 pkt_len;
 >>>>>>> v3.18
@@ -207,7 +237,10 @@ struct mwifiex_types_wmm_info {
 	struct ieee_types_wmm_ac_parameters ac_params[IEEE80211_NUM_ACS];
 } __packed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 struct mwifiex_arp_eth_header {
 	struct arphdr hdr;
@@ -216,5 +249,8 @@ struct mwifiex_arp_eth_header {
 	u8 ar_tha[ETH_ALEN];
 	u8 ar_tip[4];
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !_MWIFIEX_DECL_H_ */

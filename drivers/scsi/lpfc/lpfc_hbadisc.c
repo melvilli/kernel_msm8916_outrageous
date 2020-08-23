@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2012 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -155,10 +159,13 @@ lpfc_dev_loss_tmo_callbk(struct fc_rport *rport)
 		/* If the WWPN of the rport and ndlp don't match, ignore it */
 		if (rport->port_name != wwn_to_u64(ndlp->nlp_portname.u.wwn)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			put_device(&rport->dev);
 			return;
 		}
 =======
+=======
+>>>>>>> v3.18
 			lpfc_printf_vlog(vport, KERN_ERR, LOG_NODE,
 				"6789 rport name %lx != node port name %lx",
 				(unsigned long)rport->port_name,
@@ -183,6 +190,9 @@ lpfc_dev_loss_tmo_callbk(struct fc_rport *rport)
 		if (put_rport)
 			put_device(&rport->dev);
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -193,6 +203,10 @@ lpfc_dev_loss_tmo_callbk(struct fc_rport *rport)
 
 	evtp->evt_arg1  = lpfc_nlp_get(ndlp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ndlp->nlp_add_flag |= NLP_IN_DEV_LOSS;
+>>>>>>> v3.18
 =======
 	ndlp->nlp_add_flag |= NLP_IN_DEV_LOSS;
 >>>>>>> v3.18
@@ -237,13 +251,19 @@ lpfc_dev_loss_tmo_handler(struct lpfc_nodelist *ndlp)
 	rport = ndlp->rport;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rport)
 		return fcf_inuse;
 =======
+=======
+>>>>>>> v3.18
 	if (!rport) {
 		ndlp->nlp_add_flag &= ~NLP_IN_DEV_LOSS;
 		return fcf_inuse;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rdata = rport->dd_data;
@@ -278,6 +298,10 @@ lpfc_dev_loss_tmo_handler(struct lpfc_nodelist *ndlp)
 		rdata->pnode = NULL;
 		ndlp->rport = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ndlp->nlp_add_flag &= ~NLP_IN_DEV_LOSS;
+>>>>>>> v3.18
 =======
 		ndlp->nlp_add_flag &= ~NLP_IN_DEV_LOSS;
 >>>>>>> v3.18
@@ -297,6 +321,10 @@ lpfc_dev_loss_tmo_handler(struct lpfc_nodelist *ndlp)
 				 *(name+4), *(name+5), *(name+6), *(name+7),
 				 ndlp->nlp_DID);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ndlp->nlp_add_flag &= ~NLP_IN_DEV_LOSS;
+>>>>>>> v3.18
 =======
 		ndlp->nlp_add_flag &= ~NLP_IN_DEV_LOSS;
 >>>>>>> v3.18
@@ -310,6 +338,10 @@ lpfc_dev_loss_tmo_handler(struct lpfc_nodelist *ndlp)
 		rdata->pnode = NULL;
 		ndlp->rport = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ndlp->nlp_add_flag &= ~NLP_IN_DEV_LOSS;
+>>>>>>> v3.18
 =======
 		ndlp->nlp_add_flag &= ~NLP_IN_DEV_LOSS;
 >>>>>>> v3.18
@@ -324,6 +356,10 @@ lpfc_dev_loss_tmo_handler(struct lpfc_nodelist *ndlp)
 		warn_on = 1;
 		/* flush the target */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ndlp->nlp_add_flag &= ~NLP_IN_DEV_LOSS;
+>>>>>>> v3.18
 =======
 		ndlp->nlp_add_flag &= ~NLP_IN_DEV_LOSS;
 >>>>>>> v3.18
@@ -356,6 +392,10 @@ lpfc_dev_loss_tmo_handler(struct lpfc_nodelist *ndlp)
 	rdata->pnode = NULL;
 	ndlp->rport = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ndlp->nlp_add_flag &= ~NLP_IN_DEV_LOSS;
+>>>>>>> v3.18
 =======
 	ndlp->nlp_add_flag &= ~NLP_IN_DEV_LOSS;
 >>>>>>> v3.18
@@ -737,8 +777,11 @@ lpfc_work_done(struct lpfc_hba *phba)
 			if (work_port_events & WORKER_RAMP_DOWN_QUEUE)
 				lpfc_ramp_down_queue_handler(phba);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (work_port_events & WORKER_RAMP_UP_QUEUE)
 				lpfc_ramp_up_queue_handler(phba);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			if (work_port_events & WORKER_DELAYED_DISC_TMO)
@@ -799,7 +842,11 @@ lpfc_do_work(void *p)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_user_nice(current, -20);
+=======
+	set_user_nice(current, MIN_NICE);
+>>>>>>> v3.18
 =======
 	set_user_nice(current, MIN_NICE);
 >>>>>>> v3.18
@@ -1067,7 +1114,10 @@ lpfc_linkup(struct lpfc_hba *phba)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lpfc_cleanup_wt_rrqs(phba);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	phba->link_state = LPFC_LINK_UP;
@@ -2117,7 +2167,12 @@ lpfc_sli4_set_fcf_flogi_fail(struct lpfc_hba *phba, uint16_t fcf_index)
  * 0=success 1=failure
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 int lpfc_sli4_fcf_pri_list_add(struct lpfc_hba *phba, uint16_t fcf_index,
+=======
+static int lpfc_sli4_fcf_pri_list_add(struct lpfc_hba *phba,
+	uint16_t fcf_index,
+>>>>>>> v3.18
 =======
 static int lpfc_sli4_fcf_pri_list_add(struct lpfc_hba *phba,
 	uint16_t fcf_index,
@@ -2226,7 +2281,10 @@ lpfc_mbx_cmpl_fcf_scan_read_fcf_rec(struct lpfc_hba *phba, LPFC_MBOXQ_t *mboxq)
 	struct lpfc_fcf_rec *fcf_rec = NULL;
 	uint16_t vlan_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t seed;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool select_new_fcf;
@@ -2466,9 +2524,12 @@ lpfc_mbx_cmpl_fcf_scan_read_fcf_rec(struct lpfc_hba *phba, LPFC_MBOXQ_t *mboxq)
 		/* Setup initial running random FCF selection count */
 		phba->fcf.eligible_fcf_cnt = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Seeding the random number generator for random selection */
 		seed = (uint32_t)(0xFFFFFFFF & jiffies);
 		prandom_seed(seed);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -2629,14 +2690,20 @@ lpfc_mbx_cmpl_fcf_rr_read_fcf_rec(struct lpfc_hba *phba, LPFC_MBOXQ_t *mboxq)
 		lpfc_printf_log(phba, KERN_WARNING, LOG_FIP,
 				"2766 Mailbox command READ_FCF_RECORD "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"failed to retrieve a FCF record.\n");
 		goto error_out;
 =======
+=======
+>>>>>>> v3.18
 				"failed to retrieve a FCF record. "
 				"hba_flg x%x fcf_flg x%x\n", phba->hba_flag,
 				phba->fcf.fcf_flag);
 		lpfc_unregister_fcf_rescan(phba);
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2769,7 +2836,11 @@ out:
  * This function handles completion of init vfi mailbox command.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -4069,12 +4140,18 @@ lpfc_nlp_counters(struct lpfc_vport *vport, int state, int count)
 		break;
 	case NLP_STE_NPR_NODE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vport->fc_npr_cnt += count;
 =======
+=======
+>>>>>>> v3.18
 		if (vport->fc_npr_cnt == 0 && count == -1)
 			vport->fc_npr_cnt = 0;
 		else
 			vport->fc_npr_cnt += count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -4274,8 +4351,11 @@ lpfc_initialize_node(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
 	atomic_set(&ndlp->cmd_pending, 0);
 	ndlp->cmd_qdepth = vport->cfg_tgt_queue_depth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vport->phba->sli_rev == LPFC_SLI_REV4)
 		ndlp->nlp_rpi = lpfc_sli4_alloc_rpi(vport->phba);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -4288,6 +4368,10 @@ lpfc_enable_node(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
 	uint32_t did;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long *active_rrqs_xri_bitmap = NULL;
+>>>>>>> v3.18
 =======
 	unsigned long *active_rrqs_xri_bitmap = NULL;
 >>>>>>> v3.18
@@ -4320,6 +4404,11 @@ lpfc_enable_node(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
 	/* Keep the original DID */
 	did = ndlp->nlp_DID;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (phba->sli_rev == LPFC_SLI_REV4)
+		active_rrqs_xri_bitmap = ndlp->active_rrqs_xri_bitmap;
+>>>>>>> v3.18
 =======
 	if (phba->sli_rev == LPFC_SLI_REV4)
 		active_rrqs_xri_bitmap = ndlp->active_rrqs_xri_bitmap;
@@ -4331,8 +4420,11 @@ lpfc_enable_node(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
 	lpfc_initialize_node(vport, ndlp, did);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&phba->ndlp_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	if (phba->sli_rev == LPFC_SLI_REV4)
 		ndlp->active_rrqs_xri_bitmap = active_rrqs_xri_bitmap;
 
@@ -4340,6 +4432,9 @@ lpfc_enable_node(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
 	if (vport->phba->sli_rev == LPFC_SLI_REV4)
 		ndlp->nlp_rpi = lpfc_sli4_alloc_rpi(vport->phba);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (state != NLP_STE_UNUSED_NODE)
@@ -4552,7 +4647,11 @@ lpfc_no_rpi(struct lpfc_hba *phba, struct lpfc_nodelist *ndlp)
  * the UNREG_RPI.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -4566,6 +4665,10 @@ lpfc_nlp_logo_unreg(struct lpfc_hba *phba, LPFC_MBOXQ_t *pmb)
 		return;
 	lpfc_issue_els_logo(vport, ndlp, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mempool_free(pmb, phba->mbox_mem_pool);
+>>>>>>> v3.18
 =======
 	mempool_free(pmb, phba->mbox_mem_pool);
 >>>>>>> v3.18
@@ -4589,8 +4692,11 @@ lpfc_unreg_rpi(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp)
 	uint16_t rpi;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ndlp->nlp_flag & NLP_RPI_REGISTERED) {
 =======
+=======
+>>>>>>> v3.18
 	if (ndlp->nlp_flag & NLP_RPI_REGISTERED ||
 	    ndlp->nlp_flag & NLP_REG_LOGIN_SEND) {
 		if (ndlp->nlp_flag & NLP_REG_LOGIN_SEND)
@@ -4600,6 +4706,9 @@ lpfc_unreg_rpi(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp)
 					 "did x%x\n",
 					 ndlp->nlp_rpi, ndlp->nlp_flag,
 					 ndlp->nlp_DID);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mbox = mempool_alloc(phba->mbox_mem_pool, GFP_KERNEL);
 		if (mbox) {
@@ -4934,14 +5043,20 @@ __lpfc_findnode_did(struct lpfc_vport *vport, uint32_t did)
 			lpfc_printf_vlog(vport, KERN_INFO, LOG_NODE,
 					 "0929 FIND node DID "
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 "Data: x%p x%x x%x x%x\n",
 					 ndlp, ndlp->nlp_DID,
 					 ndlp->nlp_flag, data1);
 =======
+=======
+>>>>>>> v3.18
 					 "Data: x%p x%x x%x x%x %p\n",
 					 ndlp, ndlp->nlp_DID,
 					 ndlp->nlp_flag, data1,
 					 ndlp->active_rrqs_xri_bitmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return ndlp;
 		}
@@ -5137,7 +5252,10 @@ lpfc_disc_start(struct lpfc_vport *vport)
 	uint32_t num_sent;
 	uint32_t clear_la_pending;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int did_changed;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -5159,11 +5277,14 @@ lpfc_disc_start(struct lpfc_vport *vport)
 	lpfc_set_disctmo(vport);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vport->fc_prevDID == vport->fc_myDID)
 		did_changed = 0;
 	else
 		did_changed = 1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	vport->fc_prevDID = vport->fc_myDID;
@@ -5766,7 +5887,10 @@ lpfc_nlp_init(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
 	lpfc_initialize_node(vport, ndlp, did);
 	INIT_LIST_HEAD(&ndlp->nlp_listp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (vport->phba->sli_rev == LPFC_SLI_REV4) {
 		ndlp->nlp_rpi = lpfc_sli4_alloc_rpi(vport->phba);
 		ndlp->active_rrqs_xri_bitmap =
@@ -5778,6 +5902,9 @@ lpfc_nlp_init(struct lpfc_vport *vport, struct lpfc_nodelist *ndlp,
 	}
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	lpfc_debugfs_disc_trc(vport, LPFC_DISC_TRC_NODE,
@@ -5823,6 +5950,12 @@ lpfc_nlp_release(struct kref *kref)
 	if (NLP_CHK_FREE_REQ(ndlp)) {
 		kfree(ndlp->lat_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (phba->sli_rev == LPFC_SLI_REV4)
+			mempool_free(ndlp->active_rrqs_xri_bitmap,
+				     ndlp->phba->active_rrq_pool);
+>>>>>>> v3.18
 =======
 		if (phba->sli_rev == LPFC_SLI_REV4)
 			mempool_free(ndlp->active_rrqs_xri_bitmap,
@@ -6335,6 +6468,7 @@ lpfc_read_fcf_conn_tbl(struct lpfc_hba *phba,
 		memcpy(&conn_entry->conn_rec, &conn_rec[i],
 			sizeof(struct lpfc_fcf_conn_rec));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		conn_entry->conn_rec.vlan_tag =
 			le16_to_cpu(conn_entry->conn_rec.vlan_tag) & 0xFFF;
 		conn_entry->conn_rec.flags =
@@ -6343,6 +6477,8 @@ lpfc_read_fcf_conn_tbl(struct lpfc_hba *phba,
 			&phba->fcf_conn_rec_list);
 	}
 =======
+=======
+>>>>>>> v3.18
 		list_add_tail(&conn_entry->list,
 			&phba->fcf_conn_rec_list);
 	}
@@ -6378,6 +6514,9 @@ lpfc_read_fcf_conn_tbl(struct lpfc_hba *phba,
 					conn_rec->switch_name[7]);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -6471,7 +6610,11 @@ lpfc_parse_fcoe_conf(struct lpfc_hba *phba,
 		uint32_t size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t offset = 0, rec_length;
+=======
+	uint32_t offset = 0;
+>>>>>>> v3.18
 =======
 	uint32_t offset = 0;
 >>>>>>> v3.18
@@ -6502,8 +6645,11 @@ lpfc_parse_fcoe_conf(struct lpfc_hba *phba,
 	offset += 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rec_length = buff[offset + 1];
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Read FCoE param record */

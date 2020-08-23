@@ -129,7 +129,11 @@ static int lms283gf05_power_set(struct lcd_device *ld, int power)
 	struct lms283gf05_state *st = lcd_get_data(ld);
 	struct spi_device *spi = st->spi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lms283gf05_pdata *pdata = spi->dev.platform_data;
+=======
+	struct lms283gf05_pdata *pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	struct lms283gf05_pdata *pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -158,7 +162,11 @@ static int lms283gf05_probe(struct spi_device *spi)
 {
 	struct lms283gf05_state *st;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lms283gf05_pdata *pdata = spi->dev.platform_data;
+=======
+	struct lms283gf05_pdata *pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	struct lms283gf05_pdata *pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -177,6 +185,7 @@ static int lms283gf05_probe(struct spi_device *spi)
 	st = devm_kzalloc(&spi->dev, sizeof(struct lms283gf05_state),
 				GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (st == NULL) {
 		dev_err(&spi->dev, "No memory for device state\n");
 		return -ENOMEM;
@@ -184,11 +193,16 @@ static int lms283gf05_probe(struct spi_device *spi)
 
 	ld = lcd_device_register("lms283gf05", &spi->dev, st, &lms_ops);
 =======
+=======
+>>>>>>> v3.18
 	if (st == NULL)
 		return -ENOMEM;
 
 	ld = devm_lcd_device_register(&spi->dev, "lms283gf05", &spi->dev, st,
 					&lms_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(ld))
 		return PTR_ERR(ld);
@@ -207,6 +221,7 @@ static int lms283gf05_probe(struct spi_device *spi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int lms283gf05_remove(struct spi_device *spi)
 {
 	struct lms283gf05_state *st = spi_get_drvdata(spi);
@@ -218,6 +233,8 @@ static int lms283gf05_remove(struct spi_device *spi)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct spi_driver lms283gf05_driver = {
 	.driver = {
 		.name	= "lms283gf05",
@@ -225,7 +242,10 @@ static struct spi_driver lms283gf05_driver = {
 	},
 	.probe		= lms283gf05_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= lms283gf05_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

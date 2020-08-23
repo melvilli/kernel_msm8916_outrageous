@@ -357,7 +357,11 @@ static int n2_hash_async_finup(struct ahash_request *req)
 static int n2_hash_cra_init(struct crypto_tfm *tfm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *fallback_driver_name = tfm->__crt_alg->cra_name;
+=======
+	const char *fallback_driver_name = crypto_tfm_alg_name(tfm);
+>>>>>>> v3.18
 =======
 	const char *fallback_driver_name = crypto_tfm_alg_name(tfm);
 >>>>>>> v3.18
@@ -396,7 +400,11 @@ static void n2_hash_cra_exit(struct crypto_tfm *tfm)
 static int n2_hmac_cra_init(struct crypto_tfm *tfm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *fallback_driver_name = tfm->__crt_alg->cra_name;
+=======
+	const char *fallback_driver_name = crypto_tfm_alg_name(tfm);
+>>>>>>> v3.18
 =======
 	const char *fallback_driver_name = crypto_tfm_alg_name(tfm);
 >>>>>>> v3.18
@@ -454,10 +462,14 @@ static int n2_hmac_async_setkey(struct crypto_ahash *tfm, const u8 *key,
 	struct crypto_shash *child_shash = ctx->child_shash;
 	struct crypto_ahash *fallback_tfm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct {
 		struct shash_desc shash;
 		char ctx[crypto_shash_descsize(child_shash)];
 	} desc;
+=======
+	SHASH_DESC_ON_STACK(shash, child_shash);
+>>>>>>> v3.18
 =======
 	SHASH_DESC_ON_STACK(shash, child_shash);
 >>>>>>> v3.18
@@ -469,8 +481,13 @@ static int n2_hmac_async_setkey(struct crypto_ahash *tfm, const u8 *key,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	desc.shash.tfm = child_shash;
 	desc.shash.flags = crypto_ahash_get_flags(tfm) &
+=======
+	shash->tfm = child_shash;
+	shash->flags = crypto_ahash_get_flags(tfm) &
+>>>>>>> v3.18
 =======
 	shash->tfm = child_shash;
 	shash->flags = crypto_ahash_get_flags(tfm) &
@@ -482,7 +499,11 @@ static int n2_hmac_async_setkey(struct crypto_ahash *tfm, const u8 *key,
 	BUG_ON(ds > N2_HASH_KEY_MAX);
 	if (keylen > bs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = crypto_shash_digest(&desc.shash, key, keylen,
+=======
+		err = crypto_shash_digest(shash, key, keylen,
+>>>>>>> v3.18
 =======
 		err = crypto_shash_digest(shash, key, keylen,
 >>>>>>> v3.18

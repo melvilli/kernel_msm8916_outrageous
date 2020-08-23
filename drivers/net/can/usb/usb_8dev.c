@@ -24,7 +24,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/signal.h>
@@ -702,8 +705,13 @@ static netdev_tx_t usb_8dev_start_xmit(struct sk_buff *skb,
 
 nofreecontext:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_unanchor_urb(urb);
 	usb_free_coherent(priv->udev, size, buf, urb->transfer_dma);
+=======
+	usb_free_coherent(priv->udev, size, buf, urb->transfer_dma);
+	usb_free_urb(urb);
+>>>>>>> v3.18
 =======
 	usb_free_coherent(priv->udev, size, buf, urb->transfer_dma);
 	usb_free_urb(urb);
@@ -788,6 +796,10 @@ static int usb_8dev_start(struct usb_8dev_priv *priv)
 			usb_free_coherent(priv->udev, RX_BUFFER_SIZE, buf,
 					  urb->transfer_dma);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			usb_free_urb(urb);
+>>>>>>> v3.18
 =======
 			usb_free_urb(urb);
 >>>>>>> v3.18
@@ -900,6 +912,10 @@ static const struct net_device_ops usb_8dev_netdev_ops = {
 	.ndo_stop = usb_8dev_close,
 	.ndo_start_xmit = usb_8dev_start_xmit,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu = can_change_mtu,
+>>>>>>> v3.18
 =======
 	.ndo_change_mtu = can_change_mtu,
 >>>>>>> v3.18
@@ -973,8 +989,13 @@ static int usb_8dev_probe(struct usb_interface *intf,
 		priv->tx_contexts[i].echo_index = MAX_TX_URBS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->cmd_msg_buffer = devm_kzalloc(&intf->dev, sizeof(struct usb_8dev_cmd_msg),
 					    GFP_KERNEL);
+=======
+	priv->cmd_msg_buffer = kzalloc(sizeof(struct usb_8dev_cmd_msg),
+				      GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	priv->cmd_msg_buffer = kzalloc(sizeof(struct usb_8dev_cmd_msg),
 				      GFP_KERNEL);
@@ -993,7 +1014,11 @@ static int usb_8dev_probe(struct usb_interface *intf,
 		netdev_err(netdev,
 			"couldn't register CAN device: %d\n", err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto cleanup_candev;
+=======
+		goto cleanup_cmd_msg_buffer;
+>>>>>>> v3.18
 =======
 		goto cleanup_cmd_msg_buffer;
 >>>>>>> v3.18
@@ -1018,6 +1043,12 @@ cleanup_unregister_candev:
 	unregister_netdev(priv->netdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+cleanup_cmd_msg_buffer:
+	kfree(priv->cmd_msg_buffer);
+
+>>>>>>> v3.18
 =======
 cleanup_cmd_msg_buffer:
 	kfree(priv->cmd_msg_buffer);

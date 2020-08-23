@@ -24,11 +24,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/sh_clk.h>
 #include <linux/clkdev.h>
 #include <mach/common.h>
 =======
+=======
+>>>>>>> v3.18
 /*
  *     MD      MD      MD      MD       PLLA   PLLB    EXTAL   clki    clkz
  *     19      18      12      11                      (HMz)   (MHz)   (MHz)
@@ -47,6 +50,9 @@
 #include <linux/clkdev.h>
 #include "clock.h"
 #include "common.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MSTPCR0		IOMEM(0xffc80030)
@@ -59,6 +65,12 @@
 #define MSTPCR5		IOMEM(0xffc80054)
 #define MSTPCR6		IOMEM(0xffc80058)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MODEMR		0xFFCC0020
+
+#define MD(nr)	BIT(nr)
+>>>>>>> v3.18
 =======
 #define MODEMR		0xFFCC0020
 
@@ -74,6 +86,7 @@ static struct clk_mapping cpg_mapping = {
 	.len	= 0x80,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct clk clkp = {
 	.rate   = 62500000, /* FIXME: shortcut */
@@ -115,6 +128,8 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("sh_tmu.0", &mstp_clks[MSTP016]), /* TMU00 */
 	CLKDEV_DEV_ID("sh_tmu.1", &mstp_clks[MSTP015]), /* TMU01 */
 =======
+=======
+>>>>>>> v3.18
 static struct clk extal_clk = {
 	/* .rate will be updated on r8a7778_clock_init() */
 	.mapping = &cpg_mapping,
@@ -298,15 +313,21 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_ICK_ID("fck", "ffd80000.timer", &mstp_clks[MSTP016]),
 	CLKDEV_ICK_ID("fck", "sh-tmu.1", &mstp_clks[MSTP015]),
 	CLKDEV_ICK_ID("fck", "ffd81000.timer", &mstp_clks[MSTP015]),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 void __init r8a7778_clock_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int k, ret = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *modemr = ioremap_nocache(MODEMR, PAGE_SIZE);
 	u32 mode;
 	int k, ret = 0;
@@ -387,6 +408,9 @@ void __init r8a7778_clock_init(void)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (k = 0; !ret && (k < ARRAY_SIZE(main_clks)); k++)
 		ret = clk_register(main_clks[k]);

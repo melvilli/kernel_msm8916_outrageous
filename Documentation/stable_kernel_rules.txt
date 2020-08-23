@@ -43,7 +43,11 @@ Procedure for submitting patches to the -stable tree:
    or subsystem maintainer.
  - If the patch requires other patches as prerequisites which can be
 <<<<<<< HEAD
+<<<<<<< HEAD
    cherry-picked than this can be specified in the following format in
+=======
+   cherry-picked, then this can be specified in the following format in
+>>>>>>> v3.18
 =======
    cherry-picked, then this can be specified in the following format in
 >>>>>>> v3.18

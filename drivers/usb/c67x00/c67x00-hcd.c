@@ -385,6 +385,11 @@ int c67x00_hcd_probe(struct c67x00_sie *sie)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 

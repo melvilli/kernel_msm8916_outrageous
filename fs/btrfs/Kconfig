@@ -1,7 +1,12 @@
 config BTRFS_FS
 	tristate "Btrfs filesystem support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select LIBCRC32C
+=======
+	select CRYPTO
+	select CRYPTO_CRC32C
+>>>>>>> v3.18
 =======
 	select CRYPTO
 	select CRYPTO_CRC32C
@@ -15,6 +20,7 @@ config BTRFS_FS
 
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Btrfs is a new filesystem with extents, writable snapshotting,
 	  support for multiple devices and many more features.
 
@@ -22,6 +28,8 @@ config BTRFS_FS
 	  FINALIZED.  You should say N here unless you are interested in
 	  testing Btrfs with non-critical data.
 =======
+=======
+>>>>>>> v3.18
 	  Btrfs is a general purpose copy-on-write filesystem with extents,
 	  writable snapshotting, support for multiple devices and many more
 	  features focused on fault tolerance, repair and easy administration.
@@ -33,6 +41,9 @@ config BTRFS_FS
 
 	  For more information, please see the web pages at
 	  http://btrfs.wiki.kernel.org.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  To compile this file system support as a module, choose M here. The
@@ -79,7 +90,12 @@ config BTRFS_FS_RUN_SANITY_TESTS
 	  This will run some basic sanity tests on the free space cache
 	  code to make sure it is acting as it should.  These are mostly
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  regression tests and are only really interesting to btrfs devlopers.
+=======
+	  regression tests and are only really interesting to btrfs
+	  developers.
+>>>>>>> v3.18
 =======
 	  regression tests and are only really interesting to btrfs
 	  developers.
@@ -97,7 +113,10 @@ config BTRFS_DEBUG
 
 	  If unsure, say N.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config BTRFS_ASSERT
 	bool "Btrfs assert support"
@@ -107,4 +126,7 @@ config BTRFS_ASSERT
 	  any of the assertions trip.  This is meant for btrfs developers only.
 
 	  If unsure, say N.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

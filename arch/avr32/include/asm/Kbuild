@@ -1,11 +1,14 @@
 
 generic-y += clkdev.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 generic-y += exec.h
 generic-y += mcs_spinlock.h
 generic-y += param.h
 generic-y += trace_clock.h
 =======
+=======
+>>>>>>> v3.18
 generic-y += cputime.h
 generic-y += delay.h
 generic-y += device.h
@@ -28,4 +31,7 @@ generic-y += topology.h
 generic-y += trace_clock.h
 generic-y += vga.h
 generic-y += xor.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

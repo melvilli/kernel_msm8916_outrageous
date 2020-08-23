@@ -34,6 +34,7 @@
 #include <linux/interrupt.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/io.h>
 
 #include <plat/regs-serial.h>
@@ -41,6 +42,8 @@
 #include <mach/regs-gpio.h>
 #include <mach/regs-irq.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/serial_s3c.h>
 #include <linux/io.h>
 
@@ -48,6 +51,9 @@
 #include <mach/regs-gpio.h>
 #include <mach/regs-irq.h>
 #include <mach/gpio-samsung.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/mach/time.h>
@@ -61,9 +67,12 @@
 
 static struct sleep_save core_save[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SAVE_ITEM(S3C2410_LOCKTIME),
 	SAVE_ITEM(S3C2410_CLKCON),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* we restore the timings here, with the proviso that the board
@@ -82,6 +91,7 @@ static struct sleep_save core_save[] = {
 	SAVE_ITEM(S3C2410_BANKCON4),
 	SAVE_ITEM(S3C2410_BANKCON5),
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifndef CONFIG_CPU_FREQ
 	SAVE_ITEM(S3C2410_CLKDIVN),
@@ -94,6 +104,8 @@ static struct sleep_save core_save[] = {
 
 static struct sleep_save misc_save[] = {
 	SAVE_ITEM(S3C2410_DCLKCON),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -156,7 +168,10 @@ void s3c_pm_restore_core(void)
 {
 	s3c_pm_do_restore_core(core_save, ARRAY_SIZE(core_save));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c_pm_do_restore(misc_save, ARRAY_SIZE(misc_save));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -164,7 +179,10 @@ void s3c_pm_restore_core(void)
 void s3c_pm_save_core(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c_pm_do_save(misc_save, ARRAY_SIZE(misc_save));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s3c_pm_do_save(core_save, ARRAY_SIZE(core_save));

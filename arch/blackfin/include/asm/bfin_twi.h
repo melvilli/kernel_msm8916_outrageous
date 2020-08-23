@@ -10,6 +10,7 @@
 #define __ASM_BFIN_TWI_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/types.h>
 #include <linux/i2c.h>
 
@@ -67,6 +68,9 @@ struct bfin_twi_iface {
 =======
 #include <asm/blackfin.h>
 >>>>>>> v3.18
+=======
+#include <asm/blackfin.h>
+>>>>>>> v3.18
 
 #define DEFINE_TWI_REG(reg_name, reg) \
 static inline u16 read_##reg_name(struct bfin_twi_iface *iface) \
@@ -76,7 +80,10 @@ static inline void write_##reg_name(struct bfin_twi_iface *iface, u16 v) \
 
 DEFINE_TWI_REG(CLKDIV, clkdiv)
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_TWI_REG(CONTROL, control)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 DEFINE_TWI_REG(SLAVE_CTL, slave_ctl)
@@ -88,7 +95,10 @@ DEFINE_TWI_REG(MASTER_ADDR, master_addr)
 DEFINE_TWI_REG(INT_STAT, int_stat)
 DEFINE_TWI_REG(INT_MASK, int_mask)
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_TWI_REG(FIFO_CTL, fifo_ctl)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 DEFINE_TWI_REG(FIFO_STAT, fifo_stat)
@@ -123,6 +133,7 @@ static inline u16 read_RCV_DATA16(struct bfin_twi_iface *iface)
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*  ********************  TWO-WIRE INTERFACE (TWI) MASKS  ***********************/
@@ -196,6 +207,8 @@ static inline u16 read_RCV_DATA16(struct bfin_twi_iface *iface)
 #define	RCV_FULL	0x000C	/*              Receive FIFO Full (2 Bytes To Read)             */
 
 =======
+=======
+>>>>>>> v3.18
 static inline u16 read_FIFO_CTL(struct bfin_twi_iface *iface)
 {
 	return bfin_read16(&iface->regs_base->fifo_ctl);
@@ -217,5 +230,8 @@ static inline void write_CONTROL(struct bfin_twi_iface *iface, u16 v)
 	SSYNC();
 	bfin_write16(&iface->regs_base->control, v);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

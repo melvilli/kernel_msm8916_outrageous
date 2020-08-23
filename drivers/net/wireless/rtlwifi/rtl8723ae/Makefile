@@ -11,7 +11,10 @@ rtl8723ae-objs :=		\
 		phy.o		\
 		pwrseq.o	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pwrseqcmd.o	\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		rf.o		\

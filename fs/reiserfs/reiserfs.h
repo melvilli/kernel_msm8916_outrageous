@@ -1,6 +1,11 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 1996, 1997, 1998 Hans Reiser, see reiserfs/README for licensing and copyright details
+=======
+ * Copyright 1996, 1997, 1998 Hans Reiser, see reiserfs/README for
+ * licensing and copyright details
+>>>>>>> v3.18
 =======
  * Copyright 1996, 1997, 1998 Hans Reiser, see reiserfs/README for
  * licensing and copyright details
@@ -29,6 +34,7 @@
 struct reiserfs_journal_list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** bitmasks for i_flags field in reiserfs-specific part of inode */
 typedef enum {
     /** this says what format of key do all items (but stat data) of
@@ -48,6 +54,8 @@ typedef enum {
 	i_link_saved_unlink_mask = 0x0010,
 	i_link_saved_truncate_mask = 0x0020,
 =======
+=======
+>>>>>>> v3.18
 /* bitmasks for i_flags field in reiserfs-specific part of inode */
 typedef enum {
 	/*
@@ -76,6 +84,9 @@ typedef enum {
 	i_link_saved_unlink_mask = 0x0010,
 	i_link_saved_truncate_mask = 0x0020,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i_has_xattr_dir = 0x0040,
 	i_data_log = 0x0080,
@@ -84,12 +95,15 @@ typedef enum {
 struct reiserfs_inode_info {
 	__u32 i_key[4];		/* key is still 4 32 bit integers */
 <<<<<<< HEAD
+<<<<<<< HEAD
     /** transient inode flags that are never stored on disk. Bitmasks
       for this field are defined above. */
 	__u32 i_flags;
 
 	__u32 i_first_direct_byte;	// offset of first byte stored in direct item.
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * transient inode flags that are never stored on disk. Bitmasks
@@ -99,11 +113,15 @@ struct reiserfs_inode_info {
 
 	/* offset of first byte stored in direct item. */
 	__u32 i_first_direct_byte;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* copy of persistent inode flags read from sd_attrs. */
 	__u32 i_attrs;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i_prealloc_block;	/* first unused block of a sequence of unused blocks */
 	int i_prealloc_count;	/* length of that sequence */
@@ -119,6 +137,8 @@ struct reiserfs_inode_info {
 	 ** flushed */
 	unsigned int i_trans_id;
 =======
+=======
+>>>>>>> v3.18
 	/* first unused block of a sequence of unused blocks */
 	int i_prealloc_block;
 	int i_prealloc_count;	/* length of that sequence */
@@ -139,6 +159,9 @@ struct reiserfs_inode_info {
 	 */
 	unsigned int i_trans_id;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct reiserfs_journal_list *i_jl;
 	atomic_t openers;
@@ -154,14 +177,20 @@ typedef enum {
 } reiserfs_super_block_flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* struct reiserfs_super_block accessors/mutators
  * since this is a disk structure, it will always be in
  * little endian format. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * struct reiserfs_super_block accessors/mutators since this is a disk
  * structure, it will always be in little endian format.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define sb_block_count(sbp)         (le32_to_cpu((sbp)->s_v1.s_block_count))
 #define set_sb_block_count(sbp,v)   ((sbp)->s_v1.s_block_count = cpu_to_le32(v))
@@ -231,6 +260,7 @@ typedef enum {
 /* LOGGING -- */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* These all interelate for performance.
 **
 ** If the journal block count is smaller than n transactions, you lose speed.
@@ -274,6 +304,8 @@ struct reiserfs_journal_cnode {
 	unsigned long state;
 	struct reiserfs_journal_list *jlist;	/* journal list this cnode lives in */
 =======
+=======
+>>>>>>> v3.18
 /*
  * These all interelate for performance.
  *
@@ -329,6 +361,9 @@ struct reiserfs_journal_cnode {
 	/* journal list this cnode lives in */
 	struct reiserfs_journal_list *jlist;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct reiserfs_journal_cnode *next;	/* next in transaction list */
 	struct reiserfs_journal_cnode *prev;	/* prev in transaction list */
@@ -349,18 +384,24 @@ struct reiserfs_list_bitmap {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 ** one of these for each transaction.  The most important part here is the j_realblock.
 ** this list of cnodes is used to hash all the blocks in all the commits, to mark all the
 ** real buffer heads dirty once all the commits hit the disk,
 ** and to make sure every real block in a transaction is on disk before allowing the log area
 ** to be overwritten */
 =======
+=======
+>>>>>>> v3.18
  * one of these for each transaction.  The most important part here is the
  * j_realblock.  this list of cnodes is used to hash all the blocks in all
  * the commits, to mark all the real buffer heads dirty once all the commits
  * hit the disk, and to make sure every real block in a transaction is on
  * disk before allowing the log area to be overwritten
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct reiserfs_journal_list {
 	unsigned long j_start;
@@ -369,12 +410,18 @@ struct reiserfs_journal_list {
 	atomic_t j_nonzerolen;
 	atomic_t j_commit_left;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t j_older_commits_done;	/* all commits older than this on disk */
 =======
+=======
+>>>>>>> v3.18
 
 	/* all commits older than this on disk */
 	atomic_t j_older_commits_done;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mutex j_commit_mutex;
 	unsigned int j_trans_id;
@@ -387,18 +434,28 @@ struct reiserfs_journal_list {
 	struct list_head j_list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* time ordered list of all transactions we haven't tried to flush yet */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * time ordered list of all transactions we haven't tried
 	 * to flush yet
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head j_working_list;
 
 	/* list of tail conversion targets in need of flush before commit */
 	struct list_head j_tail_bh_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -410,6 +467,7 @@ struct reiserfs_journal_list {
 struct reiserfs_journal {
 	struct buffer_head **j_ap_blocks;	/* journal blocks on disk */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct reiserfs_journal_cnode *j_last;	/* newest journal block */
 	struct reiserfs_journal_cnode *j_first;	/*  oldest journal block.  start here for traverse */
 
@@ -417,6 +475,8 @@ struct reiserfs_journal {
 	fmode_t j_dev_mode;
 	int j_1st_reserved_block;	/* first block on s_dev of reserved area journal */
 =======
+=======
+>>>>>>> v3.18
 	/* newest journal block */
 	struct reiserfs_journal_cnode *j_last;
 
@@ -428,11 +488,15 @@ struct reiserfs_journal {
 
 	/* first block on s_dev of reserved area journal */
 	int j_1st_reserved_block;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	unsigned long j_state;
 	unsigned int j_trans_id;
 	unsigned long j_mount_id;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long j_start;	/* start of current waiting commit (index into j_ap_blocks) */
 	unsigned long j_len;	/* length of current waiting commit */
@@ -442,6 +506,8 @@ struct reiserfs_journal {
 	unsigned long j_first_unflushed_offset;	/* first unflushed transactions offset */
 	unsigned j_last_flush_trans_id;	/* last fully flushed journal timestamp */
 =======
+=======
+>>>>>>> v3.18
 
 	/* start of current waiting commit (index into j_ap_blocks) */
 	unsigned long j_start;
@@ -461,12 +527,16 @@ struct reiserfs_journal {
 	/* last fully flushed journal timestamp */
 	unsigned j_last_flush_trans_id;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct buffer_head *j_header_bh;
 
 	time_t j_trans_start_time;	/* time this transaction started */
 	struct mutex j_mutex;
 	struct mutex j_flush_mutex;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	wait_queue_head_t j_join_wait;	/* wait for current transaction to finish before starting new one */
 	atomic_t j_jlock;	/* lock for j_join_wait */
@@ -475,6 +545,8 @@ struct reiserfs_journal {
 	int j_next_full_flush;	/* next journal_end will flush all journal list */
 	int j_next_async_flush;	/* next journal_end will flush all async commits */
 =======
+=======
+>>>>>>> v3.18
 
 	/* wait for current transaction to finish before starting new one */
 	wait_queue_head_t j_join_wait;
@@ -490,11 +562,15 @@ struct reiserfs_journal {
 
 	/* next journal_end will flush all async commits */
 	int j_next_async_flush;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int j_cnode_used;	/* number of cnodes on the used list */
 	int j_cnode_free;	/* number of cnodes on the free list */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int j_trans_max;	/* max number of blocks in a transaction.  */
 	unsigned int j_max_batch;	/* max number of blocks to batch into a trans */
@@ -505,6 +581,8 @@ struct reiserfs_journal {
 	struct reiserfs_journal_cnode *j_cnode_free_list;
 	struct reiserfs_journal_cnode *j_cnode_free_orig;	/* orig pointer returned from vmalloc */
 =======
+=======
+>>>>>>> v3.18
 	/* max number of blocks in a transaction.  */
 	unsigned int j_trans_max;
 
@@ -524,6 +602,9 @@ struct reiserfs_journal {
 
 	/* orig pointer returned from vmalloc */
 	struct reiserfs_journal_cnode *j_cnode_free_orig;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct reiserfs_journal_list *j_current_jl;
@@ -546,6 +627,7 @@ struct reiserfs_journal {
 	/* list of all active transactions */
 	struct list_head j_journal_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* lists that haven't been touched by writeback attempts */
 	struct list_head j_working_list;
 
@@ -555,6 +637,8 @@ struct reiserfs_journal {
 										   the transactions */
 	struct list_head j_prealloc_list;	/* list of inodes which have preallocated blocks */
 =======
+=======
+>>>>>>> v3.18
 
 	/* lists that haven't been touched by writeback attempts */
 	struct list_head j_working_list;
@@ -570,6 +654,9 @@ struct reiserfs_journal {
 
 	/* list of inodes which have preallocated blocks */
 	struct list_head j_prealloc_list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int j_persistent_trans;
 	unsigned long j_max_trans_size;
@@ -586,18 +673,24 @@ struct reiserfs_journal {
 enum journal_state_bits {
 	J_WRITERS_BLOCKED = 1,	/* set when new writers not allowed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	J_WRITERS_QUEUED,	/* set when log is full due to too many writers */
 	J_ABORTED,		/* set when log is aborted */
 };
 
 #define JOURNAL_DESC_MAGIC "ReIsErLB"	/* ick.  magic string to find desc blocks in the journal */
 =======
+=======
+>>>>>>> v3.18
 	J_WRITERS_QUEUED,    /* set when log is full due to too many writers */
 	J_ABORTED,           /* set when log is aborted */
 };
 
 /* ick.  magic string to find desc blocks in the journal */
 #define JOURNAL_DESC_MAGIC "ReIsErLB"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 typedef __u32(*hashf_t) (const signed char *, int);
@@ -631,12 +724,18 @@ typedef struct reiserfs_proc_info_data {
 	stat_cnt_t leaves_removable;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* balances per level. Use explicit 5 as MAX_HEIGHT is not visible yet. */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * balances per level.
 	 * Use explicit 5 as MAX_HEIGHT is not visible yet.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	stat_cnt_t balance_at[5];	/* XXX */
 	/* sbk == search_by_key */
@@ -688,6 +787,7 @@ typedef struct reiserfs_proc_info_data {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* reiserfs union of in-core super block data */
 struct reiserfs_sb_info {
 	struct buffer_head *s_sbh;	/* Buffer containing the super block */
@@ -697,6 +797,8 @@ struct reiserfs_sb_info {
 	struct reiserfs_bitmap_info *s_ap_bitmap;
 	struct reiserfs_journal *s_journal;	/* pointer to journal information */
 =======
+=======
+>>>>>>> v3.18
 /* Number of quota types we support */
 #define REISERFS_MAXQUOTAS 2
 
@@ -712,11 +814,15 @@ struct reiserfs_sb_info {
 	/* pointer to journal information */
 	struct reiserfs_journal *s_journal;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned short s_mount_state;	/* reiserfs state (valid, invalid) */
 
 	/* Serialize writers access, replace the old bkl */
 	struct mutex lock;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Owner of the lock (can be recursive) */
 	struct task_struct *lock_owner;
@@ -741,6 +847,8 @@ struct reiserfs_sb_info {
 					   reaches preallocmin size (in blocks) or
 					   prealloc_list is empty. */
 =======
+=======
+>>>>>>> v3.18
 
 	/* Owner of the lock (can be recursive) */
 	struct task_struct *lock_owner;
@@ -787,11 +895,15 @@ struct reiserfs_sb_info {
 		 is empty.
 		 */
 		int preallocsize;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} s_alloc_options;
 
 	/* Comment? -Hans */
 	wait_queue_head_t s_wait;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* To be obsoleted soon by per buffer seals.. -Hans */
 	atomic_t s_generation_counter;	// increased by one every time the
@@ -799,11 +911,16 @@ struct reiserfs_sb_info {
 	unsigned long s_properties;	/* File system properties. Currently holds
 					   on-disk FS format */
 =======
+=======
+>>>>>>> v3.18
 	/* increased by one every time the  tree gets re-balanced */
 	atomic_t s_generation_counter;
 
 	/* File system properties. Currently holds on-disk FS format */
 	unsigned long s_properties;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* session statistics */
@@ -818,6 +935,7 @@ struct reiserfs_sb_info {
 	int s_direct2indirect;
 	int s_indirect2direct;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* set up when it's ok for reiserfs_read_inode2() to read from
 	   disk inode with nlink==0. Currently this is only used during
 	   finish_unfinished() processing at mount time */
@@ -827,6 +945,8 @@ struct reiserfs_sb_info {
 	int reserved_blocks;	/* amount of blocks reserved for further allocations */
 	spinlock_t bitmap_lock;	/* this lock on now only used to protect reserved_blocks variable */
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * set up when it's ok for reiserfs_read_inode2() to read from
@@ -844,6 +964,9 @@ struct reiserfs_sb_info {
 
 	/* this lock on now only used to protect reserved_blocks variable */
 	spinlock_t bitmap_lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct dentry *priv_root;	/* root of /.reiserfs_priv */
 	struct dentry *xattr_root;	/* root of /.reiserfs_priv/xattrs */
@@ -855,7 +978,11 @@ struct reiserfs_sb_info {
 
 #ifdef CONFIG_QUOTA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *s_qf_names[MAXQUOTAS];
+=======
+	char *s_qf_names[REISERFS_MAXQUOTAS];
+>>>>>>> v3.18
 =======
 	char *s_qf_names[REISERFS_MAXQUOTAS];
 >>>>>>> v3.18
@@ -864,6 +991,7 @@ struct reiserfs_sb_info {
 	char *s_jdev;		/* Stored jdev for mount option showing */
 #ifdef CONFIG_REISERFS_CHECK
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tree_balance *cur_tb;	/*
 					 * Detects whether more than one
@@ -874,6 +1002,8 @@ struct reiserfs_sb_info {
 					 * on a same mount point.
 					 */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Detects whether more than one copy of tb exists per superblock
 	 * as a means of checking whether do_balance is executing
@@ -881,6 +1011,9 @@ struct reiserfs_sb_info {
 	 * mount point.
 	 */
 	struct tree_balance *cur_tb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };
@@ -890,6 +1023,7 @@ struct reiserfs_sb_info {
 #define REISERFS_3_6 1
 #define REISERFS_OLD_FORMAT 2
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum reiserfs_mount_options {
 /* Mount options */
@@ -911,6 +1045,8 @@ enum reiserfs_mount_options {
 ** with -o hash=rupasov, the mount will fail.
 */
 =======
+=======
+>>>>>>> v3.18
 /* Mount options */
 enum reiserfs_mount_options {
 	/* large tails will be created in a session */
@@ -941,6 +1077,9 @@ enum reiserfs_mount_options {
 	 * if you have a tea hash disk, and mount with -o hash=rupasov,
 	 * the mount will fail.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	FORCE_TEA_HASH,		/* try to force tea hash on mount */
 	FORCE_RUPASOV_HASH,	/* try to force rupasov hash on mount */
@@ -952,15 +1091,21 @@ enum reiserfs_mount_options {
 	REISERFS_DATA_WRITEBACK,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* used for testing experimental features, makes benchmarking new
    features with and without more convenient, should never be used by
    users in any code shipped to users (ideally) */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * used for testing experimental features, makes benchmarking new
 	 * features with and without more convenient, should never be used by
 	 * users in any code shipped to users (ideally)
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	REISERFS_NO_BORDER,
@@ -1032,6 +1177,7 @@ int reiserfs_resize(struct super_block *, unsigned long);
 #define SB_DISK_JOURNAL_HEAD(s) (SB_JOURNAL(s)->j_header_bh->)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* A safe version of the "bdevname", which returns the "s_id" field of
  * a superblock or else "Null superblock" if the super block is NULL.
  */
@@ -1040,6 +1186,8 @@ static inline char *reiserfs_bdevname(struct super_block *s)
 	return (s == NULL) ? "Null superblock" : s->s_id;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define reiserfs_is_journal_aborted(journal) (unlikely (__reiserfs_is_journal_aborted (journal)))
@@ -1057,8 +1205,13 @@ static inline int __reiserfs_is_journal_aborted(struct reiserfs_journal
 void reiserfs_write_lock(struct super_block *s);
 void reiserfs_write_unlock(struct super_block *s);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int reiserfs_write_lock_once(struct super_block *s);
 void reiserfs_write_unlock_once(struct super_block *s, int lock_depth);
+=======
+int __must_check reiserfs_write_unlock_nested(struct super_block *s);
+void reiserfs_write_lock_nested(struct super_block *s, int depth);
+>>>>>>> v3.18
 =======
 int __must_check reiserfs_write_unlock_nested(struct super_block *s);
 void reiserfs_write_lock_nested(struct super_block *s, int depth);
@@ -1099,6 +1252,7 @@ static inline void reiserfs_lock_check_recursive(struct super_block *s) { }
  */
 static inline void reiserfs_mutex_lock_safe(struct mutex *m,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       struct super_block *s)
 {
 	reiserfs_lock_check_recursive(s);
@@ -1106,6 +1260,8 @@ static inline void reiserfs_mutex_lock_safe(struct mutex *m,
 	mutex_lock(m);
 	reiserfs_write_lock(s);
 =======
+=======
+>>>>>>> v3.18
 					    struct super_block *s)
 {
 	int depth;
@@ -1113,11 +1269,15 @@ static inline void reiserfs_mutex_lock_safe(struct mutex *m,
 	depth = reiserfs_write_unlock_nested(s);
 	mutex_lock(m);
 	reiserfs_write_lock_nested(s, depth);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void
 reiserfs_mutex_lock_nested_safe(struct mutex *m, unsigned int subclass,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			       struct super_block *s)
 {
@@ -1126,6 +1286,8 @@ reiserfs_mutex_lock_nested_safe(struct mutex *m, unsigned int subclass,
 	mutex_lock_nested(m, subclass);
 	reiserfs_write_lock(s);
 =======
+=======
+>>>>>>> v3.18
 				struct super_block *s)
 {
 	int depth;
@@ -1133,6 +1295,9 @@ reiserfs_mutex_lock_nested_safe(struct mutex *m, unsigned int subclass,
 	depth = reiserfs_write_unlock_nested(s);
 	mutex_lock_nested(m, subclass);
 	reiserfs_write_lock_nested(s, depth);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1140,15 +1305,21 @@ static inline void
 reiserfs_down_read_safe(struct rw_semaphore *sem, struct super_block *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reiserfs_lock_check_recursive(s);
 	reiserfs_write_unlock(s);
 	down_read(sem);
 	reiserfs_write_lock(s);
 =======
+=======
+>>>>>>> v3.18
        int depth;
        depth = reiserfs_write_unlock_nested(s);
        down_read(sem);
        reiserfs_write_lock_nested(s, depth);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1160,21 +1331,28 @@ static inline void reiserfs_cond_resched(struct super_block *s)
 {
 	if (need_resched()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reiserfs_write_unlock(s);
 		schedule();
 		reiserfs_write_lock(s);
 =======
+=======
+>>>>>>> v3.18
 		int depth;
 
 		depth = reiserfs_write_unlock_nested(s);
 		schedule();
 		reiserfs_write_lock_nested(s, depth);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 
 struct fid;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* in reading the #defines, it may help to understand that they employ
    the following abbreviations:
@@ -1199,6 +1377,8 @@ struct fid;
 
 */
 =======
+=======
+>>>>>>> v3.18
 /*
  * in reading the #defines, it may help to understand that they employ
  *  the following abbreviations:
@@ -1221,6 +1401,9 @@ struct fid;
  *  where first comes the arguments, and last comes the return value,
  *  of the macro.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define USE_INODE_GENERATION_COUNTER
@@ -1233,6 +1416,7 @@ struct fid;
 #define _ROUND_UP(x,n) (((x)+(n)-1u) & ~((n)-1u))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // to be ok for alpha and others we have to align structures to 8 byte
 // boundary.
 // FIXME: do not change 4 by anything else: there is code which relies on that
@@ -1242,6 +1426,8 @@ struct fid;
 ** messages.
 */
 =======
+=======
+>>>>>>> v3.18
 /*
  * to be ok for alpha and others we have to align structures to 8 byte
  * boundary.
@@ -1253,6 +1439,9 @@ struct fid;
  * debug levels.  Right now, CONFIG_REISERFS_CHECK means print all debug
  * messages.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REISERFS_DEBUG_CODE 5	/* extra messages to help find/debug errors */
 
@@ -1263,7 +1452,11 @@ void __reiserfs_warning(struct super_block *s, const char *id,
 /* assertions handling */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** always check a condition and panic if it's false. */
+=======
+/* always check a condition and panic if it's false. */
+>>>>>>> v3.18
 =======
 /* always check a condition and panic if it's false. */
 >>>>>>> v3.18
@@ -1290,6 +1483,7 @@ do {									\
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***************************************************************************/
 /*                             SUPER BLOCK                                 */
 /***************************************************************************/
@@ -1301,6 +1495,8 @@ do {									\
 #define UNSET_HASH 0		// read_super will guess about, what hash names
 		     // in directories were sorted with
 =======
+=======
+>>>>>>> v3.18
 /***************************************************************************
  *                             SUPER BLOCK                                 *
  ***************************************************************************/
@@ -1311,6 +1507,9 @@ do {									\
  * structure containing fields never written to disk.
  */
 #define UNSET_HASH 0	/* Detect hash on disk */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TEA_HASH  1
 #define YURA_HASH 2
@@ -1318,6 +1517,7 @@ do {									\
 #define DEFAULT_HASH R5_HASH
 
 struct journal_params {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__le32 jp_journal_1st_block;	/* where does journal start from on its
 					 * device */
@@ -1333,6 +1533,8 @@ struct journal_params {
 	__le32 jp_journal_max_trans_age;	/* in seconds, how old can a transaction
 						 * be */
 =======
+=======
+>>>>>>> v3.18
 	/* where does journal start from on its * device */
 	__le32 jp_journal_1st_block;
 
@@ -1359,6 +1561,9 @@ struct journal_params {
 
 	/* in seconds, how old can a transaction be */
 	__le32 jp_journal_max_trans_age;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1369,6 +1574,7 @@ struct reiserfs_super_block_v1 {
 	__le32 s_root_block;	/* root block number    */
 	struct journal_params s_journal;
 	__le16 s_blocksize;	/* block size */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__le16 s_oid_maxsize;	/* max size of object id array, see
 				 * get_objectid() commentary  */
@@ -1391,6 +1597,8 @@ struct reiserfs_super_block_v1 {
 					 * device, we need to keep after
 					 * making fs with non-standard journal */
 =======
+=======
+>>>>>>> v3.18
 
 	/* max size of object id array, see get_objectid() commentary  */
 	__le16 s_oid_maxsize;
@@ -1433,6 +1641,9 @@ struct reiserfs_super_block_v1 {
 	 * keep after making fs with non-standard journal
 	 */
 	__le16 s_reserved_for_journal;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__ ((__packed__));
 
@@ -1443,12 +1654,18 @@ struct reiserfs_super_block {
 	struct reiserfs_super_block_v1 s_v1;
 	__le32 s_inode_generation;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 s_flags;		/* Right now used only by inode-attributes, if enabled */
 =======
+=======
+>>>>>>> v3.18
 
 	/* Right now used only by inode-attributes, if enabled */
 	__le32 s_flags;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char s_uuid[16];	/* filesystem unique identifier */
 	unsigned char s_label[16];	/* filesystem volume label */
@@ -1457,16 +1674,22 @@ struct reiserfs_super_block {
 	__le32 s_lastcheck;		/* Timestamp of last fsck */
 	__le32 s_check_interval;	/* Interval between checks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char s_unused[76];	/* zero filled by mkreiserfs and
 				 * reiserfs_convert_objectid_map_v1()
 				 * so any additions must be updated
 				 * there as well. */
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * zero filled by mkreiserfs and reiserfs_convert_objectid_map_v1()
 	 * so any additions must be updated there as well. */
 	char s_unused[76];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__ ((__packed__));
 
@@ -1476,7 +1699,11 @@ struct reiserfs_super_block {
 #define REISERFS_VERSION_2 2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // on-disk super block fields converted to cpu form
+=======
+/* on-disk super block fields converted to cpu form */
+>>>>>>> v3.18
 =======
 /* on-disk super block fields converted to cpu form */
 >>>>>>> v3.18
@@ -1535,12 +1762,15 @@ int is_reiserfs_3_6(struct reiserfs_super_block *rs);
 int is_reiserfs_jr(struct reiserfs_super_block *rs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* ReiserFS leaves the first 64k unused, so that partition labels have
    enough space.  If someone wants to write a fancy bootloader that
    needs more than 64k, let us know, and this will be increased in size.
    This number must be larger than than the largest block size on any
    platform, or code will break.  -Hans */
 =======
+=======
+>>>>>>> v3.18
 /*
  * ReiserFS leaves the first 64k unused, so that partition labels have
  * enough space.  If someone wants to write a fancy bootloader that
@@ -1548,6 +1778,9 @@ int is_reiserfs_jr(struct reiserfs_super_block *rs);
  * This number must be larger than than the largest block size on any
  * platform, or code will break.  -Hans
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REISERFS_DISK_OFFSET_IN_BYTES (64 * 1024)
 #define REISERFS_FIRST_BLOCK unused_define
@@ -1574,8 +1807,12 @@ struct unfm_nodeinfo {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* there are two formats of keys: 3.5 and 3.6
  */
+=======
+/* there are two formats of keys: 3.5 and 3.6 */
+>>>>>>> v3.18
 =======
 /* there are two formats of keys: 3.5 and 3.6 */
 >>>>>>> v3.18
@@ -1597,13 +1834,19 @@ static inline struct reiserfs_sb_info *REISERFS_SB(const struct super_block *sb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Don't trust REISERFS_SB(sb)->s_bmap_nr, it's a u16
  * which overflows on large file systems. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Don't trust REISERFS_SB(sb)->s_bmap_nr, it's a u16
  * which overflows on large file systems.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline __u32 reiserfs_bmap_count(struct super_block *sb)
 {
@@ -1616,13 +1859,19 @@ static inline int bmap_would_wrap(unsigned bmap_nr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** this says about version of key of all items (but stat data) the
     object consists of */
 =======
+=======
+>>>>>>> v3.18
 /*
  * this says about version of key of all items (but stat data) the
  * object consists of
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define get_inode_item_key_version( inode )                                    \
     ((REISERFS_I(inode)->i_flags & i_item_key_version_mask) ? KEY_FORMAT_3_6 : KEY_FORMAT_3_5)
@@ -1643,6 +1892,7 @@ static inline int bmap_would_wrap(unsigned bmap_nr)
                 REISERFS_I(inode)->i_flags &= ~i_stat_data_version_mask; })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This is an aggressive tail suppression policy, I am hoping it
    improves our benchmarks. The principle behind it is that percentage
    space saving is what matters, not absolute space saving.  This is
@@ -1654,6 +1904,8 @@ static inline int bmap_would_wrap(unsigned bmap_nr)
    less significant as a percentage of space, or so goes the hypothesis.
    -Hans */
 =======
+=======
+>>>>>>> v3.18
 /*
  * This is an aggressive tail suppression policy, I am hoping it
  * improves our benchmarks. The principle behind it is that percentage
@@ -1666,6 +1918,9 @@ static inline int bmap_would_wrap(unsigned bmap_nr)
  * less significant as a percentage of space, or so goes the hypothesis.
  * -Hans
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define STORE_TAIL_IN_UNFM_S1(n_file_size,n_tail_size,n_block_size) \
 (\
@@ -1681,16 +1936,22 @@ static inline int bmap_would_wrap(unsigned bmap_nr)
 )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Another strategy for tails, this one means only create a tail if all the
    file would fit into one DIRECT item.
    Primary intention for this one is to increase performance by decreasing
    seeking.
 =======
+=======
+>>>>>>> v3.18
 /*
  * Another strategy for tails, this one means only create a tail if all the
  * file would fit into one DIRECT item.
  * Primary intention for this one is to increase performance by decreasing
  * seeking.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 */
 #define STORE_TAIL_IN_UNFM_S2(n_file_size,n_tail_size,n_block_size) \
@@ -1706,9 +1967,15 @@ static inline int bmap_would_wrap(unsigned bmap_nr)
 #define REISERFS_ERROR_FS    2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //
 // there are 5 item types currently
 //
+=======
+/*
+ * there are 5 item types currently
+ */
+>>>>>>> v3.18
 =======
 /*
  * there are 5 item types currently
@@ -1720,6 +1987,7 @@ static inline int bmap_would_wrap(unsigned bmap_nr)
 #define TYPE_DIRENTRY 3
 #define TYPE_MAXTYPE 3
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TYPE_ANY 15		// FIXME: comment is required
 
 /***************************************************************************/
@@ -1730,6 +1998,8 @@ static inline int bmap_would_wrap(unsigned bmap_nr)
 // directories use this key as well as old files
 //
 =======
+=======
+>>>>>>> v3.18
 #define TYPE_ANY 15		/* FIXME: comment is required */
 
 /***************************************************************************
@@ -1737,6 +2007,9 @@ static inline int bmap_would_wrap(unsigned bmap_nr)
  ***************************************************************************/
 
 /* * directories use this key as well as old files */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct offset_v1 {
 	__le32 k_offset;
@@ -1771,12 +2044,15 @@ static inline void set_offset_v2_k_offset(struct offset_v2 *v2, loff_t offset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Key of an item determines its location in the S+tree, and
    is composed of 4 components */
 struct reiserfs_key {
 	__le32 k_dir_id;	/* packing locality: by default parent
 				   directory object id */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Key of an item determines its location in the S+tree, and
  * is composed of 4 components
@@ -1785,6 +2061,9 @@ struct reiserfs_key {
 	/* packing locality: by default parent directory object id */
 	__le32 k_dir_id;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__le32 k_objectid;	/* object identifier */
 	union {
@@ -1795,8 +2074,13 @@ struct reiserfs_key {
 
 struct in_core_key {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 k_dir_id;		/* packing locality: by default parent
 				   directory object id */
+=======
+	/* packing locality: by default parent directory object id */
+	__u32 k_dir_id;
+>>>>>>> v3.18
 =======
 	/* packing locality: by default parent directory object id */
 	__u32 k_dir_id;
@@ -1810,6 +2094,7 @@ struct cpu_key {
 	struct in_core_key on_disk_key;
 	int version;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int key_length;		/* 3 in all cases but direct2indirect and
 				   indirect2direct conversion */
 };
@@ -1819,6 +2104,8 @@ struct cpu_key {
    compare.  These defines are used in determining what is to be passed
    to it as that parameter. */
 =======
+=======
+>>>>>>> v3.18
 	/* 3 in all cases but direct2indirect and indirect2direct conversion */
 	int key_length;
 };
@@ -1829,6 +2116,9 @@ struct cpu_key {
  * compare.  These defines are used in determining what is to be passed
  * to it as that parameter.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REISERFS_FULL_KEY_LEN     4
 #define REISERFS_SHORT_KEY_LEN    2
@@ -1859,7 +2149,11 @@ struct cpu_key {
 #define POSITION_NOT_FOUND 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // return values for reiserfs_find_entry and search_by_entry_key
+=======
+/* return values for reiserfs_find_entry and search_by_entry_key */
+>>>>>>> v3.18
 =======
 /* return values for reiserfs_find_entry and search_by_entry_key */
 >>>>>>> v3.18
@@ -1868,6 +2162,7 @@ struct cpu_key {
 #define GOTO_PREVIOUS_ITEM 2
 #define NAME_FOUND_INVISIBLE 3
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*  Everything in the filesystem is stored as a set of items.  The
     item head contains the key of the item, its free space (for
@@ -1898,6 +2193,8 @@ struct item_head {
 				   temporary, cleaned after all
 				   done */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Everything in the filesystem is stored as a set of items.  The
  * item head contains the key of the item, its free space (for
@@ -1938,6 +2235,9 @@ struct item_head {
 	 * temporary, cleaned after all done
 	 */
 	__le16 ih_version;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__ ((__packed__));
 /* size of item header     */
@@ -1961,6 +2261,7 @@ struct item_head {
 #define set_ih_free_space(ih,val) put_ih_free_space((ih), ((ih_version(ih) == KEY_FORMAT_3_6) ? 0 : (val)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* these operate on indirect items, where you've got an array of ints
 ** at a possibly unaligned location.  These are a noop on ia32
 ** 
@@ -1974,6 +2275,8 @@ struct item_head {
 // in old version uniqueness field shows key type
 //
 =======
+=======
+>>>>>>> v3.18
 /*
  * these operate on indirect items, where you've got an array of ints
  * at a possibly unaligned location.  These are a noop on ia32
@@ -1985,17 +2288,26 @@ struct item_head {
 #define put_block_num(p, i, v) put_unaligned_le32((v), (p) + (i))
 
 /* * in old version uniqueness field shows key type */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define V1_SD_UNIQUENESS 0
 #define V1_INDIRECT_UNIQUENESS 0xfffffffe
 #define V1_DIRECT_UNIQUENESS 0xffffffff
 #define V1_DIRENTRY_UNIQUENESS 500
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V1_ANY_UNIQUENESS 555	// FIXME: comment is required
 
 //
 // here are conversion routines
 //
+=======
+#define V1_ANY_UNIQUENESS 555	/* FIXME: comment is required */
+
+/* here are conversion routines */
+>>>>>>> v3.18
 =======
 #define V1_ANY_UNIQUENESS 555	/* FIXME: comment is required */
 
@@ -2038,17 +2350,23 @@ static inline __u32 type2uniqueness(int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //
 // key is pointer to on disk key which is stored in le, result is cpu,
 // there is no way to get version of object from key, so, provide
 // version to these defines
 //
 =======
+=======
+>>>>>>> v3.18
 /*
  * key is pointer to on disk key which is stored in le, result is cpu,
  * there is no way to get version of object from key, so, provide
  * version to these defines
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline loff_t le_key_k_offset(int version,
 				     const struct reiserfs_key *key)
@@ -2066,15 +2384,21 @@ static inline loff_t le_ih_k_offset(const struct item_head *ih)
 static inline loff_t le_key_k_type(int version, const struct reiserfs_key *key)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (version == KEY_FORMAT_3_5) ?
 	    uniqueness2type(le32_to_cpu(key->u.k_offset_v1.k_uniqueness)) :
 	    offset_v2_k_type(&(key->u.k_offset_v2));
 =======
+=======
+>>>>>>> v3.18
 	if (version == KEY_FORMAT_3_5) {
 		loff_t val = le32_to_cpu(key->u.k_offset_v1.k_uniqueness);
 		return uniqueness2type(val);
 	} else
 		return offset_v2_k_type(&(key->u.k_offset_v2));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2087,9 +2411,12 @@ static inline void set_le_key_k_offset(int version, struct reiserfs_key *key,
 				       loff_t offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(version == KEY_FORMAT_3_5) ? (void)(key->u.k_offset_v1.k_offset = cpu_to_le32(offset)) :	/* jdm check */
 	    (void)(set_offset_v2_k_offset(&(key->u.k_offset_v2), offset));
 =======
+=======
+>>>>>>> v3.18
 	if (version == KEY_FORMAT_3_5)
 		key->u.k_offset_v1.k_offset = cpu_to_le32(offset);
 	else
@@ -2106,6 +2433,9 @@ static inline void add_le_key_k_offset(int version, struct reiserfs_key *key,
 static inline void add_le_ih_k_offset(struct item_head *ih, loff_t offset)
 {
 	add_le_key_k_offset(ih_version(ih), &(ih->ih_key), offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2118,16 +2448,22 @@ static inline void set_le_key_k_type(int version, struct reiserfs_key *key,
 				     int type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(version == KEY_FORMAT_3_5) ?
 	    (void)(key->u.k_offset_v1.k_uniqueness =
 		   cpu_to_le32(type2uniqueness(type)))
 	    : (void)(set_offset_v2_k_type(&(key->u.k_offset_v2), type));
 =======
+=======
+>>>>>>> v3.18
 	if (version == KEY_FORMAT_3_5) {
 		type = type2uniqueness(type);
 		key->u.k_offset_v1.k_uniqueness = cpu_to_le32(type);
 	} else
 	       set_offset_v2_k_type(&key->u.k_offset_v2, type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2157,9 +2493,13 @@ static inline int is_statdata_le_key(int version, struct reiserfs_key *key)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //
 // item header has version.
 //
+=======
+/* item header has version.  */
+>>>>>>> v3.18
 =======
 /* item header has version.  */
 >>>>>>> v3.18
@@ -2184,9 +2524,13 @@ static inline int is_statdata_le_ih(struct item_head *ih)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //
 // key is pointer to cpu key, result is cpu
 //
+=======
+/* key is pointer to cpu key, result is cpu */
+>>>>>>> v3.18
 =======
 /* key is pointer to cpu key, result is cpu */
 >>>>>>> v3.18
@@ -2241,7 +2585,11 @@ static inline void cpu_key_k_offset_dec(struct cpu_key *key)
 extern struct reiserfs_key root_key;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -2254,13 +2602,19 @@ extern struct reiserfs_key root_key;
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Header of a disk block.  More precisely, header of a formatted leaf
    or internal node, and not the header of an unformatted node. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Header of a disk block.  More precisely, header of a formatted leaf
  * or internal node, and not the header of an unformatted node.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct block_head {
 	__le16 blk_level;	/* Level of a block in the tree. */
@@ -2269,7 +2623,13 @@ struct block_head {
 	__le16 blk_reserved;
 	/* dump this in v4/planA */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct reiserfs_key blk_right_delim_key;	/* kept only for compatibility */
+=======
+
+	/* kept only for compatibility */
+	struct reiserfs_key blk_right_delim_key;
+>>>>>>> v3.18
 =======
 
 	/* kept only for compatibility */
@@ -2290,6 +2650,7 @@ struct block_head {
 #define set_blkh_right_delim_key(p_blkh,val)  ((p_blkh)->blk_right_delim_key = val)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * values for blk_level field of the struct block_head
  */
@@ -2303,6 +2664,8 @@ struct block_head {
 
 /* Given the buffer head of a formatted node, resolve to the block head of that node. */
 =======
+=======
+>>>>>>> v3.18
 /* values for blk_level field of the struct block_head */
 
 /*
@@ -2317,6 +2680,9 @@ struct block_head {
  * Given the buffer head of a formatted node, resolve to the
  * block head of that node.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define B_BLK_HEAD(bh)			((struct block_head *)((bh)->b_data))
 /* Number of items that are in buffer. */
@@ -2339,6 +2705,7 @@ struct block_head {
 					    && B_LEVEL(bh) <= MAX_HEIGHT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***************************************************************************/
 /*                             STAT DATA                                   */
 /***************************************************************************/
@@ -2348,6 +2715,8 @@ struct block_head {
 // different size
 //
 =======
+=======
+>>>>>>> v3.18
 /***************************************************************************
  *                             STAT DATA                                   *
  ***************************************************************************/
@@ -2356,6 +2725,9 @@ struct block_head {
  * old stat data is 32 bytes long. We are going to distinguish new one by
  * different size
 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct stat_data_v1 {
 	__le16 sd_mode;		/* file type, permissions */
@@ -2366,19 +2738,26 @@ struct stat_data_v1 {
 	__le32 sd_atime;	/* time of last access */
 	__le32 sd_mtime;	/* time file was last modified  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 sd_ctime;	/* time inode (stat data) was last changed (except changes to sd_atime and sd_mtime) */
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * time inode (stat data) was last changed
 	 * (except changes to sd_atime and sd_mtime)
 	 */
 	__le32 sd_ctime;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	union {
 		__le32 sd_rdev;
 		__le32 sd_blocks;	/* number of blocks file uses */
 	} __attribute__ ((__packed__)) u;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__le32 sd_first_direct_byte;	/* first byte of file which is stored
 					   in a direct item: except that if it
@@ -2390,6 +2769,8 @@ struct stat_data_v1 {
 					   sd_size and our tail suppression
 					   policy.  Someday.  -Hans */
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * first byte of file which is stored in a direct item: except that if
@@ -2399,6 +2780,9 @@ struct stat_data_v1 {
 	 * suppression policy.  Someday.  -Hans
 	 */
 	__le32 sd_first_direct_byte;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__ ((__packed__));
 
@@ -2432,13 +2816,19 @@ struct stat_data_v1 {
 /* inode flags stored in sd_attrs (nee sd_reserved) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* we want common flags to have the same values as in ext2,
    so chattr(1) will work without problems */
 =======
+=======
+>>>>>>> v3.18
 /*
  * we want common flags to have the same values as in ext2,
  * so chattr(1) will work without problems
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REISERFS_IMMUTABLE_FL FS_IMMUTABLE_FL
 #define REISERFS_APPEND_FL    FS_APPEND_FL
@@ -2460,13 +2850,19 @@ struct stat_data_v1 {
 				REISERFS_NOTAIL_FL )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Stat Data on disk (reiserfs version of UFS disk inode minus the
    address blocks) */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Stat Data on disk (reiserfs version of UFS disk inode minus the
  * address blocks)
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct stat_data {
 	__le16 sd_mode;		/* file type, permissions */
@@ -2478,19 +2874,26 @@ struct stat_data {
 	__le32 sd_atime;	/* time of last access */
 	__le32 sd_mtime;	/* time file was last modified  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 sd_ctime;	/* time inode (stat data) was last changed (except changes to sd_atime and sd_mtime) */
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * time inode (stat data) was last changed
 	 * (except changes to sd_atime and sd_mtime)
 	 */
 	__le32 sd_ctime;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__le32 sd_blocks;
 	union {
 		__le32 sd_rdev;
 		__le32 sd_generation;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		//__le32 sd_first_direct_byte;
 		/* first byte of file which is stored in a
@@ -2507,10 +2910,15 @@ struct stat_data {
 // this is 44 bytes long
 //
 =======
+=======
+>>>>>>> v3.18
 	} __attribute__ ((__packed__)) u;
 } __attribute__ ((__packed__));
 
 /* this is 44 bytes long */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SD_SIZE (sizeof(struct stat_data))
 #define SD_V2_SIZE              SD_SIZE
@@ -2543,6 +2951,7 @@ struct stat_data {
 #define set_sd_v2_attrs(sdp,v)   ((sdp)->sd_attrs = cpu_to_le16(v))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***************************************************************************/
 /*                      DIRECTORY STRUCTURE                                */
 /***************************************************************************/
@@ -2560,6 +2969,8 @@ struct stat_data {
  items.  This makes, among other things, the code for removing
  directories simpler. */
 =======
+=======
+>>>>>>> v3.18
 /***************************************************************************
  *                      DIRECTORY STRUCTURE                                *
  ***************************************************************************/
@@ -2577,6 +2988,9 @@ struct stat_data {
  * items.  This makes, among other things, the code for removing
  * directories simpler.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SD_OFFSET  0
 #define SD_UNIQUENESS 0
@@ -2584,6 +2998,7 @@ struct stat_data {
 #define DOT_DOT_OFFSET 2
 #define DIRENTRY_UNIQUENESS 500
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* */
 #define FIRST_ITEM_OFFSET 1
@@ -2606,6 +3021,8 @@ struct reiserfs_de_head {
 	__le16 deh_state;	/* whether 1) entry contains stat data (for future), and 2) whether
 				   entry is hidden (unlinked) */
 =======
+=======
+>>>>>>> v3.18
 #define FIRST_ITEM_OFFSET 1
 
 /*
@@ -2638,6 +3055,9 @@ struct reiserfs_de_head {
 	 * 2) whether entry is hidden (unlinked)
 	 */
 	__le16 deh_state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__ ((__packed__));
 #define DEH_SIZE                  sizeof(struct reiserfs_de_head)
@@ -2669,15 +3089,21 @@ struct reiserfs_de_head {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* These are only used to manipulate deh_state.
  * Because of this, we'll use the ext2_ bit routines,
  * since they are little endian */
 =======
+=======
+>>>>>>> v3.18
 /*
  * These are only used to manipulate deh_state.
  * Because of this, we'll use the ext2_ bit routines,
  * since they are little endian
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef ADDR_UNALIGNED_BITS
 
@@ -2713,6 +3139,7 @@ extern void make_empty_dir_item_v1(char *body, __le32 dirid, __le32 objid,
 extern void make_empty_dir_item(char *body, __le32 dirid, __le32 objid,
 				__le32 par_dirid, __le32 par_objid);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* array of the entry headers */
  /* get item body */
@@ -2755,6 +3182,8 @@ static inline int entry_length(const struct buffer_head *bh,
 /* When reiserfs_find_entry or search_by_entry_key find directory
    entry, they return filled reiserfs_dir_entry structure */
 =======
+=======
+>>>>>>> v3.18
 /* two entries per block (at least) */
 #define REISERFS_MAX_NAME(block_size) 255
 
@@ -2765,6 +3194,9 @@ static inline int entry_length(const struct buffer_head *bh,
  * When reiserfs_find_entry or search_by_entry_key find directory
  * entry, they return filled reiserfs_dir_entry structure
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct reiserfs_dir_entry {
 	struct buffer_head *de_bh;
@@ -2784,11 +3216,14 @@ struct reiserfs_dir_entry {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* these defines are useful when a particular member of a reiserfs_dir_entry is needed */
 
 /* pointer to file name, stored in entry */
 #define B_I_DEH_ENTRY_FILE_NAME(bh,ih,deh) (B_I_PITEM (bh, ih) + deh_location(deh))
 =======
+=======
+>>>>>>> v3.18
 /*
  * these defines are useful when a particular member of
  * a reiserfs_dir_entry is needed
@@ -2797,6 +3232,9 @@ struct reiserfs_dir_entry {
 /* pointer to file name, stored in entry */
 #define B_I_DEH_ENTRY_FILE_NAME(bh, ih, deh) \
 				(ih_item_body(bh, ih) + deh_location(deh))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* length of name */
@@ -2821,12 +3259,15 @@ struct reiserfs_dir_entry {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***************************************************************************/
 /*                      DISK CHILD                                         */
 /***************************************************************************/
 /* Disk child pointer: The pointer from an internal node of the tree
    to a node that is on disk. */
 =======
+=======
+>>>>>>> v3.18
 /***************************************************************************
  *                      DISK CHILD                                         *
  ***************************************************************************/
@@ -2834,6 +3275,9 @@ struct reiserfs_dir_entry {
  * Disk child pointer:
  * The pointer from an internal node of the tree to a node that is on disk.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct disk_child {
 	__le32 dc_block_number;	/* Disk child's block number. */
@@ -2867,6 +3311,7 @@ struct disk_child {
 #define MAX_NR_KEY(bh) ( (MAX_CHILD_SIZE(bh)-DC_SIZE)/(KEY_SIZE+DC_SIZE) )
 #define MIN_NR_KEY(bh)    (MAX_NR_KEY(bh)/2)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /***************************************************************************/
 /*                      PATH STRUCTURES AND DEFINES                        */
@@ -2910,6 +3355,8 @@ excessive effort to avoid disturbing the precious VFS code.:-( The
 gods only know how we are going to SMP the code that uses them.
 znodes are the way! */
 =======
+=======
+>>>>>>> v3.18
 /***************************************************************************
  *                      PATH STRUCTURES AND DEFINES                        *
  ***************************************************************************/
@@ -2970,6 +3417,9 @@ struct path_element {
  * gods only know how we are going to SMP the code that uses them.
  * znodes are the way!
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PATH_READA	0x1	/* do read ahead */
@@ -2979,7 +3429,12 @@ struct treepath {
 	int path_length;	/* Length of the array above.   */
 	int reada;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct path_element path_elements[EXTENDED_MAX_HEIGHT];	/* Array of the path elements.  */
+=======
+	/* Array of the path elements.  */
+	struct path_element path_elements[EXTENDED_MAX_HEIGHT];
+>>>>>>> v3.18
 =======
 	/* Array of the path elements.  */
 	struct path_element path_elements[EXTENDED_MAX_HEIGHT];
@@ -3002,6 +3457,7 @@ struct treepath var = {.path_length = ILLEGAL_PATH_ELEMENT_OFFSET, .reada = 0,}
 #define PATH_OFFSET_POSITION(path, n_offset) (PATH_OFFSET_PELEMENT(path, n_offset)->pe_position)
 
 #define PATH_PLAST_BUFFER(path) (PATH_OFFSET_PBUFFER((path), (path)->path_length))
+<<<<<<< HEAD
 <<<<<<< HEAD
 				/* you know, to the person who didn't
 				   write this the macro name does not
@@ -3033,6 +3489,8 @@ struct treepath var = {.path_length = ILLEGAL_PATH_ELEMENT_OFFSET, .reada = 0,}
 /*                       MISC                                              */
 /***************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * you know, to the person who didn't write this the macro name does not
@@ -3145,6 +3603,9 @@ static inline int entry_length(const struct buffer_head *bh,
 /***************************************************************************
  *                       MISC                                              *
  ***************************************************************************/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Size of pointer to the unformatted node. */
@@ -3152,7 +3613,11 @@ static inline int entry_length(const struct buffer_head *bh,
 #define UNFM_P_SHIFT 2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // in in-core inode key is stored on le form
+=======
+/* in in-core inode key is stored on le form */
+>>>>>>> v3.18
 =======
 /* in in-core inode key is stored on le form */
 >>>>>>> v3.18
@@ -3172,7 +3637,10 @@ static inline loff_t max_reiserfs_offset(struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*#define MAX_KEY_UNIQUENESS	MAX_UL_INT*/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MAX_KEY_OBJECTID	MAX_UL_INT
@@ -3184,16 +3652,22 @@ static inline loff_t max_reiserfs_offset(struct inode *inode)
 #define REISERFS_LINK_MAX (MAX_US_INT - 1000)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* The following defines are used in reiserfs_insert_item and reiserfs_append_item  */
 #define REISERFS_KERNEL_MEM		0	/* reiserfs kernel memory mode  */
 #define REISERFS_USER_MEM		1	/* reiserfs user memory mode            */
 =======
+=======
+>>>>>>> v3.18
 /*
  * The following defines are used in reiserfs_insert_item
  * and reiserfs_append_item
  */
 #define REISERFS_KERNEL_MEM		0	/* kernel memory mode */
 #define REISERFS_USER_MEM		1	/* user memory mode */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define fs_generation(s) (REISERFS_SB(s)->s_generation_counter)
@@ -3207,9 +3681,15 @@ static inline loff_t max_reiserfs_offset(struct inode *inode)
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***************************************************************************/
 /*                  FIXATE NODES                                           */
 /***************************************************************************/
+=======
+/***************************************************************************
+ *                  FIXATE NODES                                           *
+ ***************************************************************************/
+>>>>>>> v3.18
 =======
 /***************************************************************************
  *                  FIXATE NODES                                           *
@@ -3219,6 +3699,7 @@ static inline loff_t max_reiserfs_offset(struct inode *inode)
 #define VI_TYPE_LEFT_MERGEABLE 1
 #define VI_TYPE_RIGHT_MERGEABLE 2
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* To make any changes in the tree we always first find node, that
    contains item to be changed/deleted or place to insert a new
@@ -3254,6 +3735,8 @@ struct virtual_node {
 	const void *vn_data;
 	struct virtual_item *vn_vi;	/* array of items (including a new one, excluding item to be deleted) */
 =======
+=======
+>>>>>>> v3.18
 /*
  * To make any changes in the tree we always first find node, that
  * contains item to be changed/deleted or place to insert a new
@@ -3306,6 +3789,9 @@ struct virtual_node {
 
 	/* array of items (including a new one, excluding item to be deleted) */
 	struct virtual_item *vn_vi;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -3316,6 +3802,7 @@ struct direntry_uarea {
 	__u16 entry_sizes[1];
 } __attribute__ ((__packed__));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /***************************************************************************/
 /*                  TREE BALANCE                                           */
@@ -3334,6 +3821,8 @@ struct direntry_uarea {
 
 #define MAX_FREE_BLOCK 7	/* size of the array of buffers to free at end of do_balance */
 =======
+=======
+>>>>>>> v3.18
 /***************************************************************************
  *                  TREE BALANCE                                           *
  ***************************************************************************/
@@ -3353,6 +3842,9 @@ struct direntry_uarea {
 
 /* size of the array of buffers to free at end of do_balance */
 #define MAX_FREE_BLOCK 7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* maximum number of FEB blocknrs on a single level */
@@ -3365,6 +3857,7 @@ struct tree_balance {
 	struct super_block *tb_sb;
 	struct reiserfs_transaction_handle *transaction_handle;
 	struct treepath *tb_path;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct buffer_head *L[MAX_HEIGHT];	/* array of left neighbors of nodes in the path */
 	struct buffer_head *R[MAX_HEIGHT];	/* array of right neighbors of nodes in the path */
@@ -3425,6 +3918,8 @@ struct tree_balance {
 	struct in_core_key key;	/* key pointer, to pass to block allocator or
 				   another low-level subsystem */
 =======
+=======
+>>>>>>> v3.18
 
 	/* array of left neighbors of nodes in the path */
 	struct buffer_head *L[MAX_HEIGHT];
@@ -3563,6 +4058,9 @@ struct tree_balance {
 	 * another low-level subsystem
 	 */
 	struct in_core_key key;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };
@@ -3572,20 +4070,30 @@ struct tree_balance {
 /* When inserting an item. */
 #define M_INSERT	'i'
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* When inserting into (directories only) or appending onto an already
    existent item. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * When inserting into (directories only) or appending onto an already
  * existent item.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define M_PASTE		'p'
 /* When deleting an item. */
 #define M_DELETE	'd'
 /* When truncating an item or removing an entry from a (directory) item. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define M_CUT 		'c'
+=======
+#define M_CUT		'c'
+>>>>>>> v3.18
 =======
 #define M_CUT		'c'
 >>>>>>> v3.18
@@ -3594,15 +4102,21 @@ struct tree_balance {
 #define M_INTERNAL	'n'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* When further balancing is not needed, then do_balance does not need
    to be called. */
 #define M_SKIP_BALANCING 		's'
 =======
+=======
+>>>>>>> v3.18
 /*
  * When further balancing is not needed, then do_balance does not need
  * to be called.
  */
 #define M_SKIP_BALANCING		's'
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define M_CONVERT	'v'
 
@@ -3617,13 +4131,19 @@ struct tree_balance {
 #define LAST_TO_FIRST 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* used in do_balance for passing parent of node information that has
    been gotten from tb struct */
 =======
+=======
+>>>>>>> v3.18
 /*
  * used in do_balance for passing parent of node information that has
  * been gotten from tb struct
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct buffer_info {
 	struct tree_balance *tb;
@@ -3643,6 +4163,7 @@ static inline struct super_block *sb_from_bi(struct buffer_info *bi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* there are 4 types of items: stat data, directory item, indirect, direct.
 +-------------------+------------+--------------+------------+
 |	            |  k_offset  | k_uniqueness | mergeable? |
@@ -3658,6 +4179,8 @@ static inline struct super_block *sb_from_bi(struct buffer_info *bi)
 | direct item       | offset + 1 |TYPE_DIRECT   | if not this is not the first direct item of the object
 +-------------------+------------+--------------+------------+
 =======
+=======
+>>>>>>> v3.18
 /*
  * there are 4 types of items: stat data, directory item, indirect, direct.
  * +-------------------+------------+--------------+------------+
@@ -3676,6 +4199,9 @@ static inline struct super_block *sb_from_bi(struct buffer_info *bi)
  *
  * [1] if this is not the first indirect item of the object
  * [2] if this is not the first direct item of the object
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 */
 
@@ -3716,6 +4242,7 @@ extern struct item_operations *item_ops[TYPE_ANY + 1];
 #define I_UNFM_NUM(ih)	(ih_item_len(ih) / UNFM_P_SIZE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* the used space within the unformatted node corresponding to pos within the item pointed to by ih */
 #define I_POS_UNFM_SIZE(ih,pos,size) (((pos) == I_UNFM_NUM(ih) - 1 ) ? (size) - ih_free_space(ih) : (size))
 
@@ -3739,6 +4266,8 @@ extern struct item_operations *item_ops[TYPE_ANY + 1];
 
     /* following defines use reiserfs buffer header and item header */
 =======
+=======
+>>>>>>> v3.18
 /*
  * the used space within the unformatted node corresponding
  * to pos within the item pointed to by ih
@@ -3751,11 +4280,15 @@ extern struct item_operations *item_ops[TYPE_ANY + 1];
  */
 
 /* following defines use reiserfs buffer header and item header */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* get stat-data */
 #define B_I_STAT_DATA(bh, ih) ( (struct stat_data * )((bh)->b_data + ih_location(ih)) )
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 // this is 3976 for size==4096
 #define MAX_DIRECT_ITEM_LEN(size) ((size) - BLKH_SIZE - 2*IH_SIZE - SD_SIZE - UNFM_P_SIZE)
@@ -3766,6 +4299,8 @@ extern struct item_operations *item_ops[TYPE_ANY + 1];
 #define B_I_POS_UNFM_POINTER(bh,ih,pos) le32_to_cpu(*(((unp_t *)B_I_PITEM(bh,ih)) + (pos)))
 #define PUT_B_I_POS_UNFM_POINTER(bh,ih,pos, val) do {*(((unp_t *)B_I_PITEM(bh,ih)) + (pos)) = cpu_to_le32(val); } while (0)
 =======
+=======
+>>>>>>> v3.18
 /* this is 3976 for size==4096 */
 #define MAX_DIRECT_ITEM_LEN(size) ((size) - BLKH_SIZE - 2*IH_SIZE - SD_SIZE - UNFM_P_SIZE)
 
@@ -3778,6 +4313,9 @@ extern struct item_operations *item_ops[TYPE_ANY + 1];
 	le32_to_cpu(*(((unp_t *)ih_item_body(bh, ih)) + (pos)))
 #define PUT_B_I_POS_UNFM_POINTER(bh, ih, pos, val)			\
 	(*(((unp_t *)ih_item_body(bh, ih)) + (pos)) = cpu_to_le32(val))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct reiserfs_iget_args {
@@ -3786,9 +4324,15 @@ struct reiserfs_iget_args {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***************************************************************************/
 /*                    FUNCTION DECLARATIONS                                */
 /***************************************************************************/
+=======
+/***************************************************************************
+ *                    FUNCTION DECLARATIONS                                *
+ ***************************************************************************/
+>>>>>>> v3.18
 =======
 /***************************************************************************
  *                    FUNCTION DECLARATIONS                                *
@@ -3806,12 +4350,18 @@ struct reiserfs_iget_args {
 struct reiserfs_journal_desc {
 	__le32 j_trans_id;	/* id of commit */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 j_len;		/* length of commit. len +1 is the commit block */
 =======
+=======
+>>>>>>> v3.18
 
 	/* length of commit. len +1 is the commit block */
 	__le32 j_len;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__le32 j_mount_id;	/* mount id of this trans */
 	__le32 j_realblock[1];	/* real locations for each block */
@@ -3840,6 +4390,7 @@ struct reiserfs_journal_commit {
 #define set_commit_trans_len(c,val)    do { (c)->j_len = cpu_to_le32 (val); } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* this header block gets written whenever a transaction is considered fully flushed, and is more recent than the
 ** last fully flushed transaction.  fully flushed means all the log blocks and all the real blocks are on disk,
 ** and this transaction does not need to be replayed.
@@ -3848,6 +4399,8 @@ struct reiserfs_journal_header {
 	__le32 j_last_flush_trans_id;	/* id of last fully flushed transaction */
 	__le32 j_first_unflushed_offset;	/* offset in the log of where to start replay after a crash */
 =======
+=======
+>>>>>>> v3.18
 /*
  * this header block gets written whenever a transaction is considered
  * fully flushed, and is more recent than the last fully flushed transaction.
@@ -3861,6 +4414,9 @@ struct reiserfs_journal_header {
 	/* offset in the log of where to start replay after a crash */
 	__le32 j_first_unflushed_offset;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__le32 j_mount_id;
 	/* 12 */ struct journal_params jh_journal;
@@ -3869,10 +4425,13 @@ struct reiserfs_journal_header {
 /* biggest tunable defines are right here */
 #define JOURNAL_BLOCK_COUNT 8192	/* number of blocks in the journal */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define JOURNAL_TRANS_MAX_DEFAULT 1024	/* biggest possible single transaction, don't change for now (8/3/99) */
 #define JOURNAL_TRANS_MIN_DEFAULT 256
 #define JOURNAL_MAX_BATCH_DEFAULT   900	/* max blocks to batch into one transaction, don't make this any bigger than 900 */
 =======
+=======
+>>>>>>> v3.18
 
 /* biggest possible single transaction, don't change for now (8/3/99) */
 #define JOURNAL_TRANS_MAX_DEFAULT 1024
@@ -3883,6 +4442,9 @@ struct reiserfs_journal_header {
  * don't make this any bigger than 900
  */
 #define JOURNAL_MAX_BATCH_DEFAULT   900
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define JOURNAL_MIN_RATIO 2
 #define JOURNAL_MAX_COMMIT_AGE 30
@@ -3909,25 +4471,36 @@ struct reiserfs_journal_header {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* both of these can be as low as 1, or as high as you want.  The min is the
 ** number of 4k bitmap nodes preallocated on mount. New nodes are allocated
 ** as needed, and released when transactions are committed.  On release, if 
 ** the current number of nodes is > max, the node is freed, otherwise, 
 ** it is put on a free list for faster use later.
 =======
+=======
+>>>>>>> v3.18
 /*
  * both of these can be as low as 1, or as high as you want.  The min is the
  * number of 4k bitmap nodes preallocated on mount. New nodes are allocated
  * as needed, and released when transactions are committed.  On release, if
  * the current number of nodes is > max, the node is freed, otherwise,
  * it is put on a free list for faster use later.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 */
 #define REISERFS_MIN_BITMAP_NODES 10
 #define REISERFS_MAX_BITMAP_NODES 100
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define JBH_HASH_SHIFT 13	/* these are based on journal hash size of 8192 */
+=======
+/* these are based on journal hash size of 8192 */
+#define JBH_HASH_SHIFT 13
+>>>>>>> v3.18
 =======
 /* these are based on journal hash size of 8192 */
 #define JBH_HASH_SHIFT 13
@@ -3940,7 +4513,11 @@ struct reiserfs_journal_header {
 #define journal_hash(t,sb,block) ((t)[_jhashfn((sb),(block)) & JBH_HASH_MASK])
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // We need these to make journal.c code more readable
+=======
+/* We need these to make journal.c code more readable */
+>>>>>>> v3.18
 =======
 /* We need these to make journal.c code more readable */
 >>>>>>> v3.18
@@ -3952,6 +4529,7 @@ enum reiserfs_bh_state_bits {
 	BH_JDirty = BH_PrivateStart,	/* buffer is in current transaction */
 	BH_JDirty_wait,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BH_JNew,		/* disk block was taken off free list before
 				 * being in a finished transaction, or
 				 * written to disk. Can be reused immed. */
@@ -3959,6 +4537,8 @@ enum reiserfs_bh_state_bits {
 	BH_JRestore_dirty,
 	BH_JTest,		// debugging only will go away
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * disk block was taken off free list before being in a
 	 * finished transaction, or written to disk. Can be reused immed.
@@ -3967,6 +4547,9 @@ enum reiserfs_bh_state_bits {
 	BH_JPrepared,
 	BH_JRestore_dirty,
 	BH_JTest,		/* debugging only will go away */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -3983,6 +4566,7 @@ TAS_BUFFER_FNS(JRestore_dirty, journal_restore_dirty);
 BUFFER_FNS(JTest, journal_test);
 TAS_BUFFER_FNS(JTest, journal_test);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
 ** transaction handle which is passed around for all journal calls
@@ -4006,6 +4590,8 @@ struct reiserfs_transaction_handle {
 
 /* used to keep track of ordered and tail writes, attached to the buffer
 =======
+=======
+>>>>>>> v3.18
 /* transaction handle which is passed around for all journal calls */
 struct reiserfs_transaction_handle {
 	/*
@@ -4036,6 +4622,9 @@ struct reiserfs_transaction_handle {
 
 /*
  * used to keep track of ordered and tail writes, attached to the buffer
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * head through b_journal_head.
  */
@@ -4050,7 +4639,11 @@ int reiserfs_add_tail_list(struct inode *inode, struct buffer_head *bh);
 int reiserfs_add_ordered_list(struct inode *inode, struct buffer_head *bh);
 int journal_mark_dirty(struct reiserfs_transaction_handle *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       struct super_block *, struct buffer_head *bh);
+=======
+		       struct buffer_head *bh);
+>>>>>>> v3.18
 =======
 		       struct buffer_head *bh);
 >>>>>>> v3.18
@@ -4104,10 +4697,15 @@ int journal_release(struct reiserfs_transaction_handle *, struct super_block *);
 int journal_release_error(struct reiserfs_transaction_handle *,
 			  struct super_block *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int journal_end(struct reiserfs_transaction_handle *, struct super_block *,
 		unsigned long);
 int journal_end_sync(struct reiserfs_transaction_handle *, struct super_block *,
 		     unsigned long);
+=======
+int journal_end(struct reiserfs_transaction_handle *);
+int journal_end_sync(struct reiserfs_transaction_handle *);
+>>>>>>> v3.18
 =======
 int journal_end(struct reiserfs_transaction_handle *);
 int journal_end_sync(struct reiserfs_transaction_handle *);
@@ -4121,7 +4719,11 @@ int journal_begin(struct reiserfs_transaction_handle *,
 		  struct super_block *sb, unsigned long);
 int journal_join_abort(struct reiserfs_transaction_handle *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       struct super_block *sb, unsigned long);
+=======
+		       struct super_block *sb);
+>>>>>>> v3.18
 =======
 		       struct super_block *sb);
 >>>>>>> v3.18
@@ -4147,7 +4749,11 @@ extern void copy_item_head(struct item_head *to,
 			   const struct item_head *from);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // first key is in cpu form, second - le
+=======
+/* first key is in cpu form, second - le */
+>>>>>>> v3.18
 =======
 /* first key is in cpu form, second - le */
 >>>>>>> v3.18
@@ -4156,7 +4762,11 @@ extern int comp_short_keys(const struct reiserfs_key *le_key,
 extern void le_key2cpu_key(struct cpu_key *to, const struct reiserfs_key *from);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // both are in le form
+=======
+/* both are in le form */
+>>>>>>> v3.18
 =======
 /* both are in le form */
 >>>>>>> v3.18
@@ -4166,9 +4776,13 @@ extern int comp_short_le_keys(const struct reiserfs_key *,
 			      const struct reiserfs_key *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //
 // get key version from on disk key - kludge
 //
+=======
+/* * get key version from on disk key - kludge */
+>>>>>>> v3.18
 =======
 /* * get key version from on disk key - kludge */
 >>>>>>> v3.18
@@ -4249,6 +4863,7 @@ void padd_item(char *item, int total_length, int length);
 /* inode.c */
 /* args for the create parameter of reiserfs_get_block */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GET_BLOCK_NO_CREATE 0	/* don't create new blocks or convert tails */
 #define GET_BLOCK_CREATE 1	/* add anything you need to find block */
 #define GET_BLOCK_NO_HOLE 2	/* return -ENOENT for file holes */
@@ -4256,12 +4871,17 @@ void padd_item(char *item, int total_length, int length);
 #define GET_BLOCK_NO_IMUX     8	/* i_mutex is not held, don't preallocate */
 #define GET_BLOCK_NO_DANGLE   16	/* don't leave any transactions running */
 =======
+=======
+>>>>>>> v3.18
 #define GET_BLOCK_NO_CREATE 0	 /* don't create new blocks or convert tails */
 #define GET_BLOCK_CREATE 1	 /* add anything you need to find block */
 #define GET_BLOCK_NO_HOLE 2	 /* return -ENOENT for file holes */
 #define GET_BLOCK_READ_DIRECT 4	 /* read the tail if indirect item not found */
 #define GET_BLOCK_NO_IMUX     8	 /* i_mutex is not held, don't preallocate */
 #define GET_BLOCK_NO_DANGLE   16 /* don't leave any transactions running */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void reiserfs_read_locked_inode(struct inode *inode,
@@ -4368,7 +4988,11 @@ extern const struct inode_operations reiserfs_symlink_inode_operations;
 extern const struct inode_operations reiserfs_special_inode_operations;
 extern const struct file_operations reiserfs_dir_operations;
 <<<<<<< HEAD
+<<<<<<< HEAD
 int reiserfs_readdir_dentry(struct dentry *, void *, filldir_t, loff_t *);
+=======
+int reiserfs_readdir_inode(struct inode *, struct dir_context *);
+>>>>>>> v3.18
 =======
 int reiserfs_readdir_inode(struct inode *, struct dir_context *);
 >>>>>>> v3.18
@@ -4432,18 +5056,24 @@ void leaf_delete_items(struct buffer_info *cur_bi, int last_first, int first,
 		       int del_num, int del_bytes);
 void leaf_insert_into_buf(struct buffer_info *bi, int before,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct item_head *inserted_item_ih,
 			  const char *inserted_item_body, int zeros_number);
 void leaf_paste_in_buffer(struct buffer_info *bi, int pasted_item_num,
 			  int pos_in_item, int paste_size, const char *body,
 			  int zeros_number);
 =======
+=======
+>>>>>>> v3.18
 			  struct item_head * const inserted_item_ih,
 			  const char * const inserted_item_body,
 			  int zeros_number);
 void leaf_paste_in_buffer(struct buffer_info *bi, int pasted_item_num,
 			  int pos_in_item, int paste_size,
 			  const char * const body, int zeros_number);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void leaf_cut_from_buffer(struct buffer_info *bi, int cut_item_num,
 			  int pos_in_item, int cut_size);
@@ -4475,6 +5105,7 @@ struct buffer_head *get_FEB(struct tree_balance *);
 /* bitmap.c */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* structure contains hints for block allocator, and it is a container for
  * arguments, such as node, search path, transaction_handle, etc. */
 struct __reiserfs_blocknr_hint {
@@ -4495,6 +5126,8 @@ struct __reiserfs_blocknr_hint {
 	unsigned formatted_node:1;	/* the allocator uses different polices for getting disk space for
 					 * formatted/unformatted blocks with/without preallocation */
 =======
+=======
+>>>>>>> v3.18
 /*
  * structure contains hints for block allocator, and it is a container for
  * arguments, such as node, search path, transaction_handle, etc.
@@ -4538,6 +5171,9 @@ struct __reiserfs_blocknr_hint {
 	 * space for formatted/unformatted blocks with/without preallocation
 	 */
 	unsigned formatted_node:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned preallocate:1;
 };
@@ -4555,6 +5191,10 @@ void reiserfs_init_alloc_options(struct super_block *s);
 __le32 reiserfs_choose_packing(struct inode *dir);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void show_alloc_options(struct seq_file *seq, struct super_block *s);
+>>>>>>> v3.18
 =======
 void show_alloc_options(struct seq_file *seq, struct super_block *s);
 >>>>>>> v3.18
@@ -4636,6 +5276,7 @@ __u32 r5_hash(const signed char *msg, int len);
 #define reiserfs_find_next_zero_le_bit	find_next_zero_bit_le
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* sometimes reiserfs_truncate may require to allocate few new blocks
    to perform indirect2direct conversion. People probably used to
    think, that truncate should work without problems on a filesystem
@@ -4644,6 +5285,8 @@ __u32 r5_hash(const signed char *msg, int len);
    to not worry about it. 500 is probably too much, but it should be
    absolutely safe */
 =======
+=======
+>>>>>>> v3.18
 /*
  * sometimes reiserfs_truncate may require to allocate few new blocks
  * to perform indirect2direct conversion. People probably used to
@@ -4653,6 +5296,9 @@ __u32 r5_hash(const signed char *msg, int len);
  * to not worry about it. 500 is probably too much, but it should be
  * absolutely safe
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SPARE_SPACE 500
 

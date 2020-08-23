@@ -51,6 +51,7 @@ OPTIONS
 	scale/normalize counter values
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -d::
 --detailed::
 	print more detailed statistics, can be specified up to 3 times
@@ -59,6 +60,8 @@ OPTIONS
         -d -d:     more detailed events, dTLB and iTLB events
      -d -d -d:     very detailed events, adding prefetch events
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 -r::
@@ -144,7 +147,10 @@ use --per-core in addition to -a. (system-wide).  The output includes the
 core number and the number of online logical processors on that physical processor.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 -D msecs::
 --delay msecs::
 After starting the program, wait msecs before measuring. This is useful to
@@ -155,6 +161,9 @@ filter out the startup phase of the program, which is often very different.
 
 Print statistics of transactional execution if supported.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXAMPLES
 --------

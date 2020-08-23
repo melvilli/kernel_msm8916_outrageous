@@ -92,7 +92,10 @@ static const struct usb_device_id pwc_device_table [] = {
 	{ USB_DEVICE(0x0471, 0x0313) }, /* the 'new' 720K */
 	{ USB_DEVICE(0x0471, 0x0329) }, /* Philips SPC 900NC PC Camera */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x0471, 0x032C) }, /* Philips SPC 880NC PC Camera */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x069A, 0x0001) }, /* Askey */
@@ -619,7 +622,11 @@ static int buffer_prepare(struct vb2_buffer *vb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int buffer_finish(struct vb2_buffer *vb)
+=======
+static void buffer_finish(struct vb2_buffer *vb)
+>>>>>>> v3.18
 =======
 static void buffer_finish(struct vb2_buffer *vb)
 >>>>>>> v3.18
@@ -628,6 +635,7 @@ static void buffer_finish(struct vb2_buffer *vb)
 	struct pwc_frame_buf *buf = container_of(vb, struct pwc_frame_buf, vb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Application has called dqbuf and is getting back a buffer we've
 	 * filled, take the pwc data we've stored in buf->data and decompress
@@ -635,6 +643,8 @@ static void buffer_finish(struct vb2_buffer *vb)
 	 */
 	return pwc_decompress(pdev, buf);
 =======
+=======
+>>>>>>> v3.18
 	if (vb->state == VB2_BUF_STATE_DONE) {
 		/*
 		 * Application has called dqbuf and is getting back a buffer
@@ -644,6 +654,9 @@ static void buffer_finish(struct vb2_buffer *vb)
 		 */
 		pwc_decompress(pdev, buf);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -699,6 +712,7 @@ static int start_streaming(struct vb2_queue *vq, unsigned int count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int stop_streaming(struct vb2_queue *vq)
 {
 	struct pwc_device *pdev = vb2_get_drv_priv(vq);
@@ -706,11 +720,16 @@ static int stop_streaming(struct vb2_queue *vq)
 	if (mutex_lock_interruptible(&pdev->v4l2_lock))
 		return -ERESTARTSYS;
 =======
+=======
+>>>>>>> v3.18
 static void stop_streaming(struct vb2_queue *vq)
 {
 	struct pwc_device *pdev = vb2_get_drv_priv(vq);
 
 	mutex_lock(&pdev->v4l2_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pdev->udev) {
 		pwc_set_leds(pdev, 0, 0);
@@ -721,8 +740,11 @@ static void stop_streaming(struct vb2_queue *vq)
 	pwc_cleanup_queued_bufs(pdev);
 	mutex_unlock(&pdev->v4l2_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -831,11 +853,14 @@ static int usb_pwc_probe(struct usb_interface *intf, const struct usb_device_id 
 			type_id = 740;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case 0x032C:
 			PWC_INFO("Philips SPC 880NC USB webcam detected.\n");
 			name = "Philips SPC 880NC webcam";
 			type_id = 740;
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		default:
@@ -1041,7 +1066,11 @@ static int usb_pwc_probe(struct usb_interface *intf, const struct usb_device_id 
 	pdev->vb_queue.ops = &pwc_vb_queue_ops;
 	pdev->vb_queue.mem_ops = &vb2_vmalloc_memops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev->vb_queue.timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+=======
+	pdev->vb_queue.timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+>>>>>>> v3.18
 =======
 	pdev->vb_queue.timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
 >>>>>>> v3.18
@@ -1057,7 +1086,10 @@ static int usb_pwc_probe(struct usb_interface *intf, const struct usb_device_id 
 	pdev->vdev.queue = &pdev->vb_queue;
 	pdev->vdev.queue->lock = &pdev->vb_queue_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &pdev->vdev.flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	video_set_drvdata(&pdev->vdev, pdev);
@@ -1086,7 +1118,11 @@ static int usb_pwc_probe(struct usb_interface *intf, const struct usb_device_id 
 	pwc_set_leds(pdev, 0, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Setup intial videomode */
+=======
+	/* Setup initial videomode */
+>>>>>>> v3.18
 =======
 	/* Setup initial videomode */
 >>>>>>> v3.18
@@ -1129,7 +1165,10 @@ static int usb_pwc_probe(struct usb_interface *intf, const struct usb_device_id 
 	pdev->button_dev = input_allocate_device();
 	if (!pdev->button_dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PWC_ERROR("Err, insufficient memory for webcam snapshot button device.");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		rc = -ENOMEM;

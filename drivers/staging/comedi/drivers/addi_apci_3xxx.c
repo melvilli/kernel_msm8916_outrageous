@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
 
 #include "../comedidev.h"
@@ -11,6 +12,8 @@
 #include "addi-data/hwdrv_apci3xxx.c"
 #include "addi-data/addi_common.c"
 =======
+=======
+>>>>>>> v3.18
 /*
  * addi_apci_3xxx.c
  * Copyright (C) 2004,2005  ADDI-DATA GmbH for the source code of this module.
@@ -66,6 +69,9 @@ static const struct comedi_lrange apci3xxx_ao_range = {
 		UNI_RANGE(10)
 	}
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum apci3xxx_boardid {
@@ -96,6 +102,7 @@ enum apci3xxx_boardid {
 	BOARD_APCI3500,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct addi_board apci3xxx_boardtypes[] = {
 	[BOARD_APCI3000_16] = {
@@ -728,6 +735,8 @@ static int apci3xxx_auto_attach(struct comedi_device *dev,
 {
 	const struct addi_board *board = NULL;
 =======
+=======
+>>>>>>> v3.18
 struct apci3xxx_boardinfo {
 	const char *name;
 	int ai_subdev_flags;
@@ -1417,6 +1426,9 @@ static int apci3xxx_auto_attach(struct comedi_device *dev,
 	int n_subdevices;
 	int subdev;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (context < ARRAY_SIZE(apci3xxx_boardtypes))
@@ -1425,9 +1437,12 @@ static int apci3xxx_auto_attach(struct comedi_device *dev,
 		return -ENODEV;
 	dev->board_ptr = board;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return addi_auto_attach(dev, context);
 =======
+=======
+>>>>>>> v3.18
 	dev->board_name = board->name;
 
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
@@ -1564,6 +1579,9 @@ static void apci3xxx_detach(struct comedi_device *dev)
 	if (dev->iobase)
 		apci3xxx_reset(dev);
 	comedi_pci_detach(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1572,7 +1590,11 @@ static struct comedi_driver apci3xxx_driver = {
 	.module		= THIS_MODULE,
 	.auto_attach	= apci3xxx_auto_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= i_ADDI_Detach,
+=======
+	.detach		= apci3xxx_detach,
+>>>>>>> v3.18
 =======
 	.detach		= apci3xxx_detach,
 >>>>>>> v3.18
@@ -1585,7 +1607,11 @@ static int apci3xxx_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci3xxx_pci_table) = {
+=======
+static const struct pci_device_id apci3xxx_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id apci3xxx_pci_table[] = {
 >>>>>>> v3.18

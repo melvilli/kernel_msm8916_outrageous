@@ -14,10 +14,13 @@
  *
  *  GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -46,9 +49,14 @@ MODULE_PARM_DESC(vbi_debug, "enable debug messages [vbi]");
 
 #define VBI_LINE_LENGTH 1440
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NTSC_VBI_START_LINE 10        /* line 10 - 21 */
 #define NTSC_VBI_END_LINE   21
 #define NTSC_VBI_LINES      (NTSC_VBI_END_LINE - NTSC_VBI_START_LINE + 1)
+=======
+#define VBI_NTSC_LINE_COUNT 12
+#define VBI_PAL_LINE_COUNT 18
+>>>>>>> v3.18
 =======
 #define VBI_NTSC_LINE_COUNT 12
 #define VBI_PAL_LINE_COUNT 18
@@ -58,6 +66,7 @@ MODULE_PARM_DESC(vbi_debug, "enable debug messages [vbi]");
 int cx23885_vbi_fmt(struct file *file, void *priv,
 	struct v4l2_format *f)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct cx23885_fh *fh = priv;
 	struct cx23885_dev *dev = fh->dev;
@@ -79,6 +88,8 @@ int cx23885_vbi_fmt(struct file *file, void *priv,
 		f->fmt.vbi.start[0] = 7 - 1;
 		f->fmt.vbi.start[1] = 319 - 1;
 =======
+=======
+>>>>>>> v3.18
 	struct cx23885_dev *dev = video_drvdata(file);
 
 	f->fmt.vbi.sampling_rate = 27000000;
@@ -98,6 +109,9 @@ int cx23885_vbi_fmt(struct file *file, void *priv,
 		f->fmt.vbi.start[1] = V4L2_VBI_ITU_625_F2_START + 5;
 		f->fmt.vbi.count[0] = VBI_PAL_LINE_COUNT;
 		f->fmt.vbi.count[1] = VBI_PAL_LINE_COUNT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -125,6 +139,7 @@ int cx23885_vbi_irq(struct cx23885_dev *dev, u32 status)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status & VID_BC_MSK_VBI_RISCI2) {
 		dprintk(1, "%s() VID_BC_MSK_VBI_RISCI2\n", __func__);
 		dprintk(2, "stopper vbi\n");
@@ -134,6 +149,8 @@ int cx23885_vbi_irq(struct cx23885_dev *dev, u32 status)
 		handled++;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return handled;
@@ -148,7 +165,11 @@ static int cx23885_start_vbi_dma(struct cx23885_dev    *dev,
 	/* setup fifo + format */
 	cx23885_sram_channel_setup(dev, &dev->sram_channels[SRAM_CH02],
 <<<<<<< HEAD
+<<<<<<< HEAD
 				buf->vb.width, buf->risc.dma);
+=======
+				VBI_LINE_LENGTH, buf->risc.dma);
+>>>>>>> v3.18
 =======
 				VBI_LINE_LENGTH, buf->risc.dma);
 >>>>>>> v3.18
@@ -158,7 +179,11 @@ static int cx23885_start_vbi_dma(struct cx23885_dev    *dev,
 	cx_write(VID_A_VBI_CTRL, 3);
 	cx_write(VBI_A_GPCNT_CTL, 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->count = 1;
+=======
+	q->count = 0;
+>>>>>>> v3.18
 =======
 	q->count = 0;
 >>>>>>> v3.18
@@ -174,6 +199,7 @@ static int cx23885_start_vbi_dma(struct cx23885_dev    *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int cx23885_restart_vbi_queue(struct cx23885_dev    *dev,
@@ -336,6 +362,8 @@ struct videobuf_queue_ops cx23885_vbi_qops = {
  * End:
  */
 =======
+=======
+>>>>>>> v3.18
 /* ------------------------------------------------------------------ */
 
 static int queue_setup(struct vb2_queue *q, const struct v4l2_format *fmt,
@@ -486,4 +514,7 @@ struct vb2_ops cx23885_vbi_qops = {
 	.start_streaming = cx23885_start_streaming,
 	.stop_streaming = cx23885_stop_streaming,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

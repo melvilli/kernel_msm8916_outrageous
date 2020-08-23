@@ -26,7 +26,10 @@
 #include <linux/i2c.h>
 #include <linux/i2c/pxa-i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/regulator/machine.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/spi/spi.h>
@@ -34,6 +37,10 @@
 #include <linux/spi/pxa2xx_spi.h>
 #include <linux/mtd/sharpsl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+>>>>>>> v3.18
 =======
 #include <linux/memblock.h>
 >>>>>>> v3.18
@@ -267,7 +274,11 @@ err_free_2:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void poodle_mci_setpower(struct device *dev, unsigned int vdd)
+=======
+static int poodle_mci_setpower(struct device *dev, unsigned int vdd)
+>>>>>>> v3.18
 =======
 static int poodle_mci_setpower(struct device *dev, unsigned int vdd)
 >>>>>>> v3.18
@@ -283,6 +294,11 @@ static int poodle_mci_setpower(struct device *dev, unsigned int vdd)
 		gpio_set_value(POODLE_GPIO_SD_PWR, 0);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -470,6 +486,7 @@ static void __init poodle_init(void)
 	i2c_register_board_info(0, ARRAY_AND_SIZE(poodle_i2c_devices));
 	poodle_init_spi();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regulator_has_full_constraints();
 }
 
@@ -481,12 +498,17 @@ static void __init fixup_poodle(struct tag *tags, char **cmdline,
 	mi->bank[0].start = 0xa0000000;
 	mi->bank[0].size = (32*1024*1024);
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void __init fixup_poodle(struct tag *tags, char **cmdline)
 {
 	sharpsl_save_param();
 	memblock_add(0xa0000000, SZ_32M);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

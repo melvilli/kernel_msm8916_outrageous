@@ -4,6 +4,10 @@
 #include <uapi/asm/setup.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const struct machine_desc *setup_machine_fdt(void *dt);
+>>>>>>> v3.18
 =======
 extern const struct machine_desc *setup_machine_fdt(void *dt);
 >>>>>>> v3.18

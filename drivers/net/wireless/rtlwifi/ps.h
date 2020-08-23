@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -37,7 +40,12 @@
 
 bool rtl_ps_set_rf_state(struct ieee80211_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 enum rf_pwrstate state_toset, u32 changesource);
+=======
+			 enum rf_pwrstate state_toset, u32 changesource,
+			 bool protect_or_not);
+>>>>>>> v3.18
 =======
 			 enum rf_pwrstate state_toset, u32 changesource,
 			 bool protect_or_not);
@@ -51,6 +59,11 @@ void rtl_lps_enter(struct ieee80211_hw *hw);
 void rtl_lps_leave(struct ieee80211_hw *hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void rtl_lps_set_psmode(struct ieee80211_hw *hw, u8 rt_psmode);
+
+>>>>>>> v3.18
 =======
 void rtl_lps_set_psmode(struct ieee80211_hw *hw, u8 rt_psmode);
 
@@ -61,7 +74,11 @@ void rtl_swlps_rfon_wq_callback(void *data);
 void rtl_swlps_rf_awake(struct ieee80211_hw *hw);
 void rtl_swlps_rf_sleep(struct ieee80211_hw *hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl_p2p_ps_cmd(struct ieee80211_hw *hw, u8 p2p_ps_state);
+=======
+void rtl_p2p_ps_cmd(struct ieee80211_hw *hw , u8 p2p_ps_state);
+>>>>>>> v3.18
 =======
 void rtl_p2p_ps_cmd(struct ieee80211_hw *hw , u8 p2p_ps_state);
 >>>>>>> v3.18

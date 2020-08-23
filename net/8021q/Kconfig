@@ -7,17 +7,23 @@ config VLAN_8021Q
 	---help---
 	  Select this and you will be able to create 802.1Q VLAN interfaces
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  on your ethernet interfaces.  802.1Q VLAN supports almost
 	  everything a regular ethernet interface does, including
 	  firewalling, bridging, and of course IP traffic.  You will need
 	  the 'vconfig' tool from the VLAN project in order to effectively
 	  use VLANs.  See the VLAN web page for more information:
 =======
+=======
+>>>>>>> v3.18
 	  on your Ethernet interfaces. 802.1Q VLAN supports almost
 	  everything a regular Ethernet interface does, including
 	  firewalling, bridging, and of course IP traffic. You will need
 	  the 'ip' utility in order to effectively use VLANs.
 	  See the VLAN web page for more information:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  <http://www.candelatech.com/~greear/vlan.html>
 

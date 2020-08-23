@@ -53,6 +53,7 @@
 #define PCIE_BYTE_SWAP_IO_BASE		0x249
 #define PCIE_BYTE_SWAP_IO_LIM		0x24A
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCIE_MSI_STATUS			0x25A
 #define PCIE_MSI_EN			0x25B
 #define PCIE_INT_EN0			0x261
@@ -64,6 +65,8 @@
 #define PCIE_MSI_INT_EN			(1 << 9)
 
 =======
+=======
+>>>>>>> v3.18
 
 #define PCIE_BRIDGE_MSIX_ADDR_BASE	0x24F
 #define PCIE_BRIDGE_MSIX_ADDR_LIMIT	0x250
@@ -106,11 +109,15 @@
 #define MSIX_ADDR_BASE			0xfffef00000ULL
 #define MSIX_LINK_ADDR(n, l)		(MSIX_ADDR_BASE + \
 				(PCIE_NLINKS * (n) + (l)) * MSI_ADDR_SZ)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
 #define nlm_read_pcie_reg(b, r)		nlm_read_reg(b, r)
 #define nlm_write_pcie_reg(b, r, v)	nlm_write_reg(b, r, v)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define nlm_get_pcie_base(node, inst)	\
 			nlm_pcicfg_base(XLP_IO_PCIE_OFFSET(node, inst))
@@ -119,6 +126,8 @@
 
 int xlp_pcie_link_irt(int link);
 =======
+=======
+>>>>>>> v3.18
 #define nlm_get_pcie_base(node, inst)	nlm_pcicfg_base(cpu_is_xlp9xx() ? \
 	XLP9XX_IO_PCIE_OFFSET(node, inst) : XLP_IO_PCIE_OFFSET(node, inst))
 
@@ -130,6 +139,9 @@ static inline void xlp_init_node_msi_irqs(int node, int link) {}
 
 struct pci_dev *xlp_get_pcie_link(const struct pci_dev *dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #endif /* __NLM_HAL_PCIBUS_H__ */

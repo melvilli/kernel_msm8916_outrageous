@@ -17,6 +17,7 @@
 #include <linux/io.h>
 #include <linux/mmc/host.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pm_qos.h>
 #include <linux/ratelimit.h>
 
@@ -43,6 +44,8 @@ enum sdhci_host_qos_policy {
 	SDHCI_QOS_WRITE,
 	SDHCI_QOS_MAX_POLICY,
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -87,12 +90,17 @@ struct sdhci_host {
 /* Controller reports inverted write-protect state */
 #define SDHCI_QUIRK_INVERTED_WRITE_PROTECT		(1<<16)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Controller has nonstandard clock management */
 #define SDHCI_QUIRK_NONSTANDARD_CLOCK			(1<<17)
 /* Controller does not like fast PIO transfers */
 #define SDHCI_QUIRK_PIO_NEEDS_DELAY			(1<<18)
 /* Controller losing signal/interrupt enable states after reset */
 #define SDHCI_QUIRK_RESTORE_IRQS_AFTER_RESET		(1<<19)
+=======
+/* Controller does not like fast PIO transfers */
+#define SDHCI_QUIRK_PIO_NEEDS_DELAY			(1<<18)
+>>>>>>> v3.18
 =======
 /* Controller does not like fast PIO transfers */
 #define SDHCI_QUIRK_PIO_NEEDS_DELAY			(1<<18)
@@ -129,6 +137,7 @@ struct sdhci_host {
 /* The system physically doesn't support 1.8v, even if the host does */
 #define SDHCI_QUIRK2_NO_1_8_V				(1<<2)
 #define SDHCI_QUIRK2_PRESET_VALUE_BROKEN		(1<<3)
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Read Transfer Active/ Write Transfer Active may be not
@@ -201,6 +210,8 @@ struct sdhci_host {
 /* Use reset workaround in case sdhci reset timeouts */
 #define SDHCI_QUIRK2_USE_RESET_WORKAROUND (1 << 15)
 =======
+=======
+>>>>>>> v3.18
 #define SDHCI_QUIRK2_CARD_ON_NEEDS_BUS_ON		(1<<4)
 /* Controller has a non-standard host control register */
 #define SDHCI_QUIRK2_BROKEN_HOST_CONTROL		(1<<5)
@@ -210,6 +221,9 @@ struct sdhci_host {
 #define SDHCI_QUIRK2_BROKEN_DDR50			(1<<7)
 /* Stop command (CMD12) can set Transfer Complete when not using MMC_RSP_BUSY */
 #define SDHCI_QUIRK2_STOP_WITH_TC			(1<<8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int irq;		/* Device IRQ */
@@ -218,9 +232,12 @@ struct sdhci_host {
 	const struct sdhci_ops *ops;	/* Low level hw interface */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator *vmmc;		/* Power regulator (vmmc) */
 	struct regulator *vqmmc;	/* Signaling regulator (vccq) */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Internal data */
@@ -246,10 +263,15 @@ struct sdhci_host {
 #define SDHCI_PV_ENABLED	(1<<8)	/* Preset value enabled */
 #define SDHCI_SDIO_IRQ_ENABLED	(1<<9)	/* SDIO irq enabled */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SDHCI_HS200_NEEDS_TUNING (1<<10)	/* HS200 needs tuning */
 #define SDHCI_USING_RETUNING_TIMER (1<<11)	/* Host is using a retuning timer for the card */
 #define SDHCI_HS400_NEEDS_TUNING (1<<12)	/* HS400 needs tuning */
 #define SDHCI_USE_ADMA_64BIT	 (1<<13)/* Host is 64-bit ADMA capable */
+=======
+#define SDHCI_SDR104_NEEDS_TUNING (1<<10)	/* SDR104/HS200 needs tuning */
+#define SDHCI_USING_RETUNING_TIMER (1<<11)	/* Host is using a retuning timer for the card */
+>>>>>>> v3.18
 =======
 #define SDHCI_SDR104_NEEDS_TUNING (1<<10)	/* SDR104/HS200 needs tuning */
 #define SDHCI_USING_RETUNING_TIMER (1<<11)	/* Host is using a retuning timer for the card */
@@ -266,6 +288,11 @@ struct sdhci_host {
 
 	bool runtime_suspended;	/* Host is runtime suspended */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool bus_on;		/* Bus power prevents runtime suspend */
+	bool preset_enabled;	/* Preset is enabled */
+>>>>>>> v3.18
 =======
 	bool bus_on;		/* Bus power prevents runtime suspend */
 	bool preset_enabled;	/* Preset is enabled */
@@ -276,6 +303,10 @@ struct sdhci_host {
 	struct mmc_data *data;	/* Current data request */
 	unsigned int data_early:1;	/* Data finished before cmd */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int busy_handle:1;	/* Handling the order of Busy-end */
+>>>>>>> v3.18
 =======
 	unsigned int busy_handle:1;	/* Handling the order of Busy-end */
 >>>>>>> v3.18
@@ -289,6 +320,7 @@ struct sdhci_host {
 	u8 *align_buffer;	/* Bounce buffer */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int adma_desc_sz; /* ADMA descriptor table size */
 	unsigned int adma_desc_line_sz; /* ADMA descriptor line size */
 	unsigned int align_buf_sz; /* Bounce buffer size */
@@ -301,10 +333,15 @@ struct sdhci_host {
 	struct tasklet_struct card_tasklet;	/* Tasklet structures */
 	struct tasklet_struct finish_tasklet;
 =======
+=======
+>>>>>>> v3.18
 	dma_addr_t adma_addr;	/* Mapped ADMA descr. table */
 	dma_addr_t align_addr;	/* Mapped bounce buffer */
 
 	struct tasklet_struct finish_tasklet;	/* Tasklet structures */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct timer_list timer;	/* Timer for timeouts */
@@ -316,7 +353,10 @@ struct sdhci_host {
 	unsigned int            ocr_avail_sd;
 	unsigned int            ocr_avail_mmc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32 ocr_mask;		/* available voltages */
 
 	unsigned		timing;		/* Current timing */
@@ -325,6 +365,9 @@ struct sdhci_host {
 
 	/* cached registers */
 	u32			ier;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	wait_queue_head_t	buf_ready_int;	/* Waitqueue for Buffer Read Ready interrupt */
@@ -335,6 +378,7 @@ struct sdhci_host {
 #define SDHCI_TUNING_MODE_1	0
 	struct timer_list	tuning_timer;	/* Timer for tuning */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sdhci_host_qos host_qos[SDHCI_QOS_MAX_POLICY];
 	enum sdhci_host_qos_policy last_qos_policy;
@@ -358,6 +402,8 @@ struct sdhci_host {
 	ktime_t reset_wa_t; /* time when the reset workaround is applied */
 	int reset_wa_cnt; /* total number of times workaround is used */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long private[0] ____cacheline_aligned;

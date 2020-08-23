@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  HID driver for some sony "special" devices
+=======
+ *  HID driver for Sony / PS2 / PS3 / PS4 BD devices.
+>>>>>>> v3.18
 =======
  *  HID driver for Sony / PS2 / PS3 / PS4 BD devices.
 >>>>>>> v3.18
@@ -10,12 +14,18 @@
  *  Copyright (c) 2005 Michael Haboustak <mike-@cinci.rr.com> for Concept2, Inc
  *  Copyright (c) 2008 Jiri Slaby
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (c) 2006-2008 Jiri Kosina
 =======
+=======
+>>>>>>> v3.18
  *  Copyright (c) 2012 David Dillow <dave@thedillows.org>
  *  Copyright (c) 2006-2013 Jiri Kosina
  *  Copyright (c) 2013 Colin Leitner <colin.leitner@gmail.com>
  *  Copyright (c) 2014 Frank Praznik <frank.praznik@gmail.com>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -27,7 +37,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * NOTE: in order for the Sony PS3 BD Remote Control to be found by
  * a Bluetooth host, the key combination Start+Enter has to be kept pressed
@@ -36,11 +49,15 @@
  * There will be no PIN request from the device.
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/device.h>
 #include <linux/hid.h>
 #include <linux/module.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/usb.h>
 
@@ -84,6 +101,8 @@ struct sony_sc {
 
 /* Sony Vaio VGX has wrongly mouse pointer declared as constant */
 =======
+=======
+>>>>>>> v3.18
 #include <linux/leds.h>
 #include <linux/power_supply.h>
 #include <linux/spinlock.h>
@@ -930,6 +949,9 @@ static int ps3remote_mapping(struct hid_device *hdev, struct hid_input *hi,
 	return 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __u8 *sony_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 		unsigned int *rsize)
@@ -953,6 +975,7 @@ static __u8 *sony_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The HID descriptor exposed over BT has a trailing zero byte */
 	if ((((sc->quirks & SIXAXIS_CONTROLLER_USB) && *rsize == 148) ||
 			((sc->quirks & SIXAXIS_CONTROLLER_BT) && *rsize == 149)) &&
@@ -971,6 +994,8 @@ static __u8 *sony_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The default Dualshock 4 USB descriptor doesn't assign
 	 * the gyroscope values to corresponding axes so we need a
@@ -1097,6 +1122,9 @@ static void dualshock4_parse_report(struct sony_sc *sc, __u8 *rd, int size)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sony_raw_event(struct hid_device *hdev, struct hid_report *report,
 		__u8 *rd, int size)
@@ -1104,36 +1132,49 @@ static int sony_raw_event(struct hid_device *hdev, struct hid_report *report,
 	struct sony_sc *sc = hid_get_drvdata(hdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Sixaxis HID report has acclerometers/gyro with MSByte first, this
 	 * has to be BYTE_SWAPPED before passing up to joystick interface
 	 */
 	if ((sc->quirks & (SIXAXIS_CONTROLLER_USB | SIXAXIS_CONTROLLER_BT)) &&
 			rd[0] == 0x01 && size == 49) {
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Sixaxis HID report has acclerometers/gyro with MSByte first, this
 	 * has to be BYTE_SWAPPED before passing up to joystick interface
 	 */
 	if ((sc->quirks & SIXAXIS_CONTROLLER) && rd[0] == 0x01 && size == 49) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		swap(rd[41], rd[42]);
 		swap(rd[43], rd[44]);
 		swap(rd[45], rd[46]);
 		swap(rd[47], rd[48]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		sixaxis_parse_report(sc, rd, size);
 	} else if (((sc->quirks & DUALSHOCK4_CONTROLLER_USB) && rd[0] == 0x01 &&
 			size == 64) || ((sc->quirks & DUALSHOCK4_CONTROLLER_BT)
 			&& rd[0] == 0x11 && size == 78)) {
 		dualshock4_parse_report(sc, rd, size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * The Sony Sixaxis does not handle HID Output Reports on the Interrupt EP
@@ -1173,6 +1214,8 @@ static int sixaxis_usb_output_raw_report(struct hid_device *hid, __u8 *buf,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static int sony_mapping(struct hid_device *hdev, struct hid_input *hi,
 			struct hid_field *field, struct hid_usage *usage,
 			unsigned long **bit, int *max)
@@ -1239,6 +1282,9 @@ static void sony_input_configured(struct hid_device *hdev,
 			hid_err(sc->hdev,
 				"Unable to initialize multi-touch slots\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1250,9 +1296,12 @@ static void sony_input_configured(struct hid_device *hdev,
 static int sixaxis_set_operational_usb(struct hid_device *hdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_interface *intf = to_usb_interface(hdev->dev.parent);
 	struct usb_device *dev = interface_to_usbdev(intf);
 	__u16 ifnum = intf->cur_altsetting->desc.bInterfaceNumber;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -1262,12 +1311,18 @@ static int sixaxis_set_operational_usb(struct hid_device *hdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = usb_control_msg(dev, usb_rcvctrlpipe(dev, 0),
 				 HID_REQ_GET_REPORT,
 				 USB_DIR_IN | USB_TYPE_CLASS |
 				 USB_RECIP_INTERFACE,
 				 (3 << 8) | 0xf2, ifnum, buf, 17,
 				 USB_CTRL_GET_TIMEOUT);
+=======
+	ret = hid_hw_raw_request(hdev, 0xf2, buf, 17, HID_FEATURE_REPORT,
+				 HID_REQ_GET_REPORT);
+
+>>>>>>> v3.18
 =======
 	ret = hid_hw_raw_request(hdev, 0xf2, buf, 17, HID_FEATURE_REPORT,
 				 HID_REQ_GET_REPORT);
@@ -1285,8 +1340,11 @@ static int sixaxis_set_operational_bt(struct hid_device *hdev)
 {
 	unsigned char buf[] = { 0xf4,  0x42, 0x03, 0x00, 0x00 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return hdev->hid_output_raw_report(hdev, buf, sizeof(buf), HID_FEATURE_REPORT);
 =======
+=======
+>>>>>>> v3.18
 	return hid_hw_raw_request(hdev, buf[0], buf, sizeof(buf),
 				  HID_FEATURE_REPORT, HID_REQ_SET_REPORT);
 }
@@ -2003,6 +2061,9 @@ static inline void sony_cancel_work_sync(struct sony_sc *sc)
 {
 	if (sc->worker_initialized)
 		cancel_work_sync(&sc->state_worker);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2012,8 +2073,14 @@ static int sony_probe(struct hid_device *hdev, const struct hid_device_id *id)
 	unsigned long quirks = id->driver_data;
 	struct sony_sc *sc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	sc = kzalloc(sizeof(*sc), GFP_KERNEL);
+=======
+	unsigned int connect_mask = HID_CONNECT_DEFAULT;
+
+	sc = devm_kzalloc(&hdev->dev, sizeof(*sc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	unsigned int connect_mask = HID_CONNECT_DEFAULT;
 
@@ -2027,6 +2094,10 @@ static int sony_probe(struct hid_device *hdev, const struct hid_device_id *id)
 	sc->quirks = quirks;
 	hid_set_drvdata(hdev, sc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sc->hdev = hdev;
+>>>>>>> v3.18
 =======
 	sc->hdev = hdev;
 >>>>>>> v3.18
@@ -2034,6 +2105,7 @@ static int sony_probe(struct hid_device *hdev, const struct hid_device_id *id)
 	ret = hid_parse(hdev);
 	if (ret) {
 		hid_err(hdev, "parse failed\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_free;
 	}
@@ -2063,6 +2135,8 @@ err_stop:
 err_free:
 	kfree(sc);
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -2169,6 +2243,9 @@ err_stop:
 	sony_remove_dev_list(sc);
 	sony_release_device_id(sc);
 	hid_hw_stop(hdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -2176,9 +2253,12 @@ err_stop:
 static void sony_remove(struct hid_device *hdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hid_hw_stop(hdev);
 	kfree(hid_get_drvdata(hdev));
 =======
+=======
+>>>>>>> v3.18
 	struct sony_sc *sc = hid_get_drvdata(hdev);
 
 	if (sc->quirks & SONY_LED_SUPPORT)
@@ -2196,6 +2276,9 @@ static void sony_remove(struct hid_device *hdev)
 	sony_release_device_id(sc);
 
 	hid_hw_stop(hdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2211,7 +2294,10 @@ static const struct hid_device_id sony_devices[] = {
 	{ HID_USB_DEVICE(USB_VENDOR_ID_SONY, USB_DEVICE_ID_SONY_VAIO_VGP_MOUSE),
 		.driver_data = VAIO_RDESC_CONSTANT },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Wired Buzz Controller. Reported as Sony Hub from its USB ID and as
 	 * Logitech joystick from the device descriptor. */
 	{ HID_USB_DEVICE(USB_VENDOR_ID_SONY, USB_DEVICE_ID_SONY_BUZZ_CONTROLLER),
@@ -2229,12 +2315,16 @@ static const struct hid_device_id sony_devices[] = {
 		.driver_data = DUALSHOCK4_CONTROLLER_USB },
 	{ HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_SONY, USB_DEVICE_ID_SONY_PS4_CONTROLLER),
 		.driver_data = DUALSHOCK4_CONTROLLER_BT },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };
 MODULE_DEVICE_TABLE(hid, sony_devices);
 
 static struct hid_driver sony_driver = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.name = "sony",
 	.id_table = sony_devices,
@@ -2245,6 +2335,8 @@ static struct hid_driver sony_driver = {
 };
 module_hid_driver(sony_driver);
 =======
+=======
+>>>>>>> v3.18
 	.name             = "sony",
 	.id_table         = sony_devices,
 	.input_mapping    = sony_mapping,
@@ -2271,6 +2363,9 @@ static void __exit sony_exit(void)
 }
 module_init(sony_init);
 module_exit(sony_exit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_LICENSE("GPL");

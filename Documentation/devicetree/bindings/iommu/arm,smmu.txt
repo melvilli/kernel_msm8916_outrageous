@@ -15,6 +15,10 @@ conditions.
                         "arm,smmu-v2"
                         "arm,mmu-400"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                        "arm,mmu-401"
+>>>>>>> v3.18
 =======
                         "arm,mmu-401"
 >>>>>>> v3.18

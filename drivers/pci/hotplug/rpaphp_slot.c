@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * RPA Virtual I/O device functions 
+=======
+ * RPA Virtual I/O device functions
+>>>>>>> v3.18
 =======
  * RPA Virtual I/O device functions
 >>>>>>> v3.18
@@ -56,7 +60,11 @@ struct slot *alloc_slot_struct(struct device_node *dn,
 {
 	struct slot *slot;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -66,7 +74,11 @@ struct slot *alloc_slot_struct(struct device_node *dn,
 	slot->hotplug_slot = kzalloc(sizeof(struct hotplug_slot), GFP_KERNEL);
 	if (!slot->hotplug_slot)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_slot;	
+=======
+		goto error_slot;
+>>>>>>> v3.18
 =======
 		goto error_slot;
 >>>>>>> v3.18
@@ -77,7 +89,11 @@ struct slot *alloc_slot_struct(struct device_node *dn,
 	slot->name = kstrdup(drc_name, GFP_KERNEL);
 	if (!slot->name)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_info;	
+=======
+		goto error_info;
+>>>>>>> v3.18
 =======
 		goto error_info;
 >>>>>>> v3.18
@@ -88,7 +104,11 @@ struct slot *alloc_slot_struct(struct device_node *dn,
 	slot->hotplug_slot->ops = &rpaphp_hotplug_slot_ops;
 	slot->hotplug_slot->release = &rpaphp_release_slot;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -112,7 +132,11 @@ static int is_registered(struct slot *slot)
 		if (!strcmp(tmp_slot->name, slot->name))
 			return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}	
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -129,7 +153,11 @@ int rpaphp_deregister_slot(struct slot *slot)
 
 	list_del(&slot->rpaphp_slot_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -149,7 +177,11 @@ int rpaphp_register_slot(struct slot *slot)
 	int slotno;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg("%s registering slot:path[%s] index[%x], name[%s] pdomain[%x] type[%d]\n", 
+=======
+	dbg("%s registering slot:path[%s] index[%x], name[%s] pdomain[%x] type[%d]\n",
+>>>>>>> v3.18
 =======
 	dbg("%s registering slot:path[%s] index[%x], name[%s] pdomain[%x] type[%d]\n",
 >>>>>>> v3.18
@@ -161,7 +193,11 @@ int rpaphp_register_slot(struct slot *slot)
 		err("rpaphp_register_slot: slot[%s] is already registered\n", slot->name);
 		return -EAGAIN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}	
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -182,6 +218,9 @@ int rpaphp_register_slot(struct slot *slot)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

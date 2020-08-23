@@ -115,7 +115,11 @@ struct ccdc_fault_pixel {
 	unsigned short fp_num;
 	/* Address of fault pixel table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int fpc_table_addr;
+=======
+	unsigned long fpc_table_addr;
+>>>>>>> v3.18
 =======
 	unsigned long fpc_table_addr;
 >>>>>>> v3.18

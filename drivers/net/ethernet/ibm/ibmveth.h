@@ -13,8 +13,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -144,7 +148,10 @@ struct ibmveth_adapter {
     struct net_device_stats stats;
     unsigned int mcastFilterSize;
 <<<<<<< HEAD
+<<<<<<< HEAD
     unsigned long mac_addr;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     void * buffer_list_addr;
@@ -172,9 +179,12 @@ struct ibmveth_adapter {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ibmveth_buf_desc_fields {
 	u32 flags_len;
 =======
+=======
+>>>>>>> v3.18
 /*
  * We pass struct ibmveth_buf_desc_fields to the hypervisor in registers,
  * so we don't need to byteswap the two elements. However since we use
@@ -190,6 +200,9 @@ struct ibmveth_buf_desc_fields {
 	u32 address;
 	u32 flags_len;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IBMVETH_BUF_VALID	0x80000000
 #define IBMVETH_BUF_TOGGLE	0x40000000
@@ -197,7 +210,10 @@ struct ibmveth_buf_desc_fields {
 #define IBMVETH_BUF_CSUM_GOOD	0x01000000
 #define IBMVETH_BUF_LEN_MASK	0x00FFFFFF
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 address;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -209,7 +225,11 @@ union ibmveth_buf_desc {
 
 struct ibmveth_rx_q_entry {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 flags_off;
+=======
+	__be32 flags_off;
+>>>>>>> v3.18
 =======
 	__be32 flags_off;
 >>>>>>> v3.18
@@ -221,7 +241,12 @@ struct ibmveth_rx_q_entry {
 #define IBMVETH_RXQ_OFF_MASK		0x0000FFFF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 length;
+=======
+	__be32 length;
+	/* correlator is only used by the OS, no need to byte swap */
+>>>>>>> v3.18
 =======
 	__be32 length;
 	/* correlator is only used by the OS, no need to byte swap */

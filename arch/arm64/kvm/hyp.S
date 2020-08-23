@@ -17,7 +17,10 @@
 
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irqchip/arm-gic.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -25,6 +28,10 @@
 #include <asm/memory.h>
 #include <asm/asm-offsets.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/debug-monitors.h>
+>>>>>>> v3.18
 =======
 #include <asm/debug-monitors.h>
 >>>>>>> v3.18
@@ -44,9 +51,12 @@
 	.align	PAGE_SHIFT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __kvm_hyp_code_start:
 	.globl __kvm_hyp_code_start
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 .macro save_common_regs
@@ -226,6 +236,10 @@ __kvm_hyp_code_start:
 	mrs	x23, 	cntkctl_el1
 	mrs	x24,	par_el1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mrs	x25,	mdscr_el1
+>>>>>>> v3.18
 =======
 	mrs	x25,	mdscr_el1
 >>>>>>> v3.18
@@ -241,8 +255,11 @@ __kvm_hyp_code_start:
 	stp	x20, x21, [x3, #128]
 	stp	x22, x23, [x3, #144]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	str	x24, [x3, #160]
 =======
+=======
+>>>>>>> v3.18
 	stp	x24, x25, [x3, #160]
 .endm
 
@@ -439,6 +456,9 @@ __kvm_hyp_code_start:
 
 	mrs	x21, mdccint_el1
 	str	x21, [x2, #CPU_SYSREG_OFFSET(MDCCINT_EL1)]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .endm
 
@@ -459,7 +479,11 @@ __kvm_hyp_code_start:
 	ldp	x20, x21, [x3, #128]
 	ldp	x22, x23, [x3, #144]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldr	x24, [x3, #160]
+=======
+	ldp	x24, x25, [x3, #160]
+>>>>>>> v3.18
 =======
 	ldp	x24, x25, [x3, #160]
 >>>>>>> v3.18
@@ -486,7 +510,10 @@ __kvm_hyp_code_start:
 	msr	cntkctl_el1,	x23
 	msr	par_el1,	x24
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	msr	mdscr_el1,	x25
 .endm
 
@@ -679,6 +706,9 @@ __kvm_hyp_code_start:
 
 	ldr	x21, [x2, #CPU_SYSREG_OFFSET(MDCCINT_EL1)]
 	msr	mdccint_el1, x21
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .endm
 
@@ -695,7 +725,10 @@ __kvm_hyp_code_start:
 .endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 .macro skip_debug_state tmp, target
 	ldr	\tmp, [x0, #VCPU_DEBUG_FLAGS]
 	tbz	\tmp, #KVM_ARM64_DEBUG_DIRTY_SHIFT, \target
@@ -725,6 +758,9 @@ __kvm_hyp_code_start:
 9999:
 .endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .macro save_guest_32bit_state
 	skip_32bit_state x3, 1f
@@ -742,11 +778,14 @@ __kvm_hyp_code_start:
 	mrs	x5, ifsr32_el2
 	mrs	x6, fpexc32_el2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mrs	x7, dbgvcr32_el2
 	stp	x4, x5, [x3]
 	stp	x6, x7, [x3, #16]
 
 =======
+=======
+>>>>>>> v3.18
 	stp	x4, x5, [x3]
 	str	x6, [x3, #16]
 
@@ -754,6 +793,9 @@ __kvm_hyp_code_start:
 	mrs	x7, dbgvcr32_el2
 	str	x7, [x3, #24]
 2:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	skip_tee_state x8, 1f
 
@@ -778,6 +820,7 @@ __kvm_hyp_code_start:
 	add	x3, x2, #CPU_SYSREG_OFFSET(DACR32_EL2)
 	ldp	x4, x5, [x3]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldp	x6, x7, [x3, #16]
 	msr	dacr32_el2, x4
 	msr	ifsr32_el2, x5
@@ -785,6 +828,8 @@ __kvm_hyp_code_start:
 	msr	dbgvcr32_el2, x7
 
 =======
+=======
+>>>>>>> v3.18
 	ldr	x6, [x3, #16]
 	msr	dacr32_el2, x4
 	msr	ifsr32_el2, x5
@@ -794,6 +839,9 @@ __kvm_hyp_code_start:
 	ldr	x7, [x3, #24]
 	msr	dbgvcr32_el2, x7
 2:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	skip_tee_state x8, 1f
 
@@ -806,11 +854,16 @@ __kvm_hyp_code_start:
 
 .macro activate_traps
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldr	x2, [x0, #VCPU_IRQ_LINES]
 	ldr	x1, [x0, #VCPU_HCR_EL2]
 	orr	x2, x2, x1
 	msr	hcr_el2, x2
 
+=======
+	ldr     x2, [x0, #VCPU_HCR_EL2]
+	msr     hcr_el2, x2
+>>>>>>> v3.18
 =======
 	ldr     x2, [x0, #VCPU_HCR_EL2]
 	msr     hcr_el2, x2
@@ -825,7 +878,10 @@ __kvm_hyp_code_start:
 	and	x2, x2, #MDCR_EL2_HPMN_MASK
 	orr	x2, x2, #(MDCR_EL2_TPM | MDCR_EL2_TPMCR)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	orr	x2, x2, #(MDCR_EL2_TDRA | MDCR_EL2_TDOSA)
 
 	// Check for KVM_ARM64_DEBUG_DIRTY, and set debug to trap
@@ -834,6 +890,9 @@ __kvm_hyp_code_start:
 	tbnz	x3, #KVM_ARM64_DEBUG_DIRTY_SHIFT, 1f
 	orr	x2, x2,  #MDCR_EL2_TDA
 1:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	msr	mdcr_el2, x2
 .endm
@@ -861,6 +920,7 @@ __kvm_hyp_code_start:
 .endm
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Save the VGIC CPU state into memory
  * x0: Register pointing to VCPU struct
@@ -957,6 +1017,8 @@ CPU_BE(	rev	w5, w5 )
 	cbnz	w4, 1b
 2:
 =======
+=======
+>>>>>>> v3.18
  * Call into the vgic backend for state saving
  */
 .macro save_vgic_state
@@ -984,6 +1046,9 @@ CPU_BE(	rev	w5, w5 )
 	ldr	x24, [x24, #VGIC_RESTORE_FN]
 	kern_hyp_va	x24
 	blr	x24
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .endm
 
@@ -1050,7 +1115,10 @@ __restore_sysregs:
 	ret
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 __save_debug:
 	save_debug
 	ret
@@ -1059,6 +1127,9 @@ __restore_debug:
 	restore_debug
 	ret
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __save_fpsimd:
 	save_fpsimd
@@ -1092,6 +1163,12 @@ ENTRY(__kvm_vcpu_run)
 	bl __save_sysregs
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	compute_debug_state 1f
+	bl	__save_debug
+1:
+>>>>>>> v3.18
 =======
 	compute_debug_state 1f
 	bl	__save_debug
@@ -1109,11 +1186,17 @@ ENTRY(__kvm_vcpu_run)
 	bl __restore_sysregs
 	bl __restore_fpsimd
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	skip_debug_state x3, 1f
 	bl	__restore_debug
 1:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	restore_guest_32bit_state
 	restore_guest_regs
@@ -1132,11 +1215,17 @@ __kvm_vcpu_return:
 	bl __save_fpsimd
 	bl __save_sysregs
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	skip_debug_state x3, 1f
 	bl	__save_debug
 1:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	save_guest_32bit_state
 
@@ -1153,7 +1242,10 @@ __kvm_vcpu_return:
 	bl __restore_sysregs
 	bl __restore_fpsimd
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	skip_debug_state x3, 1f
 	// Clear the dirty flag for the next run, as all the state has
@@ -1162,6 +1254,9 @@ __kvm_vcpu_return:
 	str	xzr, [x0, #VCPU_DEBUG_FLAGS]
 	bl	__restore_debug
 1:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	restore_host_regs
 
@@ -1208,13 +1303,19 @@ ENTRY(__kvm_flush_vm_context)
 ENDPROC(__kvm_flush_vm_context)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	// struct vgic_sr_vectors __vgi_sr_vectors;
 	.align 3
 ENTRY(__vgic_sr_vectors)
 	.skip	VGIC_SR_VECTOR_SZ
 ENDPROC(__vgic_sr_vectors)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __kvm_hyp_panic:
 	// Guess the context by looking at VTTBR:
@@ -1394,7 +1495,11 @@ el1_trap:
 
 2:	mrs	x0, tpidr_el2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	str	x1, [x0, #VCPU_ESR_EL2]
+=======
+	str	w1, [x0, #VCPU_ESR_EL2]
+>>>>>>> v3.18
 =======
 	str	w1, [x0, #VCPU_ESR_EL2]
 >>>>>>> v3.18
@@ -1448,9 +1553,12 @@ ENTRY(__kvm_hyp_vector)
 ENDPROC(__kvm_hyp_vector)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __kvm_hyp_code_end:
 	.globl	__kvm_hyp_code_end
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.popsection

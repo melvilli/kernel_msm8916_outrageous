@@ -358,7 +358,11 @@ static int mxb_init_done(struct saa7146_dev* dev)
 
 	/* select video mode in saa7111a */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	saa7111a_call(mxb, core, s_std, std);
+=======
+	saa7111a_call(mxb, video, s_std, std);
+>>>>>>> v3.18
 =======
 	saa7111a_call(mxb, video, s_std, std);
 >>>>>>> v3.18
@@ -384,8 +388,13 @@ static int mxb_init_done(struct saa7146_dev* dev)
 	saa7146_write(dev, GPIO_CTRL, 0x00404050);
 	saa7111a_call(mxb, core, s_gpio, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	saa7111a_call(mxb, core, s_std, std);
 	tuner_call(mxb, core, s_std, std);
+=======
+	saa7111a_call(mxb, video, s_std, std);
+	tuner_call(mxb, video, s_std, std);
+>>>>>>> v3.18
 =======
 	saa7111a_call(mxb, video, s_std, std);
 	tuner_call(mxb, video, s_std, std);
@@ -679,6 +688,7 @@ static int vidioc_g_register(struct file *file, void *fh, struct v4l2_dbg_regist
 	struct saa7146_dev *dev = ((struct saa7146_fh *)fh)->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 	if (v4l2_chip_match_host(&reg->match)) {
@@ -688,10 +698,15 @@ static int vidioc_g_register(struct file *file, void *fh, struct v4l2_dbg_regist
 	}
 	call_all(dev, core, g_register, reg);
 =======
+=======
+>>>>>>> v3.18
 	if (reg->reg > pci_resource_len(dev->pci, 0) - 4)
 		return -EINVAL;
 	reg->val = saa7146_read(dev, reg->reg);
 	reg->size = 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -701,6 +716,7 @@ static int vidioc_s_register(struct file *file, void *fh, const struct v4l2_dbg_
 	struct saa7146_dev *dev = ((struct saa7146_fh *)fh)->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 	if (v4l2_chip_match_host(&reg->match)) {
@@ -709,10 +725,15 @@ static int vidioc_s_register(struct file *file, void *fh, const struct v4l2_dbg_
 	}
 	return call_all(dev, core, s_register, reg);
 =======
+=======
+>>>>>>> v3.18
 	if (reg->reg > pci_resource_len(dev->pci, 0) - 4)
 		return -EINVAL;
 	saa7146_write(dev, reg->reg, reg->val);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
@@ -802,9 +823,15 @@ static int std_callback(struct saa7146_dev *dev, struct saa7146_standard *standa
 		saa7146_write(dev, GPIO_CTRL, 0x00404050);
 		saa7111a_call(mxb, core, s_gpio, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		saa7111a_call(mxb, core, s_std, std);
 		if (mxb->cur_input == 0)
 			tuner_call(mxb, core, s_std, std);
+=======
+		saa7111a_call(mxb, video, s_std, std);
+		if (mxb->cur_input == 0)
+			tuner_call(mxb, video, s_std, std);
+>>>>>>> v3.18
 =======
 		saa7111a_call(mxb, video, s_std, std);
 		if (mxb->cur_input == 0)
@@ -820,9 +847,15 @@ static int std_callback(struct saa7146_dev *dev, struct saa7146_standard *standa
 		saa7146_write(dev, GPIO_CTRL, 0x00404050);
 		saa7111a_call(mxb, core, s_gpio, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		saa7111a_call(mxb, core, s_std, std);
 		if (mxb->cur_input == 0)
 			tuner_call(mxb, core, s_std, std);
+=======
+		saa7111a_call(mxb, video, s_std, std);
+		if (mxb->cur_input == 0)
+			tuner_call(mxb, video, s_std, std);
+>>>>>>> v3.18
 =======
 		saa7111a_call(mxb, video, s_std, std);
 		if (mxb->cur_input == 0)

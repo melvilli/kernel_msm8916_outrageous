@@ -6,9 +6,12 @@
 
 obj-y			:= dma.o ecard.o fiq.o irq.o riscpc.o time.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-m			:=
 obj-n			:=
 obj-			:=
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

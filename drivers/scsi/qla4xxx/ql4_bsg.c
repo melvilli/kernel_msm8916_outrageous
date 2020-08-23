@@ -1,7 +1,11 @@
 /*
  * QLogic iSCSI HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2011 QLogic Corporation
+=======
+ * Copyright (c) 2011-2013 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c) 2011-2013 QLogic Corporation
 >>>>>>> v3.18
@@ -451,7 +455,10 @@ leave:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ql4xxx_execute_diag_cmd(struct bsg_job *bsg_job)
 {
 	struct Scsi_Host *host = iscsi_job_to_shost(bsg_job);
@@ -809,6 +816,9 @@ static int qla4xxx_execute_diag_test(struct bsg_job *bsg_job)
 	return rval;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * qla4xxx_process_vendor_specific - handle vendor specific bsg request
@@ -844,6 +854,12 @@ int qla4xxx_process_vendor_specific(struct bsg_job *bsg_job)
 		return qla4xxx_bsg_get_acb(bsg_job);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case QLISCSI_VND_DIAG_TEST:
+		return qla4xxx_execute_diag_test(bsg_job);
+
+>>>>>>> v3.18
 =======
 	case QLISCSI_VND_DIAG_TEST:
 		return qla4xxx_execute_diag_test(bsg_job);

@@ -16,6 +16,10 @@
 #include <linux/slab.h>
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/notifier.h>
+>>>>>>> v3.18
 =======
 #include <linux/notifier.h>
 >>>>>>> v3.18
@@ -29,6 +33,12 @@ struct class *power_supply_class;
 EXPORT_SYMBOL_GPL(power_supply_class);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ATOMIC_NOTIFIER_HEAD(power_supply_notifier);
+EXPORT_SYMBOL_GPL(power_supply_notifier);
+
+>>>>>>> v3.18
 =======
 ATOMIC_NOTIFIER_HEAD(power_supply_notifier);
 EXPORT_SYMBOL_GPL(power_supply_notifier);
@@ -62,6 +72,7 @@ static bool __power_supply_is_supplied_by(struct power_supply *supplier,
 	return false;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * power_supply_set_voltage_limit - set current limit
@@ -301,6 +312,11 @@ static int __power_supply_changed_work(struct device *dev, void *data)
 {
 	struct power_supply *psy = data;
 >>>>>>> v3.18
+=======
+static int __power_supply_changed_work(struct device *dev, void *data)
+{
+	struct power_supply *psy = data;
+>>>>>>> v3.18
 	struct power_supply *pst = dev_get_drvdata(dev);
 
 	if (__power_supply_is_supplied_by(psy, pst)) {
@@ -321,6 +337,7 @@ static void power_supply_changed_work(struct work_struct *work)
 
 	spin_lock_irqsave(&psy->changed_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (psy->changed) {
 		psy->changed = false;
 		spin_unlock_irqrestore(&psy->changed_lock, flags);
@@ -335,6 +352,8 @@ static void power_supply_changed_work(struct work_struct *work)
 	}
 	if (!psy->changed)
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Check 'changed' here to avoid issues due to race between
 	 * power_supply_changed() and this routine. In worst case
@@ -360,6 +379,9 @@ static void power_supply_changed_work(struct work_struct *work)
 	 * to true.
 	 */
 	if (likely(!psy->changed))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pm_relax(psy->dev);
 	spin_unlock_irqrestore(&psy->changed_lock, flags);
@@ -386,7 +408,11 @@ static int __power_supply_populate_supplied_from(struct device *dev,
 						 void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct power_supply *psy = (struct power_supply *)data;
+=======
+	struct power_supply *psy = data;
+>>>>>>> v3.18
 =======
 	struct power_supply *psy = data;
 >>>>>>> v3.18
@@ -398,7 +424,11 @@ static int __power_supply_populate_supplied_from(struct device *dev,
 		np = of_parse_phandle(psy->of_node, "power-supplies", i++);
 		if (!np)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			continue;
+=======
+			break;
+>>>>>>> v3.18
 =======
 			break;
 >>>>>>> v3.18
@@ -409,13 +439,19 @@ static int __power_supply_populate_supplied_from(struct device *dev,
 			psy->supplied_from[i-1] = (char *)epsy->name;
 			psy->num_supplies++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
 		}
 =======
+=======
+>>>>>>> v3.18
 			of_node_put(np);
 			break;
 		}
 		of_node_put(np);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while (np);
 
@@ -438,6 +474,7 @@ static int  __power_supply_find_supply_from_node(struct device *dev,
 						 void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device_node *np = (struct device_node *)data;
 	struct power_supply *epsy = dev_get_drvdata(dev);
 
@@ -445,12 +482,17 @@ static int  __power_supply_find_supply_from_node(struct device *dev,
 	if (epsy->of_node == np)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *np = data;
 	struct power_supply *epsy = dev_get_drvdata(dev);
 
 	/* returning non-zero breaks out of class_for_each_device loop */
 	if (epsy->of_node == np)
 		return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -459,6 +501,7 @@ static int  __power_supply_find_supply_from_node(struct device *dev,
 static int power_supply_find_supply_from_node(struct device_node *supply_node)
 {
 	int error;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device *dev;
 	struct class_dev_iter iter;
@@ -480,6 +523,8 @@ static int power_supply_find_supply_from_node(struct device_node *supply_node)
 	 * So we trick it by returning error on success to stop looking
 	 * once the matching device is found.
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * class_for_each_device() either returns its own errors or values
@@ -490,13 +535,20 @@ static int power_supply_find_supply_from_node(struct device_node *supply_node)
 	 *
 	 * We return 0 if class_for_each_device() returned 1, -EPROBE_DEFER if
 	 * it returned 0, or error as returned by it.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	error = class_for_each_device(power_supply_class, NULL, supply_node,
 				       __power_supply_find_supply_from_node);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return error ? 0 : -EPROBE_DEFER;
+=======
+	return error ? (error == 1 ? 0 : error) : -EPROBE_DEFER;
+>>>>>>> v3.18
 =======
 	return error ? (error == 1 ? 0 : error) : -EPROBE_DEFER;
 >>>>>>> v3.18
@@ -521,6 +573,7 @@ static int power_supply_check_supplies(struct power_supply *psy)
 		np = of_parse_phandle(psy->of_node, "power-supplies", cnt++);
 		if (!np)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			continue;
 
 		ret = power_supply_find_supply_from_node(np);
@@ -531,6 +584,8 @@ static int power_supply_check_supplies(struct power_supply *psy)
 	} while (np);
 
 =======
+=======
+>>>>>>> v3.18
 			break;
 
 		ret = power_supply_find_supply_from_node(np);
@@ -546,6 +601,9 @@ static int power_supply_check_supplies(struct power_supply *psy)
 	if (cnt == 1)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* All supplies found, allocate char ** array for filling */
 	psy->supplied_from = devm_kzalloc(psy->dev, sizeof(psy->supplied_from),
@@ -556,7 +614,11 @@ static int power_supply_check_supplies(struct power_supply *psy)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*psy->supplied_from = devm_kzalloc(psy->dev, sizeof(char *) * cnt,
+=======
+	*psy->supplied_from = devm_kzalloc(psy->dev, sizeof(char *) * (cnt - 1),
+>>>>>>> v3.18
 =======
 	*psy->supplied_from = devm_kzalloc(psy->dev, sizeof(char *) * (cnt - 1),
 >>>>>>> v3.18
@@ -579,6 +641,7 @@ static int __power_supply_am_i_supplied(struct device *dev, void *data)
 {
 	union power_supply_propval ret = {0,};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct power_supply *psy = (struct power_supply *)data;
 	struct power_supply *epsy = dev_get_drvdata(dev);
 
@@ -588,12 +651,17 @@ static int __power_supply_am_i_supplied(struct device *dev, void *data)
 				return ret.intval;
 		}
 =======
+=======
+>>>>>>> v3.18
 	struct power_supply *psy = data;
 	struct power_supply *epsy = dev_get_drvdata(dev);
 
 	if (__power_supply_is_supplied_by(epsy, psy))
 		if (!epsy->get_property(epsy, POWER_SUPPLY_PROP_ONLINE, &ret))
 			return ret.intval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -620,6 +688,7 @@ static int __power_supply_is_system_supplied(struct device *dev, void *data)
 
 	(*count)++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (psy->type != POWER_SUPPLY_TYPE_BATTERY) {
 		if (psy->get_property(psy, POWER_SUPPLY_PROP_ONLINE, &ret))
 			return 0;
@@ -627,10 +696,15 @@ static int __power_supply_is_system_supplied(struct device *dev, void *data)
 			return ret.intval;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (psy->type != POWER_SUPPLY_TYPE_BATTERY)
 		if (!psy->get_property(psy, POWER_SUPPLY_PROP_ONLINE, &ret))
 			return ret.intval;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -683,7 +757,10 @@ struct power_supply *power_supply_get_by_name(const char *name)
 EXPORT_SYMBOL_GPL(power_supply_get_by_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static int power_supply_match_device_node(struct device *dev, const void *data)
 {
@@ -710,6 +787,9 @@ struct power_supply *power_supply_get_by_phandle(struct device_node *np,
 EXPORT_SYMBOL_GPL(power_supply_get_by_phandle);
 #endif /* CONFIG_OF */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int power_supply_powers(struct power_supply *psy, struct device *dev)
 {
@@ -724,7 +804,10 @@ static void power_supply_dev_release(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int power_supply_reg_notifier(struct notifier_block *nb)
 {
 	return atomic_notifier_chain_register(&power_supply_notifier, nb);
@@ -737,6 +820,9 @@ void power_supply_unreg_notifier(struct notifier_block *nb)
 }
 EXPORT_SYMBOL_GPL(power_supply_unreg_notifier);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_THERMAL
 static int power_supply_read_temp(struct thermal_zone_device *tzd,
@@ -766,6 +852,12 @@ static int psy_register_thermal(struct power_supply *psy)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (psy->no_thermal)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (psy->no_thermal)
 		return 0;
@@ -777,9 +869,13 @@ static int psy_register_thermal(struct power_supply *psy)
 			psy->tzd = thermal_zone_device_register(psy->name, 0, 0,
 					psy, &psy_tzd_ops, NULL, 0, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (IS_ERR(psy->tzd))
 				return PTR_ERR(psy->tzd);
 			break;
+=======
+			return PTR_ERR_OR_ZERO(psy->tzd);
+>>>>>>> v3.18
 =======
 			return PTR_ERR_OR_ZERO(psy->tzd);
 >>>>>>> v3.18
@@ -861,9 +957,13 @@ static int psy_register_cooler(struct power_supply *psy)
 							(char *)psy->name,
 							psy, &psy_tcd_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (IS_ERR(psy->tcd))
 				return PTR_ERR(psy->tcd);
 			break;
+=======
+			return PTR_ERR_OR_ZERO(psy->tcd);
+>>>>>>> v3.18
 =======
 			return PTR_ERR_OR_ZERO(psy->tcd);
 >>>>>>> v3.18
@@ -899,7 +999,12 @@ static void psy_unregister_cooler(struct power_supply *psy)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int power_supply_register(struct device *parent, struct power_supply *psy)
+=======
+static int __power_supply_register(struct device *parent,
+				   struct power_supply *psy, bool ws)
+>>>>>>> v3.18
 =======
 static int __power_supply_register(struct device *parent,
 				   struct power_supply *psy, bool ws)
@@ -922,11 +1027,17 @@ static int __power_supply_register(struct device *parent,
 	psy->dev = dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	rc = dev_set_name(dev, "%s", psy->name);
 	if (rc)
 		goto dev_set_name_failed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_WORK(&psy->changed_work, power_supply_changed_work);
 
@@ -937,14 +1048,20 @@ static int __power_supply_register(struct device *parent,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = kobject_set_name(&dev->kobj, "%s", psy->name);
 	if (rc)
 		goto kobject_set_name_failed;
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_init(&psy->changed_lock);
 	rc = device_init_wakeup(dev, ws);
 	if (rc)
 		goto wakeup_init_failed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rc = device_add(dev);
@@ -952,11 +1069,14 @@ static int __power_supply_register(struct device *parent,
 		goto device_add_failed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&psy->changed_lock);
 	rc = device_init_wakeup(dev, true);
 	if (rc)
 		goto wakeup_init_failed;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rc = psy_register_thermal(psy);
@@ -974,7 +1094,11 @@ static int __power_supply_register(struct device *parent,
 	power_supply_changed(psy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	goto success;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -984,6 +1108,7 @@ create_triggers_failed:
 register_cooler_failed:
 	psy_unregister_thermal(psy);
 register_thermal_failed:
+<<<<<<< HEAD
 <<<<<<< HEAD
 wakeup_init_failed:
 	device_del(dev);
@@ -997,6 +1122,8 @@ success:
 EXPORT_SYMBOL_GPL(power_supply_register);
 
 =======
+=======
+>>>>>>> v3.18
 	device_del(dev);
 device_add_failed:
 wakeup_init_failed:
@@ -1018,6 +1145,9 @@ int power_supply_register_no_ws(struct device *parent, struct power_supply *psy)
 }
 EXPORT_SYMBOL_GPL(power_supply_register_no_ws);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void power_supply_unregister(struct power_supply *psy)
 {
@@ -1027,6 +1157,10 @@ void power_supply_unregister(struct power_supply *psy)
 	psy_unregister_cooler(psy);
 	psy_unregister_thermal(psy);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_init_wakeup(psy->dev, false);
+>>>>>>> v3.18
 =======
 	device_init_wakeup(psy->dev, false);
 >>>>>>> v3.18

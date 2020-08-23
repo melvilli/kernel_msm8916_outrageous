@@ -29,6 +29,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 LEAF(__strncpy_from_user_asm)
 	LONG_L		v0, TI_ADDR_LIMIT($28)	# pointer ok?
 	and		v0, a1
@@ -61,6 +62,8 @@ FEXPORT(__strncpy_from_user_nocheck_asm)
 	PTR		1b, .Lfault
 	.previous
 =======
+=======
+>>>>>>> v3.18
 	.macro __BUILD_STRNCPY_ASM func
 LEAF(__strncpy_from_\func\()_asm)
 	LONG_L		v0, TI_ADDR_LIMIT($28)	# pointer ok?
@@ -115,4 +118,7 @@ __BUILD_STRNCPY_ASM kernel
 __BUILD_STRNCPY_ASM user
 	.set pop
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

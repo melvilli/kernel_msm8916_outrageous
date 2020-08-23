@@ -43,12 +43,15 @@
 #define DRIVER_DESC	"Streamzap Remote Control driver"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_DEBUG
 static bool debug = 1;
 #else
 static bool debug;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define USB_STREAMZAP_VENDOR_ID		0x0e9c
@@ -73,6 +76,7 @@ MODULE_DEVICE_TABLE(usb, streamzap_table);
 #define SZ_BUF_LEN 128
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* from ir-rc5-sz-decoder.c */
 #ifdef CONFIG_IR_RC5_SZ_DECODER_MODULE
 #define load_rc5_sz_decode()    request_module("ir-rc5-sz-decoder")
@@ -80,6 +84,8 @@ MODULE_DEVICE_TABLE(usb, streamzap_table);
 #define load_rc5_sz_decode()    {}
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum StreamzapDecoderState {
@@ -329,7 +335,11 @@ static struct rc_dev *streamzap_init_rc_dev(struct streamzap_ir *sz)
 	rdev->priv = sz;
 	rdev->driver_type = RC_DRIVER_IR_RAW;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev->allowed_protos = RC_BIT_ALL;
+=======
+	rdev->allowed_protocols = RC_BIT_ALL;
+>>>>>>> v3.18
 =======
 	rdev->allowed_protocols = RC_BIT_ALL;
 >>>>>>> v3.18
@@ -386,8 +396,12 @@ static int streamzap_probe(struct usb_interface *intf,
 
 	sz->endpoint = &(iface_host->endpoint[0].desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((sz->endpoint->bEndpointAddress & USB_ENDPOINT_DIR_MASK)
 	    != USB_DIR_IN) {
+=======
+	if (!usb_endpoint_dir_in(sz->endpoint)) {
+>>>>>>> v3.18
 =======
 	if (!usb_endpoint_dir_in(sz->endpoint)) {
 >>>>>>> v3.18
@@ -398,8 +412,12 @@ static int streamzap_probe(struct usb_interface *intf,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((sz->endpoint->bmAttributes & USB_ENDPOINT_XFERTYPE_MASK)
 	    != USB_ENDPOINT_XFER_INT) {
+=======
+	if (!usb_endpoint_xfer_int(sz->endpoint)) {
+>>>>>>> v3.18
 =======
 	if (!usb_endpoint_xfer_int(sz->endpoint)) {
 >>>>>>> v3.18
@@ -477,9 +495,12 @@ static int streamzap_probe(struct usb_interface *intf,
 		 usbdev->bus->busnum, usbdev->devnum);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Load the streamzap not-quite-rc5 decoder too */
 	load_rc5_sz_decode();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -550,8 +571,11 @@ MODULE_AUTHOR("Jarod Wilson <jarod@wilsonet.com>");
 MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 module_param(debug, bool, S_IRUGO | S_IWUSR);
 MODULE_PARM_DESC(debug, "Enable debugging messages");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

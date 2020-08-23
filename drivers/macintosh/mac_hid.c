@@ -182,7 +182,11 @@ static void mac_hid_stop_emulation(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mac_hid_toggle_emumouse(ctl_table *table, int write,
+=======
+static int mac_hid_toggle_emumouse(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int mac_hid_toggle_emumouse(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -219,7 +223,11 @@ static int mac_hid_toggle_emumouse(struct ctl_table *table, int write,
 
 /* file(s) in /proc/sys/dev/mac_hid */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table mac_hid_files[] = {
+=======
+static struct ctl_table mac_hid_files[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table mac_hid_files[] = {
 >>>>>>> v3.18
@@ -249,7 +257,11 @@ static struct ctl_table mac_hid_files[] = {
 
 /* dir in /proc/sys/dev */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table mac_hid_dir[] = {
+=======
+static struct ctl_table mac_hid_dir[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table mac_hid_dir[] = {
 >>>>>>> v3.18
@@ -264,7 +276,11 @@ static struct ctl_table mac_hid_dir[] = {
 
 /* /proc/sys/dev itself, in case that is not there yet */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table mac_hid_root_dir[] = {
+=======
+static struct ctl_table mac_hid_root_dir[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table mac_hid_root_dir[] = {
 >>>>>>> v3.18

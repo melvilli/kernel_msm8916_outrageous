@@ -27,8 +27,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -113,7 +117,11 @@ struct kvaser_pci {
 #define KVASER_PCI_DEVICE_ID2     0x0008
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(kvaser_pci_tbl) = {
+=======
+static const struct pci_device_id kvaser_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id kvaser_pci_tbl[] = {
 >>>>>>> v3.18
@@ -224,7 +232,11 @@ static int kvaser_pci_add_chan(struct pci_dev *pdev, int channel,
 	struct sja1000_priv *priv;
 	struct kvaser_pci *board;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err, init_step;
+=======
+	int err;
+>>>>>>> v3.18
 =======
 	int err;
 >>>>>>> v3.18
@@ -249,7 +261,10 @@ static int kvaser_pci_add_chan(struct pci_dev *pdev, int channel,
 		board->xilinx_ver =
 			ioread8(board->res_addr + XILINX_VERINT) >> 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		init_step = 2;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -281,8 +296,11 @@ static int kvaser_pci_add_chan(struct pci_dev *pdev, int channel,
 	dev->irq = pdev->irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_step = 4;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_info(&pdev->dev, "reg_base=%p conf_addr=%p irq=%d\n",
@@ -290,6 +308,10 @@ static int kvaser_pci_add_chan(struct pci_dev *pdev, int channel,
 
 	SET_NETDEV_DEV(dev, &pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev->dev_id = channel;
+>>>>>>> v3.18
 =======
 	dev->dev_id = channel;
 >>>>>>> v3.18
@@ -410,7 +432,10 @@ static void kvaser_pci_remove_one(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

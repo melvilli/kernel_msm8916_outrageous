@@ -13,7 +13,11 @@
 #define _ASM_SYSCALL_H	1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/audit.h>
+=======
+#include <uapi/linux/audit.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/audit.h>
 >>>>>>> v3.18
@@ -33,7 +37,11 @@ static inline long syscall_get_nr(struct task_struct *task,
 				  struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return test_tsk_thread_flag(task, TIF_SYSCALL) ?
+=======
+	return test_pt_regs_flag(regs, PIF_SYSCALL) ?
+>>>>>>> v3.18
 =======
 	return test_pt_regs_flag(regs, PIF_SYSCALL) ?
 >>>>>>> v3.18
@@ -98,16 +106,22 @@ static inline void syscall_set_arguments(struct task_struct *task,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int syscall_get_arch(struct task_struct *task,
 				   struct pt_regs *regs)
 {
 #ifdef CONFIG_COMPAT
 	if (test_tsk_thread_flag(task, TIF_31BIT))
 =======
+=======
+>>>>>>> v3.18
 static inline int syscall_get_arch(void)
 {
 #ifdef CONFIG_COMPAT
 	if (test_tsk_thread_flag(current, TIF_31BIT))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return AUDIT_ARCH_S390;
 #endif

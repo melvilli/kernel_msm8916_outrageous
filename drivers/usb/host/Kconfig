@@ -27,6 +27,7 @@ config USB_XHCI_HCD
 if USB_XHCI_HCD
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_XHCI_PLATFORM
 	tristate
 
@@ -50,6 +51,8 @@ config USB_XHCI_HCD_DEBUGGING
 
 	  If unsure, say N.
 =======
+=======
+>>>>>>> v3.18
 config USB_XHCI_PCI
        tristate
        depends on PCI
@@ -73,6 +76,9 @@ config USB_XHCI_RCAR
 	---help---
 	  Say 'Y' to enable the support for the xHCI host controller
 	  found in Renesas R-Car ARM SoCs.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif # USB_XHCI_HCD
@@ -99,6 +105,7 @@ config USB_EHCI_HCD
 	  module will be called ehci-hcd.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_EHCI_EHSET
 	bool "Embedded High-speed Host Electrical Test Support"
 	depends on USB_EHCI_HCD
@@ -120,6 +127,11 @@ config USB_EHCI_ROOT_HUB_TT
 	bool "Root Hub Transaction Translators"
 	depends on USB_EHCI_HCD
 >>>>>>> v3.18
+=======
+config USB_EHCI_ROOT_HUB_TT
+	bool "Root Hub Transaction Translators"
+	depends on USB_EHCI_HCD
+>>>>>>> v3.18
 	---help---
 	  Some EHCI chips have vendor-specific extensions to integrate
 	  transaction translators, so that no OHCI or UHCI companion
@@ -132,7 +144,11 @@ config USB_EHCI_ROOT_HUB_TT
 config USB_EHCI_TT_NEWSCHED
 	bool "Improved Transaction Translator scheduling"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on USB_EHCI_HCD || USB_CHIPIDEA_HOST
+=======
+	depends on USB_EHCI_HCD
+>>>>>>> v3.18
 =======
 	depends on USB_EHCI_HCD
 >>>>>>> v3.18
@@ -174,12 +190,15 @@ config USB_EHCI_HCD_PMC_MSP
 		If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_EHCI_BIG_ENDIAN_MMIO
 	bool
 
 config USB_EHCI_BIG_ENDIAN_DESC
 	bool
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config XPS_USB_HCD_XILINX
@@ -189,7 +208,11 @@ config XPS_USB_HCD_XILINX
 	select USB_EHCI_BIG_ENDIAN_MMIO
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Xilinx xps USB host controller core is EHCI compilant and has
+=======
+		Xilinx xps USB host controller core is EHCI compliant and has
+>>>>>>> v3.18
 =======
 		Xilinx xps USB host controller core is EHCI compliant and has
 >>>>>>> v3.18
@@ -216,6 +239,10 @@ config USB_EHCI_HCD_OMAP
 	tristate "EHCI support for OMAP3 and later chips"
 	depends on ARCH_OMAP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select NOP_USB_XCEIV
+>>>>>>> v3.18
 =======
 	select NOP_USB_XCEIV
 >>>>>>> v3.18
@@ -224,9 +251,12 @@ config USB_EHCI_HCD_OMAP
 	  Enables support for the on-chip EHCI controller on
 	  OMAP3 and later chips.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  If your system uses a PHY on the USB port, you will need to
 	  enable USB_PHY and the appropriate PHY driver as well. Most
 	  boards need the NOP_USB_XCEIV PHY driver.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -250,7 +280,10 @@ config USB_EHCI_HCD_SPEAR
           ST SPEAr chips.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config USB_EHCI_HCD_STI
 	tristate "Support for ST STiHxxx on-chip EHCI USB controller"
 	depends on ARCH_STI && OF
@@ -260,6 +293,9 @@ config USB_EHCI_HCD_STI
 	  Enable support for the on-chip EHCI controller found on
 	  STMicroelectronics consumer electronics SoC's.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config USB_EHCI_HCD_AT91
         tristate  "Support for Atmel on-chip EHCI USB controller"
@@ -272,10 +308,15 @@ config USB_EHCI_HCD_AT91
 config USB_EHCI_MSM
 	tristate "Support for Qualcomm QSD/MSM on-chip EHCI USB controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_MSM
 	depends on USB_PHY
 	select USB_EHCI_ROOT_HUB_TT
 	select USB_MSM_OTG
+=======
+	depends on ARCH_MSM || ARCH_QCOM
+	select USB_EHCI_ROOT_HUB_TT
+>>>>>>> v3.18
 =======
 	depends on ARCH_MSM || ARCH_QCOM
 	select USB_EHCI_ROOT_HUB_TT
@@ -288,6 +329,7 @@ config USB_EHCI_MSM
 	  This driver is not supported on boards like trout which
 	  has an external PHY.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config USB_EHCI_MSM_HSIC
 	bool "Support for HSIC based MSM on-chip EHCI USB controller"
@@ -322,6 +364,10 @@ config USB_EHCI_TEGRA
 config USB_EHCI_TEGRA
        tristate "NVIDIA Tegra HCD support"
 >>>>>>> v3.18
+=======
+config USB_EHCI_TEGRA
+       tristate "NVIDIA Tegra HCD support"
+>>>>>>> v3.18
        depends on ARCH_TEGRA
        select USB_EHCI_ROOT_HUB_TT
        select USB_PHY
@@ -345,6 +391,7 @@ config USB_EHCI_SH
 	  If you use the PCI EHCI controller, this option is not necessary.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_EHCI_S5P
        tristate "EHCI support for Samsung S5P/EXYNOS SoC Series"
        depends on PLAT_S5P
@@ -352,11 +399,16 @@ config USB_EHCI_S5P
 	Enable support for the Samsung S5Pxxxx and Exynos3/4/5 SOC's
 	on-chip EHCI controller.
 =======
+=======
+>>>>>>> v3.18
 config USB_EHCI_EXYNOS
        tristate "EHCI support for Samsung S5P/EXYNOS SoC Series"
        depends on ARCH_S5PV210 || ARCH_EXYNOS
        help
 	Enable support for the Samsung Exynos SOC's on-chip EHCI controller.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config USB_EHCI_MV
@@ -374,7 +426,11 @@ config USB_EHCI_MV
 
 config USB_W90X900_EHCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "W90X900(W90P910) EHCI support"
+=======
+	tristate "W90X900(W90P910) EHCI support"
+>>>>>>> v3.18
 =======
 	tristate "W90X900(W90P910) EHCI support"
 >>>>>>> v3.18
@@ -419,7 +475,11 @@ config USB_EHCI_HCD_PLATFORM
 config USB_OCTEON_EHCI
 	bool "Octeon on-chip EHCI support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CPU_CAVIUM_OCTEON
+=======
+	depends on CAVIUM_OCTEON_SOC
+>>>>>>> v3.18
 =======
 	depends on CAVIUM_OCTEON_SOC
 >>>>>>> v3.18
@@ -446,6 +506,7 @@ config USB_OXU210HP_HCD
 	  module will be called oxu210hp-hcd.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_EHCI_MSM_72K
 	bool "Support for Legacy Qualcomm on-chip EHCI USB controller"
 	depends on USB_EHCI_HCD && USB_MSM_OTG_72K && ARCH_MSM
@@ -461,6 +522,8 @@ config USB_FS_HOST
 	  Enables support for the full speed USB controller core present
 	  on the Qualcomm chipsets
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config USB_ISP116X_HCD
@@ -491,7 +554,10 @@ config USB_ISP1760_HCD
 config USB_ISP1362_HCD
 	tristate "ISP1362 HCD support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default N
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -503,11 +569,14 @@ config USB_ISP1362_HCD
 	  module will be called isp1362-hcd.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_OHCI_HCD
 	tristate "OHCI HCD support"
 	select ISP1301_OMAP if MACH_OMAP_H2 || MACH_OMAP_H3
 	depends on USB_ISP1301 || !ARCH_LPC32XX
 =======
+=======
+>>>>>>> v3.18
 config USB_FUSBH200_HCD
 	tristate "FUSBH200 HCD support"
 	depends on USB
@@ -542,6 +611,9 @@ config USB_MAX3421_HCD
 
 config USB_OHCI_HCD
 	tristate "OHCI HCD (USB 1.1) support"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  The Open Host Controller Interface (OHCI) is a standard for accessing
@@ -560,8 +632,14 @@ if USB_OHCI_HCD
 
 config USB_OHCI_HCD_OMAP1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "OHCI support for OMAP1/2 chips"
 	depends on ARCH_OMAP1
+=======
+	tristate "OHCI support for OMAP1/2 chips"
+	depends on ARCH_OMAP1
+	depends on ISP1301_OMAP || !(MACH_OMAP_H2 || MACH_OMAP_H3)
+>>>>>>> v3.18
 =======
 	tristate "OHCI support for OMAP1/2 chips"
 	depends on ARCH_OMAP1
@@ -572,9 +650,12 @@ config USB_OHCI_HCD_OMAP1
 	  Enables support for the OHCI controller on OMAP1/2 chips.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_OHCI_HCD_OMAP3
 	bool "OHCI support for OMAP3 and later chips"
 =======
+=======
+>>>>>>> v3.18
 config USB_OHCI_HCD_SPEAR
         tristate "Support for ST SPEAr on-chip OHCI USB controller"
         depends on USB_OHCI_HCD && PLAT_SPEAR
@@ -627,6 +708,9 @@ config USB_OHCI_HCD_AT91
 
 config USB_OHCI_HCD_OMAP3
 	tristate "OHCI support for OMAP3 and later chips"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	depends on (ARCH_OMAP3 || ARCH_OMAP4)
 	default y
@@ -635,7 +719,10 @@ config USB_OHCI_HCD_OMAP3
 	  OMAP3 and later chips.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config USB_OHCI_HCD_DAVINCI
 	bool "OHCI support for TI DaVinci DA8xx"
 	depends on ARCH_DAVINCI_DA8XX
@@ -646,6 +733,9 @@ config USB_OHCI_HCD_DAVINCI
 	  controller. This driver cannot currently be a loadable
 	  module because it lacks a proper PHY abstraction.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config USB_OHCI_ATH79
 	bool "USB OHCI support for the Atheros AR71XX/AR7240 SoCs (DEPRECATED)"
@@ -683,8 +773,13 @@ config USB_OHCI_HCD_PPC_OF
 
 config USB_OHCI_HCD_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "OHCI support for PCI-bus USB controllers"
 	depends on PCI && (STB03xxx || PPC_MPC52xx || USB_OHCI_HCD_PPC_OF)
+=======
+	tristate "OHCI support for PCI-bus USB controllers"
+	depends on PCI
+>>>>>>> v3.18
 =======
 	tristate "OHCI support for PCI-bus USB controllers"
 	depends on PCI
@@ -726,8 +821,13 @@ config USB_OHCI_SH
 
 config USB_OHCI_EXYNOS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	boolean "OHCI support for Samsung EXYNOS SoC Series"
 	depends on ARCH_EXYNOS
+=======
+	tristate "OHCI support for Samsung S5P/EXYNOS SoC Series"
+	depends on ARCH_S5PV210 || ARCH_EXYNOS
+>>>>>>> v3.18
 =======
 	tristate "OHCI support for Samsung S5P/EXYNOS SoC Series"
 	depends on ARCH_S5PV210 || ARCH_EXYNOS
@@ -748,7 +848,11 @@ config USB_CNS3XXX_OHCI
 
 config USB_OHCI_HCD_PLATFORM
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Generic OHCI driver for a platform device"
+=======
+	tristate "Generic OHCI driver for a platform device"
+>>>>>>> v3.18
 =======
 	tristate "Generic OHCI driver for a platform device"
 >>>>>>> v3.18
@@ -762,7 +866,11 @@ config USB_OHCI_HCD_PLATFORM
 config USB_OCTEON_OHCI
 	bool "Octeon on-chip OHCI support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CPU_CAVIUM_OCTEON
+=======
+	depends on CAVIUM_OCTEON_SOC
+>>>>>>> v3.18
 =======
 	depends on CAVIUM_OCTEON_SOC
 >>>>>>> v3.18
@@ -774,6 +882,7 @@ config USB_OCTEON_OHCI
 	  controller.  It is needed for low-speed USB 1.0 device
 	  support.  All CN6XXX based chips with USB are supported.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 config USB_OHCI_BIG_ENDIAN_DESC
@@ -789,6 +898,8 @@ config USB_OHCI_LITTLE_ENDIAN
 	default n if STB03xxx || PPC_MPC52xx
 	default y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif # USB_OHCI_HCD
@@ -847,7 +958,10 @@ config USB_U132_HCD
 	tristate "Elan U132 Adapter Host Controller"
 	depends on USB_FTDI_ELAN
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default M
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -943,7 +1057,11 @@ config USB_WHCI_HCD
 config USB_HWA_HCD
 	tristate "Host Wire Adapter (HWA) driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on UWB
+=======
+	depends on USB && UWB
+>>>>>>> v3.18
 =======
 	depends on USB && UWB
 >>>>>>> v3.18
@@ -999,6 +1117,7 @@ config USB_HCD_SSB
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config USB_ICE40_HCD
 	tristate "ICE40 FPGA based SPI to Inter-Chip USB host controller"
 	depends on USB && SPI
@@ -1012,6 +1131,8 @@ config USB_ICE40_HCD
 	  To compile this driver a module, choose M here: the module
 	  will be called "ice40-hcd".
 =======
+=======
+>>>>>>> v3.18
 config USB_HCD_TEST_MODE
 	bool "HCD test mode support"
 	---help---
@@ -1028,4 +1149,7 @@ config USB_HCD_TEST_MODE
 	  This option is of interest only to developers who need to validate
 	  their USB hardware designs.  It is not needed for normal use.  If
 	  unsure, say N.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -224,6 +224,10 @@ static struct platform_device rb532_wdt = {
 static struct plat_serial8250_port rb532_uart_res[] = {
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.type           = PORT_16550A,
+>>>>>>> v3.18
 =======
 		.type           = PORT_16550A,
 >>>>>>> v3.18
@@ -255,6 +259,7 @@ static struct platform_device *rb532_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init parse_mac_addr(char *macstr)
 {
 	int i, h, l;
@@ -277,6 +282,8 @@ static void __init parse_mac_addr(char *macstr)
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* NAND definitions */
@@ -341,12 +348,18 @@ static int __init setup_kmac(char *s)
 {
 	printk(KERN_INFO "korina mac = %s\n", s);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	parse_mac_addr(s);
 =======
+=======
+>>>>>>> v3.18
 	if (!mac_pton(s, korina_dev0_data.mac)) {
 		printk(KERN_ERR "Invalid mac\n");
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

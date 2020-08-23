@@ -72,7 +72,11 @@ static inline unsigned long allocate_mmu_context(struct mm_struct *mm)
 
 		/* fix the TLB version if needed (we avoid version #0 so as to
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * distingush MMU_NO_CONTEXT) */
+=======
+		 * distinguish MMU_NO_CONTEXT) */
+>>>>>>> v3.18
 =======
 		 * distinguish MMU_NO_CONTEXT) */
 >>>>>>> v3.18

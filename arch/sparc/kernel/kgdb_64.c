@@ -7,6 +7,10 @@
 #include <linux/kdebug.h>
 #include <linux/ftrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 =======
 #include <linux/context_tracking.h>
 >>>>>>> v3.18
@@ -17,6 +21,11 @@
 #include <asm/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+
+>>>>>>> v3.18
 =======
 #include "kernel.h"
 
@@ -52,7 +61,11 @@ void sleeping_thread_to_gdb_regs(unsigned long *gdb_regs, struct task_struct *p)
 	struct thread_info *t = task_thread_info(p);
 	extern unsigned int switch_to_pc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern unsigned int ret_from_syscall;
+=======
+	extern unsigned int ret_from_fork;
+>>>>>>> v3.18
 =======
 	extern unsigned int ret_from_fork;
 >>>>>>> v3.18
@@ -80,7 +93,11 @@ void sleeping_thread_to_gdb_regs(unsigned long *gdb_regs, struct task_struct *p)
 
 	if (t->new_child)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pc = (unsigned long) &ret_from_syscall;
+=======
+		pc = (unsigned long) &ret_from_fork;
+>>>>>>> v3.18
 =======
 		pc = (unsigned long) &ret_from_fork;
 >>>>>>> v3.18
@@ -177,6 +194,10 @@ int kgdb_arch_handle_exception(int e_vector, int signo, int err_code,
 asmlinkage void kgdb_trap(unsigned long trap_level, struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -185,7 +206,11 @@ asmlinkage void kgdb_trap(unsigned long trap_level, struct pt_regs *regs)
 	if (user_mode(regs)) {
 		bad_trap(regs, trap_level);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -197,6 +222,11 @@ asmlinkage void kgdb_trap(unsigned long trap_level, struct pt_regs *regs)
 	kgdb_handle_exception(0x172, SIGTRAP, 0, regs);
 	local_irq_restore(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 out:
 	exception_exit(prev_state);

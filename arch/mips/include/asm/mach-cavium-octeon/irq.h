@@ -36,6 +36,11 @@ enum octeon_irq {
 	OCTEON_IRQ_PCI_MSI3,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	OCTEON_IRQ_TWSI,
+	OCTEON_IRQ_TWSI2,
+>>>>>>> v3.18
 =======
 	OCTEON_IRQ_TWSI,
 	OCTEON_IRQ_TWSI2,

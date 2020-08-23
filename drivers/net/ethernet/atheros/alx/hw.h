@@ -382,7 +382,10 @@ struct alx_rrd {
 				 ALX_ISR_RX_Q7)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Statistics counters collected by the MAC
  *
  * The order of the fields must match the strings in alx_gstrings_stats
@@ -450,6 +453,9 @@ struct alx_hw_stats {
 };
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* maximum interrupt vectors for msix */
 #define ALX_MAX_MSIX_INTRS	16
@@ -483,6 +489,7 @@ struct alx_hw {
 	/* SPEED_* + DUPLEX_*, SPEED_UNKNOWN if link is down */
 	int link_speed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* auto-neg advertisement or force mode config */
 	u32 adv_cfg;
@@ -490,11 +497,16 @@ struct alx_hw {
 
 	u32 sleep_ctrl;
 =======
+=======
+>>>>>>> v3.18
 	u8 duplex;
 
 	/* auto-neg advertisement or force mode config */
 	u8 flowctrl;
 	u32 adv_cfg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spinlock_t mdio_lock;
@@ -504,6 +516,12 @@ struct alx_hw {
 	/* PHY link patch flag */
 	bool lnk_patch;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* cumulated stats from the hardware (registers are cleared on read) */
+	struct alx_hw_stats stats;
+>>>>>>> v3.18
 =======
 
 	/* cumulated stats from the hardware (registers are cleared on read) */
@@ -563,7 +581,10 @@ void alx_enable_aspm(struct alx_hw *hw, bool l0s_en, bool l1_en);
 int alx_setup_speed_duplex(struct alx_hw *hw, u32 ethadv, u8 flowctrl);
 void alx_post_phy_link(struct alx_hw *hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int alx_pre_suspend(struct alx_hw *hw, int speed);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int alx_read_phy_reg(struct alx_hw *hw, u16 reg, u16 *phy_data);
@@ -571,9 +592,14 @@ int alx_write_phy_reg(struct alx_hw *hw, u16 reg, u16 phy_data);
 int alx_read_phy_ext(struct alx_hw *hw, u8 dev, u16 reg, u16 *pdata);
 int alx_write_phy_ext(struct alx_hw *hw, u8 dev, u16 reg, u16 data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int alx_get_phy_link(struct alx_hw *hw, int *speed);
 int alx_clear_phy_intr(struct alx_hw *hw);
 int alx_config_wol(struct alx_hw *hw);
+=======
+int alx_read_phy_link(struct alx_hw *hw);
+int alx_clear_phy_intr(struct alx_hw *hw);
+>>>>>>> v3.18
 =======
 int alx_read_phy_link(struct alx_hw *hw);
 int alx_clear_phy_intr(struct alx_hw *hw);
@@ -586,9 +612,12 @@ bool alx_phy_configured(struct alx_hw *hw);
 void alx_configure_basic(struct alx_hw *hw);
 void alx_disable_rss(struct alx_hw *hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int alx_select_powersaving_speed(struct alx_hw *hw, int *speed);
 bool alx_get_phy_info(struct alx_hw *hw);
 =======
+=======
+>>>>>>> v3.18
 bool alx_get_phy_info(struct alx_hw *hw);
 void alx_update_hw_stats(struct alx_hw *hw);
 
@@ -606,6 +635,9 @@ static inline u32 alx_speed_to_ethadv(int speed, u8 duplex)
 		return ADVERTISED_10baseT_Half;
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

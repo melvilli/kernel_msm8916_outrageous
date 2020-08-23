@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/pcmuio.c
     Driver for Winsystems PC-104 based 48-channel and 96-channel DIO boards.
 
@@ -79,6 +80,8 @@ Configuration Options:
 #include <linux/interrupt.h>
 #include <linux/slab.h>
 =======
+=======
+>>>>>>> v3.18
  * pcmuio.c
  * Comedi driver for Winsystems PC-104 based 48/96-channel DIO boards.
  *
@@ -155,12 +158,16 @@ Configuration Options:
 
 #include <linux/module.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "../comedidev.h"
 
 #include "comedi_fc.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define CHANS_PER_PORT   8
 #define PORTS_PER_ASIC   6
@@ -416,6 +423,8 @@ static int pcmuio_dio_insn_config(struct comedi_device *dev,
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 /*
  * Register I/O map
  *
@@ -589,11 +598,15 @@ static int pcmuio_dio_insn_bits(struct comedi_device *dev,
 
 	/* return the true state of the channels */
 	data[1] = ~val & chanmask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void switch_page(struct comedi_device *dev, int asic, int page)
 {
@@ -913,6 +926,8 @@ static int pcmuio_start_intr(struct comedi_device *dev,
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static int pcmuio_dio_insn_config(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
 				  struct comedi_insn *insn,
@@ -1089,11 +1104,15 @@ static void pcmuio_start_intr(struct comedi_device *dev,
 	/* set pol and enab intrs for this subdev.. */
 	pcmuio_write(dev, pol_bits, asic, PCMUIO_PAGE_POL, 0);
 	pcmuio_write(dev, bits, asic, PCMUIO_PAGE_ENAB, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int pcmuio_cancel(struct comedi_device *dev, struct comedi_subdevice *s)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 
@@ -1102,6 +1121,8 @@ static int pcmuio_cancel(struct comedi_device *dev, struct comedi_subdevice *s)
 		pcmuio_stop_intr(dev, s);
 	spin_unlock_irqrestore(&subpriv->intr.spinlock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct pcmuio_private *devpriv = dev->private;
 	int asic = pcmuio_subdevice_to_asic(s);
 	struct pcmuio_asic *chip = &devpriv->asics[asic];
@@ -1111,11 +1132,15 @@ static int pcmuio_cancel(struct comedi_device *dev, struct comedi_subdevice *s)
 	if (chip->active)
 		pcmuio_stop_intr(dev, s);
 	spin_unlock_irqrestore(&chip->spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Internal trigger function to start acquisition for an 'INTERRUPT' subdevice.
@@ -1140,6 +1165,8 @@ pcmuio_inttrig_start_intr(struct comedi_device *dev, struct comedi_subdevice *s,
 	if (event)
 		comedi_event(dev, s);
 =======
+=======
+>>>>>>> v3.18
 static int pcmuio_inttrig_start_intr(struct comedi_device *dev,
 				     struct comedi_subdevice *s,
 				     unsigned int trig_num)
@@ -1159,6 +1186,9 @@ static int pcmuio_inttrig_start_intr(struct comedi_device *dev,
 		pcmuio_start_intr(dev, s);
 
 	spin_unlock_irqrestore(&chip->spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1;
@@ -1169,6 +1199,7 @@ static int pcmuio_inttrig_start_intr(struct comedi_device *dev,
  */
 static int pcmuio_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct comedi_cmd *cmd = &s->async->cmd;
 	unsigned long flags;
@@ -1205,6 +1236,8 @@ static int pcmuio_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	if (event)
 		comedi_event(dev, s);
 =======
+=======
+>>>>>>> v3.18
 	struct pcmuio_private *devpriv = dev->private;
 	struct comedi_cmd *cmd = &s->async->cmd;
 	int asic = pcmuio_subdevice_to_asic(s);
@@ -1223,6 +1256,9 @@ static int pcmuio_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		pcmuio_start_intr(dev, s);
 
 	spin_unlock_irqrestore(&chip->spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1263,6 +1299,7 @@ static int pcmuio_cmdtest(struct comedi_device *dev,
 	err |= cfc_check_trigger_arg_is(&cmd->scan_end_arg, cmd->chanlist_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (cmd->stop_src) {
 	case TRIG_COUNT:
 		/* any count allowed */
@@ -1274,10 +1311,15 @@ static int pcmuio_cmdtest(struct comedi_device *dev,
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (cmd->stop_src == TRIG_COUNT)
 		err |= cfc_check_trigger_arg_min(&cmd->stop_arg, 1);
 	else	/* TRIG_NONE */
 		err |= cfc_check_trigger_arg_is(&cmd->stop_arg, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (err)
@@ -1292,6 +1334,7 @@ static int pcmuio_cmdtest(struct comedi_device *dev,
 
 static int pcmuio_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct pcmuio_board *board = comedi_board(dev);
 	struct pcmuio_private *devpriv;
@@ -1426,6 +1469,8 @@ static int pcmuio_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 	const struct pcmuio_board *board = dev->board_ptr;
 	struct comedi_subdevice *s;
 	struct pcmuio_private *devpriv;
@@ -1498,12 +1543,16 @@ static int pcmuio_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void pcmuio_detach(struct comedi_device *dev)
 {
 	struct pcmuio_private *devpriv = dev->private;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 
@@ -1514,6 +1563,8 @@ static void pcmuio_detach(struct comedi_device *dev)
 		}
 		kfree(devpriv->sprivs);
 =======
+=======
+>>>>>>> v3.18
 
 	if (devpriv) {
 		pcmuio_reset(dev);
@@ -1521,11 +1572,15 @@ static void pcmuio_detach(struct comedi_device *dev)
 		/* free the 2nd irq if used, the core will free the 1st one */
 		if (devpriv->irq2 && devpriv->irq2 != dev->irq)
 			free_irq(devpriv->irq2, dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	comedi_legacy_detach(dev);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct pcmuio_board pcmuio_boards[] = {
 	{
@@ -1539,6 +1594,8 @@ static const struct pcmuio_board pcmuio_boards[] = {
 	},
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct comedi_driver pcmuio_driver = {

@@ -15,6 +15,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -42,7 +46,10 @@
 
 struct jz4740_rtc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *mem;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void __iomem *base;
@@ -223,8 +230,14 @@ static int jz4740_rtc_probe(struct platform_device *pdev)
 	struct jz4740_rtc *rtc;
 	uint32_t scratchpad;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	rtc = kzalloc(sizeof(*rtc), GFP_KERNEL);
+=======
+	struct resource *mem;
+
+	rtc = devm_kzalloc(&pdev->dev, sizeof(*rtc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	struct resource *mem;
 
@@ -235,6 +248,7 @@ static int jz4740_rtc_probe(struct platform_device *pdev)
 
 	rtc->irq = platform_get_irq(pdev, 0);
 	if (rtc->irq < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = -ENOENT;
 		dev_err(&pdev->dev, "Failed to get platform irq\n");
@@ -263,6 +277,8 @@ static int jz4740_rtc_probe(struct platform_device *pdev)
 		goto err_release_mem_region;
 	}
 =======
+=======
+>>>>>>> v3.18
 		dev_err(&pdev->dev, "Failed to get platform irq\n");
 		return -ENOENT;
 	}
@@ -271,6 +287,9 @@ static int jz4740_rtc_probe(struct platform_device *pdev)
 	rtc->base = devm_ioremap_resource(&pdev->dev, mem);
 	if (IS_ERR(rtc->base))
 		return PTR_ERR(rtc->base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_init(&rtc->lock);
@@ -279,6 +298,7 @@ static int jz4740_rtc_probe(struct platform_device *pdev)
 
 	device_init_wakeup(&pdev->dev, 1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rtc->rtc = rtc_device_register(pdev->name, &pdev->dev, &jz4740_rtc_ops,
 					THIS_MODULE);
@@ -294,6 +314,8 @@ static int jz4740_rtc_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Failed to request rtc irq: %d\n", ret);
 		goto err_unregister_rtc;
 =======
+=======
+>>>>>>> v3.18
 	rtc->rtc = devm_rtc_device_register(&pdev->dev, pdev->name,
 					&jz4740_rtc_ops, THIS_MODULE);
 	if (IS_ERR(rtc->rtc)) {
@@ -307,6 +329,9 @@ static int jz4740_rtc_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "Failed to request rtc irq: %d\n", ret);
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -317,7 +342,11 @@ static int jz4740_rtc_probe(struct platform_device *pdev)
 		if (ret) {
 			dev_err(&pdev->dev, "Could not write write to RTC registers\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_free_irq;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -325,6 +354,7 @@ static int jz4740_rtc_probe(struct platform_device *pdev)
 	}
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err_free_irq:
@@ -365,6 +395,10 @@ static int jz4740_rtc_remove(struct platform_device *pdev)
 }
 
 >>>>>>> v3.18
+=======
+}
+
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 static int jz4740_rtc_suspend(struct device *dev)
 {
@@ -397,7 +431,10 @@ static const struct dev_pm_ops jz4740_pm_ops = {
 static struct platform_driver jz4740_rtc_driver = {
 	.probe	 = jz4740_rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	 = jz4740_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver	 = {

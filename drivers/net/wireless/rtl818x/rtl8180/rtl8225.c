@@ -4,15 +4,21 @@
  *
  * Copyright 2007 Michael Wu <flamingice@sourmilk.net>
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2007 Andrea Merello <andreamrl@tiscali.it>
  *
  * Based on the r8180 driver, which is:
  * Copyright 2005 Andrea Merello <andreamrl@tiscali.it>, et al.
 =======
+=======
+>>>>>>> v3.18
  * Copyright 2007 Andrea Merello <andrea.merello@gmail.com>
  *
  * Based on the r8180 driver, which is:
  * Copyright 2005 Andrea Merello <andrea.merello@gmail.com>, et al.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Thanks to Realtek for their support!
@@ -23,7 +29,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pci.h>
@@ -294,6 +303,10 @@ static void rtl8225_rf_set_tx_power(struct ieee80211_hw *dev, int channel)
 	msleep(1); /* FIXME: optional? */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* TODO: use set_anaparam2 dev.c_func*/
+>>>>>>> v3.18
 =======
 	/* TODO: use set_anaparam2 dev.c_func*/
 >>>>>>> v3.18
@@ -746,6 +759,7 @@ static void rtl8225_rf_set_channel(struct ieee80211_hw *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void rtl8225_rf_conf_erp(struct ieee80211_hw *dev,
 				struct ieee80211_bss_conf *info)
 {
@@ -768,13 +782,18 @@ static void rtl8225_rf_conf_erp(struct ieee80211_hw *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct rtl818x_rf_ops rtl8225_ops = {
 	.name		= "rtl8225",
 	.init		= rtl8225_rf_init,
 	.stop		= rtl8225_rf_stop,
 	.set_chan	= rtl8225_rf_set_channel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.conf_erp	= rtl8225_rf_conf_erp,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -785,7 +804,10 @@ static const struct rtl818x_rf_ops rtl8225z2_ops = {
 	.stop		= rtl8225_rf_stop,
 	.set_chan	= rtl8225_rf_set_channel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.conf_erp	= rtl8225_rf_conf_erp,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

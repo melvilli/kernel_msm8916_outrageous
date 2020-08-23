@@ -53,7 +53,12 @@ struct fat_mount_options {
 		 tz_set:1,	   /* Filesystem timestamps' offset set */
 		 rodir:1,	   /* allow ATTR_RO for directory */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 discard:1;	   /* Issue discard requests on deletions */
+=======
+		 discard:1,	   /* Issue discard requests on deletions */
+		 dos1xfloppy:1;	   /* Assume default BPB for DOS 1.x floppies */
+>>>>>>> v3.18
 =======
 		 discard:1,	   /* Issue discard requests on deletions */
 		 dos1xfloppy:1;	   /* Assume default BPB for DOS 1.x floppies */
@@ -92,7 +97,11 @@ struct msdos_sb_info {
 	int dir_per_block;	      /* dir entries per block */
 	int dir_per_block_bits;	      /* log2(dir_per_block) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long vol_id;         /* volume ID */
+=======
+	unsigned int vol_id;		/*volume ID*/
+>>>>>>> v3.18
 =======
 	unsigned int vol_id;		/*volume ID*/
 >>>>>>> v3.18
@@ -112,6 +121,10 @@ struct msdos_sb_info {
 
 	unsigned int dirty;           /* fs state before mount */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rcu_head rcu;
+>>>>>>> v3.18
 =======
 	struct rcu_head rcu;
 >>>>>>> v3.18
@@ -402,6 +415,7 @@ static inline unsigned long fat_dir_hash(int logstart)
 extern __printf(3, 4) __cold
 void __fat_fs_error(struct super_block *sb, int report, const char *fmt, ...);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define fat_fs_error_ratelimit(sb, fmt, args...) \
 	__fat_fs_error(sb, __ratelimit(&MSDOS_SB(sb)->ratelimit), fmt , ## args)
 /*
@@ -411,10 +425,15 @@ void __fat_fs_error(struct super_block *sb, int report, const char *fmt, ...);
  */
 #define fat_fs_error(sb, fmt, args...)	fat_fs_error_ratelimit(sb, fmt, ## args)
 =======
+=======
+>>>>>>> v3.18
 #define fat_fs_error(sb, fmt, args...)		\
 	__fat_fs_error(sb, 1, fmt , ## args)
 #define fat_fs_error_ratelimit(sb, fmt, args...) \
 	__fat_fs_error(sb, __ratelimit(&MSDOS_SB(sb)->ratelimit), fmt , ## args)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __printf(3, 4) __cold
 void fat_msg(struct super_block *sb, const char *level, const char *fmt, ...);

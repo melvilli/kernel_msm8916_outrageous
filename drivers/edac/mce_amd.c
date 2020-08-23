@@ -7,7 +7,10 @@ static struct amd_decoder_ops *fam_ops;
 
 static u8 xec_mask	 = 0xf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 nb_err_cpumask = 0xf;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -83,7 +86,12 @@ static const char * const f15h_mc1_mce_desc[] = {
 	"insn buffer",
 	"predecode buffer",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"fetch address FIFO"
+=======
+	"fetch address FIFO",
+	"dispatch uop queue"
+>>>>>>> v3.18
 =======
 	"fetch address FIFO",
 	"dispatch uop queue"
@@ -143,7 +151,12 @@ static const char * const mc5_mce_desc[] = {
 	"Physical register file AG1 port",
 	"Flag register file",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"DE error occurred"
+=======
+	"DE error occurred",
+	"Retire status queue"
+>>>>>>> v3.18
 =======
 	"DE error occurred",
 	"Retire status queue"
@@ -281,13 +294,19 @@ static bool f15h_mc0_mce(u16 ec, u8 xec)
 		else
 			pr_cont(" Internal error condition type %d.\n", xec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else if (INT_ERROR(ec)) {
 		if (xec <= 0x1f)
 			pr_cont("Hardware Assert.\n");
 		else
 			ret = false;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else
 		ret = false;
@@ -396,7 +415,11 @@ static bool f15h_mc1_mce(u16 ec, u8 xec)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 0x11 ... 0x14:
+=======
+	case 0x11 ... 0x15:
+>>>>>>> v3.18
 =======
 	case 0x11 ... 0x15:
 >>>>>>> v3.18
@@ -424,11 +447,14 @@ static void decode_mc1_mce(struct mce *m)
 
 		pr_cont("during %s.\n", (k8 ? "system linefill" : "NB data read"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (fam_ops->mc1_mce(ec, xec))
 		;
 	else
 		pr_emerg(HW_ERR "Corrupted MC1 MCE info?\n");
 =======
+=======
+>>>>>>> v3.18
 	} else if (INT_ERROR(ec)) {
 		if (xec <= 0x3f)
 			pr_cont("Hardware Assert.\n");
@@ -443,6 +469,9 @@ static void decode_mc1_mce(struct mce *m)
 
 wrong_mc1_mce:
 	pr_emerg(HW_ERR "Corrupted MC1 MCE info?\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -512,12 +541,18 @@ static bool f15h_mc2_mce(u16 ec, u8 xec)
 			ret = false;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else if (INT_ERROR(ec)) {
 		if (xec <= 0x3f)
 			pr_cont("Hardware Assert.\n");
 		else
 			ret = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -667,6 +702,10 @@ static void decode_mc5_mce(struct mce *m)
 {
 	struct cpuinfo_x86 *c = &boot_cpu_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 ec = EC(m->status);
+>>>>>>> v3.18
 =======
 	u16 ec = EC(m->status);
 >>>>>>> v3.18
@@ -678,10 +717,13 @@ static void decode_mc5_mce(struct mce *m)
 	pr_emerg(HW_ERR "MC5 Error: ");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xec == 0x0 || xec == 0xc)
 		pr_cont("%s.\n", mc5_mce_desc[xec]);
 	else if (xec < 0xd)
 =======
+=======
+>>>>>>> v3.18
 	if (INT_ERROR(ec)) {
 		if (xec <= 0x1f) {
 			pr_cont("Hardware Assert.\n");
@@ -693,6 +735,9 @@ static void decode_mc5_mce(struct mce *m)
 	if (xec == 0x0 || xec == 0xc)
 		pr_cont("%s.\n", mc5_mce_desc[xec]);
 	else if (xec <= 0xd)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_cont("%s parity error.\n", mc5_mce_desc[xec]);
 	else
@@ -712,11 +757,17 @@ static void decode_mc6_mce(struct mce *m)
 
 	switch (xec) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 0x0:
 		pr_cont("Hardware Assertion");
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 0x1:
 		pr_cont("Free List");
@@ -817,7 +868,10 @@ int amd_decode_mce(struct notifier_block *nb, unsigned long val, void *data)
 		return NOTIFY_STOP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pr_emerg(HW_ERR "%s\n", decode_error_status(m));
 
 	pr_emerg(HW_ERR "CPU:%d (%x:%x:%x) MC%d_STATUS[%s|%s|%s|%s|%s",
@@ -848,6 +902,9 @@ int amd_decode_mce(struct notifier_block *nb, unsigned long val, void *data)
 	if (!fam_ops)
 		goto err_code;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (m->bank) {
 	case 0:
@@ -883,6 +940,7 @@ int amd_decode_mce(struct notifier_block *nb, unsigned long val, void *data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_emerg(HW_ERR "Error Status: %s\n", decode_error_status(m));
 
 	pr_emerg(HW_ERR "CPU:%d (%x:%x:%x) MC%d_STATUS[%s|%s|%s|%s|%s",
@@ -913,6 +971,9 @@ int amd_decode_mce(struct notifier_block *nb, unsigned long val, void *data)
 =======
  err_code:
 >>>>>>> v3.18
+=======
+ err_code:
+>>>>>>> v3.18
 	amd_decode_err_code(m->status & 0xffff);
 
 	return NOTIFY_STOP;
@@ -929,10 +990,14 @@ static int __init mce_amd_init(void)
 
 	if (c->x86_vendor != X86_VENDOR_AMD)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
 
 	if (c->x86 < 0xf || c->x86 > 0x16)
 		return 0;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -968,7 +1033,10 @@ static int __init mce_amd_init(void)
 
 	case 0x14:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nb_err_cpumask  = 0x3;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		fam_ops->mc0_mce = cat_mc0_mce;
@@ -978,7 +1046,12 @@ static int __init mce_amd_init(void)
 
 	case 0x15:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xec_mask = 0x1f;
+=======
+		xec_mask = c->x86_model == 0x60 ? 0x3f : 0x1f;
+
+>>>>>>> v3.18
 =======
 		xec_mask = c->x86_model == 0x60 ? 0x3f : 0x1f;
 
@@ -999,7 +1072,11 @@ static int __init mce_amd_init(void)
 		printk(KERN_WARNING "Huh? What family is it: 0x%x?!\n", c->x86);
 		kfree(fam_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		fam_ops = NULL;
+>>>>>>> v3.18
 =======
 		fam_ops = NULL;
 >>>>>>> v3.18

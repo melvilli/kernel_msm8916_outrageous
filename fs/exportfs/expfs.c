@@ -51,7 +51,11 @@ find_acceptable_alias(struct dentry *result,
 	inode = result->d_inode;
 	spin_lock(&inode->i_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hlist_for_each_entry(dentry, &inode->i_dentry, d_u.d_alias) {
+=======
+	hlist_for_each_entry(dentry, &inode->i_dentry, d_alias) {
+>>>>>>> v3.18
 =======
 	hlist_for_each_entry(dentry, &inode->i_dentry, d_alias) {
 >>>>>>> v3.18
@@ -74,6 +78,7 @@ find_acceptable_alias(struct dentry *result,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Find root of a disconnected subtree and return a reference to it.
  */
@@ -89,6 +94,8 @@ find_disconnected_root(struct dentry *dentry)
 			break;
 		}
 =======
+=======
+>>>>>>> v3.18
 static bool dentry_connected(struct dentry *dentry)
 {
 	dget(dentry);
@@ -117,14 +124,20 @@ static void clear_disconnected(struct dentry *dentry)
 		spin_lock(&dentry->d_lock);
 		dentry->d_flags &= ~DCACHE_DISCONNECTED;
 		spin_unlock(&dentry->d_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		dput(dentry);
 		dentry = parent;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dentry;
 =======
+=======
+>>>>>>> v3.18
 	dput(dentry);
 }
 
@@ -206,6 +219,9 @@ out_reconnected:
 	if (!dentry_connected(dentry))
 		return ERR_PTR(-ESTALE);
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -213,8 +229,11 @@ out_reconnected:
  * Make sure target_dir is fully connected to the dentry tree.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * It may already be, as the flag isn't always updated when connection happens.
 =======
+=======
+>>>>>>> v3.18
  * On successful return, DCACHE_DISCONNECTED will be cleared on
  * target_dir, and target_dir->d_parent->...->d_parent will reach the
  * root of the filesystem.
@@ -228,11 +247,15 @@ out_reconnected:
  * that case reconnect_path may still succeed with target_dir fully
  * connected, but further operations using the filehandle will fail when
  * necessary (due to S_DEAD being set on the directory).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static int
 reconnect_path(struct vfsmount *mnt, struct dentry *target_dir, char *nbuf)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int noprogress = 0;
 	int err = -ESTALE;
@@ -345,6 +368,8 @@ reconnect_path(struct vfsmount *mnt, struct dentry *target_dir, char *nbuf)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct dentry *dentry, *parent;
 
 	dentry = dget(target_dir);
@@ -366,6 +391,9 @@ reconnect_path(struct vfsmount *mnt, struct dentry *target_dir, char *nbuf)
 	}
 	dput(dentry);
 	clear_disconnected(target_dir);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -375,7 +403,11 @@ struct getdents_callback {
 	char *name;		/* name that was found. It already points to a
 				   buffer NAME_MAX+1 is size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long ino;	/* the inum we are looking for */
+=======
+	u64 ino;		/* the inum we are looking for */
+>>>>>>> v3.18
 =======
 	u64 ino;		/* the inum we are looking for */
 >>>>>>> v3.18
@@ -395,7 +427,11 @@ static int filldir_one(void * __buf, const char * name, int len,
 
 	buf->sequence++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (buf->ino == ino) {
+=======
+	if (buf->ino == ino && len <= NAME_MAX) {
+>>>>>>> v3.18
 =======
 	if (buf->ino == ino && len <= NAME_MAX) {
 >>>>>>> v3.18
@@ -410,7 +446,11 @@ static int filldir_one(void * __buf, const char * name, int len,
 /**
  * get_name - default export_operations->get_name function
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dentry: the directory in which to find a name
+=======
+ * @path:   the directory in which to find a name
+>>>>>>> v3.18
 =======
  * @path:   the directory in which to find a name
 >>>>>>> v3.18
@@ -427,11 +467,14 @@ static int get_name(const struct path *path, char *name, struct dentry *child)
 	int error;
 	struct file *file;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct getdents_callback buffer = {
 		.ctx.actor = filldir_one,
 		.name = name,
 		.ino = child->d_inode->i_ino
 =======
+=======
+>>>>>>> v3.18
 	struct kstat stat;
 	struct path child_path = {
 		.mnt = path->mnt,
@@ -440,6 +483,9 @@ static int get_name(const struct path *path, char *name, struct dentry *child)
 	struct getdents_callback buffer = {
 		.ctx.actor = filldir_one,
 		.name = name,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -451,7 +497,10 @@ static int get_name(const struct path *path, char *name, struct dentry *child)
 		goto out;
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * inode->i_ino is unsigned long, kstat->ino is u64, so the
 	 * former would be insufficient on 32-bit hosts when the
 	 * filesystem supports 64-bit inode numbers.  So we need to
@@ -462,6 +511,9 @@ static int get_name(const struct path *path, char *name, struct dentry *child)
 		return error;
 	buffer.ino = stat.ino;
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Open the directory ...
 	 */
@@ -472,7 +524,11 @@ static int get_name(const struct path *path, char *name, struct dentry *child)
 
 	error = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!file->f_op->readdir && !file->f_op->iterate)
+=======
+	if (!file->f_op->iterate)
+>>>>>>> v3.18
 =======
 	if (!file->f_op->iterate)
 >>>>>>> v3.18
@@ -506,7 +562,11 @@ out:
  * export_encode_fh - default export_operations->encode_fh function
  * @inode:   the object to encode
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @fh:      where to store the file handle fragment
+=======
+ * @fid:     where to store the file handle fragment
+>>>>>>> v3.18
 =======
  * @fid:     where to store the file handle fragment
 >>>>>>> v3.18

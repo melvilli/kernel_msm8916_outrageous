@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
    This is part of rtl8187 OpenSource driver.
    Copyright (C) Andrea Merello 2004-2005  <andreamrl@tiscali.it>
    Released under the terms of GPL (General Public Licence)
@@ -16,6 +17,8 @@
    project Authors.
 */
 =======
+=======
+>>>>>>> v3.18
  * This is part of rtl8187 OpenSource driver.
  * Copyright (C) Andrea Merello 2004-2005  <andrea.merello@gmail.com>
  * Released under the terms of GPL (General Public Licence)
@@ -31,6 +34,9 @@
  * We want to thank the Authors of those projects and the Ndiswrapper
  * project Authors.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef R819xU_H
@@ -39,8 +45,11 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#include <linux/config.h>
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ioport.h>
@@ -48,6 +57,7 @@
 #include <linux/types.h>
 #include <linux/slab.h>
 #include <linux/netdevice.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 //#include <linux/pci.h>
 #include <linux/usb.h>
@@ -58,6 +68,8 @@
 #include <linux/timer.h>
 #include <linux/proc_fs.h>	// Necessary because we use the proc fs
 =======
+=======
+>>>>>>> v3.18
 #include <linux/usb.h>
 #include <linux/etherdevice.h>
 #include <linux/delay.h>
@@ -65,6 +77,9 @@
 #include <linux/wireless.h>
 #include <linux/timer.h>
 #include <linux/proc_fs.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/if_arp.h>
 #include <linux/random.h>
@@ -74,7 +89,11 @@
 #define RTL8192U
 #define RTL819xU_MODULE_NAME "rtl819xU"
 <<<<<<< HEAD
+<<<<<<< HEAD
 //added for HW security, john.0629
+=======
+/* HW security */
+>>>>>>> v3.18
 =======
 /* HW security */
 >>>>>>> v3.18
@@ -116,6 +135,7 @@
 #define BIT30           0x40000000
 #define BIT31           0x80000000
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 // Rx smooth factor
 #define	Rx_Smooth_Factor		20
@@ -202,6 +222,8 @@ do { if(rt_global_debug_component & component) \
 // Queue Select Value in TxDesc
 //
 =======
+=======
+>>>>>>> v3.18
 #define	Rx_Smooth_Factor		20
 #define DMESG(x, a...)
 #define DMESGW(x, a...)
@@ -287,6 +309,9 @@ extern u32 rt_global_debug_component;
 
 
 /* Queue Select Value in TxDesc */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define QSLT_BK                                 0x1
 #define QSLT_BE                                 0x0
@@ -332,6 +357,7 @@ extern u32 rt_global_debug_component;
 #define IEEE80211_WATCH_DOG_TIME    2000
 #define		PHY_Beacon_RSSI_SLID_WIN_MAX		10
 <<<<<<< HEAD
+<<<<<<< HEAD
 //for txpowertracking by amy
 #define		OFDM_Table_Length	19
 #define	CCK_Table_length	12
@@ -340,6 +366,8 @@ extern u32 rt_global_debug_component;
 typedef struct _tx_desc_819x_usb {
 	//DWORD 0
 =======
+=======
+>>>>>>> v3.18
 /* For Tx Power Tracking */
 #define		OFDM_Table_Length	19
 #define	CCK_Table_length	12
@@ -347,6 +375,9 @@ typedef struct _tx_desc_819x_usb {
 /* For rtl819x */
 typedef struct _tx_desc_819x_usb {
 	/* DWORD 0 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16	PktSize;
 	u8	Offset;
@@ -358,7 +389,11 @@ typedef struct _tx_desc_819x_usb {
 	u8	OWN:1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//DWORD 1
+=======
+	/* DWORD 1 */
+>>>>>>> v3.18
 =======
 	/* DWORD 1 */
 >>>>>>> v3.18
@@ -377,9 +412,14 @@ typedef struct _tx_desc_819x_usb {
 	u8	SecType:2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//DWORD 2
 	u16	TxBufferSize;
 	//u16 Reserved2;
+=======
+	/* DWORD 2 */
+	u16	TxBufferSize;
+>>>>>>> v3.18
 =======
 	/* DWORD 2 */
 	u16	TxBufferSize;
@@ -388,6 +428,7 @@ typedef struct _tx_desc_819x_usb {
 	u8	Reserved3:1;
 	u8	Reserved4;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//DWORD 3, 4, 5
 	u32	Reserved5;
@@ -399,6 +440,8 @@ typedef struct _tx_desc_819x_usb {
 typedef struct _tx_desc_819x_usb_aggr_subframe {
 	//DWORD 0
 =======
+=======
+>>>>>>> v3.18
 	/* DWORD 3, 4, 5 */
 	u32	Reserved5;
 	u32	Reserved6;
@@ -408,13 +451,20 @@ typedef struct _tx_desc_819x_usb_aggr_subframe {
 #ifdef USB_TX_DRIVER_AGGREGATION_ENABLE
 typedef struct _tx_desc_819x_usb_aggr_subframe {
 	/* DWORD 0 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16	PktSize;
 	u8	Offset;
 	u8	TxFWInfoSize;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//DWORD 1
+=======
+	/* DWORD 1 */
+>>>>>>> v3.18
 =======
 	/* DWORD 1 */
 >>>>>>> v3.18
@@ -433,7 +483,11 @@ typedef struct _tx_desc_819x_usb_aggr_subframe {
 	u8	PacketID:7;
 	u8	OWN:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }tx_desc_819x_usb_aggr_subframe, *ptx_desc_819x_usb_aggr_subframe;
+=======
+} tx_desc_819x_usb_aggr_subframe, *ptx_desc_819x_usb_aggr_subframe;
+>>>>>>> v3.18
 =======
 } tx_desc_819x_usb_aggr_subframe, *ptx_desc_819x_usb_aggr_subframe;
 >>>>>>> v3.18
@@ -443,7 +497,11 @@ typedef struct _tx_desc_819x_usb_aggr_subframe {
 
 typedef struct _tx_desc_cmd_819x_usb {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//DWORD 0
+=======
+	/* DWORD 0 */
+>>>>>>> v3.18
 =======
 	/* DWORD 0 */
 >>>>>>> v3.18
@@ -457,8 +515,12 @@ typedef struct _tx_desc_cmd_819x_usb {
 	u8	OWN:1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//DOWRD 1
 	//u32	Reserved3;
+=======
+	/* DOWRD 1 */
+>>>>>>> v3.18
 =======
 	/* DOWRD 1 */
 >>>>>>> v3.18
@@ -467,6 +529,7 @@ typedef struct _tx_desc_cmd_819x_usb {
 	u8	QueueSelect;
 	u8	Reserved4;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//DOWRD 2
 	u16	TxBufferSize;
@@ -512,6 +575,8 @@ typedef struct _tx_fwinfo_819x_usb {
 	//u32                Reserved;
 }tx_fwinfo_819x_usb, *ptx_fwinfo_819x_usb;
 =======
+=======
+>>>>>>> v3.18
 	/* DOWRD 2 */
 	u16	TxBufferSize;
 	u16	Reserved5;
@@ -555,6 +620,9 @@ typedef struct _tx_fwinfo_819x_usb {
 	u32	Tx_INFO_RSVD:6;
 	u32	PacketID:13;
 } tx_fwinfo_819x_usb, *ptx_fwinfo_819x_usb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 typedef struct rtl8192_rx_info {
@@ -562,15 +630,21 @@ typedef struct rtl8192_rx_info {
 	struct net_device *dev;
 	u8 out_pipe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }rtl8192_rx_info ;
 
 typedef struct rx_desc_819x_usb{
 	//DOWRD 0
 =======
+=======
+>>>>>>> v3.18
 } rtl8192_rx_info ;
 
 typedef struct rx_desc_819x_usb {
 	/* DOWRD 0 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16                 Length:14;
 	u16                 CRC32:1;
@@ -579,6 +653,7 @@ typedef struct rx_desc_819x_usb {
 	u8                  Shift:2;
 	u8                  PHYStatus:1;
 	u8                  SWDec:1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//u8                LastSeg:1;
 	//u8                FirstSeg:1;
@@ -601,6 +676,8 @@ typedef struct rx_desc_819x_usb {
 typedef struct _rx_desc_819x_usb_aggr_subframe{
 	//DOWRD 0
 =======
+=======
+>>>>>>> v3.18
 	u8                  Reserved1:4;
 
 	/* DWORD 1 */
@@ -610,6 +687,9 @@ typedef struct _rx_desc_819x_usb_aggr_subframe{
 #ifdef USB_RX_AGGREGATION_SUPPORT
 typedef struct _rx_desc_819x_usb_aggr_subframe {
 	/* DOWRD 0 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16			Length:14;
 	u16			CRC32:1;
@@ -617,7 +697,11 @@ typedef struct _rx_desc_819x_usb_aggr_subframe {
 	u8			Offset;
 	u8			RxDrvInfoSize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//DOWRD 1
+=======
+	/* DOWRD 1 */
+>>>>>>> v3.18
 =======
 	/* DOWRD 1 */
 >>>>>>> v3.18
@@ -627,6 +711,7 @@ typedef struct _rx_desc_819x_usb_aggr_subframe {
 	u8			Reserved1:4;
 	u8			Reserved2;
 	u16			Reserved3;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//DWORD 2
 	//u4Byte		Reserved3;
@@ -638,11 +723,16 @@ typedef struct _rx_desc_819x_usb_aggr_subframe {
 typedef struct rx_drvinfo_819x_usb{
 	//DWORD 0
 =======
+=======
+>>>>>>> v3.18
 } rx_desc_819x_usb_aggr_subframe, *prx_desc_819x_usb_aggr_subframe;
 #endif
 
 typedef struct rx_drvinfo_819x_usb {
 	/* DWORD 0 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16                 Reserved1:12;
 	u16                 PartAggr:1;
@@ -661,6 +751,7 @@ typedef struct rx_drvinfo_819x_usb {
 	u8                  Reserved4:1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//DWORD 1
 	u32                  TSFL;
 
@@ -670,6 +761,8 @@ typedef struct rx_drvinfo_819x_usb {
 #define MAX_DEV_ADDR_SIZE		8  /* support till 64 bit bus width OS */
 #define MAX_FIRMWARE_INFORMATION_SIZE   32 /*2006/04/30 by Emily forRTL8190*/
 =======
+=======
+>>>>>>> v3.18
 	/* DWORD 1 */
 	u32                  TSFL;
 
@@ -679,6 +772,9 @@ typedef struct rx_drvinfo_819x_usb {
 #define MAX_DEV_ADDR_SIZE		8
 /* For RTL8190 */
 #define MAX_FIRMWARE_INFORMATION_SIZE   32
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MAX_802_11_HEADER_LENGTH        (40 + MAX_FIRMWARE_INFORMATION_SIZE)
 #define ENCRYPTION_MAX_OVERHEAD		128
@@ -686,7 +782,10 @@ typedef struct rx_drvinfo_819x_usb {
 #define TX_PACKET_SHIFT_BYTES		(USB_HWDESC_HEADER_LEN + sizeof(tx_fwinfo_819x_usb))
 #define MAX_FRAGMENT_COUNT		8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef RTL8192U
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef USB_TX_DRIVER_AGGREGATION_ENABLE
@@ -694,6 +793,7 @@ typedef struct rx_drvinfo_819x_usb {
 #else
 #define MAX_TRANSMIT_BUFFER_SIZE			8000
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else
 #define MAX_TRANSMIT_BUFFER_SIZE	(1600+(MAX_802_11_HEADER_LENGTH+ENCRYPTION_MAX_OVERHEAD)*MAX_FRAGMENT_COUNT)
@@ -712,6 +812,8 @@ typedef enum rf_optype
 /* 8190 Loopback Mode definition */
 typedef enum _rtl819xUsb_loopback{
 =======
+=======
+>>>>>>> v3.18
 #ifdef USB_TX_DRIVER_AGGREGATION_ENABLE
 #define TX_PACKET_DRVAGGR_SUBFRAME_SHIFT_BYTES (sizeof(tx_desc_819x_usb_aggr_subframe) + sizeof(tx_fwinfo_819x_usb))
 #endif
@@ -725,11 +827,15 @@ typedef enum rf_optype {
 } rf_op_type;
 /* 8190 Loopback Mode definition */
 typedef enum _rtl819xUsb_loopback {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	RTL819xU_NO_LOOPBACK = 0,
 	RTL819xU_MAC_LOOPBACK = 1,
 	RTL819xU_DMA_LOOPBACK = 2,
 	RTL819xU_CCK_LOOPBACK = 3,
+<<<<<<< HEAD
 <<<<<<< HEAD
 }rtl819xUsb_loopback_e;
 
@@ -741,6 +847,8 @@ typedef enum _desc_packet_type_e{
 
 typedef enum _firmware_status{
 =======
+=======
+>>>>>>> v3.18
 } rtl819xUsb_loopback_e;
 
 /* due to rtl8192 firmware */
@@ -750,6 +858,9 @@ typedef enum _desc_packet_type_e {
 } desc_packet_type_e;
 
 typedef enum _firmware_status {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	FW_STATUS_0_INIT = 0,
 	FW_STATUS_1_MOVE_BOOT_CODE = 1,
@@ -758,7 +869,11 @@ typedef enum _firmware_status {
 	FW_STATUS_4_MOVE_DATA_CODE = 4,
 	FW_STATUS_5_READY = 5,
 <<<<<<< HEAD
+<<<<<<< HEAD
 }firmware_status_e;
+=======
+} firmware_status_e;
+>>>>>>> v3.18
 =======
 } firmware_status_e;
 >>>>>>> v3.18
@@ -766,6 +881,7 @@ typedef enum _firmware_status {
 typedef struct _rt_firmare_seg_container {
 	u16	seg_size;
 	u8	*seg_ptr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 }fw_seg_container, *pfw_seg_container;
 typedef struct _rt_firmware{
@@ -783,6 +899,8 @@ typedef struct _rt_firmware_info_819xUsb{
 	u8		sz_info[16];
 }rt_firmware_info_819xUsb, *prt_firmware_info_819xUsb;
 =======
+=======
+>>>>>>> v3.18
 } fw_seg_container, *pfw_seg_container;
 typedef struct _rt_firmware {
 	firmware_status_e firmware_status;
@@ -798,6 +916,9 @@ typedef struct _rt_firmware {
 typedef struct _rt_firmware_info_819xUsb {
 	u8		sz_info[16];
 } rt_firmware_info_819xUsb, *prt_firmware_info_819xUsb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Firmware Queue Layout */
@@ -840,14 +961,20 @@ typedef struct _rt_firmware_info_819xUsb {
 #define RSVD_FW_QUEUE_PAGE_BCN_SHIFT	0x00
 #define RSVD_FW_QUEUE_PAGE_PUB_SHIFT	0x08
 <<<<<<< HEAD
+<<<<<<< HEAD
 //=================================================================
 //=================================================================
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * =================================================================
  * =================================================================
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define EPROM_93c46 0
@@ -878,7 +1005,11 @@ typedef enum _WIRELESS_MODE {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RTL_IOCTL_WPA_SUPPLICANT		SIOCIWFIRSTPRIV+30
+=======
+#define RTL_IOCTL_WPA_SUPPLICANT		(SIOCIWFIRSTPRIV + 30)
+>>>>>>> v3.18
 =======
 #define RTL_IOCTL_WPA_SUPPLICANT		(SIOCIWFIRSTPRIV + 30)
 >>>>>>> v3.18
@@ -890,7 +1021,11 @@ typedef struct buffer {
 } buffer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct rtl_reg_debug{
+=======
+typedef struct rtl_reg_debug {
+>>>>>>> v3.18
 =======
 typedef struct rtl_reg_debug {
 >>>>>>> v3.18
@@ -903,7 +1038,11 @@ typedef struct rtl_reg_debug {
 	} head;
 	unsigned char buf[0xff];
 <<<<<<< HEAD
+<<<<<<< HEAD
 }rtl_reg_debug;
+=======
+} rtl_reg_debug;
+>>>>>>> v3.18
 =======
 } rtl_reg_debug;
 >>>>>>> v3.18
@@ -916,6 +1055,7 @@ typedef struct rtl_reg_debug {
 typedef struct _rt_9x_tx_rate_history {
 	u32             cck[4];
 	u32             ofdm[8];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// HT_MCS[0][]: BW=0 SG=0
 	// HT_MCS[1][]: BW=1 SG=0
@@ -940,6 +1080,8 @@ typedef struct Stats {
 //	unsigned long rxreset;
 //	unsigned long rxnopointer;
 =======
+=======
+>>>>>>> v3.18
 	u32             ht_mcs[4][16];
 } rt_tx_rahis_t, *prt_tx_rahis_t;
 typedef struct _RT_SMOOTH_DATA_4RF {
@@ -954,11 +1096,15 @@ typedef struct _RT_SMOOTH_DATA_4RF {
 /* Stats seems messed up, clean it ASAP */
 typedef struct Stats {
 	unsigned long txrdu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long rxok;
 	unsigned long rxframgment;
 	unsigned long rxurberr;
 	unsigned long rxstaterr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long received_rate_histogram[4][32];	//0: Total, 1:OK, 2:CRC, 3:ICV, 2007 07 03 cosa
 	unsigned long received_preamble_GI[2][32];		//0: Long preamble/GI, 1:Short preamble/GI
@@ -987,6 +1133,8 @@ typedef struct Stats {
 //	unsigned long txbeacon;
 //	unsigned long txbeaconerr;
 =======
+=======
+>>>>>>> v3.18
 	/* 0: Total, 1: OK, 2: CRC, 3: ICV */
 	unsigned long received_rate_histogram[4][32];
 	/* 0: Long preamble/GI, 1: Short preamble/GI */
@@ -1008,6 +1156,9 @@ typedef struct Stats {
 	unsigned long txresumed;
 	unsigned long txnpokint;
 	unsigned long txoverflow;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long txlpokint;
 	unsigned long txlpdrop;
@@ -1058,6 +1209,7 @@ typedef struct Stats {
 	unsigned long slide_signal_strength[100];
 	unsigned long slide_evm[100];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long slide_rssi_total;	// For recording sliding window's RSSI value
 	unsigned long slide_evm_total;	// For recording sliding window's EVM value
 	long signal_strength; // Transformed, in dbm. Beautified signal strength for UI, not correct.
@@ -1065,6 +1217,8 @@ typedef struct Stats {
 	long last_signal_strength_inpercent;
 	long recv_signal_power;	// Correct smoothed ss in Dbm, only used in driver to report real power now.
 =======
+=======
+>>>>>>> v3.18
 	/* For recording sliding window's RSSI value */
 	unsigned long slide_rssi_total;
 	/* For recording sliding window's EVM value */
@@ -1076,14 +1230,23 @@ typedef struct Stats {
 	/* Correct smoothed ss in dbm, only used in driver
 	 * to report real power now */
 	long recv_signal_power;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 rx_rssi_percentage[4];
 	u8 rx_evm_percentage[2];
 	long rxSNRdB[4];
 	rt_tx_rahis_t txrate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 Slide_Beacon_pwdb[100];     //cosa add for beacon rssi
 	u32 Slide_Beacon_Total;         //cosa add for beacon rssi
+=======
+	/* For beacon RSSI */
+	u32 Slide_Beacon_pwdb[100];
+	u32 Slide_Beacon_Total;
+>>>>>>> v3.18
 =======
 	/* For beacon RSSI */
 	u32 Slide_Beacon_pwdb[100];
@@ -1096,7 +1259,11 @@ typedef struct Stats {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Bandwidth Offset
+=======
+/* Bandwidth Offset */
+>>>>>>> v3.18
 =======
 /* Bandwidth Offset */
 >>>>>>> v3.18
@@ -1105,7 +1272,10 @@ typedef struct Stats {
 #define HAL_PRIME_CHNL_OFFSET_UPPER			2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //+by amy 080507
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1116,6 +1286,7 @@ typedef struct	ChnlAccessSetting {
 	u16 EIFS_Timer;
 	u16 CWminIndex;
 	u16 CWmaxIndex;
+<<<<<<< HEAD
 <<<<<<< HEAD
 }*PCHANNEL_ACCESS_SETTING,CHANNEL_ACCESS_SETTING;
 
@@ -1141,6 +1312,8 @@ typedef struct _BB_REGISTER_DEFINITION{
 
 typedef enum _RT_RF_TYPE_819xU{
 =======
+=======
+>>>>>>> v3.18
 } *PCHANNEL_ACCESS_SETTING, CHANNEL_ACCESS_SETTING;
 
 typedef struct _BB_REGISTER_DEFINITION {
@@ -1191,6 +1364,9 @@ typedef struct _BB_REGISTER_DEFINITION {
 } BB_REGISTER_DEFINITION_T, *PBB_REGISTER_DEFINITION_T;
 
 typedef enum _RT_RF_TYPE_819xU {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	RF_TYPE_MIN = 0,
 	RF_8225,
@@ -1198,7 +1374,11 @@ typedef enum _RT_RF_TYPE_819xU {
 	RF_8258,
 	RF_PSEUDO_11N = 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 }RT_RF_TYPE_819xU, *PRT_RF_TYPE_819xU;
+=======
+} RT_RF_TYPE_819xU, *PRT_RF_TYPE_819xU;
+>>>>>>> v3.18
 =======
 } RT_RF_TYPE_819xU, *PRT_RF_TYPE_819xU;
 >>>>>>> v3.18
@@ -1220,9 +1400,15 @@ typedef struct _rate_adaptive {
 	u32				low_rssi_threshold_ratr_40M;
 	u32				low_rssi_threshold_ratr_20M;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8				ping_rssi_enable;	//cosa add for test
 	u32				ping_rssi_ratr;	//cosa add for test
 	u32				ping_rssi_thresh_for_ra;//cosa add for test
+=======
+	u8				ping_rssi_enable;
+	u32				ping_rssi_ratr;
+	u32				ping_rssi_thresh_for_ra;
+>>>>>>> v3.18
 =======
 	u8				ping_rssi_enable;
 	u32				ping_rssi_ratr;
@@ -1242,9 +1428,15 @@ typedef struct _txbbgain_struct {
 
 typedef struct _ccktxbbgain_struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//The Value is from a22 to a29 one Byte one time is much Safer
 	u8	ccktxbb_valuearray[8];
 } ccktxbbgain_struct,*pccktxbbgain_struct;
+=======
+	/* The value is from a22 to a29, one byte one time is much safer */
+	u8	ccktxbb_valuearray[8];
+} ccktxbbgain_struct, *pccktxbbgain_struct;
+>>>>>>> v3.18
 =======
 	/* The value is from a22 to a29, one byte one time is much safer */
 	u8	ccktxbb_valuearray[8];
@@ -1261,7 +1453,10 @@ typedef struct _init_gain {
 
 } init_gain, *pinit_gain;
 <<<<<<< HEAD
+<<<<<<< HEAD
 //by amy 0606
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1280,6 +1475,7 @@ typedef struct _phy_ofdm_rx_status_report_819xusb {
 	u8	sgi_en;
 	u8  rxsc_sgien_exflg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }phy_sts_ofdm_819xusb_t;
 
 typedef struct _phy_cck_rx_status_report_819xusb {
@@ -1293,6 +1489,8 @@ typedef struct _phy_cck_rx_status_report_819xusb {
 
 typedef struct _phy_ofdm_rx_status_rxsc_sgien_exintfflag{
 =======
+=======
+>>>>>>> v3.18
 } phy_sts_ofdm_819xusb_t;
 
 typedef struct _phy_cck_rx_status_report_819xusb {
@@ -1306,16 +1504,25 @@ typedef struct _phy_cck_rx_status_report_819xusb {
 
 
 typedef struct _phy_ofdm_rx_status_rxsc_sgien_exintfflag {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8			reserved:4;
 	u8			rxsc:2;
 	u8			sgi_en:1;
 	u8			ex_intf_flag:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }phy_ofdm_rx_status_rxsc_sgien_exintfflag;
 
 typedef enum _RT_CUSTOMER_ID
 {
+=======
+} phy_ofdm_rx_status_rxsc_sgien_exintfflag;
+
+typedef enum _RT_CUSTOMER_ID {
+>>>>>>> v3.18
 =======
 } phy_ofdm_rx_status_rxsc_sgien_exintfflag;
 
@@ -1331,7 +1538,11 @@ typedef enum _RT_CUSTOMER_ID {
 	RT_CID_819x_RUNTOP = 7,
 	RT_CID_819x_Senao = 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RT_CID_TOSHIBA = 9,	// Merge by Jacken, 2008/01/31.
+=======
+	RT_CID_TOSHIBA = 9,
+>>>>>>> v3.18
 =======
 	RT_CID_TOSHIBA = 9,
 >>>>>>> v3.18
@@ -1339,6 +1550,7 @@ typedef enum _RT_CUSTOMER_ID {
 	RT_CID_Nettronix = 11,
 	RT_CID_DLINK = 12,
 	RT_CID_PRONET = 13,
+<<<<<<< HEAD
 <<<<<<< HEAD
 }RT_CUSTOMER_ID, *PRT_CUSTOMER_ID;
 
@@ -1355,6 +1567,8 @@ typedef	enum _LED_STRATEGY_8190{
 	HW_LED, // HW control 2 LEDs, LED0 and LED1 (there are 4 different control modes)
 }LED_STRATEGY_8190, *PLED_STRATEGY_8190;
 =======
+=======
+>>>>>>> v3.18
 } RT_CUSTOMER_ID, *PRT_CUSTOMER_ID;
 
 /*
@@ -1372,6 +1586,9 @@ typedef	enum _LED_STRATEGY_8190 {
 	/* HW control 2 LEDs, LED0 and LED1 (4 different control modes) */
 	HW_LED,
 } LED_STRATEGY_8190, *PLED_STRATEGY_8190;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 typedef enum _RESET_TYPE {
@@ -1382,7 +1599,11 @@ typedef enum _RESET_TYPE {
 
 /* The simple tx command OP code. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef enum _tag_TxCmd_Config_Index{
+=======
+typedef enum _tag_TxCmd_Config_Index {
+>>>>>>> v3.18
 =======
 typedef enum _tag_TxCmd_Config_Index {
 >>>>>>> v3.18
@@ -1394,17 +1615,23 @@ typedef enum _tag_TxCmd_Config_Index {
 	TXCMD_SET_TX_PWR_TRACKING			= 0xFF900005,
 	TXCMD_XXXX_CTRL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 }DCMD_TXCMD_OP;
 
 typedef struct r8192_priv {
 	struct usb_device *udev;
 	//added for maintain info from eeprom
 =======
+=======
+>>>>>>> v3.18
 } DCMD_TXCMD_OP;
 
 typedef struct r8192_priv {
 	struct usb_device *udev;
 	/* For maintain info from eeprom */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	short epromtype;
 	u16 eeprom_vid;
@@ -1418,12 +1645,15 @@ typedef struct r8192_priv {
 	struct ieee80211_device *ieee80211;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	short card_8192; /* O: rtl8192, 1:rtl8185 V B/C, 2:rtl8185 V D */
 	u8 card_8192_version; /* if TCR reports card V B/C this discriminates */
 //	short phy_ver; /* meaningful for rtl8225 1:A 2:B 3:C */
 	short enable_gpio0;
 	enum card_type {PCI,MINIPCI,CARDBUS,USB}card_type;
 =======
+=======
+>>>>>>> v3.18
 	/* O: rtl8192, 1: rtl8185 V B/C, 2: rtl8185 V D */
 	short card_8192;
 	/* If TCR reports card V B/C, this discriminates */
@@ -1432,11 +1662,15 @@ typedef struct r8192_priv {
 	enum card_type {
 		PCI, MINIPCI, CARDBUS, USB
 	} card_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	short hw_plcp_len;
 	short plcp_preamble_mode;
 
 	spinlock_t irq_lock;
+<<<<<<< HEAD
 <<<<<<< HEAD
 //	spinlock_t irq_th_lock;
 	spinlock_t tx_lock;
@@ -1447,16 +1681,22 @@ typedef struct r8192_priv {
 //	short irq_enabled;
 //	struct net_device *dev; //comment this out.
 =======
+=======
+>>>>>>> v3.18
 	spinlock_t tx_lock;
 	struct mutex mutex;
 
 	u16 irq_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	short chan;
 	short sens;
 	short max_sens;
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//	u8 chtxpwr[15]; //channels from 1 to 14, 0 not used
 //	u8 chtxpwr_ofdm[15]; //channels from 1 to 14, 0 not used
@@ -1501,6 +1741,8 @@ typedef struct r8192_priv {
 //	u32 *rxringtail;
 //	dma_addr_t rxringdma;
 =======
+=======
+>>>>>>> v3.18
 	short up;
 	/* If 1, allow bad crc frame, reception in monitor mode */
 	short crcmon;
@@ -1521,6 +1763,9 @@ typedef struct r8192_priv {
 	struct iw_statistics wstats;
 
 	/* RX stuff */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct urb **rx_urb;
 	struct urb **rx_cmd_urb;
@@ -1529,7 +1774,11 @@ typedef struct r8192_priv {
 #endif
 #ifdef THOMAS_TASKLET
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t irt_counter;//count for irq_rx_tasklet
+=======
+	atomic_t irt_counter; /* count for irq_rx_tasklet */
+>>>>>>> v3.18
 =======
 	atomic_t irt_counter; /* count for irq_rx_tasklet */
 >>>>>>> v3.18
@@ -1540,7 +1789,10 @@ typedef struct r8192_priv {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* modified by davad for Rx process */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
        struct sk_buff_head rx_queue;
@@ -1548,7 +1800,11 @@ typedef struct r8192_priv {
        struct work_struct qos_activate;
 	short  tx_urb_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t tx_pending[0x10];//UART_PRIORITY+1
+=======
+	atomic_t tx_pending[0x10]; /* UART_PRIORITY + 1 */
+>>>>>>> v3.18
 =======
 	atomic_t tx_pending[0x10]; /* UART_PRIORITY + 1 */
 >>>>>>> v3.18
@@ -1558,17 +1814,23 @@ typedef struct r8192_priv {
 	struct urb *rxurb_task;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//2 Tx Related variables
 	u16	ShortRetryLimit;
 	u16	LongRetryLimit;
 	u32	TransmitConfig;
 	u8	RegCWinMin;		// For turbo mode CW adaptive. Added by Annie, 2005-10-27.
 =======
+=======
+>>>>>>> v3.18
 	/* Tx Related variables */
 	u16	ShortRetryLimit;
 	u16	LongRetryLimit;
 	u32	TransmitConfig;
 	u8	RegCWinMin;	/* For turbo mode CW adaptive */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	u32     LastRxDescTSFHigh;
@@ -1576,7 +1838,11 @@ typedef struct r8192_priv {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//2 Rx Related variables
+=======
+	/* Rx Related variables */
+>>>>>>> v3.18
 =======
 	/* Rx Related variables */
 >>>>>>> v3.18
@@ -1595,7 +1861,11 @@ typedef struct r8192_priv {
 
 /**********************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//for rtl819xUsb
+=======
+	/* For rtl819xUsb */
+>>>>>>> v3.18
 =======
 	/* For rtl819xUsb */
 >>>>>>> v3.18
@@ -1605,7 +1875,11 @@ typedef struct r8192_priv {
 	bool	bDcut;
 	bool bCurrentRxAggrEnable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 Rf_Mode; //add for Firmware RF -R/W switch
+=======
+	u8 Rf_Mode;	/* For Firmware RF -R/W switch */
+>>>>>>> v3.18
 =======
 	u8 Rf_Mode;	/* For Firmware RF -R/W switch */
 >>>>>>> v3.18
@@ -1616,6 +1890,7 @@ typedef struct r8192_priv {
 	u8 EEPROMPwDiff;
 	u8 EEPROMCrystalCap;
 	u8 EEPROM_Def_Ver;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 EEPROMTxPowerLevelCCK;// CCK channel 1~14
 	u8 EEPROMTxPowerLevelCCK_V1[3];
@@ -1643,6 +1918,8 @@ typedef struct r8192_priv {
 
 	//for set channel
 =======
+=======
+>>>>>>> v3.18
 	u8 EEPROMTxPowerLevelCCK;		/* CCK channel 1~14 */
 	u8 EEPROMTxPowerLevelCCK_V1[3];
 	u8 EEPROMTxPowerLevelOFDM24G[3];	/* OFDM 2.4G channel 1~14 */
@@ -1668,6 +1945,9 @@ typedef struct r8192_priv {
 	long	undecorated_smoothed_pwdb;
 
 	/* For set channel */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8	SwChnlInProgress;
 	u8	SwChnlStage;
@@ -1675,6 +1955,7 @@ typedef struct r8192_priv {
 	u8	SetBWModeInProgress;
 	HT_CHANNEL_WIDTH		CurrentChannelBW;
 	u8      ChannelPlan;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// 8190 40MHz mode
 	//
@@ -1696,6 +1977,8 @@ typedef struct r8192_priv {
 	bool	bDynamicTxHighPower;  // Tx high power state
 	bool	bDynamicTxLowPower;  // Tx low power state
 =======
+=======
+>>>>>>> v3.18
 	/* 8190 40MHz mode */
 	/* Control channel sub-carrier */
 	u8	nCur40MhzPrimeSC;
@@ -1713,11 +1996,15 @@ typedef struct r8192_priv {
 	bool	bdynamic_txpower;
 	bool	bDynamicTxHighPower;
 	bool	bDynamicTxLowPower;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool	bLastDTPFlag_High;
 	bool	bLastDTPFlag_Low;
 
 	bool	bstore_last_dtpflag;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool	bstart_txctrl_bydtp;   //Define to discriminate on High power State or on sitesuvey to change Tx gain index
 	//Add by amy for Rate Adaptive
@@ -1731,6 +2018,8 @@ typedef struct r8192_priv {
 	u8			   CCK_index;
 	//2007/09/10 Mars Add CCK TX Power Tracking
 =======
+=======
+>>>>>>> v3.18
 	/* Define to discriminate on High power State or
 	 * on sitesurvey to change Tx gain index */
 	bool	bstart_txctrl_bydtp;
@@ -1743,6 +2032,9 @@ typedef struct r8192_priv {
 	u8		OFDM_index;
 	u8		CCK_index;
 	/* CCK TX Power Tracking */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ccktxbbgain_struct	cck_txbbgain_table[CCKTxBBGainTableLength];
 	ccktxbbgain_struct	cck_txbbgain_ch14_table[CCKTxBBGainTableLength];
@@ -1761,10 +2053,16 @@ typedef struct r8192_priv {
 	bool btxpowerdata_readfromEEPORM;
 	u16	TSSI_13dBm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//For Backup Initial Gain
 	init_gain initgain_backup;
 	u8 DefaultInitialGain[4];
 	// For EDCA Turbo mode, Added by amy 080515.
+=======
+	init_gain initgain_backup;
+	u8 DefaultInitialGain[4];
+	/* For EDCA Turbo mode */
+>>>>>>> v3.18
 =======
 	init_gain initgain_backup;
 	u8 DefaultInitialGain[4];
@@ -1775,7 +2073,11 @@ typedef struct r8192_priv {
 	bool		bis_cur_rdlstate;
 	struct timer_list fsync_timer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool bfsync_processing;	// 500ms Fsync timer is active or not
+=======
+	bool bfsync_processing;	/* 500ms Fsync timer is active or not */
+>>>>>>> v3.18
 =======
 	bool bfsync_processing;	/* 500ms Fsync timer is active or not */
 >>>>>>> v3.18
@@ -1787,6 +2089,7 @@ typedef struct r8192_priv {
 	u8	framesync;
 	u32	framesyncC34;
 	u8	framesyncMonitor;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		//Added by amy 080516  for RX related
 	u16	nrxAMPDU_size;
@@ -1800,6 +2103,8 @@ typedef struct r8192_priv {
 	bool bpbc_pressed;
 	//by amy for debug
 =======
+=======
+>>>>>>> v3.18
 	u16	nrxAMPDU_size;
 	u8	nrxAMPDU_aggr_num;
 
@@ -1808,6 +2113,9 @@ typedef struct r8192_priv {
 
 	u32 reset_count;
 	bool bpbc_pressed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 txpower_checkcnt;
 	u32 txpower_tracking_callback_cnt;
@@ -1818,7 +2126,11 @@ typedef struct r8192_priv {
 	u8 tx_fwinfo_force_subcarriermode;
 	u8 tx_fwinfo_force_subcarrierval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//by amy for silent reset
+=======
+	/* For silent reset */
+>>>>>>> v3.18
 =======
 	/* For silent reset */
 >>>>>>> v3.18
@@ -1835,7 +2147,11 @@ typedef struct r8192_priv {
 	u16		SifsTime;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//define work item by amy 080526
+=======
+	/* Define work item */
+>>>>>>> v3.18
 =======
 	/* Define work item */
 >>>>>>> v3.18
@@ -1847,6 +2163,7 @@ typedef struct r8192_priv {
 	struct delayed_work gpio_change_rf_wq;
 	struct delayed_work initialgain_operate_wq;
 	struct workqueue_struct *priv_wq;
+<<<<<<< HEAD
 <<<<<<< HEAD
 }r8192_priv;
 
@@ -1868,6 +2185,8 @@ typedef enum{
 	VO_PRIORITY,
 	VI_PRIORITY, //0x05
 =======
+=======
+>>>>>>> v3.18
 } r8192_priv;
 
 /* For rtl8187B */
@@ -1877,13 +2196,20 @@ typedef enum{
 	NORM_PRIORITY,
 	VO_PRIORITY,
 	VI_PRIORITY,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BE_PRIORITY,
 	BK_PRIORITY,
 	RSVD2,
 	RSVD3,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BEACON_PRIORITY, //0x0A
+=======
+	BEACON_PRIORITY,
+>>>>>>> v3.18
 =======
 	BEACON_PRIORITY,
 >>>>>>> v3.18
@@ -1891,6 +2217,7 @@ typedef enum{
 	MANAGE_PRIORITY,
 	RSVD4,
 	RSVD5,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	UART_PRIORITY //0x0F
 } priority_t;
@@ -1913,6 +2240,8 @@ bool init_firmware(struct net_device *dev);
 short rtl819xU_tx_cmd(struct net_device *dev, struct sk_buff *skb);
 short rtl8192_tx(struct net_device *dev, struct sk_buff* skb);
 =======
+=======
+>>>>>>> v3.18
 	UART_PRIORITY
 } priority_t;
 
@@ -1925,11 +2254,15 @@ typedef enum {
 bool init_firmware(struct net_device *dev);
 short rtl819xU_tx_cmd(struct net_device *dev, struct sk_buff *skb);
 short rtl8192_tx(struct net_device *dev, struct sk_buff *skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 u32 read_cam(struct net_device *dev, u8 addr);
 void write_cam(struct net_device *dev, u8 addr, u32 data);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 u8 read_nic_byte(struct net_device *dev, int x);
 u8 read_nic_byte_E(struct net_device *dev, int x);
@@ -1940,6 +2273,8 @@ void write_nic_byte_E(struct net_device *dev, int x,u8 y);
 void write_nic_word(struct net_device *dev, int x,u16 y);
 void write_nic_dword(struct net_device *dev, int x,u32 y);
 =======
+=======
+>>>>>>> v3.18
 int read_nic_byte(struct net_device *dev, int x, u8 *data);
 int read_nic_byte_E(struct net_device *dev, int x, u8 *data);
 int read_nic_dword(struct net_device *dev, int x, u32 *data);
@@ -1948,6 +2283,9 @@ void write_nic_byte(struct net_device *dev, int x, u8 y);
 void write_nic_byte_E(struct net_device *dev, int x, u8 y);
 void write_nic_word(struct net_device *dev, int x, u16 y);
 void write_nic_dword(struct net_device *dev, int x, u32 y);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void force_pci_posting(struct net_device *dev);
 
@@ -1957,23 +2295,33 @@ void rtl8192_tx_enable(struct net_device *);
 
 void rtl8192_disassociate(struct net_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 //void fix_rx_fifo(struct net_device *dev);
 void rtl8185_set_rf_pins_enable(struct net_device *dev,u32 a);
 
 void rtl8192_set_anaparam(struct net_device *dev,u32 a);
 void rtl8185_set_anaparam2(struct net_device *dev,u32 a);
 =======
+=======
+>>>>>>> v3.18
 void rtl8185_set_rf_pins_enable(struct net_device *dev, u32 a);
 
 void rtl8192_set_anaparam(struct net_device *dev, u32 a);
 void rtl8185_set_anaparam2(struct net_device *dev, u32 a);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void rtl8192_update_msr(struct net_device *dev);
 int rtl8192_down(struct net_device *dev);
 int rtl8192_up(struct net_device *dev);
 void rtl8192_commit(struct net_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl8192_set_chan(struct net_device *dev,short ch);
+=======
+void rtl8192_set_chan(struct net_device *dev, short ch);
+>>>>>>> v3.18
 =======
 void rtl8192_set_chan(struct net_device *dev, short ch);
 >>>>>>> v3.18
@@ -1983,16 +2331,22 @@ void write_phy_ofdm(struct net_device *dev, u8 adr, u32 data);
 void rtl8185_tx_antenna(struct net_device *dev, u8 ant);
 void rtl8192_set_rxconf(struct net_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 //short check_nic_enough_desc(struct net_device *dev, priority_t priority);
 extern void rtl819xusb_beacon_tx(struct net_device *dev,u16  tx_rate);
 
 void EnableHWSecurityConfig8192(struct net_device *dev);
 void setKey(struct net_device *dev, u8 EntryNo, u8 KeyIndex, u16 KeyType, u8 *MacAddr, u8 DefaultKey, u32 *KeyContent );
 =======
+=======
+>>>>>>> v3.18
 extern void rtl819xusb_beacon_tx(struct net_device *dev, u16 tx_rate);
 
 void EnableHWSecurityConfig8192(struct net_device *dev);
 void setKey(struct net_device *dev, u8 EntryNo, u8 KeyIndex, u16 KeyType, u8 *MacAddr, u8 DefaultKey, u32 *KeyContent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

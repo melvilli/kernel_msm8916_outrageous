@@ -16,9 +16,14 @@
 #include <linux/delay.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/gpio.h>
 #include <linux/of_platform.h>
 #include <linux/of_gpio.h>
+=======
+#include <linux/gpio/consumer.h>
+#include <linux/of_platform.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio/consumer.h>
 #include <linux/of_platform.h>
@@ -29,6 +34,7 @@
  * Hold configuration here, cannot be more than one instance of the driver
  * since pm_power_off itself is global.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int gpio_num = -1;
 static int gpio_active_low;
@@ -47,6 +53,8 @@ static void gpio_poweroff_do_poweroff(void)
 	/* drive it active, also inactive->active edge */
 	gpio_set_value(gpio_num, !gpio_active_low);
 =======
+=======
+>>>>>>> v3.18
 static struct gpio_desc *reset_gpio;
 
 static void gpio_poweroff_do_poweroff(void)
@@ -62,6 +70,9 @@ static void gpio_poweroff_do_poweroff(void)
 
 	/* drive it active, also inactive->active edge */
 	gpiod_set_value(reset_gpio, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* give it some time */
@@ -73,6 +84,7 @@ static void gpio_poweroff_do_poweroff(void)
 static int gpio_poweroff_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum of_gpio_flags flags;
 	bool input = false;
 	int ret;
@@ -81,17 +93,23 @@ static int gpio_poweroff_probe(struct platform_device *pdev)
 	if (pm_power_off != NULL) {
 		pr_err("%s: pm_power_off function already registered",
 =======
+=======
+>>>>>>> v3.18
 	bool input = false;
 
 	/* If a pm_power_off function has already been added, leave it alone */
 	if (pm_power_off != NULL) {
 		dev_err(&pdev->dev,
 			"%s: pm_power_off function already registered",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       __func__);
 		return -EBUSY;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	gpio_num = of_get_gpio_flags(pdev->dev.of_node, 0, &flags);
 	if (!gpio_is_valid(gpio_num))
@@ -117,6 +135,8 @@ static int gpio_poweroff_probe(struct platform_device *pdev)
 			pr_err("Could not set direction of GPIO %d", gpio_num);
 			goto err;
 =======
+=======
+>>>>>>> v3.18
 	reset_gpio = devm_gpiod_get(&pdev->dev, NULL);
 	if (IS_ERR(reset_gpio))
 		return PTR_ERR(reset_gpio);
@@ -134,6 +154,9 @@ static int gpio_poweroff_probe(struct platform_device *pdev)
 			dev_err(&pdev->dev,
 				"Could not set direction of reset GPIO\n");
 			return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -141,10 +164,13 @@ static int gpio_poweroff_probe(struct platform_device *pdev)
 	pm_power_off = &gpio_poweroff_do_poweroff;
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err:
 	gpio_free(gpio_num);
 	return -ENODEV;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -152,7 +178,10 @@ err:
 static int gpio_poweroff_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_free(gpio_num);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (pm_power_off == &gpio_poweroff_do_poweroff)

@@ -12,6 +12,11 @@ struct nouveau_bus_intr {
 struct nouveau_bus {
 	struct nouveau_subdev base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*hwsq_exec)(struct nouveau_bus *, u32 *, u32);
+	u32 hwsq_size;
+>>>>>>> v3.18
 =======
 	int (*hwsq_exec)(struct nouveau_bus *, u32 *, u32);
 	u32 hwsq_size;
@@ -39,11 +44,14 @@ nouveau_bus(void *obj)
 #define _nouveau_bus_fini _nouveau_subdev_fini
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct nouveau_oclass nv04_bus_oclass;
 extern struct nouveau_oclass nv31_bus_oclass;
 extern struct nouveau_oclass nv50_bus_oclass;
 extern struct nouveau_oclass nvc0_bus_oclass;
 =======
+=======
+>>>>>>> v3.18
 extern struct nouveau_oclass *nv04_bus_oclass;
 extern struct nouveau_oclass *nv31_bus_oclass;
 extern struct nouveau_oclass *nv50_bus_oclass;
@@ -58,6 +66,9 @@ void nouveau_hwsq_wr32(struct nouveau_hwsq *, u32 addr, u32 data);
 void nouveau_hwsq_setf(struct nouveau_hwsq *, u8 flag, int data);
 void nouveau_hwsq_wait(struct nouveau_hwsq *, u8 flag, u8 data);
 void nouveau_hwsq_nsec(struct nouveau_hwsq *, u32 nsec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

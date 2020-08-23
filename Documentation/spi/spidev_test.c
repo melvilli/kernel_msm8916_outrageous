@@ -31,7 +31,11 @@ static void pabort(const char *s)
 
 static const char *device = "/dev/spidev1.1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 static uint8_t mode;
+=======
+static uint32_t mode;
+>>>>>>> v3.18
 =======
 static uint32_t mode;
 >>>>>>> v3.18
@@ -62,7 +66,10 @@ static void transfer(int fd)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (mode & SPI_TX_QUAD)
 		tr.tx_nbits = 4;
 	else if (mode & SPI_TX_DUAL)
@@ -78,6 +85,9 @@ static void transfer(int fd)
 			tr.tx_buf = 0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
 	if (ret < 1)
@@ -104,13 +114,19 @@ static void print_usage(const char *prog)
 	     "  -L --lsb      least significant bit first\n"
 	     "  -C --cs-high  chip select active high\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     "  -3 --3wire    SI/SO signals shared\n");
 =======
+=======
+>>>>>>> v3.18
 	     "  -3 --3wire    SI/SO signals shared\n"
 	     "  -N --no-cs    no chip select\n"
 	     "  -R --ready    slave pulls low to pause\n"
 	     "  -2 --dual     dual transfer\n"
 	     "  -4 --quad     quad transfer\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	exit(1);
 }
@@ -132,6 +148,11 @@ static void parse_opts(int argc, char *argv[])
 			{ "no-cs",   0, 0, 'N' },
 			{ "ready",   0, 0, 'R' },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			{ "dual",    0, 0, '2' },
+			{ "quad",    0, 0, '4' },
+>>>>>>> v3.18
 =======
 			{ "dual",    0, 0, '2' },
 			{ "quad",    0, 0, '4' },
@@ -141,7 +162,11 @@ static void parse_opts(int argc, char *argv[])
 		int c;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		c = getopt_long(argc, argv, "D:s:d:b:lHOLC3NR", lopts, NULL);
+=======
+		c = getopt_long(argc, argv, "D:s:d:b:lHOLC3NR24", lopts, NULL);
+>>>>>>> v3.18
 =======
 		c = getopt_long(argc, argv, "D:s:d:b:lHOLC3NR24", lopts, NULL);
 >>>>>>> v3.18
@@ -187,13 +212,19 @@ static void parse_opts(int argc, char *argv[])
 			mode |= SPI_READY;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case '2':
 			mode |= SPI_TX_DUAL;
 			break;
 		case '4':
 			mode |= SPI_TX_QUAD;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			print_usage(argv[0]);
@@ -201,13 +232,19 @@ static void parse_opts(int argc, char *argv[])
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (mode & SPI_LOOP) {
 		if (mode & SPI_TX_DUAL)
 			mode |= SPI_RX_DUAL;
 		if (mode & SPI_TX_QUAD)
 			mode |= SPI_RX_QUAD;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -226,17 +263,23 @@ int main(int argc, char *argv[])
 	 * spi mode
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ioctl(fd, SPI_IOC_WR_MODE, &mode);
 	if (ret == -1)
 		pabort("can't set spi mode");
 
 	ret = ioctl(fd, SPI_IOC_RD_MODE, &mode);
 =======
+=======
+>>>>>>> v3.18
 	ret = ioctl(fd, SPI_IOC_WR_MODE32, &mode);
 	if (ret == -1)
 		pabort("can't set spi mode");
 
 	ret = ioctl(fd, SPI_IOC_RD_MODE32, &mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret == -1)
 		pabort("can't get spi mode");
@@ -264,7 +307,11 @@ int main(int argc, char *argv[])
 		pabort("can't get max speed hz");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("spi mode: %d\n", mode);
+=======
+	printf("spi mode: 0x%x\n", mode);
+>>>>>>> v3.18
 =======
 	printf("spi mode: 0x%x\n", mode);
 >>>>>>> v3.18

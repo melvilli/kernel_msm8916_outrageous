@@ -81,7 +81,12 @@ void shutdown(int exit_val, char *err_cause, int line_no)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seteuid(0);
+=======
+	if (seteuid(0) == -1)
+		perror("seteuid() failed");
+>>>>>>> v3.18
 =======
 	if (seteuid(0) == -1)
 		perror("seteuid() failed");
@@ -298,13 +303,19 @@ int main(int argc, char *argv[])
 	printf("\nInitial system state:\n");
 	printf("\tUsing queue path:\t\t%s\n", queue_path);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("\tRLIMIT_MSGQUEUE(soft):\t\t%d\n", saved_limits.rlim_cur);
 	printf("\tRLIMIT_MSGQUEUE(hard):\t\t%d\n", saved_limits.rlim_max);
 =======
+=======
+>>>>>>> v3.18
 	printf("\tRLIMIT_MSGQUEUE(soft):\t\t%ld\n",
 		(long) saved_limits.rlim_cur);
 	printf("\tRLIMIT_MSGQUEUE(hard):\t\t%ld\n",
 		(long) saved_limits.rlim_max);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printf("\tMaximum Message Size:\t\t%d\n", saved_max_msgsize);
 	printf("\tMaximum Queue Size:\t\t%d\n", saved_max_msgs);
@@ -321,8 +332,13 @@ int main(int argc, char *argv[])
 
 	printf("Adjusted system state for testing:\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("\tRLIMIT_MSGQUEUE(soft):\t\t%d\n", cur_limits.rlim_cur);
 	printf("\tRLIMIT_MSGQUEUE(hard):\t\t%d\n", cur_limits.rlim_max);
+=======
+	printf("\tRLIMIT_MSGQUEUE(soft):\t\t%ld\n", (long) cur_limits.rlim_cur);
+	printf("\tRLIMIT_MSGQUEUE(hard):\t\t%ld\n", (long) cur_limits.rlim_max);
+>>>>>>> v3.18
 =======
 	printf("\tRLIMIT_MSGQUEUE(soft):\t\t%ld\n", (long) cur_limits.rlim_cur);
 	printf("\tRLIMIT_MSGQUEUE(hard):\t\t%ld\n", (long) cur_limits.rlim_max);
@@ -472,14 +488,20 @@ int main(int argc, char *argv[])
 		printf("Queue open with total size > 2GB when euid = 0 "
 		       "failed:\t\t\tPASS\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seteuid(99);
 =======
+=======
+>>>>>>> v3.18
 
 	if (seteuid(99) == -1) {
 		perror("seteuid() failed");
 		exit(1);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	attr.mq_maxmsg = cur_max_msgs;
 	attr.mq_msgsize = cur_max_msgsize;

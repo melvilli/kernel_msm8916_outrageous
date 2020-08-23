@@ -22,6 +22,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -33,12 +34,17 @@
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
  * Please send any bug reports or fixes you make to the
  * email address(es):
  *    lksctp developers <linux-sctp@vger.kernel.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Written or modified by:
@@ -51,9 +57,12 @@
  *    Ryan Layer            <rmlayer@us.ibm.com>
  *    Kevin Gao             <kevin.gao@intel.com> 
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -96,6 +105,7 @@
 #include <net/sctp/constants.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Set SCTP_DEBUG flag via config if not already set. */
 #ifndef SCTP_DEBUG
@@ -108,12 +118,15 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IP_SCTP_MODULE
 #define SCTP_PROTOSW_FLAG 0
 #else /* static! */
 #define SCTP_PROTOSW_FLAG INET_PROTOSW_PERMANENT
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* Certain internal static functions need to be exported when
@@ -125,6 +138,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Function declarations.
  */
@@ -133,6 +148,7 @@
  * sctp/protocol.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int sctp_copy_local_addr_list(struct net *, struct sctp_bind_addr *,
 				     sctp_scope_t, gfp_t gfp,
 				     int flags);
@@ -140,11 +156,16 @@ extern struct sctp_pf *sctp_get_pf_specific(sa_family_t family);
 extern int sctp_register_pf(struct sctp_pf *, sa_family_t);
 extern void sctp_addr_wq_mgmt(struct net *, struct sctp_sockaddr_entry *, int);
 =======
+=======
+>>>>>>> v3.18
 int sctp_copy_local_addr_list(struct net *, struct sctp_bind_addr *,
 			      sctp_scope_t, gfp_t gfp, int flags);
 struct sctp_pf *sctp_get_pf_specific(sa_family_t family);
 int sctp_register_pf(struct sctp_pf *, sa_family_t);
 void sctp_addr_wq_mgmt(struct net *, struct sctp_sockaddr_entry *, int);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -154,7 +175,11 @@ int sctp_backlog_rcv(struct sock *sk, struct sk_buff *skb);
 int sctp_inet_listen(struct socket *sock, int backlog);
 void sctp_write_space(struct sock *sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sctp_data_ready(struct sock *sk, int len);
+=======
+void sctp_data_ready(struct sock *sk);
+>>>>>>> v3.18
 =======
 void sctp_data_ready(struct sock *sk);
 >>>>>>> v3.18
@@ -165,7 +190,12 @@ void sctp_copy_sock(struct sock *newsk, struct sock *sk,
 		    struct sctp_association *asoc);
 extern struct percpu_counter sctp_sockets_allocated;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int sctp_asconf_mgmt(struct sctp_sock *, struct sctp_sockaddr_entry *);
+=======
+int sctp_asconf_mgmt(struct sctp_sock *, struct sctp_sockaddr_entry *);
+struct sk_buff *sctp_skb_recv_datagram(struct sock *, int, int, int *);
+>>>>>>> v3.18
 =======
 int sctp_asconf_mgmt(struct sctp_sock *, struct sctp_sockaddr_entry *);
 struct sk_buff *sctp_skb_recv_datagram(struct sock *, int, int, int *);
@@ -232,6 +262,7 @@ extern struct kmem_cache *sctp_bucket_cachep __read_mostly;
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef TEST_FRAME
 #include <test_frame.h>
@@ -258,6 +289,8 @@ extern struct kmem_cache *sctp_bucket_cachep __read_mostly;
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* SCTP SNMP MIB stats handlers */
 #define SCTP_INC_STATS(net, field)      SNMP_INC_STATS((net)->sctp.sctp_statistics, field)
 #define SCTP_INC_STATS_BH(net, field)   SNMP_INC_STATS_BH((net)->sctp.sctp_statistics, field)
@@ -265,8 +298,11 @@ extern struct kmem_cache *sctp_bucket_cachep __read_mostly;
 #define SCTP_DEC_STATS(net, field)      SNMP_DEC_STATS((net)->sctp.sctp_statistics, field)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* !TEST_FRAME */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* sctp mib definitions */
@@ -327,6 +363,7 @@ static inline void sctp_max_rto(struct sctp_association *asoc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Print debugging messages.  */
 #if SCTP_DEBUG
 extern int sctp_debug_flag;
@@ -382,6 +419,8 @@ do {									\
 #endif /* SCTP_DEBUG */
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -471,7 +510,10 @@ static inline sctp_assoc_t sctp_assoc2id(const struct sctp_association *asoc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline enum sctp_sstat_state
 sctp_assoc_to_state(const struct sctp_association *asoc)
 {
@@ -485,6 +527,9 @@ sctp_assoc_to_state(const struct sctp_association *asoc)
 	return asoc->state + 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Look up the association by its id.  */
 struct sctp_association *sctp_id2assoc(struct sock *sk, sctp_assoc_t id);
@@ -502,6 +547,7 @@ static inline void sctp_skb_list_tail(struct sk_buff_head *list,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sctp_spin_lock_irqsave(&head->lock, flags);
 	sctp_spin_lock(&list->lock);
 
@@ -510,6 +556,8 @@ static inline void sctp_skb_list_tail(struct sk_buff_head *list,
 	sctp_spin_unlock(&list->lock);
 	sctp_spin_unlock_irqrestore(&head->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&head->lock, flags);
 	spin_lock(&list->lock);
 
@@ -517,6 +565,9 @@ static inline void sctp_skb_list_tail(struct sk_buff_head *list,
 
 	spin_unlock(&list->lock);
 	spin_unlock_irqrestore(&head->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -566,6 +617,7 @@ static inline int sctp_list_single_entry(struct list_head *head)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Generate a random jitter in the range of -50% ~ +50% of input RTO. */
 static inline __s32 sctp_jitter(__u32 rto)
 {
@@ -587,6 +639,8 @@ static inline __s32 sctp_jitter(__u32 rto)
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Break down data chunks at this point.  */
@@ -629,8 +683,11 @@ _sctp_walk_params((pos), (chunk), ntohs((chunk)->chunk_hdr.length), member)
 #define _sctp_walk_params(pos, chunk, end, member)\
 for (pos.v = chunk->member;\
 <<<<<<< HEAD
+<<<<<<< HEAD
      (pos.v + offsetof(struct sctp_paramhdr, length) + sizeof(pos.p->length) <=\
       (void *)chunk + end) &&\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
      pos.v <= (void *)chunk + end - ntohs(pos.p->length) &&\
@@ -644,8 +701,11 @@ _sctp_walk_errors((err), (chunk_hdr), ntohs((chunk_hdr)->length))
 for (err = (sctp_errhdr_t *)((void *)chunk_hdr + \
 	    sizeof(sctp_chunkhdr_t));\
 <<<<<<< HEAD
+<<<<<<< HEAD
      ((void *)err + offsetof(sctp_errhdr_t, length) + sizeof(err->length) <=\
       (void *)chunk_hdr + end) &&\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
      (void *)err <= (void *)chunk_hdr + end - ntohs(err->length) &&\
@@ -663,6 +723,7 @@ for (pos = chunk->subh.fwdtsn_hdr->skip;\
 /* Round an int up to the next multiple of 4.  */
 #define WORD_ROUND(s) (((s)+3)&~3)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Make a new instance of type.  */
 #define t_new(type, flags)	kzalloc(sizeof(type), flags)
@@ -685,6 +746,8 @@ for (pos = chunk->subh.fwdtsn_hdr->skip;\
         (tv2).tv_usec = usecs; \
 })
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* External references. */
@@ -725,6 +788,7 @@ static inline int param_type2af(__be16 type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Perform some sanity checks. */
 static inline int sctp_sanity_check(void)
 {
@@ -735,6 +799,8 @@ static inline int sctp_sanity_check(void)
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Warning: The following hash functions assume a power of two 'size'. */
@@ -807,6 +873,11 @@ static inline void sctp_v4_map_v6(union sctp_addr *addr)
 {
 	addr->v6.sin6_family = AF_INET6;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	addr->v6.sin6_flowinfo = 0;
+	addr->v6.sin6_scope_id = 0;
+>>>>>>> v3.18
 =======
 	addr->v6.sin6_flowinfo = 0;
 	addr->v6.sin6_scope_id = 0;
@@ -824,7 +895,11 @@ static inline void sctp_v4_map_v6(union sctp_addr *addr)
 static inline struct dst_entry *sctp_transport_dst_check(struct sctp_transport *t)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (t->dst && !dst_check(t->dst, 0)) {
+=======
+	if (t->dst && !dst_check(t->dst, t->dst_cookie)) {
+>>>>>>> v3.18
 =======
 	if (t->dst && !dst_check(t->dst, t->dst_cookie)) {
 >>>>>>> v3.18

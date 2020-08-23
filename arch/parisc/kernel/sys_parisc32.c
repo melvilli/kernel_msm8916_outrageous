@@ -5,6 +5,10 @@
  * Copyright (C) 2000 John Marvin
  * Copyright (C) 2001 Matthew Wilcox
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Helge Deller <deller@gmx.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Helge Deller <deller@gmx.de>
 >>>>>>> v3.18
@@ -15,6 +19,7 @@
 
 #include <linux/compat.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/sched.h>
 #include <linux/fs.h> 
@@ -60,6 +65,10 @@
 #include <linux/syscalls.h>
 
 >>>>>>> v3.18
+=======
+#include <linux/syscalls.h>
+
+>>>>>>> v3.18
 
 asmlinkage long sys32_unimplemented(int r26, int r25, int r24, int r23,
 	int r22, int r21, int r20)
@@ -69,7 +78,10 @@ asmlinkage long sys32_unimplemented(int r26, int r25, int r24, int r23,
     return -ENOSYS;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 asmlinkage long sys32_fanotify_mark(compat_int_t fanotify_fd, compat_uint_t flags,
 	compat_uint_t mask0, compat_uint_t mask1, compat_int_t dfd,
@@ -79,4 +91,7 @@ asmlinkage long sys32_fanotify_mark(compat_int_t fanotify_fd, compat_uint_t flag
 			((__u64)mask1 << 32) | mask0,
 			 dfd, pathname);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

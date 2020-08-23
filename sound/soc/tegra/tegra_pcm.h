@@ -32,14 +32,20 @@
 #define __TEGRA_PCM_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int tegra_pcm_platform_register(struct device *dev);
 =======
+=======
+>>>>>>> v3.18
 struct snd_dmaengine_pcm_config;
 
 int tegra_pcm_platform_register(struct device *dev);
 int tegra_pcm_platform_register_with_chan_names(struct device *dev,
 				struct snd_dmaengine_pcm_config *config,
 				char *txdmachan, char *rxdmachan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void tegra_pcm_platform_unregister(struct device *dev);
 

@@ -65,7 +65,13 @@ enum { DMA_CHAIN_STARTED, DMA_CHAIN_NOTSTARTED };
 static struct omap_system_dma_plat_info *p;
 static struct omap_dma_dev_attr *d;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+static void omap_clear_dma(int lch);
+static int omap_dma_set_prio_lch(int lch, unsigned char read_prio,
+				 unsigned char write_prio);
+>>>>>>> v3.18
 =======
 static void omap_clear_dma(int lch);
 static int omap_dma_set_prio_lch(int lch, unsigned char read_prio,
@@ -77,6 +83,10 @@ static u32 errata;
 static struct omap_dma_global_context_registers {
 	u32 dma_irqenable_l0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 dma_irqenable_l1;
+>>>>>>> v3.18
 =======
 	u32 dma_irqenable_l1;
 >>>>>>> v3.18
@@ -294,6 +304,7 @@ void omap_set_dma_transfer_params(int lch, int data_type, int elem_count,
 EXPORT_SYMBOL(omap_set_dma_transfer_params);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void omap_set_dma_color_mode(int lch, enum omap_dma_color_mode mode, u32 color)
 {
 	BUG_ON(omap_dma_in_1510_mode());
@@ -354,6 +365,8 @@ void omap_set_dma_color_mode(int lch, enum omap_dma_color_mode mode, u32 color)
 }
 EXPORT_SYMBOL(omap_set_dma_color_mode);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void omap_set_dma_write_mode(int lch, enum omap_dma_write_mode mode)
@@ -430,6 +443,7 @@ void omap_set_dma_params(int lch, struct omap_dma_channel_params *params)
 EXPORT_SYMBOL(omap_set_dma_params);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void omap_set_dma_src_index(int lch, int eidx, int fidx)
 {
 	if (dma_omap2plus())
@@ -440,6 +454,8 @@ void omap_set_dma_src_index(int lch, int eidx, int fidx)
 }
 EXPORT_SYMBOL(omap_set_dma_src_index);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void omap_set_dma_src_data_pack(int lch, int enable)
@@ -526,6 +542,7 @@ void omap_set_dma_dest_params(int lch, int dest_port, int dest_amode,
 EXPORT_SYMBOL(omap_set_dma_dest_params);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void omap_set_dma_dest_index(int lch, int eidx, int fidx)
 {
 	if (dma_omap2plus())
@@ -536,6 +553,8 @@ void omap_set_dma_dest_index(int lch, int eidx, int fidx)
 }
 EXPORT_SYMBOL(omap_set_dma_dest_index);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void omap_set_dma_dest_data_pack(int lch, int enable)
@@ -717,6 +736,11 @@ int omap_request_dma(int dev_id, const char *dev_name,
 	struct omap_dma_lch *chan;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	WARN(strcmp(dev_name, "DMA engine"), "Using deprecated platform DMA API - please update to DMA engine");
+
+>>>>>>> v3.18
 =======
 	WARN(strcmp(dev_name, "DMA engine"), "Using deprecated platform DMA API - please update to DMA engine");
 
@@ -726,8 +750,13 @@ int omap_request_dma(int dev_id, const char *dev_name,
 		if (free_ch == -1 && dma_chan[ch].dev_id == -1) {
 			free_ch = ch;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (dev_id == 0)
 				break;
+=======
+			/* Exit after first free channel found */
+			break;
+>>>>>>> v3.18
 =======
 			/* Exit after first free channel found */
 			break;
@@ -870,7 +899,11 @@ EXPORT_SYMBOL(omap_dma_set_global_params);
  * 	DMA_CH_PRIO_HIGH/DMA_CH_PRIO_LOW
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -895,7 +928,11 @@ omap_dma_set_prio_lch(int lch, unsigned char read_prio,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(omap_dma_set_prio_lch);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -905,7 +942,11 @@ EXPORT_SYMBOL(omap_dma_set_prio_lch);
  * through omap_start_dma(). Any buffers in flight are discarded.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void omap_clear_dma(int lch)
+=======
+static void omap_clear_dma(int lch)
+>>>>>>> v3.18
 =======
 static void omap_clear_dma(int lch)
 >>>>>>> v3.18
@@ -917,7 +958,10 @@ static void omap_clear_dma(int lch)
 	local_irq_restore(flags);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(omap_clear_dma);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -939,7 +983,10 @@ void omap_start_dma(int lch)
 		char dma_chan_link_map[MAX_LOGICAL_DMA_CH_COUNT];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_chan_link_map[lch] = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Set the link register of the first channel */
@@ -947,6 +994,11 @@ void omap_start_dma(int lch)
 
 		memset(dma_chan_link_map, 0, sizeof(dma_chan_link_map));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dma_chan_link_map[lch] = 1;
+
+>>>>>>> v3.18
 =======
 		dma_chan_link_map[lch] = 1;
 
@@ -1215,6 +1267,7 @@ void omap_dma_link_lch(int lch_head, int lch_queue)
 }
 EXPORT_SYMBOL(omap_dma_link_lch);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Once the DMA queue is stopped, we can destroy it.
@@ -1864,6 +1917,8 @@ EXPORT_SYMBOL(omap_get_dma_chain_src_pos);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*----------------------------------------------------------------------------*/
 
 #ifdef CONFIG_ARCH_OMAP1
@@ -2020,7 +2075,10 @@ static struct irqaction omap24xx_dma_irq = {
 	.name = "DMA",
 	.handler = omap2_dma_irq_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags = IRQF_DISABLED
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -2032,18 +2090,29 @@ static struct irqaction omap24xx_dma_irq;
 /*----------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Note that we are currently using only IRQENABLE_L0 and L1.
  * As the DSP may be using IRQENABLE_L2 and L3, let's not
  * touch those for now.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void omap_dma_global_context_save(void)
 {
 	omap_dma_global_context.dma_irqenable_l0 =
 		p->dma_read(IRQENABLE_L0, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	omap_dma_global_context.dma_irqenable_l1 =
+		p->dma_read(IRQENABLE_L1, 0);
+>>>>>>> v3.18
 =======
 	omap_dma_global_context.dma_irqenable_l1 =
 		p->dma_read(IRQENABLE_L1, 0);
@@ -2063,6 +2132,11 @@ void omap_dma_global_context_restore(void)
 	p->dma_write(omap_dma_global_context.dma_irqenable_l0,
 		IRQENABLE_L0, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	p->dma_write(omap_dma_global_context.dma_irqenable_l1,
+		IRQENABLE_L1, 0);
+>>>>>>> v3.18
 =======
 	p->dma_write(omap_dma_global_context.dma_irqenable_l1,
 		IRQENABLE_L1, 0);
@@ -2077,13 +2151,19 @@ void omap_dma_global_context_restore(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct omap_system_dma_plat_info *omap_get_plat_info(void)
 {
 	return p;
 }
 EXPORT_SYMBOL_GPL(omap_get_plat_info);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int omap_system_dma_probe(struct platform_device *pdev)
 {
@@ -2110,10 +2190,13 @@ static int omap_system_dma_probe(struct platform_device *pdev)
 	dma_lch_count		= d->lch_count;
 	dma_chan_count		= dma_lch_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_chan		= d->chan;
 	enable_1510_mode	= d->dev_caps & ENABLE_1510_MODE;
 
 =======
+=======
+>>>>>>> v3.18
 	enable_1510_mode	= d->dev_caps & ENABLE_1510_MODE;
 
 	dma_chan = devm_kcalloc(&pdev->dev, dma_lch_count,
@@ -2124,6 +2207,9 @@ static int omap_system_dma_probe(struct platform_device *pdev)
 	}
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dma_omap2plus()) {
 		dma_linked_lch = kzalloc(sizeof(struct dma_link_info) *
@@ -2176,7 +2262,11 @@ static int omap_system_dma_probe(struct platform_device *pdev)
 				DMA_DEFAULT_FIFO_DEPTH, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dma_omap2plus()) {
+=======
+	if (dma_omap2plus() && !(d->dev_caps & DMA_ENGINE_HANDLE_IRQ)) {
+>>>>>>> v3.18
 =======
 	if (dma_omap2plus() && !(d->dev_caps & DMA_ENGINE_HANDLE_IRQ)) {
 >>>>>>> v3.18
@@ -2185,6 +2275,10 @@ static int omap_system_dma_probe(struct platform_device *pdev)
 		if (dma_irq < 0) {
 			dev_err(&pdev->dev, "failed: request IRQ %d", dma_irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			ret = dma_irq;
+>>>>>>> v3.18
 =======
 			ret = dma_irq;
 >>>>>>> v3.18
@@ -2217,9 +2311,12 @@ exit_dma_irq_fail:
 
 exit_dma_lch_fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(p);
 	kfree(d);
 	kfree(dma_chan);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -2234,7 +2331,12 @@ static int omap_system_dma_remove(struct platform_device *pdev)
 		strcpy(irq_name, "0");
 		dma_irq = platform_get_irq_byname(pdev, irq_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		remove_irq(dma_irq, &omap24xx_dma_irq);
+=======
+		if (dma_irq >= 0)
+			remove_irq(dma_irq, &omap24xx_dma_irq);
+>>>>>>> v3.18
 =======
 		if (dma_irq >= 0)
 			remove_irq(dma_irq, &omap24xx_dma_irq);
@@ -2247,9 +2349,12 @@ static int omap_system_dma_remove(struct platform_device *pdev)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(p);
 	kfree(d);
 	kfree(dma_chan);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -21,6 +21,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -57,12 +61,18 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <net/busy_poll.h>
 
 #ifdef CONFIG_NET_RX_BUSY_POLL
 #define BP_EXTENDED_STATS
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* common prefix used by pr_<> macros */
 #undef pr_fmt
@@ -75,13 +85,19 @@
 #define IXGBE_MIN_TXD			     64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IXGBE_DEFAULT_RXD		    512
 =======
+=======
+>>>>>>> v3.18
 #if (PAGE_SIZE < 8192)
 #define IXGBE_DEFAULT_RXD		    512
 #else
 #define IXGBE_DEFAULT_RXD		    128
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IXGBE_MAX_RXD			   4096
 #define IXGBE_MIN_RXD			     64
@@ -166,7 +182,10 @@ struct vf_macvlans {
 	struct list_head l;
 	int vf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rar_entry;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool free;
@@ -206,12 +225,18 @@ struct ixgbe_queue_stats {
 	u64 packets;
 	u64 bytes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef BP_EXTENDED_STATS
 	u64 yields;
 	u64 misses;
 	u64 cleaned;
 #endif  /* BP_EXTENDED_STATS */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -241,7 +266,10 @@ enum ixgbe_ring_state_t {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ixgbe_fwd_adapter {
 	unsigned long active_vlans[BITS_TO_LONGS(VLAN_N_VID)];
 	struct net_device *netdev;
@@ -251,6 +279,9 @@ struct ixgbe_fwd_adapter {
 	int pool;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define check_for_tx_hang(ring) \
 	test_bit(__IXGBE_TX_DETECT_HANG, &(ring)->state)
@@ -270,6 +301,10 @@ struct ixgbe_ring {
 	struct net_device *netdev;	/* netdev ring belongs to */
 	struct device *dev;		/* device for DMA mapping */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ixgbe_fwd_adapter *l2_accel_priv;
+>>>>>>> v3.18
 =======
 	struct ixgbe_fwd_adapter *l2_accel_priv;
 >>>>>>> v3.18
@@ -279,7 +314,10 @@ struct ixgbe_ring {
 		struct ixgbe_rx_buffer *rx_buffer_info;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long last_rx_timestamp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long state;
@@ -334,12 +372,18 @@ enum ixgbe_ring_f_enum {
 #define MAX_RX_QUEUES (IXGBE_MAX_FDIR_INDICES + 1)
 #define MAX_TX_QUEUES (IXGBE_MAX_FDIR_INDICES + 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IXGBE_MAX_L2A_QUEUES 4
 #define IXGBE_BAD_L2A_QUEUE 3
 #define IXGBE_MAX_MACVLANS	31
 #define IXGBE_MAX_DCBMACVLANS	8
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ixgbe_ring_feature {
 	u16 limit;	/* upper limit on feature indices */
@@ -392,7 +436,11 @@ struct ixgbe_ring_container {
 
 #define MAX_RX_PACKET_BUFFERS ((adapter->flags & IXGBE_FLAG_DCB_ENABLED) \
 <<<<<<< HEAD
+<<<<<<< HEAD
                               ? 8 : 1)
+=======
+			      ? 8 : 1)
+>>>>>>> v3.18
 =======
 			      ? 8 : 1)
 >>>>>>> v3.18
@@ -419,10 +467,13 @@ struct ixgbe_q_vector {
 	char name[IFNAMSIZ + 9];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* for dynamic allocation of rings associated with this q_vector */
 	struct ixgbe_ring ring[0] ____cacheline_internodealigned_in_smp;
 };
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 	atomic_t state;
 #endif  /* CONFIG_NET_RX_BUSY_POLL */
@@ -544,6 +595,9 @@ static inline bool ixgbe_qv_disable(struct ixgbe_q_vector *q_vector)
 
 #endif /* CONFIG_NET_RX_BUSY_POLL */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_IXGBE_HWMON
 
@@ -561,13 +615,19 @@ struct hwmon_attr {
 
 struct hwmon_buff {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *device;
 	struct hwmon_attr *hwmon_list;
 =======
+=======
+>>>>>>> v3.18
 	struct attribute_group group;
 	const struct attribute_group *groups[2];
 	struct attribute *attrs[IXGBE_MAX_SENSORS * 4 + 1];
 	struct hwmon_attr hwmon_list[IXGBE_MAX_SENSORS * 4];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int n_hwmon;
 };
@@ -599,12 +659,18 @@ static inline u16 ixgbe_desc_unused(struct ixgbe_ring *ring)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void ixgbe_write_tail(struct ixgbe_ring *ring, u32 value)
 {
 	writel(value, ring->tail);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IXGBE_RX_DESC(R, i)	    \
 	(&(((union ixgbe_adv_rx_desc *)((R)->desc))[i]))
@@ -628,7 +694,10 @@ static inline void ixgbe_write_tail(struct ixgbe_ring *ring, u32 value)
 #define MAX_Q_VECTORS_82598 16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ixgbe_mac_addr {
 	u8 addr[ETH_ALEN];
 	u16 queue;
@@ -638,6 +707,9 @@ struct ixgbe_mac_addr {
 #define IXGBE_MAC_STATE_MODIFIED	0x2
 #define IXGBE_MAC_STATE_IN_USE		0x4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MAX_Q_VECTORS MAX_Q_VECTORS_82599
 #define MAX_MSIX_COUNT MAX_MSIX_VECTORS_82599
@@ -662,9 +734,13 @@ struct ixgbe_adapter {
 	 */
 	u32 flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IXGBE_FLAG_MSI_CAPABLE                  (u32)(1 << 0)
 #define IXGBE_FLAG_MSI_ENABLED                  (u32)(1 << 1)
 #define IXGBE_FLAG_MSIX_CAPABLE                 (u32)(1 << 2)
+=======
+#define IXGBE_FLAG_MSI_ENABLED                  (u32)(1 << 1)
+>>>>>>> v3.18
 =======
 #define IXGBE_FLAG_MSI_ENABLED                  (u32)(1 << 1)
 >>>>>>> v3.18
@@ -702,9 +778,14 @@ struct ixgbe_adapter {
 #define IXGBE_FLAG2_RSS_FIELD_IPV4_UDP		(u32)(1 << 8)
 #define IXGBE_FLAG2_RSS_FIELD_IPV6_UDP		(u32)(1 << 9)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IXGBE_FLAG2_PTP_ENABLED			(u32)(1 << 10)
 #define IXGBE_FLAG2_PTP_PPS_ENABLED		(u32)(1 << 11)
 #define IXGBE_FLAG2_BRIDGE_MODE_VEB		(u32)(1 << 12)
+=======
+#define IXGBE_FLAG2_PTP_PPS_ENABLED		(u32)(1 << 10)
+#define IXGBE_FLAG2_BRIDGE_MODE_VEB		(u32)(1 << 11)
+>>>>>>> v3.18
 =======
 #define IXGBE_FLAG2_PTP_PPS_ENABLED		(u32)(1 << 10)
 #define IXGBE_FLAG2_BRIDGE_MODE_VEB		(u32)(1 << 11)
@@ -786,10 +867,16 @@ struct ixgbe_adapter {
 	struct ixgbe_fcoe fcoe;
 #endif /* IXGBE_FCOE */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 wol;
 
 	u16 bd_number;
 
+=======
+	u8 __iomem *io_addr; /* Mainly for iounmap use */
+	u32 wol;
+
+>>>>>>> v3.18
 =======
 	u8 __iomem *io_addr; /* Mainly for iounmap use */
 	u32 wol;
@@ -807,15 +894,21 @@ struct ixgbe_adapter {
 	struct work_struct ptp_tx_work;
 	struct sk_buff *ptp_tx_skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long ptp_tx_start;
 	unsigned long last_overflow_check;
 	unsigned long last_rx_ptp_check;
 =======
+=======
+>>>>>>> v3.18
 	struct hwtstamp_config tstamp_config;
 	unsigned long ptp_tx_start;
 	unsigned long last_overflow_check;
 	unsigned long last_rx_ptp_check;
 	unsigned long last_rx_timestamp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spinlock_t tmreg_lock;
 	struct cyclecounter cc;
@@ -833,14 +926,20 @@ struct ixgbe_adapter {
 	u32 timer_event_accumulator;
 	u32 vferr_refcount;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kobject *info_kobj;
 #ifdef CONFIG_IXGBE_HWMON
 	struct hwmon_buff ixgbe_hwmon_buff;
 =======
+=======
+>>>>>>> v3.18
 	struct ixgbe_mac_addr *mac_table;
 	struct kobject *info_kobj;
 #ifdef CONFIG_IXGBE_HWMON
 	struct hwmon_buff *ixgbe_hwmon_buff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_IXGBE_HWMON */
 #ifdef CONFIG_DEBUG_FS
@@ -849,6 +948,10 @@ struct ixgbe_adapter {
 
 	u8 default_up;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long fwd_bitmask; /* Bitmask indicating in use pools */
+>>>>>>> v3.18
 =======
 	unsigned long fwd_bitmask; /* Bitmask indicating in use pools */
 >>>>>>> v3.18
@@ -866,10 +969,13 @@ enum ixgbe_state_t {
 	__IXGBE_RESETTING,
 	__IXGBE_DOWN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__IXGBE_SERVICE_SCHED,
 	__IXGBE_IN_SFP_INIT,
 	__IXGBE_READ_I2C,
 =======
+=======
+>>>>>>> v3.18
 	__IXGBE_DISABLED,
 	__IXGBE_REMOVING,
 	__IXGBE_SERVICE_SCHED,
@@ -877,6 +983,9 @@ enum ixgbe_state_t {
 	__IXGBE_IN_SFP_INIT,
 	__IXGBE_PTP_RUNNING,
 	__IXGBE_PTP_TX_IN_PROGRESS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -910,6 +1019,7 @@ extern const char ixgbe_driver_version[];
 extern char ixgbe_default_device_descr[];
 #endif /* IXGBE_FCOE */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void ixgbe_up(struct ixgbe_adapter *adapter);
 extern void ixgbe_down(struct ixgbe_adapter *adapter);
@@ -999,6 +1109,8 @@ extern void ixgbe_dbg_adapter_exit(struct ixgbe_adapter *adapter);
 extern void ixgbe_dbg_init(void);
 extern void ixgbe_dbg_exit(void);
 =======
+=======
+>>>>>>> v3.18
 void ixgbe_up(struct ixgbe_adapter *adapter);
 void ixgbe_down(struct ixgbe_adapter *adapter);
 void ixgbe_reinit_locked(struct ixgbe_adapter *adapter);
@@ -1088,6 +1200,9 @@ void ixgbe_dbg_adapter_init(struct ixgbe_adapter *adapter);
 void ixgbe_dbg_adapter_exit(struct ixgbe_adapter *adapter);
 void ixgbe_dbg_init(void);
 void ixgbe_dbg_exit(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline void ixgbe_dbg_adapter_init(struct ixgbe_adapter *adapter) {}
@@ -1100,6 +1215,7 @@ static inline struct netdev_queue *txring_txq(const struct ixgbe_ring *ring)
 	return netdev_get_tx_queue(ring->netdev, ring->queue_index);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void ixgbe_ptp_init(struct ixgbe_adapter *adapter);
 extern void ixgbe_ptp_stop(struct ixgbe_adapter *adapter);
@@ -1129,6 +1245,8 @@ extern void ixgbe_ptp_start_cyclecounter(struct ixgbe_adapter *adapter);
 extern void ixgbe_ptp_reset(struct ixgbe_adapter *adapter);
 extern void ixgbe_ptp_check_pps_event(struct ixgbe_adapter *adapter, u32 eicr);
 =======
+=======
+>>>>>>> v3.18
 void ixgbe_ptp_init(struct ixgbe_adapter *adapter);
 void ixgbe_ptp_suspend(struct ixgbe_adapter *adapter);
 void ixgbe_ptp_stop(struct ixgbe_adapter *adapter);
@@ -1140,12 +1258,21 @@ int ixgbe_ptp_get_ts_config(struct ixgbe_adapter *adapter, struct ifreq *ifr);
 void ixgbe_ptp_start_cyclecounter(struct ixgbe_adapter *adapter);
 void ixgbe_ptp_reset(struct ixgbe_adapter *adapter);
 void ixgbe_ptp_check_pps_event(struct ixgbe_adapter *adapter, u32 eicr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PCI_IOV
 void ixgbe_sriov_reinit(struct ixgbe_adapter *adapter);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+netdev_tx_t ixgbe_xmit_frame_ring(struct sk_buff *skb,
+				  struct ixgbe_adapter *adapter,
+				  struct ixgbe_ring *tx_ring);
+>>>>>>> v3.18
 =======
 netdev_tx_t ixgbe_xmit_frame_ring(struct sk_buff *skb,
 				  struct ixgbe_adapter *adapter,

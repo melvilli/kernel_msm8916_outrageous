@@ -14,7 +14,11 @@ obj-$(CONFIG_AGP_PARISC)	+= parisc-agp.o
 obj-$(CONFIG_AGP_I460)		+= i460-agp.o
 obj-$(CONFIG_AGP_INTEL)		+= intel-agp.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_AGP_INTEL)		+= intel-gtt.o
+=======
+obj-$(CONFIG_INTEL_GTT)		+= intel-gtt.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_INTEL_GTT)		+= intel-gtt.o
 >>>>>>> v3.18

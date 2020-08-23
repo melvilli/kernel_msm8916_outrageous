@@ -1762,16 +1762,22 @@ bail:
 static int ocfs2_dir_foreach_blk_id(struct inode *inode,
 				    u64 *f_version,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    loff_t *f_pos, void *priv,
 				    filldir_t filldir, int *filldir_err)
 {
 	int ret, i, filldir_ret;
 	unsigned long offset = *f_pos;
 =======
+=======
+>>>>>>> v3.18
 				    struct dir_context *ctx)
 {
 	int ret, i;
 	unsigned long offset = ctx->pos;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct buffer_head *di_bh = NULL;
 	struct ocfs2_dinode *di;
@@ -1789,8 +1795,12 @@ static int ocfs2_dir_foreach_blk_id(struct inode *inode,
 	data = &di->id2.i_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (*f_pos < i_size_read(inode)) {
 revalidate:
+=======
+	while (ctx->pos < i_size_read(inode)) {
+>>>>>>> v3.18
 =======
 	while (ctx->pos < i_size_read(inode)) {
 >>>>>>> v3.18
@@ -1814,6 +1824,7 @@ revalidate:
 				i += le16_to_cpu(de->rec_len);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*f_pos = offset = i;
 			*f_version = inode->i_version;
 		}
@@ -1835,6 +1846,8 @@ revalidate:
 			 */
 			u64 version = *f_version;
 =======
+=======
+>>>>>>> v3.18
 			ctx->pos = offset = i;
 			*f_version = inode->i_version;
 		}
@@ -1847,12 +1860,16 @@ revalidate:
 		}
 		offset += le16_to_cpu(de->rec_len);
 		if (le64_to_cpu(de->inode)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			unsigned char d_type = DT_UNKNOWN;
 
 			if (de->file_type < OCFS2_FT_MAX)
 				d_type = ocfs2_filetype_table[de->file_type];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			filldir_ret = filldir(priv, de->name,
 					      de->name_len,
@@ -1874,6 +1891,8 @@ out:
 	brelse(di_bh);
 
 =======
+=======
+>>>>>>> v3.18
 			if (!dir_emit(ctx, de->name, de->name_len,
 				      le64_to_cpu(de->inode), d_type))
 				goto out;
@@ -1882,6 +1901,9 @@ out:
 	}
 out:
 	brelse(di_bh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1893,6 +1915,7 @@ out:
 static int ocfs2_dir_foreach_blk_el(struct inode *inode,
 				    u64 *f_version,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    loff_t *f_pos, void *priv,
 				    filldir_t filldir, int *filldir_err)
 {
@@ -1900,16 +1923,22 @@ static int ocfs2_dir_foreach_blk_el(struct inode *inode,
 	unsigned long offset, blk, last_ra_blk = 0;
 	int i, stored;
 =======
+=======
+>>>>>>> v3.18
 				    struct dir_context *ctx,
 				    bool persist)
 {
 	unsigned long offset, blk, last_ra_blk = 0;
 	int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct buffer_head * bh, * tmp;
 	struct ocfs2_dir_entry * de;
 	struct super_block * sb = inode->i_sb;
 	unsigned int ra_sectors = 16;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	stored = 0;
@@ -1923,6 +1952,8 @@ static int ocfs2_dir_foreach_blk_el(struct inode *inode,
 			/* Skip the corrupt dirblock and keep trying */
 			*f_pos += sb->s_blocksize - offset;
 =======
+=======
+>>>>>>> v3.18
 	int stored = 0;
 
 	bh = NULL;
@@ -1934,6 +1965,9 @@ static int ocfs2_dir_foreach_blk_el(struct inode *inode,
 		if (ocfs2_read_dir_block(inode, blk, &bh, 0)) {
 			/* Skip the corrupt dirblock and keep trying */
 			ctx->pos += sb->s_blocksize - offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
@@ -1957,7 +1991,10 @@ static int ocfs2_dir_foreach_blk_el(struct inode *inode,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 revalidate:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* If the dir block has changed since the last call to
@@ -1980,7 +2017,11 @@ revalidate:
 			}
 			offset = i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*f_pos = ((*f_pos) & ~(sb->s_blocksize - 1))
+=======
+			ctx->pos = (ctx->pos & ~(sb->s_blocksize - 1))
+>>>>>>> v3.18
 =======
 			ctx->pos = (ctx->pos & ~(sb->s_blocksize - 1))
 >>>>>>> v3.18
@@ -1989,7 +2030,11 @@ revalidate:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (!error && *f_pos < i_size_read(inode)
+=======
+		while (ctx->pos < i_size_read(inode)
+>>>>>>> v3.18
 =======
 		while (ctx->pos < i_size_read(inode)
 >>>>>>> v3.18
@@ -1998,6 +2043,7 @@ revalidate:
 			if (!ocfs2_check_dir_entry(inode, de, bh, offset)) {
 				/* On error, skip the f_pos to the
 				   next block. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 				*f_pos = ((*f_pos) | (sb->s_blocksize - 1)) + 1;
 				brelse(bh);
@@ -2014,16 +2060,22 @@ revalidate:
 				 */
 				unsigned long version = *f_version;
 =======
+=======
+>>>>>>> v3.18
 				ctx->pos = (ctx->pos | (sb->s_blocksize - 1)) + 1;
 				brelse(bh);
 				continue;
 			}
 			if (le64_to_cpu(de->inode)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				unsigned char d_type = DT_UNKNOWN;
 
 				if (de->file_type < OCFS2_FT_MAX)
 					d_type = ocfs2_filetype_table[de->file_type];
+<<<<<<< HEAD
 <<<<<<< HEAD
 				error = filldir(priv, de->name,
 						de->name_len,
@@ -2041,6 +2093,8 @@ revalidate:
 			}
 			*f_pos += le16_to_cpu(de->rec_len);
 =======
+=======
+>>>>>>> v3.18
 				if (!dir_emit(ctx, de->name,
 						de->name_len,
 						le64_to_cpu(de->inode),
@@ -2052,11 +2106,15 @@ revalidate:
 			}
 			offset += le16_to_cpu(de->rec_len);
 			ctx->pos += le16_to_cpu(de->rec_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		offset = 0;
 		brelse(bh);
 		bh = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 
@@ -2076,6 +2134,8 @@ static int ocfs2_dir_foreach_blk(struct inode *inode, u64 *f_version,
 	return ocfs2_dir_foreach_blk_el(inode, f_version, f_pos, priv, filldir,
 					filldir_err);
 =======
+=======
+>>>>>>> v3.18
 		if (!persist && stored)
 			break;
 	}
@@ -2089,6 +2149,9 @@ static int ocfs2_dir_foreach_blk(struct inode *inode, u64 *f_version,
 	if (OCFS2_I(inode)->ip_dyn_features & OCFS2_INLINE_DATA_FL)
 		return ocfs2_dir_foreach_blk_id(inode, f_version, ctx);
 	return ocfs2_dir_foreach_blk_el(inode, f_version, ctx, persist);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2096,6 +2159,7 @@ static int ocfs2_dir_foreach_blk(struct inode *inode, u64 *f_version,
  * This is intended to be called from inside other kernel functions,
  * so we fake some arguments.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int ocfs2_dir_foreach(struct inode *inode, loff_t *f_pos, void *priv,
 		      filldir_t filldir)
@@ -2114,10 +2178,15 @@ int ocfs2_dir_foreach(struct inode *inode, loff_t *f_pos, void *priv,
 		ret = -EIO;
 
 =======
+=======
+>>>>>>> v3.18
 int ocfs2_dir_foreach(struct inode *inode, struct dir_context *ctx)
 {
 	u64 version = inode->i_version;
 	ocfs2_dir_foreach_blk(inode, &version, ctx, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2127,22 +2196,32 @@ int ocfs2_dir_foreach(struct inode *inode, struct dir_context *ctx)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_readdir(struct file * filp, void * dirent, filldir_t filldir)
 {
 	int error = 0;
 	struct inode *inode = file_inode(filp);
 =======
+=======
+>>>>>>> v3.18
 int ocfs2_readdir(struct file *file, struct dir_context *ctx)
 {
 	int error = 0;
 	struct inode *inode = file_inode(file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int lock_level = 0;
 
 	trace_ocfs2_readdir((unsigned long long)OCFS2_I(inode)->ip_blkno);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = ocfs2_inode_lock_atime(inode, filp->f_path.mnt, &lock_level);
+=======
+	error = ocfs2_inode_lock_atime(inode, file->f_path.mnt, &lock_level);
+>>>>>>> v3.18
 =======
 	error = ocfs2_inode_lock_atime(inode, file->f_path.mnt, &lock_level);
 >>>>>>> v3.18
@@ -2162,8 +2241,12 @@ int ocfs2_readdir(struct file *file, struct dir_context *ctx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = ocfs2_dir_foreach_blk(inode, &filp->f_version, &filp->f_pos,
 				      dirent, filldir, NULL);
+=======
+	error = ocfs2_dir_foreach_blk(inode, &file->f_version, ctx, false);
+>>>>>>> v3.18
 =======
 	error = ocfs2_dir_foreach_blk(inode, &file->f_version, ctx, false);
 >>>>>>> v3.18
@@ -2251,6 +2334,10 @@ bail:
 
 struct ocfs2_empty_dir_priv {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dir_context ctx;
+>>>>>>> v3.18
 =======
 	struct dir_context ctx;
 >>>>>>> v3.18
@@ -2339,10 +2426,16 @@ int ocfs2_empty_dir(struct inode *inode)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	loff_t start = 0;
 	struct ocfs2_empty_dir_priv priv;
 
 	memset(&priv, 0, sizeof(priv));
+=======
+	struct ocfs2_empty_dir_priv priv = {
+		.ctx.actor = ocfs2_empty_dir_filldir,
+	};
+>>>>>>> v3.18
 =======
 	struct ocfs2_empty_dir_priv priv = {
 		.ctx.actor = ocfs2_empty_dir_filldir,
@@ -2360,7 +2453,11 @@ int ocfs2_empty_dir(struct inode *inode)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ocfs2_dir_foreach(inode, &start, &priv, ocfs2_empty_dir_filldir);
+=======
+	ret = ocfs2_dir_foreach(inode, &priv.ctx);
+>>>>>>> v3.18
 =======
 	ret = ocfs2_dir_foreach(inode, &priv.ctx);
 >>>>>>> v3.18
@@ -2547,7 +2644,11 @@ static int ocfs2_dx_dir_attach_index(struct ocfs2_super *osb,
 	dx_root_bh = sb_getblk(osb->sb, dr_blkno);
 	if (dx_root_bh == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EIO;
+=======
+		ret = -ENOMEM;
+>>>>>>> v3.18
 =======
 		ret = -ENOMEM;
 >>>>>>> v3.18
@@ -2624,7 +2725,11 @@ static int ocfs2_dx_dir_format_cluster(struct ocfs2_super *osb,
 		bh = sb_getblk(osb->sb, start_blk + i);
 		if (bh == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = -EIO;
+=======
+			ret = -ENOMEM;
+>>>>>>> v3.18
 =======
 			ret = -ENOMEM;
 >>>>>>> v3.18
@@ -3135,7 +3240,11 @@ static int ocfs2_expand_inline_dir(struct inode *dir, struct buffer_head *di_bh,
 	dirdata_bh = sb_getblk(sb, blkno);
 	if (!dirdata_bh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EIO;
+=======
+		ret = -ENOMEM;
+>>>>>>> v3.18
 =======
 		ret = -ENOMEM;
 >>>>>>> v3.18
@@ -3167,6 +3276,10 @@ static int ocfs2_expand_inline_dir(struct inode *dir, struct buffer_head *di_bh,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, dir, 1);
+>>>>>>> v3.18
 =======
 	ocfs2_update_inode_fsync_trans(handle, dir, 1);
 >>>>>>> v3.18
@@ -3219,6 +3332,10 @@ static int ocfs2_expand_inline_dir(struct inode *dir, struct buffer_head *di_bh,
 	di->i_ctime = di->i_mtime = cpu_to_le64(dir->i_ctime.tv_sec);
 	di->i_ctime_nsec = di->i_mtime_nsec = cpu_to_le32(dir->i_ctime.tv_nsec);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, dir, 1);
+>>>>>>> v3.18
 =======
 	ocfs2_update_inode_fsync_trans(handle, dir, 1);
 >>>>>>> v3.18
@@ -3377,7 +3494,11 @@ static int ocfs2_do_extend_dir(struct super_block *sb,
 	*new_bh = sb_getblk(sb, p_blkno);
 	if (!*new_bh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = -EIO;
+=======
+		status = -ENOMEM;
+>>>>>>> v3.18
 =======
 		status = -ENOMEM;
 >>>>>>> v3.18
@@ -3506,7 +3627,11 @@ static int ocfs2_extend_dir(struct ocfs2_super *osb,
 			data_ac->ac_resv = &OCFS2_I(dir)->ip_la_data_resv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		credits = ocfs2_calc_extend_credits(sb, el, 1);
+=======
+		credits = ocfs2_calc_extend_credits(sb, el);
+>>>>>>> v3.18
 =======
 		credits = ocfs2_calc_extend_credits(sb, el);
 >>>>>>> v3.18
@@ -3564,6 +3689,10 @@ do_extend:
 		de->rec_len = cpu_to_le16(sb->s_blocksize);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, dir, 1);
+>>>>>>> v3.18
 =======
 	ocfs2_update_inode_fsync_trans(handle, dir, 1);
 >>>>>>> v3.18
@@ -3946,7 +4075,11 @@ static int ocfs2_dx_dir_rebalance_credits(struct ocfs2_super *osb,
 	int credits = ocfs2_clusters_to_blocks(osb->sb, 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	credits += ocfs2_calc_extend_credits(osb->sb, &dx_root->dr_list, 1);
+=======
+	credits += ocfs2_calc_extend_credits(osb->sb, &dx_root->dr_list);
+>>>>>>> v3.18
 =======
 	credits += ocfs2_calc_extend_credits(osb->sb, &dx_root->dr_list);
 >>>>>>> v3.18
@@ -4130,6 +4263,10 @@ out_commit:
 				ocfs2_clusters_to_bytes(dir->i_sb, 1));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, dir, 1);
+>>>>>>> v3.18
 =======
 	ocfs2_update_inode_fsync_trans(handle, dir, 1);
 >>>>>>> v3.18
@@ -4372,6 +4509,10 @@ static int ocfs2_expand_inline_dx_root(struct inode *dir,
 	did_quota = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, dir, 1);
+>>>>>>> v3.18
 =======
 	ocfs2_update_inode_fsync_trans(handle, dir, 1);
 >>>>>>> v3.18
@@ -4643,6 +4784,10 @@ static int ocfs2_dx_dir_remove_index(struct inode *dir,
 	spin_unlock(&OCFS2_I(dir)->ip_lock);
 	di->i_dx_root = cpu_to_le64(0ULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, dir, 1);
+>>>>>>> v3.18
 =======
 	ocfs2_update_inode_fsync_trans(handle, dir, 1);
 >>>>>>> v3.18

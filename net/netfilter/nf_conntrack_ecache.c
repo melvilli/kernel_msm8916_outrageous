@@ -30,7 +30,10 @@
 static DEFINE_MUTEX(nf_ct_ecache_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ECACHE_RETRY_WAIT (HZ/10)
 
 enum retry_state {
@@ -115,6 +118,9 @@ static void ecache_work(struct work_struct *work)
 		schedule_delayed_work(&ctnet->ecache_dwork, delay);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* deliver cached events and clear cache entry - must be called with locally
  * disabled softirqs */
@@ -204,7 +210,10 @@ void nf_conntrack_unregister_notifier(struct net *net,
 	RCU_INIT_POINTER(net->ct.nf_conntrack_event_cb, NULL);
 	mutex_unlock(&nf_ct_ecache_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* synchronize_rcu() is called from ctnetlink_exit. */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -244,7 +253,10 @@ void nf_ct_expect_unregister_notifier(struct net *net,
 	RCU_INIT_POINTER(net->ct.nf_expect_event_cb, NULL);
 	mutex_unlock(&nf_ct_ecache_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* synchronize_rcu() is called from ctnetlink_exit. */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -253,7 +265,10 @@ EXPORT_SYMBOL_GPL(nf_ct_expect_unregister_notifier);
 #define NF_CT_EVENTS_DEFAULT 1
 static int nf_ct_events __read_mostly = NF_CT_EVENTS_DEFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nf_ct_events_retry_timeout __read_mostly = 15*HZ;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -267,6 +282,7 @@ static struct ctl_table event_sysctl_table[] = {
 		.proc_handler	= proc_dointvec,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		.procname	= "nf_conntrack_events_retry_timeout",
 		.data		= &init_net.ct.sysctl_events_retry_timeout,
@@ -274,6 +290,8 @@ static struct ctl_table event_sysctl_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec_jiffies,
 	},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{}
@@ -298,7 +316,10 @@ static int nf_conntrack_event_init_sysctl(struct net *net)
 
 	table[0].data = &net->ct.sysctl_events;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	table[1].data = &net->ct.sysctl_events_retry_timeout;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -343,7 +364,11 @@ int nf_conntrack_ecache_pernet_init(struct net *net)
 {
 	net->ct.sysctl_events = nf_ct_events;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	net->ct.sysctl_events_retry_timeout = nf_ct_events_retry_timeout;
+=======
+	INIT_DELAYED_WORK(&net->ct.ecache_dwork, ecache_work);
+>>>>>>> v3.18
 =======
 	INIT_DELAYED_WORK(&net->ct.ecache_dwork, ecache_work);
 >>>>>>> v3.18
@@ -353,6 +378,10 @@ int nf_conntrack_ecache_pernet_init(struct net *net)
 void nf_conntrack_ecache_pernet_fini(struct net *net)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cancel_delayed_work_sync(&net->ct.ecache_dwork);
+>>>>>>> v3.18
 =======
 	cancel_delayed_work_sync(&net->ct.ecache_dwork);
 >>>>>>> v3.18

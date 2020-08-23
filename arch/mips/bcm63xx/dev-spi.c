@@ -19,7 +19,10 @@
 #include <bcm63xx_regs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef BCMCPU_RUNTIME_DETECT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -41,6 +44,7 @@ static __init void bcm63xx_spi_regs_init(void)
 	if (BCMCPU_IS_6338() || BCMCPU_IS_6348())
 		bcm63xx_regs_spi = bcm6348_regs_spi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (BCMCPU_IS_6358() || BCMCPU_IS_6362() || BCMCPU_IS_6368())
 		bcm63xx_regs_spi = bcm6358_regs_spi;
 }
@@ -48,10 +52,15 @@ static __init void bcm63xx_spi_regs_init(void)
 static __init void bcm63xx_spi_regs_init(void) { }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	if (BCMCPU_IS_3368() || BCMCPU_IS_6358() ||
 		BCMCPU_IS_6362() || BCMCPU_IS_6368())
 		bcm63xx_regs_spi = bcm6358_regs_spi;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct resource spi_resources[] = {
@@ -98,7 +107,12 @@ int __init bcm63xx_spi_register(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (BCMCPU_IS_6358() || BCMCPU_IS_6362() || BCMCPU_IS_6368()) {
+=======
+	if (BCMCPU_IS_3368() || BCMCPU_IS_6358() || BCMCPU_IS_6362() ||
+		BCMCPU_IS_6368()) {
+>>>>>>> v3.18
 =======
 	if (BCMCPU_IS_3368() || BCMCPU_IS_6358() || BCMCPU_IS_6362() ||
 		BCMCPU_IS_6368()) {

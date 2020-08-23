@@ -64,6 +64,7 @@ config DEVFREQ_GOV_USERSPACE
 	  given at the initialization.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DEVFREQ_GOV_CPUFREQ
 	tristate "CPUfreq"
 	depends on CPU_FREQ
@@ -140,14 +141,22 @@ config DEVFREQ_GOV_SPDM_HYP
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 comment "DEVFREQ Drivers"
 
 config ARM_EXYNOS4_BUS_DEVFREQ
 	bool "ARM Exynos4210/4212/4412 Memory Bus DEVFREQ Driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CPU_EXYNOS4210 || CPU_EXYNOS4212 || CPU_EXYNOS4412
 	select ARCH_HAS_OPP
 	select DEVFREQ_GOV_SIMPLE_ONDEMAND
+=======
+	depends on (CPU_EXYNOS4210 || SOC_EXYNOS4212 || SOC_EXYNOS4412) && !ARCH_MULTIPLATFORM
+	select DEVFREQ_GOV_SIMPLE_ONDEMAND
+	select PM_OPP
+>>>>>>> v3.18
 =======
 	depends on (CPU_EXYNOS4210 || SOC_EXYNOS4212 || SOC_EXYNOS4412) && !ARCH_MULTIPLATFORM
 	select DEVFREQ_GOV_SIMPLE_ONDEMAND
@@ -158,6 +167,7 @@ config ARM_EXYNOS4_BUS_DEVFREQ
 	  and Exynos4212/4412 memory interface and bus (vdd_mif + vdd_int).
 	  It reads PPMU counters of memory controllers and adjusts
 	  the operating frequencies and voltages with OPP support.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  To operate with optimal voltages, ASV support is required
 	  (CONFIG_EXYNOS_ASV).
@@ -204,6 +214,8 @@ config DEVFREQ_SPDM
 	  This driver allows any SPDM based client to vote for bandwidth.
 	  Used with the MSM SPDM Hypervisor Governor.
 =======
+=======
+>>>>>>> v3.18
 	  This does not yet operate with optimal voltages.
 
 config ARM_EXYNOS5_BUS_DEVFREQ
@@ -215,6 +227,9 @@ config ARM_EXYNOS5_BUS_DEVFREQ
 	  This adds the DEVFREQ driver for Exynos5250 bus interface (vdd_int).
 	  It reads PPMU counters of memory controllers and adjusts the
 	  operating frequencies and voltages with OPP support.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif # PM_DEVFREQ

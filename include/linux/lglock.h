@@ -26,6 +26,7 @@
 #include <linux/notifier.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* can make br locks by using local lock for read side, global lock for write */
 #define br_lock_init(name)	lg_lock_init(name, #name)
 #define br_read_lock(name)	lg_local_lock(name)
@@ -35,6 +36,9 @@
 
 #define DEFINE_BRLOCK(name)		DEFINE_LGLOCK(name)
 #define DEFINE_STATIC_BRLOCK(name)	DEFINE_STATIC_LGLOCK(name)
+=======
+#ifdef CONFIG_SMP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_SMP
 >>>>>>> v3.18
@@ -72,7 +76,10 @@ void lg_global_lock(struct lglock *lg);
 void lg_global_unlock(struct lglock *lg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 /* When !CONFIG_SMP, map lglock to spinlock */
 #define lglock spinlock
@@ -87,5 +94,8 @@ void lg_global_unlock(struct lglock *lg);
 #define lg_global_unlock spin_unlock
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

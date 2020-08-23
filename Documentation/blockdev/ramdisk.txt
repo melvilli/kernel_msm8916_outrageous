@@ -37,20 +37,27 @@ rescue floppy disk.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 2) Kernel Command Line Parameters
 ---------------------------------
 
 =======
+=======
+>>>>>>> v3.18
 2) Parameters
 ---------------------------------
 
 2a) Kernel Command Line Parameters
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ramdisk_size=N
 	==============
 
 This parameter tells the RAM disk driver to set up RAM disks of N k size.  The
+<<<<<<< HEAD
 <<<<<<< HEAD
 default is 4096 (4 MB) (8192 (8 MB) on S390).
 
@@ -61,6 +68,8 @@ This parameter tells the RAM disk driver how many bytes to use per block.  The
 default is 1024 (BLOCK_SIZE).
 
 =======
+=======
+>>>>>>> v3.18
 default is 4096 (4 MB).
 
 2b) Module parameters
@@ -76,6 +85,9 @@ default is 4096 (4 MB).
 	rd_size
 	=======
 	See ramdisk_size.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 3) Using "rdev -r"

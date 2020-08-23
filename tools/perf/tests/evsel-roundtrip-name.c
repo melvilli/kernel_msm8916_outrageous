@@ -3,6 +3,10 @@
 #include "parse-events.h"
 #include "tests.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "debug.h"
+>>>>>>> v3.18
 =======
 #include "debug.h"
 >>>>>>> v3.18
@@ -84,7 +88,11 @@ static int __perf_evsel__name_array_test(const char *names[], int nr_names)
 
 	err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(evsel, &evlist->entries, node) {
+=======
+	evlist__for_each(evlist, evsel) {
+>>>>>>> v3.18
 =======
 	evlist__for_each(evlist, evsel) {
 >>>>>>> v3.18

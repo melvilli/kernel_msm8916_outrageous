@@ -454,7 +454,11 @@ mmap(MAP_LOCKED) SYSTEM CALL HANDLING
 -------------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 In addition the the mlock()/mlockall() system calls, an application can request
+=======
+In addition the mlock()/mlockall() system calls, an application can request
+>>>>>>> v3.18
 =======
 In addition the mlock()/mlockall() system calls, an application can request
 >>>>>>> v3.18

@@ -13,6 +13,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "persistent_ram: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "persistent_ram: " fmt
 
@@ -51,11 +56,14 @@ static inline size_t buffer_start(struct persistent_ram_zone *prz)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_RAW_SPINLOCK(buffer_lock);
 
 /* increase and wrap the start pointer, returning the old value */
 static size_t buffer_start_add(struct persistent_ram_zone *prz, size_t a)
 =======
+=======
+>>>>>>> v3.18
 /* increase and wrap the start pointer, returning the old value */
 static size_t buffer_start_add_atomic(struct persistent_ram_zone *prz, size_t a)
 {
@@ -93,6 +101,9 @@ static DEFINE_RAW_SPINLOCK(buffer_lock);
 
 /* increase and wrap the start pointer, returning the old value */
 static size_t buffer_start_add_locked(struct persistent_ram_zone *prz, size_t a)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int old;
@@ -114,7 +125,11 @@ static size_t buffer_start_add_locked(struct persistent_ram_zone *prz, size_t a)
 
 /* increase the size counter until it hits the max size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void buffer_size_add(struct persistent_ram_zone *prz, size_t a)
+=======
+static void buffer_size_add_locked(struct persistent_ram_zone *prz, size_t a)
+>>>>>>> v3.18
 =======
 static void buffer_size_add_locked(struct persistent_ram_zone *prz, size_t a)
 >>>>>>> v3.18
@@ -139,6 +154,12 @@ exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static size_t (*buffer_start_add)(struct persistent_ram_zone *, size_t) = buffer_start_add_atomic;
+static void (*buffer_size_add)(struct persistent_ram_zone *, size_t) = buffer_size_add_atomic;
+
+>>>>>>> v3.18
 =======
 static size_t (*buffer_start_add)(struct persistent_ram_zone *, size_t) = buffer_start_add_atomic;
 static void (*buffer_size_add)(struct persistent_ram_zone *, size_t) = buffer_size_add_atomic;
@@ -225,6 +246,7 @@ static void persistent_ram_ecc_old(struct persistent_ram_zone *prz)
 		numerr = persistent_ram_decode_rs8(prz, block, size, par);
 		if (numerr > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_devel("persistent_ram: error in block %p, %d\n",
 			       block, numerr);
 			prz->corrected_bytes += numerr;
@@ -232,10 +254,15 @@ static void persistent_ram_ecc_old(struct persistent_ram_zone *prz)
 			pr_devel("persistent_ram: uncorrectable error in block %p\n",
 				block);
 =======
+=======
+>>>>>>> v3.18
 			pr_devel("error in block %p, %d\n", block, numerr);
 			prz->corrected_bytes += numerr;
 		} else if (numerr < 0) {
 			pr_devel("uncorrectable error in block %p\n", block);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			prz->bad_blocks++;
 		}
@@ -284,7 +311,11 @@ static int persistent_ram_init_ecc(struct persistent_ram_zone *prz,
 				  0, 1, prz->ecc_info.ecc_size);
 	if (prz->rs_decoder == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("persistent_ram: init_rs failed\n");
+=======
+		pr_info("init_rs failed\n");
+>>>>>>> v3.18
 =======
 		pr_info("init_rs failed\n");
 >>>>>>> v3.18
@@ -298,15 +329,21 @@ static int persistent_ram_init_ecc(struct persistent_ram_zone *prz,
 					   prz->par_header);
 	if (numerr > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("persistent_ram: error in header, %d\n", numerr);
 		prz->corrected_bytes += numerr;
 	} else if (numerr < 0) {
 		pr_info("persistent_ram: uncorrectable error in header\n");
 =======
+=======
+>>>>>>> v3.18
 		pr_info("error in header, %d\n", numerr);
 		prz->corrected_bytes += numerr;
 	} else if (numerr < 0) {
 		pr_info("uncorrectable error in header\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		prz->bad_blocks++;
 	}
@@ -337,7 +374,11 @@ static void notrace persistent_ram_update(struct persistent_ram_zone *prz,
 {
 	struct persistent_ram_buffer *buffer = prz->buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy_toio(buffer->data + start, s, count);
+=======
+	memcpy(buffer->data + start, s, count);
+>>>>>>> v3.18
 =======
 	memcpy(buffer->data + start, s, count);
 >>>>>>> v3.18
@@ -359,7 +400,11 @@ void persistent_ram_save_old(struct persistent_ram_zone *prz)
 	}
 	if (!prz->old_log) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("persistent_ram: failed to allocate buffer\n");
+=======
+		pr_err("failed to allocate buffer\n");
+>>>>>>> v3.18
 =======
 		pr_err("failed to allocate buffer\n");
 >>>>>>> v3.18
@@ -368,8 +413,13 @@ void persistent_ram_save_old(struct persistent_ram_zone *prz)
 
 	prz->old_log_size = size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy_fromio(prz->old_log, &buffer->data[start], size - start);
 	memcpy_fromio(prz->old_log + size - start, &buffer->data[0], start);
+=======
+	memcpy(prz->old_log, &buffer->data[start], size - start);
+	memcpy(prz->old_log + size - start, &buffer->data[0], start);
+>>>>>>> v3.18
 =======
 	memcpy(prz->old_log, &buffer->data[start], size - start);
 	memcpy(prz->old_log + size - start, &buffer->data[0], start);
@@ -431,8 +481,12 @@ void persistent_ram_zap(struct persistent_ram_zone *prz)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *persistent_ram_vmap(phys_addr_t start, size_t size,
 		unsigned int memtype)
+=======
+static void *persistent_ram_vmap(phys_addr_t start, size_t size)
+>>>>>>> v3.18
 =======
 static void *persistent_ram_vmap(phys_addr_t start, size_t size)
 >>>>>>> v3.18
@@ -448,6 +502,7 @@ static void *persistent_ram_vmap(phys_addr_t start, size_t size)
 	page_count = DIV_ROUND_UP(size + offset_in_page(start), PAGE_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memtype)
 		prot = pgprot_noncached(PAGE_KERNEL);
 	else
@@ -458,12 +513,17 @@ static void *persistent_ram_vmap(phys_addr_t start, size_t size)
 		pr_err("%s: Failed to allocate array for %u pages\n", __func__,
 			page_count);
 =======
+=======
+>>>>>>> v3.18
 	prot = pgprot_noncached(PAGE_KERNEL);
 
 	pages = kmalloc_array(page_count, sizeof(struct page *), GFP_KERNEL);
 	if (!pages) {
 		pr_err("%s: Failed to allocate array for %u pages\n",
 		       __func__, page_count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 	}
@@ -479,11 +539,16 @@ static void *persistent_ram_vmap(phys_addr_t start, size_t size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *persistent_ram_iomap(phys_addr_t start, size_t size,
 		unsigned int memtype)
 {
 	void *va;
 
+=======
+static void *persistent_ram_iomap(phys_addr_t start, size_t size)
+{
+>>>>>>> v3.18
 =======
 static void *persistent_ram_iomap(phys_addr_t start, size_t size)
 {
@@ -494,6 +559,7 @@ static void *persistent_ram_iomap(phys_addr_t start, size_t size)
 		return NULL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (memtype)
 		va = ioremap(start, size);
@@ -506,6 +572,8 @@ static void *persistent_ram_iomap(phys_addr_t start, size_t size)
 static int persistent_ram_buffer_map(phys_addr_t start, phys_addr_t size,
 		struct persistent_ram_zone *prz, int memtype)
 =======
+=======
+>>>>>>> v3.18
 	buffer_start_add = buffer_start_add_locked;
 	buffer_size_add = buffer_size_add_locked;
 
@@ -514,6 +582,9 @@ static int persistent_ram_buffer_map(phys_addr_t start, phys_addr_t size,
 
 static int persistent_ram_buffer_map(phys_addr_t start, phys_addr_t size,
 		struct persistent_ram_zone *prz)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	prz->paddr = start;
@@ -521,9 +592,15 @@ static int persistent_ram_buffer_map(phys_addr_t start, phys_addr_t size,
 
 	if (pfn_valid(start >> PAGE_SHIFT))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prz->vaddr = persistent_ram_vmap(start, size, memtype);
 	else
 		prz->vaddr = persistent_ram_iomap(start, size, memtype);
+=======
+		prz->vaddr = persistent_ram_vmap(start, size);
+	else
+		prz->vaddr = persistent_ram_iomap(start, size);
+>>>>>>> v3.18
 =======
 		prz->vaddr = persistent_ram_vmap(start, size);
 	else
@@ -557,6 +634,7 @@ static int persistent_ram_post_init(struct persistent_ram_zone *prz, u32 sig,
 		if (buffer_size(prz) > prz->buffer_size ||
 		    buffer_start(prz) > buffer_size(prz))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_info("persistent_ram: found existing invalid buffer,"
 				" size %zu, start %zu\n",
 			       buffer_size(prz), buffer_start(prz));
@@ -565,19 +643,29 @@ static int persistent_ram_post_init(struct persistent_ram_zone *prz, u32 sig,
 				" size %zu, start %zu\n",
 			       buffer_size(prz), buffer_start(prz));
 =======
+=======
+>>>>>>> v3.18
 			pr_info("found existing invalid buffer, size %zu, start %zu\n",
 				buffer_size(prz), buffer_start(prz));
 		else {
 			pr_debug("found existing buffer, size %zu, start %zu\n",
 				 buffer_size(prz), buffer_start(prz));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			persistent_ram_save_old(prz);
 			return 0;
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("persistent_ram: no valid data in buffer"
 			" (sig = 0x%08x)\n", prz->buffer->sig);
+=======
+		pr_debug("no valid data in buffer (sig = 0x%08x)\n",
+			 prz->buffer->sig);
+>>>>>>> v3.18
 =======
 		pr_debug("no valid data in buffer (sig = 0x%08x)\n",
 			 prz->buffer->sig);
@@ -610,8 +698,12 @@ void persistent_ram_free(struct persistent_ram_zone *prz)
 
 struct persistent_ram_zone *persistent_ram_new(phys_addr_t start, size_t size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u32 sig, struct persistent_ram_ecc_info *ecc_info,
 			unsigned int memtype)
+=======
+			u32 sig, struct persistent_ram_ecc_info *ecc_info)
+>>>>>>> v3.18
 =======
 			u32 sig, struct persistent_ram_ecc_info *ecc_info)
 >>>>>>> v3.18
@@ -622,17 +714,23 @@ struct persistent_ram_zone *persistent_ram_new(phys_addr_t start, size_t size,
 	prz = kzalloc(sizeof(struct persistent_ram_zone), GFP_KERNEL);
 	if (!prz) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("persistent_ram: failed to allocate persistent ram zone\n");
 		goto err;
 	}
 
 	ret = persistent_ram_buffer_map(start, size, prz, memtype);
 =======
+=======
+>>>>>>> v3.18
 		pr_err("failed to allocate persistent ram zone\n");
 		goto err;
 	}
 
 	ret = persistent_ram_buffer_map(start, size, prz);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		goto err;

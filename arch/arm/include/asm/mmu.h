@@ -17,7 +17,11 @@ typedef struct {
 #define ASID_BITS	8
 #define ASID_MASK	((~0ULL) << ASID_BITS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ASID(mm)	((mm)->context.id.counter & ~ASID_MASK)
+=======
+#define ASID(mm)	((unsigned int)((mm)->context.id.counter & ~ASID_MASK))
+>>>>>>> v3.18
 =======
 #define ASID(mm)	((unsigned int)((mm)->context.id.counter & ~ASID_MASK))
 >>>>>>> v3.18

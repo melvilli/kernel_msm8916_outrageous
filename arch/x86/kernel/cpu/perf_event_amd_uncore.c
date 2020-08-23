@@ -289,7 +289,11 @@ static struct pmu amd_l2_pmu = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct amd_uncore * __cpuinit amd_uncore_alloc(unsigned int cpu)
+=======
+static struct amd_uncore *amd_uncore_alloc(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static struct amd_uncore *amd_uncore_alloc(unsigned int cpu)
 >>>>>>> v3.18
@@ -298,6 +302,7 @@ static struct amd_uncore *amd_uncore_alloc(unsigned int cpu)
 			cpu_to_node(cpu));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __cpuinit amd_uncore_cpu_up_prepare(unsigned int cpu)
 {
@@ -330,6 +335,8 @@ static struct amd_uncore *
 __cpuinit amd_uncore_find_online_sibling(struct amd_uncore *this,
 					 struct amd_uncore * __percpu *uncores)
 =======
+=======
+>>>>>>> v3.18
 static int amd_uncore_cpu_up_prepare(unsigned int cpu)
 {
 	struct amd_uncore *uncore_nb = NULL, *uncore_l2;
@@ -370,6 +377,9 @@ fail:
 static struct amd_uncore *
 amd_uncore_find_online_sibling(struct amd_uncore *this,
 			       struct amd_uncore * __percpu *uncores)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned int cpu;
@@ -396,7 +406,11 @@ amd_uncore_find_online_sibling(struct amd_uncore *this,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit amd_uncore_cpu_starting(unsigned int cpu)
+=======
+static void amd_uncore_cpu_starting(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void amd_uncore_cpu_starting(unsigned int cpu)
 >>>>>>> v3.18
@@ -428,8 +442,13 @@ static void amd_uncore_cpu_starting(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit uncore_online(unsigned int cpu,
 				    struct amd_uncore * __percpu *uncores)
+=======
+static void uncore_online(unsigned int cpu,
+			  struct amd_uncore * __percpu *uncores)
+>>>>>>> v3.18
 =======
 static void uncore_online(unsigned int cpu,
 			  struct amd_uncore * __percpu *uncores)
@@ -445,7 +464,11 @@ static void uncore_online(unsigned int cpu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit amd_uncore_cpu_online(unsigned int cpu)
+=======
+static void amd_uncore_cpu_online(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void amd_uncore_cpu_online(unsigned int cpu)
 >>>>>>> v3.18
@@ -458,8 +481,13 @@ static void amd_uncore_cpu_online(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit uncore_down_prepare(unsigned int cpu,
 					  struct amd_uncore * __percpu *uncores)
+=======
+static void uncore_down_prepare(unsigned int cpu,
+				struct amd_uncore * __percpu *uncores)
+>>>>>>> v3.18
 =======
 static void uncore_down_prepare(unsigned int cpu,
 				struct amd_uncore * __percpu *uncores)
@@ -489,7 +517,11 @@ static void uncore_down_prepare(unsigned int cpu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit amd_uncore_cpu_down_prepare(unsigned int cpu)
+=======
+static void amd_uncore_cpu_down_prepare(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void amd_uncore_cpu_down_prepare(unsigned int cpu)
 >>>>>>> v3.18
@@ -502,8 +534,12 @@ static void amd_uncore_cpu_down_prepare(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit uncore_dead(unsigned int cpu,
 				  struct amd_uncore * __percpu *uncores)
+=======
+static void uncore_dead(unsigned int cpu, struct amd_uncore * __percpu *uncores)
+>>>>>>> v3.18
 =======
 static void uncore_dead(unsigned int cpu, struct amd_uncore * __percpu *uncores)
 >>>>>>> v3.18
@@ -516,15 +552,21 @@ static void uncore_dead(unsigned int cpu, struct amd_uncore * __percpu *uncores)
 	if (!--uncore->refcnt)
 		kfree(uncore);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*per_cpu_ptr(amd_uncore_nb, cpu) = NULL;
 }
 
 static void __cpuinit amd_uncore_cpu_dead(unsigned int cpu)
 =======
+=======
+>>>>>>> v3.18
 	*per_cpu_ptr(uncores, cpu) = NULL;
 }
 
 static void amd_uncore_cpu_dead(unsigned int cpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (amd_uncore_nb)
@@ -535,7 +577,11 @@ static void amd_uncore_cpu_dead(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -547,7 +593,12 @@ amd_uncore_cpu_notifier(struct notifier_block *self, unsigned long action,
 	switch (action & ~CPU_TASKS_FROZEN) {
 	case CPU_UP_PREPARE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		amd_uncore_cpu_up_prepare(cpu);
+=======
+		if (amd_uncore_cpu_up_prepare(cpu))
+			return notifier_from_errno(-ENOMEM);
+>>>>>>> v3.18
 =======
 		if (amd_uncore_cpu_up_prepare(cpu))
 			return notifier_from_errno(-ENOMEM);
@@ -579,7 +630,11 @@ amd_uncore_cpu_notifier(struct notifier_block *self, unsigned long action,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block amd_uncore_cpu_notifier_block __cpuinitdata = {
+=======
+static struct notifier_block amd_uncore_cpu_notifier_block = {
+>>>>>>> v3.18
 =======
 static struct notifier_block amd_uncore_cpu_notifier_block = {
 >>>>>>> v3.18
@@ -596,6 +651,7 @@ static void __init init_cpu_already_online(void *dummy)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init amd_uncore_init(void)
 {
 	unsigned int cpu;
@@ -611,6 +667,8 @@ static int __init amd_uncore_init(void)
 		amd_uncore_nb = alloc_percpu(struct amd_uncore *);
 		perf_pmu_register(&amd_nb_pmu, amd_nb_pmu.name, -1);
 =======
+=======
+>>>>>>> v3.18
 static void cleanup_cpu_online(void *dummy)
 {
 	unsigned int cpu = smp_processor_id();
@@ -638,6 +696,9 @@ static int __init amd_uncore_init(void)
 		ret = perf_pmu_register(&amd_nb_pmu, amd_nb_pmu.name, -1);
 		if (ret)
 			goto fail_nb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		printk(KERN_INFO "perf: AMD NB counters detected\n");
@@ -647,8 +708,11 @@ static int __init amd_uncore_init(void)
 	if (cpu_has_perfctr_l2) {
 		amd_uncore_l2 = alloc_percpu(struct amd_uncore *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		perf_pmu_register(&amd_l2_pmu, amd_l2_pmu.name, -1);
 =======
+=======
+>>>>>>> v3.18
 		if (!amd_uncore_l2) {
 			ret = -ENOMEM;
 			goto fail_l2;
@@ -656,6 +720,9 @@ static int __init amd_uncore_init(void)
 		ret = perf_pmu_register(&amd_l2_pmu, amd_l2_pmu.name, -1);
 		if (ret)
 			goto fail_l2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		printk(KERN_INFO "perf: AMD L2I counters detected\n");
@@ -663,6 +730,7 @@ static int __init amd_uncore_init(void)
 	}
 
 	if (ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -ENODEV;
 
@@ -678,6 +746,8 @@ static int __init amd_uncore_init(void)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		goto fail_nodev;
 
 	cpu_notifier_register_begin();
@@ -719,6 +789,9 @@ fail_nb:
 
 fail_nodev:
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 device_initcall(amd_uncore_init);

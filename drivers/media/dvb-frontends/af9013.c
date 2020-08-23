@@ -471,7 +471,10 @@ static int af9013_statistics_snr_result(struct dvb_frontend *fe)
 	default:
 		goto err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -610,10 +613,13 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Return an error if can't find bandwidth or the right clock */
 		if (i == ARRAY_SIZE(coeff_lut))
 			return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = af9013_wr_regs(state, 0xae00, coeff_lut[i].val,
@@ -695,7 +701,11 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 	switch (c->transmission_mode) {
 	case TRANSMISSION_MODE_AUTO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto_mode = 1;
+=======
+		auto_mode = true;
+>>>>>>> v3.18
 =======
 		auto_mode = true;
 >>>>>>> v3.18
@@ -709,7 +719,11 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 		dev_dbg(&state->i2c->dev, "%s: invalid transmission_mode\n",
 				__func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto_mode = 1;
+=======
+		auto_mode = true;
+>>>>>>> v3.18
 =======
 		auto_mode = true;
 >>>>>>> v3.18
@@ -718,7 +732,11 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 	switch (c->guard_interval) {
 	case GUARD_INTERVAL_AUTO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto_mode = 1;
+=======
+		auto_mode = true;
+>>>>>>> v3.18
 =======
 		auto_mode = true;
 >>>>>>> v3.18
@@ -738,7 +756,11 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 		dev_dbg(&state->i2c->dev, "%s: invalid guard_interval\n",
 				__func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto_mode = 1;
+=======
+		auto_mode = true;
+>>>>>>> v3.18
 =======
 		auto_mode = true;
 >>>>>>> v3.18
@@ -747,7 +769,11 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 	switch (c->hierarchy) {
 	case HIERARCHY_AUTO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto_mode = 1;
+=======
+		auto_mode = true;
+>>>>>>> v3.18
 =======
 		auto_mode = true;
 >>>>>>> v3.18
@@ -766,7 +792,11 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 	default:
 		dev_dbg(&state->i2c->dev, "%s: invalid hierarchy\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto_mode = 1;
+=======
+		auto_mode = true;
+>>>>>>> v3.18
 =======
 		auto_mode = true;
 >>>>>>> v3.18
@@ -775,7 +805,11 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 	switch (c->modulation) {
 	case QAM_AUTO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto_mode = 1;
+=======
+		auto_mode = true;
+>>>>>>> v3.18
 =======
 		auto_mode = true;
 >>>>>>> v3.18
@@ -791,7 +825,11 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 	default:
 		dev_dbg(&state->i2c->dev, "%s: invalid modulation\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto_mode = 1;
+=======
+		auto_mode = true;
+>>>>>>> v3.18
 =======
 		auto_mode = true;
 >>>>>>> v3.18
@@ -803,7 +841,11 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 	switch (c->code_rate_HP) {
 	case FEC_AUTO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto_mode = 1;
+=======
+		auto_mode = true;
+>>>>>>> v3.18
 =======
 		auto_mode = true;
 >>>>>>> v3.18
@@ -826,7 +868,11 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 		dev_dbg(&state->i2c->dev, "%s: invalid code_rate_HP\n",
 				__func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto_mode = 1;
+=======
+		auto_mode = true;
+>>>>>>> v3.18
 =======
 		auto_mode = true;
 >>>>>>> v3.18
@@ -835,7 +881,11 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 	switch (c->code_rate_LP) {
 	case FEC_AUTO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto_mode = 1;
+=======
+		auto_mode = true;
+>>>>>>> v3.18
 =======
 		auto_mode = true;
 >>>>>>> v3.18
@@ -860,7 +910,11 @@ static int af9013_set_frontend(struct dvb_frontend *fe)
 		dev_dbg(&state->i2c->dev, "%s: invalid code_rate_LP\n",
 				__func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto_mode = 1;
+=======
+		auto_mode = true;
+>>>>>>> v3.18
 =======
 		auto_mode = true;
 >>>>>>> v3.18

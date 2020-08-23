@@ -112,7 +112,11 @@ struct net_device *alloc_rtllib(int sizeof_priv)
 	if (!dev) {
 		RTLLIB_ERROR("Unable to network device.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto failed;
+=======
+		return NULL;
+>>>>>>> v3.18
 =======
 		return NULL;
 >>>>>>> v3.18
@@ -185,8 +189,12 @@ struct net_device *alloc_rtllib(int sizeof_priv)
 
  failed:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev)
 		free_netdev(dev);
+=======
+	free_netdev(dev);
+>>>>>>> v3.18
 =======
 	free_netdev(dev);
 >>>>>>> v3.18
@@ -227,6 +235,10 @@ static ssize_t write_debug_level(struct file *file, const char __user *buffer,
 	unsigned long val;
 	int err = kstrtoul_from_user(buffer, count, 0, &val);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -246,16 +258,22 @@ static const struct file_operations fops = {
 	.read = seq_read,
 	.llseek = seq_lseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.write = write_debug_level
 };
 
 int __init rtllib_init(void)
 =======
+=======
+>>>>>>> v3.18
 	.write = write_debug_level,
 	.release = single_release,
 };
 
 static int __init rtllib_init(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct proc_dir_entry *e;
@@ -277,7 +295,11 @@ static int __init rtllib_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __exit rtllib_exit(void)
+=======
+static void __exit rtllib_exit(void)
+>>>>>>> v3.18
 =======
 static void __exit rtllib_exit(void)
 >>>>>>> v3.18

@@ -19,6 +19,10 @@
 #include <keys/asymmetric-subtype.h>
 #include <keys/asymmetric-parser.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <keys/system_keyring.h>
+>>>>>>> v3.18
 =======
 #include <keys/system_keyring.h>
 >>>>>>> v3.18
@@ -27,6 +31,7 @@
 #include "public_key.h"
 #include "x509_parser.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const
 struct public_key_algorithm *x509_public_key_algorithms[PKEY_ALGO__LAST] = {
@@ -58,6 +63,8 @@ static int x509_check_signature(const struct public_key *pub,
 	if (IS_ERR(tfm))
 		return (PTR_ERR(tfm) == -ENOENT) ? -ENOPKG : PTR_ERR(tfm);
 =======
+=======
+>>>>>>> v3.18
 static bool use_builtin_keys;
 static struct asymmetric_key_id *ca_keyid;
 
@@ -177,11 +184,15 @@ int x509_get_sig_params(struct x509_certificate *cert)
 		}
 		return PTR_ERR(tfm);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	desc_size = crypto_shash_descsize(tfm) + sizeof(*desc);
 	digest_size = crypto_shash_digestsize(tfm);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* We allocate the hash operational data storage on the end of our
 	 * context data.
@@ -199,6 +210,8 @@ int x509_get_sig_params(struct x509_certificate *cert)
 	desc->tfm	= tfm;
 	desc->flags	= CRYPTO_TFM_REQ_MAY_SLEEP;
 =======
+=======
+>>>>>>> v3.18
 	/* We allocate the hash operational data storage on the end of the
 	 * digest storage space.
 	 */
@@ -213,11 +226,15 @@ int x509_get_sig_params(struct x509_certificate *cert)
 	desc = digest + digest_size;
 	desc->tfm = tfm;
 	desc->flags = CRYPTO_TFM_REQ_MAY_SLEEP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = crypto_shash_init(desc);
 	if (ret < 0)
 		goto error;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	ret = -ENOMEM;
@@ -242,6 +259,8 @@ error_no_sig:
 
 	pr_devel("<==%s() = %d\n", __func__, ret);
 =======
+=======
+>>>>>>> v3.18
 	might_sleep();
 	ret = crypto_shash_finup(desc, cert->tbs, cert->tbs_size, digest);
 error:
@@ -302,6 +321,9 @@ static int x509_validate_trust(struct x509_certificate *cert,
 			ret = x509_check_signature(key->payload.data, cert);
 		key_put(key);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -312,15 +334,21 @@ static int x509_validate_trust(struct x509_certificate *cert,
 static int x509_key_preparse(struct key_preparsed_payload *prep)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct x509_certificate *cert;
 	size_t srlen, sulen;
 	char *desc = NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct asymmetric_key_ids *kids;
 	struct x509_certificate *cert;
 	const char *q;
 	size_t srlen, sulen;
 	char *desc = NULL, *p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -331,8 +359,11 @@ static int x509_key_preparse(struct key_preparsed_payload *prep)
 	pr_devel("Cert Issuer: %s\n", cert->issuer);
 	pr_devel("Cert Subject: %s\n", cert->subject);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_devel("Cert Key Algo: %s\n", pkey_algo[cert->pkey_algo]);
 =======
+=======
+>>>>>>> v3.18
 
 	if (cert->pub->pkey_algo >= PKEY_ALGO__LAST ||
 	    cert->sig.pkey_algo >= PKEY_ALGO__LAST ||
@@ -345,6 +376,9 @@ static int x509_key_preparse(struct key_preparsed_payload *prep)
 	}
 
 	pr_devel("Cert Key Algo: %s\n", pkey_algo_name[cert->pub->pkey_algo]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_devel("Cert Valid From: %04ld-%02d-%02d %02d:%02d:%02d\n",
 		 cert->valid_from.tm_year + 1900, cert->valid_from.tm_mon + 1,
@@ -355,6 +389,7 @@ static int x509_key_preparse(struct key_preparsed_payload *prep)
 		 cert->valid_to.tm_mday, cert->valid_to.tm_hour,
 		 cert->valid_to.tm_min,  cert->valid_to.tm_sec);
 	pr_devel("Cert Signature: %s + %s\n",
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 pkey_algo[cert->sig_pkey_algo],
 		 pkey_hash_algo[cert->sig_hash_algo]);
@@ -375,6 +410,8 @@ static int x509_key_preparse(struct key_preparsed_payload *prep)
 		if (ret < 0)
 			goto error_free_cert;
 =======
+=======
+>>>>>>> v3.18
 		 pkey_algo_name[cert->sig.pkey_algo],
 		 hash_algo_name[cert->sig.pkey_hash_algo]);
 
@@ -391,11 +428,15 @@ static int x509_key_preparse(struct key_preparsed_payload *prep)
 		ret = x509_validate_trust(cert, get_system_trusted_keyring());
 		if (!ret)
 			prep->trusted = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* Propose a description */
 	sulen = strlen(cert->subject);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	srlen = strlen(cert->fingerprint);
 	ret = -ENOMEM;
@@ -408,6 +449,8 @@ static int x509_key_preparse(struct key_preparsed_payload *prep)
 	memcpy(desc + sulen + 2, cert->fingerprint, srlen);
 	desc[sulen + 2 + srlen] = 0;
 =======
+=======
+>>>>>>> v3.18
 	if (cert->raw_skid) {
 		srlen = cert->raw_skid_size;
 		q = cert->raw_skid;
@@ -436,14 +479,22 @@ static int x509_key_preparse(struct key_preparsed_payload *prep)
 		goto error_free_desc;
 	kids->id[0] = cert->id;
 	kids->id[1] = cert->skid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* We're pinning the module by being linked against it */
 	__module_get(public_key_subtype.owner);
 	prep->type_data[0] = &public_key_subtype;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prep->type_data[1] = cert->fingerprint;
 	prep->payload = cert->pub;
+=======
+	prep->type_data[1] = kids;
+	prep->payload[0] = cert->pub;
+>>>>>>> v3.18
 =======
 	prep->type_data[1] = kids;
 	prep->payload[0] = cert->pub;
@@ -454,11 +505,14 @@ static int x509_key_preparse(struct key_preparsed_payload *prep)
 	/* We've finished with the certificate */
 	cert->pub = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cert->fingerprint = NULL;
 	desc = NULL;
 	ret = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	cert->id = NULL;
 	cert->skid = NULL;
 	desc = NULL;
@@ -466,6 +520,9 @@ static int x509_key_preparse(struct key_preparsed_payload *prep)
 
 error_free_desc:
 	kfree(desc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error_free_cert:
 	x509_free_certificate(cert);
@@ -494,6 +551,12 @@ static void __exit x509_key_exit(void)
 module_init(x509_key_init);
 module_exit(x509_key_exit);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+MODULE_DESCRIPTION("X.509 certificate parser");
+MODULE_LICENSE("GPL");
+>>>>>>> v3.18
 =======
 
 MODULE_DESCRIPTION("X.509 certificate parser");

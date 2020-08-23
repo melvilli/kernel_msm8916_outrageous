@@ -121,8 +121,13 @@ It's possible to disable huge zero page by writing 0 or enable it
 back by writing 1:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 echo 0 >/sys/kernel/mm/transparent_hugepage/khugepaged/use_zero_page
 echo 1 >/sys/kernel/mm/transparent_hugepage/khugepaged/use_zero_page
+=======
+echo 0 >/sys/kernel/mm/transparent_hugepage/use_zero_page
+echo 1 >/sys/kernel/mm/transparent_hugepage/use_zero_page
+>>>>>>> v3.18
 =======
 echo 0 >/sys/kernel/mm/transparent_hugepage/use_zero_page
 echo 1 >/sys/kernel/mm/transparent_hugepage/use_zero_page
@@ -366,7 +371,11 @@ get_user_pages which is unacceptable as too many gup users are
 performance critical and they must work natively on hugepages like
 they work natively on hugetlbfs already (hugetlbfs is simpler because
 <<<<<<< HEAD
+<<<<<<< HEAD
 hugetlbfs pages cannot be splitted so there wouldn't be requirement of
+=======
+hugetlbfs pages cannot be split so there wouldn't be requirement of
+>>>>>>> v3.18
 =======
 hugetlbfs pages cannot be split so there wouldn't be requirement of
 >>>>>>> v3.18
@@ -376,7 +385,11 @@ anymore which tail page is pinned by gup and which is not while we run
 split_huge_page. But we still have to add the gup pin to the head page
 too, to know when we can free the compound page in case it's never
 <<<<<<< HEAD
+<<<<<<< HEAD
 splitted during its lifetime. That requires changing not just
+=======
+split during its lifetime. That requires changing not just
+>>>>>>> v3.18
 =======
 split during its lifetime. That requires changing not just
 >>>>>>> v3.18

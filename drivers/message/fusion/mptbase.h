@@ -406,7 +406,11 @@ typedef struct _VirtDevice {
 	VirtTarget		*vtarget;
 	u8			 configured_lun;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			 lun;
+=======
+	u64			 lun;
+>>>>>>> v3.18
 =======
 	u64			 lun;
 >>>>>>> v3.18
@@ -610,7 +614,11 @@ typedef struct _MPT_ADAPTER
 	int			 pci_irq;	/* This irq           */
 	char			 name[MPT_NAME_LENGTH];	/* "iocN"             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char			 prod_name[MPT_NAME_LENGTH];	/* "LSIFC9x9"         */
+=======
+	const char		 *prod_name;	/* "LSIFC9x9"         */
+>>>>>>> v3.18
 =======
 	const char		 *prod_name;	/* "LSIFC9x9"         */
 >>>>>>> v3.18

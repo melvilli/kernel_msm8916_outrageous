@@ -1170,7 +1170,10 @@ int cpia2_register_camera(struct camera_data *cam)
 	cam->vdev.ctrl_handler = hdl;
 	cam->vdev.v4l2_dev = &cam->v4l2_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &cam->vdev.flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

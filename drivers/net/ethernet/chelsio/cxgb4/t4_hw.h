@@ -2,7 +2,11 @@
  * This file is part of the Chelsio T4 Ethernet driver for Linux.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2003-2010 Chelsio Communications, Inc. All rights reserved.
+=======
+ * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
 >>>>>>> v3.18
@@ -73,6 +77,10 @@ enum {
 	SGE_NTIMERS = 6,          /* # of interrupt holdoff timer values */
 	SGE_NCOUNTERS = 4,        /* # of interrupt packet counter values */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SGE_MAX_IQ_SIZE = 65520,
+>>>>>>> v3.18
 =======
 	SGE_MAX_IQ_SIZE = 65520,
 >>>>>>> v3.18
@@ -143,6 +151,10 @@ struct rsp_ctrl {
 #define RSPD_TYPE(x) (((x) >> 4) & 3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define V_QINTR_CNT_EN	   0x0
+>>>>>>> v3.18
 =======
 #define V_QINTR_CNT_EN	   0x0
 >>>>>>> v3.18
@@ -187,7 +199,11 @@ enum {
 	 */
 	FLASH_FW_START_SEC = 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	FLASH_FW_NSECS = 8,
+=======
+	FLASH_FW_NSECS = 16,
+>>>>>>> v3.18
 =======
 	FLASH_FW_NSECS = 16,
 >>>>>>> v3.18
@@ -222,13 +238,19 @@ enum {
 	FLASH_CFG_MAX_SIZE = FLASH_MAX_SIZE(FLASH_CFG_NSECS),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* We don't support FLASH devices which can't support the full
 	 * standard set of sections which we need for normal
 	 * operations.
 	 */
 	FLASH_MIN_SIZE = FLASH_CFG_START + FLASH_CFG_MAX_SIZE,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	FLASH_FPGA_CFG_START_SEC = 15,
 	FLASH_FPGA_CFG_START = FLASH_START(FLASH_FPGA_CFG_START_SEC),

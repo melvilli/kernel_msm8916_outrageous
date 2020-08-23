@@ -13,8 +13,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -23,15 +27,21 @@
  *
  *	Mitsuru KANDA @USAGI       : IPv6 Support
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	Kazunori MIYAZAWA @USAGI   :
  * 	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
  *
  * 	This file is derived from net/ipv4/ah.c.
 =======
+=======
+>>>>>>> v3.18
  *	Kazunori MIYAZAWA @USAGI   :
  *	Kunihiro Ishiguro <kunihiro@ipinfusion.com>
  *
  *	This file is derived from net/ipv4/ah.c.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -297,7 +307,11 @@ static int ipv6_clear_mutable_options(struct ipv6hdr *iph, int len, int dir)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default :
+=======
+		default:
+>>>>>>> v3.18
 =======
 		default:
 >>>>>>> v3.18
@@ -363,11 +377,17 @@ static int ah6_output(struct xfrm_state *x, struct sk_buff *skb)
 	struct ah_data *ahp;
 	struct tmp_ext *iph_ext;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int seqhi_len = 0;
 	__be32 *seqhi;
 	int sglists = 0;
 	struct scatterlist *seqhisg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ahp = x->data;
@@ -383,9 +403,12 @@ static int ah6_output(struct xfrm_state *x, struct sk_buff *skb)
 		extlen += sizeof(*iph_ext);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = -ENOMEM;
 	iph_base = ah_alloc_tmp(ahash, nfrags, IPV6HDR_BASELEN + extlen);
 =======
+=======
+>>>>>>> v3.18
 	if (x->props.flags & XFRM_STATE_ESN) {
 		sglists = 1;
 		seqhi_len = sizeof(*seqhi);
@@ -393,21 +416,30 @@ static int ah6_output(struct xfrm_state *x, struct sk_buff *skb)
 	err = -ENOMEM;
 	iph_base = ah_alloc_tmp(ahash, nfrags + sglists, IPV6HDR_BASELEN +
 				extlen + seqhi_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!iph_base)
 		goto out;
 
 	iph_ext = ah_tmp_ext(iph_base);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	icv = ah_tmp_icv(ahash, iph_ext, extlen);
 	req = ah_tmp_req(ahash, icv);
 	sg = ah_req_sg(ahash, req);
 =======
+=======
+>>>>>>> v3.18
 	seqhi = (__be32 *)((char *)iph_ext + extlen);
 	icv = ah_tmp_icv(ahash, seqhi, seqhi_len);
 	req = ah_tmp_req(ahash, icv);
 	sg = ah_req_sg(ahash, req);
 	seqhisg = sg + nfrags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ah = ip_auth_hdr(skb);
@@ -453,11 +485,14 @@ static int ah6_output(struct xfrm_state *x, struct sk_buff *skb)
 	ah->seq_no = htonl(XFRM_SKB_CB(skb)->seq.output.low);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sg_init_table(sg, nfrags);
 	skb_to_sgvec(skb, sg, 0, skb->len);
 
 	ahash_request_set_crypt(req, sg, icv, skb->len);
 =======
+=======
+>>>>>>> v3.18
 	sg_init_table(sg, nfrags + sglists);
 	skb_to_sgvec_nomark(skb, sg, 0, skb->len);
 
@@ -467,6 +502,9 @@ static int ah6_output(struct xfrm_state *x, struct sk_buff *skb)
 		sg_set_buf(seqhisg, seqhi, seqhi_len);
 	}
 	ahash_request_set_crypt(req, sg, icv, skb->len + seqhi_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ahash_request_set_callback(req, 0, ah6_output_done, skb);
 
@@ -516,7 +554,11 @@ static void ah6_input_done(struct crypto_async_request *base, int err)
 	icv = ah_tmp_icv(ahp->ahash, auth_data, ahp->icv_trunc_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = memcmp(icv, auth_data, ahp->icv_trunc_len) ? -EBADMSG: 0;
+=======
+	err = memcmp(icv, auth_data, ahp->icv_trunc_len) ? -EBADMSG : 0;
+>>>>>>> v3.18
 =======
 	err = memcmp(icv, auth_data, ahp->icv_trunc_len) ? -EBADMSG : 0;
 >>>>>>> v3.18
@@ -572,11 +614,17 @@ static int ah6_input(struct xfrm_state *x, struct sk_buff *skb)
 	int nfrags;
 	int err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int seqhi_len = 0;
 	__be32 *seqhi;
 	int sglists = 0;
 	struct scatterlist *seqhisg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!pskb_may_pull(skb, sizeof(struct ip_auth_hdr)))
@@ -615,6 +663,7 @@ static int ah6_input(struct xfrm_state *x, struct sk_buff *skb)
 	skb_push(skb, hdr_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	work_iph = ah_alloc_tmp(ahash, nfrags, hdr_len + ahp->icv_trunc_len);
 	if (!work_iph)
 		goto out;
@@ -624,6 +673,8 @@ static int ah6_input(struct xfrm_state *x, struct sk_buff *skb)
 	req = ah_tmp_req(ahash, icv);
 	sg = ah_req_sg(ahash, req);
 =======
+=======
+>>>>>>> v3.18
 	if (x->props.flags & XFRM_STATE_ESN) {
 		sglists = 1;
 		seqhi_len = sizeof(*seqhi);
@@ -640,6 +691,9 @@ static int ah6_input(struct xfrm_state *x, struct sk_buff *skb)
 	req = ah_tmp_req(ahash, icv);
 	sg = ah_req_sg(ahash, req);
 	seqhisg = sg + nfrags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memcpy(work_iph, ip6h, hdr_len);
@@ -656,11 +710,14 @@ static int ah6_input(struct xfrm_state *x, struct sk_buff *skb)
 	ip6h->hop_limit   = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sg_init_table(sg, nfrags);
 	skb_to_sgvec(skb, sg, 0, skb->len);
 
 	ahash_request_set_crypt(req, sg, icv, skb->len);
 =======
+=======
+>>>>>>> v3.18
 	sg_init_table(sg, nfrags + sglists);
 	skb_to_sgvec_nomark(skb, sg, 0, skb->len);
 
@@ -671,6 +728,9 @@ static int ah6_input(struct xfrm_state *x, struct sk_buff *skb)
 	}
 
 	ahash_request_set_crypt(req, sg, icv, skb->len + seqhi_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ahash_request_set_callback(req, 0, ah6_input_done, skb);
 
@@ -685,7 +745,11 @@ static int ah6_input(struct xfrm_state *x, struct sk_buff *skb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = memcmp(icv, auth_data, ahp->icv_trunc_len) ? -EBADMSG: 0;
+=======
+	err = memcmp(icv, auth_data, ahp->icv_trunc_len) ? -EBADMSG : 0;
+>>>>>>> v3.18
 =======
 	err = memcmp(icv, auth_data, ahp->icv_trunc_len) ? -EBADMSG : 0;
 >>>>>>> v3.18
@@ -710,6 +774,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ah6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 		    u8 type, u8 code, int offset, __be32 info)
 {
@@ -733,6 +798,8 @@ static void ah6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 		ip6_update_pmtu(skb, net, info, 0, 0);
 	xfrm_state_put(x);
 =======
+=======
+>>>>>>> v3.18
 static int ah6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 		   u8 type, u8 code, int offset, __be32 info)
 {
@@ -756,6 +823,9 @@ static int ah6_err(struct sk_buff *skb, struct inet6_skb_parm *opt,
 	xfrm_state_put(x);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -805,8 +875,11 @@ static int ah6_init_state(struct xfrm_state *x)
 	ahp->icv_trunc_len = x->aalg->alg_trunc_len/8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(ahp->icv_trunc_len > MAX_AH_AUTH_LEN);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	x->props.header_len = XFRM_ALIGN8(sizeof(struct ip_auth_hdr) +
@@ -845,12 +918,15 @@ static void ah6_destroy(struct xfrm_state *x)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct xfrm_type ah6_type =
 {
 	.description	= "AH6",
 	.owner		= THIS_MODULE,
 	.proto	     	= IPPROTO_AH,
 =======
+=======
+>>>>>>> v3.18
 static int ah6_rcv_cb(struct sk_buff *skb, int err)
 {
 	return 0;
@@ -860,6 +936,9 @@ static const struct xfrm_type ah6_type = {
 	.description	= "AH6",
 	.owner		= THIS_MODULE,
 	.proto		= IPPROTO_AH,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.flags		= XFRM_TYPE_REPLAY_PROT,
 	.init_state	= ah6_init_state,
@@ -870,16 +949,22 @@ static const struct xfrm_type ah6_type = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct inet6_protocol ah6_protocol = {
 	.handler	=	xfrm6_rcv,
 	.err_handler	=	ah6_err,
 	.flags		=	INET6_PROTO_NOPOLICY,
 =======
+=======
+>>>>>>> v3.18
 static struct xfrm6_protocol ah6_protocol = {
 	.handler	=	xfrm6_rcv,
 	.cb_handler	=	ah6_rcv_cb,
 	.err_handler	=	ah6_err,
 	.priority	=	0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -891,7 +976,11 @@ static int __init ah6_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inet6_add_protocol(&ah6_protocol, IPPROTO_AH) < 0) {
+=======
+	if (xfrm6_protocol_register(&ah6_protocol, IPPROTO_AH) < 0) {
+>>>>>>> v3.18
 =======
 	if (xfrm6_protocol_register(&ah6_protocol, IPPROTO_AH) < 0) {
 >>>>>>> v3.18
@@ -906,7 +995,11 @@ static int __init ah6_init(void)
 static void __exit ah6_fini(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inet6_del_protocol(&ah6_protocol, IPPROTO_AH) < 0)
+=======
+	if (xfrm6_protocol_deregister(&ah6_protocol, IPPROTO_AH) < 0)
+>>>>>>> v3.18
 =======
 	if (xfrm6_protocol_deregister(&ah6_protocol, IPPROTO_AH) < 0)
 >>>>>>> v3.18

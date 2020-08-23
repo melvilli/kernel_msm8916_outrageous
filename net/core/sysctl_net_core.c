@@ -20,6 +20,7 @@
 #include <net/sock.h>
 #include <net/net_ratelimit.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int zero = 0;
 static int ushort_max = USHRT_MAX;
@@ -29,6 +30,8 @@ static int min_rcvbuf = SOCK_MIN_RCVBUF;
 #ifdef CONFIG_RPS
 static int rps_sock_flow_sysctl(ctl_table *table, int write,
 =======
+=======
+>>>>>>> v3.18
 #include <net/busy_poll.h>
 #include <net/pkt_sched.h>
 
@@ -38,13 +41,20 @@ static int ushort_max = USHRT_MAX;
 
 #ifdef CONFIG_RPS
 static int rps_sock_flow_sysctl(struct ctl_table *table, int write,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	unsigned int orig_size, size;
 	int ret, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctl_table tmp = {
+=======
+	struct ctl_table tmp = {
+>>>>>>> v3.18
 =======
 	struct ctl_table tmp = {
 >>>>>>> v3.18
@@ -107,7 +117,10 @@ static int rps_sock_flow_sysctl(struct ctl_table *table, int write,
 #endif /* CONFIG_RPS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_FLOW_LIMIT
 static DEFINE_MUTEX(flow_limit_update_mutex);
 
@@ -232,6 +245,9 @@ static int set_default_qdisc(struct ctl_table *table, int write,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct ctl_table net_core_table[] = {
 #ifdef CONFIG_NET
@@ -242,7 +258,11 @@ static struct ctl_table net_core_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec_minmax,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.extra1		= &min_sndbuf,
+=======
+		.extra1		= &one,
+>>>>>>> v3.18
 =======
 		.extra1		= &one,
 >>>>>>> v3.18
@@ -254,7 +274,11 @@ static struct ctl_table net_core_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec_minmax,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.extra1		= &min_rcvbuf,
+=======
+		.extra1		= &one,
+>>>>>>> v3.18
 =======
 		.extra1		= &one,
 >>>>>>> v3.18
@@ -266,7 +290,11 @@ static struct ctl_table net_core_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec_minmax,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.extra1		= &min_sndbuf,
+=======
+		.extra1		= &one,
+>>>>>>> v3.18
 =======
 		.extra1		= &one,
 >>>>>>> v3.18
@@ -278,7 +306,11 @@ static struct ctl_table net_core_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec_minmax,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.extra1		= &min_rcvbuf,
+=======
+		.extra1		= &one,
+>>>>>>> v3.18
 =======
 		.extra1		= &one,
 >>>>>>> v3.18
@@ -343,7 +375,10 @@ static struct ctl_table net_core_table[] = {
 	},
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_FLOW_LIMIT
 	{
 		.procname	= "flow_limit_cpu_bitmap",
@@ -382,6 +417,9 @@ static struct ctl_table net_core_table[] = {
 		.proc_handler	= set_default_qdisc
 	},
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_NET */
 	{

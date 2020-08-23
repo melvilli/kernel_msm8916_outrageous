@@ -335,6 +335,7 @@ void __init dc21285_preinit(void)
 	 * We don't care if these fail.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dc21285_request_irq(IRQ_PCI_SERR, dc21285_serr_irq, IRQF_DISABLED,
 			    "PCI system error", &serr_timer);
 	dc21285_request_irq(IRQ_PCI_PERR, dc21285_parity_irq, IRQF_DISABLED,
@@ -345,6 +346,8 @@ void __init dc21285_preinit(void)
 			    "Discard timer", NULL);
 	dc21285_request_irq(IRQ_PCI_DPERR, dc21285_dparity_irq, IRQF_DISABLED,
 =======
+=======
+>>>>>>> v3.18
 	dc21285_request_irq(IRQ_PCI_SERR, dc21285_serr_irq, 0,
 			    "PCI system error", &serr_timer);
 	dc21285_request_irq(IRQ_PCI_PERR, dc21285_parity_irq, 0,
@@ -354,6 +357,9 @@ void __init dc21285_preinit(void)
 	dc21285_request_irq(IRQ_DISCARD_TIMER, dc21285_discard_irq, 0,
 			    "Discard timer", NULL);
 	dc21285_request_irq(IRQ_PCI_DPERR, dc21285_dparity_irq, 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    "PCI data parity", NULL);
 

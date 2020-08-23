@@ -49,9 +49,15 @@ static struct platform_device *appldata_pdev;
  */
 static const char appldata_proc_name[APPLDATA_PROC_NAME_LENGTH] = "appldata";
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int appldata_timer_handler(ctl_table *ctl, int write,
 				  void __user *buffer, size_t *lenp, loff_t *ppos);
 static int appldata_interval_handler(ctl_table *ctl, int write,
+=======
+static int appldata_timer_handler(struct ctl_table *ctl, int write,
+				  void __user *buffer, size_t *lenp, loff_t *ppos);
+static int appldata_interval_handler(struct ctl_table *ctl, int write,
+>>>>>>> v3.18
 =======
 static int appldata_timer_handler(struct ctl_table *ctl, int write,
 				  void __user *buffer, size_t *lenp, loff_t *ppos);
@@ -208,15 +214,21 @@ static void __appldata_vtimer_setup(int cmd)
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 appldata_timer_handler(ctl_table *ctl, int write,
 			   void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	int len;
 =======
+=======
+>>>>>>> v3.18
 appldata_timer_handler(struct ctl_table *ctl, int write,
 			   void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	unsigned int len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char buf[2];
 
@@ -257,16 +269,22 @@ out:
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 appldata_interval_handler(ctl_table *ctl, int write,
 			   void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	int len, interval;
 =======
+=======
+>>>>>>> v3.18
 appldata_interval_handler(struct ctl_table *ctl, int write,
 			   void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	unsigned int len;
 	int interval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char buf[16];
 
@@ -308,18 +326,24 @@ out:
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 appldata_generic_handler(ctl_table *ctl, int write,
 			   void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	struct appldata_ops *ops = NULL, *tmp_ops;
 	int rc, len, found;
 =======
+=======
+>>>>>>> v3.18
 appldata_generic_handler(struct ctl_table *ctl, int write,
 			   void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	struct appldata_ops *ops = NULL, *tmp_ops;
 	unsigned int len;
 	int rc, found;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char buf[2];
 	struct list_head *lh;
@@ -558,6 +582,10 @@ static int __init appldata_init(void)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	init_virt_timer(&appldata_timer);
+>>>>>>> v3.18
 =======
 	init_virt_timer(&appldata_timer);
 >>>>>>> v3.18

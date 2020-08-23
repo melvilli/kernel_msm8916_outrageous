@@ -1,6 +1,10 @@
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "imx28.dtsi"
+=======
+#include "imx28.dtsi"
+>>>>>>> v3.18
 =======
 #include "imx28.dtsi"
 >>>>>>> v3.18
@@ -45,6 +49,7 @@
 					reg = <0>;
 					fsl,pinmux-ids = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 						0x0113 /* MX28_PAD_GPMI_CE1N__GPIO_0_17 */
 						0x0153 /* MX28_PAD_GPMI_RDY1__GPIO_0_21 */
 						0x2123 /* MX28_PAD_SSP2_MISO__GPIO_2_18 */
@@ -57,6 +62,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX28_PAD_GPMI_CE1N__GPIO_0_17
 						MX28_PAD_GPMI_RDY1__GPIO_0_21
 						MX28_PAD_SSP2_MISO__GPIO_2_18
@@ -68,12 +75,16 @@
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				lcdif_pins_apx4: lcdif-apx4@0 {
 					reg = <0>;
 					fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 						0x1181 /* MX28_PAD_LCD_RD_E__LCD_VSYNC */
 						0x1191 /* MX28_PAD_LCD_WR_RWN__LCD_HSYNC */
@@ -84,6 +95,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX28_PAD_LCD_RD_E__LCD_VSYNC
 						MX28_PAD_LCD_WR_RWN__LCD_HSYNC
 						MX28_PAD_LCD_RS__LCD_DOTCLK
@@ -92,12 +105,16 @@
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				mmc2_4bit_pins_apx4: mmc2-4bit-apx4@0 {
 					reg = <0>;
 					fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 						0x2041 /* MX28_PAD_SSP0_DATA4__SSP2_D0 */
 						0x2051 /* MX28_PAD_SSP0_DATA5__SSP2_D3 */
@@ -110,6 +127,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <1>;
 =======
+=======
+>>>>>>> v3.18
 						MX28_PAD_SSP0_DATA4__SSP2_D0
 						MX28_PAD_SSP0_DATA5__SSP2_D3
 						MX28_PAD_SSP0_DATA6__SSP2_CMD
@@ -120,21 +139,30 @@
 					fsl,drive-strength = <MXS_DRIVE_8mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_ENABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				mmc2_sck_cfg_apx4: mmc2-sck-cfg-apx4 {
 					fsl,pinmux-ids = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 						0x2071 /* MX28_PAD_SSP0_DATA7__SSP2_SCK */
 					>;
 					fsl,drive-strength = <2>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX28_PAD_SSP0_DATA7__SSP2_SCK
 					>;
 					fsl,drive-strength = <MXS_DRIVE_12mA>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 			};
@@ -144,15 +172,21 @@
 				pinctrl-0 = <&lcdif_24bit_pins_a
 					     &lcdif_pins_apx4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				display = <&display>;
 				status = "okay";
 
 				display: display {
 =======
+=======
+>>>>>>> v3.18
 				display = <&display0>;
 				status = "okay";
 
 				display0: display0 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					bits-per-pixel = <32>;
 					bus-width = <24>;
@@ -204,7 +238,11 @@
 					VDDA-supply = <&reg_3p3v>;
 					VDDIO-supply = <&reg_3p3v>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+					clocks = <&saif0>;
+>>>>>>> v3.18
 =======
 					clocks = <&saif0>;
 >>>>>>> v3.18
@@ -254,16 +292,22 @@
 	regulators {
 		compatible = "simple-bus";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		reg_3p3v: 3p3v {
 			compatible = "regulator-fixed";
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 
 		reg_3p3v: regulator@0 {
 			compatible = "regulator-fixed";
 			reg = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regulator-name = "3P3V";
 			regulator-min-microvolt = <3300000>;

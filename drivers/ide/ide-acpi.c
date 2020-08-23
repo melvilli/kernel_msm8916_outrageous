@@ -8,6 +8,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -18,7 +22,10 @@
 #include <linux/kernel.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ide.h>
@@ -27,8 +34,11 @@
 #include <linux/module.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define REGS_PER_GTF		7
@@ -110,7 +120,10 @@ bool ide_port_acpi(ide_hwif_t *hwif)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static acpi_handle acpi_get_child(acpi_handle handle, u64 addr)
 {
 	struct acpi_device *adev;
@@ -122,6 +135,9 @@ static acpi_handle acpi_get_child(acpi_handle handle, u64 addr)
 	return adev ? adev->handle : NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * ide_get_dev_handle - finds acpi_handle and PCI device.function
@@ -153,7 +169,11 @@ static int ide_get_dev_handle(struct device *dev, acpi_handle *handle,
 	DEBPRINT("ENTER: pci %02x:%02x.%01x\n", bus, devnum, func);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_handle = DEVICE_ACPI_HANDLE(dev);
+=======
+	dev_handle = ACPI_HANDLE(dev);
+>>>>>>> v3.18
 =======
 	dev_handle = ACPI_HANDLE(dev);
 >>>>>>> v3.18
@@ -549,18 +569,24 @@ void ide_acpi_set_state(ide_hwif_t *hwif, int on)
 		if (drive->acpidata->obj_handle)
 			acpi_bus_set_power(drive->acpidata->obj_handle,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   on ? ACPI_STATE_D0 : ACPI_STATE_D3);
 	}
 
 	if (!on)
 		acpi_bus_set_power(hwif->acpidata->obj_handle, ACPI_STATE_D3);
 =======
+=======
+>>>>>>> v3.18
 				on ? ACPI_STATE_D0 : ACPI_STATE_D3_COLD);
 	}
 
 	if (!on)
 		acpi_bus_set_power(hwif->acpidata->obj_handle,
 				   ACPI_STATE_D3_COLD);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

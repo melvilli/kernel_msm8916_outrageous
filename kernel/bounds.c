@@ -10,7 +10,12 @@
 #include <linux/mmzone.h>
 #include <linux/kbuild.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/page_cgroup.h>
+=======
+#include <linux/log2.h>
+#include <linux/spinlock_types.h>
+>>>>>>> v3.18
 =======
 #include <linux/log2.h>
 #include <linux/spinlock_types.h>
@@ -22,12 +27,18 @@ void foo(void)
 	DEFINE(NR_PAGEFLAGS, __NR_PAGEFLAGS);
 	DEFINE(MAX_NR_ZONES, __MAX_NR_ZONES);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEFINE(NR_PCG_FLAGS, __NR_PCG_FLAGS);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 	DEFINE(NR_CPUS_BITS, ilog2(CONFIG_NR_CPUS));
 #endif
 	DEFINE(SPINLOCK_SIZE, sizeof(spinlock_t));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* End of constants */
 }

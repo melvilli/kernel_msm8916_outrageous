@@ -14,6 +14,7 @@ config BCACHE_DEBUG
 	Don't select this option unless you're a developer
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Enables extra debugging tools (primarily a fuzz tester)
 
 config BCACHE_EDEBUG
@@ -23,6 +24,10 @@ config BCACHE_EDEBUG
 	Don't select this option unless you're a developer
 
 	Enables extra runtime checks which significantly affect performance
+=======
+	Enables extra debugging tools, allows expensive runtime checks to be
+	turned on.
+>>>>>>> v3.18
 =======
 	Enables extra debugging tools, allows expensive runtime checks to be
 	turned on.
@@ -37,6 +42,7 @@ config BCACHE_CLOSURES_DEBUG
 	interface to list them, which makes it possible to see asynchronous
 	operations that get stuck.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # cgroup code needs to be updated:
 #
@@ -45,5 +51,7 @@ config BCACHE_CLOSURES_DEBUG
 #	depends on BCACHE && BLK_CGROUP
 #	---help---
 #	TODO
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

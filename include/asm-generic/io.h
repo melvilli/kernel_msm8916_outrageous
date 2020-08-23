@@ -332,7 +332,11 @@ static inline void iounmap(void __iomem *addr)
 static inline void __iomem *ioport_map(unsigned long port, unsigned int nr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (void __iomem *) port;
+=======
+	return PCI_IOBASE + (port & IO_SPACE_LIMIT);
+>>>>>>> v3.18
 =======
 	return PCI_IOBASE + (port & IO_SPACE_LIMIT);
 >>>>>>> v3.18

@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -42,11 +45,17 @@
 #define N_MODE_MCS15_RIX 15
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AC_MODE_MCS7_RIX 7
 #define AC_MODE_MCS8_RIX 8
 #define AC_MODE_MCS9_RIX 9
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rtl_rate_priv {
 	u8 ht_cap;
@@ -55,6 +64,10 @@ struct rtl_rate_priv {
 int rtl_rate_control_register(void);
 void rtl_rate_control_unregister(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

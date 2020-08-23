@@ -117,12 +117,18 @@ struct svc_program		nfsd_program = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 nfsd_supported_minorversion;
 =======
+=======
+>>>>>>> v3.18
 static bool nfsd_supported_minorversions[NFSD_SUPPORTED_MINOR_VERSION + 1] = {
 	[0] = 1,
 	[1] = 1,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int nfsd_vers(int vers, enum vers_op change)
@@ -159,6 +165,7 @@ int nfsd_minorversion(u32 minorversion, enum vers_op change)
 	switch(change) {
 	case NFSD_SET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nfsd_supported_minorversion = minorversion;
 		break;
 	case NFSD_CLEAR:
@@ -169,6 +176,8 @@ int nfsd_minorversion(u32 minorversion, enum vers_op change)
 	case NFSD_TEST:
 		return minorversion <= nfsd_supported_minorversion;
 =======
+=======
+>>>>>>> v3.18
 		nfsd_supported_minorversions[minorversion] = true;
 		break;
 	case NFSD_CLEAR:
@@ -176,6 +185,9 @@ int nfsd_minorversion(u32 minorversion, enum vers_op change)
 		break;
 	case NFSD_TEST:
 		return nfsd_supported_minorversions[minorversion];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case NFSD_AVAIL:
 		return minorversion <= NFSD_SUPPORTED_MINOR_VERSION;
@@ -261,7 +273,10 @@ static void nfsd_shutdown_generic(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool nfsd_needs_lockd(void)
 {
 #if defined(CONFIG_NFSD_V3)
@@ -271,6 +286,9 @@ static bool nfsd_needs_lockd(void)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int nfsd_startup_net(int nrservs, struct net *net)
 {
@@ -287,10 +305,13 @@ static int nfsd_startup_net(int nrservs, struct net *net)
 	if (ret)
 		goto out_socks;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = lockd_up(net);
 	if (ret)
 		goto out_socks;
 =======
+=======
+>>>>>>> v3.18
 
 	if (nfsd_needs_lockd() && !nn->lockd_up) {
 		ret = lockd_up(net);
@@ -299,6 +320,9 @@ static int nfsd_startup_net(int nrservs, struct net *net)
 		nn->lockd_up = 1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = nfs4_state_start_net(net);
 	if (ret)
@@ -309,12 +333,18 @@ static int nfsd_startup_net(int nrservs, struct net *net)
 
 out_lockd:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lockd_down(net);
 =======
+=======
+>>>>>>> v3.18
 	if (nn->lockd_up) {
 		lockd_down(net);
 		nn->lockd_up = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out_socks:
 	nfsd_shutdown_generic();
@@ -327,12 +357,18 @@ static void nfsd_shutdown_net(struct net *net)
 
 	nfs4_state_shutdown_net(net);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lockd_down(net);
 =======
+=======
+>>>>>>> v3.18
 	if (nn->lockd_up) {
 		lockd_down(net);
 		nn->lockd_up = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nn->nfsd_net_up = false;
 	nfsd_shutdown_generic();
@@ -442,6 +478,10 @@ int nfsd_create_serv(struct net *net)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nn->nfsd_serv->sv_maxconn = nn->max_connections;
+>>>>>>> v3.18
 =======
 	nn->nfsd_serv->sv_maxconn = nn->max_connections;
 >>>>>>> v3.18
@@ -510,8 +550,12 @@ int nfsd_set_nrthreads(int n, int *nthreads, struct net *net)
 	tot = 0;
 	for (i = 0; i < n; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (nthreads[i] > NFSD_MAXSERVS)
 			nthreads[i] = NFSD_MAXSERVS;
+=======
+		nthreads[i] = min(nthreads[i], NFSD_MAXSERVS);
+>>>>>>> v3.18
 =======
 		nthreads[i] = min(nthreads[i], NFSD_MAXSERVS);
 >>>>>>> v3.18
@@ -564,17 +608,23 @@ nfsd_svc(int nrservs, struct net *net)
 	mutex_lock(&nfsd_mutex);
 	dprintk("nfsd: creating service\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nrservs <= 0)
 		nrservs = 0;
 	if (nrservs > NFSD_MAXSERVS)
 		nrservs = NFSD_MAXSERVS;
 	error = 0;
 =======
+=======
+>>>>>>> v3.18
 
 	nrservs = max(nrservs, 0);
 	nrservs = min(nrservs, NFSD_MAXSERVS);
 	error = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (nrservs == 0 && nn->nfsd_serv == NULL)
 		goto out;
@@ -617,6 +667,10 @@ nfsd(void *vrqstp)
 	struct svc_xprt *perm_sock = list_entry(rqstp->rq_server->sv_permsocks.next, typeof(struct svc_xprt), xpt_list);
 	struct net *net = perm_sock->xpt_net;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfsd_net *nn = net_generic(net, nfsd_net_id);
+>>>>>>> v3.18
 =======
 	struct nfsd_net *nn = net_generic(net, nfsd_net_id);
 >>>>>>> v3.18
@@ -648,12 +702,15 @@ nfsd(void *vrqstp)
 	mutex_unlock(&nfsd_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * We want less throttling in balance_dirty_pages() so that nfs to
 	 * localhost doesn't cause nfsd to lock up due to all the client's
 	 * dirty pages.
 	 */
 	current->flags |= PF_LESS_THROTTLE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	set_freezable();
@@ -663,6 +720,12 @@ nfsd(void *vrqstp)
 	 */
 	for (;;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* Update sv_maxconn if it has changed */
+		rqstp->rq_server->sv_maxconn = nn->max_connections;
+
+>>>>>>> v3.18
 =======
 		/* Update sv_maxconn if it has changed */
 		rqstp->rq_server->sv_maxconn = nn->max_connections;
@@ -711,6 +774,7 @@ static __be32 map_new_errors(u32 vers, __be32 nfserr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * A write procedure can have a large argument, and a read procedure can
  * have a large reply, but no NFSv2 or NFSv3 procedure has argument and
@@ -744,6 +808,8 @@ static bool nfs_request_too_big(struct svc_rqst *rqstp,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int
 nfsd_dispatch(struct svc_rqst *rqstp, __be32 *statp)
 {
@@ -757,11 +823,14 @@ nfsd_dispatch(struct svc_rqst *rqstp, __be32 *statp)
 	proc = rqstp->rq_procinfo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nfs_request_too_big(rqstp, proc)) {
 		dprintk("nfsd: NFSv%d argument too large\n", rqstp->rq_vers);
 		*statp = rpc_garbage_args;
 		return 1;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*

@@ -3,8 +3,14 @@
 
 #include <linux/tracepoint.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/sigp.h>
 #include <asm/debug.h>
+=======
+#include <asm/sie.h>
+#include <asm/debug.h>
+#include <asm/dis.h>
+>>>>>>> v3.18
 =======
 #include <asm/sie.h>
 #include <asm/debug.h>
@@ -36,7 +42,10 @@
 		  __entry->pswmask, __entry->pswaddr, p_args)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(kvm_s390_skey_related_inst,
 	    TP_PROTO(VCPU_PROTO_COMMON),
 	    TP_ARGS(VCPU_ARGS_COMMON),
@@ -97,6 +106,9 @@ TRACE_EVENT(kvm_s390_pfault_done,
 	    VCPU_TP_PRINTK("done pfault token %ld", __entry->pfault_token)
 	);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Tracepoints for SIE entry and exit.
@@ -134,6 +146,7 @@ TRACE_EVENT(kvm_s390_sie_fault,
 	);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define sie_intercept_code				\
 	{0x04, "Instruction"},				\
 	{0x08, "Program interruption"},			\
@@ -145,6 +158,8 @@ TRACE_EVENT(kvm_s390_sie_fault,
 	{0x20, "Validity"},				\
 	{0x28, "Stop request"}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 TRACE_EVENT(kvm_s390_sie_exit,
@@ -177,7 +192,10 @@ TRACE_EVENT(kvm_s390_intercept_instruction,
 		    VCPU_FIELD_COMMON
 		    __field(__u64, instruction)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    __field(char, insn[8])
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		    ),
@@ -191,10 +209,15 @@ TRACE_EVENT(kvm_s390_intercept_instruction,
 	    VCPU_TP_PRINTK("intercepted instruction %016llx (%s)",
 			   __entry->instruction,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   insn_to_mnemonic((unsigned char *)
 					    &__entry->instruction,
 					 __entry->insn, sizeof(__entry->insn)) ?
 			   "unknown" : __entry->insn)
+=======
+			   __print_symbolic(icpt_insn_decoder(__entry->instruction),
+					    icpt_insn_codes))
+>>>>>>> v3.18
 =======
 			   __print_symbolic(icpt_insn_decoder(__entry->instruction),
 					    icpt_insn_codes))
@@ -247,6 +270,7 @@ TRACE_EVENT(kvm_s390_intercept_validity,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define sigp_order_codes					\
 	{SIGP_SENSE, "sense"},					\
 	{SIGP_EXTERNAL_CALL, "external call"},			\
@@ -258,6 +282,8 @@ TRACE_EVENT(kvm_s390_intercept_validity,
 	{SIGP_SENSE_RUNNING, "sense running"},			\
 	{SIGP_RESTART, "restart"}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 TRACE_EVENT(kvm_s390_handle_sigp,
@@ -287,6 +313,7 @@ TRACE_EVENT(kvm_s390_handle_sigp,
 	);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define diagnose_codes				\
 	{0x10, "release pages"},		\
 	{0x44, "time slice end"},		\
@@ -294,6 +321,8 @@ TRACE_EVENT(kvm_s390_handle_sigp,
 	{0x500, "kvm hypercall"},		\
 	{0x501, "kvm breakpoint"}
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(kvm_s390_handle_sigp_pei,
 	    TP_PROTO(VCPU_PROTO_COMMON, __u8 order_code, __u16 cpu_addr),
 	    TP_ARGS(VCPU_ARGS_COMMON, order_code, cpu_addr),
@@ -316,6 +345,9 @@ TRACE_EVENT(kvm_s390_handle_sigp_pei,
 					    sigp_order_codes),
 			   __entry->cpu_addr)
 	);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 TRACE_EVENT(kvm_s390_handle_diag,
@@ -362,7 +394,10 @@ TRACE_EVENT(kvm_s390_handle_lctl,
 	);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 TRACE_EVENT(kvm_s390_handle_stctl,
 	    TP_PROTO(VCPU_PROTO_COMMON, int g, int reg1, int reg3, u64 addr),
 	    TP_ARGS(VCPU_ARGS_COMMON, g, reg1, reg3, addr),
@@ -388,6 +423,9 @@ TRACE_EVENT(kvm_s390_handle_stctl,
 			   __entry->reg1, __entry->reg3, __entry->addr)
 	);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 TRACE_EVENT(kvm_s390_handle_prefix,
 	    TP_PROTO(VCPU_PROTO_COMMON, int set, u32 address),

@@ -6,6 +6,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
 
@@ -394,8 +399,13 @@ static int xen_tmem_init(void)
 			s = " (WARNING: frontswap_ops overridden)";
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "frontswap enabled, RAM provided by "
 				 "Xen Transcendent Memory%s\n", s);
+=======
+		pr_info("frontswap enabled, RAM provided by Xen Transcendent Memory%s\n",
+			s);
+>>>>>>> v3.18
 =======
 		pr_info("frontswap enabled, RAM provided by Xen Transcendent Memory%s\n",
 			s);
@@ -411,8 +421,13 @@ static int xen_tmem_init(void)
 		if (old_ops)
 			s = " (WARNING: cleancache_ops overridden)";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "cleancache enabled, RAM provided by "
 				 "Xen Transcendent Memory%s\n", s);
+=======
+		pr_info("cleancache enabled, RAM provided by Xen Transcendent Memory%s\n",
+			s);
+>>>>>>> v3.18
 =======
 		pr_info("cleancache enabled, RAM provided by Xen Transcendent Memory%s\n",
 			s);

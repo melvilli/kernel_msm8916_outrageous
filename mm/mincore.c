@@ -71,6 +71,7 @@ static unsigned char mincore_page(struct address_space *mapping, pgoff_t pgoff)
 	 * tmpfs's .fault). So swapped out tmpfs mappings are tested here.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	page = find_get_page(mapping, pgoff);
 #ifdef CONFIG_SWAP
 	/* shmem/tmpfs may return swap: account for swapcache page too. */
@@ -79,6 +80,8 @@ static unsigned char mincore_page(struct address_space *mapping, pgoff_t pgoff)
 		page = find_get_page(swap_address_space(swap), swap.val);
 	}
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SWAP
 	if (shmem_mapping(mapping)) {
 		page = find_get_entry(mapping, pgoff);
@@ -94,6 +97,9 @@ static unsigned char mincore_page(struct address_space *mapping, pgoff_t pgoff)
 		page = find_get_page(mapping, pgoff);
 #else
 	page = find_get_page(mapping, pgoff);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	if (page) {
@@ -244,6 +250,7 @@ static long do_mincore(unsigned long addr, unsigned long pages, unsigned char *v
 	end = min(vma->vm_end, addr + (pages << PAGE_SHIFT));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_vm_hugetlb_page(vma)) {
 		mincore_hugetlb_page_range(vma, addr, end, vec);
 		return (end - addr) >> PAGE_SHIFT;
@@ -251,6 +258,8 @@ static long do_mincore(unsigned long addr, unsigned long pages, unsigned char *v
 
 	end = pmd_addr_end(addr, end);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (is_vm_hugetlb_page(vma))

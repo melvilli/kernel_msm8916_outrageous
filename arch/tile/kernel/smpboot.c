@@ -42,7 +42,11 @@ void __init smp_prepare_boot_cpu(void)
 	set_cpu_online(cpu, 1);
 	set_cpu_present(cpu, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(cpu_state) = CPU_ONLINE;
+=======
+	__this_cpu_write(cpu_state, CPU_ONLINE);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(cpu_state, CPU_ONLINE);
 >>>>>>> v3.18
@@ -138,7 +142,11 @@ static __init int reset_init_affinity(void)
 late_initcall(reset_init_affinity);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cpumask cpu_started __cpuinitdata;
+=======
+static struct cpumask cpu_started;
+>>>>>>> v3.18
 =======
 static struct cpumask cpu_started;
 >>>>>>> v3.18
@@ -149,10 +157,13 @@ static struct cpumask cpu_started;
  * is pretty fragile.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit start_secondary(void)
 {
 	int cpuid = smp_processor_id();
 =======
+=======
+>>>>>>> v3.18
 static void start_secondary(void)
 {
 	int cpuid;
@@ -160,14 +171,20 @@ static void start_secondary(void)
 	preempt_disable();
 
 	cpuid = smp_processor_id();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Set our thread pointer appropriately. */
 	set_my_cpu_offset(__per_cpu_offset[cpuid]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_disable();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -178,7 +195,11 @@ static void start_secondary(void)
 
 	/* Initialize the current asid for our first page table. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(current_asid) = min_asid;
+=======
+	__this_cpu_write(current_asid, min_asid);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(current_asid, min_asid);
 >>>>>>> v3.18
@@ -209,7 +230,11 @@ static void start_secondary(void)
  * Bring a secondary processor online.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit online_secondary(void)
+=======
+void online_secondary(void)
+>>>>>>> v3.18
 =======
 void online_secondary(void)
 >>>>>>> v3.18
@@ -229,7 +254,11 @@ void online_secondary(void)
 
 	set_cpu_online(smp_processor_id(), 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(cpu_state) = CPU_ONLINE;
+=======
+	__this_cpu_write(cpu_state, CPU_ONLINE);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(cpu_state, CPU_ONLINE);
 >>>>>>> v3.18
@@ -244,7 +273,11 @@ void online_secondary(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *tidle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *tidle)
+>>>>>>> v3.18
 =======
 int __cpu_up(unsigned int cpu, struct task_struct *tidle)
 >>>>>>> v3.18

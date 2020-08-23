@@ -2,6 +2,7 @@
 #include "progress.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void nop_progress_update(u64 curr __maybe_unused,
 				u64 total __maybe_unused,
 				const char *title __maybe_unused)
@@ -19,6 +20,8 @@ void ui_progress__update(u64 curr, u64 total, const char *title)
 {
 	return progress_fns->update(curr, total, title);
 =======
+=======
+>>>>>>> v3.18
 static void null_progress__update(struct ui_progress *p __maybe_unused)
 {
 }
@@ -47,14 +50,22 @@ void ui_progress__init(struct ui_progress *p, u64 total, const char *title)
 	p->total = total;
 	p->title = title;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void ui_progress__finish(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (progress_fns->finish)
 		progress_fns->finish();
+=======
+	if (ui_progress__ops->finish)
+		ui_progress__ops->finish();
+>>>>>>> v3.18
 =======
 	if (ui_progress__ops->finish)
 		ui_progress__ops->finish();

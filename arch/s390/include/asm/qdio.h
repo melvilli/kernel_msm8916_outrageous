@@ -337,7 +337,11 @@ typedef void qdio_handler_t(struct ccw_device *, unsigned int, int,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct qdio_initialize - qdio initalization data
+=======
+ * struct qdio_initialize - qdio initialization data
+>>>>>>> v3.18
 =======
  * struct qdio_initialize - qdio initialization data
 >>>>>>> v3.18
@@ -383,7 +387,10 @@ struct qdio_initialize {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * enum qdio_brinfo_entry_type - type of address entry for qdio_brinfo_desc()
  * @l3_ipv6_addr: entry contains IPv6 address
@@ -412,6 +419,9 @@ struct qdio_brinfo_entry_l2 {
 	struct { u8 mac[6]; u16 lnid; } addr_lnid;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define QDIO_STATE_INACTIVE		0x00000002 /* after qdio_cleanup */
 #define QDIO_STATE_ESTABLISHED		0x00000004 /* after qdio_establish */
@@ -423,11 +433,17 @@ struct qdio_brinfo_entry_l2 {
 #define QDIO_FLAG_PCI_OUT		0x10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int qdio_alloc_buffers(struct qdio_buffer **buf, unsigned int count);
 void qdio_free_buffers(struct qdio_buffer **buf, unsigned int count);
 void qdio_reset_buffers(struct qdio_buffer **buf, unsigned int count);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int qdio_allocate(struct qdio_initialize *);
 extern int qdio_establish(struct qdio_initialize *);
@@ -442,12 +458,18 @@ extern int qdio_shutdown(struct ccw_device *, int);
 extern int qdio_free(struct ccw_device *);
 extern int qdio_get_ssqd_desc(struct ccw_device *, struct qdio_ssqd_desc *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int qdio_pnso_brinfo(struct subchannel_id schid,
 		int cnc, u16 *response,
 		void (*cb)(void *priv, enum qdio_brinfo_entry_type type,
 				void *entry),
 		void *priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __QDIO_H__ */

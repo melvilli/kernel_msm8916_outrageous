@@ -123,7 +123,11 @@ struct sl811 {
 	void __iomem		*data_reg;
 	struct sl811_platform_data	*board;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct proc_dir_entry	*pde;
+=======
+	struct dentry 		*debug_file;
+>>>>>>> v3.18
 =======
 	struct dentry 		*debug_file;
 >>>>>>> v3.18
@@ -247,6 +251,7 @@ sl811_read_buf(struct sl811 *sl811, int addr, void *buf, size_t count)
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 #define DBG(stuff...)		printk(KERN_DEBUG "sl811: " stuff)
 #else
@@ -270,9 +275,14 @@ sl811_read_buf(struct sl811 *sl811, int addr, void *buf, size_t count)
 #define INFO(stuff...)		printk(KERN_INFO "sl811: " stuff)
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef PACKET_TRACE
 #    define PACKET		pr_debug("sl811: "stuff)
 #else
 #    define PACKET(stuff...)	do{}while(0)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

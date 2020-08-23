@@ -78,7 +78,11 @@ struct tape_class_device *register_tape_dev(
 					  tcd->char_device->dev, NULL,
 					  "%s", tcd->device_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = IS_ERR(tcd->class_device) ? PTR_ERR(tcd->class_device) : 0;
+=======
+	rc = PTR_RET(tcd->class_device);
+>>>>>>> v3.18
 =======
 	rc = PTR_RET(tcd->class_device);
 >>>>>>> v3.18

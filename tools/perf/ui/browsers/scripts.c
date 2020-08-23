@@ -85,24 +85,34 @@ static void script_browser__write(struct ui_browser *browser,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int script_browser__run(struct perf_script_browser *self)
 {
 	int key;
 
 	if (ui_browser__show(&self->b, self->script_name,
 =======
+=======
+>>>>>>> v3.18
 static int script_browser__run(struct perf_script_browser *browser)
 {
 	int key;
 
 	if (ui_browser__show(&browser->b, browser->script_name,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			     "Press <- or ESC to exit") < 0)
 		return -1;
 
 	while (1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		key = ui_browser__run(&self->b, 0);
+=======
+		key = ui_browser__run(&browser->b, 0);
+>>>>>>> v3.18
 =======
 		key = ui_browser__run(&browser->b, 0);
 >>>>>>> v3.18
@@ -112,7 +122,11 @@ static int script_browser__run(struct perf_script_browser *browser)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ui_browser__hide(&self->b);
+=======
+	ui_browser__hide(&browser->b);
+>>>>>>> v3.18
 =======
 	ui_browser__hide(&browser->b);
 >>>>>>> v3.18
@@ -190,8 +204,12 @@ int script_browse(const char *script_opt)
 		script.b.width = AVERAGE_LINE_LEN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (line)
 		free(line);
+=======
+	free(line);
+>>>>>>> v3.18
 =======
 	free(line);
 >>>>>>> v3.18

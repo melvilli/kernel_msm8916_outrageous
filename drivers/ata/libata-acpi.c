@@ -21,8 +21,11 @@
 #include "libata.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 unsigned int ata_acpi_gtf_filter = ATA_ACPI_FILTER_DEFAULT;
@@ -38,6 +41,7 @@ struct ata_acpi_gtf {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	Helper - belongs in the PCI layer somewhere eventually
  */
@@ -48,12 +52,15 @@ static int is_pci_dev(struct device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void ata_acpi_clear_gtf(struct ata_device *dev)
 {
 	kfree(dev->gtf_cache);
 	dev->gtf_cache = NULL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * ata_ap_acpi_handle - provide the acpi_handle for an ata_port
@@ -98,6 +105,8 @@ acpi_handle ata_dev_acpi_handle(struct ata_device *dev)
 }
 EXPORT_SYMBOL(ata_dev_acpi_handle);
 =======
+=======
+>>>>>>> v3.18
 struct ata_acpi_hotplug_context {
 	struct acpi_hotplug_context hp;
 	union {
@@ -121,6 +130,9 @@ acpi_handle ata_dev_acpi_handle(struct ata_device *dev)
 	return dev->flags & ATA_DFLAG_ACPI_DISABLED ?
 			NULL : ACPI_HANDLE(&dev->tdev);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* @ap and @dev are the same as ata_acpi_handle_hotplug() */
@@ -189,6 +201,7 @@ static void ata_acpi_handle_hotplug(struct ata_port *ap, struct ata_device *dev,
 	spin_unlock_irqrestore(ap->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wait) {
 		ata_port_wait_eh(ap);
 		flush_work(&ap->hotplug_task.work);
@@ -208,6 +221,8 @@ static void ata_acpi_ap_notify_dock(acpi_handle handle, u32 event, void *data)
 
 	ata_acpi_handle_hotplug(ap, NULL, event);
 =======
+=======
+>>>>>>> v3.18
 	if (wait)
 		ata_port_wait_eh(ap);
 }
@@ -223,6 +238,9 @@ static int ata_acpi_ap_notify_dock(struct acpi_device *adev, u32 event)
 {
 	ata_acpi_handle_hotplug(ata_hotplug_data(adev->hp).ap, NULL, event);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -245,6 +263,7 @@ static void ata_acpi_uevent(struct ata_port *ap, struct ata_device *dev,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void ata_acpi_ap_uevent(acpi_handle handle, u32 event, void *data)
 {
@@ -299,6 +318,8 @@ void ata_acpi_hotplug_init(struct ata_host *host)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 static void ata_acpi_ap_uevent(struct acpi_device *adev, u32 event)
 {
 	ata_acpi_uevent(ata_hotplug_data(adev->hp).ap, NULL, event);
@@ -378,6 +399,9 @@ void ata_acpi_bind_dev(struct ata_device *dev)
 	context->data.dev = dev;
 	acpi_initialize_hp_context(adev, &context->hp, ata_acpi_dev_notify_dock,
 				   ata_acpi_dev_uevent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -403,7 +427,11 @@ void ata_acpi_dissociate(struct ata_host *host)
 		const struct ata_acpi_gtm *gtm = ata_acpi_init_gtm(ap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ata_ap_acpi_handle(ap) && gtm)
+=======
+		if (ACPI_HANDLE(&ap->tdev) && gtm)
+>>>>>>> v3.18
 =======
 		if (ACPI_HANDLE(&ap->tdev) && gtm)
 >>>>>>> v3.18
@@ -412,9 +440,12 @@ void ata_acpi_dissociate(struct ata_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __ata_acpi_gtm(struct ata_port *ap, acpi_handle handle,
 			  struct ata_acpi_gtm *gtm)
 =======
+=======
+>>>>>>> v3.18
 /**
  * ata_acpi_gtm - execute _GTM
  * @ap: target ATA port
@@ -429,6 +460,9 @@ static int __ata_acpi_gtm(struct ata_port *ap, acpi_handle handle,
  * 0 on success, -ENOENT if _GTM doesn't exist, -errno on failure.
  */
 int ata_acpi_gtm(struct ata_port *ap, struct ata_acpi_gtm *gtm)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct acpi_buffer output = { .length = ACPI_ALLOCATE_BUFFER };
@@ -436,11 +470,17 @@ int ata_acpi_gtm(struct ata_port *ap, struct ata_acpi_gtm *gtm)
 	acpi_status status;
 	int rc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	acpi_handle handle = ACPI_HANDLE(&ap->tdev);
 
 	if (!handle)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	status = acpi_evaluate_object(handle, "_GTM", NULL, &output);
@@ -478,6 +518,7 @@ int ata_acpi_gtm(struct ata_port *ap, struct ata_acpi_gtm *gtm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * ata_acpi_gtm - execute _GTM
  * @ap: target ATA port
@@ -499,6 +540,8 @@ int ata_acpi_gtm(struct ata_port *ap, struct ata_acpi_gtm *gtm)
 		return -EINVAL;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(ata_acpi_gtm);
@@ -538,8 +581,13 @@ int ata_acpi_stm(struct ata_port *ap, const struct ata_acpi_gtm *stm)
 	input.pointer = in_params;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_evaluate_object(ata_ap_acpi_handle(ap), "_STM", &input,
 				      NULL);
+=======
+	status = acpi_evaluate_object(ACPI_HANDLE(&ap->tdev), "_STM",
+				      &input, NULL);
+>>>>>>> v3.18
 =======
 	status = acpi_evaluate_object(ACPI_HANDLE(&ap->tdev), "_STM",
 				      &input, NULL);
@@ -1019,7 +1067,11 @@ void ata_acpi_on_resume(struct ata_port *ap)
 	struct ata_device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ata_ap_acpi_handle(ap) && gtm) {
+=======
+	if (ACPI_HANDLE(&ap->tdev) && gtm) {
+>>>>>>> v3.18
 =======
 	if (ACPI_HANDLE(&ap->tdev) && gtm) {
 >>>>>>> v3.18
@@ -1036,6 +1088,10 @@ void ata_acpi_on_resume(struct ata_port *ap)
 			ata_acpi_clear_gtf(dev);
 			if (ata_dev_enabled(dev) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			    ata_dev_acpi_handle(dev) &&
+>>>>>>> v3.18
 =======
 			    ata_dev_acpi_handle(dev) &&
 >>>>>>> v3.18
@@ -1071,8 +1127,12 @@ static int ata_acpi_choose_suspend_state(struct ata_device *dev, bool runtime)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return acpi_pm_device_sleep_state(&dev->sdev->sdev_gendev,
 					  NULL, d_max_in);
+=======
+	return acpi_pm_device_sleep_state(&dev->tdev, NULL, d_max_in);
+>>>>>>> v3.18
 =======
 	return acpi_pm_device_sleep_state(&dev->tdev, NULL, d_max_in);
 >>>>>>> v3.18
@@ -1113,7 +1173,11 @@ static void pata_acpi_set_state(struct ata_port *ap, pm_message_t state)
 	acpi_handle port_handle;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port_handle = ata_ap_acpi_handle(ap);
+=======
+	port_handle = ACPI_HANDLE(&ap->tdev);
+>>>>>>> v3.18
 =======
 	port_handle = ACPI_HANDLE(&ap->tdev);
 >>>>>>> v3.18
@@ -1132,17 +1196,23 @@ static void pata_acpi_set_state(struct ata_port *ap, pm_message_t state)
 
 		acpi_bus_set_power(dev_handle, state.event & PM_EVENT_RESUME ?
 <<<<<<< HEAD
+<<<<<<< HEAD
 						ACPI_STATE_D0 : ACPI_STATE_D3);
 	}
 
 	if (!(state.event & PM_EVENT_RESUME))
 		acpi_bus_set_power(port_handle, ACPI_STATE_D3);
 =======
+=======
+>>>>>>> v3.18
 					ACPI_STATE_D0 : ACPI_STATE_D3_COLD);
 	}
 
 	if (!(state.event & PM_EVENT_RESUME))
 		acpi_bus_set_power(port_handle, ACPI_STATE_D3_COLD);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1255,6 +1325,7 @@ void ata_acpi_on_disable(struct ata_device *dev)
 	ata_acpi_clear_gtf(dev);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int compat_pci_ata(struct ata_port *ap)
 {
@@ -1362,5 +1433,7 @@ void ata_acpi_unregister(void)
 {
 	scsi_unregister_acpi_bus_type(&ata_acpi_bus);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

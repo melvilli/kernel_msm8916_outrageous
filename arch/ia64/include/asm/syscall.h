@@ -14,6 +14,10 @@
 #define _ASM_SYSCALL_H	1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/linux/audit.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/audit.h>
 >>>>>>> v3.18
@@ -84,11 +88,17 @@ static inline void syscall_set_arguments(struct task_struct *task,
 	ia64_syscall_get_set_arguments(task, regs, i, n, args, 1);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline int syscall_get_arch(void)
 {
 	return AUDIT_ARCH_IA64;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* _ASM_SYSCALL_H */

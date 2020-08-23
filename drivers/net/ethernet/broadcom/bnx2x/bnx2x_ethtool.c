@@ -7,7 +7,11 @@
  * the Free Software Foundation.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+>>>>>>> v3.18
 =======
  * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
 >>>>>>> v3.18
@@ -221,7 +225,10 @@ static int bnx2x_get_port_type(struct bnx2x *bp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int bnx2x_get_vf_settings(struct net_device *dev,
 				 struct ethtool_cmd *cmd)
 {
@@ -259,6 +266,9 @@ static int bnx2x_get_vf_settings(struct net_device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int bnx2x_get_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 {
@@ -365,7 +375,11 @@ static int bnx2x_set_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 	speed = ethtool_cmd_speed(cmd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If recieved a request for an unknown duplex, assume full*/
+=======
+	/* If received a request for an unknown duplex, assume full*/
+>>>>>>> v3.18
 =======
 	/* If received a request for an unknown duplex, assume full*/
 >>>>>>> v3.18
@@ -406,6 +420,7 @@ static int bnx2x_set_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 
 	cfg_idx = bnx2x_get_link_cfg_idx(bp);
 	old_multi_phy_config = bp->link_params.multi_phy_config;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (cmd->port) {
 	case PORT_TP:
@@ -451,6 +466,8 @@ static int bnx2x_set_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 		DP(BNX2X_MSG_ETHTOOL, "Unsupported port type\n");
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	if (cmd->port != bnx2x_get_port_type(bp)) {
 		switch (cmd->port) {
 		case PORT_TP:
@@ -493,6 +510,9 @@ static int bnx2x_set_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 			DP(BNX2X_MSG_ETHTOOL, "Unsupported port type\n");
 			return -EINVAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	/* Save new config in case command complete successfully */
@@ -733,6 +753,12 @@ static int bnx2x_get_regs_len(struct net_device *dev)
 	int regdump_len = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (IS_VF(bp))
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (IS_VF(bp))
 		return 0;
@@ -833,7 +859,10 @@ static bool bnx2x_is_reg_in_chip(struct bnx2x *bp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static bool bnx2x_is_wreg_in_chip(struct bnx2x *bp,
@@ -953,7 +982,11 @@ static int __bnx2x_get_preset_regs(struct bnx2x *bp, u32 *p, u32 preset)
 	/* Paged registers are supported in E2 & E3 only */
 	if (CHIP_IS_E2(bp) || CHIP_IS_E3(bp)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Read "paged" registes */
+=======
+		/* Read "paged" registers */
+>>>>>>> v3.18
 =======
 		/* Read "paged" registers */
 >>>>>>> v3.18
@@ -999,6 +1032,7 @@ static void bnx2x_get_regs(struct net_device *dev,
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Disable parity on path 0 */
 	bnx2x_pretend_func(bp, 0);
 	bnx2x_disable_blocks_parity(bp);
@@ -1010,6 +1044,10 @@ static void bnx2x_get_regs(struct net_device *dev,
 	/* Return to current function */
 	bnx2x_pretend_func(bp, BP_ABS_FUNC(bp));
 
+=======
+	bnx2x_disable_blocks_parity(bp);
+
+>>>>>>> v3.18
 =======
 	bnx2x_disable_blocks_parity(bp);
 
@@ -1041,6 +1079,7 @@ static void bnx2x_get_regs(struct net_device *dev,
 	__bnx2x_get_regs(bp, p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Re-enable parity attentions on path 0 */
 	bnx2x_pretend_func(bp, 0);
 	bnx2x_clear_blocks_parity(bp);
@@ -1053,6 +1092,11 @@ static void bnx2x_get_regs(struct net_device *dev,
 
 	/* Return to current function */
 	bnx2x_pretend_func(bp, BP_ABS_FUNC(bp));
+=======
+	/* Re-enable parity attentions */
+	bnx2x_clear_blocks_parity(bp);
+	bnx2x_enable_blocks_parity(bp);
+>>>>>>> v3.18
 =======
 	/* Re-enable parity attentions */
 	bnx2x_clear_blocks_parity(bp);
@@ -1078,6 +1122,12 @@ static int bnx2x_set_dump(struct net_device *dev, struct ethtool_dump *val)
 
 	/* Use the ethtool_dump "flag" field as the dump preset index */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (val->flag < 1 || val->flag > DUMP_MAX_PRESETS)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (val->flag < 1 || val->flag > DUMP_MAX_PRESETS)
 		return -EINVAL;
@@ -1093,6 +1143,11 @@ static int bnx2x_get_dump_flag(struct net_device *dev,
 	struct bnx2x *bp = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dump->version = BNX2X_DUMP_VERSION;
+	dump->flag = bp->dump_preset_idx;
+>>>>>>> v3.18
 =======
 	dump->version = BNX2X_DUMP_VERSION;
 	dump->flag = bp->dump_preset_idx;
@@ -1102,8 +1157,11 @@ static int bnx2x_get_dump_flag(struct net_device *dev,
 	DP(BNX2X_MSG_ETHTOOL, "Get dump preset %d length=%d\n",
 	   bp->dump_preset_idx, dump->len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dump->flag = ETHTOOL_GET_DUMP_DATA;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1118,8 +1176,11 @@ static int bnx2x_get_dump_data(struct net_device *dev,
 	struct dump_header dump_hdr = {0};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(p, 0, dump->len);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Disable parity attentions as long as following dump may
@@ -1127,6 +1188,7 @@ static int bnx2x_get_dump_data(struct net_device *dev,
 	 * will re-enable parity attentions right after the dump.
 	 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Disable parity on path 0 */
 	bnx2x_pretend_func(bp, 0);
@@ -1139,6 +1201,10 @@ static int bnx2x_get_dump_data(struct net_device *dev,
 	/* Return to current function */
 	bnx2x_pretend_func(bp, BP_ABS_FUNC(bp));
 
+=======
+	bnx2x_disable_blocks_parity(bp);
+
+>>>>>>> v3.18
 =======
 	bnx2x_disable_blocks_parity(bp);
 
@@ -1172,6 +1238,7 @@ static int bnx2x_get_dump_data(struct net_device *dev,
 	__bnx2x_get_preset_regs(bp, p, dump_hdr.preset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Re-enable parity attentions on path 0 */
 	bnx2x_pretend_func(bp, 0);
 	bnx2x_clear_blocks_parity(bp);
@@ -1186,10 +1253,15 @@ static int bnx2x_get_dump_data(struct net_device *dev,
 	bnx2x_pretend_func(bp, BP_ABS_FUNC(bp));
 
 =======
+=======
+>>>>>>> v3.18
 	/* Re-enable parity attentions */
 	bnx2x_clear_blocks_parity(bp);
 	bnx2x_enable_blocks_parity(bp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1292,11 +1364,17 @@ static u32 bnx2x_get_link(struct net_device *dev)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (IS_VF(bp))
 		return !test_bit(BNX2X_LINK_REPORT_LINK_DOWN,
 				 &bp->vf_link_vars.link_report_flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return bp->link_vars.link_up;
 }
@@ -1309,8 +1387,13 @@ static int bnx2x_get_eeprom_len(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Per pf misc lock must be aquired before the per port mcp lock. Otherwise, had
  * we done things the other way around, if two pfs from the same port would
+=======
+/* Per pf misc lock must be acquired before the per port mcp lock. Otherwise,
+ * had we done things the other way around, if two pfs from the same port would
+>>>>>>> v3.18
 =======
 /* Per pf misc lock must be acquired before the per port mcp lock. Otherwise,
  * had we done things the other way around, if two pfs from the same port would
@@ -1540,7 +1623,10 @@ static int bnx2x_nvram_read32(struct bnx2x *bp, u32 offset, u32 *buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool bnx2x_is_nvm_accessible(struct bnx2x *bp)
 {
 	int rc = 1;
@@ -1558,6 +1644,9 @@ static bool bnx2x_is_nvm_accessible(struct bnx2x *bp)
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int bnx2x_get_eeprom(struct net_device *dev,
 			    struct ethtool_eeprom *eeprom, u8 *eebuf)
@@ -1565,7 +1654,11 @@ static int bnx2x_get_eeprom(struct net_device *dev,
 	struct bnx2x *bp = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netif_running(dev)) {
+=======
+	if (!bnx2x_is_nvm_accessible(bp)) {
+>>>>>>> v3.18
 =======
 	if (!bnx2x_is_nvm_accessible(bp)) {
 >>>>>>> v3.18
@@ -1594,7 +1687,11 @@ static int bnx2x_get_module_eeprom(struct net_device *dev,
 	unsigned int start_addr = ee->offset, xfer_size = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netif_running(dev)) {
+=======
+	if (!bnx2x_is_nvm_accessible(bp)) {
+>>>>>>> v3.18
 =======
 	if (!bnx2x_is_nvm_accessible(bp)) {
 >>>>>>> v3.18
@@ -1661,7 +1758,11 @@ static int bnx2x_get_module_info(struct net_device *dev,
 	u8 sff8472_comp, diag_type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netif_running(dev)) {
+=======
+	if (!bnx2x_is_nvm_accessible(bp)) {
+>>>>>>> v3.18
 =======
 	if (!bnx2x_is_nvm_accessible(bp)) {
 >>>>>>> v3.18
@@ -1785,13 +1886,19 @@ static int bnx2x_nvram_write1(struct bnx2x *bp, u32 offset, u8 *data_buf,
 		val = be32_to_cpu(val_be);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val &= ~le32_to_cpu(0xff << BYTE_OFFSET(offset));
 		val |= le32_to_cpu(*data_buf << BYTE_OFFSET(offset));
 =======
+=======
+>>>>>>> v3.18
 		val &= ~le32_to_cpu((__force __le32)
 				    (0xff << BYTE_OFFSET(offset)));
 		val |= le32_to_cpu((__force __le32)
 				   (*data_buf << BYTE_OFFSET(offset)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		rc = bnx2x_nvram_write_dword(bp, align_offset, val,
@@ -1851,13 +1958,19 @@ static int bnx2x_nvram_write(struct bnx2x *bp, u32 offset, u8 *data_buf,
 		memcpy(&val, data_buf, 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Notice unlike bnx2x_nvram_read_dword() this will not
 		 * change val using be32_to_cpu(), which causes data to flip
 		 * if the eeprom is read and then written back. This is due
 		 * to tools utilizing this functionality that would break
 		 * if this would be resolved.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rc = bnx2x_nvram_write_dword(bp, offset, val, cmd_flags);
 
@@ -1883,7 +1996,12 @@ static int bnx2x_set_eeprom(struct net_device *dev,
 	int rc = 0;
 	u32 ext_phy_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netif_running(dev)) {
+=======
+
+	if (!bnx2x_is_nvm_accessible(bp)) {
+>>>>>>> v3.18
 =======
 
 	if (!bnx2x_is_nvm_accessible(bp)) {
@@ -2004,6 +2122,7 @@ static void bnx2x_get_ringparam(struct net_device *dev,
 	ering->rx_max_pending = MAX_RX_AVAIL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If size isn't already set, we give an estimation of the number
 	 * of buffers we'll have. We're neglecting some possible conditions
 	 * [we couldn't know for certain at this point if number of queues
@@ -2014,6 +2133,10 @@ static void bnx2x_get_ringparam(struct net_device *dev,
 		ering->rx_pending = bp->rx_ring_size;
 	else if (BNX2X_NUM_RX_QUEUES(bp))
 		ering->rx_pending = MAX_RX_AVAIL / BNX2X_NUM_RX_QUEUES(bp);
+=======
+	if (bp->rx_ring_size)
+		ering->rx_pending = bp->rx_ring_size;
+>>>>>>> v3.18
 =======
 	if (bp->rx_ring_size)
 		ering->rx_pending = bp->rx_ring_size;
@@ -2044,7 +2167,11 @@ static int bnx2x_set_ringparam(struct net_device *dev,
 	    (ering->rx_pending < (bp->disable_tpa ? MIN_RX_SIZE_NONTPA :
 						    MIN_RX_SIZE_TPA)) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (ering->tx_pending > (IS_MF_FCOE_AFEX(bp) ? 0 : MAX_TX_AVAIL)) ||
+=======
+	    (ering->tx_pending > (IS_MF_STORAGE_ONLY(bp) ? 0 : MAX_TX_AVAIL)) ||
+>>>>>>> v3.18
 =======
 	    (ering->tx_pending > (IS_MF_STORAGE_ONLY(bp) ? 0 : MAX_TX_AVAIL)) ||
 >>>>>>> v3.18
@@ -2150,7 +2277,10 @@ static const char bnx2x_tests_str_arr[BNX2X_NUM_TESTS_SF][ETH_GSTRING_LEN] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum {
 	BNX2X_PRI_FLAG_ISCSI,
 	BNX2X_PRI_FLAG_FCOE,
@@ -2164,6 +2294,9 @@ static const char bnx2x_private_arr[BNX2X_PRI_FLAG_LEN][ETH_GSTRING_LEN] = {
 	"Storage only interface"
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u32 bnx2x_eee_to_adv(u32 eee_adv)
 {
@@ -2286,7 +2419,11 @@ static int bnx2x_set_eee(struct net_device *dev, struct ethtool_eee *edata)
 				    EEE_MODE_OUTPUT_TIME;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Restart link to propogate changes */
+=======
+	/* Restart link to propagate changes */
+>>>>>>> v3.18
 =======
 	/* Restart link to propagate changes */
 >>>>>>> v3.18
@@ -2409,7 +2546,11 @@ static int bnx2x_test_registers(struct bnx2x *bp)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netif_running(bp->dev)) {
+=======
+	if (!bnx2x_is_nvm_accessible(bp)) {
+>>>>>>> v3.18
 =======
 	if (!bnx2x_is_nvm_accessible(bp)) {
 >>>>>>> v3.18
@@ -2517,7 +2658,11 @@ static int bnx2x_test_memory(struct bnx2x *bp)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netif_running(bp->dev)) {
+=======
+	if (!bnx2x_is_nvm_accessible(bp)) {
+>>>>>>> v3.18
 =======
 	if (!bnx2x_is_nvm_accessible(bp)) {
 >>>>>>> v3.18
@@ -3124,10 +3269,13 @@ static void bnx2x_self_test(struct net_device *dev,
 	memset(buf, 0, sizeof(u64) * BNX2X_NUM_TESTS(bp));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netif_running(dev)) {
 		DP(BNX2X_MSG_ETHTOOL,
 		   "Can't perform self-test when interface is down\n");
 =======
+=======
+>>>>>>> v3.18
 	if (bnx2x_test_nvram(bp) != 0) {
 		if (!IS_MF(bp))
 			buf[4] = 1;
@@ -3138,6 +3286,9 @@ static void bnx2x_self_test(struct net_device *dev,
 
 	if (!netif_running(dev)) {
 		DP(BNX2X_MSG_ETHTOOL, "Interface is down\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -3201,6 +3352,7 @@ static void bnx2x_self_test(struct net_device *dev,
 		bnx2x_wait_for_link(bp, link_up, is_serdes);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bnx2x_test_nvram(bp) != 0) {
 		if (!IS_MF(bp))
 			buf[4] = 1;
@@ -3208,6 +3360,9 @@ static void bnx2x_self_test(struct net_device *dev,
 			buf[0] = 1;
 		etest->flags |= ETH_TEST_FL_FAILED;
 	}
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -3238,8 +3393,14 @@ static void bnx2x_self_test(struct net_device *dev,
 	((bnx2x_stats_arr[i].flags & STATS_FLAGS_BOTH) == STATS_FLAGS_PORT)
 #define IS_FUNC_STAT(i)		(bnx2x_stats_arr[i].flags & STATS_FLAGS_FUNC)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IS_MF_MODE_STAT(bp) \
 			(IS_MF(bp) && !(bp->msg_enable & BNX2X_MSG_STATS))
+=======
+#define HIDE_PORT_STAT(bp) \
+		((IS_MF(bp) && !(bp->msg_enable & BNX2X_MSG_STATS)) || \
+		 IS_VF(bp))
+>>>>>>> v3.18
 =======
 #define HIDE_PORT_STAT(bp) \
 		((IS_MF(bp) && !(bp->msg_enable & BNX2X_MSG_STATS)) || \
@@ -3258,7 +3419,11 @@ static int bnx2x_get_sset_count(struct net_device *dev, int stringset)
 {
 	struct bnx2x *bp = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, num_stats;
+=======
+	int i, num_strings = 0;
+>>>>>>> v3.18
 =======
 	int i, num_strings = 0;
 >>>>>>> v3.18
@@ -3266,6 +3431,7 @@ static int bnx2x_get_sset_count(struct net_device *dev, int stringset)
 	switch (stringset) {
 	case ETH_SS_STATS:
 		if (is_multi(bp)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			num_stats = bnx2x_num_stat_queues(bp) *
 						BNX2X_NUM_Q_STATS;
@@ -3280,6 +3446,8 @@ static int bnx2x_get_sset_count(struct net_device *dev, int stringset)
 
 		return num_stats;
 =======
+=======
+>>>>>>> v3.18
 			num_strings = bnx2x_num_stat_queues(bp) *
 				      BNX2X_NUM_Q_STATS;
 		} else
@@ -3292,12 +3460,21 @@ static int bnx2x_get_sset_count(struct net_device *dev, int stringset)
 			num_strings += BNX2X_NUM_STATS;
 
 		return num_strings;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case ETH_SS_TEST:
 		return BNX2X_NUM_TESTS(bp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ETH_SS_PRIV_FLAGS:
+		return BNX2X_PRI_FLAG_LEN;
+
+>>>>>>> v3.18
 =======
 	case ETH_SS_PRIV_FLAGS:
 		return BNX2X_PRI_FLAG_LEN;
@@ -3309,7 +3486,10 @@ static int bnx2x_get_sset_count(struct net_device *dev, int stringset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 bnx2x_get_private_flags(struct net_device *dev)
 {
 	struct bnx2x *bp = netdev_priv(dev);
@@ -3322,6 +3502,9 @@ static u32 bnx2x_get_private_flags(struct net_device *dev)
 	return flags;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void bnx2x_get_strings(struct net_device *dev, u32 stringset, u8 *buf)
 {
@@ -3346,9 +3529,14 @@ static void bnx2x_get_strings(struct net_device *dev, u32 stringset, u8 *buf)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		for (i = 0, j = 0; i < BNX2X_NUM_STATS; i++) {
 			if (IS_MF_MODE_STAT(bp) && IS_PORT_STAT(i))
+=======
+		for (i = 0, j = 0; i < BNX2X_NUM_STATS; i++) {
+			if (HIDE_PORT_STAT(bp) && IS_PORT_STAT(i))
+>>>>>>> v3.18
 =======
 		for (i = 0, j = 0; i < BNX2X_NUM_STATS; i++) {
 			if (HIDE_PORT_STAT(bp) && IS_PORT_STAT(i))
@@ -3370,13 +3558,19 @@ static void bnx2x_get_strings(struct net_device *dev, u32 stringset, u8 *buf)
 		memcpy(buf, bnx2x_tests_str_arr + start,
 		       ETH_GSTRING_LEN * BNX2X_NUM_TESTS(bp));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		break;
 
 	case ETH_SS_PRIV_FLAGS:
 		memcpy(buf, bnx2x_private_arr,
 		       ETH_GSTRING_LEN * BNX2X_PRI_FLAG_LEN);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -3414,7 +3608,11 @@ static void bnx2x_get_ethtool_stats(struct net_device *dev,
 	hw_stats = (u32 *)&bp->eth_stats;
 	for (i = 0, j = 0; i < BNX2X_NUM_STATS; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (IS_MF_MODE_STAT(bp) && IS_PORT_STAT(i))
+=======
+		if (HIDE_PORT_STAT(bp) && IS_PORT_STAT(i))
+>>>>>>> v3.18
 =======
 		if (HIDE_PORT_STAT(bp) && IS_PORT_STAT(i))
 >>>>>>> v3.18
@@ -3444,7 +3642,11 @@ static int bnx2x_set_phys_id(struct net_device *dev,
 	struct bnx2x *bp = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netif_running(dev)) {
+=======
+	if (!bnx2x_is_nvm_accessible(bp)) {
+>>>>>>> v3.18
 =======
 	if (!bnx2x_is_nvm_accessible(bp)) {
 >>>>>>> v3.18
@@ -3454,11 +3656,14 @@ static int bnx2x_set_phys_id(struct net_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bp->port.pmf) {
 		DP(BNX2X_MSG_ETHTOOL, "Interface is not pmf\n");
 		return -EOPNOTSUPP;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (state) {
@@ -3493,7 +3698,10 @@ static int bnx2x_set_phys_id(struct net_device *dev,
 static int bnx2x_get_rss_flags(struct bnx2x *bp, struct ethtool_rxnfc *info)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (info->flow_type) {
@@ -3582,7 +3790,11 @@ static int bnx2x_set_rss_flags(struct bnx2x *bp, struct ethtool_rxnfc *info)
 			   "rss re-configured, UDP 4-tupple %s\n",
 			   udp_rss_requested ? "enabled" : "disabled");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return bnx2x_config_rss_pf(bp, &bp->rss_conf_obj, 0);
+=======
+			return bnx2x_rss(bp, &bp->rss_conf_obj, false, true);
+>>>>>>> v3.18
 =======
 			return bnx2x_rss(bp, &bp->rss_conf_obj, false, true);
 >>>>>>> v3.18
@@ -3593,7 +3805,11 @@ static int bnx2x_set_rss_flags(struct bnx2x *bp, struct ethtool_rxnfc *info)
 			   "rss re-configured, UDP 4-tupple %s\n",
 			   udp_rss_requested ? "enabled" : "disabled");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return bnx2x_config_rss_pf(bp, &bp->rss_conf_obj, 0);
+=======
+			return bnx2x_rss(bp, &bp->rss_conf_obj, false, true);
+>>>>>>> v3.18
 =======
 			return bnx2x_rss(bp, &bp->rss_conf_obj, false, true);
 >>>>>>> v3.18
@@ -3652,7 +3868,11 @@ static u32 bnx2x_get_rxfh_indir_size(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bnx2x_get_rxfh_indir(struct net_device *dev, u32 *indir)
+=======
+static int bnx2x_get_rxfh(struct net_device *dev, u32 *indir, u8 *key)
+>>>>>>> v3.18
 =======
 static int bnx2x_get_rxfh(struct net_device *dev, u32 *indir, u8 *key)
 >>>>>>> v3.18
@@ -3680,7 +3900,12 @@ static int bnx2x_get_rxfh(struct net_device *dev, u32 *indir, u8 *key)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bnx2x_set_rxfh_indir(struct net_device *dev, const u32 *indir)
+=======
+static int bnx2x_set_rxfh(struct net_device *dev, const u32 *indir,
+			  const u8 *key)
+>>>>>>> v3.18
 =======
 static int bnx2x_set_rxfh(struct net_device *dev, const u32 *indir,
 			  const u8 *key)
@@ -3692,7 +3917,11 @@ static int bnx2x_set_rxfh(struct net_device *dev, const u32 *indir,
 	for (i = 0; i < T_ETH_INDIRECTION_TABLE_SIZE; i++) {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * The same as in bnx2x_get_rxfh_indir: we can't use a memcpy()
+=======
+		 * The same as in bnx2x_get_rxfh: we can't use a memcpy()
+>>>>>>> v3.18
 =======
 		 * The same as in bnx2x_get_rxfh: we can't use a memcpy()
 >>>>>>> v3.18
@@ -3753,7 +3982,10 @@ static int bnx2x_set_channels(struct net_device *dev,
 	struct bnx2x *bp = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	DP(BNX2X_MSG_ETHTOOL,
@@ -3791,7 +4023,10 @@ static int bnx2x_set_channels(struct net_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int bnx2x_get_ts_info(struct net_device *dev,
 			     struct ethtool_ts_info *info)
 {
@@ -3832,6 +4067,9 @@ static int bnx2x_get_ts_info(struct net_device *dev,
 	return ethtool_op_get_ts_info(dev, info);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct ethtool_ops bnx2x_ethtool_ops = {
 	.get_settings		= bnx2x_get_settings,
@@ -3860,6 +4098,10 @@ static const struct ethtool_ops bnx2x_ethtool_ops = {
 	.self_test		= bnx2x_self_test,
 	.get_sset_count		= bnx2x_get_sset_count,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_priv_flags		= bnx2x_get_private_flags,
+>>>>>>> v3.18
 =======
 	.get_priv_flags		= bnx2x_get_private_flags,
 >>>>>>> v3.18
@@ -3870,8 +4112,13 @@ static const struct ethtool_ops bnx2x_ethtool_ops = {
 	.set_rxnfc		= bnx2x_set_rxnfc,
 	.get_rxfh_indir_size	= bnx2x_get_rxfh_indir_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_rxfh_indir		= bnx2x_get_rxfh_indir,
 	.set_rxfh_indir		= bnx2x_set_rxfh_indir,
+=======
+	.get_rxfh		= bnx2x_get_rxfh,
+	.set_rxfh		= bnx2x_set_rxfh,
+>>>>>>> v3.18
 =======
 	.get_rxfh		= bnx2x_get_rxfh,
 	.set_rxfh		= bnx2x_set_rxfh,
@@ -3883,6 +4130,7 @@ static const struct ethtool_ops bnx2x_ethtool_ops = {
 	.get_eee		= bnx2x_get_eee,
 	.set_eee		= bnx2x_set_eee,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_ts_info		= ethtool_op_get_ts_info,
 };
 
@@ -3890,11 +4138,16 @@ static const struct ethtool_ops bnx2x_vf_ethtool_ops = {
 	.get_settings		= bnx2x_get_settings,
 	.set_settings		= bnx2x_set_settings,
 =======
+=======
+>>>>>>> v3.18
 	.get_ts_info		= bnx2x_get_ts_info,
 };
 
 static const struct ethtool_ops bnx2x_vf_ethtool_ops = {
 	.get_settings		= bnx2x_get_vf_settings,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.get_drvinfo		= bnx2x_get_drvinfo,
 	.get_msglevel		= bnx2x_get_msglevel,
@@ -3910,8 +4163,13 @@ static const struct ethtool_ops bnx2x_vf_ethtool_ops = {
 	.set_rxnfc		= bnx2x_set_rxnfc,
 	.get_rxfh_indir_size	= bnx2x_get_rxfh_indir_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_rxfh_indir		= bnx2x_get_rxfh_indir,
 	.set_rxfh_indir		= bnx2x_set_rxfh_indir,
+=======
+	.get_rxfh		= bnx2x_get_rxfh,
+	.set_rxfh		= bnx2x_set_rxfh,
+>>>>>>> v3.18
 =======
 	.get_rxfh		= bnx2x_get_rxfh,
 	.set_rxfh		= bnx2x_set_rxfh,
@@ -3923,10 +4181,15 @@ static const struct ethtool_ops bnx2x_vf_ethtool_ops = {
 void bnx2x_set_ethtool_ops(struct bnx2x *bp, struct net_device *netdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_PF(bp))
 		SET_ETHTOOL_OPS(netdev, &bnx2x_ethtool_ops);
 	else /* vf */
 		SET_ETHTOOL_OPS(netdev, &bnx2x_vf_ethtool_ops);
+=======
+	netdev->ethtool_ops = (IS_PF(bp)) ?
+		&bnx2x_ethtool_ops : &bnx2x_vf_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = (IS_PF(bp)) ?
 		&bnx2x_ethtool_ops : &bnx2x_vf_ethtool_ops;

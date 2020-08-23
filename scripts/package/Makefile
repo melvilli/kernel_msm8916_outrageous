@@ -116,7 +116,13 @@ git --git-dir=$(srctree)/.git archive --prefix=$(perf-tar)/         \
 mkdir -p $(perf-tar);                                               \
 git --git-dir=$(srctree)/.git rev-parse HEAD > $(perf-tar)/HEAD;    \
 <<<<<<< HEAD
+<<<<<<< HEAD
 tar rf $(perf-tar).tar $(perf-tar)/HEAD;                            \
+=======
+(cd $(srctree)/tools/perf;                                          \
+util/PERF-VERSION-GEN ../../$(perf-tar)/ 2>/dev/null);              \
+tar rf $(perf-tar).tar $(perf-tar)/HEAD $(perf-tar)/PERF-VERSION-FILE; \
+>>>>>>> v3.18
 =======
 (cd $(srctree)/tools/perf;                                          \
 util/PERF-VERSION-GEN ../../$(perf-tar)/ 2>/dev/null);              \
@@ -148,6 +154,9 @@ help: FORCE
 	@echo '  perf-tarbz2-src-pkg - Build $(perf-tar).tar.bz2 source tarball'
 	@echo '  perf-tarxz-src-pkg  - Build $(perf-tar).tar.xz source tarball'
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -42,16 +42,22 @@
  * Return: Zero if successful, or a negative error code on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_device_new(struct snd_card *card, snd_device_type_t type,
 		   void *device_data, struct snd_device_ops *ops)
 {
 	struct snd_device *dev;
 =======
+=======
+>>>>>>> v3.18
 int snd_device_new(struct snd_card *card, enum snd_device_type type,
 		   void *device_data, struct snd_device_ops *ops)
 {
 	struct snd_device *dev;
 	struct list_head *p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (snd_BUG_ON(!card || !device_data || !ops))
@@ -59,20 +65,27 @@ int snd_device_new(struct snd_card *card, enum snd_device_type type,
 	dev = kzalloc(sizeof(*dev), GFP_KERNEL);
 	if (dev == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Cannot allocate device\n");
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 		dev_err(card->dev, "Cannot allocate device, type=%d\n", type);
 		return -ENOMEM;
 	}
 	INIT_LIST_HEAD(&dev->list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->card = card;
 	dev->type = type;
 	dev->state = SNDRV_DEV_BUILD;
 	dev->device_data = device_data;
 	dev->ops = ops;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_add(&dev->list, &card->devices);	/* add to the head of list */
 	return 0;
@@ -81,6 +94,8 @@ int snd_device_new(struct snd_card *card, enum snd_device_type type,
 EXPORT_SYMBOL(snd_device_new);
 
 =======
+=======
+>>>>>>> v3.18
 
 	/* insert the entry in an incrementally sorted list */
 	list_for_each_prev(p, &card->devices) {
@@ -129,6 +144,9 @@ static struct snd_device *look_for_dev(struct snd_card *card, void *device_data)
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * snd_device_free - release the device from the card
@@ -139,6 +157,7 @@ static struct snd_device *look_for_dev(struct snd_card *card, void *device_data)
  * callbacks, dev_disconnect and dev_free, corresponding to the state.
  * Then release the device.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Return: Zero if successful, or a negative error code on failure or if the
  * device not found.
@@ -148,10 +167,15 @@ int snd_device_free(struct snd_card *card, void *device_data)
  */
 void snd_device_free(struct snd_card *card, void *device_data)
 >>>>>>> v3.18
+=======
+ */
+void snd_device_free(struct snd_card *card, void *device_data)
+>>>>>>> v3.18
 {
 	struct snd_device *dev;
 	
 	if (snd_BUG_ON(!card || !device_data))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -ENXIO;
 	list_for_each_entry(dev, &card->devices, list) {
@@ -212,6 +236,8 @@ int snd_device_disconnect(struct snd_card *card, void *device_data)
 		   __builtin_return_address(0));
 	return -ENXIO;
 =======
+=======
+>>>>>>> v3.18
 		return;
 	dev = look_for_dev(card, device_data);
 	if (dev)
@@ -233,6 +259,9 @@ static int __snd_device_register(struct snd_device *dev)
 		dev->state = SNDRV_DEV_REGISTERED;
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -252,6 +281,7 @@ static int __snd_device_register(struct snd_device *dev)
 int snd_device_register(struct snd_card *card, void *device_data)
 {
 	struct snd_device *dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int err;
 
@@ -274,6 +304,8 @@ int snd_device_register(struct snd_card *card, void *device_data)
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (snd_BUG_ON(!card || !device_data))
 		return -ENXIO;
@@ -283,6 +315,9 @@ int snd_device_register(struct snd_card *card, void *device_data)
 	snd_BUG();
 	return -ENXIO;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(snd_device_register);
 
@@ -299,11 +334,17 @@ int snd_device_register_all(struct snd_card *card)
 		return -ENXIO;
 	list_for_each_entry(dev, &card->devices, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dev->state == SNDRV_DEV_BUILD && dev->ops->dev_register) {
 			if ((err = dev->ops->dev_register(dev)) < 0)
 				return err;
 			dev->state = SNDRV_DEV_REGISTERED;
 		}
+=======
+		err = __snd_device_register(dev);
+		if (err < 0)
+			return err;
+>>>>>>> v3.18
 =======
 		err = __snd_device_register(dev);
 		if (err < 0)
@@ -325,8 +366,13 @@ int snd_device_disconnect_all(struct snd_card *card)
 	if (snd_BUG_ON(!card))
 		return -ENXIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(dev, &card->devices, list) {
 		if (snd_device_disconnect(card, dev->device_data) < 0)
+=======
+	list_for_each_entry_reverse(dev, &card->devices, list) {
+		if (__snd_device_disconnect(dev) < 0)
+>>>>>>> v3.18
 =======
 	list_for_each_entry_reverse(dev, &card->devices, list) {
 		if (__snd_device_disconnect(dev) < 0)
@@ -340,6 +386,7 @@ int snd_device_disconnect_all(struct snd_card *card)
  * release all the devices on the card.
  * called from init.c
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int snd_device_free_all(struct snd_card *card, snd_device_cmd_t cmd)
 {
@@ -362,6 +409,8 @@ int snd_device_free_all(struct snd_card *card, snd_device_cmd_t cmd)
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 void snd_device_free_all(struct snd_card *card)
 {
 	struct snd_device *dev, *next;
@@ -370,5 +419,8 @@ void snd_device_free_all(struct snd_card *card)
 		return;
 	list_for_each_entry_safe_reverse(dev, next, &card->devices, list)
 		__snd_device_free(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

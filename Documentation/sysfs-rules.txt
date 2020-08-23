@@ -48,7 +48,11 @@ versions of the sysfs interface.
       - the unique key to the device at that point in time
       - the kernel's path to the device directory without the leading
 <<<<<<< HEAD
+<<<<<<< HEAD
         /sys, and always starting with with a slash
+=======
+        /sys, and always starting with a slash
+>>>>>>> v3.18
 =======
         /sys, and always starting with a slash
 >>>>>>> v3.18
@@ -166,7 +170,10 @@ versions of the sysfs interface.
   position of a parent device or exposing relative paths using "../" to
   access the chain of parents is a bug in the application.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 - When reading and writing sysfs device attribute files, avoid dependency
   on specific error codes wherever possible. This minimizes coupling to
@@ -188,4 +195,7 @@ versions of the sysfs interface.
   Userspace applications can, however, expect the format and contents of
   the attribute files to remain consistent in the absence of a version
   attribute change in the context of a given attribute.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _CAN_PLATFORM_CC770_H_
 #define _CAN_PLATFORM_CC770_H_
+=======
+#ifndef _CAN_PLATFORM_CC770_H
+#define _CAN_PLATFORM_CC770_H
+>>>>>>> v3.18
 =======
 #ifndef _CAN_PLATFORM_CC770_H
 #define _CAN_PLATFORM_CC770_H
@@ -36,7 +41,11 @@ struct cc770_platform_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* !_CAN_PLATFORM_CC770_H_ */
+=======
+#endif	/* !_CAN_PLATFORM_CC770_H */
+>>>>>>> v3.18
 =======
 #endif	/* !_CAN_PLATFORM_CC770_H */
 >>>>>>> v3.18

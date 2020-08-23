@@ -244,13 +244,19 @@ static void __init ls_hgl_init(void)
 	orion5x_xor_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mvebu_mbus_add_window("devbus-boot", LS_HGL_NOR_BOOT_BASE,
 			      LS_HGL_NOR_BOOT_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	mvebu_mbus_add_window_by_id(ORION_MBUS_DEVBUS_BOOT_TARGET,
 				    ORION_MBUS_DEVBUS_BOOT_ATTR,
 				    LS_HGL_NOR_BOOT_BASE,
 				    LS_HGL_NOR_BOOT_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register(&ls_hgl_nor_flash);
 

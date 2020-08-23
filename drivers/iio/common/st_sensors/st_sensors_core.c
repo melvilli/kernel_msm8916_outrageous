@@ -14,8 +14,14 @@
 #include <linux/delay.h>
 #include <linux/iio/iio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/unaligned.h>
 
+=======
+#include <linux/regulator/consumer.h>
+#include <linux/of.h>
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 =======
 #include <linux/regulator/consumer.h>
 #include <linux/of.h>
@@ -27,12 +33,18 @@
 #define ST_SENSORS_WAI_ADDRESS		0x0f
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline u32 st_sensors_get_unaligned_le24(const u8 *p)
 {
 	return (s32)((p[0] | p[1] << 8 | p[2] << 16) << 8) >> 8;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int st_sensors_write_data_with_mask(struct iio_dev *indio_dev,
 						u8 reg_addr, u8 mask, u8 data)
@@ -127,7 +139,12 @@ st_sensors_match_odr_error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int st_sensors_set_fullscale(struct iio_dev *indio_dev, unsigned int fs)
+=======
+static int st_sensors_set_fullscale(struct iio_dev *indio_dev,
+								unsigned int fs)
+>>>>>>> v3.18
 =======
 static int st_sensors_set_fullscale(struct iio_dev *indio_dev,
 								unsigned int fs)
@@ -212,6 +229,7 @@ int st_sensors_set_axis_enable(struct iio_dev *indio_dev, u8 axis_enable)
 EXPORT_SYMBOL(st_sensors_set_axis_enable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int st_sensors_init_sensor(struct iio_dev *indio_dev)
 {
 	int err;
@@ -232,6 +250,8 @@ int st_sensors_init_sensor(struct iio_dev *indio_dev)
 	if (err < 0)
 		goto init_error;
 =======
+=======
+>>>>>>> v3.18
 void st_sensors_power_enable(struct iio_dev *indio_dev)
 {
 	struct st_sensor_data *pdata = iio_priv(indio_dev);
@@ -360,6 +380,9 @@ int st_sensors_init_sensor(struct iio_dev *indio_dev,
 	err = st_sensors_set_odr(indio_dev, sdata->odr);
 	if (err < 0)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set BDU */
@@ -367,16 +390,22 @@ int st_sensors_init_sensor(struct iio_dev *indio_dev,
 			sdata->sensor->bdu.addr, sdata->sensor->bdu.mask, true);
 	if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto init_error;
 
 	err = st_sensors_set_axis_enable(indio_dev, ST_SENSORS_ENABLE_ALL_AXIS);
 
 init_error:
 =======
+=======
+>>>>>>> v3.18
 		return err;
 
 	err = st_sensors_set_axis_enable(indio_dev, ST_SENSORS_ENABLE_ALL_AXIS);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -386,15 +415,21 @@ int st_sensors_set_dataready_irq(struct iio_dev *indio_dev, bool enable)
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct st_sensor_data *sdata = iio_priv(indio_dev);
 
 =======
+=======
+>>>>>>> v3.18
 	u8 drdy_mask;
 	struct st_sensor_data *sdata = iio_priv(indio_dev);
 
 	if (!sdata->sensor->drdy_irq.addr)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Enable/Disable the interrupt generator 1. */
 	if (sdata->sensor->drdy_irq.ig1.en_addr > 0) {
@@ -406,11 +441,14 @@ int st_sensors_set_dataready_irq(struct iio_dev *indio_dev, bool enable)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Enable/Disable the interrupt generator for data ready. */
 	err = st_sensors_write_data_with_mask(indio_dev,
 			sdata->sensor->drdy_irq.addr,
 			sdata->sensor->drdy_irq.mask, (int)enable);
 =======
+=======
+>>>>>>> v3.18
 	if (sdata->drdy_int_pin == 1)
 		drdy_mask = sdata->sensor->drdy_irq.mask_int1;
 	else
@@ -419,6 +457,9 @@ int st_sensors_set_dataready_irq(struct iio_dev *indio_dev, bool enable)
 	/* Enable/Disable the interrupt generator for data ready. */
 	err = st_sensors_write_data_with_mask(indio_dev,
 			sdata->sensor->drdy_irq.addr, drdy_mask, (int)enable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 st_accel_set_dataready_irq_error:
@@ -451,6 +492,7 @@ EXPORT_SYMBOL(st_sensors_set_fullscale_by_gain);
 
 static int st_sensors_read_axis_data(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							u8 ch_addr, int *data)
 {
 	int err;
@@ -467,6 +509,8 @@ static int st_sensors_read_axis_data(struct iio_dev *indio_dev,
 
 read_error:
 =======
+=======
+>>>>>>> v3.18
 				struct iio_chan_spec const *ch, int *data)
 {
 	int err;
@@ -492,6 +536,9 @@ read_error:
 st_sensors_free_memory:
 	kfree(outdata);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -506,6 +553,7 @@ int st_sensors_read_info_raw(struct iio_dev *indio_dev,
 	if (indio_dev->currentmode == INDIO_BUFFER_TRIGGERED) {
 		err = -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto read_error;
 	} else {
 		err = st_sensors_set_enable(indio_dev, true);
@@ -517,6 +565,8 @@ int st_sensors_read_info_raw(struct iio_dev *indio_dev,
 		if (err < 0)
 			goto read_error;
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 	} else {
 		err = st_sensors_set_enable(indio_dev, true);
@@ -527,12 +577,16 @@ int st_sensors_read_info_raw(struct iio_dev *indio_dev,
 		err = st_sensors_read_axis_data(indio_dev, ch, val);
 		if (err < 0)
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		*val = *val >> ch->scan_type.shift;
 
 		err = st_sensors_set_enable(indio_dev, false);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_unlock(&indio_dev->mlock);
 
@@ -542,10 +596,15 @@ read_error:
 	mutex_unlock(&indio_dev->mlock);
 	return err;
 =======
+=======
+>>>>>>> v3.18
 out:
 	mutex_unlock(&indio_dev->mlock);
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(st_sensors_read_info_raw);
@@ -595,6 +654,7 @@ read_wai_error:
 EXPORT_SYMBOL(st_sensors_check_device_support);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t st_sensors_sysfs_get_sampling_frequency(struct device *dev,
 				struct device_attribute *attr, char *buf)
 {
@@ -624,6 +684,8 @@ conversion_error:
 }
 EXPORT_SYMBOL(st_sensors_sysfs_set_sampling_frequency);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ssize_t st_sensors_sysfs_sampling_frequency_avail(struct device *dev,

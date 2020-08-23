@@ -279,7 +279,11 @@
 
 	corenet-cf@18000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "fsl,corenet-cf";
+=======
+		compatible = "fsl,corenet1-cf", "fsl,corenet-cf";
+>>>>>>> v3.18
 =======
 		compatible = "fsl,corenet1-cf", "fsl,corenet-cf";
 >>>>>>> v3.18
@@ -299,6 +303,10 @@
 			24 2 0 0
 			16 2 1 30>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		fsl,portid-mapping = <0x3c000000>;
+>>>>>>> v3.18
 =======
 		fsl,portid-mapping = <0x3c000000>;
 >>>>>>> v3.18
@@ -347,9 +355,12 @@
 	clockgen: global-utilities@e1000 {
 		compatible = "fsl,p5020-clockgen", "fsl,qoriq-clockgen-1.0";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg = <0xe1000 0x1000>;
 		clock-frequency = <0>;
 =======
+=======
+>>>>>>> v3.18
 		ranges = <0x0 0xe1000 0x1000>;
 		reg = <0xe1000 0x1000>;
 		clock-frequency = <0>;
@@ -395,6 +406,9 @@
 			clock-names = "pll0", "pll0-div2", "pll1", "pll1-div2";
 			clock-output-names = "cmux1";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 

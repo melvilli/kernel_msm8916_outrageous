@@ -37,7 +37,11 @@ static loff_t hpfs_dir_lseek(struct file *filp, loff_t off, int whence)
 	hpfs_lock(s);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*printk("dir lseek\n");*/
+=======
+	/*pr_info("dir lseek\n");*/
+>>>>>>> v3.18
 =======
 	/*pr_info("dir lseek\n");*/
 >>>>>>> v3.18
@@ -56,7 +60,11 @@ ok:
 	return new_off;
 fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*printk("illegal lseek: %016llx\n", new_off);*/
+=======
+	/*pr_warn("illegal lseek: %016llx\n", new_off);*/
+>>>>>>> v3.18
 =======
 	/*pr_warn("illegal lseek: %016llx\n", new_off);*/
 >>>>>>> v3.18
@@ -66,9 +74,15 @@ fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hpfs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode *inode = file_inode(filp);
+=======
+static int hpfs_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 =======
 static int hpfs_readdir(struct file *file, struct dir_context *ctx)
 {
@@ -79,7 +93,11 @@ static int hpfs_readdir(struct file *file, struct dir_context *ctx)
 	struct hpfs_dirent *de;
 	int lc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long old_pos;
+=======
+	loff_t next_pos;
+>>>>>>> v3.18
 =======
 	loff_t next_pos;
 >>>>>>> v3.18
@@ -124,17 +142,23 @@ static int hpfs_readdir(struct file *file, struct dir_context *ctx)
 	}
 	lc = hpfs_sb(inode->i_sb)->sb_lowercase;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (filp->f_pos == 12) { /* diff -r requires this (note, that diff -r */
 		filp->f_pos = 13; /* also fails on msdos filesystem in 2.0) */
 		goto out;
 	}
 	if (filp->f_pos == 13) {
 =======
+=======
+>>>>>>> v3.18
 	if (ctx->pos == 12) { /* diff -r requires this (note, that diff -r */
 		ctx->pos = 13; /* also fails on msdos filesystem in 2.0) */
 		goto out;
 	}
 	if (ctx->pos == 13) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = -ENOENT;
 		goto out;
@@ -146,6 +170,7 @@ static int hpfs_readdir(struct file *file, struct dir_context *ctx)
 		   accepted by filldir, but what can I do?
 		   maybe killall -9 ls helps */
 		if (hpfs_sb(inode->i_sb)->sb_chk)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (hpfs_stop_cycles(inode->i_sb, filp->f_pos, &c1, &c2, "hpfs_readdir")) {
 				ret = -EFSERROR;
@@ -175,6 +200,8 @@ static int hpfs_readdir(struct file *file, struct dir_context *ctx)
 		old_pos = filp->f_pos;
 		if (!(de = map_pos_dirent(inode, &filp->f_pos, &qbh))) {
 =======
+=======
+>>>>>>> v3.18
 			if (hpfs_stop_cycles(inode->i_sb, ctx->pos, &c1, &c2, "hpfs_readdir")) {
 				ret = -EFSERROR;
 				goto out;
@@ -203,6 +230,9 @@ static int hpfs_readdir(struct file *file, struct dir_context *ctx)
 		next_pos = ctx->pos;
 		if (!(de = map_pos_dirent(inode, &next_pos, &qbh))) {
 			ctx->pos = next_pos;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = -EIOERROR;
 			goto out;
@@ -211,6 +241,7 @@ static int hpfs_readdir(struct file *file, struct dir_context *ctx)
 			if (hpfs_sb(inode->i_sb)->sb_chk) {
 				if (de->first && !de->last && (de->namelen != 2
 				    || de ->name[0] != 1 || de->name[1] != 1))
+<<<<<<< HEAD
 <<<<<<< HEAD
 					hpfs_error(inode->i_sb, "hpfs_readdir: bad ^A^A entry; pos = %08lx", old_pos);
 				if (de->last && (de->namelen != 1 || de ->name[0] != 255))
@@ -223,6 +254,8 @@ static int hpfs_readdir(struct file *file, struct dir_context *ctx)
 		if (filldir(dirent, tempname, de->namelen, old_pos, le32_to_cpu(de->fnode), DT_UNKNOWN) < 0) {
 			filp->f_pos = old_pos;
 =======
+=======
+>>>>>>> v3.18
 					hpfs_error(inode->i_sb, "hpfs_readdir: bad ^A^A entry; pos = %08lx", (unsigned long)ctx->pos);
 				if (de->last && (de->namelen != 1 || de ->name[0] != 255))
 					hpfs_error(inode->i_sb, "hpfs_readdir: bad \\377 entry; pos = %08lx", (unsigned long)ctx->pos);
@@ -233,12 +266,19 @@ static int hpfs_readdir(struct file *file, struct dir_context *ctx)
 		}
 		tempname = hpfs_translate_name(inode->i_sb, de->name, de->namelen, lc, de->not_8x3);
 		if (!dir_emit(ctx, tempname, de->namelen, le32_to_cpu(de->fnode), DT_UNKNOWN)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (tempname != de->name) kfree(tempname);
 			hpfs_brelse4(&qbh);
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ctx->pos = next_pos;
+>>>>>>> v3.18
 =======
 		ctx->pos = next_pos;
 >>>>>>> v3.18
@@ -397,7 +437,11 @@ const struct file_operations hpfs_dir_ops =
 	.llseek		= hpfs_dir_lseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= hpfs_readdir,
+=======
+	.iterate	= hpfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= hpfs_readdir,
 >>>>>>> v3.18

@@ -23,10 +23,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -42,7 +45,10 @@
 #include <linux/io.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/of_device.h>
@@ -50,7 +56,10 @@
 #include <linux/i2c-omap.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -190,6 +199,11 @@ enum {
 #define I2C_OMAP_ERRATA_I462		(1 << 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define OMAP_I2C_IP_V2_INTERRUPTS_MASK	0x6FFF
+
+>>>>>>> v3.18
 =======
 #define OMAP_I2C_IP_V2_INTERRUPTS_MASK	0x6FFF
 
@@ -208,6 +222,10 @@ struct omap_i2c_dev {
 	u32			speed;		/* Speed of bus in kHz */
 	u32			flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16			scheme;
+>>>>>>> v3.18
 =======
 	u16			scheme;
 >>>>>>> v3.18
@@ -232,8 +250,11 @@ struct omap_i2c_dev {
 	u16			westate;
 	u16			errata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct pinctrl		*pins;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -289,7 +310,11 @@ static inline void omap_i2c_write_reg(struct omap_i2c_dev *i2c_dev,
 				      int reg, u16 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writew(val, i2c_dev->base +
+=======
+	writew_relaxed(val, i2c_dev->base +
+>>>>>>> v3.18
 =======
 	writew_relaxed(val, i2c_dev->base +
 >>>>>>> v3.18
@@ -299,7 +324,11 @@ static inline void omap_i2c_write_reg(struct omap_i2c_dev *i2c_dev,
 static inline u16 omap_i2c_read_reg(struct omap_i2c_dev *i2c_dev, int reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readw(i2c_dev->base +
+=======
+	return readw_relaxed(i2c_dev->base +
+>>>>>>> v3.18
 =======
 	return readw_relaxed(i2c_dev->base +
 >>>>>>> v3.18
@@ -574,7 +603,11 @@ static int omap_i2c_xfer_msg(struct i2c_adapter *adap,
 	omap_i2c_write_reg(dev, OMAP_I2C_BUF_REG, w);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(dev->cmd_complete);
+=======
+	reinit_completion(&dev->cmd_complete);
+>>>>>>> v3.18
 =======
 	reinit_completion(&dev->cmd_complete);
 >>>>>>> v3.18
@@ -649,16 +682,22 @@ static int omap_i2c_xfer_msg(struct i2c_adapter *adap,
 		if (msg->flags & I2C_M_IGNORE_NAK)
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (stop) {
 			w = omap_i2c_read_reg(dev, OMAP_I2C_CON_REG);
 			w |= OMAP_I2C_CON_STP;
 			omap_i2c_write_reg(dev, OMAP_I2C_CON_REG, w);
 		}
 =======
+=======
+>>>>>>> v3.18
 
 		w = omap_i2c_read_reg(dev, OMAP_I2C_CON_REG);
 		w |= OMAP_I2C_CON_STP;
 		omap_i2c_write_reg(dev, OMAP_I2C_CON_REG, w);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EREMOTEIO;
 	}
@@ -679,7 +718,11 @@ omap_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg msgs[], int num)
 
 	r = pm_runtime_get_sync(dev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR_VALUE(r))
+=======
+	if (r < 0)
+>>>>>>> v3.18
 =======
 	if (r < 0)
 >>>>>>> v3.18
@@ -1084,7 +1127,10 @@ static const struct i2c_algorithm omap_i2c_algo = {
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct omap_i2c_bus_platform_data omap2420_pdata = {
 	.rev = OMAP_I2C_IP_VERSION_1,
 	.flags = OMAP_I2C_FLAG_NO_FIFO |
@@ -1099,6 +1145,9 @@ static struct omap_i2c_bus_platform_data omap2430_pdata = {
 			OMAP_I2C_FLAG_FORCE_19200_INT_CLK,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct omap_i2c_bus_platform_data omap3_pdata = {
 	.rev = OMAP_I2C_IP_VERSION_1,
@@ -1119,7 +1168,10 @@ static const struct of_device_id omap_i2c_of_match[] = {
 		.data = &omap3_pdata,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.compatible = "ti,omap2430-i2c",
 		.data = &omap2430_pdata,
@@ -1128,6 +1180,9 @@ static const struct of_device_id omap_i2c_of_match[] = {
 		.compatible = "ti,omap2420-i2c",
 		.data = &omap2420_pdata,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ },
 };
@@ -1152,7 +1207,11 @@ omap_i2c_probe(struct platform_device *pdev)
 	struct resource		*mem;
 	const struct omap_i2c_bus_platform_data *pdata =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pdev->dev.platform_data;
+=======
+		dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 		dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1161,6 +1220,7 @@ omap_i2c_probe(struct platform_device *pdev)
 	int irq;
 	int r;
 	u32 rev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u16 minor, major, scheme;
 
@@ -1173,6 +1233,9 @@ omap_i2c_probe(struct platform_device *pdev)
 =======
 	u16 minor, major;
 >>>>>>> v3.18
+=======
+	u16 minor, major;
+>>>>>>> v3.18
 
 	irq = platform_get_irq(pdev, 0);
 	if (irq < 0) {
@@ -1182,16 +1245,22 @@ omap_i2c_probe(struct platform_device *pdev)
 
 	dev = devm_kzalloc(&pdev->dev, sizeof(struct omap_i2c_dev), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev) {
 		dev_err(&pdev->dev, "Menory allocation failed\n");
 		return -ENOMEM;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (!dev)
 		return -ENOMEM;
 
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->base = devm_ioremap_resource(&pdev->dev, mem);
 	if (IS_ERR(dev->base))
@@ -1214,6 +1283,7 @@ omap_i2c_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->pins = devm_pinctrl_get_select_default(&pdev->dev);
 	if (IS_ERR(dev->pins)) {
 		if (PTR_ERR(dev->pins) == -EPROBE_DEFER)
@@ -1224,6 +1294,8 @@ omap_i2c_probe(struct platform_device *pdev)
 		dev->pins = NULL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev->dev = &pdev->dev;
@@ -1242,7 +1314,11 @@ omap_i2c_probe(struct platform_device *pdev)
 
 	r = pm_runtime_get_sync(dev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR_VALUE(r))
+=======
+	if (r < 0)
+>>>>>>> v3.18
 =======
 	if (r < 0)
 >>>>>>> v3.18
@@ -1253,6 +1329,7 @@ omap_i2c_probe(struct platform_device *pdev)
 	 * On omap1/3/2 Offset 4 is IE Reg the bit [15:14] is 0 at reset.
 	 * Also since the omap_i2c_read_reg uses reg_map_ip_* a
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * raw_readw is done.
 	 */
 	rev = __raw_readw(dev->base + 0x04);
@@ -1260,12 +1337,17 @@ omap_i2c_probe(struct platform_device *pdev)
 	scheme = OMAP_I2C_SCHEME(rev);
 	switch (scheme) {
 =======
+=======
+>>>>>>> v3.18
 	 * readw_relaxed is done.
 	 */
 	rev = readw_relaxed(dev->base + 0x04);
 
 	dev->scheme = OMAP_I2C_SCHEME(rev);
 	switch (dev->scheme) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case OMAP_I2C_SCHEME_0:
 		dev->regs = (u8 *)reg_map_ip_v1;
@@ -1338,7 +1420,11 @@ omap_i2c_probe(struct platform_device *pdev)
 	i2c_set_adapdata(adap, dev);
 	adap->owner = THIS_MODULE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adap->class = I2C_CLASS_HWMON;
+=======
+	adap->class = I2C_CLASS_DEPRECATED;
+>>>>>>> v3.18
 =======
 	adap->class = I2C_CLASS_DEPRECATED;
 >>>>>>> v3.18
@@ -1359,8 +1445,11 @@ omap_i2c_probe(struct platform_device *pdev)
 		 major, minor, dev->speed);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_i2c_register_devices(adap);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pm_runtime_mark_last_busy(dev->dev);
@@ -1385,7 +1474,11 @@ static int omap_i2c_remove(struct platform_device *pdev)
 	i2c_del_adapter(&dev->adapter);
 	ret = pm_runtime_get_sync(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR_VALUE(ret))
+=======
+	if (ret < 0)
+>>>>>>> v3.18
 =======
 	if (ret < 0)
 >>>>>>> v3.18
@@ -1407,13 +1500,19 @@ static int omap_i2c_runtime_suspend(struct device *dev)
 	_dev->iestate = omap_i2c_read_reg(_dev, OMAP_I2C_IE_REG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap_i2c_write_reg(_dev, OMAP_I2C_IE_REG, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (_dev->scheme == OMAP_I2C_SCHEME_0)
 		omap_i2c_write_reg(_dev, OMAP_I2C_IE_REG, 0);
 	else
 		omap_i2c_write_reg(_dev, OMAP_I2C_IP_V2_IRQENABLE_CLR,
 				   OMAP_I2C_IP_V2_INTERRUPTS_MASK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (_dev->rev < OMAP_I2C_OMAP1_REV_2) {

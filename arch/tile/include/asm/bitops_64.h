@@ -17,7 +17,11 @@
 
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/atomic.h>
+=======
+#include <asm/cmpxchg.h>
+>>>>>>> v3.18
 =======
 #include <asm/cmpxchg.h>
 >>>>>>> v3.18
@@ -37,10 +41,13 @@ static inline void clear_bit(unsigned nr, volatile unsigned long *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smp_mb__before_clear_bit()	smp_mb()
 #define smp_mb__after_clear_bit()	smp_mb()
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void change_bit(unsigned nr, volatile unsigned long *addr)
@@ -52,8 +59,12 @@ static inline void change_bit(unsigned nr, volatile unsigned long *addr)
 	do {
 		guess = oldval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		oldval = atomic64_cmpxchg((atomic64_t *)addr,
 					  guess, guess ^ mask);
+=======
+		oldval = cmpxchg(addr, guess, guess ^ mask);
+>>>>>>> v3.18
 =======
 		oldval = cmpxchg(addr, guess, guess ^ mask);
 >>>>>>> v3.18
@@ -102,8 +113,12 @@ static inline int test_and_change_bit(unsigned nr,
 	do {
 		guess = oldval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		oldval = atomic64_cmpxchg((atomic64_t *)addr,
 					  guess, guess ^ mask);
+=======
+		oldval = cmpxchg(addr, guess, guess ^ mask);
+>>>>>>> v3.18
 =======
 		oldval = cmpxchg(addr, guess, guess ^ mask);
 >>>>>>> v3.18

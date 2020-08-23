@@ -31,6 +31,7 @@
  *
  * Linux assigns each task a unique ASID. A simple round-robin allocation
 <<<<<<< HEAD
+<<<<<<< HEAD
  * of H/w ASID is done using software tracker @asid_cache.
  * When it reaches max 255, the allocation cycle starts afresh by flushing
  * the entire TLB and wrapping ASID back to zero.
@@ -77,6 +78,8 @@ static inline void get_new_mmu_context(struct mm_struct *mm)
 {
 	struct mm_struct *prev_owner;
 =======
+=======
+>>>>>>> v3.18
  * of H/w ASID is done using software tracker @asid_cpu.
  * When it reaches max 255, the allocation cycle starts afresh by flushing
  * the entire TLB and wrapping ASID back to zero.
@@ -107,12 +110,16 @@ DECLARE_PER_CPU(unsigned int, asid_cache);
 static inline void get_new_mmu_context(struct mm_struct *mm)
 {
 	const unsigned int cpu = smp_processor_id();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long flags;
 
 	local_irq_save(flags);
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Relinquish the currently owned ASID (if any).
 	 * Doing unconditionally saves a cmp-n-branch; for already unused
@@ -158,6 +165,8 @@ static inline void get_new_mmu_context(struct mm_struct *mm)
 
 	write_aux_reg(ARC_REG_PID, asid_cache | MMU_ENABLE);
 =======
+=======
+>>>>>>> v3.18
 	 * Move to new ASID if it was not from current alloc-cycle/generation.
 	 * This is done by ensuring that the generation bits in both mm->ASID
 	 * and cpu's ASID counter are exactly same.
@@ -189,6 +198,9 @@ static inline void get_new_mmu_context(struct mm_struct *mm)
 
 set_hw:
 	write_aux_reg(ARC_REG_PID, hw_pid(mm, cpu) | MMU_ENABLE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	local_irq_restore(flags);
@@ -202,6 +214,7 @@ static inline int
 init_new_context(struct task_struct *tsk, struct mm_struct *mm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mm->context.asid = NO_ASID;
 #ifdef CONFIG_ARC_TLB_DBG
 	mm->context.tsk = tsk;
@@ -210,6 +223,8 @@ init_new_context(struct task_struct *tsk, struct mm_struct *mm)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	for_each_possible_cpu(i)
@@ -228,6 +243,9 @@ static inline void destroy_context(struct mm_struct *mm)
 	local_irq_restore(flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Prepare the MMU for task: setup PID reg with allocated ASID
     If task doesn't have an ASID (never alloc or stolen, get a new ASID)
@@ -236,7 +254,10 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 			     struct task_struct *tsk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	const int cpu = smp_processor_id();
 
 	/*
@@ -252,12 +273,16 @@ static inline void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 	 */
 	cpumask_set_cpu(cpu, mm_cpumask(next));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef CONFIG_SMP
 	/* PGD cached in MMU reg to avoid 3 mem lookups: task->mm->pgd */
 	write_aux_reg(ARC_REG_SCRATCH_DATA0, next->pgd);
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Get a new ASID if task doesn't have a valid one. Possible when
@@ -295,6 +320,8 @@ static inline void destroy_context(struct mm_struct *mm)
 	local_irq_restore(flags);
 }
 =======
+=======
+>>>>>>> v3.18
 	get_new_mmu_context(next);
 }
 
@@ -306,6 +333,9 @@ static inline void destroy_context(struct mm_struct *mm)
  * only if it was unallocated
  */
 #define activate_mm(prev, next)		switch_mm(prev, next, NULL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* it seemed that deactivate_mm( ) is a reasonable place to do book-keeping
@@ -318,6 +348,7 @@ static inline void destroy_context(struct mm_struct *mm)
 #define deactivate_mm(tsk, mm)   do { } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void activate_mm(struct mm_struct *prev, struct mm_struct *next)
 {
 #ifndef CONFIG_SMP
@@ -329,6 +360,8 @@ static inline void activate_mm(struct mm_struct *prev, struct mm_struct *next)
 
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define enter_lazy_tlb(mm, tsk)

@@ -45,6 +45,10 @@
 #define PDBOPTS_ESP_INCIPHDR	0x04 /* Prepend IP header to output frame */
 #define PDBOPTS_ESP_IPVSN	0x02 /* process IPv6 header */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PDBOPTS_ESP_AOFL	0x04 /* adjust out frame len (decap, SEC>=5.3)*/
+>>>>>>> v3.18
 =======
 #define PDBOPTS_ESP_AOFL	0x04 /* adjust out frame len (decap, SEC>=5.3)*/
 >>>>>>> v3.18

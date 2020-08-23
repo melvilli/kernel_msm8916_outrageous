@@ -20,6 +20,10 @@
 
 #include "midi_ctrl.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "sleep.h"
+>>>>>>> v3.18
 =======
 #include "sleep.h"
 >>>>>>> v3.18
@@ -105,8 +109,12 @@ int sequencer_read(int dev, struct file *file, char __user *buf, int count)
   		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  		interruptible_sleep_on_timeout(&midi_sleeper,
 					       pre_event_timeout);
+=======
+		oss_broken_sleep_on(&midi_sleeper, pre_event_timeout);
+>>>>>>> v3.18
 =======
 		oss_broken_sleep_on(&midi_sleeper, pre_event_timeout);
 >>>>>>> v3.18
@@ -225,8 +233,11 @@ int sequencer_write(int dev, struct file *file, const char __user *buf, int coun
 	dev = dev >> 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("sequencer_write(dev=%d, count=%d)\n", dev, count));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (mode == OPEN_READ)
@@ -355,7 +366,11 @@ static int seq_queue(unsigned char *note, char nonblock)
 		 * Sleep until there is enough space on the queue
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interruptible_sleep_on(&seq_sleeper);
+=======
+		oss_broken_sleep_on(&seq_sleeper, MAX_SCHEDULE_TIMEOUT);
+>>>>>>> v3.18
 =======
 		oss_broken_sleep_on(&seq_sleeper, MAX_SCHEDULE_TIMEOUT);
 >>>>>>> v3.18
@@ -699,9 +714,12 @@ static int seq_timing_event(unsigned char *event_rec)
 
 		case TMR_ECHO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			parm = (parm << 8 | SEQ_ECHO);
 			seq_copy_to_input((unsigned char *) &parm, 4);
 =======
+=======
+>>>>>>> v3.18
 			if (seq_mode == SEQ_2)
 				seq_copy_to_input(event_rec, 8);
 			else
@@ -709,6 +727,9 @@ static int seq_timing_event(unsigned char *event_rec)
 				parm = (parm << 8 | SEQ_ECHO);
 				seq_copy_to_input((unsigned char *) &parm, 4);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -980,8 +1001,11 @@ int sequencer_open(int dev, struct file *file)
 	mode = translate_mode(file);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("sequencer_open(dev=%d)\n", dev));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!sequencer_ok)
@@ -1146,8 +1170,12 @@ static void seq_drain_midi_queues(void)
 
  		if (n)
 <<<<<<< HEAD
+<<<<<<< HEAD
  			interruptible_sleep_on_timeout(&seq_sleeper,
 						       HZ/10);
+=======
+			oss_broken_sleep_on(&seq_sleeper, HZ/10);
+>>>>>>> v3.18
 =======
 			oss_broken_sleep_on(&seq_sleeper, HZ/10);
 >>>>>>> v3.18
@@ -1162,8 +1190,11 @@ void sequencer_release(int dev, struct file *file)
 	dev = dev >> 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("sequencer_release(dev=%d)\n", dev));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1176,8 +1207,12 @@ void sequencer_release(int dev, struct file *file)
 		{
   			seq_sync();
 <<<<<<< HEAD
+<<<<<<< HEAD
  			interruptible_sleep_on_timeout(&seq_sleeper,
 						       3*HZ);
+=======
+			oss_broken_sleep_on(&seq_sleeper, 3*HZ);
+>>>>>>> v3.18
 =======
 			oss_broken_sleep_on(&seq_sleeper, 3*HZ);
 >>>>>>> v3.18
@@ -1236,7 +1271,11 @@ static int seq_sync(void)
 
  	if (qlen > 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
  		interruptible_sleep_on_timeout(&seq_sleeper, HZ);
+=======
+		oss_broken_sleep_on(&seq_sleeper, HZ);
+>>>>>>> v3.18
 =======
 		oss_broken_sleep_on(&seq_sleeper, HZ);
 >>>>>>> v3.18
@@ -1263,7 +1302,11 @@ static void midi_outc(int dev, unsigned char data)
 	spin_lock_irqsave(&lock,flags);
  	while (n && !midi_devs[dev]->outputc(dev, data)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
  		interruptible_sleep_on_timeout(&seq_sleeper, HZ/25);
+=======
+		oss_broken_sleep_on(&seq_sleeper, HZ/25);
+>>>>>>> v3.18
 =======
 		oss_broken_sleep_on(&seq_sleeper, HZ/25);
 >>>>>>> v3.18
@@ -1375,6 +1418,10 @@ int sequencer_ioctl(int dev, struct file *file, unsigned int cmd, void __user *a
 	struct synth_info inf;
 	struct seq_event_rec event_rec;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -1533,7 +1580,13 @@ int sequencer_ioctl(int dev, struct file *file, unsigned int cmd, void __user *a
 			if (copy_from_user(&event_rec, arg, sizeof(event_rec)))
 				return -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			play_event(event_rec.arr);
+=======
+			spin_lock_irqsave(&lock,flags);
+			play_event(event_rec.arr);
+			spin_unlock_irqrestore(&lock,flags);
+>>>>>>> v3.18
 =======
 			spin_lock_irqsave(&lock,flags);
 			play_event(event_rec.arr);

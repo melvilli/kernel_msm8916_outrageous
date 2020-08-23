@@ -169,7 +169,11 @@ static unsigned long centro685_pin_config[] __initdata = {
  ******************************************************************************/
 #if IS_ENABLED(CONFIG_KEYBOARD_PXA27x)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int treo680_matrix_keys[] = {
+=======
+static const unsigned int treo680_matrix_keys[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int treo680_matrix_keys[] = {
 >>>>>>> v3.18
@@ -232,7 +236,11 @@ static const unsigned int treo680_matrix_keys[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int centro_matrix_keys[] = {
+=======
+static const unsigned int centro_matrix_keys[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int centro_matrix_keys[] = {
 >>>>>>> v3.18
@@ -295,12 +303,15 @@ static const unsigned int centro_matrix_keys[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data treo680_keypad_pdata = {
 	.matrix_key_rows	= 8,
 	.matrix_key_cols	= 7,
 	.matrix_key_map		= treo680_matrix_keys,
 	.matrix_key_map_size	= ARRAY_SIZE(treo680_matrix_keys),
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data treo680_matrix_keymap_data = {
 	.keymap			= treo680_matrix_keys,
 	.keymap_size		= ARRAY_SIZE(treo680_matrix_keys),
@@ -315,6 +326,9 @@ static struct pxa27x_keypad_platform_data treo680_keypad_pdata = {
 	.matrix_key_rows	= 8,
 	.matrix_key_cols	= 7,
 	.matrix_keymap_data	= &treo680_matrix_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.direct_key_map		= { KEY_CONNECT },
 	.direct_key_num		= 1,
@@ -327,10 +341,15 @@ static void __init palmtreo_kpc_init(void)
 	static struct pxa27x_keypad_platform_data *data = &treo680_keypad_pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (machine_is_centro()) {
 		data->matrix_key_map = centro_matrix_keys;
 		data->matrix_key_map_size = ARRAY_SIZE(centro_matrix_keys);
 	}
+=======
+	if (machine_is_centro())
+		data->matrix_keymap_data = &centro_matrix_keymap_data;
+>>>>>>> v3.18
 =======
 	if (machine_is_centro())
 		data->matrix_keymap_data = &centro_matrix_keymap_data;

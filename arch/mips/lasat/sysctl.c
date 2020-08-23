@@ -40,7 +40,11 @@
 
 /* And the same for proc */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int proc_dolasatstring(ctl_table *table, int write,
+=======
+int proc_dolasatstring(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 int proc_dolasatstring(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -59,7 +63,11 @@ int proc_dolasatstring(struct ctl_table *table, int write,
 
 /* proc function to write EEPROM after changing int entry */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int proc_dolasatint(ctl_table *table, int write,
+=======
+int proc_dolasatint(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 int proc_dolasatint(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -81,7 +89,11 @@ static int rtctmp;
 
 /* proc function to read/write RealTime Clock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int proc_dolasatrtc(ctl_table *table, int write,
+=======
+int proc_dolasatrtc(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 int proc_dolasatrtc(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -110,7 +122,11 @@ int proc_dolasatrtc(struct ctl_table *table, int write,
 
 #ifdef CONFIG_INET
 <<<<<<< HEAD
+<<<<<<< HEAD
 int proc_lasat_ip(ctl_table *table, int write,
+=======
+int proc_lasat_ip(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 int proc_lasat_ip(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -174,7 +190,11 @@ int proc_lasat_ip(struct ctl_table *table, int write,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int proc_lasat_prid(ctl_table *table, int write,
+=======
+int proc_lasat_prid(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 int proc_lasat_prid(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -197,7 +217,11 @@ int proc_lasat_prid(struct ctl_table *table, int write,
 extern int lasat_boot_to_service;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table lasat_table[] = {
+=======
+static struct ctl_table lasat_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table lasat_table[] = {
 >>>>>>> v3.18
@@ -287,7 +311,11 @@ static struct ctl_table lasat_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table lasat_root_table[] = {
+=======
+static struct ctl_table lasat_root_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table lasat_root_table[] = {
 >>>>>>> v3.18

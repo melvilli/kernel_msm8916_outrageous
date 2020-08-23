@@ -55,6 +55,10 @@ static struct platform_pwm_backlight_data nb0916_backlight_data = {
 	.dft_brightness	= 100,
 	.pwm_period_ns	= 70 * 1024,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio	= -1,
 >>>>>>> v3.18
@@ -116,6 +120,7 @@ int __init mach_nb0916_init(void)
 			puv3_i2c_resources, ARRAY_SIZE(puv3_i2c_resources));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_register_data(&platform_bus, "pwm-backlight", -1,
 			&nb0916_backlight_data, sizeof(nb0916_backlight_data));
 
@@ -124,6 +129,8 @@ int __init mach_nb0916_init(void)
 
 	platform_device_register_resndata(&platform_bus, "physmap-flash", -1,
 =======
+=======
+>>>>>>> v3.18
 	platform_device_register_data(NULL, "pwm-backlight", -1,
 			&nb0916_backlight_data, sizeof(nb0916_backlight_data));
 
@@ -131,6 +138,9 @@ int __init mach_nb0916_init(void)
 			&nb0916_gpio_button_data, sizeof(nb0916_gpio_button_data));
 
 	platform_device_register_resndata(NULL, "physmap-flash", -1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			&physmap_flash_resource, 1,
 			&physmap_flash_data, sizeof(physmap_flash_data));

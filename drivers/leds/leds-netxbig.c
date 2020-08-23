@@ -22,7 +22,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/irq.h>
@@ -298,11 +301,14 @@ static ssize_t netxbig_led_sata_show(struct device *dev,
 static DEVICE_ATTR(sata, 0644, netxbig_led_sata_show, netxbig_led_sata_store);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void delete_netxbig_led(struct netxbig_led_data *led_dat)
 {
 	if (led_dat->mode_val[NETXBIG_LED_SATA] != NETXBIG_LED_INVALID_MODE)
 		device_remove_file(led_dat->cdev.dev, &dev_attr_sata);
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *netxbig_led_attrs[] = {
 	&dev_attr_sata.attr,
 	NULL
@@ -311,6 +317,9 @@ ATTRIBUTE_GROUPS(netxbig_led);
 
 static void delete_netxbig_led(struct netxbig_led_data *led_dat)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	led_classdev_unregister(&led_dat->cdev);
 }
@@ -321,8 +330,12 @@ create_netxbig_led(struct platform_device *pdev,
 		   const struct netxbig_led *template)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct netxbig_led_platform_data *pdata = pdev->dev.platform_data;
 	int ret;
+=======
+	struct netxbig_led_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct netxbig_led_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -347,13 +360,19 @@ create_netxbig_led(struct platform_device *pdev,
 	led_dat->cdev.brightness = LED_OFF;
 	led_dat->cdev.flags |= LED_CORE_SUSPENDRESUME;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If available, expose the SATA activity blink capability through
 	 * a "sata" sysfs attribute.
 	 */
 	if (led_dat->mode_val[NETXBIG_LED_SATA] != NETXBIG_LED_INVALID_MODE)
 		led_dat->cdev.groups = netxbig_led_groups;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	led_dat->mode_addr = template->mode_addr;
 	led_dat->mode_val = template->mode_val;
@@ -362,6 +381,7 @@ create_netxbig_led(struct platform_device *pdev,
 	led_dat->timer = pdata->timer;
 	led_dat->num_timer = pdata->num_timer;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = led_classdev_register(&pdev->dev, &led_dat->cdev);
 	if (ret < 0)
@@ -381,12 +401,19 @@ create_netxbig_led(struct platform_device *pdev,
 =======
 	return led_classdev_register(&pdev->dev, &led_dat->cdev);
 >>>>>>> v3.18
+=======
+	return led_classdev_register(&pdev->dev, &led_dat->cdev);
+>>>>>>> v3.18
 }
 
 static int netxbig_led_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct netxbig_led_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct netxbig_led_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct netxbig_led_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -427,7 +454,11 @@ err_free_leds:
 static int netxbig_led_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct netxbig_led_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct netxbig_led_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct netxbig_led_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

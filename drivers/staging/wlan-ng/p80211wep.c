@@ -135,7 +135,11 @@ int wep_change_key(wlandevice_t *wlandev, int keynum, u8 *key, int keylen)
 
 #ifdef WEP_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "WEP key %d len %d = %*phC\n", keynum, keylen,
+=======
+	pr_debug("WEP key %d len %d = %*phC\n", keynum, keylen,
+>>>>>>> v3.18
 =======
 	pr_debug("WEP key %d len %d = %*phC\n", keynum, keylen,
 >>>>>>> v3.18
@@ -187,7 +191,11 @@ int wep_decrypt(wlandevice_t *wlandev, u8 *buf, u32 len, int key_override,
 
 #ifdef WEP_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "D %d: %*ph (%d %d) %*phC\n", len, 3, key,
+=======
+	pr_debug("D %d: %*ph (%d %d) %*phC\n", len, 3, key,
+>>>>>>> v3.18
 =======
 	pr_debug("D %d: %*ph (%d %d) %*phC\n", len, 3, key,
 >>>>>>> v3.18
@@ -268,7 +276,11 @@ int wep_encrypt(wlandevice_t *wlandev, u8 *buf, u8 *dst, u32 len, int keynum,
 
 #ifdef WEP_DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "E %d (%d/%d %d) %*ph %*phC\n", len,
+=======
+	pr_debug("E %d (%d/%d %d) %*ph %*phC\n", len,
+>>>>>>> v3.18
 =======
 	pr_debug("E %d (%d/%d %d) %*ph %*phC\n", len,
 >>>>>>> v3.18

@@ -25,8 +25,11 @@
 static uint nowait;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct clk *cpuclk;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void (*saved_cpu_wait) (void);
@@ -48,6 +51,7 @@ static int loongson2_cpu_freq_notifier(struct notifier_block *nb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int loongson2_cpufreq_get(unsigned int cpu)
 {
 	return clk_get_rate(cpuclk);
@@ -55,10 +59,13 @@ static unsigned int loongson2_cpufreq_get(unsigned int cpu)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Here we notify other drivers of the proposed change and the final change.
  */
 static int loongson2_cpufreq_target(struct cpufreq_policy *policy,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				     unsigned int target_freq,
 				     unsigned int relation)
@@ -68,16 +75,22 @@ static int loongson2_cpufreq_target(struct cpufreq_policy *policy,
 	cpumask_t cpus_allowed;
 	struct cpufreq_freqs freqs;
 =======
+=======
+>>>>>>> v3.18
 				     unsigned int index)
 {
 	unsigned int cpu = policy->cpu;
 	cpumask_t cpus_allowed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int freq;
 
 	cpus_allowed = current->cpus_allowed;
 	set_cpus_allowed_ptr(current, cpumask_of(cpu));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cpufreq_frequency_table_target
 	    (policy, &loongson2_clockmod_table[0], target_freq, relation,
@@ -106,10 +119,16 @@ static int loongson2_cpufreq_target(struct cpufreq_policy *policy,
 	    ((cpu_clock_freq / 1000) *
 	     loongson2_clockmod_table[index].driver_data) / 8;
 >>>>>>> v3.18
+=======
+	freq =
+	    ((cpu_clock_freq / 1000) *
+	     loongson2_clockmod_table[index].driver_data) / 8;
+>>>>>>> v3.18
 
 	set_cpus_allowed_ptr(current, &cpus_allowed);
 
 	/* setting the cpu frequency */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk_set_rate(cpuclk, freq);
 
@@ -120,6 +139,9 @@ static int loongson2_cpufreq_target(struct cpufreq_policy *policy,
 =======
 	clk_set_rate(policy->clk, freq * 1000);
 >>>>>>> v3.18
+=======
+	clk_set_rate(policy->clk, freq * 1000);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -127,6 +149,10 @@ static int loongson2_cpufreq_target(struct cpufreq_policy *policy,
 static int loongson2_cpufreq_cpu_init(struct cpufreq_policy *policy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *cpuclk;
+>>>>>>> v3.18
 =======
 	struct clk *cpuclk;
 >>>>>>> v3.18
@@ -153,7 +179,11 @@ static int loongson2_cpufreq_cpu_init(struct cpufreq_policy *policy)
 		loongson2_clockmod_table[i].frequency = (rate * i) / 8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = clk_set_rate(cpuclk, rate);
+=======
+	ret = clk_set_rate(cpuclk, rate * 1000);
+>>>>>>> v3.18
 =======
 	ret = clk_set_rate(cpuclk, rate * 1000);
 >>>>>>> v3.18
@@ -162,6 +192,7 @@ static int loongson2_cpufreq_cpu_init(struct cpufreq_policy *policy)
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	policy->cur = loongson2_cpufreq_get(policy->cpu);
 
@@ -180,10 +211,15 @@ static int loongson2_cpufreq_verify(struct cpufreq_policy *policy)
 	policy->clk = cpuclk;
 	return cpufreq_generic_init(policy, &loongson2_clockmod_table[0], 0);
 >>>>>>> v3.18
+=======
+	policy->clk = cpuclk;
+	return cpufreq_generic_init(policy, &loongson2_clockmod_table[0], 0);
+>>>>>>> v3.18
 }
 
 static int loongson2_cpufreq_exit(struct cpufreq_policy *policy)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk_put(cpuclk);
 	return 0;
@@ -203,6 +239,8 @@ static struct cpufreq_driver loongson2_cpufreq_driver = {
 	.exit = loongson2_cpufreq_exit,
 	.attr = loongson2_table_attr,
 =======
+=======
+>>>>>>> v3.18
 	clk_put(policy->clk);
 	return 0;
 }
@@ -215,6 +253,9 @@ static struct cpufreq_driver loongson2_cpufreq_driver = {
 	.get = cpufreq_generic_get,
 	.exit = loongson2_cpufreq_exit,
 	.attr = cpufreq_generic_attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -249,9 +290,15 @@ static void loongson2_cpu_wait(void)
 
 	spin_lock_irqsave(&loongson2_wait_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_freq = LOONGSON_CHIPCFG0;
 	LOONGSON_CHIPCFG0 &= ~0x7;	/* Put CPU into wait mode */
 	LOONGSON_CHIPCFG0 = cpu_freq;	/* Restore CPU state */
+=======
+	cpu_freq = LOONGSON_CHIPCFG(0);
+	LOONGSON_CHIPCFG(0) &= ~0x7;	/* Put CPU into wait mode */
+	LOONGSON_CHIPCFG(0) = cpu_freq;	/* Restore CPU state */
+>>>>>>> v3.18
 =======
 	cpu_freq = LOONGSON_CHIPCFG(0);
 	LOONGSON_CHIPCFG(0) &= ~0x7;	/* Put CPU into wait mode */

@@ -15,6 +15,11 @@
 #include <linux/pci_ids.h>
 #include <linux/edac.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#include <asm-generic/io-64-nonatomic-lo-hi.h>
+>>>>>>> v3.18
 =======
 
 #include <asm-generic/io-64-nonatomic-lo-hi.h>
@@ -167,11 +172,14 @@ static void x38_clear_error_info(struct mem_ctl_info *mci)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 x38_readq(const void __iomem *addr)
 {
 	return readl(addr) | (((u64)readl(addr + 4)) << 32);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void x38_get_and_clear_error_info(struct mem_ctl_info *mci,
@@ -192,9 +200,15 @@ static void x38_get_and_clear_error_info(struct mem_ctl_info *mci,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->eccerrlog[0] = x38_readq(window + X38_C0ECCERRLOG);
 	if (x38_channel_num == 2)
 		info->eccerrlog[1] = x38_readq(window + X38_C1ECCERRLOG);
+=======
+	info->eccerrlog[0] = lo_hi_readq(window + X38_C0ECCERRLOG);
+	if (x38_channel_num == 2)
+		info->eccerrlog[1] = lo_hi_readq(window + X38_C1ECCERRLOG);
+>>>>>>> v3.18
 =======
 	info->eccerrlog[0] = lo_hi_readq(window + X38_C0ECCERRLOG);
 	if (x38_channel_num == 2)
@@ -211,15 +225,21 @@ static void x38_get_and_clear_error_info(struct mem_ctl_info *mci,
 	 */
 	if ((info->errsts ^ info->errsts2) & X38_ERRSTS_BITS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		info->eccerrlog[0] = x38_readq(window + X38_C0ECCERRLOG);
 		if (x38_channel_num == 2)
 			info->eccerrlog[1] =
 				x38_readq(window + X38_C1ECCERRLOG);
 =======
+=======
+>>>>>>> v3.18
 		info->eccerrlog[0] = lo_hi_readq(window + X38_C0ECCERRLOG);
 		if (x38_channel_num == 2)
 			info->eccerrlog[1] =
 				lo_hi_readq(window + X38_C1ECCERRLOG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -270,8 +290,12 @@ static void x38_check(struct mem_ctl_info *mci)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void __iomem *x38_map_mchbar(struct pci_dev *pdev)
+=======
+static void __iomem *x38_map_mchbar(struct pci_dev *pdev)
+>>>>>>> v3.18
 =======
 static void __iomem *x38_map_mchbar(struct pci_dev *pdev)
 >>>>>>> v3.18
@@ -475,7 +499,11 @@ static void x38_remove_one(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(x38_pci_tbl) = {
+=======
+static const struct pci_device_id x38_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id x38_pci_tbl[] = {
 >>>>>>> v3.18

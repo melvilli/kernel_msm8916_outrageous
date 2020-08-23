@@ -150,7 +150,11 @@ extern void mac_drv_clear_rx_queue(struct s_smc *smc);
 extern void enable_tx_irq(struct s_smc *smc, u_short queue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(skfddi_pci_tbl) = {
+=======
+static const struct pci_device_id skfddi_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id skfddi_pci_tbl[] = {
 >>>>>>> v3.18
@@ -356,7 +360,10 @@ static void skfp_remove_one(struct pci_dev *pdev)
 
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -444,7 +451,11 @@ static  int skfp_driver_init(struct net_device *dev)
 	read_address(smc, NULL);
 	pr_debug("HW-Addr: %pMF\n", smc->hw.fddi_canon_addr.a);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, smc->hw.fddi_canon_addr.a, 6);
+=======
+	memcpy(dev->dev_addr, smc->hw.fddi_canon_addr.a, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(dev->dev_addr, smc->hw.fddi_canon_addr.a, ETH_ALEN);
 >>>>>>> v3.18
@@ -515,7 +526,11 @@ static int skfp_open(struct net_device *dev)
 	 */
 	read_address(smc, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, smc->hw.fddi_canon_addr.a, 6);
+=======
+	memcpy(dev->dev_addr, smc->hw.fddi_canon_addr.a, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(dev->dev_addr, smc->hw.fddi_canon_addr.a, ETH_ALEN);
 >>>>>>> v3.18
@@ -1229,7 +1244,11 @@ static void CheckSourceAddress(unsigned char *frame, unsigned char *hw_addr)
 		return;
 	SRBit = frame[1 + 6] & 0x01;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&frame[1 + 6], hw_addr, 6);
+=======
+	memcpy(&frame[1 + 6], hw_addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(&frame[1 + 6], hw_addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -2266,6 +2285,7 @@ static struct pci_driver skfddi_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init skfd_init(void)
 {
 	return pci_register_driver(&skfddi_pci_driver);
@@ -2278,6 +2298,9 @@ static void __exit skfd_exit(void)
 
 module_init(skfd_init);
 module_exit(skfd_exit);
+=======
+module_pci_driver(skfddi_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(skfddi_pci_driver);
 >>>>>>> v3.18

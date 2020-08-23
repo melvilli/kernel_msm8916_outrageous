@@ -21,9 +21,12 @@ extern struct cputopo_arm cpu_topology[NR_CPUS];
 #define topology_thread_cpumask(cpu)	(&cpu_topology[cpu].thread_sibling)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define mc_capable()	(cpu_topology[0].socket_id != -1)
 #define smt_capable()	(cpu_topology[0].thread_id != -1)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void init_cpu_topology(void);

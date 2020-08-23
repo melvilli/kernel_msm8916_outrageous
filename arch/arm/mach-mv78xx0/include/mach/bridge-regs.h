@@ -16,6 +16,10 @@
 
 #define RSTOUTn_MASK		(BRIDGE_VIRT_BASE + 0x0108)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RSTOUTn_MASK_PHYS	(BRIDGE_PHYS_BASE + 0x0108)
+>>>>>>> v3.18
 =======
 #define RSTOUTn_MASK_PHYS	(BRIDGE_PHYS_BASE + 0x0108)
 >>>>>>> v3.18

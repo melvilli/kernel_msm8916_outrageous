@@ -2,7 +2,11 @@
  * This file is part of the Chelsio T4 Ethernet driver for Linux.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2003-2010 Chelsio Communications, Inc. All rights reserved.
+=======
+ * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
 >>>>>>> v3.18
@@ -103,7 +107,12 @@ struct l2t_entry *cxgb4_l2t_get(struct l2t_data *d, struct neighbour *neigh,
 				const struct net_device *physdev,
 				unsigned int priority);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+u64 cxgb4_select_ntuple(struct net_device *dev,
+			const struct l2t_entry *l2t);
+>>>>>>> v3.18
 =======
 u64 cxgb4_select_ntuple(struct net_device *dev,
 			const struct l2t_entry *l2t);

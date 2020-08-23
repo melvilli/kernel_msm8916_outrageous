@@ -8,7 +8,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "am33xx.dtsi"
+=======
+#include "am33xx.dtsi"
+>>>>>>> v3.18
 =======
 #include "am33xx.dtsi"
 >>>>>>> v3.18
@@ -28,6 +32,7 @@
 		reg = <0x80000000 0x10000000>; /* 256 MB */
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	am33xx_pinmux: pinmux@44e10800 {
 		pinctrl-names = "default";
@@ -111,6 +116,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	vbat: fixedregulator@0 {
 		compatible = "regulator-fixed";
 		regulator-name = "vbat";
@@ -131,6 +138,7 @@
 		col-scan-delay-us = <2>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		row-gpios = <&gpio1 25 0	/* Bank1, pin25 */
 			     &gpio1 26 0	/* Bank1, pin26 */
 			     &gpio1 27 0>;	/* Bank1, pin27 */
@@ -138,12 +146,17 @@
 		col-gpios = <&gpio1 21 0	/* Bank1, pin21 */
 			     &gpio1 22 0>;	/* Bank1, pin22 */
 =======
+=======
+>>>>>>> v3.18
 		row-gpios = <&gpio1 25 GPIO_ACTIVE_HIGH		/* Bank1, pin25 */
 			     &gpio1 26 GPIO_ACTIVE_HIGH		/* Bank1, pin26 */
 			     &gpio1 27 GPIO_ACTIVE_HIGH>;	/* Bank1, pin27 */
 
 		col-gpios = <&gpio1 21 GPIO_ACTIVE_HIGH		/* Bank1, pin21 */
 			     &gpio1 22 GPIO_ACTIVE_HIGH>;	/* Bank1, pin22 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		linux,keymap = <0x0000008b	/* MENU */
@@ -164,7 +177,11 @@
 			label = "volume-up";
 			linux,code = <115>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio0 2 1>;
+=======
+			gpios = <&gpio0 2 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio0 2 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -175,6 +192,7 @@
 			label = "volume-down";
 			linux,code = <114>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio0 3 1>;
 			gpio-key,wakeup;
 		};
@@ -183,6 +201,8 @@
 
 /include/ "tps65910.dtsi"
 =======
+=======
+>>>>>>> v3.18
 			gpios = <&gpio0 3 GPIO_ACTIVE_LOW>;
 			gpio-key,wakeup;
 		};
@@ -641,6 +661,9 @@
 		tx-num-evt = <32>;
 		rx-num-evt = <32>;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 &tps {
@@ -714,6 +737,11 @@
 
 		vmmc_reg: regulator@12 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			regulator-min-microvolt = <1800000>;
+			regulator-max-microvolt = <3300000>;
+>>>>>>> v3.18
 =======
 			regulator-min-microvolt = <1800000>;
 			regulator-max-microvolt = <3300000>;
@@ -724,9 +752,12 @@
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 &cpsw_emac0 {
 	phy_id = <&davinci_mdio>, <0>;
 =======
+=======
+>>>>>>> v3.18
 &mac {
 	pinctrl-names = "default", "sleep";
 	pinctrl-0 = <&cpsw_default>;
@@ -744,13 +775,19 @@
 &cpsw_emac0 {
 	phy_id = <&davinci_mdio>, <0>;
 	phy-mode = "rgmii-txid";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 &cpsw_emac1 {
 	phy_id = <&davinci_mdio>, <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	phy-mode = "rgmii-txid";
 };
 
@@ -783,5 +820,8 @@
 
 &aes {
 	status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

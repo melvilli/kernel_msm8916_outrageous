@@ -8,14 +8,20 @@
 
 #include "hfsplus_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xattr.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/posix_acl_xattr.h>
 #include <linux/nls.h>
 #include "xattr.h"
 #include "acl.h"
 
 static int hfsplus_removexattr(struct inode *inode, const char *name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 const struct xattr_handler *hfsplus_xattr_handlers[] = {
@@ -23,11 +29,17 @@ const struct xattr_handler *hfsplus_xattr_handlers[] = {
 	&hfsplus_xattr_user_handler,
 	&hfsplus_xattr_trusted_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HFSPLUS_FS_POSIX_ACL
 	&posix_acl_access_xattr_handler,
 	&posix_acl_default_xattr_handler,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&hfsplus_xattr_security_handler,
 	NULL
@@ -63,6 +75,7 @@ static inline int is_known_namespace(const char *name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int can_set_xattr(struct inode *inode, const char *name,
 				const void *value, size_t value_len)
 {
@@ -91,6 +104,8 @@ static int can_set_xattr(struct inode *inode, const char *name,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static void hfsplus_init_header_node(struct inode *attr_file,
 					u32 clump_size,
 					char *buf, u16 node_size)
@@ -294,6 +309,9 @@ end_attr_file_creation:
 		atomic_set(&sbi->attr_tree_state, HFSPLUS_FAILED_ATTR_TREE);
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -315,6 +333,7 @@ int __hfsplus_setxattr(struct inode *inode, const char *name,
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = can_set_xattr(inode, name, value, size);
 	if (err)
 		return err;
@@ -327,6 +346,10 @@ int __hfsplus_setxattr(struct inode *inode, const char *name,
 		value = "";
 		size = 0;
 	}
+=======
+	if (value == NULL)
+		return hfsplus_removexattr(inode, name);
+>>>>>>> v3.18
 =======
 	if (value == NULL)
 		return hfsplus_removexattr(inode, name);
@@ -387,8 +410,14 @@ int __hfsplus_setxattr(struct inode *inode, const char *name,
 
 	if (!HFSPLUS_SB(inode->i_sb)->attr_tree) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -EOPNOTSUPP;
 		goto end_setxattr;
+=======
+		err = hfsplus_create_attributes_file(inode->i_sb);
+		if (unlikely(err))
+			goto end_setxattr;
+>>>>>>> v3.18
 =======
 		err = hfsplus_create_attributes_file(inode->i_sb);
 		if (unlikely(err))
@@ -454,6 +483,7 @@ end_setxattr:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int is_osx_xattr(const char *xattr_name)
 {
 	return !is_known_namespace(xattr_name);
@@ -461,12 +491,18 @@ static inline int is_osx_xattr(const char *xattr_name)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int name_len(const char *xattr_name, int xattr_name_len)
 {
 	int len = xattr_name_len + 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_osx_xattr(xattr_name))
+=======
+	if (!is_known_namespace(xattr_name))
+>>>>>>> v3.18
 =======
 	if (!is_known_namespace(xattr_name))
 >>>>>>> v3.18
@@ -481,7 +517,11 @@ static int copy_name(char *buffer, const char *xattr_name, int name_len)
 	int offset = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_osx_xattr(xattr_name)) {
+=======
+	if (!is_known_namespace(xattr_name)) {
+>>>>>>> v3.18
 =======
 	if (!is_known_namespace(xattr_name)) {
 >>>>>>> v3.18
@@ -498,16 +538,22 @@ static int copy_name(char *buffer, const char *xattr_name, int name_len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t hfsplus_getxattr_finder_info(struct dentry *dentry,
 						void *value, size_t size)
 {
 	ssize_t res = 0;
 	struct inode *inode = dentry->d_inode;
 =======
+=======
+>>>>>>> v3.18
 static ssize_t hfsplus_getxattr_finder_info(struct inode *inode,
 						void *value, size_t size)
 {
 	ssize_t res = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct hfs_find_data fd;
 	u16 entry_type;
@@ -556,10 +602,16 @@ end_getxattr_finder_info:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t hfsplus_getxattr(struct dentry *dentry, const char *name,
 			 void *value, size_t size)
 {
 	struct inode *inode = dentry->d_inode;
+=======
+ssize_t __hfsplus_getxattr(struct inode *inode, const char *name,
+			 void *value, size_t size)
+{
+>>>>>>> v3.18
 =======
 ssize_t __hfsplus_getxattr(struct inode *inode, const char *name,
 			 void *value, size_t size)
@@ -578,6 +630,7 @@ ssize_t __hfsplus_getxattr(struct inode *inode, const char *name,
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strncmp(name, XATTR_MAC_OSX_PREFIX,
 				XATTR_MAC_OSX_PREFIX_LEN) == 0) {
 		/* skip "osx." prefix */
@@ -592,6 +645,10 @@ ssize_t __hfsplus_getxattr(struct inode *inode, const char *name,
 
 	if (!strcmp_xattr_finder_info(name))
 		return hfsplus_getxattr_finder_info(dentry, value, size);
+=======
+	if (!strcmp_xattr_finder_info(name))
+		return hfsplus_getxattr_finder_info(inode, value, size);
+>>>>>>> v3.18
 =======
 	if (!strcmp_xattr_finder_info(name))
 		return hfsplus_getxattr_finder_info(inode, value, size);
@@ -752,8 +809,12 @@ ssize_t hfsplus_listxattr(struct dentry *dentry, char *buffer, size_t size)
 	u16 key_len = 0;
 	struct hfsplus_attr_key attr_key;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char strbuf[HFSPLUS_ATTR_MAX_STRLEN +
 			XATTR_MAC_OSX_PREFIX_LEN + 1] = {0};
+=======
+	char *strbuf;
+>>>>>>> v3.18
 =======
 	char *strbuf;
 >>>>>>> v3.18
@@ -777,7 +838,10 @@ ssize_t hfsplus_listxattr(struct dentry *dentry, char *buffer, size_t size)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	strbuf = kmalloc(NLS_MAX_CHARSET_SIZE * HFSPLUS_ATTR_MAX_STRLEN +
 			XATTR_MAC_OSX_PREFIX_LEN + 1, GFP_KERNEL);
 	if (!strbuf) {
@@ -785,6 +849,9 @@ ssize_t hfsplus_listxattr(struct dentry *dentry, char *buffer, size_t size)
 		goto out;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = hfsplus_find_attr(inode->i_sb, inode->i_ino, NULL, &fd);
 	if (err) {
@@ -813,7 +880,11 @@ ssize_t hfsplus_listxattr(struct dentry *dentry, char *buffer, size_t size)
 			goto end_listxattr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xattr_name_len = HFSPLUS_ATTR_MAX_STRLEN;
+=======
+		xattr_name_len = NLS_MAX_CHARSET_SIZE * HFSPLUS_ATTR_MAX_STRLEN;
+>>>>>>> v3.18
 =======
 		xattr_name_len = NLS_MAX_CHARSET_SIZE * HFSPLUS_ATTR_MAX_STRLEN;
 >>>>>>> v3.18
@@ -843,6 +914,11 @@ ssize_t hfsplus_listxattr(struct dentry *dentry, char *buffer, size_t size)
 
 end_listxattr:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(strbuf);
+out:
+>>>>>>> v3.18
 =======
 	kfree(strbuf);
 out:
@@ -852,10 +928,16 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hfsplus_removexattr(struct dentry *dentry, const char *name)
 {
 	int err = 0;
 	struct inode *inode = dentry->d_inode;
+=======
+static int hfsplus_removexattr(struct inode *inode, const char *name)
+{
+	int err = 0;
+>>>>>>> v3.18
 =======
 static int hfsplus_removexattr(struct inode *inode, const char *name)
 {
@@ -867,6 +949,7 @@ static int hfsplus_removexattr(struct inode *inode, const char *name)
 	int is_xattr_acl_deleted = 0;
 	int is_all_xattrs_deleted = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((!S_ISREG(inode->i_mode) &&
 			!S_ISDIR(inode->i_mode)) ||
@@ -884,6 +967,11 @@ static int hfsplus_removexattr(struct inode *inode, const char *name)
 				XATTR_MAC_OSX_PREFIX_LEN) == 0)
 		name += XATTR_MAC_OSX_PREFIX_LEN;
 
+=======
+	if (!HFSPLUS_SB(inode->i_sb)->attr_tree)
+		return -EOPNOTSUPP;
+
+>>>>>>> v3.18
 =======
 	if (!HFSPLUS_SB(inode->i_sb)->attr_tree)
 		return -EOPNOTSUPP;
@@ -953,9 +1041,14 @@ static int hfsplus_osx_getxattr(struct dentry *dentry, const char *name,
 					void *buffer, size_t size, int type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char xattr_name[HFSPLUS_ATTR_MAX_STRLEN +
 				XATTR_MAC_OSX_PREFIX_LEN + 1] = {0};
 	size_t len = strlen(name);
+=======
+	char *xattr_name;
+	int res;
+>>>>>>> v3.18
 =======
 	char *xattr_name;
 	int res;
@@ -965,6 +1058,7 @@ static int hfsplus_osx_getxattr(struct dentry *dentry, const char *name,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len > HFSPLUS_ATTR_MAX_STRLEN)
 		return -EOPNOTSUPP;
 
@@ -973,6 +1067,8 @@ static int hfsplus_osx_getxattr(struct dentry *dentry, const char *name,
 
 	return hfsplus_getxattr(dentry, xattr_name, buffer, size);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Don't allow retrieving properly prefixed attributes
 	 * by prepending them with "osx."
@@ -989,6 +1085,9 @@ static int hfsplus_osx_getxattr(struct dentry *dentry, const char *name,
 	res = hfsplus_getxattr(dentry, xattr_name, buffer, size);
 	kfree(xattr_name);
 	return res;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -996,9 +1095,14 @@ static int hfsplus_osx_setxattr(struct dentry *dentry, const char *name,
 		const void *buffer, size_t size, int flags, int type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char xattr_name[HFSPLUS_ATTR_MAX_STRLEN +
 				XATTR_MAC_OSX_PREFIX_LEN + 1] = {0};
 	size_t len = strlen(name);
+=======
+	char *xattr_name;
+	int res;
+>>>>>>> v3.18
 =======
 	char *xattr_name;
 	int res;
@@ -1008,6 +1112,7 @@ static int hfsplus_osx_setxattr(struct dentry *dentry, const char *name,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len > HFSPLUS_ATTR_MAX_STRLEN)
 		return -EOPNOTSUPP;
 
@@ -1016,6 +1121,8 @@ static int hfsplus_osx_setxattr(struct dentry *dentry, const char *name,
 
 	return hfsplus_setxattr(dentry, xattr_name, buffer, size, flags);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Don't allow setting properly prefixed attributes
 	 * by prepending them with "osx."
@@ -1032,6 +1139,9 @@ static int hfsplus_osx_setxattr(struct dentry *dentry, const char *name,
 	res = hfsplus_setxattr(dentry, xattr_name, buffer, size, flags);
 	kfree(xattr_name);
 	return res;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -824,6 +824,10 @@ static const struct net_device_ops cc770_netdev_ops = {
 	.ndo_stop = cc770_close,
 	.ndo_start_xmit = cc770_start_xmit,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu = can_change_mtu,
+>>>>>>> v3.18
 =======
 	.ndo_change_mtu = can_change_mtu,
 >>>>>>> v3.18

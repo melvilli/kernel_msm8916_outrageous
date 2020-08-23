@@ -72,6 +72,7 @@ struct softing {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int softing_default_output(struct net_device *netdev);
 
 extern ktime_t softing_raw2ktime(struct softing *card, u32 raw);
@@ -88,6 +89,8 @@ extern int softing_load_fw(const char *file, struct softing *card,
 /* Load final application firmware after bootloader */
 extern int softing_load_app_fw(const char *file, struct softing *card);
 =======
+=======
+>>>>>>> v3.18
 int softing_default_output(struct net_device *netdev);
 
 ktime_t softing_raw2ktime(struct softing *card, u32 raw);
@@ -103,12 +106,16 @@ int softing_load_fw(const char *file, struct softing *card,
 
 /* Load final application firmware after bootloader */
 int softing_load_app_fw(const char *file, struct softing *card);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * enable or disable irq
  * only called with fw.lock locked
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int softing_enable_irq(struct softing *card, int enable);
 
@@ -119,6 +126,8 @@ extern int softing_startstop(struct net_device *netdev, int up);
 extern int softing_netdev_rx(struct net_device *netdev,
 		const struct can_frame *msg, ktime_t ktime);
 =======
+=======
+>>>>>>> v3.18
 int softing_enable_irq(struct softing *card, int enable);
 
 /* start/stop 1 bus on card */
@@ -127,6 +136,9 @@ int softing_startstop(struct net_device *netdev, int up);
 /* netif_rx() */
 int softing_netdev_rx(struct net_device *netdev, const struct can_frame *msg,
 		      ktime_t ktime);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* SOFTING DPRAM mappings */

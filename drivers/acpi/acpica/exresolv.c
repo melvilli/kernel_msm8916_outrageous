@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -161,7 +165,10 @@ acpi_ex_resolve_object_to_value(union acpi_operand_object **stack_ptr,
 		case ACPI_REFCLASS_LOCAL:
 		case ACPI_REFCLASS_ARG:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -317,6 +324,10 @@ acpi_ex_resolve_object_to_value(union acpi_operand_object **stack_ptr,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -360,6 +371,10 @@ acpi_ex_resolve_multiple(struct acpi_walk_state *walk_state,
 	switch (ACPI_GET_DESCRIPTOR_TYPE(obj_desc)) {
 	case ACPI_DESC_TYPE_OPERAND:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -368,6 +383,10 @@ acpi_ex_resolve_multiple(struct acpi_walk_state *walk_state,
 
 	case ACPI_DESC_TYPE_NAMED:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -539,7 +558,11 @@ acpi_ex_resolve_multiple(struct acpi_walk_state *walk_state,
 	type = obj_desc->common.type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18
@@ -562,7 +585,13 @@ exit:
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* No change to Type required */
+=======
+
+		/* No change to Type required */
+
+>>>>>>> v3.18
 =======
 
 		/* No change to Type required */

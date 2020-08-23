@@ -191,7 +191,10 @@ struct evtchn_reset {
 typedef struct evtchn_reset evtchn_reset_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * EVTCHNOP_init_control: initialize the control block for the FIFO ABI.
  */
@@ -225,6 +228,9 @@ struct evtchn_set_priority {
 	uint32_t priority;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct evtchn_op {
 	uint32_t cmd; /* EVTCHNOP_* */
@@ -244,7 +250,10 @@ struct evtchn_op {
 DEFINE_GUEST_HANDLE_STRUCT(evtchn_op);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * 2-level ABI
  */
@@ -280,5 +289,8 @@ struct evtchn_fifo_control_block {
 	event_word_t head[EVTCHN_FIFO_MAX_QUEUES];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __XEN_PUBLIC_EVENT_CHANNEL_H__ */

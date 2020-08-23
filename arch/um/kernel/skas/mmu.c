@@ -124,7 +124,11 @@ void uml_setup_stubs(struct mm_struct *mm)
 	err = install_special_mapping(mm, STUB_START, STUB_END - STUB_START,
 				      VM_READ | VM_MAYREAD | VM_EXEC |
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      VM_MAYEXEC | VM_DONTCOPY,
+=======
+				      VM_MAYEXEC | VM_DONTCOPY | VM_PFNMAP,
+>>>>>>> v3.18
 =======
 				      VM_MAYEXEC | VM_DONTCOPY | VM_PFNMAP,
 >>>>>>> v3.18

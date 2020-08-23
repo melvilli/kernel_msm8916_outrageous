@@ -30,6 +30,7 @@
 #include <linux/device.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef	CONFIG_ACPI
 
 #ifndef _LINUX
@@ -46,6 +47,8 @@
 #include <asm/acpi.h>
 
 =======
+=======
+>>>>>>> v3.18
 #ifndef _LINUX
 #define _LINUX
 #endif
@@ -83,6 +86,9 @@ static inline const char *acpi_dev_name(struct acpi_device *adev)
 	return dev_name(&adev->dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum acpi_irq_model_id {
 	ACPI_IRQ_MODEL_PIC = 0,
@@ -128,11 +134,17 @@ static inline void acpi_initrd_override(void *data, size_t size)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BAD_MADT_ENTRY(entry, end) (					    \
 		(!entry) || (unsigned long)entry + sizeof(*entry) > end ||  \
 		((struct acpi_subtable_header *)entry)->length < sizeof(*entry))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 char * __acpi_map_table (unsigned long phys_addr, unsigned long size);
 void __acpi_unmap_table(char *map, unsigned long size);
@@ -164,7 +176,11 @@ void acpi_numa_arch_fixup(void);
 #ifdef CONFIG_ACPI_HOTPLUG_CPU
 /* Arch dependent functions for cpu hotplug support */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int acpi_map_lsapic(acpi_handle handle, int *pcpu);
+=======
+int acpi_map_lsapic(acpi_handle handle, int physid, int *pcpu);
+>>>>>>> v3.18
 =======
 int acpi_map_lsapic(acpi_handle handle, int physid, int *pcpu);
 >>>>>>> v3.18
@@ -211,6 +227,11 @@ extern int ec_transaction(u8 command,
 extern acpi_handle ec_get_handle(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool acpi_is_pnp_device(struct acpi_device *);
+
+>>>>>>> v3.18
 =======
 extern bool acpi_is_pnp_device(struct acpi_device *);
 
@@ -295,6 +316,7 @@ extern void acpi_osi_setup(char *str);
 
 #ifdef CONFIG_ACPI_NUMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 int acpi_get_pxm(acpi_handle handle);
 int acpi_get_node(acpi_handle *handle);
 #else
@@ -303,6 +325,11 @@ static inline int acpi_get_pxm(acpi_handle handle)
 	return 0;
 }
 static inline int acpi_get_node(acpi_handle *handle)
+=======
+int acpi_get_node(acpi_handle handle);
+#else
+static inline int acpi_get_node(acpi_handle handle)
+>>>>>>> v3.18
 =======
 int acpi_get_node(acpi_handle handle);
 #else
@@ -357,6 +384,7 @@ void __init acpi_nvs_nosave_s3(void);
 
 struct acpi_osc_context {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *uuid_str; /* uuid string */
 	int rev;
 	struct acpi_buffer cap; /* arg2/arg3 */
@@ -410,6 +438,8 @@ extern bool osc_sb_apei_support_acked;
 #define OSC_PCI_NATIVE_HOTPLUG	(OSC_PCI_EXPRESS_NATIVE_HP_CONTROL |	\
 				OSC_SHPC_NATIVE_HP_CONTROL)
 =======
+=======
+>>>>>>> v3.18
 	char *uuid_str;			/* UUID string */
 	int rev;
 	struct acpi_buffer cap;		/* list of DWORD capabilities */
@@ -467,6 +497,9 @@ extern bool osc_sb_apei_support_acked;
 #define ACPI_GSB_ACCESS_ATTRIB_BLOCK_CALL	0x0000000D
 #define ACPI_GSB_ACCESS_ATTRIB_RAW_BYTES	0x0000000E
 #define ACPI_GSB_ACCESS_ATTRIB_RAW_PROCESS	0x0000000F
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern acpi_status acpi_pci_osc_control_set(acpi_handle handle,
@@ -475,8 +508,12 @@ extern acpi_status acpi_pci_osc_control_set(acpi_handle handle,
 /* Enable _OST when all relevant hotplug operations are enabled */
 #if defined(CONFIG_ACPI_HOTPLUG_CPU) &&			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(defined(CONFIG_ACPI_HOTPLUG_MEMORY) ||		\
 	 defined(CONFIG_ACPI_HOTPLUG_MEMORY_MODULE)) &&	\
+=======
+	defined(CONFIG_ACPI_HOTPLUG_MEMORY) &&		\
+>>>>>>> v3.18
 =======
 	defined(CONFIG_ACPI_HOTPLUG_MEMORY) &&		\
 >>>>>>> v3.18
@@ -529,11 +566,17 @@ static inline bool acpi_driver_match_device(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int acpi_device_uevent_modalias(struct device *, struct kobj_uevent_env *);
 int acpi_device_modalias(struct device *, char *, int);
 
 struct platform_device *acpi_create_platform_device(struct acpi_device *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ACPI_PTR(_ptr)	(_ptr)
 
@@ -542,7 +585,10 @@ struct platform_device *acpi_create_platform_device(struct acpi_device *);
 #define acpi_disabled 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ACPI_COMPANION(dev)		(NULL)
 #define ACPI_COMPANION_SET(dev, adev)	do { } while (0)
 #define ACPI_HANDLE(dev)		(NULL)
@@ -552,6 +598,9 @@ static inline const char *acpi_dev_name(struct acpi_device *adev)
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void acpi_early_init(void) { }
 
@@ -590,7 +639,11 @@ static inline int acpi_table_parse(char *id,
 				int (*handler)(struct acpi_table_header *))
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -1;
+=======
+	return -ENODEV;
+>>>>>>> v3.18
 =======
 	return -ENODEV;
 >>>>>>> v3.18
@@ -622,7 +675,10 @@ static inline bool acpi_driver_match_device(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int acpi_device_uevent_modalias(struct device *dev,
 				struct kobj_uevent_env *env)
 {
@@ -635,6 +691,9 @@ static inline int acpi_device_modalias(struct device *dev,
 	return -ENODEV;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ACPI_PTR(_ptr)	(NULL)
 
@@ -647,7 +706,10 @@ void acpi_os_set_prepare_sleep(int (*func)(u8 sleep_state,
 acpi_status acpi_os_prepare_sleep(u8 sleep_state,
 				  u32 pm1a_control, u32 pm1b_control);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void acpi_os_set_prepare_extended_sleep(int (*func)(u8 sleep_state,
 				        u32 val_a,  u32 val_b));
@@ -655,6 +717,9 @@ void acpi_os_set_prepare_extended_sleep(int (*func)(u8 sleep_state,
 acpi_status acpi_os_prepare_extended_sleep(u8 sleep_state,
 					   u32 val_a, u32 val_b);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_X86
 void arch_reserve_mem_area(acpi_physical_address addr, size_t size);
@@ -685,28 +750,40 @@ int acpi_dev_suspend_late(struct device *dev);
 int acpi_dev_resume_early(struct device *dev);
 int acpi_subsys_prepare(struct device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int acpi_subsys_suspend_late(struct device *dev);
 int acpi_subsys_resume_early(struct device *dev);
 =======
+=======
+>>>>>>> v3.18
 void acpi_subsys_complete(struct device *dev);
 int acpi_subsys_suspend_late(struct device *dev);
 int acpi_subsys_resume_early(struct device *dev);
 int acpi_subsys_suspend(struct device *dev);
 int acpi_subsys_freeze(struct device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int acpi_dev_suspend_late(struct device *dev) { return 0; }
 static inline int acpi_dev_resume_early(struct device *dev) { return 0; }
 static inline int acpi_subsys_prepare(struct device *dev) { return 0; }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int acpi_subsys_suspend_late(struct device *dev) { return 0; }
 static inline int acpi_subsys_resume_early(struct device *dev) { return 0; }
 =======
+=======
+>>>>>>> v3.18
 static inline void acpi_subsys_complete(struct device *dev) {}
 static inline int acpi_subsys_suspend_late(struct device *dev) { return 0; }
 static inline int acpi_subsys_resume_early(struct device *dev) { return 0; }
 static inline int acpi_subsys_suspend(struct device *dev) { return 0; }
 static inline int acpi_subsys_freeze(struct device *dev) { return 0; }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -714,7 +791,10 @@ static inline int acpi_subsys_freeze(struct device *dev) { return 0; }
 struct acpi_device *acpi_dev_pm_get_node(struct device *dev);
 int acpi_dev_pm_attach(struct device *dev, bool power_on);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void acpi_dev_pm_detach(struct device *dev, bool power_off);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else
@@ -727,7 +807,10 @@ static inline int acpi_dev_pm_attach(struct device *dev, bool power_on)
 	return -ENODEV;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void acpi_dev_pm_detach(struct device *dev, bool power_off) {}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -742,7 +825,10 @@ acpi_handle_printk(const char *level, void *handle, const char *fmt, ...) {}
 #endif	/* !CONFIG_ACPI */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_ACPI) && defined(CONFIG_DYNAMIC_DEBUG)
 __printf(3, 4)
 void __acpi_handle_debug(struct _ddebug *descriptor, acpi_handle handle, const char *fmt, ...);
@@ -751,6 +837,9 @@ void __acpi_handle_debug(struct _ddebug *descriptor, acpi_handle handle, const c
 	acpi_handle_printk(KERN_DEBUG, handle, fmt, ##__VA_ARGS__);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * acpi_handle_<level>: Print message with ACPI prefix and object path
@@ -774,12 +863,15 @@ void __acpi_handle_debug(struct _ddebug *descriptor, acpi_handle handle, const c
 	acpi_handle_printk(KERN_INFO, handle, fmt, ##__VA_ARGS__)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* REVISIT: Support CONFIG_DYNAMIC_DEBUG when necessary */
 #if defined(DEBUG) || defined(CONFIG_DYNAMIC_DEBUG)
 #define acpi_handle_debug(handle, fmt, ...)				\
 	acpi_handle_printk(KERN_DEBUG, handle, fmt, ##__VA_ARGS__)
 #else
 =======
+=======
+>>>>>>> v3.18
 #if defined(DEBUG)
 #define acpi_handle_debug(handle, fmt, ...)				\
 	acpi_handle_printk(KERN_DEBUG, handle, fmt, ##__VA_ARGS__)
@@ -793,6 +885,9 @@ do {									\
 				##__VA_ARGS__);				\
 } while (0)
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define acpi_handle_debug(handle, fmt, ...)				\
 ({									\
@@ -802,6 +897,10 @@ do {									\
 })
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

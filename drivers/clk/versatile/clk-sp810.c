@@ -124,7 +124,11 @@ static const struct clk_ops clk_sp810_timerclken_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct clk *clk_sp810_timerclken_of_get(struct of_phandle_args *clkspec,
+=======
+static struct clk *clk_sp810_timerclken_of_get(struct of_phandle_args *clkspec,
+>>>>>>> v3.18
 =======
 static struct clk *clk_sp810_timerclken_of_get(struct of_phandle_args *clkspec,
 >>>>>>> v3.18
@@ -133,8 +137,13 @@ static struct clk *clk_sp810_timerclken_of_get(struct of_phandle_args *clkspec,
 	struct clk_sp810 *sp810 = data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON(clkspec->args_count != 1 ||
 		    clkspec->args[0] >=	ARRAY_SIZE(sp810->timerclken)))
+=======
+	if (WARN_ON(clkspec->args_count != 1 || clkspec->args[0] >
+			ARRAY_SIZE(sp810->timerclken)))
+>>>>>>> v3.18
 =======
 	if (WARN_ON(clkspec->args_count != 1 || clkspec->args[0] >
 			ARRAY_SIZE(sp810->timerclken)))
@@ -151,7 +160,10 @@ void __init clk_sp810_of_setup(struct device_node *node)
 	char name[12];
 	struct clk_init_data init;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static int instance;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
@@ -186,7 +198,11 @@ void __init clk_sp810_of_setup(struct device_node *node)
 
 	for (i = 0; i < ARRAY_SIZE(sp810->timerclken); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snprintf(name, sizeof(name), "sp810_%d_%d", instance, i);
+=======
+		snprintf(name, ARRAY_SIZE(name), "timerclken%d", i);
+>>>>>>> v3.18
 =======
 		snprintf(name, ARRAY_SIZE(name), "timerclken%d", i);
 >>>>>>> v3.18
@@ -202,7 +218,10 @@ void __init clk_sp810_of_setup(struct device_node *node)
 
 	of_clk_add_provider(node, clk_sp810_timerclken_of_get, sp810);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	instance++;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

@@ -23,6 +23,7 @@
 #include <linux/string.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct cpu_operations *cpu_ops[NR_CPUS];
 extern struct cpu_operations *__cpu_method_of_table[];
 extern struct cpu_operations *__cpu_method_of_table_end[];
@@ -38,6 +39,8 @@ const struct cpu_operations * __init cpu_get_ops(const char *name)
 		start++;
 	};
 =======
+=======
+>>>>>>> v3.18
 extern const struct cpu_operations smp_spin_table_ops;
 extern const struct cpu_operations cpu_psci_ops;
 
@@ -61,6 +64,9 @@ static const struct cpu_operations * __init cpu_get_ops(const char *name)
 
 		ops++;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return NULL;

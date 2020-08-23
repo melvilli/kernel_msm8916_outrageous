@@ -71,6 +71,7 @@ void atomic64_set(atomic64_t *v, long long i)
 EXPORT_SYMBOL(atomic64_set);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void atomic64_add(long long a, atomic64_t *v)
 {
 	unsigned long flags;
@@ -119,6 +120,8 @@ long long atomic64_sub_return(long long a, atomic64_t *v)
 }
 EXPORT_SYMBOL(atomic64_sub_return);
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC64_OP(op, c_op)						\
 void atomic64_##op(long long a, atomic64_t *v)				\
 {									\
@@ -155,6 +158,9 @@ ATOMIC64_OPS(sub, -=)
 #undef ATOMIC64_OPS
 #undef ATOMIC64_OP_RETURN
 #undef ATOMIC64_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 long long atomic64_dec_if_positive(atomic64_t *v)

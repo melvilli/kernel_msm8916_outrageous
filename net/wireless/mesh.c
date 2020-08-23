@@ -19,6 +19,10 @@
 #define MESH_ROOT_INTERVAL     5000
 #define MESH_ROOT_CONFIRMATION_INTERVAL 2000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MESH_DEFAULT_PLINK_TIMEOUT	1800 /* timeout in seconds */
+>>>>>>> v3.18
 =======
 #define MESH_DEFAULT_PLINK_TIMEOUT	1800 /* timeout in seconds */
 >>>>>>> v3.18
@@ -80,6 +84,10 @@ const struct mesh_config default_mesh_config = {
 	.power_mode = NL80211_MESH_POWER_ACTIVE,
 	.dot11MeshAwakeWindowDuration = MESH_DEFAULT_AWAKE_WINDOW,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.plink_timeout = MESH_DEFAULT_PLINK_TIMEOUT,
+>>>>>>> v3.18
 =======
 	.plink_timeout = MESH_DEFAULT_PLINK_TIMEOUT,
 >>>>>>> v3.18
@@ -91,6 +99,10 @@ const struct mesh_setup default_mesh_setup = {
 	.path_sel_proto = IEEE80211_PATH_PROTOCOL_HWMP,
 	.path_metric = IEEE80211_PATH_METRIC_AIRTIME,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.auth_id = 0, /* open */
+>>>>>>> v3.18
 =======
 	.auth_id = 0, /* open */
 >>>>>>> v3.18
@@ -151,8 +163,12 @@ int __cfg80211_join_mesh(struct cfg80211_registered_device *rdev,
 			for (i = 0; i < sband->n_channels; i++) {
 				chan = &sband->channels[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (chan->flags & (IEEE80211_CHAN_NO_IBSS |
 						   IEEE80211_CHAN_PASSIVE_SCAN |
+=======
+				if (chan->flags & (IEEE80211_CHAN_NO_IR |
+>>>>>>> v3.18
 =======
 				if (chan->flags & (IEEE80211_CHAN_NO_IR |
 >>>>>>> v3.18
@@ -176,6 +192,7 @@ int __cfg80211_join_mesh(struct cfg80211_registered_device *rdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cfg80211_reg_can_beacon(&rdev->wiphy, &setup->chandef))
 		return -EINVAL;
 
@@ -184,6 +201,8 @@ int __cfg80211_join_mesh(struct cfg80211_registered_device *rdev,
 	if (err)
 		return err;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * check if basic rates are available otherwise use mandatory rates as
 	 * basic rates
@@ -200,6 +219,9 @@ int __cfg80211_join_mesh(struct cfg80211_registered_device *rdev,
 	if (!cfg80211_reg_can_beacon(&rdev->wiphy, &setup->chandef,
 				     NL80211_IFTYPE_MESH_POINT))
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = rdev_join_mesh(rdev, dev, conf, setup);
@@ -207,7 +229,11 @@ int __cfg80211_join_mesh(struct cfg80211_registered_device *rdev,
 		memcpy(wdev->ssid, setup->mesh_id, setup->mesh_id_len);
 		wdev->mesh_id_len = setup->mesh_id_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wdev->channel = setup->chandef.chan;
+=======
+		wdev->chandef = setup->chandef;
+>>>>>>> v3.18
 =======
 		wdev->chandef = setup->chandef;
 >>>>>>> v3.18
@@ -225,11 +251,17 @@ int cfg80211_join_mesh(struct cfg80211_registered_device *rdev,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&rdev->devlist_mtx);
 	wdev_lock(wdev);
 	err = __cfg80211_join_mesh(rdev, dev, setup, conf);
 	wdev_unlock(wdev);
 	mutex_unlock(&rdev->devlist_mtx);
+=======
+	wdev_lock(wdev);
+	err = __cfg80211_join_mesh(rdev, dev, setup, conf);
+	wdev_unlock(wdev);
+>>>>>>> v3.18
 =======
 	wdev_lock(wdev);
 	err = __cfg80211_join_mesh(rdev, dev, setup, conf);
@@ -260,6 +292,7 @@ int cfg80211_set_mesh_channel(struct cfg80211_registered_device *rdev,
 			return -ENETDOWN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = cfg80211_can_use_chan(rdev, wdev, chandef->chan,
 					    CHAN_MODE_SHARED);
 		if (err)
@@ -270,10 +303,15 @@ int cfg80211_set_mesh_channel(struct cfg80211_registered_device *rdev,
 		if (!err)
 			wdev->channel = chandef->chan;
 =======
+=======
+>>>>>>> v3.18
 		err = rdev_libertas_set_mesh_channel(rdev, wdev->netdev,
 						     chandef->chan);
 		if (!err)
 			wdev->chandef = *chandef;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		return err;
@@ -287,8 +325,13 @@ int cfg80211_set_mesh_channel(struct cfg80211_registered_device *rdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cfg80211_leave_mesh(struct cfg80211_registered_device *rdev,
 				 struct net_device *dev)
+=======
+int __cfg80211_leave_mesh(struct cfg80211_registered_device *rdev,
+			  struct net_device *dev)
+>>>>>>> v3.18
 =======
 int __cfg80211_leave_mesh(struct cfg80211_registered_device *rdev,
 			  struct net_device *dev)
@@ -312,7 +355,11 @@ int __cfg80211_leave_mesh(struct cfg80211_registered_device *rdev,
 	if (!err) {
 		wdev->mesh_id_len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wdev->channel = NULL;
+=======
+		memset(&wdev->chandef, 0, sizeof(wdev->chandef));
+>>>>>>> v3.18
 =======
 		memset(&wdev->chandef, 0, sizeof(wdev->chandef));
 >>>>>>> v3.18

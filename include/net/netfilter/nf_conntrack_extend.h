@@ -11,6 +11,10 @@ enum nf_ct_ext_id {
 	NF_CT_EXT_NAT,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NF_CT_EXT_SEQADJ,
+>>>>>>> v3.18
 =======
 	NF_CT_EXT_SEQADJ,
 >>>>>>> v3.18
@@ -31,6 +35,12 @@ enum nf_ct_ext_id {
 	NF_CT_EXT_LABELS,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_NETFILTER_SYNPROXY)
+	NF_CT_EXT_SYNPROXY,
+#endif
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_NETFILTER_SYNPROXY)
 	NF_CT_EXT_SYNPROXY,
@@ -42,7 +52,12 @@ enum nf_ct_ext_id {
 #define NF_CT_EXT_HELPER_TYPE struct nf_conn_help
 #define NF_CT_EXT_NAT_TYPE struct nf_conn_nat
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NF_CT_EXT_ACCT_TYPE struct nf_conn_counter
+=======
+#define NF_CT_EXT_SEQADJ_TYPE struct nf_conn_seqadj
+#define NF_CT_EXT_ACCT_TYPE struct nf_conn_acct
+>>>>>>> v3.18
 =======
 #define NF_CT_EXT_SEQADJ_TYPE struct nf_conn_seqadj
 #define NF_CT_EXT_ACCT_TYPE struct nf_conn_acct
@@ -53,6 +68,10 @@ enum nf_ct_ext_id {
 #define NF_CT_EXT_TIMEOUT_TYPE struct nf_conn_timeout
 #define NF_CT_EXT_LABELS_TYPE struct nf_conn_labels
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NF_CT_EXT_SYNPROXY_TYPE struct nf_conn_synproxy
+>>>>>>> v3.18
 =======
 #define NF_CT_EXT_SYNPROXY_TYPE struct nf_conn_synproxy
 >>>>>>> v3.18
@@ -87,7 +106,11 @@ static inline void *__nf_ct_ext_find(const struct nf_conn *ct, u8 id)
 
 /* Destroy all relationships */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __nf_ct_ext_destroy(struct nf_conn *ct);
+=======
+void __nf_ct_ext_destroy(struct nf_conn *ct);
+>>>>>>> v3.18
 =======
 void __nf_ct_ext_destroy(struct nf_conn *ct);
 >>>>>>> v3.18

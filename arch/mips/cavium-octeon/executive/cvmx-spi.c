@@ -178,6 +178,10 @@ int cvmx_spi_restart_interface(int interface, cvmx_spi_mode_t mode, int timeout)
 	return res;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_spi_restart_interface);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_spi_restart_interface);
 >>>>>>> v3.18

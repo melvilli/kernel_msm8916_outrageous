@@ -47,6 +47,7 @@ MODULE_DESCRIPTION("Driver for 1-wire Dallas network protocol.");
 
 static int w1_timeout = 10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 int w1_max_slave_count = 10;
 int w1_max_slave_ttl = 10;
 
@@ -54,6 +55,8 @@ module_param_named(timeout, w1_timeout, int, 0);
 module_param_named(max_slave_count, w1_max_slave_count, int, 0);
 module_param_named(slave_ttl, w1_max_slave_ttl, int, 0);
 =======
+=======
+>>>>>>> v3.18
 int w1_max_slave_count = 64;
 int w1_max_slave_ttl = 10;
 
@@ -73,14 +76,20 @@ MODULE_PARM_DESC(max_slave_count,
 module_param_named(slave_ttl, w1_max_slave_ttl, int, 0);
 MODULE_PARM_DESC(slave_ttl,
 	"Number of searches not seeing a slave before it will be removed");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 DEFINE_MUTEX(w1_mlock);
 LIST_HEAD(w1_masters);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int w1_attach_slave_device(struct w1_master *dev, struct w1_reg_num *rn);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int w1_master_match(struct device *dev, struct device_driver *drv)
@@ -107,6 +116,7 @@ static void w1_slave_release(struct device *dev)
 	struct w1_slave *sl = dev_to_w1_slave(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(dev, "%s: Releasing %s.\n", __func__, sl->name);
 
 	while (atomic_read(&sl->refcnt)) {
@@ -124,6 +134,8 @@ static void w1_slave_release(struct device *dev)
 
 static ssize_t w1_slave_read_name(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(dev, "%s: Releasing %s [%p]\n", __func__, sl->name, sl);
 
 	w1_family_put(sl->family);
@@ -131,6 +143,9 @@ static ssize_t w1_slave_read_name(struct device *dev, struct device_attribute *a
 }
 
 static ssize_t name_show(struct device *dev, struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct w1_slave *sl = dev_to_w1_slave(dev);
@@ -138,8 +153,14 @@ static ssize_t name_show(struct device *dev, struct device_attribute *attr, char
 	return sprintf(buf, "%s\n", sl->name);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t w1_slave_read_id(struct device *dev,
+=======
+static DEVICE_ATTR_RO(name);
+
+static ssize_t id_show(struct device *dev,
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(name);
 
@@ -154,6 +175,7 @@ static ssize_t id_show(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute w1_slave_attr_name =
 	__ATTR(name, S_IRUGO, w1_slave_read_name, NULL);
@@ -166,6 +188,8 @@ static ssize_t w1_default_write(struct file *filp, struct kobject *kobj,
 				struct bin_attribute *bin_attr,
 				char *buf, loff_t off, size_t count)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(id);
 
 static struct attribute *w1_slave_attrs[] = {
@@ -180,6 +204,9 @@ ATTRIBUTE_GROUPS(w1_slave);
 static ssize_t rw_write(struct file *filp, struct kobject *kobj,
 			struct bin_attribute *bin_attr, char *buf, loff_t off,
 			size_t count)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct w1_slave *sl = kobj_to_w1_slave(kobj);
@@ -198,9 +225,15 @@ out_up:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_default_read(struct file *filp, struct kobject *kobj,
 			       struct bin_attribute *bin_attr,
 			       char *buf, loff_t off, size_t count)
+=======
+static ssize_t rw_read(struct file *filp, struct kobject *kobj,
+		       struct bin_attribute *bin_attr, char *buf, loff_t off,
+		       size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t rw_read(struct file *filp, struct kobject *kobj,
 		       struct bin_attribute *bin_attr, char *buf, loff_t off,
@@ -215,6 +248,7 @@ static ssize_t rw_read(struct file *filp, struct kobject *kobj,
 	return count;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct bin_attribute w1_default_attr = {
       .attr = {
@@ -240,6 +274,8 @@ static struct w1_family_ops w1_default_fops = {
 	.add_slave	= w1_default_add_slave,
 	.remove_slave	= w1_default_remove_slave,
 =======
+=======
+>>>>>>> v3.18
 static BIN_ATTR_RW(rw, PAGE_SIZE);
 
 static struct bin_attribute *w1_slave_bin_attrs[] = {
@@ -258,6 +294,9 @@ static const struct attribute_group *w1_slave_default_groups[] = {
 
 static struct w1_family_ops w1_default_fops = {
 	.groups		= w1_slave_default_groups,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -321,22 +360,34 @@ static ssize_t w1_master_attribute_store_search(struct device * dev,
 	long tmp;
 	struct w1_master *md = dev_to_w1_master(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtol(buf, 0, &tmp) == -EINVAL)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtol(buf, 0, &tmp);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&md->mutex);
 	md->search_count = tmp;
 	mutex_unlock(&md->mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wake_up_process(md->thread);
+=======
+	/* Only wake if it is going to be searching. */
+	if (tmp)
+		wake_up_process(md->thread);
+>>>>>>> v3.18
 =======
 	/* Only wake if it is going to be searching. */
 	if (tmp)
@@ -367,22 +418,31 @@ static ssize_t w1_master_attribute_store_pullup(struct device *dev,
 	long tmp;
 	struct w1_master *md = dev_to_w1_master(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (strict_strtol(buf, 0, &tmp) == -EINVAL)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = kstrtol(buf, 0, &tmp);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&md->mutex);
 	md->enable_pullup = tmp;
 	mutex_unlock(&md->mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wake_up_process(md->thread);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -422,7 +482,10 @@ static ssize_t w1_master_attribute_show_timeout(struct device *dev, struct devic
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t w1_master_attribute_store_max_slave_count(struct device *dev,
 	struct device_attribute *attr, const char *buf, size_t count)
 {
@@ -441,6 +504,9 @@ static ssize_t w1_master_attribute_store_max_slave_count(struct device *dev,
 	return count;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t w1_master_attribute_show_max_slave_count(struct device *dev, struct device_attribute *attr, char *buf)
 {
@@ -481,6 +547,7 @@ static ssize_t w1_master_attribute_show_slaves(struct device *dev,
 	struct w1_master *md = dev_to_w1_master(dev);
 	int c = PAGE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mutex_lock(&md->mutex);
 
@@ -499,6 +566,8 @@ static ssize_t w1_master_attribute_show_slaves(struct device *dev,
 
 	mutex_unlock(&md->mutex);
 =======
+=======
+>>>>>>> v3.18
 	struct list_head *ent, *n;
 	struct w1_slave *sl = NULL;
 
@@ -513,6 +582,9 @@ static ssize_t w1_master_attribute_show_slaves(struct device *dev,
 		c -= snprintf(buf + PAGE_SIZE - c, c, "not found.\n");
 
 	mutex_unlock(&md->list_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return PAGE_SIZE - c;
@@ -568,6 +640,7 @@ static int w1_atoreg_num(struct device *dev, const char *buf, size_t count,
 
 /* Searches the slaves in the w1_master and returns a pointer or NULL.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Note: must hold the mutex
  */
 static struct w1_slave *w1_slave_search_device(struct w1_master *dev,
@@ -575,6 +648,8 @@ static struct w1_slave *w1_slave_search_device(struct w1_master *dev,
 {
 	struct w1_slave *sl;
 =======
+=======
+>>>>>>> v3.18
  * Note: must not hold list_mutex
  */
 struct w1_slave *w1_slave_search_device(struct w1_master *dev,
@@ -582,21 +657,30 @@ struct w1_slave *w1_slave_search_device(struct w1_master *dev,
 {
 	struct w1_slave *sl;
 	mutex_lock(&dev->list_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_for_each_entry(sl, &dev->slist, w1_slave_entry) {
 		if (sl->reg_num.family == rn->family &&
 				sl->reg_num.id == rn->id &&
 				sl->reg_num.crc == rn->crc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return sl;
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 			mutex_unlock(&dev->list_mutex);
 			return sl;
 		}
 	}
 	mutex_unlock(&dev->list_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NULL;
 }
@@ -655,12 +739,18 @@ static ssize_t w1_master_attribute_store_remove(struct device *dev,
 	sl = w1_slave_search_device(md, &rn);
 	if (sl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		w1_slave_detach(sl);
 =======
+=======
+>>>>>>> v3.18
 		result = w1_slave_detach(sl);
 		/* refcnt 0 means it was detached in the call */
 		if (result == 0)
 			result = count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		dev_info(dev, "Device %02x-%012llx doesn't exists\n", rn.family,
@@ -687,7 +777,11 @@ static W1_MASTER_ATTR_RO(name, S_IRUGO);
 static W1_MASTER_ATTR_RO(slaves, S_IRUGO);
 static W1_MASTER_ATTR_RO(slave_count, S_IRUGO);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static W1_MASTER_ATTR_RO(max_slave_count, S_IRUGO);
+=======
+static W1_MASTER_ATTR_RW(max_slave_count, S_IRUGO | S_IWUSR | S_IWGRP);
+>>>>>>> v3.18
 =======
 static W1_MASTER_ATTR_RW(max_slave_count, S_IRUGO | S_IWUSR | S_IWGRP);
 >>>>>>> v3.18
@@ -765,7 +859,10 @@ end:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int w1_family_notify(unsigned long action, struct w1_slave *sl)
 {
 	struct w1_family_ops *fops;
@@ -809,6 +906,9 @@ static int w1_family_notify(unsigned long action, struct w1_slave *sl)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __w1_attach_slave_device(struct w1_slave *sl)
 {
@@ -819,6 +919,10 @@ static int __w1_attach_slave_device(struct w1_slave *sl)
 	sl->dev.bus = &w1_bus_type;
 	sl->dev.release = &w1_slave_release;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sl->dev.groups = w1_slave_groups;
+>>>>>>> v3.18
 =======
 	sl->dev.groups = w1_slave_groups;
 >>>>>>> v3.18
@@ -835,6 +939,12 @@ static int __w1_attach_slave_device(struct w1_slave *sl)
 		dev_name(&sl->dev), sl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* suppress for w1_family_notify before sending KOBJ_ADD */
+	dev_set_uevent_suppress(&sl->dev, true);
+
+>>>>>>> v3.18
 =======
 	/* suppress for w1_family_notify before sending KOBJ_ADD */
 	dev_set_uevent_suppress(&sl->dev, true);
@@ -847,6 +957,7 @@ static int __w1_attach_slave_device(struct w1_slave *sl)
 			dev_name(&sl->dev), err);
 		return err;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* Create "name" entry */
@@ -891,6 +1002,8 @@ out_unreg:
 
 static int w1_attach_slave_device(struct w1_master *dev, struct w1_reg_num *rn)
 =======
+=======
+>>>>>>> v3.18
 	w1_family_notify(BUS_NOTIFY_ADD_DEVICE, sl);
 
 	dev_set_uevent_suppress(&sl->dev, false);
@@ -904,6 +1017,9 @@ static int w1_attach_slave_device(struct w1_master *dev, struct w1_reg_num *rn)
 }
 
 int w1_attach_slave_device(struct w1_master *dev, struct w1_reg_num *rn)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct w1_slave *sl;
@@ -923,6 +1039,7 @@ int w1_attach_slave_device(struct w1_master *dev, struct w1_reg_num *rn)
 	sl->owner = THIS_MODULE;
 	sl->master = dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(W1_SLAVE_ACTIVE, (long *)&sl->flags);
 
 	memset(&msg, 0, sizeof(msg));
@@ -930,6 +1047,8 @@ int w1_attach_slave_device(struct w1_master *dev, struct w1_reg_num *rn)
 	atomic_set(&sl->refcnt, 0);
 	init_completion(&sl->released);
 =======
+=======
+>>>>>>> v3.18
 	set_bit(W1_SLAVE_ACTIVE, &sl->flags);
 
 	memset(&msg, 0, sizeof(msg));
@@ -941,6 +1060,9 @@ int w1_attach_slave_device(struct w1_master *dev, struct w1_reg_num *rn)
 	mutex_unlock(&dev->mutex);
 	request_module("w1-family-0x%0x", rn->family);
 	mutex_lock(&dev->mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock(&w1_flock);
@@ -977,6 +1099,7 @@ int w1_attach_slave_device(struct w1_master *dev, struct w1_reg_num *rn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void w1_slave_detach(struct w1_slave *sl)
 {
 	struct w1_netlink_msg msg;
@@ -1000,6 +1123,8 @@ void w1_slave_detach(struct w1_slave *sl)
 	wait_for_completion(&sl->released);
 	kfree(sl);
 =======
+=======
+>>>>>>> v3.18
 int w1_unref_slave(struct w1_slave *sl)
 {
 	struct w1_master *dev = sl->master;
@@ -1043,6 +1168,9 @@ int w1_slave_detach(struct w1_slave *sl)
 	if (destroy_now)
 		destroy_now = !w1_unref_slave(sl);
 	return destroy_now ? 0 : -EBUSY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1073,7 +1201,11 @@ struct w1_slave *w1_search_slave(struct w1_reg_num *id)
 	mutex_lock(&w1_mlock);
 	list_for_each_entry(dev, &w1_masters, w1_master_entry) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock(&dev->mutex);
+=======
+		mutex_lock(&dev->list_mutex);
+>>>>>>> v3.18
 =======
 		mutex_lock(&dev->list_mutex);
 >>>>>>> v3.18
@@ -1088,7 +1220,11 @@ struct w1_slave *w1_search_slave(struct w1_reg_num *id)
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&dev->mutex);
+=======
+		mutex_unlock(&dev->list_mutex);
+>>>>>>> v3.18
 =======
 		mutex_unlock(&dev->list_mutex);
 >>>>>>> v3.18
@@ -1112,6 +1248,10 @@ void w1_reconnect_slaves(struct w1_family *f, int attach)
 			"for family %02x.\n", dev->name, f->fid);
 		mutex_lock(&dev->mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mutex_lock(&dev->list_mutex);
+>>>>>>> v3.18
 =======
 		mutex_lock(&dev->list_mutex);
 >>>>>>> v3.18
@@ -1127,11 +1267,14 @@ void w1_reconnect_slaves(struct w1_family *f, int attach)
 				struct w1_reg_num rn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				memcpy(&rn, &sl->reg_num, sizeof(rn));
 				w1_slave_detach(sl);
 
 				w1_attach_slave_device(dev, &rn);
 =======
+=======
+>>>>>>> v3.18
 				mutex_unlock(&dev->list_mutex);
 				memcpy(&rn, &sl->reg_num, sizeof(rn));
 				/* If it was already in use let the automatic
@@ -1140,12 +1283,19 @@ void w1_reconnect_slaves(struct w1_family *f, int attach)
 				if (!w1_slave_detach(sl))
 					w1_attach_slave_device(dev, &rn);
 				mutex_lock(&dev->list_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
 		dev_dbg(&dev->dev, "Reconnecting slaves in device %s "
 			"has been finished.\n", dev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mutex_unlock(&dev->list_mutex);
+>>>>>>> v3.18
 =======
 		mutex_unlock(&dev->list_mutex);
 >>>>>>> v3.18
@@ -1167,7 +1317,11 @@ void w1_slave_found(struct w1_master *dev, u64 rn)
 	sl = w1_slave_search_device(dev, tmp);
 	if (sl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_bit(W1_SLAVE_ACTIVE, (long *)&sl->flags);
+=======
+		set_bit(W1_SLAVE_ACTIVE, &sl->flags);
+>>>>>>> v3.18
 =======
 		set_bit(W1_SLAVE_ACTIVE, &sl->flags);
 >>>>>>> v3.18
@@ -1181,14 +1335,20 @@ void w1_slave_found(struct w1_master *dev, u64 rn)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Performs a ROM Search & registers any devices found.
 =======
+=======
+>>>>>>> v3.18
  * w1_search() - Performs a ROM Search & registers any devices found.
  * @dev: The master device to search
  * @search_type: W1_SEARCH to search all devices, or W1_ALARM_SEARCH
  * to return only devices in the alarmed state
  * @cb: Function to call when a device is found
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * The 1-wire search is a simple binary tree search.
  * For each bit of the address, we read two bits and write one bit.
@@ -1200,8 +1360,11 @@ void w1_slave_found(struct w1_master *dev, u64 rn)
  * See "Application note 187 1-wire search algorithm" at www.maxim-ic.com
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev        The master device to search
  * @cb         Function to call when a device is found
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -1215,7 +1378,12 @@ void w1_search(struct w1_master *dev, u8 search_type, w1_slave_found_callback cb
 
 	search_bit = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rn = last_rn = 0;
+=======
+	rn = dev->search_id;
+	last_rn = 0;
+>>>>>>> v3.18
 =======
 	rn = dev->search_id;
 	last_rn = 0;
@@ -1267,7 +1435,11 @@ void w1_search(struct w1_master *dev, u8 search_type, w1_slave_found_callback cb
 				search_bit = ((last_rn >> i) & 0x1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/** Read two bits and write one bit */
+=======
+			/* Read two bits and write one bit */
+>>>>>>> v3.18
 =======
 			/* Read two bits and write one bit */
 >>>>>>> v3.18
@@ -1286,8 +1458,12 @@ void w1_search(struct w1_master *dev, u8 search_type, w1_slave_found_callback cb
 			rn |= (tmp64 << i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* ensure we're called from kthread and not by netlink callback */
 			if (!dev->priv && kthread_should_stop()) {
+=======
+			if (test_bit(W1_ABORT_SEARCH, &dev->flags)) {
+>>>>>>> v3.18
 =======
 			if (test_bit(W1_ABORT_SEARCH, &dev->flags)) {
 >>>>>>> v3.18
@@ -1300,12 +1476,15 @@ void w1_search(struct w1_master *dev, u8 search_type, w1_slave_found_callback cb
 
 		if ( (triplet_ret & 0x03) != 0x03 ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ( (desc_bit == last_zero) || (last_zero < 0))
 				last_device = 1;
 			desc_bit = last_zero;
 			cb(dev, rn);
 		}
 =======
+=======
+>>>>>>> v3.18
 			if ((desc_bit == last_zero) || (last_zero < 0)) {
 				last_device = 1;
 				dev->search_id = 0;
@@ -1330,6 +1509,9 @@ void w1_search(struct w1_master *dev, u8 search_type, w1_slave_found_callback cb
 				dev->max_slave_count);
 			set_bit(W1_WARN_MAX_COUNT, &dev->flags);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1339,6 +1521,7 @@ void w1_search_process_cb(struct w1_master *dev, u8 search_type,
 {
 	struct w1_slave *sl, *sln;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each_entry(sl, &dev->slist, w1_slave_entry)
 		clear_bit(W1_SLAVE_ACTIVE, (long *)&sl->flags);
@@ -1352,6 +1535,8 @@ void w1_search_process_cb(struct w1_master *dev, u8 search_type,
 			sl->ttl = dev->slave_ttl;
 	}
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&dev->list_mutex);
 	list_for_each_entry(sl, &dev->slist, w1_slave_entry)
 		clear_bit(W1_SLAVE_ACTIVE, &sl->flags);
@@ -1370,6 +1555,9 @@ void w1_search_process_cb(struct w1_master *dev, u8 search_type,
 			sl->ttl = dev->slave_ttl;
 	}
 	mutex_unlock(&dev->list_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (dev->search_count > 0)
@@ -1382,7 +1570,10 @@ static void w1_search_process(struct w1_master *dev, u8 search_type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * w1_process_callbacks() - execute each dev->async_list callback entry
  * @dev: w1_master device
@@ -1411,6 +1602,9 @@ int w1_process_callbacks(struct w1_master *dev)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int w1_process(void *data)
 {
@@ -1420,16 +1614,22 @@ int w1_process(void *data)
 	 */
 	const unsigned long jtime = msecs_to_jiffies(w1_timeout * 1000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	while (!kthread_should_stop()) {
 		if (dev->search_count) {
 =======
+=======
+>>>>>>> v3.18
 	/* remainder if it woke up early */
 	unsigned long jremain = 0;
 
 	for (;;) {
 
 		if (!jremain && dev->search_count) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			mutex_lock(&dev->mutex);
 			w1_search_process(dev, W1_SEARCH);
@@ -1437,10 +1637,13 @@ int w1_process(void *data)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		try_to_freeze();
 		__set_current_state(TASK_INTERRUPTIBLE);
 
 =======
+=======
+>>>>>>> v3.18
 		mutex_lock(&dev->list_mutex);
 		/* Note, w1_process_callback drops the lock while processing,
 		 * but locks it again before returning.
@@ -1461,20 +1664,29 @@ int w1_process(void *data)
 		 */
 		mutex_unlock(&dev->list_mutex);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (kthread_should_stop())
 			break;
 
 		/* Only sleep when the search is active. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dev->search_count)
 			schedule_timeout(jtime);
 =======
+=======
+>>>>>>> v3.18
 		if (dev->search_count) {
 			if (!jremain)
 				jremain = jtime;
 			jremain = schedule_timeout(jremain);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else
 			schedule();
@@ -1490,7 +1702,11 @@ static int __init w1_init(void)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Driver for 1-wire Dallas network protocol.\n");
+=======
+	pr_info("Driver for 1-wire Dallas network protocol.\n");
+>>>>>>> v3.18
 =======
 	pr_info("Driver for 1-wire Dallas network protocol.\n");
 >>>>>>> v3.18
@@ -1500,7 +1716,11 @@ static int __init w1_init(void)
 	retval = bus_register(&w1_bus_type);
 	if (retval) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to register bus. err=%d.\n", retval);
+=======
+		pr_err("Failed to register bus. err=%d.\n", retval);
+>>>>>>> v3.18
 =======
 		pr_err("Failed to register bus. err=%d.\n", retval);
 >>>>>>> v3.18
@@ -1510,8 +1730,12 @@ static int __init w1_init(void)
 	retval = driver_register(&w1_master_driver);
 	if (retval) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 			"Failed to register master driver. err=%d.\n",
+=======
+		pr_err("Failed to register master driver. err=%d.\n",
+>>>>>>> v3.18
 =======
 		pr_err("Failed to register master driver. err=%d.\n",
 >>>>>>> v3.18
@@ -1522,8 +1746,12 @@ static int __init w1_init(void)
 	retval = driver_register(&w1_slave_driver);
 	if (retval) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 			"Failed to register slave driver. err=%d.\n",
+=======
+		pr_err("Failed to register slave driver. err=%d.\n",
+>>>>>>> v3.18
 =======
 		pr_err("Failed to register slave driver. err=%d.\n",
 >>>>>>> v3.18

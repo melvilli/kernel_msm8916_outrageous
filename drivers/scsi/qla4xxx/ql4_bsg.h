@@ -16,7 +16,10 @@
 #define QLISCSI_VND_RESTORE_DEFAULTS	6
 #define QLISCSI_VND_GET_ACB		7
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define QLISCSI_VND_DIAG_TEST		8
 
 /* QLISCSI_VND_DIAG_CMD sub code */
@@ -30,6 +33,9 @@
 #define QL_DIAG_CMD_TEST_DMA_XFER	0x9	/* Only ISP4XXX */
 #define QL_DIAG_CMD_SELF_DDR_RW		0xC
 #define QL_DIAG_CMD_SELF_ONCHIP_MEM_RW	0xD
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

@@ -126,6 +126,10 @@ static struct platform_pwm_backlight_data zylonite_backlight_data = {
 	.dft_brightness	= 100,
 	.pwm_period_ns	= 10000,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio	= -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio	= -1,
 >>>>>>> v3.18
@@ -268,7 +272,11 @@ static inline void zylonite_init_mmc(void) {}
 
 #if defined(CONFIG_KEYBOARD_PXA27x) || defined(CONFIG_KEYBOARD_PXA27x_MODULE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int zylonite_matrix_key_map[] = {
+=======
+static const unsigned int zylonite_matrix_key_map[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int zylonite_matrix_key_map[] = {
 >>>>>>> v3.18
@@ -315,12 +323,15 @@ static const unsigned int zylonite_matrix_key_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data zylonite_keypad_info = {
 	.matrix_key_rows	= 8,
 	.matrix_key_cols	= 8,
 	.matrix_key_map		= zylonite_matrix_key_map,
 	.matrix_key_map_size	= ARRAY_SIZE(zylonite_matrix_key_map),
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data zylonite_matrix_keymap_data = {
 	.keymap			= zylonite_matrix_key_map,
 	.keymap_size		= ARRAY_SIZE(zylonite_matrix_key_map),
@@ -330,6 +341,9 @@ static struct pxa27x_keypad_platform_data zylonite_keypad_info = {
 	.matrix_key_rows	= 8,
 	.matrix_key_cols	= 8,
 	.matrix_keymap_data	= &zylonite_matrix_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.enable_rotary0		= 1,

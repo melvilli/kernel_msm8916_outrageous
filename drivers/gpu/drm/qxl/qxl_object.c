@@ -37,7 +37,10 @@ static void qxl_ttm_bo_destroy(struct ttm_buffer_object *tbo)
 
 	qxl_surface_evict(qdev, bo, false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qxl_fence_fini(&bo->fence);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&qdev->gem.mutex);
@@ -54,6 +57,7 @@ bool qxl_ttm_bo_is_qxl_bo(struct ttm_buffer_object *bo)
 	return false;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void qxl_ttm_placement_from_domain(struct qxl_bo *qbo, u32 domain)
 {
@@ -74,6 +78,8 @@ void qxl_ttm_placement_from_domain(struct qxl_bo *qbo, u32 domain)
 	qbo->placement.num_placement = c;
 	qbo->placement.num_busy_placement = c;
 =======
+=======
+>>>>>>> v3.18
 void qxl_ttm_placement_from_domain(struct qxl_bo *qbo, u32 domain, bool pinned)
 {
 	u32 c = 0;
@@ -96,13 +102,20 @@ void qxl_ttm_placement_from_domain(struct qxl_bo *qbo, u32 domain, bool pinned)
 		qbo->placements[i].fpfn = 0;
 		qbo->placements[i].lpfn = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 int qxl_bo_create(struct qxl_device *qdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  unsigned long size, bool kernel, u32 domain,
+=======
+		  unsigned long size, bool kernel, bool pinned, u32 domain,
+>>>>>>> v3.18
 =======
 		  unsigned long size, bool kernel, bool pinned, u32 domain,
 >>>>>>> v3.18
@@ -114,8 +127,11 @@ int qxl_bo_create(struct qxl_device *qdev,
 	int r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(qdev->mman.bdev.dev_mapping == NULL))
 		qdev->mman.bdev.dev_mapping = qdev->ddev->dev_mapping;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (kernel)
@@ -133,6 +149,7 @@ int qxl_bo_create(struct qxl_device *qdev,
 		return r;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bo->gem_base.driver_private = NULL;
 	bo->type = domain;
 	bo->pin_count = 0;
@@ -149,6 +166,8 @@ int qxl_bo_create(struct qxl_device *qdev,
 			&bo->placement, 0, !kernel, NULL, size,
 			NULL, &qxl_ttm_bo_destroy);
 =======
+=======
+>>>>>>> v3.18
 	bo->type = domain;
 	bo->pin_count = pinned ? 1 : 0;
 	bo->surface_id = 0;
@@ -162,6 +181,9 @@ int qxl_bo_create(struct qxl_device *qdev,
 	r = ttm_bo_init(&qdev->mman.bdev, &bo->tbo, size, type,
 			&bo->placement, 0, !kernel, NULL, size,
 			NULL, NULL, &qxl_ttm_bo_destroy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(r != 0)) {
 		if (r != -ERESTARTSYS)
@@ -280,7 +302,11 @@ int qxl_bo_pin(struct qxl_bo *bo, u32 domain, u64 *gpu_addr)
 {
 	struct qxl_device *qdev = (struct qxl_device *)bo->gem_base.dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int r, i;
+=======
+	int r;
+>>>>>>> v3.18
 =======
 	int r;
 >>>>>>> v3.18
@@ -292,9 +318,13 @@ int qxl_bo_pin(struct qxl_bo *bo, u32 domain, u64 *gpu_addr)
 		return 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qxl_ttm_placement_from_domain(bo, domain);
 	for (i = 0; i < bo->placement.num_placement; i++)
 		bo->placements[i] |= TTM_PL_FLAG_NO_EVICT;
+=======
+	qxl_ttm_placement_from_domain(bo, domain, true);
+>>>>>>> v3.18
 =======
 	qxl_ttm_placement_from_domain(bo, domain, true);
 >>>>>>> v3.18
@@ -323,7 +353,11 @@ int qxl_bo_unpin(struct qxl_bo *bo)
 		return 0;
 	for (i = 0; i < bo->placement.num_placement; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bo->placements[i] &= ~TTM_PL_FLAG_NO_EVICT;
+=======
+		bo->placements[i].flags &= ~TTM_PL_FLAG_NO_EVICT;
+>>>>>>> v3.18
 =======
 		bo->placements[i].flags &= ~TTM_PL_FLAG_NO_EVICT;
 >>>>>>> v3.18
@@ -381,6 +415,7 @@ int qxl_bo_check_id(struct qxl_device *qdev, struct qxl_bo *bo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qxl_bo_list_unreserve(struct qxl_reloc_list *reloc_list, bool failed)
 {
 	struct qxl_bo_list *entry, *sf;
@@ -427,6 +462,8 @@ int qxl_bo_list_add(struct qxl_reloc_list *reloc_list, struct qxl_bo *bo)
 		return ret;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 int qxl_surf_evict(struct qxl_device *qdev)
 {
 	return ttm_bo_evict_mm(&qdev->mman.bdev, TTM_PL_PRIV0);
@@ -435,5 +472,8 @@ int qxl_surf_evict(struct qxl_device *qdev)
 int qxl_vram_evict(struct qxl_device *qdev)
 {
 	return ttm_bo_evict_mm(&qdev->mman.bdev, TTM_PL_VRAM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -3,7 +3,11 @@
  *
  * Based on the r8180 driver, which is:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2004-2005 Andrea Merello <andreamrl@tiscali.it>, et al.
+=======
+ * Copyright 2004-2005 Andrea Merello <andrea.merello@gmail.com>, et al.
+>>>>>>> v3.18
 =======
  * Copyright 2004-2005 Andrea Merello <andrea.merello@gmail.com>, et al.
 >>>>>>> v3.18
@@ -33,7 +37,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ioport.h>
@@ -96,10 +103,13 @@
 	.driver_data = (kernel_ulong_t)&(cfg)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define irqreturn_type irqreturn_t
 
 #define rtl8192_interrupt(x, y, z) rtl8192_interrupt_rsl(x, y)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RTL_MAX_SCAN_SIZE 128
@@ -203,6 +213,11 @@
 #define MAX_TX_QUEUE_COUNT			9
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int hwwep;
+
+>>>>>>> v3.18
 =======
 extern int hwwep;
 
@@ -601,7 +616,10 @@ struct r8192_priv {
 	struct rt_firmware			*pFirmware;
 	enum rtl819x_loopback LoopbackMode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum firmware_source firmware_source;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1063,8 +1081,11 @@ void check_rfctrl_gpio_timer(unsigned long data);
 
 void rtl8192_hw_wakeup_wq(void *data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_type rtl8192_interrupt(int irq, void *netdev, struct pt_regs *regs);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 short rtl8192_pci_initdescring(struct net_device *dev);

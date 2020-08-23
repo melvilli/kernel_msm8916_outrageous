@@ -16,10 +16,13 @@ ccflags-y += -nostdlib -Wl,-soname=linux-vdso.so.1 \
 		$(call cc-ldoption, -Wl$(comma)--hash-style=sysv)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Workaround for bare-metal (ELF) toolchains that neglect to pass -shared
 # down to collect2, resulting in silent corruption of the vDSO image.
 ccflags-y += -Wl,-shared
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-y += vdso.o
@@ -51,6 +54,7 @@ $(obj)/vdso-offsets.h: $(obj)/vdso.so.dbg FORCE
 
 # Assembly rules for the .S files
 <<<<<<< HEAD
+<<<<<<< HEAD
 $(obj-vdso): %.o: %.S
 	$(call if_changed_dep,vdsoas)
 
@@ -59,6 +63,8 @@ quiet_cmd_vdsold = VDSOL $@
       cmd_vdsold = $(CC) $(c_flags) -Wl,-n -Wl,-T $^ -o $@
 quiet_cmd_vdsoas = VDSOA $@
 =======
+=======
+>>>>>>> v3.18
 $(obj-vdso): %.o: %.S FORCE
 	$(call if_changed_dep,vdsoas)
 
@@ -66,6 +72,9 @@ $(obj-vdso): %.o: %.S FORCE
 quiet_cmd_vdsold = VDSOL   $@
       cmd_vdsold = $(CC) $(c_flags) -Wl,-n -Wl,-T $^ -o $@
 quiet_cmd_vdsoas = VDSOA   $@
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       cmd_vdsoas = $(CC) $(a_flags) -c -o $@ $<
 

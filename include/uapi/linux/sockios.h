@@ -66,7 +66,10 @@
 #define	SIOCSIFHWBROADCAST	0x8937	/* set hardware broadcast addr	*/
 #define SIOCGIFCOUNT	0x8938		/* get number of devices */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIOCKILLADDR	0x8939		/* kill sockets with this local addr */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -130,7 +133,12 @@
 
 /* hardware time stamping: parameters in linux/net_tstamp.h */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIOCSHWTSTAMP   0x89b0
+=======
+#define SIOCSHWTSTAMP	0x89b0		/* set and get config		*/
+#define SIOCGHWTSTAMP	0x89b1		/* get config			*/
+>>>>>>> v3.18
 =======
 #define SIOCSHWTSTAMP	0x89b0		/* set and get config		*/
 #define SIOCGHWTSTAMP	0x89b1		/* get config			*/

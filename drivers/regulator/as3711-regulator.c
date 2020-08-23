@@ -23,13 +23,17 @@
 struct as3711_regulator_info {
 	struct regulator_desc	desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		max_uV;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
 
 struct as3711_regulator {
 	struct as3711_regulator_info *reg_info;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct regulator_dev *rdev;
 };
@@ -134,6 +138,10 @@ static int as3711_map_voltage_sd(struct regulator_dev *rdev,
 };
 
 >>>>>>> v3.18
+=======
+};
+
+>>>>>>> v3.18
 /*
  * The regulator API supports 4 modes of operataion: FAST, NORMAL, IDLE and
  * STANDBY. We map them in the following way to AS3711 SD1-4 DCDC modes:
@@ -189,6 +197,7 @@ static unsigned int as3711_get_mode_sd(struct regulator_dev *rdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int as3711_map_voltage_aldo(struct regulator_dev *rdev,
 				  int min_uV, int max_uV)
 {
@@ -221,6 +230,8 @@ static int as3711_map_voltage_dldo(struct regulator_dev *rdev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct regulator_ops as3711_sd_ops = {
 	.is_enabled		= regulator_is_enabled_regmap,
 	.enable			= regulator_enable_regmap,
@@ -228,8 +239,13 @@ static struct regulator_ops as3711_sd_ops = {
 	.get_voltage_sel	= regulator_get_voltage_sel_regmap,
 	.set_voltage_sel	= regulator_set_voltage_sel_regmap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.list_voltage		= as3711_list_voltage_sd,
 	.map_voltage		= as3711_map_voltage_sd,
+=======
+	.list_voltage		= regulator_list_voltage_linear_range,
+	.map_voltage		= regulator_map_voltage_linear_range,
+>>>>>>> v3.18
 =======
 	.list_voltage		= regulator_list_voltage_linear_range,
 	.map_voltage		= regulator_map_voltage_linear_range,
@@ -245,8 +261,13 @@ static struct regulator_ops as3711_aldo_ops = {
 	.get_voltage_sel	= regulator_get_voltage_sel_regmap,
 	.set_voltage_sel	= regulator_set_voltage_sel_regmap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.list_voltage		= as3711_list_voltage_aldo,
 	.map_voltage		= as3711_map_voltage_aldo,
+=======
+	.list_voltage		= regulator_list_voltage_linear_range,
+	.map_voltage		= regulator_map_voltage_linear_range,
+>>>>>>> v3.18
 =======
 	.list_voltage		= regulator_list_voltage_linear_range,
 	.map_voltage		= regulator_map_voltage_linear_range,
@@ -259,6 +280,7 @@ static struct regulator_ops as3711_dldo_ops = {
 	.disable		= regulator_disable_regmap,
 	.get_voltage_sel	= regulator_get_voltage_sel_regmap,
 	.set_voltage_sel	= regulator_set_voltage_sel_regmap,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.list_voltage		= as3711_list_voltage_dldo,
 	.map_voltage		= as3711_map_voltage_dldo,
@@ -296,6 +318,8 @@ static struct as3711_regulator_info as3711_reg_info[] = {
 	AS3711_REG(LDO_7, LDO_7_VOLTAGE, 7, 0x3f, 0, 900000, 3300000, dldo),
 	AS3711_REG(LDO_8, LDO_8_VOLTAGE, 7, 0x3f, 0, 900000, 3300000, dldo),
 =======
+=======
+>>>>>>> v3.18
 	.list_voltage		= regulator_list_voltage_linear_range,
 	.map_voltage		= regulator_map_voltage_linear_range,
 };
@@ -347,6 +371,9 @@ static struct as3711_regulator_info as3711_reg_info[] = {
 	AS3711_REG(LDO_6, LDO_6_VOLTAGE, 7, 0x3f, dldo),
 	AS3711_REG(LDO_7, LDO_7_VOLTAGE, 7, 0x3f, dldo),
 	AS3711_REG(LDO_8, LDO_8_VOLTAGE, 7, 0x3f, dldo),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* StepUp output voltage depends on supplying regulator */
 };
@@ -375,7 +402,11 @@ static int as3711_regulator_parse_dt(struct device *dev,
 	struct as3711_regulator_pdata *pdata = dev_get_platdata(dev);
 	struct device_node *regulators =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		of_find_node_by_name(dev->parent->of_node, "regulators");
+=======
+		of_get_child_by_name(dev->parent->of_node, "regulators");
+>>>>>>> v3.18
 =======
 		of_get_child_by_name(dev->parent->of_node, "regulators");
 >>>>>>> v3.18
@@ -409,7 +440,10 @@ static int as3711_regulator_probe(struct platform_device *pdev)
 	struct as3711_regulator_pdata *pdata = dev_get_platdata(&pdev->dev);
 	struct as3711 *as3711 = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_init_data *reg_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct regulator_config config = {.dev = &pdev->dev,};
@@ -437,6 +471,7 @@ static int as3711_regulator_probe(struct platform_device *pdev)
 	regs = devm_kzalloc(&pdev->dev, AS3711_REGULATOR_NUM *
 			sizeof(struct as3711_regulator), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!regs) {
 		dev_err(&pdev->dev, "Memory allocation failed exiting..\n");
 		return -ENOMEM;
@@ -454,6 +489,8 @@ static int as3711_regulator_probe(struct platform_device *pdev)
 
 		config.init_data = reg_data;
 =======
+=======
+>>>>>>> v3.18
 	if (!regs)
 		return -ENOMEM;
 
@@ -462,11 +499,15 @@ static int as3711_regulator_probe(struct platform_device *pdev)
 		reg->reg_info = ri;
 
 		config.init_data = pdata->init_data[id];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		config.driver_data = reg;
 		config.regmap = as3711->regmap;
 		config.of_node = of_node[id];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		rdev = regulator_register(&ri->desc, &config);
 		if (IS_ERR(rdev)) {
@@ -496,6 +537,8 @@ static int as3711_regulator_remove(struct platform_device *pdev)
 		regulator_unregister(regs[id].rdev);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		rdev = devm_regulator_register(&pdev->dev, &ri->desc, &config);
 		if (IS_ERR(rdev)) {
 			dev_err(&pdev->dev, "Failed to register regulator %s\n",
@@ -505,6 +548,9 @@ static int as3711_regulator_remove(struct platform_device *pdev)
 	}
 	platform_set_drvdata(pdev, regs);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -515,7 +561,10 @@ static struct platform_driver as3711_regulator_driver = {
 	},
 	.probe		= as3711_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= as3711_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

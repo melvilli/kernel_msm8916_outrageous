@@ -88,6 +88,7 @@ struct sk_buff *tipc_nametbl_get(const void *req_tlv_area, int req_tlv_space);
 u32 tipc_nametbl_translate(u32 type, u32 instance, u32 *node);
 int tipc_nametbl_mc_translate(u32 type, u32 lower, u32 upper, u32 limit,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct tipc_port_list *dports);
 struct publication *tipc_nametbl_publish(u32 type, u32 lower, u32 upper,
 				    u32 scope, u32 port_ref, u32 key);
@@ -97,6 +98,8 @@ struct publication *tipc_nametbl_insert_publ(u32 type, u32 lower, u32 upper,
 struct publication *tipc_nametbl_remove_publ(u32 type, u32 lower,
 					u32 node, u32 ref, u32 key);
 =======
+=======
+>>>>>>> v3.18
 			      struct tipc_port_list *dports);
 struct publication *tipc_nametbl_publish(u32 type, u32 lower, u32 upper,
 					 u32 scope, u32 port_ref, u32 key);
@@ -106,6 +109,9 @@ struct publication *tipc_nametbl_insert_publ(u32 type, u32 lower, u32 upper,
 					     u32 key);
 struct publication *tipc_nametbl_remove_publ(u32 type, u32 lower, u32 node,
 					     u32 ref, u32 key);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void tipc_nametbl_subscribe(struct tipc_subscription *s);
 void tipc_nametbl_unsubscribe(struct tipc_subscription *s);

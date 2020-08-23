@@ -20,9 +20,15 @@ extern struct phy_device *of_phy_connect(struct net_device *dev,
 					 void (*hndlr)(struct net_device *),
 					 u32 flags, phy_interface_t iface);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct phy_device *of_phy_connect_fixed_link(struct net_device *dev,
 					 void (*hndlr)(struct net_device *),
 					 phy_interface_t iface);
+=======
+struct phy_device *of_phy_attach(struct net_device *dev,
+				 struct device_node *phy_np, u32 flags,
+				 phy_interface_t iface);
+>>>>>>> v3.18
 =======
 struct phy_device *of_phy_attach(struct net_device *dev,
 				 struct device_node *phy_np, u32 flags,
@@ -35,14 +41,20 @@ extern struct mii_bus *of_mdio_find_bus(struct device_node *mdio_np);
 static inline int of_mdiobus_register(struct mii_bus *mdio, struct device_node *np)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -ENOSYS;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Fall back to the non-DT function to register a bus.
 	 * This way, we don't have to keep compat bits around in drivers.
 	 */
 
 	return mdiobus_register(mdio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -60,9 +72,15 @@ static inline struct phy_device *of_phy_connect(struct net_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct phy_device *of_phy_connect_fixed_link(struct net_device *dev,
 							   void (*hndlr)(struct net_device *),
 							   phy_interface_t iface)
+=======
+static inline struct phy_device *of_phy_attach(struct net_device *dev,
+					       struct device_node *phy_np,
+					       u32 flags, phy_interface_t iface)
+>>>>>>> v3.18
 =======
 static inline struct phy_device *of_phy_attach(struct net_device *dev,
 					       struct device_node *phy_np,
@@ -79,7 +97,10 @@ static inline struct mii_bus *of_mdio_find_bus(struct device_node *mdio_np)
 #endif /* CONFIG_OF */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_OF) && defined(CONFIG_FIXED_PHY)
 extern int of_phy_register_fixed_link(struct device_node *np);
 extern bool of_phy_is_fixed_link(struct device_node *np);
@@ -95,5 +116,8 @@ static inline bool of_phy_is_fixed_link(struct device_node *np)
 #endif
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __LINUX_OF_MDIO_H */

@@ -23,21 +23,28 @@
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_platform.h>
 #include <linux/platform_data/gpio-rcar.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/irqchip.h>
 #include <linux/irqchip/arm-gic.h>
 #include <linux/of_platform.h>
 #include <linux/platform_data/dma-rcar-hpbdma.h>
 #include <linux/platform_data/gpio-rcar.h>
 #include <linux/platform_data/irq-renesas-intc-irqpin.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/delay.h>
 #include <linux/input.h>
 #include <linux/io.h>
 #include <linux/serial_sci.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/sh_intc.h>
 #include <linux/sh_timer.h>
@@ -47,6 +54,8 @@
 #include <mach/r8a7779.h>
 #include <mach/common.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/sh_timer.h>
 #include <linux/dma-mapping.h>
 #include <linux/usb/otg.h>
@@ -55,6 +64,9 @@
 #include <linux/usb/ohci_pdriver.h>
 #include <linux/pm_runtime.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
@@ -63,11 +75,17 @@
 #include <asm/hardware/cache-l2x0.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "common.h"
 #include "irqs.h"
 #include "r8a7779.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct map_desc r8a7779_io_desc[] __initdata = {
 	/* 2M entity map for 0xf0000000 (MPCORE) */
@@ -92,6 +110,7 @@ void __init r8a7779_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct resource r8a7779_pfc_resources[] = {
 	[0] = {
 		.start	= 0xfffc0000,
@@ -99,6 +118,8 @@ static struct resource r8a7779_pfc_resources[] = {
 		.flags	= IORESOURCE_MEM,
 	},
 =======
+=======
+>>>>>>> v3.18
 /* IRQ */
 #define INT2SMSKCR0 IOMEM(0xfe7822a0)
 #define INT2SMSKCR1 IOMEM(0xfe7822a4)
@@ -159,6 +180,9 @@ void __init r8a7779_init_irq_extpin(int irlm)
 /* PFC/GPIO */
 static struct resource r8a7779_pfc_resources[] = {
 	DEFINE_RES_MEM(0xfffc0000, 0x023c),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -172,6 +196,7 @@ static struct platform_device r8a7779_pfc_device = {
 #define R8A7779_GPIO(idx, npins) \
 static struct resource r8a7779_gpio##idx##_resources[] = {		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[0] = {								\
 		.start	= 0xffc40000 + 0x1000 * (idx),			\
 		.end	= 0xffc4002b + 0x1000 * (idx),			\
@@ -181,6 +206,10 @@ static struct resource r8a7779_gpio##idx##_resources[] = {		\
 		.start	= gic_iid(0xad + (idx)),			\
 		.flags	= IORESOURCE_IRQ,				\
 	}								\
+=======
+	DEFINE_RES_MEM(0xffc40000 + (0x1000 * (idx)), 0x002c),		\
+	DEFINE_RES_IRQ(gic_iid(0xad + (idx))),				\
+>>>>>>> v3.18
 =======
 	DEFINE_RES_MEM(0xffc40000 + (0x1000 * (idx)), 0x002c),		\
 	DEFINE_RES_IRQ(gic_iid(0xad + (idx))),				\
@@ -229,6 +258,7 @@ void __init r8a7779_pinmux_init(void)
 			    ARRAY_SIZE(r8a7779_pinctrl_devices));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct plat_sci_port scif0_platform_data = {
 	.mapbase	= 0xffe40000,
@@ -392,6 +422,8 @@ static struct platform_device tmu01_device = {
 	.resource	= tmu01_resources,
 	.num_resources	= ARRAY_SIZE(tmu01_resources),
 =======
+=======
+>>>>>>> v3.18
 /* SCIF */
 #define R8A7779_SCIF(index, baseaddr, irq)			\
 static struct plat_sci_port scif##index##_platform_data = {	\
@@ -442,6 +474,9 @@ static struct platform_device tmu0_device = {
 	},
 	.resource	= tmu0_resources,
 	.num_resources	= ARRAY_SIZE(tmu0_resources),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -543,6 +578,7 @@ static struct platform_device sata_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Ether */
 static struct resource ether_resources[] = {
 	{
@@ -552,6 +588,8 @@ static struct resource ether_resources[] = {
 	}, {
 		.start	= gic_iid(0xb4),
 =======
+=======
+>>>>>>> v3.18
 /* USB */
 static struct usb_phy *phy;
 
@@ -686,14 +724,20 @@ static struct resource ohci1_resources[] = {
 	},
 	[1] = {
 		.start	= gic_iid(0x4d),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.flags	= IORESOURCE_IRQ,
 	},
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_device *r8a7779_devices_dt[] __initdata = {
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device ohci1_device = {
 	.name	= "ohci-platform",
 	.id	= 1,
@@ -863,6 +907,9 @@ static struct platform_device *r8a7779_early_devices[] __initdata = {
 };
 
 static struct platform_device *r8a7779_standard_devices[] __initdata = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&scif0_device,
 	&scif1_device,
@@ -871,11 +918,14 @@ static struct platform_device *r8a7779_standard_devices[] __initdata = {
 	&scif4_device,
 	&scif5_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&tmu00_device,
 	&tmu01_device,
 };
 
 static struct platform_device *r8a7779_late_devices[] __initdata = {
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	&i2c0_device,
@@ -889,8 +939,13 @@ void __init r8a7779_add_standard_devices(void)
 {
 #ifdef CONFIG_CACHE_L2X0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Early BRESP enable, Shared attribute override enable, 64K*16way */
 	l2x0_init(IOMEM(0xf0100000), 0x40470000, 0x82000fff);
+=======
+	/* Shared attribute override enable, 64K*16way */
+	l2x0_init(IOMEM(0xf0100000), 0x00400000, 0xc20f0fff);
+>>>>>>> v3.18
 =======
 	/* Shared attribute override enable, 64K*16way */
 	l2x0_init(IOMEM(0xf0100000), 0x00400000, 0xc20f0fff);
@@ -900,6 +955,7 @@ void __init r8a7779_add_standard_devices(void)
 
 	r8a7779_init_pm_domains();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_add_devices(r8a7779_devices_dt,
 			    ARRAY_SIZE(r8a7779_devices_dt));
@@ -924,19 +980,29 @@ void __init r8a7779_earlytimer_init(void)
 	shmobile_earlytimer_init();
 	r8a7779_register_twd();
 =======
+=======
+>>>>>>> v3.18
 	platform_add_devices(r8a7779_early_devices,
 			    ARRAY_SIZE(r8a7779_early_devices));
 	platform_add_devices(r8a7779_standard_devices,
 			    ARRAY_SIZE(r8a7779_standard_devices));
 	r8a7779_register_hpb_dmae();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void __init r8a7779_add_early_devices(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	early_platform_add_devices(r8a7779_devices_dt,
 				   ARRAY_SIZE(r8a7779_devices_dt));
+=======
+	early_platform_add_devices(r8a7779_early_devices,
+				   ARRAY_SIZE(r8a7779_early_devices));
+>>>>>>> v3.18
 =======
 	early_platform_add_devices(r8a7779_early_devices,
 				   ARRAY_SIZE(r8a7779_early_devices));
@@ -960,6 +1026,7 @@ void __init r8a7779_add_early_devices(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USE_OF
 void __init r8a7779_init_delay(void)
 {
@@ -980,6 +1047,8 @@ void __init r8a7779_add_standard_devices_dt(void)
 	of_platform_populate(NULL, of_default_bus_match_table,
 			     r8a7779_auxdata_lookup, NULL);
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device *r8a7779_late_devices[] __initdata = {
 	&ehci0_device,
 	&ehci1_device,
@@ -1037,6 +1106,9 @@ u32 __init r8a7779_read_mode_pins(void)
 	}
 
 	return mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1048,11 +1120,17 @@ static const char *r8a7779_compat_dt[] __initdata = {
 DT_MACHINE_START(R8A7779_DT, "Generic R8A7779 (Flattened Device Tree)")
 	.map_io		= r8a7779_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_early	= r8a7779_init_delay,
 	.nr_irqs	= NR_IRQS_LEGACY,
 	.init_irq	= r8a7779_init_irq_dt,
 	.init_machine	= r8a7779_add_standard_devices_dt,
 	.init_time	= shmobile_timer_init,
+=======
+	.init_early	= shmobile_init_delay,
+	.init_irq	= r8a7779_init_irq_dt,
+	.init_late	= shmobile_init_late,
+>>>>>>> v3.18
 =======
 	.init_early	= shmobile_init_delay,
 	.init_irq	= r8a7779_init_irq_dt,

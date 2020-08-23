@@ -2512,8 +2512,13 @@ static void asc_prt_scsi_host(struct Scsi_Host *s)
 
 	printk("Scsi_Host at addr 0x%p, device %s\n", s, dev_name(boardp->dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(" host_busy %u, host_no %d, last_reset %d,\n",
 	       s->host_busy, s->host_no, (unsigned)s->last_reset);
+=======
+	printk(" host_busy %u, host_no %d,\n",
+	       atomic_read(&s->host_busy), s->host_no);
+>>>>>>> v3.18
 =======
 	printk(" host_busy %u, host_no %d,\n",
 	       atomic_read(&s->host_busy), s->host_no);
@@ -3351,8 +3356,13 @@ static void asc_prt_driver_conf(struct seq_file *m, struct Scsi_Host *shost)
 
 	seq_printf(m,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   " host_busy %u, last_reset %lu, max_id %u, max_lun %u, max_channel %u\n",
 		   shost->host_busy, shost->last_reset, shost->max_id,
+=======
+		   " host_busy %u, max_id %u, max_lun %llu, max_channel %u\n",
+		   atomic_read(&shost->host_busy), shost->max_id,
+>>>>>>> v3.18
 =======
 		   " host_busy %u, max_id %u, max_lun %llu, max_channel %u\n",
 		   atomic_read(&shost->host_busy), shost->max_id,

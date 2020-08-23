@@ -36,7 +36,10 @@ bool vmw_fifo_have_3d(struct vmw_private *dev_priv)
 	const struct vmw_fifo_state *fifo = &dev_priv->fifo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!(dev_priv->capabilities & SVGA_CAP_3D))
 		return false;
 
@@ -54,6 +57,9 @@ bool vmw_fifo_have_3d(struct vmw_private *dev_priv)
 		return (result != 0);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(dev_priv->capabilities & SVGA_CAP_EXTENDED_FIFO))
 		return false;
@@ -164,6 +170,7 @@ int vmw_fifo_init(struct vmw_private *dev_priv, struct vmw_fifo_state *fifo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void vmw_fifo_ping_host(struct vmw_private *dev_priv, uint32_t reason)
 {
 	__le32 __iomem *fifo_mem = dev_priv->mmio_virt;
@@ -171,17 +178,25 @@ void vmw_fifo_ping_host(struct vmw_private *dev_priv, uint32_t reason)
 	mutex_lock(&dev_priv->hw_mutex);
 
 =======
+=======
+>>>>>>> v3.18
 void vmw_fifo_ping_host_locked(struct vmw_private *dev_priv, uint32_t reason)
 {
 	__le32 __iomem *fifo_mem = dev_priv->mmio_virt;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(ioread32(fifo_mem + SVGA_FIFO_BUSY) == 0)) {
 		iowrite32(1, fifo_mem + SVGA_FIFO_BUSY);
 		vmw_write(dev_priv, SVGA_REG_SYNC, reason);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }
 
 void vmw_fifo_ping_host(struct vmw_private *dev_priv, uint32_t reason)
@@ -189,6 +204,9 @@ void vmw_fifo_ping_host(struct vmw_private *dev_priv, uint32_t reason)
 	mutex_lock(&dev_priv->hw_mutex);
 
 	vmw_fifo_ping_host_locked(dev_priv, reason);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&dev_priv->hw_mutex);
@@ -406,8 +424,11 @@ void *vmw_fifo_reserve(struct vmw_private *dev_priv, uint32_t bytes)
 			else {
 				fifo_state->dynamic_buffer = vmalloc(bytes);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (!fifo_state->dynamic_buffer)
 					goto out_err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				return fifo_state->dynamic_buffer;
@@ -555,7 +576,12 @@ out_err:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * vmw_fifo_emit_dummy_query - emits a dummy query to the fifo.
+=======
+ * vmw_fifo_emit_dummy_legacy_query - emits a dummy query to the fifo using
+ * legacy query commands.
+>>>>>>> v3.18
 =======
  * vmw_fifo_emit_dummy_legacy_query - emits a dummy query to the fifo using
  * legacy query commands.
@@ -564,6 +590,7 @@ out_err:
  * @dev_priv: The device private structure.
  * @cid: The hardware context id used for the query.
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * This function is used to emit a dummy occlusion query with
  * no primitives rendered between query begin and query end.
@@ -579,10 +606,15 @@ out_err:
 int vmw_fifo_emit_dummy_query(struct vmw_private *dev_priv,
 			      uint32_t cid)
 =======
+=======
+>>>>>>> v3.18
  * See the vmw_fifo_emit_dummy_query documentation.
  */
 static int vmw_fifo_emit_dummy_legacy_query(struct vmw_private *dev_priv,
 					    uint32_t cid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/*
@@ -622,7 +654,10 @@ static int vmw_fifo_emit_dummy_legacy_query(struct vmw_private *dev_priv,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * vmw_fifo_emit_dummy_gb_query - emits a dummy query to the fifo using
@@ -695,4 +730,7 @@ int vmw_fifo_emit_dummy_query(struct vmw_private *dev_priv,
 
 	return vmw_fifo_emit_dummy_legacy_query(dev_priv, cid);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

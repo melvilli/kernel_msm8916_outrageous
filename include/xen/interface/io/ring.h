@@ -182,6 +182,7 @@ struct __name##_back_ring {						\
     (&((_r)->sring->ring[((_idx) & (RING_SIZE(_r) - 1))].req))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Get a local copy of a request.
  *
@@ -198,6 +199,8 @@ struct __name##_back_ring {						\
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define RING_GET_RESPONSE(_r, _idx)					\
     (&((_r)->sring->ring[((_idx) & (RING_SIZE(_r) - 1))].rsp))
 
@@ -206,12 +209,18 @@ struct __name##_back_ring {						\
     (((_cons) - (_r)->rsp_prod_pvt) >= RING_SIZE(_r))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Ill-behaved frontend determination: Can there be this many requests? */
 #define RING_REQUEST_PROD_OVERFLOW(_r, _prod)               \
     (((_prod) - (_r)->rsp_prod_pvt) > RING_SIZE(_r))
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RING_PUSH_REQUESTS(_r) do {					\
     wmb(); /* back sees requests /before/ updated producer index */	\

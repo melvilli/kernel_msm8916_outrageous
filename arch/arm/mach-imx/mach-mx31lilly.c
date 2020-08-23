@@ -46,6 +46,10 @@
 #include "common.h"
 #include "devices-imx31.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 =======
 #include "ehci.h"
 >>>>>>> v3.18
@@ -313,7 +317,10 @@ MACHINE_START(LILLY1131, "INCO startec LILLY-1131")
 	.init_early = imx31_init_early,
 	.init_irq = mx31_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx31_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= mx31lilly_timer_init,

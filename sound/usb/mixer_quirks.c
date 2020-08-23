@@ -10,6 +10,11 @@
  *	    Thomas Sailer (sailer@ife.ee.ethz.ch)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *   Audio Advantage Micro II support added by:
+ *	    Przemek Rudy (prudy1@o2.pl)
+>>>>>>> v3.18
 =======
  *   Audio Advantage Micro II support added by:
  *	    Przemek Rudy (prudy1@o2.pl)
@@ -36,6 +41,10 @@
 #include <linux/usb/audio.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/asoundef.h>
+>>>>>>> v3.18
 =======
 #include <sound/asoundef.h>
 >>>>>>> v3.18
@@ -185,7 +194,10 @@ static const struct rc_config {
 	{ USB_ID(0x041e, 0x3042), 0, 1, 1, 1,  1,  0x000d }, /* Usb X-Fi S51 */
 	{ USB_ID(0x041e, 0x30df), 0, 1, 1, 1,  1,  0x000d }, /* Usb X-Fi S51 Pro */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_ID(0x041e, 0x3237), 0, 1, 1, 1,  1,  0x000d }, /* Usb X-Fi S51 Pro */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ USB_ID(0x041e, 0x3048), 2, 2, 6, 6,  2,  0x6e91 }, /* Toshiba SB0500 */
@@ -444,7 +456,10 @@ static void snd_audigy2nx_proc_read(struct snd_info_entry *entry,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* EMU0204 */
 static int snd_emu0204_ch_switch_info(struct snd_kcontrol *kcontrol,
 				      struct snd_ctl_elem_info *uinfo)
@@ -528,6 +543,9 @@ static int snd_emu0204_controls_create(struct usb_mixer_interface *mixer)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* ASUS Xonar U1 / U3 controls */
 
@@ -607,6 +625,7 @@ static int snd_nativeinstruments_control_get(struct snd_kcontrol *kcontrol,
 		ret = -ENODEV;
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = usb_control_msg(dev, usb_rcvctrlpipe(dev, 0), bRequest,
 				  USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_DIR_IN,
 				  0, wIndex,
@@ -617,6 +636,8 @@ static int snd_nativeinstruments_control_get(struct snd_kcontrol *kcontrol,
 		snd_printk(KERN_ERR
 			   "unable to issue vendor read request (ret = %d)", ret);
 =======
+=======
+>>>>>>> v3.18
 		ret = snd_usb_ctl_msg(dev, usb_rcvctrlpipe(dev, 0), bRequest,
 				  USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_DIR_IN,
 				  0, wIndex,
@@ -626,6 +647,9 @@ static int snd_nativeinstruments_control_get(struct snd_kcontrol *kcontrol,
 	if (ret < 0) {
 		dev_err(&dev->dev,
 			"unable to issue vendor read request (ret = %d)", ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}
@@ -657,8 +681,13 @@ static int snd_nativeinstruments_control_put(struct snd_kcontrol *kcontrol,
 
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR
 			   "unable to issue vendor write request (ret = %d)", ret);
+=======
+		dev_err(&dev->dev,
+			"unable to issue vendor write request (ret = %d)", ret);
+>>>>>>> v3.18
 =======
 		dev_err(&dev->dev,
 			"unable to issue vendor write request (ret = %d)", ret);
@@ -1438,7 +1467,10 @@ static struct std_mono_table ebox44_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Audio Advantage Micro II findings:
  *
  * Mapping spdif AES bits to vendor register.bit:
@@ -1644,6 +1676,9 @@ static int snd_microii_controls_create(struct usb_mixer_interface *mixer)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int snd_usb_mixer_apply_create_quirk(struct usb_mixer_interface *mixer)
 {
@@ -1668,7 +1703,10 @@ int snd_usb_mixer_apply_create_quirk(struct usb_mixer_interface *mixer)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* EMU0204 */
 	case USB_ID(0x041e, 0x3f19):
 		err = snd_emu0204_controls_create(mixer);
@@ -1676,6 +1714,9 @@ int snd_usb_mixer_apply_create_quirk(struct usb_mixer_interface *mixer)
 			break;
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case USB_ID(0x0763, 0x2030): /* M-Audio Fast Track C400 */
 	case USB_ID(0x0763, 0x2031): /* M-Audio Fast Track C400 */
@@ -1694,11 +1735,17 @@ int snd_usb_mixer_apply_create_quirk(struct usb_mixer_interface *mixer)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case USB_ID(0x0d8c, 0x0103): /* Audio Advantage Micro II */
 		err = snd_microii_controls_create(mixer);
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case USB_ID(0x17cc, 0x1011): /* Traktor Audio 6 */
 		err = snd_nativeinstruments_create_mixer(mixer,
@@ -1745,7 +1792,11 @@ void snd_usb_mixer_rc_memory_change(struct usb_mixer_interface *mixer,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd(KERN_DEBUG "memory change in unknown unit %d\n", unitid);
+=======
+		usb_audio_dbg(mixer->chip, "memory change in unknown unit %d\n", unitid);
+>>>>>>> v3.18
 =======
 		usb_audio_dbg(mixer->chip, "memory change in unknown unit %d\n", unitid);
 >>>>>>> v3.18

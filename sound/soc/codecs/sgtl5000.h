@@ -13,7 +13,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Register values.
+=======
+ * Registers addresses
+>>>>>>> v3.18
 =======
  * Registers addresses
 >>>>>>> v3.18

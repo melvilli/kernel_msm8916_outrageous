@@ -230,13 +230,19 @@ static ssize_t max8997_led_store_mode(struct device *dev,
 static DEVICE_ATTR(mode, 0644, max8997_led_show_mode, max8997_led_store_mode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *max8997_attrs[] = {
 	&dev_attr_mode.attr,
 	NULL
 };
 ATTRIBUTE_GROUPS(max8997);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int max8997_led_probe(struct platform_device *pdev)
 {
@@ -263,6 +269,10 @@ static int max8997_led_probe(struct platform_device *pdev)
 	led->cdev.flags |= LED_CORE_SUSPENDRESUME;
 	led->cdev.brightness = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	led->cdev.groups = max8997_groups;
+>>>>>>> v3.18
 =======
 	led->cdev.groups = max8997_groups;
 >>>>>>> v3.18
@@ -295,6 +305,7 @@ static int max8997_led_probe(struct platform_device *pdev)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = device_create_file(led->cdev.dev, &dev_attr_mode);
 	if (ret != 0) {
 		dev_err(&pdev->dev,
@@ -305,6 +316,8 @@ static int max8997_led_probe(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -313,7 +326,10 @@ static int max8997_led_remove(struct platform_device *pdev)
 	struct max8997_led *led = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_remove_file(led->cdev.dev, &dev_attr_mode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	led_classdev_unregister(&led->cdev);

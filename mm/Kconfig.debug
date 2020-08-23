@@ -18,6 +18,7 @@ config DEBUG_PAGEALLOC
 	  a resume because free pages are not saved to the suspend image.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SLUB_DEBUG_PANIC_ON
 	bool "Enable to Panic on SLUB corruption detection"
 	depends on SLUB_DEBUG
@@ -28,6 +29,8 @@ config SLUB_DEBUG_PANIC_ON
 	  investigating the root cause which may be rooted within cache
 	  or memory.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config WANT_PAGE_DEBUG_FLAGS

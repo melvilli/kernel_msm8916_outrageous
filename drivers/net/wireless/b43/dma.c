@@ -432,9 +432,15 @@ static int alloc_ringmemory(struct b43_dmaring *ring)
 				B43_DMA64_RINGMEMSIZE : B43_DMA32_RINGMEMSIZE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ring->descbase = dma_alloc_coherent(ring->dev->dev->dma_dev,
 					    ring_mem_size, &(ring->dmabase),
 					    GFP_KERNEL | __GFP_ZERO);
+=======
+	ring->descbase = dma_zalloc_coherent(ring->dev->dev->dma_dev,
+					     ring_mem_size, &(ring->dmabase),
+					     GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ring->descbase = dma_zalloc_coherent(ring->dev->dev->dma_dev,
 					     ring_mem_size, &(ring->dmabase),
@@ -1072,12 +1078,18 @@ static int b43_dma_set_mask(struct b43_wldev *dev, u64 mask)
 	 * lower mask, as we can always also support a lower one. */
 	while (1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = dma_set_mask(dev->dev->dma_dev, mask);
 		if (!err) {
 			err = dma_set_coherent_mask(dev->dev->dma_dev, mask);
 			if (!err)
 				break;
 		}
+=======
+		err = dma_set_mask_and_coherent(dev->dev->dma_dev, mask);
+		if (!err)
+			break;
+>>>>>>> v3.18
 =======
 		err = dma_set_mask_and_coherent(dev->dev->dma_dev, mask);
 		if (!err)

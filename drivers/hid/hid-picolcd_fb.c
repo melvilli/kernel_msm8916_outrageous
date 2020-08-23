@@ -502,7 +502,11 @@ static ssize_t picolcd_fb_update_rate_store(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(fb_update_rate, 0666, picolcd_fb_update_rate_show,
+=======
+static DEVICE_ATTR(fb_update_rate, 0664, picolcd_fb_update_rate_show,
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(fb_update_rate, 0664, picolcd_fb_update_rate_show,
 >>>>>>> v3.18

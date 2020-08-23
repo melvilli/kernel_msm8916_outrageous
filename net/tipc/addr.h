@@ -38,6 +38,11 @@
 #define _TIPC_ADDR_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "core.h"
+
+>>>>>>> v3.18
 =======
 #include "core.h"
 

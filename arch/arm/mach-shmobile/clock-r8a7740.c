@@ -23,14 +23,20 @@
 #include <linux/sh_clk.h>
 #include <linux/clkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/clock.h>
 #include <mach/common.h>
 #include <mach/r8a7740.h>
 =======
+=======
+>>>>>>> v3.18
 
 #include "clock.h"
 #include "common.h"
 #include "r8a7740.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -274,7 +280,11 @@ static struct clk fsibck_clk = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct clk *main_clks[] = {
+=======
+static struct clk *main_clks[] = {
+>>>>>>> v3.18
 =======
 static struct clk *main_clks[] = {
 >>>>>>> v3.18
@@ -329,7 +339,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct clk div4_clks[DIV4_NR] = {
+=======
+static struct clk div4_clks[DIV4_NR] = {
+>>>>>>> v3.18
 =======
 static struct clk div4_clks[DIV4_NR] = {
 >>>>>>> v3.18
@@ -470,7 +484,11 @@ enum {
 	MSTP116, MSTP111, MSTP100, MSTP117,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MSTP230,
+=======
+	MSTP230, MSTP229,
+>>>>>>> v3.18
 =======
 	MSTP230, MSTP229,
 >>>>>>> v3.18
@@ -481,7 +499,11 @@ enum {
 	MSTP329, MSTP328, MSTP323, MSTP320,
 	MSTP314, MSTP313, MSTP312,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MSTP309,
+=======
+	MSTP309, MSTP304,
+>>>>>>> v3.18
 =======
 	MSTP309, MSTP304,
 >>>>>>> v3.18
@@ -497,7 +519,11 @@ static struct clk mstp_clks[MSTP_NR] = {
 	[MSTP125] = SH_CLK_MSTP32(&div6_clks[DIV6_SUB],	SMSTPCR1, 25, 0), /* TMU0 */
 	[MSTP117] = SH_CLK_MSTP32(&div4_clks[DIV4_B],	SMSTPCR1, 17, 0), /* LCDC1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[MSTP116] = SH_CLK_MSTP32(&div6_clks[DIV6_SUB],	SMSTPCR1, 16, 0), /* IIC0 */
+=======
+	[MSTP116] = SH_CLK_MSTP32(&div4_clks[DIV4_HPP],	SMSTPCR1, 16, 0), /* IIC0 */
+>>>>>>> v3.18
 =======
 	[MSTP116] = SH_CLK_MSTP32(&div4_clks[DIV4_HPP],	SMSTPCR1, 16, 0), /* IIC0 */
 >>>>>>> v3.18
@@ -506,6 +532,10 @@ static struct clk mstp_clks[MSTP_NR] = {
 
 	[MSTP230] = SH_CLK_MSTP32(&div6_clks[DIV6_SUB],	SMSTPCR2, 30, 0), /* SCIFA6 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[MSTP229] = SH_CLK_MSTP32(&div4_clks[DIV4_HP],	SMSTPCR2, 29, 0), /* INTCA */
+>>>>>>> v3.18
 =======
 	[MSTP229] = SH_CLK_MSTP32(&div4_clks[DIV4_HP],	SMSTPCR2, 29, 0), /* INTCA */
 >>>>>>> v3.18
@@ -531,6 +561,10 @@ static struct clk mstp_clks[MSTP_NR] = {
 	[MSTP312] = SH_CLK_MSTP32(&div4_clks[DIV4_HP],	SMSTPCR3, 12, 0), /* MMC */
 	[MSTP309] = SH_CLK_MSTP32(&div4_clks[DIV4_HP],	SMSTPCR3,  9, 0), /* GEther */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[MSTP304] = SH_CLK_MSTP32(&div4_clks[DIV4_CP],	SMSTPCR3,  4, 0), /* TPU0 */
+>>>>>>> v3.18
 =======
 	[MSTP304] = SH_CLK_MSTP32(&div4_clks[DIV4_CP],	SMSTPCR3,  4, 0), /* TPU0 */
 >>>>>>> v3.18
@@ -583,6 +617,7 @@ static struct clk_lookup lookups[] = {
 	/* MSTP32 clocks */
 	CLKDEV_DEV_ID("sh_mobile_lcdc_fb.0",	&mstp_clks[MSTP100]),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLKDEV_DEV_ID("sh_tmu.3",		&mstp_clks[MSTP111]),
 	CLKDEV_DEV_ID("sh_tmu.4",		&mstp_clks[MSTP111]),
 	CLKDEV_DEV_ID("sh_tmu.5",		&mstp_clks[MSTP111]),
@@ -596,10 +631,16 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("fff20000.i2c",		&mstp_clks[MSTP116]),
 	CLKDEV_DEV_ID("sh_mobile_lcdc_fb.1",	&mstp_clks[MSTP117]),
 >>>>>>> v3.18
+=======
+	CLKDEV_DEV_ID("i2c-sh_mobile.0",	&mstp_clks[MSTP116]),
+	CLKDEV_DEV_ID("fff20000.i2c",		&mstp_clks[MSTP116]),
+	CLKDEV_DEV_ID("sh_mobile_lcdc_fb.1",	&mstp_clks[MSTP117]),
+>>>>>>> v3.18
 	CLKDEV_DEV_ID("sh_mobile_ceu.0",	&mstp_clks[MSTP127]),
 	CLKDEV_DEV_ID("sh_mobile_ceu.1",	&mstp_clks[MSTP128]),
 
 	CLKDEV_DEV_ID("sh-sci.4",		&mstp_clks[MSTP200]),
+<<<<<<< HEAD
 <<<<<<< HEAD
 	CLKDEV_DEV_ID("e6c80000.sci",		&mstp_clks[MSTP200]),
 	CLKDEV_DEV_ID("sh-sci.3",		&mstp_clks[MSTP201]),
@@ -615,6 +656,8 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("sh-sci.5",		&mstp_clks[MSTP207]),
 	CLKDEV_DEV_ID("e6cb0000.sci",		&mstp_clks[MSTP207]),
 =======
+=======
+>>>>>>> v3.18
 	CLKDEV_DEV_ID("e6c80000.serial",	&mstp_clks[MSTP200]),
 	CLKDEV_DEV_ID("sh-sci.3",		&mstp_clks[MSTP201]),
 	CLKDEV_DEV_ID("e6c70000.serial",	&mstp_clks[MSTP201]),
@@ -628,12 +671,16 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("e6c30000.serial",	&mstp_clks[MSTP206]),
 	CLKDEV_DEV_ID("sh-sci.5",		&mstp_clks[MSTP207]),
 	CLKDEV_DEV_ID("e6cb0000.serial",	&mstp_clks[MSTP207]),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CLKDEV_DEV_ID("sh-dma-engine.3",	&mstp_clks[MSTP214]),
 	CLKDEV_DEV_ID("sh-dma-engine.2",	&mstp_clks[MSTP216]),
 	CLKDEV_DEV_ID("sh-dma-engine.1",	&mstp_clks[MSTP217]),
 	CLKDEV_DEV_ID("sh-dma-engine.0",	&mstp_clks[MSTP218]),
 	CLKDEV_DEV_ID("sh-sci.7",		&mstp_clks[MSTP222]),
+<<<<<<< HEAD
 <<<<<<< HEAD
 	CLKDEV_DEV_ID("e6cd0000.sci",		&mstp_clks[MSTP222]),
 	CLKDEV_DEV_ID("sh-sci.6",		&mstp_clks[MSTP230]),
@@ -656,6 +703,8 @@ static struct clk_lookup lookups[] = {
 
 	/* ICK */
 =======
+=======
+>>>>>>> v3.18
 	CLKDEV_DEV_ID("e6cd0000.serial",	&mstp_clks[MSTP222]),
 	CLKDEV_DEV_ID("renesas_intc_irqpin.0",	&mstp_clks[MSTP229]),
 	CLKDEV_DEV_ID("renesas_intc_irqpin.1",	&mstp_clks[MSTP229]),
@@ -690,6 +739,9 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_ICK_ID("fck",	"fff80000.timer",	&mstp_clks[MSTP125]),
 	CLKDEV_ICK_ID("fck",	"sh-cmt-48.1",		&mstp_clks[MSTP329]),
 	CLKDEV_ICK_ID("fck",	"e6138000.timer",	&mstp_clks[MSTP329]),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CLKDEV_ICK_ID("host",	"renesas_usbhs",	&mstp_clks[MSTP416]),
 	CLKDEV_ICK_ID("func",	"renesas_usbhs",	&mstp_clks[MSTP407]),

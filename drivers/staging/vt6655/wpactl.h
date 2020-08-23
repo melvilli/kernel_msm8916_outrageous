@@ -39,17 +39,23 @@
 //WPA related
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef enum { WPA_ALG_NONE, WPA_ALG_WEP, WPA_ALG_TKIP, WPA_ALG_CCMP } wpa_alg;
 typedef enum { CIPHER_NONE, CIPHER_WEP40, CIPHER_TKIP, CIPHER_CCMP,
 	       CIPHER_WEP104 } wpa_cipher;
 typedef enum { KEY_MGMT_802_1X, KEY_MGMT_CCKM, KEY_MGMT_PSK, KEY_MGMT_NONE,
 	       KEY_MGMT_802_1X_NO_WPA, KEY_MGMT_WPA_NONE } wpa_key_mgmt;
 =======
+=======
+>>>>>>> v3.18
 enum wpa_alg { WPA_ALG_NONE, WPA_ALG_WEP, WPA_ALG_TKIP, WPA_ALG_CCMP };
 enum wpa_cipher { CIPHER_NONE, CIPHER_WEP40, CIPHER_TKIP, CIPHER_CCMP,
 		  CIPHER_WEP104 };
 enum wpa_key_mgmt { KEY_MGMT_802_1X, KEY_MGMT_CCKM, KEY_MGMT_PSK, KEY_MGMT_NONE,
 		    KEY_MGMT_802_1X_NO_WPA, KEY_MGMT_WPA_NONE };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define AUTH_ALG_OPEN_SYSTEM	0x01
@@ -60,8 +66,11 @@ enum wpa_key_mgmt { KEY_MGMT_802_1X, KEY_MGMT_CCKM, KEY_MGMT_PSK, KEY_MGMT_NONE,
 #define RSN_INFO_ELEM 0x30
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef unsigned long long   NDIS_802_11_KEY_RSC;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*---------------------  Export Classes  ----------------------------*/
@@ -71,9 +80,15 @@ typedef unsigned long long   NDIS_802_11_KEY_RSC;
 /*---------------------  Export Functions  --------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wpa_set_wpadev(PSDevice pDevice, int val);
 int wpa_ioctl(PSDevice pDevice, struct iw_point *p);
 int wpa_set_keys(PSDevice pDevice, void *ctx, bool fcpfkernel);
+=======
+int wpa_set_wpadev(struct vnt_private *, int val);
+int wpa_ioctl(struct vnt_private *, struct iw_point *p);
+int wpa_set_keys(struct vnt_private *, void *ctx, bool fcpfkernel);
+>>>>>>> v3.18
 =======
 int wpa_set_wpadev(struct vnt_private *, int val);
 int wpa_ioctl(struct vnt_private *, struct iw_point *p);

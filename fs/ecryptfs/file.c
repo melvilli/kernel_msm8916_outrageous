@@ -46,6 +46,7 @@
  */
 static ssize_t ecryptfs_read_update_atime(struct kiocb *iocb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const struct iovec *iov,
 				unsigned long nr_segs, loff_t pos)
 {
@@ -55,6 +56,8 @@ static ssize_t ecryptfs_read_update_atime(struct kiocb *iocb,
 
 	rc = generic_file_aio_read(iocb, iov, nr_segs, pos);
 =======
+=======
+>>>>>>> v3.18
 				struct iov_iter *to)
 {
 	ssize_t rc;
@@ -62,6 +65,9 @@ static ssize_t ecryptfs_read_update_atime(struct kiocb *iocb,
 	struct file *file = iocb->ki_filp;
 
 	rc = generic_file_read_iter(iocb, to);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Even though this is a async interface, we need to wait
@@ -71,9 +77,14 @@ static ssize_t ecryptfs_read_update_atime(struct kiocb *iocb,
 		rc = wait_on_sync_kiocb(iocb);
 	if (rc >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lower.dentry = ecryptfs_dentry_to_lower(file->f_path.dentry);
 		lower.mnt = ecryptfs_dentry_to_lower_mnt(file->f_path.dentry);
 		touch_atime(&lower);
+=======
+		path = ecryptfs_dentry_to_lower_path(file->f_path.dentry);
+		touch_atime(path);
+>>>>>>> v3.18
 =======
 		path = ecryptfs_dentry_to_lower_path(file->f_path.dentry);
 		touch_atime(path);
@@ -85,9 +96,14 @@ static ssize_t ecryptfs_read_update_atime(struct kiocb *iocb,
 struct ecryptfs_getdents_callback {
 	struct dir_context ctx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *dirent;
 	struct dentry *dentry;
 	filldir_t filldir;
+=======
+	struct dir_context *caller;
+	struct super_block *sb;
+>>>>>>> v3.18
 =======
 	struct dir_context *caller;
 	struct super_block *sb;
@@ -110,7 +126,11 @@ ecryptfs_filldir(void *dirent, const char *lower_name, int lower_namelen,
 	buf->filldir_called++;
 	rc = ecryptfs_decode_and_decrypt_filename(&name, &name_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  buf->dentry, lower_name,
+=======
+						  buf->sb, lower_name,
+>>>>>>> v3.18
 =======
 						  buf->sb, lower_name,
 >>>>>>> v3.18
@@ -122,14 +142,20 @@ ecryptfs_filldir(void *dirent, const char *lower_name, int lower_namelen,
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = buf->filldir(buf->dirent, name, name_size, offset, ino, d_type);
 	kfree(name);
 	if (rc >= 0)
 =======
+=======
+>>>>>>> v3.18
 	buf->caller->pos = buf->ctx.pos;
 	rc = !dir_emit(buf->caller, name, name_size, ino, d_type);
 	kfree(name);
 	if (!rc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		buf->entries_written++;
 out:
@@ -139,6 +165,7 @@ out:
 /**
  * ecryptfs_readdir
  * @file: The eCryptfs directory file
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @dirent: Directory entry handle
  * @filldir: The filldir callback function
@@ -163,6 +190,8 @@ static int ecryptfs_readdir(struct file *file, void *dirent, filldir_t filldir)
 	rc = iterate_dir(lower_file, &buf.ctx);
 	file->f_pos = lower_file->f_pos;
 =======
+=======
+>>>>>>> v3.18
  * @ctx: The actor to feed the entries to
  */
 static int ecryptfs_readdir(struct file *file, struct dir_context *ctx)
@@ -179,6 +208,9 @@ static int ecryptfs_readdir(struct file *file, struct dir_context *ctx)
 	lower_file->f_pos = ctx->pos;
 	rc = iterate_dir(lower_file, &buf.ctx);
 	ctx->pos = buf.ctx.pos;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc < 0)
 		goto out;
@@ -236,6 +268,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ecryptfs_mmap(struct file *file, struct vm_area_struct *vma)
 {
 	struct file *lower_file = ecryptfs_file_to_lower(file);
@@ -249,6 +282,8 @@ static int ecryptfs_mmap(struct file *file, struct vm_area_struct *vma)
 	return generic_file_mmap(file, vma);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -265,6 +300,10 @@ static int ecryptfs_open(struct inode *inode, struct file *file)
 	int rc = 0;
 	struct ecryptfs_crypt_stat *crypt_stat = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ecryptfs_mount_crypt_stat *mount_crypt_stat;
+>>>>>>> v3.18
 =======
 	struct ecryptfs_mount_crypt_stat *mount_crypt_stat;
 >>>>>>> v3.18
@@ -274,7 +313,10 @@ static int ecryptfs_open(struct inode *inode, struct file *file)
 	struct ecryptfs_file_info *file_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	mount_crypt_stat = &ecryptfs_superblock_to_private(
 		ecryptfs_dentry->d_sb)->mount_crypt_stat;
 	if ((mount_crypt_stat->flags & ECRYPTFS_ENCRYPTED_VIEW_ENABLED)
@@ -286,6 +328,9 @@ static int ecryptfs_open(struct inode *inode, struct file *file)
 		rc = -EPERM;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Released in ecryptfs_release or end of function if failure */
 	file_info = kmem_cache_zalloc(ecryptfs_file_info_cache, GFP_KERNEL);
@@ -310,8 +355,13 @@ static int ecryptfs_open(struct inode *inode, struct file *file)
 		printk(KERN_ERR "%s: Error attempting to initialize "
 			"the lower file for the dentry with name "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"[%s]; rc = [%d]\n", __func__,
 			ecryptfs_dentry->d_name.name, rc);
+=======
+			"[%pd]; rc = [%d]\n", __func__,
+			ecryptfs_dentry, rc);
+>>>>>>> v3.18
 =======
 			"[%pd]; rc = [%d]\n", __func__,
 			ecryptfs_dentry, rc);
@@ -356,7 +406,11 @@ static int ecryptfs_flush(struct file *file, fl_owner_t td)
 	struct file *lower_file = ecryptfs_file_to_lower(file);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lower_file->f_op && lower_file->f_op->flush) {
+=======
+	if (lower_file->f_op->flush) {
+>>>>>>> v3.18
 =======
 	if (lower_file->f_op->flush) {
 >>>>>>> v3.18
@@ -394,7 +448,11 @@ static int ecryptfs_fasync(int fd, struct file *file, int flag)
 
 	lower_file = ecryptfs_file_to_lower(file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lower_file->f_op && lower_file->f_op->fasync)
+=======
+	if (lower_file->f_op->fasync)
+>>>>>>> v3.18
 =======
 	if (lower_file->f_op->fasync)
 >>>>>>> v3.18
@@ -406,6 +464,7 @@ static long
 ecryptfs_unlocked_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file *lower_file = NULL;
 	long rc = -ENOTTY;
 
@@ -413,10 +472,15 @@ ecryptfs_unlocked_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		lower_file = ecryptfs_file_to_lower(file);
 	if (lower_file && lower_file->f_op && lower_file->f_op->unlocked_ioctl)
 =======
+=======
+>>>>>>> v3.18
 	struct file *lower_file = ecryptfs_file_to_lower(file);
 	long rc = -ENOTTY;
 
 	if (lower_file->f_op->unlocked_ioctl)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rc = lower_file->f_op->unlocked_ioctl(lower_file, cmd, arg);
 	return rc;
@@ -427,6 +491,7 @@ static long
 ecryptfs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file *lower_file = NULL;
 	long rc = -ENOIOCTLCMD;
 
@@ -434,10 +499,15 @@ ecryptfs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		lower_file = ecryptfs_file_to_lower(file);
 	if (lower_file && lower_file->f_op && lower_file->f_op->compat_ioctl)
 =======
+=======
+>>>>>>> v3.18
 	struct file *lower_file = ecryptfs_file_to_lower(file);
 	long rc = -ENOIOCTLCMD;
 
 	if (lower_file->f_op->compat_ioctl)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rc = lower_file->f_op->compat_ioctl(lower_file, cmd, arg);
 	return rc;
@@ -446,7 +516,11 @@ ecryptfs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 
 const struct file_operations ecryptfs_dir_fops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir = ecryptfs_readdir,
+=======
+	.iterate = ecryptfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate = ecryptfs_readdir,
 >>>>>>> v3.18
@@ -467,24 +541,34 @@ const struct file_operations ecryptfs_dir_fops = {
 const struct file_operations ecryptfs_main_fops = {
 	.llseek = generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read = do_sync_read,
 	.aio_read = ecryptfs_read_update_atime,
 	.write = do_sync_write,
 	.aio_write = generic_file_aio_write,
 	.readdir = ecryptfs_readdir,
 =======
+=======
+>>>>>>> v3.18
 	.read = new_sync_read,
 	.read_iter = ecryptfs_read_update_atime,
 	.write = new_sync_write,
 	.write_iter = generic_file_write_iter,
 	.iterate = ecryptfs_readdir,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.unlocked_ioctl = ecryptfs_unlocked_ioctl,
 #ifdef CONFIG_COMPAT
 	.compat_ioctl = ecryptfs_compat_ioctl,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mmap = ecryptfs_mmap,
+=======
+	.mmap = generic_file_mmap,
+>>>>>>> v3.18
 =======
 	.mmap = generic_file_mmap,
 >>>>>>> v3.18

@@ -37,8 +37,13 @@
 
 struct dn_header {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32	magic_num;
 	u32	file_size;
+=======
+	__be32	magic_num;
+	__be32	file_size;
+>>>>>>> v3.18
 =======
 	__be32	magic_num;
 	__be32	file_size;
@@ -73,8 +78,14 @@ static void array_le32_to_cpu(u32 *arr, int num)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < num; i++, arr++)
 		*arr = __le32_to_cpu(*arr);
+=======
+
+	for (i = 0; i < num; i++, arr++)
+		le32_to_cpus(arr);
+>>>>>>> v3.18
 =======
 
 	for (i = 0; i < num; i++, arr++)
@@ -91,7 +102,11 @@ static int gdm_wibro_send(struct usb_device *usbdev, void *data, int len)
 
 	ret = usb_bulk_msg(usbdev, usb_sndbulkpipe(usbdev, 1), data, len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			&actual, 1000);
+=======
+			   &actual, 1000);
+>>>>>>> v3.18
 =======
 			   &actual, 1000);
 >>>>>>> v3.18
@@ -111,7 +126,11 @@ static int gdm_wibro_recv(struct usb_device *usbdev, void *data, int len)
 
 	ret = usb_bulk_msg(usbdev, usb_rcvbulkpipe(usbdev, 2), data, len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			&actual, 5000);
+=======
+			   &actual, 5000);
+>>>>>>> v3.18
 =======
 			   &actual, 5000);
 >>>>>>> v3.18
@@ -126,8 +145,13 @@ static int gdm_wibro_recv(struct usb_device *usbdev, void *data, int len)
 
 static int download_image(struct usb_device *usbdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const struct firmware *firm,
 				loff_t pos, u32 img_len, u32 magic_num)
+=======
+			  const struct firmware *firm,
+			  loff_t pos, u32 img_len, u32 magic_num)
+>>>>>>> v3.18
 =======
 			  const struct firmware *firm,
 			  loff_t pos, u32 img_len, u32 magic_num)
@@ -139,8 +163,13 @@ static int download_image(struct usb_device *usbdev,
 
 	size = ALIGN(img_len, DOWNLOAD_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	h.magic_num = __cpu_to_be32(magic_num);
 	h.file_size = __cpu_to_be32(size);
+=======
+	h.magic_num = cpu_to_be32(magic_num);
+	h.file_size = cpu_to_be32(size);
+>>>>>>> v3.18
 =======
 	h.magic_num = cpu_to_be32(magic_num);
 	h.file_size = cpu_to_be32(size);
@@ -199,6 +228,7 @@ int usb_boot(struct usb_device *usbdev, u16 pid)
 
 	array_le32_to_cpu((u32 *)&hdr, 19);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0
 	if (hdr.magic_code != 0x10767fff) {
 		dev_err(&usbdev->dev, "Invalid magic code 0x%08x\n",
@@ -207,6 +237,9 @@ int usb_boot(struct usb_device *usbdev, u16 pid)
 		goto out;
 	}
 #endif
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -235,6 +268,7 @@ int usb_boot(struct usb_device *usbdev, u16 pid)
 
 		array_le32_to_cpu((u32 *)&fw_info, 8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0
 		if ((fw_info.id & 0xfffff000) != 0x10767000) {
 			dev_err(&usbdev->dev, "Invalid FW id. 0x%08x\n",
@@ -243,6 +277,8 @@ int usb_boot(struct usb_device *usbdev, u16 pid)
 			goto out;
 		}
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -256,8 +292,13 @@ int usb_boot(struct usb_device *usbdev, u16 pid)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = download_image(usbdev, firm, pos,
 				fw_info.kernel_len, DN_KERNEL_MAGIC_NUMBER);
+=======
+		ret = download_image(usbdev, firm, pos, fw_info.kernel_len,
+				     DN_KERNEL_MAGIC_NUMBER);
+>>>>>>> v3.18
 =======
 		ret = download_image(usbdev, firm, pos, fw_info.kernel_len,
 				     DN_KERNEL_MAGIC_NUMBER);
@@ -273,7 +314,11 @@ int usb_boot(struct usb_device *usbdev, u16 pid)
 		}
 		ret = download_image(usbdev, firm, pos, fw_info.rootfs_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				DN_ROOTFS_MAGIC_NUMBER);
+=======
+				     DN_ROOTFS_MAGIC_NUMBER);
+>>>>>>> v3.18
 =======
 				     DN_ROOTFS_MAGIC_NUMBER);
 >>>>>>> v3.18
@@ -322,7 +367,11 @@ out:
 
 static int em_download_image(struct usb_device *usbdev, const char *img_name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				char *type_string)
+=======
+			     char *type_string)
+>>>>>>> v3.18
 =======
 			     char *type_string)
 >>>>>>> v3.18
@@ -397,11 +446,16 @@ out:
 static int em_fw_reset(struct usb_device *usbdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	/*Send ZLP*/
 	ret = gdm_wibro_send(usbdev, NULL, 0);
 	return ret;
+=======
+	/*Send ZLP*/
+	return gdm_wibro_send(usbdev, NULL, 0);
+>>>>>>> v3.18
 =======
 	/*Send ZLP*/
 	return gdm_wibro_send(usbdev, NULL, 0);

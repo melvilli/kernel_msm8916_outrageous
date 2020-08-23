@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2003 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -40,6 +44,7 @@
 
 struct iwl_rs_rate_info {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 plcp;	/* uCode API:  IWL_RATE_6M_PLCP, etc. */
 	u8 plcp_siso;	/* uCode API:  IWL_RATE_SISO_6M_PLCP, etc. */
 	u8 plcp_mimo2;	/* uCode API:  IWL_RATE_MIMO2_6M_PLCP, etc. */
@@ -52,6 +57,8 @@ struct iwl_rs_rate_info {
 	u8 prev_rs_tgg;  /* previous rate used in TGG rs algo */
 	u8 next_rs_tgg;  /* next rate used in TGG rs algo */
 =======
+=======
+>>>>>>> v3.18
 	u8 plcp;	  /* uCode API:  IWL_RATE_6M_PLCP, etc. */
 	u8 plcp_ht_siso;  /* uCode API:  IWL_RATE_SISO_6M_PLCP, etc. */
 	u8 plcp_ht_mimo2; /* uCode API:  IWL_RATE_MIMO2_6M_PLCP, etc. */
@@ -59,6 +66,9 @@ struct iwl_rs_rate_info {
 	u8 plcp_vht_mimo2;
 	u8 prev_rs;      /* previous rate used in rs algo */
 	u8 next_rs;      /* next rate used in rs algo */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -103,6 +113,7 @@ enum {
 #define	IWL_RATE_11M_MASK  (1 << IWL_RATE_11M_INDEX)
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* uCode API values for OFDM high-throughput (HT) bit rates */
 enum {
@@ -151,6 +162,8 @@ enum {
 	IWL_RATE_5M_IEEE  = 11,
 	IWL_RATE_11M_IEEE = 22,
 =======
+=======
+>>>>>>> v3.18
 /* uCode API values for HT/VHT bit rates */
 enum {
 	IWL_RATE_HT_SISO_MCS_0_PLCP = 0,
@@ -197,6 +210,9 @@ enum {
 	IWL_RATE_HT_SISO_MCS_9_PLCP = IWL_RATE_HT_SISO_MCS_INV_PLCP,
 	IWL_RATE_HT_MIMO2_MCS_8_PLCP = IWL_RATE_HT_SISO_MCS_INV_PLCP,
 	IWL_RATE_HT_MIMO2_MCS_9_PLCP = IWL_RATE_HT_SISO_MCS_INV_PLCP,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -222,6 +238,7 @@ enum {
 #define IWL_RATE_SCALE_SWITCH		10880	/*  85% */
 #define IWL_RATE_HIGH_TH		10880	/*  85% */
 #define IWL_RATE_INCREASE_TH		6400	/*  50% */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IWL_RATE_DECREASE_TH		1920	/*  15% */
 
@@ -273,6 +290,8 @@ enum {
 
 #define IWL_ACTION_LIMIT		3	/* # possible actions */
 =======
+=======
+>>>>>>> v3.18
 #define RS_SR_FORCE_DECREASE		1920	/*  15% */
 #define RS_SR_NO_DECREASE		10880	/*  85% */
 
@@ -282,6 +301,9 @@ enum {
 #define TPC_MAX_REDUCTION		15
 #define TPC_NO_REDUCTION		0
 #define TPC_INVALID			0xff
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define LINK_QUAL_AGG_TIME_LIMIT_DEF	(4000) /* 4 milliseconds */
@@ -312,6 +334,7 @@ enum {
 enum iwl_table_type {
 	LQ_NONE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LQ_G,		/* legacy types */
 	LQ_A,
 	LQ_SISO,	/* high-throughput types */
@@ -329,6 +352,8 @@ enum iwl_table_type {
 #define is_a_band(tbl) ((tbl) == LQ_A)
 #define is_g_and(tbl) ((tbl) == LQ_G)
 =======
+=======
+>>>>>>> v3.18
 	LQ_LEGACY_G,	/* legacy types */
 	LQ_LEGACY_A,
 	LQ_HT_SISO,	/* HT types */
@@ -378,6 +403,9 @@ struct rs_rate {
 #define is_ht20(rate)         ((rate)->bw == RATE_MCS_CHAN_WIDTH_20)
 #define is_ht40(rate)         ((rate)->bw == RATE_MCS_CHAN_WIDTH_40)
 #define is_ht80(rate)         ((rate)->bw == RATE_MCS_CHAN_WIDTH_80)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define IWL_MAX_MCS_DISPLAY_SIZE	12
@@ -397,8 +425,11 @@ struct iwl_rate_scale_data {
 	s32 counter;		/* number of frames attempted */
 	s32 average_tpt;	/* success ratio * expected throughput */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long stamp;
 =======
+=======
+>>>>>>> v3.18
 };
 
 /* Possible Tx columns
@@ -423,6 +454,9 @@ enum rs_column {
 struct rs_rate_stats {
 	u64 success;
 	u64 total;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -433,6 +467,7 @@ struct rs_rate_stats {
  * one for "active", and one for "search".
  */
 struct iwl_scale_tbl_info {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	enum iwl_table_type lq_type;
 	u8 ant_type;
@@ -455,6 +490,8 @@ struct iwl_traffic_load {
 					 * been used since the last cleanup */
 	u8 head;			/* start of the circular buffer */
 =======
+=======
+>>>>>>> v3.18
 	struct rs_rate rate;
 	enum rs_column column;
 	const u16 *expected_tpt;	/* throughput metrics; expected_tpt_G, etc. */
@@ -467,6 +504,9 @@ enum {
 	RS_STATE_SEARCH_CYCLE_STARTED,
 	RS_STATE_SEARCH_CYCLE_ENDED,
 	RS_STATE_STAY_IN_COLUMN,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -478,8 +518,12 @@ enum {
 struct iwl_lq_sta {
 	u8 active_tbl;		/* index of active table, range 0-1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 enable_counter;	/* indicates HT mode */
 	u8 stay_in_tbl;		/* 1: disallow, 0: allow search for new mode */
+=======
+	u8 rs_state;            /* RS_STATE_* */
+>>>>>>> v3.18
 =======
 	u8 rs_state;            /* RS_STATE_* */
 >>>>>>> v3.18
@@ -496,6 +540,7 @@ struct iwl_lq_sta {
 	u64 flush_timer;	/* time staying in mode before new search */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 action_counter;	/* # mode-switch actions tried */
 	u8 is_green;
 	enum ieee80211_band band;
@@ -508,6 +553,8 @@ struct iwl_lq_sta {
 	u16 active_mimo3_rate;
 	s8 max_rate_idx;     /* Max rate set by user */
 =======
+=======
+>>>>>>> v3.18
 	u32 visited_columns;    /* Bitmask marking which Tx columns were
 				 * explored during a search cycle
 				 */
@@ -526,11 +573,15 @@ struct iwl_lq_sta {
 	u8 max_siso_rate_idx;
 	u8 max_mimo2_rate_idx;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 missed_rate_counter;
 
 	struct iwl_lq_cmd lq;
 	struct iwl_scale_tbl_info lq_info[LQ_SIZE]; /* "active", "search" */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct iwl_traffic_load load[IWL_MAX_TID_COUNT];
 	u8 tx_agg_tid_en;
@@ -545,6 +596,9 @@ struct iwl_lq_sta {
 =======
 	u8 tx_agg_tid_en;
 >>>>>>> v3.18
+=======
+	u8 tx_agg_tid_en;
+>>>>>>> v3.18
 
 	/* used to be in sta_info */
 	int last_txrate_idx;
@@ -552,6 +606,7 @@ struct iwl_lq_sta {
 	u32 last_rate_n_flags;
 	/* packets destined for this STA are aggregated */
 	u8 is_agg;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* BT traffic this sta was last updated in */
 	u8 last_bt_traffic;
@@ -569,6 +624,8 @@ extern void iwl_mvm_rs_rate_init(struct iwl_mvm *mvm,
 				 struct ieee80211_sta *sta,
 				 enum ieee80211_band band);
 =======
+=======
+>>>>>>> v3.18
 
 	/* tx power reduce for this sta */
 	int tpc_reduce;
@@ -593,6 +650,9 @@ void iwl_mvm_rs_rate_init(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 /* Notify RS about Tx status */
 void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 			  int tid, struct ieee80211_tx_info *info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -606,7 +666,11 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int iwl_mvm_rate_control_register(void);
+=======
+int iwl_mvm_rate_control_register(void);
+>>>>>>> v3.18
 =======
 int iwl_mvm_rate_control_register(void);
 >>>>>>> v3.18
@@ -618,14 +682,20 @@ int iwl_mvm_rate_control_register(void);
  * the driver is unloaded.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void iwl_mvm_rate_control_unregister(void);
 =======
+=======
+>>>>>>> v3.18
 void iwl_mvm_rate_control_unregister(void);
 
 struct iwl_mvm_sta;
 
 int iwl_mvm_tx_protection(struct iwl_mvm *mvm, struct iwl_mvm_sta *mvmsta,
 			  bool enable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __rs__ */

@@ -18,6 +18,7 @@
 static int proc_initialized;	/* = 0 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static loff_t
 proc_bus_pci_lseek(struct file *file, loff_t off, int whence)
 {
@@ -47,6 +48,8 @@ proc_bus_pci_lseek(struct file *file, loff_t off, int whence)
 static ssize_t
 proc_bus_pci_read(struct file *file, char __user *buf, size_t nbytes, loff_t *ppos)
 =======
+=======
+>>>>>>> v3.18
 static loff_t proc_bus_pci_lseek(struct file *file, loff_t off, int whence)
 {
 	struct pci_dev *dev = PDE_DATA(file_inode(file));
@@ -55,6 +58,9 @@ static loff_t proc_bus_pci_lseek(struct file *file, loff_t off, int whence)
 
 static ssize_t proc_bus_pci_read(struct file *file, char __user *buf,
 				 size_t nbytes, loff_t *ppos)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pci_dev *dev = PDE_DATA(file_inode(file));
@@ -139,8 +145,13 @@ static ssize_t proc_bus_pci_read(struct file *file, char __user *buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 proc_bus_pci_write(struct file *file, const char __user *buf, size_t nbytes, loff_t *ppos)
+=======
+static ssize_t proc_bus_pci_write(struct file *file, const char __user *buf,
+				  size_t nbytes, loff_t *ppos)
+>>>>>>> v3.18
 =======
 static ssize_t proc_bus_pci_write(struct file *file, const char __user *buf,
 				  size_t nbytes, loff_t *ppos)
@@ -258,7 +269,11 @@ static long proc_bus_pci_ioctl(struct file *file, unsigned int cmd,
 		ret = -EINVAL;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -453,7 +468,11 @@ int pci_proc_detach_device(struct pci_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pci_proc_detach_bus(struct pci_bus* bus)
+=======
+int pci_proc_detach_bus(struct pci_bus *bus)
+>>>>>>> v3.18
 =======
 int pci_proc_detach_bus(struct pci_bus *bus)
 >>>>>>> v3.18
@@ -467,6 +486,10 @@ static int proc_bus_pci_dev_open(struct inode *inode, struct file *file)
 	return seq_open(file, &proc_bus_pci_devices_op);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -491,9 +514,13 @@ static int __init pci_proc_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 device_initcall(pci_proc_init);
 
+=======
+device_initcall(pci_proc_init);
+>>>>>>> v3.18
 =======
 device_initcall(pci_proc_init);
 >>>>>>> v3.18

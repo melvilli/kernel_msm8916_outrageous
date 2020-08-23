@@ -11,13 +11,19 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef pr_fmt
 #undef pr_fmt
 #endif
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/fs.h>
 #include <linux/pagemap.h>
@@ -29,12 +35,15 @@ typedef __u64 __bitwise __fs64;
 #include <linux/qnx6_fs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_QNX6FS_DEBUG
 #define QNX6DEBUG(X) printk X
 #else
 #define QNX6DEBUG(X) (void) 0
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct qnx6_sb_info {

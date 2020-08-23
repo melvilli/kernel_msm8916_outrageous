@@ -51,10 +51,13 @@ source "drivers/char/Kconfig"
 source "drivers/i2c/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/slimbus/Kconfig"
 
 source "drivers/soundwire/Kconfig"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "drivers/spi/Kconfig"
@@ -62,8 +65,11 @@ source "drivers/spi/Kconfig"
 source "drivers/spmi/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/ssbi/Kconfig"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "drivers/hsi/Kconfig"
@@ -113,8 +119,11 @@ source "drivers/memstick/Kconfig"
 source "drivers/leds/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/switch/Kconfig"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "drivers/accessibility/Kconfig"
@@ -126,8 +135,11 @@ source "drivers/edac/Kconfig"
 source "drivers/rtc/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/esoc/Kconfig"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "drivers/dma/Kconfig"
@@ -155,6 +167,11 @@ source "drivers/staging/Kconfig"
 source "drivers/platform/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/soc/Kconfig"
+
+>>>>>>> v3.18
 =======
 source "drivers/soc/Kconfig"
 
@@ -174,6 +191,11 @@ source "drivers/remoteproc/Kconfig"
 source "drivers/rpmsg/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/soc/Kconfig"
+
+>>>>>>> v3.18
 =======
 source "drivers/soc/Kconfig"
 
@@ -199,6 +221,7 @@ source "drivers/ipack/Kconfig"
 source "drivers/reset/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/coresight/Kconfig"
 
 source "drivers/bif/Kconfig"
@@ -211,6 +234,8 @@ source "drivers/soc/Kconfig"
 
 source "drivers/firmware/Kconfig"
 =======
+=======
+>>>>>>> v3.18
 source "drivers/fmc/Kconfig"
 
 source "drivers/phy/Kconfig"
@@ -222,6 +247,9 @@ source "drivers/mcb/Kconfig"
 source "drivers/ras/Kconfig"
 
 source "drivers/thunderbolt/Kconfig"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endmenu

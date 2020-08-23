@@ -17,6 +17,7 @@ Debugging390.txt
 driver-model.txt
 	- information on s390 devices and the driver model.
 <<<<<<< HEAD
+<<<<<<< HEAD
 monreader.txt
 	- information on accessing the z/VM monitor stream from Linux.
 s390dbf.txt
@@ -25,6 +26,8 @@ TAPE
 	- information on the driver for channel-attached tapes.
 zfcpdump
 =======
+=======
+>>>>>>> v3.18
 kvm.txt
 	- ioctl calls to /dev/kvm on s390.
 monreader.txt
@@ -34,5 +37,8 @@ qeth.txt
 s390dbf.txt
 	- information on using the s390 debug feature.
 zfcpdump.txt
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	- information on the s390 SCSI dump tool.

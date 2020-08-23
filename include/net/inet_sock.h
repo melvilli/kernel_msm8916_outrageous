@@ -33,7 +33,10 @@
  * @faddr - Saved first hop address
  * @nexthop - Saved nexthop address in LSRR and SSRR
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @is_data - Options in __data, rather than skb
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @is_strictroute - Strict source route
@@ -75,6 +78,7 @@ struct ip_options_data {
 struct inet_request_sock {
 	struct request_sock	req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_IPV6)
 	u16			inet6_rsk_offset;
 #endif
@@ -83,6 +87,8 @@ struct inet_request_sock {
 	__be32			rmt_addr;
 	__be16			rmt_port;
 =======
+=======
+>>>>>>> v3.18
 #define ir_loc_addr		req.__req_common.skc_rcv_saddr
 #define ir_rmt_addr		req.__req_common.skc_daddr
 #define ir_num			req.__req_common.skc_num
@@ -91,6 +97,9 @@ struct inet_request_sock {
 #define ir_v6_loc_addr		req.__req_common.skc_v6_rcv_saddr
 #define ir_iif			req.__req_common.skc_bound_dev_if
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kmemcheck_bitfield_begin(flags);
 	u16			snd_wscale : 4,
@@ -103,14 +112,20 @@ struct inet_request_sock {
 				no_srccheck: 1;
 	kmemcheck_bitfield_end(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32                     ir_mark;
 	struct ip_options_rcu	*opt;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		struct ip_options_rcu	*opt;
 		struct sk_buff		*pktopts;
 	};
 	u32                     ir_mark;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -122,16 +137,22 @@ static inline struct inet_request_sock *inet_rsk(const struct request_sock *sk)
 static inline u32 inet_request_mark(struct sock *sk, struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!sk->sk_mark && sock_net(sk)->ipv4.sysctl_tcp_fwmark_accept)
 		return skb->mark;
 
 	return sk->sk_mark;
 =======
+=======
+>>>>>>> v3.18
 	if (!sk->sk_mark && sock_net(sk)->ipv4.sysctl_tcp_fwmark_accept) {
 		return skb->mark;
 	} else {
 		return sk->sk_mark;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -144,6 +165,12 @@ struct inet_cork {
 	struct dst_entry	*dst;
 	u8			tx_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__u8			ttl;
+	__s16			tos;
+	char			priority;
+>>>>>>> v3.18
 =======
 	__u8			ttl;
 	__s16			tos;
@@ -190,10 +217,15 @@ struct inet_sock {
 #define inet_daddr		sk.__sk_common.skc_daddr
 #define inet_rcv_saddr		sk.__sk_common.skc_rcv_saddr
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define inet_addrpair		sk.__sk_common.skc_addrpair
 #define inet_dport		sk.__sk_common.skc_dport
 #define inet_num		sk.__sk_common.skc_num
 #define inet_portpair		sk.__sk_common.skc_portpair
+=======
+#define inet_dport		sk.__sk_common.skc_dport
+#define inet_num		sk.__sk_common.skc_num
+>>>>>>> v3.18
 =======
 #define inet_dport		sk.__sk_common.skc_dport
 #define inet_num		sk.__sk_common.skc_num
@@ -251,6 +283,7 @@ static inline void inet_sk_copy_descendant(struct sock *sk_to,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int inet_sk_rebuild_header(struct sock *sk);
 
 extern u32 inet_ehash_secret;
@@ -261,6 +294,8 @@ static inline unsigned int inet_ehashfn(struct net *net,
 					const __be32 laddr, const __u16 lport,
 					const __be32 faddr, const __be16 fport)
 =======
+=======
+>>>>>>> v3.18
 int inet_sk_rebuild_header(struct sock *sk);
 
 static inline unsigned int __inet_ehashfn(const __be32 laddr,
@@ -268,11 +303,15 @@ static inline unsigned int __inet_ehashfn(const __be32 laddr,
 					  const __be32 faddr,
 					  const __be16 fport,
 					  u32 initval)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return jhash_3words((__force __u32) laddr,
 			    (__force __u32) faddr,
 			    ((__u32) lport) << 16 | (__force __u32)fport,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			    inet_ehash_secret + net_hash_mix(net));
 }
@@ -287,6 +326,9 @@ static inline int inet_sk_ehashfn(const struct sock *sk)
 	struct net *net = sock_net(sk);
 
 	return inet_ehashfn(net, laddr, lport, faddr, fport);
+=======
+			    initval);
+>>>>>>> v3.18
 =======
 			    initval);
 >>>>>>> v3.18

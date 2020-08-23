@@ -35,7 +35,10 @@
 #include <linux/etherdevice.h>
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -226,6 +229,10 @@ static int r6040_phy_read(void __iomem *ioaddr, int phy_addr, int reg)
 		if (!(cmd & MDIO_READ))
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		udelay(1);
+>>>>>>> v3.18
 =======
 		udelay(1);
 >>>>>>> v3.18
@@ -253,6 +260,10 @@ static int r6040_phy_write(void __iomem *ioaddr,
 		if (!(cmd & MDIO_WRITE))
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		udelay(1);
+>>>>>>> v3.18
 =======
 		udelay(1);
 >>>>>>> v3.18
@@ -281,11 +292,14 @@ static int r6040_mdiobus_write(struct mii_bus *bus, int phy_addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int r6040_mdiobus_reset(struct mii_bus *bus)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void r6040_free_txbufs(struct net_device *dev)
@@ -849,8 +863,13 @@ static netdev_tx_t r6040_start_xmit(struct sk_buff *skb,
 	lp->tx_free_desc--;
 	descptr = lp->tx_insert_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb->len < MISR)
 		descptr->len = MISR;
+=======
+	if (skb->len < ETH_ZLEN)
+		descptr->len = ETH_ZLEN;
+>>>>>>> v3.18
 =======
 	if (skb->len < ETH_ZLEN)
 		descptr->len = ETH_ZLEN;
@@ -1210,7 +1229,10 @@ static int r6040_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	lp->mii_bus->read = r6040_mdiobus_read;
 	lp->mii_bus->write = r6040_mdiobus_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp->mii_bus->reset = r6040_mdiobus_reset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	lp->mii_bus->name = "r6040_eth_mii";
@@ -1254,7 +1276,10 @@ err_out_mdio:
 err_out_unmap:
 	netif_napi_del(&lp->napi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_iounmap(pdev, ioaddr);
@@ -1283,16 +1308,22 @@ static void r6040_remove_one(struct pci_dev *pdev)
 	free_netdev(dev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 }
 
 
 static DEFINE_PCI_DEVICE_TABLE(r6040_pci_tbl) = {
 =======
+=======
+>>>>>>> v3.18
 }
 
 
 static const struct pci_device_id r6040_pci_tbl[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_RDC, 0x6040) },
 	{ 0 }

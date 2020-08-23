@@ -8,8 +8,11 @@
 #define _MACH_PORTMUX_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_RESOURCES	MAX_BLACKFIN_GPIOS
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* EMAC RMII Port Mux */
@@ -25,6 +28,10 @@
 #define P_MII0_ERxER	(P_DEFINED | P_IDENT(GPIO_PC4) | P_FUNCT(0))
 #define P_MII0_TxCLK	(P_DEFINED | P_IDENT(GPIO_PB14) | P_FUNCT(0))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define P_MII0_PTPPPS	(P_DEFINED | P_IDENT(GPIO_PB15) | P_FUNCT(0))
+>>>>>>> v3.18
 =======
 #define P_MII0_PTPPPS	(P_DEFINED | P_IDENT(GPIO_PB15) | P_FUNCT(0))
 >>>>>>> v3.18
@@ -40,6 +47,10 @@
 	P_MII0_PHYINT, \
 	P_MII0_CRS, \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	P_MII0_PTPPPS, \
+>>>>>>> v3.18
 =======
 	P_MII0_PTPPPS, \
 >>>>>>> v3.18
@@ -58,6 +69,10 @@
 #define P_MII1_ERxER	(P_DEFINED | P_IDENT(GPIO_PE14) | P_FUNCT(0))
 #define P_MII1_TxCLK	(P_DEFINED | P_IDENT(GPIO_PG6) | P_FUNCT(0))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define P_MII1_PTPPPS	(P_DEFINED | P_IDENT(GPIO_PC9) | P_FUNCT(0))
+>>>>>>> v3.18
 =======
 #define P_MII1_PTPPPS	(P_DEFINED | P_IDENT(GPIO_PC9) | P_FUNCT(0))
 >>>>>>> v3.18
@@ -73,6 +88,10 @@
 	P_MII1_PHYINT, \
 	P_MII1_CRS, \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	P_MII1_PTPPPS, \
+>>>>>>> v3.18
 =======
 	P_MII1_PTPPPS, \
 >>>>>>> v3.18

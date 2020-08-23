@@ -48,6 +48,7 @@ static int ht_print_chan(struct ieee80211_channel *chan,
 
 	if (chan->flags & IEEE80211_CHAN_DISABLED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return snprintf(buf + offset,
 				buf_size - offset,
 				"%d Disabled\n",
@@ -60,6 +61,8 @@ static int ht_print_chan(struct ieee80211_channel *chan,
 			(chan->flags & IEEE80211_CHAN_NO_HT40MINUS) ? ' ' : '-',
 			(chan->flags & IEEE80211_CHAN_NO_HT40PLUS)  ? ' ' : '+');
 =======
+=======
+>>>>>>> v3.18
 		return scnprintf(buf + offset,
 				 buf_size - offset,
 				 "%d Disabled\n",
@@ -73,6 +76,9 @@ static int ht_print_chan(struct ieee80211_channel *chan,
 				' ' : '-',
 			 (chan->flags & IEEE80211_CHAN_NO_HT40PLUS) ?
 				' ' : '+');
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -91,7 +97,11 @@ static ssize_t ht40allow_map_read(struct file *file,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&cfg80211_mutex);
+=======
+	rtnl_lock();
+>>>>>>> v3.18
 =======
 	rtnl_lock();
 >>>>>>> v3.18
@@ -106,7 +116,11 @@ static ssize_t ht40allow_map_read(struct file *file,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&cfg80211_mutex);
+=======
+	rtnl_unlock();
+>>>>>>> v3.18
 =======
 	rtnl_unlock();
 >>>>>>> v3.18

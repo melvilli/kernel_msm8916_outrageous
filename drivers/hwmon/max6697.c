@@ -78,7 +78,11 @@ struct max6697_chip_data {
 
 struct max6697_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -186,8 +190,13 @@ static const struct max6697_chip_data max6697_chip_data[] = {
 static struct max6697_data *max6697_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6697_data *data = i2c_get_clientdata(client);
+=======
+	struct max6697_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct max6697_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -313,8 +322,12 @@ static ssize_t set_temp(struct device *dev,
 	int nr = to_sensor_dev_attr_2(devattr)->nr;
 	int index = to_sensor_dev_attr_2(devattr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6697_data *data = i2c_get_clientdata(client);
+=======
+	struct max6697_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct max6697_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -330,7 +343,11 @@ static ssize_t set_temp(struct device *dev,
 	temp = clamp_val(temp, 0, data->type == max6581 ? 255 : 127);
 	data->temp[nr][index] = temp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = i2c_smbus_write_byte_data(client,
+=======
+	ret = i2c_smbus_write_byte_data(data->client,
+>>>>>>> v3.18
 =======
 	ret = i2c_smbus_write_byte_data(data->client,
 >>>>>>> v3.18
@@ -423,8 +440,12 @@ static umode_t max6697_is_visible(struct kobject *kobj, struct attribute *attr,
 {
 	struct device *dev = container_of(kobj, struct device, kobj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6697_data *data = i2c_get_clientdata(client);
+=======
+	struct max6697_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct max6697_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -511,6 +532,10 @@ static const struct attribute_group max6697_group = {
 	.attrs = max6697_attributes, .is_visible = max6697_is_visible,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+__ATTRIBUTE_GROUPS(max6697);
+>>>>>>> v3.18
 =======
 __ATTRIBUTE_GROUPS(max6697);
 >>>>>>> v3.18
@@ -522,6 +547,7 @@ static void max6697_get_config_of(struct device_node *node,
 	const __be32 *prop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prop = of_get_property(node, "smbus-timeout-disable", &len);
 	if (prop)
 		pdata->smbus_timeout_disable = true;
@@ -532,6 +558,8 @@ static void max6697_get_config_of(struct device_node *node,
 	if (prop)
 		pdata->beta_compensation = true;
 =======
+=======
+>>>>>>> v3.18
 	pdata->smbus_timeout_disable =
 		of_property_read_bool(node, "smbus-timeout-disable");
 	pdata->extended_range_enable =
@@ -539,6 +567,9 @@ static void max6697_get_config_of(struct device_node *node,
 	pdata->beta_compensation =
 		of_property_read_bool(node, "beta-compensation-enable");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	prop = of_get_property(node, "alert-mask", &len);
 	if (prop && len == sizeof(u32))
@@ -561,9 +592,15 @@ static void max6697_get_config_of(struct device_node *node,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max6697_init_chip(struct i2c_client *client)
 {
 	struct max6697_data *data = i2c_get_clientdata(client);
+=======
+static int max6697_init_chip(struct max6697_data *data,
+			     struct i2c_client *client)
+{
+>>>>>>> v3.18
 =======
 static int max6697_init_chip(struct max6697_data *data,
 			     struct i2c_client *client)
@@ -667,6 +704,10 @@ static int max6697_probe(struct i2c_client *client,
 	struct device *dev = &client->dev;
 	struct max6697_data *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *hwmon_dev;
+>>>>>>> v3.18
 =======
 	struct device *hwmon_dev;
 >>>>>>> v3.18
@@ -681,6 +722,7 @@ static int max6697_probe(struct i2c_client *client,
 
 	data->type = id->driver_data;
 	data->chip = &max6697_chip_data[data->type];
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	i2c_set_clientdata(client, data);
@@ -716,6 +758,8 @@ static int max6697_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	data->client = client;
 	mutex_init(&data->update_lock);
 
@@ -727,6 +771,9 @@ static int max6697_remove(struct i2c_client *client)
 							   data,
 							   max6697_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -752,7 +799,10 @@ static struct i2c_driver max6697_driver = {
 	},
 	.probe = max6697_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= max6697_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = max6697_id,

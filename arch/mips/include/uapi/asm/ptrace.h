@@ -10,6 +10,11 @@
 #define _UAPI_ASM_PTRACE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 
@@ -27,6 +32,7 @@
 #define DSP_CONTROL	77
 #define ACX		78
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef __KERNEL__
 /*
@@ -47,6 +53,8 @@ struct pt_regs {
 } __attribute__ ((aligned (8)));
 #endif /* __KERNEL__ */
 =======
+=======
+>>>>>>> v3.18
 /*
  * This struct defines the registers as used by PTRACE_{GET,SET}REGS. The
  * format is the same for both 32- and 64-bit processes. Registers for 32-bit
@@ -68,6 +76,9 @@ struct pt_regs {
 	__u64 cp0_status;
 	__u64 cp0_cause;
 } __attribute__ ((aligned (8)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Arbitrarily choose the same ptrace numbers as used by the Sparc code. */

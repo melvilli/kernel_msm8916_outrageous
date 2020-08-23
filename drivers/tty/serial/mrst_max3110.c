@@ -44,6 +44,10 @@
 #include <linux/kthread.h>
 #include <linux/spi/spi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pm.h>
+>>>>>>> v3.18
 =======
 #include <linux/pm.h>
 >>>>>>> v3.18
@@ -66,6 +70,10 @@ struct uart_max3110 {
 	struct task_struct *read_thread;
 	struct mutex thread_mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex io_mutex;
+>>>>>>> v3.18
 =======
 	struct mutex io_mutex;
 >>>>>>> v3.18
@@ -99,6 +107,10 @@ static int max3110_write_then_read(struct uart_max3110 *max,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&max->io_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&max->io_mutex);
 >>>>>>> v3.18
@@ -117,6 +129,10 @@ static int max3110_write_then_read(struct uart_max3110 *max,
 	/* Do the i/o */
 	ret = spi_sync(spi, &message);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&max->io_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&max->io_mutex);
 >>>>>>> v3.18
@@ -508,6 +524,7 @@ static int serial_m3110_startup(struct uart_port *port)
 
 	if (max->irq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		max->read_thread = NULL;
 		ret = request_irq(max->irq, serial_m3110_irq,
 				IRQ_TYPE_EDGE_FALLING, "max3110", max);
@@ -521,6 +538,11 @@ static int serial_m3110_startup(struct uart_port *port)
 	}
 
 	if (max->irq == 0) {
+=======
+		/* Enable RX IRQ only */
+		config |= WC_RXA_IRQ_ENABLE;
+	} else {
+>>>>>>> v3.18
 =======
 		/* Enable RX IRQ only */
 		config |= WC_RXA_IRQ_ENABLE;
@@ -540,8 +562,11 @@ static int serial_m3110_startup(struct uart_port *port)
 	ret = max3110_out(max, config);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (max->irq)
 			free_irq(max->irq, max);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (max->read_thread)
@@ -566,9 +591,12 @@ static void serial_m3110_shutdown(struct uart_port *port)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (max->irq)
 		free_irq(max->irq, max);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Disable interrupts from this port */
@@ -738,11 +766,15 @@ static void serial_m3110_pm(struct uart_port *port, unsigned int state,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void serial_m3110_enable_ms(struct uart_port *port)
 {
 }
 
 struct uart_ops serial_m3110_ops = {
+=======
+static struct uart_ops serial_m3110_ops = {
+>>>>>>> v3.18
 =======
 static struct uart_ops serial_m3110_ops = {
 >>>>>>> v3.18
@@ -753,7 +785,10 @@ static struct uart_ops serial_m3110_ops = {
 	.start_tx	= serial_m3110_start_tx,
 	.stop_rx	= serial_m3110_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= serial_m3110_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= serial_m3110_break_ctl,
@@ -785,7 +820,12 @@ static int serial_m3110_suspend(struct device *dev)
 	struct uart_max3110 *max = spi_get_drvdata(spi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	disable_irq(max->irq);
+=======
+	if (max->irq > 0)
+		disable_irq(max->irq);
+>>>>>>> v3.18
 =======
 	if (max->irq > 0)
 		disable_irq(max->irq);
@@ -803,7 +843,12 @@ static int serial_m3110_resume(struct device *dev)
 	max3110_out(max, max->cur_conf);
 	uart_resume_port(&serial_m3110_reg, &max->port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enable_irq(max->irq);
+=======
+	if (max->irq > 0)
+		enable_irq(max->irq);
+>>>>>>> v3.18
 =======
 	if (max->irq > 0)
 		enable_irq(max->irq);
@@ -849,6 +894,10 @@ static int serial_m3110_probe(struct spi_device *spi)
 
 	mutex_init(&max->thread_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&max->io_mutex);
+>>>>>>> v3.18
 =======
 	mutex_init(&max->io_mutex);
 >>>>>>> v3.18
@@ -890,7 +939,10 @@ static int serial_m3110_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (max->irq) {
 		ret = request_irq(max->irq, serial_m3110_irq,
 				IRQ_TYPE_EDGE_FALLING, "max3110", max);
@@ -901,13 +953,20 @@ static int serial_m3110_probe(struct spi_device *spi)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spi_set_drvdata(spi, max);
 	pmax = max;
 
 	/* Give membase a psudo value to pass serial_core's check */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max->port.membase = (void *)0xff110000;
+=======
+	max->port.membase = (unsigned char __iomem *)0xff110000;
+>>>>>>> v3.18
 =======
 	max->port.membase = (unsigned char __iomem *)0xff110000;
 >>>>>>> v3.18
@@ -934,6 +993,12 @@ static int serial_m3110_remove(struct spi_device *dev)
 	free_page((unsigned long)max->con_xmit.buf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (max->irq)
+		free_irq(max->irq, max);
+
+>>>>>>> v3.18
 =======
 	if (max->irq)
 		free_irq(max->irq, max);

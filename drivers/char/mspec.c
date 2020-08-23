@@ -268,7 +268,11 @@ mspec_mmap(struct file *file, struct vm_area_struct *vma,
 		return -EPERM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pages = (vma->vm_end - vma->vm_start) >> PAGE_SHIFT;
+=======
+	pages = vma_pages(vma);
+>>>>>>> v3.18
 =======
 	pages = vma_pages(vma);
 >>>>>>> v3.18

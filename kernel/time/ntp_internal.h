@@ -8,7 +8,11 @@ extern u64 ntp_tick_length(void);
 extern int second_overflow(unsigned long secs);
 extern int ntp_validate_timex(struct timex *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __do_adjtimex(struct timex *, struct timespec *, s32 *);
+=======
+extern int __do_adjtimex(struct timex *, struct timespec64 *, s32 *);
+>>>>>>> v3.18
 =======
 extern int __do_adjtimex(struct timex *, struct timespec64 *, s32 *);
 >>>>>>> v3.18

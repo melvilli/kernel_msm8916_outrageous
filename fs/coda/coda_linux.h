@@ -13,13 +13,19 @@
 #define _LINUX_CODA_FS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef pr_fmt
 #undef pr_fmt
 #endif
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/param.h>
@@ -50,7 +56,11 @@ int coda_open(struct inode *i, struct file *f);
 int coda_release(struct inode *i, struct file *f);
 int coda_permission(struct inode *inode, int mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int coda_revalidate_inode(struct dentry *);
+=======
+int coda_revalidate_inode(struct inode *);
+>>>>>>> v3.18
 =======
 int coda_revalidate_inode(struct inode *);
 >>>>>>> v3.18
@@ -77,7 +87,11 @@ void coda_sysctl_clean(void);
         ptr = (cast)vzalloc((unsigned long) size); \
     if (!ptr) \
 <<<<<<< HEAD
+<<<<<<< HEAD
         printk("kernel malloc returns 0 at %s:%d\n", __FILE__, __LINE__); \
+=======
+	pr_warn("kernel malloc returns 0 at %s:%d\n", __FILE__, __LINE__); \
+>>>>>>> v3.18
 =======
 	pr_warn("kernel malloc returns 0 at %s:%d\n", __FILE__, __LINE__); \
 >>>>>>> v3.18

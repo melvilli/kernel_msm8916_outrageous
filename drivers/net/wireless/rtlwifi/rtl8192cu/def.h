@@ -39,9 +39,12 @@
 #define CHIP_VENDOR_UMC_B_CUT		BIT(6)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IS_NORMAL_CHIP(version)		\
 	(((version) & NORMAL_CHIP) ? true : false)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define IS_8723_SERIES(version)		\

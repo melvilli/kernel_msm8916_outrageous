@@ -105,7 +105,10 @@ void rtl92cu_set_check_bssid(struct ieee80211_hw *hw, bool check_bssid);
 int rtl92c_download_fw(struct ieee80211_hw *hw);
 void rtl92c_set_fw_pwrmode_cmd(struct ieee80211_hw *hw, u8 mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl92c_set_fw_rsvdpagepkt(struct ieee80211_hw *hw, bool dl_finished);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void rtl92c_set_fw_joinbss_report_cmd(struct ieee80211_hw *hw, u8 mstatus);
@@ -113,6 +116,12 @@ void rtl92c_fill_h2c_cmd(struct ieee80211_hw *hw,
 			 u8 element_id, u32 cmd_len, u8 *p_cmdbuffer);
 bool rtl92cu_phy_mac_config(struct ieee80211_hw *hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void rtl92cu_update_hal_rate_tbl(struct ieee80211_hw *hw,
+				 struct ieee80211_sta *sta,
+				 u8 rssi_level);
+>>>>>>> v3.18
 =======
 void rtl92cu_update_hal_rate_tbl(struct ieee80211_hw *hw,
 				 struct ieee80211_sta *sta,

@@ -68,7 +68,10 @@ int drm_global_item_ref(struct drm_global_reference *ref)
 	int ret;
 	struct drm_global_item *item = &glob[ref->global_type];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *object;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -89,7 +92,10 @@ int drm_global_item_ref(struct drm_global_reference *ref)
 	++item->refcount;
 	ref->object = item->object;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	object = item->object;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_unlock(&item->mutex);

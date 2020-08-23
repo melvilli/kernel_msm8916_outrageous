@@ -49,16 +49,22 @@ struct input_polled_dev {
 /* private: */
 	struct delayed_work work;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 struct input_polled_dev *input_allocate_polled_device(void);
 =======
+=======
+>>>>>>> v3.18
 
 	bool devres_managed;
 };
 
 struct input_polled_dev *input_allocate_polled_device(void);
 struct input_polled_dev *devm_input_allocate_polled_device(struct device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void input_free_polled_device(struct input_polled_dev *dev);
 int input_register_polled_device(struct input_polled_dev *dev);

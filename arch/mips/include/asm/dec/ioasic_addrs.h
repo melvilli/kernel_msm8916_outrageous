@@ -41,7 +41,11 @@
 #define IOASIC_SCSI	(12*IOASIC_SLOT_SIZE)	/* ASC SCSI */
 #define IOASIC_FDC_DMA	(13*IOASIC_SLOT_SIZE)	/* FDC DMA (maxine) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IOASIC_SCSI_DMA (14*IOASIC_SLOT_SIZE)	/* ??? */
+=======
+#define IOASIC_SCSI_DMA	(14*IOASIC_SLOT_SIZE)	/* ??? */
+>>>>>>> v3.18
 =======
 #define IOASIC_SCSI_DMA	(14*IOASIC_SLOT_SIZE)	/* ??? */
 >>>>>>> v3.18

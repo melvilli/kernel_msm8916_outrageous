@@ -50,7 +50,10 @@
 #include <linux/delay.h>
 #include <linux/hdlc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/in.h>
@@ -81,7 +84,11 @@
 static int LMC_PKT_BUF_SZ = 1542;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(lmc_pci_tbl) = {
+=======
+static const struct pci_device_id lmc_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id lmc_pci_tbl[] = {
 >>>>>>> v3.18
@@ -981,7 +988,10 @@ static int lmc_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 err_hdlcdev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(sc);
@@ -1006,7 +1016,10 @@ static void lmc_remove_one(struct pci_dev *pdev)
 		pci_release_regions(pdev);
 		pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -2140,7 +2153,11 @@ bug_out:
     spin_unlock_irqrestore(&sc->lmc_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     lmc_trace(dev, "lmc_driver_timout out");
+=======
+    lmc_trace(dev, "lmc_driver_timeout out");
+>>>>>>> v3.18
 =======
     lmc_trace(dev, "lmc_driver_timeout out");
 >>>>>>> v3.18

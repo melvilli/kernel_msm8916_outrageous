@@ -207,7 +207,10 @@ static void find_target_mwait(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool has_pkg_state_counter(void)
 {
 	u64 tmp;
@@ -217,6 +220,9 @@ static bool has_pkg_state_counter(void)
 	       !rdmsrl_safe(MSR_PKG_C7_RESIDENCY, &tmp);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u64 pkg_state_counter(void)
 {
@@ -451,9 +457,13 @@ static int clamp_thread(void *arg)
 			local_touch_nmi();
 			stop_critical_timings();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__monitor((void *)&current_thread_info()->flags, 0, 0);
 			cpu_relax(); /* allow HT sibling to run */
 			__mwait(eax, ecx);
+=======
+			mwait_idle_with_hints(eax, ecx);
+>>>>>>> v3.18
 =======
 			mwait_idle_with_hints(eax, ecx);
 >>>>>>> v3.18
@@ -462,7 +472,11 @@ static int clamp_thread(void *arg)
 		}
 		tick_nohz_idle_exit();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		preempt_enable_no_resched();
+=======
+		preempt_enable();
+>>>>>>> v3.18
 =======
 		preempt_enable();
 >>>>>>> v3.18
@@ -521,7 +535,11 @@ static int start_power_clamp(void)
 
 	/* check if pkg cstate counter is completely 0, abort in this case */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pkg_state_counter()) {
+=======
+	if (!has_pkg_state_counter()) {
+>>>>>>> v3.18
 =======
 	if (!has_pkg_state_counter()) {
 >>>>>>> v3.18
@@ -699,8 +717,11 @@ static const struct x86_cpu_id intel_powerclamp_ids[] = {
 	{ X86_VENDOR_INTEL, 6, 0x2e},
 	{ X86_VENDOR_INTEL, 6, 0x2f},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ X86_VENDOR_INTEL, 6, 0x3a},
 =======
+=======
+>>>>>>> v3.18
 	{ X86_VENDOR_INTEL, 6, 0x37},
 	{ X86_VENDOR_INTEL, 6, 0x3a},
 	{ X86_VENDOR_INTEL, 6, 0x3c},
@@ -709,6 +730,9 @@ static const struct x86_cpu_id intel_powerclamp_ids[] = {
 	{ X86_VENDOR_INTEL, 6, 0x3f},
 	{ X86_VENDOR_INTEL, 6, 0x45},
 	{ X86_VENDOR_INTEL, 6, 0x46},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };
@@ -794,6 +818,7 @@ static int powerclamp_init(void)
 	retval = powerclamp_probe();
 	if (retval)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return retval;
 	/* set default limit, maybe adjusted during runtime based on feedback */
 	window_size = 2;
@@ -810,6 +835,8 @@ static int powerclamp_init(void)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		goto exit_free;
 
 	/* set default limit, maybe adjusted during runtime based on feedback */
@@ -843,6 +870,9 @@ exit_unregister:
 exit_free:
 	kfree(cpu_clamping_mask);
 	return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 module_init(powerclamp_init);

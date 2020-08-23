@@ -22,11 +22,17 @@
 #include "hw-ops.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "common-init.h"
 #include "common-beacon.h"
 #include "common-debug.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Common header for Atheros 802.11n base driver cores */
 
@@ -50,6 +56,7 @@
 	(((x) + ((mul)/2)) / (mul))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ath9k_cmn_get_hw_crypto_keytype(struct sk_buff *skb);
 void ath9k_cmn_update_ichannel(struct ath9k_channel *ichan,
 			       struct ieee80211_channel *chan,
@@ -57,6 +64,8 @@ void ath9k_cmn_update_ichannel(struct ath9k_channel *ichan,
 struct ath9k_channel *ath9k_cmn_get_curchannel(struct ieee80211_hw *hw,
 					       struct ath_hw *ah);
 =======
+=======
+>>>>>>> v3.18
 #define IEEE80211_MS_TO_TU(x)   (((x) * 1000) / 1024)
 
 struct ath_beacon_config {
@@ -93,6 +102,9 @@ int ath9k_cmn_get_hw_crypto_keytype(struct sk_buff *skb);
 struct ath9k_channel *ath9k_cmn_get_channel(struct ieee80211_hw *hw,
 					    struct ath_hw *ah,
 					    struct cfg80211_chan_def *chandef);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ath9k_cmn_count_streams(unsigned int chainmask, int max);
 void ath9k_cmn_btcoex_bt_stomp(struct ath_common *common,

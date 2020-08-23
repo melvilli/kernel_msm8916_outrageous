@@ -56,6 +56,7 @@
 #include <linux/fcntl.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIRC_ON_SA1100
 #include <asm/hardware.h>
 #ifdef CONFIG_SA1100_COLLIE
@@ -63,6 +64,8 @@
 #include <asm/ucb1200.h>
 #endif
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -98,6 +101,7 @@ static void init_act220(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*** SA1100 ***/
 #ifdef LIRC_ON_SA1100
 struct sa1100_ser2_registers {
@@ -127,6 +131,8 @@ static unsigned int duty_cycle = 50;   /* duty cycle of 50% */
 
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RBUF_LEN 1024
@@ -194,15 +200,21 @@ static bool debug;
 /* Communication with user-space */
 static unsigned int lirc_poll(struct file *file, poll_table *wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t lirc_read(struct file *file, char *buf, size_t count,
 		loff_t *ppos);
 static ssize_t lirc_write(struct file *file, const char *buf, size_t n,
 		loff_t *pos);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t lirc_read(struct file *file, char __user *buf, size_t count,
 			 loff_t *ppos);
 static ssize_t lirc_write(struct file *file, const char __user *buf, size_t n,
 			  loff_t *pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg);
 static void add_read_queue(int flag, unsigned long val);
@@ -219,6 +231,7 @@ static int init_port(void);
 static void drop_port(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIRC_ON_SA1100
 static void on(void)
 {
@@ -232,6 +245,8 @@ static void off(void)
 #else
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline unsigned int sinp(int offset)
 {
 	return inb(io + offset);
@@ -242,7 +257,10 @@ static inline void soutp(int offset, int value)
 	outb(value, io + offset);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -272,8 +290,13 @@ static unsigned int lirc_poll(struct file *file, poll_table *wait)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t lirc_read(struct file *file, char *buf, size_t count,
 		loff_t *ppos)
+=======
+static ssize_t lirc_read(struct file *file, char __user *buf, size_t count,
+			 loff_t *ppos)
+>>>>>>> v3.18
 =======
 static ssize_t lirc_read(struct file *file, char __user *buf, size_t count,
 			 loff_t *ppos)
@@ -291,9 +314,15 @@ static ssize_t lirc_read(struct file *file, char __user *buf, size_t count,
 	while (n < count) {
 		if (rx_head != rx_tail) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (copy_to_user((void *) buf + n,
 					(void *) (rx_buf + rx_head),
 					sizeof(int))) {
+=======
+			if (copy_to_user(buf + n,
+					 rx_buf + rx_head,
+					 sizeof(int))) {
+>>>>>>> v3.18
 =======
 			if (copy_to_user(buf + n,
 					 rx_buf + rx_head,
@@ -322,8 +351,13 @@ static ssize_t lirc_read(struct file *file, char __user *buf, size_t count,
 	return n ? n : retval;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t lirc_write(struct file *file, const char *buf, size_t n,
 				loff_t *pos)
+=======
+static ssize_t lirc_write(struct file *file, const char __user *buf, size_t n,
+			  loff_t *pos)
+>>>>>>> v3.18
 =======
 static ssize_t lirc_write(struct file *file, const char __user *buf, size_t n,
 			  loff_t *pos)
@@ -341,10 +375,13 @@ static ssize_t lirc_write(struct file *file, const char __user *buf, size_t n,
 		return PTR_ERR(tx_buf);
 	i = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIRC_ON_SA1100
 	/* disable receiver */
 	Ser2UTCR3 = 0;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	local_irq_save(flags);
@@ -362,6 +399,7 @@ static ssize_t lirc_write(struct file *file, const char __user *buf, size_t n,
 	}
 	local_irq_restore(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIRC_ON_SA1100
 	off();
 	udelay(1000); /* wait 1ms for IR diode to recover */
@@ -373,12 +411,15 @@ static ssize_t lirc_write(struct file *file, const char __user *buf, size_t n,
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	kfree(tx_buf);
 	return count;
 }
 
 static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int retval = 0;
 	__u32 value = 0;
@@ -396,11 +437,16 @@ static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 #else
 	if (cmd == LIRC_GET_FEATURES)
 =======
+=======
+>>>>>>> v3.18
 	u32 __user *uptr = (u32 __user *)arg;
 	int retval = 0;
 	u32 value = 0;
 
 	if (cmd == LIRC_GET_FEATURES)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		value = LIRC_CAN_SEND_PULSE | LIRC_CAN_REC_MODE2;
 	else if (cmd == LIRC_GET_SEND_MODE)
@@ -408,7 +454,10 @@ static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 	else if (cmd == LIRC_GET_REC_MODE)
 		value = LIRC_MODE_MODE2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -417,7 +466,11 @@ static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 	case LIRC_GET_SEND_MODE:
 	case LIRC_GET_REC_MODE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = put_user(value, (__u32 *) arg);
+=======
+		retval = put_user(value, uptr);
+>>>>>>> v3.18
 =======
 		retval = put_user(value, uptr);
 >>>>>>> v3.18
@@ -425,6 +478,7 @@ static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 
 	case LIRC_SET_SEND_MODE:
 	case LIRC_SET_REC_MODE:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		retval = get_user(value, (__u32 *) arg);
 		break;
@@ -459,6 +513,10 @@ static long lirc_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
 			space_width -= LIRC_ON_SA1100_TRANSMITTER_LATENCY;
 		break;
 #endif
+=======
+		retval = get_user(value, uptr);
+		break;
+>>>>>>> v3.18
 =======
 		retval = get_user(value, uptr);
 		break;
@@ -600,10 +658,15 @@ static void sir_timeout(unsigned long data)
 	spin_lock_irqsave(&timer_lock, flags);
 	if (last_value) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef LIRC_ON_SA1100
 		/* clear unread bits in UART and restart */
 		outb(UART_FCR_CLEAR_RCVR, io + UART_FCR);
 #endif
+=======
+		/* clear unread bits in UART and restart */
+		outb(UART_FCR_CLEAR_RCVR, io + UART_FCR);
+>>>>>>> v3.18
 =======
 		/* clear unread bits in UART and restart */
 		outb(UART_FCR_CLEAR_RCVR, io + UART_FCR);
@@ -623,6 +686,7 @@ static irqreturn_t sir_interrupt(int irq, void *dev_id)
 	unsigned char data;
 	struct timeval curr_tv;
 	static unsigned long deltv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef LIRC_ON_SA1100
 	int status;
@@ -680,6 +744,8 @@ static irqreturn_t sir_interrupt(int irq, void *dev_id)
 	if (status)
 		Ser2UTSR0 = status;
 #else
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long deltintrtv;
@@ -767,6 +833,7 @@ static irqreturn_t sir_interrupt(int irq, void *dev_id)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 	return IRQ_RETVAL(IRQ_HANDLED);
 }
@@ -810,6 +877,11 @@ static void send_space(unsigned long length)
 }
 
 >>>>>>> v3.18
+=======
+	return IRQ_RETVAL(IRQ_HANDLED);
+}
+
+>>>>>>> v3.18
 static void send_space(unsigned long len)
 {
 	safe_udelay(len);
@@ -829,6 +901,7 @@ static void send_pulse(unsigned long len)
 			;
 	}
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 
@@ -857,6 +930,8 @@ static int sa1100_irda_set_power_collie(int state)
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 static int init_hardware(void)
 {
@@ -864,6 +939,7 @@ static int init_hardware(void)
 
 	spin_lock_irqsave(&hardware_lock, flags);
 	/* reset UART */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef LIRC_ON_SA1100
 #ifdef CONFIG_SA1100_COLLIE
@@ -910,6 +986,9 @@ static int init_hardware(void)
 	Ser2UTSR0 &= (UTSR0_RID | UTSR0_RBB | UTSR0_REB);
 
 #elif defined(LIRC_SIR_TEKRAM)
+=======
+#if defined(LIRC_SIR_TEKRAM)
+>>>>>>> v3.18
 =======
 #if defined(LIRC_SIR_TEKRAM)
 >>>>>>> v3.18
@@ -1009,6 +1088,7 @@ static void drop_hardware(void)
 	spin_lock_irqsave(&hardware_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIRC_ON_SA1100
 	Ser2UTCR3 = 0;
 
@@ -1031,6 +1111,11 @@ static void drop_hardware(void)
 	outb(0, io + UART_IER);
 
 >>>>>>> v3.18
+=======
+	/* turn off interrupts */
+	outb(0, io + UART_IER);
+
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&hardware_lock, flags);
 }
 
@@ -1042,13 +1127,17 @@ static int init_port(void)
 
 	/* get I/O port access and IRQ line */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef LIRC_ON_SA1100
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (request_region(io, 8, LIRC_DRIVER_NAME) == NULL) {
 		pr_err("i/o port 0x%.4x already in use.\n", io);
 		return -EBUSY;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 	retval = request_irq(irq, sir_interrupt, 0,
@@ -1064,6 +1153,8 @@ static int init_port(void)
 	pr_info("I/O port 0x%.4x, IRQ %d.\n", io, irq);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	retval = request_irq(irq, sir_interrupt, 0,
 			     LIRC_DRIVER_NAME, NULL);
 	if (retval < 0) {
@@ -1072,6 +1163,9 @@ static int init_port(void)
 		return retval;
 	}
 	pr_info("I/O port 0x%.4x, IRQ %d.\n", io, irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	init_timer(&timerlist);
@@ -1086,9 +1180,13 @@ static void drop_port(void)
 	free_irq(irq, NULL);
 	del_timer_sync(&timerlist);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef LIRC_ON_SA1100
 	release_region(io, 8);
 #endif
+=======
+	release_region(io, 8);
+>>>>>>> v3.18
 =======
 	release_region(io, 8);
 >>>>>>> v3.18
@@ -1390,9 +1488,12 @@ module_exit(lirc_sir_exit);
 MODULE_DESCRIPTION("Infrared receiver driver for Tekram Irmate 210");
 MODULE_AUTHOR("Christoph Bartelmus");
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(LIRC_ON_SA1100)
 MODULE_DESCRIPTION("LIRC driver for StrongARM SA1100 embedded microprocessor");
 MODULE_AUTHOR("Christoph Bartelmus");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #elif defined(LIRC_SIR_ACTISYS_ACT200L)
@@ -1408,10 +1509,13 @@ MODULE_AUTHOR("Milan Pikula");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef LIRC_ON_SA1100
 module_param(irq, int, S_IRUGO);
 MODULE_PARM_DESC(irq, "Interrupt (16)");
 #else
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 module_param(io, int, S_IRUGO);
@@ -1423,7 +1527,10 @@ MODULE_PARM_DESC(irq, "Interrupt (4 or 3)");
 module_param(threshold, int, S_IRUGO);
 MODULE_PARM_DESC(threshold, "space detection threshold (3)");
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

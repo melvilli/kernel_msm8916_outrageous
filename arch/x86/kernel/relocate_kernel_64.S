@@ -152,6 +152,7 @@ identity_mapped:
 	testq	%r11, %r11
 	jnz 1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xorq	%rax, %rax
 	xorq	%rbx, %rbx
 	xorq    %rcx, %rcx
@@ -168,6 +169,8 @@ identity_mapped:
 	xorq	%r14, %r14
 	xorq	%r15, %r15
 =======
+=======
+>>>>>>> v3.18
 	xorl	%eax, %eax
 	xorl	%ebx, %ebx
 	xorl    %ecx, %ecx
@@ -183,6 +186,9 @@ identity_mapped:
 	xorl	%r13d, %r13d
 	xorl	%r14d, %r14d
 	xorl	%r15d, %r15d
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret
@@ -231,8 +237,13 @@ virtual_mapped:
 swap_pages:
 	movq	%rdi, %rcx 	/* Put the page_list in %rcx */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xorq	%rdi, %rdi
 	xorq	%rsi, %rsi
+=======
+	xorl	%edi, %edi
+	xorl	%esi, %esi
+>>>>>>> v3.18
 =======
 	xorl	%edi, %edi
 	xorl	%esi, %esi

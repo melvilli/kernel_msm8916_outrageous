@@ -9,6 +9,10 @@
  */
 #include <linux/atomic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/completion.h>
+>>>>>>> v3.18
 =======
 #include <linux/completion.h>
 >>>>>>> v3.18
@@ -67,17 +71,23 @@ static DEFINE_PER_CPU(struct ipi_data, ipi_data) = {
 static DEFINE_SPINLOCK(boot_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * "thread" is assumed to be a valid Meta hardware thread ID.
  */
 int __cpuinit boot_secondary(unsigned int thread, struct task_struct *idle)
 =======
+=======
+>>>>>>> v3.18
 static DECLARE_COMPLETION(cpu_running);
 
 /*
  * "thread" is assumed to be a valid Meta hardware thread ID.
  */
 static int boot_secondary(unsigned int thread, struct task_struct *idle)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 val;
@@ -129,11 +139,17 @@ static int boot_secondary(unsigned int thread, struct task_struct *idle)
  * those changes.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void describe_cachepart_change(unsigned int thread,
 						const char *label,
 						unsigned int sz,
 						unsigned int old,
 						unsigned int new)
+=======
+static void describe_cachepart_change(unsigned int thread, const char *label,
+				      unsigned int sz, unsigned int old,
+				      unsigned int new)
+>>>>>>> v3.18
 =======
 static void describe_cachepart_change(unsigned int thread, const char *label,
 				      unsigned int sz, unsigned int old,
@@ -187,7 +203,11 @@ static void describe_cachepart_change(unsigned int thread, const char *label,
  * partitions.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void setup_smp_cache(unsigned int thread)
+=======
+static void setup_smp_cache(unsigned int thread)
+>>>>>>> v3.18
 =======
 static void setup_smp_cache(unsigned int thread)
 >>>>>>> v3.18
@@ -236,7 +256,11 @@ static void setup_smp_cache(unsigned int thread)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *idle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 int __cpu_up(unsigned int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -263,14 +287,18 @@ int __cpu_up(unsigned int cpu, struct task_struct *idle)
 	ret = boot_secondary(thread, idle);
 	if (ret == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long timeout;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
 		 * CPU was successfully started, wait for it
 		 * to come online or time out.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		timeout = jiffies + HZ;
 		while (time_before(jiffies, timeout)) {
@@ -280,6 +308,10 @@ int __cpu_up(unsigned int cpu, struct task_struct *idle)
 			udelay(10);
 			barrier();
 		}
+=======
+		wait_for_completion_timeout(&cpu_running,
+					    msecs_to_jiffies(1000));
+>>>>>>> v3.18
 =======
 		wait_for_completion_timeout(&cpu_running,
 					    msecs_to_jiffies(1000));
@@ -309,10 +341,16 @@ static DECLARE_COMPLETION(cpu_killed);
  * __cpu_disable runs on the processor to be shutdown.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuexit __cpu_disable(void)
 {
 	unsigned int cpu = smp_processor_id();
 	struct task_struct *p;
+=======
+int __cpu_disable(void)
+{
+	unsigned int cpu = smp_processor_id();
+>>>>>>> v3.18
 =======
 int __cpu_disable(void)
 {
@@ -338,12 +376,16 @@ int __cpu_disable(void)
 	local_flush_tlb_all();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_lock(&tasklist_lock);
 	for_each_process(p) {
 		if (p->mm)
 			cpumask_clear_cpu(cpu, mm_cpumask(p->mm));
 	}
 	read_unlock(&tasklist_lock);
+=======
+	clear_tasks_mm_cpumask(cpu);
+>>>>>>> v3.18
 =======
 	clear_tasks_mm_cpumask(cpu);
 >>>>>>> v3.18
@@ -356,7 +398,11 @@ int __cpu_disable(void)
  * waits until shutdown has completed, or it is timed out.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuexit __cpu_die(unsigned int cpu)
+=======
+void __cpu_die(unsigned int cpu)
+>>>>>>> v3.18
 =======
 void __cpu_die(unsigned int cpu)
 >>>>>>> v3.18
@@ -372,7 +418,11 @@ void __cpu_die(unsigned int cpu)
  * brought online again it will need to run secondary_startup().
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuexit cpu_die(void)
+=======
+void cpu_die(void)
+>>>>>>> v3.18
 =======
 void cpu_die(void)
 >>>>>>> v3.18
@@ -391,7 +441,11 @@ void cpu_die(void)
  * per-processor storage.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit smp_store_cpu_info(unsigned int cpuid)
+=======
+void smp_store_cpu_info(unsigned int cpuid)
+>>>>>>> v3.18
 =======
 void smp_store_cpu_info(unsigned int cpuid)
 >>>>>>> v3.18
@@ -443,12 +497,16 @@ asmlinkage void secondary_start_kernel(void)
 	setup_priv();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Enable local interrupts.
 	 */
 	tbi_startup_interrupt(TBID_SIGNUM_TRT);
 	notify_cpu_starting(cpu);
 	local_irq_enable();
+=======
+	notify_cpu_starting(cpu);
+>>>>>>> v3.18
 =======
 	notify_cpu_starting(cpu);
 >>>>>>> v3.18
@@ -464,6 +522,7 @@ asmlinkage void secondary_start_kernel(void)
 	 */
 	set_cpu_online(cpu, true);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * Check for cache aliasing.
@@ -471,6 +530,8 @@ asmlinkage void secondary_start_kernel(void)
 	 */
 	check_for_cache_aliasing(cpu);
 =======
+=======
+>>>>>>> v3.18
 	complete(&cpu_running);
 
 	/*
@@ -478,6 +539,9 @@ asmlinkage void secondary_start_kernel(void)
 	 */
 	tbi_startup_interrupt(TBID_SIGNUM_TRT);
 	local_irq_enable();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -580,7 +644,11 @@ void arch_send_call_function_ipi_mask(const struct cpumask *mask)
 void arch_send_call_function_single_ipi(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	send_ipi_message(cpumask_of(cpu), IPI_CALL_FUNC_SINGLE);
+=======
+	send_ipi_message(cpumask_of(cpu), IPI_CALL_FUNC);
+>>>>>>> v3.18
 =======
 	send_ipi_message(cpumask_of(cpu), IPI_CALL_FUNC);
 >>>>>>> v3.18
@@ -610,16 +678,22 @@ static DEFINE_SPINLOCK(stop_lock);
  *  Bit 0 - Inter-processor function call
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_IPI(struct pt_regs *regs)
 {
 	unsigned int cpu = smp_processor_id();
 	struct ipi_data *ipi = &per_cpu(ipi_data, cpu);
 	struct pt_regs *old_regs = set_irq_regs(regs);
 =======
+=======
+>>>>>>> v3.18
 static int do_IPI(void)
 {
 	unsigned int cpu = smp_processor_id();
 	struct ipi_data *ipi = &per_cpu(ipi_data, cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long msgs, nextmsg;
 	int handled = 0;
@@ -646,10 +720,13 @@ static int do_IPI(void)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case IPI_CALL_FUNC_SINGLE:
 			generic_smp_call_function_single_interrupt();
 			break;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		default:
@@ -660,8 +737,11 @@ static int do_IPI(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_irq_regs(old_regs);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return handled;
@@ -730,7 +810,11 @@ static TBIRES ipi_handler(TBIRES State, int SigNum, int Triggers,
 		   int Inst, PTBI pTBI, int *handled)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*handled = do_IPI((struct pt_regs *)State.Sig.pCtx);
+=======
+	*handled = do_IPI();
+>>>>>>> v3.18
 =======
 	*handled = do_IPI();
 >>>>>>> v3.18

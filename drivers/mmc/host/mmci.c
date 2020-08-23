@@ -14,6 +14,10 @@
 #include <linux/ioport.h>
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -28,6 +32,10 @@
 #include <linux/mmc/host.h>
 #include <linux/mmc/card.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mmc/slot-gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/mmc/slot-gpio.h>
 >>>>>>> v3.18
@@ -50,6 +58,10 @@
 
 #include "mmci.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "mmci_qcom_dml.h"
+>>>>>>> v3.18
 =======
 #include "mmci_qcom_dml.h"
 >>>>>>> v3.18
@@ -63,6 +75,11 @@ static unsigned int fmax = 515633;
  * @clkreg: default value for MCICLOCK register
  * @clkreg_enable: enable value for MMCICLOCK register
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @clkreg_8bit_bus_enable: enable value for 8 bit bus
+ * @clkreg_neg_edge_enable: enable value for inverted data/cmd output
+>>>>>>> v3.18
 =======
  * @clkreg_8bit_bus_enable: enable value for 8 bit bus
  * @clkreg_neg_edge_enable: enable value for inverted data/cmd output
@@ -73,6 +90,7 @@ static unsigned int fmax = 515633;
  * @fifohalfsize: number of bytes that can be written when MCI_TXFIFOHALFEMPTY
  *		  is asserted (likewise for RX)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @sdio: variant supports SDIO
  * @st_clkdiv: true if using a ST-specific clock divider algorithm
  * @blksz_datactrl16: true if Block size is at b16..b30 position in datactrl register
@@ -80,6 +98,8 @@ static unsigned int fmax = 515633;
  * @signal_direction: input/out direction of bus signals can be indicated
  * @pwrreg_clkgate: MMCIPOWER register must be used to gate the clock
 =======
+=======
+>>>>>>> v3.18
  * @data_cmd_enable: enable value for data commands.
  * @st_sdio: enable ST specific SDIO logic
  * @st_clkdiv: true if using a ST-specific clock divider algorithm
@@ -98,11 +118,15 @@ static unsigned int fmax = 515633;
  * @qcom_fifo: enables qcom specific fifo pio read logic.
  * @qcom_dml: enables qcom specific dma glue for dma transfers.
  * @reversed_irq_handling: handle data irq before cmd irq.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct variant_data {
 	unsigned int		clkreg;
 	unsigned int		clkreg_enable;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int		datalength_bits;
 	unsigned int		fifosize;
@@ -114,6 +138,8 @@ struct variant_data {
 	bool			signal_direction;
 	bool			pwrreg_clkgate;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int		clkreg_8bit_bus_enable;
 	unsigned int		clkreg_neg_edge_enable;
 	unsigned int		datalength_bits;
@@ -136,6 +162,9 @@ struct variant_data {
 	bool			qcom_fifo;
 	bool			qcom_dml;
 	bool			reversed_irq_handling;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -145,6 +174,11 @@ static struct variant_data variant_arm = {
 	.datalength_bits	= 16,
 	.pwrreg_powerup		= MCI_PWR_UP,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.f_max			= 100000000,
+	.reversed_irq_handling	= true,
+>>>>>>> v3.18
 =======
 	.f_max			= 100000000,
 	.reversed_irq_handling	= true,
@@ -157,6 +191,10 @@ static struct variant_data variant_arm_extended_fifo = {
 	.datalength_bits	= 16,
 	.pwrreg_powerup		= MCI_PWR_UP,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.f_max			= 100000000,
+>>>>>>> v3.18
 =======
 	.f_max			= 100000000,
 >>>>>>> v3.18
@@ -169,6 +207,10 @@ static struct variant_data variant_arm_extended_fifo_hwfc = {
 	.datalength_bits	= 16,
 	.pwrreg_powerup		= MCI_PWR_UP,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.f_max			= 100000000,
+>>>>>>> v3.18
 =======
 	.f_max			= 100000000,
 >>>>>>> v3.18
@@ -179,12 +221,15 @@ static struct variant_data variant_u300 = {
 	.fifohalfsize		= 8 * 4,
 	.clkreg_enable		= MCI_ST_U300_HWFCEN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.datalength_bits	= 16,
 	.sdio			= true,
 	.pwrreg_powerup		= MCI_PWR_ON,
 	.signal_direction	= true,
 	.pwrreg_clkgate		= true,
 =======
+=======
+>>>>>>> v3.18
 	.clkreg_8bit_bus_enable = MCI_ST_8BIT_BUS,
 	.datalength_bits	= 16,
 	.datactrl_mask_sdio	= MCI_ST_DPSM_SDIOEN,
@@ -194,6 +239,9 @@ static struct variant_data variant_u300 = {
 	.signal_direction	= true,
 	.pwrreg_clkgate		= true,
 	.pwrreg_nopower		= true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -203,12 +251,15 @@ static struct variant_data variant_nomadik = {
 	.clkreg			= MCI_CLK_ENABLE,
 	.datalength_bits	= 24,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.sdio			= true,
 	.st_clkdiv		= true,
 	.pwrreg_powerup		= MCI_PWR_ON,
 	.signal_direction	= true,
 	.pwrreg_clkgate		= true,
 =======
+=======
+>>>>>>> v3.18
 	.datactrl_mask_sdio	= MCI_ST_DPSM_SDIOEN,
 	.st_sdio		= true,
 	.st_clkdiv		= true,
@@ -217,6 +268,9 @@ static struct variant_data variant_nomadik = {
 	.signal_direction	= true,
 	.pwrreg_clkgate		= true,
 	.pwrreg_nopower		= true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -226,6 +280,7 @@ static struct variant_data variant_ux500 = {
 	.clkreg			= MCI_CLK_ENABLE,
 	.clkreg_enable		= MCI_ST_UX500_HWFCEN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.datalength_bits	= 24,
 	.sdio			= true,
 	.st_clkdiv		= true,
@@ -233,6 +288,8 @@ static struct variant_data variant_ux500 = {
 	.signal_direction	= true,
 	.pwrreg_clkgate		= true,
 =======
+=======
+>>>>>>> v3.18
 	.clkreg_8bit_bus_enable = MCI_ST_8BIT_BUS,
 	.clkreg_neg_edge_enable	= MCI_ST_UX500_NEG_EDGE,
 	.datalength_bits	= 24,
@@ -245,6 +302,9 @@ static struct variant_data variant_ux500 = {
 	.pwrreg_clkgate		= true,
 	.busy_detect		= true,
 	.pwrreg_nopower		= true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -253,6 +313,7 @@ static struct variant_data variant_ux500v2 = {
 	.fifohalfsize		= 8 * 4,
 	.clkreg			= MCI_CLK_ENABLE,
 	.clkreg_enable		= MCI_ST_UX500_HWFCEN,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.datalength_bits	= 24,
 	.sdio			= true,
@@ -264,6 +325,8 @@ static struct variant_data variant_ux500v2 = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	.clkreg_8bit_bus_enable = MCI_ST_8BIT_BUS,
 	.clkreg_neg_edge_enable	= MCI_ST_UX500_NEG_EDGE,
 	.datactrl_mask_ddrmode	= MCI_ST_DPSM_DDRMODE,
@@ -317,6 +380,9 @@ static int mmci_card_busy(struct mmc_host *mmc)
 	return busy;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Validate mmc prerequisites
@@ -337,7 +403,10 @@ static int mmci_validate_data(struct mmci_host *host,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void mmci_reg_delay(struct mmci_host *host)
 {
 	/*
@@ -353,6 +422,9 @@ static void mmci_reg_delay(struct mmci_host *host)
 		ndelay(120);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This must be called with host->lock held
@@ -380,7 +452,10 @@ static void mmci_write_pwrreg(struct mmci_host *host, u32 pwr)
  * This must be called with host->lock held
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void mmci_write_datactrlreg(struct mmci_host *host, u32 datactrl)
 {
 	/* Keep ST Micro busy mode if enabled */
@@ -395,6 +470,9 @@ static void mmci_write_datactrlreg(struct mmci_host *host, u32 datactrl)
 /*
  * This must be called with host->lock held
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void mmci_set_clkreg(struct mmci_host *host, unsigned int desired)
 {
@@ -402,9 +480,12 @@ static void mmci_set_clkreg(struct mmci_host *host, unsigned int desired)
 	u32 clk = variant->clkreg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (desired) {
 		if (desired >= host->mclk) {
 =======
+=======
+>>>>>>> v3.18
 	/* Make sure cclk reflects the current calculated clock */
 	host->cclk = 0;
 
@@ -412,6 +493,9 @@ static void mmci_set_clkreg(struct mmci_host *host, unsigned int desired)
 		if (variant->explicit_mclk_control) {
 			host->cclk = host->mclk;
 		} else if (desired >= host->mclk) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			clk = MCI_CLK_BYPASS;
 			if (variant->st_clkdiv)
@@ -446,6 +530,7 @@ static void mmci_set_clkreg(struct mmci_host *host, unsigned int desired)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (host->mmc->ios.bus_width == MMC_BUS_WIDTH_4)
 		clk |= MCI_4BIT_BUS;
 	if (host->mmc->ios.bus_width == MMC_BUS_WIDTH_8)
@@ -454,6 +539,8 @@ static void mmci_set_clkreg(struct mmci_host *host, unsigned int desired)
 	if (host->mmc->ios.timing == MMC_TIMING_UHS_DDR50)
 		clk |= MCI_ST_UX500_NEG_EDGE;
 =======
+=======
+>>>>>>> v3.18
 	/* Set actual clock for debug */
 	host->mmc->actual_clock = host->cclk;
 
@@ -465,6 +552,9 @@ static void mmci_set_clkreg(struct mmci_host *host, unsigned int desired)
 	if (host->mmc->ios.timing == MMC_TIMING_UHS_DDR50 ||
 	    host->mmc->ios.timing == MMC_TIMING_MMC_DDR52)
 		clk |= variant->clkreg_neg_edge_enable;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mmci_write_clkreg(host, clk);
@@ -505,7 +595,11 @@ static void mmci_set_mask1(struct mmci_host *host, unsigned int mask)
 static void mmci_stop_data(struct mmci_host *host)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(0, host->base + MMCIDATACTRL);
+=======
+	mmci_write_datactrlreg(host, 0);
+>>>>>>> v3.18
 =======
 	mmci_write_datactrlreg(host, 0);
 >>>>>>> v3.18
@@ -534,6 +628,7 @@ static void mmci_init_sg(struct mmci_host *host, struct mmc_data *data)
 static void mmci_dma_setup(struct mmci_host *host)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mmci_platform_data *plat = host->plat;
 	const char *rxname, *txname;
 	dma_cap_mask_t mask;
@@ -543,12 +638,17 @@ static void mmci_dma_setup(struct mmci_host *host)
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 	const char *rxname, *txname;
 	dma_cap_mask_t mask;
 	struct variant_data *variant = host->variant;
 
 	host->dma_rx_channel = dma_request_slave_channel(mmc_dev(host->mmc), "rx");
 	host->dma_tx_channel = dma_request_slave_channel(mmc_dev(host->mmc), "tx");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* initialize pre request cookie */
@@ -563,6 +663,7 @@ static void mmci_dma_setup(struct mmci_host *host)
 	 * attempt to use it bidirectionally, however if it is
 	 * is specified but cannot be located, DMA will be disabled.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (plat->dma_rx_param) {
 		host->dma_rx_channel = dma_request_channel(mask,
@@ -582,6 +683,10 @@ static void mmci_dma_setup(struct mmci_host *host)
 	} else {
 		host->dma_tx_channel = host->dma_rx_channel;
 	}
+=======
+	if (host->dma_rx_channel && !host->dma_tx_channel)
+		host->dma_tx_channel = host->dma_rx_channel;
+>>>>>>> v3.18
 =======
 	if (host->dma_rx_channel && !host->dma_tx_channel)
 		host->dma_tx_channel = host->dma_rx_channel;
@@ -619,11 +724,17 @@ static void mmci_dma_setup(struct mmci_host *host)
 			host->mmc->max_seg_size = max_seg_size;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (variant->qcom_dml && host->dma_rx_channel && host->dma_tx_channel)
 		if (dml_hw_init(host, host->mmc->parent->of_node))
 			variant->qcom_dml = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -634,11 +745,17 @@ static void mmci_dma_setup(struct mmci_host *host)
 static inline void mmci_dma_release(struct mmci_host *host)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mmci_platform_data *plat = host->plat;
 
 	if (host->dma_rx_channel)
 		dma_release_channel(host->dma_rx_channel);
 	if (host->dma_tx_channel && plat->dma_tx_param)
+=======
+	if (host->dma_rx_channel)
+		dma_release_channel(host->dma_rx_channel);
+	if (host->dma_tx_channel)
+>>>>>>> v3.18
 =======
 	if (host->dma_rx_channel)
 		dma_release_channel(host->dma_rx_channel);
@@ -735,6 +852,10 @@ static int __mmci_dma_prep_data(struct mmci_host *host, struct mmc_data *data,
 	enum dma_data_direction buffer_dirn;
 	int nr_sg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags = DMA_CTRL_ACK;
+>>>>>>> v3.18
 =======
 	unsigned long flags = DMA_CTRL_ACK;
 >>>>>>> v3.18
@@ -763,16 +884,22 @@ static int __mmci_dma_prep_data(struct mmci_host *host, struct mmc_data *data,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dmaengine_slave_config(chan, &conf);
 	desc = dmaengine_prep_slave_sg(chan, data->sg, nr_sg,
 					    conf.direction, DMA_CTRL_ACK);
 =======
+=======
+>>>>>>> v3.18
 	if (host->variant->qcom_dml)
 		flags |= DMA_PREP_INTERRUPT;
 
 	dmaengine_slave_config(chan, &conf);
 	desc = dmaengine_prep_slave_sg(chan, data->sg, nr_sg,
 					    conf.direction, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!desc)
 		goto unmap_exit;
@@ -823,11 +950,14 @@ static int mmci_dma_start_data(struct mmci_host *host, unsigned int datactrl)
 	dma_async_issue_pending(host->dma_current);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	datactrl |= MCI_DPSM_DMAENABLE;
 
 	/* Trigger the DMA transfer */
 	writel(datactrl, host->base + MMCIDATACTRL);
 =======
+=======
+>>>>>>> v3.18
 	if (host->variant->qcom_dml)
 		dml_start_xfer(host, data);
 
@@ -835,6 +965,9 @@ static int mmci_dma_start_data(struct mmci_host *host, unsigned int datactrl)
 
 	/* Trigger the DMA transfer */
 	mmci_write_datactrlreg(host, datactrl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -957,7 +1090,11 @@ static void mmci_start_data(struct mmci_host *host, struct mmc_data *data)
 
 	clks = (unsigned long long)data->timeout_ns * host->cclk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do_div(clks, 1000000000UL);
+=======
+	do_div(clks, NSEC_PER_SEC);
+>>>>>>> v3.18
 =======
 	do_div(clks, NSEC_PER_SEC);
 >>>>>>> v3.18
@@ -974,6 +1111,11 @@ static void mmci_start_data(struct mmci_host *host, struct mmc_data *data)
 	if (variant->blksz_datactrl16)
 		datactrl = MCI_DPSM_ENABLE | (data->blksz << 16);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else if (variant->blksz_datactrl4)
+		datactrl = MCI_DPSM_ENABLE | (data->blksz << 4);
+>>>>>>> v3.18
 =======
 	else if (variant->blksz_datactrl4)
 		datactrl = MCI_DPSM_ENABLE | (data->blksz << 4);
@@ -984,6 +1126,7 @@ static void mmci_start_data(struct mmci_host *host, struct mmc_data *data)
 	if (data->flags & MMC_DATA_READ)
 		datactrl |= MCI_DPSM_DIRECTION;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* The ST Micro variants has a special bit to enable SDIO */
 	if (variant->sdio && host->mmc->card)
@@ -1015,6 +1158,8 @@ static void mmci_start_data(struct mmci_host *host, struct mmc_data *data)
 	if (host->mmc->ios.timing == MMC_TIMING_UHS_DDR50)
 		datactrl |= MCI_ST_DPSM_DDRMODE;
 =======
+=======
+>>>>>>> v3.18
 	if (host->mmc->card && mmc_card_sdio(host->mmc->card)) {
 		u32 clk;
 
@@ -1039,6 +1184,9 @@ static void mmci_start_data(struct mmci_host *host, struct mmc_data *data)
 	if (host->mmc->ios.timing == MMC_TIMING_UHS_DDR50 ||
 	    host->mmc->ios.timing == MMC_TIMING_MMC_DDR52)
 		datactrl |= variant->datactrl_mask_ddrmode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1070,7 +1218,11 @@ static void mmci_start_data(struct mmci_host *host, struct mmc_data *data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(datactrl, base + MMCIDATACTRL);
+=======
+	mmci_write_datactrlreg(host, datactrl);
+>>>>>>> v3.18
 =======
 	mmci_write_datactrlreg(host, datactrl);
 >>>>>>> v3.18
@@ -1089,7 +1241,11 @@ mmci_start_command(struct mmci_host *host, struct mmc_command *cmd, u32 c)
 	if (readl(base + MMCICOMMAND) & MCI_CPSM_ENABLE) {
 		writel(0, base + MMCICOMMAND);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		udelay(1);
+=======
+		mmci_reg_delay(host);
+>>>>>>> v3.18
 =======
 		mmci_reg_delay(host);
 >>>>>>> v3.18
@@ -1105,6 +1261,12 @@ mmci_start_command(struct mmci_host *host, struct mmc_command *cmd, u32 c)
 		c |= MCI_CPSM_INTERRUPT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (mmc_cmd_type(cmd) == MMC_CMD_ADTC)
+		c |= host->variant->data_cmd_enable;
+
+>>>>>>> v3.18
 =======
 	if (mmc_cmd_type(cmd) == MMC_CMD_ADTC)
 		c |= host->variant->data_cmd_enable;
@@ -1121,11 +1283,17 @@ mmci_data_irq(struct mmci_host *host, struct mmc_data *data,
 	      unsigned int status)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Make sure we have data to handle */
 	if (!data)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* First check for errors */
 	if (status & (MCI_DATACRCFAIL|MCI_DATATIMEOUT|MCI_STARTBITERR|
@@ -1183,7 +1351,11 @@ mmci_data_irq(struct mmci_host *host, struct mmc_data *data,
 			data->bytes_xfered = data->blksz * data->blocks;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!data->stop) {
+=======
+		if (!data->stop || host->mrq->sbc) {
+>>>>>>> v3.18
 =======
 		if (!data->stop || host->mrq->sbc) {
 >>>>>>> v3.18
@@ -1200,7 +1372,10 @@ mmci_cmd_irq(struct mmci_host *host, struct mmc_command *cmd,
 {
 	void __iomem *base = host->base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool sbc, busy_resp;
 
 	if (!cmd)
@@ -1233,6 +1408,9 @@ mmci_cmd_irq(struct mmci_host *host, struct mmc_command *cmd,
 			base + MMCIMASK0);
 		host->busy_status = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	host->cmd = NULL;
@@ -1249,7 +1427,11 @@ mmci_cmd_irq(struct mmci_host *host, struct mmc_command *cmd,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cmd->data || cmd->error) {
+=======
+	if ((!sbc && !cmd->data) || cmd->error) {
+>>>>>>> v3.18
 =======
 	if ((!sbc && !cmd->data) || cmd->error) {
 >>>>>>> v3.18
@@ -1262,7 +1444,13 @@ mmci_cmd_irq(struct mmci_host *host, struct mmc_command *cmd,
 			mmci_stop_data(host);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mmci_request_end(host, cmd->mrq);
+=======
+		mmci_request_end(host, host->mrq);
+	} else if (sbc) {
+		mmci_start_command(host, host->mrq->cmd, 0);
+>>>>>>> v3.18
 =======
 		mmci_request_end(host, host->mrq);
 	} else if (sbc) {
@@ -1274,7 +1462,10 @@ mmci_cmd_irq(struct mmci_host *host, struct mmc_command *cmd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int mmci_get_rx_fifocnt(struct mmci_host *host, u32 status, int remain)
 {
 	return remain - (readl(host->base + MMCIFIFOCNT) << 2);
@@ -1294,11 +1485,15 @@ static int mmci_qcom_get_rx_fifocnt(struct mmci_host *host, u32 status, int r)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mmci_pio_read(struct mmci_host *host, char *buffer, unsigned int remain)
 {
 	void __iomem *base = host->base;
 	char *ptr = buffer;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 status;
 	int host_remain = host->size;
@@ -1306,11 +1501,16 @@ static int mmci_pio_read(struct mmci_host *host, char *buffer, unsigned int rema
 	do {
 		int count = host_remain - (readl(base + MMCIFIFOCNT) << 2);
 =======
+=======
+>>>>>>> v3.18
 	u32 status = readl(host->base + MMCISTATUS);
 	int host_remain = host->size;
 
 	do {
 		int count = host->get_rx_fifocnt(host, status, host_remain);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (count > remain)
@@ -1479,9 +1679,12 @@ static irqreturn_t mmci_irq(int irq, void *dev_id)
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct mmc_command *cmd;
 		struct mmc_data *data;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		status = readl(host->base + MMCISTATUS);
@@ -1494,18 +1697,25 @@ static irqreturn_t mmci_irq(int irq, void *dev_id)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * We intentionally clear the MCI_ST_CARDBUSY IRQ here (if it's
 		 * enabled) since the HW seems to be triggering the IRQ on both
 		 * edges while monitoring DAT0 for busy completion.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		status &= readl(host->base + MMCIMASK0);
 		writel(status, host->base + MMCICLEAR);
 
 		dev_dbg(mmc_dev(host->mmc), "irq0 (data+cmd) %08x\n", status);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		data = host->data;
 		if (status & (MCI_DATACRCFAIL|MCI_DATATIMEOUT|MCI_STARTBITERR|
@@ -1517,6 +1727,8 @@ static irqreturn_t mmci_irq(int irq, void *dev_id)
 		if (status & (MCI_CMDCRCFAIL|MCI_CMDTIMEOUT|MCI_CMDSENT|MCI_CMDRESPEND) && cmd)
 			mmci_cmd_irq(host, cmd, status);
 =======
+=======
+>>>>>>> v3.18
 		if (host->variant->reversed_irq_handling) {
 			mmci_data_irq(host, host->data, status);
 			mmci_cmd_irq(host, host->cmd, status);
@@ -1528,6 +1740,9 @@ static irqreturn_t mmci_irq(int irq, void *dev_id)
 		/* Don't poll for busy completion in irq context. */
 		if (host->busy_status)
 			status &= ~MCI_ST_CARDBUSY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ret = 1;
@@ -1564,12 +1779,18 @@ static void mmci_request(struct mmc_host *mmc, struct mmc_request *mrq)
 		mmci_start_data(host, mrq->data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmci_start_command(host, mrq->cmd, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (mrq->sbc)
 		mmci_start_command(host, mrq->sbc, 0);
 	else
 		mmci_start_command(host, mrq->cmd, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock_irqrestore(&host->lock, flags);
@@ -1595,14 +1816,20 @@ static void mmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 			mmc_regulator_set_ocr(mmc, mmc->supply.vmmc, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!IS_ERR(mmc->supply.vqmmc) &&
 		    regulator_is_enabled(mmc->supply.vqmmc))
 			regulator_disable(mmc->supply.vqmmc);
 =======
+=======
+>>>>>>> v3.18
 		if (!IS_ERR(mmc->supply.vqmmc) && host->vqmmc_enabled) {
 			regulator_disable(mmc->supply.vqmmc);
 			host->vqmmc_enabled = false;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		break;
@@ -1620,8 +1847,12 @@ static void mmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		break;
 	case MMC_POWER_ON:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!IS_ERR(mmc->supply.vqmmc) &&
 		    !regulator_is_enabled(mmc->supply.vqmmc)) {
+=======
+		if (!IS_ERR(mmc->supply.vqmmc) && !host->vqmmc_enabled) {
+>>>>>>> v3.18
 =======
 		if (!IS_ERR(mmc->supply.vqmmc) && !host->vqmmc_enabled) {
 >>>>>>> v3.18
@@ -1630,6 +1861,11 @@ static void mmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 				dev_err(mmc_dev(mmc),
 					"failed to enable vqmmc regulator\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			else
+				host->vqmmc_enabled = true;
+>>>>>>> v3.18
 =======
 			else
 				host->vqmmc_enabled = true;
@@ -1647,7 +1883,11 @@ static void mmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		 * the SD/MMC bus and feedback-clock usage.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pwr |= host->plat->sigdir;
+=======
+		pwr |= host->pwr_reg_add;
+>>>>>>> v3.18
 =======
 		pwr |= host->pwr_reg_add;
 >>>>>>> v3.18
@@ -1680,7 +1920,10 @@ static void mmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		pwr &= ~MCI_PWR_ON;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (host->variant->explicit_mclk_control &&
 	    ios->clock != host->clock_cache) {
 		ret = clk_set_rate(host->clk, ios->clock);
@@ -1692,12 +1935,19 @@ static void mmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 	}
 	host->clock_cache = ios->clock;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&host->lock, flags);
 
 	mmci_set_clkreg(host, ios->clock);
 	mmci_write_pwrreg(host, pwr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mmci_reg_delay(host);
+>>>>>>> v3.18
 =======
 	mmci_reg_delay(host);
 >>>>>>> v3.18
@@ -1708,6 +1958,7 @@ static void mmci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 	pm_runtime_put_autosuspend(mmc_dev(mmc));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int mmci_get_ro(struct mmc_host *mmc)
 {
@@ -1721,10 +1972,13 @@ static int mmci_get_ro(struct mmc_host *mmc)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int mmci_get_cd(struct mmc_host *mmc)
 {
 	struct mmci_host *host = mmc_priv(mmc);
 	struct mmci_platform_data *plat = host->plat;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int status;
 
@@ -1734,10 +1988,16 @@ static int mmci_get_cd(struct mmc_host *mmc)
 
 	if (status == -ENOSYS) {
 >>>>>>> v3.18
+=======
+	unsigned int status = mmc_gpio_get_cd(mmc);
+
+	if (status == -ENOSYS) {
+>>>>>>> v3.18
 		if (!plat->status)
 			return 1; /* Assume always present */
 
 		status = plat->status(mmc_dev(host->mmc));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else
 		status = !!gpio_get_value_cansleep(host->gpio_cd)
@@ -1761,6 +2021,8 @@ static irqreturn_t mmci_cd_irq(int irq, void *dev_id)
 
 static const struct mmc_host_ops mmci_ops = {
 =======
+=======
+>>>>>>> v3.18
 	}
 	return status;
 }
@@ -1799,11 +2061,15 @@ static int mmci_sig_volt_switch(struct mmc_host *mmc, struct mmc_ios *ios)
 }
 
 static struct mmc_host_ops mmci_ops = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.request	= mmci_request,
 	.pre_req	= mmci_pre_request,
 	.post_req	= mmci_post_request,
 	.set_ios	= mmci_set_ios,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.get_ro		= mmci_get_ro,
 	.get_cd		= mmci_get_cd,
@@ -1855,6 +2121,8 @@ static void mmci_dt_populate_generic_pdata(struct device_node *np,
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	.get_ro		= mmc_gpio_get_ro,
 	.get_cd		= mmci_get_cd,
 	.start_signal_voltage_switch = mmci_sig_volt_switch,
@@ -1888,6 +2156,9 @@ static int mmci_of_parse(struct device_node *np, struct mmc_host *mmc)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int mmci_probe(struct amba_device *dev,
@@ -1913,6 +2184,7 @@ static int mmci_probe(struct amba_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (np)
 		mmci_dt_populate_generic_pdata(np, plat);
 
@@ -1926,6 +2198,8 @@ static int mmci_probe(struct amba_device *dev,
 		goto rel_regions;
 	}
 =======
+=======
+>>>>>>> v3.18
 	mmc = mmc_alloc_host(sizeof(struct mmci_host), &dev->dev);
 	if (!mmc)
 		return -ENOMEM;
@@ -1933,16 +2207,22 @@ static int mmci_probe(struct amba_device *dev,
 	ret = mmci_of_parse(np, mmc);
 	if (ret)
 		goto host_free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	host = mmc_priv(mmc);
 	host->mmc = mmc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->gpio_wp = -ENOSYS;
 	host->gpio_cd = -ENOSYS;
 	host->gpio_cd_irq = -1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	host->hw_designer = amba_manf(dev);
@@ -1951,10 +2231,16 @@ static int mmci_probe(struct amba_device *dev,
 	dev_dbg(mmc_dev(mmc), "revision = 0x%01x\n", host->hw_revision);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->clk = clk_get(&dev->dev, NULL);
 	if (IS_ERR(host->clk)) {
 		ret = PTR_ERR(host->clk);
 		host->clk = NULL;
+=======
+	host->clk = devm_clk_get(&dev->dev, NULL);
+	if (IS_ERR(host->clk)) {
+		ret = PTR_ERR(host->clk);
+>>>>>>> v3.18
 =======
 	host->clk = devm_clk_get(&dev->dev, NULL);
 	if (IS_ERR(host->clk)) {
@@ -1966,14 +2252,20 @@ static int mmci_probe(struct amba_device *dev,
 	ret = clk_prepare_enable(host->clk);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto clk_free;
 =======
+=======
+>>>>>>> v3.18
 		goto host_free;
 
 	if (variant->qcom_fifo)
 		host->get_rx_fifocnt = mmci_qcom_get_rx_fifocnt;
 	else
 		host->get_rx_fifocnt = mmci_get_rx_fifocnt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	host->plat = plat;
@@ -1985,8 +2277,13 @@ static int mmci_probe(struct amba_device *dev,
 	 * (if possible).
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (host->mclk > 100000000) {
 		ret = clk_set_rate(host->clk, 100000000);
+=======
+	if (host->mclk > variant->f_max) {
+		ret = clk_set_rate(host->clk, variant->f_max);
+>>>>>>> v3.18
 =======
 	if (host->mclk > variant->f_max) {
 		ret = clk_set_rate(host->clk, variant->f_max);
@@ -1998,6 +2295,7 @@ static int mmci_probe(struct amba_device *dev,
 			host->mclk);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->phybase = dev->res.start;
 	host->base = ioremap(dev->res.start, resource_size(&dev->res));
 	if (!host->base) {
@@ -2007,6 +2305,8 @@ static int mmci_probe(struct amba_device *dev,
 
 	mmc->ops = &mmci_ops;
 =======
+=======
+>>>>>>> v3.18
 
 	host->phybase = dev->res.start;
 	host->base = devm_ioremap_resource(&dev->dev, &dev->res);
@@ -2015,11 +2315,15 @@ static int mmci_probe(struct amba_device *dev,
 		goto clk_disable;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * The ARM and ST versions of the block have slightly different
 	 * clock divider equations which means that the minimum divider
 	 * differs too.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 */
 	if (variant->st_clkdiv)
@@ -2057,6 +2361,8 @@ static int mmci_probe(struct amba_device *dev,
 	} else
 		dev_warn(&dev->dev, "could not get default pinstate\n");
 =======
+=======
+>>>>>>> v3.18
 	 * on Qualcomm like controllers get the nearest minimum clock to 100Khz
 	 */
 	if (variant->st_clkdiv)
@@ -2081,6 +2387,9 @@ static int mmci_probe(struct amba_device *dev,
 
 
 	dev_dbg(mmc_dev(mmc), "clocking block at %u Hz\n", mmc->f_max);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Get regulators and the supported OCR mask */
@@ -2091,12 +2400,15 @@ static int mmci_probe(struct amba_device *dev,
 		dev_warn(mmc_dev(mmc), "Platform OCR mask is ignored\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc->caps = plat->capabilities;
 	mmc->caps2 = plat->capabilities2;
 
 	/* We support these PM capabilities. */
 	mmc->pm_caps = MMC_PM_KEEP_POWER;
 =======
+=======
+>>>>>>> v3.18
 	/* DT takes precedence over platform data. */
 	if (!np) {
 		if (!plat->cd_invert)
@@ -2118,6 +2430,9 @@ static int mmci_probe(struct amba_device *dev,
 
 	/* We support these PM capabilities. */
 	mmc->pm_caps |= MMC_PM_KEEP_POWER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -2155,6 +2470,7 @@ static int mmci_probe(struct amba_device *dev,
 	writel(0, host->base + MMCIMASK1);
 	writel(0xfff, host->base + MMCICLEAR);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (plat->gpio_cd == -EPROBE_DEFER) {
 		ret = -EPROBE_DEFER;
@@ -2205,6 +2521,8 @@ static int mmci_probe(struct amba_device *dev,
 	if (ret)
 		goto unmap;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If:
 	 * - not using DT but using a descriptor table, or
@@ -2240,21 +2558,30 @@ static int mmci_probe(struct amba_device *dev,
 			DRIVER_NAME " (cmd)", host);
 	if (ret)
 		goto clk_disable;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!dev->irq[1])
 		host->singleirq = true;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = request_irq(dev->irq[1], mmci_pio_irq, IRQF_SHARED,
 				  DRIVER_NAME " (pio)", host);
 		if (ret)
 			goto irq0_free;
 =======
+=======
+>>>>>>> v3.18
 		ret = devm_request_irq(&dev->dev, dev->irq[1], mmci_pio_irq,
 				IRQF_SHARED, DRIVER_NAME " (pio)", host);
 		if (ret)
 			goto clk_disable;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2277,6 +2604,7 @@ static int mmci_probe(struct amba_device *dev,
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
  irq0_free:
 	free_irq(dev->irq[0], host);
@@ -2305,6 +2633,12 @@ static int mmci_probe(struct amba_device *dev,
  host_free:
 	mmc_free_host(mmc);
 >>>>>>> v3.18
+=======
+ clk_disable:
+	clk_disable_unprepare(host->clk);
+ host_free:
+	mmc_free_host(mmc);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -2313,8 +2647,11 @@ static int mmci_remove(struct amba_device *dev)
 	struct mmc_host *mmc = amba_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amba_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (mmc) {
@@ -2335,6 +2672,7 @@ static int mmci_remove(struct amba_device *dev)
 		writel(0, host->base + MMCIDATACTRL);
 
 		mmci_dma_release(host);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		free_irq(dev->irq[0], host);
 		if (!host->singleirq)
@@ -2358,11 +2696,16 @@ static int mmci_remove(struct amba_device *dev)
 		clk_disable_unprepare(host->clk);
 		mmc_free_host(mmc);
 >>>>>>> v3.18
+=======
+		clk_disable_unprepare(host->clk);
+		mmc_free_host(mmc);
+>>>>>>> v3.18
 	}
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_SUSPEND
 static int mmci_suspend(struct device *dev)
@@ -2405,6 +2748,8 @@ static int mmci_resume(struct device *dev)
 
 #ifdef CONFIG_PM_RUNTIME
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 static void mmci_save(struct mmci_host *host)
 {
@@ -2440,6 +2785,9 @@ static void mmci_restore(struct mmci_host *host)
 	spin_unlock_irqrestore(&host->lock, flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mmci_runtime_suspend(struct device *dev)
 {
@@ -2449,6 +2797,11 @@ static int mmci_runtime_suspend(struct device *dev)
 	if (mmc) {
 		struct mmci_host *host = mmc_priv(mmc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pinctrl_pm_select_sleep_state(dev);
+		mmci_save(host);
+>>>>>>> v3.18
 =======
 		pinctrl_pm_select_sleep_state(dev);
 		mmci_save(host);
@@ -2468,6 +2821,11 @@ static int mmci_runtime_resume(struct device *dev)
 		struct mmci_host *host = mmc_priv(mmc);
 		clk_prepare_enable(host->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mmci_restore(host);
+		pinctrl_pm_select_default_state(dev);
+>>>>>>> v3.18
 =======
 		mmci_restore(host);
 		pinctrl_pm_select_default_state(dev);
@@ -2480,8 +2838,14 @@ static int mmci_runtime_resume(struct device *dev)
 
 static const struct dev_pm_ops mmci_dev_pm_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_SYSTEM_SLEEP_PM_OPS(mmci_suspend, mmci_resume)
 	SET_RUNTIME_PM_OPS(mmci_runtime_suspend, mmci_runtime_resume, NULL)
+=======
+	SET_SYSTEM_SLEEP_PM_OPS(pm_runtime_force_suspend,
+				pm_runtime_force_resume)
+	SET_PM_RUNTIME_PM_OPS(mmci_runtime_suspend, mmci_runtime_resume, NULL)
+>>>>>>> v3.18
 =======
 	SET_SYSTEM_SLEEP_PM_OPS(pm_runtime_force_suspend,
 				pm_runtime_force_resume)
@@ -2525,7 +2889,11 @@ static struct amba_id mmci_ids[] = {
 		.id     = 0x00280180,
 		.mask   = 0x00ffffff,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.data	= &variant_nomadik,
+=======
+		.data	= &variant_u300,
+>>>>>>> v3.18
 =======
 		.data	= &variant_u300,
 >>>>>>> v3.18
@@ -2541,13 +2909,19 @@ static struct amba_id mmci_ids[] = {
 		.data	= &variant_ux500v2,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Qualcomm variants */
 	{
 		.id     = 0x00051180,
 		.mask	= 0x000fffff,
 		.data	= &variant_qcom,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0, 0 },
 };

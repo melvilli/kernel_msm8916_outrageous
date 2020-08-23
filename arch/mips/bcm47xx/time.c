@@ -28,6 +28,11 @@
 #include <asm/time.h>
 #include <bcm47xx.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <bcm47xx_nvram.h>
+#include <bcm47xx_board.h>
+>>>>>>> v3.18
 =======
 #include <bcm47xx_nvram.h>
 #include <bcm47xx_board.h>
@@ -37,11 +42,17 @@ void __init plat_time_init(void)
 {
 	unsigned long hz = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u16 chip_id = 0;
 	char buf[10];
 	int len;
 	enum bcm47xx_board board = bcm47xx_board_get();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -56,6 +67,10 @@ void __init plat_time_init(void)
 	case BCM47XX_BUS_TYPE_SSB:
 		hz = ssb_cpu_clock(&bcm47xx_bus.ssb.mipscore) / 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		chip_id = bcm47xx_bus.ssb.chip_id;
+>>>>>>> v3.18
 =======
 		chip_id = bcm47xx_bus.ssb.chip_id;
 >>>>>>> v3.18
@@ -65,6 +80,10 @@ void __init plat_time_init(void)
 	case BCM47XX_BUS_TYPE_BCMA:
 		hz = bcma_cpu_clock(&bcm47xx_bus.bcma.bus.drv_mips) / 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		chip_id = bcm47xx_bus.bcma.bus.chipinfo.id;
+>>>>>>> v3.18
 =======
 		chip_id = bcm47xx_bus.bcma.bus.chipinfo.id;
 >>>>>>> v3.18
@@ -73,7 +92,10 @@ void __init plat_time_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (chip_id == 0x5354) {
 		len = bcm47xx_nvram_getenv("clkfreq", buf, sizeof(buf));
 		if (len >= 0 && !strncmp(buf, "200", 4))
@@ -89,6 +111,9 @@ void __init plat_time_init(void)
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!hz)
 		hz = 100000000;

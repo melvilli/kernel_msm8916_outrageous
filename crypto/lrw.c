@@ -401,6 +401,9 @@ module_exit(crypto_module_exit);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("LRW block cipher mode");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("lrw");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

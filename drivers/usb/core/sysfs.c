@@ -19,6 +19,7 @@
 /* Active configuration fields */
 #define usb_actconfig_show(field, format_string)			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t  show_##field(struct device *dev,			\
 		struct device_attribute *attr, char *buf)		\
 {									\
@@ -33,6 +34,8 @@ static ssize_t  show_##field(struct device *dev,			\
 	else								\
 		return 0;						\
 =======
+=======
+>>>>>>> v3.18
 static ssize_t field##_show(struct device *dev,				\
 			    struct device_attribute *attr, char *buf)	\
 {									\
@@ -48,11 +51,15 @@ static ssize_t field##_show(struct device *dev,				\
 				actconfig->desc.field);			\
 	usb_unlock_device(udev);					\
 	return rc;							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }									\
 
 #define usb_actconfig_attr(field, format_string)		\
 	usb_actconfig_show(field, format_string)		\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	static DEVICE_ATTR(field, S_IRUGO, show_##field, NULL);
 
@@ -61,17 +68,23 @@ usb_actconfig_attr(bmAttributes, "%2x\n")
 
 static ssize_t show_bMaxPower(struct device *dev,
 =======
+=======
+>>>>>>> v3.18
 	static DEVICE_ATTR_RO(field)
 
 usb_actconfig_attr(bNumInterfaces, "%2d\n");
 usb_actconfig_attr(bmAttributes, "%2x\n");
 
 static ssize_t bMaxPower_show(struct device *dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct device_attribute *attr, char *buf)
 {
 	struct usb_device *udev;
 	struct usb_host_config *actconfig;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	udev = to_usb_device(dev);
@@ -84,6 +97,8 @@ static DEVICE_ATTR(bMaxPower, S_IRUGO, show_bMaxPower, NULL);
 
 static ssize_t show_configuration_string(struct device *dev,
 =======
+=======
+>>>>>>> v3.18
 	ssize_t rc = 0;
 
 	udev = to_usb_device(dev);
@@ -97,11 +112,15 @@ static ssize_t show_configuration_string(struct device *dev,
 static DEVICE_ATTR_RO(bMaxPower);
 
 static ssize_t configuration_show(struct device *dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct device_attribute *attr, char *buf)
 {
 	struct usb_device *udev;
 	struct usb_host_config *actconfig;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	udev = to_usb_device(dev);
@@ -112,6 +131,8 @@ static ssize_t configuration_show(struct device *dev,
 }
 static DEVICE_ATTR(configuration, S_IRUGO, show_configuration_string, NULL);
 =======
+=======
+>>>>>>> v3.18
 	ssize_t rc = 0;
 
 	udev = to_usb_device(dev);
@@ -123,15 +144,24 @@ static DEVICE_ATTR(configuration, S_IRUGO, show_configuration_string, NULL);
 	return rc;
 }
 static DEVICE_ATTR_RO(configuration);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* configuration value is always present, and r/w */
 usb_actconfig_show(bConfigurationValue, "%u\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 set_bConfigurationValue(struct device *dev, struct device_attribute *attr,
 		const char *buf, size_t count)
+=======
+static ssize_t bConfigurationValue_store(struct device *dev,
+					 struct device_attribute *attr,
+					 const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t bConfigurationValue_store(struct device *dev,
 					 struct device_attribute *attr,
@@ -149,6 +179,7 @@ static ssize_t bConfigurationValue_store(struct device *dev,
 	return (value < 0) ? value : count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEVICE_ATTR_IGNORE_LOCKDEP(bConfigurationValue, S_IRUGO | S_IWUSR,
 		show_bConfigurationValue, set_bConfigurationValue);
@@ -157,12 +188,17 @@ static DEVICE_ATTR_IGNORE_LOCKDEP(bConfigurationValue, S_IRUGO | S_IWUSR,
 #define usb_string_attr(name)						\
 static ssize_t  show_##name(struct device *dev,				\
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_IGNORE_LOCKDEP(bConfigurationValue, S_IRUGO | S_IWUSR,
 		bConfigurationValue_show, bConfigurationValue_store);
 
 /* String fields */
 #define usb_string_attr(name)						\
 static ssize_t  name##_show(struct device *dev,				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct device_attribute *attr, char *buf)		\
 {									\
@@ -176,7 +212,11 @@ static ssize_t  name##_show(struct device *dev,				\
 	return retval;							\
 }									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(name, S_IRUGO, show_##name, NULL);
+=======
+static DEVICE_ATTR_RO(name)
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(name)
 >>>>>>> v3.18
@@ -186,8 +226,13 @@ usb_string_attr(manufacturer);
 usb_string_attr(serial);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 show_speed(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static ssize_t speed_show(struct device *dev, struct device_attribute *attr,
+			  char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t speed_show(struct device *dev, struct device_attribute *attr,
 			  char *buf)
@@ -221,15 +266,21 @@ static ssize_t speed_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%s\n", speed);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(speed, S_IRUGO, show_speed, NULL);
 
 static ssize_t
 show_busnum(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(speed);
 
 static ssize_t busnum_show(struct device *dev, struct device_attribute *attr,
 			   char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *udev;
@@ -238,15 +289,21 @@ static ssize_t busnum_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%d\n", udev->bus->busnum);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(busnum, S_IRUGO, show_busnum, NULL);
 
 static ssize_t
 show_devnum(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(busnum);
 
 static ssize_t devnum_show(struct device *dev, struct device_attribute *attr,
 			   char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *udev;
@@ -255,15 +312,21 @@ static ssize_t devnum_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%d\n", udev->devnum);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(devnum, S_IRUGO, show_devnum, NULL);
 
 static ssize_t
 show_devpath(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(devnum);
 
 static ssize_t devpath_show(struct device *dev, struct device_attribute *attr,
 			    char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *udev;
@@ -272,15 +335,21 @@ static ssize_t devpath_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%s\n", udev->devpath);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(devpath, S_IRUGO, show_devpath, NULL);
 
 static ssize_t
 show_version(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(devpath);
 
 static ssize_t version_show(struct device *dev, struct device_attribute *attr,
 			    char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *udev;
@@ -291,15 +360,21 @@ static ssize_t version_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%2x.%02x\n", bcdUSB >> 8, bcdUSB & 0xff);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(version, S_IRUGO, show_version, NULL);
 
 static ssize_t
 show_maxchild(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(version);
 
 static ssize_t maxchild_show(struct device *dev, struct device_attribute *attr,
 			     char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *udev;
@@ -308,15 +383,21 @@ static ssize_t maxchild_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%d\n", udev->maxchild);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(maxchild, S_IRUGO, show_maxchild, NULL);
 
 static ssize_t
 show_quirks(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(maxchild);
 
 static ssize_t quirks_show(struct device *dev, struct device_attribute *attr,
 			   char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *udev;
@@ -325,15 +406,21 @@ static ssize_t quirks_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "0x%x\n", udev->quirks);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(quirks, S_IRUGO, show_quirks, NULL);
 
 static ssize_t
 show_avoid_reset_quirk(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(quirks);
 
 static ssize_t avoid_reset_quirk_show(struct device *dev,
 				      struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *udev;
@@ -343,9 +430,15 @@ static ssize_t avoid_reset_quirk_show(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 set_avoid_reset_quirk(struct device *dev, struct device_attribute *attr,
 		const char *buf, size_t count)
+=======
+static ssize_t avoid_reset_quirk_store(struct device *dev,
+				      struct device_attribute *attr,
+				      const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t avoid_reset_quirk_store(struct device *dev,
 				      struct device_attribute *attr,
@@ -366,6 +459,7 @@ static ssize_t avoid_reset_quirk_store(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEVICE_ATTR(avoid_reset_quirk, S_IRUGO | S_IWUSR,
 		show_avoid_reset_quirk, set_avoid_reset_quirk);
@@ -373,10 +467,15 @@ static DEVICE_ATTR(avoid_reset_quirk, S_IRUGO | S_IWUSR,
 static ssize_t
 show_urbnum(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RW(avoid_reset_quirk);
 
 static ssize_t urbnum_show(struct device *dev, struct device_attribute *attr,
 			   char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *udev;
@@ -385,15 +484,21 @@ static ssize_t urbnum_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%d\n", atomic_read(&udev->urbnum));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(urbnum, S_IRUGO, show_urbnum, NULL);
 
 static ssize_t
 show_removable(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(urbnum);
 
 static ssize_t removable_show(struct device *dev, struct device_attribute *attr,
 			      char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *udev;
@@ -415,21 +520,28 @@ static ssize_t removable_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%s\n", state);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(removable, S_IRUGO, show_removable, NULL);
 
 static ssize_t
 show_ltm_capable(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(removable);
 
 static ssize_t ltm_capable_show(struct device *dev,
 				struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (usb_device_supports_ltm(to_usb_device(dev)))
 		return sprintf(buf, "%s\n", "yes");
 	return sprintf(buf, "%s\n", "no");
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 static DEVICE_ATTR(ltm_capable, S_IRUGO, show_ltm_capable, NULL);
 
@@ -438,12 +550,17 @@ static DEVICE_ATTR(ltm_capable, S_IRUGO, show_ltm_capable, NULL);
 static ssize_t
 show_persist(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(ltm_capable);
 
 #ifdef	CONFIG_PM
 
 static ssize_t persist_show(struct device *dev, struct device_attribute *attr,
 			    char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *udev = to_usb_device(dev);
@@ -452,9 +569,14 @@ static ssize_t persist_show(struct device *dev, struct device_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 set_persist(struct device *dev, struct device_attribute *attr,
 		const char *buf, size_t count)
+=======
+static ssize_t persist_store(struct device *dev, struct device_attribute *attr,
+			     const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t persist_store(struct device *dev, struct device_attribute *attr,
 			     const char *buf, size_t count)
@@ -476,8 +598,12 @@ static ssize_t persist_store(struct device *dev, struct device_attribute *attr,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEVICE_ATTR(persist, S_IRUGO | S_IWUSR, show_persist, set_persist);
+=======
+static DEVICE_ATTR_RW(persist);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RW(persist);
 >>>>>>> v3.18
@@ -516,9 +642,14 @@ static void remove_persist_attributes(struct device *dev)
 #ifdef	CONFIG_PM_RUNTIME
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 show_connected_duration(struct device *dev, struct device_attribute *attr,
 		char *buf)
+=======
+static ssize_t connected_duration_show(struct device *dev,
+				       struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t connected_duration_show(struct device *dev,
 				       struct device_attribute *attr, char *buf)
@@ -530,8 +661,12 @@ static ssize_t connected_duration_show(struct device *dev,
 			jiffies_to_msecs(jiffies - udev->connect_time));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEVICE_ATTR(connected_duration, S_IRUGO, show_connected_duration, NULL);
+=======
+static DEVICE_ATTR_RO(connected_duration);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(connected_duration);
 >>>>>>> v3.18
@@ -544,9 +679,14 @@ static DEVICE_ATTR_RO(connected_duration);
  * If the device is suspended, the active_duration is up-to-date.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 show_active_duration(struct device *dev, struct device_attribute *attr,
 		char *buf)
+=======
+static ssize_t active_duration_show(struct device *dev,
+				    struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t active_duration_show(struct device *dev,
 				    struct device_attribute *attr, char *buf)
@@ -562,25 +702,37 @@ static ssize_t active_duration_show(struct device *dev,
 	return sprintf(buf, "%u\n", duration);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEVICE_ATTR(active_duration, S_IRUGO, show_active_duration, NULL);
 
 static ssize_t
 show_autosuspend(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(active_duration);
 
 static ssize_t autosuspend_show(struct device *dev,
 				struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return sprintf(buf, "%d\n", dev->power.autosuspend_delay / 1000);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 set_autosuspend(struct device *dev, struct device_attribute *attr,
 		const char *buf, size_t count)
+=======
+static ssize_t autosuspend_store(struct device *dev,
+				 struct device_attribute *attr, const char *buf,
+				 size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t autosuspend_store(struct device *dev,
 				 struct device_attribute *attr, const char *buf,
@@ -597,9 +749,13 @@ static ssize_t autosuspend_store(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEVICE_ATTR(autosuspend, S_IRUGO | S_IWUSR,
 		show_autosuspend, set_autosuspend);
+=======
+static DEVICE_ATTR_RW(autosuspend);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RW(autosuspend);
 >>>>>>> v3.18
@@ -608,7 +764,12 @@ static const char on_string[] = "on";
 static const char auto_string[] = "auto";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void warn_level(void) {
+=======
+static void warn_level(void)
+{
+>>>>>>> v3.18
 =======
 static void warn_level(void)
 {
@@ -623,8 +784,13 @@ static void warn_level(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 show_level(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static ssize_t level_show(struct device *dev, struct device_attribute *attr,
+			  char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t level_show(struct device *dev, struct device_attribute *attr,
 			  char *buf)
@@ -640,9 +806,14 @@ static ssize_t level_show(struct device *dev, struct device_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 set_level(struct device *dev, struct device_attribute *attr,
 		const char *buf, size_t count)
+=======
+static ssize_t level_store(struct device *dev, struct device_attribute *attr,
+			   const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t level_store(struct device *dev, struct device_attribute *attr,
 			   const char *buf, size_t count)
@@ -675,6 +846,7 @@ static ssize_t level_store(struct device *dev, struct device_attribute *attr,
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEVICE_ATTR(level, S_IRUGO | S_IWUSR, show_level, set_level);
 
@@ -682,17 +854,26 @@ static ssize_t
 show_usb2_hardware_lpm(struct device *dev, struct device_attribute *attr,
 				char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RW(level);
 
 static ssize_t usb2_hardware_lpm_show(struct device *dev,
 				      struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *udev = to_usb_device(dev);
 	const char *p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (udev->usb2_hw_lpm_enabled == 1)
+=======
+	if (udev->usb2_hw_lpm_allowed == 1)
+>>>>>>> v3.18
 =======
 	if (udev->usb2_hw_lpm_allowed == 1)
 >>>>>>> v3.18
@@ -704,9 +885,15 @@ static ssize_t usb2_hardware_lpm_show(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 set_usb2_hardware_lpm(struct device *dev, struct device_attribute *attr,
 		const char *buf, size_t count)
+=======
+static ssize_t usb2_hardware_lpm_store(struct device *dev,
+				       struct device_attribute *attr,
+				       const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t usb2_hardware_lpm_store(struct device *dev,
 				       struct device_attribute *attr,
@@ -722,13 +909,19 @@ static ssize_t usb2_hardware_lpm_store(struct device *dev,
 	ret = strtobool(buf, &value);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ret)
 		ret = usb_set_usb2_hardware_lpm(udev, value);
 =======
+=======
+>>>>>>> v3.18
 	if (!ret) {
 		udev->usb2_hw_lpm_allowed = value;
 		ret = usb_set_usb2_hardware_lpm(udev, value);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	usb_unlock_device(udev);
@@ -739,6 +932,7 @@ static ssize_t usb2_hardware_lpm_store(struct device *dev,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEVICE_ATTR(usb2_hardware_lpm, S_IRUGO | S_IWUSR, show_usb2_hardware_lpm,
 			set_usb2_hardware_lpm);
@@ -746,6 +940,8 @@ static DEVICE_ATTR(usb2_hardware_lpm, S_IRUGO | S_IWUSR, show_usb2_hardware_lpm,
 static struct attribute *usb2_hardware_lpm_attr[] = {
 	&dev_attr_usb2_hardware_lpm.attr,
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RW(usb2_hardware_lpm);
 
 static ssize_t usb2_lpm_l1_timeout_show(struct device *dev,
@@ -799,6 +995,9 @@ static struct attribute *usb2_hardware_lpm_attr[] = {
 	&dev_attr_usb2_hardware_lpm.attr,
 	&dev_attr_usb2_lpm_l1_timeout.attr,
 	&dev_attr_usb2_lpm_besl.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NULL,
 };
@@ -852,7 +1051,11 @@ static void remove_power_attributes(struct device *dev)
 #define usb_descriptor_attr_le16(field, format_string)			\
 static ssize_t								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 show_##field(struct device *dev, struct device_attribute *attr,	\
+=======
+field##_show(struct device *dev, struct device_attribute *attr,	\
+>>>>>>> v3.18
 =======
 field##_show(struct device *dev, struct device_attribute *attr,	\
 >>>>>>> v3.18
@@ -865,6 +1068,7 @@ field##_show(struct device *dev, struct device_attribute *attr,	\
 			le16_to_cpu(udev->descriptor.field));		\
 }									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(field, S_IRUGO, show_##field, NULL);
 
 usb_descriptor_attr_le16(idVendor, "%04x\n")
@@ -875,6 +1079,8 @@ usb_descriptor_attr_le16(bcdDevice, "%04x\n")
 static ssize_t								\
 show_##field(struct device *dev, struct device_attribute *attr,	\
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(field)
 
 usb_descriptor_attr_le16(idVendor, "%04x\n");
@@ -884,6 +1090,9 @@ usb_descriptor_attr_le16(bcdDevice, "%04x\n");
 #define usb_descriptor_attr(field, format_string)			\
 static ssize_t								\
 field##_show(struct device *dev, struct device_attribute *attr,	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		char *buf)						\
 {									\
@@ -892,6 +1101,7 @@ field##_show(struct device *dev, struct device_attribute *attr,	\
 	udev = to_usb_device(dev);					\
 	return sprintf(buf, format_string, udev->descriptor.field);	\
 }									\
+<<<<<<< HEAD
 <<<<<<< HEAD
 static DEVICE_ATTR(field, S_IRUGO, show_##field, NULL);
 
@@ -908,6 +1118,8 @@ static ssize_t usb_dev_authorized_show(struct device *dev,
 				       struct device_attribute *attr,
 				       char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(field)
 
 usb_descriptor_attr(bDeviceClass, "%02x\n");
@@ -920,6 +1132,9 @@ usb_descriptor_attr(bMaxPacketSize0, "%d\n");
 /* show if the device is authorized (1) or not (0) */
 static ssize_t authorized_show(struct device *dev,
 			       struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *usb_dev = to_usb_device(dev);
@@ -927,7 +1142,10 @@ static ssize_t authorized_show(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -936,9 +1154,15 @@ static ssize_t authorized_show(struct device *dev,
  * Writing a 0 deauthorizes the device, writing a 1 authorizes it.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t usb_dev_authorized_store(struct device *dev,
 					struct device_attribute *attr,
 					const char *buf, size_t size)
+=======
+static ssize_t authorized_store(struct device *dev,
+				struct device_attribute *attr, const char *buf,
+				size_t size)
+>>>>>>> v3.18
 =======
 static ssize_t authorized_store(struct device *dev,
 				struct device_attribute *attr, const char *buf,
@@ -956,6 +1180,7 @@ static ssize_t authorized_store(struct device *dev,
 	else
 		result = usb_authorize_device(usb_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return result < 0? result : size;
 }
 
@@ -967,6 +1192,8 @@ static ssize_t usb_remove_store(struct device *dev,
 		struct device_attribute *attr,
 		const char *buf, size_t count)
 =======
+=======
+>>>>>>> v3.18
 	return result < 0 ? result : size;
 }
 static DEVICE_ATTR_IGNORE_LOCKDEP(authorized, S_IRUGO | S_IWUSR,
@@ -975,6 +1202,9 @@ static DEVICE_ATTR_IGNORE_LOCKDEP(authorized, S_IRUGO | S_IWUSR,
 /* "Safely remove a device" */
 static ssize_t remove_store(struct device *dev, struct device_attribute *attr,
 			    const char *buf, size_t count)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_device *udev = to_usb_device(dev);
@@ -993,7 +1223,11 @@ static ssize_t remove_store(struct device *dev, struct device_attribute *attr,
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR_IGNORE_LOCKDEP(remove, 0200, NULL, usb_remove_store);
+=======
+static DEVICE_ATTR_IGNORE_LOCKDEP(remove, S_IWUSR, NULL, remove_store);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_IGNORE_LOCKDEP(remove, S_IWUSR, NULL, remove_store);
 >>>>>>> v3.18
@@ -1093,6 +1327,10 @@ read_descriptors(struct file *filp, struct kobject *kobj,
 	 * configurations (config plus subsidiary descriptors).
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usb_lock_device(udev);
+>>>>>>> v3.18
 =======
 	usb_lock_device(udev);
 >>>>>>> v3.18
@@ -1117,6 +1355,10 @@ read_descriptors(struct file *filp, struct kobject *kobj,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usb_unlock_device(udev);
+>>>>>>> v3.18
 =======
 	usb_unlock_device(udev);
 >>>>>>> v3.18
@@ -1161,15 +1403,21 @@ void usb_remove_sysfs_dev_files(struct usb_device *udev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Interface Accociation Descriptor fields */
 #define usb_intf_assoc_attr(field, format_string)			\
 static ssize_t								\
 show_iad_##field(struct device *dev, struct device_attribute *attr,	\
 =======
+=======
+>>>>>>> v3.18
 /* Interface Association Descriptor fields */
 #define usb_intf_assoc_attr(field, format_string)			\
 static ssize_t								\
 iad_##field##_show(struct device *dev, struct device_attribute *attr,	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		char *buf)						\
 {									\
@@ -1179,6 +1427,7 @@ iad_##field##_show(struct device *dev, struct device_attribute *attr,	\
 			intf->intf_assoc->field); 			\
 }									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(iad_##field, S_IRUGO, show_iad_##field, NULL);
 
 usb_intf_assoc_attr(bFirstInterface, "%02x\n")
@@ -1187,6 +1436,8 @@ usb_intf_assoc_attr(bFunctionClass, "%02x\n")
 usb_intf_assoc_attr(bFunctionSubClass, "%02x\n")
 usb_intf_assoc_attr(bFunctionProtocol, "%02x\n")
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(iad_##field)
 
 usb_intf_assoc_attr(bFirstInterface, "%02x\n");
@@ -1194,13 +1445,20 @@ usb_intf_assoc_attr(bInterfaceCount, "%02d\n");
 usb_intf_assoc_attr(bFunctionClass, "%02x\n");
 usb_intf_assoc_attr(bFunctionSubClass, "%02x\n");
 usb_intf_assoc_attr(bFunctionProtocol, "%02x\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Interface fields */
 #define usb_intf_attr(field, format_string)				\
 static ssize_t								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 show_##field(struct device *dev, struct device_attribute *attr,	\
+=======
+field##_show(struct device *dev, struct device_attribute *attr,		\
+>>>>>>> v3.18
 =======
 field##_show(struct device *dev, struct device_attribute *attr,		\
 >>>>>>> v3.18
@@ -1211,6 +1469,7 @@ field##_show(struct device *dev, struct device_attribute *attr,		\
 	return sprintf(buf, format_string,				\
 			intf->cur_altsetting->desc.field); 		\
 }									\
+<<<<<<< HEAD
 <<<<<<< HEAD
 static DEVICE_ATTR(field, S_IRUGO, show_##field, NULL);
 
@@ -1224,6 +1483,8 @@ usb_intf_attr(bInterfaceProtocol, "%02x\n")
 static ssize_t show_interface_string(struct device *dev,
 		struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(field)
 
 usb_intf_attr(bInterfaceNumber, "%02x\n");
@@ -1235,6 +1496,9 @@ usb_intf_attr(bInterfaceProtocol, "%02x\n");
 
 static ssize_t interface_show(struct device *dev, struct device_attribute *attr,
 			      char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_interface *intf;
@@ -1242,9 +1506,13 @@ static ssize_t interface_show(struct device *dev, struct device_attribute *attr,
 
 	intf = to_usb_interface(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	string = intf->cur_altsetting->string;
 	barrier();		/* The altsetting might change! */
 
+=======
+	string = ACCESS_ONCE(intf->cur_altsetting->string);
+>>>>>>> v3.18
 =======
 	string = ACCESS_ONCE(intf->cur_altsetting->string);
 >>>>>>> v3.18
@@ -1253,15 +1521,21 @@ static ssize_t interface_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%s\n", string);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(interface, S_IRUGO, show_interface_string, NULL);
 
 static ssize_t show_modalias(struct device *dev,
 		struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(interface);
 
 static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
 			     char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_interface *intf;
@@ -1271,7 +1545,11 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
 	intf = to_usb_interface(dev);
 	udev = interface_to_usbdev(intf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	alt = intf->cur_altsetting;
+=======
+	alt = ACCESS_ONCE(intf->cur_altsetting);
+>>>>>>> v3.18
 =======
 	alt = ACCESS_ONCE(intf->cur_altsetting);
 >>>>>>> v3.18
@@ -1289,6 +1567,7 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
 			alt->desc.bInterfaceProtocol,
 			alt->desc.bInterfaceNumber);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 static DEVICE_ATTR(modalias, S_IRUGO, show_modalias, NULL);
 
@@ -1315,6 +1594,8 @@ static ssize_t show_supports_autosuspend(struct device *dev,
 }
 static DEVICE_ATTR(supports_autosuspend, S_IRUGO, show_supports_autosuspend, NULL);
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(modalias);
 
 static ssize_t supports_autosuspend_show(struct device *dev,
@@ -1331,6 +1612,9 @@ static ssize_t supports_autosuspend_show(struct device *dev,
 	return sprintf(buf, "%u\n", s);
 }
 static DEVICE_ATTR_RO(supports_autosuspend);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct attribute *intf_attrs[] = {

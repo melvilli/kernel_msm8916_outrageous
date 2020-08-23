@@ -2,7 +2,10 @@
    BlueZ - Bluetooth protocol stack for Linux
    Copyright (C) 2000-2001 Qualcomm Incorporated
 <<<<<<< HEAD
+<<<<<<< HEAD
    Copyright (C) 2014 The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -33,7 +36,10 @@
 #include <net/sock.h>
 #include <linux/seq_file.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/usb.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -74,6 +80,10 @@ struct bt_security {
 #define BT_SECURITY_MEDIUM	2
 #define BT_SECURITY_HIGH	3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BT_SECURITY_FIPS	4
+>>>>>>> v3.18
 =======
 #define BT_SECURITY_FIPS	4
 >>>>>>> v3.18
@@ -120,11 +130,14 @@ struct bt_power {
 #define BT_CHANNEL_POLICY_AMP_PREFERRED		2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __printf(1, 2)
 int bt_info(const char *fmt, ...);
 __printf(1, 2)
 int bt_err(const char *fmt, ...);
 =======
+=======
+>>>>>>> v3.18
 #define BT_VOICE		11
 struct bt_voice {
 	__u16 setting;
@@ -140,6 +153,9 @@ __printf(1, 2)
 void bt_info(const char *fmt, ...);
 __printf(1, 2)
 void bt_err(const char *fmt, ...);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define BT_INFO(fmt, ...)	bt_info(fmt "\n", ##__VA_ARGS__)
@@ -220,8 +236,13 @@ static inline bool bdaddr_type_is_le(__u8 type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BDADDR_ANY   (&(bdaddr_t) {{0, 0, 0, 0, 0, 0} })
 #define BDADDR_LOCAL (&(bdaddr_t) {{0, 0, 0, 0xff, 0xff, 0xff} })
+=======
+#define BDADDR_ANY  (&(bdaddr_t) {{0, 0, 0, 0, 0, 0}})
+#define BDADDR_NONE (&(bdaddr_t) {{0xff, 0xff, 0xff, 0xff, 0xff, 0xff}})
+>>>>>>> v3.18
 =======
 #define BDADDR_ANY  (&(bdaddr_t) {{0, 0, 0, 0, 0, 0}})
 #define BDADDR_NONE (&(bdaddr_t) {{0xff, 0xff, 0xff, 0xff, 0xff, 0xff}})
@@ -246,16 +267,22 @@ void baswap(bdaddr_t *dst, bdaddr_t *src);
 struct bt_sock {
 	struct sock sk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bdaddr_t    src;
 	bdaddr_t    dst;
 	struct list_head accept_q;
 	struct sock *parent;
 	unsigned long flags;
 =======
+=======
+>>>>>>> v3.18
 	struct list_head accept_q;
 	struct sock *parent;
 	unsigned long flags;
 	void (*skb_msg_name)(struct sk_buff *, void *, int *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -284,6 +311,10 @@ uint bt_sock_poll(struct file *file, struct socket *sock, poll_table *wait);
 int  bt_sock_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg);
 int  bt_sock_wait_state(struct sock *sk, int state, unsigned long timeo);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int  bt_sock_wait_ready(struct sock *sk, unsigned long flags);
+>>>>>>> v3.18
 =======
 int  bt_sock_wait_ready(struct sock *sk, unsigned long flags);
 >>>>>>> v3.18
@@ -295,6 +326,7 @@ struct sock *bt_accept_dequeue(struct sock *parent, struct socket *newsock);
 /* Skb helpers */
 struct l2cap_ctrl {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int	sframe:1,
 			poll:1,
 			final:1,
@@ -305,6 +337,8 @@ struct l2cap_ctrl {
 	__u16		txseq;
 	__u8		retries;
 =======
+=======
+>>>>>>> v3.18
 	__u8	sframe:1,
 		poll:1,
 		final:1,
@@ -314,6 +348,9 @@ struct l2cap_ctrl {
 	__u16	reqseq;
 	__u16	txseq;
 	__u8	retries;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -331,11 +368,14 @@ struct bt_skb_cb {
 	__u8 pkt_type;
 	__u8 incoming;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16 expect;
 	__u8 force_active;
 	struct l2cap_ctrl control;
 	struct hci_req_ctrl req;
 =======
+=======
+>>>>>>> v3.18
 	__u16 opcode;
 	__u16 expect;
 	__u8 force_active;
@@ -344,6 +384,9 @@ struct bt_skb_cb {
 	struct hci_req_ctrl req;
 	bdaddr_t bdaddr;
 	__le16 psm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #define bt_cb(skb) ((struct bt_skb_cb *)((skb)->cb))
@@ -393,6 +436,7 @@ out:
 int bt_to_errno(__u16 code);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int hci_sock_init(void);
 extern void hci_sock_cleanup(void);
 
@@ -404,6 +448,8 @@ extern int  bt_procfs_init(struct net *net, const char *name,
 			   int (* seq_show)(struct seq_file *, void *));
 extern void bt_procfs_cleanup(struct net *net, const char *name);
 =======
+=======
+>>>>>>> v3.18
 int hci_sock_init(void);
 void hci_sock_cleanup(void);
 
@@ -414,6 +460,9 @@ int bt_procfs_init(struct net *net, const char *name,
 		   struct bt_sock_list *sk_list,
 		   int (*seq_show)(struct seq_file *, void *));
 void bt_procfs_cleanup(struct net *net, const char *name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct dentry *bt_debugfs;
@@ -427,9 +476,12 @@ void sco_exit(void);
 void bt_sock_reclassify_lock(struct sock *sk, int proto);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int get_rome_version(struct usb_device *udev);
 int rome_download(struct usb_device *udev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __BLUETOOTH_H */

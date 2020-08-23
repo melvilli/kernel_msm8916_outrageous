@@ -107,7 +107,11 @@ op_axp_stop(void)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 op_axp_create_files(struct super_block *sb, struct dentry *root)
+=======
+op_axp_create_files(struct dentry *root)
+>>>>>>> v3.18
 =======
 op_axp_create_files(struct dentry *root)
 >>>>>>> v3.18
@@ -119,6 +123,7 @@ op_axp_create_files(struct dentry *root)
 		char buf[4];
 
 		snprintf(buf, sizeof buf, "%d", i);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dir = oprofilefs_mkdir(sb, root, buf);
 
@@ -138,6 +143,8 @@ op_axp_create_files(struct dentry *root)
 					&sys.enable_kernel);
 		oprofilefs_create_ulong(sb, root, "enable_user",
 =======
+=======
+>>>>>>> v3.18
 		dir = oprofilefs_mkdir(root, buf);
 
 		oprofilefs_create_ulong(dir, "enabled", &ctr[i].enabled);
@@ -155,6 +162,9 @@ op_axp_create_files(struct dentry *root)
 		oprofilefs_create_ulong(root, "enable_kernel",
 					&sys.enable_kernel);
 		oprofilefs_create_ulong(root, "enable_user",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					&sys.enable_user);
 	}

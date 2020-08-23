@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -75,6 +83,7 @@
  * enum iwl_tx_flags - bitmasks for tx_flags in TX command
  * @TX_CMD_FLG_PROT_REQUIRE: use RTS or CTS-to-self to protect the frame
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @TX_CMD_FLG_ACK: expect ACK from receiving station
  * @TX_CMD_FLG_STA_RATE: use RS table with initial index from the TX command.
  *	Otherwise, use rate_n_flags from the TX command
@@ -86,6 +95,8 @@
  * @TX_CMD_FLG_HT_NDPA: mark frame is NDPA for HT beamformer sequence
  * @TX_CMD_FLG_CSI_FDBK2HOST: mark to send feedback to host (only if good CRC)
 =======
+=======
+>>>>>>> v3.18
  * @TX_CMD_FLG_WRITE_TX_POWER: update current tx power value in the mgmt frame
  * @TX_CMD_FLG_ACK: expect ACK from receiving station
  * @TX_CMD_FLG_STA_RATE: use RS table with initial index from the TX command.
@@ -97,13 +108,19 @@
  * @TX_CMD_FLG_CSI_FDBK2HOST: mark to send feedback to host (only if good CRC)
  * @TX_CMD_FLG_BT_PRIO_POS: the position of the BT priority (bit 11 is ignored
  *	on old firmwares).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @TX_CMD_FLG_BT_DIS: disable BT priority for this frame
  * @TX_CMD_FLG_SEQ_CTL: set if FW should override the sequence control.
  *	Should be set for mgmt, non-QOS data, mcast, bcast and in scan command
  * @TX_CMD_FLG_MORE_FRAG: this frame is non-last MPDU
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @TX_CMD_FLG_NEXT_FRAME: this frame includes information of the next frame
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @TX_CMD_FLG_TSF: FW should calculate and insert TSF in the frame
@@ -111,7 +128,10 @@
  * @TX_CMD_FLG_CALIB: activate PA TX power calibrations
  * @TX_CMD_FLG_KEEP_SEQ_CTL: if seq_ctl is set, don't increase inner seq count
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @TX_CMD_FLG_AGG_START: allow this frame to start aggregation
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @TX_CMD_FLG_MH_PAD: driver inserted 2 byte padding after MAC header.
@@ -120,7 +140,10 @@
  * @TX_CMD_FLG_CCMP_AGG: this frame uses CCMP for aggregation acceleration
  * @TX_CMD_FLG_TKIP_MIC_DONE: FW already performed TKIP MIC calculation
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @TX_CMD_FLG_CTS_ONLY: send CTS only, no data after that
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @TX_CMD_FLG_DUR: disable duration overwriting used in PS-Poll Assoc-id
@@ -132,9 +155,15 @@
 enum iwl_tx_flags {
 	TX_CMD_FLG_PROT_REQUIRE		= BIT(0),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TX_CMD_FLG_ACK			= BIT(3),
 	TX_CMD_FLG_STA_RATE		= BIT(4),
 	TX_CMD_FLG_BA			= BIT(5),
+=======
+	TX_CMD_FLG_WRITE_TX_POWER	= BIT(1),
+	TX_CMD_FLG_ACK			= BIT(3),
+	TX_CMD_FLG_STA_RATE		= BIT(4),
+>>>>>>> v3.18
 =======
 	TX_CMD_FLG_WRITE_TX_POWER	= BIT(1),
 	TX_CMD_FLG_ACK			= BIT(3),
@@ -146,6 +175,7 @@ enum iwl_tx_flags {
 	TX_CMD_FLG_HT_NDPA		= BIT(9),
 	TX_CMD_FLG_CSI_FDBK2HOST	= BIT(10),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TX_CMD_FLG_BT_DIS		= BIT(12),
 	TX_CMD_FLG_SEQ_CTL		= BIT(13),
 	TX_CMD_FLG_MORE_FRAG		= BIT(14),
@@ -155,6 +185,8 @@ enum iwl_tx_flags {
 	TX_CMD_FLG_KEEP_SEQ_CTL		= BIT(18),
 	TX_CMD_FLG_AGG_START		= BIT(19),
 =======
+=======
+>>>>>>> v3.18
 	TX_CMD_FLG_BT_PRIO_POS		= 11,
 	TX_CMD_FLG_BT_DIS		= BIT(12),
 	TX_CMD_FLG_SEQ_CTL		= BIT(13),
@@ -162,13 +194,19 @@ enum iwl_tx_flags {
 	TX_CMD_FLG_TSF			= BIT(16),
 	TX_CMD_FLG_CALIB		= BIT(17),
 	TX_CMD_FLG_KEEP_SEQ_CTL		= BIT(18),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TX_CMD_FLG_MH_PAD		= BIT(20),
 	TX_CMD_FLG_RESP_TO_DRV		= BIT(21),
 	TX_CMD_FLG_CCMP_AGG		= BIT(22),
 	TX_CMD_FLG_TKIP_MIC_DONE	= BIT(23),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TX_CMD_FLG_CTS_ONLY		= BIT(24),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	TX_CMD_FLG_DUR			= BIT(25),
@@ -185,6 +223,11 @@ enum iwl_tx_flags {
 #define TX_CMD_SEC_CCM			0x02
 #define TX_CMD_SEC_TKIP			0x03
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TX_CMD_SEC_EXT			0x04
+#define TX_CMD_SEC_MSK			0x07
+>>>>>>> v3.18
 =======
 #define TX_CMD_SEC_EXT			0x04
 #define TX_CMD_SEC_MSK			0x07
@@ -244,8 +287,11 @@ enum iwl_tx_flags {
  * ( TX_CMD = 0x1c )
  * @len: in bytes of the payload, see below for details
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @next_frame_len: same as len, but for next frame (0 if not applicable)
  *	Used for fragmentation and bursting, but not in 11n aggregation.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @tx_flags: combination of TX_CMD_FLG_*
@@ -266,8 +312,11 @@ enum iwl_tx_flags {
  * @tid_spec: TID/tspec
  * @pm_frame_timeout: PM TX frame timeout
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @driver_txop: duration od EDCA TXOP, in 32-usec units. Set this if not
  *	specified by HCCA protocol
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -289,16 +338,22 @@ struct iwl_tx_cmd {
 	__le16 next_frame_len;
 	__le32 tx_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* DRAM_SCRATCH_API_U_VER_1 */
 	u8 try_cnt;
 	u8 btkill_cnt;
 	__le16 reserved;
 =======
+=======
+>>>>>>> v3.18
 	struct {
 		u8 try_cnt;
 		u8 btkill_cnt;
 		__le16 reserved;
 	} scratch; /* DRAM_SCRATCH_API_U_VER_1 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__le32 rate_n_flags;
 	u8 sta_id;
@@ -307,8 +362,12 @@ struct iwl_tx_cmd {
 	u8 reserved2;
 	u8 key[16];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le16 next_frame_flags;
 	__le16 reserved3;
+=======
+	__le32 reserved3;
+>>>>>>> v3.18
 =======
 	__le32 reserved3;
 >>>>>>> v3.18
@@ -320,7 +379,11 @@ struct iwl_tx_cmd {
 	u8 tid_tspec;
 	__le16 pm_frame_timeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le16 driver_txop;
+=======
+	__le16 reserved4;
+>>>>>>> v3.18
 =======
 	__le16 reserved4;
 >>>>>>> v3.18
@@ -556,7 +619,12 @@ struct iwl_mvm_tx_resp {
 	u8 pa_integ_res_c[3];
 	__le16 measurement_req_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le16 reserved;
+=======
+	u8 reduced_tpc;
+	u8 reserved;
+>>>>>>> v3.18
 =======
 	u8 reduced_tpc;
 	u8 reserved;
@@ -627,7 +695,10 @@ struct iwl_beacon_notif {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct iwl_extended_beacon_notif - notifies about beacon transmission
  * @beacon_notify_hdr: tx response command associated with the beacon
  * @tsf: last beacon tsf
@@ -642,6 +713,9 @@ struct iwl_extended_beacon_notif {
 } __packed; /* BEACON_NTFY_API_S_VER_5 */
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * enum iwl_dump_control - dump (flush) control flags
  * @DUMP_TX_FIFO_FLUSH: Dump MSDUs until the the FIFO is empty

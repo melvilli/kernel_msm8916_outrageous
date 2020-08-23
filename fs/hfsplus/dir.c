@@ -13,6 +13,10 @@
 #include <linux/slab.h>
 #include <linux/random.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/nls.h>
+>>>>>>> v3.18
 =======
 #include <linux/nls.h>
 >>>>>>> v3.18
@@ -21,6 +25,10 @@
 #include "hfsplus_raw.h"
 #include "xattr.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "acl.h"
+>>>>>>> v3.18
 =======
 #include "acl.h"
 >>>>>>> v3.18
@@ -130,6 +138,7 @@ fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hfsplus_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode *inode = file_inode(filp);
@@ -137,12 +146,17 @@ static int hfsplus_readdir(struct file *filp, void *dirent, filldir_t filldir)
 	int len, err;
 	char strbuf[HFSPLUS_MAX_STRLEN + 1];
 =======
+=======
+>>>>>>> v3.18
 static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 {
 	struct inode *inode = file_inode(file);
 	struct super_block *sb = inode->i_sb;
 	int len, err;
 	char *strbuf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hfsplus_cat_entry entry;
 	struct hfs_find_data fd;
@@ -150,7 +164,11 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 	u16 type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (filp->f_pos >= inode->i_size)
+=======
+	if (file->f_pos >= inode->i_size)
+>>>>>>> v3.18
 =======
 	if (file->f_pos >= inode->i_size)
 >>>>>>> v3.18
@@ -160,18 +178,25 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 	if (err)
 		return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	strbuf = kmalloc(NLS_MAX_CHARSET_SIZE * HFSPLUS_MAX_STRLEN + 1, GFP_KERNEL);
 	if (!strbuf) {
 		err = -ENOMEM;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hfsplus_cat_build_key(sb, fd.search_key, inode->i_ino, NULL);
 	err = hfs_brec_find(&fd, hfs_find_rec_by_key);
 	if (err)
 		goto out;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch ((u32)filp->f_pos) {
 	case 0:
@@ -182,6 +207,8 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 		/* fall through */
 	case 1:
 =======
+=======
+>>>>>>> v3.18
 	if (ctx->pos == 0) {
 		/* This is completely artificial... */
 		if (!dir_emit_dot(file, ctx))
@@ -189,6 +216,9 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 		ctx->pos = 1;
 	}
 	if (ctx->pos == 1) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (fd.entrylength > sizeof(entry) || fd.entrylength < 0) {
 			err = -EIO;
@@ -208,6 +238,7 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (filldir(dirent, "..", 2, 1,
 			    be32_to_cpu(entry.thread.parentID), DT_DIR))
 			goto out;
@@ -222,6 +253,8 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		if (!dir_emit(ctx, "..", 2,
 			    be32_to_cpu(entry.thread.parentID), DT_DIR))
 			goto out;
@@ -232,6 +265,9 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 	err = hfs_brec_goto(&fd, ctx->pos - 1);
 	if (err)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (;;) {
 		if (be32_to_cpu(fd.key->cat.parent) != inode->i_ino) {
@@ -249,7 +285,11 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 			fd.entrylength);
 		type = be16_to_cpu(entry.type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len = HFSPLUS_MAX_STRLEN;
+=======
+		len = NLS_MAX_CHARSET_SIZE * HFSPLUS_MAX_STRLEN;
+>>>>>>> v3.18
 =======
 		len = NLS_MAX_CHARSET_SIZE * HFSPLUS_MAX_STRLEN;
 >>>>>>> v3.18
@@ -268,11 +308,14 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 					be32_to_cpu(entry.folder.id))
 				goto next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (filldir(dirent, strbuf, len, filp->f_pos,
 				    be32_to_cpu(entry.folder.id), DT_DIR))
 				break;
 		} else if (type == HFSPLUS_FILE) {
 =======
+=======
+>>>>>>> v3.18
 			if (!dir_emit(ctx, strbuf, len,
 				    be32_to_cpu(entry.folder.id), DT_DIR))
 				break;
@@ -280,6 +323,9 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 			u16 mode;
 			unsigned type = DT_UNKNOWN;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (fd.entrylength < sizeof(struct hfsplus_cat_file)) {
 				pr_err("small file entry\n");
@@ -287,9 +333,12 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 				goto out;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (filldir(dirent, strbuf, len, filp->f_pos,
 				    be32_to_cpu(entry.file.id), DT_REG))
 =======
+=======
+>>>>>>> v3.18
 
 			mode = be16_to_cpu(entry.file.permissions.mode);
 			if (S_ISREG(mode))
@@ -307,6 +356,9 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 
 			if (!dir_emit(ctx, strbuf, len,
 				      be32_to_cpu(entry.file.id), type))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 		} else {
@@ -316,8 +368,13 @@ static int hfsplus_readdir(struct file *file, struct dir_context *ctx)
 		}
 next:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		filp->f_pos++;
 		if (filp->f_pos >= inode->i_size)
+=======
+		ctx->pos++;
+		if (ctx->pos >= inode->i_size)
+>>>>>>> v3.18
 =======
 		ctx->pos++;
 		if (ctx->pos >= inode->i_size)
@@ -328,7 +385,11 @@ next:
 			goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rd = filp->private_data;
+=======
+	rd = file->private_data;
+>>>>>>> v3.18
 =======
 	rd = file->private_data;
 >>>>>>> v3.18
@@ -339,8 +400,13 @@ next:
 			goto out;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		filp->private_data = rd;
 		rd->file = filp;
+=======
+		file->private_data = rd;
+		rd->file = file;
+>>>>>>> v3.18
 =======
 		file->private_data = rd;
 		rd->file = file;
@@ -350,6 +416,10 @@ next:
 	memcpy(&rd->key, fd.key, sizeof(struct hfsplus_cat_key));
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(strbuf);
+>>>>>>> v3.18
 =======
 	kfree(strbuf);
 >>>>>>> v3.18
@@ -637,13 +707,19 @@ const struct inode_operations hfsplus_dir_inode_operations = {
 	.getxattr		= generic_getxattr,
 	.listxattr		= hfsplus_listxattr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.removexattr		= hfsplus_removexattr,
 =======
+=======
+>>>>>>> v3.18
 	.removexattr		= generic_removexattr,
 #ifdef CONFIG_HFSPLUS_FS_POSIX_ACL
 	.get_acl		= hfsplus_get_posix_acl,
 	.set_acl		= hfsplus_set_posix_acl,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -651,7 +727,11 @@ const struct file_operations hfsplus_dir_operations = {
 	.fsync		= hfsplus_file_fsync,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= hfsplus_readdir,
+=======
+	.iterate	= hfsplus_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= hfsplus_readdir,
 >>>>>>> v3.18

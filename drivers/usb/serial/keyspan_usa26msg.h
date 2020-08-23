@@ -63,7 +63,11 @@
 
 		(b)	0x80 bit set
 <<<<<<< HEAD
+<<<<<<< HEAD
 			indiates that the bytes following alternate data and
+=======
+			indicates that the bytes following alternate data and
+>>>>>>> v3.18
 =======
 			indicates that the bytes following alternate data and
 >>>>>>> v3.18

@@ -24,15 +24,21 @@
 const struct file_operations bfs_file_operations = {
 	.llseek 	= generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.aio_read	= generic_file_aio_read,
 	.write		= do_sync_write,
 	.aio_write	= generic_file_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.read		= new_sync_read,
 	.read_iter	= generic_file_read_iter,
 	.write		= new_sync_write,
 	.write_iter	= generic_file_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.mmap		= generic_file_mmap,
 	.splice_read	= generic_file_splice_read,
@@ -174,7 +180,11 @@ static void bfs_write_failed(struct address_space *mapping, loff_t to)
 
 	if (to > inode->i_size)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_pagecache(inode, to, inode->i_size);
+=======
+		truncate_pagecache(inode, inode->i_size);
+>>>>>>> v3.18
 =======
 		truncate_pagecache(inode, inode->i_size);
 >>>>>>> v3.18

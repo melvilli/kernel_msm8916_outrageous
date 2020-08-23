@@ -100,7 +100,11 @@ static int xfer_read(struct i2c_adapter *adap, struct i2c_msg *pmsg)
 	i2c_dev->msg = pmsg;
 	i2c_dev->buf_offset = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(i2c_dev->complete);
+=======
+	reinit_completion(&i2c_dev->complete);
+>>>>>>> v3.18
 =======
 	reinit_completion(&i2c_dev->complete);
 >>>>>>> v3.18

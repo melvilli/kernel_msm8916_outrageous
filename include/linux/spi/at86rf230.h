@@ -27,6 +27,7 @@ struct at86rf230_platform_data {
 	int slp_tr;
 	int dig2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Setting the irq_type will configure the driver to request
 	 * the platform irq trigger type according to the given value
@@ -41,6 +42,8 @@ struct at86rf230_platform_data {
 	 * of the device to high active (the default value).
 	 */
 	int irq_type;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

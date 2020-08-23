@@ -64,6 +64,10 @@
 extern unsigned long hpet_address;
 extern unsigned long force_hpet_address;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int boot_hpet_disable;
+>>>>>>> v3.18
 =======
 extern int boot_hpet_disable;
 >>>>>>> v3.18

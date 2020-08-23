@@ -210,6 +210,10 @@ define_machine(mpc8544_ds) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -228,6 +232,10 @@ define_machine(mpc8572_ds) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -246,6 +254,10 @@ define_machine(p2020_ds) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18

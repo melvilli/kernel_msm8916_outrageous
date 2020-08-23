@@ -63,6 +63,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ISID_SIZE			6
+
+>>>>>>> v3.18
 =======
 #define ISID_SIZE			6
 
@@ -137,11 +142,17 @@ struct iscsi_task {
 	unsigned long		last_timeout;
 	bool			have_checked_conn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* T10 protection information */
 	bool			protected;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* state set/tested under session->lock */
 	int			state;
@@ -186,6 +197,10 @@ struct iscsi_conn {
 	/* iSCSI connection-wide sequencing */
 	uint32_t		exp_statsn;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t		statsn;
+>>>>>>> v3.18
 =======
 	uint32_t		statsn;
 >>>>>>> v3.18
@@ -230,7 +245,10 @@ struct iscsi_conn {
 	char			*persistent_address;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned		max_segment_size;
 	unsigned		tcp_xmit_wsf;
 	unsigned		tcp_recv_wsf;
@@ -248,6 +266,9 @@ struct iscsi_conn {
 	uint8_t			is_fw_assigned_ipv6;
 	char			*local_ipaddr;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* MIB-statistics */
 	uint64_t		txdata_octets;
@@ -324,7 +345,10 @@ struct iscsi_session {
 	char			*ifacename;
 	char			*initiatorname;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	char			*boot_root;
 	char			*boot_nic;
 	char			*boot_target;
@@ -341,11 +365,15 @@ struct iscsi_session {
 	uint8_t			discovery_auth_optional;
 	uint8_t			isid[ISID_SIZE];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* control data */
 	struct iscsi_transport	*tt;
 	struct Scsi_Host	*host;
 	struct iscsi_conn	*leadconn;	/* leading connection */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spinlock_t		lock;		/* protects session state, *
 						 * sequence numbers,       *
@@ -354,6 +382,8 @@ struct iscsi_session {
 						 * - mgmtpool,		   *
 						 * - r2tpool		   */
 =======
+=======
+>>>>>>> v3.18
 	/* Between the forward and the backward locks exists a strict locking
 	 * hierarchy. The mutual exclusion zone protected by the forward lock
 	 * can enclose the mutual exclusion zone protected by the backward lock
@@ -367,6 +397,9 @@ struct iscsi_session {
 	spinlock_t		back_lock;	/* protects cmdsn_exp      *
 						 * cmdsn_max,              *
 						 * cmdpool kfifo_in        */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			state;		/* session state           */
 	int			age;		/* counts session re-opens */

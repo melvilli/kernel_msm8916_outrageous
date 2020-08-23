@@ -106,8 +106,11 @@ register struct thread_info *current_thread_info_reg asm("g6");
 /* #define TI_RESTART_BLOCK 0x25n */ /* Nobody cares */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PREEMPT_ACTIVE		0x4000000
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -136,6 +139,11 @@ register struct thread_info *current_thread_info_reg asm("g6");
 					 _TIF_SIGPENDING)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define is_32bit_task()	(1)
+
+>>>>>>> v3.18
 =======
 #define is_32bit_task()	(1)
 

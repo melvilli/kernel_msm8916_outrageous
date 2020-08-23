@@ -49,7 +49,10 @@ int __isa_exception_epc(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* (microMIPS) Convert 16-bit register encoding to 32-bit register encoding. */
 static const unsigned int reg16to32map[8] = {16, 17, 2, 3, 4, 5, 6, 7};
 
@@ -246,6 +249,9 @@ int __mm_isBranchInstr(struct pt_regs *regs, struct mm_decoded_insn dec_insn,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Compute return address and emulate branch in microMIPS mode after an
@@ -400,7 +406,11 @@ int __MIPS16e_compute_return_epc(struct pt_regs *regs)
  * @regs:	Pointer to pt_regs
  * @insn:	branch instruction to decode
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @returns:	-EFAULT on error and forces SIGILL, and on success
+=======
+ * @returns:	-EFAULT on error and forces SIGBUS, and on success
+>>>>>>> v3.18
 =======
  * @returns:	-EFAULT on error and forces SIGBUS, and on success
 >>>>>>> v3.18
@@ -501,7 +511,10 @@ int __compute_return_epc_for_insn(struct pt_regs *regs,
 	 * These are unconditional and in j_format.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case jalx_op:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case jal_op:
@@ -525,7 +538,11 @@ int __compute_return_epc_for_insn(struct pt_regs *regs,
 		    regs->regs[insn.i_format.rt]) {
 			epc = epc + 4 + (insn.i_format.simmediate << 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (insn.i_format.rt == beql_op)
+=======
+			if (insn.i_format.opcode == beql_op)
+>>>>>>> v3.18
 =======
 			if (insn.i_format.opcode == beql_op)
 >>>>>>> v3.18
@@ -541,7 +558,11 @@ int __compute_return_epc_for_insn(struct pt_regs *regs,
 		    regs->regs[insn.i_format.rt]) {
 			epc = epc + 4 + (insn.i_format.simmediate << 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (insn.i_format.rt == bnel_op)
+=======
+			if (insn.i_format.opcode == bnel_op)
+>>>>>>> v3.18
 =======
 			if (insn.i_format.opcode == bnel_op)
 >>>>>>> v3.18
@@ -557,7 +578,11 @@ int __compute_return_epc_for_insn(struct pt_regs *regs,
 		if ((long)regs->regs[insn.i_format.rs] <= 0) {
 			epc = epc + 4 + (insn.i_format.simmediate << 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (insn.i_format.rt == bnel_op)
+=======
+			if (insn.i_format.opcode == blezl_op)
+>>>>>>> v3.18
 =======
 			if (insn.i_format.opcode == blezl_op)
 >>>>>>> v3.18
@@ -573,7 +598,11 @@ int __compute_return_epc_for_insn(struct pt_regs *regs,
 		if ((long)regs->regs[insn.i_format.rs] > 0) {
 			epc = epc + 4 + (insn.i_format.simmediate << 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (insn.i_format.rt == bnel_op)
+=======
+			if (insn.i_format.opcode == bgtzl_op)
+>>>>>>> v3.18
 =======
 			if (insn.i_format.opcode == bgtzl_op)
 >>>>>>> v3.18
@@ -590,7 +619,11 @@ int __compute_return_epc_for_insn(struct pt_regs *regs,
 		preempt_disable();
 		if (is_fpu_owner())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			asm volatile("cfc1\t%0,$31" : "=r" (fcr31));
+=======
+		        fcr31 = read_32bit_cp1_register(CP1_STATUS);
+>>>>>>> v3.18
 =======
 		        fcr31 = read_32bit_cp1_register(CP1_STATUS);
 >>>>>>> v3.18
@@ -664,9 +697,14 @@ int __compute_return_epc_for_insn(struct pt_regs *regs,
 
 sigill:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("%s: DSP branch but not DSP ASE - sending SIGILL.\n",
 		current->comm);
 	force_sig(SIGILL, current);
+=======
+	printk("%s: DSP branch but not DSP ASE - sending SIGBUS.\n", current->comm);
+	force_sig(SIGBUS, current);
+>>>>>>> v3.18
 =======
 	printk("%s: DSP branch but not DSP ASE - sending SIGBUS.\n", current->comm);
 	force_sig(SIGBUS, current);
@@ -701,7 +739,10 @@ unaligned:
 	force_sig(SIGBUS, current);
 	return -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

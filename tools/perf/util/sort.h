@@ -21,6 +21,7 @@
 #include "parse-options.h"
 #include "parse-events.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "thread.h"
 #include "sort.h"
@@ -35,6 +36,8 @@ extern int sort__has_parent;
 extern int sort__has_sym;
 extern int sort__branch_mode;
 =======
+=======
+>>>>>>> v3.18
 #include "hist.h"
 #include "thread.h"
 
@@ -50,6 +53,9 @@ extern int sort__need_collapse;
 extern int sort__has_parent;
 extern int sort__has_sym;
 extern enum sort_mode sort__mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct sort_entry sort_comm;
 extern struct sort_entry sort_dso;
@@ -99,6 +105,7 @@ struct hist_entry {
 	} pairs;
 	struct he_stat		stat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct map_symbol	ms;
 	struct thread		*thread;
 	u64			ip;
@@ -107,6 +114,8 @@ struct hist_entry {
 	struct hist_entry_diff	diff;
 
 =======
+=======
+>>>>>>> v3.18
 	struct he_stat		*stat_acc;
 	struct map_symbol	ms;
 	struct thread		*thread;
@@ -121,6 +130,9 @@ struct hist_entry {
 	/* We are added by hists__add_dummy_entry. */
 	bool			dummy;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* XXX These two should move to some tree widget lib */
 	u16			row_offset;
@@ -153,6 +165,7 @@ static inline struct hist_entry *hist_entry__next_pair(struct hist_entry *he)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void hist_entry__add_pair(struct hist_entry *he,
 					struct hist_entry *pair)
 {
@@ -160,6 +173,8 @@ static inline void hist_entry__add_pair(struct hist_entry *he,
 }
 
 =======
+=======
+>>>>>>> v3.18
 static inline void hist_entry__add_pair(struct hist_entry *pair,
 					struct hist_entry *he)
 {
@@ -189,6 +204,9 @@ enum sort_mode {
 	SORT_MODE__DIFF,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum sort_type {
 	/* common sort keys */
@@ -202,12 +220,16 @@ enum sort_type {
 	SORT_LOCAL_WEIGHT,
 	SORT_GLOBAL_WEIGHT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SORT_MEM_DADDR_SYMBOL,
 	SORT_MEM_DADDR_DSO,
 	SORT_MEM_LOCKED,
 	SORT_MEM_TLB,
 	SORT_MEM_LVL,
 	SORT_MEM_SNOOP,
+=======
+	SORT_TRANSACTION,
+>>>>>>> v3.18
 =======
 	SORT_TRANSACTION,
 >>>>>>> v3.18
@@ -220,7 +242,10 @@ enum sort_type {
 	SORT_SYM_TO,
 	SORT_MISPREDICT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	SORT_ABORT,
 	SORT_IN_TX,
 
@@ -233,6 +258,9 @@ enum sort_type {
 	SORT_MEM_LVL,
 	SORT_MEM_SNOOP,
 	SORT_MEM_DCACHELINE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -248,15 +276,21 @@ struct sort_entry {
 	int64_t (*se_cmp)(struct hist_entry *, struct hist_entry *);
 	int64_t (*se_collapse)(struct hist_entry *, struct hist_entry *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	(*se_snprintf)(struct hist_entry *self, char *bf, size_t size,
 			       unsigned int width);
 	u8	se_width_idx;
 	bool	elide;
 =======
+=======
+>>>>>>> v3.18
 	int64_t	(*se_sort)(struct hist_entry *, struct hist_entry *);
 	int	(*se_snprintf)(struct hist_entry *he, char *bf, size_t size,
 			       unsigned int width);
 	u8	se_width_idx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -265,11 +299,14 @@ extern struct list_head hist_entry__sort_list;
 
 int setup_sorting(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int sort_dimension__add(const char *);
 void sort_entry__setup_elide(struct sort_entry *self, struct strlist *list,
 			     const char *list_name, FILE *fp);
 
 =======
+=======
+>>>>>>> v3.18
 int setup_output_field(void);
 void reset_output_field(void);
 extern int sort_dimension__add(const char *);
@@ -279,5 +316,8 @@ void perf_hpp__set_elide(int idx, bool elide);
 int report_parse_ignore_callees_opt(const struct option *opt, const char *arg, int unset);
 
 bool is_strict_order(const char *order);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* __PERF_SORT_H */

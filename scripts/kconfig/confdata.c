@@ -141,7 +141,13 @@ static int conf_set_sym_val(struct symbol *sym, int def, int def_flags, char *p)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		conf_warning("symbol value '%s' invalid for %s", p, sym->name);
+=======
+		if (def != S_DEF_AUTO)
+			conf_warning("symbol value '%s' invalid for %s",
+				     p, sym->name);
+>>>>>>> v3.18
 =======
 		if (def != S_DEF_AUTO)
 			conf_warning("symbol value '%s' invalid for %s",
@@ -168,7 +174,12 @@ static int conf_set_sym_val(struct symbol *sym, int def, int def_flags, char *p)
 		}
 		if (!p2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			conf_warning("invalid string found");
+=======
+			if (def != S_DEF_AUTO)
+				conf_warning("invalid string found");
+>>>>>>> v3.18
 =======
 			if (def != S_DEF_AUTO)
 				conf_warning("invalid string found");
@@ -184,7 +195,13 @@ static int conf_set_sym_val(struct symbol *sym, int def, int def_flags, char *p)
 			sym->flags |= def_flags;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			conf_warning("symbol value '%s' invalid for %s", p, sym->name);
+=======
+			if (def != S_DEF_AUTO)
+				conf_warning("symbol value '%s' invalid for %s",
+					     p, sym->name);
+>>>>>>> v3.18
 =======
 			if (def != S_DEF_AUTO)
 				conf_warning("symbol value '%s' invalid for %s",
@@ -1058,7 +1075,11 @@ void conf_set_changed_callback(void (*fn)(void))
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void randomize_choice_values(struct symbol *csym)
+=======
+static bool randomize_choice_values(struct symbol *csym)
+>>>>>>> v3.18
 =======
 static bool randomize_choice_values(struct symbol *csym)
 >>>>>>> v3.18
@@ -1075,7 +1096,11 @@ static bool randomize_choice_values(struct symbol *csym)
 	 */
 	if (csym->curr.tri != yes)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return false;
+>>>>>>> v3.18
 =======
 		return false;
 >>>>>>> v3.18
@@ -1103,6 +1128,12 @@ static bool randomize_choice_values(struct symbol *csym)
 			sym->def[S_DEF_USER].tri = no;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		sym->flags |= SYMBOL_DEF_USER;
+		/* clear VALID to get value calculated */
+		sym->flags &= ~SYMBOL_VALID;
+>>>>>>> v3.18
 =======
 		sym->flags |= SYMBOL_DEF_USER;
 		/* clear VALID to get value calculated */
@@ -1113,6 +1144,11 @@ static bool randomize_choice_values(struct symbol *csym)
 	/* clear VALID to get value calculated */
 	csym->flags &= ~(SYMBOL_VALID);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return true;
+>>>>>>> v3.18
 =======
 
 	return true;
@@ -1140,7 +1176,11 @@ void set_all_choice_values(struct symbol *csym)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void conf_set_all_new_symbols(enum conf_def_mode mode)
+=======
+bool conf_set_all_new_symbols(enum conf_def_mode mode)
+>>>>>>> v3.18
 =======
 bool conf_set_all_new_symbols(enum conf_def_mode mode)
 >>>>>>> v3.18
@@ -1192,6 +1232,10 @@ bool conf_set_all_new_symbols(enum conf_def_mode mode)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool has_changed = false;
+>>>>>>> v3.18
 =======
 	bool has_changed = false;
 >>>>>>> v3.18
@@ -1203,6 +1247,10 @@ bool conf_set_all_new_symbols(enum conf_def_mode mode)
 		case S_BOOLEAN:
 		case S_TRISTATE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			has_changed = true;
+>>>>>>> v3.18
 =======
 			has_changed = true;
 >>>>>>> v3.18
@@ -1215,12 +1263,18 @@ bool conf_set_all_new_symbols(enum conf_def_mode mode)
 				break;
 			case def_no:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sym->def[S_DEF_USER].tri = no;
 =======
+=======
+>>>>>>> v3.18
 				if (sym->flags & SYMBOL_ALLNOCONFIG_Y)
 					sym->def[S_DEF_USER].tri = yes;
 				else
 					sym->def[S_DEF_USER].tri = no;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			case def_random:
@@ -1272,9 +1326,12 @@ bool conf_set_all_new_symbols(enum conf_def_mode mode)
 		sym_calc_value(csym);
 		if (mode == def_random)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			randomize_choice_values(csym);
 	}
 =======
+=======
+>>>>>>> v3.18
 			has_changed = randomize_choice_values(csym);
 		else {
 			set_all_choice_values(csym);
@@ -1283,5 +1340,8 @@ bool conf_set_all_new_symbols(enum conf_def_mode mode)
 	}
 
 	return has_changed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

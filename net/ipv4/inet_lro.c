@@ -231,6 +231,7 @@ static void lro_add_packet(struct net_lro_desc *lro_desc, struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void lro_add_frags(struct net_lro_desc *lro_desc,
 			  int len, int hlen, int truesize,
 			  struct skb_frag_struct *skb_frags,
@@ -254,6 +255,8 @@ static void lro_add_frags(struct net_lro_desc *lro_desc,
 		skb_shinfo(skb)->nr_frags++;
 	}
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -374,6 +377,7 @@ out:
 	return 1;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static struct sk_buff *lro_gen_skb(struct net_lro_mgr *lro_mgr,
@@ -499,6 +503,8 @@ out:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void lro_receive_skb(struct net_lro_mgr *lro_mgr,
 		     struct sk_buff *skb,
 		     void *priv)
@@ -512,6 +518,7 @@ void lro_receive_skb(struct net_lro_mgr *lro_mgr,
 }
 EXPORT_SYMBOL(lro_receive_skb);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void lro_receive_frags(struct net_lro_mgr *lro_mgr,
 		       struct skb_frag_struct *frags,
@@ -532,6 +539,8 @@ EXPORT_SYMBOL(lro_receive_frags);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void lro_flush_all(struct net_lro_mgr *lro_mgr)
 {
 	int i;
@@ -544,6 +553,7 @@ void lro_flush_all(struct net_lro_mgr *lro_mgr)
 }
 EXPORT_SYMBOL(lro_flush_all);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void lro_flush_pkt(struct net_lro_mgr *lro_mgr,
 		  struct iphdr *iph, struct tcphdr *tcph)
@@ -555,5 +565,7 @@ void lro_flush_pkt(struct net_lro_mgr *lro_mgr,
 		lro_flush(lro_mgr, lro_desc);
 }
 EXPORT_SYMBOL(lro_flush_pkt);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

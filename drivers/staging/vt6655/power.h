@@ -30,13 +30,17 @@
 #define __POWER_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define     C_PWBT                   1000      // micro sec. power up before TBTT
 #define     PS_FAST_INTERVAL         1         // Fast power saving listen interval
 #define     PS_MAX_INTERVAL          4         // MAX power saving listen interval
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*---------------------  Export Classes  ----------------------------*/
 
@@ -49,6 +53,8 @@
 // PSDevice pDevice
 // PSDevice hDeviceContext
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 bool

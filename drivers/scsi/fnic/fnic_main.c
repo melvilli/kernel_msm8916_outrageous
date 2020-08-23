@@ -75,7 +75,10 @@ MODULE_PARM_DESC(fnic_trace_max_pages, "Total allocated memory pages "
 					"for fnic trace buffer");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 unsigned int fnic_fc_trace_max_pages = 64;
 module_param(fnic_fc_trace_max_pages, uint, S_IRUGO|S_IWUSR);
 MODULE_PARM_DESC(fnic_fc_trace_max_pages,
@@ -85,6 +88,9 @@ static unsigned int fnic_max_qdepth = FNIC_DFLT_QUEUE_DEPTH;
 module_param(fnic_max_qdepth, uint, S_IRUGO|S_IWUSR);
 MODULE_PARM_DESC(fnic_max_qdepth, "Queue depth to report for each LUN");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct libfc_function_template fnic_transport_template = {
 	.frame_send = fnic_send,
@@ -104,7 +110,11 @@ static int fnic_slave_alloc(struct scsi_device *sdev)
 		return -ENXIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scsi_activate_tcq(sdev, FNIC_DFLT_QUEUE_DEPTH);
+=======
+	scsi_activate_tcq(sdev, fnic_max_qdepth);
+>>>>>>> v3.18
 =======
 	scsi_activate_tcq(sdev, fnic_max_qdepth);
 >>>>>>> v3.18
@@ -124,7 +134,11 @@ static struct scsi_host_template fnic_host_template = {
 	.this_id = -1,
 	.cmd_per_lun = 3,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.can_queue = FNIC_MAX_IO_REQ,
+=======
+	.can_queue = FNIC_DFLT_IO_REQ,
+>>>>>>> v3.18
 =======
 	.can_queue = FNIC_DFLT_IO_REQ,
 >>>>>>> v3.18
@@ -147,6 +161,10 @@ static void fnic_get_host_speed(struct Scsi_Host *shost);
 static struct scsi_transport_template *fnic_fc_transport;
 static struct fc_host_statistics *fnic_get_stats(struct Scsi_Host *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void fnic_reset_host_stats(struct Scsi_Host *);
+>>>>>>> v3.18
 =======
 static void fnic_reset_host_stats(struct Scsi_Host *);
 >>>>>>> v3.18
@@ -178,6 +196,10 @@ static struct fc_function_template fnic_fc_functions = {
 	.issue_fc_host_lip = fnic_reset,
 	.get_fc_host_stats = fnic_get_stats,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.reset_fc_host_stats = fnic_reset_host_stats,
+>>>>>>> v3.18
 =======
 	.reset_fc_host_stats = fnic_reset_host_stats,
 >>>>>>> v3.18
@@ -235,7 +257,12 @@ static struct fc_host_statistics *fnic_get_stats(struct Scsi_Host *host)
 	stats->dumped_frames = vs->tx.tx_drops + vs->rx.rx_drop;
 	stats->invalid_crc_count = vs->rx.rx_crc_errors;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stats->seconds_since_last_reset = (jiffies - lp->boot_time) / HZ;
+=======
+	stats->seconds_since_last_reset =
+			(jiffies - fnic->stats_reset_time) / HZ;
+>>>>>>> v3.18
 =======
 	stats->seconds_since_last_reset =
 			(jiffies - fnic->stats_reset_time) / HZ;
@@ -247,7 +274,10 @@ static struct fc_host_statistics *fnic_get_stats(struct Scsi_Host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * fnic_dump_fchost_stats
  * note : dumps fc_statistics into system logs
@@ -350,6 +380,9 @@ static void fnic_reset_host_stats(struct Scsi_Host *host)
 	return;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void fnic_log_q_error(struct fnic *fnic)
 {
@@ -586,17 +619,23 @@ static int fnic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	host->transportt = fnic_fc_transport;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = scsi_init_shared_tag_map(host, FNIC_MAX_IO_REQ);
 	if (err) {
 		shost_printk(KERN_ERR, fnic->lport->host,
 			     "Unable to alloc shared tag map\n");
 		goto err_out_free_hba;
 =======
+=======
+>>>>>>> v3.18
 	err = fnic_stats_debugfs_init(fnic);
 	if (err) {
 		shost_printk(KERN_ERR, fnic->lport->host,
 				"Failed to initialize debugfs for stats\n");
 		fnic_stats_debugfs_remove(fnic);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -623,15 +662,21 @@ static int fnic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	/* Query PCI controller on system for DMA addressing
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * limitation for the device.  Try 40-bit first, and
 	 * fail to 32-bit.
 	 */
 	err = pci_set_dma_mask(pdev, DMA_BIT_MASK(40));
 =======
+=======
+>>>>>>> v3.18
 	 * limitation for the device.  Try 64-bit first, and
 	 * fail to 32-bit.
 	 */
 	err = pci_set_dma_mask(pdev, DMA_BIT_MASK(64));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err) {
 		err = pci_set_dma_mask(pdev, DMA_BIT_MASK(32));
@@ -650,15 +695,21 @@ static int fnic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = pci_set_consistent_dma_mask(pdev, DMA_BIT_MASK(40));
 		if (err) {
 			shost_printk(KERN_ERR, fnic->lport->host,
 				     "Unable to obtain 40-bit DMA "
 =======
+=======
+>>>>>>> v3.18
 		err = pci_set_consistent_dma_mask(pdev, DMA_BIT_MASK(64));
 		if (err) {
 			shost_printk(KERN_ERR, fnic->lport->host,
 				     "Unable to obtain 64-bit DMA "
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				     "for consistent allocations, aborting.\n");
 			goto err_out_release_regions;
@@ -727,7 +778,10 @@ static int fnic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		goto err_out_dev_close;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Configure Maximum Outstanding IO reqs*/
 	if (fnic->config.io_throttle_count != FNIC_UCSM_DFLT_THROTTLE_CNT_BLD) {
@@ -744,6 +798,9 @@ static int fnic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		goto err_out_dev_close;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	host->max_lun = fnic->config.luns_per_tgt;
 	host->max_id = FNIC_MAX_FCP_TARGET;
@@ -822,6 +879,7 @@ static int fnic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		INIT_WORK(&fnic->event_work, fnic_handle_event);
 		skb_queue_head_init(&fnic->fip_frame_queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_irqsave(&fnic_list_lock, flags);
 		if (!fnic_fip_queue) {
 			fnic_fip_queue =
@@ -837,6 +895,8 @@ static int fnic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		spin_unlock_irqrestore(&fnic_list_lock, flags);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		INIT_LIST_HEAD(&fnic->evlist);
 		INIT_LIST_HEAD(&fnic->vlans);
 	} else {
@@ -844,6 +904,10 @@ static int fnic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 			     "firmware uses non-FIP mode\n");
 		fcoe_ctlr_init(&fnic->ctlr, FIP_MODE_NON_FIP);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		fnic->ctlr.state = FIP_ST_NON_FIP;
+>>>>>>> v3.18
 =======
 		fnic->ctlr.state = FIP_ST_NON_FIP;
 >>>>>>> v3.18
@@ -919,6 +983,10 @@ static int fnic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	fc_lport_init_stats(lp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fnic->stats_reset_time = jiffies;
+>>>>>>> v3.18
 =======
 	fnic->stats_reset_time = jiffies;
 >>>>>>> v3.18
@@ -1002,6 +1070,10 @@ err_out_disable_device:
 	pci_disable_device(pdev);
 err_out_free_hba:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fnic_stats_debugfs_remove(fnic);
+>>>>>>> v3.18
 =======
 	fnic_stats_debugfs_remove(fnic);
 >>>>>>> v3.18
@@ -1058,6 +1130,10 @@ static void fnic_remove(struct pci_dev *pdev)
 	fcoe_ctlr_destroy(&fnic->ctlr);
 	fc_lport_destroy(lp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fnic_stats_debugfs_remove(fnic);
+>>>>>>> v3.18
 =======
 	fnic_stats_debugfs_remove(fnic);
 >>>>>>> v3.18
@@ -1089,7 +1165,10 @@ static void fnic_remove(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	scsi_host_put(lp->host);
@@ -1110,6 +1189,7 @@ static int __init fnic_init_module(void)
 	printk(KERN_INFO PFX "%s, ver %s\n", DRV_DESCRIPTION, DRV_VERSION);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Allocate memory for trace buffer */
 	err = fnic_trace_buf_init();
 	if (err < 0) {
@@ -1119,6 +1199,8 @@ static int __init fnic_init_module(void)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	/* Create debugfs entries for fnic */
 	err = fnic_debugfs_init();
 	if (err < 0) {
@@ -1144,6 +1226,9 @@ static int __init fnic_init_module(void)
 		fnic_fc_trace_free();
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Create a cache for allocation of default size sgls */
 	len = sizeof(struct fnic_dflt_sgl_list);
@@ -1190,7 +1275,10 @@ static int __init fnic_init_module(void)
 	INIT_LIST_HEAD(&fnic_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	fnic_fip_queue = create_singlethread_workqueue("fnic_fip_q");
 	if (!fnic_fip_queue) {
 		printk(KERN_ERR PFX "fnic FIP work queue create failed\n");
@@ -1198,6 +1286,9 @@ static int __init fnic_init_module(void)
 		goto err_create_fip_workq;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fnic_fc_transport = fc_attach_transport(&fnic_fc_functions);
 	if (!fnic_fc_transport) {
@@ -1218,6 +1309,11 @@ err_pci_register:
 	fc_release_transport(fnic_fc_transport);
 err_fc_transport:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	destroy_workqueue(fnic_fip_queue);
+err_create_fip_workq:
+>>>>>>> v3.18
 =======
 	destroy_workqueue(fnic_fip_queue);
 err_create_fip_workq:
@@ -1232,6 +1328,11 @@ err_create_fnic_sgl_slab_max:
 err_create_fnic_sgl_slab_dflt:
 	fnic_trace_free();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fnic_fc_trace_free();
+	fnic_debugfs_terminate();
+>>>>>>> v3.18
 =======
 	fnic_fc_trace_free();
 	fnic_debugfs_terminate();
@@ -1253,6 +1354,11 @@ static void __exit fnic_cleanup_module(void)
 	fc_release_transport(fnic_fc_transport);
 	fnic_trace_free();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fnic_fc_trace_free();
+	fnic_debugfs_terminate();
+>>>>>>> v3.18
 =======
 	fnic_fc_trace_free();
 	fnic_debugfs_terminate();

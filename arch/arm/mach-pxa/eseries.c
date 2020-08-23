@@ -22,6 +22,10 @@
 #include <linux/mtd/partitions.h>
 #include <linux/usb/gpio_vbus.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+>>>>>>> v3.18
 =======
 #include <linux/memblock.h>
 >>>>>>> v3.18
@@ -46,6 +50,7 @@
 
 /* Only e800 has 128MB RAM */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init eseries_fixup(struct tag *tags, char **cmdline, struct meminfo *mi)
 {
 	mi->nr_banks=1;
@@ -55,12 +60,17 @@ void __init eseries_fixup(struct tag *tags, char **cmdline, struct meminfo *mi)
 	else
 		mi->bank[0].size = (64*1024*1024);
 =======
+=======
+>>>>>>> v3.18
 void __init eseries_fixup(struct tag *tags, char **cmdline)
 {
 	if (machine_is_e800())
 		memblock_add(0xa0000000, SZ_128M);
 	else
 		memblock_add(0xa0000000, SZ_64M);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -216,7 +216,10 @@ CONFIG_SH_WDT=m
 # CONFIG_USB_HID is not set
 CONFIG_USB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_USB_MON=y

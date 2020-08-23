@@ -23,10 +23,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * $Log: cumana_NCR5380.h,v $
  */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef MAC_NCR5380_H
@@ -55,8 +58,11 @@
 #include <scsi/scsicam.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef HOSTS_C
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define NCR5380_implementation_fields \
@@ -82,10 +88,13 @@
 #define NCR5380_write_info macscsi_write_info
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BOARD_NORMAL	0
 #define BOARD_NCR53C400	1
 
 #endif /* ndef HOSTS_C */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* ndef ASM */

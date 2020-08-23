@@ -15,10 +15,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -43,8 +46,13 @@ Notes:
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../comedidev.h"
 #include <linux/ioport.h>
+=======
+#include <linux/module.h>
+#include "../comedidev.h"
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 #include "../comedidev.h"
@@ -110,10 +118,13 @@ static const struct aio12_8_boardtype board_types[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct aio12_8_private {
 	unsigned int ao_readback[4];
 };
 =======
+=======
+>>>>>>> v3.18
 static int aio_aio12_8_ai_eoc(struct comedi_device *dev,
 			      struct comedi_subdevice *s,
 			      struct comedi_insn *insn,
@@ -126,6 +137,9 @@ static int aio_aio12_8_ai_eoc(struct comedi_device *dev,
 		return 0;
 	return -EBUSY;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int aio_aio12_8_ai_read(struct comedi_device *dev,
@@ -135,8 +149,13 @@ static int aio_aio12_8_ai_read(struct comedi_device *dev,
 	unsigned int chan = CR_CHAN(insn->chanspec);
 	unsigned int range = CR_RANGE(insn->chanspec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int val;
 	unsigned char control;
+=======
+	unsigned char control;
+	int ret;
+>>>>>>> v3.18
 =======
 	unsigned char control;
 	int ret;
@@ -155,14 +174,18 @@ static int aio_aio12_8_ai_read(struct comedi_device *dev,
 
 	for (n = 0; n < insn->n; n++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int timeout = 5;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*  Setup and start conversion */
 		outb(control, dev->iobase + AIO12_8_ADC_REG);
 
 		/*  Wait for conversion to complete */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		do {
 			val = inb(dev->iobase + AIO12_8_STATUS_REG);
@@ -177,6 +200,11 @@ static int aio_aio12_8_ai_read(struct comedi_device *dev,
 		if (ret)
 			return ret;
 >>>>>>> v3.18
+=======
+		ret = comedi_timeout(dev, s, insn, aio_aio12_8_ai_eoc, 0);
+		if (ret)
+			return ret;
+>>>>>>> v3.18
 
 		data[n] = inw(dev->iobase + AIO12_8_ADC_REG) & s->maxdata;
 	}
@@ -184,6 +212,7 @@ static int aio_aio12_8_ai_read(struct comedi_device *dev,
 	return insn->n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int aio_aio12_8_ao_read(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
@@ -208,6 +237,8 @@ static int aio_aio12_8_ao_write(struct comedi_device *dev,
 	unsigned long port = dev->iobase + AIO12_8_DAC_REG(chan);
 	unsigned int val = 0;
 =======
+=======
+>>>>>>> v3.18
 static int aio_aio12_8_ao_insn_write(struct comedi_device *dev,
 				     struct comedi_subdevice *s,
 				     struct comedi_insn *insn,
@@ -215,6 +246,9 @@ static int aio_aio12_8_ao_insn_write(struct comedi_device *dev,
 {
 	unsigned int chan = CR_CHAN(insn->chanspec);
 	unsigned int val = s->readback[chan];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i;
 
@@ -224,10 +258,16 @@ static int aio_aio12_8_ao_insn_write(struct comedi_device *dev,
 	for (i = 0; i < insn->n; i++) {
 		val = data[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		outw(val, port);
 	}
 
 	devpriv->ao_readback[chan] = val;
+=======
+		outw(val, dev->iobase + AIO12_8_DAC_REG(chan));
+	}
+	s->readback[chan] = val;
+>>>>>>> v3.18
 =======
 		outw(val, dev->iobase + AIO12_8_DAC_REG(chan));
 	}
@@ -239,6 +279,7 @@ static int aio_aio12_8_ao_insn_write(struct comedi_device *dev,
 
 static const struct comedi_lrange range_aio_aio12_8 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	4,
 	{
 	 UNI_RANGE(5),
@@ -247,12 +288,17 @@ static const struct comedi_lrange range_aio_aio12_8 = {
 	 BIP_RANGE(10),
 	 }
 =======
+=======
+>>>>>>> v3.18
 	4, {
 		UNI_RANGE(5),
 		BIP_RANGE(5),
 		UNI_RANGE(10),
 		BIP_RANGE(10)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -260,8 +306,12 @@ static int aio_aio12_8_attach(struct comedi_device *dev,
 			      struct comedi_devconfig *it)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct aio12_8_boardtype *board = comedi_board(dev);
 	struct aio12_8_private *devpriv;
+=======
+	const struct aio12_8_boardtype *board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct aio12_8_boardtype *board = dev->board_ptr;
 >>>>>>> v3.18
@@ -273,11 +323,14 @@ static int aio_aio12_8_attach(struct comedi_device *dev,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = comedi_alloc_subdevices(dev, 4);
@@ -306,15 +359,21 @@ static int aio_aio12_8_attach(struct comedi_device *dev,
 		s->maxdata	= 0x0fff;
 		s->range_table	= &range_aio_aio12_8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s->insn_read	= aio_aio12_8_ao_read;
 		s->insn_write	= aio_aio12_8_ao_write;
 =======
+=======
+>>>>>>> v3.18
 		s->insn_write	= aio_aio12_8_ao_insn_write;
 		s->insn_read	= comedi_readback_insn_read;
 
 		ret = comedi_alloc_subdev_readback(s);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		s->type = COMEDI_SUBD_UNUSED;
@@ -323,8 +382,12 @@ static int aio_aio12_8_attach(struct comedi_device *dev,
 	s = &dev->subdevices[2];
 	/* 8255 Digital i/o subdevice */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = subdev_8255_init(dev, s, NULL,
 			       dev->iobase + AIO12_8_8255_BASE_REG);
+=======
+	ret = subdev_8255_init(dev, s, NULL, AIO12_8_8255_BASE_REG);
+>>>>>>> v3.18
 =======
 	ret = subdev_8255_init(dev, s, NULL, AIO12_8_8255_BASE_REG);
 >>>>>>> v3.18
@@ -335,6 +398,7 @@ static int aio_aio12_8_attach(struct comedi_device *dev,
 	/* 8254 counter/timer subdevice */
 	s->type		= COMEDI_SUBD_UNUSED;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_info(dev->class_dev, "%s: %s attached\n",
 		dev->driver->driver_name, dev->board_name);
@@ -353,12 +417,21 @@ static void aio_aio12_8_detach(struct comedi_device *dev)
 }
 
 >>>>>>> v3.18
+=======
+	return 0;
+}
+
+>>>>>>> v3.18
 static struct comedi_driver aio_aio12_8_driver = {
 	.driver_name	= "aio_aio12_8",
 	.module		= THIS_MODULE,
 	.attach		= aio_aio12_8_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= aio_aio12_8_detach,
+=======
+	.detach		= comedi_legacy_detach,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_legacy_detach,
 >>>>>>> v3.18

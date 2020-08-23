@@ -275,7 +275,11 @@ static struct request *get_rdac_req(struct scsi_device *sdev,
 	rq = blk_get_request(q, rw, GFP_NOIO);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rq) {
+=======
+	if (IS_ERR(rq)) {
+>>>>>>> v3.18
 =======
 	if (IS_ERR(rq)) {
 >>>>>>> v3.18
@@ -574,7 +578,11 @@ static int mode_select_handle_sense(struct scsi_device *sdev,
 			 * Command Lock contention
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = SCSI_DH_IMM_RETRY;
+=======
+			err = SCSI_DH_RETRY;
+>>>>>>> v3.18
 =======
 			err = SCSI_DH_RETRY;
 >>>>>>> v3.18
@@ -628,8 +636,11 @@ retry:
 		if (err == SCSI_DH_RETRY && retry_cnt--)
 			goto retry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (err == SCSI_DH_IMM_RETRY)
 			goto retry;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -800,6 +811,10 @@ static const struct scsi_dh_devlist rdac_dev_list[] = {
 	{"IBM", "1745"},
 	{"IBM", "1746"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"IBM", "1813"},
+>>>>>>> v3.18
 =======
 	{"IBM", "1813"},
 >>>>>>> v3.18

@@ -28,7 +28,11 @@
 #
 # Added support for handling multiple types of compression. What includes
 <<<<<<< HEAD
+<<<<<<< HEAD
 # gzip, bzip, bzip2, zip, compress, and plaintext. 
+=======
+# gzip, bzip, bzip2, zip, compress, and plaintext.
+>>>>>>> v3.18
 =======
 # gzip, bzip, bzip2, zip, compress, and plaintext.
 >>>>>>> v3.18
@@ -164,7 +168,11 @@ applyPatch () {
   # Remove backup files
   find $sourcedir/ '(' -name '*.orig' -o -name '.*.orig' ')' -exec rm -f {} \;
 <<<<<<< HEAD
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

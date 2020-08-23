@@ -381,6 +381,7 @@ static cycle_t itc_get_cycles(struct clocksource *cs)
 static struct irqaction timer_irqaction = {
 	.handler =	timer_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags =	IRQF_DISABLED | IRQF_IRQPOLL,
 	.name =		"timer"
 };
@@ -401,10 +402,15 @@ static int __init rtc_init(void)
 module_init(rtc_init);
 
 =======
+=======
+>>>>>>> v3.18
 	.flags =	IRQF_IRQPOLL,
 	.name =		"timer"
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void read_persistent_clock(struct timespec *ts)
 {
@@ -449,7 +455,11 @@ void update_vsyscall_tz(void)
 
 void update_vsyscall_old(struct timespec *wall, struct timespec *wtm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct clocksource *c, u32 mult)
+=======
+			 struct clocksource *c, u32 mult, cycle_t cycle_last)
+>>>>>>> v3.18
 =======
 			 struct clocksource *c, u32 mult, cycle_t cycle_last)
 >>>>>>> v3.18
@@ -462,7 +472,11 @@ void update_vsyscall_old(struct timespec *wall, struct timespec *wtm,
         fsyscall_gtod_data.clk_shift = c->shift;
         fsyscall_gtod_data.clk_fsys_mmio = c->archdata.fsys_mmio;
 <<<<<<< HEAD
+<<<<<<< HEAD
         fsyscall_gtod_data.clk_cycle_last = c->cycle_last;
+=======
+        fsyscall_gtod_data.clk_cycle_last = cycle_last;
+>>>>>>> v3.18
 =======
         fsyscall_gtod_data.clk_cycle_last = cycle_last;
 >>>>>>> v3.18

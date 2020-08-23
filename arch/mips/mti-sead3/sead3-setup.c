@@ -5,12 +5,15 @@
  *
  * Copyright (C) 2012 MIPS Technologies, Inc.  All rights reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 #include <linux/init.h>
 #include <linux/of_platform.h>
 #include <linux/of_fdt.h>
 #include <linux/bootmem.h>
 =======
+=======
+>>>>>>> v3.18
  * Copyright (C) 2013 Imagination Technologies Ltd.
  */
 #include <linux/init.h>
@@ -20,6 +23,9 @@
 
 #include <asm/prom.h>
 #include <asm/fw/fw.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/mips-boards/generic.h>
@@ -30,9 +36,12 @@ const char *get_system_type(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init plat_mem_setup(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static uint32_t get_memsize_from_cmdline(void)
 {
 	int memsize = 0;
@@ -100,13 +109,20 @@ void __init plat_mem_setup(void)
 	/* allow command line/bootloader env to override memory size in DT */
 	parse_memsize_param();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Load the builtin devicetree. This causes the chosen node to be
 	 * parsed resulting in our memory appearing
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__dt_setup_arch(&__dtb_start);
+=======
+	__dt_setup_arch(__dtb_start);
+>>>>>>> v3.18
 =======
 	__dt_setup_arch(__dtb_start);
 >>>>>>> v3.18
@@ -114,6 +130,7 @@ void __init plat_mem_setup(void)
 
 void __init device_tree_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long base, size;
 
@@ -129,6 +146,8 @@ void __init device_tree_init(void)
 	unflatten_device_tree();
 }
 =======
+=======
+>>>>>>> v3.18
 	if (!initial_boot_params)
 		return;
 
@@ -141,4 +160,7 @@ static int __init customize_machine(void)
 	return 0;
 }
 arch_initcall(customize_machine);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

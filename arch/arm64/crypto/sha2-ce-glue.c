@@ -151,7 +151,10 @@ static void sha2_finup(struct shash_desc *desc, const u8 *data,
 	sha2_ce_transform(blocks, data, sctx->state, NULL, len);
 	kernel_neon_end();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data += blocks * SHA256_BLOCK_SIZE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

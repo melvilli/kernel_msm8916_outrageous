@@ -60,7 +60,11 @@ static int get_div(struct tegra_clk_frac_div *divider, unsigned long rate,
 
 	if (divider_ux1 > get_max_div(divider))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return get_max_div(divider);
+>>>>>>> v3.18
 =======
 		return get_max_div(divider);
 >>>>>>> v3.18

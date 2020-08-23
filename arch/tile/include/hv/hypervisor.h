@@ -319,14 +319,20 @@
 #define HV_DISPATCH_SET_PTE_SUPER_SHIFT           57
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** One more than the largest dispatch value */
 #define _HV_DISPATCH_END                          58
 =======
+=======
+>>>>>>> v3.18
 /** hv_console_set_ipi */
 #define HV_DISPATCH_CONSOLE_SET_IPI               63
 
 /** One more than the largest dispatch value */
 #define _HV_DISPATCH_END                          64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -550,8 +556,11 @@ typedef enum {
 
   /** Human-readable CPU module description. */
 <<<<<<< HEAD
+<<<<<<< HEAD
   HV_CONFSTR_CPUMOD_DESC     = 19
 =======
+=======
+>>>>>>> v3.18
   HV_CONFSTR_CPUMOD_DESC     = 19,
 
   /** Per-tile hypervisor statistics.  When this identifier is specified,
@@ -561,6 +570,9 @@ typedef enum {
    *  "zero out the stats instead of retrieving them"; in this case the
    *  buffer and buffer length are ignored. */
   HV_CONFSTR_HV_STATS        = 20
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 } HV_ConfstrQuery;
@@ -569,7 +581,13 @@ typedef enum {
  *
  * @param query Identifier for the specific string to be retrieved
 <<<<<<< HEAD
+<<<<<<< HEAD
  *        (HV_CONFSTR_xxx).
+=======
+ *        (HV_CONFSTR_xxx).  Some strings may require or permit extra
+ *        arguments to be appended which select specific objects to be
+ *        described; see the string descriptions above.
+>>>>>>> v3.18
 =======
  *        (HV_CONFSTR_xxx).  Some strings may require or permit extra
  *        arguments to be appended which select specific objects to be
@@ -583,7 +601,11 @@ typedef enum {
  *        buffer is not writable by the client, HV_EFAULT.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hv_confstr(HV_ConfstrQuery query, HV_VirtAddr buf, int len);
+=======
+int hv_confstr(HV_ConfstrQuery query, HV_VirtAddr buf, int len, ...);
+>>>>>>> v3.18
 =======
 int hv_confstr(HV_ConfstrQuery query, HV_VirtAddr buf, int len, ...);
 >>>>>>> v3.18
@@ -592,7 +614,10 @@ int hv_confstr(HV_ConfstrQuery query, HV_VirtAddr buf, int len, ...);
 typedef struct
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __BIG_ENDIAN__
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
   /** X coordinate, relative to supervisor's top-left coordinate */
@@ -601,10 +626,13 @@ typedef struct
   /** Y coordinate, relative to supervisor's top-left coordinate */
   int y;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
   int y;
   int x;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 } HV_Coord;
@@ -622,7 +650,10 @@ typedef struct
 int hv_get_ipi_pte(HV_Coord tile, int pl, HV_PTE* pte);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /** Configure the console interrupt.
  *
  * When the console client interrupt is enabled, the hypervisor will
@@ -647,6 +678,9 @@ int hv_get_ipi_pte(HV_Coord tile, int pl, HV_PTE* pte);
  */
 int hv_console_set_ipi(int ipi, int event, HV_Coord coord);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* !CHIP_HAS_IPI() */
 
@@ -1156,6 +1190,7 @@ HV_VirtAddrRange hv_inquire_virtual(int idx);
 typedef struct
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __BIG_ENDIAN__
   HV_ASID start;        /**< First ASID in the range. */
   unsigned int size;    /**< Number of ASIDs. Zero for an invalid range. */
@@ -1163,6 +1198,10 @@ typedef struct
   unsigned int size;    /**< Number of ASIDs. Zero for an invalid range. */
   HV_ASID start;        /**< First ASID in the range. */
 #endif
+=======
+  HV_ASID start;        /**< First ASID in the range. */
+  unsigned int size;    /**< Number of ASIDs. Zero for an invalid range. */
+>>>>>>> v3.18
 =======
   HV_ASID start;        /**< First ASID in the range. */
   unsigned int size;    /**< Number of ASIDs. Zero for an invalid range. */
@@ -1491,7 +1530,10 @@ typedef enum
 typedef struct
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __BIG_ENDIAN__
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
   /** X coordinate, relative to supervisor's top-left coordinate */
@@ -1503,11 +1545,14 @@ typedef struct
   /** Status of this recipient */
   HV_Recip_State state:10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else //__BIG_ENDIAN__
   HV_Recip_State state:10;
   unsigned int y:11;
   unsigned int x:11;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 } HV_Recipient;

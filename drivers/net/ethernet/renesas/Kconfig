@@ -5,6 +5,7 @@
 config SH_ETH
 	tristate "Renesas SuperH Ethernet support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on (SUPERH || ARCH_SHMOBILE) && \
 		(CPU_SUBTYPE_SH7710 || CPU_SUBTYPE_SH7712 || \
 		 CPU_SUBTYPE_SH7763 || CPU_SUBTYPE_SH7619 || \
@@ -18,6 +19,11 @@ config SH_ETH
 	depends on ARCH_SHMOBILE || SUPERH || COMPILE_TEST
 	select CRC32
 >>>>>>> v3.18
+=======
+	depends on HAS_DMA
+	depends on ARCH_SHMOBILE || SUPERH || COMPILE_TEST
+	select CRC32
+>>>>>>> v3.18
 	select MII
 	select MDIO_BITBANG
 	select PHYLIB
@@ -26,7 +32,11 @@ config SH_ETH
 	  This driver supporting CPUs are:
 		- SH7619, SH7710, SH7712, SH7724, SH7734, SH7763, SH7757,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  R8A7740 and R8A7779.
+=======
+		  R8A7740, R8A777x and R8A779x.
+>>>>>>> v3.18
 =======
 		  R8A7740, R8A777x and R8A779x.
 >>>>>>> v3.18

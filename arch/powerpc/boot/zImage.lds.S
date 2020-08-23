@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 OUTPUT_ARCH(powerpc:common)
 =======
+=======
+>>>>>>> v3.18
 #include <asm-generic/vmlinux.lds.h>
 
 #ifdef CONFIG_PPC64_BOOT_WRAPPER
@@ -8,6 +11,9 @@ OUTPUT_ARCH(powerpc:common64)
 #else
 OUTPUT_ARCH(powerpc:common)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENTRY(_zimage_start)
 EXTERN(_zimage_start)
@@ -27,7 +33,13 @@ SECTIONS
     *(.data*)
     *(.sdata*)
 <<<<<<< HEAD
+<<<<<<< HEAD
     *(.got2)
+=======
+#ifndef CONFIG_PPC64_BOOT_WRAPPER
+    *(.got2)
+#endif
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_PPC64_BOOT_WRAPPER
     *(.got2)
@@ -44,8 +56,11 @@ SECTIONS
   .hash : { *(.hash) }
   .interp : { *(.interp) }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .rela.dyn : { *(.rela*) }
 =======
+=======
+>>>>>>> v3.18
   .rela.dyn :
   {
 #ifdef CONFIG_PPC64_BOOT_WRAPPER
@@ -53,6 +68,9 @@ SECTIONS
 #endif
     *(.rela*)
   }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   . = ALIGN(8);
@@ -80,7 +98,10 @@ SECTIONS
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC64_BOOT_WRAPPER
   .got :
   {
@@ -90,6 +111,9 @@ SECTIONS
   }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   . = ALIGN(4096);
   .bss       :

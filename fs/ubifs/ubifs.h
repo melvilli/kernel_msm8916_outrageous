@@ -43,6 +43,7 @@
 
 /* Normal UBIFS messages */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ubifs_msg(fmt, ubi_num, ...)				\
 		pr_notice("UBIFS-%d: " fmt "\n",		\
 		ubi_num, ##__VA_ARGS__)
@@ -58,6 +59,8 @@
 /* Used when device number is unknown or irrelevant */
 #define UBIFS_UNKNOWN_DEV_NUM -1
 =======
+=======
+>>>>>>> v3.18
 #define ubifs_msg(fmt, ...) pr_notice("UBIFS: " fmt "\n", ##__VA_ARGS__)
 /* UBIFS error messages */
 #define ubifs_err(fmt, ...)                                         \
@@ -76,6 +79,9 @@
 		if (!(c)->probing)                                  \
 			ubifs_err(fmt, ##__VA_ARGS__);              \
 	} while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* UBIFS file system VFS magic number */
@@ -332,7 +338,10 @@ struct ubifs_scan_node {
  * @nodes: list of struct ubifs_scan_node
  * @endpt: end point (and therefore the start of empty space)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ecc: read returned -EBADMSG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @buf: buffer containing entire LEB scanned
@@ -343,7 +352,10 @@ struct ubifs_scan_leb {
 	struct list_head nodes;
 	int endpt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ecc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void *buf;
@@ -1241,6 +1253,10 @@ struct ubifs_debug_info;
  * @replaying: %1 during journal replay
  * @mounting: %1 while mounting
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @probing: %1 while attempting to mount if MS_SILENT mount flag is set
+>>>>>>> v3.18
 =======
  * @probing: %1 while attempting to mount if MS_SILENT mount flag is set
 >>>>>>> v3.18
@@ -1476,6 +1492,10 @@ struct ubifs_info {
 	unsigned int mounting:1;
 	unsigned int remounting_rw:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int probing:1;
+>>>>>>> v3.18
 =======
 	unsigned int probing:1;
 >>>>>>> v3.18
@@ -1663,12 +1683,18 @@ int ubifs_tnc_end_commit(struct ubifs_info *c);
 
 /* shrinker.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ubifs_shrinker(struct shrinker *shrink, struct shrink_control *sc);
 =======
+=======
+>>>>>>> v3.18
 unsigned long ubifs_shrink_scan(struct shrinker *shrink,
 				struct shrink_control *sc);
 unsigned long ubifs_shrink_count(struct shrinker *shrink,
 				 struct shrink_control *sc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* commit.c */
@@ -1819,15 +1845,21 @@ long ubifs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg);
 int __init ubifs_compressors_init(void);
 void ubifs_compressors_exit(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ubifs_compress(struct ubifs_info *c, const void *in_buf, int in_len,
 		    void *out_buf, int *out_len, int *compr_type);
 int ubifs_decompress(struct ubifs_info *c, const void *buf, int len, void *out,
 		     int *out_len, int compr_type);
 =======
+=======
+>>>>>>> v3.18
 void ubifs_compress(const void *in_buf, int in_len, void *out_buf, int *out_len,
 		    int *compr_type);
 int ubifs_decompress(const void *buf, int len, void *out, int *out_len,
 		     int compr_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "debug.h"

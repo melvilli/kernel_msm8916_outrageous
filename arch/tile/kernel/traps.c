@@ -16,6 +16,10 @@
 #include <linux/kernel.h>
 #include <linux/kprobes.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kdebug.h>
+>>>>>>> v3.18
 =======
 #include <linux/kdebug.h>
 >>>>>>> v3.18
@@ -34,7 +38,11 @@
 void __init trap_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Nothing needed here since we link code at .intrpt1 */
+=======
+	/* Nothing needed here since we link code at .intrpt */
+>>>>>>> v3.18
 =======
 	/* Nothing needed here since we link code at .intrpt */
 >>>>>>> v3.18
@@ -50,10 +58,16 @@ static int __init setup_unaligned_fixup(char *str)
 	 * the correct address from inside the single_step code.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long val;
 	if (strict_strtol(str, 0, &val) != 0)
 		return 0;
 	unaligned_fixup = val;
+=======
+	if (kstrtoint(str, 0, &unaligned_fixup) != 0)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (kstrtoint(str, 0, &unaligned_fixup) != 0)
 		return 0;
@@ -115,6 +129,7 @@ static int retry_gpv(unsigned int gpv_reason)
 #endif /* CHIP_HAS_TILE_DMA() */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __tilegx__
 #define bundle_bits tilegx_bundle_bits
 #else
@@ -122,6 +137,9 @@ static int retry_gpv(unsigned int gpv_reason)
 #endif
 
 extern bundle_bits bpt_code;
+=======
+extern tile_bundle_bits bpt_code;
+>>>>>>> v3.18
 =======
 extern tile_bundle_bits bpt_code;
 >>>>>>> v3.18
@@ -133,7 +151,11 @@ asm(".pushsection .rodata.bpt_code,\"a\";"
     ".popsection");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int special_ill(bundle_bits bundle, int *sigp, int *codep)
+=======
+static int special_ill(tile_bundle_bits bundle, int *sigp, int *codep)
+>>>>>>> v3.18
 =======
 static int special_ill(tile_bundle_bits bundle, int *sigp, int *codep)
 >>>>>>> v3.18
@@ -237,7 +259,10 @@ static const char *const int_name[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int do_bpt(struct pt_regs *regs)
 {
 	unsigned long bundle, bcode, bpt;
@@ -280,6 +305,9 @@ static int do_bpt(struct pt_regs *regs)
 	return 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __kprobes do_trap(struct pt_regs *regs, int fault_num,
 		       unsigned long reason)
@@ -288,11 +316,14 @@ void __kprobes do_trap(struct pt_regs *regs, int fault_num,
 	int signo, code;
 	unsigned long address = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bundle_bits instr;
 
 	/* Re-enable interrupts. */
 	local_irq_enable();
 =======
+=======
+>>>>>>> v3.18
 	tile_bundle_bits instr;
 	int is_kernel = !user_mode(regs);
 
@@ -303,12 +334,16 @@ void __kprobes do_trap(struct pt_regs *regs, int fault_num,
 	/* Re-enable interrupts, if they were previously enabled. */
 	if (!(regs->flags & PT_FLAGS_DISABLE_IRQ))
 		local_irq_enable();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * If it hits in kernel mode and we can't fix it up, just exit the
 	 * current process and hope for the best.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!user_mode(regs)) {
 		const char *name;
@@ -317,6 +352,8 @@ void __kprobes do_trap(struct pt_regs *regs, int fault_num,
 		if (fault_num >= 0 &&
 		    fault_num < sizeof(int_name)/sizeof(int_name[0]) &&
 =======
+=======
+>>>>>>> v3.18
 	if (is_kernel) {
 		const char *name;
 		char buf[100];
@@ -324,17 +361,23 @@ void __kprobes do_trap(struct pt_regs *regs, int fault_num,
 			return;
 		if (fault_num >= 0 &&
 		    fault_num < ARRAY_SIZE(int_name) &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    int_name[fault_num] != NULL)
 			name = int_name[fault_num];
 		else
 			name = "Unknown interrupt";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_alert("Kernel took bad trap %d (%s) at PC %#lx\n",
 			 fault_num, name, regs->pc);
 		if (fault_num == INT_GPV)
 			pr_alert("GPV_REASON is %#lx\n", reason);
 =======
+=======
+>>>>>>> v3.18
 		if (fault_num == INT_GPV)
 			snprintf(buf, sizeof(buf), "; GPV_REASON %#lx", reason);
 #ifdef __tilegx__
@@ -345,6 +388,9 @@ void __kprobes do_trap(struct pt_regs *regs, int fault_num,
 			buf[0] = '\0';
 		pr_alert("Kernel took bad trap %d (%s) at PC %#lx%s\n",
 			 fault_num, name, regs->pc, buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		show_regs(regs);
 		do_exit(SIGKILL);  /* FIXME: implement i386 die() */
@@ -428,11 +474,16 @@ void __kprobes do_trap(struct pt_regs *regs, int fault_num,
 
 		signo = SIGSEGV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		code = SEGV_MAPERR;
 		if (reason & SPR_ILL_TRANS_REASON__I_STREAM_VA_RMASK)
 			address = regs->pc;
 		else
 			address = 0;  /* FIXME: GX: single-step for address */
+=======
+		address = reason;
+		code = SEGV_MAPERR;
+>>>>>>> v3.18
 =======
 		address = reason;
 		code = SEGV_MAPERR;

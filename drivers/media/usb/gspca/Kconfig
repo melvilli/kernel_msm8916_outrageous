@@ -51,7 +51,10 @@ config USB_GSPCA_CPIA1
 	  module will be called gspca_cpia1.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config USB_GSPCA_DTCS033
 	tristate "DTCS033 (Scopium) USB Astro-Camera Driver"
 	depends on VIDEO_V4L2 && USB_GSPCA
@@ -62,6 +65,9 @@ config USB_GSPCA_DTCS033
 	  To compile this driver as a module, choose M here: the
 	  module will be called gspca_dtcs033.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config USB_GSPCA_ETOMS
 	tristate "Etoms USB Camera Driver"
@@ -352,7 +358,10 @@ config USB_GSPCA_STK014
 	  module will be called gspca_stk014.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config USB_GSPCA_STK1135
 	tristate "Syntek STK1135 USB Camera Driver"
 	depends on VIDEO_V4L2 && USB_GSPCA
@@ -362,6 +371,9 @@ config USB_GSPCA_STK1135
 	  To compile this driver as a module, choose M here: the
 	  module will be called gspca_stk1135.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config USB_GSPCA_STV0680
 	tristate "STV0680 USB Camera Driver"

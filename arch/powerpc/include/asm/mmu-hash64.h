@@ -23,6 +23,7 @@
 #include <asm/pgtable-ppc64.h>
 #include <asm/bug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * Segment table
@@ -43,6 +44,9 @@
 #ifndef __ASSEMBLY__
 extern char initial_stab[];
 #endif /* ! __ASSEMBLY */
+=======
+#include <asm/processor.h>
+>>>>>>> v3.18
 =======
 #include <asm/processor.h>
 >>>>>>> v3.18
@@ -140,8 +144,13 @@ extern char initial_stab[];
 
 struct hash_pte {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long v;
 	unsigned long r;
+=======
+	__be64 v;
+	__be64 r;
+>>>>>>> v3.18
 =======
 	__be64 v;
 	__be64 r;
@@ -219,7 +228,10 @@ static inline unsigned int mmu_psize_to_shift(unsigned int mmu_psize)
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int slb_vsid_shift(int ssize)
 {
 	if (ssize == MMU_SEGSIZE_256M)
@@ -227,6 +239,9 @@ static inline int slb_vsid_shift(int ssize)
 	return SLB_VSID_SHIFT_1T;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int segment_shift(int ssize)
 {
@@ -356,6 +371,10 @@ extern int __hash_page_64K(unsigned long ea, unsigned long access,
 struct mm_struct;
 unsigned int hash_page_do_lazy_icache(unsigned int pp, pte_t pte, int trap);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int hash_page_mm(struct mm_struct *mm, unsigned long ea, unsigned long access, unsigned long trap);
+>>>>>>> v3.18
 =======
 extern int hash_page_mm(struct mm_struct *mm, unsigned long ea, unsigned long access, unsigned long trap);
 >>>>>>> v3.18
@@ -364,7 +383,10 @@ int __hash_page_huge(unsigned long ea, unsigned long access, unsigned long vsid,
 		     pte_t *ptep, unsigned long trap, int local, int ssize,
 		     unsigned int shift, unsigned int mmu_psize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 extern int __hash_page_thp(unsigned long ea, unsigned long access,
 			   unsigned long vsid, pmd_t *pmdp, unsigned long trap,
@@ -379,6 +401,9 @@ static inline int __hash_page_thp(unsigned long ea, unsigned long access,
 	return -1;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void hash_failure_debug(unsigned long ea, unsigned long access,
 			       unsigned long vsid, unsigned long trap,
@@ -388,6 +413,11 @@ extern int htab_bolt_mapping(unsigned long vstart, unsigned long vend,
 			     unsigned long pstart, unsigned long prot,
 			     int psize, int ssize);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int htab_remove_mapping(unsigned long vstart, unsigned long vend,
+			int psize, int ssize);
+>>>>>>> v3.18
 =======
 int htab_remove_mapping(unsigned long vstart, unsigned long vend,
 			int psize, int ssize);
@@ -401,10 +431,15 @@ extern void hpte_init_beat(void);
 extern void hpte_init_beat_v3(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void stabs_alloc(void);
 extern void slb_initialize(void);
 extern void slb_flush_and_rebolt(void);
 extern void stab_initialize(unsigned long stab);
+=======
+extern void slb_initialize(void);
+extern void slb_flush_and_rebolt(void);
+>>>>>>> v3.18
 =======
 extern void slb_initialize(void);
 extern void slb_flush_and_rebolt(void);
@@ -533,7 +568,11 @@ extern void slb_set_size(u16 size);
 struct subpage_prot_table {
 	unsigned long maxaddr;	/* only addresses < this are protected */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int **protptrs[2];
+=======
+	unsigned int **protptrs[(TASK_SIZE_USER64 >> 43)];
+>>>>>>> v3.18
 =======
 	unsigned int **protptrs[(TASK_SIZE_USER64 >> 43)];
 >>>>>>> v3.18

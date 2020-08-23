@@ -4,8 +4,11 @@
 #define _ASM_X86_CLOCKSOURCE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_64
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define VCLOCK_NONE 0  /* No vDSO clock available.	*/
@@ -18,8 +21,11 @@ struct arch_clocksource_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_X86_64 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ASM_X86_CLOCKSOURCE_H */

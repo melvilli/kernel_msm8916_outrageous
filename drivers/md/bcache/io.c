@@ -10,6 +10,7 @@
 #include "debug.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bch_bi_idx_hack_endio(struct bio *bio, int error)
 {
 	struct bio *p = bio->bi_private;
@@ -188,6 +189,8 @@ static unsigned bch_bio_max_sectors(struct bio *bio)
 			ret += bv->bv_len >> 9;
 		}
 =======
+=======
+>>>>>>> v3.18
 #include <linux/blkdev.h>
 
 static unsigned bch_bio_max_sectors(struct bio *bio)
@@ -218,6 +221,9 @@ static unsigned bch_bio_max_sectors(struct bio *bio)
 
 		seg++;
 		ret += bv.bv_len >> 9;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -225,7 +231,11 @@ static unsigned bch_bio_max_sectors(struct bio *bio)
 
 	WARN_ON(!ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = max_t(int, ret, bio_iovec(bio)->bv_len >> 9);
+=======
+	ret = max_t(int, ret, bio_iovec(bio).bv_len >> 9);
+>>>>>>> v3.18
 =======
 	ret = max_t(int, ret, bio_iovec(bio).bv_len >> 9);
 >>>>>>> v3.18
@@ -240,7 +250,11 @@ static void bch_bio_submit_split_done(struct closure *cl)
 	s->bio->bi_end_io = s->bi_end_io;
 	s->bio->bi_private = s->bi_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio_endio(s->bio, 0);
+=======
+	bio_endio_nodec(s->bio, 0);
+>>>>>>> v3.18
 =======
 	bio_endio_nodec(s->bio, 0);
 >>>>>>> v3.18
@@ -261,6 +275,7 @@ static void bch_bio_submit_split_endio(struct bio *bio, int error)
 	closure_put(cl);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __bch_bio_submit_split(struct closure *cl)
 {
@@ -287,10 +302,15 @@ void bch_generic_make_request(struct bio *bio, struct bio_split_pool *p)
 {
 	struct bio_split_hook *s;
 =======
+=======
+>>>>>>> v3.18
 void bch_generic_make_request(struct bio *bio, struct bio_split_pool *p)
 {
 	struct bio_split_hook *s;
 	struct bio *n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!bio_has_data(bio) && !(bio->bi_rw & REQ_DISCARD))
@@ -301,6 +321,10 @@ void bch_generic_make_request(struct bio *bio, struct bio_split_pool *p)
 
 	s = mempool_alloc(p->bio_split_hook, GFP_NOIO);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	closure_init(&s->cl, NULL);
+>>>>>>> v3.18
 =======
 	closure_init(&s->cl, NULL);
 >>>>>>> v3.18
@@ -312,11 +336,14 @@ void bch_generic_make_request(struct bio *bio, struct bio_split_pool *p)
 	bio_get(bio);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	closure_call(&s->cl, __bch_bio_submit_split, NULL, NULL);
 	return;
 submit:
 	bch_generic_make_request_hack(bio);
 =======
+=======
+>>>>>>> v3.18
 	do {
 		n = bio_next_split(bio, bch_bio_max_sectors(bio),
 				   GFP_NOIO, s->p->bio_split);
@@ -331,6 +358,9 @@ submit:
 	continue_at(&s->cl, bch_bio_submit_split_done, NULL);
 submit:
 	generic_make_request(bio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -360,8 +390,13 @@ void __bch_submit_bbio(struct bio *bio, struct cache_set *c)
 	struct bbio *b = container_of(bio, struct bbio, bio);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_sector	= PTR_OFFSET(&b->key, 0);
 	bio->bi_bdev	= PTR_CACHE(c, &b->key, 0)->bdev;
+=======
+	bio->bi_iter.bi_sector	= PTR_OFFSET(&b->key, 0);
+	bio->bi_bdev		= PTR_CACHE(c, &b->key, 0)->bdev;
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_sector	= PTR_OFFSET(&b->key, 0);
 	bio->bi_bdev		= PTR_CACHE(c, &b->key, 0)->bdev;

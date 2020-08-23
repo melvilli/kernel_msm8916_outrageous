@@ -16,6 +16,7 @@
 #define TCP_SCALABLE_MD_SCALE	3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void tcp_scalable_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
 {
 	struct tcp_sock *tp = tcp_sk(sk);
@@ -26,6 +27,8 @@ static void tcp_scalable_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
 	if (tp->snd_cwnd <= tp->snd_ssthresh)
 		tcp_slow_start(tp);
 =======
+=======
+>>>>>>> v3.18
 static void tcp_scalable_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 {
 	struct tcp_sock *tp = tcp_sk(sk);
@@ -35,6 +38,9 @@ static void tcp_scalable_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 
 	if (tp->snd_cwnd <= tp->snd_ssthresh)
 		tcp_slow_start(tp, acked);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		tcp_cong_avoid_ai(tp, min(tp->snd_cwnd, TCP_SCALABLE_AI_CNT));
@@ -43,6 +49,7 @@ static void tcp_scalable_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 static u32 tcp_scalable_ssthresh(struct sock *sk)
 {
 	const struct tcp_sock *tp = tcp_sk(sk);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return max(tp->snd_cwnd - (tp->snd_cwnd>>TCP_SCALABLE_MD_SCALE), 2U);
 }
@@ -53,6 +60,8 @@ static struct tcp_congestion_ops tcp_scalable __read_mostly = {
 	.cong_avoid	= tcp_scalable_cong_avoid,
 	.min_cwnd	= tcp_reno_min_cwnd,
 =======
+=======
+>>>>>>> v3.18
 
 	return max(tp->snd_cwnd - (tp->snd_cwnd>>TCP_SCALABLE_MD_SCALE), 2U);
 }
@@ -60,6 +69,9 @@ static struct tcp_congestion_ops tcp_scalable __read_mostly = {
 static struct tcp_congestion_ops tcp_scalable __read_mostly = {
 	.ssthresh	= tcp_scalable_ssthresh,
 	.cong_avoid	= tcp_scalable_cong_avoid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.owner		= THIS_MODULE,

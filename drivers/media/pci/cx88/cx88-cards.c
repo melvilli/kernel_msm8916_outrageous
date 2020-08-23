@@ -79,6 +79,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_COMPOSITE1,
 			.vmux   = 0,
@@ -93,6 +94,8 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 3,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_COMPOSITE1,
 			.vmux   = 0,
@@ -106,6 +109,9 @@ static const struct cx88_board cx88_boards[] = {
 			.type   = CX88_VMUX_COMPOSITE4,
 			.vmux   = 3,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	[CX88_BOARD_HAUPPAUGE] = {
@@ -115,6 +121,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
@@ -134,6 +141,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0xff02,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -151,6 +160,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0xff02,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.radio = {
 			.type   = CX88_RADIO,
@@ -164,6 +176,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -172,6 +185,8 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -179,6 +194,9 @@ static const struct cx88_board cx88_boards[] = {
 			.type   = CX88_VMUX_SVIDEO,
 			.vmux   = 2,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	[CX88_BOARD_PIXELVIEW] = {
@@ -187,6 +205,7 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_type     = UNSET,
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
@@ -200,6 +219,8 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -211,6 +232,9 @@ static const struct cx88_board cx88_boards[] = {
 			.type   = CX88_VMUX_SVIDEO,
 			.vmux   = 2,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.radio = {
 			 .type  = CX88_RADIO,
@@ -225,6 +249,7 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT | TDA9887_INTERCARRIER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -239,6 +264,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x03fe,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -252,6 +279,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x03fe,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	[CX88_BOARD_WINFAST2000XP_EXPERT] = {
@@ -262,7 +292,11 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -273,7 +307,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x00F5e700,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -284,7 +322,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x00F5c700,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -295,7 +337,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x00F5c700,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -315,6 +361,7 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -329,6 +376,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio1  = 0xe05f,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -342,6 +391,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio1  = 0xe05f,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.radio = {
 			.gpio1  = 0xe0df,
@@ -358,7 +410,11 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf	= TDA9887_PRESENT | TDA9887_INTERCARRIER_NTSC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -368,7 +424,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio1  = 0x000080c0,
 			.gpio2  = 0x0000ff40,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -378,7 +438,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio1  = 0x000080c0,
 			.gpio2  = 0x0000ff40,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -388,7 +452,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio1  = 0x000080c0,
 			.gpio2  = 0x0000ff40,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -408,7 +476,11 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -419,7 +491,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x0035e700,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -431,7 +507,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x0035c700,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -442,7 +522,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x02000000,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -463,7 +547,11 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -472,7 +560,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0000bde2,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -481,7 +573,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0000bde6,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -490,7 +586,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0000bde6,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -508,6 +608,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_COMPOSITE1,
 			.vmux   = 0,
@@ -519,6 +620,8 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_COMPOSITE1,
 			.vmux   = 0,
@@ -529,6 +632,9 @@ static const struct cx88_board cx88_boards[] = {
 			.type   = CX88_VMUX_SVIDEO,
 			.vmux   = 2,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	[CX88_BOARD_PROLINK_PLAYTVPVR] = {
@@ -538,6 +644,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf	= TDA9887_PRESENT,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
@@ -553,6 +660,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0xbff3,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -566,6 +675,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0xbff3,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.radio = {
 			.type   = CX88_RADIO,
@@ -580,24 +692,34 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
 			.gpio0  = 0x0000fde6,
 		},{
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
 			.gpio0  = 0x0000fde6,
 		}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			.type   = CX88_VMUX_SVIDEO,
 			.vmux   = 2,
 			.gpio0  = 0x0000fde6, // 0x0000fda6 L,R RCA audio in?
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -615,7 +737,11 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -624,7 +750,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x00000fbf,
 			.gpio2  = 0x0000fc08,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -633,7 +763,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x00000fbf,
 			.gpio2  = 0x0000fc68,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -642,7 +776,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x00000fbf,
 			.gpio2  = 0x0000fc68,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -654,7 +792,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -663,7 +805,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0700,
 			.gpio2  = 0x0101,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -672,7 +818,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0700,
 			.gpio2  = 0x0101,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -685,6 +835,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_COMPOSITE1,
 			.vmux   = 1,
@@ -695,6 +846,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x000027df,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_COMPOSITE1,
 			.vmux   = 1,
@@ -704,6 +857,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x000027df,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -713,6 +869,7 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_type     = UNSET,
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
@@ -732,6 +889,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x000007fa,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -749,6 +908,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x000007fa,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.radio = {
 			.type   = CX88_RADIO,
@@ -779,6 +941,7 @@ static const struct cx88_board cx88_boards[] = {
 		    1 - high RF
 		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -797,6 +960,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0	= 0x0f00,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -814,6 +979,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0	= 0x0f00,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -824,15 +992,21 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_DVB,
 			.vmux   = 0,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_DVB,
 			.vmux   = 0,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -843,15 +1017,21 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_DVB,
 			.vmux   = 0,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_DVB,
 			.vmux   = 0,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -862,17 +1042,23 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
 			.audioroute = 1,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
 			.audioroute = 1,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_BLACKBIRD,
 	},
@@ -883,6 +1069,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_COMPOSITE1,
 			.vmux   = 1,
@@ -893,6 +1080,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x000027df,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_COMPOSITE1,
 			.vmux   = 1,
@@ -902,6 +1091,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x000027df,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -912,7 +1104,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input		= {{
+=======
+		.input		= { {
+>>>>>>> v3.18
 =======
 		.input		= { {
 >>>>>>> v3.18
@@ -921,7 +1117,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x00000700,
 			.gpio2  = 0x00000101,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -930,7 +1130,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x00000700,
 			.gpio2  = 0x00000101,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -956,6 +1160,7 @@ static const struct cx88_board cx88_boards[] = {
 		 * GPIO[16] = Remote control input
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -970,6 +1175,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x00008400,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -983,6 +1190,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x00008400,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.radio = {
 			.type   = CX88_RADIO,
@@ -999,7 +1209,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -1008,6 +1222,7 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0xed1a,
 			.gpio2  = 0x00ff,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
 			.type   = CX88_VMUX_DEBUG,
 			.vmux   = 0,
@@ -1018,6 +1233,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0xff02,
 		},{
 =======
+=======
+>>>>>>> v3.18
 		}, {
 			.type   = CX88_VMUX_DEBUG,
 			.vmux   = 0,
@@ -1027,13 +1244,20 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 1,
 			.gpio0  = 0xff02,
 		}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			.type   = CX88_VMUX_SVIDEO,
 			.vmux   = 2,
 			.gpio0  = 0xed92,
 			.gpio2  = 0x00ff,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -1052,7 +1276,11 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -1061,7 +1289,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x00009d80,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1070,7 +1302,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x00009d76,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1079,7 +1315,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x00009d76,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -1098,6 +1338,7 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 1,
@@ -1112,6 +1353,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio1  = 0x0000e07f,
 		}}
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 1,
@@ -1125,6 +1368,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 3,
 			.gpio1  = 0x0000e07f,
 		} }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	[CX88_BOARD_PIXELVIEW_PLAYTV_ULTRA_PRO] = {
@@ -1135,6 +1381,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 		/* Some variants use a tda9874 and so need the tvaudio module. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.audio_chip     = V4L2_IDENT_TVAUDIO,
 		.input          = {{
@@ -1151,6 +1398,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0	= 0xbf63,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.audio_chip     = CX88_AUDIO_TVAUDIO,
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
@@ -1165,6 +1414,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0	= 0xbf63,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.radio = {
 			 .type  = CX88_RADIO,
@@ -1179,6 +1431,7 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1193,6 +1446,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x97e9,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1206,6 +1461,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x97e9,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -1216,7 +1474,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -1225,7 +1487,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0700,
 			.gpio2  = 0x0101,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1234,7 +1500,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0700,
 			.gpio2  = 0x0101,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -1244,6 +1514,7 @@ static const struct cx88_board cx88_boards[] = {
 		.name           = "TerraTec Cinergy 1400 DVB-T",
 		.tuner_type     = TUNER_ABSENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_DVB,
 			.vmux   = 0,
@@ -1255,6 +1526,8 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_DVB,
 			.vmux   = 0,
@@ -1265,6 +1538,9 @@ static const struct cx88_board cx88_boards[] = {
 			.type   = CX88_VMUX_SVIDEO,
 			.vmux   = 2,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -1276,6 +1552,7 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1290,6 +1567,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x87f9,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1303,6 +1582,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x87f9,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -1314,7 +1596,11 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr     = ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -1323,7 +1609,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0000cd73,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1332,7 +1622,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0000cd73,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1341,7 +1635,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0000cdb3,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -1358,7 +1656,11 @@ static const struct cx88_board cx88_boards[] = {
 		 .name           = "Kworld V-Stream Xpert DVD",
 		 .tuner_type     = UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 .input          = {{
+=======
+		 .input          = { {
+>>>>>>> v3.18
 =======
 		 .input          = { {
 >>>>>>> v3.18
@@ -1369,7 +1671,11 @@ static const struct cx88_board cx88_boards[] = {
 			 .gpio2  = 0x02000000,
 			 .gpio3  = 0x00100000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 },{
+=======
+		 }, {
+>>>>>>> v3.18
 =======
 		 }, {
 >>>>>>> v3.18
@@ -1380,7 +1686,11 @@ static const struct cx88_board cx88_boards[] = {
 			 .gpio2  = 0x02000000,
 			 .gpio3  = 0x00100000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 }},
+=======
+		 } },
+>>>>>>> v3.18
 =======
 		 } },
 >>>>>>> v3.18
@@ -1392,7 +1702,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -1403,7 +1717,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x00000001,
 			.gpio3  = 0x00000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1414,7 +1732,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x00000001,
 			.gpio3  = 0x00000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1425,7 +1747,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x00000001,
 			.gpio3  = 0x00000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -1438,6 +1764,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_DVB,
 			.vmux   = 0,
@@ -1449,6 +1776,8 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_DVB,
 			.vmux   = 0,
@@ -1459,6 +1788,9 @@ static const struct cx88_board cx88_boards[] = {
 			.type   = CX88_VMUX_SVIDEO,
 			.vmux   = 2,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -1470,7 +1802,11 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -1481,7 +1817,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x0010,
 			.gpio3  = 0x0000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1492,7 +1832,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x0010,
 			.gpio3  = 0x0000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1503,7 +1847,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x0010,
 			.gpio3  = 0x0000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -1515,9 +1863,15 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.audio_chip	= V4L2_IDENT_WM8775,
 		.i2sinputcntl   = 2,
 		.input		= {{
+=======
+		.audio_chip	= CX88_AUDIO_WM8775,
+		.i2sinputcntl   = 2,
+		.input		= { {
+>>>>>>> v3.18
 =======
 		.audio_chip	= CX88_AUDIO_WM8775,
 		.i2sinputcntl   = 2,
@@ -1528,7 +1882,11 @@ static const struct cx88_board cx88_boards[] = {
 			/* 2: Line-In */
 			.audioroute = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1537,7 +1895,11 @@ static const struct cx88_board cx88_boards[] = {
 			/* 2: Line-In */
 			.audioroute = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1546,7 +1908,11 @@ static const struct cx88_board cx88_boards[] = {
 			/* 2: Line-In */
 			.audioroute = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -1559,15 +1925,21 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input		= {{
 			.type	= CX88_VMUX_DVB,
 			.vmux	= 0,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input		= { {
 			.type	= CX88_VMUX_DVB,
 			.vmux	= 0,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -1578,8 +1950,13 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.audio_chip = V4L2_IDENT_WM8775,
 		.input		= {{
+=======
+		.audio_chip = CX88_AUDIO_WM8775,
+		.input		= { {
+>>>>>>> v3.18
 =======
 		.audio_chip = CX88_AUDIO_WM8775,
 		.input		= { {
@@ -1589,7 +1966,11 @@ static const struct cx88_board cx88_boards[] = {
 			/* 2: Line-In */
 			.audioroute = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1598,7 +1979,11 @@ static const struct cx88_board cx88_boards[] = {
 			/* 2: Line-In */
 			.audioroute = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1607,7 +1992,11 @@ static const struct cx88_board cx88_boards[] = {
 			/* 2: Line-In */
 			.audioroute = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -1621,6 +2010,7 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input		= {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1632,6 +2022,8 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux	= 2,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input		= { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1642,6 +2034,9 @@ static const struct cx88_board cx88_boards[] = {
 			.type	= CX88_VMUX_SVIDEO,
 			.vmux	= 2,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* fixme: Add radio support */
 		.mpeg           = CX88_MPEG_DVB,
@@ -1654,6 +2049,7 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input		= {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1662,6 +2058,8 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux	= 1,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input		= { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1669,6 +2067,9 @@ static const struct cx88_board cx88_boards[] = {
 			.type	= CX88_VMUX_COMPOSITE1,
 			.vmux	= 1,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* fixme: Add radio support */
 		.mpeg           = CX88_MPEG_DVB,
@@ -1681,6 +2082,7 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT | TDA9887_PORT1_ACTIVE |
 				  TDA9887_PORT2_ACTIVE,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
@@ -1696,6 +2098,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0	= 0xf80808,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1709,6 +2113,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0	= 0xf80808,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.radio = {
 			 .type  = CX88_RADIO,
@@ -1726,7 +2133,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -1735,7 +2146,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0700,
 			.gpio2  = 0x0101,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1744,7 +2159,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0700,
 			.gpio2  = 0x0101,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -1757,6 +2176,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_COMPOSITE1,
 			.vmux   = 1,
@@ -1767,6 +2187,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x000067df,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_COMPOSITE1,
 			.vmux   = 1,
@@ -1776,6 +2198,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x000067df,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -1786,7 +2211,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -1795,7 +2224,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x3de2,
 			.gpio2  = 0x00ff,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1804,7 +2237,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x3de6,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -1813,7 +2250,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x3de6,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -1831,6 +2272,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1845,6 +2287,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x0000a75b,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1858,6 +2302,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x0000a75b,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -1868,6 +2315,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
@@ -1883,6 +2331,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x87f9,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1896,6 +2346,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x87f9,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -1909,17 +2362,23 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
 			.gpio0  = 0x0000BDE6
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
 			.gpio0  = 0x0000BDE6
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_BLACKBIRD,
 	},
@@ -1933,17 +2392,23 @@ static const struct cx88_board cx88_boards[] = {
 		.tda9887_conf   = TDA9887_PRESENT | TDA9887_PORT1_ACTIVE |
 				  TDA9887_PORT2_ACTIVE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
 			.gpio0  = 0x5da6,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
 			.gpio0  = 0x5da6,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_BLACKBIRD,
 	},
@@ -1953,6 +2418,7 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_type     = UNSET,
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
@@ -1968,6 +2434,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0	= 0x078b,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -1981,6 +2449,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0	= 0x078b,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.radio = {
 			 .type  = CX88_RADIO,
@@ -1995,7 +2466,11 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr     = ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -2027,7 +2502,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x0001d701,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -2048,7 +2527,11 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr     = ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -2059,7 +2542,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2	= 0x00000000,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -2070,7 +2557,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2	= 0x00017304,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -2081,7 +2572,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2	= 0x00017304,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -2092,7 +2587,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2	= 0x00017304,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -2112,6 +2611,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr    = ADDR_UNSET,
 		.radio_addr    = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input  = {{
 			.type  = CX88_VMUX_DVB,
 			.vmux  = 0,
@@ -2120,6 +2620,8 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux  = 1,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input  = { {
 			.type  = CX88_VMUX_DVB,
 			.vmux  = 0,
@@ -2127,6 +2629,9 @@ static const struct cx88_board cx88_boards[] = {
 			.type  = CX88_VMUX_COMPOSITE1,
 			.vmux  = 1,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -2138,8 +2643,13 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr     = ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.audio_chip     = V4L2_IDENT_WM8775,
 		.input          = {{
+=======
+		.audio_chip     = CX88_AUDIO_WM8775,
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.audio_chip     = CX88_AUDIO_WM8775,
 		.input          = { {
@@ -2150,7 +2660,11 @@ static const struct cx88_board cx88_boards[] = {
 			/* 1: TV Audio / FM Mono */
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -2160,7 +2674,11 @@ static const struct cx88_board cx88_boards[] = {
 			/* 2: Line-In */
 			.audioroute = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -2170,7 +2688,11 @@ static const struct cx88_board cx88_boards[] = {
 			/* 2: Line-In */
 			.audioroute = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -2190,6 +2712,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -2204,6 +2727,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x070b,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -2217,6 +2742,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x070b,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	[CX88_BOARD_TE_DTV_250_OEM_SWANN] = {
@@ -2226,7 +2754,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -2237,7 +2769,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x003fffff,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -2248,7 +2784,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x003fffff,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -2259,7 +2799,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2  = 0x003fffff,
 			.gpio3  = 0x02000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -2272,17 +2816,23 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr	= ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.audio_chip     = V4L2_IDENT_WM8775,
 		/*
 		 * gpio0 as reported by Mike Crash <mike AT mikecrash.com>
 		 */
 		.input		= {{
 =======
+=======
+>>>>>>> v3.18
 		.audio_chip     = CX88_AUDIO_WM8775,
 		/*
 		 * gpio0 as reported by Mike Crash <mike AT mikecrash.com>
 		 */
 		.input		= { {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -2290,7 +2840,11 @@ static const struct cx88_board cx88_boards[] = {
 			/* 1: TV Audio / FM Mono */
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -2300,7 +2854,11 @@ static const struct cx88_board cx88_boards[] = {
 			/* 2: Line-In */
 			.audioroute = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -2310,7 +2868,11 @@ static const struct cx88_board cx88_boards[] = {
 			/* 2: Line-In */
 			.audioroute = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -2341,6 +2903,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_DEBUG,
 			.vmux   = 3,
@@ -2355,6 +2918,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x07fa,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_DEBUG,
 			.vmux   = 3,
@@ -2368,6 +2933,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x07fa,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	[CX88_BOARD_PINNACLE_PCTV_HD_800i] = {
@@ -2377,7 +2945,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -2386,7 +2958,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x04fb,
 			.gpio1  = 0x10ff,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -2396,7 +2972,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio1  = 0x10ef,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		},{
+=======
+		}, {
+>>>>>>> v3.18
 =======
 		}, {
 >>>>>>> v3.18
@@ -2406,7 +2986,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio1  = 0x10ef,
 			.audioroute = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -2420,7 +3004,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -2682,6 +3270,7 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr	= ADDR_UNSET,
 		.radio_addr	= ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -2696,6 +3285,8 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio0  = 0x16d9,
 		}},
 =======
+=======
+>>>>>>> v3.18
 		.input          = { {
 			.type   = CX88_VMUX_TELEVISION,
 			.vmux   = 0,
@@ -2709,6 +3300,9 @@ static const struct cx88_board cx88_boards[] = {
 			.vmux   = 2,
 			.gpio0  = 0x16d9,
 		} },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mpeg           = CX88_MPEG_DVB,
 	},
@@ -2812,7 +3406,11 @@ static const struct cx88_board cx88_boards[] = {
 		.radio_addr     = ADDR_UNSET,
 		.tda9887_conf   = TDA9887_PRESENT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.audio_chip     = V4L2_IDENT_WM8775,
+=======
+		.audio_chip     = CX88_AUDIO_WM8775,
+>>>>>>> v3.18
 =======
 		.audio_chip     = CX88_AUDIO_WM8775,
 >>>>>>> v3.18
@@ -2854,7 +3452,11 @@ static const struct cx88_board cx88_boards[] = {
 		 * 4: FM Stereo
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -2892,7 +3494,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -2908,7 +3514,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -2924,7 +3534,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -2940,7 +3554,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -2956,7 +3574,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -2972,7 +3594,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -2988,7 +3614,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -3005,7 +3635,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -3021,7 +3655,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -3037,7 +3675,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -3101,7 +3743,11 @@ static const struct cx88_board cx88_boards[] = {
 		 * 14: FM (0=on,1=off ???)
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -3146,7 +3792,11 @@ static const struct cx88_board cx88_boards[] = {
 		 * 14: FM (0=on,1=off ???)
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input		= {{
+=======
+		.input		= { {
+>>>>>>> v3.18
 =======
 		.input		= { {
 >>>>>>> v3.18
@@ -3168,7 +3818,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio1	= 0x6060,	/* pin 13 = 1, pin 14 = 1 */
 			.gpio2	= 0x0000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -3195,7 +3849,11 @@ static const struct cx88_board cx88_boards[] = {
 		 *  16: 0: RF input is cable
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input		= {{
+=======
+		.input		= { {
+>>>>>>> v3.18
 =======
 		.input		= { {
 >>>>>>> v3.18
@@ -3227,7 +3885,11 @@ static const struct cx88_board cx88_boards[] = {
 			.gpio2	= 0x0101,
 			.gpio3	= 0x0000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}},
+=======
+		} },
+>>>>>>> v3.18
 =======
 		} },
 >>>>>>> v3.18
@@ -3259,7 +3921,11 @@ static const struct cx88_board cx88_boards[] = {
 		.tuner_addr     = ADDR_UNSET,
 		.radio_addr     = ADDR_UNSET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.input          = {{
+=======
+		.input          = { {
+>>>>>>> v3.18
 =======
 		.input          = { {
 >>>>>>> v3.18
@@ -3279,6 +3945,7 @@ static const struct cx88_subid cx88_subids[] = {
 		.subdevice = 0x3400,
 		.card      = CX88_BOARD_HAUPPAUGE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},{
 		.subvendor = 0x0070,
 		.subdevice = 0x3401,
@@ -3293,6 +3960,8 @@ static const struct cx88_subid cx88_subids[] = {
 		.card      = CX88_BOARD_GDI,
 	},{
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.subvendor = 0x0070,
 		.subdevice = 0x3401,
@@ -3306,6 +3975,9 @@ static const struct cx88_subid cx88_subids[] = {
 		.subdevice = 0x0107, /* with mpeg encoder */
 		.card      = CX88_BOARD_GDI,
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.subvendor = PCI_VENDOR_ID_ATI,
 		.subdevice = 0x00f8,
@@ -3319,6 +3991,7 @@ static const struct cx88_subid cx88_subids[] = {
 		.subdevice = 0x6611,
 		.card      = CX88_BOARD_WINFAST2000XP_EXPERT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},{
 		.subvendor = 0x107d,
 		.subdevice = 0x6613,	/* NTSC */
@@ -3485,6 +4158,8 @@ static const struct cx88_subid cx88_subids[] = {
 		.card      = CX88_BOARD_DVICO_FUSIONHDTV_DVB_T_DUAL,
 	},{
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.subvendor = 0x107d,
 		.subdevice = 0x6613,	/* NTSC */
@@ -3650,13 +4325,20 @@ static const struct cx88_subid cx88_subids[] = {
 		.subdevice = 0xdb50,
 		.card      = CX88_BOARD_DVICO_FUSIONHDTV_DVB_T_DUAL,
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.subvendor = 0x18ac,
 		.subdevice = 0xdb54,
 		.card      = CX88_BOARD_DVICO_FUSIONHDTV_DVB_T_DUAL,
 		/* Re-branded DViCO: DigitalNow DVB-T Dual */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},{
+=======
+	}, {
+>>>>>>> v3.18
 =======
 	}, {
 >>>>>>> v3.18
@@ -3673,6 +4355,7 @@ static const struct cx88_subid cx88_subids[] = {
 		.subdevice = 0x0840,
 		.card      = CX88_BOARD_KWORLD_HARDWARE_MPEG_TV_XPERT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},{
 		.subvendor = 0x1421,
 		.subdevice = 0x0305,
@@ -3723,6 +4406,8 @@ static const struct cx88_subid cx88_subids[] = {
 		.card      = CX88_BOARD_GENIATECH_DVBS,
 	},{
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.subvendor = 0x1421,
 		.subdevice = 0x0305,
@@ -3772,6 +4457,9 @@ static const struct cx88_subid cx88_subids[] = {
 		.subdevice = 0x0084,
 		.card      = CX88_BOARD_GENIATECH_DVBS,
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.subvendor = 0x0070,
 		.subdevice = 0x1404,
@@ -3785,7 +4473,11 @@ static const struct cx88_subid cx88_subids[] = {
 		.subdevice = 0xdccd,
 		.card      = CX88_BOARD_SAMSUNG_SMT_7020,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},{
+=======
+	}, {
+>>>>>>> v3.18
 =======
 	}, {
 >>>>>>> v3.18
@@ -3793,6 +4485,7 @@ static const struct cx88_subid cx88_subids[] = {
 		.subdevice = 0xc111, /* AverMedia M150-D */
 		/* This board is known to work with the ASUS PVR416 config */
 		.card      = CX88_BOARD_ASUS_PVR_416,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	},{
 		.subvendor = 0xc180,
@@ -3844,6 +4537,8 @@ static const struct cx88_subid cx88_subids[] = {
 		.card      = CX88_BOARD_ADSTECH_PTV_390,
 	},{
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.subvendor = 0xc180,
 		.subdevice = 0xc980,
@@ -3893,6 +4588,9 @@ static const struct cx88_subid cx88_subids[] = {
 		.subdevice = 0x0390,
 		.card      = CX88_BOARD_ADSTECH_PTV_390,
 	}, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.subvendor = 0x11bd,
 		.subdevice = 0x0051,

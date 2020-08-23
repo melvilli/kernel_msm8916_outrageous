@@ -1931,15 +1931,21 @@ static int ipw2100_wdev_init(struct net_device *dev)
 			if (geo->bg[i].flags & LIBIPW_CH_PASSIVE_ONLY)
 				bg_band->channels[i].flags |=
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IEEE80211_CHAN_PASSIVE_SCAN;
 			if (geo->bg[i].flags & LIBIPW_CH_NO_IBSS)
 				bg_band->channels[i].flags |=
 					IEEE80211_CHAN_NO_IBSS;
 =======
+=======
+>>>>>>> v3.18
 					IEEE80211_CHAN_NO_IR;
 			if (geo->bg[i].flags & LIBIPW_CH_NO_IBSS)
 				bg_band->channels[i].flags |=
 					IEEE80211_CHAN_NO_IR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (geo->bg[i].flags & LIBIPW_CH_RADAR_DETECT)
 				bg_band->channels[i].flags |=
@@ -2013,7 +2019,10 @@ static void isr_indicate_associated(struct ipw2100_priv *priv, u32 status)
 	char *txratename;
 	u8 bssid[ETH_ALEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECLARE_SSID_BUF(ssid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2078,8 +2087,13 @@ static void isr_indicate_associated(struct ipw2100_priv *priv, u32 status)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IPW_DEBUG_INFO("%s: Associated with '%s' at %s, channel %d (BSSID=%pM)\n",
 		       priv->net_dev->name, print_ssid(ssid, essid, essid_len),
+=======
+	IPW_DEBUG_INFO("%s: Associated with '%*pE' at %s, channel %d (BSSID=%pM)\n",
+		       priv->net_dev->name, essid_len, essid,
+>>>>>>> v3.18
 =======
 	IPW_DEBUG_INFO("%s: Associated with '%*pE' at %s, channel %d (BSSID=%pM)\n",
 		       priv->net_dev->name, essid_len, essid,
@@ -2111,9 +2125,14 @@ static int ipw2100_set_essid(struct ipw2100_priv *priv, char *essid,
 	};
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECLARE_SSID_BUF(ssid);
 
 	IPW_DEBUG_HC("SSID: '%s'\n", print_ssid(ssid, essid, ssid_len));
+=======
+
+	IPW_DEBUG_HC("SSID: '%*pE'\n", ssid_len, essid);
+>>>>>>> v3.18
 =======
 
 	IPW_DEBUG_HC("SSID: '%*pE'\n", ssid_len, essid);
@@ -2159,11 +2178,16 @@ static int ipw2100_set_essid(struct ipw2100_priv *priv, char *essid,
 static void isr_indicate_association_lost(struct ipw2100_priv *priv, u32 status)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECLARE_SSID_BUF(ssid);
 
 	IPW_DEBUG(IPW_DL_NOTIF | IPW_DL_STATE | IPW_DL_ASSOC,
 		  "disassociated: '%s' %pM\n",
 		  print_ssid(ssid, priv->essid, priv->essid_len),
+=======
+	IPW_DEBUG(IPW_DL_NOTIF | IPW_DL_STATE | IPW_DL_ASSOC,
+		  "disassociated: '%*pE' %pM\n", priv->essid_len, priv->essid,
+>>>>>>> v3.18
 =======
 	IPW_DEBUG(IPW_DL_NOTIF | IPW_DL_STATE | IPW_DL_ASSOC,
 		  "disassociated: '%*pE' %pM\n", priv->essid_len, priv->essid,
@@ -3475,8 +3499,14 @@ static int ipw2100_msg_allocate(struct ipw2100_priv *priv)
 
 	for (i = 0; i < IPW_COMMAND_POOL_SIZE; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		v = pci_alloc_consistent(priv->pci_dev,
 					 sizeof(struct ipw2100_cmd_header), &p);
+=======
+		v = pci_zalloc_consistent(priv->pci_dev,
+					  sizeof(struct ipw2100_cmd_header),
+					  &p);
+>>>>>>> v3.18
 =======
 		v = pci_zalloc_consistent(priv->pci_dev,
 					  sizeof(struct ipw2100_cmd_header),
@@ -3491,8 +3521,11 @@ static int ipw2100_msg_allocate(struct ipw2100_priv *priv)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(v, 0, sizeof(struct ipw2100_cmd_header));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		priv->msg_buffers[i].type = COMMAND;
@@ -4371,9 +4404,13 @@ static int status_queue_allocate(struct ipw2100_priv *priv, int entries)
 
 	q->size = entries * sizeof(struct ipw2100_status);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->drv =
 	    (struct ipw2100_status *)pci_alloc_consistent(priv->pci_dev,
 							  q->size, &q->nic);
+=======
+	q->drv = pci_zalloc_consistent(priv->pci_dev, q->size, &q->nic);
+>>>>>>> v3.18
 =======
 	q->drv = pci_zalloc_consistent(priv->pci_dev, q->size, &q->nic);
 >>>>>>> v3.18
@@ -4383,8 +4420,11 @@ static int status_queue_allocate(struct ipw2100_priv *priv, int entries)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(q->drv, 0, q->size);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	IPW_DEBUG_INFO("exit\n");
@@ -4416,7 +4456,11 @@ static int bd_queue_allocate(struct ipw2100_priv *priv,
 	q->entries = entries;
 	q->size = entries * sizeof(struct ipw2100_bd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->drv = pci_alloc_consistent(priv->pci_dev, q->size, &q->nic);
+=======
+	q->drv = pci_zalloc_consistent(priv->pci_dev, q->size, &q->nic);
+>>>>>>> v3.18
 =======
 	q->drv = pci_zalloc_consistent(priv->pci_dev, q->size, &q->nic);
 >>>>>>> v3.18
@@ -4426,7 +4470,10 @@ static int bd_queue_allocate(struct ipw2100_priv *priv,
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(q->drv, 0, q->size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -6291,8 +6338,11 @@ static int ipw2100_pci_init_one(struct pci_dev *pci_dev,
 		pci_write_config_dword(pci_dev, 0x40, val & 0xffff00ff);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_power_state(pci_dev, PCI_D0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!ipw2100_hw_is_adapter_in_system(dev)) {
@@ -6416,7 +6466,10 @@ out:
 
 		free_libipw(dev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -6569,7 +6622,11 @@ static void ipw2100_shutdown(struct pci_dev *pci_dev)
 #define IPW2100_DEV_ID(x) { PCI_VENDOR_ID_INTEL, 0x1043, 0x8086, x }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ipw2100_pci_id_table) = {
+=======
+static const struct pci_device_id ipw2100_pci_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ipw2100_pci_id_table[] = {
 >>>>>>> v3.18
@@ -7043,7 +7100,10 @@ static int ipw2100_wx_set_essid(struct net_device *dev,
 	int length = 0;
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECLARE_SSID_BUF(ssid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -7076,8 +7136,12 @@ static int ipw2100_wx_set_essid(struct net_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IPW_DEBUG_WX("Setting ESSID: '%s' (%d)\n",
 		     print_ssid(ssid, essid, length), length);
+=======
+	IPW_DEBUG_WX("Setting ESSID: '%*pE' (%d)\n", length, essid, length);
+>>>>>>> v3.18
 =======
 	IPW_DEBUG_WX("Setting ESSID: '%*pE' (%d)\n", length, essid, length);
 >>>>>>> v3.18
@@ -7102,7 +7166,10 @@ static int ipw2100_wx_get_essid(struct net_device *dev,
 
 	struct ipw2100_priv *priv = libipw_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECLARE_SSID_BUF(ssid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -7110,8 +7177,13 @@ static int ipw2100_wx_get_essid(struct net_device *dev,
 	 * configured ESSID then return that; otherwise return ANY */
 	if (priv->config & CFG_STATIC_ESSID || priv->status & STATUS_ASSOCIATED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IPW_DEBUG_WX("Getting essid: '%s'\n",
 			     print_ssid(ssid, priv->essid, priv->essid_len));
+=======
+		IPW_DEBUG_WX("Getting essid: '%*pE'\n",
+			     priv->essid_len, priv->essid);
+>>>>>>> v3.18
 =======
 		IPW_DEBUG_WX("Getting essid: '%*pE'\n",
 			     priv->essid_len, priv->essid);
@@ -7142,7 +7214,11 @@ static int ipw2100_wx_set_nick(struct net_device *dev,
 		return -E2BIG;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wrqu->data.length = min((size_t) wrqu->data.length, sizeof(priv->nick));
+=======
+	wrqu->data.length = min_t(size_t, wrqu->data.length, sizeof(priv->nick));
+>>>>>>> v3.18
 =======
 	wrqu->data.length = min_t(size_t, wrqu->data.length, sizeof(priv->nick));
 >>>>>>> v3.18

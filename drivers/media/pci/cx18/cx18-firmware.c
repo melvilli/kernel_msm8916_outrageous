@@ -131,7 +131,11 @@ static int load_cpu_fw_direct(const char *fn, u8 __iomem *mem, struct cx18 *cx)
 	}
 	if (!test_bit(CX18_F_I_LOADED_FW, &cx->i_flags))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		CX18_INFO("loaded %s firmware (%zd bytes)\n", fn, fw->size);
+=======
+		CX18_INFO("loaded %s firmware (%zu bytes)\n", fn, fw->size);
+>>>>>>> v3.18
 =======
 		CX18_INFO("loaded %s firmware (%zu bytes)\n", fn, fw->size);
 >>>>>>> v3.18
@@ -169,7 +173,11 @@ static int load_apu_fw_direct(const char *fn, u8 __iomem *dst, struct cx18 *cx,
 	apu_version = (vers[0] << 24) | (vers[4] << 16) | vers[32];
 	while (offset + sizeof(seghdr) < fw->size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const u32 *shptr = src + offset / 4;
+=======
+		const __le32 *shptr = (__force __le32 *)src + offset / 4;
+>>>>>>> v3.18
 =======
 		const __le32 *shptr = (__force __le32 *)src + offset / 4;
 >>>>>>> v3.18
@@ -211,7 +219,11 @@ static int load_apu_fw_direct(const char *fn, u8 __iomem *dst, struct cx18 *cx,
 	}
 	if (!test_bit(CX18_F_I_LOADED_FW, &cx->i_flags))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		CX18_INFO("loaded %s firmware V%08x (%zd bytes)\n",
+=======
+		CX18_INFO("loaded %s firmware V%08x (%zu bytes)\n",
+>>>>>>> v3.18
 =======
 		CX18_INFO("loaded %s firmware V%08x (%zu bytes)\n",
 >>>>>>> v3.18

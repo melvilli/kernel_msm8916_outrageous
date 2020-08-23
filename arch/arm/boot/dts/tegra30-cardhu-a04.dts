@@ -1,7 +1,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "tegra30-cardhu.dtsi"
+=======
+#include "tegra30-cardhu.dtsi"
+>>>>>>> v3.18
 =======
 #include "tegra30-cardhu.dtsi"
 >>>>>>> v3.18
@@ -13,7 +17,10 @@
 	compatible = "nvidia,cardhu-a04", "nvidia,cardhu", "nvidia,tegra30";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	sdhci@78000400 {
 		status = "okay";
 		power-gpios = <&gpio TEGRA_GPIO(D, 3) GPIO_ACTIVE_HIGH>;
@@ -21,6 +28,9 @@
 		keep-power-in-suspend;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	regulators {
 		compatible = "simple-bus";
@@ -37,7 +47,11 @@
 			regulator-boot-on;
 			enable-active-high;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpio = <&pmic 7 0>;
+=======
+			gpio = <&pmic 7 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpio = <&pmic 7 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -53,7 +67,11 @@
 			regulator-boot-on;
 			enable-active-high;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpio = <&pmic 6 0>;
+=======
+			gpio = <&pmic 6 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpio = <&pmic 6 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -67,7 +85,11 @@
 			regulator-max-microvolt = <5000000>;
 			enable-active-high;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpio = <&gpio 238 0>; /* GPIO PDD6 */
+=======
+			gpio = <&gpio TEGRA_GPIO(DD, 6) GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpio = <&gpio TEGRA_GPIO(DD, 6) GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -83,7 +105,11 @@
 			regulator-max-microvolt = <5000000>;
 			enable-active-high;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpio = <&gpio 236 0>; /* GPIO PDD4 */
+=======
+			gpio = <&gpio TEGRA_GPIO(DD, 4) GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpio = <&gpio TEGRA_GPIO(DD, 4) GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -99,7 +125,11 @@
 			regulator-max-microvolt = <5000000>;
 			enable-active-high;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpio = <&pmic 8 0>;
+=======
+			gpio = <&pmic 8 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpio = <&pmic 8 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -115,7 +145,11 @@
 			regulator-boot-on;
 			enable-active-high;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpio = <&gpio 234 0>; /* GPIO PDD2 */
+=======
+			gpio = <&gpio TEGRA_GPIO(DD, 2) GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpio = <&gpio TEGRA_GPIO(DD, 2) GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -131,6 +165,7 @@
 			regulator-boot-on;
 			enable-active-high;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpio = <&gpio 232 0>; /* GPIO PDD0 */
 		};
 	};
@@ -141,6 +176,11 @@
 		bus-width = <4>;
 		keep-power-in-suspend;
 	};
+=======
+			gpio = <&gpio TEGRA_GPIO(DD, 0) GPIO_ACTIVE_HIGH>;
+		};
+	};
+>>>>>>> v3.18
 =======
 			gpio = <&gpio TEGRA_GPIO(DD, 0) GPIO_ACTIVE_HIGH>;
 		};

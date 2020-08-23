@@ -268,6 +268,7 @@ TRACE_EVENT(mm_page_alloc_extfrag,
 
 	TP_PROTO(struct page *page,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int alloc_order, int fallback_order,
 			int alloc_migratetype, int fallback_migratetype),
 
@@ -275,12 +276,17 @@ TRACE_EVENT(mm_page_alloc_extfrag,
 		alloc_order, fallback_order,
 		alloc_migratetype, fallback_migratetype),
 =======
+=======
+>>>>>>> v3.18
 		int alloc_order, int fallback_order,
 		int alloc_migratetype, int fallback_migratetype, int new_migratetype),
 
 	TP_ARGS(page,
 		alloc_order, fallback_order,
 		alloc_migratetype, fallback_migratetype, new_migratetype),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TP_STRUCT__entry(
@@ -290,6 +296,10 @@ TRACE_EVENT(mm_page_alloc_extfrag,
 		__field(	int,		alloc_migratetype	)
 		__field(	int,		fallback_migratetype	)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__field(	int,		change_ownership	)
+>>>>>>> v3.18
 =======
 		__field(	int,		change_ownership	)
 >>>>>>> v3.18
@@ -302,6 +312,10 @@ TRACE_EVENT(mm_page_alloc_extfrag,
 		__entry->alloc_migratetype	= alloc_migratetype;
 		__entry->fallback_migratetype	= fallback_migratetype;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__entry->change_ownership	= (new_migratetype == alloc_migratetype);
+>>>>>>> v3.18
 =======
 		__entry->change_ownership	= (new_migratetype == alloc_migratetype);
 >>>>>>> v3.18
@@ -316,6 +330,7 @@ TRACE_EVENT(mm_page_alloc_extfrag,
 		__entry->alloc_migratetype,
 		__entry->fallback_migratetype,
 		__entry->fallback_order < pageblock_order,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__entry->alloc_migratetype == __entry->fallback_migratetype)
 );
@@ -864,6 +879,11 @@ DEFINE_EVENT(iommu_sec_ptbl_map_range, iommu_sec_ptbl_map_range_end,
 
 	TP_ARGS(sec_id, num, va, pa, len)
 	);
+=======
+		__entry->change_ownership)
+);
+
+>>>>>>> v3.18
 =======
 		__entry->change_ownership)
 );

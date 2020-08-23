@@ -13,6 +13,7 @@
 #define _MPC8610_I2S_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* SSI Register Map */
 struct ccsr_ssi {
 	__be32 stx0;	/* 0x.0000 - SSI Transmit Data Register 0 */
@@ -41,6 +42,8 @@ struct ccsr_ssi {
 };
 
 =======
+=======
+>>>>>>> v3.18
 /* SSI registers */
 #define CCSR_SSI_STX0			0x00
 #define CCSR_SSI_STX1			0x04
@@ -67,6 +70,9 @@ struct ccsr_ssi {
 #define CCSR_SSI_SACCDIS		0x58
 
 #define CCSR_SSI_SCR_SYNC_TX_FS		0x00001000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CCSR_SSI_SCR_RFR_CLK_DIS	0x00000800
 #define CCSR_SSI_SCR_TFR_CLK_DIS	0x00000400
@@ -155,7 +161,13 @@ struct ccsr_ssi {
 
 /* STCCR and SRCCR */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CCSR_SSI_SxCCR_DIV2		0x00040000
+=======
+#define CCSR_SSI_SxCCR_DIV2_SHIFT	18
+#define CCSR_SSI_SxCCR_DIV2		0x00040000
+#define CCSR_SSI_SxCCR_PSR_SHIFT	17
+>>>>>>> v3.18
 =======
 #define CCSR_SSI_SxCCR_DIV2_SHIFT	18
 #define CCSR_SSI_SxCCR_DIV2		0x00040000
@@ -240,9 +252,12 @@ struct ccsr_ssi {
 #define CCSR_SSI_SACNT_AC97EN		0x00000001
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 
 struct device;
 
@@ -304,4 +319,7 @@ static inline void fsl_ssi_debugfs_remove(struct fsl_ssi_dbg *ssi_dbg)
 #endif  /* ! IS_ENABLED(CONFIG_DEBUG_FS) */
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

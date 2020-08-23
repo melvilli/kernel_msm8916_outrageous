@@ -138,7 +138,11 @@ ENTRY(csum_partial)
 	mv r10, r5
 	cmpi.c	r5, 0x8
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blt	small_csumcpy		/* < 8(singed) bytes to copy */
+=======
+	blt	small_csumcpy		/* < 8(signed) bytes to copy */
+>>>>>>> v3.18
 =======
 	blt	small_csumcpy		/* < 8(signed) bytes to copy */
 >>>>>>> v3.18

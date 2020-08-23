@@ -46,7 +46,13 @@ int btrfs_submit_compressed_write(struct inode *inode, u64 start,
 int btrfs_submit_compressed_read(struct inode *inode, struct bio *bio,
 				 int mirror_num, unsigned long bio_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+void btrfs_clear_biovec_end(struct bio_vec *bvec, int vcnt,
+				   unsigned long pg_index,
+				   unsigned long pg_offset);
+>>>>>>> v3.18
 =======
 void btrfs_clear_biovec_end(struct bio_vec *bvec, int vcnt,
 				   unsigned long pg_index,

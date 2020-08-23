@@ -395,7 +395,11 @@ static int bnep_tx_frame(struct bnep_session *s, struct sk_buff *skb)
 	u8 type = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("skb %pK dev %pK type %d", skb, skb->dev, skb->pkt_type);
+=======
+	BT_DBG("skb %p dev %p type %d", skb, skb->dev, skb->pkt_type);
+>>>>>>> v3.18
 =======
 	BT_DBG("skb %p dev %p type %d", skb, skb->dev, skb->pkt_type);
 >>>>>>> v3.18
@@ -516,6 +520,7 @@ static int bnep_session(void *arg)
 static struct device *bnep_get_device(struct bnep_session *session)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bdaddr_t *src = &bt_sk(session->sock->sk)->src;
 	bdaddr_t *dst = &bt_sk(session->sock->sk)->dst;
 	struct hci_dev *hdev;
@@ -531,6 +536,8 @@ static struct device *bnep_get_device(struct bnep_session *session)
 
 	return conn ? &conn->dev : NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct hci_conn *conn;
 
 	conn = l2cap_pi(session->sock->sk)->chan->conn->hcon;
@@ -538,6 +545,9 @@ static struct device *bnep_get_device(struct bnep_session *session)
 		return NULL;
 
 	return &conn->dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -555,6 +565,7 @@ int bnep_add_connection(struct bnep_connadd_req *req, struct socket *sock)
 	BT_DBG("");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!l2cap_is_socket(sock))
 		return -EBADFD;
 
@@ -566,6 +577,8 @@ int bnep_add_connection(struct bnep_connadd_req *req, struct socket *sock)
 				(*req->device) ? req->device : "bnep%d",
 				bnep_net_setup);
 =======
+=======
+>>>>>>> v3.18
 	baswap((void *) dst, &l2cap_pi(sock->sk)->chan->dst);
 	baswap((void *) src, &l2cap_pi(sock->sk)->chan->src);
 
@@ -574,6 +587,9 @@ int bnep_add_connection(struct bnep_connadd_req *req, struct socket *sock)
 			   (*req->device) ? req->device : "bnep%d",
 			   NET_NAME_UNKNOWN,
 			   bnep_net_setup);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!dev)
 		return -ENOMEM;

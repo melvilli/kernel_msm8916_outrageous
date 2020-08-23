@@ -2,7 +2,11 @@
 	-------------------------------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 This text is is a collection of suggestions for people writing patches or
+=======
+This text is a collection of suggestions for people writing patches or
+>>>>>>> v3.18
 =======
 This text is a collection of suggestions for people writing patches or
 >>>>>>> v3.18
@@ -32,8 +36,12 @@ increase the chances of your change being accepted.
 
 * If your patch (or the driver) is affected by configuration options such as
 <<<<<<< HEAD
+<<<<<<< HEAD
   CONFIG_SMP or CONFIG_HOTPLUG, make sure it compiles for all configuration
   variants.
+=======
+  CONFIG_SMP, make sure it compiles for all configuration variants.
+>>>>>>> v3.18
 =======
   CONFIG_SMP, make sure it compiles for all configuration variants.
 >>>>>>> v3.18

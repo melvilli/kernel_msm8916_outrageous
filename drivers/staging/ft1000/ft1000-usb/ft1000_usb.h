@@ -12,6 +12,7 @@
 #define PSEUDOSZ                16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  SUCCESS             0x00
 
 struct app_info_block {
@@ -19,12 +20,17 @@ struct app_info_block {
 	u32 nRxMsg;                    /* DPRAM msg rcv from dsp with app_id */
 	u32 nTxMsgReject;              /* DPRAM msg rejected due to DSP doorbell set */
 =======
+=======
+>>>>>>> v3.18
 struct app_info_block {
 	u32 nTxMsg;                    /* DPRAM msg sent to DSP with app_id */
 	u32 nRxMsg;                    /* DPRAM msg rcv from dsp with app_id */
 	u32 nTxMsgReject;              /* DPRAM msg rejected due to DSP doorbell
 					* set
 					*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 nRxMsgMiss;                /* DPRAM msg dropped due to overflow */
 	struct fown_struct *fileobject;/* Application's file object */
@@ -33,26 +39,35 @@ struct app_info_block {
 	int NumOfMsg;                   /* number of messages queued up */
 	wait_queue_head_t wait_dpram_msg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head app_sqlist;   /* link list of msgs for applicaton on slow queue */
 } __packed;
 
 #define DEBUG(args...) printk(KERN_INFO args)
 =======
+=======
+>>>>>>> v3.18
 	struct list_head app_sqlist;   /* link list of msgs for applicaton on
 					* slow queue
 					*/
 } __packed;
 
 #define DEBUG(args...) pr_info(args)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define FALSE           0
 #define TRUE            1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define STATUS_SUCCESS  0
 #define STATUS_FAILURE   0x1001
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define FT1000_STATUS_CLOSING  0x01
@@ -68,7 +83,13 @@ struct app_info_block {
 /* the indexes are swapped comparing to PCMCIA - is it OK or a bug? */
 #undef FT1000_MAG_DSP_LED_INDX
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FT1000_MAG_DSP_LED_INDX		0x1	/* dsp led status for PAD device */
+=======
+#define FT1000_MAG_DSP_LED_INDX		0x1	/* dsp led status for PAD
+						 * device
+						 */
+>>>>>>> v3.18
 =======
 #define FT1000_MAG_DSP_LED_INDX		0x1	/* dsp led status for PAD
 						 * device
@@ -132,6 +153,7 @@ struct dpram_blk {
 
 int ft1000_read_register(struct ft1000_usb *ft1000dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u16 *Data, u16 nRegIndx);
 int ft1000_write_register(struct ft1000_usb *ft1000dev,
 			u16 value, u16 nRegIndx);
@@ -148,6 +170,8 @@ int fix_ft1000_read_dpram32(struct ft1000_usb *ft1000dev,
 int fix_ft1000_write_dpram32(struct ft1000_usb *ft1000dev,
 			u16 indx, u8 *buffer);
 =======
+=======
+>>>>>>> v3.18
 			 u16 *Data, u16 nRegIndx);
 int ft1000_write_register(struct ft1000_usb *ft1000dev,
 			  u16 value, u16 nRegIndx);
@@ -163,6 +187,9 @@ int fix_ft1000_read_dpram32(struct ft1000_usb *ft1000dev,
 			    u16 indx, u8 *buffer);
 int fix_ft1000_write_dpram32(struct ft1000_usb *ft1000dev,
 			     u16 indx, u8 *buffer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern void *pFileStart;
@@ -171,7 +198,11 @@ extern int numofmsgbuf;
 
 int ft1000_close(struct net_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
+=======
+int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
+>>>>>>> v3.18
 =======
 int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 >>>>>>> v3.18
@@ -180,6 +211,7 @@ int scram_dnldr(struct ft1000_usb *ft1000dev, void *pFileStart,
 extern struct list_head freercvpool;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern spinlock_t free_buff_lock;   /* lock to arbitrate free buffer list for receive command data */
 
 int ft1000_create_dev(struct ft1000_usb *dev);
@@ -187,6 +219,8 @@ void ft1000_destroy_dev(struct net_device *dev);
 extern void card_send_command(struct ft1000_usb *ft1000dev,
 				void *ptempbuffer, int size);
 =======
+=======
+>>>>>>> v3.18
 /* lock to arbitrate free buffer list for receive command data */
 extern spinlock_t free_buff_lock;
 
@@ -194,6 +228,9 @@ int ft1000_create_dev(struct ft1000_usb *dev);
 void ft1000_destroy_dev(struct net_device *dev);
 extern int card_send_command(struct ft1000_usb *ft1000dev,
 			      void *ptempbuffer, int size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct dpram_blk *ft1000_get_buffer(struct list_head *bufflist);
@@ -203,6 +240,7 @@ int dsp_reload(struct ft1000_usb *ft1000dev);
 int init_ft1000_netdev(struct ft1000_usb *ft1000dev);
 struct usb_interface;
 int reg_ft1000_netdev(struct ft1000_usb *ft1000dev,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			struct usb_interface *intf);
 int ft1000_poll(void *dev_id);
@@ -214,8 +252,13 @@ void ft1000_cleanup_proc(struct ft1000_info *info);
 
 #endif
 =======
+=======
+>>>>>>> v3.18
 		      struct usb_interface *intf);
 int ft1000_poll(void *dev_id);
 
 #endif  /* _FT1000_USB_H_ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -41,10 +41,13 @@ void __init pcibios_fixup_irqs(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init pcibios_penalize_isa_irq(int irq)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void pcibios_enable_irq(struct pci_dev *dev)

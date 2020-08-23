@@ -27,6 +27,10 @@
 #include <linux/console.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/static_key.h>
+>>>>>>> v3.18
 =======
 #include <linux/static_key.h>
 >>>>>>> v3.18
@@ -46,11 +50,14 @@
 #include <asm/trace.h>
 #include <asm/firmware.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "plpar_wrappers.h"
 #include "pseries.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/plpar_wrappers.h>
 #include <asm/fadump.h>
 
@@ -63,6 +70,9 @@
 #define HBR_AVPN	0x0200000000000000UL
 #define HBR_ANDCOND	0x0100000000000000UL
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* in hvCall.S */
@@ -71,8 +81,11 @@ EXPORT_SYMBOL(plpar_hcall9);
 EXPORT_SYMBOL(plpar_hcall_norets);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void pSeries_find_serial_port(void);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void vpa_init(int cpu)
@@ -84,10 +97,13 @@ void vpa_init(int cpu)
 	struct dtl_entry *dtl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_has_feature(CPU_FTR_ALTIVEC))
 		lppaca_of(cpu).vmxregs_in_use = 1;
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The spec says it "may be problematic" if CPU x registers the VPA of
 	 * CPU y. We should never do that, but wail if we ever do.
@@ -100,6 +116,9 @@ void vpa_init(int cpu)
 	if (cpu_has_feature(CPU_FTR_ARCH_207S))
 		lppaca_of(cpu).ebb_regs_in_use = 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	addr = __pa(&lppaca_of(cpu));
 	ret = register_vpa(hwcpu, addr);
@@ -114,7 +133,11 @@ void vpa_init(int cpu)
 	 * reports that.  All SPLPAR support SLB shadow buffer.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = __pa(&slb_shadow[cpu]);
+=======
+	addr = __pa(paca[cpu].slb_shadow_ptr);
+>>>>>>> v3.18
 =======
 	addr = __pa(paca[cpu].slb_shadow_ptr);
 >>>>>>> v3.18
@@ -138,7 +161,11 @@ void vpa_init(int cpu)
 
 		/* hypervisor reads buffer length from this field */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dtl->enqueue_to_dispatch_time = DISPATCH_LOG_BYTES;
+=======
+		dtl->enqueue_to_dispatch_time = cpu_to_be32(DISPATCH_LOG_BYTES);
+>>>>>>> v3.18
 =======
 		dtl->enqueue_to_dispatch_time = cpu_to_be32(DISPATCH_LOG_BYTES);
 >>>>>>> v3.18
@@ -182,8 +209,14 @@ static long pSeries_lpar_hpte_insert(unsigned long hpte_group,
 
 	/* Make pHyp happy */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((rflags & _PAGE_NO_CACHE) & !(rflags & _PAGE_WRITETHRU))
 		hpte_r &= ~_PAGE_COHERENT;
+=======
+	if ((rflags & _PAGE_NO_CACHE) && !(rflags & _PAGE_WRITETHRU))
+		hpte_r &= ~HPTE_R_M;
+
+>>>>>>> v3.18
 =======
 	if ((rflags & _PAGE_NO_CACHE) && !(rflags & _PAGE_WRITETHRU))
 		hpte_r &= ~HPTE_R_M;
@@ -281,7 +314,10 @@ static void pSeries_lpar_hptab_clear(void)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef __LITTLE_ENDIAN__
 	/*
@@ -308,6 +344,9 @@ static void pSeries_lpar_hptab_clear(void)
 			panic("Could not enable big endian exceptions");
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -321,7 +360,12 @@ static long pSeries_lpar_hpte_updatepp(unsigned long slot,
 				       unsigned long newpp,
 				       unsigned long vpn,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       int psize, int ssize, int local)
+=======
+				       int psize, int apsize,
+				       int ssize, int local)
+>>>>>>> v3.18
 =======
 				       int psize, int apsize,
 				       int ssize, int local)
@@ -414,7 +458,12 @@ static void pSeries_lpar_hpte_updateboltedpp(unsigned long newpp,
 
 static void pSeries_lpar_hpte_invalidate(unsigned long slot, unsigned long vpn,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 int psize, int ssize, int local)
+=======
+					 int psize, int apsize,
+					 int ssize, int local)
+>>>>>>> v3.18
 =======
 					 int psize, int apsize,
 					 int ssize, int local)
@@ -436,7 +485,10 @@ static void pSeries_lpar_hpte_invalidate(unsigned long slot, unsigned long vpn,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Limit iterations holding pSeries_lpar_tlbie_lock to 3. We also need
  * to make sure that we avoid bouncing the hypervisor tlbie lock.
@@ -536,6 +588,9 @@ static void pSeries_lpar_hugepage_invalidate(unsigned long vsid,
 						   index, psize, ssize);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void pSeries_lpar_hpte_removebolted(unsigned long ea,
 					   int psize, int ssize)
@@ -549,6 +604,7 @@ static void pSeries_lpar_hpte_removebolted(unsigned long ea,
 	slot = pSeries_lpar_hpte_find(vpn, psize, ssize);
 	BUG_ON(slot == -1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pSeries_lpar_hpte_invalidate(slot, vpn, psize, ssize, 0);
 }
@@ -561,12 +617,17 @@ static void pSeries_lpar_hpte_removebolted(unsigned long ea,
 #define HBR_ANDCOND	0x0100000000000000UL
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * lpar doesn't use the passed actual page size
 	 */
 	pSeries_lpar_hpte_invalidate(slot, vpn, psize, 0, ssize, 0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Take a spinlock around flushes to avoid bouncing the hypervisor tlbie
@@ -602,14 +663,20 @@ static void pSeries_lpar_flush_hash_range(unsigned long number, int local)
 			slot += hidx & _PTEIDX_GROUP_IX;
 			if (!firmware_has_feature(FW_FEATURE_BULK_REMOVE)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pSeries_lpar_hpte_invalidate(slot, vpn, psize,
 							     ssize, local);
 =======
+=======
+>>>>>>> v3.18
 				/*
 				 * lpar doesn't use the passed actual page size
 				 */
 				pSeries_lpar_hpte_invalidate(slot, vpn, psize,
 							     0, ssize, local);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			} else {
 				param[pix] = HBR_REQUEST | HBR_AVPN | slot;
@@ -662,6 +729,10 @@ void __init hpte_init_lpar(void)
 	ppc_md.flush_hash_range	= pSeries_lpar_flush_hash_range;
 	ppc_md.hpte_clear_all   = pSeries_lpar_hptab_clear;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ppc_md.hugepage_invalidate = pSeries_lpar_hugepage_invalidate;
+>>>>>>> v3.18
 =======
 	ppc_md.hugepage_invalidate = pSeries_lpar_hugepage_invalidate;
 >>>>>>> v3.18
@@ -721,7 +792,10 @@ EXPORT_SYMBOL(arch_free_page);
 
 #ifdef CONFIG_TRACEPOINTS
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef HAVE_JUMP_LABEL
 struct static_key hcall_tracepoint_key = STATIC_KEY_INIT;
 
@@ -735,6 +809,9 @@ void hcall_tracepoint_unregfunc(void)
 	static_key_slow_dec(&hcall_tracepoint_key);
 }
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * We optimise our hcall path by placing hcall_tracepoint_refcount
@@ -746,6 +823,7 @@ void hcall_tracepoint_unregfunc(void)
 extern long hcall_tracepoint_refcount;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 
  * Since the tracing code might execute hcalls we need to guard against
  * recursion. One example of this are spinlocks calling H_YIELD on
@@ -753,6 +831,8 @@ extern long hcall_tracepoint_refcount;
  */
 static DEFINE_PER_CPU(unsigned int, hcall_trace_depth);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void hcall_tracepoint_regfunc(void)
@@ -765,7 +845,10 @@ void hcall_tracepoint_unregfunc(void)
 	hcall_tracepoint_refcount--;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 /*
@@ -775,6 +858,9 @@ void hcall_tracepoint_unregfunc(void)
  */
 static DEFINE_PER_CPU(unsigned int, hcall_trace_depth);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void __trace_hcall_entry(unsigned long opcode, unsigned long *args)
@@ -851,7 +937,11 @@ int h_get_mpp(struct hvcall_mpp_data *mpp_data)
 	mpp_data->mem_weight = (retbuf[3] >> 7 * 8) & 0xff;
 	mpp_data->unallocated_mem_weight = (retbuf[3] >> 6 * 8) & 0xff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mpp_data->unallocated_entitlement = retbuf[3] & 0xffffffffffff;
+=======
+	mpp_data->unallocated_entitlement = retbuf[3] & 0xffffffffffffUL;
+>>>>>>> v3.18
 =======
 	mpp_data->unallocated_entitlement = retbuf[3] & 0xffffffffffffUL;
 >>>>>>> v3.18

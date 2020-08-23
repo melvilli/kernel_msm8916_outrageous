@@ -1,6 +1,10 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
+=======
+ * Driver for Solarflare network controllers and boards
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
 >>>>>>> v3.18

@@ -35,6 +35,10 @@
 #include <linux/netfilter_ipv4.h>
 #include <linux/if_ether.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/icmpv6.h>
+>>>>>>> v3.18
 =======
 #include <linux/icmpv6.h>
 >>>>>>> v3.18
@@ -48,6 +52,7 @@
 #include <net/net_namespace.h>
 #include <net/netns/generic.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define HASH_SIZE  16
 #define HASH(addr) (((__force u32)addr^((__force u32)addr>>4))&(HASH_SIZE-1))
@@ -363,6 +368,8 @@ static netdev_tx_t vti_tunnel_xmit(struct sk_buff *skb, struct net_device *dev)
 	if (tdev == dev) {
 		ip_rt_put(rt);
 =======
+=======
+>>>>>>> v3.18
 static struct rtnl_link_ops vti_link_ops __read_mostly;
 
 static int vti_net_id __read_mostly;
@@ -493,6 +500,9 @@ static netdev_tx_t vti_xmit(struct sk_buff *skb, struct net_device *dev,
 
 	if (tdev == dev) {
 		dst_release(dst);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev->stats.collisions++;
 		goto tx_error;
@@ -508,6 +518,7 @@ static netdev_tx_t vti_xmit(struct sk_buff *skb, struct net_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(IPCB(skb), 0, sizeof(*IPCB(skb)));
 	skb_dst_drop(skb);
 	skb_dst_set(skb, &rt->dst);
@@ -517,6 +528,8 @@ static netdev_tx_t vti_xmit(struct sk_buff *skb, struct net_device *dev,
 	tstats = this_cpu_ptr(dev->tstats);
 	VTI_XMIT(tstats, &dev->stats);
 =======
+=======
+>>>>>>> v3.18
 	skb_scrub_packet(skb, !net_eq(tunnel->net, dev_net(dev)));
 	skb_dst_set(skb, dst);
 	skb->dev = skb_dst(skb)->dev;
@@ -525,6 +538,9 @@ static netdev_tx_t vti_xmit(struct sk_buff *skb, struct net_device *dev,
 	if (net_xmit_eval(err) == 0)
 		err = skb->len;
 	iptunnel_xmit_stats(err, &dev->stats, dev->tstats);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NETDEV_TX_OK;
 
@@ -532,6 +548,7 @@ tx_error_icmp:
 	dst_link_failure(skb);
 tx_error:
 	dev->stats.tx_errors++;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_kfree_skb(skb);
 	return NETDEV_TX_OK;
@@ -574,6 +591,8 @@ static int vti_tunnel_bind_dev(struct net_device *dev)
 	dev->iflink = tunnel->parms.link;
 	return dev->mtu;
 =======
+=======
+>>>>>>> v3.18
 	kfree_skb(skb);
 	return NETDEV_TX_OK;
 }
@@ -668,6 +687,9 @@ static int vti4_err(struct sk_buff *skb, u32 info)
 	xfrm_state_put(x);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -676,6 +698,7 @@ vti_tunnel_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 {
 	int err = 0;
 	struct ip_tunnel_parm p;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ip_tunnel *t;
 	struct net *net = dev_net(dev);
@@ -805,6 +828,8 @@ static int vti_tunnel_change_mtu(struct net_device *dev, int new_mtu)
 		return -EINVAL;
 	dev->mtu = new_mtu;
 =======
+=======
+>>>>>>> v3.18
 
 	if (copy_from_user(&p, ifr->ifr_ifru.ifru_data, sizeof(p)))
 		return -EFAULT;
@@ -833,12 +858,16 @@ static int vti_tunnel_change_mtu(struct net_device *dev, int new_mtu)
 
 	if (copy_to_user(ifr->ifr_ifru.ifru_data, &p, sizeof(p)))
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static const struct net_device_ops vti_netdev_ops = {
 	.ndo_init	= vti_tunnel_init,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.ndo_uninit	= vti_tunnel_uninit,
 	.ndo_start_xmit	= vti_tunnel_xmit,
@@ -854,6 +883,8 @@ static void vti_dev_free(struct net_device *dev)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	.ndo_uninit	= ip_tunnel_uninit,
 	.ndo_start_xmit	= vti_tunnel_xmit,
 	.ndo_do_ioctl	= vti_tunnel_ioctl,
@@ -861,11 +892,15 @@ static void vti_dev_free(struct net_device *dev)
 	.ndo_get_stats64 = ip_tunnel_get_stats64,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void vti_tunnel_setup(struct net_device *dev)
 {
 	dev->netdev_ops		= &vti_netdev_ops;
 	dev->type		= ARPHRD_TUNNEL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev->destructor		= vti_dev_free;
 
@@ -879,11 +914,15 @@ static void vti_tunnel_setup(struct net_device *dev)
 =======
 	ip_tunnel_setup(dev, vti_net_id);
 >>>>>>> v3.18
+=======
+	ip_tunnel_setup(dev, vti_net_id);
+>>>>>>> v3.18
 }
 
 static int vti_tunnel_init(struct net_device *dev)
 {
 	struct ip_tunnel *tunnel = netdev_priv(dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	tunnel->dev = dev;
@@ -905,6 +944,8 @@ static int __net_init vti_fb_tunnel_init(struct net_device *dev)
 	struct iphdr *iph = &tunnel->parms.iph;
 	struct vti_net *ipn = net_generic(dev_net(dev), vti_net_id);
 =======
+=======
+>>>>>>> v3.18
 	struct iphdr *iph = &tunnel->parms.iph;
 
 	memcpy(dev->dev_addr, &iph->saddr, 4);
@@ -925,11 +966,15 @@ static void __net_init vti_fb_tunnel_init(struct net_device *dev)
 {
 	struct ip_tunnel *tunnel = netdev_priv(dev);
 	struct iphdr *iph = &tunnel->parms.iph;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iph->version		= 4;
 	iph->protocol		= IPPROTO_IPIP;
 	iph->ihl		= 5;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	dev_hold(dev);
@@ -961,6 +1006,8 @@ static void vti_destroy_tunnels(struct vti_net *ipn, struct list_head *head)
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 }
 
 static struct xfrm4_protocol vti_esp4_protocol __read_mostly = {
@@ -986,11 +1033,15 @@ static struct xfrm4_protocol vti_ipcomp4_protocol __read_mostly = {
 	.err_handler	=	vti4_err,
 	.priority	=	100,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __net_init vti_init_net(struct net *net)
 {
 	int err;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vti_net *ipn = net_generic(net, vti_net_id);
 
@@ -1024,6 +1075,8 @@ err_alloc_dev:
 	/* nothing */
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	struct ip_tunnel_net *itn;
 
 	err = ip_tunnel_init_net(net, vti_net_id, &vti_link_ops, "ip_vti0");
@@ -1032,11 +1085,15 @@ err_alloc_dev:
 	itn = net_generic(net, vti_net_id);
 	vti_fb_tunnel_init(itn->fb_tunnel_dev);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __net_exit vti_exit_net(struct net *net)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vti_net *ipn = net_generic(net, vti_net_id);
 	LIST_HEAD(list);
@@ -1049,6 +1106,10 @@ static void __net_exit vti_exit_net(struct net *net)
 	struct ip_tunnel_net *itn = net_generic(net, vti_net_id);
 	ip_tunnel_delete_net(itn, &vti_link_ops);
 >>>>>>> v3.18
+=======
+	struct ip_tunnel_net *itn = net_generic(net, vti_net_id);
+	ip_tunnel_delete_net(itn, &vti_link_ops);
+>>>>>>> v3.18
 }
 
 static struct pernet_operations vti_net_ops = {
@@ -1056,7 +1117,11 @@ static struct pernet_operations vti_net_ops = {
 	.exit = vti_exit_net,
 	.id   = &vti_net_id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.size = sizeof(struct vti_net),
+=======
+	.size = sizeof(struct ip_tunnel_net),
+>>>>>>> v3.18
 =======
 	.size = sizeof(struct ip_tunnel_net),
 >>>>>>> v3.18
@@ -1078,6 +1143,11 @@ static void vti_netlink_parms(struct nlattr *data[],
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	parms->i_flags = VTI_ISVTI;
+
+>>>>>>> v3.18
 =======
 	parms->i_flags = VTI_ISVTI;
 
@@ -1102,6 +1172,7 @@ static void vti_netlink_parms(struct nlattr *data[],
 static int vti_newlink(struct net *src_net, struct net_device *dev,
 		       struct nlattr *tb[], struct nlattr *data[])
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ip_tunnel *nt;
 	struct net *net = dev_net(dev);
@@ -1129,16 +1200,22 @@ static int vti_newlink(struct net *src_net, struct net_device *dev,
 out:
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	struct ip_tunnel_parm parms;
 
 	vti_netlink_parms(data, &parms);
 	return ip_tunnel_newlink(dev, tb, &parms);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int vti_changelink(struct net_device *dev, struct nlattr *tb[],
 			  struct nlattr *data[])
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ip_tunnel *t, *nt;
 	struct net *net = dev_net(dev);
@@ -1183,10 +1260,15 @@ static int vti_changelink(struct net_device *dev, struct nlattr *tb[],
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct ip_tunnel_parm p;
 
 	vti_netlink_parms(data, &p);
 	return ip_tunnel_changelink(dev, tb, &p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1238,6 +1320,10 @@ static struct rtnl_link_ops vti_link_ops __read_mostly = {
 	.newlink	= vti_newlink,
 	.changelink	= vti_changelink,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.dellink        = ip_tunnel_dellink,
+>>>>>>> v3.18
 =======
 	.dellink        = ip_tunnel_dellink,
 >>>>>>> v3.18
@@ -1247,6 +1333,7 @@ static struct rtnl_link_ops vti_link_ops __read_mostly = {
 
 static int __init vti_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int err;
 
@@ -1262,6 +1349,8 @@ static int __init vti_init(void)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	const char *msg;
 	int err;
 
@@ -1284,6 +1373,9 @@ static int __init vti_init(void)
 		goto xfrm_proto_comp_failed;
 
 	msg = "netlink interface";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = rtnl_link_register(&vti_link_ops);
 	if (err < 0)
@@ -1293,9 +1385,12 @@ static int __init vti_init(void)
 
 rtnl_link_failed:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfrm4_mode_tunnel_input_deregister(&vti_handler);
 	unregister_pernet_device(&vti_net_ops);
 =======
+=======
+>>>>>>> v3.18
 	xfrm4_protocol_deregister(&vti_ipcomp4_protocol, IPPROTO_COMP);
 xfrm_proto_comp_failed:
 	xfrm4_protocol_deregister(&vti_ah4_protocol, IPPROTO_AH);
@@ -1305,6 +1400,9 @@ xfrm_proto_esp_failed:
 	unregister_pernet_device(&vti_net_ops);
 pernet_dev_failed:
 	pr_err("vti init: failed to register %s\n", msg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -1313,9 +1411,15 @@ static void __exit vti_fini(void)
 {
 	rtnl_link_unregister(&vti_link_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xfrm4_mode_tunnel_input_deregister(&vti_handler))
 		pr_info("vti close: can't deregister tunnel\n");
 
+=======
+	xfrm4_protocol_deregister(&vti_ipcomp4_protocol, IPPROTO_COMP);
+	xfrm4_protocol_deregister(&vti_ah4_protocol, IPPROTO_AH);
+	xfrm4_protocol_deregister(&vti_esp4_protocol, IPPROTO_ESP);
+>>>>>>> v3.18
 =======
 	xfrm4_protocol_deregister(&vti_ipcomp4_protocol, IPPROTO_COMP);
 	xfrm4_protocol_deregister(&vti_ah4_protocol, IPPROTO_AH);

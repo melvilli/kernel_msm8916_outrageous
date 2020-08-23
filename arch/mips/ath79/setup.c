@@ -183,7 +183,11 @@ const char *get_system_type(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int __cpuinit get_c0_compare_int(void)
+=======
+unsigned int get_c0_compare_int(void)
+>>>>>>> v3.18
 =======
 unsigned int get_c0_compare_int(void)
 >>>>>>> v3.18
@@ -205,7 +209,10 @@ void __init plat_mem_setup(void)
 	ath79_detect_sys_type();
 	detect_memory_region(0, ATH79_MEM_SIZE_MIN, ATH79_MEM_SIZE_MAX);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ath79_clocks_init();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -217,6 +224,7 @@ void __init plat_mem_setup(void)
 void __init plat_time_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clk *clk;
 
 	clk = clk_get(NULL, "cpu");
@@ -225,6 +233,8 @@ void __init plat_time_init(void)
 
 	mips_hpt_frequency = clk_get_rate(clk) / 2;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long cpu_clk_rate;
 	unsigned long ahb_clk_rate;
 	unsigned long ddr_clk_rate;
@@ -244,6 +254,9 @@ void __init plat_time_init(void)
 		ref_clk_rate / 1000000, (ref_clk_rate / 1000) % 1000);
 
 	mips_hpt_frequency = cpu_clk_rate / 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

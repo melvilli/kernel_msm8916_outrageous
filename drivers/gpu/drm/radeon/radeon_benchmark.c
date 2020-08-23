@@ -46,6 +46,7 @@ static int radeon_benchmark_do_move(struct radeon_device *rdev, unsigned size,
 		switch (flag) {
 		case RADEON_BENCHMARK_COPY_DMA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			r = radeon_copy_dma(rdev, saddr, daddr,
 					    size / RADEON_GPU_PAGE_SIZE,
 					    &fence);
@@ -74,6 +75,8 @@ exit_do_move:
 		radeon_fence_unref(&fence);
 	return r;
 =======
+=======
+>>>>>>> v3.18
 			fence = radeon_copy_dma(rdev, saddr, daddr,
 						size / RADEON_GPU_PAGE_SIZE,
 						NULL);
@@ -97,6 +100,9 @@ exit_do_move:
 	}
 	end_jiffies = jiffies;
 	return jiffies_to_msecs(end_jiffies - start_jiffies);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -124,7 +130,11 @@ static void radeon_benchmark_move(struct radeon_device *rdev, unsigned size,
 
 	n = RADEON_BENCHMARK_ITERATIONS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = radeon_bo_create(rdev, size, PAGE_SIZE, true, sdomain, NULL, &sobj);
+=======
+	r = radeon_bo_create(rdev, size, PAGE_SIZE, true, sdomain, 0, NULL, NULL, &sobj);
+>>>>>>> v3.18
 =======
 	r = radeon_bo_create(rdev, size, PAGE_SIZE, true, sdomain, 0, NULL, NULL, &sobj);
 >>>>>>> v3.18
@@ -140,7 +150,11 @@ static void radeon_benchmark_move(struct radeon_device *rdev, unsigned size,
 		goto out_cleanup;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = radeon_bo_create(rdev, size, PAGE_SIZE, true, ddomain, NULL, &dobj);
+=======
+	r = radeon_bo_create(rdev, size, PAGE_SIZE, true, ddomain, 0, NULL, NULL, &dobj);
+>>>>>>> v3.18
 =======
 	r = radeon_bo_create(rdev, size, PAGE_SIZE, true, ddomain, 0, NULL, NULL, &dobj);
 >>>>>>> v3.18

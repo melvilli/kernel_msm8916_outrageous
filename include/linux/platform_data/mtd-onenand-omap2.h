@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * arch/arm/plat-omap/include/mach/onenand.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Copyright (C) 2006 Nokia Corporation

@@ -6,6 +6,10 @@
 #include <linux/mount.h>
 #include <linux/security.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/crc32.h>
+>>>>>>> v3.18
 =======
 #include <linux/crc32.h>
 >>>>>>> v3.18
@@ -92,8 +96,13 @@ struct nfs_parsed_mount_data {
 	unsigned int		options;
 	unsigned int		bsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		auth_flavor_len;
 	rpc_authflavor_t	auth_flavors[1];
+=======
+	struct nfs_auth_info	auth_info;
+	rpc_authflavor_t	selected_flavor;
+>>>>>>> v3.18
 =======
 	struct nfs_auth_info	auth_info;
 	rpc_authflavor_t	selected_flavor;
@@ -163,6 +172,10 @@ struct nfs_client *nfs_get_client(const struct nfs_client_initdata *,
 int nfs_probe_fsinfo(struct nfs_server *server, struct nfs_fh *, struct nfs_fattr *);
 void nfs_server_insert_lists(struct nfs_server *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void nfs_server_remove_lists(struct nfs_server *);
+>>>>>>> v3.18
 =======
 void nfs_server_remove_lists(struct nfs_server *);
 >>>>>>> v3.18
@@ -179,7 +192,11 @@ extern struct nfs_client *nfs4_find_client_ident(struct net *, int);
 extern struct nfs_client *
 nfs4_find_client_sessionid(struct net *, const struct sockaddr *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct nfs4_sessionid *);
+=======
+				struct nfs4_sessionid *, u32);
+>>>>>>> v3.18
 =======
 				struct nfs4_sessionid *, u32);
 >>>>>>> v3.18
@@ -191,6 +208,12 @@ extern struct nfs_server *nfs4_create_server(
 extern struct nfs_server *nfs4_create_referral_server(struct nfs_clone_mount *,
 						      struct nfs_fh *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int nfs4_update_server(struct nfs_server *server, const char *hostname,
+					struct sockaddr *sap, size_t salen,
+					struct net *net);
+>>>>>>> v3.18
 =======
 extern int nfs4_update_server(struct nfs_server *server, const char *hostname,
 					struct sockaddr *sap, size_t salen,
@@ -209,11 +232,14 @@ extern struct nfs_client *nfs4_set_ds_client(struct nfs_client* mds_clp,
 					     unsigned int ds_timeo,
 					     unsigned int ds_retrans);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PROC_FS
 extern int __init nfs_fs_proc_init(void);
 extern void nfs_fs_proc_exit(void);
 #else
 =======
+=======
+>>>>>>> v3.18
 extern struct rpc_clnt *nfs4_find_or_create_ds_client(struct nfs_client *,
 						struct inode *);
 #ifdef CONFIG_PROC_FS
@@ -229,6 +255,9 @@ static inline int nfs_fs_proc_net_init(struct net *net)
 static inline void nfs_fs_proc_net_exit(struct net *net)
 {
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int nfs_fs_proc_init(void)
 {
@@ -244,6 +273,7 @@ int nfs_sockaddr_match_ipaddr(const struct sockaddr *, const struct sockaddr *);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* nfs3client.c */
 #if IS_ENABLED(CONFIG_NFS_V3)
 struct nfs_server *nfs3_create_server(struct nfs_mount_info *, struct nfs_subversion *);
@@ -251,6 +281,8 @@ struct nfs_server *nfs3_clone_server(struct nfs_server *, struct nfs_fh *,
 				     struct nfs_fattr *, rpc_authflavor_t);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* callback_xdr.c */
@@ -269,7 +301,10 @@ extern void nfs_destroy_writepagecache(void);
 extern int __init nfs_init_directcache(void);
 extern void nfs_destroy_directcache(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool nfs_pgarray_set(struct nfs_page_array *p, unsigned int pagecount);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void nfs_pgheader_init(struct nfs_pageio_descriptor *desc,
@@ -279,7 +314,10 @@ void nfs_set_pgio_error(struct nfs_pgio_header *hdr, int error, loff_t pos);
 int nfs_iocounter_wait(struct nfs_io_counter *c);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern const struct nfs_pageio_ops nfs_pgio_rw_ops;
 struct nfs_pgio_header *nfs_pgio_header_alloc(const struct nfs_rw_ops *);
 void nfs_pgio_header_free(struct nfs_pgio_header *);
@@ -289,6 +327,9 @@ int nfs_initiate_pgio(struct rpc_clnt *, struct nfs_pgio_header *,
 		      const struct rpc_call_ops *, int, int);
 void nfs_free_request(struct nfs_page *req);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void nfs_iocounter_init(struct nfs_io_counter *c)
 {
@@ -315,6 +356,10 @@ extern int nfs4_decode_dirent(struct xdr_stream *,
 extern const u32 nfs41_maxread_overhead;
 extern const u32 nfs41_maxwrite_overhead;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const u32 nfs41_maxgetdevinfo_overhead;
+>>>>>>> v3.18
 =======
 extern const u32 nfs41_maxgetdevinfo_overhead;
 >>>>>>> v3.18
@@ -326,7 +371,10 @@ extern struct rpc_procinfo nfs4_procedures[];
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NFS_V4_SECURITY_LABEL
 extern struct nfs4_label *nfs4_label_alloc(struct nfs_server *server, gfp_t flags);
 static inline void nfs4_label_free(struct nfs4_label *label)
@@ -351,11 +399,15 @@ static inline void nfs_zap_label_cache_locked(struct nfs_inode *nfsi)
 }
 #endif /* CONFIG_NFS_V4_SECURITY_LABEL */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* proc.c */
 void nfs_close_context(struct nfs_open_context *ctx, int is_sync);
 extern struct nfs_client *nfs_init_client(struct nfs_client *clp,
 			   const struct rpc_timeout *timeparms,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			   const char *ip_addr, rpc_authflavor_t authflavour);
 
@@ -363,6 +415,8 @@ extern struct nfs_client *nfs_init_client(struct nfs_client *clp,
 extern int nfs_access_cache_shrinker(struct shrinker *shrink,
 					struct shrink_control *sc);
 =======
+=======
+>>>>>>> v3.18
 			   const char *ip_addr);
 
 /* dir.c */
@@ -371,6 +425,9 @@ extern unsigned long nfs_access_cache_count(struct shrinker *shrink,
 					    struct shrink_control *sc);
 extern unsigned long nfs_access_cache_scan(struct shrinker *shrink,
 					   struct shrink_control *sc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct dentry *nfs_lookup(struct inode *, struct dentry *, unsigned int);
 int nfs_create(struct inode *, struct dentry *, umode_t, bool);
@@ -387,6 +444,7 @@ int nfs_file_fsync_commit(struct file *, loff_t, loff_t, int);
 loff_t nfs_file_llseek(struct file *, loff_t, int);
 int nfs_file_flush(struct file *, fl_owner_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t nfs_file_read(struct kiocb *, const struct iovec *, unsigned long, loff_t);
 ssize_t nfs_file_splice_read(struct file *, loff_t *, struct pipe_inode_info *,
 			     size_t, unsigned int);
@@ -400,6 +458,8 @@ ssize_t nfs_file_splice_write(struct pipe_inode_info *, struct file *, loff_t *,
 int nfs_check_flags(int);
 int nfs_setlease(struct file *, long, struct file_lock **);
 =======
+=======
+>>>>>>> v3.18
 ssize_t nfs_file_read(struct kiocb *, struct iov_iter *);
 ssize_t nfs_file_splice_read(struct file *, loff_t *, struct pipe_inode_info *,
 			     size_t, unsigned int);
@@ -409,6 +469,9 @@ int nfs_file_release(struct inode *, struct file *);
 int nfs_lock(struct file *, int, struct file_lock *);
 int nfs_flock(struct file *, int, struct file_lock *);
 int nfs_check_flags(int);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* inode.c */
@@ -421,7 +484,11 @@ extern void nfs_clear_inode(struct inode *);
 extern void nfs_evict_inode(struct inode *);
 void nfs_zap_acl_cache(struct inode *inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int nfs_wait_bit_killable(void *word);
+=======
+extern int nfs_wait_bit_killable(struct wait_bit_key *key);
+>>>>>>> v3.18
 =======
 extern int nfs_wait_bit_killable(struct wait_bit_key *key);
 >>>>>>> v3.18
@@ -435,6 +502,10 @@ extern struct file_system_type nfs4_xdev_fs_type;
 extern struct file_system_type nfs4_referral_fs_type;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool nfs_auth_info_match(const struct nfs_auth_info *, rpc_authflavor_t);
+>>>>>>> v3.18
 =======
 bool nfs_auth_info_match(const struct nfs_auth_info *, rpc_authflavor_t);
 >>>>>>> v3.18
@@ -476,7 +547,11 @@ extern struct dentry *nfs4_get_root(struct super_block *, struct nfs_fh *,
 				    const char *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int nfs4_get_rootfh(struct nfs_server *server, struct nfs_fh *mntfh);
+=======
+extern int nfs4_get_rootfh(struct nfs_server *server, struct nfs_fh *mntfh, bool);
+>>>>>>> v3.18
 =======
 extern int nfs4_get_rootfh(struct nfs_server *server, struct nfs_fh *mntfh, bool);
 >>>>>>> v3.18
@@ -484,6 +559,7 @@ extern int nfs4_get_rootfh(struct nfs_server *server, struct nfs_fh *mntfh, bool
 
 struct nfs_pgio_completion_ops;
 /* read.c */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct nfs_read_header *nfs_readhdr_alloc(void);
 extern void nfs_readhdr_free(struct nfs_pgio_header *hdr);
@@ -499,11 +575,16 @@ extern int nfs_generic_pagein(struct nfs_pageio_descriptor *desc,
 extern void nfs_pageio_reset_read_mds(struct nfs_pageio_descriptor *pgio);
 extern void nfs_readdata_release(struct nfs_read_data *rdata);
 =======
+=======
+>>>>>>> v3.18
 extern void nfs_pageio_init_read(struct nfs_pageio_descriptor *pgio,
 			struct inode *inode, bool force_mds,
 			const struct nfs_pgio_completion_ops *compl_ops);
 extern void nfs_read_prepare(struct rpc_task *task, void *calldata);
 extern void nfs_pageio_reset_read_mds(struct nfs_pageio_descriptor *pgio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* super.c */
@@ -520,6 +601,7 @@ int nfs_remount(struct super_block *sb, int *flags, char *raw_data);
 /* write.c */
 extern void nfs_pageio_init_write(struct nfs_pageio_descriptor *pgio,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct inode *inode, int ioflags,
 			const struct nfs_pgio_completion_ops *compl_ops);
 extern struct nfs_write_header *nfs_writehdr_alloc(void);
@@ -534,10 +616,15 @@ extern int nfs_initiate_write(struct rpc_clnt *clnt,
 			      const struct rpc_call_ops *call_ops,
 			      int how, int flags);
 =======
+=======
+>>>>>>> v3.18
 			struct inode *inode, int ioflags, bool force_mds,
 			const struct nfs_pgio_completion_ops *compl_ops);
 extern void nfs_pageio_reset_write_mds(struct nfs_pageio_descriptor *pgio);
 extern void nfs_commit_free(struct nfs_commit_data *p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void nfs_write_prepare(struct rpc_task *task, void *calldata);
 extern void nfs_commit_prepare(struct rpc_task *task, void *calldata);
@@ -552,6 +639,10 @@ extern void nfs_init_commit(struct nfs_commit_data *data,
 int nfs_scan_commit_list(struct list_head *src, struct list_head *dst,
 			 struct nfs_commit_info *cinfo, int max);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unsigned long nfs_reqs_to_commit(struct nfs_commit_info *);
+>>>>>>> v3.18
 =======
 unsigned long nfs_reqs_to_commit(struct nfs_commit_info *);
 >>>>>>> v3.18
@@ -561,6 +652,10 @@ void nfs_mark_request_commit(struct nfs_page *req,
 			     struct pnfs_layout_segment *lseg,
 			     struct nfs_commit_info *cinfo);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int nfs_write_need_commit(struct nfs_pgio_header *);
+>>>>>>> v3.18
 =======
 int nfs_write_need_commit(struct nfs_pgio_header *);
 >>>>>>> v3.18
@@ -578,6 +673,11 @@ void nfs_init_cinfo(struct nfs_commit_info *cinfo,
 		    struct inode *inode,
 		    struct nfs_direct_req *dreq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int nfs_key_timeout_notify(struct file *filp, struct inode *inode);
+bool nfs_ctx_key_to_expire(struct nfs_open_context *ctx);
+>>>>>>> v3.18
 =======
 int nfs_key_timeout_notify(struct file *filp, struct inode *inode);
 bool nfs_ctx_key_to_expire(struct nfs_open_context *ctx);
@@ -591,7 +691,10 @@ extern int nfs_migrate_page(struct address_space *,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* unlink.c */
 extern struct rpc_task *
 nfs_async_rename(struct inode *old_dir, struct inode *new_dir,
@@ -599,6 +702,9 @@ nfs_async_rename(struct inode *old_dir, struct inode *new_dir,
 		 void (*complete)(struct rpc_task *, struct nfs_renamedata *));
 extern int nfs_sillyrename(struct inode *dir, struct dentry *dentry);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* direct.c */
 void nfs_init_cinfo_from_dreq(struct nfs_commit_info *cinfo,
@@ -611,16 +717,22 @@ extern ssize_t nfs_dreq_bytes_left(struct nfs_direct_req *dreq);
 
 /* nfs4proc.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __nfs4_read_done_cb(struct nfs_read_data *);
 extern struct nfs_client *nfs4_init_client(struct nfs_client *clp,
 			    const struct rpc_timeout *timeparms,
 			    const char *ip_addr,
 			    rpc_authflavor_t authflavour);
 =======
+=======
+>>>>>>> v3.18
 extern void __nfs4_read_done_cb(struct nfs_pgio_header *);
 extern struct nfs_client *nfs4_init_client(struct nfs_client *clp,
 			    const struct rpc_timeout *timeparms,
 			    const char *ip_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int nfs40_walk_client_list(struct nfs_client *clp,
 				struct nfs_client **result,
@@ -745,7 +857,10 @@ u64 nfs_timespec_to_change_attr(const struct timespec *ts)
 	return ((u64)ts->tv_sec << 30) + ts->tv_nsec;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_CRC32
 /**
@@ -765,4 +880,7 @@ static inline u32 nfs_fhandle_hash(const struct nfs_fh *fh)
 	return 0;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

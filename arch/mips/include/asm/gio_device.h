@@ -51,8 +51,13 @@ extern int gio_register_driver(struct gio_driver *);
 extern void gio_unregister_driver(struct gio_driver *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define gio_get_drvdata(_dev)	     drv_get_drvdata(&(_dev)->dev)
 #define gio_set_drvdata(_dev, data)  drv_set_drvdata(&(_dev)->dev, (data))
+=======
+#define gio_get_drvdata(_dev)	     dev_get_drvdata(&(_dev)->dev)
+#define gio_set_drvdata(_dev, data)  dev_set_drvdata(&(_dev)->dev, (data))
+>>>>>>> v3.18
 =======
 #define gio_get_drvdata(_dev)	     dev_get_drvdata(&(_dev)->dev)
 #define gio_set_drvdata(_dev, data)  dev_set_drvdata(&(_dev)->dev, (data))

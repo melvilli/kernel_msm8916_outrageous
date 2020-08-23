@@ -36,6 +36,11 @@
 #include "../../mm/internal.h"	/* munlock_vma_page */
 #include <linux/percpu-rwsem.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/task_work.h>
+#include <linux/shmem_fs.h>
+>>>>>>> v3.18
 =======
 #include <linux/task_work.h>
 #include <linux/shmem_fs.h>
@@ -65,8 +70,11 @@ static struct percpu_rw_semaphore dup_mmap_sem;
 /* Have a copy of original instruction */
 #define UPROBE_COPY_INSN	0
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Can skip singlestep */
 #define UPROBE_SKIP_SSTEP	1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -81,7 +89,10 @@ struct uprobe {
 	loff_t			offset;
 	unsigned long		flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * The generic code assumes that it has two members of unknown type
@@ -93,6 +104,9 @@ struct uprobe {
 	 *	ixol -	potentially modified instruction to execute out of
 	 *		line, copied to xol_area by xol_get_insn_slot().
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct arch_uprobe	arch;
 };
@@ -108,7 +122,10 @@ struct return_instance {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Execute out of line area: anonymous executable mapping installed
  * by the probed task to execute the copy of the original instruction
  * mangled by set_swbp().
@@ -132,6 +149,9 @@ struct xol_area {
 };
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * valid_vma: Verify if the specified vma is an executable vma
  * Relax restrictions while unregistering: vm_flags might have
@@ -143,7 +163,11 @@ struct xol_area {
 static bool valid_vma(struct vm_area_struct *vma, bool is_register)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vm_flags_t flags = VM_HUGETLB | VM_MAYEXEC | VM_SHARED;
+=======
+	vm_flags_t flags = VM_HUGETLB | VM_MAYEXEC | VM_MAYSHARE;
+>>>>>>> v3.18
 =======
 	vm_flags_t flags = VM_HUGETLB | VM_MAYEXEC | VM_MAYSHARE;
 >>>>>>> v3.18
@@ -186,12 +210,18 @@ static int __replace_page(struct vm_area_struct *vma, unsigned long addr,
 	const unsigned long mmun_start = addr;
 	const unsigned long mmun_end   = addr + PAGE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct mem_cgroup *memcg;
 
 	err = mem_cgroup_try_charge(kpage, vma->vm_mm, GFP_KERNEL, &memcg);
 	if (err)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* For try_to_free_swap() and munlock_vma_page() below */
@@ -206,6 +236,11 @@ static int __replace_page(struct vm_area_struct *vma, unsigned long addr,
 	get_page(kpage);
 	page_add_new_anon_rmap(kpage, vma, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mem_cgroup_commit_charge(kpage, memcg, false);
+	lru_cache_add_active_or_unevictable(kpage, vma);
+>>>>>>> v3.18
 =======
 	mem_cgroup_commit_charge(kpage, memcg, false);
 	lru_cache_add_active_or_unevictable(kpage, vma);
@@ -232,6 +267,10 @@ static int __replace_page(struct vm_area_struct *vma, unsigned long addr,
 	err = 0;
  unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mem_cgroup_cancel_charge(kpage, memcg);
+>>>>>>> v3.18
 =======
 	mem_cgroup_cancel_charge(kpage, memcg);
 >>>>>>> v3.18
@@ -314,6 +353,7 @@ static int verify_opcode(struct page *page, unsigned long vaddr, uprobe_opcode_t
  * breakpoint instruction is not of the smallest length instruction
  * supported by that architecture then we need to modify is_trap_at_addr and
 <<<<<<< HEAD
+<<<<<<< HEAD
  * write_opcode accordingly. This would never be a problem for archs that
  * have fixed length instructions.
  */
@@ -321,15 +361,21 @@ static int verify_opcode(struct page *page, unsigned long vaddr, uprobe_opcode_t
 /*
  * write_opcode - write the opcode at a given virtual address.
 =======
+=======
+>>>>>>> v3.18
  * uprobe_write_opcode accordingly. This would never be a problem for archs
  * that have fixed length instructions.
  *
  * uprobe_write_opcode - write the opcode at a given virtual address.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @mm: the probed process address space.
  * @vaddr: the virtual address to store the opcode.
  * @opcode: opcode to be written at @vaddr.
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Called with mm->mmap_sem held (for read and with a reference to
  * mm).
@@ -339,10 +385,15 @@ static int verify_opcode(struct page *page, unsigned long vaddr, uprobe_opcode_t
  */
 static int write_opcode(struct mm_struct *mm, unsigned long vaddr,
 =======
+=======
+>>>>>>> v3.18
  * Called with mm->mmap_sem held for write.
  * Return 0 (success) or a negative errno.
  */
 int uprobe_write_opcode(struct mm_struct *mm, unsigned long vaddr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			uprobe_opcode_t opcode)
 {
@@ -361,11 +412,17 @@ retry:
 		goto put_old;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = anon_vma_prepare(vma);
 	if (ret)
 		goto put_old;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = -ENOMEM;
 	new_page = alloc_page_vma(GFP_HIGHUSER_MOVABLE, vma, vaddr);
@@ -373,6 +430,7 @@ retry:
 		goto put_old;
 
 	__SetPageUptodate(new_page);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	copy_highpage(new_page, old_page);
@@ -385,6 +443,12 @@ retry:
 	ret = __replace_page(vma, vaddr, old_page, new_page);
 
 put_new:
+=======
+	copy_highpage(new_page, old_page);
+	copy_to_page(new_page, vaddr, &opcode, UPROBE_SWBP_INSN_SIZE);
+
+	ret = __replace_page(vma, vaddr, old_page, new_page);
+>>>>>>> v3.18
 =======
 	copy_highpage(new_page, old_page);
 	copy_to_page(new_page, vaddr, &opcode, UPROBE_SWBP_INSN_SIZE);
@@ -412,7 +476,11 @@ put_old:
 int __weak set_swbp(struct arch_uprobe *auprobe, struct mm_struct *mm, unsigned long vaddr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return write_opcode(mm, vaddr, UPROBE_SWBP_INSN);
+=======
+	return uprobe_write_opcode(mm, vaddr, UPROBE_SWBP_INSN);
+>>>>>>> v3.18
 =======
 	return uprobe_write_opcode(mm, vaddr, UPROBE_SWBP_INSN);
 >>>>>>> v3.18
@@ -431,7 +499,11 @@ int __weak
 set_orig_insn(struct arch_uprobe *auprobe, struct mm_struct *mm, unsigned long vaddr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return write_opcode(mm, vaddr, *(uprobe_opcode_t *)auprobe->insn);
+=======
+	return uprobe_write_opcode(mm, vaddr, *(uprobe_opcode_t *)&auprobe->insn);
+>>>>>>> v3.18
 =======
 	return uprobe_write_opcode(mm, vaddr, *(uprobe_opcode_t *)&auprobe->insn);
 >>>>>>> v3.18
@@ -562,12 +634,18 @@ static struct uprobe *alloc_uprobe(struct inode *inode, loff_t offset)
 	init_rwsem(&uprobe->register_rwsem);
 	init_rwsem(&uprobe->consumer_rwsem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* For now assume that the instruction need not be single-stepped */
 	__set_bit(UPROBE_SKIP_SSTEP, &uprobe->flags);
 
 	/* add to uprobes_tree, sorted on inode:offset */
 	cur_uprobe = insert_uprobe(uprobe);
 
+=======
+
+	/* add to uprobes_tree, sorted on inode:offset */
+	cur_uprobe = insert_uprobe(uprobe);
+>>>>>>> v3.18
 =======
 
 	/* add to uprobes_tree, sorted on inode:offset */
@@ -615,6 +693,7 @@ static bool consumer_del(struct uprobe *uprobe, struct uprobe_consumer *uc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 __copy_insn(struct address_space *mapping, struct file *filp, char *insn,
 			unsigned long nbytes, loff_t offset)
@@ -629,6 +708,8 @@ __copy_insn(struct address_space *mapping, struct file *filp, char *insn,
 	 */
 	page = read_mapping_page(mapping, offset >> PAGE_CACHE_SHIFT, filp);
 =======
+=======
+>>>>>>> v3.18
 static int __copy_insn(struct address_space *mapping, struct file *filp,
 			void *insn, int nbytes, loff_t offset)
 {
@@ -642,6 +723,9 @@ static int __copy_insn(struct address_space *mapping, struct file *filp,
 		page = read_mapping_page(mapping, offset >> PAGE_CACHE_SHIFT, filp);
 	else
 		page = shmem_read_mapping_page(mapping, offset >> PAGE_CACHE_SHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(page))
 		return PTR_ERR(page);
@@ -654,6 +738,7 @@ static int __copy_insn(struct address_space *mapping, struct file *filp,
 
 static int copy_insn(struct uprobe *uprobe, struct file *filp)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct address_space *mapping;
 	unsigned long nbytes;
@@ -678,6 +763,8 @@ static int copy_insn(struct uprobe *uprobe, struct file *filp)
 	}
 	return __copy_insn(mapping, filp, uprobe->arch.insn, bytes, uprobe->offset);
 =======
+=======
+>>>>>>> v3.18
 	struct address_space *mapping = uprobe->inode->i_mapping;
 	loff_t offs = uprobe->offset;
 	void *insn = &uprobe->arch.insn;
@@ -700,6 +787,9 @@ static int copy_insn(struct uprobe *uprobe, struct file *filp)
 	} while (size);
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -722,7 +812,11 @@ static int prepare_uprobe(struct uprobe *uprobe, struct file *file,
 
 	ret = -ENOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_trap_insn((uprobe_opcode_t *)uprobe->arch.insn))
+=======
+	if (is_trap_insn((uprobe_opcode_t *)&uprobe->arch.insn))
+>>>>>>> v3.18
 =======
 	if (is_trap_insn((uprobe_opcode_t *)&uprobe->arch.insn))
 >>>>>>> v3.18
@@ -733,7 +827,11 @@ static int prepare_uprobe(struct uprobe *uprobe, struct file *file,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* write_opcode() assumes we don't cross page boundary */
+=======
+	/* uprobe_write_opcode() assumes we don't cross page boundary */
+>>>>>>> v3.18
 =======
 	/* uprobe_write_opcode() assumes we don't cross page boundary */
 >>>>>>> v3.18
@@ -977,7 +1075,11 @@ static void __uprobe_unregister(struct uprobe *uprobe, struct uprobe_consumer *u
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!consumer_del(uprobe, uc))	/* WARN? */
+=======
+	if (WARN_ON(!consumer_del(uprobe, uc)))
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!consumer_del(uprobe, uc)))
 >>>>>>> v3.18
@@ -1016,6 +1118,12 @@ int uprobe_register(struct inode *inode, loff_t offset, struct uprobe_consumer *
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* copy_insn() uses read_mapping_page() or shmem_read_mapping_page() */
+	if (!inode->i_mapping->a_ops->readpage && !shmem_mapping(inode->i_mapping))
+		return -EIO;
+>>>>>>> v3.18
 =======
 	/* copy_insn() uses read_mapping_page() or shmem_read_mapping_page() */
 	if (!inode->i_mapping->a_ops->readpage && !shmem_mapping(inode->i_mapping))
@@ -1065,7 +1173,11 @@ int uprobe_apply(struct inode *inode, loff_t offset,
 
 	uprobe = find_uprobe(inode, offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!uprobe)
+=======
+	if (WARN_ON(!uprobe))
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!uprobe))
 >>>>>>> v3.18
@@ -1094,7 +1206,11 @@ void uprobe_unregister(struct inode *inode, loff_t offset, struct uprobe_consume
 
 	uprobe = find_uprobe(inode, offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!uprobe)
+=======
+	if (WARN_ON(!uprobe))
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!uprobe))
 >>>>>>> v3.18
@@ -1275,9 +1391,14 @@ void uprobe_munmap(struct vm_area_struct *vma, unsigned long start, unsigned lon
 
 /* Slot allocation for XOL */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int xol_add_vma(struct xol_area *area)
 {
 	struct mm_struct *mm = current->mm;
+=======
+static int xol_add_vma(struct mm_struct *mm, struct xol_area *area)
+{
+>>>>>>> v3.18
 =======
 static int xol_add_vma(struct mm_struct *mm, struct xol_area *area)
 {
@@ -1289,6 +1410,7 @@ static int xol_add_vma(struct mm_struct *mm, struct xol_area *area)
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -ENOMEM;
 	/* Try to map as high as possible, this is only a hint. */
 	area->vaddr = get_unmapped_area(NULL, TASK_SIZE - PAGE_SIZE, PAGE_SIZE, 0, 0);
@@ -1296,6 +1418,8 @@ static int xol_add_vma(struct mm_struct *mm, struct xol_area *area)
 		ret = area->vaddr;
 		goto fail;
 =======
+=======
+>>>>>>> v3.18
 	if (!area->vaddr) {
 		/* Try to map as high as possible, this is only a hint. */
 		area->vaddr = get_unmapped_area(NULL, TASK_SIZE - PAGE_SIZE,
@@ -1304,6 +1428,9 @@ static int xol_add_vma(struct mm_struct *mm, struct xol_area *area)
 			ret = area->vaddr;
 			goto fail;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1315,7 +1442,10 @@ static int xol_add_vma(struct mm_struct *mm, struct xol_area *area)
 	smp_wmb();	/* pairs with get_xol_area() */
 	mm->uprobes_state.xol_area = area;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  fail:
@@ -1324,6 +1454,7 @@ static int xol_add_vma(struct mm_struct *mm, struct xol_area *area)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * get_xol_area - Allocate process's xol_area if necessary.
@@ -1343,6 +1474,8 @@ static struct xol_area *get_xol_area(void)
 
 	area = kzalloc(sizeof(*area), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 static struct xol_area *__create_xol_area(unsigned long vaddr)
 {
 	struct mm_struct *mm = current->mm;
@@ -1350,6 +1483,9 @@ static struct xol_area *__create_xol_area(unsigned long vaddr)
 	struct xol_area *area;
 
 	area = kmalloc(sizeof(*area), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(!area))
 		goto out;
@@ -1363,6 +1499,7 @@ static struct xol_area *__create_xol_area(unsigned long vaddr)
 		goto free_bitmap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* allocate first slot of task's xol_area for the return probes */
 	set_bit(0, area->bitmap);
 	copy_to_page(area->page, 0, &insn, UPROBE_SWBP_INSN_SIZE);
@@ -1371,6 +1508,8 @@ static struct xol_area *__create_xol_area(unsigned long vaddr)
 
 	if (!xol_add_vma(area))
 =======
+=======
+>>>>>>> v3.18
 	area->vaddr = vaddr;
 	init_waitqueue_head(&area->wq);
 	/* Reserve the 1st slot for get_trampoline_vaddr() */
@@ -1379,6 +1518,9 @@ static struct xol_area *__create_xol_area(unsigned long vaddr)
 	copy_to_page(area->page, 0, &insn, UPROBE_SWBP_INSN_SIZE);
 
 	if (!xol_add_vma(mm, area))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return area;
 
@@ -1389,10 +1531,13 @@ static struct xol_area *__create_xol_area(unsigned long vaddr)
 	kfree(area);
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	area = mm->uprobes_state.xol_area;
  ret:
 	smp_read_barrier_depends();     /* pairs with wmb in xol_add_vma() */
 =======
+=======
+>>>>>>> v3.18
 	return NULL;
 }
 
@@ -1412,6 +1557,9 @@ static struct xol_area *get_xol_area(void)
 
 	area = mm->uprobes_state.xol_area;
 	smp_read_barrier_depends();	/* pairs with wmb in xol_add_vma() */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return area;
 }
@@ -1496,6 +1644,7 @@ static unsigned long xol_get_insn_slot(struct uprobe *uprobe)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Initialize the slot */
 	copy_to_page(area->page, xol_vaddr, uprobe->arch.insn, MAX_UINSN_BYTES);
 	/*
@@ -1503,6 +1652,10 @@ static unsigned long xol_get_insn_slot(struct uprobe *uprobe)
 	 * This should work on supported architectures too.
 	 */
 	flush_dcache_page(area->page);
+=======
+	arch_uprobe_copy_ixol(area->page, xol_vaddr,
+			      &uprobe->arch.ixol, sizeof(uprobe->arch.ixol));
+>>>>>>> v3.18
 =======
 	arch_uprobe_copy_ixol(area->page, xol_vaddr,
 			      &uprobe->arch.ixol, sizeof(uprobe->arch.ixol));
@@ -1550,7 +1703,10 @@ static void xol_free_insn_slot(struct task_struct *tsk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void __weak arch_uprobe_copy_ixol(struct page *page, unsigned long vaddr,
 				  void *src, unsigned long len)
 {
@@ -1566,6 +1722,9 @@ void __weak arch_uprobe_copy_ixol(struct page *page, unsigned long vaddr,
 	flush_dcache_page(page);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * uprobe_get_swbp_addr - compute address of swbp given post-swbp regs
@@ -1579,7 +1738,10 @@ unsigned long __weak uprobe_get_swbp_addr(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 unsigned long uprobe_get_trap_addr(struct pt_regs *regs)
 {
 	struct uprobe_task *utask = current->utask;
@@ -1590,6 +1752,9 @@ unsigned long uprobe_get_trap_addr(struct pt_regs *regs)
 	return instruction_pointer(regs);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Called with no locks held.
@@ -1622,6 +1787,7 @@ void uprobe_free_utask(struct task_struct *t)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Called in context of a new clone/fork from copy_process.
  */
 void uprobe_copy_process(struct task_struct *t)
@@ -1630,6 +1796,8 @@ void uprobe_copy_process(struct task_struct *t)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Allocate a uprobe_task object for the task if if necessary.
@@ -1647,7 +1815,10 @@ static struct uprobe_task *get_utask(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int dup_utask(struct task_struct *t, struct uprobe_task *o_utask)
 {
 	struct uprobe_task *n_utask;
@@ -1724,6 +1895,9 @@ void uprobe_copy_process(struct task_struct *t, unsigned long flags)
 	task_work_add(t, &t->utask->dup_xol_work, true);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Current area->vaddr notion assume the trampoline address is always
@@ -1876,6 +2050,7 @@ bool uprobe_deny_signal(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Avoid singlestepping the original instruction if the original instruction
  * is a NOP or can be emulated.
@@ -1890,6 +2065,8 @@ static bool can_skip_sstep(struct uprobe *uprobe, struct pt_regs *regs)
 	return false;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void mmf_recalc_uprobes(struct mm_struct *mm)
@@ -2055,12 +2232,18 @@ static bool handle_trampoline(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool __weak arch_uprobe_ignore(struct arch_uprobe *aup, struct pt_regs *regs)
 {
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Run handler and ask thread to singlestep.
@@ -2113,9 +2296,12 @@ static void handle_swbp(struct pt_regs *regs)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handler_chain(uprobe, regs);
 	if (can_skip_sstep(uprobe, regs))
 =======
+=======
+>>>>>>> v3.18
 	/* Tracing handlers use ->utask to communicate with fetch methods */
 	if (!get_utask())
 		goto out;
@@ -2126,6 +2312,9 @@ static void handle_swbp(struct pt_regs *regs)
 	handler_chain(uprobe, regs);
 
 	if (arch_uprobe_skip_sstep(&uprobe->arch, regs))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 
@@ -2133,7 +2322,11 @@ static void handle_swbp(struct pt_regs *regs)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* can_skip_sstep() succeeded, or restart if can't singlestep */
+=======
+	/* arch_uprobe_skip_sstep() succeeded, or restart if can't singlestep */
+>>>>>>> v3.18
 =======
 	/* arch_uprobe_skip_sstep() succeeded, or restart if can't singlestep */
 >>>>>>> v3.18
@@ -2149,16 +2342,22 @@ static void handle_singlestep(struct uprobe_task *utask, struct pt_regs *regs)
 {
 	struct uprobe *uprobe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	uprobe = utask->active_uprobe;
 	if (utask->state == UTASK_SSTEP_ACK)
 		arch_uprobe_post_xol(&uprobe->arch, regs);
 =======
+=======
+>>>>>>> v3.18
 	int err = 0;
 
 	uprobe = utask->active_uprobe;
 	if (utask->state == UTASK_SSTEP_ACK)
 		err = arch_uprobe_post_xol(&uprobe->arch, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else if (utask->state == UTASK_SSTEP_TRAPPED)
 		arch_uprobe_abort_xol(&uprobe->arch, regs);
@@ -2174,12 +2373,18 @@ static void handle_singlestep(struct uprobe_task *utask, struct pt_regs *regs)
 	recalc_sigpending(); /* see uprobe_deny_signal() */
 	spin_unlock_irq(&current->sighand->siglock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (unlikely(err)) {
 		uprobe_warn(current, "execute the probed insn, sending SIGILL.");
 		force_sig_info(SIGILL, SEND_SIG_FORCED, current);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2259,12 +2464,16 @@ static int __init init_uprobes(void)
 	return register_die_notifier(&uprobe_exception_nb);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(init_uprobes);
 
 static void __exit exit_uprobes(void)
 {
 }
 module_exit(exit_uprobes);
+=======
+__initcall(init_uprobes);
+>>>>>>> v3.18
 =======
 __initcall(init_uprobes);
 >>>>>>> v3.18

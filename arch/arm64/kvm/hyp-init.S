@@ -81,11 +81,17 @@ __do_hyp_init:
 	isb
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Invalidate the stale TLBs from Bootloader */
 	tlbi	alle2
 	dsb	sy
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mrs	x4, sctlr_el2
 	and	x4, x4, #SCTLR_EL2_EE	// preserve endianness of EL2

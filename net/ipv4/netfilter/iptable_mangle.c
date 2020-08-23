@@ -80,7 +80,11 @@ ipt_mangle_out(struct sk_buff *skb, const struct net_device *out)
 /* The work comes in here from netfilter.c. */
 static unsigned int
 <<<<<<< HEAD
+<<<<<<< HEAD
 iptable_mangle_hook(unsigned int hook,
+=======
+iptable_mangle_hook(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 =======
 iptable_mangle_hook(const struct nf_hook_ops *ops,
 >>>>>>> v3.18
@@ -90,6 +94,7 @@ iptable_mangle_hook(const struct nf_hook_ops *ops,
 		     int (*okfn)(struct sk_buff *))
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hook == NF_INET_LOCAL_OUT)
 		return ipt_mangle_out(skb, out);
 	if (hook == NF_INET_POST_ROUTING)
@@ -98,6 +103,8 @@ iptable_mangle_hook(const struct nf_hook_ops *ops,
 	/* PREROUTING/INPUT/FORWARD: */
 	return ipt_do_table(skb, hook, in, out,
 =======
+=======
+>>>>>>> v3.18
 	if (ops->hooknum == NF_INET_LOCAL_OUT)
 		return ipt_mangle_out(skb, out);
 	if (ops->hooknum == NF_INET_POST_ROUTING)
@@ -105,6 +112,9 @@ iptable_mangle_hook(const struct nf_hook_ops *ops,
 				    dev_net(out)->ipv4.iptable_mangle);
 	/* PREROUTING/INPUT/FORWARD: */
 	return ipt_do_table(skb, ops->hooknum, in, out,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    dev_net(in)->ipv4.iptable_mangle);
 }
@@ -122,7 +132,11 @@ static int __net_init iptable_mangle_net_init(struct net *net)
 		ipt_register_table(net, &packet_mangler, repl);
 	kfree(repl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(net->ipv4.iptable_mangle);
+=======
+	return PTR_ERR_OR_ZERO(net->ipv4.iptable_mangle);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(net->ipv4.iptable_mangle);
 >>>>>>> v3.18

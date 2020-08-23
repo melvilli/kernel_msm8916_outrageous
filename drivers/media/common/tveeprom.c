@@ -41,7 +41,10 @@
 #include <media/tveeprom.h>
 #include <media/v4l2-common.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -71,6 +74,7 @@ MODULE_PARM_DESC(debug, "Debug level (0-1)");
  * tuner formats the tuner supports.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct HAUPPAUGE_TUNER_FMT
 {
 	int	id;
@@ -79,10 +83,15 @@ static struct HAUPPAUGE_TUNER_FMT
 hauppauge_tuner_fmt[] =
 {
 =======
+=======
+>>>>>>> v3.18
 static const struct {
 	int	id;
 	const char * const name;
 } hauppauge_tuner_fmt[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ V4L2_STD_UNKNOWN,                   " UNKNOWN" },
 	{ V4L2_STD_UNKNOWN,                   " FM" },
@@ -99,6 +108,7 @@ static const struct {
    testing and never made it to the outside world. So you will only see
    a subset in actual produced cards. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct HAUPPAUGE_TUNER
 {
 	int  id;
@@ -107,10 +117,15 @@ static struct HAUPPAUGE_TUNER
 hauppauge_tuner[] =
 {
 =======
+=======
+>>>>>>> v3.18
 static const struct {
 	int  id;
 	const char * const name;
 } hauppauge_tuner[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* 0-9 */
 	{ TUNER_ABSENT,			"None" },
@@ -316,6 +331,7 @@ static const struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Use V4L2_IDENT_AMBIGUOUS for those audio 'chips' that are
  * internal to a video chip, i.e. not a separate audio chip. */
 static struct HAUPPAUGE_AUDIOIC
@@ -380,6 +396,8 @@ audioIC[] =
 	{ V4L2_IDENT_AMBIGUOUS, "SAA7164"   },
 	{ V4L2_IDENT_AMBIGUOUS, "AU8522"    },
 =======
+=======
+>>>>>>> v3.18
 /* Use TVEEPROM_AUDPROC_INTERNAL for those audio 'chips' that are
  * internal to a video chip, i.e. not a separate audio chip. */
 static const struct {
@@ -440,6 +458,9 @@ static const struct {
 	{ TVEEPROM_AUDPROC_INTERNAL, "CX23887"   },
 	{ TVEEPROM_AUDPROC_INTERNAL, "SAA7164"   },
 	{ TVEEPROM_AUDPROC_INTERNAL, "AU8522"    },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -534,17 +555,23 @@ void tveeprom_hauppauge_analog(struct i2c_client *c, struct tveeprom *tvee,
 
 	int tuner1 = 0, t_format1 = 0, audioic = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *t_name1 = NULL;
 	const char *t_fmt_name1[8] = { " none", "", "", "", "", "", "", "" };
 
 	int tuner2 = 0, t_format2 = 0;
 	char *t_name2 = NULL;
 =======
+=======
+>>>>>>> v3.18
 	const char *t_name1 = NULL;
 	const char *t_fmt_name1[8] = { " none", "", "", "", "", "", "", "" };
 
 	int tuner2 = 0, t_format2 = 0;
 	const char *t_name2 = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const char *t_fmt_name2[8] = { " none", "", "", "", "", "", "", "" };
 
@@ -634,15 +661,21 @@ void tveeprom_hauppauge_analog(struct i2c_client *c, struct tveeprom *tvee,
 			inputs directly. */
 			audioic = eeprom_data[i+2] & 0x7f;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (audioic < ARRAY_SIZE(audioIC))
 				tvee->audio_processor = audioIC[audioic].id;
 			else
 				tvee->audio_processor = V4L2_IDENT_UNKNOWN;
 =======
+=======
+>>>>>>> v3.18
 			if (audioic < ARRAY_SIZE(audio_ic))
 				tvee->audio_processor = audio_ic[audioic].id;
 			else
 				tvee->audio_processor = TVEEPROM_AUDPROC_OTHER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -674,15 +707,21 @@ void tveeprom_hauppauge_analog(struct i2c_client *c, struct tveeprom *tvee,
 			inputs directly. */
 			audioic = eeprom_data[i+1] & 0x7f;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (audioic < ARRAY_SIZE(audioIC))
 				tvee->audio_processor = audioIC[audioic].id;
 			else
 				tvee->audio_processor = V4L2_IDENT_UNKNOWN;
 =======
+=======
+>>>>>>> v3.18
 			if (audioic < ARRAY_SIZE(audio_ic))
 				tvee->audio_processor = audio_ic[audioic].id;
 			else
 				tvee->audio_processor = TVEEPROM_AUDPROC_OTHER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			break;
@@ -829,17 +868,23 @@ void tveeprom_hauppauge_analog(struct i2c_client *c, struct tveeprom *tvee,
 	if (audioic < 0) {
 		tveeprom_info("audio processor is unknown (no idx)\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tvee->audio_processor = V4L2_IDENT_UNKNOWN;
 	} else {
 		if (audioic < ARRAY_SIZE(audioIC))
 			tveeprom_info("audio processor is %s (idx %d)\n",
 					audioIC[audioic].name, audioic);
 =======
+=======
+>>>>>>> v3.18
 		tvee->audio_processor = TVEEPROM_AUDPROC_OTHER;
 	} else {
 		if (audioic < ARRAY_SIZE(audio_ic))
 			tveeprom_info("audio processor is %s (idx %d)\n",
 					audio_ic[audioic].name, audioic);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else
 			tveeprom_info("audio processor is unknown (idx %d)\n",

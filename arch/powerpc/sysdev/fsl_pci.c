@@ -23,6 +23,10 @@
 #include <linux/string.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/interrupt.h>
+>>>>>>> v3.18
 =======
 #include <linux/interrupt.h>
 >>>>>>> v3.18
@@ -31,6 +35,12 @@
 #include <linux/log2.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/suspend.h>
+#include <linux/syscore_ops.h>
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/suspend.h>
 #include <linux/syscore_ops.h>
@@ -41,12 +51,18 @@
 #include <asm/prom.h>
 #include <asm/pci-bridge.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/machdep.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/ppc-pci.h>
 #include <asm/machdep.h>
 #include <asm/disassemble.h>
 #include <asm/ppc-opcode.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <sysdev/fsl_soc.h>
 #include <sysdev/fsl_pci.h>
@@ -54,7 +70,11 @@
 static int fsl_pcie_bus_fixup, is_mpc83xx_pci;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void quirk_fsl_pcie_header(struct pci_dev *dev)
+=======
+static void quirk_fsl_pcie_early(struct pci_dev *dev)
+>>>>>>> v3.18
 =======
 static void quirk_fsl_pcie_early(struct pci_dev *dev)
 >>>>>>> v3.18
@@ -63,7 +83,11 @@ static void quirk_fsl_pcie_early(struct pci_dev *dev)
 
 	/* if we aren't a PCIe don't bother */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pci_find_capability(dev, PCI_CAP_ID_EXP))
+=======
+	if (!pci_is_pcie(dev))
+>>>>>>> v3.18
 =======
 	if (!pci_is_pcie(dev))
 >>>>>>> v3.18
@@ -90,7 +114,11 @@ static int fsl_pcie_check_link(struct pci_controller *hose)
 		if (hose->ops->read == fsl_indirect_read_config) {
 			struct pci_bus bus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bus.number = 0;
+=======
+			bus.number = hose->first_busno;
+>>>>>>> v3.18
 =======
 			bus.number = hose->first_busno;
 >>>>>>> v3.18
@@ -148,7 +176,11 @@ static int fsl_pci_dma_set_mask(struct device *dev, u64 dma_mask)
 	 * SoC address from across PCI if needed
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((dev->bus == &pci_bus_type) &&
+=======
+	if ((dev_is_pci(dev)) &&
+>>>>>>> v3.18
 =======
 	if ((dev_is_pci(dev)) &&
 >>>>>>> v3.18
@@ -331,15 +363,21 @@ static void setup_pci_atmu(struct pci_controller *hose)
 		/* Size window to exact size if power-of-two or one size up */
 		if ((1ull << mem_log) != mem) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ((1ull << mem_log) > mem)
 				pr_info("%s: Setting PCI inbound window "
 					"greater than memory size\n", name);
 			mem_log++;
 =======
+=======
+>>>>>>> v3.18
 			mem_log++;
 			if ((1ull << mem_log) > mem)
 				pr_info("%s: Setting PCI inbound window "
 					"greater than memory size\n", name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -414,7 +452,13 @@ static void setup_pci_atmu(struct pci_controller *hose)
 
 	if (hose->dma_window_size < mem) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_SWIOTLB
+=======
+#ifdef CONFIG_SWIOTLB
+		ppc_swiotlb_enable = 1;
+#else
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_SWIOTLB
 		ppc_swiotlb_enable = 1;
@@ -495,7 +539,11 @@ void fsl_pcibios_fixup_bus(struct pci_bus *bus)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init fsl_add_bridge(struct platform_device *pdev, int is_primary)
+=======
+int fsl_add_bridge(struct platform_device *pdev, int is_primary)
+>>>>>>> v3.18
 =======
 int fsl_add_bridge(struct platform_device *pdev, int is_primary)
 >>>>>>> v3.18
@@ -564,7 +612,12 @@ int fsl_add_bridge(struct platform_device *pdev, int is_primary)
 		/* For PCI read PROG to identify controller mode */
 		early_read_config_byte(hose, 0, 0, PCI_CLASS_PROG, &progif);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((progif & 1) == 1)
+=======
+		if ((progif & 1) &&
+		    !of_property_read_bool(dev, "fsl,pci-agent-force-enum"))
+>>>>>>> v3.18
 =======
 		if ((progif & 1) &&
 		    !of_property_read_bool(dev, "fsl,pci-agent-force-enum"))
@@ -612,7 +665,12 @@ no_bridge:
 #endif /* CONFIG_FSL_SOC_BOOKE || CONFIG_PPC_86xx */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_FREESCALE, PCI_ANY_ID, quirk_fsl_pcie_header);
+=======
+DECLARE_PCI_FIXUP_EARLY(PCI_VENDOR_ID_FREESCALE, PCI_ANY_ID,
+			quirk_fsl_pcie_early);
+>>>>>>> v3.18
 =======
 DECLARE_PCI_FIXUP_EARLY(PCI_VENDOR_ID_FREESCALE, PCI_ANY_ID,
 			quirk_fsl_pcie_early);
@@ -904,8 +962,13 @@ u64 fsl_pci_immrbar_base(struct pci_controller *hose)
 		for (i = 0; i < 4; i++) {
 			/* not enabled, skip */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!in_le32(&in[i].ar) & PEX_RCIWARn_EN)
 				 continue;
+=======
+			if (!(in_le32(&in[i].ar) & PEX_RCIWARn_EN))
+				continue;
+>>>>>>> v3.18
 =======
 			if (!(in_le32(&in[i].ar) & PEX_RCIWARn_EN))
 				continue;
@@ -927,7 +990,10 @@ u64 fsl_pci_immrbar_base(struct pci_controller *hose)
 		pci_bus_read_config_dword(hose->bus,
 			PCI_DEVFN(0, 0), PCI_BASE_ADDRESS_0, &base);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/*
 		 * For PEXCSRBAR, bit 3-0 indicate prefetchable and
@@ -936,6 +1002,9 @@ u64 fsl_pci_immrbar_base(struct pci_controller *hose)
 		 */
 		base &= PCI_BASE_ADDRESS_MEM_MASK;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return base;
 	}
@@ -945,7 +1014,10 @@ u64 fsl_pci_immrbar_base(struct pci_controller *hose)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_E500
 static int mcheck_handle_load(struct pt_regs *regs, u32 inst)
 {
@@ -1100,6 +1172,9 @@ int fsl_pci_mcheck_exception(struct pt_regs *regs)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(CONFIG_FSL_SOC_BOOKE) || defined(CONFIG_PPC_86xx)
 static const struct of_device_id pci_ids[] = {
@@ -1108,6 +1183,10 @@ static const struct of_device_id pci_ids[] = {
 	{ .compatible = "fsl,mpc8610-pci", },
 	{ .compatible = "fsl,mpc8641-pcie", },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible = "fsl,qoriq-pcie", },
+>>>>>>> v3.18
 =======
 	{ .compatible = "fsl,qoriq-pcie", },
 >>>>>>> v3.18
@@ -1162,6 +1241,7 @@ void fsl_pci_assign_primary(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fsl_pci_probe(struct platform_device *pdev)
 {
 	int ret;
@@ -1190,6 +1270,8 @@ static int fsl_pci_probe(struct platform_device *pdev)
 
 	mpc85xx_pci_err_probe(pdev);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static irqreturn_t fsl_pci_pme_handle(int irq, void *dev_id)
 {
@@ -1254,6 +1336,7 @@ static int fsl_pci_pme_probe(struct pci_controller *hose)
 	pci_read_config_word(dev, dev->pm_cap + PCI_PM_CTRL, &pms);
 	pms |= PCI_PM_CTRL_PME_ENABLE;
 	pci_write_config_word(dev, dev->pm_cap + PCI_PM_CTRL, pms);
+<<<<<<< HEAD
 >>>>>>> v3.18
 
 	return 0;
@@ -1276,10 +1359,13 @@ static int fsl_pci_resume(struct device *dev)
 	}
 
 	setup_pci_atmu(hose);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static const struct dev_pm_ops pci_pm_ops = {
 	.resume = fsl_pci_resume,
 };
@@ -1292,6 +1378,8 @@ static const struct dev_pm_ops pci_pm_ops = {
 
 #endif
 =======
+=======
+>>>>>>> v3.18
 static void send_pme_turnoff_message(struct pci_controller *hose)
 {
 	struct ccsr_pci __iomem *pci = hose->private_data;
@@ -1384,13 +1472,19 @@ static int fsl_pci_probe(struct platform_device *pdev)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct platform_driver fsl_pci_driver = {
 	.driver = {
 		.name = "fsl-pci",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pm = PCI_PM_OPS,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.of_match_table = pci_ids,
@@ -1401,6 +1495,12 @@ static struct platform_driver fsl_pci_driver = {
 static int __init fsl_pci_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_SLEEP
+	register_syscore_ops(&pci_syscore_pm_ops);
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 	register_syscore_ops(&pci_syscore_pm_ops);

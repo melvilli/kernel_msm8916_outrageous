@@ -28,6 +28,10 @@
 #include <linux/mc146818rtc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu.h>
 >>>>>>> v3.18
@@ -46,8 +50,11 @@
 #include <asm/mips-boards/maltaint.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long cpu_khz;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int mips_cpu_timer_irq;
@@ -83,6 +90,7 @@ static void __init estimate_frequencies(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined (CONFIG_KVM_GUEST) && defined (CONFIG_KVM_HOST_FREQ)
 	unsigned int prid = read_c0_prid() & 0xffff00;
 
@@ -95,6 +103,10 @@ static void __init estimate_frequencies(void)
 		count *= 2;
 
 	mips_hpt_frequency = count;
+=======
+#if defined(CONFIG_KVM_GUEST) && CONFIG_KVM_GUEST_TIMER_FREQ
+	mips_hpt_frequency = CONFIG_KVM_GUEST_TIMER_FREQ * 1000000;
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_KVM_GUEST) && CONFIG_KVM_GUEST_TIMER_FREQ
 	mips_hpt_frequency = CONFIG_KVM_GUEST_TIMER_FREQ * 1000000;
@@ -163,7 +175,11 @@ static void __init plat_perf_setup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int __cpuinit get_c0_compare_int(void)
+=======
+unsigned int get_c0_compare_int(void)
+>>>>>>> v3.18
 =======
 unsigned int get_c0_compare_int(void)
 >>>>>>> v3.18
@@ -184,12 +200,15 @@ unsigned int get_c0_compare_int(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init plat_time_init(void)
 {
 	unsigned int prid = read_c0_prid() & 0xffff00;
 	unsigned int freq;
 
 =======
+=======
+>>>>>>> v3.18
 static void __init init_rtc(void)
 {
 	/* stop the clock whilst setting it up */
@@ -208,6 +227,9 @@ void __init plat_time_init(void)
 	unsigned int freq;
 
 	init_rtc();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	estimate_frequencies();
 
@@ -219,7 +241,10 @@ void __init plat_time_init(void)
 	printk("CPU frequency %d.%02d MHz\n", freq/1000000,
 	       (freq%1000000)*100/1000000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_khz = freq / 1000;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

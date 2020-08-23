@@ -20,6 +20,10 @@
 
 #include <sound/core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/dmaengine_pcm.h>
+>>>>>>> v3.18
 =======
 #include <sound/dmaengine_pcm.h>
 >>>>>>> v3.18
@@ -29,6 +33,11 @@
 #include <linux/platform_data/dma-ep93xx.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ep93xx-pcm.h"
+
+>>>>>>> v3.18
 =======
 #include "ep93xx-pcm.h"
 
@@ -105,6 +114,11 @@ struct ep93xx_ac97_info {
 	void __iomem		*regs;
 	struct completion	done;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_dmaengine_dai_dma_data dma_params_rx;
+	struct snd_dmaengine_dai_dma_data dma_params_tx;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data dma_params_rx;
 	struct snd_dmaengine_dai_dma_data dma_params_tx;
@@ -117,7 +131,11 @@ static struct ep93xx_ac97_info *ep93xx_ac97_info;
 static struct ep93xx_dma_data ep93xx_ac97_pcm_out = {
 	.name		= "ac97-pcm-out",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dma_port	= EP93XX_DMA_AAC1,
+=======
+	.port		= EP93XX_DMA_AAC1,
+>>>>>>> v3.18
 =======
 	.port		= EP93XX_DMA_AAC1,
 >>>>>>> v3.18
@@ -127,7 +145,11 @@ static struct ep93xx_dma_data ep93xx_ac97_pcm_out = {
 static struct ep93xx_dma_data ep93xx_ac97_pcm_in = {
 	.name		= "ac97-pcm-in",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dma_port	= EP93XX_DMA_AAC1,
+=======
+	.port		= EP93XX_DMA_AAC1,
+>>>>>>> v3.18
 =======
 	.port		= EP93XX_DMA_AAC1,
 >>>>>>> v3.18
@@ -260,7 +282,11 @@ static irqreturn_t ep93xx_ac97_interrupt(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_ac97_bus_ops soc_ac97_ops = {
+=======
+static struct snd_ac97_bus_ops ep93xx_ac97_ops = {
+>>>>>>> v3.18
 =======
 static struct snd_ac97_bus_ops ep93xx_ac97_ops = {
 >>>>>>> v3.18
@@ -270,7 +296,10 @@ static struct snd_ac97_bus_ops ep93xx_ac97_ops = {
 	.warm_reset	= ep93xx_ac97_warm_reset,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(soc_ac97_ops);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -344,6 +373,7 @@ static int ep93xx_ac97_trigger(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ep93xx_ac97_startup(struct snd_pcm_substream *substream,
 			       struct snd_soc_dai *dai)
 {
@@ -356,6 +386,8 @@ static int ep93xx_ac97_startup(struct snd_pcm_substream *substream,
 
 	snd_soc_dai_set_dma_data(dai, substream, dma_data);
 =======
+=======
+>>>>>>> v3.18
 static int ep93xx_ac97_dai_probe(struct snd_soc_dai *dai)
 {
 	struct ep93xx_ac97_info *info = snd_soc_dai_get_drvdata(dai);
@@ -366,13 +398,19 @@ static int ep93xx_ac97_dai_probe(struct snd_soc_dai *dai)
 	dai->playback_dma_data = &info->dma_params_tx;
 	dai->capture_dma_data = &info->dma_params_rx;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static const struct snd_soc_dai_ops ep93xx_ac97_dai_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.startup	= ep93xx_ac97_startup,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.trigger	= ep93xx_ac97_trigger,
@@ -383,6 +421,10 @@ static struct snd_soc_dai_driver ep93xx_ac97_dai = {
 	.id		= 0,
 	.ac97_control	= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.probe		= ep93xx_ac97_dai_probe,
+>>>>>>> v3.18
 =======
 	.probe		= ep93xx_ac97_dai_probe,
 >>>>>>> v3.18
@@ -420,9 +462,12 @@ static int ep93xx_ac97_probe(struct platform_device *pdev)
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	info->regs = devm_ioremap_resource(&pdev->dev, res);
@@ -448,17 +493,24 @@ static int ep93xx_ac97_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = snd_soc_set_ac97_ops(&ep93xx_ac97_ops);
 	if (ret)
 		goto fail;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = snd_soc_register_component(&pdev->dev, &ep93xx_ac97_component,
 					 &ep93xx_ac97_dai, 1);
 	if (ret)
 		goto fail;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 
@@ -467,6 +519,8 @@ fail:
 	ep93xx_ac97_info = NULL;
 	dev_set_drvdata(&pdev->dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_ep93xx_pcm_platform_register(&pdev->dev);
 	if (ret)
 		goto fail_unregister;
@@ -478,6 +532,9 @@ fail_unregister:
 fail:
 	ep93xx_ac97_info = NULL;
 	snd_soc_set_ac97_ops(NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -492,9 +549,15 @@ static int ep93xx_ac97_remove(struct platform_device *pdev)
 	ep93xx_ac97_write_reg(info, AC97GCR, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 	ep93xx_ac97_info = NULL;
 	dev_set_drvdata(&pdev->dev, NULL);
+=======
+	ep93xx_ac97_info = NULL;
+
+	snd_soc_set_ac97_ops(NULL);
+>>>>>>> v3.18
 =======
 	ep93xx_ac97_info = NULL;
 

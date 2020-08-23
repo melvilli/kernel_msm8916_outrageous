@@ -17,6 +17,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -34,8 +38,13 @@
  * kernel that was not aware of the root item structure change.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void btrfs_read_root_item(struct extent_buffer *eb, int slot,
 			  struct btrfs_root_item *item)
+=======
+static void btrfs_read_root_item(struct extent_buffer *eb, int slot,
+				struct btrfs_root_item *item)
+>>>>>>> v3.18
 =======
 static void btrfs_read_root_item(struct extent_buffer *eb, int slot,
 				struct btrfs_root_item *item)
@@ -54,7 +63,11 @@ static void btrfs_read_root_item(struct extent_buffer *eb, int slot,
 		!= btrfs_root_generation_v2(item)) {
 		if (btrfs_root_generation_v2(item) != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "btrfs: mismatching "
+=======
+			printk(KERN_WARNING "BTRFS: mismatching "
+>>>>>>> v3.18
 =======
 			printk(KERN_WARNING "BTRFS: mismatching "
 >>>>>>> v3.18
@@ -78,6 +91,7 @@ static void btrfs_read_root_item(struct extent_buffer *eb, int slot,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * lookup the root with the highest offset for a given objectid.  The key we do
  * find is copied into 'key'.  If we find something return 0, otherwise 1, < 0
  * on error.
@@ -88,6 +102,8 @@ int btrfs_find_last_root(struct btrfs_root *root, u64 objectid,
 	struct btrfs_path *path;
 	struct btrfs_key search_key;
 =======
+=======
+>>>>>>> v3.18
  * btrfs_find_root - lookup the root by the key.
  * root: the root of the root tree
  * search_key: the key to search
@@ -105,12 +121,16 @@ int btrfs_find_root(struct btrfs_root *root, struct btrfs_key *search_key,
 		    struct btrfs_path *path, struct btrfs_root_item *root_item,
 		    struct btrfs_key *root_key)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct btrfs_key found_key;
 	struct extent_buffer *l;
 	int ret;
 	int slot;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	search_key.objectid = objectid;
 	search_key.type = BTRFS_ROOT_ITEM_KEY;
@@ -133,6 +153,8 @@ int btrfs_find_root(struct btrfs_root *root, struct btrfs_key *search_key,
 	btrfs_item_key_to_cpu(l, &found_key, slot);
 	if (found_key.objectid != objectid ||
 =======
+=======
+>>>>>>> v3.18
 	ret = btrfs_search_slot(NULL, root, search_key, path, 0, 0);
 	if (ret < 0)
 		return ret;
@@ -153,11 +175,15 @@ int btrfs_find_root(struct btrfs_root *root, struct btrfs_key *search_key,
 
 	btrfs_item_key_to_cpu(l, &found_key, slot);
 	if (found_key.objectid != search_key->objectid ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    found_key.type != BTRFS_ROOT_ITEM_KEY) {
 		ret = 1;
 		goto out;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (item)
 		btrfs_read_root_item(l, slot, item);
@@ -168,6 +194,8 @@ int btrfs_find_root(struct btrfs_root *root, struct btrfs_key *search_key,
 out:
 	btrfs_free_path(path);
 =======
+=======
+>>>>>>> v3.18
 
 	if (root_item)
 		btrfs_read_root_item(l, slot, root_item);
@@ -175,6 +203,9 @@ out:
 		memcpy(root_key, &found_key, sizeof(found_key));
 out:
 	btrfs_release_path(path);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -214,9 +245,14 @@ int btrfs_update_root(struct btrfs_trans_handle *trans, struct btrfs_root
 	if (ret != 0) {
 		btrfs_print_leaf(root, path->nodes[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_CRIT "unable to update root key %llu %u %llu\n",
 		       (unsigned long long)key->objectid, key->type,
 		       (unsigned long long)key->offset);
+=======
+		btrfs_crit(root->fs_info, "unable to update root key %llu %u %llu",
+		       key->objectid, key->type, key->offset);
+>>>>>>> v3.18
 =======
 		btrfs_crit(root->fs_info, "unable to update root key %llu %u %llu",
 		       key->objectid, key->type, key->offset);
@@ -283,6 +319,7 @@ int btrfs_insert_root(struct btrfs_trans_handle *trans, struct btrfs_root *root,
 	return btrfs_insert_item(trans, root, key, item, sizeof(*item));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * at mount time we want to find all the old transaction snapshots that were in
@@ -366,6 +403,8 @@ err:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int btrfs_find_orphan_roots(struct btrfs_root *tree_root)
 {
 	struct extent_buffer *leaf;
@@ -376,11 +415,17 @@ int btrfs_find_orphan_roots(struct btrfs_root *tree_root)
 	int err = 0;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool can_recover = true;
 
 	if (tree_root->fs_info->sb->s_flags & MS_RDONLY)
 		can_recover = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	path = btrfs_alloc_path();
@@ -422,6 +467,7 @@ int btrfs_find_orphan_roots(struct btrfs_root *tree_root)
 		key.offset++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		root = btrfs_read_fs_root_no_name(tree_root->fs_info,
 						  &root_key);
 		if (!IS_ERR(root))
@@ -439,6 +485,8 @@ int btrfs_find_orphan_roots(struct btrfs_root *tree_root)
 			break;
 		}
 =======
+=======
+>>>>>>> v3.18
 		root = btrfs_read_fs_root(tree_root, &root_key);
 		err = PTR_ERR_OR_ZERO(root);
 		if (err && err != -ENOENT) {
@@ -485,6 +533,9 @@ int btrfs_find_orphan_roots(struct btrfs_root *tree_root)
 
 		if (btrfs_root_refs(&root->root_item) == 0)
 			btrfs_add_dead_root(root);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -499,8 +550,11 @@ int btrfs_del_root(struct btrfs_trans_handle *trans, struct btrfs_root *root,
 	struct btrfs_path *path;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct btrfs_root_item *ri;
 	struct extent_buffer *leaf;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -513,8 +567,11 @@ int btrfs_del_root(struct btrfs_trans_handle *trans, struct btrfs_root *root,
 
 	BUG_ON(ret != 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	leaf = path->nodes[0];
 	ri = btrfs_item_ptr(leaf, path->slots[0], struct btrfs_root_item);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -581,6 +638,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int btrfs_find_root_ref(struct btrfs_root *tree_root,
 		   struct btrfs_path *path,
 		   u64 root_id, u64 ref_id)
@@ -596,6 +654,8 @@ int btrfs_find_root_ref(struct btrfs_root *tree_root,
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -671,6 +731,7 @@ again:
 void btrfs_check_and_init_root_item(struct btrfs_root_item *root_item)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 inode_flags = le64_to_cpu(root_item->inode.flags);
 
 	if (!(inode_flags & BTRFS_INODE_ROOT_ITEM_INIT)) {
@@ -679,6 +740,8 @@ void btrfs_check_and_init_root_item(struct btrfs_root_item *root_item)
 		root_item->flags = 0;
 		root_item->byte_limit = 0;
 =======
+=======
+>>>>>>> v3.18
 	u64 inode_flags = btrfs_stack_inode_flags(&root_item->inode);
 
 	if (!(inode_flags & BTRFS_INODE_ROOT_ITEM_INIT)) {
@@ -686,6 +749,9 @@ void btrfs_check_and_init_root_item(struct btrfs_root_item *root_item)
 		btrfs_set_stack_inode_flags(&root_item->inode, inode_flags);
 		btrfs_set_root_flags(root_item, 0);
 		btrfs_set_root_limit(root_item, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -698,9 +764,15 @@ void btrfs_update_root_times(struct btrfs_trans_handle *trans,
 
 	spin_lock(&root->root_item_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	item->ctransid = cpu_to_le64(trans->transid);
 	item->ctime.sec = cpu_to_le64(ct.tv_sec);
 	item->ctime.nsec = cpu_to_le32(ct.tv_nsec);
+=======
+	btrfs_set_root_ctransid(item, trans->transid);
+	btrfs_set_stack_timespec_sec(&item->ctime, ct.tv_sec);
+	btrfs_set_stack_timespec_nsec(&item->ctime, ct.tv_nsec);
+>>>>>>> v3.18
 =======
 	btrfs_set_root_ctransid(item, trans->transid);
 	btrfs_set_stack_timespec_sec(&item->ctime, ct.tv_sec);

@@ -248,7 +248,11 @@ int ecryptfs_process_response(struct ecryptfs_daemon *daemon,
 	}
 	msg_size = (sizeof(*msg) + msg->data_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msg_ctx->msg = kmalloc(msg_size, GFP_KERNEL);
+=======
+	msg_ctx->msg = kmemdup(msg, msg_size, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	msg_ctx->msg = kmemdup(msg, msg_size, GFP_KERNEL);
 >>>>>>> v3.18
@@ -259,7 +263,10 @@ int ecryptfs_process_response(struct ecryptfs_daemon *daemon,
 		goto unlock;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(msg_ctx->msg, msg, msg_size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	msg_ctx->state = ECRYPTFS_MSG_CTX_STATE_DONE;
@@ -443,8 +450,12 @@ void ecryptfs_release_messaging(void)
 		for (i = 0; i < ecryptfs_message_buf_len; i++) {
 			mutex_lock(&ecryptfs_msg_ctx_arr[i].mux);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ecryptfs_msg_ctx_arr[i].msg)
 				kfree(ecryptfs_msg_ctx_arr[i].msg);
+=======
+			kfree(ecryptfs_msg_ctx_arr[i].msg);
+>>>>>>> v3.18
 =======
 			kfree(ecryptfs_msg_ctx_arr[i].msg);
 >>>>>>> v3.18

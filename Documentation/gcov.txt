@@ -51,11 +51,17 @@ Configure the kernel with:
         CONFIG_GCOV_KERNEL=y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 select the gcc's gcov format, default is autodetect based on gcc version:
 
         CONFIG_GCOV_FORMAT_AUTODETECT=y
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 and to get coverage data for the entire kernel:
 

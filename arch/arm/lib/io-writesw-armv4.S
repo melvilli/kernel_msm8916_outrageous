@@ -32,7 +32,11 @@
 ENTRY(__raw_writesw)
 		teq	r2, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moveq	pc, lr
+=======
+		reteq	lr
+>>>>>>> v3.18
 =======
 		reteq	lr
 >>>>>>> v3.18
@@ -101,7 +105,11 @@ ENTRY(__raw_writesw)
 3:		movne	ip, r3, lsr #8
 		strneh	ip, [r0]
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18

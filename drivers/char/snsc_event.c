@@ -293,8 +293,12 @@ scdrv_event_init(struct sysctl_data_s *scd)
 	/* hook event subchannel up to the system controller interrupt */
 	rv = request_irq(SGI_UART_VECTOR, scdrv_event_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 IRQF_SHARED | IRQF_DISABLED,
 			 "system controller events", event_sd);
+=======
+			 IRQF_SHARED, "system controller events", event_sd);
+>>>>>>> v3.18
 =======
 			 IRQF_SHARED, "system controller events", event_sd);
 >>>>>>> v3.18

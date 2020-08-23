@@ -19,6 +19,11 @@
 #include <linux/sched.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+#include <asm/switch_to.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 #include <asm/switch_to.h>
@@ -64,6 +69,7 @@ int is_valid_bugaddr(unsigned long addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __kprobes do_trap(struct pt_regs *regs,
 			      int si_signo, int si_code, char *str)
 {
@@ -74,10 +80,15 @@ static void __kprobes do_trap(struct pt_regs *regs,
 		return;
 
 =======
+=======
+>>>>>>> v3.18
 void do_report_trap(struct pt_regs *regs, int si_signo, int si_code, char *str)
 {
 	siginfo_t info;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (user_mode(regs)) {
 		info.si_signo = si_signo;
@@ -103,7 +114,10 @@ void do_report_trap(struct pt_regs *regs, int si_signo, int si_code, char *str)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __kprobes do_trap(struct pt_regs *regs, int si_signo, int si_code,
 			      char *str)
 {
@@ -113,6 +127,9 @@ static void __kprobes do_trap(struct pt_regs *regs, int si_signo, int si_code,
 	do_report_trap(regs, si_signo, si_code, str);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __kprobes do_per_trap(struct pt_regs *regs)
 {
@@ -203,6 +220,10 @@ void __kprobes illegal_op(struct pt_regs *regs)
         __u8 opcode[6];
 	__u16 __user *location;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int is_uprobe_insn = 0;
+>>>>>>> v3.18
 =======
 	int is_uprobe_insn = 0;
 >>>>>>> v3.18
@@ -223,11 +244,17 @@ void __kprobes illegal_op(struct pt_regs *regs)
 			} else
 				signal = SIGILL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_UPROBES
 		} else if (*((__u16 *) opcode) == UPROBE_SWBP_INSN) {
 			is_uprobe_insn = 1;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_MATHEMU
 		} else if (opcode[0] == 0xb3) {
@@ -255,12 +282,15 @@ void __kprobes illegal_op(struct pt_regs *regs)
 		} else
 			signal = SIGILL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		/*
 		 * If we get an illegal op in kernel mode, send it through the
 		 * kprobes notifier. If kprobes doesn't pick it up, SIGILL
 		 */
 =======
+=======
+>>>>>>> v3.18
 	}
 	/*
 	 * We got either an illegal op in kernel mode, or user space trapped
@@ -268,6 +298,9 @@ void __kprobes illegal_op(struct pt_regs *regs)
 	 * it up. If not, SIGILL.
 	 */
 	if (is_uprobe_insn || !user_mode(regs)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (notify_die(DIE_BPT, "bpt", regs, 0,
 			       3, SIGTRAP) != NOTIFY_STOP)
@@ -338,7 +371,10 @@ DO_ERROR_INFO(specification_exception, SIGILL, ILL_ILLOPN,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_64BIT
 int alloc_vector_registers(struct task_struct *tsk)
 {
@@ -407,6 +443,9 @@ static int __init disable_vector_extension(char *str)
 __setup("novx", disable_vector_extension);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void data_exception(struct pt_regs *regs)
 {
@@ -474,7 +513,10 @@ void data_exception(struct pt_regs *regs)
         }
 #endif 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_64BIT
 	/* Check for vector register enablement */
 	if (MACHINE_HAS_VX && !current->thread.vxrs &&
@@ -487,6 +529,9 @@ void data_exception(struct pt_regs *regs)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (current->thread.fp_regs.fpc & FPC_DXC_MASK)
 		signal = SIGFPE;

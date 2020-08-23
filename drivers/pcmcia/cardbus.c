@@ -71,6 +71,11 @@ int __ref cb_alloc(struct pcmcia_socket *s)
 	unsigned int max, pass;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 
@@ -82,8 +87,12 @@ int __ref cb_alloc(struct pcmcia_socket *s)
 	for (pass = 0; pass < 2; pass++)
 		list_for_each_entry(dev, &bus->devices, bus_list)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (dev->hdr_type == PCI_HEADER_TYPE_BRIDGE ||
 			    dev->hdr_type == PCI_HEADER_TYPE_CARDBUS)
+=======
+			if (pci_is_bridge(dev))
+>>>>>>> v3.18
 =======
 			if (pci_is_bridge(dev))
 >>>>>>> v3.18
@@ -101,9 +110,15 @@ int __ref cb_alloc(struct pcmcia_socket *s)
 		s->tune_bridge(s, bus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_enable_bridges(bus);
 	pci_bus_add_devices(bus);
 
+=======
+	pci_bus_add_devices(bus);
+
+	pci_unlock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pci_bus_add_devices(bus);
 
@@ -132,14 +147,20 @@ void cb_free(struct pcmcia_socket *s)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_safe(dev, tmp, &bus->devices, bus_list)
 		pci_stop_and_remove_bus_device(dev);
 =======
+=======
+>>>>>>> v3.18
 	pci_lock_rescan_remove();
 
 	list_for_each_entry_safe(dev, tmp, &bus->devices, bus_list)
 		pci_stop_and_remove_bus_device(dev);
 
 	pci_unlock_rescan_remove();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

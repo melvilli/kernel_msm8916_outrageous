@@ -102,9 +102,12 @@ static inline void send_pfow_command(struct map_info *map,
 {
 	int bits_per_chip = map_bankwidth(map) * 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int chipnum;
 	struct lpddr_private *lpddr = map->fldrv_priv;
 	chipnum = adr >> lpddr->chipshift;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

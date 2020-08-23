@@ -15,6 +15,7 @@
 #include "zfcp_qdio.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QBUFF_PER_PAGE		(PAGE_SIZE / sizeof(struct qdio_buffer))
 
 static bool enable_multibuffer;
@@ -35,6 +36,11 @@ static int zfcp_qdio_buffers_enqueue(struct qdio_buffer **sbal)
 			sbal[pos] = sbal[pos - 1] + 1;
 	return 0;
 }
+=======
+static bool enable_multibuffer = 1;
+module_param_named(datarouter, enable_multibuffer, bool, 0400);
+MODULE_PARM_DESC(datarouter, "Enable hardware data router support (default on)");
+>>>>>>> v3.18
 =======
 static bool enable_multibuffer = 1;
 module_param_named(datarouter, enable_multibuffer, bool, 0400);
@@ -333,6 +339,7 @@ static int zfcp_qdio_allocate(struct zfcp_qdio *qdio)
 {
 	struct qdio_initialize init_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (zfcp_qdio_buffers_enqueue(qdio->req_q) ||
 	    zfcp_qdio_buffers_enqueue(qdio->res_q))
@@ -343,6 +350,8 @@ static int zfcp_qdio_allocate(struct zfcp_qdio *qdio)
 
 	return qdio_allocate(&init_data);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = qdio_alloc_buffers(qdio->req_q, QDIO_MAX_BUFFERS_PER_Q);
@@ -367,6 +376,9 @@ free_res_q:
 free_req_q:
 	qdio_free_buffers(qdio->req_q, QDIO_MAX_BUFFERS_PER_Q);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -482,8 +494,11 @@ failed_establish:
 void zfcp_qdio_destroy(struct zfcp_qdio *qdio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int p;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!qdio)
@@ -493,11 +508,16 @@ void zfcp_qdio_destroy(struct zfcp_qdio *qdio)
 		qdio_free(qdio->adapter->ccw_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (p = 0; p < QDIO_MAX_BUFFERS_PER_Q; p += QBUFF_PER_PAGE) {
 		free_page((unsigned long) qdio->req_q[p]);
 		free_page((unsigned long) qdio->res_q[p]);
 	}
 
+=======
+	qdio_free_buffers(qdio->req_q, QDIO_MAX_BUFFERS_PER_Q);
+	qdio_free_buffers(qdio->res_q, QDIO_MAX_BUFFERS_PER_Q);
+>>>>>>> v3.18
 =======
 	qdio_free_buffers(qdio->req_q, QDIO_MAX_BUFFERS_PER_Q);
 	qdio_free_buffers(qdio->res_q, QDIO_MAX_BUFFERS_PER_Q);
@@ -517,7 +537,11 @@ int zfcp_qdio_setup(struct zfcp_adapter *adapter)
 
 	if (zfcp_qdio_allocate(qdio)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		zfcp_qdio_destroy(qdio);
+=======
+		kfree(qdio);
+>>>>>>> v3.18
 =======
 		kfree(qdio);
 >>>>>>> v3.18

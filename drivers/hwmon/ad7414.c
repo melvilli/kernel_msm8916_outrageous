@@ -40,7 +40,11 @@ static u8 AD7414_REG_LIMIT[] = { AD7414_REG_T_HIGH, AD7414_REG_T_LOW };
 
 struct ad7414_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device		*hwmon_dev;
+=======
+	struct i2c_client	*client;
+>>>>>>> v3.18
 =======
 	struct i2c_client	*client;
 >>>>>>> v3.18
@@ -77,8 +81,13 @@ static inline int ad7414_write(struct i2c_client *client, u8 reg, u8 value)
 static struct ad7414_data *ad7414_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ad7414_data *data = i2c_get_clientdata(client);
+=======
+	struct ad7414_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct ad7414_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -137,8 +146,13 @@ static ssize_t set_max_min(struct device *dev,
 			   const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ad7414_data *data = i2c_get_clientdata(client);
+=======
+	struct ad7414_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct ad7414_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -179,7 +193,11 @@ static SENSOR_DEVICE_ATTR(temp1_min_alarm, S_IRUGO, show_alarm, NULL, 3);
 static SENSOR_DEVICE_ATTR(temp1_max_alarm, S_IRUGO, show_alarm, NULL, 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *ad7414_attributes[] = {
+=======
+static struct attribute *ad7414_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *ad7414_attrs[] = {
 >>>>>>> v3.18
@@ -192,9 +210,13 @@ static struct attribute *ad7414_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group ad7414_group = {
 	.attrs = ad7414_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(ad7414);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(ad7414);
 >>>>>>> v3.18
@@ -203,20 +225,27 @@ static int ad7414_probe(struct i2c_client *client,
 			const struct i2c_device_id *dev_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ad7414_data *data;
 	int conf;
 	int err;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct ad7414_data *data;
 	struct device *hwmon_dev;
 	int conf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_BYTE_DATA |
 				     I2C_FUNC_SMBUS_READ_WORD_DATA))
 		return -EOPNOTSUPP;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	data = devm_kzalloc(&client->dev, sizeof(struct ad7414_data),
 			    GFP_KERNEL);
@@ -225,11 +254,16 @@ static int ad7414_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, data);
 =======
+=======
+>>>>>>> v3.18
 	data = devm_kzalloc(dev, sizeof(struct ad7414_data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
 
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_init(&data->lock);
 
@@ -239,8 +273,12 @@ static int ad7414_probe(struct i2c_client *client,
 	conf = i2c_smbus_read_byte_data(client, AD7414_REG_CONF);
 	if (conf < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_warn(&client->dev,
 			 "ad7414_probe unable to read config register.\n");
+=======
+		dev_warn(dev, "ad7414_probe unable to read config register.\n");
+>>>>>>> v3.18
 =======
 		dev_warn(dev, "ad7414_probe unable to read config register.\n");
 >>>>>>> v3.18
@@ -249,6 +287,7 @@ static int ad7414_probe(struct i2c_client *client,
 		i2c_smbus_write_byte_data(client, AD7414_REG_CONF, conf);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register sysfs hooks */
 	err = sysfs_create_group(&client->dev.kobj, &ad7414_group);
@@ -276,10 +315,15 @@ static int ad7414_remove(struct i2c_client *client)
 	sysfs_remove_group(&client->dev.kobj, &ad7414_group);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	hwmon_dev = devm_hwmon_device_register_with_groups(dev,
 							   client->name,
 							   data, ad7414_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -295,7 +339,10 @@ static struct i2c_driver ad7414_driver = {
 	},
 	.probe	= ad7414_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= ad7414_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = ad7414_id,

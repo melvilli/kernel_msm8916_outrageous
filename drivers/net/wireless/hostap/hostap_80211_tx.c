@@ -1,6 +1,10 @@
 #include <linux/slab.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/etherdevice.h>
 >>>>>>> v3.18
@@ -108,8 +112,12 @@ netdev_tx_t hostap_data_start_xmit(struct sk_buff *skb,
 		} else if (local->iw_mode == IW_MODE_INFRA &&
 			   (local->wds_type & HOSTAP_WDS_AP_CLIENT) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   memcmp(skb->data + ETH_ALEN, dev->dev_addr,
 				  ETH_ALEN) != 0) {
+=======
+			   !ether_addr_equal(skb->data + ETH_ALEN, dev->dev_addr)) {
+>>>>>>> v3.18
 =======
 			   !ether_addr_equal(skb->data + ETH_ALEN, dev->dev_addr)) {
 >>>>>>> v3.18

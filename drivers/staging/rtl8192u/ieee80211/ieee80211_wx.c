@@ -40,6 +40,7 @@ struct modes_unit {
 	int mode_size;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct modes_unit ieee80211_modes[] = {
 	{"a",1},
 	{"b",1},
@@ -48,6 +49,8 @@ struct modes_unit ieee80211_modes[] = {
 	{"N-24G",5},
 	{"N-5G",4},
 =======
+=======
+>>>>>>> v3.18
 static struct modes_unit ieee80211_modes[] = {
 	{"a", 1},
 	{"b", 1},
@@ -55,6 +58,9 @@ static struct modes_unit ieee80211_modes[] = {
 	{"?", 1},
 	{"N-24G", 5},
 	{"N-5G", 4},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -205,7 +211,11 @@ static inline char *rtl819x_translate_scan(struct ieee80211_device *ieee,
 	if (iwe.u.data.length)
 	    start = iwe_stream_add_point(info, start, stop, &iwe, custom);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if (WIRELESS_EXT < 18)
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -239,6 +249,7 @@ static inline char *rtl819x_translate_scan(struct ieee80211_device *ieee,
 		start = iwe_stream_add_point(info, start, stop, &iwe, buf);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 	memset(&iwe, 0, sizeof(iwe));
 	if (network->wpa_ie_len)
@@ -259,6 +270,8 @@ static inline char *rtl819x_translate_scan(struct ieee80211_device *ieee,
 		start = iwe_stream_add_point(info, start, stop, &iwe, buf);
 	}
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -323,6 +336,10 @@ int ieee80211_wx_get_scan(struct ieee80211_device *ieee,
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ieee80211_wx_get_scan);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(ieee80211_wx_get_scan);
 >>>>>>> v3.18
@@ -501,6 +518,10 @@ int ieee80211_wx_set_encode(struct ieee80211_device *ieee,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ieee80211_wx_set_encode);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(ieee80211_wx_set_encode);
 >>>>>>> v3.18
@@ -547,7 +568,12 @@ int ieee80211_wx_get_encode(struct ieee80211_device *ieee,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if (WIRELESS_EXT >= 18)
+=======
+EXPORT_SYMBOL(ieee80211_wx_get_encode);
+
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(ieee80211_wx_get_encode);
 
@@ -726,6 +752,10 @@ done:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ieee80211_wx_set_encode_ext);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(ieee80211_wx_set_encode_ext);
 >>>>>>> v3.18
@@ -785,6 +815,10 @@ int ieee80211_wx_get_encode_ext(struct ieee80211_device *ieee,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ieee80211_wx_get_encode_ext);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(ieee80211_wx_get_encode_ext);
 >>>>>>> v3.18
@@ -805,6 +839,10 @@ int ieee80211_wx_set_mlme(struct ieee80211_device *ieee,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(ieee80211_wx_set_mlme);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(ieee80211_wx_set_mlme);
 >>>>>>> v3.18
@@ -835,7 +873,11 @@ int ieee80211_wx_set_auth(struct ieee80211_device *ieee,
 
 	case IW_AUTH_80211_AUTH_ALG:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//printk("======>%s():data->value is %d\n",__FUNCTION__,data->value);
+=======
+		//printk("======>%s():data->value is %d\n",__func__,data->value);
+>>>>>>> v3.18
 =======
 		//printk("======>%s():data->value is %d\n",__func__,data->value);
 >>>>>>> v3.18
@@ -875,7 +917,12 @@ int ieee80211_wx_set_auth(struct ieee80211_device *ieee,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+EXPORT_SYMBOL(ieee80211_wx_set_auth);
+
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(ieee80211_wx_set_auth);
 
@@ -914,6 +961,7 @@ int ieee80211_wx_set_gen_ie(struct ieee80211_device *ieee, u8 *ie, size_t len)
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(ieee80211_wx_set_gen_ie);
 #if (WIRELESS_EXT >= 18)
@@ -925,6 +973,9 @@ EXPORT_SYMBOL(ieee80211_wx_get_encode_ext);
 EXPORT_SYMBOL(ieee80211_wx_get_scan);
 EXPORT_SYMBOL(ieee80211_wx_set_encode);
 EXPORT_SYMBOL(ieee80211_wx_get_encode);
+=======
+EXPORT_SYMBOL(ieee80211_wx_set_gen_ie);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(ieee80211_wx_set_gen_ie);
 >>>>>>> v3.18

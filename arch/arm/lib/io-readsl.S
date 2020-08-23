@@ -13,7 +13,11 @@
 ENTRY(__raw_readsl)
 		teq	r2, #0		@ do we have to check for the zero len?
 <<<<<<< HEAD
+<<<<<<< HEAD
 		moveq	pc, lr
+=======
+		reteq	lr
+>>>>>>> v3.18
 =======
 		reteq	lr
 >>>>>>> v3.18
@@ -38,7 +42,11 @@ ENTRY(__raw_readsl)
 		ldrne	r3, [r0, #0]
 		strne	r3, [r1, #0]
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -56,9 +64,15 @@ ENTRY(__raw_readsl)
 
 4:		subs	r2, r2, #1
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	ip, r3, pull #24
 		ldrne	r3, [r0]
 		orrne	ip, ip, r3, push #8
+=======
+		mov	ip, r3, lspull #24
+		ldrne	r3, [r0]
+		orrne	ip, ip, r3, lspush #8
+>>>>>>> v3.18
 =======
 		mov	ip, r3, lspull #24
 		ldrne	r3, [r0]
@@ -70,9 +84,15 @@ ENTRY(__raw_readsl)
 
 5:		subs	r2, r2, #1
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	ip, r3, pull #16
 		ldrne	r3, [r0]
 		orrne	ip, ip, r3, push #16
+=======
+		mov	ip, r3, lspull #16
+		ldrne	r3, [r0]
+		orrne	ip, ip, r3, lspush #16
+>>>>>>> v3.18
 =======
 		mov	ip, r3, lspull #16
 		ldrne	r3, [r0]
@@ -84,9 +104,15 @@ ENTRY(__raw_readsl)
 
 6:		subs	r2, r2, #1
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	ip, r3, pull #8
 		ldrne	r3, [r0]
 		orrne	ip, ip, r3, push #24
+=======
+		mov	ip, r3, lspull #8
+		ldrne	r3, [r0]
+		orrne	ip, ip, r3, lspush #24
+>>>>>>> v3.18
 =======
 		mov	ip, r3, lspull #8
 		ldrne	r3, [r0]
@@ -102,7 +128,11 @@ ENTRY(__raw_readsl)
 8:		mov	r3, ip, get_byte_0
 		strb	r3, [r1, #0]
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18

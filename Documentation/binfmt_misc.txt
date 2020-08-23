@@ -16,6 +16,7 @@ First you must mount binfmt_misc:
 
 To actually register a new binary type, you have to set up a string looking like
 <<<<<<< HEAD
+<<<<<<< HEAD
 :name:type:offset:magic:mask:interpreter:flags (where you can choose the ':' upon
 your needs) and echo it to /proc/sys/fs/binfmt_misc/register.
 Here is what the fields mean:
@@ -43,6 +44,8 @@ Here is what the fields mean:
             included, binfmt_misc will add an argument to the argument vector for
             this purpose, thus preserving the original argv[0].
 =======
+=======
+>>>>>>> v3.18
 :name:type:offset:magic:mask:interpreter:flags (where you can choose the ':'
 upon your needs) and echo it to /proc/sys/fs/binfmt_misc/register.
 
@@ -80,15 +83,24 @@ Here is what the fields mean:
             argv[] set to ["/bin/foo", "/usr/local/bin/blah", "blah"].  The
             interp has to be aware of this so it can execute /usr/local/bin/blah
             with argv[] set to ["blah"].
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       'O' - open-binary. Legacy behavior of binfmt_misc is to pass the full path
             of the binary to the interpreter as an argument. When this flag is
             included, binfmt_misc will open the file for reading and pass its
             descriptor as an argument, instead of the full path, thus allowing
 <<<<<<< HEAD
+<<<<<<< HEAD
             the interpreter to execute non-readable binaries. This feature should
             be used with care - the interpreter has to be trusted not to emit
             the contents of the non-readable binary.
+=======
+            the interpreter to execute non-readable binaries. This feature
+            should be used with care - the interpreter has to be trusted not to
+            emit the contents of the non-readable binary.
+>>>>>>> v3.18
 =======
             the interpreter to execute non-readable binaries. This feature
             should be used with care - the interpreter has to be trusted not to
@@ -105,7 +117,11 @@ Here is what the fields mean:
 
 There are some restrictions:
 <<<<<<< HEAD
+<<<<<<< HEAD
  - the whole register string may not exceed 255 characters
+=======
+ - the whole register string may not exceed 1920 characters
+>>>>>>> v3.18
 =======
  - the whole register string may not exceed 1920 characters
 >>>>>>> v3.18
@@ -161,9 +177,12 @@ cause unexpected behaviour and can be a security hazard.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 There is a web page about binfmt_misc at
 http://www.tat.physik.uni-tuebingen.de
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 Richard Günther <rguenth@tat.physik.uni-tuebingen.de>

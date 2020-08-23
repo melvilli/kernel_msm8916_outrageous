@@ -24,7 +24,11 @@ int oz_usb_control_req(void *hpd, u8 req_id, struct usb_ctrlrequest *setup,
 		const u8 *data, int data_len);
 int oz_usb_get_desc_req(void *hpd, u8 req_id, u8 req_type, u8 desc_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 index, u16 windex, int offset, int len);
+=======
+	u8 index, __le16 windex, int offset, int len);
+>>>>>>> v3.18
 =======
 	u8 index, __le16 windex, int offset, int len);
 >>>>>>> v3.18

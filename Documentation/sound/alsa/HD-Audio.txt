@@ -455,6 +455,11 @@ The generic parser supports the following hints:
 - primary_hp (bool): probe headphone jacks as the primary outputs;
   default true
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- multi_io (bool): try probing multi-I/O config (e.g. shared
+  line-in/surround, mic/clfe jacks)
+>>>>>>> v3.18
 =======
 - multi_io (bool): try probing multi-I/O config (e.g. shared
   line-in/surround, mic/clfe jacks)

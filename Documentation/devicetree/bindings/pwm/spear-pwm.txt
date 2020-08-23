@@ -6,9 +6,14 @@ Required properties:
   - "st,spear1340-pwm"
 - reg: physical base address and length of the controller's registers
 <<<<<<< HEAD
+<<<<<<< HEAD
 - #pwm-cells: number of cells used to specify PWM which is fixed to 2 on
   SPEAr. The first cell specifies the per-chip index of the PWM to use and
   the second cell is the period in nanoseconds.
+=======
+- #pwm-cells: should be 2. See pwm.txt in this directory for a description of
+  the cells format.
+>>>>>>> v3.18
 =======
 - #pwm-cells: should be 2. See pwm.txt in this directory for a description of
   the cells format.

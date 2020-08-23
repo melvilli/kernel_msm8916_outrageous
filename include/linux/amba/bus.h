@@ -22,7 +22,11 @@
 #include <linux/regulator/consumer.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AMBA_NR_IRQS	2
+=======
+#define AMBA_NR_IRQS	9
+>>>>>>> v3.18
 =======
 #define AMBA_NR_IRQS	9
 >>>>>>> v3.18
@@ -35,7 +39,10 @@ struct amba_device {
 	struct resource		res;
 	struct clk		*pclk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64			dma_mask;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int		periphid;
@@ -53,10 +60,13 @@ struct amba_driver {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum amba_vendor {
 	AMBA_VENDOR_ARM = 0x41,
 	AMBA_VENDOR_ST = 0x80,
 =======
+=======
+>>>>>>> v3.18
 /*
  * Constants for the designer field of the Peripheral ID register. When bit 7
  * is set to '1', bits [6:0] should be the JEP106 manufacturer identity code.
@@ -66,6 +76,9 @@ enum amba_vendor {
 	AMBA_VENDOR_ST = 0x80,
 	AMBA_VENDOR_QCOM = 0x51,
 	AMBA_VENDOR_LSI = 0xb6,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -151,7 +164,10 @@ struct amba_device name##_device = {				\
 	.dev = __AMBA_DEV(busid, data, ~0ULL),			\
 	.res = DEFINE_RES_MEM(base, SZ_4K),			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dma_mask = ~0ULL,					\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.irq = irqs,						\

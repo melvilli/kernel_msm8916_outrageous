@@ -24,6 +24,7 @@
 #define PREFIX "ACPI: "
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int init_acpi_device_notify(void);
 int acpi_scan_init(void);
 #ifdef	CONFIG_ACPI_PCI_SLOT
@@ -51,6 +52,8 @@ void acpi_memory_hotplug_init(void);
 #else
 static inline void acpi_memory_hotplug_init(void) {}
 =======
+=======
+>>>>>>> v3.18
 acpi_status acpi_os_initialize1(void);
 int init_acpi_device_notify(void);
 int acpi_scan_init(void);
@@ -73,6 +76,9 @@ static inline void register_dock_dependent_device(struct acpi_device *adev,
 						  acpi_handle dshandle) {}
 static inline int dock_notify(struct acpi_device *adev, u32 event) { return -ENODEV; }
 static inline void acpi_dock_add(struct acpi_device *adev) {}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #ifdef CONFIG_X86
@@ -82,6 +88,11 @@ static inline void acpi_cmos_rtc_init(void) {}
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool acpi_force_hot_remove;
+
+>>>>>>> v3.18
 =======
 extern bool acpi_force_hot_remove;
 
@@ -99,18 +110,24 @@ int acpi_debugfs_init(void);
 static inline void acpi_debugfs_init(void) { return; }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_INTEL_LPSS
 void acpi_lpss_init(void);
 #else
 static inline void acpi_lpss_init(void) {}
 #endif
 =======
+=======
+>>>>>>> v3.18
 void acpi_lpss_init(void);
 
 acpi_status acpi_hotplug_schedule(struct acpi_device *adev, u32 src);
 bool acpi_queue_hotplug_work(struct work_struct *work);
 void acpi_device_hotplug(struct acpi_device *adev, u32 src);
 bool acpi_scan_is_offline(struct acpi_device *adev, bool uevent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* --------------------------------------------------------------------------
@@ -126,6 +143,11 @@ void acpi_init_device_object(struct acpi_device *device, acpi_handle handle,
 void acpi_device_add_finalize(struct acpi_device *device);
 void acpi_free_pnp_ids(struct acpi_device_pnp *pnp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool acpi_device_is_present(struct acpi_device *adev);
+bool acpi_device_is_battery(struct acpi_device *adev);
+>>>>>>> v3.18
 =======
 bool acpi_device_is_present(struct acpi_device *adev);
 bool acpi_device_is_battery(struct acpi_device *adev);
@@ -149,14 +171,20 @@ int acpi_power_transition(struct acpi_device *device, int state);
 
 int acpi_wakeup_device_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void acpi_early_processor_set_pdc(void);
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_ARCH_MIGHT_HAVE_ACPI_PDC
 void acpi_early_processor_set_pdc(void);
 #else
 static inline void acpi_early_processor_set_pdc(void) {}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* --------------------------------------------------------------------------
@@ -179,11 +207,17 @@ struct acpi_ec {
 extern struct acpi_ec *first_ec;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* If we find an EC via the ECDT, we need to keep a ptr to its context */
 /* External interfaces use first EC only, so remember */
 typedef int (*acpi_ec_query_func) (void *data);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int acpi_ec_init(void);
 int acpi_ec_ecdt_probe(void);
@@ -192,12 +226,18 @@ void acpi_ec_block_transactions(void);
 void acpi_ec_unblock_transactions(void);
 void acpi_ec_unblock_transactions_early(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int acpi_ec_add_query_handler(struct acpi_ec *ec, u8 query_bit,
 			      acpi_handle handle, acpi_ec_query_func func,
 			      void *data);
 void acpi_ec_remove_query_handler(struct acpi_ec *ec, u8 query_bit);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*--------------------------------------------------------------------------
@@ -221,6 +261,7 @@ static inline void suspend_nvs_restore(void) {}
 
 /*--------------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 				Platform bus support
   -------------------------------------------------------------------------- */
 struct platform_device;
@@ -228,11 +269,16 @@ struct platform_device;
 int acpi_create_platform_device(struct acpi_device *adev,
 				const struct acpi_device_id *id);
 =======
+=======
+>>>>>>> v3.18
 					Video
   -------------------------------------------------------------------------- */
 #if defined(CONFIG_ACPI_VIDEO) || defined(CONFIG_ACPI_VIDEO_MODULE)
 bool acpi_osi_is_win8(void);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ACPI_INTERNAL_H_ */

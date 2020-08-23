@@ -102,7 +102,11 @@ static void *ct_seq_start(struct seq_file *seq, loff_t *pos)
 	struct ct_iter_state *st = seq->private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st->time_now = ktime_to_ns(ktime_get_real());
+=======
+	st->time_now = ktime_get_real_ns();
+>>>>>>> v3.18
 =======
 	st->time_now = ktime_get_real_ns();
 >>>>>>> v3.18
@@ -413,7 +417,11 @@ static int log_invalid_proto_max = 255;
 static struct ctl_table_header *nf_ct_netfilter_header;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table nf_ct_sysctl_table[] = {
+=======
+static struct ctl_table nf_ct_sysctl_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table nf_ct_sysctl_table[] = {
 >>>>>>> v3.18
@@ -467,7 +475,11 @@ static struct ctl_table nf_ct_sysctl_table[] = {
 #define NET_NF_CONNTRACK_MAX 2089
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table nf_ct_netfilter_table[] = {
+=======
+static struct ctl_table nf_ct_netfilter_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table nf_ct_netfilter_table[] = {
 >>>>>>> v3.18

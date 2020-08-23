@@ -11,8 +11,14 @@ Required properties:
   gpio1 and gpio_mux. There're only one gpio interrupt in arch-mmp,
   gpio_mux.
 <<<<<<< HEAD
+<<<<<<< HEAD
 - interrupt-name : Should be the name of irq resource. Each interrupt
   binds its interrupt-name.
+=======
+- interrupt-names : Should be the names of irq resources. Each interrupt
+  uses its own interrupt name, so there should be as many interrupt names
+  as referenced interrups.
+>>>>>>> v3.18
 =======
 - interrupt-names : Should be the names of irq resources. Each interrupt
   uses its own interrupt name, so there should be as many interrupt names
@@ -25,7 +31,11 @@ Required properties:
 - #gpio-cells : Should be one.  It is the pin number.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Example:
+=======
+Example for a MMP platform:
+>>>>>>> v3.18
 =======
 Example for a MMP platform:
 >>>>>>> v3.18
@@ -35,7 +45,11 @@ Example for a MMP platform:
 		reg = <0xd4019000 0x1000>;
 		interrupts = <49>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupt-name = "gpio_mux";
+=======
+		interrupt-names = "gpio_mux";
+>>>>>>> v3.18
 =======
 		interrupt-names = "gpio_mux";
 >>>>>>> v3.18
@@ -46,7 +60,10 @@ Example for a MMP platform:
       };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Example for a PXA3xx platform:
 
 	gpio: gpio@40e00000 {
@@ -60,6 +77,9 @@ Example for a PXA3xx platform:
 		#interrupt-cells = <0x2>;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 * Marvell Orion GPIO Controller
 

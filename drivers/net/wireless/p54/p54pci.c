@@ -14,7 +14,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/pci.h>
@@ -37,7 +40,11 @@ MODULE_ALIAS("prism54pci");
 MODULE_FIRMWARE("isl3886pci");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(p54p_table) = {
+=======
+static const struct pci_device_id p54p_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id p54p_table[] = {
 >>>>>>> v3.18
@@ -639,7 +646,10 @@ static int p54p_probe(struct pci_dev *pdev,
 
  err_free_dev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	p54_free_common(dev);

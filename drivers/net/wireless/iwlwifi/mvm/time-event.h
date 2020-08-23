@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -134,11 +144,14 @@
  * @min_duration: will start a new session if the current session will end
  *	in less than min_duration.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * This function can be used to start a session protection which means that the
  * fw will stay on the channel for %duration_ms milliseconds. This function
  * will block (sleep) until the session starts. This function can also be used
 =======
+=======
+>>>>>>> v3.18
  * @max_delay: maximum delay before starting the time event (in TU)
  * @wait_for_notif: true if it is required that a time event notification be
  *	waited for (that the time event has been scheduled before returning)
@@ -146,6 +159,9 @@
  * This function can be used to start a session protection which means that the
  * fw will stay on the channel for %duration_ms milliseconds. This function
  * can block (sleep) until the session starts. This function can also be used
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * to extend a currently running session.
  * This function is meant to be used for BSS association for example, where we
@@ -154,7 +170,12 @@
 void iwl_mvm_protect_session(struct iwl_mvm *mvm,
 			     struct ieee80211_vif *vif,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     u32 duration, u32 min_duration);
+=======
+			     u32 duration, u32 min_duration,
+			     u32 max_delay, bool wait_for_notif);
+>>>>>>> v3.18
 =======
 			     u32 duration, u32 min_duration,
 			     u32 max_delay, bool wait_for_notif);
@@ -238,7 +259,10 @@ void iwl_mvm_te_clear_data(struct iwl_mvm *mvm,
 void iwl_mvm_roc_done_wk(struct work_struct *wk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * iwl_mvm_schedule_csa_period - request channel switch absence period
  * @mvm: the mvm component
@@ -268,5 +292,8 @@ iwl_mvm_te_scheduled(struct iwl_mvm_time_event_data *te_data)
 	return !!te_data->uid;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __time_event_h__ */

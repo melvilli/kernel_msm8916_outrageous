@@ -38,6 +38,7 @@ static ssize_t read_file_tgt_int_stats(struct file *file, char __user *user_buf,
 	ath9k_htc_ps_restore(priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len += snprintf(buf + len, sizeof(buf) - len,
 			"%20s : %10u\n", "RX",
 			be32_to_cpu(cmd_rsp.rx));
@@ -62,6 +63,8 @@ static ssize_t read_file_tgt_int_stats(struct file *file, char __user *user_buf,
 			"%20s : %10u\n", "CST",
 			be32_to_cpu(cmd_rsp.cst));
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "%20s : %10u\n", "RX",
 			 be32_to_cpu(cmd_rsp.rx));
@@ -85,6 +88,9 @@ static ssize_t read_file_tgt_int_stats(struct file *file, char __user *user_buf,
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "%20s : %10u\n", "CST",
 			 be32_to_cpu(cmd_rsp.cst));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (len > sizeof(buf))
@@ -122,6 +128,7 @@ static ssize_t read_file_tgt_tx_stats(struct file *file, char __user *user_buf,
 	ath9k_htc_ps_restore(priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len += snprintf(buf + len, sizeof(buf) - len,
 			"%20s : %10u\n", "Xretries",
 			be32_to_cpu(cmd_rsp.xretries));
@@ -158,6 +165,8 @@ static ssize_t read_file_tgt_tx_stats(struct file *file, char __user *user_buf,
 			"%20s : %10u\n", "NoBuf",
 			be32_to_cpu(cmd_rsp.nobuf));
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "%20s : %10u\n", "Xretries",
 			 be32_to_cpu(cmd_rsp.xretries));
@@ -193,6 +202,9 @@ static ssize_t read_file_tgt_tx_stats(struct file *file, char __user *user_buf,
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "%20s : %10u\n", "NoBuf",
 			 be32_to_cpu(cmd_rsp.nobuf));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (len > sizeof(buf))
@@ -230,6 +242,7 @@ static ssize_t read_file_tgt_rx_stats(struct file *file, char __user *user_buf,
 	ath9k_htc_ps_restore(priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len += snprintf(buf + len, sizeof(buf) - len,
 			"%20s : %10u\n", "NoBuf",
 			be32_to_cpu(cmd_rsp.nobuf));
@@ -242,6 +255,8 @@ static ssize_t read_file_tgt_rx_stats(struct file *file, char __user *user_buf,
 			"%20s : %10u\n", "HostDone",
 			be32_to_cpu(cmd_rsp.host_done));
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "%20s : %10u\n", "NoBuf",
 			 be32_to_cpu(cmd_rsp.nobuf));
@@ -253,6 +268,9 @@ static ssize_t read_file_tgt_rx_stats(struct file *file, char __user *user_buf,
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "%20s : %10u\n", "HostDone",
 			 be32_to_cpu(cmd_rsp.host_done));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (len > sizeof(buf))
@@ -275,6 +293,7 @@ static ssize_t read_file_xmit(struct file *file, char __user *user_buf,
 	char buf[512];
 	unsigned int len = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	len += snprintf(buf + len, sizeof(buf) - len,
 			"%20s : %10u\n", "Buffers queued",
@@ -308,6 +327,8 @@ static ssize_t read_file_xmit(struct file *file, char __user *user_buf,
 			"%20s : %10u\n", "VO queued",
 			priv->debug.tx_stats.queue_stats[IEEE80211_AC_VO]);
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "%20s : %10u\n", "Buffers queued",
 			 priv->debug.tx_stats.buf_queued);
@@ -339,6 +360,9 @@ static ssize_t read_file_xmit(struct file *file, char __user *user_buf,
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "%20s : %10u\n", "VO queued",
 			 priv->debug.tx_stats.queue_stats[IEEE80211_AC_VO]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (len > sizeof(buf))
@@ -355,6 +379,7 @@ static const struct file_operations fops_xmit = {
 };
 
 void ath9k_htc_err_stat_rx(struct ath9k_htc_priv *priv,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			   struct ath_htc_rx_status *rxs)
 {
@@ -390,6 +415,8 @@ static ssize_t read_file_recv(struct file *file, char __user *user_buf,
 			priv->debug.rx_stats.err_phy_stats[p]);
 
 =======
+=======
+>>>>>>> v3.18
 			     struct ath_rx_status *rs)
 {
 	ath9k_cmn_debug_stat_rx(&priv->debug.rx_stats, rs);
@@ -398,6 +425,9 @@ static ssize_t read_file_recv(struct file *file, char __user *user_buf,
 static ssize_t read_file_skb_rx(struct file *file, char __user *user_buf,
 			      size_t count, loff_t *ppos)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct ath9k_htc_priv *priv = file->private_data;
 	char *buf;
@@ -408,6 +438,7 @@ static ssize_t read_file_skb_rx(struct file *file, char __user *user_buf,
 	if (buf == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	len += snprintf(buf + len, size - len,
 			"%20s : %10u\n", "SKBs allocated",
@@ -469,6 +500,8 @@ static ssize_t read_file_skb_rx(struct file *file, char __user *user_buf,
 	PHY_ERR("HT-LENGTH", ATH9K_PHYERR_HT_LENGTH_ILLEGAL);
 	PHY_ERR("HT-RATE", ATH9K_PHYERR_HT_RATE_ILLEGAL);
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, size - len,
 			 "%20s : %10u\n", "SKBs allocated",
 			 priv->debug.skbrx_stats.skb_allocated);
@@ -478,6 +511,9 @@ static ssize_t read_file_skb_rx(struct file *file, char __user *user_buf,
 	len += scnprintf(buf + len, size - len,
 			 "%20s : %10u\n", "SKBs Dropped",
 			 priv->debug.skbrx_stats.skb_dropped);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (len > size)
@@ -488,6 +524,7 @@ static ssize_t read_file_skb_rx(struct file *file, char __user *user_buf,
 
 	return retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #undef PHY_ERR
 }
@@ -495,10 +532,15 @@ static ssize_t read_file_skb_rx(struct file *file, char __user *user_buf,
 static const struct file_operations fops_recv = {
 	.read = read_file_recv,
 =======
+=======
+>>>>>>> v3.18
 }
 
 static const struct file_operations fops_skb_rx = {
 	.read = read_file_skb_rx,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = simple_open,
 	.owner = THIS_MODULE,
@@ -515,7 +557,11 @@ static ssize_t read_file_slot(struct file *file, char __user *user_buf,
 	spin_lock_bh(&priv->tx.tx_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len += snprintf(buf + len, sizeof(buf) - len, "TX slot bitmap : ");
+=======
+	len += scnprintf(buf + len, sizeof(buf) - len, "TX slot bitmap : ");
+>>>>>>> v3.18
 =======
 	len += scnprintf(buf + len, sizeof(buf) - len, "TX slot bitmap : ");
 >>>>>>> v3.18
@@ -524,17 +570,23 @@ static ssize_t read_file_slot(struct file *file, char __user *user_buf,
 			       priv->tx.tx_slot, MAX_TX_BUF_NUM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len += snprintf(buf + len, sizeof(buf) - len, "\n");
 
 	len += snprintf(buf + len, sizeof(buf) - len,
 			"Used slots     : %d\n",
 			bitmap_weight(priv->tx.tx_slot, MAX_TX_BUF_NUM));
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, sizeof(buf) - len, "\n");
 
 	len += scnprintf(buf + len, sizeof(buf) - len,
 			 "Used slots     : %d\n",
 			 bitmap_weight(priv->tx.tx_slot, MAX_TX_BUF_NUM));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock_bh(&priv->tx.tx_lock);
@@ -559,6 +611,7 @@ static ssize_t read_file_queue(struct file *file, char __user *user_buf,
 	char buf[512];
 	unsigned int len = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	len += snprintf(buf + len, sizeof(buf) - len, "%20s : %10u\n",
 			"Mgmt endpoint", skb_queue_len(&priv->tx.mgmt_ep_queue));
@@ -585,6 +638,8 @@ static ssize_t read_file_queue(struct file *file, char __user *user_buf,
 	len += snprintf(buf + len, sizeof(buf) - len, "%20s : %10u\n",
 			"Queued count", priv->tx.queued_cnt);
 =======
+=======
+>>>>>>> v3.18
 	len += scnprintf(buf + len, sizeof(buf) - len, "%20s : %10u\n",
 			 "Mgmt endpoint", skb_queue_len(&priv->tx.mgmt_ep_queue));
 
@@ -609,6 +664,9 @@ static ssize_t read_file_queue(struct file *file, char __user *user_buf,
 	spin_lock_bh(&priv->tx.tx_lock);
 	len += scnprintf(buf + len, sizeof(buf) - len, "%20s : %10u\n",
 			 "Queued count", priv->tx.queued_cnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_bh(&priv->tx.tx_lock);
 
@@ -653,7 +711,11 @@ static ssize_t write_file_debug(struct file *file, const char __user *user_buf,
 
 	buf[len] = '\0';
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &mask))
+=======
+	if (kstrtoul(buf, 0, &mask))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &mask))
 >>>>>>> v3.18
@@ -671,6 +733,7 @@ static const struct file_operations fops_debug = {
 	.llseek = default_llseek,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t read_file_base_eeprom(struct file *file, char __user *user_buf,
 				     size_t count, loff_t *ppos)
@@ -1102,6 +1165,8 @@ static const struct file_operations fops_modal_eeprom = {
 	.llseek = default_llseek,
 };
 =======
+=======
+>>>>>>> v3.18
 /* Ethtool support for get-stats */
 #define AMKSTR(nm) #nm "_BE", #nm "_BK", #nm "_VI", #nm "_VO"
 static const char ath9k_htc_gstrings_stats[][ETH_GSTRING_LEN] = {
@@ -1183,6 +1248,9 @@ void ath9k_htc_get_et_stats(struct ieee80211_hw *hw,
 	WARN_ON(i != ATH9K_HTC_SSTATS_LEN);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int ath9k_htc_init_debug(struct ath_hw *ah)
@@ -1204,15 +1272,21 @@ int ath9k_htc_init_debug(struct ath_hw *ah)
 	debugfs_create_file("xmit", S_IRUSR, priv->debug.debugfs_phy,
 			    priv, &fops_xmit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debugfs_create_file("recv", S_IRUSR, priv->debug.debugfs_phy,
 			    priv, &fops_recv);
 =======
+=======
+>>>>>>> v3.18
 	debugfs_create_file("skb_rx", S_IRUSR, priv->debug.debugfs_phy,
 			    priv, &fops_skb_rx);
 
 	ath9k_cmn_debug_recv(priv->debug.debugfs_phy, &priv->debug.rx_stats);
 	ath9k_cmn_debug_phy_err(priv->debug.debugfs_phy, &priv->debug.rx_stats);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	debugfs_create_file("slot", S_IRUSR, priv->debug.debugfs_phy,
 			    priv, &fops_slot);
@@ -1221,10 +1295,16 @@ int ath9k_htc_init_debug(struct ath_hw *ah)
 	debugfs_create_file("debug", S_IRUSR | S_IWUSR, priv->debug.debugfs_phy,
 			    priv, &fops_debug);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debugfs_create_file("base_eeprom", S_IRUSR, priv->debug.debugfs_phy,
 			    priv, &fops_base_eeprom);
 	debugfs_create_file("modal_eeprom", S_IRUSR, priv->debug.debugfs_phy,
 			    priv, &fops_modal_eeprom);
+=======
+
+	ath9k_cmn_debug_base_eeprom(priv->debug.debugfs_phy, priv->ah);
+	ath9k_cmn_debug_modal_eeprom(priv->debug.debugfs_phy, priv->ah);
+>>>>>>> v3.18
 =======
 
 	ath9k_cmn_debug_base_eeprom(priv->debug.debugfs_phy, priv->ah);

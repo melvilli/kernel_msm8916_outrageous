@@ -2,7 +2,11 @@
  * ELF definitions for the Hexagon architecture
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2010-2012, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2010-2013, The Linux Foundation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2010-2013, The Linux Foundation. All rights reserved.
 >>>>>>> v3.18
@@ -207,7 +211,11 @@ do {					\
 
 /* Hrm is this going to cause problems for changing PAGE_SIZE?  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ELF_EXEC_PAGESIZE	4096
+=======
+#define ELF_EXEC_PAGESIZE	PAGE_SIZE
+>>>>>>> v3.18
 =======
 #define ELF_EXEC_PAGESIZE	PAGE_SIZE
 >>>>>>> v3.18

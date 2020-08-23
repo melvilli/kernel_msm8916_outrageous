@@ -3,6 +3,11 @@
  * Author: Jiang Liu <liuj97@gmail.com>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Zi Shen Lim <zlim.lnx@gmail.com>
+ *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Zi Shen Lim <zlim.lnx@gmail.com>
  *
@@ -26,10 +31,13 @@
 #include <linux/stop_machine.h>
 #include <linux/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/cacheflush.h>
 #include <asm/insn.h>
 
 =======
+=======
+>>>>>>> v3.18
 
 #include <asm/cacheflush.h>
 #include <asm/debug-monitors.h>
@@ -38,6 +46,9 @@
 #define AARCH64_INSN_SF_BIT	BIT(31)
 #define AARCH64_INSN_N_BIT	BIT(22)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int aarch64_insn_encoding_class[] = {
 	AARCH64_INSN_CLS_UNKNOWN,
@@ -173,14 +184,20 @@ static int __kprobes aarch64_insn_patch_text_cb(void *arg)
 		 * visibility.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_set(&pp->cpu_count, -1);
 	} else {
 		while (atomic_read(&pp->cpu_count) != -1)
 =======
+=======
+>>>>>>> v3.18
 		/* Notify other processors with an additional increment. */
 		atomic_inc(&pp->cpu_count);
 	} else {
 		while (atomic_read(&pp->cpu_count) <= num_online_cpus())
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			cpu_relax();
 		isb();
@@ -275,7 +292,10 @@ u32 __kprobes aarch64_insn_encode_immediate(enum aarch64_insn_imm_type type,
 		shift = 12;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case AARCH64_INSN_IMM_7:
 		mask = BIT(7) - 1;
 		shift = 15;
@@ -289,6 +309,9 @@ u32 __kprobes aarch64_insn_encode_immediate(enum aarch64_insn_imm_type type,
 		mask = BIT(6) - 1;
 		shift = 16;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		pr_err("aarch64_insn_encode_immediate: unknown immediate encoding %d\n",
@@ -304,11 +327,14 @@ u32 __kprobes aarch64_insn_encode_immediate(enum aarch64_insn_imm_type type,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 __kprobes aarch64_insn_gen_branch_imm(unsigned long pc, unsigned long addr,
 					  enum aarch64_insn_branch_type type)
 {
 	u32 insn;
 =======
+=======
+>>>>>>> v3.18
 static u32 aarch64_insn_encode_register(enum aarch64_insn_register_type type,
 					u32 insn,
 					enum aarch64_insn_register reg)
@@ -379,6 +405,9 @@ static u32 aarch64_insn_encode_ldst_size(enum aarch64_insn_size_type type,
 static inline long branch_imm_common(unsigned long pc, unsigned long addr,
 				     long range)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	long offset;
 
@@ -389,7 +418,10 @@ static inline long branch_imm_common(unsigned long pc, unsigned long addr,
 	BUG_ON((pc & 0x3) || (addr & 0x3));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	offset = ((long)addr - (long)pc);
 	BUG_ON(offset < -range || offset >= range);
 
@@ -402,12 +434,16 @@ u32 __kprobes aarch64_insn_gen_branch_imm(unsigned long pc, unsigned long addr,
 	u32 insn;
 	long offset;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * B/BL support [-128M, 128M) offset
 	 * ARM64 virtual address arrangement guarantees all kernel and module
 	 * texts are within +/-128M.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	offset = ((long)addr - (long)pc);
 	BUG_ON(offset < -SZ_128M || offset >= SZ_128M);
@@ -417,6 +453,8 @@ u32 __kprobes aarch64_insn_gen_branch_imm(unsigned long pc, unsigned long addr,
 	else
 		insn = aarch64_insn_get_b_value();
 =======
+=======
+>>>>>>> v3.18
 	offset = branch_imm_common(pc, addr, SZ_128M);
 
 	switch (type) {
@@ -430,6 +468,9 @@ u32 __kprobes aarch64_insn_gen_branch_imm(unsigned long pc, unsigned long addr,
 		BUG_ON(1);
 		return AARCH64_BREAK_FAULT;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return aarch64_insn_encode_immediate(AARCH64_INSN_IMM_26, insn,
@@ -437,7 +478,10 @@ u32 __kprobes aarch64_insn_gen_branch_imm(unsigned long pc, unsigned long addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 u32 aarch64_insn_gen_comp_branch_imm(unsigned long pc, unsigned long addr,
 				     enum aarch64_insn_register reg,
 				     enum aarch64_insn_variant variant,
@@ -494,6 +538,9 @@ u32 aarch64_insn_gen_cond_branch_imm(unsigned long pc, unsigned long addr,
 					     offset >> 2);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 u32 __kprobes aarch64_insn_gen_hint(enum aarch64_insn_hint_op op)
 {
@@ -505,7 +552,10 @@ u32 __kprobes aarch64_insn_gen_nop(void)
 	return aarch64_insn_gen_hint(AARCH64_INSN_HINT_NOP);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 u32 aarch64_insn_gen_branch_reg(enum aarch64_insn_register reg,
 				enum aarch64_insn_branch_type type)
@@ -1003,4 +1053,7 @@ u32 aarch64_insn_gen_logical_shifted_reg(enum aarch64_insn_register dst,
 
 	return aarch64_insn_encode_immediate(AARCH64_INSN_IMM_6, insn, shift);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

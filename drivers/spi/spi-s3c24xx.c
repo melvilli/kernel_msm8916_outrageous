@@ -10,9 +10,13 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/spinlock.h>
 #include <linux/workqueue.h>
+=======
+#include <linux/spinlock.h>
+>>>>>>> v3.18
 =======
 #include <linux/spinlock.h>
 >>>>>>> v3.18
@@ -34,7 +38,10 @@
 #include <plat/regs-spi.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/fiq.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/fiq.h>
@@ -86,7 +93,10 @@ struct s3c24xx_spi {
 
 	struct clk		*clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource		*ioarea;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct spi_master	*master;
@@ -96,7 +106,10 @@ struct s3c24xx_spi {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SPCON_DEFAULT (S3C2410_SPCON_MSTR | S3C2410_SPCON_SMOD_INT)
@@ -140,13 +153,17 @@ static int s3c24xx_spi_update_state(struct spi_device *spi,
 	struct s3c24xx_spi *hw = to_hw(spi);
 	struct s3c24xx_spi_devstate *cs = spi->controller_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int bpw;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int hz;
 	unsigned int div;
 	unsigned long clk;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bpw = t ? t->bits_per_word : spi->bits_per_word;
 	hz  = t ? t->speed_hz : spi->max_speed_hz;
@@ -162,6 +179,13 @@ static int s3c24xx_spi_update_state(struct spi_device *spi,
 		return -EINVAL;
 	}
 
+=======
+	hz  = t ? t->speed_hz : spi->max_speed_hz;
+
+	if (!hz)
+		hz = spi->max_speed_hz;
+
+>>>>>>> v3.18
 =======
 	hz  = t ? t->speed_hz : spi->max_speed_hz;
 
@@ -222,17 +246,23 @@ static int s3c24xx_spi_setup(struct spi_device *spi)
 	/* allocate settings on the first call */
 	if (!cs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cs = kzalloc(sizeof(struct s3c24xx_spi_devstate), GFP_KERNEL);
 		if (!cs) {
 			dev_err(&spi->dev, "no memory for controller state\n");
 			return -ENOMEM;
 		}
 =======
+=======
+>>>>>>> v3.18
 		cs = devm_kzalloc(&spi->dev,
 				  sizeof(struct s3c24xx_spi_devstate),
 				  GFP_KERNEL);
 		if (!cs)
 			return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		cs->spcon = SPCON_DEFAULT;
@@ -256,11 +286,14 @@ static int s3c24xx_spi_setup(struct spi_device *spi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void s3c24xx_spi_cleanup(struct spi_device *spi)
 {
 	kfree(spi->controller_state);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline unsigned int hw_txbyte(struct s3c24xx_spi *hw, int count)
@@ -316,7 +349,11 @@ static inline u32 ack_bit(unsigned int irq)
  * as normal, since the IRQ will have been re-routed to the FIQ handler.
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void s3c24xx_spi_tryfiq(struct s3c24xx_spi *hw)
+=======
+static void s3c24xx_spi_tryfiq(struct s3c24xx_spi *hw)
+>>>>>>> v3.18
 =======
 static void s3c24xx_spi_tryfiq(struct s3c24xx_spi *hw)
 >>>>>>> v3.18
@@ -557,8 +594,12 @@ static int s3c24xx_spi_probe(struct platform_device *pdev)
 	if (master == NULL) {
 		dev_err(&pdev->dev, "No memory for spi_master\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENOMEM;
 		goto err_nomem;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -568,8 +609,13 @@ static int s3c24xx_spi_probe(struct platform_device *pdev)
 	memset(hw, 0, sizeof(struct s3c24xx_spi));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->master = spi_master_get(master);
 	hw->pdata = pdata = pdev->dev.platform_data;
+=======
+	hw->master = master;
+	hw->pdata = pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	hw->master = master;
 	hw->pdata = pdata = dev_get_platdata(&pdev->dev);
@@ -597,6 +643,10 @@ static int s3c24xx_spi_probe(struct platform_device *pdev)
 	master->num_chipselect = hw->pdata->num_cs;
 	master->bus_num = pdata->bus_num;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	master->bits_per_word_mask = SPI_BPW_MASK(8);
+>>>>>>> v3.18
 =======
 	master->bits_per_word_mask = SPI_BPW_MASK(8);
 >>>>>>> v3.18
@@ -610,13 +660,17 @@ static int s3c24xx_spi_probe(struct platform_device *pdev)
 
 	hw->master->setup  = s3c24xx_spi_setup;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->master->cleanup = s3c24xx_spi_cleanup;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	dev_dbg(hw->dev, "bitbang at %p\n", &hw->bitbang);
 
 	/* find and map our resources */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -641,11 +695,16 @@ static int s3c24xx_spi_probe(struct platform_device *pdev)
 		err = -ENXIO;
 		goto err_no_iomap;
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	hw->regs = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(hw->regs)) {
 		err = PTR_ERR(hw->regs);
 		goto err_no_pdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -653,6 +712,7 @@ static int s3c24xx_spi_probe(struct platform_device *pdev)
 	if (hw->irq < 0) {
 		dev_err(&pdev->dev, "No IRQ specified\n");
 		err = -ENOENT;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_no_irq;
 	}
@@ -669,6 +729,8 @@ static int s3c24xx_spi_probe(struct platform_device *pdev)
 		err = PTR_ERR(hw->clk);
 		goto err_no_clk;
 =======
+=======
+>>>>>>> v3.18
 		goto err_no_pdata;
 	}
 
@@ -684,6 +746,9 @@ static int s3c24xx_spi_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "No clock for device\n");
 		err = PTR_ERR(hw->clk);
 		goto err_no_pdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -697,7 +762,12 @@ static int s3c24xx_spi_probe(struct platform_device *pdev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = gpio_request(pdata->pin_cs, dev_name(&pdev->dev));
+=======
+		err = devm_gpio_request(&pdev->dev, pdata->pin_cs,
+					dev_name(&pdev->dev));
+>>>>>>> v3.18
 =======
 		err = devm_gpio_request(&pdev->dev, pdata->pin_cs,
 					dev_name(&pdev->dev));
@@ -726,6 +796,7 @@ static int s3c24xx_spi_probe(struct platform_device *pdev)
 
  err_register:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hw->set_cs == s3c24xx_spi_gpiocs)
 		gpio_free(pdata->pin_cs);
 
@@ -748,10 +819,15 @@ static int s3c24xx_spi_probe(struct platform_device *pdev)
 
  err_nomem:
 =======
+=======
+>>>>>>> v3.18
 	clk_disable(hw->clk);
 
  err_no_pdata:
 	spi_master_put(hw->master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -760,6 +836,7 @@ static int s3c24xx_spi_remove(struct platform_device *dev)
 {
 	struct s3c24xx_spi *hw = platform_get_drvdata(dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
 
@@ -781,6 +858,10 @@ static int s3c24xx_spi_remove(struct platform_device *dev)
 	spi_bitbang_stop(&hw->bitbang);
 	clk_disable(hw->clk);
 >>>>>>> v3.18
+=======
+	spi_bitbang_stop(&hw->bitbang);
+	clk_disable(hw->clk);
+>>>>>>> v3.18
 	spi_master_put(hw->master);
 	return 0;
 }
@@ -791,14 +872,20 @@ static int s3c24xx_spi_remove(struct platform_device *dev)
 static int s3c24xx_spi_suspend(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s3c24xx_spi *hw = platform_get_drvdata(to_platform_device(dev));
 =======
+=======
+>>>>>>> v3.18
 	struct s3c24xx_spi *hw = dev_get_drvdata(dev);
 	int ret;
 
 	ret = spi_master_suspend(hw->master);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (hw->pdata && hw->pdata->gpio_setup)
@@ -811,15 +898,21 @@ static int s3c24xx_spi_suspend(struct device *dev)
 static int s3c24xx_spi_resume(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s3c24xx_spi *hw = platform_get_drvdata(to_platform_device(dev));
 
 	s3c24xx_spi_initialsetup(hw);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct s3c24xx_spi *hw = dev_get_drvdata(dev);
 
 	s3c24xx_spi_initialsetup(hw);
 	return spi_master_resume(hw->master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

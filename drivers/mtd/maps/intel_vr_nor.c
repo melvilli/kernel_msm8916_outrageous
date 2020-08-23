@@ -32,7 +32,10 @@
 #include <linux/slab.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mtd/mtd.h>
@@ -184,7 +187,10 @@ static void vr_nor_pci_remove(struct pci_dev *dev)
 	struct vr_nor_mtd *p = pci_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	vr_nor_destroy_partitions(p);

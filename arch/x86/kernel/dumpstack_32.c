@@ -17,7 +17,10 @@
 #include <asm/stacktrace.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void *is_irq_stack(void *p, void *irq)
 {
 	if (p < irq || p >= (irq + THREAD_SIZE))
@@ -39,6 +42,9 @@ static void *is_softirq_stack(unsigned long *stack, int cpu)
 
 	return is_irq_stack(stack, irq);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void dump_trace(struct task_struct *task, struct pt_regs *regs,
@@ -46,7 +52,13 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 		const struct stacktrace_ops *ops, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int graph = 0;
+=======
+	const unsigned cpu = get_cpu();
+	int graph = 0;
+	u32 *prev_esp;
+>>>>>>> v3.18
 =======
 	const unsigned cpu = get_cpu();
 	int graph = 0;
@@ -61,7 +73,11 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 
 		stack = &dummy;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (task && task != current)
+=======
+		if (task != current)
+>>>>>>> v3.18
 =======
 		if (task != current)
 >>>>>>> v3.18
@@ -74,6 +90,7 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 	for (;;) {
 		struct thread_info *context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		context = (struct thread_info *)
 			((unsigned long)stack & (~(THREAD_SIZE - 1)));
@@ -83,6 +100,8 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 		if (!stack)
 			break;
 =======
+=======
+>>>>>>> v3.18
 		void *end_stack;
 
 		end_stack = is_hardirq_stack(stack, cpu);
@@ -103,12 +122,19 @@ void dump_trace(struct task_struct *task, struct pt_regs *regs,
 		if (!stack)
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ops->stack(data, "IRQ") < 0)
 			break;
 		touch_nmi_watchdog();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	put_cpu();
+>>>>>>> v3.18
 =======
 	put_cpu();
 >>>>>>> v3.18

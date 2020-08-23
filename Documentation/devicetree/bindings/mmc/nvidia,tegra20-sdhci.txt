@@ -9,13 +9,19 @@ by mmc.txt and the properties used by the sdhci-tegra driver.
 Required properties:
 - compatible : Should be "nvidia,<chip>-sdhci"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - clocks : Must contain one entry, for the module clock.
   See ../clocks/clock-bindings.txt for details.
 - resets : Must contain an entry for each entry in reset-names.
   See ../reset/reset.txt for details.
 - reset-names : Must include the following entries:
   - sdhci
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Optional properties:
@@ -28,6 +34,12 @@ sdhci@c8000200 {
 	reg = <0xc8000200 0x200>;
 	interrupts = <47>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clocks = <&tegra_car 14>;
+	resets = <&tegra_car 14>;
+	reset-names = "sdhci";
+>>>>>>> v3.18
 =======
 	clocks = <&tegra_car 14>;
 	resets = <&tegra_car 14>;

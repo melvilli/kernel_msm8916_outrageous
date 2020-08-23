@@ -213,11 +213,14 @@ static int max8907_rtc_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max8907_rtc_remove(struct platform_device *pdev)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver max8907_rtc_driver = {
@@ -227,7 +230,10 @@ static struct platform_driver max8907_rtc_driver = {
 	},
 	.probe = max8907_rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = max8907_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

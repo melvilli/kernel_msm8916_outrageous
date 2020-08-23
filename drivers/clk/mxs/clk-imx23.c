@@ -11,7 +11,13 @@
 
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/clkdev.h>
+=======
+#include <linux/clk/mxs.h>
+#include <linux/clkdev.h>
+#include <linux/clk-provider.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk/mxs.h>
 #include <linux/clkdev.h>
@@ -106,6 +112,7 @@ static enum imx23_clk clks_init_on[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init mx23_clocks_init(void)
 {
 	struct device_node *np;
@@ -117,6 +124,8 @@ int __init mx23_clocks_init(void)
 
 	np = of_find_compatible_node(NULL, NULL, "fsl,imx23-clkctrl");
 =======
+=======
+>>>>>>> v3.18
 static void __init mx23_clocks_init(struct device_node *np)
 {
 	struct device_node *dcnp;
@@ -127,6 +136,9 @@ static void __init mx23_clocks_init(struct device_node *np)
 	WARN_ON(!digctrl);
 	of_node_put(dcnp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clkctrl = of_iomap(np, 0);
 	WARN_ON(!clkctrl);
@@ -181,7 +193,11 @@ static void __init mx23_clocks_init(struct device_node *np)
 			pr_err("i.MX23 clk %d: register failed with %ld\n",
 				i, PTR_ERR(clks[i]));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return PTR_ERR(clks[i]);
+=======
+			return;
+>>>>>>> v3.18
 =======
 			return;
 >>>>>>> v3.18
@@ -195,8 +211,13 @@ static void __init mx23_clocks_init(struct device_node *np)
 		clk_prepare_enable(clks[clks_init_on[i]]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
+=======
+}
+CLK_OF_DECLARE(imx23_clkctrl, "fsl,imx23-clkctrl", mx23_clocks_init);
+>>>>>>> v3.18
 =======
 }
 CLK_OF_DECLARE(imx23_clkctrl, "fsl,imx23-clkctrl", mx23_clocks_init);

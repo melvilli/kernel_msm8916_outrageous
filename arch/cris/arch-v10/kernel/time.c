@@ -15,7 +15,10 @@
 #include <linux/init.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <arch/svinto.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/types.h>
@@ -38,7 +41,11 @@ unsigned long get_ns_in_jiffie(void)
 	local_irq_save(flags);
 	timer_count = *R_TIMER0_DATA;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	presc_count = *R_TIM_PRESC_STATUS;  
+=======
+	presc_count = *R_TIM_PRESC_STATUS;
+>>>>>>> v3.18
 =======
 	presc_count = *R_TIM_PRESC_STATUS;
 >>>>>>> v3.18
@@ -58,7 +65,11 @@ unsigned long get_ns_in_jiffie(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ns = ( (TIMER0_DIV - timer_count) * ((1000000000/HZ)/TIMER0_DIV )) + 
+=======
+	ns = ( (TIMER0_DIV - timer_count) * ((1000000000/HZ)/TIMER0_DIV )) +
+>>>>>>> v3.18
 =======
 	ns = ( (TIMER0_DIV - timer_count) * ((1000000000/HZ)/TIMER0_DIV )) +
 >>>>>>> v3.18
@@ -92,7 +103,11 @@ static u32 cris_v10_gettimeoffset(void)
  * and a 3-bit key value. The effect of writing to the R_WATCHDOG register is
  * described in the table below:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> v3.18
 =======
  *
 >>>>>>> v3.18
@@ -105,9 +120,15 @@ static u32 cris_v10_gettimeoffset(void)
  *   started         1       ~key         Restart watchdog with key = ~key.
  *   started         X       new_key_val  Change key to new_key_val.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 
  * Note: '~' is the bitwise NOT operator.
  * 
+=======
+ *
+ * Note: '~' is the bitwise NOT operator.
+ *
+>>>>>>> v3.18
 =======
  *
  * Note: '~' is the bitwise NOT operator.
@@ -119,7 +140,11 @@ static u32 cris_v10_gettimeoffset(void)
 #define start_watchdog reset_watchdog
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_ETRAX_WATCHDOG) && !defined(CONFIG_SVINTO_SIM)
+=======
+#ifdef CONFIG_ETRAX_WATCHDOG
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_ETRAX_WATCHDOG
 >>>>>>> v3.18
@@ -133,10 +158,16 @@ static int watchdog_key = 0;  /* arbitrary number */
 #define WATCHDOG_MIN_FREE_PAGES 8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 reset_watchdog(void)
 {
 #if defined(CONFIG_ETRAX_WATCHDOG) && !defined(CONFIG_SVINTO_SIM)
+=======
+void reset_watchdog(void)
+{
+#if defined(CONFIG_ETRAX_WATCHDOG)
+>>>>>>> v3.18
 =======
 void reset_watchdog(void)
 {
@@ -155,6 +186,7 @@ void reset_watchdog(void)
 /* stop the watchdog - we still need the correct key */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void 
 stop_watchdog(void)
 {
@@ -167,6 +199,8 @@ stop_watchdog(void)
 
 
 =======
+=======
+>>>>>>> v3.18
 void stop_watchdog(void)
 {
 #ifdef CONFIG_ETRAX_WATCHDOG
@@ -179,11 +213,15 @@ void stop_watchdog(void)
 
 extern void cris_do_profile(struct pt_regs *regs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * timer_interrupt() needs to keep up the real-time clock,
  * as well as call the "xtime_update()" routine every clocktick
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 //static unsigned short myjiff; /* used by our debug routine print_timestamp */
@@ -192,6 +230,9 @@ extern void cris_do_profile(struct pt_regs *regs);
 
 static inline irqreturn_t
 timer_interrupt(int irq, void *dev_id)
+=======
+static inline irqreturn_t timer_interrupt(int irq, void *dev_id)
+>>>>>>> v3.18
 =======
 static inline irqreturn_t timer_interrupt(int irq, void *dev_id)
 >>>>>>> v3.18
@@ -211,8 +252,12 @@ static inline irqreturn_t timer_interrupt(int irq, void *dev_id)
 		IO_STATE( R_TIMER_CTRL, clksel0, c6250kHz);
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*R_TIMER_CTRL = r_timer_ctrl_shadow | 
 		IO_STATE(R_TIMER_CTRL, i0, clr);
+=======
+	*R_TIMER_CTRL = r_timer_ctrl_shadow | IO_STATE(R_TIMER_CTRL, i0, clr);
+>>>>>>> v3.18
 =======
 	*R_TIMER_CTRL = r_timer_ctrl_shadow | IO_STATE(R_TIMER_CTRL, i0, clr);
 >>>>>>> v3.18
@@ -221,7 +266,11 @@ static inline irqreturn_t timer_interrupt(int irq, void *dev_id)
 	/* reset watchdog otherwise it resets us! */
 	reset_watchdog();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -230,9 +279,14 @@ static inline irqreturn_t timer_interrupt(int irq, void *dev_id)
 
 	/* call the real timer interrupt handler */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	xtime_update(1);
 	
+=======
+	xtime_update(1);
+
+>>>>>>> v3.18
 =======
 	xtime_update(1);
 
@@ -241,6 +295,7 @@ static inline irqreturn_t timer_interrupt(int irq, void *dev_id)
         return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* timer is IRQF_SHARED so drivers can add stuff to the timer irq chain
  * it needs to be IRQF_DISABLED to make the jiffies update work properly
@@ -263,6 +318,8 @@ time_init(void)
 	 * loops_per_usec is calculated by the kernel later once the 
 	 * clock has started.  
 =======
+=======
+>>>>>>> v3.18
 /* timer is IRQF_SHARED so drivers can add stuff to the timer irq chain */
 
 static struct irqaction irq2  = {
@@ -280,6 +337,9 @@ void __init time_init(void)
 	 * to be initialized to make usleep work. A better value for
 	 * loops_per_usec is calculated by the kernel later once the
 	 * clock has started.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	loops_per_usec = 50;
@@ -292,7 +352,11 @@ void __init time_init(void)
 	 * timer settings below (hz and divide factor) !!!
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -307,8 +371,13 @@ void __init time_init(void)
 		IO_STATE( R_TIMER_CTRL, tm0, stop_ld) |
 		IO_STATE( R_TIMER_CTRL, clksel0, c6250kHz);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	*R_TIMER_CTRL = r_timer_ctrl_shadow = 
+=======
+
+	*R_TIMER_CTRL = r_timer_ctrl_shadow =
+>>>>>>> v3.18
 =======
 
 	*R_TIMER_CTRL = r_timer_ctrl_shadow =
@@ -323,15 +392,21 @@ void __init time_init(void)
 		IO_STATE( R_TIMER_CTRL, clksel0, c6250kHz);
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*R_TIMER_CTRL = 
 		IO_FIELD(R_TIMER_CTRL, timerdiv1, 192)      | 
 		IO_FIELD(R_TIMER_CTRL, timerdiv0, TIMER0_DIV)      |
 		IO_STATE(R_TIMER_CTRL, i1,        nop)      | 
 =======
+=======
+>>>>>>> v3.18
 	*R_TIMER_CTRL =
 		IO_FIELD(R_TIMER_CTRL, timerdiv1, 192)      |
 		IO_FIELD(R_TIMER_CTRL, timerdiv0, TIMER0_DIV)      |
 		IO_STATE(R_TIMER_CTRL, i1,        nop)      |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		IO_STATE(R_TIMER_CTRL, tm1,       stop_ld)  |
 		IO_STATE(R_TIMER_CTRL, clksel1,   c19k2Hz)  |
@@ -339,9 +414,15 @@ void __init time_init(void)
 		IO_STATE(R_TIMER_CTRL, tm0,       stop_ld)  |
 		IO_STATE(R_TIMER_CTRL, clksel0,   flexible);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	*R_TIMER_CTRL = r_timer_ctrl_shadow =
 		IO_FIELD(R_TIMER_CTRL, timerdiv1, 192)      | 
+=======
+
+	*R_TIMER_CTRL = r_timer_ctrl_shadow =
+		IO_FIELD(R_TIMER_CTRL, timerdiv1, 192)      |
+>>>>>>> v3.18
 =======
 
 	*R_TIMER_CTRL = r_timer_ctrl_shadow =
@@ -359,6 +440,7 @@ void __init time_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*R_IRQ_MASK0_SET =
 		IO_STATE(R_IRQ_MASK0_SET, timer0, set); /* unmask the timer irq */
 	
@@ -370,6 +452,8 @@ void __init time_init(void)
 
 #if defined(CONFIG_ETRAX_WATCHDOG) && !defined(CONFIG_SVINTO_SIM)
 =======
+=======
+>>>>>>> v3.18
 	/* unmask the timer irq */
 	*R_IRQ_MASK0_SET = IO_STATE(R_IRQ_MASK0_SET, timer0, set);
 
@@ -378,6 +462,9 @@ void __init time_init(void)
 
 	/* enable watchdog if we should use one */
 #if defined(CONFIG_ETRAX_WATCHDOG)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	printk("Enabling watchdog...\n");
 	start_watchdog();
@@ -392,10 +479,15 @@ void __init time_init(void)
 	asm ("setf m");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*R_IRQ_MASK0_SET =
 		IO_STATE(R_IRQ_MASK0_SET, watchdog_nmi, set);
 	*R_VECT_MASK_SET =
 		IO_STATE(R_VECT_MASK_SET, nmi, set);
+=======
+	*R_IRQ_MASK0_SET = IO_STATE(R_IRQ_MASK0_SET, watchdog_nmi, set);
+	*R_VECT_MASK_SET = IO_STATE(R_VECT_MASK_SET, nmi, set);
+>>>>>>> v3.18
 =======
 	*R_IRQ_MASK0_SET = IO_STATE(R_IRQ_MASK0_SET, watchdog_nmi, set);
 	*R_VECT_MASK_SET = IO_STATE(R_VECT_MASK_SET, nmi, set);

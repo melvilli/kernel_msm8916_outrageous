@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,7 +50,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -63,8 +72,11 @@ ACPI_MODULE_NAME("tbxfload")
 static acpi_status acpi_tb_load_namespace(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int no_auto_ssdt;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*******************************************************************************
@@ -80,7 +92,11 @@ static int no_auto_ssdt;
  ******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_load_tables(void)
+=======
+acpi_status __init acpi_load_tables(void)
+>>>>>>> v3.18
 =======
 acpi_status __init acpi_load_tables(void)
 >>>>>>> v3.18
@@ -101,7 +117,11 @@ acpi_status __init acpi_load_tables(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACPI_EXPORT_SYMBOL(acpi_load_tables)
+=======
+ACPI_EXPORT_SYMBOL_INIT(acpi_load_tables)
+>>>>>>> v3.18
 =======
 ACPI_EXPORT_SYMBOL_INIT(acpi_load_tables)
 >>>>>>> v3.18
@@ -139,7 +159,11 @@ static acpi_status acpi_tb_load_namespace(void)
 			       ACPI_SIG_DSDT)
 	    ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    ACPI_FAILURE(acpi_tb_verify_table
+=======
+	    ACPI_FAILURE(acpi_tb_validate_table
+>>>>>>> v3.18
 =======
 	    ACPI_FAILURE(acpi_tb_validate_table
 >>>>>>> v3.18
@@ -154,7 +178,11 @@ static acpi_status acpi_tb_load_namespace(void)
 	 * address. We must take care here because the address of the .Tables
 	 * array can change dynamically as tables are loaded at run-time. Note:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * .Pointer field is not validated until after call to acpi_tb_verify_table.
+=======
+	 * .Pointer field is not validated until after call to acpi_tb_validate_table.
+>>>>>>> v3.18
 =======
 	 * .Pointer field is not validated until after call to acpi_tb_validate_table.
 >>>>>>> v3.18
@@ -204,7 +232,11 @@ static acpi_status acpi_tb_load_namespace(void)
 					 signature), ACPI_SIG_PSDT))
 		    ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    ACPI_FAILURE(acpi_tb_verify_table
+=======
+		    ACPI_FAILURE(acpi_tb_validate_table
+>>>>>>> v3.18
 =======
 		    ACPI_FAILURE(acpi_tb_validate_table
 >>>>>>> v3.18
@@ -213,11 +245,14 @@ static acpi_status acpi_tb_load_namespace(void)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (no_auto_ssdt) {
 			printk(KERN_WARNING "ACPI: SSDT ignored due to \"acpi_no_auto_ssdt\"\n");
 			continue;
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Ignore errors while loading tables, get as many as possible */
@@ -230,7 +265,11 @@ static acpi_status acpi_tb_load_namespace(void)
 	ACPI_INFO((AE_INFO, "All ACPI Tables successfully acquired"));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18
@@ -241,7 +280,10 @@ unlock_and_exit:
 /*******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_install_table
  *
  * PARAMETERS:  address             - Address of the ACPI table to be installed.
@@ -281,6 +323,9 @@ ACPI_EXPORT_SYMBOL_INIT(acpi_install_table)
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * FUNCTION:    acpi_load_table
  *
@@ -297,11 +342,17 @@ ACPI_EXPORT_SYMBOL_INIT(acpi_install_table)
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 acpi_status acpi_load_table(struct acpi_table_header *table)
 {
 	acpi_status status;
 	struct acpi_table_desc table_desc;
+=======
+acpi_status acpi_load_table(struct acpi_table_header *table)
+{
+	acpi_status status;
+>>>>>>> v3.18
 =======
 acpi_status acpi_load_table(struct acpi_table_header *table)
 {
@@ -318,6 +369,7 @@ acpi_status acpi_load_table(struct acpi_table_header *table)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Init local table descriptor */
 
 	ACPI_MEMSET(&table_desc, 0, sizeof(struct acpi_table_desc));
@@ -326,6 +378,8 @@ acpi_status acpi_load_table(struct acpi_table_header *table)
 	table_desc.length = table->length;
 	table_desc.flags = ACPI_TABLE_ORIGIN_UNKNOWN;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Must acquire the interpreter lock during this operation */
@@ -339,8 +393,11 @@ acpi_status acpi_load_table(struct acpi_table_header *table)
 
 	ACPI_INFO((AE_INFO, "Host-directed Dynamic ACPI Table Load:"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_tb_add_table(&table_desc, &table_index);
 =======
+=======
+>>>>>>> v3.18
 	(void)acpi_ut_acquire_mutex(ACPI_MTX_TABLES);
 
 	status = acpi_tb_install_standard_table(ACPI_PTR_TO_PHYSADDR(table),
@@ -359,6 +416,9 @@ acpi_status acpi_load_table(struct acpi_table_header *table)
 	status =
 	    acpi_tb_validate_table(&acpi_gbl_root_table_list.
 				   tables[table_index]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ACPI_FAILURE(status)) {
 		goto unlock_and_exit;
@@ -374,7 +434,11 @@ acpi_status acpi_load_table(struct acpi_table_header *table)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18
@@ -492,6 +556,7 @@ acpi_status acpi_unload_parent_table(acpi_handle object)
 
 ACPI_EXPORT_SYMBOL(acpi_unload_parent_table)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int __init acpi_no_auto_ssdt_setup(char *s) {
 
@@ -503,5 +568,7 @@ static int __init acpi_no_auto_ssdt_setup(char *s) {
 }
 
 __setup("acpi_no_auto_ssdt", acpi_no_auto_ssdt_setup);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

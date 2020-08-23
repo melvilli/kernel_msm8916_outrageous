@@ -36,7 +36,11 @@ config EL3
 config 3C515
 	tristate "3c515 ISA \"Fast EtherLink\""
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on (ISA || EISA) && ISA_DMA_API
+=======
+	depends on ISA && ISA_DMA_API
+>>>>>>> v3.18
 =======
 	depends on ISA && ISA_DMA_API
 >>>>>>> v3.18
@@ -72,16 +76,22 @@ config VORTEX
 	tristate "3c590/3c900 series (592/595/597) \"Vortex/Boomerang\" support"
 	depends on (PCI || EISA) && HAS_IOPORT_MAP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
 	select MII
 	---help---
 	  This option enables driver support for a large number of 10Mbps and
 	  10/100Mbps EISA, PCI and PCMCIA 3Com network cards:
 =======
+=======
+>>>>>>> v3.18
 	select MII
 	---help---
 	  This option enables driver support for a large number of 10Mbps and
 	  10/100Mbps EISA, PCI and Cardbus 3Com network cards:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  "Vortex"    (Fast EtherLink 3c590/3c592/3c595/3c597) EISA and PCI

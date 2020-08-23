@@ -122,7 +122,11 @@ ENTRY(__memzero)
 	tst	r1, #1			@ 1 a byte left over
 	strneb	r2, [r0], #1		@ 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr			@ 1
+=======
+	ret	lr			@ 1
+>>>>>>> v3.18
 =======
 	ret	lr			@ 1
 >>>>>>> v3.18

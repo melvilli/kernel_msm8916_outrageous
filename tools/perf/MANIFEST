@@ -2,8 +2,11 @@ tools/perf
 tools/scripts
 tools/lib/traceevent
 <<<<<<< HEAD
+<<<<<<< HEAD
 tools/lib/lk
 =======
+=======
+>>>>>>> v3.18
 tools/lib/api
 tools/lib/symbol/kallsyms.c
 tools/lib/symbol/kallsyms.h
@@ -12,6 +15,9 @@ tools/include/linux/compiler.h
 tools/include/linux/hash.h
 tools/include/linux/export.h
 tools/include/linux/types.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 include/linux/const.h
 include/linux/perf_event.h
@@ -42,6 +48,12 @@ arch/x86/include/uapi/asm/svm.h
 arch/x86/include/uapi/asm/vmx.h
 arch/x86/include/uapi/asm/kvm.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+arch/x86/include/uapi/asm/kvm_perf.h
+arch/s390/include/uapi/asm/sie.h
+arch/s390/include/uapi/asm/kvm_perf.h
+>>>>>>> v3.18
 =======
 arch/x86/include/uapi/asm/kvm_perf.h
 arch/s390/include/uapi/asm/sie.h

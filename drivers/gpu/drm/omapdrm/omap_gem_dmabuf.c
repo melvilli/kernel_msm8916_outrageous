@@ -137,10 +137,13 @@ static void omap_gem_dmabuf_kunmap(struct dma_buf *buffer,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * TODO maybe we can split up drm_gem_mmap to avoid duplicating
  * some here.. or at least have a drm_dmabuf_mmap helper.
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int omap_gem_dmabuf_mmap(struct dma_buf *buffer,
@@ -148,6 +151,10 @@ static int omap_gem_dmabuf_mmap(struct dma_buf *buffer,
 {
 	struct drm_gem_object *obj = buffer->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct drm_device *dev = obj->dev;
+>>>>>>> v3.18
 =======
 	struct drm_device *dev = obj->dev;
 >>>>>>> v3.18
@@ -156,6 +163,7 @@ static int omap_gem_dmabuf_mmap(struct dma_buf *buffer,
 	if (WARN_ON(!obj->filp))
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Check for valid size. */
 	if (omap_gem_mmap_size(obj) < vma->vm_end - vma->vm_start) {
@@ -183,11 +191,16 @@ static int omap_gem_dmabuf_mmap(struct dma_buf *buffer,
 
 out_unlock:
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&dev->struct_mutex);
 	ret = drm_gem_mmap_obj(obj, omap_gem_mmap_size(obj), vma);
 	mutex_unlock(&dev->struct_mutex);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return omap_gem_mmap_obj(obj, vma);
@@ -210,7 +223,11 @@ struct dma_buf *omap_gem_prime_export(struct drm_device *dev,
 		struct drm_gem_object *obj, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dma_buf_export(obj, &omap_dmabuf_ops, obj->size, flags);
+=======
+	return dma_buf_export(obj, &omap_dmabuf_ops, obj->size, flags, NULL);
+>>>>>>> v3.18
 =======
 	return dma_buf_export(obj, &omap_dmabuf_ops, obj->size, flags, NULL);
 >>>>>>> v3.18

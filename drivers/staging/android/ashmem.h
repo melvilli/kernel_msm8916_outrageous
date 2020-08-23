@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2014, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -18,6 +19,8 @@
 #include <linux/compat.h>
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * include/linux/ashmem.h
  *
@@ -38,6 +41,9 @@
 
 #include "uapi/ashmem.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* support of 32bit userspace on 64bit platforms */
 #ifdef CONFIG_COMPAT
@@ -46,7 +52,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif	/* _LINUX_ASHMEM_H */
+>>>>>>> v3.18
 =======
 #endif	/* _LINUX_ASHMEM_H */
 >>>>>>> v3.18

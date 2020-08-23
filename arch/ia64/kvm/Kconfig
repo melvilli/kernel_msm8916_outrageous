@@ -26,6 +26,10 @@ config KVM
 	select ANON_INODES
 	select HAVE_KVM_IRQCHIP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_KVM_IRQFD
+>>>>>>> v3.18
 =======
 	select HAVE_KVM_IRQFD
 >>>>>>> v3.18

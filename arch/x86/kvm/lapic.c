@@ -77,6 +77,7 @@ static inline void apic_set_reg(struct kvm_lapic *apic, int reg_off, u32 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int apic_test_and_set_vector(int vec, void *bitmap)
 {
 	return test_and_set_bit(VEC_POS(vec), (bitmap) + REG_POS(vec));
@@ -87,6 +88,8 @@ static inline int apic_test_and_clear_vector(int vec, void *bitmap)
 	return test_and_clear_bit(VEC_POS(vec), (bitmap) + REG_POS(vec));
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int apic_test_vector(int vec, void *bitmap)
@@ -126,6 +129,7 @@ struct static_key_deferred apic_hw_disabled __read_mostly;
 struct static_key_deferred apic_sw_disabled __read_mostly;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void apic_set_spiv(struct kvm_lapic *apic, u32 val)
 {
 	if ((kvm_apic_get_reg(apic, APIC_SPIV) ^ val) & APIC_SPIV_APIC_ENABLED) {
@@ -137,6 +141,8 @@ static inline void apic_set_spiv(struct kvm_lapic *apic, u32 val)
 	apic_set_reg(apic, APIC_SPIV, val);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int apic_enabled(struct kvm_lapic *apic)
@@ -227,7 +233,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void apic_set_spiv(struct kvm_lapic *apic, u32 val)
 {
 	u32 prev = kvm_apic_get_reg(apic, APIC_SPIV);
@@ -242,6 +251,9 @@ static inline void apic_set_spiv(struct kvm_lapic *apic, u32 val)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void kvm_apic_set_id(struct kvm_lapic *apic, u8 id)
 {
@@ -355,15 +367,21 @@ void kvm_apic_update_irr(struct kvm_vcpu *vcpu, u32 *pir)
 EXPORT_SYMBOL_GPL(kvm_apic_update_irr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int apic_test_and_set_irr(int vec, struct kvm_lapic *apic)
 {
 	apic->irr_pending = true;
 	return apic_test_and_set_vector(vec, apic->regs + APIC_IRR);
 =======
+=======
+>>>>>>> v3.18
 static inline void apic_set_irr(int vec, struct kvm_lapic *apic)
 {
 	apic->irr_pending = true;
 	apic_set_vector(vec, apic->regs + APIC_IRR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -532,7 +550,11 @@ static bool pv_eoi_get_pending(struct kvm_vcpu *vcpu)
 	if (pv_eoi_get_user(vcpu, &val) < 0)
 		apic_debug("Can't read EOI MSR value: 0x%llx\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   (unsigned long long)vcpi->arch.pv_eoi.msr_val);
+=======
+			   (unsigned long long)vcpu->arch.pv_eoi.msr_val);
+>>>>>>> v3.18
 =======
 			   (unsigned long long)vcpu->arch.pv_eoi.msr_val);
 >>>>>>> v3.18
@@ -544,7 +566,11 @@ static void pv_eoi_set_pending(struct kvm_vcpu *vcpu)
 	if (pv_eoi_put_user(vcpu, KVM_PV_EOI_ENABLED) < 0) {
 		apic_debug("Can't set EOI MSR value: 0x%llx\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   (unsigned long long)vcpi->arch.pv_eoi.msr_val);
+=======
+			   (unsigned long long)vcpu->arch.pv_eoi.msr_val);
+>>>>>>> v3.18
 =======
 			   (unsigned long long)vcpu->arch.pv_eoi.msr_val);
 >>>>>>> v3.18
@@ -558,7 +584,11 @@ static void pv_eoi_clr_pending(struct kvm_vcpu *vcpu)
 	if (pv_eoi_put_user(vcpu, KVM_PV_EOI_DISABLED) < 0) {
 		apic_debug("Can't clear EOI MSR value: 0x%llx\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   (unsigned long long)vcpi->arch.pv_eoi.msr_val);
+=======
+			   (unsigned long long)vcpu->arch.pv_eoi.msr_val);
+>>>>>>> v3.18
 =======
 			   (unsigned long long)vcpu->arch.pv_eoi.msr_val);
 >>>>>>> v3.18
@@ -759,6 +789,11 @@ static int __apic_accept_irq(struct kvm_lapic *apic, int delivery_mode,
 	struct kvm_vcpu *vcpu = apic->vcpu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_kvm_apic_accept_irq(vcpu->vcpu_id, delivery_mode,
+				  trig_mode, vector);
+>>>>>>> v3.18
 =======
 	trace_kvm_apic_accept_irq(vcpu->vcpu_id, delivery_mode,
 				  trig_mode, vector);
@@ -771,6 +806,7 @@ static int __apic_accept_irq(struct kvm_lapic *apic, int delivery_mode,
 		if (unlikely(!apic_enabled(apic)))
 			break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (dest_map)
 			__set_bit(vcpu->vcpu_id, dest_map);
@@ -788,6 +824,8 @@ static int __apic_accept_irq(struct kvm_lapic *apic, int delivery_mode,
 				goto out;
 			}
 =======
+=======
+>>>>>>> v3.18
 		result = 1;
 
 		if (dest_map)
@@ -797,11 +835,15 @@ static int __apic_accept_irq(struct kvm_lapic *apic, int delivery_mode,
 			kvm_x86_ops->deliver_posted_interrupt(vcpu, vector);
 		else {
 			apic_set_irr(vector, apic);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			kvm_make_request(KVM_REQ_EVENT, vcpu);
 			kvm_vcpu_kick(vcpu);
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 out:
 		trace_kvm_apic_accept_irq(vcpu->vcpu_id, delivery_mode,
@@ -811,6 +853,8 @@ out:
 	case APIC_DM_REMRD:
 		apic_debug("Ignoring delivery mode 3\n");
 =======
+=======
+>>>>>>> v3.18
 		break;
 
 	case APIC_DM_REMRD:
@@ -818,6 +862,9 @@ out:
 		vcpu->arch.pv.pv_unhalted = 1;
 		kvm_make_request(KVM_REQ_EVENT, vcpu);
 		kvm_vcpu_kick(vcpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -1193,15 +1240,21 @@ static void apic_manage_nmi_watchdog(struct kvm_lapic *apic, u32 lvt0_val)
 			apic_debug("Receive NMI setting on APIC_LVT0 "
 				   "for cpu %d\n", apic->vcpu->vcpu_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			atomic_inc(&apic->vcpu->kvm->arch.vapics_in_nmi_mode);
 		}
 	} else if (nmi_wd_enabled)
 		atomic_dec(&apic->vcpu->kvm->arch.vapics_in_nmi_mode);
 =======
+=======
+>>>>>>> v3.18
 			apic->vcpu->kvm->arch.vapics_in_nmi_mode++;
 		}
 	} else if (nmi_wd_enabled)
 		apic->vcpu->kvm->arch.vapics_in_nmi_mode--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1443,6 +1496,12 @@ void kvm_set_lapic_tscdeadline_msr(struct kvm_vcpu *vcpu, u64 data)
 
 	hrtimer_cancel(&apic->lapic_timer.timer);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Inject here so clearing tscdeadline won't override new value */
+	if (apic_has_pending_timer(vcpu))
+		kvm_inject_apic_timer_irqs(vcpu);
+>>>>>>> v3.18
 =======
 	/* Inject here so clearing tscdeadline won't override new value */
 	if (apic_has_pending_timer(vcpu))
@@ -1569,7 +1628,11 @@ void kvm_lapic_reset(struct kvm_vcpu *vcpu)
 	vcpu->arch.apic_attention = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	apic_debug(KERN_INFO "%s: vcpu=%p, id=%d, base_msr="
+=======
+	apic_debug("%s: vcpu=%p, id=%d, base_msr="
+>>>>>>> v3.18
 =======
 	apic_debug("%s: vcpu=%p, id=%d, base_msr="
 >>>>>>> v3.18
@@ -1739,13 +1802,19 @@ void kvm_inject_apic_timer_irqs(struct kvm_vcpu *vcpu)
 
 	if (atomic_read(&apic->lapic_timer.pending) > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (kvm_apic_local_deliver(apic, APIC_LVTT))
 			atomic_dec(&apic->lapic_timer.pending);
 =======
+=======
+>>>>>>> v3.18
 		kvm_apic_local_deliver(apic, APIC_LVTT);
 		if (apic_lvtt_tscdeadline(apic))
 			apic->lapic_timer.tscdeadline = 0;
 		atomic_set(&apic->lapic_timer.pending, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -2029,7 +2098,11 @@ void kvm_apic_accept_events(struct kvm_vcpu *vcpu)
 		smp_rmb();
 		sipi_vector = apic->sipi_vector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("vcpu %d received sipi with vector # %x\n",
+=======
+		apic_debug("vcpu %d received sipi with vector # %x\n",
+>>>>>>> v3.18
 =======
 		apic_debug("vcpu %d received sipi with vector # %x\n",
 >>>>>>> v3.18

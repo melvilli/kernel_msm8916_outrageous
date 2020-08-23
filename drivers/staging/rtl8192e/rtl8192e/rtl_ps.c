@@ -3,7 +3,11 @@
  *
  * Based on the r8180 driver, which is:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2004-2005 Andrea Merello <andreamrl@tiscali.it>, et al.
+=======
+ * Copyright 2004-2005 Andrea Merello <andrea.merello@gmail.com>, et al.
+>>>>>>> v3.18
 =======
  * Copyright 2004-2005 Andrea Merello <andrea.merello@gmail.com>, et al.
 >>>>>>> v3.18
@@ -38,6 +42,10 @@ static void rtl8192_hw_sleep_down(struct net_device *dev)
 	struct r8192_priv *priv = rtllib_priv(dev);
 	unsigned long flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -60,6 +68,10 @@ void rtl8192_hw_sleep_wq(void *data)
 				     struct rtllib_device, hw_sleep_wq);
 	struct net_device *dev = ieee->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -71,6 +83,10 @@ void rtl8192_hw_wakeup(struct net_device *dev)
 	struct r8192_priv *priv = rtllib_priv(dev);
 	unsigned long flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -94,8 +110,13 @@ void rtl8192_hw_wakeup_wq(void *data)
 				     struct rtllib_device, hw_wakeup_wq);
 	struct net_device *dev = ieee->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl8192_hw_wakeup(dev);
 
+=======
+
+	rtl8192_hw_wakeup(dev);
+>>>>>>> v3.18
 =======
 
 	rtl8192_hw_wakeup(dev);
@@ -201,6 +222,10 @@ void IPSLeave_wq(void *data)
 	struct net_device *dev = ieee->dev;
 	struct r8192_priv *priv = (struct r8192_priv *)rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -214,6 +239,10 @@ void rtllib_ips_leave_wq(struct net_device *dev)
 	struct r8192_priv *priv = (struct r8192_priv *)rtllib_priv(dev);
 	enum rt_rf_power_state rtState;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -239,6 +268,10 @@ void rtllib_ips_leave(struct net_device *dev)
 {
 	struct r8192_priv *priv = (struct r8192_priv *)rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

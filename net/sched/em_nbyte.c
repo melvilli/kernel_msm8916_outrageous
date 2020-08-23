@@ -24,7 +24,11 @@ struct nbyte_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int em_nbyte_change(struct tcf_proto *tp, void *data, int data_len,
+=======
+static int em_nbyte_change(struct net *net, void *data, int data_len,
+>>>>>>> v3.18
 =======
 static int em_nbyte_change(struct net *net, void *data, int data_len,
 >>>>>>> v3.18

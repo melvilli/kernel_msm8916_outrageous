@@ -66,7 +66,11 @@ config CAN_LEDS
 config CAN_AT91
 	tristate "Atmel AT91 onchip CAN controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARM
+=======
+	depends on (ARCH_AT91 || COMPILE_TEST) && HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on (ARCH_AT91 || COMPILE_TEST) && HAS_IOMEM
 >>>>>>> v3.18
@@ -76,7 +80,11 @@ config CAN_AT91
 
 config CAN_TI_HECC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_OMAP3
+=======
+	depends on ARM
+>>>>>>> v3.18
 =======
 	depends on ARM
 >>>>>>> v3.18
@@ -86,12 +94,15 @@ config CAN_TI_HECC
 	  TI devices. The device specifications are available from www.ti.com
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CAN_MCP251X
 	tristate "Microchip MCP251x SPI CAN controllers"
 	depends on SPI && HAS_DMA
 	---help---
 	  Driver for the Microchip MCP251x SPI CAN controllers.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config CAN_BFIN
@@ -114,6 +125,7 @@ config CAN_JANZ_ICAN3
 	  called janz-ican3.ko.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HAVE_CAN_FLEXCAN
 	bool
 
@@ -125,13 +137,22 @@ config CAN_FLEXCAN
 	tristate "Support for Freescale FLEXCAN based chips"
 	depends on ARM || PPC
 >>>>>>> v3.18
+=======
+config CAN_FLEXCAN
+	tristate "Support for Freescale FLEXCAN based chips"
+	depends on ARM || PPC
+>>>>>>> v3.18
 	---help---
 	  Say Y here if you want to support for Freescale FlexCAN.
 
 config PCH_CAN
 	tristate "Intel EG20T PCH CAN controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI
+=======
+	depends on PCI && (X86_32 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on PCI && (X86_32 || COMPILE_TEST)
 >>>>>>> v3.18
@@ -150,7 +171,10 @@ config CAN_GRCAN
 	  the hardware level to work.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config CAN_RCAR
 	tristate "Renesas R-Car CAN controller"
 	depends on ARM
@@ -169,6 +193,9 @@ config CAN_XILINXCAN
 	  Xilinx CAN driver. This driver supports both soft AXI CAN IP and
 	  Zynq CANPS IP.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "drivers/net/can/mscan/Kconfig"
 
@@ -177,15 +204,21 @@ source "drivers/net/can/sja1000/Kconfig"
 source "drivers/net/can/c_can/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/net/can/cc770/Kconfig"
 
 =======
+=======
+>>>>>>> v3.18
 source "drivers/net/can/m_can/Kconfig"
 
 source "drivers/net/can/cc770/Kconfig"
 
 source "drivers/net/can/spi/Kconfig"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "drivers/net/can/usb/Kconfig"
 

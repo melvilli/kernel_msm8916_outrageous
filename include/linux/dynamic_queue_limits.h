@@ -74,9 +74,12 @@ static inline void dql_queued(struct dql *dql, unsigned int count)
 	BUG_ON(count > DQL_MAX_OBJECT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dql->num_queued += count;
 	dql->last_obj_cnt = count;
 =======
+=======
+>>>>>>> v3.18
 	dql->last_obj_cnt = count;
 
 	/* We want to force a write first, so that cpu do not attempt
@@ -87,6 +90,9 @@ static inline void dql_queued(struct dql *dql, unsigned int count)
 	barrier();
 
 	dql->num_queued += count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -94,7 +100,11 @@ static inline void dql_queued(struct dql *dql, unsigned int count)
 static inline int dql_avail(const struct dql *dql)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dql->adj_limit - dql->num_queued;
+=======
+	return ACCESS_ONCE(dql->adj_limit) - ACCESS_ONCE(dql->num_queued);
+>>>>>>> v3.18
 =======
 	return ACCESS_ONCE(dql->adj_limit) - ACCESS_ONCE(dql->num_queued);
 >>>>>>> v3.18

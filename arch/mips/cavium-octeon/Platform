@@ -2,6 +2,7 @@
 # Cavium Octeon
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 platform-$(CONFIG_CPU_CAVIUM_OCTEON)	+= cavium-octeon/
 cflags-$(CONFIG_CPU_CAVIUM_OCTEON)	+=				\
 		-I$(srctree)/arch/mips/include/asm/mach-cavium-octeon
@@ -10,6 +11,8 @@ load-$(CONFIG_CPU_CAVIUM_OCTEON)	+= 0xffffffff84100000
 else
 load-$(CONFIG_CPU_CAVIUM_OCTEON)	+= 0xffffffff81100000
 =======
+=======
+>>>>>>> v3.18
 platform-$(CONFIG_CAVIUM_OCTEON_SOC)	+= cavium-octeon/
 cflags-$(CONFIG_CAVIUM_OCTEON_SOC)	+=				\
 		-I$(srctree)/arch/mips/include/asm/mach-cavium-octeon
@@ -17,5 +20,8 @@ ifdef CONFIG_CAVIUM_OCTEON_2ND_KERNEL
 load-$(CONFIG_CAVIUM_OCTEON_SOC)	+= 0xffffffff84100000
 else
 load-$(CONFIG_CAVIUM_OCTEON_SOC)	+= 0xffffffff81100000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif

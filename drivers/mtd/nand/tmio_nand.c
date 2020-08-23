@@ -358,7 +358,11 @@ static void tmio_hw_stop(struct platform_device *dev, struct tmio_nand *tmio)
 static int tmio_probe(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tmio_nand_data *data = dev->dev.platform_data;
+=======
+	struct tmio_nand_data *data = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct tmio_nand_data *data = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -376,11 +380,17 @@ static int tmio_probe(struct platform_device *dev)
 		dev_warn(&dev->dev, "NULL platform data!\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmio = kzalloc(sizeof *tmio, GFP_KERNEL);
 	if (!tmio) {
 		retval = -ENOMEM;
 		goto err_kzalloc;
 	}
+=======
+	tmio = devm_kzalloc(&dev->dev, sizeof(*tmio), GFP_KERNEL);
+	if (!tmio)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	tmio = devm_kzalloc(&dev->dev, sizeof(*tmio), GFP_KERNEL);
 	if (!tmio)
@@ -395,6 +405,7 @@ static int tmio_probe(struct platform_device *dev)
 	mtd->priv = nand_chip;
 	mtd->name = "tmio-nand";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tmio->ccr = ioremap(ccr->start, resource_size(ccr));
 	if (!tmio->ccr) {
@@ -413,6 +424,8 @@ static int tmio_probe(struct platform_device *dev)
 	if (retval)
 		goto err_hwinit;
 =======
+=======
+>>>>>>> v3.18
 	tmio->ccr = devm_ioremap(&dev->dev, ccr->start, resource_size(ccr));
 	if (!tmio->ccr)
 		return -EIO;
@@ -425,6 +438,9 @@ static int tmio_probe(struct platform_device *dev)
 	retval = tmio_hw_init(dev, tmio);
 	if (retval)
 		return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Set address of NAND IO lines */
@@ -454,8 +470,13 @@ static int tmio_probe(struct platform_device *dev)
 	nand_chip->chip_delay = 15;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = request_irq(irq, &tmio_irq,
 				IRQF_DISABLED, dev_name(&dev->dev), tmio);
+=======
+	retval = devm_request_irq(&dev->dev, irq, &tmio_irq, 0,
+				  dev_name(&dev->dev), tmio);
+>>>>>>> v3.18
 =======
 	retval = devm_request_irq(&dev->dev, irq, &tmio_irq, 0,
 				  dev_name(&dev->dev), tmio);
@@ -472,7 +493,11 @@ static int tmio_probe(struct platform_device *dev)
 	if (nand_scan(mtd, 1)) {
 		retval = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_scan;
+=======
+		goto err_irq;
+>>>>>>> v3.18
 =======
 		goto err_irq;
 >>>>>>> v3.18
@@ -486,6 +511,7 @@ static int tmio_probe(struct platform_device *dev)
 
 	nand_release(mtd);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_scan:
 	if (tmio->irq)
@@ -503,6 +529,10 @@ err_kzalloc:
 err_irq:
 	tmio_hw_stop(dev, tmio);
 >>>>>>> v3.18
+=======
+err_irq:
+	tmio_hw_stop(dev, tmio);
+>>>>>>> v3.18
 	return retval;
 }
 
@@ -512,12 +542,16 @@ static int tmio_remove(struct platform_device *dev)
 
 	nand_release(&tmio->mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tmio->irq)
 		free_irq(tmio->irq, tmio);
 	tmio_hw_stop(dev, tmio);
 	iounmap(tmio->fcr);
 	iounmap(tmio->ccr);
 	kfree(tmio);
+=======
+	tmio_hw_stop(dev, tmio);
+>>>>>>> v3.18
 =======
 	tmio_hw_stop(dev, tmio);
 >>>>>>> v3.18

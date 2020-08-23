@@ -137,7 +137,11 @@ static struct property *sym_get_range_prop(struct symbol *sym)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sym_get_range_val(struct symbol *sym, int base)
+=======
+static long long sym_get_range_val(struct symbol *sym, int base)
+>>>>>>> v3.18
 =======
 static long long sym_get_range_val(struct symbol *sym, int base)
 >>>>>>> v3.18
@@ -154,7 +158,11 @@ static long long sym_get_range_val(struct symbol *sym, int base)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return strtol(sym->curr.val, NULL, base);
+=======
+	return strtoll(sym->curr.val, NULL, base);
+>>>>>>> v3.18
 =======
 	return strtoll(sym->curr.val, NULL, base);
 >>>>>>> v3.18
@@ -164,7 +172,12 @@ static void sym_validate_range(struct symbol *sym)
 {
 	struct property *prop;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int base, val, val2;
+=======
+	int base;
+	long long val, val2;
+>>>>>>> v3.18
 =======
 	int base;
 	long long val, val2;
@@ -185,7 +198,11 @@ static void sym_validate_range(struct symbol *sym)
 	if (!prop)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = strtol(sym->curr.val, NULL, base);
+=======
+	val = strtoll(sym->curr.val, NULL, base);
+>>>>>>> v3.18
 =======
 	val = strtoll(sym->curr.val, NULL, base);
 >>>>>>> v3.18
@@ -197,9 +214,15 @@ static void sym_validate_range(struct symbol *sym)
 	}
 	if (sym->type == S_INT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sprintf(str, "%d", val2);
 	else
 		sprintf(str, "0x%x", val2);
+=======
+		sprintf(str, "%lld", val2);
+	else
+		sprintf(str, "0x%llx", val2);
+>>>>>>> v3.18
 =======
 		sprintf(str, "%lld", val2);
 	else
@@ -618,7 +641,11 @@ bool sym_string_within_range(struct symbol *sym, const char *str)
 {
 	struct property *prop;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int val;
+=======
+	long long val;
+>>>>>>> v3.18
 =======
 	long long val;
 >>>>>>> v3.18
@@ -633,7 +660,11 @@ bool sym_string_within_range(struct symbol *sym, const char *str)
 		if (!prop)
 			return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = strtol(str, NULL, 10);
+=======
+		val = strtoll(str, NULL, 10);
+>>>>>>> v3.18
 =======
 		val = strtoll(str, NULL, 10);
 >>>>>>> v3.18
@@ -646,7 +677,11 @@ bool sym_string_within_range(struct symbol *sym, const char *str)
 		if (!prop)
 			return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = strtol(str, NULL, 16);
+=======
+		val = strtoll(str, NULL, 16);
+>>>>>>> v3.18
 =======
 		val = strtoll(str, NULL, 16);
 >>>>>>> v3.18
@@ -990,12 +1025,15 @@ const char *sym_escape_string_value(const char *in)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct symbol **sym_re_search(const char *pattern)
 {
 	struct symbol *sym, **sym_arr = NULL;
 	int i, cnt, size;
 	regex_t re;
 =======
+=======
+>>>>>>> v3.18
 struct sym_match {
 	struct symbol	*sym;
 	off_t		so, eo;
@@ -1038,6 +1076,9 @@ struct symbol **sym_re_search(const char *pattern)
 	int i, cnt, size;
 	regex_t re;
 	regmatch_t match[1];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cnt = size = 0;
@@ -1045,7 +1086,11 @@ struct symbol **sym_re_search(const char *pattern)
 	if (strlen(pattern) == 0)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (regcomp(&re, pattern, REG_EXTENDED|REG_NOSUB|REG_ICASE))
+=======
+	if (regcomp(&re, pattern, REG_EXTENDED|REG_ICASE))
+>>>>>>> v3.18
 =======
 	if (regcomp(&re, pattern, REG_EXTENDED|REG_ICASE))
 >>>>>>> v3.18
@@ -1054,6 +1099,7 @@ struct symbol **sym_re_search(const char *pattern)
 	for_all_symbols(i, sym) {
 		if (sym->flags & SYMBOL_CONST || !sym->name)
 			continue;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (regexec(&re, sym->name, 0, NULL, 0))
 			continue;
@@ -1072,6 +1118,8 @@ struct symbol **sym_re_search(const char *pattern)
 	if (sym_arr)
 		sym_arr[cnt] = NULL;
 =======
+=======
+>>>>>>> v3.18
 		if (regexec(&re, sym->name, 1, match, 0))
 			continue;
 		if (cnt >= size) {
@@ -1102,6 +1150,9 @@ struct symbol **sym_re_search(const char *pattern)
 sym_re_search_free:
 	/* sym_match_arr can be NULL if no match, but free(NULL) is OK */
 	free(sym_match_arr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	regfree(&re);
 
@@ -1113,7 +1164,11 @@ sym_re_search_free:
  * current state so we can print out relevant info to user.
  * The entries are located on the call stack so no need to free memory.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Note inser() remove() must always match to properly clear the stack.
+=======
+ * Note insert() remove() must always match to properly clear the stack.
+>>>>>>> v3.18
 =======
  * Note insert() remove() must always match to properly clear the stack.
 >>>>>>> v3.18

@@ -20,6 +20,10 @@
 #include <linux/init.h>
 #include <linux/idr.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/namei.h>
+>>>>>>> v3.18
 =======
 #include <linux/namei.h>
 >>>>>>> v3.18
@@ -28,16 +32,22 @@
 #include <linux/completion.h>
 #include <asm/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kmemleak.h>
 
 #include "internal.h"
 
 DEFINE_SPINLOCK(proc_subdir_lock);
 =======
+=======
+>>>>>>> v3.18
 
 #include "internal.h"
 
 static DEFINE_SPINLOCK(proc_subdir_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int proc_match(unsigned int len, const char *name, struct proc_dir_entry *de)
@@ -61,8 +71,12 @@ static int proc_notify_change(struct dentry *dentry, struct iattr *iattr)
 	mark_inode_dirty(inode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	de->uid = inode->i_uid;
 	de->gid = inode->i_gid;
+=======
+	proc_set_user(de, inode->i_uid, inode->i_gid);
+>>>>>>> v3.18
 =======
 	proc_set_user(de, inode->i_uid, inode->i_gid);
 >>>>>>> v3.18
@@ -179,6 +193,7 @@ void proc_free_inum(unsigned int inum)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * As some entries in /proc are volatile, we want to 
  * get rid of unused dentries.  This could be made 
@@ -194,6 +209,8 @@ static const struct dentry_operations proc_dentry_operations =
 {
 	.d_delete	= proc_delete_dentry,
 =======
+=======
+>>>>>>> v3.18
 static void *proc_follow_link(struct dentry *dentry, struct nameidata *nd)
 {
 	nd_set_link(nd, __PDE_DATA(dentry->d_inode));
@@ -203,6 +220,9 @@ static void *proc_follow_link(struct dentry *dentry, struct nameidata *nd)
 static const struct inode_operations proc_link_inode_operations = {
 	.readlink	= generic_readlink,
 	.follow_link	= proc_follow_link,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -226,7 +246,11 @@ struct dentry *proc_lookup_de(struct proc_dir_entry *de, struct inode *dir,
 			if (!inode)
 				return ERR_PTR(-ENOMEM);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			d_set_d_op(dentry, &proc_dentry_operations);
+=======
+			d_set_d_op(dentry, &simple_dentry_operations);
+>>>>>>> v3.18
 =======
 			d_set_d_op(dentry, &simple_dentry_operations);
 >>>>>>> v3.18
@@ -253,6 +277,7 @@ struct dentry *proc_lookup(struct inode *dir, struct dentry *dentry,
  * value of the readdir() call, as long as it's non-negative
  * for success..
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int proc_readdir_de(struct proc_dir_entry *de, struct file *filp, void *dirent,
 		filldir_t filldir)
@@ -325,6 +350,8 @@ int proc_readdir(struct file *filp, void *dirent, filldir_t filldir)
 
 	return proc_readdir_de(PDE(inode), filp, dirent, filldir);
 =======
+=======
+>>>>>>> v3.18
 int proc_readdir_de(struct proc_dir_entry *de, struct file *file,
 		    struct dir_context *ctx)
 {
@@ -371,6 +398,9 @@ int proc_readdir(struct file *file, struct dir_context *ctx)
 	struct inode *inode = file_inode(file);
 
 	return proc_readdir_de(PDE(inode), file, ctx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -383,7 +413,11 @@ static const struct file_operations proc_dir_operations = {
 	.llseek			= generic_file_llseek,
 	.read			= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir		= proc_readdir,
+=======
+	.iterate		= proc_readdir,
+>>>>>>> v3.18
 =======
 	.iterate		= proc_readdir,
 >>>>>>> v3.18
@@ -445,6 +479,7 @@ static struct proc_dir_entry *__proc_create(struct proc_dir_entry **parent,
 {
 	struct proc_dir_entry *ent = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *fn = name;
 	unsigned int len;
 
@@ -469,6 +504,8 @@ static struct proc_dir_entry *__proc_create(struct proc_dir_entry **parent,
 	memcpy(ent->name, fn, len + 1);
 	ent->namelen = len;
 =======
+=======
+>>>>>>> v3.18
 	const char *fn;
 	struct qstr qstr;
 
@@ -491,6 +528,9 @@ static struct proc_dir_entry *__proc_create(struct proc_dir_entry **parent,
 
 	memcpy(ent->name, fn, qstr.len + 1);
 	ent->namelen = qstr.len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ent->mode = mode;
 	ent->nlink = nlink;

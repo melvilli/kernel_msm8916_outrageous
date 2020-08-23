@@ -35,6 +35,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/include/ "e6500_power_isa.dtsi"
+
+>>>>>>> v3.18
 =======
 /include/ "e6500_power_isa.dtsi"
 
@@ -68,7 +73,13 @@
 			device_type = "cpu";
 			reg = <0 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			next-level-cache = <&L2>;
+=======
+			clocks = <&mux0>;
+			next-level-cache = <&L2>;
+			fsl,portid-mapping = <0x80000000>;
+>>>>>>> v3.18
 =======
 			clocks = <&mux0>;
 			next-level-cache = <&L2>;
@@ -79,7 +90,13 @@
 			device_type = "cpu";
 			reg = <2 3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			next-level-cache = <&L2>;
+=======
+			clocks = <&mux0>;
+			next-level-cache = <&L2>;
+			fsl,portid-mapping = <0x80000000>;
+>>>>>>> v3.18
 =======
 			clocks = <&mux0>;
 			next-level-cache = <&L2>;
@@ -90,7 +107,13 @@
 			device_type = "cpu";
 			reg = <4 5>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			next-level-cache = <&L2>;
+=======
+			clocks = <&mux0>;
+			next-level-cache = <&L2>;
+			fsl,portid-mapping = <0x80000000>;
+>>>>>>> v3.18
 =======
 			clocks = <&mux0>;
 			next-level-cache = <&L2>;
@@ -101,7 +124,13 @@
 			device_type = "cpu";
 			reg = <6 7>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			next-level-cache = <&L2>;
+=======
+			clocks = <&mux0>;
+			next-level-cache = <&L2>;
+			fsl,portid-mapping = <0x80000000>;
+>>>>>>> v3.18
 =======
 			clocks = <&mux0>;
 			next-level-cache = <&L2>;

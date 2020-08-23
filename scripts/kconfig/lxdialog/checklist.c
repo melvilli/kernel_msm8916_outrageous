@@ -133,9 +133,15 @@ int dialog_checklist(const char *title, const char *prompt, int height,
 
 do_resize:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (getmaxy(stdscr) < (height + 6))
 		return -ERRDISPLAYTOOSMALL;
 	if (getmaxx(stdscr) < (width + 6))
+=======
+	if (getmaxy(stdscr) < (height + CHECKLIST_HEIGTH_MIN))
+		return -ERRDISPLAYTOOSMALL;
+	if (getmaxx(stdscr) < (width + CHECKLIST_WIDTH_MIN))
+>>>>>>> v3.18
 =======
 	if (getmaxy(stdscr) < (height + CHECKLIST_HEIGTH_MIN))
 		return -ERRDISPLAYTOOSMALL;
@@ -147,8 +153,13 @@ do_resize:
 
 	/* center dialog box on screen */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	x = (COLS - width) / 2;
 	y = (LINES - height) / 2;
+=======
+	x = (getmaxx(stdscr) - width) / 2;
+	y = (getmaxy(stdscr) - height) / 2;
+>>>>>>> v3.18
 =======
 	x = (getmaxx(stdscr) - width) / 2;
 	y = (getmaxy(stdscr) - height) / 2;
@@ -180,7 +191,11 @@ do_resize:
 	/* create new window for the list */
 	list = subwin(dialog, list_height, list_width, y + box_y + 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	              x + box_x + 1);
+=======
+		      x + box_x + 1);
+>>>>>>> v3.18
 =======
 		      x + box_x + 1);
 >>>>>>> v3.18
@@ -190,7 +205,11 @@ do_resize:
 	/* draw a box around the list items */
 	draw_box(dialog, box_y, box_x, list_height + 2, list_width + 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	         dlg.menubox_border.atr, dlg.menubox.atr);
+=======
+		 dlg.menubox_border.atr, dlg.menubox.atr);
+>>>>>>> v3.18
 =======
 		 dlg.menubox_border.atr, dlg.menubox.atr);
 >>>>>>> v3.18

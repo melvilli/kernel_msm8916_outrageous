@@ -29,7 +29,11 @@ static void reset_cpu(void)
 	 * scalling
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LOONGSON_CHIPCFG0 |= 0x7;
+=======
+	LOONGSON_CHIPCFG(0) |= 0x7;
+>>>>>>> v3.18
 =======
 	LOONGSON_CHIPCFG(0) |= 0x7;
 >>>>>>> v3.18

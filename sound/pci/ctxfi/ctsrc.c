@@ -432,7 +432,12 @@ get_src_rsc(struct src_mgr *mgr, const struct src_desc *desc, struct src **rsrc)
 	spin_unlock_irqrestore(&mgr->mgr_lock, flags);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "ctxfi: Can't meet SRC resource request!\n");
+=======
+		dev_err(mgr->card->dev,
+			"Can't meet SRC resource request!\n");
+>>>>>>> v3.18
 =======
 		dev_err(mgr->card->dev,
 			"Can't meet SRC resource request!\n");
@@ -549,7 +554,11 @@ static int src_mgr_commit_write(struct src_mgr *mgr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int src_mgr_create(void *hw, struct src_mgr **rsrc_mgr)
+=======
+int src_mgr_create(struct hw *hw, struct src_mgr **rsrc_mgr)
+>>>>>>> v3.18
 =======
 int src_mgr_create(struct hw *hw, struct src_mgr **rsrc_mgr)
 >>>>>>> v3.18
@@ -568,7 +577,11 @@ int src_mgr_create(struct hw *hw, struct src_mgr **rsrc_mgr)
 
 	spin_lock_init(&src_mgr->mgr_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	conj_mask = ((struct hw *)hw)->src_dirty_conj_mask();
+=======
+	conj_mask = hw->src_dirty_conj_mask();
+>>>>>>> v3.18
 =======
 	conj_mask = hw->src_dirty_conj_mask();
 >>>>>>> v3.18
@@ -580,6 +593,7 @@ int src_mgr_create(struct hw *hw, struct src_mgr **rsrc_mgr)
 	src_mgr->src_disable = src_disable;
 	src_mgr->commit_write = src_mgr_commit_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Disable all SRC resources. */
 	for (i = 0; i < 256; i++)
@@ -587,6 +601,8 @@ int src_mgr_create(struct hw *hw, struct src_mgr **rsrc_mgr)
 
 	((struct hw *)hw)->src_mgr_commit_write(hw, src_mgr->mgr.ctrl_blk);
 =======
+=======
+>>>>>>> v3.18
 	src_mgr->card = hw->card;
 
 	/* Disable all SRC resources. */
@@ -594,6 +610,9 @@ int src_mgr_create(struct hw *hw, struct src_mgr **rsrc_mgr)
 		hw->src_mgr_dsb_src(src_mgr->mgr.ctrl_blk, i);
 
 	hw->src_mgr_commit_write(hw, src_mgr->mgr.ctrl_blk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*rsrc_mgr = src_mgr;
@@ -763,7 +782,12 @@ static int get_srcimp_rsc(struct srcimp_mgr *mgr,
 	spin_unlock_irqrestore(&mgr->mgr_lock, flags);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "ctxfi: Can't meet SRCIMP resource request!\n");
+=======
+		dev_err(mgr->card->dev,
+			"Can't meet SRCIMP resource request!\n");
+>>>>>>> v3.18
 =======
 		dev_err(mgr->card->dev,
 			"Can't meet SRCIMP resource request!\n");
@@ -854,7 +878,11 @@ static int srcimp_imap_delete(struct srcimp_mgr *mgr, struct imapper *entry)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int srcimp_mgr_create(void *hw, struct srcimp_mgr **rsrcimp_mgr)
+=======
+int srcimp_mgr_create(struct hw *hw, struct srcimp_mgr **rsrcimp_mgr)
+>>>>>>> v3.18
 =======
 int srcimp_mgr_create(struct hw *hw, struct srcimp_mgr **rsrcimp_mgr)
 >>>>>>> v3.18
@@ -890,6 +918,10 @@ int srcimp_mgr_create(struct hw *hw, struct srcimp_mgr **rsrcimp_mgr)
 	srcimp_mgr->imap_add = srcimp_imap_add;
 	srcimp_mgr->imap_delete = srcimp_imap_delete;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	srcimp_mgr->card = hw->card;
+>>>>>>> v3.18
 =======
 	srcimp_mgr->card = hw->card;
 >>>>>>> v3.18

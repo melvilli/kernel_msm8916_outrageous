@@ -364,9 +364,12 @@ static int ar71xx_pci_probe(struct platform_device *pdev)
 
 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "cfg_base");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	apc->cfg_base = devm_ioremap_resource(&pdev->dev, res);

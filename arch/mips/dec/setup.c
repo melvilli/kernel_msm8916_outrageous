@@ -24,6 +24,10 @@
 #include <asm/cpu.h>
 #include <asm/cpu-features.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu-type.h>
 >>>>>>> v3.18
@@ -70,7 +74,11 @@ EXPORT_SYMBOL(ioasic_base);
  * IRQ routing and priority tables.  Priorites are set as follows:
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *		KN01	KN230	KN02	KN02-BA KN02-CA KN03
+=======
+ *		KN01	KN230	KN02	KN02-BA	KN02-CA	KN03
+>>>>>>> v3.18
 =======
  *		KN01	KN230	KN02	KN02-BA	KN02-CA	KN03
 >>>>>>> v3.18
@@ -422,7 +430,11 @@ static void __init dec_init_kn02(void)
 /*
  * Machine-specific initialisation for KN02-BA, aka DS5000/1xx
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (xx = 20, 25, 33), aka 3min.	 Also applies to KN04(-BA), aka
+=======
+ * (xx = 20, 25, 33), aka 3min.  Also applies to KN04(-BA), aka
+>>>>>>> v3.18
 =======
  * (xx = 20, 25, 33), aka 3min.  Also applies to KN04(-BA), aka
 >>>>>>> v3.18
@@ -761,11 +773,17 @@ void __init arch_init_irq(void)
 		dec_interrupt[DEC_IRQ_FPU] = -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Free the halt interrupt unused on R4k systems.  */
 	if (current_cpu_type() == CPU_R4000SC ||
 	    current_cpu_type() == CPU_R4400SC)
 		dec_interrupt[DEC_IRQ_HALT] = -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Register board interrupts: FPU and cascade. */

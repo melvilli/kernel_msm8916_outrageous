@@ -26,6 +26,12 @@ menuconfig NETDEVICES
 if NETDEVICES
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config MII
+	tristate
+
+>>>>>>> v3.18
 =======
 config MII
 	tristate
@@ -107,6 +113,7 @@ config NET_FC
 	  "SCSI generic support".
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MII
 	tristate "Generic Media Independent Interface device support"
 	help
@@ -114,6 +121,8 @@ config MII
 	  or internal device.  It is safe to say Y or M here even if your
 	  ethernet card lacks MII.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config IFB
@@ -154,7 +163,11 @@ config MACVTAP
 	  on the MAC-VLAN network interface, called macvtap. A macvtap device
 	  can be added in the same way as a macvlan device, using 'type
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  macvlan', and then be accessed through the tap user space interface.
+=======
+	  macvtap', and then be accessed through the tap user space interface.
+>>>>>>> v3.18
 =======
 	  macvtap', and then be accessed through the tap user space interface.
 >>>>>>> v3.18
@@ -166,7 +179,11 @@ config VXLAN
        tristate "Virtual eXtensible Local Area Network (VXLAN)"
        depends on INET
 <<<<<<< HEAD
+<<<<<<< HEAD
        select NET_IP_TUNNEL
+=======
+       select NET_UDP_TUNNEL
+>>>>>>> v3.18
 =======
        select NET_UDP_TUNNEL
 >>>>>>> v3.18
@@ -200,11 +217,14 @@ config NETPOLL
 	def_bool NETCONSOLE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config NETPOLL_TRAP
 	bool "Netpoll traffic trapping"
 	default n
 	depends on NETPOLL
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config NET_POLL_CONTROLLER
@@ -263,6 +283,10 @@ config VIRTIO_NET
 	tristate "Virtio network driver"
 	depends on VIRTIO
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select AVERAGE
+>>>>>>> v3.18
 =======
 	select AVERAGE
 >>>>>>> v3.18
@@ -271,7 +295,10 @@ config VIRTIO_NET
 	  lguest or QEMU based VMMs (like KVM or Xen).  Say Y or M.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NLMON
 	tristate "Virtual netlink monitoring device"
 	---help---
@@ -282,6 +309,9 @@ config NLMON
 	  diagnostics, etc. This is mostly intended for developers or support
 	  to debug netlink issues. If unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # NET_CORE
 
@@ -347,6 +377,7 @@ source "drivers/net/wan/Kconfig"
 source "drivers/net/ieee802154/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DANIPC
 	tristate "DAN IPC network device"
 	depends on PACKET
@@ -356,6 +387,8 @@ config DANIPC
 		enable an efficient and reliable communication between
 		the different processors in the SoC.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config XEN_NETDEV_FRONTEND

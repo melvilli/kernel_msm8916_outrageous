@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2004-2013 Freescale Semiconductor, Inc. All Rights Reserved.
+=======
+ * Copyright 2004-2014 Freescale Semiconductor, Inc. All Rights Reserved.
+>>>>>>> v3.18
 =======
  * Copyright 2004-2014 Freescale Semiconductor, Inc. All Rights Reserved.
 >>>>>>> v3.18
@@ -17,6 +21,7 @@
 
 #include <linux/reboot.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct platform_device;
 struct pt_regs;
@@ -87,6 +92,8 @@ extern int mx53_display_revision(void);
 extern void imx_set_aips(void __iomem *);
 extern int mxc_device_init(void);
 =======
+=======
+>>>>>>> v3.18
 struct irq_data;
 struct platform_device;
 struct pt_regs;
@@ -145,6 +152,9 @@ void imx_set_soc_revision(unsigned int rev);
 unsigned int imx_get_soc_revision(void);
 void imx_init_revision_from_anatop(void);
 struct device *imx_soc_device_init(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum mxc_cpu_pwr_mode {
@@ -162,6 +172,7 @@ enum mx3_cpu_pwr_mode {
 	MX3_SLEEP,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void mx3_cpu_lp_set(enum mx3_cpu_pwr_mode mode);
 extern void imx_print_silicon_rev(const char *cpu, int srev);
@@ -224,6 +235,8 @@ static inline void imx53_pm_init(void) {}
 #ifdef CONFIG_NEON
 extern int mx51_neon_fixup(void);
 =======
+=======
+>>>>>>> v3.18
 void mx3_cpu_lp_set(enum mx3_cpu_pwr_mode mode);
 void imx_print_silicon_rev(const char *cpu, int srev);
 
@@ -283,19 +296,28 @@ static inline void imx5_pm_set_ccm_base(void __iomem *base) {}
 
 #ifdef CONFIG_NEON
 int mx51_neon_fixup(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int mx51_neon_fixup(void) { return 0; }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CACHE_L2X0
 void imx_init_l2cache(void);
 #else
 static inline void imx_init_l2cache(void) {}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct smp_operations imx_smp_ops;
 

@@ -60,6 +60,11 @@ struct kvm_ioapic {
 	DECLARE_BITMAP(handled_vectors, 256);
 	struct rtc_status rtc_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct delayed_work eoi_inject;
+	u32 irq_eoi[IOAPIC_NUM_PINS];
+>>>>>>> v3.18
 =======
 	struct delayed_work eoi_inject;
 	u32 irq_eoi[IOAPIC_NUM_PINS];
@@ -97,7 +102,10 @@ int kvm_ioapic_set_irq(struct kvm_ioapic *ioapic, int irq, int irq_source_id,
 		       int level, bool line_status);
 void kvm_ioapic_clear_all(struct kvm_ioapic *ioapic, int irq_source_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvm_ioapic_reset(struct kvm_ioapic *ioapic);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int kvm_irq_delivery_to_apic(struct kvm *kvm, struct kvm_lapic *src,

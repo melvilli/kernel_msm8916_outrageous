@@ -22,6 +22,12 @@
 #include <asm/tlb.h>
 #include <asm/setup.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/hugetlb.h>
+
+#ifdef CONFIG_HUGETLB_PAGE
+>>>>>>> v3.18
 =======
 #include <asm/hugetlb.h>
 
@@ -90,11 +96,14 @@ int pgd_huge(pgd_t pgd)
 	return ((pgd_val(pgd) & 0x3) != 0x0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int pmd_huge_support(void)
 {
 	return 1;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else
@@ -112,6 +121,7 @@ int pgd_huge(pgd_t pgd)
 {
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int pmd_huge_support(void)
@@ -183,11 +193,16 @@ EXPORT_SYMBOL_GPL(find_linux_pte_or_hugepte);
 pte_t *huge_pte_offset(struct mm_struct *mm, unsigned long addr)
 {
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 pte_t *huge_pte_offset(struct mm_struct *mm, unsigned long addr)
 {
 	/* Only called for hugetlbfs pages, hence can ignore THP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return find_linux_pte_or_hugepte(mm->pgd, addr, NULL);
 }
@@ -385,7 +400,11 @@ int alloc_bootmem_huge_page(struct hstate *hstate)
 {
 	struct huge_bootmem_page *m;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int idx = shift_to_mmu_psize(hstate->order + PAGE_SHIFT);
+=======
+	int idx = shift_to_mmu_psize(huge_page_shift(hstate));
+>>>>>>> v3.18
 =======
 	int idx = shift_to_mmu_psize(huge_page_shift(hstate));
 >>>>>>> v3.18
@@ -550,7 +569,11 @@ static void hugepd_free(struct mmu_gather *tlb, void *hugepte)
 	struct hugepd_freelist **batchp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	batchp = &__get_cpu_var(hugepd_freelist_cur);
+=======
+	batchp = &get_cpu_var(hugepd_freelist_cur);
+>>>>>>> v3.18
 =======
 	batchp = &get_cpu_var(hugepd_freelist_cur);
 >>>>>>> v3.18
@@ -560,6 +583,10 @@ static void hugepd_free(struct mmu_gather *tlb, void *hugepte)
 			  cpumask_of(smp_processor_id()))) {
 		kmem_cache_free(hugepte_cache, hugepte);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        put_cpu_var(hugepd_freelist_cur);
+>>>>>>> v3.18
 =======
         put_cpu_var(hugepd_freelist_cur);
 >>>>>>> v3.18
@@ -577,6 +604,10 @@ static void hugepd_free(struct mmu_gather *tlb, void *hugepte)
 		*batchp = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	put_cpu_var(hugepd_freelist_cur);
+>>>>>>> v3.18
 =======
 	put_cpu_var(hugepd_freelist_cur);
 >>>>>>> v3.18
@@ -723,8 +754,11 @@ static void hugetlb_free_pud_range(struct mmu_gather *tlb, pgd_t *pgd,
 /*
  * This function frees user-level page tables of a process.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Must be called with pagetable lock held.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -783,12 +817,15 @@ follow_huge_addr(struct mm_struct *mm, unsigned long address, int write)
 	unsigned shift;
 	unsigned long mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ptep = find_linux_pte_or_hugepte(mm->pgd, address, &shift);
 
 	/* Verify it is a huge page else bail. */
 	if (!ptep || !shift)
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Transparent hugepages are handled by generic code. We can skip them
 	 * here.
@@ -797,6 +834,9 @@ follow_huge_addr(struct mm_struct *mm, unsigned long address, int write)
 
 	/* Verify it is a huge page else bail. */
 	if (!ptep || !shift || pmd_trans_huge(*(pmd_t *)ptep))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ERR_PTR(-EINVAL);
 
@@ -816,6 +856,7 @@ follow_huge_pmd(struct mm_struct *mm, unsigned long address,
 	return NULL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int gup_hugepte(pte_t *ptep, unsigned long sz, unsigned long addr,
 		unsigned long end, int write, struct page **pages, int *nr)
@@ -880,6 +921,8 @@ int gup_hugepte(pte_t *ptep, unsigned long sz, unsigned long addr,
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static unsigned long hugepte_addr_end(unsigned long addr, unsigned long end,
@@ -1099,7 +1142,10 @@ void flush_dcache_icache_hugepage(struct page *page)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #endif /* CONFIG_HUGETLB_PAGE */
 
@@ -1265,4 +1311,7 @@ int gup_hugepte(pte_t *ptep, unsigned long sz, unsigned long addr,
 
 	return 1;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

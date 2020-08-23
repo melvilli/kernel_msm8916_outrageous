@@ -19,7 +19,10 @@
 #ifdef __KERNEL__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Low-level stepping controls. */
 #define DBG_MDSCR_SS		(1 << 0)
 #define DBG_SPSR_SS		(1 << 21)
@@ -29,6 +32,9 @@
 #define DBG_MDSCR_MDE		(1 << 15)
 #define DBG_MDSCR_MASK		~(DBG_MDSCR_KDE | DBG_MDSCR_MDE)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	DBG_ESR_EVT(x)		(((x) >> 27) & 0x7)
 
@@ -52,12 +58,15 @@
  * #imm16 values used for BRK instruction generation
  * Allowed values for kgbd are 0x400 - 0x7ff
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 0x400: for dynamic BRK instruction
  * 0x401: for compile time BRK instruction
  */
 #define KGDB_DYN_DGB_BRK_IMM		0x400
 #define KDBG_COMPILED_DBG_BRK_IMM	0x401
 =======
+=======
+>>>>>>> v3.18
  * 0x100: for triggering a fault on purpose (reserved)
  * 0x400: for dynamic BRK instruction
  * 0x401: for compile time BRK instruction
@@ -65,6 +74,9 @@
 #define FAULT_BRK_IMM			0x100
 #define KGDB_DYN_DBG_BRK_IMM		0x400
 #define KGDB_COMPILED_DBG_BRK_IMM	0x401
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -75,10 +87,13 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Extract byte from BRK instruction
  */
 #define KGDB_DYN_DGB_BRK_INS_BYTE(x) \
 =======
+=======
+>>>>>>> v3.18
  * BRK instruction for provoking a fault on purpose
  * Unlike kgdb, #imm16 value with unallocated handler is used for faulting.
  */
@@ -88,12 +103,16 @@
  * Extract byte from BRK instruction
  */
 #define KGDB_DYN_DBG_BRK_INS_BYTE(x) \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	((((AARCH64_BREAK_MON) & 0xffe0001f) >> (x * 8)) & 0xff)
 
 /*
  * Extract byte from BRK #imm16
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define KGBD_DYN_DGB_BRK_IMM_BYTE(x) \
 	(((((KGDB_DYN_DGB_BRK_IMM) & 0xffff) << 5) >> (x * 8)) & 0xff)
@@ -114,6 +133,8 @@ enum debug_el {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #define KGBD_DYN_DBG_BRK_IMM_BYTE(x) \
 	(((((KGDB_DYN_DBG_BRK_IMM) & 0xffff) << 5) >> (x * 8)) & 0xff)
 
@@ -127,6 +148,9 @@ enum debug_el {
 
 #define CACHE_FLUSH_IS_SAFE		1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* AArch32 */
 #define DBG_ESR_EVT_BKPT	0x4
@@ -166,12 +190,18 @@ void unregister_break_hook(struct break_hook *hook);
 u8 debug_monitors_arch(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum debug_el {
 	DBG_ACTIVE_EL0 = 0,
 	DBG_ACTIVE_EL1,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void enable_debug_monitors(enum debug_el el);
 void disable_debug_monitors(enum debug_el el);

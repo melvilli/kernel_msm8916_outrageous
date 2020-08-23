@@ -3,7 +3,10 @@ menu "Android"
 config ANDROID
 	bool "Android Drivers"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default N
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -14,6 +17,10 @@ if ANDROID
 config ANDROID_BINDER_IPC
 	bool "Android Binder IPC Driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on MMU
+>>>>>>> v3.18
 =======
 	depends on MMU
 >>>>>>> v3.18
@@ -27,6 +34,7 @@ config ANDROID_BINDER_IPC
 	  between said processes.
 
 config ANDROID_BINDER_IPC_32BIT
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool "Use old (Android 4.4 and earlier) 32-bit binder API"
 	depends on !64BIT && ANDROID_BINDER_IPC
@@ -47,6 +55,8 @@ config ANDROID_BINDER_DEVICES
 	  created. Each binder device has its own context manager, and is
 	  therefore logically separated from the other devices.
 =======
+=======
+>>>>>>> v3.18
 	bool
 	depends on !64BIT && ANDROID_BINDER_IPC
 	default y
@@ -58,6 +68,9 @@ config ANDROID_BINDER_DEVICES
 	  earlier).
 
 	  Note that enabling this will break newer Android user-space.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ASHMEM
@@ -90,6 +103,7 @@ config ANDROID_LOGGER
 	  much overhead in the system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config LOGCAT_SIZE
 	int "Adjust android log buffer sizes"
 	default 256
@@ -98,6 +112,8 @@ config LOGCAT_SIZE
 	  Set logger buffer size. Enter a number greater than zero.
 	  Any value less than 256 is recommended. Reduce value to save kernel static memory size.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ANDROID_TIMED_OUTPUT
@@ -111,6 +127,7 @@ config ANDROID_TIMED_GPIO
 
 config ANDROID_LOW_MEMORY_KILLER
 	bool "Android Low Memory Killer"
+<<<<<<< HEAD
 <<<<<<< HEAD
 	default N
 	---help---
@@ -128,11 +145,16 @@ config ANDROID_LOW_MEMORY_KILLER_AUTODETECT_OOM_ADJ_VALUES
 config ANDROID_INTF_ALARM_DEV
 	bool "Android alarm driver"
 =======
+=======
+>>>>>>> v3.18
 	---help---
 	  Registers processes to be killed when memory is low
 
 config ANDROID_INTF_ALARM_DEV
 	tristate "Android alarm driver"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	depends on RTC_CLASS
 	default n
@@ -146,7 +168,12 @@ config SYNC
 	default n
 	select ANON_INODES
 <<<<<<< HEAD
+<<<<<<< HEAD
 	help
+=======
+	select DMA_SHARED_BUFFER
+	---help---
+>>>>>>> v3.18
 =======
 	select DMA_SHARED_BUFFER
 	---help---
@@ -160,7 +187,11 @@ config SW_SYNC
 	default n
 	depends on SYNC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	help
+=======
+	---help---
+>>>>>>> v3.18
 =======
 	---help---
 >>>>>>> v3.18
@@ -173,7 +204,11 @@ config SW_SYNC_USER
 	default n
 	depends on SW_SYNC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	help
+=======
+	---help---
+>>>>>>> v3.18
 =======
 	---help---
 >>>>>>> v3.18
@@ -181,6 +216,7 @@ config SW_SYNC_USER
 	  *WARNING* improper use of this can result in deadlocking kernel
 	  drivers from userspace.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ONESHOT_SYNC
 	bool "One shot sync objects"
@@ -201,6 +237,10 @@ source "drivers/staging/android/ion/Kconfig"
 
 source "drivers/staging/android/fiq_debugger/Kconfig"
 
+=======
+source "drivers/staging/android/ion/Kconfig"
+
+>>>>>>> v3.18
 =======
 source "drivers/staging/android/ion/Kconfig"
 

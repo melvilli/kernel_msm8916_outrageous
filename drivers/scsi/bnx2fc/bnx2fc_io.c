@@ -1,14 +1,20 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* bnx2fc_io.c: Broadcom NetXtreme II Linux FCoE offload driver.
  * IO manager and SCSI IO processing.
  *
  * Copyright (c) 2008 - 2013 Broadcom Corporation
 =======
+=======
+>>>>>>> v3.18
 /* bnx2fc_io.c: QLogic NetXtreme II Linux FCoE offload driver.
  * IO manager and SCSI IO processing.
  *
  * Copyright (c) 2008 - 2013 Broadcom Corporation
  * Copyright (c) 2014, QLogic Corporation
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -291,6 +297,11 @@ struct bnx2fc_cmd_mgr *bnx2fc_cmd_mgr_alloc(struct bnx2fc_hba *hba)
 	if (!cmgr->free_list_lock) {
 		printk(KERN_ERR PFX "failed to alloc free_list_lock\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		kfree(cmgr->free_list);
+		cmgr->free_list = NULL;
+>>>>>>> v3.18
 =======
 		kfree(cmgr->free_list);
 		cmgr->free_list = NULL;
@@ -608,7 +619,11 @@ static void bnx2fc_free_mp_resc(struct bnx2fc_cmd *io_req)
 	}
 	if (mp_req->req_buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_free_coherent(&hba->pcidev->dev, PAGE_SIZE,
+=======
+		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+>>>>>>> v3.18
 =======
 		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
 >>>>>>> v3.18
@@ -618,7 +633,11 @@ static void bnx2fc_free_mp_resc(struct bnx2fc_cmd *io_req)
 	}
 	if (mp_req->resp_buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_free_coherent(&hba->pcidev->dev, PAGE_SIZE,
+=======
+		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+>>>>>>> v3.18
 =======
 		dma_free_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
 >>>>>>> v3.18
@@ -644,7 +663,11 @@ int bnx2fc_init_mp_req(struct bnx2fc_cmd *io_req)
 	mp_req->req_len = sizeof(struct fcp_cmnd);
 	io_req->data_xfer_len = mp_req->req_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mp_req->req_buf = dma_alloc_coherent(&hba->pcidev->dev, PAGE_SIZE,
+=======
+	mp_req->req_buf = dma_alloc_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+>>>>>>> v3.18
 =======
 	mp_req->req_buf = dma_alloc_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
 >>>>>>> v3.18
@@ -657,7 +680,11 @@ int bnx2fc_init_mp_req(struct bnx2fc_cmd *io_req)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mp_req->resp_buf = dma_alloc_coherent(&hba->pcidev->dev, PAGE_SIZE,
+=======
+	mp_req->resp_buf = dma_alloc_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
+>>>>>>> v3.18
 =======
 	mp_req->resp_buf = dma_alloc_coherent(&hba->pcidev->dev, CNIC_PAGE_SIZE,
 >>>>>>> v3.18
@@ -669,8 +696,13 @@ int bnx2fc_init_mp_req(struct bnx2fc_cmd *io_req)
 		return FAILED;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(mp_req->req_buf, 0, PAGE_SIZE);
 	memset(mp_req->resp_buf, 0, PAGE_SIZE);
+=======
+	memset(mp_req->req_buf, 0, CNIC_PAGE_SIZE);
+	memset(mp_req->resp_buf, 0, CNIC_PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	memset(mp_req->req_buf, 0, CNIC_PAGE_SIZE);
 	memset(mp_req->resp_buf, 0, CNIC_PAGE_SIZE);
@@ -700,7 +732,11 @@ int bnx2fc_init_mp_req(struct bnx2fc_cmd *io_req)
 	mp_req_bd->buf_addr_lo = (u32)addr & 0xffffffff;
 	mp_req_bd->buf_addr_hi = (u32)((u64)addr >> 32);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mp_req_bd->buf_len = PAGE_SIZE;
+=======
+	mp_req_bd->buf_len = CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 	mp_req_bd->buf_len = CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -716,7 +752,11 @@ int bnx2fc_init_mp_req(struct bnx2fc_cmd *io_req)
 	mp_resp_bd->buf_addr_lo = (u32)addr & 0xffffffff;
 	mp_resp_bd->buf_addr_hi = (u32)((u64)addr >> 32);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mp_resp_bd->buf_len = PAGE_SIZE;
+=======
+	mp_resp_bd->buf_len = CNIC_PAGE_SIZE;
+>>>>>>> v3.18
 =======
 	mp_resp_bd->buf_len = CNIC_PAGE_SIZE;
 >>>>>>> v3.18
@@ -1289,13 +1329,19 @@ int bnx2fc_eh_abort(struct scsi_cmnd *sc_cmd)
 				 bnx2fc_cmd_release); /* drop timer hold */
 		rc = bnx2fc_expl_logo(lport, io_req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* This only occurs when an task abort was requested while ABTS
 		   is in progress.  Setting the IO_CLEANUP flag will skip the
 		   RRQ process in the case when the fw generated SCSI_CMD cmpl
 		   was a result from the ABTS request rather than the CLEANUP
 		   request */
 		set_bit(BNX2FC_FLAG_IO_CLEANUP,	&io_req->req_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -1494,9 +1540,15 @@ static void bnx2fc_lun_reset_cmpl(struct bnx2fc_cmd *io_req)
 	struct bnx2fc_rport *tgt = io_req->tgt;
 	struct bnx2fc_cmd *cmd, *tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int tm_lun = sc_cmd->device->lun;
 	int rc = 0;
 	int lun;
+=======
+	u64 tm_lun = sc_cmd->device->lun;
+	u64 lun;
+	int rc = 0;
+>>>>>>> v3.18
 =======
 	u64 tm_lun = sc_cmd->device->lun;
 	u64 lun;
@@ -1703,11 +1755,17 @@ static int bnx2fc_map_sg(struct bnx2fc_cmd *io_req)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Use dma_map_sg directly to ensure we're using the correct
 	 * dev struct off of pcidev.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sg_count = dma_map_sg(&hba->pcidev->dev, scsi_sglist(sc),
 			      scsi_sg_count(sc), sc->sc_data_direction);
@@ -1759,10 +1817,13 @@ static void bnx2fc_unmap_sg_list(struct bnx2fc_cmd *io_req)
 {
 	struct scsi_cmnd *sc = io_req->sc_cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (io_req->bd_tbl->bd_valid && sc) {
 		scsi_dma_unmap(sc);
 =======
+=======
+>>>>>>> v3.18
 	struct bnx2fc_interface *interface = io_req->port->priv;
 	struct bnx2fc_hba *hba = interface->hba;
 
@@ -1773,6 +1834,9 @@ static void bnx2fc_unmap_sg_list(struct bnx2fc_cmd *io_req)
 	if (io_req->bd_tbl->bd_valid && sc && scsi_sg_count(sc)) {
 		dma_unmap_sg(&hba->pcidev->dev, scsi_sglist(sc),
 		    scsi_sg_count(sc), sc->sc_data_direction);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		io_req->bd_tbl->bd_valid = 0;
 	}
@@ -1943,7 +2007,10 @@ int bnx2fc_queuecommand(struct Scsi_Host *host,
 		goto exit_qcmd;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (tgt->retry_delay_timestamp) {
 		if (time_after(jiffies, tgt->retry_delay_timestamp)) {
 			tgt->retry_delay_timestamp = 0;
@@ -1955,13 +2022,20 @@ int bnx2fc_queuecommand(struct Scsi_Host *host,
 	}
 
 	spin_lock_bh(&tgt->tgt_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	io_req = bnx2fc_cmd_alloc(tgt);
 	if (!io_req) {
 		rc = SCSI_MLQUEUE_HOST_BUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_qcmd;
+=======
+		goto exit_qcmd_tgtlock;
+>>>>>>> v3.18
 =======
 		goto exit_qcmd_tgtlock;
 >>>>>>> v3.18
@@ -1972,14 +2046,20 @@ int bnx2fc_queuecommand(struct Scsi_Host *host,
 		printk(KERN_ERR PFX "Unable to post io_req\n");
 		rc = SCSI_MLQUEUE_HOST_BUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_qcmd;
 	}
 =======
+=======
+>>>>>>> v3.18
 		goto exit_qcmd_tgtlock;
 	}
 
 exit_qcmd_tgtlock:
 	spin_unlock_bh(&tgt->tgt_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 exit_qcmd:
 	return rc;
@@ -2059,7 +2139,10 @@ void bnx2fc_process_scsi_cmd_compl(struct bnx2fc_cmd *io_req,
 				io_req->cdb_status, io_req->fcp_resid);
 			sc_cmd->result = (DID_OK << 16) | io_req->cdb_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			if (io_req->cdb_status == SAM_STAT_TASK_SET_FULL ||
 			    io_req->cdb_status == SAM_STAT_BUSY) {
@@ -2069,6 +2152,9 @@ void bnx2fc_process_scsi_cmd_compl(struct bnx2fc_cmd *io_req,
 					fcp_rsp->retry_delay_timer * HZ / 10;
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		if (io_req->fcp_resid)
@@ -2099,6 +2185,11 @@ int bnx2fc_post_io_req(struct bnx2fc_rport *tgt,
 	u16 xid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* bnx2fc_post_io_req() is called with the tgt_lock held */
+
+>>>>>>> v3.18
 =======
 	/* bnx2fc_post_io_req() is called with the tgt_lock held */
 
@@ -2131,9 +2222,13 @@ int bnx2fc_post_io_req(struct bnx2fc_rport *tgt,
 	if (bnx2fc_build_bd_list_from_sg(io_req)) {
 		printk(KERN_ERR PFX "BD list creation failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&tgt->tgt_lock);
 		kref_put(&io_req->refcount, bnx2fc_cmd_release);
 		spin_unlock_bh(&tgt->tgt_lock);
+=======
+		kref_put(&io_req->refcount, bnx2fc_cmd_release);
+>>>>>>> v3.18
 =======
 		kref_put(&io_req->refcount, bnx2fc_cmd_release);
 >>>>>>> v3.18
@@ -2149,12 +2244,18 @@ int bnx2fc_post_io_req(struct bnx2fc_rport *tgt,
 	bnx2fc_init_task(io_req, task);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&tgt->tgt_lock);
 
 	if (tgt->flush_in_prog) {
 		printk(KERN_ERR PFX "Flush in progress..Host Busy\n");
 		kref_put(&io_req->refcount, bnx2fc_cmd_release);
 		spin_unlock_bh(&tgt->tgt_lock);
+=======
+	if (tgt->flush_in_prog) {
+		printk(KERN_ERR PFX "Flush in progress..Host Busy\n");
+		kref_put(&io_req->refcount, bnx2fc_cmd_release);
+>>>>>>> v3.18
 =======
 	if (tgt->flush_in_prog) {
 		printk(KERN_ERR PFX "Flush in progress..Host Busy\n");
@@ -2167,7 +2268,10 @@ int bnx2fc_post_io_req(struct bnx2fc_rport *tgt,
 		printk(KERN_ERR PFX "Session not ready...post_io\n");
 		kref_put(&io_req->refcount, bnx2fc_cmd_release);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_bh(&tgt->tgt_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return -EAGAIN;
@@ -2188,7 +2292,10 @@ int bnx2fc_post_io_req(struct bnx2fc_rport *tgt,
 	/* Ring doorbell */
 	bnx2fc_ring_doorbell(tgt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&tgt->tgt_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

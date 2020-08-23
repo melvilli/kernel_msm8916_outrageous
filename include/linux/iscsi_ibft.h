@@ -22,7 +22,11 @@
 #define ISCSI_IBFT_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18

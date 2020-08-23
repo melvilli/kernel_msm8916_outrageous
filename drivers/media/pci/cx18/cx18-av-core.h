@@ -105,7 +105,10 @@ struct cx18_av_state {
 	u32 audclk_freq;
 	int audmode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 rev;

@@ -8,6 +8,10 @@
 #include <linux/fs.h>
 #include <linux/mount.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/blkdev.h>
+>>>>>>> v3.18
 =======
 #include <linux/blkdev.h>
 >>>>>>> v3.18
@@ -146,8 +150,13 @@ bail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_handle_blocksize(struct inode *inode,
 				struct ocfs2_info_request __user *req)
+=======
+static int ocfs2_info_handle_blocksize(struct inode *inode,
+				       struct ocfs2_info_request __user *req)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_handle_blocksize(struct inode *inode,
 				       struct ocfs2_info_request __user *req)
@@ -169,8 +178,13 @@ static int ocfs2_info_handle_blocksize(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_handle_clustersize(struct inode *inode,
 				  struct ocfs2_info_request __user *req)
+=======
+static int ocfs2_info_handle_clustersize(struct inode *inode,
+					 struct ocfs2_info_request __user *req)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_handle_clustersize(struct inode *inode,
 					 struct ocfs2_info_request __user *req)
@@ -193,8 +207,13 @@ static int ocfs2_info_handle_clustersize(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_handle_maxslots(struct inode *inode,
 			       struct ocfs2_info_request __user *req)
+=======
+static int ocfs2_info_handle_maxslots(struct inode *inode,
+				      struct ocfs2_info_request __user *req)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_handle_maxslots(struct inode *inode,
 				      struct ocfs2_info_request __user *req)
@@ -217,8 +236,13 @@ static int ocfs2_info_handle_maxslots(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_handle_label(struct inode *inode,
 			    struct ocfs2_info_request __user *req)
+=======
+static int ocfs2_info_handle_label(struct inode *inode,
+				   struct ocfs2_info_request __user *req)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_handle_label(struct inode *inode,
 				   struct ocfs2_info_request __user *req)
@@ -241,8 +265,13 @@ static int ocfs2_info_handle_label(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_handle_uuid(struct inode *inode,
 			   struct ocfs2_info_request __user *req)
+=======
+static int ocfs2_info_handle_uuid(struct inode *inode,
+				  struct ocfs2_info_request __user *req)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_handle_uuid(struct inode *inode,
 				  struct ocfs2_info_request __user *req)
@@ -265,8 +294,13 @@ static int ocfs2_info_handle_uuid(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_handle_fs_features(struct inode *inode,
 				  struct ocfs2_info_request __user *req)
+=======
+static int ocfs2_info_handle_fs_features(struct inode *inode,
+					 struct ocfs2_info_request __user *req)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_handle_fs_features(struct inode *inode,
 					 struct ocfs2_info_request __user *req)
@@ -291,8 +325,13 @@ static int ocfs2_info_handle_fs_features(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_handle_journal_size(struct inode *inode,
 				   struct ocfs2_info_request __user *req)
+=======
+static int ocfs2_info_handle_journal_size(struct inode *inode,
+					  struct ocfs2_info_request __user *req)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_handle_journal_size(struct inode *inode,
 					  struct ocfs2_info_request __user *req)
@@ -305,7 +344,11 @@ static int ocfs2_info_handle_journal_size(struct inode *inode,
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oij.ij_journal_size = osb->journal->j_inode->i_size;
+=======
+	oij.ij_journal_size = i_size_read(osb->journal->j_inode);
+>>>>>>> v3.18
 =======
 	oij.ij_journal_size = i_size_read(osb->journal->j_inode);
 >>>>>>> v3.18
@@ -319,14 +362,20 @@ static int ocfs2_info_handle_journal_size(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_scan_inode_alloc(struct ocfs2_super *osb,
 				struct inode *inode_alloc, u64 blkno,
 				struct ocfs2_info_freeinode *fi, u32 slot)
 =======
+=======
+>>>>>>> v3.18
 static int ocfs2_info_scan_inode_alloc(struct ocfs2_super *osb,
 				       struct inode *inode_alloc, u64 blkno,
 				       struct ocfs2_info_freeinode *fi,
 				       u32 slot)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int status = 0, unlock = 0;
@@ -373,8 +422,13 @@ bail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_handle_freeinode(struct inode *inode,
 				struct ocfs2_info_request __user *req)
+=======
+static int ocfs2_info_handle_freeinode(struct inode *inode,
+				       struct ocfs2_info_request __user *req)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_handle_freeinode(struct inode *inode,
 				       struct ocfs2_info_request __user *req)
@@ -427,18 +481,24 @@ static int ocfs2_info_handle_freeinode(struct inode *inode,
 
 		status = ocfs2_info_scan_inode_alloc(osb, inode_alloc, blkno, oifi, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (status < 0)
 			goto bail;
 
 		iput(inode_alloc);
 		inode_alloc = NULL;
 =======
+=======
+>>>>>>> v3.18
 
 		iput(inode_alloc);
 		inode_alloc = NULL;
 
 		if (status < 0)
 			goto bail;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -486,8 +546,13 @@ static void o2ffg_update_stats(struct ocfs2_info_freefrag_stats *stats,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ocfs2_info_update_ffg(struct ocfs2_info_freefrag *ffg,
 			   unsigned int chunksize)
+=======
+static void ocfs2_info_update_ffg(struct ocfs2_info_freefrag *ffg,
+				  unsigned int chunksize)
+>>>>>>> v3.18
 =======
 static void ocfs2_info_update_ffg(struct ocfs2_info_freefrag *ffg,
 				  unsigned int chunksize)
@@ -498,6 +563,7 @@ static void ocfs2_info_update_ffg(struct ocfs2_info_freefrag *ffg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_freefrag_scan_chain(struct ocfs2_super *osb,
 				   struct inode *gb_inode,
 				   struct ocfs2_dinode *gb_dinode,
@@ -505,12 +571,17 @@ int ocfs2_info_freefrag_scan_chain(struct ocfs2_super *osb,
 				   struct ocfs2_info_freefrag *ffg,
 				   u32 chunks_in_group)
 =======
+=======
+>>>>>>> v3.18
 static int ocfs2_info_freefrag_scan_chain(struct ocfs2_super *osb,
 					  struct inode *gb_inode,
 					  struct ocfs2_dinode *gb_dinode,
 					  struct ocfs2_chain_rec *rec,
 					  struct ocfs2_info_freefrag *ffg,
 					  u32 chunks_in_group)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int status = 0, used;
@@ -610,9 +681,15 @@ bail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_freefrag_scan_bitmap(struct ocfs2_super *osb,
 				    struct inode *gb_inode, u64 blkno,
 				    struct ocfs2_info_freefrag *ffg)
+=======
+static int ocfs2_info_freefrag_scan_bitmap(struct ocfs2_super *osb,
+					   struct inode *gb_inode, u64 blkno,
+					   struct ocfs2_info_freefrag *ffg)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_freefrag_scan_bitmap(struct ocfs2_super *osb,
 					   struct inode *gb_inode, u64 blkno,
@@ -696,8 +773,13 @@ bail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_handle_freefrag(struct inode *inode,
 			       struct ocfs2_info_request __user *req)
+=======
+static int ocfs2_info_handle_freefrag(struct inode *inode,
+				      struct ocfs2_info_request __user *req)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_handle_freefrag(struct inode *inode,
 				      struct ocfs2_info_request __user *req)
@@ -774,8 +856,13 @@ out_err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_handle_unknown(struct inode *inode,
 			      struct ocfs2_info_request __user *req)
+=======
+static int ocfs2_info_handle_unknown(struct inode *inode,
+				     struct ocfs2_info_request __user *req)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_handle_unknown(struct inode *inode,
 				     struct ocfs2_info_request __user *req)
@@ -802,8 +889,13 @@ static int ocfs2_info_handle_unknown(struct inode *inode,
  * - validate size of different requests.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_handle_request(struct inode *inode,
 			      struct ocfs2_info_request __user *req)
+=======
+static int ocfs2_info_handle_request(struct inode *inode,
+				     struct ocfs2_info_request __user *req)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_handle_request(struct inode *inode,
 				     struct ocfs2_info_request __user *req)
@@ -866,8 +958,13 @@ bail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_get_request_ptr(struct ocfs2_info *info, int idx,
 			  u64 *req_addr, int compat_flag)
+=======
+static int ocfs2_get_request_ptr(struct ocfs2_info *info, int idx,
+				 u64 *req_addr, int compat_flag)
+>>>>>>> v3.18
 =======
 static int ocfs2_get_request_ptr(struct ocfs2_info *info, int idx,
 				 u64 *req_addr, int compat_flag)
@@ -909,8 +1006,13 @@ bail:
  * request will be less likely to be broken if disk layout get changed.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ocfs2_info_handle(struct inode *inode, struct ocfs2_info *info,
 		      int compat_flag)
+=======
+static int ocfs2_info_handle(struct inode *inode, struct ocfs2_info *info,
+			     int compat_flag)
+>>>>>>> v3.18
 =======
 static int ocfs2_info_handle(struct inode *inode, struct ocfs2_info *info,
 			     int compat_flag)
@@ -1033,6 +1135,10 @@ long ocfs2_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	{
 		struct super_block *sb = inode->i_sb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct request_queue *q = bdev_get_queue(sb->s_bdev);
+>>>>>>> v3.18
 =======
 		struct request_queue *q = bdev_get_queue(sb->s_bdev);
 >>>>>>> v3.18
@@ -1043,10 +1149,13 @@ long ocfs2_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 			return -EPERM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (copy_from_user(&range, argp, sizeof(range)))
 			return -EFAULT;
 
 =======
+=======
+>>>>>>> v3.18
 		if (!blk_queue_discard(q))
 			return -EOPNOTSUPP;
 
@@ -1055,6 +1164,9 @@ long ocfs2_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 
 		range.minlen = max_t(u64, q->limits.discard_granularity,
 				     range.minlen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = ocfs2_trim_fs(sb, &range);
 		if (ret < 0)

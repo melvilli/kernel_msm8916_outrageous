@@ -35,7 +35,11 @@ static const struct resword *is_reserved_word(register const char *str, register
 #line 8 "scripts/genksyms/keywords.gperf"
 struct resword { const char *name; int token; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* maximum key range = 64, duplicates = 0 */
+=======
+/* maximum key range = 98, duplicates = 0 */
+>>>>>>> v3.18
 =======
 /* maximum key range = 98, duplicates = 0 */
 >>>>>>> v3.18
@@ -52,6 +56,7 @@ is_reserved_hash (register const char *str, register unsigned int len)
 {
   static const unsigned char asso_values[] =
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
       67, 67, 67, 67, 67, 67, 67, 67, 67, 67,
       67, 67, 67, 67, 67, 67, 67, 67, 67, 67,
@@ -80,6 +85,8 @@ is_reserved_hash (register const char *str, register unsigned int len)
       67, 67, 67, 67, 67, 67, 67, 67, 67, 67,
       67, 67, 67, 67, 67, 67
 =======
+=======
+>>>>>>> v3.18
       101, 101, 101, 101, 101, 101, 101, 101, 101, 101,
       101, 101, 101, 101, 101, 101, 101, 101, 101, 101,
       101, 101, 101, 101, 101, 101, 101, 101, 101, 101,
@@ -106,6 +113,9 @@ is_reserved_hash (register const char *str, register unsigned int len)
       101, 101, 101, 101, 101, 101, 101, 101, 101, 101,
       101, 101, 101, 101, 101, 101, 101, 101, 101, 101,
       101, 101, 101, 101, 101, 101
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     };
   return len + asso_values[(unsigned char)str[2]] + asso_values[(unsigned char)str[0]] + asso_values[(unsigned char)str[len - 1]];
@@ -123,17 +133,23 @@ is_reserved_word (register const char *str, register unsigned int len)
   enum
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
       TOTAL_KEYWORDS = 45,
       MIN_WORD_LENGTH = 3,
       MAX_WORD_LENGTH = 24,
       MIN_HASH_VALUE = 3,
       MAX_HASH_VALUE = 66
 =======
+=======
+>>>>>>> v3.18
       TOTAL_KEYWORDS = 46,
       MIN_WORD_LENGTH = 3,
       MAX_WORD_LENGTH = 24,
       MIN_HASH_VALUE = 3,
       MAX_HASH_VALUE = 100
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     };
 
@@ -141,7 +157,11 @@ is_reserved_word (register const char *str, register unsigned int len)
     {
       {""}, {""}, {""},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 33 "scripts/genksyms/keywords.gperf"
+=======
+#line 35 "scripts/genksyms/keywords.gperf"
+>>>>>>> v3.18
 =======
 #line 35 "scripts/genksyms/keywords.gperf"
 >>>>>>> v3.18
@@ -154,7 +174,11 @@ is_reserved_word (register const char *str, register unsigned int len)
       {"__asm__", ASM_KEYW},
       {""}, {""},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 59 "scripts/genksyms/keywords.gperf"
+=======
+#line 27 "scripts/genksyms/keywords.gperf"
+>>>>>>> v3.18
 =======
 #line 27 "scripts/genksyms/keywords.gperf"
 >>>>>>> v3.18
@@ -168,6 +192,7 @@ is_reserved_word (register const char *str, register unsigned int len)
       {"__const__", CONST_KEYW},
 #line 25 "scripts/genksyms/keywords.gperf"
       {"__signed__", SIGNED_KEYW},
+<<<<<<< HEAD
 <<<<<<< HEAD
 #line 51 "scripts/genksyms/keywords.gperf"
       {"static", STATIC_KEYW},
@@ -184,6 +209,8 @@ is_reserved_word (register const char *str, register unsigned int len)
       {"__restrict__", RESTRICT_KEYW},
 #line 32 "scripts/genksyms/keywords.gperf"
 =======
+=======
+>>>>>>> v3.18
 #line 53 "scripts/genksyms/keywords.gperf"
       {"static", STATIC_KEYW},
       {""},
@@ -198,6 +225,9 @@ is_reserved_word (register const char *str, register unsigned int len)
 #line 33 "scripts/genksyms/keywords.gperf"
       {"__restrict__", RESTRICT_KEYW},
 #line 34 "scripts/genksyms/keywords.gperf"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       {"restrict", RESTRICT_KEYW},
 #line 12 "scripts/genksyms/keywords.gperf"
@@ -206,17 +236,23 @@ is_reserved_word (register const char *str, register unsigned int len)
       {"__inline__", INLINE_KEYW},
       {""},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 27 "scripts/genksyms/keywords.gperf"
       {"__volatile__", VOLATILE_KEYW},
 #line 10 "scripts/genksyms/keywords.gperf"
       {"EXPORT_SYMBOL", EXPORT_SYMBOL_KEYW},
 #line 30 "scripts/genksyms/keywords.gperf"
 =======
+=======
+>>>>>>> v3.18
 #line 29 "scripts/genksyms/keywords.gperf"
       {"__volatile__", VOLATILE_KEYW},
 #line 10 "scripts/genksyms/keywords.gperf"
       {"EXPORT_SYMBOL", EXPORT_SYMBOL_KEYW},
 #line 32 "scripts/genksyms/keywords.gperf"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       {"_restrict", RESTRICT_KEYW},
       {""},
@@ -227,17 +263,23 @@ is_reserved_word (register const char *str, register unsigned int len)
 #line 21 "scripts/genksyms/keywords.gperf"
       {"__extension__", EXTENSION_KEYW},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 42 "scripts/genksyms/keywords.gperf"
       {"enum", ENUM_KEYW},
 #line 13 "scripts/genksyms/keywords.gperf"
       {"EXPORT_UNUSED_SYMBOL", EXPORT_SYMBOL_KEYW},
 #line 43 "scripts/genksyms/keywords.gperf"
 =======
+=======
+>>>>>>> v3.18
 #line 44 "scripts/genksyms/keywords.gperf"
       {"enum", ENUM_KEYW},
 #line 13 "scripts/genksyms/keywords.gperf"
       {"EXPORT_UNUSED_SYMBOL", EXPORT_SYMBOL_KEYW},
 #line 45 "scripts/genksyms/keywords.gperf"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       {"extern", EXTERN_KEYW},
       {""},
@@ -245,6 +287,7 @@ is_reserved_word (register const char *str, register unsigned int len)
       {"__signed", SIGNED_KEYW},
 #line 14 "scripts/genksyms/keywords.gperf"
       {"EXPORT_UNUSED_SYMBOL_GPL", EXPORT_SYMBOL_KEYW},
+<<<<<<< HEAD
 <<<<<<< HEAD
 #line 54 "scripts/genksyms/keywords.gperf"
       {"union", UNION_KEYW},
@@ -286,6 +329,8 @@ is_reserved_word (register const char *str, register unsigned int len)
 #line 50 "scripts/genksyms/keywords.gperf"
       {"signed", SIGNED_KEYW}
 =======
+=======
+>>>>>>> v3.18
 #line 57 "scripts/genksyms/keywords.gperf"
       {"union", UNION_KEYW},
       {""}, {""},
@@ -334,6 +379,9 @@ is_reserved_word (register const char *str, register unsigned int len)
       {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""},
 #line 46 "scripts/genksyms/keywords.gperf"
       {"float", FLOAT_KEYW}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     };
 

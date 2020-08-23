@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,7 +50,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -157,6 +166,11 @@ acpi_initialize_tables(struct acpi_table_desc * initial_table_array,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ACPI_EXPORT_SYMBOL_INIT(acpi_initialize_tables)
+
+>>>>>>> v3.18
 =======
 ACPI_EXPORT_SYMBOL_INIT(acpi_initialize_tables)
 
@@ -176,7 +190,11 @@ ACPI_EXPORT_SYMBOL_INIT(acpi_initialize_tables)
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_reallocate_root_table(void)
+=======
+acpi_status __init acpi_reallocate_root_table(void)
+>>>>>>> v3.18
 =======
 acpi_status __init acpi_reallocate_root_table(void)
 >>>>>>> v3.18
@@ -200,6 +218,11 @@ acpi_status __init acpi_reallocate_root_table(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ACPI_EXPORT_SYMBOL_INIT(acpi_reallocate_root_table)
+
+>>>>>>> v3.18
 =======
 ACPI_EXPORT_SYMBOL_INIT(acpi_reallocate_root_table)
 
@@ -225,8 +248,13 @@ acpi_get_table_header(char *signature,
 		      u32 instance, struct acpi_table_header *out_table_header)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
        u32 i;
        u32 j;
+=======
+	u32 i;
+	u32 j;
+>>>>>>> v3.18
 =======
 	u32 i;
 	u32 j;
@@ -257,7 +285,11 @@ acpi_get_table_header(char *signature,
 			if ((acpi_gbl_root_table_list.tables[i].flags &
 			     ACPI_TABLE_ORIGIN_MASK) ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    ACPI_TABLE_ORIGIN_MAPPED) {
+=======
+			    ACPI_TABLE_ORIGIN_INTERNAL_PHYSICAL) {
+>>>>>>> v3.18
 =======
 			    ACPI_TABLE_ORIGIN_INTERNAL_PHYSICAL) {
 >>>>>>> v3.18
@@ -349,8 +381,13 @@ acpi_get_table_with_size(char *signature,
 	       acpi_size *tbl_size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
        u32 i;
        u32 j;
+=======
+	u32 i;
+	u32 j;
+>>>>>>> v3.18
 =======
 	u32 i;
 	u32 j;
@@ -379,7 +416,11 @@ acpi_get_table_with_size(char *signature,
 
 		status =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    acpi_tb_verify_table(&acpi_gbl_root_table_list.tables[i]);
+=======
+		    acpi_tb_validate_table(&acpi_gbl_root_table_list.tables[i]);
+>>>>>>> v3.18
 =======
 		    acpi_tb_validate_table(&acpi_gbl_root_table_list.tables[i]);
 >>>>>>> v3.18
@@ -398,6 +439,10 @@ acpi_get_table_with_size(char *signature,
 	return (AE_NOT_FOUND);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -413,6 +458,10 @@ acpi_get_table(char *signature,
 		       instance, out_table, &tbl_size);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -433,7 +482,11 @@ ACPI_EXPORT_SYMBOL(acpi_get_table)
  ******************************************************************************/
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_get_table_by_index(u32 table_index, struct acpi_table_header **table)
+=======
+acpi_get_table_by_index(u32 table_index, struct acpi_table_header ** table)
+>>>>>>> v3.18
 =======
 acpi_get_table_by_index(u32 table_index, struct acpi_table_header ** table)
 >>>>>>> v3.18
@@ -463,8 +516,13 @@ acpi_get_table_by_index(u32 table_index, struct acpi_table_header ** table)
 
 		status =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    acpi_tb_verify_table(&acpi_gbl_root_table_list.
 					 tables[table_index]);
+=======
+		    acpi_tb_validate_table(&acpi_gbl_root_table_list.
+					   tables[table_index]);
+>>>>>>> v3.18
 =======
 		    acpi_tb_validate_table(&acpi_gbl_root_table_list.
 					   tables[table_index]);
@@ -483,7 +541,10 @@ acpi_get_table_by_index(u32 table_index, struct acpi_table_header ** table)
 ACPI_EXPORT_SYMBOL(acpi_get_table_by_index)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*******************************************************************************
@@ -527,7 +588,11 @@ acpi_install_table_handler(acpi_table_handler handler, void *context)
 	acpi_gbl_table_handler_context = context;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -572,7 +637,11 @@ acpi_status acpi_remove_table_handler(acpi_table_handler handler)
 	acpi_gbl_table_handler = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18

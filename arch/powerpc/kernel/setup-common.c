@@ -63,8 +63,11 @@
 #include <asm/fadump.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "setup.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef DEBUG
@@ -82,14 +85,20 @@ struct machdep_calls *machine_id;
 EXPORT_SYMBOL(machine_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long klimit = (unsigned long) _end;
 
 char cmd_line[COMMAND_LINE_SIZE];
 =======
+=======
+>>>>>>> v3.18
 int boot_cpuid = -1;
 EXPORT_SYMBOL_GPL(boot_cpuid);
 
 unsigned long klimit = (unsigned long) _end;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -104,6 +113,12 @@ struct screen_info screen_info = {
 	.orig_video_points = 16
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_FB_VGA16_MODULE)
+EXPORT_SYMBOL(screen_info);
+#endif
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_FB_VGA16_MODULE)
 EXPORT_SYMBOL(screen_info);
@@ -228,6 +243,10 @@ static int show_cpuinfo(struct seq_file *m, void *v)
 	unsigned long cpu_id = (unsigned long)v - 1;
 	unsigned int pvr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long proc_freq;
+>>>>>>> v3.18
 =======
 	unsigned long proc_freq;
 >>>>>>> v3.18
@@ -283,6 +302,7 @@ static int show_cpuinfo(struct seq_file *m, void *v)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Assume here that all clock rates are the same in a
 	 * smp system.  -- Cort
 	 */
@@ -290,6 +310,8 @@ static int show_cpuinfo(struct seq_file *m, void *v)
 		seq_printf(m, "clock\t\t: %lu.%06luMHz\n",
 			   ppc_proc_freq / 1000000, ppc_proc_freq % 1000000);
 =======
+=======
+>>>>>>> v3.18
 	 * Platforms that have variable clock rates, should implement
 	 * the method ppc_md.get_proc_freq() that reports the clock
 	 * rate of a given cpu. The rest can use ppc_proc_freq to
@@ -303,6 +325,9 @@ static int show_cpuinfo(struct seq_file *m, void *v)
 	if (proc_freq)
 		seq_printf(m, "clock\t\t: %lu.%06luMHz\n",
 			   proc_freq / 1000000, proc_freq % 1000000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ppc_md.show_percpuinfo != NULL)
@@ -410,7 +435,11 @@ void __init check_for_initrd(void)
 
 	if (initrd_start)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("Found initrd at 0x%lx:0x%lx\n", initrd_start, initrd_end);
+=======
+		pr_info("Found initrd at 0x%lx:0x%lx\n", initrd_start, initrd_end);
+>>>>>>> v3.18
 =======
 		pr_info("Found initrd at 0x%lx:0x%lx\n", initrd_start, initrd_end);
 >>>>>>> v3.18
@@ -422,14 +451,20 @@ void __init check_for_initrd(void)
 #ifdef CONFIG_SMP
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int threads_per_core, threads_shift;
 cpumask_t threads_core_mask;
 EXPORT_SYMBOL_GPL(threads_per_core);
 =======
+=======
+>>>>>>> v3.18
 int threads_per_core, threads_per_subcore, threads_shift;
 cpumask_t threads_core_mask;
 EXPORT_SYMBOL_GPL(threads_per_core);
 EXPORT_SYMBOL_GPL(threads_per_subcore);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(threads_shift);
 EXPORT_SYMBOL_GPL(threads_core_mask);
@@ -440,6 +475,10 @@ static void __init cpu_init_thread_core_maps(int tpc)
 
 	threads_per_core = tpc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	threads_per_subcore = tpc;
+>>>>>>> v3.18
 =======
 	threads_per_subcore = tpc;
 >>>>>>> v3.18
@@ -488,7 +527,12 @@ void __init smp_setup_cpu_maps(void)
 
 	while ((dn = of_find_node_by_type(dn, "cpu")) && cpu < nr_cpu_ids) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const int *intserv;
+=======
+		const __be32 *intserv;
+		__be32 cpu_be;
+>>>>>>> v3.18
 =======
 		const __be32 *intserv;
 		__be32 cpu_be;
@@ -501,13 +545,17 @@ void __init smp_setup_cpu_maps(void)
 				&len);
 		if (intserv) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nthreads = len / sizeof(int);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			DBG("    ibm,ppc-interrupt-server#s -> %d threads\n",
 			    nthreads);
 		} else {
 			DBG("    no ibm,ppc-interrupt-server#s -> 1 thread\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 			intserv = of_get_property(dn, "reg", NULL);
 			if (!intserv)
@@ -520,6 +568,8 @@ void __init smp_setup_cpu_maps(void)
 			set_cpu_present(cpu, true);
 			set_hard_smp_processor_id(cpu, intserv[j]);
 =======
+=======
+>>>>>>> v3.18
 			intserv = of_get_property(dn, "reg", &len);
 			if (!intserv) {
 				cpu_be = cpu_to_be32(cpu);
@@ -543,6 +593,9 @@ void __init smp_setup_cpu_maps(void)
 
 			set_cpu_present(cpu, avail);
 			set_hard_smp_processor_id(cpu, be32_to_cpu(intserv[j]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			set_cpu_possible(cpu, true);
 			cpu++;
@@ -564,7 +617,11 @@ void __init smp_setup_cpu_maps(void)
 	    (dn = of_find_node_by_path("/rtas"))) {
 		int num_addr_cell, num_size_cell, maxcpus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const unsigned int *ireg;
+=======
+		const __be32 *ireg;
+>>>>>>> v3.18
 =======
 		const __be32 *ireg;
 >>>>>>> v3.18
@@ -578,7 +635,11 @@ void __init smp_setup_cpu_maps(void)
 			goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		maxcpus = ireg[num_addr_cell + num_size_cell];
+=======
+		maxcpus = be32_to_cpup(ireg + num_addr_cell + num_size_cell);
+>>>>>>> v3.18
 =======
 		maxcpus = be32_to_cpup(ireg + num_addr_cell + num_size_cell);
 >>>>>>> v3.18
@@ -808,6 +869,7 @@ arch_initcall(powerpc_debugfs_init);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BOOKE_WDT
 extern u32 booke_wdt_enabled;
 extern u32 booke_wdt_period;
@@ -835,6 +897,8 @@ int __init early_parse_wdt_period(char *p)
 early_param("wdt_period", early_parse_wdt_period);
 #endif	/* CONFIG_BOOKE_WDT */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void ppc_printk_progress(char *s, unsigned short hex)

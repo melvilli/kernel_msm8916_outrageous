@@ -19,8 +19,12 @@ EXPORT_SYMBOL(unblock_signals);
  * OK, we're invoking a handler
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void handle_signal(struct pt_regs *regs, unsigned long signr,
 			 struct k_sigaction *ka, struct siginfo *info)
+=======
+static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -44,7 +48,11 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 
 		case -ERESTARTSYS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(ka->sa.sa_flags & SA_RESTART)) {
+=======
+			if (!(ksig->ka.sa.sa_flags & SA_RESTART)) {
+>>>>>>> v3.18
 =======
 			if (!(ksig->ka.sa.sa_flags & SA_RESTART)) {
 >>>>>>> v3.18
@@ -61,6 +69,7 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 
 	sp = PT_REGS_SP(regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((ka->sa.sa_flags & SA_ONSTACK) && (sas_ss_flags(sp) == 0))
 		sp = current->sas_ss_sp + current->sas_ss_size;
 
@@ -76,6 +85,8 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	else
 		signal_delivered(signr, info, ka, regs, singlestep);
 =======
+=======
+>>>>>>> v3.18
 	if ((ksig->ka.sa.sa_flags & SA_ONSTACK) && (sas_ss_flags(sp) == 0))
 		sp = current->sas_ss_sp + current->sas_ss_size;
 
@@ -87,11 +98,15 @@ static void handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 		err = setup_signal_stack_si(sp, ksig, regs, oldset);
 
 	signal_setup_done(err, ksig, singlestep);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int kern_do_signal(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct k_sigaction ka_copy;
 	struct siginfo info;
@@ -102,6 +117,8 @@ static int kern_do_signal(struct pt_regs *regs)
 		/* Whee!  Actually deliver the signal.  */
 		handle_signal(regs, sig, &ka_copy, &info);
 =======
+=======
+>>>>>>> v3.18
 	struct ksignal ksig;
 	int handled_sig = 0;
 
@@ -109,6 +126,9 @@ static int kern_do_signal(struct pt_regs *regs)
 		handled_sig = 1;
 		/* Whee!  Actually deliver the signal.  */
 		handle_signal(&ksig, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

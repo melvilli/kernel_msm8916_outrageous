@@ -54,7 +54,11 @@ extern struct inet_hashinfo dccp_hashinfo;
 extern struct percpu_counter dccp_orphan_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dccp_time_wait(struct sock *sk, int state, int timeo);
+=======
+void dccp_time_wait(struct sock *sk, int state, int timeo);
+>>>>>>> v3.18
 =======
 void dccp_time_wait(struct sock *sk, int state, int timeo);
 >>>>>>> v3.18
@@ -229,6 +233,7 @@ static inline void dccp_csum_outgoing(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dccp_v4_send_check(struct sock *sk, struct sk_buff *skb);
 
 extern int  dccp_retransmit_skb(struct sock *sk);
@@ -240,6 +245,8 @@ extern void dccp_reqsk_send_ack(struct sock *sk, struct sk_buff *skb,
 extern void dccp_send_sync(struct sock *sk, const u64 seq,
 			   const enum dccp_pkt_type pkt_type);
 =======
+=======
+>>>>>>> v3.18
 void dccp_v4_send_check(struct sock *sk, struct sk_buff *skb);
 
 int dccp_retransmit_skb(struct sock *sk);
@@ -250,11 +257,15 @@ void dccp_reqsk_send_ack(struct sock *sk, struct sk_buff *skb,
 
 void dccp_send_sync(struct sock *sk, const u64 seq,
 		    const enum dccp_pkt_type pkt_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * TX Packet Dequeueing Interface
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void		dccp_qpolicy_push(struct sock *sk, struct sk_buff *skb);
 extern bool		dccp_qpolicy_full(struct sock *sk);
@@ -263,17 +274,23 @@ extern struct sk_buff	*dccp_qpolicy_top(struct sock *sk);
 extern struct sk_buff	*dccp_qpolicy_pop(struct sock *sk);
 extern bool		dccp_qpolicy_param_ok(struct sock *sk, __be32 param);
 =======
+=======
+>>>>>>> v3.18
 void dccp_qpolicy_push(struct sock *sk, struct sk_buff *skb);
 bool dccp_qpolicy_full(struct sock *sk);
 void dccp_qpolicy_drop(struct sock *sk, struct sk_buff *skb);
 struct sk_buff *dccp_qpolicy_top(struct sock *sk);
 struct sk_buff *dccp_qpolicy_pop(struct sock *sk);
 bool dccp_qpolicy_param_ok(struct sock *sk, __be32 param);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * TX Packet Output and TX Timers
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void   dccp_write_xmit(struct sock *sk);
 extern void   dccp_write_space(struct sock *sk);
@@ -281,17 +298,23 @@ extern void   dccp_flush_write_queue(struct sock *sk, long *time_budget);
 
 extern void dccp_init_xmit_timers(struct sock *sk);
 =======
+=======
+>>>>>>> v3.18
 void dccp_write_xmit(struct sock *sk);
 void dccp_write_space(struct sock *sk);
 void dccp_flush_write_queue(struct sock *sk, long *time_budget);
 
 void dccp_init_xmit_timers(struct sock *sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void dccp_clear_xmit_timers(struct sock *sk)
 {
 	inet_csk_clear_xmit_timers(sk);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern unsigned int dccp_sync_mss(struct sock *sk, u32 pmtu);
 
@@ -368,6 +391,8 @@ extern void	   dccp_send_close(struct sock *sk, const int active);
 extern int	   dccp_invalid_packet(struct sk_buff *skb);
 extern u32	   dccp_sample_rtt(struct sock *sk, long delta);
 =======
+=======
+>>>>>>> v3.18
 unsigned int dccp_sync_mss(struct sock *sk, u32 pmtu);
 
 const char *dccp_packet_name(const int type);
@@ -436,6 +461,9 @@ int dccp_send_reset(struct sock *sk, enum dccp_reset_codes code);
 void dccp_send_close(struct sock *sk, const int active);
 int dccp_invalid_packet(struct sk_buff *skb);
 u32 dccp_sample_rtt(struct sock *sk, long delta);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int dccp_bad_service_code(const struct sock *sk,
@@ -581,6 +609,7 @@ static inline int dccp_ack_pending(const struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  dccp_feat_signal_nn_change(struct sock *sk, u8 feat, u64 nn_val);
 extern int  dccp_feat_finalise_settings(struct dccp_sock *dp);
 extern int  dccp_feat_server_ccid_dependencies(struct dccp_request_sock *dreq);
@@ -601,6 +630,8 @@ extern int dccp_insert_option(struct sk_buff *skb, unsigned char option,
 extern int dccp_sysctl_init(void);
 extern void dccp_sysctl_exit(void);
 =======
+=======
+>>>>>>> v3.18
 int dccp_feat_signal_nn_change(struct sock *sk, u8 feat, u64 nn_val);
 int dccp_feat_finalise_settings(struct dccp_sock *dp);
 int dccp_feat_server_ccid_dependencies(struct dccp_request_sock *dreq);
@@ -619,6 +650,9 @@ int dccp_insert_option(struct sk_buff *skb, unsigned char option,
 #ifdef CONFIG_SYSCTL
 int dccp_sysctl_init(void);
 void dccp_sysctl_exit(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int dccp_sysctl_init(void)

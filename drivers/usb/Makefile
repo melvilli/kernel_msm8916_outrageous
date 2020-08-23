@@ -6,9 +6,15 @@
 
 obj-$(CONFIG_USB)		+= core/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_USB_PHY)		+= phy/
 
 obj-$(CONFIG_USB_DWC3)		+= dwc3/
+=======
+
+obj-$(CONFIG_USB_DWC3)		+= dwc3/
+obj-$(CONFIG_USB_DWC2)		+= dwc2/
+>>>>>>> v3.18
 =======
 
 obj-$(CONFIG_USB_DWC3)		+= dwc3/
@@ -33,7 +39,13 @@ obj-$(CONFIG_USB_ISP1760_HCD)	+= host/
 obj-$(CONFIG_USB_IMX21_HCD)	+= host/
 obj-$(CONFIG_USB_FSL_MPH_DR_OF)	+= host/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_USB_ICE40_HCD)	+= host/
+=======
+obj-$(CONFIG_USB_FUSBH200_HCD)	+= host/
+obj-$(CONFIG_USB_FOTG210_HCD)	+= host/
+obj-$(CONFIG_USB_MAX3421_HCD)	+= host/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_USB_FUSBH200_HCD)	+= host/
 obj-$(CONFIG_USB_FOTG210_HCD)	+= host/
@@ -49,7 +61,10 @@ obj-$(CONFIG_USB_PRINTER)	+= class/
 obj-$(CONFIG_USB_WDM)		+= class/
 obj-$(CONFIG_USB_TMC)		+= class/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_USB_CCID_BRIDGE)	+= class/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -63,6 +78,10 @@ obj-$(CONFIG_USB_SERIAL)	+= serial/
 
 obj-$(CONFIG_USB)		+= misc/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_USB_SUPPORT)	+= phy/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_USB_SUPPORT)	+= phy/
 >>>>>>> v3.18
@@ -77,7 +96,13 @@ obj-$(CONFIG_USB_RENESAS_USBHS)	+= renesas_usbhs/
 obj-$(CONFIG_USB_GADGET)	+= gadget/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_USB_COMMON)	+= usb-common.o
+=======
+obj-$(CONFIG_USB_COMMON)	+= common/
+
+obj-$(CONFIG_USBIP_CORE)	+= usbip/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_USB_COMMON)	+= common/
 

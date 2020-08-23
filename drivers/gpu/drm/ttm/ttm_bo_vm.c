@@ -34,6 +34,10 @@
 #include <ttm/ttm_bo_driver.h>
 #include <ttm/ttm_placement.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_vma_manager.h>
+>>>>>>> v3.18
 =======
 #include <drm/drm_vma_manager.h>
 >>>>>>> v3.18
@@ -44,6 +48,7 @@
 
 #define TTM_BO_VM_NUM_PREFAULT 16
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct ttm_buffer_object *ttm_bo_vm_lookup_rb(struct ttm_bo_device *bdev,
 						     unsigned long page_start,
@@ -75,6 +80,8 @@ static struct ttm_buffer_object *ttm_bo_vm_lookup_rb(struct ttm_bo_device *bdev,
 
 	return best_bo;
 =======
+=======
+>>>>>>> v3.18
 static int ttm_bo_vm_fault_idle(struct ttm_buffer_object *bo,
 				struct vm_area_struct *vma,
 				struct vm_fault *vmf)
@@ -115,6 +122,9 @@ static int ttm_bo_vm_fault_idle(struct ttm_buffer_object *bo,
 
 out_unlock:
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -135,6 +145,10 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	struct ttm_mem_type_manager *man =
 		&bdev->man[bo->mem.mem_type];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct vm_area_struct cvma;
+>>>>>>> v3.18
 =======
 	struct vm_area_struct cvma;
 >>>>>>> v3.18
@@ -142,6 +156,7 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	/*
 	 * Work around locking order reversal in fault / nopfn
 	 * between mmap_sem and bo_reserve: Perform a trylock operation
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * for reserve, and if it fails, retry the fault after scheduling.
 	 */
@@ -154,6 +169,8 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	 * for reserve, and if it fails, retry the fault after waiting
 	 * for the buffer to become unreserved.
 	 */
@@ -188,6 +205,9 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 		goto out_unlock;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (bdev->driver->fault_reserve_notify) {
 		ret = bdev->driver->fault_reserve_notify(bo);
@@ -196,7 +216,10 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 			break;
 		case -EBUSY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			set_need_resched();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		case -ERESTARTSYS:
@@ -213,6 +236,7 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	 * move.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_lock(&bdev->fence_lock);
 	if (test_bit(TTM_BO_PRIV_FLAG_MOVING, &bo->priv_flags)) {
@@ -226,11 +250,16 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	} else
 		spin_unlock(&bdev->fence_lock);
 =======
+=======
+>>>>>>> v3.18
 	ret = ttm_bo_vm_fault_idle(bo, vma, vmf);
 	if (unlikely(ret != 0)) {
 		retval = ret;
 		goto out_unlock;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = ttm_mem_io_lock(man, true);
@@ -246,9 +275,15 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 
 	page_offset = ((address - vma->vm_start) >> PAGE_SHIFT) +
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    bo->vm_node->start - vma->vm_pgoff;
 	page_last = vma_pages(vma) +
 	    bo->vm_node->start - vma->vm_pgoff;
+=======
+		vma->vm_pgoff - drm_vma_node_start(&bo->vma_node);
+	page_last = vma_pages(vma) + vma->vm_pgoff -
+		drm_vma_node_start(&bo->vma_node);
+>>>>>>> v3.18
 =======
 		vma->vm_pgoff - drm_vma_node_start(&bo->vma_node);
 	page_last = vma_pages(vma) + vma->vm_pgoff -
@@ -261,6 +296,7 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	}
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Strictly, we're not allowed to modify vma->vm_page_prot here,
 	 * since the mmap_sem is only held in read mode. However, we
@@ -283,6 +319,8 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 		    vm_get_page_prot(vma->vm_flags) :
 		    ttm_io_prot(bo->mem.placement, vma->vm_page_prot);
 =======
+=======
+>>>>>>> v3.18
 	 * Make a local vma copy to modify the page_prot member
 	 * and vm_flags if necessary. The vma parameter is protected
 	 * by mmap_sem in write mode.
@@ -297,6 +335,9 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 		ttm = bo->ttm;
 		cvma.vm_page_prot = ttm_io_prot(bo->mem.placement,
 						cvma.vm_page_prot);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Allocate all page at once, most common usage */
@@ -322,11 +363,14 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pfn = page_to_pfn(page);
 		}
 
 		ret = vm_insert_mixed(vma, address, pfn);
 =======
+=======
+>>>>>>> v3.18
 			page->mapping = vma->vm_file->f_mapping;
 			page->index = drm_vma_node_start(&bo->vma_node) +
 				page_offset;
@@ -338,6 +382,9 @@ static int ttm_bo_vm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 		else
 			ret = vm_insert_pfn(&cvma, address, pfn);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Somebody beat us to this PTE or prefaulting to
@@ -369,6 +416,11 @@ static void ttm_bo_vm_open(struct vm_area_struct *vma)
 	    (struct ttm_buffer_object *)vma->vm_private_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	WARN_ON(bo->bdev->dev_mapping != vma->vm_file->f_mapping);
+
+>>>>>>> v3.18
 =======
 	WARN_ON(bo->bdev->dev_mapping != vma->vm_file->f_mapping);
 
@@ -391,7 +443,10 @@ static const struct vm_operations_struct ttm_bo_vm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct ttm_buffer_object *ttm_bo_vm_lookup(struct ttm_bo_device *bdev,
 						  unsigned long offset,
 						  unsigned long pages)
@@ -416,6 +471,9 @@ static struct ttm_buffer_object *ttm_bo_vm_lookup(struct ttm_bo_device *bdev,
 	return bo;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ttm_bo_mmap(struct file *filp, struct vm_area_struct *vma,
 		struct ttm_bo_device *bdev)
@@ -424,6 +482,7 @@ int ttm_bo_mmap(struct file *filp, struct vm_area_struct *vma,
 	struct ttm_buffer_object *bo;
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	read_lock(&bdev->vm_lock);
 	bo = ttm_bo_vm_lookup_rb(bdev, vma->vm_pgoff,
@@ -436,6 +495,11 @@ int ttm_bo_mmap(struct file *filp, struct vm_area_struct *vma,
 		pr_err("Could not find buffer object to map\n");
 		return -EINVAL;
 	}
+=======
+	bo = ttm_bo_vm_lookup(bdev, vma->vm_pgoff, vma_pages(vma));
+	if (unlikely(!bo))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	bo = ttm_bo_vm_lookup(bdev, vma->vm_pgoff, vma_pages(vma));
 	if (unlikely(!bo))
@@ -460,8 +524,11 @@ int ttm_bo_mmap(struct file *filp, struct vm_area_struct *vma,
 
 	vma->vm_private_data = bo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma->vm_flags |= VM_IO | VM_MIXEDMAP | VM_DONTEXPAND | VM_DONTDUMP;
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * We'd like to use VM_PFNMAP on shared mappings, where
@@ -472,6 +539,9 @@ int ttm_bo_mmap(struct file *filp, struct vm_area_struct *vma,
 	 */
 	vma->vm_flags |= VM_MIXEDMAP;
 	vma->vm_flags |= VM_IO | VM_DONTEXPAND | VM_DONTDUMP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 out_unref:
@@ -487,6 +557,7 @@ int ttm_fbdev_mmap(struct vm_area_struct *vma, struct ttm_buffer_object *bo)
 
 	vma->vm_ops = &ttm_bo_vm_ops;
 	vma->vm_private_data = ttm_bo_reference(bo);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	vma->vm_flags |= VM_IO | VM_MIXEDMAP | VM_DONTEXPAND;
 	return 0;
@@ -652,9 +723,14 @@ ssize_t ttm_bo_fbdev_io(struct ttm_buffer_object *bo, const char __user *wbuf,
 	return io_size;
 }
 =======
+=======
+>>>>>>> v3.18
 	vma->vm_flags |= VM_MIXEDMAP;
 	vma->vm_flags |= VM_IO | VM_DONTEXPAND;
 	return 0;
 }
 EXPORT_SYMBOL(ttm_fbdev_mmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

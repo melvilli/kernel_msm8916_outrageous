@@ -33,6 +33,10 @@
 #include "../ps.h"
 #include "../cam.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../stats.h"
+>>>>>>> v3.18
 =======
 #include "../stats.h"
 >>>>>>> v3.18
@@ -44,6 +48,10 @@
 #include "mac.h"
 #include "trx.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../rtl8192c/fw_common.h"
+>>>>>>> v3.18
 =======
 #include "../rtl8192c/fw_common.h"
 >>>>>>> v3.18
@@ -747,6 +755,7 @@ static u8 _rtl92c_evm_db_to_percentage(char value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static long _rtl92c_translate_todbm(struct ieee80211_hw *hw,
 				     u8 signal_strength_index)
 {
@@ -757,6 +766,8 @@ static long _rtl92c_translate_todbm(struct ieee80211_hw *hw,
 	return signal_power;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static long _rtl92c_signal_scale_mapping(struct ieee80211_hw *hw,
@@ -807,7 +818,11 @@ static void _rtl92c_query_rxphystatus(struct ieee80211_hw *hw,
 	u8 *pdesc = (u8 *)p_desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	is_cck_rate = RX_HAL_IS_CCK_RATE(p_desc);
+=======
+	is_cck_rate = RX_HAL_IS_CCK_RATE(p_desc->rxmcs);
+>>>>>>> v3.18
 =======
 	is_cck_rate = RX_HAL_IS_CCK_RATE(p_desc->rxmcs);
 >>>>>>> v3.18
@@ -928,6 +943,7 @@ static void _rtl92c_query_rxphystatus(struct ieee80211_hw *hw,
 			  (hw, total_rssi /= rf_rx_num));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void _rtl92c_process_ui_rssi(struct ieee80211_hw *hw,
 		struct rtl_stats *pstats)
@@ -1105,6 +1121,8 @@ static void _rtl92c_process_phyinfo(struct ieee80211_hw *hw,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void rtl92c_translate_rx_signal_stuff(struct ieee80211_hw *hw,
 					       struct sk_buff *skb,
 					       struct rtl_stats *pstats,
@@ -1142,7 +1160,11 @@ void rtl92c_translate_rx_signal_stuff(struct ieee80211_hw *hw,
 				   packet_matchbssid, packet_toself,
 				   packet_beacon);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_rtl92c_process_phyinfo(hw, tmp_buf, pstats);
+=======
+	rtl_process_phyinfo(hw, tmp_buf, pstats);
+>>>>>>> v3.18
 =======
 	rtl_process_phyinfo(hw, tmp_buf, pstats);
 >>>>>>> v3.18

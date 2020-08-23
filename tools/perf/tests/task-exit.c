@@ -10,6 +10,7 @@ static int exited;
 static int nr_exit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sig_handler(int sig)
 {
 	exited = 1;
@@ -17,6 +18,8 @@ static void sig_handler(int sig)
 	if (sig == SIGUSR1)
 		nr_exit = -1;
 =======
+=======
+>>>>>>> v3.18
 static void sig_handler(int sig __maybe_unused)
 {
 	exited = 1;
@@ -32,6 +35,9 @@ static void workload_exec_failed_signal(int signo __maybe_unused,
 {
 	exited	= 1;
 	nr_exit = -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -47,7 +53,11 @@ int test__task_exit(void)
 	struct perf_evsel *evsel;
 	struct perf_evlist *evlist;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct perf_target target = {
+=======
+	struct target target = {
+>>>>>>> v3.18
 =======
 	struct target target = {
 >>>>>>> v3.18
@@ -55,6 +65,7 @@ int test__task_exit(void)
 		.uses_mmap	= true,
 	};
 	const char *argv[] = { "true", NULL };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	signal(SIGCHLD, sig_handler);
@@ -75,6 +86,8 @@ int test__task_exit(void)
 		goto out_free_evlist;
 	}
 =======
+=======
+>>>>>>> v3.18
 	char sbuf[STRERR_BUFSIZE];
 
 	signal(SIGCHLD, sig_handler);
@@ -84,6 +97,9 @@ int test__task_exit(void)
 		pr_debug("perf_evlist__new_default\n");
 		return -1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -98,6 +114,7 @@ int test__task_exit(void)
 		err = -ENOMEM;
 		pr_debug("Not enough memory to create thread/cpu maps\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_delete_maps;
 	}
 
@@ -106,6 +123,8 @@ int test__task_exit(void)
 		pr_debug("Couldn't run the workload!\n");
 		goto out_delete_maps;
 =======
+=======
+>>>>>>> v3.18
 		goto out_delete_evlist;
 	}
 
@@ -114,6 +133,9 @@ int test__task_exit(void)
 	if (err < 0) {
 		pr_debug("Couldn't run the workload!\n");
 		goto out_delete_evlist;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -128,8 +150,14 @@ int test__task_exit(void)
 	err = perf_evlist__open(evlist);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("Couldn't open the evlist: %s\n", strerror(-err));
 		goto out_delete_maps;
+=======
+		pr_debug("Couldn't open the evlist: %s\n",
+			 strerror_r(-err, sbuf, sizeof(sbuf)));
+		goto out_delete_evlist;
+>>>>>>> v3.18
 =======
 		pr_debug("Couldn't open the evlist: %s\n",
 			 strerror_r(-err, sbuf, sizeof(sbuf)));
@@ -140,8 +168,13 @@ int test__task_exit(void)
 	if (perf_evlist__mmap(evlist, 128, true) < 0) {
 		pr_debug("failed to mmap events: %d (%s)\n", errno,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 strerror(errno));
 		goto out_close_evlist;
+=======
+			 strerror_r(errno, sbuf, sizeof(sbuf)));
+		goto out_delete_evlist;
+>>>>>>> v3.18
 =======
 			 strerror_r(errno, sbuf, sizeof(sbuf)));
 		goto out_delete_evlist;
@@ -153,6 +186,7 @@ int test__task_exit(void)
 retry:
 	while ((event = perf_evlist__mmap_read(evlist, 0)) != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (event->header.type != PERF_RECORD_EXIT)
 			continue;
 
@@ -162,6 +196,8 @@ retry:
 	if (!exited || !nr_exit) {
 		poll(evlist->pollfd, evlist->nr_fds, -1);
 =======
+=======
+>>>>>>> v3.18
 		if (event->header.type == PERF_RECORD_EXIT)
 			nr_exit++;
 
@@ -170,6 +206,9 @@ retry:
 
 	if (!exited || !nr_exit) {
 		perf_evlist__poll(evlist, -1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto retry;
 	}
@@ -180,12 +219,16 @@ retry:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	perf_evlist__munmap(evlist);
 out_close_evlist:
 	perf_evlist__close(evlist);
 out_delete_maps:
 	perf_evlist__delete_maps(evlist);
 out_free_evlist:
+=======
+out_delete_evlist:
+>>>>>>> v3.18
 =======
 out_delete_evlist:
 >>>>>>> v3.18

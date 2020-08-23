@@ -16,9 +16,13 @@ static struct rc_map_table streamzap[] = {
 /*
  * The Streamzap remote is almost, but not quite, RC-5, as it has an extra
 <<<<<<< HEAD
+<<<<<<< HEAD
  * bit in it, which throws the in-kernel RC-5 decoder for a loop. Currently,
  * an additional RC-5-sz decoder is being deployed to support it, but it
  * may be possible to merge it back with the standard RC-5 decoder.
+=======
+ * bit in it.
+>>>>>>> v3.18
 =======
  * bit in it.
 >>>>>>> v3.18

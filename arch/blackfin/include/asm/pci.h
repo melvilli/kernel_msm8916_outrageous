@@ -11,11 +11,14 @@
 #define PCIBIOS_MIN_MEM 0x10000000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void pcibios_penalize_isa_irq(int irq)
 {
 	/* We don't do dynamic PCI IRQ allocation */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif				/* _ASM_BFIN_PCI_H */

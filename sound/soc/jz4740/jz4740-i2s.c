@@ -30,16 +30,22 @@
 #include <sound/soc.h>
 #include <sound/initval.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "jz4740-i2s.h"
 #include "jz4740-pcm.h"
 =======
+=======
+>>>>>>> v3.18
 #include <sound/dmaengine_pcm.h>
 
 #include "jz4740-i2s.h"
 
 #define JZ4740_DMA_TYPE_AIC_TRANSMIT 24
 #define JZ4740_DMA_TYPE_AIC_RECEIVE 25
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define JZ_REG_AIC_CONF		0x00
@@ -99,8 +105,13 @@ struct jz4740_i2s {
 	struct clk *clk_i2s;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct jz4740_pcm_config pcm_config_playback;
 	struct jz4740_pcm_config pcm_config_capture;
+=======
+	struct snd_dmaengine_dai_dma_data playback_dma_data;
+	struct snd_dmaengine_dai_dma_data capture_dma_data;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data playback_dma_data;
 	struct snd_dmaengine_dai_dma_data capture_dma_data;
@@ -133,7 +144,11 @@ static int jz4740_i2s_startup(struct snd_pcm_substream *substream,
 	jz4740_i2s_write(i2s, JZ_REG_AIC_CTRL, ctrl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(i2s->clk_i2s);
+=======
+	clk_prepare_enable(i2s->clk_i2s);
+>>>>>>> v3.18
 =======
 	clk_prepare_enable(i2s->clk_i2s);
 >>>>>>> v3.18
@@ -159,7 +174,11 @@ static void jz4740_i2s_shutdown(struct snd_pcm_substream *substream,
 	jz4740_i2s_write(i2s, JZ_REG_AIC_CONF, conf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(i2s->clk_i2s);
+=======
+	clk_disable_unprepare(i2s->clk_i2s);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(i2s->clk_i2s);
 >>>>>>> v3.18
@@ -256,8 +275,11 @@ static int jz4740_i2s_hw_params(struct snd_pcm_substream *substream,
 {
 	struct jz4740_i2s *i2s = snd_soc_dai_get_drvdata(dai);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum jz4740_dma_width dma_width;
 	struct jz4740_pcm_config *pcm_config;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int sample_size;
@@ -269,11 +291,17 @@ static int jz4740_i2s_hw_params(struct snd_pcm_substream *substream,
 	case SNDRV_PCM_FORMAT_S8:
 		sample_size = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_width = JZ4740_DMA_WIDTH_8BIT;
 		break;
 	case SNDRV_PCM_FORMAT_S16:
 		sample_size = 1;
 		dma_width = JZ4740_DMA_WIDTH_16BIT;
+=======
+		break;
+	case SNDRV_PCM_FORMAT_S16:
+		sample_size = 1;
+>>>>>>> v3.18
 =======
 		break;
 	case SNDRV_PCM_FORMAT_S16:
@@ -292,6 +320,7 @@ static int jz4740_i2s_hw_params(struct snd_pcm_substream *substream,
 		else
 			ctrl &= ~JZ_AIC_CTRL_MONO_TO_STEREO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		pcm_config = &i2s->pcm_config_playback;
 		pcm_config->dma_config.dst_width = dma_width;
@@ -307,13 +336,21 @@ static int jz4740_i2s_hw_params(struct snd_pcm_substream *substream,
 		ctrl &= ~JZ_AIC_CTRL_INPUT_SAMPLE_SIZE_MASK;
 		ctrl |= sample_size << JZ_AIC_CTRL_INPUT_SAMPLE_SIZE_OFFSET;
 >>>>>>> v3.18
+=======
+	} else {
+		ctrl &= ~JZ_AIC_CTRL_INPUT_SAMPLE_SIZE_MASK;
+		ctrl |= sample_size << JZ_AIC_CTRL_INPUT_SAMPLE_SIZE_OFFSET;
+>>>>>>> v3.18
 	}
 
 	jz4740_i2s_write(i2s, JZ_REG_AIC_CTRL, ctrl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dai_set_dma_data(dai, substream, pcm_config);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -355,15 +392,21 @@ static int jz4740_i2s_suspend(struct snd_soc_dai *dai)
 		jz4740_i2s_write(i2s, JZ_REG_AIC_CONF, conf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_disable(i2s->clk_i2s);
 	}
 
 	clk_disable(i2s->clk_aic);
 =======
+=======
+>>>>>>> v3.18
 		clk_disable_unprepare(i2s->clk_i2s);
 	}
 
 	clk_disable_unprepare(i2s->clk_aic);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -375,15 +418,21 @@ static int jz4740_i2s_resume(struct snd_soc_dai *dai)
 	uint32_t conf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(i2s->clk_aic);
 
 	if (dai->active) {
 		clk_enable(i2s->clk_i2s);
 =======
+=======
+>>>>>>> v3.18
 	clk_prepare_enable(i2s->clk_aic);
 
 	if (dai->active) {
 		clk_prepare_enable(i2s->clk_i2s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		conf = jz4740_i2s_read(i2s, JZ_REG_AIC_CONF);
@@ -396,6 +445,7 @@ static int jz4740_i2s_resume(struct snd_soc_dai *dai)
 
 static void jz4740_i2c_init_pcm_config(struct jz4740_i2s *i2s)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct jz4740_dma_config *dma_config;
 
@@ -417,6 +467,8 @@ static void jz4740_i2c_init_pcm_config(struct jz4740_i2s *i2s)
 	dma_config->mode = JZ4740_DMA_MODE_SINGLE;
 	i2s->pcm_config_capture.fifo_addr = i2s->phys_base + JZ_REG_AIC_FIFO;
 =======
+=======
+>>>>>>> v3.18
 	struct snd_dmaengine_dai_dma_data *dma_data;
 
 	/* Playback */
@@ -430,6 +482,9 @@ static void jz4740_i2c_init_pcm_config(struct jz4740_i2s *i2s)
 	dma_data->maxburst = 16;
 	dma_data->slave_id = JZ4740_DMA_TYPE_AIC_RECEIVE;
 	dma_data->addr = i2s->phys_base + JZ_REG_AIC_FIFO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -439,15 +494,21 @@ static int jz4740_i2s_dai_probe(struct snd_soc_dai *dai)
 	uint32_t conf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(i2s->clk_aic);
 
 	jz4740_i2c_init_pcm_config(i2s);
 =======
+=======
+>>>>>>> v3.18
 	clk_prepare_enable(i2s->clk_aic);
 
 	jz4740_i2c_init_pcm_config(i2s);
 	snd_soc_dai_init_dma_data(dai, &i2s->playback_dma_data,
 		&i2s->capture_dma_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	conf = (7 << JZ_AIC_CONF_FIFO_RX_THRESHOLD_OFFSET) |
@@ -467,7 +528,11 @@ static int jz4740_i2s_dai_remove(struct snd_soc_dai *dai)
 	struct jz4740_i2s *i2s = snd_soc_dai_get_drvdata(dai);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(i2s->clk_aic);
+=======
+	clk_disable_unprepare(i2s->clk_aic);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(i2s->clk_aic);
 >>>>>>> v3.18
@@ -514,6 +579,7 @@ static const struct snd_soc_component_driver jz4740_i2s_component = {
 static int jz4740_i2s_dev_probe(struct platform_device *pdev)
 {
 	struct jz4740_i2s *i2s;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -597,6 +663,8 @@ static int jz4740_i2s_dev_remove(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct resource *mem;
 	int ret;
 
@@ -628,13 +696,19 @@ static int jz4740_i2s_dev_remove(struct platform_device *pdev)
 
 	return devm_snd_dmaengine_pcm_register(&pdev->dev, NULL,
 		SND_DMAENGINE_PCM_FLAG_COMPAT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct platform_driver jz4740_i2s_driver = {
 	.probe = jz4740_i2s_dev_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = jz4740_i2s_dev_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver = {

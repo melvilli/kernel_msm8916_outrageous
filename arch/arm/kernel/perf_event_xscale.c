@@ -49,6 +49,7 @@ enum xscale_counters {
 
 static const unsigned xscale_perf_map[PERF_COUNT_HW_MAX] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[PERF_COUNT_HW_CPU_CYCLES]		= XSCALE_PERFCTR_CCNT,
 	[PERF_COUNT_HW_INSTRUCTIONS]		= XSCALE_PERFCTR_INSTRUCTION,
 	[PERF_COUNT_HW_CACHE_REFERENCES]	= HW_OP_UNSUPPORTED,
@@ -162,6 +163,8 @@ static unsigned xscale_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 		},
 	},
 =======
+=======
+>>>>>>> v3.18
 	PERF_MAP_ALL_UNSUPPORTED,
 	[PERF_COUNT_HW_CPU_CYCLES]		= XSCALE_PERFCTR_CCNT,
 	[PERF_COUNT_HW_INSTRUCTIONS]		= XSCALE_PERFCTR_INSTRUCTION,
@@ -187,6 +190,9 @@ static const unsigned xscale_perf_cache_map[PERF_COUNT_HW_CACHE_MAX]
 
 	[C(ITLB)][C(OP_READ)][C(RESULT_MISS)]	= XSCALE_PERFCTR_ITLB_MISS,
 	[C(ITLB)][C(OP_WRITE)][C(RESULT_MISS)]	= XSCALE_PERFCTR_ITLB_MISS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -471,7 +477,11 @@ static int xscale_map_event(struct perf_event *event)
 static int xscale1pmu_init(struct arm_pmu *cpu_pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_pmu->name		= "xscale1";
+=======
+	cpu_pmu->name		= "armv5_xscale1";
+>>>>>>> v3.18
 =======
 	cpu_pmu->name		= "armv5_xscale1";
 >>>>>>> v3.18
@@ -845,7 +855,11 @@ static inline void xscale2pmu_write_counter(struct perf_event *event, u32 val)
 static int xscale2pmu_init(struct arm_pmu *cpu_pmu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_pmu->name		= "xscale2";
+=======
+	cpu_pmu->name		= "armv5_xscale2";
+>>>>>>> v3.18
 =======
 	cpu_pmu->name		= "armv5_xscale2";
 >>>>>>> v3.18

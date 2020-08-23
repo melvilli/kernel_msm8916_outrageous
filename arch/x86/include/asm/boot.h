@@ -28,7 +28,11 @@
 #else /* !CONFIG_KERNEL_BZIP2 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BOOT_HEAP_SIZE	0x10000
+=======
+#define BOOT_HEAP_SIZE	0x8000
+>>>>>>> v3.18
 =======
 #define BOOT_HEAP_SIZE	0x8000
 >>>>>>> v3.18

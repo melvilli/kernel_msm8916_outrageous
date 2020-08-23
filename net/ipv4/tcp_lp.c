@@ -116,7 +116,11 @@ static void tcp_lp_init(struct sock *sk)
  * From TCP-LP's paper, this will be handled in additive increasement.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void tcp_lp_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
+=======
+static void tcp_lp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
+>>>>>>> v3.18
 =======
 static void tcp_lp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 >>>>>>> v3.18
@@ -125,7 +129,11 @@ static void tcp_lp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 
 	if (!(lp->flag & LP_WITHIN_INF))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcp_reno_cong_avoid(sk, ack, in_flight);
+=======
+		tcp_reno_cong_avoid(sk, ack, acked);
+>>>>>>> v3.18
 =======
 		tcp_reno_cong_avoid(sk, ack, acked);
 >>>>>>> v3.18
@@ -323,11 +331,17 @@ static void tcp_lp_pkts_acked(struct sock *sk, u32 num_acked, s32 rtt_us)
 
 static struct tcp_congestion_ops tcp_lp __read_mostly = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags = TCP_CONG_RTT_STAMP,
 	.init = tcp_lp_init,
 	.ssthresh = tcp_reno_ssthresh,
 	.cong_avoid = tcp_lp_cong_avoid,
 	.min_cwnd = tcp_reno_min_cwnd,
+=======
+	.init = tcp_lp_init,
+	.ssthresh = tcp_reno_ssthresh,
+	.cong_avoid = tcp_lp_cong_avoid,
+>>>>>>> v3.18
 =======
 	.init = tcp_lp_init,
 	.ssthresh = tcp_reno_ssthresh,

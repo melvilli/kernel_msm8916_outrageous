@@ -2,9 +2,13 @@
  * This file contains the login functions used by the iSCSI Target driver.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * \u00a9 Copyright 2007-2011 RisingTide Systems LLC.
  *
  * Licensed to the Linux Foundation under the General Public License (GPL) version 2.
+=======
+ * (c) Copyright 2007-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2007-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -55,6 +59,10 @@ static struct iscsi_login *iscsi_login_init_conn(struct iscsi_conn *conn)
 		return NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	conn->login = login;
+>>>>>>> v3.18
 =======
 	conn->login = login;
 >>>>>>> v3.18
@@ -93,7 +101,10 @@ static struct iscsi_login *iscsi_login_init_conn(struct iscsi_conn *conn)
 	init_completion(&conn->rx_half_close_comp);
 	init_completion(&conn->tx_half_close_comp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_completion(&conn->rx_login_comp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_init(&conn->cmd_lock);
@@ -295,6 +306,10 @@ static int iscsi_login_zero_tsih_s1(
 	struct iscsi_session *sess = NULL;
 	struct iscsi_login_req *pdu = (struct iscsi_login_req *)buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum target_prot_op sup_pro_ops;
+>>>>>>> v3.18
 =======
 	enum target_prot_op sup_pro_ops;
 >>>>>>> v3.18
@@ -345,7 +360,10 @@ static int iscsi_login_zero_tsih_s1(
 
 	sess->creation_time = get_jiffies_64();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&sess->session_stats_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -364,8 +382,14 @@ static int iscsi_login_zero_tsih_s1(
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	sess->se_sess = transport_init_session();
+=======
+	sup_pro_ops = conn->conn_transport->iscsit_get_sup_prot_ops(conn);
+
+	sess->se_sess = transport_init_session(sup_pro_ops);
+>>>>>>> v3.18
 =======
 	sup_pro_ops = conn->conn_transport->iscsit_get_sup_prot_ops(conn);
 
@@ -395,9 +419,15 @@ static int iscsi_login_zero_tsih_s2(
 	 * struct iscsi_portal_group->np_login_sem from iscsit_access_np().
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sess->tsih = ++ISCSI_TPG_S(sess)->ntsih;
 	if (!sess->tsih)
 		sess->tsih = ++ISCSI_TPG_S(sess)->ntsih;
+=======
+	sess->tsih = ++sess->tpg->ntsih;
+	if (!sess->tsih)
+		sess->tsih = ++sess->tpg->ntsih;
+>>>>>>> v3.18
 =======
 	sess->tsih = ++sess->tpg->ntsih;
 	if (!sess->tsih)
@@ -409,7 +439,11 @@ static int iscsi_login_zero_tsih_s2(
 	 */
 	if (iscsi_copy_param_list(&conn->param_list,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ISCSI_TPG_C(conn)->param_list, 1) < 0) {
+=======
+				conn->tpg->param_list, 1) < 0) {
+>>>>>>> v3.18
 =======
 				conn->tpg->param_list, 1) < 0) {
 >>>>>>> v3.18
@@ -472,7 +506,11 @@ static int iscsi_login_zero_tsih_s2(
 			return -1;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = strict_strtoul(param->value, 0, &mrdsl);
+=======
+		rc = kstrtoul(param->value, 0, &mrdsl);
+>>>>>>> v3.18
 =======
 		rc = kstrtoul(param->value, 0, &mrdsl);
 >>>>>>> v3.18
@@ -484,7 +522,11 @@ static int iscsi_login_zero_tsih_s2(
 		off = mrdsl % PAGE_SIZE;
 		if (!off)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;
+=======
+			goto check_prot;
+>>>>>>> v3.18
 =======
 			goto check_prot;
 >>>>>>> v3.18
@@ -500,7 +542,10 @@ static int iscsi_login_zero_tsih_s2(
 		if (iscsi_change_param_sprintf(conn, "MaxRecvDataSegmentLength=%lu\n", mrdsl))
 			return -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * ISER currently requires that ImmediateData + Unsolicited
 		 * Data be disabled when protection / signature MRs are enabled.
@@ -519,6 +564,9 @@ check_prot:
 			pr_debug("Forcing ImmediateData=No + InitialR2T=Yes for"
 				 " T10-PI enabled ISER session\n");
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -645,7 +693,11 @@ static int iscsi_login_non_zero_tsih_s2(
 
 	if (iscsi_copy_param_list(&conn->param_list,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ISCSI_TPG_C(conn)->param_list, 0) < 0) {
+=======
+			conn->tpg->param_list, 0) < 0) {
+>>>>>>> v3.18
 =======
 			conn->tpg->param_list, 0) < 0) {
 >>>>>>> v3.18
@@ -752,6 +804,7 @@ static void iscsi_post_login_start_timers(struct iscsi_conn *conn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int iscsit_start_kthreads(struct iscsi_conn *conn)
 {
 	int ret = 0;
@@ -802,6 +855,9 @@ void iscsi_post_login_handler(
 =======
 int iscsi_post_login_handler(
 >>>>>>> v3.18
+=======
+int iscsi_post_login_handler(
+>>>>>>> v3.18
 	struct iscsi_np *np,
 	struct iscsi_conn *conn,
 	u8 zero_tsih)
@@ -810,8 +866,14 @@ int iscsi_post_login_handler(
 	struct iscsi_session *sess = conn->sess;
 	struct se_session *se_sess = sess->se_sess;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iscsi_portal_group *tpg = ISCSI_TPG_S(sess);
 	struct se_portal_group *se_tpg = &tpg->tpg_se_tpg;
+=======
+	struct iscsi_portal_group *tpg = sess->tpg;
+	struct se_portal_group *se_tpg = &tpg->tpg_se_tpg;
+	struct iscsi_thread_set *ts;
+>>>>>>> v3.18
 =======
 	struct iscsi_portal_group *tpg = sess->tpg;
 	struct se_portal_group *se_tpg = &tpg->tpg_se_tpg;
@@ -832,6 +894,10 @@ int iscsi_post_login_handler(
 	 * SCSI Initiator -> SCSI Target Port Mapping
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ts = iscsi_get_thread_set();
+>>>>>>> v3.18
 =======
 	ts = iscsi_get_thread_set();
 >>>>>>> v3.18
@@ -863,6 +929,11 @@ int iscsi_post_login_handler(
 
 		iscsi_post_login_start_timers(conn);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		iscsi_activate_thread_set(conn, ts);
+>>>>>>> v3.18
 =======
 
 		iscsi_activate_thread_set(conn, ts);
@@ -875,6 +946,7 @@ int iscsi_post_login_handler(
 		conn->conn_rx_reset_cpumask = 1;
 		conn->conn_tx_reset_cpumask = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Wakeup the sleeping iscsi_target_rx_thread() now that
 		 * iscsi_conn is in TARG_CONN_STATE_LOGGED_IN state.
@@ -886,6 +958,10 @@ int iscsi_post_login_handler(
 
 		iscsit_dec_conn_usage_count(conn);
 >>>>>>> v3.18
+=======
+
+		iscsit_dec_conn_usage_count(conn);
+>>>>>>> v3.18
 		if (stop_timer) {
 			spin_lock_bh(&se_tpg->session_lock);
 			iscsit_stop_time2retain_timer(sess);
@@ -893,7 +969,11 @@ int iscsi_post_login_handler(
 		}
 		iscsit_dec_session_usage_count(sess);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -939,6 +1019,10 @@ int iscsi_post_login_handler(
 
 	iscsi_post_login_start_timers(conn);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	iscsi_activate_thread_set(conn, ts);
+>>>>>>> v3.18
 =======
 	iscsi_activate_thread_set(conn, ts);
 >>>>>>> v3.18
@@ -950,6 +1034,7 @@ int iscsi_post_login_handler(
 	conn->conn_rx_reset_cpumask = 1;
 	conn->conn_tx_reset_cpumask = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Wakeup the sleeping iscsi_target_rx_thread() now that
 	 * iscsi_conn is in TARG_CONN_STATE_LOGGED_IN state.
@@ -957,10 +1042,15 @@ int iscsi_post_login_handler(
 	complete(&conn->rx_login_comp);
 	iscsit_dec_conn_usage_count(conn);
 =======
+=======
+>>>>>>> v3.18
 
 	iscsit_dec_conn_usage_count(conn);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1027,7 +1117,11 @@ int iscsit_setup_np(
 {
 	struct socket *sock = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int backlog = 5, ret, opt = 0, len;
+=======
+	int backlog = ISCSIT_TCP_BACKLOG, ret, opt = 0, len;
+>>>>>>> v3.18
 =======
 	int backlog = ISCSIT_TCP_BACKLOG, ret, opt = 0, len;
 >>>>>>> v3.18
@@ -1120,8 +1214,12 @@ int iscsit_setup_np(
 fail:
 	np->np_socket = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sock)
 		sock_release(sock);
+=======
+	sock_release(sock);
+>>>>>>> v3.18
 =======
 	sock_release(sock);
 >>>>>>> v3.18
@@ -1171,15 +1269,21 @@ int iscsit_accept_np(struct iscsi_np *np, struct iscsi_conn *conn)
 				(struct sockaddr *)&sock_in6, &err, 1);
 		if (!rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snprintf(conn->login_ip, sizeof(conn->login_ip), "%pI6c",
 				&sock_in6.sin6_addr.in6_u);
 =======
+=======
+>>>>>>> v3.18
 			if (!ipv6_addr_v4mapped(&sock_in6.sin6_addr))
 				snprintf(conn->login_ip, sizeof(conn->login_ip), "[%pI6c]",
 					&sock_in6.sin6_addr.in6_u);
 			else
 				snprintf(conn->login_ip, sizeof(conn->login_ip), "%pI4",
 					&sock_in6.sin6_addr.s6_addr32[3]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			conn->login_port = ntohs(sock_in6.sin6_port);
 		}
@@ -1188,15 +1292,21 @@ int iscsit_accept_np(struct iscsi_np *np, struct iscsi_conn *conn)
 				(struct sockaddr *)&sock_in6, &err, 0);
 		if (!rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snprintf(conn->local_ip, sizeof(conn->local_ip), "%pI6c",
 				&sock_in6.sin6_addr.in6_u);
 =======
+=======
+>>>>>>> v3.18
 			if (!ipv6_addr_v4mapped(&sock_in6.sin6_addr))
 				snprintf(conn->local_ip, sizeof(conn->local_ip), "[%pI6c]",
 					&sock_in6.sin6_addr.in6_u);
 			else
 				snprintf(conn->local_ip, sizeof(conn->local_ip), "%pI4",
 					&sock_in6.sin6_addr.s6_addr32[3]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			conn->local_port = ntohs(sock_in6.sin6_port);
 		}
@@ -1298,11 +1408,14 @@ iscsit_conn_set_transport(struct iscsi_conn *conn, struct iscsit_transport *t)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __iscsi_target_login_thread(struct iscsi_np *np)
 {
 	u8 *buffer, zero_tsih = 0;
 	int ret = 0, rc, stop;
 =======
+=======
+>>>>>>> v3.18
 void iscsi_target_login_sess_out(struct iscsi_conn *conn,
 		struct iscsi_np *np, bool zero_tsih, bool new_sess)
 {
@@ -1377,12 +1490,20 @@ static int __iscsi_target_login_thread(struct iscsi_np *np)
 {
 	u8 *buffer, zero_tsih = 0;
 	int ret = 0, rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct iscsi_conn *conn = NULL;
 	struct iscsi_login *login;
 	struct iscsi_portal_group *tpg = NULL;
 	struct iscsi_login_req *pdu;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct iscsi_tpg_np *tpg_np;
+	bool new_sess = false;
+>>>>>>> v3.18
 =======
 	struct iscsi_tpg_np *tpg_np;
 	bool new_sess = false;
@@ -1395,6 +1516,12 @@ static int __iscsi_target_login_thread(struct iscsi_np *np)
 		np->np_thread_state = ISCSI_NP_THREAD_ACTIVE;
 		complete(&np->np_restart_comp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	} else if (np->np_thread_state == ISCSI_NP_THREAD_SHUTDOWN) {
+		spin_unlock_bh(&np->np_thread_lock);
+		goto exit;
+>>>>>>> v3.18
 =======
 	} else if (np->np_thread_state == ISCSI_NP_THREAD_SHUTDOWN) {
 		spin_unlock_bh(&np->np_thread_lock);
@@ -1436,8 +1563,11 @@ static int __iscsi_target_login_thread(struct iscsi_np *np)
 			kfree(conn);
 			conn = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ret == -ENODEV)
 				goto out;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/* Get another socket */
@@ -1537,6 +1667,10 @@ static int __iscsi_target_login_thread(struct iscsi_np *np)
 		goto new_sess_out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	login->zero_tsih = zero_tsih;
+>>>>>>> v3.18
 =======
 	login->zero_tsih = zero_tsih;
 >>>>>>> v3.18
@@ -1555,6 +1689,7 @@ static int __iscsi_target_login_thread(struct iscsi_np *np)
 			goto old_sess_out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (iscsi_target_start_negotiation(login, conn) < 0)
 		goto new_sess_out;
@@ -1652,6 +1787,8 @@ out:
 	if (!stop)
 		return 1;
 =======
+=======
+>>>>>>> v3.18
 	ret = iscsi_target_start_negotiation(login, conn);
 	if (ret < 0)
 		goto new_sess_out;
@@ -1697,13 +1834,19 @@ old_sess_out:
 out:
 	return 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 exit:
 	iscsi_stop_login_thread_timer(np);
 	spin_lock_bh(&np->np_thread_lock);
 	np->np_thread_state = ISCSI_NP_THREAD_EXIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np->np_thread = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock_bh(&np->np_thread_lock);
@@ -1719,7 +1862,11 @@ int iscsi_target_login_thread(void *arg)
 	allow_signal(SIGINT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (!kthread_should_stop()) {
+=======
+	while (1) {
+>>>>>>> v3.18
 =======
 	while (1) {
 >>>>>>> v3.18

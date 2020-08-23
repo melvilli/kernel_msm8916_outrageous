@@ -124,6 +124,11 @@ static int omap_framebuffer_dirty(struct drm_framebuffer *fb,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	drm_modeset_lock_all(fb->dev);
+
+>>>>>>> v3.18
 =======
 	drm_modeset_lock_all(fb->dev);
 
@@ -135,6 +140,11 @@ static int omap_framebuffer_dirty(struct drm_framebuffer *fb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	drm_modeset_unlock_all(fb->dev);
+
+>>>>>>> v3.18
 =======
 	drm_modeset_unlock_all(fb->dev);
 
@@ -225,7 +235,10 @@ void omap_framebuffer_update_scanout(struct drm_framebuffer *fb,
 		info->screen_width  = omap_gem_tiled_stride(plane->bo, orient);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		switch (win->rotation & 0xf) {
 		case 0:
 		case BIT(DRM_ROTATE_0):
@@ -240,6 +253,9 @@ void omap_framebuffer_update_scanout(struct drm_framebuffer *fb,
 			break;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		info->paddr         = get_linear_addr(plane, format, 0, x, y);
 		info->rotation_type = OMAP_DSS_ROT_DMA;
@@ -264,6 +280,7 @@ void omap_framebuffer_update_scanout(struct drm_framebuffer *fb,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Call for unpin 'a' (if not NULL), and pin 'b' (if not NULL).  Although
  * buffers to unpin are just pushed to the unpin fifo so that the
@@ -315,6 +332,8 @@ int omap_framebuffer_replace(struct drm_framebuffer *a,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 /* pin, prepare for scanout: */
 int omap_framebuffer_pin(struct drm_framebuffer *fb)
 {
@@ -358,6 +377,9 @@ int omap_framebuffer_unpin(struct drm_framebuffer *fb)
 	return 0;
 
 fail:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -382,7 +404,12 @@ struct drm_connector *omap_framebuffer_get_next_connector(
 
 	if (!from)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return list_first_entry(connector_list, typeof(*from), head);
+=======
+		return list_first_entry_or_null(connector_list, typeof(*from),
+						head);
+>>>>>>> v3.18
 =======
 		return list_first_entry_or_null(connector_list, typeof(*from),
 						head);
@@ -393,7 +420,11 @@ struct drm_connector *omap_framebuffer_get_next_connector(
 			struct drm_encoder *encoder = connector->encoder;
 			struct drm_crtc *crtc = encoder ? encoder->crtc : NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (crtc && crtc->fb == fb)
+=======
+			if (crtc && crtc->primary->fb == fb)
+>>>>>>> v3.18
 =======
 			if (crtc && crtc->primary->fb == fb)
 >>>>>>> v3.18
@@ -416,6 +447,10 @@ void omap_framebuffer_flush(struct drm_framebuffer *fb,
 	VERB("flush: %d,%d %dx%d, fb=%p", x, y, w, h, fb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* FIXME: This is racy - no protection against modeset config changes. */
+>>>>>>> v3.18
 =======
 	/* FIXME: This is racy - no protection against modeset config changes. */
 >>>>>>> v3.18

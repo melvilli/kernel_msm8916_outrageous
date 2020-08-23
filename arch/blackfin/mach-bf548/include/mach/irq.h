@@ -434,7 +434,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * bfin pint registers layout
+=======
+ * gpio pint registers layout
+>>>>>>> v3.18
 =======
  * gpio pint registers layout
 >>>>>>> v3.18

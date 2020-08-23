@@ -268,7 +268,11 @@ int config_ipipe_hw(struct vpfe_ipipe_device *ipipe)
 
 	ipipe_mode = get_ipipe_mode(ipipe);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ipipe < 0) {
+=======
+	if (ipipe_mode < 0) {
+>>>>>>> v3.18
 =======
 	if (ipipe_mode < 0) {
 >>>>>>> v3.18
@@ -796,7 +800,11 @@ ipipe_set_3d_lut_regs(void *__iomem base_addr, void *__iomem isp5_base_addr,
 	/* valied table */
 	tbl = lut_3d->table;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0 ; i < VPFE_IPIPE_MAX_SIZE_3D_LUT; i++) {
+=======
+	for (i = 0; i < VPFE_IPIPE_MAX_SIZE_3D_LUT; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < VPFE_IPIPE_MAX_SIZE_3D_LUT; i++) {
 >>>>>>> v3.18
@@ -908,7 +916,11 @@ ipipe_set_gbce_regs(void *__iomem base_addr, void *__iomem isp5_base_addr,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (count = 0; count < VPFE_IPIPE_MAX_SIZE_GBCE_LUT ; count += 2)
+=======
+	for (count = 0; count < VPFE_IPIPE_MAX_SIZE_GBCE_LUT; count += 2)
+>>>>>>> v3.18
 =======
 	for (count = 0; count < VPFE_IPIPE_MAX_SIZE_GBCE_LUT; count += 2)
 >>>>>>> v3.18

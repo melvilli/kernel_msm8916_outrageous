@@ -5,6 +5,10 @@
  *
  * Copyright 2009	Johannes Berg <johannes@sipsolutions.net>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright 2013-2014  Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright 2013-2014  Intel Mobile Communications GmbH
 >>>>>>> v3.18
@@ -59,6 +63,11 @@ bool cfg80211_chandef_valid(const struct cfg80211_chan_def *chandef)
 
 	switch (chandef->width) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case NL80211_CHAN_WIDTH_5:
+	case NL80211_CHAN_WIDTH_10:
+>>>>>>> v3.18
 =======
 	case NL80211_CHAN_WIDTH_5:
 	case NL80211_CHAN_WIDTH_10:
@@ -162,13 +171,19 @@ static int cfg80211_chandef_get_width(const struct cfg80211_chan_def *c)
 
 	switch (c->width) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case NL80211_CHAN_WIDTH_5:
 		width = 5;
 		break;
 	case NL80211_CHAN_WIDTH_10:
 		width = 10;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case NL80211_CHAN_WIDTH_20:
 	case NL80211_CHAN_WIDTH_20_NOHT:
@@ -213,7 +228,10 @@ cfg80211_chandef_compatible(const struct cfg80211_chan_def *c1,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * can't be compatible if one of them is 5 or 10 MHz,
 	 * but they don't have the same width.
@@ -224,6 +242,9 @@ cfg80211_chandef_compatible(const struct cfg80211_chan_def *c1,
 	    c2->width == NL80211_CHAN_WIDTH_10)
 		return NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (c1->width == NL80211_CHAN_WIDTH_20_NOHT ||
 	    c1->width == NL80211_CHAN_WIDTH_20)
@@ -291,7 +312,10 @@ void cfg80211_set_dfs_state(struct wiphy *wiphy,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 cfg80211_get_start_freq(u32 center_freq,
 				   u32 bandwidth)
 {
@@ -318,6 +342,9 @@ static u32 cfg80211_get_end_freq(u32 center_freq,
 	return end_freq;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int cfg80211_get_chans_dfs_required(struct wiphy *wiphy,
 					    u32 center_freq,
@@ -325,26 +352,36 @@ static int cfg80211_get_chans_dfs_required(struct wiphy *wiphy,
 {
 	struct ieee80211_channel *c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 freq;
 
 	for (freq = center_freq - bandwidth/2 + 10;
 	     freq <= center_freq + bandwidth/2 - 10;
 	     freq += 20) {
 =======
+=======
+>>>>>>> v3.18
 	u32 freq, start_freq, end_freq;
 
 	start_freq = cfg80211_get_start_freq(center_freq, bandwidth);
 	end_freq = cfg80211_get_end_freq(center_freq, bandwidth);
 
 	for (freq = start_freq; freq <= end_freq; freq += 20) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		c = ieee80211_get_channel(wiphy, freq);
 		if (!c)
 			return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((c->flags & IEEE80211_CHAN_RADAR) &&
 		    !(wiphy->flags & WIPHY_FLAG_DFS_OFFLOAD))
+=======
+		if (c->flags & IEEE80211_CHAN_RADAR)
+>>>>>>> v3.18
 =======
 		if (c->flags & IEEE80211_CHAN_RADAR)
 >>>>>>> v3.18
@@ -356,21 +393,28 @@ static int cfg80211_get_chans_dfs_required(struct wiphy *wiphy,
 
 int cfg80211_chandef_dfs_required(struct wiphy *wiphy,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  const struct cfg80211_chan_def *chandef)
 {
 	int width;
 	int r;
 =======
+=======
+>>>>>>> v3.18
 				  const struct cfg80211_chan_def *chandef,
 				  enum nl80211_iftype iftype)
 {
 	int width;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (WARN_ON(!cfg80211_chandef_valid(chandef)))
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	width = cfg80211_chandef_get_width(chandef);
 	if (width < 0)
@@ -399,6 +443,8 @@ static bool cfg80211_secondary_chans_ok(struct wiphy *wiphy,
 	     freq <= center_freq + bandwidth/2 - 10;
 	     freq += 20) {
 =======
+=======
+>>>>>>> v3.18
 	switch (iftype) {
 	case NL80211_IFTYPE_ADHOC:
 	case NL80211_IFTYPE_AP:
@@ -534,11 +580,15 @@ static bool cfg80211_get_chans_dfs_available(struct wiphy *wiphy,
 	 * had gone through CAC return false
 	 */
 	for (freq = start_freq; freq <= end_freq; freq += 20) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		c = ieee80211_get_channel(wiphy, freq);
 		if (!c)
 			return false;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* check for radar flags */
 		if ((!(wiphy->flags & WIPHY_FLAG_DFS_OFFLOAD)) &&
@@ -549,6 +599,8 @@ static bool cfg80211_get_chans_dfs_available(struct wiphy *wiphy,
 		/* check for the other flags */
 		if (c->flags & prohibited_flags & ~IEEE80211_CHAN_RADAR)
 =======
+=======
+>>>>>>> v3.18
 		if (c->flags & IEEE80211_CHAN_DISABLED)
 			return false;
 
@@ -664,6 +716,9 @@ static bool cfg80211_secondary_chans_ok(struct wiphy *wiphy,
 	for (freq = start_freq; freq <= end_freq; freq += 20) {
 		c = ieee80211_get_channel(wiphy, freq);
 		if (!c || c->flags & prohibited_flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return false;
 	}
@@ -678,7 +733,11 @@ bool cfg80211_chandef_usable(struct wiphy *wiphy,
 	struct ieee80211_sta_ht_cap *ht_cap;
 	struct ieee80211_sta_vht_cap *vht_cap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 width, control_freq, cap;
+=======
+	u32 width, control_freq;
+>>>>>>> v3.18
 =======
 	u32 width, control_freq;
 >>>>>>> v3.18
@@ -693,7 +752,10 @@ bool cfg80211_chandef_usable(struct wiphy *wiphy,
 
 	switch (chandef->width) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case NL80211_CHAN_WIDTH_5:
 		width = 5;
 		break;
@@ -701,12 +763,19 @@ bool cfg80211_chandef_usable(struct wiphy *wiphy,
 		prohibited_flags |= IEEE80211_CHAN_NO_10MHZ;
 		width = 10;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case NL80211_CHAN_WIDTH_20:
 		if (!ht_cap->ht_supported)
 			return false;
 	case NL80211_CHAN_WIDTH_20_NOHT:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		prohibited_flags |= IEEE80211_CHAN_NO_20MHZ;
+>>>>>>> v3.18
 =======
 		prohibited_flags |= IEEE80211_CHAN_NO_20MHZ;
 >>>>>>> v3.18
@@ -728,8 +797,12 @@ bool cfg80211_chandef_usable(struct wiphy *wiphy,
 		break;
 	case NL80211_CHAN_WIDTH_80P80:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cap = vht_cap->cap & IEEE80211_VHT_CAP_SUPP_CHAN_WIDTH_MASK;
 		if (cap != IEEE80211_VHT_CAP_SUPP_CHAN_WIDTH_160_80PLUS80MHZ)
+=======
+		if (!(vht_cap->cap & IEEE80211_VHT_CAP_SUPP_CHAN_WIDTH_160_80PLUS80MHZ))
+>>>>>>> v3.18
 =======
 		if (!(vht_cap->cap & IEEE80211_VHT_CAP_SUPP_CHAN_WIDTH_160_80PLUS80MHZ))
 >>>>>>> v3.18
@@ -744,9 +817,13 @@ bool cfg80211_chandef_usable(struct wiphy *wiphy,
 		if (!vht_cap->vht_supported)
 			return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cap = vht_cap->cap & IEEE80211_VHT_CAP_SUPP_CHAN_WIDTH_MASK;
 		if (cap != IEEE80211_VHT_CAP_SUPP_CHAN_WIDTH_160MHZ &&
 		    cap != IEEE80211_VHT_CAP_SUPP_CHAN_WIDTH_160_80PLUS80MHZ)
+=======
+		if (!(vht_cap->cap & IEEE80211_VHT_CAP_SUPP_CHAN_WIDTH_160MHZ))
+>>>>>>> v3.18
 =======
 		if (!(vht_cap->cap & IEEE80211_VHT_CAP_SUPP_CHAN_WIDTH_160MHZ))
 >>>>>>> v3.18
@@ -774,12 +851,18 @@ bool cfg80211_chandef_usable(struct wiphy *wiphy,
 		prohibited_flags |= IEEE80211_CHAN_NO_OFDM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* 5 and 10 MHz are only defined for the OFDM PHY */
 	if (width < 20)
 		prohibited_flags |= IEEE80211_CHAN_NO_OFDM;
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!cfg80211_secondary_chans_ok(wiphy, chandef->center_freq1,
 					 width, prohibited_flags))
@@ -792,6 +875,7 @@ bool cfg80211_chandef_usable(struct wiphy *wiphy,
 }
 EXPORT_SYMBOL(cfg80211_chandef_usable);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 bool cfg80211_reg_can_beacon(struct wiphy *wiphy,
 			     struct cfg80211_chan_def *chandef)
@@ -806,6 +890,8 @@ bool cfg80211_reg_can_beacon(struct wiphy *wiphy,
 				      IEEE80211_CHAN_NO_IBSS |
 				      IEEE80211_CHAN_RADAR);
 =======
+=======
+>>>>>>> v3.18
 /*
  * For GO only, check if the channel can be used under permissive conditions
  * mandated by the some regulatory bodies, i.e., the channel is marked with
@@ -917,6 +1003,9 @@ bool cfg80211_reg_can_beacon(struct wiphy *wiphy,
 	}
 
 	res = cfg80211_chandef_usable(wiphy, chandef, prohibited_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	trace_cfg80211_return_bool(res);
@@ -939,14 +1028,20 @@ void
 cfg80211_get_chan_state(struct wireless_dev *wdev,
 		        struct ieee80211_channel **chan,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		        enum cfg80211_chan_mode *chanmode)
 {
 =======
+=======
+>>>>>>> v3.18
 		        enum cfg80211_chan_mode *chanmode,
 		        u8 *radar_detect)
 {
 	int ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*chan = NULL;
 	*chanmode = CHAN_MODE_UNDEFINED;
@@ -961,12 +1056,15 @@ cfg80211_get_chan_state(struct wireless_dev *wdev,
 		if (wdev->current_bss) {
 			*chan = wdev->current_bss->pub.channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*chanmode = wdev->ibss_fixed
 				  ? CHAN_MODE_SHARED
 				  : CHAN_MODE_EXCLUSIVE;
 			return;
 		}
 =======
+=======
+>>>>>>> v3.18
 			*chanmode = (wdev->ibss_fixed &&
 				     !wdev->ibss_dfs_possible)
 				  ? CHAN_MODE_SHARED
@@ -979,6 +1077,9 @@ cfg80211_get_chan_state(struct wireless_dev *wdev,
 			return;
 		}
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case NL80211_IFTYPE_STATION:
 	case NL80211_IFTYPE_P2P_CLIENT:
@@ -992,12 +1093,15 @@ cfg80211_get_chan_state(struct wireless_dev *wdev,
 	case NL80211_IFTYPE_P2P_GO:
 		if (wdev->cac_started) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*chan = wdev->channel;
 			*chanmode = CHAN_MODE_SHARED;
 		} else if (wdev->beacon_interval) {
 			*chan = wdev->channel;
 			*chanmode = CHAN_MODE_SHARED;
 =======
+=======
+>>>>>>> v3.18
 			*chan = wdev->chandef.chan;
 			*chanmode = CHAN_MODE_SHARED;
 			*radar_detect |= BIT(wdev->chandef.width);
@@ -1011,15 +1115,21 @@ cfg80211_get_chan_state(struct wireless_dev *wdev,
 			WARN_ON(ret < 0);
 			if (ret > 0)
 				*radar_detect |= BIT(wdev->chandef.width);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		return;
 	case NL80211_IFTYPE_MESH_POINT:
 		if (wdev->mesh_id_len) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*chan = wdev->channel;
 			*chanmode = CHAN_MODE_SHARED;
 =======
+=======
+>>>>>>> v3.18
 			*chan = wdev->chandef.chan;
 			*chanmode = CHAN_MODE_SHARED;
 
@@ -1029,12 +1139,16 @@ cfg80211_get_chan_state(struct wireless_dev *wdev,
 			WARN_ON(ret < 0);
 			if (ret > 0)
 				*radar_detect |= BIT(wdev->chandef.width);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		return;
 	case NL80211_IFTYPE_MONITOR:
 	case NL80211_IFTYPE_AP_VLAN:
 	case NL80211_IFTYPE_WDS:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* these interface types don't really have a channel */
 		return;
@@ -1046,14 +1160,21 @@ cfg80211_get_chan_state(struct wireless_dev *wdev,
 	case NL80211_IFTYPE_P2P_DEVICE:
 		/* these interface types don't really have a channel */
 >>>>>>> v3.18
+=======
+	case NL80211_IFTYPE_P2P_DEVICE:
+		/* these interface types don't really have a channel */
+>>>>>>> v3.18
 		return;
 	case NL80211_IFTYPE_UNSPECIFIED:
 	case NUM_NL80211_IFTYPES:
 		WARN_ON(1);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

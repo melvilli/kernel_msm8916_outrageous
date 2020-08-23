@@ -9,13 +9,19 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
 =======
+=======
+>>>>>>> v3.18
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/pinctrl/omap.h>
 
 #include "skeleton.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
@@ -27,12 +33,15 @@
 		serial1 = &uart2;
 		serial2 = &uart3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 
 	cpus {
 		cpu@0 {
 			compatible = "arm,arm1136jf-s";
 =======
+=======
+>>>>>>> v3.18
 		i2c0 = &i2c1;
 		i2c1 = &i2c2;
 	};
@@ -44,6 +53,9 @@
 		cpu {
 			compatible = "arm,arm1136jf-s";
 			device_type = "cpu";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -69,7 +81,10 @@
 		ti,hwmods = "l3_main";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		aes: aes@480a6000 {
 			compatible = "ti,omap2-aes";
 			ti,hwmods = "aes";
@@ -85,13 +100,19 @@
 			interrupts = <58>;
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		intc: interrupt-controller@1 {
 			compatible = "ti,omap2-intc";
 			interrupt-controller;
 			#interrupt-cells = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ti,intc-size = <96>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			reg = <0x480FE000 0x1000>;
@@ -100,6 +121,10 @@
 		sdma: dma-controller@48056000 {
 			compatible = "ti,omap2430-sdma", "ti,omap2420-sdma";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			ti,hwmods = "dma";
+>>>>>>> v3.18
 =======
 			ti,hwmods = "dma";
 >>>>>>> v3.18
@@ -114,10 +139,13 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uart1: serial@4806a000 {
 			compatible = "ti,omap2-uart";
 			ti,hwmods = "uart1";
 =======
+=======
+>>>>>>> v3.18
 		i2c1: i2c@48070000 {
 			compatible = "ti,omap2-i2c";
 			ti,hwmods = "i2c1";
@@ -183,6 +211,9 @@
 			interrupts = <72>;
 			dmas = <&sdma 49 &sdma 50>;
 			dma-names = "tx", "rx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			clock-frequency = <48000000>;
 		};
@@ -191,11 +222,17 @@
 			compatible = "ti,omap2-uart";
 			ti,hwmods = "uart2";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			reg = <0x4806c000 0x400>;
 			interrupts = <73>;
 			dmas = <&sdma 51 &sdma 52>;
 			dma-names = "tx", "rx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			clock-frequency = <48000000>;
 		};
@@ -204,11 +241,17 @@
 			compatible = "ti,omap2-uart";
 			ti,hwmods = "uart3";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			reg = <0x4806e000 0x400>;
 			interrupts = <74>;
 			dmas = <&sdma 53 &sdma 54>;
 			dma-names = "tx", "rx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			clock-frequency = <48000000>;
 		};
@@ -298,7 +341,10 @@
 			ti,timer-pwm;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		dss: dss@48050000 {
 			compatible = "ti,omap2-dss";
@@ -330,6 +376,9 @@
 				ti,hwmods = "dss_venc";
 			};
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

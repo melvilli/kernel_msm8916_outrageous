@@ -29,14 +29,20 @@
 #include <linux/interrupt.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/regulator/driver.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_gpio.h>
 #include <linux/platform_device.h>
 #include <linux/regulator/driver.h>
 #include <linux/regulator/of_regulator.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/mfd/max8998.h>
 #include <linux/mfd/max8998-private.h>
@@ -46,7 +52,10 @@ struct max8998_data {
 	struct max8998_dev	*iodev;
 	int			num_regulators;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_dev	**rdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8                      buck1_vol[4]; /* voltages for selection */
@@ -601,7 +610,11 @@ static struct regulator_desc regulators[] = {
 		.owner		= THIS_MODULE,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name		= "EN32KHz AP",
+=======
+		.name		= "EN32KHz-AP",
+>>>>>>> v3.18
 =======
 		.name		= "EN32KHz-AP",
 >>>>>>> v3.18
@@ -611,7 +624,11 @@ static struct regulator_desc regulators[] = {
 		.owner		= THIS_MODULE,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name		= "EN32KHz CP",
+=======
+		.name		= "EN32KHz-CP",
+>>>>>>> v3.18
 =======
 		.name		= "EN32KHz-CP",
 >>>>>>> v3.18
@@ -641,6 +658,7 @@ static struct regulator_desc regulators[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max8998_pmic_probe(struct platform_device *pdev)
 {
 	struct max8998_dev *iodev = dev_get_drvdata(pdev->dev.parent);
@@ -651,6 +669,8 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 	struct i2c_client *i2c;
 	int i, ret, size;
 =======
+=======
+>>>>>>> v3.18
 static int max8998_pmic_dt_parse_dvs_gpio(struct max8998_dev *iodev,
 			struct max8998_platform_data *pdata,
 			struct device_node *pmic_np)
@@ -778,6 +798,9 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 	struct i2c_client *i2c;
 	int i, ret;
 	unsigned int v;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!pdata) {
@@ -786,13 +809,19 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_OF) && iodev->dev->of_node) {
 		ret = max8998_pmic_dt_parse_pdata(iodev, pdata);
 		if (ret)
 			return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	max8998 = devm_kzalloc(&pdev->dev, sizeof(struct max8998_data),
 			       GFP_KERNEL);
@@ -800,12 +829,15 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = sizeof(struct regulator_dev *) * pdata->num_regulators;
 	max8998->rdev = devm_kzalloc(&pdev->dev, size, GFP_KERNEL);
 	if (!max8998->rdev)
 		return -ENOMEM;
 
 	rdev = max8998->rdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	max8998->dev = &pdev->dev;
@@ -830,8 +862,12 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 				"MAX8998 SET1 GPIO defined as 0 !\n");
 			WARN_ON(!pdata->buck1_set1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = -EIO;
 			goto err_out;
+=======
+			return -EIO;
+>>>>>>> v3.18
 =======
 			return -EIO;
 >>>>>>> v3.18
@@ -842,8 +878,12 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 				"MAX8998 SET2 GPIO defined as 0 !\n");
 			WARN_ON(!pdata->buck1_set2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = -EIO;
 			goto err_out;
+=======
+			return -EIO;
+>>>>>>> v3.18
 =======
 			return -EIO;
 >>>>>>> v3.18
@@ -857,6 +897,7 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 		gpio_request(pdata->buck1_set2, "MAX8998 BUCK1_SET2");
 		gpio_direction_output(pdata->buck1_set2,
 				      (max8998->buck1_idx >> 1) & 0x1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Set predefined value for BUCK1 register 1 */
 		i = 0;
@@ -906,6 +947,8 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 			goto err_out;
 
 =======
+=======
+>>>>>>> v3.18
 
 		/* Set predefined values for BUCK1 registers */
 		for (v = 0; v < ARRAY_SIZE(pdata->buck1_voltage); ++v) {
@@ -921,6 +964,9 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 			if (ret)
 				return ret;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -931,8 +977,12 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 				"MAX8998 SET3 GPIO defined as 0 !\n");
 			WARN_ON(!pdata->buck2_set3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = -EIO;
 			goto err_out;
+=======
+			return -EIO;
+>>>>>>> v3.18
 =======
 			return -EIO;
 >>>>>>> v3.18
@@ -941,6 +991,7 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 		gpio_direction_output(pdata->buck2_set3,
 				      max8998->buck2_idx & 0x1);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* BUCK2 register 1 */
 		i = 0;
@@ -964,6 +1015,8 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 		if (ret)
 			goto err_out;
 =======
+=======
+>>>>>>> v3.18
 		/* Set predefined values for BUCK2 registers */
 		for (v = 0; v < ARRAY_SIZE(pdata->buck2_voltage); ++v) {
 			i = 0;
@@ -978,6 +1031,9 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 			if (ret)
 				return ret;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -997,6 +1053,7 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 
 		config.dev = max8998->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		config.init_data = pdata->regulators[i].initdata;
 		config.driver_data = max8998;
 
@@ -1007,6 +1064,8 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 			rdev[i] = NULL;
 			goto err;
 =======
+=======
+>>>>>>> v3.18
 		config.of_node = pdata->regulators[i].reg_node;
 		config.init_data = pdata->regulators[i].initdata;
 		config.driver_data = max8998;
@@ -1018,12 +1077,16 @@ static int max8998_pmic_probe(struct platform_device *pdev)
 			dev_err(max8998->dev, "regulator %s init failed (%d)\n",
 						regulators[index].name, ret);
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 err:
 	while (--i >= 0)
@@ -1043,6 +1106,8 @@ static int max8998_pmic_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static const struct platform_device_id max8998_pmic_id[] = {
@@ -1059,7 +1124,10 @@ static struct platform_driver max8998_pmic_driver = {
 	},
 	.probe = max8998_pmic_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = max8998_pmic_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = max8998_pmic_id,

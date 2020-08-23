@@ -34,9 +34,12 @@
 #define MAX_BUS_CLK	(4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Number of gpio's used is max data bus width + command and clock lines */
 #define NUM_GPIOS(x)	(x + 2)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -55,7 +58,11 @@ struct sdhci_s3c {
 	struct resource		*ioarea;
 	struct s3c_sdhci_platdata *pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		cur_clk;
+=======
+	int			cur_clk;
+>>>>>>> v3.18
 =======
 	int			cur_clk;
 >>>>>>> v3.18
@@ -65,6 +72,12 @@ struct sdhci_s3c {
 	struct clk		*clk_io;
 	struct clk		*clk_bus[MAX_BUS_CLK];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long		clk_rates[MAX_BUS_CLK];
+
+	bool			no_divider;
+>>>>>>> v3.18
 =======
 	unsigned long		clk_rates[MAX_BUS_CLK];
 
@@ -83,6 +96,10 @@ struct sdhci_s3c {
 struct sdhci_s3c_drv_data {
 	unsigned int	sdhci_quirks;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool		no_divider;
+>>>>>>> v3.18
 =======
 	bool		no_divider;
 >>>>>>> v3.18
@@ -94,6 +111,7 @@ static inline struct sdhci_s3c *to_s3c(struct sdhci_host *host)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * get_curclk - convert ctrl2 register to clock source number
  * @ctrl2: Control2 register value.
@@ -123,6 +141,8 @@ static void sdhci_s3c_check_sclk(struct sdhci_host *host)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * sdhci_s3c_get_max_clk - callback to get maximum clock frequency.
  * @host: The SDHCI host instance.
  *
@@ -131,6 +151,7 @@ static void sdhci_s3c_check_sclk(struct sdhci_host *host)
 static unsigned int sdhci_s3c_get_max_clk(struct sdhci_host *host)
 {
 	struct sdhci_s3c *ourhost = to_s3c(host);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct clk *busclk;
 	unsigned int rate, max;
@@ -147,11 +168,16 @@ static unsigned int sdhci_s3c_get_max_clk(struct sdhci_host *host)
 
 		rate = clk_get_rate(busclk);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long rate, max = 0;
 	int src;
 
 	for (src = 0; src < MAX_BUS_CLK; src++) {
 		rate = ourhost->clk_rates[src];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rate > max)
 			max = rate;
@@ -173,9 +199,15 @@ static unsigned int sdhci_s3c_consider_clock(struct sdhci_s3c *ourhost,
 	unsigned long rate;
 	struct clk *clksrc = ourhost->clk_bus[src];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int div;
 
 	if (!clksrc)
+=======
+	int shift;
+
+	if (IS_ERR(clksrc))
+>>>>>>> v3.18
 =======
 	int shift;
 
@@ -188,7 +220,11 @@ static unsigned int sdhci_s3c_consider_clock(struct sdhci_s3c *ourhost,
 	 * speed possible with selected clock source and skip the division.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ourhost->host->quirks & SDHCI_QUIRK_NONSTANDARD_CLOCK) {
+=======
+	if (ourhost->no_divider) {
+>>>>>>> v3.18
 =======
 	if (ourhost->no_divider) {
 >>>>>>> v3.18
@@ -196,6 +232,7 @@ static unsigned int sdhci_s3c_consider_clock(struct sdhci_s3c *ourhost,
 		return wanted - rate;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rate = clk_get_rate(clksrc);
 
@@ -209,6 +246,8 @@ static unsigned int sdhci_s3c_consider_clock(struct sdhci_s3c *ourhost,
 
 	return wanted - (rate / div);
 =======
+=======
+>>>>>>> v3.18
 	rate = ourhost->clk_rates[src];
 
 	for (shift = 0; shift <= 8; ++shift) {
@@ -227,6 +266,9 @@ static unsigned int sdhci_s3c_consider_clock(struct sdhci_s3c *ourhost,
 		src, rate, wanted, rate >> shift);
 
 	return wanted - (rate >> shift);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -248,10 +290,13 @@ static void sdhci_s3c_set_clock(struct sdhci_host *host, unsigned int clock)
 	u32 ctrl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* don't bother if the clock is going off. */
 	if (clock == 0)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	host->mmc->actual_clock = 0;
 
 	/* don't bother if the clock is going off. */
@@ -259,6 +304,9 @@ static void sdhci_s3c_set_clock(struct sdhci_host *host, unsigned int clock)
 		sdhci_set_clock(host, clock);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (src = 0; src < MAX_BUS_CLK; src++) {
@@ -279,6 +327,7 @@ static void sdhci_s3c_set_clock(struct sdhci_host *host, unsigned int clock)
 
 		clk_prepare_enable(clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_disable_unprepare(ourhost->clk_bus[ourhost->cur_clk]);
 
 		/* turn clock off to card before changing clock source */
@@ -294,6 +343,8 @@ static void sdhci_s3c_set_clock(struct sdhci_host *host, unsigned int clock)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		if (ourhost->cur_clk >= 0)
 			clk_disable_unprepare(
 					ourhost->clk_bus[ourhost->cur_clk]);
@@ -310,6 +361,9 @@ static void sdhci_s3c_set_clock(struct sdhci_host *host, unsigned int clock)
 	ctrl |= best_src << S3C_SDHCI_CTRL2_SELBASECLK_SHIFT;
 	writel(ctrl, host->ioaddr + S3C_SDHCI_CONTROL2);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* reprogram default hardware configuration */
 	writel(S3C64XX_SDHCI_CONTROL4_DRIVE_9mA,
@@ -329,6 +383,11 @@ static void sdhci_s3c_set_clock(struct sdhci_host *host, unsigned int clock)
 		ctrl |= (S3C_SDHCI_CTRL3_FCSEL3 | S3C_SDHCI_CTRL3_FCSEL2);
 	writel(ctrl, host->ioaddr + S3C_SDHCI_CONTROL3);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	sdhci_set_clock(host, clock);
+>>>>>>> v3.18
 =======
 
 	sdhci_set_clock(host, clock);
@@ -348,6 +407,7 @@ static unsigned int sdhci_s3c_get_min_clock(struct sdhci_host *host)
 {
 	struct sdhci_s3c *ourhost = to_s3c(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int delta, min = UINT_MAX;
 	int src;
 
@@ -360,6 +420,8 @@ static unsigned int sdhci_s3c_get_min_clock(struct sdhci_host *host)
 			min = -delta;
 	}
 =======
+=======
+>>>>>>> v3.18
 	unsigned long rate, min = ULONG_MAX;
 	int src;
 
@@ -371,6 +433,9 @@ static unsigned int sdhci_s3c_get_min_clock(struct sdhci_host *host)
 			min = rate;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return min;
 }
@@ -380,9 +445,12 @@ static unsigned int sdhci_cmu_get_max_clock(struct sdhci_host *host)
 {
 	struct sdhci_s3c *ourhost = to_s3c(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return clk_round_rate(ourhost->clk_bus[ourhost->cur_clk], UINT_MAX);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long rate, max = 0;
 	int src;
 
@@ -399,6 +467,9 @@ static unsigned int sdhci_cmu_get_max_clock(struct sdhci_host *host)
 	}
 
 	return max;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -407,6 +478,7 @@ static unsigned int sdhci_cmu_get_min_clock(struct sdhci_host *host)
 {
 	struct sdhci_s3c *ourhost = to_s3c(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * initial clock can be in the frequency range of
@@ -414,6 +486,8 @@ static unsigned int sdhci_cmu_get_min_clock(struct sdhci_host *host)
 	 */
 	return clk_round_rate(ourhost->clk_bus[ourhost->cur_clk], 400000);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long rate, min = ULONG_MAX;
 	int src;
 
@@ -430,6 +504,9 @@ static unsigned int sdhci_cmu_get_min_clock(struct sdhci_host *host)
 	}
 
 	return min;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -442,10 +519,13 @@ static void sdhci_cmu_set_clock(struct sdhci_host *host, unsigned int clock)
 	u16 clk = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* don't bother if the clock is going off */
 	if (clock == 0)
 		return;
 =======
+=======
+>>>>>>> v3.18
 	host->mmc->actual_clock = 0;
 
 	/* If the clock is going off, set to 0 at clock control register */
@@ -453,6 +533,9 @@ static void sdhci_cmu_set_clock(struct sdhci_host *host, unsigned int clock)
 		sdhci_writew(host, 0, SDHCI_CLOCK_CONTROL);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sdhci_s3c_set_clock(host, clock);
@@ -460,8 +543,11 @@ static void sdhci_cmu_set_clock(struct sdhci_host *host, unsigned int clock)
 	clk_set_rate(ourhost->clk_bus[ourhost->cur_clk], clock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->clock = clock;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clk = SDHCI_CLOCK_INT_EN;
@@ -486,7 +572,11 @@ static void sdhci_cmu_set_clock(struct sdhci_host *host, unsigned int clock)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * sdhci_s3c_platform_bus_width - support 8bit buswidth
+=======
+ * sdhci_s3c_set_bus_width - support 8bit buswidth
+>>>>>>> v3.18
 =======
  * sdhci_s3c_set_bus_width - support 8bit buswidth
 >>>>>>> v3.18
@@ -497,7 +587,11 @@ static void sdhci_cmu_set_clock(struct sdhci_host *host, unsigned int clock)
  * So we add platform_bus_width() and support 8bit width.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sdhci_s3c_platform_bus_width(struct sdhci_host *host, int width)
+=======
+static void sdhci_s3c_set_bus_width(struct sdhci_host *host, int width)
+>>>>>>> v3.18
 =======
 static void sdhci_s3c_set_bus_width(struct sdhci_host *host, int width)
 >>>>>>> v3.18
@@ -523,8 +617,11 @@ static void sdhci_s3c_set_bus_width(struct sdhci_host *host, int width)
 
 	sdhci_writeb(host, ctrl, SDHCI_HOST_CONTROL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -533,6 +630,7 @@ static struct sdhci_ops sdhci_s3c_ops = {
 	.get_max_clock		= sdhci_s3c_get_max_clk,
 	.set_clock		= sdhci_s3c_set_clock,
 	.get_min_clock		= sdhci_s3c_get_min_clock,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.platform_bus_width	= sdhci_s3c_platform_bus_width,
 };
@@ -606,11 +704,16 @@ static void sdhci_s3c_setup_card_detect_gpio(struct sdhci_s3c *sc)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	.set_bus_width		= sdhci_s3c_set_bus_width,
 	.reset			= sdhci_reset,
 	.set_uhs_signaling	= sdhci_set_uhs_signaling,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_OF
 static int sdhci_s3c_parse_dt(struct device *dev,
@@ -618,9 +721,13 @@ static int sdhci_s3c_parse_dt(struct device *dev,
 {
 	struct device_node *node = dev->of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sdhci_s3c *ourhost = to_s3c(host);
 	u32 max_width;
 	int gpio;
+=======
+	u32 max_width;
+>>>>>>> v3.18
 =======
 	u32 max_width;
 >>>>>>> v3.18
@@ -642,6 +749,7 @@ static int sdhci_s3c_parse_dt(struct device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio = of_get_named_gpio(node, "cd-gpios", 0);
 	if (gpio_is_valid(gpio)) {
 		pdata->cd_type = S3C_SDHCI_CD_GPIO;
@@ -654,6 +762,10 @@ static int sdhci_s3c_parse_dt(struct device *dev,
 		dev_err(dev, "invalid card detect gpio specified\n");
 		return -EINVAL;
 	}
+=======
+	if (of_get_named_gpio(node, "cd-gpios", 0))
+		return 0;
+>>>>>>> v3.18
 =======
 	if (of_get_named_gpio(node, "cd-gpios", 0))
 		return 0;
@@ -736,6 +848,10 @@ static int sdhci_s3c_probe(struct platform_device *pdev)
 	sc->pdev = pdev;
 	sc->pdata = pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sc->cur_clk = -1;
+>>>>>>> v3.18
 =======
 	sc->cur_clk = -1;
 >>>>>>> v3.18
@@ -753,6 +869,7 @@ static int sdhci_s3c_probe(struct platform_device *pdev)
 	clk_prepare_enable(sc->clk_io);
 
 	for (clks = 0, ptr = 0; ptr < MAX_BUS_CLK; ptr++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		struct clk *clk;
 		char name[14];
@@ -774,6 +891,8 @@ static int sdhci_s3c_probe(struct platform_device *pdev)
 		dev_info(dev, "clock source %d: %s (%ld Hz)\n",
 			 ptr, name, clk_get_rate(clk));
 =======
+=======
+>>>>>>> v3.18
 		char name[14];
 
 		snprintf(name, 14, "mmc_busclk.%d", ptr);
@@ -786,6 +905,9 @@ static int sdhci_s3c_probe(struct platform_device *pdev)
 
 		dev_info(dev, "clock source %d: %s (%ld Hz)\n",
 				ptr, name, sc->clk_rates[ptr]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -796,10 +918,13 @@ static int sdhci_s3c_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_PM_RUNTIME
 	clk_prepare_enable(sc->clk_bus[sc->cur_clk]);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -817,6 +942,10 @@ static int sdhci_s3c_probe(struct platform_device *pdev)
 	host->ops = &sdhci_s3c_ops;
 	host->quirks = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	host->quirks2 = 0;
+>>>>>>> v3.18
 =======
 	host->quirks2 = 0;
 >>>>>>> v3.18
@@ -826,13 +955,19 @@ static int sdhci_s3c_probe(struct platform_device *pdev)
 	host->quirks |= SDHCI_QUIRK_NO_ENDATTR_IN_NOPDESC;
 	host->quirks |= SDHCI_QUIRK_NO_HISPD_BIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (drv_data)
 		host->quirks |= drv_data->sdhci_quirks;
 =======
+=======
+>>>>>>> v3.18
 	if (drv_data) {
 		host->quirks |= drv_data->sdhci_quirks;
 		sc->no_divider = drv_data->no_divider;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef CONFIG_MMC_SDHCI_S3C_DMA
@@ -883,7 +1018,11 @@ static int sdhci_s3c_probe(struct platform_device *pdev)
 	 * we can use overriding functions instead of default.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (host->quirks & SDHCI_QUIRK_NONSTANDARD_CLOCK) {
+=======
+	if (sc->no_divider) {
+>>>>>>> v3.18
 =======
 	if (sc->no_divider) {
 >>>>>>> v3.18
@@ -905,6 +1044,7 @@ static int sdhci_s3c_probe(struct platform_device *pdev)
 	pm_suspend_ignore_children(&pdev->dev, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = sdhci_add_host(host);
 	if (ret) {
 		dev_err(dev, "sdhci_add_host() failed\n");
@@ -923,6 +1063,8 @@ static int sdhci_s3c_probe(struct platform_device *pdev)
 		sdhci_s3c_setup_card_detect_gpio(sc);
 
 =======
+=======
+>>>>>>> v3.18
 	mmc_of_parse(host->mmc);
 
 	ret = sdhci_add_host(host);
@@ -931,6 +1073,9 @@ static int sdhci_s3c_probe(struct platform_device *pdev)
 		goto err_req_regs;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PM_RUNTIME
 	if (pdata->cd_type != S3C_SDHCI_CD_INTERNAL)
@@ -940,9 +1085,13 @@ static int sdhci_s3c_probe(struct platform_device *pdev)
 
  err_req_regs:
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_PM_RUNTIME
 	clk_disable_unprepare(sc->clk_bus[sc->cur_clk]);
 #endif
+=======
+	pm_runtime_disable(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pm_runtime_disable(&pdev->dev);
 >>>>>>> v3.18
@@ -961,10 +1110,13 @@ static int sdhci_s3c_remove(struct platform_device *pdev)
 	struct sdhci_host *host =  platform_get_drvdata(pdev);
 	struct sdhci_s3c *sc = sdhci_priv(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s3c_sdhci_platdata *pdata = sc->pdata;
 
 	if (pdata->cd_type == S3C_SDHCI_CD_EXTERNAL && pdata->ext_cd_cleanup)
 		pdata->ext_cd_cleanup(&sdhci_s3c_notify_change);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -973,7 +1125,11 @@ static int sdhci_s3c_remove(struct platform_device *pdev)
 
 #ifdef CONFIG_PM_RUNTIME
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->cd_type != S3C_SDHCI_CD_INTERNAL)
+=======
+	if (sc->pdata->cd_type != S3C_SDHCI_CD_INTERNAL)
+>>>>>>> v3.18
 =======
 	if (sc->pdata->cd_type != S3C_SDHCI_CD_INTERNAL)
 >>>>>>> v3.18
@@ -984,6 +1140,7 @@ static int sdhci_s3c_remove(struct platform_device *pdev)
 	pm_runtime_dont_use_autosuspend(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef CONFIG_PM_RUNTIME
 	clk_disable_unprepare(sc->clk_bus[sc->cur_clk]);
@@ -997,13 +1154,21 @@ static int sdhci_s3c_remove(struct platform_device *pdev)
 
 	sdhci_free_host(host);
 >>>>>>> v3.18
+=======
+	clk_disable_unprepare(sc->clk_io);
+
+	sdhci_free_host(host);
+>>>>>>> v3.18
 
 	return 0;
 }
 
 #ifdef CONFIG_PM_SLEEP
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int sdhci_s3c_suspend(struct device *dev)
@@ -1032,7 +1197,12 @@ static int sdhci_s3c_runtime_suspend(struct device *dev)
 	ret = sdhci_runtime_suspend_host(host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable_unprepare(ourhost->clk_bus[ourhost->cur_clk]);
+=======
+	if (ourhost->cur_clk >= 0)
+		clk_disable_unprepare(ourhost->clk_bus[ourhost->cur_clk]);
+>>>>>>> v3.18
 =======
 	if (ourhost->cur_clk >= 0)
 		clk_disable_unprepare(ourhost->clk_bus[ourhost->cur_clk]);
@@ -1050,7 +1220,12 @@ static int sdhci_s3c_runtime_resume(struct device *dev)
 
 	clk_prepare_enable(busclk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_prepare_enable(ourhost->clk_bus[ourhost->cur_clk]);
+=======
+	if (ourhost->cur_clk >= 0)
+		clk_prepare_enable(ourhost->clk_bus[ourhost->cur_clk]);
+>>>>>>> v3.18
 =======
 	if (ourhost->cur_clk >= 0)
 		clk_prepare_enable(ourhost->clk_bus[ourhost->cur_clk]);
@@ -1070,6 +1245,7 @@ static const struct dev_pm_ops sdhci_s3c_pmops = {
 #define SDHCI_S3C_PMOPS (&sdhci_s3c_pmops)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct dev_pm_ops sdhci_s3c_pmops = {
 	.suspend	= sdhci_s3c_suspend,
 	.resume		= sdhci_s3c_resume,
@@ -1079,6 +1255,8 @@ static const struct dev_pm_ops sdhci_s3c_pmops = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #else
 #define SDHCI_S3C_PMOPS NULL
 #endif
@@ -1086,7 +1264,11 @@ static const struct dev_pm_ops sdhci_s3c_pmops = {
 #if defined(CONFIG_CPU_EXYNOS4210) || defined(CONFIG_SOC_EXYNOS4212)
 static struct sdhci_s3c_drv_data exynos4_sdhci_drv_data = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.sdhci_quirks = SDHCI_QUIRK_NONSTANDARD_CLOCK,
+=======
+	.no_divider = true,
+>>>>>>> v3.18
 =======
 	.no_divider = true,
 >>>>>>> v3.18
@@ -1124,7 +1306,10 @@ static struct platform_driver sdhci_s3c_driver = {
 	.id_table	= sdhci_s3c_driver_ids,
 	.driver		= {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name	= "s3c-sdhci",

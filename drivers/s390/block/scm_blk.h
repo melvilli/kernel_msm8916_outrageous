@@ -108,7 +108,11 @@ extern debug_info_t *scm_debug;
 static inline void SCM_LOG_HEX(int level, void *data, int length)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (level > scm_debug->level)
+=======
+	if (!debug_level_enabled(scm_debug, level))
+>>>>>>> v3.18
 =======
 	if (!debug_level_enabled(scm_debug, level))
 >>>>>>> v3.18

@@ -16,12 +16,15 @@
 #define _ASM_TILE_UNALIGNED_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/unaligned/le_struct.h>
 #include <linux/unaligned/be_byteshift.h>
 #include <linux/unaligned/generic.h>
 #define get_unaligned	__get_unaligned_le
 #define put_unaligned	__put_unaligned_le
 =======
+=======
+>>>>>>> v3.18
 /*
  * We could implement faster get_unaligned_[be/le]64 using the ldna
  * instruction on tilegx; however, we need to either copy all of the
@@ -31,6 +34,9 @@
  * are not often called, we'll stick with the generic version.
  */
 #include <asm-generic/unaligned.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

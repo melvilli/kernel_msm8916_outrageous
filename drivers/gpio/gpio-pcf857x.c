@@ -19,8 +19,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/slab.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/gpio.h>
@@ -30,16 +33,22 @@
 #include <linux/irq.h>
 #include <linux/irqdomain.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/spinlock.h>
 #include <linux/workqueue.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/of_device.h>
 #include <linux/slab.h>
 #include <linux/spinlock.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -63,7 +72,10 @@ static const struct i2c_device_id pcf857x_id[] = {
 MODULE_DEVICE_TABLE(i2c, pcf857x_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id pcf857x_of_table[] = {
 	{ .compatible = "nxp,pcf8574" },
@@ -85,6 +97,9 @@ static const struct of_device_id pcf857x_of_table[] = {
 MODULE_DEVICE_TABLE(of, pcf857x_of_table);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The pcf857x, pca857x, and pca967x chips only expose one read and one
@@ -103,7 +118,10 @@ struct pcf857x {
 	struct i2c_client	*client;
 	struct mutex		lock;		/* protect 'out' */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct	work;		/* irq demux work */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct irq_domain	*irq_domain;	/* for irq demux  */
@@ -111,7 +129,11 @@ struct pcf857x {
 	unsigned		out;		/* software latch */
 	unsigned		status;		/* current status */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			irq;		/* real irq number */
+=======
+	unsigned		irq_mapped;	/* mapped gpio irqs */
+>>>>>>> v3.18
 =======
 	unsigned		irq_mapped;	/* mapped gpio irqs */
 >>>>>>> v3.18
@@ -208,6 +230,7 @@ static int pcf857x_to_irq(struct gpio_chip *chip, unsigned offset)
 {
 	struct pcf857x *gpio = container_of(chip, struct pcf857x, chip);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return irq_create_mapping(gpio->irq_domain, offset);
 }
@@ -218,6 +241,8 @@ static void pcf857x_irq_demux_work(struct work_struct *work)
 					       struct pcf857x,
 					       work);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = irq_create_mapping(gpio->irq_domain, offset);
@@ -230,6 +255,9 @@ static void pcf857x_irq_demux_work(struct work_struct *work)
 static irqreturn_t pcf857x_irq(int irq, void *data)
 {
 	struct pcf857x  *gpio = data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long change, i, status, flags;
 
@@ -238,20 +266,27 @@ static irqreturn_t pcf857x_irq(int irq, void *data)
 	spin_lock_irqsave(&gpio->slock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	change = gpio->status ^ status;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * call the interrupt handler iff gpio is used as
 	 * interrupt source, just to avoid bad irqs
 	 */
 
 	change = ((gpio->status ^ status) & gpio->irq_mapped);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for_each_set_bit(i, &change, gpio->chip.ngpio)
 		generic_handle_irq(irq_find_mapping(gpio->irq_domain, i));
 	gpio->status = status;
 
 	spin_unlock_irqrestore(&gpio->slock, flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -266,10 +301,13 @@ static irqreturn_t pcf857x_irq_demux(int irq, void *data)
 	schedule_work(&gpio->work);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int pcf857x_irq_domain_map(struct irq_domain *domain, unsigned int virq,
 				 irq_hw_number_t hw)
@@ -278,6 +316,8 @@ static int pcf857x_irq_domain_map(struct irq_domain *domain, unsigned int virq,
 				 &dummy_irq_chip,
 				 handle_level_irq);
 =======
+=======
+>>>>>>> v3.18
 static int pcf857x_irq_domain_map(struct irq_domain *domain, unsigned int irq,
 				 irq_hw_number_t hw)
 {
@@ -293,6 +333,9 @@ static int pcf857x_irq_domain_map(struct irq_domain *domain, unsigned int irq,
 #endif
 	gpio->irq_mapped |= (1 << hw);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -307,12 +350,18 @@ static void pcf857x_irq_domain_cleanup(struct pcf857x *gpio)
 		irq_domain_remove(gpio->irq_domain);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpio->irq)
 		free_irq(gpio->irq, gpio);
 }
 
 static int pcf857x_irq_domain_init(struct pcf857x *gpio,
 				   struct pcf857x_platform_data *pdata,
+=======
+}
+
+static int pcf857x_irq_domain_init(struct pcf857x *gpio,
+>>>>>>> v3.18
 =======
 }
 
@@ -326,7 +375,11 @@ static int pcf857x_irq_domain_init(struct pcf857x *gpio,
 						 gpio->chip.ngpio,
 						 &pcf857x_irq_domain_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						 NULL);
+=======
+						 gpio);
+>>>>>>> v3.18
 =======
 						 gpio);
 >>>>>>> v3.18
@@ -335,23 +388,33 @@ static int pcf857x_irq_domain_init(struct pcf857x *gpio,
 
 	/* enable real irq */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = request_irq(client->irq, pcf857x_irq_demux, 0,
 			     dev_name(&client->dev), gpio);
 =======
+=======
+>>>>>>> v3.18
 	status = devm_request_threaded_irq(&client->dev, client->irq,
 				NULL, pcf857x_irq, IRQF_ONESHOT |
 				IRQF_TRIGGER_FALLING | IRQF_SHARED,
 				dev_name(&client->dev), gpio);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (status)
 		goto fail;
 
 	/* enable gpio_to_irq() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&gpio->work, pcf857x_irq_demux_work);
 	gpio->chip.to_irq	= pcf857x_to_irq;
 	gpio->irq		= client->irq;
+=======
+	gpio->chip.to_irq	= pcf857x_to_irq;
+>>>>>>> v3.18
 =======
 	gpio->chip.to_irq	= pcf857x_to_irq;
 >>>>>>> v3.18
@@ -369,6 +432,7 @@ static int pcf857x_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pcf857x_platform_data	*pdata;
 	struct pcf857x			*gpio;
 	int				status;
@@ -378,6 +442,8 @@ static int pcf857x_probe(struct i2c_client *client,
 		dev_dbg(&client->dev, "no platform data\n");
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct pcf857x_platform_data	*pdata = dev_get_platdata(&client->dev);
 	struct device_node		*np = client->dev.of_node;
 	struct pcf857x			*gpio;
@@ -390,6 +456,9 @@ static int pcf857x_probe(struct i2c_client *client,
 		n_latch = pdata->n_latch;
 	else
 		dev_dbg(&client->dev, "no platform data\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Allocate, initialize, and register this gpio_chip. */
@@ -402,7 +471,11 @@ static int pcf857x_probe(struct i2c_client *client,
 
 	gpio->chip.base			= pdata ? pdata->gpio_base : -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio->chip.can_sleep		= 1;
+=======
+	gpio->chip.can_sleep		= true;
+>>>>>>> v3.18
 =======
 	gpio->chip.can_sleep		= true;
 >>>>>>> v3.18
@@ -416,17 +489,23 @@ static int pcf857x_probe(struct i2c_client *client,
 
 	/* enable gpio_to_irq() if platform has settings */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata && client->irq) {
 		status = pcf857x_irq_domain_init(gpio, pdata, client);
 		if (status < 0) {
 			dev_err(&client->dev, "irq_domain init failed\n");
 			goto fail;
 =======
+=======
+>>>>>>> v3.18
 	if (client->irq) {
 		status = pcf857x_irq_domain_init(gpio, client);
 		if (status < 0) {
 			dev_err(&client->dev, "irq_domain init failed\n");
 			goto fail_irq_domain;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -496,17 +575,23 @@ static int pcf857x_probe(struct i2c_client *client,
 	 * written (some pins may need to be driven low).
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Using pdata->n_latch avoids that trouble.  When left initialized
 	 * to zero, our software copy of the "latch" then matches the chip's
 	 * all-ones reset state.  Otherwise it flags pins to be driven low.
 	 */
 	gpio->out = pdata ? ~pdata->n_latch : ~0;
 =======
+=======
+>>>>>>> v3.18
 	 * Using n_latch avoids that trouble.  When left initialized to zero,
 	 * our software copy of the "latch" then matches the chip's all-ones
 	 * reset state.  Otherwise it flags pins to be driven low.
 	 */
 	gpio->out = ~n_latch;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gpio->status = gpio->out;
 
@@ -531,6 +616,7 @@ static int pcf857x_probe(struct i2c_client *client,
 
 fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&client->dev, "probe error %d for '%s'\n",
 			status, client->name);
 
@@ -538,6 +624,8 @@ fail:
 		pcf857x_irq_domain_cleanup(gpio);
 
 =======
+=======
+>>>>>>> v3.18
 	if (client->irq)
 		pcf857x_irq_domain_cleanup(gpio);
 
@@ -545,6 +633,9 @@ fail_irq_domain:
 	dev_dbg(&client->dev, "probe error %d for '%s'\n",
 		status, client->name);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
@@ -552,7 +643,11 @@ fail_irq_domain:
 static int pcf857x_remove(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pcf857x_platform_data	*pdata = client->dev.platform_data;
+=======
+	struct pcf857x_platform_data	*pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct pcf857x_platform_data	*pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -571,6 +666,7 @@ static int pcf857x_remove(struct i2c_client *client)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata && client->irq)
 		pcf857x_irq_domain_cleanup(gpio);
 
@@ -578,10 +674,15 @@ static int pcf857x_remove(struct i2c_client *client)
 	if (status)
 		dev_err(&client->dev, "%s --> %d\n", "remove", status);
 =======
+=======
+>>>>>>> v3.18
 	if (client->irq)
 		pcf857x_irq_domain_cleanup(gpio);
 
 	gpiochip_remove(&gpio->chip);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
@@ -591,6 +692,10 @@ static struct i2c_driver pcf857x_driver = {
 		.name	= "pcf857x",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(pcf857x_of_table),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(pcf857x_of_table),
 >>>>>>> v3.18

@@ -86,9 +86,12 @@ static struct max1111_data *the_max1111;
 int max1111_read_channel(int channel)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!the_max1111 || !the_max1111->spi)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return max1111_read(&the_max1111->spi->dev, channel);
@@ -199,10 +202,15 @@ static int max1111_probe(struct spi_device *spi)
 
 	data = devm_kzalloc(&spi->dev, sizeof(struct max1111_data), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data == NULL) {
 		dev_err(&spi->dev, "failed to allocate memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (data == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (data == NULL)
 		return -ENOMEM;
@@ -272,9 +280,12 @@ static int max1111_remove(struct spi_device *spi)
 	struct max1111_data *data = spi_get_drvdata(spi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SHARPSL_PM
 	the_max1111 = NULL;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hwmon_device_unregister(data->hwmon_dev);

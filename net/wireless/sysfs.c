@@ -31,7 +31,12 @@ static ssize_t name ## _show(struct device *dev,			\
 {									\
 	return sprintf(buf, fmt "\n", dev_to_rdev(dev)->member);	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+}									\
+static DEVICE_ATTR_RO(name)
+>>>>>>> v3.18
 =======
 }									\
 static DEVICE_ATTR_RO(name)
@@ -48,7 +53,11 @@ static ssize_t name_show(struct device *dev,
 	return sprintf(buf, "%s\n", dev_name(&wiphy->dev));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+static DEVICE_ATTR_RO(name);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(name);
 >>>>>>> v3.18
@@ -70,6 +79,7 @@ static ssize_t addresses_show(struct device *dev,
 	return buf - start;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute ieee80211_dev_attrs[] = {
 	__ATTR_RO(index),
@@ -80,6 +90,8 @@ static struct device_attribute ieee80211_dev_attrs[] = {
 	{}
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(addresses);
 
 static struct attribute *ieee80211_attrs[] = {
@@ -91,6 +103,9 @@ static struct attribute *ieee80211_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(ieee80211);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void wiphy_dev_release(struct device *dev)
@@ -107,7 +122,10 @@ static int wiphy_uevent(struct device *dev, struct kobj_uevent_env *env)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 static void cfg80211_leave_all(struct cfg80211_registered_device *rdev)
 {
@@ -117,6 +135,9 @@ static void cfg80211_leave_all(struct cfg80211_registered_device *rdev)
 		cfg80211_leave(rdev, wdev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int wiphy_suspend(struct device *dev, pm_message_t state)
 {
@@ -126,6 +147,7 @@ static int wiphy_suspend(struct device *dev, pm_message_t state)
 	rdev->suspend_at = get_seconds();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rdev->ops->suspend) {
 		rtnl_lock();
 		if (rdev->wiphy.registered)
@@ -133,6 +155,8 @@ static int wiphy_suspend(struct device *dev, pm_message_t state)
 		rtnl_unlock();
 	}
 =======
+=======
+>>>>>>> v3.18
 	rtnl_lock();
 	if (rdev->wiphy.registered) {
 		if (!rdev->wiphy.wowlan_config)
@@ -146,6 +170,9 @@ static int wiphy_suspend(struct device *dev, pm_message_t state)
 		}
 	}
 	rtnl_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -169,6 +196,10 @@ static int wiphy_resume(struct device *dev)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -185,17 +216,23 @@ struct class ieee80211_class = {
 	.owner = THIS_MODULE,
 	.dev_release = wiphy_dev_release,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs = ieee80211_dev_attrs,
 	.dev_uevent = wiphy_uevent,
 	.suspend = wiphy_suspend,
 	.resume = wiphy_resume,
 =======
+=======
+>>>>>>> v3.18
 	.dev_groups = ieee80211_groups,
 	.dev_uevent = wiphy_uevent,
 #ifdef CONFIG_PM
 	.suspend = wiphy_suspend,
 	.resume = wiphy_resume,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ns_type = &net_ns_type_operations,
 	.namespace = wiphy_namespace,

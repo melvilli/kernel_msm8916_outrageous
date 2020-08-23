@@ -14,7 +14,10 @@
 #define TPS6586X_SLEW_RATE_MASK         0x07
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* VERSION CRC */
 #define TPS658621A	0x15
 #define TPS658621CD	0x2c
@@ -23,6 +26,9 @@
 #define TPS658640v2	0x02
 #define TPS658643	0x03
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	TPS6586X_ID_SYS,
@@ -109,6 +115,10 @@ extern int tps6586x_update(struct device *dev, int reg, uint8_t val,
 			   uint8_t mask);
 extern int tps6586x_irq_get_virq(struct device *dev, int irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int tps6586x_get_version(struct device *dev);
+>>>>>>> v3.18
 =======
 extern int tps6586x_get_version(struct device *dev);
 >>>>>>> v3.18

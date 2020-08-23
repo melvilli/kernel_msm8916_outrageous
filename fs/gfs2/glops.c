@@ -48,7 +48,12 @@ static void gfs2_ail_error(struct gfs2_glock *gl, const struct buffer_head *bh)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __gfs2_ail_flush(struct gfs2_glock *gl, bool fsync)
+=======
+static void __gfs2_ail_flush(struct gfs2_glock *gl, bool fsync,
+			     unsigned int nr_revokes)
+>>>>>>> v3.18
 =======
 static void __gfs2_ail_flush(struct gfs2_glock *gl, bool fsync,
 			     unsigned int nr_revokes)
@@ -60,18 +65,24 @@ static void __gfs2_ail_flush(struct gfs2_glock *gl, bool fsync,
 	struct buffer_head *bh;
 	const unsigned long b_state = (1UL << BH_Dirty)|(1UL << BH_Pinned)|(1UL << BH_Lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sector_t blocknr;
 
 	gfs2_log_lock(sdp);
 	spin_lock(&sdp->sd_ail_lock);
 	list_for_each_entry_safe(bd, tmp, head, bd_ail_gl_list) {
 =======
+=======
+>>>>>>> v3.18
 
 	gfs2_log_lock(sdp);
 	spin_lock(&sdp->sd_ail_lock);
 	list_for_each_entry_safe_reverse(bd, tmp, head, bd_ail_gl_list) {
 		if (nr_revokes == 0)
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bh = bd->bd_bh;
 		if (bh->b_state & b_state) {
@@ -79,6 +90,7 @@ static void __gfs2_ail_flush(struct gfs2_glock *gl, bool fsync,
 				continue;
 			gfs2_ail_error(gl, bh);
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		blocknr = bh->b_blocknr;
 		bh->b_private = NULL;
@@ -88,6 +100,10 @@ static void __gfs2_ail_flush(struct gfs2_glock *gl, bool fsync,
 		bd->bd_blkno = blocknr;
 
 		gfs2_trans_add_revoke(sdp, bd);
+=======
+		gfs2_trans_add_revoke(sdp, bd);
+		nr_revokes--;
+>>>>>>> v3.18
 =======
 		gfs2_trans_add_revoke(sdp, bd);
 		nr_revokes--;
@@ -106,6 +122,11 @@ static void gfs2_ail_empty_gl(struct gfs2_glock *gl)
 
 	memset(&tr, 0, sizeof(tr));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&tr.tr_buf);
+	INIT_LIST_HEAD(&tr.tr_databuf);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&tr.tr_buf);
 	INIT_LIST_HEAD(&tr.tr_databuf);
@@ -115,6 +136,7 @@ static void gfs2_ail_empty_gl(struct gfs2_glock *gl)
 	if (!tr.tr_revokes)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* A shortened, inline version of gfs2_trans_begin() */
 	tr.tr_reserved = 1 + gfs2_struct2blk(sdp, tr.tr_revokes, sizeof(u64));
@@ -129,6 +151,8 @@ static void gfs2_ail_empty_gl(struct gfs2_glock *gl)
 	gfs2_trans_end(sdp);
 	gfs2_log_flush(sdp, NULL);
 =======
+=======
+>>>>>>> v3.18
 	/* A shortened, inline version of gfs2_trans_begin()
          * tr->alloced is not set since the transaction structure is
          * on the stack */
@@ -146,6 +170,9 @@ static void gfs2_ail_empty_gl(struct gfs2_glock *gl)
 
 	gfs2_trans_end(sdp);
 	gfs2_log_flush(sdp, NULL, NORMAL_FLUSH);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -154,6 +181,10 @@ void gfs2_ail_flush(struct gfs2_glock *gl, bool fsync)
 	struct gfs2_sbd *sdp = gl->gl_sbd;
 	unsigned int revokes = atomic_read(&gl->gl_ail_count);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int max_revokes = (sdp->sd_sb.sb_bsize - sizeof(struct gfs2_log_descriptor)) / sizeof(u64);
+>>>>>>> v3.18
 =======
 	unsigned int max_revokes = (sdp->sd_sb.sb_bsize - sizeof(struct gfs2_log_descriptor)) / sizeof(u64);
 >>>>>>> v3.18
@@ -163,6 +194,7 @@ void gfs2_ail_flush(struct gfs2_glock *gl, bool fsync)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = gfs2_trans_begin(sdp, 0, revokes);
 	if (ret)
 		return;
@@ -170,6 +202,8 @@ void gfs2_ail_flush(struct gfs2_glock *gl, bool fsync)
 	gfs2_trans_end(sdp);
 	gfs2_log_flush(sdp, NULL);
 =======
+=======
+>>>>>>> v3.18
 	while (revokes > max_revokes)
 		max_revokes += (sdp->sd_sb.sb_bsize - sizeof(struct gfs2_meta_header)) / sizeof(u64);
 
@@ -179,6 +213,9 @@ void gfs2_ail_flush(struct gfs2_glock *gl, bool fsync)
 	__gfs2_ail_flush(gl, fsync, max_revokes);
 	gfs2_trans_end(sdp);
 	gfs2_log_flush(sdp, NULL, NORMAL_FLUSH);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -194,7 +231,12 @@ void gfs2_ail_flush(struct gfs2_glock *gl, bool fsync)
 static void rgrp_go_sync(struct gfs2_glock *gl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct address_space *metamapping = gfs2_glock2aspace(gl);
+=======
+	struct gfs2_sbd *sdp = gl->gl_sbd;
+	struct address_space *mapping = &sdp->sd_aspace;
+>>>>>>> v3.18
 =======
 	struct gfs2_sbd *sdp = gl->gl_sbd;
 	struct address_space *mapping = &sdp->sd_aspace;
@@ -207,15 +249,21 @@ static void rgrp_go_sync(struct gfs2_glock *gl)
 	GLOCK_BUG_ON(gl, gl->gl_state != LM_ST_EXCLUSIVE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gfs2_log_flush(gl->gl_sbd, gl);
 	filemap_fdatawrite(metamapping);
 	error = filemap_fdatawait(metamapping);
         mapping_set_error(metamapping, error);
 =======
+=======
+>>>>>>> v3.18
 	gfs2_log_flush(sdp, gl, NORMAL_FLUSH);
 	filemap_fdatawrite_range(mapping, gl->gl_vm.start, gl->gl_vm.end);
 	error = filemap_fdatawait_range(mapping, gl->gl_vm.start, gl->gl_vm.end);
 	mapping_set_error(mapping, error);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gfs2_ail_empty_gl(gl);
 
@@ -239,18 +287,24 @@ static void rgrp_go_sync(struct gfs2_glock *gl)
 static void rgrp_go_inval(struct gfs2_glock *gl, int flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct address_space *mapping = gfs2_glock2aspace(gl);
 
 	WARN_ON_ONCE(!(flags & DIO_METADATA));
 	gfs2_assert_withdraw(gl->gl_sbd, !atomic_read(&gl->gl_ail_count));
 	truncate_inode_pages(mapping, 0);
 =======
+=======
+>>>>>>> v3.18
 	struct gfs2_sbd *sdp = gl->gl_sbd;
 	struct address_space *mapping = &sdp->sd_aspace;
 
 	WARN_ON_ONCE(!(flags & DIO_METADATA));
 	gfs2_assert_withdraw(sdp, !atomic_read(&gl->gl_ail_count));
 	truncate_inode_pages_range(mapping, gl->gl_vm.start, gl->gl_vm.end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (gl->gl_object) {
@@ -274,14 +328,20 @@ static void inode_go_sync(struct gfs2_glock *gl)
 	if (ip && !S_ISREG(ip->i_inode.i_mode))
 		ip = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ip && test_and_clear_bit(GIF_SW_PAGED, &ip->i_flags))
 		unmap_shared_mapping_range(ip->i_inode.i_mapping, 0, 0);
 =======
+=======
+>>>>>>> v3.18
 	if (ip) {
 		if (test_and_clear_bit(GIF_SW_PAGED, &ip->i_flags))
 			unmap_shared_mapping_range(ip->i_inode.i_mapping, 0, 0);
 		inode_dio_wait(&ip->i_inode);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!test_and_clear_bit(GLF_DIRTY, &gl->gl_flags))
 		return;
@@ -289,7 +349,11 @@ static void inode_go_sync(struct gfs2_glock *gl)
 	GLOCK_BUG_ON(gl, gl->gl_state != LM_ST_EXCLUSIVE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gfs2_log_flush(gl->gl_sbd, gl);
+=======
+	gfs2_log_flush(gl->gl_sbd, gl, NORMAL_FLUSH);
+>>>>>>> v3.18
 =======
 	gfs2_log_flush(gl->gl_sbd, gl, NORMAL_FLUSH);
 >>>>>>> v3.18
@@ -316,8 +380,13 @@ static void inode_go_sync(struct gfs2_glock *gl)
  * @gl: the glock
  * @flags:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 
  * Normally we invlidate everything, but if we are moving into
+=======
+ *
+ * Normally we invalidate everything, but if we are moving into
+>>>>>>> v3.18
 =======
  *
  * Normally we invalidate everything, but if we are moving into
@@ -345,7 +414,11 @@ static void inode_go_inval(struct gfs2_glock *gl, int flags)
 
 	if (ip == GFS2_I(gl->gl_sbd->sd_rindex)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gfs2_log_flush(gl->gl_sbd, NULL);
+=======
+		gfs2_log_flush(gl->gl_sbd, NULL, NORMAL_FLUSH);
+>>>>>>> v3.18
 =======
 		gfs2_log_flush(gl->gl_sbd, NULL, NORMAL_FLUSH);
 >>>>>>> v3.18
@@ -513,6 +586,12 @@ static int inode_go_lock(struct gfs2_holder *gh)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (gh->gh_state != LM_ST_DEFERRED)
+		inode_dio_wait(&ip->i_inode);
+
+>>>>>>> v3.18
 =======
 	if (gh->gh_state != LM_ST_DEFERRED)
 		inode_dio_wait(&ip->i_inode);
@@ -538,6 +617,7 @@ static int inode_go_lock(struct gfs2_holder *gh)
  * @ip: the inode
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns: 0 on success, -ENOBUFS when we run out of space
  */
 
@@ -547,6 +627,8 @@ static int inode_go_dump(struct seq_file *seq, const struct gfs2_glock *gl)
 	if (ip == NULL)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
  */
 
 static void inode_go_dump(struct seq_file *seq, const struct gfs2_glock *gl)
@@ -554,6 +636,9 @@ static void inode_go_dump(struct seq_file *seq, const struct gfs2_glock *gl)
 	const struct gfs2_inode *ip = gl->gl_object;
 	if (ip == NULL)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gfs2_print_dbg(seq, " I: n:%llu/%llu t:%u f:0x%02lx d:0x%08x s:%llu\n",
 		  (unsigned long long)ip->i_no_formal_ino,
@@ -562,16 +647,22 @@ static void inode_go_dump(struct seq_file *seq, const struct gfs2_glock *gl)
 		  (unsigned int)ip->i_diskflags,
 		  (unsigned long long)i_size_read(&ip->i_inode));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 /**
  * trans_go_sync - promote/demote the transaction glock
 =======
+=======
+>>>>>>> v3.18
 }
 
 /**
  * freeze_go_sync - promote/demote the freeze glock
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @gl: the glock
  * @state: the requested state
@@ -579,6 +670,7 @@ static void inode_go_dump(struct seq_file *seq, const struct gfs2_glock *gl)
  *
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void trans_go_sync(struct gfs2_glock *gl)
 {
@@ -589,6 +681,8 @@ static void trans_go_sync(struct gfs2_glock *gl)
 		gfs2_meta_syncfs(sdp);
 		gfs2_log_shutdown(sdp);
 =======
+=======
+>>>>>>> v3.18
 static void freeze_go_sync(struct gfs2_glock *gl)
 {
 	struct gfs2_sbd *sdp = gl->gl_sbd;
@@ -605,13 +699,20 @@ static void freeze_go_sync(struct gfs2_glock *gl)
 				io_schedule();
 		} while(atomic_read(&sdp->sd_log_freeze));
 		finish_wait(&sdp->sd_log_frozen_wait, &wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * trans_go_xmote_bh - After promoting/demoting the transaction glock
+=======
+ * freeze_go_xmote_bh - After promoting/demoting the freeze glock
+>>>>>>> v3.18
 =======
  * freeze_go_xmote_bh - After promoting/demoting the freeze glock
 >>>>>>> v3.18
@@ -620,7 +721,11 @@ static void freeze_go_sync(struct gfs2_glock *gl)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int trans_go_xmote_bh(struct gfs2_glock *gl, struct gfs2_holder *gh)
+=======
+static int freeze_go_xmote_bh(struct gfs2_glock *gl, struct gfs2_holder *gh)
+>>>>>>> v3.18
 =======
 static int freeze_go_xmote_bh(struct gfs2_glock *gl, struct gfs2_holder *gh)
 >>>>>>> v3.18
@@ -657,7 +762,11 @@ static int freeze_go_xmote_bh(struct gfs2_glock *gl, struct gfs2_holder *gh)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int trans_go_demote_ok(const struct gfs2_glock *gl)
+=======
+static int freeze_go_demote_ok(const struct gfs2_glock *gl)
+>>>>>>> v3.18
 =======
 static int freeze_go_demote_ok(const struct gfs2_glock *gl)
 >>>>>>> v3.18
@@ -682,9 +791,15 @@ static void iopen_go_callback(struct gfs2_glock *gl, bool remote)
 	if (gl->gl_demote_state == LM_ST_UNLOCKED &&
 	    gl->gl_state == LM_ST_SHARED && ip) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gfs2_glock_hold(gl);
 		if (queue_work(gfs2_delete_workqueue, &gl->gl_delete) == 0)
 			gfs2_glock_put_nolock(gl);
+=======
+		gl->gl_lockref.count++;
+		if (queue_work(gfs2_delete_workqueue, &gl->gl_delete) == 0)
+			gl->gl_lockref.count--;
+>>>>>>> v3.18
 =======
 		gl->gl_lockref.count++;
 		if (queue_work(gfs2_delete_workqueue, &gl->gl_delete) == 0)
@@ -715,6 +830,7 @@ const struct gfs2_glock_operations gfs2_rgrp_glops = {
 	.go_dump = gfs2_rgrp_dump,
 	.go_type = LM_TYPE_RGRP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.go_flags = GLOF_ASPACE | GLOF_LVB,
 };
 
@@ -723,6 +839,8 @@ const struct gfs2_glock_operations gfs2_trans_glops = {
 	.go_xmote_bh = trans_go_xmote_bh,
 	.go_demote_ok = trans_go_demote_ok,
 =======
+=======
+>>>>>>> v3.18
 	.go_flags = GLOF_LVB,
 };
 
@@ -730,6 +848,9 @@ const struct gfs2_glock_operations gfs2_freeze_glops = {
 	.go_sync = freeze_go_sync,
 	.go_xmote_bh = freeze_go_xmote_bh,
 	.go_demote_ok = freeze_go_demote_ok,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.go_type = LM_TYPE_NONDISK,
 };

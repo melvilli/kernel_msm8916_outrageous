@@ -17,15 +17,21 @@
 #include <linux/bitops.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/regulator/driver.h>
 #include <linux/regulator/machine.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/platform_device.h>
 #include <linux/regulator/driver.h>
 #include <linux/regulator/machine.h>
 #include <linux/regulator/of_regulator.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/gpio.h>
 #include <linux/slab.h>
@@ -37,8 +43,11 @@
 #include <linux/mfd/arizona/registers.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARIZONA_MICSUPP_MAX_SELECTOR 0x1f
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct arizona_micsupp {
@@ -51,6 +60,7 @@ struct arizona_micsupp {
 	struct work_struct check_cp_work;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int arizona_micsupp_list_voltage(struct regulator_dev *rdev,
 					unsigned int selector)
@@ -88,6 +98,8 @@ static int arizona_micsupp_map_voltage(struct regulator_dev *rdev,
 	return selector;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void arizona_micsupp_check_cp(struct work_struct *work)
@@ -160,8 +172,13 @@ static struct regulator_ops arizona_micsupp_ops = {
 	.is_enabled = regulator_is_enabled_regmap,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.list_voltage = arizona_micsupp_list_voltage,
 	.map_voltage = arizona_micsupp_map_voltage,
+=======
+	.list_voltage = regulator_list_voltage_linear_range,
+	.map_voltage = regulator_map_voltage_linear_range,
+>>>>>>> v3.18
 =======
 	.list_voltage = regulator_list_voltage_linear_range,
 	.map_voltage = regulator_map_voltage_linear_range,
@@ -175,19 +192,29 @@ static struct regulator_ops arizona_micsupp_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct regulator_linear_range arizona_micsupp_ranges[] = {
 	REGULATOR_LINEAR_RANGE(1700000, 0,    0x1e, 50000),
 	REGULATOR_LINEAR_RANGE(3300000, 0x1f, 0x1f, 0),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct regulator_desc arizona_micsupp = {
 	.name = "MICVDD",
 	.supply_name = "CPVDD",
 	.type = REGULATOR_VOLTAGE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.n_voltages = ARIZONA_MICSUPP_MAX_SELECTOR + 1,
+=======
+	.n_voltages = 32,
+>>>>>>> v3.18
 =======
 	.n_voltages = 32,
 >>>>>>> v3.18
@@ -201,7 +228,10 @@ static const struct regulator_desc arizona_micsupp = {
 	.bypass_mask = ARIZONA_CPMIC_BYPASS,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.linear_ranges = arizona_micsupp_ranges,
 	.n_linear_ranges = ARRAY_SIZE(arizona_micsupp_ranges),
 
@@ -232,6 +262,9 @@ static const struct regulator_desc arizona_micsupp_ext = {
 	.linear_ranges = arizona_micsupp_ext_ranges,
 	.n_linear_ranges = ARRAY_SIZE(arizona_micsupp_ext_ranges),
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.enable_time = 3000,
 
@@ -251,10 +284,13 @@ static const struct regulator_init_data arizona_micsupp_default = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int arizona_micsupp_probe(struct platform_device *pdev)
 {
 	struct arizona *arizona = dev_get_drvdata(pdev->dev.parent);
 =======
+=======
+>>>>>>> v3.18
 static const struct regulator_init_data arizona_micsupp_ext_default = {
 	.constraints = {
 		.valid_ops_mask = REGULATOR_CHANGE_STATUS |
@@ -297,6 +333,9 @@ static int arizona_micsupp_probe(struct platform_device *pdev)
 {
 	struct arizona *arizona = dev_get_drvdata(pdev->dev.parent);
 	const struct regulator_desc *desc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct regulator_config config = { };
 	struct arizona_micsupp *micsupp;
@@ -304,10 +343,15 @@ static int arizona_micsupp_probe(struct platform_device *pdev)
 
 	micsupp = devm_kzalloc(&pdev->dev, sizeof(*micsupp), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (micsupp == NULL) {
 		dev_err(&pdev->dev, "Unable to allocate private data\n");
 		return -ENOMEM;
 	}
+=======
+	if (!micsupp)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!micsupp)
 		return -ENOMEM;
@@ -322,8 +366,11 @@ static int arizona_micsupp_probe(struct platform_device *pdev)
 	 * platform data if provided.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	micsupp->init_data = arizona_micsupp_default;
 =======
+=======
+>>>>>>> v3.18
 	switch (arizona->type) {
 	case WM5110:
 		desc = &arizona_micsupp_ext;
@@ -335,6 +382,9 @@ static int arizona_micsupp_probe(struct platform_device *pdev)
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	micsupp->init_data.consumer_supplies = &micsupp->supply;
 	micsupp->supply.supply = "MICVDD";
@@ -345,7 +395,10 @@ static int arizona_micsupp_probe(struct platform_device *pdev)
 	config.regmap = arizona->regmap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_OF)) {
 		if (!dev_get_platdata(arizona->dev)) {
 			ret = arizona_micsupp_of_get_pdata(arizona, &config);
@@ -354,6 +407,9 @@ static int arizona_micsupp_probe(struct platform_device *pdev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (arizona->pdata.micvdd)
 		config.init_data = arizona->pdata.micvdd;
@@ -365,7 +421,13 @@ static int arizona_micsupp_probe(struct platform_device *pdev)
 			   ARIZONA_CPMIC_BYPASS, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	micsupp->regulator = regulator_register(&arizona_micsupp, &config);
+=======
+	micsupp->regulator = devm_regulator_register(&pdev->dev,
+						     desc,
+						     &config);
+>>>>>>> v3.18
 =======
 	micsupp->regulator = devm_regulator_register(&pdev->dev,
 						     desc,
@@ -378,6 +440,7 @@ static int arizona_micsupp_probe(struct platform_device *pdev)
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_set_drvdata(pdev, micsupp);
 
@@ -394,6 +457,11 @@ static int arizona_micsupp_remove(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, micsupp);
 >>>>>>> v3.18
+=======
+	of_node_put(config.of_node);
+
+	platform_set_drvdata(pdev, micsupp);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -401,7 +469,10 @@ static int arizona_micsupp_remove(struct platform_device *pdev)
 static struct platform_driver arizona_micsupp_driver = {
 	.probe = arizona_micsupp_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = arizona_micsupp_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {

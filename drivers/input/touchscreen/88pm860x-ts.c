@@ -17,6 +17,10 @@
 #include <linux/mfd/88pm860x.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -177,7 +181,11 @@ static int pm860x_touch_probe(struct platform_device *pdev)
 {
 	struct pm860x_chip *chip = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pm860x_touch_pdata *pdata = pdev->dev.platform_data;
+=======
+	struct pm860x_touch_pdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct pm860x_touch_pdata *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -243,6 +251,7 @@ static int pm860x_touch_probe(struct platform_device *pdev)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	touch = kzalloc(sizeof(struct pm860x_touch), GFP_KERNEL);
 	if (touch == NULL)
 		return -ENOMEM;
@@ -254,6 +263,8 @@ static int pm860x_touch_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	touch = devm_kzalloc(&pdev->dev, sizeof(struct pm860x_touch),
 			     GFP_KERNEL);
 	if (!touch)
@@ -265,6 +276,9 @@ static int pm860x_touch_probe(struct platform_device *pdev)
 	if (!touch->idev) {
 		dev_err(&pdev->dev, "Failed to allocate input device!\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -281,16 +295,22 @@ static int pm860x_touch_probe(struct platform_device *pdev)
 	input_set_drvdata(touch->idev, touch);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_threaded_irq(touch->irq, NULL, pm860x_touch_handler,
 				   IRQF_ONESHOT, "touch", touch);
 	if (ret < 0)
 		goto out_irq;
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_request_threaded_irq(&pdev->dev, touch->irq, NULL,
 					pm860x_touch_handler, IRQF_ONESHOT,
 					"touch", touch);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	__set_bit(EV_ABS, touch->idev->evbit);
@@ -310,7 +330,11 @@ static int pm860x_touch_probe(struct platform_device *pdev)
 	if (ret < 0) {
 		dev_err(chip->dev, "Failed to register touch!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_rg;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -318,6 +342,7 @@ static int pm860x_touch_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, touch);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 out_rg:
 	free_irq(touch->irq, touch);
@@ -339,6 +364,8 @@ static int pm860x_touch_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver pm860x_touch_driver = {
@@ -348,7 +375,10 @@ static struct platform_driver pm860x_touch_driver = {
 	},
 	.probe	= pm860x_touch_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= pm860x_touch_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

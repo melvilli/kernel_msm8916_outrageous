@@ -1,6 +1,12 @@
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <linux/types.h>
+
+#include <asm/checksum.h>
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 
@@ -22,6 +28,12 @@ EXPORT_SYMBOL(min_low_pfn);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Network checksum functions */
+EXPORT_SYMBOL(csum_partial);
+
+>>>>>>> v3.18
 =======
 /* Network checksum functions */
 EXPORT_SYMBOL(csum_partial);

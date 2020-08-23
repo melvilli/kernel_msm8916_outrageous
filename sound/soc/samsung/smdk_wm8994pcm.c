@@ -135,6 +135,7 @@ static int snd_smdk_probe(struct platform_device *pdev)
 
 	smdk_pcm.dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_register_card(&smdk_pcm);
 	if (ret) {
 		dev_err(&pdev->dev, "snd_soc_register_card failed %d\n", ret);
@@ -150,11 +151,16 @@ static int snd_smdk_remove(struct platform_device *pdev)
 	platform_set_drvdata(pdev, NULL);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_snd_soc_register_card(&pdev->dev, &smdk_pcm);
 	if (ret)
 		dev_err(&pdev->dev, "snd_soc_register_card failed %d\n", ret);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -165,7 +171,10 @@ static struct platform_driver snd_smdk_driver = {
 	},
 	.probe = snd_smdk_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = snd_smdk_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

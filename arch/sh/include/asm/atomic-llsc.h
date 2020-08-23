@@ -3,6 +3,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * To get proper branch prediction for the main line, we must branch
  * forward to code at the end of this object's .text section, then
  * branch back to restart the operation.
@@ -38,6 +39,8 @@ static inline void atomic_sub(int i, atomic_t *v)
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * SH-4A note:
  *
  * We basically get atomic_xxx_return() for free compared with
@@ -45,6 +48,7 @@ static inline void atomic_sub(int i, atomic_t *v)
  * encoding, so the retval is automatically set without having to
  * do any special work.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline int atomic_add_return(int i, atomic_t *v)
 {
@@ -80,6 +84,8 @@ static inline int atomic_sub_return(int i, atomic_t *v)
 	return temp;
 }
 =======
+=======
+>>>>>>> v3.18
 /*
  * To get proper branch prediction for the main line, we must branch
  * forward to code at the end of this object's .text section, then
@@ -127,6 +133,9 @@ ATOMIC_OPS(sub)
 #undef ATOMIC_OPS
 #undef ATOMIC_OP_RETURN
 #undef ATOMIC_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void atomic_clear_mask(unsigned int mask, atomic_t *v)

@@ -52,6 +52,10 @@ struct rtable;
 struct fib_nh_exception {
 	struct fib_nh_exception __rcu	*fnhe_next;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int				fnhe_genid;
+>>>>>>> v3.18
 =======
 	int				fnhe_genid;
 >>>>>>> v3.18
@@ -60,7 +64,12 @@ struct fib_nh_exception {
 	__be32				fnhe_gw;
 	unsigned long			fnhe_expires;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtable __rcu		*fnhe_rth;
+=======
+	struct rtable __rcu		*fnhe_rth_input;
+	struct rtable __rcu		*fnhe_rth_output;
+>>>>>>> v3.18
 =======
 	struct rtable __rcu		*fnhe_rth_input;
 	struct rtable __rcu		*fnhe_rth_output;
@@ -73,7 +82,12 @@ struct fnhe_hash_bucket {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FNHE_HASH_SIZE		2048
+=======
+#define FNHE_HASH_SHIFT		11
+#define FNHE_HASH_SIZE		(1 << FNHE_HASH_SHIFT)
+>>>>>>> v3.18
 =======
 #define FNHE_HASH_SHIFT		11
 #define FNHE_HASH_SIZE		(1 << FNHE_HASH_SHIFT)
@@ -100,7 +114,11 @@ struct fib_nh {
 	struct rtable __rcu * __percpu *nh_pcpu_rth_output;
 	struct rtable __rcu	*nh_rth_input;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fnhe_hash_bucket	*nh_exceptions;
+=======
+	struct fnhe_hash_bucket	__rcu *nh_exceptions;
+>>>>>>> v3.18
 =======
 	struct fnhe_hash_bucket	__rcu *nh_exceptions;
 >>>>>>> v3.18
@@ -182,7 +200,11 @@ struct fib_result_nl {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern __be32 fib_info_update_nh_saddr(struct net *net, struct fib_nh *nh);
+=======
+__be32 fib_info_update_nh_saddr(struct net *net, struct fib_nh *nh);
+>>>>>>> v3.18
 =======
 __be32 fib_info_update_nh_saddr(struct net *net, struct fib_nh *nh);
 >>>>>>> v3.18
@@ -208,6 +230,7 @@ struct fib_table {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int fib_table_lookup(struct fib_table *tb, const struct flowi4 *flp,
 			    struct fib_result *res, int fib_flags);
 extern int fib_table_insert(struct fib_table *, struct fib_config *);
@@ -217,6 +240,8 @@ extern int fib_table_dump(struct fib_table *table, struct sk_buff *skb,
 extern int fib_table_flush(struct fib_table *table);
 extern void fib_free_table(struct fib_table *tb);
 =======
+=======
+>>>>>>> v3.18
 int fib_table_lookup(struct fib_table *tb, const struct flowi4 *flp,
 		     struct fib_result *res, int fib_flags);
 int fib_table_insert(struct fib_table *, struct fib_config *);
@@ -225,6 +250,9 @@ int fib_table_dump(struct fib_table *table, struct sk_buff *skb,
 		   struct netlink_callback *cb);
 int fib_table_flush(struct fib_table *table);
 void fib_free_table(struct fib_table *tb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -266,6 +294,7 @@ static inline int fib_lookup(struct net *net, const struct flowi4 *flp,
 
 #else /* CONFIG_IP_MULTIPLE_TABLES */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __net_init fib4_rules_init(struct net *net);
 extern void __net_exit fib4_rules_exit(struct net *net);
 
@@ -275,6 +304,8 @@ extern struct fib_table *fib_get_table(struct net *net, u32 id);
 extern int __fib_lookup(struct net *net, struct flowi4 *flp,
 			struct fib_result *res);
 =======
+=======
+>>>>>>> v3.18
 int __net_init fib4_rules_init(struct net *net);
 void __net_exit fib4_rules_exit(struct net *net);
 
@@ -282,6 +313,9 @@ struct fib_table *fib_new_table(struct net *net, u32 id);
 struct fib_table *fib_get_table(struct net *net, u32 id);
 
 int __fib_lookup(struct net *net, struct flowi4 *flp, struct fib_result *res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int fib_lookup(struct net *net, struct flowi4 *flp,
@@ -311,6 +345,7 @@ static inline int fib_lookup(struct net *net, struct flowi4 *flp,
 /* Exported by fib_frontend.c */
 extern const struct nla_policy rtm_ipv4_policy[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void		ip_fib_init(void);
 extern __be32 fib_compute_spec_dst(struct sk_buff *skb);
 extern int fib_validate_source(struct sk_buff *skb, __be32 src, __be32 dst,
@@ -318,12 +353,17 @@ extern int fib_validate_source(struct sk_buff *skb, __be32 src, __be32 dst,
 			       struct in_device *idev, u32 *itag);
 extern void fib_select_default(struct fib_result *res);
 =======
+=======
+>>>>>>> v3.18
 void ip_fib_init(void);
 __be32 fib_compute_spec_dst(struct sk_buff *skb);
 int fib_validate_source(struct sk_buff *skb, __be32 src, __be32 dst,
 			u8 tos, int oif, struct net_device *dev,
 			struct in_device *idev, u32 *itag);
 void fib_select_default(struct fib_result *res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_IP_ROUTE_CLASSID
 static inline int fib_num_tclassid_users(struct net *net)
@@ -339,6 +379,7 @@ static inline int fib_num_tclassid_users(struct net *net)
 
 /* Exported by fib_semantics.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ip_fib_check_default(__be32 gw, struct net_device *dev);
 extern int fib_sync_down_dev(struct net_device *dev, int force);
 extern int fib_sync_down_addr(struct net *net, __be32 local);
@@ -350,6 +391,8 @@ extern void fib_select_multipath(struct fib_result *res);
 extern void fib_trie_init(void);
 extern struct fib_table *fib_trie_table(u32 id);
 =======
+=======
+>>>>>>> v3.18
 int ip_fib_check_default(__be32 gw, struct net_device *dev);
 int fib_sync_down_dev(struct net_device *dev, int force);
 int fib_sync_down_addr(struct net *net, __be32 local);
@@ -359,6 +402,9 @@ void fib_select_multipath(struct fib_result *res);
 /* Exported by fib_trie.c */
 void fib_trie_init(void);
 struct fib_table *fib_trie_table(u32 id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void fib_combine_itag(u32 *itag, const struct fib_result *res)
@@ -378,7 +424,11 @@ static inline void fib_combine_itag(u32 *itag, const struct fib_result *res)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void free_fib_info(struct fib_info *fi);
+=======
+void free_fib_info(struct fib_info *fi);
+>>>>>>> v3.18
 =======
 void free_fib_info(struct fib_info *fi);
 >>>>>>> v3.18
@@ -391,8 +441,13 @@ static inline void fib_info_put(struct fib_info *fi)
 
 #ifdef CONFIG_PROC_FS
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __net_init  fib_proc_init(struct net *net);
 extern void __net_exit fib_proc_exit(struct net *net);
+=======
+int __net_init fib_proc_init(struct net *net);
+void __net_exit fib_proc_exit(struct net *net);
+>>>>>>> v3.18
 =======
 int __net_init fib_proc_init(struct net *net);
 void __net_exit fib_proc_exit(struct net *net);

@@ -15,8 +15,12 @@ obj-$(CONFIG_GIANFAR) += gianfar_driver.o
 obj-$(CONFIG_PTP_1588_CLOCK_GIANFAR) += gianfar_ptp.o
 gianfar_driver-objs := gianfar.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gianfar_ethtool.o \
 		gianfar_sysfs.o
+=======
+		gianfar_ethtool.o
+>>>>>>> v3.18
 =======
 		gianfar_ethtool.o
 >>>>>>> v3.18

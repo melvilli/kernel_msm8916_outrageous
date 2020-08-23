@@ -67,7 +67,11 @@ typedef	enum _ACK_POLICY{
 	eAckPlc0_ACK		= 0x00,
 	eAckPlc1_NoACK		= 0x01,
 <<<<<<< HEAD
+<<<<<<< HEAD
 }ACK_POLICY,*PACK_POLICY;
+=======
+} ACK_POLICY, *PACK_POLICY;
+>>>>>>> v3.18
 =======
 } ACK_POLICY, *PACK_POLICY;
 >>>>>>> v3.18
@@ -281,7 +285,11 @@ typedef	enum _QOS_ELE_SUBTYPE{
 	QOSELE_TYPE_INFO	= 0x00,		// 0x00: Information element
 	QOSELE_TYPE_PARAM	= 0x01,		// 0x01: parameter element
 <<<<<<< HEAD
+<<<<<<< HEAD
 }QOS_ELE_SUBTYPE,*PQOS_ELE_SUBTYPE;
+=======
+} QOS_ELE_SUBTYPE, *PQOS_ELE_SUBTYPE;
+>>>>>>> v3.18
 =======
 } QOS_ELE_SUBTYPE, *PQOS_ELE_SUBTYPE;
 >>>>>>> v3.18
@@ -297,7 +305,11 @@ typedef	enum _DIRECTION_VALUE{
 	DIR_DIRECT		= 2,		// 0x10	// DirectLink
 	DIR_BI_DIR		= 3,		// 0x11	// Bi-Direction
 <<<<<<< HEAD
+<<<<<<< HEAD
 }DIRECTION_VALUE,*PDIRECTION_VALUE;
+=======
+} DIRECTION_VALUE, *PDIRECTION_VALUE;
+>>>>>>> v3.18
 =======
 } DIRECTION_VALUE, *PDIRECTION_VALUE;
 >>>>>>> v3.18
@@ -376,7 +388,11 @@ typedef	enum _ACM_METHOD{
 	eAcmWay1_HW			= 1,		// By HW.
 	eAcmWay2_SW			= 2,		// By SW.
 <<<<<<< HEAD
+<<<<<<< HEAD
 }ACM_METHOD,*PACM_METHOD;
+=======
+} ACM_METHOD, *PACM_METHOD;
+>>>>>>> v3.18
 =======
 } ACM_METHOD, *PACM_METHOD;
 >>>>>>> v3.18
@@ -500,7 +516,11 @@ typedef struct _STA_QOS{
 	//DECLARE_RT_OBJECT(STA_QOS);
 	u8				WMMIEBuf[MAX_WMMELE_LENGTH];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8*				WMMIE;
+=======
+	u8				*WMMIE;
+>>>>>>> v3.18
 =======
 	u8				*WMMIE;
 >>>>>>> v3.18
@@ -519,7 +539,11 @@ typedef struct _STA_QOS{
 
 	// Part 2. EDCA Parameter (perAC)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *				pWMMInfoEle;
+=======
+	u8				*pWMMInfoEle;
+>>>>>>> v3.18
 =======
 	u8				*pWMMInfoEle;
 >>>>>>> v3.18
@@ -562,6 +586,7 @@ typedef struct _BSS_QOS{
 
 	u8			bdWMMIEBuf[MAX_WMMELE_LENGTH];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8*		bdWMMIE;
 
 	QOS_ELE_SUBTYPE		EleSubType;
@@ -569,12 +594,17 @@ typedef struct _BSS_QOS{
 	u8 *			pWMMInfoEle;
 	u8 *			pWMMParamEle;
 =======
+=======
+>>>>>>> v3.18
 	u8		*bdWMMIE;
 
 	QOS_ELE_SUBTYPE		EleSubType;
 
 	u8			*pWMMInfoEle;
 	u8			*pWMMParamEle;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	QOS_INFO_FIELD		QosInfoField;

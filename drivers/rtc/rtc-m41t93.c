@@ -195,12 +195,15 @@ static int m41t93_probe(struct spi_device *spi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int m41t93_remove(struct spi_device *spi)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct spi_driver m41t93_driver = {
@@ -210,7 +213,10 @@ static struct spi_driver m41t93_driver = {
 	},
 	.probe	= m41t93_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = m41t93_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

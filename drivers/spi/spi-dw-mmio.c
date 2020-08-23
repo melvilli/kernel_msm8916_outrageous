@@ -17,6 +17,12 @@
 #include <linux/scatterlist.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_gpio.h>
+#include <linux/of_platform.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_gpio.h>
@@ -37,6 +43,7 @@ static int dw_spi_mmio_probe(struct platform_device *pdev)
 	struct dw_spi_mmio *dwsmmio;
 	struct dw_spi *dws;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *mem, *ioarea;
 	int ret;
 
@@ -46,6 +53,8 @@ static int dw_spi_mmio_probe(struct platform_device *pdev)
 		goto err_end;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct resource *mem;
 	int ret;
 	int num_cs;
@@ -54,6 +63,9 @@ static int dw_spi_mmio_probe(struct platform_device *pdev)
 			GFP_KERNEL);
 	if (!dwsmmio)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dws = &dwsmmio->dws;
@@ -62,6 +74,7 @@ static int dw_spi_mmio_probe(struct platform_device *pdev)
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!mem) {
 		dev_err(&pdev->dev, "no mem resource?\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = -EINVAL;
 		goto err_kfree;
@@ -81,6 +94,8 @@ static int dw_spi_mmio_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto err_release_reg;
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -88,12 +103,16 @@ static int dw_spi_mmio_probe(struct platform_device *pdev)
 	if (IS_ERR(dws->regs)) {
 		dev_err(&pdev->dev, "SPI region map failed\n");
 		return PTR_ERR(dws->regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	dws->irq = platform_get_irq(pdev, 0);
 	if (dws->irq < 0) {
 		dev_err(&pdev->dev, "no irq resource?\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = dws->irq; /* -ENXIO */
 		goto err_unmap;
@@ -115,6 +134,8 @@ static int dw_spi_mmio_probe(struct platform_device *pdev)
 	if (ret)
 		goto err_clk;
 =======
+=======
+>>>>>>> v3.18
 		return dws->irq; /* -ENXIO */
 	}
 
@@ -160,11 +181,15 @@ static int dw_spi_mmio_probe(struct platform_device *pdev)
 	ret = dw_spi_add_host(&pdev->dev, dws);
 	if (ret)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	platform_set_drvdata(pdev, dwsmmio);
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_clk:
 	clk_disable(dwsmmio->clk);
@@ -183,12 +208,17 @@ err_end:
 out:
 	clk_disable_unprepare(dwsmmio->clk);
 >>>>>>> v3.18
+=======
+out:
+	clk_disable_unprepare(dwsmmio->clk);
+>>>>>>> v3.18
 	return ret;
 }
 
 static int dw_spi_mmio_remove(struct platform_device *pdev)
 {
 	struct dw_spi_mmio *dwsmmio = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct resource *mem;
 
@@ -209,6 +239,8 @@ static int dw_spi_mmio_remove(struct platform_device *pdev)
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	clk_disable_unprepare(dwsmmio->clk);
 	dw_spi_remove_host(&dwsmmio->dws);
@@ -222,6 +254,9 @@ static const struct of_device_id dw_spi_mmio_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, dw_spi_mmio_of_match);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver dw_spi_mmio_driver = {
 	.probe		= dw_spi_mmio_probe,
@@ -230,6 +265,10 @@ static struct platform_driver dw_spi_mmio_driver = {
 		.name	= DRIVER_NAME,
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = dw_spi_mmio_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = dw_spi_mmio_of_match,
 >>>>>>> v3.18

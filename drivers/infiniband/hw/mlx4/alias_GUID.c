@@ -155,7 +155,11 @@ void mlx4_ib_notify_slaves_on_guid_change(struct mlx4_ib_dev *dev,
 
 		slave_id = (block_num * NUM_ALIAS_GUID_IN_REC) + i ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (slave_id >= dev->dev->num_slaves)
+=======
+		if (slave_id >= dev->dev->num_vfs + 1)
+>>>>>>> v3.18
 =======
 		if (slave_id >= dev->dev->num_vfs + 1)
 >>>>>>> v3.18

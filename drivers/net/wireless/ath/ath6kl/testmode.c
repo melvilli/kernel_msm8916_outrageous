@@ -67,7 +67,12 @@ nla_put_failure:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ath6kl_tm_cmd(struct wiphy *wiphy, void *data, int len)
+=======
+int ath6kl_tm_cmd(struct wiphy *wiphy, struct wireless_dev *wdev,
+		  void *data, int len)
+>>>>>>> v3.18
 =======
 int ath6kl_tm_cmd(struct wiphy *wiphy, struct wireless_dev *wdev,
 		  void *data, int len)

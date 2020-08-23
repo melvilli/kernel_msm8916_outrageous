@@ -26,6 +26,7 @@
 
 #include <subdev/timer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/bar.h>
 #include <subdev/fb.h>
 #include <subdev/vm.h>
@@ -39,6 +40,8 @@ struct nvc0_bar_priv {
 		struct nouveau_vm *vm;
 	} bar[2];
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/fb.h>
 #include <subdev/vm.h>
 
@@ -54,6 +57,9 @@ struct nvc0_bar_priv {
 	struct nouveau_bar base;
 	spinlock_t lock;
 	struct nvc0_bar_priv_vm bar[2];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -70,7 +76,10 @@ nvc0_bar_kmap(struct nouveau_bar *bar, struct nouveau_mem *mem,
 
 	nouveau_vm_map(vma, mem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvc0_vm_flush_engine(nv_subdev(bar), priv->bar[0].pgd->addr, 5);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -90,7 +99,10 @@ nvc0_bar_umap(struct nouveau_bar *bar, struct nouveau_mem *mem,
 
 	nouveau_vm_map(vma, mem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvc0_vm_flush_engine(nv_subdev(bar), priv->bar[1].pgd->addr, 5);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -100,6 +112,7 @@ static void
 nvc0_bar_unmap(struct nouveau_bar *bar, struct nouveau_vma *vma)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nvc0_bar_priv *priv = (void *)bar;
 	int i = !(vma->vm == priv->bar[0].vm);
 
@@ -108,10 +121,14 @@ nvc0_bar_unmap(struct nouveau_bar *bar, struct nouveau_vma *vma)
 =======
 	nouveau_vm_unmap(vma);
 >>>>>>> v3.18
+=======
+	nouveau_vm_unmap(vma);
+>>>>>>> v3.18
 	nouveau_vm_put(vma);
 }
 
 static int
+<<<<<<< HEAD
 <<<<<<< HEAD
 nvc0_bar_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	      struct nouveau_oclass *oclass, void *data, u32 size,
@@ -134,6 +151,8 @@ nvc0_bar_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 				&priv->bar[0].mem);
 	mem = priv->bar[0].mem;
 =======
+=======
+>>>>>>> v3.18
 nvc0_bar_init_vm(struct nvc0_bar_priv *priv, struct nvc0_bar_priv_vm *bar_vm,
 		 int bar_nr)
 {
@@ -144,11 +163,15 @@ nvc0_bar_init_vm(struct nvc0_bar_priv *priv, struct nvc0_bar_priv_vm *bar_vm,
 
 	ret = nouveau_gpuobj_new(nv_object(priv), NULL, 0x1000, 0, 0,
 				&bar_vm->mem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
 
 	ret = nouveau_gpuobj_new(nv_object(priv), NULL, 0x8000, 0, 0,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				&priv->bar[0].pgd);
 	if (ret)
@@ -168,6 +191,8 @@ nvc0_bar_init_vm(struct nvc0_bar_priv *priv, struct nvc0_bar_priv_vm *bar_vm,
 
 	ret = nouveau_vm_ref(vm, &priv->bar[0].vm, priv->bar[0].pgd);
 =======
+=======
+>>>>>>> v3.18
 				&bar_vm->pgd);
 	if (ret)
 		return ret;
@@ -194,6 +219,7 @@ nvc0_bar_init_vm(struct nvc0_bar_priv *priv, struct nvc0_bar_priv_vm *bar_vm,
 	}
 
 	ret = nouveau_vm_ref(vm, &bar_vm->vm, bar_vm->pgd);
+<<<<<<< HEAD
 >>>>>>> v3.18
 	nouveau_vm_ref(NULL, &vm, NULL);
 	if (ret)
@@ -222,10 +248,13 @@ nvc0_bar_init_vm(struct nvc0_bar_priv *priv, struct nvc0_bar_priv_vm *bar_vm,
 		return ret;
 
 	ret = nouveau_vm_ref(vm, &priv->bar[1].vm, priv->bar[1].pgd);
+=======
+>>>>>>> v3.18
 	nouveau_vm_ref(NULL, &vm, NULL);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 	nv_wo32(mem, 0x0200, lower_32_bits(priv->bar[1].pgd->addr));
 	nv_wo32(mem, 0x0204, upper_32_bits(priv->bar[1].pgd->addr));
 	nv_wo32(mem, 0x0208, lower_32_bits(pci_resource_len(pdev, 1) - 1));
@@ -234,6 +263,8 @@ nvc0_bar_init_vm(struct nvc0_bar_priv *priv, struct nvc0_bar_priv_vm *bar_vm,
 	priv->base.alloc = nouveau_bar_alloc;
 	priv->base.kmap = nvc0_bar_kmap;
 =======
+=======
+>>>>>>> v3.18
 	nv_wo32(bar_vm->mem, 0x0200, lower_32_bits(bar_vm->pgd->addr));
 	nv_wo32(bar_vm->mem, 0x0204, upper_32_bits(bar_vm->pgd->addr));
 	nv_wo32(bar_vm->mem, 0x0208, lower_32_bits(bar_len - 1));
@@ -271,6 +302,9 @@ nvc0_bar_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	priv->base.umap = nvc0_bar_umap;
 	priv->base.unmap = nvc0_bar_unmap;
@@ -280,7 +314,11 @@ nvc0_bar_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
+=======
+void
+>>>>>>> v3.18
 =======
 void
 >>>>>>> v3.18
@@ -303,7 +341,11 @@ nvc0_bar_dtor(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
+=======
+int
+>>>>>>> v3.18
 =======
 int
 >>>>>>> v3.18
@@ -319,16 +361,22 @@ nvc0_bar_init(struct nouveau_object *object)
 	nv_mask(priv, 0x000200, 0x00000100, 0x00000000);
 	nv_mask(priv, 0x000200, 0x00000100, 0x00000100);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv_mask(priv, 0x100c80, 0x00000001, 0x00000000);
 
 	nv_wr32(priv, 0x001704, 0x80000000 | priv->bar[1].mem->addr >> 12);
 	nv_wr32(priv, 0x001714, 0xc0000000 | priv->bar[0].mem->addr >> 12);
 =======
+=======
+>>>>>>> v3.18
 
 	nv_wr32(priv, 0x001704, 0x80000000 | priv->bar[1].mem->addr >> 12);
 	if (priv->bar[0].mem)
 		nv_wr32(priv, 0x001714,
 			0xc0000000 | priv->bar[0].mem->addr >> 12);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

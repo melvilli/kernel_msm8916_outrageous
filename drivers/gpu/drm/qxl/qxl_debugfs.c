@@ -59,10 +59,13 @@ qxl_debugfs_buffers_info(struct seq_file *m, void *data)
 
 	list_for_each_entry(bo, &qdev->gem.objects, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(m, "size %ld, pc %d, sync obj %p, num releases %d\n",
 			   (unsigned long)bo->gem_base.size, bo->pin_count,
 			   bo->tbo.sync_obj, bo->fence.num_active_releases);
 =======
+=======
+>>>>>>> v3.18
 		struct reservation_object_list *fobj;
 		int rel;
 
@@ -74,6 +77,9 @@ qxl_debugfs_buffers_info(struct seq_file *m, void *data)
 		seq_printf(m, "size %ld, pc %d, num releases %d\n",
 			   (unsigned long)bo->gem_base.size,
 			   bo->pin_count, rel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;

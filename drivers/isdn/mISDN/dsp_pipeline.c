@@ -103,7 +103,11 @@ int mISDN_dsp_element_register(struct mISDN_dsp_element *elem)
 	entry->dev.release = mISDN_dsp_dev_release;
 	dev_set_drvdata(&entry->dev, elem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_name(&entry->dev, elem->name);
+=======
+	dev_set_name(&entry->dev, "%s", elem->name);
+>>>>>>> v3.18
 =======
 	dev_set_name(&entry->dev, "%s", elem->name);
 >>>>>>> v3.18

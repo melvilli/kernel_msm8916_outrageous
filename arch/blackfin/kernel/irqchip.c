@@ -12,6 +12,10 @@
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/seq_file.h>
+>>>>>>> v3.18
 =======
 #include <linux/seq_file.h>
 >>>>>>> v3.18
@@ -37,6 +41,7 @@ static struct irq_desc bad_irq_desc = {
 #endif
 
 #ifdef CONFIG_PROC_FS
+<<<<<<< HEAD
 <<<<<<< HEAD
 int show_interrupts(struct seq_file *p, void *v)
 {
@@ -70,6 +75,8 @@ int show_interrupts(struct seq_file *p, void *v)
 		seq_printf(p, "Err: %10u\n",  atomic_read(&irq_err_count));
 	}
 =======
+=======
+>>>>>>> v3.18
 int arch_show_interrupts(struct seq_file *p, int prec)
 {
 	int j;
@@ -79,6 +86,9 @@ int arch_show_interrupts(struct seq_file *p, int prec)
 		seq_printf(p, "%10u ", cpu_pda[j].__nmi_count);
 	seq_printf(p, "  CORE  Non Maskable Interrupt\n");
 	seq_printf(p, "%*s: %10u\n", prec, "ERR", atomic_read(&irq_err_count));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

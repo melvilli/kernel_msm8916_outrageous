@@ -6,7 +6,11 @@
  * Licensed under GPLv2.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "at91sam9g20.dtsi"
+=======
+#include "at91sam9g20.dtsi"
+>>>>>>> v3.18
 =======
 #include "at91sam9g20.dtsi"
 >>>>>>> v3.18
@@ -31,7 +35,10 @@
 			clock-frequency = <18432000>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		slow_xtal {
 			clock-frequency = <32768>;
@@ -40,6 +47,9 @@
 		main_xtal {
 			clock-frequency = <18432000>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -50,11 +60,14 @@
 					pinctrl_pck0_as_mck: pck0_as_mck {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<2 1 0x2 0x0>;	/* PC1 periph B */
 					};
 
 				};
 =======
+=======
+>>>>>>> v3.18
 							<AT91_PIOC 1 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PC1 periph B */
 					};
 
@@ -66,6 +79,9 @@
 							<AT91_PIOC 9 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP_DEGLITCH>;	/* PC9 gpio CD pin pull up and deglitch */
 					};
 				};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -95,7 +111,11 @@
 
 			usb1: gadget@fffa4000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				atmel,vbus-gpio = <&pioC 5 0>;
+=======
+				atmel,vbus-gpio = <&pioC 5 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 				atmel,vbus-gpio = <&pioC 5 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -113,6 +133,7 @@
 					reg = <1>;
 					bus-width = <4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					cd-gpios = <&pioC 9 0>;
 				};
 			};
@@ -126,6 +147,9 @@
 =======
 					cd-gpios = <&pioC 9 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
+=======
+					cd-gpios = <&pioC 9 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 				};
 			};
 
@@ -136,7 +160,10 @@
 
 			spi0: spi@fffc8000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				status = "okay";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				cs-gpios = <0>, <&pioC 11 0>, <0>, <0>;
@@ -147,11 +174,17 @@
 				};
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			watchdog@fffffd40 {
 				status = "okay";
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -228,7 +261,11 @@
 		btn3 {
 			label = "Button 3";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioA 30 1>;
+=======
+			gpios = <&pioA 30 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioA 30 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -239,7 +276,11 @@
 		btn4 {
 			label = "Button 4";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioA 31 1>;
+=======
+			gpios = <&pioA 31 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioA 31 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18

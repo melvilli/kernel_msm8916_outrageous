@@ -555,7 +555,11 @@ static irqreturn_t pm860x_vchg_handler(int irq, void *data)
 					OVTEMP_AUTORECOVER);
 			dev_dbg(info->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"%s, pm8606 over-temp occure\n", __func__);
+=======
+				"%s, pm8606 over-temp occurred\n", __func__);
+>>>>>>> v3.18
 =======
 				"%s, pm8606 over-temp occurred\n", __func__);
 >>>>>>> v3.18
@@ -567,7 +571,11 @@ static irqreturn_t pm860x_vchg_handler(int irq, void *data)
 		info->allowed = 0;
 		dev_dbg(info->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"%s,pm8607 over-vchg occure,vchg = %dmv\n",
+=======
+			"%s,pm8607 over-vchg occurred,vchg = %dmv\n",
+>>>>>>> v3.18
 =======
 			"%s,pm8607 over-vchg occurred,vchg = %dmv\n",
 >>>>>>> v3.18
@@ -720,7 +728,10 @@ static int pm860x_charger_probe(struct platform_device *pdev)
 
 out_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	power_supply_unregister(&info->usb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	while (--i >= 0)
@@ -735,7 +746,10 @@ static int pm860x_charger_remove(struct platform_device *pdev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	power_supply_unregister(&info->usb);

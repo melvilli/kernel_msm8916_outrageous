@@ -7,7 +7,13 @@
 # Copyright (C) 2013 John Crispin <blogic@openwrt.org>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y := prom.o of.o reset.o clk.o irq.o
+=======
+obj-y := prom.o of.o reset.o clk.o irq.o timer.o
+
+obj-$(CONFIG_CLKEVT_RT3352) += cevt-rt3352.o
+>>>>>>> v3.18
 =======
 obj-y := prom.o of.o reset.o clk.o irq.o timer.o
 
@@ -21,7 +27,10 @@ obj-$(CONFIG_SOC_MT7620) += mt7620.o
 
 obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 obj-y += dts/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

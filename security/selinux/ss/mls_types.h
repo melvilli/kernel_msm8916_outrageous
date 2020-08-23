@@ -36,7 +36,11 @@ static inline int mls_level_dom(struct mls_level *l1, struct mls_level *l2)
 {
 	return ((l1->sens >= l2->sens) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ebitmap_contains(&l1->cat, &l2->cat));
+=======
+		ebitmap_contains(&l1->cat, &l2->cat, 0));
+>>>>>>> v3.18
 =======
 		ebitmap_contains(&l1->cat, &l2->cat, 0));
 >>>>>>> v3.18

@@ -52,6 +52,10 @@ struct nsm_res {
 
 static const struct rpc_program	nsm_program;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static				LIST_HEAD(nsm_handles);
+>>>>>>> v3.18
 =======
 static				LIST_HEAD(nsm_handles);
 >>>>>>> v3.18
@@ -263,6 +267,7 @@ void nsm_unmonitor(const struct nlm_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct nsm_handle *nsm_lookup_hostname(const struct list_head *nsm_handles,
 					const char *hostname, const size_t len)
 {
@@ -270,12 +275,17 @@ static struct nsm_handle *nsm_lookup_hostname(const struct list_head *nsm_handle
 
 	list_for_each_entry(nsm, nsm_handles, sm_link)
 =======
+=======
+>>>>>>> v3.18
 static struct nsm_handle *nsm_lookup_hostname(const char *hostname,
 					      const size_t len)
 {
 	struct nsm_handle *nsm;
 
 	list_for_each_entry(nsm, &nsm_handles, sm_link)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (strlen(nsm->sm_name) == len &&
 		    memcmp(nsm->sm_name, hostname, len) == 0)
@@ -284,6 +294,7 @@ static struct nsm_handle *nsm_lookup_hostname(const char *hostname,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct nsm_handle *nsm_lookup_addr(const struct list_head *nsm_handles,
 					const struct sockaddr *sap)
 {
@@ -291,17 +302,23 @@ static struct nsm_handle *nsm_lookup_addr(const struct list_head *nsm_handles,
 
 	list_for_each_entry(nsm, nsm_handles, sm_link)
 =======
+=======
+>>>>>>> v3.18
 static struct nsm_handle *nsm_lookup_addr(const struct sockaddr *sap)
 {
 	struct nsm_handle *nsm;
 
 	list_for_each_entry(nsm, &nsm_handles, sm_link)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rpc_cmp_addr(nsm_addr(nsm), sap))
 			return nsm;
 	return NULL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct nsm_handle *nsm_lookup_priv(const struct list_head *nsm_handles,
 					const struct nsm_private *priv)
@@ -310,11 +327,16 @@ static struct nsm_handle *nsm_lookup_priv(const struct list_head *nsm_handles,
 
 	list_for_each_entry(nsm, nsm_handles, sm_link)
 =======
+=======
+>>>>>>> v3.18
 static struct nsm_handle *nsm_lookup_priv(const struct nsm_private *priv)
 {
 	struct nsm_handle *nsm;
 
 	list_for_each_entry(nsm, &nsm_handles, sm_link)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (memcmp(nsm->sm_priv.data, priv->data,
 					sizeof(priv->data)) == 0)
@@ -343,11 +365,17 @@ static void nsm_init_private(struct nsm_handle *nsm)
 {
 	u64 *p = (u64 *)&nsm->sm_priv.data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
 	s64 ns;
 
 	ktime_get_ts(&ts);
 	ns = timespec_to_ns(&ts);
+=======
+	s64 ns;
+
+	ns = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	s64 ns;
 
@@ -387,7 +415,10 @@ static struct nsm_handle *nsm_create_handle(const struct sockaddr *sap,
 /**
  * nsm_get_handle - Find or create a cached nsm_handle
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @net: network namespace
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @sap: pointer to socket address of handle to find
@@ -403,8 +434,12 @@ static struct nsm_handle *nsm_create_handle(const struct sockaddr *sap,
  * an error occurs.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nsm_handle *nsm_get_handle(const struct net *net,
 				  const struct sockaddr *sap,
+=======
+struct nsm_handle *nsm_get_handle(const struct sockaddr *sap,
+>>>>>>> v3.18
 =======
 struct nsm_handle *nsm_get_handle(const struct sockaddr *sap,
 >>>>>>> v3.18
@@ -413,7 +448,10 @@ struct nsm_handle *nsm_get_handle(const struct sockaddr *sap,
 {
 	struct nsm_handle *cached, *new = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lockd_net *ln = net_generic(net, lockd_net_id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -431,10 +469,16 @@ retry:
 
 	if (nsm_use_hostnames && hostname != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cached = nsm_lookup_hostname(&ln->nsm_handles,
 					hostname, hostname_len);
 	else
 		cached = nsm_lookup_addr(&ln->nsm_handles, sap);
+=======
+		cached = nsm_lookup_hostname(hostname, hostname_len);
+	else
+		cached = nsm_lookup_addr(sap);
+>>>>>>> v3.18
 =======
 		cached = nsm_lookup_hostname(hostname, hostname_len);
 	else
@@ -454,7 +498,11 @@ retry:
 
 	if (new != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_add(&new->sm_link, &ln->nsm_handles);
+=======
+		list_add(&new->sm_link, &nsm_handles);
+>>>>>>> v3.18
 =======
 		list_add(&new->sm_link, &nsm_handles);
 >>>>>>> v3.18
@@ -475,7 +523,10 @@ retry:
 /**
  * nsm_reboot_lookup - match NLMPROC_SM_NOTIFY arguments to an nsm_handle
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @net:  network namespace
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @info: pointer to NLMPROC_SM_NOTIFY arguments
@@ -484,6 +535,7 @@ retry:
  * nsm_handle's reference count is bumped. Otherwise returns NULL if some
  * error occurred.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct nsm_handle *nsm_reboot_lookup(const struct net *net,
 				const struct nlm_reboot *info)
@@ -495,6 +547,8 @@ struct nsm_handle *nsm_reboot_lookup(const struct net *net,
 
 	cached = nsm_lookup_priv(&ln->nsm_handles, &info->priv);
 =======
+=======
+>>>>>>> v3.18
 struct nsm_handle *nsm_reboot_lookup(const struct nlm_reboot *info)
 {
 	struct nsm_handle *cached;
@@ -502,6 +556,9 @@ struct nsm_handle *nsm_reboot_lookup(const struct nlm_reboot *info)
 	spin_lock(&nsm_lock);
 
 	cached = nsm_lookup_priv(&info->priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(cached == NULL)) {
 		spin_unlock(&nsm_lock);

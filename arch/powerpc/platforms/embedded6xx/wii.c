@@ -236,7 +236,11 @@ define_machine(wii) {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id wii_of_bus[] = {
+=======
+static const struct of_device_id wii_of_bus[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id wii_of_bus[] = {
 >>>>>>> v3.18

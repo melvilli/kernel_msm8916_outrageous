@@ -262,7 +262,11 @@ static void egpio_write_cache(struct egpio_info *ei)
 static int __init egpio_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct htc_egpio_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct htc_egpio_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct htc_egpio_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -275,7 +279,11 @@ static int __init egpio_probe(struct platform_device *pdev)
 
 	/* Initialize ei data structure. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ei = kzalloc(sizeof(*ei), GFP_KERNEL);
+=======
+	ei = devm_kzalloc(&pdev->dev, sizeof(*ei), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ei = devm_kzalloc(&pdev->dev, sizeof(*ei), GFP_KERNEL);
 >>>>>>> v3.18
@@ -295,7 +303,12 @@ static int __init egpio_probe(struct platform_device *pdev)
 	if (!res)
 		goto fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ei->base_addr = ioremap_nocache(res->start, resource_size(res));
+=======
+	ei->base_addr = devm_ioremap_nocache(&pdev->dev, res->start,
+					     resource_size(res));
+>>>>>>> v3.18
 =======
 	ei->base_addr = devm_ioremap_nocache(&pdev->dev, res->start,
 					     resource_size(res));
@@ -320,7 +333,13 @@ static int __init egpio_probe(struct platform_device *pdev)
 
 	ei->nchips = pdata->num_chips;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ei->chip = kzalloc(sizeof(struct egpio_chip) * ei->nchips, GFP_KERNEL);
+=======
+	ei->chip = devm_kzalloc(&pdev->dev,
+				sizeof(struct egpio_chip) * ei->nchips,
+				GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ei->chip = devm_kzalloc(&pdev->dev,
 				sizeof(struct egpio_chip) * ei->nchips,
@@ -381,7 +400,10 @@ static int __init egpio_probe(struct platform_device *pdev)
 fail:
 	printk(KERN_ERR "EGPIO failed to setup\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(ei);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -402,9 +424,12 @@ static int __exit egpio_remove(struct platform_device *pdev)
 		device_init_wakeup(&pdev->dev, 0);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(ei->base_addr);
 	kfree(ei->chip);
 	kfree(ei);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

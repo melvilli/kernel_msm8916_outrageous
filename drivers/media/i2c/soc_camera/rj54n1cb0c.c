@@ -18,8 +18,13 @@
 #include <media/rj54n1cb0c.h>
 #include <media/soc_camera.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-subdev.h>
 #include <media/v4l2-chip-ident.h>
+=======
+#include <media/v4l2-clk.h>
+#include <media/v4l2-subdev.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-clk.h>
 #include <media/v4l2-subdev.h>
@@ -157,6 +162,10 @@ struct rj54n1 {
 	struct v4l2_subdev subdev;
 	struct v4l2_ctrl_handler hdl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_clk *clk;
+>>>>>>> v3.18
 =======
 	struct v4l2_clk *clk;
 >>>>>>> v3.18
@@ -1130,6 +1139,7 @@ static int rj54n1_s_fmt(struct v4l2_subdev *sd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rj54n1_g_chip_ident(struct v4l2_subdev *sd,
 			       struct v4l2_dbg_chip_ident *id)
 {
@@ -1149,12 +1159,15 @@ static int rj54n1_g_chip_ident(struct v4l2_subdev *sd,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int rj54n1_g_register(struct v4l2_subdev *sd,
 			     struct v4l2_dbg_register *reg)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (reg->match.type != V4L2_CHIP_MATCH_I2C_ADDR ||
 	    reg->reg < 0x400 || reg->reg > 0x1fff)
@@ -1165,10 +1178,15 @@ static int rj54n1_g_register(struct v4l2_subdev *sd,
 		return -ENODEV;
 
 =======
+=======
+>>>>>>> v3.18
 	if (reg->reg < 0x400 || reg->reg > 0x1fff)
 		/* Registers > 0x0800 are only available from Sharp support */
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reg->size = 1;
 	reg->val = reg_read(client, reg->reg);
@@ -1185,6 +1203,7 @@ static int rj54n1_s_register(struct v4l2_subdev *sd,
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (reg->match.type != V4L2_CHIP_MATCH_I2C_ADDR ||
 	    reg->reg < 0x400 || reg->reg > 0x1fff)
 		/* Registers >= 0x0800 are only available from Sharp support */
@@ -1194,10 +1213,15 @@ static int rj54n1_s_register(struct v4l2_subdev *sd,
 		return -ENODEV;
 
 =======
+=======
+>>>>>>> v3.18
 	if (reg->reg < 0x400 || reg->reg > 0x1fff)
 		/* Registers >= 0x0800 are only available from Sharp support */
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (reg_write(client, reg->reg, reg->val) < 0)
 		return -EIO;
@@ -1211,8 +1235,14 @@ static int rj54n1_s_power(struct v4l2_subdev *sd, int on)
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return soc_camera_set_power(&client->dev, ssdd, on);
+=======
+	struct rj54n1 *rj54n1 = to_rj54n1(client);
+
+	return soc_camera_set_power(&client->dev, ssdd, rj54n1->clk, on);
+>>>>>>> v3.18
 =======
 	struct rj54n1 *rj54n1 = to_rj54n1(client);
 
@@ -1266,7 +1296,10 @@ static const struct v4l2_ctrl_ops rj54n1_ctrl_ops = {
 
 static struct v4l2_subdev_core_ops rj54n1_subdev_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident	= rj54n1_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -1418,10 +1451,13 @@ static int rj54n1_probe(struct i2c_client *client,
 		(clk_div.ratio_tg + 1) / (clk_div.ratio_t + 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = rj54n1_video_probe(client, rj54n1_priv);
 	if (ret < 0)
 		v4l2_ctrl_handler_free(&rj54n1->hdl);
 =======
+=======
+>>>>>>> v3.18
 	rj54n1->clk = v4l2_clk_get(&client->dev, "mclk");
 	if (IS_ERR(rj54n1->clk)) {
 		ret = PTR_ERR(rj54n1->clk);
@@ -1434,6 +1470,9 @@ static int rj54n1_probe(struct i2c_client *client,
 eclkget:
 		v4l2_ctrl_handler_free(&rj54n1->hdl);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1445,6 +1484,10 @@ static int rj54n1_remove(struct i2c_client *client)
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l2_clk_put(rj54n1->clk);
+>>>>>>> v3.18
 =======
 	v4l2_clk_put(rj54n1->clk);
 >>>>>>> v3.18

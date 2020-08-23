@@ -2,7 +2,10 @@
 #define _ASM_X86_MICROCODE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define native_rdmsr(msr, val1, val2)			\
 do {							\
 	u64 __val = native_read_msr((msr));		\
@@ -18,6 +21,9 @@ do {							\
 			 (u32)((u64)(val)),		\
 			 (u32)((u64)(val) >> 32))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct cpu_signature {
 	unsigned int sig;
@@ -29,6 +35,10 @@ struct device;
 
 enum ucode_state { UCODE_ERROR, UCODE_OK, UCODE_NFOUND };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool dis_ucode_ldr;
+>>>>>>> v3.18
 =======
 extern bool dis_ucode_ldr;
 >>>>>>> v3.18
@@ -83,17 +93,23 @@ static inline void __exit exit_amd_microcode(void) {}
 #define MAX_UCODE_COUNT 128
 extern void __init load_ucode_bsp(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __cpuinit load_ucode_ap(void);
 extern int __init save_microcode_in_initrd(void);
 #else
 static inline void __init load_ucode_bsp(void) {}
 static inline void __cpuinit load_ucode_ap(void) {}
 =======
+=======
+>>>>>>> v3.18
 extern void load_ucode_ap(void);
 extern int __init save_microcode_in_initrd(void);
 #else
 static inline void __init load_ucode_bsp(void) {}
 static inline void load_ucode_ap(void) {}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int __init save_microcode_in_initrd(void)
 {

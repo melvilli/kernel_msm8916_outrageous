@@ -222,7 +222,12 @@ static void snd_echo_midi_output_write(unsigned long data)
 		sent = write_midi(chip, buf, bytes);
 		if (sent < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "write_midi() error %d\n", sent);
+=======
+			dev_err(chip->card->dev,
+				"write_midi() error %d\n", sent);
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"write_midi() error %d\n", sent);

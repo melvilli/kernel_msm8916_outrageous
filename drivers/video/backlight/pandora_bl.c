@@ -101,6 +101,7 @@ done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pandora_backlight_get_brightness(struct backlight_device *bl)
 {
 	return bl->props.brightness;
@@ -110,6 +111,11 @@ static const struct backlight_ops pandora_backlight_ops = {
 	.options	= BL_CORE_SUSPENDRESUME,
 	.update_status	= pandora_backlight_update_status,
 	.get_brightness	= pandora_backlight_get_brightness,
+=======
+static const struct backlight_ops pandora_backlight_ops = {
+	.options	= BL_CORE_SUSPENDRESUME,
+	.update_status	= pandora_backlight_update_status,
+>>>>>>> v3.18
 =======
 static const struct backlight_ops pandora_backlight_ops = {
 	.options	= BL_CORE_SUSPENDRESUME,
@@ -127,8 +133,13 @@ static int pandora_backlight_probe(struct platform_device *pdev)
 	props.max_brightness = MAX_USER_VALUE;
 	props.type = BACKLIGHT_RAW;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl = backlight_device_register(pdev->name, &pdev->dev,
 			NULL, &pandora_backlight_ops, &props);
+=======
+	bl = devm_backlight_device_register(&pdev->dev, pdev->name, &pdev->dev,
+					NULL, &pandora_backlight_ops, &props);
+>>>>>>> v3.18
 =======
 	bl = devm_backlight_device_register(&pdev->dev, pdev->name, &pdev->dev,
 					NULL, &pandora_backlight_ops, &props);
@@ -157,6 +168,7 @@ static int pandora_backlight_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pandora_backlight_remove(struct platform_device *pdev)
 {
 	struct backlight_device *bl = platform_get_drvdata(pdev);
@@ -172,11 +184,16 @@ static struct platform_driver pandora_backlight_driver = {
 	.probe		= pandora_backlight_probe,
 	.remove		= pandora_backlight_remove,
 =======
+=======
+>>>>>>> v3.18
 static struct platform_driver pandora_backlight_driver = {
 	.driver		= {
 		.name	= "pandora-backlight",
 	},
 	.probe		= pandora_backlight_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -32,7 +32,11 @@
 #warning    ARM unwind is known to compile only with EABI compilers.
 #warning    Change compiler or disable ARM_UNWIND option.
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif (__GNUC__ == 4 && __GNUC_MINOR__ <= 2)
+=======
+#elif (__GNUC__ == 4 && __GNUC_MINOR__ <= 2) && !defined(__clang__)
+>>>>>>> v3.18
 =======
 #elif (__GNUC__ == 4 && __GNUC_MINOR__ <= 2) && !defined(__clang__)
 >>>>>>> v3.18
@@ -73,13 +77,19 @@ struct unwind_ctrl_block {
 	unsigned long vrs[16];		/* virtual register set */
 	const unsigned long *insn;	/* pointer to the current instructions word */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned long sp_high;		/* highest value of sp allowed */
 	/*
 	 * 1 : check for stack overflow for each register pop.
 	 * 0 : save overhead if there is plenty of stack remaining.
 	 */
 	int check_each_pop;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int entries;			/* number of entries left to interpret */
 	int byte;			/* current byte number in the instructions word */
@@ -165,7 +175,11 @@ static const struct unwind_idx *search_index(unsigned long addr,
 		return start;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("unwind: Unknown symbol address %08lx\n", addr);
+=======
+		pr_warn("unwind: Unknown symbol address %08lx\n", addr);
+>>>>>>> v3.18
 =======
 		pr_warn("unwind: Unknown symbol address %08lx\n", addr);
 >>>>>>> v3.18
@@ -237,7 +251,11 @@ static unsigned long unwind_get_byte(struct unwind_ctrl_block *ctrl)
 
 	if (ctrl->entries <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("unwind: Corrupt unwind table\n");
+=======
+		pr_warn("unwind: Corrupt unwind table\n");
+>>>>>>> v3.18
 =======
 		pr_warn("unwind: Corrupt unwind table\n");
 >>>>>>> v3.18
@@ -257,7 +275,10 @@ static unsigned long unwind_get_byte(struct unwind_ctrl_block *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Before poping a register check whether it is feasible or not */
 static int unwind_pop_register(struct unwind_ctrl_block *ctrl,
 				unsigned long **vsp, unsigned int reg)
@@ -330,6 +351,9 @@ static int unwind_exec_pop_subset_r0_to_r3(struct unwind_ctrl_block *ctrl,
 	return URC_OK;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Execute the current unwind instruction.
@@ -338,6 +362,10 @@ static int unwind_exec_insn(struct unwind_ctrl_block *ctrl)
 {
 	unsigned long insn = unwind_get_byte(ctrl);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret = URC_OK;
+>>>>>>> v3.18
 =======
 	int ret = URC_OK;
 >>>>>>> v3.18
@@ -351,14 +379,18 @@ static int unwind_exec_insn(struct unwind_ctrl_block *ctrl)
 	else if ((insn & 0xf0) == 0x80) {
 		unsigned long mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long *vsp = (unsigned long *)ctrl->vrs[SP];
 		int load_sp, reg = 4;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 		insn = (insn << 8) | unwind_get_byte(ctrl);
 		mask = insn & 0x0fff;
 		if (mask == 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			pr_warning("unwind: 'Refuse to unwind' instruction %04lx\n",
 				   insn);
@@ -376,6 +408,8 @@ static int unwind_exec_insn(struct unwind_ctrl_block *ctrl)
 		if (!load_sp)
 			ctrl->vrs[SP] = (unsigned long)vsp;
 =======
+=======
+>>>>>>> v3.18
 			pr_warn("unwind: 'Refuse to unwind' instruction %04lx\n",
 				insn);
 			return -URC_FAILURE;
@@ -384,11 +418,15 @@ static int unwind_exec_insn(struct unwind_ctrl_block *ctrl)
 		ret = unwind_exec_pop_subset_r4_to_r13(ctrl, mask);
 		if (ret)
 			goto error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if ((insn & 0xf0) == 0x90 &&
 		   (insn & 0x0d) != 0x0d)
 		ctrl->vrs[SP] = ctrl->vrs[insn & 0x0f];
 	else if ((insn & 0xf0) == 0xa0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		unsigned long *vsp = (unsigned long *)ctrl->vrs[SP];
 		int reg;
@@ -404,6 +442,11 @@ static int unwind_exec_insn(struct unwind_ctrl_block *ctrl)
 		if (ret)
 			goto error;
 >>>>>>> v3.18
+=======
+		ret = unwind_exec_pop_r4_to_rN(ctrl, insn);
+		if (ret)
+			goto error;
+>>>>>>> v3.18
 	} else if (insn == 0xb0) {
 		if (ctrl->vrs[PC] == 0)
 			ctrl->vrs[PC] = ctrl->vrs[LR];
@@ -411,6 +454,7 @@ static int unwind_exec_insn(struct unwind_ctrl_block *ctrl)
 		ctrl->entries = 0;
 	} else if (insn == 0xb1) {
 		unsigned long mask = unwind_get_byte(ctrl);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		unsigned long *vsp = (unsigned long *)ctrl->vrs[SP];
 		int reg = 0;
@@ -430,6 +474,8 @@ static int unwind_exec_insn(struct unwind_ctrl_block *ctrl)
 		}
 		ctrl->vrs[SP] = (unsigned long)vsp;
 =======
+=======
+>>>>>>> v3.18
 
 		if (mask == 0 || mask & 0xf0) {
 			pr_warn("unwind: Spare encoding %04lx\n",
@@ -440,6 +486,9 @@ static int unwind_exec_insn(struct unwind_ctrl_block *ctrl)
 		ret = unwind_exec_pop_subset_r0_to_r3(ctrl, mask);
 		if (ret)
 			goto error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (insn == 0xb2) {
 		unsigned long uleb128 = unwind_get_byte(ctrl);
@@ -447,7 +496,11 @@ static int unwind_exec_insn(struct unwind_ctrl_block *ctrl)
 		ctrl->vrs[SP] += 0x204 + (uleb128 << 2);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("unwind: Unhandled instruction %02lx\n", insn);
+=======
+		pr_warn("unwind: Unhandled instruction %02lx\n", insn);
+>>>>>>> v3.18
 =======
 		pr_warn("unwind: Unhandled instruction %02lx\n", insn);
 >>>>>>> v3.18
@@ -458,7 +511,12 @@ static int unwind_exec_insn(struct unwind_ctrl_block *ctrl)
 		 ctrl->vrs[FP], ctrl->vrs[SP], ctrl->vrs[LR], ctrl->vrs[PC]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return URC_OK;
+=======
+error:
+	return ret;
+>>>>>>> v3.18
 =======
 error:
 	return ret;
@@ -472,6 +530,7 @@ error:
 int unwind_frame(struct stackframe *frame)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long high, low;
 	const struct unwind_idx *idx;
 	struct unwind_ctrl_block ctrl;
@@ -480,6 +539,8 @@ int unwind_frame(struct stackframe *frame)
 	low = frame->sp;
 	high = ALIGN(low, THREAD_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long low;
 	const struct unwind_idx *idx;
 	struct unwind_ctrl_block ctrl;
@@ -487,6 +548,9 @@ int unwind_frame(struct stackframe *frame)
 	/* store the highest address on the stack to avoid crossing it*/
 	low = frame->sp;
 	ctrl.sp_high = ALIGN(low, THREAD_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pr_debug("%s(pc = %08lx lr = %08lx sp = %08lx)\n", __func__,
@@ -498,7 +562,11 @@ int unwind_frame(struct stackframe *frame)
 	idx = unwind_find_idx(frame->pc);
 	if (!idx) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("unwind: Index not found %08lx\n", frame->pc);
+=======
+		pr_warn("unwind: Index not found %08lx\n", frame->pc);
+>>>>>>> v3.18
 =======
 		pr_warn("unwind: Index not found %08lx\n", frame->pc);
 >>>>>>> v3.18
@@ -521,8 +589,13 @@ int unwind_frame(struct stackframe *frame)
 		ctrl.insn = &idx->insn;
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("unwind: Unsupported personality routine %08lx in the index at %p\n",
 			   idx->insn, idx);
+=======
+		pr_warn("unwind: Unsupported personality routine %08lx in the index at %p\n",
+			idx->insn, idx);
+>>>>>>> v3.18
 =======
 		pr_warn("unwind: Unsupported personality routine %08lx in the index at %p\n",
 			idx->insn, idx);
@@ -539,6 +612,7 @@ int unwind_frame(struct stackframe *frame)
 		ctrl.entries = 1 + ((*ctrl.insn & 0x00ff0000) >> 16);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("unwind: Unsupported personality routine %08lx at %p\n",
 			   *ctrl.insn, ctrl.insn);
 		return -URC_FAILURE;
@@ -550,6 +624,8 @@ int unwind_frame(struct stackframe *frame)
 			return urc;
 		if (ctrl.vrs[SP] < low || ctrl.vrs[SP] >= high)
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("unwind: Unsupported personality routine %08lx at %p\n",
 			*ctrl.insn, ctrl.insn);
 		return -URC_FAILURE;
@@ -565,6 +641,9 @@ int unwind_frame(struct stackframe *frame)
 		if (urc < 0)
 			return urc;
 		if (ctrl.vrs[SP] < low || ctrl.vrs[SP] >= ctrl.sp_high)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -URC_FAILURE;
 	}
@@ -596,6 +675,7 @@ void unwind_backtrace(struct pt_regs *regs, struct task_struct *tsk)
 
 	if (regs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		frame.fp = regs->ARM_fp;
 		frame.sp = regs->ARM_sp;
 		frame.lr = regs->ARM_lr;
@@ -603,10 +683,15 @@ void unwind_backtrace(struct pt_regs *regs, struct task_struct *tsk)
 		frame.pc = kernel_text_address(regs->ARM_pc)
 			 ? regs->ARM_pc : regs->ARM_lr;
 =======
+=======
+>>>>>>> v3.18
 		arm_get_current_stackframe(regs, &frame);
 		/* PC might be corrupted, use LR in that case. */
 		if (!kernel_text_address(regs->ARM_pc))
 			frame.pc = regs->ARM_lr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (tsk == current) {
 		frame.fp = (unsigned long)__builtin_frame_address(0);

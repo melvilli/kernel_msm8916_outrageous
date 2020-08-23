@@ -7,12 +7,18 @@
 #include <linux/pkt_sched.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct gnet_stats_basic_cpu {
 	struct gnet_stats_basic_packed bstats;
 	struct u64_stats_sync syncp;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct gnet_dump {
 	spinlock_t *      lock;
@@ -27,6 +33,7 @@ struct gnet_dump {
 	struct tc_stats   tc_stats;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int gnet_stats_start_copy(struct sk_buff *skb, int type,
 				 spinlock_t *lock, struct gnet_dump *d);
@@ -57,6 +64,8 @@ extern int gen_replace_estimator(struct gnet_stats_basic_packed *bstats,
 extern bool gen_estimator_active(const struct gnet_stats_basic_packed *bstats,
 				 const struct gnet_stats_rate_est *rate_est);
 =======
+=======
+>>>>>>> v3.18
 int gnet_stats_start_copy(struct sk_buff *skb, int type, spinlock_t *lock,
 			  struct gnet_dump *d);
 
@@ -92,5 +101,8 @@ int gen_replace_estimator(struct gnet_stats_basic_packed *bstats,
 			  spinlock_t *stats_lock, struct nlattr *opt);
 bool gen_estimator_active(const struct gnet_stats_basic_packed *bstats,
 			  const struct gnet_stats_rate_est64 *rate_est);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

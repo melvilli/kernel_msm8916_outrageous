@@ -10,8 +10,11 @@
 #define __LINUX_CLK_MXS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mx23_clocks_init(void);
 int mx28_clocks_init(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int mxs_saif_clkmux_select(unsigned int clkmux);

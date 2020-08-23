@@ -18,7 +18,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -29,6 +32,10 @@
 #include <linux/gpio.h>
 #include <linux/gpio_keys.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -128,6 +135,7 @@ static struct gpio_keys_platform_data *gpio_keys_polled_get_devtree_pdata(struct
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = kzalloc(sizeof(*pdata) + nbuttons * (sizeof *button),
 			GFP_KERNEL);
 	if (!pdata) {
@@ -135,10 +143,15 @@ static struct gpio_keys_platform_data *gpio_keys_polled_get_devtree_pdata(struct
 		goto err_out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	pdata = devm_kzalloc(dev, sizeof(*pdata) + nbuttons * sizeof(*button),
 			     GFP_KERNEL);
 	if (!pdata)
 		return ERR_PTR(-ENOMEM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pdata->buttons = (struct gpio_keys_button *)(pdata + 1);
@@ -166,7 +179,11 @@ static struct gpio_keys_platform_data *gpio_keys_polled_get_devtree_pdata(struct
 					"Failed to get gpio flags, error: %d\n",
 					error);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_free_pdata;
+=======
+			return ERR_PTR(error);
+>>>>>>> v3.18
 =======
 			return ERR_PTR(error);
 >>>>>>> v3.18
@@ -181,8 +198,12 @@ static struct gpio_keys_platform_data *gpio_keys_polled_get_devtree_pdata(struct
 			dev_err(dev, "Button without keycode: 0x%x\n",
 				button->gpio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = -EINVAL;
 			goto err_free_pdata;
+=======
+			return ERR_PTR(-EINVAL);
+>>>>>>> v3.18
 =======
 			return ERR_PTR(-EINVAL);
 >>>>>>> v3.18
@@ -201,6 +222,7 @@ static struct gpio_keys_platform_data *gpio_keys_polled_get_devtree_pdata(struct
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->nbuttons == 0) {
 		error = -EINVAL;
 		goto err_free_pdata;
@@ -216,6 +238,8 @@ err_out:
 
 static struct of_device_id gpio_keys_polled_of_match[] = {
 =======
+=======
+>>>>>>> v3.18
 	if (pdata->nbuttons == 0)
 		return ERR_PTR(-EINVAL);
 
@@ -223,6 +247,9 @@ static struct of_device_id gpio_keys_polled_of_match[] = {
 }
 
 static const struct of_device_id gpio_keys_polled_of_match[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "gpio-keys-polled", },
 	{ },
@@ -246,6 +273,10 @@ static int gpio_keys_polled_probe(struct platform_device *pdev)
 	struct input_polled_dev *poll_dev;
 	struct input_dev *input;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	size_t size;
+>>>>>>> v3.18
 =======
 	size_t size;
 >>>>>>> v3.18
@@ -264,6 +295,7 @@ static int gpio_keys_polled_probe(struct platform_device *pdev)
 
 	if (!pdata->poll_interval) {
 		dev_err(dev, "missing poll_interval value\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		error = -EINVAL;
 		goto err_free_pdata;
@@ -284,6 +316,8 @@ static int gpio_keys_polled_probe(struct platform_device *pdev)
 		error = -ENOMEM;
 		goto err_free_bdev;
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -299,6 +333,9 @@ static int gpio_keys_polled_probe(struct platform_device *pdev)
 	if (!poll_dev) {
 		dev_err(dev, "no memory for polled device\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -313,7 +350,10 @@ static int gpio_keys_polled_probe(struct platform_device *pdev)
 	input->name = pdev->name;
 	input->phys = DRV_NAME"/input0";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input->dev.parent = &pdev->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -335,6 +375,7 @@ static int gpio_keys_polled_probe(struct platform_device *pdev)
 		if (button->wakeup) {
 			dev_err(dev, DRV_NAME " does not support wakeup\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = -EINVAL;
 			goto err_free_gpio;
 		}
@@ -346,6 +387,8 @@ static int gpio_keys_polled_probe(struct platform_device *pdev)
 				gpio, error);
 			goto err_free_gpio;
 =======
+=======
+>>>>>>> v3.18
 			return -EINVAL;
 		}
 
@@ -355,6 +398,9 @@ static int gpio_keys_polled_probe(struct platform_device *pdev)
 			dev_err(dev, "unable to claim gpio %u, err=%d\n",
 				gpio, error);
 			return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -376,7 +422,11 @@ static int gpio_keys_polled_probe(struct platform_device *pdev)
 		dev_err(dev, "unable to register polled device, err=%d\n",
 			error);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free_gpio;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -388,6 +438,7 @@ static int gpio_keys_polled_probe(struct platform_device *pdev)
 					     &bdev->data[i]);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err_free_gpio:
@@ -434,12 +485,17 @@ static int gpio_keys_polled_remove(struct platform_device *pdev)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static struct platform_driver gpio_keys_polled_driver = {
 	.probe	= gpio_keys_polled_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= gpio_keys_polled_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver	= {

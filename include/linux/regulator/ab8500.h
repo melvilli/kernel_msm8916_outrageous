@@ -323,6 +323,7 @@ struct ab8500_regulator_platform_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_REGULATOR_AB8500_DEBUG
 int ab8500_regulator_debug_init(struct platform_device *pdev);
 int ab8500_regulator_debug_exit(struct platform_device *pdev);
@@ -341,6 +342,8 @@ static inline int ab8500_regulator_debug_exit(struct platform_device *pdev)
 int ab8500_ext_regulator_init(struct platform_device *pdev);
 void ab8500_ext_regulator_exit(struct platform_device *pdev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

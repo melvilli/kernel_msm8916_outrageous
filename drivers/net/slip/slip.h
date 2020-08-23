@@ -54,6 +54,10 @@ struct slip {
   struct net_device	*dev;		/* easy for intr handling	*/
   spinlock_t		lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  struct work_struct	tx_work;	/* Flushes transmit buffer	*/
+>>>>>>> v3.18
 =======
   struct work_struct	tx_work;	/* Flushes transmit buffer	*/
 >>>>>>> v3.18

@@ -13,6 +13,7 @@ static unsigned int
 nouveau_vga_set_decode(void *priv, bool state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_device *device = nouveau_dev(priv);
 
 	if (device->chipset >= 0x40)
@@ -20,6 +21,8 @@ nouveau_vga_set_decode(void *priv, bool state)
 	else
 		nv_wr32(device, 0x001854, state);
 =======
+=======
+>>>>>>> v3.18
 	struct nvif_device *device = &nouveau_drm(priv)->device;
 
 	if (device->info.family == NV_DEVICE_INFO_V0_CURIE &&
@@ -30,6 +33,9 @@ nouveau_vga_set_decode(void *priv, bool state)
 		nvif_wr32(device, 0x088054, state);
 	else
 		nvif_wr32(device, 0x001854, state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (state)
@@ -46,6 +52,12 @@ nouveau_switcheroo_set_state(struct pci_dev *pdev,
 	struct drm_device *dev = pci_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if ((nouveau_is_optimus() || nouveau_is_v1_dsm()) && state == VGA_SWITCHEROO_OFF)
+		return;
+
+>>>>>>> v3.18
 =======
 	if ((nouveau_is_optimus() || nouveau_is_v1_dsm()) && state == VGA_SWITCHEROO_OFF)
 		return;
@@ -79,6 +91,7 @@ nouveau_switcheroo_can_switch(struct pci_dev *pdev)
 {
 	struct drm_device *dev = pci_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool can_switch;
 
 	spin_lock(&dev->count_lock);
@@ -86,6 +99,8 @@ nouveau_switcheroo_can_switch(struct pci_dev *pdev)
 	spin_unlock(&dev->count_lock);
 	return can_switch;
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * FIXME: open_count is protected by drm_global_mutex but that would lead to
@@ -93,6 +108,9 @@ nouveau_switcheroo_can_switch(struct pci_dev *pdev)
 	 * completely racy anyway. So don't bother with locking for now.
 	 */
 	return dev->open_count == 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -108,9 +126,12 @@ nouveau_vga_init(struct nouveau_drm *drm)
 {
 	struct drm_device *dev = drm->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vga_client_register(dev->pdev, dev, NULL, nouveau_vga_set_decode);
 	vga_switcheroo_register_client(dev->pdev, &nouveau_switcheroo_ops);
 =======
+=======
+>>>>>>> v3.18
 	bool runtime = false;
 
 	/* only relevant for PCI devices */
@@ -127,6 +148,9 @@ nouveau_vga_init(struct nouveau_drm *drm)
 
 	if (runtime && nouveau_is_v1_dsm() && !nouveau_is_optimus())
 		vga_switcheroo_init_domain_pm_ops(drm->dev->dev, &drm->vga_pm_domain);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -135,8 +159,11 @@ nouveau_vga_fini(struct nouveau_drm *drm)
 {
 	struct drm_device *dev = drm->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vga_switcheroo_unregister_client(dev->pdev);
 =======
+=======
+>>>>>>> v3.18
 	bool runtime = false;
 
 	if (nouveau_runtime_pm == 1)
@@ -147,6 +174,9 @@ nouveau_vga_fini(struct nouveau_drm *drm)
 	vga_switcheroo_unregister_client(dev->pdev);
 	if (runtime && nouveau_is_v1_dsm() && !nouveau_is_optimus())
 		vga_switcheroo_fini_domain_pm_ops(drm->dev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vga_client_register(dev->pdev, NULL, NULL, NULL);
 }

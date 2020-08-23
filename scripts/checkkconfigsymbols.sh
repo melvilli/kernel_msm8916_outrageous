@@ -10,7 +10,11 @@ paths="$@"
 Kconfigs="`find . -name 'Kconfig' -o -name 'Kconfig*[^~]'`"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /bin/echo -e "File list \tundefined symbol used"
+=======
+printf "File list \tundefined symbol used\n"
+>>>>>>> v3.18
 =======
 printf "File list \tundefined symbol used\n"
 >>>>>>> v3.18
@@ -59,7 +63,11 @@ while read symb files; do
 	symb_bare=`echo $symb | sed -e 's/_MODULE//'`
 	if ! grep -q "\<$symb_bare\>" $Kconfigs; then
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/bin/echo -e "$files: \t$symb"
+=======
+		printf "$files: \t$symb\n"
+>>>>>>> v3.18
 =======
 		printf "$files: \t$symb\n"
 >>>>>>> v3.18

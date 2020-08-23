@@ -11,6 +11,10 @@
 #include <linux/elfcore.h>
 #include <linux/elf.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -74,8 +78,11 @@ typedef unsigned long kimage_entry_t;
 
 struct kexec_segment {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __user *buf;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * This pointer can point to user memory if kexec_load() system
 	 * call is used or will point to kernel memory if
@@ -88,6 +95,9 @@ struct kexec_segment {
 		void __user *buf;
 		void *kbuf;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	size_t bufsz;
 	unsigned long mem;
@@ -104,7 +114,10 @@ struct compat_kexec_segment {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct kexec_sha_region {
 	unsigned long start;
 	unsigned long len;
@@ -126,6 +139,9 @@ struct purgatory_info {
 	unsigned long purgatory_load_addr;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct kimage {
 	kimage_entry_t head;
@@ -144,7 +160,11 @@ struct kimage {
 	struct list_head control_pages;
 	struct list_head dest_pages;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head unuseable_pages;
+=======
+	struct list_head unusable_pages;
+>>>>>>> v3.18
 =======
 	struct list_head unusable_pages;
 >>>>>>> v3.18
@@ -158,6 +178,11 @@ struct kimage {
 #define KEXEC_TYPE_CRASH   1
 	unsigned int preserve_context : 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* If set, we are using file mode kexec syscall */
+	unsigned int file_mode:1;
+>>>>>>> v3.18
 =======
 	/* If set, we are using file mode kexec syscall */
 	unsigned int file_mode:1;
@@ -167,10 +192,13 @@ struct kimage {
 	struct kimage_arch arch;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 
 =======
+=======
+>>>>>>> v3.18
 
 	/* Additional fields for file based kexec syscall */
 	void *kernel_buf;
@@ -223,6 +251,9 @@ struct kexec_file_ops {
 	kexec_cleanup_t *cleanup;
 	kexec_verify_sig_t *verify_sig;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* kexec interface functions */
@@ -235,6 +266,7 @@ extern asmlinkage long sys_kexec_load(unsigned long entry,
 					unsigned long flags);
 extern int kernel_kexec(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_COMPAT
 extern asmlinkage long compat_sys_kexec_load(unsigned long entry,
 				unsigned long nr_segments,
@@ -244,6 +276,8 @@ extern asmlinkage long compat_sys_kexec_load(unsigned long entry,
 extern struct page *kimage_alloc_control_pages(struct kimage *image,
 						unsigned int order);
 =======
+=======
+>>>>>>> v3.18
 extern int kexec_add_buffer(struct kimage *image, char *buffer,
 			    unsigned long bufsz, unsigned long memsz,
 			    unsigned long buf_align, unsigned long buf_min,
@@ -259,6 +293,9 @@ extern int kexec_purgatory_get_set_symbol(struct kimage *image,
 					  unsigned int size, bool get_value);
 extern void *kexec_purgatory_get_symbol_addr(struct kimage *image,
 					     const char *name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void crash_kexec(struct pt_regs *);
 int kexec_should_crash(struct task_struct *);
@@ -296,6 +333,10 @@ unsigned long paddr_vmcoreinfo_note(void);
 extern struct kimage *kexec_image;
 extern struct kimage *kexec_crash_image;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int kexec_load_disabled;
+>>>>>>> v3.18
 =======
 extern int kexec_load_disabled;
 >>>>>>> v3.18
@@ -312,11 +353,17 @@ extern int kexec_load_disabled;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* List of defined/legal kexec file flags */
 #define KEXEC_FILE_FLAGS	(KEXEC_FILE_UNLOAD | KEXEC_FILE_ON_CRASH | \
 				 KEXEC_FILE_NO_INITRAMFS)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define VMCOREINFO_BYTES           (4096)
 #define VMCOREINFO_NOTE_NAME       "VMCOREINFO"

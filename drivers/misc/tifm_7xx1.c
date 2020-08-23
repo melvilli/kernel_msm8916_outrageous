@@ -357,13 +357,19 @@ static int tifm_7xx1_probe(struct pci_dev *dev,
 
 	fm->addr = pci_ioremap_bar(dev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!fm->addr)
 		goto err_out_free;
 =======
+=======
+>>>>>>> v3.18
 	if (!fm->addr) {
 		rc = -ENODEV;
 		goto err_out_free;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rc = request_irq(dev->irq, tifm_7xx1_isr, IRQF_SHARED, DRIVER_NAME, fm);
@@ -386,7 +392,10 @@ err_out_unmap:
 	iounmap(fm->addr);
 err_out_free:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tifm_free_adapter(fm);
@@ -416,8 +425,11 @@ static void tifm_7xx1_remove(struct pci_dev *dev)
 		tifm_7xx1_sock_power_off(tifm_7xx1_sock_addr(fm->addr, cnt));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(fm->addr);

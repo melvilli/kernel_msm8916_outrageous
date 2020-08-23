@@ -24,9 +24,12 @@
 
 #include "nvc0.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "fuc/hubnvc0.fuc.h"
 #include "fuc/gpcnvc0.fuc.h"
 =======
+=======
+>>>>>>> v3.18
 #include "ctxnvc0.h"
 
 /*******************************************************************************
@@ -126,12 +129,16 @@ nvc0_graph_zbc_depth_get(struct nvc0_graph_priv *priv, int format,
 	nvc0_graph_zbc_clear_depth(priv, zbc);
 	return zbc;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*******************************************************************************
  * Graphics object classes
  ******************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct nouveau_oclass
 nvc0_graph_sclass[] = {
@@ -177,6 +184,8 @@ nvc0_graph_units(struct nouveau_graph *graph)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static int
 nvc0_fermi_mthd_zbc_color(struct nouveau_object *object, void *data, u32 size)
 {
@@ -305,6 +314,9 @@ nvc0_graph_sclass[] = {
 	{}
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*******************************************************************************
  * PGRAPH context
@@ -367,7 +379,11 @@ nvc0_graph_context_ctor(struct nouveau_object *parent,
 		u32 data = mmio->data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mmio->shift) {
+=======
+		if (mmio->buffer >= 0) {
+>>>>>>> v3.18
 =======
 		if (mmio->buffer >= 0) {
 >>>>>>> v3.18
@@ -419,6 +435,7 @@ nvc0_graph_context_dtor(struct nouveau_object *object)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct nouveau_oclass
 nvc0_graph_cclass = {
 	.ofuncs = &(struct nouveau_ofuncs) {
@@ -430,6 +447,8 @@ nvc0_graph_cclass = {
 		.wr32 = _nouveau_graph_context_wr32,
 	},
 =======
+=======
+>>>>>>> v3.18
 /*******************************************************************************
  * PGRAPH register lists
  ******************************************************************************/
@@ -684,6 +703,9 @@ nvc0_graph_pack_mmio[] = {
 	{ nvc0_graph_init_fe_1 },
 	{ nvc0_graph_init_pe_1 },
 	{}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -691,6 +713,7 @@ nvc0_graph_pack_mmio[] = {
  * PGRAPH engine/subdev functions
  ******************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void
 nvc0_graph_ctxctl_debug_unit(struct nvc0_graph_priv *priv, u32 base)
@@ -731,6 +754,8 @@ nvc0_graph_ctxctl_isr(struct nvc0_graph_priv *priv)
 	nvc0_graph_ctxctl_debug(priv);
 	nv_wr32(priv, 0x409c20, ustat);
 =======
+=======
+>>>>>>> v3.18
 void
 nvc0_graph_zbc_init(struct nvc0_graph_priv *priv)
 {
@@ -927,6 +952,9 @@ nvc0_graph_trap_mp(struct nvc0_graph_priv *priv, int gpc, int tpc)
 
 	nv_wr32(priv, TPC_UNIT(gpc, tpc, 0x648), 0x00000000);
 	nv_wr32(priv, TPC_UNIT(gpc, tpc, 0x650), gerr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -940,13 +968,17 @@ nvc0_graph_trap_tpc(struct nvc0_graph_priv *priv, int gpc, int tpc)
 		nv_error(priv, "GPC%d/TPC%d/TEX: 0x%08x\n", gpc, tpc, trap);
 		nv_wr32(priv, TPC_UNIT(gpc, tpc, 0x0224), 0xc0000000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(priv, TPC_UNIT(gpc, tpc, 0x0508), 0x00000001);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		stat &= ~0x00000001;
 	}
 
 	if (stat & 0x00000002) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		u32 trap0 = nv_rd32(priv, TPC_UNIT(gpc, tpc, 0x0644));
 		u32 trap1 = nv_rd32(priv, TPC_UNIT(gpc, tpc, 0x064c));
@@ -958,6 +990,9 @@ nvc0_graph_trap_tpc(struct nvc0_graph_priv *priv, int gpc, int tpc)
 =======
 		nvc0_graph_trap_mp(priv, gpc, tpc);
 >>>>>>> v3.18
+=======
+		nvc0_graph_trap_mp(priv, gpc, tpc);
+>>>>>>> v3.18
 		stat &= ~0x00000002;
 	}
 
@@ -966,7 +1001,10 @@ nvc0_graph_trap_tpc(struct nvc0_graph_priv *priv, int gpc, int tpc)
 		nv_error(priv, "GPC%d/TPC%d/POLY: 0x%08x\n", gpc, tpc, trap);
 		nv_wr32(priv, TPC_UNIT(gpc, tpc, 0x0084), 0xc0000000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(priv, TPC_UNIT(gpc, tpc, 0x0508), 0x00000004);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		stat &= ~0x00000004;
@@ -977,7 +1015,10 @@ nvc0_graph_trap_tpc(struct nvc0_graph_priv *priv, int gpc, int tpc)
 		nv_error(priv, "GPC%d/TPC%d/L1C: 0x%08x\n", gpc, tpc, trap);
 		nv_wr32(priv, TPC_UNIT(gpc, tpc, 0x048c), 0xc0000000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(priv, TPC_UNIT(gpc, tpc, 0x0508), 0x00000008);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		stat &= ~0x00000008;
@@ -986,7 +1027,10 @@ nvc0_graph_trap_tpc(struct nvc0_graph_priv *priv, int gpc, int tpc)
 	if (stat) {
 		nv_error(priv, "GPC%d/TPC%d/0x%08x: unknown\n", gpc, tpc, stat);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(priv, TPC_UNIT(gpc, tpc, 0x0508), stat);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1000,10 +1044,14 @@ nvc0_graph_trap_gpc(struct nvc0_graph_priv *priv, int gpc)
 
 	if (stat & 0x00000001) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 trap = nv_rd32(priv, GPC_UNIT(gpc, 0x0420));
 		nv_error(priv, "GPC%d/PROP: 0x%08x\n", gpc, trap);
 		nv_wr32(priv, GPC_UNIT(gpc, 0x0420), 0xc0000000);
 		nv_wr32(priv, GPC_UNIT(gpc, 0x2c90), 0x00000001);
+=======
+		nvc0_graph_trap_gpc_rop(priv, gpc);
+>>>>>>> v3.18
 =======
 		nvc0_graph_trap_gpc_rop(priv, gpc);
 >>>>>>> v3.18
@@ -1015,7 +1063,10 @@ nvc0_graph_trap_gpc(struct nvc0_graph_priv *priv, int gpc)
 		nv_error(priv, "GPC%d/ZCULL: 0x%08x\n", gpc, trap);
 		nv_wr32(priv, GPC_UNIT(gpc, 0x0900), 0xc0000000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(priv, GPC_UNIT(gpc, 0x2c90), 0x00000002);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		stat &= ~0x00000002;
@@ -1026,7 +1077,10 @@ nvc0_graph_trap_gpc(struct nvc0_graph_priv *priv, int gpc)
 		nv_error(priv, "GPC%d/CCACHE: 0x%08x\n", gpc, trap);
 		nv_wr32(priv, GPC_UNIT(gpc, 0x1028), 0xc0000000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(priv, GPC_UNIT(gpc, 0x2c90), 0x00000004);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		stat &= ~0x00000004;
@@ -1037,7 +1091,10 @@ nvc0_graph_trap_gpc(struct nvc0_graph_priv *priv, int gpc)
 		nv_error(priv, "GPC%d/ESETUP: 0x%08x\n", gpc, trap);
 		nv_wr32(priv, GPC_UNIT(gpc, 0x0824), 0xc0000000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(priv, GPC_UNIT(gpc, 0x2c90), 0x00000008);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		stat &= ~0x00000009;
@@ -1055,7 +1112,10 @@ nvc0_graph_trap_gpc(struct nvc0_graph_priv *priv, int gpc)
 	if (stat) {
 		nv_error(priv, "GPC%d/0x%08x: unknown\n", gpc, stat);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(priv, GPC_UNIT(gpc, 0x2c90), stat);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1066,7 +1126,11 @@ nvc0_graph_trap_intr(struct nvc0_graph_priv *priv)
 {
 	u32 trap = nv_rd32(priv, 0x400108);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rop, gpc;
+=======
+	int rop, gpc, i;
+>>>>>>> v3.18
 =======
 	int rop, gpc, i;
 >>>>>>> v3.18
@@ -1120,7 +1184,10 @@ nvc0_graph_trap_intr(struct nvc0_graph_priv *priv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (trap & 0x00000100) {
 		u32 stat = nv_rd32(priv, 0x407020);
 
@@ -1139,6 +1206,9 @@ nvc0_graph_trap_intr(struct nvc0_graph_priv *priv)
 		trap &= ~0x00000100;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (trap & 0x01000000) {
 		u32 stat = nv_rd32(priv, 0x400118);
@@ -1175,10 +1245,13 @@ nvc0_graph_trap_intr(struct nvc0_graph_priv *priv)
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 nvc0_graph_intr(struct nouveau_subdev *subdev)
 {
 	struct nouveau_fifo *pfifo = nouveau_fifo(subdev);
 =======
+=======
+>>>>>>> v3.18
 nvc0_graph_ctxctl_debug_unit(struct nvc0_graph_priv *priv, u32 base)
 {
 	nv_error(priv, "%06x - done 0x%08x\n", base,
@@ -1245,6 +1318,9 @@ static void
 nvc0_graph_intr(struct nouveau_subdev *subdev)
 {
 	struct nouveau_fifo *pfifo = nouveau_fifo(subdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nouveau_engine *engine = nv_engine(subdev);
 	struct nouveau_object *engctx;
@@ -1318,6 +1394,7 @@ nvc0_graph_intr(struct nouveau_subdev *subdev)
 	nouveau_engctx_put(engctx);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int
 nvc0_graph_ctor_fw(struct nvc0_graph_priv *priv, const char *fwname,
@@ -1605,6 +1682,8 @@ nvc0_graph_init_rop(struct nvc0_graph_priv *priv)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void
 nvc0_graph_init_fw(struct nvc0_graph_priv *priv, u32 fuc_base,
 		   struct nvc0_graph_fuc *code, struct nvc0_graph_fuc *data)
@@ -1622,6 +1701,7 @@ nvc0_graph_init_fw(struct nvc0_graph_priv *priv, u32 fuc_base,
 		nv_wr32(priv, fuc_base + 0x0184, code->data[i]);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static int
@@ -1629,6 +1709,8 @@ nvc0_graph_init_ctxctl(struct nvc0_graph_priv *priv)
 {
 	u32 r000260;
 =======
+=======
+>>>>>>> v3.18
 
 	/* code must be padded to 0x40 words */
 	for (; i & 0x3f; i++)
@@ -1681,13 +1763,20 @@ nvc0_graph_init_ctxctl(struct nvc0_graph_priv *priv)
 {
 	struct nvc0_graph_oclass *oclass = (void *)nv_object(priv)->oclass;
 	struct nvc0_grctx_oclass *cclass = (void *)nv_engine(priv)->cclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i;
 
 	if (priv->firmware) {
 		/* load fuc microcode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		r000260 = nv_mask(priv, 0x000260, 0x00000001, 0x00000000);
+=======
+		nouveau_mc(priv)->unk260(nouveau_mc(priv), 0);
+>>>>>>> v3.18
 =======
 		nouveau_mc(priv)->unk260(nouveau_mc(priv), 0);
 >>>>>>> v3.18
@@ -1696,7 +1785,11 @@ nvc0_graph_init_ctxctl(struct nvc0_graph_priv *priv)
 		nvc0_graph_init_fw(priv, 0x41a000, &priv->fuc41ac,
 						   &priv->fuc41ad);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_wr32(priv, 0x000260, r000260);
+=======
+		nouveau_mc(priv)->unk260(nouveau_mc(priv), 1);
+>>>>>>> v3.18
 =======
 		nouveau_mc(priv)->unk260(nouveau_mc(priv), 1);
 >>>>>>> v3.18
@@ -1740,7 +1833,10 @@ nvc0_graph_init_ctxctl(struct nvc0_graph_priv *priv)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (nv_device(priv)->chipset >= 0xe0) {
 			nv_wr32(priv, 0x409800, 0x00000000);
 			nv_wr32(priv, 0x409500, 0x00000001);
@@ -1773,6 +1869,9 @@ nvc0_graph_init_ctxctl(struct nvc0_graph_priv *priv)
 			nv_wr32(priv, 0x40802c, 0x00000001);
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (priv->data == NULL) {
 			int ret = nvc0_grctx_generate(priv);
@@ -1783,6 +1882,7 @@ nvc0_graph_init_ctxctl(struct nvc0_graph_priv *priv)
 		}
 
 		return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 
@@ -1798,6 +1898,8 @@ nvc0_graph_init_ctxctl(struct nvc0_graph_priv *priv)
 			nv_wr32(priv, 0x409188, i >> 6);
 		nv_wr32(priv, 0x409184, nvc0_grhub_code[i]);
 =======
+=======
+>>>>>>> v3.18
 	} else
 	if (!oclass->fecs.ucode) {
 		return -ENOSYS;
@@ -1814,11 +1916,15 @@ nvc0_graph_init_ctxctl(struct nvc0_graph_priv *priv)
 		if ((i & 0x3f) == 0)
 			nv_wr32(priv, 0x409188, i >> 6);
 		nv_wr32(priv, 0x409184, oclass->fecs.ucode->code.data[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* load GPC microcode */
 	nv_wr32(priv, 0x41a1c0, 0x01000000);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < sizeof(nvc0_grgpc_data) / 4; i++)
 		nv_wr32(priv, 0x41a1c4, nvc0_grgpc_data[i]);
@@ -1834,6 +1940,8 @@ nvc0_graph_init_ctxctl(struct nvc0_graph_priv *priv)
 	/* start HUB ucode running, it'll init the GPCs */
 	nv_wr32(priv, 0x409800, nv_device(priv)->chipset);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < oclass->gpccs.ucode->data.size / 4; i++)
 		nv_wr32(priv, 0x41a1c4, oclass->gpccs.ucode->data.data[i]);
 
@@ -1852,6 +1960,9 @@ nvc0_graph_init_ctxctl(struct nvc0_graph_priv *priv)
 	nvc0_graph_init_csdata(priv, cclass->ppc, 0x41a000, 0x008, 0x41be00);
 
 	/* start HUB ucode running, it'll init the GPCs */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nv_wr32(priv, 0x40910c, 0x00000000);
 	nv_wr32(priv, 0x409100, 0x00000002);
@@ -1874,12 +1985,15 @@ nvc0_graph_init_ctxctl(struct nvc0_graph_priv *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 nvc0_graph_init(struct nouveau_object *object)
 {
 	struct nvc0_graph_priv *priv = (void *)object;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 int
 nvc0_graph_init(struct nouveau_object *object)
 {
@@ -1890,12 +2004,16 @@ nvc0_graph_init(struct nouveau_object *object)
 	u8  tpcnr[GPC_MAX];
 	int gpc, tpc, rop;
 	int ret, i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = nouveau_graph_init(&priv->base);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	nvc0_graph_init_obj418880(priv);
 	nvc0_graph_init_regs(priv);
@@ -1911,6 +2029,8 @@ nvc0_graph_init(struct nouveau_object *object)
 	nvc0_graph_init_gpc_1(priv);
 	nvc0_graph_init_rop(priv);
 =======
+=======
+>>>>>>> v3.18
 	nv_wr32(priv, GPC_BCAST(0x0880), 0x00000000);
 	nv_wr32(priv, GPC_BCAST(0x08a4), 0x00000000);
 	nv_wr32(priv, GPC_BCAST(0x0888), 0x00000000);
@@ -1993,6 +2113,9 @@ nvc0_graph_init(struct nouveau_object *object)
 		nv_wr32(priv, ROP_UNIT(rop, 0x204), 0xffffffff);
 		nv_wr32(priv, ROP_UNIT(rop, 0x208), 0xffffffff);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	nv_wr32(priv, 0x400108, 0xffffffff);
@@ -2001,6 +2124,7 @@ nvc0_graph_init(struct nouveau_object *object)
 	nv_wr32(priv, 0x400130, 0xffffffff);
 	nv_wr32(priv, 0x40011c, 0xffffffff);
 	nv_wr32(priv, 0x400134, 0xffffffff);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	nv_wr32(priv, 0x400054, 0x34ce3464);
 
@@ -2016,6 +2140,8 @@ nvc0_graph_oclass = {
 	.handle = NV_ENGINE(GR, 0xc0),
 	.ofuncs = &(struct nouveau_ofuncs) {
 =======
+=======
+>>>>>>> v3.18
 
 	nv_wr32(priv, 0x400054, 0x34ce3464);
 
@@ -2203,6 +2329,9 @@ struct nouveau_oclass *
 nvc0_graph_oclass = &(struct nvc0_graph_oclass) {
 	.base.handle = NV_ENGINE(GR, 0xc0),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ctor = nvc0_graph_ctor,
 		.dtor = nvc0_graph_dtor,
@@ -2210,12 +2339,18 @@ nvc0_graph_oclass = &(struct nvc0_graph_oclass) {
 		.fini = _nouveau_graph_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 	.cclass = &nvc0_grctx_oclass,
 	.sclass =  nvc0_graph_sclass,
 	.mmio = nvc0_graph_pack_mmio,
 	.fecs.ucode = &nvc0_graph_fecs_ucode,
 	.gpccs.ucode = &nvc0_graph_gpccs_ucode,
 }.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

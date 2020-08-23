@@ -97,9 +97,15 @@ static int w1_f2d_readblock(struct w1_slave *sl, int off, int count, char *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f2d_read_bin(struct file *filp, struct kobject *kobj,
 			       struct bin_attribute *bin_attr,
 			       char *buf, loff_t off, size_t count)
+=======
+static ssize_t eeprom_read(struct file *filp, struct kobject *kobj,
+			   struct bin_attribute *bin_attr, char *buf,
+			   loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t eeprom_read(struct file *filp, struct kobject *kobj,
 			   struct bin_attribute *bin_attr, char *buf,
@@ -209,9 +215,15 @@ retry:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f2d_write_bin(struct file *filp, struct kobject *kobj,
 				struct bin_attribute *bin_attr,
 				char *buf, loff_t off, size_t count)
+=======
+static ssize_t eeprom_write(struct file *filp, struct kobject *kobj,
+			    struct bin_attribute *bin_attr, char *buf,
+			    loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t eeprom_write(struct file *filp, struct kobject *kobj,
 			    struct bin_attribute *bin_attr, char *buf,
@@ -277,6 +289,7 @@ out_up:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct bin_attribute w1_f2d_bin_attr = {
 	.attr = {
 		.name = "eeprom",
@@ -301,6 +314,8 @@ static struct w1_family_ops w1_f2d_fops = {
 	.add_slave      = w1_f2d_add_slave,
 	.remove_slave   = w1_f2d_remove_slave,
 =======
+=======
+>>>>>>> v3.18
 static BIN_ATTR_RW(eeprom, W1_F2D_EEPROM_SIZE);
 
 static struct bin_attribute *w1_f2d_bin_attrs[] = {
@@ -319,6 +334,9 @@ static const struct attribute_group *w1_f2d_groups[] = {
 
 static struct w1_family_ops w1_f2d_fops = {
 	.groups		= w1_f2d_groups,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -344,6 +362,10 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Bernhard Weirich <bernhard.weirich@riedel.net>");
 MODULE_DESCRIPTION("w1 family 2d driver for DS2431, 1kb EEPROM");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("w1-family-" __stringify(W1_EEPROM_DS2431));
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("w1-family-" __stringify(W1_EEPROM_DS2431));
 >>>>>>> v3.18

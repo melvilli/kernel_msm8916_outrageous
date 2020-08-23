@@ -25,6 +25,11 @@
 
 #include <mach/dma.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+#include <plat/gpio-cfg.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 #include <plat/gpio-cfg.h>
@@ -34,6 +39,7 @@
 #include "dma.h"
 #include "s3c24xx-i2s.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct s3c2410_dma_client s3c24xx_dma_client_out = {
 	.name = "I2S PCM Stereo out"
@@ -52,14 +58,24 @@ static struct s3c_dma_params s3c24xx_i2s_pcm_stereo_out = {
 	.channel	= DMACH_I2S_OUT,
 	.ch_name	= "tx",
 >>>>>>> v3.18
+=======
+static struct s3c_dma_params s3c24xx_i2s_pcm_stereo_out = {
+	.channel	= DMACH_I2S_OUT,
+	.ch_name	= "tx",
+>>>>>>> v3.18
 	.dma_size	= 2,
 };
 
 static struct s3c_dma_params s3c24xx_i2s_pcm_stereo_in = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.client		= &s3c24xx_dma_client_in,
 	.channel	= DMACH_I2S_IN,
 	.dma_addr	= S3C2410_PA_IIS + S3C2410_IISFIFO,
+=======
+	.channel	= DMACH_I2S_IN,
+	.ch_name	= "rx",
+>>>>>>> v3.18
 =======
 	.channel	= DMACH_I2S_IN,
 	.ch_name	= "rx",
@@ -246,8 +262,12 @@ static int s3c24xx_i2s_hw_params(struct snd_pcm_substream *substream,
 				 struct snd_soc_dai *dai)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct s3c_dma_params *dma_data;
+=======
+	struct snd_dmaengine_dai_dma_data *dma_data;
+>>>>>>> v3.18
 =======
 	struct snd_dmaengine_dai_dma_data *dma_data;
 >>>>>>> v3.18
@@ -255,6 +275,7 @@ static int s3c24xx_i2s_hw_params(struct snd_pcm_substream *substream,
 
 	pr_debug("Entered %s\n", __func__);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK)
 		dma_data = &s3c24xx_i2s_pcm_stereo_out;
@@ -265,11 +286,15 @@ static int s3c24xx_i2s_hw_params(struct snd_pcm_substream *substream,
 =======
 	dma_data = snd_soc_dai_get_dma_data(dai, substream);
 >>>>>>> v3.18
+=======
+	dma_data = snd_soc_dai_get_dma_data(dai, substream);
+>>>>>>> v3.18
 
 	/* Working copies of register */
 	iismod = readl(s3c24xx_i2s.regs + S3C2410_IISMOD);
 	pr_debug("hw_params r: IISMOD: %x\n", iismod);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S8:
@@ -280,6 +305,8 @@ static int s3c24xx_i2s_hw_params(struct snd_pcm_substream *substream,
 		iismod |= S3C2410_IISMOD_16BIT;
 		dma_data->dma_size = 2;
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 8:
 		iismod &= ~S3C2410_IISMOD_16BIT;
@@ -288,6 +315,9 @@ static int s3c24xx_i2s_hw_params(struct snd_pcm_substream *substream,
 	case 16:
 		iismod |= S3C2410_IISMOD_16BIT;
 		dma_data->addr_width = 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -304,8 +334,11 @@ static int s3c24xx_i2s_trigger(struct snd_pcm_substream *substream, int cmd,
 {
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s3c_dma_params *dma_data =
 		snd_soc_dai_get_dma_data(dai, substream);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -327,7 +360,10 @@ static int s3c24xx_i2s_trigger(struct snd_pcm_substream *substream, int cmd,
 			s3c24xx_snd_txctrl(1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s3c2410_dma_ctrl(dma_data->channel, S3C2410_DMAOP_STARTED);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -420,6 +456,7 @@ static int s3c24xx_i2s_probe(struct snd_soc_dai *dai)
 	pr_debug("Entered %s\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_i2s.regs = ioremap(S3C2410_PA_IIS, 0x100);
 	if (s3c24xx_i2s.regs == NULL)
 		return -ENXIO;
@@ -432,6 +469,8 @@ static int s3c24xx_i2s_probe(struct snd_soc_dai *dai)
 	}
 	clk_enable(s3c24xx_i2s.iis_clk);
 =======
+=======
+>>>>>>> v3.18
 	samsung_asoc_init_dma_data(dai, &s3c24xx_i2s_pcm_stereo_out,
 		&s3c24xx_i2s_pcm_stereo_in);
 
@@ -441,6 +480,9 @@ static int s3c24xx_i2s_probe(struct snd_soc_dai *dai)
 		return PTR_ERR(s3c24xx_i2s.iis_clk);
 	}
 	clk_prepare_enable(s3c24xx_i2s.iis_clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Configure the I2S pins (GPE0...GPE4) in correct mode */
@@ -466,7 +508,11 @@ static int s3c24xx_i2s_suspend(struct snd_soc_dai *cpu_dai)
 	s3c24xx_i2s.iispsr = readl(s3c24xx_i2s.regs + S3C2410_IISPSR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(s3c24xx_i2s.iis_clk);
+=======
+	clk_disable_unprepare(s3c24xx_i2s.iis_clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(s3c24xx_i2s.iis_clk);
 >>>>>>> v3.18
@@ -478,7 +524,11 @@ static int s3c24xx_i2s_resume(struct snd_soc_dai *cpu_dai)
 {
 	pr_debug("Entered %s\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(s3c24xx_i2s.iis_clk);
+=======
+	clk_prepare_enable(s3c24xx_i2s.iis_clk);
+>>>>>>> v3.18
 =======
 	clk_prepare_enable(s3c24xx_i2s.iis_clk);
 >>>>>>> v3.18
@@ -534,10 +584,13 @@ static int s3c24xx_iis_dev_probe(struct platform_device *pdev)
 {
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = snd_soc_register_component(&pdev->dev, &s3c24xx_i2s_component,
 					 &s3c24xx_i2s_dai, 1);
 =======
+=======
+>>>>>>> v3.18
 	struct resource *res;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -554,12 +607,16 @@ static int s3c24xx_iis_dev_probe(struct platform_device *pdev)
 
 	ret = devm_snd_soc_register_component(&pdev->dev,
 			&s3c24xx_i2s_component, &s3c24xx_i2s_dai, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		pr_err("failed to register the dai\n");
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = asoc_dma_platform_register(&pdev->dev);
 	if (ret) {
@@ -584,6 +641,8 @@ static struct platform_driver s3c24xx_iis_driver = {
 	.probe  = s3c24xx_iis_dev_probe,
 	.remove = s3c24xx_iis_dev_remove,
 =======
+=======
+>>>>>>> v3.18
 	ret = samsung_asoc_dma_platform_register(&pdev->dev);
 	if (ret)
 		pr_err("failed to register the dma: %d\n", ret);
@@ -593,6 +652,9 @@ static struct platform_driver s3c24xx_iis_driver = {
 
 static struct platform_driver s3c24xx_iis_driver = {
 	.probe  = s3c24xx_iis_dev_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.driver = {
 		.name = "s3c24xx-iis",

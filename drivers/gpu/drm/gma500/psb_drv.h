@@ -28,6 +28,10 @@
 #include "psb_reg.h"
 #include "psb_intel_drv.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gma_display.h"
+>>>>>>> v3.18
 =======
 #include "gma_display.h"
 >>>>>>> v3.18
@@ -37,7 +41,10 @@
 #include "opregion.h"
 #include "oaktrail.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "mmu.h"
 
 #define DRIVER_AUTHOR "Alan Cox <alan@linux.intel.com> and others"
@@ -50,6 +57,9 @@
 #define DRIVER_MAJOR 1
 #define DRIVER_MINOR 0
 #define DRIVER_PATCHLEVEL 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Append new drm mode definition here, align with libdrm definition */
@@ -62,6 +72,7 @@ enum {
 	CHIP_MFLD_0130 = 3,		/* Medfield */
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IS_PSB(dev) (((dev)->pci_device & 0xfffe) == 0x8108)
 #define IS_MRST(dev) (((dev)->pci_device & 0xfffc) == 0x4100)
@@ -83,12 +94,17 @@ enum {
  *	Hardware offsets
  */
 =======
+=======
+>>>>>>> v3.18
 #define IS_PSB(dev) (((dev)->pdev->device & 0xfffe) == 0x8108)
 #define IS_MRST(dev) (((dev)->pdev->device & 0xfff0) == 0x4100)
 #define IS_MFLD(dev) (((dev)->pdev->device & 0xfff8) == 0x0130)
 #define IS_CDV(dev) (((dev)->pdev->device & 0xfff0) == 0x0be0)
 
 /* Hardware offsets */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PSB_VDC_OFFSET		 0x00000000
 #define PSB_VDC_SIZE		 0x000080000
@@ -97,6 +113,7 @@ enum {
 #define PSB_SGX_SIZE		 0x8000
 #define PSB_SGX_OFFSET		 0x00040000
 #define MRST_SGX_OFFSET		 0x00080000
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  *	PCI resource identifiers
@@ -108,6 +125,8 @@ enum {
  *	PCI configuration
  */
 =======
+=======
+>>>>>>> v3.18
 
 /* PCI resource identifiers */
 #define PSB_MMIO_RESOURCE	 0
@@ -116,6 +135,9 @@ enum {
 #define PSB_GTT_RESOURCE	 3
 
 /* PCI configuration */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PSB_GMCH_CTRL		 0x52
 #define PSB_BSM			 0x5C
@@ -124,6 +146,7 @@ enum {
 #define _PSB_PGETBL_ENABLED	 0x00000001
 #define PSB_SGX_2D_SLAVE_PORT	 0x4000
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* To get rid of */
 #define PSB_TT_PRIV0_LIMIT	 (256*1024*1024)
@@ -149,6 +172,8 @@ enum {
  *	Cache control
  */
 =======
+=======
+>>>>>>> v3.18
 /* TODO: To get rid of */
 #define PSB_TT_PRIV0_LIMIT	 (256*1024*1024)
 #define PSB_TT_PRIV0_PLIMIT	 (PSB_TT_PRIV0_LIMIT >> PAGE_SHIFT)
@@ -166,6 +191,9 @@ enum {
 #define PSB_PTE_SHIFT		  12
 
 /* Cache control */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PSB_PTE_VALID		  0x0001	/* PTE / PDE valid */
 #define PSB_PTE_WO		  0x0002	/* Write only */
@@ -173,9 +201,13 @@ enum {
 #define PSB_PTE_CACHED		  0x0008	/* CPU cache coherent */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	VDC registers and bits
  */
+=======
+/* VDC registers and bits */
+>>>>>>> v3.18
 =======
 /* VDC registers and bits */
 >>>>>>> v3.18
@@ -273,8 +305,13 @@ enum {
 
 #define PSB_NUM_VBLANKS 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PSB_WATCHDOG_DELAY (DRM_HZ * 2)
 #define PSB_LID_DELAY (DRM_HZ / 10)
+=======
+#define PSB_WATCHDOG_DELAY (HZ * 2)
+#define PSB_LID_DELAY (HZ / 10)
+>>>>>>> v3.18
 =======
 #define PSB_WATCHDOG_DELAY (HZ * 2)
 #define PSB_LID_DELAY (HZ / 10)
@@ -298,7 +335,11 @@ enum {
 #define MDFLD_DPU_ENABLE 	(1 << 31)
 #define MDFLD_DSR_FULLSCREEN 	(1 << 30)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MDFLD_DSR_DELAY		(DRM_HZ / MDFLD_DSR_RR)
+=======
+#define MDFLD_DSR_DELAY		(HZ / MDFLD_DSR_RR)
+>>>>>>> v3.18
 =======
 #define MDFLD_DSR_DELAY		(HZ / MDFLD_DSR_RR)
 >>>>>>> v3.18
@@ -335,6 +376,10 @@ struct psb_intel_opregion {
 	void *vbt;
 	u32 __iomem *lid_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct work_struct asle_work;
+>>>>>>> v3.18
 =======
 	struct work_struct asle_work;
 >>>>>>> v3.18
@@ -357,10 +402,14 @@ struct intel_gmbus {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	Register offset maps
  */
 
+=======
+/* Register offset maps */
+>>>>>>> v3.18
 =======
 /* Register offset maps */
 >>>>>>> v3.18
@@ -398,9 +447,13 @@ struct psb_offset {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	Common status for pipes.
  */
+=======
+/* Common status for pipes */
+>>>>>>> v3.18
 =======
 /* Common status for pipes */
 >>>>>>> v3.18
@@ -538,6 +591,10 @@ struct psb_ops;
 struct drm_psb_private {
 	struct drm_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct pci_dev *aux_pdev; /* Currently only used by mrst */
+>>>>>>> v3.18
 =======
 	struct pci_dev *aux_pdev; /* Currently only used by mrst */
 >>>>>>> v3.18
@@ -567,6 +624,7 @@ struct drm_psb_private {
 	struct psb_mmu_pd *pf_pd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Register base
 	 */
@@ -580,6 +638,8 @@ struct drm_psb_private {
 	 */
 
 =======
+=======
+>>>>>>> v3.18
 	/* Register base */
 	uint8_t __iomem *sgx_reg;
 	uint8_t __iomem *vdc_reg;
@@ -587,12 +647,16 @@ struct drm_psb_private {
 	uint32_t gatt_free_offset;
 
 	/* Fencing / irq */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint32_t vdc_irq_mask;
 	uint32_t pipestat[PSB_NUM_PIPE];
 
 	spinlock_t irqmask_lock;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Power
@@ -601,14 +665,21 @@ struct drm_psb_private {
 =======
 	/* Power */
 >>>>>>> v3.18
+=======
+	/* Power */
+>>>>>>> v3.18
 	bool suspended;
 	bool display_power;
 	int display_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Modesetting
 	 */
+=======
+	/* Modesetting */
+>>>>>>> v3.18
 =======
 	/* Modesetting */
 >>>>>>> v3.18
@@ -620,6 +691,7 @@ struct drm_psb_private {
 	uint32_t num_pipe;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * OSPM info (Power management base) (can go ?)
 	 */
@@ -630,10 +702,15 @@ struct drm_psb_private {
 	 */
 
 =======
+=======
+>>>>>>> v3.18
 	/* OSPM info (Power management base) (TODO: can go ?) */
 	uint32_t ospm_base;
 
 	/* Sizes info */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 fuse_reg_value;
 	u32 video_device_fuse;
@@ -644,6 +721,10 @@ struct drm_psb_private {
 	/* gmbus */
 	struct intel_gmbus *gmbus;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint8_t __iomem *gmbus_reg;
+>>>>>>> v3.18
 =======
 	uint8_t __iomem *gmbus_reg;
 >>>>>>> v3.18
@@ -658,9 +739,13 @@ struct drm_psb_private {
 	struct drm_property *force_audio_property;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * LVDS info
 	 */
+=======
+	/* LVDS info */
+>>>>>>> v3.18
 =======
 	/* LVDS info */
 >>>>>>> v3.18
@@ -698,10 +783,14 @@ struct drm_psb_private {
 	struct oaktrail_hdmi_dev *hdmi_priv;
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Register state
 	 */
 
+=======
+	/* Register state */
+>>>>>>> v3.18
 =======
 	/* Register state */
 >>>>>>> v3.18
@@ -711,6 +800,7 @@ struct drm_psb_private {
 	uint32_t msi_addr;
 	uint32_t msi_data;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Hotplug handling
@@ -722,10 +812,15 @@ struct drm_psb_private {
 	 * LID-Switch
 	 */
 =======
+=======
+>>>>>>> v3.18
 	/* Hotplug handling */
 	struct work_struct hotplug_work;
 
 	/* LID-Switch */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spinlock_t lid_lock;
 	struct timer_list lid_timer;
@@ -733,10 +828,14 @@ struct drm_psb_private {
 	u32 lid_last_state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Watchdog
 	 */
 
+=======
+	/* Watchdog */
+>>>>>>> v3.18
 =======
 	/* Watchdog */
 >>>>>>> v3.18
@@ -760,9 +859,13 @@ struct drm_psb_private {
 	spinlock_t lock_2d;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Panel brightness
 	 */
+=======
+	/* Panel brightness */
+>>>>>>> v3.18
 =======
 	/* Panel brightness */
 >>>>>>> v3.18
@@ -799,10 +902,14 @@ struct drm_psb_private {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	Operations for each board type
  */
  
+=======
+/* Operations for each board type */
+>>>>>>> v3.18
 =======
 /* Operations for each board type */
 >>>>>>> v3.18
@@ -815,6 +922,10 @@ struct psb_ops {
 	int hdmi_mask;		/* Mask of HDMI CRTCs */
 	int lvds_mask;		/* Mask of LVDS CRTCs */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int sdvo_mask;		/* Mask of SDVO CRTCs */
+>>>>>>> v3.18
 =======
 	int sdvo_mask;		/* Mask of SDVO CRTCs */
 >>>>>>> v3.18
@@ -824,6 +935,10 @@ struct psb_ops {
 	struct drm_crtc_helper_funcs const *crtc_helper;
 	struct drm_crtc_funcs const *crtc_funcs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct gma_clock_funcs *clock_funcs;
+>>>>>>> v3.18
 =======
 	const struct gma_clock_funcs *clock_funcs;
 >>>>>>> v3.18
@@ -845,6 +960,11 @@ struct psb_ops {
 	int (*power_up)(struct drm_device *dev);
 	int (*power_down)(struct drm_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*update_wm)(struct drm_device *dev, struct drm_crtc *crtc);
+	void (*disable_sr)(struct drm_device *dev);
+>>>>>>> v3.18
 =======
 	void (*update_wm)(struct drm_device *dev, struct drm_crtc *crtc);
 	void (*disable_sr)(struct drm_device *dev);
@@ -861,8 +981,11 @@ struct psb_ops {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct psb_mmu_driver;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int drm_crtc_probe_output_modes(struct drm_device *dev, int, int);
@@ -873,6 +996,7 @@ static inline struct drm_psb_private *psb_priv(struct drm_device *dev)
 	return (struct drm_psb_private *) dev->dev_private;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * MMU stuff.
@@ -925,6 +1049,10 @@ extern irqreturn_t psb_irq_handler(DRM_IRQ_ARGS);
 /* psb_irq.c */
 extern irqreturn_t psb_irq_handler(int irq, void *arg);
 >>>>>>> v3.18
+=======
+/* psb_irq.c */
+extern irqreturn_t psb_irq_handler(int irq, void *arg);
+>>>>>>> v3.18
 extern int psb_irq_enable_dpst(struct drm_device *dev);
 extern int psb_irq_disable_dpst(struct drm_device *dev);
 extern void psb_irq_preinstall(struct drm_device *dev);
@@ -947,6 +1075,7 @@ psb_disable_pipestat(struct drm_psb_private *dev_priv, int pipe, u32 mask);
 extern u32 psb_get_vblank_counter(struct drm_device *dev, int crtc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * framebuffer.c
  */
@@ -957,11 +1086,16 @@ extern int psbfb_remove(struct drm_device *dev,
  * accel_2d.c
  */
 =======
+=======
+>>>>>>> v3.18
 /* framebuffer.c */
 extern int psbfb_probed(struct drm_device *dev);
 extern int psbfb_remove(struct drm_device *dev,
 			struct drm_framebuffer *fb);
 /* accel_2d.c */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void psbfb_copyarea(struct fb_info *info,
 					const struct fb_copyarea *region);
@@ -969,10 +1103,14 @@ extern int psbfb_sync(struct fb_info *info);
 extern void psb_spank(struct drm_psb_private *dev_priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * psb_reset.c
  */
 
+=======
+/* psb_reset.c */
+>>>>>>> v3.18
 =======
 /* psb_reset.c */
 >>>>>>> v3.18
@@ -1010,7 +1148,10 @@ extern const struct drm_connector_funcs psb_intel_lvds_connector_funcs;
 
 /* gem.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int psb_gem_init_object(struct drm_gem_object *obj);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void psb_gem_free_object(struct drm_gem_object *obj);
@@ -1019,8 +1160,11 @@ extern int psb_gem_get_aperture(struct drm_device *dev, void *data,
 extern int psb_gem_dumb_create(struct drm_file *file, struct drm_device *dev,
 			struct drm_mode_create_dumb *args);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int psb_gem_dumb_destroy(struct drm_file *file, struct drm_device *dev,
 			uint32_t handle);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int psb_gem_dumb_map_gtt(struct drm_file *file, struct drm_device *dev,
@@ -1044,9 +1188,13 @@ extern const struct psb_ops mdfld_chip_ops;
 extern const struct psb_ops cdv_chip_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Debug print bits setting
  */
+=======
+/* Debug print bits setting */
+>>>>>>> v3.18
 =======
 /* Debug print bits setting */
 >>>>>>> v3.18
@@ -1066,10 +1214,14 @@ extern const struct psb_ops cdv_chip_ops;
 extern int drm_idle_check_interval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	Utilities
  */
 
+=======
+/* Utilities */
+>>>>>>> v3.18
 =======
 /* Utilities */
 >>>>>>> v3.18
@@ -1117,11 +1269,14 @@ static inline uint32_t REGISTER_READ(struct drm_device *dev, uint32_t reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_READ(reg)	       REGISTER_READ(dev, (reg))
 
 static inline void REGISTER_WRITE(struct drm_device *dev, uint32_t reg,
 				      uint32_t val)
 =======
+=======
+>>>>>>> v3.18
 static inline uint32_t REGISTER_READ_AUX(struct drm_device *dev, uint32_t reg)
 {
 	struct drm_psb_private *dev_priv = dev->dev_private;
@@ -1149,6 +1304,9 @@ static inline uint32_t REGISTER_READ_WITH_AUX(struct drm_device *dev,
 
 static inline void REGISTER_WRITE(struct drm_device *dev, uint32_t reg,
 				  uint32_t val)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drm_psb_private *dev_priv = dev->dev_private;
@@ -1156,8 +1314,11 @@ static inline void REGISTER_WRITE(struct drm_device *dev, uint32_t reg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_WRITE(reg, val)	REGISTER_WRITE(dev, (reg), (val))
 =======
+=======
+>>>>>>> v3.18
 static inline void REGISTER_WRITE_AUX(struct drm_device *dev, uint32_t reg,
 				      uint32_t val)
 {
@@ -1178,6 +1339,9 @@ static inline void REGISTER_WRITE_WITH_AUX(struct drm_device *dev, uint32_t reg,
 }
 
 #define REG_WRITE_WITH_AUX(reg, val, aux) REGISTER_WRITE_WITH_AUX(dev, (reg), (val), (aux))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void REGISTER_WRITE16(struct drm_device *dev,

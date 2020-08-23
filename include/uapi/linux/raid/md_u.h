@@ -40,7 +40,10 @@
 #define GET_ARRAY_INFO		_IOR (MD_MAJOR, 0x11, mdu_array_info_t)
 #define GET_DISK_INFO		_IOR (MD_MAJOR, 0x12, mdu_disk_info_t)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PRINT_RAID_DEBUG	_IO (MD_MAJOR, 0x13)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RAID_AUTORUN		_IO (MD_MAJOR, 0x14)

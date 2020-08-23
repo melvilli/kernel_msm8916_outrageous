@@ -18,9 +18,15 @@ extern unsigned long tlb_context_cache;
 extern unsigned long mmu_context_bmap[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void get_new_mmu_context(struct mm_struct *mm);
 #ifdef CONFIG_SMP
 extern void smp_new_mmu_context_version(void);
+=======
+void get_new_mmu_context(struct mm_struct *mm);
+#ifdef CONFIG_SMP
+void smp_new_mmu_context_version(void);
+>>>>>>> v3.18
 =======
 void get_new_mmu_context(struct mm_struct *mm);
 #ifdef CONFIG_SMP
@@ -31,6 +37,7 @@ void smp_new_mmu_context_version(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int init_new_context(struct task_struct *tsk, struct mm_struct *mm);
 extern void destroy_context(struct mm_struct *mm);
 
@@ -39,6 +46,8 @@ extern void __tsb_context_switch(unsigned long pgd_pa,
 				 struct tsb_config *tsb_huge,
 				 unsigned long tsb_descr_pa);
 =======
+=======
+>>>>>>> v3.18
 int init_new_context(struct task_struct *tsk, struct mm_struct *mm);
 void destroy_context(struct mm_struct *mm);
 
@@ -46,6 +55,9 @@ void __tsb_context_switch(unsigned long pgd_pa,
 			  struct tsb_config *tsb_base,
 			  struct tsb_config *tsb_huge,
 			  unsigned long tsb_descr_pa);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void tsb_context_switch(struct mm_struct *mm)
@@ -63,15 +75,21 @@ static inline void tsb_context_switch(struct mm_struct *mm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void tsb_grow(struct mm_struct *mm, unsigned long tsb_index, unsigned long mm_rss);
 #ifdef CONFIG_SMP
 extern void smp_tsb_sync(struct mm_struct *mm);
 =======
+=======
+>>>>>>> v3.18
 void tsb_grow(struct mm_struct *mm,
 	      unsigned long tsb_index,
 	      unsigned long mm_rss);
 #ifdef CONFIG_SMP
 void smp_tsb_sync(struct mm_struct *mm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 #define smp_tsb_sync(__mm) do { } while (0)
@@ -91,7 +109,11 @@ void smp_tsb_sync(struct mm_struct *mm);
 	  "r" (SECONDARY_CONTEXT), "i" (ASI_DMMU), "i" (ASI_MMU))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __flush_tlb_mm(unsigned long, unsigned long);
+=======
+void __flush_tlb_mm(unsigned long, unsigned long);
+>>>>>>> v3.18
 =======
 void __flush_tlb_mm(unsigned long, unsigned long);
 >>>>>>> v3.18

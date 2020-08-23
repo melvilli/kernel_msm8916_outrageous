@@ -34,6 +34,10 @@
 #include <asm/pgtable.h>
 #include <mach/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gpio-iop32x.h"
+>>>>>>> v3.18
 =======
 #include "gpio-iop32x.h"
 >>>>>>> v3.18
@@ -175,6 +179,10 @@ static struct platform_device iq80321_serial_device = {
 static void __init iq80321_init_machine(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	register_iop32x_gpio();
+>>>>>>> v3.18
 =======
 	register_iop32x_gpio();
 >>>>>>> v3.18

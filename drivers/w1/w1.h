@@ -23,7 +23,10 @@
 #define __W1_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct w1_reg_num - broken out slave device id
  *
@@ -31,6 +34,9 @@
  * @id: along with family is the unique device id
  * @crc: checksum of the other bytes
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct w1_reg_num
 {
@@ -69,8 +75,11 @@ struct w1_reg_num
 
 #define W1_SLAVE_ACTIVE		0
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #define W1_SLAVE_DETACH		1
 
 /**
@@ -89,6 +98,9 @@ struct w1_reg_num
  * @dev: kernel device identifier
  *
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct w1_slave
 {
@@ -98,9 +110,14 @@ struct w1_slave
 	struct w1_reg_num	reg_num;
 	atomic_t		refcnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8			rom[9];
 	u32			flags;
 	int			ttl;
+=======
+	int			ttl;
+	unsigned long		flags;
+>>>>>>> v3.18
 =======
 	int			ttl;
 	unsigned long		flags;
@@ -111,7 +128,10 @@ struct w1_slave
 	void			*family_data;
 	struct device		dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct completion	released;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -121,7 +141,10 @@ typedef void (*w1_slave_found_callback)(struct w1_master *, u64);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct w1_bus_master - operations available on a bus master
  *
  * @data: the first parameter in all the functions below
@@ -159,12 +182,16 @@ typedef void (*w1_slave_found_callback)(struct w1_master *, u64);
  * w1_master* is passed to the slave found callback.
  * u8 is search_type, W1_SEARCH or W1_ALARM_SEARCH
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Note: read_bit and write_bit are very low level functions and should only
  * be used with hardware that doesn't really support 1-wire operations,
  * like a parallel/serial port.
  * Either define read_bit and write_bit OR define, at minimum, touch_bit and
  * reset_bus.
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 struct w1_bus_master
@@ -232,6 +259,8 @@ struct w1_bus_master
 	 *  w1_master* is passed to the slave found callback.
 	 */
 =======
+=======
+>>>>>>> v3.18
  *
  */
 struct w1_bus_master
@@ -258,13 +287,19 @@ struct w1_bus_master
 
 	u8		(*set_pullup)(void *, int);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void		(*search)(void *, struct w1_master *,
 		u8, w1_slave_found_callback);
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * enum w1_master_flags - bitfields used in w1_master.flags
  * @W1_ABORT_SEARCH: abort searching early on shutdown
@@ -304,6 +339,9 @@ enum w1_master_flags {
  * @bus_master:		io operations available
  * @seq:		sequence number used for netlink broadcasts
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct w1_master
 {
@@ -311,8 +349,11 @@ struct w1_master
 	struct module		*owner;
 	unsigned char		name[W1_MAXNAMELEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	slist;
 =======
+=======
+>>>>>>> v3.18
 	/* list_mutex protects just slist and async_list so slaves can be
 	 * searched for and async commands added while the master has
 	 * w1_master.mutex locked and is operating on the bus.
@@ -321,6 +362,9 @@ struct w1_master
 	struct mutex		list_mutex;
 	struct list_head	slist;
 	struct list_head	async_list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			max_slave_count, slave_count;
 	unsigned long		attempts;
@@ -329,6 +373,11 @@ struct w1_master
 	u32			id;
 	int			search_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* id to start searching on, to continue a search or 0 to restart */
+	u64			search_id;
+>>>>>>> v3.18
 =======
 	/* id to start searching on, to continue a search or 0 to restart */
 	u64			search_id;
@@ -338,7 +387,10 @@ struct w1_master
 
 	void			*priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			priv_size;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -348,6 +400,11 @@ struct w1_master
 	int			pullup_duration;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	long			flags;
+
+>>>>>>> v3.18
 =======
 	long			flags;
 
@@ -365,7 +422,10 @@ struct w1_master
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct w1_async_cmd - execute callback from the w1_process kthread
  * @async_entry: link entry
@@ -380,17 +440,23 @@ struct w1_async_cmd {
 	void (*cb)(struct w1_master *dev, struct w1_async_cmd *async_cmd);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int w1_create_master_attributes(struct w1_master *);
 void w1_destroy_master_attributes(struct w1_master *master);
 void w1_search(struct w1_master *dev, u8 search_type, w1_slave_found_callback cb);
 void w1_search_devices(struct w1_master *dev, u8 search_type, w1_slave_found_callback cb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct w1_slave *w1_search_slave(struct w1_reg_num *id);
 void w1_slave_found(struct w1_master *dev, u64 rn);
 void w1_search_process_cb(struct w1_master *dev, u8 search_type,
 	w1_slave_found_callback cb);
 =======
+=======
+>>>>>>> v3.18
 /* call w1_unref_slave to release the reference counts w1_search_slave added */
 struct w1_slave *w1_search_slave(struct w1_reg_num *id);
 /* decrements the reference on sl->master and sl, and cleans up if zero
@@ -401,6 +467,9 @@ void w1_search_process_cb(struct w1_master *dev, u8 search_type,
 	w1_slave_found_callback cb);
 struct w1_slave *w1_slave_search_device(struct w1_master *dev,
 	struct w1_reg_num *rn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct w1_master *w1_search_master_id(u32 id);
 
@@ -411,7 +480,13 @@ struct w1_master *w1_search_master_id(u32 id);
  */
 void w1_reconnect_slaves(struct w1_family *f, int attach);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void w1_slave_detach(struct w1_slave *sl);
+=======
+int w1_attach_slave_device(struct w1_master *dev, struct w1_reg_num *rn);
+/* 0 success, otherwise EBUSY */
+int w1_slave_detach(struct w1_slave *sl);
+>>>>>>> v3.18
 =======
 int w1_attach_slave_device(struct w1_master *dev, struct w1_reg_num *rn);
 /* 0 success, otherwise EBUSY */
@@ -453,6 +528,10 @@ extern struct list_head w1_masters;
 extern struct mutex w1_mlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int w1_process_callbacks(struct w1_master *dev);
+>>>>>>> v3.18
 =======
 extern int w1_process_callbacks(struct w1_master *dev);
 >>>>>>> v3.18

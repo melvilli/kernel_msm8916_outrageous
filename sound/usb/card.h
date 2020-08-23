@@ -3,17 +3,23 @@
 
 #define MAX_NR_RATES	1024
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_PACKS	20
 #define MAX_PACKS_HS	(MAX_PACKS * 8)	/* in high speed mode */
 #define MAX_URBS	8
 #define SYNC_URBS	4	/* always four urbs for sync */
 #define MAX_QUEUE	24	/* try not to exceed this queue length, in ms */
 =======
+=======
+>>>>>>> v3.18
 #define MAX_PACKS	6		/* per URB */
 #define MAX_PACKS_HS	(MAX_PACKS * 8)	/* in high speed mode */
 #define MAX_URBS	12
 #define SYNC_URBS	4	/* always four urbs for sync */
 #define MAX_QUEUE	18	/* try not to exceed this queue length, in ms */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct audioformat {
@@ -30,6 +36,10 @@ struct audioformat {
 	unsigned char ep_attr;		/* endpoint attributes */
 	unsigned char datainterval;	/* log_2 of data packet interval */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned char protocol;		/* UAC_VERSION_1/2 */
+>>>>>>> v3.18
 =======
 	unsigned char protocol;		/* UAC_VERSION_1/2 */
 >>>>>>> v3.18
@@ -99,6 +109,10 @@ struct snd_usb_endpoint {
 	unsigned int maxpacksize;	/* max packet size in bytes */
 	unsigned int maxframesize;      /* max packet size in frames */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int max_urb_frames;	/* max URB size in frames */
+>>>>>>> v3.18
 =======
 	unsigned int max_urb_frames;	/* max URB size in frames */
 >>>>>>> v3.18
@@ -112,7 +126,11 @@ struct snd_usb_endpoint {
 	unsigned char silence_value;
 	unsigned int stride;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int iface, alt_idx;
+=======
+	int iface, altsetting;
+>>>>>>> v3.18
 =======
 	int iface, altsetting;
 >>>>>>> v3.18
@@ -137,6 +155,11 @@ struct snd_usb_substream {
 	unsigned int cur_rate;		/* current rate (for hw_params callback) */
 	unsigned int period_bytes;	/* current period bytes (for hw_params callback) */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int period_frames;	/* current frames per period */
+	unsigned int buffer_periods;	/* current periods per buffer */
+>>>>>>> v3.18
 =======
 	unsigned int period_frames;	/* current frames per period */
 	unsigned int buffer_periods;	/* current periods per buffer */
@@ -151,6 +174,10 @@ struct snd_usb_substream {
 	unsigned int hwptr_done;	/* processed byte position in the buffer */
 	unsigned int transfer_done;		/* processed frames since last period update */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int frame_limit;	/* limits number of packets in URB */
+>>>>>>> v3.18
 =======
 	unsigned int frame_limit;	/* limits number of packets in URB */
 >>>>>>> v3.18

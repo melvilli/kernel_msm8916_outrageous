@@ -41,6 +41,7 @@
 #include <linux/proc_fs.h>
 #include <linux/memblock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_address.h>
 #include <linux/of_fdt.h>
 #include <linux/of_platform.h>
@@ -50,12 +51,17 @@
 
 #include <asm/fixmap.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_fdt.h>
 #include <linux/of_platform.h>
 #include <linux/efi.h>
 
 #include <asm/fixmap.h>
 #include <asm/cpu.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/cputype.h>
 #include <asm/elf.h>
@@ -78,6 +84,7 @@ unsigned long elf_hwcap __read_mostly;
 EXPORT_SYMBOL_GPL(elf_hwcap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int boot_reason;
 EXPORT_SYMBOL(boot_reason);
 
@@ -87,6 +94,8 @@ EXPORT_SYMBOL(cold_boot);
 char* (*arch_read_hardware_id)(void);
 EXPORT_SYMBOL(arch_read_hardware_id);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_COMPAT
@@ -138,6 +147,7 @@ void __init early_print(const char *str, ...)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cpuinfo_arm64 {
 	struct cpu	cpu;
 	u32		reg_midr;
@@ -151,6 +161,8 @@ void cpuinfo_store_cpu(void)
 	info->reg_midr = read_cpuid_id();
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init smp_setup_processor_id(void)
@@ -260,6 +272,11 @@ static void __init setup_processor(void)
 	elf_hwcap = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpuinfo_store_boot_cpu();
+
+>>>>>>> v3.18
 =======
 	cpuinfo_store_boot_cpu();
 
@@ -343,8 +360,11 @@ static void __init setup_processor(void)
 static void __init setup_machine_fdt(phys_addr_t dt_phys)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpuinfo_store_cpu();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!dt_phys || !early_init_dt_scan(phys_to_virt(dt_phys))) {
@@ -360,8 +380,11 @@ static void __init setup_machine_fdt(phys_addr_t dt_phys)
 
 	machine_name = of_flat_dt_get_machine_name();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (machine_name)
 		pr_info("Machine: %s\n", machine_name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -416,6 +439,7 @@ static void __init request_standard_resources(void)
 u64 __cpu_logical_map[NR_CPUS] = { [0 ... NR_CPUS-1] = INVALID_HWID };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init __weak init_random_pool(void) { }
 
 void __init setup_arch(char **cmdline_p)
@@ -425,6 +449,10 @@ void __init setup_arch(char **cmdline_p)
 	 */
 	local_async_enable();
 
+=======
+void __init setup_arch(char **cmdline_p)
+{
+>>>>>>> v3.18
 =======
 void __init setup_arch(char **cmdline_p)
 {
@@ -441,7 +469,10 @@ void __init setup_arch(char **cmdline_p)
 	*cmdline_p = boot_command_line;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_mem_pgprot();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	early_ioremap_init();
@@ -449,13 +480,19 @@ void __init setup_arch(char **cmdline_p)
 	parse_early_param();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 *  Unmask asynchronous aborts after bringing up possible earlycon.
 	 * (Report possible System Errors once we can report this occurred)
 	 */
 	local_async_enable();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	efi_init();
 	arm64_memblock_init();
@@ -484,7 +521,10 @@ void __init setup_arch(char **cmdline_p)
 #endif
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_random_pool();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -495,7 +535,11 @@ static int __init arm64_device_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 arch_initcall(arm64_device_init);
+=======
+arch_initcall_sync(arm64_device_init);
+>>>>>>> v3.18
 =======
 arch_initcall_sync(arm64_device_init);
 >>>>>>> v3.18
@@ -526,6 +570,7 @@ static const char *hwcap_str[] = {
 	NULL
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_COMPAT
 static const char *compat_hwcap_str[] = {
@@ -564,6 +609,8 @@ static int c_show(struct seq_file *m, void *v)
 		u32 midr = cpuinfo->reg_midr;
 
 =======
+=======
+>>>>>>> v3.18
 static int c_show(struct seq_file *m, void *v)
 {
 	int i;
@@ -572,6 +619,9 @@ static int c_show(struct seq_file *m, void *v)
 		   cpu_name, read_cpuid_id() & 15, ELF_PLATFORM);
 
 	for_each_online_cpu(i) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * glibc reads /proc/cpuinfo to determine the number of
@@ -581,6 +631,7 @@ static int c_show(struct seq_file *m, void *v)
 #ifdef CONFIG_SMP
 		seq_printf(m, "processor\t: %d\n", i);
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		/*
@@ -617,6 +668,8 @@ static int c_show(struct seq_file *m, void *v)
 	}
 #endif
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	/* dump out the processor features */
@@ -635,6 +688,9 @@ static int c_show(struct seq_file *m, void *v)
 	seq_puts(m, "\n");
 
 	seq_printf(m, "Hardware\t: %s\n", machine_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -661,6 +717,7 @@ const struct seq_operations cpuinfo_op = {
 	.stop	= c_stop,
 	.show	= c_show
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void arch_setup_pdev_archdata(struct platform_device *pdev)
@@ -693,5 +750,7 @@ static int __init msm8994_check_tlbi_workaround(void)
 	return 0;
 }
 arch_initcall_sync(msm8994_check_tlbi_workaround);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

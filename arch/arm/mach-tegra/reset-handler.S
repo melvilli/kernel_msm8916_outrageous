@@ -15,6 +15,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/linkage.h>
 #include <linux/init.h>
 
@@ -22,6 +23,8 @@
 #include <asm/asm-offsets.h>
 #include <asm/hardware/cache-l2x0.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/linkage.h>
 
@@ -29,6 +32,9 @@
 
 #include <asm/asm-offsets.h>
 #include <asm/cache.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "flowctrl.h"
@@ -37,7 +43,10 @@
 #include "sleep.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define APB_MISC_GP_HIDREV	0x804
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PMC_SCRATCH41	0x140
@@ -52,10 +61,13 @@
  *	  an LP2 transition. Also branched to by LP0 and LP1 resume after
  *	  re-enabling sdram.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 ENTRY(tegra_resume)
 	bl	v7_invalidate_l1
 =======
+=======
+>>>>>>> v3.18
  *
  *	r6: SoC ID
  *	r8: CPU part number
@@ -63,6 +75,9 @@ ENTRY(tegra_resume)
 ENTRY(tegra_resume)
 	check_cpu_part_num 0xc09, r8, r9
 	bleq	v7_invalidate_l1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cpu_id	r0
@@ -70,6 +85,7 @@ ENTRY(tegra_resume)
  THUMB(	it	ne )
 	bne	cpu_resume			@ no
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_ARCH_TEGRA_3x_SOC
 	/* Are we on Tegra20? */
@@ -91,6 +107,8 @@ ENTRY(tegra_resume)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	/* Are we on Tegra20? */
 	cmp	r6, #TEGRA20
 	beq	1f				@ Yes
@@ -110,6 +128,9 @@ ENTRY(tegra_resume)
 	mov32	r9, 0xc09
 	cmp	r8, r9
 	bne	end_ca9_scu_l2_resume
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_HAVE_ARM_SCU
 	/* enable SCU */
@@ -120,9 +141,12 @@ ENTRY(tegra_resume)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* L2 cache resume & re-enable */
 	l2_cache_resume r0, r1, r2, l2x0_saved_regs_addr
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CACHE_L2X0
 	/* L2 cache resume & re-enable */
 	bl	l2c310_early_resume
@@ -131,6 +155,9 @@ end_ca9_scu_l2_resume:
 	mov32	r9, 0xc0f
 	cmp	r8, r9
 	bleq	tegra_init_l2_for_a15
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	b	cpu_resume
@@ -138,12 +165,15 @@ ENDPROC(tegra_resume)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CACHE_L2X0
 	.globl	l2x0_saved_regs_addr
 l2x0_saved_regs_addr:
 	.long	0
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.align L1_CACHE_SHIFT
@@ -158,7 +188,11 @@ ENTRY(__tegra_cpu_reset_handler_start)
  *
  *      Others: scratch
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      R6  = SoC ID << 8
+=======
+ *      R6  = SoC ID
+>>>>>>> v3.18
 =======
  *      R6  = SoC ID
 >>>>>>> v3.18
@@ -179,6 +213,7 @@ ENTRY(__tegra_cpu_reset_handler)
 	cpsid	aif, 0x13			@ SVC mode, interrupts disabled
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov32	r6, TEGRA_APB_MISC_BASE
 	ldr	r6, [r6, #APB_MISC_GP_HIDREV]
 	and	r6, r6, #0xff00
@@ -186,10 +221,15 @@ ENTRY(__tegra_cpu_reset_handler)
 t20_check:
 	cmp	r6, #(0x20 << 8)
 =======
+=======
+>>>>>>> v3.18
 	tegra_get_soc_id TEGRA_APB_MISC_BASE, r6
 #ifdef CONFIG_ARCH_TEGRA_2x_SOC
 t20_check:
 	cmp	r6, #TEGRA20
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bne	after_t20_check
 t20_errata:
@@ -207,7 +247,11 @@ after_t20_check:
 #ifdef CONFIG_ARCH_TEGRA_3x_SOC
 t30_check:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmp	r6, #(0x30 << 8)
+=======
+	cmp	r6, #TEGRA30
+>>>>>>> v3.18
 =======
 	cmp	r6, #TEGRA30
 >>>>>>> v3.18
@@ -238,7 +282,11 @@ after_errata:
 #ifdef CONFIG_ARCH_TEGRA_2x_SOC
 	/* Are we on Tegra20? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmp	r6, #(0x20 << 8)
+=======
+	cmp	r6, #TEGRA20
+>>>>>>> v3.18
 =======
 	cmp	r6, #TEGRA20
 >>>>>>> v3.18
@@ -252,7 +300,10 @@ after_errata:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Waking up from LP1? */
 	ldr	r8, [r12, #RESET_DATA(MASK_LP1)]
 	tst	r8, r11				@ if in_lp1
@@ -266,6 +317,9 @@ after_errata:
 	bx	lr
 __is_not_lp1:
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Waking up from LP2? */
 	ldr	r9, [r12, #RESET_DATA(MASK_LP2)]
@@ -281,12 +335,15 @@ __is_not_lp2:
 #ifdef CONFIG_SMP
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Can only be secondary boot (initial or hotplug) but CPU 0
 	 * cannot be here.
 	 */
 	cmp	r10, #0
 	bleq	__die				@ CPU0 cannot be here
 =======
+=======
+>>>>>>> v3.18
 	 * Can only be secondary boot (initial or hotplug)
 	 * CPU0 can't be here for Tegra20/30
 	 */
@@ -295,6 +352,9 @@ __is_not_lp2:
 	cmp	r10, #0
 	bleq	__die				@ CPU0 cannot be here
 __no_cpu0_chk:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ldr	lr, [r12, #RESET_DATA(STARTUP_SECONDARY)]
 	cmp	lr, #0
@@ -316,10 +376,14 @@ __die:
 
 	/* Are we on Tegra20? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov32	r6, TEGRA_APB_MISC_BASE
 	ldr	r0, [r6, #APB_MISC_GP_HIDREV]
 	and	r0, r0, #0xff00
 	cmp	r0, #(0x20 << 8)
+=======
+	cmp	r6, #TEGRA20
+>>>>>>> v3.18
 =======
 	cmp	r6, #TEGRA20
 >>>>>>> v3.18

@@ -36,6 +36,7 @@
 
 #include "device.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "tmacro.h"
 
 #define REV_ID_VT3253_A0    0x00
@@ -419,6 +420,8 @@ void MACvEnableBarkerPreambleMd(struct vnt_private *);
 void MACvDisableBarkerPreambleMd(struct vnt_private *);
 void MACvWriteBeaconInterval(struct vnt_private *, u16);
 =======
+=======
+>>>>>>> v3.18
 
 #define REV_ID_VT3253_A0	0x00
 #define REV_ID_VT3253_A1	0x01
@@ -767,6 +770,9 @@ void vnt_mac_enable_barker_preamble_mode(struct vnt_private *);
 void vnt_mac_disable_barker_preamble_mode(struct vnt_private *);
 void vnt_mac_set_beacon_interval(struct vnt_private *, u16);
 void vnt_mac_set_led(struct vnt_private *priv, u8, u8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __MAC_H__ */

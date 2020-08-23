@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: SDIO specific definitions
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -37,6 +41,11 @@
 #define SD8787_DEFAULT_FW_NAME "mrvl/sd8787_uapsta.bin"
 #define SD8797_DEFAULT_FW_NAME "mrvl/sd8797_uapsta.bin"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SD8897_DEFAULT_FW_NAME "mrvl/sd8897_uapsta.bin"
+#define SD8887_DEFAULT_FW_NAME "mrvl/sd8887_uapsta.bin"
+>>>>>>> v3.18
 =======
 #define SD8897_DEFAULT_FW_NAME "mrvl/sd8897_uapsta.bin"
 #define SD8887_DEFAULT_FW_NAME "mrvl/sd8887_uapsta.bin"
@@ -47,6 +56,7 @@
 
 #define REG_PORT			0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RD_BITMAP_L			0x04
 #define RD_BITMAP_U			0x05
 #define WR_BITMAP_L			0x06
@@ -55,11 +65,14 @@
 #define RD_LEN_P0_U			0x09
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 #define MWIFIEX_SDIO_IO_PORT_MASK		0xfffff
 
 #define MWIFIEX_SDIO_BYTE_MODE_MASK	0x80000000
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define CTRL_PORT			0
 #define CTRL_PORT_MASK			0x0001
@@ -75,6 +88,8 @@
 /* Multi port RX aggregation buffer size */
 #define SDIO_MP_RX_AGGR_DEF_BUF_SIZE        (16384)	/* 16K */
 =======
+=======
+>>>>>>> v3.18
 #define SDIO_MPA_ADDR_BASE		0x1000
 #define CTRL_PORT			0
 #define CTRL_PORT_MASK			0x0001
@@ -94,11 +109,15 @@
 
 #define MWIFIEX_MP_AGGR_BUF_SIZE_16K	(16384)
 #define MWIFIEX_MP_AGGR_BUF_SIZE_32K	(32768)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Misc. Config Register : Auto Re-enable interrupts */
 #define AUTO_RE_ENABLE_INT              BIT(4)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Host Control Registers */
 /* Host Control Registers : I/O port 0 */
@@ -122,16 +141,22 @@
 /* Host Control Registers : Host interrupt mask */
 #define HOST_INT_MASK_REG		0x02
 =======
+=======
+>>>>>>> v3.18
 /* Host Control Registers : Configuration */
 #define CONFIGURATION_REG		0x00
 /* Host Control Registers : Host power up */
 #define HOST_POWER_UP			(0x1U << 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Host Control Registers : Upload host interrupt mask */
 #define UP_LD_HOST_INT_MASK		(0x1U)
 /* Host Control Registers : Download host interrupt mask */
 #define DN_LD_HOST_INT_MASK		(0x2U)
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Enable Host interrupt mask */
 #define HOST_INT_ENABLE	(UP_LD_HOST_INT_MASK | DN_LD_HOST_INT_MASK)
@@ -143,11 +168,15 @@
 =======
 
 >>>>>>> v3.18
+=======
+
+>>>>>>> v3.18
 /* Host Control Registers : Upload host interrupt status */
 #define UP_LD_HOST_INT_STATUS		(0x1U)
 /* Host Control Registers : Download host interrupt status */
 #define DN_LD_HOST_INT_STATUS		(0x2U)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Host Control Registers : Host interrupt RSR */
 #define HOST_INT_RSR_REG		0x01
@@ -220,6 +249,8 @@
 #define CARD_RX_UNIT_REG		0x63
 
 =======
+=======
+>>>>>>> v3.18
 /* Host Control Registers : Host interrupt status */
 #define CARD_INT_STATUS_REG		0x28
 
@@ -228,6 +259,9 @@
 /* Card Control Registers : Download card ready */
 #define DN_LD_CARD_RDY                  (0x1U << 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Max retry number of CMD53 write */
 #define MAX_WRITE_IOMEM_RETRY		2
@@ -250,7 +284,12 @@
 		a->mpa_tx.ports |= (1<<(a->mpa_tx.pkt_cnt));		\
 	else								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		a->mpa_tx.ports |= (1<<(a->mpa_tx.pkt_cnt+1+(MAX_PORT -	\
+=======
+		a->mpa_tx.ports |= (1<<(a->mpa_tx.pkt_cnt+1+		\
+						(a->max_ports -	\
+>>>>>>> v3.18
 =======
 		a->mpa_tx.ports |= (1<<(a->mpa_tx.pkt_cnt+1+		\
 						(a->max_ports -	\
@@ -264,12 +303,15 @@
 			(a->mpa_tx.pkt_cnt == a->mpa_tx.pkt_aggr_limit)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* SDIO Tx aggregation port limit ? */
 #define MP_TX_AGGR_PORT_LIMIT_REACHED(a) ((a->curr_wr_port <		\
 			a->mpa_tx.start_port) && (((MAX_PORT -		\
 			a->mpa_tx.start_port) + a->curr_wr_port) >=	\
 				SDIO_MP_AGGR_DEF_PKT_LIMIT))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Reset SDIO Tx aggregation buffer parameters */
@@ -285,12 +327,15 @@
 			(a->mpa_rx.pkt_cnt == a->mpa_rx.pkt_aggr_limit)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* SDIO Tx aggregation port limit ? */
 #define MP_RX_AGGR_PORT_LIMIT_REACHED(a) ((a->curr_rd_port <		\
 			a->mpa_rx.start_port) && (((MAX_PORT -		\
 			a->mpa_rx.start_port) + a->curr_rd_port) >=	\
 			SDIO_MP_AGGR_DEF_PKT_LIMIT))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* SDIO Rx aggregation in progress ? */
@@ -300,6 +345,7 @@
 #define MP_RX_AGGR_BUF_HAS_ROOM(a, rx_len)				\
 			((a->mpa_rx.buf_len+rx_len) <= a->mpa_rx.buf_size)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Prepare to copy current packet from card to SDIO Rx aggregation buffer */
 #define MP_RX_AGGR_SETUP(a, skb, port) do {				\
@@ -317,6 +363,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Reset SDIO Rx aggregation buffer parameters */
 #define MP_RX_AGGR_BUF_RESET(a) do {					\
 	a->mpa_rx.pkt_cnt = 0;						\
@@ -326,7 +374,10 @@
 } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* data structure for SDIO MPA TX */
@@ -336,7 +387,11 @@ struct mwifiex_sdio_mpa_tx {
 	u32 buf_len;
 	u32 pkt_cnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 ports;
+=======
+	u32 ports;
+>>>>>>> v3.18
 =======
 	u32 ports;
 >>>>>>> v3.18
@@ -351,17 +406,23 @@ struct mwifiex_sdio_mpa_rx {
 	u32 buf_len;
 	u32 pkt_cnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 ports;
 	u16 start_port;
 
 	struct sk_buff *skb_arr[SDIO_MP_AGGR_DEF_PKT_LIMIT];
 	u32 len_arr[SDIO_MP_AGGR_DEF_PKT_LIMIT];
 =======
+=======
+>>>>>>> v3.18
 	u32 ports;
 	u16 start_port;
 
 	struct sk_buff **skb_arr;
 	u32 *len_arr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	u8 enabled;
@@ -373,7 +434,10 @@ int mwifiex_bus_register(void);
 void mwifiex_bus_unregister(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct mwifiex_sdio_card_reg {
 	u8 start_rd_port;
 	u8 start_wr_port;
@@ -417,11 +481,15 @@ struct mwifiex_sdio_card_reg {
 	u8 fw_dump_end;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct sdio_mmc_card {
 	struct sdio_func *func;
 	struct mwifiex_adapter *adapter;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u16 mp_rd_bitmap;
 	u16 mp_wr_bitmap;
@@ -429,6 +497,8 @@ struct sdio_mmc_card {
 	u16 mp_end_port;
 	u16 mp_data_port_mask;
 =======
+=======
+>>>>>>> v3.18
 	const char *firmware;
 	const struct mwifiex_sdio_card_reg *reg;
 	u8 max_ports;
@@ -445,6 +515,9 @@ struct sdio_mmc_card {
 
 	u16 mp_end_port;
 	u32 mp_data_port_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	u8 curr_rd_port;
@@ -457,7 +530,10 @@ struct sdio_mmc_card {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct mwifiex_sdio_device {
 	const char *firmware;
 	const struct mwifiex_sdio_card_reg *reg;
@@ -648,6 +724,9 @@ static const struct mwifiex_sdio_device mwifiex_sdio_sd8887 = {
 	.supports_fw_dump = false,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * .cmdrsp_complete handler
@@ -670,7 +749,10 @@ static inline int mwifiex_sdio_event_complete(struct mwifiex_adapter *adapter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool
 mp_rx_aggr_port_limit_reached(struct sdio_mmc_card *card)
 {
@@ -744,5 +826,8 @@ static inline void mp_rx_aggr_setup(struct sdio_mmc_card *card,
 	card->mpa_rx.len_arr[card->mpa_rx.pkt_cnt] = skb->len;
 	card->mpa_rx.pkt_cnt++;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _MWIFIEX_SDIO_H */

@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_AVR32_MSGBUF_H
 #define __ASM_AVR32_MSGBUF_H
+=======
+#ifndef _UAPI__ASM_AVR32_MSGBUF_H
+#define _UAPI__ASM_AVR32_MSGBUF_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI__ASM_AVR32_MSGBUF_H
 #define _UAPI__ASM_AVR32_MSGBUF_H
@@ -34,7 +39,11 @@ struct msqid64_ds {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_AVR32_MSGBUF_H */
+=======
+#endif /* _UAPI__ASM_AVR32_MSGBUF_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI__ASM_AVR32_MSGBUF_H */
 >>>>>>> v3.18

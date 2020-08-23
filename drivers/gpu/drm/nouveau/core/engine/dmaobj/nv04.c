@@ -24,7 +24,11 @@
 
 #include <core/gpuobj.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+#include <nvif/class.h>
+>>>>>>> v3.18
 =======
 #include <nvif/class.h>
 >>>>>>> v3.18
@@ -32,6 +36,7 @@
 #include <subdev/fb.h>
 #include <subdev/vm/nv04.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <engine/dmaobj.h>
 
@@ -53,6 +58,8 @@ nv04_dmaobj_bind(struct nouveau_dmaeng *dmaeng,
 	u64 adjust = dmaobj->start & 0x00000fff;
 	u32 length = dmaobj->limit - dmaobj->start;
 =======
+=======
+>>>>>>> v3.18
 #include "priv.h"
 
 struct nv04_dmaobj_priv {
@@ -72,21 +79,30 @@ nv04_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 	u64 offset = priv->base.start & 0xfffff000;
 	u64 adjust = priv->base.start & 0x00000fff;
 	u32 length = priv->base.limit - priv->base.start;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
 	if (!nv_iclass(parent, NV_ENGCTX_CLASS)) {
 		switch (nv_mclass(parent->parent)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case NV03_CHANNEL_DMA_CLASS:
 		case NV10_CHANNEL_DMA_CLASS:
 		case NV17_CHANNEL_DMA_CLASS:
 		case NV40_CHANNEL_DMA_CLASS:
 =======
+=======
+>>>>>>> v3.18
 		case NV03_CHANNEL_DMA:
 		case NV10_CHANNEL_DMA:
 		case NV17_CHANNEL_DMA:
 		case NV40_CHANNEL_DMA:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		default:
@@ -94,6 +110,7 @@ nv04_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dmaobj->target == NV_MEM_TARGET_VM) {
 		if (nv_object(vmm)->oclass == &nv04_vmmgr_oclass) {
@@ -118,6 +135,8 @@ nv04_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 	case NV_MEM_TARGET_PCI_NOSNOOP:
 		flags0 |= 0x00033000;
 =======
+=======
+>>>>>>> v3.18
 	if (priv->clone) {
 		struct nv04_vmmgr_priv *vmm = nv04_vmmgr(dmaobj);
 		struct nouveau_gpuobj *pgt = vmm->vm->pgt[0].obj[0];
@@ -171,12 +190,16 @@ nv04_dmaobj_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		break;
 	case NV_MEM_TARGET_PCI_NOSNOOP:
 		priv->flags0 |= 0x00033000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (dmaobj->access) {
 	case NV_MEM_ACCESS_RO:
@@ -187,6 +210,8 @@ nv04_dmaobj_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	case NV_MEM_ACCESS_RW:
 		flags2 |= 0x00000002;
 =======
+=======
+>>>>>>> v3.18
 	switch (priv->base.access) {
 	case NV_MEM_ACCESS_RO:
 		priv->flags0 |= 0x00004000;
@@ -195,12 +220,16 @@ nv04_dmaobj_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		priv->flags0 |= 0x00008000;
 	case NV_MEM_ACCESS_RW:
 		priv->flags2 |= 0x00000002;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = nouveau_gpuobj_new(parent, parent, 16, 16, 0, &gpuobj);
 	*pgpuobj = gpuobj;
@@ -243,6 +272,8 @@ nv04_dmaeng_oclass = {
 	},
 };
 =======
+=======
+>>>>>>> v3.18
 	return dmaeng->bind(&priv->base, nv_object(priv), (void *)pobject);
 }
 
@@ -274,4 +305,7 @@ nv04_dmaeng_oclass = &(struct nvkm_dmaeng_impl) {
 	.sclass = nv04_dmaeng_sclass,
 	.bind = nv04_dmaobj_bind,
 }.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

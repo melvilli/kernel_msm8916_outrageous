@@ -384,7 +384,11 @@ static long dsp56k_ioctl(struct file *file, unsigned int cmd,
 		}
 		case DSP56K_HOST_CMD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (arg > 31 || arg < 0)
+=======
+			if (arg > 31)
+>>>>>>> v3.18
 =======
 			if (arg > 31)
 >>>>>>> v3.18

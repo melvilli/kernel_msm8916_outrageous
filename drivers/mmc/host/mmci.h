@@ -14,7 +14,10 @@
 #define MCI_OD			(1 << 6)
 #define MCI_ROD			(1 << 7)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * The ST Micro version does not have ROD and reuse the voltage registers for
  * direction settings.
@@ -25,6 +28,9 @@
 #define MCI_ST_DATA31DIREN	(1 << 5)
 #define MCI_ST_FBCLKEN		(1 << 7)
 #define MCI_ST_DATA74DIREN	(1 << 8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MMCICLOCK		0x004
@@ -45,7 +51,10 @@
 #define MCI_ARM_HWFCEN		(1 << 12)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Modified on Qualcomm Integrations */
 #define MCI_QCOM_CLK_WIDEBUS_8	(BIT(10) | BIT(11))
 #define MCI_QCOM_CLK_FLOWENA	BIT(12)
@@ -55,6 +64,9 @@
 #define MCI_QCOM_CLK_SELECT_IN_FBCLK	BIT(15)
 #define MCI_QCOM_CLK_SELECT_IN_DDR_MODE	(BIT(14) | BIT(15))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MMCIARGUMENT		0x008
 #define MMCICOMMAND		0x00c
@@ -64,11 +76,14 @@
 #define MCI_CPSM_PENDING	(1 << 9)
 #define MCI_CPSM_ENABLE		(1 << 10)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MCI_SDIO_SUSP		(1 << 11)
 #define MCI_ENCMD_COMPL		(1 << 12)
 #define MCI_NIEN		(1 << 13)
 #define MCI_CE_ATACMD		(1 << 14)
 =======
+=======
+>>>>>>> v3.18
 /* Argument flag extenstions in the ST Micro versions */
 #define MCI_ST_SDIO_SUSP	(1 << 11)
 #define MCI_ST_ENCMD_COMPL	(1 << 12)
@@ -82,6 +97,9 @@
 #define MCI_QCOM_CSPM_CCSDISABLE	BIT(15)
 #define MCI_QCOM_CSPM_AUTO_CMD19	BIT(16)
 #define MCI_QCOM_CSPM_AUTO_CMD21	BIT(21)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MMCIRESPCMD		0x010
@@ -136,6 +154,10 @@
 #define MCI_ST_SDIOIT		(1 << 22)
 #define MCI_ST_CEATAEND		(1 << 23)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MCI_ST_CARDBUSY		(1 << 24)
+>>>>>>> v3.18
 =======
 #define MCI_ST_CARDBUSY		(1 << 24)
 >>>>>>> v3.18
@@ -156,6 +178,10 @@
 #define MCI_ST_SDIOITC		(1 << 22)
 #define MCI_ST_CEATAENDC	(1 << 23)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MCI_ST_BUSYENDC		(1 << 24)
+>>>>>>> v3.18
 =======
 #define MCI_ST_BUSYENDC		(1 << 24)
 >>>>>>> v3.18
@@ -187,6 +213,10 @@
 #define MCI_ST_SDIOITMASK	(1 << 22)
 #define MCI_ST_CEATAENDMASK	(1 << 23)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MCI_ST_BUSYEND		(1 << 24)
+>>>>>>> v3.18
 =======
 #define MCI_ST_BUSYEND		(1 << 24)
 >>>>>>> v3.18
@@ -226,9 +256,12 @@ struct mmci_host {
 	struct mmc_host		*mmc;
 	struct clk		*clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			gpio_cd;
 	int			gpio_wp;
 	int			gpio_cd_irq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool			singleirq;
@@ -237,10 +270,13 @@ struct mmci_host {
 
 	unsigned int		mclk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		cclk;
 	u32			pwr_reg;
 	u32			clk_reg;
 =======
+=======
+>>>>>>> v3.18
 	/* cached value of requested clk in set_ios */
 	unsigned int		clock_cache;
 	unsigned int		cclk;
@@ -250,6 +286,9 @@ struct mmci_host {
 	u32			datactrl_reg;
 	u32			busy_status;
 	bool			vqmmc_enabled;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mmci_platform_data *plat;
 	struct variant_data	*variant;
@@ -264,10 +303,14 @@ struct mmci_host {
 	struct sg_mapping_iter	sg_miter;
 	unsigned int		size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* pinctrl handles */
 	struct pinctrl		*pinctrl;
 	struct pinctrl_state	*pins_default;
+=======
+	int (*get_rx_fifocnt)(struct mmci_host *h, u32 status, int remain);
+>>>>>>> v3.18
 =======
 	int (*get_rx_fifocnt)(struct mmci_host *h, u32 status, int remain);
 >>>>>>> v3.18

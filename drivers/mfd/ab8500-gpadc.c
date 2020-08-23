@@ -868,6 +868,10 @@ static void ab8500_gpadc_read_calibration_data(struct ab8500_gpadc *gpadc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_RUNTIME
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_RUNTIME
 >>>>>>> v3.18
@@ -890,6 +894,7 @@ static int ab8500_gpadc_runtime_resume(struct device *dev)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int ab8500_gpadc_runtime_idle(struct device *dev)
 {
@@ -897,6 +902,11 @@ static int ab8500_gpadc_runtime_idle(struct device *dev)
 	return 0;
 }
 
+=======
+#endif
+
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #endif
 
@@ -930,6 +940,10 @@ static int ab8500_gpadc_resume(struct device *dev)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -940,7 +954,11 @@ static int ab8500_gpadc_probe(struct platform_device *pdev)
 	struct ab8500_gpadc *gpadc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpadc = kzalloc(sizeof(struct ab8500_gpadc), GFP_KERNEL);
+=======
+	gpadc = devm_kzalloc(&pdev->dev, sizeof(struct ab8500_gpadc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	gpadc = devm_kzalloc(&pdev->dev, sizeof(struct ab8500_gpadc), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1024,8 +1042,11 @@ fail_irq:
 	free_irq(gpadc->irq_hw, gpadc);
 fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(gpadc);
 	gpadc = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1053,8 +1074,11 @@ static int ab8500_gpadc_remove(struct platform_device *pdev)
 	pm_runtime_put_noidle(gpadc->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(gpadc);
 	gpadc = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1064,7 +1088,11 @@ static const struct dev_pm_ops ab8500_gpadc_pm_ops = {
 	SET_RUNTIME_PM_OPS(ab8500_gpadc_runtime_suspend,
 			   ab8500_gpadc_runtime_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   ab8500_gpadc_runtime_idle)
+=======
+			   NULL)
+>>>>>>> v3.18
 =======
 			   NULL)
 >>>>>>> v3.18

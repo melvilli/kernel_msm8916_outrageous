@@ -191,6 +191,7 @@ int jffs2_do_setattr (struct inode *inode, struct iattr *iattr)
 int jffs2_setattr(struct dentry *dentry, struct iattr *iattr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
 
 	rc = inode_change_ok(dentry->d_inode, iattr);
@@ -201,6 +202,8 @@ int jffs2_setattr(struct dentry *dentry, struct iattr *iattr)
 	if (!rc && (iattr->ia_valid & ATTR_MODE))
 		rc = jffs2_acl_chmod(dentry->d_inode);
 =======
+=======
+>>>>>>> v3.18
 	struct inode *inode = dentry->d_inode;
 	int rc;
 
@@ -211,6 +214,9 @@ int jffs2_setattr(struct dentry *dentry, struct iattr *iattr)
 	rc = jffs2_do_setattr(inode, iattr);
 	if (!rc && (iattr->ia_valid & ATTR_MODE))
 		rc = posix_acl_chmod(inode, inode->i_mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rc;
@@ -255,7 +261,11 @@ void jffs2_evict_inode (struct inode *inode)
 	jffs2_dbg(1, "%s(): ino #%lu mode %o\n",
 		  __func__, inode->i_ino, inode->i_mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -474,6 +484,7 @@ struct inode *jffs2_new_inode (struct inode *dir_i, umode_t mode, struct jffs2_r
 	ret = jffs2_init_acl_pre(dir_i, inode, &mode);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    make_bad_inode(inode);
 	    iput(inode);
 	    return ERR_PTR(ret);
@@ -481,6 +492,8 @@ struct inode *jffs2_new_inode (struct inode *dir_i, umode_t mode, struct jffs2_r
 	ret = jffs2_do_new_inode (c, f, mode, ri);
 	if (ret) {
 =======
+=======
+>>>>>>> v3.18
 		mutex_unlock(&f->sem);
 		make_bad_inode(inode);
 		iput(inode);
@@ -489,6 +502,9 @@ struct inode *jffs2_new_inode (struct inode *dir_i, umode_t mode, struct jffs2_r
 	ret = jffs2_do_new_inode (c, f, mode, ri);
 	if (ret) {
 		mutex_unlock(&f->sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		make_bad_inode(inode);
 		iput(inode);
@@ -507,6 +523,10 @@ struct inode *jffs2_new_inode (struct inode *dir_i, umode_t mode, struct jffs2_r
 
 	if (insert_inode_locked(inode) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mutex_unlock(&f->sem);
+>>>>>>> v3.18
 =======
 		mutex_unlock(&f->sem);
 >>>>>>> v3.18
@@ -548,11 +568,17 @@ int jffs2_do_fill_super(struct super_block *sb, void *data, int silent)
 	c = JFFS2_SB_INFO(sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Do not support the MLC nand */
 	if (c->mtd->type == MTD_MLCNANDFLASH)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef CONFIG_JFFS2_FS_WRITEBUFFER
 	if (c->mtd->type == MTD_NANDFLASH) {
@@ -722,7 +748,11 @@ unsigned char *jffs2_gc_fetch_page(struct jffs2_sb_info *c,
 	struct page *pg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pg = read_cache_page_async(inode->i_mapping, offset >> PAGE_CACHE_SHIFT,
+=======
+	pg = read_cache_page(inode->i_mapping, offset >> PAGE_CACHE_SHIFT,
+>>>>>>> v3.18
 =======
 	pg = read_cache_page(inode->i_mapping, offset >> PAGE_CACHE_SHIFT,
 >>>>>>> v3.18

@@ -60,11 +60,14 @@ void *return_address(unsigned int level)
 #else /* if defined(CONFIG_FRAME_POINTER) && !defined(CONFIG_ARM_UNWIND) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *return_address(unsigned int level)
 {
 	return NULL;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* if defined(CONFIG_FRAME_POINTER) && !defined(CONFIG_ARM_UNWIND) / else */

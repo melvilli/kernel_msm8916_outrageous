@@ -378,8 +378,12 @@ rsc_init(struct cache_head *cnew, struct cache_head *ctmp)
 	tmp->handle.data = NULL;
 	new->mechctx = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new->cred.cr_group_info = NULL;
 	new->cred.cr_principal = NULL;
+=======
+	init_svc_cred(&new->cred);
+>>>>>>> v3.18
 =======
 	init_svc_cred(&new->cred);
 >>>>>>> v3.18
@@ -397,9 +401,13 @@ update_rsc(struct cache_head *cnew, struct cache_head *ctmp)
 	spin_lock_init(&new->seqdata.sd_lock);
 	new->cred = tmp->cred;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp->cred.cr_group_info = NULL;
 	new->cred.cr_principal = tmp->cred.cr_principal;
 	tmp->cred.cr_principal = NULL;
+=======
+	init_svc_cred(&tmp->cred);
+>>>>>>> v3.18
 =======
 	init_svc_cred(&tmp->cred);
 >>>>>>> v3.18
@@ -496,7 +504,11 @@ static int rsc_parse(struct cache_detail *cd,
 		if (len < 0)
 			goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gm = gss_mech_get_by_name(buf);
+=======
+		gm = rsci.cred.cr_gss_mech = gss_mech_get_by_name(buf);
+>>>>>>> v3.18
 =======
 		gm = rsci.cred.cr_gss_mech = gss_mech_get_by_name(buf);
 >>>>>>> v3.18
@@ -530,7 +542,10 @@ static int rsc_parse(struct cache_detail *cd,
 	status = 0;
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gss_mech_put(gm);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rsc_free(&rsci);
@@ -875,8 +890,13 @@ unwrap_integ_data(struct svc_rqst *rqstp, struct xdr_buf *buf, u32 seq, struct g
 	if (svc_getnl(&buf->head[0]) != seq)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* trim off the mic and padding at the end before returning */
 	xdr_buf_trim(buf, round_up_to_quad(mic.len) + 4);
+=======
+	/* trim off the mic at the end before returning */
+	xdr_buf_trim(buf, mic.len + 4);
+>>>>>>> v3.18
 =======
 	/* trim off the mic at the end before returning */
 	xdr_buf_trim(buf, mic.len + 4);
@@ -911,7 +931,11 @@ unwrap_priv_data(struct svc_rqst *rqstp, struct xdr_buf *buf, u32 seq, struct gs
 	int pad, saved_len, remaining_len, offset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rqstp->rq_splice_ok = 0;
+=======
+	rqstp->rq_splice_ok = false;
+>>>>>>> v3.18
 =======
 	rqstp->rq_splice_ok = false;
 >>>>>>> v3.18
@@ -1196,8 +1220,13 @@ static int gss_proxy_save_rsc(struct cache_detail *cd,
 		/* userspace seem buggy, we should always get at least a
 		 * mapping to nobody */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dprintk("RPC:       No creds found, marking Negative!\n");
 		set_bit(CACHE_NEGATIVE, &rsci.h.flags);
+=======
+		dprintk("RPC:       No creds found!\n");
+		goto out;
+>>>>>>> v3.18
 =======
 		dprintk("RPC:       No creds found!\n");
 		goto out;
@@ -1214,6 +1243,10 @@ static int gss_proxy_save_rsc(struct cache_detail *cd,
 		if (!gm)
 			goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rsci.cred.cr_gss_mech = gm;
+>>>>>>> v3.18
 =======
 		rsci.cred.cr_gss_mech = gm;
 >>>>>>> v3.18
@@ -1233,7 +1266,10 @@ static int gss_proxy_save_rsc(struct cache_detail *cd,
 	status = 0;
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gss_mech_put(gm);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rsc_free(&rsci);
@@ -1304,6 +1340,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_SPINLOCK(use_gssp_lock);
 
 static bool use_gss_proxy(struct net *net)
@@ -1364,6 +1401,8 @@ static int wait_for_gss_proxy(struct net *net, struct file *file)
 }
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * Try to set the sn->use_gss_proxy variable to a new value. We only allow
  * it to be changed if it's currently undefined (-1). If it's any other value
@@ -1392,13 +1431,20 @@ static bool use_gss_proxy(struct net *net)
 }
 
 #ifdef CONFIG_PROC_FS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t write_gssp(struct file *file, const char __user *buf,
 			 size_t count, loff_t *ppos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net *net = PDE_DATA(file->f_path.dentry->d_inode);
+=======
+	struct net *net = PDE_DATA(file_inode(file));
+>>>>>>> v3.18
 =======
 	struct net *net = PDE_DATA(file_inode(file));
 >>>>>>> v3.18
@@ -1418,15 +1464,21 @@ static ssize_t write_gssp(struct file *file, const char __user *buf,
 	if (i != 1)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = set_gss_proxy(net, 1);
 	if (res)
 		return res;
 	res = set_gssp_clnt(net);
 =======
+=======
+>>>>>>> v3.18
 	res = set_gssp_clnt(net);
 	if (res)
 		return res;
 	res = set_gss_proxy(net, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (res)
 		return res;
@@ -1436,6 +1488,7 @@ static ssize_t write_gssp(struct file *file, const char __user *buf,
 static ssize_t read_gssp(struct file *file, char __user *buf,
 			 size_t count, loff_t *ppos)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct net *net = PDE_DATA(file->f_path.dentry->d_inode);
 	unsigned long p = *ppos;
@@ -1449,6 +1502,8 @@ static ssize_t read_gssp(struct file *file, char __user *buf,
 
 	snprintf(tbuf, sizeof(tbuf), "%d\n", use_gss_proxy(net));
 =======
+=======
+>>>>>>> v3.18
 	struct net *net = PDE_DATA(file_inode(file));
 	struct sunrpc_net *sn = net_generic(net, sunrpc_net_id);
 	unsigned long p = *ppos;
@@ -1456,6 +1511,9 @@ static ssize_t read_gssp(struct file *file, char __user *buf,
 	size_t len;
 
 	snprintf(tbuf, sizeof(tbuf), "%d\n", sn->use_gss_proxy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	len = strlen(tbuf);
 	if (p >= len)
@@ -1607,7 +1665,11 @@ svcauth_gss_accept(struct svc_rqst *rqstp, __be32 *authp)
 		if (gss_write_verf(rqstp, rsci->mechctx, gc->gc_seq))
 			goto auth_err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rsci->h.expiry_time = seconds_since_boot();
+=======
+		rsci->h.expiry_time = get_seconds();
+>>>>>>> v3.18
 =======
 		rsci->h.expiry_time = get_seconds();
 >>>>>>> v3.18
@@ -1635,6 +1697,10 @@ svcauth_gss_accept(struct svc_rqst *rqstp, __be32 *authp)
 					gc->gc_seq, rsci->mechctx))
 				goto garbage_args;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			rqstp->rq_auth_slack = RPC_MAX_AUTH_SIZE;
+>>>>>>> v3.18
 =======
 			rqstp->rq_auth_slack = RPC_MAX_AUTH_SIZE;
 >>>>>>> v3.18
@@ -1647,6 +1713,10 @@ svcauth_gss_accept(struct svc_rqst *rqstp, __be32 *authp)
 					gc->gc_seq, rsci->mechctx))
 				goto garbage_args;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			rqstp->rq_auth_slack = RPC_MAX_AUTH_SIZE * 2;
+>>>>>>> v3.18
 =======
 			rqstp->rq_auth_slack = RPC_MAX_AUTH_SIZE * 2;
 >>>>>>> v3.18
@@ -1731,8 +1801,12 @@ svcauth_gss_wrap_resp_integ(struct svc_rqst *rqstp)
 	*p++ = htonl(integ_len);
 	*p++ = htonl(gc->gc_seq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xdr_buf_subsegment(resbuf, &integ_buf, integ_offset,
 				integ_len))
+=======
+	if (xdr_buf_subsegment(resbuf, &integ_buf, integ_offset, integ_len))
+>>>>>>> v3.18
 =======
 	if (xdr_buf_subsegment(resbuf, &integ_buf, integ_offset, integ_len))
 >>>>>>> v3.18
@@ -1744,10 +1818,15 @@ svcauth_gss_wrap_resp_integ(struct svc_rqst *rqstp)
 						+ resbuf->head[0].iov_len;
 		resbuf->tail[0].iov_len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		resv = &resbuf->tail[0];
 	} else {
 		resv = &resbuf->tail[0];
 	}
+=======
+	}
+	resv = &resbuf->tail[0];
+>>>>>>> v3.18
 =======
 	}
 	resv = &resbuf->tail[0];

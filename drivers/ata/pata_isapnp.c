@@ -79,7 +79,11 @@ static int isapnp_init_one(struct pnp_dev *idev, const struct pnp_device_id *dev
 	ap->ioaddr.cmd_addr = cmd_addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pnp_port_valid(idev, 1) == 0) {
+=======
+	if (pnp_port_valid(idev, 1)) {
+>>>>>>> v3.18
 =======
 	if (pnp_port_valid(idev, 1)) {
 >>>>>>> v3.18

@@ -560,7 +560,11 @@ sclp_tty_init(void)
 	driver->init_termios = tty_std_termios;
 	driver->init_termios.c_iflag = IGNBRK | IGNPAR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	driver->init_termios.c_oflag = ONLCR | XTABS;
+=======
+	driver->init_termios.c_oflag = ONLCR;
+>>>>>>> v3.18
 =======
 	driver->init_termios.c_oflag = ONLCR;
 >>>>>>> v3.18

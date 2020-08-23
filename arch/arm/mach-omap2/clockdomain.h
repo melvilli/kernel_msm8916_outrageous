@@ -19,7 +19,10 @@
 #include "powerdomain.h"
 #include "clock.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "omap_hwmod.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -102,6 +105,11 @@ struct clkdm_dep {
 #define _CLKDM_FLAG_HWSUP_ENABLED		BIT(0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct omap_hwmod;
+
+>>>>>>> v3.18
 =======
 struct omap_hwmod;
 
@@ -141,7 +149,11 @@ struct clockdomain {
 	const u8 dep_bit;
 	const u8 prcm_partition;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const s16 cm_inst;
+=======
+	const u16 cm_inst;
+>>>>>>> v3.18
 =======
 	const u16 cm_inst;
 >>>>>>> v3.18
@@ -229,6 +241,12 @@ extern void __init omap3xxx_clockdomains_init(void);
 extern void __init am33xx_clockdomains_init(void);
 extern void __init omap44xx_clockdomains_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void __init omap54xx_clockdomains_init(void);
+extern void __init dra7xx_clockdomains_init(void);
+void am43xx_clockdomains_init(void);
+>>>>>>> v3.18
 =======
 extern void __init omap54xx_clockdomains_init(void);
 extern void __init dra7xx_clockdomains_init(void);
@@ -243,6 +261,10 @@ extern struct clkdm_ops omap3_clkdm_operations;
 extern struct clkdm_ops omap4_clkdm_operations;
 extern struct clkdm_ops am33xx_clkdm_operations;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct clkdm_ops am43xx_clkdm_operations;
+>>>>>>> v3.18
 =======
 extern struct clkdm_ops am43xx_clkdm_operations;
 >>>>>>> v3.18

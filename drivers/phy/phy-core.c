@@ -22,6 +22,10 @@
 #include <linux/idr.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regulator/consumer.h>
+>>>>>>> v3.18
 =======
 #include <linux/regulator/consumer.h>
 >>>>>>> v3.18
@@ -91,6 +95,10 @@ static struct phy_provider *of_phy_provider_lookup(struct device_node *node)
 {
 	struct phy_provider *phy_provider;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node *child;
+>>>>>>> v3.18
 =======
 	struct device_node *child;
 >>>>>>> v3.18
@@ -99,11 +107,17 @@ static struct phy_provider *of_phy_provider_lookup(struct device_node *node)
 		if (phy_provider->dev->of_node == node)
 			return phy_provider;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		for_each_child_of_node(phy_provider->dev->of_node, child)
 			if (child == node)
 				return phy_provider;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -242,13 +256,19 @@ int phy_power_on(struct phy *phy)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (phy->pwr) {
 		ret = regulator_enable(phy->pwr);
 		if (ret)
 			return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = phy_pm_runtime_get_sync(phy);
 	if (ret < 0 && ret != -ENOTSUPP)
@@ -272,6 +292,11 @@ out:
 	mutex_unlock(&phy->mutex);
 	phy_pm_runtime_put_sync(phy);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (phy->pwr)
+		regulator_disable(phy->pwr);
+>>>>>>> v3.18
 =======
 	if (phy->pwr)
 		regulator_disable(phy->pwr);
@@ -302,6 +327,12 @@ int phy_power_off(struct phy *phy)
 	phy_pm_runtime_put(phy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (phy->pwr)
+		regulator_disable(phy->pwr);
+
+>>>>>>> v3.18
 =======
 	if (phy->pwr)
 		regulator_disable(phy->pwr);
@@ -633,7 +664,10 @@ struct phy *phy_create(struct device *dev, struct device_node *node,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* phy-supply */
 	phy->pwr = regulator_get_optional(dev, "phy");
 	if (IS_ERR(phy->pwr)) {
@@ -644,6 +678,9 @@ struct phy *phy_create(struct device *dev, struct device_node *node,
 		phy->pwr = NULL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	device_initialize(&phy->dev);
 	mutex_init(&phy->mutex);
@@ -672,15 +709,21 @@ struct phy *phy_create(struct device *dev, struct device_node *node,
 
 put_dev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_device(&phy->dev);
 	ida_remove(&phy_ida, phy->id);
 =======
+=======
+>>>>>>> v3.18
 	put_device(&phy->dev);  /* calls phy_release() which frees resources */
 	return ERR_PTR(ret);
 
 free_ida:
 	ida_simple_remove(&phy_ida, phy->id);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 free_phy:
 	kfree(phy);
@@ -868,7 +911,12 @@ static void phy_release(struct device *dev)
 	phy = to_phy(dev);
 	dev_vdbg(dev, "releasing '%s'\n", dev_name(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ida_remove(&phy_ida, phy->id);
+=======
+	regulator_put(phy->pwr);
+	ida_simple_remove(&phy_ida, phy->id);
+>>>>>>> v3.18
 =======
 	regulator_put(phy->pwr);
 	ida_simple_remove(&phy_ida, phy->id);

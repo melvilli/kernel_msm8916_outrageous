@@ -77,12 +77,18 @@ static inline void map_dma_buffer(struct musb_request *request,
 
 	if (request->request.dma == DMA_ADDR_INVALID) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		request->request.dma = dma_map_single(
 =======
+=======
+>>>>>>> v3.18
 		dma_addr_t dma_addr;
 		int ret;
 
 		dma_addr = dma_map_single(
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				musb->controller,
 				request->request.buf,
@@ -91,12 +97,18 @@ static inline void map_dma_buffer(struct musb_request *request,
 					? DMA_TO_DEVICE
 					: DMA_FROM_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		ret = dma_mapping_error(musb->controller, dma_addr);
 		if (ret)
 			return;
 
 		request->request.dma = dma_addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		request->map_state = MUSB_MAPPED;
 	} else {
@@ -184,7 +196,11 @@ __acquires(ep->musb->lock)
 				req->request.actual, req->request.length,
 				request->status);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req->request.complete(&req->ep->end_point, &req->request);
+=======
+	usb_gadget_giveback_request(&req->ep->end_point, &req->request);
+>>>>>>> v3.18
 =======
 	usb_gadget_giveback_request(&req->ep->end_point, &req->request);
 >>>>>>> v3.18
@@ -377,6 +393,7 @@ static void txstate(struct musb *musb, struct musb_request *req)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(CONFIG_USB_TI_CPPI_DMA)
 		/* program endpoint CSR first, then setup DMA */
 		csr &= ~(MUSB_TXCSR_P_UNDERRUN | MUSB_TXCSR_TXPKTRDY);
@@ -419,6 +436,8 @@ static void txstate(struct musb *musb, struct musb_request *req)
 				request_size);
 #endif
 =======
+=======
+>>>>>>> v3.18
 #endif
 		if (is_cppi_enabled()) {
 			/* program endpoint CSR first, then setup DMA */
@@ -462,6 +481,9 @@ static void txstate(struct musb *musb, struct musb_request *req)
 					request->zero,
 					request->dma + request->actual,
 					request_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 #endif
@@ -1177,7 +1199,11 @@ static int musb_gadget_enable(struct usb_ep *ep,
 			case USB_ENDPOINT_XFER_INT:	s = "int"; break;
 			default:			s = "iso"; break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}; s; }),
+=======
+			} s; }),
+>>>>>>> v3.18
 =======
 			} s; }),
 >>>>>>> v3.18
@@ -1336,7 +1362,12 @@ static int musb_gadget_queue(struct usb_ep *ep, struct usb_request *req,
 				req, ep->name, "disabled");
 		status = -ESHUTDOWN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto cleanup;
+=======
+		unmap_dma_buffer(request, musb);
+		goto unlock;
+>>>>>>> v3.18
 =======
 		unmap_dma_buffer(request, musb);
 		goto unlock;
@@ -1351,7 +1382,11 @@ static int musb_gadget_queue(struct usb_ep *ep, struct usb_request *req,
 		musb_ep_restart(musb, request);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 cleanup:
+=======
+unlock:
+>>>>>>> v3.18
 =======
 unlock:
 >>>>>>> v3.18
@@ -1795,7 +1830,11 @@ init_peripheral_ep(struct musb *musb, struct musb_ep *ep, u8 epnum, int is_in)
 	INIT_LIST_HEAD(&ep->end_point.ep_list);
 	if (!epnum) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ep->end_point.maxpacket = 64;
+=======
+		usb_ep_set_maxpacket_limit(&ep->end_point, 64);
+>>>>>>> v3.18
 =======
 		usb_ep_set_maxpacket_limit(&ep->end_point, 64);
 >>>>>>> v3.18
@@ -1804,9 +1843,15 @@ init_peripheral_ep(struct musb *musb, struct musb_ep *ep, u8 epnum, int is_in)
 	} else {
 		if (is_in)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ep->end_point.maxpacket = hw_ep->max_packet_sz_tx;
 		else
 			ep->end_point.maxpacket = hw_ep->max_packet_sz_rx;
+=======
+			usb_ep_set_maxpacket_limit(&ep->end_point, hw_ep->max_packet_sz_tx);
+		else
+			usb_ep_set_maxpacket_limit(&ep->end_point, hw_ep->max_packet_sz_rx);
+>>>>>>> v3.18
 =======
 			usb_ep_set_maxpacket_limit(&ep->end_point, hw_ep->max_packet_sz_tx);
 		else
@@ -1868,10 +1913,13 @@ int musb_gadget_setup(struct musb *musb)
 	musb->g.speed = USB_SPEED_UNKNOWN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* this "gadget" abstracts/virtualizes the controller */
 	musb->g.name = musb_driver_name;
 	musb->g.is_otg = 1;
 =======
+=======
+>>>>>>> v3.18
 	MUSB_DEV_MODE(musb);
 	musb->xceiv->otg->default_a = 0;
 	musb->xceiv->state = OTG_STATE_B_IDLE;
@@ -1883,6 +1931,9 @@ int musb_gadget_setup(struct musb *musb)
 #elif IS_ENABLED(CONFIG_USB_MUSB_GADGET)
 	musb->g.is_otg = 0;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	musb_g_init_endpoints(musb);
@@ -1904,6 +1955,11 @@ err:
 void musb_gadget_cleanup(struct musb *musb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (musb->port_mode == MUSB_PORT_MODE_HOST)
+		return;
+>>>>>>> v3.18
 =======
 	if (musb->port_mode == MUSB_PORT_MODE_HOST)
 		return;
@@ -1928,7 +1984,10 @@ static int musb_gadget_start(struct usb_gadget *g,
 	struct musb		*musb = gadget_to_musb(g);
 	struct usb_otg		*otg = musb->xceiv->otg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_hcd		*hcd = musb_to_hcd(musb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long		flags;
@@ -1954,6 +2013,11 @@ static int musb_gadget_start(struct usb_gadget *g,
 	spin_unlock_irqrestore(&musb->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	musb_start(musb);
+
+>>>>>>> v3.18
 =======
 	musb_start(musb);
 
@@ -1962,6 +2026,7 @@ static int musb_gadget_start(struct usb_gadget *g,
 	 * handles power budgeting ... this way also
 	 * ensures HdrcStart is indirectly called.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	retval = usb_add_hcd(hcd, 0, 0);
 	if (retval < 0) {
@@ -1974,6 +2039,11 @@ static int musb_gadget_start(struct usb_gadget *g,
 
 	hcd->self.uses_pio_for_control = 1;
 
+=======
+	if (musb->xceiv->last_event == USB_EVENT_ID)
+		musb_platform_set_vbus(musb, 1);
+
+>>>>>>> v3.18
 =======
 	if (musb->xceiv->last_event == USB_EVENT_ID)
 		musb_platform_set_vbus(musb, 1);
@@ -2057,7 +2127,12 @@ static int musb_gadget_stop(struct usb_gadget *g,
 	otg_set_peripheral(musb->xceiv->otg, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(musb->controller, "unregistering driver %s\n", driver->function);
+=======
+	dev_dbg(musb->controller, "unregistering driver %s\n",
+				  driver ? driver->function : "(removed)");
+>>>>>>> v3.18
 =======
 	dev_dbg(musb->controller, "unregistering driver %s\n",
 				  driver ? driver->function : "(removed)");
@@ -2069,7 +2144,10 @@ static int musb_gadget_stop(struct usb_gadget *g,
 	spin_unlock_irqrestore(&musb->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_remove_hcd(musb_to_hcd(musb));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -2235,8 +2313,11 @@ __acquires(musb->lock)
 	 * or else after HNP, as A-Device
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (devctl & MUSB_DEVCTL_BDEVICE) {
 =======
+=======
+>>>>>>> v3.18
 	if (!musb->g.is_otg) {
 		/* USB device controllers that are not OTG compatible
 		 * may not have DEVCTL register in silicon.
@@ -2246,6 +2327,9 @@ __acquires(musb->lock)
 		musb->xceiv->state = OTG_STATE_B_PERIPHERAL;
 		musb->g.is_a_peripheral = 0;
 	} else if (devctl & MUSB_DEVCTL_BDEVICE) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		musb->xceiv->state = OTG_STATE_B_PERIPHERAL;
 		musb->g.is_a_peripheral = 0;

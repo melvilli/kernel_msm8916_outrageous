@@ -17,7 +17,11 @@ To do ISA style DMA you need to include two headers:
 
 The first is the generic DMA API used to convert virtual addresses to
 <<<<<<< HEAD
+<<<<<<< HEAD
 physical addresses (see Documentation/DMA-API.txt for details).
+=======
+bus addresses (see Documentation/DMA-API.txt for details).
+>>>>>>> v3.18
 =======
 bus addresses (see Documentation/DMA-API.txt for details).
 >>>>>>> v3.18
@@ -55,7 +59,11 @@ Part III - Address translation
 ------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 To translate the virtual address to a physical use the normal DMA
+=======
+To translate the virtual address to a bus address, use the normal DMA
+>>>>>>> v3.18
 =======
 To translate the virtual address to a bus address, use the normal DMA
 >>>>>>> v3.18

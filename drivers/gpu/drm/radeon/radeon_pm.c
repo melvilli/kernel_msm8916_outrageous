@@ -68,8 +68,11 @@ int radeon_pm_get_type_index(struct radeon_device *rdev,
 void radeon_pm_acpi_event_handler(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rdev->pm.pm_method == PM_METHOD_PROFILE) {
 =======
+=======
+>>>>>>> v3.18
 	if ((rdev->pm.pm_method == PM_METHOD_DPM) && rdev->pm.dpm_enabled) {
 		mutex_lock(&rdev->pm.mutex);
 		if (power_supply_is_system_supplied() > 0)
@@ -82,6 +85,9 @@ void radeon_pm_acpi_event_handler(struct radeon_device *rdev)
 		}
 		mutex_unlock(&rdev->pm.mutex);
         } else if (rdev->pm.pm_method == PM_METHOD_PROFILE) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rdev->pm.profile == PM_PROFILE_AUTO) {
 			mutex_lock(&rdev->pm.mutex);
@@ -267,7 +273,11 @@ static void radeon_pm_set_clocks(struct radeon_device *rdev)
 			continue;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		r = radeon_fence_wait_empty_locked(rdev, i);
+=======
+		r = radeon_fence_wait_empty(rdev, i);
+>>>>>>> v3.18
 =======
 		r = radeon_fence_wait_empty(rdev, i);
 >>>>>>> v3.18
@@ -353,7 +363,11 @@ static ssize_t radeon_get_pm_profile(struct device *dev,
 				     char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_device *ddev = pci_get_drvdata(to_pci_dev(dev));
+=======
+	struct drm_device *ddev = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct drm_device *ddev = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -373,10 +387,13 @@ static ssize_t radeon_set_pm_profile(struct device *dev,
 				     size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_device *ddev = pci_get_drvdata(to_pci_dev(dev));
 	struct radeon_device *rdev = ddev->dev_private;
 
 =======
+=======
+>>>>>>> v3.18
 	struct drm_device *ddev = dev_get_drvdata(dev);
 	struct radeon_device *rdev = ddev->dev_private;
 
@@ -385,6 +402,9 @@ static ssize_t radeon_set_pm_profile(struct device *dev,
 	     (ddev->switch_power_state != DRM_SWITCH_POWER_ON))
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_lock(&rdev->pm.mutex);
 	if (rdev->pm.pm_method == PM_METHOD_PROFILE) {
@@ -418,7 +438,11 @@ static ssize_t radeon_get_pm_method(struct device *dev,
 				    char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_device *ddev = pci_get_drvdata(to_pci_dev(dev));
+=======
+	struct drm_device *ddev = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct drm_device *ddev = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -427,7 +451,12 @@ static ssize_t radeon_get_pm_method(struct device *dev,
 
 	return snprintf(buf, PAGE_SIZE, "%s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(pm == PM_METHOD_DYNPM) ? "dynpm" : "profile");
+=======
+			(pm == PM_METHOD_DYNPM) ? "dynpm" :
+			(pm == PM_METHOD_PROFILE) ? "profile" : "dpm");
+>>>>>>> v3.18
 =======
 			(pm == PM_METHOD_DYNPM) ? "dynpm" :
 			(pm == PM_METHOD_PROFILE) ? "profile" : "dpm");
@@ -440,10 +469,13 @@ static ssize_t radeon_set_pm_method(struct device *dev,
 				    size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_device *ddev = pci_get_drvdata(to_pci_dev(dev));
 	struct radeon_device *rdev = ddev->dev_private;
 
 =======
+=======
+>>>>>>> v3.18
 	struct drm_device *ddev = dev_get_drvdata(dev);
 	struct radeon_device *rdev = ddev->dev_private;
 
@@ -459,6 +491,9 @@ static ssize_t radeon_set_pm_method(struct device *dev,
 		count = -EINVAL;
 		goto fail;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (strncmp("dynpm", buf, strlen("dynpm")) == 0) {
@@ -485,9 +520,12 @@ fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(power_profile, S_IRUGO | S_IWUSR, radeon_get_pm_profile, radeon_set_pm_profile);
 static DEVICE_ATTR(power_method, S_IRUGO | S_IWUSR, radeon_get_pm_method, radeon_set_pm_method);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t radeon_get_dpm_state(struct device *dev,
 				    struct device_attribute *attr,
 				    char *buf)
@@ -596,12 +634,16 @@ static DEVICE_ATTR(power_dpm_state, S_IRUGO | S_IWUSR, radeon_get_dpm_state, rad
 static DEVICE_ATTR(power_dpm_force_performance_level, S_IRUGO | S_IWUSR,
 		   radeon_get_dpm_forced_performance_level,
 		   radeon_set_dpm_forced_performance_level);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t radeon_hwmon_show_temp(struct device *dev,
 				      struct device_attribute *attr,
 				      char *buf)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct drm_device *ddev = pci_get_drvdata(to_pci_dev(dev));
 	struct radeon_device *rdev = ddev->dev_private;
@@ -629,6 +671,8 @@ static ssize_t radeon_hwmon_show_temp(struct device *dev,
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct radeon_device *rdev = dev_get_drvdata(dev);
 	struct drm_device *ddev = rdev->ddev;
 	int temp;
@@ -642,11 +686,15 @@ static ssize_t radeon_hwmon_show_temp(struct device *dev,
 		temp = radeon_get_temperature(rdev);
 	else
 		temp = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return snprintf(buf, PAGE_SIZE, "%d\n", temp);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t radeon_hwmon_show_name(struct device *dev,
 				      struct device_attribute *attr,
@@ -667,6 +715,8 @@ static struct attribute *hwmon_attributes[] = {
 static const struct attribute_group hwmon_attrgroup = {
 	.attrs = hwmon_attributes,
 =======
+=======
+>>>>>>> v3.18
 static ssize_t radeon_hwmon_show_temp_thresh(struct device *dev,
 					     struct device_attribute *attr,
 					     char *buf)
@@ -717,6 +767,9 @@ static const struct attribute_group hwmon_attrgroup = {
 static const struct attribute_group *hwmon_groups[] = {
 	&hwmon_attrgroup,
 	NULL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -725,8 +778,11 @@ static int radeon_hwmon_init(struct radeon_device *rdev)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev->pm.int_hwmon_dev = NULL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (rdev->pm.int_thermal_type) {
@@ -737,11 +793,14 @@ static int radeon_hwmon_init(struct radeon_device *rdev)
 	case THERMAL_TYPE_SUMO:
 	case THERMAL_TYPE_SI:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* No support for TN yet */
 		if (rdev->family == CHIP_ARUBA)
 			return err;
 		rdev->pm.int_hwmon_dev = hwmon_device_register(rdev->dev);
 =======
+=======
+>>>>>>> v3.18
 	case THERMAL_TYPE_CI:
 	case THERMAL_TYPE_KV:
 		if (rdev->asic->pm.get_temperature == NULL)
@@ -749,11 +808,15 @@ static int radeon_hwmon_init(struct radeon_device *rdev)
 		rdev->pm.int_hwmon_dev = hwmon_device_register_with_groups(rdev->dev,
 									   "radeon", rdev,
 									   hwmon_groups);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (IS_ERR(rdev->pm.int_hwmon_dev)) {
 			err = PTR_ERR(rdev->pm.int_hwmon_dev);
 			dev_err(rdev->dev,
 				"Unable to register hwmon device: %d\n", err);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			break;
 		}
@@ -764,6 +827,8 @@ static int radeon_hwmon_init(struct radeon_device *rdev)
 			dev_err(rdev->dev,
 				"Unable to create hwmon sysfs file: %d\n", err);
 			hwmon_device_unregister(rdev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -778,6 +843,7 @@ static int radeon_hwmon_init(struct radeon_device *rdev)
 static void radeon_hwmon_fini(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rdev->pm.int_hwmon_dev) {
 		sysfs_remove_group(&rdev->pm.int_hwmon_dev->kobj, &hwmon_attrgroup);
 		hwmon_device_unregister(rdev->pm.int_hwmon_dev);
@@ -786,6 +852,8 @@ static void radeon_hwmon_fini(struct radeon_device *rdev)
 
 void radeon_pm_suspend(struct radeon_device *rdev)
 =======
+=======
+>>>>>>> v3.18
 	if (rdev->pm.int_hwmon_dev)
 		hwmon_device_unregister(rdev->pm.int_hwmon_dev);
 }
@@ -1144,6 +1212,9 @@ void radeon_dpm_enable_vce(struct radeon_device *rdev, bool enable)
 }
 
 static void radeon_pm_suspend_old(struct radeon_device *rdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	mutex_lock(&rdev->pm.mutex);
@@ -1157,8 +1228,11 @@ static void radeon_pm_suspend_old(struct radeon_device *rdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void radeon_pm_resume(struct radeon_device *rdev)
 =======
+=======
+>>>>>>> v3.18
 static void radeon_pm_suspend_dpm(struct radeon_device *rdev)
 {
 	mutex_lock(&rdev->pm.mutex);
@@ -1179,6 +1253,9 @@ void radeon_pm_suspend(struct radeon_device *rdev)
 }
 
 static void radeon_pm_resume_old(struct radeon_device *rdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* set up the default clocks if the MC ucode is loaded */
@@ -1217,6 +1294,7 @@ static void radeon_pm_resume_old(struct radeon_device *rdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int radeon_pm_init(struct radeon_device *rdev)
 {
 	int ret;
@@ -1224,6 +1302,8 @@ int radeon_pm_init(struct radeon_device *rdev)
 	/* default to profile method */
 	rdev->pm.pm_method = PM_METHOD_PROFILE;
 =======
+=======
+>>>>>>> v3.18
 static void radeon_pm_resume_dpm(struct radeon_device *rdev)
 {
 	int ret;
@@ -1269,6 +1349,9 @@ static int radeon_pm_init_old(struct radeon_device *rdev)
 {
 	int ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rdev->pm.profile = PM_PROFILE_DEFAULT;
 	rdev->pm.dynpm_state = DYNPM_STATE_DISABLED;
@@ -1332,8 +1415,11 @@ static int radeon_pm_init_old(struct radeon_device *rdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void radeon_pm_fini(struct radeon_device *rdev)
 =======
+=======
+>>>>>>> v3.18
 static void radeon_dpm_print_power_states(struct radeon_device *rdev)
 {
 	int i;
@@ -1510,6 +1596,9 @@ int radeon_pm_late_init(struct radeon_device *rdev)
 }
 
 static void radeon_pm_fini_old(struct radeon_device *rdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (rdev->pm.num_power_states > 1) {
@@ -1533,6 +1622,7 @@ static void radeon_pm_fini_old(struct radeon_device *rdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rdev->pm.power_state)
 		kfree(rdev->pm.power_state);
 
@@ -1541,6 +1631,8 @@ static void radeon_pm_fini_old(struct radeon_device *rdev)
 
 void radeon_pm_compute_clocks(struct radeon_device *rdev)
 =======
+=======
+>>>>>>> v3.18
 	radeon_hwmon_fini(rdev);
 	kfree(rdev->pm.power_state);
 }
@@ -1573,6 +1665,9 @@ void radeon_pm_fini(struct radeon_device *rdev)
 }
 
 static void radeon_pm_compute_clocks_old(struct radeon_device *rdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drm_device *ddev = rdev->ddev;
@@ -1587,6 +1682,7 @@ static void radeon_pm_compute_clocks_old(struct radeon_device *rdev)
 	rdev->pm.active_crtcs = 0;
 	rdev->pm.active_crtc_count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(crtc,
 		&ddev->mode_config.crtc_list, head) {
 		radeon_crtc = to_radeon_crtc(crtc);
@@ -1594,6 +1690,8 @@ static void radeon_pm_compute_clocks_old(struct radeon_device *rdev)
 			rdev->pm.active_crtcs |= (1 << radeon_crtc->crtc_id);
 			rdev->pm.active_crtc_count++;
 =======
+=======
+>>>>>>> v3.18
 	if (rdev->num_crtc && rdev->mode_info.mode_config_initialized) {
 		list_for_each_entry(crtc,
 				    &ddev->mode_config.crtc_list, head) {
@@ -1602,6 +1700,9 @@ static void radeon_pm_compute_clocks_old(struct radeon_device *rdev)
 				rdev->pm.active_crtcs |= (1 << radeon_crtc->crtc_id);
 				rdev->pm.active_crtc_count++;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1656,7 +1757,10 @@ static void radeon_pm_compute_clocks_old(struct radeon_device *rdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void radeon_pm_compute_clocks_dpm(struct radeon_device *rdev)
 {
 	struct drm_device *ddev = rdev->ddev;
@@ -1702,6 +1806,9 @@ void radeon_pm_compute_clocks(struct radeon_device *rdev)
 		radeon_pm_compute_clocks_old(rdev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool radeon_pm_in_vbl(struct radeon_device *rdev)
 {
@@ -1714,9 +1821,15 @@ static bool radeon_pm_in_vbl(struct radeon_device *rdev)
 	for (crtc = 0; (crtc < rdev->num_crtc) && in_vbl; crtc++) {
 		if (rdev->pm.active_crtcs & (1 << crtc)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vbl_status = radeon_get_crtc_scanoutpos(rdev->ddev, crtc, &vpos, &hpos);
 			if ((vbl_status & DRM_SCANOUTPOS_VALID) &&
 			    !(vbl_status & DRM_SCANOUTPOS_INVBL))
+=======
+			vbl_status = radeon_get_crtc_scanoutpos(rdev->ddev, crtc, 0, &vpos, &hpos, NULL, NULL);
+			if ((vbl_status & DRM_SCANOUTPOS_VALID) &&
+			    !(vbl_status & DRM_SCANOUTPOS_IN_VBLANK))
+>>>>>>> v3.18
 =======
 			vbl_status = radeon_get_crtc_scanoutpos(rdev->ddev, crtc, 0, &vpos, &hpos, NULL, NULL);
 			if ((vbl_status & DRM_SCANOUTPOS_VALID) &&
@@ -1812,6 +1925,7 @@ static int radeon_debugfs_pm_info(struct seq_file *m, void *data)
 	struct drm_device *dev = node->minor->dev;
 	struct radeon_device *rdev = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	seq_printf(m, "default engine clock: %u0 kHz\n", rdev->pm.default_sclk);
 	/* radeon_get_engine_clock is not reliable on APUs so just print the current clock */
@@ -1827,6 +1941,8 @@ static int radeon_debugfs_pm_info(struct seq_file *m, void *data)
 	if (rdev->asic->pm.get_pcie_lanes)
 		seq_printf(m, "PCIE lanes: %d\n", radeon_get_pcie_lanes(rdev));
 =======
+=======
+>>>>>>> v3.18
 	struct drm_device *ddev = rdev->ddev;
 
 	if  ((rdev->flags & RADEON_IS_PX) &&
@@ -1854,6 +1970,9 @@ static int radeon_debugfs_pm_info(struct seq_file *m, void *data)
 		if (rdev->asic->pm.get_pcie_lanes)
 			seq_printf(m, "PCIE lanes: %d\n", radeon_get_pcie_lanes(rdev));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

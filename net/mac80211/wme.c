@@ -1,6 +1,10 @@
 /*
  * Copyright 2004, Instant802 Networks, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright 2013-2014  Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright 2013-2014  Intel Mobile Communications GmbH
 >>>>>>> v3.18
@@ -111,6 +115,10 @@ u16 ieee80211_select_queue(struct ieee80211_sub_if_data *sdata,
 	const u8 *ra = NULL;
 	bool qos = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mac80211_qos_map *qos_map;
+>>>>>>> v3.18
 =======
 	struct mac80211_qos_map *qos_map;
 >>>>>>> v3.18
@@ -126,7 +134,11 @@ u16 ieee80211_select_queue(struct ieee80211_sub_if_data *sdata,
 		sta = rcu_dereference(sdata->u.vlan.sta);
 		if (sta) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			qos = test_sta_flag(sta, WLAN_STA_WME);
+=======
+			qos = sta->sta.wme;
+>>>>>>> v3.18
 =======
 			qos = sta->sta.wme;
 >>>>>>> v3.18
@@ -157,7 +169,11 @@ u16 ieee80211_select_queue(struct ieee80211_sub_if_data *sdata,
 		sta = sta_info_get(sdata, ra);
 		if (sta)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			qos = test_sta_flag(sta, WLAN_STA_WME);
+=======
+			qos = sta->sta.wme;
+>>>>>>> v3.18
 =======
 			qos = sta->sta.wme;
 >>>>>>> v3.18
@@ -177,13 +193,19 @@ u16 ieee80211_select_queue(struct ieee80211_sub_if_data *sdata,
 	/* use the data classifier to determine what 802.1d tag the
 	 * data frame has */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->priority = cfg80211_classify8021d(skb, NULL);
 =======
+=======
+>>>>>>> v3.18
 	rcu_read_lock();
 	qos_map = rcu_dereference(sdata->qos_map);
 	skb->priority = cfg80211_classify8021d(skb, qos_map ?
 					       &qos_map->qos_map : NULL);
 	rcu_read_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ieee80211_downgrade_queue(sdata, skb);

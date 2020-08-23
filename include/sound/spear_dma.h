@@ -30,7 +30,10 @@ struct spear_dma_data {
 	u32 max_burst;
 	enum dma_slave_buswidth addr_width;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool (*filter)(struct dma_chan *chan, void *slave);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

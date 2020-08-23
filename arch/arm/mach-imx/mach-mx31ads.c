@@ -583,7 +583,10 @@ MACHINE_START(MX31ADS, "Freescale MX31ADS")
 	.init_early = imx31_init_early,
 	.init_irq = mx31ads_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx31_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= mx31ads_timer_init,

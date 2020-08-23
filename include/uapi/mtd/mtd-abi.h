@@ -95,15 +95,21 @@ struct mtd_write_req {
 #define MTD_ROM			2
 #define MTD_NORFLASH		3
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MTD_NANDFLASH		4
 #define MTD_DATAFLASH		6
 #define MTD_UBIVOLUME		7
 #define MTD_MLCNANDFLASH	8
 =======
+=======
+>>>>>>> v3.18
 #define MTD_NANDFLASH		4	/* SLC NAND */
 #define MTD_DATAFLASH		6
 #define MTD_UBIVOLUME		7
 #define MTD_MLCNANDFLASH	8	/* MLC NAND (including TLC) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MTD_WRITEABLE		0x400	/* Device is writeable */
@@ -117,6 +123,10 @@ struct mtd_write_req {
 #define MTD_CAP_NORFLASH	(MTD_WRITEABLE | MTD_BIT_WRITEABLE)
 #define MTD_CAP_NANDFLASH	(MTD_WRITEABLE)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MTD_CAP_NVRAM		(MTD_WRITEABLE | MTD_BIT_WRITEABLE | MTD_NO_ERASE)
+>>>>>>> v3.18
 =======
 #define MTD_CAP_NVRAM		(MTD_WRITEABLE | MTD_BIT_WRITEABLE | MTD_NO_ERASE)
 >>>>>>> v3.18
@@ -243,7 +253,11 @@ struct nand_oobfree {
 struct nand_ecclayout_user {
 	__u32 eccbytes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 eccpos[256];
+=======
+	__u32 eccpos[MTD_MAX_ECCPOS_ENTRIES];
+>>>>>>> v3.18
 =======
 	__u32 eccpos[MTD_MAX_ECCPOS_ENTRIES];
 >>>>>>> v3.18
@@ -291,11 +305,17 @@ enum mtd_file_modes {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int mtd_type_is_nand_user(const struct mtd_info_user *mtd)
 {
 	return mtd->type == MTD_NANDFLASH || mtd->type == MTD_MLCNANDFLASH;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __MTD_ABI_H__ */

@@ -2,7 +2,11 @@
  * net/tipc/msg.h: Include file for TIPC message header routines
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2000-2007, Ericsson AB
+=======
+ * Copyright (c) 2000-2007, 2014, Ericsson AB
+>>>>>>> v3.18
 =======
  * Copyright (c) 2000-2007, 2014, Ericsson AB
 >>>>>>> v3.18
@@ -447,6 +451,10 @@ static inline struct tipc_msg *msg_get_wrapped(struct tipc_msg *m)
 #define  MSG_FRAGMENTER       12
 #define  LINK_CONFIG          13
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  SOCK_WAKEUP          14       /* pseudo user */
+>>>>>>> v3.18
 =======
 #define  SOCK_WAKEUP          14       /* pseudo user */
 >>>>>>> v3.18
@@ -472,12 +480,18 @@ static inline struct tipc_msg *msg_get_wrapped(struct tipc_msg *m)
 #define LAST_FRAGMENT		2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Bundling protocol message types
  */
 #define BUNDLE_OPEN             0
 #define BUNDLE_CLOSED           1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Link management protocol message types
@@ -571,12 +585,15 @@ static inline void msg_set_last_bcast(struct tipc_msg *m, u32 n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static inline u32 msg_fragm_no(struct tipc_msg *m)
 {
 	return msg_bits(m, 4, 16, 0xffff);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void msg_set_fragm_no(struct tipc_msg *m, u32 n)
@@ -596,12 +613,15 @@ static inline void msg_set_next_sent(struct tipc_msg *m, u32 n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static inline u32 msg_long_msgno(struct tipc_msg *m)
 {
 	return msg_bits(m, 4, 0, 0xffff);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void msg_set_long_msgno(struct tipc_msg *m, u32 n)
@@ -741,6 +761,7 @@ static inline void msg_set_link_tolerance(struct tipc_msg *m, u32 n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 tipc_msg_tot_importance(struct tipc_msg *m);
 void tipc_msg_init(struct tipc_msg *m, u32 user, u32 type,
 			    u32 hsize, u32 destnode);
@@ -748,6 +769,8 @@ int tipc_msg_build(struct tipc_msg *hdr, struct iovec const *msg_sect,
 		   u32 num_sect, unsigned int total_len,
 			    int max_size, int usrmem, struct sk_buff **buf);
 =======
+=======
+>>>>>>> v3.18
 static inline u32 tipc_msg_tot_importance(struct tipc_msg *m)
 {
 	if ((msg_user(m) == MSG_FRAGMENTER) && (msg_type(m) == FIRST_FRAGMENT))
@@ -784,5 +807,8 @@ int tipc_msg_build(struct tipc_msg *mhdr, struct iovec const *iov,
 
 struct sk_buff *tipc_msg_reassemble(struct sk_buff *chain);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

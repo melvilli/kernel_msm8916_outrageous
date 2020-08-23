@@ -23,6 +23,10 @@ bool nouveau_timer_wait_ne(void *, u64 nsec, u32 addr, u32 mask, u32 data);
 bool nouveau_timer_wait_cb(void *, u64 nsec, bool (*func)(void *), void *data);
 void nouveau_timer_alarm(void *, u32 nsec, struct nouveau_alarm *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void nouveau_timer_alarm_cancel(void *, struct nouveau_alarm *);
+>>>>>>> v3.18
 =======
 void nouveau_timer_alarm_cancel(void *, struct nouveau_alarm *);
 >>>>>>> v3.18
@@ -40,6 +44,10 @@ struct nouveau_timer {
 	u64  (*read)(struct nouveau_timer *);
 	void (*alarm)(struct nouveau_timer *, u64 time, struct nouveau_alarm *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*alarm_cancel)(struct nouveau_timer *, struct nouveau_alarm *);
+>>>>>>> v3.18
 =======
 	void (*alarm_cancel)(struct nouveau_timer *, struct nouveau_alarm *);
 >>>>>>> v3.18
@@ -66,6 +74,10 @@ int nouveau_timer_create_(struct nouveau_object *, struct nouveau_engine *,
 
 extern struct nouveau_oclass nv04_timer_oclass;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct nouveau_oclass gk20a_timer_oclass;
+>>>>>>> v3.18
 =======
 extern struct nouveau_oclass gk20a_timer_oclass;
 >>>>>>> v3.18

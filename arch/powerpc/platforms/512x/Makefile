@@ -2,7 +2,12 @@
 # Makefile for the Freescale PowerPC 512x linux kernel.
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y				+= clock.o mpc512x_shared.o
+=======
+obj-$(CONFIG_COMMON_CLK)	+= clock-commonclk.o
+obj-y				+= mpc512x_shared.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_COMMON_CLK)	+= clock-commonclk.o
 obj-y				+= mpc512x_shared.o

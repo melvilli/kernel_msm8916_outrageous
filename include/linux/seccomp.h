@@ -28,6 +28,7 @@ struct seccomp {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __secure_computing(int);
 static inline int secure_computing(int this_syscall)
 {
@@ -42,6 +43,8 @@ static inline void secure_computing_strict(int this_syscall)
 	BUG_ON(secure_computing(this_syscall) != 0);
 }
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_ARCH_SECCOMP_FILTER
 extern int __secure_computing(void);
 static inline int secure_computing(void)
@@ -59,6 +62,9 @@ int seccomp_phase2(u32 phase1_result);
 #else
 extern void secure_computing_strict(int this_syscall);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern long prctl_get_seccomp(void);
@@ -77,14 +83,20 @@ struct seccomp { };
 struct seccomp_filter { };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int secure_computing(int this_syscall) { return 0; }
 static inline void secure_computing_strict(int this_syscall) { return; }
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HAVE_ARCH_SECCOMP_FILTER
 static inline int secure_computing(void) { return 0; }
 #else
 static inline void secure_computing_strict(int this_syscall) { return; }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline long prctl_get_seccomp(void)
@@ -107,7 +119,10 @@ static inline int seccomp_mode(struct seccomp *s)
 extern void put_seccomp_filter(struct task_struct *tsk);
 extern void get_seccomp_filter(struct task_struct *tsk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32 seccomp_bpf_load(int off);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else  /* CONFIG_SECCOMP_FILTER */

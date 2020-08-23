@@ -72,7 +72,11 @@ static struct resource rtc_irqs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell lp8788_devs[] = {
+=======
+static const struct mfd_cell lp8788_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell lp8788_devs[] = {
 >>>>>>> v3.18
@@ -178,7 +182,11 @@ static int lp8788_probe(struct i2c_client *cl, const struct i2c_device_id *id)
 {
 	struct lp8788 *lp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lp8788_platform_data *pdata = cl->dev.platform_data;
+=======
+	struct lp8788_platform_data *pdata = dev_get_platdata(&cl->dev);
+>>>>>>> v3.18
 =======
 	struct lp8788_platform_data *pdata = dev_get_platdata(&cl->dev);
 >>>>>>> v3.18

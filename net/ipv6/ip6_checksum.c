@@ -76,6 +76,7 @@ int udp6_csum_init(struct sk_buff *skb, struct udphdr *uh, int proto)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (uh->check == 0) {
 		/* RFC 2460 section 8.1 says that we SHOULD log
 		   this error. Well, it is reasonable.
@@ -97,6 +98,8 @@ int udp6_csum_init(struct sk_buff *skb, struct udphdr *uh, int proto)
 }
 EXPORT_SYMBOL(udp6_csum_init);
 =======
+=======
+>>>>>>> v3.18
 	/* To support RFC 6936 (allow zero checksum in UDP/IPV6 for tunnels)
 	 * we accept a checksum of zero here. When we find the socket
 	 * for the UDP packet we'll check if that socket allows zero checksum
@@ -144,4 +147,7 @@ void udp6_set_csum(bool nocheck, struct sk_buff *skb,
 	}
 }
 EXPORT_SYMBOL(udp6_set_csum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (C) 1995, 1996, 1997 Olaf Kirch <okir@monad.swb.de> */
 
 #ifndef _LINUX_NFSD_FH_INT_H
@@ -6,6 +7,8 @@
 
 #include <linux/nfsd/nfsfh.h>
 =======
+=======
+>>>>>>> v3.18
 /*
  * Copyright (C) 1995, 1996, 1997 Olaf Kirch <okir@monad.swb.de>
  *
@@ -61,6 +64,9 @@ typedef struct svc_fh {
 #endif /* CONFIG_NFSD_V3 */
 
 } svc_fh;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum nfsd_fsid {
@@ -83,9 +89,12 @@ extern enum fsid_source fsid_source(struct svc_fh *fhp);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This might look a little large to "inline" but in all calls except
  * one, 'vers' is constant so moste of the function disappears.
 =======
+=======
+>>>>>>> v3.18
 /*
  * This might look a little large to "inline" but in all calls except
  * one, 'vers' is constant so moste of the function disappears.
@@ -95,6 +104,9 @@ extern enum fsid_source fsid_source(struct svc_fh *fhp);
  * callers don't know which it will be. So we must use __force to keep
  * sparse from complaining. Since these values are opaque to the
  * client, that shouldn't be a problem.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static inline void mk_fsid(int vers, u32 *fsidv, dev_t dev, ino_t ino,
@@ -104,7 +116,11 @@ static inline void mk_fsid(int vers, u32 *fsidv, dev_t dev, ino_t ino,
 	switch(vers) {
 	case FSID_DEV:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fsidv[0] = htonl((MAJOR(dev)<<16) |
+=======
+		fsidv[0] = (__force __u32)htonl((MAJOR(dev)<<16) |
+>>>>>>> v3.18
 =======
 		fsidv[0] = (__force __u32)htonl((MAJOR(dev)<<16) |
 >>>>>>> v3.18
@@ -116,8 +132,13 @@ static inline void mk_fsid(int vers, u32 *fsidv, dev_t dev, ino_t ino,
 		break;
 	case FSID_MAJOR_MINOR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fsidv[0] = htonl(MAJOR(dev));
 		fsidv[1] = htonl(MINOR(dev));
+=======
+		fsidv[0] = (__force __u32)htonl(MAJOR(dev));
+		fsidv[1] = (__force __u32)htonl(MINOR(dev));
+>>>>>>> v3.18
 =======
 		fsidv[0] = (__force __u32)htonl(MAJOR(dev));
 		fsidv[1] = (__force __u32)htonl(MINOR(dev));
@@ -213,7 +234,10 @@ fh_init(struct svc_fh *fhp, int maxsize)
 #ifdef CONFIG_NFSD_V3
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * The wcc data stored in current_fh should be cleared
  * between compound ops.
  */
@@ -225,6 +249,9 @@ fh_clear_wcc(struct svc_fh *fhp)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Fill in the pre_op attr for the wcc data
  */
@@ -246,7 +273,12 @@ fill_pre_wcc(struct svc_fh *fhp)
 extern void fill_post_wcc(struct svc_fh *);
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	fill_pre_wcc(ignored)
+=======
+#define fh_clear_wcc(ignored)
+#define fill_pre_wcc(ignored)
+>>>>>>> v3.18
 =======
 #define fh_clear_wcc(ignored)
 #define fill_pre_wcc(ignored)
@@ -272,8 +304,13 @@ fh_lock_nested(struct svc_fh *fhp, unsigned int subclass)
 
 	if (fhp->fh_locked) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "fh_lock: %s/%s already locked!\n",
 			dentry->d_parent->d_name.name, dentry->d_name.name);
+=======
+		printk(KERN_WARNING "fh_lock: %pd2 already locked!\n",
+			dentry);
+>>>>>>> v3.18
 =======
 		printk(KERN_WARNING "fh_lock: %pd2 already locked!\n",
 			dentry);
@@ -307,7 +344,11 @@ fh_unlock(struct svc_fh *fhp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* _LINUX_NFSD_FH_INT_H */
+=======
+#endif /* _LINUX_NFSD_NFSFH_H */
+>>>>>>> v3.18
 =======
 #endif /* _LINUX_NFSD_NFSFH_H */
 >>>>>>> v3.18

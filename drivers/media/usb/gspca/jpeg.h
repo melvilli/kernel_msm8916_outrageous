@@ -155,7 +155,13 @@ static void jpeg_set_qual(u8 *jpeg_hdr,
 	int i, sc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (quality < 50)
+=======
+	if (quality <= 0)
+		sc = 5000;
+	else if (quality < 50)
+>>>>>>> v3.18
 =======
 	if (quality <= 0)
 		sc = 5000;

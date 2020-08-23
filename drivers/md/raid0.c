@@ -1,16 +1,22 @@
 /*
    raid0.c : Multiple Devices driver for Linux
 <<<<<<< HEAD
+<<<<<<< HEAD
              Copyright (C) 1994-96 Marc ZYNGIER
 	     <zyngier@ufr-info-p7.ibp.fr> or
 	     <maz@gloups.fdn.fr>
              Copyright (C) 1999, 2000 Ingo Molnar, Red Hat
 
 =======
+=======
+>>>>>>> v3.18
 	     Copyright (C) 1994-96 Marc ZYNGIER
 	     <zyngier@ufr-info-p7.ibp.fr> or
 	     <maz@gloups.fdn.fr>
 	     Copyright (C) 1999, 2000 Ingo Molnar, Red Hat
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
    RAID-0 management functions.
@@ -20,15 +26,21 @@
    the Free Software Foundation; either version 2, or (at your option)
    any later version.
 <<<<<<< HEAD
+<<<<<<< HEAD
    
    You should have received a copy of the GNU General Public License
    (for example /usr/src/linux/COPYING); if not, write to the Free
    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  
 =======
+=======
+>>>>>>> v3.18
 
    You should have received a copy of the GNU General Public License
    (for example /usr/src/linux/COPYING); if not, write to the Free
    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 */
 
@@ -516,16 +528,22 @@ static inline int is_io_in_chunk_boundary(struct mddev *mddev,
 {
 	if (likely(is_power_of_2(chunk_sects))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return chunk_sects >= ((bio->bi_sector & (chunk_sects-1))
 					+ bio_sectors(bio));
 	} else{
 		sector_t sector = bio->bi_sector;
 =======
+=======
+>>>>>>> v3.18
 		return chunk_sects >=
 			((bio->bi_iter.bi_sector & (chunk_sects-1))
 					+ bio_sectors(bio));
 	} else{
 		sector_t sector = bio->bi_iter.bi_sector;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return chunk_sects >= (sector_div(sector, chunk_sects)
 						+ bio_sectors(bio));
@@ -535,10 +553,16 @@ static inline int is_io_in_chunk_boundary(struct mddev *mddev,
 static void raid0_make_request(struct mddev *mddev, struct bio *bio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int chunk_sects;
 	sector_t sector_offset;
 	struct strip_zone *zone;
 	struct md_rdev *tmp_dev;
+=======
+	struct strip_zone *zone;
+	struct md_rdev *tmp_dev;
+	struct bio *split;
+>>>>>>> v3.18
 =======
 	struct strip_zone *zone;
 	struct md_rdev *tmp_dev;
@@ -550,6 +574,7 @@ static void raid0_make_request(struct mddev *mddev, struct bio *bio)
 		return;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	chunk_sects = mddev->chunk_sectors;
 	if (unlikely(!is_io_in_chunk_boundary(mddev, chunk_sects, bio))) {
@@ -600,6 +625,8 @@ bad_map:
 	bio_io_error(bio);
 	return;
 =======
+=======
+>>>>>>> v3.18
 	do {
 		sector_t sector = bio->bi_iter.bi_sector;
 		unsigned chunk_sects = mddev->chunk_sectors;
@@ -629,6 +656,9 @@ bad_map:
 		} else
 			generic_make_request(split);
 	} while (split != bio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -658,6 +688,10 @@ static void *raid0_takeover_raid45(struct mddev *mddev)
 			return ERR_PTR(-EINVAL);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rdev->sectors = mddev->dev_sectors;
+>>>>>>> v3.18
 =======
 		rdev->sectors = mddev->dev_sectors;
 >>>>>>> v3.18
@@ -768,13 +802,19 @@ static void *raid0_takeover(struct mddev *mddev)
 	 *  raid1 - with (N -1) mirror drives faulty
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (mddev->bitmap) {
 		printk(KERN_ERR "md/raid0: %s: cannot takeover array with bitmap\n",
 		       mdname(mddev));
 		return ERR_PTR(-EBUSY);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (mddev->level == 4)
 		return raid0_takeover_raid45(mddev);

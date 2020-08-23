@@ -17,7 +17,10 @@
 #include <linux/delay.h>
 #include <linux/of_gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -30,14 +33,20 @@
 #include <asm/uic.h>
 #include <asm/ppc4xx.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 static __initdata struct of_device_id warp_of_bus[] = {
 =======
+=======
+>>>>>>> v3.18
 #include <asm/dma.h>
 
 
 static const struct of_device_id warp_of_bus[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "ibm,plb4", },
 	{ .compatible = "ibm,opb", },

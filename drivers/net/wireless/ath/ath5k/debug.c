@@ -63,15 +63,21 @@
 #include <linux/export.h>
 #include <linux/moduleparam.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/seq_file.h>
 #include <linux/list.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/vmalloc.h>
 
 #include <linux/seq_file.h>
 #include <linux/list.h>
 #include <linux/vmalloc.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "debug.h"
 #include "ath5k.h"
@@ -254,15 +260,21 @@ static ssize_t write_file_beacon(struct file *file,
 	char buf[20];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (copy_from_user(buf, userbuf, min(count, sizeof(buf))))
 		return -EFAULT;
 
 =======
+=======
+>>>>>>> v3.18
 	count = min_t(size_t, count, sizeof(buf) - 1);
 	if (copy_from_user(buf, userbuf, count))
 		return -EFAULT;
 
 	buf[count] = '\0';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (strncmp(buf, "disable", 7) == 0) {
 		AR5K_REG_DISABLE_BITS(ah, AR5K_BEACON, AR5K_BEACON_ENABLE);
@@ -362,15 +374,21 @@ static ssize_t write_file_debug(struct file *file,
 	char buf[20];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (copy_from_user(buf, userbuf, min(count, sizeof(buf))))
 		return -EFAULT;
 
 =======
+=======
+>>>>>>> v3.18
 	count = min_t(size_t, count, sizeof(buf) - 1);
 	if (copy_from_user(buf, userbuf, count))
 		return -EFAULT;
 
 	buf[count] = '\0';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(dbg_info); i++) {
 		if (strncmp(buf, dbg_info[i].name,
@@ -473,15 +491,21 @@ static ssize_t write_file_antenna(struct file *file,
 	char buf[20];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (copy_from_user(buf, userbuf, min(count, sizeof(buf))))
 		return -EFAULT;
 
 =======
+=======
+>>>>>>> v3.18
 	count = min_t(size_t, count, sizeof(buf) - 1);
 	if (copy_from_user(buf, userbuf, count))
 		return -EFAULT;
 
 	buf[count] = '\0';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (strncmp(buf, "diversity", 9) == 0) {
 		ath5k_hw_set_antenna_mode(ah, AR5K_ANTMODE_DEFAULT);
@@ -652,15 +676,21 @@ static ssize_t write_file_frameerrors(struct file *file,
 	char buf[20];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (copy_from_user(buf, userbuf, min(count, sizeof(buf))))
 		return -EFAULT;
 
 =======
+=======
+>>>>>>> v3.18
 	count = min_t(size_t, count, sizeof(buf) - 1);
 	if (copy_from_user(buf, userbuf, count))
 		return -EFAULT;
 
 	buf[count] = '\0';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (strncmp(buf, "clear", 5) == 0) {
 		st->rxerr_crc = 0;
@@ -807,15 +837,21 @@ static ssize_t write_file_ani(struct file *file,
 	char buf[20];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (copy_from_user(buf, userbuf, min(count, sizeof(buf))))
 		return -EFAULT;
 
 =======
+=======
+>>>>>>> v3.18
 	count = min_t(size_t, count, sizeof(buf) - 1);
 	if (copy_from_user(buf, userbuf, count))
 		return -EFAULT;
 
 	buf[count] = '\0';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (strncmp(buf, "sens-low", 8) == 0) {
 		ath5k_ani_init(ah, ATH5K_ANI_MODE_MANUAL_HIGH);
@@ -911,15 +947,21 @@ static ssize_t write_file_queue(struct file *file,
 	char buf[20];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (copy_from_user(buf, userbuf, min(count, sizeof(buf))))
 		return -EFAULT;
 
 =======
+=======
+>>>>>>> v3.18
 	count = min_t(size_t, count, sizeof(buf) - 1);
 	if (copy_from_user(buf, userbuf, count))
 		return -EFAULT;
 
 	buf[count] = '\0';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (strncmp(buf, "start", 5) == 0)
 		ieee80211_wake_queues(ah->hw);
@@ -939,7 +981,10 @@ static const struct file_operations fops_queue = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* debugfs: eeprom */
 
 struct eeprom_private {
@@ -1034,6 +1079,9 @@ static const struct file_operations fops_eeprom = {
 	.owner = THIS_MODULE,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void
@@ -1063,6 +1111,11 @@ ath5k_debug_init_device(struct ath5k_hw *ah)
 	debugfs_create_file("misc", S_IRUSR, phydir, ah, &fops_misc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	debugfs_create_file("eeprom", S_IRUSR, phydir, ah, &fops_eeprom);
+
+>>>>>>> v3.18
 =======
 	debugfs_create_file("eeprom", S_IRUSR, phydir, ah, &fops_eeprom);
 

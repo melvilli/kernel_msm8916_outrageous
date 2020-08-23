@@ -153,6 +153,7 @@ framebuffer device (see <xref linkend="osd" />).</entry>
 	  </row>
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>&v4l2-pix-format;</entry>
 	    <entry><structfield>fmt</structfield></entry>
 	    <entry></entry>
@@ -161,10 +162,15 @@ framebuffer device (see <xref linkend="osd" />).</entry>
 linkend="pixfmt" />, for clarification the fields and acceptable values
 	    are listed below:</entry>
 =======
+=======
+>>>>>>> v3.18
 	    <entry>struct</entry>
 	    <entry><structfield>fmt</structfield></entry>
 	    <entry></entry>
 	    <entry>Layout of the frame buffer.</entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  </row>
 	  <row>
@@ -284,9 +290,14 @@ see <xref linkend="colorspaces" />.</entry>
 	    <entry>__u32</entry>
 	    <entry><structfield>priv</structfield></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>Reserved for additional information about custom
 (driver defined) formats. When not used drivers and applications must
 set this field to zero.</entry>
+=======
+	    <entry>Reserved. Drivers and applications must set this field to
+zero.</entry>
+>>>>>>> v3.18
 =======
 	    <entry>Reserved. Drivers and applications must set this field to
 zero.</entry>

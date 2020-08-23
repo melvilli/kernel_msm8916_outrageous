@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * max77686.h - Driver for the Maxim 77686
+=======
+ * max77686.h - Driver for the Maxim 77686/802
+>>>>>>> v3.18
 =======
  * max77686.h - Driver for the Maxim 77686/802
 >>>>>>> v3.18
@@ -76,7 +80,10 @@ enum max77686_regulators {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* MAX77802 regulator IDs */
 enum max77802_regulators {
 	MAX77802_BUCK1 = 0,
@@ -125,6 +132,9 @@ enum max77802_regulators {
 	MAX77802_REG_MAX,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct max77686_regulator_data {
 	int id;
@@ -139,7 +149,10 @@ enum max77686_opmode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum max77802_opmode {
 	MAX77802_OPMODE_OFF,
 	MAX77802_OPMODE_STANDBY,
@@ -147,6 +160,9 @@ enum max77802_opmode {
 	MAX77802_OPMODE_NORMAL,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct max77686_opmode_data {
 	int id;
@@ -155,8 +171,11 @@ struct max77686_opmode_data {
 
 struct max77686_platform_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* IRQ */
 	int irq_gpio;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ono;

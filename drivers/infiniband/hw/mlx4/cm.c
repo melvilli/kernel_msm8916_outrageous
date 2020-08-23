@@ -62,12 +62,18 @@ struct cm_generic_msg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct cm_sidr_generic_msg {
 	struct ib_mad_hdr hdr;
 	__be32 request_id;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct cm_req_msg {
 	unsigned char unused[0x60];
@@ -78,9 +84,12 @@ struct cm_req_msg {
 static void set_local_comm_id(struct ib_mad *mad, u32 cm_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cm_generic_msg *msg = (struct cm_generic_msg *)mad;
 	msg->local_comm_id = cpu_to_be32(cm_id);
 =======
+=======
+>>>>>>> v3.18
 	if (mad->mad_hdr.attr_id == CM_SIDR_REQ_ATTR_ID) {
 		struct cm_sidr_generic_msg *msg =
 			(struct cm_sidr_generic_msg *)mad;
@@ -92,16 +101,22 @@ static void set_local_comm_id(struct ib_mad *mad, u32 cm_id)
 		struct cm_generic_msg *msg = (struct cm_generic_msg *)mad;
 		msg->local_comm_id = cpu_to_be32(cm_id);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static u32 get_local_comm_id(struct ib_mad *mad)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cm_generic_msg *msg = (struct cm_generic_msg *)mad;
 
 	return be32_to_cpu(msg->local_comm_id);
 =======
+=======
+>>>>>>> v3.18
 	if (mad->mad_hdr.attr_id == CM_SIDR_REQ_ATTR_ID) {
 		struct cm_sidr_generic_msg *msg =
 			(struct cm_sidr_generic_msg *)mad;
@@ -113,15 +128,21 @@ static u32 get_local_comm_id(struct ib_mad *mad)
 		struct cm_generic_msg *msg = (struct cm_generic_msg *)mad;
 		return be32_to_cpu(msg->local_comm_id);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void set_remote_comm_id(struct ib_mad *mad, u32 cm_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cm_generic_msg *msg = (struct cm_generic_msg *)mad;
 	msg->remote_comm_id = cpu_to_be32(cm_id);
 =======
+=======
+>>>>>>> v3.18
 	if (mad->mad_hdr.attr_id == CM_SIDR_REP_ATTR_ID) {
 		struct cm_sidr_generic_msg *msg =
 			(struct cm_sidr_generic_msg *)mad;
@@ -133,16 +154,22 @@ static void set_remote_comm_id(struct ib_mad *mad, u32 cm_id)
 		struct cm_generic_msg *msg = (struct cm_generic_msg *)mad;
 		msg->remote_comm_id = cpu_to_be32(cm_id);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static u32 get_remote_comm_id(struct ib_mad *mad)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cm_generic_msg *msg = (struct cm_generic_msg *)mad;
 
 	return be32_to_cpu(msg->remote_comm_id);
 =======
+=======
+>>>>>>> v3.18
 	if (mad->mad_hdr.attr_id == CM_SIDR_REP_ATTR_ID) {
 		struct cm_sidr_generic_msg *msg =
 			(struct cm_sidr_generic_msg *)mad;
@@ -154,6 +181,9 @@ static u32 get_remote_comm_id(struct ib_mad *mad)
 		struct cm_generic_msg *msg = (struct cm_generic_msg *)mad;
 		return be32_to_cpu(msg->remote_comm_id);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -347,15 +377,21 @@ int mlx4_ib_multiplex_cm_handler(struct ib_device *ibdev, int port, int slave_id
 	int pv_cm_id = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sl_cm_id = get_local_comm_id(mad);
 
 	if (mad->mad_hdr.attr_id == CM_REQ_ATTR_ID ||
 			mad->mad_hdr.attr_id == CM_REP_ATTR_ID) {
 =======
+=======
+>>>>>>> v3.18
 	if (mad->mad_hdr.attr_id == CM_REQ_ATTR_ID ||
 			mad->mad_hdr.attr_id == CM_REP_ATTR_ID ||
 			mad->mad_hdr.attr_id == CM_SIDR_REQ_ATTR_ID) {
 		sl_cm_id = get_local_comm_id(mad);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		id = id_map_alloc(ibdev, slave_id, sl_cm_id);
 		if (IS_ERR(id)) {
@@ -364,15 +400,21 @@ int mlx4_ib_multiplex_cm_handler(struct ib_device *ibdev, int port, int slave_id
 			return PTR_ERR(id);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (mad->mad_hdr.attr_id == CM_REJ_ATTR_ID) {
 		return 0;
 	} else {
 =======
+=======
+>>>>>>> v3.18
 	} else if (mad->mad_hdr.attr_id == CM_REJ_ATTR_ID ||
 		   mad->mad_hdr.attr_id == CM_SIDR_REP_ATTR_ID) {
 		return 0;
 	} else {
 		sl_cm_id = get_local_comm_id(mad);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		id = id_map_get(ibdev, &pv_cm_id, slave_id, sl_cm_id);
 	}
@@ -395,7 +437,11 @@ int mlx4_ib_multiplex_cm_handler(struct ib_device *ibdev, int port, int slave_id
 
 int mlx4_ib_demux_cm_handler(struct ib_device *ibdev, int port, int *slave,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							     struct ib_mad *mad)
+=======
+			     struct ib_mad *mad)
+>>>>>>> v3.18
 =======
 			     struct ib_mad *mad)
 >>>>>>> v3.18
@@ -404,10 +450,13 @@ int mlx4_ib_demux_cm_handler(struct ib_device *ibdev, int port, int *slave,
 	struct id_map_entry *id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mad->mad_hdr.attr_id == CM_REQ_ATTR_ID) {
 		union ib_gid gid;
 
 =======
+=======
+>>>>>>> v3.18
 	if (mad->mad_hdr.attr_id == CM_REQ_ATTR_ID ||
 	    mad->mad_hdr.attr_id == CM_SIDR_REQ_ATTR_ID) {
 		union ib_gid gid;
@@ -415,6 +464,9 @@ int mlx4_ib_demux_cm_handler(struct ib_device *ibdev, int port, int *slave,
 		if (!slave)
 			return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gid = gid_from_req_msg(ibdev, mad);
 		*slave = mlx4_ib_find_real_gid(ibdev, port, gid.global.interface_id);
@@ -435,7 +487,12 @@ int mlx4_ib_demux_cm_handler(struct ib_device *ibdev, int port, int *slave,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*slave = id->slave_id;
+=======
+	if (slave)
+		*slave = id->slave_id;
+>>>>>>> v3.18
 =======
 	if (slave)
 		*slave = id->slave_id;

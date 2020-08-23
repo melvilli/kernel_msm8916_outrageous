@@ -148,9 +148,13 @@ static inline void snd_info_set_text_ops(struct snd_info_entry *entry,
 
 int snd_info_check_reserved_words(const char *str);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_info_entry *snd_register_module_info(struct module *module,
 						const char *name,
 						struct snd_info_entry *parent);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -184,9 +188,13 @@ static inline void snd_info_set_text_ops(struct snd_info_entry *entry __attribut
 
 static inline int snd_info_check_reserved_words(const char *str) { return 1; }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct snd_info_entry *snd_register_module_info(
 				struct module *module, const char *name,
 				struct snd_info_entry *parent) { return NULL; }
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -6,9 +6,13 @@
  *       information from the decompresser to the kernel
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000, 2001 Axis Communications AB
  *
  * Authors:  Mikael Starvik (starvik@axis.com)
+=======
+ * Copyright (C) 2000-2012 Axis Communications AB
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000-2012 Axis Communications AB
 >>>>>>> v3.18
@@ -23,10 +27,16 @@
 
 	;; WARNING! The registers r8 and r9 are used as parameters carrying
 <<<<<<< HEAD
+<<<<<<< HEAD
 	;; information from the decompressor (if the kernel was compressed). 
 	;; They should not be used in the code below.
 
 #ifndef CONFIG_SVINTO_SIM	
+=======
+	;; information from the decompressor (if the kernel was compressed).
+	;; They should not be used in the code below.
+
+>>>>>>> v3.18
 =======
 	;; information from the decompressor (if the kernel was compressed).
 	;; They should not be used in the code below.
@@ -38,7 +48,11 @@
 	move.d   CONFIG_ETRAX_DEF_R_BUS_CONFIG, $r0
 	move.d   $r0, [R_BUS_CONFIG]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -53,9 +67,15 @@
 	moveq    2, $r6	
 _sdram_init:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	; Refer to ETRAX 100LX Designers Reference for a description of SDRAM initialization
 	
+=======
+
+	; Refer to ETRAX 100LX Designers Reference for a description of SDRAM initialization
+
+>>>>>>> v3.18
 =======
 
 	; Refer to ETRAX 100LX Designers Reference for a description of SDRAM initialization
@@ -66,7 +86,11 @@ _sdram_init:
 	move.d   $r0, [R_SDRAM_CONFIG]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	; Calculate value of mrs_data 
+=======
+	; Calculate value of mrs_data
+>>>>>>> v3.18
 =======
 	; Calculate value of mrs_data
 >>>>>>> v3.18
@@ -80,6 +104,7 @@ _sdram_init:
 	and.d    0x00ff0000, $r2
 	bne	 _set_timing
 	lsrq     16, $r2
+<<<<<<< HEAD
 <<<<<<< HEAD
 	
 	move.d   0x40, $r2       ; Assume 32 bits and CAS latency = 2
@@ -98,6 +123,8 @@ _speed_100:
 	nop
 _speed_50:			
 =======
+=======
+>>>>>>> v3.18
 
 	move.d   0x40, $r2       ; Assume 32 bits and CAS latency = 2
 	move.d   CONFIG_ETRAX_DEF_R_SDRAM_TIMING, $r1
@@ -114,6 +141,9 @@ _speed_100:
 	ba       _bw_check
 	nop
 _speed_50:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmp.d    0x01, $r1	; CAS latency = 2?
 	beq      _bw_check
@@ -130,7 +160,11 @@ _bw_check:
 _set_timing:
 	move.d   CONFIG_ETRAX_DEF_R_SDRAM_TIMING, $r1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	and.d    0x8000f9ff, $r1 ; Make sure mrs data and command is 0 
+=======
+	and.d    0x8000f9ff, $r1 ; Make sure mrs data and command is 0
+>>>>>>> v3.18
 =======
 	and.d    0x8000f9ff, $r1 ; Make sure mrs data and command is 0
 >>>>>>> v3.18
@@ -139,9 +173,15 @@ _set_timing:
 	or.d     0x0000c000, $r1 ; ref = disable
 	lslq     16, $r2		; mrs data starts at bit 16
 <<<<<<< HEAD
+<<<<<<< HEAD
 	or.d     $r2, $r1 
 	move.d   $r1, [R_SDRAM_TIMING]	
 		
+=======
+	or.d     $r2, $r1
+	move.d   $r1, [R_SDRAM_TIMING]
+
+>>>>>>> v3.18
 =======
 	or.d     $r2, $r1
 	move.d   $r1, [R_SDRAM_TIMING]
@@ -152,7 +192,11 @@ _set_timing:
 1:	bne      1b
 	subq     1, $r2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -202,9 +246,14 @@ _sdram_commands_start:
 	.byte   0	; nop
 	.byte   1	; mrs
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.byte   0	; nop 
 _sdram_commands_end:		
 #endif
+=======
+	.byte   0	; nop
+_sdram_commands_end:
+>>>>>>> v3.18
 =======
 	.byte   0	; nop
 _sdram_commands_end:

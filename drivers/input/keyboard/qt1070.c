@@ -26,7 +26,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/i2c.h>
@@ -247,7 +250,10 @@ static int qt1070_remove(struct i2c_client *client)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int qt1070_suspend(struct device *dev)
 {
@@ -274,6 +280,9 @@ static int qt1070_resume(struct device *dev)
 
 static SIMPLE_DEV_PM_OPS(qt1070_pm_ops, qt1070_suspend, qt1070_resume);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct i2c_device_id qt1070_id[] = {
 	{ "qt1070", 0 },
@@ -286,6 +295,10 @@ static struct i2c_driver qt1070_driver = {
 		.name	= "qt1070",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm	= &qt1070_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm	= &qt1070_pm_ops,
 >>>>>>> v3.18

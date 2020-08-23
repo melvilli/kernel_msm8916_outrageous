@@ -31,6 +31,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -286,8 +291,13 @@ void xenbus_dev_shutdown(struct device *_dev)
 	get_device(&dev->dev);
 	if (dev->state != XenbusStateConnected) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "%s: %s: %s != Connected, skipping\n", __func__,
 		       dev->nodename, xenbus_strstate(dev->state));
+=======
+		pr_info("%s: %s: %s != Connected, skipping\n",
+			__func__, dev->nodename, xenbus_strstate(dev->state));
+>>>>>>> v3.18
 =======
 		pr_info("%s: %s: %s != Connected, skipping\n",
 			__func__, dev->nodename, xenbus_strstate(dev->state));
@@ -298,8 +308,13 @@ void xenbus_dev_shutdown(struct device *_dev)
 	timeout = wait_for_completion_timeout(&dev->down, timeout);
 	if (!timeout)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "%s: %s timeout closing device\n",
 		       __func__, dev->nodename);
+=======
+		pr_info("%s: %s timeout closing device\n",
+			__func__, dev->nodename);
+>>>>>>> v3.18
 =======
 		pr_info("%s: %s timeout closing device\n",
 			__func__, dev->nodename);
@@ -311,10 +326,13 @@ EXPORT_SYMBOL_GPL(xenbus_dev_shutdown);
 
 int xenbus_register_driver_common(struct xenbus_driver *drv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct xen_bus_type *bus)
 {
 	drv->driver.bus = &bus->bus;
 =======
+=======
+>>>>>>> v3.18
 				  struct xen_bus_type *bus,
 				  struct module *owner, const char *mod_name)
 {
@@ -322,6 +340,9 @@ int xenbus_register_driver_common(struct xenbus_driver *drv,
 	drv->driver.bus = &bus->bus;
 	drv->driver.owner = owner;
 	drv->driver.mod_name = mod_name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return driver_register(&drv->driver);
@@ -408,6 +429,10 @@ static ssize_t nodename_show(struct device *dev,
 	return sprintf(buf, "%s\n", to_xenbus_device(dev)->nodename);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(nodename);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(nodename);
 >>>>>>> v3.18
@@ -418,6 +443,10 @@ static ssize_t devtype_show(struct device *dev,
 	return sprintf(buf, "%s\n", to_xenbus_device(dev)->devicetype);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(devtype);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(devtype);
 >>>>>>> v3.18
@@ -429,6 +458,7 @@ static ssize_t modalias_show(struct device *dev,
 		       to_xenbus_device(dev)->devicetype);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct device_attribute xenbus_dev_attrs[] = {
 	__ATTR_RO(nodename),
@@ -438,6 +468,8 @@ struct device_attribute xenbus_dev_attrs[] = {
 };
 EXPORT_SYMBOL_GPL(xenbus_dev_attrs);
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(modalias);
 
 static struct attribute *xenbus_dev_attrs[] = {
@@ -456,6 +488,9 @@ const struct attribute_group *xenbus_dev_groups[] = {
 	NULL,
 };
 EXPORT_SYMBOL_GPL(xenbus_dev_groups);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int xenbus_probe_node(struct xen_bus_type *bus,
@@ -502,7 +537,11 @@ int xenbus_probe_node(struct xen_bus_type *bus,
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_name(&xendev->dev, devname);
+=======
+	dev_set_name(&xendev->dev, "%s", devname);
+>>>>>>> v3.18
 =======
 	dev_set_name(&xendev->dev, "%s", devname);
 >>>>>>> v3.18
@@ -638,8 +677,12 @@ int xenbus_dev_suspend(struct device *dev)
 		err = drv->suspend(xdev);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "xenbus: suspend %s failed: %i\n", dev_name(dev), err);
+=======
+		pr_warn("suspend %s failed: %i\n", dev_name(dev), err);
+>>>>>>> v3.18
 =======
 		pr_warn("suspend %s failed: %i\n", dev_name(dev), err);
 >>>>>>> v3.18
@@ -662,9 +705,14 @@ int xenbus_dev_resume(struct device *dev)
 	err = talk_to_otherend(xdev);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "xenbus: resume (talk_to_otherend) %s failed: %i\n",
 		       dev_name(dev), err);
+=======
+		pr_warn("resume (talk_to_otherend) %s failed: %i\n",
+			dev_name(dev), err);
+>>>>>>> v3.18
 =======
 		pr_warn("resume (talk_to_otherend) %s failed: %i\n",
 			dev_name(dev), err);
@@ -678,9 +726,13 @@ int xenbus_dev_resume(struct device *dev)
 		err = drv->resume(xdev);
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING
 			       "xenbus: resume %s failed: %i\n",
 			       dev_name(dev), err);
+=======
+			pr_warn("resume %s failed: %i\n", dev_name(dev), err);
+>>>>>>> v3.18
 =======
 			pr_warn("resume %s failed: %i\n", dev_name(dev), err);
 >>>>>>> v3.18
@@ -691,9 +743,14 @@ int xenbus_dev_resume(struct device *dev)
 	err = watch_otherend(xdev);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "xenbus_probe: resume (watch_otherend) %s failed: "
 		       "%d.\n", dev_name(dev), err);
+=======
+		pr_warn("resume (watch_otherend) %s failed: %d.\n",
+			dev_name(dev), err);
+>>>>>>> v3.18
 =======
 		pr_warn("resume (watch_otherend) %s failed: %d.\n",
 			dev_name(dev), err);
@@ -853,8 +910,12 @@ static int __init xenbus_init(void)
 	err = xs_init();
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "XENBUS: Error initializing xenstore comms: %i\n", err);
+=======
+		pr_warn("Error initializing xenstore comms: %i\n", err);
+>>>>>>> v3.18
 =======
 		pr_warn("Error initializing xenstore comms: %i\n", err);
 >>>>>>> v3.18

@@ -75,10 +75,13 @@ _mcount:
 
 	/* When tracing is activated, it calls ftrace_caller+8 (aka here) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lw	t1, function_trace_stop
 	bnez	t1, ftrace_stub
 	 nop
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	MCOUNT_SAVE_REGS
@@ -87,8 +90,11 @@ _mcount:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	move	a0, ra		/* arg1: self return address */
 =======
+=======
+>>>>>>> v3.18
 	PTR_SUBU a0, ra, 8	/* arg1: self address */
 	PTR_LA   t1, _stext
 	sltu     t2, a0, t1	/* t2 = (a0 < _stext) */
@@ -103,6 +109,9 @@ _mcount:
 	PTR_SUBU a0, a0, 12
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.globl ftrace_call
 ftrace_call:
@@ -126,9 +135,12 @@ ftrace_stub:
 
 NESTED(_mcount, PT_SIZE, ra)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lw	t1, function_trace_stop
 	bnez	t1, ftrace_stub
 	 nop
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	PTR_LA	t1, ftrace_stub
@@ -199,9 +211,12 @@ NESTED(ftrace_graph_caller, PT_SIZE, ra)
 
 	/* arg3: Get frame pointer of current stack */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_FRAME_POINTER
 	move	a2, fp
 #else /* ! CONFIG_FRAME_POINTER */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_64BIT
@@ -210,7 +225,10 @@ NESTED(ftrace_graph_caller, PT_SIZE, ra)
 	PTR_LA	a2, (PT_SIZE+8)(sp)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -168,6 +168,10 @@ struct si470x_device {
 	struct usb_device *usbdev;
 	struct usb_interface *intf;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char *usb_buf;
+>>>>>>> v3.18
 =======
 	char *usb_buf;
 >>>>>>> v3.18

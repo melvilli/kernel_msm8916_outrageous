@@ -24,6 +24,10 @@
 #include "h/supern_2.h"
 #include <linux/bitrev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/etherdevice.h>
 >>>>>>> v3.18
@@ -60,7 +64,11 @@ static	char cam_warning [] = "E_SMT_004: CAM still busy\n";
 #define	DUMMY_READ()	smc->hw.mc_dummy = (u_short) inp(ADDR(B0_RAP))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	CHECK_NPP() {	unsigned k = 10000 ;\
+=======
+#define	CHECK_NPP() {	unsigned int k = 10000 ;\
+>>>>>>> v3.18
 =======
 #define	CHECK_NPP() {	unsigned int k = 10000 ;\
 >>>>>>> v3.18
@@ -71,7 +79,11 @@ static	char cam_warning [] = "E_SMT_004: CAM still busy\n";
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	CHECK_CAM() {	unsigned k = 10 ;\
+=======
+#define	CHECK_CAM() {	unsigned int k = 10 ;\
+>>>>>>> v3.18
 =======
 #define	CHECK_CAM() {	unsigned int k = 10 ;\
 >>>>>>> v3.18
@@ -369,22 +381,29 @@ static	void set_formac_addr(struct s_smc *smc)
 
 	outpw(FM_A(FM_SAID),my_said) ;	/* set short address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outpw(FM_A(FM_LAIL),(unsigned)((smc->hw.fddi_home_addr.a[4]<<8) +
 					smc->hw.fddi_home_addr.a[5])) ;
 	outpw(FM_A(FM_LAIC),(unsigned)((smc->hw.fddi_home_addr.a[2]<<8) +
 					smc->hw.fddi_home_addr.a[3])) ;
 	outpw(FM_A(FM_LAIM),(unsigned)((smc->hw.fddi_home_addr.a[0]<<8) +
 =======
+=======
+>>>>>>> v3.18
 	outpw(FM_A(FM_LAIL),(unsigned short)((smc->hw.fddi_home_addr.a[4]<<8) +
 					smc->hw.fddi_home_addr.a[5])) ;
 	outpw(FM_A(FM_LAIC),(unsigned short)((smc->hw.fddi_home_addr.a[2]<<8) +
 					smc->hw.fddi_home_addr.a[3])) ;
 	outpw(FM_A(FM_LAIM),(unsigned short)((smc->hw.fddi_home_addr.a[0]<<8) +
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					smc->hw.fddi_home_addr.a[1])) ;
 
 	outpw(FM_A(FM_SAGP),my_sagp) ;	/* set short group address */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	outpw(FM_A(FM_LAGL),(unsigned)((smc->hw.fp.group_addr.a[4]<<8) +
 					smc->hw.fp.group_addr.a[5])) ;
@@ -397,6 +416,8 @@ static	void set_formac_addr(struct s_smc *smc)
 	outpw(FM_A(FM_TREQ1),(unsigned)(t_requ>>16)) ;
 	outpw(FM_A(FM_TREQ0),(unsigned)t_requ) ;
 =======
+=======
+>>>>>>> v3.18
 	outpw(FM_A(FM_LAGL),(unsigned short)((smc->hw.fp.group_addr.a[4]<<8) +
 					smc->hw.fp.group_addr.a[5])) ;
 	outpw(FM_A(FM_LAGC),(unsigned short)((smc->hw.fp.group_addr.a[2]<<8) +
@@ -407,6 +428,9 @@ static	void set_formac_addr(struct s_smc *smc)
 	/* set r_request regs. (MSW & LSW of TRT ) */
 	outpw(FM_A(FM_TREQ1),(unsigned short)(t_requ>>16)) ;
 	outpw(FM_A(FM_TREQ0),(unsigned short)t_requ) ;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -428,15 +452,21 @@ static void set_int(char *p, int l)
  */
 static void copy_tx_mac(struct s_smc *smc, u_long td, struct fddi_mac *mac,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned off, int len)
 /* u_long td;		 transmit descriptor */
 /* struct fddi_mac *mac; mac frame pointer */
 /* unsigned off;	 start address within buffer memory */
 =======
+=======
+>>>>>>> v3.18
 			unsigned int off, int len)
 /* u_long td;		 transmit descriptor */
 /* struct fddi_mac *mac; mac frame pointer */
 /* unsigned int off;	 start address within buffer memory */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* int len ;		 length of the frame including the FC */
 {
@@ -494,7 +524,11 @@ static void directed_beacon(struct s_smc *smc)
 	* (char *) a = (char) ((long)DBEACON_INFO<<24L) ;
 	a[1] = 0 ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy((char *)a+1,(char *) &smc->mib.m[MAC0].fddiMACUpstreamNbr,6) ;
+=======
+	memcpy((char *)a+1, (char *) &smc->mib.m[MAC0].fddiMACUpstreamNbr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy((char *)a+1, (char *) &smc->mib.m[MAC0].fddiMACUpstreamNbr, ETH_ALEN);
 >>>>>>> v3.18
@@ -1127,7 +1161,11 @@ static struct s_fpmc* mac_get_mc_table(struct s_smc *smc,
 			continue ;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (memcmp((char *)&tb->a,(char *)own,6))
+=======
+		if (!ether_addr_equal((char *)&tb->a, (char *)own))
+>>>>>>> v3.18
 =======
 		if (!ether_addr_equal((char *)&tb->a, (char *)own))
 >>>>>>> v3.18

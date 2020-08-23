@@ -28,6 +28,7 @@
 #include "atom.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void radeon_atom_copy_swap(u8 *dst, u8 *src, u8 num_bytes, bool to_le);
 
 #define TARGET_HW_I2C_CLOCK 50
@@ -35,10 +36,15 @@ extern void radeon_atom_copy_swap(u8 *dst, u8 *src, u8 num_bytes, bool to_le);
 /* these are a limitation of ProcessI2cChannelTransaction not the hw */
 #define ATOM_MAX_HW_I2C_WRITE 2
 =======
+=======
+>>>>>>> v3.18
 #define TARGET_HW_I2C_CLOCK 50
 
 /* these are a limitation of ProcessI2cChannelTransaction not the hw */
 #define ATOM_MAX_HW_I2C_WRITE 3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ATOM_MAX_HW_I2C_READ  255
 
@@ -52,11 +58,14 @@ static int radeon_process_i2c_ch(struct radeon_i2c_chan *chan,
 	int index = GetIndexIntoMasterTable(COMMAND, ProcessI2cChannelTransaction);
 	unsigned char *base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 out;
 
 	memset(&args, 0, sizeof(args));
 
 =======
+=======
+>>>>>>> v3.18
 	u16 out = cpu_to_le16(0);
 	int r = 0;
 
@@ -65,17 +74,23 @@ static int radeon_process_i2c_ch(struct radeon_i2c_chan *chan,
 	mutex_lock(&chan->mutex);
 	mutex_lock(&rdev->mode_info.atom_context->scratch_mutex);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	base = (unsigned char *)rdev->mode_info.atom_context->scratch;
 
 	if (flags & HW_I2C_WRITE) {
 		if (num > ATOM_MAX_HW_I2C_WRITE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DRM_ERROR("hw i2c: tried to write too many bytes (%d vs 2)\n", num);
 			return -EINVAL;
 		}
 		memcpy(&out, buf, num);
 =======
+=======
+>>>>>>> v3.18
 			DRM_ERROR("hw i2c: tried to write too many bytes (%d vs 3)\n", num);
 			r = -EINVAL;
 			goto done;
@@ -88,11 +103,15 @@ static int radeon_process_i2c_ch(struct radeon_i2c_chan *chan,
 			num--;
 		if (num)
 			memcpy(&out, &buf[1], num);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		args.lpI2CDataOut = cpu_to_le16(out);
 	} else {
 		if (num > ATOM_MAX_HW_I2C_READ) {
 			DRM_ERROR("hw i2c: tried to read too many bytes (%d vs 255)\n", num);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			return -EINVAL;
 		}
@@ -101,6 +120,8 @@ static int radeon_process_i2c_ch(struct radeon_i2c_chan *chan,
 	args.ucI2CSpeed = TARGET_HW_I2C_CLOCK;
 	args.ucRegIndex = 0;
 =======
+=======
+>>>>>>> v3.18
 			r = -EINVAL;
 			goto done;
 		}
@@ -110,13 +131,20 @@ static int radeon_process_i2c_ch(struct radeon_i2c_chan *chan,
 
 	args.ucFlag = flags;
 	args.ucI2CSpeed = TARGET_HW_I2C_CLOCK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	args.ucTransBytes = num;
 	args.ucSlaveAddr = slave_addr << 1;
 	args.ucLineNumber = chan->rec.i2c_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atom_execute_table(rdev->mode_info.atom_context, index, (uint32_t *)&args);
+=======
+	atom_execute_table_scratch_unlocked(rdev->mode_info.atom_context, index, (uint32_t *)&args);
+>>>>>>> v3.18
 =======
 	atom_execute_table_scratch_unlocked(rdev->mode_info.atom_context, index, (uint32_t *)&args);
 >>>>>>> v3.18
@@ -125,7 +153,12 @@ static int radeon_process_i2c_ch(struct radeon_i2c_chan *chan,
 	if (args.ucStatus != HW_ASSISTED_I2C_STATUS_SUCCESS) {
 		DRM_DEBUG_KMS("hw_i2c error\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EIO;
+=======
+		r = -EIO;
+		goto done;
+>>>>>>> v3.18
 =======
 		r = -EIO;
 		goto done;
@@ -136,13 +169,19 @@ static int radeon_process_i2c_ch(struct radeon_i2c_chan *chan,
 		radeon_atom_copy_swap(buf, base, num, false);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 done:
 	mutex_unlock(&rdev->mode_info.atom_context->scratch_mutex);
 	mutex_unlock(&chan->mutex);
 
 	return r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -153,7 +192,11 @@ int radeon_atom_hw_i2c_xfer(struct i2c_adapter *i2c_adap,
 	struct i2c_msg *p;
 	int i, remaining, current_count, buffer_offset, max_bytes, ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 buf = 0, flags;
+=======
+	u8 flags;
+>>>>>>> v3.18
 =======
 	u8 flags;
 >>>>>>> v3.18
@@ -164,7 +207,11 @@ int radeon_atom_hw_i2c_xfer(struct i2c_adapter *i2c_adap,
 		ret = radeon_process_i2c_ch(i2c,
 					    p->addr, HW_I2C_WRITE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    &buf, 1);
+=======
+					    NULL, 0);
+>>>>>>> v3.18
 =======
 					    NULL, 0);
 >>>>>>> v3.18

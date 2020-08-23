@@ -72,6 +72,7 @@ struct nf_conn_help {
 #include <net/netfilter/ipv6/nf_conntrack_ipv6.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Handle NATTYPE Stuff,only if NATTYPE module was defined */
 #if defined(CONFIG_IP_NF_TARGET_NATTYPE_MODULE)
 #include <linux/netfilter_ipv4/ipt_NATTYPE.h>
@@ -84,6 +85,8 @@ struct nf_conn {
 
 	spinlock_t lock;
 =======
+=======
+>>>>>>> v3.18
 struct nf_conn {
 	/* Usage count in here is 1 for hash table/destruct timer, 1 per skb,
 	 * plus 1 for any connection(s) we are `master' for
@@ -97,6 +100,9 @@ struct nf_conn {
 
 	spinlock_t	lock;
 	u16		cpu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* XXX should I move this to the tail ? - Y.K */
@@ -127,10 +133,13 @@ struct nf_conn {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_IP_NF_TARGET_NATTYPE_MODULE)
 	unsigned long nattype_entry;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Storage reserved for other modules, must be the last member */
@@ -168,6 +177,7 @@ static inline struct net *nf_ct_net(const struct nf_conn *ct)
 
 /* Alter reply tuple (maybe alter helper). */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void
 nf_conntrack_alter_reply(struct nf_conn *ct,
 			 const struct nf_conntrack_tuple *newreply);
@@ -178,6 +188,8 @@ extern int
 nf_conntrack_tuple_taken(const struct nf_conntrack_tuple *tuple,
 			 const struct nf_conn *ignored_conntrack);
 =======
+=======
+>>>>>>> v3.18
 void nf_conntrack_alter_reply(struct nf_conn *ct,
 			      const struct nf_conntrack_tuple *newreply);
 
@@ -185,6 +197,9 @@ void nf_conntrack_alter_reply(struct nf_conn *ct,
    conntrack). */
 int nf_conntrack_tuple_taken(const struct nf_conntrack_tuple *tuple,
 			     const struct nf_conn *ignored_conntrack);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Return conntrack_info and tuple hash for given skb. */
@@ -204,8 +219,13 @@ static inline void nf_ct_put(struct nf_conn *ct)
 
 /* Protocol module loading */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int nf_ct_l3proto_try_module_get(unsigned short l3proto);
 extern void nf_ct_l3proto_module_put(unsigned short l3proto);
+=======
+int nf_ct_l3proto_try_module_get(unsigned short l3proto);
+void nf_ct_l3proto_module_put(unsigned short l3proto);
+>>>>>>> v3.18
 =======
 int nf_ct_l3proto_try_module_get(unsigned short l3proto);
 void nf_ct_l3proto_module_put(unsigned short l3proto);
@@ -215,6 +235,7 @@ void nf_ct_l3proto_module_put(unsigned short l3proto);
  * Allocate a hashtable of hlist_head (if nulls == 0),
  * or hlist_nulls_head (if nulls == 1)
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void *nf_ct_alloc_hashtable(unsigned int *sizep, int nulls);
 
@@ -242,6 +263,8 @@ extern void __nf_ct_refresh_acct(struct nf_conn *ct,
 				 unsigned long extra_jiffies,
 				 int do_acct);
 =======
+=======
+>>>>>>> v3.18
 void *nf_ct_alloc_hashtable(unsigned int *sizep, int nulls);
 
 void nf_ct_free_hashtable(void *hash, unsigned int size);
@@ -263,6 +286,9 @@ bool nf_ct_invert_tuplepr(struct nf_conntrack_tuple *inverse,
 void __nf_ct_refresh_acct(struct nf_conn *ct, enum ip_conntrack_info ctinfo,
 			  const struct sk_buff *skb,
 			  unsigned long extra_jiffies, int do_acct);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Refresh conntrack for this many jiffies and do accounting */
@@ -283,10 +309,15 @@ static inline void nf_ct_refresh(struct nf_conn *ct,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool __nf_ct_kill_acct(struct nf_conn *ct,
 			      enum ip_conntrack_info ctinfo,
 			      const struct sk_buff *skb,
 			      int do_acct);
+=======
+bool __nf_ct_kill_acct(struct nf_conn *ct, enum ip_conntrack_info ctinfo,
+		       const struct sk_buff *skb, int do_acct);
+>>>>>>> v3.18
 =======
 bool __nf_ct_kill_acct(struct nf_conn *ct, enum ip_conntrack_info ctinfo,
 		       const struct sk_buff *skb, int do_acct);
@@ -308,7 +339,11 @@ static inline bool nf_ct_kill(struct nf_conn *ct)
 
 /* These are for NAT.  Icky. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern s16 (*nf_ct_nat_offset)(const struct nf_conn *ct,
+=======
+extern s32 (*nf_ct_nat_offset)(const struct nf_conn *ct,
+>>>>>>> v3.18
 =======
 extern s32 (*nf_ct_nat_offset)(const struct nf_conn *ct,
 >>>>>>> v3.18
@@ -319,6 +354,7 @@ extern s32 (*nf_ct_nat_offset)(const struct nf_conn *ct,
 DECLARE_PER_CPU(struct nf_conn, nf_conntrack_untracked);
 static inline struct nf_conn *nf_ct_untracked_get(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return &__raw_get_cpu_var(nf_conntrack_untracked);
 }
@@ -334,6 +370,8 @@ nf_conntrack_alloc(struct net *net, u16 zone,
 		   const struct nf_conntrack_tuple *repl,
 		   gfp_t gfp);
 =======
+=======
+>>>>>>> v3.18
 	return raw_cpu_ptr(&nf_conntrack_untracked);
 }
 void nf_ct_untracked_status_or(unsigned long bits);
@@ -347,6 +385,9 @@ struct nf_conn *nf_conntrack_alloc(struct net *net, u16 zone,
 				   const struct nf_conntrack_tuple *orig,
 				   const struct nf_conntrack_tuple *repl,
 				   gfp_t gfp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int nf_ct_is_template(const struct nf_conn *ct)
@@ -379,7 +420,11 @@ static inline bool nf_is_loopback_packet(const struct sk_buff *skb)
 struct kernel_param;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int nf_conntrack_set_hashsize(const char *val, struct kernel_param *kp);
+=======
+int nf_conntrack_set_hashsize(const char *val, struct kernel_param *kp);
+>>>>>>> v3.18
 =======
 int nf_conntrack_set_hashsize(const char *val, struct kernel_param *kp);
 >>>>>>> v3.18
@@ -389,6 +434,11 @@ extern unsigned int nf_conntrack_hash_rnd;
 void init_nf_conntrack_hash_rnd(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void nf_conntrack_tmpl_insert(struct net *net, struct nf_conn *tmpl);
+
+>>>>>>> v3.18
 =======
 void nf_conntrack_tmpl_insert(struct net *net, struct nf_conn *tmpl);
 

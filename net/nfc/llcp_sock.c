@@ -13,9 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the
  * Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -608,7 +612,11 @@ static int llcp_sock_release(struct socket *sock)
 	/* Send a DISC */
 	if (sk->sk_state == LLCP_CONNECTED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nfc_llcp_disconnect(llcp_sock);
+=======
+		nfc_llcp_send_disconnect(llcp_sock);
+>>>>>>> v3.18
 =======
 		nfc_llcp_send_disconnect(llcp_sock);
 >>>>>>> v3.18
@@ -623,7 +631,11 @@ static int llcp_sock_release(struct socket *sock)
 			lock_sock(accept_sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nfc_llcp_disconnect(lsk);
+=======
+			nfc_llcp_send_disconnect(lsk);
+>>>>>>> v3.18
 =======
 			nfc_llcp_send_disconnect(lsk);
 >>>>>>> v3.18
@@ -639,7 +651,10 @@ static int llcp_sock_release(struct socket *sock)
 	release_sock(sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Keep this sock alive and therefore do not remove it from the sockets
 	 * list until the DISC PDU has been actually sent. Otherwise we would
 	 * reply with DM PDUs before sending the DISC one.
@@ -647,6 +662,9 @@ static int llcp_sock_release(struct socket *sock)
 	if (sk->sk_state == LLCP_DISCONNECTING)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sock->type == SOCK_RAW)
 		nfc_llcp_sock_unlink(&local->raw_sockets, sk);
@@ -718,7 +736,10 @@ static int llcp_sock_connect(struct socket *sock, struct sockaddr *_addr,
 	llcp_sock->dev = dev;
 	llcp_sock->local = nfc_llcp_local_get(local);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	llcp_sock->remote_miu = llcp_sock->local->remote_miu;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	llcp_sock->ssap = nfc_llcp_get_local_ssap(local);
@@ -791,8 +812,13 @@ static int llcp_sock_sendmsg(struct kiocb *iocb, struct socket *sock,
 
 	if (sk->sk_type == SOCK_DGRAM) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sockaddr_nfc_llcp *addr =
 			(struct sockaddr_nfc_llcp *)msg->msg_name;
+=======
+		DECLARE_SOCKADDR(struct sockaddr_nfc_llcp *, addr,
+				 msg->msg_name);
+>>>>>>> v3.18
 =======
 		DECLARE_SOCKADDR(struct sockaddr_nfc_llcp *, addr,
 				 msg->msg_name);
@@ -869,8 +895,13 @@ static int llcp_sock_recvmsg(struct kiocb *iocb, struct socket *sock,
 	if (sk->sk_type == SOCK_DGRAM && msg->msg_name) {
 		struct nfc_llcp_ui_cb *ui_cb = nfc_llcp_ui_skb_cb(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sockaddr_nfc_llcp *sockaddr =
 			(struct sockaddr_nfc_llcp *) msg->msg_name;
+=======
+		DECLARE_SOCKADDR(struct sockaddr_nfc_llcp *, sockaddr,
+				 msg->msg_name);
+>>>>>>> v3.18
 =======
 		DECLARE_SOCKADDR(struct sockaddr_nfc_llcp *, sockaddr,
 				 msg->msg_name);

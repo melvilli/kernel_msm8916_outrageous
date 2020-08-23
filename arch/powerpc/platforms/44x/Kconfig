@@ -200,7 +200,10 @@ config CURRITUCK
 	  This option enables support for the IBM Currituck (476fpe) evaluation board
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config AKEBONO
 	bool "IBM Akebono (476gtr) Support"
 	depends on PPC_47x
@@ -229,6 +232,9 @@ config AKEBONO
 	  This option enables support for the IBM Akebono (476gtr) evaluation board
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ICON
 	bool "Icon"
@@ -297,7 +303,10 @@ config 440EP
 	select IBM440EP_ERR42
 	select IBM_EMAC_ZMII
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select USB_ARCH_HAS_OHCI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -359,7 +368,10 @@ config APM821xx
 	select IBM_EMAC_TAH
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config 476FPE_ERR46
 	depends on 476FPE
 	bool "Enable linker work around for PPC476FPE errata #46"
@@ -374,6 +386,9 @@ config 476FPE_ERR46
 	  page boundaries. The work around is only required when
 	  building modules.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # 44x errata/workaround config symbols, selected by the CPU models above
 config IBM440EP_ERR42

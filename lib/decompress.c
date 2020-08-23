@@ -12,6 +12,10 @@
 #include <linux/decompress/inflate.h>
 #include <linux/decompress/unlzo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/decompress/unlz4.h>
+>>>>>>> v3.18
 =======
 #include <linux/decompress/unlz4.h>
 >>>>>>> v3.18
@@ -20,6 +24,10 @@
 #include <linux/string.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/printk.h>
+>>>>>>> v3.18
 =======
 #include <linux/printk.h>
 >>>>>>> v3.18
@@ -40,6 +48,12 @@
 # define unlzo NULL
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_DECOMPRESS_LZ4
+# define unlz4 NULL
+#endif
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_DECOMPRESS_LZ4
 # define unlz4 NULL
@@ -60,16 +74,22 @@ static const struct compress_format compressed_formats[] __initconst = {
 	{ {0xfd, 0x37}, "xz", unxz },
 	{ {0x89, 0x4c}, "lzo", unlzo },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ {0, 0}, NULL, NULL }
 };
 
 decompress_fn __init decompress_method(const unsigned char *inbuf, int len,
 =======
+=======
+>>>>>>> v3.18
 	{ {0x02, 0x21}, "lz4", unlz4 },
 	{ {0, 0}, NULL, NULL }
 };
 
 decompress_fn __init decompress_method(const unsigned char *inbuf, long len,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				const char **name)
 {
@@ -79,6 +99,11 @@ decompress_fn __init decompress_method(const unsigned char *inbuf, long len,
 		return NULL;	/* Need at least this much... */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pr_debug("Compressed data magic: %#.2x %#.2x\n", inbuf[0], inbuf[1]);
+
+>>>>>>> v3.18
 =======
 	pr_debug("Compressed data magic: %#.2x %#.2x\n", inbuf[0], inbuf[1]);
 

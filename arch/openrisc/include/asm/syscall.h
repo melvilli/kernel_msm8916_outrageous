@@ -20,6 +20,10 @@
 #define __ASM_OPENRISC_SYSCALL_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <uapi/linux/audit.h>
+>>>>>>> v3.18
 =======
 #include <uapi/linux/audit.h>
 >>>>>>> v3.18
@@ -76,10 +80,16 @@ syscall_set_arguments(struct task_struct *task, struct pt_regs *regs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int syscall_get_arch(void)
 {
 	return AUDIT_ARCH_OPENRISC;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

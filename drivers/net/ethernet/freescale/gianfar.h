@@ -10,7 +10,11 @@
  * Modifier: Sandeep Gopalpet <sandeep.kumar@freescale.com>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2002-2009, 2011 Freescale Semiconductor, Inc.
+=======
+ * Copyright 2002-2009, 2011-2013 Freescale Semiconductor, Inc.
+>>>>>>> v3.18
 =======
  * Copyright 2002-2009, 2011-2013 Freescale Semiconductor, Inc.
 >>>>>>> v3.18
@@ -34,7 +38,10 @@
 #include <linux/slab.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -154,11 +161,17 @@ extern const char gfar_driver_version[];
 		| SUPPORTED_MII)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define GFAR_SUPPORTED_GBIT (SUPPORTED_1000baseT_Full \
 		| SUPPORTED_Pause \
 		| SUPPORTED_Asym_Pause)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* TBI register addresses */
 #define MII_TBICON		0x11
@@ -389,14 +402,20 @@ extern const char gfar_driver_version[];
 		IMASK_XFUN | IMASK_RXC | IMASK_BABT | IMASK_DPE \
 		| IMASK_PERR)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IMASK_RTX_DISABLED ((~(IMASK_RXFEN0 | IMASK_TXFEN | IMASK_BSY)) \
 			   & IMASK_DEFAULT)
 =======
+=======
+>>>>>>> v3.18
 #define IMASK_RX_DEFAULT (IMASK_RXFEN0 | IMASK_BSY)
 #define IMASK_TX_DEFAULT (IMASK_TXFEN | IMASK_TXBEN)
 
 #define IMASK_RX_DISABLED ((~(IMASK_RX_DEFAULT)) & IMASK_DEFAULT)
 #define IMASK_TX_DISABLED ((~(IMASK_TX_DEFAULT)) & IMASK_DEFAULT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Fifo management */
@@ -429,7 +448,13 @@ extern const char gfar_driver_version[];
 /* This default RIR value directly corresponds
  * to the 3-bit hash value generated */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEFAULT_RIR0	0x05397700
+=======
+#define DEFAULT_8RXQ_RIR0	0x05397700
+/* Map even hash values to Q0, and odd ones to Q1 */
+#define DEFAULT_2RXQ_RIR0	0x04104100
+>>>>>>> v3.18
 =======
 #define DEFAULT_8RXQ_RIR0	0x05397700
 /* Map even hash values to Q0, and odd ones to Q1 */
@@ -600,7 +625,11 @@ struct rxfcb {
 
 struct gianfar_skb_cb {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int alignamount;
+=======
+	unsigned int bytes_sent; /* bytes-on-wire (i.e. no FCB) */
+>>>>>>> v3.18
 =======
 	unsigned int bytes_sent; /* bytes-on-wire (i.e. no FCB) */
 >>>>>>> v3.18
@@ -910,7 +939,10 @@ struct gfar {
 #define FSL_GIANFAR_DEV_HAS_VLAN		0x00000020
 #define FSL_GIANFAR_DEV_HAS_EXTENDED_HASH	0x00000040
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FSL_GIANFAR_DEV_HAS_PADDING		0x00000080
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define FSL_GIANFAR_DEV_HAS_MAGIC_PACKET	0x00000100
@@ -925,8 +957,13 @@ struct gfar {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ISRG_SHIFT_TX	0x10
 #define ISRG_SHIFT_RX	0x18
+=======
+#define ISRG_RR0	0x80000000
+#define ISRG_TR0	0x00800000
+>>>>>>> v3.18
 =======
 #define ISRG_RR0	0x80000000
 #define ISRG_TR0	0x00800000
@@ -943,7 +980,10 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* GFAR_SQ_POLLING: Single Queue NAPI polling mode
  *	The driver supports a single pair of RX/Tx queues
  *	per interrupt group (Rx/Tx int line). MQ_MG mode
@@ -960,6 +1000,9 @@ enum gfar_poll_mode {
 	GFAR_MQ_POLLING
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Per TX queue stats
@@ -1023,7 +1066,10 @@ struct rx_q_stats {
 /**
  *	struct gfar_priv_rx_q - per rx queue structure
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	@rxlock: per queue rx spin lock
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *	@rx_skbuff: skb pointers
@@ -1039,8 +1085,12 @@ struct rx_q_stats {
 
 struct gfar_priv_rx_q {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t rxlock __attribute__ ((aligned (SMP_CACHE_BYTES)));
 	struct	sk_buff ** rx_skbuff;
+=======
+	struct	sk_buff **rx_skbuff __aligned(SMP_CACHE_BYTES);
+>>>>>>> v3.18
 =======
 	struct	sk_buff **rx_skbuff __aligned(SMP_CACHE_BYTES);
 >>>>>>> v3.18
@@ -1076,13 +1126,17 @@ struct gfar_irqinfo {
  *	@priv: back pointer to the priv structure
  *	@regs: the ioremapped register space for this group
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	@grp_id: group id for this group
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *	@irqinfo: TX/RX/ER irq data for this group
  */
 
 struct gfar_priv_grp {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spinlock_t grplock __attribute__ ((aligned (SMP_CACHE_BYTES)));
 	struct	napi_struct napi;
@@ -1097,6 +1151,8 @@ struct gfar_priv_grp {
 	unsigned long num_tx_queues;
 	unsigned long tx_bit_map;
 =======
+=======
+>>>>>>> v3.18
 	spinlock_t grplock __aligned(SMP_CACHE_BYTES);
 	struct	napi_struct napi_rx;
 	struct	napi_struct napi_tx;
@@ -1111,6 +1167,9 @@ struct gfar_priv_grp {
 	unsigned long tx_bit_map;
 	unsigned long num_rx_queues;
 	unsigned long rx_bit_map;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct gfar_irqinfo *irqinfo[GFAR_NUM_IRQS];
@@ -1127,12 +1186,18 @@ enum gfar_errata {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum gfar_dev_state {
 	GFAR_DOWN = 1,
 	GFAR_RESETTING
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Struct stolen almost completely (and shamelessly) from the FCC enet source
  * (Ok, that's not so true anymore, but there is a family resemblance)
@@ -1145,8 +1210,11 @@ enum gfar_dev_state {
  */
 struct gfar_private {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int num_rx_queues;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct device *dev;
@@ -1157,6 +1225,10 @@ struct gfar_private {
 	u16 uses_rxfcb;
 	u16 padding;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 device_flags;
+>>>>>>> v3.18
 =======
 	u32 device_flags;
 >>>>>>> v3.18
@@ -1170,17 +1242,23 @@ struct gfar_private {
 	struct gfar_priv_grp gfargrp[MAXGROUPS];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 device_flags;
 
 	unsigned int mode;
 	unsigned int num_tx_queues;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long state;
 
 	unsigned short mode;
 	unsigned short poll_mode;
 	unsigned int num_tx_queues;
 	unsigned int num_rx_queues;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int num_grps;
 
@@ -1213,13 +1291,19 @@ struct gfar_private {
 		wol_en:1,
 		/* Enable priorty based Tx scheduling in Hw */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prio_sched_en:1;
 =======
+=======
+>>>>>>> v3.18
 		prio_sched_en:1,
 		/* Flow control flags */
 		pause_aneg_en:1,
 		tx_pause_en:1,
 		rx_pause_en:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* The total tx and rx ring size for the enabled queues */
@@ -1227,6 +1311,12 @@ struct gfar_private {
 	unsigned int total_rx_ring_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 rqueue;
+	u32 tqueue;
+
+>>>>>>> v3.18
 =======
 	u32 rqueue;
 	u32 tqueue;
@@ -1247,11 +1337,14 @@ struct gfar_private {
 	int hash_width;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* global parameters */
 	unsigned int fifo_threshold;
 	unsigned int fifo_starve;
 	unsigned int fifo_starve_off;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*Filer table*/
@@ -1299,6 +1392,7 @@ static inline void gfar_read_filer(struct gfar_private *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void lock_rx_qs(struct gfar_private *priv);
 extern void lock_tx_qs(struct gfar_private *priv);
 extern void unlock_rx_qs(struct gfar_private *priv);
@@ -1315,6 +1409,8 @@ int gfar_set_features(struct net_device *dev, netdev_features_t features);
 extern void gfar_check_rx_parser_mode(struct gfar_private *priv);
 extern void gfar_vlan_mode(struct net_device *dev, netdev_features_t features);
 =======
+=======
+>>>>>>> v3.18
 static inline void gfar_write_isrg(struct gfar_private *priv)
 {
 	struct gfar __iomem *regs = priv->gfargrp[0].regs;
@@ -1382,6 +1478,9 @@ void gfar_phy_test(struct mii_bus *bus, struct phy_device *phydev, int enable,
 		   u32 regnum, u32 read);
 void gfar_configure_coalescing_all(struct gfar_private *priv);
 int gfar_set_features(struct net_device *dev, netdev_features_t features);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern const struct ethtool_ops gfar_ethtool_ops;

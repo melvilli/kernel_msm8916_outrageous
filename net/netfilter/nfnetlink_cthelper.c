@@ -68,25 +68,34 @@ nfnl_cthelper_parse_tuple(struct nf_conntrack_tuple *tuple,
 			  const struct nlattr *attr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nlattr *tb[NFCTH_TUPLE_MAX+1];
 
 	nla_parse_nested(tb, NFCTH_TUPLE_MAX, attr, nfnl_cthelper_tuple_pol);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 	struct nlattr *tb[NFCTH_TUPLE_MAX+1];
 
 	err = nla_parse_nested(tb, NFCTH_TUPLE_MAX, attr, nfnl_cthelper_tuple_pol);
 	if (err < 0)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!tb[NFCTH_TUPLE_L3PROTONUM] || !tb[NFCTH_TUPLE_L4PROTONUM])
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Not all fields are initialized so first zero the tuple */
 	memset(tuple, 0, sizeof(struct nf_conntrack_tuple));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tuple->src.l3num = ntohs(nla_get_be16(tb[NFCTH_TUPLE_L3PROTONUM]));
@@ -99,7 +108,11 @@ static int
 nfnl_cthelper_from_nlattr(struct nlattr *attr, struct nf_conn *ct)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nf_conn_help *help = nfct_help(ct);
+=======
+	const struct nf_conn_help *help = nfct_help(ct);
+>>>>>>> v3.18
 =======
 	const struct nf_conn_help *help = nfct_help(ct);
 >>>>>>> v3.18
@@ -111,7 +124,11 @@ nfnl_cthelper_from_nlattr(struct nlattr *attr, struct nf_conn *ct)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(help->data, nla_data(attr), help->helper->data_len);
+=======
+	memcpy(&help->data, nla_data(attr), help->helper->data_len);
+>>>>>>> v3.18
 =======
 	memcpy(&help->data, nla_data(attr), help->helper->data_len);
 >>>>>>> v3.18
@@ -145,16 +162,22 @@ nfnl_cthelper_expect_policy(struct nf_conntrack_expect_policy *expect_policy,
 			    const struct nlattr *attr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nlattr *tb[NFCTH_POLICY_MAX+1];
 
 	nla_parse_nested(tb, NFCTH_POLICY_MAX, attr, nfnl_cthelper_expect_pol);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 	struct nlattr *tb[NFCTH_POLICY_MAX+1];
 
 	err = nla_parse_nested(tb, NFCTH_POLICY_MAX, attr, nfnl_cthelper_expect_pol);
 	if (err < 0)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!tb[NFCTH_POLICY_NAME] ||
@@ -186,13 +209,19 @@ nfnl_cthelper_parse_expect_policy(struct nf_conntrack_helper *helper,
 	struct nlattr *tb[NFCTH_POLICY_SET_MAX+1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nla_parse_nested(tb, NFCTH_POLICY_SET_MAX, attr,
 					nfnl_cthelper_expect_policy_set);
 =======
+=======
+>>>>>>> v3.18
 	ret = nla_parse_nested(tb, NFCTH_POLICY_SET_MAX, attr,
 			       nfnl_cthelper_expect_policy_set);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!tb[NFCTH_POLICY_SET_NUM])

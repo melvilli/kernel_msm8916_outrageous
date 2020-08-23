@@ -99,7 +99,11 @@ static inline int access_ok(int type, const void __user *addr,
 	if ((get_fs().seg < ((unsigned long)addr)) ||
 			(get_fs().seg < ((unsigned long)addr + size - 1))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("ACCESS fail: %s at 0x%08x (size 0x%x), seg 0x%08x\n",
+=======
+		pr_devel("ACCESS fail: %s at 0x%08x (size 0x%x), seg 0x%08x\n",
+>>>>>>> v3.18
 =======
 		pr_devel("ACCESS fail: %s at 0x%08x (size 0x%x), seg 0x%08x\n",
 >>>>>>> v3.18
@@ -109,7 +113,11 @@ static inline int access_ok(int type, const void __user *addr,
 	}
 ok:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("ACCESS OK: %s at 0x%08x (size 0x%x), seg 0x%08x\n",
+=======
+	pr_devel("ACCESS OK: %s at 0x%08x (size 0x%x), seg 0x%08x\n",
+>>>>>>> v3.18
 =======
 	pr_devel("ACCESS OK: %s at 0x%08x (size 0x%x), seg 0x%08x\n",
 >>>>>>> v3.18
@@ -154,7 +162,11 @@ static inline unsigned long __must_check clear_user(void __user *to,
 							unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();
+=======
+	might_fault();
+>>>>>>> v3.18
 =======
 	might_fault();
 >>>>>>> v3.18
@@ -239,7 +251,11 @@ extern long __user_bad(void);
 #define __get_user(x, ptr)						\
 ({									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long __gu_val = 0;					\
+=======
+	unsigned long __gu_val;						\
+>>>>>>> v3.18
 =======
 	unsigned long __gu_val;						\
 >>>>>>> v3.18
@@ -388,6 +404,7 @@ static inline long copy_from_user(void *to,
 		const void __user *from, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long res = n;
 	might_sleep();
 	if (likely(access_ok(VERIFY_READ, from, n)))
@@ -396,10 +413,15 @@ static inline long copy_from_user(void *to,
 		memset(to + (n - res), 0, res);
 	return res;
 =======
+=======
+>>>>>>> v3.18
 	might_fault();
 	if (access_ok(VERIFY_READ, from, n))
 		return __copy_from_user(to, from, n);
 	return n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -412,7 +434,11 @@ static inline long copy_to_user(void __user *to,
 		const void *from, unsigned long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	might_sleep();
+=======
+	might_fault();
+>>>>>>> v3.18
 =======
 	might_fault();
 >>>>>>> v3.18

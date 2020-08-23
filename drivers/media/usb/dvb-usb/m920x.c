@@ -246,7 +246,11 @@ static int m920x_rc_core_query(struct dvb_usb_device *d)
 		rc_repeat(d->rc_dev);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc_keydown(d->rc_dev, rc_state[1], 0);
+=======
+		rc_keydown(d->rc_dev, RC_TYPE_UNKNOWN, rc_state[1], 0);
+>>>>>>> v3.18
 =======
 		rc_keydown(d->rc_dev, RC_TYPE_UNKNOWN, rc_state[1], 0);
 >>>>>>> v3.18
@@ -1217,7 +1221,11 @@ static struct dvb_usb_device_properties vp7049_properties = {
 		.rc_codes       = RC_MAP_TWINHAN_VP1027_DVBS,
 		.rc_query       = m920x_rc_core_query,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.allowed_protos = RC_TYPE_UNKNOWN,
+=======
+		.allowed_protos = RC_BIT_UNKNOWN,
+>>>>>>> v3.18
 =======
 		.allowed_protos = RC_BIT_UNKNOWN,
 >>>>>>> v3.18

@@ -2,6 +2,11 @@
 #define _ASM_X86_MWAIT_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sched.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/sched.h>
 
@@ -19,7 +24,10 @@
 #define MWAIT_ECX_INTERRUPT_BREAK	0x1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void __monitor(const void *eax, unsigned long ecx,
 			     unsigned long edx)
 {
@@ -61,5 +69,8 @@ static inline void mwait_idle_with_hints(unsigned long eax, unsigned long ecx)
 	current_clr_polling();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_X86_MWAIT_H */

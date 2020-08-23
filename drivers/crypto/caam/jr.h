@@ -9,8 +9,13 @@
 
 /* Prototypes for backend-level services exposed to APIs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int caam_jr_register(struct device *ctrldev, struct device **rdev);
 int caam_jr_deregister(struct device *rdev);
+=======
+struct device *caam_jr_alloc(void);
+void caam_jr_free(struct device *rdev);
+>>>>>>> v3.18
 =======
 struct device *caam_jr_alloc(void);
 void caam_jr_free(struct device *rdev);
@@ -21,9 +26,12 @@ int caam_jr_enqueue(struct device *dev, u32 *desc,
 		    void *areq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int caam_jr_probe(struct platform_device *pdev, struct device_node *np,
 			 int ring);
 extern int caam_jr_shutdown(struct device *dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* JR_H */

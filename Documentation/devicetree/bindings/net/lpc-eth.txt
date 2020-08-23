@@ -7,10 +7,16 @@ Required properties:
 
 Optional properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - phy-mode: String, operation mode of the PHY interface.
   Supported values are: "mii", "rmii" (default)
 - use-iram: Use LPC32xx internal SRAM (IRAM) for DMA buffering
 - local-mac-address : 6 bytes, mac address
+=======
+- phy-mode: See ethernet.txt file in the same directory. If the property is
+  absent, "rmii" is assumed.
+- use-iram: Use LPC32xx internal SRAM (IRAM) for DMA buffering
+>>>>>>> v3.18
 =======
 - phy-mode: See ethernet.txt file in the same directory. If the property is
   absent, "rmii" is assumed.

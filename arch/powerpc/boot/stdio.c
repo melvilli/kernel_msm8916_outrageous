@@ -22,7 +22,10 @@ size_t strnlen(const char * s, size_t count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef __powerpc64__
 
 # define do_div(n, base) ({						\
@@ -35,6 +38,9 @@ size_t strnlen(const char * s, size_t count)
 
 #else
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern unsigned int __div64_32(unsigned long long *dividend,
 			       unsigned int divisor);
@@ -55,6 +61,11 @@ extern unsigned int __div64_32(unsigned long long *dividend,
  })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* __powerpc64__ */
+
+>>>>>>> v3.18
 =======
 #endif /* __powerpc64__ */
 

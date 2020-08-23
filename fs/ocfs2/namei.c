@@ -159,7 +159,11 @@ bail_add:
 		 * ocfs2_get_parent() and ocfs2_get_dentry()
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret)
+=======
+		if (!IS_ERR_OR_NULL(ret))
+>>>>>>> v3.18
 =======
 		if (!IS_ERR_OR_NULL(ret))
 >>>>>>> v3.18
@@ -210,7 +214,10 @@ static struct inode *ocfs2_get_init_inode(struct inode *dir, umode_t mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ocfs2_cleanup_add_entry_failure(struct ocfs2_super *osb,
 		struct dentry *dentry, struct inode *inode)
 {
@@ -226,6 +233,9 @@ static void ocfs2_cleanup_add_entry_failure(struct ocfs2_super *osb,
 	iput(inode);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ocfs2_mknod(struct inode *dir,
 		       struct dentry *dentry,
@@ -253,6 +263,11 @@ static int ocfs2_mknod(struct inode *dir,
 	sigset_t oldset;
 	int did_block_signals = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct posix_acl *default_acl = NULL, *acl = NULL;
+	struct ocfs2_dentry_lock *dl = NULL;
+>>>>>>> v3.18
 =======
 	struct posix_acl *default_acl = NULL, *acl = NULL;
 	struct ocfs2_dentry_lock *dl = NULL;
@@ -359,13 +374,19 @@ static int ocfs2_mknod(struct inode *dir,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	status = posix_acl_create(dir, &mode, &default_acl, &acl);
 	if (status) {
 		mlog_errno(status);
 		goto leave;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	handle = ocfs2_start_trans(osb, ocfs2_mknod_credits(osb->sb,
 							    S_ISDIR(mode),
@@ -416,9 +437,12 @@ static int ocfs2_mknod(struct inode *dir,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = ocfs2_init_acl(handle, inode, dir, new_fe_bh, parent_fe_bh,
 				meta_ac, data_ac);
 =======
+=======
+>>>>>>> v3.18
 	if (default_acl) {
 		status = ocfs2_set_acl(handle, inode, new_fe_bh,
 				       ACL_TYPE_DEFAULT, default_acl,
@@ -430,6 +454,9 @@ static int ocfs2_mknod(struct inode *dir,
 				       meta_ac, data_ac);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (status < 0) {
 		mlog_errno(status);
@@ -458,6 +485,11 @@ static int ocfs2_mknod(struct inode *dir,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dl = dentry->d_fsdata;
+
+>>>>>>> v3.18
 =======
 	dl = dentry->d_fsdata;
 
@@ -475,11 +507,17 @@ static int ocfs2_mknod(struct inode *dir,
 	status = 0;
 leave:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (default_acl)
 		posix_acl_release(default_acl);
 	if (acl)
 		posix_acl_release(acl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (status < 0 && did_quota_inode)
 		dquot_free_inode(inode);
@@ -493,7 +531,10 @@ leave:
 	brelse(new_fe_bh);
 	brelse(parent_fe_bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(si.name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(si.value);
@@ -516,6 +557,12 @@ leave:
 	 */
 	if ((status < 0) && inode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (dl)
+			ocfs2_cleanup_add_entry_failure(osb, dentry, inode);
+
+>>>>>>> v3.18
 =======
 		if (dl)
 			ocfs2_cleanup_add_entry_failure(osb, dentry, inode);
@@ -547,6 +594,10 @@ static int __ocfs2_mknod_locked(struct inode *dir,
 	struct ocfs2_extent_list *fel;
 	u16 feat;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ocfs2_inode_info *oi = OCFS2_I(inode);
+>>>>>>> v3.18
 =======
 	struct ocfs2_inode_info *oi = OCFS2_I(inode);
 >>>>>>> v3.18
@@ -565,7 +616,11 @@ static int __ocfs2_mknod_locked(struct inode *dir,
 	*new_fe_bh = sb_getblk(osb->sb, fe_blkno);
 	if (!*new_fe_bh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = -EIO;
+=======
+		status = -ENOMEM;
+>>>>>>> v3.18
 =======
 		status = -ENOMEM;
 >>>>>>> v3.18
@@ -602,7 +657,11 @@ static int __ocfs2_mknod_locked(struct inode *dir,
 	fe->i_last_eb_blk = 0;
 	strcpy(fe->i_signature, OCFS2_INODE_SIGNATURE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	le32_add_cpu(&fe->i_flags, OCFS2_VALID_FL);
+=======
+	fe->i_flags |= cpu_to_le32(OCFS2_VALID_FL);
+>>>>>>> v3.18
 =======
 	fe->i_flags |= cpu_to_le32(OCFS2_VALID_FL);
 >>>>>>> v3.18
@@ -640,8 +699,13 @@ static int __ocfs2_mknod_locked(struct inode *dir,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = 0; /* error in ocfs2_create_new_inode_locks is not
 		     * critical */
+=======
+	oi->i_sync_tid = handle->h_transaction->t_tid;
+	oi->i_datasync_tid = handle->h_transaction->t_tid;
+>>>>>>> v3.18
 =======
 	oi->i_sync_tid = handle->h_transaction->t_tid;
 	oi->i_datasync_tid = handle->h_transaction->t_tid;
@@ -733,6 +797,10 @@ static int ocfs2_link(struct dentry *old_dentry,
 	struct ocfs2_dir_lookup_result lookup = { NULL, };
 	sigset_t oldset;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 old_de_ino;
+>>>>>>> v3.18
 =======
 	u64 old_de_ino;
 >>>>>>> v3.18
@@ -759,7 +827,10 @@ static int ocfs2_link(struct dentry *old_dentry,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = ocfs2_lookup_ino_from_name(dir, old_dentry->d_name.name,
 			old_dentry->d_name.len, &old_de_ino);
 	if (err) {
@@ -776,6 +847,9 @@ static int ocfs2_link(struct dentry *old_dentry,
 		goto out;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = ocfs2_check_dir_for_entry(dir, dentry->d_name.name,
 					dentry->d_name.len);
@@ -885,7 +959,11 @@ static int ocfs2_remote_dentry_delete(struct dentry *dentry)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int inode_is_unlinkable(struct inode *inode)
+=======
+static inline int ocfs2_inode_is_unlinkable(struct inode *inode)
+>>>>>>> v3.18
 =======
 static inline int ocfs2_inode_is_unlinkable(struct inode *inode)
 >>>>>>> v3.18
@@ -907,6 +985,10 @@ static int ocfs2_unlink(struct inode *dir,
 	int status;
 	int child_locked = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool is_unlinkable = false;
+>>>>>>> v3.18
 =======
 	bool is_unlinkable = false;
 >>>>>>> v3.18
@@ -985,7 +1067,11 @@ static int ocfs2_unlink(struct inode *dir,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inode_is_unlinkable(inode)) {
+=======
+	if (ocfs2_inode_is_unlinkable(inode)) {
+>>>>>>> v3.18
 =======
 	if (ocfs2_inode_is_unlinkable(inode)) {
 >>>>>>> v3.18
@@ -997,6 +1083,10 @@ static int ocfs2_unlink(struct inode *dir,
 			goto leave;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		is_unlinkable = true;
+>>>>>>> v3.18
 =======
 		is_unlinkable = true;
 >>>>>>> v3.18
@@ -1020,6 +1110,7 @@ static int ocfs2_unlink(struct inode *dir,
 	fe = (struct ocfs2_dinode *) fe_bh->b_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inode_is_unlinkable(inode)) {
 		status = ocfs2_orphan_add(osb, handle, inode, fe_bh, orphan_name,
 					  &orphan_insert, orphan_dir);
@@ -1029,6 +1120,8 @@ static int ocfs2_unlink(struct inode *dir,
 		}
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* delete the name from the parent dir */
@@ -1054,7 +1147,10 @@ static int ocfs2_unlink(struct inode *dir,
 		if (S_ISDIR(inode->i_mode))
 			inc_nlink(dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		goto leave;
 	}
 
@@ -1063,6 +1159,9 @@ static int ocfs2_unlink(struct inode *dir,
 				orphan_name, &orphan_insert, orphan_dir);
 		if (status < 0)
 			mlog_errno(status);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1089,7 +1188,11 @@ leave:
 	ocfs2_free_dir_lookup_result(&lookup);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status && (status != -ENOTEMPTY))
+=======
+	if (status && (status != -ENOTEMPTY) && (status != -ENOENT))
+>>>>>>> v3.18
 =======
 	if (status && (status != -ENOTEMPTY) && (status != -ENOENT))
 >>>>>>> v3.18
@@ -1099,7 +1202,10 @@ leave:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ocfs2_check_if_ancestor(struct ocfs2_super *osb,
 		u64 src_inode_no, u64 dest_inode_no)
 {
@@ -1159,6 +1265,9 @@ static int ocfs2_check_if_ancestor(struct ocfs2_super *osb,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The only place this should be used is rename!
@@ -1172,6 +1281,10 @@ static int ocfs2_double_lock(struct ocfs2_super *osb,
 {
 	int status;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int inode1_is_ancestor, inode2_is_ancestor;
+>>>>>>> v3.18
 =======
 	int inode1_is_ancestor, inode2_is_ancestor;
 >>>>>>> v3.18
@@ -1189,10 +1302,13 @@ static int ocfs2_double_lock(struct ocfs2_super *osb,
 		*bh2 = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we always want to lock the one with the lower lockid first. */
 	if (oi1->ip_blkno != oi2->ip_blkno) {
 		if (oi1->ip_blkno < oi2->ip_blkno) {
 =======
+=======
+>>>>>>> v3.18
 	/* we always want to lock the one with the lower lockid first.
 	 * and if they are nested, we lock ancestor first */
 	if (oi1->ip_blkno != oi2->ip_blkno) {
@@ -1213,6 +1329,9 @@ static int ocfs2_double_lock(struct ocfs2_super *osb,
 		if ((inode1_is_ancestor == 1) ||
 				(oi1->ip_blkno < oi2->ip_blkno &&
 				inode2_is_ancestor == 0)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* switch id1 and id2 around */
 			tmpbh = bh2;
@@ -1295,6 +1414,10 @@ static int ocfs2_rename(struct inode *old_dir,
 	struct ocfs2_dir_lookup_result orphan_insert = { NULL, };
 	struct ocfs2_dir_lookup_result target_insert = { NULL, };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool should_add_orphan = false;
+>>>>>>> v3.18
 =======
 	bool should_add_orphan = false;
 >>>>>>> v3.18
@@ -1335,7 +1458,10 @@ static int ocfs2_rename(struct inode *old_dir,
 		}
 		rename_lock = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* here we cannot guarantee the inodes haven't just been
 		 * changed, so check if they are nested again */
@@ -1351,6 +1477,9 @@ static int ocfs2_rename(struct inode *old_dir,
 					(unsigned long long)new_dir->i_ino);
 			goto bail;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1523,6 +1652,10 @@ static int ocfs2_rename(struct inode *old_dir,
 				goto bail;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			should_add_orphan = true;
+>>>>>>> v3.18
 =======
 			should_add_orphan = true;
 >>>>>>> v3.18
@@ -1571,6 +1704,7 @@ static int ocfs2_rename(struct inode *old_dir,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (S_ISDIR(new_inode->i_mode) ||
 		    (ocfs2_read_links_count(newfe) == 1)) {
 			status = ocfs2_orphan_add(osb, handle, new_inode,
@@ -1582,6 +1716,8 @@ static int ocfs2_rename(struct inode *old_dir,
 			}
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* change the dirent to point to the correct inode */
@@ -1599,7 +1735,10 @@ static int ocfs2_rename(struct inode *old_dir,
 			ocfs2_add_links_count(newfe, -1);
 		ocfs2_journal_dirty(handle, newfe_bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (should_add_orphan) {
 			status = ocfs2_orphan_add(osb, handle, new_inode,
 					newfe_bh, orphan_name,
@@ -1609,6 +1748,9 @@ static int ocfs2_rename(struct inode *old_dir,
 				goto bail;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/* if the name was not found in new_dir, add it now */
@@ -1880,6 +2022,10 @@ static int ocfs2_symlink(struct inode *dir,
 	sigset_t oldset;
 	int did_block_signals = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ocfs2_dentry_lock *dl = NULL;
+>>>>>>> v3.18
 =======
 	struct ocfs2_dentry_lock *dl = NULL;
 >>>>>>> v3.18
@@ -2072,6 +2218,11 @@ static int ocfs2_symlink(struct inode *dir,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dl = dentry->d_fsdata;
+
+>>>>>>> v3.18
 =======
 	dl = dentry->d_fsdata;
 
@@ -2102,7 +2253,10 @@ bail:
 	brelse(new_fe_bh);
 	brelse(parent_fe_bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(si.name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(si.value);
@@ -2115,6 +2269,12 @@ bail:
 		ocfs2_free_alloc_context(xattr_ac);
 	if ((status < 0) && inode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (dl)
+			ocfs2_cleanup_add_entry_failure(osb, dentry, inode);
+
+>>>>>>> v3.18
 =======
 		if (dl)
 			ocfs2_cleanup_add_entry_failure(osb, dentry, inode);
@@ -2306,7 +2466,10 @@ static int ocfs2_orphan_add(struct ocfs2_super *osb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We're going to journal the change of i_flags and i_orphaned_slot.
 	 * It's safe anyway, though some callers may duplicate the journaling.
@@ -2322,6 +2485,9 @@ static int ocfs2_orphan_add(struct ocfs2_super *osb,
 		goto leave;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* we're a cluster, and nlink can change on disk from
 	 * underneath us... */
@@ -2337,6 +2503,7 @@ static int ocfs2_orphan_add(struct ocfs2_super *osb,
 				   orphan_dir_bh, lookup);
 	if (status < 0) {
 		mlog_errno(status);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto leave;
 	}
@@ -2358,10 +2525,15 @@ static int ocfs2_orphan_add(struct ocfs2_super *osb,
 
 	le32_add_cpu(&fe->i_flags, OCFS2_ORPHANED_FL);
 =======
+=======
+>>>>>>> v3.18
 		goto rollback;
 	}
 
 	fe->i_flags |= cpu_to_le32(OCFS2_ORPHANED_FL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	OCFS2_I(inode)->ip_flags &= ~OCFS2_INODE_SKIP_ORPHAN_DIR;
 
@@ -2376,12 +2548,15 @@ static int ocfs2_orphan_add(struct ocfs2_super *osb,
 				   osb->slot_num);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 leave:
 	brelse(orphan_dir_bh);
 
 	if (status)
 		mlog_errno(status);
 =======
+=======
+>>>>>>> v3.18
 rollback:
 	if (status < 0) {
 		if (S_ISDIR(inode->i_mode))
@@ -2392,6 +2567,9 @@ rollback:
 leave:
 	brelse(orphan_dir_bh);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
@@ -2766,16 +2944,22 @@ int ocfs2_mv_orphaned_inode_to_new(struct inode *dir,
 
 	di = (struct ocfs2_dinode *)di_bh->b_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	le32_add_cpu(&di->i_flags, -OCFS2_ORPHANED_FL);
 	di->i_orphaned_slot = 0;
 	set_nlink(inode, 1);
 	ocfs2_set_links_count(di, inode->i_nlink);
 =======
+=======
+>>>>>>> v3.18
 	di->i_flags &= ~cpu_to_le32(OCFS2_ORPHANED_FL);
 	di->i_orphaned_slot = 0;
 	set_nlink(inode, 1);
 	ocfs2_set_links_count(di, inode->i_nlink);
 	ocfs2_update_inode_fsync_trans(handle, inode, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ocfs2_journal_dirty(handle, di_bh);
 
@@ -2838,6 +3022,10 @@ const struct inode_operations ocfs2_dir_iops = {
 	.fiemap         = ocfs2_fiemap,
 	.get_acl	= ocfs2_iop_get_acl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_acl	= ocfs2_iop_set_acl,
+>>>>>>> v3.18
 =======
 	.set_acl	= ocfs2_iop_set_acl,
 >>>>>>> v3.18

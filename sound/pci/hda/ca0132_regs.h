@@ -21,7 +21,11 @@
 
 #ifndef __CA0132_REGS_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __CA0312_REGS_H
+=======
+#define __CA0132_REGS_H
+>>>>>>> v3.18
 =======
 #define __CA0132_REGS_H
 >>>>>>> v3.18

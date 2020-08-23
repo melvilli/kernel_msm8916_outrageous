@@ -25,10 +25,16 @@
 #include <linux/dma-mapping.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/delay.h>
 #include <linux/time.h>
 #include <linux/fsl/mxs-dma.h>
 #include <linux/pinctrl/consumer.h>
+=======
+#include <linux/clk-provider.h>
+#include <linux/delay.h>
+#include <linux/time.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk-provider.h>
 #include <linux/delay.h>
@@ -39,7 +45,10 @@
 #include <sound/pcm_params.h>
 #include <sound/soc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mach-types.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -62,9 +71,15 @@ static struct mxs_saif *mxs_saif[2];
  *
  * We abstract this as each saif has a master, the master could be
 <<<<<<< HEAD
+<<<<<<< HEAD
  * himself or other saifs. In the generic saif driver, saif does not need
  * to know the different clkmux. Saif only needs to know who is his master
  * and operating his master to generate the proper clock rate for him.
+=======
+ * itself or other saifs. In the generic saif driver, saif does not need
+ * to know the different clkmux. Saif only needs to know who is its master
+ * and operating its master to generate the proper clock rate for it.
+>>>>>>> v3.18
 =======
  * itself or other saifs. In the generic saif driver, saif does not need
  * to know the different clkmux. Saif only needs to know who is its master
@@ -94,7 +109,11 @@ static int mxs_saif_set_dai_sysclk(struct snd_soc_dai *cpu_dai,
  * is provided by other SAIF, we provide a interface here to get its master
  * from its master_id.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Note that the master could be himself.
+=======
+ * Note that the master could be itself.
+>>>>>>> v3.18
 =======
  * Note that the master could be itself.
 >>>>>>> v3.18
@@ -516,6 +535,10 @@ static int mxs_saif_trigger(struct snd_pcm_substream *substream, int cmd,
 	struct mxs_saif *master_saif;
 	u32 delay;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -528,6 +551,7 @@ static int mxs_saif_trigger(struct snd_pcm_substream *substream, int cmd,
 	case SNDRV_PCM_TRIGGER_START:
 	case SNDRV_PCM_TRIGGER_RESUME:
 	case SNDRV_PCM_TRIGGER_PAUSE_RELEASE:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_dbg(cpu_dai->dev, "start\n");
 
@@ -543,6 +567,8 @@ static int mxs_saif_trigger(struct snd_pcm_substream *substream, int cmd,
 		if (saif != master_saif) {
 			clk_enable(saif->clk);
 =======
+=======
+>>>>>>> v3.18
 		if (saif->state == MXS_SAIF_STATE_RUNNING)
 			return 0;
 
@@ -566,17 +592,26 @@ static int mxs_saif_trigger(struct snd_pcm_substream *substream, int cmd,
 				return ret;
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			__raw_writel(BM_SAIF_CTRL_RUN,
 				saif->base + SAIF_CTRL + MXS_SET_ADDR);
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (!master_saif->mclk_in_use)
 			__raw_writel(BM_SAIF_CTRL_RUN,
 				master_saif->base + SAIF_CTRL + MXS_SET_ADDR);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
 			/*
@@ -602,6 +637,10 @@ static int mxs_saif_trigger(struct snd_pcm_substream *substream, int cmd,
 
 		master_saif->ongoing = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		saif->state = MXS_SAIF_STATE_RUNNING;
+>>>>>>> v3.18
 =======
 		saif->state = MXS_SAIF_STATE_RUNNING;
 >>>>>>> v3.18
@@ -618,6 +657,12 @@ static int mxs_saif_trigger(struct snd_pcm_substream *substream, int cmd,
 	case SNDRV_PCM_TRIGGER_STOP:
 	case SNDRV_PCM_TRIGGER_PAUSE_PUSH:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (saif->state == MXS_SAIF_STATE_STOPPED)
+			return 0;
+
+>>>>>>> v3.18
 =======
 		if (saif->state == MXS_SAIF_STATE_STOPPED)
 			return 0;
@@ -644,6 +689,10 @@ static int mxs_saif_trigger(struct snd_pcm_substream *substream, int cmd,
 
 		master_saif->ongoing = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		saif->state = MXS_SAIF_STATE_STOPPED;
+>>>>>>> v3.18
 =======
 		saif->state = MXS_SAIF_STATE_STOPPED;
 >>>>>>> v3.18
@@ -676,8 +725,11 @@ static int mxs_saif_dai_probe(struct snd_soc_dai *dai)
 
 	snd_soc_dai_set_drvdata(dai, saif);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dai->playback_dma_data = &saif->dma_param;
 	dai->capture_dma_data = &saif->dma_param;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -736,6 +788,7 @@ static irqreturn_t mxs_saif_irq(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mxs_saif_probe(struct platform_device *pdev)
 {
 	struct device_node *np = pdev->dev.of_node;
@@ -743,6 +796,8 @@ static int mxs_saif_probe(struct platform_device *pdev)
 	struct mxs_saif *saif;
 	struct pinctrl *pinctrl;
 =======
+=======
+>>>>>>> v3.18
 static int mxs_saif_mclk_init(struct platform_device *pdev)
 {
 	struct mxs_saif *saif = platform_get_drvdata(pdev);
@@ -775,6 +830,9 @@ static int mxs_saif_probe(struct platform_device *pdev)
 	struct device_node *np = pdev->dev.of_node;
 	struct resource *iores;
 	struct mxs_saif *saif;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret = 0;
 	struct device_node *master;
@@ -816,12 +874,15 @@ static int mxs_saif_probe(struct platform_device *pdev)
 	mxs_saif[saif->id] = saif;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
 	if (IS_ERR(pinctrl)) {
 		ret = PTR_ERR(pinctrl);
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	saif->clk = devm_clk_get(&pdev->dev, NULL);
@@ -838,6 +899,7 @@ static int mxs_saif_probe(struct platform_device *pdev)
 	if (IS_ERR(saif->base))
 		return PTR_ERR(saif->base);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dmares = platform_get_resource(pdev, IORESOURCE_DMA, 0);
 	if (!dmares) {
@@ -857,6 +919,8 @@ static int mxs_saif_probe(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	saif->irq = platform_get_irq(pdev, 0);
 	if (saif->irq < 0) {
 		ret = saif->irq;
@@ -874,6 +938,7 @@ static int mxs_saif_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	saif->dma_param.dma_data.chan_irq = platform_get_irq(pdev, 1);
 	if (saif->dma_param.dma_data.chan_irq < 0) {
 		ret = saif->dma_param.dma_data.chan_irq;
@@ -887,6 +952,8 @@ static int mxs_saif_probe(struct platform_device *pdev)
 	ret = snd_soc_register_component(&pdev->dev, &mxs_saif_component,
 					 &mxs_saif_dai, 1);
 =======
+=======
+>>>>>>> v3.18
 	platform_set_drvdata(pdev, saif);
 
 	/* We only support saif0 being tx and clock master */
@@ -898,6 +965,9 @@ static int mxs_saif_probe(struct platform_device *pdev)
 
 	ret = devm_snd_soc_register_component(&pdev->dev, &mxs_saif_component,
 					      &mxs_saif_dai, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		dev_err(&pdev->dev, "register DAI failed\n");
@@ -907,6 +977,7 @@ static int mxs_saif_probe(struct platform_device *pdev)
 	ret = mxs_pcm_platform_register(&pdev->dev);
 	if (ret) {
 		dev_err(&pdev->dev, "register PCM failed: %d\n", ret);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto failed_pdev_alloc;
 	}
@@ -926,10 +997,15 @@ static int mxs_saif_remove(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -942,7 +1018,10 @@ MODULE_DEVICE_TABLE(of, mxs_saif_dt_ids);
 static struct platform_driver mxs_saif_driver = {
 	.probe = mxs_saif_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = mxs_saif_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

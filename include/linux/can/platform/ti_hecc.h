@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __CAN_PLATFORM_TI_HECC_H__
 #define __CAN_PLATFORM_TI_HECC_H__
+=======
+#ifndef _CAN_PLATFORM_TI_HECC_H
+#define _CAN_PLATFORM_TI_HECC_H
+>>>>>>> v3.18
 =======
 #ifndef _CAN_PLATFORM_TI_HECC_H
 #define _CAN_PLATFORM_TI_HECC_H
@@ -47,7 +52,11 @@ struct ti_hecc_platform_data {
 	void (*transceiver_switch) (int);
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+#endif /* !_CAN_PLATFORM_TI_HECC_H */
+>>>>>>> v3.18
 =======
 #endif /* !_CAN_PLATFORM_TI_HECC_H */
 >>>>>>> v3.18

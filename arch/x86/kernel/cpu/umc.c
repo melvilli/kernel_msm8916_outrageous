@@ -1,6 +1,9 @@
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/processor.h>
@@ -12,17 +15,23 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct cpu_dev __cpuinitconst umc_cpu_dev = {
 	.c_vendor	= "UMC",
 	.c_ident	= { "UMC UMC UMC" },
 	.c_models = {
 		{ .vendor = X86_VENDOR_UMC, .family = 4, .model_names =
 =======
+=======
+>>>>>>> v3.18
 static const struct cpu_dev umc_cpu_dev = {
 	.c_vendor	= "UMC",
 	.c_ident	= { "UMC UMC UMC" },
 	.legacy_models	= {
 		{ .family = 4, .model_names =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		  {
 			  [1] = "U5D",

@@ -8,6 +8,7 @@ static inline void pnv_smp_init(void) { }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PCI
 extern void pnv_pci_init(void);
 extern void pnv_pci_shutdown(void);
@@ -17,6 +18,8 @@ static inline void pnv_pci_shutdown(void) { }
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 struct pci_dev;
 
 #ifdef CONFIG_PCI
@@ -43,5 +46,8 @@ extern void pnv_lpc_init(void);
 
 bool cpu_core_split_required(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _POWERNV_H */

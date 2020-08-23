@@ -8,7 +8,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -27,7 +30,11 @@
 extern int bridge_probe(nasid_t nasid, int widget, int masterwid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit probe_one_port(nasid_t nasid, int widget, int masterwid)
+=======
+static int probe_one_port(nasid_t nasid, int widget, int masterwid)
+>>>>>>> v3.18
 =======
 static int probe_one_port(nasid_t nasid, int widget, int masterwid)
 >>>>>>> v3.18
@@ -55,7 +62,11 @@ static int probe_one_port(nasid_t nasid, int widget, int masterwid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit xbow_probe(nasid_t nasid)
+=======
+static int xbow_probe(nasid_t nasid)
+>>>>>>> v3.18
 =======
 static int xbow_probe(nasid_t nasid)
 >>>>>>> v3.18
@@ -112,7 +123,11 @@ static int xbow_probe(nasid_t nasid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit xtalk_probe_node(cnodeid_t nid)
+=======
+void xtalk_probe_node(cnodeid_t nid)
+>>>>>>> v3.18
 =======
 void xtalk_probe_node(cnodeid_t nid)
 >>>>>>> v3.18

@@ -75,7 +75,11 @@ struct thread_struct {
 
 /* Return saved PC of a blocked thread. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long thread_saved_pc(struct task_struct *t);
+=======
+unsigned long thread_saved_pc(struct task_struct *t);
+>>>>>>> v3.18
 =======
 unsigned long thread_saved_pc(struct task_struct *t);
 >>>>>>> v3.18
@@ -112,7 +116,11 @@ static inline void start_thread(struct pt_regs * regs, unsigned long pc,
 #define release_thread(tsk)		do { } while(0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long get_wchan(struct task_struct *);
+=======
+unsigned long get_wchan(struct task_struct *);
+>>>>>>> v3.18
 =======
 unsigned long get_wchan(struct task_struct *);
 >>>>>>> v3.18
@@ -125,14 +133,20 @@ unsigned long get_wchan(struct task_struct *);
 
 extern struct task_struct *last_task_used_math;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define cpu_relax()	barrier()
 =======
+=======
+>>>>>>> v3.18
 int do_mathemu(struct pt_regs *regs, struct task_struct *fpt);
 
 #define cpu_relax()	barrier()
 #define cpu_relax_lowlatency() cpu_relax()
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void (*sparc_idle)(void);
 

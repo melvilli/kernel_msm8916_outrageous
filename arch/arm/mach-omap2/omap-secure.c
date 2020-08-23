@@ -4,6 +4,11 @@
  * Copyright (C) 2011 Texas Instruments, Inc.
  *	Santosh Shilimkar <santosh.shilimkar@ti.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2012 Ivaylo Dimitrov <freemangordon@abv.bg>
+ * Copyright (C) 2013 Pali Rohár <pali.rohar@gmail.com>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012 Ivaylo Dimitrov <freemangordon@abv.bg>
  * Copyright (C) 2013 Pali Rohár <pali.rohar@gmail.com>
@@ -76,7 +81,10 @@ phys_addr_t omap_secure_ram_mempool_base(void)
 	return omap_secure_memblock_base;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * rx51_secure_dispatcher: Routine to dispatch secure PPA API calls
@@ -151,4 +159,7 @@ u32 rx51_secure_rng_call(u32 ptr, u32 count, u32 flag)
 				      NO_FLAG,
 				      3, ptr, count, flag, 0);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

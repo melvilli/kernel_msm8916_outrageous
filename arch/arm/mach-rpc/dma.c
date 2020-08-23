@@ -142,7 +142,11 @@ static int iomd_request_dma(unsigned int chan, dma_t *dma)
 
 	return request_irq(idma->irq, iomd_dma_handle,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   IRQF_DISABLED, idma->dma.device_id, idma);
+=======
+			   0, idma->dma.device_id, idma);
+>>>>>>> v3.18
 =======
 			   0, idma->dma.device_id, idma);
 >>>>>>> v3.18

@@ -12,7 +12,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kref.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/notifier.h>
@@ -22,6 +25,10 @@
 #include <linux/of.h>
 #include "offline_states.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "pseries.h"
+>>>>>>> v3.18
 =======
 #include "pseries.h"
 >>>>>>> v3.18
@@ -33,17 +40,23 @@
 
 struct cc_workarea {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32	drc_index;
 	u32	zero;
 	u32	name_offset;
 	u32	prop_length;
 	u32	prop_offset;
 =======
+=======
+>>>>>>> v3.18
 	__be32	drc_index;
 	__be32	zero;
 	__be32	name_offset;
 	__be32	prop_length;
 	__be32	prop_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -65,17 +78,23 @@ static struct property *dlpar_parse_cc_property(struct cc_workarea *ccwa)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	name = (char *)ccwa + ccwa->name_offset;
 	prop->name = kstrdup(name, GFP_KERNEL);
 
 	prop->length = ccwa->prop_length;
 	value = (char *)ccwa + ccwa->prop_offset;
 =======
+=======
+>>>>>>> v3.18
 	name = (char *)ccwa + be32_to_cpu(ccwa->name_offset);
 	prop->name = kstrdup(name, GFP_KERNEL);
 
 	prop->length = be32_to_cpu(ccwa->prop_length);
 	value = (char *)ccwa + be32_to_cpu(ccwa->prop_offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	prop->value = kmemdup(value, prop->length, GFP_KERNEL);
 	if (!prop->value) {
@@ -87,7 +106,12 @@ static struct property *dlpar_parse_cc_property(struct cc_workarea *ccwa)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device_node *dlpar_parse_cc_node(struct cc_workarea *ccwa)
+=======
+static struct device_node *dlpar_parse_cc_node(struct cc_workarea *ccwa,
+					       const char *path)
+>>>>>>> v3.18
 =======
 static struct device_node *dlpar_parse_cc_node(struct cc_workarea *ccwa,
 					       const char *path)
@@ -97,18 +121,25 @@ static struct device_node *dlpar_parse_cc_node(struct cc_workarea *ccwa,
 	char *name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* If parent node path is "/" advance path to NULL terminator to
 	 * prevent double leading slashs in full_name.
 	 */
 	if (!path[1])
 		path++;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dn = kzalloc(sizeof(*dn), GFP_KERNEL);
 	if (!dn)
 		return NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* The configure connector reported name does not contain a
 	 * preceding '/', so we allocate a buffer large enough to
@@ -120,12 +151,22 @@ static struct device_node *dlpar_parse_cc_node(struct cc_workarea *ccwa,
 	name = (char *)ccwa + be32_to_cpu(ccwa->name_offset);
 	dn->full_name = kasprintf(GFP_KERNEL, "%s/%s", path, name);
 >>>>>>> v3.18
+=======
+	name = (char *)ccwa + be32_to_cpu(ccwa->name_offset);
+	dn->full_name = kasprintf(GFP_KERNEL, "%s/%s", path, name);
+>>>>>>> v3.18
 	if (!dn->full_name) {
 		kfree(dn);
 		return NULL;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	of_node_set_flag(dn, OF_DYNAMIC);
+	of_node_init(dn);
+
+>>>>>>> v3.18
 =======
 	of_node_set_flag(dn, OF_DYNAMIC);
 	of_node_init(dn);
@@ -169,7 +210,12 @@ void dlpar_free_cc_nodes(struct device_node *dn)
 #define ERR_CFG_USE     -9003
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct device_node *dlpar_configure_connector(u32 drc_index)
+=======
+struct device_node *dlpar_configure_connector(__be32 drc_index,
+					      struct device_node *parent)
+>>>>>>> v3.18
 =======
 struct device_node *dlpar_configure_connector(__be32 drc_index,
 					      struct device_node *parent)
@@ -183,6 +229,10 @@ struct device_node *dlpar_configure_connector(__be32 drc_index,
 	struct cc_workarea *ccwa;
 	char *data_buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *parent_path = parent->full_name;
+>>>>>>> v3.18
 =======
 	const char *parent_path = parent->full_name;
 >>>>>>> v3.18
@@ -220,7 +270,11 @@ struct device_node *dlpar_configure_connector(__be32 drc_index,
 
 		case NEXT_SIBLING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dn = dlpar_parse_cc_node(ccwa);
+=======
+			dn = dlpar_parse_cc_node(ccwa, parent_path);
+>>>>>>> v3.18
 =======
 			dn = dlpar_parse_cc_node(ccwa, parent_path);
 >>>>>>> v3.18
@@ -234,6 +288,7 @@ struct device_node *dlpar_configure_connector(__be32 drc_index,
 
 		case NEXT_CHILD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dn = dlpar_parse_cc_node(ccwa);
 			if (!dn)
 				goto cc_error;
@@ -242,6 +297,8 @@ struct device_node *dlpar_configure_connector(__be32 drc_index,
 				first_dn = dn;
 			else {
 =======
+=======
+>>>>>>> v3.18
 			if (first_dn)
 				parent_path = last_dn->full_name;
 
@@ -253,6 +310,9 @@ struct device_node *dlpar_configure_connector(__be32 drc_index,
 				dn->parent = parent;
 				first_dn = dn;
 			} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				dn->parent = last_dn;
 				if (last_dn)
@@ -278,6 +338,10 @@ struct device_node *dlpar_configure_connector(__be32 drc_index,
 		case PREV_PARENT:
 			last_dn = last_dn->parent;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			parent_path = last_dn->parent->full_name;
+>>>>>>> v3.18
 =======
 			parent_path = last_dn->parent->full_name;
 >>>>>>> v3.18
@@ -336,8 +400,11 @@ int dlpar_attach_node(struct device_node *dn)
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_node_set_flag(dn, OF_DYNAMIC);
 	kref_init(&dn->kref);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dn->parent = derive_parent(dn->full_name);
@@ -358,9 +425,12 @@ int dlpar_attach_node(struct device_node *dn)
 int dlpar_detach_node(struct device_node *dn)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
 
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *child;
 	int rc;
 
@@ -370,6 +440,9 @@ int dlpar_detach_node(struct device_node *dn)
 		child = of_get_next_child(dn, child);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = of_detach_node(dn);
 	if (rc)
@@ -441,7 +514,12 @@ static int dlpar_online_cpu(struct device_node *dn)
 	unsigned int cpu;
 	int len, nthreads, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *intserv;
+=======
+	const __be32 *intserv;
+	u32 thread;
+>>>>>>> v3.18
 =======
 	const __be32 *intserv;
 	u32 thread;
@@ -456,8 +534,14 @@ static int dlpar_online_cpu(struct device_node *dn)
 	cpu_maps_update_begin();
 	for (i = 0; i < nthreads; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for_each_present_cpu(cpu) {
 			if (get_hard_smp_processor_id(cpu) != intserv[i])
+=======
+		thread = be32_to_cpu(intserv[i]);
+		for_each_present_cpu(cpu) {
+			if (get_hard_smp_processor_id(cpu) != thread)
+>>>>>>> v3.18
 =======
 		thread = be32_to_cpu(intserv[i]);
 		for_each_present_cpu(cpu) {
@@ -468,7 +552,11 @@ static int dlpar_online_cpu(struct device_node *dn)
 					!= CPU_STATE_OFFLINE);
 			cpu_maps_update_done();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = cpu_up(cpu);
+=======
+			rc = device_online(get_cpu_device(cpu));
+>>>>>>> v3.18
 =======
 			rc = device_online(get_cpu_device(cpu));
 >>>>>>> v3.18
@@ -481,7 +569,11 @@ static int dlpar_online_cpu(struct device_node *dn)
 		if (cpu == num_possible_cpus())
 			printk(KERN_WARNING "Could not find cpu to online "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       "with physical id 0x%x\n", intserv[i]);
+=======
+			       "with physical id 0x%x\n", thread);
+>>>>>>> v3.18
 =======
 			       "with physical id 0x%x\n", thread);
 >>>>>>> v3.18
@@ -495,6 +587,7 @@ out:
 
 static ssize_t dlpar_cpu_probe(const char *buf, size_t count)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device_node *dn;
 	unsigned long drc_index;
@@ -528,6 +621,8 @@ static ssize_t dlpar_cpu_probe(const char *buf, size_t count)
 	kfree(dn->full_name);
 	dn->full_name = cpu_name;
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *dn, *parent;
 	u32 drc_index;
 	int rc;
@@ -545,14 +640,21 @@ static ssize_t dlpar_cpu_probe(const char *buf, size_t count)
 		return -EINVAL;
 
 	of_node_put(parent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rc = dlpar_acquire_drc(drc_index);
 	if (rc) {
 		dlpar_free_cc_nodes(dn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = -EINVAL;
 		goto out;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -563,6 +665,7 @@ static ssize_t dlpar_cpu_probe(const char *buf, size_t count)
 		dlpar_release_drc(drc_index);
 		dlpar_free_cc_nodes(dn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
 	}
 
@@ -572,6 +675,8 @@ out:
 
 	return rc ? rc : count;
 =======
+=======
+>>>>>>> v3.18
 		return rc;
 	}
 
@@ -580,6 +685,9 @@ out:
 		return rc;
 
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -589,7 +697,12 @@ static int dlpar_offline_cpu(struct device_node *dn)
 	unsigned int cpu;
 	int len, nthreads, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *intserv;
+=======
+	const __be32 *intserv;
+	u32 thread;
+>>>>>>> v3.18
 =======
 	const __be32 *intserv;
 	u32 thread;
@@ -604,8 +717,14 @@ static int dlpar_offline_cpu(struct device_node *dn)
 	cpu_maps_update_begin();
 	for (i = 0; i < nthreads; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for_each_present_cpu(cpu) {
 			if (get_hard_smp_processor_id(cpu) != intserv[i])
+=======
+		thread = be32_to_cpu(intserv[i]);
+		for_each_present_cpu(cpu) {
+			if (get_hard_smp_processor_id(cpu) != thread)
+>>>>>>> v3.18
 =======
 		thread = be32_to_cpu(intserv[i]);
 		for_each_present_cpu(cpu) {
@@ -620,7 +739,11 @@ static int dlpar_offline_cpu(struct device_node *dn)
 				set_preferred_offline_state(cpu, CPU_STATE_OFFLINE);
 				cpu_maps_update_done();
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rc = cpu_down(cpu);
+=======
+				rc = device_offline(get_cpu_device(cpu));
+>>>>>>> v3.18
 =======
 				rc = device_offline(get_cpu_device(cpu));
 >>>>>>> v3.18
@@ -637,7 +760,11 @@ static int dlpar_offline_cpu(struct device_node *dn)
 			 */
 			set_preferred_offline_state(cpu, CPU_STATE_OFFLINE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			BUG_ON(plpar_hcall_norets(H_PROD, intserv[i])
+=======
+			BUG_ON(plpar_hcall_norets(H_PROD, thread)
+>>>>>>> v3.18
 =======
 			BUG_ON(plpar_hcall_norets(H_PROD, thread)
 >>>>>>> v3.18
@@ -648,7 +775,11 @@ static int dlpar_offline_cpu(struct device_node *dn)
 		if (cpu == num_possible_cpus())
 			printk(KERN_WARNING "Could not find cpu to offline "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       "with physical id 0x%x\n", intserv[i]);
+=======
+			       "with physical id 0x%x\n", thread);
+>>>>>>> v3.18
 =======
 			       "with physical id 0x%x\n", thread);
 >>>>>>> v3.18
@@ -664,7 +795,11 @@ static ssize_t dlpar_cpu_release(const char *buf, size_t count)
 {
 	struct device_node *dn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *drc_index;
+=======
+	u32 drc_index;
+>>>>>>> v3.18
 =======
 	u32 drc_index;
 >>>>>>> v3.18
@@ -675,8 +810,13 @@ static ssize_t dlpar_cpu_release(const char *buf, size_t count)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drc_index = of_get_property(dn, "ibm,my-drc-index", NULL);
 	if (!drc_index) {
+=======
+	rc = of_property_read_u32(dn, "ibm,my-drc-index", &drc_index);
+	if (rc) {
+>>>>>>> v3.18
 =======
 	rc = of_property_read_u32(dn, "ibm,my-drc-index", &drc_index);
 	if (rc) {
@@ -685,6 +825,7 @@ static ssize_t dlpar_cpu_release(const char *buf, size_t count)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cpu_hotplug_driver_lock();
 	rc = dlpar_offline_cpu(dn);
@@ -699,6 +840,8 @@ static ssize_t dlpar_cpu_release(const char *buf, size_t count)
 		of_node_put(dn);
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	rc = dlpar_offline_cpu(dn);
 	if (rc) {
 		of_node_put(dn);
@@ -709,11 +852,15 @@ static ssize_t dlpar_cpu_release(const char *buf, size_t count)
 	if (rc) {
 		of_node_put(dn);
 		return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	rc = dlpar_detach_node(dn);
 	if (rc) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dlpar_acquire_drc(*drc_index);
 		goto out;
@@ -724,6 +871,8 @@ out:
 	cpu_hotplug_driver_unlock();
 	return rc ? rc : count;
 =======
+=======
+>>>>>>> v3.18
 		dlpar_acquire_drc(drc_index);
 		return rc;
 	}
@@ -731,6 +880,9 @@ out:
 	of_node_put(dn);
 
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

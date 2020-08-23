@@ -54,7 +54,11 @@
 #elif defined(CONFIG_SPARSEMEM)
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Note: section's mem_map is encorded to reflect its start_pfn.
+=======
+ * Note: section's mem_map is encoded to reflect its start_pfn.
+>>>>>>> v3.18
 =======
  * Note: section's mem_map is encoded to reflect its start_pfn.
 >>>>>>> v3.18

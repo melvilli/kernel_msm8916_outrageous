@@ -115,7 +115,11 @@
 
 struct n_hdlc_buf {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head  list_item;
+=======
+	struct n_hdlc_buf *link;
+>>>>>>> v3.18
 =======
 	struct n_hdlc_buf *link;
 >>>>>>> v3.18
@@ -127,7 +131,12 @@ struct n_hdlc_buf {
 
 struct n_hdlc_buf_list {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head  list;
+=======
+	struct n_hdlc_buf *head;
+	struct n_hdlc_buf *tail;
+>>>>>>> v3.18
 =======
 	struct n_hdlc_buf *head;
 	struct n_hdlc_buf *tail;
@@ -145,6 +154,10 @@ struct n_hdlc_buf_list {
  * @tbusy - reentrancy flag for tx wakeup code
  * @woke_up - FIXME: describe this field
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @tbuf - currently transmitting tx buffer
+>>>>>>> v3.18
 =======
  * @tbuf - currently transmitting tx buffer
 >>>>>>> v3.18
@@ -161,6 +174,10 @@ struct n_hdlc {
 	int			tbusy;
 	int			woke_up;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct n_hdlc_buf	*tbuf;
+>>>>>>> v3.18
 =======
 	struct n_hdlc_buf	*tbuf;
 >>>>>>> v3.18
@@ -174,8 +191,12 @@ struct n_hdlc {
  * HDLC buffer list manipulation functions
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void n_hdlc_buf_return(struct n_hdlc_buf_list *buf_list,
 						struct n_hdlc_buf *buf);
+=======
+static void n_hdlc_buf_list_init(struct n_hdlc_buf_list *list);
+>>>>>>> v3.18
 =======
 static void n_hdlc_buf_list_init(struct n_hdlc_buf_list *list);
 >>>>>>> v3.18
@@ -229,10 +250,13 @@ static void flush_tx_queue(struct tty_struct *tty)
 	struct n_hdlc *n_hdlc = tty2n_hdlc(tty);
 	struct n_hdlc_buf *buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	while ((buf = n_hdlc_buf_get(&n_hdlc->tx_buf_list)))
 		n_hdlc_buf_put(&n_hdlc->tx_free_buf_list, buf);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	while ((buf = n_hdlc_buf_get(&n_hdlc->tx_buf_list)))
@@ -243,6 +267,9 @@ static void flush_tx_queue(struct tty_struct *tty)
 		n_hdlc->tbuf = NULL;
 	}
 	spin_unlock_irqrestore(&n_hdlc->tx_buf_list.spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -310,6 +337,10 @@ static void n_hdlc_release(struct n_hdlc *n_hdlc)
 			break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(n_hdlc->tbuf);
+>>>>>>> v3.18
 =======
 	kfree(n_hdlc->tbuf);
 >>>>>>> v3.18
@@ -432,8 +463,11 @@ static void n_hdlc_send_frames(struct n_hdlc *n_hdlc, struct tty_struct *tty)
 	spin_unlock_irqrestore(&n_hdlc->tx_buf_list.spinlock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tbuf = n_hdlc_buf_get(&n_hdlc->tx_buf_list);
 =======
+=======
+>>>>>>> v3.18
 	/* get current transmit buffer or get new transmit */
 	/* buffer from list of pending transmit buffers */
 		
@@ -441,6 +475,9 @@ static void n_hdlc_send_frames(struct n_hdlc *n_hdlc, struct tty_struct *tty)
 	if (!tbuf)
 		tbuf = n_hdlc_buf_get(&n_hdlc->tx_buf_list);
 		
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (tbuf) {
 		if (debuglevel >= DEBUG_LEVEL_INFO)	
@@ -454,7 +491,11 @@ static void n_hdlc_send_frames(struct n_hdlc *n_hdlc, struct tty_struct *tty)
 		/* rollback was possible and has been done */
 		if (actual == -ERESTARTSYS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			n_hdlc_buf_return(&n_hdlc->tx_buf_list, tbuf);
+=======
+			n_hdlc->tbuf = tbuf;
+>>>>>>> v3.18
 =======
 			n_hdlc->tbuf = tbuf;
 >>>>>>> v3.18
@@ -473,12 +514,18 @@ static void n_hdlc_send_frames(struct n_hdlc *n_hdlc, struct tty_struct *tty)
 			/* free current transmit buffer */
 			n_hdlc_buf_put(&n_hdlc->tx_free_buf_list, tbuf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 			
 			/* this tx buffer is done */
 			n_hdlc->tbuf = NULL;
 			
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* wait up sleeping writers */
 			wake_up_interruptible(&tty->write_wait);
@@ -490,6 +537,7 @@ static void n_hdlc_send_frames(struct n_hdlc *n_hdlc, struct tty_struct *tty)
 				printk("%s(%d)frame %p pending\n",
 					__FILE__,__LINE__,tbuf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			/*
 			 * the buffer was not accepted by driver,
@@ -497,10 +545,15 @@ static void n_hdlc_send_frames(struct n_hdlc *n_hdlc, struct tty_struct *tty)
 			 */
 			n_hdlc_buf_return(&n_hdlc->tx_buf_list, tbuf);
 =======
+=======
+>>>>>>> v3.18
 					
 			/* buffer not accepted by driver */
 			/* set this buffer as pending buffer */
 			n_hdlc->tbuf = tbuf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -800,8 +853,12 @@ static int n_hdlc_tty_ioctl(struct tty_struct *tty, struct file *file,
 	int count;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct n_hdlc_buf *buf = NULL;
 
+=======
+	
+>>>>>>> v3.18
 =======
 	
 >>>>>>> v3.18
@@ -819,10 +876,15 @@ static int n_hdlc_tty_ioctl(struct tty_struct *tty, struct file *file,
 		/* in next available frame (if any) */
 		spin_lock_irqsave(&n_hdlc->rx_buf_list.spinlock,flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buf = list_first_entry_or_null(&n_hdlc->rx_buf_list.list,
 						struct n_hdlc_buf, list_item);
 		if (buf)
 			count = buf->count;
+=======
+		if (n_hdlc->rx_buf_list.head)
+			count = n_hdlc->rx_buf_list.head->count;
+>>>>>>> v3.18
 =======
 		if (n_hdlc->rx_buf_list.head)
 			count = n_hdlc->rx_buf_list.head->count;
@@ -839,10 +901,15 @@ static int n_hdlc_tty_ioctl(struct tty_struct *tty, struct file *file,
 		/* add size of next output frame in queue */
 		spin_lock_irqsave(&n_hdlc->tx_buf_list.spinlock,flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buf = list_first_entry_or_null(&n_hdlc->tx_buf_list.list,
 						struct n_hdlc_buf, list_item);
 		if (buf)
 			count += buf->count;
+=======
+		if (n_hdlc->tx_buf_list.head)
+			count += n_hdlc->tx_buf_list.head->count;
+>>>>>>> v3.18
 =======
 		if (n_hdlc->tx_buf_list.head)
 			count += n_hdlc->tx_buf_list.head->count;
@@ -895,7 +962,11 @@ static unsigned int n_hdlc_tty_poll(struct tty_struct *tty, struct file *filp,
 
 		/* set bits for operations that won't block */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!list_empty(&n_hdlc->rx_buf_list.list))
+=======
+		if (n_hdlc->rx_buf_list.head)
+>>>>>>> v3.18
 =======
 		if (n_hdlc->rx_buf_list.head)
 >>>>>>> v3.18
@@ -906,7 +977,11 @@ static unsigned int n_hdlc_tty_poll(struct tty_struct *tty, struct file *filp,
 			mask |= POLLHUP;
 		if (!tty_is_writelocked(tty) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 				!list_empty(&n_hdlc->tx_free_buf_list.list))
+=======
+				n_hdlc->tx_free_buf_list.head)
+>>>>>>> v3.18
 =======
 				n_hdlc->tx_free_buf_list.head)
 >>>>>>> v3.18
@@ -925,7 +1000,11 @@ static struct n_hdlc *n_hdlc_alloc(void)
 	struct n_hdlc_buf *buf;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct n_hdlc *n_hdlc = kmalloc(sizeof(*n_hdlc), GFP_KERNEL);
+=======
+	struct n_hdlc *n_hdlc = kzalloc(sizeof(*n_hdlc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	struct n_hdlc *n_hdlc = kzalloc(sizeof(*n_hdlc), GFP_KERNEL);
 >>>>>>> v3.18
@@ -933,6 +1012,7 @@ static struct n_hdlc *n_hdlc_alloc(void)
 	if (!n_hdlc)
 		return NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memset(n_hdlc, 0, sizeof(*n_hdlc));
 
@@ -947,11 +1027,16 @@ static struct n_hdlc *n_hdlc_alloc(void)
 	INIT_LIST_HEAD(&n_hdlc->tx_buf_list.list);
 
 =======
+=======
+>>>>>>> v3.18
 	n_hdlc_buf_list_init(&n_hdlc->rx_free_buf_list);
 	n_hdlc_buf_list_init(&n_hdlc->tx_free_buf_list);
 	n_hdlc_buf_list_init(&n_hdlc->rx_buf_list);
 	n_hdlc_buf_list_init(&n_hdlc->tx_buf_list);
 	
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* allocate free rx buffer list */
 	for(i=0;i<DEFAULT_RX_BUF_COUNT;i++) {
@@ -980,6 +1065,7 @@ static struct n_hdlc *n_hdlc_alloc(void)
 }	/* end of n_hdlc_alloc() */
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * n_hdlc_buf_return - put the HDLC buffer after the head of the specified list
  * @buf_list - pointer to the buffer list
@@ -1015,6 +1101,8 @@ static void n_hdlc_buf_put(struct n_hdlc_buf_list *buf_list,
 
 	spin_unlock_irqrestore(&buf_list->spinlock, flags);
 =======
+=======
+>>>>>>> v3.18
  * n_hdlc_buf_list_init - initialize specified HDLC buffer list
  * @list - pointer to buffer list
  */
@@ -1045,13 +1133,20 @@ static void n_hdlc_buf_put(struct n_hdlc_buf_list *list,
 	
 	spin_unlock_irqrestore(&list->spinlock,flags);
 	
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }	/* end of n_hdlc_buf_put() */
 
 /**
  * n_hdlc_buf_get - remove and return an HDLC buffer from list
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @buf_list - pointer to HDLC buffer list
+=======
+ * @list - pointer to HDLC buffer list
+>>>>>>> v3.18
 =======
  * @list - pointer to HDLC buffer list
 >>>>>>> v3.18
@@ -1060,6 +1155,7 @@ static void n_hdlc_buf_put(struct n_hdlc_buf_list *list,
  * list.
  * Returns a pointer to HDLC buffer if available, otherwise %NULL.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct n_hdlc_buf *n_hdlc_buf_get(struct n_hdlc_buf_list *buf_list)
 {
@@ -1078,6 +1174,8 @@ static struct n_hdlc_buf *n_hdlc_buf_get(struct n_hdlc_buf_list *buf_list)
 	spin_unlock_irqrestore(&buf_list->spinlock, flags);
 	return buf;
 =======
+=======
+>>>>>>> v3.18
 static struct n_hdlc_buf* n_hdlc_buf_get(struct n_hdlc_buf_list *list)
 {
 	unsigned long flags;
@@ -1095,6 +1193,9 @@ static struct n_hdlc_buf* n_hdlc_buf_get(struct n_hdlc_buf_list *list)
 	spin_unlock_irqrestore(&list->spinlock,flags);
 	return buf;
 	
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }	/* end of n_hdlc_buf_get() */
 
@@ -1105,8 +1206,11 @@ static char hdlc_register_ok[] __initdata =
 static char hdlc_register_fail[] __initdata =
 	KERN_ERR "error registering line discipline: %d\n";
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char hdlc_init_fail[] __initdata =
 	KERN_INFO "N_HDLC: init failure %d\n";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1129,8 +1233,11 @@ static int __init n_hdlc_init(void)
 		printk(hdlc_register_fail, status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status)
 		printk(hdlc_init_fail, status);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return status;

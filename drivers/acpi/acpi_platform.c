@@ -17,6 +17,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dma-mapping.h>
+>>>>>>> v3.18
 =======
 #include <linux/dma-mapping.h>
 >>>>>>> v3.18
@@ -26,6 +30,7 @@
 
 ACPI_MODULE_NAME("platform");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * The following ACPI IDs are known to be suitable for representing as
@@ -37,11 +42,16 @@ static const struct acpi_device_id acpi_platform_device_ids[] = {
 
 	{ }
 =======
+=======
+>>>>>>> v3.18
 static const struct acpi_device_id forbidden_id_list[] = {
 	{"PNP0000", 0},	/* PIC */
 	{"PNP0100", 0},	/* Timer */
 	{"PNP0200", 0},	/* AT DMA Controller */
 	{"", 0},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -49,7 +59,10 @@ static const struct acpi_device_id forbidden_id_list[] = {
  * acpi_create_platform_device - Create platform device for ACPI device node
  * @adev: ACPI device node to create a platform device for.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @id: ACPI device ID used to match @adev.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -60,8 +73,12 @@ static const struct acpi_device_id forbidden_id_list[] = {
  * Name of the platform device will be the same as @adev's.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int acpi_create_platform_device(struct acpi_device *adev,
 				const struct acpi_device_id *id)
+=======
+struct platform_device *acpi_create_platform_device(struct acpi_device *adev)
+>>>>>>> v3.18
 =======
 struct platform_device *acpi_create_platform_device(struct acpi_device *adev)
 >>>>>>> v3.18
@@ -72,7 +89,11 @@ struct platform_device *acpi_create_platform_device(struct acpi_device *adev)
 	struct resource_list_entry *rentry;
 	struct list_head resource_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *resources;
+=======
+	struct resource *resources = NULL;
+>>>>>>> v3.18
 =======
 	struct resource *resources = NULL;
 >>>>>>> v3.18
@@ -80,6 +101,7 @@ struct platform_device *acpi_create_platform_device(struct acpi_device *adev)
 
 	/* If the ACPI node already has a physical device attached, skip it. */
 	if (adev->physical_node_count)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return 0;
 
@@ -100,6 +122,8 @@ struct platform_device *acpi_create_platform_device(struct acpi_device *adev)
 
 	acpi_dev_free_resource_list(&resource_list);
 =======
+=======
+>>>>>>> v3.18
 		return NULL;
 
 	if (!acpi_match_device_ids(adev, forbidden_id_list))
@@ -123,6 +147,9 @@ struct platform_device *acpi_create_platform_device(struct acpi_device *adev)
 
 		acpi_dev_free_resource_list(&resource_list);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(&pdevinfo, 0, sizeof(pdevinfo));
@@ -152,6 +179,7 @@ struct platform_device *acpi_create_platform_device(struct acpi_device *adev)
 	pdevinfo.res = resources;
 	pdevinfo.num_res = count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdevinfo.acpi_node.handle = adev->handle;
 	pdev = platform_device_register_full(&pdevinfo);
 	if (IS_ERR(pdev)) {
@@ -177,6 +205,8 @@ void __init acpi_platform_init(void)
 	acpi_scan_add_handler(&platform_handler);
 }
 =======
+=======
+>>>>>>> v3.18
 	pdevinfo.acpi_node.companion = adev;
 	pdevinfo.dma_mask = DMA_BIT_MASK(32);
 	pdev = platform_device_register_full(&pdevinfo);
@@ -191,4 +221,7 @@ void __init acpi_platform_init(void)
 	return pdev;
 }
 EXPORT_SYMBOL_GPL(acpi_create_platform_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

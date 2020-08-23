@@ -50,16 +50,22 @@
 	regulators {
 		compatible = "simple-bus";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		reg_3p3v: 3p3v {
 			compatible = "regulator-fixed";
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 
 		reg_3p3v: regulator@0 {
 			compatible = "regulator-fixed";
 			reg = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regulator-name = "3P3V";
 			regulator-min-microvolt = <3300000>;
@@ -109,7 +115,11 @@
 &esdhc1 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_esdhc1_2>;
+=======
+	pinctrl-0 = <&pinctrl_esdhc1>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_esdhc1>;
 >>>>>>> v3.18
@@ -123,7 +133,11 @@
 	pinctrl-0 = <&pinctrl_hog>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hog {
+=======
+	imx53-ard {
+>>>>>>> v3.18
 =======
 	imx53-ard {
 >>>>>>> v3.18
@@ -166,7 +180,10 @@
 			>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		pinctrl_esdhc1: esdhc1grp {
 			fsl,pins = <
@@ -189,6 +206,9 @@
 				MX53_PAD_PATA_DMACK__UART1_RXD_MUX	0x1e4
 			>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };
@@ -196,7 +216,11 @@
 &uart1 {
 	pinctrl-names = "default";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl-0 = <&pinctrl_uart1_2>;
+=======
+	pinctrl-0 = <&pinctrl_uart1>;
+>>>>>>> v3.18
 =======
 	pinctrl-0 = <&pinctrl_uart1>;
 >>>>>>> v3.18

@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -103,6 +111,11 @@ int iwl_mvm_leds_init(struct iwl_mvm *mvm)
 
 	switch (mode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case IWL_LED_BLINK:
+		IWL_ERR(mvm, "Blink led mode not supported, used default\n");
+>>>>>>> v3.18
 =======
 	case IWL_LED_BLINK:
 		IWL_ERR(mvm, "Blink led mode not supported, used default\n");
@@ -117,7 +130,11 @@ int iwl_mvm_leds_init(struct iwl_mvm *mvm)
 	default:
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18

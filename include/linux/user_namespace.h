@@ -18,10 +18,13 @@ struct uid_gid_map {	/* 64 bytes -- 1 cache line */
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USERNS_SETGROUPS_ALLOWED 1UL
 
 #define USERNS_INIT_FLAGS USERNS_SETGROUPS_ALLOWED
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct user_namespace {
@@ -35,16 +38,22 @@ struct user_namespace {
 	kgid_t			group;
 	unsigned int		proc_inum;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long		flags;
 	bool			may_mount_sysfs;
 	bool			may_mount_proc;
 =======
+=======
+>>>>>>> v3.18
 
 	/* Register of per-UID persistent keyrings for this namespace */
 #ifdef CONFIG_PERSISTENT_KEYRINGS
 	struct key		*persistent_keyring_register;
 	struct rw_semaphore	persistent_keyring_register_sem;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -71,6 +80,7 @@ static inline void put_user_ns(struct user_namespace *ns)
 
 struct seq_operations;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct seq_operations proc_uid_seq_operations;
 extern struct seq_operations proc_gid_seq_operations;
 extern struct seq_operations proc_projid_seq_operations;
@@ -81,12 +91,17 @@ extern ssize_t proc_setgroups_write(struct file *, const char __user *, size_t, 
 extern int proc_setgroups_show(struct seq_file *m, void *v);
 extern bool userns_may_setgroups(const struct user_namespace *ns);
 =======
+=======
+>>>>>>> v3.18
 extern const struct seq_operations proc_uid_seq_operations;
 extern const struct seq_operations proc_gid_seq_operations;
 extern const struct seq_operations proc_projid_seq_operations;
 extern ssize_t proc_uid_map_write(struct file *, const char __user *, size_t, loff_t *);
 extern ssize_t proc_gid_map_write(struct file *, const char __user *, size_t, loff_t *);
 extern ssize_t proc_projid_map_write(struct file *, const char __user *, size_t, loff_t *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 
@@ -113,6 +128,7 @@ static inline void put_user_ns(struct user_namespace *ns)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool userns_may_setgroups(const struct user_namespace *ns)
 {
 	return true;
@@ -121,6 +137,10 @@ static inline bool userns_may_setgroups(const struct user_namespace *ns)
 
 void update_mnt_policy(struct user_namespace *userns);
 
+=======
+#endif
+
+>>>>>>> v3.18
 =======
 #endif
 

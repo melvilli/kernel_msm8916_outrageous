@@ -309,6 +309,11 @@ struct AdapterCtlBlk {
 	struct timer_list selto_timer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long last_reset;
+
+>>>>>>> v3.18
 =======
 	unsigned long last_reset;
 
@@ -523,9 +528,13 @@ static struct ParameterData cfg_data[] = {
 		0,
 		0x2f,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SCSI_MULTI_LUN
 			NAC_SCANLUN |
 #endif
+=======
+		NAC_SCANLUN |
+>>>>>>> v3.18
 =======
 		NAC_SCANLUN |
 >>>>>>> v3.18
@@ -870,9 +879,15 @@ static void waiting_set_timer(struct AdapterCtlBlk *acb, unsigned long to)
 	acb->waiting_timer.function = waiting_timeout;
 	acb->waiting_timer.data = (unsigned long) acb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (time_before(jiffies + to, acb->scsi_host->last_reset - HZ / 2))
 		acb->waiting_timer.expires =
 		    acb->scsi_host->last_reset - HZ / 2 + 1;
+=======
+	if (time_before(jiffies + to, acb->last_reset - HZ / 2))
+		acb->waiting_timer.expires =
+		    acb->last_reset - HZ / 2 + 1;
+>>>>>>> v3.18
 =======
 	if (time_before(jiffies + to, acb->last_reset - HZ / 2))
 		acb->waiting_timer.expires =
@@ -1103,7 +1118,11 @@ static int dc395x_queue_command_lck(struct scsi_cmnd *cmd, void (*done)(struct s
 	    (struct AdapterCtlBlk *)cmd->device->host->hostdata;
 	dprintkdbg(DBG_0, "queue_command: (0x%p) <%02i-%i> cmnd=0x%02x\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cmd, cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
+=======
+		cmd, cmd->device->id, (u8)cmd->device->lun, cmd->cmnd[0]);
+>>>>>>> v3.18
 =======
 		cmd, cmd->device->id, (u8)cmd->device->lun, cmd->cmnd[0]);
 >>>>>>> v3.18
@@ -1122,7 +1141,11 @@ static int dc395x_queue_command_lck(struct scsi_cmnd *cmd, void (*done)(struct s
 	if (!(acb->dcb_map[cmd->device->id] & (1 << cmd->device->lun))) {
 		dprintkl(KERN_INFO, "queue_command: Ignore target <%02i-%i>\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cmd->device->id, cmd->device->lun);
+=======
+			cmd->device->id, (u8)cmd->device->lun);
+>>>>>>> v3.18
 =======
 			cmd->device->id, (u8)cmd->device->lun);
 >>>>>>> v3.18
@@ -1135,7 +1158,11 @@ static int dc395x_queue_command_lck(struct scsi_cmnd *cmd, void (*done)(struct s
 		/* should never happen */
 		dprintkl(KERN_ERR, "queue_command: No such device <%02i-%i>",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cmd->device->id, cmd->device->lun);
+=======
+			cmd->device->id, (u8)cmd->device->lun);
+>>>>>>> v3.18
 =======
 			cmd->device->id, (u8)cmd->device->lun);
 >>>>>>> v3.18
@@ -1235,7 +1262,11 @@ static void dump_register_info(struct AdapterCtlBlk *acb,
 				srb, srb->cmd,
 				srb->cmd->cmnd[0], srb->cmd->device->id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       	srb->cmd->device->lun);
+=======
+				(u8)srb->cmd->device->lun);
+>>>>>>> v3.18
 =======
 				(u8)srb->cmd->device->lun);
 >>>>>>> v3.18
@@ -1334,7 +1365,11 @@ static int __dc395x_eh_bus_reset(struct scsi_cmnd *cmd)
 	dprintkl(KERN_INFO,
 		"eh_bus_reset: (0%p) target=<%02i-%i> cmd=%p\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cmd, cmd->device->id, cmd->device->lun, cmd);
+=======
+		cmd, cmd->device->id, (u8)cmd->device->lun, cmd);
+>>>>>>> v3.18
 =======
 		cmd, cmd->device->id, (u8)cmd->device->lun, cmd);
 >>>>>>> v3.18
@@ -1355,7 +1390,11 @@ static int __dc395x_eh_bus_reset(struct scsi_cmnd *cmd)
 
 	/* We may be in serious trouble. Wait some seconds */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acb->scsi_host->last_reset =
+=======
+	acb->last_reset =
+>>>>>>> v3.18
 =======
 	acb->last_reset =
 >>>>>>> v3.18
@@ -1409,7 +1448,11 @@ static int dc395x_eh_abort(struct scsi_cmnd *cmd)
 	struct ScsiReqBlk *srb;
 	dprintkl(KERN_INFO, "eh_abort: (0x%p) target=<%02i-%i> cmd=%p\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cmd, cmd->device->id, cmd->device->lun, cmd);
+=======
+		cmd, cmd->device->id, (u8)cmd->device->lun, cmd);
+>>>>>>> v3.18
 =======
 		cmd, cmd->device->id, (u8)cmd->device->lun, cmd);
 >>>>>>> v3.18
@@ -1506,9 +1549,15 @@ static void selto_timer(struct AdapterCtlBlk *acb)
 	acb->selto_timer.data = (unsigned long) acb;
 	if (time_before
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (jiffies + HZ, acb->scsi_host->last_reset + HZ / 2))
 		acb->selto_timer.expires =
 		    acb->scsi_host->last_reset + HZ / 2 + 1;
+=======
+	    (jiffies + HZ, acb->last_reset + HZ / 2))
+		acb->selto_timer.expires =
+		    acb->last_reset + HZ / 2 + 1;
+>>>>>>> v3.18
 =======
 	    (jiffies + HZ, acb->last_reset + HZ / 2))
 		acb->selto_timer.expires =
@@ -1585,7 +1634,11 @@ static u8 start_scsi(struct AdapterCtlBlk* acb, struct DeviceCtlBlk* dcb,
 	/* Allow starting of SCSI commands half a second before we allow the mid-level
 	 * to queue them again after a reset */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (time_before(jiffies, acb->scsi_host->last_reset - HZ / 2)) {
+=======
+	if (time_before(jiffies, acb->last_reset - HZ / 2)) {
+>>>>>>> v3.18
 =======
 	if (time_before(jiffies, acb->last_reset - HZ / 2)) {
 >>>>>>> v3.18
@@ -1659,7 +1712,11 @@ static u8 start_scsi(struct AdapterCtlBlk* acb, struct DeviceCtlBlk* dcb,
 				"Out of tags target=<%02i-%i>)\n",
 				srb->cmd, srb->cmd->device->id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				srb->cmd->device->lun);
+=======
+				(u8)srb->cmd->device->lun);
+>>>>>>> v3.18
 =======
 				(u8)srb->cmd->device->lun);
 >>>>>>> v3.18
@@ -1681,7 +1738,11 @@ static u8 start_scsi(struct AdapterCtlBlk* acb, struct DeviceCtlBlk* dcb,
 	/* Send CDB ..command block ......... */
 	dprintkdbg(DBG_KG, "start_scsi: (0x%p) <%02i-%i> cmnd=0x%02x tag=%i\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		srb->cmd, srb->cmd->device->id, srb->cmd->device->lun,
+=======
+		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun,
+>>>>>>> v3.18
 =======
 		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun,
 >>>>>>> v3.18
@@ -2103,7 +2164,11 @@ static void data_out_phase0(struct AdapterCtlBlk *acb, struct ScsiReqBlk *srb,
 	u32 d_left_counter = 0;
 	dprintkdbg(DBG_0, "data_out_phase0: (0x%p) <%02i-%i>\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		srb->cmd, srb->cmd->device->id, srb->cmd->device->lun);
+=======
+		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun);
+>>>>>>> v3.18
 =======
 		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun);
 >>>>>>> v3.18
@@ -2237,7 +2302,11 @@ static void data_out_phase1(struct AdapterCtlBlk *acb, struct ScsiReqBlk *srb,
 {
 	dprintkdbg(DBG_0, "data_out_phase1: (0x%p) <%02i-%i>\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		srb->cmd, srb->cmd->device->id, srb->cmd->device->lun);
+=======
+		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun);
+>>>>>>> v3.18
 =======
 		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun);
 >>>>>>> v3.18
@@ -2253,7 +2322,11 @@ static void data_in_phase0(struct AdapterCtlBlk *acb, struct ScsiReqBlk *srb,
 
 	dprintkdbg(DBG_0, "data_in_phase0: (0x%p) <%02i-%i>\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		srb->cmd, srb->cmd->device->id, srb->cmd->device->lun);
+=======
+		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun);
+>>>>>>> v3.18
 =======
 		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun);
 >>>>>>> v3.18
@@ -2468,7 +2541,11 @@ static void data_in_phase1(struct AdapterCtlBlk *acb, struct ScsiReqBlk *srb,
 {
 	dprintkdbg(DBG_0, "data_in_phase1: (0x%p) <%02i-%i>\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		srb->cmd, srb->cmd->device->id, srb->cmd->device->lun);
+=======
+		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun);
+>>>>>>> v3.18
 =======
 		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun);
 >>>>>>> v3.18
@@ -2484,7 +2561,11 @@ static void data_io_transfer(struct AdapterCtlBlk *acb,
 	dprintkdbg(DBG_0,
 		"data_io_transfer: (0x%p) <%02i-%i> %c len=%i, sg=(%i/%i)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		srb->cmd, srb->cmd->device->id, srb->cmd->device->lun,
+=======
+		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun,
+>>>>>>> v3.18
 =======
 		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun,
 >>>>>>> v3.18
@@ -2661,7 +2742,11 @@ static void status_phase0(struct AdapterCtlBlk *acb, struct ScsiReqBlk *srb,
 {
 	dprintkdbg(DBG_0, "status_phase0: (0x%p) <%02i-%i>\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		srb->cmd, srb->cmd->device->id, srb->cmd->device->lun);
+=======
+		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun);
+>>>>>>> v3.18
 =======
 		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun);
 >>>>>>> v3.18
@@ -2679,7 +2764,11 @@ static void status_phase1(struct AdapterCtlBlk *acb, struct ScsiReqBlk *srb,
 {
 	dprintkdbg(DBG_0, "status_phase1: (0x%p) <%02i-%i>\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		srb->cmd, srb->cmd->device->id, srb->cmd->device->lun);
+=======
+		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun);
+>>>>>>> v3.18
 =======
 		srb->cmd, srb->cmd->device->id, (u8)srb->cmd->device->lun);
 >>>>>>> v3.18
@@ -3121,7 +3210,11 @@ static void disconnect(struct AdapterCtlBlk *acb)
 		udelay(500);
 		/* Suspend queue for a while */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acb->scsi_host->last_reset =
+=======
+		acb->last_reset =
+>>>>>>> v3.18
 =======
 		acb->last_reset =
 >>>>>>> v3.18
@@ -3147,7 +3240,11 @@ static void disconnect(struct AdapterCtlBlk *acb)
 	} else if (srb->state & SRB_ABORT_SENT) {
 		dcb->flag &= ~ABORT_DEV_;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acb->scsi_host->last_reset = jiffies + HZ / 2 + 1;
+=======
+		acb->last_reset = jiffies + HZ / 2 + 1;
+>>>>>>> v3.18
 =======
 		acb->last_reset = jiffies + HZ / 2 + 1;
 >>>>>>> v3.18
@@ -3416,7 +3513,11 @@ static void srb_done(struct AdapterCtlBlk *acb, struct DeviceCtlBlk *dcb,
 
 	dprintkdbg(DBG_1, "srb_done: (0x%p) <%02i-%i>\n", srb->cmd,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		srb->cmd->device->id, srb->cmd->device->lun);
+=======
+		srb->cmd->device->id, (u8)srb->cmd->device->lun);
+>>>>>>> v3.18
 =======
 		srb->cmd->device->id, (u8)srb->cmd->device->lun);
 >>>>>>> v3.18
@@ -3600,7 +3701,11 @@ static void srb_done(struct AdapterCtlBlk *acb, struct DeviceCtlBlk *dcb,
 			dprintkdbg(DBG_KG, "srb_done: (0x%p) <%02i-%i> "
 				"cmnd=0x%02x Missed %i bytes\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cmd, cmd->device->id, cmd->device->lun,
+=======
+				cmd, cmd->device->id, (u8)cmd->device->lun,
+>>>>>>> v3.18
 =======
 				cmd, cmd->device->id, (u8)cmd->device->lun,
 >>>>>>> v3.18
@@ -3644,7 +3749,11 @@ static void doing_srb_done(struct AdapterCtlBlk *acb, u8 did_flag,
 			result = MK_RES(0, did_flag, 0, 0);
 			printk("G:%p(%02i-%i) ", p,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       p->device->id, p->device->lun);
+=======
+			       p->device->id, (u8)p->device->lun);
+>>>>>>> v3.18
 =======
 			       p->device->id, (u8)p->device->lun);
 >>>>>>> v3.18
@@ -3678,7 +3787,11 @@ static void doing_srb_done(struct AdapterCtlBlk *acb, u8 did_flag,
 			result = MK_RES(0, did_flag, 0, 0);
 			printk("W:%p<%02i-%i>", p, p->device->id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       p->device->lun);
+=======
+			       (u8)p->device->lun);
+>>>>>>> v3.18
 =======
 			       (u8)p->device->lun);
 >>>>>>> v3.18
@@ -3763,7 +3876,11 @@ static void scsi_reset_detect(struct AdapterCtlBlk *acb)
 	udelay(500);
 	/* Maybe we locked up the bus? Then lets wait even longer ... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acb->scsi_host->last_reset =
+=======
+	acb->last_reset =
+>>>>>>> v3.18
 =======
 	acb->last_reset =
 >>>>>>> v3.18
@@ -3795,7 +3912,11 @@ static void request_sense(struct AdapterCtlBlk *acb, struct DeviceCtlBlk *dcb,
 	struct scsi_cmnd *cmd = srb->cmd;
 	dprintkdbg(DBG_1, "request_sense: (0x%p) <%02i-%i>\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cmd, cmd->device->id, cmd->device->lun);
+=======
+		cmd, cmd->device->id, (u8)cmd->device->lun);
+>>>>>>> v3.18
 =======
 		cmd, cmd->device->id, (u8)cmd->device->lun);
 >>>>>>> v3.18
@@ -4548,7 +4669,11 @@ static void adapter_init_scsi_host(struct Scsi_Host *host)
 	host->unique_id = acb->io_port_base;
 	host->irq = acb->irq_level;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->last_reset = jiffies;
+=======
+	acb->last_reset = jiffies;
+>>>>>>> v3.18
 =======
 	acb->last_reset = jiffies;
 >>>>>>> v3.18
@@ -4558,7 +4683,10 @@ static void adapter_init_scsi_host(struct Scsi_Host *host)
 		host->max_id--;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SCSI_MULTI_LUN
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (eeprom->channel_cfg & NAC_SCANLUN)
@@ -4566,10 +4694,13 @@ static void adapter_init_scsi_host(struct Scsi_Host *host)
 	else
 		host->max_lun = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 	host->max_lun = 1;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -4616,7 +4747,11 @@ static void adapter_init_chip(struct AdapterCtlBlk *acb)
 		udelay(500);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acb->scsi_host->last_reset =
+=======
+		acb->last_reset =
+>>>>>>> v3.18
 =======
 		acb->last_reset =
 >>>>>>> v3.18
@@ -4779,7 +4914,11 @@ static int dc395x_show_info(struct seq_file *m, struct Scsi_Host *host)
 	SPRINTF(" SelTimeout %ims\n", (1638 * acb->sel_timeout) / 1000);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SPRINTF("MaxID %i, MaxLUN %i, ", host->max_id, host->max_lun);
+=======
+	SPRINTF("MaxID %i, MaxLUN %llu, ", host->max_id, host->max_lun);
+>>>>>>> v3.18
 =======
 	SPRINTF("MaxID %i, MaxLUN %llu, ", host->max_id, host->max_lun);
 >>>>>>> v3.18
@@ -4999,7 +5138,10 @@ static void dc395x_remove_one(struct pci_dev *dev)
 	pci_disable_device(dev);
 	scsi_host_put(scsi_host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

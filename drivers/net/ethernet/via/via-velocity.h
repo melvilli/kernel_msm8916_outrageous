@@ -1266,7 +1266,11 @@ struct velocity_context {
 #define PHYID_MARVELL_1000  0x01410C50UL
 #define PHYID_MARVELL_1000S 0x01410C40UL
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#define PHYID_ICPLUS_IP101A 0x02430C54UL
+>>>>>>> v3.18
 =======
 #define PHYID_ICPLUS_IP101A 0x02430C54UL
 >>>>>>> v3.18
@@ -1439,13 +1443,19 @@ struct velocity_opt {
 
 struct velocity_info {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev *pdev;
 	struct net_device *dev;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev;
 	struct pci_dev *pdev;
 	struct net_device *netdev;
 	int no_eeprom;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	unsigned long active_vlans[BITS_TO_LONGS(VLAN_N_VID)];
@@ -1526,7 +1536,11 @@ static inline int velocity_get_ip(struct velocity_info *vptr)
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	in_dev = __in_dev_get_rcu(vptr->dev);
+=======
+	in_dev = __in_dev_get_rcu(vptr->netdev);
+>>>>>>> v3.18
 =======
 	in_dev = __in_dev_get_rcu(vptr->netdev);
 >>>>>>> v3.18

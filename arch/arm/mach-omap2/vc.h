@@ -118,6 +118,12 @@ extern struct omap_vc_param omap4_iva_vc_data;
 extern struct omap_vc_param omap4_core_vc_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void omap3_vc_set_pmic_signaling(int core_next_state);
+
+
+>>>>>>> v3.18
 =======
 void omap3_vc_set_pmic_signaling(int core_next_state);
 

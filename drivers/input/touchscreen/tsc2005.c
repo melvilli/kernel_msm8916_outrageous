@@ -26,12 +26,15 @@
 #include <linux/module.h>
 #include <linux/input.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/delay.h>
 #include <linux/pm.h>
 #include <linux/spi/spi.h>
 #include <linux/spi/tsc2005.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/input/touchscreen.h>
 #include <linux/interrupt.h>
 #include <linux/delay.h>
@@ -41,6 +44,9 @@
 #include <linux/spi/spi.h>
 #include <linux/spi/tsc2005.h>
 #include <linux/regulator/consumer.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -113,12 +119,18 @@
 
 #define MAX_12BIT			0xfff
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define TSC2005_DEF_X_FUZZ		4
 #define TSC2005_DEF_Y_FUZZ		8
 #define TSC2005_DEF_P_FUZZ		2
 #define TSC2005_DEF_RESISTOR		280
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TSC2005_SPI_MAX_SPEED_HZ	10000000
 #define TSC2005_PENUP_TIME_MS		40
@@ -164,6 +176,12 @@ struct tsc2005 {
 	bool			pen_down;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct regulator	*vio;
+
+	int			reset_gpio;
+>>>>>>> v3.18
 =======
 	struct regulator	*vio;
 
@@ -364,7 +382,10 @@ static void tsc2005_stop_scan(struct tsc2005 *ts)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void tsc2005_set_reset(struct tsc2005 *ts, bool enable)
 {
 	if (ts->reset_gpio >= 0)
@@ -373,6 +394,9 @@ static void tsc2005_set_reset(struct tsc2005 *ts, bool enable)
 		ts->set_reset(enable);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* must be called with ts->mutex held */
 static void __tsc2005_disable(struct tsc2005 *ts)
@@ -393,7 +417,11 @@ static void __tsc2005_enable(struct tsc2005 *ts)
 	tsc2005_start_scan(ts);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ts->esd_timeout && ts->set_reset) {
+=======
+	if (ts->esd_timeout && (ts->set_reset || ts->reset_gpio)) {
+>>>>>>> v3.18
 =======
 	if (ts->esd_timeout && (ts->set_reset || ts->reset_gpio)) {
 >>>>>>> v3.18
@@ -456,9 +484,15 @@ static ssize_t tsc2005_selftest_show(struct device *dev,
 
 	/* hardware reset */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ts->set_reset(false);
 	usleep_range(100, 500); /* only 10us required */
 	ts->set_reset(true);
+=======
+	tsc2005_set_reset(ts, false);
+	usleep_range(100, 500); /* only 10us required */
+	tsc2005_set_reset(ts, true);
+>>>>>>> v3.18
 =======
 	tsc2005_set_reset(ts, false);
 	usleep_range(100, 500); /* only 10us required */
@@ -507,7 +541,11 @@ static umode_t tsc2005_attr_is_visible(struct kobject *kobj,
 
 	if (attr == &dev_attr_selftest.attr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!ts->set_reset)
+=======
+		if (!ts->set_reset && !ts->reset_gpio)
+>>>>>>> v3.18
 =======
 		if (!ts->set_reset && !ts->reset_gpio)
 >>>>>>> v3.18
@@ -561,9 +599,15 @@ static void tsc2005_esd_work(struct work_struct *work)
 	tsc2005_update_pen_state(ts, 0, 0, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ts->set_reset(false);
 	usleep_range(100, 500); /* only 10us required */
 	ts->set_reset(true);
+=======
+	tsc2005_set_reset(ts, false);
+	usleep_range(100, 500); /* only 10us required */
+	tsc2005_set_reset(ts, true);
+>>>>>>> v3.18
 =======
 	tsc2005_set_reset(ts, false);
 	usleep_range(100, 500); /* only 10us required */
@@ -629,6 +673,7 @@ static void tsc2005_setup_spi_xfer(struct tsc2005 *ts)
 static int tsc2005_probe(struct spi_device *spi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct tsc2005_platform_data *pdata = spi->dev.platform_data;
 	struct tsc2005 *ts;
 	struct input_dev *input_dev;
@@ -654,6 +699,8 @@ static int tsc2005_probe(struct spi_device *spi)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	const struct tsc2005_platform_data *pdata = dev_get_platdata(&spi->dev);
 	struct device_node *np = spi->dev.of_node;
 
@@ -696,6 +743,9 @@ static int tsc2005_probe(struct spi_device *spi)
 								&esd_timeout);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spi->mode = SPI_MODE_0;
 	spi->bits_per_word = 8;
@@ -707,6 +757,7 @@ static int tsc2005_probe(struct spi_device *spi)
 		return error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ts = kzalloc(sizeof(*ts), GFP_KERNEL);
 	input_dev = input_allocate_device();
 	if (!ts || !input_dev) {
@@ -714,6 +765,8 @@ static int tsc2005_probe(struct spi_device *spi)
 		goto err_free_mem;
 	}
 =======
+=======
+>>>>>>> v3.18
 	ts = devm_kzalloc(&spi->dev, sizeof(*ts), GFP_KERNEL);
 	if (!ts)
 		return -ENOMEM;
@@ -721,16 +774,22 @@ static int tsc2005_probe(struct spi_device *spi)
 	input_dev = devm_input_allocate_device(&spi->dev);
 	if (!input_dev)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ts->spi = spi;
 	ts->idev = input_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ts->x_plate_ohm	= pdata->ts_x_plate_ohm	? : 280;
 	ts->esd_timeout	= pdata->esd_timeout_ms;
 	ts->set_reset	= pdata->set_reset;
 =======
+=======
+>>>>>>> v3.18
 	ts->x_plate_ohm = x_plate_ohm;
 	ts->esd_timeout = esd_timeout;
 
@@ -762,6 +821,9 @@ static int tsc2005_probe(struct spi_device *spi)
 		ts->reset_gpio = -1;
 		ts->set_reset = pdata->set_reset;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_init(&ts->mutex);
@@ -788,6 +850,12 @@ static int tsc2005_probe(struct spi_device *spi)
 	input_set_abs_params(input_dev, ABS_PRESSURE, 0, max_p, fudge_p, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (np)
+		touchscreen_parse_of_params(input_dev);
+
+>>>>>>> v3.18
 =======
 	if (np)
 		touchscreen_parse_of_params(input_dev);
@@ -802,6 +870,7 @@ static int tsc2005_probe(struct spi_device *spi)
 	tsc2005_stop_scan(ts);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = request_threaded_irq(spi->irq, NULL, tsc2005_irq_thread,
 				     IRQF_TRIGGER_RISING | IRQF_ONESHOT,
 				     "tsc2005", ts);
@@ -809,6 +878,8 @@ static int tsc2005_probe(struct spi_device *spi)
 		dev_err(&spi->dev, "Failed to request irq, err: %d\n", error);
 		goto err_free_mem;
 =======
+=======
+>>>>>>> v3.18
 	error = devm_request_threaded_irq(&spi->dev, spi->irq, NULL,
 					  tsc2005_irq_thread,
 					  IRQF_TRIGGER_RISING | IRQF_ONESHOT,
@@ -823,6 +894,9 @@ static int tsc2005_probe(struct spi_device *spi)
 		error = regulator_enable(ts->vio);
 		if (error)
 			return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -832,7 +906,11 @@ static int tsc2005_probe(struct spi_device *spi)
 		dev_err(&spi->dev,
 			"Failed to create sysfs attributes, err: %d\n", error);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_clear_drvdata;
+=======
+		goto disable_regulator;
+>>>>>>> v3.18
 =======
 		goto disable_regulator;
 >>>>>>> v3.18
@@ -851,12 +929,18 @@ static int tsc2005_probe(struct spi_device *spi)
 err_remove_sysfs:
 	sysfs_remove_group(&spi->dev.kobj, &tsc2005_attr_group);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_clear_drvdata:
 	spi_set_drvdata(spi, NULL);
 	free_irq(spi->irq, ts);
 err_free_mem:
 	input_free_device(input_dev);
 	kfree(ts);
+=======
+disable_regulator:
+	if (ts->vio)
+		regulator_disable(ts->vio);
+>>>>>>> v3.18
 =======
 disable_regulator:
 	if (ts->vio)
@@ -870,6 +954,7 @@ static int tsc2005_remove(struct spi_device *spi)
 	struct tsc2005 *ts = spi_get_drvdata(spi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_remove_group(&ts->spi->dev.kobj, &tsc2005_attr_group);
 
 	free_irq(ts->spi->irq, ts);
@@ -878,11 +963,16 @@ static int tsc2005_remove(struct spi_device *spi)
 
 	spi_set_drvdata(spi, NULL);
 =======
+=======
+>>>>>>> v3.18
 	sysfs_remove_group(&spi->dev.kobj, &tsc2005_attr_group);
 
 	if (ts->vio)
 		regulator_disable(ts->vio);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

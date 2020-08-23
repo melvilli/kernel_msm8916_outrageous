@@ -8,7 +8,10 @@
 #define __UM_UBD_USER_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ignore_sigwinch_sig(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int start_io_thread(unsigned long sp, int *fds_out);

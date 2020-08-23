@@ -2293,6 +2293,11 @@ TRACE_EVENT(ocfs2_rename,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+DEFINE_OCFS2_ULL_ULL_EVENT(ocfs2_rename_not_permitted);
+
+>>>>>>> v3.18
 =======
 DEFINE_OCFS2_ULL_ULL_EVENT(ocfs2_rename_not_permitted);
 
@@ -2585,6 +2590,11 @@ DEFINE_OCFS2_INT_INT_EVENT(ocfs2_extend_trans);
 DEFINE_OCFS2_INT_EVENT(ocfs2_extend_trans_restart);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+DEFINE_OCFS2_INT_INT_EVENT(ocfs2_allocate_extend_trans);
+
+>>>>>>> v3.18
 =======
 DEFINE_OCFS2_INT_INT_EVENT(ocfs2_allocate_extend_trans);
 

@@ -36,7 +36,11 @@
  * atomic_set() is the clrex or dummy strex done on every exception return.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_read(v)	(*(volatile int *)&(v)->counter)
+=======
+#define atomic_read(v)	ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 =======
 #define atomic_read(v)	ACCESS_ONCE((v)->counter)
 >>>>>>> v3.18
@@ -47,6 +51,7 @@
  * store exclusive to ensure that these are atomic.  We may loop
  * to ensure that the update happens.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void atomic_add(int i, atomic_t *v)
 {
@@ -112,6 +117,8 @@ static inline int atomic_sub_return(int i, atomic_t *v)
 	return result;
 }
 =======
+=======
+>>>>>>> v3.18
 
 #define ATOMIC_OP(op, asm_op)						\
 static inline void atomic_##op(int i, atomic_t *v)			\
@@ -157,6 +164,9 @@ ATOMIC_OPS(sub, sub)
 #undef ATOMIC_OPS
 #undef ATOMIC_OP_RETURN
 #undef ATOMIC_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int atomic_cmpxchg(atomic_t *ptr, int old, int new)
@@ -209,6 +219,7 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
  */
 #define ATOMIC64_INIT(i) { (i) }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define atomic64_read(v)	(*(volatile long *)&(v)->counter)
 #define atomic64_set(v,i)	(((v)->counter) = (i))
@@ -277,6 +288,8 @@ static inline long atomic64_sub_return(long i, atomic64_t *v)
 	return result;
 }
 =======
+=======
+>>>>>>> v3.18
 #define atomic64_read(v)	ACCESS_ONCE((v)->counter)
 #define atomic64_set(v,i)	(((v)->counter) = (i))
 
@@ -324,6 +337,9 @@ ATOMIC64_OPS(sub, sub)
 #undef ATOMIC64_OPS
 #undef ATOMIC64_OP_RETURN
 #undef ATOMIC64_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline long atomic64_cmpxchg(atomic64_t *ptr, long old, long new)

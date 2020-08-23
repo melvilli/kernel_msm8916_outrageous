@@ -17,15 +17,21 @@
 #include <asm/msi_bitmap.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NR_MSI_REG		8
 #define IRQS_PER_MSI_REG	32
 #define NR_MSI_IRQS	(NR_MSI_REG * IRQS_PER_MSI_REG)
 =======
+=======
+>>>>>>> v3.18
 #define NR_MSI_REG_MSIIR	8  /* MSIIR can index 8 MSI registers */
 #define NR_MSI_REG_MSIIR1	16 /* MSIIR1 can index 16 MSI registers */
 #define NR_MSI_REG_MAX		NR_MSI_REG_MSIIR1
 #define IRQS_PER_MSI_REG	32
 #define NR_MSI_IRQS_MAX	(NR_MSI_REG_MAX * IRQS_PER_MSI_REG)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define FSL_PIC_IP_MASK   0x0000000F
@@ -34,6 +40,11 @@
 #define FSL_PIC_IP_VMPIC  0x00000003
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct fsl_msi_cascade_data;
+
+>>>>>>> v3.18
 =======
 struct fsl_msi_cascade_data;
 
@@ -45,15 +56,21 @@ struct fsl_msi {
 
 	u32 msiir_offset; /* Offset of MSIIR, relative to start of CCSR */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *msi_regs;
 	u32 feature;
 	int msi_virqs[NR_MSI_REG];
 =======
+=======
+>>>>>>> v3.18
 	u32 ibs_shift; /* Shift of interrupt bit select */
 	u32 srs_shift; /* Shift of the shared interrupt register select */
 	void __iomem *msi_regs;
 	u32 feature;
 	struct fsl_msi_cascade_data *cascade_array[NR_MSI_REG_MAX];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct msi_bitmap bitmap;

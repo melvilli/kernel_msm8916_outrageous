@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: WMM
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -39,7 +43,10 @@ static const u16 mwifiex_1d_to_wmm_queue[8] = { 1, 0, 0, 1, 2, 2, 3, 3 };
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * This table inverses the tos_to_tid operation to get a priority
  * which is in sequential order, and can be compared.
  * Use this to compare the priority of two different TIDs.
@@ -55,6 +62,9 @@ static const u8 tos_to_tid_inv[] = {
 	0x07};
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This function retrieves the TID of the given RA list.
  */
@@ -106,16 +116,22 @@ mwifiex_wmm_is_ra_list_empty(struct list_head *ra_list_hhead)
 
 void mwifiex_wmm_add_buf_txqueue(struct mwifiex_private *priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					struct sk_buff *skb);
 void mwifiex_ralist_add(struct mwifiex_private *priv, u8 *ra);
 void mwifiex_rotate_priolists(struct mwifiex_private *priv,
 			      struct mwifiex_ra_list_tbl *ra,
 			      int tid);
 =======
+=======
+>>>>>>> v3.18
 				 struct sk_buff *skb);
 void mwifiex_ralist_add(struct mwifiex_private *priv, const u8 *ra);
 void mwifiex_rotate_priolists(struct mwifiex_private *priv,
 			      struct mwifiex_ra_list_tbl *ra, int tid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int mwifiex_wmm_lists_empty(struct mwifiex_adapter *adapter);
@@ -124,6 +140,7 @@ int mwifiex_is_ralist_valid(struct mwifiex_private *priv,
 			    struct mwifiex_ra_list_tbl *ra_list, int tid);
 
 u8 mwifiex_wmm_compute_drv_pkt_delay(struct mwifiex_private *priv,
+<<<<<<< HEAD
 <<<<<<< HEAD
 					     const struct sk_buff *skb);
 void mwifiex_wmm_init(struct mwifiex_adapter *adapter);
@@ -142,6 +159,8 @@ void mwifiex_wmm_setup_ac_downgrade(struct mwifiex_private *priv);
 extern int mwifiex_ret_wmm_get_status(struct mwifiex_private *priv,
 				      const struct host_cmd_ds_command *resp);
 =======
+=======
+>>>>>>> v3.18
 				     const struct sk_buff *skb);
 void mwifiex_wmm_init(struct mwifiex_adapter *adapter);
 
@@ -159,6 +178,9 @@ struct mwifiex_ra_list_tbl *
 mwifiex_wmm_get_queue_raptr(struct mwifiex_private *priv, u8 tid,
 			    const u8 *ra_addr);
 u8 mwifiex_wmm_downgrade_tid(struct mwifiex_private *priv, u32 tid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* !_MWIFIEX_WMM_H_ */

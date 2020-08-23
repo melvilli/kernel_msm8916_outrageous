@@ -74,7 +74,11 @@ static struct irq_chip ralink_intc_irq_chip = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int __cpuinit get_c0_compare_int(void)
+=======
+unsigned int get_c0_compare_int(void)
+>>>>>>> v3.18
 =======
 unsigned int get_c0_compare_int(void)
 >>>>>>> v3.18

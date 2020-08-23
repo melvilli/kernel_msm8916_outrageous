@@ -14,6 +14,10 @@
 #include <linux/pci.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/dma.h>
+>>>>>>> v3.18
 =======
 #include <asm/dma.h>
 >>>>>>> v3.18

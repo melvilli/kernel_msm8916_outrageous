@@ -22,6 +22,10 @@
 #include "br_private.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* called with RTNL */
+>>>>>>> v3.18
 =======
 /* called with RTNL */
 >>>>>>> v3.18
@@ -31,8 +35,12 @@ static int get_bridge_ifindices(struct net *net, int *indices, int num)
 	int i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_lock();
 	for_each_netdev_rcu(net, dev) {
+=======
+	for_each_netdev(net, dev) {
+>>>>>>> v3.18
 =======
 	for_each_netdev(net, dev) {
 >>>>>>> v3.18
@@ -42,7 +50,10 @@ static int get_bridge_ifindices(struct net *net, int *indices, int num)
 			indices[i++] = dev->ifindex;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_unlock();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -260,7 +271,13 @@ static int old_dev_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 			return -EPERM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		br_stp_set_bridge_priority(br, args[1]);
+=======
+		spin_lock_bh(&br->lock);
+		br_stp_set_bridge_priority(br, args[1]);
+		spin_unlock_bh(&br->lock);
+>>>>>>> v3.18
 =======
 		spin_lock_bh(&br->lock);
 		br_stp_set_bridge_priority(br, args[1]);
@@ -398,7 +415,11 @@ int br_dev_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 	struct net_bridge *br = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(cmd) {
+=======
+	switch (cmd) {
+>>>>>>> v3.18
 =======
 	switch (cmd) {
 >>>>>>> v3.18

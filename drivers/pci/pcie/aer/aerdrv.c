@@ -263,6 +263,10 @@ static struct aer_rpc *aer_alloc_rpc(struct pcie_device *dev)
 	INIT_WORK(&rpc->dpc_handler, aer_isr);
 	mutex_init(&rpc->rpc_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	init_waitqueue_head(&rpc->wait_release);
+>>>>>>> v3.18
 =======
 	init_waitqueue_head(&rpc->wait_release);
 >>>>>>> v3.18
@@ -289,7 +293,12 @@ static void aer_remove(struct pcie_device *dev)
 			free_irq(dev->irq, dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		flush_work(&rpc->dpc_handler);
+=======
+		wait_event(rpc->wait_release, rpc->prod_idx == rpc->cons_idx);
+
+>>>>>>> v3.18
 =======
 		wait_event(rpc->wait_release, rpc->prod_idx == rpc->cons_idx);
 
@@ -360,7 +369,11 @@ static pci_ers_result_t aer_root_reset(struct pci_dev *dev)
 	pci_write_config_dword(dev, pos + PCI_ERR_ROOT_COMMAND, reg32);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aer_do_secondary_bus_reset(dev);
+=======
+	pci_reset_bridge_secondary_bus(dev);
+>>>>>>> v3.18
 =======
 	pci_reset_bridge_secondary_bus(dev);
 >>>>>>> v3.18

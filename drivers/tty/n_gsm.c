@@ -195,6 +195,10 @@ struct gsm_mux {
 	struct tty_struct *tty;		/* The tty our ldisc is bound to */
 	spinlock_t lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex mutex;
+>>>>>>> v3.18
 =======
 	struct mutex mutex;
 >>>>>>> v3.18
@@ -812,7 +816,11 @@ static int gsm_dlci_data_output(struct gsm_mux *gsm, struct gsm_dlci *dlci)
 
 	total_size = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while(1) {
+=======
+	while (1) {
+>>>>>>> v3.18
 =======
 	while (1) {
 >>>>>>> v3.18
@@ -836,8 +844,13 @@ static int gsm_dlci_data_output(struct gsm_mux *gsm, struct gsm_dlci *dlci)
 		case 1:	/* Unstructured */
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case 2:	/* Unstructed with modem bits. Always one byte as we never
 			   send inline break data */
+=======
+		case 2:	/* Unstructed with modem bits.
+		Always one byte as we never send inline break data */
+>>>>>>> v3.18
 =======
 		case 2:	/* Unstructed with modem bits.
 		Always one byte as we never send inline break data */
@@ -982,7 +995,11 @@ static void gsm_dlci_data_kick(struct gsm_dlci *dlci)
 	int sweep;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dlci->constipated) 
+=======
+	if (dlci->constipated)
+>>>>>>> v3.18
 =======
 	if (dlci->constipated)
 >>>>>>> v3.18
@@ -999,7 +1016,11 @@ static void gsm_dlci_data_kick(struct gsm_dlci *dlci)
 	}
 	if (sweep)
 <<<<<<< HEAD
+<<<<<<< HEAD
  		gsm_dlci_data_sweep(dlci->gsm);
+=======
+		gsm_dlci_data_sweep(dlci->gsm);
+>>>>>>> v3.18
 =======
 		gsm_dlci_data_sweep(dlci->gsm);
 >>>>>>> v3.18
@@ -1171,7 +1192,11 @@ static void gsm_control_rls(struct gsm_mux *gsm, u8 *data, int clen)
 {
 	struct tty_port *port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int addr = 0 ;
+=======
+	unsigned int addr = 0;
+>>>>>>> v3.18
 =======
 	unsigned int addr = 0;
 >>>>>>> v3.18
@@ -1741,11 +1766,16 @@ static void gsm_dlci_release(struct gsm_dlci *dlci)
 		mutex_unlock(&dlci->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* tty_vhangup needs the tty_lock, so unlock and
 		   relock after doing the hangup. */
 		tty_unlock(tty);
 		tty_vhangup(tty);
 		tty_lock(tty);
+=======
+		tty_vhangup(tty);
+
+>>>>>>> v3.18
 =======
 		tty_vhangup(tty);
 
@@ -1782,16 +1812,22 @@ static void gsm_queue(struct gsm_mux *gsm)
 	if ((gsm->control & ~PF) == UI)
 		gsm->fcs = gsm_fcs_add_block(gsm->fcs, gsm->buf, gsm->len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gsm->encoding == 0){
 		/* WARNING: gsm->received_fcs is used for gsm->encoding = 0 only.
 		            In this case it contain the last piece of data
 		            required to generate final CRC */
 =======
+=======
+>>>>>>> v3.18
 	if (gsm->encoding == 0) {
 		/* WARNING: gsm->received_fcs is used for
 		gsm->encoding = 0 only.
 		In this case it contain the last piece of data
 		required to generate final CRC */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gsm->fcs = gsm_fcs_add(gsm->fcs, gsm->received_fcs);
 	}
@@ -2068,7 +2104,11 @@ static void gsm_error(struct gsm_mux *gsm,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void gsm_cleanup_mux(struct gsm_mux *gsm)
+=======
+static void gsm_cleanup_mux(struct gsm_mux *gsm)
+>>>>>>> v3.18
 =======
 static void gsm_cleanup_mux(struct gsm_mux *gsm)
 >>>>>>> v3.18
@@ -2107,15 +2147,21 @@ static void gsm_cleanup_mux(struct gsm_mux *gsm)
 	}
 	/* Free up any link layer users */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < NUM_DLCI; i++)
 		if (gsm->dlci[i])
 			gsm_dlci_release(gsm->dlci[i]);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&gsm->mutex);
 	for (i = 0; i < NUM_DLCI; i++)
 		if (gsm->dlci[i])
 			gsm_dlci_release(gsm->dlci[i]);
 	mutex_unlock(&gsm->mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Now wipe the queues */
 	list_for_each_entry_safe(txq, ntxq, &gsm->tx_list, list)
@@ -2123,7 +2169,10 @@ static void gsm_cleanup_mux(struct gsm_mux *gsm)
 	INIT_LIST_HEAD(&gsm->tx_list);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(gsm_cleanup_mux);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2137,7 +2186,11 @@ EXPORT_SYMBOL_GPL(gsm_cleanup_mux);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gsm_activate_mux(struct gsm_mux *gsm)
+=======
+static int gsm_activate_mux(struct gsm_mux *gsm)
+>>>>>>> v3.18
 =======
 static int gsm_activate_mux(struct gsm_mux *gsm)
 >>>>>>> v3.18
@@ -2146,9 +2199,13 @@ static int gsm_activate_mux(struct gsm_mux *gsm)
 	int i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_timer(&gsm->t2_timer);
 	gsm->t2_timer.function = gsm_control_retransmit;
 	gsm->t2_timer.data = (unsigned long)gsm;
+=======
+	setup_timer(&gsm->t2_timer, gsm_control_retransmit, (unsigned long)gsm);
+>>>>>>> v3.18
 =======
 	setup_timer(&gsm->t2_timer, gsm_control_retransmit, (unsigned long)gsm);
 >>>>>>> v3.18
@@ -2181,7 +2238,10 @@ static int gsm_activate_mux(struct gsm_mux *gsm)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(gsm_activate_mux);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2192,7 +2252,11 @@ EXPORT_SYMBOL_GPL(gsm_activate_mux);
  *	Dispose of allocated resources for a dead mux
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void gsm_free_mux(struct gsm_mux *gsm)
+=======
+static void gsm_free_mux(struct gsm_mux *gsm)
+>>>>>>> v3.18
 =======
 static void gsm_free_mux(struct gsm_mux *gsm)
 >>>>>>> v3.18
@@ -2202,7 +2266,10 @@ static void gsm_free_mux(struct gsm_mux *gsm)
 	kfree(gsm);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(gsm_free_mux);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2235,7 +2302,11 @@ static inline void mux_put(struct gsm_mux *gsm)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct gsm_mux *gsm_alloc_mux(void)
+=======
+static struct gsm_mux *gsm_alloc_mux(void)
+>>>>>>> v3.18
 =======
 static struct gsm_mux *gsm_alloc_mux(void)
 >>>>>>> v3.18
@@ -2256,6 +2327,10 @@ static struct gsm_mux *gsm_alloc_mux(void)
 	}
 	spin_lock_init(&gsm->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&gsm->mutex);
+>>>>>>> v3.18
 =======
 	mutex_init(&gsm->mutex);
 >>>>>>> v3.18
@@ -2275,7 +2350,10 @@ static struct gsm_mux *gsm_alloc_mux(void)
 	return gsm;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(gsm_alloc_mux);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2315,8 +2393,12 @@ static int gsmld_output(struct gsm_mux *gsm, u8 *data, int len)
 static int gsmld_attach_gsm(struct tty_struct *tty, struct gsm_mux *gsm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, i;
 	int base = gsm->num << 6; /* Base for this MUX */
+=======
+	int ret, i, base;
+>>>>>>> v3.18
 =======
 	int ret, i, base;
 >>>>>>> v3.18
@@ -2330,6 +2412,10 @@ static int gsmld_attach_gsm(struct tty_struct *tty, struct gsm_mux *gsm)
 		/* Don't register device 0 - this is the control channel and not
 		   a usable tty interface */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		base = gsm->num << 6; /* Base for this MUX */
+>>>>>>> v3.18
 =======
 		base = gsm->num << 6; /* Base for this MUX */
 >>>>>>> v3.18
@@ -2370,7 +2456,11 @@ static void gsmld_receive_buf(struct tty_struct *tty, const unsigned char *cp,
 	int i;
 	char buf[64];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char flags;
+=======
+	char flags = TTY_NORMAL;
+>>>>>>> v3.18
 =======
 	char flags = TTY_NORMAL;
 >>>>>>> v3.18
@@ -2381,7 +2471,12 @@ static void gsmld_receive_buf(struct tty_struct *tty, const unsigned char *cp,
 
 	for (i = count, dp = cp, f = fp; i; i--, dp++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		flags = *f++;
+=======
+		if (f)
+			flags = *f++;
+>>>>>>> v3.18
 =======
 		if (f)
 			flags = *f++;
@@ -2469,6 +2564,10 @@ static int gsmld_open(struct tty_struct *tty)
 {
 	struct gsm_mux *gsm;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -2487,8 +2586,11 @@ static int gsmld_open(struct tty_struct *tty)
 	/* Attach the initial passive connection */
 	gsm->encoding = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gsmld_attach_gsm(tty, gsm);
 =======
+=======
+>>>>>>> v3.18
 
 	ret = gsmld_attach_gsm(tty, gsm);
 	if (ret != 0) {
@@ -2496,6 +2598,9 @@ static int gsmld_open(struct tty_struct *tty)
 		mux_put(gsm);
 	}
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2835,7 +2940,11 @@ static void gsm_mux_rx_netchar(struct gsm_dlci *dlci,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gsm_change_mtu(struct net_device *net, int new_mtu)
+=======
+static int gsm_change_mtu(struct net_device *net, int new_mtu)
+>>>>>>> v3.18
 =======
 static int gsm_change_mtu(struct net_device *net, int new_mtu)
 >>>>>>> v3.18
@@ -2908,9 +3017,14 @@ static int gsm_create_network(struct gsm_dlci *dlci, struct gsm_netconfig *nc)
 	if (nc->if_name[0] != '\0')
 		netname = nc->if_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	net = alloc_netdev(sizeof(struct gsm_mux_net),
 			netname,
 			gsm_mux_net_init);
+=======
+	net = alloc_netdev(sizeof(struct gsm_mux_net), netname,
+			   NET_NAME_UNKNOWN, gsm_mux_net_init);
+>>>>>>> v3.18
 =======
 	net = alloc_netdev(sizeof(struct gsm_mux_net), netname,
 			   NET_NAME_UNKNOWN, gsm_mux_net_init);
@@ -3038,11 +3152,14 @@ static int gsmtty_install(struct tty_driver *driver, struct tty_struct *tty)
 	if (gsm->dead)
 		return -EL2HLT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If DLCI 0 is not yet fully open return an error. This is ok from a locking
 	   perspective as we don't have to worry about this if DLCI0 is lost */
 	if (gsm->dlci[0] && gsm->dlci[0]->state != DLCI_OPEN) 
 		return -EL2NSYNC;
 =======
+=======
+>>>>>>> v3.18
 	/* If DLCI 0 is not yet fully open return an error.
 	This is ok from a locking
 	perspective as we don't have to worry about this
@@ -3052,6 +3169,9 @@ static int gsmtty_install(struct tty_driver *driver, struct tty_struct *tty)
 		mutex_unlock(&gsm->mutex);
 		return -EL2NSYNC;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dlci = gsm->dlci[line];
 	if (dlci == NULL) {
@@ -3059,24 +3179,33 @@ static int gsmtty_install(struct tty_driver *driver, struct tty_struct *tty)
 		dlci = gsm_dlci_alloc(gsm, line);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dlci == NULL)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	if (dlci == NULL) {
 		mutex_unlock(&gsm->mutex);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = tty_port_install(&dlci->port, driver, tty);
 	if (ret) {
 		if (alloc)
 			dlci_put(dlci);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ret;
 	}
 
 	tty->driver_data = dlci;
 =======
+=======
+>>>>>>> v3.18
 		mutex_unlock(&gsm->mutex);
 		return ret;
 	}
@@ -3086,6 +3215,9 @@ static int gsmtty_install(struct tty_driver *driver, struct tty_struct *tty)
 	mux_get(gsm);
 	tty->driver_data = dlci;
 	mutex_unlock(&gsm->mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -3098,9 +3230,12 @@ static int gsmtty_open(struct tty_struct *tty, struct file *filp)
 
 	port->count++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dlci_get(dlci);
 	dlci_get(dlci->gsm->dlci[0]);
 	mux_get(dlci->gsm);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tty_port_tty_set(port, tty);
@@ -3130,7 +3265,11 @@ static void gsmtty_close(struct tty_struct *tty, struct file *filp)
 	gsm = dlci->gsm;
 	if (tty_port_close_start(&dlci->port, tty, filp) == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -3142,10 +3281,14 @@ static void gsmtty_close(struct tty_struct *tty, struct file *filp)
 	tty_port_close_end(&dlci->port, tty);
 	tty_port_tty_set(&dlci->port, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	dlci_put(dlci);
 	dlci_put(gsm->dlci[0]);
 	mux_put(gsm);
+=======
+	return;
+>>>>>>> v3.18
 =======
 	return;
 >>>>>>> v3.18
@@ -3326,7 +3469,10 @@ static int gsmtty_break_ctl(struct tty_struct *tty, int state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void gsmtty_remove(struct tty_driver *driver, struct tty_struct *tty)
 {
 	struct gsm_dlci *dlci = tty->driver_data;
@@ -3337,6 +3483,9 @@ static void gsmtty_remove(struct tty_driver *driver, struct tty_struct *tty)
 	mux_put(gsm);
 	driver->ttys[tty->index] = NULL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Virtual ttys for the demux */
@@ -3358,6 +3507,10 @@ static const struct tty_operations gsmtty_ops = {
 	.tiocmset		= gsmtty_tiocmset,
 	.break_ctl		= gsmtty_break_ctl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.remove			= gsmtty_remove,
+>>>>>>> v3.18
 =======
 	.remove			= gsmtty_remove,
 >>>>>>> v3.18

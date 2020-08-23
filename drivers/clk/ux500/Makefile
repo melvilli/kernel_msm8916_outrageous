@@ -9,6 +9,10 @@ obj-y += clk-sysctrl.o
 
 # Clock definitions
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-y += u8500_of_clk.o
+>>>>>>> v3.18
 =======
 obj-y += u8500_of_clk.o
 >>>>>>> v3.18

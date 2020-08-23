@@ -149,8 +149,13 @@ Bitmap system area
 ------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The bitmap itself is devided into three parts.
 First the system area, that is split into two halfs.
+=======
+The bitmap itself is divided into three parts.
+First the system area, that is split into two halves.
+>>>>>>> v3.18
 =======
 The bitmap itself is divided into three parts.
 First the system area, that is split into two halves.

@@ -20,10 +20,13 @@
 #include <asm/traps.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PRINT_USER_FAULTS /* (turn this on if you want user faults to be */
 			 /*  dumped to the console via printk)          */
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Various important other fields */
@@ -38,6 +41,11 @@
 DEFINE_PER_CPU(struct exception_data, exception_data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int show_unhandled_signals = 1;
+
+>>>>>>> v3.18
 =======
 int show_unhandled_signals = 1;
 
@@ -151,11 +159,14 @@ int fixup_exception(struct pt_regs *regs)
 	const struct exception_table_entry *fix;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fix = search_exception_tables(regs->iaoq[0]);
 	if (fix) {
 		struct exception_data *d;
 		d = &__get_cpu_var(exception_data);
 =======
+=======
+>>>>>>> v3.18
 	/* If we only stored 32bit addresses in the exception table we can drop
 	 * out if we faulted on a 64bit address. */
 	if ((sizeof(regs->iaoq[0]) > sizeof(fix->insn))
@@ -166,6 +177,9 @@ int fixup_exception(struct pt_regs *regs)
 	if (fix) {
 		struct exception_data *d;
 		d = this_cpu_ptr(&exception_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		d->fault_ip = regs->iaoq[0];
 		d->fault_space = regs->isr;
@@ -189,7 +203,10 @@ int fixup_exception(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Print out info about fatal segfaults, if the show_unhandled_signals
  * sysctl is set:
@@ -216,11 +233,15 @@ show_signal_msg(struct pt_regs *regs, unsigned long code,
 	show_regs(regs);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void do_page_fault(struct pt_regs *regs, unsigned long code,
 			      unsigned long address)
 {
 	struct vm_area_struct *vma, *prev_vma;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct task_struct *tsk = current;
 	struct mm_struct *mm = tsk->mm;
@@ -234,6 +255,8 @@ void do_page_fault(struct pt_regs *regs, unsigned long code,
 	if (user_mode(regs))
 		flags |= FAULT_FLAG_USER;
 =======
+=======
+>>>>>>> v3.18
 	struct task_struct *tsk;
 	struct mm_struct *mm;
 	unsigned long acc_type;
@@ -253,6 +276,9 @@ void do_page_fault(struct pt_regs *regs, unsigned long code,
 		flags |= FAULT_FLAG_USER;
 
 	acc_type = parisc_acctyp(code, regs->iir);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (acc_type & VM_WRITE)
 		flags |= FAULT_FLAG_WRITE;
@@ -269,8 +295,11 @@ retry:
 good_area:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acc_type = parisc_acctyp(code,regs->iir);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((vma->vm_flags & acc_type) != acc_type)
@@ -296,8 +325,11 @@ good_area:
 		if (fault & VM_FAULT_OOM)
 			goto out_of_memory;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (fault & VM_FAULT_SIGSEGV)
 			goto bad_area;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		else if (fault & VM_FAULT_SIGBUS)
@@ -339,6 +371,7 @@ bad_area:
 		struct siginfo si;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef PRINT_USER_FAULTS
 		printk(KERN_DEBUG "\n");
 		printk(KERN_DEBUG "do_page_fault() pid=%d command='%s' type=%lu address=0x%08lx\n",
@@ -356,6 +389,8 @@ bad_area:
 		si.si_addr = (void __user *) address;
 		force_sig_info(SIGSEGV, &si, current);
 =======
+=======
+>>>>>>> v3.18
 		show_signal_msg(regs, code, address, tsk, vma);
 
 		switch (code) {
@@ -392,6 +427,9 @@ bad_area:
 		si.si_errno = 0;
 		si.si_addr = (void __user *) address;
 		force_sig_info(si.si_signo, &si, current);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}

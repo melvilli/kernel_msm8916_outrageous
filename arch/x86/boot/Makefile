@@ -21,7 +21,11 @@ targets		+= fdimage fdimage144 fdimage288 image.iso mtools.conf
 subdir-		:= compressed
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 setup-y		+= a20.o bioscall.o cmdline.o copy.o cpu.o cpucheck.o
+=======
+setup-y		+= a20.o bioscall.o cmdline.o copy.o cpu.o cpuflags.o cpucheck.o
+>>>>>>> v3.18
 =======
 setup-y		+= a20.o bioscall.o cmdline.o copy.o cpu.o cpuflags.o cpucheck.o
 >>>>>>> v3.18
@@ -40,7 +44,12 @@ setup-y		+= video-bios.o
 
 targets		+= $(setup-y)
 <<<<<<< HEAD
+<<<<<<< HEAD
 hostprogs-y	:= mkcpustr tools/build
+=======
+hostprogs-y	:= tools/build
+hostprogs-$(CONFIG_X86_FEATURE_NAMES) += mkcpustr
+>>>>>>> v3.18
 =======
 hostprogs-y	:= tools/build
 hostprogs-$(CONFIG_X86_FEATURE_NAMES) += mkcpustr
@@ -51,6 +60,10 @@ HOST_EXTRACFLAGS += -I$(srctree)/tools/include \
 	            -D__EXPORTED_HEADERS__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ifdef CONFIG_X86_FEATURE_NAMES
+>>>>>>> v3.18
 =======
 ifdef CONFIG_X86_FEATURE_NAMES
 >>>>>>> v3.18
@@ -58,6 +71,7 @@ $(obj)/cpu.o: $(obj)/cpustr.h
 
 quiet_cmd_cpustr = CPUSTR  $@
       cmd_cpustr = $(obj)/mkcpustr > $@
+<<<<<<< HEAD
 <<<<<<< HEAD
 targets		+= cpustr.h
 $(obj)/cpustr.h: $(obj)/mkcpustr FORCE
@@ -80,6 +94,8 @@ KBUILD_CFLAGS	:= $(USERINCLUDE) -m32 -g -Os -D_SETUP -D__KERNEL__ \
 		   $(call cc-option, -fno-stack-protector) \
 		   $(call cc-option, -mpreferred-stack-boundary=2)
 =======
+=======
+>>>>>>> v3.18
 targets += cpustr.h
 $(obj)/cpustr.h: $(obj)/mkcpustr FORCE
 	$(call if_changed,cpustr)
@@ -88,6 +104,9 @@ endif
 # ---------------------------------------------------------------------------
 
 KBUILD_CFLAGS	:= $(USERINCLUDE) $(REALMODE_CFLAGS) -D_SETUP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 KBUILD_AFLAGS	:= $(KBUILD_CFLAGS) -D__ASSEMBLY__
 GCOV_PROFILE := n
@@ -96,7 +115,12 @@ $(obj)/bzImage: asflags-y  := $(SVGA_MODE)
 
 quiet_cmd_image = BUILD   $@
 <<<<<<< HEAD
+<<<<<<< HEAD
 cmd_image = $(obj)/tools/build $(obj)/setup.bin $(obj)/vmlinux.bin $(obj)/zoffset.h > $@
+=======
+cmd_image = $(obj)/tools/build $(obj)/setup.bin $(obj)/vmlinux.bin \
+			       $(obj)/zoffset.h $@
+>>>>>>> v3.18
 =======
 cmd_image = $(obj)/tools/build $(obj)/setup.bin $(obj)/vmlinux.bin \
 			       $(obj)/zoffset.h $@
@@ -113,7 +137,11 @@ $(obj)/vmlinux.bin: $(obj)/compressed/vmlinux FORCE
 SETUP_OBJS = $(addprefix $(obj)/,$(setup-y))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 sed-voffset := -e 's/^\([0-9a-fA-F]*\) . \(_text\|_end\)$$/\#define VO_\2 0x\1/p'
+=======
+sed-voffset := -e 's/^\([0-9a-fA-F]*\) [ABCDGRSTVW] \(_text\|_end\)$$/\#define VO_\2 0x\1/p'
+>>>>>>> v3.18
 =======
 sed-voffset := -e 's/^\([0-9a-fA-F]*\) [ABCDGRSTVW] \(_text\|_end\)$$/\#define VO_\2 0x\1/p'
 >>>>>>> v3.18
@@ -126,7 +154,11 @@ $(obj)/voffset.h: vmlinux FORCE
 	$(call if_changed,voffset)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 sed-zoffset := -e 's/^\([0-9a-fA-F]*\) . \(startup_32\|startup_64\|efi_pe_entry\|efi_stub_entry\|input_data\|_end\|z_.*\)$$/\#define ZO_\2 0x\1/p'
+=======
+sed-zoffset := -e 's/^\([0-9a-fA-F]*\) [ABCDGRSTVW] \(startup_32\|startup_64\|efi32_stub_entry\|efi64_stub_entry\|efi_pe_entry\|input_data\|_end\|z_.*\)$$/\#define ZO_\2 0x\1/p'
+>>>>>>> v3.18
 =======
 sed-zoffset := -e 's/^\([0-9a-fA-F]*\) [ABCDGRSTVW] \(startup_32\|startup_64\|efi32_stub_entry\|efi64_stub_entry\|efi_pe_entry\|input_data\|_end\|z_.*\)$$/\#define ZO_\2 0x\1/p'
 >>>>>>> v3.18
@@ -206,9 +238,12 @@ isoimage: $(obj)/bzImage
 		if [ -f /usr/$$i/syslinux/isolinux.bin ] ; then \
 			cp /usr/$$i/syslinux/isolinux.bin $(obj)/isoimage ; \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if [ -f /usr/$$i/syslinux/ldlinux.c32 ]; then \
 				cp /usr/$$i/syslinux/ldlinux.c32 $(obj)/isoimage ; \
 			fi ; \
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			break ; \

@@ -59,6 +59,10 @@ SYSCALL_DEFINE3(msync, unsigned long, start, size_t, len, int, flags)
 	for (;;) {
 		struct file *file;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		loff_t fstart, fend;
+>>>>>>> v3.18
 =======
 		loff_t fstart, fend;
 >>>>>>> v3.18
@@ -82,6 +86,12 @@ SYSCALL_DEFINE3(msync, unsigned long, start, size_t, len, int, flags)
 		}
 		file = vma->vm_file;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		fstart = (start - vma->vm_start) +
+			 ((loff_t)vma->vm_pgoff << PAGE_SHIFT);
+		fend = fstart + (min(end, vma->vm_end) - start) - 1;
+>>>>>>> v3.18
 =======
 		fstart = (start - vma->vm_start) +
 			 ((loff_t)vma->vm_pgoff << PAGE_SHIFT);
@@ -93,12 +103,18 @@ SYSCALL_DEFINE3(msync, unsigned long, start, size_t, len, int, flags)
 			get_file(file);
 			up_read(&mm->mmap_sem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = vfs_fsync(file, 0);
 =======
+=======
+>>>>>>> v3.18
 			if (vma->vm_flags & VM_NONLINEAR)
 				error = vfs_fsync(file, 1);
 			else
 				error = vfs_fsync_range(file, fstart, fend, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			fput(file);
 			if (error || start >= end)

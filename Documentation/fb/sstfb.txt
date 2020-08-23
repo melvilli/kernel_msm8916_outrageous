@@ -11,7 +11,11 @@ Introduction
 	you want the latest version, check out the CVS, as the driver is a work
 	in progress, I feel uncomfortable with releasing tarballs of something
 <<<<<<< HEAD
+<<<<<<< HEAD
 	not completely working...Don't worry, it's still more than useable
+=======
+	not completely working...Don't worry, it's still more than usable
+>>>>>>> v3.18
 =======
 	not completely working...Don't worry, it's still more than usable
 >>>>>>> v3.18

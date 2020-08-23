@@ -2,7 +2,11 @@
  * net/tipc/bcast.h: Include file for TIPC broadcast code
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2003-2006, Ericsson AB
+=======
+ * Copyright (c) 2003-2006, 2014, Ericsson AB
+>>>>>>> v3.18
 =======
  * Copyright (c) 2003-2006, 2014, Ericsson AB
 >>>>>>> v3.18
@@ -44,6 +48,10 @@
 #define MAX_NODES 4096
 #define WSIZE 32
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TIPC_BCLINK_RESET 1
+>>>>>>> v3.18
 =======
 #define TIPC_BCLINK_RESET 1
 >>>>>>> v3.18
@@ -78,6 +86,7 @@ struct tipc_node;
 extern const char tipc_bclink_name[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tipc_nmap_add(struct tipc_node_map *nm_ptr, u32 node);
 void tipc_nmap_remove(struct tipc_node_map *nm_ptr, u32 node);
 
@@ -86,11 +95,16 @@ void tipc_nmap_remove(struct tipc_node_map *nm_ptr, u32 node);
  */
 static inline int tipc_nmap_equal(struct tipc_node_map *nm_a, struct tipc_node_map *nm_b)
 =======
+=======
+>>>>>>> v3.18
 /**
  * tipc_nmap_equal - test for equality of node maps
  */
 static inline int tipc_nmap_equal(struct tipc_node_map *nm_a,
 				  struct tipc_node_map *nm_b)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return !memcmp(nm_a, nm_b, sizeof(*nm_a));
@@ -100,8 +114,14 @@ void tipc_port_list_add(struct tipc_port_list *pl_ptr, u32 port);
 void tipc_port_list_free(struct tipc_port_list *pl_ptr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tipc_bclink_init(void);
 void tipc_bclink_stop(void);
+=======
+int tipc_bclink_init(void);
+void tipc_bclink_stop(void);
+void tipc_bclink_set_flags(unsigned int flags);
+>>>>>>> v3.18
 =======
 int tipc_bclink_init(void);
 void tipc_bclink_stop(void);
@@ -112,8 +132,12 @@ void tipc_bclink_remove_node(u32 addr);
 struct tipc_node *tipc_bclink_retransmit_to(void);
 void tipc_bclink_acknowledge(struct tipc_node *n_ptr, u32 acked);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int  tipc_bclink_send_msg(struct sk_buff *buf);
 void tipc_bclink_recv_pkt(struct sk_buff *buf);
+=======
+void tipc_bclink_rcv(struct sk_buff *buf);
+>>>>>>> v3.18
 =======
 void tipc_bclink_rcv(struct sk_buff *buf);
 >>>>>>> v3.18
@@ -124,12 +148,18 @@ int  tipc_bclink_stats(char *stats_buf, const u32 buf_size);
 int  tipc_bclink_reset_stats(void);
 int  tipc_bclink_set_queue_limits(u32 limit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tipc_bcbearer_sort(void);
 
 =======
+=======
+>>>>>>> v3.18
 void tipc_bcbearer_sort(struct tipc_node_map *nm_ptr, u32 node, bool action);
 uint  tipc_bclink_get_mtu(void);
 int tipc_bclink_xmit(struct sk_buff *buf);
 void tipc_bclink_wakeup_users(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

@@ -71,17 +71,23 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int abs_x[3] = {350, 3900, 5};
 module_param_array(abs_x, int, NULL, 0);
 MODULE_PARM_DESC(abs_x, "Touchscreen absolute X min, max, fuzz");
 
 static int abs_y[3] = {320, 3750, 40};
 =======
+=======
+>>>>>>> v3.18
 static int abs_x[3] = {150, 4000, 5};
 module_param_array(abs_x, int, NULL, 0);
 MODULE_PARM_DESC(abs_x, "Touchscreen absolute X min, max, fuzz");
 
 static int abs_y[3] = {200, 4000, 40};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 module_param_array(abs_y, int, NULL, 0);
 MODULE_PARM_DESC(abs_y, "Touchscreen absolute Y min, max, fuzz");
@@ -593,7 +599,11 @@ static int wm97xx_probe(struct device *dev)
 {
 	struct wm97xx *wm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm97xx_pdata *pdata = dev->platform_data;
+=======
+	struct wm97xx_pdata *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct wm97xx_pdata *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18

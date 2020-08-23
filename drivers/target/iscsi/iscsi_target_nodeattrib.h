@@ -2,7 +2,12 @@
 #define ISCSI_TARGET_NODEATTRIB_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void iscsit_set_default_node_attribues(struct iscsi_node_acl *);
+=======
+extern void iscsit_set_default_node_attribues(struct iscsi_node_acl *,
+					      struct iscsi_portal_group *);
+>>>>>>> v3.18
 =======
 extern void iscsit_set_default_node_attribues(struct iscsi_node_acl *,
 					      struct iscsi_portal_group *);

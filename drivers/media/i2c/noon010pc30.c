@@ -20,7 +20,10 @@
 #include <linux/regulator/consumer.h>
 #include <media/noon010pc30.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/videodev2.h>
@@ -559,6 +562,10 @@ static int noon010_set_fmt(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh,
 	noon010_try_frame_size(&fmt->format, &size);
 	fmt->format.colorspace = V4L2_COLORSPACE_JPEG;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fmt->format.field = V4L2_FIELD_NONE;
+>>>>>>> v3.18
 =======
 	fmt->format.field = V4L2_FIELD_NONE;
 >>>>>>> v3.18
@@ -720,7 +727,11 @@ static int noon010_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = kzalloc(sizeof(*info), GFP_KERNEL);
+=======
+	info = devm_kzalloc(&client->dev, sizeof(*info), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	info = devm_kzalloc(&client->dev, sizeof(*info), GFP_KERNEL);
 >>>>>>> v3.18
@@ -758,7 +769,13 @@ static int noon010_probe(struct i2c_client *client,
 
 	if (gpio_is_valid(pdata->gpio_nreset)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = gpio_request(pdata->gpio_nreset, "NOON010PC30 NRST");
+=======
+		ret = devm_gpio_request_one(&client->dev, pdata->gpio_nreset,
+					    GPIOF_OUT_INIT_LOW,
+					    "NOON010PC30 NRST");
+>>>>>>> v3.18
 =======
 		ret = devm_gpio_request_one(&client->dev, pdata->gpio_nreset,
 					    GPIOF_OUT_INIT_LOW,
@@ -770,13 +787,17 @@ static int noon010_probe(struct i2c_client *client,
 		}
 		info->gpio_nreset = pdata->gpio_nreset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpio_direction_output(info->gpio_nreset, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		gpio_export(info->gpio_nreset, 0);
 	}
 
 	if (gpio_is_valid(pdata->gpio_nstby)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = gpio_request(pdata->gpio_nstby, "NOON010PC30 NSTBY");
 		if (ret) {
@@ -786,6 +807,8 @@ static int noon010_probe(struct i2c_client *client,
 		info->gpio_nstby = pdata->gpio_nstby;
 		gpio_direction_output(info->gpio_nstby, 0);
 =======
+=======
+>>>>>>> v3.18
 		ret = devm_gpio_request_one(&client->dev, pdata->gpio_nstby,
 					    GPIOF_OUT_INIT_LOW,
 					    "NOON010PC30 NSTBY");
@@ -794,6 +817,9 @@ static int noon010_probe(struct i2c_client *client,
 			goto np_err;
 		}
 		info->gpio_nstby = pdata->gpio_nstby;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio_export(info->gpio_nstby, 0);
 	}
@@ -802,15 +828,21 @@ static int noon010_probe(struct i2c_client *client,
 		info->supply[i].supply = noon010_supply_name[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = regulator_bulk_get(&client->dev, NOON010_NUM_SUPPLIES,
 				 info->supply);
 	if (ret)
 		goto np_reg_err;
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_regulator_bulk_get(&client->dev, NOON010_NUM_SUPPLIES,
 				 info->supply);
 	if (ret)
 		goto np_err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	info->pad.flags = MEDIA_PAD_FL_SOURCE;
@@ -818,7 +850,11 @@ static int noon010_probe(struct i2c_client *client,
 	ret = media_entity_init(&sd->entity, 1, &info->pad, 0);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto np_me_err;
+=======
+		goto np_err;
+>>>>>>> v3.18
 =======
 		goto np_err;
 >>>>>>> v3.18
@@ -827,6 +863,7 @@ static int noon010_probe(struct i2c_client *client,
 	if (!ret)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 np_me_err:
 	regulator_bulk_free(NOON010_NUM_SUPPLIES, info->supply);
@@ -845,6 +882,11 @@ np_err:
 	v4l2_ctrl_handler_free(&info->hdl);
 	v4l2_device_unregister_subdev(sd);
 >>>>>>> v3.18
+=======
+np_err:
+	v4l2_ctrl_handler_free(&info->hdl);
+	v4l2_device_unregister_subdev(sd);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -855,6 +897,7 @@ static int noon010_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&info->hdl);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	regulator_bulk_free(NOON010_NUM_SUPPLIES, info->supply);
@@ -867,6 +910,10 @@ static int noon010_remove(struct i2c_client *client)
 
 	media_entity_cleanup(&sd->entity);
 	kfree(info);
+=======
+	media_entity_cleanup(&sd->entity);
+
+>>>>>>> v3.18
 =======
 	media_entity_cleanup(&sd->entity);
 

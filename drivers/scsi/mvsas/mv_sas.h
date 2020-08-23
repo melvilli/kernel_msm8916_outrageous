@@ -40,6 +40,10 @@
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 =======
 #include <asm/unaligned.h>
 >>>>>>> v3.18

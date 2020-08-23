@@ -21,16 +21,22 @@
 #include <linux/slab.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/irq.h>
 #include <asm/mach/irq.h>
 #include <linux/pinctrl/consumer.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_gpio.h>
 #include <linux/dmaengine.h>
 #include <linux/dma-direction.h>
 #include <linux/dma-mapping.h>
 #include <asm/irq.h>
 #include <asm/mach/irq.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "sirfsoc_uart.h"
@@ -42,6 +48,12 @@ sirfsoc_uart_pio_rx_chars(struct uart_port *port, unsigned int max_rx_count);
 static struct uart_driver sirfsoc_uart_drv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void sirfsoc_uart_tx_dma_complete_callback(void *param);
+static void sirfsoc_uart_start_next_rx_dma(struct uart_port *port);
+static void sirfsoc_uart_rx_dma_complete_callback(void *param);
+>>>>>>> v3.18
 =======
 static void sirfsoc_uart_tx_dma_complete_callback(void *param);
 static void sirfsoc_uart_start_next_rx_dma(struct uart_port *port);
@@ -105,7 +117,10 @@ static struct sirfsoc_uart_port sirfsoc_uart_ports[SIRFSOC_UART_NR] = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[5] = {
 		.port = {
 			.iotype		= UPIO_MEM,
@@ -113,6 +128,9 @@ static struct sirfsoc_uart_port sirfsoc_uart_ports[SIRFSOC_UART_NR] = {
 			.line		= 5,
 		},
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -125,18 +143,24 @@ static inline unsigned int sirfsoc_uart_tx_empty(struct uart_port *port)
 {
 	unsigned long reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg = rd_regl(port, SIRFUART_TX_FIFO_STATUS);
 	if (reg & SIRFUART_FIFOEMPTY_MASK(port))
 		return TIOCSER_TEMT;
 	else
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	struct sirfsoc_fifo_status *ufifo_st = &sirfport->uart_reg->fifo_status;
 	reg = rd_regl(port, ureg->sirfsoc_tx_fifo_status);
 
 	return (reg & ufifo_st->ff_empty(port->line)) ? TIOCSER_TEMT : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -144,12 +168,15 @@ static unsigned int sirfsoc_uart_get_mctrl(struct uart_port *port)
 {
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(sirfport->ms_enabled)) {
 		goto cts_asserted;
 	} else if (sirfport->hw_flow_ctrl) {
 		if (!(rd_regl(port, SIRFUART_AFC_CTRL) &
 						SIRFUART_CTS_IN_STATUS))
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	if (!sirfport->hw_flow_ctrl || !sirfport->ms_enabled)
 		goto cts_asserted;
@@ -161,6 +188,9 @@ static unsigned int sirfsoc_uart_get_mctrl(struct uart_port *port)
 			goto cts_deasserted;
 	} else {
 		if (!gpio_get_value(sirfport->cts_gpio))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto cts_asserted;
 		else
@@ -176,6 +206,7 @@ static void sirfsoc_uart_set_mctrl(struct uart_port *port, unsigned int mctrl)
 {
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int assert = mctrl & TIOCM_RTS;
 	unsigned int val = assert ? SIRFUART_AFC_CTRL_RX_THD : 0x0;
 	unsigned int current_val;
@@ -184,6 +215,8 @@ static void sirfsoc_uart_set_mctrl(struct uart_port *port, unsigned int mctrl)
 		val |= current_val;
 		wr_regl(port, SIRFUART_AFC_CTRL, val);
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	unsigned int assert = mctrl & TIOCM_RTS;
 	unsigned int val = assert ? SIRFUART_AFC_CTRL_RX_THD : 0x0;
@@ -200,12 +233,16 @@ static void sirfsoc_uart_set_mctrl(struct uart_port *port, unsigned int mctrl)
 			gpio_set_value(sirfport->rts_gpio, 1);
 		else
 			gpio_set_value(sirfport->rts_gpio, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 
 static void sirfsoc_uart_stop_tx(struct uart_port *port)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int regv;
 	regv = rd_regl(port, SIRFUART_INT_EN);
@@ -221,6 +258,8 @@ void sirfsoc_uart_start_tx(struct uart_port *port)
 	regv = rd_regl(port, SIRFUART_INT_EN);
 	wr_regl(port, SIRFUART_INT_EN, regv | SIRFUART_TX_INT_EN);
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	struct sirfsoc_int_en *uint_en = &sirfport->uart_reg->uart_int_en;
@@ -354,17 +393,23 @@ static void sirfsoc_uart_start_tx(struct uart_port *port)
 			wr_regl(port, ureg->sirfsoc_int_en_reg,
 					uint_en->sirfsoc_txfifo_empty_en);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void sirfsoc_uart_stop_rx(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long regv;
 	wr_regl(port, SIRFUART_RX_FIFO_OP, 0);
 	regv = rd_regl(port, SIRFUART_INT_EN);
 	wr_regl(port, SIRFUART_INT_EN, regv & ~SIRFUART_RX_IO_INT_EN);
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	struct sirfsoc_int_en *uint_en = &sirfport->uart_reg->uart_int_en;
@@ -390,12 +435,16 @@ static void sirfsoc_uart_stop_rx(struct uart_port *port)
 			wr_regl(port, SIRFUART_INT_EN_CLR,
 					SIRFUART_RX_IO_INT_EN(port, uint_en));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void sirfsoc_uart_disable_ms(struct uart_port *port)
 {
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long reg;
 	sirfport->ms_enabled = 0;
@@ -406,6 +455,8 @@ static void sirfsoc_uart_disable_ms(struct uart_port *port)
 	reg = rd_regl(port, SIRFUART_INT_EN);
 	wr_regl(port, SIRFUART_INT_EN, reg & ~SIRFUART_CTS_INT_EN);
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	struct sirfsoc_int_en *uint_en = &sirfport->uart_reg->uart_int_en;
 
@@ -436,12 +487,16 @@ static irqreturn_t sirfsoc_uart_usp_cts_handler(int irq, void *dev_id)
 				!gpio_get_value(sirfport->cts_gpio));
 	spin_unlock(&port->lock);
 	return IRQ_HANDLED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void sirfsoc_uart_enable_ms(struct uart_port *port)
 {
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long reg;
 	unsigned long flg;
@@ -456,6 +511,8 @@ static void sirfsoc_uart_enable_ms(struct uart_port *port)
 		!(rd_regl(port, SIRFUART_AFC_CTRL) & SIRFUART_CTS_IN_STATUS));
 	sirfport->ms_enabled = 1;
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	struct sirfsoc_int_en *uint_en = &sirfport->uart_reg->uart_int_en;
 
@@ -475,11 +532,15 @@ static void sirfsoc_uart_enable_ms(struct uart_port *port)
 					uint_en->sirfsoc_cts_en);
 	} else
 		enable_irq(gpio_to_irq(sirfport->cts_gpio));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void sirfsoc_uart_break_ctl(struct uart_port *port, int break_state)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long ulcon = rd_regl(port, SIRFUART_LINE_CTRL);
 	if (break_state)
@@ -488,6 +549,8 @@ static void sirfsoc_uart_break_ctl(struct uart_port *port, int break_state)
 		ulcon &= ~SIRFUART_SET_BREAK;
 	wr_regl(port, SIRFUART_LINE_CTRL, ulcon);
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	if (sirfport->uart_reg->uart_type == SIRF_REAL_UART) {
@@ -498,6 +561,9 @@ static void sirfsoc_uart_break_ctl(struct uart_port *port, int break_state)
 			ulcon &= ~SIRFUART_SET_BREAK;
 		wr_regl(port, ureg->sirfsoc_line_ctrl, ulcon);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -505,12 +571,15 @@ static unsigned int
 sirfsoc_uart_pio_rx_chars(struct uart_port *port, unsigned int max_rx_count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ch, rx_count = 0;
 
 	while (!(rd_regl(port, SIRFUART_RX_FIFO_STATUS) &
 					SIRFUART_FIFOEMPTY_MASK(port))) {
 		ch = rd_regl(port, SIRFUART_RX_FIFO_DATA) | SIRFUART_DUMMY_READ;
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	struct sirfsoc_fifo_status *ufifo_st = &sirfport->uart_reg->fifo_status;
@@ -523,6 +592,9 @@ sirfsoc_uart_pio_rx_chars(struct uart_port *port, unsigned int max_rx_count)
 					ufifo_st->ff_empty(port->line))) {
 		ch = rd_regl(port, ureg->sirfsoc_rx_fifo_data) |
 			SIRFUART_DUMMY_READ;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (unlikely(uart_handle_sysrq_char(port, ch)))
 			continue;
@@ -533,8 +605,13 @@ sirfsoc_uart_pio_rx_chars(struct uart_port *port, unsigned int max_rx_count)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port->icount.rx += rx_count;
 	tty_flip_buffer_push(&port->state->port);
+=======
+	sirfport->rx_io_count += rx_count;
+	port->icount.rx += rx_count;
+>>>>>>> v3.18
 =======
 	sirfport->rx_io_count += rx_count;
 	port->icount.rx += rx_count;
@@ -548,6 +625,7 @@ sirfsoc_uart_pio_tx_chars(struct sirfsoc_uart_port *sirfport, int count)
 {
 	struct uart_port *port = &sirfport->port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct circ_buf *xmit = &port->state->xmit;
 	unsigned int num_tx = 0;
 	while (!uart_circ_empty(xmit) &&
@@ -556,6 +634,8 @@ sirfsoc_uart_pio_tx_chars(struct sirfsoc_uart_port *sirfport, int count)
 		count--) {
 		wr_regl(port, SIRFUART_TX_FIFO_DATA, xmit->buf[xmit->tail]);
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	struct sirfsoc_fifo_status *ufifo_st = &sirfport->uart_reg->fifo_status;
 	struct circ_buf *xmit = &port->state->xmit;
@@ -566,6 +646,9 @@ sirfsoc_uart_pio_tx_chars(struct sirfsoc_uart_port *sirfport, int count)
 		count--) {
 		wr_regl(port, ureg->sirfsoc_tx_fifo_data,
 				xmit->buf[xmit->tail]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		xmit->tail = (xmit->tail + 1) & (UART_XMIT_SIZE - 1);
 		port->icount.tx++;
@@ -577,7 +660,10 @@ sirfsoc_uart_pio_tx_chars(struct sirfsoc_uart_port *sirfport, int count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void sirfsoc_uart_tx_dma_complete_callback(void *param)
 {
 	struct sirfsoc_uart_port *sirfport = (struct sirfsoc_uart_port *)param;
@@ -732,6 +818,9 @@ static void sirfsoc_uart_handle_rx_done(struct sirfsoc_uart_port *sirfport)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static irqreturn_t sirfsoc_uart_isr(int irq, void *dev_id)
 {
@@ -740,6 +829,7 @@ static irqreturn_t sirfsoc_uart_isr(int irq, void *dev_id)
 	unsigned long flag = TTY_NORMAL;
 	struct sirfsoc_uart_port *sirfport = (struct sirfsoc_uart_port *)dev_id;
 	struct uart_port *port = &sirfport->port;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct uart_state *state = port->state;
 	struct circ_buf *xmit = &port->state->xmit;
@@ -815,6 +905,8 @@ static unsigned int
 sirfsoc_calc_sample_div(unsigned long baud_rate,
 			unsigned long ioclk_rate, unsigned long *setted_baud)
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	struct sirfsoc_fifo_status *ufifo_st = &sirfport->uart_reg->fifo_status;
 	struct sirfsoc_int_status *uint_st = &sirfport->uart_reg->uart_int_st;
@@ -1010,6 +1102,9 @@ sirfsoc_usp_calc_sample_div(unsigned long set_rate,
 static unsigned int
 sirfsoc_uart_calc_sample_div(unsigned long baud_rate,
 			unsigned long ioclk_rate, unsigned long *set_baud)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long min_delta = ~0UL;
@@ -1034,7 +1129,11 @@ sirfsoc_uart_calc_sample_div(unsigned long baud_rate,
 			regv = regv | (sample_div << SIRF_SAMPLE_DIV_SHIFT);
 			min_delta = temp_delta;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*setted_baud = baud_tmp;
+=======
+			*set_baud = baud_tmp;
+>>>>>>> v3.18
 =======
 			*set_baud = baud_tmp;
 >>>>>>> v3.18
@@ -1049,6 +1148,7 @@ static void sirfsoc_uart_set_termios(struct uart_port *port,
 {
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long	config_reg = 0;
 	unsigned long	baud_rate;
 	unsigned long	setted_baud;
@@ -1060,6 +1160,8 @@ static void sirfsoc_uart_set_termios(struct uart_port *port,
 	int		threshold_div;
 	int		temp;
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	struct sirfsoc_int_en *uint_en = &sirfport->uart_reg->uart_int_en;
 	unsigned long	config_reg = 0;
@@ -1074,11 +1176,15 @@ static void sirfsoc_uart_set_termios(struct uart_port *port,
 	u32		data_bit_len, stop_bit_len, len_val;
 	unsigned long	sample_div_reg = 0xf;
 	ioclk_rate	= port->uartclk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (termios->c_cflag & CSIZE) {
 	default:
 	case CS8:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		config_reg |= SIRFUART_DATA_BIT_LEN_8;
 		break;
@@ -1124,6 +1230,8 @@ static void sirfsoc_uart_set_termios(struct uart_port *port,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 		data_bit_len = 8;
 		config_reg |= SIRFUART_DATA_BIT_LEN_8;
 		break;
@@ -1193,6 +1301,9 @@ static void sirfsoc_uart_set_termios(struct uart_port *port,
 	}
 	if ((termios->c_cflag & CREAD) == 0)
 		port->ignore_status_mask |= SIRFUART_DUMMY_READ;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Hardware Flow Control Settings */
 	if (UART_ENABLE_MS(port, termios->c_cflag)) {
@@ -1203,9 +1314,14 @@ static void sirfsoc_uart_set_termios(struct uart_port *port,
 			sirfsoc_uart_disable_ms(port);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (port->uartclk == 150000000) {
 		/* common rate: fast calculation */
+=======
+	baud_rate = uart_get_baud_rate(port, termios, old, 0, 4000000);
+	if (ioclk_rate == 150000000) {
+>>>>>>> v3.18
 =======
 	baud_rate = uart_get_baud_rate(port, termios, old, 0, 4000000);
 	if (ioclk_rate == 150000000) {
@@ -1214,6 +1330,7 @@ static void sirfsoc_uart_set_termios(struct uart_port *port,
 			if (baud_rate == baudrate_to_regv[ic].baud_rate)
 				clk_div_reg = baudrate_to_regv[ic].reg_val;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	setted_baud = baud_rate;
@@ -1273,6 +1390,8 @@ static void startup_uart_controller(struct uart_port *port)
 	wr_regl(port, SIRFUART_TX_FIFO_CTRL, temp);
 	wr_regl(port, SIRFUART_RX_FIFO_CTRL, temp);
 =======
+=======
+>>>>>>> v3.18
 	set_baud = baud_rate;
 	if (sirfport->uart_reg->uart_type == SIRF_REAL_UART) {
 		if (unlikely(clk_div_reg == 0))
@@ -1362,6 +1481,9 @@ static void sirfsoc_uart_pm(struct uart_port *port, unsigned int state,
 		clk_prepare_enable(sirfport->clk);
 	else
 		clk_disable_unprepare(sirfport->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1369,6 +1491,10 @@ static int sirfsoc_uart_startup(struct uart_port *port)
 {
 	struct sirfsoc_uart_port *sirfport	= to_sirfport(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
+>>>>>>> v3.18
 =======
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 >>>>>>> v3.18
@@ -1386,9 +1512,12 @@ static int sirfsoc_uart_startup(struct uart_port *port)
 		goto irq_err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	startup_uart_controller(port);
 	enable_irq(port->irq);
 =======
+=======
+>>>>>>> v3.18
 
 	/* initial hardware settings */
 	wr_regl(port, ureg->sirfsoc_tx_dma_io_ctrl,
@@ -1441,6 +1570,9 @@ static int sirfsoc_uart_startup(struct uart_port *port)
 	return 0;
 init_rx_err:
 	free_irq(port->irq, sirfport);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 irq_err:
 	return ret;
@@ -1450,6 +1582,7 @@ static void sirfsoc_uart_shutdown(struct uart_port *port)
 {
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wr_regl(port, SIRFUART_INT_EN, 0);
 	free_irq(port->irq, sirfport);
 	if (sirfport->ms_enabled) {
@@ -1457,6 +1590,8 @@ static void sirfsoc_uart_shutdown(struct uart_port *port)
 		sirfport->ms_enabled = 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	if (!sirfport->is_marco)
 		wr_regl(port, ureg->sirfsoc_int_en_reg, 0);
@@ -1473,6 +1608,9 @@ static void sirfsoc_uart_shutdown(struct uart_port *port)
 	}
 	if (sirfport->tx_dma_chan)
 		sirfport->tx_dma_state = TX_DMA_IDLE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1484,15 +1622,21 @@ static const char *sirfsoc_uart_type(struct uart_port *port)
 static int sirfsoc_uart_request_port(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *ret;
 	ret = request_mem_region(port->mapbase,
 				SIRFUART_MAP_SIZE, SIRFUART_PORT_NAME);
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
 	struct sirfsoc_uart_param *uart_param = &sirfport->uart_reg->uart_param;
 	void *ret;
 	ret = request_mem_region(port->mapbase,
 		SIRFUART_MAP_SIZE, uart_param->port_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret ? 0 : -EBUSY;
 }
@@ -1523,6 +1667,10 @@ static struct uart_ops sirfsoc_uart_ops = {
 	.shutdown	= sirfsoc_uart_shutdown,
 	.set_termios	= sirfsoc_uart_set_termios,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pm		= sirfsoc_uart_pm,
+>>>>>>> v3.18
 =======
 	.pm		= sirfsoc_uart_pm,
 >>>>>>> v3.18
@@ -1534,7 +1682,12 @@ static struct uart_ops sirfsoc_uart_ops = {
 
 #ifdef CONFIG_SERIAL_SIRFSOC_CONSOLE
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init sirfsoc_uart_console_setup(struct console *co, char *options)
+=======
+static int __init
+sirfsoc_uart_console_setup(struct console *co, char *options)
+>>>>>>> v3.18
 =======
 static int __init
 sirfsoc_uart_console_setup(struct console *co, char *options)
@@ -1546,7 +1699,12 @@ sirfsoc_uart_console_setup(struct console *co, char *options)
 	unsigned int flow = 'n';
 	struct uart_port *port = &sirfsoc_uart_ports[co->index].port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
+	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
+>>>>>>> v3.18
 =======
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
@@ -1558,10 +1716,13 @@ sirfsoc_uart_console_setup(struct console *co, char *options)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (options)
 		uart_parse_options(options, &baud, &parity, &bits, &flow);
 	port->cons = co;
 =======
+=======
+>>>>>>> v3.18
 	/* enable usp in mode1 register */
 	if (sirfport->uart_reg->uart_type == SIRF_USP_UART)
 		wr_regl(port, ureg->sirfsoc_mode1, SIRFSOC_USP_EN |
@@ -1573,6 +1734,9 @@ sirfsoc_uart_console_setup(struct console *co, char *options)
 	/* default console tx/rx transfer using io mode */
 	sirfport->rx_dma_chan = NULL;
 	sirfport->tx_dma_chan = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return uart_set_options(port, co, baud, parity, bits, flow);
 }
@@ -1580,11 +1744,14 @@ sirfsoc_uart_console_setup(struct console *co, char *options)
 static void sirfsoc_uart_console_putchar(struct uart_port *port, int ch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (rd_regl(port,
 		SIRFUART_TX_FIFO_STATUS) & SIRFUART_FIFOFULL_MASK(port))
 		cpu_relax();
 	wr_regb(port, SIRFUART_TX_FIFO_DATA, ch);
 =======
+=======
+>>>>>>> v3.18
 	struct sirfsoc_uart_port *sirfport = to_sirfport(port);
 	struct sirfsoc_register *ureg = &sirfport->uart_reg->uart_reg;
 	struct sirfsoc_fifo_status *ufifo_st = &sirfport->uart_reg->fifo_status;
@@ -1592,6 +1759,9 @@ static void sirfsoc_uart_console_putchar(struct uart_port *port, int ch)
 		ureg->sirfsoc_tx_fifo_status) & ufifo_st->ff_full(port->line))
 		cpu_relax();
 	wr_regl(port, ureg->sirfsoc_tx_fifo_data, ch);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1635,8 +1805,11 @@ static struct uart_driver sirfsoc_uart_drv = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sirfsoc_uart_probe(struct platform_device *pdev)
 =======
+=======
+>>>>>>> v3.18
 static struct of_device_id sirfsoc_uart_ids[] = {
 	{ .compatible = "sirf,prima2-uart", .data = &sirfsoc_uart,},
 	{ .compatible = "sirf,marco-uart", .data = &sirfsoc_uart},
@@ -1646,6 +1819,9 @@ static struct of_device_id sirfsoc_uart_ids[] = {
 MODULE_DEVICE_TABLE(of, sirfsoc_uart_ids);
 
 static int sirfsoc_uart_probe(struct platform_device *pdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct sirfsoc_uart_port *sirfport;
@@ -1653,8 +1829,11 @@ static int sirfsoc_uart_probe(struct platform_device *pdev)
 	struct resource *res;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	int i, j;
 	struct dma_slave_config slv_cfg = {
 		.src_maxburst = 2,
@@ -1665,6 +1844,9 @@ static int sirfsoc_uart_probe(struct platform_device *pdev)
 	const struct of_device_id *match;
 
 	match = of_match_node(sirfsoc_uart_ids, pdev->dev.of_node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (of_property_read_u32(pdev->dev.of_node, "cell-index", &pdev->id)) {
 		dev_err(&pdev->dev,
@@ -1673,7 +1855,13 @@ static int sirfsoc_uart_probe(struct platform_device *pdev)
 		goto err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	if (of_device_is_compatible(pdev->dev.of_node, "sirf,prima2-usp-uart"))
+		pdev->id += ((struct sirfsoc_uart_register *)
+				match->data)->uart_param.register_uart_nr;
+>>>>>>> v3.18
 =======
 	if (of_device_is_compatible(pdev->dev.of_node, "sirf,prima2-usp-uart"))
 		pdev->id += ((struct sirfsoc_uart_register *)
@@ -1684,10 +1872,13 @@ static int sirfsoc_uart_probe(struct platform_device *pdev)
 	port->dev = &pdev->dev;
 	port->private_data = sirfport;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (of_find_property(pdev->dev.of_node, "hw_flow_ctrl", NULL))
 		sirfport->hw_flow_ctrl = 1;
 =======
+=======
+>>>>>>> v3.18
 	sirfport->uart_reg = (struct sirfsoc_uart_register *)match->data;
 
 	sirfport->hw_flow_ctrl = of_property_read_bool(pdev->dev.of_node,
@@ -1734,6 +1925,9 @@ static int sirfsoc_uart_probe(struct platform_device *pdev)
 usp_no_flow_control:
 	if (of_device_is_compatible(pdev->dev.of_node, "sirf,marco-uart"))
 		sirfport->is_marco = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (of_property_read_u32(pdev->dev.of_node,
@@ -1752,11 +1946,17 @@ usp_no_flow_control:
 		goto err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	tasklet_init(&sirfport->rx_dma_complete_tasklet,
 			sirfsoc_uart_rx_dma_complete_tl, (unsigned long)sirfport);
 	tasklet_init(&sirfport->rx_tmo_process_tasklet,
 			sirfsoc_rx_tmo_process_tl, (unsigned long)sirfport);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	port->mapbase = res->start;
 	port->membase = devm_ioremap(&pdev->dev, res->start, resource_size(res));
@@ -1774,6 +1974,7 @@ usp_no_flow_control:
 	port->irq = res->start;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sirfport->hw_flow_ctrl) {
 		sirfport->p = pinctrl_get_select_default(&pdev->dev);
 		ret = IS_ERR(sirfport->p);
@@ -1788,11 +1989,16 @@ usp_no_flow_control:
 	}
 	clk_prepare_enable(sirfport->clk);
 =======
+=======
+>>>>>>> v3.18
 	sirfport->clk = clk_get(&pdev->dev, NULL);
 	if (IS_ERR(sirfport->clk)) {
 		ret = PTR_ERR(sirfport->clk);
 		goto err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	port->uartclk = clk_get_rate(sirfport->clk);
 
@@ -1807,6 +2013,7 @@ usp_no_flow_control:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 port_err:
@@ -1817,6 +2024,8 @@ clk_err:
 	if (sirfport->hw_flow_ctrl)
 		pinctrl_put(sirfport->p);
 =======
+=======
+>>>>>>> v3.18
 	sirfport->rx_dma_chan = dma_request_slave_channel(port->dev, "rx");
 	for (i = 0; sirfport->rx_dma_chan && i < SIRFSOC_RX_LOOP_BUF_CNT; i++) {
 		sirfport->rx_dma_items[i].xmit.buf =
@@ -1845,6 +2054,9 @@ alloc_coherent_err:
 	dma_release_channel(sirfport->rx_dma_chan);
 port_err:
 	clk_put(sirfport->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err:
 	return ret;
@@ -1854,6 +2066,7 @@ static int sirfsoc_uart_remove(struct platform_device *pdev)
 {
 	struct sirfsoc_uart_port *sirfport = platform_get_drvdata(pdev);
 	struct uart_port *port = &sirfport->port;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 	if (sirfport->hw_flow_ctrl)
@@ -1869,6 +2082,8 @@ sirfsoc_uart_suspend(struct platform_device *pdev, pm_message_t state)
 {
 	struct sirfsoc_uart_port *sirfport = platform_get_drvdata(pdev);
 =======
+=======
+>>>>>>> v3.18
 	clk_put(sirfport->clk);
 	uart_remove_one_port(&sirfsoc_uart_drv, port);
 	if (sirfport->rx_dma_chan) {
@@ -1892,6 +2107,9 @@ static int
 sirfsoc_uart_suspend(struct device *pdev)
 {
 	struct sirfsoc_uart_port *sirfport = dev_get_drvdata(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct uart_port *port = &sirfport->port;
 	uart_suspend_port(&sirfsoc_uart_drv, port);
@@ -1899,9 +2117,15 @@ sirfsoc_uart_suspend(struct device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sirfsoc_uart_resume(struct platform_device *pdev)
 {
 	struct sirfsoc_uart_port *sirfport = platform_get_drvdata(pdev);
+=======
+static int sirfsoc_uart_resume(struct device *pdev)
+{
+	struct sirfsoc_uart_port *sirfport = dev_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 static int sirfsoc_uart_resume(struct device *pdev)
 {
@@ -1912,6 +2136,7 @@ static int sirfsoc_uart_resume(struct device *pdev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct of_device_id sirfsoc_uart_ids[] = {
 	{ .compatible = "sirf,prima2-uart", },
@@ -1920,19 +2145,27 @@ static struct of_device_id sirfsoc_uart_ids[] = {
 };
 MODULE_DEVICE_TABLE(of, sirfsoc_uart_ids);
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 static const struct dev_pm_ops sirfsoc_uart_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(sirfsoc_uart_suspend, sirfsoc_uart_resume)
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct platform_driver sirfsoc_uart_driver = {
 	.probe		= sirfsoc_uart_probe,
 	.remove		= sirfsoc_uart_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend	= sirfsoc_uart_suspend,
 	.resume		= sirfsoc_uart_resume,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver		= {
@@ -1940,6 +2173,10 @@ static struct platform_driver sirfsoc_uart_driver = {
 		.owner	= THIS_MODULE,
 		.of_match_table = sirfsoc_uart_ids,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm	= &sirfsoc_uart_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm	= &sirfsoc_uart_pm_ops,
 >>>>>>> v3.18

@@ -18,8 +18,11 @@
 #include <linux/sunrpc/svc_xprt.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/ipv6.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "nfsd.h"
@@ -29,9 +32,12 @@
 #define NFSDDBG_FACILITY	NFSDDBG_EXPORT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct auth_domain	svc_client;
 typedef struct svc_export	svc_export;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -80,7 +86,11 @@ static struct svc_expkey *svc_expkey_lookup(struct cache_detail *cd, struct svc_
 static int expkey_parse(struct cache_detail *cd, char *mesg, int mlen)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* client fsidtype fsid [path] */
+=======
+	/* client fsidtype fsid expiry [path] */
+>>>>>>> v3.18
 =======
 	/* client fsidtype fsid expiry [path] */
 >>>>>>> v3.18
@@ -306,6 +316,7 @@ svc_expkey_update(struct cache_detail *cd, struct svc_expkey *new,
 static void nfsd4_fslocs_free(struct nfsd4_fs_locations *fsloc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 
 	for (i = 0; i < fsloc->locations_count; i++) {
@@ -314,6 +325,8 @@ static void nfsd4_fslocs_free(struct nfsd4_fs_locations *fsloc)
 	}
 	kfree(fsloc->locations);
 =======
+=======
+>>>>>>> v3.18
 	struct nfsd4_fs_location *locations = fsloc->locations;
 	int i;
 
@@ -327,6 +340,9 @@ static void nfsd4_fslocs_free(struct nfsd4_fs_locations *fsloc)
 
 	kfree(locations);
 	fsloc->locations = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -415,11 +431,17 @@ fsloc_parse(char **mesg, char *buf, struct nfsd4_fs_locations *fsloc)
 	int migrated, i, err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* more than one fsloc */
 	if (fsloc->locations)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* listsize */
 	err = get_uint(mesg, &fsloc->locations_count);
@@ -471,6 +493,7 @@ out_free_all:
 static int secinfo_parse(char **mesg, char *buf, struct svc_export *exp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int listsize, err;
 	struct exp_flavor_info *f;
 
@@ -479,6 +502,8 @@ static int secinfo_parse(char **mesg, char *buf, struct svc_export *exp)
 		return err;
 	if (listsize < 0 || listsize > MAX_SECINFO_LIST)
 =======
+=======
+>>>>>>> v3.18
 	struct exp_flavor_info *f;
 	u32 listsize;
 	int err;
@@ -491,6 +516,9 @@ static int secinfo_parse(char **mesg, char *buf, struct svc_export *exp)
 	if (err)
 		return err;
 	if (listsize > MAX_SECINFO_LIST)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
@@ -523,7 +551,10 @@ secinfo_parse(char **mesg, char *buf, struct svc_export *exp) { return 0; }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int
 uuid_parse(char **mesg, char *buf, unsigned char **puuid)
 {
@@ -545,6 +576,9 @@ uuid_parse(char **mesg, char *buf, unsigned char **puuid)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int svc_export_parse(struct cache_detail *cd, char *mesg, int mlen)
 {
@@ -625,6 +659,7 @@ static int svc_export_parse(struct cache_detail *cd, char *mesg, int mlen)
 			if (strcmp(buf, "fsloc") == 0)
 				err = fsloc_parse(&mesg, buf, &exp.ex_fslocs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			else if (strcmp(buf, "uuid") == 0) {
 				/* expect a 16 byte uuid encoded as \xXXXX... */
 				len = qword_get(&mesg, buf, PAGE_SIZE);
@@ -637,6 +672,11 @@ static int svc_export_parse(struct cache_detail *cd, char *mesg, int mlen)
 						err = -ENOMEM;
 				}
 			} else if (strcmp(buf, "secinfo") == 0)
+=======
+			else if (strcmp(buf, "uuid") == 0)
+				err = uuid_parse(&mesg, buf, &exp.ex_uuid);
+			else if (strcmp(buf, "secinfo") == 0)
+>>>>>>> v3.18
 =======
 			else if (strcmp(buf, "uuid") == 0)
 				err = uuid_parse(&mesg, buf, &exp.ex_uuid);
@@ -659,7 +699,10 @@ static int svc_export_parse(struct cache_detail *cd, char *mesg, int mlen)
 			goto out4;
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		 * No point caching this if it would immediately expire.
 		 * Also, this protects exportfs's dummy export from the
 		 * anon_uid/anon_gid checks:
@@ -667,6 +710,9 @@ static int svc_export_parse(struct cache_detail *cd, char *mesg, int mlen)
 		if (exp.h.expiry_time < seconds_since_boot())
 			goto out4;
 		/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * For some reason exportfs has been passing down an
 		 * invalid (-1) uid & gid on the "dummy" export which it
@@ -675,6 +721,10 @@ static int svc_export_parse(struct cache_detail *cd, char *mesg, int mlen)
 		 * delay these checks till after check_export:
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		err = -EINVAL;
+>>>>>>> v3.18
 =======
 		err = -EINVAL;
 >>>>>>> v3.18
@@ -683,6 +733,10 @@ static int svc_export_parse(struct cache_detail *cd, char *mesg, int mlen)
 		if (!gid_valid(exp.ex_anon_gid))
 			goto out4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		err = 0;
+>>>>>>> v3.18
 =======
 		err = 0;
 >>>>>>> v3.18
@@ -737,7 +791,11 @@ static int svc_export_show(struct seq_file *m,
 			int i;
 			seq_puts(m, ",uuid=");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			for (i=0; i<16; i++) {
+=======
+			for (i = 0; i < EX_UUID_LEN; i++) {
+>>>>>>> v3.18
 =======
 			for (i = 0; i < EX_UUID_LEN; i++) {
 >>>>>>> v3.18
@@ -768,8 +826,13 @@ static void svc_export_init(struct cache_head *cnew, struct cache_head *citem)
 	kref_get(&item->ex_client->ref);
 	new->ex_client = item->ex_client;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new->ex_path.dentry = dget(item->ex_path.dentry);
 	new->ex_path.mnt = mntget(item->ex_path.mnt);
+=======
+	new->ex_path = item->ex_path;
+	path_get(&item->ex_path);
+>>>>>>> v3.18
 =======
 	new->ex_path = item->ex_path;
 	path_get(&item->ex_path);
@@ -868,7 +931,11 @@ svc_export_update(struct svc_export *new, struct svc_export *old)
 
 static struct svc_expkey *
 <<<<<<< HEAD
+<<<<<<< HEAD
 exp_find_key(struct cache_detail *cd, svc_client *clp, int fsid_type,
+=======
+exp_find_key(struct cache_detail *cd, struct auth_domain *clp, int fsid_type,
+>>>>>>> v3.18
 =======
 exp_find_key(struct cache_detail *cd, struct auth_domain *clp, int fsid_type,
 >>>>>>> v3.18
@@ -894,9 +961,15 @@ exp_find_key(struct cache_detail *cd, struct auth_domain *clp, int fsid_type,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static svc_export *exp_get_by_name(struct cache_detail *cd, svc_client *clp,
 				   const struct path *path, struct cache_req *reqp)
+=======
+static struct svc_export *
+exp_get_by_name(struct cache_detail *cd, struct auth_domain *clp,
+		const struct path *path, struct cache_req *reqp)
+>>>>>>> v3.18
 =======
 static struct svc_export *
 exp_get_by_name(struct cache_detail *cd, struct auth_domain *clp,
@@ -926,17 +999,23 @@ exp_get_by_name(struct cache_detail *cd, struct auth_domain *clp,
  * Find the export entry for a given dentry.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct svc_export *exp_parent(struct cache_detail *cd, svc_client *clp,
 				     struct path *path)
 {
 	struct dentry *saved = dget(path->dentry);
 	svc_export *exp = exp_get_by_name(cd, clp, path, NULL);
 =======
+=======
+>>>>>>> v3.18
 static struct svc_export *
 exp_parent(struct cache_detail *cd, struct auth_domain *clp, struct path *path)
 {
 	struct dentry *saved = dget(path->dentry);
 	struct svc_export *exp = exp_get_by_name(cd, clp, path, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (PTR_ERR(exp) == -ENOENT && !IS_ROOT(path->dentry)) {
@@ -959,7 +1038,11 @@ exp_parent(struct cache_detail *cd, struct auth_domain *clp, struct path *path)
  */
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 exp_rootfh(struct net *net, svc_client *clp, char *name,
+=======
+exp_rootfh(struct net *net, struct auth_domain *clp, char *name,
+>>>>>>> v3.18
 =======
 exp_rootfh(struct net *net, struct auth_domain *clp, char *name,
 >>>>>>> v3.18
@@ -1242,6 +1325,10 @@ static struct flags {
 	{ NFSEXP_ASYNC, {"async", "sync"}},
 	{ NFSEXP_GATHERED_WRITES, {"wdelay", "no_wdelay"}},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ NFSEXP_NOREADDIRPLUS, {"nordirplus", ""}},
+>>>>>>> v3.18
 =======
 	{ NFSEXP_NOREADDIRPLUS, {"nordirplus", ""}},
 >>>>>>> v3.18
@@ -1354,7 +1441,11 @@ static int e_show(struct seq_file *m, void *p)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cache_get(&exp->h);
+=======
+	exp_get(exp);
+>>>>>>> v3.18
 =======
 	exp_get(exp);
 >>>>>>> v3.18

@@ -23,7 +23,11 @@ CONFIG_CMDLINE_OVERWRITE=y
 CONFIG_CMDLINE="console=ttySC1,115200 mem=64M root=/dev/nfs"
 CONFIG_PCI=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_HOTPLUG_PCI=m
+=======
+CONFIG_HOTPLUG_PCI=y
+>>>>>>> v3.18
 =======
 CONFIG_HOTPLUG_PCI=y
 >>>>>>> v3.18

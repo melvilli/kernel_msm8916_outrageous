@@ -126,8 +126,14 @@ static bool ath6kl_process_uapsdq(struct ath6kl_sta *conn,
 		spin_unlock_bh(&conn->psq_lock);
 		return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (!conn->apsd_info)
 		return false;
+=======
+	} else if (!conn->apsd_info) {
+		return false;
+	}
+>>>>>>> v3.18
 =======
 	} else if (!conn->apsd_info) {
 		return false;
@@ -323,8 +329,14 @@ int ath6kl_control_tx(void *devt, struct sk_buff *skb,
 		ath6kl_err("wmi ctrl ep full, dropping pkt : 0x%p, len:%d\n",
 			   skb, skb->len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		cookie = ath6kl_alloc_cookie(ar);
+=======
+	} else {
+		cookie = ath6kl_alloc_cookie(ar);
+	}
+>>>>>>> v3.18
 =======
 	} else {
 		cookie = ath6kl_alloc_cookie(ar);
@@ -372,7 +384,11 @@ int ath6kl_data_tx(struct sk_buff *skb, struct net_device *dev)
 	u32 map_no = 0;
 	u16 htc_tag = ATH6KL_DATA_PKT_TAG;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 ac = 99 ; /* initialize to unmapped ac */
+=======
+	u8 ac = 99; /* initialize to unmapped ac */
+>>>>>>> v3.18
 =======
 	u8 ac = 99; /* initialize to unmapped ac */
 >>>>>>> v3.18
@@ -466,8 +482,14 @@ int ath6kl_data_tx(struct sk_buff *skb, struct net_device *dev)
 				goto fail_tx;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		goto fail_tx;
+=======
+	} else {
+		goto fail_tx;
+	}
+>>>>>>> v3.18
 =======
 	} else {
 		goto fail_tx;
@@ -725,7 +747,10 @@ void ath6kl_tx_complete(struct htc_target *target,
 	/* reap completed packets */
 	while (!list_empty(packet_queue)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		packet = list_first_entry(packet_queue, struct htc_packet,
@@ -1115,8 +1140,14 @@ static void aggr_deque_frms(struct aggr_info_conn *agg_conn, u8 tid,
 				skb_queue_tail(&rxtid->q, node->skb);
 			node->skb = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
 			stats->num_hole++;
+=======
+		} else {
+			stats->num_hole++;
+		}
+>>>>>>> v3.18
 =======
 		} else {
 			stats->num_hole++;
@@ -1243,7 +1274,11 @@ static bool aggr_process_recv_frm(struct aggr_info_conn *agg_conn, u8 tid,
 
 	spin_lock_bh(&rxtid->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (idx = 0 ; idx < rxtid->hold_q_sz; idx++) {
+=======
+	for (idx = 0; idx < rxtid->hold_q_sz; idx++) {
+>>>>>>> v3.18
 =======
 	for (idx = 0; idx < rxtid->hold_q_sz; idx++) {
 >>>>>>> v3.18
@@ -1301,7 +1336,10 @@ static void ath6kl_uapsd_trigger_frame_rx(struct ath6kl_vif *vif,
 
 	while ((!is_apsdq_empty) && (num_frames_to_deliver)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		spin_lock_bh(&conn->psq_lock);
@@ -1645,8 +1683,14 @@ void ath6kl_rx(struct htc_target *target, struct htc_packet *packet)
 				return;
 			aggr_conn = conn->aggr_conn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
 			aggr_conn = vif->aggr_cntxt->aggr_conn;
+=======
+		} else {
+			aggr_conn = vif->aggr_cntxt->aggr_conn;
+		}
+>>>>>>> v3.18
 =======
 		} else {
 			aggr_conn = vif->aggr_cntxt->aggr_conn;
@@ -1659,8 +1703,14 @@ void ath6kl_rx(struct htc_target *target, struct htc_packet *packet)
 			return;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (!is_broadcast_ether_addr(datap->h_dest))
 		vif->net_stats.multicast++;
+=======
+	} else if (!is_broadcast_ether_addr(datap->h_dest)) {
+		vif->net_stats.multicast++;
+	}
+>>>>>>> v3.18
 =======
 	} else if (!is_broadcast_ether_addr(datap->h_dest)) {
 		vif->net_stats.multicast++;
@@ -1761,8 +1811,14 @@ void aggr_recv_addba_req_evt(struct ath6kl_vif *vif, u8 tid_mux, u16 seq_no,
 		if (sta)
 			aggr_conn = sta->aggr_conn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		aggr_conn = vif->aggr_cntxt->aggr_conn;
+=======
+	} else {
+		aggr_conn = vif->aggr_cntxt->aggr_conn;
+	}
+>>>>>>> v3.18
 =======
 	} else {
 		aggr_conn = vif->aggr_cntxt->aggr_conn;
@@ -1823,7 +1879,10 @@ void aggr_conn_init(struct ath6kl_vif *vif, struct aggr_info *aggr_info,
 		spin_lock_init(&rxtid->lock);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1866,8 +1925,14 @@ void aggr_recv_delba_req_evt(struct ath6kl_vif *vif, u8 tid_mux)
 		if (sta)
 			aggr_conn = sta->aggr_conn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		aggr_conn = vif->aggr_cntxt->aggr_conn;
+=======
+	} else {
+		aggr_conn = vif->aggr_cntxt->aggr_conn;
+	}
+>>>>>>> v3.18
 =======
 	} else {
 		aggr_conn = vif->aggr_cntxt->aggr_conn;

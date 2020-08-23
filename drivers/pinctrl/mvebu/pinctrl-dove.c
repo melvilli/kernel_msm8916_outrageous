@@ -19,6 +19,7 @@
 #include <linux/of.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/pinctrl.h>
 
 #include "pinctrl-mvebu.h"
@@ -109,6 +110,8 @@ static int dove_mpp4_ctrl_get(struct mvebu_mpp_ctrl *ctrl,
 	case 62: /* mpp_uart1 */
 		mask = DOVE_UART1_GPIO_SEL;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/mfd/syscon.h>
 #include <linux/pinctrl/pinctrl.h>
 #include <linux/regmap.h>
@@ -225,6 +228,9 @@ static int dove_mpp4_ctrl_get(unsigned pid, unsigned long *config)
 		break;
 	case 62: /* mpp_uart1 */
 		mask = UART1_GPIO_SEL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -236,6 +242,7 @@ static int dove_mpp4_ctrl_get(unsigned pid, unsigned long *config)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int dove_mpp4_ctrl_set(struct mvebu_mpp_ctrl *ctrl,
 			      unsigned long config)
@@ -259,6 +266,8 @@ static int dove_mpp4_ctrl_set(struct mvebu_mpp_ctrl *ctrl,
 	case 62: /* mpp_uart1 */
 		mask = DOVE_UART1_GPIO_SEL;
 =======
+=======
+>>>>>>> v3.18
 static int dove_mpp4_ctrl_set(unsigned pid, unsigned long config)
 {
 	unsigned long mpp4 = readl(mpp4_base);
@@ -279,6 +288,9 @@ static int dove_mpp4_ctrl_set(unsigned pid, unsigned long config)
 		break;
 	case 62: /* mpp_uart1 */
 		mask = UART1_GPIO_SEL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -290,7 +302,11 @@ static int dove_mpp4_ctrl_set(unsigned pid, unsigned long config)
 		mpp4 |= mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(mpp4, DOVE_MPP_CTRL4_VIRT_BASE);
+=======
+	writel(mpp4, mpp4_base);
+>>>>>>> v3.18
 =======
 	writel(mpp4, mpp4_base);
 >>>>>>> v3.18
@@ -299,6 +315,7 @@ static int dove_mpp4_ctrl_set(unsigned pid, unsigned long config)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dove_nand_ctrl_get(struct mvebu_mpp_ctrl *ctrl,
 			      unsigned long *config)
 {
@@ -306,12 +323,15 @@ static int dove_nand_ctrl_get(struct mvebu_mpp_ctrl *ctrl,
 
 	*config = ((gmpp & DOVE_NAND_GPIO_EN) != 0);
 =======
+=======
+>>>>>>> v3.18
 static int dove_nand_ctrl_get(unsigned pid, unsigned long *config)
 {
 	unsigned int gmpp;
 
 	regmap_read(gconfmap, MPP_GENERAL_CONFIG, &gmpp);
 	*config = ((gmpp & NAND_GPIO_EN) != 0);
+<<<<<<< HEAD
 >>>>>>> v3.18
 
 	return 0;
@@ -328,10 +348,13 @@ static int dove_nand_ctrl_set(struct mvebu_mpp_ctrl *ctrl,
 		gmpp |= DOVE_NAND_GPIO_EN;
 
 	writel(gmpp, DOVE_MPP_GENERAL_VIRT_BASE);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static int dove_audio0_ctrl_get(struct mvebu_mpp_ctrl *ctrl,
 				unsigned long *config)
 {
@@ -339,6 +362,8 @@ static int dove_audio0_ctrl_get(struct mvebu_mpp_ctrl *ctrl,
 
 	*config = ((pmu & DOVE_AU0_AC97_SEL) != 0);
 =======
+=======
+>>>>>>> v3.18
 static int dove_nand_ctrl_set(unsigned pid, unsigned long config)
 {
 	regmap_update_bits(gconfmap, MPP_GENERAL_CONFIG,
@@ -352,11 +377,15 @@ static int dove_audio0_ctrl_get(unsigned pid, unsigned long *config)
 	unsigned long pmu = readl(mpp_base + PMU_MPP_GENERAL_CTRL);
 
 	*config = ((pmu & AU0_AC97_SEL) != 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int dove_audio0_ctrl_set(struct mvebu_mpp_ctrl *ctrl,
 				unsigned long config)
@@ -368,6 +397,8 @@ static int dove_audio0_ctrl_set(struct mvebu_mpp_ctrl *ctrl,
 		pmu |= DOVE_AU0_AC97_SEL;
 	writel(pmu, DOVE_PMU_MPP_GENERAL_CTRL);
 =======
+=======
+>>>>>>> v3.18
 static int dove_audio0_ctrl_set(unsigned pid, unsigned long config)
 {
 	unsigned long pmu = readl(mpp_base + PMU_MPP_GENERAL_CTRL);
@@ -376,11 +407,15 @@ static int dove_audio0_ctrl_set(unsigned pid, unsigned long config)
 	if (config)
 		pmu |= AU0_AC97_SEL;
 	writel(pmu, mpp_base + PMU_MPP_GENERAL_CTRL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int dove_audio1_ctrl_get(struct mvebu_mpp_ctrl *ctrl,
 				unsigned long *config)
@@ -399,6 +434,8 @@ static int dove_audio1_ctrl_get(struct mvebu_mpp_ctrl *ctrl,
 		*config |= BIT(1);
 	if (gcfg2 & DOVE_TWSI_OPTION3_GPIO)
 =======
+=======
+>>>>>>> v3.18
 static int dove_audio1_ctrl_get(unsigned pid, unsigned long *config)
 {
 	unsigned int mpp4 = readl(mpp4_base);
@@ -418,6 +455,9 @@ static int dove_audio1_ctrl_get(unsigned pid, unsigned long *config)
 	if (gmpp & AU1_SPDIFO_GPIO_EN)
 		*config |= BIT(1);
 	if (gcfg2 & TWSI_OPTION3_GPIO)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*config |= BIT(0);
 
@@ -430,6 +470,7 @@ static int dove_audio1_ctrl_get(unsigned pid, unsigned long *config)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int dove_audio1_ctrl_set(struct mvebu_mpp_ctrl *ctrl,
 				unsigned long config)
@@ -461,6 +502,8 @@ static int dove_audio1_ctrl_set(struct mvebu_mpp_ctrl *ctrl,
 	writel(gmpp, DOVE_MPP_GENERAL_VIRT_BASE);
 	writel(gcfg2, DOVE_GLOBAL_CONFIG_2);
 =======
+=======
+>>>>>>> v3.18
 static int dove_audio1_ctrl_set(unsigned pid, unsigned long config)
 {
 	unsigned int mpp4 = readl(mpp4_base);
@@ -479,6 +522,9 @@ static int dove_audio1_ctrl_set(unsigned pid, unsigned long config)
 	regmap_update_bits(gconfmap, GLOBAL_CONFIG_2,
 			   TWSI_OPTION3_GPIO,
 			   (config & BIT(0)) ? TWSI_OPTION3_GPIO : 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -490,17 +536,23 @@ static int dove_audio1_ctrl_set(unsigned pid, unsigned long config)
  * enforce gpio setting by pinctrl mapping.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dove_audio1_ctrl_gpio_req(struct mvebu_mpp_ctrl *ctrl, u8 pid)
 {
 	unsigned long config;
 
 	dove_audio1_ctrl_get(ctrl, &config);
 =======
+=======
+>>>>>>> v3.18
 static int dove_audio1_ctrl_gpio_req(unsigned pid)
 {
 	unsigned long config;
 
 	dove_audio1_ctrl_get(pid, &config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (config) {
@@ -525,8 +577,12 @@ static int dove_audio1_ctrl_gpio_req(unsigned pid)
 
 /* mpp[52:57] has gpio pins capable of in and out */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dove_audio1_ctrl_gpio_dir(struct mvebu_mpp_ctrl *ctrl, u8 pid,
 				bool input)
+=======
+static int dove_audio1_ctrl_gpio_dir(unsigned pid, bool input)
+>>>>>>> v3.18
 =======
 static int dove_audio1_ctrl_gpio_dir(unsigned pid, bool input)
 >>>>>>> v3.18
@@ -536,6 +592,7 @@ static int dove_audio1_ctrl_gpio_dir(unsigned pid, bool input)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int dove_twsi_ctrl_get(struct mvebu_mpp_ctrl *ctrl,
 			      unsigned long *config)
@@ -550,6 +607,8 @@ static int dove_twsi_ctrl_get(struct mvebu_mpp_ctrl *ctrl,
 		*config = 2;
 	else if (gcfg2 & DOVE_TWSI_ENABLE_OPTION3)
 =======
+=======
+>>>>>>> v3.18
 static int dove_twsi_ctrl_get(unsigned pid, unsigned long *config)
 {
 	unsigned int gcfg1;
@@ -564,12 +623,16 @@ static int dove_twsi_ctrl_get(unsigned pid, unsigned long *config)
 	else if (gcfg2 & TWSI_ENABLE_OPTION2)
 		*config = 2;
 	else if (gcfg2 & TWSI_ENABLE_OPTION3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*config = 3;
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int dove_twsi_ctrl_set(struct mvebu_mpp_ctrl *ctrl,
 				unsigned long config)
@@ -595,6 +658,8 @@ static int dove_twsi_ctrl_set(struct mvebu_mpp_ctrl *ctrl,
 	writel(gcfg1, DOVE_GLOBAL_CONFIG_1);
 	writel(gcfg2, DOVE_GLOBAL_CONFIG_2);
 =======
+=======
+>>>>>>> v3.18
 static int dove_twsi_ctrl_set(unsigned pid, unsigned long config)
 {
 	unsigned int gcfg1 = 0;
@@ -618,12 +683,16 @@ static int dove_twsi_ctrl_set(unsigned pid, unsigned long config)
 	regmap_update_bits(gconfmap, GLOBAL_CONFIG_2,
 			   TWSI_ENABLE_OPTION2 | TWSI_ENABLE_OPTION3,
 			   gcfg2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 static struct mvebu_mpp_ctrl dove_mpp_controls[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	MPP_FUNC_CTRL(0, 0, "mpp0", dove_pmu_mpp_ctrl),
 	MPP_FUNC_CTRL(1, 1, "mpp1", dove_pmu_mpp_ctrl),
@@ -646,6 +715,10 @@ static struct mvebu_mpp_ctrl dove_mpp_controls[] = {
 	MPP_FUNC_CTRL(0, 15, NULL, dove_pmu_mpp_ctrl),
 	MPP_FUNC_CTRL(16, 23, NULL, dove_mpp_ctrl),
 >>>>>>> v3.18
+=======
+	MPP_FUNC_CTRL(0, 15, NULL, dove_pmu_mpp_ctrl),
+	MPP_FUNC_CTRL(16, 23, NULL, dove_mpp_ctrl),
+>>>>>>> v3.18
 	MPP_FUNC_CTRL(24, 39, "mpp_camera", dove_mpp4_ctrl),
 	MPP_FUNC_CTRL(40, 45, "mpp_sdio0", dove_mpp4_ctrl),
 	MPP_FUNC_CTRL(46, 51, "mpp_sdio1", dove_mpp4_ctrl),
@@ -664,8 +737,11 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x03, "sdio0", "cd"),
 		MPP_FUNCTION(0x0f, "lcd0", "pwm"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -678,6 +754,9 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(1,
 		MPP_FUNCTION(0x00, "gpio", NULL),
@@ -685,8 +764,11 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x03, "sdio0", "wp"),
 		MPP_FUNCTION(0x0f, "lcd1", "pwm"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -699,6 +781,9 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(2,
 		MPP_FUNCTION(0x00, "gpio", NULL),
@@ -707,8 +792,11 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x03, "sdio0", "buspwr"),
 		MPP_FUNCTION(0x04, "uart1", "rts"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -721,6 +809,9 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(3,
 		MPP_FUNCTION(0x00, "gpio", NULL),
@@ -730,8 +821,11 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x04, "uart1", "cts"),
 		MPP_FUNCTION(0x0f, "lcd-spi", "cs1"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -744,6 +838,9 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(4,
 		MPP_FUNCTION(0x00, "gpio", NULL),
@@ -751,8 +848,11 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x03, "sdio1", "cd"),
 		MPP_FUNCTION(0x04, "spi1", "miso"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -765,6 +865,9 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(5,
 		MPP_FUNCTION(0x00, "gpio", NULL),
@@ -772,8 +875,11 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x03, "sdio1", "wp"),
 		MPP_FUNCTION(0x04, "spi1", "cs"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -786,6 +892,9 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(6,
 		MPP_FUNCTION(0x00, "gpio", NULL),
@@ -793,8 +902,11 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x03, "sdio1", "buspwr"),
 		MPP_FUNCTION(0x04, "spi1", "mosi"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -807,12 +919,16 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(7,
 		MPP_FUNCTION(0x00, "gpio", NULL),
 		MPP_FUNCTION(0x02, "uart3", "rxd"),
 		MPP_FUNCTION(0x03, "sdio1", "ledctrl"),
 		MPP_FUNCTION(0x04, "spi1", "sck"),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 	MPP_MODE(8,
@@ -828,6 +944,8 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x05, "ssp", "sclk"),
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -885,6 +1003,9 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(11,
 		MPP_FUNCTION(0x00, "gpio", NULL),
@@ -894,8 +1015,11 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x04, "sdio1", "ledctrl"),
 		MPP_FUNCTION(0x05, "pex0", "clkreq"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -908,6 +1032,9 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(12,
 		MPP_FUNCTION(0x00, "gpio", NULL),
@@ -916,8 +1043,11 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x03, "audio0", "extclk"),
 		MPP_FUNCTION(0x04, "sdio1", "cd"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -930,6 +1060,9 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(13,
 		MPP_FUNCTION(0x00, "gpio", NULL),
@@ -938,8 +1071,11 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x04, "sdio1", "wp"),
 		MPP_FUNCTION(0x05, "ssp", "extclk"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -952,6 +1088,9 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(14,
 		MPP_FUNCTION(0x00, "gpio", NULL),
@@ -959,8 +1098,11 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x04, "sdio1", "buspwr"),
 		MPP_FUNCTION(0x05, "ssp", "rxd"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -973,6 +1115,9 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(15,
 		MPP_FUNCTION(0x00, "gpio", NULL),
@@ -980,8 +1125,11 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(0x04, "sdio1", "ledctrl"),
 		MPP_FUNCTION(0x05, "ssp", "sfrm"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		MPP_FUNCTION(0x10, "pmu", NULL)),
 =======
+=======
+>>>>>>> v3.18
 		MPP_FUNCTION(CONFIG_PMU | 0x0, "pmu-nc", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x1, "pmu-low", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0x2, "pmu-high", NULL),
@@ -994,6 +1142,9 @@ static struct mvebu_mpp_mode dove_mpp_modes[] = {
 		MPP_FUNCTION(CONFIG_PMU | 0xc, "ext1-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xd, "ext2-wakeup", NULL),
 		MPP_FUNCTION(CONFIG_PMU | 0xe, "pmu-blink", NULL)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(16,
 		MPP_FUNCTION(0x00, "gpio", NULL),
@@ -1110,9 +1261,12 @@ static struct of_device_id dove_pinctrl_of_match[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dove_pinctrl_probe(struct platform_device *pdev)
 {
 =======
+=======
+>>>>>>> v3.18
 static struct regmap_config gc_regmap_config = {
 	.reg_bits = 32,
 	.val_bits = 32,
@@ -1124,6 +1278,9 @@ static int dove_pinctrl_probe(struct platform_device *pdev)
 {
 	struct resource *res, *mpp_res;
 	struct resource fb_res;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct of_device_id *match =
 		of_match_device(dove_pinctrl_of_match, &pdev->dev);
@@ -1137,11 +1294,14 @@ static int dove_pinctrl_probe(struct platform_device *pdev)
 	if (IS_ERR(clk)) {
 		dev_err(&pdev->dev, "Unable to get pdma clock");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return PTR_RET(clk);
 	}
 	clk_prepare_enable(clk);
 
 =======
+=======
+>>>>>>> v3.18
 		return PTR_ERR(clk);
 	}
 	clk_prepare_enable(clk);
@@ -1199,6 +1359,9 @@ static int dove_pinctrl_probe(struct platform_device *pdev)
 	if (fb_res.start)
 		dev_warn(&pdev->dev, FW_BUG "Missing pinctrl regs in DTB. Please update your firmware.\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return mvebu_pinctrl_probe(pdev);
 }
@@ -1218,7 +1381,11 @@ static struct platform_driver dove_pinctrl_driver = {
 		.name = "dove-pinctrl",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(dove_pinctrl_of_match),
+=======
+		.of_match_table = dove_pinctrl_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = dove_pinctrl_of_match,
 >>>>>>> v3.18

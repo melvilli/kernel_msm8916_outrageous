@@ -65,11 +65,17 @@ static int ad2s90_probe(struct spi_device *spi)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
@@ -90,7 +96,11 @@ static int ad2s90_probe(struct spi_device *spi)
 	ret = iio_device_register(indio_dev);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -102,11 +112,14 @@ static int ad2s90_probe(struct spi_device *spi)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 error_free_dev:
 	iio_device_free(indio_dev);
 error_ret:
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -115,7 +128,10 @@ static int ad2s90_remove(struct spi_device *spi)
 {
 	iio_device_unregister(spi_get_drvdata(spi));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(spi_get_drvdata(spi));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

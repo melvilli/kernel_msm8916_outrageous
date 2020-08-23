@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -52,7 +56,10 @@ acpi_status acpi_allocate_root_table(u32 initial_table_count);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * tbxfroot - Root pointer utilities
  */
 u32 acpi_tb_get_rsdp_length(struct acpi_table_rsdp *rsdp);
@@ -87,6 +94,9 @@ u8 acpi_tb_is_table_loaded(u32 table_index);
 void acpi_tb_set_table_loaded_flag(u32 table_index, u8 is_loaded);
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * tbfadt - FADT parse/convert/validate
  */
@@ -107,6 +117,7 @@ acpi_tb_find_table(char *signature,
 acpi_status acpi_tb_resize_root_table_list(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_tb_verify_table(struct acpi_table_desc *table_desc);
 
 struct acpi_table_header *acpi_tb_table_override(struct acpi_table_header
@@ -117,6 +128,8 @@ struct acpi_table_header *acpi_tb_table_override(struct acpi_table_header
 acpi_status
 acpi_tb_add_table(struct acpi_table_desc *table_desc, u32 *table_index);
 =======
+=======
+>>>>>>> v3.18
 acpi_status acpi_tb_validate_table(struct acpi_table_desc *table_desc);
 
 void acpi_tb_invalidate_table(struct acpi_table_desc *table_desc);
@@ -136,6 +149,9 @@ acpi_status
 acpi_tb_install_standard_table(acpi_physical_address address,
 			       u8 flags,
 			       u8 reload, u8 override, u32 *table_index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 acpi_status
@@ -144,7 +160,11 @@ acpi_tb_store_table(acpi_physical_address address,
 		    u32 length, u8 flags, u32 *table_index);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void acpi_tb_delete_table(struct acpi_table_desc *table_desc);
+=======
+void acpi_tb_uninstall_table(struct acpi_table_desc *table_desc);
+>>>>>>> v3.18
 =======
 void acpi_tb_uninstall_table(struct acpi_table_desc *table_desc);
 >>>>>>> v3.18
@@ -160,10 +180,13 @@ acpi_status acpi_tb_release_owner_id(u32 table_index);
 acpi_status acpi_tb_get_owner_id(u32 table_index, acpi_owner_id *owner_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 acpi_tb_is_table_loaded(u32 table_index);
 
 void acpi_tb_set_table_loaded_flag(u32 table_index, u8 is_loaded);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -188,9 +211,12 @@ struct acpi_table_header *acpi_tb_copy_dsdt(u32 table_index);
 
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_tb_install_table(acpi_physical_address address,
 		      char *signature, u32 table_index);
 =======
+=======
+>>>>>>> v3.18
 acpi_tb_install_table_with_override(u32 table_index,
 				    struct acpi_table_desc *new_table_desc,
 				    u8 override);
@@ -198,6 +224,9 @@ acpi_tb_install_table_with_override(u32 table_index,
 acpi_status
 acpi_tb_install_fixed_table(acpi_physical_address address,
 			    char *signature, u32 table_index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 acpi_status acpi_tb_parse_root_table(acpi_physical_address rsdp_address);

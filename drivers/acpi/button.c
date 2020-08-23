@@ -32,8 +32,12 @@
 #include <linux/input.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -85,10 +89,13 @@ static void acpi_button_notify(struct acpi_device *device, u32 event);
 
 #ifdef CONFIG_PM_SLEEP
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int acpi_button_resume(struct device *dev);
 #endif
 static SIMPLE_DEV_PM_OPS(acpi_button_pm, NULL, acpi_button_resume);
 =======
+=======
+>>>>>>> v3.18
 static int acpi_button_suspend(struct device *dev);
 static int acpi_button_resume(struct device *dev);
 #else
@@ -96,6 +103,9 @@ static int acpi_button_resume(struct device *dev);
 #define acpi_button_resume NULL
 #endif
 static SIMPLE_DEV_PM_OPS(acpi_button_pm, acpi_button_suspend, acpi_button_resume);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct acpi_driver acpi_button_driver = {
@@ -116,7 +126,11 @@ struct acpi_button {
 	char phys[32];			/* for input device */
 	unsigned long pushed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool wakeup_enabled;
+=======
+	bool suspended;
+>>>>>>> v3.18
 =======
 	bool suspended;
 >>>>>>> v3.18
@@ -312,10 +326,13 @@ static void acpi_button_notify(struct acpi_device *device, u32 event)
 			acpi_lid_send_state(device);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int keycode = test_bit(KEY_SLEEP, input->keybit) ?
 						KEY_SLEEP : KEY_POWER;
 
 =======
+=======
+>>>>>>> v3.18
 			int keycode;
 
 			pm_wakeup_event(&device->dev, 0);
@@ -324,6 +341,9 @@ static void acpi_button_notify(struct acpi_device *device, u32 event)
 
 			keycode = test_bit(KEY_SLEEP, input->keybit) ?
 						KEY_SLEEP : KEY_POWER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			input_report_key(input, keycode, 1);
 			input_sync(input);
@@ -331,16 +351,22 @@ static void acpi_button_notify(struct acpi_device *device, u32 event)
 			input_sync(input);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pm_wakeup_event(&device->dev, 0);
 		}
 
 		acpi_bus_generate_proc_event(device, event, ++button->pushed);
 =======
+=======
+>>>>>>> v3.18
 			acpi_bus_generate_netlink_event(
 					device->pnp.device_class,
 					dev_name(&device->dev),
 					event, ++button->pushed);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -352,7 +378,10 @@ static void acpi_button_notify(struct acpi_device *device, u32 event)
 
 #ifdef CONFIG_PM_SLEEP
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int acpi_button_suspend(struct device *dev)
 {
 	struct acpi_device *device = to_acpi_device(dev);
@@ -362,6 +391,9 @@ static int acpi_button_suspend(struct device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int acpi_button_resume(struct device *dev)
 {
@@ -369,6 +401,10 @@ static int acpi_button_resume(struct device *dev)
 	struct acpi_button *button = acpi_driver_data(device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	button->suspended = false;
+>>>>>>> v3.18
 =======
 	button->suspended = false;
 >>>>>>> v3.18
@@ -439,6 +475,7 @@ static int acpi_button_add(struct acpi_device *device)
 	switch (button->type) {
 	case ACPI_BUTTON_TYPE_POWER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		input->evbit[0] = BIT_MASK(EV_KEY);
 		set_bit(KEY_POWER, input->keybit);
 		break;
@@ -452,6 +489,8 @@ static int acpi_button_add(struct acpi_device *device)
 		input->evbit[0] = BIT_MASK(EV_SW);
 		set_bit(SW_LID, input->swbit);
 =======
+=======
+>>>>>>> v3.18
 		input_set_capability(input, EV_KEY, KEY_POWER);
 		break;
 
@@ -461,6 +500,9 @@ static int acpi_button_add(struct acpi_device *device)
 
 	case ACPI_BUTTON_TYPE_LID:
 		input_set_capability(input, EV_SW, SW_LID);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -478,6 +520,7 @@ static int acpi_button_add(struct acpi_device *device)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device->wakeup.flags.valid) {
 		/* Button's GPE is run-wake GPE */
 		acpi_enable_gpe(device->wakeup.gpe_device,
@@ -488,6 +531,8 @@ static int acpi_button_add(struct acpi_device *device)
 		}
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	printk(KERN_INFO PREFIX "%s [%s]\n", name, acpi_device_bid(device));
@@ -507,6 +552,7 @@ static int acpi_button_remove(struct acpi_device *device)
 	struct acpi_button *button = acpi_driver_data(device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device->wakeup.flags.valid) {
 		acpi_disable_gpe(device->wakeup.gpe_device,
 				device->wakeup.gpe_number);
@@ -514,6 +560,8 @@ static int acpi_button_remove(struct acpi_device *device)
 			device_set_wakeup_enable(&device->dev, false);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	acpi_button_remove_fs(device);

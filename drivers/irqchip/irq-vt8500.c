@@ -179,15 +179,21 @@ static struct irq_domain_ops vt8500_irq_domain_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void __exception_irq_entry vt8500_handle_irq(struct pt_regs *regs)
 {
 	u32 stat, i;
 	int irqnr, virq;
 =======
+=======
+>>>>>>> v3.18
 static void __exception_irq_entry vt8500_handle_irq(struct pt_regs *regs)
 {
 	u32 stat, i;
 	int irqnr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void __iomem *base;
 
@@ -206,6 +212,7 @@ static void __exception_irq_entry vt8500_handle_irq(struct pt_regs *regs)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		virq = irq_find_mapping(intc[i].domain, irqnr);
 		handle_IRQ(virq, regs);
 	}
@@ -213,12 +220,17 @@ static void __exception_irq_entry vt8500_handle_irq(struct pt_regs *regs)
 
 int __init vt8500_irq_init(struct device_node *node, struct device_node *parent)
 =======
+=======
+>>>>>>> v3.18
 		handle_domain_irq(intc[i].domain, irqnr, regs);
 	}
 }
 
 static int __init vt8500_irq_init(struct device_node *node,
 				  struct device_node *parent)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int irq, i;

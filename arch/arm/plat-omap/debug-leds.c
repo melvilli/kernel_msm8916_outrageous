@@ -86,7 +86,11 @@ static void dbg_led_set(struct led_classdev *cdev,
 	u16 reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg = __raw_readw(&fpga->leds);
+=======
+	reg = readw_relaxed(&fpga->leds);
+>>>>>>> v3.18
 =======
 	reg = readw_relaxed(&fpga->leds);
 >>>>>>> v3.18
@@ -95,7 +99,11 @@ static void dbg_led_set(struct led_classdev *cdev,
 	else
 		reg &= ~led->mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writew(reg, &fpga->leds);
+=======
+	writew_relaxed(reg, &fpga->leds);
+>>>>>>> v3.18
 =======
 	writew_relaxed(reg, &fpga->leds);
 >>>>>>> v3.18
@@ -107,7 +115,11 @@ static enum led_brightness dbg_led_get(struct led_classdev *cdev)
 	u16 reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg = __raw_readw(&fpga->leds);
+=======
+	reg = readw_relaxed(&fpga->leds);
+>>>>>>> v3.18
 =======
 	reg = readw_relaxed(&fpga->leds);
 >>>>>>> v3.18
@@ -125,7 +137,11 @@ static int fpga_probe(struct platform_device *pdev)
 
 	fpga = ioremap(iomem->start, resource_size(iomem));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writew(0xff, &fpga->leds);
+=======
+	writew_relaxed(0xff, &fpga->leds);
+>>>>>>> v3.18
 =======
 	writew_relaxed(0xff, &fpga->leds);
 >>>>>>> v3.18
@@ -155,8 +171,13 @@ static int fpga_probe(struct platform_device *pdev)
 static int fpga_suspend_noirq(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fpga_led_state = __raw_readw(&fpga->leds);
 	__raw_writew(0xff, &fpga->leds);
+=======
+	fpga_led_state = readw_relaxed(&fpga->leds);
+	writew_relaxed(0xff, &fpga->leds);
+>>>>>>> v3.18
 =======
 	fpga_led_state = readw_relaxed(&fpga->leds);
 	writew_relaxed(0xff, &fpga->leds);
@@ -168,7 +189,11 @@ static int fpga_suspend_noirq(struct device *dev)
 static int fpga_resume_noirq(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writew(~fpga_led_state, &fpga->leds);
+=======
+	writew_relaxed(~fpga_led_state, &fpga->leds);
+>>>>>>> v3.18
 =======
 	writew_relaxed(~fpga_led_state, &fpga->leds);
 >>>>>>> v3.18

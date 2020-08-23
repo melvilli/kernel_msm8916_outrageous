@@ -15,6 +15,11 @@ void pvclock_read_wallclock(struct pvclock_wall_clock *wall,
 void pvclock_resume(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void pvclock_touch_watchdogs(void);
+
+>>>>>>> v3.18
 =======
 void pvclock_touch_watchdogs(void);
 
@@ -99,7 +104,10 @@ unsigned __pvclock_read_cycles(const struct pvclock_vcpu_time_info *src,
 struct pvclock_vsyscall_time_info {
 	struct pvclock_vcpu_time_info pvti;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 migrate_count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 } __attribute__((__aligned__(SMP_CACHE_BYTES)));

@@ -23,7 +23,11 @@
 #include <linux/platform_device.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 >>>>>>> v3.18
@@ -38,17 +42,24 @@
 #include <linux/clk.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/gpio-davinci.h>
 #include <linux/platform_data/i2c-davinci.h>
 #include <linux/platform_data/mtd-davinci.h>
 #include <linux/platform_data/mtd-davinci-aemif.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
 #include <mach/common.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <mach/serial.h>
 #include <linux/platform_data/i2c-davinci.h>
@@ -57,10 +68,15 @@
 #include <mach/cdce949.h>
 #include <linux/platform_data/mtd-davinci-aemif.h>
 =======
+=======
+>>>>>>> v3.18
 #include <mach/irqs.h>
 #include <mach/serial.h>
 #include <mach/clock.h>
 #include <mach/cdce949.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "davinci.h"
@@ -769,10 +785,13 @@ static void __init davinci_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct davinci_uart_config uart_config __initdata = {
 	.enabled_uarts = (1 << 0),
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DM646X_EVM_PHY_ID		"davinci_mdio-0:01"
@@ -812,11 +831,14 @@ static struct edma_rsv_info dm646x_edma_rsv[] = {
 static __init void evm_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct davinci_soc_info *soc_info = &davinci_soc_info;
 
 	evm_init_i2c();
 	davinci_serial_init(&uart_config);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	struct davinci_soc_info *soc_info = &davinci_soc_info;
 
@@ -826,6 +848,9 @@ static __init void evm_init(void)
 
 	evm_init_i2c();
 	davinci_serial_init(dm646x_serial_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dm646x_init_mcasp0(&dm646x_evm_snd_data[0]);
 	dm646x_init_mcasp1(&dm646x_evm_snd_data[1]);
@@ -836,6 +861,12 @@ static __init void evm_init(void)
 	platform_device_register(&davinci_nand_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (davinci_aemif_setup(&davinci_nand_device))
+		pr_warn("%s: Cannot configure AEMIF.\n", __func__);
+
+>>>>>>> v3.18
 =======
 	if (davinci_aemif_setup(&davinci_nand_device))
 		pr_warn("%s: Cannot configure AEMIF.\n", __func__);

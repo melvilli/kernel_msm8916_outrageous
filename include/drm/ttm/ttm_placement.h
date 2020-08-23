@@ -66,6 +66,11 @@
  * TTM_PL_FLAG_NO_EVICT means that the buffer may never
  * be evicted to make room for other buffers.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * TTM_PL_FLAG_TOPDOWN requests to be placed from the
+ * top of the memory area, instead of the bottom.
+>>>>>>> v3.18
 =======
  * TTM_PL_FLAG_TOPDOWN requests to be placed from the
  * top of the memory area, instead of the bottom.
@@ -78,6 +83,10 @@
 #define TTM_PL_FLAG_SHARED      (1 << 20)
 #define TTM_PL_FLAG_NO_EVICT    (1 << 21)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TTM_PL_FLAG_TOPDOWN     (1 << 22)
+>>>>>>> v3.18
 =======
 #define TTM_PL_FLAG_TOPDOWN     (1 << 22)
 >>>>>>> v3.18

@@ -49,7 +49,10 @@
 #define SUMO2_GB_ADDR_CONFIG_GOLDEN          0x02010002
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* pm registers */
 #define	SMC_MSG						0x20c
 #define		HOST_SMC_MSG(x)				((x) << 0)
@@ -341,6 +344,9 @@
 
 #define CGTS_SM_CTRL_REG                                0x9150
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Registers */
 
@@ -385,7 +391,10 @@
 #define	CG_SCRATCH1					0x820
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define RLC_CNTL                                        0x3f00
 #       define RLC_ENABLE                               (1 << 0)
 #       define GFX_POWER_GATING_ENABLE                  (1 << 7)
@@ -414,6 +423,9 @@
 #define TN_RLC_LB_ALWAYS_ACTIVE_SIMD_MASK                 0x3fe8
 #define TN_RLC_LB_PARAMS                                  0x3fec
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define GRBM_GFX_INDEX          			0x802C
 #define		INSTANCE_INDEX(x)			((x) << 0)
@@ -508,6 +520,12 @@
 #define DCCG_AUDIO_DTO0_LOAD              0x05b8
 #define DCCG_AUDIO_DTO0_CNTL              0x05bc
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#       define DCCG_AUDIO_DTO_WALLCLOCK_RATIO(x) (((x) & 7) << 0)
+#       define DCCG_AUDIO_DTO_WALLCLOCK_RATIO_MASK 7
+#       define DCCG_AUDIO_DTO_WALLCLOCK_RATIO_SHIFT 0
+>>>>>>> v3.18
 =======
 #       define DCCG_AUDIO_DTO_WALLCLOCK_RATIO(x) (((x) & 7) << 0)
 #       define DCCG_AUDIO_DTO_WALLCLOCK_RATIO_MASK 7
@@ -527,16 +545,22 @@
 #       define HDMI_ERROR_MASK               (1 << 9)
 #       define HDMI_DEEP_COLOR_ENABLE        (1 << 24)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #       define HDMI_DEEP_COLOR_DEPTH         (((x) & 3) << 28)
 #       define HDMI_24BIT_DEEP_COLOR         0
 #       define HDMI_30BIT_DEEP_COLOR         1
 #       define HDMI_36BIT_DEEP_COLOR         2
 =======
+=======
+>>>>>>> v3.18
 #       define HDMI_DEEP_COLOR_DEPTH(x)      (((x) & 3) << 28)
 #       define HDMI_24BIT_DEEP_COLOR         0
 #       define HDMI_30BIT_DEEP_COLOR         1
 #       define HDMI_36BIT_DEEP_COLOR         2
 #       define HDMI_DEEP_COLOR_DEPTH_MASK    (3 << 28)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define HDMI_STATUS                          0x7034
 #       define HDMI_ACTIVE_AVMUTE            (1 << 0)
@@ -736,7 +760,10 @@
 
 /* DCE4/5 ELD audio interface */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AZ_F0_CODEC_PIN0_CONTROL_CHANNEL_SPEAKER          0x5f78
 #define		SPEAKER_ALLOCATION(x)			(((x) & 0x7f) << 0)
 #define		SPEAKER_ALLOCATION_MASK			(0x7f << 0)
@@ -744,6 +771,9 @@
 #define		HDMI_CONNECTION				(1 << 16)
 #define		DP_CONNECTION				(1 << 17)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AZ_F0_CODEC_PIN0_CONTROL_AUDIO_DESCRIPTOR0        0x5f84 /* LPCM */
 #define AZ_F0_CODEC_PIN0_CONTROL_AUDIO_DESCRIPTOR1        0x5f88 /* AC3 */
@@ -775,7 +805,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AZ_CHANNEL_COUNT_CONTROL                          0x5fe4
 #       define HBR_CHANNEL_COUNT(x)                       (((x) & 0x7) << 0)
 #       define COMPRESSED_CHANNEL_COUNT(x)                (((x) & 0x7) << 4)
@@ -814,6 +847,9 @@
 #define AZ_F0_CODEC_PIN0_CONTROL_RESPONSE_AV_NUMBER       0x5ffc
 #       define NUMBER_OF_DISPLAY_ID(x)                    (((x) & 0x7) << 0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AZ_HOT_PLUG_CONTROL                               0x5e78
 #       define AZ_FORCE_CODEC_WAKE                        (1 << 0)
@@ -894,7 +930,10 @@
 #define		TOFFSET_MASK			        0x00003FE0
 #define		TOFFSET_SHIFT			        5
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define		DIG_THERM_DPM(x)			((x) << 14)
 #define		DIG_THERM_DPM_MASK			0x003FC000
 #define		DIG_THERM_DPM_SHIFT			14
@@ -919,6 +958,9 @@
 #define 	TN_THERM_INT_MASK_HIGH			(1 << 24)
 #define 	TN_THERM_INT_MASK_LOW			(1 << 25)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	CG_MULT_THERMAL_STATUS				0x740
 #define		ASIC_T(x)			        ((x) << 16)
@@ -928,6 +970,10 @@
 #define		TS0_ADC_DOUT_MASK			0x000003FF
 #define		TS0_ADC_DOUT_SHIFT			0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1384,7 +1430,10 @@
 #       define DC_HPDx_EN                                 (1 << 28)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* DCE4/5/6 FMT blocks */
 #define FMT_DYNAMIC_EXP_CNTL                 0x6fb4
 #       define FMT_DYNAMIC_EXP_EN            (1 << 0)
@@ -1417,6 +1466,9 @@
 #       define FMT_CLAMP_8BPC                1
 #       define FMT_CLAMP_10BPC               2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* ASYNC DMA */
 #define DMA_RB_RPTR                                       0xd008
@@ -1453,8 +1505,11 @@
 #define	DMA_PACKET_NOP                          0xf
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* PCIE link stuff */
 =======
+=======
+>>>>>>> v3.18
 /* PIF PHY0 indirect regs */
 #define PB0_PIF_CNTL                                      0x10
 #       define LS2_EXIT_TIME(x)                           ((x) << 17)
@@ -1497,6 +1552,9 @@
 #       define LC_L1_INACTIVITY_SHIFT                     12
 #       define LC_PMI_TO_L1_DIS                           (1 << 16)
 #       define LC_ASPM_TO_L1_DIS                          (1 << 24)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PCIE_LC_TRAINING_CNTL                             0xa1 /* PCIE_P */
 #define PCIE_LC_LINK_WIDTH_CNTL                           0xa2 /* PCIE_P */
@@ -1518,6 +1576,12 @@
 #       define LC_UPCONFIGURE_SUPPORT                     (1 << 12)
 #       define LC_UPCONFIGURE_DIS                         (1 << 13)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#       define LC_DYN_LANES_PWR_STATE(x)                  ((x) << 21)
+#       define LC_DYN_LANES_PWR_STATE_MASK                (0x3 << 21)
+#       define LC_DYN_LANES_PWR_STATE_SHIFT               21
+>>>>>>> v3.18
 =======
 #       define LC_DYN_LANES_PWR_STATE(x)                  ((x) << 21)
 #       define LC_DYN_LANES_PWR_STATE_MASK                (0x3 << 21)
@@ -1532,6 +1596,12 @@
 #       define LC_SPEED_CHANGE_ATTEMPTS_ALLOWED_SHIFT     3
 #       define LC_CURRENT_DATA_RATE                       (1 << 11)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#       define LC_HW_VOLTAGE_IF_CONTROL(x)                ((x) << 12)
+#       define LC_HW_VOLTAGE_IF_CONTROL_MASK              (3 << 12)
+#       define LC_HW_VOLTAGE_IF_CONTROL_SHIFT             12
+>>>>>>> v3.18
 =======
 #       define LC_HW_VOLTAGE_IF_CONTROL(x)                ((x) << 12)
 #       define LC_HW_VOLTAGE_IF_CONTROL_MASK              (3 << 12)

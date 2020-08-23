@@ -16,6 +16,10 @@
 #include "pnfs.h"
 #include "nfs4session.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "nfs4trace.h"
+>>>>>>> v3.18
 =======
 #include "nfs4trace.h"
 >>>>>>> v3.18
@@ -98,6 +102,10 @@ __be32 nfs4_callback_recall(struct cb_recallargs *args, void *dummy,
 		res = htonl(NFS4ERR_RESOURCE);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_nfs4_recall_delegation(inode, -ntohl(res));
+>>>>>>> v3.18
 =======
 	trace_nfs4_recall_delegation(inode, -ntohl(res));
 >>>>>>> v3.18
@@ -119,7 +127,12 @@ out:
  * hashed by filehandle.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pnfs_layout_hdr * get_layout_by_fh_locked(struct nfs_client *clp, struct nfs_fh *fh)
+=======
+static struct pnfs_layout_hdr * get_layout_by_fh_locked(struct nfs_client *clp,
+		struct nfs_fh *fh, nfs4_stateid *stateid)
+>>>>>>> v3.18
 =======
 static struct pnfs_layout_hdr * get_layout_by_fh_locked(struct nfs_client *clp,
 		struct nfs_fh *fh, nfs4_stateid *stateid)
@@ -132,6 +145,11 @@ static struct pnfs_layout_hdr * get_layout_by_fh_locked(struct nfs_client *clp,
 	list_for_each_entry_rcu(server, &clp->cl_superblocks, client_link) {
 		list_for_each_entry(lo, &server->layouts, plh_layouts) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (!nfs4_stateid_match_other(&lo->plh_stateid, stateid))
+				continue;
+>>>>>>> v3.18
 =======
 			if (!nfs4_stateid_match_other(&lo->plh_stateid, stateid))
 				continue;
@@ -141,7 +159,11 @@ static struct pnfs_layout_hdr * get_layout_by_fh_locked(struct nfs_client *clp,
 			ino = igrab(lo->plh_inode);
 			if (!ino)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				continue;
+=======
+				break;
+>>>>>>> v3.18
 =======
 				break;
 >>>>>>> v3.18
@@ -151,7 +173,11 @@ static struct pnfs_layout_hdr * get_layout_by_fh_locked(struct nfs_client *clp,
 				spin_unlock(&ino->i_lock);
 				iput(ino);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				continue;
+=======
+				break;
+>>>>>>> v3.18
 =======
 				break;
 >>>>>>> v3.18
@@ -166,7 +192,12 @@ static struct pnfs_layout_hdr * get_layout_by_fh_locked(struct nfs_client *clp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pnfs_layout_hdr * get_layout_by_fh(struct nfs_client *clp, struct nfs_fh *fh)
+=======
+static struct pnfs_layout_hdr * get_layout_by_fh(struct nfs_client *clp,
+		struct nfs_fh *fh, nfs4_stateid *stateid)
+>>>>>>> v3.18
 =======
 static struct pnfs_layout_hdr * get_layout_by_fh(struct nfs_client *clp,
 		struct nfs_fh *fh, nfs4_stateid *stateid)
@@ -177,7 +208,11 @@ static struct pnfs_layout_hdr * get_layout_by_fh(struct nfs_client *clp,
 	spin_lock(&clp->cl_lock);
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lo = get_layout_by_fh_locked(clp, fh);
+=======
+	lo = get_layout_by_fh_locked(clp, fh, stateid);
+>>>>>>> v3.18
 =======
 	lo = get_layout_by_fh_locked(clp, fh, stateid);
 >>>>>>> v3.18
@@ -196,6 +231,7 @@ static u32 initiate_file_draining(struct nfs_client *clp,
 	LIST_HEAD(free_me_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lo = get_layout_by_fh(clp, &args->cbl_fh);
 	if (!lo)
 		return NFS4ERR_NOMATCHING_LAYOUT;
@@ -210,6 +246,8 @@ static u32 initiate_file_draining(struct nfs_client *clp,
 		rv = NFS4ERR_NOMATCHING_LAYOUT;
 	pnfs_set_layout_stateid(lo, &args->cbl_stateid, true);
 =======
+=======
+>>>>>>> v3.18
 	lo = get_layout_by_fh(clp, &args->cbl_fh, &args->cbl_stateid);
 	if (!lo)
 		goto out;
@@ -235,12 +273,19 @@ static u32 initiate_file_draining(struct nfs_client *clp,
 			&args->cbl_range);
 	}
 unlock:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&ino->i_lock);
 	pnfs_free_lseg_list(&free_me_list);
 	pnfs_put_layout_hdr(lo);
 	iput(ino);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+>>>>>>> v3.18
 =======
 out:
 >>>>>>> v3.18
@@ -338,9 +383,12 @@ __be32 nfs4_callback_devicenotify(struct cb_devicenotifyargs *args,
 
 	found:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dev->cbd_notify_type == NOTIFY_DEVICEID4_CHANGE)
 			dprintk("%s: NOTIFY_DEVICEID4_CHANGE not supported, "
 				"deleting instead\n", __func__);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		nfs4_delete_deviceid(server->pnfs_curr_ld, clp, &dev->cbd_dev_id);
@@ -372,7 +420,11 @@ validate_seqid(struct nfs4_slot_table *tbl, struct cb_sequenceargs * args)
 	struct nfs4_slot *slot;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("%s enter. slotid %d seqid %d\n",
+=======
+	dprintk("%s enter. slotid %u seqid %u\n",
+>>>>>>> v3.18
 =======
 	dprintk("%s enter. slotid %u seqid %u\n",
 >>>>>>> v3.18
@@ -383,7 +435,11 @@ validate_seqid(struct nfs4_slot_table *tbl, struct cb_sequenceargs * args)
 
 	slot = tbl->slots + args->csa_slotid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("%s slot table seqid: %d\n", __func__, slot->seq_nr);
+=======
+	dprintk("%s slot table seqid: %u\n", __func__, slot->seq_nr);
+>>>>>>> v3.18
 =======
 	dprintk("%s slot table seqid: %u\n", __func__, slot->seq_nr);
 >>>>>>> v3.18
@@ -397,7 +453,11 @@ validate_seqid(struct nfs4_slot_table *tbl, struct cb_sequenceargs * args)
 	/* Replay */
 	if (args->csa_sequenceid == slot->seq_nr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dprintk("%s seqid %d is a replay\n",
+=======
+		dprintk("%s seqid %u is a replay\n",
+>>>>>>> v3.18
 =======
 		dprintk("%s seqid %u is a replay\n",
 >>>>>>> v3.18
@@ -489,7 +549,12 @@ __be32 nfs4_callback_sequence(struct cb_sequenceargs *args,
 	__be32 status = htonl(NFS4ERR_BADSESSION);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clp = nfs4_find_client_sessionid(cps->net, args->csa_addr, &args->csa_sessionid);
+=======
+	clp = nfs4_find_client_sessionid(cps->net, args->csa_addr,
+					 &args->csa_sessionid, cps->minorversion);
+>>>>>>> v3.18
 =======
 	clp = nfs4_find_client_sessionid(cps->net, args->csa_addr,
 					 &args->csa_sessionid, cps->minorversion);
@@ -549,6 +614,10 @@ out:
 		res->csr_status = status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_nfs4_cb_sequence(args, res, status);
+>>>>>>> v3.18
 =======
 	trace_nfs4_cb_sequence(args, res, status);
 >>>>>>> v3.18
@@ -609,7 +678,11 @@ __be32 nfs4_callback_recallslot(struct cb_recallslotargs *args, void *dummy,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk_rcu("NFS: CB_RECALL_SLOT request from %s target highest slotid %d\n",
+=======
+	dprintk_rcu("NFS: CB_RECALL_SLOT request from %s target highest slotid %u\n",
+>>>>>>> v3.18
 =======
 	dprintk_rcu("NFS: CB_RECALL_SLOT request from %s target highest slotid %u\n",
 >>>>>>> v3.18

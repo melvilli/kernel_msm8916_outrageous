@@ -69,6 +69,11 @@ enum {
 extern int mlx4_ib_sm_guid_assign;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MLX4_IB_UC_STEER_QPN_ALIGN 1
+#define MLX4_IB_UC_MAX_NUM_QPS     256
+>>>>>>> v3.18
 =======
 #define MLX4_IB_UC_STEER_QPN_ALIGN 1
 #define MLX4_IB_UC_MAX_NUM_QPS     256
@@ -138,13 +143,19 @@ struct mlx4_ib_fmr {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct mlx4_ib_flow {
 	struct ib_flow ibflow;
 	/* translating DMFS verbs sniffer rule to FW API requires two reg IDs */
 	u64 reg_id[2];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct mlx4_ib_wq {
 	u64		       *wrid;
@@ -162,6 +173,11 @@ enum mlx4_ib_qp_flags {
 	MLX4_IB_QP_LSO = IB_QP_CREATE_IPOIB_UD_LSO,
 	MLX4_IB_QP_BLOCK_MULTICAST_LOOPBACK = IB_QP_CREATE_BLOCK_MULTICAST_LOOPBACK,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	MLX4_IB_QP_NETIF = IB_QP_CREATE_NETIF_QP,
+	MLX4_IB_QP_CREATE_USE_GFP_NOIO = IB_QP_CREATE_USE_GFP_NOIO,
+>>>>>>> v3.18
 =======
 	MLX4_IB_QP_NETIF = IB_QP_CREATE_NETIF_QP,
 	MLX4_IB_QP_CREATE_USE_GFP_NOIO = IB_QP_CREATE_USE_GFP_NOIO,
@@ -252,7 +268,10 @@ struct mlx4_ib_proxy_sqp_hdr {
 }  __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct mlx4_roce_smac_vlan_info {
 	u64 smac;
 	int smac_index;
@@ -269,6 +288,9 @@ struct mlx4_roce_smac_vlan_info {
 	int update_vid;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct mlx4_ib_qp {
 	struct ib_qp		ibqp;
@@ -303,7 +325,13 @@ struct mlx4_ib_qp {
 	struct list_head	steering_rules;
 	struct mlx4_ib_buf	*sqp_proxy_rcv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	struct mlx4_roce_smac_vlan_info pri;
+	struct mlx4_roce_smac_vlan_info alt;
+	u64			reg_id;
+>>>>>>> v3.18
 =======
 	struct mlx4_roce_smac_vlan_info pri;
 	struct mlx4_roce_smac_vlan_info alt;
@@ -467,13 +495,19 @@ struct mlx4_ib_iboe {
 	spinlock_t		lock;
 	struct net_device      *netdevs[MLX4_MAX_PORTS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct notifier_block 	nb;
 =======
+=======
+>>>>>>> v3.18
 	struct net_device      *masters[MLX4_MAX_PORTS];
 	atomic64_t		mac[MLX4_MAX_PORTS];
 	struct notifier_block 	nb;
 	struct notifier_block	nb_inet;
 	struct notifier_block	nb_inet6;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	union ib_gid		gid_table[MLX4_MAX_PORTS][128];
 };
@@ -541,7 +575,10 @@ struct mlx4_ib_dev {
 	struct mlx4_ib_iov_port	iov_ports[MLX4_MAX_PORTS];
 	struct pkey_mgt		pkeys;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned long *ib_uc_qpns_bitmap;
 	int steer_qpn_count;
 	int steer_qpn_base;
@@ -549,6 +586,9 @@ struct mlx4_ib_dev {
 	struct mlx4_ib_qp      *qp1_proxy[MLX4_MAX_PORTS];
 	/* lock when destroying qp1_proxy and getting netdev events */
 	struct mutex		qp1_proxy_lock[MLX4_MAX_PORTS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -615,13 +655,19 @@ static inline struct mlx4_ib_fmr *to_mfmr(struct ib_fmr *ibfmr)
 	return container_of(ibfmr, struct mlx4_ib_fmr, ibfmr);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline struct mlx4_ib_flow *to_mflow(struct ib_flow *ibflow)
 {
 	return container_of(ibflow, struct mlx4_ib_flow, ibflow);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct mlx4_ib_qp *to_mqp(struct ib_qp *ibqp)
 {
@@ -735,9 +781,12 @@ int __mlx4_ib_query_gid(struct ib_device *ibdev, u8 port, int index,
 			union ib_gid *gid, int netw_view);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mlx4_ib_resolve_grh(struct mlx4_ib_dev *dev, const struct ib_ah_attr *ah_attr,
 			u8 *mac, int *is_mcast, u8 port);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline bool mlx4_ib_ah_grh_present(struct mlx4_ib_ah *ah)
@@ -775,16 +824,22 @@ int mlx4_ib_send_to_slave(struct mlx4_ib_dev *dev, int slave, u8 port,
 			  enum ib_qp_type qpt, struct ib_wc *wc,
 			  struct ib_grh *grh, struct ib_mad *mad);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mlx4_ib_send_to_wire(struct mlx4_ib_dev *dev, int slave, u8 port,
 			 enum ib_qp_type dest_qpt, u16 pkey_index, u32 remote_qpn,
 			 u32 qkey, struct ib_ah_attr *attr, struct ib_mad *mad);
 =======
+=======
+>>>>>>> v3.18
 
 int mlx4_ib_send_to_wire(struct mlx4_ib_dev *dev, int slave, u8 port,
 			 enum ib_qp_type dest_qpt, u16 pkey_index, u32 remote_qpn,
 			 u32 qkey, struct ib_ah_attr *attr, u8 *s_mac,
 			 struct ib_mad *mad);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __be64 mlx4_ib_get_new_demux_tid(struct mlx4_ib_demux_ctx *ctx);
 
@@ -824,7 +879,10 @@ void mlx4_ib_device_unregister_sysfs(struct mlx4_ib_dev *device);
 __be64 mlx4_ib_gen_node_guid(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int mlx4_ib_steer_qp_alloc(struct mlx4_ib_dev *dev, int count, int *qpn);
 void mlx4_ib_steer_qp_free(struct mlx4_ib_dev *dev, u32 qpn, int count);
 int mlx4_ib_steer_qp_reg(struct mlx4_ib_dev *mdev, struct mlx4_ib_qp *mqp,
@@ -833,6 +891,9 @@ int mlx4_ib_rereg_user_mr(struct ib_mr *mr, int flags,
 			  u64 start, u64 length, u64 virt_addr,
 			  int mr_access_flags, struct ib_pd *pd,
 			  struct ib_udata *udata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* MLX4_IB_H */

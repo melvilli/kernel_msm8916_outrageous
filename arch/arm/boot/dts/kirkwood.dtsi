@@ -1,16 +1,23 @@
 /include/ "skeleton.dtsi"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/gpio/gpio.h>
 
 #define MBUS_ID(target,attributes) (((target) << 24) | ((attributes) << 16))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
 	compatible = "marvell,kirkwood";
 	interrupt-parent = <&intc>;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	aliases {
 	       gpio0 = &gpio0;
@@ -23,6 +30,8 @@
 		reg = <0xf1020204 0x04>,
 		      <0xf1020214 0x04>;
 =======
+=======
+>>>>>>> v3.18
 	cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -80,11 +89,15 @@
 			pinctrl-names = "default";
 			status = "disabled";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
 	ocp@f1000000 {
 		compatible = "simple-bus";
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ranges = <0x00000000 0xf1000000 0x4000000
 		          0xf5000000 0xf5000000 0x0000400>;
@@ -96,6 +109,8 @@
 			reg = <0x10030 0x4>;
 	        	#clock-cells = <1>;
 =======
+=======
+>>>>>>> v3.18
 		ranges = <0x00000000 0xf1000000 0x0100000>;
 		#address-cells = <1>;
 		#size-cells = <1>;
@@ -163,6 +178,9 @@
 			pinctrl-0 = <&pmx_spi>;
 			pinctrl-names = "default";
 			status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -191,8 +209,11 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		serial@12000 {
 =======
+=======
+>>>>>>> v3.18
 		i2c0: i2c@11000 {
 			compatible = "marvell,mv64xxx-i2c";
 			reg = <0x11000 0x20>;
@@ -207,6 +228,9 @@
 		};
 
 		uart0: serial@12000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			compatible = "ns16550a";
 			reg = <0x12000 0x100>;
@@ -214,23 +238,30 @@
 			interrupts = <33>;
 			clocks = <&gate_clk 7>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			status = "disabled";
 		};
 
 		serial@12100 {
 =======
+=======
+>>>>>>> v3.18
 			pinctrl-0 = <&pmx_uart0>;
 			pinctrl-names = "default";
 			status = "disabled";
 		};
 
 		uart1: serial@12100 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			compatible = "ns16550a";
 			reg = <0x12100 0x100>;
 			reg-shift = <2>;
 			interrupts = <34>;
 			clocks = <&gate_clk 7>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			status = "disabled";
 		};
@@ -252,6 +283,8 @@
 			clocks = <&gate_clk 7>;
 			status = "disabled";
 =======
+=======
+>>>>>>> v3.18
 			pinctrl-0 = <&pmx_uart1>;
 			pinctrl-names = "default";
 			status = "disabled";
@@ -274,6 +307,9 @@
 			reg = <0x20110 0x8>;
 			interrupts = <1>;
 			marvell,#interrupts = <6>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -285,10 +321,13 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wdt@20300 {
 			compatible = "marvell,orion-wdt";
 			reg = <0x20300 0x28>;
 =======
+=======
+>>>>>>> v3.18
 		l2: l2-cache@20128 {
 			compatible = "marvell,kirkwood-cache";
 			reg = <0x20128 0x4>;
@@ -314,14 +353,20 @@
 			reg = <0x20300 0x28>, <0x20108 0x4>;
 			interrupt-parent = <&bridge_intc>;
 			interrupts = <3>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			clocks = <&gate_clk 7>;
 			status = "okay";
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xor@60800 {
 =======
+=======
+>>>>>>> v3.18
 		usb0: ehci@50000 {
 			compatible = "marvell,orion-ehci";
 			reg = <0x50000 0x1000>;
@@ -331,6 +376,9 @@
 		};
 
 		dma0: xor@60800 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			compatible = "marvell,orion-xor";
 			reg = <0x60800 0x100
@@ -352,15 +400,21 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xor@60900 {
 			compatible = "marvell,orion-xor";
 			reg = <0x60900 0x100
 			       0xd0B00 0x100>;
 =======
+=======
+>>>>>>> v3.18
 		dma1: xor@60900 {
 			compatible = "marvell,orion-xor";
 			reg = <0x60900 0x100
 			       0x60B00 0x100>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			status = "okay";
 			clocks = <&gate_clk 16>;
@@ -378,6 +432,7 @@
 			};
 		};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ehci@50000 {
 			compatible = "marvell,orion-ehci";
@@ -437,6 +492,8 @@
 			interrupts = <28>;
 			clocks = <&gate_clk 4>;
 =======
+=======
+>>>>>>> v3.18
 		eth0: ethernet-controller@72000 {
 			compatible = "marvell,kirkwood-eth";
 			#address-cells = <1>;
@@ -514,6 +571,9 @@
 			interrupts = <24>;
 			clocks = <&gate_clk 9>;
 			clock-names = "internal";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			status = "disabled";
 		};

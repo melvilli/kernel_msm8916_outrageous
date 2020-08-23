@@ -6,6 +6,7 @@
 #   written by Ralf Baechle <ralf@linux-mips.org>
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y				:= malta-amon.o malta-display.o malta-init.o \
 				   malta-int.o malta-memory.o malta-platform.o \
 				   malta-reset.o malta-setup.o malta-time.o
@@ -16,10 +17,15 @@ obj-$(CONFIG_PCI)		+= malta-pci.o
 # FIXME FIXME FIXME
 obj-$(CONFIG_MIPS_MT_SMTC)	+= malta-smtc.o
 =======
+=======
+>>>>>>> v3.18
 obj-y				:= malta-display.o malta-init.o \
 				   malta-int.o malta-memory.o malta-platform.o \
 				   malta-reset.o malta-setup.o malta-time.o
 
 obj-$(CONFIG_MIPS_CMP)		+= malta-amon.o
 obj-$(CONFIG_MIPS_MALTA_PM)	+= malta-pm.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -287,7 +287,11 @@ struct ak4113 {
 	ak4113_read_t *read;
 	void *private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t wq_processing;
+=======
+	unsigned int init:1;
+>>>>>>> v3.18
 =======
 	unsigned int init:1;
 >>>>>>> v3.18

@@ -1,8 +1,13 @@
 #!/bin/sh
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 #	Output a simple RPM spec file that uses no fancy features requiring
 #	RPM v4. This is intended to work with any RPM distro.
+=======
+#	Output a simple RPM spec file.
+#	This version assumes a minimum of RPM 4.0.3.
+>>>>>>> v3.18
 =======
 #	Output a simple RPM spec file.
 #	This version assumes a minimum of RPM 4.0.3.
@@ -65,7 +70,10 @@ echo "building most standard programs and are also needed for rebuilding the"
 echo "glibc package."
 echo ""
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 echo "%package devel"
 echo "Summary: Development package for building kernel modules to match the $__KERNELRELEASE kernel"
 echo "Group: System Environment/Kernel"
@@ -74,6 +82,9 @@ echo "%description -n kernel-devel"
 echo "This package provides kernel headers and makefiles sufficient to build modules"
 echo "against the $__KERNELRELEASE kernel package."
 echo ""
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 if ! $PREBUILT; then
@@ -91,6 +102,7 @@ fi
 
 echo "%install"
 <<<<<<< HEAD
+<<<<<<< HEAD
 echo "%ifarch ia64"
 echo 'mkdir -p $RPM_BUILD_ROOT/boot/efi $RPM_BUILD_ROOT/lib/modules'
 echo 'mkdir -p $RPM_BUILD_ROOT/lib/firmware'
@@ -101,6 +113,8 @@ echo "%endif"
 
 echo 'INSTALL_MOD_PATH=$RPM_BUILD_ROOT make %{?_smp_mflags} KBUILD_SRC= modules_install'
 =======
+=======
+>>>>>>> v3.18
 echo 'KBUILD_IMAGE=$(make image_name)'
 echo "%ifarch ia64"
 echo 'mkdir -p $RPM_BUILD_ROOT/boot/efi $RPM_BUILD_ROOT/lib/modules'
@@ -112,6 +126,9 @@ echo 'mkdir -p $RPM_BUILD_ROOT'"/lib/firmware/$KERNELRELEASE"
 echo 'INSTALL_MOD_PATH=$RPM_BUILD_ROOT make %{?_smp_mflags} KBUILD_SRC= mod-fw= modules_install'
 echo 'INSTALL_FW_PATH=$RPM_BUILD_ROOT'"/lib/firmware/$KERNELRELEASE"
 echo 'make INSTALL_FW_PATH=$INSTALL_FW_PATH' firmware_install
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 echo "%ifarch ia64"
 echo 'cp $KBUILD_IMAGE $RPM_BUILD_ROOT'"/boot/efi/vmlinuz-$KERNELRELEASE"
@@ -138,7 +155,10 @@ echo 'mv vmlinux.orig vmlinux'
 echo "%endif"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 echo 'rm -f $RPM_BUILD_ROOT'"/lib/modules/$KERNELRELEASE/{build,source}"
 echo "mkdir -p "'$RPM_BUILD_ROOT'"/usr/src/kernels/$KERNELRELEASE"
 echo "EXCLUDES=\"$RCS_TAR_IGNORE --exclude .tmp_versions --exclude=*vmlinux* --exclude=*.o --exclude=*.ko --exclude=*.cmd --exclude=Documentation --exclude=firmware --exclude .config.old --exclude .missing-syscalls.d\""
@@ -147,13 +167,19 @@ echo 'cd $RPM_BUILD_ROOT'"/lib/modules/$KERNELRELEASE"
 echo "ln -sf /usr/src/kernels/$KERNELRELEASE build"
 echo "ln -sf /usr/src/kernels/$KERNELRELEASE source"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 echo ""
 echo "%clean"
 echo 'rm -rf $RPM_BUILD_ROOT'
 echo ""
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 echo "%post"
 echo "if [ -x /sbin/installkernel -a -r /boot/vmlinuz-$KERNELRELEASE -a -r /boot/System.map-$KERNELRELEASE ]; then"
 echo "cp /boot/vmlinuz-$KERNELRELEASE /boot/vmlinuz-$KERNELRELEASE-rpm"
@@ -163,13 +189,22 @@ echo "/sbin/installkernel $KERNELRELEASE /boot/vmlinuz-$KERNELRELEASE-rpm /boot/
 echo "rm -f /boot/vmlinuz-$KERNELRELEASE-rpm /boot/System.map-$KERNELRELEASE-rpm"
 echo "fi"
 echo ""
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 echo "%files"
 echo '%defattr (-, root, root)'
 echo "%dir /lib/modules"
 echo "/lib/modules/$KERNELRELEASE"
 <<<<<<< HEAD
+<<<<<<< HEAD
 echo "/lib/firmware"
+=======
+echo "%exclude /lib/modules/$KERNELRELEASE/build"
+echo "%exclude /lib/modules/$KERNELRELEASE/source"
+echo "/lib/firmware/$KERNELRELEASE"
+>>>>>>> v3.18
 =======
 echo "%exclude /lib/modules/$KERNELRELEASE/build"
 echo "%exclude /lib/modules/$KERNELRELEASE/source"
@@ -182,11 +217,17 @@ echo '%defattr (-, root, root)'
 echo "/usr/include"
 echo ""
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 echo "%files devel"
 echo '%defattr (-, root, root)'
 echo "/usr/src/kernels/$KERNELRELEASE"
 echo "/lib/modules/$KERNELRELEASE/build"
 echo "/lib/modules/$KERNELRELEASE/source"
 echo ""
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

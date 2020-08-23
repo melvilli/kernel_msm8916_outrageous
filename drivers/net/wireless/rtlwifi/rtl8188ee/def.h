@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -115,7 +118,10 @@
 #define CHIP_BONDING_IDENTIFIER(_value)	(((_value)>>22)&0x3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* [15:12] IC version(CUT): A-cut=0, B-cut=1, C-cut=2, D-cut=3
@@ -137,7 +143,10 @@
 #define E_CUT_VERSION			BIT(14)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* MASK */
@@ -157,7 +166,10 @@
 #define GET_CVID_CUT_VERSION(version)	((version) & CUT_VERSION_MASK)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define IS_81XXC(version)						\
@@ -187,7 +199,11 @@
 	(IS_81XXC(version) ? ((IS_CHIP_VENDOR_UMC(version)) ?		\
 	 ((GET_CVID_CUT_VERSION(version)) ? false : true) : false) : false)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IS_81xxC_VENDOR_UMC_B_CUT(version)				\
+=======
+#define IS_81XXC_VENDOR_UMC_B_CUT(version)				\
+>>>>>>> v3.18
 =======
 #define IS_81XXC_VENDOR_UMC_B_CUT(version)				\
 >>>>>>> v3.18
@@ -242,6 +258,7 @@ enum power_polocy_config {
 
 enum interface_select_pci {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INTF_SEL1_MINICARD,
 	INTF_SEL0_PCIE,
 	INTF_SEL2_RSV,
@@ -281,6 +298,8 @@ enum wake_on_wlan_mode {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	INTF_SEL1_MINICARD = 0,
 	INTF_SEL0_PCIE = 1,
 	INTF_SEL2_RSV = 2,
@@ -312,6 +331,9 @@ enum hal_fw_c2h_cmd_id {
 	HAL_FW_C2H_CMD_MAX
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum rtl_desc_qsel {
 	QSLT_BK = 0x2,

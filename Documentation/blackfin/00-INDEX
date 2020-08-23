@@ -1,6 +1,7 @@
 00-INDEX
 	- This file
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 bfin-gpio-notes.txt
 	- Notes in developing/using bfin-gpio driver.
@@ -8,6 +9,8 @@ bfin-gpio-notes.txt
 bfin-spi-notes.txt
 	- Notes for using bfin spi bus driver.
 =======
+=======
+>>>>>>> v3.18
 Makefile
 	- Makefile for gptimers example file.
 bfin-gpio-notes.txt
@@ -16,4 +19,7 @@ bfin-spi-notes.txt
 	- Notes for using bfin spi bus driver.
 gptimers-example.c
 	- gptimers example
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -281,7 +281,11 @@ static ktime_t dccp_timestamp_seed;
 u32 dccp_timestamp(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s64 delta = ktime_us_delta(ktime_get_real(), dccp_timestamp_seed);
+=======
+	u64 delta = (u64)ktime_us_delta(ktime_get_real(), dccp_timestamp_seed);
+>>>>>>> v3.18
 =======
 	u64 delta = (u64)ktime_us_delta(ktime_get_real(), dccp_timestamp_seed);
 >>>>>>> v3.18

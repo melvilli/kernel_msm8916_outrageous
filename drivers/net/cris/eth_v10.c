@@ -1497,7 +1497,10 @@ e100_set_config(struct net_device *dev, struct ifmap *map)
 			spin_unlock(&np->lock);
 			return -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		default:

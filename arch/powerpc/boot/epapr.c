@@ -49,8 +49,13 @@ static void platform_fixups(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void platform_init(unsigned long r3, unsigned long r4, unsigned long r5,
 		   unsigned long r6, unsigned long r7)
+=======
+void epapr_platform_init(unsigned long r3, unsigned long r4, unsigned long r5,
+			 unsigned long r6, unsigned long r7)
+>>>>>>> v3.18
 =======
 void epapr_platform_init(unsigned long r3, unsigned long r4, unsigned long r5,
 			 unsigned long r6, unsigned long r7)

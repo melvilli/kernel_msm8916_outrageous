@@ -3,7 +3,10 @@
  * Copyright (C) 1999, 2000 Silicon Graphics, Inc.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>

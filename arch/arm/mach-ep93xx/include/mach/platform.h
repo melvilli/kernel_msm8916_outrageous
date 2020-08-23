@@ -7,6 +7,10 @@
 #include <linux/reboot.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct device;
+>>>>>>> v3.18
 =======
 struct device;
 >>>>>>> v3.18
@@ -59,7 +63,11 @@ int ep93xx_ide_acquire_gpio(struct platform_device *pdev);
 void ep93xx_ide_release_gpio(struct platform_device *pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ep93xx_init_devices(void);
+=======
+struct device *ep93xx_init_devices(void);
+>>>>>>> v3.18
 =======
 struct device *ep93xx_init_devices(void);
 >>>>>>> v3.18

@@ -2,7 +2,10 @@
 #include <linux/types.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/spinlock.h>
 
 static DEFINE_RAW_SPINLOCK(__io_lock);
@@ -38,6 +41,9 @@ void atomic_io_modify(void __iomem *reg, u32 mask, u32 set)
 	raw_spin_unlock_irqrestore(&__io_lock, flags);
 }
 EXPORT_SYMBOL(atomic_io_modify);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

@@ -15,7 +15,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/i2c.h>
@@ -166,10 +169,16 @@ static irqreturn_t mcs5000_ts_interrupt(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mcs5000_ts_phys_init(struct mcs5000_ts_data *data)
 {
 	const struct mcs_platform_data *platform_data =
 		data->platform_data;
+=======
+static void mcs5000_ts_phys_init(struct mcs5000_ts_data *data,
+				 const struct mcs_platform_data *platform_data)
+{
+>>>>>>> v3.18
 =======
 static void mcs5000_ts_phys_init(struct mcs5000_ts_data *data,
 				 const struct mcs_platform_data *platform_data)
@@ -198,6 +207,7 @@ static void mcs5000_ts_phys_init(struct mcs5000_ts_data *data,
 
 static int mcs5000_ts_probe(struct i2c_client *client,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const struct i2c_device_id *id)
 {
 	struct mcs5000_ts_data *data;
@@ -221,6 +231,8 @@ static int mcs5000_ts_probe(struct i2c_client *client,
 
 	input_dev->name = "MELPAS MCS-5000 Touchscreen";
 =======
+=======
+>>>>>>> v3.18
 			    const struct i2c_device_id *id)
 {
 	const struct mcs_platform_data *pdata;
@@ -247,6 +259,9 @@ static int mcs5000_ts_probe(struct i2c_client *client,
 	}
 
 	input_dev->name = "MELFAS MCS-5000 Touchscreen";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	input_dev->id.bustype = BUS_I2C;
 	input_dev->dev.parent = &client->dev;
@@ -258,6 +273,7 @@ static int mcs5000_ts_probe(struct i2c_client *client,
 	input_set_abs_params(input_dev, ABS_Y, 0, MCS5000_MAX_YC, 0, 0);
 
 	input_set_drvdata(input_dev, data);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (data->platform_data->cfg_pin)
@@ -302,6 +318,8 @@ static int mcs5000_ts_remove(struct i2c_client *client)
 #ifdef CONFIG_PM
 static int mcs5000_ts_suspend(struct device *dev)
 =======
+=======
+>>>>>>> v3.18
 	data->input_dev = input_dev;
 
 	if (pdata->cfg_pin)
@@ -329,6 +347,9 @@ static int mcs5000_ts_suspend(struct device *dev)
 }
 
 static int __maybe_unused mcs5000_ts_suspend(struct device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct i2c_client *client = to_i2c_client(dev);
@@ -340,6 +361,7 @@ static int __maybe_unused mcs5000_ts_suspend(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mcs5000_ts_resume(struct device *dev)
 {
 	struct i2c_client *client = to_i2c_client(dev);
@@ -347,6 +369,8 @@ static int mcs5000_ts_resume(struct device *dev)
 
 	mcs5000_ts_phys_init(data);
 =======
+=======
+>>>>>>> v3.18
 static int __maybe_unused mcs5000_ts_resume(struct device *dev)
 {
 	struct i2c_client *client = to_i2c_client(dev);
@@ -354,6 +378,9 @@ static int __maybe_unused mcs5000_ts_resume(struct device *dev)
 	const struct mcs_platform_data *pdata = dev_get_platdata(dev);
 
 	mcs5000_ts_phys_init(data, pdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -361,7 +388,10 @@ static int __maybe_unused mcs5000_ts_resume(struct device *dev)
 
 static SIMPLE_DEV_PM_OPS(mcs5000_ts_pm, mcs5000_ts_suspend, mcs5000_ts_resume);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -374,12 +404,18 @@ MODULE_DEVICE_TABLE(i2c, mcs5000_ts_id);
 static struct i2c_driver mcs5000_ts_driver = {
 	.probe		= mcs5000_ts_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= mcs5000_ts_remove,
 	.driver = {
 		.name = "mcs5000_ts",
 #ifdef CONFIG_PM
 		.pm   = &mcs5000_ts_pm,
 #endif
+=======
+	.driver = {
+		.name = "mcs5000_ts",
+		.pm   = &mcs5000_ts_pm,
+>>>>>>> v3.18
 =======
 	.driver = {
 		.name = "mcs5000_ts",

@@ -299,7 +299,11 @@ static void free_tx_desc(struct adapter *adapter, struct sge_txq *q,
 				unmap_skb(d->skb, q, cidx, pdev);
 			if (d->eop) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				kfree_skb(d->skb);
+=======
+				dev_consume_skb_any(d->skb);
+>>>>>>> v3.18
 =======
 				dev_consume_skb_any(d->skb);
 >>>>>>> v3.18
@@ -1193,7 +1197,11 @@ static void write_tx_pkt_wr(struct adapter *adap, struct sk_buff *skb,
 					      V_WR_TID(q->token));
 			wr_gen2(d, gen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kfree_skb(skb);
+=======
+			dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 			dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -1242,7 +1250,11 @@ netdev_tx_t t3_eth_xmit(struct sk_buff *skb, struct net_device *dev)
 	 */
 	if (unlikely(skb->len < ETH_HLEN)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 		dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -1550,10 +1562,16 @@ static void deferred_unmap_destructor(struct sk_buff *skb)
 	p = dui->addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb->tail - skb->transport_header)
 		pci_unmap_single(dui->pdev, *p++,
 				 skb->tail - skb->transport_header,
 				 PCI_DMA_TODEVICE);
+=======
+	if (skb_tail_pointer(skb) - skb_transport_header(skb))
+		pci_unmap_single(dui->pdev, *p++, skb_tail_pointer(skb) -
+				 skb_transport_header(skb), PCI_DMA_TODEVICE);
+>>>>>>> v3.18
 =======
 	if (skb_tail_pointer(skb) - skb_transport_header(skb))
 		pci_unmap_single(dui->pdev, *p++, skb_tail_pointer(skb) -
@@ -1647,7 +1665,11 @@ static inline unsigned int calc_tx_descs_ofld(const struct sk_buff *skb)
 	flits = skb_transport_offset(skb) / 8;	/* headers */
 	cnt = skb_shinfo(skb)->nr_frags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb->tail != skb->transport_header)
+=======
+	if (skb_tail_pointer(skb) != skb_transport_header(skb))
+>>>>>>> v3.18
 =======
 	if (skb_tail_pointer(skb) != skb_transport_header(skb))
 >>>>>>> v3.18

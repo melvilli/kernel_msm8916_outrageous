@@ -132,6 +132,10 @@ struct physdev_irq {
 #define MAP_PIRQ_TYPE_UNKNOWN		0x2
 #define MAP_PIRQ_TYPE_MSI_SEG		0x3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MAP_PIRQ_TYPE_MULTI_MSI		0x4
+>>>>>>> v3.18
 =======
 #define MAP_PIRQ_TYPE_MULTI_MSI		0x4
 >>>>>>> v3.18
@@ -146,12 +150,15 @@ struct physdev_map_pirq {
     /* IN or OUT */
     int pirq;
 <<<<<<< HEAD
+<<<<<<< HEAD
     /* IN - high 16 bits hold segment for MAP_PIRQ_TYPE_MSI_SEG */
     int bus;
     /* IN */
     int devfn;
     /* IN */
 =======
+=======
+>>>>>>> v3.18
     /* IN - high 16 bits hold segment for ..._MSI_SEG and ..._MULTI_MSI */
     int bus;
     /* IN */
@@ -162,6 +169,9 @@ struct physdev_map_pirq {
      * OUT (..._MULTI_MSI only)
      * - Number of vectors allocated.
      */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     int entry_nr;
     /* IN */
@@ -249,7 +259,10 @@ struct physdev_get_free_pirq {
 #define XEN_PCI_DEV_PXM                0x4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define XEN_PCI_MMCFG_RESERVED         0x1
 
 #define PHYSDEVOP_pci_mmcfg_reserved    24
@@ -261,6 +274,9 @@ struct physdev_pci_mmcfg_reserved {
     uint32_t flags;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PHYSDEVOP_pci_device_add        25
 struct physdev_pci_device_add {

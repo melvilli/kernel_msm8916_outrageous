@@ -40,6 +40,7 @@ struct shmid64_ds {
 	__kernel_pid_t		shm_cpid;	/* pid of creator */
 	__kernel_pid_t		shm_lpid;	/* pid of last operator */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long		shm_nattch;	/* no. of current attaches */
 	unsigned long		__unused4;
 	unsigned long		__unused5;
@@ -56,6 +57,8 @@ struct shminfo64 {
 	unsigned long	__unused3;
 	unsigned long	__unused4;
 =======
+=======
+>>>>>>> v3.18
 	__kernel_ulong_t	shm_nattch;	/* no. of current attaches */
 	__kernel_ulong_t	__unused4;
 	__kernel_ulong_t	__unused5;
@@ -71,6 +74,9 @@ struct shminfo64 {
 	__kernel_ulong_t	__unused2;
 	__kernel_ulong_t	__unused3;
 	__kernel_ulong_t	__unused4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

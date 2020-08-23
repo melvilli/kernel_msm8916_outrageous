@@ -36,11 +36,17 @@
 #define AB8500_RTC_CALIB_REG		0x0E
 #define AB8500_RTC_SWITCH_STAT_REG	0x0F
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AB8540_RTC_ALRM_SEC		0x22
 #define AB8540_RTC_ALRM_MIN_LOW_REG	0x23
 #define AB8540_RTC_ALRM_MIN_MID_REG	0x24
 #define AB8540_RTC_ALRM_MIN_HI_REG	0x25
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* RtcReadRequest bits */
@@ -66,12 +72,18 @@ static const u8 ab8500_rtc_alarm_regs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const u8 ab8540_rtc_alarm_regs[] = {
 	AB8540_RTC_ALRM_MIN_HI_REG, AB8540_RTC_ALRM_MIN_MID_REG,
 	AB8540_RTC_ALRM_MIN_LOW_REG, AB8540_RTC_ALRM_SEC
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Calculate the seconds from 1970 to 01-01-2000 00:00:00 */
 static unsigned long get_elapsed_seconds(int year)
@@ -283,7 +295,10 @@ static int ab8500_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alarm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ab8540_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alarm)
 {
 	int retval, i;
@@ -320,6 +335,9 @@ static int ab8540_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alarm)
 
 	return ab8500_rtc_irq_enable(dev, alarm->enabled);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ab8500_rtc_set_calibration(struct device *dev, int calibration)
@@ -444,9 +462,12 @@ static const struct rtc_class_ops ab8500_rtc_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ab8500_rtc_probe(struct platform_device *pdev)
 {
 =======
+=======
+>>>>>>> v3.18
 static const struct rtc_class_ops ab8540_rtc_ops = {
 	.read_time		= ab8500_rtc_read_time,
 	.set_time		= ab8500_rtc_set_time,
@@ -463,6 +484,9 @@ static struct platform_device_id ab85xx_rtc_ids[] = {
 static int ab8500_rtc_probe(struct platform_device *pdev)
 {
 	const struct platform_device_id *platid = platform_get_device_id(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err;
 	struct rtc_device *rtc;
@@ -497,7 +521,12 @@ static int ab8500_rtc_probe(struct platform_device *pdev)
 
 	rtc = devm_rtc_device_register(&pdev->dev, "ab8500-rtc",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					&ab8500_rtc_ops, THIS_MODULE);
+=======
+				(struct rtc_class_ops *)platid->driver_data,
+				THIS_MODULE);
+>>>>>>> v3.18
 =======
 				(struct rtc_class_ops *)platid->driver_data,
 				THIS_MODULE);
@@ -530,8 +559,11 @@ static int ab8500_rtc_remove(struct platform_device *pdev)
 	ab8500_sysfs_rtc_unregister(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -545,6 +577,10 @@ static struct platform_driver ab8500_rtc_driver = {
 	.probe	= ab8500_rtc_probe,
 	.remove = ab8500_rtc_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.id_table = ab85xx_rtc_ids,
+>>>>>>> v3.18
 =======
 	.id_table = ab85xx_rtc_ids,
 >>>>>>> v3.18

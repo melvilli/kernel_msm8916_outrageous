@@ -12,6 +12,10 @@
 #define pr_fmt(fmt) "X.509: "fmt
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/export.h>
+>>>>>>> v3.18
 =======
 #include <linux/export.h>
 >>>>>>> v3.18
@@ -50,12 +54,15 @@ void x509_free_certificate(struct x509_certificate *cert)
 		kfree(cert->issuer);
 		kfree(cert->subject);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(cert->fingerprint);
 		kfree(cert->authority);
 		kfree(cert);
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 		kfree(cert->id);
 		kfree(cert->skid);
 		kfree(cert->authority);
@@ -65,6 +72,9 @@ void x509_free_certificate(struct x509_certificate *cert)
 	}
 }
 EXPORT_SYMBOL_GPL(x509_free_certificate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -75,6 +85,10 @@ struct x509_certificate *x509_cert_parse(const void *data, size_t datalen)
 	struct x509_certificate *cert;
 	struct x509_parse_context *ctx;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct asymmetric_key_id *kid;
+>>>>>>> v3.18
 =======
 	struct asymmetric_key_id *kid;
 >>>>>>> v3.18
@@ -106,7 +120,10 @@ struct x509_certificate *x509_cert_parse(const void *data, size_t datalen)
 		goto error_decode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Generate cert issuer + serial number key ID */
 	kid = asymmetric_key_generate_id(cert->raw_serial,
 					 cert->raw_serial_size,
@@ -118,6 +135,9 @@ struct x509_certificate *x509_cert_parse(const void *data, size_t datalen)
 	}
 	cert->id = kid;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(ctx);
 	return cert;
@@ -130,6 +150,10 @@ error_no_cert:
 	return ERR_PTR(ret);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(x509_cert_parse);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(x509_cert_parse);
 >>>>>>> v3.18
@@ -191,6 +215,7 @@ int x509_note_pkey_algo(void *context, size_t hdrlen,
 
 	case OID_md4WithRSAEncryption:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctx->cert->sig_hash_algo = PKEY_HASH_MD5;
 		ctx->cert->sig_pkey_algo = PKEY_ALGO_RSA;
 		break;
@@ -219,6 +244,8 @@ int x509_note_pkey_algo(void *context, size_t hdrlen,
 		ctx->cert->sig_hash_algo = PKEY_HASH_SHA224;
 		ctx->cert->sig_pkey_algo = PKEY_ALGO_RSA;
 =======
+=======
+>>>>>>> v3.18
 		ctx->cert->sig.pkey_hash_algo = HASH_ALGO_MD5;
 		ctx->cert->sig.pkey_algo = PKEY_ALGO_RSA;
 		break;
@@ -246,6 +273,9 @@ int x509_note_pkey_algo(void *context, size_t hdrlen,
 	case OID_sha224WithRSAEncryption:
 		ctx->cert->sig.pkey_hash_algo = HASH_ALGO_SHA224;
 		ctx->cert->sig.pkey_algo = PKEY_ALGO_RSA;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -272,9 +302,12 @@ int x509_note_signature(void *context, size_t hdrlen,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctx->cert->sig = value;
 	ctx->cert->sig_size = vlen;
 =======
+=======
+>>>>>>> v3.18
 	ctx->cert->raw_sig = value;
 	ctx->cert->raw_sig_size = vlen;
 	return 0;
@@ -290,6 +323,9 @@ int x509_note_serial(void *context, size_t hdrlen,
 	struct x509_parse_context *ctx = context;
 	ctx->cert->raw_serial = value;
 	ctx->cert->raw_serial_size = vlen;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -407,6 +443,11 @@ int x509_note_issuer(void *context, size_t hdrlen,
 {
 	struct x509_parse_context *ctx = context;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ctx->cert->raw_issuer = value;
+	ctx->cert->raw_issuer_size = vlen;
+>>>>>>> v3.18
 =======
 	ctx->cert->raw_issuer = value;
 	ctx->cert->raw_issuer_size = vlen;
@@ -420,6 +461,11 @@ int x509_note_subject(void *context, size_t hdrlen,
 {
 	struct x509_parse_context *ctx = context;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ctx->cert->raw_subject = value;
+	ctx->cert->raw_subject_size = vlen;
+>>>>>>> v3.18
 =======
 	ctx->cert->raw_subject = value;
 	ctx->cert->raw_subject_size = vlen;
@@ -440,8 +486,14 @@ int x509_extract_key_data(void *context, size_t hdrlen,
 		return -ENOPKG;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* There seems to be an extraneous 0 byte on the front of the data */
 	ctx->cert->pkey_algo = PKEY_ALGO_RSA;
+=======
+	ctx->cert->pub->pkey_algo = PKEY_ALGO_RSA;
+
+	/* Discard the BIT STRING metadata */
+>>>>>>> v3.18
 =======
 	ctx->cert->pub->pkey_algo = PKEY_ALGO_RSA;
 
@@ -487,8 +539,13 @@ int x509_process_extension(void *context, size_t hdrlen,
 {
 	struct x509_parse_context *ctx = context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const unsigned char *v = value;
 	char *f;
+=======
+	struct asymmetric_key_id *kid;
+	const unsigned char *v = value;
+>>>>>>> v3.18
 =======
 	struct asymmetric_key_id *kid;
 	const unsigned char *v = value;
@@ -500,7 +557,11 @@ int x509_process_extension(void *context, size_t hdrlen,
 	if (ctx->last_oid == OID_subjectKeyIdentifier) {
 		/* Get hold of the key fingerprint */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vlen < 3)
+=======
+		if (ctx->cert->skid || vlen < 3)
+>>>>>>> v3.18
 =======
 		if (ctx->cert->skid || vlen < 3)
 >>>>>>> v3.18
@@ -511,6 +572,7 @@ int x509_process_extension(void *context, size_t hdrlen,
 		vlen -= 2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		f = kmalloc(vlen * 2 + 1, GFP_KERNEL);
 		if (!f)
 			return -ENOMEM;
@@ -519,6 +581,8 @@ int x509_process_extension(void *context, size_t hdrlen,
 		pr_debug("fingerprint %s\n", f);
 		ctx->cert->fingerprint = f;
 =======
+=======
+>>>>>>> v3.18
 		ctx->cert->raw_skid_size = vlen;
 		ctx->cert->raw_skid = v;
 		kid = asymmetric_key_generate_id(ctx->cert->raw_subject,
@@ -528,16 +592,24 @@ int x509_process_extension(void *context, size_t hdrlen,
 			return PTR_ERR(kid);
 		ctx->cert->skid = kid;
 		pr_debug("subjkeyid %*phN\n", kid->len, kid->data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	}
 
 	if (ctx->last_oid == OID_authorityKeyIdentifier) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		size_t key_len;
 
 		/* Get hold of the CA key fingerprint */
 		if (vlen < 5)
+=======
+		/* Get hold of the CA key fingerprint */
+		if (ctx->cert->authority || vlen < 5)
+>>>>>>> v3.18
 =======
 		/* Get hold of the CA key fingerprint */
 		if (ctx->cert->authority || vlen < 5)
@@ -560,7 +632,11 @@ int x509_process_extension(void *context, size_t hdrlen,
 				return -EBADMSG;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			key_len = v[3];
+=======
+			vlen = v[3];
+>>>>>>> v3.18
 =======
 			vlen = v[3];
 >>>>>>> v3.18
@@ -586,6 +662,7 @@ int x509_process_extension(void *context, size_t hdrlen,
 				return -EBADMSG;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			key_len = v[sub + 1];
 			v += (sub + 2);
 		}
@@ -598,6 +675,8 @@ int x509_process_extension(void *context, size_t hdrlen,
 		pr_debug("authority   %s\n", f);
 		ctx->cert->authority = f;
 =======
+=======
+>>>>>>> v3.18
 			vlen = v[sub + 1];
 			v += (sub + 2);
 		}
@@ -609,6 +688,9 @@ int x509_process_extension(void *context, size_t hdrlen,
 			return PTR_ERR(kid);
 		pr_debug("authkeyid %*phN\n", kid->len, kid->data);
 		ctx->cert->authority = kid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	}

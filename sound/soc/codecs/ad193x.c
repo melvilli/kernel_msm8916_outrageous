@@ -7,6 +7,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
@@ -14,10 +15,15 @@
 #include <linux/i2c.h>
 #include <linux/spi/spi.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/device.h>
 #include <linux/regmap.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/slab.h>
 #include <sound/core.h>
@@ -27,6 +33,10 @@
 #include <sound/soc.h>
 #include <sound/tlv.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -44,8 +54,13 @@ struct ad193x_priv {
 static const char * const ad193x_deemp[] = {"None", "48kHz", "44.1kHz", "32kHz"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ad193x_deemp_enum =
 	SOC_ENUM_SINGLE(AD193X_DAC_CTRL2, 1, 4, ad193x_deemp);
+=======
+static SOC_ENUM_SINGLE_DECL(ad193x_deemp_enum, AD193X_DAC_CTRL2, 1,
+			    ad193x_deemp);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(ad193x_deemp_enum, AD193X_DAC_CTRL2, 1,
 			    ad193x_deemp);
@@ -266,6 +281,7 @@ static int ad193x_hw_params(struct snd_pcm_substream *substream,
 
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		word_len = 3;
@@ -276,6 +292,8 @@ static int ad193x_hw_params(struct snd_pcm_substream *substream,
 	case SNDRV_PCM_FORMAT_S24_LE:
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		word_len = 3;
@@ -285,6 +303,9 @@ static int ad193x_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case 24:
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		word_len = 0;
 		break;
@@ -349,6 +370,7 @@ static struct snd_soc_dai_driver ad193x_dai = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ad193x_probe(struct snd_soc_codec *codec)
 {
 	struct ad193x_priv *ad193x = snd_soc_codec_get_drvdata(codec);
@@ -360,6 +382,11 @@ static int ad193x_probe(struct snd_soc_codec *codec)
 		dev_err(codec->dev, "failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
+=======
+static int ad193x_codec_probe(struct snd_soc_codec *codec)
+{
+	struct ad193x_priv *ad193x = snd_soc_codec_get_drvdata(codec);
+>>>>>>> v3.18
 =======
 static int ad193x_codec_probe(struct snd_soc_codec *codec)
 {
@@ -383,17 +410,23 @@ static int ad193x_codec_probe(struct snd_soc_codec *codec)
 	regmap_write(ad193x->regmap, AD193X_PLL_CLK_CTRL1, 0x04);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
 }
 
 static struct snd_soc_codec_driver soc_codec_dev_ad193x = {
 	.probe = 	ad193x_probe,
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
 static struct snd_soc_codec_driver soc_codec_dev_ad193x = {
 	.probe = ad193x_codec_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.controls = ad193x_snd_controls,
 	.num_controls = ARRAY_SIZE(ad193x_snd_controls),
@@ -408,6 +441,7 @@ static bool adau193x_reg_volatile(struct device *dev, unsigned int reg)
 	return false;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_SPI_MASTER)
 
@@ -544,6 +578,8 @@ static void __exit ad193x_modexit(void)
 }
 module_exit(ad193x_modexit);
 =======
+=======
+>>>>>>> v3.18
 const struct regmap_config ad193x_regmap_config = {
 	.max_register = AD193X_NUM_REGS - 1,
 	.volatile_reg = adau193x_reg_volatile,
@@ -569,6 +605,9 @@ int ad193x_probe(struct device *dev, struct regmap *regmap)
 		&ad193x_dai, 1);
 }
 EXPORT_SYMBOL_GPL(ad193x_probe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_DESCRIPTION("ASoC ad193x driver");

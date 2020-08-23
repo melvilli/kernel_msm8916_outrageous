@@ -27,6 +27,11 @@
 #include "internal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KEY_MAX_DESC_SIZE 4096
+
+>>>>>>> v3.18
 =======
 #define KEY_MAX_DESC_SIZE 4096
 
@@ -84,7 +89,11 @@ SYSCALL_DEFINE5(add_key, const char __user *, _type,
 	description = NULL;
 	if (_description) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		description = strndup_user(_description, PAGE_SIZE);
+=======
+		description = strndup_user(_description, KEY_MAX_DESC_SIZE);
+>>>>>>> v3.18
 =======
 		description = strndup_user(_description, KEY_MAX_DESC_SIZE);
 >>>>>>> v3.18
@@ -96,11 +105,17 @@ SYSCALL_DEFINE5(add_key, const char __user *, _type,
 			kfree(description);
 			description = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		} else if ((description[0] == '.') &&
 			   (strncmp(type, "keyring", 7) == 0)) {
 			ret = -EPERM;
 			goto error2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -110,7 +125,11 @@ SYSCALL_DEFINE5(add_key, const char __user *, _type,
 
 	vm = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (plen) {
+=======
+	if (_payload) {
+>>>>>>> v3.18
 =======
 	if (_payload) {
 >>>>>>> v3.18
@@ -132,7 +151,11 @@ SYSCALL_DEFINE5(add_key, const char __user *, _type,
 
 	/* find the target keyring (which must be writable) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	keyring_ref = lookup_user_key(ringid, KEY_LOOKUP_CREATE, KEY_WRITE);
+=======
+	keyring_ref = lookup_user_key(ringid, KEY_LOOKUP_CREATE, KEY_NEED_WRITE);
+>>>>>>> v3.18
 =======
 	keyring_ref = lookup_user_key(ringid, KEY_LOOKUP_CREATE, KEY_NEED_WRITE);
 >>>>>>> v3.18
@@ -198,7 +221,11 @@ SYSCALL_DEFINE4(request_key, const char __user *, _type,
 
 	/* pull the description into kernel space */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	description = strndup_user(_description, PAGE_SIZE);
+=======
+	description = strndup_user(_description, KEY_MAX_DESC_SIZE);
+>>>>>>> v3.18
 =======
 	description = strndup_user(_description, KEY_MAX_DESC_SIZE);
 >>>>>>> v3.18
@@ -224,7 +251,11 @@ SYSCALL_DEFINE4(request_key, const char __user *, _type,
 	if (destringid) {
 		dest_ref = lookup_user_key(destringid, KEY_LOOKUP_CREATE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   KEY_WRITE);
+=======
+					   KEY_NEED_WRITE);
+>>>>>>> v3.18
 =======
 					   KEY_NEED_WRITE);
 >>>>>>> v3.18
@@ -286,7 +317,11 @@ long keyctl_get_keyring_ID(key_serial_t id, int create)
 
 	lflags = create ? KEY_LOOKUP_CREATE : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key_ref = lookup_user_key(id, lflags, KEY_SEARCH);
+=======
+	key_ref = lookup_user_key(id, lflags, KEY_NEED_SEARCH);
+>>>>>>> v3.18
 =======
 	key_ref = lookup_user_key(id, lflags, KEY_NEED_SEARCH);
 >>>>>>> v3.18
@@ -308,8 +343,12 @@ error:
  * keyring, creating it if necessary.  A named session keyring must have Search
  * permission for it to be joined.  Session keyrings without this permit will
 <<<<<<< HEAD
+<<<<<<< HEAD
  * be skipped over.  It is not permitted for userspace to create or join
  * keyrings whose name begin with a dot.
+=======
+ * be skipped over.
+>>>>>>> v3.18
 =======
  * be skipped over.
 >>>>>>> v3.18
@@ -325,7 +364,11 @@ long keyctl_join_session_keyring(const char __user *_name)
 	name = NULL;
 	if (_name) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		name = strndup_user(_name, PAGE_SIZE);
+=======
+		name = strndup_user(_name, KEY_MAX_DESC_SIZE);
+>>>>>>> v3.18
 =======
 		name = strndup_user(_name, KEY_MAX_DESC_SIZE);
 >>>>>>> v3.18
@@ -334,10 +377,13 @@ long keyctl_join_session_keyring(const char __user *_name)
 			goto error;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		ret = -EPERM;
 		if (name[0] == '.')
 			goto error_name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -345,8 +391,13 @@ long keyctl_join_session_keyring(const char __user *_name)
 	/* join the session */
 	ret = join_session_keyring(name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_name:
 	kfree(name);
+=======
+	kfree(name);
+
+>>>>>>> v3.18
 =======
 	kfree(name);
 
@@ -380,7 +431,11 @@ long keyctl_update_key(key_serial_t id,
 	/* pull the payload in if one was supplied */
 	payload = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (plen) {
+=======
+	if (_payload) {
+>>>>>>> v3.18
 =======
 	if (_payload) {
 >>>>>>> v3.18
@@ -396,7 +451,11 @@ long keyctl_update_key(key_serial_t id,
 
 	/* find the target key (which must be writable) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key_ref = lookup_user_key(id, 0, KEY_WRITE);
+=======
+	key_ref = lookup_user_key(id, 0, KEY_NEED_WRITE);
+>>>>>>> v3.18
 =======
 	key_ref = lookup_user_key(id, 0, KEY_NEED_WRITE);
 >>>>>>> v3.18
@@ -431,7 +490,11 @@ long keyctl_revoke_key(key_serial_t id)
 	long ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key_ref = lookup_user_key(id, 0, KEY_WRITE);
+=======
+	key_ref = lookup_user_key(id, 0, KEY_NEED_WRITE);
+>>>>>>> v3.18
 =======
 	key_ref = lookup_user_key(id, 0, KEY_NEED_WRITE);
 >>>>>>> v3.18
@@ -440,7 +503,11 @@ long keyctl_revoke_key(key_serial_t id)
 		if (ret != -EACCES)
 			goto error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		key_ref = lookup_user_key(id, 0, KEY_SETATTR);
+=======
+		key_ref = lookup_user_key(id, 0, KEY_NEED_SETATTR);
+>>>>>>> v3.18
 =======
 		key_ref = lookup_user_key(id, 0, KEY_NEED_SETATTR);
 >>>>>>> v3.18
@@ -475,6 +542,7 @@ long keyctl_invalidate_key(key_serial_t id)
 	kenter("%d", id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key_ref = lookup_user_key(id, 0, KEY_SEARCH);
 	if (IS_ERR(key_ref)) {
 		ret = PTR_ERR(key_ref);
@@ -485,6 +553,8 @@ long keyctl_invalidate_key(key_serial_t id)
 	ret = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	key_ref = lookup_user_key(id, 0, KEY_NEED_SEARCH);
 	if (IS_ERR(key_ref)) {
 		ret = PTR_ERR(key_ref);
@@ -507,6 +577,9 @@ invalidate:
 	key_invalidate(key_ref_to_ptr(key_ref));
 	ret = 0;
 error_put:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	key_ref_put(key_ref);
 error:
@@ -527,7 +600,11 @@ long keyctl_keyring_clear(key_serial_t ringid)
 	long ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	keyring_ref = lookup_user_key(ringid, KEY_LOOKUP_CREATE, KEY_WRITE);
+=======
+	keyring_ref = lookup_user_key(ringid, KEY_LOOKUP_CREATE, KEY_NEED_WRITE);
+>>>>>>> v3.18
 =======
 	keyring_ref = lookup_user_key(ringid, KEY_LOOKUP_CREATE, KEY_NEED_WRITE);
 >>>>>>> v3.18
@@ -573,7 +650,11 @@ long keyctl_keyring_link(key_serial_t id, key_serial_t ringid)
 	long ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	keyring_ref = lookup_user_key(ringid, KEY_LOOKUP_CREATE, KEY_WRITE);
+=======
+	keyring_ref = lookup_user_key(ringid, KEY_LOOKUP_CREATE, KEY_NEED_WRITE);
+>>>>>>> v3.18
 =======
 	keyring_ref = lookup_user_key(ringid, KEY_LOOKUP_CREATE, KEY_NEED_WRITE);
 >>>>>>> v3.18
@@ -583,7 +664,11 @@ long keyctl_keyring_link(key_serial_t id, key_serial_t ringid)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key_ref = lookup_user_key(id, KEY_LOOKUP_CREATE, KEY_LINK);
+=======
+	key_ref = lookup_user_key(id, KEY_LOOKUP_CREATE, KEY_NEED_LINK);
+>>>>>>> v3.18
 =======
 	key_ref = lookup_user_key(id, KEY_LOOKUP_CREATE, KEY_NEED_LINK);
 >>>>>>> v3.18
@@ -616,7 +701,11 @@ long keyctl_keyring_unlink(key_serial_t id, key_serial_t ringid)
 	long ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	keyring_ref = lookup_user_key(ringid, 0, KEY_WRITE);
+=======
+	keyring_ref = lookup_user_key(ringid, 0, KEY_NEED_WRITE);
+>>>>>>> v3.18
 =======
 	keyring_ref = lookup_user_key(ringid, 0, KEY_NEED_WRITE);
 >>>>>>> v3.18
@@ -660,16 +749,22 @@ long keyctl_describe_key(key_serial_t keyid,
 	struct key *key, *instkey;
 	key_ref_t key_ref;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *tmpbuf;
 	long ret;
 
 	key_ref = lookup_user_key(keyid, KEY_LOOKUP_PARTIAL, KEY_VIEW);
 =======
+=======
+>>>>>>> v3.18
 	char *infobuf;
 	long ret;
 	int desclen, infolen;
 
 	key_ref = lookup_user_key(keyid, KEY_LOOKUP_PARTIAL, KEY_NEED_VIEW);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(key_ref)) {
 		/* viewing a key under construction is permitted if we have the
@@ -691,6 +786,7 @@ long keyctl_describe_key(key_serial_t keyid,
 	}
 
 okay:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* calculate how much description we're going to return */
 	ret = -ENOMEM;
@@ -725,6 +821,8 @@ okay:
 
 	kfree(tmpbuf);
 =======
+=======
+>>>>>>> v3.18
 	key = key_ref_to_ptr(key_ref);
 	desclen = strlen(key->description);
 
@@ -750,6 +848,9 @@ okay:
 	}
 
 	kfree(infobuf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error2:
 	key_ref_put(key_ref);
@@ -783,7 +884,11 @@ long keyctl_keyring_search(key_serial_t ringid,
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	description = strndup_user(_description, PAGE_SIZE);
+=======
+	description = strndup_user(_description, KEY_MAX_DESC_SIZE);
+>>>>>>> v3.18
 =======
 	description = strndup_user(_description, KEY_MAX_DESC_SIZE);
 >>>>>>> v3.18
@@ -794,7 +899,11 @@ long keyctl_keyring_search(key_serial_t ringid,
 
 	/* get the keyring at which to begin the search */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	keyring_ref = lookup_user_key(ringid, 0, KEY_SEARCH);
+=======
+	keyring_ref = lookup_user_key(ringid, 0, KEY_NEED_SEARCH);
+>>>>>>> v3.18
 =======
 	keyring_ref = lookup_user_key(ringid, 0, KEY_NEED_SEARCH);
 >>>>>>> v3.18
@@ -808,7 +917,11 @@ long keyctl_keyring_search(key_serial_t ringid,
 	if (destringid) {
 		dest_ref = lookup_user_key(destringid, KEY_LOOKUP_CREATE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   KEY_WRITE);
+=======
+					   KEY_NEED_WRITE);
+>>>>>>> v3.18
 =======
 					   KEY_NEED_WRITE);
 >>>>>>> v3.18
@@ -839,7 +952,11 @@ long keyctl_keyring_search(key_serial_t ringid,
 	/* link the resulting key to the destination keyring if we can */
 	if (dest_ref) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = key_permission(key_ref, KEY_LINK);
+=======
+		ret = key_permission(key_ref, KEY_NEED_LINK);
+>>>>>>> v3.18
 =======
 		ret = key_permission(key_ref, KEY_NEED_LINK);
 >>>>>>> v3.18
@@ -894,7 +1011,11 @@ long keyctl_read_key(key_serial_t keyid, char __user *buffer, size_t buflen)
 
 	/* see if we can read it directly */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = key_permission(key_ref, KEY_READ);
+=======
+	ret = key_permission(key_ref, KEY_NEED_READ);
+>>>>>>> v3.18
 =======
 	ret = key_permission(key_ref, KEY_NEED_READ);
 >>>>>>> v3.18
@@ -915,6 +1036,7 @@ long keyctl_read_key(key_serial_t keyid, char __user *buffer, size_t buflen)
 	/* the key is probably readable - now try to read it */
 can_read_key:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -EOPNOTSUPP;
 	if (key->type->read) {
 		/* Read the data with the semaphore held (since we might sleep)
@@ -926,6 +1048,8 @@ can_read_key:
 			ret = key->type->read(key, buffer, buflen);
 		up_read(&key->sem);
 =======
+=======
+>>>>>>> v3.18
 	ret = key_validate(key);
 	if (ret == 0) {
 		ret = -EOPNOTSUPP;
@@ -936,6 +1060,9 @@ can_read_key:
 			ret = key->type->read(key, buffer, buflen);
 			up_read(&key->sem);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -983,7 +1110,11 @@ long keyctl_chown_key(key_serial_t id, uid_t user, gid_t group)
 
 	key_ref = lookup_user_key(id, KEY_LOOKUP_CREATE | KEY_LOOKUP_PARTIAL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  KEY_SETATTR);
+=======
+				  KEY_NEED_SETATTR);
+>>>>>>> v3.18
 =======
 				  KEY_NEED_SETATTR);
 >>>>>>> v3.18
@@ -1093,7 +1224,11 @@ long keyctl_setperm_key(key_serial_t id, key_perm_t perm)
 
 	key_ref = lookup_user_key(id, KEY_LOOKUP_CREATE | KEY_LOOKUP_PARTIAL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  KEY_SETATTR);
+=======
+				  KEY_NEED_SETATTR);
+>>>>>>> v3.18
 =======
 				  KEY_NEED_SETATTR);
 >>>>>>> v3.18
@@ -1139,7 +1274,11 @@ static long get_instantiation_keyring(key_serial_t ringid,
 	/* if a specific keyring is nominated by ID, then use that */
 	if (ringid > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dkref = lookup_user_key(ringid, KEY_LOOKUP_CREATE, KEY_WRITE);
+=======
+		dkref = lookup_user_key(ringid, KEY_LOOKUP_CREATE, KEY_NEED_WRITE);
+>>>>>>> v3.18
 =======
 		dkref = lookup_user_key(ringid, KEY_LOOKUP_CREATE, KEY_NEED_WRITE);
 >>>>>>> v3.18
@@ -1436,8 +1575,13 @@ error:
  * return the old setting.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If a thread or process keyring is specified then it will be created if it
  * doesn't yet exist.  The old setting will be returned if successful.
+=======
+ * If a process keyring is specified then this will be created if it doesn't
+ * yet exist.  The old setting will be returned if successful.
+>>>>>>> v3.18
 =======
  * If a process keyring is specified then this will be created if it doesn't
  * yet exist.  The old setting will be returned if successful.
@@ -1467,14 +1611,20 @@ long keyctl_set_reqkey_keyring(int reqkey_defl)
 	case KEY_REQKEY_DEFL_PROCESS_KEYRING:
 		ret = install_process_keyring_to_cred(new);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret < 0)
 			goto error;
 =======
+=======
+>>>>>>> v3.18
 		if (ret < 0) {
 			if (ret != -EEXIST)
 				goto error;
 			ret = 0;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto set;
 
@@ -1521,7 +1671,11 @@ long keyctl_set_timeout(key_serial_t id, unsigned timeout)
 
 	key_ref = lookup_user_key(id, KEY_LOOKUP_CREATE | KEY_LOOKUP_PARTIAL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  KEY_SETATTR);
+=======
+				  KEY_NEED_SETATTR);
+>>>>>>> v3.18
 =======
 				  KEY_NEED_SETATTR);
 >>>>>>> v3.18
@@ -1628,7 +1782,11 @@ long keyctl_get_security(key_serial_t keyid,
 	long ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key_ref = lookup_user_key(keyid, KEY_LOOKUP_PARTIAL, KEY_VIEW);
+=======
+	key_ref = lookup_user_key(keyid, KEY_LOOKUP_PARTIAL, KEY_NEED_VIEW);
+>>>>>>> v3.18
 =======
 	key_ref = lookup_user_key(keyid, KEY_LOOKUP_PARTIAL, KEY_NEED_VIEW);
 >>>>>>> v3.18
@@ -1696,7 +1854,11 @@ long keyctl_session_to_parent(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	keyring_r = lookup_user_key(KEY_SPEC_SESSION_KEYRING, 0, KEY_LINK);
+=======
+	keyring_r = lookup_user_key(KEY_SPEC_SESSION_KEYRING, 0, KEY_NEED_LINK);
+>>>>>>> v3.18
 =======
 	keyring_r = lookup_user_key(KEY_SPEC_SESSION_KEYRING, 0, KEY_NEED_LINK);
 >>>>>>> v3.18
@@ -1885,6 +2047,12 @@ SYSCALL_DEFINE5(keyctl, int, option, unsigned long, arg2, unsigned long, arg3,
 		return keyctl_invalidate_key((key_serial_t) arg2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case KEYCTL_GET_PERSISTENT:
+		return keyctl_get_persistent((uid_t)arg2, (key_serial_t)arg3);
+
+>>>>>>> v3.18
 =======
 	case KEYCTL_GET_PERSISTENT:
 		return keyctl_get_persistent((uid_t)arg2, (key_serial_t)arg3);

@@ -23,6 +23,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -32,16 +36,22 @@
 #include <linux/pm.h>			/* pm_message_t */
 #include <linux/stringify.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* number of supported soundcards */
 #ifdef CONFIG_SND_DYNAMIC_MINORS
 #define SNDRV_CARDS 32
 =======
+=======
+>>>>>>> v3.18
 #include <linux/printk.h>
 
 /* number of supported soundcards */
 #ifdef CONFIG_SND_DYNAMIC_MINORS
 #define SNDRV_CARDS CONFIG_SND_MAX_CARDS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 #define SNDRV_CARDS 8		/* don't change - minor numbers */
@@ -52,6 +62,7 @@
 /* forward declarations */
 struct pci_dev;
 struct module;
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct device;
 struct device_attribute;
@@ -87,6 +98,8 @@ typedef int __bitwise snd_device_cmd_t;
 #define	SNDRV_DEV_CMD_NORMAL	((__force snd_device_cmd_t) 1)	
 #define	SNDRV_DEV_CMD_POST	((__force snd_device_cmd_t) 2)
 =======
+=======
+>>>>>>> v3.18
 struct completion;
 
 /* device allocation stuff */
@@ -114,6 +127,9 @@ enum snd_device_state {
 	SNDRV_DEV_REGISTERED,
 	SNDRV_DEV_DISCONNECTED,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct snd_device;
@@ -128,8 +144,13 @@ struct snd_device {
 	struct list_head list;		/* list of registered devices */
 	struct snd_card *card;		/* card which holds this device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_device_state_t state;	/* state of the device */
 	snd_device_type_t type;		/* device type */
+=======
+	enum snd_device_state state;	/* state of the device */
+	enum snd_device_type type;	/* device type */
+>>>>>>> v3.18
 =======
 	enum snd_device_state state;	/* state of the device */
 	enum snd_device_type type;	/* device type */
@@ -180,6 +201,7 @@ struct snd_card {
 	spinlock_t files_lock;		/* lock the files for this card */
 	int shutdown;			/* this card is going down */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int free_on_last_close;		/* free in context of file_release */
 	wait_queue_head_t shutdown_sleep;
 	atomic_t refcount;		/* refcount for disconnection */
@@ -189,10 +211,15 @@ struct snd_card {
 	unsigned long offline_change;
 	wait_queue_head_t offline_poll_wait;
 =======
+=======
+>>>>>>> v3.18
 	struct completion *release_completion;
 	struct device *dev;		/* device assigned to this card */
 	struct device card_dev;		/* cardX object for sysfs */
 	bool registered;		/* card_dev is registered? */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PM
@@ -208,6 +235,11 @@ struct snd_card {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define dev_to_snd_card(p)	container_of(p, struct snd_card, card_dev)
+
+>>>>>>> v3.18
 =======
 #define dev_to_snd_card(p)	container_of(p, struct snd_card, card_dev)
 
@@ -261,7 +293,11 @@ struct snd_minor {
 static inline struct device *snd_card_get_device_link(struct snd_card *card)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return card ? card->card_dev : NULL;
+=======
+	return card ? &card->card_dev : NULL;
+>>>>>>> v3.18
 =======
 	return card ? &card->card_dev : NULL;
 >>>>>>> v3.18
@@ -312,6 +348,7 @@ static inline int snd_register_device(int type, struct snd_card *card, int dev,
 int snd_unregister_device(int type, struct snd_card *card, int dev);
 void *snd_lookup_minor_data(unsigned int minor, int type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_add_device_sysfs_file(int type, struct snd_card *card, int dev,
 			      struct device_attribute *attr);
 
@@ -320,11 +357,16 @@ int snd_register_oss_device(int type, struct snd_card *card, int dev,
 			    const struct file_operations *f_ops, void *private_data,
 			    const char *name);
 =======
+=======
+>>>>>>> v3.18
 struct device *snd_get_device(int type, struct snd_card *card, int dev);
 
 #ifdef CONFIG_SND_OSSEMUL
 int snd_register_oss_device(int type, struct snd_card *card, int dev,
 			    const struct file_operations *f_ops, void *private_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int snd_unregister_oss_device(int type, struct snd_card *card, int dev);
 void *snd_lookup_oss_minor_data(unsigned int minor, int type);
@@ -360,9 +402,15 @@ extern int (*snd_mixer_oss_notify_callback)(struct snd_card *card, int cmd);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_card_create(int idx, const char *id,
 		    struct module *module, int extra_size,
 		    struct snd_card **card_ret);
+=======
+int snd_card_new(struct device *parent, int idx, const char *xid,
+		 struct module *module, int extra_size,
+		 struct snd_card **card_ret);
+>>>>>>> v3.18
 =======
 int snd_card_new(struct device *parent, int idx, const char *xid,
 		 struct module *module, int extra_size,
@@ -380,9 +428,13 @@ int snd_component_add(struct snd_card *card, const char *component);
 int snd_card_file_add(struct snd_card *card, struct file *file);
 int snd_card_file_remove(struct snd_card *card, struct file *file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_card_unref(struct snd_card *card);
 void snd_card_change_online_state(struct snd_card *card, int online);
 bool snd_card_is_online_state(struct snd_card *card);
+=======
+#define snd_card_unref(card)	put_device(&(card)->card_dev)
+>>>>>>> v3.18
 =======
 #define snd_card_unref(card)	put_device(&(card)->card_dev)
 >>>>>>> v3.18
@@ -391,6 +443,7 @@ bool snd_card_is_online_state(struct snd_card *card);
 
 /* device.c */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int snd_device_new(struct snd_card *card, snd_device_type_t type,
 		   void *device_data, struct snd_device_ops *ops);
@@ -401,6 +454,8 @@ int snd_device_disconnect_all(struct snd_card *card);
 int snd_device_free(struct snd_card *card, void *device_data);
 int snd_device_free_all(struct snd_card *card, snd_device_cmd_t cmd);
 =======
+=======
+>>>>>>> v3.18
 int snd_device_new(struct snd_card *card, enum snd_device_type type,
 		   void *device_data, struct snd_device_ops *ops);
 int snd_device_register(struct snd_card *card, void *device_data);
@@ -408,6 +463,9 @@ int snd_device_register_all(struct snd_card *card);
 int snd_device_disconnect_all(struct snd_card *card);
 void snd_device_free(struct snd_card *card, void *device_data);
 void snd_device_free_all(struct snd_card *card);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* isadma.c */
@@ -475,12 +533,18 @@ void __snd_printk(unsigned int level, const char *file, int line,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Suppress high rates of output when CONFIG_SND_DEBUG is enabled.
  */
 #define snd_printd_ratelimit() printk_ratelimit()
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * snd_BUG_ON - debugging check macro
  * @cond: condition to evaluate
@@ -505,6 +569,11 @@ static inline void _snd_printd(int level, const char *format, ...) {}
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline bool snd_printd_ratelimit(void) { return false; }
+
+>>>>>>> v3.18
 =======
 static inline bool snd_printd_ratelimit(void) { return false; }
 
@@ -537,7 +606,10 @@ static inline void snd_printdd(const char *format, ...) {}
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PCI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* PCI quirk list helper */
@@ -576,6 +648,10 @@ struct snd_pci_quirk {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PCI
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PCI
 >>>>>>> v3.18
@@ -586,7 +662,10 @@ const struct snd_pci_quirk *
 snd_pci_quirk_lookup_id(u16 vendor, u16 device,
 			const struct snd_pci_quirk *list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 static inline const struct snd_pci_quirk *
 snd_pci_quirk_lookup(struct pci_dev *pci, const struct snd_pci_quirk *list)
@@ -600,6 +679,9 @@ snd_pci_quirk_lookup_id(u16 vendor, u16 device,
 {
 	return NULL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

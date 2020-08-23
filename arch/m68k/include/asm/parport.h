@@ -12,6 +12,11 @@
 #define _ASM_M68K_PARPORT_H 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#undef insl
+#undef outsl
+>>>>>>> v3.18
 =======
 #undef insl
 #undef outsl

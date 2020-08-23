@@ -66,6 +66,10 @@ config SGI_NEWPORT_CONSOLE
         tristate "SGI Newport Console support"
         depends on SGI_IP22 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        select FONT_SUPPORT
+>>>>>>> v3.18
 =======
         select FONT_SUPPORT
 >>>>>>> v3.18
@@ -97,13 +101,19 @@ config DUMMY_CONSOLE_ROWS
 config FRAMEBUFFER_CONSOLE
 	tristate "Framebuffer Console support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on FB
 	select CRC32
 =======
+=======
+>>>>>>> v3.18
 	depends on FB && !UML
 	select VT_HW_CONSOLE_BINDING
 	select CRC32
 	select FONT_SUPPORT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Low-level framebuffer-based console driver.
@@ -138,6 +148,10 @@ config STI_CONSOLE
         bool "STI text console"
         depends on PARISC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        select FONT_SUPPORT
+>>>>>>> v3.18
 =======
         select FONT_SUPPORT
 >>>>>>> v3.18
@@ -147,6 +161,7 @@ config STI_CONSOLE
           machines.  Say Y here to build support for it into your kernel.
           The alternative is to use your primary serial port as a console.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config FONTS
 	bool "Select compiled-in fonts"
@@ -257,6 +272,8 @@ config FONT_AUTOSELECT
 	depends on !FONT_10x18
 	select FONT_8x16
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endmenu

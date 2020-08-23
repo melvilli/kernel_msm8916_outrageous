@@ -34,6 +34,7 @@ struct sh_dmae_slave_config {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct sh_dmae_channel {
 	unsigned int	offset;
 	unsigned int	dmars;
@@ -42,6 +43,8 @@ struct sh_dmae_channel {
 };
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct sh_dmae_channel - DMAC channel platform data
  * @offset:		register offset within the main IOMEM resource
@@ -80,6 +83,9 @@ struct sh_dmae_channel {
  * @chclr_bitwise:	channel CHCLR registers are bitwise
  * @slave_only:		DMAC cannot be used for MEMCPY
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct sh_dmae_pdata {
 	const struct sh_dmae_slave_config *slave;
@@ -100,6 +106,7 @@ struct sh_dmae_pdata {
 	unsigned int needs_tend_set:1;
 	unsigned int no_dmars:1;
 	unsigned int chclr_present:1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int slave_only:1;
 };
@@ -143,6 +150,8 @@ struct sh_dmae_pdata {
 
 bool shdma_chan_filter(struct dma_chan *chan, void *arg);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int chclr_bitwise:1;
 	unsigned int slave_only:1;
 };
@@ -164,6 +173,9 @@ bool shdma_chan_filter(struct dma_chan *chan, void *arg);
 #define CHCR_DE	0x00000001	/* DMA Enable */
 #define CHCR_TE	0x00000002	/* Transfer End Flag */
 #define CHCR_IE	0x00000004	/* Interrupt Enable */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

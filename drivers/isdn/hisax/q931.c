@@ -811,7 +811,11 @@ prfeatureind(char *dest, u_char *p)
 	dp += prbits(dp, *p, 8, 8);
 	*dp++ = '\n';
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(*p++ & 80)) {
+=======
+	if (!(*p++ & 0x80)) {
+>>>>>>> v3.18
 =======
 	if (!(*p++ & 0x80)) {
 >>>>>>> v3.18
@@ -1184,7 +1188,11 @@ LogFrame(struct IsdnCardState *cs, u_char *buf, int size)
 		*dp++ = '\n';
 		*dp = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		HiSax_putstatus(cs, NULL, cs->dlog);
+=======
+		HiSax_putstatus(cs, NULL, "%s", cs->dlog);
+>>>>>>> v3.18
 =======
 		HiSax_putstatus(cs, NULL, "%s", cs->dlog);
 >>>>>>> v3.18
@@ -1255,7 +1263,11 @@ dlogframe(struct IsdnCardState *cs, struct sk_buff *skb, int dir)
 	if (finish) {
 		*dp = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		HiSax_putstatus(cs, NULL, cs->dlog);
+=======
+		HiSax_putstatus(cs, NULL, "%s", cs->dlog);
+>>>>>>> v3.18
 =======
 		HiSax_putstatus(cs, NULL, "%s", cs->dlog);
 >>>>>>> v3.18
@@ -1522,7 +1534,11 @@ dlogframe(struct IsdnCardState *cs, struct sk_buff *skb, int dir)
 	}
 	*dp = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	HiSax_putstatus(cs, NULL, cs->dlog);
+=======
+	HiSax_putstatus(cs, NULL, "%s", cs->dlog);
+>>>>>>> v3.18
 =======
 	HiSax_putstatus(cs, NULL, "%s", cs->dlog);
 >>>>>>> v3.18

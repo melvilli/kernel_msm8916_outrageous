@@ -41,15 +41,21 @@
 
 /* Various timeout values in ms */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MTIP_NCQ_COMMAND_TIMEOUT_MS       5000
 #define MTIP_IOCTL_COMMAND_TIMEOUT_MS     5000
 #define MTIP_INTERNAL_COMMAND_TIMEOUT_MS  5000
 =======
+=======
+>>>>>>> v3.18
 #define MTIP_NCQ_CMD_TIMEOUT_MS      15000
 #define MTIP_IOCTL_CMD_TIMEOUT_MS    5000
 #define MTIP_INT_CMD_TIMEOUT_MS      5000
 #define MTIP_QUIESCE_IO_TIMEOUT_MS   (MTIP_NCQ_CMD_TIMEOUT_MS * \
 				     (MTIP_MAX_RETRIES + 1))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* check for timeouts every 500ms */
@@ -62,7 +68,11 @@
 
 /* unaligned IO handling */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MTIP_MAX_UNALIGNED_SLOTS	8
+=======
+#define MTIP_MAX_UNALIGNED_SLOTS	2
+>>>>>>> v3.18
 =======
 #define MTIP_MAX_UNALIGNED_SLOTS	2
 >>>>>>> v3.18
@@ -82,7 +92,11 @@
  * a single command may have.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MTIP_MAX_SG		128
+=======
+#define MTIP_MAX_SG		504
+>>>>>>> v3.18
 =======
 #define MTIP_MAX_SG		504
 >>>>>>> v3.18
@@ -109,7 +123,11 @@
 /* Driver name and version strings */
 #define MTIP_DRV_NAME		"mtip32xx"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MTIP_DRV_VERSION	"1.2.6os3"
+=======
+#define MTIP_DRV_VERSION	"1.3.1"
+>>>>>>> v3.18
 =======
 #define MTIP_DRV_VERSION	"1.3.1"
 >>>>>>> v3.18
@@ -161,6 +179,10 @@ enum {
 	MTIP_PF_ISSUE_CMDS_BIT      = 5,
 	MTIP_PF_REBUILD_BIT         = 6,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	MTIP_PF_SR_CLEANUP_BIT      = 7,
+>>>>>>> v3.18
 =======
 	MTIP_PF_SR_CLEANUP_BIT      = 7,
 >>>>>>> v3.18
@@ -172,6 +194,7 @@ enum {
 	MTIP_DDF_OVER_TEMP_BIT      = 2,
 	MTIP_DDF_WRITE_PROTECT_BIT  = 3,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MTIP_DDF_STOP_IO      = ((1 << MTIP_DDF_REMOVE_PENDING_BIT) |
 				(1 << MTIP_DDF_SEC_LOCK_BIT) |
 				(1 << MTIP_DDF_OVER_TEMP_BIT) |
@@ -180,12 +203,18 @@ enum {
 =======
 	MTIP_DDF_REMOVE_DONE_BIT    = 4,
 >>>>>>> v3.18
+=======
+	MTIP_DDF_REMOVE_DONE_BIT    = 4,
+>>>>>>> v3.18
 	MTIP_DDF_CLEANUP_BIT        = 5,
 	MTIP_DDF_RESUME_BIT         = 6,
 	MTIP_DDF_INIT_DONE_BIT      = 7,
 	MTIP_DDF_REBUILD_FAILED_BIT = 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	MTIP_DDF_STOP_IO      = ((1 << MTIP_DDF_REMOVE_PENDING_BIT) |
 				(1 << MTIP_DDF_SEC_LOCK_BIT) |
@@ -193,6 +222,9 @@ enum {
 				(1 << MTIP_DDF_WRITE_PROTECT_BIT) |
 				(1 << MTIP_DDF_REBUILD_FAILED_BIT)),
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -366,12 +398,17 @@ struct mtip_cmd {
 	void (*comp_func)(struct mtip_port *port,
 				int tag,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				void *data,
 				int status);
 	/* Additional callback function that may be called by comp_func() */
 	void (*async_callback)(void *data, int status);
 
 	void *async_data; /* Addl. data passed to async_callback() */
+=======
+				struct mtip_cmd *cmd,
+				int status);
+>>>>>>> v3.18
 =======
 				struct mtip_cmd *cmd,
 				int status);
@@ -387,10 +424,13 @@ struct mtip_cmd {
 
 	int direction; /* Data transfer direction */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	unsigned long comp_time; /* command completion time, in jiffies */
 
 	atomic_t active; /* declares if this command sent to the drive. */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -434,6 +474,7 @@ struct mtip_port {
 	dma_addr_t rxfis_dma;
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Pointer to the beginning of the command table memory as used
 	 * by the driver.
 	 */
@@ -444,6 +485,8 @@ struct mtip_port {
 	 */
 	dma_addr_t command_tbl_dma;
 =======
+=======
+>>>>>>> v3.18
 	 * Pointer to the DMA region for RX Fis, Identify, RLE10, and SMART
 	 */
 	void *block1;
@@ -451,6 +494,9 @@ struct mtip_port {
 	 * DMA address of region for RX Fis, Identify, RLE10, and SMART
 	 */
 	dma_addr_t block1_dma;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Pointer to the beginning of the identify data memory as used
@@ -491,12 +537,15 @@ struct mtip_port {
 	 */
 	unsigned long cmds_to_issue[SLOTBITS_IN_LONGS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Array of command slots. Structure includes pointers to the
 	 * command header and command table, and completion function and data
 	 * pointers.
 	 */
 	struct mtip_cmd commands[MTIP_MAX_COMMAND_SLOTS];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Used by mtip_service_thread to wait for an event */
@@ -510,6 +559,7 @@ struct mtip_port {
 	 * Timer used to complete commands that have been active for too long.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timer_list cmd_timer;
 	unsigned long ic_pause_timer;
 	/*
@@ -517,6 +567,9 @@ struct mtip_port {
 	 * command slots available.
 	 */
 	struct semaphore cmd_slot;
+=======
+	unsigned long ic_pause_timer;
+>>>>>>> v3.18
 =======
 	unsigned long ic_pause_timer;
 >>>>>>> v3.18
@@ -547,6 +600,11 @@ struct driver_data {
 	struct request_queue *queue; /* Our request queue. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct blk_mq_tag_set tags; /* blk_mq tags */
+
+>>>>>>> v3.18
 =======
 	struct blk_mq_tag_set tags; /* blk_mq tags */
 
@@ -568,6 +626,11 @@ struct driver_data {
 	bool trim_supp; /* flag indicating trim support */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool sr;
+
+>>>>>>> v3.18
 =======
 	bool sr;
 
@@ -579,6 +642,7 @@ struct driver_data {
 	struct workqueue_struct *isr_workq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mtip_work work[MTIP_MAX_SLOT_GROUPS];
 
 	atomic_t irq_workers_active;
@@ -587,6 +651,8 @@ struct driver_data {
 
 	int unal_qdepth; /* qdepth of unaligned IO queue */
 =======
+=======
+>>>>>>> v3.18
 	atomic_t irq_workers_active;
 
 	struct mtip_work work[MTIP_MAX_SLOT_GROUPS];
@@ -594,12 +660,20 @@ struct driver_data {
 	int isr_binding;
 
 	struct block_device *bdev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct list_head online_list; /* linkage for online list */
 
 	struct list_head remove_list; /* linkage for removing list */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	int unal_qdepth; /* qdepth of unaligned IO queue */
+>>>>>>> v3.18
 =======
 
 	int unal_qdepth; /* qdepth of unaligned IO queue */

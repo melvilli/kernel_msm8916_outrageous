@@ -93,6 +93,12 @@ static bool linkwatch_urgent_event(struct net_device *dev)
 		return true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (dev->priv_flags & IFF_TEAM_PORT)
+		return true;
+
+>>>>>>> v3.18
 =======
 	if (dev->priv_flags & IFF_TEAM_PORT)
 		return true;

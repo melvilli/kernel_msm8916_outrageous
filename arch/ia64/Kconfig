@@ -7,17 +7,23 @@ menu "Processor type and features"
 config IA64
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select PCI if (!IA64_HP_SIM)
 	select ACPI if (!IA64_HP_SIM)
 	select PM if (!IA64_HP_SIM)
 	select ARCH_SUPPORTS_MSI
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_MIGHT_HAVE_PC_PARPORT
 	select ARCH_MIGHT_HAVE_PC_SERIO
 	select PCI if (!IA64_HP_SIM)
 	select ACPI if (!IA64_HP_SIM)
 	select ARCH_MIGHT_HAVE_ACPI_PDC if ACPI
 	select PM if (!IA64_HP_SIM)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HAVE_UNSTABLE_SCHED_CLOCK
 	select HAVE_IDE
@@ -30,6 +36,10 @@ config IA64
 	select HAVE_DMA_ATTRS
 	select HAVE_KVM
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select TTY
+>>>>>>> v3.18
 =======
 	select TTY
 >>>>>>> v3.18
@@ -39,6 +49,10 @@ config IA64
 	select HAVE_MEMBLOCK_NODE_MAP
 	select HAVE_VIRT_CPU_ACCOUNTING
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_HAS_SG_CHAIN
+>>>>>>> v3.18
 =======
 	select ARCH_HAS_SG_CHAIN
 >>>>>>> v3.18
@@ -48,6 +62,10 @@ config IA64
 	select GENERIC_PENDING_IRQ if SMP
 	select GENERIC_IRQ_SHOW
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select GENERIC_IRQ_LEGACY
+>>>>>>> v3.18
 =======
 	select GENERIC_IRQ_LEGACY
 >>>>>>> v3.18
@@ -64,6 +82,11 @@ config IA64
 	select HAVE_MOD_ARCH_SPECIFIC
 	select MODULES_USE_ELF_RELA
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_USE_CMPXCHG_LOCKREF
+	select HAVE_ARCH_AUDITSYSCALL
+>>>>>>> v3.18
 =======
 	select ARCH_USE_CMPXCHG_LOCKREF
 	select HAVE_ARCH_AUDITSYSCALL
@@ -130,6 +153,10 @@ config DMI
 	bool
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select DMI_SCAN_MACHINE_NON_EFI_FALLBACK
+>>>>>>> v3.18
 =======
 	select DMI_SCAN_MACHINE_NON_EFI_FALLBACK
 >>>>>>> v3.18
@@ -177,9 +204,12 @@ config PARAVIRT
 	  the kernel is theoretically slower and slightly larger.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 source "arch/ia64/xen/Kconfig"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif
@@ -208,7 +238,10 @@ config IA64_GENERIC
 	  SGI-UV		For SGI UV systems
 	  Ski-simulator		For the HP simulator <http://www.hpl.hp.com/research/linux/ski/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Xen-domU		For xen domU system
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -267,6 +300,7 @@ config IA64_HP_SIM
 	select SWIOTLB
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config IA64_XEN_GUEST
 	bool "Xen guest"
 	select SWIOTLB
@@ -275,6 +309,8 @@ config IA64_XEN_GUEST
 	  Build a kernel that runs on Xen guest domain. At this moment only
 	  16KB page size in supported.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endchoice
@@ -414,7 +450,10 @@ config HOTPLUG_CPU
 	bool "Support for hot-pluggable CPUs"
 	depends on SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HOTPLUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default n
@@ -607,9 +646,15 @@ config KEXEC
 	  It is an ongoing process to be certain the hardware in a machine
 	  is properly shutdown, so do not be surprised if this code does not
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  initially work for you.  It may help to enable device hotplugging
 	  support.  As of this writing the exact hardware interface is
 	  strongly in flux, so no good recommendation can be made.
+=======
+	  initially work for you.  As of this writing the exact hardware
+	  interface is strongly in flux, so no good recommendation can be
+	  made.
+>>>>>>> v3.18
 =======
 	  initially work for you.  As of this writing the exact hardware
 	  interface is strongly in flux, so no good recommendation can be

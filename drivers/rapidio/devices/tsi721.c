@@ -769,6 +769,7 @@ static int tsi721_enable_msix(struct tsi721_device *priv)
 #endif /* CONFIG_RAPIDIO_DMA_ENGINE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = pci_enable_msix(priv->pdev, entries, ARRAY_SIZE(entries));
 	if (err) {
 		if (err > 0)
@@ -779,10 +780,15 @@ static int tsi721_enable_msix(struct tsi721_device *priv)
 			dev_err(&priv->pdev->dev,
 				"Failed to enable MSI-X (err=%d)\n", err);
 =======
+=======
+>>>>>>> v3.18
 	err = pci_enable_msix_exact(priv->pdev, entries, ARRAY_SIZE(entries));
 	if (err) {
 		dev_err(&priv->pdev->dev,
 			"Failed to enable MSI-X (err=%d)\n", err);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return err;
 	}
@@ -2264,6 +2270,10 @@ static int tsi721_setup_mport(struct tsi721_device *priv)
 	mport->priv = (void *)priv;
 	mport->phys_efptr = 0x100;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mport->dev.parent = &pdev->dev;
+>>>>>>> v3.18
 =======
 	mport->dev.parent = &pdev->dev;
 >>>>>>> v3.18
@@ -2509,7 +2519,11 @@ err_exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(tsi721_pci_tbl) = {
+=======
+static const struct pci_device_id tsi721_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id tsi721_pci_tbl[] = {
 >>>>>>> v3.18
@@ -2531,6 +2545,7 @@ static int __init tsi721_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __exit tsi721_exit(void)
 {
 	pci_unregister_driver(&tsi721_driver);
@@ -2538,9 +2553,14 @@ static void __exit tsi721_exit(void)
 
 device_initcall(tsi721_init);
 =======
+=======
+>>>>>>> v3.18
 device_initcall(tsi721_init);
 
 MODULE_DESCRIPTION("IDT Tsi721 PCIExpress-to-SRIO bridge driver");
 MODULE_AUTHOR("Integrated Device Technology, Inc.");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -25,8 +25,12 @@ struct iw_handler_def;
 struct iw_statistics;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct iw_handler_def r8192_wx_handlers_def;
 struct iw_statistics *r8192_get_wireless_stats(struct net_device *dev);
+=======
+extern const struct iw_handler_def r8192_wx_handlers_def;
+>>>>>>> v3.18
 =======
 extern const struct iw_handler_def r8192_wx_handlers_def;
 >>>>>>> v3.18

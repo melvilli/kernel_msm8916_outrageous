@@ -27,9 +27,15 @@ enum netevent_notif_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int register_netevent_notifier(struct notifier_block *nb);
 extern int unregister_netevent_notifier(struct notifier_block *nb);
 extern int call_netevent_notifiers(unsigned long val, void *v);
+=======
+int register_netevent_notifier(struct notifier_block *nb);
+int unregister_netevent_notifier(struct notifier_block *nb);
+int call_netevent_notifiers(unsigned long val, void *v);
+>>>>>>> v3.18
 =======
 int register_netevent_notifier(struct notifier_block *nb);
 int unregister_netevent_notifier(struct notifier_block *nb);

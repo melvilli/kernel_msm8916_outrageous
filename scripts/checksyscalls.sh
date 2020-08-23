@@ -26,7 +26,11 @@ cat << EOF
 #define __IGNORE_lchown		/* fchownat */
 #define __IGNORE_access		/* faccessat */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __IGNORE_rename		/* renameat */
+=======
+#define __IGNORE_rename		/* renameat2 */
+>>>>>>> v3.18
 =======
 #define __IGNORE_rename		/* renameat2 */
 >>>>>>> v3.18
@@ -42,6 +46,12 @@ cat << EOF
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Missing flags argument */
+#define __IGNORE_renameat	/* renameat2 */
+
+>>>>>>> v3.18
 =======
 /* Missing flags argument */
 #define __IGNORE_renameat	/* renameat2 */

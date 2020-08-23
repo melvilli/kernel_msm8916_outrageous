@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Nomadik clock implementation
  * Copyright (C) 2013 ST-Ericsson AB
@@ -10,6 +13,9 @@
 #define pr_fmt(fmt) "Nomadik SRC clocks: " fmt
 
 #include <linux/bitops.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/clkdev.h>
@@ -17,18 +23,25 @@
 #include <linux/io.h>
 #include <linux/clk-provider.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <linux/debugfs.h>
 #include <linux/seq_file.h>
 #include <linux/spinlock.h>
 #include <linux/reboot.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * The Nomadik clock tree is described in the STN8815A12 DB V4.2
  * reference manual for the chip, page 94 ff.
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 
@@ -70,6 +83,8 @@ void __init nomadik_clk_init(void)
 	clk_register_clkdev(clk, NULL, "nmk-i2c.1");
 }
 =======
+=======
+>>>>>>> v3.18
  * Clock IDs are in the STn8815 Reference Manual table 3, page 27.
  */
 
@@ -624,4 +639,7 @@ static void __init of_nomadik_src_clk_setup(struct device_node *np)
 }
 CLK_OF_DECLARE(nomadik_src_clk,
 	"st,nomadik-src-clock", of_nomadik_src_clk_setup);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

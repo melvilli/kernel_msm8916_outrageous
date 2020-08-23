@@ -55,8 +55,13 @@ struct scom_controller {
 	void (*unmap)(scom_map_t map);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 (*read)(scom_map_t map, u32 reg);
 	void (*write)(scom_map_t map, u32 reg, u64 value);
+=======
+	int (*read)(scom_map_t map, u64 reg, u64 *value);
+	int (*write)(scom_map_t map, u64 reg, u64 value);
+>>>>>>> v3.18
 =======
 	int (*read)(scom_map_t map, u64 reg, u64 *value);
 	int (*write)(scom_map_t map, u64 reg, u64 value);
@@ -139,11 +144,14 @@ static inline void scom_unmap(scom_map_t map)
  * @map: Result of scom_map
  * @reg: Register index within that map
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 static inline u64 scom_read(scom_map_t map, u32 reg)
 {
 	return scom_controller->read(map, reg);
 =======
+=======
+>>>>>>> v3.18
  * @value: Updated with the value read
  *
  * Returns 0 (success) or a negative error code
@@ -156,6 +164,9 @@ static inline int scom_read(scom_map_t map, u64 reg, u64 *value)
 	if (rc)
 		*value = 0xfffffffffffffffful;
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -165,6 +176,7 @@ static inline int scom_read(scom_map_t map, u64 reg, u64 *value)
  * @reg: Register index within that map
  * @value: Value to write
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 static inline void scom_write(scom_map_t map, u32 reg, u64 value)
 {
@@ -172,6 +184,8 @@ static inline void scom_write(scom_map_t map, u32 reg, u64 value)
 }
 
 =======
+=======
+>>>>>>> v3.18
  *
  * Returns 0 (success) or a negative error code
  */
@@ -181,6 +195,9 @@ static inline int scom_write(scom_map_t map, u64 reg, u64 value)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PPC_SCOM */
 #endif /* __ASSEMBLY__ */

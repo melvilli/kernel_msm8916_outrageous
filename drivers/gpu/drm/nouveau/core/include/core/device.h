@@ -5,6 +5,10 @@
 #include <core/subdev.h>
 #include <core/engine.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <core/event.h>
+>>>>>>> v3.18
 =======
 #include <core/event.h>
 >>>>>>> v3.18
@@ -22,8 +26,12 @@ enum nv_subdev_type {
 	NVDEV_SUBDEV_GPIO,
 	NVDEV_SUBDEV_I2C,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NVDEV_SUBDEV_CLOCK,
 	NVDEV_SUBDEV_DEVINIT_LAST = NVDEV_SUBDEV_CLOCK,
+=======
+	NVDEV_SUBDEV_DEVINIT_LAST = NVDEV_SUBDEV_I2C,
+>>>>>>> v3.18
 =======
 	NVDEV_SUBDEV_DEVINIT_LAST = NVDEV_SUBDEV_I2C,
 >>>>>>> v3.18
@@ -33,6 +41,10 @@ enum nv_subdev_type {
 	 * list above them exist and have been initialised.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NVDEV_SUBDEV_FUSE,
+>>>>>>> v3.18
 =======
 	NVDEV_SUBDEV_FUSE,
 >>>>>>> v3.18
@@ -42,7 +54,11 @@ enum nv_subdev_type {
 	NVDEV_SUBDEV_TIMER,
 	NVDEV_SUBDEV_FB,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NVDEV_SUBDEV_LTCG,
+=======
+	NVDEV_SUBDEV_LTC,
+>>>>>>> v3.18
 =======
 	NVDEV_SUBDEV_LTC,
 >>>>>>> v3.18
@@ -51,11 +67,14 @@ enum nv_subdev_type {
 	NVDEV_SUBDEV_VM,
 	NVDEV_SUBDEV_BAR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NVDEV_SUBDEV_VOLT,
 	NVDEV_SUBDEV_THERM,
 
 	NVDEV_ENGINE_DMAOBJ,
 =======
+=======
+>>>>>>> v3.18
 	NVDEV_SUBDEV_PWR,
 	NVDEV_SUBDEV_VOLT,
 	NVDEV_SUBDEV_THERM,
@@ -64,6 +83,9 @@ enum nv_subdev_type {
 	NVDEV_ENGINE_FIRST,
 	NVDEV_ENGINE_DMAOBJ = NVDEV_ENGINE_FIRST,
 	NVDEV_ENGINE_IFB,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NVDEV_ENGINE_FIFO,
 	NVDEV_ENGINE_SW,
@@ -77,15 +99,21 @@ enum nv_subdev_type {
 	NVDEV_ENGINE_COPY0,
 	NVDEV_ENGINE_COPY1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NVDEV_ENGINE_UNK1C1,
 	NVDEV_ENGINE_VENC,
 	NVDEV_ENGINE_DISP,
 =======
+=======
+>>>>>>> v3.18
 	NVDEV_ENGINE_COPY2,
 	NVDEV_ENGINE_VIC,
 	NVDEV_ENGINE_VENC,
 	NVDEV_ENGINE_DISP,
 	NVDEV_ENGINE_PERFMON,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	NVDEV_SUBDEV_NR,
@@ -97,20 +125,30 @@ struct nouveau_device {
 
 	struct pci_dev *pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 handle;
 
 =======
+=======
+>>>>>>> v3.18
 	struct platform_device *platformdev;
 	u64 handle;
 
 	struct nvkm_event event;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const char *cfgopt;
 	const char *dbgopt;
 	const char *name;
 	const char *cname;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 disable_mask;
+>>>>>>> v3.18
 =======
 	u64 disable_mask;
 >>>>>>> v3.18
@@ -119,6 +157,10 @@ struct nouveau_device {
 		NV_04    = 0x04,
 		NV_10    = 0x10,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		NV_11    = 0x11,
+>>>>>>> v3.18
 =======
 		NV_11    = 0x11,
 >>>>>>> v3.18
@@ -128,8 +170,13 @@ struct nouveau_device {
 		NV_50    = 0x50,
 		NV_C0    = 0xc0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		NV_D0    = 0xd0,
 		NV_E0    = 0xe0,
+=======
+		NV_E0    = 0xe0,
+		GM100    = 0x110,
+>>>>>>> v3.18
 =======
 		NV_E0    = 0xe0,
 		GM100    = 0x110,
@@ -141,9 +188,12 @@ struct nouveau_device {
 	struct nouveau_oclass *oclass[NVDEV_SUBDEV_NR];
 	struct nouveau_object *subdev[NVDEV_SUBDEV_NR];
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 
 	struct {
 		struct notifier_block nb;
@@ -152,6 +202,9 @@ struct nouveau_device {
 
 int nouveau_device_list(u64 *name, int size);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct nouveau_device *
 nv_device(void *obj)
@@ -202,7 +255,10 @@ nv_device_match(struct nouveau_object *object, u16 dev, u16 ven, u16 sub)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool
 nv_device_is_pci(struct nouveau_device *device)
 {
@@ -225,5 +281,8 @@ nv_device_resource_len(struct nouveau_device *device, unsigned int bar);
 int
 nv_device_get_irq(struct nouveau_device *device, bool stall);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

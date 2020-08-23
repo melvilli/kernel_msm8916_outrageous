@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/init.h>
+>>>>>>> v3.18
 =======
 #include <linux/init.h>
 >>>>>>> v3.18
@@ -14,6 +18,11 @@
 #include <asm/setup.h>
 #include <asm/bootinfo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/bootinfo-apollo.h>
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 =======
 #include <asm/bootinfo-apollo.h>
 #include <asm/byteorder.h>
@@ -53,6 +62,7 @@ static const char *apollo_models[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int apollo_parse_bootinfo(const struct bi_record *record) {
 
 	int unknown = 0;
@@ -66,6 +76,8 @@ int apollo_parse_bootinfo(const struct bi_record *record) {
 		default:
 			 unknown=1;
 =======
+=======
+>>>>>>> v3.18
 int __init apollo_parse_bootinfo(const struct bi_record *record)
 {
 	int unknown = 0;
@@ -78,6 +90,9 @@ int __init apollo_parse_bootinfo(const struct bi_record *record)
 
 	default:
 		 unknown=1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -85,16 +100,22 @@ int __init apollo_parse_bootinfo(const struct bi_record *record)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dn_setup_model(void) {
 
 
 	printk("Apollo hardware found: ");
 	printk("[%s]\n", apollo_models[apollo_model - APOLLO_DN3000]);
 =======
+=======
+>>>>>>> v3.18
 static void __init dn_setup_model(void)
 {
 	pr_info("Apollo hardware found: [%s]\n",
 		apollo_models[apollo_model - APOLLO_DN3000]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch(apollo_model) {
@@ -227,13 +248,19 @@ void dn_sched_init(irq_handler_t timer_routine)
 
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("*(0x10803) %02x\n",*(volatile unsigned char *)(apollo_timer + 0x3));
 	printk("*(0x10803) %02x\n",*(volatile unsigned char *)(apollo_timer + 0x3));
 =======
+=======
+>>>>>>> v3.18
 	pr_info("*(0x10803) %02x\n",
 		*(volatile unsigned char *)(apollo_timer + 0x3));
 	pr_info("*(0x10803) %02x\n",
 		*(volatile unsigned char *)(apollo_timer + 0x3));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -273,6 +300,7 @@ int dn_dummy_hwclk(int op, struct rtc_time *t) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dn_dummy_set_clock_mmss(unsigned long nowtime) {
 
   printk("set_clock_mmss\n");
@@ -280,10 +308,15 @@ int dn_dummy_set_clock_mmss(unsigned long nowtime) {
   return 0;
 
 =======
+=======
+>>>>>>> v3.18
 int dn_dummy_set_clock_mmss(unsigned long nowtime)
 {
 	pr_info("set_clock_mmss\n");
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

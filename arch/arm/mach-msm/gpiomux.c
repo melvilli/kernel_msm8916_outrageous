@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2010,2013-2014, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2010, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2010, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -12,6 +16,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 #include <linux/module.h>
@@ -87,6 +92,8 @@ int msm_gpiomux_write(unsigned gpio, enum msm_gpiomux_setting which,
 	spin_unlock_irqrestore(&gpiomux_lock, irq_flags);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
@@ -139,12 +146,16 @@ int msm_gpiomux_write(unsigned gpio,
 
 	spin_unlock_irqrestore(&gpiomux_lock, irq_flags);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(msm_gpiomux_write);
 
 int msm_gpiomux_get(unsigned gpio)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct msm_gpiomux_rec *rec = msm_gpiomux_recs + gpio;
 	unsigned long irq_flags;
@@ -159,6 +170,8 @@ int msm_gpiomux_get(unsigned gpio)
 	if (rec->ref++ == 0 && rec->sets[GPIOMUX_ACTIVE])
 		__msm_gpiomux_write(gpio, *rec->sets[GPIOMUX_ACTIVE]);
 =======
+=======
+>>>>>>> v3.18
 	struct msm_gpiomux_config *cfg = msm_gpiomux_configs + gpio;
 	unsigned long irq_flags;
 
@@ -168,6 +181,9 @@ int msm_gpiomux_get(unsigned gpio)
 	spin_lock_irqsave(&gpiomux_lock, irq_flags);
 	if (cfg->ref++ == 0 && cfg->active & GPIOMUX_VALID)
 		__msm_gpiomux_write(gpio, cfg->active);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&gpiomux_lock, irq_flags);
 	return 0;
@@ -176,6 +192,7 @@ EXPORT_SYMBOL(msm_gpiomux_get);
 
 int msm_gpiomux_put(unsigned gpio)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct msm_gpiomux_rec *rec = msm_gpiomux_recs + gpio;
 	unsigned long irq_flags;
@@ -191,6 +208,8 @@ int msm_gpiomux_put(unsigned gpio)
 	if (--rec->ref == 0 && rec->sets[GPIOMUX_SUSPENDED])
 		__msm_gpiomux_write(gpio, *rec->sets[GPIOMUX_SUSPENDED]);
 =======
+=======
+>>>>>>> v3.18
 	struct msm_gpiomux_config *cfg = msm_gpiomux_configs + gpio;
 	unsigned long irq_flags;
 
@@ -201,12 +220,16 @@ int msm_gpiomux_put(unsigned gpio)
 	BUG_ON(cfg->ref == 0);
 	if (--cfg->ref == 0 && cfg->suspended & GPIOMUX_VALID)
 		__msm_gpiomux_write(gpio, cfg->suspended);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&gpiomux_lock, irq_flags);
 	return 0;
 }
 EXPORT_SYMBOL(msm_gpiomux_put);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int msm_tlmm_misc_reg_read(enum msm_tlmm_misc_reg misc_reg)
 {
@@ -305,6 +328,8 @@ int msm_gpiomux_init_dt(void)
 }
 EXPORT_SYMBOL(msm_gpiomux_init_dt);
 =======
+=======
+>>>>>>> v3.18
 static int __init gpiomux_init(void)
 {
 	unsigned n;
@@ -318,4 +343,7 @@ static int __init gpiomux_init(void)
 	return 0;
 }
 postcore_initcall(gpiomux_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

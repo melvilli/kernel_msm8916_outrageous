@@ -1467,8 +1467,12 @@ static void gelic_ether_setup_netdev_ops(struct net_device *netdev,
 	netdev->watchdog_timeo = GELIC_NET_WATCHDOG_TIMEOUT;
 	/* NAPI */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_napi_add(netdev, napi,
 		       gelic_net_poll, GELIC_NET_NAPI_WEIGHT);
+=======
+	netif_napi_add(netdev, napi, gelic_net_poll, NAPI_POLL_WEIGHT);
+>>>>>>> v3.18
 =======
 	netif_napi_add(netdev, napi, gelic_net_poll, NAPI_POLL_WEIGHT);
 >>>>>>> v3.18
@@ -1567,7 +1571,11 @@ static struct gelic_card *gelic_alloc_card_net(struct net_device **netdev)
 	 */
 	*netdev = alloc_etherdev(sizeof(struct gelic_port));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!netdev) {
+=======
+	if (!*netdev) {
+>>>>>>> v3.18
 =======
 	if (!*netdev) {
 >>>>>>> v3.18
@@ -1736,7 +1744,11 @@ static int ps3_gelic_driver_probe(struct ps3_system_bus_device *dev)
 	}
 	result = request_irq(card->irq, gelic_card_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     IRQF_DISABLED, netdev->name, card);
+=======
+			     0, netdev->name, card);
+>>>>>>> v3.18
 =======
 			     0, netdev->name, card);
 >>>>>>> v3.18
@@ -1753,6 +1765,7 @@ static int ps3_gelic_driver_probe(struct ps3_system_bus_device *dev)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gelic_card_init_chain(card, &card->tx_chain,
 			card->descr, GELIC_NET_TX_DESCRIPTORS))
 		goto fail_alloc_tx;
@@ -1760,6 +1773,8 @@ static int ps3_gelic_driver_probe(struct ps3_system_bus_device *dev)
 				 card->descr + GELIC_NET_TX_DESCRIPTORS,
 				 GELIC_NET_RX_DESCRIPTORS))
 =======
+=======
+>>>>>>> v3.18
 	result = gelic_card_init_chain(card, &card->tx_chain,
 				       card->descr, GELIC_NET_TX_DESCRIPTORS);
 	if (result)
@@ -1768,6 +1783,9 @@ static int ps3_gelic_driver_probe(struct ps3_system_bus_device *dev)
 				       card->descr + GELIC_NET_TX_DESCRIPTORS,
 				       GELIC_NET_RX_DESCRIPTORS);
 	if (result)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto fail_alloc_rx;
 
@@ -1779,7 +1797,12 @@ static int ps3_gelic_driver_probe(struct ps3_system_bus_device *dev)
 		GELIC_NET_RX_DESCRIPTORS);
 	/* allocate rx skbs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gelic_card_alloc_rx_skbs(card))
+=======
+	result = gelic_card_alloc_rx_skbs(card);
+	if (result)
+>>>>>>> v3.18
 =======
 	result = gelic_card_alloc_rx_skbs(card);
 	if (result)
@@ -1802,7 +1825,12 @@ static int ps3_gelic_driver_probe(struct ps3_system_bus_device *dev)
 
 #ifdef CONFIG_GELIC_WIRELESS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gelic_wl_driver_probe(card)) {
+=======
+	result = gelic_wl_driver_probe(card);
+	if (result) {
+>>>>>>> v3.18
 =======
 	result = gelic_wl_driver_probe(card);
 	if (result) {

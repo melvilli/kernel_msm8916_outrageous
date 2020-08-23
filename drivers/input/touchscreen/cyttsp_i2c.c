@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Source for:
+=======
+ * cyttsp_i2c.c
+>>>>>>> v3.18
 =======
  * cyttsp_i2c.c
 >>>>>>> v3.18
@@ -24,11 +28,15 @@
  * GNU General Public License for more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * Contact Cypress Semiconductor at www.cypress.com <kev@cypress.com>
+=======
+ * Contact Cypress Semiconductor at www.cypress.com <ttdrivers@cypress.com>
+>>>>>>> v3.18
 =======
  * Contact Cypress Semiconductor at www.cypress.com <ttdrivers@cypress.com>
 >>>>>>> v3.18
@@ -42,6 +50,7 @@
 
 #define CY_I2C_DATA_SIZE	128
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int cyttsp_i2c_read_block_data(struct cyttsp *ts,
 				      u8 addr, u8 length, void *values)
@@ -86,6 +95,8 @@ static int cyttsp_i2c_write_block_data(struct cyttsp *ts,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct cyttsp_bus_ops cyttsp_i2c_bus_ops = {
 	.bustype	= BUS_I2C,
 	.write		= cyttsp_i2c_write_block_data,
@@ -110,7 +121,10 @@ static int cyttsp_i2c_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, ts);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

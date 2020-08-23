@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of.h>	/* linux/of.h gets to determine #include ordering */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef _POWERPC_PROM_H
@@ -24,6 +27,7 @@
 #include <linux/atomic.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HAVE_ARCH_DEVTREE_FIXUPS
 
 /*
@@ -39,6 +43,8 @@ extern unsigned long pci_address_to_pio(phys_addr_t address);
 #define pci_address_to_pio pci_address_to_pio
 #endif	/* CONFIG_PCI */
 =======
+=======
+>>>>>>> v3.18
 /* These includes should be removed once implicit includes are cleaned up. */
 #include <linux/of.h>
 #include <linux/of_fdt.h>
@@ -88,11 +94,15 @@ struct boot_param_header {
 /*
  * OF address retreival & translation
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Parse the ibm,dma-window property of an OF node into the busno, phys and
  * size parameters.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void of_parse_dma_window(struct device_node *dn, const void *dma_window_prop,
 		unsigned long *busno, unsigned long *phys, unsigned long *size);
@@ -112,6 +122,8 @@ static inline int of_node_to_nid(struct device_node *device) { return 0; }
 extern void of_instantiate_rtc(void);
 
 =======
+=======
+>>>>>>> v3.18
 void of_parse_dma_window(struct device_node *dn, const __be32 *dma_window,
 			 unsigned long *busno, unsigned long *phys,
 			 unsigned long *size);
@@ -120,6 +132,9 @@ extern void of_instantiate_rtc(void);
 
 extern int of_get_ibm_chip_id(struct device_node *np);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* The of_drconf_cell struct defines the layout of the LMB array
  * specified in the device tree property
@@ -207,6 +222,7 @@ struct of_drconf_cell {
 extern unsigned char ibm_architecture_vec[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* These includes are put at the bottom because they may contain things
  * that are overridden by this file.  Ideally they shouldn't be included
  * by this file, but there are a bunch of .c files that currently depend
@@ -216,6 +232,8 @@ extern unsigned char ibm_architecture_vec[];
 #include <linux/of_irq.h>
 #include <linux/platform_device.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __KERNEL__ */

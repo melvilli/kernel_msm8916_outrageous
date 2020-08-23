@@ -45,7 +45,10 @@ struct cpu_task {
 extern struct cpu_task cpu_tasks[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long low_physmem;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern unsigned long high_physmem;
@@ -56,8 +59,11 @@ extern unsigned long start_vm;
 extern unsigned long long highmem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long _stext, _etext, _sdata, _edata, __bss_start, _end;
 extern unsigned long _unprotected_end;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern unsigned long brk_start;

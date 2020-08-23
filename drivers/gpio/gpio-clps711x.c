@@ -2,7 +2,11 @@
  *  CLPS711X GPIO driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2012 Alexander Shiyan <shc_work@mail.ru>
+=======
+ *  Copyright (C) 2012,2013 Alexander Shiyan <shc_work@mail.ru>
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2012,2013 Alexander Shiyan <shc_work@mail.ru>
 >>>>>>> v3.18
@@ -13,6 +17,7 @@
  * (at your option) any later version.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/io.h>
 #include <linux/slab.h>
@@ -203,6 +208,8 @@ MODULE_LICENSE("GPL v2");
 MODULE_AUTHOR("Alexander Shiyan <shc_work@mail.ru>");
 MODULE_DESCRIPTION("CLPS711X GPIO driver");
 =======
+=======
+>>>>>>> v3.18
 #include <linux/err.h>
 #include <linux/gpio.h>
 #include <linux/module.h>
@@ -293,4 +300,7 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Alexander Shiyan <shc_work@mail.ru>");
 MODULE_DESCRIPTION("CLPS711X GPIO driver");
 MODULE_ALIAS("platform:clps711x-gpio");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

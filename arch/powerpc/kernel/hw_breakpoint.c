@@ -29,7 +29,10 @@
 #include <linux/kernel.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/smp.h>
@@ -77,7 +80,11 @@ int arch_install_hw_breakpoint(struct perf_event *bp)
 	 */
 	if (current->thread.last_hit_ubp != bp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_breakpoint(info);
+=======
+		__set_breakpoint(info);
+>>>>>>> v3.18
 =======
 		__set_breakpoint(info);
 >>>>>>> v3.18
@@ -207,7 +214,11 @@ void thread_change_pc(struct task_struct *tsk, struct pt_regs *regs)
 	info = counter_arch_bp(tsk->thread.last_hit_ubp);
 	regs->msr &= ~MSR_SE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_breakpoint(info);
+=======
+	__set_breakpoint(info);
+>>>>>>> v3.18
 =======
 	__set_breakpoint(info);
 >>>>>>> v3.18
@@ -240,10 +251,15 @@ int __kprobes hw_breakpoint_handler(struct die_args *args)
 
 	bp = __get_cpu_var(bp_per_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bp) {
 		rc = NOTIFY_DONE;
 		goto out;
 	}
+=======
+	if (!bp)
+		goto out;
+>>>>>>> v3.18
 =======
 	if (!bp)
 		goto out;
@@ -304,7 +320,11 @@ int __kprobes hw_breakpoint_handler(struct die_args *args)
 		perf_bp_event(bp, regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_breakpoint(info);
+=======
+	__set_breakpoint(info);
+>>>>>>> v3.18
 =======
 	__set_breakpoint(info);
 >>>>>>> v3.18
@@ -317,7 +337,11 @@ out:
  * Handle single-step exceptions following a DABR hit.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __kprobes single_step_dabr_instruction(struct die_args *args)
+=======
+static int __kprobes single_step_dabr_instruction(struct die_args *args)
+>>>>>>> v3.18
 =======
 static int __kprobes single_step_dabr_instruction(struct die_args *args)
 >>>>>>> v3.18
@@ -344,7 +368,11 @@ static int __kprobes single_step_dabr_instruction(struct die_args *args)
 		perf_bp_event(bp, regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_breakpoint(info);
+=======
+	__set_breakpoint(info);
+>>>>>>> v3.18
 =======
 	__set_breakpoint(info);
 >>>>>>> v3.18

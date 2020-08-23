@@ -54,6 +54,12 @@
 #define XENFEAT_dom0                      11
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Xen also maps grant references at pfn = mfn */
+#define XENFEAT_grant_map_identity        12
+
+>>>>>>> v3.18
 =======
 /* Xen also maps grant references at pfn = mfn */
 #define XENFEAT_grant_map_identity        12

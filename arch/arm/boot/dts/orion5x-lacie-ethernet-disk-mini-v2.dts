@@ -7,9 +7,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /dts-v1/;
 /include/ "orion5x.dtsi"
 =======
+=======
+>>>>>>> v3.18
 /*
  * TODO: add Orion USB device port init when kernel.org support is added.
  * TODO: add flash write support: see below.
@@ -23,6 +26,9 @@
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 #include "orion5x-mv88f5182.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
@@ -35,6 +41,7 @@
 
 	chosen {
 		bootargs = "console=ttyS0,115200n8 earlyprintk";
+<<<<<<< HEAD
 <<<<<<< HEAD
 	};
 
@@ -53,6 +60,8 @@
 	gpio_keys {
 		compatible = "gpio-keys";
 =======
+=======
+>>>>>>> v3.18
 		linux,stdout-path = &uart0;
 	};
 
@@ -66,11 +75,15 @@
 		compatible = "gpio-keys";
 		pinctrl-0 = <&pmx_power_button>;
 		pinctrl-names = "default";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 		button@1 {
 			label = "Power-on Switch";
+<<<<<<< HEAD
 <<<<<<< HEAD
 			linux,code = <116>; /* KEY_POWER */
 			gpios = <&gpio0 18 0>;
@@ -87,6 +100,8 @@
 	};
 };
 =======
+=======
+>>>>>>> v3.18
 			linux,code = <KEY_POWER>;
 			gpios = <&gpio0 18 GPIO_ACTIVE_HIGH>;
 		};
@@ -212,4 +227,7 @@
 &uart0 {
 	status = "okay";
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

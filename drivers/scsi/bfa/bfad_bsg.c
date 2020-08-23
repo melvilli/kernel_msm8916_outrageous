@@ -27,7 +27,10 @@ bfad_iocmd_ioc_enable(struct bfad_s *bfad, void *cmd)
 {
 	struct bfa_bsg_gen_s *iocmd = (struct bfa_bsg_gen_s *)cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	rc = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long	flags;
@@ -38,7 +41,11 @@ bfad_iocmd_ioc_enable(struct bfad_s *bfad, void *cmd)
 		spin_unlock_irqrestore(&bfad->bfad_lock, flags);
 		iocmd->status = BFA_STATUS_OK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return rc;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -51,7 +58,11 @@ bfad_iocmd_ioc_enable(struct bfad_s *bfad, void *cmd)
 	wait_for_completion(&bfad->enable_comp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rc;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -62,7 +73,10 @@ bfad_iocmd_ioc_disable(struct bfad_s *bfad, void *cmd)
 {
 	struct bfa_bsg_gen_s *iocmd = (struct bfa_bsg_gen_s *)cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	rc = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long	flags;
@@ -72,7 +86,11 @@ bfad_iocmd_ioc_disable(struct bfad_s *bfad, void *cmd)
 		spin_unlock_irqrestore(&bfad->bfad_lock, flags);
 		iocmd->status = BFA_STATUS_OK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return rc;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -93,7 +111,11 @@ bfad_iocmd_ioc_disable(struct bfad_s *bfad, void *cmd)
 	iocmd->status = BFA_STATUS_OK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rc;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -252,7 +274,10 @@ bfad_iocmd_iocfc_get_attr(struct bfad_s *bfad, void *cmd)
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bfad_iocmd_ioc_fw_sig_inv(struct bfad_s *bfad, void *cmd)
 {
 	struct bfa_bsg_gen_s *iocmd = (struct bfa_bsg_gen_s *)cmd;
@@ -265,6 +290,9 @@ bfad_iocmd_ioc_fw_sig_inv(struct bfad_s *bfad, void *cmd)
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 bfad_iocmd_iocfc_set_intr(struct bfad_s *bfad, void *cmd)
 {
@@ -440,6 +468,7 @@ bfad_iocmd_port_cfg_maxfrsize(struct bfad_s *bfad, void *cmd)
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 bfad_iocmd_port_cfg_bbsc(struct bfad_s *bfad, void *cmd, unsigned int v_cmd)
 {
 	struct bfa_bsg_gen_s *iocmd = (struct bfa_bsg_gen_s *)cmd;
@@ -460,6 +489,8 @@ bfad_iocmd_port_cfg_bbsc(struct bfad_s *bfad, void *cmd, unsigned int v_cmd)
 }
 
 =======
+=======
+>>>>>>> v3.18
 bfad_iocmd_port_cfg_bbcr(struct bfad_s *bfad, unsigned int cmd, void *pcmd)
 {
 	struct bfa_bsg_bbcr_enable_s *iocmd =
@@ -497,6 +528,9 @@ bfad_iocmd_port_get_bbcr_attr(struct bfad_s *bfad, void *pcmd)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 bfad_iocmd_lport_get_attr(struct bfad_s *bfad, void *cmd)
@@ -1845,20 +1879,27 @@ bfad_iocmd_diag_lb_stat(struct bfad_s *bfad, void *cmd)
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 bfad_iocmd_diag_cfg_dport(struct bfad_s *bfad, unsigned int cmd, void *pcmd)
 {
 	struct bfa_bsg_gen_s *iocmd = (struct bfa_bsg_gen_s *)pcmd;
 =======
+=======
+>>>>>>> v3.18
 bfad_iocmd_diag_dport_enable(struct bfad_s *bfad, void *pcmd)
 {
 	struct bfa_bsg_dport_enable_s *iocmd =
 				(struct bfa_bsg_dport_enable_s *)pcmd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long	flags;
 	struct bfad_hal_comp fcomp;
 
 	init_completion(&fcomp.comp);
 	spin_lock_irqsave(&bfad->bfad_lock, flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cmd == IOCMD_DIAG_DPORT_ENABLE)
 		iocmd->status = bfa_dport_enable(&bfad->bfa,
@@ -1874,6 +1915,8 @@ bfad_iocmd_diag_dport_enable(struct bfad_s *bfad, void *pcmd)
 	spin_unlock_irqrestore(&bfad->bfad_lock, flags);
 
 =======
+=======
+>>>>>>> v3.18
 	iocmd->status = bfa_dport_enable(&bfad->bfa, iocmd->lpcnt,
 					iocmd->pat, bfad_hcb_comp, &fcomp);
 	spin_unlock_irqrestore(&bfad->bfad_lock, flags);
@@ -1897,6 +1940,9 @@ bfad_iocmd_diag_dport_disable(struct bfad_s *bfad, void *pcmd)
 	spin_lock_irqsave(&bfad->bfad_lock, flags);
 	iocmd->status = bfa_dport_disable(&bfad->bfa, bfad_hcb_comp, &fcomp);
 	spin_unlock_irqrestore(&bfad->bfad_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (iocmd->status != BFA_STATUS_OK)
 		bfa_trc(bfad, iocmd->status);
@@ -1905,7 +1951,10 @@ bfad_iocmd_diag_dport_disable(struct bfad_s *bfad, void *pcmd)
 		iocmd->status = fcomp.status;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1930,12 +1979,16 @@ bfad_iocmd_diag_dport_start(struct bfad_s *bfad, void *pcmd)
 		wait_for_completion(&fcomp.comp);
 		iocmd->status = fcomp.status;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 int
+<<<<<<< HEAD
 <<<<<<< HEAD
 bfad_iocmd_diag_dport_get_state(struct bfad_s *bfad, void *pcmd)
 {
@@ -1946,6 +1999,8 @@ bfad_iocmd_diag_dport_get_state(struct bfad_s *bfad, void *pcmd)
 	spin_lock_irqsave(&bfad->bfad_lock, flags);
 	iocmd->status = bfa_dport_get_state(&bfad->bfa, &iocmd->state);
 =======
+=======
+>>>>>>> v3.18
 bfad_iocmd_diag_dport_show(struct bfad_s *bfad, void *pcmd)
 {
 	struct bfa_bsg_diag_dport_show_s *iocmd =
@@ -1954,6 +2009,9 @@ bfad_iocmd_diag_dport_show(struct bfad_s *bfad, void *pcmd)
 
 	spin_lock_irqsave(&bfad->bfad_lock, flags);
 	iocmd->status = bfa_dport_show(&bfad->bfa, &iocmd->result);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&bfad->bfad_lock, flags);
 
@@ -1961,6 +2019,10 @@ bfad_iocmd_diag_dport_show(struct bfad_s *bfad, void *pcmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2391,13 +2453,19 @@ bfad_iocmd_cfg_trunk(struct bfad_s *bfad, void *cmd, unsigned int v_cmd)
 	spin_lock_irqsave(&bfad->bfad_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bfa_fcport_is_dport(&bfad->bfa))
 		return BFA_STATUS_DPORT_ERR;
 =======
+=======
+>>>>>>> v3.18
 	if (bfa_fcport_is_dport(&bfad->bfa)) {
 		spin_unlock_irqrestore(&bfad->bfad_lock, flags);
 		return BFA_STATUS_DPORT_ERR;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((fcport->cfg.topology == BFA_PORT_TOPOLOGY_LOOP) ||
@@ -2822,7 +2890,11 @@ bfad_iocmd_fruvpd_update(struct bfad_s *bfad, void *cmd)
 	iocmd->status = bfa_fruvpd_update(BFA_FRU(&bfad->bfa),
 				&iocmd->data, iocmd->len, iocmd->offset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				bfad_hcb_comp, &fcomp);
+=======
+				bfad_hcb_comp, &fcomp, iocmd->trfr_cmpl);
+>>>>>>> v3.18
 =======
 				bfad_hcb_comp, &fcomp, iocmd->trfr_cmpl);
 >>>>>>> v3.18
@@ -2914,16 +2986,22 @@ bfad_iocmd_handler(struct bfad_s *bfad, unsigned int cmd, void *iocmd,
 		rc = bfad_iocmd_port_cfg_maxfrsize(bfad, iocmd);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case IOCMD_PORT_BBSC_ENABLE:
 	case IOCMD_PORT_BBSC_DISABLE:
 		rc = bfad_iocmd_port_cfg_bbsc(bfad, iocmd, cmd);
 =======
+=======
+>>>>>>> v3.18
 	case IOCMD_PORT_BBCR_ENABLE:
 	case IOCMD_PORT_BBCR_DISABLE:
 		rc = bfad_iocmd_port_cfg_bbcr(bfad, cmd, iocmd);
 		break;
 	case IOCMD_PORT_BBCR_GET_ATTR:
 		rc = bfad_iocmd_port_get_bbcr_attr(bfad, iocmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case IOCMD_LPORT_GET_ATTR:
@@ -3009,6 +3087,12 @@ bfad_iocmd_handler(struct bfad_s *bfad, unsigned int cmd, void *iocmd,
 		rc = bfad_iocmd_ioc_get_pcifn_cfg(bfad, iocmd);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case IOCMD_IOC_FW_SIG_INV:
+		rc = bfad_iocmd_ioc_fw_sig_inv(bfad, iocmd);
+		break;
+>>>>>>> v3.18
 =======
 	case IOCMD_IOC_FW_SIG_INV:
 		rc = bfad_iocmd_ioc_fw_sig_inv(bfad, iocmd);
@@ -3092,12 +3176,15 @@ bfad_iocmd_handler(struct bfad_s *bfad, unsigned int cmd, void *iocmd,
 		break;
 	case IOCMD_DIAG_DPORT_ENABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case IOCMD_DIAG_DPORT_DISABLE:
 		rc = bfad_iocmd_diag_cfg_dport(bfad, cmd, iocmd);
 		break;
 	case IOCMD_DIAG_DPORT_GET_STATE:
 		rc = bfad_iocmd_diag_dport_get_state(bfad, iocmd);
 =======
+=======
+>>>>>>> v3.18
 		rc = bfad_iocmd_diag_dport_enable(bfad, iocmd);
 		break;
 	case IOCMD_DIAG_DPORT_DISABLE:
@@ -3108,6 +3195,9 @@ bfad_iocmd_handler(struct bfad_s *bfad, unsigned int cmd, void *iocmd,
 		break;
 	case IOCMD_DIAG_DPORT_START:
 		rc = bfad_iocmd_diag_dport_start(bfad, iocmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case IOCMD_PHY_GET_ATTR:
@@ -3383,8 +3473,14 @@ bfad_fcxp_map_sg(struct bfad_s *bfad, void *payload_kbuf,
 	buf_info = buf_base;
 	buf_info->size = payload_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf_info->virt = dma_alloc_coherent(&bfad->pcidev->dev, buf_info->size,
 					&buf_info->phys, GFP_KERNEL);
+=======
+	buf_info->virt = dma_zalloc_coherent(&bfad->pcidev->dev,
+					     buf_info->size, &buf_info->phys,
+					     GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	buf_info->virt = dma_zalloc_coherent(&bfad->pcidev->dev,
 					     buf_info->size, &buf_info->phys,
@@ -3395,7 +3491,10 @@ bfad_fcxp_map_sg(struct bfad_s *bfad, void *payload_kbuf,
 
 	/* copy the linear bsg buffer to buf_info */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(buf_info->virt, 0, buf_info->size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memcpy(buf_info->virt, payload_kbuf, buf_info->size);
@@ -3510,7 +3609,12 @@ bfad_im_bsg_els_ct_request(struct fc_bsg_job *job)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (copy_from_user((uint8_t *)bsg_fcpt, bsg_data->payload,
+=======
+	if (copy_from_user((uint8_t *)bsg_fcpt,
+				(void *)(unsigned long)bsg_data->payload,
+>>>>>>> v3.18
 =======
 	if (copy_from_user((uint8_t *)bsg_fcpt,
 				(void *)(unsigned long)bsg_data->payload,
@@ -3669,8 +3773,13 @@ out_free_mem:
 
 	/* Need a copy to user op */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (copy_to_user(bsg_data->payload, (void *) bsg_fcpt,
 			 bsg_data->payload_len))
+=======
+	if (copy_to_user((void *)(unsigned long)bsg_data->payload,
+			(void *)bsg_fcpt, bsg_data->payload_len))
+>>>>>>> v3.18
 =======
 	if (copy_to_user((void *)(unsigned long)bsg_data->payload,
 			(void *)bsg_fcpt, bsg_data->payload_len))

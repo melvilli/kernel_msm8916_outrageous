@@ -19,7 +19,10 @@
 #define INITVALS_9340_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ar9340_1p0_mac_postamble ar9300_2p2_mac_postamble
 
 #define ar9340_1p0_soc_postamble ar9300_2p2_soc_postamble
@@ -34,6 +37,9 @@
 
 #define ar9340_1p0_baseband_postamble_dfs_channel ar9300_2p2_baseband_postamble_dfs_channel
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const u32 ar9340_1p0_radio_postamble[][5] = {
 	/* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
@@ -118,8 +124,11 @@ static const u32 ar9340Modes_lowest_ob_db_tx_gain_table_1p0[][5] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ar9340Modes_fast_clock_1p0 ar9300Modes_fast_clock_2p2
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const u32 ar9340_1p0_radio_core[][2] = {
@@ -236,10 +245,13 @@ static const u32 ar9340_1p0_radio_core_40M[][2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ar9340_1p0_mac_postamble ar9300_2p2_mac_postamble
 
 #define ar9340_1p0_soc_postamble ar9300_2p2_soc_postamble
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const u32 ar9340_1p0_baseband_postamble[][5] = {
@@ -248,7 +260,11 @@ static const u32 ar9340_1p0_baseband_postamble[][5] = {
 	{0x00009820, 0x206a022e, 0x206a022e, 0x206a022e, 0x206a022e},
 	{0x00009824, 0x5ac640d0, 0x5ac640d0, 0x5ac640d0, 0x5ac640d0},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x00009828, 0x06903081, 0x06903081, 0x06903881, 0x06903881},
+=======
+	{0x00009828, 0x06903081, 0x06903081, 0x09103881, 0x09103881},
+>>>>>>> v3.18
 =======
 	{0x00009828, 0x06903081, 0x06903081, 0x09103881, 0x09103881},
 >>>>>>> v3.18
@@ -338,7 +354,11 @@ static const u32 ar9340_1p0_baseband_core[][2] = {
 	{0x00009e34, 0x6af6532f},
 	{0x00009e38, 0x0cc80c00},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x00009e40, 0x0d261820},
+=======
+	{0x00009e40, 0x0d261800},
+>>>>>>> v3.18
 =======
 	{0x00009e40, 0x0d261800},
 >>>>>>> v3.18
@@ -746,6 +766,7 @@ static const u32 ar9340Modes_ub124_tx_gain_table_1p0[][5] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const u32 ar9340Common_rx_gain_table_1p0[][2] = {
 	/* Addr      allmodes  */
 	{0x0000a000, 0x00010000},
@@ -1006,6 +1027,8 @@ static const u32 ar9340Common_rx_gain_table_1p0[][2] = {
 	{0x0000b1fc, 0x00000196},
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const u32 ar9340Modes_low_ob_db_tx_gain_table_1p0[][5] = {
@@ -1472,8 +1495,11 @@ static const u32 ar9340_1p0_mac_core[][2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ar9340Common_wo_xlna_rx_gain_table_1p0 ar9300Common_wo_xlna_rx_gain_table_2p2
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const u32 ar9340_1p0_soc_preamble[][2] = {
@@ -1485,7 +1511,10 @@ static const u32 ar9340_1p0_soc_preamble[][2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const u32 ar9340_cus227_tx_gain_table_1p0[][5] = {
 	/* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
 	{0x0000a2dc, 0x0380c7fc, 0x0380c7fc, 0x03aaa352, 0x03aaa352},
@@ -1588,5 +1617,8 @@ static const u32 ar9340_cus227_tx_gain_table_1p0[][5] = {
 	{0x0000a3ac, 0x30303030, 0x30303030, 0x30303030, 0x30303030},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* INITVALS_9340_H */

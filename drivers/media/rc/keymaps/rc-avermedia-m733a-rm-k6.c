@@ -94,7 +94,11 @@ module_exit(exit_rc_map_avermedia_m733a_rm_k6)
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

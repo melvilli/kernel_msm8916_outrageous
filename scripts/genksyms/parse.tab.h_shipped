@@ -1,15 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* A Bison parser, made by GNU Bison 2.5.  */
 
 /* Bison interface for Yacc-like parsers in C
    
       Copyright (C) 1984, 1989-1990, 2000-2011 Free Software Foundation, Inc.
 =======
+=======
+>>>>>>> v3.18
 /* A Bison parser, made by GNU Bison 2.5.1.  */
 
 /* Bison interface for Yacc-like parsers in C
    
       Copyright (C) 1984, 1989-1990, 2000-2012 Free Software Foundation, Inc.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
    
    This program is free software: you can redistribute it and/or modify
@@ -75,6 +81,7 @@
      ASM_PHRASE = 285,
      ATTRIBUTE_PHRASE = 286,
 <<<<<<< HEAD
+<<<<<<< HEAD
      BRACE_PHRASE = 287,
      BRACKET_PHRASE = 288,
      EXPRESSION_PHRASE = 289,
@@ -88,6 +95,8 @@
      OTHER = 297,
      FILENAME = 298
 =======
+=======
+>>>>>>> v3.18
      TYPEOF_PHRASE = 287,
      BRACE_PHRASE = 288,
      BRACKET_PHRASE = 289,
@@ -101,6 +110,9 @@
      TYPE = 297,
      OTHER = 298,
      FILENAME = 299
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
    };
 #endif

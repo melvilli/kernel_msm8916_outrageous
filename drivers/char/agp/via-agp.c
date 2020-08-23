@@ -44,7 +44,10 @@ static int via_fetch_size(void)
 static int via_configure(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 temp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct aper_size_info_8 *current_size;
@@ -54,9 +57,15 @@ static int via_configure(void)
 	pci_write_config_byte(agp_bridge->dev, VIA_APSIZE,
 			      current_size->size_value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* address to map too */
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	/* address to map to */
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	/* address to map to */
 	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
@@ -142,9 +151,15 @@ static int via_configure_agp3(void)
 	current_size = A_SIZE_16(agp_bridge->current_size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* address to map too */
 	pci_read_config_dword(agp_bridge->dev, AGP_APBASE, &temp);
 	agp_bridge->gart_bus_addr = (temp & PCI_BASE_ADDRESS_MEM_MASK);
+=======
+	/* address to map to */
+	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,
+						    AGP_APERTURE_BAR);
+>>>>>>> v3.18
 =======
 	/* address to map to */
 	agp_bridge->gart_bus_addr = pci_bus_address(agp_bridge->dev,

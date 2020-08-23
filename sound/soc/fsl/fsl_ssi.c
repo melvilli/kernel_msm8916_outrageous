@@ -9,7 +9,10 @@
  * version 2.  This program is licensed "as is" without any warranty of any
  * kind, whether express or implied.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  *
  * Some notes why imx-pcm-fiq is used instead of DMA on some boards:
@@ -30,6 +33,9 @@
  * value. When we read the same register two times (and the register still
  * contains the same value) these status bits are not set. We work
  * around this by not polling these bits but only wait a fixed delay.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -42,6 +48,11 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/spinlock.h>
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/spinlock.h>
 #include <linux/of.h>
@@ -60,6 +71,7 @@
 #include "fsl_ssi.h"
 #include "imx-pcm.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef PPC
 #define read_ssi(addr)			 in_be32(addr)
@@ -82,6 +94,8 @@ static inline void write_ssi_mask(u32 __iomem *addr, u32 clear, u32 set)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * FSLSSI_I2S_RATES: sample rates supported by the I2S
  *
@@ -91,8 +105,12 @@ static inline void write_ssi_mask(u32 __iomem *addr, u32 clear, u32 set)
  * are really supported.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FSLSSI_I2S_RATES (SNDRV_PCM_RATE_5512 | SNDRV_PCM_RATE_8000_192000 | \
 			  SNDRV_PCM_RATE_CONTINUOUS)
+=======
+#define FSLSSI_I2S_RATES SNDRV_PCM_RATE_CONTINUOUS
+>>>>>>> v3.18
 =======
 #define FSLSSI_I2S_RATES SNDRV_PCM_RATE_CONTINUOUS
 >>>>>>> v3.18
@@ -122,6 +140,7 @@ static inline void write_ssi_mask(u32 __iomem *addr, u32 clear, u32 set)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* SIER bitflag of interrupts to enable */
 #define SIER_FLAGS (CCSR_SSI_SIER_TFRC_EN | CCSR_SSI_SIER_TDMAE | \
 		    CCSR_SSI_SIER_TIE | CCSR_SSI_SIER_TUE0_EN | \
@@ -129,6 +148,8 @@ static inline void write_ssi_mask(u32 __iomem *addr, u32 clear, u32 set)
 		    CCSR_SSI_SIER_RDMAE | CCSR_SSI_SIER_RIE | \
 		    CCSR_SSI_SIER_ROE0_EN | CCSR_SSI_SIER_ROE1_EN)
 =======
+=======
+>>>>>>> v3.18
 #define FSLSSI_SIER_DBG_RX_FLAGS (CCSR_SSI_SIER_RFF0_EN | \
 		CCSR_SSI_SIER_RLS_EN | CCSR_SSI_SIER_RFS_EN | \
 		CCSR_SSI_SIER_ROE0_EN | CCSR_SSI_SIER_RFRC_EN)
@@ -167,11 +188,15 @@ struct fsl_ssi_soc_data {
 	bool offline_config;
 	u32 sisr_write_mask;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
  * fsl_ssi_private: per-SSI private data
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @ssi: pointer to the SSI's registers
  * @ssi_phys: physical address of the SSI registers
@@ -233,6 +258,8 @@ struct fsl_ssi_private {
 };
 
 =======
+=======
+>>>>>>> v3.18
  * @reg: Pointer to the regmap registers
  * @irq: IRQ of this SSI
  * @cpu_dai_drv: CPU DAI driver for this device
@@ -368,6 +395,9 @@ static bool fsl_ssi_is_i2s_cbm_cfs(struct fsl_ssi_private *ssi_private)
 	return (ssi_private->dai_fmt & SND_SOC_DAIFMT_MASTER_MASK) ==
 		SND_SOC_DAIFMT_CBM_CFS;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * fsl_ssi_isr: SSI interrupt handler
@@ -385,10 +415,16 @@ static irqreturn_t fsl_ssi_isr(int irq, void *dev_id)
 {
 	struct fsl_ssi_private *ssi_private = dev_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ccsr_ssi __iomem *ssi = ssi_private->ssi;
 	irqreturn_t ret = IRQ_NONE;
 	__be32 sisr;
 	__be32 sisr2 = 0;
+=======
+	struct regmap *regs = ssi_private->regs;
+	__be32 sisr;
+	__be32 sisr2;
+>>>>>>> v3.18
 =======
 	struct regmap *regs = ssi_private->regs;
 	__be32 sisr;
@@ -399,6 +435,7 @@ static irqreturn_t fsl_ssi_isr(int irq, void *dev_id)
 	   were interrupted for.  We mask it with the Interrupt Enable register
 	   so that we only check for events that we're interested in.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sisr = read_ssi(&ssi->sisr) & SIER_FLAGS;
 
@@ -519,6 +556,8 @@ static irqreturn_t fsl_ssi_isr(int irq, void *dev_id)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	regmap_read(regs, CCSR_SSI_SISR, &sisr);
 
 	sisr2 = sisr & ssi_private->soc->sisr_write_mask;
@@ -746,6 +785,9 @@ static void fsl_ssi_setup_ac97(struct fsl_ssi_private *ssi_private)
 			CCSR_SSI_SCR_SSIEN | CCSR_SSI_SCR_TE | CCSR_SSI_SCR_RE);
 
 	regmap_write(regs, CCSR_SSI_SOR, CCSR_SSI_SOR_WAIT(3));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -763,6 +805,7 @@ static int fsl_ssi_startup(struct snd_pcm_substream *substream,
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct fsl_ssi_private *ssi_private =
 		snd_soc_dai_get_drvdata(rtd->cpu_dai);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int synchronous = ssi_private->cpu_dai_drv.symmetric_rates;
 
@@ -875,6 +918,8 @@ static int fsl_ssi_startup(struct snd_pcm_substream *substream,
 
 		ssi_private->second_stream = substream;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = clk_prepare_enable(ssi_private->clk);
@@ -1009,6 +1054,9 @@ static int fsl_ssi_set_bclk(struct snd_pcm_substream *substream,
 			dev_err(cpu_dai->dev, "failed to set baudclk rate\n");
 			return -EINVAL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1016,7 +1064,10 @@ static int fsl_ssi_set_bclk(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int fsl_ssi_set_dai_sysclk(struct snd_soc_dai *cpu_dai,
 		int clk_id, unsigned int freq, int dir)
 {
@@ -1027,6 +1078,9 @@ static int fsl_ssi_set_dai_sysclk(struct snd_soc_dai *cpu_dai,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * fsl_ssi_hw_params - program the sample size
@@ -1046,12 +1100,15 @@ static int fsl_ssi_hw_params(struct snd_pcm_substream *substream,
 {
 	struct fsl_ssi_private *ssi_private = snd_soc_dai_get_drvdata(cpu_dai);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ccsr_ssi __iomem *ssi = ssi_private->ssi;
 	unsigned int sample_size =
 		snd_pcm_format_width(params_format(hw_params));
 	u32 wl = CCSR_SSI_SxCCR_WL(sample_size);
 	int enabled = read_ssi(&ssi->scr) & CCSR_SSI_SCR_SSIEN;
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *regs = ssi_private->regs;
 	unsigned int channels = params_channels(hw_params);
 	unsigned int sample_size =
@@ -1063,6 +1120,9 @@ static int fsl_ssi_hw_params(struct snd_pcm_substream *substream,
 
 	regmap_read(regs, CCSR_SSI_SCR, &scr_val);
 	enabled = scr_val & CCSR_SSI_SCR_SSIEN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1073,7 +1133,10 @@ static int fsl_ssi_hw_params(struct snd_pcm_substream *substream,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (fsl_ssi_is_i2s_master(ssi_private)) {
 		ret = fsl_ssi_set_bclk(substream, cpu_dai, hw_params);
 		if (ret)
@@ -1106,6 +1169,9 @@ static int fsl_ssi_hw_params(struct snd_pcm_substream *substream,
 				channels == 1 ? 0 : i2smode);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * FIXME: The documentation says that SxCCR[WL] should not be
@@ -1121,10 +1187,13 @@ static int fsl_ssi_hw_params(struct snd_pcm_substream *substream,
 	if ((substream->stream == SNDRV_PCM_STREAM_PLAYBACK) ||
 	    ssi_private->cpu_dai_drv.symmetric_rates)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		write_ssi_mask(&ssi->stccr, CCSR_SSI_SxCCR_WL_MASK, wl);
 	else
 		write_ssi_mask(&ssi->srccr, CCSR_SSI_SxCCR_WL_MASK, wl);
 =======
+=======
+>>>>>>> v3.18
 		regmap_update_bits(regs, CCSR_SSI_STCCR, CCSR_SSI_SxCCR_WL_MASK,
 				wl);
 	else
@@ -1362,6 +1431,9 @@ static int fsl_ssi_set_dai_tdm_slot(struct snd_soc_dai *cpu_dai, u32 tx_mask,
 	regmap_write(regs, CCSR_SSI_SRMSK, rx_mask);
 
 	regmap_update_bits(regs, CCSR_SSI_SCR, CCSR_SSI_SCR_SSIEN, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1381,6 +1453,7 @@ static int fsl_ssi_trigger(struct snd_pcm_substream *substream, int cmd,
 {
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct fsl_ssi_private *ssi_private = snd_soc_dai_get_drvdata(rtd->cpu_dai);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ccsr_ssi __iomem *ssi = ssi_private->ssi;
 
@@ -1402,6 +1475,8 @@ static int fsl_ssi_trigger(struct snd_pcm_substream *substream, int cmd,
 		else
 			write_ssi_mask(&ssi->scr, CCSR_SSI_SCR_RE, 0);
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *regs = ssi_private->regs;
 
 	switch (cmd) {
@@ -1421,6 +1496,9 @@ static int fsl_ssi_trigger(struct snd_pcm_substream *substream, int cmd,
 			fsl_ssi_tx_config(ssi_private, false);
 		else
 			fsl_ssi_rx_config(ssi_private, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -1428,6 +1506,7 @@ static int fsl_ssi_trigger(struct snd_pcm_substream *substream, int cmd,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 }
@@ -1457,6 +1536,8 @@ static void fsl_ssi_shutdown(struct snd_pcm_substream *substream,
 		write_ssi_mask(&ssi->scr, CCSR_SSI_SCR_SSIEN, 0);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (fsl_ssi_is_ac97(ssi_private)) {
 		if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK)
 			regmap_write(regs, CCSR_SSI_SOR, CCSR_SSI_SOR_TX_CLR);
@@ -1465,6 +1546,9 @@ static void fsl_ssi_shutdown(struct snd_pcm_substream *substream,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1473,7 +1557,11 @@ static int fsl_ssi_dai_probe(struct snd_soc_dai *dai)
 	struct fsl_ssi_private *ssi_private = snd_soc_dai_get_drvdata(dai);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ssi_private->ssi_on_imx) {
+=======
+	if (ssi_private->soc->imx && ssi_private->use_dma) {
+>>>>>>> v3.18
 =======
 	if (ssi_private->soc->imx && ssi_private->use_dma) {
 >>>>>>> v3.18
@@ -1487,15 +1575,21 @@ static int fsl_ssi_dai_probe(struct snd_soc_dai *dai)
 static const struct snd_soc_dai_ops fsl_ssi_dai_ops = {
 	.startup	= fsl_ssi_startup,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.hw_params	= fsl_ssi_hw_params,
 	.shutdown	= fsl_ssi_shutdown,
 =======
+=======
+>>>>>>> v3.18
 	.shutdown       = fsl_ssi_shutdown,
 	.hw_params	= fsl_ssi_hw_params,
 	.hw_free	= fsl_ssi_hw_free,
 	.set_fmt	= fsl_ssi_set_dai_fmt,
 	.set_sysclk	= fsl_ssi_set_dai_sysclk,
 	.set_tdm_slot	= fsl_ssi_set_dai_tdm_slot,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.trigger	= fsl_ssi_trigger,
 };
@@ -1505,8 +1599,13 @@ static struct snd_soc_dai_driver fsl_ssi_dai_template = {
 	.probe = fsl_ssi_dai_probe,
 	.playback = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* The SSI does not support monaural audio. */
 		.channels_min = 2,
+=======
+		.stream_name = "CPU-Playback",
+		.channels_min = 1,
+>>>>>>> v3.18
 =======
 		.stream_name = "CPU-Playback",
 		.channels_min = 1,
@@ -1517,7 +1616,12 @@ static struct snd_soc_dai_driver fsl_ssi_dai_template = {
 	},
 	.capture = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.channels_min = 2,
+=======
+		.stream_name = "CPU-Capture",
+		.channels_min = 1,
+>>>>>>> v3.18
 =======
 		.stream_name = "CPU-Capture",
 		.channels_min = 1,
@@ -1533,6 +1637,7 @@ static const struct snd_soc_component_driver fsl_ssi_component = {
 	.name		= "fsl-ssi",
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Show the statistics of a flag only if its interrupt is enabled.  The
  * compiler will optimze this code to a no-op if the interrupt is not
@@ -1585,6 +1690,8 @@ static ssize_t fsl_sysfs_ssi_show(struct device *dev,
 }
 
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_dai_driver fsl_ssi_ac97_dai = {
 	.ac97_control = 1,
 	.playback = {
@@ -1656,6 +1763,9 @@ static struct snd_ac97_bus_ops fsl_ssi_ac97_ops = {
 	.write		= fsl_ssi_ac97_write,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * Make every character in a string lower-case
@@ -1673,7 +1783,10 @@ static void make_lowercase(char *s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int fsl_ssi_imx_probe(struct platform_device *pdev,
 		struct fsl_ssi_private *ssi_private, void __iomem *iomem)
 {
@@ -1769,11 +1882,15 @@ static void fsl_ssi_imx_clean(struct platform_device *pdev,
 		clk_disable_unprepare(ssi_private->clk);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int fsl_ssi_probe(struct platform_device *pdev)
 {
 	struct fsl_ssi_private *ssi_private;
 	int ret = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device_attribute *dev_attr = NULL;
 	struct device_node *np = pdev->dev.of_node;
@@ -1783,6 +1900,8 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 	char name[64];
 	bool shared;
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *np = pdev->dev.of_node;
 	const struct of_device_id *of_id;
 	const char *p, *sprop;
@@ -1790,6 +1909,9 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 	struct resource res;
 	void __iomem *iomem;
 	char name[64];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* SSIs that are not connected on the board should have a
@@ -1799,6 +1921,7 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 	if (!of_device_is_available(np))
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* We only support the SSI in "I2S Slave" mode */
 	sprop = of_get_property(np, "fsl,mode", NULL);
@@ -1812,18 +1935,24 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 	ssi_private = kzalloc(sizeof(struct fsl_ssi_private) + strlen(p),
 			      GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	of_id = of_match_device(fsl_ssi_ids, &pdev->dev);
 	if (!of_id || !of_id->data)
 		return -EINVAL;
 
 	ssi_private = devm_kzalloc(&pdev->dev, sizeof(*ssi_private),
 			GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ssi_private) {
 		dev_err(&pdev->dev, "could not allocate DAI object\n");
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	strcpy(ssi_private->name, p);
 
@@ -1832,6 +1961,8 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 	       sizeof(fsl_ssi_dai_template));
 	ssi_private->cpu_dai_drv.name = ssi_private->name;
 =======
+=======
+>>>>>>> v3.18
 	ssi_private->soc = of_id->data;
 
 	sprop = of_get_property(np, "fsl,mode", NULL);
@@ -1856,12 +1987,16 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 		       sizeof(fsl_ssi_dai_template));
 	}
 	ssi_private->cpu_dai_drv.name = dev_name(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Get the addresses and IRQ */
 	ret = of_address_to_resource(np, 0, &res);
 	if (ret) {
 		dev_err(&pdev->dev, "could not determine device resources\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto error_kmalloc;
 	}
@@ -1892,6 +2027,8 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 	if (!of_find_property(np, "fsl,ssi-asynchronous", NULL))
 		ssi_private->cpu_dai_drv.symmetric_rates = 1;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 	ssi_private->ssi_phys = res.start;
@@ -1929,6 +2066,9 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 		ssi_private->cpu_dai_drv.symmetric_channels = 1;
 		ssi_private->cpu_dai_drv.symmetric_samplebits = 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Determine the FIFO depth. */
@@ -1939,6 +2079,7 @@ static int fsl_ssi_probe(struct platform_device *pdev)
                 /* Older 8610 DTs didn't have the fifo-depth property */
 		ssi_private->fifo_depth = 8;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (of_device_is_compatible(pdev->dev.of_node, "fsl,imx21-ssi")) {
 		u32 dma_events[2];
@@ -2006,6 +2147,8 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 	dev_set_drvdata(&pdev->dev, ssi_private);
 
 =======
+=======
+>>>>>>> v3.18
 	dev_set_drvdata(&pdev->dev, ssi_private);
 
 	if (ssi_private->soc->imx) {
@@ -2014,11 +2157,15 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 			goto error_irqmap;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = snd_soc_register_component(&pdev->dev, &fsl_ssi_component,
 					 &ssi_private->cpu_dai_drv, 1);
 	if (ret) {
 		dev_err(&pdev->dev, "failed to register DAI: %d\n", ret);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto error_dev;
 	}
@@ -2034,6 +2181,8 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		goto error_asoc_register;
 	}
 
@@ -2052,6 +2201,9 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 	if (ret)
 		goto error_asoc_register;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * If codec-handle property is missing from SSI node, we assume
@@ -2059,10 +2211,15 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 	 * SSI driver to trigger machine driver's probe.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!of_get_property(np, "codec-handle", NULL)) {
 		ssi_private->new_binding = true;
 		goto done;
 	}
+=======
+	if (!of_get_property(np, "codec-handle", NULL))
+		goto done;
+>>>>>>> v3.18
 =======
 	if (!of_get_property(np, "codec-handle", NULL))
 		goto done;
@@ -2086,6 +2243,7 @@ static int fsl_ssi_probe(struct platform_device *pdev)
 	if (IS_ERR(ssi_private->pdev)) {
 		ret = PTR_ERR(ssi_private->pdev);
 		dev_err(&pdev->dev, "failed to register platform: %d\n", ret);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto error_dai;
 	}
@@ -2120,6 +2278,8 @@ error_iomap:
 error_kmalloc:
 	kfree(ssi_private);
 =======
+=======
+>>>>>>> v3.18
 		goto error_sound_card;
 	}
 
@@ -2143,6 +2303,9 @@ error_asoc_register:
 error_irqmap:
 	if (ssi_private->use_dma)
 		irq_dispose_mapping(ssi_private->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -2152,6 +2315,7 @@ static int fsl_ssi_remove(struct platform_device *pdev)
 {
 	struct fsl_ssi_private *ssi_private = dev_get_drvdata(&pdev->dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!ssi_private->new_binding)
 		platform_device_unregister(ssi_private->pdev);
@@ -2169,6 +2333,8 @@ static int fsl_ssi_remove(struct platform_device *pdev)
 	kfree(ssi_private);
 	dev_set_drvdata(&pdev->dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	fsl_ssi_debugfs_remove(&ssi_private->dbg_stats);
 
 	if (ssi_private->pdev)
@@ -2180,11 +2346,15 @@ static int fsl_ssi_remove(struct platform_device *pdev)
 
 	if (ssi_private->use_dma)
 		irq_dispose_mapping(ssi_private->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct of_device_id fsl_ssi_ids[] = {
 	{ .compatible = "fsl,mpc8610-ssi", },
@@ -2193,6 +2363,8 @@ static const struct of_device_id fsl_ssi_ids[] = {
 };
 MODULE_DEVICE_TABLE(of, fsl_ssi_ids);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver fsl_ssi_driver = {
@@ -2208,6 +2380,10 @@ static struct platform_driver fsl_ssi_driver = {
 module_platform_driver(fsl_ssi_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("platform:fsl-ssi-dai");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("platform:fsl-ssi-dai");
 >>>>>>> v3.18

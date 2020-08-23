@@ -26,6 +26,10 @@
 #include <linux/i2c.h>
 #include <linux/spi/spi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -163,7 +167,10 @@ static bool cs4271_volatile_reg(struct device *dev, unsigned int reg)
 
 struct cs4271_private {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* SND_SOC_I2C or SND_SOC_SPI */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int			mclk;
@@ -181,7 +188,10 @@ struct cs4271_private {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_soc_dapm_widget cs4271_dapm_widgets[] = {
 SND_SOC_DAPM_INPUT("AINA"),
 SND_SOC_DAPM_INPUT("AINB"),
@@ -202,6 +212,9 @@ static const struct snd_soc_dapm_route cs4271_dapm_routes[] = {
 	{ "AOUTB-", NULL, "Playback" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * @freq is the desired MCLK rate
@@ -295,15 +308,21 @@ static int cs4271_get_deemph(struct snd_kcontrol *kcontrol,
 			     struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct cs4271_private *cs4271 = snd_soc_codec_get_drvdata(codec);
 
 	ucontrol->value.integer.value[0] = cs4271->deemph;
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 	struct cs4271_private *cs4271 = snd_soc_codec_get_drvdata(codec);
 
 	ucontrol->value.enumerated.item[0] = cs4271->deemph;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -312,15 +331,21 @@ static int cs4271_put_deemph(struct snd_kcontrol *kcontrol,
 			     struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct cs4271_private *cs4271 = snd_soc_codec_get_drvdata(codec);
 
 	cs4271->deemph = ucontrol->value.integer.value[0];
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 	struct cs4271_private *cs4271 = snd_soc_codec_get_drvdata(codec);
 
 	cs4271->deemph = ucontrol->value.enumerated.item[0];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return cs4271_set_deemph(codec);
 }
@@ -564,7 +589,10 @@ static int cs4271_probe(struct snd_soc_codec *codec)
 	struct cs4271_platform_data *cs4271plat = codec->dev->platform_data;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int gpio_nreset = -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool amutec_eq_bmutec = false;
@@ -572,9 +600,12 @@ static int cs4271_probe(struct snd_soc_codec *codec)
 #ifdef CONFIG_OF
 	if (of_match_device(cs4271_dt_ids, codec->dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpio_nreset = of_get_named_gpio(codec->dev->of_node,
 						"reset-gpio", 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (of_get_property(codec->dev->of_node,
@@ -589,15 +620,19 @@ static int cs4271_probe(struct snd_soc_codec *codec)
 
 	if (cs4271plat) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (gpio_is_valid(cs4271plat->gpio_nreset))
 			gpio_nreset = cs4271plat->gpio_nreset;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		amutec_eq_bmutec = cs4271plat->amutec_eq_bmutec;
 		cs4271->enable_soft_reset = cs4271plat->enable_soft_reset;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (gpio_nreset >= 0)
 		if (devm_gpio_request(codec->dev, gpio_nreset, "CS4271 Reset"))
@@ -608,19 +643,27 @@ static int cs4271_probe(struct snd_soc_codec *codec)
 		udelay(1);
 		gpio_set_value(gpio_nreset, 1);
 =======
+=======
+>>>>>>> v3.18
 	if (gpio_is_valid(cs4271->gpio_nreset)) {
 		/* Reset codec */
 		gpio_direction_output(cs4271->gpio_nreset, 0);
 		udelay(1);
 		gpio_set_value(cs4271->gpio_nreset, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Give the codec time to wake up */
 		udelay(1);
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cs4271->gpio_nreset = gpio_nreset;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = regmap_update_bits(cs4271->regmap, CS4271_MODE2,
@@ -641,8 +684,12 @@ static int cs4271_probe(struct snd_soc_codec *codec)
 				   CS4271_MODE2_MUTECAEQUB);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snd_soc_add_codec_controls(codec, cs4271_snd_controls,
 		ARRAY_SIZE(cs4271_snd_controls));
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -665,9 +712,12 @@ static struct snd_soc_codec_driver soc_codec_dev_cs4271 = {
 	.suspend		= cs4271_soc_suspend,
 	.resume			= cs4271_soc_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 
 	.controls		= cs4271_snd_controls,
 	.num_controls		= ARRAY_SIZE(cs4271_snd_controls),
@@ -707,6 +757,9 @@ static int cs4271_common_probe(struct device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(CONFIG_SPI_MASTER)
 
@@ -728,16 +781,22 @@ static int cs4271_spi_probe(struct spi_device *spi)
 {
 	struct cs4271_private *cs4271;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	cs4271 = devm_kzalloc(&spi->dev, sizeof(*cs4271), GFP_KERNEL);
 	if (!cs4271)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = cs4271_common_probe(&spi->dev, &cs4271);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spi_set_drvdata(spi, cs4271);
@@ -767,7 +826,11 @@ static struct spi_driver cs4271_spi_driver = {
 #endif /* defined(CONFIG_SPI_MASTER) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -794,16 +857,22 @@ static int cs4271_i2c_probe(struct i2c_client *client,
 {
 	struct cs4271_private *cs4271;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	cs4271 = devm_kzalloc(&client->dev, sizeof(*cs4271), GFP_KERNEL);
 	if (!cs4271)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = cs4271_common_probe(&client->dev, &cs4271);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	i2c_set_clientdata(client, cs4271);
@@ -832,7 +901,11 @@ static struct i2c_driver cs4271_i2c_driver = {
 	.remove		= cs4271_i2c_remove,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE) */
+=======
+#endif /* IS_ENABLED(CONFIG_I2C) */
+>>>>>>> v3.18
 =======
 #endif /* IS_ENABLED(CONFIG_I2C) */
 >>>>>>> v3.18
@@ -849,7 +922,11 @@ static int __init cs4271_modinit(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -879,7 +956,11 @@ static void __exit cs4271_modexit(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18

@@ -58,8 +58,11 @@ static void power_supply_update_bat_leds(struct power_supply *psy)
 static int power_supply_create_bat_triggers(struct power_supply *psy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	psy->charging_full_trig_name = kasprintf(GFP_KERNEL,
@@ -91,7 +94,11 @@ static int power_supply_create_bat_triggers(struct power_supply *psy)
 				    &psy->charging_blink_full_solid_trig);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	goto success;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -104,9 +111,13 @@ charging_failed:
 	kfree(psy->charging_full_trig_name);
 charging_full_failed:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = -ENOMEM;
 success:
 	return rc;
+=======
+	return -ENOMEM;
+>>>>>>> v3.18
 =======
 	return -ENOMEM;
 >>>>>>> v3.18
@@ -144,6 +155,7 @@ static void power_supply_update_gen_leds(struct power_supply *psy)
 static int power_supply_create_gen_triggers(struct power_supply *psy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = 0;
 
 	psy->online_trig_name = kasprintf(GFP_KERNEL, "%s-online", psy->name);
@@ -159,6 +171,8 @@ online_failed:
 success:
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	psy->online_trig_name = kasprintf(GFP_KERNEL, "%s-online", psy->name);
 	if (!psy->online_trig_name)
 		return -ENOMEM;
@@ -166,6 +180,9 @@ success:
 	led_trigger_register_simple(psy->online_trig_name, &psy->online_trig);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -148,7 +148,10 @@ static void remove(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(info->priv);
@@ -164,6 +167,7 @@ static struct pci_driver pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init aectc_init(void)
 {
 	return pci_register_driver(&pci_driver);
@@ -178,6 +182,10 @@ MODULE_LICENSE("GPL");
 
 module_init(aectc_init);
 module_exit(aectc_exit);
+=======
+module_pci_driver(pci_driver);
+MODULE_LICENSE("GPL");
+>>>>>>> v3.18
 =======
 module_pci_driver(pci_driver);
 MODULE_LICENSE("GPL");

@@ -12,7 +12,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/input.h>
@@ -32,6 +35,7 @@ struct da9052_onkey {
 static void da9052_onkey_query(struct da9052_onkey *onkey)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int key_stat;
 
 	key_stat = da9052_reg_read(onkey->da9052, DA9052_EVENT_B_REG);
@@ -39,12 +43,17 @@ static void da9052_onkey_query(struct da9052_onkey *onkey)
 		dev_err(onkey->da9052->dev,
 			"Failed to read onkey event %d\n", key_stat);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = da9052_reg_read(onkey->da9052, DA9052_STATUS_A_REG);
 	if (ret < 0) {
 		dev_err(onkey->da9052->dev,
 			"Failed to read onkey event err=%d\n", ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/*
@@ -52,6 +61,7 @@ static void da9052_onkey_query(struct da9052_onkey *onkey)
 		 * generated, onkey event state determines the onkey
 		 * button state.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		key_stat &= DA9052_EVENTB_ENONKEY;
 		input_report_key(onkey->input, KEY_POWER, key_stat);
@@ -65,6 +75,8 @@ static void da9052_onkey_query(struct da9052_onkey *onkey)
 	if (key_stat)
 		schedule_delayed_work(&onkey->work, msecs_to_jiffies(50));
 =======
+=======
+>>>>>>> v3.18
 		bool pressed = !(ret & DA9052_STATUSA_NONKEY);
 
 		input_report_key(onkey->input, KEY_POWER, pressed);
@@ -79,6 +91,9 @@ static void da9052_onkey_query(struct da9052_onkey *onkey)
 			schedule_delayed_work(&onkey->work,
 						msecs_to_jiffies(50));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

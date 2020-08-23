@@ -127,6 +127,11 @@ static int openpic_cpu_write_internal(void *opaque, gpa_t addr,
 static int openpic_cpu_read_internal(void *opaque, gpa_t addr,
 				     u32 *ptr, int idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void write_IRQreg_idr(struct openpic *opp, int n_IRQ,
+				    uint32_t val);
+>>>>>>> v3.18
 =======
 static inline void write_IRQreg_idr(struct openpic *opp, int n_IRQ,
 				    uint32_t val);
@@ -534,7 +539,10 @@ static void openpic_reset(struct openpic *opp)
 	for (i = 0; i < opp->max_irq; i++) {
 		opp->src[i].ivpr = opp->ivpr_reset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		opp->src[i].idr = opp->idr_reset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -552,6 +560,11 @@ static void openpic_reset(struct openpic *opp)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		write_IRQreg_idr(opp, i, opp->idr_reset);
+>>>>>>> v3.18
 =======
 
 		write_IRQreg_idr(opp, i, opp->idr_reset);
@@ -1649,6 +1662,10 @@ static void mpic_destroy(struct kvm_device *dev)
 	dev->kvm->arch.mpic = NULL;
 	kfree(opp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(dev);
+>>>>>>> v3.18
 =======
 	kfree(dev);
 >>>>>>> v3.18
@@ -1840,8 +1857,12 @@ int kvm_set_msi(struct kvm_kernel_irq_routing_entry *e,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_set_routing_entry(struct kvm_irq_routing_table *rt,
 			  struct kvm_kernel_irq_routing_entry *e,
+=======
+int kvm_set_routing_entry(struct kvm_kernel_irq_routing_entry *e,
+>>>>>>> v3.18
 =======
 int kvm_set_routing_entry(struct kvm_kernel_irq_routing_entry *e,
 >>>>>>> v3.18
@@ -1857,7 +1878,10 @@ int kvm_set_routing_entry(struct kvm_kernel_irq_routing_entry *e,
 		if (e->irqchip.pin >= KVM_IRQCHIP_NUM_PINS)
 			goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rt->chip[ue->u.irqchip.irqchip][e->irqchip.pin] = ue->gsi;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;

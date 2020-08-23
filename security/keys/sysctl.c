@@ -16,7 +16,11 @@
 static const int zero, one = 1, max = INT_MAX;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ctl_table key_sysctls[] = {
+=======
+struct ctl_table key_sysctls[] = {
+>>>>>>> v3.18
 =======
 struct ctl_table key_sysctls[] = {
 >>>>>>> v3.18
@@ -66,7 +70,10 @@ struct ctl_table key_sysctls[] = {
 		.extra2 = (void *) &max,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PERSISTENT_KEYRINGS
 	{
 		.procname = "persistent_keyring_expiry",
@@ -78,6 +85,9 @@ struct ctl_table key_sysctls[] = {
 		.extra2 = (void *) &max,
 	},
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };

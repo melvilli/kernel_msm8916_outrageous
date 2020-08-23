@@ -35,6 +35,10 @@
 #include "karma.h"
 #include "sysv68.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "cmdline.h"
+>>>>>>> v3.18
 =======
 #include "cmdline.h"
 >>>>>>> v3.18
@@ -70,6 +74,12 @@ static int (*check_part[])(struct parsed_partitions *) = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_CMDLINE_PARTITION
+	cmdline_partition,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_CMDLINE_PARTITION
 	cmdline_partition,

@@ -2,7 +2,11 @@
  * net/tipc/msg.c: TIPC message header routines
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2000-2006, Ericsson AB
+=======
+ * Copyright (c) 2000-2006, 2014, Ericsson AB
+>>>>>>> v3.18
 =======
  * Copyright (c) 2000-2006, 2014, Ericsson AB
 >>>>>>> v3.18
@@ -41,6 +45,7 @@
 #include "core.h"
 #include "msg.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 u32 tipc_msg_tot_importance(struct tipc_msg *m)
 {
@@ -59,6 +64,8 @@ u32 tipc_msg_tot_importance(struct tipc_msg *m)
 void tipc_msg_init(struct tipc_msg *m, u32 user, u32 type,
 			    u32 hsize, u32 destnode)
 =======
+=======
+>>>>>>> v3.18
 #include "addr.h"
 #include "name_table.h"
 
@@ -71,6 +78,9 @@ static unsigned int align(unsigned int i)
 
 void tipc_msg_init(struct tipc_msg *m, u32 user, u32 type, u32 hsize,
 		   u32 destnode)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	memset(m, 0, hsize);
@@ -80,6 +90,7 @@ void tipc_msg_init(struct tipc_msg *m, u32 user, u32 type, u32 hsize,
 	msg_set_size(m, hsize);
 	msg_set_prevnode(m, tipc_own_addr);
 	msg_set_type(m, type);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	msg_set_orignode(m, tipc_own_addr);
 	msg_set_destnode(m, destnode);
@@ -129,6 +140,8 @@ int tipc_msg_build(struct tipc_msg *hdr, struct iovec const *msg_sect,
 	*buf = NULL;
 	return -EFAULT;
 =======
+=======
+>>>>>>> v3.18
 	if (hsize > SHORT_H_SIZE) {
 		msg_set_orignode(m, tipc_own_addr);
 		msg_set_destnode(m, destnode);
@@ -532,5 +545,8 @@ error:
 	pr_warn("Failed do clone local mcast rcv buffer\n");
 	kfree_skb(head);
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

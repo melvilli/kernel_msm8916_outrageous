@@ -22,6 +22,10 @@
 
 #include "qeth_core.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "qeth_l2.h"
+>>>>>>> v3.18
 =======
 #include "qeth_l2.h"
 >>>>>>> v3.18
@@ -37,12 +41,18 @@ static int qeth_l2_send_setdelmac(struct qeth_card *, __u8 *,
 static void qeth_l2_set_multicast_list(struct net_device *);
 static int qeth_l2_recover(void *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void qeth_bridgeport_query_support(struct qeth_card *card);
 static void qeth_bridge_state_change(struct qeth_card *card,
 					struct qeth_ipa_cmd *cmd);
 static void qeth_bridge_host_event(struct qeth_card *card,
 					struct qeth_ipa_cmd *cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int qeth_l2_do_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
@@ -248,7 +258,11 @@ static inline int qeth_l2_get_cast_type(struct qeth_card *card,
 
 static void qeth_l2_fill_header(struct qeth_card *card, struct qeth_hdr *hdr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct sk_buff *skb, int ipv, int cast_type)
+=======
+			struct sk_buff *skb, int cast_type)
+>>>>>>> v3.18
 =======
 			struct sk_buff *skb, int cast_type)
 >>>>>>> v3.18
@@ -736,10 +750,15 @@ static int qeth_l2_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	struct qeth_card *card = dev->ml_priv;
 	struct sk_buff *new_skb = skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ipv = qeth_get_ip_version(skb);
 	int cast_type = qeth_l2_get_cast_type(card, skb);
 	struct qeth_qdio_out_q *queue = card->qdio.out_qs
 		[qeth_get_priority_queue(card, skb, ipv, cast_type)];
+=======
+	int cast_type = qeth_l2_get_cast_type(card, skb);
+	struct qeth_qdio_out_q *queue;
+>>>>>>> v3.18
 =======
 	int cast_type = qeth_l2_get_cast_type(card, skb);
 	struct qeth_qdio_out_q *queue;
@@ -750,7 +769,10 @@ static int qeth_l2_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	int hd_len = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (card->qdio.do_prio_queueing || (cast_type &&
 					card->info.is_multicast_different))
 		queue = card->qdio.out_qs[qeth_get_priority_queue(card, skb,
@@ -758,6 +780,9 @@ static int qeth_l2_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	else
 		queue = card->qdio.out_qs[card->qdio.default_out_queue];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((card->state != CARD_STATE_UP) || !card->lan_online) {
 		card->stats.tx_carrier_errors++;
@@ -788,7 +813,11 @@ static int qeth_l2_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 			elements_needed++;
 			skb_reset_mac_header(new_skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			qeth_l2_fill_header(card, hdr, new_skb, ipv, cast_type);
+=======
+			qeth_l2_fill_header(card, hdr, new_skb, cast_type);
+>>>>>>> v3.18
 =======
 			qeth_l2_fill_header(card, hdr, new_skb, cast_type);
 >>>>>>> v3.18
@@ -805,7 +834,11 @@ static int qeth_l2_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 						sizeof(struct qeth_hdr));
 			skb_set_mac_header(new_skb, sizeof(struct qeth_hdr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			qeth_l2_fill_header(card, hdr, new_skb, ipv, cast_type);
+=======
+			qeth_l2_fill_header(card, hdr, new_skb, cast_type);
+>>>>>>> v3.18
 =======
 			qeth_l2_fill_header(card, hdr, new_skb, cast_type);
 >>>>>>> v3.18
@@ -920,6 +953,10 @@ static int qeth_l2_probe_device(struct ccwgroup_device *gdev)
 	struct qeth_card *card = dev_get_drvdata(&gdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qeth_l2_create_device_attributes(&gdev->dev);
+>>>>>>> v3.18
 =======
 	qeth_l2_create_device_attributes(&gdev->dev);
 >>>>>>> v3.18
@@ -935,6 +972,10 @@ static void qeth_l2_remove_device(struct ccwgroup_device *cgdev)
 	struct qeth_card *card = dev_get_drvdata(&cgdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qeth_l2_remove_device_attributes(&cgdev->dev);
+>>>>>>> v3.18
 =======
 	qeth_l2_remove_device_attributes(&cgdev->dev);
 >>>>>>> v3.18
@@ -946,7 +987,10 @@ static void qeth_l2_remove_device(struct ccwgroup_device *cgdev)
 
 	if (card->dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netif_napi_del(&card->napi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		unregister_netdev(card->dev);
@@ -991,17 +1035,23 @@ static int qeth_l2_setup_netdev(struct qeth_card *card)
 	switch (card->info.type) {
 	case QETH_CARD_TYPE_IQD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		card->dev = alloc_netdev(0, "hsi%d", ether_setup);
 		break;
 	case QETH_CARD_TYPE_OSN:
 		card->dev = alloc_netdev(0, "osn%d", ether_setup);
 =======
+=======
+>>>>>>> v3.18
 		card->dev = alloc_netdev(0, "hsi%d", NET_NAME_UNKNOWN,
 					 ether_setup);
 		break;
 	case QETH_CARD_TYPE_OSN:
 		card->dev = alloc_netdev(0, "osn%d", NET_NAME_UNKNOWN,
 					 ether_setup);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		card->dev->flags |= IFF_NOARP;
 		break;
@@ -1017,10 +1067,16 @@ static int qeth_l2_setup_netdev(struct qeth_card *card)
 	card->dev->mtu = card->info.initial_mtu;
 	card->dev->netdev_ops = &qeth_l2_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (card->info.type != QETH_CARD_TYPE_OSN)
 		SET_ETHTOOL_OPS(card->dev, &qeth_l2_ethtool_ops);
 	else
 		SET_ETHTOOL_OPS(card->dev, &qeth_l2_osn_ops);
+=======
+	card->dev->ethtool_ops =
+		(card->info.type != QETH_CARD_TYPE_OSN) ?
+		&qeth_l2_ethtool_ops : &qeth_l2_osn_ops;
+>>>>>>> v3.18
 =======
 	card->dev->ethtool_ops =
 		(card->info.type != QETH_CARD_TYPE_OSN) ?
@@ -1053,11 +1109,17 @@ static int __qeth_l2_set_online(struct ccwgroup_device *gdev, int recovery_mode)
 		goto out_remove;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	qeth_bridgeport_query_support(card);
 	if (card->options.sbp.supported_funcs)
 		dev_info(&card->gdev->dev,
 		"The device represents a HiperSockets Bridge Capable Port\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	qeth_trace_features(card);
 
@@ -1077,6 +1139,11 @@ static int __qeth_l2_set_online(struct ccwgroup_device *gdev, int recovery_mode)
 		card->info.hwtrap = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qeth_l2_setup_bridgeport_attrs(card);
+
+>>>>>>> v3.18
 =======
 	qeth_l2_setup_bridgeport_attrs(card);
 
@@ -1156,6 +1223,10 @@ out_remove:
 	ccw_device_set_offline(CARD_WDEV(card));
 	ccw_device_set_offline(CARD_RDEV(card));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qdio_free(CARD_DDEV(card));
+>>>>>>> v3.18
 =======
 	qdio_free(CARD_DDEV(card));
 >>>>>>> v3.18
@@ -1201,6 +1272,10 @@ static int __qeth_l2_set_offline(struct ccwgroup_device *cgdev,
 	if (rc)
 		QETH_DBF_TEXT_(SETUP, 2, "1err%d", rc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qdio_free(CARD_DDEV(card));
+>>>>>>> v3.18
 =======
 	qdio_free(CARD_DDEV(card));
 >>>>>>> v3.18
@@ -1267,6 +1342,10 @@ static void qeth_l2_shutdown(struct ccwgroup_device *gdev)
 	qeth_qdio_clear_card(card, 0);
 	qeth_clear_qdio_buffers(card);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qdio_free(CARD_DDEV(card));
+>>>>>>> v3.18
 =======
 	qdio_free(CARD_DDEV(card));
 >>>>>>> v3.18
@@ -1319,7 +1398,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Returns zero if the command is successfully "consumed" */
 static int qeth_l2_control_event(struct qeth_card *card,
 					struct qeth_ipa_cmd *cmd)
@@ -1340,6 +1422,9 @@ static int qeth_l2_control_event(struct qeth_card *card,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qeth_discipline qeth_l2_discipline = {
 	.start_poll = qeth_qdio_start_poll,
@@ -1355,6 +1440,10 @@ struct qeth_discipline qeth_l2_discipline = {
 	.thaw = qeth_l2_pm_resume,
 	.restore = qeth_l2_pm_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.control_event_handler = qeth_l2_control_event,
+>>>>>>> v3.18
 =======
 	.control_event_handler = qeth_l2_control_event,
 >>>>>>> v3.18
@@ -1465,7 +1554,10 @@ void qeth_osn_deregister(struct net_device *dev)
 EXPORT_SYMBOL(qeth_osn_deregister);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* SETBRIDGEPORT support, async notifications */
 
 enum qeth_an_event_type {anev_reg_unreg, anev_abort, anev_reset};
@@ -2054,6 +2146,9 @@ int qeth_bridgeport_an_set(struct qeth_card *card, int enable)
 }
 EXPORT_SYMBOL_GPL(qeth_bridgeport_an_set);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 module_init(qeth_l2_init);
 module_exit(qeth_l2_exit);

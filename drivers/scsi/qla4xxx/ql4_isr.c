@@ -1,7 +1,11 @@
 /*
  * QLogic iSCSI HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2012 QLogic Corporation
+=======
+ * Copyright (c)  2003-2013 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2013 QLogic Corporation
 >>>>>>> v3.18
@@ -31,7 +35,11 @@ static void qla4xxx_copy_sense(struct scsi_qla_host *ha,
 	sense_len = le16_to_cpu(sts_entry->senseDataByteCnt);
 	if (sense_len == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG2(ql4_printk(KERN_INFO, ha, "scsi%ld:%d:%d:%d: %s:"
+=======
+		DEBUG2(ql4_printk(KERN_INFO, ha, "scsi%ld:%d:%d:%llu: %s:"
+>>>>>>> v3.18
 =======
 		DEBUG2(ql4_printk(KERN_INFO, ha, "scsi%ld:%d:%d:%llu: %s:"
 >>>>>>> v3.18
@@ -52,7 +60,11 @@ static void qla4xxx_copy_sense(struct scsi_qla_host *ha,
 	memcpy(cmd->sense_buffer, sts_entry->senseData, sense_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG2(printk(KERN_INFO "scsi%ld:%d:%d:%d: %s: sense key = %x, "
+=======
+	DEBUG2(printk(KERN_INFO "scsi%ld:%d:%d:%llu: %s: sense key = %x, "
+>>>>>>> v3.18
 =======
 	DEBUG2(printk(KERN_INFO "scsi%ld:%d:%d:%llu: %s: sense key = %x, "
 >>>>>>> v3.18
@@ -182,7 +194,11 @@ static void qla4xxx_status_entry(struct scsi_qla_host *ha,
 				cmd->result = DID_ERROR << 16;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				DEBUG2(printk("scsi%ld:%d:%d:%d: %s: "
+=======
+				DEBUG2(printk("scsi%ld:%d:%d:%llu: %s: "
+>>>>>>> v3.18
 =======
 				DEBUG2(printk("scsi%ld:%d:%d:%llu: %s: "
 >>>>>>> v3.18
@@ -214,7 +230,11 @@ static void qla4xxx_status_entry(struct scsi_qla_host *ha,
 
 	case SCS_RESET_OCCURRED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG2(printk("scsi%ld:%d:%d:%d: %s: Device RESET occurred\n",
+=======
+		DEBUG2(printk("scsi%ld:%d:%d:%llu: %s: Device RESET occurred\n",
+>>>>>>> v3.18
 =======
 		DEBUG2(printk("scsi%ld:%d:%d:%llu: %s: Device RESET occurred\n",
 >>>>>>> v3.18
@@ -226,7 +246,11 @@ static void qla4xxx_status_entry(struct scsi_qla_host *ha,
 
 	case SCS_ABORTED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG2(printk("scsi%ld:%d:%d:%d: %s: Abort occurred\n",
+=======
+		DEBUG2(printk("scsi%ld:%d:%d:%llu: %s: Abort occurred\n",
+>>>>>>> v3.18
 =======
 		DEBUG2(printk("scsi%ld:%d:%d:%llu: %s: Abort occurred\n",
 >>>>>>> v3.18
@@ -238,7 +262,11 @@ static void qla4xxx_status_entry(struct scsi_qla_host *ha,
 
 	case SCS_TIMEOUT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG2(printk(KERN_INFO "scsi%ld:%d:%d:%d: Timeout\n",
+=======
+		DEBUG2(printk(KERN_INFO "scsi%ld:%d:%d:%llu: Timeout\n",
+>>>>>>> v3.18
 =======
 		DEBUG2(printk(KERN_INFO "scsi%ld:%d:%d:%llu: Timeout\n",
 >>>>>>> v3.18
@@ -261,7 +289,11 @@ static void qla4xxx_status_entry(struct scsi_qla_host *ha,
 		if ((sts_entry->iscsiFlags & ISCSI_FLAG_RESIDUAL_OVER) ||
 		     (sts_entry->completionStatus == SCS_DATA_OVERRUN)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DEBUG2(printk("scsi%ld:%d:%d:%d: %s: " "Data overrun\n",
+=======
+			DEBUG2(printk("scsi%ld:%d:%d:%llu: %s: " "Data overrun\n",
+>>>>>>> v3.18
 =======
 			DEBUG2(printk("scsi%ld:%d:%d:%llu: %s: " "Data overrun\n",
 >>>>>>> v3.18
@@ -292,7 +324,11 @@ static void qla4xxx_status_entry(struct scsi_qla_host *ha,
 			    cmd->underflow) {
 				DEBUG2(ql4_printk(KERN_INFO, ha,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  "scsi%ld:%d:%d:%d: %s: Mid-layer Data underrun, xferlen = 0x%x,residual = 0x%x\n",
+=======
+						  "scsi%ld:%d:%d:%llu: %s: Mid-layer Data underrun, xferlen = 0x%x,residual = 0x%x\n",
+>>>>>>> v3.18
 =======
 						  "scsi%ld:%d:%d:%llu: %s: Mid-layer Data underrun, xferlen = 0x%x,residual = 0x%x\n",
 >>>>>>> v3.18
@@ -328,7 +364,11 @@ static void qla4xxx_status_entry(struct scsi_qla_host *ha,
 
 			DEBUG2(ql4_printk(KERN_INFO, ha,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  "scsi%ld:%d:%d:%d: %s: Dropped frame(s) detected (0x%x of 0x%x bytes).\n",
+=======
+					  "scsi%ld:%d:%d:%llu: %s: Dropped frame(s) detected (0x%x of 0x%x bytes).\n",
+>>>>>>> v3.18
 =======
 					  "scsi%ld:%d:%d:%llu: %s: Dropped frame(s) detected (0x%x of 0x%x bytes).\n",
 >>>>>>> v3.18
@@ -354,7 +394,11 @@ check_scsi_status:
 	case SCS_DEVICE_LOGGED_OUT:
 	case SCS_DEVICE_UNAVAILABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG2(printk(KERN_INFO "scsi%ld:%d:%d:%d: SCS_DEVICE "
+=======
+		DEBUG2(printk(KERN_INFO "scsi%ld:%d:%d:%llu: SCS_DEVICE "
+>>>>>>> v3.18
 =======
 		DEBUG2(printk(KERN_INFO "scsi%ld:%d:%d:%llu: SCS_DEVICE "
 >>>>>>> v3.18
@@ -378,7 +422,11 @@ check_scsi_status:
 		 */
 		cmd->result = DID_OK << 16 | sts_entry->scsiStatus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG2(printk("scsi%ld:%d:%d: %s: QUEUE FULL detected "
+=======
+		DEBUG2(printk("scsi%ld:%d:%llu: %s: QUEUE FULL detected "
+>>>>>>> v3.18
 =======
 		DEBUG2(printk("scsi%ld:%d:%llu: %s: QUEUE FULL detected "
 >>>>>>> v3.18
@@ -434,9 +482,15 @@ static void qla4xxx_passthru_status_entry(struct scsi_qla_host *ha,
 	cls_conn = ddb_entry->conn;
 	conn = cls_conn->dd_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&conn->session->lock);
 	task = iscsi_itt_to_task(conn, itt);
 	spin_unlock(&conn->session->lock);
+=======
+	spin_lock(&conn->session->back_lock);
+	task = iscsi_itt_to_task(conn, itt);
+	spin_unlock(&conn->session->back_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&conn->session->back_lock);
 	task = iscsi_itt_to_task(conn, itt);
@@ -643,7 +697,11 @@ static int qla4_83xx_loopback_in_progress(struct scsi_qla_host *ha)
 	int rval = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_qla8032(ha)) {
+=======
+	if (is_qla8032(ha) || is_qla8042(ha)) {
+>>>>>>> v3.18
 =======
 	if (is_qla8032(ha) || is_qla8042(ha)) {
 >>>>>>> v3.18
@@ -665,7 +723,10 @@ static int qla4_83xx_loopback_in_progress(struct scsi_qla_host *ha)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void qla4xxx_update_ipaddr_state(struct scsi_qla_host *ha,
 					uint32_t ipaddr_idx,
 					uint32_t ipaddr_fw_state)
@@ -708,6 +769,9 @@ static void qla4xxx_default_router_changed(struct scsi_qla_host *ha,
 	       &mbox_sts[5], sizeof(uint32_t));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * qla4xxx_isr_decode_mailbox - decodes mailbox status
@@ -724,8 +788,14 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 	uint32_t mbox_sts[MBOX_AEN_REG_COUNT];
 	__le32 __iomem *mailbox_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (is_qla8032(ha))
+=======
+	uint32_t opcode = 0;
+
+	if (is_qla8032(ha) || is_qla8042(ha))
+>>>>>>> v3.18
 =======
 	uint32_t opcode = 0;
 
@@ -775,7 +845,12 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 
 			if ((is_qla8022(ha) && ql4xdontresethba) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    (is_qla8032(ha) && qla4_83xx_idc_dontreset(ha))) {
+=======
+			    ((is_qla8032(ha) || is_qla8042(ha)) &&
+			     qla4_83xx_idc_dontreset(ha))) {
+>>>>>>> v3.18
 =======
 			    ((is_qla8032(ha) || is_qla8042(ha)) &&
 			     qla4_83xx_idc_dontreset(ha))) {
@@ -812,12 +887,18 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 					      sizeof(mbox_sts),
 					      (uint8_t *) mbox_sts);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			if ((is_qla8032(ha) || is_qla8042(ha)) &&
 			    ha->notify_link_up_comp)
 				complete(&ha->link_up_comp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -863,6 +944,7 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 			    mbox_sts[2], mbox_sts[3]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* mbox_sts[2] = Old ACB state
 			 * mbox_sts[3] = new ACB state */
 			if ((mbox_sts[3] == ACB_STATE_VALID) &&
@@ -872,6 +954,8 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 			else if ((mbox_sts[3] == ACB_STATE_ACQUIRING) &&
 				 (mbox_sts[2] == ACB_STATE_VALID)) {
 =======
+=======
+>>>>>>> v3.18
 			qla4xxx_update_ipaddr_state(ha, mbox_sts[5],
 						    mbox_sts[3]);
 			/* mbox_sts[2] = Old ACB state
@@ -882,6 +966,9 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 				set_bit(DPC_GET_DHCP_IP_ADDR, &ha->dpc_flags);
 			} else if ((mbox_sts[3] == IP_ADDRSTATE_ACQUIRING) &&
 				   (mbox_sts[2] == IP_ADDRSTATE_PREFERRED)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (is_qla80XX(ha))
 					set_bit(DPC_RESET_HA_FW_CONTEXT,
@@ -889,9 +976,12 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 				else
 					set_bit(DPC_RESET_HA, &ha->dpc_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else if ((mbox_sts[3] == ACB_STATE_UNCONFIGURED))
 				complete(&ha->disable_acb_comp);
 =======
+=======
+>>>>>>> v3.18
 			} else if (mbox_sts[3] == IP_ADDRSTATE_DISABLING) {
 				ql4_printk(KERN_INFO, ha, "scsi%ld: %s: ACB in disabling state\n",
 					   ha->host_no, __func__);
@@ -917,6 +1007,9 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 					  ha->host_no, mbox_sts[0], mbox_sts[1],
 					  mbox_sts[2], mbox_sts[3], mbox_sts[4],
 					  mbox_sts[5]));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -998,9 +1091,13 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 
 		case MBOX_ASTS_IDC_REQUEST_NOTIFICATION:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{
 			uint32_t opcode;
 			if (is_qla8032(ha)) {
+=======
+			if (is_qla8032(ha) || is_qla8042(ha)) {
+>>>>>>> v3.18
 =======
 			if (is_qla8032(ha) || is_qla8042(ha)) {
 >>>>>>> v3.18
@@ -1023,10 +1120,16 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 			}
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 
 		case MBOX_ASTS_IDC_COMPLETE:
 			if (is_qla8032(ha)) {
+=======
+
+		case MBOX_ASTS_IDC_COMPLETE:
+			if (is_qla8032(ha) || is_qla8042(ha)) {
+>>>>>>> v3.18
 =======
 
 		case MBOX_ASTS_IDC_COMPLETE:
@@ -1042,11 +1145,14 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 						  ha->host_no, mbox_sts[0]));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (qla4_83xx_loopback_in_progress(ha))
 					set_bit(AF_LOOPBACK, &ha->flags);
 				else
 					clear_bit(AF_LOOPBACK, &ha->flags);
 =======
+=======
+>>>>>>> v3.18
 				opcode = mbox_sts[1] >> 16;
 				if (ha->notify_idc_comp)
 					complete(&ha->idc_comp);
@@ -1064,6 +1170,9 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 							&ha->dpc_flags);
 				}
 				qla4xxx_wake_dpc(ha);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			break;
@@ -1078,7 +1187,10 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 					  "scsi%ld: AEN %04x Received IPv6 default router changed notification\n",
 					  ha->host_no, mbox_sts[0]));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			qla4xxx_default_router_changed(ha, mbox_sts);
 			break;
 
@@ -1093,6 +1205,9 @@ static void qla4xxx_isr_decode_mailbox(struct scsi_qla_host * ha,
 					  ha->host_no, mbox_sts[0]));
 			/* new IDC timeout */
 			ha->idc_extend_tmo = mbox_sts[1];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -1165,7 +1280,12 @@ void qla4_82xx_interrupt_service_routine(struct scsi_qla_host *ha,
 {
 	/* Process response queue interrupt. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (intr_status & HSRX_RISC_IOCB_INT)
+=======
+	if ((intr_status & HSRX_RISC_IOCB_INT) &&
+	    test_bit(AF_INIT_DONE, &ha->flags))
+>>>>>>> v3.18
 =======
 	if ((intr_status & HSRX_RISC_IOCB_INT) &&
 	    test_bit(AF_INIT_DONE, &ha->flags))
@@ -1513,7 +1633,11 @@ qla4_8xxx_default_intr_handler(int irq, void *dev_id)
 	uint8_t reqs_count = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_qla8032(ha)) {
+=======
+	if (is_qla8032(ha) || is_qla8042(ha)) {
+>>>>>>> v3.18
 =======
 	if (is_qla8032(ha) || is_qla8042(ha)) {
 >>>>>>> v3.18
@@ -1551,16 +1675,22 @@ qla4_8xxx_msix_rsp_q(int irq, void *dev_id)
 	struct scsi_qla_host *ha = dev_id;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t ival = 0;
 
 	spin_lock_irqsave(&ha->hardware_lock, flags);
 	if (is_qla8032(ha)) {
 =======
+=======
+>>>>>>> v3.18
 	int intr_status;
 	uint32_t ival = 0;
 
 	spin_lock_irqsave(&ha->hardware_lock, flags);
 	if (is_qla8032(ha) || is_qla8042(ha)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ival = readl(&ha->qla4_83xx_reg->iocb_int_mask);
 		if (ival == 0) {
@@ -1572,9 +1702,12 @@ qla4_8xxx_msix_rsp_q(int irq, void *dev_id)
 		writel(0, &ha->qla4_83xx_reg->iocb_int_mask);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qla4xxx_process_response_queue(ha);
 		writel(0, &ha->qla4_82xx_reg->host_int);
 =======
+=======
+>>>>>>> v3.18
 		intr_status = readl(&ha->qla4_82xx_reg->host_status);
 		if (intr_status & HSRX_RISC_IOCB_INT) {
 			qla4xxx_process_response_queue(ha);
@@ -1584,6 +1717,9 @@ qla4_8xxx_msix_rsp_q(int irq, void *dev_id)
 				   __func__);
 			goto exit_msix_rsp_q;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	ha->isr_count++;
@@ -1659,7 +1795,12 @@ void qla4xxx_process_aen(struct scsi_qla_host * ha, uint8_t process_aen)
 int qla4xxx_request_irqs(struct scsi_qla_host *ha)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret = 0;
+	int rval = QLA_ERROR;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 	int rval = QLA_ERROR;
@@ -1670,15 +1811,21 @@ int qla4xxx_request_irqs(struct scsi_qla_host *ha)
 
 	if (ql4xenablemsix == 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Note: MSI Interrupts not supported for ISP8324 */
 		if (is_qla8032(ha)) {
 			ql4_printk(KERN_INFO, ha, "%s: MSI Interrupts not supported for ISP8324, Falling back-to INTx mode\n",
 				   __func__);
 =======
+=======
+>>>>>>> v3.18
 		/* Note: MSI Interrupts not supported for ISP8324 and ISP8042 */
 		if (is_qla8032(ha) || is_qla8042(ha)) {
 			ql4_printk(KERN_INFO, ha, "%s: MSI Interrupts not supported for ISP%04x, Falling back-to INTx mode\n",
 				   __func__, ha->pdev->device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto try_intx;
 		}
@@ -1696,9 +1843,15 @@ int qla4xxx_request_irqs(struct scsi_qla_host *ha)
 		goto irq_attached;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (is_qla8032(ha)) {
 			ql4_printk(KERN_INFO, ha, "%s: ISP8324: MSI-X: Falling back-to INTx mode. ret = %d\n",
 				   __func__, ret);
+=======
+		if (is_qla8032(ha) || is_qla8042(ha)) {
+			ql4_printk(KERN_INFO, ha, "%s: ISP%04x: MSI-X: Falling back-to INTx mode. ret = %d\n",
+				   __func__, ha->pdev->device, ret);
+>>>>>>> v3.18
 =======
 		if (is_qla8032(ha) || is_qla8042(ha)) {
 			ql4_printk(KERN_INFO, ha, "%s: ISP%04x: MSI-X: Falling back-to INTx mode. ret = %d\n",
@@ -1730,6 +1883,7 @@ try_msi:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Prevent interrupts from falling back to INTx mode in cases where
 	 * interrupts cannot get acquired through MSI-X or MSI mode.
@@ -1740,6 +1894,8 @@ try_msi:
 	}
 try_intx:
 =======
+=======
+>>>>>>> v3.18
 try_intx:
 	if (is_qla8022(ha)) {
 		ql4_printk(KERN_WARNING, ha, "%s: ISP82xx Legacy interrupt not supported\n",
@@ -1747,6 +1903,9 @@ try_intx:
 		goto irq_not_attached;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Trying INTx */
 	ret = request_irq(ha->pdev->irq, ha->isp_ops->intr_handler,
@@ -1768,14 +1927,20 @@ irq_attached:
 	ha->host->irq = ha->pdev->irq;
 	ql4_printk(KERN_INFO, ha, "%s: irq %d attached\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    __func__, ha->pdev->irq);
 irq_not_attached:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		   __func__, ha->pdev->irq);
 	rval = QLA_SUCCESS;
 irq_not_attached:
 	return rval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

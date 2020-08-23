@@ -2,7 +2,11 @@
  * bq2415x charger driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011-2012  Pali Rohár <pali.rohar@gmail.com>
+=======
+ * Copyright (C) 2011-2013  Pali Rohár <pali.rohar@gmail.com>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2013  Pali Rohár <pali.rohar@gmail.com>
 >>>>>>> v3.18
@@ -35,6 +39,7 @@
  * termination current. It it is less or equal to zero, configuring charge
  * and termination current will not be possible.
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Function set_mode_hook is needed for automode (setting correct current
  * limit when charger is connected/disconnected or setting boost mode).
@@ -81,6 +86,11 @@
  * in value notify_device. Device driver must immediately report property
  * POWER_SUPPLY_PROP_CURRENT_MAX when current changed.
 >>>>>>> v3.18
+=======
+ * For automode support is needed to provide name of power supply device
+ * in value notify_device. Device driver must immediately report property
+ * POWER_SUPPLY_PROP_CURRENT_MAX when current changed.
+>>>>>>> v3.18
  */
 
 /* Supported modes with maximal current limit */
@@ -100,8 +110,12 @@ struct bq2415x_platform_data {
 	int termination_current;	/* mA */
 	int resistor_sense;		/* m ohm */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*set_mode_hook)(void (*hook)(enum bq2415x_mode mode, void *data),
 			     void *data);
+=======
+	const char *notify_device;	/* name */
+>>>>>>> v3.18
 =======
 	const char *notify_device;	/* name */
 >>>>>>> v3.18

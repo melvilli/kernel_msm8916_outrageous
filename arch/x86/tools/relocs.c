@@ -70,8 +70,13 @@ static const char * const sym_regex_kernel[S_NSYMTYPES] = {
 	"init_per_cpu__.*|"
 	"__end_rodata_hpage_align|"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"__vvar_page|"
 #endif
+=======
+#endif
+	"__vvar_page|"
+>>>>>>> v3.18
 =======
 #endif
 	"__vvar_page|"
@@ -701,7 +706,11 @@ static void walk_relocs(int (*process)(struct section *sec, Elf_Rel *rel,
  */
 static int per_cpu_shndx	= -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 Elf_Addr per_cpu_load_addr;
+=======
+static Elf_Addr per_cpu_load_addr;
+>>>>>>> v3.18
 =======
 static Elf_Addr per_cpu_load_addr;
 >>>>>>> v3.18
@@ -732,11 +741,14 @@ static void percpu_init(void)
 /*
  * Check to see if a symbol lies in the .data..percpu section.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * For some as yet not understood reason the "__init_begin"
  * symbol which immediately preceeds the .data..percpu section
  * also shows up as it it were part of it so we do an explict
  * check for that symbol name and ignore it.
 =======
+=======
+>>>>>>> v3.18
  *
  * The linker incorrectly associates some symbols with the
  * .data..percpu section so we also need to check the symbol
@@ -749,13 +761,22 @@ static void percpu_init(void)
  * The "gold" linker incorrectly associates:
  *	init_per_cpu__irq_stack_union
  *	init_per_cpu__gdt_page
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static int is_percpu_sym(ElfW(Sym) *sym, const char *symname)
 {
 	return (sym->st_shndx == per_cpu_shndx) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		strcmp(symname, "__init_begin");
+=======
+		strcmp(symname, "__init_begin") &&
+		strcmp(symname, "__per_cpu_load") &&
+		strncmp(symname, "init_per_cpu_", 13);
+>>>>>>> v3.18
 =======
 		strcmp(symname, "__init_begin") &&
 		strcmp(symname, "__per_cpu_load") &&
@@ -1046,7 +1067,10 @@ static void emit_relocs(int as_text, int use_real_mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * As an aid to debugging problems with different linkers
  * print summary information about the relocs.
@@ -1070,6 +1094,9 @@ static void print_reloc_info(void)
 	walk_relocs(do_reloc_info);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if ELF_BITS == 64
 # define process process_64
@@ -1079,7 +1106,12 @@ static void print_reloc_info(void)
 
 void process(FILE *fp, int use_real_mode, int as_text,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     int show_absolute_syms, int show_absolute_relocs)
+=======
+	     int show_absolute_syms, int show_absolute_relocs,
+	     int show_reloc_info)
+>>>>>>> v3.18
 =======
 	     int show_absolute_syms, int show_absolute_relocs,
 	     int show_reloc_info)
@@ -1102,11 +1134,17 @@ void process(FILE *fp, int use_real_mode, int as_text,
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (show_reloc_info) {
 		print_reloc_info();
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	emit_relocs(as_text, use_real_mode);
 }

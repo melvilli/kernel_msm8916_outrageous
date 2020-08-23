@@ -62,7 +62,11 @@ int ip_route_me_harder(struct sk_buff *skb, unsigned int addr_type)
 		dst = xfrm_lookup(net, dst, flowi4_to_flowi(&fl4), skb->sk, 0);
 		if (IS_ERR(dst))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return PTR_ERR(dst);;
+=======
+			return PTR_ERR(dst);
+>>>>>>> v3.18
 =======
 			return PTR_ERR(dst);
 >>>>>>> v3.18

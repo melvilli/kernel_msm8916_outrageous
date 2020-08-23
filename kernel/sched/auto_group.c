@@ -149,11 +149,16 @@ autogroup_move_group(struct task_struct *p, struct autogroup *ag)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t = p;
 	do {
 		sched_move_task(t);
 	} while_each_thread(p, t);
 
+=======
+	for_each_thread(p, t)
+		sched_move_task(t);
+>>>>>>> v3.18
 =======
 	for_each_thread(p, t)
 		sched_move_task(t);
@@ -209,7 +214,11 @@ int proc_sched_autogroup_set_nice(struct task_struct *p, int nice)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nice < -20 || nice > 19)
+=======
+	if (nice < MIN_NICE || nice > MAX_NICE)
+>>>>>>> v3.18
 =======
 	if (nice < MIN_NICE || nice > MAX_NICE)
 >>>>>>> v3.18

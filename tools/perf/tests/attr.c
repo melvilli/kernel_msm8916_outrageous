@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -23,6 +26,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Powerpc needs __SANE_USERSPACE_TYPES__ before <linux/types.h> to select
  * 'int-ll64.h' and avoid compile warnings when printing __u64 with %llu.
@@ -31,6 +35,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <inttypes.h>
+=======
+#include <stdlib.h>
+#include <stdio.h>
+>>>>>>> v3.18
 =======
 #include <stdlib.h>
 #include <stdio.h>

@@ -18,7 +18,10 @@ struct ceph_buffer {
 	struct kvec vec;
 	size_t alloc_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool is_vmalloc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

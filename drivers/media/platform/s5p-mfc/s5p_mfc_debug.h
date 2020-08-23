@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * drivers/media/platform/samsung/mfc5/s5p_mfc_debug.h
+=======
+ * drivers/media/platform/s5p-mfc/s5p_mfc_debug.h
+>>>>>>> v3.18
 =======
  * drivers/media/platform/s5p-mfc/s5p_mfc_debug.h
 >>>>>>> v3.18
@@ -23,17 +27,23 @@
 
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int debug;
 
 #define mfc_debug(level, fmt, args...)				\
 	do {							\
 		if (debug >= level)				\
 =======
+=======
+>>>>>>> v3.18
 extern int mfc_debug_level;
 
 #define mfc_debug(level, fmt, args...)				\
 	do {							\
 		if (mfc_debug_level >= level)			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			printk(KERN_DEBUG "%s:%d: " fmt,	\
 				__func__, __LINE__, ##args);	\

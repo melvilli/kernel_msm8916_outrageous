@@ -8,12 +8,15 @@
 #include <linux/timer.h>
 #include <linux/scatterlist.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct Scsi_Host;
 struct scsi_device;
 struct scsi_driver;
 
 =======
+=======
+>>>>>>> v3.18
 #include <scsi/scsi_device.h>
 
 struct Scsi_Host;
@@ -21,6 +24,9 @@ struct scsi_driver;
 
 #include <scsi/scsi_device.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * MAX_COMMAND_SIZE is:
@@ -66,6 +72,10 @@ struct scsi_cmnd {
 	struct list_head list;  /* scsi_cmnd participates in queue lists */
 	struct list_head eh_entry; /* entry for the host eh_cmd_q */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct delayed_work abort_work;
+>>>>>>> v3.18
 =======
 	struct delayed_work abort_work;
 >>>>>>> v3.18
@@ -94,6 +104,10 @@ struct scsi_cmnd {
 	unsigned char prot_op;
 	unsigned char prot_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned char prot_flags;
+>>>>>>> v3.18
 =======
 	unsigned char prot_flags;
 >>>>>>> v3.18
@@ -151,7 +165,10 @@ struct scsi_cmnd {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Return the driver private allocation behind the command.
  * Only works if cmd_size is set in the host template.
@@ -161,6 +178,9 @@ static inline void *scsi_cmd_priv(struct scsi_cmnd *cmd)
 	return cmd + 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* make sure not to use it with REQ_TYPE_BLOCK_PC commands */
 static inline struct scsi_driver *scsi_cmd_to_driver(struct scsi_cmnd *cmd)
@@ -170,10 +190,14 @@ static inline struct scsi_driver *scsi_cmd_to_driver(struct scsi_cmnd *cmd)
 
 extern struct scsi_cmnd *scsi_get_command(struct scsi_device *, gfp_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct scsi_cmnd *__scsi_get_command(struct Scsi_Host *, gfp_t);
 extern void scsi_put_command(struct scsi_cmnd *);
 extern void __scsi_put_command(struct Scsi_Host *, struct scsi_cmnd *,
 			       struct device *);
+=======
+extern void scsi_put_command(struct scsi_cmnd *);
+>>>>>>> v3.18
 =======
 extern void scsi_put_command(struct scsi_cmnd *);
 >>>>>>> v3.18
@@ -185,7 +209,10 @@ extern void scsi_kunmap_atomic_sg(void *virt);
 
 extern int scsi_init_io(struct scsi_cmnd *cmd, gfp_t gfp_mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void scsi_release_buffers(struct scsi_cmnd *cmd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -193,9 +220,12 @@ extern int scsi_dma_map(struct scsi_cmnd *cmd);
 extern void scsi_dma_unmap(struct scsi_cmnd *cmd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct scsi_cmnd *scsi_allocate_command(gfp_t gfp_mask);
 void scsi_free_command(gfp_t gfp_mask, struct scsi_cmnd *cmd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline unsigned scsi_sg_count(struct scsi_cmnd *cmd)
@@ -289,7 +319,10 @@ static inline unsigned char scsi_get_prot_op(struct scsi_cmnd *scmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum scsi_prot_flags {
 	SCSI_PROT_TRANSFER_PI		= 1 << 0,
 	SCSI_PROT_GUARD_CHECK		= 1 << 1,
@@ -298,6 +331,9 @@ enum scsi_prot_flags {
 	SCSI_PROT_IP_CHECKSUM		= 1 << 4,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The controller usually does not know anything about the target it
@@ -328,7 +364,10 @@ static inline sector_t scsi_get_lba(struct scsi_cmnd *scmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned int scsi_prot_interval(struct scsi_cmnd *scmd)
 {
 	return scmd->device->sector_size;
@@ -340,6 +379,9 @@ static inline u32 scsi_prot_ref_tag(struct scsi_cmnd *scmd)
 		(ilog2(scsi_prot_interval(scmd)) - 9) & 0xffffffff;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned scsi_prot_sg_count(struct scsi_cmnd *cmd)
 {
@@ -375,7 +417,10 @@ static inline void set_driver_byte(struct scsi_cmnd *cmd, char status)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned scsi_transfer_length(struct scsi_cmnd *scmd)
 {
 	unsigned int xfer_len = scsi_out(scmd)->length;
@@ -387,5 +432,8 @@ static inline unsigned scsi_transfer_length(struct scsi_cmnd *scmd)
 	return xfer_len;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _SCSI_SCSI_CMND_H */

@@ -21,6 +21,10 @@
 #include <linux/i2c.h>
 #include <linux/i2c/pxa-i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/io.h>
+>>>>>>> v3.18
 =======
 #include <asm/io.h>
 >>>>>>> v3.18

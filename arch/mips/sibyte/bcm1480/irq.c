@@ -96,7 +96,11 @@ static int bcm1480_set_affinity(struct irq_data *d, const struct cpumask *mask,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i = cpumask_first(mask);
+=======
+	i = cpumask_first_and(mask, cpu_online_mask);
+>>>>>>> v3.18
 =======
 	i = cpumask_first_and(mask, cpu_online_mask);
 >>>>>>> v3.18
@@ -352,6 +356,7 @@ asmlinkage void plat_irq_dispatch(void)
 	unsigned int pending;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SIBYTE_BCM1480_PROF
 	/* Set compare to count to silence count/compare timer interrupts */
 	write_c0_compare(read_c0_count());
@@ -365,6 +370,10 @@ asmlinkage void plat_irq_dispatch(void)
 	else
 #endif
 
+=======
+	pending = read_c0_cause() & read_c0_status();
+
+>>>>>>> v3.18
 =======
 	pending = read_c0_cause() & read_c0_status();
 

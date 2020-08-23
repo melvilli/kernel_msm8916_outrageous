@@ -138,7 +138,11 @@ static const struct file_operations cpuid_fops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit int cpuid_device_create(int cpu)
+=======
+static int cpuid_device_create(int cpu)
+>>>>>>> v3.18
 =======
 static int cpuid_device_create(int cpu)
 >>>>>>> v3.18
@@ -156,9 +160,14 @@ static void cpuid_device_destroy(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit cpuid_class_cpu_callback(struct notifier_block *nfb,
 					      unsigned long action,
 					      void *hcpu)
+=======
+static int cpuid_class_cpu_callback(struct notifier_block *nfb,
+				    unsigned long action, void *hcpu)
+>>>>>>> v3.18
 =======
 static int cpuid_class_cpu_callback(struct notifier_block *nfb,
 				    unsigned long action, void *hcpu)
@@ -209,7 +218,12 @@ static int __init cpuid_init(void)
 	}
 	cpuid_class->devnode = cpuid_devnode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_online_cpus();
+=======
+
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 =======
 
 	cpu_notifier_register_begin();
@@ -220,8 +234,13 @@ static int __init cpuid_init(void)
 			goto out_class;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_hotcpu_notifier(&cpuid_class_cpu_notifier);
 	put_online_cpus();
+=======
+	__register_hotcpu_notifier(&cpuid_class_cpu_notifier);
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__register_hotcpu_notifier(&cpuid_class_cpu_notifier);
 	cpu_notifier_register_done();
@@ -236,7 +255,11 @@ out_class:
 		cpuid_device_destroy(i);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_online_cpus();
+=======
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_done();
 >>>>>>> v3.18
@@ -252,7 +275,11 @@ static void __exit cpuid_exit(void)
 	int cpu = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_online_cpus();
+=======
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 >>>>>>> v3.18
@@ -261,8 +288,13 @@ static void __exit cpuid_exit(void)
 	class_destroy(cpuid_class);
 	__unregister_chrdev(CPUID_MAJOR, 0, NR_CPUS, "cpu/cpuid");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_hotcpu_notifier(&cpuid_class_cpu_notifier);
 	put_online_cpus();
+=======
+	__unregister_hotcpu_notifier(&cpuid_class_cpu_notifier);
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__unregister_hotcpu_notifier(&cpuid_class_cpu_notifier);
 	cpu_notifier_register_done();

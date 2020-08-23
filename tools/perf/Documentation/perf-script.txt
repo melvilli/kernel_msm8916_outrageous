@@ -116,7 +116,11 @@ OPTIONS
 --fields::
         Comma separated list of fields to print. Options are:
 <<<<<<< HEAD
+<<<<<<< HEAD
         comm, tid, pid, time, cpu, event, trace, ip, sym, dso, addr, symoff.
+=======
+        comm, tid, pid, time, cpu, event, trace, ip, sym, dso, addr, symoff, srcline, period.
+>>>>>>> v3.18
 =======
         comm, tid, pid, time, cpu, event, trace, ip, sym, dso, addr, symoff, srcline, period.
 >>>>>>> v3.18
@@ -145,7 +149,11 @@ OPTIONS
 		"Overriding previous field request for all events."
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Alternativey, consider the order:
+=======
+	Alternatively, consider the order:
+>>>>>>> v3.18
 =======
 	Alternatively, consider the order:
 >>>>>>> v3.18
@@ -212,7 +220,10 @@ OPTIONS
 	Try to resolve the path of [kernel.kallsyms]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 --show-task-events
 	Display task related events (e.g. FORK, COMM, EXIT).
 
@@ -225,6 +236,9 @@ OPTIONS
 --header-only
 	Show only perf.data header.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 SEE ALSO
 --------

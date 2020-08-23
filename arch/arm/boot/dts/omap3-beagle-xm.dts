@@ -8,17 +8,23 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap36xx.dtsi"
 
 / {
 	model = "TI OMAP3 BeagleBoard xM";
 	compatible = "ti,omap3-beagle-xm, ti,omap3-beagle", "ti,omap3";
 =======
+=======
+>>>>>>> v3.18
 #include "omap36xx.dtsi"
 
 / {
 	model = "TI OMAP3 BeagleBoard xM";
 	compatible = "ti,omap3-beagle-xm", "ti,omap36xx", "ti,omap3";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cpus {
@@ -33,12 +39,18 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	aliases {
 		display0 = &dvi0;
 		display1 = &tv0;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	leds {
 		compatible = "gpio-leds";
@@ -46,7 +58,11 @@
 		heartbeat {
 			label = "beagleboard::usr0";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio5 22 0>; /* 150 -> D6 LED */
+=======
+			gpios = <&gpio5 22 GPIO_ACTIVE_HIGH>; /* 150 -> D6 LED */
+>>>>>>> v3.18
 =======
 			gpios = <&gpio5 22 GPIO_ACTIVE_HIGH>; /* 150 -> D6 LED */
 >>>>>>> v3.18
@@ -56,7 +72,11 @@
 		mmc {
 			label = "beagleboard::usr1";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio5 21 0>; /* 149 -> D7 LED */
+=======
+			gpios = <&gpio5 21 GPIO_ACTIVE_HIGH>; /* 149 -> D7 LED */
+>>>>>>> v3.18
 =======
 			gpios = <&gpio5 21 GPIO_ACTIVE_HIGH>; /* 149 -> D7 LED */
 >>>>>>> v3.18
@@ -82,7 +102,10 @@
 		ti,codec = <&twl_audio>;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	gpio_keys {
 		compatible = "gpio-keys";
@@ -257,6 +280,9 @@
 			OMAP3630_CORE2_IOPAD(0x25fa, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d15.hsusb2_data1 */
 		>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -274,11 +300,14 @@
 			};
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 };
 
 /include/ "twl4030.dtsi"
 =======
+=======
+>>>>>>> v3.18
 
 		twl_power: power {
 			compatible = "ti,twl4030-power-beagleboard-xm", "ti,twl4030-power-idle-osc-off";
@@ -289,6 +318,9 @@
 
 #include "twl4030.dtsi"
 #include "twl4030_omap3.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 &i2c2 {
@@ -297,6 +329,7 @@
 
 &i2c3 {
 	clock-frequency = <100000>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/*
@@ -307,6 +340,8 @@
 		compatible = "ti,eeprom";
 		reg = <0x50>;
 	};
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -341,10 +376,13 @@
 	interface-type = <0>;
 	usb-phy = <&usb2_phy>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mode = <3>;
 	power = <50>;
 };
 =======
+=======
+>>>>>>> v3.18
 	phys = <&usb2_phy>;
 	phy-names = "usb2-phy";
 	mode = <3>;
@@ -410,4 +448,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

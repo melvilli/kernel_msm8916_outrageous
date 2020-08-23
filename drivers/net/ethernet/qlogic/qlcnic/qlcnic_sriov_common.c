@@ -34,9 +34,12 @@ static void qlcnic_sriov_vf_poll_dev_state(struct work_struct *);
 static void qlcnic_sriov_vf_cancel_fw_work(struct qlcnic_adapter *);
 static void qlcnic_sriov_cleanup_transaction(struct qlcnic_bc_trans *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qlcnic_sriov_vf_mbx_op(struct qlcnic_adapter *,
 				  struct qlcnic_cmd_args *);
 =======
+=======
+>>>>>>> v3.18
 static int qlcnic_sriov_issue_cmd(struct qlcnic_adapter *,
 				  struct qlcnic_cmd_args *);
 static int qlcnic_sriov_channel_cfg_cmd(struct qlcnic_adapter *, u8);
@@ -45,6 +48,9 @@ static int qlcnic_sriov_vf_shutdown(struct pci_dev *);
 static int qlcnic_sriov_vf_resume(struct qlcnic_adapter *);
 static int qlcnic_sriov_async_issue_cmd(struct qlcnic_adapter *,
 					struct qlcnic_cmd_args *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct qlcnic_hardware_ops qlcnic_sriov_vf_hw_ops = {
@@ -56,7 +62,11 @@ static struct qlcnic_hardware_ops qlcnic_sriov_vf_hw_ops = {
 	.setup_intr			= qlcnic_83xx_setup_intr,
 	.alloc_mbx_args			= qlcnic_83xx_alloc_mbx_args,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mbx_cmd			= qlcnic_sriov_vf_mbx_op,
+=======
+	.mbx_cmd			= qlcnic_sriov_issue_cmd,
+>>>>>>> v3.18
 =======
 	.mbx_cmd			= qlcnic_sriov_issue_cmd,
 >>>>>>> v3.18
@@ -83,6 +93,11 @@ static struct qlcnic_hardware_ops qlcnic_sriov_vf_hw_ops = {
 	.get_board_info			= qlcnic_83xx_get_port_info,
 	.free_mac_list			= qlcnic_sriov_vf_free_mac_list,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_sds_intr		= qlcnic_83xx_enable_sds_intr,
+	.disable_sds_intr		= qlcnic_83xx_disable_sds_intr,
+>>>>>>> v3.18
 =======
 	.enable_sds_intr		= qlcnic_83xx_enable_sds_intr,
 	.disable_sds_intr		= qlcnic_83xx_disable_sds_intr,
@@ -96,6 +111,11 @@ static struct qlcnic_nic_template qlcnic_sriov_vf_ops = {
 	.napi_add		= qlcnic_83xx_napi_add,
 	.napi_del		= qlcnic_83xx_napi_del,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.shutdown		= qlcnic_sriov_vf_shutdown,
+	.resume			= qlcnic_sriov_vf_resume,
+>>>>>>> v3.18
 =======
 	.shutdown		= qlcnic_sriov_vf_shutdown,
 	.resume			= qlcnic_sriov_vf_resume,
@@ -199,6 +219,10 @@ int qlcnic_sriov_init(struct qlcnic_adapter *adapter, int num_vfs)
 		vf->pci_func = qlcnic_sriov_virtid_fn(adapter, i);
 		mutex_init(&vf->send_cmd_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		spin_lock_init(&vf->vlan_list_lock);
+>>>>>>> v3.18
 =======
 		spin_lock_init(&vf->vlan_list_lock);
 >>>>>>> v3.18
@@ -209,6 +233,11 @@ int qlcnic_sriov_init(struct qlcnic_adapter *adapter, int num_vfs)
 		init_completion(&vf->ch_free_cmpl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		INIT_WORK(&vf->trans_work, qlcnic_sriov_process_bc_cmd);
+
+>>>>>>> v3.18
 =======
 		INIT_WORK(&vf->trans_work, qlcnic_sriov_process_bc_cmd);
 
@@ -221,12 +250,18 @@ int qlcnic_sriov_init(struct qlcnic_adapter *adapter, int num_vfs)
 			}
 			sriov->vf_info[i].vp = vp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vp->max_tx_bw = MAX_BW;
 =======
+=======
+>>>>>>> v3.18
 			vp->vlan_mode = QLC_GUEST_VLAN_MODE;
 			vp->max_tx_bw = MAX_BW;
 			vp->min_tx_bw = MIN_BW;
 			vp->spoofchk = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			random_ether_addr(vp->mac);
 			dev_info(&adapter->pdev->dev,
@@ -312,12 +347,18 @@ static void qlcnic_sriov_vf_cleanup(struct qlcnic_adapter *adapter)
 void qlcnic_sriov_cleanup(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!test_bit(__QLCNIC_SRIOV_ENABLE, &adapter->state))
 		return;
 
 	qlcnic_sriov_free_vlans(adapter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (qlcnic_sriov_pf_check(adapter))
 		qlcnic_sriov_pf_cleanup(adapter);
@@ -329,6 +370,7 @@ void qlcnic_sriov_cleanup(struct qlcnic_adapter *adapter)
 static int qlcnic_sriov_post_bc_msg(struct qlcnic_adapter *adapter, u32 *hdr,
 				    u32 *pay, u8 pci_func, u8 size)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 rsp, mbx_val, fw_data, rsp_num, mbx_cmd, val, wait_time = 0;
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
@@ -421,6 +463,8 @@ out:
 	spin_unlock_irqrestore(&adapter->ahw->mbx_lock, flags);
 	return rsp;
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	struct qlcnic_mailbox *mbx = ahw->mailbox;
 	struct qlcnic_cmd_args cmd;
@@ -453,6 +497,9 @@ out:
 	}
 
 	return cmd.rsp_opcode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -537,7 +584,11 @@ static int qlcnic_sriov_set_pvid_mode(struct qlcnic_adapter *adapter,
 				      struct qlcnic_cmd_args *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter->rx_pvid = (cmd->rsp.arg[1] >> 16) & 0xffff;
+=======
+	adapter->rx_pvid = MSW(cmd->rsp.arg[1]) & 0xffff;
+>>>>>>> v3.18
 =======
 	adapter->rx_pvid = MSW(cmd->rsp.arg[1]) & 0xffff;
 >>>>>>> v3.18
@@ -557,11 +608,14 @@ static int qlcnic_sriov_set_guest_vlan_mode(struct qlcnic_adapter *adapter,
 
 	sriov->any_vlan = cmd->rsp.arg[2] & 0xf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!sriov->any_vlan)
 		return 0;
 
 	sriov->num_allowed_vlans = cmd->rsp.arg[2] >> 16;
 =======
+=======
+>>>>>>> v3.18
 	sriov->num_allowed_vlans = cmd->rsp.arg[2] >> 16;
 	dev_info(&adapter->pdev->dev, "Number of allowed Guest VLANs = %d\n",
 		 sriov->num_allowed_vlans);
@@ -571,6 +625,9 @@ static int qlcnic_sriov_set_guest_vlan_mode(struct qlcnic_adapter *adapter,
 	if (!sriov->any_vlan)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	num_vlans = sriov->num_allowed_vlans;
 	sriov->allowed_vlans = kzalloc(sizeof(u16) * num_vlans, GFP_KERNEL);
@@ -589,8 +646,14 @@ static int qlcnic_sriov_get_vf_acl(struct qlcnic_adapter *adapter)
 	struct qlcnic_sriov *sriov = adapter->ahw->sriov;
 	struct qlcnic_cmd_args cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
+=======
+	int ret = 0;
+
+	memset(&cmd, 0, sizeof(cmd));
+>>>>>>> v3.18
 =======
 	int ret = 0;
 
@@ -623,8 +686,13 @@ static int qlcnic_sriov_get_vf_acl(struct qlcnic_adapter *adapter)
 static int qlcnic_sriov_vf_init_driver(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qlcnic_info nic_info;
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
+=======
+	struct qlcnic_hardware_context *ahw = adapter->ahw;
+	struct qlcnic_info nic_info;
+>>>>>>> v3.18
 =======
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	struct qlcnic_info nic_info;
@@ -636,6 +704,11 @@ static int qlcnic_sriov_vf_init_driver(struct qlcnic_adapter *adapter)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ahw->max_mc_count = nic_info.max_rx_mcast_mac_filters;
+
+>>>>>>> v3.18
 =======
 	ahw->max_mc_count = nic_info.max_rx_mcast_mac_filters;
 
@@ -645,10 +718,13 @@ static int qlcnic_sriov_vf_init_driver(struct qlcnic_adapter *adapter)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = qlcnic_sriov_get_vf_acl(adapter);
 	if (err)
 		return err;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (qlcnic_83xx_get_port_info(adapter))
@@ -673,6 +749,7 @@ static int qlcnic_sriov_setup_vf(struct qlcnic_adapter *adapter,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&adapter->vf_mc_list);
 	if (!qlcnic_use_msi_x && !!qlcnic_use_msi)
 		dev_warn(&adapter->pdev->dev,
@@ -680,6 +757,8 @@ static int qlcnic_sriov_setup_vf(struct qlcnic_adapter *adapter,
 
 	err = qlcnic_setup_intr(adapter, 1);
 =======
+=======
+>>>>>>> v3.18
 	adapter->flags |= QLCNIC_VLAN_FILTERING;
 	adapter->ahw->total_nic_func = 1;
 	INIT_LIST_HEAD(&adapter->vf_mc_list);
@@ -692,6 +771,9 @@ static int qlcnic_sriov_setup_vf(struct qlcnic_adapter *adapter,
 	qlcnic_set_sds_ring_count(adapter, QLCNIC_SINGLE_RING);
 
 	err = qlcnic_setup_intr(adapter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err) {
 		dev_err(&adapter->pdev->dev, "Failed to setup interrupt\n");
@@ -719,11 +801,17 @@ static int qlcnic_sriov_setup_vf(struct qlcnic_adapter *adapter,
 		goto err_out_send_channel_term;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = qlcnic_sriov_get_vf_acl(adapter);
 	if (err)
 		goto err_out_send_channel_term;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = qlcnic_setup_netdev(adapter, adapter->netdev, pci_using_dac);
 	if (err)
@@ -733,6 +821,10 @@ static int qlcnic_sriov_setup_vf(struct qlcnic_adapter *adapter,
 	dev_info(&adapter->pdev->dev, "%s: XGbE port initialized\n",
 		 adapter->netdev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -777,8 +869,11 @@ int qlcnic_sriov_vf_init(struct qlcnic_adapter *adapter, int pci_using_dac)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&ahw->mbx_lock);
 	set_bit(QLC_83XX_MBX_READY, &ahw->idc.status);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	set_bit(QLC_83XX_MODULE_LOADED, &ahw->idc.status);
@@ -801,6 +896,11 @@ int qlcnic_sriov_vf_init(struct qlcnic_adapter *adapter, int pci_using_dac)
 		dev_warn(&adapter->pdev->dev, "failed to read mac addr\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_DELAYED_WORK(&adapter->idc_aen_work, qlcnic_83xx_idc_aen_work);
+
+>>>>>>> v3.18
 =======
 	INIT_DELAYED_WORK(&adapter->idc_aen_work, qlcnic_83xx_idc_aen_work);
 
@@ -908,6 +1008,10 @@ static int qlcnic_sriov_alloc_bc_mbx_args(struct qlcnic_cmd_args *mbx, u32 type)
 			mbx->req.arg[0] = (type | (mbx->req.num << 16) |
 					   (3 << 29));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			mbx->rsp.arg[0] = (type & 0xffff) | mbx->rsp.num << 16;
+>>>>>>> v3.18
 =======
 			mbx->rsp.arg[0] = (type & 0xffff) | mbx->rsp.num << 16;
 >>>>>>> v3.18
@@ -956,6 +1060,10 @@ static int qlcnic_sriov_prepare_bc_hdr(struct qlcnic_bc_trans *trans,
 		cmd->rsp.arg = (u32 *)trans->rsp_pay;
 		cmd_op = cmd->req.arg[0] & 0xff;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		cmd->cmd_op = cmd_op;
+>>>>>>> v3.18
 =======
 		cmd->cmd_op = cmd_op;
 >>>>>>> v3.18
@@ -967,6 +1075,10 @@ static int qlcnic_sriov_prepare_bc_hdr(struct qlcnic_bc_trans *trans,
 		cmd->rsp.num = trans->rsp_pay_size / 4;
 		hdr = trans->rsp_hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		cmd->op_type = trans->req_hdr->op_type;
+>>>>>>> v3.18
 =======
 		cmd->op_type = trans->req_hdr->op_type;
 >>>>>>> v3.18
@@ -1030,7 +1142,10 @@ static void qlcnic_sriov_schedule_bc_cmd(struct qlcnic_sriov *sriov,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&vf->trans_work, func);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	queue_work(sriov->bc.bc_trans_wq, &vf->trans_work);
@@ -1245,6 +1360,10 @@ static void qlcnic_sriov_process_bc_cmd(struct work_struct *work)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(&cmd, 0, sizeof(struct qlcnic_cmd_args));
+>>>>>>> v3.18
 =======
 	memset(&cmd, 0, sizeof(struct qlcnic_cmd_args));
 >>>>>>> v3.18
@@ -1398,6 +1517,10 @@ static void qlcnic_sriov_handle_bc_cmd(struct qlcnic_sriov *sriov,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(&cmd, 0, sizeof(struct qlcnic_cmd_args));
+>>>>>>> v3.18
 =======
 	memset(&cmd, 0, sizeof(struct qlcnic_cmd_args));
 >>>>>>> v3.18
@@ -1527,7 +1650,11 @@ int qlcnic_sriov_cfg_bc_intr(struct qlcnic_adapter *adapter, u8 enable)
 		cmd.req.arg[1] = (1 << 4) | (1 << 5) | (1 << 6) | (1 << 7);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = qlcnic_83xx_mbx_op(adapter, &cmd);
+=======
+	err = qlcnic_83xx_issue_cmd(adapter, &cmd);
+>>>>>>> v3.18
 =======
 	err = qlcnic_83xx_issue_cmd(adapter, &cmd);
 >>>>>>> v3.18
@@ -1563,16 +1690,22 @@ static int qlcnic_sriov_retry_bc_cmd(struct qlcnic_adapter *adapter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qlcnic_sriov_vf_mbx_op(struct qlcnic_adapter *adapter,
 				  struct qlcnic_cmd_args *cmd)
 {
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 =======
+=======
+>>>>>>> v3.18
 static int __qlcnic_sriov_issue_cmd(struct qlcnic_adapter *adapter,
 				  struct qlcnic_cmd_args *cmd)
 {
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 	struct qlcnic_mailbox *mbx = ahw->mailbox;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct device *dev = &adapter->pdev->dev;
 	struct qlcnic_bc_trans *trans;
@@ -1584,7 +1717,11 @@ static int __qlcnic_sriov_issue_cmd(struct qlcnic_adapter *adapter,
 	rsp = qlcnic_sriov_alloc_bc_trans(&trans);
 	if (rsp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return rsp;
+=======
+		goto free_cmd;
+>>>>>>> v3.18
 =======
 		goto free_cmd;
 >>>>>>> v3.18
@@ -1595,7 +1732,11 @@ static int __qlcnic_sriov_issue_cmd(struct qlcnic_adapter *adapter,
 
 retry:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(QLC_83XX_MBX_READY, &adapter->ahw->idc.status)) {
+=======
+	if (!test_bit(QLC_83XX_MBX_READY, &mbx->status)) {
+>>>>>>> v3.18
 =======
 	if (!test_bit(QLC_83XX_MBX_READY, &mbx->status)) {
 >>>>>>> v3.18
@@ -1630,6 +1771,7 @@ retry:
 		rsp = QLCNIC_RCODE_SUCCESS;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rsp = mbx_err_code;
 		if (!rsp)
 			rsp = 1;
@@ -1637,6 +1779,8 @@ retry:
 			"MBX command 0x%x failed with err:0x%x for VF %d\n",
 			opcode, mbx_err_code, func);
 =======
+=======
+>>>>>>> v3.18
 		if (cmd->type == QLC_83XX_MBX_CMD_NO_WAIT) {
 			rsp = QLCNIC_RCODE_SUCCESS;
 		} else {
@@ -1648,6 +1792,9 @@ retry:
 				"MBX command 0x%x failed with err:0x%x for VF %d\n",
 				opcode, mbx_err_code, func);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1656,7 +1803,11 @@ err_out:
 		ahw->reset_context = 1;
 		adapter->need_fw_reset = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(QLC_83XX_MBX_READY, &ahw->idc.status);
+=======
+		clear_bit(QLC_83XX_MBX_READY, &mbx->status);
+>>>>>>> v3.18
 =======
 		clear_bit(QLC_83XX_MBX_READY, &mbx->status);
 >>>>>>> v3.18
@@ -1665,11 +1816,14 @@ err_out:
 cleanup_transaction:
 	qlcnic_sriov_cleanup_transaction(trans);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rsp;
 }
 
 int qlcnic_sriov_channel_cfg_cmd(struct qlcnic_adapter *adapter, u8 cmd_op)
 =======
+=======
+>>>>>>> v3.18
 
 free_cmd:
 	if (cmd->type == QLC_83XX_MBX_CMD_NO_WAIT) {
@@ -1691,6 +1845,9 @@ static int qlcnic_sriov_issue_cmd(struct qlcnic_adapter *adapter,
 }
 
 static int qlcnic_sriov_channel_cfg_cmd(struct qlcnic_adapter *adapter, u8 cmd_op)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct qlcnic_cmd_args cmd;
@@ -1698,6 +1855,10 @@ static int qlcnic_sriov_channel_cfg_cmd(struct qlcnic_adapter *adapter, u8 cmd_o
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(&cmd, 0, sizeof(cmd));
+>>>>>>> v3.18
 =======
 	memset(&cmd, 0, sizeof(cmd));
 >>>>>>> v3.18
@@ -1726,6 +1887,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qlcnic_vf_add_mc_list(struct net_device *netdev, u16 vlan)
 {
 	struct qlcnic_adapter *adapter = netdev_priv(netdev);
@@ -1750,6 +1912,8 @@ void qlcnic_vf_add_mc_list(struct net_device *netdev, u16 vlan)
 		list_del(&cur->list);
 		kfree(cur);
 =======
+=======
+>>>>>>> v3.18
 static void qlcnic_vf_add_mc_list(struct net_device *netdev, const u8 *mac)
 {
 	struct qlcnic_adapter *adapter = netdev_priv(netdev);
@@ -1772,6 +1936,9 @@ static void qlcnic_vf_add_mc_list(struct net_device *netdev, const u8 *mac)
 		spin_unlock(&vf->vlan_list_lock);
 		if (qlcnic_84xx_check(adapter))
 			qlcnic_nic_add_mac(adapter, mac, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1782,6 +1949,10 @@ void qlcnic_sriov_cleanup_async_list(struct qlcnic_back_channel *bc)
 	struct qlcnic_async_work_list *entry;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	flush_workqueue(bc->bc_async_wq);
+>>>>>>> v3.18
 =======
 	flush_workqueue(bc->bc_async_wq);
 >>>>>>> v3.18
@@ -1795,11 +1966,14 @@ void qlcnic_sriov_cleanup_async_list(struct qlcnic_back_channel *bc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void qlcnic_sriov_vf_set_multi(struct net_device *netdev)
 {
 	struct qlcnic_adapter *adapter = netdev_priv(netdev);
 	u16 vlan;
 =======
+=======
+>>>>>>> v3.18
 void qlcnic_sriov_vf_set_multi(struct net_device *netdev)
 {
 	struct qlcnic_adapter *adapter = netdev_priv(netdev);
@@ -1809,11 +1983,15 @@ void qlcnic_sriov_vf_set_multi(struct net_device *netdev)
 	};
 	struct netdev_hw_addr *ha;
 	u32 mode = VPORT_MISS_MODE_DROP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!test_bit(__QLCNIC_FW_ATTACHED, &adapter->state))
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	vlan = adapter->ahw->sriov->vlan;
 	__qlcnic_set_multi(netdev, vlan);
@@ -1829,6 +2007,8 @@ static void qlcnic_sriov_handle_async_multi(struct work_struct *work)
 
 	qlcnic_sriov_vf_set_multi(netdev);
 =======
+=======
+>>>>>>> v3.18
 	if (netdev->flags & IFF_PROMISC) {
 		if (!(adapter->flags & QLCNIC_PROMISC_DISABLED))
 			mode = VPORT_MISS_MODE_ACCEPT_ALL;
@@ -1878,6 +2058,9 @@ static void qlcnic_sriov_handle_async_issue_cmd(struct work_struct *work)
 	adapter = entry->ptr;
 	cmd = entry->cmd;
 	__qlcnic_sriov_issue_cmd(adapter, cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return;
 }
@@ -1909,8 +2092,14 @@ qlcnic_sriov_get_free_node_async_work(struct qlcnic_back_channel *bc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void qlcnic_sriov_schedule_bc_async_work(struct qlcnic_back_channel *bc,
 						work_func_t func, void *data)
+=======
+static void qlcnic_sriov_schedule_async_cmd(struct qlcnic_back_channel *bc,
+					    work_func_t func, void *data,
+					    struct qlcnic_cmd_args *cmd)
+>>>>>>> v3.18
 =======
 static void qlcnic_sriov_schedule_async_cmd(struct qlcnic_back_channel *bc,
 					    work_func_t func, void *data,
@@ -1925,6 +2114,10 @@ static void qlcnic_sriov_schedule_async_cmd(struct qlcnic_back_channel *bc,
 
 	entry->ptr = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	entry->cmd = cmd;
+>>>>>>> v3.18
 =======
 	entry->cmd = cmd;
 >>>>>>> v3.18
@@ -1932,6 +2125,7 @@ static void qlcnic_sriov_schedule_async_cmd(struct qlcnic_back_channel *bc,
 	queue_work(bc->bc_async_wq, &entry->work);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void qlcnic_sriov_vf_schedule_multi(struct net_device *netdev)
 {
@@ -1945,6 +2139,8 @@ void qlcnic_sriov_vf_schedule_multi(struct net_device *netdev)
 	qlcnic_sriov_schedule_bc_async_work(bc, qlcnic_sriov_handle_async_multi,
 					    netdev);
 =======
+=======
+>>>>>>> v3.18
 static int qlcnic_sriov_async_issue_cmd(struct qlcnic_adapter *adapter,
 					struct qlcnic_cmd_args *cmd)
 {
@@ -1957,6 +2153,9 @@ static int qlcnic_sriov_async_issue_cmd(struct qlcnic_adapter *adapter,
 	qlcnic_sriov_schedule_async_cmd(bc, qlcnic_sriov_handle_async_issue_cmd,
 					adapter, cmd);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1965,8 +2164,14 @@ static int qlcnic_sriov_vf_reinit_driver(struct qlcnic_adapter *adapter)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(QLC_83XX_MBX_READY, &adapter->ahw->idc.status);
 	qlcnic_83xx_enable_mbx_intrpt(adapter);
+=======
+	adapter->need_fw_reset = 0;
+	qlcnic_83xx_reinit_mbx_work(adapter->ahw->mailbox);
+	qlcnic_83xx_enable_mbx_interrupt(adapter);
+>>>>>>> v3.18
 =======
 	adapter->need_fw_reset = 0;
 	qlcnic_83xx_reinit_mbx_work(adapter->ahw->mailbox);
@@ -2015,13 +2220,19 @@ static void qlcnic_sriov_vf_detach(struct qlcnic_adapter *adapter)
 	u8 i, max_ints = ahw->num_msix - 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qlcnic_83xx_disable_mbx_intr(adapter);
 	netif_device_detach(netdev);
 =======
+=======
+>>>>>>> v3.18
 	netif_device_detach(netdev);
 	qlcnic_83xx_detach_mailbox_work(adapter);
 	qlcnic_83xx_disable_mbx_intr(adapter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (netif_running(netdev))
 		qlcnic_down(adapter, netdev);
@@ -2049,7 +2260,11 @@ static int qlcnic_sriov_vf_handle_dev_ready(struct qlcnic_adapter *adapter)
 			adapter->fw_fail_cnt = 0;
 			dev_info(dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 "%s: Reinitalization of VF 0x%x done after FW reset\n",
+=======
+				 "%s: Reinitialization of VF 0x%x done after FW reset\n",
+>>>>>>> v3.18
 =======
 				 "%s: Reinitialization of VF 0x%x done after FW reset\n",
 >>>>>>> v3.18
@@ -2071,6 +2286,10 @@ static int qlcnic_sriov_vf_handle_context_reset(struct qlcnic_adapter *adapter)
 {
 	struct qlcnic_hardware_context *ahw = adapter->ahw;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct qlcnic_mailbox *mbx = ahw->mailbox;
+>>>>>>> v3.18
 =======
 	struct qlcnic_mailbox *mbx = ahw->mailbox;
 >>>>>>> v3.18
@@ -2085,7 +2304,11 @@ static int qlcnic_sriov_vf_handle_context_reset(struct qlcnic_adapter *adapter)
 	if (adapter->reset_ctx_cnt < 3) {
 		adapter->need_fw_reset = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(QLC_83XX_MBX_READY, &idc->status);
+=======
+		clear_bit(QLC_83XX_MBX_READY, &mbx->status);
+>>>>>>> v3.18
 =======
 		clear_bit(QLC_83XX_MBX_READY, &mbx->status);
 >>>>>>> v3.18
@@ -2114,7 +2337,11 @@ static int qlcnic_sriov_vf_handle_context_reset(struct qlcnic_adapter *adapter)
 	set_bit(__QLCNIC_RESETTING, &adapter->state);
 	adapter->need_fw_reset = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_bit(QLC_83XX_MBX_READY, &idc->status);
+=======
+	clear_bit(QLC_83XX_MBX_READY, &mbx->status);
+>>>>>>> v3.18
 =======
 	clear_bit(QLC_83XX_MBX_READY, &mbx->status);
 >>>>>>> v3.18
@@ -2168,6 +2395,10 @@ static int
 qlcnic_sriov_vf_idc_need_quiescent_state(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct qlcnic_mailbox *mbx = adapter->ahw->mailbox;
+>>>>>>> v3.18
 =======
 	struct qlcnic_mailbox *mbx = adapter->ahw->mailbox;
 >>>>>>> v3.18
@@ -2179,7 +2410,11 @@ qlcnic_sriov_vf_idc_need_quiescent_state(struct qlcnic_adapter *adapter)
 		adapter->tx_timeo_cnt = 0;
 		adapter->reset_ctx_cnt = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(QLC_83XX_MBX_READY, &idc->status);
+=======
+		clear_bit(QLC_83XX_MBX_READY, &mbx->status);
+>>>>>>> v3.18
 =======
 		clear_bit(QLC_83XX_MBX_READY, &mbx->status);
 >>>>>>> v3.18
@@ -2192,6 +2427,10 @@ qlcnic_sriov_vf_idc_need_quiescent_state(struct qlcnic_adapter *adapter)
 static int qlcnic_sriov_vf_idc_init_reset_state(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct qlcnic_mailbox *mbx = adapter->ahw->mailbox;
+>>>>>>> v3.18
 =======
 	struct qlcnic_mailbox *mbx = adapter->ahw->mailbox;
 >>>>>>> v3.18
@@ -2205,7 +2444,11 @@ static int qlcnic_sriov_vf_idc_init_reset_state(struct qlcnic_adapter *adapter)
 		adapter->tx_timeo_cnt = 0;
 		adapter->reset_ctx_cnt = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(QLC_83XX_MBX_READY, &idc->status);
+=======
+		clear_bit(QLC_83XX_MBX_READY, &mbx->status);
+>>>>>>> v3.18
 =======
 		clear_bit(QLC_83XX_MBX_READY, &mbx->status);
 >>>>>>> v3.18
@@ -2221,13 +2464,19 @@ static int qlcnic_sriov_vf_idc_unknown_state(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void qlcnic_sriov_vf_periodic_tasks(struct qlcnic_adapter *adapter)
 {
 	if (adapter->fhash.fnum)
 		qlcnic_prune_lb_filters(adapter);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void qlcnic_sriov_vf_poll_dev_state(struct work_struct *work)
 {
@@ -2261,6 +2510,11 @@ static void qlcnic_sriov_vf_poll_dev_state(struct work_struct *work)
 
 	idc->prev_state = idc->curr_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qlcnic_sriov_vf_periodic_tasks(adapter);
+
+>>>>>>> v3.18
 =======
 	qlcnic_sriov_vf_periodic_tasks(adapter);
 
@@ -2281,6 +2535,7 @@ static void qlcnic_sriov_vf_cancel_fw_work(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qlcnic_sriov_validate_vlan_cfg(struct qlcnic_sriov *sriov,
 					  u16 vid, u8 enable)
 {
@@ -2289,6 +2544,8 @@ static int qlcnic_sriov_validate_vlan_cfg(struct qlcnic_sriov *sriov,
 	int i;
 
 =======
+=======
+>>>>>>> v3.18
 static int qlcnic_sriov_check_vlan_id(struct qlcnic_sriov *sriov,
 				      struct qlcnic_vf_info *vf, u16 vlan_id)
 {
@@ -2335,18 +2592,27 @@ static int qlcnic_sriov_validate_vlan_cfg(struct qlcnic_adapter *adapter,
 
 	vf = &adapter->ahw->sriov->vf_info[0];
 	vlan_exist = qlcnic_sriov_check_any_vlan(vf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sriov->vlan_mode != QLC_GUEST_VLAN_MODE)
 		return -EINVAL;
 
 	if (enable) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (vlan)
 =======
+=======
+>>>>>>> v3.18
 		if (qlcnic_83xx_vf_check(adapter) && vlan_exist)
 			return -EINVAL;
 
 		if (qlcnic_sriov_validate_num_vlans(sriov, vf))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EINVAL;
 
@@ -2361,7 +2627,11 @@ static int qlcnic_sriov_validate_vlan_cfg(struct qlcnic_adapter *adapter,
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!vlan || vlan != vid)
+=======
+		if (!vlan_exist || qlcnic_sriov_check_vlan_id(sriov, vf, vid))
+>>>>>>> v3.18
 =======
 		if (!vlan_exist || qlcnic_sriov_check_vlan_id(sriov, vf, vid))
 >>>>>>> v3.18
@@ -2372,7 +2642,10 @@ static int qlcnic_sriov_validate_vlan_cfg(struct qlcnic_adapter *adapter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void qlcnic_sriov_vlan_operation(struct qlcnic_vf_info *vf, u16 vlan_id,
 					enum qlcnic_vlan_operations opcode)
 {
@@ -2401,11 +2674,15 @@ static void qlcnic_sriov_vlan_operation(struct qlcnic_vf_info *vf, u16 vlan_id,
 	return;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int qlcnic_sriov_cfg_vf_guest_vlan(struct qlcnic_adapter *adapter,
 				   u16 vid, u8 enable)
 {
 	struct qlcnic_sriov *sriov = adapter->ahw->sriov;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct qlcnic_cmd_args cmd;
 	int ret;
@@ -2415,6 +2692,8 @@ int qlcnic_sriov_cfg_vf_guest_vlan(struct qlcnic_adapter *adapter,
 
 	ret = qlcnic_sriov_validate_vlan_cfg(sriov, vid, enable);
 =======
+=======
+>>>>>>> v3.18
 	struct net_device *netdev = adapter->netdev;
 	struct qlcnic_vf_info *vf;
 	struct qlcnic_cmd_args cmd;
@@ -2426,6 +2705,9 @@ int qlcnic_sriov_cfg_vf_guest_vlan(struct qlcnic_adapter *adapter,
 
 	vf = &adapter->ahw->sriov->vf_info[0];
 	ret = qlcnic_sriov_validate_vlan_cfg(adapter, vid, enable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return ret;
@@ -2444,6 +2726,7 @@ int qlcnic_sriov_cfg_vf_guest_vlan(struct qlcnic_adapter *adapter,
 			"Failed to configure guest VLAN, err=%d\n", ret);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qlcnic_free_mac_list(adapter);
 
 		if (enable)
@@ -2453,6 +2736,8 @@ int qlcnic_sriov_cfg_vf_guest_vlan(struct qlcnic_adapter *adapter,
 
 		qlcnic_sriov_vf_set_multi(adapter->netdev);
 =======
+=======
+>>>>>>> v3.18
 		netif_addr_lock_bh(netdev);
 		qlcnic_free_mac_list(adapter);
 		netif_addr_unlock_bh(netdev);
@@ -2465,6 +2750,9 @@ int qlcnic_sriov_cfg_vf_guest_vlan(struct qlcnic_adapter *adapter,
 		netif_addr_lock_bh(netdev);
 		qlcnic_set_multi(netdev);
 		netif_addr_unlock_bh(netdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2476,6 +2764,7 @@ static void qlcnic_sriov_vf_free_mac_list(struct qlcnic_adapter *adapter)
 {
 	struct list_head *head = &adapter->mac_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qlcnic_mac_list_s *cur;
 	u16 vlan;
 
@@ -2486,19 +2775,27 @@ static void qlcnic_sriov_vf_free_mac_list(struct qlcnic_adapter *adapter)
 		qlcnic_sre_macaddr_change(adapter, cur->mac_addr,
 					  vlan, QLCNIC_MAC_DEL);
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_mac_vlan_list *cur;
 
 	while (!list_empty(head)) {
 		cur = list_entry(head->next, struct qlcnic_mac_vlan_list, list);
 		qlcnic_sre_macaddr_change(adapter, cur->mac_addr, cur->vlan_id,
 					  QLCNIC_MAC_DEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		list_del(&cur->list);
 		kfree(cur);
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 
 static int qlcnic_sriov_vf_shutdown(struct pci_dev *pdev)
@@ -2618,4 +2915,7 @@ bool qlcnic_sriov_check_any_vlan(struct qlcnic_vf_info *vf)
 	spin_unlock_bh(&vf->vlan_list_lock);
 	return err;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

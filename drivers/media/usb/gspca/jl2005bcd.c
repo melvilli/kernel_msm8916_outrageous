@@ -456,7 +456,11 @@ static int sd_start(struct gspca_dev *gspca_dev)
 	sd->cap_mode = gspca_dev->cam.cam_mode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18

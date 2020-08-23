@@ -82,8 +82,14 @@ struct ceph_pg_v1 {
 #define CEPH_NOPOOL  ((__u64) (-1))  /* pool id not defined */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CEPH_PG_TYPE_REP     1
 #define CEPH_PG_TYPE_RAID4   2
+=======
+#define CEPH_POOL_TYPE_REP     1
+#define CEPH_POOL_TYPE_RAID4   2 /* never implemented */
+#define CEPH_POOL_TYPE_EC      3
+>>>>>>> v3.18
 =======
 #define CEPH_POOL_TYPE_REP     1
 #define CEPH_POOL_TYPE_RAID4   2 /* never implemented */
@@ -140,11 +146,17 @@ extern const char *ceph_osd_state_name(int s);
 #define CEPH_OSD_OUT 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* osd primary-affinity.  fixed point value: 0x10000 == baseline */
 #define CEPH_OSD_MAX_PRIMARY_AFFINITY 0x10000
 #define CEPH_OSD_DEFAULT_PRIMARY_AFFINITY 0x10000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -181,6 +193,10 @@ extern const char *ceph_osd_state_name(int s);
 #define CEPH_OSD_OP_MODE_RMW   0x3000
 #define CEPH_OSD_OP_MODE_SUB   0x4000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CEPH_OSD_OP_MODE_CACHE 0x8000
+>>>>>>> v3.18
 =======
 #define CEPH_OSD_OP_MODE_CACHE 0x8000
 >>>>>>> v3.18
@@ -193,6 +209,7 @@ extern const char *ceph_osd_state_name(int s);
 #define CEPH_OSD_OP_TYPE_PG    0x0500
 #define CEPH_OSD_OP_TYPE_MULTI 0x0600 /* multiobject */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum {
 	/** data **/
@@ -289,6 +306,8 @@ enum {
 	CEPH_OSD_OP_PGLS      = CEPH_OSD_OP_MODE_RD | CEPH_OSD_OP_TYPE_PG | 1,
 	CEPH_OSD_OP_PGLS_FILTER = CEPH_OSD_OP_MODE_RD | CEPH_OSD_OP_TYPE_PG | 2,
 =======
+=======
+>>>>>>> v3.18
 #define __CEPH_OSD_OP1(mode, nr) \
 	(CEPH_OSD_OP_MODE_##mode | (nr))
 
@@ -418,6 +437,9 @@ enum {
 #define GENERATE_ENUM_ENTRY(op, opcode, str)	CEPH_OSD_OP_##op = (opcode),
 __CEPH_FORALL_OSD_OPS(GENERATE_ENUM_ENTRY)
 #undef GENERATE_ENUM_ENTRY
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -494,11 +516,17 @@ enum {
 	CEPH_OSD_FLAG_LOCALIZE_READS = 0x2000,  /* read from nearby replica, if any */
 	CEPH_OSD_FLAG_RWORDERED =      0x4000,  /* order wrt concurrent reads */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	CEPH_OSD_FLAG_IGNORE_CACHE =   0x8000,  /* ignore cache logic */
 	CEPH_OSD_FLAG_SKIPRWLOCKS =   0x10000,  /* skip rw locks */
 	CEPH_OSD_FLAG_IGNORE_OVERLAY = 0x20000, /* ignore pool overlay */
 	CEPH_OSD_FLAG_FLUSH =         0x40000,  /* this is part of flush */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -535,7 +563,11 @@ enum {
 struct ceph_osd_op {
 	__le16 op;           /* CEPH_OSD_OP_* */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 flags;        /* CEPH_OSD_FLAG_* */
+=======
+	__le32 flags;        /* CEPH_OSD_OP_FLAG_* */
+>>>>>>> v3.18
 =======
 	__le32 flags;        /* CEPH_OSD_OP_FLAG_* */
 >>>>>>> v3.18
@@ -573,11 +605,17 @@ struct ceph_osd_op {
 			__le64 src_offset;
 		} __attribute__ ((packed)) clonerange;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		struct {
 			__le64 expected_object_size;
 			__le64 expected_write_size;
 		} __attribute__ ((packed)) alloc_hint;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 	__le32 payload_len;

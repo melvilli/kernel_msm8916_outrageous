@@ -38,7 +38,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -629,7 +632,11 @@ static void carl9170_tx_ampdu_timeout(struct ar9170 *ar)
 			goto unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sta = __carl9170_get_tx_sta(ar, skb);
+=======
+		sta = iter->sta;
+>>>>>>> v3.18
 =======
 		sta = iter->sta;
 >>>>>>> v3.18
@@ -874,7 +881,10 @@ static bool carl9170_tx_cts_check(struct ar9170 *ar,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void carl9170_tx_get_rates(struct ar9170 *ar,
 				  struct ieee80211_vif *vif,
 				  struct ieee80211_sta *sta,
@@ -962,6 +972,9 @@ static void carl9170_tx_apply_rateset(struct ar9170 *ar,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int carl9170_tx_prepare(struct ar9170 *ar,
 			       struct ieee80211_sta *sta,
@@ -972,6 +985,7 @@ static int carl9170_tx_prepare(struct ar9170 *ar,
 	struct carl9170_vif_info *cvif;
 	struct ieee80211_tx_info *info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_tx_rate *txrate;
 	struct carl9170_tx_info *arinfo;
 	unsigned int hw_queue;
@@ -980,10 +994,15 @@ static int carl9170_tx_prepare(struct ar9170 *ar,
 	u16 len;
 	bool ampdu, no_ack;
 =======
+=======
+>>>>>>> v3.18
 	struct carl9170_tx_info *arinfo;
 	unsigned int hw_queue;
 	__le16 mac_tmp;
 	u16 len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	BUILD_BUG_ON(sizeof(*arinfo) > sizeof(info->rate_driver_data));
@@ -994,8 +1013,11 @@ static int carl9170_tx_prepare(struct ar9170 *ar,
 		     AR9170_TX_HWDESC_LEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUILD_BUG_ON(IEEE80211_TX_MAX_RATES < CARL9170_TX_MAX_RATES);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	BUILD_BUG_ON(AR9170_MAX_VIRTUAL_MAC >
@@ -1040,8 +1062,12 @@ static int carl9170_tx_prepare(struct ar9170 *ar,
 			       AR9170_TX_MAC_QOS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	no_ack = !!(info->flags & IEEE80211_TX_CTL_NO_ACK);
 	if (unlikely(no_ack))
+=======
+	if (unlikely(info->flags & IEEE80211_TX_CTL_NO_ACK))
+>>>>>>> v3.18
 =======
 	if (unlikely(info->flags & IEEE80211_TX_CTL_NO_ACK))
 >>>>>>> v3.18
@@ -1066,8 +1092,12 @@ static int carl9170_tx_prepare(struct ar9170 *ar,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ampdu = !!(info->flags & IEEE80211_TX_CTL_AMPDU);
 	if (ampdu) {
+=======
+	if (info->flags & IEEE80211_TX_CTL_AMPDU) {
+>>>>>>> v3.18
 =======
 	if (info->flags & IEEE80211_TX_CTL_AMPDU) {
 >>>>>>> v3.18
@@ -1097,6 +1127,7 @@ static int carl9170_tx_prepare(struct ar9170 *ar,
 			txc->s.ampdu_settings, factor);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * NOTE: For the first rate, the ERP & AMPDU flags are directly
@@ -1142,6 +1173,8 @@ static int carl9170_tx_prepare(struct ar9170 *ar,
 			txc->s.ri[i] |= CARL9170_TX_SUPER_RI_AMPDU;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	txc->s.len = cpu_to_le16(skb->len);
@@ -1205,6 +1238,7 @@ static void carl9170_set_ampdu_params(struct ar9170 *ar, struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool carl9170_tx_rate_check(struct ar9170 *ar, struct sk_buff *_dest,
 				   struct sk_buff *_src)
 {
@@ -1227,12 +1261,18 @@ static bool carl9170_tx_rate_check(struct ar9170 *ar, struct sk_buff *_dest,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void carl9170_tx_ampdu(struct ar9170 *ar)
 {
 	struct sk_buff_head agg;
 	struct carl9170_sta_tid *tid_info;
 	struct sk_buff *skb, *first;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ieee80211_tx_info *tx_info_first;
+>>>>>>> v3.18
 =======
 	struct ieee80211_tx_info *tx_info_first;
 >>>>>>> v3.18
@@ -1282,6 +1322,10 @@ retry:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		tx_info_first = NULL;
+>>>>>>> v3.18
 =======
 		tx_info_first = NULL;
 >>>>>>> v3.18
@@ -1296,9 +1340,12 @@ retry:
 				break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!carl9170_tx_rate_check(ar, skb, first))
 				break;
 =======
+=======
+>>>>>>> v3.18
 			if (!tx_info_first) {
 				carl9170_tx_get_rates(ar, tid_info->vif,
 						      tid_info->sta, first);
@@ -1306,6 +1353,9 @@ retry:
 			}
 
 			carl9170_tx_apply_rateset(ar, tx_info_first, skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			atomic_inc(&ar->tx_ampdu_upload);
@@ -1322,8 +1372,12 @@ retry:
 		    carl9170_get_seq(skb_peek(&tid_info->queue)) !=
 		    tid_info->snx) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*
 			 * stop TID, if A-MPDU frames are still missing,
+=======
+			/* stop TID, if A-MPDU frames are still missing,
+>>>>>>> v3.18
 =======
 			/* stop TID, if A-MPDU frames are still missing,
 >>>>>>> v3.18
@@ -1594,6 +1648,10 @@ void carl9170_op_tx(struct ieee80211_hw *hw,
 	struct ieee80211_tx_info *info;
 	struct ieee80211_sta *sta = control->sta;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ieee80211_vif *vif;
+>>>>>>> v3.18
 =======
 	struct ieee80211_vif *vif;
 >>>>>>> v3.18
@@ -1604,6 +1662,10 @@ void carl9170_op_tx(struct ieee80211_hw *hw,
 
 	info = IEEE80211_SKB_CB(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vif = info->control.vif;
+>>>>>>> v3.18
 =======
 	vif = info->control.vif;
 >>>>>>> v3.18
@@ -1638,6 +1700,11 @@ void carl9170_op_tx(struct ieee80211_hw *hw,
 		unsigned int queue = skb_get_queue_mapping(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		carl9170_tx_get_rates(ar, vif, sta, skb);
+		carl9170_tx_apply_rateset(ar, info, skb);
+>>>>>>> v3.18
 =======
 		carl9170_tx_get_rates(ar, vif, sta, skb);
 		carl9170_tx_apply_rateset(ar, info, skb);
@@ -1689,7 +1756,11 @@ static struct carl9170_vif_info *carl9170_pick_beaconing_vif(struct ar9170 *ar)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_assign_pointer(ar->beacon_iter, cvif);
+=======
+	RCU_INIT_POINTER(ar->beacon_iter, cvif);
+>>>>>>> v3.18
 =======
 	RCU_INIT_POINTER(ar->beacon_iter, cvif);
 >>>>>>> v3.18

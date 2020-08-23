@@ -234,6 +234,11 @@
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_core.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/serial_core.h>
 

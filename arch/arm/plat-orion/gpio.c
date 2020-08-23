@@ -427,7 +427,11 @@ static void gpio_irq_handler(unsigned irq, struct irq_desc *desc)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		type = irqd_get_trigger_type(irq_get_irq_data(irq));
+=======
+		type = irq_get_trigger_type(irq);
+>>>>>>> v3.18
 =======
 		type = irq_get_trigger_type(irq);
 >>>>>>> v3.18
@@ -502,7 +506,10 @@ static void orion_gpio_dbg_show(struct seq_file *s, struct gpio_chip *chip)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void orion_gpio_unmask_irq(struct irq_data *d)
 {
 	struct irq_chip_generic *gc = irq_data_get_irq_chip_data(d);
@@ -531,6 +538,9 @@ static void orion_gpio_mask_irq(struct irq_data *d)
 	irq_gc_unlock(gc);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init orion_gpio_init(struct device_node *np,
 			    int gpio_base, int ngpio,
@@ -601,8 +611,13 @@ void __init orion_gpio_init(struct device_node *np,
 	ct->regs.mask = ochip->mask_offset + GPIO_LEVEL_MASK_OFF;
 	ct->type = IRQ_TYPE_LEVEL_HIGH | IRQ_TYPE_LEVEL_LOW;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ct->chip.irq_mask = irq_gc_mask_clr_bit;
 	ct->chip.irq_unmask = irq_gc_mask_set_bit;
+=======
+	ct->chip.irq_mask = orion_gpio_mask_irq;
+	ct->chip.irq_unmask = orion_gpio_unmask_irq;
+>>>>>>> v3.18
 =======
 	ct->chip.irq_mask = orion_gpio_mask_irq;
 	ct->chip.irq_unmask = orion_gpio_unmask_irq;
@@ -616,8 +631,13 @@ void __init orion_gpio_init(struct device_node *np,
 	ct->type = IRQ_TYPE_EDGE_RISING | IRQ_TYPE_EDGE_FALLING;
 	ct->chip.irq_ack = irq_gc_ack_clr_bit;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ct->chip.irq_mask = irq_gc_mask_clr_bit;
 	ct->chip.irq_unmask = irq_gc_mask_set_bit;
+=======
+	ct->chip.irq_mask = orion_gpio_mask_irq;
+	ct->chip.irq_unmask = orion_gpio_unmask_irq;
+>>>>>>> v3.18
 =======
 	ct->chip.irq_mask = orion_gpio_mask_irq;
 	ct->chip.irq_unmask = orion_gpio_unmask_irq;
@@ -642,6 +662,7 @@ void __init orion_gpio_init(struct device_node *np,
 
 	orion_gpio_chip_count++;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #ifdef CONFIG_OF
@@ -691,5 +712,7 @@ void __init orion_gpio_of_init(int irq_gpio_base)
 		orion_gpio_of_init_one(np, irq_gpio_base);
 }
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

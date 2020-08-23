@@ -2,6 +2,7 @@
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : compatible list, contains 2 entries,
   first is "fsl,CHIP-msi", where CHIP is the processor(mpc8610, mpc8572,
   etc.) and the second is "fsl,mpic-msi" or "fsl,ipic-msi" depending on
@@ -18,6 +19,8 @@ Required properties:
   Each available range must begin and end on a multiple of 32 (i.e.
   no splitting an individual MSI register or the associated PIC interrupt).
 =======
+=======
+>>>>>>> v3.18
 - compatible : compatible list, may contain one or two entries
   The first is "fsl,CHIP-msi", where CHIP is the processor(mpc8610, mpc8572,
   etc.) and the second is "fsl,mpic-msi" or "fsl,ipic-msi" or
@@ -32,6 +35,9 @@ Required properties:
   The second region should contain the address of aliased MSIIR or MSIIR1
   register for platforms that have such an alias, if using MSIIR1, the second
   region must be added because different MSI group has different MSIIR1 offset.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - interrupts : each one of the interrupts here is one entry per 32 MSIs,
@@ -46,7 +52,10 @@ Required properties:
 
 Optional properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - msi-available-ranges: use <start count> style section to define which
   msi interrupt can be used in the 256 msi interrupts. This property is
   optional, without this, all the MSI interrupts can be used.
@@ -55,6 +64,9 @@ Optional properties:
   MPIC v4.3 does not support this property because the 32 interrupts of an
   individual register are not continuous when using MSIIR1.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - msi-address-64: 64-bit PCI address of the MSIIR register. The MSIIR register
   is used for MSI messaging.  The address of MSIIR in PCI address space is
@@ -83,7 +95,10 @@ Example:
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	msi@41600 {
 		compatible = "fsl,mpic-msi-v4.3";
 		reg = <0x41600 0x200 0x44148 4>;
@@ -106,6 +121,9 @@ Example:
 			0x107 0 0 0>;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 The Freescale hypervisor and msi-address-64
 -------------------------------------------

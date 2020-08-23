@@ -27,7 +27,11 @@
  * <size>    := standard linux memsize OR "-" to denote all remaining space
  *              size is automatically truncated at end of device
 <<<<<<< HEAD
+<<<<<<< HEAD
  *              if specified or trucated size is 0 the part is skipped
+=======
+ *              if specified or truncated size is 0 the part is skipped
+>>>>>>> v3.18
 =======
  *              if specified or truncated size is 0 the part is skipped
 >>>>>>> v3.18
@@ -400,7 +404,12 @@ static int __init cmdline_parser_init(void)
 	if (mtdparts)
 		mtdpart_setup(mtdparts);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return register_mtd_parser(&cmdline_parser);
+=======
+	register_mtd_parser(&cmdline_parser);
+	return 0;
+>>>>>>> v3.18
 =======
 	register_mtd_parser(&cmdline_parser);
 	return 0;

@@ -141,6 +141,7 @@ struct siga_flag {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct chsc_ssqd_area {
 	struct chsc_header request;
 	u16:10;
@@ -175,6 +176,8 @@ struct scssc_area {
 	u32:32;
 } __attribute__ ((packed));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct qdio_dev_perf_stat {
@@ -397,6 +400,7 @@ static inline int multicast_outbound(struct qdio_q *q)
 	(unlikely(q->irq_ptr->siga_flag.sync_out_after_pci))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define for_each_input_queue(irq_ptr, q, i)	\
 	for (i = 0, q = irq_ptr->input_qs[0];	\
 		i < irq_ptr->nr_input_qs;	\
@@ -406,12 +410,17 @@ static inline int multicast_outbound(struct qdio_q *q)
 		i < irq_ptr->nr_output_qs;	\
 		q = irq_ptr->output_qs[++i])
 =======
+=======
+>>>>>>> v3.18
 #define for_each_input_queue(irq_ptr, q, i)		\
 	for (i = 0; i < irq_ptr->nr_input_qs &&		\
 		({ q = irq_ptr->input_qs[i]; 1; }); i++)
 #define for_each_output_queue(irq_ptr, q, i)		\
 	for (i = 0; i < irq_ptr->nr_output_qs &&	\
 		({ q = irq_ptr->output_qs[i]; 1; }); i++)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define prev_buf(bufnr)	\

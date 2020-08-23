@@ -238,7 +238,11 @@ int __cleancache_get_page(struct page *page)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!PageLocked(page));
+=======
+	VM_BUG_ON_PAGE(!PageLocked(page), page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(!PageLocked(page), page);
 >>>>>>> v3.18
@@ -284,7 +288,11 @@ void __cleancache_put_page(struct page *page)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!PageLocked(page));
+=======
+	VM_BUG_ON_PAGE(!PageLocked(page), page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(!PageLocked(page), page);
 >>>>>>> v3.18
@@ -327,7 +335,11 @@ void __cleancache_invalidate_page(struct address_space *mapping,
 			return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		VM_BUG_ON(!PageLocked(page));
+=======
+		VM_BUG_ON_PAGE(!PageLocked(page), page);
+>>>>>>> v3.18
 =======
 		VM_BUG_ON_PAGE(!PageLocked(page), page);
 >>>>>>> v3.18

@@ -30,6 +30,11 @@
 #include <sound/soc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "tegra_asoc_utils.h"
+
+>>>>>>> v3.18
 =======
 #include "tegra_asoc_utils.h"
 
@@ -39,6 +44,10 @@
 struct tegra_wm9712 {
 	struct platform_device *codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tegra_asoc_utils_data util_data;
+>>>>>>> v3.18
 =======
 	struct tegra_asoc_utils_data util_data;
 >>>>>>> v3.18
@@ -57,9 +66,13 @@ static int tegra_wm9712_init(struct snd_soc_pcm_runtime *rtd)
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dapm_force_enable_pin(dapm, "Mic Bias");
 
 	return snd_soc_dapm_sync(dapm);
+=======
+	return snd_soc_dapm_force_enable_pin(dapm, "Mic Bias");
+>>>>>>> v3.18
 =======
 	return snd_soc_dapm_force_enable_pin(dapm, "Mic Bias");
 >>>>>>> v3.18
@@ -69,7 +82,10 @@ static struct snd_soc_dai_link tegra_wm9712_dai = {
 	.name = "AC97 HiFi",
 	.stream_name = "AC97 HiFi",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cpu_dai_name = "tegra20-ac97",
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.codec_dai_name = "wm9712-hifi",
@@ -136,7 +152,10 @@ static int tegra_wm9712_driver_probe(struct platform_device *pdev)
 	tegra_wm9712_dai.platform_of_node = tegra_wm9712_dai.cpu_of_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = tegra_asoc_utils_init(&machine->util_data, &pdev->dev);
 	if (ret)
 		goto codec_unregister;
@@ -145,13 +164,20 @@ static int tegra_wm9712_driver_probe(struct platform_device *pdev)
 	if (ret)
 		goto asoc_utils_fini;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = snd_soc_register_card(card);
 	if (ret) {
 		dev_err(&pdev->dev, "snd_soc_register_card failed (%d)\n",
 			ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto codec_unregister;
+=======
+		goto asoc_utils_fini;
+>>>>>>> v3.18
 =======
 		goto asoc_utils_fini;
 >>>>>>> v3.18
@@ -160,6 +186,11 @@ static int tegra_wm9712_driver_probe(struct platform_device *pdev)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+asoc_utils_fini:
+	tegra_asoc_utils_fini(&machine->util_data);
+>>>>>>> v3.18
 =======
 asoc_utils_fini:
 	tegra_asoc_utils_fini(&machine->util_data);
@@ -179,6 +210,11 @@ static int tegra_wm9712_driver_remove(struct platform_device *pdev)
 	snd_soc_unregister_card(card);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tegra_asoc_utils_fini(&machine->util_data);
+
+>>>>>>> v3.18
 =======
 	tegra_asoc_utils_fini(&machine->util_data);
 

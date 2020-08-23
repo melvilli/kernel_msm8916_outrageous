@@ -10,7 +10,11 @@
 static void __init check_bugs(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_data->loops_per_jiffy = loops_per_jiffy;
+=======
+	boot_cpu_data.loops_per_jiffy = loops_per_jiffy;
+>>>>>>> v3.18
 =======
 	boot_cpu_data.loops_per_jiffy = loops_per_jiffy;
 >>>>>>> v3.18

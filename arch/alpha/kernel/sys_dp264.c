@@ -191,9 +191,12 @@ static void
 dp264_device_interrupt(unsigned long vector)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 1
 	printk("dp264_device_interrupt: NOT IMPLEMENTED YET!!\n");
 #else
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long pld;
@@ -214,12 +217,16 @@ dp264_device_interrupt(unsigned long vector)
 		else
 			handle_irq(16 + i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0
 		TSUNAMI_cchip->dir0.csr = 1UL << i; mb();
 		tmp = TSUNAMI_cchip->dir0.csr;
 #endif
 	}
 #endif
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18

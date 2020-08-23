@@ -73,6 +73,10 @@
 #define  SDHCI_DATA_LVL_MASK	0x00F00000
 #define   SDHCI_DATA_LVL_SHIFT	20
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define   SDHCI_DATA_0_LVL_MASK	0x00100000
+>>>>>>> v3.18
 =======
 #define   SDHCI_DATA_0_LVL_MASK	0x00100000
 >>>>>>> v3.18
@@ -141,7 +145,11 @@
 #define  SDHCI_INT_DATA_END_BIT	0x00400000
 #define  SDHCI_INT_BUS_POWER	0x00800000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  SDHCI_INT_AUTO_CMD_ERR	0x01000000
+=======
+#define  SDHCI_INT_ACMD12ERR	0x01000000
+>>>>>>> v3.18
 =======
 #define  SDHCI_INT_ACMD12ERR	0x01000000
 >>>>>>> v3.18
@@ -152,9 +160,13 @@
 
 #define  SDHCI_INT_CMD_MASK	(SDHCI_INT_RESPONSE | SDHCI_INT_TIMEOUT | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SDHCI_INT_CRC | SDHCI_INT_END_BIT | SDHCI_INT_INDEX | \
 				 SDHCI_INT_AUTO_CMD_ERR)
 
+=======
+		SDHCI_INT_CRC | SDHCI_INT_END_BIT | SDHCI_INT_INDEX)
+>>>>>>> v3.18
 =======
 		SDHCI_INT_CRC | SDHCI_INT_END_BIT | SDHCI_INT_INDEX)
 >>>>>>> v3.18
@@ -166,6 +178,7 @@
 #define SDHCI_INT_ALL_MASK	((unsigned int)-1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SDHCI_AUTO_CMD_ERR		0x3C
 #define SDHCI_AUTO_CMD12_NOT_EXEC	0x0001
 #define SDHCI_AUTO_CMD_TIMEOUT_ERR	0x0002
@@ -173,6 +186,9 @@
 #define SDHCI_AUTO_CMD_ENDBIT_ERR	0x0008
 #define SDHCI_AUTO_CMD_INDEX_ERR	0x0010
 #define SDHCI_AUTO_CMD12_NOT_ISSUED	0x0080
+=======
+#define SDHCI_ACMD12_ERR	0x3C
+>>>>>>> v3.18
 =======
 #define SDHCI_ACMD12_ERR	0x3C
 >>>>>>> v3.18
@@ -194,7 +210,10 @@
 #define  SDHCI_CTRL_EXEC_TUNING		0x0040
 #define  SDHCI_CTRL_TUNED_CLK		0x0080
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  SDHCI_CTRL_ASYNC_INT_ENABLE	0x4000
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define  SDHCI_CTRL_PRESET_VAL_ENABLE	0x8000
@@ -218,7 +237,10 @@
 #define  SDHCI_CAN_VDD_180	0x04000000
 #define  SDHCI_CAN_64BIT	0x10000000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  SDHCI_ASYNC_INTR	0x20000000
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -258,9 +280,13 @@
 /* 55-57 reserved */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SDHCI_HI_SHIFT 32
 #define SDHCI_ADMA_ADDRESS_LOW	0x58 /* addr[0:31] */
 #define SDHCI_ADMA_ADDRESS_HIGH	0x5C /* addr[32:63] */
+=======
+#define SDHCI_ADMA_ADDRESS	0x58
+>>>>>>> v3.18
 =======
 #define SDHCI_ADMA_ADDRESS	0x58
 >>>>>>> v3.18
@@ -320,6 +346,7 @@ struct sdhci_ops {
 	unsigned int	(*get_min_clock)(struct sdhci_host *host);
 	unsigned int	(*get_timeout_clock)(struct sdhci_host *host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		(*platform_bus_width)(struct sdhci_host *host,
 					       int width);
 	void (*platform_send_init_74_clocks)(struct sdhci_host *host,
@@ -350,6 +377,8 @@ struct sdhci_ops {
 	int	(*enable_controller_clock)(struct sdhci_host *host);
 	void	(*reset_workaround)(struct sdhci_host *host, u32 enable);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int	(*get_max_timeout_count)(struct sdhci_host *host);
 	void		(*set_timeout)(struct sdhci_host *host,
 				       struct mmc_command *cmd);
@@ -364,6 +393,9 @@ struct sdhci_ops {
 	void    (*adma_workaround)(struct sdhci_host *host, u32 intmask);
 	void	(*platform_init)(struct sdhci_host *host);
 	void    (*card_event)(struct sdhci_host *host);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -464,7 +496,10 @@ extern void sdhci_card_detect(struct sdhci_host *host);
 extern int sdhci_add_host(struct sdhci_host *host);
 extern void sdhci_remove_host(struct sdhci_host *host, int dead);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern void sdhci_send_command(struct sdhci_host *host,
 				struct mmc_command *cmd);
 
@@ -477,6 +512,9 @@ void sdhci_set_clock(struct sdhci_host *host, unsigned int clock);
 void sdhci_set_bus_width(struct sdhci_host *host, int width);
 void sdhci_reset(struct sdhci_host *host, u8 mask);
 void sdhci_set_uhs_signaling(struct sdhci_host *host, unsigned timing);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PM

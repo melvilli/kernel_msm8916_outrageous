@@ -138,7 +138,11 @@ struct qfq_class {
 	struct gnet_stats_basic_packed bstats;
 	struct gnet_stats_queue qstats;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gnet_stats_rate_est rate_est;
+=======
+	struct gnet_stats_rate_est64 rate_est;
+>>>>>>> v3.18
 =======
 	struct gnet_stats_rate_est64 rate_est;
 >>>>>>> v3.18
@@ -186,7 +190,11 @@ struct qfq_group {
 
 struct qfq_sched {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcf_proto *filter_list;
+=======
+	struct tcf_proto __rcu *filter_list;
+>>>>>>> v3.18
 =======
 	struct tcf_proto __rcu *filter_list;
 >>>>>>> v3.18
@@ -468,7 +476,12 @@ static int qfq_change_class(struct Qdisc *sch, u32 classid, u32 parentid,
 	if (cl != NULL) { /* modify existing class */
 		if (tca[TCA_RATE]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = gen_replace_estimator(&cl->bstats, &cl->rate_est,
+=======
+			err = gen_replace_estimator(&cl->bstats, NULL,
+						    &cl->rate_est,
+>>>>>>> v3.18
 =======
 			err = gen_replace_estimator(&cl->bstats, NULL,
 						    &cl->rate_est,
@@ -498,7 +511,12 @@ static int qfq_change_class(struct Qdisc *sch, u32 classid, u32 parentid,
 
 	if (tca[TCA_RATE]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = gen_new_estimator(&cl->bstats, &cl->rate_est,
+=======
+		err = gen_new_estimator(&cl->bstats, NULL,
+					&cl->rate_est,
+>>>>>>> v3.18
 =======
 		err = gen_new_estimator(&cl->bstats, NULL,
 					&cl->rate_est,
@@ -595,7 +613,12 @@ static void qfq_put_class(struct Qdisc *sch, unsigned long arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_proto **qfq_tcf_chain(struct Qdisc *sch, unsigned long cl)
+=======
+static struct tcf_proto __rcu **qfq_tcf_chain(struct Qdisc *sch,
+					      unsigned long cl)
+>>>>>>> v3.18
 =======
 static struct tcf_proto __rcu **qfq_tcf_chain(struct Qdisc *sch,
 					      unsigned long cl)
@@ -685,7 +708,10 @@ static int qfq_dump_class_stats(struct Qdisc *sch, unsigned long arg,
 
 	memset(&xstats, 0, sizeof(xstats));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cl->qdisc->qstats.qlen = cl->qdisc->q.qlen;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -693,14 +719,20 @@ static int qfq_dump_class_stats(struct Qdisc *sch, unsigned long arg,
 	xstats.lmax = cl->agg->lmax;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gnet_stats_copy_basic(d, &cl->bstats) < 0 ||
 	    gnet_stats_copy_rate_est(d, &cl->bstats, &cl->rate_est) < 0 ||
 	    gnet_stats_copy_queue(d, &cl->qdisc->qstats) < 0)
 =======
+=======
+>>>>>>> v3.18
 	if (gnet_stats_copy_basic(d, NULL, &cl->bstats) < 0 ||
 	    gnet_stats_copy_rate_est(d, &cl->bstats, &cl->rate_est) < 0 ||
 	    gnet_stats_copy_queue(d, NULL,
 				  &cl->qdisc->qstats, cl->qdisc->q.qlen) < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -1;
 
@@ -738,6 +770,10 @@ static struct qfq_class *qfq_classify(struct sk_buff *skb, struct Qdisc *sch,
 	struct qfq_class *cl;
 	struct tcf_result res;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tcf_proto *fl;
+>>>>>>> v3.18
 =======
 	struct tcf_proto *fl;
 >>>>>>> v3.18
@@ -752,7 +788,12 @@ static struct qfq_class *qfq_classify(struct sk_buff *skb, struct Qdisc *sch,
 
 	*qerr = NET_XMIT_SUCCESS | __NET_XMIT_BYPASS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = tc_classify(skb, q->filter_list, &res);
+=======
+	fl = rcu_dereference_bh(q->filter_list);
+	result = tc_classify(skb, fl, &res);
+>>>>>>> v3.18
 =======
 	fl = rcu_dereference_bh(q->filter_list);
 	result = tc_classify(skb, fl, &res);
@@ -869,8 +910,11 @@ static void qfq_make_eligible(struct qfq_sched *q)
 
 	if (vslot != old_vslot) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long mask = (1ULL << fls(vslot ^ old_vslot)) - 1;
 =======
+=======
+>>>>>>> v3.18
 		unsigned long mask;
 		int last_flip_pos = fls(vslot ^ old_vslot);
 
@@ -879,6 +923,9 @@ static void qfq_make_eligible(struct qfq_sched *q)
 		else
 			mask = (1UL << last_flip_pos) - 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		qfq_move_groups(q, mask, IR, ER);
 		qfq_move_groups(q, mask, IB, EB);
@@ -1084,10 +1131,13 @@ static inline void charge_actual_service(struct qfq_aggregate *agg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void qfq_update_agg_ts(struct qfq_sched *q,
 				     struct qfq_aggregate *agg,
 				     enum update_reason reason);
 =======
+=======
+>>>>>>> v3.18
 /* Assign a reasonable start time for a new aggregate in group i.
  * Admissible values for \hat(F) are multiples of \sigma_i
  * no greater than V+\sigma_i . Larger values mean that
@@ -1143,6 +1193,9 @@ qfq_update_agg_ts(struct qfq_sched *q,
 
 	agg->F = agg->S + (u64)agg->budgetmax * agg->inv_w;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void qfq_schedule_agg(struct qfq_sched *q, struct qfq_aggregate *agg);
@@ -1267,6 +1320,7 @@ static struct qfq_aggregate *qfq_choose_next_agg(struct qfq_sched *q)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Assign a reasonable start time for a new aggregate in group i.
  * Admissible values for \hat(F) are multiples of \sigma_i
@@ -1329,6 +1383,8 @@ static void qfq_schedule_agg(struct qfq_sched *, struct qfq_aggregate *);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int qfq_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 {
 	struct qfq_sched *q = qdisc_priv(sch);
@@ -1340,7 +1396,11 @@ static int qfq_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	if (cl == NULL) {
 		if (err & __NET_XMIT_BYPASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.drops++;
+=======
+			qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -1364,7 +1424,11 @@ static int qfq_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 		if (net_xmit_drop_count(err)) {
 			cl->qstats.drops++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.drops++;
+=======
+			qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_drop(sch);
 >>>>>>> v3.18

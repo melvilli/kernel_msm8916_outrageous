@@ -250,6 +250,7 @@ static u8 fan_to_reg(long rpm, int div)
  */
 #define TEMP23_FROM_REG(val)	((val) / 128 * 500)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TEMP23_TO_REG(val)	((val) <= -128000 ? 0x8000 : \
 				 (val) >= 127500 ? 0x7F80 : \
 				 (val) < 0 ? ((val) - 250) / 500 * 128 : \
@@ -264,6 +265,8 @@ static u8 fan_to_reg(long rpm, int div)
 #define TOL_TEMP_TO_REG(val)		((val) >= 15000 ? 15 : \
 					((val) + 500) / 1000)
 =======
+=======
+>>>>>>> v3.18
 #define TEMP23_TO_REG(val)	(DIV_ROUND_CLOSEST(clamp_val((val), -128000, \
 						   127500), 500) * 128)
 
@@ -274,6 +277,9 @@ static u8 fan_to_reg(long rpm, int div)
 /* for thermal cruise temp tolerance, 4-bits, LSB = 1 degree Celsius */
 #define TOL_TEMP_TO_REG(val)	DIV_ROUND_CLOSEST(clamp_val((val), 0, 15000), \
 						  1000)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define BEEP_MASK_TO_REG(val)		((val) & 0xffffff)
@@ -1057,7 +1063,11 @@ static struct sensor_device_attribute sda_temp_alarm[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* get reatime status of all sensors items: voltage, temp, fan */
+=======
+/* get realtime status of all sensors items: voltage, temp, fan */
+>>>>>>> v3.18
 =======
 /* get realtime status of all sensors items: voltage, temp, fan */
 >>>>>>> v3.18
@@ -1202,6 +1212,12 @@ static ssize_t store_vrm_reg(struct device *dev,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (val > 255)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (val > 255)
 		return -EINVAL;

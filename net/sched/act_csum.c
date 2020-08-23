@@ -38,6 +38,7 @@
 
 #define CSUM_TAB_MASK 15
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_common *tcf_csum_ht[CSUM_TAB_MASK + 1];
 static u32 csum_idx_gen;
 static DEFINE_RWLOCK(csum_lock);
@@ -47,6 +48,8 @@ static struct tcf_hashinfo csum_hash_info = {
 	.hmask	= CSUM_TAB_MASK,
 	.lock	= &csum_lock,
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -60,7 +63,10 @@ static int tcf_csum_init(struct net *n, struct nlattr *nla, struct nlattr *est,
 	struct nlattr *tb[TCA_CSUM_MAX + 1];
 	struct tc_csum *parm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcf_common *pc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct tcf_csum *p;
@@ -77,6 +83,7 @@ static int tcf_csum_init(struct net *n, struct nlattr *nla, struct nlattr *est,
 		return -EINVAL;
 	parm = nla_data(tb[TCA_CSUM_PARMS]);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pc = tcf_hash_check(parm->index, a, bind, &csum_hash_info);
 	if (!pc) {
@@ -95,6 +102,8 @@ static int tcf_csum_init(struct net *n, struct nlattr *nla, struct nlattr *est,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (!tcf_hash_check(parm->index, a, bind)) {
 		ret = tcf_hash_create(parm->index, est, a, sizeof(*p), bind);
 		if (ret)
@@ -109,6 +118,9 @@ static int tcf_csum_init(struct net *n, struct nlattr *nla, struct nlattr *est,
 	}
 
 	p = to_tcf_csum(a);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_bh(&p->tcf_lock);
 	p->tcf_action = parm->action;
@@ -117,7 +129,11 @@ static int tcf_csum_init(struct net *n, struct nlattr *nla, struct nlattr *est,
 
 	if (ret == ACT_P_CREATED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcf_hash_insert(pc, &csum_hash_info);
+=======
+		tcf_hash_insert(a);
+>>>>>>> v3.18
 =======
 		tcf_hash_insert(a);
 >>>>>>> v3.18
@@ -126,12 +142,15 @@ static int tcf_csum_init(struct net *n, struct nlattr *nla, struct nlattr *est,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tcf_csum_cleanup(struct tc_action *a, int bind)
 {
 	struct tcf_csum *p = a->priv;
 	return tcf_hash_release(&p->common, bind, &csum_hash_info);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -609,6 +628,7 @@ nla_put_failure:
 static struct tc_action_ops act_csum_ops = {
 	.kind		= "csum",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.hinfo		= &csum_hash_info,
 	.type		= TCA_ACT_CSUM,
 	.capab		= TCA_CAP_NONE,
@@ -620,11 +640,16 @@ static struct tc_action_ops act_csum_ops = {
 	.init		= tcf_csum_init,
 	.walk		= tcf_generic_walker
 =======
+=======
+>>>>>>> v3.18
 	.type		= TCA_ACT_CSUM,
 	.owner		= THIS_MODULE,
 	.act		= tcf_csum,
 	.dump		= tcf_csum_dump,
 	.init		= tcf_csum_init,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -634,7 +659,11 @@ MODULE_LICENSE("GPL");
 static int __init csum_init_module(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return tcf_register_action(&act_csum_ops);
+=======
+	return tcf_register_action(&act_csum_ops, CSUM_TAB_MASK);
+>>>>>>> v3.18
 =======
 	return tcf_register_action(&act_csum_ops, CSUM_TAB_MASK);
 >>>>>>> v3.18

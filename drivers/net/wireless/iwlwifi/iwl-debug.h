@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2003 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -39,13 +43,19 @@
 static inline bool iwl_have_debug_level(u32 level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return iwlwifi_mod_params.debug_level & level;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IWLWIFI_DEBUG
 	return iwlwifi_mod_params.debug_level & level;
 #else
 	return false;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -56,6 +66,7 @@ void __iwl_info(struct device *dev, const char *fmt, ...) __printf(2, 3);
 void __iwl_crit(struct device *dev, const char *fmt, ...) __printf(2, 3);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* No matter what is m (priv, bus, trans), this will work */
 #define IWL_ERR(m, f, a...) __iwl_err((m)->dev, false, false, f, ## a)
 #define IWL_ERR_DEV(d, f, a...) __iwl_err((d), false, false, f, ## a)
@@ -63,6 +74,8 @@ void __iwl_crit(struct device *dev, const char *fmt, ...) __printf(2, 3);
 #define IWL_INFO(m, f, a...) __iwl_info((m)->dev, f, ## a)
 #define IWL_CRIT(m, f, a...) __iwl_crit((m)->dev, f, ## a)
 =======
+=======
+>>>>>>> v3.18
 /* not all compilers can evaluate strlen() at compile time, so use sizeof() */
 #define CHECK_FOR_NEWLINE(f) BUILD_BUG_ON(f[sizeof(f) - 2] != '\n')
 
@@ -89,6 +102,9 @@ void __iwl_crit(struct device *dev, const char *fmt, ...) __printf(2, 3);
 		CHECK_FOR_NEWLINE(f);					\
 		__iwl_crit((m)->dev, f, ## a);				\
 	} while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if defined(CONFIG_IWLWIFI_DEBUG) || defined(CONFIG_IWLWIFI_DEVICE_TRACING)
@@ -110,6 +126,7 @@ do {									\
 } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IWL_DEBUG(m, level, fmt, args...)				\
 	__iwl_dbg((m)->dev, level, false, __func__, fmt, ##args)
 #define IWL_DEBUG_DEV(dev, level, fmt, args...)				\
@@ -117,6 +134,8 @@ do {									\
 #define IWL_DEBUG_LIMIT(m, level, fmt, args...)				\
 	__iwl_dbg((m)->dev, level, true, __func__, fmt, ##args)
 =======
+=======
+>>>>>>> v3.18
 #define __IWL_DEBUG_DEV(dev, level, limit, fmt, args...)		\
 	do {								\
 		CHECK_FOR_NEWLINE(fmt);					\
@@ -128,6 +147,9 @@ do {									\
 	__IWL_DEBUG_DEV(dev, level, false, fmt, ##args)
 #define IWL_DEBUG_LIMIT(m, level, fmt, args...)				\
 	__IWL_DEBUG_DEV((m)->dev, level, true, fmt, ##args)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_IWLWIFI_DEBUG
@@ -172,6 +194,10 @@ do {                                            			\
 #define IWL_DL_STATE		0x00000008
 /* 0x000000F0 - 0x00000010 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IWL_DL_QUOTA		0x00000010
+>>>>>>> v3.18
 =======
 #define IWL_DL_QUOTA		0x00000010
 >>>>>>> v3.18
@@ -182,6 +208,10 @@ do {                                            			\
 #define IWL_DL_POWER		0x00000100
 #define IWL_DL_TEMP		0x00000200
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IWL_DL_RPM		0x00000400
+>>>>>>> v3.18
 =======
 #define IWL_DL_RPM		0x00000400
 >>>>>>> v3.18
@@ -205,6 +235,10 @@ do {                                            			\
 #define IWL_DL_ISR		0x02000000
 #define IWL_DL_HT		0x04000000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IWL_DL_EXTERNAL		0x08000000
+>>>>>>> v3.18
 =======
 #define IWL_DL_EXTERNAL		0x08000000
 >>>>>>> v3.18
@@ -217,6 +251,10 @@ do {                                            			\
 #define IWL_DEBUG_INFO(p, f, a...)	IWL_DEBUG(p, IWL_DL_INFO, f, ## a)
 #define IWL_DEBUG_MAC80211(p, f, a...)	IWL_DEBUG(p, IWL_DL_MAC80211, f, ## a)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IWL_DEBUG_EXTERNAL(p, f, a...)	IWL_DEBUG(p, IWL_DL_EXTERNAL, f, ## a)
+>>>>>>> v3.18
 =======
 #define IWL_DEBUG_EXTERNAL(p, f, a...)	IWL_DEBUG(p, IWL_DL_EXTERNAL, f, ## a)
 >>>>>>> v3.18
@@ -229,6 +267,10 @@ do {                                            			\
 #define IWL_DEBUG_WEP(p, f, a...)	IWL_DEBUG(p, IWL_DL_WEP, f, ## a)
 #define IWL_DEBUG_HC(p, f, a...)	IWL_DEBUG(p, IWL_DL_HCMD, f, ## a)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IWL_DEBUG_QUOTA(p, f, a...)	IWL_DEBUG(p, IWL_DL_QUOTA, f, ## a)
+>>>>>>> v3.18
 =======
 #define IWL_DEBUG_QUOTA(p, f, a...)	IWL_DEBUG(p, IWL_DL_QUOTA, f, ## a)
 >>>>>>> v3.18
@@ -259,6 +301,10 @@ do {                                            			\
 #define IWL_DEBUG_POWER(p, f, a...)	IWL_DEBUG(p, IWL_DL_POWER, f, ## a)
 #define IWL_DEBUG_11H(p, f, a...)	IWL_DEBUG(p, IWL_DL_11H, f, ## a)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IWL_DEBUG_RPM(p, f, a...)	IWL_DEBUG(p, IWL_DL_RPM, f, ## a)
+>>>>>>> v3.18
 =======
 #define IWL_DEBUG_RPM(p, f, a...)	IWL_DEBUG(p, IWL_DL_RPM, f, ## a)
 >>>>>>> v3.18

@@ -43,7 +43,11 @@
 	mov	\rscratch, #0
 	strb	\rscratch, [\rbase, \rcpu]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
+=======
+	dsb	st
+>>>>>>> v3.18
 =======
 	dsb	st
 >>>>>>> v3.18
@@ -107,7 +111,11 @@ ENTRY(vlock_unlock)
 	mov	r1, #VLOCK_OWNER_NONE
 	strb	r1, [r0, #VLOCK_OWNER_OFFSET]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
+=======
+	dsb	st
+>>>>>>> v3.18
 =======
 	dsb	st
 >>>>>>> v3.18

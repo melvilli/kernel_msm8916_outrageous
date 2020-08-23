@@ -36,6 +36,7 @@
 
 //
 <<<<<<< HEAD
+<<<<<<< HEAD
 //  For IO mapped
 //
 
@@ -70,14 +71,20 @@ do {						\
 //
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 //  For memory mapped IO
 //
 
 #define VNSvInPortB(dwIOAddress, pbyData)				\
 do {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	volatile unsigned char *pbyAddr = (unsigned char *)(dwIOAddress); \
 	*(pbyData) = readb(pbyAddr);					\
+=======
+	*(pbyData) = ioread8(dwIOAddress);				\
+>>>>>>> v3.18
 =======
 	*(pbyData) = ioread8(dwIOAddress);				\
 >>>>>>> v3.18
@@ -86,8 +93,12 @@ do {									\
 #define VNSvInPortW(dwIOAddress, pwData)				\
 do {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	volatile unsigned short *pwAddr = (unsigned short *)(dwIOAddress); \
 	*(pwData) = readw(pwAddr);					\
+=======
+	*(pwData) = ioread16(dwIOAddress);				\
+>>>>>>> v3.18
 =======
 	*(pwData) = ioread16(dwIOAddress);				\
 >>>>>>> v3.18
@@ -96,8 +107,12 @@ do {									\
 #define VNSvInPortD(dwIOAddress, pdwData)				\
 do {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	volatile unsigned long *pdwAddr = (unsigned long *)(dwIOAddress); \
 	*(pdwData) = readl(pdwAddr);					\
+=======
+	*(pdwData) = ioread32(dwIOAddress);				\
+>>>>>>> v3.18
 =======
 	*(pdwData) = ioread32(dwIOAddress);				\
 >>>>>>> v3.18
@@ -106,8 +121,12 @@ do {									\
 #define VNSvOutPortB(dwIOAddress, byData)				\
 do {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	volatile unsigned char *pbyAddr = (unsigned char *)(dwIOAddress); \
 	writeb((unsigned char)byData, pbyAddr);				\
+=======
+	iowrite8((u8)byData, dwIOAddress);				\
+>>>>>>> v3.18
 =======
 	iowrite8((u8)byData, dwIOAddress);				\
 >>>>>>> v3.18
@@ -116,8 +135,12 @@ do {									\
 #define VNSvOutPortW(dwIOAddress, wData)				\
 do {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	volatile unsigned short *pwAddr = ((unsigned short *)(dwIOAddress)); \
 	writew((unsigned short)wData, pwAddr);				\
+=======
+	iowrite16((u16)wData, dwIOAddress);				\
+>>>>>>> v3.18
 =======
 	iowrite16((u16)wData, dwIOAddress);				\
 >>>>>>> v3.18
@@ -125,6 +148,7 @@ do {									\
 
 #define VNSvOutPortD(dwIOAddress, dwData)				\
 do {									\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	volatile unsigned long *pdwAddr = (unsigned long *)(dwIOAddress); \
 	writel((unsigned long)dwData, pdwAddr);				\
@@ -159,6 +183,11 @@ do {						\
 #define PCBvOutPortD(dwIOAddress, dwData)	\
 	outl(dwData, dwIOAddress)
 
+=======
+	iowrite32((u32)dwData, dwIOAddress);				\
+} while (0)
+
+>>>>>>> v3.18
 =======
 	iowrite32((u32)dwData, dwIOAddress);				\
 } while (0)

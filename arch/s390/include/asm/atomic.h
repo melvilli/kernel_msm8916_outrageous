@@ -16,6 +16,10 @@
 #include <linux/compiler.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -24,9 +28,12 @@
 #define ATOMIC_INIT(i)  { (i) }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __CS_LOOP(ptr, op_val, op_string) ({				\
 	int old_val, new_val;						\
 =======
+=======
+>>>>>>> v3.18
 #define __ATOMIC_NO_BARRIER	"\n"
 
 #ifdef CONFIG_HAVE_MARCH_Z196_FEATURES
@@ -63,6 +70,9 @@
 	int old_val, new_val;						\
 									\
 	typecheck(atomic_t *, ptr);					\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	asm volatile(							\
 		"	l	%0,%2\n"				\
@@ -70,6 +80,7 @@
 		op_string "	%1,%3\n"				\
 		"	cs	%0,%1,%2\n"				\
 		"	jl	0b"					\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		: "=&d" (old_val), "=&d" (new_val),			\
 		  "=Q" (((atomic_t *)(ptr))->counter)			\
@@ -79,6 +90,8 @@
 })
 
 =======
+=======
+>>>>>>> v3.18
 		: "=&d" (old_val), "=&d" (new_val), "+Q" ((ptr)->counter)\
 		: "d" (op_val)						\
 		: "cc", "memory");					\
@@ -87,6 +100,9 @@
 
 #endif /* CONFIG_HAVE_MARCH_Z196_FEATURES */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int atomic_read(const atomic_t *v)
 {
@@ -107,6 +123,7 @@ static inline void atomic_set(atomic_t *v, int i)
 
 static inline int atomic_add_return(int i, atomic_t *v)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return __CS_LOOP(v, i, "ar");
 }
@@ -135,6 +152,8 @@ static inline void atomic_set_mask(unsigned long mask, atomic_t *v)
 {
 	__CS_LOOP(v, mask, "or");
 =======
+=======
+>>>>>>> v3.18
 	return __ATOMIC_LOOP(v, i, __ATOMIC_ADD, __ATOMIC_BARRIER) + i;
 }
 
@@ -172,6 +191,9 @@ static inline void atomic_clear_mask(unsigned int mask, atomic_t *v)
 static inline void atomic_set_mask(unsigned int mask, atomic_t *v)
 {
 	__ATOMIC_LOOP(v, mask, __ATOMIC_OR, __ATOMIC_NO_BARRIER);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -182,8 +204,13 @@ static inline int atomic_cmpxchg(atomic_t *v, int old, int new)
 	asm volatile(
 		"	cs	%0,%2,%1"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		: "+d" (old), "=Q" (v->counter)
 		: "d" (new), "Q" (v->counter)
+=======
+		: "+d" (old), "+Q" (v->counter)
+		: "d" (new)
+>>>>>>> v3.18
 =======
 		: "+d" (old), "+Q" (v->counter)
 		: "d" (new)
@@ -209,7 +236,11 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef __CS_LOOP
+=======
+#undef __ATOMIC_LOOP
+>>>>>>> v3.18
 =======
 #undef __ATOMIC_LOOP
 >>>>>>> v3.18
@@ -219,9 +250,12 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 #ifdef CONFIG_64BIT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __CSG_LOOP(ptr, op_val, op_string) ({				\
 	long long old_val, new_val;					\
 =======
+=======
+>>>>>>> v3.18
 #define __ATOMIC64_NO_BARRIER	"\n"
 
 #ifdef CONFIG_HAVE_MARCH_Z196_FEATURES
@@ -258,6 +292,9 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 	long long old_val, new_val;					\
 									\
 	typecheck(atomic64_t *, ptr);					\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	asm volatile(							\
 		"	lg	%0,%2\n"				\
@@ -265,6 +302,7 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 		op_string "	%1,%3\n"				\
 		"	csg	%0,%1,%2\n"				\
 		"	jl	0b"					\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		: "=&d" (old_val), "=&d" (new_val),			\
 		  "=Q" (((atomic_t *)(ptr))->counter)			\
@@ -274,6 +312,8 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 })
 
 =======
+=======
+>>>>>>> v3.18
 		: "=&d" (old_val), "=&d" (new_val), "+Q" ((ptr)->counter)\
 		: "d" (op_val)						\
 		: "cc", "memory");					\
@@ -282,6 +322,9 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 
 #endif /* CONFIG_HAVE_MARCH_Z196_FEATURES */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline long long atomic64_read(const atomic64_t *v)
 {
@@ -303,6 +346,7 @@ static inline void atomic64_set(atomic64_t *v, long long i)
 static inline long long atomic64_add_return(long long i, atomic64_t *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __CSG_LOOP(v, i, "agr");
 }
 
@@ -310,6 +354,8 @@ static inline long long atomic64_sub_return(long long i, atomic64_t *v)
 {
 	return __CSG_LOOP(v, i, "sgr");
 =======
+=======
+>>>>>>> v3.18
 	return __ATOMIC64_LOOP(v, i, __ATOMIC64_ADD, __ATOMIC64_BARRIER) + i;
 }
 
@@ -326,13 +372,20 @@ static inline void atomic64_add(long long i, atomic64_t *v)
 	}
 #endif
 	__ATOMIC64_LOOP(v, i, __ATOMIC64_ADD, __ATOMIC64_NO_BARRIER);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void atomic64_clear_mask(unsigned long mask, atomic64_t *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CSG_LOOP(v, ~mask, "ngr");
+=======
+	__ATOMIC64_LOOP(v, ~mask, __ATOMIC64_AND, __ATOMIC64_NO_BARRIER);
+>>>>>>> v3.18
 =======
 	__ATOMIC64_LOOP(v, ~mask, __ATOMIC64_AND, __ATOMIC64_NO_BARRIER);
 >>>>>>> v3.18
@@ -341,7 +394,11 @@ static inline void atomic64_clear_mask(unsigned long mask, atomic64_t *v)
 static inline void atomic64_set_mask(unsigned long mask, atomic64_t *v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CSG_LOOP(v, mask, "ogr");
+=======
+	__ATOMIC64_LOOP(v, mask, __ATOMIC64_OR, __ATOMIC64_NO_BARRIER);
+>>>>>>> v3.18
 =======
 	__ATOMIC64_LOOP(v, mask, __ATOMIC64_OR, __ATOMIC64_NO_BARRIER);
 >>>>>>> v3.18
@@ -355,8 +412,13 @@ static inline long long atomic64_cmpxchg(atomic64_t *v,
 	asm volatile(
 		"	csg	%0,%2,%1"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		: "+d" (old), "=Q" (v->counter)
 		: "d" (new), "Q" (v->counter)
+=======
+		: "+d" (old), "+Q" (v->counter)
+		: "d" (new)
+>>>>>>> v3.18
 =======
 		: "+d" (old), "+Q" (v->counter)
 		: "d" (new)
@@ -366,7 +428,11 @@ static inline long long atomic64_cmpxchg(atomic64_t *v,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef __CSG_LOOP
+=======
+#undef __ATOMIC64_LOOP
+>>>>>>> v3.18
 =======
 #undef __ATOMIC64_LOOP
 >>>>>>> v3.18
@@ -406,8 +472,13 @@ static inline long long atomic64_xchg(atomic64_t *v, long long new)
 		"0:	cds	%0,%2,%1\n"
 		"	jl	0b\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		: "=&d" (rp_old), "=Q" (v->counter)
 		: "d" (rp_new), "Q" (v->counter)
+=======
+		: "=&d" (rp_old), "+Q" (v->counter)
+		: "d" (rp_new)
+>>>>>>> v3.18
 =======
 		: "=&d" (rp_old), "+Q" (v->counter)
 		: "d" (rp_new)
@@ -425,8 +496,13 @@ static inline long long atomic64_cmpxchg(atomic64_t *v,
 	asm volatile(
 		"	cds	%0,%2,%1"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		: "+&d" (rp_old), "=Q" (v->counter)
 		: "d" (rp_new), "Q" (v->counter)
+=======
+		: "+&d" (rp_old), "+Q" (v->counter)
+		: "d" (rp_new)
+>>>>>>> v3.18
 =======
 		: "+&d" (rp_old), "+Q" (v->counter)
 		: "d" (rp_new)
@@ -448,6 +524,7 @@ static inline long long atomic64_add_return(long long i, atomic64_t *v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline long long atomic64_sub_return(long long i, atomic64_t *v)
 {
 	long long old, new;
@@ -459,6 +536,8 @@ static inline long long atomic64_sub_return(long long i, atomic64_t *v)
 	return new;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void atomic64_set_mask(unsigned long long mask, atomic64_t *v)
@@ -482,10 +561,13 @@ static inline void atomic64_clear_mask(unsigned long long mask, atomic64_t *v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_64BIT */
 
 static inline int atomic64_add_unless(atomic64_t *v, long long a, long long u)
 =======
+=======
+>>>>>>> v3.18
 static inline void atomic64_add(long long i, atomic64_t *v)
 {
 	atomic64_add_return(i, v);
@@ -494,6 +576,9 @@ static inline void atomic64_add(long long i, atomic64_t *v)
 #endif /* CONFIG_64BIT */
 
 static inline int atomic64_add_unless(atomic64_t *v, long long i, long long u)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	long long c, old;
@@ -503,7 +588,11 @@ static inline int atomic64_add_unless(atomic64_t *v, long long i, long long u)
 		if (unlikely(c == u))
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		old = atomic64_cmpxchg(v, c, c + a);
+=======
+		old = atomic64_cmpxchg(v, c, c + i);
+>>>>>>> v3.18
 =======
 		old = atomic64_cmpxchg(v, c, c + i);
 >>>>>>> v3.18
@@ -532,6 +621,7 @@ static inline long long atomic64_dec_if_positive(atomic64_t *v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic64_add(_i, _v)		atomic64_add_return(_i, _v)
 #define atomic64_add_negative(_i, _v)	(atomic64_add_return(_i, _v) < 0)
 #define atomic64_inc(_v)		atomic64_add_return(1, _v)
@@ -541,6 +631,8 @@ static inline long long atomic64_dec_if_positive(atomic64_t *v)
 #define atomic64_sub_and_test(_i, _v)	(atomic64_sub_return(_i, _v) == 0)
 #define atomic64_dec(_v)		atomic64_sub_return(1, _v)
 =======
+=======
+>>>>>>> v3.18
 #define atomic64_add_negative(_i, _v)	(atomic64_add_return(_i, _v) < 0)
 #define atomic64_inc(_v)		atomic64_add(1, _v)
 #define atomic64_inc_return(_v)		atomic64_add_return(1, _v)
@@ -549,17 +641,23 @@ static inline long long atomic64_dec_if_positive(atomic64_t *v)
 #define atomic64_sub(_i, _v)		atomic64_add(-(long long)(_i), _v)
 #define atomic64_sub_and_test(_i, _v)	(atomic64_sub_return(_i, _v) == 0)
 #define atomic64_dec(_v)		atomic64_sub(1, _v)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define atomic64_dec_return(_v)		atomic64_sub_return(1, _v)
 #define atomic64_dec_and_test(_v)	(atomic64_sub_return(1, _v) == 0)
 #define atomic64_inc_not_zero(v)	atomic64_add_unless((v), 1, 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smp_mb__before_atomic_dec()	smp_mb()
 #define smp_mb__after_atomic_dec()	smp_mb()
 #define smp_mb__before_atomic_inc()	smp_mb()
 #define smp_mb__after_atomic_inc()	smp_mb()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __ARCH_S390_ATOMIC__  */

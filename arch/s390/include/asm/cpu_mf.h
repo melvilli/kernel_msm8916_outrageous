@@ -57,7 +57,10 @@ struct cpumf_ctr_info {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* QUERY SAMPLING INFORMATION block */
 struct hws_qsi_info_block {	    /* Bit(s) */
 	unsigned int b0_13:14;	    /* 0-13: zeros			 */
@@ -148,6 +151,9 @@ struct hws_trailer_entry {
 	unsigned long long progusage2;	 /*				      */
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Query counter information */
 static inline int qctri(struct cpumf_ctr_info *info)
@@ -193,7 +199,10 @@ static inline int ecctr(u64 ctr, u64 *val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Query sampling information */
 static inline int qsi(struct hws_qsi_info_block *info)
 {
@@ -285,5 +294,8 @@ static inline unsigned long *get_next_sdbt(unsigned long *s)
 {
 	return (unsigned long *) (*s & ~0x1ul);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_S390_CPU_MF_H */

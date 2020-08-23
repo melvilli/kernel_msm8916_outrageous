@@ -104,10 +104,15 @@ static long media_device_enum_entities(struct media_device *mdev,
 
 	u_ent.id = ent->id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ent->name) {
 		strncpy(u_ent.name, ent->name, sizeof(u_ent.name));
 		u_ent.name[sizeof(u_ent.name) - 1] = '\0';
 	}
+=======
+	if (ent->name)
+		strlcpy(u_ent.name, ent->name, sizeof(u_ent.name));
+>>>>>>> v3.18
 =======
 	if (ent->name)
 		strlcpy(u_ent.name, ent->name, sizeof(u_ent.name));
@@ -377,7 +382,12 @@ static void media_device_release(struct media_devnode *mdev)
  * - model must be filled with the device model name
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __must_check media_device_register(struct media_device *mdev)
+=======
+int __must_check __media_device_register(struct media_device *mdev,
+					 struct module *owner)
+>>>>>>> v3.18
 =======
 int __must_check __media_device_register(struct media_device *mdev,
 					 struct module *owner)
@@ -398,7 +408,11 @@ int __must_check __media_device_register(struct media_device *mdev,
 	mdev->devnode.parent = mdev->dev;
 	mdev->devnode.release = media_device_release;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = media_devnode_register(&mdev->devnode);
+=======
+	ret = media_devnode_register(&mdev->devnode, owner);
+>>>>>>> v3.18
 =======
 	ret = media_devnode_register(&mdev->devnode, owner);
 >>>>>>> v3.18
@@ -414,7 +428,11 @@ int __must_check __media_device_register(struct media_device *mdev,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(media_device_register);
+=======
+EXPORT_SYMBOL_GPL(__media_device_register);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(__media_device_register);
 >>>>>>> v3.18

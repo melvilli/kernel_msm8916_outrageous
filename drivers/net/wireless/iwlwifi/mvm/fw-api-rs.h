@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -77,6 +85,10 @@
  * These serve as indexes into
  * struct iwl_rate_info fw_rate_idx_to_plcp[IWL_RATE_COUNT];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * TODO: avoid overlap between legacy and HT rates
+>>>>>>> v3.18
 =======
  * TODO: avoid overlap between legacy and HT rates
 >>>>>>> v3.18
@@ -91,6 +103,7 @@ enum {
 	IWL_RATE_6M_INDEX,
 	IWL_FIRST_OFDM_RATE = IWL_RATE_6M_INDEX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IWL_RATE_9M_INDEX,
 	IWL_RATE_12M_INDEX,
 	IWL_RATE_18M_INDEX,
@@ -104,6 +117,8 @@ enum {
 	IWL_RATE_COUNT_LEGACY = IWL_LAST_NON_HT_RATE + 1,
 	IWL_RATE_COUNT,
 =======
+=======
+>>>>>>> v3.18
 	IWL_RATE_MCS_0_INDEX = IWL_RATE_6M_INDEX,
 	IWL_FIRST_HT_RATE = IWL_RATE_MCS_0_INDEX,
 	IWL_FIRST_VHT_RATE = IWL_RATE_MCS_0_INDEX,
@@ -129,6 +144,9 @@ enum {
 	IWL_LAST_VHT_RATE = IWL_RATE_MCS_9_INDEX,
 	IWL_RATE_COUNT_LEGACY = IWL_LAST_NON_HT_RATE + 1,
 	IWL_RATE_COUNT = IWL_LAST_VHT_RATE + 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -149,6 +167,10 @@ enum {
 	IWL_RATE_5M_PLCP  = 55,
 	IWL_RATE_11M_PLCP = 110,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IWL_RATE_INVM_PLCP = -1,
+>>>>>>> v3.18
 =======
 	IWL_RATE_INVM_PLCP = -1,
 >>>>>>> v3.18
@@ -209,6 +231,11 @@ enum {
  */
 #define RATE_HT_MCS_RATE_CODE_MSK	0x7
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RATE_HT_MCS_NSS_POS             3
+#define RATE_HT_MCS_NSS_MSK             (3 << RATE_HT_MCS_NSS_POS)
+>>>>>>> v3.18
 =======
 #define RATE_HT_MCS_NSS_POS             3
 #define RATE_HT_MCS_NSS_MSK             (3 << RATE_HT_MCS_NSS_POS)
@@ -290,7 +317,12 @@ enum {
 /* Bit 17-18: (0) SS, (1) SS*2 */
 #define RATE_MCS_STBC_POS		17
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RATE_MCS_STBC_MSK		(1 << RATE_MCS_STBC_POS)
+=======
+#define RATE_MCS_HT_STBC_MSK		(3 << RATE_MCS_STBC_POS)
+#define RATE_MCS_VHT_STBC_MSK		(1 << RATE_MCS_STBC_POS)
+>>>>>>> v3.18
 =======
 #define RATE_MCS_HT_STBC_MSK		(3 << RATE_MCS_STBC_POS)
 #define RATE_MCS_VHT_STBC_MSK		(1 << RATE_MCS_STBC_POS)
@@ -319,9 +351,12 @@ enum {
 #define  LQ_MAX_RETRY_NUM 16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Link quality command flags, only this one is available */
 #define  LQ_FLAG_SET_STA_TLC_RTS_MSK	BIT(0)
 =======
+=======
+>>>>>>> v3.18
 /* Link quality command flags bit fields */
 
 /* Bit 0: (0) Don't use RTS (1) Use RTS */
@@ -347,6 +382,9 @@ enum {
  */
 #define LQ_FLAG_DYNAMIC_BW_POS          6
 #define LQ_FLAG_DYNAMIC_BW_MSK          (1 << LQ_FLAG_DYNAMIC_BW_POS)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -376,7 +414,11 @@ enum {
 struct iwl_lq_cmd {
 	u8 sta_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 reserved1;
+=======
+	u8 reduced_tpc;
+>>>>>>> v3.18
 =======
 	u8 reduced_tpc;
 >>>>>>> v3.18

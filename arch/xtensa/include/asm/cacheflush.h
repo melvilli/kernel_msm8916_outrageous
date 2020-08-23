@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * include/asm-xtensa/cacheflush.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * This file is subject to the terms and conditions of the GNU General Public
@@ -9,7 +12,11 @@
  * for more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (C) 2001 - 2007 Tensilica Inc.
+=======
+ * (C) 2001 - 2013 Tensilica Inc.
+>>>>>>> v3.18
 =======
  * (C) 2001 - 2013 Tensilica Inc.
 >>>>>>> v3.18
@@ -19,8 +26,11 @@
 #define _XTENSA_CACHEFLUSH_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mm.h>
@@ -52,6 +62,10 @@
  *
  * __flush_invalidate_dcache_page_alias(vaddr,paddr)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * __invalidate_dcache_page_alias(vaddr,paddr)
+>>>>>>> v3.18
 =======
  * __invalidate_dcache_page_alias(vaddr,paddr)
 >>>>>>> v3.18
@@ -66,7 +80,10 @@ extern void __invalidate_icache_range(unsigned long, unsigned long);
 extern void __invalidate_dcache_range(unsigned long, unsigned long);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if XCHAL_DCACHE_IS_WRITEBACK
@@ -85,6 +102,10 @@ extern void __flush_invalidate_dcache_range(unsigned long, unsigned long);
 #if defined(CONFIG_MMU) && (DCACHE_WAY_SIZE > PAGE_SIZE)
 extern void __flush_invalidate_dcache_page_alias(unsigned long, unsigned long);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void __invalidate_dcache_page_alias(unsigned long, unsigned long);
+>>>>>>> v3.18
 =======
 extern void __invalidate_dcache_page_alias(unsigned long, unsigned long);
 >>>>>>> v3.18
@@ -109,10 +130,13 @@ static inline void __invalidate_icache_page_alias(unsigned long virt,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if (DCACHE_WAY_SIZE > PAGE_SIZE)
 
 #define flush_cache_all()						\
 =======
+=======
+>>>>>>> v3.18
 #if (DCACHE_WAY_SIZE > PAGE_SIZE) || defined(CONFIG_SMP)
 
 #ifdef CONFIG_SMP
@@ -129,6 +153,9 @@ void flush_cache_page(struct vm_area_struct*,
 #endif
 
 #define local_flush_cache_all()						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	do {								\
 		__flush_invalidate_dcache_all();			\
@@ -144,15 +171,21 @@ void flush_cache_page(struct vm_area_struct*,
 #define ARCH_IMPLEMENTS_FLUSH_DCACHE_PAGE 1
 extern void flush_dcache_page(struct page*);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void flush_cache_range(struct vm_area_struct*, ulong, ulong);
 extern void flush_cache_page(struct vm_area_struct*,
 			     unsigned long, unsigned long);
 =======
+=======
+>>>>>>> v3.18
 
 void local_flush_cache_range(struct vm_area_struct *vma,
 		unsigned long start, unsigned long end);
 void local_flush_cache_page(struct vm_area_struct *vma,
 		unsigned long address, unsigned long pfn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else
@@ -168,8 +201,14 @@ void local_flush_cache_page(struct vm_area_struct *vma,
 #define flush_dcache_page(page)				do { } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define flush_cache_page(vma,addr,pfn)			do { } while (0)
 #define flush_cache_range(vma,start,end)		do { } while (0)
+=======
+#define flush_icache_range local_flush_icache_range
+#define flush_cache_page(vma, addr, pfn)		do { } while (0)
+#define flush_cache_range(vma, start, end)		do { } while (0)
+>>>>>>> v3.18
 =======
 #define flush_icache_range local_flush_icache_range
 #define flush_cache_page(vma, addr, pfn)		do { } while (0)
@@ -180,7 +219,11 @@ void local_flush_cache_page(struct vm_area_struct *vma,
 
 /* Ensure consistency between data and instruction cache. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define flush_icache_range(start,end) 					\
+=======
+#define local_flush_icache_range(start, end)				\
+>>>>>>> v3.18
 =======
 #define local_flush_icache_range(start, end)				\
 >>>>>>> v3.18
@@ -312,7 +355,10 @@ static inline void flush_invalidate_dcache_unaligned(u32 addr, u32 size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __KERNEL__ */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _XTENSA_CACHEFLUSH_H */

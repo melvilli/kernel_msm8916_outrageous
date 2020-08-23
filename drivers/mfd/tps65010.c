@@ -243,8 +243,13 @@ static int dbg_show(struct seq_file *s, void *_)
 	/* ignore ackint2 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_delayed_work(&tps->work, POWER_POLL_DELAY);
 
+=======
+	queue_delayed_work(system_power_efficient_wq, &tps->work,
+			   POWER_POLL_DELAY);
+>>>>>>> v3.18
 =======
 	queue_delayed_work(system_power_efficient_wq, &tps->work,
 			   POWER_POLL_DELAY);
@@ -406,7 +411,12 @@ static void tps65010_interrupt(struct tps65010 *tps)
 		poll = 1;
 	if (poll)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		schedule_delayed_work(&tps->work, POWER_POLL_DELAY);
+=======
+		queue_delayed_work(system_power_efficient_wq, &tps->work,
+				   POWER_POLL_DELAY);
+>>>>>>> v3.18
 =======
 		queue_delayed_work(system_power_efficient_wq, &tps->work,
 				   POWER_POLL_DELAY);
@@ -459,7 +469,11 @@ static irqreturn_t tps65010_irq(int irq, void *_tps)
 	disable_irq_nosync(irq);
 	set_bit(FLAG_IRQ_ENABLE, &tps->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_delayed_work(&tps->work, 0);
+=======
+	queue_delayed_work(system_power_efficient_wq, &tps->work, 0);
+>>>>>>> v3.18
 =======
 	queue_delayed_work(system_power_efficient_wq, &tps->work, 0);
 >>>>>>> v3.18
@@ -532,7 +546,11 @@ static int __exit tps65010_remove(struct i2c_client *client)
 {
 	struct tps65010		*tps = i2c_get_clientdata(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tps65010_board	*board = client->dev.platform_data;
+=======
+	struct tps65010_board	*board = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct tps65010_board	*board = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -548,7 +566,10 @@ static int __exit tps65010_remove(struct i2c_client *client)
 	cancel_delayed_work_sync(&tps->work);
 	debugfs_remove(tps->file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(tps);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	the_tps = NULL;
@@ -561,7 +582,11 @@ static int tps65010_probe(struct i2c_client *client,
 	struct tps65010		*tps;
 	int			status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tps65010_board	*board = client->dev.platform_data;
+=======
+	struct tps65010_board	*board = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct tps65010_board	*board = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -575,7 +600,11 @@ static int tps65010_probe(struct i2c_client *client,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tps = kzalloc(sizeof *tps, GFP_KERNEL);
+=======
+	tps = devm_kzalloc(&client->dev, sizeof(*tps), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	tps = devm_kzalloc(&client->dev, sizeof(*tps), GFP_KERNEL);
 >>>>>>> v3.18
@@ -597,7 +626,11 @@ static int tps65010_probe(struct i2c_client *client,
 			dev_dbg(&client->dev, "can't get IRQ %d, err %d\n",
 					client->irq, status);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto fail1;
+=======
+			return status;
+>>>>>>> v3.18
 =======
 			return status;
 >>>>>>> v3.18
@@ -701,9 +734,12 @@ static int tps65010_probe(struct i2c_client *client,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 fail1:
 	kfree(tps);
 	return status;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -755,7 +791,12 @@ int tps65010_set_vbus_draw(unsigned mA)
 				FLAG_VBUS_CHANGED, &the_tps->flags)) {
 		/* gadget drivers call this in_irq() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		schedule_delayed_work(&the_tps->work, 0);
+=======
+		queue_delayed_work(system_power_efficient_wq, &the_tps->work,
+				   0);
+>>>>>>> v3.18
 =======
 		queue_delayed_work(system_power_efficient_wq, &the_tps->work,
 				   0);

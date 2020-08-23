@@ -4,6 +4,7 @@
 struct device;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct gpio_keys_button {
 	/* Configuration parameters */
 	unsigned int code;	/* input event code (KEY_*, SW_*) */
@@ -28,6 +29,8 @@ struct gpio_keys_platform_data {
 	void (*disable)(struct device *dev);
 	const char *name;		/* input device name */
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct gpio_keys_button - configuration parameters
  * @code:		input event code (KEY_*, SW_*)
@@ -75,6 +78,9 @@ struct gpio_keys_platform_data {
 	int (*enable)(struct device *dev);
 	void (*disable)(struct device *dev);
 	const char *name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

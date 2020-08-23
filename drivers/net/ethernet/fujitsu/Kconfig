@@ -6,7 +6,11 @@ config NET_VENDOR_FUJITSU
 	bool "Fujitsu devices"
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ISA || PCMCIA
+=======
+	depends on PCMCIA
+>>>>>>> v3.18
 =======
 	depends on PCMCIA
 >>>>>>> v3.18

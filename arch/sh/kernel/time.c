@@ -81,10 +81,15 @@ static int __init rtc_generic_init(void)
 
 	pdev = platform_device_register_simple("rtc-generic", -1, NULL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(pdev))
 		return PTR_ERR(pdev);
 
 	return 0;
+=======
+
+	return PTR_ERR_OR_ZERO(pdev);
+>>>>>>> v3.18
 =======
 
 	return PTR_ERR_OR_ZERO(pdev);

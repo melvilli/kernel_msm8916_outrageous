@@ -13,6 +13,10 @@
 /dts-v1/;
 /include/ "sun4i-a10.dtsi"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/include/ "sunxi-common-regulators.dtsi"
+>>>>>>> v3.18
 =======
 /include/ "sunxi-common-regulators.dtsi"
 >>>>>>> v3.18
@@ -21,6 +25,7 @@
 	model = "Cubietech Cubieboard";
 	compatible = "cubietech,a10-cubieboard", "allwinner,sun4i-a10";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	aliases {
 		serial0 = &uart0;
@@ -33,6 +38,8 @@
 
 	soc@01c20000 {
 =======
+=======
+>>>>>>> v3.18
 	soc@01c00000 {
 		emac: ethernet@01c0b000 {
 			pinctrl-names = "default";
@@ -86,6 +93,9 @@
 			status = "okay";
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pinctrl@01c20800 {
 			led_pins_cubieboard: led_pins@0 {
@@ -97,13 +107,19 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		ir0: ir@01c21800 {
 			pinctrl-names = "default";
 			pinctrl-0 = <&ir0_pins_a>;
 			status = "okay";
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		uart0: serial@01c28000 {
 			pinctrl-names = "default";
@@ -111,7 +127,10 @@
 			status = "okay";
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		i2c0: i2c@01c2ac00 {
 			pinctrl-names = "default";
@@ -133,6 +152,9 @@
 			pinctrl-0 = <&i2c1_pins_a>;
 			status = "okay";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -143,7 +165,11 @@
 
 		blue {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			label = "cubieboard::blue";
+=======
+			label = "cubieboard:blue:usr";
+>>>>>>> v3.18
 =======
 			label = "cubieboard:blue:usr";
 >>>>>>> v3.18
@@ -152,7 +178,11 @@
 
 		green {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			label = "cubieboard::green";
+=======
+			label = "cubieboard:green:usr";
+>>>>>>> v3.18
 =======
 			label = "cubieboard:green:usr";
 >>>>>>> v3.18
@@ -161,7 +191,10 @@
 		};
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	reg_ahci_5v: ahci-5v {
 		status = "okay";
@@ -174,5 +207,8 @@
 	reg_usb2_vbus: usb2-vbus {
 		status = "okay";
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

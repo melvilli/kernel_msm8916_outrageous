@@ -22,6 +22,10 @@
 
 #include <drm/drmP.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_gem.h>
+>>>>>>> v3.18
 =======
 #include <drm/drm_gem.h>
 >>>>>>> v3.18
@@ -58,7 +62,12 @@ struct gtt_range {
 
 extern struct gtt_range *psb_gtt_alloc_range(struct drm_device *dev, int len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						const char *name, int backed);
+=======
+					     const char *name, int backed,
+					     u32 align);
+>>>>>>> v3.18
 =======
 					     const char *name, int backed,
 					     u32 align);

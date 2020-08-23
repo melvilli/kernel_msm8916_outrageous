@@ -2,6 +2,11 @@
 include include/uapi/asm-generic/Kbuild.asm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += resource.h
+
+>>>>>>> v3.18
 =======
 generic-y += resource.h
 
@@ -19,7 +24,10 @@ header-y += pdc.h
 header-y += posix_types.h
 header-y += ptrace.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += resource.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += sembuf.h

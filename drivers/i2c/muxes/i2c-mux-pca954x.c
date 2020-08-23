@@ -29,7 +29,11 @@
  *	i2c-virtual_cb.c from Brian Kuschak <bkuschak@yahoo.com>
  * and
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	pca9540.c from Jean Delvare <khali@linux-fr.org>.
+=======
+ *	pca9540.c from Jean Delvare <jdelvare@suse.de>.
+>>>>>>> v3.18
 =======
  *	pca9540.c from Jean Delvare <jdelvare@suse.de>.
 >>>>>>> v3.18
@@ -40,6 +44,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/slab.h>
@@ -49,6 +54,8 @@
 
 #include <linux/i2c/pca954x.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/device.h>
 #include <linux/gpio/consumer.h>
 #include <linux/i2c.h>
@@ -57,6 +64,9 @@
 #include <linux/module.h>
 #include <linux/pm.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PCA954X_MAX_NCHANS 8
@@ -201,6 +211,7 @@ static int pca954x_probe(struct i2c_client *client,
 {
 	struct i2c_adapter *adap = to_i2c_adapter(client->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pca954x_platform_data *pdata = client->dev.platform_data;
 	int num, force, class;
 	struct pca954x *data;
@@ -218,6 +229,8 @@ static int pca954x_probe(struct i2c_client *client,
 	i2c_set_clientdata(client, data);
 
 =======
+=======
+>>>>>>> v3.18
 	struct pca954x_platform_data *pdata = dev_get_platdata(&client->dev);
 	struct gpio_desc *gpio;
 	int num, force, class;
@@ -238,6 +251,9 @@ static int pca954x_probe(struct i2c_client *client,
 	if (!IS_ERR(gpio))
 		gpiod_direction_output(gpio, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Write the mux register at addr to verify
 	 * that the mux is in fact present. This also
@@ -246,7 +262,11 @@ static int pca954x_probe(struct i2c_client *client,
 	if (i2c_smbus_write_byte(client, 0) < 0) {
 		dev_warn(&client->dev, "probe failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_free;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -295,9 +315,12 @@ virt_reg_failed:
 	for (num--; num >= 0; num--)
 		i2c_del_mux_adapter(data->virt_adaps[num]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 exit_free:
 	kfree(data);
 err:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -316,6 +339,7 @@ static int pca954x_remove(struct i2c_client *client)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(data);
 	return 0;
 }
@@ -324,6 +348,8 @@ static struct i2c_driver pca954x_driver = {
 	.driver		= {
 		.name	= "pca954x",
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -344,6 +370,9 @@ static struct i2c_driver pca954x_driver = {
 	.driver		= {
 		.name	= "pca954x",
 		.pm	= &pca954x_pm,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.owner	= THIS_MODULE,
 	},

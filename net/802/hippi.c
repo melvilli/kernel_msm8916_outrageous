@@ -173,7 +173,11 @@ int hippi_neigh_setup_dev(struct net_device *dev, struct neigh_parms *p)
 {
 	/* Never send broadcast/multicast ARP messages */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->mcast_probes = 0;
+=======
+	NEIGH_VAR_INIT(p, MCAST_PROBES, 0);
+>>>>>>> v3.18
 =======
 	NEIGH_VAR_INIT(p, MCAST_PROBES, 0);
 >>>>>>> v3.18
@@ -184,7 +188,11 @@ int hippi_neigh_setup_dev(struct net_device *dev, struct neigh_parms *p)
 	*/
 	if (p->tbl->family != AF_INET6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p->ucast_probes = 0;
+=======
+		NEIGH_VAR_INIT(p, UCAST_PROBES, 0);
+>>>>>>> v3.18
 =======
 		NEIGH_VAR_INIT(p, UCAST_PROBES, 0);
 >>>>>>> v3.18
@@ -237,7 +245,12 @@ static void hippi_setup(struct net_device *dev)
 struct net_device *alloc_hippi_dev(int sizeof_priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return alloc_netdev(sizeof_priv, "hip%d", hippi_setup);
+=======
+	return alloc_netdev(sizeof_priv, "hip%d", NET_NAME_UNKNOWN,
+			    hippi_setup);
+>>>>>>> v3.18
 =======
 	return alloc_netdev(sizeof_priv, "hip%d", NET_NAME_UNKNOWN,
 			    hippi_setup);

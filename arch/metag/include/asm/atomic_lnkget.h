@@ -28,6 +28,7 @@ static inline int atomic_read(const atomic_t *v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void atomic_add(int i, atomic_t *v)
 {
 	int temp;
@@ -108,6 +109,8 @@ static inline int atomic_sub_return(int i, atomic_t *v)
 	return result;
 }
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC_OP(op)							\
 static inline void atomic_##op(int i, atomic_t *v)			\
 {									\
@@ -158,6 +161,9 @@ ATOMIC_OPS(sub)
 #undef ATOMIC_OPS
 #undef ATOMIC_OP_RETURN
 #undef ATOMIC_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void atomic_clear_mask(unsigned int mask, atomic_t *v)

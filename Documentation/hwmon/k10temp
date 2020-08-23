@@ -12,8 +12,13 @@ Supported chips:
 * AMD Family 12h processors: "Llano" (E2/A4/A6/A8-Series)
 * AMD Family 14h processors: "Brazos" (C/E/G/Z-Series)
 <<<<<<< HEAD
+<<<<<<< HEAD
 * AMD Family 15h processors: "Bulldozer" (FX-Series), "Trinity"
 * AMD Family 16h processors: "Kabini"
+=======
+* AMD Family 15h processors: "Bulldozer" (FX-Series), "Trinity", "Kaveri", "Carrizo"
+* AMD Family 16h processors: "Kabini", "Mullins"
+>>>>>>> v3.18
 =======
 * AMD Family 15h processors: "Bulldozer" (FX-Series), "Trinity", "Kaveri", "Carrizo"
 * AMD Family 16h processors: "Kabini", "Mullins"
@@ -52,7 +57,11 @@ Description
 
 This driver permits reading of the internal temperature sensor of AMD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Family 10h/11h/12h/14h/15h processors.
+=======
+Family 10h/11h/12h/14h/15h/16h processors.
+>>>>>>> v3.18
 =======
 Family 10h/11h/12h/14h/15h/16h processors.
 >>>>>>> v3.18

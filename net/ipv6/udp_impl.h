@@ -8,6 +8,7 @@
 #include <net/transp_v6.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  	__udp6_lib_rcv(struct sk_buff *, struct udp_table *, int );
 extern void 	__udp6_lib_err(struct sk_buff *, struct inet6_skb_parm *,
 			       u8 , u8 , int , __be32 , struct udp_table *);
@@ -37,6 +38,8 @@ extern void udp_v6_clear_sk(struct sock *sk, int size);
 #ifdef CONFIG_PROC_FS
 extern int	udp6_seq_show(struct seq_file *seq, void *v);
 =======
+=======
+>>>>>>> v3.18
 int __udp6_lib_rcv(struct sk_buff *, struct udp_table *, int);
 void __udp6_lib_err(struct sk_buff *, struct inet6_skb_parm *, u8, u8, int,
 		    __be32, struct udp_table *);
@@ -64,6 +67,9 @@ void udp_v6_clear_sk(struct sock *sk, int size);
 
 #ifdef CONFIG_PROC_FS
 int udp6_seq_show(struct seq_file *seq, void *v);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #endif	/* _UDP6_IMPL_H */

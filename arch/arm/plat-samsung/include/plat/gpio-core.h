@@ -15,6 +15,12 @@
 #define __PLAT_SAMSUNG_GPIO_CORE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Bring in machine-local definitions, especially S3C_GPIO_END */
+#include <mach/gpio-samsung.h>
+
+>>>>>>> v3.18
 =======
 /* Bring in machine-local definitions, especially S3C_GPIO_END */
 #include <mach/gpio-samsung.h>

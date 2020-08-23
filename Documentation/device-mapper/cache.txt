@@ -51,7 +51,12 @@ other parameters detailed later):
    This information could be put on the cache device, but having it
    separate allows the volume manager to configure it differently,
 <<<<<<< HEAD
+<<<<<<< HEAD
    e.g. as a mirror for extra robustness.
+=======
+   e.g. as a mirror for extra robustness.  This metadata device may only
+   be used by a single cache device.
+>>>>>>> v3.18
 =======
    e.g. as a mirror for extra robustness.  This metadata device may only
    be used by a single cache device.
@@ -63,7 +68,12 @@ Fixed block size
 The origin is divided up into blocks of a fixed size.  This block size
 is configurable when you first create the cache.  Typically we've been
 <<<<<<< HEAD
+<<<<<<< HEAD
 using block sizes of 256k - 1024k.
+=======
+using block sizes of 256KB - 1024KB.  The block size must be between 64
+(32KB) and 2097152 (1GB) and a multiple of 64 (32KB).
+>>>>>>> v3.18
 =======
 using block sizes of 256KB - 1024KB.  The block size must be between 64
 (32KB) and 2097152 (1GB) and a multiple of 64 (32KB).
@@ -77,16 +87,22 @@ block sizes are bad because they increase the amount of metadata (both
 in core and on disk).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Writeback/writethrough
 ----------------------
 
 The cache has two modes, writeback and writethrough.
 =======
+=======
+>>>>>>> v3.18
 Cache operating modes
 ---------------------
 
 The cache has three operating modes: writeback, writethrough and
 passthrough.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 If writeback, the default, is selected then a write to a block that is
@@ -98,9 +114,12 @@ complete until it has hit both the origin and cache devices.  Clean
 blocks should remain clean.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 A simple cleaner policy is provided, which will clean (write back) all
 dirty blocks in a cache.  Useful for decommissioning a cache.
 =======
+=======
+>>>>>>> v3.18
 If passthrough is selected, useful when the cache contents are not known
 to be coherent with the origin device, then all reads are served from
 the origin device (all reads miss the cache) and all writes are
@@ -126,6 +145,9 @@ importance if writeback mode is used.  Writethrough and passthrough
 modes already maintain a clean cache.  Future support to partially clean
 the cache, above a specified threshold, will allow for keeping the cache
 warm and in writeback mode during resize.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Migration throttling
@@ -134,7 +156,11 @@ Migration throttling
 Migrating data between the origin and cache device uses bandwidth.
 The user can set a throttle to prevent more than a certain amount of
 <<<<<<< HEAD
+<<<<<<< HEAD
 migration occuring at any one time.  Currently we're not taking any
+=======
+migration occurring at any one time.  Currently we're not taking any
+>>>>>>> v3.18
 =======
 migration occurring at any one time.  Currently we're not taking any
 >>>>>>> v3.18
@@ -149,6 +175,7 @@ Updating on-disk metadata
 -------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 On-disk metadata is committed every time a REQ_SYNC or REQ_FUA bio is
 written.  If no such requests are made then commits will occur every
 second.  This means the cache behaves like a physical disk that has a
@@ -156,11 +183,16 @@ write cache (the same is true of the thin-provisioning target).  If
 power is lost you may lose some recent writes.  The metadata should
 always be consistent in spite of any crash.
 =======
+=======
+>>>>>>> v3.18
 On-disk metadata is committed every time a FLUSH or FUA bio is written.
 If no such requests are made then commits will occur every second.  This
 means the cache behaves like a physical disk that has a volatile write
 cache.  If power is lost you may lose some recent writes.  The metadata
 should always be consistent in spite of any crash.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The 'dirty' state for a cache block changes far too frequently for us
@@ -218,7 +250,11 @@ Constructor
 
  #feature args   : number of feature arguments passed
 <<<<<<< HEAD
+<<<<<<< HEAD
  feature args    : writethrough.  (The default is writeback.)
+=======
+ feature args    : writethrough or passthrough (The default is writeback.)
+>>>>>>> v3.18
 =======
  feature args    : writethrough or passthrough (The default is writeback.)
 >>>>>>> v3.18
@@ -238,7 +274,10 @@ Optional feature arguments are:
 		   so they may differ from the corresponding origin blocks.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
    passthrough	 : a degraded mode useful for various cache coherency
 		   situations (e.g., rolling back snapshots of
 		   underlying storage).	 Reads and writes always go to
@@ -246,6 +285,9 @@ Optional feature arguments are:
 		   block, then the cache block is invalidated.
 		   To enable passthrough mode the cache must be clean.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 A policy called 'default' is always registered.  This is an alias for
 the policy we currently think is giving best all round performance.
@@ -256,6 +298,7 @@ the characteristics of a specific policy, always request it by name.
 Status
 ------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <#used metadata blocks>/<#total metadata blocks> <#read hits> <#read misses>
 <#write hits> <#write misses> <#demotions> <#promotions> <#blocks in cache>
@@ -288,6 +331,8 @@ core args                : Key/value pairs for tuning the core
 policy args              : Key/value pairs
 			     e.g. 'sequential_threshold 1024
 =======
+=======
+>>>>>>> v3.18
 <metadata block size> <#used metadata blocks>/<#total metadata blocks>
 <cache block size> <#used cache blocks>/<#total cache blocks>
 <#read hits> <#read misses> <#write hits> <#write misses>
@@ -325,6 +370,9 @@ policy name		 : Name of the policy
 #policy args		 : Number of policy arguments to follow (must be even)
 policy args		 : Key/value pairs
 			     e.g. sequential_threshold
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Messages
@@ -342,7 +390,10 @@ E.g.
    dmsetup message my_cache 0 sequential_threshold 1024
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 Invalidation is removing an entry from the cache without writing it
 back.  Cache blocks can be invalidated via the invalidate_cblocks
@@ -359,6 +410,9 @@ when invalidate_cblocks is used.
 E.g.
    dmsetup message my_cache 0 invalidate_cblocks 2345 3456-4567 5678-6789
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Examples
 ========
@@ -366,7 +420,11 @@ Examples
 The test suite can be found here:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 https://github.com/jthornber/thinp-test-suite
+=======
+https://github.com/jthornber/device-mapper-test-suite
+>>>>>>> v3.18
 =======
 https://github.com/jthornber/device-mapper-test-suite
 >>>>>>> v3.18

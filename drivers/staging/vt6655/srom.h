@@ -134,6 +134,7 @@ typedef struct tagSSromReg {
 /*---------------------  Export Functions  --------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned char SROMbyReadEmbedded(unsigned long dwIoBase, unsigned char byContntOffset);
 bool SROMbWriteEmbedded(unsigned long dwIoBase, unsigned char byContntOffset, unsigned char byData);
 
@@ -153,6 +154,8 @@ void SROMvReadSubSysVenId(unsigned long dwIoBase, unsigned long *pdwSubSysVenId)
 
 bool SROMbAutoLoad(unsigned long dwIoBase);
 =======
+=======
+>>>>>>> v3.18
 unsigned char SROMbyReadEmbedded(void __iomem *dwIoBase, unsigned char byContntOffset);
 bool SROMbWriteEmbedded(void __iomem *dwIoBase, unsigned char byContntOffset, unsigned char byData);
 
@@ -171,6 +174,9 @@ void SROMvWriteEtherAddress(void __iomem *dwIoBase, unsigned char *pbyEtherAddre
 void SROMvReadSubSysVenId(void __iomem *dwIoBase, unsigned long *pdwSubSysVenId);
 
 bool SROMbAutoLoad(void __iomem *dwIoBase);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif // __EEPROM_H__

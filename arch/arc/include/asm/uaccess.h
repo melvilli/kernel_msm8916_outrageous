@@ -84,10 +84,14 @@
 	"	.section .fixup, \"ax\"\n"	\
 	"	.align 4\n"			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"3:	# return -EFAULT\n"		\
 	"	mov %0, %3\n"			\
 	"	# zero out dst ptr\n"		\
 	"	mov %1,  0\n"			\
+=======
+	"3:	mov %0, %3\n"			\
+>>>>>>> v3.18
 =======
 	"3:	mov %0, %3\n"			\
 >>>>>>> v3.18
@@ -109,11 +113,15 @@
 	"	.section .fixup, \"ax\"\n"	\
 	"	.align 4\n"			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"3:	# return -EFAULT\n"		\
 	"	mov %0, %3\n"			\
 	"	# zero out dst ptr\n"		\
 	"	mov %1,  0\n"			\
 	"	mov %R1, 0\n"			\
+=======
+	"3:	mov %0, %3\n"			\
+>>>>>>> v3.18
 =======
 	"3:	mov %0, %3\n"			\
 >>>>>>> v3.18

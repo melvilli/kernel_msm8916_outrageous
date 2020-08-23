@@ -27,7 +27,12 @@
  */
 static struct ip_vs_dest *
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip_vs_lc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb)
+=======
+ip_vs_lc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
+		  struct ip_vs_iphdr *iph)
+>>>>>>> v3.18
 =======
 ip_vs_lc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 		  struct ip_vs_iphdr *iph)
@@ -64,7 +69,11 @@ ip_vs_lc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 		IP_VS_DBG_BUF(6, "LC: server %s:%u activeconns %d "
 			      "inactconns %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      IP_VS_DBG_ADDR(svc->af, &least->addr),
+=======
+			      IP_VS_DBG_ADDR(least->af, &least->addr),
+>>>>>>> v3.18
 =======
 			      IP_VS_DBG_ADDR(least->af, &least->addr),
 >>>>>>> v3.18

@@ -69,7 +69,10 @@
 
 		MDIO: mdio@6000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			device_type = "mdio";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			compatible = "tsi108-mdio";

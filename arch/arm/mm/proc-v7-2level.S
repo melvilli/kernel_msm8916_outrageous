@@ -60,7 +60,11 @@ ENTRY(cpu_v7_switch_mm)
 	isb
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	bx	lr
+>>>>>>> v3.18
 =======
 	bx	lr
 >>>>>>> v3.18
@@ -111,7 +115,11 @@ ENTRY(cpu_v7_set_pte_ext)
 	ALT_UP (mcr	p15, 0, r0, c7, c10, 1)		@ flush_pte
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	bx	lr
+>>>>>>> v3.18
 =======
 	bx	lr
 >>>>>>> v3.18
@@ -147,11 +155,15 @@ ENDPROC(cpu_v7_set_pte_ext)
 	 */
 .equ	PRRR,	0xff0a81a8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_MSM_SCORPIONMP
 .equ	NMRR,	0x40e080e0
 #else
 .equ	NMRR,	0x40e040e0
 #endif
+=======
+.equ	NMRR,	0x40e040e0
+>>>>>>> v3.18
 =======
 .equ	NMRR,	0x40e040e0
 >>>>>>> v3.18
@@ -170,8 +182,11 @@ ENDPROC(cpu_v7_set_pte_ext)
 	.endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*   AT
@@ -185,7 +200,10 @@ ENDPROC(cpu_v7_set_pte_ext)
 v7_crval:
 	crval	clear=0x2120c302, mmuset=0x10c03c7d, ucset=0x00c01c7c
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	.previous
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

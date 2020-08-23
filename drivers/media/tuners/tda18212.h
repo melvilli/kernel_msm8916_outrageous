@@ -26,8 +26,11 @@
 
 struct tda18212_config {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 i2c_address;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 if_dvbt_6;
@@ -38,6 +41,7 @@ struct tda18212_config {
 	u16 if_dvbt2_7;
 	u16 if_dvbt2_8;
 	u16 if_dvbc;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -53,6 +57,8 @@ static inline struct dvb_frontend *tda18212_attach(struct dvb_frontend *fe,
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	u16 if_atsc_vsb;
 	u16 if_atsc_qam;
 
@@ -61,6 +67,9 @@ static inline struct dvb_frontend *tda18212_attach(struct dvb_frontend *fe,
 	 */
 	struct dvb_frontend *fe;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

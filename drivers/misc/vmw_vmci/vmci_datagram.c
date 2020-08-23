@@ -329,7 +329,12 @@ int vmci_datagram_dispatch(u32 context_id,
 	BUILD_BUG_ON(sizeof(struct vmci_datagram) != 24);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (VMCI_DG_SIZE(dg) > VMCI_MAX_DG_SIZE) {
+=======
+	if (dg->payload_size > VMCI_MAX_DG_SIZE ||
+	    VMCI_DG_SIZE(dg) > VMCI_MAX_DG_SIZE) {
+>>>>>>> v3.18
 =======
 	if (dg->payload_size > VMCI_MAX_DG_SIZE ||
 	    VMCI_DG_SIZE(dg) > VMCI_MAX_DG_SIZE) {

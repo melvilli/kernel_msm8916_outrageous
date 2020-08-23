@@ -2,17 +2,23 @@
  * drivers/usb/otg/ab8500_usb.c
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * USB transceiver driver for AB8500 chip
  *
  * Copyright (C) 2010 ST-Ericsson AB
  * Mian Yousaf Kaukab <mian.yousaf.kaukab@stericsson.com>
 =======
+=======
+>>>>>>> v3.18
  * USB transceiver driver for AB8500 family chips
  *
  * Copyright (C) 2010-2013 ST-Ericsson AB
  * Mian Yousaf Kaukab <mian.yousaf.kaukab@stericsson.com>
  * Avinash Kumar <avinash.kumar@stericsson.com>
  * Thirupathi Chippakurthy <thirupathi.chippakurthy@stericsson.com>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -39,6 +45,11 @@
 #include <linux/interrupt.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 #include <linux/err.h>
@@ -56,13 +67,19 @@
 #define AB8500_USB_LINE_STAT_REG 0x80
 #define AB8505_USB_LINE_STAT_REG 0x94
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AB8500_USB_PHY_CTRL_REG 0x8A
 =======
+=======
+>>>>>>> v3.18
 #define AB8540_USB_LINK_STAT_REG 0x94
 #define AB9540_USB_LINK_STAT_REG 0x94
 #define AB8540_USB_OTG_CTL_REG 0x87
 #define AB8500_USB_PHY_CTRL_REG 0x8A
 #define AB8540_VBUS_CTRL_REG 0x82
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Bank AB8500_DEVELOPMENT */
@@ -70,6 +87,10 @@
 
 /* Bank AB8500_DEBUG */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AB8540_DEBUG 0x32
+>>>>>>> v3.18
 =======
 #define AB8540_DEBUG 0x32
 >>>>>>> v3.18
@@ -78,6 +99,12 @@
 #define AB8500_USB_PHY_TUNE3 0x07
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Bank AB8500_INTERRUPT */
+#define AB8500_IT_SOURCE2_REG 0x01
+
+>>>>>>> v3.18
 =======
 /* Bank AB8500_INTERRUPT */
 #define AB8500_IT_SOURCE2_REG 0x01
@@ -89,12 +116,18 @@
 #define AB8500_BIT_WD_CTRL_ENABLE (1 << 0)
 #define AB8500_BIT_WD_CTRL_KICK (1 << 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AB8500_BIT_SOURCE2_VBUSDET (1 << 7)
 #define AB8540_BIT_OTG_CTL_VBUS_VALID_ENA (1 << 0)
 #define AB8540_BIT_OTG_CTL_ID_HOST_ENA (1 << 1)
 #define AB8540_BIT_OTG_CTL_ID_DEV_ENA (1 << 5)
 #define AB8540_BIT_VBUS_CTRL_CHARG_DET_ENA (1 << 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define AB8500_WD_KICK_DELAY_US 100 /* usec */
@@ -153,7 +186,10 @@ enum ab8505_usb_link_status {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum ab8540_usb_link_status {
 	USB_LINK_NOT_CONFIGURED_8540 = 0,
 	USB_LINK_STD_HOST_NC_8540,
@@ -216,6 +252,9 @@ enum ab9540_usb_link_status {
 	USB_LINK_MOTOROLA_FACTORY_CBL_PHY_EN_9540
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum ab8500_usb_mode {
 	USB_IDLE = 0,
@@ -225,7 +264,10 @@ enum ab8500_usb_mode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Register USB_LINK_STATUS interrupt */
 #define AB8500_USB_FLAG_USE_LINK_STATUS_IRQ	(1 << 0)
 /* Register ID_WAKEUP_F interrupt */
@@ -241,6 +283,9 @@ enum ab8500_usb_mode {
 /* Enable the vbus host workaround */
 #define AB8500_USB_FLAG_USE_VBUS_HOST_QUIRK	(1 << 6)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ab8500_usb {
 	struct usb_phy phy;
@@ -249,7 +294,13 @@ struct ab8500_usb {
 	unsigned vbus_draw;
 	struct work_struct phy_dis_work;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum ab8500_usb_mode mode;
+=======
+	struct work_struct vbus_event_work;
+	enum ab8500_usb_mode mode;
+	struct clk *sysclk;
+>>>>>>> v3.18
 =======
 	struct work_struct vbus_event_work;
 	enum ab8500_usb_mode mode;
@@ -263,6 +314,11 @@ struct ab8500_usb {
 	struct pinctrl *pinctrl;
 	struct pinctrl_state *pins_sleep;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool enabled_charging_detection;
+	unsigned int flags;
+>>>>>>> v3.18
 =======
 	bool enabled_charging_detection;
 	unsigned int flags;
@@ -306,7 +362,11 @@ static void ab8500_usb_regulator_enable(struct ab8500_usb *ab)
 		dev_err(ab->dev, "Failed to enable v-ape\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!is_ab8500_2p0_or_earlier(ab->ab8500)) {
+=======
+	if (ab->flags & AB8500_USB_FLAG_REGULATOR_SET_VOLTAGE) {
+>>>>>>> v3.18
 =======
 	if (ab->flags & AB8500_USB_FLAG_REGULATOR_SET_VOLTAGE) {
 >>>>>>> v3.18
@@ -330,7 +390,11 @@ static void ab8500_usb_regulator_enable(struct ab8500_usb *ab)
 		dev_err(ab->dev, "Failed to enable vddulpivio18\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!is_ab8500_2p0_or_earlier(ab->ab8500)) {
+=======
+	if (ab->flags & AB8500_USB_FLAG_REGULATOR_SET_VOLTAGE) {
+>>>>>>> v3.18
 =======
 	if (ab->flags & AB8500_USB_FLAG_REGULATOR_SET_VOLTAGE) {
 >>>>>>> v3.18
@@ -355,7 +419,11 @@ static void ab8500_usb_regulator_disable(struct ab8500_usb *ab)
 
 	/* USB is not the only consumer of Vintcore, restore old settings */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!is_ab8500_2p0_or_earlier(ab->ab8500)) {
+=======
+	if (ab->flags & AB8500_USB_FLAG_REGULATOR_SET_VOLTAGE) {
+>>>>>>> v3.18
 =======
 	if (ab->flags & AB8500_USB_FLAG_REGULATOR_SET_VOLTAGE) {
 >>>>>>> v3.18
@@ -399,6 +467,12 @@ static void ab8500_usb_phy_enable(struct ab8500_usb *ab, bool sel_host)
 		dev_err(ab->dev, "could not get/set default pinstate\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (clk_prepare_enable(ab->sysclk))
+		dev_err(ab->dev, "can't prepare/enable clock\n");
+
+>>>>>>> v3.18
 =======
 	if (clk_prepare_enable(ab->sysclk))
 		dev_err(ab->dev, "can't prepare/enable clock\n");
@@ -410,7 +484,10 @@ static void ab8500_usb_phy_enable(struct ab8500_usb *ab, bool sel_host)
 			AB8500_USB, AB8500_USB_PHY_CTRL_REG,
 			bit, bit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (ab->flags & AB8500_USB_FLAG_USE_VBUS_HOST_QUIRK) {
 		if (sel_host)
@@ -420,6 +497,9 @@ static void ab8500_usb_phy_enable(struct ab8500_usb *ab, bool sel_host)
 					AB8540_BIT_OTG_CTL_ID_HOST_ENA |
 					AB8540_BIT_OTG_CTL_ID_DEV_ENA);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -439,6 +519,11 @@ static void ab8500_usb_phy_disable(struct ab8500_usb *ab, bool sel_host)
 	ab8500_usb_wd_workaround(ab);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clk_disable_unprepare(ab->sysclk);
+
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(ab->sysclk);
 
@@ -456,7 +541,12 @@ static void ab8500_usb_phy_disable(struct ab8500_usb *ab, bool sel_host)
 			dev_err(ab->dev, "could not set pins to sleep state\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* as USB pins are shared with idddet, release them to allow
+=======
+		/*
+		 * as USB pins are shared with iddet, release them to allow
+>>>>>>> v3.18
 =======
 		/*
 		 * as USB pins are shared with iddet, release them to allow
@@ -473,7 +563,10 @@ static void ab8500_usb_phy_disable(struct ab8500_usb *ab, bool sel_host)
 #define ab8500_usb_peri_phy_dis(ab)	ab8500_usb_phy_disable(ab, false)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ab9540_usb_link_status_update(struct ab8500_usb *ab,
 		enum ab9540_usb_link_status lsts)
 {
@@ -722,6 +815,9 @@ static int ab8540_usb_link_status_update(struct ab8500_usb *ab,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ab8505_usb_link_status_update(struct ab8500_usb *ab,
 		enum ab8505_usb_link_status lsts)
@@ -924,7 +1020,10 @@ static int abx500_usb_link_status_update(struct ab8500_usb *ab)
 		lsts = (reg >> 3) & 0x1F;
 		ret = ab8505_usb_link_status_update(ab, lsts);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else if (is_ab8540(ab->ab8500)) {
 		enum ab8540_usb_link_status lsts;
 
@@ -939,6 +1038,9 @@ static int abx500_usb_link_status_update(struct ab8500_usb *ab)
 				AB8500_USB, AB9540_USB_LINK_STAT_REG, &reg);
 		lsts = (reg >> 3) & 0xFF;
 		ret = ab9540_usb_link_status_update(ab, lsts);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -996,7 +1098,11 @@ static irqreturn_t ab8500_usb_disconnect_irq(int irq, void *data)
 static irqreturn_t ab8500_usb_link_status_irq(int irq, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ab8500_usb *ab = (struct ab8500_usb *) data;
+=======
+	struct ab8500_usb *ab = (struct ab8500_usb *)data;
+>>>>>>> v3.18
 =======
 	struct ab8500_usb *ab = (struct ab8500_usb *)data;
 >>>>>>> v3.18
@@ -1019,7 +1125,10 @@ static void ab8500_usb_phy_disable_work(struct work_struct *work)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Check if VBUS is set and linkstatus has not detected a cable. */
 static bool ab8500_usb_check_vbus_status(struct ab8500_usb *ab)
 {
@@ -1083,6 +1192,9 @@ static void ab8500_usb_vbus_turn_on_event_work(struct work_struct *work)
 	ab->enabled_charging_detection = true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned ab8500_eyediagram_workaroud(struct ab8500_usb *ab, unsigned mA)
 {
@@ -1140,7 +1252,11 @@ static int ab8500_usb_set_peripheral(struct usb_otg *otg,
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((ab->mode != USB_IDLE) && (!gadget)) {
+=======
+	if ((ab->mode != USB_IDLE) && !gadget) {
+>>>>>>> v3.18
 =======
 	if ((ab->mode != USB_IDLE) && !gadget) {
 >>>>>>> v3.18
@@ -1168,7 +1284,11 @@ static int ab8500_usb_set_host(struct usb_otg *otg, struct usb_bus *host)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((ab->mode != USB_IDLE) && (!host)) {
+=======
+	if ((ab->mode != USB_IDLE) && !host) {
+>>>>>>> v3.18
 =======
 	if ((ab->mode != USB_IDLE) && !host) {
 >>>>>>> v3.18
@@ -1180,7 +1300,10 @@ static int ab8500_usb_set_host(struct usb_otg *otg, struct usb_bus *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ab8500_usb_restart_phy(struct ab8500_usb *ab)
 {
 	abx500_mask_and_set_register_interruptible(ab->dev,
@@ -1208,6 +1331,9 @@ static void ab8500_usb_restart_phy(struct ab8500_usb *ab)
 			0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ab8500_usb_regulator_get(struct ab8500_usb *ab)
 {
@@ -1243,6 +1369,7 @@ static int ab8500_usb_irq_setup(struct platform_device *pdev,
 	int err;
 	int irq;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	irq = platform_get_irq_byname(pdev, "USB_LINK_STATUS");
 	if (irq < 0) {
@@ -1282,6 +1409,8 @@ static int ab8500_usb_irq_setup(struct platform_device *pdev,
 		dev_err(ab->dev, "request_irq failed for Vbus fall irq\n");
 		return err;
 =======
+=======
+>>>>>>> v3.18
 	if (ab->flags & AB8500_USB_FLAG_USE_LINK_STATUS_IRQ) {
 		irq = platform_get_irq_byname(pdev, "USB_LINK_STATUS");
 		if (irq < 0) {
@@ -1328,6 +1457,9 @@ static int ab8500_usb_irq_setup(struct platform_device *pdev,
 			dev_err(ab->dev, "request_irq failed for Vbus fall irq\n");
 			return err;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1335,7 +1467,10 @@ static int ab8500_usb_irq_setup(struct platform_device *pdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ab8500_usb_set_ab8500_tuning_values(struct ab8500_usb *ab)
 {
 	int err;
@@ -1476,6 +1611,9 @@ static void ab8500_usb_set_ab9540_tuning_values(struct ab8500_usb *ab)
 				err);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ab8500_usb_probe(struct platform_device *pdev)
 {
@@ -1515,7 +1653,10 @@ static int ab8500_usb_probe(struct platform_device *pdev)
 	otg->set_peripheral	= ab8500_usb_set_peripheral;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (is_ab8500(ab->ab8500)) {
 		ab->flags |= AB8500_USB_FLAG_USE_LINK_STATUS_IRQ |
 			AB8500_USB_FLAG_USE_ID_WAKEUP_IRQ |
@@ -1543,6 +1684,9 @@ static int ab8500_usb_probe(struct platform_device *pdev)
 	if (is_ab8500_2p0_or_earlier(ab->ab8500))
 		ab->flags &= ~AB8500_USB_FLAG_REGULATOR_SET_VOLTAGE;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_set_drvdata(pdev, ab);
 
@@ -1550,6 +1694,11 @@ static int ab8500_usb_probe(struct platform_device *pdev)
 	INIT_WORK(&ab->phy_dis_work, ab8500_usb_phy_disable_work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	INIT_WORK(&ab->vbus_event_work, ab8500_usb_vbus_turn_on_event_work);
+
+>>>>>>> v3.18
 =======
 	INIT_WORK(&ab->vbus_event_work, ab8500_usb_vbus_turn_on_event_work);
 
@@ -1559,13 +1708,19 @@ static int ab8500_usb_probe(struct platform_device *pdev)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ab->sysclk = devm_clk_get(ab->dev, "sysclk");
 	if (IS_ERR(ab->sysclk)) {
 		dev_err(ab->dev, "Could not get sysclk.\n");
 		return PTR_ERR(ab->sysclk);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = ab8500_usb_irq_setup(pdev, ab);
 	if (err < 0)
@@ -1577,6 +1732,7 @@ static int ab8500_usb_probe(struct platform_device *pdev)
 		return err;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Phy tuning values for AB8500 */
 	if (!is_ab8500_2p0_or_earlier(ab->ab8500)) {
@@ -1654,6 +1810,8 @@ static int ab8500_usb_probe(struct platform_device *pdev)
 					err);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (is_ab8500(ab->ab8500) && !is_ab8500_2p0_or_earlier(ab->ab8500))
 		/* Phy tuning values for AB8500 > v2.0 */
 		ab8500_usb_set_ab8500_tuning_values(ab);
@@ -1666,13 +1824,19 @@ static int ab8500_usb_probe(struct platform_device *pdev)
 	else if (is_ab9540(ab->ab8500))
 		/* Phy tuning values for AB9540 */
 		ab8500_usb_set_ab9540_tuning_values(ab);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Needed to enable ID detection. */
 	ab8500_usb_wd_workaround(ab);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * This is required for usb-link-status to work properly when a
 	 * cable is connected at boot time.
@@ -1684,6 +1848,9 @@ static int ab8500_usb_probe(struct platform_device *pdev)
 			schedule_work(&ab->vbus_event_work);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	abx500_usb_link_status_update(ab);
 
@@ -1698,6 +1865,10 @@ static int ab8500_usb_remove(struct platform_device *pdev)
 
 	cancel_work_sync(&ab->phy_dis_work);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cancel_work_sync(&ab->vbus_event_work);
+>>>>>>> v3.18
 =======
 	cancel_work_sync(&ab->vbus_event_work);
 >>>>>>> v3.18
@@ -1713,12 +1884,15 @@ static int ab8500_usb_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_driver ab8500_usb_driver = {
 	.probe		= ab8500_usb_probe,
 	.remove		= ab8500_usb_remove,
 	.driver		= {
 		.name	= "ab8500-usb",
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device_id ab8500_usb_devtype[] = {
 	{ .name = "ab8500-usb", },
 	{ .name = "ab8540-usb", },
@@ -1733,6 +1907,9 @@ static struct platform_driver ab8500_usb_driver = {
 	.id_table	= ab8500_usb_devtype,
 	.driver		= {
 		.name	= "abx5x0-usb",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.owner	= THIS_MODULE,
 	},
@@ -1751,9 +1928,14 @@ static void __exit ab8500_usb_exit(void)
 module_exit(ab8500_usb_exit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS("platform:ab8500_usb");
 MODULE_AUTHOR("ST-Ericsson AB");
 MODULE_DESCRIPTION("AB8500 usb transceiver driver");
+=======
+MODULE_AUTHOR("ST-Ericsson AB");
+MODULE_DESCRIPTION("AB8500 family usb transceiver driver");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("ST-Ericsson AB");
 MODULE_DESCRIPTION("AB8500 family usb transceiver driver");

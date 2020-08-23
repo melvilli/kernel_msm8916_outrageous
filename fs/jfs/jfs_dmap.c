@@ -347,8 +347,12 @@ int dbFree(struct inode *ip, s64 blkno, s64 nblocks)
 		       (unsigned long long) blkno,
 		       (unsigned long long) nblocks);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb,
 			  "dbFree: block to be freed is outside the map");
+=======
+		jfs_error(ip->i_sb, "block to be freed is outside the map\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "block to be freed is outside the map\n");
 >>>>>>> v3.18
@@ -389,7 +393,11 @@ int dbFree(struct inode *ip, s64 blkno, s64 nblocks)
 		/* free the blocks. */
 		if ((rc = dbFreeDmap(bmp, dp, blkno, nb))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(ip->i_sb, "dbFree: error in block map\n");
+=======
+			jfs_error(ip->i_sb, "error in block map\n");
+>>>>>>> v3.18
 =======
 			jfs_error(ip->i_sb, "error in block map\n");
 >>>>>>> v3.18
@@ -450,8 +458,12 @@ dbUpdatePMap(struct inode *ipbmap,
 		       (unsigned long long) blkno,
 		       (unsigned long long) nblocks);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ipbmap->i_sb,
 			  "dbUpdatePMap: blocks are outside the map");
+=======
+		jfs_error(ipbmap->i_sb, "blocks are outside the map\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ipbmap->i_sb, "blocks are outside the map\n");
 >>>>>>> v3.18
@@ -739,7 +751,11 @@ int dbAlloc(struct inode *ip, s64 hint, s64 nblocks, s64 * results)
 	/* the hint should be within the map */
 	if (hint >= mapSize) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb, "dbAlloc: the hint is outside the map");
+=======
+		jfs_error(ip->i_sb, "the hint is outside the map\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "the hint is outside the map\n");
 >>>>>>> v3.18
@@ -1074,8 +1090,12 @@ static int dbExtend(struct inode *ip, s64 blkno, s64 nblocks, s64 addnblocks)
 	if (lastblkno < 0 || lastblkno >= bmp->db_mapsize) {
 		IREAD_UNLOCK(ipbmap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ip->i_sb,
 			  "dbExtend: the block is outside the filesystem");
+=======
+		jfs_error(ip->i_sb, "the block is outside the filesystem\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ip->i_sb, "the block is outside the filesystem\n");
 >>>>>>> v3.18
@@ -1155,8 +1175,12 @@ static int dbAllocNext(struct bmap * bmp, struct dmap * dp, s64 blkno,
 
 	if (dp->tree.leafidx != cpu_to_le32(LEAFIND)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(bmp->db_ipbmap->i_sb,
 			  "dbAllocNext: Corrupt dmap page");
+=======
+		jfs_error(bmp->db_ipbmap->i_sb, "Corrupt dmap page\n");
+>>>>>>> v3.18
 =======
 		jfs_error(bmp->db_ipbmap->i_sb, "Corrupt dmap page\n");
 >>>>>>> v3.18
@@ -1237,7 +1261,11 @@ static int dbAllocNext(struct bmap * bmp, struct dmap * dp, s64 blkno,
 				 */
 				l2size =
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    min((int)leaf[word], NLSTOL2BSZ(nwords));
+=======
+				    min_t(int, leaf[word], NLSTOL2BSZ(nwords));
+>>>>>>> v3.18
 =======
 				    min_t(int, leaf[word], NLSTOL2BSZ(nwords));
 >>>>>>> v3.18
@@ -1294,8 +1322,12 @@ dbAllocNear(struct bmap * bmp,
 
 	if (dp->tree.leafidx != cpu_to_le32(LEAFIND)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(bmp->db_ipbmap->i_sb,
 			  "dbAllocNear: Corrupt dmap page");
+=======
+		jfs_error(bmp->db_ipbmap->i_sb, "Corrupt dmap page\n");
+>>>>>>> v3.18
 =======
 		jfs_error(bmp->db_ipbmap->i_sb, "Corrupt dmap page\n");
 >>>>>>> v3.18
@@ -1414,8 +1446,12 @@ dbAllocAG(struct bmap * bmp, int agno, s64 nblocks, int l2nb, s64 * results)
 	if (l2nb > bmp->db_agl2size) {
 		jfs_error(bmp->db_ipbmap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  "dbAllocAG: allocation request is larger than the "
 			  "allocation group size");
+=======
+			  "allocation request is larger than the allocation group size\n");
+>>>>>>> v3.18
 =======
 			  "allocation request is larger than the allocation group size\n");
 >>>>>>> v3.18
@@ -1454,7 +1490,11 @@ dbAllocAG(struct bmap * bmp, int agno, s64 nblocks, int l2nb, s64 * results)
 			       (unsigned long long) nblocks);
 			jfs_error(bmp->db_ipbmap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "dbAllocAG: dbAllocCtl failed in free AG");
+=======
+				  "dbAllocCtl failed in free AG\n");
+>>>>>>> v3.18
 =======
 				  "dbAllocCtl failed in free AG\n");
 >>>>>>> v3.18
@@ -1474,8 +1514,12 @@ dbAllocAG(struct bmap * bmp, int agno, s64 nblocks, int l2nb, s64 * results)
 
 	if (dcp->leafidx != cpu_to_le32(CTLLEAFIND)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(bmp->db_ipbmap->i_sb,
 			  "dbAllocAG: Corrupt dmapctl page");
+=======
+		jfs_error(bmp->db_ipbmap->i_sb, "Corrupt dmapctl page\n");
+>>>>>>> v3.18
 =======
 		jfs_error(bmp->db_ipbmap->i_sb, "Corrupt dmapctl page\n");
 >>>>>>> v3.18
@@ -1520,7 +1564,11 @@ dbAllocAG(struct bmap * bmp, int agno, s64 nblocks, int l2nb, s64 * results)
 			if (n == 4) {
 				jfs_error(bmp->db_ipbmap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  "dbAllocAG: failed descending stree");
+=======
+					  "failed descending stree\n");
+>>>>>>> v3.18
 =======
 					  "failed descending stree\n");
 >>>>>>> v3.18
@@ -1564,8 +1612,12 @@ dbAllocAG(struct bmap * bmp, int agno, s64 nblocks, int l2nb, s64 * results)
 				if (rc == -ENOSPC) {
 					jfs_error(bmp->db_ipbmap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  "dbAllocAG: control page "
 						  "inconsistent");
+=======
+						  "control page inconsistent\n");
+>>>>>>> v3.18
 =======
 						  "control page inconsistent\n");
 >>>>>>> v3.18
@@ -1581,7 +1633,11 @@ dbAllocAG(struct bmap * bmp, int agno, s64 nblocks, int l2nb, s64 * results)
 		if (rc == -ENOSPC) {
 			jfs_error(bmp->db_ipbmap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "dbAllocAG: unable to allocate blocks");
+=======
+				  "unable to allocate blocks\n");
+>>>>>>> v3.18
 =======
 				  "unable to allocate blocks\n");
 >>>>>>> v3.18
@@ -1644,8 +1700,12 @@ static int dbAllocAny(struct bmap * bmp, s64 nblocks, int l2nb, s64 * results)
 	rc = dbAllocCtl(bmp, nblocks, l2nb, blkno, results);
 	if (rc == -ENOSPC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(bmp->db_ipbmap->i_sb,
 			  "dbAllocAny: unable to allocate blocks");
+=======
+		jfs_error(bmp->db_ipbmap->i_sb, "unable to allocate blocks\n");
+>>>>>>> v3.18
 =======
 		jfs_error(bmp->db_ipbmap->i_sb, "unable to allocate blocks\n");
 >>>>>>> v3.18
@@ -1713,8 +1773,12 @@ s64 dbDiscardAG(struct inode *ip, int agno, s64 minlen)
 	totrim = kmalloc(sizeof(struct range2trim) * range_cnt, GFP_NOFS);
 	if (totrim == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(bmp->db_ipbmap->i_sb,
 			  "dbDiscardAG: no memory for trim array");
+=======
+		jfs_error(bmp->db_ipbmap->i_sb, "no memory for trim array\n");
+>>>>>>> v3.18
 =======
 		jfs_error(bmp->db_ipbmap->i_sb, "no memory for trim array\n");
 >>>>>>> v3.18
@@ -1747,8 +1811,12 @@ s64 dbDiscardAG(struct inode *ip, int agno, s64 minlen)
 		} else {
 			/* Trim any already allocated blocks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(bmp->db_ipbmap->i_sb,
 				"dbDiscardAG: -EIO");
+=======
+			jfs_error(bmp->db_ipbmap->i_sb, "-EIO\n");
+>>>>>>> v3.18
 =======
 			jfs_error(bmp->db_ipbmap->i_sb, "-EIO\n");
 >>>>>>> v3.18
@@ -1830,7 +1898,11 @@ static int dbFindCtl(struct bmap * bmp, int l2nb, int level, s64 * blkno)
 		if (dcp->leafidx != cpu_to_le32(CTLLEAFIND)) {
 			jfs_error(bmp->db_ipbmap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "dbFindCtl: Corrupt dmapctl page");
+=======
+				  "Corrupt dmapctl page\n");
+>>>>>>> v3.18
 =======
 				  "Corrupt dmapctl page\n");
 >>>>>>> v3.18
@@ -1855,7 +1927,11 @@ static int dbFindCtl(struct bmap * bmp, int l2nb, int level, s64 * blkno)
 			if (lev != level) {
 				jfs_error(bmp->db_ipbmap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  "dbFindCtl: dmap inconsistent");
+=======
+					  "dmap inconsistent\n");
+>>>>>>> v3.18
 =======
 					  "dmap inconsistent\n");
 >>>>>>> v3.18
@@ -1983,7 +2059,11 @@ dbAllocCtl(struct bmap * bmp, s64 nblocks, int l2nb, s64 blkno, s64 * results)
 			release_metapage(mp);
 			jfs_error(bmp->db_ipbmap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "dbAllocCtl: the dmap is not all free");
+=======
+				  "the dmap is not all free\n");
+>>>>>>> v3.18
 =======
 				  "the dmap is not all free\n");
 >>>>>>> v3.18
@@ -1994,7 +2074,11 @@ dbAllocCtl(struct bmap * bmp, s64 nblocks, int l2nb, s64 blkno, s64 * results)
 		/* determine how many blocks to allocate from this dmap.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nb = min(n, (s64)BPERDMAP);
+=======
+		nb = min_t(s64, n, BPERDMAP);
+>>>>>>> v3.18
 =======
 		nb = min_t(s64, n, BPERDMAP);
 >>>>>>> v3.18
@@ -2038,7 +2122,11 @@ dbAllocCtl(struct bmap * bmp, s64 nblocks, int l2nb, s64 blkno, s64 * results)
 			 */
 			jfs_error(bmp->db_ipbmap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "dbAllocCtl: I/O Error: Block Leakage.");
+=======
+				  "I/O Error: Block Leakage\n");
+>>>>>>> v3.18
 =======
 				  "I/O Error: Block Leakage\n");
 >>>>>>> v3.18
@@ -2054,8 +2142,12 @@ dbAllocCtl(struct bmap * bmp, s64 nblocks, int l2nb, s64 blkno, s64 * results)
 			 */
 			release_metapage(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			jfs_error(bmp->db_ipbmap->i_sb,
 				  "dbAllocCtl: Block Leakage.");
+=======
+			jfs_error(bmp->db_ipbmap->i_sb, "Block Leakage\n");
+>>>>>>> v3.18
 =======
 			jfs_error(bmp->db_ipbmap->i_sb, "Block Leakage\n");
 >>>>>>> v3.18
@@ -2356,8 +2448,12 @@ static void dbAllocBits(struct bmap * bmp, struct dmap * dp, s64 blkno,
 				if (leaf[word] < BUDMIN) {
 					jfs_error(bmp->db_ipbmap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  "dbAllocBits: leaf page "
 						  "corrupt");
+=======
+						  "leaf page corrupt\n");
+>>>>>>> v3.18
 =======
 						  "leaf page corrupt\n");
 >>>>>>> v3.18
@@ -2370,7 +2466,12 @@ static void dbAllocBits(struct bmap * bmp, struct dmap * dp, s64 blkno,
 				 * of bits currently described by this leaf.
 				 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				size = min((int)leaf[word], NLSTOL2BSZ(nwords));
+=======
+				size = min_t(int, leaf[word],
+					     NLSTOL2BSZ(nwords));
+>>>>>>> v3.18
 =======
 				size = min_t(int, leaf[word],
 					     NLSTOL2BSZ(nwords));
@@ -2638,8 +2739,12 @@ dbAdjCtl(struct bmap * bmp, s64 blkno, int newval, int alloc, int level)
 
 	if (dcp->leafidx != cpu_to_le32(CTLLEAFIND)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(bmp->db_ipbmap->i_sb,
 			  "dbAdjCtl: Corrupt dmapctl page");
+=======
+		jfs_error(bmp->db_ipbmap->i_sb, "Corrupt dmapctl page\n");
+>>>>>>> v3.18
 =======
 		jfs_error(bmp->db_ipbmap->i_sb, "Corrupt dmapctl page\n");
 >>>>>>> v3.18
@@ -2744,8 +2849,12 @@ dbAdjCtl(struct bmap * bmp, s64 blkno, int newval, int alloc, int level)
 			if (bmp->db_maxfreebud != oldroot) {
 				jfs_error(bmp->db_ipbmap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  "dbAdjCtl: the maximum free buddy is "
 					  "not the old root");
+=======
+					  "the maximum free buddy is not the old root\n");
+>>>>>>> v3.18
 =======
 					  "the maximum free buddy is not the old root\n");
 >>>>>>> v3.18
@@ -3591,7 +3700,11 @@ int dbExtendFS(struct inode *ipbmap, s64 blkno,	s64 nblocks)
 	l2mp = read_metapage(ipbmap, p, PSIZE, 0);
 	if (!l2mp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jfs_error(ipbmap->i_sb, "dbExtendFS: L2 page could not be read");
+=======
+		jfs_error(ipbmap->i_sb, "L2 page could not be read\n");
+>>>>>>> v3.18
 =======
 		jfs_error(ipbmap->i_sb, "L2 page could not be read\n");
 >>>>>>> v3.18
@@ -3692,7 +3805,11 @@ int dbExtendFS(struct inode *ipbmap, s64 blkno,	s64 nblocks)
 						goto errout;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 					n = min(nblocks, (s64)BPERDMAP);
+=======
+					n = min_t(s64, nblocks, BPERDMAP);
+>>>>>>> v3.18
 =======
 					n = min_t(s64, nblocks, BPERDMAP);
 >>>>>>> v3.18
@@ -3764,8 +3881,12 @@ int dbExtendFS(struct inode *ipbmap, s64 blkno,	s64 nblocks)
 	}			/* for each L1 in a L2 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jfs_error(ipbmap->i_sb,
 		  "dbExtendFS: function has not returned as expected");
+=======
+	jfs_error(ipbmap->i_sb, "function has not returned as expected\n");
+>>>>>>> v3.18
 =======
 	jfs_error(ipbmap->i_sb, "function has not returned as expected\n");
 >>>>>>> v3.18
@@ -3839,7 +3960,11 @@ void dbFinalizeBmap(struct inode *ipbmap)
 		if (bmp->db_agpref >= bmp->db_numag) {
 			jfs_error(ipbmap->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "cannot find ag with average freespace");
+=======
+				  "cannot find ag with average freespace\n");
+>>>>>>> v3.18
 =======
 				  "cannot find ag with average freespace\n");
 >>>>>>> v3.18

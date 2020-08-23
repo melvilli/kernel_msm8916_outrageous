@@ -110,7 +110,10 @@ static int clk_pfd_set_rate(struct clk_hw *hw, unsigned long rate,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int clk_pfd_is_enabled(struct clk_hw *hw)
 {
 	struct clk_pfd *pfd = to_clk_pfd(hw);
@@ -121,6 +124,9 @@ static int clk_pfd_is_enabled(struct clk_hw *hw)
 	return 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct clk_ops clk_pfd_ops = {
 	.enable		= clk_pfd_enable,
@@ -129,6 +135,10 @@ static const struct clk_ops clk_pfd_ops = {
 	.round_rate	= clk_pfd_round_rate,
 	.set_rate	= clk_pfd_set_rate,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.is_enabled     = clk_pfd_is_enabled,
+>>>>>>> v3.18
 =======
 	.is_enabled     = clk_pfd_is_enabled,
 >>>>>>> v3.18

@@ -1,15 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Linux* Base Driver for the Intel(R) PRO/1000 Family of Adapters
 ===============================================================
 
 Intel Gigabit Linux driver.
 Copyright(c) 1999 - 2010 Intel Corporation.
 =======
+=======
+>>>>>>> v3.18
 Linux* Base Driver for Intel(R) Ethernet Network Connection
 ===========================================================
 
 Intel Gigabit Linux driver.
 Copyright(c) 1999 - 2013 Intel Corporation.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Contents
@@ -429,8 +435,13 @@ Additional Configurations
     with the maximum Jumbo Frames size of 16128.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   - Using Jumbo Frames at 10 or 100 Mbps may result in poor performance or
     loss of link.
+=======
+  - Using Jumbo frames at 10 or 100 Mbps is not supported and may result in
+    poor performance or loss of link.
+>>>>>>> v3.18
 =======
   - Using Jumbo frames at 10 or 100 Mbps is not supported and may result in
     poor performance or loss of link.
@@ -442,7 +453,11 @@ Additional Configurations
      Intel(R) PRO/1000 PM Network Connection
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   Ethtool
+=======
+  ethtool
+>>>>>>> v3.18
 =======
   ethtool
 >>>>>>> v3.18

@@ -258,6 +258,11 @@
 			compatible = "xlnx,compound";
 			ethernet@81c00000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				#address-cells = <1>;
+				#size-cells = <0>;
+>>>>>>> v3.18
 =======
 				#address-cells = <1>;
 				#size-cells = <0>;

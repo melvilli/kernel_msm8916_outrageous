@@ -21,7 +21,10 @@
 #include "gcov.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct gcov_info *gcov_info_head;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int gcov_events_enabled;
@@ -38,7 +41,11 @@ void __gcov_init(struct gcov_info *info)
 	mutex_lock(&gcov_lock);
 	if (gcov_version == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gcov_version = info->version;
+=======
+		gcov_version = gcov_info_version(info);
+>>>>>>> v3.18
 =======
 		gcov_version = gcov_info_version(info);
 >>>>>>> v3.18
@@ -53,8 +60,12 @@ void __gcov_init(struct gcov_info *info)
 	 * listener.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->next = gcov_info_head;
 	gcov_info_head = info;
+=======
+	gcov_info_link(info);
+>>>>>>> v3.18
 =======
 	gcov_info_link(info);
 >>>>>>> v3.18
@@ -93,7 +104,10 @@ void __gcov_merge_delta(gcov_type *counters, unsigned int n_counters)
 EXPORT_SYMBOL(__gcov_merge_delta);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void __gcov_merge_ior(gcov_type *counters, unsigned int n_counters)
 {
 	/* Unused. */
@@ -106,6 +120,9 @@ void __gcov_merge_time_profile(gcov_type *counters, unsigned int n_counters)
 }
 EXPORT_SYMBOL(__gcov_merge_time_profile);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * gcov_enable_events - enable event reporting through gcov_event()
@@ -118,6 +135,7 @@ EXPORT_SYMBOL(__gcov_merge_time_profile);
 void gcov_enable_events(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gcov_info *info;
 
 	mutex_lock(&gcov_lock);
@@ -126,6 +144,8 @@ void gcov_enable_events(void)
 	for (info = gcov_info_head; info; info = info->next)
 		gcov_event(GCOV_ADD, info);
 =======
+=======
+>>>>>>> v3.18
 	struct gcov_info *info = NULL;
 
 	mutex_lock(&gcov_lock);
@@ -135,6 +155,9 @@ void gcov_enable_events(void)
 	while ((info = gcov_info_next(info)))
 		gcov_event(GCOV_ADD, info);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&gcov_lock);
 }
@@ -151,8 +174,13 @@ static int gcov_module_notifier(struct notifier_block *nb, unsigned long event,
 {
 	struct module *mod = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gcov_info *info;
 	struct gcov_info *prev;
+=======
+	struct gcov_info *info = NULL;
+	struct gcov_info *prev = NULL;
+>>>>>>> v3.18
 =======
 	struct gcov_info *info = NULL;
 	struct gcov_info *prev = NULL;
@@ -161,6 +189,7 @@ static int gcov_module_notifier(struct notifier_block *nb, unsigned long event,
 	if (event != MODULE_STATE_GOING)
 		return NOTIFY_OK;
 	mutex_lock(&gcov_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	prev = NULL;
 	/* Remove entries located in module from linked list. */
@@ -171,11 +200,16 @@ static int gcov_module_notifier(struct notifier_block *nb, unsigned long event,
 			else
 				gcov_info_head = info->next;
 =======
+=======
+>>>>>>> v3.18
 
 	/* Remove entries located in module from linked list. */
 	while ((info = gcov_info_next(info))) {
 		if (within(info, mod->module_core, mod->core_size)) {
 			gcov_info_unlink(prev, info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (gcov_events_enabled)
 				gcov_event(GCOV_REMOVE, info);
@@ -183,6 +217,10 @@ static int gcov_module_notifier(struct notifier_block *nb, unsigned long event,
 			prev = info;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

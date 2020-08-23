@@ -24,7 +24,10 @@
 #include "pinctrl-mvebu.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __iomem *mpp_base;
 
 static int armada_370_mpp_ctrl_get(unsigned pid, unsigned long *config)
@@ -37,6 +40,9 @@ static int armada_370_mpp_ctrl_set(unsigned pid, unsigned long config)
 	return default_mpp_ctrl_set(mpp_base, pid, config);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct mvebu_mpp_mode mv88f6710_mpp_modes[] = {
 	MPP_MODE(0,
@@ -374,17 +380,23 @@ static struct mvebu_mpp_mode mv88f6710_mpp_modes[] = {
 	   MPP_FUNCTION(0x0, "gpio", NULL),
 	   MPP_FUNCTION(0x1, "spi0", "miso"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   MPP_FUNCTION(0x2, "spi0", "cs1")),
 	MPP_MODE(65,
 	   MPP_FUNCTION(0x0, "gpio", NULL),
 	   MPP_FUNCTION(0x1, "spi0", "mosi"),
 	   MPP_FUNCTION(0x2, "spi0", "cs2")),
 =======
+=======
+>>>>>>> v3.18
 	   MPP_FUNCTION(0x2, "spi0-1", "cs1")),
 	MPP_MODE(65,
 	   MPP_FUNCTION(0x0, "gpio", NULL),
 	   MPP_FUNCTION(0x1, "spi0", "mosi"),
 	   MPP_FUNCTION(0x2, "spi0-1", "cs2")),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -397,7 +409,11 @@ static struct of_device_id armada_370_pinctrl_of_match[] = {
 
 static struct mvebu_mpp_ctrl mv88f6710_mpp_controls[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MPP_REG_CTRL(0, 65),
+=======
+	MPP_FUNC_CTRL(0, 65, NULL, armada_370_mpp_ctrl),
+>>>>>>> v3.18
 =======
 	MPP_FUNC_CTRL(0, 65, NULL, armada_370_mpp_ctrl),
 >>>>>>> v3.18
@@ -413,13 +429,19 @@ static int armada_370_pinctrl_probe(struct platform_device *pdev)
 {
 	struct mvebu_pinctrl_soc_info *soc = &armada_370_pinctrl_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct resource *res;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	mpp_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(mpp_base))
 		return PTR_ERR(mpp_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	soc->variant = 0; /* no variants for Armada 370 */
@@ -445,7 +467,11 @@ static struct platform_driver armada_370_pinctrl_driver = {
 		.name = "armada-370-pinctrl",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(armada_370_pinctrl_of_match),
+=======
+		.of_match_table = armada_370_pinctrl_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = armada_370_pinctrl_of_match,
 >>>>>>> v3.18

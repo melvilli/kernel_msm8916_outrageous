@@ -116,7 +116,11 @@ struct fscache_cache *fscache_select_cache_for_object(
 
 		cache = object->cache;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (object->state >= FSCACHE_OBJECT_DYING ||
+=======
+		if (fscache_object_is_dying(object) ||
+>>>>>>> v3.18
 =======
 		if (fscache_object_is_dying(object) ||
 >>>>>>> v3.18
@@ -229,13 +233,19 @@ int fscache_add_cache(struct fscache_cache *cache,
 
 	cache->flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ifsdef->event_mask = ULONG_MAX & ~(1 << FSCACHE_OBJECT_EV_CLEARED);
 	ifsdef->state = FSCACHE_OBJECT_ACTIVE;
 =======
+=======
+>>>>>>> v3.18
 	ifsdef->event_mask =
 		((1 << NR_FSCACHE_OBJECT_EVENTS) - 1) &
 		~(1 << FSCACHE_OBJECT_EV_CLEARED);
 	__set_bit(FSCACHE_OBJECT_IS_AVAILABLE, &ifsdef->flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!tagname)
@@ -290,8 +300,13 @@ int fscache_add_cache(struct fscache_cache *cache,
 	up_write(&fscache_addremove_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_NOTICE "FS-Cache: Cache \"%s\" added (type %s)\n",
 	       cache->tag->name, cache->ops->name);
+=======
+	pr_notice("Cache \"%s\" added (type %s)\n",
+		  cache->tag->name, cache->ops->name);
+>>>>>>> v3.18
 =======
 	pr_notice("Cache \"%s\" added (type %s)\n",
 		  cache->tag->name, cache->ops->name);
@@ -303,7 +318,11 @@ int fscache_add_cache(struct fscache_cache *cache,
 
 tag_in_use:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "FS-Cache: Cache tag '%s' already in use\n", tagname);
+=======
+	pr_err("Cache tag '%s' already in use\n", tagname);
+>>>>>>> v3.18
 =======
 	pr_err("Cache tag '%s' already in use\n", tagname);
 >>>>>>> v3.18
@@ -336,8 +355,12 @@ void fscache_io_error(struct fscache_cache *cache)
 {
 	if (!test_and_set_bit(FSCACHE_IOERROR, &cache->flags))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "FS-Cache:"
 		       " Cache '%s' stopped due to I/O error\n",
+=======
+		pr_err("Cache '%s' stopped due to I/O error\n",
+>>>>>>> v3.18
 =======
 		pr_err("Cache '%s' stopped due to I/O error\n",
 >>>>>>> v3.18
@@ -354,6 +377,7 @@ static void fscache_withdraw_all_objects(struct fscache_cache *cache,
 {
 	struct fscache_object *object;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock(&cache->object_list_lock);
 
@@ -375,6 +399,8 @@ static void fscache_withdraw_all_objects(struct fscache_cache *cache,
 
 	spin_unlock(&cache->object_list_lock);
 =======
+=======
+>>>>>>> v3.18
 	while (!list_empty(&cache->object_list)) {
 		spin_lock(&cache->object_list_lock);
 
@@ -394,6 +420,9 @@ static void fscache_withdraw_all_objects(struct fscache_cache *cache,
 		spin_unlock(&cache->object_list_lock);
 		cond_resched();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -414,8 +443,13 @@ void fscache_withdraw_cache(struct fscache_cache *cache)
 	_enter("");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_NOTICE "FS-Cache: Withdrawing cache \"%s\"\n",
 	       cache->tag->name);
+=======
+	pr_notice("Withdrawing cache \"%s\"\n",
+		  cache->tag->name);
+>>>>>>> v3.18
 =======
 	pr_notice("Withdrawing cache \"%s\"\n",
 		  cache->tag->name);

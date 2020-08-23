@@ -1043,8 +1043,11 @@ role="subsection"><title>DMX_ADD_PID</title>
 <informaltable><tgroup cols="1"><tbody><row><entry
  align="char">
 <<<<<<< HEAD
+<<<<<<< HEAD
 <para>This ioctl is undocumented. Documentation is welcome.</para>
 =======
+=======
+>>>>>>> v3.18
 <para>This ioctl call allows to add multiple PIDs to a transport stream filter
 previously set up with DMX_SET_PES_FILTER and output equal to DMX_OUT_TSDEMUX_TAP.
 </para></entry></row><row><entry align="char"><para>
@@ -1053,6 +1056,9 @@ It is used by readers of /dev/dvb/adapterX/demuxY.
 It may be called at any time, i.e. before or after the first filter on the
 shared file descriptor was started. It makes it possible to record multiple
 services without the need to de-multiplex or re-multiplex TS packets.</para>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 </entry>
  </row></tbody></tgroup></informaltable>
@@ -1087,7 +1093,11 @@ services without the need to de-multiplex or re-multiplex TS packets.</para>
 </entry><entry
  align="char">
 <<<<<<< HEAD
+<<<<<<< HEAD
 <para>Undocumented.</para>
+=======
+<para>PID number to be filtered.</para>
+>>>>>>> v3.18
 =======
 <para>PID number to be filtered.</para>
 >>>>>>> v3.18
@@ -1103,8 +1113,11 @@ role="subsection"><title>DMX_REMOVE_PID</title>
 <informaltable><tgroup cols="1"><tbody><row><entry
  align="char">
 <<<<<<< HEAD
+<<<<<<< HEAD
 <para>This ioctl is undocumented. Documentation is welcome.</para>
 =======
+=======
+>>>>>>> v3.18
 <para>This ioctl call allows to remove a PID when multiple PIDs are set on a
 transport stream filter, e. g. a filter previously set up with output equal to
 DMX_OUT_TSDEMUX_TAP, created via either DMX_SET_PES_FILTER or DMX_ADD_PID.
@@ -1114,6 +1127,9 @@ It is used by readers of /dev/dvb/adapterX/demuxY.
 It may be called at any time, i.e. before or after the first filter on the
 shared file descriptor was started. It makes it possible to record multiple
 services without the need to de-multiplex or re-multiplex TS packets.</para>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 </entry>
  </row></tbody></tgroup></informaltable>
@@ -1148,7 +1164,11 @@ services without the need to de-multiplex or re-multiplex TS packets.</para>
 </entry><entry
  align="char">
 <<<<<<< HEAD
+<<<<<<< HEAD
 <para>Undocumented.</para>
+=======
+<para>PID of the PES filter to be removed.</para>
+>>>>>>> v3.18
 =======
 <para>PID of the PES filter to be removed.</para>
 >>>>>>> v3.18

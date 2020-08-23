@@ -48,7 +48,11 @@
 
 static DECLARE_BITMAP(callid_bitmap, MAX_CALLID + 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pppox_sock **callid_sock;
+=======
+static struct pppox_sock __rcu **callid_sock;
+>>>>>>> v3.18
 =======
 static struct pppox_sock __rcu **callid_sock;
 >>>>>>> v3.18
@@ -88,17 +92,23 @@ struct pptp_gre_header {
 	u8  flags;
 	u8  ver;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 protocol;
 	u16 payload_len;
 	u16 call_id;
 	u32 seq;
 	u32 ack;
 =======
+=======
+>>>>>>> v3.18
 	__be16 protocol;
 	__be16 payload_len;
 	__be16 call_id;
 	__be32 seq;
 	__be32 ack;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
@@ -433,9 +443,12 @@ static int pptp_bind(struct socket *sock, struct sockaddr *uservaddr,
 	int error = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sockaddr_len < sizeof(struct sockaddr_pppox))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	lock_sock(sk);
@@ -460,9 +473,12 @@ static int pptp_connect(struct socket *sock, struct sockaddr *uservaddr,
 	int error = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sockaddr_len < sizeof(struct sockaddr_pppox))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sp->sa_protocol != PX_PROTO_PPTP)

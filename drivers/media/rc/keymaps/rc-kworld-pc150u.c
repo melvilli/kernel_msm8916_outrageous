@@ -5,7 +5,11 @@
  * Copyright (c) 2010 by Kyle Strickland
  *   (based on kworld-plus-tv-analog.c by
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    Mauro Carvalho Chehab <mchehab@redhat.com>)
+=======
+ *    Mauro Carvalho Chehab)
+>>>>>>> v3.18
 =======
  *    Mauro Carvalho Chehab)
 >>>>>>> v3.18

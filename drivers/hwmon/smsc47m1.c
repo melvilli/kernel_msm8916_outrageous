@@ -8,7 +8,11 @@
  *
  * Copyright (C) 2002 Mark D. Studebaker <mdsxyz123@yahoo.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2007 Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2004-2007 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2007 Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -147,11 +151,14 @@ struct smsc47m1_sio_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int __exit smsc47m1_remove(struct platform_device *pdev);
 static struct smsc47m1_data *smsc47m1_update_device(struct device *dev,
 		int init);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int smsc47m1_read_value(struct smsc47m1_data *data, u8 reg)
@@ -166,6 +173,7 @@ static inline void smsc47m1_write_value(struct smsc47m1_data *data, u8 reg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_driver smsc47m1_driver = {
 	.driver = {
 		.owner	= THIS_MODULE,
@@ -174,6 +182,8 @@ static struct platform_driver smsc47m1_driver = {
 	.remove		= __exit_p(smsc47m1_remove),
 };
 =======
+=======
+>>>>>>> v3.18
 static struct smsc47m1_data *smsc47m1_update_device(struct device *dev,
 		int init)
 {
@@ -222,6 +232,9 @@ static struct smsc47m1_data *smsc47m1_update_device(struct device *dev,
 	mutex_unlock(&data->update_lock);
 	return data;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t get_fan(struct device *dev, struct device_attribute
@@ -727,7 +740,11 @@ static int __init smsc47m1_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct smsc47m1_sio_data *sio_data = dev->platform_data;
+=======
+	struct smsc47m1_sio_data *sio_data = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct smsc47m1_sio_data *sio_data = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -874,6 +891,7 @@ static int __exit smsc47m1_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct smsc47m1_data *smsc47m1_update_device(struct device *dev,
 		int init)
 {
@@ -923,6 +941,8 @@ static struct smsc47m1_data *smsc47m1_update_device(struct device *dev,
 	return data;
 }
 =======
+=======
+>>>>>>> v3.18
 static struct platform_driver smsc47m1_driver = {
 	.driver = {
 		.owner	= THIS_MODULE,
@@ -930,6 +950,9 @@ static struct platform_driver smsc47m1_driver = {
 	},
 	.remove		= __exit_p(smsc47m1_remove),
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __init smsc47m1_device_add(unsigned short address,
@@ -1013,7 +1036,11 @@ static void __exit sm_smsc47m1_exit(void)
 {
 	platform_driver_unregister(&smsc47m1_driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smsc47m1_restore(pdev->dev.platform_data);
+=======
+	smsc47m1_restore(dev_get_platdata(&pdev->dev));
+>>>>>>> v3.18
 =======
 	smsc47m1_restore(dev_get_platdata(&pdev->dev));
 >>>>>>> v3.18

@@ -43,7 +43,11 @@ static bool ip_may_fragment(const struct sk_buff *skb)
 {
 	return unlikely((ip_hdr(skb)->frag_off & htons(IP_DF)) == 0) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb->local_df;
+=======
+		skb->ignore_df;
+>>>>>>> v3.18
 =======
 		skb->ignore_df;
 >>>>>>> v3.18
@@ -60,6 +64,7 @@ static bool ip_exceeds_mtu(const struct sk_buff *skb, unsigned int mtu)
 	return true;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool ip_gso_exceeds_dst_mtu(const struct sk_buff *skb)
 {
@@ -110,6 +115,8 @@ static int ip_forward_finish_gso(struct sk_buff *skb)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 static int ip_forward_finish(struct sk_buff *skb)
 {
@@ -122,9 +129,12 @@ static int ip_forward_finish(struct sk_buff *skb)
 		ip_forward_options(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ip_gso_exceeds_dst_mtu(skb))
 		return ip_forward_finish_gso(skb);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return dst_output(skb);
@@ -133,6 +143,10 @@ static int ip_forward_finish(struct sk_buff *skb)
 int ip_forward(struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 mtu;
+>>>>>>> v3.18
 =======
 	u32 mtu;
 >>>>>>> v3.18
@@ -141,7 +155,12 @@ int ip_forward(struct sk_buff *skb)
 	struct ip_options *opt	= &(IPCB(skb)->opt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(skb->sk))
+=======
+	/* that should never happen */
+	if (skb->pkt_type != PACKET_HOST)
+>>>>>>> v3.18
 =======
 	/* that should never happen */
 	if (skb->pkt_type != PACKET_HOST)
@@ -158,9 +177,12 @@ int ip_forward(struct sk_buff *skb)
 		return NET_RX_SUCCESS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb->pkt_type != PACKET_HOST)
 		goto drop;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	skb_forward_csum(skb);
@@ -182,17 +204,23 @@ int ip_forward(struct sk_buff *skb)
 		goto sr_failed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ip_may_fragment(skb) && ip_exceeds_mtu(skb, dst_mtu(&rt->dst))) {
 		IP_INC_STATS(dev_net(rt->dst.dev), IPSTATS_MIB_FRAGFAILS);
 		icmp_send(skb, ICMP_DEST_UNREACH, ICMP_FRAG_NEEDED,
 			  htonl(dst_mtu(&rt->dst)));
 =======
+=======
+>>>>>>> v3.18
 	IPCB(skb)->flags |= IPSKB_FORWARDED;
 	mtu = ip_dst_mtu_maybe_forward(&rt->dst, true);
 	if (!ip_may_fragment(skb) && ip_exceeds_mtu(skb, mtu)) {
 		IP_INC_STATS(dev_net(rt->dst.dev), IPSTATS_MIB_FRAGFAILS);
 		icmp_send(skb, ICMP_DEST_UNREACH, ICMP_FRAG_NEEDED,
 			  htonl(mtu));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto drop;
 	}
@@ -210,8 +238,12 @@ int ip_forward(struct sk_buff *skb)
 	 *	we calculated.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IPCB(skb)->flags & IPSKB_DOREDIRECT && !opt->srr &&
 	    !skb_sec_path(skb))
+=======
+	if (rt->rt_flags&RTCF_DOREDIRECT && !opt->srr && !skb_sec_path(skb))
+>>>>>>> v3.18
 =======
 	if (rt->rt_flags&RTCF_DOREDIRECT && !opt->srr && !skb_sec_path(skb))
 >>>>>>> v3.18

@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2012 Coraid, Inc.  See COPYING for GPL terms. */
+=======
+/* Copyright (c) 2013 Coraid, Inc.  See COPYING for GPL terms. */
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2013 Coraid, Inc.  See COPYING for GPL terms. */
 >>>>>>> v3.18
@@ -22,6 +26,10 @@
 #include <linux/export.h>
 #include <linux/moduleparam.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/debugfs.h>
+>>>>>>> v3.18
 =======
 #include <linux/debugfs.h>
 >>>>>>> v3.18
@@ -31,6 +39,10 @@
 static DEFINE_MUTEX(aoeblk_mutex);
 static struct kmem_cache *buf_pool_cache;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct dentry *aoe_debugfs_dir;
+>>>>>>> v3.18
 =======
 static struct dentry *aoe_debugfs_dir;
 >>>>>>> v3.18
@@ -121,7 +133,10 @@ static ssize_t aoedisk_show_payload(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int aoedisk_debugfs_show(struct seq_file *s, void *ignored)
 {
 	struct aoedev *d;
@@ -171,6 +186,9 @@ static int aoe_debugfs_open(struct inode *inode, struct file *file)
 	return single_open(file, aoedisk_debugfs_show, inode->i_private);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEVICE_ATTR(state, S_IRUGO, aoedisk_show_state, NULL);
 static DEVICE_ATTR(mac, S_IRUGO, aoedisk_show_mac, NULL);
@@ -195,7 +213,10 @@ static const struct attribute_group attr_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct file_operations aoe_debugfs_fops = {
 	.open = aoe_debugfs_open,
 	.read = seq_read,
@@ -234,6 +255,9 @@ aoedisk_rm_debugfs(struct aoedev *d)
 	d->debugfs = NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 aoedisk_add_sysfs(struct aoedev *d)
@@ -436,6 +460,10 @@ aoeblk_gdalloc(void *vp)
 	add_disk(gd);
 	aoedisk_add_sysfs(d);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	aoedisk_add_debugfs(d);
+>>>>>>> v3.18
 =======
 	aoedisk_add_debugfs(d);
 >>>>>>> v3.18
@@ -461,6 +489,11 @@ void
 aoeblk_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	debugfs_remove_recursive(aoe_debugfs_dir);
+	aoe_debugfs_dir = NULL;
+>>>>>>> v3.18
 =======
 	debugfs_remove_recursive(aoe_debugfs_dir);
 	aoe_debugfs_dir = NULL;
@@ -477,13 +510,19 @@ aoeblk_init(void)
 	if (buf_pool_cache == NULL)
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	aoe_debugfs_dir = debugfs_create_dir("aoe", NULL);
 	if (IS_ERR_OR_NULL(aoe_debugfs_dir)) {
 		pr_info("aoe: cannot create debugfs directory\n");
 		aoe_debugfs_dir = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

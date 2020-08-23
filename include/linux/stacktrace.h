@@ -21,8 +21,11 @@ extern void save_stack_trace_tsk(struct task_struct *tsk,
 
 extern void print_stack_trace(struct stack_trace *trace, int spaces);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  snprint_stack_trace(char *buf, int buf_len,
 				struct stack_trace *trace, int spaces);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -38,7 +41,10 @@ extern void save_stack_trace_user(struct stack_trace *trace);
 # define save_stack_trace_user(trace)			do { } while (0)
 # define print_stack_trace(trace, spaces)		do { } while (0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define snprint_stack_trace(buf, len, trace, spaces)	do { } while (0)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

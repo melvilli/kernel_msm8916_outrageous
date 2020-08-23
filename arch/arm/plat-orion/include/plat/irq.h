@@ -13,7 +13,10 @@
 
 void orion_irq_init(unsigned int irq_start, void __iomem *maskaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init orion_dt_init_irq(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

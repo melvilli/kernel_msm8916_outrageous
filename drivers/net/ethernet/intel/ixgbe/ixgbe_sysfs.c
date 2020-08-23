@@ -21,6 +21,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -116,8 +120,13 @@ static int ixgbe_add_hwmon_attr(struct ixgbe_adapter *adapter,
 	struct hwmon_attr *ixgbe_attr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n_attr = adapter->ixgbe_hwmon_buff.n_hwmon;
 	ixgbe_attr = &adapter->ixgbe_hwmon_buff.hwmon_list[n_attr];
+=======
+	n_attr = adapter->ixgbe_hwmon_buff->n_hwmon;
+	ixgbe_attr = &adapter->ixgbe_hwmon_buff->hwmon_list[n_attr];
+>>>>>>> v3.18
 =======
 	n_attr = adapter->ixgbe_hwmon_buff->n_hwmon;
 	ixgbe_attr = &adapter->ixgbe_hwmon_buff->hwmon_list[n_attr];
@@ -128,7 +137,11 @@ static int ixgbe_add_hwmon_attr(struct ixgbe_adapter *adapter,
 		ixgbe_attr->dev_attr.show = ixgbe_hwmon_show_location;
 		snprintf(ixgbe_attr->name, sizeof(ixgbe_attr->name),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "temp%u_label", offset);
+=======
+			 "temp%u_label", offset + 1);
+>>>>>>> v3.18
 =======
 			 "temp%u_label", offset + 1);
 >>>>>>> v3.18
@@ -137,7 +150,11 @@ static int ixgbe_add_hwmon_attr(struct ixgbe_adapter *adapter,
 		ixgbe_attr->dev_attr.show = ixgbe_hwmon_show_temp;
 		snprintf(ixgbe_attr->name, sizeof(ixgbe_attr->name),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "temp%u_input", offset);
+=======
+			 "temp%u_input", offset + 1);
+>>>>>>> v3.18
 =======
 			 "temp%u_input", offset + 1);
 >>>>>>> v3.18
@@ -146,7 +163,11 @@ static int ixgbe_add_hwmon_attr(struct ixgbe_adapter *adapter,
 		ixgbe_attr->dev_attr.show = ixgbe_hwmon_show_cautionthresh;
 		snprintf(ixgbe_attr->name, sizeof(ixgbe_attr->name),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "temp%u_max", offset);
+=======
+			 "temp%u_max", offset + 1);
+>>>>>>> v3.18
 =======
 			 "temp%u_max", offset + 1);
 >>>>>>> v3.18
@@ -155,7 +176,11 @@ static int ixgbe_add_hwmon_attr(struct ixgbe_adapter *adapter,
 		ixgbe_attr->dev_attr.show = ixgbe_hwmon_show_maxopthresh;
 		snprintf(ixgbe_attr->name, sizeof(ixgbe_attr->name),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 "temp%u_crit", offset);
+=======
+			 "temp%u_crit", offset + 1);
+>>>>>>> v3.18
 =======
 			 "temp%u_crit", offset + 1);
 >>>>>>> v3.18
@@ -173,6 +198,7 @@ static int ixgbe_add_hwmon_attr(struct ixgbe_adapter *adapter,
 	ixgbe_attr->dev_attr.attr.mode = S_IRUGO;
 	ixgbe_attr->dev_attr.attr.name = ixgbe_attr->name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	rc = device_create_file(&adapter->pdev->dev,
 				&ixgbe_attr->dev_attr);
@@ -182,6 +208,8 @@ static int ixgbe_add_hwmon_attr(struct ixgbe_adapter *adapter,
 
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	sysfs_attr_init(&ixgbe_attr->dev_attr.attr);
 
 	adapter->ixgbe_hwmon_buff->attrs[n_attr] = &ixgbe_attr->dev_attr.attr;
@@ -189,11 +217,15 @@ static int ixgbe_add_hwmon_attr(struct ixgbe_adapter *adapter,
 	++adapter->ixgbe_hwmon_buff->n_hwmon;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void ixgbe_sysfs_del_adapter(struct ixgbe_adapter *adapter)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 
@@ -211,6 +243,8 @@ static void ixgbe_sysfs_del_adapter(struct ixgbe_adapter *adapter)
 		hwmon_device_unregister(adapter->ixgbe_hwmon_buff.device);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 /* called from ixgbe_main.c */
@@ -223,9 +257,15 @@ void ixgbe_sysfs_exit(struct ixgbe_adapter *adapter)
 int ixgbe_sysfs_init(struct ixgbe_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hwmon_buff *ixgbe_hwmon = &adapter->ixgbe_hwmon_buff;
 	unsigned int i;
 	int n_attrs;
+=======
+	struct hwmon_buff *ixgbe_hwmon;
+	struct device *hwmon_dev;
+	unsigned int i;
+>>>>>>> v3.18
 =======
 	struct hwmon_buff *ixgbe_hwmon;
 	struct device *hwmon_dev;
@@ -242,6 +282,7 @@ int ixgbe_sysfs_init(struct ixgbe_adapter *adapter)
 	if (adapter->hw.mac.ops.init_thermal_sensor_thresh(&adapter->hw))
 		goto exit;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Allocation space for max attributs
@@ -261,6 +302,8 @@ int ixgbe_sysfs_init(struct ixgbe_adapter *adapter)
 		goto err;
 	}
 =======
+=======
+>>>>>>> v3.18
 	ixgbe_hwmon = devm_kzalloc(&adapter->pdev->dev, sizeof(*ixgbe_hwmon),
 				   GFP_KERNEL);
 	if (ixgbe_hwmon == NULL) {
@@ -268,6 +311,9 @@ int ixgbe_sysfs_init(struct ixgbe_adapter *adapter)
 		goto exit;
 	}
 	adapter->ixgbe_hwmon_buff = ixgbe_hwmon;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < IXGBE_MAX_SENSORS; i++) {
@@ -281,6 +327,7 @@ int ixgbe_sysfs_init(struct ixgbe_adapter *adapter)
 		/* Bail if any hwmon attr struct fails to initialize */
 		rc = ixgbe_add_hwmon_attr(adapter, i, IXGBE_HWMON_TYPE_CAUTION);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc |= ixgbe_add_hwmon_attr(adapter, i, IXGBE_HWMON_TYPE_LOC);
 		rc |= ixgbe_add_hwmon_attr(adapter, i, IXGBE_HWMON_TYPE_TEMP);
 		rc |= ixgbe_add_hwmon_attr(adapter, i, IXGBE_HWMON_TYPE_MAX);
@@ -293,6 +340,8 @@ int ixgbe_sysfs_init(struct ixgbe_adapter *adapter)
 err:
 	ixgbe_sysfs_del_adapter(adapter);
 =======
+=======
+>>>>>>> v3.18
 		if (rc)
 			goto exit;
 		rc = ixgbe_add_hwmon_attr(adapter, i, IXGBE_HWMON_TYPE_LOC);
@@ -315,6 +364,9 @@ err:
 							   ixgbe_hwmon->groups);
 	if (IS_ERR(hwmon_dev))
 		rc = PTR_ERR(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 exit:
 	return rc;

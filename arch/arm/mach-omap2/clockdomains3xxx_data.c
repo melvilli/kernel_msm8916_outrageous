@@ -248,7 +248,11 @@ static struct clockdomain iva2_clkdm = {
 	.name		= "iva2_clkdm",
 	.pwrdm		= { .name = "iva2_pwrdm" },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= CLKDM_CAN_HWSUP_SWSUP,
+=======
+	.flags		= CLKDM_CAN_SWSUP,
+>>>>>>> v3.18
 =======
 	.flags		= CLKDM_CAN_SWSUP,
 >>>>>>> v3.18

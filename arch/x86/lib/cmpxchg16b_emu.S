@@ -7,6 +7,7 @@
  */
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/alternative-asm.h>
 #include <asm/frame.h>
 #include <asm/dwarf2.h>
@@ -16,6 +17,10 @@
 #else
 #define SEG_PREFIX
 #endif
+=======
+#include <asm/dwarf2.h>
+#include <asm/percpu.h>
+>>>>>>> v3.18
 =======
 #include <asm/dwarf2.h>
 #include <asm/percpu.h>
@@ -45,6 +50,7 @@ CFI_STARTPROC
 # macros).
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 this_cpu_cmpxchg16b_emu:
 	pushf
 	cli
@@ -64,6 +70,8 @@ this_cpu_cmpxchg16b_emu:
  not_same:
 	popf
 =======
+=======
+>>>>>>> v3.18
 	pushfq_cfi
 	cli
 
@@ -83,6 +91,9 @@ this_cpu_cmpxchg16b_emu:
 	CFI_RESTORE_STATE
 .Lnot_same:
 	popfq_cfi
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xor %al,%al
 	ret

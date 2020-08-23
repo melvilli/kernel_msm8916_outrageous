@@ -21,6 +21,10 @@
 #include <linux/bitops.h>
 #include <linux/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <xen/platform_pci.h>
+>>>>>>> v3.18
 =======
 #include <xen/platform_pci.h>
 >>>>>>> v3.18
@@ -56,7 +60,11 @@ struct pcifront_device {
 
 struct pcifront_sd {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_sysdata sd;
+=======
+	int domain;
+>>>>>>> v3.18
 =======
 	int domain;
 >>>>>>> v3.18
@@ -74,9 +82,13 @@ static inline void pcifront_init_sd(struct pcifront_sd *sd,
 				    struct pcifront_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Because we do not expose that information via XenBus. */
 	sd->sd.node = first_online_node;
 	sd->sd.domain = domain;
+=======
+	sd->domain = domain;
+>>>>>>> v3.18
 =======
 	sd->domain = domain;
 >>>>>>> v3.18
@@ -478,8 +490,13 @@ static int pcifront_scan_root(struct pcifront_device *pdev,
 		 domain, bus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bus_entry = kzalloc(sizeof(*bus_entry), GFP_KERNEL);
 	sd = kzalloc(sizeof(*sd), GFP_KERNEL);
+=======
+	bus_entry = kmalloc(sizeof(*bus_entry), GFP_KERNEL);
+	sd = kmalloc(sizeof(*sd), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	bus_entry = kmalloc(sizeof(*bus_entry), GFP_KERNEL);
 	sd = kmalloc(sizeof(*sd), GFP_KERNEL);
@@ -491,6 +508,11 @@ static int pcifront_scan_root(struct pcifront_device *pdev,
 	pcifront_init_sd(sd, domain, bus, pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 
@@ -502,6 +524,10 @@ static int pcifront_scan_root(struct pcifront_device *pdev,
 			"Error creating PCI Frontend Bus!\n");
 		err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pci_unlock_rescan_remove();
+>>>>>>> v3.18
 =======
 		pci_unlock_rescan_remove();
 >>>>>>> v3.18
@@ -523,6 +549,10 @@ static int pcifront_scan_root(struct pcifront_device *pdev,
 	pci_bus_add_devices(b);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_unlock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pci_unlock_rescan_remove();
 >>>>>>> v3.18
@@ -589,6 +619,10 @@ static void pcifront_free_roots(struct pcifront_device *pdev)
 	dev_dbg(&pdev->xdev->dev, "cleaning up root buses\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 >>>>>>> v3.18
@@ -605,6 +639,10 @@ static void pcifront_free_roots(struct pcifront_device *pdev)
 		kfree(bus_entry);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_unlock_rescan_remove();
+>>>>>>> v3.18
 =======
 	pci_unlock_rescan_remove();
 >>>>>>> v3.18
@@ -1084,13 +1122,19 @@ static int pcifront_detach_devices(struct pcifront_device *pdev)
 			continue;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_stop_and_remove_bus_device(pci_dev);
 		pci_dev_put(pci_dev);
 =======
+=======
+>>>>>>> v3.18
 		pci_lock_rescan_remove();
 		pci_stop_and_remove_bus_device(pci_dev);
 		pci_dev_put(pci_dev);
 		pci_unlock_rescan_remove();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		dev_dbg(&pdev->xdev->dev,
@@ -1175,12 +1219,15 @@ static const struct xenbus_device_id xenpci_ids[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_XENBUS_DRIVER(xenpci, "pcifront",
 	.probe			= pcifront_xenbus_probe,
 	.remove			= pcifront_xenbus_remove,
 	.otherend_changed	= pcifront_backend_changed,
 );
 =======
+=======
+>>>>>>> v3.18
 static struct xenbus_driver xenpci_driver = {
 	.name			= "pcifront",
 	.ids			= xenpci_ids,
@@ -1188,6 +1235,9 @@ static struct xenbus_driver xenpci_driver = {
 	.remove			= pcifront_xenbus_remove,
 	.otherend_changed	= pcifront_backend_changed,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __init pcifront_init(void)
@@ -1196,6 +1246,12 @@ static int __init pcifront_init(void)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!xen_has_pv_devices())
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (!xen_has_pv_devices())
 		return -ENODEV;

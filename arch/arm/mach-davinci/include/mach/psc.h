@@ -183,6 +183,7 @@
 #define DA8XX_LPSC1_L3_CBA_RAM		31
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* TNETV107X LPSC Assignments */
 #define TNETV107X_LPSC_ARM			0
 #define TNETV107X_LPSC_GEM			1
@@ -230,6 +231,8 @@
 #define TNETV107X_LPSC_DDR2_EMIF2_VCTL_RST	43
 #define TNETV107X_LPSC_MAX			44
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* PSC register offsets */

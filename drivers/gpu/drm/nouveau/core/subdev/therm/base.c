@@ -93,7 +93,13 @@ nouveau_therm_update(struct nouveau_therm *therm, int mode)
 	struct nouveau_therm_priv *priv = (void *)therm;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int duty;
+=======
+	bool immd = true;
+	bool poll = true;
+	int duty = -1;
+>>>>>>> v3.18
 =======
 	bool immd = true;
 	bool poll = true;
@@ -107,6 +113,7 @@ nouveau_therm_update(struct nouveau_therm *therm, int mode)
 
 	switch (mode) {
 	case NOUVEAU_THERM_CTRL_MANUAL:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		duty = nouveau_therm_fan_get(therm);
 		if (duty < 0)
@@ -131,6 +138,8 @@ done:
 		ptimer->alarm(ptimer, 1000000000ULL, &priv->alarm);
 	spin_unlock_irqrestore(&priv->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 		ptimer->alarm_cancel(ptimer, &priv->alarm);
 		duty = nouveau_therm_fan_get(therm);
 		if (duty < 0)
@@ -180,6 +189,9 @@ nouveau_therm_cstate(struct nouveau_therm *ptherm, int fan, int dir)
 		nouveau_therm_update(ptherm, -1);
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -203,21 +215,31 @@ nouveau_therm_fan_mode(struct nouveau_therm *therm, int mode)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The default PDAEMON ucode interferes with fan management */
 	if ((mode >= ARRAY_SIZE(name)) ||
 	    (mode != NOUVEAU_THERM_CTRL_NONE && device->card_type >= NV_C0))
 =======
+=======
+>>>>>>> v3.18
 	/* The default PPWR ucode on fermi interferes with fan management */
 	if ((mode >= ARRAY_SIZE(name)) ||
 	    (mode != NOUVEAU_THERM_CTRL_NONE && device->card_type >= NV_C0 &&
 	     !nouveau_subdev(device, NVDEV_SUBDEV_PWR)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
 	/* do not allow automatic fan management if the thermal sensor is
 	 * not available */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->mode == 2 && therm->temp_get(therm) < 0)
+=======
+	if (mode == NOUVEAU_THERM_CTRL_AUTO && therm->temp_get(therm) < 0)
+>>>>>>> v3.18
 =======
 	if (mode == NOUVEAU_THERM_CTRL_AUTO && therm->temp_get(therm) < 0)
 >>>>>>> v3.18
@@ -337,10 +359,13 @@ _nouveau_therm_init(struct nouveau_object *object)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->suspend >= 0)
 		nouveau_therm_fan_mode(therm, priv->mode);
 	priv->sensor.program_alarms(therm);
 =======
+=======
+>>>>>>> v3.18
 	if (priv->suspend >= 0) {
 		/* restore the pwm value only when on manual or auto mode */
 		if (priv->suspend > 0)
@@ -350,6 +375,9 @@ _nouveau_therm_init(struct nouveau_object *object)
 	}
 	nouveau_therm_sensor_init(therm);
 	nouveau_therm_fan_init(therm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -361,6 +389,11 @@ _nouveau_therm_fini(struct nouveau_object *object, bool suspend)
 	struct nouveau_therm_priv *priv = (void *)therm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nouveau_therm_fan_fini(therm, suspend);
+	nouveau_therm_sensor_fini(therm, suspend);
+>>>>>>> v3.18
 =======
 	nouveau_therm_fan_fini(therm, suspend);
 	nouveau_therm_sensor_fini(therm, suspend);
@@ -409,7 +442,11 @@ nouveau_therm_preinit(struct nouveau_therm *therm)
 	nouveau_therm_fan_ctor(therm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nouveau_therm_fan_mode(therm, NOUVEAU_THERM_CTRL_NONE);
+=======
+	nouveau_therm_fan_mode(therm, NOUVEAU_THERM_CTRL_AUTO);
+>>>>>>> v3.18
 =======
 	nouveau_therm_fan_mode(therm, NOUVEAU_THERM_CTRL_AUTO);
 >>>>>>> v3.18

@@ -14,6 +14,7 @@
 #include <linux/compiler.h>
 #include <asm/byteorder.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern int test_and_set_bit(unsigned long nr, volatile unsigned long *addr);
 extern int test_and_clear_bit(unsigned long nr, volatile unsigned long *addr);
@@ -28,6 +29,8 @@ extern void change_bit(unsigned long nr, volatile unsigned long *addr);
 #define smp_mb__after_clear_bit()	barrier()
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/barrier.h>
 
 int test_and_set_bit(unsigned long nr, volatile unsigned long *addr);
@@ -39,6 +42,9 @@ void change_bit(unsigned long nr, volatile unsigned long *addr);
 
 #include <asm-generic/bitops/non-atomic.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm-generic/bitops/fls.h>
 #include <asm-generic/bitops/__fls.h>
@@ -47,8 +53,13 @@ void change_bit(unsigned long nr, volatile unsigned long *addr);
 #ifdef __KERNEL__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ffs(int x);
 extern unsigned long __ffs(unsigned long);
+=======
+int ffs(int x);
+unsigned long __ffs(unsigned long);
+>>>>>>> v3.18
 =======
 int ffs(int x);
 unsigned long __ffs(unsigned long);
@@ -63,15 +74,21 @@ unsigned long __ffs(unsigned long);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long __arch_hweight64(__u64 w);
 extern unsigned int __arch_hweight32(unsigned int w);
 extern unsigned int __arch_hweight16(unsigned int w);
 extern unsigned int __arch_hweight8(unsigned int w);
 =======
+=======
+>>>>>>> v3.18
 unsigned long __arch_hweight64(__u64 w);
 unsigned int __arch_hweight32(unsigned int w);
 unsigned int __arch_hweight16(unsigned int w);
 unsigned int __arch_hweight8(unsigned int w);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm-generic/bitops/const_hweight.h>

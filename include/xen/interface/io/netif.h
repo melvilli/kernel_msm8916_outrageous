@@ -39,7 +39,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  /*
  * "feature-split-event-channels" is introduced to separate guest TX
  * and RX notificaion. Backend either doesn't support this feature or
@@ -119,6 +122,9 @@
  * present.
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This is the 'wire' format for packets:
@@ -166,13 +172,19 @@ struct xen_netif_tx_request {
 #define  XEN_NETIF_EXTRA_FLAG_MORE	(1U<<_XEN_NETIF_EXTRA_FLAG_MORE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* GSO types - only TCPv4 currently supported. */
 #define XEN_NETIF_GSO_TYPE_TCPV4	(1)
 =======
+=======
+>>>>>>> v3.18
 /* GSO types */
 #define XEN_NETIF_GSO_TYPE_NONE		(0)
 #define XEN_NETIF_GSO_TYPE_TCPV4	(1)
 #define XEN_NETIF_GSO_TYPE_TCPV6	(2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

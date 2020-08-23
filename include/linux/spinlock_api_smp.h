@@ -132,8 +132,12 @@ static inline void __raw_spin_lock_irq(raw_spinlock_t *lock)
 static inline void __raw_spin_lock_bh(raw_spinlock_t *lock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_bh_disable();
 	preempt_disable();
+=======
+	__local_bh_disable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
+>>>>>>> v3.18
 =======
 	__local_bh_disable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
 >>>>>>> v3.18
@@ -149,7 +153,11 @@ static inline void __raw_spin_lock(raw_spinlock_t *lock)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_PREEMPT */
+=======
+#endif /* !CONFIG_GENERIC_LOCKBREAK || CONFIG_DEBUG_LOCK_ALLOC */
+>>>>>>> v3.18
 =======
 #endif /* !CONFIG_GENERIC_LOCKBREAK || CONFIG_DEBUG_LOCK_ALLOC */
 >>>>>>> v3.18
@@ -183,8 +191,12 @@ static inline void __raw_spin_unlock_bh(raw_spinlock_t *lock)
 	spin_release(&lock->dep_map, 1, _RET_IP_);
 	do_raw_spin_unlock(lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_enable_no_resched();
 	local_bh_enable_ip((unsigned long)__builtin_return_address(0));
+=======
+	__local_bh_enable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
+>>>>>>> v3.18
 =======
 	__local_bh_enable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
 >>>>>>> v3.18
@@ -193,8 +205,12 @@ static inline void __raw_spin_unlock_bh(raw_spinlock_t *lock)
 static inline int __raw_spin_trylock_bh(raw_spinlock_t *lock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local_bh_disable();
 	preempt_disable();
+=======
+	__local_bh_disable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
+>>>>>>> v3.18
 =======
 	__local_bh_disable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
 >>>>>>> v3.18
@@ -203,8 +219,12 @@ static inline int __raw_spin_trylock_bh(raw_spinlock_t *lock)
 		return 1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	preempt_enable_no_resched();
 	local_bh_enable_ip((unsigned long)__builtin_return_address(0));
+=======
+	__local_bh_enable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
+>>>>>>> v3.18
 =======
 	__local_bh_enable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
 >>>>>>> v3.18

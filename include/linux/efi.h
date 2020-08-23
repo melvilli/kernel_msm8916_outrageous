@@ -21,6 +21,10 @@
 #include <linux/pfn.h>
 #include <linux/pstore.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/reboot.h>
+>>>>>>> v3.18
 =======
 #include <linux/reboot.h>
 >>>>>>> v3.18
@@ -96,6 +100,10 @@ typedef	struct {
 #define EFI_MEMORY_WT		((u64)0x0000000000000004ULL)	/* write-through */
 #define EFI_MEMORY_WB		((u64)0x0000000000000008ULL)	/* write-back */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EFI_MEMORY_UCE		((u64)0x0000000000000010ULL)	/* uncached, exported */
+>>>>>>> v3.18
 =======
 #define EFI_MEMORY_UCE		((u64)0x0000000000000010ULL)	/* uncached, exported */
 >>>>>>> v3.18
@@ -162,7 +170,10 @@ typedef struct {
 } efi_time_cap_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef struct {
 	efi_table_hdr_t hdr;
 	u32 raise_tpl;
@@ -259,6 +270,9 @@ typedef struct {
 	u64 create_event_ex;
 } __packed efi_boot_services_64_t;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * EFI Boot Services table
@@ -339,7 +353,10 @@ typedef enum {
 } EFI_PCI_IO_PROTOCOL_ATTRIBUTE_OPERATION;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef struct {
 	u32 read;
 	u32 write;
@@ -349,6 +366,9 @@ typedef struct {
 	u64 read;
 	u64 write;
 } efi_pci_io_protocol_access_64_t;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 typedef struct {
@@ -358,7 +378,10 @@ typedef struct {
 
 typedef struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32 poll_mem;
 	u32 poll_io;
 	efi_pci_io_protocol_access_32_t mem;
@@ -399,6 +422,9 @@ typedef struct {
 } efi_pci_io_protocol_64;
 
 typedef struct {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void *poll_mem;
 	void *poll_io;
@@ -455,6 +481,7 @@ typedef struct {
 typedef struct {
 	efi_table_hdr_t hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long get_time;
 	unsigned long set_time;
 	unsigned long get_wakeup_time;
@@ -470,6 +497,8 @@ typedef struct {
 	unsigned long query_capsule_caps;
 	unsigned long query_variable_info;
 =======
+=======
+>>>>>>> v3.18
 	u32 get_time;
 	u32 set_time;
 	u32 get_wakeup_time;
@@ -520,6 +549,9 @@ typedef struct {
 	void *update_capsule;
 	void *query_capsule_caps;
 	void *query_variable_info;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } efi_runtime_services_t;
 
@@ -536,11 +568,17 @@ typedef efi_status_t efi_set_variable_t (efi_char16_t *name, efi_guid_t *vendor,
 					 u32 attr, unsigned long data_size,
 					 void *data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef efi_status_t
 efi_set_variable_nonblocking_t(efi_char16_t *name, efi_guid_t *vendor,
 			       u32 attr, unsigned long data_size, void *data);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef efi_status_t efi_get_next_high_mono_count_t (u32 *count);
 typedef void efi_reset_system_t (int reset_type, efi_status_t status,
@@ -563,6 +601,11 @@ typedef efi_status_t efi_query_capsule_caps_t(efi_capsule_header_t **capsules,
 typedef efi_status_t efi_query_variable_store_t(u32 attributes, unsigned long size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void efi_native_runtime_setup(void);
+
+>>>>>>> v3.18
 =======
 void efi_native_runtime_setup(void);
 
@@ -622,6 +665,12 @@ void efi_native_runtime_setup(void);
     EFI_GUID(  0x964e5b22, 0x6459, 0x11d2, 0x8e, 0x39, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DEVICE_TREE_GUID \
+    EFI_GUID(  0xb1b621d5, 0xf19c, 0x41a5, 0x83, 0x0b, 0xd9, 0x15, 0x2c, 0x69, 0xaa, 0xe0 )
+
+>>>>>>> v3.18
 =======
 #define DEVICE_TREE_GUID \
     EFI_GUID(  0xb1b621d5, 0xf19c, 0x41a5, 0x83, 0x0b, 0xd9, 0x15, 0x2c, 0x69, 0xaa, 0xe0 )
@@ -727,7 +776,10 @@ struct efi_fdt_params {
 typedef struct {
 	u32 revision;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32 parent_handle;
 	u32 system_table;
 	u32 device_handle;
@@ -760,6 +812,9 @@ typedef struct {
 
 typedef struct {
 	u32 revision;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void *parent_handle;
 	efi_system_table_t *system_table;
@@ -788,7 +843,10 @@ typedef struct {
 } efi_file_info_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef struct {
 	u64 revision;
 	u32 open;
@@ -817,6 +875,9 @@ typedef struct {
 	u64 flush;
 } efi_file_handle_64_t;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef struct _efi_file_handle {
 	u64 revision;
@@ -864,6 +925,12 @@ extern struct efi {
 	unsigned long uga;		/* UGA table */
 	unsigned long uv_systab;	/* UV system table */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long fw_vendor;	/* fw_vendor */
+	unsigned long runtime;		/* runtime table */
+	unsigned long config_table;	/* config tables */
+>>>>>>> v3.18
 =======
 	unsigned long fw_vendor;	/* fw_vendor */
 	unsigned long runtime;		/* runtime table */
@@ -877,6 +944,10 @@ extern struct efi {
 	efi_get_next_variable_t *get_next_variable;
 	efi_set_variable_t *set_variable;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	efi_set_variable_nonblocking_t *set_variable_nonblocking;
+>>>>>>> v3.18
 =======
 	efi_set_variable_nonblocking_t *set_variable_nonblocking;
 >>>>>>> v3.18
@@ -932,8 +1003,12 @@ extern int __init efi_uart_console_only (void);
 extern void efi_initialize_iomem_resources(struct resource *code_resource,
 		struct resource *data_resource, struct resource *bss_resource);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long efi_get_time(void);
 extern int efi_set_rtc_mmss(unsigned long nowtime);
+=======
+extern void efi_get_time(struct timespec *now);
+>>>>>>> v3.18
 =======
 extern void efi_get_time(struct timespec *now);
 >>>>>>> v3.18
@@ -942,6 +1017,12 @@ extern int efi_get_fdt_params(struct efi_fdt_params *params, int verbose);
 extern struct efi_memory_map memmap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int efi_reboot_quirk_mode;
+extern bool efi_poweroff_required(void);
+
+>>>>>>> v3.18
 =======
 extern int efi_reboot_quirk_mode;
 extern bool efi_poweroff_required(void);
@@ -954,7 +1035,10 @@ extern bool efi_poweroff_required(void);
 	     (md) = (void *)(md) + (m)->desc_size)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Format an EFI memory descriptor's type and attributes to a user-provided
  * character buffer, as per snprintf(), and return the buffer.
@@ -962,6 +1046,9 @@ extern bool efi_poweroff_required(void);
 char * __init efi_md_typeattr_format(char *buf, size_t size,
 				     const efi_memory_desc_t *md);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * efi_range_is_wc - check the WC bit on an address range
@@ -999,15 +1086,21 @@ extern int __init efi_setup_pcdp_console(char *);
 #define EFI_MEMMAP		4	/* Can we use EFI memory map? */
 #define EFI_64BIT		5	/* Is the firmware 64-bit? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_EFI
 # ifdef CONFIG_X86
 
 =======
+=======
+>>>>>>> v3.18
 #define EFI_PARAVIRT		6	/* Access is via a paravirt interface */
 #define EFI_ARCH_1		7	/* First arch-specific bit */
 
 #ifdef CONFIG_EFI
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Test whether the above EFI_* bits are enabled.
@@ -1016,6 +1109,7 @@ static inline bool efi_enabled(int feature)
 {
 	return test_bit(feature, &efi.flags) != 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 # else
 static inline bool efi_enabled(int feature)
@@ -1026,12 +1120,20 @@ static inline bool efi_enabled(int feature)
 =======
 extern void efi_reboot(enum reboot_mode reboot_mode, const char *__unused);
 >>>>>>> v3.18
+=======
+extern void efi_reboot(enum reboot_mode reboot_mode, const char *__unused);
+>>>>>>> v3.18
 #else
 static inline bool efi_enabled(int feature)
 {
 	return false;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void
+efi_reboot(enum reboot_mode reboot_mode, const char *__unused) {}
+>>>>>>> v3.18
 =======
 static inline void
 efi_reboot(enum reboot_mode reboot_mode, const char *__unused) {}
@@ -1131,6 +1233,10 @@ struct efivar_operations {
 	efi_get_next_variable_t *get_next_variable;
 	efi_set_variable_t *set_variable;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	efi_set_variable_nonblocking_t *set_variable_nonblocking;
+>>>>>>> v3.18
 =======
 	efi_set_variable_nonblocking_t *set_variable_nonblocking;
 >>>>>>> v3.18
@@ -1141,12 +1247,17 @@ struct efivars {
 	/*
 	 * ->lock protects two things:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * 1) ->list - adds, removals, reads, writes
 	 * 2) ops.[gs]et_variable() calls.
 	 * It must not be held when creating sysfs entries or calling kmalloc.
 	 * ops.get_next_variable() is only called from register_efivars()
 	 * or efivar_update_sysfs_entries(),
 	 * which is protected by the BKL, so that path is safe.
+=======
+	 * 1) efivarfs_list and efivars_sysfs_list
+	 * 2) ->ops calls
+>>>>>>> v3.18
 =======
 	 * 1) efivarfs_list and efivars_sysfs_list
 	 * 2) ->ops calls
@@ -1181,9 +1292,12 @@ struct efivar_entry {
 	struct list_head list;
 	struct kobject kobj;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	bool scanning;
 	bool deleting;
 };
@@ -1199,6 +1313,9 @@ struct efi_simple_text_output_protocol_64 {
 	u64 output_string;
 	u64 test_string;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct efi_simple_text_output_protocol {
@@ -1256,10 +1373,14 @@ struct efivar_entry *efivar_entry_find(efi_char16_t *name, efi_guid_t guid,
 				       struct list_head *head, bool remove);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool efivar_validate(efi_guid_t vendor, efi_char16_t *var_name, u8 *data,
 		     unsigned long data_size);
 bool efivar_variable_is_removable(efi_guid_t vendor, const char *name,
 				  size_t len);
+=======
+bool efivar_validate(efi_char16_t *var_name, u8 *data, unsigned long len);
+>>>>>>> v3.18
 =======
 bool efivar_validate(efi_char16_t *var_name, u8 *data, unsigned long len);
 >>>>>>> v3.18
@@ -1271,9 +1392,12 @@ void efivar_run_worker(void);
 int efivars_sysfs_init(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_EFI_VARS */
 
 =======
+=======
+>>>>>>> v3.18
 #define EFIVARS_DATA_SIZE_MAX 1024
 
 #endif /* CONFIG_EFI_VARS */
@@ -1355,5 +1479,8 @@ efi_status_t handle_cmdline_files(efi_system_table_t *sys_table_arg,
 efi_status_t efi_parse_options(char *cmdline);
 
 bool efi_runtime_disabled(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_EFI_H */

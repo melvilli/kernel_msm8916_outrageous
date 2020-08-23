@@ -23,7 +23,10 @@ config CPU_FREQ_MAPLE
 	  This adds support for frequency switching on Maple 970FX
 	  Evaluation Board and compatible boards (IBM JS2x blades).
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config PPC_CORENET_CPUFREQ
 	tristate "CPU frequency scaling driver for Freescale E500MC SoCs"
@@ -64,4 +67,7 @@ config POWERNV_CPUFREQ
        help
 	 This adds support for CPU frequency switching on IBM POWERNV
 	 platform
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

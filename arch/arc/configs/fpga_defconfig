@@ -1,15 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_CROSS_COMPILE="arc-elf32-"
 # CONFIG_LOCALVERSION_AUTO is not set
 CONFIG_DEFAULT_HOSTNAME="ARCLinux"
 # CONFIG_SWAP is not set
 =======
+=======
+>>>>>>> v3.18
 CONFIG_CROSS_COMPILE="arc-linux-uclibc-"
 # CONFIG_LOCALVERSION_AUTO is not set
 CONFIG_DEFAULT_HOSTNAME="ARCLinux"
 # CONFIG_SWAP is not set
 CONFIG_SYSVIPC=y
 CONFIG_POSIX_MQUEUE=y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 CONFIG_HIGH_RES_TIMERS=y
 CONFIG_IKCONFIG=y
@@ -31,7 +37,10 @@ CONFIG_MODULES=y
 # CONFIG_IOSCHED_CFQ is not set
 CONFIG_ARC_PLAT_FPGA_LEGACY=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_ARC_BOARD_ML509=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_ARC_HAS_RTSC is not set
@@ -51,6 +60,12 @@ CONFIG_INET=y
 # CONFIG_FIRMWARE_IN_KERNEL is not set
 # CONFIG_BLK_DEV is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_NETDEVICES=y
+CONFIG_ARC_EMAC=y
+CONFIG_LXT_PHY=y
+>>>>>>> v3.18
 =======
 CONFIG_NETDEVICES=y
 CONFIG_ARC_EMAC=y
@@ -78,6 +93,10 @@ CONFIG_NFS_FS=y
 # CONFIG_ENABLE_WARN_DEPRECATED is not set
 # CONFIG_ENABLE_MUST_CHECK is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# CONFIG_DEBUG_PREEMPT is not set
+>>>>>>> v3.18
 =======
 # CONFIG_DEBUG_PREEMPT is not set
 >>>>>>> v3.18

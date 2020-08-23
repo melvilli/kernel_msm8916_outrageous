@@ -52,7 +52,11 @@ extern unsigned int vced_count, vcei_count;
  * so don't change it unless you know what you are doing.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TASK_SIZE	0x80000000UL
+=======
+#define TASK_SIZE	0x7fff8000UL
+>>>>>>> v3.18
 =======
 #define TASK_SIZE	0x7fff8000UL
 >>>>>>> v3.18
@@ -102,6 +106,7 @@ extern unsigned int vced_count, vcei_count;
 #define NUM_FPU_REGS	32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef __u64 fpureg_t;
 
 /*
@@ -115,6 +120,8 @@ struct mips_fpu_struct {
 	fpureg_t	fpr[NUM_FPU_REGS];
 	unsigned int	fcr31;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_HAS_MSA
 # define FPU_REG_WIDTH	128
 #else
@@ -157,6 +164,9 @@ struct mips_fpu_struct {
 	union fpureg	fpr[NUM_FPU_REGS];
 	unsigned int	fcr31;
 	unsigned int	msacsr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -187,7 +197,11 @@ union mips_watch_reg_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_CAVIUM_OCTEON
+=======
+#if defined(CONFIG_CPU_CAVIUM_OCTEON)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_CPU_CAVIUM_OCTEON)
 >>>>>>> v3.18
@@ -236,7 +250,12 @@ struct octeon_cop2_state {
 	unsigned long	cop2_gfm_result[2];
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INIT_OCTEON_COP2 {0,}
+=======
+#define COP2_INIT						\
+	.cp2			= {0,},
+>>>>>>> v3.18
 =======
 #define COP2_INIT						\
 	.cp2			= {0,},
@@ -248,7 +267,10 @@ struct octeon_cvmseg_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #elif defined(CONFIG_CPU_XLP)
 struct nlm_cop2_state {
 	u64	rx[4];
@@ -261,6 +283,9 @@ struct nlm_cop2_state {
 	.cp2			= {{0}, {0}, 0, 0},
 #else
 #define COP2_INIT
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -269,8 +294,11 @@ typedef struct {
 } mm_segment_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ARCH_MIN_TASKALIGN	8
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_HAS_MSA
 # define ARCH_MIN_TASKALIGN	16
 # define FPU_ALIGN		__aligned(16)
@@ -278,6 +306,9 @@ typedef struct {
 # define ARCH_MIN_TASKALIGN	8
 # define FPU_ALIGN
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct mips_abi;
@@ -296,7 +327,11 @@ struct thread_struct {
 
 	/* Saved fpu/fpu emulator stuff. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mips_fpu_struct fpu;
+=======
+	struct mips_fpu_struct fpu FPU_ALIGN;
+>>>>>>> v3.18
 =======
 	struct mips_fpu_struct fpu FPU_ALIGN;
 >>>>>>> v3.18
@@ -319,14 +354,20 @@ struct thread_struct {
 	unsigned long error_code;
 #ifdef CONFIG_CPU_CAVIUM_OCTEON
 <<<<<<< HEAD
+<<<<<<< HEAD
     struct octeon_cop2_state cp2 __attribute__ ((__aligned__(128)));
     struct octeon_cvmseg_state cvmseg __attribute__ ((__aligned__(128)));
 =======
+=======
+>>>>>>> v3.18
 	struct octeon_cop2_state cp2 __attribute__ ((__aligned__(128)));
 	struct octeon_cvmseg_state cvmseg __attribute__ ((__aligned__(128)));
 #endif
 #ifdef CONFIG_CPU_XLP
 	struct nlm_cop2_state cp2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	struct mips_abi *abi;
@@ -341,6 +382,7 @@ struct thread_struct {
 #endif /* CONFIG_MIPS_MT_FPAFF */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_CAVIUM_OCTEON
 #define OCTEON_INIT						\
 	.cp2			= INIT_OCTEON_COP2,
@@ -348,6 +390,8 @@ struct thread_struct {
 #define OCTEON_INIT
 #endif /* CONFIG_CPU_CAVIUM_OCTEON */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define INIT_THREAD  {						\
@@ -374,8 +418,14 @@ struct thread_struct {
 	 */							\
 	.fpu			= {				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.fpr		= {0,},				\
 		.fcr31		= 0,				\
+=======
+		.fpr		= {{{0,},},},			\
+		.fcr31		= 0,				\
+		.msacsr		= 0,				\
+>>>>>>> v3.18
 =======
 		.fpr		= {{{0,},},},			\
 		.fcr31		= 0,				\
@@ -405,9 +455,15 @@ struct thread_struct {
 	.error_code		= 0,				\
 	/*							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Cavium Octeon specifics (null if not Octeon)		\
 	 */							\
 	OCTEON_INIT						\
+=======
+	 * Platform specific cop2 registers(null if no COP2)	\
+	 */							\
+	COP2_INIT						\
+>>>>>>> v3.18
 =======
 	 * Platform specific cop2 registers(null if no COP2)	\
 	 */							\
@@ -438,6 +494,10 @@ unsigned long get_wchan(struct task_struct *p);
 
 #define cpu_relax()	barrier()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency() cpu_relax()
 >>>>>>> v3.18
@@ -465,12 +525,15 @@ unsigned long get_wchan(struct task_struct *p);
 #define prefetchw(x) __builtin_prefetch((x), 1, 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * See Documentation/scheduler/sched-arch.txt; prevents deadlock on SMP
  * systems.
  */
 #define __ARCH_WANT_UNLOCKED_CTXSW
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

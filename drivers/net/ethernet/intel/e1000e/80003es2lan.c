@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -27,6 +28,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel PRO/1000 Linux driver
  * Copyright(c) 1999 - 2014 Intel Corporation.
  *
@@ -47,6 +50,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* 80003ES2LAN Gigabit Ethernet Controller (Copper)
@@ -90,7 +96,11 @@ static s32 e1000_init_phy_params_80003es2lan(struct e1000_hw *hw)
 
 	if (hw->phy.media_type != e1000_media_type_copper) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phy->type	= e1000_phy_none;
+=======
+		phy->type = e1000_phy_none;
+>>>>>>> v3.18
 =======
 		phy->type = e1000_phy_none;
 >>>>>>> v3.18
@@ -101,15 +111,21 @@ static s32 e1000_init_phy_params_80003es2lan(struct e1000_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy->addr		= 1;
 	phy->autoneg_mask	= AUTONEG_ADVERTISE_SPEED_DEFAULT;
 	phy->reset_delay_us      = 100;
 	phy->type		= e1000_phy_gg82563;
 =======
+=======
+>>>>>>> v3.18
 	phy->addr = 1;
 	phy->autoneg_mask = AUTONEG_ADVERTISE_SPEED_DEFAULT;
 	phy->reset_delay_us = 100;
 	phy->type = e1000_phy_gg82563;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* This can only be done after all function pointers are setup. */
@@ -133,6 +149,7 @@ static s32 e1000_init_nvm_params_80003es2lan(struct e1000_hw *hw)
 	u16 size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvm->opcode_bits	= 8;
 	nvm->delay_usec	 = 1;
 	switch (nvm->override) {
@@ -147,6 +164,8 @@ static s32 e1000_init_nvm_params_80003es2lan(struct e1000_hw *hw)
 	default:
 		nvm->page_size    = eecd & E1000_EECD_ADDR_BITS ? 32 : 8;
 =======
+=======
+>>>>>>> v3.18
 	nvm->opcode_bits = 8;
 	nvm->delay_usec = 1;
 	switch (nvm->override) {
@@ -160,6 +179,9 @@ static s32 e1000_init_nvm_params_80003es2lan(struct e1000_hw *hw)
 		break;
 	default:
 		nvm->page_size = eecd & E1000_EECD_ADDR_BITS ? 32 : 8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nvm->address_bits = eecd & E1000_EECD_ADDR_BITS ? 16 : 8;
 		break;
@@ -179,7 +201,11 @@ static s32 e1000_init_nvm_params_80003es2lan(struct e1000_hw *hw)
 	if (size > 14)
 		size = 14;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvm->word_size	= 1 << size;
+=======
+	nvm->word_size = 1 << size;
+>>>>>>> v3.18
 =======
 	nvm->word_size = 1 << size;
 >>>>>>> v3.18
@@ -773,14 +799,20 @@ static s32 e1000_reset_hw_80003es2lan(struct e1000_hw *hw)
 
 	/* Disable IBIST slave mode (far-end loopback) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	e1000_read_kmrn_reg_80003es2lan(hw, E1000_KMRNCTRLSTA_INBAND_PARAM,
 					&kum_reg_data);
 =======
+=======
+>>>>>>> v3.18
 	ret_val =
 	    e1000_read_kmrn_reg_80003es2lan(hw, E1000_KMRNCTRLSTA_INBAND_PARAM,
 					    &kum_reg_data);
 	if (ret_val)
 		return ret_val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kum_reg_data |= E1000_KMRNCTRLSTA_IBIST_DISABLE;
 	e1000_write_kmrn_reg_80003es2lan(hw, E1000_KMRNCTRLSTA_INBAND_PARAM,
@@ -922,7 +954,11 @@ static void e1000_initialize_hw_bits_80003es2lan(struct e1000_hw *hw)
 	/* Transmit Arbitration Control 0 */
 	reg = er32(TARC(0));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg &= ~(0xF << 27); /* 30:27 */
+=======
+	reg &= ~(0xF << 27);	/* 30:27 */
+>>>>>>> v3.18
 =======
 	reg &= ~(0xF << 27);	/* 30:27 */
 >>>>>>> v3.18
@@ -1436,6 +1472,10 @@ static const struct e1000_mac_operations es2_mac_ops = {
 	.config_collision_dist	= e1000e_config_collision_dist_generic,
 	.rar_set		= e1000e_rar_set_generic,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.rar_get_count		= e1000e_rar_get_count_generic,
+>>>>>>> v3.18
 =======
 	.rar_get_count		= e1000e_rar_get_count_generic,
 >>>>>>> v3.18

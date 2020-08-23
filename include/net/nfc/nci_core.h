@@ -4,6 +4,10 @@
  *
  *  Copyright (C) 2011 Texas Instruments, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *  Copyright (C) 2013 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2013 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -25,8 +29,12 @@
  *
  *  You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -73,15 +81,21 @@ struct nci_dev;
 
 struct nci_ops {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*open)(struct nci_dev *ndev);
 	int (*close)(struct nci_dev *ndev);
 	int (*send)(struct sk_buff *skb);
 =======
+=======
+>>>>>>> v3.18
 	int   (*open)(struct nci_dev *ndev);
 	int   (*close)(struct nci_dev *ndev);
 	int   (*send)(struct nci_dev *ndev, struct sk_buff *skb);
 	int   (*setup)(struct nci_dev *ndev);
 	__u32 (*get_rfprotocol)(struct nci_dev *ndev, __u8 rf_protocol);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -164,7 +178,10 @@ struct nci_dev {
 struct nci_dev *nci_allocate_device(struct nci_ops *ops,
 				    __u32 supported_protocols,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    __u32 supported_se,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				    int tx_headroom,
@@ -173,7 +190,12 @@ void nci_free_device(struct nci_dev *ndev);
 int nci_register_device(struct nci_dev *ndev);
 void nci_unregister_device(struct nci_dev *ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int nci_recv_frame(struct sk_buff *skb);
+=======
+int nci_recv_frame(struct nci_dev *ndev, struct sk_buff *skb);
+int nci_set_config(struct nci_dev *ndev, __u8 id, size_t len, __u8 *val);
+>>>>>>> v3.18
 =======
 int nci_recv_frame(struct nci_dev *ndev, struct sk_buff *skb);
 int nci_set_config(struct nci_dev *ndev, __u8 id, size_t len, __u8 *val);
@@ -227,7 +249,10 @@ void nci_req_complete(struct nci_dev *ndev, int result);
 int nci_to_errno(__u8 code);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* ----- NCI over SPI acknowledge modes ----- */
 #define NCI_SPI_CRC_DISABLED	0x00
 #define NCI_SPI_CRC_ENABLED	0x01
@@ -254,5 +279,8 @@ int nci_spi_send(struct nci_spi *nspi,
 		 struct sk_buff *skb);
 struct sk_buff *nci_spi_read(struct nci_spi *nspi);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __NCI_CORE_H */

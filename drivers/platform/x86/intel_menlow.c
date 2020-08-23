@@ -37,10 +37,15 @@
 #include <linux/pci.h>
 #include <linux/pm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/thermal.h>
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/thermal.h>
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/thermal.h>
 #include <linux/acpi.h>
@@ -162,8 +167,11 @@ static int intel_menlow_memory_add(struct acpi_device *device)
 {
 	int result = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_status status = AE_OK;
 	acpi_handle dummy;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct thermal_cooling_device *cdev;
@@ -172,6 +180,7 @@ static int intel_menlow_memory_add(struct acpi_device *device)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_get_handle(device->handle, MEMORY_GET_BANDWIDTH, &dummy);
 	if (ACPI_FAILURE(status))
 		goto end;
@@ -179,10 +188,15 @@ static int intel_menlow_memory_add(struct acpi_device *device)
 	status = acpi_get_handle(device->handle, MEMORY_SET_BANDWIDTH, &dummy);
 	if (ACPI_FAILURE(status))
 =======
+=======
+>>>>>>> v3.18
 	if (!acpi_has_method(device->handle, MEMORY_GET_BANDWIDTH))
 		goto end;
 
 	if (!acpi_has_method(device->handle, MEMORY_SET_BANDWIDTH))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto end;
 

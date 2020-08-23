@@ -51,6 +51,7 @@ config MMC_BLOCK_BOUNCE
 	  If unsure, say Y here.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MMC_BLOCK_DEFERRED_RESUME
 	bool "Deferr MMC layer resume until I/O is requested"
 	depends on MMC_BLOCK
@@ -60,6 +61,8 @@ config MMC_BLOCK_DEFERRED_RESUME
 	  is requested. This will reduce overall resume latency and
 	  save power when theres an SD card inserted but not being used.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SDIO_UART
@@ -81,6 +84,7 @@ config MMC_TEST
 	  This driver is only of interest to those developing or
 	  testing a host driver. Most people should say N here.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 config MMC_BLOCK_TEST
 	tristate "MMC block test"
@@ -91,5 +95,7 @@ config MMC_BLOCK_TEST
 	  Currently used to test eMMC 4.5 features (packed commands, sanitize,
 	  BKOPs).
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

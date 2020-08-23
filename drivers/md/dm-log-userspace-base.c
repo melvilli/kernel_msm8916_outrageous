@@ -11,16 +11,22 @@
 #include <linux/dm-log-userspace.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "dm-log-userspace-transfer.h"
 
 #define DM_LOG_USERSPACE_VSN "1.1.0"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/workqueue.h>
 
 #include "dm-log-userspace-transfer.h"
 
 #define DM_LOG_USERSPACE_VSN "1.3.0"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct flush_entry {
@@ -67,7 +73,10 @@ struct log_c {
 	struct list_head mark_list;
 	struct list_head clear_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Workqueue for flush of clear region requests.
@@ -80,6 +89,9 @@ struct log_c {
 	 * Combine userspace flush and mark requests for efficiency.
 	 */
 	uint32_t integrated_flush;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -146,6 +158,12 @@ static int build_constructor_string(struct dm_target *ti,
 	*ctr_str = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/*
+	 * Determine overall size of the string.
+	 */
+>>>>>>> v3.18
 =======
 	/*
 	 * Determine overall size of the string.
@@ -171,7 +189,10 @@ static int build_constructor_string(struct dm_target *ti,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void do_flush(struct work_struct *work)
 {
 	int r;
@@ -185,11 +206,15 @@ static void do_flush(struct work_struct *work)
 		dm_table_event(lc->ti->table);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * userspace_ctr
  *
  * argv contains:
+<<<<<<< HEAD
 <<<<<<< HEAD
  *	<UUID> <other args>
  * Where 'other args' is the userspace implementation specific log
@@ -200,6 +225,8 @@ static void do_flush(struct work_struct *work)
  * when communicating with userspace about a log; but will pass on everything
  * else.
 =======
+=======
+>>>>>>> v3.18
  *	<UUID> [integrated_flush] <other args>
  * Where 'other args' are the userspace implementation-specific log
  * arguments.
@@ -216,6 +243,9 @@ static void do_flush(struct work_struct *work)
  *
  * The rest of the line, beginning with 'clustered-disk', is passed
  * to the userspace ctr function.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static int userspace_ctr(struct dm_dirty_log *log, struct dm_target *ti,
@@ -253,21 +283,30 @@ static int userspace_ctr(struct dm_dirty_log *log, struct dm_target *ti,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(lc->uuid, argv[0], DM_UUID_LEN);
 =======
+=======
+>>>>>>> v3.18
 	lc->usr_argc = argc;
 
 	strncpy(lc->uuid, argv[0], DM_UUID_LEN);
 	argc--;
 	argv++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_init(&lc->flush_lock);
 	INIT_LIST_HEAD(&lc->mark_list);
 	INIT_LIST_HEAD(&lc->clear_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	str_size = build_constructor_string(ti, argc - 1, argv + 1, &ctr_str);
 =======
+=======
+>>>>>>> v3.18
 	if (!strcasecmp(argv[0], "integrated_flush")) {
 		lc->integrated_flush = 1;
 		argc--;
@@ -275,6 +314,9 @@ static int userspace_ctr(struct dm_dirty_log *log, struct dm_target *ti,
 	}
 
 	str_size = build_constructor_string(ti, argc, argv, &ctr_str);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (str_size < 0) {
 		kfree(lc);
@@ -329,7 +371,10 @@ static int userspace_ctr(struct dm_dirty_log *log, struct dm_target *ti,
 			      devices_rdata);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (lc->integrated_flush) {
 		lc->dmlog_wq = alloc_workqueue("dmlogd", WQ_MEM_RECLAIM, 0);
@@ -343,6 +388,9 @@ static int userspace_ctr(struct dm_dirty_log *log, struct dm_target *ti,
 		atomic_set(&lc->sched_flush, 0);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	kfree(devices_rdata);
@@ -352,7 +400,10 @@ out:
 	} else {
 		lc->usr_argv_str = ctr_str;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lc->usr_argc = argc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		log->context = lc;
@@ -366,10 +417,13 @@ static void userspace_dtr(struct dm_dirty_log *log)
 	struct log_c *lc = log->context;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(void) dm_consult_userspace(lc->uuid, lc->luid, DM_ULOG_DTR,
 				 NULL, 0,
 				 NULL, NULL);
 =======
+=======
+>>>>>>> v3.18
 	if (lc->integrated_flush) {
 		/* flush workqueue */
 		if (atomic_read(&lc->sched_flush))
@@ -380,6 +434,9 @@ static void userspace_dtr(struct dm_dirty_log *log)
 
 	(void) dm_consult_userspace(lc->uuid, lc->luid, DM_ULOG_DTR,
 				    NULL, 0, NULL, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (lc->log_dev)
@@ -398,8 +455,12 @@ static int userspace_presuspend(struct dm_dirty_log *log)
 
 	r = dm_consult_userspace(lc->uuid, lc->luid, DM_ULOG_PRESUSPEND,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 NULL, 0,
 				 NULL, NULL);
+=======
+				 NULL, 0, NULL, NULL);
+>>>>>>> v3.18
 =======
 				 NULL, 0, NULL, NULL);
 >>>>>>> v3.18
@@ -413,10 +474,13 @@ static int userspace_postsuspend(struct dm_dirty_log *log)
 	struct log_c *lc = log->context;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = dm_consult_userspace(lc->uuid, lc->luid, DM_ULOG_POSTSUSPEND,
 				 NULL, 0,
 				 NULL, NULL);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Run planned flush earlier.
 	 */
@@ -425,6 +489,9 @@ static int userspace_postsuspend(struct dm_dirty_log *log)
 
 	r = dm_consult_userspace(lc->uuid, lc->luid, DM_ULOG_POSTSUSPEND,
 				 NULL, 0, NULL, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return r;
@@ -438,8 +505,12 @@ static int userspace_resume(struct dm_dirty_log *log)
 	lc->in_sync_hint = 0;
 	r = dm_consult_userspace(lc->uuid, lc->luid, DM_ULOG_RESUME,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 NULL, 0,
 				 NULL, NULL);
+=======
+				 NULL, 0, NULL, NULL);
+>>>>>>> v3.18
 =======
 				 NULL, 0, NULL, NULL);
 >>>>>>> v3.18
@@ -539,7 +610,12 @@ static int flush_one_by_one(struct log_c *lc, struct list_head *flush_list)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int flush_by_group(struct log_c *lc, struct list_head *flush_list)
+=======
+static int flush_by_group(struct log_c *lc, struct list_head *flush_list,
+			  int flush_with_payload)
+>>>>>>> v3.18
 =======
 static int flush_by_group(struct log_c *lc, struct list_head *flush_list,
 			  int flush_with_payload)
@@ -570,6 +646,7 @@ static int flush_by_group(struct log_c *lc, struct list_head *flush_list,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		r = userspace_do_request(lc, lc->uuid, type,
 					 (char *)(group),
 					 count * sizeof(uint64_t),
@@ -580,6 +657,8 @@ static int flush_by_group(struct log_c *lc, struct list_head *flush_list,
 			r = flush_one_by_one(lc, flush_list);
 			break;
 =======
+=======
+>>>>>>> v3.18
 		if (flush_with_payload) {
 			r = userspace_do_request(lc, lc->uuid, DM_ULOG_FLUSH,
 						 (char *)(group),
@@ -603,6 +682,9 @@ static int flush_by_group(struct log_c *lc, struct list_head *flush_list,
 				r = flush_one_by_one(lc, flush_list);
 				break;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -641,6 +723,11 @@ static int userspace_flush(struct dm_dirty_log *log)
 	LIST_HEAD(mark_list);
 	LIST_HEAD(clear_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int mark_list_is_empty;
+	int clear_list_is_empty;
+>>>>>>> v3.18
 =======
 	int mark_list_is_empty;
 	int clear_list_is_empty;
@@ -652,6 +739,7 @@ static int userspace_flush(struct dm_dirty_log *log)
 	list_splice_init(&lc->clear_list, &clear_list);
 	spin_unlock_irqrestore(&lc->flush_lock, flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (list_empty(&mark_list) && list_empty(&clear_list))
 		return 0;
@@ -671,6 +759,8 @@ fail:
 	/*
 	 * We can safely remove these entries, even if failure.
 =======
+=======
+>>>>>>> v3.18
 	mark_list_is_empty = list_empty(&mark_list);
 	clear_list_is_empty = list_empty(&clear_list);
 
@@ -716,6 +806,9 @@ fail:
 out:
 	/*
 	 * We can safely remove these entries, even after failure.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Calling code will receive an error and will know that
 	 * the log facility has failed.
@@ -821,8 +914,12 @@ static int userspace_get_resync_work(struct dm_dirty_log *log, region_t *region)
 	rdata_size = sizeof(pkg);
 	r = userspace_do_request(lc, lc->uuid, DM_ULOG_GET_RESYNC_WORK,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 NULL, 0,
 				 (char *)&pkg, &rdata_size);
+=======
+				 NULL, 0, (char *)&pkg, &rdata_size);
+>>>>>>> v3.18
 =======
 				 NULL, 0, (char *)&pkg, &rdata_size);
 >>>>>>> v3.18
@@ -852,8 +949,12 @@ static void userspace_set_region_sync(struct dm_dirty_log *log,
 
 	r = userspace_do_request(lc, lc->uuid, DM_ULOG_SET_REGION_SYNC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 (char *)&pkg, sizeof(pkg),
 				 NULL, NULL);
+=======
+				 (char *)&pkg, sizeof(pkg), NULL, NULL);
+>>>>>>> v3.18
 =======
 				 (char *)&pkg, sizeof(pkg), NULL, NULL);
 >>>>>>> v3.18
@@ -883,8 +984,12 @@ static region_t userspace_get_sync_count(struct dm_dirty_log *log)
 	rdata_size = sizeof(sync_count);
 	r = userspace_do_request(lc, lc->uuid, DM_ULOG_GET_SYNC_COUNT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 NULL, 0,
 				 (char *)&sync_count, &rdata_size);
+=======
+				 NULL, 0, (char *)&sync_count, &rdata_size);
+>>>>>>> v3.18
 =======
 				 NULL, 0, (char *)&sync_count, &rdata_size);
 >>>>>>> v3.18
@@ -915,8 +1020,12 @@ static int userspace_status(struct dm_dirty_log *log, status_type_t status_type,
 	case STATUSTYPE_INFO:
 		r = userspace_do_request(lc, lc->uuid, DM_ULOG_STATUS_INFO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 NULL, 0,
 					 result, &sz);
+=======
+					 NULL, 0, result, &sz);
+>>>>>>> v3.18
 =======
 					 NULL, 0, result, &sz);
 >>>>>>> v3.18
@@ -933,13 +1042,19 @@ static int userspace_status(struct dm_dirty_log *log, status_type_t status_type,
 		table_args++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMEMIT("%s %u %s %s ", log->type->name, lc->usr_argc,
 		       lc->uuid, table_args);
 =======
+=======
+>>>>>>> v3.18
 		DMEMIT("%s %u %s ", log->type->name, lc->usr_argc, lc->uuid);
 		if (lc->integrated_flush)
 			DMEMIT("integrated_flush ");
 		DMEMIT("%s ", table_args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}

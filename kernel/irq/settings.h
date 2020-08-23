@@ -15,6 +15,10 @@ enum {
 	_IRQ_NESTED_THREAD	= IRQ_NESTED_THREAD,
 	_IRQ_PER_CPU_DEVID	= IRQ_PER_CPU_DEVID,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	_IRQ_IS_POLLED		= IRQ_IS_POLLED,
+>>>>>>> v3.18
 =======
 	_IRQ_IS_POLLED		= IRQ_IS_POLLED,
 >>>>>>> v3.18
@@ -31,6 +35,10 @@ enum {
 #define IRQ_NESTED_THREAD	GOT_YOU_MORON
 #define IRQ_PER_CPU_DEVID	GOT_YOU_MORON
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IRQ_IS_POLLED		GOT_YOU_MORON
+>>>>>>> v3.18
 =======
 #define IRQ_IS_POLLED		GOT_YOU_MORON
 >>>>>>> v3.18
@@ -156,10 +164,16 @@ static inline bool irq_settings_is_nested_thread(struct irq_desc *desc)
 	return desc->status_use_accessors & _IRQ_NESTED_THREAD;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline bool irq_settings_is_polled(struct irq_desc *desc)
 {
 	return desc->status_use_accessors & _IRQ_IS_POLLED;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -337,7 +337,11 @@ static void __init pmac_setup_arch(void)
 
 #ifdef CONFIG_ADB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strstr(cmd_line, "adb_sync")) {
+=======
+	if (strstr(boot_command_line, "adb_sync")) {
+>>>>>>> v3.18
 =======
 	if (strstr(boot_command_line, "adb_sync")) {
 >>>>>>> v3.18
@@ -465,7 +469,11 @@ static void __init pmac_init_early(void)
 {
 	/* Enable early btext debug if requested */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strstr(cmd_line, "btextdbg")) {
+=======
+	if (strstr(boot_command_line, "btextdbg")) {
+>>>>>>> v3.18
 =======
 	if (strstr(boot_command_line, "btextdbg")) {
 >>>>>>> v3.18
@@ -478,8 +486,13 @@ static void __init pmac_init_early(void)
 
 	/* Initialize debug stuff */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	udbg_scc_init(!!strstr(cmd_line, "sccdbg"));
 	udbg_adb_init(!!strstr(cmd_line, "btextdbg"));
+=======
+	udbg_scc_init(!!strstr(boot_command_line, "sccdbg"));
+	udbg_adb_init(!!strstr(boot_command_line, "btextdbg"));
+>>>>>>> v3.18
 =======
 	udbg_scc_init(!!strstr(boot_command_line, "sccdbg"));
 	udbg_adb_init(!!strstr(boot_command_line, "btextdbg"));

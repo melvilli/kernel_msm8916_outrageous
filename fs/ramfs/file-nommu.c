@@ -28,6 +28,7 @@
 
 static int ramfs_nommu_setattr(struct dentry *, struct iattr *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 const struct address_space_operations ramfs_aops = {
 	.readpage		= simple_readpage,
@@ -36,17 +37,23 @@ const struct address_space_operations ramfs_aops = {
 	.set_page_dirty		= __set_page_dirty_no_writeback,
 };
 =======
+=======
+>>>>>>> v3.18
 static unsigned long ramfs_nommu_get_unmapped_area(struct file *file,
 						   unsigned long addr,
 						   unsigned long len,
 						   unsigned long pgoff,
 						   unsigned long flags);
 static int ramfs_nommu_mmap(struct file *file, struct vm_area_struct *vma);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 const struct file_operations ramfs_file_operations = {
 	.mmap			= ramfs_nommu_mmap,
 	.get_unmapped_area	= ramfs_nommu_get_unmapped_area,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.read			= do_sync_read,
 	.aio_read		= generic_file_aio_read,
@@ -56,6 +63,8 @@ const struct file_operations ramfs_file_operations = {
 	.splice_read		= generic_file_splice_read,
 	.splice_write		= generic_file_splice_write,
 =======
+=======
+>>>>>>> v3.18
 	.read			= new_sync_read,
 	.read_iter		= generic_file_read_iter,
 	.write			= new_sync_write,
@@ -63,6 +72,9 @@ const struct file_operations ramfs_file_operations = {
 	.fsync			= noop_fsync,
 	.splice_read		= generic_file_splice_read,
 	.splice_write		= iter_file_splice_write,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.llseek			= generic_file_llseek,
 };
@@ -217,7 +229,11 @@ static int ramfs_nommu_setattr(struct dentry *dentry, struct iattr *ia)
  *   - the pages be physically contiguous in sequence
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long ramfs_nommu_get_unmapped_area(struct file *file,
+=======
+static unsigned long ramfs_nommu_get_unmapped_area(struct file *file,
+>>>>>>> v3.18
 =======
 static unsigned long ramfs_nommu_get_unmapped_area(struct file *file,
 >>>>>>> v3.18
@@ -247,7 +263,11 @@ static unsigned long ramfs_nommu_get_unmapped_area(struct file *file,
 	/* gang-find the pages */
 	ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pages = kzalloc(lpages * sizeof(struct page *), GFP_KERNEL);
+=======
+	pages = kcalloc(lpages, sizeof(struct page *), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	pages = kcalloc(lpages, sizeof(struct page *), GFP_KERNEL);
 >>>>>>> v3.18
@@ -284,7 +304,11 @@ out:
  * set up a mapping for shared memory segments
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ramfs_nommu_mmap(struct file *file, struct vm_area_struct *vma)
+=======
+static int ramfs_nommu_mmap(struct file *file, struct vm_area_struct *vma)
+>>>>>>> v3.18
 =======
 static int ramfs_nommu_mmap(struct file *file, struct vm_area_struct *vma)
 >>>>>>> v3.18

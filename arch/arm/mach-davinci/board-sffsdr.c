@@ -27,7 +27,11 @@
 #include <linux/platform_device.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 >>>>>>> v3.18
@@ -130,10 +134,13 @@ static struct platform_device *davinci_sffsdr_devices[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct davinci_uart_config uart_config __initdata = {
 	.enabled_uarts = (1 << 0),
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void __init davinci_sffsdr_map_io(void)
@@ -149,7 +156,11 @@ static __init void davinci_sffsdr_init(void)
 			     ARRAY_SIZE(davinci_sffsdr_devices));
 	sffsdr_init_i2c();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	davinci_serial_init(&uart_config);
+=======
+	davinci_serial_init(dm644x_serial_device);
+>>>>>>> v3.18
 =======
 	davinci_serial_init(dm644x_serial_device);
 >>>>>>> v3.18
@@ -163,7 +174,10 @@ static __init void davinci_sffsdr_init(void)
 
 MACHINE_START(SFFSDR, "Lyrtech SFFSDR")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Maintainer: Hugo Villeneuve hugo.villeneuve@lyrtech.com */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.atag_offset  = 0x100,

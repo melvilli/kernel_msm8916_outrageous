@@ -35,12 +35,18 @@
 #include "musb_core.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const char *iep_chan_names[] = { "iep_1_9", "iep_2_10", "iep_3_11", "iep_4_12",
 					"iep_5_13", "iep_6_14", "iep_7_15", "iep_8" };
 static const char *oep_chan_names[] = { "oep_1_9", "oep_2_10", "oep_3_11", "oep_4_12",
 					"oep_5_13", "oep_6_14", "oep_7_15", "oep_8" };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ux500_dma_channel {
 	struct dma_channel channel;
@@ -57,10 +63,15 @@ struct ux500_dma_channel {
 struct ux500_dma_controller {
 	struct dma_controller controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ux500_dma_channel rx_channel[UX500_MUSB_DMA_NUM_RX_CHANNELS];
 	struct ux500_dma_channel tx_channel[UX500_MUSB_DMA_NUM_TX_CHANNELS];
 	u32	num_rx_channels;
 	u32	num_tx_channels;
+=======
+	struct ux500_dma_channel rx_channel[UX500_MUSB_DMA_NUM_RX_TX_CHANNELS];
+	struct ux500_dma_channel tx_channel[UX500_MUSB_DMA_NUM_RX_TX_CHANNELS];
+>>>>>>> v3.18
 =======
 	struct ux500_dma_channel rx_channel[UX500_MUSB_DMA_NUM_RX_TX_CHANNELS];
 	struct ux500_dma_channel tx_channel[UX500_MUSB_DMA_NUM_RX_TX_CHANNELS];
@@ -85,8 +96,12 @@ static void ux500_dma_callback(void *private_data)
 	ux500_channel->channel.actual_len = ux500_channel->cur_len;
 	ux500_channel->channel.status = MUSB_DMA_STATUS_FREE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	musb_dma_completion(musb, hw_ep->epnum,
 		ux500_channel->is_tx);
+=======
+	musb_dma_completion(musb, hw_ep->epnum, ux500_channel->is_tx);
+>>>>>>> v3.18
 =======
 	musb_dma_completion(musb, hw_ep->epnum, ux500_channel->is_tx);
 >>>>>>> v3.18
@@ -112,7 +127,11 @@ static bool ux500_configure_channel(struct dma_channel *channel,
 
 	dev_dbg(musb->controller,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"packet_sz=%d, mode=%d, dma_addr=0x%llu, len=%d is_tx=%d\n",
+=======
+		"packet_sz=%d, mode=%d, dma_addr=0x%llx, len=%d is_tx=%d\n",
+>>>>>>> v3.18
 =======
 		"packet_sz=%d, mode=%d, dma_addr=0x%llx, len=%d is_tx=%d\n",
 >>>>>>> v3.18
@@ -166,9 +185,14 @@ static struct dma_channel *ux500_dma_channel_allocate(struct dma_controller *c,
 	struct musb *musb = controller->private_data;
 	u8 ch_num = hw_ep->epnum - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 max_ch;
 
 	/* Max 8 DMA channels (0 - 7). Each DMA channel can only be allocated
+=======
+
+	/* 8 DMA channels (0 - 7). Each DMA channel can only be allocated
+>>>>>>> v3.18
 =======
 
 	/* 8 DMA channels (0 - 7). Each DMA channel can only be allocated
@@ -180,10 +204,14 @@ static struct dma_channel *ux500_dma_channel_allocate(struct dma_controller *c,
 		ch_num -= 8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max_ch = is_tx ? controller->num_tx_channels :
 			controller->num_rx_channels;
 
 	if (ch_num >= max_ch)
+=======
+	if (ch_num >= UX500_MUSB_DMA_NUM_RX_TX_CHANNELS)
+>>>>>>> v3.18
 =======
 	if (ch_num >= UX500_MUSB_DMA_NUM_RX_TX_CHANNELS)
 >>>>>>> v3.18
@@ -287,10 +315,15 @@ static int ux500_dma_channel_abort(struct dma_channel *channel)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ux500_dma_controller_stop(struct dma_controller *c)
 {
 	struct ux500_dma_controller *controller = container_of(c,
 			struct ux500_dma_controller, controller);
+=======
+static void ux500_dma_controller_stop(struct ux500_dma_controller *controller)
+{
+>>>>>>> v3.18
 =======
 static void ux500_dma_controller_stop(struct ux500_dma_controller *controller)
 {
@@ -300,7 +333,11 @@ static void ux500_dma_controller_stop(struct ux500_dma_controller *controller)
 	u8 ch_num;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (ch_num = 0; ch_num < controller->num_rx_channels; ch_num++) {
+=======
+	for (ch_num = 0; ch_num < UX500_MUSB_DMA_NUM_RX_TX_CHANNELS; ch_num++) {
+>>>>>>> v3.18
 =======
 	for (ch_num = 0; ch_num < UX500_MUSB_DMA_NUM_RX_TX_CHANNELS; ch_num++) {
 >>>>>>> v3.18
@@ -314,7 +351,11 @@ static void ux500_dma_controller_stop(struct ux500_dma_controller *controller)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (ch_num = 0; ch_num < controller->num_tx_channels; ch_num++) {
+=======
+	for (ch_num = 0; ch_num < UX500_MUSB_DMA_NUM_RX_TX_CHANNELS; ch_num++) {
+>>>>>>> v3.18
 =======
 	for (ch_num = 0; ch_num < UX500_MUSB_DMA_NUM_RX_TX_CHANNELS; ch_num++) {
 >>>>>>> v3.18
@@ -326,6 +367,7 @@ static void ux500_dma_controller_stop(struct ux500_dma_controller *controller)
 		if (ux500_channel->dma_chan)
 			dma_release_channel(ux500_channel->dma_chan);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	return 0;
@@ -342,6 +384,8 @@ static int ux500_dma_controller_start(struct dma_controller *c)
 	struct ux500_musb_board_data *data = plat->board_data;
 	struct dma_channel *dma_channel = NULL;
 =======
+=======
+>>>>>>> v3.18
 }
 
 static int ux500_dma_controller_start(struct ux500_dma_controller *controller)
@@ -353,6 +397,9 @@ static int ux500_dma_controller_start(struct ux500_dma_controller *controller)
 	struct ux500_musb_board_data *data;
 	struct dma_channel *dma_channel = NULL;
 	char **chan_names;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 ch_num;
 	u8 dir;
@@ -360,6 +407,7 @@ static int ux500_dma_controller_start(struct ux500_dma_controller *controller)
 
 	void **param_array;
 	struct ux500_dma_channel *channel_array;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 ch_count;
 	dma_cap_mask_t mask;
@@ -371,6 +419,8 @@ static int ux500_dma_controller_start(struct ux500_dma_controller *controller)
 	controller->num_rx_channels = data->num_rx_channels;
 	controller->num_tx_channels = data->num_tx_channels;
 =======
+=======
+>>>>>>> v3.18
 	dma_cap_mask_t mask;
 
 	if (!plat) {
@@ -379,6 +429,9 @@ static int ux500_dma_controller_start(struct ux500_dma_controller *controller)
 	}
 
 	data = plat->board_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dma_cap_zero(mask);
@@ -387,12 +440,15 @@ static int ux500_dma_controller_start(struct ux500_dma_controller *controller)
 	/* Prepare the loop for RX channels */
 	channel_array = controller->rx_channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ch_count = data->num_rx_channels;
 	param_array = data->dma_rx_param_array;
 
 	for (dir = 0; dir < 2; dir++) {
 		for (ch_num = 0; ch_num < ch_count; ch_num++) {
 =======
+=======
+>>>>>>> v3.18
 	param_array = data ? data->dma_rx_param_array : NULL;
 	chan_names = (char **)iep_chan_names;
 
@@ -400,6 +456,9 @@ static int ux500_dma_controller_start(struct ux500_dma_controller *controller)
 		for (ch_num = 0;
 		     ch_num < UX500_MUSB_DMA_NUM_RX_TX_CHANNELS;
 		     ch_num++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ux500_channel = &channel_array[ch_num];
 			ux500_channel->controller = controller;
@@ -412,10 +471,13 @@ static int ux500_dma_controller_start(struct ux500_dma_controller *controller)
 			dma_channel->max_len = SZ_16M;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ux500_channel->dma_chan = dma_request_channel(mask,
 							data->dma_filter,
 							param_array[ch_num]);
 =======
+=======
+>>>>>>> v3.18
 			ux500_channel->dma_chan =
 				dma_request_slave_channel(dev, chan_names[ch_num]);
 
@@ -429,6 +491,9 @@ static int ux500_dma_controller_start(struct ux500_dma_controller *controller)
 							    param_array[ch_num] :
 							    NULL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (!ux500_channel->dma_chan) {
 				ERR("Dma pipe allocation error dir=%d ch=%d\n",
@@ -436,7 +501,11 @@ static int ux500_dma_controller_start(struct ux500_dma_controller *controller)
 
 				/* Release already allocated channels */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ux500_dma_controller_stop(c);
+=======
+				ux500_dma_controller_stop(controller);
+>>>>>>> v3.18
 =======
 				ux500_dma_controller_stop(controller);
 >>>>>>> v3.18
@@ -449,8 +518,13 @@ static int ux500_dma_controller_start(struct ux500_dma_controller *controller)
 		/* Prepare the loop for TX channels */
 		channel_array = controller->tx_channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ch_count = data->num_tx_channels;
 		param_array = data->dma_tx_param_array;
+=======
+		param_array = data ? data->dma_tx_param_array : NULL;
+		chan_names = (char **)oep_chan_names;
+>>>>>>> v3.18
 =======
 		param_array = data ? data->dma_tx_param_array : NULL;
 		chan_names = (char **)oep_chan_names;
@@ -467,23 +541,33 @@ void dma_controller_destroy(struct dma_controller *c)
 			struct ux500_dma_controller, controller);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(controller);
 }
 
 struct dma_controller *dma_controller_create(struct musb *musb, void __iomem *base)
 =======
+=======
+>>>>>>> v3.18
 	ux500_dma_controller_stop(controller);
 	kfree(controller);
 }
 
 struct dma_controller *dma_controller_create(struct musb *musb,
 					void __iomem *base)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ux500_dma_controller *controller;
 	struct platform_device *pdev = to_platform_device(musb->controller);
 	struct resource	*iomem;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -504,8 +588,11 @@ struct dma_controller *dma_controller_create(struct musb *musb,
 	controller->phy_base = (dma_addr_t) iomem->start;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	controller->controller.start = ux500_dma_controller_start;
 	controller->controller.stop = ux500_dma_controller_stop;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	controller->controller.channel_alloc = ux500_dma_channel_allocate;
@@ -515,6 +602,12 @@ struct dma_controller *dma_controller_create(struct musb *musb,
 	controller->controller.is_compatible = ux500_dma_is_compatible;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ret = ux500_dma_controller_start(controller);
+	if (ret)
+		goto plat_get_fail;
+>>>>>>> v3.18
 =======
 	ret = ux500_dma_controller_start(controller);
 	if (ret)

@@ -2,6 +2,11 @@
  * Freescale MPC85xx Memory Controller kenel module
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Parts Copyrighted (c) 2013 by Freescale Semiconductor, Inc.
+ *
+>>>>>>> v3.18
 =======
  * Parts Copyrighted (c) 2013 by Freescale Semiconductor, Inc.
  *
@@ -202,7 +207,10 @@ static void mpc85xx_pci_check(struct edac_pci_ctl_info *pci)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void mpc85xx_pcie_check(struct edac_pci_ctl_info *pci)
 {
 	struct mpc85xx_pci_pdata *pdata = pci->pvt_info;
@@ -239,6 +247,9 @@ static int mpc85xx_pcie_find_capability(struct device_node *np)
 	return early_find_capability(hose, 0, 0, PCI_CAP_ID_EXP);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static irqreturn_t mpc85xx_pci_isr(int irq, void *dev_id)
 {
@@ -252,12 +263,18 @@ static irqreturn_t mpc85xx_pci_isr(int irq, void *dev_id)
 		return IRQ_NONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mpc85xx_pci_check(pci);
 =======
+=======
+>>>>>>> v3.18
 	if (pdata->is_pcie)
 		mpc85xx_pcie_check(pci);
 	else
 		mpc85xx_pci_check(pci);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return IRQ_HANDLED;
@@ -291,11 +308,17 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 	pdata->name = "mpc85xx_pci_err";
 	pdata->irq = NO_IRQ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (mpc85xx_pcie_find_capability(op->dev.of_node) > 0)
 		pdata->is_pcie = true;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_set_drvdata(&op->dev, pci);
 	pci->dev = &op->dev;
@@ -304,15 +327,21 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 	pci->dev_name = dev_name(&op->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (edac_op_state == EDAC_OPSTATE_POLL)
 		pci->edac_check = mpc85xx_pci_check;
 =======
+=======
+>>>>>>> v3.18
 	if (edac_op_state == EDAC_OPSTATE_POLL) {
 		if (pdata->is_pcie)
 			pci->edac_check = mpc85xx_pcie_check;
 		else
 			pci->edac_check = mpc85xx_pci_check;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pdata->edac_idx = edac_pci_idx++;
@@ -343,6 +372,7 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	orig_pci_err_cap_dr =
 	    in_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_CAP_DR);
 
@@ -354,6 +384,8 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 	/* disable master abort reporting */
 	out_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_EN, ~0x40);
 =======
+=======
+>>>>>>> v3.18
 	if (pdata->is_pcie) {
 		orig_pci_err_cap_dr =
 		    in_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_ADDR);
@@ -374,6 +406,9 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 		/* disable master abort reporting */
 		out_be32(pdata->pci_vbase + MPC85XX_PCI_ERR_EN, ~0x40);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* clear error bits */
@@ -388,7 +423,12 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 		pdata->irq = irq_of_parse_and_map(op->dev.of_node, 0);
 		res = devm_request_irq(&op->dev, pdata->irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       mpc85xx_pci_isr, IRQF_DISABLED,
+=======
+				       mpc85xx_pci_isr,
+				       IRQF_SHARED,
+>>>>>>> v3.18
 =======
 				       mpc85xx_pci_isr,
 				       IRQF_SHARED,
@@ -408,7 +448,10 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pdata->is_pcie) {
 		/*
 		 * Enable all PCIe error interrupt & error detect except invalid
@@ -425,6 +468,9 @@ int mpc85xx_pci_err_probe(struct platform_device *op)
 			 | PEX_ERR_ICCAD_DISR_BIT);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	devres_remove_group(&op->dev, mpc85xx_pci_err_probe);
 	edac_dbg(3, "success\n");
@@ -441,6 +487,7 @@ err:
 }
 EXPORT_SYMBOL(mpc85xx_pci_err_probe);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int mpc85xx_pci_err_remove(struct platform_device *op)
 {
@@ -464,6 +511,8 @@ static int mpc85xx_pci_err_remove(struct platform_device *op)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif				/* CONFIG_PCI */
@@ -697,7 +746,11 @@ static int mpc85xx_l2_err_probe(struct platform_device *op)
 		pdata->irq = irq_of_parse_and_map(op->dev.of_node, 0);
 		res = devm_request_irq(&op->dev, pdata->irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       mpc85xx_l2_isr, IRQF_DISABLED,
+=======
+				       mpc85xx_l2_isr, IRQF_SHARED,
+>>>>>>> v3.18
 =======
 				       mpc85xx_l2_isr, IRQF_SHARED,
 >>>>>>> v3.18
@@ -1201,7 +1254,11 @@ static int mpc85xx_mc_err_probe(struct platform_device *op)
 		res = devm_request_irq(&op->dev, pdata->irq,
 				       mpc85xx_mc_isr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IRQF_DISABLED | IRQF_SHARED,
+=======
+				       IRQF_SHARED,
+>>>>>>> v3.18
 =======
 				       IRQF_SHARED,
 >>>>>>> v3.18

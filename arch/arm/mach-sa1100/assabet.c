@@ -76,6 +76,7 @@ void ASSABET_BCR_frob(unsigned int mask, unsigned int val)
 EXPORT_SYMBOL(ASSABET_BCR_frob);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void assabet_ucb1x00_reset(enum ucb1x00_reset state)
 {
 	if (state == UCB_RST_PROBE)
@@ -83,6 +84,8 @@ static void assabet_ucb1x00_reset(enum ucb1x00_reset state)
 }
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * The codec reset goes to three devices, so we need to release
  * the rest when any one of these requests it.  However, that
@@ -220,6 +223,9 @@ void assabet_uda1341_reset(int set)
 }
 EXPORT_SYMBOL(assabet_uda1341_reset);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -296,12 +302,18 @@ static int assabet_irda_set_power(struct device *dev, unsigned int state)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state < 4) {
 		state = bcr_state[state];
 		ASSABET_BCR_clear(state ^ (ASSABET_BCR_IRDA_MD1|
 					   ASSABET_BCR_IRDA_MD0));
 		ASSABET_BCR_set(state);
 	}
+=======
+	if (state < 4)
+		ASSABET_BCR_frob(ASSABET_BCR_IRDA_MD1 | ASSABET_BCR_IRDA_MD0,
+				 bcr_state[state]);
+>>>>>>> v3.18
 =======
 	if (state < 4)
 		ASSABET_BCR_frob(ASSABET_BCR_IRDA_MD1 | ASSABET_BCR_IRDA_MD0,
@@ -327,6 +339,10 @@ static struct ucb1x00_plat_data assabet_ucb1x00_data = {
 	.reset		= assabet_ucb1x00_reset,
 	.gpio_base	= -1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.can_wakeup	= 1,
+>>>>>>> v3.18
 =======
 	.can_wakeup	= 1,
 >>>>>>> v3.18
@@ -553,7 +569,11 @@ static void __init get_assabet_scr(void)
 
 static void __init
 <<<<<<< HEAD
+<<<<<<< HEAD
 fixup_assabet(struct tag *tags, char **cmdline, struct meminfo *mi)
+=======
+fixup_assabet(struct tag *tags, char **cmdline)
+>>>>>>> v3.18
 =======
 fixup_assabet(struct tag *tags, char **cmdline)
 >>>>>>> v3.18

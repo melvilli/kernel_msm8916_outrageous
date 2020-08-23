@@ -56,7 +56,10 @@ struct ipoctal {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct ipoctal *chan_to_ipoctal(struct ipoctal_channel *chan,
 					      unsigned int index)
 {
@@ -73,6 +76,9 @@ static void ipoctal_reset_channel(struct ipoctal_channel *channel)
 	iowrite8(CR_CMD_RESET_MR, &channel->regs->w.cr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ipoctal_port_activate(struct tty_port *port, struct tty_struct *tty)
 {
@@ -92,6 +98,7 @@ static int ipoctal_port_activate(struct tty_port *port, struct tty_struct *tty)
 static int ipoctal_open(struct tty_struct *tty, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ipoctal_channel *channel;
 
 	channel = dev_get_drvdata(tty->dev);
@@ -99,6 +106,8 @@ static int ipoctal_open(struct tty_struct *tty, struct file *file)
 
 	return tty_port_open(&channel->tty_port, tty, file);
 =======
+=======
+>>>>>>> v3.18
 	struct ipoctal_channel *channel = dev_get_drvdata(tty->dev);
 	struct ipoctal *ipoctal = chan_to_ipoctal(channel, tty->index);
 	int err;
@@ -113,6 +122,9 @@ static int ipoctal_open(struct tty_struct *tty, struct file *file)
 		ipack_put_carrier(ipoctal->dev);
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -188,7 +200,10 @@ static void ipoctal_irq_rx(struct ipoctal_channel *channel, u8 sr)
 			}
 			if (sr & SR_RECEIVED_BREAK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				iowrite8(CR_CMD_RESET_BREAK_CHANGE, &channel->regs->w.cr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				channel->stats.rcv_break++;
@@ -217,6 +232,10 @@ static void ipoctal_irq_tx(struct ipoctal_channel *channel)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock(&channel->lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&channel->lock);
 >>>>>>> v3.18
@@ -227,6 +246,10 @@ static void ipoctal_irq_tx(struct ipoctal_channel *channel)
 	*pointer_write = *pointer_write % PAGE_SIZE;
 	channel->nb_bytes--;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock(&channel->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&channel->lock);
 >>>>>>> v3.18
@@ -237,7 +260,10 @@ static void ipoctal_irq_channel(struct ipoctal_channel *channel)
 	u8 isr, sr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&channel->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* The HW is organized in pair of channels.  See which register we need
@@ -246,6 +272,12 @@ static void ipoctal_irq_channel(struct ipoctal_channel *channel)
 	sr = ioread8(&channel->regs->r.sr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (isr & (IMR_DELTA_BREAK_A | IMR_DELTA_BREAK_B))
+		iowrite8(CR_CMD_RESET_BREAK_CHANGE, &channel->regs->w.cr);
+
+>>>>>>> v3.18
 =======
 	if (isr & (IMR_DELTA_BREAK_A | IMR_DELTA_BREAK_B))
 		iowrite8(CR_CMD_RESET_BREAK_CHANGE, &channel->regs->w.cr);
@@ -270,8 +302,11 @@ static void ipoctal_irq_channel(struct ipoctal_channel *channel)
 	if ((isr & channel->isr_tx_rdy_mask) && (sr & SR_TX_READY))
 		ipoctal_irq_tx(channel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_unlock(&channel->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -365,10 +400,14 @@ static int ipoctal_inst_slot(struct ipoctal *ipoctal, unsigned int bus_nr,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iowrite8(CR_DISABLE_RX | CR_DISABLE_TX, &channel->regs->w.cr);
 		channel->rx_enable = 0;
 		iowrite8(CR_CMD_RESET_RX, &channel->regs->w.cr);
 		iowrite8(CR_CMD_RESET_TX, &channel->regs->w.cr);
+=======
+		ipoctal_reset_channel(channel);
+>>>>>>> v3.18
 =======
 		ipoctal_reset_channel(channel);
 >>>>>>> v3.18
@@ -388,6 +427,7 @@ static int ipoctal_inst_slot(struct ipoctal *ipoctal, unsigned int bus_nr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * IP-OCTAL has different addresses to copy its IRQ vector.
 	 * Depending of the carrier these addresses are accesible or not.
@@ -395,6 +435,8 @@ static int ipoctal_inst_slot(struct ipoctal *ipoctal, unsigned int bus_nr,
 	 */
 	ipoctal->dev->bus->ops->request_irq(ipoctal->dev,
 				       ipoctal_irq_handler, ipoctal);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Dummy write */
@@ -458,7 +500,10 @@ static int ipoctal_inst_slot(struct ipoctal *ipoctal, unsigned int bus_nr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * IP-OCTAL has different addresses to copy its IRQ vector.
 	 * Depending of the carrier these addresses are accesible or not.
@@ -467,6 +512,9 @@ static int ipoctal_inst_slot(struct ipoctal *ipoctal, unsigned int bus_nr,
 	ipoctal->dev->bus->ops->request_irq(ipoctal->dev,
 				       ipoctal_irq_handler, ipoctal);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -545,11 +593,15 @@ static void ipoctal_set_termios(struct tty_struct *tty,
 
 	/* Disable and reset everything before change the setup */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iowrite8(CR_DISABLE_RX | CR_DISABLE_TX, &channel->regs->w.cr);
 	iowrite8(CR_CMD_RESET_RX, &channel->regs->w.cr);
 	iowrite8(CR_CMD_RESET_TX, &channel->regs->w.cr);
 	iowrite8(CR_CMD_RESET_ERR_STATUS, &channel->regs->w.cr);
 	iowrite8(CR_CMD_RESET_MR, &channel->regs->w.cr);
+=======
+	ipoctal_reset_channel(channel);
+>>>>>>> v3.18
 =======
 	ipoctal_reset_channel(channel);
 >>>>>>> v3.18
@@ -691,12 +743,16 @@ static void ipoctal_hangup(struct tty_struct *tty)
 	tty_port_hangup(&channel->tty_port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iowrite8(CR_DISABLE_RX | CR_DISABLE_TX, &channel->regs->w.cr);
 	channel->rx_enable = 0;
 	iowrite8(CR_CMD_RESET_RX, &channel->regs->w.cr);
 	iowrite8(CR_CMD_RESET_TX, &channel->regs->w.cr);
 	iowrite8(CR_CMD_RESET_ERR_STATUS, &channel->regs->w.cr);
 	iowrite8(CR_CMD_RESET_MR, &channel->regs->w.cr);
+=======
+	ipoctal_reset_channel(channel);
+>>>>>>> v3.18
 =======
 	ipoctal_reset_channel(channel);
 >>>>>>> v3.18
@@ -713,6 +769,7 @@ static void ipoctal_shutdown(struct tty_struct *tty)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iowrite8(CR_DISABLE_RX | CR_DISABLE_TX, &channel->regs->w.cr);
 	channel->rx_enable = 0;
 	iowrite8(CR_CMD_RESET_RX, &channel->regs->w.cr);
@@ -723,6 +780,8 @@ static void ipoctal_shutdown(struct tty_struct *tty)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	ipoctal_reset_channel(channel);
 	clear_bit(ASYNCB_INITIALIZED, &channel->tty_port.flags);
 }
@@ -736,6 +795,9 @@ static void ipoctal_cleanup(struct tty_struct *tty)
 	ipack_put_carrier(ipoctal->dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct tty_operations ipoctal_fops = {
 	.ioctl =		NULL,
@@ -749,6 +811,10 @@ static const struct tty_operations ipoctal_fops = {
 	.hangup =		ipoctal_hangup,
 	.shutdown =		ipoctal_shutdown,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cleanup =              ipoctal_cleanup,
+>>>>>>> v3.18
 =======
 	.cleanup =              ipoctal_cleanup,
 >>>>>>> v3.18

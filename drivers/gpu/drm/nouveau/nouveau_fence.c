@@ -29,11 +29,17 @@
 #include <linux/ktime.h>
 #include <linux/hrtimer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <trace/events/fence.h>
 
 #include <nvif/notify.h>
 #include <nvif/event.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "nouveau_drm.h"
@@ -41,8 +47,11 @@
 #include "nouveau_fence.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <engine/fifo.h>
 =======
+=======
+>>>>>>> v3.18
 static const struct fence_ops nouveau_fence_ops_uevent;
 static const struct fence_ops nouveau_fence_ops_legacy;
 
@@ -92,11 +101,15 @@ nouveau_local_fence(struct fence *fence, struct nouveau_drm *drm) {
 
 	return from_fence(fence);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void
 nouveau_fence_context_del(struct nouveau_fence_chan *fctx)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct nouveau_fence *fence, *fnext;
 	spin_lock(&fctx->lock);
@@ -133,6 +146,8 @@ nouveau_fence_update(struct nouveau_channel *chan)
 	}
 	spin_unlock(&fctx->lock);
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_fence *fence;
 
 	spin_lock_irq(&fctx->lock);
@@ -296,6 +311,9 @@ err_free:
 	kfree(work);
 err:
 	func(data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -303,6 +321,7 @@ int
 nouveau_fence_emit(struct nouveau_fence *fence, struct nouveau_channel *chan)
 {
 	struct nouveau_fence_chan *fctx = chan->fence;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -317,6 +336,8 @@ nouveau_fence_emit(struct nouveau_fence *fence, struct nouveau_channel *chan)
 		list_add_tail(&fence->head, &fctx->pending);
 		spin_unlock(&fctx->lock);
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_fence_priv *priv = (void*)chan->drm->fence;
 	int ret;
 
@@ -342,6 +363,9 @@ nouveau_fence_emit(struct nouveau_fence *fence, struct nouveau_channel *chan)
 
 		list_add_tail(&fence->head, &fctx->pending);
 		spin_unlock_irq(&fctx->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -351,6 +375,7 @@ nouveau_fence_emit(struct nouveau_fence *fence, struct nouveau_channel *chan)
 bool
 nouveau_fence_done(struct nouveau_fence *fence)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (fence->channel)
 		nouveau_fence_update(fence->channel);
@@ -441,6 +466,8 @@ nouveau_fence_wait(struct nouveau_fence *fence, bool lazy, bool intr)
 	while (!nouveau_fence_done(fence)) {
 		if (fence->timeout && time_after_eq(jiffies, fence->timeout)) {
 =======
+=======
+>>>>>>> v3.18
 	if (fence->base.ops == &nouveau_fence_ops_legacy ||
 	    fence->base.ops == &nouveau_fence_ops_uevent) {
 		struct nouveau_fence_chan *fctx = nouveau_fctx(fence);
@@ -501,11 +528,15 @@ nouveau_fence_wait_busy(struct nouveau_fence *fence, bool intr)
 
 	while (!nouveau_fence_done(fence)) {
 		if (time_after_eq(jiffies, fence->timeout)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = -EBUSY;
 			break;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__set_current_state(intr ? TASK_INTERRUPTIBLE :
 					   TASK_UNINTERRUPTIBLE);
@@ -516,6 +547,11 @@ nouveau_fence_wait_busy(struct nouveau_fence *fence, bool intr)
 			if (sleep_time > NSEC_PER_MSEC)
 				sleep_time = NSEC_PER_MSEC;
 		}
+=======
+		__set_current_state(intr ?
+				    TASK_INTERRUPTIBLE :
+				    TASK_UNINTERRUPTIBLE);
+>>>>>>> v3.18
 =======
 		__set_current_state(intr ?
 				    TASK_INTERRUPTIBLE :
@@ -533,6 +569,7 @@ nouveau_fence_wait_busy(struct nouveau_fence *fence, bool intr)
 }
 
 int
+<<<<<<< HEAD
 <<<<<<< HEAD
 nouveau_fence_sync(struct nouveau_fence *fence, struct nouveau_channel *chan)
 {
@@ -558,6 +595,8 @@ nouveau_fence_del(struct kref *kref)
 	struct nouveau_fence *fence = container_of(kref, typeof(*fence), kref);
 	kfree(fence);
 =======
+=======
+>>>>>>> v3.18
 nouveau_fence_wait(struct nouveau_fence *fence, bool lazy, bool intr)
 {
 	long ret;
@@ -637,6 +676,9 @@ nouveau_fence_sync(struct nouveau_bo *nvbo, struct nouveau_channel *chan, bool e
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -644,6 +686,7 @@ void
 nouveau_fence_unref(struct nouveau_fence **pfence)
 {
 	if (*pfence)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		kref_put(&(*pfence)->kref, nouveau_fence_del);
 	*pfence = NULL;
@@ -657,10 +700,15 @@ nouveau_fence_ref(struct nouveau_fence *fence)
 }
 
 =======
+=======
+>>>>>>> v3.18
 		fence_put(&(*pfence)->base);
 	*pfence = NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int
 nouveau_fence_new(struct nouveau_channel *chan, bool sysmem,
@@ -678,7 +726,10 @@ nouveau_fence_new(struct nouveau_channel *chan, bool sysmem,
 
 	fence->sysmem = sysmem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kref_init(&fence->kref);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -690,7 +741,10 @@ nouveau_fence_new(struct nouveau_channel *chan, bool sysmem,
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static const char *nouveau_fence_get_get_driver_name(struct fence *fence)
 {
@@ -796,4 +850,7 @@ static const struct fence_ops nouveau_fence_ops_uevent = {
 	.wait = fence_default_wait,
 	.release = NULL
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

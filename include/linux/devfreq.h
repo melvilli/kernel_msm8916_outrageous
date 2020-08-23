@@ -53,10 +53,13 @@ struct devfreq_dev_status {
 #define DEVFREQ_FLAG_LEAST_UPPER_BOUND		0x1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEVFREQ_FLAG_FAST_HINT			0x2
 #define DEVFREQ_FLAG_SLOW_HINT			0x4
 #define DEVFREQ_FLAG_WAKEUP_MAXFREQ		0x8
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -119,8 +122,12 @@ struct devfreq_governor {
 
 	const char name[DEVFREQ_NAME_LEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*get_target_freq)(struct devfreq *this, unsigned long *freq,
 				u32 *flag);
+=======
+	int (*get_target_freq)(struct devfreq *this, unsigned long *freq);
+>>>>>>> v3.18
 =======
 	int (*get_target_freq)(struct devfreq *this, unsigned long *freq);
 >>>>>>> v3.18
@@ -181,7 +188,11 @@ struct devfreq {
 	bool stop_polling;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* information for device freqeuncy transition */
+=======
+	/* information for device frequency transition */
+>>>>>>> v3.18
 =======
 	/* information for device frequency transition */
 >>>>>>> v3.18
@@ -198,7 +209,10 @@ extern struct devfreq *devfreq_add_device(struct device *dev,
 				  void *data);
 extern int devfreq_remove_device(struct devfreq *devfreq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern struct devfreq *devm_devfreq_add_device(struct device *dev,
 				  struct devfreq_dev_profile *profile,
 				  const char *governor_name,
@@ -207,13 +221,20 @@ extern void devm_devfreq_remove_device(struct device *dev,
 				  struct devfreq *devfreq);
 
 /* Supposed to be called by PM_SLEEP/PM_RUNTIME callbacks */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int devfreq_suspend_device(struct devfreq *devfreq);
 extern int devfreq_resume_device(struct devfreq *devfreq);
 
 /* Helper functions for devfreq user device driver with OPP. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct opp *devfreq_recommended_opp(struct device *dev,
+=======
+extern struct dev_pm_opp *devfreq_recommended_opp(struct device *dev,
+>>>>>>> v3.18
 =======
 extern struct dev_pm_opp *devfreq_recommended_opp(struct device *dev,
 >>>>>>> v3.18
@@ -223,11 +244,17 @@ extern int devfreq_register_opp_notifier(struct device *dev,
 extern int devfreq_unregister_opp_notifier(struct device *dev,
 					   struct devfreq *devfreq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int devm_devfreq_register_opp_notifier(struct device *dev,
 					      struct devfreq *devfreq);
 extern void devm_devfreq_unregister_opp_notifier(struct device *dev,
 						struct devfreq *devfreq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if IS_ENABLED(CONFIG_DEVFREQ_GOV_SIMPLE_ONDEMAND)
@@ -241,9 +268,12 @@ extern void devm_devfreq_unregister_opp_notifier(struct device *dev,
  *			Specify 0 to use the default. Valid value = 0 to 100.
  *			downdifferential < upthreshold must hold.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @simple_scaling:	Setting this flag will scale the clocks up only if the
  *			load is above @upthreshold and will scale the clocks
  *			down only if the load is below @downdifferential.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -254,7 +284,10 @@ struct devfreq_simple_ondemand_data {
 	unsigned int upthreshold;
 	unsigned int downdifferential;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int simple_scaling;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -267,7 +300,11 @@ static inline struct devfreq *devfreq_add_device(struct device *dev,
 					  void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return NULL;
+=======
+	return ERR_PTR(-ENOSYS);
+>>>>>>> v3.18
 =======
 	return ERR_PTR(-ENOSYS);
 >>>>>>> v3.18
@@ -279,7 +316,10 @@ static inline int devfreq_remove_device(struct devfreq *devfreq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct devfreq *devm_devfreq_add_device(struct device *dev,
 					struct devfreq_dev_profile *profile,
 					const char *governor_name,
@@ -293,6 +333,9 @@ static inline void devm_devfreq_remove_device(struct device *dev,
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int devfreq_suspend_device(struct devfreq *devfreq)
 {
@@ -305,7 +348,11 @@ static inline int devfreq_resume_device(struct devfreq *devfreq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct opp *devfreq_recommended_opp(struct device *dev,
+=======
+static inline struct dev_pm_opp *devfreq_recommended_opp(struct device *dev,
+>>>>>>> v3.18
 =======
 static inline struct dev_pm_opp *devfreq_recommended_opp(struct device *dev,
 >>>>>>> v3.18
@@ -327,7 +374,10 @@ static inline int devfreq_unregister_opp_notifier(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int devm_devfreq_register_opp_notifier(struct device *dev,
 						     struct devfreq *devfreq)
 {
@@ -338,6 +388,9 @@ static inline void devm_devfreq_unregister_opp_notifier(struct device *dev,
 							struct devfreq *devfreq)
 {
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PM_DEVFREQ */
 

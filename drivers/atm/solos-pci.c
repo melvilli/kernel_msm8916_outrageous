@@ -761,7 +761,11 @@ static irqreturn_t solos_irq(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void solos_bh(unsigned long card_arg)
+=======
+static void solos_bh(unsigned long card_arg)
+>>>>>>> v3.18
 =======
 static void solos_bh(unsigned long card_arg)
 >>>>>>> v3.18
@@ -1230,6 +1234,10 @@ static int fpga_probe(struct pci_dev *dev, const struct pci_device_id *id)
 	if (!card->config_regs) {
 		dev_warn(&dev->dev, "Failed to ioremap config registers\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		err = -ENOMEM;
+>>>>>>> v3.18
 =======
 		err = -ENOMEM;
 >>>>>>> v3.18
@@ -1239,6 +1247,10 @@ static int fpga_probe(struct pci_dev *dev, const struct pci_device_id *id)
 	if (!card->buffers) {
 		dev_warn(&dev->dev, "Failed to ioremap data buffers\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		err = -ENOMEM;
+>>>>>>> v3.18
 =======
 		err = -ENOMEM;
 >>>>>>> v3.18
@@ -1291,6 +1303,10 @@ static int fpga_probe(struct pci_dev *dev, const struct pci_device_id *id)
 			if (!card->dma_bounce) {
 				dev_warn(&card->dev->dev, "Failed to allocate DMA bounce buffers\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				err = -ENOMEM;
+>>>>>>> v3.18
 =======
 				err = -ENOMEM;
 >>>>>>> v3.18
@@ -1352,7 +1368,10 @@ static int fpga_probe(struct pci_dev *dev, const struct pci_device_id *id)
  out_unmap_both:
 	kfree(card->dma_bounce);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_iounmap(dev, card->buffers);
@@ -1477,7 +1496,10 @@ static void fpga_remove(struct pci_dev *dev)
 	pci_disable_device(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(card);

@@ -738,7 +738,11 @@ struct ngene {
 	int                   nr;
 	struct pci_dev       *pci_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char        *iomem;
+=======
+	unsigned char __iomem *iomem;
+>>>>>>> v3.18
 =======
 	unsigned char __iomem *iomem;
 >>>>>>> v3.18

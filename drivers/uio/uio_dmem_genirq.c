@@ -147,7 +147,11 @@ static int uio_dmem_genirq_irqcontrol(struct uio_info *dev_info, s32 irq_on)
 static int uio_dmem_genirq_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uio_dmem_genirq_pdata *pdata = pdev->dev.platform_data;
+=======
+	struct uio_dmem_genirq_pdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct uio_dmem_genirq_pdata *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -209,7 +213,11 @@ static int uio_dmem_genirq_probe(struct platform_device *pdev)
 		if (ret < 0) {
 			dev_err(&pdev->dev, "failed to get IRQ\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto bad0;
+=======
+			goto bad1;
+>>>>>>> v3.18
 =======
 			goto bad1;
 >>>>>>> v3.18
@@ -238,7 +246,11 @@ static int uio_dmem_genirq_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->dmem_region_start = uiomem - &uioinfo->mem[0];
+=======
+	priv->dmem_region_start = i;
+>>>>>>> v3.18
 =======
 	priv->dmem_region_start = i;
 >>>>>>> v3.18
@@ -288,6 +300,10 @@ static int uio_dmem_genirq_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "unable to register uio device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pm_runtime_disable(&pdev->dev);
+>>>>>>> v3.18
 =======
 		pm_runtime_disable(&pdev->dev);
 >>>>>>> v3.18
@@ -299,7 +315,10 @@ static int uio_dmem_genirq_probe(struct platform_device *pdev)
  bad1:
 	kfree(priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_runtime_disable(&pdev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  bad0:
@@ -356,8 +375,11 @@ static const struct of_device_id uio_of_genirq_match[] = {
 };
 MODULE_DEVICE_TABLE(of, uio_of_genirq_match);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 # define uio_of_genirq_match NULL
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -370,7 +392,11 @@ static struct platform_driver uio_dmem_genirq = {
 		.owner = THIS_MODULE,
 		.pm = &uio_dmem_genirq_dev_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = uio_of_genirq_match,
+=======
+		.of_match_table = of_match_ptr(uio_of_genirq_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(uio_of_genirq_match),
 >>>>>>> v3.18

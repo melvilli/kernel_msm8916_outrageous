@@ -40,7 +40,11 @@ extern int cpci_debug;
 		if (cpci_debug)					\
 			printk (KERN_DEBUG "%s: " format "\n",	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 				MY_NAME , ## arg); 		\
+=======
+				MY_NAME , ## arg);		\
+>>>>>>> v3.18
 =======
 				MY_NAME , ## arg);		\
 >>>>>>> v3.18
@@ -51,7 +55,11 @@ extern int cpci_debug;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 cpci_get_attention_status(struct slot* slot)
+=======
+u8 cpci_get_attention_status(struct slot *slot)
+>>>>>>> v3.18
 =======
 u8 cpci_get_attention_status(struct slot *slot)
 >>>>>>> v3.18
@@ -75,7 +83,11 @@ u8 cpci_get_attention_status(struct slot *slot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cpci_set_attention_status(struct slot* slot, int status)
+=======
+int cpci_set_attention_status(struct slot *slot, int status)
+>>>>>>> v3.18
 =======
 int cpci_set_attention_status(struct slot *slot, int status)
 >>>>>>> v3.18
@@ -106,7 +118,11 @@ int cpci_set_attention_status(struct slot *slot, int status)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 cpci_get_hs_csr(struct slot* slot)
+=======
+u16 cpci_get_hs_csr(struct slot *slot)
+>>>>>>> v3.18
 =======
 u16 cpci_get_hs_csr(struct slot *slot)
 >>>>>>> v3.18
@@ -128,7 +144,11 @@ u16 cpci_get_hs_csr(struct slot *slot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cpci_check_and_clear_ins(struct slot* slot)
+=======
+int cpci_check_and_clear_ins(struct slot *slot)
+>>>>>>> v3.18
 =======
 int cpci_check_and_clear_ins(struct slot *slot)
 >>>>>>> v3.18
@@ -161,7 +181,11 @@ int cpci_check_and_clear_ins(struct slot *slot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cpci_check_ext(struct slot* slot)
+=======
+int cpci_check_ext(struct slot *slot)
+>>>>>>> v3.18
 =======
 int cpci_check_ext(struct slot *slot)
 >>>>>>> v3.18
@@ -186,7 +210,11 @@ int cpci_check_ext(struct slot *slot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cpci_clear_ext(struct slot* slot)
+=======
+int cpci_clear_ext(struct slot *slot)
+>>>>>>> v3.18
 =======
 int cpci_clear_ext(struct slot *slot)
 >>>>>>> v3.18
@@ -216,7 +244,11 @@ int cpci_clear_ext(struct slot *slot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cpci_led_on(struct slot* slot)
+=======
+int cpci_led_on(struct slot *slot)
+>>>>>>> v3.18
 =======
 int cpci_led_on(struct slot *slot)
 >>>>>>> v3.18
@@ -249,7 +281,11 @@ int cpci_led_on(struct slot *slot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cpci_led_off(struct slot* slot)
+=======
+int cpci_led_off(struct slot *slot)
+>>>>>>> v3.18
 =======
 int cpci_led_off(struct slot *slot)
 >>>>>>> v3.18
@@ -287,6 +323,7 @@ int cpci_led_off(struct slot *slot)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __ref cpci_configure_slot(struct slot *slot)
 {
 	struct pci_dev *dev;
@@ -295,6 +332,8 @@ int __ref cpci_configure_slot(struct slot *slot)
 	dbg("%s - enter", __func__);
 
 =======
+=======
+>>>>>>> v3.18
 int cpci_configure_slot(struct slot *slot)
 {
 	struct pci_dev *dev;
@@ -305,6 +344,9 @@ int cpci_configure_slot(struct slot *slot)
 
 	pci_lock_rescan_remove();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (slot->dev == NULL) {
 		dbg("pci_dev null, finding %02x:%02x:%x",
@@ -327,7 +369,12 @@ int cpci_configure_slot(struct slot *slot)
 		if (slot->dev == NULL) {
 			err("Could not find PCI device for slot %02x", slot->number);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -ENODEV;
+=======
+			ret = -ENODEV;
+			goto out;
+>>>>>>> v3.18
 =======
 			ret = -ENODEV;
 			goto out;
@@ -340,8 +387,12 @@ int cpci_configure_slot(struct slot *slot)
 		if (PCI_SLOT(dev->devfn) != PCI_SLOT(slot->devfn))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((dev->hdr_type == PCI_HEADER_TYPE_BRIDGE) ||
 		    (dev->hdr_type == PCI_HEADER_TYPE_CARDBUS))
+=======
+		if (pci_is_bridge(dev))
+>>>>>>> v3.18
 =======
 		if (pci_is_bridge(dev))
 >>>>>>> v3.18
@@ -353,12 +404,15 @@ int cpci_configure_slot(struct slot *slot)
 	pci_bus_add_devices(parent);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg("%s - exit", __func__);
 	return 0;
 }
 
 int cpci_unconfigure_slot(struct slot* slot)
 =======
+=======
+>>>>>>> v3.18
  out:
 	pci_unlock_rescan_remove();
 	dbg("%s - exit", __func__);
@@ -366,6 +420,9 @@ int cpci_unconfigure_slot(struct slot* slot)
 }
 
 int cpci_unconfigure_slot(struct slot *slot)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pci_dev *dev, *temp;
@@ -377,6 +434,11 @@ int cpci_unconfigure_slot(struct slot *slot)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_lock_rescan_remove();
+
+>>>>>>> v3.18
 =======
 	pci_lock_rescan_remove();
 
@@ -392,6 +454,11 @@ int cpci_unconfigure_slot(struct slot *slot)
 	slot->dev = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_unlock_rescan_remove();
+
+>>>>>>> v3.18
 =======
 	pci_unlock_rescan_remove();
 

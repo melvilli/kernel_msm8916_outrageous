@@ -5,7 +5,11 @@
 obj-y		+= access.o bus.o probe.o host-bridge.o remove.o pci.o \
 			pci-driver.o search.o pci-sysfs.o rom.o setup-res.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			irq.o vpd.o setup-bus.o
+=======
+			irq.o vpd.o setup-bus.o vc.o
+>>>>>>> v3.18
 =======
 			irq.o vpd.o setup-bus.o vc.o
 >>>>>>> v3.18
@@ -38,6 +42,7 @@ obj-$(CONFIG_PCI_IOV) += iov.o
 # Some architectures use the generic PCI setup functions
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_X86) += setup-bus.o
 obj-$(CONFIG_ALPHA) += setup-bus.o setup-irq.o
 obj-$(CONFIG_ARM) += setup-bus.o setup-irq.o
@@ -55,6 +60,8 @@ obj-$(CONFIG_SPARC_LEON) += setup-bus.o setup-irq.o
 obj-$(CONFIG_M68K) += setup-bus.o setup-irq.o
 obj-$(CONFIG_ARM64) += setup-bus.o setup-irq.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_ALPHA) += setup-irq.o
 obj-$(CONFIG_ARM) += setup-irq.o
 obj-$(CONFIG_UNICORE32) += setup-irq.o
@@ -63,6 +70,9 @@ obj-$(CONFIG_MIPS) += setup-irq.o
 obj-$(CONFIG_TILE) += setup-irq.o
 obj-$(CONFIG_SPARC_LEON) += setup-irq.o
 obj-$(CONFIG_M68K) += setup-irq.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #

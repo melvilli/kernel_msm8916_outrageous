@@ -151,7 +151,11 @@ static int user_atoi(char __user *ubuf, size_t len)
  * Send us to sleep.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sysctl_pm_do_suspend(ctl_table *ctl, int write,
+=======
+static int sysctl_pm_do_suspend(struct ctl_table *ctl, int write,
+>>>>>>> v3.18
 =======
 static int sysctl_pm_do_suspend(struct ctl_table *ctl, int write,
 >>>>>>> v3.18
@@ -202,7 +206,11 @@ static int try_set_cmode(int new_cmode)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cmode_procctl(ctl_table *ctl, int write,
+=======
+static int cmode_procctl(struct ctl_table *ctl, int write,
+>>>>>>> v3.18
 =======
 static int cmode_procctl(struct ctl_table *ctl, int write,
 >>>>>>> v3.18
@@ -278,7 +286,11 @@ static int try_set_cm(int new_cm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int p0_procctl(ctl_table *ctl, int write,
+=======
+static int p0_procctl(struct ctl_table *ctl, int write,
+>>>>>>> v3.18
 =======
 static int p0_procctl(struct ctl_table *ctl, int write,
 >>>>>>> v3.18
@@ -295,7 +307,11 @@ static int p0_procctl(struct ctl_table *ctl, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cm_procctl(ctl_table *ctl, int write,
+=======
+static int cm_procctl(struct ctl_table *ctl, int write,
+>>>>>>> v3.18
 =======
 static int cm_procctl(struct ctl_table *ctl, int write,
 >>>>>>> v3.18

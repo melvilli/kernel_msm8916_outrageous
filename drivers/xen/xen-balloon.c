@@ -31,6 +31,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -87,7 +92,11 @@ static int balloon_init_watcher(struct notifier_block *notifier,
 	err = register_xenbus_watch(&target_watch);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to set balloon watcher\n");
+=======
+		pr_err("Failed to set balloon watcher\n");
+>>>>>>> v3.18
 =======
 		pr_err("Failed to set balloon watcher\n");
 >>>>>>> v3.18
@@ -105,7 +114,11 @@ static int __init balloon_init(void)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("xen-balloon: Initialising balloon driver.\n");
+=======
+	pr_info("Initialising balloon driver\n");
+>>>>>>> v3.18
 =======
 	pr_info("Initialising balloon driver\n");
 >>>>>>> v3.18

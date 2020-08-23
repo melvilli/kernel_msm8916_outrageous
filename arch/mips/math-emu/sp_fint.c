@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -22,6 +25,7 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
@@ -32,12 +36,17 @@
 
 ieee754sp ieee754sp_fint(int x)
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
 #include "ieee754sp.h"
 
 union ieee754sp ieee754sp_fint(int x)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned xm;
@@ -45,7 +54,11 @@ union ieee754sp ieee754sp_fint(int x)
 	int xs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLEARCX;
+=======
+	ieee754_clearcx();
+>>>>>>> v3.18
 =======
 	ieee754_clearcx();
 >>>>>>> v3.18
@@ -67,6 +80,7 @@ union ieee754sp ieee754sp_fint(int x)
 		xm = x;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xe = SP_MBITS + 3;
 
 	if (xm >> (SP_MBITS + 1 + 3)) {
@@ -74,12 +88,17 @@ union ieee754sp ieee754sp_fint(int x)
 		 */
 		while (xm >> (SP_MBITS + 1 + 3)) {
 =======
+=======
+>>>>>>> v3.18
 	xe = SP_FBITS + 3;
 
 	if (xm >> (SP_FBITS + 1 + 3)) {
 		/* shunt out overflow bits
 		 */
 		while (xm >> (SP_FBITS + 1 + 3)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			SPXSRSX1();
 		}
@@ -87,7 +106,11 @@ union ieee754sp ieee754sp_fint(int x)
 		/* normalize in grs extended single precision
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while ((xm >> (SP_MBITS + 3)) == 0) {
+=======
+		while ((xm >> (SP_FBITS + 3)) == 0) {
+>>>>>>> v3.18
 =======
 		while ((xm >> (SP_FBITS + 3)) == 0) {
 >>>>>>> v3.18
@@ -95,6 +118,7 @@ union ieee754sp ieee754sp_fint(int x)
 			xe--;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	SPNORMRET1(xs, xe, xm, "fint", x);
 }
@@ -106,6 +130,9 @@ ieee754sp ieee754sp_funs(unsigned int u)
 		return ieee754sp_add(ieee754sp_1e31(),
 				     ieee754sp_fint(u & ~(1 << 31)));
 	return ieee754sp_fint(u);
+=======
+	return ieee754sp_format(xs, xe, xm);
+>>>>>>> v3.18
 =======
 	return ieee754sp_format(xs, xe, xm);
 >>>>>>> v3.18

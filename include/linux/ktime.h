@@ -28,7 +28,11 @@
  * ktime_t:
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * On 64-bit CPUs a single 64-bit variable is used to store the hrtimers
+=======
+ * A single 64-bit variable is used to store the hrtimers
+>>>>>>> v3.18
 =======
  * A single 64-bit variable is used to store the hrtimers
 >>>>>>> v3.18
@@ -37,6 +41,7 @@
  * NOPs and most arithmetic ktime_t operations are plain arithmetic
  * operations.
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * On 32-bit CPUs an optimized representation of the timespec structure
  * is used to avoid expensive conversions from and to timespecs. The
@@ -64,10 +69,16 @@ union ktime {
 union ktime {
 	s64	tv64;
 >>>>>>> v3.18
+=======
+ */
+union ktime {
+	s64	tv64;
+>>>>>>> v3.18
 };
 
 typedef union ktime ktime_t;		/* Kill this */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * ktime_t definitions when using the 64-bit scalar representation:
@@ -77,11 +88,14 @@ typedef union ktime ktime_t;		/* Kill this */
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * ktime_set - Set a ktime_t variable from a seconds/nanoseconds value
  * @secs:	seconds to set
  * @nsecs:	nanoseconds to set
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Return the ktime_t representation of the value
  */
@@ -93,6 +107,8 @@ static inline ktime_t ktime_set(const long secs, const unsigned long nsecs)
 #endif
 	return (ktime_t) { .tv64 = (s64)secs * NSEC_PER_SEC + (s64)nsecs };
 =======
+=======
+>>>>>>> v3.18
  * Return: The ktime_t representation of the value.
  */
 static inline ktime_t ktime_set(const s64 secs, const unsigned long nsecs)
@@ -101,6 +117,9 @@ static inline ktime_t ktime_set(const s64 secs, const unsigned long nsecs)
 		return (ktime_t){ .tv64 = KTIME_MAX };
 
 	return (ktime_t) { .tv64 = secs * NSEC_PER_SEC + (s64)nsecs };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -133,13 +152,19 @@ static inline ktime_t timespec_to_ktime(struct timespec ts)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* convert a timespec64 to ktime_t format: */
 static inline ktime_t timespec64_to_ktime(struct timespec64 ts)
 {
 	return ktime_set(ts.tv_sec, ts.tv_nsec);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* convert a timeval to ktime_t format: */
 static inline ktime_t timeval_to_ktime(struct timeval tv)
@@ -151,6 +176,12 @@ static inline ktime_t timeval_to_ktime(struct timeval tv)
 #define ktime_to_timespec(kt)		ns_to_timespec((kt).tv64)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Map the ktime_t to timespec conversion to ns_to_timespec function */
+#define ktime_to_timespec64(kt)		ns_to_timespec64((kt).tv64)
+
+>>>>>>> v3.18
 =======
 /* Map the ktime_t to timespec conversion to ns_to_timespec function */
 #define ktime_to_timespec64(kt)		ns_to_timespec64((kt).tv64)
@@ -162,6 +193,7 @@ static inline ktime_t timeval_to_ktime(struct timeval tv)
 /* Convert ktime_t to nanoseconds - NOP in the scalar storage format: */
 #define ktime_to_ns(kt)			((kt).tv64)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else	/* !((BITS_PER_LONG == 64) || defined(CONFIG_KTIME_SCALAR)) */
 
@@ -311,6 +343,8 @@ static inline s64 ktime_to_ns(const ktime_t kt)
 #endif	/* !((BITS_PER_LONG == 64) || defined(CONFIG_KTIME_SCALAR)) */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /**
  * ktime_equal - Compares two ktime_t variables to see if they are equal
@@ -318,7 +352,13 @@ static inline s64 ktime_to_ns(const ktime_t kt)
  * @cmp2:	comparable2
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Compare two ktime_t variables, returns 1 if equal
+=======
+ * Compare two ktime_t variables.
+ *
+ * Return: 1 if equal.
+>>>>>>> v3.18
 =======
  * Compare two ktime_t variables.
  *
@@ -336,7 +376,11 @@ static inline int ktime_equal(const ktime_t cmp1, const ktime_t cmp2)
  * @cmp2:	comparable2
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns ...
+=======
+ * Return: ...
+>>>>>>> v3.18
 =======
  * Return: ...
 >>>>>>> v3.18
@@ -354,11 +398,14 @@ static inline int ktime_compare(const ktime_t cmp1, const ktime_t cmp2)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline s64 ktime_to_us(const ktime_t kt)
 {
 	struct timeval tv = ktime_to_timeval(kt);
 	return (s64) tv.tv_sec * USEC_PER_SEC + tv.tv_usec;
 =======
+=======
+>>>>>>> v3.18
 /**
  * ktime_after - Compare if a ktime_t value is bigger than another one.
  * @cmp1:	comparable1
@@ -392,14 +439,21 @@ extern u64 ktime_divns(const ktime_t kt, s64 div);
 static inline s64 ktime_to_us(const ktime_t kt)
 {
 	return ktime_divns(kt, NSEC_PER_USEC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline s64 ktime_to_ms(const ktime_t kt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timeval tv = ktime_to_timeval(kt);
 	return (s64) tv.tv_sec * MSEC_PER_SEC + tv.tv_usec / USEC_PER_MSEC;
+=======
+	return ktime_divns(kt, NSEC_PER_MSEC);
+>>>>>>> v3.18
 =======
 	return ktime_divns(kt, NSEC_PER_MSEC);
 >>>>>>> v3.18
@@ -413,21 +467,31 @@ static inline s64 ktime_us_delta(const ktime_t later, const ktime_t earlier)
 static inline ktime_t ktime_add_us(const ktime_t kt, const u64 usec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ktime_add_ns(kt, usec * 1000);
 =======
+=======
+>>>>>>> v3.18
 	return ktime_add_ns(kt, usec * NSEC_PER_USEC);
 }
 
 static inline ktime_t ktime_add_ms(const ktime_t kt, const u64 msec)
 {
 	return ktime_add_ns(kt, msec * NSEC_PER_MSEC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline ktime_t ktime_sub_us(const ktime_t kt, const u64 usec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ktime_sub_ns(kt, usec * 1000);
+=======
+	return ktime_sub_ns(kt, usec * NSEC_PER_USEC);
+>>>>>>> v3.18
 =======
 	return ktime_sub_ns(kt, usec * NSEC_PER_USEC);
 >>>>>>> v3.18
@@ -442,14 +506,20 @@ extern ktime_t ktime_add_safe(const ktime_t lhs, const ktime_t rhs);
  * @ts:		the timespec variable to store the result in
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns true if there was a successful conversion, false if kt was 0.
  */
 static inline bool ktime_to_timespec_cond(const ktime_t kt, struct timespec *ts)
 =======
+=======
+>>>>>>> v3.18
  * Return: %true if there was a successful conversion, %false if kt was 0.
  */
 static inline __must_check bool ktime_to_timespec_cond(const ktime_t kt,
 						       struct timespec *ts)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (kt.tv64) {
@@ -461,7 +531,10 @@ static inline __must_check bool ktime_to_timespec_cond(const ktime_t kt,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * ktime_to_timespec64_cond - convert a ktime_t variable to timespec64
  *			    format only if the variable contains data
@@ -481,6 +554,9 @@ static inline __must_check bool ktime_to_timespec64_cond(const ktime_t kt,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * The resolution of the clocks. The resolution value is returned in
@@ -491,6 +567,7 @@ static inline __must_check bool ktime_to_timespec64_cond(const ktime_t kt,
 #define LOW_RES_NSEC		TICK_NSEC
 #define KTIME_LOW_RES		(ktime_t){ .tv64 = LOW_RES_NSEC }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Get the monotonic time in timespec format: */
 extern void ktime_get_ts(struct timespec *ts);
@@ -505,6 +582,8 @@ static inline ktime_t ns_to_ktime(u64 ns)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static inline ktime_t ns_to_ktime(u64 ns)
 {
 	static const ktime_t ktime_zero = { .tv64 = 0 };
@@ -521,5 +600,8 @@ static inline ktime_t ms_to_ktime(u64 ms)
 
 # include <linux/timekeeping.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

@@ -156,11 +156,17 @@ static struct cpuidle_monitor *snb_register(void)
 	case 0x3A: /* IVB */
 	case 0x3E: /* IVB Xeon */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 0x3C: /* HSW */
 	case 0x3F: /* HSW */
 	case 0x45: /* HSW */
 	case 0x46: /* HSW */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:

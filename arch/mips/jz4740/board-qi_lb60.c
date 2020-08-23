@@ -16,6 +16,10 @@
 #include <linux/init.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio/machine.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio/machine.h>
 >>>>>>> v3.18
@@ -430,9 +434,12 @@ static struct platform_device qi_lb60_audio_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_device *jz_platform_devices[] __initdata = {
 	&jz4740_udc_device,
 =======
+=======
+>>>>>>> v3.18
 static struct gpiod_lookup_table qi_lb60_audio_gpio_table = {
 	.dev_id = "qi-lb60-audio",
 	.table = {
@@ -445,6 +452,9 @@ static struct gpiod_lookup_table qi_lb60_audio_gpio_table = {
 static struct platform_device *jz_platform_devices[] __initdata = {
 	&jz4740_udc_device,
 	&jz4740_udc_xceiv_device,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&jz4740_mmc_device,
 	&jz4740_nand_device,
@@ -458,6 +468,10 @@ static struct platform_device *jz_platform_devices[] __initdata = {
 	&jz4740_adc_device,
 	&jz4740_pwm_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&jz4740_dma_device,
+>>>>>>> v3.18
 =======
 	&jz4740_dma_device,
 >>>>>>> v3.18
@@ -483,6 +497,11 @@ static int __init qi_lb60_init_platform_devices(void)
 	jz4740_mmc_device.dev.platform_data = &qi_lb60_mmc_pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gpiod_add_lookup_table(&qi_lb60_audio_gpio_table);
+
+>>>>>>> v3.18
 =======
 	gpiod_add_lookup_table(&qi_lb60_audio_gpio_table);
 

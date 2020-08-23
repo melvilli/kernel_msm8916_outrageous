@@ -14,6 +14,10 @@
 #include <linux/dma-mapping.h>
 #include <linux/etherdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -56,6 +60,10 @@ MODULE_PARM_DESC(buffer_size, "DMA buffer allocation size");
 #define	ETH_HASH1	0x4c
 #define	ETH_TXCTRL	0x50
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	ETH_END		0x54
+>>>>>>> v3.18
 =======
 #define	ETH_END		0x54
 >>>>>>> v3.18
@@ -188,6 +196,10 @@ MODULE_PARM_DESC(buffer_size, "DMA buffer allocation size");
  * @dma_alloc:	dma allocated buffer size
  * @io_region_size:	I/O memory region size
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @num_bd:	number of buffer descriptors
+>>>>>>> v3.18
 =======
  * @num_bd:	number of buffer descriptors
 >>>>>>> v3.18
@@ -212,6 +224,10 @@ struct ethoc {
 	resource_size_t io_region_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int num_bd;
+>>>>>>> v3.18
 =======
 	unsigned int num_bd;
 >>>>>>> v3.18
@@ -233,6 +249,10 @@ struct ethoc {
 	struct phy_device *phy;
 	struct mii_bus *mdio;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *clk;
+>>>>>>> v3.18
 =======
 	struct clk *clk;
 >>>>>>> v3.18
@@ -676,11 +696,14 @@ static int ethoc_mdio_write(struct mii_bus *bus, int phy, int reg, u16 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ethoc_mdio_reset(struct mii_bus *bus)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void ethoc_mdio_poll(struct net_device *dev)
@@ -712,12 +735,18 @@ static int ethoc_mdio_probe(struct net_device *dev)
 
 	priv->phy = phy;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	phy->advertising &= ~(ADVERTISED_1000baseT_Full |
 			      ADVERTISED_1000baseT_Half);
 	phy->supported &= ~(SUPPORTED_1000baseT_Full |
 			    SUPPORTED_1000baseT_Half);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -796,11 +825,14 @@ static int ethoc_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ethoc_config(struct net_device *dev, struct ifmap *map)
 {
 	return -ENOSYS;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void ethoc_do_set_mac_address(struct net_device *dev)
@@ -925,7 +957,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ethoc_get_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 {
 	struct ethoc *priv = netdev_priv(dev);
@@ -1022,13 +1057,19 @@ const struct ethtool_ops ethoc_ethtool_ops = {
 	.get_ts_info = ethtool_op_get_ts_info,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct net_device_ops ethoc_netdev_ops = {
 	.ndo_open = ethoc_open,
 	.ndo_stop = ethoc_stop,
 	.ndo_do_ioctl = ethoc_ioctl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ndo_set_config = ethoc_config,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.ndo_set_mac_address = ethoc_set_mac_address,
@@ -1054,6 +1095,11 @@ static int ethoc_probe(struct platform_device *pdev)
 	int ret = 0;
 	bool random_mac = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ethoc_platform_data *pdata = dev_get_platdata(&pdev->dev);
+	u32 eth_clkfreq = pdata ? pdata->eth_clkfreq : 0;
+>>>>>>> v3.18
 =======
 	struct ethoc_platform_data *pdata = dev_get_platdata(&pdev->dev);
 	u32 eth_clkfreq = pdata ? pdata->eth_clkfreq : 0;
@@ -1158,6 +1204,10 @@ static int ethoc_probe(struct platform_device *pdev)
 		goto error;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->num_bd = num_bd;
+>>>>>>> v3.18
 =======
 	priv->num_bd = num_bd;
 >>>>>>> v3.18
@@ -1176,8 +1226,12 @@ static int ethoc_probe(struct platform_device *pdev)
 
 	/* Allow the platform setup code to pass in a MAC address. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->dev.platform_data) {
 		struct ethoc_platform_data *pdata = pdev->dev.platform_data;
+=======
+	if (pdata) {
+>>>>>>> v3.18
 =======
 	if (pdata) {
 >>>>>>> v3.18
@@ -1219,7 +1273,10 @@ static int ethoc_probe(struct platform_device *pdev)
 		netdev->addr_assign_type = NET_ADDR_RANDOM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Allow the platform setup code to adjust MII management bus clock. */
 	if (!eth_clkfreq) {
 		struct clk *clk = devm_clk_get(&pdev->dev, NULL);
@@ -1241,6 +1298,9 @@ static int ethoc_probe(struct platform_device *pdev)
 			    clkdiv);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* register MII bus */
 	priv->mdio = mdiobus_alloc();
@@ -1255,7 +1315,10 @@ static int ethoc_probe(struct platform_device *pdev)
 	priv->mdio->read = ethoc_mdio_read;
 	priv->mdio->write = ethoc_mdio_write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->mdio->reset = ethoc_mdio_reset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	priv->mdio->priv = priv;
@@ -1282,8 +1345,11 @@ static int ethoc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ether_setup(netdev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* setup the net_device structure */
@@ -1291,6 +1357,10 @@ static int ethoc_probe(struct platform_device *pdev)
 	netdev->watchdog_timeo = ETHOC_TIMEOUT;
 	netdev->features |= 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	netdev->ethtool_ops = &ethoc_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &ethoc_ethtool_ops;
 >>>>>>> v3.18
@@ -1317,6 +1387,11 @@ free_mdio:
 	mdiobus_free(priv->mdio);
 free:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (priv->clk)
+		clk_disable_unprepare(priv->clk);
+>>>>>>> v3.18
 =======
 	if (priv->clk)
 		clk_disable_unprepare(priv->clk);
@@ -1336,8 +1411,11 @@ static int ethoc_remove(struct platform_device *pdev)
 	struct ethoc *priv = netdev_priv(netdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (netdev) {
@@ -1351,6 +1429,11 @@ static int ethoc_remove(struct platform_device *pdev)
 			mdiobus_free(priv->mdio);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (priv->clk)
+			clk_disable_unprepare(priv->clk);
+>>>>>>> v3.18
 =======
 		if (priv->clk)
 			clk_disable_unprepare(priv->clk);

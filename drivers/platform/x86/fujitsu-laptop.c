@@ -67,7 +67,10 @@
 #include <linux/input.h>
 #include <linux/kfifo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/video_output.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -134,6 +137,7 @@
 #define FUJLAPTOP_DBG_TRACE	  0x0008
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dbg_printk(a_dbg_level, format, arg...) \
 	do { if (dbg_level & a_dbg_level) \
 		printk(FUJLAPTOP_DEBUG "%s: " format, __func__ , ## arg); \
@@ -144,6 +148,8 @@
 #else
 #define vdbg_printk(a_dbg_level, format, arg...)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_FUJITSU_LAPTOP_DEBUG
 #define vdbg_printk(a_dbg_level, format, arg...) \
 	do { if (dbg_level & a_dbg_level) \
@@ -152,6 +158,9 @@
 #else
 #define vdbg_printk(a_dbg_level, format, arg...) \
 	do { } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -234,8 +243,12 @@ static int call_fext_func(int cmd, int arg0, int arg1, int arg2)
 	};
 	struct acpi_object_list arg_list = { 4, &params[0] };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_buffer output;
 	union acpi_object out_obj;
+=======
+	unsigned long long value;
+>>>>>>> v3.18
 =======
 	unsigned long long value;
 >>>>>>> v3.18
@@ -254,10 +267,14 @@ static int call_fext_func(int cmd, int arg0, int arg1, int arg2)
 	params[3].integer.value = arg2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	output.length = sizeof(out_obj);
 	output.pointer = &out_obj;
 
 	status = acpi_evaluate_object(handle, NULL, &arg_list, &output);
+=======
+	status = acpi_evaluate_integer(handle, NULL, &arg_list, &value);
+>>>>>>> v3.18
 =======
 	status = acpi_evaluate_integer(handle, NULL, &arg_list, &value);
 >>>>>>> v3.18
@@ -268,6 +285,7 @@ static int call_fext_func(int cmd, int arg0, int arg1, int arg2)
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (out_obj.type != ACPI_TYPE_INTEGER) {
 		vdbg_printk(FUJLAPTOP_DBG_WARN,
@@ -282,10 +300,15 @@ static int call_fext_func(int cmd, int arg0, int arg1, int arg2)
 			cmd, arg0, arg1, arg2, (int)out_obj.integer.value);
 	return out_obj.integer.value;
 =======
+=======
+>>>>>>> v3.18
 	vdbg_printk(FUJLAPTOP_DBG_TRACE,
 		"FUNC 0x%x (args 0x%x, 0x%x, 0x%x) returned 0x%x\n",
 			cmd, arg0, arg1, arg2, (int)value);
 	return value;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -347,8 +370,11 @@ static int set_lcd_level(int level)
 {
 	acpi_status status = AE_OK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union acpi_object arg0 = { ACPI_TYPE_INTEGER };
 	struct acpi_object_list arg_list = { 1, &arg0 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	acpi_handle handle = NULL;
@@ -366,9 +392,14 @@ static int set_lcd_level(int level)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arg0.integer.value = level;
 
 	status = acpi_evaluate_object(handle, NULL, &arg_list, NULL);
+=======
+
+	status = acpi_execute_simple_method(handle, NULL, level);
+>>>>>>> v3.18
 =======
 
 	status = acpi_execute_simple_method(handle, NULL, level);
@@ -383,8 +414,11 @@ static int set_lcd_level_alt(int level)
 {
 	acpi_status status = AE_OK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union acpi_object arg0 = { ACPI_TYPE_INTEGER };
 	struct acpi_object_list arg_list = { 1, &arg0 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	acpi_handle handle = NULL;
@@ -402,9 +436,13 @@ static int set_lcd_level_alt(int level)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arg0.integer.value = level;
 
 	status = acpi_evaluate_object(handle, NULL, &arg_list, NULL);
+=======
+	status = acpi_execute_simple_method(handle, NULL, level);
+>>>>>>> v3.18
 =======
 	status = acpi_execute_simple_method(handle, NULL, level);
 >>>>>>> v3.18
@@ -629,6 +667,7 @@ static struct platform_driver fujitsupf_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dmi_check_cb_common(const struct dmi_system_id *id)
 {
 	acpi_handle handle;
@@ -637,12 +676,17 @@ static void dmi_check_cb_common(const struct dmi_system_id *id)
 		if (ACPI_SUCCESS(acpi_get_handle(NULL,
 				"\\_SB.PCI0.LPCB.FJEX.SBL2", &handle)))
 =======
+=======
+>>>>>>> v3.18
 static void __init dmi_check_cb_common(const struct dmi_system_id *id)
 {
 	pr_info("Identified laptop model '%s'\n", id->ident);
 	if (use_alt_lcd_levels == -1) {
 		if (acpi_has_method(NULL,
 				"\\_SB.PCI0.LPCB.FJEX.SBL2"))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			use_alt_lcd_levels = 1;
 		else
@@ -653,7 +697,11 @@ static void __init dmi_check_cb_common(const struct dmi_system_id *id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dmi_check_cb_s6410(const struct dmi_system_id *id)
+=======
+static int __init dmi_check_cb_s6410(const struct dmi_system_id *id)
+>>>>>>> v3.18
 =======
 static int __init dmi_check_cb_s6410(const struct dmi_system_id *id)
 >>>>>>> v3.18
@@ -665,7 +713,11 @@ static int __init dmi_check_cb_s6410(const struct dmi_system_id *id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dmi_check_cb_s6420(const struct dmi_system_id *id)
+=======
+static int __init dmi_check_cb_s6420(const struct dmi_system_id *id)
+>>>>>>> v3.18
 =======
 static int __init dmi_check_cb_s6420(const struct dmi_system_id *id)
 >>>>>>> v3.18
@@ -677,7 +729,11 @@ static int __init dmi_check_cb_s6420(const struct dmi_system_id *id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dmi_check_cb_p8010(const struct dmi_system_id *id)
+=======
+static int __init dmi_check_cb_p8010(const struct dmi_system_id *id)
+>>>>>>> v3.18
 =======
 static int __init dmi_check_cb_p8010(const struct dmi_system_id *id)
 >>>>>>> v3.18
@@ -690,7 +746,11 @@ static int __init dmi_check_cb_p8010(const struct dmi_system_id *id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dmi_system_id fujitsu_dmi_table[] = {
+=======
+static const struct dmi_system_id fujitsu_dmi_table[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct dmi_system_id fujitsu_dmi_table[] __initconst = {
 >>>>>>> v3.18
@@ -723,8 +783,11 @@ static const struct dmi_system_id fujitsu_dmi_table[] __initconst = {
 static int acpi_fujitsu_add(struct acpi_device *device)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle handle;
 	int result = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int state = 0;
@@ -763,8 +826,13 @@ static int acpi_fujitsu_add(struct acpi_device *device)
 		goto err_free_input_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = acpi_bus_update_power(fujitsu->acpi_handle, &state);
 	if (result) {
+=======
+	error = acpi_bus_update_power(fujitsu->acpi_handle, &state);
+	if (error) {
+>>>>>>> v3.18
 =======
 	error = acpi_bus_update_power(fujitsu->acpi_handle, &state);
 	if (error) {
@@ -780,8 +848,12 @@ static int acpi_fujitsu_add(struct acpi_device *device)
 	fujitsu->dev = device;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ACPI_SUCCESS
 	    (acpi_get_handle(device->handle, METHOD_NAME__INI, &handle))) {
+=======
+	if (acpi_has_method(device->handle, METHOD_NAME__INI)) {
+>>>>>>> v3.18
 =======
 	if (acpi_has_method(device->handle, METHOD_NAME__INI)) {
 >>>>>>> v3.18
@@ -804,7 +876,11 @@ static int acpi_fujitsu_add(struct acpi_device *device)
 	get_lcd_level();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return result;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -816,7 +892,11 @@ err_free_input_dev:
 	input_free_device(input);
 err_stop:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return result;
+=======
+	return error;
+>>>>>>> v3.18
 =======
 	return error;
 >>>>>>> v3.18
@@ -863,8 +943,11 @@ static void acpi_fujitsu_notify(struct acpi_device *device, u32 event)
 					set_lcd_level(newb);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			acpi_bus_generate_proc_event(fujitsu->dev,
 				ACPI_VIDEO_NOTIFY_INC_BRIGHTNESS, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			keycode = KEY_BRIGHTNESSUP;
@@ -876,8 +959,11 @@ static void acpi_fujitsu_notify(struct acpi_device *device, u32 event)
 					set_lcd_level(newb);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			acpi_bus_generate_proc_event(fujitsu->dev,
 				ACPI_VIDEO_NOTIFY_DEC_BRIGHTNESS, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			keycode = KEY_BRIGHTNESSDOWN;
@@ -903,7 +989,10 @@ static void acpi_fujitsu_notify(struct acpi_device *device, u32 event)
 static int acpi_fujitsu_hotkey_add(struct acpi_device *device)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle handle;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int result = 0;
@@ -957,8 +1046,13 @@ static int acpi_fujitsu_hotkey_add(struct acpi_device *device)
 		goto err_free_input_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = acpi_bus_update_power(fujitsu_hotkey->acpi_handle, &state);
 	if (result) {
+=======
+	error = acpi_bus_update_power(fujitsu_hotkey->acpi_handle, &state);
+	if (error) {
+>>>>>>> v3.18
 =======
 	error = acpi_bus_update_power(fujitsu_hotkey->acpi_handle, &state);
 	if (error) {
@@ -974,8 +1068,12 @@ static int acpi_fujitsu_hotkey_add(struct acpi_device *device)
 	fujitsu_hotkey->dev = device;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ACPI_SUCCESS
 	    (acpi_get_handle(device->handle, METHOD_NAME__INI, &handle))) {
+=======
+	if (acpi_has_method(device->handle, METHOD_NAME__INI)) {
+>>>>>>> v3.18
 =======
 	if (acpi_has_method(device->handle, METHOD_NAME__INI)) {
 >>>>>>> v3.18
@@ -1043,7 +1141,11 @@ err_free_fifo:
 	kfifo_free(&fujitsu_hotkey->fifo);
 err_stop:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return result;
+=======
+	return error;
+>>>>>>> v3.18
 =======
 	return error;
 >>>>>>> v3.18
@@ -1193,7 +1295,10 @@ static struct acpi_driver acpi_fujitsu_hotkey_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct acpi_device_id fujitsu_ids[] __used = {
 	{ACPI_FUJITSU_HID, 0},
 	{ACPI_FUJITSU_HOTKEY_HID, 0},
@@ -1201,6 +1306,9 @@ static const struct acpi_device_id fujitsu_ids[] __used = {
 };
 MODULE_DEVICE_TABLE(acpi, fujitsu_ids);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init fujitsu_init(void)
 {
@@ -1361,6 +1469,7 @@ MODULE_ALIAS("dmi:*:svnFUJITSUSIEMENS:*:pvr:rvnFUJITSU:rnFJNB1D3:*:cvrS6410:*");
 MODULE_ALIAS("dmi:*:svnFUJITSUSIEMENS:*:pvr:rvnFUJITSU:rnFJNB1E6:*:cvrS6420:*");
 MODULE_ALIAS("dmi:*:svnFUJITSU:*:pvr:rvnFUJITSU:rnFJNB19C:*:cvrS7020:*");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct pnp_device_id pnp_ids[] __used = {
 	{.id = "FUJ02bf"},
@@ -1370,5 +1479,7 @@ static struct pnp_device_id pnp_ids[] __used = {
 };
 
 MODULE_DEVICE_TABLE(pnp, pnp_ids);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

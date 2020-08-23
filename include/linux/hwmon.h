@@ -16,11 +16,14 @@
 
 struct device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct device *hwmon_device_register(struct device *dev);
 
 void hwmon_device_unregister(struct device *dev);
 =======
+=======
+>>>>>>> v3.18
 struct attribute_group;
 
 struct device *hwmon_device_register(struct device *dev);
@@ -35,6 +38,9 @@ devm_hwmon_device_register_with_groups(struct device *dev, const char *name,
 
 void hwmon_device_unregister(struct device *dev);
 void devm_hwmon_device_unregister(struct device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

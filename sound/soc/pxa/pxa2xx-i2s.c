@@ -24,9 +24,15 @@
 #include <sound/soc.h>
 #include <sound/pxa2xx-lib.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/hardware.h>
 #include <mach/dma.h>
+=======
+#include <sound/dmaengine_pcm.h>
+
+#include <mach/hardware.h>
+>>>>>>> v3.18
 =======
 #include <sound/dmaengine_pcm.h>
 
@@ -89,6 +95,7 @@ static struct clk *clk_i2s;
 static int clk_ena = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa2xx_pcm_dma_params pxa2xx_i2s_pcm_stereo_out = {
 	.name			= "I2S PCM Stereo out",
 	.dev_addr		= __PREG(SADR),
@@ -104,6 +111,8 @@ static struct pxa2xx_pcm_dma_params pxa2xx_i2s_pcm_stereo_in = {
 	.dcmd			= DCMD_INCTRGADDR | DCMD_FLOWSRC |
 				  DCMD_BURST32 | DCMD_WIDTH4,
 =======
+=======
+>>>>>>> v3.18
 static unsigned long pxa2xx_i2s_pcm_stereo_out_req = 3;
 static struct snd_dmaengine_dai_dma_data pxa2xx_i2s_pcm_stereo_out = {
 	.addr		= __PREG(SADR),
@@ -118,6 +127,9 @@ static struct snd_dmaengine_dai_dma_data pxa2xx_i2s_pcm_stereo_in = {
 	.addr_width	= DMA_SLAVE_BUSWIDTH_4_BYTES,
 	.maxburst	= 32,
 	.filter_data	= &pxa2xx_i2s_pcm_stereo_in_req,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -187,14 +199,20 @@ static int pxa2xx_i2s_hw_params(struct snd_pcm_substream *substream,
 				struct snd_soc_dai *dai)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa2xx_pcm_dma_params *dma_data;
 
 	BUG_ON(IS_ERR(clk_i2s));
 =======
+=======
+>>>>>>> v3.18
 	struct snd_dmaengine_dai_dma_data *dma_data;
 
 	if (WARN_ON(IS_ERR(clk_i2s)))
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk_prepare_enable(clk_i2s);
 	clk_ena = 1;

@@ -22,9 +22,13 @@
 
 	You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 	along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -57,7 +61,13 @@
  * RF3053 2.4G/5G 3T3R(RT3883/RT3563/RT3573/RT3593/RT3662)
  * RF5592 2.4G/5G 2T2R
 <<<<<<< HEAD
+<<<<<<< HEAD
  * RF5360 2.4G 1T1R
+=======
+ * RF3070 2.4G 1T1R
+ * RF5360 2.4G 1T1R
+ * RF5362 2.4G 1T1R
+>>>>>>> v3.18
 =======
  * RF3070 2.4G 1T1R
  * RF5360 2.4G 1T1R
@@ -81,13 +91,19 @@
 #define RF3053				0x000d
 #define RF5592				0x000f
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RF3290				0x3290
 #define RF5360				0x5360
 =======
+=======
+>>>>>>> v3.18
 #define RF3070				0x3070
 #define RF3290				0x3290
 #define RF5360				0x5360
 #define RF5362				0x5362
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RF5370				0x5370
 #define RF5372				0x5372
@@ -106,6 +122,10 @@
 #define REV_RT3090E			0x0211
 #define REV_RT3390E			0x0211
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define REV_RT3593E			0x0211
+>>>>>>> v3.18
 =======
 #define REV_RT3593E			0x0211
 >>>>>>> v3.18
@@ -122,7 +142,11 @@
 #define CSR_REG_SIZE			0x0800
 #define EEPROM_BASE			0x0000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_SIZE			0x0110
+=======
+#define EEPROM_SIZE			0x0200
+>>>>>>> v3.18
 =======
 #define EEPROM_SIZE			0x0200
 >>>>>>> v3.18
@@ -147,7 +171,11 @@
  * MAC_CSR0_3290: MAC_CSR0 for RT3290 to identity MAC version number.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAC_CSR0_3290				0x0000
+=======
+#define MAC_CSR0_3290			0x0000
+>>>>>>> v3.18
 =======
 #define MAC_CSR0_3290			0x0000
 >>>>>>> v3.18
@@ -240,7 +268,11 @@
  * COEX_CFG_0
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COEX_CFG0			0x0040
+=======
+#define COEX_CFG0		0x0040
+>>>>>>> v3.18
 =======
 #define COEX_CFG0		0x0040
 >>>>>>> v3.18
@@ -249,7 +281,11 @@
  * COEX_CFG_1
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COEX_CFG1			0x0044
+=======
+#define COEX_CFG1		0x0044
+>>>>>>> v3.18
 =======
 #define COEX_CFG1		0x0044
 >>>>>>> v3.18
@@ -258,7 +294,11 @@
  * COEX_CFG_2
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COEX_CFG2			0x0048
+=======
+#define COEX_CFG2		0x0048
+>>>>>>> v3.18
 =======
 #define COEX_CFG2		0x0048
 >>>>>>> v3.18
@@ -276,8 +316,13 @@
 #define PLL_CONTROL		FIELD32(0x00070000)
 #define PLL_LPF_R1		FIELD32(0x00080000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PLL_LPF_C1_CTRL	FIELD32(0x00300000)
 #define PLL_LPF_C2_CTRL	FIELD32(0x00c00000)
+=======
+#define PLL_LPF_C1_CTRL		FIELD32(0x00300000)
+#define PLL_LPF_C2_CTRL		FIELD32(0x00c00000)
+>>>>>>> v3.18
 =======
 #define PLL_LPF_C1_CTRL		FIELD32(0x00300000)
 #define PLL_LPF_C2_CTRL		FIELD32(0x00c00000)
@@ -1129,7 +1174,10 @@
 #define TX_PWR_CFG_0_12MBS		FIELD32(0x0f000000)
 #define TX_PWR_CFG_0_18MBS		FIELD32(0xf0000000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* bits for 3T devices */
 #define TX_PWR_CFG_0_CCK1_CH0		FIELD32(0x0000000f)
 #define TX_PWR_CFG_0_CCK1_CH1		FIELD32(0x000000f0)
@@ -1139,6 +1187,9 @@
 #define TX_PWR_CFG_0_OFDM6_CH1		FIELD32(0x00f00000)
 #define TX_PWR_CFG_0_OFDM12_CH0		FIELD32(0x0f000000)
 #define TX_PWR_CFG_0_OFDM12_CH1		FIELD32(0xf0000000)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1154,7 +1205,10 @@
 #define TX_PWR_CFG_1_MCS2		FIELD32(0x0f000000)
 #define TX_PWR_CFG_1_MCS3		FIELD32(0xf0000000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* bits for 3T devices */
 #define TX_PWR_CFG_1_OFDM24_CH0		FIELD32(0x0000000f)
 #define TX_PWR_CFG_1_OFDM24_CH1		FIELD32(0x000000f0)
@@ -1164,6 +1218,9 @@
 #define TX_PWR_CFG_1_MCS0_CH1		FIELD32(0x00f00000)
 #define TX_PWR_CFG_1_MCS2_CH0		FIELD32(0x0f000000)
 #define TX_PWR_CFG_1_MCS2_CH1		FIELD32(0xf0000000)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1179,7 +1236,10 @@
 #define TX_PWR_CFG_2_MCS10		FIELD32(0x0f000000)
 #define TX_PWR_CFG_2_MCS11		FIELD32(0xf0000000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* bits for 3T devices */
 #define TX_PWR_CFG_2_MCS4_CH0		FIELD32(0x0000000f)
 #define TX_PWR_CFG_2_MCS4_CH1		FIELD32(0x000000f0)
@@ -1189,6 +1249,9 @@
 #define TX_PWR_CFG_2_MCS8_CH1		FIELD32(0x00f00000)
 #define TX_PWR_CFG_2_MCS10_CH0		FIELD32(0x0f000000)
 #define TX_PWR_CFG_2_MCS10_CH1		FIELD32(0xf0000000)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1204,7 +1267,10 @@
 #define TX_PWR_CFG_3_UKNOWN3		FIELD32(0x0f000000)
 #define TX_PWR_CFG_3_UKNOWN4		FIELD32(0xf0000000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* bits for 3T devices */
 #define TX_PWR_CFG_3_MCS12_CH0		FIELD32(0x0000000f)
 #define TX_PWR_CFG_3_MCS12_CH1		FIELD32(0x000000f0)
@@ -1214,6 +1280,9 @@
 #define TX_PWR_CFG_3_STBC0_CH1		FIELD32(0x00f00000)
 #define TX_PWR_CFG_3_STBC2_CH0		FIELD32(0x0f000000)
 #define TX_PWR_CFG_3_STBC2_CH1		FIELD32(0xf0000000)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1225,12 +1294,18 @@
 #define TX_PWR_CFG_4_UKNOWN7		FIELD32(0x00000f00)
 #define TX_PWR_CFG_4_UKNOWN8		FIELD32(0x0000f000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* bits for 3T devices */
 #define TX_PWR_CFG_3_STBC4_CH0		FIELD32(0x0000000f)
 #define TX_PWR_CFG_3_STBC4_CH1		FIELD32(0x000000f0)
 #define TX_PWR_CFG_3_STBC6_CH0		FIELD32(0x00000f00)
 #define TX_PWR_CFG_3_STBC6_CH1		FIELD32(0x0000f000)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1554,7 +1629,10 @@
 #define EXP_ACK_TIME			0x1380
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* TX_PWR_CFG_5 */
 #define TX_PWR_CFG_5			0x1384
 #define TX_PWR_CFG_5_MCS16_CH0		FIELD32(0x0000000f)
@@ -1630,6 +1708,9 @@
 #define TX_PWR_CFG_9_STBC7_CH1		FIELD32(0x000000f0)
 #define TX_PWR_CFG_9_STBC7_CH2		FIELD32(0x00000f00)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * RX_FILTER_CFG: RX configuration register.
@@ -2083,7 +2164,11 @@ struct mac_iveiv_entry {
 #define HW_BEACON_BASE7			0x5bc0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HW_BEACON_OFFSET(__index) \
+=======
+#define HW_BEACON_BASE(__index) \
+>>>>>>> v3.18
 =======
 #define HW_BEACON_BASE(__index) \
 >>>>>>> v3.18
@@ -2092,6 +2177,11 @@ struct mac_iveiv_entry {
 	  (HW_BEACON_BASE6 - ((__index - 6) * 0x0200))))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BEACON_BASE_TO_OFFSET(_base)	(((_base) - 0x4000) / 64)
+
+>>>>>>> v3.18
 =======
 #define BEACON_BASE_TO_OFFSET(_base)	(((_base) - 0x4000) / 64)
 
@@ -2165,11 +2255,17 @@ struct mac_iveiv_entry {
 #define BBP109_TX1_POWER		FIELD8(0xf0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* BBP 110 */
 #define BBP110_TX2_POWER		FIELD8(0x0f)
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * BBP 138: Unknown
@@ -2219,9 +2315,12 @@ struct mac_iveiv_entry {
 #define RFCSR3_PA1_BIAS_CCK		FIELD8(0x70)
 #define RFCSR3_PA2_CASCODE_BIAS_CCKK	FIELD8(0x80)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Bits for RF3290/RF5360/RF5370/RF5372/RF5390/RF5392 */
 #define RFCSR3_VCOCAL_EN		FIELD8(0x80)
 =======
+=======
+>>>>>>> v3.18
 /* Bits for RF3290/RF5360/RF5362/RF5370/RF5372/RF5390/RF5392 */
 #define RFCSR3_VCOCAL_EN		FIELD8(0x80)
 /* Bits for RF3050 */
@@ -2230,6 +2329,9 @@ struct mac_iveiv_entry {
 #define RFCSR3_BIT3			FIELD8(0x08)
 #define RFCSR3_BIT4			FIELD8(0x10)
 #define RFCSR3_BIT5			FIELD8(0x20)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -2243,7 +2345,13 @@ struct mac_iveiv_entry {
 #define RFCSR6_R1			FIELD8(0x03)
 #define RFCSR6_R2			FIELD8(0x40)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RFCSR6_TXDIV		FIELD8(0x0c)
+=======
+#define RFCSR6_TXDIV			FIELD8(0x0c)
+/* bits for RF3053 */
+#define RFCSR6_VCO_IC			FIELD8(0xc0)
+>>>>>>> v3.18
 =======
 #define RFCSR6_TXDIV			FIELD8(0x0c)
 /* bits for RF3053 */
@@ -2274,14 +2382,20 @@ struct mac_iveiv_entry {
  */
 #define RFCSR11_R			FIELD8(0x03)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RFCSR11_MOD			FIELD8(0xc0)
 =======
+=======
+>>>>>>> v3.18
 #define RFCSR11_PLL_MOD			FIELD8(0x0c)
 #define RFCSR11_MOD			FIELD8(0xc0)
 /* bits for RF3053 */
 /* TODO: verify RFCSR11_MOD usage on other chips */
 #define RFCSR11_PLL_IDOH		FIELD8(0x40)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -2289,7 +2403,11 @@ struct mac_iveiv_entry {
  */
 #define RFCSR12_TX_POWER		FIELD8(0x1f)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RFCSR12_DR0				FIELD8(0xe0)
+=======
+#define RFCSR12_DR0			FIELD8(0xe0)
+>>>>>>> v3.18
 =======
 #define RFCSR12_DR0			FIELD8(0xe0)
 >>>>>>> v3.18
@@ -2299,7 +2417,11 @@ struct mac_iveiv_entry {
  */
 #define RFCSR13_TX_POWER		FIELD8(0x1f)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RFCSR13_DR0				FIELD8(0xe0)
+=======
+#define RFCSR13_DR0			FIELD8(0xe0)
+>>>>>>> v3.18
 =======
 #define RFCSR13_DR0			FIELD8(0xe0)
 >>>>>>> v3.18
@@ -2321,13 +2443,19 @@ struct mac_iveiv_entry {
 #define RFCSR17_TX_LO1_EN		FIELD8(0x08)
 #define RFCSR17_R			FIELD8(0x20)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RFCSR17_CODE                   FIELD8(0x7f)
 =======
+=======
+>>>>>>> v3.18
 #define RFCSR17_CODE			FIELD8(0x7f)
 
 /* RFCSR 18 */
 #define RFCSR18_XO_TUNE_BYPASS		FIELD8(0x40)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -2391,13 +2519,19 @@ struct mac_iveiv_entry {
 #define RFCSR31_RX_CALIB		FIELD8(0x7f)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* RFCSR 32 bits for RF3053 */
 #define RFCSR32_TX_AGC_FC		FIELD8(0xf8)
 
 /* RFCSR 36 bits for RF3053 */
 #define RFCSR36_RF_BS			FIELD8(0x80)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * RFCSR 38:
@@ -2408,6 +2542,10 @@ struct mac_iveiv_entry {
  * RFCSR 39:
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RFCSR39_RX_DIV			FIELD8(0x40)
+>>>>>>> v3.18
 =======
 #define RFCSR39_RX_DIV			FIELD8(0x40)
 >>>>>>> v3.18
@@ -2419,6 +2557,12 @@ struct mac_iveiv_entry {
 #define RFCSR49_TX			FIELD8(0x3f)
 #define RFCSR49_EP			FIELD8(0xc0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* bits for RT3593 */
+#define RFCSR49_TX_LO1_IC		FIELD8(0x1c)
+#define RFCSR49_TX_DIV			FIELD8(0x20)
+>>>>>>> v3.18
 =======
 /* bits for RT3593 */
 #define RFCSR49_TX_LO1_IC		FIELD8(0x1c)
@@ -2431,7 +2575,10 @@ struct mac_iveiv_entry {
 #define RFCSR50_TX			FIELD8(0x3f)
 #define RFCSR50_EP			FIELD8(0xc0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* bits for RT3593 */
 #define RFCSR50_TX_LO1_EN		FIELD8(0x20)
 #define RFCSR50_TX_LO2_EN		FIELD8(0x10)
@@ -2453,6 +2600,9 @@ struct mac_iveiv_entry {
 
 #define RFCSR57_DRV_CC			FIELD8(0xfc)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -2488,11 +2638,14 @@ struct mac_iveiv_entry {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Chip ID
  */
 #define EEPROM_CHIP_ID			0x0000
 =======
+=======
+>>>>>>> v3.18
 enum rt2800_eeprom_word {
 	EEPROM_CHIP_ID = 0,
 	EEPROM_VERSION,
@@ -2540,13 +2693,19 @@ enum rt2800_eeprom_word {
 	/* New values must be added before this */
 	EEPROM_WORD_COUNT
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * EEPROM Version
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_VERSION			0x0001
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_VERSION_FAE		FIELD16(0x00ff)
@@ -2556,6 +2715,7 @@ enum rt2800_eeprom_word {
  * HW MAC address.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_MAC_ADDR_0		0x0002
 #define EEPROM_MAC_ADDR_BYTE0		FIELD16(0x00ff)
 #define EEPROM_MAC_ADDR_BYTE1		FIELD16(0xff00)
@@ -2563,6 +2723,12 @@ enum rt2800_eeprom_word {
 #define EEPROM_MAC_ADDR_BYTE2		FIELD16(0x00ff)
 #define EEPROM_MAC_ADDR_BYTE3		FIELD16(0xff00)
 #define EEPROM_MAC_ADDR_2		0x0004
+=======
+#define EEPROM_MAC_ADDR_BYTE0		FIELD16(0x00ff)
+#define EEPROM_MAC_ADDR_BYTE1		FIELD16(0xff00)
+#define EEPROM_MAC_ADDR_BYTE2		FIELD16(0x00ff)
+#define EEPROM_MAC_ADDR_BYTE3		FIELD16(0xff00)
+>>>>>>> v3.18
 =======
 #define EEPROM_MAC_ADDR_BYTE0		FIELD16(0x00ff)
 #define EEPROM_MAC_ADDR_BYTE1		FIELD16(0xff00)
@@ -2579,10 +2745,16 @@ enum rt2800_eeprom_word {
  * RF_TYPE: RFIC type
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	EEPROM_NIC_CONF0		0x001a
 #define EEPROM_NIC_CONF0_RXPATH		FIELD16(0x000f)
 #define EEPROM_NIC_CONF0_TXPATH		FIELD16(0x00f0)
 #define EEPROM_NIC_CONF0_RF_TYPE		FIELD16(0x0f00)
+=======
+#define EEPROM_NIC_CONF0_RXPATH		FIELD16(0x000f)
+#define EEPROM_NIC_CONF0_TXPATH		FIELD16(0x00f0)
+#define EEPROM_NIC_CONF0_RF_TYPE	FIELD16(0x0f00)
+>>>>>>> v3.18
 =======
 #define EEPROM_NIC_CONF0_RXPATH		FIELD16(0x000f)
 #define EEPROM_NIC_CONF0_TXPATH		FIELD16(0x00f0)
@@ -2609,16 +2781,22 @@ enum rt2800_eeprom_word {
  * DAC_TEST: 0: disable, 1: enable
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	EEPROM_NIC_CONF1		0x001b
 #define EEPROM_NIC_CONF1_HW_RADIO		FIELD16(0x0001)
 #define EEPROM_NIC_CONF1_EXTERNAL_TX_ALC		FIELD16(0x0002)
 #define EEPROM_NIC_CONF1_EXTERNAL_LNA_2G		FIELD16(0x0004)
 #define EEPROM_NIC_CONF1_EXTERNAL_LNA_5G		FIELD16(0x0008)
 =======
+=======
+>>>>>>> v3.18
 #define EEPROM_NIC_CONF1_HW_RADIO		FIELD16(0x0001)
 #define EEPROM_NIC_CONF1_EXTERNAL_TX_ALC	FIELD16(0x0002)
 #define EEPROM_NIC_CONF1_EXTERNAL_LNA_2G	FIELD16(0x0004)
 #define EEPROM_NIC_CONF1_EXTERNAL_LNA_5G	FIELD16(0x0008)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define EEPROM_NIC_CONF1_CARDBUS_ACCEL		FIELD16(0x0010)
 #define EEPROM_NIC_CONF1_BW40M_SB_2G		FIELD16(0x0020)
@@ -2627,9 +2805,15 @@ enum rt2800_eeprom_word {
 #define EEPROM_NIC_CONF1_BW40M_2G		FIELD16(0x0100)
 #define EEPROM_NIC_CONF1_BW40M_5G		FIELD16(0x0200)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_NIC_CONF1_BROADBAND_EXT_LNA		FIELD16(0x400)
 #define EEPROM_NIC_CONF1_ANT_DIVERSITY		FIELD16(0x1800)
 #define EEPROM_NIC_CONF1_INTERNAL_TX_ALC		FIELD16(0x2000)
+=======
+#define EEPROM_NIC_CONF1_BROADBAND_EXT_LNA	FIELD16(0x400)
+#define EEPROM_NIC_CONF1_ANT_DIVERSITY		FIELD16(0x1800)
+#define EEPROM_NIC_CONF1_INTERNAL_TX_ALC	FIELD16(0x2000)
+>>>>>>> v3.18
 =======
 #define EEPROM_NIC_CONF1_BROADBAND_EXT_LNA	FIELD16(0x400)
 #define EEPROM_NIC_CONF1_ANT_DIVERSITY		FIELD16(0x1800)
@@ -2642,7 +2826,10 @@ enum rt2800_eeprom_word {
  * EEPROM frequency
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	EEPROM_FREQ			0x001d
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_FREQ_OFFSET		FIELD16(0x00ff)
@@ -2662,9 +2849,12 @@ enum rt2800_eeprom_word {
  * LED_MODE: Led mode.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_LED_AG_CONF		0x001e
 #define EEPROM_LED_ACT_CONF		0x001f
 #define EEPROM_LED_POLARITY		0x0020
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_LED_POLARITY_RDY_BG	FIELD16(0x0001)
@@ -2684,10 +2874,16 @@ enum rt2800_eeprom_word {
  * CRYSTAL: 00: Reserved, 01: One crystal, 10: Two crystal, 11: Reserved
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_NIC_CONF2		0x0021
 #define EEPROM_NIC_CONF2_RX_STREAM		FIELD16(0x000f)
 #define EEPROM_NIC_CONF2_TX_STREAM		FIELD16(0x00f0)
 #define EEPROM_NIC_CONF2_CRYSTAL		FIELD16(0x0600)
+=======
+#define EEPROM_NIC_CONF2_RX_STREAM	FIELD16(0x000f)
+#define EEPROM_NIC_CONF2_TX_STREAM	FIELD16(0x00f0)
+#define EEPROM_NIC_CONF2_CRYSTAL	FIELD16(0x0600)
+>>>>>>> v3.18
 =======
 #define EEPROM_NIC_CONF2_RX_STREAM	FIELD16(0x000f)
 #define EEPROM_NIC_CONF2_TX_STREAM	FIELD16(0x00f0)
@@ -2698,7 +2894,10 @@ enum rt2800_eeprom_word {
  * EEPROM LNA
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_LNA			0x0022
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_LNA_BG			FIELD16(0x00ff)
@@ -2708,7 +2907,10 @@ enum rt2800_eeprom_word {
  * EEPROM RSSI BG offset
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_RSSI_BG			0x0023
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_RSSI_BG_OFFSET0		FIELD16(0x00ff)
@@ -2718,7 +2920,10 @@ enum rt2800_eeprom_word {
  * EEPROM RSSI BG2 offset
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_RSSI_BG2			0x0024
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_RSSI_BG2_OFFSET2		FIELD16(0x00ff)
@@ -2728,7 +2933,10 @@ enum rt2800_eeprom_word {
  * EEPROM TXMIXER GAIN BG offset (note overlaps with EEPROM RSSI BG2).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TXMIXER_GAIN_BG		0x0024
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TXMIXER_GAIN_BG_VAL	FIELD16(0x0007)
@@ -2737,7 +2945,10 @@ enum rt2800_eeprom_word {
  * EEPROM RSSI A offset
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_RSSI_A			0x0025
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_RSSI_A_OFFSET0		FIELD16(0x00ff)
@@ -2747,7 +2958,10 @@ enum rt2800_eeprom_word {
  * EEPROM RSSI A2 offset
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_RSSI_A2			0x0026
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_RSSI_A2_OFFSET2		FIELD16(0x00ff)
@@ -2757,7 +2971,10 @@ enum rt2800_eeprom_word {
  * EEPROM TXMIXER GAIN A offset (note overlaps with EEPROM RSSI A2).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TXMIXER_GAIN_A		0x0026
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TXMIXER_GAIN_A_VAL	FIELD16(0x0007)
@@ -2766,7 +2983,10 @@ enum rt2800_eeprom_word {
  * EEPROM EIRP Maximum TX power values(unit: dbm)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_EIRP_MAX_TX_POWER	0x0027
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_EIRP_MAX_TX_POWER_2GHZ	FIELD16(0x00ff)
@@ -2780,7 +3000,10 @@ enum rt2800_eeprom_word {
  * ENABLE: enable tx power compensation for 40BW
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TXPOWER_DELTA		0x0028
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TXPOWER_DELTA_VALUE_2G	FIELD16(0x003f)
@@ -2794,8 +3017,11 @@ enum rt2800_eeprom_word {
  * EEPROM TXPOWER 802.11BG
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	EEPROM_TXPOWER_BG1		0x0029
 #define	EEPROM_TXPOWER_BG2		0x0030
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TXPOWER_BG_SIZE		7
@@ -2810,7 +3036,10 @@ enum rt2800_eeprom_word {
  *         reduced by (agc_step * -3)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_BG1		0x0037
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_BG1_MINUS4	FIELD16(0x00ff)
@@ -2824,7 +3053,10 @@ enum rt2800_eeprom_word {
  *         reduced by (agc_step * -1)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_BG2		0x0038
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_BG2_MINUS2	FIELD16(0x00ff)
@@ -2837,7 +3069,10 @@ enum rt2800_eeprom_word {
  *        increased by (agc_step * 1)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_BG3		0x0039
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_BG3_REF	FIELD16(0x00ff)
@@ -2851,7 +3086,10 @@ enum rt2800_eeprom_word {
  *        increased by (agc_step * 3)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_BG4		0x003a
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_BG4_PLUS2	FIELD16(0x00ff)
@@ -2864,7 +3102,10 @@ enum rt2800_eeprom_word {
  * AGC_STEP: Temperature compensation step.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_BG5		0x003b
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_BG5_PLUS4	FIELD16(0x00ff)
@@ -2874,8 +3115,11 @@ enum rt2800_eeprom_word {
  * EEPROM TXPOWER 802.11A
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TXPOWER_A1		0x003c
 #define EEPROM_TXPOWER_A2		0x0053
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TXPOWER_A_SIZE		6
@@ -2883,11 +3127,17 @@ enum rt2800_eeprom_word {
 #define EEPROM_TXPOWER_A_2		FIELD16(0xff00)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* EEPROM_TXPOWER_{A,G} fields for RT3593 */
 #define EEPROM_TXPOWER_ALC		FIELD8(0x1f)
 #define EEPROM_TXPOWER_FINE_CTRL	FIELD8(0xe0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * EEPROM temperature compensation boundaries 802.11A
@@ -2897,7 +3147,10 @@ enum rt2800_eeprom_word {
  *         reduced by (agc_step * -3)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_A1		0x006a
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_A1_MINUS4	FIELD16(0x00ff)
@@ -2911,7 +3164,10 @@ enum rt2800_eeprom_word {
  *         reduced by (agc_step * -1)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_A2		0x006b
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_A2_MINUS2	FIELD16(0x00ff)
@@ -2924,7 +3180,10 @@ enum rt2800_eeprom_word {
  *        increased by (agc_step * 1)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_A3		0x006c
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_A3_REF	FIELD16(0x00ff)
@@ -2938,7 +3197,10 @@ enum rt2800_eeprom_word {
  *        increased by (agc_step * 3)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_A4		0x006d
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_A4_PLUS2	FIELD16(0x00ff)
@@ -2951,7 +3213,10 @@ enum rt2800_eeprom_word {
  * AGC_STEP: Temperature compensation step.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TSSI_BOUND_A5		0x006e
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TSSI_BOUND_A5_PLUS4	FIELD16(0x00ff)
@@ -2961,7 +3226,10 @@ enum rt2800_eeprom_word {
  * EEPROM TXPOWER by rate: tx power per tx rate for HT20 mode
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EEPROM_TXPOWER_BYRATE		0x006f
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_TXPOWER_BYRATE_SIZE	9
@@ -2975,7 +3243,10 @@ enum rt2800_eeprom_word {
  * EEPROM BBP.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	EEPROM_BBP_START		0x0078
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EEPROM_BBP_SIZE			16
@@ -2983,11 +3254,17 @@ enum rt2800_eeprom_word {
 #define EEPROM_BBP_REG_ID		FIELD16(0xff00)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* EEPROM_EXT_LNA2 */
 #define EEPROM_EXT_LNA2_A1		FIELD16(0x00ff)
 #define EEPROM_EXT_LNA2_A2		FIELD16(0xff00)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * EEPROM IQ Calibration, unlike other entries those are byte addresses.
@@ -3060,7 +3337,11 @@ enum rt2800_eeprom_word {
 #define MCU_LED				0x50
 #define MCU_LED_STRENGTH		0x51
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MCU_LED_AG_CONF		0x52
+=======
+#define MCU_LED_AG_CONF			0x52
+>>>>>>> v3.18
 =======
 #define MCU_LED_AG_CONF			0x52
 >>>>>>> v3.18
@@ -3070,14 +3351,20 @@ enum rt2800_eeprom_word {
 #define MCU_BOOT_SIGNAL			0x72
 #define MCU_ANT_SELECT			0X73
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MCU_BBP_SIGNAL			0x80
 #define MCU_POWER_SAVE			0x83
 #define MCU_BAND_SELECT		0x91
 =======
+=======
+>>>>>>> v3.18
 #define MCU_FREQ_OFFSET			0x74
 #define MCU_BBP_SIGNAL			0x80
 #define MCU_POWER_SAVE			0x83
 #define MCU_BAND_SELECT			0x91
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -3092,12 +3379,15 @@ enum rt2800_eeprom_word {
  * DMA descriptor defines.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TXWI_DESC_SIZE			(4 * sizeof(__le32))
 #define RXWI_DESC_SIZE			(4 * sizeof(__le32))
 
 #define TXWI_DESC_SIZE_5592		(5 * sizeof(__le32))
 #define RXWI_DESC_SIZE_5592		(6 * sizeof(__le32))
 =======
+=======
+>>>>>>> v3.18
 
 #define TXWI_DESC_SIZE_4WORDS		(4 * sizeof(__le32))
 #define TXWI_DESC_SIZE_5WORDS		(5 * sizeof(__le32))
@@ -3106,6 +3396,9 @@ enum rt2800_eeprom_word {
 #define RXWI_DESC_SIZE_5WORDS		(5 * sizeof(__le32))
 #define RXWI_DESC_SIZE_6WORDS		(6 * sizeof(__le32))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * TX WI structure
@@ -3226,6 +3519,7 @@ enum rt2800_eeprom_word {
 #define DEFAULT_TXPOWER	5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TXPOWER_G_FROM_DEV(__txpower) \
 	((__txpower) > MAX_G_TXPOWER) ? DEFAULT_TXPOWER : (__txpower)
 
@@ -3239,6 +3533,8 @@ enum rt2800_eeprom_word {
 	clamp_t(char, __txpower, MIN_A_TXPOWER, MAX_A_TXPOWER)
 
 =======
+=======
+>>>>>>> v3.18
 #define MIN_A_TXPOWER_3593	0
 #define MAX_A_TXPOWER_3593	31
 
@@ -3248,6 +3544,9 @@ enum rt2800_eeprom_word {
 #define TXPOWER_A_FROM_DEV(__txpower) \
 	((__txpower) > MAX_A_TXPOWER) ? DEFAULT_TXPOWER : (__txpower)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *  Board's maximun TX power limitation

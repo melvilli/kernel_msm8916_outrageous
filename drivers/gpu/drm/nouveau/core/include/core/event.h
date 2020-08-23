@@ -2,6 +2,7 @@
 #define __NVKM_EVENT_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* return codes from event handlers */
 #define NVKM_EVENT_DROP 0
 #define NVKM_EVENT_KEEP 1
@@ -34,6 +35,8 @@ void nouveau_event_get(struct nouveau_event *, int index,
 void nouveau_event_put(struct nouveau_event *, int index,
 		       struct nouveau_eventh *);
 =======
+=======
+>>>>>>> v3.18
 #include <core/notify.h>
 
 struct nvkm_event_func {
@@ -64,6 +67,9 @@ void nvkm_event_get(struct nvkm_event *, u32 types, int index);
 void nvkm_event_put(struct nvkm_event *, u32 types, int index);
 void nvkm_event_send(struct nvkm_event *, u32 types, int index,
 		     void *data, u32 size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

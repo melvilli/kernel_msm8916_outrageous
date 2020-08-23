@@ -30,6 +30,10 @@
 #ifdef CONFIG_PPC_ICP_NATIVE
 extern int icp_native_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void icp_native_flush_interrupt(void);
+>>>>>>> v3.18
 =======
 extern void icp_native_flush_interrupt(void);
 >>>>>>> v3.18

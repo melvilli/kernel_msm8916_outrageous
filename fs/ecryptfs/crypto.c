@@ -38,6 +38,7 @@
 #include "ecryptfs_kernel.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 ecryptfs_decrypt_page_offset(struct ecryptfs_crypt_stat *crypt_stat,
 			     struct page *dst_page, int dst_offset,
@@ -48,6 +49,10 @@ ecryptfs_encrypt_page_offset(struct ecryptfs_crypt_stat *crypt_stat,
 			     struct page *dst_page, int dst_offset,
 			     struct page *src_page, int src_offset, int size,
 			     unsigned char *iv);
+=======
+#define DECRYPT		0
+#define ENCRYPT		1
+>>>>>>> v3.18
 =======
 #define DECRYPT		0
 #define ENCRYPT		1
@@ -342,6 +347,7 @@ static void extent_crypt_complete(struct crypto_async_request *req, int rc)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * encrypt_scatterlist
  * @crypt_stat: Pointer to the crypt_stat struct to initialize.
  * @dest_sg: Destination of encrypted data
@@ -356,6 +362,8 @@ static int encrypt_scatterlist(struct ecryptfs_crypt_stat *crypt_stat,
 			       struct scatterlist *src_sg, int size,
 			       unsigned char *iv)
 =======
+=======
+>>>>>>> v3.18
  * crypt_scatterlist
  * @crypt_stat: Pointer to the crypt_stat struct to initialize.
  * @dst_sg: Destination of the data after performing the crypto operation
@@ -370,6 +378,9 @@ static int crypt_scatterlist(struct ecryptfs_crypt_stat *crypt_stat,
 			     struct scatterlist *dst_sg,
 			     struct scatterlist *src_sg, int size,
 			     unsigned char *iv, int op)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ablkcipher_request *req = NULL;
@@ -414,9 +425,15 @@ static int crypt_scatterlist(struct ecryptfs_crypt_stat *crypt_stat,
 	}
 	mutex_unlock(&crypt_stat->cs_tfm_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ecryptfs_printk(KERN_DEBUG, "Encrypting [%d] bytes.\n", size);
 	ablkcipher_request_set_crypt(req, src_sg, dest_sg, size, iv);
 	rc = crypto_ablkcipher_encrypt(req);
+=======
+	ablkcipher_request_set_crypt(req, src_sg, dst_sg, size, iv);
+	rc = op == ENCRYPT ? crypto_ablkcipher_encrypt(req) :
+			     crypto_ablkcipher_decrypt(req);
+>>>>>>> v3.18
 =======
 	ablkcipher_request_set_crypt(req, src_sg, dst_sg, size, iv);
 	rc = op == ENCRYPT ? crypto_ablkcipher_encrypt(req) :
@@ -428,7 +445,11 @@ static int crypt_scatterlist(struct ecryptfs_crypt_stat *crypt_stat,
 		wait_for_completion(&ecr->completion);
 		rc = ecr->rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(ecr->completion);
+=======
+		reinit_completion(&ecr->completion);
+>>>>>>> v3.18
 =======
 		reinit_completion(&ecr->completion);
 >>>>>>> v3.18
@@ -439,6 +460,7 @@ out:
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * ecryptfs_lower_offset_for_extent
  *
@@ -476,6 +498,8 @@ static int ecryptfs_encrypt_extent(struct page *enc_extent_page,
 	extent_base = (((loff_t)page->index)
 		       * (PAGE_CACHE_SIZE / crypt_stat->extent_size));
 =======
+=======
+>>>>>>> v3.18
  * lower_offset_for_page
  *
  * Convert an eCryptfs page index into a lower byte offset
@@ -513,6 +537,9 @@ static int crypt_extent(struct ecryptfs_crypt_stat *crypt_stat,
 	int rc;
 
 	extent_base = (((loff_t)page_index) * (PAGE_CACHE_SIZE / extent_size));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = ecryptfs_derive_iv(extent_iv, crypt_stat,
 				(extent_base + extent_offset));
@@ -522,6 +549,7 @@ static int crypt_extent(struct ecryptfs_crypt_stat *crypt_stat,
 			(unsigned long long)(extent_base + extent_offset), rc);
 		goto out;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = ecryptfs_encrypt_page_offset(crypt_stat, enc_extent_page, 0,
 					  page, (extent_offset
@@ -533,6 +561,8 @@ static int crypt_extent(struct ecryptfs_crypt_stat *crypt_stat,
 		       "rc = [%d]\n", __func__, page->index, extent_offset,
 		       rc);
 =======
+=======
+>>>>>>> v3.18
 
 	sg_init_table(&src_sg, 1);
 	sg_init_table(&dst_sg, 1);
@@ -548,6 +578,9 @@ static int crypt_extent(struct ecryptfs_crypt_stat *crypt_stat,
 		printk(KERN_ERR "%s: Error attempting to crypt page with "
 		       "page_index = [%ld], extent_offset = [%ld]; "
 		       "rc = [%d]\n", __func__, page_index, extent_offset, rc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -580,6 +613,10 @@ int ecryptfs_encrypt_page(struct page *page)
 	struct page *enc_extent_page = NULL;
 	loff_t extent_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	loff_t lower_offset;
+>>>>>>> v3.18
 =======
 	loff_t lower_offset;
 >>>>>>> v3.18
@@ -597,6 +634,7 @@ int ecryptfs_encrypt_page(struct page *page)
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enc_extent_virt = kmap(enc_extent_page);
 	for (extent_offset = 0;
 	     extent_offset < (PAGE_CACHE_SIZE / crypt_stat->extent_size);
@@ -606,18 +644,24 @@ int ecryptfs_encrypt_page(struct page *page)
 		rc = ecryptfs_encrypt_extent(enc_extent_page, crypt_stat, page,
 					     extent_offset);
 =======
+=======
+>>>>>>> v3.18
 
 	for (extent_offset = 0;
 	     extent_offset < (PAGE_CACHE_SIZE / crypt_stat->extent_size);
 	     extent_offset++) {
 		rc = crypt_extent(crypt_stat, enc_extent_page, page,
 				  extent_offset, ENCRYPT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rc) {
 			printk(KERN_ERR "%s: Error encrypting extent; "
 			       "rc = [%d]\n", __func__, rc);
 			goto out;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ecryptfs_lower_offset_for_extent(
 			&offset, ((((loff_t)page->index)
@@ -672,6 +716,8 @@ static int ecryptfs_decrypt_extent(struct page *page,
 		       "rc = [%d]\n", __func__, page->index, extent_offset,
 		       rc);
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	lower_offset = lower_offset_for_page(crypt_stat, page);
@@ -683,12 +729,21 @@ static int ecryptfs_decrypt_extent(struct page *page,
 		ecryptfs_printk(KERN_ERR,
 			"Error attempting to write lower page; rc = [%d]\n",
 			rc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
 	rc = 0;
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (enc_extent_page) {
+		__free_page(enc_extent_page);
+	}
+>>>>>>> v3.18
 =======
 	if (enc_extent_page) {
 		__free_page(enc_extent_page);
@@ -718,9 +773,15 @@ int ecryptfs_decrypt_page(struct page *page)
 	struct inode *ecryptfs_inode;
 	struct ecryptfs_crypt_stat *crypt_stat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *enc_extent_virt;
 	struct page *enc_extent_page = NULL;
 	unsigned long extent_offset;
+=======
+	char *page_virt;
+	unsigned long extent_offset;
+	loff_t lower_offset;
+>>>>>>> v3.18
 =======
 	char *page_virt;
 	unsigned long extent_offset;
@@ -732,6 +793,7 @@ int ecryptfs_decrypt_page(struct page *page)
 	crypt_stat =
 		&(ecryptfs_inode_to_private(ecryptfs_inode)->crypt_stat);
 	BUG_ON(!(crypt_stat->flags & ECRYPTFS_ENCRYPTED));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	enc_extent_page = alloc_page(GFP_USER);
 	if (!enc_extent_page) {
@@ -762,6 +824,8 @@ int ecryptfs_decrypt_page(struct page *page)
 		rc = ecryptfs_decrypt_extent(page, crypt_stat, enc_extent_page,
 					     extent_offset);
 =======
+=======
+>>>>>>> v3.18
 
 	lower_offset = lower_offset_for_page(crypt_stat, page);
 	page_virt = kmap(page);
@@ -780,6 +844,9 @@ int ecryptfs_decrypt_page(struct page *page)
 	     extent_offset++) {
 		rc = crypt_extent(crypt_stat, page, page,
 				  extent_offset, DECRYPT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rc) {
 			printk(KERN_ERR "%s: Error encrypting extent; "
@@ -788,6 +855,7 @@ int ecryptfs_decrypt_page(struct page *page)
 		}
 	}
 out:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (enc_extent_page) {
 		kunmap(enc_extent_page);
@@ -926,6 +994,9 @@ ecryptfs_decrypt_page_offset(struct ecryptfs_crypt_stat *crypt_stat,
 =======
 	return rc;
 >>>>>>> v3.18
+=======
+	return rc;
+>>>>>>> v3.18
 }
 
 #define ECRYPTFS_MAX_SCATTERLIST_LEN 4
@@ -945,10 +1016,13 @@ int ecryptfs_init_crypt_ctx(struct ecryptfs_crypt_stat *crypt_stat)
 	int rc = -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!crypt_stat->cipher) {
 		ecryptfs_printk(KERN_ERR, "No cipher specified\n");
 		goto out;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ecryptfs_printk(KERN_DEBUG,
@@ -957,17 +1031,23 @@ int ecryptfs_init_crypt_ctx(struct ecryptfs_crypt_stat *crypt_stat)
 			crypt_stat->cipher, (int)strlen(crypt_stat->cipher),
 			crypt_stat->key_size << 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (crypt_stat->tfm) {
 		rc = 0;
 		goto out;
 	}
 	mutex_lock(&crypt_stat->cs_tfm_mutex);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&crypt_stat->cs_tfm_mutex);
 	if (crypt_stat->tfm) {
 		rc = 0;
 		goto out_unlock;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = ecryptfs_crypto_api_algify_cipher_name(&full_alg_name,
 						    crypt_stat->cipher, "cbc");
@@ -975,7 +1055,10 @@ int ecryptfs_init_crypt_ctx(struct ecryptfs_crypt_stat *crypt_stat)
 		goto out_unlock;
 	crypt_stat->tfm = crypto_alloc_ablkcipher(full_alg_name, 0, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(full_alg_name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (IS_ERR(crypt_stat->tfm)) {
@@ -983,6 +1066,7 @@ int ecryptfs_init_crypt_ctx(struct ecryptfs_crypt_stat *crypt_stat)
 		crypt_stat->tfm = NULL;
 		ecryptfs_printk(KERN_ERR, "cryptfs: init_crypt_ctx(): "
 				"Error initializing cipher [%s]\n",
+<<<<<<< HEAD
 <<<<<<< HEAD
 				crypt_stat->cipher);
 		goto out_unlock;
@@ -993,6 +1077,8 @@ out_unlock:
 	mutex_unlock(&crypt_stat->cs_tfm_mutex);
 out:
 =======
+=======
+>>>>>>> v3.18
 				full_alg_name);
 		goto out_free;
 	}
@@ -1002,6 +1088,9 @@ out_free:
 	kfree(full_alg_name);
 out_unlock:
 	mutex_unlock(&crypt_stat->cs_tfm_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -2283,6 +2372,10 @@ ecryptfs_decode_from_filename(unsigned char *dst, size_t *dst_size,
 		case 2:
 			dst[dst_byte_offset++] |= (src_byte);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			dst[dst_byte_offset] = 0;
+>>>>>>> v3.18
 =======
 			dst[dst_byte_offset] = 0;
 >>>>>>> v3.18
@@ -2427,6 +2520,7 @@ out:
 int ecryptfs_decode_and_decrypt_filename(char **plaintext_name,
 					 size_t *plaintext_name_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 struct dentry *ecryptfs_dir_dentry,
 					 const char *name, size_t name_size)
 {
@@ -2434,11 +2528,16 @@ int ecryptfs_decode_and_decrypt_filename(char **plaintext_name,
 		&ecryptfs_superblock_to_private(
 			ecryptfs_dir_dentry->d_sb)->mount_crypt_stat;
 =======
+=======
+>>>>>>> v3.18
 					 struct super_block *sb,
 					 const char *name, size_t name_size)
 {
 	struct ecryptfs_mount_crypt_stat *mount_crypt_stat =
 		&ecryptfs_superblock_to_private(sb)->mount_crypt_stat;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char *decoded_name;
 	size_t decoded_name_size;

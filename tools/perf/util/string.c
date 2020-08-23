@@ -10,8 +10,14 @@
 s64 perf_atoll(const char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int i;
 	s64 length = -1, unit = 1;
+=======
+	s64 length;
+	char *p;
+	char c;
+>>>>>>> v3.18
 =======
 	s64 length;
 	char *p;
@@ -21,6 +27,7 @@ s64 perf_atoll(const char *str)
 	if (!isdigit(str[0]))
 		goto out_err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 1; i < strlen(str); i++) {
 		switch (str[i]) {
@@ -89,6 +96,8 @@ out_err:
 out:
 	return length;
 =======
+=======
+>>>>>>> v3.18
 	length = strtoll(str, &p, 10);
 	switch (c = *p++) {
 		case 'b': case 'B':
@@ -124,6 +133,9 @@ out:
 
 out_err:
 	return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -173,7 +185,11 @@ void argv_free(char **argv)
 	char **p;
 	for (p = argv; *p; p++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(*p);
+=======
+		zfree(p);
+>>>>>>> v3.18
 =======
 		zfree(p);
 >>>>>>> v3.18

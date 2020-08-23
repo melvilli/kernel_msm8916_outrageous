@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -51,7 +55,11 @@
 /* Current ACPICA subsystem version in YYYYMMDD format */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ACPI_CA_VERSION                 0x20130328
+=======
+#define ACPI_CA_VERSION                 0x20140926
+>>>>>>> v3.18
 =======
 #define ACPI_CA_VERSION                 0x20140926
 >>>>>>> v3.18
@@ -61,6 +69,7 @@
 #include <acpi/actbl.h>
 #include <acpi/acbuffer.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern u8 acpi_gbl_permanent_mmap;
 
@@ -278,6 +287,8 @@ acpi_status acpi_get_id(acpi_handle object, acpi_owner_id * out_type);
 
 acpi_status acpi_get_parent(acpi_handle object, acpi_handle * out_handle);
 =======
+=======
+>>>>>>> v3.18
 /*****************************************************************************
  *
  * Macros used for ACPICA globals and configuration
@@ -756,11 +767,15 @@ ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 			    acpi_get_parent(acpi_handle object,
 					    acpi_handle * out_handle))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Handler interfaces
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 acpi_status
 acpi_install_initialization_handler(acpi_init_handler handler, u32 function);
@@ -770,6 +785,8 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 				(acpi_gbl_event_handler handler, void *context))
 
 =======
+=======
+>>>>>>> v3.18
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 			    acpi_install_initialization_handler
 			    (acpi_init_handler handler, u32 function))
@@ -784,6 +801,9 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 				 acpi_install_global_event_handler
 				 (acpi_gbl_event_handler handler,
 				  void *context))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 				 acpi_install_fixed_event_handler(u32
@@ -810,6 +830,7 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 							 acpi_gpe_handler
 							 address))
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_install_notify_handler(acpi_handle device, u32 handler_type,
 					acpi_notify_handler handler,
 					void *context);
@@ -835,6 +856,8 @@ acpi_status acpi_install_exception_handler(acpi_exception_handler handler);
 
 acpi_status acpi_install_interface_handler(acpi_interface_handler handler);
 =======
+=======
+>>>>>>> v3.18
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 			     acpi_install_notify_handler(acpi_handle device,
 							 u32 handler_type,
@@ -871,6 +894,9 @@ ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 			     acpi_install_interface_handler
 			     (acpi_interface_handler handler))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -880,6 +906,10 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 				acpi_acquire_global_lock(u16 timeout,
 							 u32 *handle))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -890,11 +920,14 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
  * Interfaces to AML mutex objects
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status
 acpi_acquire_mutex(acpi_handle handle, acpi_string pathname, u16 timeout);
 
 acpi_status acpi_release_mutex(acpi_handle handle, acpi_string pathname);
 =======
+=======
+>>>>>>> v3.18
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 			    acpi_acquire_mutex(acpi_handle handle,
 					       acpi_string pathname,
@@ -903,6 +936,9 @@ ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 			    acpi_release_mutex(acpi_handle handle,
 					       acpi_string pathname))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -914,7 +950,10 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 				acpi_disable_event(u32 event, u32 flags))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status acpi_clear_event(u32 event))
@@ -924,6 +963,10 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 						      acpi_event_status
 						      *event_status))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -954,11 +997,17 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				acpi_mark_gpe_for_wake(acpi_handle gpe_device,
 						       u32 gpe_number))
 
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				acpi_setup_gpe_for_wake(acpi_handle
 							parent_device,
@@ -974,10 +1023,16 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 						     acpi_event_status
 						     *event_status))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status acpi_disable_all_gpes(void))
 
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status acpi_enable_all_runtime_gpes(void))
+=======
+ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status acpi_disable_all_gpes(void))
+ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status acpi_enable_all_runtime_gpes(void))
+ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status acpi_enable_all_wakeup_gpes(void))
+>>>>>>> v3.18
 =======
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status acpi_disable_all_gpes(void))
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status acpi_enable_all_runtime_gpes(void))
@@ -1005,6 +1060,7 @@ typedef
 acpi_status(*acpi_walk_resource_callback) (struct acpi_resource * resource,
 					   void *context);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 acpi_status
 acpi_get_vendor_resource(acpi_handle device,
@@ -1049,6 +1105,8 @@ acpi_buffer_to_resource(u8 *aml_buffer,
 			u16 aml_buffer_length,
 			struct acpi_resource **resource_ptr);
 =======
+=======
+>>>>>>> v3.18
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 			    acpi_get_vendor_resource(acpi_handle device,
 						     char *name,
@@ -1099,11 +1157,15 @@ ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 						     u16 aml_buffer_length,
 						     struct acpi_resource
 						     **resource_ptr))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Hardware (ACPI device) interfaces
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 acpi_status acpi_reset(void);
 
@@ -1111,6 +1173,8 @@ acpi_status acpi_read(u64 *value, struct acpi_generic_address *reg);
 
 acpi_status acpi_write(u64 value, struct acpi_generic_address *reg);
 =======
+=======
+>>>>>>> v3.18
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status acpi_reset(void))
 
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status
@@ -1120,6 +1184,9 @@ ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 			    acpi_write(u64 value,
 				       struct acpi_generic_address *reg))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
@@ -1134,6 +1201,7 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
  * Sleep/Wake interfaces
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status
 acpi_get_sleep_type_data(u8 sleep_state, u8 * slp_typ_a, u8 * slp_typ_b);
 
@@ -1147,6 +1215,8 @@ acpi_status acpi_leave_sleep_state_prep(u8 sleep_state);
 
 acpi_status acpi_leave_sleep_state(u8 sleep_state);
 =======
+=======
+>>>>>>> v3.18
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 			    acpi_get_sleep_type_data(u8 sleep_state,
 						     u8 *slp_typ_a,
@@ -1161,13 +1231,19 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status acpi_enter_sleep_state_s4bios(void))
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 			    acpi_leave_sleep_state_prep(u8 sleep_state))
 ACPI_EXTERNAL_RETURN_STATUS(acpi_status acpi_leave_sleep_state(u8 sleep_state))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 				acpi_set_firmware_waking_vector(u32
 								physical_address))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if ACPI_MACHINE_WIDTH == 64
@@ -1182,7 +1258,10 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 				acpi_get_timer_resolution(u32 *resolution))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status acpi_get_timer(u32 *ticks))
@@ -1196,6 +1275,7 @@ ACPI_HW_DEPENDENT_RETURN_STATUS(acpi_status
 /*
  * Error/Warning output
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void ACPI_INTERNAL_VAR_XFACE
 acpi_error(const char *module_name,
@@ -1222,6 +1302,8 @@ void ACPI_INTERNAL_VAR_XFACE
 acpi_bios_warning(const char *module_name,
 		  u32 line_number, const char *format, ...) ACPI_PRINTF_LIKE(3);
 =======
+=======
+>>>>>>> v3.18
 ACPI_MSG_DEPENDENT_RETURN_VOID(ACPI_PRINTF_LIKE(3)
 			       void ACPI_INTERNAL_VAR_XFACE
 			       acpi_error(const char *module_name,
@@ -1253,11 +1335,15 @@ ACPI_MSG_DEPENDENT_RETURN_VOID(ACPI_PRINTF_LIKE(3)
 				acpi_bios_warning(const char *module_name,
 						  u32 line_number,
 						  const char *format, ...))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Debug output
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef ACPI_DEBUG_OUTPUT
 
@@ -1277,6 +1363,8 @@ acpi_debug_print_raw(u32 requested_debug_level,
 		     const char *format, ...) ACPI_PRINTF_LIKE(6);
 #endif
 =======
+=======
+>>>>>>> v3.18
 ACPI_DBG_DEPENDENT_RETURN_VOID(ACPI_PRINTF_LIKE(6)
 			       void ACPI_INTERNAL_VAR_XFACE
 			       acpi_debug_print(u32 requested_debug_level,
@@ -1320,6 +1408,9 @@ ACPI_EXTERNAL_RETURN_STATUS(acpi_status
 					       acpi_object_handler handler,
 					       void **data,
 					       void (*callback)(void *)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* __ACXFACE_H__ */

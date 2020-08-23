@@ -19,6 +19,10 @@
 #include <linux/seq_file.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/irq.h>
 >>>>>>> v3.18

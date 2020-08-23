@@ -201,17 +201,23 @@ static int copy_to_brd_setup(struct brd_device *brd, sector_t sector, size_t n)
 	copy = min_t(size_t, n, PAGE_SIZE - offset);
 	if (!brd_insert_page(brd, sector))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
 	if (copy < n) {
 		sector += copy >> SECTOR_SHIFT;
 		if (!brd_insert_page(brd, sector))
 			return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 		return -ENOSPC;
 	if (copy < n) {
 		sector += copy >> SECTOR_SHIFT;
 		if (!brd_insert_page(brd, sector))
 			return -ENOSPC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -337,6 +343,7 @@ static void brd_make_request(struct request_queue *q, struct bio *bio)
 	struct brd_device *brd = bdev->bd_disk->private_data;
 	int rw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bvec;
 	sector_t sector;
 	int i;
@@ -344,12 +351,17 @@ static void brd_make_request(struct request_queue *q, struct bio *bio)
 
 	sector = bio->bi_sector;
 =======
+=======
+>>>>>>> v3.18
 	struct bio_vec bvec;
 	sector_t sector;
 	struct bvec_iter iter;
 	int err = -EIO;
 
 	sector = bio->bi_iter.bi_sector;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (bio_end_sector(bio) > get_capacity(bdev->bd_disk))
 		goto out;
@@ -357,7 +369,11 @@ static void brd_make_request(struct request_queue *q, struct bio *bio)
 	if (unlikely(bio->bi_rw & REQ_DISCARD)) {
 		err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		discard_from_brd(brd, sector, bio->bi_size);
+=======
+		discard_from_brd(brd, sector, bio->bi_iter.bi_size);
+>>>>>>> v3.18
 =======
 		discard_from_brd(brd, sector, bio->bi_iter.bi_size);
 >>>>>>> v3.18
@@ -369,15 +385,21 @@ static void brd_make_request(struct request_queue *q, struct bio *bio)
 		rw = READ;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio_for_each_segment(bvec, bio, i) {
 		unsigned int len = bvec->bv_len;
 		err = brd_do_bvec(brd, bvec->bv_page, len,
 					bvec->bv_offset, rw, sector);
 =======
+=======
+>>>>>>> v3.18
 	bio_for_each_segment(bvec, bio, iter) {
 		unsigned int len = bvec.bv_len;
 		err = brd_do_bvec(brd, bvec.bv_page, len,
 					bvec.bv_offset, rw, sector);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err)
 			break;
@@ -389,7 +411,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int brd_rw_page(struct block_device *bdev, sector_t sector,
 		       struct page *page, int rw)
 {
@@ -399,6 +424,9 @@ static int brd_rw_page(struct block_device *bdev, sector_t sector,
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_BLK_DEV_XIP
 static int brd_direct_access(struct block_device *bdev, sector_t sector,
@@ -416,7 +444,11 @@ static int brd_direct_access(struct block_device *bdev, sector_t sector,
 	page = brd_insert_page(brd, sector);
 	if (!page)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
+=======
+		return -ENOSPC;
+>>>>>>> v3.18
 =======
 		return -ENOSPC;
 >>>>>>> v3.18
@@ -464,6 +496,10 @@ static int brd_ioctl(struct block_device *bdev, fmode_t mode,
 static const struct block_device_operations brd_fops = {
 	.owner =		THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.rw_page =		brd_rw_page,
+>>>>>>> v3.18
 =======
 	.rw_page =		brd_rw_page,
 >>>>>>> v3.18
@@ -481,6 +517,10 @@ int rd_size = CONFIG_BLK_DEV_RAM_SIZE;
 static int max_part;
 static int part_shift;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int part_show = 0;
+>>>>>>> v3.18
 =======
 static int part_show = 0;
 >>>>>>> v3.18
@@ -491,6 +531,11 @@ MODULE_PARM_DESC(rd_size, "Size of each RAM disk in kbytes.");
 module_param(max_part, int, S_IRUGO);
 MODULE_PARM_DESC(max_part, "Maximum number of partitions per RAM disk");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+module_param(part_show, int, S_IRUGO);
+MODULE_PARM_DESC(part_show, "Control RAM disk visibility in /proc/partitions");
+>>>>>>> v3.18
 =======
 module_param(part_show, int, S_IRUGO);
 MODULE_PARM_DESC(part_show, "Control RAM disk visibility in /proc/partitions");
@@ -549,7 +594,12 @@ static struct brd_device *brd_alloc(int i)
 	disk->private_data	= brd;
 	disk->queue		= brd->brd_queue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	disk->flags |= GENHD_FL_SUPPRESS_PARTITION_INFO;
+=======
+	if (!part_show)
+		disk->flags |= GENHD_FL_SUPPRESS_PARTITION_INFO;
+>>>>>>> v3.18
 =======
 	if (!part_show)
 		disk->flags |= GENHD_FL_SUPPRESS_PARTITION_INFO;

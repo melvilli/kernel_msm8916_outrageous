@@ -28,7 +28,11 @@
 #include <asm/mmu_context.h>
 #include <asm/hw_irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "trace.h"
+=======
+#include "trace_pr.h"
+>>>>>>> v3.18
 =======
 #include "trace_pr.h"
 >>>>>>> v3.18
@@ -39,7 +43,11 @@ void kvmppc_mmu_invalidate_pte(struct kvm_vcpu *vcpu, struct hpte_cache *pte)
 {
 	ppc_md.hpte_invalidate(pte->slot, pte->host_vpn,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       MMU_PAGE_4K, MMU_SEGSIZE_256M,
+=======
+			       pte->pagesize, pte->pagesize, MMU_SEGSIZE_256M,
+>>>>>>> v3.18
 =======
 			       pte->pagesize, pte->pagesize, MMU_SEGSIZE_256M,
 >>>>>>> v3.18
@@ -67,7 +75,11 @@ static struct kvmppc_sid_map *find_sid_vsid(struct kvm_vcpu *vcpu, u64 gvsid)
 	u16 sid_map_mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vcpu->arch.shared->msr & MSR_PR)
+=======
+	if (kvmppc_get_msr(vcpu) & MSR_PR)
+>>>>>>> v3.18
 =======
 	if (kvmppc_get_msr(vcpu) & MSR_PR)
 >>>>>>> v3.18
@@ -91,7 +103,12 @@ static struct kvmppc_sid_map *find_sid_vsid(struct kvm_vcpu *vcpu, u64 gvsid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte)
+=======
+int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
+			bool iswrite)
+>>>>>>> v3.18
 =======
 int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
 			bool iswrite)
@@ -108,6 +125,7 @@ int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
 	struct kvmppc_sid_map *map;
 	int r = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Get host physical address for gpa */
 	hpaddr = kvmppc_gfn_to_pfn(vcpu, orig_pte->raddr >> PAGE_SHIFT);
@@ -119,6 +137,8 @@ int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
 	hpaddr <<= PAGE_SHIFT;
 	hpaddr |= orig_pte->raddr & (~0xfffULL & ~PAGE_MASK);
 =======
+=======
+>>>>>>> v3.18
 	int hpsize = MMU_PAGE_4K;
 	bool writable;
 	unsigned long mmu_seq;
@@ -140,6 +160,9 @@ int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
 		goto out;
 	}
 	hpaddr = pfn << PAGE_SHIFT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* and write the mapping ea -> hpa into the pt */
@@ -159,6 +182,7 @@ int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vsid = map->host_vsid;
 	vpn = hpt_vpn(orig_pte->eaddr, vsid, MMU_SEGSIZE_256M);
 
@@ -167,6 +191,8 @@ int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
 	else
 		mark_page_dirty(vcpu->kvm, orig_pte->raddr >> PAGE_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 	vpn = hpt_vpn(orig_pte->eaddr, map->host_vsid, MMU_SEGSIZE_256M);
 
 	kvm_set_pfn_accessed(pfn);
@@ -176,16 +202,22 @@ int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
 		mark_page_dirty(vcpu->kvm, gfn);
 		kvm_set_pfn_dirty(pfn);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!orig_pte->may_execute)
 		rflags |= HPTE_R_N;
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kvmppc_mmu_flush_icache(hpaddr >> PAGE_SHIFT);
 
 	hash = hpt_hash(vpn, PTE_SIZE, MMU_SEGSIZE_256M);
 =======
+=======
+>>>>>>> v3.18
 		kvmppc_mmu_flush_icache(pfn);
 
 	/*
@@ -206,6 +238,9 @@ int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
 		r = -EAGAIN;
 		goto out_unlock;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 map_again:
@@ -216,17 +251,23 @@ map_again:
 		if (ppc_md.hpte_remove(hpteg) < 0) {
 			r = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
 		}
 
 	ret = ppc_md.hpte_insert(hpteg, vpn, hpaddr, rflags, vflags,
 				 MMU_PAGE_4K, MMU_PAGE_4K, MMU_SEGSIZE_256M);
 =======
+=======
+>>>>>>> v3.18
 			goto out_unlock;
 		}
 
 	ret = ppc_md.hpte_insert(hpteg, vpn, hpaddr, rflags, vflags,
 				 hpsize, hpsize, MMU_SEGSIZE_256M);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret < 0) {
@@ -237,8 +278,11 @@ map_again:
 		goto map_again;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct hpte_cache *pte = kvmppc_mmu_hpte_cache_next(vcpu);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		trace_kvm_book3s_64_mmu_map(rflags, hpteg,
@@ -252,6 +296,7 @@ map_again:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte->slot = hpteg + (ret & 7);
 		pte->host_vpn = vpn;
 		pte->pte = *orig_pte;
@@ -261,6 +306,8 @@ map_again:
 	}
 	kvm_release_pfn_clean(hpaddr >> PAGE_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 		cpte->slot = hpteg + (ret & 7);
 		cpte->host_vpn = vpn;
 		cpte->pte = *orig_pte;
@@ -276,6 +323,9 @@ out_unlock:
 	kvm_release_pfn_clean(pfn);
 	if (cpte)
 		kvmppc_mmu_hpte_cache_free(cpte);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -283,7 +333,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void kvmppc_mmu_unmap_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *pte)
 {
 	u64 mask = 0xfffffffffULL;
@@ -295,6 +348,9 @@ void kvmppc_mmu_unmap_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *pte)
 	kvmppc_mmu_pte_vflush(vcpu, pte->vpage, mask);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct kvmppc_sid_map *create_sid_map(struct kvm_vcpu *vcpu, u64 gvsid)
 {
@@ -304,7 +360,11 @@ static struct kvmppc_sid_map *create_sid_map(struct kvm_vcpu *vcpu, u64 gvsid)
 	static int backwards_map = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vcpu->arch.shared->msr & MSR_PR)
+=======
+	if (kvmppc_get_msr(vcpu) & MSR_PR)
+>>>>>>> v3.18
 =======
 	if (kvmppc_get_msr(vcpu) & MSR_PR)
 >>>>>>> v3.18
@@ -349,11 +409,16 @@ static int kvmppc_mmu_next_segment(struct kvm_vcpu *vcpu, ulong esid)
 	int r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!svcpu->slb_max)
 		svcpu->slb_max = 1;
 
 	/* Are we overwriting? */
 	for (i = 1; i < svcpu->slb_max; i++) {
+=======
+	/* Are we overwriting? */
+	for (i = 0; i < svcpu->slb_max; i++) {
+>>>>>>> v3.18
 =======
 	/* Are we overwriting? */
 	for (i = 0; i < svcpu->slb_max; i++) {
@@ -368,7 +433,11 @@ static int kvmppc_mmu_next_segment(struct kvm_vcpu *vcpu, ulong esid)
 
 	/* Found a spare entry that was invalidated before */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (found_inval > 0) {
+=======
+	if (found_inval >= 0) {
+>>>>>>> v3.18
 =======
 	if (found_inval >= 0) {
 >>>>>>> v3.18
@@ -424,13 +493,19 @@ int kvmppc_mmu_map_segment(struct kvm_vcpu *vcpu, ulong eaddr)
 	slb_esid |= slb_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_64K_PAGES
 	/* Set host segment base page size to 64K if possible */
 	if (gvsid & VSID_64K)
 		slb_vsid |= mmu_psize_defs[MMU_PAGE_64K].sllp;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	svcpu->slb[slb_index].esid = slb_esid;
 	svcpu->slb[slb_index].vsid = slb_vsid;
@@ -443,11 +518,14 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_mmu_flush_segments(struct kvm_vcpu *vcpu)
 {
 	struct kvmppc_book3s_shadow_vcpu *svcpu = svcpu_get(vcpu);
 	svcpu->slb_max = 1;
 =======
+=======
+>>>>>>> v3.18
 void kvmppc_mmu_flush_segment(struct kvm_vcpu *vcpu, ulong ea, ulong seg_size)
 {
 	struct kvmppc_book3s_shadow_vcpu *svcpu = svcpu_get(vcpu);
@@ -469,13 +547,20 @@ void kvmppc_mmu_flush_segments(struct kvm_vcpu *vcpu)
 {
 	struct kvmppc_book3s_shadow_vcpu *svcpu = svcpu_get(vcpu);
 	svcpu->slb_max = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	svcpu->slb[0].esid = 0;
 	svcpu_put(svcpu);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_mmu_destroy(struct kvm_vcpu *vcpu)
+=======
+void kvmppc_mmu_destroy_pr(struct kvm_vcpu *vcpu)
+>>>>>>> v3.18
 =======
 void kvmppc_mmu_destroy_pr(struct kvm_vcpu *vcpu)
 >>>>>>> v3.18
@@ -495,9 +580,15 @@ int kvmppc_mmu_init(struct kvm_vcpu *vcpu)
 	vcpu3s->context_id[0] = err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vcpu3s->proto_vsid_max = ((vcpu3s->context_id[0] + 1)
 				  << ESID_BITS) - 1;
 	vcpu3s->proto_vsid_first = vcpu3s->context_id[0] << ESID_BITS;
+=======
+	vcpu3s->proto_vsid_max = ((u64)(vcpu3s->context_id[0] + 1)
+				  << ESID_BITS) - 1;
+	vcpu3s->proto_vsid_first = (u64)vcpu3s->context_id[0] << ESID_BITS;
+>>>>>>> v3.18
 =======
 	vcpu3s->proto_vsid_max = ((u64)(vcpu3s->context_id[0] + 1)
 				  << ESID_BITS) - 1;

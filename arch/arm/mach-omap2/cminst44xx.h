@@ -12,17 +12,23 @@
 #define __ARCH_ASM_MACH_OMAP2_CMINST44XX_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool omap4_cminst_is_clkdm_in_hwsup(u8 part, s16 inst, u16 cdoffs);
 extern void omap4_cminst_clkdm_enable_hwsup(u8 part, s16 inst, u16 cdoffs);
 extern void omap4_cminst_clkdm_disable_hwsup(u8 part, s16 inst, u16 cdoffs);
 extern void omap4_cminst_clkdm_force_sleep(u8 part, s16 inst, u16 cdoffs);
 extern void omap4_cminst_clkdm_force_wakeup(u8 part, s16 inst, u16 cdoffs);
 =======
+=======
+>>>>>>> v3.18
 bool omap4_cminst_is_clkdm_in_hwsup(u8 part, u16 inst, u16 cdoffs);
 void omap4_cminst_clkdm_enable_hwsup(u8 part, u16 inst, u16 cdoffs);
 void omap4_cminst_clkdm_disable_hwsup(u8 part, u16 inst, u16 cdoffs);
 void omap4_cminst_clkdm_force_sleep(u8 part, u16 inst, u16 cdoffs);
 void omap4_cminst_clkdm_force_wakeup(u8 part, u16 inst, u16 cdoffs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int omap4_cminst_wait_module_ready(u8 part, u16 inst, s16 cdoffs, u16 clkctrl_offs);
 extern int omap4_cminst_wait_module_idle(u8 part, u16 inst, s16 cdoffs,
@@ -36,6 +42,7 @@ extern void omap4_cminst_module_disable(u8 part, u16 inst, s16 cdoffs,
  * but this will probably take some time to fix properly
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32 omap4_cminst_read_inst_reg(u8 part, s16 inst, u16 idx);
 extern void omap4_cminst_write_inst_reg(u32 val, u8 part, s16 inst, u16 idx);
 extern u32 omap4_cminst_rmw_inst_reg_bits(u32 mask, u32 bits, u8 part,
@@ -45,6 +52,8 @@ extern u32 omap4_cminst_set_inst_reg_bits(u32 bits, u8 part, s16 inst,
 extern u32 omap4_cminst_clear_inst_reg_bits(u32 bits, u8 part, s16 inst,
 					   s16 idx);
 =======
+=======
+>>>>>>> v3.18
 u32 omap4_cminst_read_inst_reg(u8 part, u16 inst, u16 idx);
 void omap4_cminst_write_inst_reg(u32 val, u8 part, u16 inst, u16 idx);
 u32 omap4_cminst_rmw_inst_reg_bits(u32 mask, u32 bits, u8 part,
@@ -53,6 +62,9 @@ u32 omap4_cminst_set_inst_reg_bits(u32 bits, u8 part, u16 inst,
 				   s16 idx);
 u32 omap4_cminst_clear_inst_reg_bits(u32 bits, u8 part, u16 inst,
 				     s16 idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern u32 omap4_cminst_read_inst_reg_bits(u8 part, u16 inst, s16 idx,
 					   u32 mask);

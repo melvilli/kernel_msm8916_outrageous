@@ -499,7 +499,11 @@ static int ab3100_regulator_register(struct platform_device *pdev,
 				     struct regulator_init_data *init_data,
 				     struct device_node *np,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     int id)
+=======
+				     unsigned long id)
+>>>>>>> v3.18
 =======
 				     unsigned long id)
 >>>>>>> v3.18
@@ -540,7 +544,11 @@ static int ab3100_regulator_register(struct platform_device *pdev,
 	config.driver_data = reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev = regulator_register(desc, &config);
+=======
+	rdev = devm_regulator_register(&pdev->dev, desc, &config);
+>>>>>>> v3.18
 =======
 	rdev = devm_regulator_register(&pdev->dev, desc, &config);
 >>>>>>> v3.18
@@ -625,7 +633,10 @@ static int ab3100_regulators_remove(struct platform_device *pdev)
 		struct ab3100_regulator *reg = &ab3100_regulators[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		regulator_unregister(reg->rdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		reg->rdev = NULL;
@@ -659,7 +670,11 @@ ab3100_regulator_of_probe(struct platform_device *pdev, struct device_node *np)
 			pdev, NULL, ab3100_regulator_matches[i].init_data,
 			ab3100_regulator_matches[i].of_node,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(int) ab3100_regulator_matches[i].driver_data);
+=======
+			(unsigned long)ab3100_regulator_matches[i].driver_data);
+>>>>>>> v3.18
 =======
 			(unsigned long)ab3100_regulator_matches[i].driver_data);
 >>>>>>> v3.18
@@ -676,7 +691,11 @@ ab3100_regulator_of_probe(struct platform_device *pdev, struct device_node *np)
 static int ab3100_regulators_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ab3100_platform_data *plfdata = pdev->dev.platform_data;
+=======
+	struct ab3100_platform_data *plfdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct ab3100_platform_data *plfdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

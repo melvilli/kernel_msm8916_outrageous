@@ -17,7 +17,11 @@ config ISDN_DRV_HISAX
 	  card, below.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 if ISDN_DRV_HISAX!=n
+=======
+if ISDN_DRV_HISAX
+>>>>>>> v3.18
 =======
 if ISDN_DRV_HISAX
 >>>>>>> v3.18
@@ -353,10 +357,13 @@ config HISAX_ENTERNOW_PCI
 	  ISDN card.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endif
 
 if ISDN_DRV_HISAX
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config HISAX_DEBUG
@@ -428,11 +435,14 @@ config HISAX_FRITZ_PCIPNP
 	  from the menu "Plug and Play configuration")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HISAX_AVM_A1_PCMCIA
 	bool
 	depends on HISAX_AVM_A1_CS
 	default y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif

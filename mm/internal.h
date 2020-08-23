@@ -12,6 +12,10 @@
 #define __MM_INTERNAL_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/fs.h>
+>>>>>>> v3.18
 =======
 #include <linux/fs.h>
 >>>>>>> v3.18
@@ -26,7 +30,10 @@ static inline void set_page_count(struct page *page, int v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int __do_page_cache_readahead(struct address_space *mapping,
 		struct file *filp, pgoff_t offset, unsigned long nr_to_read,
 		unsigned long lookahead_size);
@@ -41,6 +48,9 @@ static inline unsigned long ra_submit(struct file_ra_state *ra,
 					ra->start, ra->size, ra->async_size);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Turn a non-refcounted page (->_count == 0) into refcounted with
@@ -48,6 +58,7 @@ static inline unsigned long ra_submit(struct file_ra_state *ra,
  */
 static inline void set_page_refcounted(struct page *page)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	VM_BUG_ON(PageTail(page));
 	VM_BUG_ON(atomic_read(&page->_count));
@@ -60,11 +71,16 @@ static inline void __put_page(struct page *page)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	VM_BUG_ON_PAGE(PageTail(page), page);
 	VM_BUG_ON_PAGE(atomic_read(&page->_count), page);
 	set_page_count(page, 1);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void __get_page_tail_foll(struct page *page,
 					bool get_page_head)
@@ -81,6 +97,7 @@ static inline void __get_page_tail_foll(struct page *page,
 	 * page_cache_get_speculative()) on tail pages.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(atomic_read(&page->first_page->_count) <= 0);
 	VM_BUG_ON(atomic_read(&page->_count) != 0);
 	VM_BUG_ON(page_mapcount(page) < 0);
@@ -88,10 +105,15 @@ static inline void __get_page_tail_foll(struct page *page,
 		atomic_inc(&page->first_page->_count);
 	atomic_inc(&page->_mapcount);
 =======
+=======
+>>>>>>> v3.18
 	VM_BUG_ON_PAGE(atomic_read(&page->first_page->_count) <= 0, page);
 	if (get_page_head)
 		atomic_inc(&page->first_page->_count);
 	get_huge_page_tail(page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -115,7 +137,11 @@ static inline void get_page_foll(struct page *page)
 		 * requires to already have an elevated page->_count.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		VM_BUG_ON(atomic_read(&page->_count) <= 0);
+=======
+		VM_BUG_ON_PAGE(atomic_read(&page->_count) <= 0, page);
+>>>>>>> v3.18
 =======
 		VM_BUG_ON_PAGE(atomic_read(&page->_count) <= 0, page);
 >>>>>>> v3.18
@@ -141,7 +167,10 @@ extern pmd_t *mm_find_pmd(struct mm_struct *mm, unsigned long address);
  * in mm/page_alloc.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Locate the struct page for both the matching buddy in our
@@ -167,6 +196,9 @@ __find_buddy_index(unsigned long page_idx, unsigned int order)
 }
 
 extern int __isolate_free_page(struct page *page, unsigned int order);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void __free_pages_bootmem(struct page *page, unsigned int order);
 extern void prep_compound_page(struct page *page, unsigned long order);
@@ -174,6 +206,10 @@ extern void prep_compound_page(struct page *page, unsigned long order);
 extern bool is_free_buddy_page(struct page *page);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int user_min_free_kbytes;
+>>>>>>> v3.18
 =======
 extern int user_min_free_kbytes;
 >>>>>>> v3.18
@@ -198,7 +234,11 @@ struct compact_control {
 	unsigned long free_pfn;		/* isolate_freepages search base */
 	unsigned long migrate_pfn;	/* isolate_migratepages search base */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool sync;			/* Synchronous migration */
+=======
+	enum migrate_mode mode;		/* Async or sync migration mode */
+>>>>>>> v3.18
 =======
 	enum migrate_mode mode;		/* Async or sync migration mode */
 >>>>>>> v3.18
@@ -210,16 +250,22 @@ struct compact_control {
 
 	int order;			/* order a direct compactor needs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int migratetype;		/* MOVABLE, RECLAIMABLE etc */
 	struct zone *zone;
 	bool contended;			/* True if a lock was contended */
 =======
+=======
+>>>>>>> v3.18
 	const gfp_t gfp_mask;		/* gfp mask of a direct compactor */
 	struct zone *zone;
 	int contended;			/* Signal need_sched() or lock
 					 * contention detected during
 					 * compaction
 					 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -228,8 +274,13 @@ isolate_freepages_range(struct compact_control *cc,
 			unsigned long start_pfn, unsigned long end_pfn);
 unsigned long
 <<<<<<< HEAD
+<<<<<<< HEAD
 isolate_migratepages_range(struct zone *zone, struct compact_control *cc,
 	unsigned long low_pfn, unsigned long end_pfn, bool unevictable);
+=======
+isolate_migratepages_range(struct compact_control *cc,
+			   unsigned long low_pfn, unsigned long end_pfn);
+>>>>>>> v3.18
 =======
 isolate_migratepages_range(struct compact_control *cc,
 			   unsigned long low_pfn, unsigned long end_pfn);
@@ -239,16 +290,22 @@ isolate_migratepages_range(struct compact_control *cc,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * function for dealing with page's order in buddy system.
  * zone->lock is already acquired when we use these.
  * So, we don't need atomic page->flags operations here.
 =======
+=======
+>>>>>>> v3.18
  * This function returns the order of a free page in the buddy system. In
  * general, page_zone(page)->lock must be held by the caller to prevent the
  * page from being allocated in parallel and returning garbage as the order.
  * If a caller does not hold page_zone(page)->lock, it must guarantee that the
  * page cannot be allocated or merged in parallel. Alternatively, it must
  * handle invalid values gracefully, and use page_order_unsafe() below.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static inline unsigned long page_order(struct page *page)
@@ -258,7 +315,10 @@ static inline unsigned long page_order(struct page *page)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Like page_order(), but for callers who cannot afford to hold the zone lock.
  * PageBuddy() should be checked first by the caller to minimize race window,
@@ -277,6 +337,9 @@ static inline bool is_cow_mapping(vm_flags_t flags)
 	return (flags & (VM_SHARED | VM_MAYWRITE)) == VM_MAYWRITE;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* mm/util.c */
 void __vma_link_list(struct mm_struct *mm, struct vm_area_struct *vma,
@@ -293,6 +356,7 @@ static inline void munlock_vma_pages_all(struct vm_area_struct *vma)
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Called only in fault path, to determine if a new page is being
  * mapped into a LOCKED vma.  If it is, mark page as mlocked.
@@ -314,6 +378,8 @@ static inline int mlocked_vma_newpage(struct vm_area_struct *vma,
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * must be called with vma's mmap_sem held for read or write, and page locked.
@@ -353,6 +419,7 @@ static inline void mlock_migrate_page(struct page *newpage, struct page *page)
 extern pmd_t maybe_pmd_mkwrite(pmd_t pmd, struct vm_area_struct *vma);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long vma_address(struct page *page,
 				 struct vm_area_struct *vma);
 #else /* !CONFIG_MMU */
@@ -361,11 +428,16 @@ static inline int mlocked_vma_newpage(struct vm_area_struct *v, struct page *p)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 extern unsigned long vma_address(struct page *page,
 				 struct vm_area_struct *vma);
 #endif
 #else /* !CONFIG_MMU */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void clear_page_mlock(struct page *page) { }
 static inline void mlock_vma_page(struct page *page) { }
@@ -382,7 +454,11 @@ static inline struct page *mem_map_offset(struct page *base, int offset)
 {
 	if (unlikely(offset >= MAX_ORDER_NR_PAGES))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return pfn_to_page(page_to_pfn(base) + offset);
+=======
+		return nth_page(base, offset);
+>>>>>>> v3.18
 =======
 		return nth_page(base, offset);
 >>>>>>> v3.18
@@ -508,6 +584,10 @@ unsigned long reclaim_clean_pages_from_list(struct zone *zone,
 #define ALLOC_CPUSET		0x40 /* check for correct cpuset */
 #define ALLOC_CMA		0x80 /* allow allocations from CMA areas */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ALLOC_FAIR		0x100 /* fair zone allocation */
+>>>>>>> v3.18
 =======
 #define ALLOC_FAIR		0x100 /* fair zone allocation */
 >>>>>>> v3.18

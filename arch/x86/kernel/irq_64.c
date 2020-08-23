@@ -53,6 +53,7 @@ static inline void stack_overflow_check(struct pt_regs *regs)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_stack_top = (u64)__get_cpu_var(irq_stack_union.irq_stack) +
 			STACK_TOP_MARGIN;
 	irq_stack_bottom = (u64)__get_cpu_var(irq_stack_ptr);
@@ -61,6 +62,8 @@ static inline void stack_overflow_check(struct pt_regs *regs)
 
 	oist = &__get_cpu_var(orig_ist);
 =======
+=======
+>>>>>>> v3.18
 	irq_stack_top = (u64)this_cpu_ptr(irq_stack_union.irq_stack) +
 			STACK_TOP_MARGIN;
 	irq_stack_bottom = (u64)__this_cpu_read(irq_stack_ptr);
@@ -68,6 +71,9 @@ static inline void stack_overflow_check(struct pt_regs *regs)
 		return;
 
 	oist = this_cpu_ptr(&orig_ist);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	estack_top = (u64)oist->ist[0] - EXCEPTION_STKSZ + STACK_TOP_MARGIN;
 	estack_bottom = (u64)oist->ist[N_EXCEPTION_STACKS - 1];
@@ -98,6 +104,7 @@ bool handle_irq(unsigned irq, struct pt_regs *regs)
 	return true;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 extern void call_softirq(void);
@@ -119,5 +126,7 @@ asmlinkage void do_softirq(void)
 	}
 	local_irq_restore(flags);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

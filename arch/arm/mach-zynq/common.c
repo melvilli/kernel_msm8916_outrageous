@@ -20,6 +20,10 @@
 #include <linux/platform_device.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk-provider.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk-provider.h>
 >>>>>>> v3.18
@@ -30,13 +34,19 @@
 #include <linux/of_platform.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irqchip.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/memblock.h>
 #include <linux/irqchip.h>
 #include <linux/irqchip/arm-gic.h>
 #include <linux/slab.h>
 #include <linux/sys_soc.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/mach/arch.h>
@@ -47,6 +57,10 @@
 #include <asm/pgtable.h>
 #include <asm/smp_scu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/system_info.h>
+>>>>>>> v3.18
 =======
 #include <asm/system_info.h>
 >>>>>>> v3.18
@@ -54,6 +68,7 @@
 
 #include "common.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __iomem *zynq_scu_base;
 
@@ -64,6 +79,8 @@ static struct of_device_id zynq_of_bus_ids[] __initdata = {
 
 /**
 =======
+=======
+>>>>>>> v3.18
 #define ZYNQ_DEVCFG_MCTRL		0x80
 #define ZYNQ_DEVCFG_PS_VERSION_SHIFT	28
 #define ZYNQ_DEVCFG_PS_VERSION_MASK	0xF
@@ -125,12 +142,16 @@ static void __init zynq_init_late(void)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * zynq_init_machine - System specific initialization, intended to be
  *		       called from board specific initialization.
  */
 static void __init zynq_init_machine(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * 64KB way size, 8-way associativity, parity disabled
@@ -139,6 +160,8 @@ static void __init zynq_init_machine(void)
 
 	of_platform_bus_probe(NULL, zynq_of_bus_ids, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct platform_device_info devinfo = { .name = "cpufreq-dt", };
 	struct soc_device_attribute *soc_dev_attr;
 	struct soc_device *soc_dev;
@@ -177,18 +200,27 @@ out:
 	platform_device_register_full(&devinfo);
 
 	zynq_slcr_init();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __init zynq_timer_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zynq_slcr_init();
 =======
+=======
+>>>>>>> v3.18
 	zynq_early_slcr_init();
 
 	zynq_clock_init();
 	of_clk_init(NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clocksource_of_init();
 }
@@ -221,8 +253,11 @@ static void __init zynq_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void zynq_system_reset(char mode, const char *cmd)
 =======
+=======
+>>>>>>> v3.18
 static void __init zynq_irq_init(void)
 {
 	gic_arch_extn.flags = IRQCHIP_SKIP_SET_WAKE | IRQCHIP_MASK_ON_SUSPEND;
@@ -230,6 +265,9 @@ static void __init zynq_irq_init(void)
 }
 
 static void zynq_system_reset(enum reboot_mode mode, const char *cmd)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	zynq_slcr_system_reset();
@@ -237,13 +275,17 @@ static void zynq_system_reset(enum reboot_mode mode, const char *cmd)
 
 static const char * const zynq_dt_match[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"xlnx,zynq-zc702",
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	"xlnx,zynq-7000",
 	NULL
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 MACHINE_START(XILINX_EP107, "Xilinx Zynq Platform")
 	.smp		= smp_ops(zynq_smp_ops),
@@ -253,6 +295,8 @@ MACHINE_START(XILINX_EP107, "Xilinx Zynq Platform")
 	.init_time	= zynq_timer_init,
 	.dt_compat	= zynq_dt_match,
 =======
+=======
+>>>>>>> v3.18
 DT_MACHINE_START(XILINX_EP107, "Xilinx Zynq Platform")
 	/* 64KB way size, 8-way associativity, parity disabled */
 	.l2c_aux_val	= 0x00000000,
@@ -265,6 +309,9 @@ DT_MACHINE_START(XILINX_EP107, "Xilinx Zynq Platform")
 	.init_time	= zynq_timer_init,
 	.dt_compat	= zynq_dt_match,
 	.reserve	= zynq_memory_init,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.restart	= zynq_system_reset,
 MACHINE_END

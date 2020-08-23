@@ -28,6 +28,10 @@
 #include <linux/io.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -36,6 +40,7 @@
 
 #include <linux/mfd/davinci_voicecodec.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 u32 davinci_vc_read(struct davinci_vc *davinci_vc, int reg)
 {
@@ -48,15 +53,21 @@ void davinci_vc_write(struct davinci_vc *davinci_vc,
 	__raw_writel(val, davinci_vc->base + reg);
 }
 =======
+=======
+>>>>>>> v3.18
 static struct regmap_config davinci_vc_regmap = {
 	.reg_bits = 32,
 	.val_bits = 32,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int __init davinci_vc_probe(struct platform_device *pdev)
 {
 	struct davinci_vc *davinci_vc;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct resource *res, *mem;
 	struct mfd_cell *cell = NULL;
@@ -64,12 +75,17 @@ static int __init davinci_vc_probe(struct platform_device *pdev)
 
 	davinci_vc = kzalloc(sizeof(struct davinci_vc), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	struct resource *res;
 	struct mfd_cell *cell = NULL;
 	int ret;
 
 	davinci_vc = devm_kzalloc(&pdev->dev,
 				  sizeof(struct davinci_vc), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!davinci_vc) {
 		dev_dbg(&pdev->dev,
@@ -78,6 +94,7 @@ static int __init davinci_vc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	davinci_vc->clk = clk_get(&pdev->dev, NULL);
 	if (IS_ERR(davinci_vc->clk)) {
 		dev_dbg(&pdev->dev,
@@ -85,16 +102,22 @@ static int __init davinci_vc_probe(struct platform_device *pdev)
 		ret = -ENODEV;
 		goto fail1;
 =======
+=======
+>>>>>>> v3.18
 	davinci_vc->clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(davinci_vc->clk)) {
 		dev_dbg(&pdev->dev,
 			    "could not get the clock for voice codec\n");
 		return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	clk_enable(davinci_vc->clk);
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!res) {
 		dev_err(&pdev->dev, "no mem resource\n");
@@ -119,6 +142,8 @@ static int __init davinci_vc_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto fail3;
 =======
+=======
+>>>>>>> v3.18
 
 	davinci_vc->base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(davinci_vc->base)) {
@@ -132,6 +157,9 @@ static int __init davinci_vc_probe(struct platform_device *pdev)
 	if (IS_ERR(davinci_vc->regmap)) {
 		ret = PTR_ERR(davinci_vc->regmap);
 		goto fail;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -140,7 +168,11 @@ static int __init davinci_vc_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "no DMA resource\n");
 		ret = -ENXIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail4;
+=======
+		goto fail;
+>>>>>>> v3.18
 =======
 		goto fail;
 >>>>>>> v3.18
@@ -155,7 +187,11 @@ static int __init davinci_vc_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "no DMA resource\n");
 		ret = -ENXIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail4;
+=======
+		goto fail;
+>>>>>>> v3.18
 =======
 		goto fail;
 >>>>>>> v3.18
@@ -185,7 +221,11 @@ static int __init davinci_vc_probe(struct platform_device *pdev)
 	if (ret != 0) {
 		dev_err(&pdev->dev, "fail to register client devices\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail4;
+=======
+		goto fail;
+>>>>>>> v3.18
 =======
 		goto fail;
 >>>>>>> v3.18
@@ -193,6 +233,7 @@ static int __init davinci_vc_probe(struct platform_device *pdev)
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 fail4:
 	iounmap(davinci_vc->base);
@@ -208,6 +249,10 @@ fail1:
 fail:
 	clk_disable(davinci_vc->clk);
 >>>>>>> v3.18
+=======
+fail:
+	clk_disable(davinci_vc->clk);
+>>>>>>> v3.18
 
 	return ret;
 }
@@ -219,6 +264,7 @@ static int davinci_vc_remove(struct platform_device *pdev)
 	mfd_remove_devices(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(davinci_vc->base);
 	release_mem_region(davinci_vc->pbase, davinci_vc->base_size);
 
@@ -227,6 +273,9 @@ static int davinci_vc_remove(struct platform_device *pdev)
 	davinci_vc->clk = NULL;
 
 	kfree(davinci_vc);
+=======
+	clk_disable(davinci_vc->clk);
+>>>>>>> v3.18
 =======
 	clk_disable(davinci_vc->clk);
 >>>>>>> v3.18

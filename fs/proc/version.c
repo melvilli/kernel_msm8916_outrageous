@@ -32,7 +32,11 @@ static int __init proc_version_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(proc_version_init);
+=======
+fs_initcall(proc_version_init);
+>>>>>>> v3.18
 =======
 fs_initcall(proc_version_init);
 >>>>>>> v3.18

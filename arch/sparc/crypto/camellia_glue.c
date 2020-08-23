@@ -275,7 +275,10 @@ static struct crypto_alg algs[] = { {
 			.min_keysize	= CAMELLIA_MIN_KEY_SIZE,
 			.max_keysize	= CAMELLIA_MAX_KEY_SIZE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.ivsize		= CAMELLIA_BLOCK_SIZE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			.setkey		= camellia_set_key,
@@ -327,7 +330,11 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Camellia Cipher Algorithm, sparc64 camellia opcode accelerated");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("aes");
+=======
+MODULE_ALIAS("aes");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("aes");
 >>>>>>> v3.18

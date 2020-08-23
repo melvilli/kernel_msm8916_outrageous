@@ -22,11 +22,17 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_SERIAL_MFD_HSU_CONSOLE) && defined(CONFIG_MAGIC_SYSRQ)
 #define SUPPORT_SYSRQ
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/init.h>
@@ -297,7 +303,11 @@ static void serial_hsu_enable_ms(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void hsu_dma_tx(struct uart_hsu_port *up)
+=======
+static void hsu_dma_tx(struct uart_hsu_port *up)
+>>>>>>> v3.18
 =======
 static void hsu_dma_tx(struct uart_hsu_port *up)
 >>>>>>> v3.18
@@ -348,7 +358,12 @@ static void hsu_dma_tx(struct uart_hsu_port *up)
 
 /* The buffer is already cache coherent */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void hsu_dma_start_rx_chan(struct hsu_dma_chan *rxc, struct hsu_dma_buffer *dbuf)
+=======
+static void hsu_dma_start_rx_chan(struct hsu_dma_chan *rxc,
+					struct hsu_dma_buffer *dbuf)
+>>>>>>> v3.18
 =======
 static void hsu_dma_start_rx_chan(struct hsu_dma_chan *rxc,
 					struct hsu_dma_buffer *dbuf)
@@ -399,7 +414,12 @@ static void serial_hsu_stop_tx(struct uart_port *port)
 /* This is always called in spinlock protected mode, so
  * modify timeout timer is safe here */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void hsu_dma_rx(struct uart_hsu_port *up, u32 int_sts)
+=======
+static void hsu_dma_rx(struct uart_hsu_port *up, u32 int_sts,
+			unsigned long *flags)
+>>>>>>> v3.18
 =======
 static void hsu_dma_rx(struct uart_hsu_port *up, u32 int_sts,
 			unsigned long *flags)
@@ -456,7 +476,13 @@ static void hsu_dma_rx(struct uart_hsu_port *up, u32 int_sts,
 					 | (0x1 << 24)	/* timeout bit, see HSU Errata 1 */
 					 );
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_flip_buffer_push(tport);
+=======
+	spin_unlock_irqrestore(&up->port.lock, *flags);
+	tty_flip_buffer_push(tport);
+	spin_lock_irqsave(&up->port.lock, *flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&up->port.lock, *flags);
 	tty_flip_buffer_push(tport);
@@ -483,7 +509,12 @@ static void serial_hsu_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void receive_chars(struct uart_hsu_port *up, int *status)
+=======
+static inline void receive_chars(struct uart_hsu_port *up, int *status,
+		unsigned long *flags)
+>>>>>>> v3.18
 =======
 static inline void receive_chars(struct uart_hsu_port *up, int *status,
 		unsigned long *flags)
@@ -548,12 +579,18 @@ static inline void receive_chars(struct uart_hsu_port *up, int *status,
 		*status = serial_in(up, UART_LSR);
 	} while ((*status & UART_LSR_DR) && max_count--);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_flip_buffer_push(&up->port.state->port);
 =======
+=======
+>>>>>>> v3.18
 
 	spin_unlock_irqrestore(&up->port.lock, *flags);
 	tty_flip_buffer_push(&up->port.state->port);
 	spin_lock_irqsave(&up->port.lock, *flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -649,7 +686,11 @@ static irqreturn_t port_irq(int irq, void *dev_id)
 	lsr = serial_in(up, UART_LSR);
 	if (lsr & UART_LSR_DR)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		receive_chars(up, &lsr);
+=======
+		receive_chars(up, &lsr, &flags);
+>>>>>>> v3.18
 =======
 		receive_chars(up, &lsr, &flags);
 >>>>>>> v3.18
@@ -683,7 +724,11 @@ static inline void dma_chan_irq(struct hsu_dma_chan *chan)
 	/* Rx channel */
 	if (chan->dirt == DMA_FROM_DEVICE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hsu_dma_rx(up, int_sts);
+=======
+		hsu_dma_rx(up, int_sts, &flags);
+>>>>>>> v3.18
 =======
 		hsu_dma_rx(up, int_sts, &flags);
 >>>>>>> v3.18
@@ -1013,7 +1058,11 @@ serial_hsu_set_termios(struct uart_port *port, struct ktermios *termios,
 	if (termios->c_iflag & INPCK)
 		up->port.read_status_mask |= UART_LSR_FE | UART_LSR_PE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -1225,7 +1274,11 @@ static struct console serial_hsu_console = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct uart_ops serial_hsu_pops = {
+=======
+static struct uart_ops serial_hsu_pops = {
+>>>>>>> v3.18
 =======
 static struct uart_ops serial_hsu_pops = {
 >>>>>>> v3.18
@@ -1304,6 +1357,7 @@ static int serial_hsu_resume(struct pci_dev *pdev)
 static int serial_hsu_runtime_idle(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	err = pm_schedule_suspend(dev, 500);
@@ -1311,6 +1365,10 @@ static int serial_hsu_runtime_idle(struct device *dev)
 		return -EBUSY;
 
 	return 0;
+=======
+	pm_schedule_suspend(dev, 500);
+	return -EBUSY;
+>>>>>>> v3.18
 =======
 	pm_schedule_suspend(dev, 500);
 	return -EBUSY;
@@ -1507,7 +1565,10 @@ static void serial_hsu_remove(struct pci_dev *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_irq(pdev->irq, priv);
@@ -1563,7 +1624,11 @@ module_exit(hsu_pci_exit);
 
 MODULE_LICENSE("GPL v2");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS("platform:medfield-hsu");
+=======
+MODULE_DEVICE_TABLE(pci, pci_ids);
+>>>>>>> v3.18
 =======
 MODULE_DEVICE_TABLE(pci, pci_ids);
 >>>>>>> v3.18

@@ -122,10 +122,13 @@ static int __init uwb_subsys_init(void)
 	if (result < 0)
 		goto error_uwb_rc_class_register;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uwb_dbg_init();
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 
 	/* Register the UWB bus */
 	result = bus_register(&uwb_bus_type);
@@ -139,6 +142,9 @@ static int __init uwb_subsys_init(void)
 
 exit_bus:
 	class_unregister(&uwb_rc_class);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error_uwb_rc_class_register:
 	uwb_est_destroy();
@@ -151,6 +157,10 @@ static void __exit uwb_subsys_exit(void)
 {
 	uwb_dbg_exit();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bus_unregister(&uwb_bus_type);
+>>>>>>> v3.18
 =======
 	bus_unregister(&uwb_bus_type);
 >>>>>>> v3.18

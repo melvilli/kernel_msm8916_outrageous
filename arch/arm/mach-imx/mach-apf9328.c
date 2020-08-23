@@ -143,7 +143,10 @@ MACHINE_START(APF9328, "Armadeus APF9328")
 	.init_early   = imx1_init_early,
 	.init_irq     = mx1_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq   = imx1_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= apf9328_timer_init,

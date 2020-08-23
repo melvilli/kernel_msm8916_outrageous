@@ -1728,10 +1728,14 @@ allocated:
 
 	BUFFER_TRACE(gdp_bh, "journal_dirty_metadata for group descriptor");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = ext3_journal_dirty_metadata(handle, gdp_bh);
 	if (!fatal)
 		fatal = err;
 
+=======
+	fatal = ext3_journal_dirty_metadata(handle, gdp_bh);
+>>>>>>> v3.18
 =======
 	fatal = ext3_journal_dirty_metadata(handle, gdp_bh);
 >>>>>>> v3.18

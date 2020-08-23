@@ -3,6 +3,10 @@
 
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/atomic.h>
+>>>>>>> v3.18
 =======
 #include <linux/atomic.h>
 >>>>>>> v3.18
@@ -15,6 +19,10 @@ struct ceph_pagelist {
 	struct list_head free_list;
 	size_t num_pages_free;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_t refcnt;
+>>>>>>> v3.18
 =======
 	atomic_t refcnt;
 >>>>>>> v3.18
@@ -35,14 +43,20 @@ static inline void ceph_pagelist_init(struct ceph_pagelist *pl)
 	INIT_LIST_HEAD(&pl->free_list);
 	pl->num_pages_free = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 extern int ceph_pagelist_release(struct ceph_pagelist *pl);
 =======
+=======
+>>>>>>> v3.18
 	atomic_set(&pl->refcnt, 1);
 }
 
 extern void ceph_pagelist_release(struct ceph_pagelist *pl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int ceph_pagelist_append(struct ceph_pagelist *pl, const void *d, size_t l);

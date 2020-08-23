@@ -17,7 +17,11 @@
 #define NFLOGGER_NAME_LEN		64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct list_head nf_loggers_l[NFPROTO_NUMPROTO] __read_mostly;
+=======
+static struct nf_logger __rcu *loggers[NFPROTO_NUMPROTO][NF_LOG_TYPE_MAX] __read_mostly;
+>>>>>>> v3.18
 =======
 static struct nf_logger __rcu *loggers[NFPROTO_NUMPROTO][NF_LOG_TYPE_MAX] __read_mostly;
 >>>>>>> v3.18
@@ -26,12 +30,15 @@ static DEFINE_MUTEX(nf_log_mutex);
 static struct nf_logger *__find_logger(int pf, const char *str_logger)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nf_logger *t;
 
 	list_for_each_entry(t, &nf_loggers_l[pf], list[pf]) {
 		if (!strnicmp(str_logger, t->name, strlen(t->name)))
 			return t;
 =======
+=======
+>>>>>>> v3.18
 	struct nf_logger *log;
 	int i;
 
@@ -43,6 +50,9 @@ static struct nf_logger *__find_logger(int pf, const char *str_logger)
 						lockdep_is_held(&nf_log_mutex));
 		if (!strncasecmp(str_logger, log->name, strlen(log->name)))
 			return log;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -92,9 +102,12 @@ int nf_log_register(u_int8_t pf, struct nf_logger *logger)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < ARRAY_SIZE(logger->list); i++)
 		INIT_LIST_HEAD(&logger->list[i]);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&nf_log_mutex);
@@ -102,15 +115,21 @@ int nf_log_register(u_int8_t pf, struct nf_logger *logger)
 	if (pf == NFPROTO_UNSPEC) {
 		for (i = NFPROTO_UNSPEC; i < NFPROTO_NUMPROTO; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_add_tail(&(logger->list[i]), &(nf_loggers_l[i]));
 	} else {
 		/* register at end of list to honor first register win */
 		list_add_tail(&logger->list[pf], &nf_loggers_l[pf]);
 =======
+=======
+>>>>>>> v3.18
 			rcu_assign_pointer(loggers[i][logger->type], logger);
 	} else {
 		/* register at end of list to honor first register win */
 		rcu_assign_pointer(loggers[pf][logger->type], logger);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -127,7 +146,11 @@ void nf_log_unregister(struct nf_logger *logger)
 	mutex_lock(&nf_log_mutex);
 	for (i = 0; i < NFPROTO_NUMPROTO; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_del(&logger->list[i]);
+=======
+		RCU_INIT_POINTER(loggers[i][logger->type], NULL);
+>>>>>>> v3.18
 =======
 		RCU_INIT_POINTER(loggers[i][logger->type], NULL);
 >>>>>>> v3.18
@@ -162,7 +185,10 @@ void nf_log_unbind_pf(struct net *net, u_int8_t pf)
 EXPORT_SYMBOL(nf_log_unbind_pf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void nf_logger_request_module(int pf, enum nf_log_type type)
 {
 	if (loggers[pf][type] == NULL)
@@ -205,6 +231,9 @@ void nf_logger_put(int pf, enum nf_log_type type)
 }
 EXPORT_SYMBOL_GPL(nf_logger_put);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void nf_log_packet(struct net *net,
 		   u_int8_t pf,
@@ -221,13 +250,19 @@ void nf_log_packet(struct net *net,
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	logger = rcu_dereference(net->nf.nf_loggers[pf]);
 =======
+=======
+>>>>>>> v3.18
 	if (loginfo != NULL)
 		logger = rcu_dereference(loggers[pf][loginfo->type]);
 	else
 		logger = rcu_dereference(net->nf.nf_loggers[pf]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (logger) {
 		va_start(args, fmt);
@@ -240,7 +275,10 @@ void nf_log_packet(struct net *net,
 EXPORT_SYMBOL(nf_log_packet);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define S_SIZE (1024 - (sizeof(unsigned int) + 1))
 
 struct nf_log_buf {
@@ -298,6 +336,9 @@ void nf_log_buf_close(struct nf_log_buf *m)
 }
 EXPORT_SYMBOL_GPL(nf_log_buf_close);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PROC_FS
 static void *seq_start(struct seq_file *seq, loff_t *pos)
@@ -334,8 +375,12 @@ static int seq_show(struct seq_file *s, void *v)
 	loff_t *pos = v;
 	const struct nf_logger *logger;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nf_logger *t;
 	int ret;
+=======
+	int i, ret;
+>>>>>>> v3.18
 =======
 	int i, ret;
 >>>>>>> v3.18
@@ -353,12 +398,15 @@ static int seq_show(struct seq_file *s, void *v)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(t, &nf_loggers_l[*pos], list[*pos]) {
 		ret = seq_printf(s, "%s", t->name);
 		if (ret < 0)
 			return ret;
 		if (&t->list[*pos] != nf_loggers_l[*pos].prev) {
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < NF_LOG_TYPE_MAX; i++) {
 		if (loggers[*pos][i] == NULL)
 			continue;
@@ -369,6 +417,9 @@ static int seq_show(struct seq_file *s, void *v)
 		if (ret < 0)
 			return ret;
 		if (i == 0 && loggers[*pos][i + 1] != NULL) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = seq_printf(s, ",");
 			if (ret < 0)
@@ -408,7 +459,11 @@ static char nf_log_sysctl_fnames[NFPROTO_NUMPROTO-NFPROTO_UNSPEC][3];
 static struct ctl_table nf_log_sysctl_table[NFPROTO_NUMPROTO+1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int nf_log_proc_dostring(ctl_table *table, int write,
+=======
+static int nf_log_proc_dostring(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int nf_log_proc_dostring(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -420,7 +475,11 @@ static int nf_log_proc_dostring(struct ctl_table *table, int write,
 	int r = 0;
 	int tindex = (unsigned long)table->extra1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net *net = table->extra2;
+=======
+	struct net *net = current->nsproxy->net_ns;
+>>>>>>> v3.18
 =======
 	struct net *net = current->nsproxy->net_ns;
 >>>>>>> v3.18
@@ -477,6 +536,10 @@ static int netfilter_log_sysctl_init(struct net *net)
 			nf_log_sysctl_table[i].procname	=
 				nf_log_sysctl_fnames[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			nf_log_sysctl_table[i].data = NULL;
+>>>>>>> v3.18
 =======
 			nf_log_sysctl_table[i].data = NULL;
 >>>>>>> v3.18
@@ -491,9 +554,12 @@ static int netfilter_log_sysctl_init(struct net *net)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = NFPROTO_UNSPEC; i < NFPROTO_NUMPROTO; i++)
 		table[i].extra2 = net;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	net->nf.nf_log_dir_header = register_net_sysctl(net,
@@ -549,9 +615,13 @@ static int __net_init nf_log_net_init(struct net *net)
 out_sysctl:
 #ifdef CONFIG_PROC_FS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* For init_net: errors will trigger panic, don't unroll on error. */
 	if (!net_eq(net, &init_net))
 		remove_proc_entry("nf_log", net->nf.proc_netfilter);
+=======
+	remove_proc_entry("nf_log", net->nf.proc_netfilter);
+>>>>>>> v3.18
 =======
 	remove_proc_entry("nf_log", net->nf.proc_netfilter);
 >>>>>>> v3.18
@@ -575,6 +645,7 @@ static struct pernet_operations nf_log_net_ops = {
 int __init netfilter_log_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, ret;
 
 	ret = register_pernet_subsys(&nf_log_net_ops);
@@ -585,6 +656,9 @@ int __init netfilter_log_init(void)
 		INIT_LIST_HEAD(&(nf_loggers_l[i]));
 
 	return 0;
+=======
+	return register_pernet_subsys(&nf_log_net_ops);
+>>>>>>> v3.18
 =======
 	return register_pernet_subsys(&nf_log_net_ops);
 >>>>>>> v3.18

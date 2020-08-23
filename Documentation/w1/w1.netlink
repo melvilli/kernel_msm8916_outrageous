@@ -6,8 +6,13 @@ Message types.
 
 There are three types of messages between w1 core and userspace:
 <<<<<<< HEAD
+<<<<<<< HEAD
 1. Events. They are generated each time new master or slave device
 	found either due to automatic or requested search.
+=======
+1. Events. They are generated each time a new master or slave device
+	is found either due to automatic or requested search.
+>>>>>>> v3.18
 =======
 1. Events. They are generated each time a new master or slave device
 	is found either due to automatic or requested search.
@@ -36,7 +41,11 @@ Protocol.
 				userspace command for slave device
 				(read/write/touch)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 res	- reserved
+=======
+	__u8 status	- error indication from kernel
+>>>>>>> v3.18
 =======
 	__u8 status	- error indication from kernel
 >>>>>>> v3.18
@@ -54,11 +63,14 @@ Protocol.
 			W1_CMD_READ 	- read command
 			W1_CMD_WRITE	- write command
 <<<<<<< HEAD
+<<<<<<< HEAD
 			W1_CMD_TOUCH	- touch command
 				(write and sample data back to userspace)
 			W1_CMD_SEARCH	- search command
 			W1_CMD_ALARM_SEARCH - alarm search command
 =======
+=======
+>>>>>>> v3.18
 			W1_CMD_SEARCH	- search command
 			W1_CMD_ALARM_SEARCH - alarm search command
 			W1_CMD_TOUCH	- touch command
@@ -67,6 +79,9 @@ Protocol.
 			W1_CMD_SLAVE_ADD	- add slave to kernel list
 			W1_CMD_SLAVE_REMOVE	- remove slave from kernel list
 			W1_CMD_LIST_SLAVES	- get slaves list from kernel
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u8 res	- reserved
 	__u16 len	- length of data for this command
@@ -108,8 +123,12 @@ format:
 
 	Each message is at most 4k in size, so if number of master devices
 <<<<<<< HEAD
+<<<<<<< HEAD
 	exceeds this, it will be split into several messages,
 	cn.seq will be increased for each one.
+=======
+	exceeds this, it will be split into several messages.
+>>>>>>> v3.18
 =======
 	exceeds this, it will be split into several messages.
 >>>>>>> v3.18
@@ -156,7 +175,11 @@ of the sizeof(struct w1_netlink_msg) and sizeof(struct w1_netlink_cmd).
 If reply is generated for master or root command (which do not have
 w1_netlink_cmd attached), reply will contain only cn_msg and w1_netlink_msg
 <<<<<<< HEAD
+<<<<<<< HEAD
 structires.
+=======
+structures.
+>>>>>>> v3.18
 =======
 structures.
 >>>>>>> v3.18
@@ -189,7 +212,11 @@ Then all requested in w1_netlink_msg operations are performed one by one.
 If command requires reply (like read command) it is sent on command completion.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 When all commands (w1_netlink_cmd) are processed muster device is unlocked
+=======
+When all commands (w1_netlink_cmd) are processed master device is unlocked
+>>>>>>> v3.18
 =======
 When all commands (w1_netlink_cmd) are processed master device is unlocked
 >>>>>>> v3.18

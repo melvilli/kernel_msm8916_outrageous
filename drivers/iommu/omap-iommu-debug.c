@@ -214,6 +214,7 @@ static ssize_t debug_read_pagetable(struct file *file, char __user *userbuf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t debug_read_mmap(struct file *file, char __user *userbuf,
 			       size_t count, loff_t *ppos)
 {
@@ -326,6 +327,8 @@ err_out:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define DEBUG_FOPS(name)						\
 	static const struct file_operations debug_##name##_fops = {	\
 		.open = simple_open,					\
@@ -346,8 +349,11 @@ DEBUG_FOPS_RO(regs);
 DEBUG_FOPS_RO(tlb);
 DEBUG_FOPS(pagetable);
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEBUG_FOPS_RO(mmap);
 DEBUG_FOPS(mem);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -361,8 +367,13 @@ DEBUG_FOPS(mem);
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEBUG_ADD_FILE(name) __DEBUG_ADD_FILE(name, 600)
 #define DEBUG_ADD_FILE_RO(name) __DEBUG_ADD_FILE(name, 400)
+=======
+#define DEBUG_ADD_FILE(name) __DEBUG_ADD_FILE(name, 0600)
+#define DEBUG_ADD_FILE_RO(name) __DEBUG_ADD_FILE(name, 0400)
+>>>>>>> v3.18
 =======
 #define DEBUG_ADD_FILE(name) __DEBUG_ADD_FILE(name, 0600)
 #define DEBUG_ADD_FILE_RO(name) __DEBUG_ADD_FILE(name, 0400)
@@ -401,8 +412,11 @@ static int iommu_debug_register(struct device *dev, void *data)
 	DEBUG_ADD_FILE_RO(tlb);
 	DEBUG_ADD_FILE(pagetable);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_ADD_FILE_RO(mmap);
 	DEBUG_ADD_FILE(mem);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

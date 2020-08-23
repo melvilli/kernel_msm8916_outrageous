@@ -62,8 +62,11 @@
  *****************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEBUG
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/device.h>
@@ -132,8 +135,13 @@ void __iwl_dbg(struct device *dev,
 	if (iwl_have_debug_level(level) &&
 	    (!limit || net_ratelimit()))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(dev, "%c %s %pV", in_interrupt() ? 'I' : 'U',
 			function, &vaf);
+=======
+		dev_printk(KERN_DEBUG, dev, "%c %s %pV",
+			   in_interrupt() ? 'I' : 'U', function, &vaf);
+>>>>>>> v3.18
 =======
 		dev_printk(KERN_DEBUG, dev, "%c %s %pV",
 			   in_interrupt() ? 'I' : 'U', function, &vaf);

@@ -186,6 +186,7 @@ static int nst_fop_open(struct inode *inode, struct file *file)
 {
 	struct o2net_send_tracking *dummy_nst;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct seq_file *seq;
 	int ret;
 
@@ -210,6 +211,8 @@ out:
 	kfree(dummy_nst);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 	dummy_nst = __seq_open_private(file, &nst_seq_ops, sizeof(*dummy_nst));
 	if (!dummy_nst)
@@ -217,6 +220,9 @@ out:
 	o2net_debug_add_nst(dummy_nst);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -423,6 +429,7 @@ static const struct seq_operations sc_seq_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sc_common_open(struct file *file, struct o2net_sock_debug *sd)
 {
 	struct o2net_sock_container *dummy_sc;
@@ -451,6 +458,8 @@ out:
 	kfree(dummy_sc);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static int sc_common_open(struct file *file, int ctxt)
 {
 	struct o2net_sock_debug *sd;
@@ -472,6 +481,9 @@ static int sc_common_open(struct file *file, int ctxt)
 	o2net_debug_add_sc(dummy_sc);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -488,6 +500,7 @@ static int sc_fop_release(struct inode *inode, struct file *file)
 static int stats_fop_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct o2net_sock_debug *sd;
 
 	sd = kmalloc(sizeof(struct o2net_sock_debug), GFP_KERNEL);
@@ -498,6 +511,9 @@ static int stats_fop_open(struct inode *inode, struct file *file)
 	sd->dbg_sock = NULL;
 
 	return sc_common_open(file, sd);
+=======
+	return sc_common_open(file, SHOW_SOCK_STATS);
+>>>>>>> v3.18
 =======
 	return sc_common_open(file, SHOW_SOCK_STATS);
 >>>>>>> v3.18
@@ -513,6 +529,7 @@ static const struct file_operations stats_seq_fops = {
 static int sc_fop_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct o2net_sock_debug *sd;
 
 	sd = kmalloc(sizeof(struct o2net_sock_debug), GFP_KERNEL);
@@ -523,6 +540,9 @@ static int sc_fop_open(struct inode *inode, struct file *file)
 	sd->dbg_sock = NULL;
 
 	return sc_common_open(file, sd);
+=======
+	return sc_common_open(file, SHOW_SOCK_CONTAINERS);
+>>>>>>> v3.18
 =======
 	return sc_common_open(file, SHOW_SOCK_CONTAINERS);
 >>>>>>> v3.18

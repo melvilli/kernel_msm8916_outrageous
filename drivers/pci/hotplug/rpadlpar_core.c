@@ -158,8 +158,12 @@ static void dlpar_pci_add_bus(struct device_node *dn)
 
 	/* Scan below the new bridge */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->hdr_type == PCI_HEADER_TYPE_BRIDGE ||
 	    dev->hdr_type == PCI_HEADER_TYPE_CARDBUS)
+=======
+	if (pci_is_bridge(dev))
+>>>>>>> v3.18
 =======
 	if (pci_is_bridge(dev))
 >>>>>>> v3.18
@@ -222,7 +226,11 @@ static int dlpar_remove_phb(char *drc_name, struct device_node *dn)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If pci slot is hotplugable, use hotplug to remove it */
+=======
+	/* If pci slot is hotpluggable, use hotplug to remove it */
+>>>>>>> v3.18
 =======
 	/* If pci slot is hotpluggable, use hotplug to remove it */
 >>>>>>> v3.18
@@ -268,6 +276,7 @@ static int dlpar_add_phb(char *drc_name, struct device_node *dn)
 static int dlpar_add_vio_slot(char *drc_name, struct device_node *dn)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vio_dev *vio_dev;
 
 	vio_dev = vio_find_node(dn);
@@ -275,6 +284,10 @@ static int dlpar_add_vio_slot(char *drc_name, struct device_node *dn)
 		put_device(&vio_dev->dev);
 		return -EINVAL;
 	}
+=======
+	if (vio_find_node(dn))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (vio_find_node(dn))
 		return -EINVAL;
@@ -355,9 +368,12 @@ static int dlpar_remove_vio_slot(char *drc_name, struct device_node *dn)
 
 	vio_unregister_device(vio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	put_device(&vio_dev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -379,11 +395,14 @@ int dlpar_remove_pci_slot(char *drc_name, struct device_node *dn)
 	struct pci_bus *bus;
 	struct slot *slot;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	bus = pcibios_find_pci_bus(dn);
 	if (!bus)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 
 	pci_lock_rescan_remove();
@@ -393,6 +412,9 @@ int dlpar_remove_pci_slot(char *drc_name, struct device_node *dn)
 		ret = -EINVAL;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pr_debug("PCI: Removing PCI slot below EADS bridge %s\n",
@@ -408,7 +430,12 @@ int dlpar_remove_pci_slot(char *drc_name, struct device_node *dn)
 				"%s: unable to remove hotplug slot %s\n",
 				__func__, drc_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -EIO;
+=======
+			ret = -EIO;
+			goto out;
+>>>>>>> v3.18
 =======
 			ret = -EIO;
 			goto out;
@@ -424,7 +451,12 @@ int dlpar_remove_pci_slot(char *drc_name, struct device_node *dn)
 		printk(KERN_ERR "%s: failed to unmap bus range\n",
 			__func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ERANGE;
+=======
+		ret = -ERANGE;
+		goto out;
+>>>>>>> v3.18
 =======
 		ret = -ERANGE;
 		goto out;
@@ -435,16 +467,22 @@ int dlpar_remove_pci_slot(char *drc_name, struct device_node *dn)
 	BUG_ON(!bus->self);
 	pr_debug("PCI: Now removing bridge device %s\n", pci_name(bus->self));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eeh_remove_bus_device(bus->self, true);
 	pci_stop_and_remove_bus_device(bus->self);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	pci_stop_and_remove_bus_device(bus->self);
 
  out:
 	pci_unlock_rescan_remove();
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

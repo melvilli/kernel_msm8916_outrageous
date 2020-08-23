@@ -1,7 +1,12 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2008-2010 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2008-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2008-2013 Solarflare Communications Inc.
@@ -16,6 +21,7 @@
 #define EFX_MCDI_H
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * enum efx_mcdi_state
  * @MCDI_STATE_QUIESCENT: No pending MCDI requests. If the caller holds the
@@ -61,6 +67,8 @@ struct efx_mcdi_iface {
 	unsigned int resprc;
 	size_t resplen;
 =======
+=======
+>>>>>>> v3.18
  * enum efx_mcdi_state - MCDI request handling state
  * @MCDI_STATE_QUIESCENT: No pending MCDI requests. If the caller holds the
  *	mcdi @iface_lock then they are able to move to %MCDI_STATE_RUNNING
@@ -124,6 +132,9 @@ struct efx_mcdi_iface {
 	spinlock_t async_lock;
 	struct list_head async_list;
 	struct timer_list async_timer;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -133,6 +144,7 @@ struct efx_mcdi_mon {
 	unsigned long last_update;
 	struct device *device;
 	struct efx_mcdi_mon_attribute *attrs;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int n_attrs;
 };
@@ -237,6 +249,8 @@ extern bool efx_mcdi_mac_check_fault(struct efx_nic *efx);
 extern int efx_mcdi_mon_probe(struct efx_nic *efx);
 extern void efx_mcdi_mon_remove(struct efx_nic *efx);
 =======
+=======
+>>>>>>> v3.18
 	struct attribute_group group;
 	const struct attribute_group *groups[2];
 	unsigned int n_attrs;
@@ -498,6 +512,9 @@ int efx_mcdi_set_workaround(struct efx_nic *efx, u32 type, bool enabled);
 #ifdef CONFIG_SFC_MCDI_MON
 int efx_mcdi_mon_probe(struct efx_nic *efx);
 void efx_mcdi_mon_remove(struct efx_nic *efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int efx_mcdi_mon_probe(struct efx_nic *efx) { return 0; }
@@ -505,7 +522,10 @@ static inline void efx_mcdi_mon_remove(struct efx_nic *efx) {}
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SFC_MTD
 int efx_mcdi_mtd_read(struct mtd_info *mtd, loff_t start, size_t len,
 		      size_t *retlen, u8 *buffer);
@@ -516,5 +536,8 @@ int efx_mcdi_mtd_sync(struct mtd_info *mtd);
 void efx_mcdi_mtd_rename(struct efx_mtd_partition *part);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* EFX_MCDI_H */

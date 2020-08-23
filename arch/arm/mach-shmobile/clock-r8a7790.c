@@ -23,6 +23,7 @@
 #include <linux/sh_clk.h>
 #include <linux/clkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/common.h>
 
 #define CPG_BASE 0xe6150000
@@ -31,6 +32,8 @@
 #define SMSTPCR2 0xe6150138
 #define SMSTPCR7 0xe615014c
 =======
+=======
+>>>>>>> v3.18
 
 #include "clock.h"
 #include "common.h"
@@ -82,6 +85,9 @@
 #define MMC1CKCR	0xE6150244
 #define SSPCKCR		0xE6150248
 #define SSPRSCKCR	0xE615024C
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct clk_mapping cpg_mapping = {
@@ -89,6 +95,7 @@ static struct clk_mapping cpg_mapping = {
 	.len    = CPG_LEN,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct clk p_clk = {
 	.rate	= 65000000, /* shortcut for now */
@@ -120,6 +127,8 @@ static struct clk mstp_clks[MSTP_NR] = {
 
 static struct clk_lookup lookups[] = {
 =======
+=======
+>>>>>>> v3.18
 static struct clk extal_clk = {
 	/* .rate will be updated on r8a7790_clock_init() */
 	.mapping	= &cpg_mapping,
@@ -372,6 +381,9 @@ static struct clk_lookup lookups[] = {
 
 	/* MSTP */
 	CLKDEV_DEV_ID("rcar_sound", &mstp_clks[MSTP1005]),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CLKDEV_DEV_ID("sh-sci.0", &mstp_clks[MSTP204]),
 	CLKDEV_DEV_ID("sh-sci.1", &mstp_clks[MSTP203]),
@@ -382,6 +394,7 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_DEV_ID("sh-sci.6", &mstp_clks[MSTP721]),
 	CLKDEV_DEV_ID("sh-sci.7", &mstp_clks[MSTP720]),
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 void __init r8a7790_clock_init(void)
@@ -389,6 +402,8 @@ void __init r8a7790_clock_init(void)
 	int k, ret = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	CLKDEV_DEV_ID("sh-sci.8", &mstp_clks[MSTP717]),
 	CLKDEV_DEV_ID("sh-sci.9", &mstp_clks[MSTP716]),
 	CLKDEV_DEV_ID("i2c-rcar_gen2.0", &mstp_clks[MSTP931]),
@@ -492,19 +507,28 @@ void __init r8a7790_clock_init(void)
 	else
 		SH_CLK_SET_RATIO(&qspi_clk_ratio, 1, 20);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (k = 0; !ret && (k < ARRAY_SIZE(main_clks)); k++)
 		ret = clk_register(main_clks[k]);
 
 	if (!ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		ret = sh_clk_div4_register(div4_clks, DIV4_NR, &div4_table);
 
 	if (!ret)
 		ret = sh_clk_div6_register(div6_clks, DIV6_NR);
 
 	if (!ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = sh_clk_mstp_register(mstp_clks, MSTP_NR);
 

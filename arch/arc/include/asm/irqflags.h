@@ -16,11 +16,14 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
 #include <asm/arcregs.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <asm/arcregs.h>
 
 /* status32 Reg bits related to Interrupt Handling */
@@ -43,6 +46,9 @@
 #define AUX_ITRIGGER		0x40d
 #define AUX_IPULSE		0x415
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __ASSEMBLY__
 
@@ -137,6 +143,7 @@ static inline int arch_irqs_disabled(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void arch_mask_irq(unsigned int irq)
 {
 	unsigned int ienb;
@@ -158,6 +165,8 @@ static inline void arch_unmask_irq(unsigned int irq)
 #else
 
 =======
+=======
+>>>>>>> v3.18
 #else
 
 #ifdef CONFIG_TRACE_IRQFLAGS
@@ -180,12 +189,19 @@ static inline void arch_unmask_irq(unsigned int irq)
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .macro IRQ_DISABLE  scratch
 	lr	\scratch, [status32]
 	bic	\scratch, \scratch, (STATUS_E1_MASK | STATUS_E2_MASK)
 	flag	\scratch
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TRACE_ASM_IRQ_DISABLE
+>>>>>>> v3.18
 =======
 	TRACE_ASM_IRQ_DISABLE
 >>>>>>> v3.18
@@ -196,6 +212,10 @@ static inline void arch_unmask_irq(unsigned int irq)
 	or	\scratch, \scratch, (STATUS_E1_MASK | STATUS_E2_MASK)
 	flag	\scratch
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TRACE_ASM_IRQ_ENABLE
+>>>>>>> v3.18
 =======
 	TRACE_ASM_IRQ_ENABLE
 >>>>>>> v3.18
@@ -204,8 +224,11 @@ static inline void arch_unmask_irq(unsigned int irq)
 #endif	/* __ASSEMBLY__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* KERNEL */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

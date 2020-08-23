@@ -645,6 +645,10 @@ static int pd6729_pci_probe(struct pci_dev *dev,
 		dev_warn(&dev->dev, "refusing to load the driver as the "
 			"io_base is NULL.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ret = -ENOMEM;
+>>>>>>> v3.18
 =======
 		ret = -ENOMEM;
 >>>>>>> v3.18
@@ -678,6 +682,10 @@ static int pd6729_pci_probe(struct pci_dev *dev,
 	if (irq_mode == 0 && mask == 0) {
 		dev_warn(&dev->dev, "no ISA interrupt is available.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ret = -ENODEV;
+>>>>>>> v3.18
 =======
 		ret = -ENODEV;
 >>>>>>> v3.18
@@ -771,7 +779,11 @@ static void pd6729_pci_remove(struct pci_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pd6729_pci_ids) = {
+=======
+static const struct pci_device_id pd6729_pci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pd6729_pci_ids[] = {
 >>>>>>> v3.18
@@ -788,6 +800,7 @@ static struct pci_driver pd6729_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pd6729_module_init(void)
 {
 	return pci_register_driver(&pd6729_pci_driver);
@@ -800,6 +813,9 @@ static void pd6729_module_exit(void)
 
 module_init(pd6729_module_init);
 module_exit(pd6729_module_exit);
+=======
+module_pci_driver(pd6729_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(pd6729_pci_driver);
 >>>>>>> v3.18

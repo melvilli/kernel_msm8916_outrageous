@@ -158,7 +158,11 @@ static void brcmf_btcoex_boost_wifi(struct brcmf_btcoex_info *btci,
 
 		/* save current */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE, "new SCO/eSCO coex algo {save & override}\n");
+=======
+		brcmf_dbg(INFO, "new SCO/eSCO coex algo {save & override}\n");
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO, "new SCO/eSCO coex algo {save & override}\n");
 >>>>>>> v3.18
@@ -170,7 +174,11 @@ static void brcmf_btcoex_boost_wifi(struct brcmf_btcoex_info *btci,
 
 		btci->saved_regs_part2 = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE,
+=======
+		brcmf_dbg(INFO,
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO,
 >>>>>>> v3.18
@@ -188,7 +196,11 @@ static void brcmf_btcoex_boost_wifi(struct brcmf_btcoex_info *btci,
 	} else if (btci->saved_regs_part2) {
 		/* restore previously saved bt params */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE, "Do new SCO/eSCO coex algo {restore}\n");
+=======
+		brcmf_dbg(INFO, "Do new SCO/eSCO coex algo {restore}\n");
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO, "Do new SCO/eSCO coex algo {restore}\n");
 >>>>>>> v3.18
@@ -199,7 +211,11 @@ static void brcmf_btcoex_boost_wifi(struct brcmf_btcoex_info *btci,
 		brcmf_btcoex_params_write(ifp, 71, btci->reg71);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE,
+=======
+		brcmf_dbg(INFO,
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO,
 >>>>>>> v3.18
@@ -210,7 +226,11 @@ static void brcmf_btcoex_boost_wifi(struct brcmf_btcoex_info *btci,
 		btci->saved_regs_part2 = false;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_err("attempted to restore not saved BTCOEX params\n");
+=======
+		brcmf_dbg(INFO, "attempted to restore not saved BTCOEX params\n");
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO, "attempted to restore not saved BTCOEX params\n");
 >>>>>>> v3.18
@@ -240,7 +260,11 @@ static bool brcmf_btcoex_is_sco_active(struct brcmf_if *ifp)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE, "sample[%d], btc_params 27:%x\n", i, param27);
+=======
+		brcmf_dbg(INFO, "sample[%d], btc_params 27:%x\n", i, param27);
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO, "sample[%d], btc_params 27:%x\n", i, param27);
 >>>>>>> v3.18
@@ -251,7 +275,11 @@ static bool brcmf_btcoex_is_sco_active(struct brcmf_if *ifp)
 
 		if (sco_id_cnt > 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			brcmf_dbg(TRACE,
+=======
+			brcmf_dbg(INFO,
+>>>>>>> v3.18
 =======
 			brcmf_dbg(INFO,
 >>>>>>> v3.18
@@ -279,7 +307,11 @@ static void btcmf_btcoex_save_part1(struct brcmf_btcoex_info *btci)
 		brcmf_btcoex_params_read(ifp, 68, &btci->reg68);
 		btci->saved_regs_part1 = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE,
+=======
+		brcmf_dbg(INFO,
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO,
 >>>>>>> v3.18
@@ -303,7 +335,11 @@ static void brcmf_btcoex_restore_part1(struct brcmf_btcoex_info *btci)
 		brcmf_btcoex_params_write(ifp, 41, btci->reg41);
 		brcmf_btcoex_params_write(ifp, 68, btci->reg68);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE,
+=======
+		brcmf_dbg(INFO,
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO,
 >>>>>>> v3.18
@@ -344,7 +380,11 @@ static void brcmf_btcoex_handler(struct work_struct *work)
 		   to get DHCP address
 		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE, "DHCP started\n");
+=======
+		brcmf_dbg(INFO, "DHCP started\n");
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO, "DHCP started\n");
 >>>>>>> v3.18
@@ -363,7 +403,11 @@ static void brcmf_btcoex_handler(struct work_struct *work)
 	case BRCMF_BT_DHCP_OPPR_WIN:
 		if (btci->dhcp_done) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			brcmf_dbg(TRACE, "DHCP done before T1 expiration\n");
+=======
+			brcmf_dbg(INFO, "DHCP done before T1 expiration\n");
+>>>>>>> v3.18
 =======
 			brcmf_dbg(INFO, "DHCP done before T1 expiration\n");
 >>>>>>> v3.18
@@ -372,7 +416,11 @@ static void brcmf_btcoex_handler(struct work_struct *work)
 
 		/* DHCP is not over yet, start lowering BT priority */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE, "DHCP T1:%d expired\n",
+=======
+		brcmf_dbg(INFO, "DHCP T1:%d expired\n",
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO, "DHCP T1:%d expired\n",
 >>>>>>> v3.18
@@ -388,9 +436,15 @@ static void brcmf_btcoex_handler(struct work_struct *work)
 	case BRCMF_BT_DHCP_FLAG_FORCE_TIMEOUT:
 		if (btci->dhcp_done)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			brcmf_dbg(TRACE, "DHCP done before T2 expiration\n");
 		else
 			brcmf_dbg(TRACE, "DHCP T2:%d expired\n",
+=======
+			brcmf_dbg(INFO, "DHCP done before T2 expiration\n");
+		else
+			brcmf_dbg(INFO, "DHCP T2:%d expired\n",
+>>>>>>> v3.18
 =======
 			brcmf_dbg(INFO, "DHCP done before T2 expiration\n");
 		else
@@ -495,7 +549,11 @@ static void brcmf_btcoex_dhcp_end(struct brcmf_btcoex_info *btci)
 	btci->dhcp_done = true;
 	if (btci->timer_on) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE, "disable BT DHCP Timer\n");
+=======
+		brcmf_dbg(INFO, "disable BT DHCP Timer\n");
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO, "disable BT DHCP Timer\n");
 >>>>>>> v3.18
@@ -505,7 +563,11 @@ static void brcmf_btcoex_dhcp_end(struct brcmf_btcoex_info *btci)
 		/* schedule worker if transition to IDLE is needed */
 		if (btci->bt_state != BRCMF_BT_DHCP_IDLE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			brcmf_dbg(TRACE, "bt_state:%d\n",
+=======
+			brcmf_dbg(INFO, "bt_state:%d\n",
+>>>>>>> v3.18
 =======
 			brcmf_dbg(INFO, "bt_state:%d\n",
 >>>>>>> v3.18
@@ -535,7 +597,11 @@ int brcmf_btcoex_set_mode(struct brcmf_cfg80211_vif *vif,
 	switch (mode) {
 	case BRCMF_BTCOEX_DISABLED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE, "DHCP session starts\n");
+=======
+		brcmf_dbg(INFO, "DHCP session starts\n");
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO, "DHCP session starts\n");
 >>>>>>> v3.18
@@ -551,7 +617,11 @@ int brcmf_btcoex_set_mode(struct brcmf_cfg80211_vif *vif,
 
 	case BRCMF_BTCOEX_ENABLED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE, "DHCP session ends\n");
+=======
+		brcmf_dbg(INFO, "DHCP session ends\n");
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO, "DHCP session ends\n");
 >>>>>>> v3.18
@@ -562,7 +632,11 @@ int brcmf_btcoex_set_mode(struct brcmf_cfg80211_vif *vif,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brcmf_dbg(TRACE, "Unknown mode, ignored\n");
+=======
+		brcmf_dbg(INFO, "Unknown mode, ignored\n");
+>>>>>>> v3.18
 =======
 		brcmf_dbg(INFO, "Unknown mode, ignored\n");
 >>>>>>> v3.18

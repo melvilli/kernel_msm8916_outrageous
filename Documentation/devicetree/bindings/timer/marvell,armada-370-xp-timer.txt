@@ -3,7 +3,12 @@ Marvell Armada 370 and Armada XP Timers
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: Should be "marvell,armada-370-xp-timer"
+=======
+- compatible: Should be either "marvell,armada-370-timer" or
+  "marvell,armada-xp-timer" as appropriate.
+>>>>>>> v3.18
 =======
 - compatible: Should be either "marvell,armada-370-timer" or
   "marvell,armada-xp-timer" as appropriate.
@@ -14,12 +19,15 @@ Required properties:
   pair for the Global Timer registers, second pair for the
   local/private timers.
 <<<<<<< HEAD
+<<<<<<< HEAD
 - clocks: clock driving the timer hardware
 
 Optional properties:
 - marvell,timer-25Mhz: Tells whether the Global timer supports the 25
   Mhz fixed mode (available on Armada XP and not on Armada 370)
 =======
+=======
+>>>>>>> v3.18
 
 Clocks required for compatible = "marvell,armada-370-timer":
 - clocks : Must contain a single entry describing the clock input
@@ -50,4 +58,7 @@ Examples:
 		clocks = <&coreclk 2>, <&refclk>;
 		clock-names = "nbclk", "fixed";
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

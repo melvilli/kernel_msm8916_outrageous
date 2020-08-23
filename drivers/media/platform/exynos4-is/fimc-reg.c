@@ -14,7 +14,11 @@
 #include <linux/regmap.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/s5p_fimc.h>
+=======
+#include <media/exynos-fimc.h>
+>>>>>>> v3.18
 =======
 #include <media/exynos-fimc.h>
 >>>>>>> v3.18
@@ -623,7 +627,11 @@ int fimc_hw_set_camera_source(struct fimc_dev *fimc,
 
 		if (i == ARRAY_SIZE(pix_desc)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			v4l2_err(&vc->vfd,
+=======
+			v4l2_err(&vc->ve.vdev,
+>>>>>>> v3.18
 =======
 			v4l2_err(&vc->ve.vdev,
 >>>>>>> v3.18
@@ -707,7 +715,11 @@ int fimc_hw_set_camera_type(struct fimc_dev *fimc,
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			v4l2_err(&vid_cap->vfd,
+=======
+			v4l2_err(&vid_cap->ve.vdev,
+>>>>>>> v3.18
 =======
 			v4l2_err(&vid_cap->ve.vdev,
 >>>>>>> v3.18
@@ -734,7 +746,12 @@ int fimc_hw_set_camera_type(struct fimc_dev *fimc,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		v4l2_err(&vid_cap->vfd, "Invalid FIMC bus type selected: %d\n",
+=======
+		v4l2_err(&vid_cap->ve.vdev,
+			 "Invalid FIMC bus type selected: %d\n",
+>>>>>>> v3.18
 =======
 		v4l2_err(&vid_cap->ve.vdev,
 			 "Invalid FIMC bus type selected: %d\n",

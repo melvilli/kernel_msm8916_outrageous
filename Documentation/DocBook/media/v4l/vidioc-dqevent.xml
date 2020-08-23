@@ -77,7 +77,11 @@
 	    <entry>&v4l2-event-vsync;</entry>
             <entry><structfield>vsync</structfield></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>Event data for event V4L2_EVENT_VSYNC.
+=======
+	    <entry>Event data for event <constant>V4L2_EVENT_VSYNC</constant>.
+>>>>>>> v3.18
 =======
 	    <entry>Event data for event <constant>V4L2_EVENT_VSYNC</constant>.
 >>>>>>> v3.18
@@ -88,7 +92,11 @@
 	    <entry>&v4l2-event-ctrl;</entry>
             <entry><structfield>ctrl</structfield></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>Event data for event V4L2_EVENT_CTRL.
+=======
+	    <entry>Event data for event <constant>V4L2_EVENT_CTRL</constant>.
+>>>>>>> v3.18
 =======
 	    <entry>Event data for event <constant>V4L2_EVENT_CTRL</constant>.
 >>>>>>> v3.18
@@ -99,8 +107,11 @@
 	    <entry>&v4l2-event-frame-sync;</entry>
             <entry><structfield>frame_sync</structfield></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>Event data for event V4L2_EVENT_FRAME_SYNC.</entry>
 =======
+=======
+>>>>>>> v3.18
 	    <entry>Event data for event
 	    <constant>V4L2_EVENT_FRAME_SYNC</constant>.</entry>
 	  </row>
@@ -115,6 +126,9 @@
 	    <entry>&v4l2-event-src-change;</entry>
             <entry><structfield>src_change</structfield></entry>
 	    <entry>Event data for event V4L2_EVENT_SOURCE_CHANGE.</entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  </row>
 	  <row>
@@ -268,7 +282,10 @@
     </table>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
     <table frame="none" pgwide="1" id="v4l2-event-src-change">
       <title>struct <structname>v4l2_event_src_change</structname></title>
       <tgroup cols="3">
@@ -323,6 +340,9 @@
       </tgroup>
     </table>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     <table pgwide="1" frame="none" id="changes-flags">
       <title>Changes</title>
@@ -353,7 +373,10 @@
       </tgroup>
     </table>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
     <table pgwide="1" frame="none" id="src-changes-flags">
       <title>Source Changes</title>
@@ -371,6 +394,9 @@
 	</tbody>
       </tgroup>
     </table>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   </refsect1>
   <refsect1>

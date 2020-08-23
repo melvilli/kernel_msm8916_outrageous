@@ -1,5 +1,6 @@
 #include "headers.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 //-----------------------------------------------------------------------------
 // Procedure:	vendorextnGetSectionInfo
 //
@@ -14,6 +15,8 @@
 //-----------------------------------------------------------------------------
 INT vendorextnGetSectionInfo(PVOID  pContext, struct bcm_flash2x_vendor_info *pVendorInfo)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Procedure:	vendorextnGetSectionInfo
  *
@@ -28,11 +31,15 @@ INT vendorextnGetSectionInfo(PVOID  pContext, struct bcm_flash2x_vendor_info *pV
  */
 INT vendorextnGetSectionInfo(PVOID  pContext,
 			struct bcm_flash2x_vendor_info *pVendorInfo)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return STATUS_FAILURE;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //-----------------------------------------------------------------------------
 // Procedure:   vendorextnInit
@@ -47,6 +54,8 @@ INT vendorextnGetSectionInfo(PVOID  pContext,
 //
 //-----------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*
  * Procedure:   vendorextnInit
  *
@@ -59,12 +68,16 @@ INT vendorextnGetSectionInfo(PVOID  pContext,
  *
  *
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 INT vendorextnInit(struct bcm_mini_adapter *Adapter)
 {
 	return STATUS_SUCCESS;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //-----------------------------------------------------------------------------
 // Procedure:   vendorextnExit
@@ -79,6 +92,8 @@ INT vendorextnInit(struct bcm_mini_adapter *Adapter)
 //
 //-----------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*
  * Procedure:   vendorextnExit
  *
@@ -91,12 +106,16 @@ INT vendorextnInit(struct bcm_mini_adapter *Adapter)
  *
  *
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 INT vendorextnExit(struct bcm_mini_adapter *Adapter)
 {
 	return STATUS_SUCCESS;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //------------------------------------------------------------------------
 // Procedure:	vendorextnIoctl
@@ -114,6 +133,8 @@ INT vendorextnExit(struct bcm_mini_adapter *Adapter)
 //
 //--------------------------------------------------------------------------
 =======
+=======
+>>>>>>> v3.18
 /*
  * Procedure:	vendorextnIoctl
  *
@@ -130,6 +151,9 @@ INT vendorextnExit(struct bcm_mini_adapter *Adapter)
  *		STATUS_SUCCESS/STATUS_FAILURE as per the IOCTL return value
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 INT vendorextnIoctl(struct bcm_mini_adapter *Adapter, UINT cmd, ULONG arg)
 {
@@ -138,6 +162,7 @@ INT vendorextnIoctl(struct bcm_mini_adapter *Adapter, UINT cmd, ULONG arg)
 
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //------------------------------------------------------------------
 // Procedure:	vendorextnReadSection
@@ -159,6 +184,8 @@ INT vendorextnIoctl(struct bcm_mini_adapter *Adapter, UINT cmd, ULONG arg)
 INT vendorextnReadSection(PVOID  pContext, PUCHAR pBuffer, enum bcm_flash2x_section_val SectionVal,
 			UINT offset, UINT numOfBytes)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Procedure:	vendorextnReadSection
  *
@@ -177,6 +204,9 @@ INT vendorextnReadSection(PVOID  pContext, PUCHAR pBuffer, enum bcm_flash2x_sect
 
 INT vendorextnReadSection(PVOID  pContext, PUCHAR pBuffer,
 	enum bcm_flash2x_section_val SectionVal, UINT offset, UINT numOfBytes)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return STATUS_FAILURE;
@@ -184,6 +214,7 @@ INT vendorextnReadSection(PVOID  pContext, PUCHAR pBuffer,
 
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //------------------------------------------------------------------
 // Procedure:	vendorextnWriteSection
@@ -205,6 +236,8 @@ INT vendorextnReadSection(PVOID  pContext, PUCHAR pBuffer,
 INT vendorextnWriteSection(PVOID  pContext, PUCHAR pBuffer, enum bcm_flash2x_section_val SectionVal,
 			UINT offset, UINT numOfBytes, BOOLEAN bVerify)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Procedure:	vendorextnWriteSection
  *
@@ -224,6 +257,9 @@ INT vendorextnWriteSection(PVOID  pContext, PUCHAR pBuffer, enum bcm_flash2x_sec
 INT vendorextnWriteSection(PVOID  pContext, PUCHAR pBuffer,
 	enum bcm_flash2x_section_val SectionVal, UINT offset,
 	UINT numOfBytes, bool bVerify)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return STATUS_FAILURE;
@@ -231,6 +267,7 @@ INT vendorextnWriteSection(PVOID  pContext, PUCHAR pBuffer,
 
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //------------------------------------------------------------------
 // Procedure:	vendorextnWriteSectionWithoutErase
@@ -255,6 +292,8 @@ INT vendorextnWriteSectionWithoutErase(PVOID  pContext, PUCHAR pBuffer, enum bcm
 }
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * Procedure:	vendorextnWriteSectionWithoutErase
  *
@@ -275,4 +314,7 @@ INT vendorextnWriteSectionWithoutErase(PVOID  pContext, PUCHAR pBuffer,
 {
 	return STATUS_FAILURE;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

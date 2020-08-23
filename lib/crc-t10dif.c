@@ -12,6 +12,7 @@
 #include <linux/module.h>
 #include <linux/crc-t10dif.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Table generated using the following polynomium:
  * x^16 + x^15 + x^11 + x^9 + x^8 + x^7 + x^5 + x^4 + x^2 + x + 1
@@ -67,6 +68,8 @@ EXPORT_SYMBOL(crc_t10dif);
 MODULE_DESCRIPTION("T10 DIF CRC calculation");
 MODULE_LICENSE("GPL");
 =======
+=======
+>>>>>>> v3.18
 #include <linux/err.h>
 #include <linux/init.h>
 #include <crypto/hash.h>
@@ -118,4 +121,7 @@ module_exit(crc_t10dif_mod_fini);
 MODULE_DESCRIPTION("T10 DIF CRC calculation");
 MODULE_LICENSE("GPL");
 MODULE_SOFTDEP("pre: crct10dif");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -73,8 +73,11 @@ enum {
 	REG_UIC_COMMAND_ARG_2			= 0x98,
 	REG_UIC_COMMAND_ARG_3			= 0x9C,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	UFSHCI_REG_SPACE_SIZE			= 0xA0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -97,7 +100,10 @@ enum {
 	UFSHCI_VERSION_10 = 0x00010000,
 	UFSHCI_VERSION_11 = 0x00010100,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	UFSHCI_VERSION_20 = 0x00020000,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -174,7 +180,10 @@ enum {
 #define UIC_PHY_ADAPTER_LAYER_ERROR			UFS_BIT(31)
 #define UIC_PHY_ADAPTER_LAYER_ERROR_CODE_MASK		0x1F
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UIC_PHY_ADAPTER_LAYER_LANE_ERR_MASK		0xF
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

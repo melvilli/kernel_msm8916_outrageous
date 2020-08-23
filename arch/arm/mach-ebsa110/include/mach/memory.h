@@ -18,11 +18,14 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Physical DRAM offset.
  */
 #define PLAT_PHYS_OFFSET	UL(0x00000000)
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Cache flushing area - SRAM

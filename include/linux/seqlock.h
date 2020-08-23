@@ -4,6 +4,7 @@
  * Reader/writer consistent mechanism without starving writers. This type of
  * lock for data where the reader wants a consistent set of information
 <<<<<<< HEAD
+<<<<<<< HEAD
  * and is willing to retry if the information changes.  Readers never
  * block but they may have to retry if a writer is in
  * progress. Writers do not wait for readers. 
@@ -14,6 +15,8 @@
  *
  * Expected reader usage:
 =======
+=======
+>>>>>>> v3.18
  * and is willing to retry if the information changes. There are two types
  * of readers:
  * 1. Sequence readers which never block a writer but they may have to retry
@@ -29,6 +32,9 @@
  * invalidate a pointer that a reader was following.
  *
  * Expected non-blocking reader usage:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * 	do {
  *	    seq = read_seqbegin(&foo);
@@ -47,6 +53,10 @@
 #include <linux/spinlock.h>
 #include <linux/preempt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/lockdep.h>
+>>>>>>> v3.18
 =======
 #include <linux/lockdep.h>
 >>>>>>> v3.18
@@ -61,11 +71,14 @@
 typedef struct seqcount {
 	unsigned sequence;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } seqcount_t;
 
 #define SEQCNT_ZERO { 0 }
 #define seqcount_init(x)	do { *(x) = (seqcount_t) SEQCNT_ZERO; } while (0)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 	struct lockdep_map dep_map;
 #endif
@@ -110,6 +123,9 @@ static inline void seqcount_lockdep_reader_access(const seqcount_t *s)
 
 #define SEQCNT_ZERO(lockname) { .sequence = 0, SEQCOUNT_DEP_MAP_INIT(lockname)}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -140,7 +156,10 @@ repeat:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * raw_read_seqcount - Read the raw seqcount
  * @s: pointer to seqcount_t
  * Returns: count to be passed to read_seqcount_retry
@@ -173,6 +192,9 @@ static inline unsigned raw_read_seqcount_begin(const seqcount_t *s)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * read_seqcount_begin - begin a seq-read critical section
  * @s: pointer to seqcount_t
@@ -185,9 +207,14 @@ static inline unsigned raw_read_seqcount_begin(const seqcount_t *s)
 static inline unsigned read_seqcount_begin(const seqcount_t *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned ret = __read_seqcount_begin(s);
 	smp_rmb();
 	return ret;
+=======
+	seqcount_lockdep_reader_access(s);
+	return raw_read_seqcount_begin(s);
+>>>>>>> v3.18
 =======
 	seqcount_lockdep_reader_access(s);
 	return raw_read_seqcount_begin(s);
@@ -252,7 +279,10 @@ static inline int read_seqcount_retry(const seqcount_t *s, unsigned start)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline void raw_write_seqcount_begin(seqcount_t *s)
 {
@@ -277,17 +307,23 @@ static inline void raw_write_seqcount_latch(seqcount_t *s)
        smp_wmb();      /* increment "sequence" before following stores */
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Sequence counter only version assumes that callers are using their
  * own mutexing.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void write_seqcount_begin(seqcount_t *s)
 {
 	s->sequence++;
 	smp_wmb();
 =======
+=======
+>>>>>>> v3.18
 static inline void write_seqcount_begin_nested(seqcount_t *s, int subclass)
 {
 	raw_write_seqcount_begin(s);
@@ -297,14 +333,22 @@ static inline void write_seqcount_begin_nested(seqcount_t *s, int subclass)
 static inline void write_seqcount_begin(seqcount_t *s)
 {
 	write_seqcount_begin_nested(s, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void write_seqcount_end(seqcount_t *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smp_wmb();
 	s->sequence++;
+=======
+	seqcount_release(&s->dep_map, 1, _RET_IP_);
+	raw_write_seqcount_end(s);
+>>>>>>> v3.18
 =======
 	seqcount_release(&s->dep_map, 1, _RET_IP_);
 	raw_write_seqcount_end(s);
@@ -336,7 +380,11 @@ typedef struct {
 #define __SEQLOCK_UNLOCKED(lockname)			\
 	{						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.seqcount = SEQCNT_ZERO,		\
+=======
+		.seqcount = SEQCNT_ZERO(lockname),	\
+>>>>>>> v3.18
 =======
 		.seqcount = SEQCNT_ZERO(lockname),	\
 >>>>>>> v3.18
@@ -426,7 +474,10 @@ write_sequnlock_irqrestore(seqlock_t *sl, unsigned long flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * A locking reader exclusively locks out other writers and locking readers,
  * but doesn't update the sequence number. Acts like a normal spin_lock/unlock.
@@ -527,5 +578,8 @@ done_seqretry_irqrestore(seqlock_t *lock, int seq, unsigned long flags)
 	if (seq & 1)
 		read_sequnlock_excl_irqrestore(lock, flags);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __LINUX_SEQLOCK_H */

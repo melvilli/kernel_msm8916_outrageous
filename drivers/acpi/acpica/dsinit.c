@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -88,8 +92,13 @@ acpi_ds_init_one_object(acpi_handle obj_handle,
 	struct acpi_namespace_node *node =
 	    (struct acpi_namespace_node *)obj_handle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_object_type type;
 	acpi_status status;
+=======
+	acpi_status status;
+	union acpi_operand_object *obj_desc;
+>>>>>>> v3.18
 =======
 	acpi_status status;
 	union acpi_operand_object *obj_desc;
@@ -110,9 +119,13 @@ acpi_ds_init_one_object(acpi_handle obj_handle,
 	/* And even then, we are only interested in a few object types */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	type = acpi_ns_get_type(obj_handle);
 
 	switch (type) {
+=======
+	switch (acpi_ns_get_type(obj_handle)) {
+>>>>>>> v3.18
 =======
 	switch (acpi_ns_get_type(obj_handle)) {
 >>>>>>> v3.18
@@ -131,9 +144,12 @@ acpi_ds_init_one_object(acpi_handle obj_handle,
 
 	case ACPI_TYPE_METHOD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		info->method_count++;
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Auto-serialization support. We will examine each method that is
 		 * not_serialized to determine if it creates any Named objects. If
@@ -172,6 +188,9 @@ acpi_ds_init_one_object(acpi_handle obj_handle,
 		}
 
 		info->non_serial_method_count++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -182,6 +201,10 @@ acpi_ds_init_one_object(acpi_handle obj_handle,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -228,7 +251,10 @@ acpi_ds_initialize_objects(u32 table_index,
 	ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
 			  "**** Starting initialization of namespace objects ****\n"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_DEBUG_PRINT_RAW((ACPI_DB_INIT, "Parsing all Control Methods:"));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -266,6 +292,7 @@ acpi_ds_initialize_objects(u32 table_index,
 
 	ACPI_DEBUG_PRINT_RAW((ACPI_DB_INIT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      "\nTable [%4.4s](id %4.4X) - %u Objects with %u Devices %u Methods %u Regions\n",
 			      table->signature, owner_id, info.object_count,
 			      info.device_count, info.method_count,
@@ -275,6 +302,8 @@ acpi_ds_initialize_objects(u32 table_index,
 			  "%u Methods, %u Regions\n", info.method_count,
 			  info.op_region_count));
 =======
+=======
+>>>>>>> v3.18
 			      "Table [%4.4s] (id %4.4X) - %4u Objects with %3u Devices, "
 			      "%3u Regions, %3u Methods (%u/%u/%u Serial/Non/Cvt)\n",
 			      table->signature, owner_id, info.object_count,
@@ -285,6 +314,9 @@ acpi_ds_initialize_objects(u32 table_index,
 
 	ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH, "%u Methods, %u Regions\n",
 			  info.method_count, info.op_region_count));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return_ACPI_STATUS(AE_OK);

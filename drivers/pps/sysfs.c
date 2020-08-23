@@ -30,8 +30,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pps_show_assert(struct device *dev,
 				struct device_attribute *attr, char *buf)
+=======
+static ssize_t assert_show(struct device *dev, struct device_attribute *attr,
+			   char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t assert_show(struct device *dev, struct device_attribute *attr,
 			   char *buf)
@@ -47,14 +52,20 @@ static ssize_t assert_show(struct device *dev, struct device_attribute *attr,
 			pps->assert_sequence);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t pps_show_clear(struct device *dev,
 				struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(assert);
 
 static ssize_t clear_show(struct device *dev, struct device_attribute *attr,
 			  char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pps_device *pps = dev_get_drvdata(dev);
@@ -67,14 +78,20 @@ static ssize_t clear_show(struct device *dev, struct device_attribute *attr,
 			pps->clear_sequence);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t pps_show_mode(struct device *dev,
 				struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(clear);
 
 static ssize_t mode_show(struct device *dev, struct device_attribute *attr,
 			 char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pps_device *pps = dev_get_drvdata(dev);
@@ -82,14 +99,20 @@ static ssize_t mode_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%4x\n", pps->info.mode);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t pps_show_echo(struct device *dev,
 				struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(mode);
 
 static ssize_t echo_show(struct device *dev, struct device_attribute *attr,
 			 char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pps_device *pps = dev_get_drvdata(dev);
@@ -97,14 +120,20 @@ static ssize_t echo_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%d\n", !!pps->info.echo);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t pps_show_name(struct device *dev,
 				struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(echo);
 
 static ssize_t name_show(struct device *dev, struct device_attribute *attr,
 			 char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pps_device *pps = dev_get_drvdata(dev);
@@ -112,20 +141,27 @@ static ssize_t name_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%s\n", pps->info.name);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t pps_show_path(struct device *dev,
 				struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(name);
 
 static ssize_t path_show(struct device *dev, struct device_attribute *attr,
 			 char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pps_device *pps = dev_get_drvdata(dev);
 
 	return sprintf(buf, "%s\n", pps->info.path);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct device_attribute pps_attrs[] = {
@@ -137,6 +173,8 @@ struct device_attribute pps_attrs[] = {
 	__ATTR(path, S_IRUGO, pps_show_path, NULL),
 	__ATTR_NULL,
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(path);
 
 static struct attribute *pps_attrs[] = {
@@ -156,5 +194,8 @@ static const struct attribute_group pps_group = {
 const struct attribute_group *pps_groups[] = {
 	&pps_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

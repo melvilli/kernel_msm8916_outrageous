@@ -118,6 +118,7 @@ static const char *wm8978_alc3[] = {"ALC", "Limiter"};
 static const char *wm8978_alc1[] = {"Off", "Right", "Left", "Both"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const SOC_ENUM_SINGLE_DECL(adc_compand, WM8978_COMPANDING_CONTROL, 1,
 				  wm8978_companding);
 static const SOC_ENUM_SINGLE_DECL(dac_compand, WM8978_COMPANDING_CONTROL, 3,
@@ -134,6 +135,8 @@ static const SOC_ENUM_SINGLE_DECL(eq5, WM8978_EQ5, 5, wm8978_eq5);
 static const SOC_ENUM_SINGLE_DECL(alc3, WM8978_ALC_CONTROL_3, 8, wm8978_alc3);
 static const SOC_ENUM_SINGLE_DECL(alc1, WM8978_ALC_CONTROL_1, 7, wm8978_alc1);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(adc_compand, WM8978_COMPANDING_CONTROL, 1,
 			    wm8978_companding);
 static SOC_ENUM_SINGLE_DECL(dac_compand, WM8978_COMPANDING_CONTROL, 3,
@@ -149,6 +152,9 @@ static SOC_ENUM_SINGLE_DECL(eq4, WM8978_EQ4, 5, wm8978_eq4);
 static SOC_ENUM_SINGLE_DECL(eq5, WM8978_EQ5, 5, wm8978_eq5);
 static SOC_ENUM_SINGLE_DECL(alc3, WM8978_ALC_CONTROL_3, 8, wm8978_alc3);
 static SOC_ENUM_SINGLE_DECL(alc1, WM8978_ALC_CONTROL_1, 7, wm8978_alc1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const DECLARE_TLV_DB_SCALE(digital_tlv, -12750, 50, 1);
@@ -755,6 +761,7 @@ static int wm8978_hw_params(struct snd_pcm_substream *substream,
 
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -766,6 +773,8 @@ static int wm8978_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -776,6 +785,9 @@ static int wm8978_hw_params(struct snd_pcm_substream *substream,
 		iface_ctl |= 0x40;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		iface_ctl |= 0x60;
 		break;
@@ -849,8 +861,13 @@ static int wm8978_hw_params(struct snd_pcm_substream *substream,
 			", consider using PLL" : "");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(codec->dev, "%s: fmt %d, rate %u, MCLK divisor #%d\n", __func__,
 		params_format(params), params_rate(params), best);
+=======
+	dev_dbg(codec->dev, "%s: width %d, rate %u, MCLK divisor #%d\n", __func__,
+		params_width(params), params_rate(params), best);
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->dev, "%s: width %d, rate %u, MCLK divisor #%d\n", __func__,
 		params_width(params), params_rate(params), best);
@@ -958,6 +975,10 @@ static struct snd_soc_dai_driver wm8978_dai = {
 	},
 	.ops = &wm8978_dai_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.symmetric_rates = 1,
+>>>>>>> v3.18
 =======
 	.symmetric_rates = 1,
 >>>>>>> v3.18
@@ -1015,7 +1036,11 @@ static int wm8978_probe(struct snd_soc_codec *codec)
 {
 	struct wm8978_priv *wm8978 = snd_soc_codec_get_drvdata(codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0, i;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -1026,12 +1051,15 @@ static int wm8978_probe(struct snd_soc_codec *codec)
 	 */
 	wm8978->sysclk = WM8978_PLL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->control_data = wm8978->regmap;
 	ret = snd_soc_codec_set_cache_io(codec, 7, 9, SND_SOC_REGMAP);
 	if (ret < 0) {
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

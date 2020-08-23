@@ -26,7 +26,10 @@ config NF_CONNTRACK_IPV6
 	  To compile it as a module, choose M here.  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NF_TABLES_IPV6
 	depends on NF_TABLES
 	tristate "IPv6 nf_tables support"
@@ -95,6 +98,9 @@ config NFT_MASQ_IPV6
 
 endif # NF_NAT_IPV6
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config IP6_NF_IPTABLES
 	tristate "IP6 tables support (required for filtering)"
@@ -217,6 +223,10 @@ config IP6_NF_TARGET_REJECT
 	tristate "REJECT target support"
 	depends on IP6_NF_FILTER
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select NF_REJECT_IPV6
+>>>>>>> v3.18
 =======
 	select NF_REJECT_IPV6
 >>>>>>> v3.18
@@ -228,6 +238,7 @@ config IP6_NF_TARGET_REJECT
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config IP6_NF_TARGET_REJECT_SKERR
 	bool "Force socket error when rejecting with icmp*"
@@ -241,6 +252,8 @@ config IP6_NF_TARGET_REJECT_SKERR
 
 	  If unsure, say N.
 =======
+=======
+>>>>>>> v3.18
 config IP6_NF_TARGET_SYNPROXY
 	tristate "SYNPROXY target support"
 	depends on NF_CONNTRACK && NETFILTER_ADVANCED
@@ -253,6 +266,9 @@ config IP6_NF_TARGET_SYNPROXY
 	  during SYN-flood attacks.
 
 	  To compile it as a module, choose M here. If unsure, say N.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config IP6_NF_MANGLE
@@ -287,6 +303,7 @@ config IP6_NF_SECURITY
          If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config NF_NAT_IPV6
 	tristate "IPv6 NAT"
 	depends on NF_CONNTRACK_IPV6
@@ -304,6 +321,8 @@ if NF_NAT_IPV6
 config IP6_NF_TARGET_MASQUERADE
 	tristate "MASQUERADE target support"
 =======
+=======
+>>>>>>> v3.18
 config IP6_NF_NAT
 	tristate "ip6tables NAT support"
 	depends on NF_CONNTRACK_IPV6
@@ -323,6 +342,9 @@ if IP6_NF_NAT
 config IP6_NF_TARGET_MASQUERADE
 	tristate "MASQUERADE target support"
 	select NF_NAT_MASQUERADE_IPV6
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Masquerading is a special case of NAT: all outgoing connections are
@@ -342,7 +364,11 @@ config IP6_NF_TARGET_NPT
 	  To compile it as a module, choose M here.  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endif # NF_NAT_IPV6
+=======
+endif # IP6_NF_NAT
+>>>>>>> v3.18
 =======
 endif # IP6_NF_NAT
 >>>>>>> v3.18

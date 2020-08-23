@@ -75,6 +75,7 @@
 /*---------------------  Export Functions  --------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool IFRFbWriteEmbedded(unsigned long dwIoBase, unsigned long dwData);
 bool RFbSelectChannel(unsigned long dwIoBase, unsigned char byRFType, unsigned char byChannel);
 bool RFbInit(
@@ -85,6 +86,8 @@ bool RFbSetPower(PSDevice pDevice, unsigned int uRATE, unsigned int uCH);
 bool RFbRawSetPower(
 	PSDevice  pDevice,
 =======
+=======
+>>>>>>> v3.18
 bool IFRFbWriteEmbedded(void __iomem *dwIoBase, unsigned long dwData);
 bool RFbSelectChannel(void __iomem *dwIoBase, unsigned char byRFType, unsigned char byChannel);
 bool RFbInit(
@@ -94,6 +97,9 @@ bool RFvWriteWakeProgSyn(void __iomem *dwIoBase, unsigned char byRFType, unsigne
 bool RFbSetPower(struct vnt_private *, unsigned int uRATE, unsigned int uCH);
 bool RFbRawSetPower(
 	struct vnt_private *,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char byPwr,
 	unsigned int uRATE
@@ -102,7 +108,11 @@ bool RFbRawSetPower(
 void
 RFvRSSITodBm(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSDevice pDevice,
+=======
+	struct vnt_private *,
+>>>>>>> v3.18
 =======
 	struct vnt_private *,
 >>>>>>> v3.18
@@ -112,7 +122,11 @@ RFvRSSITodBm(
 
 //{{ RobertYu: 20050104
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool RFbAL7230SelectChannelPostProcess(unsigned long dwIoBase, unsigned char byOldChannel, unsigned char byNewChannel);
+=======
+bool RFbAL7230SelectChannelPostProcess(void __iomem *dwIoBase, unsigned char byOldChannel, unsigned char byNewChannel);
+>>>>>>> v3.18
 =======
 bool RFbAL7230SelectChannelPostProcess(void __iomem *dwIoBase, unsigned char byOldChannel, unsigned char byNewChannel);
 >>>>>>> v3.18

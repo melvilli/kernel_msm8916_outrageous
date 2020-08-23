@@ -12,7 +12,10 @@
 #include <linux/spi/spi.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/workqueue.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/of.h>
@@ -316,9 +319,12 @@ static int falcon_sflash_setup(struct spi_device *spi)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (spi->chip_select > 0)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&ebu_lock, flags);
@@ -429,9 +435,13 @@ static int falcon_sflash_probe(struct platform_device *pdev)
 
 	master->mode_bits = SPI_MODE_3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->num_chipselect = 1;
 	master->flags = SPI_MASTER_HALF_DUPLEX;
 	master->bus_num = -1;
+=======
+	master->flags = SPI_MASTER_HALF_DUPLEX;
+>>>>>>> v3.18
 =======
 	master->flags = SPI_MASTER_HALF_DUPLEX;
 >>>>>>> v3.18
@@ -442,9 +452,13 @@ static int falcon_sflash_probe(struct platform_device *pdev)
 	master->dev.of_node = pdev->dev.of_node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, priv);
 
 	ret = spi_register_master(master);
+=======
+	ret = devm_spi_register_master(&pdev->dev, master);
+>>>>>>> v3.18
 =======
 	ret = devm_spi_register_master(&pdev->dev, master);
 >>>>>>> v3.18
@@ -453,6 +467,7 @@ static int falcon_sflash_probe(struct platform_device *pdev)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int falcon_sflash_remove(struct platform_device *pdev)
 {
@@ -465,6 +480,8 @@ static int falcon_sflash_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct of_device_id falcon_sflash_match[] = {
 	{ .compatible = "lantiq,sflash-falcon" },
 	{},
@@ -474,7 +491,10 @@ MODULE_DEVICE_TABLE(of, falcon_sflash_match);
 static struct platform_driver falcon_sflash_driver = {
 	.probe	= falcon_sflash_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	= falcon_sflash_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver = {

@@ -5,11 +5,14 @@
  *
  * Copyright (C) IBM Corporation, 2004. All rights reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  */
 
 #include <linux/init.h>
 =======
+=======
+>>>>>>> v3.18
  * Copyright (C) Red Hat Inc., 2014. All rights reserved.
  * Authors:
  *      Vivek Goyal <vgoyal@redhat.com>
@@ -18,6 +21,9 @@
 
 #define pr_fmt(fmt)	"kexec: " fmt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/types.h>
 #include <linux/kernel.h>
@@ -29,6 +35,10 @@
 #include <linux/elfcore.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -45,7 +55,10 @@
 #include <asm/virtext.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Alignment required for elf header segment */
 #define ELF_CORE_HEADER_ALIGN   4096
 
@@ -85,6 +98,9 @@ struct crash_memmap_data {
 	unsigned int type;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int in_crash_kexec;
 
@@ -98,6 +114,10 @@ int in_crash_kexec;
 crash_vmclear_fn __rcu *crash_vmclear_loaded_vmcss = NULL;
 EXPORT_SYMBOL_GPL(crash_vmclear_loaded_vmcss);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unsigned long crash_zero_bytes;
+>>>>>>> v3.18
 =======
 unsigned long crash_zero_bytes;
 >>>>>>> v3.18
@@ -120,9 +140,13 @@ static void kdump_nmi_callback(int cpu, struct pt_regs *regs)
 #ifdef CONFIG_X86_32
 	struct pt_regs fixed_regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 #ifdef CONFIG_X86_32
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -193,17 +217,23 @@ void native_machine_crash_shutdown(struct pt_regs *regs)
 	cpu_emergency_svm_disable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lapic_shutdown();
 #if defined(CONFIG_X86_IO_APIC)
 	disable_IO_APIC();
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_IO_APIC
 	/* Prevent crash_kexec() from deadlocking on ioapic_lock. */
 	ioapic_zap_locks();
 	disable_IO_APIC();
 #endif
 	lapic_shutdown();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_HPET_TIMER
 	hpet_disable();
@@ -211,7 +241,10 @@ void native_machine_crash_shutdown(struct pt_regs *regs)
 	crash_save_cpu(regs, safe_smp_processor_id());
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_KEXEC_FILE
 static int get_nr_ram_ranges_callback(unsigned long start_pfn,
@@ -729,4 +762,7 @@ int crash_load_segments(struct kimage *image)
 	return ret;
 }
 #endif /* CONFIG_KEXEC_FILE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -688,7 +688,11 @@ static int register_pio_HBA(long base, struct get_conf *gc, struct pci_dev *pdev
 
 	if (!reg_IRQ[gc->IRQ]) {	/* Interrupt already registered ? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!request_irq(gc->IRQ, do_eata_pio_int_handler, IRQF_DISABLED, "EATA-PIO", sh)) {
+=======
+		if (!request_irq(gc->IRQ, do_eata_pio_int_handler, 0, "EATA-PIO", sh)) {
+>>>>>>> v3.18
 =======
 		if (!request_irq(gc->IRQ, do_eata_pio_int_handler, 0, "EATA-PIO", sh)) {
 >>>>>>> v3.18
@@ -924,9 +928,15 @@ static int eata_pio_detect(struct scsi_host_template *tpnt)
 	find_pio_ISA(&gc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i <= MAXIRQ; i++)
 		if (reg_IRQ[i])
 			request_irq(i, do_eata_pio_int_handler, IRQF_DISABLED, "EATA-PIO", NULL);
+=======
+	for (i = 0; i < MAXIRQ; i++)
+		if (reg_IRQ[i])
+			request_irq(i, do_eata_pio_int_handler, 0, "EATA-PIO", NULL);
+>>>>>>> v3.18
 =======
 	for (i = 0; i < MAXIRQ; i++)
 		if (reg_IRQ[i])

@@ -5,7 +5,11 @@
 # Common support (must be linked before board specific support)
 obj-y				+= clock.o devices.o generic.o irq.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   time.o reset.o
+=======
+				   reset.o
+>>>>>>> v3.18
 =======
 				   reset.o
 >>>>>>> v3.18

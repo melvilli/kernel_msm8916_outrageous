@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2011 Tilera Corporation. All Rights Reserved.
+=======
+ * Copyright 2013 Tilera Corporation. All Rights Reserved.
+>>>>>>> v3.18
 =======
  * Copyright 2013 Tilera Corporation. All Rights Reserved.
 >>>>>>> v3.18
@@ -36,7 +40,10 @@
 #define REVCZ(x) __insn_ctz(x)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * Create eight copies of the byte in a uint64_t.  Byte Shuffle uses
@@ -48,4 +55,7 @@ static inline uint64_t copy_byte(uint8_t byte)
 {
 	return __insn_shufflebytes(byte, 0, 0);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

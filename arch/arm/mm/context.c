@@ -16,7 +16,10 @@
 #include <linux/smp.h>
 #include <linux/percpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/msm_rtb.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -25,6 +28,10 @@
 #include <asm/thread_notify.h>
 #include <asm/tlbflush.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/proc-fns.h>
+>>>>>>> v3.18
 =======
 #include <asm/proc-fns.h>
 >>>>>>> v3.18
@@ -44,8 +51,13 @@
  * should be unique within all running processes.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * In big endian operation, the two 32 bit words are swapped if accesed by
  * non 64-bit operations.
+=======
+ * In big endian operation, the two 32 bit words are swapped if accessed
+ * by non-64-bit operations.
+>>>>>>> v3.18
 =======
  * In big endian operation, the two 32 bit words are swapped if accessed
  * by non-64-bit operations.
@@ -91,6 +103,7 @@ void a15_erratum_get_cpumask(int this_cpu, struct mm_struct *mm,
 
 #ifdef CONFIG_ARM_LPAE
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cpu_set_reserved_ttbr0(void)
 {
 	unsigned long ttbl = __pa(swapper_pg_dir);
@@ -107,25 +120,36 @@ static void cpu_set_reserved_ttbr0(void)
 	isb();
 }
 =======
+=======
+>>>>>>> v3.18
 /*
  * With LPAE, the ASID and page tables are updated atomicly, so there is
  * no need for a reserved set of tables (the active ASID tracking prevents
  * any issues across a rollover).
  */
 #define cpu_set_reserved_ttbr0()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static void cpu_set_reserved_ttbr0(void)
 {
 	u32 ttb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Copy TTBR1 into TTBR0 */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Copy TTBR1 into TTBR0.
 	 * This points at swapper_pg_dir, which contains only global
 	 * entries so any speculative walks are perfectly safe.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	asm volatile(
 	"	mrc	p15, 0, %0, c2, c0, 1		@ read TTBR1\n"
@@ -155,7 +179,10 @@ static int contextidr_notifier(struct notifier_block *unused, unsigned long cmd,
 	: "=r" (contextidr), "+r" (pid)
 	: "I" (~ASID_MASK));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uncached_logk(LOGK_CTXID, (void *)contextidr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	isb();
@@ -202,10 +229,14 @@ static void flush_context(unsigned int cpu)
 
 	/* Queue a TLB invalidate and flush the I-cache if necessary. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tlb_ops_need_broadcast())
 		cpumask_set_cpu(cpu, &tlb_flush_pending);
 	else
 		cpumask_setall(&tlb_flush_pending);
+=======
+	cpumask_setall(&tlb_flush_pending);
+>>>>>>> v3.18
 =======
 	cpumask_setall(&tlb_flush_pending);
 >>>>>>> v3.18
@@ -226,6 +257,10 @@ static int is_reserved_asid(u64 asid)
 static u64 new_context(struct mm_struct *mm, unsigned int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	static u32 cur_idx = 1;
+>>>>>>> v3.18
 =======
 	static u32 cur_idx = 1;
 >>>>>>> v3.18
@@ -244,11 +279,14 @@ static u64 new_context(struct mm_struct *mm, unsigned int cpu)
 		 * note of the currently active ASIDs and mark the TLBs
 		 * as requiring flushes. We always count from ASID #1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * as we reserve ASID #0 to switch via TTBR0 and indicate
 		 * rollover events.
 		 */
 		asid = find_next_zero_bit(asid_map, NUM_USER_ASIDS, 1);
 =======
+=======
+>>>>>>> v3.18
 		 * as we reserve ASID #0 to switch via TTBR0 and to
 		 * avoid speculative page table walks from hitting in
 		 * any partial walk caches, which could be populated
@@ -256,6 +294,9 @@ static u64 new_context(struct mm_struct *mm, unsigned int cpu)
 		 * the module area and the userspace stack.
 		 */
 		asid = find_next_zero_bit(asid_map, NUM_USER_ASIDS, cur_idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (asid == NUM_USER_ASIDS) {
 			generation = atomic64_add_return(ASID_FIRST_VERSION,
@@ -265,6 +306,10 @@ static u64 new_context(struct mm_struct *mm, unsigned int cpu)
 		}
 		__set_bit(asid, asid_map);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		cur_idx = asid;
+>>>>>>> v3.18
 =======
 		cur_idx = asid;
 >>>>>>> v3.18
@@ -286,8 +331,14 @@ void check_and_switch_context(struct mm_struct *mm, struct task_struct *tsk)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Required during context switch to avoid speculative page table
 	 * walking with the wrong TTBR.
+=======
+	 * We cannot update the pgd and the ASID atomicly with classic
+	 * MMU, so switch exclusively to global mappings to avoid
+	 * speculative page table walking with the wrong TTBR.
+>>>>>>> v3.18
 =======
 	 * We cannot update the pgd and the ASID atomicly with classic
 	 * MMU, so switch exclusively to global mappings to avoid
@@ -313,7 +364,10 @@ void check_and_switch_context(struct mm_struct *mm, struct task_struct *tsk)
 		local_flush_bp_all();
 		local_flush_tlb_all();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dummy_flush_tlb_a15_erratum();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

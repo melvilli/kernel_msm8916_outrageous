@@ -459,8 +459,12 @@ int ubifs_validate_entry(struct ubifs_info *c,
 	    strnlen(dent->name, nlen) != nlen ||
 	    le64_to_cpu(dent->inum) > MAX_INUM) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("bad %s node", c->vi.ubi_num,
 			  key_type == UBIFS_DENT_KEY ?
+=======
+		ubifs_err("bad %s node", key_type == UBIFS_DENT_KEY ?
+>>>>>>> v3.18
 =======
 		ubifs_err("bad %s node", key_type == UBIFS_DENT_KEY ?
 >>>>>>> v3.18
@@ -470,7 +474,11 @@ int ubifs_validate_entry(struct ubifs_info *c,
 
 	if (key_type != UBIFS_DENT_KEY && key_type != UBIFS_XENT_KEY) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("bad key type %d", c->vi.ubi_num, key_type);
+=======
+		ubifs_err("bad key type %d", key_type);
+>>>>>>> v3.18
 =======
 		ubifs_err("bad key type %d", key_type);
 >>>>>>> v3.18
@@ -599,7 +607,11 @@ static int replay_bud(struct ubifs_info *c, struct bud_entry *b)
 
 		if (snod->sqnum >= SQNUM_WATERMARK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("file system's life ended", c->vi.ubi_num);
+=======
+			ubifs_err("file system's life ended");
+>>>>>>> v3.18
 =======
 			ubifs_err("file system's life ended");
 >>>>>>> v3.18
@@ -661,7 +673,11 @@ static int replay_bud(struct ubifs_info *c, struct bud_entry *b)
 			    new_size < 0 || new_size > c->max_inode_sz ||
 			    old_size <= new_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ubifs_err("bad truncation node", c->vi.ubi_num);
+=======
+				ubifs_err("bad truncation node");
+>>>>>>> v3.18
 =======
 				ubifs_err("bad truncation node");
 >>>>>>> v3.18
@@ -681,7 +697,11 @@ static int replay_bud(struct ubifs_info *c, struct bud_entry *b)
 		default:
 			ubifs_err("unexpected node type %d in bud LEB %d:%d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, snod->type, lnum, snod->offs);
+=======
+				  snod->type, lnum, snod->offs);
+>>>>>>> v3.18
 =======
 				  snod->type, lnum, snod->offs);
 >>>>>>> v3.18
@@ -707,7 +727,11 @@ out:
 
 out_dump:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ubifs_err("bad node is at LEB %d:%d", c->vi.ubi_num, lnum, snod->offs);
+=======
+	ubifs_err("bad node is at LEB %d:%d", lnum, snod->offs);
+>>>>>>> v3.18
 =======
 	ubifs_err("bad node is at LEB %d:%d", lnum, snod->offs);
 >>>>>>> v3.18
@@ -831,8 +855,12 @@ static int validate_ref(struct ubifs_info *c, const struct ubifs_ref_node *ref)
 		if (bud->jhead == jhead && bud->start <= offs)
 			return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("bud at LEB %d:%d was already referred",
 				c->vi.ubi_num, lnum, offs);
+=======
+		ubifs_err("bud at LEB %d:%d was already referred", lnum, offs);
+>>>>>>> v3.18
 =======
 		ubifs_err("bud at LEB %d:%d was already referred", lnum, offs);
 >>>>>>> v3.18
@@ -893,7 +921,11 @@ static int replay_log_leb(struct ubifs_info *c, int lnum, int offs, void *sbuf)
 		if (snod->type != UBIFS_CS_NODE) {
 			ubifs_err("first log node at LEB %d:%d is not CS node",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, lnum, offs);
+=======
+				  lnum, offs);
+>>>>>>> v3.18
 =======
 				  lnum, offs);
 >>>>>>> v3.18
@@ -902,7 +934,11 @@ static int replay_log_leb(struct ubifs_info *c, int lnum, int offs, void *sbuf)
 		if (le64_to_cpu(node->cmt_no) != c->cmt_no) {
 			ubifs_err("first CS node at LEB %d:%d has wrong commit number %llu expected %llu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, lnum, offs,
+=======
+				  lnum, offs,
+>>>>>>> v3.18
 =======
 				  lnum, offs,
 >>>>>>> v3.18
@@ -930,7 +966,11 @@ static int replay_log_leb(struct ubifs_info *c, int lnum, int offs, void *sbuf)
 	/* Make sure the first node sits at offset zero of the LEB */
 	if (snod->offs != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("first node is not at zero offset", c->vi.ubi_num);
+=======
+		ubifs_err("first node is not at zero offset");
+>>>>>>> v3.18
 =======
 		ubifs_err("first node is not at zero offset");
 >>>>>>> v3.18
@@ -942,7 +982,11 @@ static int replay_log_leb(struct ubifs_info *c, int lnum, int offs, void *sbuf)
 
 		if (snod->sqnum >= SQNUM_WATERMARK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("file system's life ended", c->vi.ubi_num);
+=======
+			ubifs_err("file system's life ended");
+>>>>>>> v3.18
 =======
 			ubifs_err("file system's life ended");
 >>>>>>> v3.18
@@ -952,7 +996,11 @@ static int replay_log_leb(struct ubifs_info *c, int lnum, int offs, void *sbuf)
 		if (snod->sqnum < c->cs_sqnum) {
 			ubifs_err("bad sqnum %llu, commit sqnum %llu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  c->vi.ubi_num, snod->sqnum, c->cs_sqnum);
+=======
+				  snod->sqnum, c->cs_sqnum);
+>>>>>>> v3.18
 =======
 				  snod->sqnum, c->cs_sqnum);
 >>>>>>> v3.18
@@ -985,8 +1033,12 @@ static int replay_log_leb(struct ubifs_info *c, int lnum, int offs, void *sbuf)
 			/* Make sure it sits at the beginning of LEB */
 			if (snod->offs != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ubifs_err("unexpected node in log",
 						c->vi.ubi_num);
+=======
+				ubifs_err("unexpected node in log");
+>>>>>>> v3.18
 =======
 				ubifs_err("unexpected node in log");
 >>>>>>> v3.18
@@ -995,8 +1047,12 @@ static int replay_log_leb(struct ubifs_info *c, int lnum, int offs, void *sbuf)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ubifs_err("unexpected node in log",
 					c->vi.ubi_num);
+=======
+			ubifs_err("unexpected node in log");
+>>>>>>> v3.18
 =======
 			ubifs_err("unexpected node in log");
 >>>>>>> v3.18
@@ -1017,7 +1073,11 @@ out:
 out_dump:
 	ubifs_err("log error detected while replaying the log at LEB %d:%d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			c->vi.ubi_num, lnum, offs + snod->offs);
+=======
+		  lnum, offs + snod->offs);
+>>>>>>> v3.18
 =======
 		  lnum, offs + snod->offs);
 >>>>>>> v3.18
@@ -1082,8 +1142,13 @@ int ubifs_replay_journal(struct ubifs_info *c)
 
 	if (c->ihead_offs != c->leb_size - free) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ubifs_err("bad index head LEB %d:%d", c->vi.ubi_num,
 				c->ihead_lnum, c->ihead_offs);
+=======
+		ubifs_err("bad index head LEB %d:%d", c->ihead_lnum,
+			  c->ihead_offs);
+>>>>>>> v3.18
 =======
 		ubifs_err("bad index head LEB %d:%d", c->ihead_lnum,
 			  c->ihead_offs);

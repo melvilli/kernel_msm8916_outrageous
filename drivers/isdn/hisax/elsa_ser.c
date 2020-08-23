@@ -345,7 +345,11 @@ static inline void receive_chars(struct IsdnCardState *cs,
 		t += sprintf(t, "modem read cnt %d", cs->hw.elsa.rcvcnt);
 		QuickHex(t, cs->hw.elsa.rcvbuf, cs->hw.elsa.rcvcnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		debugl1(cs, tmp);
+=======
+		debugl1(cs, "%s", tmp);
+>>>>>>> v3.18
 =======
 		debugl1(cs, "%s", tmp);
 >>>>>>> v3.18
@@ -578,7 +582,12 @@ modem_l2l1(struct PStack *st, int pr, void *arg)
 		bcs->cs->dc.isac.arcofi_bc = st->l1.bc;
 		arcofi_fsm(bcs->cs, ARCOFI_START, &ARCOFI_XOP_0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interruptible_sleep_on(&bcs->cs->dc.isac.arcofi_wait);
+=======
+		wait_event_interruptible(bcs->cs->dc.isac.arcofi_wait,
+				 bcs->cs->dc.isac.arcofi_state == ARCOFI_NOP);
+>>>>>>> v3.18
 =======
 		wait_event_interruptible(bcs->cs->dc.isac.arcofi_wait,
 				 bcs->cs->dc.isac.arcofi_state == ARCOFI_NOP);

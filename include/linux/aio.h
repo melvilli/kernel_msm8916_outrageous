@@ -28,6 +28,7 @@ struct kiocb;
 #define KIOCB_CANCELLED		((void *) (~0ULL))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef int (kiocb_cancel_fn)(struct kiocb *, struct io_event *);
 
 struct kiocb {
@@ -38,6 +39,8 @@ struct kiocb {
 	kiocb_cancel_fn		*ki_cancel;
 	void			(*ki_dtor)(struct kiocb *);
 =======
+=======
+>>>>>>> v3.18
 typedef int (kiocb_cancel_fn)(struct kiocb *);
 
 struct kiocb {
@@ -45,6 +48,9 @@ struct kiocb {
 	struct kioctx		*ki_ctx;	/* NULL for sync ops */
 	kiocb_cancel_fn		*ki_cancel;
 	void			*private;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	union {
@@ -54,6 +60,7 @@ struct kiocb {
 
 	__u64			ki_user_data;	/* user's data for completion */
 	loff_t			ki_pos;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	void			*private;
@@ -66,6 +73,9 @@ struct kiocb {
  	struct iovec		*ki_iovec;
  	unsigned long		ki_nr_segs;
  	unsigned long		ki_cur_seg;
+=======
+	size_t			ki_nbytes;	/* copy of iocb->aio_nbytes */
+>>>>>>> v3.18
 =======
 	size_t			ki_nbytes;	/* copy of iocb->aio_nbytes */
 >>>>>>> v3.18
@@ -89,7 +99,10 @@ static inline void init_sync_kiocb(struct kiocb *kiocb, struct file *filp)
 {
 	*kiocb = (struct kiocb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.ki_users = ATOMIC_INIT(1),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			.ki_ctx = NULL,
@@ -102,7 +115,10 @@ static inline void init_sync_kiocb(struct kiocb *kiocb, struct file *filp)
 #ifdef CONFIG_AIO
 extern ssize_t wait_on_sync_kiocb(struct kiocb *iocb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void aio_put_req(struct kiocb *iocb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void aio_complete(struct kiocb *iocb, long res, long res2);
@@ -114,7 +130,10 @@ void kiocb_set_cancel_fn(struct kiocb *req, kiocb_cancel_fn *cancel);
 #else
 static inline ssize_t wait_on_sync_kiocb(struct kiocb *iocb) { return 0; }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void aio_put_req(struct kiocb *iocb) { }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void aio_complete(struct kiocb *iocb, long res, long res2) { }

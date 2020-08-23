@@ -29,6 +29,11 @@ struct device_node;
  * @cpu_init:	Reads any data necessary for a specific enable-method from the
  *		devicetree, for a given cpu node and proposed logical id.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @cpu_init_idle: Reads any data necessary to initialize CPU idle states from
+ *		devicetree, for a given cpu node and proposed logical id.
+>>>>>>> v3.18
 =======
  * @cpu_init_idle: Reads any data necessary to initialize CPU idle states from
  *		devicetree, for a given cpu node and proposed logical id.
@@ -53,6 +58,10 @@ struct cpu_operations {
 	const char	*name;
 	int		(*cpu_init)(struct device_node *, unsigned int);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int		(*cpu_init_idle)(struct device_node *, unsigned int);
+>>>>>>> v3.18
 =======
 	int		(*cpu_init_idle)(struct device_node *, unsigned int);
 >>>>>>> v3.18
@@ -71,6 +80,7 @@ struct cpu_operations {
 
 extern const struct cpu_operations *cpu_ops[NR_CPUS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __init cpu_read_ops(struct device_node *dn, int cpu);
 extern void __init cpu_read_bootcpu_ops(void);
 
@@ -78,6 +88,10 @@ extern void __init cpu_read_bootcpu_ops(void);
 	static const struct cpu_operations *__cpu_method_table_##name	\
 	__used __section(__cpu_method_of_table)				\
 	= __ops;
+=======
+int __init cpu_read_ops(struct device_node *dn, int cpu);
+void __init cpu_read_bootcpu_ops(void);
+>>>>>>> v3.18
 =======
 int __init cpu_read_ops(struct device_node *dn, int cpu);
 void __init cpu_read_bootcpu_ops(void);

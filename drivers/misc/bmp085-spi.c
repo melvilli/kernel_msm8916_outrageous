@@ -42,7 +42,11 @@ static int bmp085_spi_probe(struct spi_device *client)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return bmp085_probe(&client->dev, regmap);
+=======
+	return bmp085_probe(&client->dev, regmap, client->irq);
+>>>>>>> v3.18
 =======
 	return bmp085_probe(&client->dev, regmap, client->irq);
 >>>>>>> v3.18

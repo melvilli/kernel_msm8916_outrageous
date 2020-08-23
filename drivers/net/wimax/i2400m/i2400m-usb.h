@@ -257,6 +257,7 @@ void i2400mu_init(struct i2400mu *i2400mu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int i2400mu_notification_setup(struct i2400mu *);
 extern void i2400mu_notification_release(struct i2400mu *);
 
@@ -275,6 +276,8 @@ extern ssize_t i2400mu_bus_bm_wait_for_ack(struct i2400m *,
 					   struct i2400m_bootrom_header *,
 					   size_t);
 =======
+=======
+>>>>>>> v3.18
 int i2400mu_notification_setup(struct i2400mu *);
 void i2400mu_notification_release(struct i2400mu *);
 
@@ -291,5 +294,8 @@ ssize_t i2400mu_bus_bm_cmd_send(struct i2400m *,
 				int);
 ssize_t i2400mu_bus_bm_wait_for_ack(struct i2400m *,
 				    struct i2400m_bootrom_header *, size_t);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* #ifndef __I2400M_USB_H__ */

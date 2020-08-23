@@ -2,7 +2,11 @@
 config VIDEO_HDPVR
 	tristate "Hauppauge HD PVR support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIDEO_DEV
+=======
+	depends on VIDEO_DEV && VIDEO_V4L2
+>>>>>>> v3.18
 =======
 	depends on VIDEO_DEV && VIDEO_V4L2
 >>>>>>> v3.18

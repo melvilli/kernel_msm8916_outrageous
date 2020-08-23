@@ -297,7 +297,10 @@ modulator programming see
 	  </row>
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    <entry><constant>V4L2_CAP_SDR_CAPTURE</constant></entry>
 	    <entry>0x00100000</entry>
 	    <entry>The device supports the
@@ -310,6 +313,9 @@ modulator programming see
 fields.</entry>
 	  </row>
 	  <row>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    <entry><constant>V4L2_CAP_READWRITE</constant></entry>
 	    <entry>0x01000000</entry>

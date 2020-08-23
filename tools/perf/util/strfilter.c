@@ -11,6 +11,7 @@ static const char *OP_not	= "!";	/* Logical NOT */
 #define is_separator(c)	(is_operator(c) || (c) == '(' || (c) == ')')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void strfilter_node__delete(struct strfilter_node *self)
 {
 	if (self) {
@@ -28,6 +29,8 @@ void strfilter__delete(struct strfilter *self)
 		strfilter_node__delete(self->root);
 		free(self);
 =======
+=======
+>>>>>>> v3.18
 static void strfilter_node__delete(struct strfilter_node *node)
 {
 	if (node) {
@@ -44,6 +47,9 @@ void strfilter__delete(struct strfilter *filter)
 	if (filter) {
 		strfilter_node__delete(filter->root);
 		free(filter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -82,6 +88,7 @@ static struct strfilter_node *strfilter_node__alloc(const char *op,
 						    struct strfilter_node *r)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct strfilter_node *ret = zalloc(sizeof(struct strfilter_node));
 
 	if (ret) {
@@ -92,6 +99,8 @@ static struct strfilter_node *strfilter_node__alloc(const char *op,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	struct strfilter_node *node = zalloc(sizeof(*node));
 
 	if (node) {
@@ -101,6 +110,9 @@ static struct strfilter_node *strfilter_node__alloc(const char *op,
 	}
 
 	return node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -186,6 +198,7 @@ error:
 struct strfilter *strfilter__new(const char *rules, const char **err)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct strfilter *ret = zalloc(sizeof(struct strfilter));
 	const char *ep = NULL;
 
@@ -220,6 +233,8 @@ static bool strfilter_node__compare(struct strfilter_node *self,
 	default:
 		return strglobmatch(str, self->p);
 =======
+=======
+>>>>>>> v3.18
 	struct strfilter *filter = zalloc(sizeof(*filter));
 	const char *ep = NULL;
 
@@ -253,11 +268,15 @@ static bool strfilter_node__compare(struct strfilter_node *node,
 		return !strfilter_node__compare(node->r, str);
 	default:
 		return strglobmatch(str, node->p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 
 /* Return true if STR matches the filter rules */
+<<<<<<< HEAD
 <<<<<<< HEAD
 bool strfilter__compare(struct strfilter *self, const char *str)
 {
@@ -265,10 +284,15 @@ bool strfilter__compare(struct strfilter *self, const char *str)
 		return false;
 	return strfilter_node__compare(self->root, str);
 =======
+=======
+>>>>>>> v3.18
 bool strfilter__compare(struct strfilter *filter, const char *str)
 {
 	if (!filter)
 		return false;
 	return strfilter_node__compare(filter->root, str);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

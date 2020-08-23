@@ -70,6 +70,11 @@ enum iscsi_uevent_e {
 	ISCSI_UEVENT_LOGOUT_FLASHNODE	= UEVENT_BASE + 29,
 	ISCSI_UEVENT_LOGOUT_FLASHNODE_SID	= UEVENT_BASE + 30,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ISCSI_UEVENT_SET_CHAP		= UEVENT_BASE + 31,
+	ISCSI_UEVENT_GET_HOST_STATS	= UEVENT_BASE + 32,
+>>>>>>> v3.18
 =======
 	ISCSI_UEVENT_SET_CHAP		= UEVENT_BASE + 31,
 	ISCSI_UEVENT_GET_HOST_STATS	= UEVENT_BASE + 32,
@@ -247,6 +252,12 @@ struct iscsi_uevent {
 			uint32_t	sid;
 		} logout_flashnode_sid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct msg_get_host_stats {
+			uint32_t host_no;
+		} get_host_stats;
+>>>>>>> v3.18
 =======
 		struct msg_get_host_stats {
 			uint32_t host_no;
@@ -321,9 +332,12 @@ enum iscsi_param_type {
 	ISCSI_NET_PARAM,	/* iscsi_net_param */
 	ISCSI_FLASHNODE_PARAM,	/* iscsi_flashnode_param */
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	ISCSI_CHAP_PARAM,	/* iscsi_chap_param */
 	ISCSI_IFACE_PARAM,	/* iscsi_iface_param */
 };
@@ -335,6 +349,9 @@ struct iscsi_param_info {
 	uint8_t value[0];	/* length sized value follows */
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct iscsi_iface_param_info {
 	uint32_t iface_num;	/* iface number, 0 - n */
@@ -400,6 +417,7 @@ struct iscsi_path {
 #define ISCSI_VLAN_ENABLE	0x02
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* iSCSI network params */
 enum iscsi_net_param {
 	ISCSI_NET_PARAM_IPV4_ADDR		= 1,
@@ -423,6 +441,8 @@ enum iscsi_net_param {
 	ISCSI_NET_PARAM_MTU			= 19,
 	ISCSI_NET_PARAM_PORT			= 20,
 =======
+=======
+>>>>>>> v3.18
 /* iscsi generic enable/disabled setting for various features */
 #define ISCSI_NET_PARAM_DISABLE		0x01
 #define ISCSI_NET_PARAM_ENABLE		0x02
@@ -523,6 +543,9 @@ enum iscsi_iface_param {
 	ISCSI_IFACE_PARAM_DISCOVERY_LOGOUT_EN,
 	ISCSI_IFACE_PARAM_STRICT_LOGIN_COMP_EN,
 	ISCSI_IFACE_PARAM_INITIATOR_NAME,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -564,6 +587,10 @@ enum iscsi_err {
 	ISCSI_ERR_TCP_CONN_CLOSE	= ISCSI_ERR_BASE + 20,
 	ISCSI_ERR_SCSI_EH_SESSION_RST	= ISCSI_ERR_BASE + 21,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ISCSI_ERR_NOP_TIMEDOUT		= ISCSI_ERR_BASE + 22,
+>>>>>>> v3.18
 =======
 	ISCSI_ERR_NOP_TIMEDOUT		= ISCSI_ERR_BASE + 22,
 >>>>>>> v3.18
@@ -622,7 +649,10 @@ enum iscsi_param {
 	ISCSI_PARAM_CHAP_IN_IDX,
 	ISCSI_PARAM_CHAP_OUT_IDX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	ISCSI_PARAM_BOOT_ROOT,
 	ISCSI_PARAM_BOOT_NIC,
@@ -661,6 +691,9 @@ enum iscsi_param {
 	ISCSI_PARAM_DISCOVERY_PARENT_IDX,
 	ISCSI_PARAM_DISCOVERY_PARENT_TYPE,
 	ISCSI_PARAM_LOCAL_IPADDR,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* must always be last */
 	ISCSI_PARAM_MAX,
@@ -876,7 +909,10 @@ enum chap_type_e {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum iscsi_chap_param {
 	ISCSI_CHAP_PARAM_INDEX,
 	ISCSI_CHAP_PARAM_CHAP_TYPE,
@@ -885,6 +921,9 @@ enum iscsi_chap_param {
 	ISCSI_CHAP_PARAM_PASSWORD_LEN
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ISCSI_CHAP_AUTH_NAME_MAX_LEN	256
 #define ISCSI_CHAP_AUTH_SECRET_MAX_LEN	256
@@ -897,7 +936,10 @@ struct iscsi_chap_rec {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ISCSI_HOST_STATS_CUSTOM_MAX             32
 #define ISCSI_HOST_STATS_CUSTOM_DESC_MAX        64
 struct iscsi_host_stats_custom {
@@ -1006,5 +1048,8 @@ struct iscsi_offload_host_stats {
 		__aligned(sizeof(uint64_t));
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

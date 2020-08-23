@@ -89,7 +89,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	timer@2c000200 {
 		compatible = "arm,cortex-a5-global-timer",
 		             "arm,cortex-a9-global-timer";
@@ -98,6 +101,9 @@
 		clocks = <&oscclk0>;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	watchdog@2c000620 {
 		compatible = "arm,cortex-a5-twd-wdt";
@@ -132,7 +138,11 @@
 		arm,vexpress,config-bridge = <&v2m_sysreg>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		osc@0 {
+=======
+		oscclk0: osc@0 {
+>>>>>>> v3.18
 =======
 		oscclk0: osc@0 {
 >>>>>>> v3.18

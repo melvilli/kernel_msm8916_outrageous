@@ -27,6 +27,7 @@
 
 /* Interrupt handlers registered during init_IRQ */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void apic_timer_interrupt(void);
 extern void x86_platform_ipi(void);
 extern void kvm_posted_intr_ipi(void);
@@ -78,6 +79,8 @@ extern void threshold_interrupt(void);
 extern void call_function_interrupt(void);
 extern void call_function_single_interrupt(void);
 =======
+=======
+>>>>>>> v3.18
 extern asmlinkage void apic_timer_interrupt(void);
 extern asmlinkage void x86_platform_ipi(void);
 extern asmlinkage void kvm_posted_intr_ipi(void);
@@ -145,6 +148,9 @@ extern void trace_call_function_single_interrupt(void);
 #define trace_reboot_interrupt  reboot_interrupt
 #define trace_kvm_posted_intr_ipi kvm_posted_intr_ipi
 #endif /* CONFIG_TRACING */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* IOAPIC */
@@ -152,7 +158,10 @@ extern void trace_call_function_single_interrupt(void);
 extern unsigned long io_apic_irqs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void init_VISWS_APIC_irqs(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void setup_IO_APIC(void);
@@ -229,20 +238,27 @@ extern void eisa_set_level_irq(unsigned int irq);
 
 /* SMP */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void smp_apic_timer_interrupt(struct pt_regs *);
 extern void smp_spurious_interrupt(struct pt_regs *);
 extern void smp_x86_platform_ipi(struct pt_regs *);
 extern void smp_error_interrupt(struct pt_regs *);
 =======
+=======
+>>>>>>> v3.18
 extern __visible void smp_apic_timer_interrupt(struct pt_regs *);
 extern __visible void smp_spurious_interrupt(struct pt_regs *);
 extern __visible void smp_x86_platform_ipi(struct pt_regs *);
 extern __visible void smp_error_interrupt(struct pt_regs *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_X86_IO_APIC
 extern asmlinkage void smp_irq_move_cleanup_interrupt(void);
 #endif
 #ifdef CONFIG_SMP
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void smp_reschedule_interrupt(struct pt_regs *);
 extern void smp_call_function_interrupt(struct pt_regs *);
@@ -256,6 +272,8 @@ extern asmlinkage void smp_invalidate_interrupt(struct pt_regs *);
 
 extern void (*__initconst interrupt[NR_VECTORS-FIRST_EXTERNAL_VECTOR])(void);
 =======
+=======
+>>>>>>> v3.18
 extern __visible void smp_reschedule_interrupt(struct pt_regs *);
 extern __visible void smp_call_function_interrupt(struct pt_regs *);
 extern __visible void smp_call_function_single_interrupt(struct pt_regs *);
@@ -269,6 +287,9 @@ extern void (*__initconst interrupt[NR_VECTORS-FIRST_EXTERNAL_VECTOR])(void);
 
 #define VECTOR_UNDEFINED	(-1)
 #define VECTOR_RETRIGGERED	(-2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 typedef int vector_irq_t[NR_VECTORS];

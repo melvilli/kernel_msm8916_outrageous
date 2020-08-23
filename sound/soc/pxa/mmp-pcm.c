@@ -18,6 +18,10 @@
 #include <linux/platform_data/dma-mmp_tdma.h>
 #include <linux/platform_data/mmp_audio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -38,6 +42,7 @@ struct mmp_dma_data {
 		SNDRV_PCM_INFO_INTERLEAVED |	\
 		SNDRV_PCM_INFO_PAUSE |		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SNDRV_PCM_INFO_RESUME)
 
 #define MMP_PCM_FORMATS (SNDRV_PCM_FMTBIT_S16_LE | \
@@ -47,12 +52,19 @@ struct mmp_dma_data {
 		SNDRV_PCM_INFO_RESUME |		\
 		SNDRV_PCM_INFO_NO_PERIOD_WAKEUP)
 >>>>>>> v3.18
+=======
+		SNDRV_PCM_INFO_RESUME |		\
+		SNDRV_PCM_INFO_NO_PERIOD_WAKEUP)
+>>>>>>> v3.18
 
 static struct snd_pcm_hardware mmp_pcm_hardware[] = {
 	{
 		.info			= MMP_PCM_INFO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.formats		= MMP_PCM_FORMATS,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.period_bytes_min	= 1024,
@@ -65,7 +77,10 @@ static struct snd_pcm_hardware mmp_pcm_hardware[] = {
 	{
 		.info			= MMP_PCM_INFO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.formats		= MMP_PCM_FORMATS,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.period_bytes_min	= 1024,
@@ -81,6 +96,7 @@ static int mmp_pcm_hw_params(struct snd_pcm_substream *substream,
 			      struct snd_pcm_hw_params *params)
 {
 	struct dma_chan *chan = snd_dmaengine_pcm_get_chan(substream);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct pxa2xx_pcm_dma_params *dma_params;
@@ -104,6 +120,8 @@ static int mmp_pcm_hw_params(struct snd_pcm_substream *substream,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct dma_slave_config slave_config;
 	int ret;
 
@@ -113,6 +131,9 @@ static int mmp_pcm_hw_params(struct snd_pcm_substream *substream,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = dmaengine_slave_config(chan, &slave_config);
 	if (ret)
@@ -175,7 +196,11 @@ static int mmp_pcm_mmap(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_pcm_ops mmp_pcm_ops = {
+=======
+static struct snd_pcm_ops mmp_pcm_ops = {
+>>>>>>> v3.18
 =======
 static struct snd_pcm_ops mmp_pcm_ops = {
 >>>>>>> v3.18
@@ -232,10 +257,16 @@ static int mmp_pcm_preallocate_dma_buffer(struct snd_pcm_substream *substream,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf->area = (unsigned char *)gen_pool_alloc(gpool, size);
 	if (!buf->area)
 		return -ENOMEM;
 	buf->addr = gen_pool_virt_to_phys(gpool, (unsigned long)buf->area);
+=======
+	buf->area = gen_pool_dma_alloc(gpool, size, &buf->addr);
+	if (!buf->area)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	buf->area = gen_pool_dma_alloc(gpool, size, &buf->addr);
 	if (!buf->area)
@@ -246,7 +277,11 @@ static int mmp_pcm_preallocate_dma_buffer(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mmp_pcm_new(struct snd_soc_pcm_runtime *rtd)
+=======
+static int mmp_pcm_new(struct snd_soc_pcm_runtime *rtd)
+>>>>>>> v3.18
 =======
 static int mmp_pcm_new(struct snd_soc_pcm_runtime *rtd)
 >>>>>>> v3.18
@@ -271,7 +306,11 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_soc_platform_driver mmp_soc_platform = {
+=======
+static struct snd_soc_platform_driver mmp_soc_platform = {
+>>>>>>> v3.18
 =======
 static struct snd_soc_platform_driver mmp_soc_platform = {
 >>>>>>> v3.18

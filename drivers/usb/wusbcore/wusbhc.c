@@ -56,7 +56,12 @@ static struct wusbhc *usbhc_dev_to_wusbhc(struct device *dev)
  */
 static ssize_t wusb_trust_timeout_show(struct device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       struct device_attribute *attr, char *buf)
+=======
+					struct device_attribute *attr,
+					char *buf)
+>>>>>>> v3.18
 =======
 					struct device_attribute *attr,
 					char *buf)
@@ -81,6 +86,7 @@ static ssize_t wusb_trust_timeout_store(struct device *dev,
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* FIXME: maybe we should check for range validity? */
 	wusbhc->trust_timeout = trust_timeout;
 	cancel_delayed_work(&wusbhc->keep_alive_timer);
@@ -88,11 +94,16 @@ static ssize_t wusb_trust_timeout_store(struct device *dev,
 	queue_delayed_work(wusbd, &wusbhc->keep_alive_timer,
 			   (trust_timeout * CONFIG_HZ)/1000/2);
 =======
+=======
+>>>>>>> v3.18
 	wusbhc->trust_timeout = min_t(unsigned, trust_timeout, 500);
 	cancel_delayed_work(&wusbhc->keep_alive_timer);
 	flush_workqueue(wusbd);
 	queue_delayed_work(wusbd, &wusbhc->keep_alive_timer,
 			   msecs_to_jiffies(wusbhc->trust_timeout / 2));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	return result < 0 ? result : size;
@@ -188,8 +199,11 @@ static ssize_t wusb_phy_rate_store(struct device *dev,
 	return size;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(wusb_phy_rate, 0644, wusb_phy_rate_show, wusb_phy_rate_store);
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(wusb_phy_rate, 0644, wusb_phy_rate_show,
 			wusb_phy_rate_store);
 
@@ -252,6 +266,9 @@ static ssize_t wusb_retry_count_store(struct device *dev,
 }
 static DEVICE_ATTR(wusb_retry_count, 0644, wusb_retry_count_show,
 	wusb_retry_count_store);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Group all the WUSBHC attributes */
@@ -260,6 +277,11 @@ static struct attribute *wusbhc_attrs[] = {
 		&dev_attr_wusb_chid.attr,
 		&dev_attr_wusb_phy_rate.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		&dev_attr_wusb_dnts.attr,
+		&dev_attr_wusb_retry_count.attr,
+>>>>>>> v3.18
 =======
 		&dev_attr_wusb_dnts.attr,
 		&dev_attr_wusb_retry_count.attr,
@@ -290,15 +312,21 @@ int wusbhc_create(struct wusbhc *wusbhc)
 	int result = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wusbhc->trust_timeout = WUSB_TRUST_TIMEOUT_MS;
 	wusbhc->phy_rate = UWB_PHY_RATE_INVALID - 1;
 =======
+=======
+>>>>>>> v3.18
 	/* set defaults.  These can be overwritten using sysfs attributes. */
 	wusbhc->trust_timeout = WUSB_TRUST_TIMEOUT_MS;
 	wusbhc->phy_rate = UWB_PHY_RATE_INVALID - 1;
 	wusbhc->dnts_num_slots = 4;
 	wusbhc->dnts_interval = 2;
 	wusbhc->retry_count = WUSB_RETRY_COUNT_INFINITE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_init(&wusbhc->mutex);
@@ -350,6 +378,7 @@ int wusbhc_b_create(struct wusbhc *wusbhc)
 	result = sysfs_create_group(wusbhc_kobj(wusbhc), &wusbhc_attr_group);
 	if (result < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev, "Cannot register WUSBHC attributes: %d\n", result);
 		goto error_create_attr_group;
 	}
@@ -362,12 +391,17 @@ int wusbhc_b_create(struct wusbhc *wusbhc)
 error_pal_register:
 	sysfs_remove_group(wusbhc_kobj(wusbhc), &wusbhc_attr_group);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev, "Cannot register WUSBHC attributes: %d\n",
 			result);
 		goto error_create_attr_group;
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error_create_attr_group:
 	return result;
@@ -463,7 +497,11 @@ EXPORT_SYMBOL_GPL(wusb_cluster_id_put);
  *    for the WUSB device.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  - [WUSB] sections 4.13 and 7.5.1 specifies the stop retrasmittion
+=======
+ *  - [WUSB] sections 4.13 and 7.5.1 specify the stop retransmission
+>>>>>>> v3.18
 =======
  *  - [WUSB] sections 4.13 and 7.5.1 specify the stop retransmission
 >>>>>>> v3.18
@@ -473,7 +511,12 @@ EXPORT_SYMBOL_GPL(wusb_cluster_id_put);
 void wusbhc_giveback_urb(struct wusbhc *wusbhc, struct urb *urb, int status)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wusb_dev *wusb_dev = __wusb_dev_get_by_usb_dev(wusbhc, urb->dev);
+=======
+	struct wusb_dev *wusb_dev = __wusb_dev_get_by_usb_dev(wusbhc,
+					urb->dev);
+>>>>>>> v3.18
 =======
 	struct wusb_dev *wusb_dev = __wusb_dev_get_by_usb_dev(wusbhc,
 					urb->dev);
@@ -504,7 +547,12 @@ EXPORT_SYMBOL_GPL(wusbhc_giveback_urb);
 void wusbhc_reset_all(struct wusbhc *wusbhc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uwb_rc_reset_all(wusbhc->uwb_rc);
+=======
+	if (wusbhc->uwb_rc)
+		uwb_rc_reset_all(wusbhc->uwb_rc);
+>>>>>>> v3.18
 =======
 	if (wusbhc->uwb_rc)
 		uwb_rc_reset_all(wusbhc->uwb_rc);

@@ -63,6 +63,10 @@
 #include <linux/binfmts.h>
 #include <linux/sched/sysctl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kexec.h>
+>>>>>>> v3.18
 =======
 #include <linux/kexec.h>
 >>>>>>> v3.18
@@ -100,11 +104,14 @@
 
 /* External variables not in a header file. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB
 extern int deny_new_usb;
 #endif
 extern int sysctl_overcommit_memory;
 extern int sysctl_overcommit_ratio;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int max_threads;
@@ -116,8 +123,11 @@ extern unsigned int core_pipe_limit;
 #endif
 extern int pid_max;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int extra_free_kbytes;
 extern int min_free_order_shift;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int pid_max_min, pid_max_max;
@@ -129,15 +139,19 @@ extern int sysctl_nr_open_min, sysctl_nr_open_max;
 extern int sysctl_nr_trim_pages;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BLOCK
 extern int blk_iopoll_enabled;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 /* Constants used for minimum and  maximum */
 #ifdef CONFIG_LOCKUP_DETECTOR
 static int sixty = 60;
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int neg_one = -1;
 #endif
@@ -147,6 +161,8 @@ static int __maybe_unused one = 1;
 static int __maybe_unused two = 2;
 static int __maybe_unused three = 3;
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 static int __maybe_unused neg_one = -1;
@@ -155,6 +171,9 @@ static int zero;
 static int __maybe_unused one = 1;
 static int __maybe_unused two = 2;
 static int __maybe_unused four = 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned long one_ul = 1;
 static int one_hundred = 100;
@@ -169,7 +188,10 @@ static unsigned long dirty_bytes_min = 2 * PAGE_SIZE;
 static int maxolduid = 65535;
 static int minolduid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int min_percpu_pagelist_fract = 8;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -188,10 +210,13 @@ static unsigned long hung_task_timeout_max = (LONG_MAX/HZ);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SPARC64
 extern int sysctl_tsb_ratio;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef __hppa__
@@ -212,7 +237,10 @@ extern int no_unaligned_warning;
 
 #ifdef CONFIG_PROC_SYSCTL
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #define SYSCTL_WRITES_LEGACY	-1
 #define SYSCTL_WRITES_WARN	 0
@@ -220,6 +248,9 @@ extern int no_unaligned_warning;
 
 static int sysctl_writes_strict = SYSCTL_WRITES_WARN;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int proc_do_cad_pid(struct ctl_table *table, int write,
 		  void __user *buffer, size_t *lenp, loff_t *ppos);
@@ -242,9 +273,15 @@ static int proc_dostring_coredump(struct ctl_table *table, int write,
 #ifdef CONFIG_MAGIC_SYSRQ
 /* Note: sysrq code uses it's own private copy */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __sysrq_enabled = SYSRQ_DEFAULT_ENABLE;
 
 static int sysrq_sysctl_handler(ctl_table *table, int write,
+=======
+static int __sysrq_enabled = CONFIG_MAGIC_SYSRQ_DEFAULT_ENABLE;
+
+static int sysrq_sysctl_handler(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int __sysrq_enabled = CONFIG_MAGIC_SYSRQ_DEFAULT_ENABLE;
 
@@ -336,6 +373,7 @@ static struct ctl_table kern_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec,
 	},
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{
 		.procname	= "sched_wake_to_idle",
@@ -500,6 +538,8 @@ static struct ctl_table kern_table[] = {
 #endif	/* CONFIG_SCHED_HMP */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SCHED_DEBUG
 	{
 		.procname	= "sched_min_granularity_ns",
@@ -593,6 +633,7 @@ static struct ctl_table kern_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.procname	= "numa_balancing_scan_period_reset",
 		.data		= &sysctl_numa_balancing_scan_period_reset,
 		.maxlen		= sizeof(unsigned int),
@@ -600,6 +641,8 @@ static struct ctl_table kern_table[] = {
 		.proc_handler	= proc_dointvec,
 	},
 	{
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.procname	= "numa_balancing_scan_period_max_ms",
@@ -614,8 +657,11 @@ static struct ctl_table kern_table[] = {
 		.maxlen		= sizeof(unsigned int),
 		.mode		= 0644,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.proc_handler	= proc_dointvec,
 =======
+=======
+>>>>>>> v3.18
 		.proc_handler	= proc_dointvec_minmax,
 		.extra1		= &one,
 	},
@@ -627,6 +673,9 @@ static struct ctl_table kern_table[] = {
 		.proc_handler	= sysctl_numa_balancing,
 		.extra1		= &zero,
 		.extra2		= &one,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 #endif /* CONFIG_NUMA_BALANCING */
@@ -729,7 +778,10 @@ static struct ctl_table kern_table[] = {
 		.proc_handler	= proc_taint,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.procname	= "sysctl_writes_strict",
 		.data		= &sysctl_writes_strict,
@@ -739,6 +791,9 @@ static struct ctl_table kern_table[] = {
 		.extra1		= &neg_one,
 		.extra2		= &one,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #ifdef CONFIG_LATENCYTOP
@@ -850,7 +905,10 @@ static struct ctl_table kern_table[] = {
 		.proc_handler	= proc_dointvec,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.procname	= "traceoff_on_warning",
 		.data		= &__disable_trace_on_warning,
@@ -870,6 +928,9 @@ static struct ctl_table kern_table[] = {
 		.extra1		= &one,
 		.extra2		= &one,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #ifdef CONFIG_MODULES
@@ -892,7 +953,11 @@ static struct ctl_table kern_table[] = {
 	},
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#ifdef CONFIG_UEVENT_HELPER
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_UEVENT_HELPER
 >>>>>>> v3.18
@@ -904,7 +969,11 @@ static struct ctl_table kern_table[] = {
 		.proc_handler	= proc_dostring,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -1064,6 +1133,7 @@ static struct ctl_table kern_table[] = {
 	},
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB
 	{
 		.procname	= "deny_new_usb",
@@ -1075,6 +1145,8 @@ static struct ctl_table kern_table[] = {
 		.extra2		= &one,
 	},
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{
@@ -1095,7 +1167,11 @@ static struct ctl_table kern_table[] = {
 	{
 		.procname       = "watchdog",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.data           = &watchdog_enabled,
+=======
+		.data           = &watchdog_user_enabled,
+>>>>>>> v3.18
 =======
 		.data           = &watchdog_user_enabled,
 >>>>>>> v3.18
@@ -1112,7 +1188,11 @@ static struct ctl_table kern_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dowatchdog,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.extra1		= &neg_one,
+=======
+		.extra1		= &zero,
+>>>>>>> v3.18
 =======
 		.extra1		= &zero,
 >>>>>>> v3.18
@@ -1128,10 +1208,13 @@ static struct ctl_table kern_table[] = {
 		.extra2		= &one,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		.procname       = "nmi_watchdog",
 		.data           = &watchdog_enabled,
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SMP
 	{
 		.procname	= "softlockup_all_cpu_backtrace",
@@ -1146,6 +1229,9 @@ static struct ctl_table kern_table[] = {
 	{
 		.procname       = "nmi_watchdog",
 		.data           = &watchdog_user_enabled,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.maxlen         = sizeof (int),
 		.mode           = 0644,
@@ -1275,14 +1361,20 @@ static struct ctl_table kern_table[] = {
 		.procname	= "hung_task_check_count",
 		.data		= &sysctl_hung_task_check_count,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= sizeof(unsigned long),
 		.mode		= 0644,
 		.proc_handler	= proc_doulongvec_minmax,
 =======
+=======
+>>>>>>> v3.18
 		.maxlen		= sizeof(int),
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec_minmax,
 		.extra1		= &zero,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{
@@ -1297,14 +1389,20 @@ static struct ctl_table kern_table[] = {
 		.procname	= "hung_task_warnings",
 		.data		= &sysctl_hung_task_warnings,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= sizeof(unsigned long),
 		.mode		= 0644,
 		.proc_handler	= proc_doulongvec_minmax,
 =======
+=======
+>>>>>>> v3.18
 		.maxlen		= sizeof(int),
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec_minmax,
 		.extra1		= &neg_one,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 #endif
@@ -1341,6 +1439,7 @@ static struct ctl_table kern_table[] = {
 	},
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_RCU_TORTURE_TEST
 	{
 		.procname       = "rcutorture_runnable",
@@ -1350,6 +1449,8 @@ static struct ctl_table kern_table[] = {
 		.proc_handler	= proc_dointvec,
 	},
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PERF_EVENTS
@@ -1401,6 +1502,7 @@ static struct ctl_table kern_table[] = {
 	},
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BLOCK
 	{
 		.procname	= "blk_iopoll",
@@ -1431,6 +1533,8 @@ static struct ctl_table kern_table[] = {
  * NOTE: do not add new entries to this table unless you have read
  * Documentation/sysctl/ctl_unnumbered.txt
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ }
@@ -1475,8 +1579,11 @@ static struct ctl_table vm_table[] = {
 		.maxlen		= sizeof(sysctl_overcommit_ratio),
 		.mode		= 0644,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.proc_handler	= proc_dointvec,
 =======
+=======
+>>>>>>> v3.18
 		.proc_handler	= overcommit_ratio_handler,
 	},
 	{
@@ -1485,6 +1592,9 @@ static struct ctl_table vm_table[] = {
 		.maxlen		= sizeof(sysctl_overcommit_kbytes),
 		.mode		= 0644,
 		.proc_handler	= overcommit_kbytes_handler,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{
@@ -1566,8 +1676,12 @@ static struct ctl_table vm_table[] = {
 		.mode		= 0644,
 		.proc_handler	= hugetlb_sysctl_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.extra1		= (void *)&hugetlb_zero,
 		.extra2		= (void *)&hugetlb_infinity,
+=======
+		.extra1		= &zero,
+>>>>>>> v3.18
 =======
 		.extra1		= &zero,
 >>>>>>> v3.18
@@ -1580,8 +1694,12 @@ static struct ctl_table vm_table[] = {
 		.mode           = 0644,
 		.proc_handler   = &hugetlb_mempolicy_sysctl_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.extra1		= (void *)&hugetlb_zero,
 		.extra2		= (void *)&hugetlb_infinity,
+=======
+		.extra1		= &zero,
+>>>>>>> v3.18
 =======
 		.extra1		= &zero,
 >>>>>>> v3.18
@@ -1600,7 +1718,11 @@ static struct ctl_table vm_table[] = {
 		.maxlen		= sizeof(int),
 		.mode		= 0644,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.proc_handler	= hugetlb_treat_movable_handler,
+=======
+		.proc_handler	= proc_dointvec,
+>>>>>>> v3.18
 =======
 		.proc_handler	= proc_dointvec,
 >>>>>>> v3.18
@@ -1612,8 +1734,12 @@ static struct ctl_table vm_table[] = {
 		.mode		= 0644,
 		.proc_handler	= hugetlb_overcommit_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.extra1		= (void *)&hugetlb_zero,
 		.extra2		= (void *)&hugetlb_infinity,
+=======
+		.extra1		= &zero,
+>>>>>>> v3.18
 =======
 		.extra1		= &zero,
 >>>>>>> v3.18
@@ -1634,7 +1760,11 @@ static struct ctl_table vm_table[] = {
 		.proc_handler	= drop_caches_sysctl_handler,
 		.extra1		= &one,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.extra2		= &three,
+=======
+		.extra2		= &four,
+>>>>>>> v3.18
 =======
 		.extra2		= &four,
 >>>>>>> v3.18
@@ -1668,6 +1798,7 @@ static struct ctl_table vm_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.procname	= "extra_free_kbytes",
 		.data		= &extra_free_kbytes,
 		.maxlen		= sizeof(extra_free_kbytes),
@@ -1685,13 +1816,19 @@ static struct ctl_table vm_table[] = {
 	{
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		.procname	= "percpu_pagelist_fraction",
 		.data		= &percpu_pagelist_fraction,
 		.maxlen		= sizeof(percpu_pagelist_fraction),
 		.mode		= 0644,
 		.proc_handler	= percpu_pagelist_fraction_sysctl_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.extra1		= &min_percpu_pagelist_fract,
+=======
+		.extra1		= &zero,
+>>>>>>> v3.18
 =======
 		.extra1		= &zero,
 >>>>>>> v3.18
@@ -1808,9 +1945,12 @@ static struct ctl_table vm_table[] = {
 	{
 		.procname	= "vdso_enabled",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.data		= &vdso_enabled,
 		.maxlen		= sizeof(vdso_enabled),
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_32
 		.data		= &vdso32_enabled,
 		.maxlen		= sizeof(vdso32_enabled),
@@ -1818,6 +1958,9 @@ static struct ctl_table vm_table[] = {
 		.data		= &vdso_enabled,
 		.maxlen		= sizeof(vdso_enabled),
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec,
@@ -1836,6 +1979,7 @@ static struct ctl_table vm_table[] = {
 	},
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		.procname	= "scan_unevictable_pages",
 		.data		= &scan_unevictable_pages,
@@ -1843,6 +1987,8 @@ static struct ctl_table vm_table[] = {
 		.mode		= 0644,
 		.proc_handler	= scan_unevictable_handler,
 	},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_MEMORY_FAILURE
@@ -1880,6 +2026,7 @@ static struct ctl_table vm_table[] = {
 		.proc_handler	= proc_doulongvec_minmax,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HAVE_ARCH_MMAP_RND_BITS
 	{
 		.procname	= "mmap_rnd_bits",
@@ -1904,6 +2051,8 @@ static struct ctl_table vm_table[] = {
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	{ }
 };
 
@@ -1918,7 +2067,11 @@ static struct ctl_table fs_table[] = {
 		.procname	= "inode-nr",
 		.data		= &inodes_stat,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= 2*sizeof(int),
+=======
+		.maxlen		= 2*sizeof(long),
+>>>>>>> v3.18
 =======
 		.maxlen		= 2*sizeof(long),
 >>>>>>> v3.18
@@ -1929,7 +2082,11 @@ static struct ctl_table fs_table[] = {
 		.procname	= "inode-state",
 		.data		= &inodes_stat,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= 7*sizeof(int),
+=======
+		.maxlen		= 7*sizeof(long),
+>>>>>>> v3.18
 =======
 		.maxlen		= 7*sizeof(long),
 >>>>>>> v3.18
@@ -1963,7 +2120,11 @@ static struct ctl_table fs_table[] = {
 		.procname	= "dentry-state",
 		.data		= &dentry_stat,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.maxlen		= 6*sizeof(int),
+=======
+		.maxlen		= 6*sizeof(long),
+>>>>>>> v3.18
 =======
 		.maxlen		= 6*sizeof(long),
 >>>>>>> v3.18
@@ -2090,6 +2251,7 @@ static struct ctl_table fs_table[] = {
 		.extra1		= &pipe_min_size,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		.procname	= "pipe-user-pages-hard",
 		.data		= &pipe_user_pages_hard,
@@ -2104,6 +2266,8 @@ static struct ctl_table fs_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_doulongvec_minmax,
 	},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ }
@@ -2155,8 +2319,13 @@ int __init sysctl_init(void)
 #ifdef CONFIG_PROC_SYSCTL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int _proc_do_string(void* data, int maxlen, int write,
 			   void __user *buffer,
+=======
+static int _proc_do_string(char *data, int maxlen, int write,
+			   char __user *buffer,
+>>>>>>> v3.18
 =======
 static int _proc_do_string(char *data, int maxlen, int write,
 			   char __user *buffer,
@@ -2174,10 +2343,13 @@ static int _proc_do_string(char *data, int maxlen, int write,
 
 	if (write) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len = 0;
 		p = buffer;
 		while (len < *lenp) {
 =======
+=======
+>>>>>>> v3.18
 		if (sysctl_writes_strict == SYSCTL_WRITES_STRICT) {
 			/* Only continue writes not past the end of buffer. */
 			len = strlen(data);
@@ -2195,11 +2367,15 @@ static int _proc_do_string(char *data, int maxlen, int write,
 		*ppos += *lenp;
 		p = buffer;
 		while ((p - buffer) < *lenp && len < maxlen - 1) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (get_user(c, p++))
 				return -EFAULT;
 			if (c == 0 || c == '\n')
 				break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			len++;
 		}
@@ -2209,6 +2385,11 @@ static int _proc_do_string(char *data, int maxlen, int write,
 			return -EFAULT;
 		((char *) data)[len] = 0;
 		*ppos += *lenp;
+=======
+			data[len++] = c;
+		}
+		data[len] = 0;
+>>>>>>> v3.18
 =======
 			data[len++] = c;
 		}
@@ -2231,15 +2412,21 @@ static int _proc_do_string(char *data, int maxlen, int write,
 			len = *lenp;
 		if (len)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if(copy_to_user(buffer, data, len))
 				return -EFAULT;
 		if (len < *lenp) {
 			if(put_user('\n', ((char __user *) buffer) + len))
 =======
+=======
+>>>>>>> v3.18
 			if (copy_to_user(buffer, data, len))
 				return -EFAULT;
 		if (len < *lenp) {
 			if (put_user('\n', buffer + len))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return -EFAULT;
 			len++;
@@ -2251,7 +2438,10 @@ static int _proc_do_string(char *data, int maxlen, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void warn_sysctl_write(struct ctl_table *table)
 {
 	pr_warn_once("%s wrote to %s when file position was not 0!\n"
@@ -2260,6 +2450,9 @@ static void warn_sysctl_write(struct ctl_table *table)
 		current->comm, table->procname);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * proc_dostring - read a string sysctl
@@ -2282,14 +2475,20 @@ int proc_dostring(struct ctl_table *table, int write,
 		  void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return _proc_do_string(table->data, table->maxlen, write,
 			       buffer, lenp, ppos);
 =======
+=======
+>>>>>>> v3.18
 	if (write && *ppos && sysctl_writes_strict == SYSCTL_WRITES_WARN)
 		warn_sysctl_write(table);
 
 	return _proc_do_string((char *)(table->data), table->maxlen, write,
 			       (char __user *)buffer, lenp, ppos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2465,7 +2664,10 @@ static int __do_proc_dointvec(void *tbl_data, struct ctl_table *table,
 
 	if (write) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (*ppos) {
 			switch (sysctl_writes_strict) {
 			case SYSCTL_WRITES_STRICT:
@@ -2478,6 +2680,9 @@ static int __do_proc_dointvec(void *tbl_data, struct ctl_table *table,
 			}
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (left > PAGE_SIZE - 1)
 			left = PAGE_SIZE - 1;
@@ -2537,6 +2742,10 @@ free:
 	}
 	*lenp -= left;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+>>>>>>> v3.18
 =======
 out:
 >>>>>>> v3.18
@@ -2733,7 +2942,10 @@ static int __do_proc_doulongvec_minmax(void *data, struct ctl_table *table, int 
 
 	if (write) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (*ppos) {
 			switch (sysctl_writes_strict) {
 			case SYSCTL_WRITES_STRICT:
@@ -2746,6 +2958,9 @@ static int __do_proc_doulongvec_minmax(void *data, struct ctl_table *table, int 
 			}
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (left > PAGE_SIZE - 1)
 			left = PAGE_SIZE - 1;
@@ -2776,7 +2991,10 @@ static int __do_proc_doulongvec_minmax(void *data, struct ctl_table *table, int 
 			if (neg)
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			val = convmul * val / convdiv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			if ((min && val < *min) || (max && val > *max))
@@ -2785,14 +3003,20 @@ static int __do_proc_doulongvec_minmax(void *data, struct ctl_table *table, int 
 		} else {
 			val = convdiv * (*i) / convmul;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!first)
 				err = proc_put_char(&buffer, &left, '\t');
 =======
+=======
+>>>>>>> v3.18
 			if (!first) {
 				err = proc_put_char(&buffer, &left, '\t');
 				if (err)
 					break;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			err = proc_put_long(&buffer, &left, val, false);
 			if (err)
@@ -2812,6 +3036,10 @@ free:
 	}
 	*lenp -= left;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+>>>>>>> v3.18
 =======
 out:
 >>>>>>> v3.18
@@ -2929,13 +3157,19 @@ static int do_proc_dointvec_ms_jiffies_conv(bool *negp, unsigned long *lvalp,
 {
 	if (write) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*valp = msecs_to_jiffies(*negp ? -*lvalp : *lvalp);
 =======
+=======
+>>>>>>> v3.18
 		unsigned long jif = msecs_to_jiffies(*negp ? -*lvalp : *lvalp);
 
 		if (jif > INT_MAX)
 			return 1;
 		*valp = (int)jif;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		int val = *valp;
@@ -3066,17 +3300,23 @@ int proc_do_large_bitmap(struct ctl_table *table, int write,
 	size_t left = *lenp;
 	unsigned long bitmap_len = table->maxlen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *bitmap = (unsigned long *) table->data;
 	unsigned long *tmp_bitmap = NULL;
 	char tr_a[] = { '-', ',', '\n' }, tr_b[] = { ',', '\n', 0 }, c;
 
 	if (!bitmap_len || !left || (*ppos && !write)) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned long *bitmap = *(unsigned long **) table->data;
 	unsigned long *tmp_bitmap = NULL;
 	char tr_a[] = { '-', ',', '\n' }, tr_b[] = { ',', '\n', 0 }, c;
 
 	if (!bitmap || !bitmap_len || !left || (*ppos && !write)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*lenp = 0;
 		return 0;

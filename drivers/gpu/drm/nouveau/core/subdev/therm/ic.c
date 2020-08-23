@@ -30,9 +30,15 @@
 static bool
 probe_monitoring_device(struct nouveau_i2c_port *i2c,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct i2c_board_info *info)
 {
 	struct nouveau_therm_priv *priv = (void *)nouveau_therm(i2c);
+=======
+			struct i2c_board_info *info, void *data)
+{
+	struct nouveau_therm_priv *priv = data;
+>>>>>>> v3.18
 =======
 			struct i2c_board_info *info, void *data)
 {
@@ -48,7 +54,12 @@ probe_monitoring_device(struct nouveau_i2c_port *i2c,
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!client->driver || client->driver->detect(client, info)) {
+=======
+	if (!client->dev.driver ||
+	    to_i2c_driver(client->dev.driver)->detect(client, info)) {
+>>>>>>> v3.18
 =======
 	if (!client->dev.driver ||
 	    to_i2c_driver(client->dev.driver)->detect(client, info)) {
@@ -66,6 +77,7 @@ probe_monitoring_device(struct nouveau_i2c_port *i2c,
 	return true;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct i2c_board_info
 nv_board_infos[] = {
@@ -90,6 +102,8 @@ nv_board_infos[] = {
 	{ I2C_BOARD_INFO("lm63", 0x18) },
 	{ I2C_BOARD_INFO("lm63", 0x4e) },
 =======
+=======
+>>>>>>> v3.18
 static struct nouveau_i2c_board_info
 nv_board_infos[] = {
 	{ { I2C_BOARD_INFO("w83l785ts", 0x2d) }, 0 },
@@ -112,6 +126,9 @@ nv_board_infos[] = {
 	{ { I2C_BOARD_INFO("adm1021", 0x4e) }, 0  },
 	{ { I2C_BOARD_INFO("lm63", 0x18) }, 0  },
 	{ { I2C_BOARD_INFO("lm63", 0x4e) }, 0  },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };
@@ -126,6 +143,7 @@ nouveau_therm_ic_ctor(struct nouveau_therm *therm)
 
 	if (!nvbios_extdev_find(bios, NVBIOS_EXTDEV_LM89, &extdev_entry)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct i2c_board_info board[] = {
 			{ I2C_BOARD_INFO("lm90", extdev_entry.addr >> 1) },
 			{ }
@@ -134,6 +152,8 @@ nouveau_therm_ic_ctor(struct nouveau_therm *therm)
 		i2c->identify(i2c, NV_I2C_DEFAULT(0), "monitoring device",
 				  board, probe_monitoring_device);
 =======
+=======
+>>>>>>> v3.18
 		struct nouveau_i2c_board_info board[] = {
 		  { { I2C_BOARD_INFO("lm90", extdev_entry.addr >> 1) }, 0},
 		  { }
@@ -141,12 +161,16 @@ nouveau_therm_ic_ctor(struct nouveau_therm *therm)
 
 		i2c->identify(i2c, NV_I2C_DEFAULT(0), "monitoring device",
 			      board, probe_monitoring_device, therm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (priv->ic)
 			return;
 	}
 
 	if (!nvbios_extdev_find(bios, NVBIOS_EXTDEV_ADT7473, &extdev_entry)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		struct i2c_board_info board[] = {
 			{ I2C_BOARD_INFO("adt7473", extdev_entry.addr >> 1) },
@@ -156,6 +180,8 @@ nouveau_therm_ic_ctor(struct nouveau_therm *therm)
 		i2c->identify(i2c, NV_I2C_DEFAULT(0), "monitoring device",
 				  board, probe_monitoring_device);
 =======
+=======
+>>>>>>> v3.18
 		struct nouveau_i2c_board_info board[] = {
 		  { { I2C_BOARD_INFO("adt7473", extdev_entry.addr >> 1) }, 20 },
 		  { }
@@ -163,6 +189,9 @@ nouveau_therm_ic_ctor(struct nouveau_therm *therm)
 
 		i2c->identify(i2c, NV_I2C_DEFAULT(0), "monitoring device",
 			      board, probe_monitoring_device, therm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (priv->ic)
 			return;
@@ -173,7 +202,11 @@ nouveau_therm_ic_ctor(struct nouveau_therm *therm)
 	 */
 	i2c->identify(i2c, NV_I2C_DEFAULT(0), "monitoring device",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      nv_board_infos, probe_monitoring_device);
+=======
+		      nv_board_infos, probe_monitoring_device, therm);
+>>>>>>> v3.18
 =======
 		      nv_board_infos, probe_monitoring_device, therm);
 >>>>>>> v3.18

@@ -54,9 +54,12 @@ __set_bit(unsigned long nr, volatile void * addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smp_mb__before_clear_bit()	smp_mb()
 #define smp_mb__after_clear_bit()	smp_mb()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void

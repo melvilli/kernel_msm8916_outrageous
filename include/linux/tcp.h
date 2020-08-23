@@ -18,8 +18,13 @@
 #define _LINUX_TCP_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/skbuff.h>
 #include <linux/dmaengine.h>
+=======
+
+#include <linux/skbuff.h>
+>>>>>>> v3.18
 =======
 
 #include <linux/skbuff.h>
@@ -112,7 +117,10 @@ static inline void tcp_clear_options(struct tcp_options_received *rx_opt)
 #define TCP_NUM_SACKS 4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct tcp_cookie_values;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct tcp_request_sock_ops;
@@ -120,10 +128,14 @@ struct tcp_request_sock_ops;
 struct tcp_request_sock {
 	struct inet_request_sock 	req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_TCP_MD5SIG
 	/* Only used by TCP MD5 Signature so far. */
 	const struct tcp_request_sock_ops *af_specific;
 #endif
+=======
+	const struct tcp_request_sock_ops *af_specific;
+>>>>>>> v3.18
 =======
 	const struct tcp_request_sock_ops *af_specific;
 >>>>>>> v3.18
@@ -182,6 +194,7 @@ struct tcp_sock {
 		int			memory;
 		int			len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_NET_DMA
 		/* members for async copy */
 		struct dma_chan		*dma_chan;
@@ -189,6 +202,8 @@ struct tcp_sock {
 		struct dma_pinned_list	*pinned_list;
 		dma_cookie_t		dma_cookie;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} ucopy;
@@ -213,6 +228,7 @@ struct tcp_sock {
 		syn_data:1,	/* SYN includes data */
 		syn_fastopen:1,	/* SYN includes Fast Open option */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		syn_data_acked:1;/* data in SYN is acked by SYN-ACK */
 	u32	tlp_high_seq;	/* snd_nxt at the time of TLP retransmit. */
 
@@ -222,6 +238,8 @@ struct tcp_sock {
 	u32	mdev_max;	/* maximal mdev for the last rtt period	*/
 	u32	rttvar;		/* smoothed mdev_max			*/
 =======
+=======
+>>>>>>> v3.18
 		syn_data_acked:1,/* data in SYN is acked by SYN-ACK */
 		is_cwnd_limited:1;/* forward progress limited by snd_cwnd? */
 	u32	tlp_high_seq;	/* snd_nxt at the time of TLP retransmit. */
@@ -231,12 +249,20 @@ struct tcp_sock {
 	u32	mdev_us;	/* medium deviation			*/
 	u32	mdev_max_us;	/* maximal mdev for the last rtt period	*/
 	u32	rttvar_us;	/* smoothed mdev_max			*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32	rtt_seq;	/* sequence number to update rttvar	*/
 
 	u32	packets_out;	/* Packets which are "in flight"	*/
 	u32	retrans_out;	/* Retransmitted packets out		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32	max_packets_out;  /* max packets_out in last window */
+	u32	max_packets_seq;  /* right edge of max_packets_out flight */
+>>>>>>> v3.18
 =======
 	u32	max_packets_out;  /* max packets_out in last window */
 	u32	max_packets_seq;  /* right edge of max_packets_out flight */
@@ -270,6 +296,10 @@ struct tcp_sock {
  	u32	rcv_wnd;	/* Current receiver window		*/
 	u32	write_seq;	/* Tail(+1) of data held in tcp send buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32	notsent_lowat;	/* TCP_NOTSENT_LOWAT */
+>>>>>>> v3.18
 =======
 	u32	notsent_lowat;	/* TCP_NOTSENT_LOWAT */
 >>>>>>> v3.18
@@ -282,17 +312,23 @@ struct tcp_sock {
 	/* from STCP, retrans queue hinting */
 	struct sk_buff* lost_skb_hint;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_buff *scoreboard_skb_hint;
 	struct sk_buff *retransmit_skb_hint;
 
 	struct sk_buff_head	out_of_order_queue; /* Out of order segments go here */
 =======
+=======
+>>>>>>> v3.18
 	struct sk_buff *retransmit_skb_hint;
 
 	/* OOO segments go in this list. Note that socket lock must be held,
 	 * as we do not use sk_buff_head lock.
 	 */
 	struct sk_buff_head	out_of_order_queue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* SACKs data, these 2 need to be together (see tcp_options_write) */
@@ -319,7 +355,11 @@ struct tcp_sock {
 				 * also used in SYN-SENT to remember stamp of
 				 * the first SYN. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32	undo_marker;	/* tracking retrans started here. */
+=======
+	u32	undo_marker;	/* snd_una upon a new recovery episode. */
+>>>>>>> v3.18
 =======
 	u32	undo_marker;	/* snd_una upon a new recovery episode. */
 >>>>>>> v3.18
@@ -412,11 +452,14 @@ static inline bool tcp_passive_fastopen(const struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool fastopen_cookie_present(struct tcp_fastopen_cookie *foc)
 {
 	return foc->len != -1;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void tcp_sock_destruct(struct sock *sk);

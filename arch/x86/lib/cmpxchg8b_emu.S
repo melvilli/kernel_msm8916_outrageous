@@ -8,11 +8,16 @@
 
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/alternative-asm.h>
 #include <asm/frame.h>
 #include <asm/dwarf2.h>
 
 
+=======
+#include <asm/dwarf2.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/dwarf2.h>
 
@@ -36,6 +41,7 @@ CFI_STARTPROC
 # eax:edx with the expected value)
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 cmpxchg8b_emu:
 	pushfl
 	cli
@@ -45,6 +51,8 @@ cmpxchg8b_emu:
 	cmpl 4(%esi), %edx
 	jne half_same
 =======
+=======
+>>>>>>> v3.18
 	pushfl_cfi
 	cli
 
@@ -52,11 +60,15 @@ cmpxchg8b_emu:
 	jne .Lnot_same
 	cmpl 4(%esi), %edx
 	jne .Lhalf_same
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	movl %ebx,  (%esi)
 	movl %ecx, 4(%esi)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	popfl
 	ret
@@ -68,6 +80,8 @@ cmpxchg8b_emu:
 
 	popfl
 =======
+=======
+>>>>>>> v3.18
 	CFI_REMEMBER_STATE
 	popfl_cfi
 	ret
@@ -79,6 +93,9 @@ cmpxchg8b_emu:
 	movl 4(%esi), %edx
 
 	popfl_cfi
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret
 

@@ -26,7 +26,13 @@
 #define __INTEL_DRV_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c.h>
+=======
+#include <linux/async.h>
+#include <linux/i2c.h>
+#include <linux/hdmi.h>
+>>>>>>> v3.18
 =======
 #include <linux/async.h>
 #include <linux/i2c.h>
@@ -38,12 +44,18 @@
 #include <drm/drm_crtc_helper.h>
 #include <drm/drm_fb_helper.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <drm/drm_dp_helper.h>
 =======
+=======
+>>>>>>> v3.18
 #include <drm/drm_dp_mst_helper.h>
 
 #define DIV_ROUND_CLOSEST_ULL(ll, d)	\
 ({ unsigned long long _tmp = (ll)+(d)/2; do_div(_tmp, d); _tmp; })
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -78,8 +90,13 @@
 					       DIV_ROUND_UP((US), 1000), 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define KHz(x) (1000*x)
 #define MHz(x) KHz(1000*x)
+=======
+#define KHz(x) (1000 * (x))
+#define MHz(x) KHz(1000 * (x))
+>>>>>>> v3.18
 =======
 #define KHz(x) (1000 * (x))
 #define MHz(x) KHz(1000 * (x))
@@ -95,14 +112,20 @@
 #define MAX_OUTPUTS 6
 /* maximum connectors per crtcs in the mode set */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INTELFB_CONN_LIMIT 4
 =======
+=======
+>>>>>>> v3.18
 
 /* Maximum cursor sizes */
 #define GEN2_CURSOR_WIDTH 64
 #define GEN2_CURSOR_HEIGHT 64
 #define MAX_CURSOR_WIDTH 256
 #define MAX_CURSOR_HEIGHT 256
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define INTEL_I2C_BUS_DVO 1
@@ -120,7 +143,13 @@
 #define INTEL_OUTPUT_DISPLAYPORT 7
 #define INTEL_OUTPUT_EDP 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INTEL_OUTPUT_UNKNOWN 9
+=======
+#define INTEL_OUTPUT_DSI 9
+#define INTEL_OUTPUT_UNKNOWN 10
+#define INTEL_OUTPUT_DP_MST 11
+>>>>>>> v3.18
 =======
 #define INTEL_OUTPUT_DSI 9
 #define INTEL_OUTPUT_UNKNOWN 10
@@ -133,6 +162,12 @@
 #define INTEL_DVO_CHIP_TVOUT 4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define INTEL_DSI_VIDEO_MODE	0
+#define INTEL_DSI_COMMAND_MODE	1
+
+>>>>>>> v3.18
 =======
 #define INTEL_DSI_VIDEO_MODE	0
 #define INTEL_DSI_COMMAND_MODE	1
@@ -146,14 +181,20 @@ struct intel_framebuffer {
 struct intel_fbdev {
 	struct drm_fb_helper helper;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct intel_framebuffer ifb;
 	struct list_head fbdev_list;
 	struct drm_display_mode *our_mode;
 =======
+=======
+>>>>>>> v3.18
 	struct intel_framebuffer *fb;
 	struct list_head fbdev_list;
 	struct drm_display_mode *our_mode;
 	int preferred_bpp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -167,12 +208,16 @@ struct intel_encoder {
 
 	int type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool needs_tv_clock;
 	/*
 	 * Intel hw has only one MUX where encoders could be clone, hence a
 	 * simple flag is enough to compute the possible_clones mask.
 	 */
 	bool cloneable;
+=======
+	unsigned int cloneable;
+>>>>>>> v3.18
 =======
 	unsigned int cloneable;
 >>>>>>> v3.18
@@ -191,7 +236,10 @@ struct intel_encoder {
 	 * it is connected to in the pipe parameter. */
 	bool (*get_hw_state)(struct intel_encoder *, enum pipe *pipe);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Reconstructs the equivalent mode flags for the current hardware
 	 * state. This must be called _after_ display->get_pipe_config has
 	 * pre-filled the pipe config. Note that intel_encoder->base.crtc must
@@ -204,6 +252,9 @@ struct intel_encoder {
 	 * device interrupts are disabled.
 	 */
 	void (*suspend)(struct intel_encoder *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int crtc_mask;
 	enum hpd_pin hpd_pin;
@@ -212,8 +263,11 @@ struct intel_encoder {
 struct intel_panel {
 	struct drm_display_mode *fixed_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int fitting_mode;
 =======
+=======
+>>>>>>> v3.18
 	struct drm_display_mode *downclock_mode;
 	int fitting_mode;
 
@@ -230,6 +284,9 @@ struct intel_panel {
 	} backlight;
 
 	void (*backlight_power)(struct intel_connector *, bool enable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -251,7 +308,10 @@ struct intel_connector {
 	bool (*get_hw_state)(struct intel_connector *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Removes all interfaces through which the connector is accessible
 	 * - like sysfs, debugfs entries -, so that no new operations can be
@@ -260,6 +320,9 @@ struct intel_connector {
 	 */
 	void (*unregister)(struct intel_connector *);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Panel info for eDP and LVDS */
 	struct intel_panel panel;
@@ -267,6 +330,10 @@ struct intel_connector {
 	/* Cached EDID for eDP and LVDS. May hold ERR_PTR for invalid EDID. */
 	struct edid *edid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct edid *detect_edid;
+>>>>>>> v3.18
 =======
 	struct edid *detect_edid;
 >>>>>>> v3.18
@@ -274,6 +341,7 @@ struct intel_connector {
 	/* since POLL and HPD connectors may use the same HPD line keep the native
 	   state of connector->polled in case hotplug storm detection changes it */
 	u8 polled;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -285,6 +353,8 @@ struct intel_crtc_config {
 	 * overwriting them.  Currently only lvds needs that. */
 	bool timings_set;
 =======
+=======
+>>>>>>> v3.18
 
 	void *port; /* store this opaque as its illegal to dereference it */
 
@@ -337,6 +407,9 @@ struct intel_crtc_config {
 	 * and get clipped at the edges. */
 	int pipe_src_w, pipe_src_h;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Whether to set up the PCH/FDI. Note that we never allow sharing
 	 * between pch encoders and cpu encoders. */
@@ -356,7 +429,10 @@ struct intel_crtc_config {
 	 * accordingly. */
 	bool has_dp_encoder;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Whether we should send NULL infoframes. Required for audio. */
 	bool has_hdmi_sink;
@@ -369,12 +445,16 @@ struct intel_crtc_config {
 	 * Enable dithering, used when the selected pipe bpp doesn't match the
 	 * plane bpp.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool dither;
 
 	/* Controls for the clock computation, to override various stages. */
 	bool clock_set;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Settings for the intel dpll used on pretty much everything but
 	 * haswell. */
@@ -395,6 +475,8 @@ struct intel_crtc_config {
 	/* Used by SDVO (and if we ever fix it, HDMI). */
 	unsigned pixel_multiplier;
 =======
+=======
+>>>>>>> v3.18
 	/* SDVO TV has a bunch of special case. To make multifunction encoders
 	 * work correctly, we need to track this at runtime.*/
 	bool sdvo_tv_clock;
@@ -475,6 +557,9 @@ struct intel_pipe_wm {
 struct intel_mmio_flip {
 	u32 seqno;
 	u32 ring_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -490,6 +575,7 @@ struct intel_crtc {
 	 */
 	bool active;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool eld_vld;
 	bool primary_disabled; /* is the crtc obscured by a plane? */
 	bool lowfreq_avail;
@@ -497,11 +583,16 @@ struct intel_crtc {
 	struct intel_unpin_work *unpin_work;
 	int fdi_lanes;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long enabled_power_domains;
 	bool primary_enabled; /* is the primary plane (partially) visible? */
 	bool lowfreq_avail;
 	struct intel_overlay *overlay;
 	struct intel_unpin_work *unpin_work;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	atomic_t unpin_work_count;
@@ -513,6 +604,7 @@ struct intel_crtc {
 
 	struct drm_i915_gem_object *cursor_bo;
 	uint32_t cursor_addr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int16_t cursor_x, cursor_y;
 	int16_t cursor_width, cursor_height;
@@ -527,6 +619,8 @@ struct intel_crtc {
 	/* reset counter value when the last flip was submitted */
 	unsigned int reset_counter;
 =======
+=======
+>>>>>>> v3.18
 	int16_t cursor_width, cursor_height;
 	uint32_t cursor_cntl;
 	uint32_t cursor_size;
@@ -560,6 +654,9 @@ struct intel_plane_wm_parameters {
 	uint8_t bytes_per_pixel;
 	bool enabled;
 	bool scaled;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -571,7 +668,10 @@ struct intel_plane {
 	bool can_scale;
 	int max_downscale;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 lut_r[1024], lut_g[1024], lut_b[1024];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int crtc_x, crtc_y;
@@ -579,8 +679,11 @@ struct intel_plane {
 	uint32_t src_x, src_y;
 	uint32_t src_w, src_h;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*update_plane)(struct drm_plane *plane,
 =======
+=======
+>>>>>>> v3.18
 	unsigned int rotation;
 
 	/* Since we need to change the watermarks before/after
@@ -592,6 +695,9 @@ struct intel_plane {
 
 	void (*update_plane)(struct drm_plane *plane,
 			     struct drm_crtc *crtc,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			     struct drm_framebuffer *fb,
 			     struct drm_i915_gem_object *obj,
@@ -600,7 +706,12 @@ struct intel_plane {
 			     uint32_t x, uint32_t y,
 			     uint32_t src_w, uint32_t src_h);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*disable_plane)(struct drm_plane *plane);
+=======
+	void (*disable_plane)(struct drm_plane *plane,
+			      struct drm_crtc *crtc);
+>>>>>>> v3.18
 =======
 	void (*disable_plane)(struct drm_plane *plane,
 			      struct drm_crtc *crtc);
@@ -635,6 +746,7 @@ struct cxsr_latency {
 #define to_intel_encoder(x) container_of(x, struct intel_encoder, base)
 #define to_intel_framebuffer(x) container_of(x, struct intel_framebuffer, base)
 #define to_intel_plane(x) container_of(x, struct intel_plane, base)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define DIP_HEADER_SIZE	5
@@ -699,6 +811,9 @@ struct dip_infoframe {
 =======
 #define intel_fb_obj(x) (x ? to_intel_framebuffer(x)->obj : NULL)
 >>>>>>> v3.18
+=======
+#define intel_fb_obj(x) (x ? to_intel_framebuffer(x)->obj : NULL)
+>>>>>>> v3.18
 
 struct intel_hdmi {
 	u32 hdmi_reg;
@@ -710,6 +825,7 @@ struct intel_hdmi {
 	enum hdmi_force_audio force_audio;
 	bool rgb_quant_range_selectable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*write_infoframe)(struct drm_encoder *encoder,
 				struct dip_infoframe *frame);
 	void (*set_infoframes)(struct drm_encoder *encoder,
@@ -719,6 +835,8 @@ struct intel_hdmi {
 #define DP_MAX_DOWNSTREAM_PORTS		0x10
 #define DP_LINK_CONFIGURATION_SIZE	9
 =======
+=======
+>>>>>>> v3.18
 	enum hdmi_picture_aspect aspect_ratio;
 	void (*write_infoframe)(struct drm_encoder *encoder,
 				enum hdmi_infoframe_type type,
@@ -741,6 +859,9 @@ enum edp_drrs_refresh_rate_type {
 	DRRS_LOW_RR,
 	DRRS_MAX_RR, /* RR count */
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct intel_dp {
@@ -748,7 +869,10 @@ struct intel_dp {
 	uint32_t aux_ch_ctl_reg;
 	uint32_t DP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t  link_configuration[DP_LINK_CONFIGURATION_SIZE];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool has_audio;
@@ -759,10 +883,16 @@ struct intel_dp {
 	uint8_t lane_count;
 	uint8_t dpcd[DP_RECEIVER_CAP_SIZE];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t downstream_ports[DP_MAX_DOWNSTREAM_PORTS];
 	struct i2c_adapter adapter;
 	struct i2c_algo_dp_aux_data algo;
 	bool is_pch_edp;
+=======
+	uint8_t psr_dpcd[EDP_PSR_RECEIVER_CAP_SIZE];
+	uint8_t downstream_ports[DP_MAX_DOWNSTREAM_PORTS];
+	struct drm_dp_aux aux;
+>>>>>>> v3.18
 =======
 	uint8_t psr_dpcd[EDP_PSR_RECEIVER_CAP_SIZE];
 	uint8_t downstream_ports[DP_MAX_DOWNSTREAM_PORTS];
@@ -777,8 +907,11 @@ struct intel_dp {
 	struct delayed_work panel_vdd_work;
 	bool want_panel_vdd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct intel_connector *attached_connector;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long last_power_cycle;
 	unsigned long last_power_on;
 	unsigned long last_backlight_off;
@@ -817,6 +950,9 @@ struct intel_dp {
 		struct mutex mutex;
 	} drrs_state;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -827,9 +963,12 @@ struct intel_digital_port {
 	struct intel_dp dp;
 	struct intel_hdmi hdmi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	bool (*hpd_pulse)(struct intel_digital_port *, bool);
 };
 
@@ -868,6 +1007,9 @@ vlv_pipe_to_channel(enum pipe pipe)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct drm_crtc *
 intel_get_crtc_for_pipe(struct drm_device *dev, int pipe)
@@ -893,6 +1035,7 @@ struct intel_unpin_work {
 #define INTEL_FLIP_INACTIVE	0
 #define INTEL_FLIP_PENDING	1
 #define INTEL_FLIP_COMPLETE	2
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool enable_stall_check;
 };
@@ -980,6 +1123,8 @@ struct intel_set_config {
 	struct drm_encoder **save_connector_encoders;
 	struct drm_crtc **save_encoder_crtcs;
 =======
+=======
+>>>>>>> v3.18
 	u32 flip_count;
 	u32 gtt_offset;
 	struct intel_engine_cs *flip_queued_ring;
@@ -993,12 +1138,16 @@ struct intel_set_config {
 	struct drm_encoder **save_connector_encoders;
 	struct drm_crtc **save_encoder_crtcs;
 	bool *save_crtc_enabled;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bool fb_changed;
 	bool mode_changed;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int intel_set_mode(struct drm_crtc *crtc, struct drm_display_mode *mode,
 			  int x, int y, struct drm_framebuffer *old_fb);
@@ -1026,6 +1175,8 @@ static inline struct intel_dp *enc_to_intel_dp(struct drm_encoder *encoder)
 		container_of(encoder, struct intel_digital_port, base.base);
 	return &intel_dig_port->dp;
 =======
+=======
+>>>>>>> v3.18
 struct intel_load_detect_pipe {
 	struct drm_framebuffer *release_fb;
 	bool load_detect_temp;
@@ -1036,6 +1187,9 @@ static inline struct intel_encoder *
 intel_attached_encoder(struct drm_connector *connector)
 {
 	return to_intel_connector(connector)->encoder;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1046,7 +1200,10 @@ enc_to_dig_port(struct drm_encoder *encoder)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct intel_dp_mst_encoder *
 enc_to_mst(struct drm_encoder *encoder)
 {
@@ -1058,6 +1215,9 @@ static inline struct intel_dp *enc_to_intel_dp(struct drm_encoder *encoder)
 	return &enc_to_dig_port(encoder)->dp;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct intel_digital_port *
 dp_to_dig_port(struct intel_dp *intel_dp)
@@ -1071,6 +1231,7 @@ hdmi_to_dig_port(struct intel_hdmi *intel_hdmi)
 	return container_of(intel_hdmi, struct intel_digital_port, hdmi);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 bool ibx_digital_port_connected(struct drm_i915_private *dev_priv,
 				struct intel_digital_port *port);
@@ -1211,6 +1372,8 @@ extern void intel_ddi_fdi_disable(struct drm_crtc *crtc);
 
 extern void intel_display_handle_reset(struct drm_device *dev);
 =======
+=======
+>>>>>>> v3.18
 
 /* i915_irq.c */
 bool intel_set_cpu_fifo_underrun_reporting(struct drm_device *dev,
@@ -1601,6 +1764,9 @@ int intel_sprite_get_colorkey(struct drm_device *dev, void *data,
 
 /* intel_tv.c */
 void intel_tv_init(struct drm_device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __INTEL_DRV_H__ */

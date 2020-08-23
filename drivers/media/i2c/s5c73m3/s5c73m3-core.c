@@ -16,7 +16,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sizes.h>
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -28,7 +32,13 @@
 #include <linux/media.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/regulator/consumer.h>
+=======
+#include <linux/of_gpio.h>
+#include <linux/regulator/consumer.h>
+#include <linux/sizes.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_gpio.h>
 #include <linux/regulator/consumer.h>
@@ -44,6 +54,10 @@
 #include <media/v4l2-mediabus.h>
 #include <media/s5c73m3.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/v4l2-of.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-of.h>
 >>>>>>> v3.18
@@ -61,6 +75,11 @@ module_param(update_fw, int, 0644);
 
 #define S5C73M3_EMBEDDED_DATA_MAXLEN	SZ_4K
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define S5C73M3_MIPI_DATA_LANES		4
+#define S5C73M3_CLK_NAME		"cis_extclk"
+>>>>>>> v3.18
 =======
 #define S5C73M3_MIPI_DATA_LANES		4
 #define S5C73M3_CLK_NAME		"cis_extclk"
@@ -1131,12 +1150,18 @@ static int s5c73m3_oif_set_fmt(struct v4l2_subdev *sd,
 		mf = v4l2_subdev_get_try_format(fh, fmt->pad);
 		*mf = fmt->format;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (fmt->pad == OIF_ISP_PAD) {
 			mf = v4l2_subdev_get_try_format(fh, OIF_SOURCE_PAD);
 			mf->width = fmt->format.width;
 			mf->height = fmt->format.height;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		switch (fmt->pad) {
@@ -1378,10 +1403,13 @@ static int __s5c73m3_power_on(struct s5c73m3 *state)
 		ret = regulator_enable(state->supplies[i].consumer);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 			goto err_reg_dis;
 	}
 
@@ -1396,6 +1424,9 @@ static int __s5c73m3_power_on(struct s5c73m3 *state)
 	v4l2_dbg(1, s5c73m3_dbg, &state->oif_sd, "clock frequency: %ld\n",
 					clk_get_rate(state->clock));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s5c73m3_gpio_deassert(state, STBY);
 	usleep_range(100, 200);
@@ -1405,7 +1436,12 @@ static int __s5c73m3_power_on(struct s5c73m3 *state)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 err:
+=======
+
+err_reg_dis:
+>>>>>>> v3.18
 =======
 
 err_reg_dis:
@@ -1425,6 +1461,12 @@ static int __s5c73m3_power_off(struct s5c73m3 *state)
 	if (s5c73m3_gpio_assert(state, STBY))
 		usleep_range(100, 200);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	clk_disable_unprepare(state->clock);
+
+>>>>>>> v3.18
 =======
 
 	clk_disable_unprepare(state->clock);
@@ -1439,12 +1481,15 @@ static int __s5c73m3_power_off(struct s5c73m3 *state)
 			goto err;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 err:
 	for (++i; i < S5C73M3_MAX_SUPPLIES; i++)
 		regulator_enable(state->supplies[i].consumer);
 
 =======
+=======
+>>>>>>> v3.18
 
 	return 0;
 err:
@@ -1456,6 +1501,9 @@ err:
 	}
 
 	clk_prepare_enable(state->clock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1513,6 +1561,7 @@ static int s5c73m3_oif_registered(struct v4l2_subdev *sd)
 			MEDIA_LNK_FL_IMMUTABLE | MEDIA_LNK_FL_ENABLED);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&state->lock);
 	ret = __s5c73m3_power_on(state);
 	if (ret == 0)
@@ -1524,6 +1573,8 @@ static int s5c73m3_oif_registered(struct v4l2_subdev *sd)
 	v4l2_dbg(1, s5c73m3_dbg, sd, "%s: Booting %s (%d)\n",
 		 __func__, ret ? "failed" : "succeded", ret);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1584,6 +1635,7 @@ static const struct v4l2_subdev_ops oif_subdev_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int s5c73m3_configure_gpio(int nr, int val, const char *name)
 {
 	unsigned long flags = val ? GPIOF_OUT_INIT_HIGH : GPIOF_OUT_INIT_LOW;
@@ -1607,6 +1659,8 @@ static int s5c73m3_free_gpios(struct s5c73m3 *state)
 		gpio_free(state->gpio[i].gpio);
 		state->gpio[i].gpio = -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 static int s5c73m3_configure_gpios(struct s5c73m3 *state)
 {
 	static const char * const gpio_names[] = {
@@ -1652,11 +1706,15 @@ static int s5c73m3_parse_gpios(struct s5c73m3 *state)
 		}
 		state->gpio[i].gpio = ret;
 		state->gpio[i].level = !(of_flags & OF_GPIO_ACTIVE_LOW);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int s5c73m3_configure_gpios(struct s5c73m3 *state,
 				   const struct s5c73m3_platform_data *pdata)
@@ -1686,6 +1744,8 @@ static int s5c73m3_configure_gpios(struct s5c73m3 *state,
 	if (gpio_is_valid(gpio->gpio))
 		gpio_set_value(gpio->gpio, 0);
 =======
+=======
+>>>>>>> v3.18
 static int s5c73m3_get_platform_data(struct s5c73m3 *state)
 {
 	struct device *dev = &state->i2c_client->dev;
@@ -1742,6 +1802,9 @@ static int s5c73m3_get_platform_data(struct s5c73m3 *state)
 	 */
 	if (ep.bus.mipi_csi2.num_data_lanes != S5C73M3_MIPI_DATA_LANES)
 		dev_info(dev, "falling back to 4 MIPI CSI-2 data lanes\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1752,7 +1815,10 @@ static int s5c73m3_probe(struct i2c_client *client,
 {
 	struct device *dev = &client->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct s5c73m3_platform_data *pdata = client->dev.platform_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct v4l2_subdev *sd;
@@ -1761,6 +1827,7 @@ static int s5c73m3_probe(struct i2c_client *client,
 	int ret, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata == NULL) {
 		dev_err(&client->dev, "Platform data not specified\n");
 		return -EINVAL;
@@ -1768,17 +1835,25 @@ static int s5c73m3_probe(struct i2c_client *client,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	state = devm_kzalloc(dev, sizeof(*state), GFP_KERNEL);
 	if (!state)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	state->i2c_client = client;
 	ret = s5c73m3_get_platform_data(state);
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_init(&state->lock);
 	sd = &state->sensor_sd;
@@ -1786,7 +1861,11 @@ static int s5c73m3_probe(struct i2c_client *client,
 
 	v4l2_subdev_init(sd, &s5c73m3_subdev_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sd->owner = client->driver->driver.owner;
+=======
+	sd->owner = client->dev.driver->owner;
+>>>>>>> v3.18
 =======
 	sd->owner = client->dev.driver->owner;
 >>>>>>> v3.18
@@ -1822,12 +1901,18 @@ static int s5c73m3_probe(struct i2c_client *client,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state->mclk_frequency = pdata->mclk_frequency;
 	state->bus_type = pdata->bus_type;
 
 	ret = s5c73m3_configure_gpios(state, pdata);
 	if (ret)
 		goto out_err1;
+=======
+	ret = s5c73m3_configure_gpios(state);
+	if (ret)
+		goto out_err;
+>>>>>>> v3.18
 =======
 	ret = s5c73m3_configure_gpios(state);
 	if (ret)
@@ -1842,7 +1927,11 @@ static int s5c73m3_probe(struct i2c_client *client,
 	if (ret) {
 		dev_err(dev, "failed to get regulators\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_err2;
+=======
+		goto out_err;
+>>>>>>> v3.18
 =======
 		goto out_err;
 >>>>>>> v3.18
@@ -1851,7 +1940,11 @@ static int s5c73m3_probe(struct i2c_client *client,
 	ret = s5c73m3_init_controls(state);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_err2;
+=======
+		goto out_err;
+>>>>>>> v3.18
 =======
 		goto out_err;
 >>>>>>> v3.18
@@ -1871,6 +1964,7 @@ static int s5c73m3_probe(struct i2c_client *client,
 	ret = s5c73m3_register_spi_driver(state);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_err2;
 
 	state->i2c_client = client;
@@ -1882,6 +1976,8 @@ out_err2:
 	s5c73m3_free_gpios(state);
 out_err1:
 =======
+=======
+>>>>>>> v3.18
 		goto out_err;
 
 	oif_sd->dev = dev;
@@ -1908,6 +2004,9 @@ out_err1:
 out_err1:
 	s5c73m3_unregister_spi_driver(state);
 out_err:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	media_entity_cleanup(&sd->entity);
 	return ret;
@@ -1920,7 +2019,11 @@ static int s5c73m3_remove(struct i2c_client *client)
 	struct v4l2_subdev *sensor_sd = &state->sensor_sd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_device_unregister_subdev(oif_sd);
+=======
+	v4l2_async_unregister_subdev(oif_sd);
+>>>>>>> v3.18
 =======
 	v4l2_async_unregister_subdev(oif_sd);
 >>>>>>> v3.18
@@ -1933,7 +2036,10 @@ static int s5c73m3_remove(struct i2c_client *client)
 
 	s5c73m3_unregister_spi_driver(state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s5c73m3_free_gpios(state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1947,9 +2053,12 @@ static const struct i2c_device_id s5c73m3_id[] = {
 MODULE_DEVICE_TABLE(i2c, s5c73m3_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct i2c_driver s5c73m3_i2c_driver = {
 	.driver = {
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id s5c73m3_of_match[] = {
 	{ .compatible = "samsung,s5c73m3" },
@@ -1961,6 +2070,9 @@ MODULE_DEVICE_TABLE(of, s5c73m3_of_match);
 static struct i2c_driver s5c73m3_i2c_driver = {
 	.driver = {
 		.of_match_table = of_match_ptr(s5c73m3_of_match),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.name	= DRIVER_NAME,
 	},

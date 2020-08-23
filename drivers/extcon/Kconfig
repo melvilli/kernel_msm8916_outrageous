@@ -15,7 +15,10 @@ if EXTCON
 comment "Extcon Device Drivers"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config EXTCON_ADC_JACK
 	tristate "ADC Jack extcon support"
 	depends on IIO
@@ -30,6 +33,9 @@ config EXTCON_ARIZONA
 	  with Wolfson Arizona devices. These are audio CODECs with
 	  advanced audio accessory detection support.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config EXTCON_GPIO
 	tristate "GPIO extcon support"
@@ -39,12 +45,15 @@ config EXTCON_GPIO
 	  extcon supports single state per extcon instance.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config EXTCON_ADC_JACK
 	tristate "ADC Jack extcon support"
 	depends on IIO
 	help
 	  Say Y here to enable extcon device driver based on ADC values.
 =======
+=======
+>>>>>>> v3.18
 config EXTCON_MAX14577
 	tristate "MAX14577/77836 EXTCON Support"
 	depends on MFD_MAX14577
@@ -54,6 +63,9 @@ config EXTCON_MAX14577
 	  If you say yes here you get support for the MUIC device of
 	  Maxim MAX14577/77836. The MAX14577/77836 MUIC is a USB port accessory
 	  detector and switch.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config EXTCON_MAX77693
@@ -75,6 +87,7 @@ config EXTCON_MAX8997
 	  detector and switch.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config EXTCON_ARIZONA
 	tristate "Wolfson Arizona EXTCON support"
 	depends on MFD_ARIZONA && INPUT && SND_SOC
@@ -83,6 +96,8 @@ config EXTCON_ARIZONA
 	  with Wolfson Arizona devices. These are audio CODECs with
 	  advanced audio accessory detection support.
 =======
+=======
+>>>>>>> v3.18
 config EXTCON_PALMAS
 	tristate "Palmas USB EXTCON support"
 	depends on MFD_PALMAS
@@ -112,6 +127,9 @@ config EXTCON_SM5502
 	  If you say yes here you get support for the MUIC device of
 	  Silicon Mitus SM5502. The SM5502 is a USB port accessory
 	  detector and switch.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif # MULTISTATE_SWITCH

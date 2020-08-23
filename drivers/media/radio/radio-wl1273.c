@@ -376,7 +376,11 @@ static int wl1273_fm_set_tx_freq(struct wl1273_device *radio, unsigned int freq)
 		return r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(radio->busy);
+=======
+	reinit_completion(&radio->busy);
+>>>>>>> v3.18
 =======
 	reinit_completion(&radio->busy);
 >>>>>>> v3.18
@@ -394,7 +398,11 @@ static int wl1273_fm_set_tx_freq(struct wl1273_device *radio, unsigned int freq)
 		return r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(radio->busy);
+=======
+	reinit_completion(&radio->busy);
+>>>>>>> v3.18
 =======
 	reinit_completion(&radio->busy);
 >>>>>>> v3.18
@@ -453,7 +461,11 @@ static int wl1273_fm_set_rx_freq(struct wl1273_device *radio, unsigned int freq)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(radio->busy);
+=======
+	reinit_completion(&radio->busy);
+>>>>>>> v3.18
 =======
 	reinit_completion(&radio->busy);
 >>>>>>> v3.18
@@ -818,7 +830,11 @@ static int wl1273_fm_set_seek(struct wl1273_device *radio,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(radio->busy);
+=======
+	reinit_completion(&radio->busy);
+>>>>>>> v3.18
 =======
 	reinit_completion(&radio->busy);
 >>>>>>> v3.18
@@ -864,7 +880,11 @@ static int wl1273_fm_set_seek(struct wl1273_device *radio,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(radio->busy);
+=======
+	reinit_completion(&radio->busy);
+>>>>>>> v3.18
 =======
 	reinit_completion(&radio->busy);
 >>>>>>> v3.18

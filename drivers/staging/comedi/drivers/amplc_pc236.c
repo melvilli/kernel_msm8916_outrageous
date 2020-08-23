@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/amplc_pc236.c
     Driver for Amplicon PC36AT and PCI236 DIO boards.
 
@@ -570,6 +571,8 @@ static struct comedi_driver amplc_pc236_driver = {
 	.auto_attach = pc236_auto_attach,
 	.detach = pc236_detach,
 =======
+=======
+>>>>>>> v3.18
  * comedi/drivers/amplc_pc236.c
  * Driver for Amplicon PC36AT DIO boards.
  *
@@ -644,12 +647,16 @@ static struct comedi_driver amplc_pc236_driver = {
 	.module = THIS_MODULE,
 	.attach = pc236_attach,
 	.detach = comedi_legacy_detach,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.board_name = &pc236_boards[0].name,
 	.offset = sizeof(struct pc236_board),
 	.num_names = ARRAY_SIZE(pc236_boards),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if DO_PCI
 static DEFINE_PCI_DEVICE_TABLE(pc236_pci_table) = {
@@ -681,9 +688,14 @@ module_comedi_driver(amplc_pc236_driver);
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 MODULE_DESCRIPTION("Comedi low-level driver");
 =======
+=======
+>>>>>>> v3.18
 module_comedi_driver(amplc_pc236_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 MODULE_DESCRIPTION("Comedi driver for Amplicon PC36AT DIO boards");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");

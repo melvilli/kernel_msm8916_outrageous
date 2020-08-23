@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2003 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -44,7 +48,11 @@ static int iwl_sta_ucode_activate(struct iwl_priv *priv, u8 sta_id)
 
 	if (sta_id >= IWLAGN_STATION_COUNT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IWL_ERR(priv, "invalid sta_id %u", sta_id);
+=======
+		IWL_ERR(priv, "invalid sta_id %u\n", sta_id);
+>>>>>>> v3.18
 =======
 		IWL_ERR(priv, "invalid sta_id %u\n", sta_id);
 >>>>>>> v3.18
@@ -174,7 +182,11 @@ int iwl_send_add_sta(struct iwl_priv *priv,
 
 	if (cmd.handler_status)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IWL_ERR(priv, "%s - error in the CMD response %d", __func__,
+=======
+		IWL_ERR(priv, "%s - error in the CMD response %d\n", __func__,
+>>>>>>> v3.18
 =======
 		IWL_ERR(priv, "%s - error in the CMD response %d\n", __func__,
 >>>>>>> v3.18
@@ -274,7 +286,11 @@ int iwl_sta_update_ht(struct iwl_priv *priv, struct iwl_rxon_context *ctx,
 	cmd.sta.sta_id = sta_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return iwl_send_add_sta(priv, &cmd, CMD_SYNC);
+=======
+	return iwl_send_add_sta(priv, &cmd, 0);
+>>>>>>> v3.18
 =======
 	return iwl_send_add_sta(priv, &cmd, 0);
 >>>>>>> v3.18
@@ -430,7 +446,11 @@ int iwl_add_station_common(struct iwl_priv *priv, struct iwl_rxon_context *ctx,
 
 	/* Add station to device's station table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_send_add_sta(priv, &sta_cmd, CMD_SYNC);
+=======
+	ret = iwl_send_add_sta(priv, &sta_cmd, 0);
+>>>>>>> v3.18
 =======
 	ret = iwl_send_add_sta(priv, &sta_cmd, 0);
 >>>>>>> v3.18
@@ -477,7 +497,10 @@ static int iwl_send_remove_station(struct iwl_priv *priv,
 		.id = REPLY_REMOVE_STA,
 		.len = { sizeof(struct iwl_rem_sta_cmd), },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.data = { &rm_sta_cmd, },
@@ -764,7 +787,11 @@ void iwl_restore_stations(struct iwl_priv *priv, struct iwl_rxon_context *ctx)
 			}
 			spin_unlock_bh(&priv->sta_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = iwl_send_add_sta(priv, &sta_cmd, CMD_SYNC);
+=======
+			ret = iwl_send_add_sta(priv, &sta_cmd, 0);
+>>>>>>> v3.18
 =======
 			ret = iwl_send_add_sta(priv, &sta_cmd, 0);
 >>>>>>> v3.18
@@ -784,8 +811,12 @@ void iwl_restore_stations(struct iwl_priv *priv, struct iwl_rxon_context *ctx)
 			 */
 			if (send_lq)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				iwl_send_lq_cmd(priv, ctx, &lq,
 						CMD_SYNC, true);
+=======
+				iwl_send_lq_cmd(priv, ctx, &lq, 0, true);
+>>>>>>> v3.18
 =======
 				iwl_send_lq_cmd(priv, ctx, &lq, 0, true);
 >>>>>>> v3.18
@@ -1000,7 +1031,11 @@ int iwlagn_add_bssid_station(struct iwl_priv *priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_send_lq_cmd(priv, ctx, link_cmd, CMD_SYNC, true);
+=======
+	ret = iwl_send_lq_cmd(priv, ctx, link_cmd, 0, true);
+>>>>>>> v3.18
 =======
 	ret = iwl_send_lq_cmd(priv, ctx, link_cmd, 0, true);
 >>>>>>> v3.18
@@ -1035,7 +1070,10 @@ static int iwl_send_static_wepkey_cmd(struct iwl_priv *priv,
 		.id = ctx->wep_key_cmd,
 		.data = { wep_cmd, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	};
@@ -1287,7 +1325,11 @@ int iwl_remove_dynamic_key(struct iwl_priv *priv,
 	sta_cmd.mode = STA_CONTROL_MODIFY_MSK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return iwl_send_add_sta(priv, &sta_cmd, CMD_SYNC);
+=======
+	return iwl_send_add_sta(priv, &sta_cmd, 0);
+>>>>>>> v3.18
 =======
 	return iwl_send_add_sta(priv, &sta_cmd, 0);
 >>>>>>> v3.18
@@ -1327,7 +1369,11 @@ int iwl_set_dynamic_key(struct iwl_priv *priv,
 		ieee80211_get_tkip_rx_p1k(keyconf, addr, seq.tkip.iv32, p1k);
 		ret = iwlagn_send_sta_key(priv, keyconf, sta_id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  seq.tkip.iv32, p1k, CMD_SYNC);
+=======
+					  seq.tkip.iv32, p1k, 0);
+>>>>>>> v3.18
 =======
 					  seq.tkip.iv32, p1k, 0);
 >>>>>>> v3.18
@@ -1337,7 +1383,11 @@ int iwl_set_dynamic_key(struct iwl_priv *priv,
 	case WLAN_CIPHER_SUITE_WEP104:
 		ret = iwlagn_send_sta_key(priv, keyconf, sta_id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  0, NULL, CMD_SYNC);
+=======
+					  0, NULL, 0);
+>>>>>>> v3.18
 =======
 					  0, NULL, 0);
 >>>>>>> v3.18
@@ -1460,7 +1510,11 @@ int iwl_sta_tx_modify_enable_tid(struct iwl_priv *priv, int sta_id, int tid)
 	spin_unlock_bh(&priv->sta_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return iwl_send_add_sta(priv, &sta_cmd, CMD_SYNC);
+=======
+	return iwl_send_add_sta(priv, &sta_cmd, 0);
+>>>>>>> v3.18
 =======
 	return iwl_send_add_sta(priv, &sta_cmd, 0);
 >>>>>>> v3.18
@@ -1488,7 +1542,11 @@ int iwl_sta_rx_agg_start(struct iwl_priv *priv, struct ieee80211_sta *sta,
 	spin_unlock_bh(&priv->sta_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return iwl_send_add_sta(priv, &sta_cmd, CMD_SYNC);
+=======
+	return iwl_send_add_sta(priv, &sta_cmd, 0);
+>>>>>>> v3.18
 =======
 	return iwl_send_add_sta(priv, &sta_cmd, 0);
 >>>>>>> v3.18
@@ -1517,7 +1575,11 @@ int iwl_sta_rx_agg_stop(struct iwl_priv *priv, struct ieee80211_sta *sta,
 	spin_unlock_bh(&priv->sta_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return iwl_send_add_sta(priv, &sta_cmd, CMD_SYNC);
+=======
+	return iwl_send_add_sta(priv, &sta_cmd, 0);
+>>>>>>> v3.18
 =======
 	return iwl_send_add_sta(priv, &sta_cmd, 0);
 >>>>>>> v3.18

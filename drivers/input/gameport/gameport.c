@@ -24,6 +24,10 @@
 #include <linux/sched.h>	/* HZ */
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/timekeeping.h>
+>>>>>>> v3.18
 =======
 #include <linux/timekeeping.h>
 >>>>>>> v3.18
@@ -35,11 +39,17 @@ MODULE_DESCRIPTION("Generic gameport layer");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool use_ktime = true;
 module_param(use_ktime, bool, 0400);
 MODULE_PARM_DESC(use_ktime, "Use ktime for measuring I/O speed");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * gameport_mutex protects entire gameport subsystem and is taken
@@ -88,7 +98,10 @@ static unsigned int get_time_pit(void)
 static int gameport_measure_speed(struct gameport *gameport)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned int i, t, tx;
 	u64 t1, t2, t3;
 	unsigned long flags;
@@ -121,6 +134,9 @@ static int gameport_measure_speed(struct gameport *gameport)
 
 static int old_gameport_measure_speed(struct gameport *gameport)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(__i386__)
 
@@ -469,7 +485,11 @@ static struct gameport *gameport_get_pending_child(struct gameport *parent)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t gameport_show_description(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static ssize_t gameport_description_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t gameport_description_show(struct device *dev, struct device_attribute *attr, char *buf)
 >>>>>>> v3.18
@@ -479,8 +499,14 @@ static ssize_t gameport_description_show(struct device *dev, struct device_attri
 	return sprintf(buf, "%s\n", gameport->name);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t gameport_rebind_driver(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+=======
+static DEVICE_ATTR(description, S_IRUGO, gameport_description_show, NULL);
+
+static ssize_t drvctl_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(description, S_IRUGO, gameport_description_show, NULL);
 
@@ -514,6 +540,7 @@ static ssize_t drvctl_store(struct device *dev, struct device_attribute *attr, c
 	return error ? error : count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute gameport_device_attrs[] = {
 	__ATTR(description, S_IRUGO, gameport_show_description, NULL),
@@ -521,6 +548,8 @@ static struct device_attribute gameport_device_attrs[] = {
 	__ATTR_NULL
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_WO(drvctl);
 
 static struct attribute *gameport_device_attrs[] = {
@@ -529,6 +558,9 @@ static struct attribute *gameport_device_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(gameport_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void gameport_release_port(struct device *dev)
@@ -586,7 +618,13 @@ static void gameport_add_port(struct gameport *gameport)
 		gameport->parent->child = gameport;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gameport->speed = gameport_measure_speed(gameport);
+=======
+	gameport->speed = use_ktime ?
+		gameport_measure_speed(gameport) :
+		old_gameport_measure_speed(gameport);
+>>>>>>> v3.18
 =======
 	gameport->speed = use_ktime ?
 		gameport_measure_speed(gameport) :
@@ -713,7 +751,11 @@ EXPORT_SYMBOL(gameport_unregister_port);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t gameport_driver_show_description(struct device_driver *drv, char *buf)
+=======
+static ssize_t description_show(struct device_driver *drv, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t description_show(struct device_driver *drv, char *buf)
 >>>>>>> v3.18
@@ -722,12 +764,15 @@ static ssize_t description_show(struct device_driver *drv, char *buf)
 	return sprintf(buf, "%s\n", driver->description ? driver->description : "(none)");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct driver_attribute gameport_driver_attrs[] = {
 	__ATTR(description, S_IRUGO, gameport_driver_show_description, NULL),
 	__ATTR_NULL
 };
 =======
+=======
+>>>>>>> v3.18
 static DRIVER_ATTR_RO(description);
 
 static struct attribute *gameport_driver_attrs[] = {
@@ -735,6 +780,9 @@ static struct attribute *gameport_driver_attrs[] = {
 	NULL
 };
 ATTRIBUTE_GROUPS(gameport_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int gameport_driver_probe(struct device *dev)
@@ -836,8 +884,13 @@ static int gameport_bus_match(struct device *dev, struct device_driver *drv)
 static struct bus_type gameport_bus = {
 	.name		= "gameport",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= gameport_device_attrs,
 	.drv_attrs	= gameport_driver_attrs,
+=======
+	.dev_groups	= gameport_device_groups,
+	.drv_groups	= gameport_driver_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups	= gameport_device_groups,
 	.drv_groups	= gameport_driver_groups,

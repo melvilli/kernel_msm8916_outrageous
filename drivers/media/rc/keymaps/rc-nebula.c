@@ -3,7 +3,11 @@
  * keymap imported from ir-keymaps.c
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2010 by Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (c) 2010 by Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (c) 2010 by Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -18,6 +22,7 @@
 #include <linux/module.h>
 
 static struct rc_map_table nebula[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ 0x00, KEY_0 },
 	{ 0x01, KEY_1 },
@@ -75,6 +80,8 @@ static struct rc_map_table nebula[] = {
 	{ 0x35, KEY_PHONE },
 	{ 0x36, KEY_PC },
 =======
+=======
+>>>>>>> v3.18
 	{ 0x0000, KEY_0 },
 	{ 0x0001, KEY_1 },
 	{ 0x0002, KEY_2 },
@@ -130,6 +137,9 @@ static struct rc_map_table nebula[] = {
 	{ 0x0034, KEY_EMAIL },
 	{ 0x0035, KEY_PHONE },
 	{ 0x0036, KEY_PC },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -138,7 +148,11 @@ static struct rc_map_list nebula_map = {
 		.scan    = nebula,
 		.size    = ARRAY_SIZE(nebula),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.rc_type = RC_TYPE_UNKNOWN,	/* Legacy IR type */
+=======
+		.rc_type = RC_TYPE_RC5,
+>>>>>>> v3.18
 =======
 		.rc_type = RC_TYPE_RC5,
 >>>>>>> v3.18
@@ -161,7 +175,11 @@ module_exit(exit_rc_map_nebula)
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

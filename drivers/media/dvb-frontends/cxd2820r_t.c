@@ -47,6 +47,10 @@ int cxd2820r_set_frontend_t(struct dvb_frontend *fe)
 
 		{ 0x00070, priv->cfg.ts_mode, 0xff },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		{ 0x00071, !priv->cfg.ts_clock_inv << 4, 0x10 },
+>>>>>>> v3.18
 =======
 		{ 0x00071, !priv->cfg.ts_clock_inv << 4, 0x10 },
 >>>>>>> v3.18
@@ -93,7 +97,11 @@ int cxd2820r_set_frontend_t(struct dvb_frontend *fe)
 
 	priv->delivery_system = SYS_DVBT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->ber_running = 0; /* tune stops BER counter */
+=======
+	priv->ber_running = false; /* tune stops BER counter */
+>>>>>>> v3.18
 =======
 	priv->ber_running = false; /* tune stops BER counter */
 >>>>>>> v3.18
@@ -280,7 +288,11 @@ int cxd2820r_read_ber_t(struct dvb_frontend *fe, u32 *ber)
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->ber_running = 1;
+=======
+		priv->ber_running = true;
+>>>>>>> v3.18
 =======
 		priv->ber_running = true;
 >>>>>>> v3.18

@@ -19,6 +19,10 @@
 #include <linux/slab.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 =======
 #include <asm/byteorder.h>
 >>>>>>> v3.18
@@ -34,7 +38,12 @@
 
 unsigned int zorro_num_autocon;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct zorro_dev zorro_autocon[ZORRO_NUM_AUTO];
+=======
+struct zorro_dev_init zorro_autocon_init[ZORRO_NUM_AUTO] __initdata;
+struct zorro_dev *zorro_autocon;
+>>>>>>> v3.18
 =======
 struct zorro_dev_init zorro_autocon_init[ZORRO_NUM_AUTO] __initdata;
 struct zorro_dev *zorro_autocon;
@@ -48,6 +57,10 @@ struct zorro_dev *zorro_autocon;
 struct zorro_bus {
 	struct device dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct zorro_dev devices[0];
+>>>>>>> v3.18
 =======
 	struct zorro_dev devices[0];
 >>>>>>> v3.18
@@ -139,6 +152,10 @@ static int __init amiga_zorro_probe(struct platform_device *pdev)
 {
 	struct zorro_bus *bus;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct zorro_dev_init *zi;
+>>>>>>> v3.18
 =======
 	struct zorro_dev_init *zi;
 >>>>>>> v3.18
@@ -149,6 +166,7 @@ static int __init amiga_zorro_probe(struct platform_device *pdev)
 
 	/* Initialize the Zorro bus */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bus = kzalloc(sizeof(*bus), GFP_KERNEL);
 	if (!bus)
 		return -ENOMEM;
@@ -156,6 +174,8 @@ static int __init amiga_zorro_probe(struct platform_device *pdev)
 	bus->dev.parent = &pdev->dev;
 	dev_set_name(&bus->dev, "zorro");
 =======
+=======
+>>>>>>> v3.18
 	bus = kzalloc(sizeof(*bus) +
 		      zorro_num_autocon * sizeof(bus->devices[0]),
 		      GFP_KERNEL);
@@ -165,6 +185,9 @@ static int __init amiga_zorro_probe(struct platform_device *pdev)
 	zorro_autocon = bus->devices;
 	bus->dev.parent = &pdev->dev;
 	dev_set_name(&bus->dev, zorro_bus_type.name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	error = device_register(&bus->dev);
 	if (error) {
@@ -181,6 +204,7 @@ static int __init amiga_zorro_probe(struct platform_device *pdev)
 	/* First identify all devices ... */
 	for (i = 0; i < zorro_num_autocon; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		z = &zorro_autocon[i];
 		z->id = (z->rom.er_Manufacturer<<16) | (z->rom.er_Product<<8);
 		if (z->id == ZORRO_PROD_GVP_EPC_BASE) {
@@ -191,6 +215,8 @@ static int __init amiga_zorro_probe(struct platform_device *pdev)
 		sprintf(z->name, "Zorro device %08x", z->id);
 		zorro_name_device(z);
 =======
+=======
+>>>>>>> v3.18
 		zi = &zorro_autocon_init[i];
 		z = &zorro_autocon[i];
 
@@ -208,6 +234,9 @@ static int __init amiga_zorro_probe(struct platform_device *pdev)
 		zorro_name_device(z);
 		z->resource.start = zi->boardaddr;
 		z->resource.end = zi->boardaddr + zi->boardsize - 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		z->resource.name = z->name;
 		r = zorro_find_parent_resource(pdev, z);
@@ -217,9 +246,15 @@ static int __init amiga_zorro_probe(struct platform_device *pdev)
 				"Address space collision on device %s %pR\n",
 				z->name, &z->resource);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_set_name(&z->dev, "%02x", i);
 		z->dev.parent = &bus->dev;
 		z->dev.bus = &zorro_bus_type;
+=======
+		z->dev.parent = &bus->dev;
+		z->dev.bus = &zorro_bus_type;
+		z->dev.id = i;
+>>>>>>> v3.18
 =======
 		z->dev.parent = &bus->dev;
 		z->dev.bus = &zorro_bus_type;

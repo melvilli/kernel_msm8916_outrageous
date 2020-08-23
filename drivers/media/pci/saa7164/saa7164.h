@@ -64,7 +64,11 @@
 #include <media/v4l2-common.h>
 #include <media/v4l2-ioctl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+#include <media/v4l2-device.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-device.h>
 >>>>>>> v3.18
@@ -381,6 +385,10 @@ struct saa7164_port {
 	/* Defaults established in saa7164-encoder.c */
 	struct saa7164_tvnorm encodernorm;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l2_std_id std;
+>>>>>>> v3.18
 =======
 	v4l2_std_id std;
 >>>>>>> v3.18
@@ -436,6 +444,11 @@ struct saa7164_dev {
 	atomic_t		refcount;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_device v4l2_dev;
+
+>>>>>>> v3.18
 =======
 	struct v4l2_device v4l2_dev;
 

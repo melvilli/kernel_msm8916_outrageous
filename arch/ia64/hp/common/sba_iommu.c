@@ -243,7 +243,11 @@ struct ioc {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ioc *ioc_list;
+=======
+static struct ioc *ioc_list, *ioc_found;
+>>>>>>> v3.18
 =======
 static struct ioc *ioc_list, *ioc_found;
 >>>>>>> v3.18
@@ -260,7 +264,11 @@ static u64 prefetch_spill_page;
 
 #ifdef CONFIG_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define GET_IOC(dev)	(((dev)->bus == &pci_bus_type)						\
+=======
+# define GET_IOC(dev)	((dev_is_pci(dev))						\
+>>>>>>> v3.18
 =======
 # define GET_IOC(dev)	((dev_is_pci(dev))						\
 >>>>>>> v3.18
@@ -1149,12 +1157,15 @@ sba_alloc_coherent(struct device *dev, size_t size, dma_addr_t *dma_handle,
 #ifdef CONFIG_NUMA
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct page *page;
 		page = alloc_pages_exact_node(ioc->node == MAX_NUMNODES ?
 		                        numa_node_id() : ioc->node, flags,
 		                        get_order(size));
 
 =======
+=======
+>>>>>>> v3.18
 		int node = ioc->node;
 		struct page *page;
 
@@ -1162,6 +1173,9 @@ sba_alloc_coherent(struct device *dev, size_t size, dma_addr_t *dma_handle,
 			node = numa_node_id();
 
 		page = alloc_pages_exact_node(node, flags, get_order(size));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (unlikely(!page))
 			return NULL;
@@ -1615,7 +1629,11 @@ static void sba_unmap_sg_attrs(struct device *dev, struct scatterlist *sglist,
 ***************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -1830,6 +1848,7 @@ static struct ioc_iommu ioc_iommu_info[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ioc * __init
 ioc_init(unsigned long hpa, void *handle)
 {
@@ -1845,6 +1864,8 @@ ioc_init(unsigned long hpa, void *handle)
 
 	ioc->handle = handle;
 =======
+=======
+>>>>>>> v3.18
 static void ioc_init(unsigned long hpa, struct ioc *ioc)
 {
 	struct ioc_iommu *info;
@@ -1852,6 +1873,9 @@ static void ioc_init(unsigned long hpa, struct ioc *ioc)
 	ioc->next = ioc_list;
 	ioc_list = ioc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ioc->ioc_hpa = ioremap(hpa, 0x1000);
 
@@ -1894,8 +1918,11 @@ static void ioc_init(unsigned long hpa, struct ioc *ioc)
 		ioc->name, (ioc->rev >> 4) & 0xF, ioc->rev & 0xF,
 		hpa, ioc->iov_size >> 20, ioc->ibase);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return ioc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1950,7 +1977,11 @@ ioc_show(struct seq_file *s, void *v)
 		ioc->name, ((ioc->rev >> 4) & 0xF), (ioc->rev & 0xF));
 #ifdef CONFIG_NUMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ioc->node != MAX_NUMNODES)
+=======
+	if (ioc->node != NUMA_NO_NODE)
+>>>>>>> v3.18
 =======
 	if (ioc->node != NUMA_NO_NODE)
 >>>>>>> v3.18
@@ -2032,7 +2063,11 @@ sba_connect_bus(struct pci_bus *bus)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handle = PCI_CONTROLLER(bus)->acpi_handle;
+=======
+	handle = acpi_device_handle(PCI_CONTROLLER(bus)->companion);
+>>>>>>> v3.18
 =======
 	handle = acpi_device_handle(PCI_CONTROLLER(bus)->companion);
 >>>>>>> v3.18
@@ -2058,6 +2093,7 @@ sba_connect_bus(struct pci_bus *bus)
 	printk(KERN_WARNING "No IOC for PCI Bus %04x:%02x in ACPI\n", pci_domain_nr(bus), bus->number);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_NUMA
 static void __init
@@ -2090,6 +2126,8 @@ acpi_sba_ioc_add(struct acpi_device *device)
 {
 	struct ioc *ioc;
 =======
+=======
+>>>>>>> v3.18
 static void __init
 sba_map_ioc_to_node(struct ioc *ioc, acpi_handle handle)
 {
@@ -2107,11 +2145,15 @@ sba_map_ioc_to_node(struct ioc *ioc, acpi_handle handle)
 static void acpi_sba_ioc_add(struct ioc *ioc)
 {
 	acpi_handle handle = ioc->handle;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	acpi_status status;
 	u64 hpa, length;
 	struct acpi_device_info *adi;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = hp_acpi_csr_space(device->handle, &hpa, &length);
 	if (ACPI_FAILURE(status))
@@ -2121,6 +2163,8 @@ static void acpi_sba_ioc_add(struct ioc *ioc)
 	if (ACPI_FAILURE(status))
 		return 1;
 =======
+=======
+>>>>>>> v3.18
 	ioc_found = ioc->next;
 	status = hp_acpi_csr_space(handle, &hpa, &length);
 	if (ACPI_FAILURE(status))
@@ -2129,6 +2173,9 @@ static void acpi_sba_ioc_add(struct ioc *ioc)
 	status = acpi_get_object_info(handle, &adi);
 	if (ACPI_FAILURE(status))
 		goto err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -2151,6 +2198,7 @@ static void acpi_sba_ioc_add(struct ioc *ioc)
 		iovp_shift = 12;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioc = ioc_init(hpa, device->handle);
 	if (!ioc)
 		return 1;
@@ -2159,6 +2207,8 @@ static void acpi_sba_ioc_add(struct ioc *ioc)
 	sba_map_ioc_to_node(ioc, device->handle);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ioc_init(hpa, ioc);
 	/* setup NUMA node association */
 	sba_map_ioc_to_node(ioc, handle);
@@ -2166,6 +2216,9 @@ static void acpi_sba_ioc_add(struct ioc *ioc)
 
  err:
 	kfree(ioc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2174,6 +2227,7 @@ static const struct acpi_device_id hp_ioc_iommu_device_ids[] = {
 	{"HWP0004", 0},
 	{"", 0},
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct acpi_driver acpi_sba_ioc_driver = {
 	.name		= "IOC IOMMU Driver",
@@ -2184,6 +2238,8 @@ static struct acpi_driver acpi_sba_ioc_driver = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 
 static int acpi_sba_ioc_attach(struct acpi_device *device,
 			       const struct acpi_device_id *not_used)
@@ -2213,6 +2269,9 @@ static int __init acpi_sba_ioc_init_acpi(void)
 /* This has to run before acpi_scan_init(). */
 arch_initcall(acpi_sba_ioc_init_acpi);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct dma_map_ops swiotlb_dma_ops;
 
@@ -2239,8 +2298,11 @@ sba_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_bus_register_driver(&acpi_sba_ioc_driver);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * ioc_found should be populated by the acpi_sba_ioc_handler's .attach()
 	 * routine, but that only happens if acpi_scan_init() has already run.
@@ -2248,6 +2310,9 @@ sba_init(void)
 	while (ioc_found)
 		acpi_sba_ioc_add(ioc_found);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ioc_list) {
 #ifdef CONFIG_IA64_GENERIC

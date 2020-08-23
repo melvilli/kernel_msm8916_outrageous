@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -22,6 +25,7 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
@@ -32,12 +36,17 @@
 
 ieee754dp ieee754dp_flong(s64 x)
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
 #include "ieee754dp.h"
 
 union ieee754dp ieee754dp_flong(s64 x)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u64 xm;
@@ -45,7 +54,11 @@ union ieee754dp ieee754dp_flong(s64 x)
 	int xs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLEARCX;
+=======
+	ieee754_clearcx();
+>>>>>>> v3.18
 =======
 	ieee754_clearcx();
 >>>>>>> v3.18
@@ -69,22 +82,32 @@ union ieee754dp ieee754dp_flong(s64 x)
 
 	/* normalize */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xe = DP_MBITS + 3;
 	if (xm >> (DP_MBITS + 1 + 3)) {
 		/* shunt out overflow bits */
 		while (xm >> (DP_MBITS + 1 + 3)) {
 =======
+=======
+>>>>>>> v3.18
 	xe = DP_FBITS + 3;
 	if (xm >> (DP_FBITS + 1 + 3)) {
 		/* shunt out overflow bits */
 		while (xm >> (DP_FBITS + 1 + 3)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			XDPSRSX1();
 		}
 	} else {
 		/* normalize in grs extended double precision */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while ((xm >> (DP_MBITS + 3)) == 0) {
+=======
+		while ((xm >> (DP_FBITS + 3)) == 0) {
+>>>>>>> v3.18
 =======
 		while ((xm >> (DP_FBITS + 3)) == 0) {
 >>>>>>> v3.18
@@ -92,6 +115,7 @@ union ieee754dp ieee754dp_flong(s64 x)
 			xe--;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DPNORMRET1(xs, xe, xm, "dp_flong", x);
 }
@@ -102,6 +126,10 @@ ieee754dp ieee754dp_fulong(u64 u)
 		return ieee754dp_add(ieee754dp_1e63(),
 				     ieee754dp_flong(u & ~(1ULL << 63)));
 	return ieee754dp_flong(u);
+=======
+
+	return ieee754dp_format(xs, xe, xm);
+>>>>>>> v3.18
 =======
 
 	return ieee754dp_format(xs, xe, xm);

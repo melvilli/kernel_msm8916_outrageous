@@ -260,7 +260,11 @@ cuda_probe(void)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 cuda_init_via(void)
+=======
+__init cuda_init_via(void)
+>>>>>>> v3.18
 =======
 __init cuda_init_via(void)
 >>>>>>> v3.18
@@ -384,6 +388,10 @@ cuda_request(struct adb_request *req, void (*done)(struct adb_request *),
     return cuda_write(req);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(cuda_request);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(cuda_request);
 >>>>>>> v3.18
@@ -450,6 +458,10 @@ cuda_poll(void)
 	enable_irq(cuda_irq);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(cuda_poll);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(cuda_poll);
 >>>>>>> v3.18

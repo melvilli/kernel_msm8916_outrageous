@@ -290,6 +290,10 @@ static void __init realview_pba8_init(void)
 	platform_device_register(&realview_i2c_device);
 	platform_device_register(&realview_cf_device);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	platform_device_register(&realview_leds_device);
+>>>>>>> v3.18
 =======
 	platform_device_register(&realview_leds_device);
 >>>>>>> v3.18

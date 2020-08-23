@@ -56,7 +56,11 @@
 /* bytes swapped. To allow an endian tolerant implementation, the byte */
 /* halves have been expressed independently here.                      */
 <<<<<<< HEAD
+<<<<<<< HEAD
 const unsigned char TKIP_Sbox_Lower[256] = {
+=======
+static const unsigned char TKIP_Sbox_Lower[256] = {
+>>>>>>> v3.18
 =======
 static const unsigned char TKIP_Sbox_Lower[256] = {
 >>>>>>> v3.18
@@ -95,7 +99,11 @@ static const unsigned char TKIP_Sbox_Lower[256] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const unsigned char TKIP_Sbox_Upper[256] = {
+=======
+static const unsigned char TKIP_Sbox_Upper[256] = {
+>>>>>>> v3.18
 =======
 static const unsigned char TKIP_Sbox_Upper[256] = {
 >>>>>>> v3.18
@@ -166,17 +174,23 @@ unsigned int rotr1(unsigned int a)
 	unsigned int b;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((a & 0x01) == 0x01) {
 		b = (a >> 1) | 0x8000;
 	} else {
 		b = (a >> 1) & 0x7fff;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if ((a & 0x01) == 0x01)
 		b = (a >> 1) | 0x8000;
 	else
 		b = (a >> 1) & 0x7fff;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b = b % 65536;
 	return b;
@@ -206,7 +220,10 @@ void TKIPvMixKey(
 {
 	unsigned int p1k[5];
 <<<<<<< HEAD
+<<<<<<< HEAD
 //    unsigned int ttak0, ttak1, ttak2, ttak3, ttak4;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int tsc0, tsc1, tsc2;

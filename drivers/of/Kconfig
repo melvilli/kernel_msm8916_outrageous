@@ -8,6 +8,7 @@ menu "Device Tree and Open Firmware support"
 	depends on OF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PROC_DEVICETREE
 	bool "Support for device tree in /proc"
 	depends on PROC_FS && !SPARC
@@ -22,6 +23,8 @@ config OF_SELFTEST
 	  This option builds in test cases for the device tree infrastructure
 	  that are executed one at boot time, and the results dumped to the
 =======
+=======
+>>>>>>> v3.18
 config OF_SELFTEST
 	bool "Device Tree Runtime self tests"
 	depends on OF_IRQ && OF_EARLY_FLATTREE
@@ -30,6 +33,9 @@ config OF_SELFTEST
 	help
 	  This option builds in test cases for the device tree infrastructure
 	  that are executed once at boot time, and the results dumped to the
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  console.
 
@@ -56,17 +62,24 @@ config OF_ADDRESS
 	def_bool y
 	depends on !SPARC
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	select OF_ADDRESS_PCI if PCI
 
 config OF_ADDRESS_PCI
 	bool
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config OF_IRQ
 	def_bool y
 	depends on !SPARC
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config OF_DEVICE
 	def_bool y
@@ -77,6 +90,8 @@ config OF_I2C
 	help
 	  OpenFirmware I2C accessors
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config OF_NET
@@ -102,6 +117,7 @@ config OF_PCI_IRQ
 	  OpenFirmware PCI IRQ routing helpers
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config OF_SPMI
 	def_tristate SPMI
 	depends on SPMI
@@ -110,10 +126,13 @@ config OF_SPMI
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config OF_MTD
 	depends on MTD
 	def_bool y
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config OF_SLIMBUS
 	def_tristate SLIMBUS
@@ -134,6 +153,8 @@ config OF_BATTERYDATA
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config OF_RESERVED_MEM
 	depends on OF_EARLY_FLATTREE
 	bool
@@ -141,6 +162,12 @@ config OF_RESERVED_MEM
 	  Helpers to allow for reservation of memory regions
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config OF_RESOLVE
+	bool
+
+>>>>>>> v3.18
 =======
 config OF_RESOLVE
 	bool

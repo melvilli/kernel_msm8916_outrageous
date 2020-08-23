@@ -98,7 +98,11 @@ struct ad5755_state {
 
 	union {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 d32;
+=======
+		__be32 d32;
+>>>>>>> v3.18
 =======
 		__be32 d32;
 >>>>>>> v3.18
@@ -258,6 +262,7 @@ static inline int ad5755_get_offset(struct ad5755_state *st,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int ad5755_get_scale(struct ad5755_state *st,
 	struct iio_chan_spec const *chan)
 {
@@ -267,6 +272,8 @@ static inline int ad5755_get_scale(struct ad5755_state *st,
 	return ((max - min) * 1000000000ULL) >> chan->scan_type.realbits;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ad5755_chan_reg_info(struct ad5755_state *st,
@@ -311,6 +318,10 @@ static int ad5755_read_raw(struct iio_dev *indio_dev,
 	struct ad5755_state *st = iio_priv(indio_dev);
 	unsigned int reg, shift, offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int min, max;
+>>>>>>> v3.18
 =======
 	int min, max;
 >>>>>>> v3.18
@@ -319,14 +330,20 @@ static int ad5755_read_raw(struct iio_dev *indio_dev,
 	switch (info) {
 	case IIO_CHAN_INFO_SCALE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*val = 0;
 		*val2 = ad5755_get_scale(st, chan);
 		return IIO_VAL_INT_PLUS_NANO;
 =======
+=======
+>>>>>>> v3.18
 		ad5755_get_min_max(st, chan, &min, &max);
 		*val = max - min;
 		*val2 = chan->scan_type.realbits;
 		return IIO_VAL_FRACTIONAL_LOG2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IIO_CHAN_INFO_OFFSET:
 		*val = ad5755_get_offset(st, chan);
@@ -405,6 +422,10 @@ static const struct iio_chan_spec_ext_info ad5755_ext_info[] = {
 		.read = ad5755_read_powerdown,
 		.write = ad5755_write_powerdown,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.shared = IIO_SEPARATE,
+>>>>>>> v3.18
 =======
 		.shared = IIO_SEPARATE,
 >>>>>>> v3.18
@@ -421,14 +442,20 @@ static const struct iio_chan_spec_ext_info ad5755_ext_info[] = {
 		BIT(IIO_CHAN_INFO_CALIBSCALE) |			\
 		BIT(IIO_CHAN_INFO_CALIBBIAS),			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_type = IIO_ST('u', (_bits), 16, 16 - (_bits)),	\
 =======
+=======
+>>>>>>> v3.18
 	.scan_type = {						\
 		.sign = 'u',					\
 		.realbits = (_bits),				\
 		.storagebits = 16,				\
 		.shift = 16 - (_bits),				\
 	},							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ext_info = ad5755_ext_info,				\
 }
@@ -597,7 +624,11 @@ static int ad5755_probe(struct spi_device *spi)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 >>>>>>> v3.18
@@ -624,6 +655,7 @@ static int ad5755_probe(struct spi_device *spi)
 
 	ret = ad5755_init_channels(indio_dev, pdata);
 	if (ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto error_free;
 
@@ -654,6 +686,8 @@ static int ad5755_remove(struct spi_device *spi)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 
 	ret = ad5755_setup_pdata(indio_dev, pdata);
@@ -661,6 +695,9 @@ static int ad5755_remove(struct spi_device *spi)
 		return ret;
 
 	return devm_iio_device_register(&spi->dev, indio_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -681,7 +718,10 @@ static struct spi_driver ad5755_driver = {
 	},
 	.probe = ad5755_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = ad5755_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = ad5755_id,

@@ -104,7 +104,11 @@ static void wait_for_srst_clear(struct lola *chip, struct lola_stream *str)
 		msleep(1);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING SFX "SRST not clear (stream %d)\n", str->dsd);
+=======
+	dev_warn(chip->card->dev, "SRST not clear (stream %d)\n", str->dsd);
+>>>>>>> v3.18
 =======
 	dev_warn(chip->card->dev, "SRST not clear (stream %d)\n", str->dsd);
 >>>>>>> v3.18
@@ -123,7 +127,11 @@ static int lola_stream_wait_for_fifo(struct lola *chip,
 		msleep(1);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING SFX "FIFO not ready (stream %d)\n", str->dsd);
+=======
+	dev_warn(chip->card->dev, "FIFO not ready (stream %d)\n", str->dsd);
+>>>>>>> v3.18
 =======
 	dev_warn(chip->card->dev, "FIFO not ready (stream %d)\n", str->dsd);
 >>>>>>> v3.18
@@ -165,7 +173,11 @@ static int lola_sync_wait_for_fifo(struct lola *chip,
 		msleep(1);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING SFX "FIFO not ready (pending %d)\n", pending - 1);
+=======
+	dev_warn(chip->card->dev, "FIFO not ready (pending %d)\n", pending - 1);
+>>>>>>> v3.18
 =======
 	dev_warn(chip->card->dev, "FIFO not ready (pending %d)\n", pending - 1);
 >>>>>>> v3.18
@@ -386,7 +398,11 @@ static int lola_setup_periods(struct lola *chip, struct lola_pcm *pcm,
 
  error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR SFX "Too many BDL entries: buffer=%d, period=%d\n",
+=======
+	dev_err(chip->card->dev, "Too many BDL entries: buffer=%d, period=%d\n",
+>>>>>>> v3.18
 =======
 	dev_err(chip->card->dev, "Too many BDL entries: buffer=%d, period=%d\n",
 >>>>>>> v3.18
@@ -432,7 +448,11 @@ static int lola_set_stream_config(struct lola *chip,
 			      str->format_verb, 0, &val, NULL);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR SFX "Cannot set stream format 0x%x\n",
+=======
+		dev_err(chip->card->dev, "Cannot set stream format 0x%x\n",
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "Cannot set stream format 0x%x\n",
 >>>>>>> v3.18
@@ -448,7 +468,12 @@ static int lola_set_stream_config(struct lola *chip,
 				      &val, NULL);
 		if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR SFX "Cannot set stream channel %d\n", i);
+=======
+			dev_err(chip->card->dev,
+				"Cannot set stream channel %d\n", i);
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"Cannot set stream channel %d\n", i);
@@ -677,7 +702,11 @@ static int lola_init_stream(struct lola *chip, struct lola_stream *str,
 	err = lola_read_param(chip, nid, LOLA_PAR_AUDIO_WIDGET_CAP, &val);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR SFX "Can't read wcaps for 0x%x\n", nid);
+=======
+		dev_err(chip->card->dev, "Can't read wcaps for 0x%x\n", nid);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "Can't read wcaps for 0x%x\n", nid);
 >>>>>>> v3.18
@@ -687,7 +716,12 @@ static int lola_init_stream(struct lola *chip, struct lola_stream *str,
 		/* test TYPE and bits 0..11 (no test bit9 : Digital = 0/1) */
 		if ((val & 0x00f00dff) != 0x00000010) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR SFX "Invalid wcaps 0x%x for 0x%x\n",
+=======
+			dev_err(chip->card->dev,
+				"Invalid wcaps 0x%x for 0x%x\n",
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"Invalid wcaps 0x%x for 0x%x\n",
@@ -701,7 +735,12 @@ static int lola_init_stream(struct lola *chip, struct lola_stream *str,
 		 */
 		if ((val & 0x00f00cff) != 0x00100010) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR SFX "Invalid wcaps 0x%x for 0x%x\n",
+=======
+			dev_err(chip->card->dev,
+				"Invalid wcaps 0x%x for 0x%x\n",
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"Invalid wcaps 0x%x for 0x%x\n",
@@ -717,7 +756,11 @@ static int lola_init_stream(struct lola *chip, struct lola_stream *str,
 	err = lola_read_param(chip, nid, LOLA_PAR_STREAM_FORMATS, &val);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR SFX "Can't read FORMATS 0x%x\n", nid);
+=======
+		dev_err(chip->card->dev, "Can't read FORMATS 0x%x\n", nid);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "Can't read FORMATS 0x%x\n", nid);
 >>>>>>> v3.18
@@ -728,7 +771,12 @@ static int lola_init_stream(struct lola *chip, struct lola_stream *str,
 		str->can_float = true;
 	if (!(val & 1)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR SFX "Invalid formats 0x%x for 0x%x", val, nid);
+=======
+		dev_err(chip->card->dev,
+			"Invalid formats 0x%x for 0x%x", val, nid);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"Invalid formats 0x%x for 0x%x", val, nid);

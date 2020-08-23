@@ -52,7 +52,11 @@
 #define MMC_WIDTH		0x0100
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pxav2_set_private_registers(struct sdhci_host *host, u8 mask)
+=======
+static void pxav2_reset(struct sdhci_host *host, u8 mask)
+>>>>>>> v3.18
 =======
 static void pxav2_reset(struct sdhci_host *host, u8 mask)
 >>>>>>> v3.18
@@ -61,6 +65,11 @@ static void pxav2_reset(struct sdhci_host *host, u8 mask)
 	struct sdhci_pxa_platdata *pdata = pdev->dev.platform_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sdhci_reset(host, mask);
+
+>>>>>>> v3.18
 =======
 	sdhci_reset(host, mask);
 
@@ -98,7 +107,11 @@ static void pxav2_reset(struct sdhci_host *host, u8 mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pxav2_mmc_set_width(struct sdhci_host *host, int width)
+=======
+static void pxav2_mmc_set_bus_width(struct sdhci_host *host, int width)
+>>>>>>> v3.18
 =======
 static void pxav2_mmc_set_bus_width(struct sdhci_host *host, int width)
 >>>>>>> v3.18
@@ -121,6 +134,7 @@ static void pxav2_mmc_set_bus_width(struct sdhci_host *host, int width)
 	writew(tmp, host->ioaddr + SD_CE_ATA_2);
 	writeb(ctrl, host->ioaddr + SDHCI_HOST_CONTROL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 }
@@ -130,6 +144,8 @@ static const struct sdhci_ops pxav2_sdhci_ops = {
 	.platform_reset_exit = pxav2_set_private_registers,
 	.platform_bus_width = pxav2_mmc_set_width,
 =======
+=======
+>>>>>>> v3.18
 }
 
 static const struct sdhci_ops pxav2_sdhci_ops = {
@@ -138,6 +154,9 @@ static const struct sdhci_ops pxav2_sdhci_ops = {
 	.set_bus_width = pxav2_mmc_set_bus_width,
 	.reset         = pxav2_reset,
 	.set_uhs_signaling = sdhci_set_uhs_signaling,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -200,7 +219,11 @@ static int sdhci_pxav2_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host = sdhci_pltfm_init(pdev, NULL);
+=======
+	host = sdhci_pltfm_init(pdev, NULL, 0);
+>>>>>>> v3.18
 =======
 	host = sdhci_pltfm_init(pdev, NULL, 0);
 >>>>>>> v3.18
@@ -282,8 +305,11 @@ static int sdhci_pxav2_remove(struct platform_device *pdev)
 	kfree(pxa);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -293,7 +319,10 @@ static struct platform_driver sdhci_pxav2_driver = {
 	.driver		= {
 		.name	= "sdhci-pxav2",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_OF

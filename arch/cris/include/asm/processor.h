@@ -48,7 +48,10 @@ struct task_struct;
 
 #define task_pt_regs(task) user_regs(task_thread_info(task))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define current_regs() task_pt_regs(current)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -68,6 +71,10 @@ static inline void release_thread(struct task_struct *dead_task)
 
 #define cpu_relax()     barrier()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency() cpu_relax()
 >>>>>>> v3.18

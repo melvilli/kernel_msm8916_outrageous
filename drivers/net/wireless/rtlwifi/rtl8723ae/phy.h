@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -43,6 +46,10 @@
 #define HIGHPOWER_RADIOA_ARRAYLEN		22
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IQK_ADDA_REG_NUM			16
+>>>>>>> v3.18
 =======
 #define IQK_ADDA_REG_NUM			16
 >>>>>>> v3.18
@@ -57,6 +64,7 @@
 #define LOOP_LIMIT				5
 #define MAX_STALL_TIME				50
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AntennaDiversityValue			0x80
 #define MAX_TXPWR_IDX_NMODE_92S			63
 #define Reset_Cnt_Limit				3
@@ -64,6 +72,8 @@
 #define IQK_MAC_REG_NUM				4
 
 =======
+=======
+>>>>>>> v3.18
 #define ANTENNADIVERSITYVALUE			0x80
 #define MAX_TXPWR_IDX_NMODE_92S			63
 #define Reset_Cnt_Limit				3
@@ -73,6 +83,9 @@
 
 #define IQK_DELAY_TIME				1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RF6052_MAX_PATH				2
 
@@ -96,6 +109,7 @@
 #define RTL92C_MAX_PATH_NUM			2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum swchnlcmd_id {
 	CMDID_END,
 	CMDID_SET_TXPOWEROWER_LEVEL,
@@ -113,6 +127,8 @@ struct swchnlcmd {
 	u32 msdelay;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum hw90_block_e {
@@ -206,6 +222,7 @@ struct tx_power_struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32 rtl8723ae_phy_query_bb_reg(struct ieee80211_hw *hw,
 				      u32 regaddr, u32 bitmask);
 extern void rtl8723ae_phy_set_bb_reg(struct ieee80211_hw *hw,
@@ -244,6 +261,8 @@ bool rtl8723ae_phy_set_io_cmd(struct ieee80211_hw *hw, enum io_type iotype);
 extern bool rtl8723ae_phy_set_rf_power_state(struct ieee80211_hw *hw,
 					     enum rf_pwrstate rfpwr_state);
 =======
+=======
+>>>>>>> v3.18
 u32 rtl8723e_phy_query_rf_reg(struct ieee80211_hw *hw,
 			      enum radio_path rfpath, u32 regaddr,
 			      u32 bitmask);
@@ -276,6 +295,9 @@ bool rtl8723e_phy_config_rf_with_headerfile(struct ieee80211_hw *hw,
 bool rtl8723e_phy_set_io_cmd(struct ieee80211_hw *hw, enum io_type iotype);
 bool rtl8723e_phy_set_rf_power_state(struct ieee80211_hw *hw,
 				     enum rf_pwrstate rfpwr_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

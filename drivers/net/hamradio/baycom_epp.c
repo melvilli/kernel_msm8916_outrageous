@@ -1207,7 +1207,11 @@ static int __init init_baycomepp(void)
 		
 		dev = alloc_netdev(sizeof(struct baycom_state), "bce%d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   baycom_epp_dev_setup);
+=======
+				   NET_NAME_UNKNOWN, baycom_epp_dev_setup);
+>>>>>>> v3.18
 =======
 				   NET_NAME_UNKNOWN, baycom_epp_dev_setup);
 >>>>>>> v3.18

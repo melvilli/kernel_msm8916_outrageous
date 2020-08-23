@@ -20,6 +20,10 @@ static inline u16 combine_8_to_16(u8 lower, u8 upper)
 	u16 _lower = lower;
 	u16 _upper = upper;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -36,15 +40,21 @@ irqreturn_t lis3l02dq_data_rdy_trig_poll(int irq, void *private)
 
 	if (st->trigger_on) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iio_trigger_poll(st->trig, iio_get_time_ns());
 		return IRQ_HANDLED;
 	} else
 		return IRQ_WAKE_THREAD;
 =======
+=======
+>>>>>>> v3.18
 		iio_trigger_poll(st->trig);
 		return IRQ_HANDLED;
 	}
 	return IRQ_WAKE_THREAD;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -123,7 +133,11 @@ static int lis3l02dq_get_buffer_element(struct iio_dev *indio_dev,
 {
 	int ret, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *rx_array ;
+=======
+	u8 *rx_array;
+>>>>>>> v3.18
 =======
 	u8 *rx_array;
 >>>>>>> v3.18
@@ -162,11 +176,15 @@ static irqreturn_t lis3l02dq_trigger_handler(int irq, void *p)
 		len = lis3l02dq_get_buffer_element(indio_dev, data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  /* Guaranteed to be aligned with 8 byte boundary */
 	if (indio_dev->scan_timestamp)
 		*(s64 *)((u8 *)data + ALIGN(len, sizeof(s64)))
 			= pf->timestamp;
 	iio_push_to_buffers(indio_dev, (u8 *)data);
+=======
+	iio_push_to_buffers_with_timestamp(indio_dev, data, pf->timestamp);
+>>>>>>> v3.18
 =======
 	iio_push_to_buffers_with_timestamp(indio_dev, data, pf->timestamp);
 >>>>>>> v3.18
@@ -284,8 +302,12 @@ static int lis3l02dq_trig_try_reen(struct iio_trigger *trig)
 			break;
 	if (i == 5)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO
 		       "Failed to clear the interrupt for lis3l02dq\n");
+=======
+		pr_info("Failed to clear the interrupt for lis3l02dq\n");
+>>>>>>> v3.18
 =======
 		pr_info("Failed to clear the interrupt for lis3l02dq\n");
 >>>>>>> v3.18
@@ -411,7 +433,10 @@ error_ret:
 
 static const struct iio_buffer_setup_ops lis3l02dq_buffer_setup_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.preenable = &iio_sw_buffer_preenable,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.postenable = &lis3l02dq_buffer_postenable,
@@ -428,7 +453,11 @@ int lis3l02dq_configure_buffer(struct iio_dev *indio_dev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev->buffer = buffer;
+=======
+	iio_device_attach_buffer(indio_dev, buffer);
+>>>>>>> v3.18
 =======
 	iio_device_attach_buffer(indio_dev, buffer);
 >>>>>>> v3.18

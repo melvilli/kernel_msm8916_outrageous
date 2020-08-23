@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -27,6 +28,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel PRO/1000 Linux driver
  * Copyright(c) 1999 - 2014 Intel Corporation.
  *
@@ -47,6 +50,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "e1000.h"
@@ -78,7 +84,11 @@ static u8 e1000_calculate_checksum(u8 *buffer, u32 length)
  *  @hw: pointer to the HW structure
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Returns E1000_success upon success, else E1000_ERR_HOST_INTERFACE_COMMAND
+=======
+ *  Returns 0 upon success, else -E1000_ERR_HOST_INTERFACE_COMMAND
+>>>>>>> v3.18
 =======
  *  Returns 0 upon success, else -E1000_ERR_HOST_INTERFACE_COMMAND
 >>>>>>> v3.18
@@ -113,7 +123,11 @@ static s32 e1000_mng_enable_host_if(struct e1000_hw *hw)
 
 	if (i == E1000_MNG_DHCP_COMMAND_TIMEOUT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		e_dbg("Previous command timeout failed .\n");
+=======
+		e_dbg("Previous command timeout failed.\n");
+>>>>>>> v3.18
 =======
 		e_dbg("Previous command timeout failed.\n");
 >>>>>>> v3.18
@@ -366,16 +380,22 @@ bool e1000e_enable_mng_pass_thru(struct e1000_hw *hw)
 		   (hw->mac.type == e1000_82583)) {
 		u16 data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		factps = er32(FACTPS);
 		e1000_read_nvm(hw, NVM_INIT_CONTROL2_REG, 1, &data);
 =======
+=======
+>>>>>>> v3.18
 		s32 ret_val;
 
 		factps = er32(FACTPS);
 		ret_val = e1000_read_nvm(hw, NVM_INIT_CONTROL2_REG, 1, &data);
 		if (ret_val)
 			return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!(factps & E1000_FACTPS_MNGCG) &&

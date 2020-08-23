@@ -665,7 +665,11 @@ static void ipoib_ib_tx_timer_func(unsigned long ctx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ipoib_ib_dev_open(struct net_device *dev)
+=======
+int ipoib_ib_dev_open(struct net_device *dev, int flush)
+>>>>>>> v3.18
 =======
 int ipoib_ib_dev_open(struct net_device *dev, int flush)
 >>>>>>> v3.18
@@ -674,6 +678,7 @@ int ipoib_ib_dev_open(struct net_device *dev, int flush)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ib_find_pkey(priv->ca, priv->port, priv->pkey, &priv->pkey_index)) {
 		ipoib_warn(priv, "P_Key 0x%04x not found\n", priv->pkey);
 		clear_bit(IPOIB_PKEY_ASSIGNED, &priv->flags);
@@ -681,6 +686,8 @@ int ipoib_ib_dev_open(struct net_device *dev, int flush)
 	}
 	set_bit(IPOIB_PKEY_ASSIGNED, &priv->flags);
 =======
+=======
+>>>>>>> v3.18
 	ipoib_pkey_dev_check_presence(dev);
 
 	if (!test_bit(IPOIB_PKEY_ASSIGNED, &priv->flags)) {
@@ -688,6 +695,9 @@ int ipoib_ib_dev_open(struct net_device *dev, int flush)
 			   (!(priv->pkey & 0x7fff) ? "Invalid" : "not found"));
 		return -1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = ipoib_init_qp(dev);
@@ -700,8 +710,12 @@ int ipoib_ib_dev_open(struct net_device *dev, int flush)
 	if (ret) {
 		ipoib_warn(priv, "ipoib_ib_post_receives returned %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ipoib_ib_dev_stop(dev, 1);
 		return -1;
+=======
+		goto dev_stop;
+>>>>>>> v3.18
 =======
 		goto dev_stop;
 >>>>>>> v3.18
@@ -711,8 +725,12 @@ int ipoib_ib_dev_open(struct net_device *dev, int flush)
 	if (ret) {
 		ipoib_warn(priv, "ipoib_cm_dev_open returned %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ipoib_ib_dev_stop(dev, 1);
 		return -1;
+=======
+		goto dev_stop;
+>>>>>>> v3.18
 =======
 		goto dev_stop;
 >>>>>>> v3.18
@@ -727,6 +745,7 @@ int ipoib_ib_dev_open(struct net_device *dev, int flush)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static void ipoib_pkey_dev_check_presence(struct net_device *dev)
@@ -736,6 +755,8 @@ static void ipoib_pkey_dev_check_presence(struct net_device *dev)
 
 	if (ib_find_pkey(priv->ca, priv->port, priv->pkey, &pkey_index))
 =======
+=======
+>>>>>>> v3.18
 dev_stop:
 	if (!test_and_set_bit(IPOIB_FLAG_INITIALIZED, &priv->flags))
 		napi_enable(&priv->napi);
@@ -750,6 +771,9 @@ void ipoib_pkey_dev_check_presence(struct net_device *dev)
 	if (!(priv->pkey & 0x7fff) ||
 	    ib_find_pkey(priv->ca, priv->port, priv->pkey,
 			 &priv->pkey_index))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		clear_bit(IPOIB_PKEY_ASSIGNED, &priv->flags);
 	else
@@ -782,6 +806,7 @@ int ipoib_ib_dev_down(struct net_device *dev, int flush)
 	netif_carrier_off(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Shutdown the P_Key thread if still active */
 	if (!test_bit(IPOIB_PKEY_ASSIGNED, &priv->flags)) {
 		mutex_lock(&pkey_mutex);
@@ -792,6 +817,8 @@ int ipoib_ib_dev_down(struct net_device *dev, int flush)
 			flush_workqueue(ipoib_workqueue);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ipoib_mcast_stop_thread(dev, flush);
@@ -966,7 +993,11 @@ int ipoib_ib_dev_init(struct net_device *dev, struct ib_device *ca, int port)
 
 	if (dev->flags & IFF_UP) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ipoib_ib_dev_open(dev)) {
+=======
+		if (ipoib_ib_dev_open(dev, 1)) {
+>>>>>>> v3.18
 =======
 		if (ipoib_ib_dev_open(dev, 1)) {
 >>>>>>> v3.18
@@ -979,7 +1010,10 @@ int ipoib_ib_dev_init(struct net_device *dev, struct ib_device *ca, int port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Takes whatever value which is in pkey index 0 and updates priv->pkey
  * returns 0 if the pkey value was changed.
@@ -1029,6 +1063,9 @@ static inline int update_child_pkey(struct ipoib_dev_priv *priv)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __ipoib_ib_dev_flush(struct ipoib_dev_priv *priv,
 				enum ipoib_flush_level level)
@@ -1036,9 +1073,15 @@ static void __ipoib_ib_dev_flush(struct ipoib_dev_priv *priv,
 	struct ipoib_dev_priv *cpriv;
 	struct net_device *dev = priv->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 new_index;
 
 	mutex_lock(&priv->vlan_mutex);
+=======
+	int result;
+
+	down_read(&priv->vlan_rwsem);
+>>>>>>> v3.18
 =======
 	int result;
 
@@ -1053,14 +1096,20 @@ static void __ipoib_ib_dev_flush(struct ipoib_dev_priv *priv,
 		__ipoib_ib_dev_flush(cpriv, level);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&priv->vlan_mutex);
 
 	if (!test_bit(IPOIB_FLAG_INITIALIZED, &priv->flags)) {
 =======
+=======
+>>>>>>> v3.18
 	up_read(&priv->vlan_rwsem);
 
 	if (!test_bit(IPOIB_FLAG_INITIALIZED, &priv->flags) &&
 	    level != IPOIB_FLUSH_HEAVY) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ipoib_dbg(priv, "Not flushing - IPOIB_FLAG_INITIALIZED not set.\n");
 		return;
@@ -1068,7 +1117,10 @@ static void __ipoib_ib_dev_flush(struct ipoib_dev_priv *priv,
 
 	if (!test_bit(IPOIB_FLAG_ADMIN_UP, &priv->flags)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* interface is down. update pkey and leave. */
 		if (level == IPOIB_FLUSH_HEAVY) {
 			if (!test_bit(IPOIB_FLAG_SUBINTERFACE, &priv->flags))
@@ -1076,12 +1128,16 @@ static void __ipoib_ib_dev_flush(struct ipoib_dev_priv *priv,
 			else
 				update_child_pkey(priv);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ipoib_dbg(priv, "Not flushing - IPOIB_FLAG_ADMIN_UP not set.\n");
 		return;
 	}
 
 	if (level == IPOIB_FLUSH_HEAVY) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (ib_find_pkey(priv->ca, priv->port, priv->pkey, &new_index)) {
 			clear_bit(IPOIB_PKEY_ASSIGNED, &priv->flags);
@@ -1113,6 +1169,8 @@ static void __ipoib_ib_dev_flush(struct ipoib_dev_priv *priv,
 		if (oper_up)
 			set_bit(IPOIB_FLAG_OPER_UP, &priv->flags);
 =======
+=======
+>>>>>>> v3.18
 		/* child devices chase their origin pkey value, while non-child
 		 * (parent) devices should always takes what present in pkey index 0
 		 */
@@ -1137,6 +1195,9 @@ static void __ipoib_ib_dev_flush(struct ipoib_dev_priv *priv,
 	if (level == IPOIB_FLUSH_LIGHT) {
 		ipoib_mark_paths_invalid(dev);
 		ipoib_mcast_dev_flush(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1145,15 +1206,21 @@ static void __ipoib_ib_dev_flush(struct ipoib_dev_priv *priv,
 
 	if (level == IPOIB_FLUSH_HEAVY) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ipoib_ib_dev_stop(dev, 0);
 		ipoib_ib_dev_open(dev);
 =======
+=======
+>>>>>>> v3.18
 		if (test_bit(IPOIB_FLAG_INITIALIZED, &priv->flags))
 			ipoib_ib_dev_stop(dev, 0);
 		if (ipoib_ib_dev_open(dev, 0) != 0)
 			return;
 		if (netif_queue_stopped(dev))
 			netif_start_queue(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1198,12 +1265,18 @@ void ipoib_ib_dev_cleanup(struct net_device *dev)
 
 	ipoib_dbg(priv, "cleaning up ib_dev\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We must make sure there are no more (path) completions
 	 * that may wish to touch priv fields that are no longer valid
 	 */
 	ipoib_flush_paths(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ipoib_mcast_stop_thread(dev, 1);
@@ -1212,6 +1285,7 @@ void ipoib_ib_dev_cleanup(struct net_device *dev)
 	ipoib_transport_dev_cleanup(dev);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Delayed P_Key Assigment Interim Support
@@ -1264,6 +1338,9 @@ int ipoib_pkey_dev_delay_open(struct net_device *dev)
 
 	return 0;
 }
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

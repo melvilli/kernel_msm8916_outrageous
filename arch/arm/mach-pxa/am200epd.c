@@ -294,8 +294,12 @@ static int am200_setup_irq(struct fb_info *info)
 
 	ret = request_irq(PXA_GPIO_TO_IRQ(RDY_GPIO_PIN), am200_handle_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				IRQF_DISABLED|IRQF_TRIGGER_FALLING,
 				"AM200", info->par);
+=======
+				IRQF_TRIGGER_FALLING, "AM200", info->par);
+>>>>>>> v3.18
 =======
 				IRQF_TRIGGER_FALLING, "AM200", info->par);
 >>>>>>> v3.18

@@ -2,7 +2,11 @@
 #include <asm/amd_nb.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct edac_pci_ctl_info *amd64_ctl_pci;
+=======
+static struct edac_pci_ctl_info *pci_ctl;
+>>>>>>> v3.18
 =======
 static struct edac_pci_ctl_info *pci_ctl;
 >>>>>>> v3.18
@@ -92,11 +96,14 @@ int __amd64_write_pci_cfg_dword(struct pci_dev *pdev, int offset,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Depending on the family, F2 DCT reads need special handling:
  *
  * K8: has a single DCT only
 =======
+=======
+>>>>>>> v3.18
  * Select DCT to which PCI cfg accesses are routed
  */
 static void f15h_select_dct(struct amd64_pvt *pvt, u8 dct)
@@ -114,12 +121,16 @@ static void f15h_select_dct(struct amd64_pvt *pvt, u8 dct)
  * Depending on the family, F2 DCT reads need special handling:
  *
  * K8: has a single DCT only and no address offsets >= 0x100
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * F10h: each DCT has its own set of regs
  *	DCT0 -> F2x040..
  *	DCT1 -> F2x140..
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * F15h: we select which DCT we access using F1x10C[DctCfgSel]
  *
@@ -167,6 +178,8 @@ static int f15_read_dct_pci_cfg(struct amd64_pvt *pvt, int addr, u32 *val,
 
 	return __amd64_read_pci_cfg_dword(pvt->F2, addr, val, func);
 =======
+=======
+>>>>>>> v3.18
  * F16h: has only 1 DCT
  *
  * F15h: we select which DCT we access using F1x10C[DctCfgSel]
@@ -212,6 +225,9 @@ static inline int amd64_read_dct_pci_cfg(struct amd64_pvt *pvt, u8 dct,
 		break;
 	}
 	return amd64_read_pci_cfg(pvt->F2, offset, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -234,7 +250,11 @@ static inline int amd64_read_dct_pci_cfg(struct amd64_pvt *pvt, u8 dct,
  * issue. If requested is too big, then use last maximum value found.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __amd64_set_scrub_rate(struct pci_dev *ctl, u32 new_bw, u32 min_rate)
+=======
+static int __set_scrub_rate(struct pci_dev *ctl, u32 new_bw, u32 min_rate)
+>>>>>>> v3.18
 =======
 static int __set_scrub_rate(struct pci_dev *ctl, u32 new_bw, u32 min_rate)
 >>>>>>> v3.18
@@ -274,7 +294,11 @@ static int __set_scrub_rate(struct pci_dev *ctl, u32 new_bw, u32 min_rate)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int amd64_set_scrub_rate(struct mem_ctl_info *mci, u32 bw)
+=======
+static int set_scrub_rate(struct mem_ctl_info *mci, u32 bw)
+>>>>>>> v3.18
 =======
 static int set_scrub_rate(struct mem_ctl_info *mci, u32 bw)
 >>>>>>> v3.18
@@ -282,6 +306,7 @@ static int set_scrub_rate(struct mem_ctl_info *mci, u32 bw)
 	struct amd64_pvt *pvt = mci->pvt_info;
 	u32 min_scrubrate = 0x5;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (boot_cpu_data.x86 == 0xf)
 		min_scrubrate = 0x0;
@@ -295,6 +320,8 @@ static int set_scrub_rate(struct mem_ctl_info *mci, u32 bw)
 
 static int amd64_get_scrub_rate(struct mem_ctl_info *mci)
 =======
+=======
+>>>>>>> v3.18
 	if (pvt->fam == 0xf)
 		min_scrubrate = 0x0;
 
@@ -306,6 +333,9 @@ static int amd64_get_scrub_rate(struct mem_ctl_info *mci)
 }
 
 static int get_scrub_rate(struct mem_ctl_info *mci)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct amd64_pvt *pvt = mci->pvt_info;
@@ -313,8 +343,13 @@ static int get_scrub_rate(struct mem_ctl_info *mci)
 	int i, retval = -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* F15h Erratum #505 */
 	if (boot_cpu_data.x86 == 0x15)
+=======
+	/* Erratum #505 */
+	if (pvt->fam == 0x15 && pvt->model < 0x10)
+>>>>>>> v3.18
 =======
 	/* Erratum #505 */
 	if (pvt->fam == 0x15 && pvt->model < 0x10)
@@ -339,8 +374,12 @@ static int get_scrub_rate(struct mem_ctl_info *mci)
  * DRAM base/limit associated with node_id
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool amd64_base_limit_match(struct amd64_pvt *pvt, u64 sys_addr,
 				   u8 nid)
+=======
+static bool base_limit_match(struct amd64_pvt *pvt, u64 sys_addr, u8 nid)
+>>>>>>> v3.18
 =======
 static bool base_limit_match(struct amd64_pvt *pvt, u64 sys_addr, u8 nid)
 >>>>>>> v3.18
@@ -388,7 +427,11 @@ static struct mem_ctl_info *find_mc_by_sys_addr(struct mem_ctl_info *mci,
 	if (intlv_en == 0) {
 		for (node_id = 0; node_id < DRAM_RANGES; node_id++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (amd64_base_limit_match(pvt, sys_addr, node_id))
+=======
+			if (base_limit_match(pvt, sys_addr, node_id))
+>>>>>>> v3.18
 =======
 			if (base_limit_match(pvt, sys_addr, node_id))
 >>>>>>> v3.18
@@ -416,7 +459,11 @@ static struct mem_ctl_info *find_mc_by_sys_addr(struct mem_ctl_info *mci,
 
 	/* sanity test for sys_addr */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(!amd64_base_limit_match(pvt, sys_addr, node_id))) {
+=======
+	if (unlikely(!base_limit_match(pvt, sys_addr, node_id))) {
+>>>>>>> v3.18
 =======
 	if (unlikely(!base_limit_match(pvt, sys_addr, node_id))) {
 >>>>>>> v3.18
@@ -447,7 +494,11 @@ static void get_cs_base_and_mask(struct amd64_pvt *pvt, int csrow, u8 dct,
 	u8 addr_shift;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (boot_cpu_data.x86 == 0xf && pvt->ext_model < K8_REV_F) {
+=======
+	if (pvt->fam == 0xf && pvt->ext_model < K8_REV_F) {
+>>>>>>> v3.18
 =======
 	if (pvt->fam == 0xf && pvt->ext_model < K8_REV_F) {
 >>>>>>> v3.18
@@ -459,16 +510,22 @@ static void get_cs_base_and_mask(struct amd64_pvt *pvt, int csrow, u8 dct,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	* F16h needs two addr_shift values: 8 for high and 6 for low
 	* (cf. F16h BKDG).
 	*/
 	} else if (boot_cpu_data.x86 == 0x16) {
 =======
+=======
+>>>>>>> v3.18
 	 * F16h and F15h, models 30h and later need two addr_shift values:
 	 * 8 for high and 6 for low (cf. F16h BKDG).
 	 */
 	} else if (pvt->fam == 0x16 ||
 		  (pvt->fam == 0x15 && pvt->model >= 0x30)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		csbase          = pvt->csels[dct].csbases[csrow];
 		csmask          = pvt->csels[dct].csmasks[csrow >> 1];
@@ -491,7 +548,11 @@ static void get_cs_base_and_mask(struct amd64_pvt *pvt, int csrow, u8 dct,
 		addr_shift	= 8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (boot_cpu_data.x86 == 0x15)
+=======
+		if (pvt->fam == 0x15)
+>>>>>>> v3.18
 =======
 		if (pvt->fam == 0x15)
 >>>>>>> v3.18
@@ -577,7 +638,11 @@ int amd64_get_dram_hole_info(struct mem_ctl_info *mci, u64 *hole_base,
 
 	/* only revE and later have the DRAM Hole Address Register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (boot_cpu_data.x86 == 0xf && pvt->ext_model < K8_REV_E) {
+=======
+	if (pvt->fam == 0xf && pvt->ext_model < K8_REV_E) {
+>>>>>>> v3.18
 =======
 	if (pvt->fam == 0xf && pvt->ext_model < K8_REV_E) {
 >>>>>>> v3.18
@@ -588,7 +653,11 @@ int amd64_get_dram_hole_info(struct mem_ctl_info *mci, u64 *hole_base,
 
 	/* valid for Fam10h and above */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (boot_cpu_data.x86 >= 0x10 && !dhar_mem_hoist_valid(pvt)) {
+=======
+	if (pvt->fam >= 0x10 && !dhar_mem_hoist_valid(pvt)) {
+>>>>>>> v3.18
 =======
 	if (pvt->fam >= 0x10 && !dhar_mem_hoist_valid(pvt)) {
 >>>>>>> v3.18
@@ -624,10 +693,15 @@ int amd64_get_dram_hole_info(struct mem_ctl_info *mci, u64 *hole_base,
 	*hole_size = (1ULL << 32) - *hole_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (boot_cpu_data.x86 > 0xf)
 		*hole_offset = f10_dhar_offset(pvt);
 	else
 		*hole_offset = k8_dhar_offset(pvt);
+=======
+	*hole_offset = (pvt->fam > 0xf) ? f10_dhar_offset(pvt)
+					: k8_dhar_offset(pvt);
+>>>>>>> v3.18
 =======
 	*hole_offset = (pvt->fam > 0xf) ? f10_dhar_offset(pvt)
 					: k8_dhar_offset(pvt);
@@ -801,7 +875,11 @@ static int get_channel_from_ecc_syndrome(struct mem_ctl_info *, u16);
  * are ECC capable.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long amd64_determine_edac_cap(struct amd64_pvt *pvt)
+=======
+static unsigned long determine_edac_cap(struct amd64_pvt *pvt)
+>>>>>>> v3.18
 =======
 static unsigned long determine_edac_cap(struct amd64_pvt *pvt)
 >>>>>>> v3.18
@@ -810,7 +888,11 @@ static unsigned long determine_edac_cap(struct amd64_pvt *pvt)
 	unsigned long edac_cap = EDAC_FLAG_NONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bit = (boot_cpu_data.x86 > 0xf || pvt->ext_model >= K8_REV_F)
+=======
+	bit = (pvt->fam > 0xf || pvt->ext_model >= K8_REV_F)
+>>>>>>> v3.18
 =======
 	bit = (pvt->fam > 0xf || pvt->ext_model >= K8_REV_F)
 >>>>>>> v3.18
@@ -824,9 +906,15 @@ static unsigned long determine_edac_cap(struct amd64_pvt *pvt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void amd64_debug_display_dimm_sizes(struct amd64_pvt *, u8);
 
 static void amd64_dump_dramcfg_low(u32 dclr, int chan)
+=======
+static void debug_display_dimm_sizes(struct amd64_pvt *, u8);
+
+static void debug_dump_dramcfg_low(struct amd64_pvt *pvt, u32 dclr, int chan)
+>>>>>>> v3.18
 =======
 static void debug_display_dimm_sizes(struct amd64_pvt *, u8);
 
@@ -843,7 +931,11 @@ static void debug_dump_dramcfg_low(struct amd64_pvt *pvt, u32 dclr, int chan)
 		 (dclr & BIT(8)) ?  "enabled" : "disabled");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (boot_cpu_data.x86 == 0x10)
+=======
+	if (pvt->fam == 0x10)
+>>>>>>> v3.18
 =======
 	if (pvt->fam == 0x10)
 >>>>>>> v3.18
@@ -870,7 +962,11 @@ static void dump_misc_regs(struct amd64_pvt *pvt)
 		 (pvt->nbcap & NBCAP_CHIPKILL) ? "yes" : "no");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amd64_dump_dramcfg_low(pvt->dclr0, 0);
+=======
+	debug_dump_dramcfg_low(pvt, pvt->dclr0, 0);
+>>>>>>> v3.18
 =======
 	debug_dump_dramcfg_low(pvt, pvt->dclr0, 0);
 >>>>>>> v3.18
@@ -879,6 +975,7 @@ static void dump_misc_regs(struct amd64_pvt *pvt)
 
 	edac_dbg(1, "F1xF0 (DRAM Hole Address): 0x%08x, base: 0x%08x, offset: 0x%08x\n",
 		 pvt->dhar, dhar_base(pvt),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 (boot_cpu_data.x86 == 0xf) ? k8_dhar_offset(pvt)
 		 : f10_dhar_offset(pvt));
@@ -893,6 +990,8 @@ static void dump_misc_regs(struct amd64_pvt *pvt)
 
 	amd64_debug_display_dimm_sizes(pvt, 1);
 =======
+=======
+>>>>>>> v3.18
 		 (pvt->fam == 0xf) ? k8_dhar_offset(pvt)
 				   : f10_dhar_offset(pvt));
 
@@ -905,12 +1004,16 @@ static void dump_misc_regs(struct amd64_pvt *pvt)
 		return;
 
 	debug_display_dimm_sizes(pvt, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	amd64_info("using %s syndromes.\n", ((pvt->ecc_sym_sz == 8) ? "x8" : "x4"));
 
 	/* Only if NOT ganged does dclr1 have valid info */
 	if (!dct_ganging_enabled(pvt))
+<<<<<<< HEAD
 <<<<<<< HEAD
 		amd64_dump_dramcfg_low(pvt->dclr1, 1);
 }
@@ -924,6 +1027,8 @@ static void prep_chip_selects(struct amd64_pvt *pvt)
 		pvt->csels[0].b_cnt = pvt->csels[1].b_cnt = 8;
 		pvt->csels[0].m_cnt = pvt->csels[1].m_cnt = 8;
 =======
+=======
+>>>>>>> v3.18
 		debug_dump_dramcfg_low(pvt, pvt->dclr1, 1);
 }
 
@@ -938,6 +1043,9 @@ static void prep_chip_selects(struct amd64_pvt *pvt)
 	} else if (pvt->fam == 0x15 && pvt->model >= 0x30) {
 		pvt->csels[0].b_cnt = pvt->csels[1].b_cnt = 4;
 		pvt->csels[0].m_cnt = pvt->csels[1].m_cnt = 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		pvt->csels[0].b_cnt = pvt->csels[1].b_cnt = 8;
@@ -961,6 +1069,7 @@ static void read_dct_base_mask(struct amd64_pvt *pvt)
 		u32 *base1 = &pvt->csels[1].csbases[cs];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!amd64_read_dct_pci_cfg(pvt, reg0, base0))
 			edac_dbg(0, "  DCSB0[%d]=0x%08x reg: F2x%x\n",
 				 cs, *base0, reg0);
@@ -972,6 +1081,8 @@ static void read_dct_base_mask(struct amd64_pvt *pvt)
 			edac_dbg(0, "  DCSB1[%d]=0x%08x reg: F2x%x\n",
 				 cs, *base1, reg1);
 =======
+=======
+>>>>>>> v3.18
 		if (!amd64_read_dct_pci_cfg(pvt, 0, reg0, base0))
 			edac_dbg(0, "  DCSB0[%d]=0x%08x reg: F2x%x\n",
 				 cs, *base0, reg0);
@@ -983,6 +1094,9 @@ static void read_dct_base_mask(struct amd64_pvt *pvt)
 			edac_dbg(0, "  DCSB1[%d]=0x%08x reg: F2x%x\n",
 				 cs, *base1, (pvt->fam == 0x10) ? reg1
 								: reg0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -992,6 +1106,7 @@ static void read_dct_base_mask(struct amd64_pvt *pvt)
 		u32 *mask0 = &pvt->csels[0].csmasks[cs];
 		u32 *mask1 = &pvt->csels[1].csmasks[cs];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!amd64_read_dct_pci_cfg(pvt, reg0, mask0))
 			edac_dbg(0, "    DCSM0[%d]=0x%08x reg: F2x%x\n",
@@ -1008,6 +1123,8 @@ static void read_dct_base_mask(struct amd64_pvt *pvt)
 
 static enum mem_type amd64_determine_memory_type(struct amd64_pvt *pvt, int cs)
 =======
+=======
+>>>>>>> v3.18
 		if (!amd64_read_dct_pci_cfg(pvt, 0, reg0, mask0))
 			edac_dbg(0, "    DCSM0[%d]=0x%08x reg: F2x%x\n",
 				 cs, *mask0, reg0);
@@ -1023,15 +1140,24 @@ static enum mem_type amd64_determine_memory_type(struct amd64_pvt *pvt, int cs)
 }
 
 static enum mem_type determine_memory_type(struct amd64_pvt *pvt, int cs)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	enum mem_type type;
 
 	/* F15h supports only DDR3 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (boot_cpu_data.x86 >= 0x15)
 		type = (pvt->dclr0 & BIT(16)) ?	MEM_DDR3 : MEM_RDDR3;
 	else if (boot_cpu_data.x86 == 0x10 || pvt->ext_model >= K8_REV_F) {
+=======
+	if (pvt->fam >= 0x15)
+		type = (pvt->dclr0 & BIT(16)) ?	MEM_DDR3 : MEM_RDDR3;
+	else if (pvt->fam == 0x10 || pvt->ext_model >= K8_REV_F) {
+>>>>>>> v3.18
 =======
 	if (pvt->fam >= 0x15)
 		type = (pvt->dclr0 & BIT(16)) ?	MEM_DDR3 : MEM_RDDR3;
@@ -1070,9 +1196,14 @@ static int k8_early_channel_count(struct amd64_pvt *pvt)
 
 /* On F10h and later ErrAddr is MC4_ADDR[47:1] */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 get_error_address(struct mce *m)
 {
 	struct cpuinfo_x86 *c = &boot_cpu_data;
+=======
+static u64 get_error_address(struct amd64_pvt *pvt, struct mce *m)
+{
+>>>>>>> v3.18
 =======
 static u64 get_error_address(struct amd64_pvt *pvt, struct mce *m)
 {
@@ -1082,7 +1213,11 @@ static u64 get_error_address(struct amd64_pvt *pvt, struct mce *m)
 	u8 end_bit   = 47;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c->x86 == 0xf) {
+=======
+	if (pvt->fam == 0xf) {
+>>>>>>> v3.18
 =======
 	if (pvt->fam == 0xf) {
 >>>>>>> v3.18
@@ -1096,7 +1231,11 @@ static u64 get_error_address(struct amd64_pvt *pvt, struct mce *m)
 	 * Erratum 637 workaround
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c->x86 == 0x15) {
+=======
+	if (pvt->fam == 0x15) {
+>>>>>>> v3.18
 =======
 	if (pvt->fam == 0x15) {
 >>>>>>> v3.18
@@ -1164,8 +1303,13 @@ static void read_dram_base_limit_regs(struct amd64_pvt *pvt, unsigned range)
 {
 	struct amd_northbridge *nb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev *misc, *f1 = NULL;
 	struct cpuinfo_x86 *c = &boot_cpu_data;
+=======
+	struct pci_dev *f1 = NULL;
+	unsigned int pci_func;
+>>>>>>> v3.18
 =======
 	struct pci_dev *f1 = NULL;
 	unsigned int pci_func;
@@ -1177,7 +1321,11 @@ static void read_dram_base_limit_regs(struct amd64_pvt *pvt, unsigned range)
 	amd64_read_pci_cfg(pvt->F1, DRAM_LIMIT_LO + off, &pvt->ranges[range].lim.lo);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c->x86 == 0xf)
+=======
+	if (pvt->fam == 0xf)
+>>>>>>> v3.18
 =======
 	if (pvt->fam == 0xf)
 >>>>>>> v3.18
@@ -1191,7 +1339,11 @@ static void read_dram_base_limit_regs(struct amd64_pvt *pvt, unsigned range)
 
 	/* F15h: factor in CC6 save area by reading dst node's limit reg */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c->x86 != 0x15)
+=======
+	if (pvt->fam != 0x15)
+>>>>>>> v3.18
 =======
 	if (pvt->fam != 0x15)
 >>>>>>> v3.18
@@ -1202,13 +1354,19 @@ static void read_dram_base_limit_regs(struct amd64_pvt *pvt, unsigned range)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	misc = nb->misc;
 	f1 = pci_get_related_function(misc->vendor, PCI_DEVICE_ID_AMD_15H_NB_F1, misc);
 =======
+=======
+>>>>>>> v3.18
 	pci_func = (pvt->model == 0x30) ? PCI_DEVICE_ID_AMD_15H_M30H_NB_F1
 					: PCI_DEVICE_ID_AMD_15H_NB_F1;
 
 	f1 = pci_get_related_function(nb->misc->vendor, pci_func, nb->misc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (WARN_ON(!f1))
 		return;
@@ -1357,7 +1515,11 @@ static int f1x_early_channel_count(struct amd64_pvt *pvt)
 
 	/* On F10h, if we are in 128 bit mode, then we are using 2 channels */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (boot_cpu_data.x86 == 0x10 && (pvt->dclr0 & WIDTH_128))
+=======
+	if (pvt->fam == 0x10 && (pvt->dclr0 & WIDTH_128))
+>>>>>>> v3.18
 =======
 	if (pvt->fam == 0x10 && (pvt->dclr0 & WIDTH_128))
 >>>>>>> v3.18
@@ -1445,7 +1607,11 @@ static int f15_dbam_to_chip_select(struct amd64_pvt *pvt, u8 dct,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * F16h has only limited cs_modes
+=======
+ * F16h and F15h model 30h have only limited cs_modes.
+>>>>>>> v3.18
 =======
  * F16h and F15h model 30h have only limited cs_modes.
 >>>>>>> v3.18
@@ -1466,15 +1632,21 @@ static void read_dram_ctl_register(struct amd64_pvt *pvt)
 {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (boot_cpu_data.x86 == 0xf)
 		return;
 
 	if (!amd64_read_dct_pci_cfg(pvt, DCT_SEL_LO, &pvt->dct_sel_lo)) {
 =======
+=======
+>>>>>>> v3.18
 	if (pvt->fam == 0xf)
 		return;
 
 	if (!amd64_read_pci_cfg(pvt->F2, DCT_SEL_LO, &pvt->dct_sel_lo)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		edac_dbg(0, "F2x110 (DCTSelLow): 0x%08x, High range addrs at: 0x%x\n",
 			 pvt->dct_sel_lo, dct_sel_baseaddr(pvt));
@@ -1497,8 +1669,11 @@ static void read_dram_ctl_register(struct amd64_pvt *pvt)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amd64_read_dct_pci_cfg(pvt, DCT_SEL_HI, &pvt->dct_sel_hi);
 =======
+=======
+>>>>>>> v3.18
 	amd64_read_pci_cfg(pvt->F2, DCT_SEL_HI, &pvt->dct_sel_hi);
 }
 
@@ -1531,6 +1706,9 @@ static u8 f15_m30h_determine_channel(struct amd64_pvt *pvt, u64 sys_addr,
 		}
 	}
 	return channel;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1584,7 +1762,11 @@ static u64 f1x_get_norm_dct_addr(struct amd64_pvt *pvt, u8 range,
 	u64 dram_base		= get_dram_base(pvt, range);
 	u64 hole_off		= f10_dhar_offset(pvt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 dct_sel_base_off	= (u64)(pvt->dct_sel_hi & 0xFFFFFC00) << 16;
+=======
+	u64 dct_sel_base_off	= (pvt->dct_sel_hi & 0xFFFFFC00) << 16;
+>>>>>>> v3.18
 =======
 	u64 dct_sel_base_off	= (pvt->dct_sel_hi & 0xFFFFFC00) << 16;
 >>>>>>> v3.18
@@ -1688,11 +1870,17 @@ static int f1x_lookup_addr_in_dct(u64 in_addr, u8 nid, u8 dct)
 
 		if ((in_addr & cs_mask) == (cs_base & cs_mask)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (pvt->fam == 0x15 && pvt->model >= 0x30) {
 				cs_found =  csrow;
 				break;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			cs_found = f10_process_possible_spare(pvt, dct, csrow);
 
@@ -1713,6 +1901,7 @@ static u64 f1x_swap_interleaved_region(struct amd64_pvt *pvt, u64 sys_addr)
 	u32 swap_reg, swap_base, swap_limit, rgn_size, tmp_addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (boot_cpu_data.x86 == 0x10) {
 		/* only revC3 and revE have that feature */
 		if (boot_cpu_data.x86_model < 4 ||
@@ -1723,6 +1912,8 @@ static u64 f1x_swap_interleaved_region(struct amd64_pvt *pvt, u64 sys_addr)
 
 	amd64_read_dct_pci_cfg(pvt, SWAP_INTLV_REG, &swap_reg);
 =======
+=======
+>>>>>>> v3.18
 	if (pvt->fam == 0x10) {
 		/* only revC3 and revE have that feature */
 		if (pvt->model < 4 || (pvt->model < 0xa && pvt->stepping < 3))
@@ -1730,6 +1921,9 @@ static u64 f1x_swap_interleaved_region(struct amd64_pvt *pvt, u64 sys_addr)
 	}
 
 	amd64_read_pci_cfg(pvt->F2, SWAP_INTLV_REG, &swap_reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!(swap_reg & 0x1))
@@ -1831,9 +2025,12 @@ static int f1x_match_to_this_node(struct amd64_pvt *pvt, unsigned range,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int f1x_translate_sysaddr_to_cs(struct amd64_pvt *pvt, u64 sys_addr,
 				       int *chan_sel)
 =======
+=======
+>>>>>>> v3.18
 static int f15_m30h_match_to_this_node(struct amd64_pvt *pvt, unsigned range,
 					u64 sys_addr, int *chan_sel)
 {
@@ -1956,12 +2153,16 @@ static int f15_m30h_match_to_this_node(struct amd64_pvt *pvt, unsigned range,
 static int f1x_translate_sysaddr_to_cs(struct amd64_pvt *pvt,
 					u64 sys_addr,
 					int *chan_sel)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int cs_found = -EINVAL;
 	unsigned range;
 
 	for (range = 0; range < DRAM_RANGES; range++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (!dram_rw(pvt, range))
@@ -1971,6 +2172,8 @@ static int f1x_translate_sysaddr_to_cs(struct amd64_pvt *pvt,
 		    (get_dram_limit(pvt, range) >= sys_addr)) {
 
 =======
+=======
+>>>>>>> v3.18
 		if (!dram_rw(pvt, range))
 			continue;
 
@@ -1981,6 +2184,9 @@ static int f1x_translate_sysaddr_to_cs(struct amd64_pvt *pvt,
 
 		else if ((get_dram_base(pvt, range)  <= sys_addr) &&
 			 (get_dram_limit(pvt, range) >= sys_addr)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			cs_found = f1x_match_to_this_node(pvt, range,
 							  sys_addr, chan_sel);
@@ -2025,7 +2231,11 @@ static void f1x_map_sysaddr_to_csrow(struct mem_ctl_info *mci, u64 sys_addr,
  * CSROWs
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void amd64_debug_display_dimm_sizes(struct amd64_pvt *pvt, u8 ctrl)
+=======
+static void debug_display_dimm_sizes(struct amd64_pvt *pvt, u8 ctrl)
+>>>>>>> v3.18
 =======
 static void debug_display_dimm_sizes(struct amd64_pvt *pvt, u8 ctrl)
 >>>>>>> v3.18
@@ -2035,7 +2245,11 @@ static void debug_display_dimm_sizes(struct amd64_pvt *pvt, u8 ctrl)
 	u32 dbam  = ctrl ? pvt->dbam1 : pvt->dbam0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (boot_cpu_data.x86 == 0xf) {
+=======
+	if (pvt->fam == 0xf) {
+>>>>>>> v3.18
 =======
 	if (pvt->fam == 0xf) {
 >>>>>>> v3.18
@@ -2047,11 +2261,14 @@ static void debug_display_dimm_sizes(struct amd64_pvt *pvt, u8 ctrl)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbam = (ctrl && !dct_ganging_enabled(pvt)) ? pvt->dbam1 : pvt->dbam0;
 	dcsb = (ctrl && !dct_ganging_enabled(pvt)) ? pvt->csels[1].csbases
 						   : pvt->csels[0].csbases;
 
 =======
+=======
+>>>>>>> v3.18
 	if (pvt->fam == 0x10) {
 		dbam = (ctrl && !dct_ganging_enabled(pvt)) ? pvt->dbam1
 							   : pvt->dbam0;
@@ -2062,6 +2279,9 @@ static void debug_display_dimm_sizes(struct amd64_pvt *pvt, u8 ctrl)
 		dbam = pvt->dbam0;
 		dcsb = pvt->csels[1].csbases;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	edac_dbg(1, "F2x%d80 (DRAM Bank Address Mapping): 0x%08x\n",
 		 ctrl, dbam);
@@ -2088,7 +2308,11 @@ static void debug_display_dimm_sizes(struct amd64_pvt *pvt, u8 ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct amd64_family_type amd64_family_types[] = {
+=======
+static struct amd64_family_type family_types[] = {
+>>>>>>> v3.18
 =======
 static struct amd64_family_type family_types[] = {
 >>>>>>> v3.18
@@ -2101,7 +2325,10 @@ static struct amd64_family_type family_types[] = {
 			.map_sysaddr_to_csrow	= k8_map_sysaddr_to_csrow,
 			.dbam_to_cs		= k8_dbam_to_chip_select,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.read_dct_pci_cfg	= k8_read_dct_pci_cfg,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -2115,7 +2342,10 @@ static struct amd64_family_type family_types[] = {
 			.map_sysaddr_to_csrow	= f1x_map_sysaddr_to_csrow,
 			.dbam_to_cs		= f10_dbam_to_chip_select,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.read_dct_pci_cfg	= f10_read_dct_pci_cfg,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -2129,8 +2359,11 @@ static struct amd64_family_type family_types[] = {
 			.map_sysaddr_to_csrow	= f1x_map_sysaddr_to_csrow,
 			.dbam_to_cs		= f15_dbam_to_chip_select,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.read_dct_pci_cfg	= f15_read_dct_pci_cfg,
 =======
+=======
+>>>>>>> v3.18
 		}
 	},
 	[F15_M30H_CPUS] = {
@@ -2141,6 +2374,9 @@ static struct amd64_family_type family_types[] = {
 			.early_channel_count	= f1x_early_channel_count,
 			.map_sysaddr_to_csrow	= f1x_map_sysaddr_to_csrow,
 			.dbam_to_cs		= f16_dbam_to_chip_select,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	},
@@ -2153,8 +2389,11 @@ static struct amd64_family_type family_types[] = {
 			.map_sysaddr_to_csrow	= f1x_map_sysaddr_to_csrow,
 			.dbam_to_cs		= f16_dbam_to_chip_select,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.read_dct_pci_cfg	= f10_read_dct_pci_cfg,
 =======
+=======
+>>>>>>> v3.18
 		}
 	},
 	[F16_M30H_CPUS] = {
@@ -2165,6 +2404,9 @@ static struct amd64_family_type family_types[] = {
 			.early_channel_count	= f1x_early_channel_count,
 			.map_sysaddr_to_csrow	= f1x_map_sysaddr_to_csrow,
 			.dbam_to_cs		= f16_dbam_to_chip_select,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	},
@@ -2374,9 +2616,15 @@ static void __log_bus_error(struct mem_ctl_info *mci, struct err_info *err,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __amd64_decode_bus_error(struct mem_ctl_info *mci,
 					    struct mce *m)
 {
+=======
+static inline void decode_bus_error(int node_id, struct mce *m)
+{
+	struct mem_ctl_info *mci = mcis[node_id];
+>>>>>>> v3.18
 =======
 static inline void decode_bus_error(int node_id, struct mce *m)
 {
@@ -2400,7 +2648,11 @@ static inline void decode_bus_error(int node_id, struct mce *m)
 	memset(&err, 0, sizeof(err));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sys_addr = get_error_address(m);
+=======
+	sys_addr = get_error_address(pvt, m);
+>>>>>>> v3.18
 =======
 	sys_addr = get_error_address(pvt, m);
 >>>>>>> v3.18
@@ -2414,11 +2666,14 @@ static inline void decode_bus_error(int node_id, struct mce *m)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void amd64_decode_bus_error(int node_id, struct mce *m)
 {
 	__amd64_decode_bus_error(mcis[node_id], m);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -2468,10 +2723,16 @@ static void free_mc_sibling_devs(struct amd64_pvt *pvt)
 static void read_mc_regs(struct amd64_pvt *pvt)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpuinfo_x86 *c = &boot_cpu_data;
 	u64 msr_val;
 	u32 tmp;
 	unsigned range;
+=======
+	unsigned range;
+	u64 msr_val;
+	u32 tmp;
+>>>>>>> v3.18
 =======
 	unsigned range;
 	u64 msr_val;
@@ -2524,6 +2785,7 @@ static void read_mc_regs(struct amd64_pvt *pvt)
 
 	amd64_read_pci_cfg(pvt->F1, DHAR, &pvt->dhar);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amd64_read_dct_pci_cfg(pvt, DBAM0, &pvt->dbam0);
 
 	amd64_read_pci_cfg(pvt->F3, F10_ONLINE_SPARE, &pvt->online_spare);
@@ -2535,6 +2797,8 @@ static void read_mc_regs(struct amd64_pvt *pvt)
 		amd64_read_dct_pci_cfg(pvt, DCLR1, &pvt->dclr1);
 		amd64_read_dct_pci_cfg(pvt, DCHR1, &pvt->dchr1);
 =======
+=======
+>>>>>>> v3.18
 	amd64_read_dct_pci_cfg(pvt, 0, DBAM0, &pvt->dbam0);
 
 	amd64_read_pci_cfg(pvt->F3, F10_ONLINE_SPARE, &pvt->online_spare);
@@ -2545,11 +2809,15 @@ static void read_mc_regs(struct amd64_pvt *pvt)
 	if (!dct_ganging_enabled(pvt)) {
 		amd64_read_dct_pci_cfg(pvt, 1, DCLR0, &pvt->dclr1);
 		amd64_read_dct_pci_cfg(pvt, 1, DCHR0, &pvt->dchr1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	pvt->ecc_sym_sz = 4;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (c->x86 >= 0x10) {
 		amd64_read_pci_cfg(pvt->F3, EXT_NB_MCA_CFG, &tmp);
@@ -2560,6 +2828,8 @@ static void read_mc_regs(struct amd64_pvt *pvt)
 		/* F10h, revD and later can do x8 ECC too */
 		if ((c->x86 > 0x10 || c->x86_model > 7) && tmp & BIT(25))
 =======
+=======
+>>>>>>> v3.18
 	if (pvt->fam >= 0x10) {
 		amd64_read_pci_cfg(pvt->F3, EXT_NB_MCA_CFG, &tmp);
 		/* F16h has only DCT0, so no need to read dbam1 */
@@ -2568,6 +2838,9 @@ static void read_mc_regs(struct amd64_pvt *pvt)
 
 		/* F10h, revD and later can do x8 ECC too */
 		if ((pvt->fam > 0x10 || pvt->model > 7) && tmp & BIT(25))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pvt->ecc_sym_sz = 8;
 	}
@@ -2609,7 +2882,11 @@ static void read_mc_regs(struct amd64_pvt *pvt)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 amd64_csrow_nr_pages(struct amd64_pvt *pvt, u8 dct, int csrow_nr)
+=======
+static u32 get_csrow_nr_pages(struct amd64_pvt *pvt, u8 dct, int csrow_nr)
+>>>>>>> v3.18
 =======
 static u32 get_csrow_nr_pages(struct amd64_pvt *pvt, u8 dct, int csrow_nr)
 >>>>>>> v3.18
@@ -2667,7 +2944,11 @@ static int init_csrows(struct mem_ctl_info *mci)
 		bool row_dct1 = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (boot_cpu_data.x86 != 0xf)
+=======
+		if (pvt->fam != 0xf)
+>>>>>>> v3.18
 =======
 		if (pvt->fam != 0xf)
 >>>>>>> v3.18
@@ -2684,7 +2965,11 @@ static int init_csrows(struct mem_ctl_info *mci)
 
 		if (row_dct0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nr_pages = amd64_csrow_nr_pages(pvt, 0, i);
+=======
+			nr_pages = get_csrow_nr_pages(pvt, 0, i);
+>>>>>>> v3.18
 =======
 			nr_pages = get_csrow_nr_pages(pvt, 0, i);
 >>>>>>> v3.18
@@ -2693,8 +2978,13 @@ static int init_csrows(struct mem_ctl_info *mci)
 
 		/* K8 has only one DCT */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (boot_cpu_data.x86 != 0xf && row_dct1) {
 			int row_dct1_pages = amd64_csrow_nr_pages(pvt, 1, i);
+=======
+		if (pvt->fam != 0xf && row_dct1) {
+			int row_dct1_pages = get_csrow_nr_pages(pvt, 1, i);
+>>>>>>> v3.18
 =======
 		if (pvt->fam != 0xf && row_dct1) {
 			int row_dct1_pages = get_csrow_nr_pages(pvt, 1, i);
@@ -2705,7 +2995,11 @@ static int init_csrows(struct mem_ctl_info *mci)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mtype = amd64_determine_memory_type(pvt, i);
+=======
+		mtype = determine_memory_type(pvt, i);
+>>>>>>> v3.18
 =======
 		mtype = determine_memory_type(pvt, i);
 >>>>>>> v3.18
@@ -2743,7 +3037,11 @@ static void get_cpus_on_this_dct_cpumask(struct cpumask *mask, u16 nid)
 
 /* check MCG_CTL on all the cpus on this node */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool amd64_nb_mce_bank_enabled_on_node(u16 nid)
+=======
+static bool nb_mce_bank_enabled_on_node(u16 nid)
+>>>>>>> v3.18
 =======
 static bool nb_mce_bank_enabled_on_node(u16 nid)
 >>>>>>> v3.18
@@ -2920,7 +3218,11 @@ static bool ecc_enabled(struct pci_dev *F3, u16 nid)
 	amd64_info("DRAM ECC %s.\n", (ecc_en ? "enabled" : "disabled"));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nb_mce_en = amd64_nb_mce_bank_enabled_on_node(nid);
+=======
+	nb_mce_en = nb_mce_bank_enabled_on_node(nid);
+>>>>>>> v3.18
 =======
 	nb_mce_en = nb_mce_bank_enabled_on_node(nid);
 >>>>>>> v3.18
@@ -2939,6 +3241,10 @@ static bool ecc_enabled(struct pci_dev *F3, u16 nid)
 static int set_mc_sysfs_attrs(struct mem_ctl_info *mci)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct amd64_pvt *pvt = mci->pvt_info;
+>>>>>>> v3.18
 =======
 	struct amd64_pvt *pvt = mci->pvt_info;
 >>>>>>> v3.18
@@ -2949,7 +3255,11 @@ static int set_mc_sysfs_attrs(struct mem_ctl_info *mci)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (boot_cpu_data.x86 >= 0x10) {
+=======
+	if (pvt->fam >= 0x10) {
+>>>>>>> v3.18
 =======
 	if (pvt->fam >= 0x10) {
 >>>>>>> v3.18
@@ -2964,15 +3274,21 @@ static int set_mc_sysfs_attrs(struct mem_ctl_info *mci)
 static void del_mc_sysfs_attrs(struct mem_ctl_info *mci)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amd64_remove_sysfs_dbg_files(mci);
 
 	if (boot_cpu_data.x86 >= 0x10)
 =======
+=======
+>>>>>>> v3.18
 	struct amd64_pvt *pvt = mci->pvt_info;
 
 	amd64_remove_sysfs_dbg_files(mci);
 
 	if (pvt->fam >= 0x10)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		amd64_remove_sysfs_inject_files(mci);
 }
@@ -2992,7 +3308,11 @@ static void setup_mci_misc_attrs(struct mem_ctl_info *mci,
 		mci->edac_ctl_cap |= EDAC_FLAG_S4ECD4ED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mci->edac_cap		= amd64_determine_edac_cap(pvt);
+=======
+	mci->edac_cap		= determine_edac_cap(pvt);
+>>>>>>> v3.18
 =======
 	mci->edac_cap		= determine_edac_cap(pvt);
 >>>>>>> v3.18
@@ -3004,8 +3324,13 @@ static void setup_mci_misc_attrs(struct mem_ctl_info *mci,
 
 	/* memory scrubber interface */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mci->set_sdram_scrub_rate = amd64_set_scrub_rate;
 	mci->get_sdram_scrub_rate = amd64_get_scrub_rate;
+=======
+	mci->set_sdram_scrub_rate = set_scrub_rate;
+	mci->get_sdram_scrub_rate = get_scrub_rate;
+>>>>>>> v3.18
 =======
 	mci->set_sdram_scrub_rate = set_scrub_rate;
 	mci->get_sdram_scrub_rate = get_scrub_rate;
@@ -3015,6 +3340,7 @@ static void setup_mci_misc_attrs(struct mem_ctl_info *mci,
 /*
  * returns a pointer to the family descriptor on success, NULL otherwise.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct amd64_family_type *amd64_per_family_init(struct amd64_pvt *pvt)
 {
@@ -3041,6 +3367,8 @@ static struct amd64_family_type *amd64_per_family_init(struct amd64_pvt *pvt)
 		fam_type		= &amd64_family_types[F16_CPUS];
 		pvt->ops		= &amd64_family_types[F16_CPUS].ops;
 =======
+=======
+>>>>>>> v3.18
 static struct amd64_family_type *per_family_init(struct amd64_pvt *pvt)
 {
 	struct amd64_family_type *fam_type = NULL;
@@ -3080,6 +3408,9 @@ static struct amd64_family_type *per_family_init(struct amd64_pvt *pvt)
 		}
 		fam_type	= &family_types[F16_CPUS];
 		pvt->ops	= &family_types[F16_CPUS].ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -3089,10 +3420,15 @@ static struct amd64_family_type *per_family_init(struct amd64_pvt *pvt)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvt->ext_model = boot_cpu_data.x86_model >> 4;
 
 	amd64_info("%s %sdetected (node %d).\n", fam_type->ctl_name,
 		     (fam == 0xf ?
+=======
+	amd64_info("%s %sdetected (node %d).\n", fam_type->ctl_name,
+		     (pvt->fam == 0xf ?
+>>>>>>> v3.18
 =======
 	amd64_info("%s %sdetected (node %d).\n", fam_type->ctl_name,
 		     (pvt->fam == 0xf ?
@@ -3104,7 +3440,11 @@ static struct amd64_family_type *per_family_init(struct amd64_pvt *pvt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int amd64_init_one_instance(struct pci_dev *F2)
+=======
+static int init_one_instance(struct pci_dev *F2)
+>>>>>>> v3.18
 =======
 static int init_one_instance(struct pci_dev *F2)
 >>>>>>> v3.18
@@ -3126,7 +3466,11 @@ static int init_one_instance(struct pci_dev *F2)
 
 	ret = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fam_type = amd64_per_family_init(pvt);
+=======
+	fam_type = per_family_init(pvt);
+>>>>>>> v3.18
 =======
 	fam_type = per_family_init(pvt);
 >>>>>>> v3.18
@@ -3191,7 +3535,11 @@ static int init_one_instance(struct pci_dev *F2)
 		amd_report_gart_errors(true);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amd_register_ecc_decoder(amd64_decode_bus_error);
+=======
+	amd_register_ecc_decoder(decode_bus_error);
+>>>>>>> v3.18
 =======
 	amd_register_ecc_decoder(decode_bus_error);
 >>>>>>> v3.18
@@ -3218,8 +3566,13 @@ err_ret:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int amd64_probe_one_instance(struct pci_dev *pdev,
 				    const struct pci_device_id *mc_type)
+=======
+static int probe_one_instance(struct pci_dev *pdev,
+			      const struct pci_device_id *mc_type)
+>>>>>>> v3.18
 =======
 static int probe_one_instance(struct pci_dev *pdev,
 			      const struct pci_device_id *mc_type)
@@ -3256,7 +3609,11 @@ static int probe_one_instance(struct pci_dev *pdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = amd64_init_one_instance(pdev);
+=======
+	ret = init_one_instance(pdev);
+>>>>>>> v3.18
 =======
 	ret = init_one_instance(pdev);
 >>>>>>> v3.18
@@ -3276,7 +3633,11 @@ err_out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void amd64_remove_one_instance(struct pci_dev *pdev)
+=======
+static void remove_one_instance(struct pci_dev *pdev)
+>>>>>>> v3.18
 =======
 static void remove_one_instance(struct pci_dev *pdev)
 >>>>>>> v3.18
@@ -3289,6 +3650,11 @@ static void remove_one_instance(struct pci_dev *pdev)
 
 	mci = find_mci_by_dev(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	WARN_ON(!mci);
+
+>>>>>>> v3.18
 =======
 	WARN_ON(!mci);
 
@@ -3308,7 +3674,11 @@ static void remove_one_instance(struct pci_dev *pdev)
 	/* unregister from EDAC MCE */
 	amd_report_gart_errors(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amd_unregister_ecc_decoder(amd64_decode_bus_error);
+=======
+	amd_unregister_ecc_decoder(decode_bus_error);
+>>>>>>> v3.18
 =======
 	amd_unregister_ecc_decoder(decode_bus_error);
 >>>>>>> v3.18
@@ -3330,7 +3700,11 @@ static void remove_one_instance(struct pci_dev *pdev)
  * inquiry this table to see if this driver is for a given device found.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(amd64_pci_table) = {
+=======
+static const struct pci_device_id amd64_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id amd64_pci_table[] = {
 >>>>>>> v3.18
@@ -3361,7 +3735,10 @@ static const struct pci_device_id amd64_pci_table[] = {
 	{
 		.vendor		= PCI_VENDOR_ID_AMD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.device		= PCI_DEVICE_ID_AMD_15H_M30H_NB_F2,
 		.subvendor	= PCI_ANY_ID,
 		.subdevice	= PCI_ANY_ID,
@@ -3370,6 +3747,9 @@ static const struct pci_device_id amd64_pci_table[] = {
 	},
 	{
 		.vendor		= PCI_VENDOR_ID_AMD,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.device		= PCI_DEVICE_ID_AMD_16H_NB_F2,
 		.subvendor	= PCI_ANY_ID,
@@ -3378,7 +3758,10 @@ static const struct pci_device_id amd64_pci_table[] = {
 		.class_mask	= 0,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.vendor		= PCI_VENDOR_ID_AMD,
 		.device		= PCI_DEVICE_ID_AMD_16H_M30H_NB_F2,
@@ -3387,6 +3770,9 @@ static const struct pci_device_id amd64_pci_table[] = {
 		.class		= 0,
 		.class_mask	= 0,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	{0, }
@@ -3396,8 +3782,13 @@ MODULE_DEVICE_TABLE(pci, amd64_pci_table);
 static struct pci_driver amd64_pci_driver = {
 	.name		= EDAC_MOD_STR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.probe		= amd64_probe_one_instance,
 	.remove		= amd64_remove_one_instance,
+=======
+	.probe		= probe_one_instance,
+	.remove		= remove_one_instance,
+>>>>>>> v3.18
 =======
 	.probe		= probe_one_instance,
 	.remove		= remove_one_instance,
@@ -3410,6 +3801,7 @@ static void setup_pci_device(void)
 	struct mem_ctl_info *mci;
 	struct amd64_pvt *pvt;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (amd64_ctl_pci)
 		return;
@@ -3429,6 +3821,8 @@ static void setup_pci_device(void)
 				   __func__);
 			}
 =======
+=======
+>>>>>>> v3.18
 	if (pci_ctl)
 		return;
 
@@ -3441,6 +3835,9 @@ static void setup_pci_device(void)
 	if (!pci_ctl) {
 		pr_warn("%s(): Unable to create PCI control\n", __func__);
 		pr_warn("%s(): PCI error report via EDAC not set\n", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -3498,8 +3895,13 @@ err_ret:
 static void __exit amd64_edac_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (amd64_ctl_pci)
 		edac_pci_release_generic_ctl(amd64_ctl_pci);
+=======
+	if (pci_ctl)
+		edac_pci_release_generic_ctl(pci_ctl);
+>>>>>>> v3.18
 =======
 	if (pci_ctl)
 		edac_pci_release_generic_ctl(pci_ctl);

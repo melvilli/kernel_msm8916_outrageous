@@ -36,6 +36,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -622,7 +627,11 @@ static int __init xenbus_init(void)
 	err = misc_register(&xenbus_dev);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Could not register xenbus frontend device\n");
+=======
+		pr_err("Could not register xenbus frontend device\n");
+>>>>>>> v3.18
 =======
 		pr_err("Could not register xenbus frontend device\n");
 >>>>>>> v3.18

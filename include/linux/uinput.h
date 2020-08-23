@@ -21,6 +21,11 @@
  *
  * Changes/Revisions:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *	0.4	01/09/2014 (Benjamin Tissoires <benjamin.tissoires@redhat.com>)
+ *		- add UI_GET_SYSNAME ioctl
+>>>>>>> v3.18
 =======
  *	0.4	01/09/2014 (Benjamin Tissoires <benjamin.tissoires@redhat.com>)
  *		- add UI_GET_SYSNAME ioctl

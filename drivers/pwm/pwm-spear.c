@@ -3,7 +3,11 @@
  *
  * Copyright (C) 2012 ST Microelectronics
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Shiraz Hashim <shiraz.hashim@st.com>
+=======
+ * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
+>>>>>>> v3.18
 =======
  * Shiraz Hashim <shiraz.linux.kernel@gmail.com>
 >>>>>>> v3.18
@@ -183,6 +187,7 @@ static int spear_pwm_probe(struct platform_device *pdev)
 	u32 val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!r) {
 		dev_err(&pdev->dev, "no memory resources defined\n");
@@ -196,11 +201,16 @@ static int spear_pwm_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	pc = devm_kzalloc(&pdev->dev, sizeof(*pc), GFP_KERNEL);
 	if (!pc)
 		return -ENOMEM;
 
 	r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pc->mmio_base = devm_ioremap_resource(&pdev->dev, r);
 	if (IS_ERR(pc->mmio_base))
@@ -240,7 +250,11 @@ static int spear_pwm_probe(struct platform_device *pdev)
 
 	ret = pwmchip_add(&pc->chip);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ret) {
+=======
+	if (ret < 0) {
+>>>>>>> v3.18
 =======
 	if (ret < 0) {
 >>>>>>> v3.18
@@ -276,6 +290,10 @@ static struct platform_driver spear_pwm_driver = {
 	.driver = {
 		.name = "spear-pwm",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.owner = THIS_MODULE,
+>>>>>>> v3.18
 =======
 		.owner = THIS_MODULE,
 >>>>>>> v3.18
@@ -289,7 +307,11 @@ module_platform_driver(spear_pwm_driver);
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Shiraz Hashim <shiraz.hashim@st.com>");
+=======
+MODULE_AUTHOR("Shiraz Hashim <shiraz.linux.kernel@gmail.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Shiraz Hashim <shiraz.linux.kernel@gmail.com>");
 >>>>>>> v3.18

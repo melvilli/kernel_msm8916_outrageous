@@ -21,6 +21,7 @@
 
 #define UART0_PHYS		0xE0000000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UART1_PHYS		0xE0001000
 #define UART_SIZE		SZ_4K
 #define UART_VIRT		0xF0001000
@@ -34,6 +35,8 @@
 #define LL_UART_VADDR		UART_VIRT
 
 =======
+=======
+>>>>>>> v3.18
 #define UART0_VIRT		0xF0000000
 #define UART1_PHYS		0xE0001000
 #define UART1_VIRT		0xF0001000
@@ -46,6 +49,9 @@
 # define LL_UART_VADDR		UART0_VIRT
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.macro	addruart, rp, rv, tmp
 		ldr	\rp, =LL_UART_PADDR	@ physical
@@ -58,17 +64,27 @@
 
 		.macro	waituart,rd,rx
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 1001:		ldr	\rd, [\rx, #UART_SR_OFFSET]
 ARM_BE8(	rev	\rd, \rd )
 		tst	\rd, #UART_SR_TXEMPTY
 		beq	1001b
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.endm
 
 		.macro	busyuart,rd,rx
 1002:		ldr	\rd, [\rx, #UART_SR_OFFSET]	@ get status register
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ARM_BE8(	rev	\rd, \rd )
+>>>>>>> v3.18
 =======
 ARM_BE8(	rev	\rd, \rd )
 >>>>>>> v3.18

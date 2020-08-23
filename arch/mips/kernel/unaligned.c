@@ -8,6 +8,10 @@
  * Copyright (C) 1996, 1998, 1999, 2002 by Ralf Baechle
  * Copyright (C) 1999 Silicon Graphics, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Imagination Technologies Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Imagination Technologies Ltd.
 >>>>>>> v3.18
@@ -77,6 +81,10 @@
  *	 Undo the partial store in this case.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+>>>>>>> v3.18
 =======
 #include <linux/context_tracking.h>
 >>>>>>> v3.18
@@ -118,8 +126,13 @@ extern void show_registers(struct pt_regs *regs);
 #define     LoadHW(addr, value, res)  \
 		__asm__ __volatile__ (".set\tnoat\n"        \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"1:\tlb\t%0, 0(%2)\n"               \
 			"2:\tlbu\t$1, 1(%2)\n\t"            \
+=======
+			"1:\t"user_lb("%0", "0(%2)")"\n"    \
+			"2:\t"user_lbu("$1", "1(%2)")"\n\t" \
+>>>>>>> v3.18
 =======
 			"1:\t"user_lb("%0", "0(%2)")"\n"    \
 			"2:\t"user_lbu("$1", "1(%2)")"\n\t" \
@@ -143,8 +156,13 @@ extern void show_registers(struct pt_regs *regs);
 #define     LoadW(addr, value, res)   \
 		__asm__ __volatile__ (                      \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"1:\tlwl\t%0, (%2)\n"               \
 			"2:\tlwr\t%0, 3(%2)\n\t"            \
+=======
+			"1:\t"user_lwl("%0", "(%2)")"\n"    \
+			"2:\t"user_lwr("%0", "3(%2)")"\n\t" \
+>>>>>>> v3.18
 =======
 			"1:\t"user_lwl("%0", "(%2)")"\n"    \
 			"2:\t"user_lwr("%0", "3(%2)")"\n\t" \
@@ -167,8 +185,13 @@ extern void show_registers(struct pt_regs *regs);
 		__asm__ __volatile__ (                      \
 			".set\tnoat\n"                      \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"1:\tlbu\t%0, 0(%2)\n"              \
 			"2:\tlbu\t$1, 1(%2)\n\t"            \
+=======
+			"1:\t"user_lbu("%0", "0(%2)")"\n"   \
+			"2:\t"user_lbu("$1", "1(%2)")"\n\t" \
+>>>>>>> v3.18
 =======
 			"1:\t"user_lbu("%0", "0(%2)")"\n"   \
 			"2:\t"user_lbu("$1", "1(%2)")"\n\t" \
@@ -193,8 +216,13 @@ extern void show_registers(struct pt_regs *regs);
 #define     LoadWU(addr, value, res)  \
 		__asm__ __volatile__ (                      \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"1:\tlwl\t%0, (%2)\n"               \
 			"2:\tlwr\t%0, 3(%2)\n\t"            \
+=======
+			"1:\t"user_lwl("%0", "(%2)")"\n"    \
+			"2:\t"user_lwr("%0", "3(%2)")"\n\t" \
+>>>>>>> v3.18
 =======
 			"1:\t"user_lwl("%0", "(%2)")"\n"    \
 			"2:\t"user_lwr("%0", "3(%2)")"\n\t" \
@@ -237,9 +265,15 @@ extern void show_registers(struct pt_regs *regs);
 		__asm__ __volatile__ (                      \
 			".set\tnoat\n"                      \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"1:\tsb\t%1, 1(%2)\n\t"             \
 			"srl\t$1, %1, 0x8\n"                \
 			"2:\tsb\t$1, 0(%2)\n\t"             \
+=======
+			"1:\t"user_sb("%1", "1(%2)")"\n"    \
+			"srl\t$1, %1, 0x8\n"                \
+			"2:\t"user_sb("$1", "0(%2)")"\n"    \
+>>>>>>> v3.18
 =======
 			"1:\t"user_sb("%1", "1(%2)")"\n"    \
 			"srl\t$1, %1, 0x8\n"                \
@@ -263,8 +297,13 @@ extern void show_registers(struct pt_regs *regs);
 #define     StoreW(addr, value, res)  \
 		__asm__ __volatile__ (                      \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"1:\tswl\t%1,(%2)\n"                \
 			"2:\tswr\t%1, 3(%2)\n\t"            \
+=======
+			"1:\t"user_swl("%1", "(%2)")"\n"    \
+			"2:\t"user_swr("%1", "3(%2)")"\n\t" \
+>>>>>>> v3.18
 =======
 			"1:\t"user_swl("%1", "(%2)")"\n"    \
 			"2:\t"user_swr("%1", "3(%2)")"\n\t" \
@@ -306,8 +345,13 @@ extern void show_registers(struct pt_regs *regs);
 #define     LoadHW(addr, value, res)  \
 		__asm__ __volatile__ (".set\tnoat\n"        \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"1:\tlb\t%0, 1(%2)\n"               \
 			"2:\tlbu\t$1, 0(%2)\n\t"            \
+=======
+			"1:\t"user_lb("%0", "1(%2)")"\n"    \
+			"2:\t"user_lbu("$1", "0(%2)")"\n\t" \
+>>>>>>> v3.18
 =======
 			"1:\t"user_lb("%0", "1(%2)")"\n"    \
 			"2:\t"user_lbu("$1", "0(%2)")"\n\t" \
@@ -331,8 +375,13 @@ extern void show_registers(struct pt_regs *regs);
 #define     LoadW(addr, value, res)   \
 		__asm__ __volatile__ (                      \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"1:\tlwl\t%0, 3(%2)\n"              \
 			"2:\tlwr\t%0, (%2)\n\t"             \
+=======
+			"1:\t"user_lwl("%0", "3(%2)")"\n"   \
+			"2:\t"user_lwr("%0", "(%2)")"\n\t"  \
+>>>>>>> v3.18
 =======
 			"1:\t"user_lwl("%0", "3(%2)")"\n"   \
 			"2:\t"user_lwr("%0", "(%2)")"\n\t"  \
@@ -355,8 +404,13 @@ extern void show_registers(struct pt_regs *regs);
 		__asm__ __volatile__ (                      \
 			".set\tnoat\n"                      \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"1:\tlbu\t%0, 1(%2)\n"              \
 			"2:\tlbu\t$1, 0(%2)\n\t"            \
+=======
+			"1:\t"user_lbu("%0", "1(%2)")"\n"   \
+			"2:\t"user_lbu("$1", "0(%2)")"\n\t" \
+>>>>>>> v3.18
 =======
 			"1:\t"user_lbu("%0", "1(%2)")"\n"   \
 			"2:\t"user_lbu("$1", "0(%2)")"\n\t" \
@@ -381,8 +435,13 @@ extern void show_registers(struct pt_regs *regs);
 #define     LoadWU(addr, value, res)  \
 		__asm__ __volatile__ (                      \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"1:\tlwl\t%0, 3(%2)\n"              \
 			"2:\tlwr\t%0, (%2)\n\t"             \
+=======
+			"1:\t"user_lwl("%0", "3(%2)")"\n"   \
+			"2:\t"user_lwr("%0", "(%2)")"\n\t"  \
+>>>>>>> v3.18
 =======
 			"1:\t"user_lwl("%0", "3(%2)")"\n"   \
 			"2:\t"user_lwr("%0", "(%2)")"\n\t"  \
@@ -425,9 +484,15 @@ extern void show_registers(struct pt_regs *regs);
 		__asm__ __volatile__ (                      \
 			".set\tnoat\n"                      \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"1:\tsb\t%1, 0(%2)\n\t"             \
 			"srl\t$1,%1, 0x8\n"                 \
 			"2:\tsb\t$1, 1(%2)\n\t"             \
+=======
+			"1:\t"user_sb("%1", "0(%2)")"\n"    \
+			"srl\t$1,%1, 0x8\n"                 \
+			"2:\t"user_sb("$1", "1(%2)")"\n"    \
+>>>>>>> v3.18
 =======
 			"1:\t"user_sb("%1", "0(%2)")"\n"    \
 			"srl\t$1,%1, 0x8\n"                 \
@@ -451,8 +516,13 @@ extern void show_registers(struct pt_regs *regs);
 #define     StoreW(addr, value, res)  \
 		__asm__ __volatile__ (                      \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"1:\tswl\t%1, 3(%2)\n"              \
 			"2:\tswr\t%1, (%2)\n\t"             \
+=======
+			"1:\t"user_swl("%1", "3(%2)")"\n"   \
+			"2:\t"user_swr("%1", "(%2)")"\n\t"  \
+>>>>>>> v3.18
 =======
 			"1:\t"user_swl("%1", "3(%2)")"\n"   \
 			"2:\t"user_swr("%1", "(%2)")"\n\t"  \
@@ -500,7 +570,13 @@ static void emulate_load_store_insn(struct pt_regs *regs,
 	unsigned long orig31;
 	void __user *fault_addr = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#ifdef	CONFIG_EVA
+	mm_segment_t seg;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef	CONFIG_EVA
 	mm_segment_t seg;
@@ -551,7 +627,10 @@ static void emulate_load_store_insn(struct pt_regs *regs,
 		 * interest.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EVA
 	case spec3_op:
 		/*
@@ -634,6 +713,9 @@ static void emulate_load_store_insn(struct pt_regs *regs,
 		set_fs(seg);
 		break;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case lh_op:
 		if (!access_ok(VERIFY_READ, addr, 2))
@@ -845,7 +927,12 @@ const int reg16to32[] = { 16, 17, 2, 3, 4, 5, 6, 7 };
 const int reg16to32st[] = { 0, 17, 2, 3, 4, 5, 6, 7 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void emulate_load_store_microMIPS(struct pt_regs *regs, void __user * addr)
+=======
+static void emulate_load_store_microMIPS(struct pt_regs *regs,
+					 void __user *addr)
+>>>>>>> v3.18
 =======
 static void emulate_load_store_microMIPS(struct pt_regs *regs,
 					 void __user *addr)
@@ -1714,12 +1801,15 @@ sigill:
 	force_sig(SIGILL, current);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void do_ade(struct pt_regs *regs)
 {
 	unsigned int __user *pc;
 	mm_segment_t seg;
 
 =======
+=======
+>>>>>>> v3.18
 
 asmlinkage void do_ade(struct pt_regs *regs)
 {
@@ -1728,6 +1818,9 @@ asmlinkage void do_ade(struct pt_regs *regs)
 	mm_segment_t seg;
 
 	prev_state = exception_enter();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	perf_sw_event(PERF_COUNT_SW_ALIGNMENT_FAULTS,
 			1, regs, regs->cp0_badvaddr);
@@ -1805,6 +1898,10 @@ sigbus:
 	 * XXX On return from the signal handler we should advance the epc
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	exception_exit(prev_state);
+>>>>>>> v3.18
 =======
 	exception_exit(prev_state);
 >>>>>>> v3.18

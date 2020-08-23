@@ -35,6 +35,11 @@
 #include <drm/drmP.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/ati_pcigart.h>
+
+>>>>>>> v3.18
 =======
 #include <drm/ati_pcigart.h>
 

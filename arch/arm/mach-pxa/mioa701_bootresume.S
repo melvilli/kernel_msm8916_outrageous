@@ -30,7 +30,11 @@ ENTRY(mioa701_jumpaddr)
 	ldr	r0, mioa701_jumpaddr	@ (Murphy's Law)
 	ldr	r0, [r0]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r0
+=======
+	ret	r0
+>>>>>>> v3.18
 =======
 	ret	r0
 >>>>>>> v3.18

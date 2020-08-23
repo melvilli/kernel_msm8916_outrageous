@@ -5,8 +5,11 @@
  *                         for convergence integrated media GmbH
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * This program is free software; you can redistribute it and/or
@@ -33,7 +36,10 @@
 #include <linux/spinlock.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/debugfs.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -54,8 +60,11 @@
 #define MAX_PID 0x1fff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIMESTAMP_LEN	4
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SPEED_PKTS_INTERVAL 50000
@@ -78,6 +87,7 @@ struct dvb_demux_filter {
 
 #define DMX_FEED_ENTRY(pos) list_entry(pos, struct dvb_demux_feed, list_head)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct dmx_index_entry {
@@ -167,6 +177,8 @@ struct dvb_dmx_video_patterns_results {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct dvb_demux_feed {
 	union {
 		struct dmx_ts_feed ts;
@@ -179,11 +191,14 @@ struct dvb_demux_feed {
 	} cb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union {
 		dmx_ts_data_ready_cb ts;
 		dmx_section_data_ready_cb sec;
 	} data_ready_cb;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dvb_demux *demux;
@@ -194,9 +209,12 @@ struct dvb_demux_feed {
 	u8 *buffer;
 	int buffer_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum dmx_tsp_format_t tsp_out_format;
 	struct dmx_secure_mode secure_mode;
 	struct dmx_cipher_operations cipher_ops;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -207,6 +225,7 @@ struct dvb_demux_feed {
 	enum dmx_ts_pes pes_type;
 
 	int cc;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int first_cc;
 	int pusi_seen;		/* prevents feeding of garbage from previous section */
@@ -239,12 +258,17 @@ struct dvb_demux_feed {
 	enum dmx_video_codec video_codec;
 	struct dmx_indexing_params idx_params;
 =======
+=======
+>>>>>>> v3.18
 	int pusi_seen;		/* prevents feeding of garbage from previous section */
 
 	u16 peslen;
 
 	struct list_head list_head;
 	unsigned int index;	/* a unique index for each feed (can be used as hardware pid filter index) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -258,6 +282,7 @@ struct dvb_demux {
 	int (*write_to_decoder)(struct dvb_demux_feed *feed,
 				 const u8 *buf, size_t len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*decoder_fullness_init)(struct dvb_demux_feed *feed);
 	int (*decoder_fullness_wait)(struct dvb_demux_feed *feed,
 				 size_t required_space);
@@ -270,10 +295,13 @@ struct dvb_demux {
 				struct dmx_cipher_operations *cipher_ops);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	u32 (*check_crc32)(struct dvb_demux_feed *feed,
 			    const u8 *buf, size_t len);
 	void (*memcopy)(struct dvb_demux_feed *feed, u8 *dst,
 			 const u8 *src, size_t len);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int (*oob_command)(struct dvb_demux_feed *feed,
 		struct dmx_oob_command *cmd);
@@ -282,6 +310,8 @@ struct dvb_demux {
 			 u64 *timestampIn27Mhz);
 	int (*set_indexing)(struct dvb_demux_feed *feed);
 	int (*flush_decoder_buffer)(struct dvb_demux_feed *feed, size_t length);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -310,6 +340,7 @@ struct dvb_demux {
 	struct timespec speed_last_time; /* for TS speed check */
 	uint32_t speed_pkts_cnt; /* for TS speed check */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	enum dmx_tsp_format_t tsp_format;
 	size_t ts_packet_size;
@@ -335,13 +366,18 @@ struct dvb_demux {
 	u32 total_crc_time;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 };
 
 int dvb_dmx_init(struct dvb_demux *dvbdemux);
 void dvb_dmx_release(struct dvb_demux *dvbdemux);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dvb_dmx_swfilter_section_packet(struct dvb_demux_feed *feed, const u8 *buf,
 	int should_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void dvb_dmx_swfilter_packets(struct dvb_demux *dvbdmx, const u8 *buf,
@@ -351,6 +387,7 @@ void dvb_dmx_swfilter_204(struct dvb_demux *demux, const u8 *buf,
 			  size_t count);
 void dvb_dmx_swfilter_raw(struct dvb_demux *demux, const u8 *buf,
 			  size_t count);
+<<<<<<< HEAD
 <<<<<<< HEAD
 void dvb_dmx_swfilter_format(
 			struct dvb_demux *demux, const u8 *buf,
@@ -463,6 +500,8 @@ static inline u16 ts_pid(const u8 *buf)
 	return ((buf[1] & 0x1f) << 8) + buf[2];
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -23,8 +23,11 @@
 #define LSM330_GYRO_DEV_NAME		"lsm330_gyro"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int st_gyro_common_probe(struct iio_dev *indio_dev);
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct st_sensors_platform_data - gyro platform data
  * @drdy_int_pin: DRDY on gyros is available only on INT2 pin.
@@ -35,6 +38,9 @@ static const struct st_sensors_platform_data gyro_pdata = {
 
 int st_gyro_common_probe(struct iio_dev *indio_dev,
 					struct st_sensors_platform_data *pdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void st_gyro_common_remove(struct iio_dev *indio_dev);
 

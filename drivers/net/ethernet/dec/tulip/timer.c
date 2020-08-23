@@ -159,7 +159,11 @@ void comet_timer(unsigned long data)
 	struct net_device *dev = (struct net_device *)data;
 	struct tulip_private *tp = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int next_tick = 60*HZ;
+=======
+	int next_tick = 2*HZ;
+>>>>>>> v3.18
 =======
 	int next_tick = 2*HZ;
 >>>>>>> v3.18

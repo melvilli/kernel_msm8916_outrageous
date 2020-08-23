@@ -90,7 +90,11 @@ static inline void lcd_unregister_fb(struct lcd_device *ld)
 #endif /* CONFIG_FB */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t lcd_show_power(struct device *dev, struct device_attribute *attr,
+=======
+static ssize_t lcd_power_show(struct device *dev, struct device_attribute *attr,
+>>>>>>> v3.18
 =======
 static ssize_t lcd_power_show(struct device *dev, struct device_attribute *attr,
 >>>>>>> v3.18
@@ -110,7 +114,11 @@ static ssize_t lcd_power_show(struct device *dev, struct device_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t lcd_store_power(struct device *dev,
+=======
+static ssize_t lcd_power_store(struct device *dev,
+>>>>>>> v3.18
 =======
 static ssize_t lcd_power_store(struct device *dev,
 >>>>>>> v3.18
@@ -137,8 +145,14 @@ static ssize_t lcd_power_store(struct device *dev,
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t lcd_show_contrast(struct device *dev,
+=======
+static DEVICE_ATTR_RW(lcd_power);
+
+static ssize_t contrast_show(struct device *dev,
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RW(lcd_power);
 
@@ -158,7 +172,11 @@ static ssize_t contrast_show(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t lcd_store_contrast(struct device *dev,
+=======
+static ssize_t contrast_store(struct device *dev,
+>>>>>>> v3.18
 =======
 static ssize_t contrast_store(struct device *dev,
 >>>>>>> v3.18
@@ -185,8 +203,14 @@ static ssize_t contrast_store(struct device *dev,
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t lcd_show_max_contrast(struct device *dev,
+=======
+static DEVICE_ATTR_RW(contrast);
+
+static ssize_t max_contrast_show(struct device *dev,
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RW(contrast);
 
@@ -199,6 +223,10 @@ static ssize_t max_contrast_show(struct device *dev,
 	return sprintf(buf, "%d\n", ld->props.max_contrast);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(max_contrast);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(max_contrast);
 >>>>>>> v3.18
@@ -212,6 +240,7 @@ static void lcd_device_release(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device_attribute lcd_device_attributes[] = {
 	__ATTR(lcd_power, 0644, lcd_show_power, lcd_store_power),
 	__ATTR(contrast, 0644, lcd_show_contrast, lcd_store_contrast),
@@ -219,6 +248,8 @@ static struct device_attribute lcd_device_attributes[] = {
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *lcd_device_attrs[] = {
 	&dev_attr_lcd_power.attr,
 	&dev_attr_contrast.attr,
@@ -226,6 +257,9 @@ static struct attribute *lcd_device_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(lcd_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -258,7 +292,11 @@ struct lcd_device *lcd_device_register(const char *name, struct device *parent,
 	new_ld->dev.parent = parent;
 	new_ld->dev.release = lcd_device_release;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_name(&new_ld->dev, name);
+=======
+	dev_set_name(&new_ld->dev, "%s", name);
+>>>>>>> v3.18
 =======
 	dev_set_name(&new_ld->dev, "%s", name);
 >>>>>>> v3.18
@@ -267,7 +305,11 @@ struct lcd_device *lcd_device_register(const char *name, struct device *parent,
 	rc = device_register(&new_ld->dev);
 	if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(new_ld);
+=======
+		put_device(&new_ld->dev);
+>>>>>>> v3.18
 =======
 		put_device(&new_ld->dev);
 >>>>>>> v3.18
@@ -307,7 +349,10 @@ void lcd_device_unregister(struct lcd_device *ld)
 EXPORT_SYMBOL(lcd_device_unregister);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void devm_lcd_device_release(struct device *dev, void *res)
 {
 	struct lcd_device *lcd = *(struct lcd_device **)res;
@@ -378,6 +423,9 @@ void devm_lcd_device_unregister(struct device *dev, struct lcd_device *ld)
 EXPORT_SYMBOL(devm_lcd_device_unregister);
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __exit lcd_class_exit(void)
 {
@@ -394,7 +442,11 @@ static int __init lcd_class_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_class->dev_attrs = lcd_device_attributes;
+=======
+	lcd_class->dev_groups = lcd_device_groups;
+>>>>>>> v3.18
 =======
 	lcd_class->dev_groups = lcd_device_groups;
 >>>>>>> v3.18

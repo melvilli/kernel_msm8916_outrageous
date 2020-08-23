@@ -37,7 +37,11 @@
 	sparc32_cachetlb_ops->page_for_dma(addr)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void sparc_flush_page_to_ram(struct page *page);
+=======
+void sparc_flush_page_to_ram(struct page *page);
+>>>>>>> v3.18
 =======
 void sparc_flush_page_to_ram(struct page *page);
 >>>>>>> v3.18
@@ -56,9 +60,15 @@ void sparc_flush_page_to_ram(struct page *page);
  * frames are up to date.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void flush_user_windows(void);
 extern void kill_user_windows(void);
 extern void flushw_all(void);
+=======
+void flush_user_windows(void);
+void kill_user_windows(void);
+void flushw_all(void);
+>>>>>>> v3.18
 =======
 void flush_user_windows(void);
 void kill_user_windows(void);

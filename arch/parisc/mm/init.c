@@ -33,6 +33,10 @@
 
 extern int  data_start;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void parisc_kernel_start(void);	/* Kernel entry point in head.S */
+>>>>>>> v3.18
 =======
 extern void parisc_kernel_start(void);	/* Kernel entry point in head.S */
 >>>>>>> v3.18
@@ -219,7 +223,10 @@ static void __init setup_bootmem(void)
 
 	mem_max = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < npmem_ranges; i++) {
@@ -237,10 +244,15 @@ static void __init setup_bootmem(void)
 				mem_max = mem_limit;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	        num_physpages += pmem_ranges[i].pages;
 			break;
 		}
 	    num_physpages += pmem_ranges[i].pages;
+=======
+			break;
+		}
+>>>>>>> v3.18
 =======
 			break;
 		}
@@ -340,8 +352,14 @@ static void __init setup_bootmem(void)
 			(unsigned long)(PAGE0->mem_free +
 				PDC_CONSOLE_IO_IODC_SIZE), BOOTMEM_DEFAULT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reserve_bootmem_node(NODE_DATA(0), __pa((unsigned long)_text),
 			(unsigned long)(_end - _text), BOOTMEM_DEFAULT);
+=======
+	reserve_bootmem_node(NODE_DATA(0), __pa(KERNEL_BINARY_TEXT_START),
+			(unsigned long)(_end - KERNEL_BINARY_TEXT_START),
+			BOOTMEM_DEFAULT);
+>>>>>>> v3.18
 =======
 	reserve_bootmem_node(NODE_DATA(0), __pa(KERNEL_BINARY_TEXT_START),
 			(unsigned long)(_end - KERNEL_BINARY_TEXT_START),
@@ -400,7 +418,10 @@ static void __init setup_bootmem(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init parisc_text_address(unsigned long vaddr)
 {
 	static unsigned long head_ptr __initdata;
@@ -412,6 +433,9 @@ static int __init parisc_text_address(unsigned long vaddr)
 	return core_kernel_text(vaddr) || vaddr == head_ptr;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init map_pages(unsigned long start_vaddr,
 			     unsigned long start_paddr, unsigned long size,
@@ -502,7 +526,11 @@ static void __init map_pages(unsigned long start_vaddr,
 				if (force)
 					pte =  __mk_pte(address, pgprot);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				else if (core_kernel_text(vaddr) &&
+=======
+				else if (parisc_text_address(vaddr) &&
+>>>>>>> v3.18
 =======
 				else if (parisc_text_address(vaddr) &&
 >>>>>>> v3.18
@@ -569,7 +597,11 @@ void free_initmem(void)
 	flush_icache_range(init_begin, init_end);
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages += free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 =======
 	free_initmem_default(-1);
 >>>>>>> v3.18
@@ -621,8 +653,11 @@ unsigned long pcxl_dma_start __read_mostly;
 void __init mem_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int codesize, reservedpages, datasize, initsize;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Do sanity checks on page table constants */
@@ -633,6 +668,7 @@ void __init mem_init(void)
 			> BITS_PER_LONG);
 
 	high_memory = __va((max_pfn << PAGE_SHIFT));
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #ifndef CONFIG_DISCONTIGMEM
@@ -677,6 +713,10 @@ void __init mem_init(void)
 	set_max_mapnr(page_to_pfn(virt_to_page(high_memory - 1)) + 1);
 	free_all_bootmem();
 >>>>>>> v3.18
+=======
+	set_max_mapnr(page_to_pfn(virt_to_page(high_memory - 1)) + 1);
+	free_all_bootmem();
+>>>>>>> v3.18
 
 #ifdef CONFIG_PA11
 	if (hppa_dma_ops == &pcxl_dma_ops) {
@@ -692,6 +732,7 @@ void __init mem_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Memory: %luk/%luk available (%dk kernel code, %dk reserved, %dk data, %dk init)\n",
 		nr_free_pages() << (PAGE_SHIFT-10),
 		num_physpages << (PAGE_SHIFT-10),
@@ -701,6 +742,9 @@ void __init mem_init(void)
 		initsize >> 10
 	);
 
+=======
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 =======
 	mem_init_print_info(NULL);
 >>>>>>> v3.18
@@ -734,6 +778,7 @@ EXPORT_SYMBOL(empty_zero_page);
 
 void show_mem(unsigned int filter)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i,free = 0,total = 0,reserved = 0;
 	int shared = 0, cached = 0;
@@ -785,6 +830,8 @@ void show_mem(unsigned int filter)
 	printk(KERN_INFO "%d pages swap cached\n", cached);
 
 =======
+=======
+>>>>>>> v3.18
 	int total = 0,reserved = 0;
 	pg_data_t *pgdat;
 
@@ -809,6 +856,9 @@ void show_mem(unsigned int filter)
 
 	printk(KERN_INFO "%d pages of RAM\n", total);
 	printk(KERN_INFO "%d reserved pages\n", reserved);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_DISCONTIGMEM
@@ -870,7 +920,10 @@ static void __init pagetable_init(void)
 
 	empty_zero_page = alloc_bootmem_pages(PAGE_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(empty_zero_page, 0, PAGE_SIZE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1184,7 +1237,11 @@ void flush_tlb_all(void)
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages += free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, -1, "initrd");
 >>>>>>> v3.18

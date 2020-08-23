@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -27,6 +28,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel PRO/1000 Linux driver
  * Copyright(c) 1999 - 2014 Intel Corporation.
  *
@@ -47,6 +50,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _E1000E_MAC_H_
@@ -92,7 +98,12 @@ void e1000_write_vfta_generic(struct e1000_hw *hw, u32 offset, u32 value);
 
 void e1000_set_lan_id_multi_port_pcie(struct e1000_hw *hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void e1000e_rar_set_generic(struct e1000_hw *hw, u8 *addr, u32 index);
+=======
+u32 e1000e_rar_get_count_generic(struct e1000_hw *hw);
+int e1000e_rar_set_generic(struct e1000_hw *hw, u8 *addr, u32 index);
+>>>>>>> v3.18
 =======
 u32 e1000e_rar_get_count_generic(struct e1000_hw *hw);
 int e1000e_rar_set_generic(struct e1000_hw *hw, u8 *addr, u32 index);

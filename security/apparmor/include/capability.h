@@ -5,7 +5,11 @@
  *
  * Copyright (C) 1998-2008 Novell/SUSE
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2009-2010 Canonical Ltd.
+=======
+ * Copyright 2009-2013 Canonical Ltd.
+>>>>>>> v3.18
 =======
  * Copyright 2009-2013 Canonical Ltd.
 >>>>>>> v3.18
@@ -22,6 +26,11 @@
 #include <linux/sched.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "apparmorfs.h"
+
+>>>>>>> v3.18
 =======
 #include "apparmorfs.h"
 
@@ -44,8 +53,14 @@ struct aa_caps {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int aa_capable(struct task_struct *task, struct aa_profile *profile, int cap,
 	       int audit);
+=======
+extern struct aa_fs_entry aa_fs_entry_caps[];
+
+int aa_capable(struct aa_profile *profile, int cap, int audit);
+>>>>>>> v3.18
 =======
 extern struct aa_fs_entry aa_fs_entry_caps[];
 

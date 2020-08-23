@@ -33,7 +33,10 @@ int roccat_common2_send_with_status(struct usb_device *usb_dev,
 		uint command, void const *buf, uint size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct roccat_common2_device {
 	int roccat_claimed;
 	int chrdev_minor;
@@ -96,5 +99,8 @@ static struct bin_attribute bin_attr_ ## thingy = { \
 	.write = roccat_common2_sysfs_write_ ## thingy \
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

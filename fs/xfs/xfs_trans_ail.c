@@ -19,6 +19,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
@@ -29,6 +30,8 @@
 #include "xfs_trace.h"
 #include "xfs_error.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
 #include "xfs_sb.h"
@@ -39,6 +42,9 @@
 #include "xfs_trace.h"
 #include "xfs_error.h"
 #include "xfs_log.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef DEBUG
@@ -75,6 +81,7 @@ xfs_ail_check(
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Return a pointer to the first item in the AIL.  If the AIL is empty, then
  * return NULL.
  */
@@ -89,6 +96,8 @@ xfs_ail_min(
 }
 
  /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Return a pointer to the last item in the AIL.  If the AIL is empty, then
@@ -203,7 +212,10 @@ xfs_trans_ail_cursor_next(
 void
 xfs_trans_ail_cursor_done(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct xfs_ail		*ailp,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct xfs_ail_cursor	*cur)
@@ -401,7 +413,11 @@ xfsaild_push(
 		 * done now.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xfs_trans_ail_cursor_done(ailp, &cur);
+=======
+		xfs_trans_ail_cursor_done(&cur);
+>>>>>>> v3.18
 =======
 		xfs_trans_ail_cursor_done(&cur);
 >>>>>>> v3.18
@@ -417,17 +433,23 @@ xfsaild_push(
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Note that IOP_PUSH may unlock and reacquire the AIL lock.  We
 		 * rely on the AIL cursor implementation to be able to deal with
 		 * the dropped lock.
 		 */
 		lock_result = IOP_PUSH(lip, &ailp->xa_buf_list);
 =======
+=======
+>>>>>>> v3.18
 		 * Note that iop_push may unlock and reacquire the AIL lock.  We
 		 * rely on the AIL cursor implementation to be able to deal with
 		 * the dropped lock.
 		 */
 		lock_result = lip->li_ops->iop_push(lip, &ailp->xa_buf_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		switch (lock_result) {
 		case XFS_ITEM_SUCCESS:
@@ -498,7 +520,11 @@ xfsaild_push(
 		lsn = lip->li_lsn;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_trans_ail_cursor_done(ailp, &cur);
+=======
+	xfs_trans_ail_cursor_done(&cur);
+>>>>>>> v3.18
 =======
 	xfs_trans_ail_cursor_done(&cur);
 >>>>>>> v3.18
@@ -708,6 +734,10 @@ xfs_trans_ail_update_bulk(
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			trace_xfs_ail_move(lip, lip->li_lsn, lsn);
+>>>>>>> v3.18
 =======
 			trace_xfs_ail_move(lip, lip->li_lsn, lsn);
 >>>>>>> v3.18
@@ -717,6 +747,10 @@ xfs_trans_ail_update_bulk(
 		} else {
 			lip->li_flags |= XFS_LI_IN_AIL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			trace_xfs_ail_insert(lip, 0, lsn);
+>>>>>>> v3.18
 =======
 			trace_xfs_ail_insert(lip, 0, lsn);
 >>>>>>> v3.18
@@ -789,6 +823,10 @@ xfs_trans_ail_delete_bulk(
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		trace_xfs_ail_delete(lip, mlip->li_lsn, lip->li_lsn);
+>>>>>>> v3.18
 =======
 		trace_xfs_ail_delete(lip, mlip->li_lsn, lip->li_lsn);
 >>>>>>> v3.18
@@ -821,7 +859,11 @@ xfs_trans_ail_init(
 	ailp = kmem_zalloc(sizeof(struct xfs_ail), KM_MAYFAIL);
 	if (!ailp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ENOMEM;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -844,7 +886,11 @@ xfs_trans_ail_init(
 out_free_ailp:
 	kmem_free(ailp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ENOMEM;
+=======
+	return -ENOMEM;
+>>>>>>> v3.18
 =======
 	return -ENOMEM;
 >>>>>>> v3.18

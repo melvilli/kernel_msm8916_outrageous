@@ -1,5 +1,9 @@
 #ifndef __MV_CRYPTO_H__
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define __MV_CRYPTO_H__
+>>>>>>> v3.18
 =======
 #define __MV_CRYPTO_H__
 >>>>>>> v3.18

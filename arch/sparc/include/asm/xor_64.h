@@ -21,6 +21,7 @@
 #include <asm/spitfire.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void xor_vis_2(unsigned long, unsigned long *, unsigned long *);
 extern void xor_vis_3(unsigned long, unsigned long *, unsigned long *,
 		      unsigned long *);
@@ -29,6 +30,8 @@ extern void xor_vis_4(unsigned long, unsigned long *, unsigned long *,
 extern void xor_vis_5(unsigned long, unsigned long *, unsigned long *,
 		      unsigned long *, unsigned long *, unsigned long *);
 =======
+=======
+>>>>>>> v3.18
 void xor_vis_2(unsigned long, unsigned long *, unsigned long *);
 void xor_vis_3(unsigned long, unsigned long *, unsigned long *,
 	       unsigned long *);
@@ -36,6 +39,9 @@ void xor_vis_4(unsigned long, unsigned long *, unsigned long *,
 	       unsigned long *, unsigned long *);
 void xor_vis_5(unsigned long, unsigned long *, unsigned long *,
 	       unsigned long *, unsigned long *, unsigned long *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* XXX Ugh, write cheetah versions... -DaveM */
@@ -49,6 +55,7 @@ static struct xor_block_template xor_block_VIS = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void xor_niagara_2(unsigned long, unsigned long *, unsigned long *);
 extern void xor_niagara_3(unsigned long, unsigned long *, unsigned long *,
 			  unsigned long *);
@@ -57,6 +64,8 @@ extern void xor_niagara_4(unsigned long, unsigned long *, unsigned long *,
 extern void xor_niagara_5(unsigned long, unsigned long *, unsigned long *,
 			  unsigned long *, unsigned long *, unsigned long *);
 =======
+=======
+>>>>>>> v3.18
 void xor_niagara_2(unsigned long, unsigned long *, unsigned long *);
 void xor_niagara_3(unsigned long, unsigned long *, unsigned long *,
 		   unsigned long *);
@@ -64,6 +73,9 @@ void xor_niagara_4(unsigned long, unsigned long *, unsigned long *,
 		   unsigned long *, unsigned long *);
 void xor_niagara_5(unsigned long, unsigned long *, unsigned long *,
 		   unsigned long *, unsigned long *, unsigned long *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct xor_block_template xor_block_niagara = {

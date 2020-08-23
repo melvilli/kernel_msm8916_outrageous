@@ -114,7 +114,10 @@ static void pcibios_scanbus(struct pci_controller *hose)
 			pci_bus_size_bridges(bus);
 			pci_bus_assign_resources(bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pci_enable_bridges(bus);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -124,6 +127,7 @@ static void pcibios_scanbus(struct pci_controller *hose)
 #ifdef CONFIG_OF
 void pci_load_of_ranges(struct pci_controller *hose, struct device_node *node)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const __be32 *ranges;
 	int rlen;
@@ -171,6 +175,8 @@ void pci_load_of_ranges(struct pci_controller *hose, struct device_node *node)
 			res->child = NULL;
 		}
 =======
+=======
+>>>>>>> v3.18
 	struct of_pci_range range;
 	struct of_pci_range_parser parser;
 
@@ -202,6 +208,9 @@ void pci_load_of_ranges(struct pci_controller *hose, struct device_node *node)
 		}
 		if (res != NULL)
 			of_pci_range_to_resource(&range, node, res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

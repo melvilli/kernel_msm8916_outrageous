@@ -17,7 +17,10 @@
 #include <asm/setup.h>
 #include <asm/traps.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/gcmpregs.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/hardirq.h>
@@ -33,7 +36,10 @@ unsigned int gic_irq_flags[GIC_NUM_INTRS];
 struct gic_shared_intr_map gic_shared_intr_map[GIC_NUM_INTRS];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct gic_pcpu_mask {
 	DECLARE_BITMAP(pcpu_mask, GIC_NUM_INTRS);
 };
@@ -46,6 +52,9 @@ struct gic_intrmask_regs {
 	DECLARE_BITMAP(intrmask, GIC_NUM_INTRS);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct gic_pcpu_mask pcpu_masks[NR_CPUS];
 static struct gic_pending_regs pending_regs[NR_CPUS];
@@ -74,7 +83,10 @@ void gic_write_compare(cycle_t cnt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void gic_write_cpu_compare(cycle_t cnt, int cpu)
 {
 	unsigned long flags;
@@ -90,6 +102,9 @@ void gic_write_cpu_compare(cycle_t cnt, int cpu)
 	local_irq_restore(flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 cycle_t gic_read_compare(void)
 {
@@ -200,7 +215,11 @@ unsigned int gic_compare_int(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int gic_get_int(void)
+=======
+void gic_get_int_mask(unsigned long *dst, const unsigned long *src)
+>>>>>>> v3.18
 =======
 void gic_get_int_mask(unsigned long *dst, const unsigned long *src)
 >>>>>>> v3.18
@@ -229,9 +248,12 @@ void gic_get_int_mask(unsigned long *dst, const unsigned long *src)
 	bitmap_and(pending, pending, intrmask, GIC_NUM_INTRS);
 	bitmap_and(pending, pending, pcpu_mask, GIC_NUM_INTRS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return find_first_bit(pending, GIC_NUM_INTRS);
 =======
+=======
+>>>>>>> v3.18
 	bitmap_and(dst, src, pending, GIC_NUM_INTRS);
 }
 
@@ -243,6 +265,9 @@ unsigned int gic_get_int(void)
 	gic_get_int_mask(interrupts, interrupts);
 
 	return find_first_bit(interrupts, GIC_NUM_INTRS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -274,6 +299,7 @@ static int gic_set_affinity(struct irq_data *d, const struct cpumask *cpumask,
 	/* Assumption : cpumask refers to a single CPU */
 	spin_lock_irqsave(&gic_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (;;) {
 		/* Re-route this IRQ */
 		GIC_SH_MAP_TO_VPE_SMASK(irq, first_cpu(tmp));
@@ -285,6 +311,8 @@ static int gic_set_affinity(struct irq_data *d, const struct cpumask *cpumask,
 
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	/* Re-route this IRQ */
 	GIC_SH_MAP_TO_VPE_SMASK(irq, first_cpu(tmp));
@@ -294,6 +322,9 @@ static int gic_set_affinity(struct irq_data *d, const struct cpumask *cpumask,
 		clear_bit(irq, pcpu_masks[i].pcpu_mask);
 	set_bit(irq, pcpu_masks[first_cpu(tmp)].pcpu_mask);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cpumask_copy(d->affinity, cpumask);
 	spin_unlock_irqrestore(&gic_lock, flags);
@@ -355,14 +386,20 @@ static void __init gic_setup_intr(unsigned int intr, unsigned int cpu,
 	/* Init Intr Masks */
 	GIC_CLR_INTR_MASK(intr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Initialise per-cpu Interrupt software masks */
 	if (flags & GIC_FLAG_IPI)
 		set_bit(intr, pcpu_masks[cpu].pcpu_mask);
 =======
+=======
+>>>>>>> v3.18
 
 	/* Initialise per-cpu Interrupt software masks */
 	set_bit(intr, pcpu_masks[cpu].pcpu_mask);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((flags & GIC_FLAG_TRANSPARENT) && (cpu_has_veic == 0))
 		GIC_SET_INTR_MASK(intr);
@@ -403,8 +440,11 @@ static void __init gic_basic_init(int numintrs, int numvpes,
 		if (cpu == GIC_UNUSED)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cpu == 0 && i != 0 && intrmap[i].flags == 0)
 			continue;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		gic_setup_intr(i,

@@ -53,7 +53,11 @@ static void snd_wm8776_activate_ctl(struct snd_wm8776 *wm,
 
 	memset(&elem_id, 0, sizeof(elem_id));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(elem_id.name, ctl_name, sizeof(elem_id.name));
+=======
+	strlcpy(elem_id.name, ctl_name, sizeof(elem_id.name));
+>>>>>>> v3.18
 =======
 	strlcpy(elem_id.name, ctl_name, sizeof(elem_id.name));
 >>>>>>> v3.18
@@ -531,7 +535,12 @@ static int snd_wm8776_ctl_get(struct snd_kcontrol *kcontrol,
 	if (wm->ctl[n].flags & WM8776_FLAG_INVERT) {
 		val1 = wm->ctl[n].max - (val1 - wm->ctl[n].min);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val2 = wm->ctl[n].max - (val2 - wm->ctl[n].min);
+=======
+		if (wm->ctl[n].flags & WM8776_FLAG_STEREO)
+			val2 = wm->ctl[n].max - (val2 - wm->ctl[n].min);
+>>>>>>> v3.18
 =======
 		if (wm->ctl[n].flags & WM8776_FLAG_STEREO)
 			val2 = wm->ctl[n].max - (val2 - wm->ctl[n].min);

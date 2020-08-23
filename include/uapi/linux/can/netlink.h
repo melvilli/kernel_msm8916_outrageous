@@ -6,11 +6,14 @@
  * Copyright (c) 2009 Wolfgang Grandegger <wg@grandegger.com>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 #ifndef CAN_NETLINK_H
 #define CAN_NETLINK_H
 =======
+=======
+>>>>>>> v3.18
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the version 2 of the GNU General Public License
  * as published by the Free Software Foundation
@@ -23,6 +26,9 @@
 
 #ifndef _UAPI_CAN_NETLINK_H
 #define _UAPI_CAN_NETLINK_H
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/types.h>
@@ -100,17 +106,23 @@ struct can_ctrlmode {
 
 #define CAN_CTRLMODE_LOOPBACK		0x01	/* Loopback mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CAN_CTRLMODE_LISTENONLY		0x02 	/* Listen-only mode */
 #define CAN_CTRLMODE_3_SAMPLES		0x04	/* Triple sampling mode */
 #define CAN_CTRLMODE_ONE_SHOT		0x08	/* One-Shot mode */
 #define CAN_CTRLMODE_BERR_REPORTING	0x10	/* Bus-error reporting */
 =======
+=======
+>>>>>>> v3.18
 #define CAN_CTRLMODE_LISTENONLY		0x02	/* Listen-only mode */
 #define CAN_CTRLMODE_3_SAMPLES		0x04	/* Triple sampling mode */
 #define CAN_CTRLMODE_ONE_SHOT		0x08	/* One-Shot mode */
 #define CAN_CTRLMODE_BERR_REPORTING	0x10	/* Bus-error reporting */
 #define CAN_CTRLMODE_FD			0x20	/* CAN FD mode */
 #define CAN_CTRLMODE_PRESUME_ACK	0x40	/* Ignore missing CAN ACKs */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -139,6 +151,11 @@ enum {
 	IFLA_CAN_RESTART,
 	IFLA_CAN_BERR_COUNTER,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IFLA_CAN_DATA_BITTIMING,
+	IFLA_CAN_DATA_BITTIMING_CONST,
+>>>>>>> v3.18
 =======
 	IFLA_CAN_DATA_BITTIMING,
 	IFLA_CAN_DATA_BITTIMING_CONST,
@@ -149,7 +166,11 @@ enum {
 #define IFLA_CAN_MAX	(__IFLA_CAN_MAX - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CAN_NETLINK_H */
+=======
+#endif /* !_UAPI_CAN_NETLINK_H */
+>>>>>>> v3.18
 =======
 #endif /* !_UAPI_CAN_NETLINK_H */
 >>>>>>> v3.18

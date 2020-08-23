@@ -24,14 +24,20 @@
 #include <linux/seq_file.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/bug.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_fdt.h>
 #include <linux/interrupt.h>
 #include <linux/bug.h>
 #include <linux/pci.h>
 #include <linux/cpufreq.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/machdep.h>
@@ -40,6 +46,11 @@
 #include <asm/rtas.h>
 #include <asm/opal.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/kexec.h>
+#include <asm/smp.h>
+>>>>>>> v3.18
 =======
 #include <asm/kexec.h>
 #include <asm/smp.h>
@@ -50,6 +61,11 @@
 static void __init pnv_setup_arch(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	set_arch_panic_timeout(10, ARCH_PANIC_TIMEOUT);
+
+>>>>>>> v3.18
 =======
 	set_arch_panic_timeout(10, ARCH_PANIC_TIMEOUT);
 
@@ -73,13 +89,19 @@ static void __init pnv_setup_arch(void)
 static void __init pnv_init_early(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Initialize the LPC bus now so that legacy serial
 	 * ports can be found on it
 	 */
 	opal_lpc_init();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_HVC_OPAL
 	if (firmware_has_feature(FW_FEATURE_OPAL))
@@ -117,7 +139,10 @@ static void pnv_show_cpuinfo(struct seq_file *m)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void pnv_prepare_going_down(void)
 {
 	/*
@@ -139,12 +164,20 @@ static void pnv_prepare_going_down(void)
 	opal_flash_term_callback();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void  __noreturn pnv_restart(char *cmd)
 {
 	long rc = OPAL_BUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pnv_prepare_going_down();
+
+>>>>>>> v3.18
 =======
 	pnv_prepare_going_down();
 
@@ -165,6 +198,11 @@ static void __noreturn pnv_power_off(void)
 	long rc = OPAL_BUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pnv_prepare_going_down();
+
+>>>>>>> v3.18
 =======
 	pnv_prepare_going_down();
 
@@ -190,7 +228,10 @@ static void pnv_progress(char *s, unsigned short hex)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int pnv_dma_set_mask(struct device *dev, u64 dma_mask)
 {
 	if (dev_is_pci(dev))
@@ -206,6 +247,9 @@ static u64 pnv_dma_get_required_mask(struct device *dev)
 	return __dma_get_required_mask(dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void pnv_shutdown(void)
 {
@@ -213,19 +257,26 @@ static void pnv_shutdown(void)
 	pnv_pci_shutdown();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* And unregister all OPAL interrupts so they don't fire
 	 * up while we kexec
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Stop OPAL activity: Unregister all OPAL interrupts so they
 	 * don't fire up while we kexec and make sure all potentially
 	 * DMA'ing ops are complete (such as dump retrieval).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	opal_shutdown();
 }
 
 #ifdef CONFIG_KEXEC
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void pnv_kexec_cpu_down(int crash_shutdown, int secondary)
 {
@@ -234,6 +285,8 @@ static void pnv_kexec_cpu_down(int crash_shutdown, int secondary)
 #endif /* CONFIG_KEXEC */
 
 =======
+=======
+>>>>>>> v3.18
 static void pnv_kexec_wait_secondaries_down(void)
 {
 	int my_cpu, i, notified = -1;
@@ -301,6 +354,9 @@ static unsigned long pnv_memory_block_size(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init pnv_setup_machdep_opal(void)
 {
@@ -312,6 +368,12 @@ static void __init pnv_setup_machdep_opal(void)
 	ppc_md.halt = pnv_halt;
 	ppc_md.machine_check_exception = opal_machine_check;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ppc_md.mce_check_early_recovery = opal_mce_check_early_recovery;
+	ppc_md.hmi_exception_early = opal_hmi_exception_early;
+	ppc_md.handle_hmi_exception = opal_handle_hmi_exception;
+>>>>>>> v3.18
 =======
 	ppc_md.mce_check_early_recovery = opal_mce_check_early_recovery;
 	ppc_md.hmi_exception_early = opal_hmi_exception_early;
@@ -355,7 +417,10 @@ static int __init pnv_probe(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Returns the cpu frequency for 'cpu' in Hz. This is used by
  * /proc/cpuinfo
@@ -375,6 +440,9 @@ static unsigned long pnv_get_proc_freq(unsigned int cpu)
 	return ret_freq;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 define_machine(powernv) {
 	.name			= "PowerNV",
@@ -384,6 +452,10 @@ define_machine(powernv) {
 	.init_IRQ		= pnv_init_IRQ,
 	.show_cpuinfo		= pnv_show_cpuinfo,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.get_proc_freq          = pnv_get_proc_freq,
+>>>>>>> v3.18
 =======
 	.get_proc_freq          = pnv_get_proc_freq,
 >>>>>>> v3.18
@@ -392,10 +464,13 @@ define_machine(powernv) {
 	.power_save             = power7_idle,
 	.calibrate_decr		= generic_calibrate_decr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_KEXEC
 	.kexec_cpu_down		= pnv_kexec_cpu_down,
 #endif
 =======
+=======
+>>>>>>> v3.18
 	.dma_set_mask		= pnv_dma_set_mask,
 	.dma_get_required_mask	= pnv_dma_get_required_mask,
 #ifdef CONFIG_KEXEC
@@ -404,5 +479,8 @@ define_machine(powernv) {
 #ifdef CONFIG_MEMORY_HOTPLUG_SPARSE
 	.memory_block_size	= pnv_memory_block_size,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

@@ -11,9 +11,15 @@ These require the following properties:
 - qcom,controller-type
   indicates the SSBI bus variant the controller should use to talk
 <<<<<<< HEAD
+<<<<<<< HEAD
   with the slave device.  This should be one of "ssbi", "ssbi2",
   "pmic-arbiter", "geni-ssbi-arbiter" or "geni-ssbi2-arbiter".
   The type chosen is determined by the attached slave.
+=======
+  with the slave device.  This should be one of "ssbi", "ssbi2", or
+  "pmic-arbiter".  The type chosen is determined by the attached
+  slave.
+>>>>>>> v3.18
 =======
   with the slave device.  This should be one of "ssbi", "ssbi2", or
   "pmic-arbiter".  The type chosen is determined by the attached

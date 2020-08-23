@@ -866,7 +866,11 @@ static int octeon_cf_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cf_port = kzalloc(sizeof(*cf_port), GFP_KERNEL);
+=======
+	cf_port = devm_kzalloc(&pdev->dev, sizeof(*cf_port), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	cf_port = devm_kzalloc(&pdev->dev, sizeof(*cf_port), GFP_KERNEL);
 >>>>>>> v3.18
@@ -886,10 +890,16 @@ static int octeon_cf_probe(struct platform_device *pdev)
 
 	reg_prop = of_find_property(node, "reg", &reg_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!reg_prop || reg_len < sizeof(__be32)) {
 		rv = -EINVAL;
 		goto free_cf_port;
 	}
+=======
+	if (!reg_prop || reg_len < sizeof(__be32))
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (!reg_prop || reg_len < sizeof(__be32))
 		return -EINVAL;
@@ -912,6 +922,7 @@ static int octeon_cf_probe(struct platform_device *pdev)
 				if (!res_dma) {
 					of_node_put(dma_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					rv = -EINVAL;
 					goto free_cf_port;
 				}
@@ -923,6 +934,8 @@ static int octeon_cf_probe(struct platform_device *pdev)
 					rv = -EINVAL;
 					goto free_cf_port;
 =======
+=======
+>>>>>>> v3.18
 					return -EINVAL;
 				}
 				cf_port->dma_base = (u64)devm_ioremap_nocache(&pdev->dev, res_dma->start,
@@ -930,6 +943,9 @@ static int octeon_cf_probe(struct platform_device *pdev)
 				if (!cf_port->dma_base) {
 					of_node_put(dma_node);
 					return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 
@@ -941,6 +957,7 @@ static int octeon_cf_probe(struct platform_device *pdev)
 			of_node_put(dma_node);
 		}
 		res_cs1 = platform_get_resource(pdev, IORESOURCE_MEM, 1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!res_cs1) {
 			rv = -EINVAL;
@@ -957,6 +974,8 @@ static int octeon_cf_probe(struct platform_device *pdev)
 			goto free_cf_port;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (!res_cs1)
 			return -EINVAL;
 
@@ -968,12 +987,16 @@ static int octeon_cf_probe(struct platform_device *pdev)
 		if (reg_len < (n_addr + n_size + 1) * sizeof(__be32))
 			return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cs_num += n_addr + n_size;
 		cf_port->cs1 = be32_to_cpup(cs_num);
 	}
 
 	res_cs0 = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (!res_cs0) {
@@ -987,6 +1010,8 @@ static int octeon_cf_probe(struct platform_device *pdev)
 	if (!cs0)
 		goto free_cf_port;
 =======
+=======
+>>>>>>> v3.18
 	if (!res_cs0)
 		return -EINVAL;
 
@@ -994,13 +1019,20 @@ static int octeon_cf_probe(struct platform_device *pdev)
 				   resource_size(res_cs0));
 	if (!cs0)
 		return rv;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* allocate host */
 	host = ata_host_alloc(&pdev->dev, 1);
 	if (!host)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto free_cf_port;
+=======
+		return rv;
+>>>>>>> v3.18
 =======
 		return rv;
 >>>>>>> v3.18
@@ -1063,6 +1095,7 @@ static int octeon_cf_probe(struct platform_device *pdev)
 	cf_port->c0 = ap->ioaddr.ctl_addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev->dev.coherent_dma_mask = DMA_BIT_MASK(64);
 	pdev->dev.dma_mask = &pdev->dev.coherent_dma_mask;
 
@@ -1070,12 +1103,17 @@ static int octeon_cf_probe(struct platform_device *pdev)
 
 
 =======
+=======
+>>>>>>> v3.18
 	rv = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(64));
 	if (rv)
 		return rv;
 
 	ata_port_desc(ap, "cmd %p ctl %p", base, ap->ioaddr.ctl_addr);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_info(&pdev->dev, "version " DRV_VERSION" %d bit%s.\n",
 		 is_16bit ? 16 : 8,
@@ -1084,10 +1122,13 @@ static int octeon_cf_probe(struct platform_device *pdev)
 	return ata_host_activate(host, irq, irq_handler,
 				 IRQF_SHARED, &octeon_cf_sht);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 free_cf_port:
 	kfree(cf_port);
 	return rv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1098,7 +1139,11 @@ static void octeon_cf_shutdown(struct device *dev)
 	union cvmx_mio_boot_dma_intx dma_int;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct octeon_cf_port *cf_port = dev->platform_data;
+=======
+	struct octeon_cf_port *cf_port = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct octeon_cf_port *cf_port = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -1133,7 +1178,11 @@ static struct of_device_id octeon_cf_match[] = {
 	{},
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DEVICE_TABLE(of, octeon_cf_match);
+=======
+MODULE_DEVICE_TABLE(of, octeon_i2c_match);
+>>>>>>> v3.18
 =======
 MODULE_DEVICE_TABLE(of, octeon_i2c_match);
 >>>>>>> v3.18

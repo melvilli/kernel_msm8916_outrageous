@@ -106,12 +106,15 @@ pte_alloc_one(struct mm_struct *mm, unsigned long address)
 {
 	pgtable_t pte_pg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pte_pg = __get_free_pages(GFP_KERNEL | __GFP_REPEAT, __get_order_pte());
 	if (pte_pg) {
 		memzero((void *)pte_pg, PTRS_PER_PTE * 4);
 		pgtable_page_ctor(virt_to_page(pte_pg));
 =======
+=======
+>>>>>>> v3.18
 	struct page *page;
 
 	pte_pg = __get_free_pages(GFP_KERNEL | __GFP_REPEAT, __get_order_pte());
@@ -122,6 +125,9 @@ pte_alloc_one(struct mm_struct *mm, unsigned long address)
 	if (!pgtable_page_ctor(page)) {
 		__free_page(page);
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

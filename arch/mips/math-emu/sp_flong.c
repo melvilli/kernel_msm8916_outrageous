@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -22,6 +25,7 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
@@ -32,12 +36,17 @@
 
 ieee754sp ieee754sp_flong(s64 x)
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
 #include "ieee754sp.h"
 
 union ieee754sp ieee754sp_flong(s64 x)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u64 xm;		/* <--- need 64-bit mantissa temp */
@@ -45,7 +54,11 @@ union ieee754sp ieee754sp_flong(s64 x)
 	int xs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLEARCX;
+=======
+	ieee754_clearcx();
+>>>>>>> v3.18
 =======
 	ieee754_clearcx();
 >>>>>>> v3.18
@@ -67,6 +80,7 @@ union ieee754sp ieee754sp_flong(s64 x)
 		xm = x;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xe = SP_MBITS + 3;
 
 	if (xm >> (SP_MBITS + 1 + 3)) {
@@ -74,19 +88,28 @@ union ieee754sp ieee754sp_flong(s64 x)
 		 */
 		while (xm >> (SP_MBITS + 1 + 3)) {
 =======
+=======
+>>>>>>> v3.18
 	xe = SP_FBITS + 3;
 
 	if (xm >> (SP_FBITS + 1 + 3)) {
 		/* shunt out overflow bits
 		 */
 		while (xm >> (SP_FBITS + 1 + 3)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			SPXSRSX1();
 		}
 	} else {
 		/* normalize in grs extended single precision */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while ((xm >> (SP_MBITS + 3)) == 0) {
+=======
+		while ((xm >> (SP_FBITS + 3)) == 0) {
+>>>>>>> v3.18
 =======
 		while ((xm >> (SP_FBITS + 3)) == 0) {
 >>>>>>> v3.18
@@ -94,6 +117,7 @@ union ieee754sp ieee754sp_flong(s64 x)
 			xe--;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	SPNORMRET1(xs, xe, xm, "sp_flong", x);
 }
@@ -105,6 +129,9 @@ ieee754sp ieee754sp_fulong(u64 u)
 		return ieee754sp_add(ieee754sp_1e63(),
 				     ieee754sp_flong(u & ~(1ULL << 63)));
 	return ieee754sp_flong(u);
+=======
+	return ieee754sp_format(xs, xe, xm);
+>>>>>>> v3.18
 =======
 	return ieee754sp_format(xs, xe, xm);
 >>>>>>> v3.18

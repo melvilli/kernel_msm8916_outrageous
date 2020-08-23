@@ -27,7 +27,11 @@ char *strchr(const char *s, int c)
 
 	/* Create eight copies of the byte for which we are looking. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const uint64_t goal = 0x0101010101010101ULL * (uint8_t) c;
+=======
+	const uint64_t goal = copy_byte(c);
+>>>>>>> v3.18
 =======
 	const uint64_t goal = copy_byte(c);
 >>>>>>> v3.18

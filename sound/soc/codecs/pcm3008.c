@@ -29,8 +29,11 @@
 #include "pcm3008.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCM3008_VERSION "0.2"
 =======
+=======
+>>>>>>> v3.18
 static int pcm3008_dac_ev(struct snd_soc_dapm_widget *w,
 			  struct snd_kcontrol *kcontrol,
 			  int event)
@@ -79,6 +82,9 @@ static const struct snd_soc_dapm_route pcm3008_dapm_routes[] = {
 	{ "VOUTL", NULL, "DAC" },
 	{ "VOUTR", NULL, "DAC" },
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PCM3008_RATES (SNDRV_PCM_RATE_32000 | SNDRV_PCM_RATE_44100 |	\
@@ -103,6 +109,7 @@ static struct snd_soc_dai_driver pcm3008_dai = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pcm3008_gpio_free(struct pcm3008_setup_data *setup)
 {
 	gpio_free(setup->dem0_pin);
@@ -118,6 +125,8 @@ static int pcm3008_soc_probe(struct snd_soc_codec *codec)
 
 	printk(KERN_INFO "PCM3008 SoC Audio Codec %s\n", PCM3008_VERSION);
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_codec_driver soc_codec_dev_pcm3008 = {
 	.dapm_widgets = pcm3008_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(pcm3008_dapm_widgets),
@@ -132,6 +141,9 @@ static int pcm3008_codec_probe(struct platform_device *pdev)
 
 	if (!setup)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* DEM1  DEM0  DE-EMPHASIS_MODE
@@ -142,6 +154,7 @@ static int pcm3008_codec_probe(struct platform_device *pdev)
 	 */
 
 	/* Configure DEM0 GPIO (turning OFF DAC De-emphasis). */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = gpio_request(setup->dem0_pin, "codec_dem0");
 	if (ret == 0)
@@ -221,6 +234,8 @@ static struct snd_soc_codec_driver soc_codec_dev_pcm3008 = {
 static int pcm3008_codec_probe(struct platform_device *pdev)
 {
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_gpio_request_one(&pdev->dev, setup->dem0_pin,
 				    GPIOF_OUT_INIT_HIGH, "codec_dem0");
 	if (ret != 0)
@@ -244,6 +259,9 @@ static int pcm3008_codec_probe(struct platform_device *pdev)
 	if (ret != 0)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return snd_soc_register_codec(&pdev->dev,
 			&soc_codec_dev_pcm3008, &pcm3008_dai, 1);
@@ -253,6 +271,10 @@ static int pcm3008_codec_remove(struct platform_device *pdev)
 {
 	snd_soc_unregister_codec(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

@@ -18,8 +18,13 @@
 #define ATOMIC64_INIT(i)	{ (i) }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_read(v)		(*(volatile int *)&(v)->counter)
 #define atomic64_read(v)	(*(volatile long *)&(v)->counter)
+=======
+#define atomic_read(v)		ACCESS_ONCE((v)->counter)
+#define atomic64_read(v)	ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 =======
 #define atomic_read(v)		ACCESS_ONCE((v)->counter)
 #define atomic64_read(v)	ACCESS_ONCE((v)->counter)
@@ -34,6 +39,7 @@
  * branch back to restart the operation.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static __inline__ void atomic_add(int i, atomic_t * v)
 {
@@ -175,6 +181,8 @@ static __inline__ long atomic64_sub_return(long i, atomic64_t * v)
 	return result;
 }
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC_OP(op)							\
 static __inline__ void atomic_##op(int i, atomic_t * v)			\
 {									\
@@ -261,6 +269,9 @@ ATOMIC_OPS(sub)
 #undef ATOMIC64_OP
 #undef ATOMIC_OP_RETURN
 #undef ATOMIC_OP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define atomic64_cmpxchg(v, old, new) (cmpxchg(&((v)->counter), old, new))
@@ -281,6 +292,7 @@ ATOMIC_OPS(sub)
 static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int c, old;
 	c = atomic_read(v);
 	for (;;) {
@@ -293,6 +305,8 @@ static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
 	}
 	return c;
 =======
+=======
+>>>>>>> v3.18
 	int c, new, old;
 	smp_mb();
 	__asm__ __volatile__(
@@ -311,6 +325,9 @@ static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
 	: "memory");
 	smp_mb();
 	return old;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -322,6 +339,7 @@ static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
  * @u: ...unless v is equal to u.
  *
  * Atomically adds @a to @v, so long as it was not @u.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Returns the old value of @v.
  */
@@ -339,6 +357,8 @@ static __inline__ int atomic64_add_unless(atomic64_t *v, long a, long u)
 	}
 	return c != (u);
 =======
+=======
+>>>>>>> v3.18
  * Returns true iff @v was not @u.
  */
 static __inline__ int atomic64_add_unless(atomic64_t *v, long a, long u)
@@ -389,6 +409,9 @@ static inline long atomic64_dec_if_positive(atomic64_t *v)
 	: "memory");
 	smp_mb();
 	return old - 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -419,11 +442,14 @@ static inline long atomic64_dec_if_positive(atomic64_t *v)
 #define atomic64_dec(v) atomic64_sub(1,(v))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define smp_mb__before_atomic_dec()	smp_mb()
 #define smp_mb__after_atomic_dec()	smp_mb()
 #define smp_mb__before_atomic_inc()	smp_mb()
 #define smp_mb__after_atomic_inc()	smp_mb()
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ALPHA_ATOMIC_H */

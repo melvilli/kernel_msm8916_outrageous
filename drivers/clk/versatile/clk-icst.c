@@ -34,7 +34,11 @@ struct clk_icst {
 	void __iomem *vcoreg;
 	void __iomem *lockreg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct icst_params *params;
+=======
+	struct icst_params *params;
+>>>>>>> v3.18
 =======
 	struct icst_params *params;
 >>>>>>> v3.18
@@ -89,6 +93,11 @@ static unsigned long icst_recalc_rate(struct clk_hw *hw,
 	struct icst_vco vco;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (parent_rate)
+		icst->params->ref = parent_rate;
+>>>>>>> v3.18
 =======
 	if (parent_rate)
 		icst->params->ref = parent_rate;
@@ -115,6 +124,11 @@ static int icst_set_rate(struct clk_hw *hw, unsigned long rate,
 	struct icst_vco vco;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (parent_rate)
+		icst->params->ref = parent_rate;
+>>>>>>> v3.18
 =======
 	if (parent_rate)
 		icst->params->ref = parent_rate;
@@ -134,6 +148,11 @@ static const struct clk_ops icst_ops = {
 struct clk *icst_clk_register(struct device *dev,
 			const struct clk_icst_desc *desc,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			const char *name,
+			const char *parent_name,
+>>>>>>> v3.18
 =======
 			const char *name,
 			const char *parent_name,
@@ -144,6 +163,10 @@ struct clk *icst_clk_register(struct device *dev,
 	struct clk_icst *icst;
 	struct clk_init_data init;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct icst_params *pclone;
+>>>>>>> v3.18
 =======
 	struct icst_params *pclone;
 >>>>>>> v3.18
@@ -154,6 +177,7 @@ struct clk *icst_clk_register(struct device *dev,
 		return ERR_PTR(-ENOMEM);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init.name = "icst";
 	init.ops = &icst_ops;
 	init.flags = CLK_IS_ROOT;
@@ -162,6 +186,8 @@ struct clk *icst_clk_register(struct device *dev,
 	icst->hw.init = &init;
 	icst->params = desc->params;
 =======
+=======
+>>>>>>> v3.18
 
 	pclone = kmemdup(desc->params, sizeof(*pclone), GFP_KERNEL);
 	if (!pclone) {
@@ -177,6 +203,9 @@ struct clk *icst_clk_register(struct device *dev,
 	init.num_parents = (parent_name ? 1 : 0);
 	icst->hw.init = &init;
 	icst->params = pclone;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	icst->vcoreg = base + desc->vco_offset;
 	icst->lockreg = base + desc->lock_offset;
@@ -188,6 +217,10 @@ struct clk *icst_clk_register(struct device *dev,
 	return clk;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(icst_clk_register);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(icst_clk_register);
 >>>>>>> v3.18

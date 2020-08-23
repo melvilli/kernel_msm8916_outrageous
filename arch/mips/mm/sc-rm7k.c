@@ -7,7 +7,10 @@
 #undef DEBUG
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -108,7 +111,11 @@ static void blast_rm7k_tcache(void)
  * This function is executed in uncached address space.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void __rm7k_tc_enable(void)
+=======
+static void __rm7k_tc_enable(void)
+>>>>>>> v3.18
 =======
 static void __rm7k_tc_enable(void)
 >>>>>>> v3.18
@@ -125,7 +132,11 @@ static void __rm7k_tc_enable(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void rm7k_tc_enable(void)
+=======
+static void rm7k_tc_enable(void)
+>>>>>>> v3.18
 =======
 static void rm7k_tc_enable(void)
 >>>>>>> v3.18
@@ -142,7 +153,11 @@ static void rm7k_tc_enable(void)
  * This function is executed in uncached address space.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void __rm7k_sc_enable(void)
+=======
+static void __rm7k_sc_enable(void)
+>>>>>>> v3.18
 =======
 static void __rm7k_sc_enable(void)
 >>>>>>> v3.18
@@ -159,7 +174,11 @@ static void __rm7k_sc_enable(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void rm7k_sc_enable(void)
+=======
+static void rm7k_sc_enable(void)
+>>>>>>> v3.18
 =======
 static void rm7k_sc_enable(void)
 >>>>>>> v3.18
@@ -204,7 +223,11 @@ static struct bcache_ops rm7k_sc_ops = {
  * wrap around point with different addresses.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void __probe_tcache(void)
+=======
+static void __probe_tcache(void)
+>>>>>>> v3.18
 =======
 static void __probe_tcache(void)
 >>>>>>> v3.18
@@ -250,7 +273,11 @@ static void __probe_tcache(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit rm7k_sc_init(void)
+=======
+void rm7k_sc_init(void)
+>>>>>>> v3.18
 =======
 void rm7k_sc_init(void)
 >>>>>>> v3.18

@@ -14,9 +14,13 @@
 
 	You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
 	along with this program; if not, write to the
 	Free Software Foundation, Inc.,
 	59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+	along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
 	along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -32,7 +36,10 @@
 #include <linux/delay.h>
 #include <linux/etherdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -693,7 +700,11 @@ static void rt61pci_config_antenna_2x(struct rt2x00_dev *rt2x00dev,
 	rt2x00_set_field8(&r3, BBP_R3_SMART_MODE, rt2x00_rf(rt2x00dev, RF2529));
 	rt2x00_set_field8(&r4, BBP_R4_RX_FRAME_END,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  !test_bit(CAPABILITY_FRAME_TYPE, &rt2x00dev->cap_flags));
+=======
+			  !rt2x00_has_cap_frame_type(rt2x00dev));
+>>>>>>> v3.18
 =======
 			  !rt2x00_has_cap_frame_type(rt2x00dev));
 >>>>>>> v3.18
@@ -825,15 +836,21 @@ static void rt61pci_config_ant(struct rt2x00_dev *rt2x00dev,
 	if (rt2x00dev->curr_band == IEEE80211_BAND_5GHZ) {
 		sel = antenna_sel_a;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lna = test_bit(CAPABILITY_EXTERNAL_LNA_A, &rt2x00dev->cap_flags);
 	} else {
 		sel = antenna_sel_bg;
 		lna = test_bit(CAPABILITY_EXTERNAL_LNA_BG, &rt2x00dev->cap_flags);
 =======
+=======
+>>>>>>> v3.18
 		lna = rt2x00_has_cap_external_lna_a(rt2x00dev);
 	} else {
 		sel = antenna_sel_bg;
 		lna = rt2x00_has_cap_external_lna_bg(rt2x00dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -855,7 +872,11 @@ static void rt61pci_config_ant(struct rt2x00_dev *rt2x00dev,
 		rt61pci_config_antenna_2x(rt2x00dev, ant);
 	else if (rt2x00_rf(rt2x00dev, RF2529)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(CAPABILITY_DOUBLE_ANTENNA, &rt2x00dev->cap_flags))
+=======
+		if (rt2x00_has_cap_double_antenna(rt2x00dev))
+>>>>>>> v3.18
 =======
 		if (rt2x00_has_cap_double_antenna(rt2x00dev))
 >>>>>>> v3.18
@@ -873,7 +894,11 @@ static void rt61pci_config_lna_gain(struct rt2x00_dev *rt2x00dev,
 
 	if (libconf->conf->chandef.chan->band == IEEE80211_BAND_2GHZ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(CAPABILITY_EXTERNAL_LNA_BG, &rt2x00dev->cap_flags))
+=======
+		if (rt2x00_has_cap_external_lna_bg(rt2x00dev))
+>>>>>>> v3.18
 =======
 		if (rt2x00_has_cap_external_lna_bg(rt2x00dev))
 >>>>>>> v3.18
@@ -883,7 +908,11 @@ static void rt61pci_config_lna_gain(struct rt2x00_dev *rt2x00dev,
 		lna_gain -= rt2x00_get_field16(eeprom, EEPROM_RSSI_OFFSET_BG_1);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(CAPABILITY_EXTERNAL_LNA_A, &rt2x00dev->cap_flags))
+=======
+		if (rt2x00_has_cap_external_lna_a(rt2x00dev))
+>>>>>>> v3.18
 =======
 		if (rt2x00_has_cap_external_lna_a(rt2x00dev))
 >>>>>>> v3.18
@@ -1085,7 +1114,11 @@ static void rt61pci_link_tuner(struct rt2x00_dev *rt2x00dev,
 		low_bound = 0x28;
 		up_bound = 0x48;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(CAPABILITY_EXTERNAL_LNA_A, &rt2x00dev->cap_flags)) {
+=======
+		if (rt2x00_has_cap_external_lna_a(rt2x00dev)) {
+>>>>>>> v3.18
 =======
 		if (rt2x00_has_cap_external_lna_a(rt2x00dev)) {
 >>>>>>> v3.18
@@ -1096,7 +1129,11 @@ static void rt61pci_link_tuner(struct rt2x00_dev *rt2x00dev,
 		low_bound = 0x20;
 		up_bound = 0x40;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(CAPABILITY_EXTERNAL_LNA_BG, &rt2x00dev->cap_flags)) {
+=======
+		if (rt2x00_has_cap_external_lna_bg(rt2x00dev)) {
+>>>>>>> v3.18
 =======
 		if (rt2x00_has_cap_external_lna_bg(rt2x00dev)) {
 >>>>>>> v3.18
@@ -2073,7 +2110,11 @@ static void rt61pci_clear_beacon(struct queue_entry *entry)
 {
 	struct rt2x00_dev *rt2x00dev = entry->queue->rt2x00dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reg;
+=======
+	u32 orig_reg, reg;
+>>>>>>> v3.18
 =======
 	u32 orig_reg, reg;
 >>>>>>> v3.18
@@ -2083,7 +2124,12 @@ static void rt61pci_clear_beacon(struct queue_entry *entry)
 	 * otherwise we might be sending out invalid data.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rt2x00mmio_register_read(rt2x00dev, TXRX_CSR9, &reg);
+=======
+	rt2x00mmio_register_read(rt2x00dev, TXRX_CSR9, &orig_reg);
+	reg = orig_reg;
+>>>>>>> v3.18
 =======
 	rt2x00mmio_register_read(rt2x00dev, TXRX_CSR9, &orig_reg);
 	reg = orig_reg;
@@ -2099,10 +2145,16 @@ static void rt61pci_clear_beacon(struct queue_entry *entry)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Enable beaconing again.
 	 */
 	rt2x00_set_field32(&reg, TXRX_CSR9_BEACON_GEN, 1);
 	rt2x00mmio_register_write(rt2x00dev, TXRX_CSR9, reg);
+=======
+	 * Restore global beaconing state.
+	 */
+	rt2x00mmio_register_write(rt2x00dev, TXRX_CSR9, orig_reg);
+>>>>>>> v3.18
 =======
 	 * Restore global beaconing state.
 	 */
@@ -2229,7 +2281,11 @@ static void rt61pci_txdone(struct rt2x00_dev *rt2x00dev)
 	 * tx ring size for now.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < rt2x00dev->ops->tx->entry_num; i++) {
+=======
+	for (i = 0; i < rt2x00dev->tx->limit; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < rt2x00dev->tx->limit; i++) {
 >>>>>>> v3.18
@@ -2636,7 +2692,11 @@ static int rt61pci_init_eeprom(struct rt2x00_dev *rt2x00dev)
 	 */
 	if (rt2x00_rf(rt2x00dev, RF2529) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !test_bit(CAPABILITY_DOUBLE_ANTENNA, &rt2x00dev->cap_flags)) {
+=======
+	    !rt2x00_has_cap_double_antenna(rt2x00dev)) {
+>>>>>>> v3.18
 =======
 	    !rt2x00_has_cap_double_antenna(rt2x00dev)) {
 >>>>>>> v3.18
@@ -2855,7 +2915,11 @@ static int rt61pci_probe_hw_mode(struct rt2x00_dev *rt2x00dev)
 	spec->supported_rates = SUPPORT_RATE_CCK | SUPPORT_RATE_OFDM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(CAPABILITY_RF_SEQUENCE, &rt2x00dev->cap_flags)) {
+=======
+	if (!rt2x00_has_cap_rf_sequence(rt2x00dev)) {
+>>>>>>> v3.18
 =======
 	if (!rt2x00_has_cap_rf_sequence(rt2x00dev)) {
 >>>>>>> v3.18
@@ -3092,6 +3156,7 @@ static const struct rt2x00lib_ops rt61pci_rt2x00_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct data_queue_desc rt61pci_queue_rx = {
 	.entry_num		= 32,
 	.data_size		= DATA_FRAME_SIZE,
@@ -3113,6 +3178,8 @@ static const struct data_queue_desc rt61pci_queue_bcn = {
 	.priv_size		= sizeof(struct queue_entry_priv_mmio),
 };
 =======
+=======
+>>>>>>> v3.18
 static void rt61pci_queue_init(struct data_queue *queue)
 {
 	switch (queue->qid) {
@@ -3147,6 +3214,9 @@ static void rt61pci_queue_init(struct data_queue *queue)
 		break;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct rt2x00_ops rt61pci_ops = {
@@ -3156,10 +3226,14 @@ static const struct rt2x00_ops rt61pci_ops = {
 	.rf_size		= RF_SIZE,
 	.tx_queues		= NUM_TX_QUEUES,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.extra_tx_headroom	= 0,
 	.rx			= &rt61pci_queue_rx,
 	.tx			= &rt61pci_queue_tx,
 	.bcn			= &rt61pci_queue_bcn,
+=======
+	.queue_init		= rt61pci_queue_init,
+>>>>>>> v3.18
 =======
 	.queue_init		= rt61pci_queue_init,
 >>>>>>> v3.18
@@ -3174,7 +3248,11 @@ static const struct rt2x00_ops rt61pci_ops = {
  * RT61pci module information.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(rt61pci_device_table) = {
+=======
+static const struct pci_device_id rt61pci_device_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id rt61pci_device_table[] = {
 >>>>>>> v3.18

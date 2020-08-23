@@ -65,8 +65,12 @@ bool radeon_ddc_probe(struct radeon_connector *radeon_connector, bool use_aux)
 
 	if (use_aux) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct radeon_connector_atom_dig *dig = radeon_connector->con_priv;
 		ret = i2c_transfer(&dig->dp_i2c_bus->adapter, msgs, 2);
+=======
+		ret = i2c_transfer(&radeon_connector->ddc_bus->aux.ddc, msgs, 2);
+>>>>>>> v3.18
 =======
 		ret = i2c_transfer(&radeon_connector->ddc_bus->aux.ddc, msgs, 2);
 >>>>>>> v3.18
@@ -100,6 +104,11 @@ static int pre_xfer(struct i2c_adapter *i2c_adap)
 	uint32_t temp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&i2c->mutex);
+
+>>>>>>> v3.18
 =======
 	mutex_lock(&i2c->mutex);
 
@@ -181,6 +190,11 @@ static void post_xfer(struct i2c_adapter *i2c_adap)
 	WREG32(rec->mask_data_reg, temp);
 	temp = RREG32(rec->mask_data_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	mutex_unlock(&i2c->mutex);
+>>>>>>> v3.18
 =======
 
 	mutex_unlock(&i2c->mutex);
@@ -829,6 +843,11 @@ static int radeon_hw_i2c_xfer(struct i2c_adapter *i2c_adap,
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&i2c->mutex);
+
+>>>>>>> v3.18
 =======
 	mutex_lock(&i2c->mutex);
 
@@ -900,6 +919,11 @@ static int radeon_hw_i2c_xfer(struct i2c_adapter *i2c_adap,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&i2c->mutex);
+
+>>>>>>> v3.18
 =======
 	mutex_unlock(&i2c->mutex);
 
@@ -945,6 +969,10 @@ struct radeon_i2c_chan *radeon_i2c_create(struct drm_device *dev,
 	i2c->dev = dev;
 	i2c_set_adapdata(&i2c->adapter, i2c);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&i2c->mutex);
+>>>>>>> v3.18
 =======
 	mutex_init(&i2c->mutex);
 >>>>>>> v3.18
@@ -979,6 +1007,7 @@ struct radeon_i2c_chan *radeon_i2c_create(struct drm_device *dev,
 		snprintf(i2c->adapter.name, sizeof(i2c->adapter.name),
 			 "Radeon i2c bit bus %s", name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		i2c->adapter.algo_data = &i2c->algo.bit;
 		i2c->algo.bit.pre_xfer = pre_xfer;
 		i2c->algo.bit.post_xfer = post_xfer;
@@ -990,6 +1019,8 @@ struct radeon_i2c_chan *radeon_i2c_create(struct drm_device *dev,
 		i2c->algo.bit.timeout = usecs_to_jiffies(2200);	/* from VESA */
 		i2c->algo.bit.data = i2c;
 =======
+=======
+>>>>>>> v3.18
 		i2c->adapter.algo_data = &i2c->bit;
 		i2c->bit.pre_xfer = pre_xfer;
 		i2c->bit.post_xfer = post_xfer;
@@ -1000,6 +1031,9 @@ struct radeon_i2c_chan *radeon_i2c_create(struct drm_device *dev,
 		i2c->bit.udelay = 10;
 		i2c->bit.timeout = usecs_to_jiffies(2200);	/* from VESA */
 		i2c->bit.data = i2c;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = i2c_bit_add_bus(&i2c->adapter);
 		if (ret) {
@@ -1015,6 +1049,7 @@ out_free:
 
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct radeon_i2c_chan *radeon_i2c_create_dp(struct drm_device *dev,
 					     struct radeon_i2c_bus_rec *rec,
@@ -1053,12 +1088,19 @@ out_free:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void radeon_i2c_destroy(struct radeon_i2c_chan *i2c)
 {
 	if (!i2c)
 		return;
 	i2c_del_adapter(&i2c->adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (i2c->has_aux)
+		drm_dp_aux_unregister(&i2c->aux);
+>>>>>>> v3.18
 =======
 	if (i2c->has_aux)
 		drm_dp_aux_unregister(&i2c->aux);

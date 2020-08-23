@@ -19,7 +19,10 @@
 #include <linux/notifier.h>
 #include <linux/regulator/consumer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/regulator/proxy-consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -45,7 +48,10 @@ enum regulator_status {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct regulator_linear_range - specify linear voltage ranges
  *
  * Specify a range of voltages for regulator_map_linar_range() and
@@ -73,6 +79,9 @@ struct regulator_linear_range {
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * struct regulator_ops - regulator operations.
  *
@@ -211,6 +220,11 @@ enum regulator_type {
  * @name: Identifying name for the regulator.
  * @supply_name: Identifying the regulator supply
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @of_match: Name used to identify regulator in DT.
+ * @regulators_node: Name of node containing regulator definitions in DT.
+>>>>>>> v3.18
 =======
  * @of_match: Name used to identify regulator in DT.
  * @regulators_node: Name of node containing regulator definitions in DT.
@@ -229,12 +243,18 @@ enum regulator_type {
  * @uV_step: Voltage increase with each selector (if linear mapping)
  * @linear_min_sel: Minimal selector for starting linear mapping
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ramp_delay: Time to settle down after voltage change (unit: uV/us)
 =======
+=======
+>>>>>>> v3.18
  * @fixed_uV: Fixed voltage of rails.
  * @ramp_delay: Time to settle down after voltage change (unit: uV/us)
  * @linear_ranges: A constant table of possible voltage ranges.
  * @n_linear_ranges: Number of entries in the @linear_ranges table.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @volt_table: Voltage mapping table (if table based mapping)
  *
@@ -247,6 +267,11 @@ enum regulator_type {
  * @enable_reg: Register for control when using regmap enable/disable ops
  * @enable_mask: Mask for control when using regmap enable/disable ops
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @enable_val: Enabling value for control when using regmap enable/disable ops
+ * @disable_val: Disabling value for control when using regmap enable/disable ops
+>>>>>>> v3.18
 =======
  * @enable_val: Enabling value for control when using regmap enable/disable ops
  * @disable_val: Disabling value for control when using regmap enable/disable ops
@@ -256,31 +281,43 @@ enum regulator_type {
  * @bypass_reg: Register for control when using regmap set_bypass
  * @bypass_mask: Mask for control when using regmap set_bypass
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * @enable_time: Time taken for initial enable of regulator (in uS).
 =======
+=======
+>>>>>>> v3.18
  * @bypass_val_on: Enabling value for control when using regmap set_bypass
  * @bypass_val_off: Disabling value for control when using regmap set_bypass
  *
  * @enable_time: Time taken for initial enable of regulator (in uS).
  * @off_on_delay: guard time (in uS), before re-enabling a regulator
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct regulator_desc {
 	const char *name;
 	const char *supply_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int id;
 	bool continuous_voltage_range;
 	unsigned n_voltages;
 	struct regulator_ops *ops;
 =======
+=======
+>>>>>>> v3.18
 	const char *of_match;
 	const char *regulators_node;
 	int id;
 	bool continuous_voltage_range;
 	unsigned n_voltages;
 	const struct regulator_ops *ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int irq;
 	enum regulator_type type;
@@ -290,15 +327,21 @@ struct regulator_desc {
 	unsigned int uV_step;
 	unsigned int linear_min_sel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ramp_delay;
 
 =======
+=======
+>>>>>>> v3.18
 	int fixed_uV;
 	unsigned int ramp_delay;
 
 	const struct regulator_linear_range *linear_ranges;
 	int n_linear_ranges;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const unsigned int *volt_table;
 
@@ -309,12 +352,15 @@ struct regulator_desc {
 	unsigned int enable_reg;
 	unsigned int enable_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool enable_is_inverted;
 	unsigned int bypass_reg;
 	unsigned int bypass_mask;
 
 	unsigned int enable_time;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int enable_val;
 	unsigned int disable_val;
 	bool enable_is_inverted;
@@ -326,6 +372,9 @@ struct regulator_desc {
 	unsigned int enable_time;
 
 	unsigned int off_on_delay;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -400,7 +449,13 @@ struct regulator_dev {
 	struct regulator_enable_gpio *ena_pin;
 	unsigned int ena_gpio_state:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct proxy_consumer *proxy_consumer;
+=======
+
+	/* time when this regulator was disabled last time */
+	unsigned long last_off_jiffy;
+>>>>>>> v3.18
 =======
 
 	/* time when this regulator was disabled last time */
@@ -412,14 +467,20 @@ struct regulator_dev *
 regulator_register(const struct regulator_desc *regulator_desc,
 		   const struct regulator_config *config);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void regulator_unregister(struct regulator_dev *rdev);
 =======
+=======
+>>>>>>> v3.18
 struct regulator_dev *
 devm_regulator_register(struct device *dev,
 			const struct regulator_desc *regulator_desc,
 			const struct regulator_config *config);
 void regulator_unregister(struct regulator_dev *rdev);
 void devm_regulator_unregister(struct device *dev, struct regulator_dev *rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int regulator_notifier_call_chain(struct regulator_dev *rdev,
@@ -434,6 +495,11 @@ int regulator_mode_to_status(unsigned int);
 int regulator_list_voltage_linear(struct regulator_dev *rdev,
 				  unsigned int selector);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int regulator_list_voltage_linear_range(struct regulator_dev *rdev,
+					unsigned int selector);
+>>>>>>> v3.18
 =======
 int regulator_list_voltage_linear_range(struct regulator_dev *rdev,
 					unsigned int selector);
@@ -443,6 +509,11 @@ int regulator_list_voltage_table(struct regulator_dev *rdev,
 int regulator_map_voltage_linear(struct regulator_dev *rdev,
 				  int min_uV, int max_uV);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int regulator_map_voltage_linear_range(struct regulator_dev *rdev,
+				       int min_uV, int max_uV);
+>>>>>>> v3.18
 =======
 int regulator_map_voltage_linear_range(struct regulator_dev *rdev,
 				       int min_uV, int max_uV);

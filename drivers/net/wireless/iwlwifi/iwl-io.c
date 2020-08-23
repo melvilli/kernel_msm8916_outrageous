@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2003 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -38,6 +42,11 @@
 #include "iwl-csr.h"
 #include "iwl-debug.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "iwl-prph.h"
+#include "iwl-fh.h"
+>>>>>>> v3.18
 =======
 #include "iwl-prph.h"
 #include "iwl-fh.h"
@@ -102,7 +111,11 @@ int iwl_poll_direct_bit(struct iwl_trans *trans, u32 addr, u32 mask,
 IWL_EXPORT_SYMBOL(iwl_poll_direct_bit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 __iwl_read_prph(struct iwl_trans *trans, u32 ofs)
+=======
+u32 __iwl_read_prph(struct iwl_trans *trans, u32 ofs)
+>>>>>>> v3.18
 =======
 u32 __iwl_read_prph(struct iwl_trans *trans, u32 ofs)
 >>>>>>> v3.18
@@ -113,7 +126,11 @@ u32 __iwl_read_prph(struct iwl_trans *trans, u32 ofs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __iwl_write_prph(struct iwl_trans *trans, u32 ofs, u32 val)
+=======
+void __iwl_write_prph(struct iwl_trans *trans, u32 ofs, u32 val)
+>>>>>>> v3.18
 =======
 void __iwl_write_prph(struct iwl_trans *trans, u32 ofs, u32 val)
 >>>>>>> v3.18
@@ -147,7 +164,10 @@ void iwl_write_prph(struct iwl_trans *trans, u32 ofs, u32 val)
 IWL_EXPORT_SYMBOL(iwl_write_prph);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int iwl_poll_prph_bit(struct iwl_trans *trans, u32 addr,
 		      u32 bits, u32 mask, int timeout)
 {
@@ -163,6 +183,9 @@ int iwl_poll_prph_bit(struct iwl_trans *trans, u32 addr,
 	return -ETIMEDOUT;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void iwl_set_bits_prph(struct iwl_trans *trans, u32 ofs, u32 mask)
 {
@@ -202,7 +225,10 @@ void iwl_clear_bits_prph(struct iwl_trans *trans, u32 ofs, u32 mask)
 }
 IWL_EXPORT_SYMBOL(iwl_clear_bits_prph);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void iwl_force_nmi(struct iwl_trans *trans)
 {
@@ -285,4 +311,7 @@ int iwl_dump_fh(struct iwl_trans *trans, char **buf)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

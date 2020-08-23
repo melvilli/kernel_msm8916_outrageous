@@ -28,6 +28,7 @@
 #include <linux/netfilter_ipv6/ip6_tables.h>
 #include <net/netfilter/nf_log.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/netfilter/xt_log.h>
 
 static struct nf_loginfo default_loginfo = {
@@ -830,6 +831,8 @@ ip6t_log_packet(struct net *net,
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 static unsigned int
 log_tg(struct sk_buff *skb, const struct xt_action_param *par)
@@ -843,6 +846,7 @@ log_tg(struct sk_buff *skb, const struct xt_action_param *par)
 	li.u.log.logflags = loginfo->logflags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (par->family == NFPROTO_IPV4)
 		ipt_log_packet(net, NFPROTO_IPV4, par->hooknum, skb, par->in,
 			       par->out, &li, loginfo->prefix);
@@ -854,6 +858,10 @@ log_tg(struct sk_buff *skb, const struct xt_action_param *par)
 	else
 		WARN_ON_ONCE(1);
 
+=======
+	nf_log_packet(net, par->family, par->hooknum, skb, par->in, par->out,
+		      &li, "%s", loginfo->prefix);
+>>>>>>> v3.18
 =======
 	nf_log_packet(net, par->family, par->hooknum, skb, par->in, par->out,
 		      &li, "%s", loginfo->prefix);
@@ -879,14 +887,20 @@ static int log_tg_check(const struct xt_tgchk_param *par)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	return nf_logger_find_get(par->family, NF_LOG_TYPE_LOG);
 }
 
 static void log_tg_destroy(const struct xt_tgdtor_param *par)
 {
 	nf_logger_put(par->family, NF_LOG_TYPE_LOG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -898,6 +912,10 @@ static struct xt_target log_tg_regs[] __read_mostly = {
 		.targetsize	= sizeof(struct xt_log_info),
 		.checkentry	= log_tg_check,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.destroy	= log_tg_destroy,
+>>>>>>> v3.18
 =======
 		.destroy	= log_tg_destroy,
 >>>>>>> v3.18
@@ -911,6 +929,10 @@ static struct xt_target log_tg_regs[] __read_mostly = {
 		.targetsize	= sizeof(struct xt_log_info),
 		.checkentry	= log_tg_check,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.destroy	= log_tg_destroy,
+>>>>>>> v3.18
 =======
 		.destroy	= log_tg_destroy,
 >>>>>>> v3.18
@@ -919,6 +941,7 @@ static struct xt_target log_tg_regs[] __read_mostly = {
 #endif
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct nf_logger ipt_log_logger __read_mostly = {
 	.name		= "ipt_LOG",
@@ -983,16 +1006,24 @@ static int __init log_tg_init(void)
 {
 	return xt_register_targets(log_tg_regs, ARRAY_SIZE(log_tg_regs));
 >>>>>>> v3.18
+=======
+static int __init log_tg_init(void)
+{
+	return xt_register_targets(log_tg_regs, ARRAY_SIZE(log_tg_regs));
+>>>>>>> v3.18
 }
 
 static void __exit log_tg_exit(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unregister_pernet_subsys(&log_net_ops);
 	nf_log_unregister(&ipt_log_logger);
 #if IS_ENABLED(CONFIG_IP6_NF_IPTABLES)
 	nf_log_unregister(&ip6t_log_logger);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	xt_unregister_targets(log_tg_regs, ARRAY_SIZE(log_tg_regs));

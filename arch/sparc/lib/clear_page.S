@@ -38,15 +38,21 @@ _clear_page:		/* %o0=dest */
 clear_user_page:	/* %o0=dest, %o1=vaddr */
 	lduw		[%g6 + TI_PRE_COUNT], %o2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sethi		%uhi(PAGE_OFFSET), %g2
 	sethi		%hi(PAGE_SIZE), %o4
 
 	sllx		%g2, 32, %g2
 =======
+=======
+>>>>>>> v3.18
 	sethi		%hi(PAGE_OFFSET), %g2
 	sethi		%hi(PAGE_SIZE), %o4
 
 	ldx		[%g2 + %lo(PAGE_OFFSET)], %g2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sethi		%hi(PAGE_KERNEL_LOCKED), %g3
 

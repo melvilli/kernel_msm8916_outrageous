@@ -92,7 +92,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct ad7746_chip_info - chip specifc information
+=======
+ * struct ad7746_chip_info - chip specific information
+>>>>>>> v3.18
 =======
  * struct ad7746_chip_info - chip specific information
 >>>>>>> v3.18
@@ -110,12 +114,18 @@ struct ad7746_chip_info {
 	u8	capdac[2][2];
 	s8	capdac_set;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	union {
 		__be32 d32;
 		u8 d8[4];
 	} data ____cacheline_aligned;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -579,11 +589,14 @@ static int ad7746_read_raw(struct iio_dev *indio_dev,
 	u8 regval, reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union {
 		u32 d32;
 		u8 d8[4];
 	} data;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&indio_dev->mlock);
@@ -607,7 +620,11 @@ static int ad7746_read_raw(struct iio_dev *indio_dev,
 
 		ret = i2c_smbus_read_i2c_block_data(chip->client,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			chan->address >> 8, 3, &data.d8[1]);
+=======
+			chan->address >> 8, 3, &chip->data.d8[1]);
+>>>>>>> v3.18
 =======
 			chan->address >> 8, 3, &chip->data.d8[1]);
 >>>>>>> v3.18
@@ -616,7 +633,11 @@ static int ad7746_read_raw(struct iio_dev *indio_dev,
 			goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*val = (be32_to_cpu(data.d32) & 0xFFFFFF) - 0x800000;
+=======
+		*val = (be32_to_cpu(chip->data.d32) & 0xFFFFFF) - 0x800000;
+>>>>>>> v3.18
 =======
 		*val = (be32_to_cpu(chip->data.d32) & 0xFFFFFF) - 0x800000;
 >>>>>>> v3.18
@@ -680,6 +701,7 @@ static int ad7746_read_raw(struct iio_dev *indio_dev,
 		case IIO_CAPACITANCE:
 			/* 8.192pf / 2^24 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*val2 = 488;
 			*val =  0;
 			break;
@@ -695,6 +717,8 @@ static int ad7746_read_raw(struct iio_dev *indio_dev,
 
 		ret = IIO_VAL_INT_PLUS_NANO;
 =======
+=======
+>>>>>>> v3.18
 			*val =  0;
 			*val2 = 488;
 			ret = IIO_VAL_INT_PLUS_NANO;
@@ -710,6 +734,9 @@ static int ad7746_read_raw(struct iio_dev *indio_dev,
 			break;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -741,11 +768,17 @@ static int ad7746_probe(struct i2c_client *client,
 	unsigned char regval = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*chip));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*chip));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*chip));
 	if (!indio_dev)
@@ -796,28 +829,37 @@ static int ad7746_probe(struct i2c_client *client,
 					AD7746_REG_EXC_SETUP, regval);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
 
 	ret = iio_device_register(indio_dev);
 	if (ret)
 		goto error_free_dev;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 
 	ret = iio_device_register(indio_dev);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_info(&client->dev, "%s capacitive sensor registered\n", id->name);
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 error_free_dev:
 	iio_device_free(indio_dev);
 error_ret:
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -828,7 +870,10 @@ static int ad7746_remove(struct i2c_client *client)
 
 	iio_device_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

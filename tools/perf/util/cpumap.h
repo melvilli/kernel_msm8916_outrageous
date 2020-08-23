@@ -5,6 +5,12 @@
 #include <stdbool.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "perf.h"
+#include "util/debug.h"
+
+>>>>>>> v3.18
 =======
 #include "perf.h"
 #include "util/debug.h"
@@ -48,7 +54,11 @@ static inline int cpu_map__nr(const struct cpu_map *map)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool cpu_map__all(const struct cpu_map *map)
+=======
+static inline bool cpu_map__empty(const struct cpu_map *map)
+>>>>>>> v3.18
 =======
 static inline bool cpu_map__empty(const struct cpu_map *map)
 >>>>>>> v3.18
@@ -57,7 +67,10 @@ static inline bool cpu_map__empty(const struct cpu_map *map)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int max_cpu_num;
 int max_node_num;
 int *cpunode_map;
@@ -90,5 +103,8 @@ static inline int cpu__get_node(int cpu)
 	return cpunode_map[cpu];
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __PERF_CPUMAP_H */

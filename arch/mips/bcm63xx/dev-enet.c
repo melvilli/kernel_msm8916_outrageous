@@ -10,6 +10,10 @@
 #include <linux/kernel.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/export.h>
+>>>>>>> v3.18
 =======
 #include <linux/export.h>
 >>>>>>> v3.18
@@ -18,7 +22,10 @@
 #include <bcm63xx_regs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const unsigned long bcm6348_regs_enetdmac[] = {
 	[ENETDMAC_CHANCFG]	= ENETDMAC_CHANCFG_REG,
 	[ENETDMAC_IR]		= ENETDMAC_IR_REG,
@@ -48,6 +55,9 @@ static __init void bcm63xx_enetdmac_regs_init(void)
 		bcm63xx_regs_enetdmac = bcm6348_regs_enetdmac;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct resource shared_res[] = {
 	{
@@ -56,7 +66,10 @@ static struct resource shared_res[] = {
 		.flags		= IORESOURCE_MEM,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.start		= -1, /* filled at runtime */
 		.end		= -1, /* filled at runtime */
@@ -67,6 +80,9 @@ static struct resource shared_res[] = {
 		.end		= -1, /* filled at runtime */
 		.flags		= IORESOURCE_MEM,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -144,7 +160,10 @@ static struct platform_device bcm63xx_enet1_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct resource enetsw_res[] = {
 	{
 		/* start & end filled at runtime */
@@ -210,6 +229,9 @@ static int __init register_shared(void)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int __init bcm63xx_enet_register(int unit,
 				 const struct bcm63xx_enet_platform_data *pd)
@@ -221,6 +243,7 @@ int __init bcm63xx_enet_register(int unit,
 	if (unit > 1)
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (unit == 1 && BCMCPU_IS_6338())
 		return -ENODEV;
@@ -239,12 +262,17 @@ int __init bcm63xx_enet_register(int unit,
 		shared_device_registered = 1;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (unit == 1 && (BCMCPU_IS_6338() || BCMCPU_IS_6345()))
 		return -ENODEV;
 
 	ret = register_shared();
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unit == 0) {
@@ -282,7 +310,10 @@ int __init bcm63xx_enet_register(int unit,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	dpd->dma_chan_en_mask = ENETDMAC_CHANCFG_EN_MASK;
 	dpd->dma_chan_int_mask = ENETDMAC_IR_PKTDONE_MASK;
 	if (BCMCPU_IS_6345()) {
@@ -298,6 +329,9 @@ int __init bcm63xx_enet_register(int unit,
 		dpd->dma_chan_width = ENETDMA_CHAN_WIDTH;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = platform_device_register(pdev);
 	if (ret)
@@ -305,7 +339,10 @@ int __init bcm63xx_enet_register(int unit,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int __init
 bcm63xx_enetsw_register(const struct bcm63xx_enetsw_platform_data *pd)
@@ -345,4 +382,7 @@ bcm63xx_enetsw_register(const struct bcm63xx_enetsw_platform_data *pd)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

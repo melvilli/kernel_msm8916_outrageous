@@ -47,11 +47,14 @@
 
 static int load_elf_binary(struct linux_binprm *bprm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int load_elf_library(struct file *);
 static unsigned long elf_map(struct file *, unsigned long, struct elf_phdr *,
 				int, int, unsigned long);
 
 =======
+=======
+>>>>>>> v3.18
 static unsigned long elf_map(struct file *, unsigned long, struct elf_phdr *,
 				int, int, unsigned long);
 
@@ -61,6 +64,9 @@ static int load_elf_library(struct file *);
 #define load_elf_library NULL
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * If we don't support core dumping, then supply a NULL so we
@@ -419,7 +425,11 @@ static unsigned long load_elf_interp(struct elfhdr *interp_elf_ex,
 	if (!elf_check_arch(interp_elf_ex))
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!interpreter->f_op || !interpreter->f_op->mmap)
+=======
+	if (!interpreter->f_op->mmap)
+>>>>>>> v3.18
 =======
 	if (!interpreter->f_op->mmap)
 >>>>>>> v3.18
@@ -560,9 +570,12 @@ out:
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INTERPRETER_NONE 0
 #define INTERPRETER_ELF 2
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef STACK_RND_MASK
@@ -572,6 +585,7 @@ out:
 static unsigned long randomize_stack_top(unsigned long stack_top)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long random_variable = 0;
 
 	if ((current->flags & PF_RANDOMIZE) &&
@@ -579,11 +593,16 @@ static unsigned long randomize_stack_top(unsigned long stack_top)
 		random_variable = (unsigned long) get_random_int();
 		random_variable &= STACK_RND_MASK;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int random_variable = 0;
 
 	if ((current->flags & PF_RANDOMIZE) &&
 		!(current->personality & ADDR_NO_RANDOMIZE)) {
 		random_variable = get_random_int() & STACK_RND_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		random_variable <<= PAGE_SHIFT;
 	}
@@ -611,7 +630,10 @@ static int load_elf_binary(struct linux_binprm *bprm)
 	unsigned long reloc_func_desc __maybe_unused = 0;
 	int executable_stack = EXSTACK_DEFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long def_flags = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct pt_regs *regs = current_pt_regs();
@@ -639,7 +661,11 @@ static int load_elf_binary(struct linux_binprm *bprm)
 	if (!elf_check_arch(&loc->elf_ex))
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bprm->file->f_op || !bprm->file->f_op->mmap)
+=======
+	if (!bprm->file->f_op->mmap)
+>>>>>>> v3.18
 =======
 	if (!bprm->file->f_op->mmap)
 >>>>>>> v3.18
@@ -717,11 +743,17 @@ static int load_elf_binary(struct linux_binprm *bprm)
 			would_dump(bprm, interpreter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Get the exec headers */
 			retval = kernel_read(interpreter, 0,
 					     (void *)&loc->interp_elf_ex,
 					     sizeof(loc->interp_elf_ex));
 			if (retval != sizeof(loc->interp_elf_ex)) {
+=======
+			retval = kernel_read(interpreter, 0, bprm->buf,
+					     BINPRM_BUF_SIZE);
+			if (retval != BINPRM_BUF_SIZE) {
+>>>>>>> v3.18
 =======
 			retval = kernel_read(interpreter, 0, bprm->buf,
 					     BINPRM_BUF_SIZE);
@@ -733,6 +765,11 @@ static int load_elf_binary(struct linux_binprm *bprm)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			/* Get the exec headers */
+			loc->interp_elf_ex = *((struct elfhdr *)bprm->buf);
+>>>>>>> v3.18
 =======
 			/* Get the exec headers */
 			loc->interp_elf_ex = *((struct elfhdr *)bprm->buf);
@@ -769,9 +806,12 @@ static int load_elf_binary(struct linux_binprm *bprm)
 		goto out_free_dentry;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* OK, This is the point of no return */
 	current->mm->def_flags = def_flags;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Do this immediately, since STACK_TOP as used in setup_arg_pages
@@ -790,10 +830,15 @@ static int load_elf_binary(struct linux_binprm *bprm)
 	retval = setup_arg_pages(bprm, randomize_stack_top(STACK_TOP),
 				 executable_stack);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval < 0) {
 		send_sig(SIGKILL, current, 0);
 		goto out_free_dentry;
 	}
+=======
+	if (retval < 0)
+		goto out_free_dentry;
+>>>>>>> v3.18
 =======
 	if (retval < 0)
 		goto out_free_dentry;
@@ -808,7 +853,10 @@ static int load_elf_binary(struct linux_binprm *bprm)
 		int elf_prot = 0, elf_flags;
 		unsigned long k, vaddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long total_size = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -824,10 +872,15 @@ static int load_elf_binary(struct linux_binprm *bprm)
 			retval = set_brk(elf_bss + load_bias,
 					 elf_brk + load_bias);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (retval) {
 				send_sig(SIGKILL, current, 0);
 				goto out_free_dentry;
 			}
+=======
+			if (retval)
+				goto out_free_dentry;
+>>>>>>> v3.18
 =======
 			if (retval)
 				goto out_free_dentry;
@@ -881,6 +934,7 @@ static int load_elf_binary(struct linux_binprm *bprm)
 			load_bias = ELF_PAGESTART(ELF_ET_DYN_BASE - vaddr);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 			total_size = total_mapping_size(elf_phdata,
 							loc->elf_ex.e_phnum);
 			if (!total_size) {
@@ -894,11 +948,16 @@ static int load_elf_binary(struct linux_binprm *bprm)
 		if (BAD_ADDR(error)) {
 			send_sig(SIGKILL, current, 0);
 =======
+=======
+>>>>>>> v3.18
 		}
 
 		error = elf_map(bprm->file, load_bias + vaddr, elf_ppnt,
 				elf_prot, elf_flags, 0);
 		if (BAD_ADDR(error)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			retval = IS_ERR((void *)error) ?
 				PTR_ERR((void*)error) : -EINVAL;
@@ -931,7 +990,10 @@ static int load_elf_binary(struct linux_binprm *bprm)
 		    TASK_SIZE - elf_ppnt->p_memsz < k) {
 			/* set_brk can never work. Avoid overflows. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			send_sig(SIGKILL, current, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			retval = -EINVAL;
@@ -966,12 +1028,18 @@ static int load_elf_binary(struct linux_binprm *bprm)
 	 */
 	retval = set_brk(elf_bss, elf_brk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval) {
 		send_sig(SIGKILL, current, 0);
 		goto out_free_dentry;
 	}
 	if (likely(elf_bss != elf_brk) && unlikely(padzero(elf_bss))) {
 		send_sig(SIGSEGV, current, 0);
+=======
+	if (retval)
+		goto out_free_dentry;
+	if (likely(elf_bss != elf_brk) && unlikely(padzero(elf_bss))) {
+>>>>>>> v3.18
 =======
 	if (retval)
 		goto out_free_dentry;
@@ -998,7 +1066,10 @@ static int load_elf_binary(struct linux_binprm *bprm)
 		}
 		if (BAD_ADDR(elf_entry)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			force_sig(SIGSEGV, current);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			retval = IS_ERR((void *)elf_entry) ?
@@ -1014,7 +1085,10 @@ static int load_elf_binary(struct linux_binprm *bprm)
 		elf_entry = loc->elf_ex.e_entry;
 		if (BAD_ADDR(elf_entry)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			force_sig(SIGSEGV, current);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			retval = -EINVAL;
@@ -1029,10 +1103,15 @@ static int load_elf_binary(struct linux_binprm *bprm)
 #ifdef ARCH_HAS_SETUP_ADDITIONAL_PAGES
 	retval = arch_setup_additional_pages(bprm, !!elf_interpreter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval < 0) {
 		send_sig(SIGKILL, current, 0);
 		goto out;
 	}
+=======
+	if (retval < 0)
+		goto out;
+>>>>>>> v3.18
 =======
 	if (retval < 0)
 		goto out;
@@ -1043,10 +1122,15 @@ static int load_elf_binary(struct linux_binprm *bprm)
 	retval = create_elf_tables(bprm, &loc->elf_ex,
 			  load_addr, interp_load_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval < 0) {
 		send_sig(SIGKILL, current, 0);
 		goto out;
 	}
+=======
+	if (retval < 0)
+		goto out;
+>>>>>>> v3.18
 =======
 	if (retval < 0)
 		goto out;
@@ -1111,6 +1195,10 @@ out_free_ph:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_USELIB
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_USELIB
 >>>>>>> v3.18
@@ -1135,7 +1223,11 @@ static int load_elf_library(struct file *file)
 	/* First of all, some simple consistency checks */
 	if (elf_ex.e_type != ET_EXEC || elf_ex.e_phnum > 2 ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !elf_check_arch(&elf_ex) || !file->f_op || !file->f_op->mmap)
+=======
+	    !elf_check_arch(&elf_ex) || !file->f_op->mmap)
+>>>>>>> v3.18
 =======
 	    !elf_check_arch(&elf_ex) || !file->f_op->mmap)
 >>>>>>> v3.18
@@ -1197,6 +1289,10 @@ out:
 	return error;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* #ifdef CONFIG_USELIB */
+>>>>>>> v3.18
 =======
 #endif /* #ifdef CONFIG_USELIB */
 >>>>>>> v3.18
@@ -1223,7 +1319,10 @@ static bool always_dump_vma(struct vm_area_struct *vma)
 	if (vma == get_gate_vma(vma->vm_mm))
 		return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Assume that all vmas with a .name op should always be dumped.
@@ -1232,6 +1331,9 @@ static bool always_dump_vma(struct vm_area_struct *vma)
 	if (vma->vm_ops && vma->vm_ops->name && vma->vm_ops->name(vma))
 		return true;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * arch_vma_name() returns non-NULL for special architecture mappings,
@@ -1351,6 +1453,7 @@ static int notesize(struct memelfnote *en)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DUMP_WRITE(addr, nr, foffset)	\
 	do { if (!dump_write(file, (addr), (nr))) return 0; *foffset += (nr); } while(0)
 
@@ -1366,12 +1469,16 @@ static int writenote(struct memelfnote *men, struct file *file,
 =======
 static int writenote(struct memelfnote *men, struct coredump_params *cprm)
 >>>>>>> v3.18
+=======
+static int writenote(struct memelfnote *men, struct coredump_params *cprm)
+>>>>>>> v3.18
 {
 	struct elf_note en;
 	en.n_namesz = strlen(men->name) + 1;
 	en.n_descsz = men->datasz;
 	en.n_type = men->type;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DUMP_WRITE(&en, sizeof(en), foffset);
 	DUMP_WRITE(men->name, en.n_namesz, foffset);
@@ -1385,10 +1492,15 @@ static int writenote(struct memelfnote *men, struct coredump_params *cprm)
 }
 #undef DUMP_WRITE
 =======
+=======
+>>>>>>> v3.18
 	return dump_emit(cprm, &en, sizeof(en)) &&
 	    dump_emit(cprm, men->name, en.n_namesz) && dump_align(cprm, 4) &&
 	    dump_emit(cprm, men->data, men->datasz) && dump_align(cprm, 4);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void fill_elf_header(struct elfhdr *elf, int segs,
@@ -1736,7 +1848,11 @@ static int fill_thread_core_info(struct elf_thread_core_info *t,
 static int fill_note_info(struct elfhdr *elf, int phdrs,
 			  struct elf_note_info *info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  siginfo_t *siginfo, struct pt_regs *regs)
+=======
+			  const siginfo_t *siginfo, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 			  const siginfo_t *siginfo, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -1843,9 +1959,15 @@ static size_t get_note_info_size(struct elf_note_info *info)
  */
 static int write_note_info(struct elf_note_info *info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   struct file *file, loff_t *foffset)
 {
 	bool first = 1;
+=======
+			   struct coredump_params *cprm)
+{
+	bool first = true;
+>>>>>>> v3.18
 =======
 			   struct coredump_params *cprm)
 {
@@ -1856,6 +1978,7 @@ static int write_note_info(struct elf_note_info *info,
 	do {
 		int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!writenote(&t->notes[0], file, foffset))
 			return 0;
@@ -1869,6 +1992,8 @@ static int write_note_info(struct elf_note_info *info,
 		if (first && info->files.data &&
 				!writenote(&info->files, file, foffset))
 =======
+=======
+>>>>>>> v3.18
 		if (!writenote(&t->notes[0], cprm))
 			return 0;
 
@@ -1880,21 +2005,30 @@ static int write_note_info(struct elf_note_info *info,
 			return 0;
 		if (first && info->files.data &&
 				!writenote(&info->files, cprm))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 0;
 
 		for (i = 1; i < info->thread_notes; ++i)
 			if (t->notes[i].data &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    !writenote(&t->notes[i], file, foffset))
 				return 0;
 
 		first = 0;
 =======
+=======
+>>>>>>> v3.18
 			    !writenote(&t->notes[i], cprm))
 				return 0;
 
 		first = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		t = t->next;
 	} while (t);
@@ -2016,20 +2150,27 @@ static int elf_note_info_init(struct elf_note_info *info)
 static int fill_note_info(struct elfhdr *elf, int phdrs,
 			  struct elf_note_info *info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  siginfo_t *siginfo, struct pt_regs *regs)
 {
 	struct list_head *t;
 =======
+=======
+>>>>>>> v3.18
 			  const siginfo_t *siginfo, struct pt_regs *regs)
 {
 	struct list_head *t;
 	struct core_thread *ct;
 	struct elf_thread_status *ets;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!elf_note_info_init(info))
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (siginfo->si_signo) {
 		struct core_thread *ct;
@@ -2053,6 +2194,8 @@ static int fill_note_info(struct elfhdr *elf, int phdrs,
 			info->thread_status_size += sz;
 		}
 =======
+=======
+>>>>>>> v3.18
 	for (ct = current->mm->core_state->dumper.next;
 					ct; ct = ct->next) {
 		ets = kzalloc(sizeof(*ets), GFP_KERNEL);
@@ -2069,6 +2212,9 @@ static int fill_note_info(struct elfhdr *elf, int phdrs,
 		ets = list_entry(t, struct elf_thread_status, list);
 		sz = elf_dump_thread_status(siginfo->si_signo, ets);
 		info->thread_status_size += sz;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	/* now collect the dump for the current */
@@ -2130,7 +2276,11 @@ static size_t get_note_info_size(struct elf_note_info *info)
 
 static int write_note_info(struct elf_note_info *info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   struct file *file, loff_t *foffset)
+=======
+			   struct coredump_params *cprm)
+>>>>>>> v3.18
 =======
 			   struct coredump_params *cprm)
 >>>>>>> v3.18
@@ -2140,7 +2290,11 @@ static int write_note_info(struct elf_note_info *info,
 
 	for (i = 0; i < info->numnote; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!writenote(info->notes + i, file, foffset))
+=======
+		if (!writenote(info->notes + i, cprm))
+>>>>>>> v3.18
 =======
 		if (!writenote(info->notes + i, cprm))
 >>>>>>> v3.18
@@ -2153,7 +2307,11 @@ static int write_note_info(struct elf_note_info *info,
 
 		for (i = 0; i < tmp->num_notes; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!writenote(&tmp->notes[i], file, foffset))
+=======
+			if (!writenote(&tmp->notes[i], cprm))
+>>>>>>> v3.18
 =======
 			if (!writenote(&tmp->notes[i], cprm))
 >>>>>>> v3.18
@@ -2253,10 +2411,16 @@ static int elf_core_dump(struct coredump_params *cprm)
 	mm_segment_t fs;
 	int segs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t size = 0;
 	struct vm_area_struct *vma, *gate_vma;
 	struct elfhdr *elf = NULL;
 	loff_t offset = 0, dataoff, foffset;
+=======
+	struct vm_area_struct *vma, *gate_vma;
+	struct elfhdr *elf = NULL;
+	loff_t offset = 0, dataoff;
+>>>>>>> v3.18
 =======
 	struct vm_area_struct *vma, *gate_vma;
 	struct elfhdr *elf = NULL;
@@ -2318,7 +2482,10 @@ static int elf_core_dump(struct coredump_params *cprm)
 	offset += sizeof(*elf);				/* Elf header */
 	offset += segs * sizeof(struct elf_phdr);	/* Program headers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	foffset = offset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2352,6 +2519,7 @@ static int elf_core_dump(struct coredump_params *cprm)
 	offset = dataoff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size += sizeof(*elf);
 	if (size > cprm->limit || !dump_write(cprm->file, elf, sizeof(*elf)))
 		goto end_coredump;
@@ -2360,10 +2528,15 @@ static int elf_core_dump(struct coredump_params *cprm)
 	if (size > cprm->limit
 	    || !dump_write(cprm->file, phdr4note, sizeof(*phdr4note)))
 =======
+=======
+>>>>>>> v3.18
 	if (!dump_emit(cprm, elf, sizeof(*elf)))
 		goto end_coredump;
 
 	if (!dump_emit(cprm, phdr4note, sizeof(*phdr4note)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto end_coredump;
 
@@ -2387,6 +2560,7 @@ static int elf_core_dump(struct coredump_params *cprm)
 		phdr.p_align = ELF_EXEC_PAGESIZE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		size += sizeof(phdr);
 		if (size > cprm->limit
 		    || !dump_write(cprm->file, &phdr, sizeof(phdr)))
@@ -2406,6 +2580,8 @@ static int elf_core_dump(struct coredump_params *cprm)
 	/* Align to page */
 	if (!dump_seek(cprm->file, dataoff - foffset))
 =======
+=======
+>>>>>>> v3.18
 		if (!dump_emit(cprm, &phdr, sizeof(phdr)))
 			goto end_coredump;
 	}
@@ -2422,6 +2598,9 @@ static int elf_core_dump(struct coredump_params *cprm)
 
 	/* Align to page */
 	if (!dump_skip(cprm, dataoff - cprm->written))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto end_coredump;
 
@@ -2440,6 +2619,7 @@ static int elf_core_dump(struct coredump_params *cprm)
 			if (page) {
 				void *kaddr = kmap(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				stop = ((size += PAGE_SIZE) > cprm->limit) ||
 					!dump_write(cprm->file, kaddr,
 						    PAGE_SIZE);
@@ -2448,17 +2628,23 @@ static int elf_core_dump(struct coredump_params *cprm)
 			} else
 				stop = !dump_seek(cprm->file, PAGE_SIZE);
 =======
+=======
+>>>>>>> v3.18
 				stop = !dump_emit(cprm, kaddr, PAGE_SIZE);
 				kunmap(page);
 				page_cache_release(page);
 			} else
 				stop = !dump_skip(cprm, PAGE_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (stop)
 				goto end_coredump;
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!elf_core_write_extra_data(cprm->file, &size, cprm->limit))
 		goto end_coredump;
@@ -2469,11 +2655,16 @@ static int elf_core_dump(struct coredump_params *cprm)
 		    || !dump_write(cprm->file, shdr4extnum,
 				   sizeof(*shdr4extnum)))
 =======
+=======
+>>>>>>> v3.18
 	if (!elf_core_write_extra_data(cprm))
 		goto end_coredump;
 
 	if (e_phnum == PN_XNUM) {
 		if (!dump_emit(cprm, shdr4extnum, sizeof(*shdr4extnum)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto end_coredump;
 	}

@@ -3,6 +3,11 @@
  * Author: Jiang Liu <liuj97@gmail.com>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Zi Shen Lim <zlim.lnx@gmail.com>
+ *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Zi Shen Lim <zlim.lnx@gmail.com>
  *
@@ -22,7 +27,10 @@
 #ifndef	__ASM_INSN_H
 #define	__ASM_INSN_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -32,7 +40,10 @@
 
 #ifndef __ASSEMBLY__
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -78,6 +89,7 @@ enum aarch64_insn_imm_type {
 	AARCH64_INSN_IMM_12,
 	AARCH64_INSN_IMM_9,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	AARCH64_INSN_IMM_MAX
 };
 
@@ -85,6 +97,8 @@ enum aarch64_insn_branch_type {
 	AARCH64_INSN_BRANCH_NOLINK,
 	AARCH64_INSN_BRANCH_LINK,
 =======
+=======
+>>>>>>> v3.18
 	AARCH64_INSN_IMM_7,
 	AARCH64_INSN_IMM_6,
 	AARCH64_INSN_IMM_S,
@@ -234,6 +248,9 @@ enum aarch64_insn_logic_type {
 	AARCH64_INSN_LOGIC_EON,
 	AARCH64_INSN_LOGIC_AND_SETFLAGS,
 	AARCH64_INSN_LOGIC_BIC_SETFLAGS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -244,9 +261,12 @@ static __always_inline u32 aarch64_insn_get_##abbr##_value(void) \
 { return (val); }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __AARCH64_INSN_FUNCS(b,		0xFC000000, 0x14000000)
 __AARCH64_INSN_FUNCS(bl,	0xFC000000, 0x94000000)
 =======
+=======
+>>>>>>> v3.18
 __AARCH64_INSN_FUNCS(str_reg,	0x3FE0EC00, 0x38206800)
 __AARCH64_INSN_FUNCS(ldr_reg,	0x3FE0EC00, 0x38606800)
 __AARCH64_INSN_FUNCS(stp_post,	0x7FC00000, 0x28800000)
@@ -291,6 +311,9 @@ __AARCH64_INSN_FUNCS(bl,	0xFC000000, 0x94000000)
 __AARCH64_INSN_FUNCS(cbz,	0xFE000000, 0x34000000)
 __AARCH64_INSN_FUNCS(cbnz,	0xFE000000, 0x35000000)
 __AARCH64_INSN_FUNCS(bcond,	0xFF000010, 0x54000000)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __AARCH64_INSN_FUNCS(svc,	0xFFE0001F, 0xD4000001)
 __AARCH64_INSN_FUNCS(hvc,	0xFFE0001F, 0xD4000002)
@@ -298,6 +321,12 @@ __AARCH64_INSN_FUNCS(smc,	0xFFE0001F, 0xD4000003)
 __AARCH64_INSN_FUNCS(brk,	0xFFE0001F, 0xD4200000)
 __AARCH64_INSN_FUNCS(hint,	0xFFFFF01F, 0xD503201F)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+__AARCH64_INSN_FUNCS(br,	0xFFFFFC1F, 0xD61F0000)
+__AARCH64_INSN_FUNCS(blr,	0xFFFFFC1F, 0xD63F0000)
+__AARCH64_INSN_FUNCS(ret,	0xFFFFFC1F, 0xD65F0000)
+>>>>>>> v3.18
 =======
 __AARCH64_INSN_FUNCS(br,	0xFFFFFC1F, 0xD61F0000)
 __AARCH64_INSN_FUNCS(blr,	0xFFFFFC1F, 0xD63F0000)
@@ -316,9 +345,12 @@ u32 aarch64_insn_encode_immediate(enum aarch64_insn_imm_type type,
 u32 aarch64_insn_gen_branch_imm(unsigned long pc, unsigned long addr,
 				enum aarch64_insn_branch_type type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 aarch64_insn_gen_hint(enum aarch64_insn_hint_op op);
 u32 aarch64_insn_gen_nop(void);
 =======
+=======
+>>>>>>> v3.18
 u32 aarch64_insn_gen_comp_branch_imm(unsigned long pc, unsigned long addr,
 				     enum aarch64_insn_register reg,
 				     enum aarch64_insn_variant variant,
@@ -380,6 +412,9 @@ u32 aarch64_insn_gen_logical_shifted_reg(enum aarch64_insn_register dst,
 					 int shift,
 					 enum aarch64_insn_variant variant,
 					 enum aarch64_insn_logic_type type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 bool aarch64_insn_hotpatch_safe(u32 old_insn, u32 new_insn);
@@ -388,8 +423,12 @@ int aarch64_insn_patch_text_nosync(void *addr, u32 insn);
 int aarch64_insn_patch_text_sync(void *addrs[], u32 insns[], int cnt);
 int aarch64_insn_patch_text(void *addrs[], u32 insns[], int cnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #endif  /* __ASSEMBLY__ */
+=======
+#endif /* __ASSEMBLY__ */
+>>>>>>> v3.18
 =======
 #endif /* __ASSEMBLY__ */
 >>>>>>> v3.18

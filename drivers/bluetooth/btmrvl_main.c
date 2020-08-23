@@ -20,7 +20,11 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -29,6 +33,10 @@
 
 #include "btmrvl_drv.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "btmrvl_sdio.h"
+>>>>>>> v3.18
 =======
 #include "btmrvl_sdio.h"
 >>>>>>> v3.18
@@ -59,6 +67,7 @@ bool btmrvl_check_evtpkt(struct btmrvl_private *priv, struct sk_buff *skb)
 	if (hdr->evt == HCI_EV_CMD_COMPLETE) {
 		struct hci_ev_cmd_complete *ec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u16 opcode, ocf, ogf;
 
 		ec = (void *) (skb->data + HCI_EVENT_HDR_SIZE);
@@ -79,6 +88,8 @@ bool btmrvl_check_evtpkt(struct btmrvl_private *priv, struct sk_buff *skb)
 			kfree_skb(skb);
 			return false;
 =======
+=======
+>>>>>>> v3.18
 		u16 opcode;
 
 		ec = (void *) (skb->data + HCI_EVENT_HDR_SIZE);
@@ -95,6 +106,9 @@ bool btmrvl_check_evtpkt(struct btmrvl_private *priv, struct sk_buff *skb)
 				kfree_skb(skb);
 				return false;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -118,7 +132,11 @@ int btmrvl_process_event(struct btmrvl_private *priv, struct sk_buff *skb)
 
 	switch (event->data[0]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case BT_CMD_AUTO_SLEEP_MODE:
+=======
+	case BT_EVENT_AUTO_SLEEP_MODE:
+>>>>>>> v3.18
 =======
 	case BT_EVENT_AUTO_SLEEP_MODE:
 >>>>>>> v3.18
@@ -135,7 +153,11 @@ int btmrvl_process_event(struct btmrvl_private *priv, struct sk_buff *skb)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case BT_CMD_HOST_SLEEP_CONFIG:
+=======
+	case BT_EVENT_HOST_SLEEP_CONFIG:
+>>>>>>> v3.18
 =======
 	case BT_EVENT_HOST_SLEEP_CONFIG:
 >>>>>>> v3.18
@@ -147,7 +169,11 @@ int btmrvl_process_event(struct btmrvl_private *priv, struct sk_buff *skb)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case BT_CMD_HOST_SLEEP_ENABLE:
+=======
+	case BT_EVENT_HOST_SLEEP_ENABLE:
+>>>>>>> v3.18
 =======
 	case BT_EVENT_HOST_SLEEP_ENABLE:
 >>>>>>> v3.18
@@ -156,7 +182,11 @@ int btmrvl_process_event(struct btmrvl_private *priv, struct sk_buff *skb)
 			if (adapter->psmode)
 				adapter->ps_state = PS_SLEEP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			wake_up_interruptible(&adapter->cmd_wait_q);
+=======
+			wake_up_interruptible(&adapter->event_hs_wait_q);
+>>>>>>> v3.18
 =======
 			wake_up_interruptible(&adapter->event_hs_wait_q);
 >>>>>>> v3.18
@@ -167,7 +197,11 @@ int btmrvl_process_event(struct btmrvl_private *priv, struct sk_buff *skb)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case BT_CMD_MODULE_CFG_REQ:
+=======
+	case BT_EVENT_MODULE_CFG_REQ:
+>>>>>>> v3.18
 =======
 	case BT_EVENT_MODULE_CFG_REQ:
 >>>>>>> v3.18
@@ -216,6 +250,7 @@ exit:
 EXPORT_SYMBOL_GPL(btmrvl_process_event);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int btmrvl_send_module_cfg_cmd(struct btmrvl_private *priv, int subcmd)
 {
 	struct sk_buff *skb;
@@ -224,6 +259,8 @@ int btmrvl_send_module_cfg_cmd(struct btmrvl_private *priv, int subcmd)
 
 	skb = bt_skb_alloc(sizeof(*cmd), GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 static int btmrvl_send_sync_cmd(struct btmrvl_private *priv, u16 opcode,
 				const void *param, u8 len)
 {
@@ -231,12 +268,16 @@ static int btmrvl_send_sync_cmd(struct btmrvl_private *priv, u16 opcode,
 	struct hci_command_hdr *hdr;
 
 	skb = bt_skb_alloc(HCI_COMMAND_HDR_SIZE + len, GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (skb == NULL) {
 		BT_ERR("No free skb");
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cmd = (struct btmrvl_cmd *) skb_put(skb, sizeof(*cmd));
 	cmd->ocf_ogf = cpu_to_le16(hci_opcode_pack(OGF, BT_CMD_MODULE_CFG_REQ));
@@ -247,6 +288,8 @@ static int btmrvl_send_sync_cmd(struct btmrvl_private *priv, u16 opcode,
 
 	skb->dev = (void *) priv->btmrvl_dev.hcidev;
 =======
+=======
+>>>>>>> v3.18
 	hdr = (struct hci_command_hdr *)skb_put(skb, HCI_COMMAND_HDR_SIZE);
 	hdr->opcode = cpu_to_le16(opcode);
 	hdr->plen = len;
@@ -256,6 +299,9 @@ static int btmrvl_send_sync_cmd(struct btmrvl_private *priv, u16 opcode,
 
 	bt_cb(skb)->pkt_type = MRVL_VENDOR_PKT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	skb_queue_head(&priv->adapter->tx_queue, skb);
 
@@ -264,14 +310,18 @@ static int btmrvl_send_sync_cmd(struct btmrvl_private *priv, u16 opcode,
 	priv->adapter->cmd_complete = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("Queue module cfg Command");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	wake_up_interruptible(&priv->main_thread.wait_q);
 
 	if (!wait_event_interruptible_timeout(priv->adapter->cmd_wait_q,
 				priv->adapter->cmd_complete,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				msecs_to_jiffies(WAIT_UNTIL_CMD_RESP))) {
 		ret = -ETIMEDOUT;
@@ -281,6 +331,8 @@ static int btmrvl_send_sync_cmd(struct btmrvl_private *priv, u16 opcode,
 
 	BT_DBG("module cfg Command done");
 =======
+=======
+>>>>>>> v3.18
 				msecs_to_jiffies(WAIT_UNTIL_CMD_RESP)))
 		return -ETIMEDOUT;
 
@@ -294,12 +346,16 @@ int btmrvl_send_module_cfg_cmd(struct btmrvl_private *priv, u8 subcmd)
 	ret = btmrvl_send_sync_cmd(priv, BT_CMD_MODULE_CFG_REQ, &subcmd, 1);
 	if (ret)
 		BT_ERR("module_cfg_cmd(%x) failed\n", subcmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
 }
 EXPORT_SYMBOL_GPL(btmrvl_send_module_cfg_cmd);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int btmrvl_send_hscfg_cmd(struct btmrvl_private *priv)
 {
@@ -329,6 +385,8 @@ int btmrvl_send_hscfg_cmd(struct btmrvl_private *priv)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 int btmrvl_pscan_window_reporting(struct btmrvl_private *priv, u8 subcmd)
 {
 	struct btmrvl_sdio_card *card = priv->btmrvl_dev.card;
@@ -362,12 +420,16 @@ int btmrvl_send_hscfg_cmd(struct btmrvl_private *priv)
 		BT_ERR("HSCFG command failed\n");
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(btmrvl_send_hscfg_cmd);
 
 int btmrvl_enable_ps(struct btmrvl_private *priv)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sk_buff *skb;
 	struct btmrvl_cmd *cmd;
@@ -395,6 +457,8 @@ int btmrvl_enable_ps(struct btmrvl_private *priv)
 
 	BT_DBG("Queue PSMODE Command:%d", cmd->data[0]);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	u8 param;
 
@@ -406,6 +470,9 @@ int btmrvl_enable_ps(struct btmrvl_private *priv)
 	ret = btmrvl_send_sync_cmd(priv, BT_CMD_AUTO_SLEEP_MODE, &param, 1);
 	if (ret)
 		BT_ERR("PSMODE command failed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -414,6 +481,7 @@ EXPORT_SYMBOL_GPL(btmrvl_enable_ps);
 
 int btmrvl_enable_hs(struct btmrvl_private *priv)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sk_buff *skb;
 	struct btmrvl_cmd *cmd;
@@ -446,6 +514,8 @@ int btmrvl_enable_hs(struct btmrvl_private *priv)
 						priv->adapter->ps_state,
 						priv->adapter->wakeup_tries);
 =======
+=======
+>>>>>>> v3.18
 	struct btmrvl_adapter *adapter = priv->adapter;
 	int ret;
 
@@ -470,6 +540,9 @@ int btmrvl_enable_hs(struct btmrvl_private *priv)
 		BT_DBG("host sleep enabled: %d,%d,%d", adapter->hs_state,
 		       adapter->ps_state, adapter->wakeup_tries);
 		ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -553,6 +626,11 @@ static int btmrvl_tx_pkt(struct btmrvl_private *priv, struct sk_buff *skb)
 static void btmrvl_init_adapter(struct btmrvl_private *priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int buf_size;
+
+>>>>>>> v3.18
 =======
 	int buf_size;
 
@@ -562,8 +640,11 @@ static void btmrvl_init_adapter(struct btmrvl_private *priv)
 	priv->adapter->ps_state = PS_AWAKE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_waitqueue_head(&priv->adapter->cmd_wait_q);
 =======
+=======
+>>>>>>> v3.18
 	buf_size = ALIGN_SZ(SDIO_BLOCK_SIZE, BTSDIO_DMA_ALIGN);
 	priv->adapter->hw_regs_buf = kzalloc(buf_size, GFP_KERNEL);
 	if (!priv->adapter->hw_regs_buf) {
@@ -579,6 +660,9 @@ static void btmrvl_init_adapter(struct btmrvl_private *priv)
 
 	init_waitqueue_head(&priv->adapter->cmd_wait_q);
 	init_waitqueue_head(&priv->adapter->event_hs_wait_q);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -587,6 +671,10 @@ static void btmrvl_free_adapter(struct btmrvl_private *priv)
 	skb_queue_purge(&priv->adapter->tx_queue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(priv->adapter->hw_regs_buf);
+>>>>>>> v3.18
 =======
 	kfree(priv->adapter->hw_regs_buf);
 >>>>>>> v3.18
@@ -595,6 +683,7 @@ static void btmrvl_free_adapter(struct btmrvl_private *priv)
 	priv->adapter = NULL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int btmrvl_ioctl(struct hci_dev *hdev,
 				unsigned int cmd, unsigned long arg)
@@ -617,12 +706,17 @@ static int btmrvl_send_frame(struct sk_buff *skb)
 	priv = hci_get_drvdata(hdev);
 
 =======
+=======
+>>>>>>> v3.18
 static int btmrvl_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 {
 	struct btmrvl_private *priv = hci_get_drvdata(hdev);
 
 	BT_DBG("type=%d, len=%d", skb->pkt_type, skb->len);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!test_bit(HCI_RUNNING, &hdev->flags)) {
 		BT_ERR("Failed testing HCI_RUNING, flags=%lx", hdev->flags);
@@ -681,7 +775,10 @@ static int btmrvl_open(struct hci_dev *hdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int btmrvl_download_cal_data(struct btmrvl_private *priv,
 				    u8 *data, int len)
 {
@@ -773,6 +870,9 @@ static int btmrvl_set_bdaddr(struct hci_dev *hdev, const bdaddr_t *bdaddr)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This function handles the event generated by firmware, rx data
@@ -862,6 +962,7 @@ int btmrvl_register_hdev(struct btmrvl_private *priv)
 	hci_set_drvdata(hdev, priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hdev->bus = HCI_SDIO;
 	hdev->open = btmrvl_open;
 	hdev->close = btmrvl_close;
@@ -871,6 +972,8 @@ int btmrvl_register_hdev(struct btmrvl_private *priv)
 
 	btmrvl_send_module_cfg_cmd(priv, MODULE_BRINGUP_REQ);
 =======
+=======
+>>>>>>> v3.18
 	hdev->bus   = HCI_SDIO;
 	hdev->open  = btmrvl_open;
 	hdev->close = btmrvl_close;
@@ -878,6 +981,9 @@ int btmrvl_register_hdev(struct btmrvl_private *priv)
 	hdev->send  = btmrvl_send_frame;
 	hdev->setup = btmrvl_setup;
 	hdev->set_bdaddr = btmrvl_set_bdaddr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hdev->dev_type = priv->btmrvl_dev.dev_type;
@@ -934,6 +1040,11 @@ struct btmrvl_private *btmrvl_add_card(void *card)
 	priv->main_thread.task = kthread_run(btmrvl_service_main_thread,
 				&priv->main_thread, "btmrvl_main_service");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (IS_ERR(priv->main_thread.task))
+		goto err_thread;
+>>>>>>> v3.18
 =======
 	if (IS_ERR(priv->main_thread.task))
 		goto err_thread;
@@ -945,6 +1056,12 @@ struct btmrvl_private *btmrvl_add_card(void *card)
 	return priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+err_thread:
+	btmrvl_free_adapter(priv);
+
+>>>>>>> v3.18
 =======
 err_thread:
 	btmrvl_free_adapter(priv);
@@ -966,6 +1083,10 @@ int btmrvl_remove_card(struct btmrvl_private *priv)
 
 	wake_up_interruptible(&priv->adapter->cmd_wait_q);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wake_up_interruptible(&priv->adapter->event_hs_wait_q);
+>>>>>>> v3.18
 =======
 	wake_up_interruptible(&priv->adapter->event_hs_wait_q);
 >>>>>>> v3.18

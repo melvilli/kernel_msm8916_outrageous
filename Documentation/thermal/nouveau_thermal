@@ -5,7 +5,11 @@ Supported chips:
 * NV43+
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Authors: Martin Peres (mupuf) <martin.peres@labri.fr>
+=======
+Authors: Martin Peres (mupuf) <martin.peres@free.fr>
+>>>>>>> v3.18
 =======
 Authors: Martin Peres (mupuf) <martin.peres@free.fr>
 >>>>>>> v3.18
@@ -73,8 +77,14 @@ Your fan can be driven in different modes:
 NOTE: Be sure to use the manual mode if you want to drive the fan speed manually
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 NOTE2: Not all fan management modes may be supported on all chipsets. We are
 working on it.
+=======
+NOTE2: When operating in manual mode outside the vbios-defined
+[PWM_min, PWM_max] range, the reported fan speed (RPM) may not be accurate
+depending on your hardware.
+>>>>>>> v3.18
 =======
 NOTE2: When operating in manual mode outside the vbios-defined
 [PWM_min, PWM_max] range, the reported fan speed (RPM) may not be accurate

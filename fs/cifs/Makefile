@@ -7,7 +7,11 @@ cifs-y := cifsfs.o cifssmb.o cifs_debug.o connect.o dir.o file.o inode.o \
 	  link.o misc.o netmisc.o smbencrypt.o transport.o asn1.o \
 	  cifs_unicode.o nterr.o xattr.o cifsencrypt.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  readdir.o ioctl.o sess.o export.o smb1ops.o
+=======
+	  readdir.o ioctl.o sess.o export.o smb1ops.o winucase.o
+>>>>>>> v3.18
 =======
 	  readdir.o ioctl.o sess.o export.o smb1ops.o winucase.o
 >>>>>>> v3.18

@@ -131,7 +131,11 @@ static inline int avc_audit(u32 ssid, u32 tsid,
 			    struct av_decision *avd,
 			    int result,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    struct common_audit_data *a, unsigned flags)
+=======
+			    struct common_audit_data *a)
+>>>>>>> v3.18
 =======
 			    struct common_audit_data *a)
 >>>>>>> v3.18
@@ -143,22 +147,29 @@ static inline int avc_audit(u32 ssid, u32 tsid,
 	return slow_avc_audit(ssid, tsid, tclass,
 			      requested, audited, denied, result,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      a, flags);
 }
 
 #define AVC_STRICT 1 /* Ignore permissive mode. */
 #define AVC_EXTENDED_PERMS 2	/* update extended permissions */
 =======
+=======
+>>>>>>> v3.18
 			      a, 0);
 }
 
 #define AVC_STRICT 1 /* Ignore permissive mode. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int avc_has_perm_noaudit(u32 ssid, u32 tsid,
 			 u16 tclass, u32 requested,
 			 unsigned flags,
 			 struct av_decision *avd);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int avc_has_perm_flags(u32 ssid, u32 tsid,
 		       u16 tclass, u32 requested,
@@ -179,6 +190,11 @@ int avc_has_perm(u32 ssid, u32 tsid,
 		 u16 tclass, u32 requested,
 		 struct common_audit_data *auditdata);
 >>>>>>> v3.18
+=======
+int avc_has_perm(u32 ssid, u32 tsid,
+		 u16 tclass, u32 requested,
+		 struct common_audit_data *auditdata);
+>>>>>>> v3.18
 
 u32 avc_policy_seqno(void);
 
@@ -191,7 +207,10 @@ u32 avc_policy_seqno(void);
 #define AVC_CALLBACK_AUDITDENY_ENABLE	64
 #define AVC_CALLBACK_AUDITDENY_DISABLE	128
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AVC_CALLBACK_ADD_XPERMS		256
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

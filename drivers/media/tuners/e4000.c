@@ -20,6 +20,7 @@
 
 #include "e4000_priv.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Max transfer size done by I2C transfer functions */
 #define MAX_XFER_SIZE  64
@@ -188,6 +189,8 @@ err:
 
 	dev_dbg(&priv->i2c->dev, "%s: failed=%d\n", __func__, ret);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/math64.h>
 
 static int e4000_init(struct dvb_frontend *fe)
@@ -258,12 +261,16 @@ err:
 	if (ret)
 		dev_dbg(&s->client->dev, "failed=%d\n", ret);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
 
 static int e4000_sleep(struct dvb_frontend *fe)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct e4000_priv *priv = fe->tuner_priv;
 	int ret;
@@ -287,6 +294,8 @@ err:
 
 	dev_dbg(&priv->i2c->dev, "%s: failed=%d\n", __func__, ret);
 =======
+=======
+>>>>>>> v3.18
 	struct e4000 *s = fe->tuner_priv;
 	int ret;
 
@@ -301,12 +310,16 @@ err:
 	if (ret)
 		dev_dbg(&s->client->dev, "failed=%d\n", ret);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
 
 static int e4000_set_params(struct dvb_frontend *fe)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct e4000_priv *priv = fe->tuner_priv;
 	struct dtv_frontend_properties *c = &fe->dtv_property_cache;
@@ -325,6 +338,8 @@ static int e4000_set_params(struct dvb_frontend *fe)
 	ret = e4000_wr_reg(priv, 0x1a, 0x00);
 	if (ret < 0)
 =======
+=======
+>>>>>>> v3.18
 	struct e4000 *s = fe->tuner_priv;
 	struct dtv_frontend_properties *c = &fe->dtv_property_cache;
 	int ret, i, sigma_delta;
@@ -339,6 +354,9 @@ static int e4000_set_params(struct dvb_frontend *fe)
 	/* gain control manual */
 	ret = regmap_write(s->regmap, 0x1a, 0x00);
 	if (ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err;
 
@@ -348,6 +366,7 @@ static int e4000_set_params(struct dvb_frontend *fe)
 			break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (i == ARRAY_SIZE(e4000_pll_lut))
 		goto err;
@@ -360,6 +379,8 @@ static int e4000_set_params(struct dvb_frontend *fe)
 	sigma_delta = 0x10000UL * (f_VCO % priv->cfg->clock) / priv->cfg->clock;
 	buf[0] = f_VCO / priv->cfg->clock;
 =======
+=======
+>>>>>>> v3.18
 	if (i == ARRAY_SIZE(e4000_pll_lut)) {
 		ret = -EINVAL;
 		goto err;
@@ -369,6 +390,9 @@ static int e4000_set_params(struct dvb_frontend *fe)
 	pll_n = div_u64_rem(f_vco, s->clock, &pll_f);
 	sigma_delta = div_u64(0x10000ULL * pll_f, s->clock);
 	buf[0] = pll_n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	buf[1] = (sigma_delta >> 0) & 0xff;
 	buf[2] = (sigma_delta >> 8) & 0xff;
@@ -376,17 +400,23 @@ static int e4000_set_params(struct dvb_frontend *fe)
 	buf[4] = e4000_pll_lut[i].div;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&priv->i2c->dev, "%s: f_VCO=%u pll div=%d sigma_delta=%04x\n",
 			__func__, f_VCO, buf[0], sigma_delta);
 
 	ret = e4000_wr_regs(priv, 0x09, buf, 5);
 	if (ret < 0)
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(&s->client->dev, "f_vco=%llu pll div=%d sigma_delta=%04x\n",
 			f_vco, buf[0], sigma_delta);
 
 	ret = regmap_bulk_write(s->regmap, 0x09, buf, 5);
 	if (ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err;
 
@@ -397,12 +427,15 @@ static int e4000_set_params(struct dvb_frontend *fe)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (i == ARRAY_SIZE(e400_lna_filter_lut))
 		goto err;
 
 	ret = e4000_wr_reg(priv, 0x10, e400_lna_filter_lut[i].val);
 	if (ret < 0)
 =======
+=======
+>>>>>>> v3.18
 	if (i == ARRAY_SIZE(e400_lna_filter_lut)) {
 		ret = -EINVAL;
 		goto err;
@@ -410,6 +443,9 @@ static int e4000_set_params(struct dvb_frontend *fe)
 
 	ret = regmap_write(s->regmap, 0x10, e400_lna_filter_lut[i].val);
 	if (ret)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err;
 
@@ -420,21 +456,32 @@ static int e4000_set_params(struct dvb_frontend *fe)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (i == ARRAY_SIZE(e4000_if_filter_lut))
 		goto err;
 =======
+=======
+>>>>>>> v3.18
 	if (i == ARRAY_SIZE(e4000_if_filter_lut)) {
 		ret = -EINVAL;
 		goto err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	buf[0] = e4000_if_filter_lut[i].reg11_val;
 	buf[1] = e4000_if_filter_lut[i].reg12_val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = e4000_wr_regs(priv, 0x11, buf, 2);
 	if (ret < 0)
+=======
+	ret = regmap_bulk_write(s->regmap, 0x11, buf, 2);
+	if (ret)
+>>>>>>> v3.18
 =======
 	ret = regmap_bulk_write(s->regmap, 0x11, buf, 2);
 	if (ret)
@@ -447,6 +494,7 @@ static int e4000_set_params(struct dvb_frontend *fe)
 			break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (i == ARRAY_SIZE(e4000_band_lut))
 		goto err;
@@ -474,6 +522,8 @@ err:
 
 	dev_dbg(&priv->i2c->dev, "%s: failed=%d\n", __func__, ret);
 =======
+=======
+>>>>>>> v3.18
 	if (i == ARRAY_SIZE(e4000_band_lut)) {
 		ret = -EINVAL;
 		goto err;
@@ -532,6 +582,9 @@ err:
 	if (ret)
 		dev_dbg(&s->client->dev, "failed=%d\n", ret);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -539,9 +592,15 @@ err:
 static int e4000_get_if_frequency(struct dvb_frontend *fe, u32 *frequency)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct e4000_priv *priv = fe->tuner_priv;
 
 	dev_dbg(&priv->i2c->dev, "%s:\n", __func__);
+=======
+	struct e4000 *s = fe->tuner_priv;
+
+	dev_dbg(&s->client->dev, "\n");
+>>>>>>> v3.18
 =======
 	struct e4000 *s = fe->tuner_priv;
 
@@ -553,6 +612,7 @@ static int e4000_get_if_frequency(struct dvb_frontend *fe, u32 *frequency)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int e4000_release(struct dvb_frontend *fe)
 {
@@ -566,6 +626,8 @@ static int e4000_release(struct dvb_frontend *fe)
 }
 
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_VIDEO_V4L2)
 static int e4000_set_lna_gain(struct dvb_frontend *fe)
 {
@@ -753,6 +815,9 @@ static const struct v4l2_ctrl_ops e4000_ctrl_ops = {
 };
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct dvb_tuner_ops e4000_tuner_ops = {
 	.info = {
@@ -762,8 +827,11 @@ static const struct dvb_tuner_ops e4000_tuner_ops = {
 	},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release = e4000_release,
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init = e4000_init,
@@ -773,6 +841,7 @@ static const struct dvb_tuner_ops e4000_tuner_ops = {
 	.get_if_frequency = e4000_get_if_frequency,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct dvb_frontend *e4000_attach(struct dvb_frontend *fe,
 		struct i2c_adapter *i2c, const struct e4000_config *cfg)
@@ -831,6 +900,8 @@ err:
 }
 EXPORT_SYMBOL(e4000_attach);
 =======
+=======
+>>>>>>> v3.18
 /*
  * Use V4L2 subdev to carry V4L2 control handler, even we don't implement
  * subdev itself, just to avoid reinventing the wheel.
@@ -971,6 +1042,9 @@ static struct i2c_driver e4000_driver = {
 };
 
 module_i2c_driver(e4000_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_DESCRIPTION("Elonics E4000 silicon tuner driver");

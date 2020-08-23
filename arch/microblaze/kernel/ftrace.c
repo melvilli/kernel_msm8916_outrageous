@@ -28,6 +28,12 @@ void prepare_ftrace_return(unsigned long *parent, unsigned long self_addr)
 				&return_to_handler;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (unlikely(ftrace_graph_is_dead()))
+		return;
+
+>>>>>>> v3.18
 =======
 	if (unlikely(ftrace_graph_is_dead()))
 		return;
@@ -178,11 +184,16 @@ int ftrace_make_call(struct dyn_ftrace *rec, unsigned long addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init ftrace_dyn_arch_init(void *data)
 {
 	/* The return code is retured via data */
 	*(unsigned long *)data = 0;
 
+=======
+int __init ftrace_dyn_arch_init(void)
+{
+>>>>>>> v3.18
 =======
 int __init ftrace_dyn_arch_init(void)
 {

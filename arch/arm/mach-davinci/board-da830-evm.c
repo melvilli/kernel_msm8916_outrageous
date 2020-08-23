@@ -18,7 +18,11 @@
 #include <linux/i2c.h>
 #include <linux/i2c/pcf857x.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 >>>>>>> v3.18
@@ -27,17 +31,24 @@
 #include <linux/spi/spi.h>
 #include <linux/spi/flash.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_data/gpio-davinci.h>
 #include <linux/platform_data/mtd-davinci.h>
 #include <linux/platform_data/mtd-davinci-aemif.h>
 #include <linux/platform_data/spi-davinci.h>
 #include <linux/platform_data/usb-davinci.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <mach/cp_intc.h>
 #include <mach/mux.h>
@@ -47,10 +58,15 @@
 #include <linux/platform_data/mtd-davinci-aemif.h>
 #include <linux/platform_data/spi-davinci.h>
 =======
+=======
+>>>>>>> v3.18
 #include <mach/common.h>
 #include <mach/cp_intc.h>
 #include <mach/mux.h>
 #include <mach/da8xx.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DA830_EVM_PHY_ID		""
@@ -94,7 +110,11 @@ static int da830_evm_usb_ocic_notify(da8xx_ocic_handler_t handler)
 		da830_evm_usb_ocic_handler = handler;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = request_irq(irq, da830_evm_usb_ocic_irq, IRQF_DISABLED |
+=======
+		error = request_irq(irq, da830_evm_usb_ocic_irq,
+>>>>>>> v3.18
 =======
 		error = request_irq(irq, da830_evm_usb_ocic_irq,
 >>>>>>> v3.18
@@ -209,10 +229,13 @@ static __init void da830_evm_usb_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct davinci_uart_config da830_evm_uart_config __initdata = {
 	.enabled_uarts = 0x7,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const short da830_evm_mcasp1_pins[] = {
@@ -448,6 +471,12 @@ static inline void da830_evm_init_nand(int mux_mode)
 		pr_warning("da830_evm_init: NAND device not registered.\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (davinci_aemif_setup(&da830_evm_nand_device))
+		pr_warn("%s: Cannot configure AEMIF.\n", __func__);
+
+>>>>>>> v3.18
 =======
 	if (davinci_aemif_setup(&da830_evm_nand_device))
 		pr_warn("%s: Cannot configure AEMIF.\n", __func__);
@@ -628,11 +657,17 @@ static __init void da830_evm_init(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = da830_register_gpio();
 	if (ret)
 		pr_warn("da830_evm_init: GPIO init failed: %d\n", ret);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = da830_register_edma(da830_edma_rsv);
 	if (ret)
@@ -670,7 +705,11 @@ static __init void da830_evm_init(void)
 				ret);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	davinci_serial_init(&da830_evm_uart_config);
+=======
+	davinci_serial_init(da8xx_serial_device);
+>>>>>>> v3.18
 =======
 	davinci_serial_init(da8xx_serial_device);
 >>>>>>> v3.18

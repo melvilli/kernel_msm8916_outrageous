@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * vdso_test.c: Sample code to test parse_vdso.c on x86_64
  * Copyright (c) 2011 Andy Lutomirski
  * Subject to the GNU General Public License, version 2
@@ -16,6 +17,8 @@
 #include <unistd.h>
 #include <stdint.h>
 =======
+=======
+>>>>>>> v3.18
  * vdso_test.c: Sample code to test parse_vdso.c
  * Copyright (c) 2014 Andy Lutomirski
  * Subject to the GNU General Public License, version 2
@@ -31,12 +34,16 @@
 #include <stdio.h>
 #include <sys/auxv.h>
 #include <sys/time.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern void *vdso_sym(const char *version, const char *name);
 extern void vdso_init_from_sysinfo_ehdr(uintptr_t base);
 extern void vdso_init_from_auxv(void *auxv);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* We need a libc functions... */
 int strcmp(const char *a, const char *b)
@@ -94,6 +101,8 @@ __attribute__((externally_visible)) void c_main(void **stack)
 	/* Now we're pointing at auxv.  Initialize the vDSO parser. */
 	vdso_init_from_auxv((void *)stack);
 =======
+=======
+>>>>>>> v3.18
 int main(int argc, char **argv)
 {
 	unsigned long sysinfo_ehdr = getauxval(AT_SYSINFO_EHDR);
@@ -103,6 +112,9 @@ int main(int argc, char **argv)
 	}
 
 	vdso_init_from_sysinfo_ehdr(getauxval(AT_SYSINFO_EHDR));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Find gettimeofday. */
@@ -110,19 +122,26 @@ int main(int argc, char **argv)
 	gtod_t gtod = (gtod_t)vdso_sym("LINUX_2.6", "__vdso_gettimeofday");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!gtod)
 		linux_exit(1);
 =======
+=======
+>>>>>>> v3.18
 	if (!gtod) {
 		printf("Could not find __vdso_gettimeofday\n");
 		return 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct timeval tv;
 	long ret = gtod(&tv, 0);
 
 	if (ret == 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		char buf[] = "The time is                     .000000\n";
 		to_base10(buf + 31, tv.tv_sec);
@@ -148,6 +167,8 @@ asm (
         "jmp c_main"
 	);
 =======
+=======
+>>>>>>> v3.18
 		printf("The time is %lld.%06lld\n",
 		       (long long)tv.tv_sec, (long long)tv.tv_usec);
 	} else {
@@ -156,4 +177,7 @@ asm (
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

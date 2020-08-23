@@ -18,6 +18,10 @@
 #include <linux/init.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_gpio.h>
 >>>>>>> v3.18
@@ -54,11 +58,17 @@ struct  cs42l52_private {
 	u32 mclk;
 	u8 flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_INPUT) || defined(CONFIG_INPUT_MODULE)
 	struct input_dev *beep;
 	struct work_struct beep_work;
 	int beep_rate;
 #endif
+=======
+	struct input_dev *beep;
+	struct work_struct beep_work;
+	int beep_rate;
+>>>>>>> v3.18
 =======
 	struct input_dev *beep;
 	struct work_struct beep_work;
@@ -188,9 +198,15 @@ static bool cs42l52_volatile_register(struct device *dev, unsigned int reg)
 	case CS42L52_SPK_STATUS:
 	case CS42L52_CHARGE_PUMP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 1;
 	default:
 		return 0;
+=======
+		return true;
+	default:
+		return false;
+>>>>>>> v3.18
 =======
 		return true;
 	default:
@@ -212,6 +228,11 @@ static DECLARE_TLV_DB_SCALE(pga_tlv, -600, 50, 0);
 static DECLARE_TLV_DB_SCALE(mix_tlv, -50, 50, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DECLARE_TLV_DB_SCALE(beep_tlv, -56, 200, 0);
+
+>>>>>>> v3.18
 =======
 static DECLARE_TLV_DB_SCALE(beep_tlv, -56, 200, 0);
 
@@ -229,6 +250,7 @@ static const char * const cs42l52_adcb_text[] = {
 	"Input1B", "Input2B", "Input3B", "Input4B", "PGA Input Right"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum adca_enum =
 	SOC_ENUM_SINGLE(CS42L52_ADC_PGA_A, 5,
 		ARRAY_SIZE(cs42l52_adca_text), cs42l52_adca_text);
@@ -237,11 +259,16 @@ static const struct soc_enum adcb_enum =
 	SOC_ENUM_SINGLE(CS42L52_ADC_PGA_B, 5,
 		ARRAY_SIZE(cs42l52_adcb_text), cs42l52_adcb_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(adca_enum,
 			    CS42L52_ADC_PGA_A, 5, cs42l52_adca_text);
 
 static SOC_ENUM_SINGLE_DECL(adcb_enum,
 			    CS42L52_ADC_PGA_B, 5, cs42l52_adcb_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new adca_mux =
@@ -255,6 +282,7 @@ static const char * const mic_bias_level_text[] = {
 	"0.8 +VA", "0.83 +VA", "0.91 +VA"
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct soc_enum mic_bias_level_enum =
 	SOC_ENUM_SINGLE(CS42L52_IFACE_CTL2, 0,
@@ -283,6 +311,8 @@ static const struct soc_enum digital_output_mux_enum =
 			ARRAY_SIZE(digital_output_mux_text),
 			digital_output_mux_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(mic_bias_level_enum,
 			    CS42L52_IFACE_CTL2, 0, mic_bias_level_text);
 
@@ -299,6 +329,9 @@ static const char * const digital_output_mux_text[] = {"ADC", "DSP"};
 static SOC_ENUM_SINGLE_DECL(digital_output_mux_enum,
 			    CS42L52_ADC_MISC_CTL, 6,
 			    digital_output_mux_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new digital_output_mux =
@@ -310,9 +343,15 @@ static const char * const hp_gain_num_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum hp_gain_enum =
 	SOC_ENUM_SINGLE(CS42L52_PB_CTL1, 5,
 		ARRAY_SIZE(hp_gain_num_text), hp_gain_num_text);
+=======
+static SOC_ENUM_SINGLE_DECL(hp_gain_enum,
+			    CS42L52_PB_CTL1, 5,
+			    hp_gain_num_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(hp_gain_enum,
 			    CS42L52_PB_CTL1, 5,
@@ -325,9 +364,15 @@ static const char * const beep_pitch_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum beep_pitch_enum =
 	SOC_ENUM_SINGLE(CS42L52_BEEP_FREQ, 4,
 			ARRAY_SIZE(beep_pitch_text), beep_pitch_text);
+=======
+static SOC_ENUM_SINGLE_DECL(beep_pitch_enum,
+			    CS42L52_BEEP_FREQ, 4,
+			    beep_pitch_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(beep_pitch_enum,
 			    CS42L52_BEEP_FREQ, 4,
@@ -341,9 +386,15 @@ static const char * const beep_ontime_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum beep_ontime_enum =
 	SOC_ENUM_SINGLE(CS42L52_BEEP_FREQ, 0,
 			ARRAY_SIZE(beep_ontime_text), beep_ontime_text);
+=======
+static SOC_ENUM_SINGLE_DECL(beep_ontime_enum,
+			    CS42L52_BEEP_FREQ, 0,
+			    beep_ontime_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(beep_ontime_enum,
 			    CS42L52_BEEP_FREQ, 0,
@@ -356,9 +407,15 @@ static const char * const beep_offtime_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum beep_offtime_enum =
 	SOC_ENUM_SINGLE(CS42L52_BEEP_VOL, 5,
 			ARRAY_SIZE(beep_offtime_text), beep_offtime_text);
+=======
+static SOC_ENUM_SINGLE_DECL(beep_offtime_enum,
+			    CS42L52_BEEP_VOL, 5,
+			    beep_offtime_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(beep_offtime_enum,
 			    CS42L52_BEEP_VOL, 5,
@@ -370,9 +427,15 @@ static const char * const beep_config_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum beep_config_enum =
 	SOC_ENUM_SINGLE(CS42L52_BEEP_TONE_CTL, 6,
 			ARRAY_SIZE(beep_config_text), beep_config_text);
+=======
+static SOC_ENUM_SINGLE_DECL(beep_config_enum,
+			    CS42L52_BEEP_TONE_CTL, 6,
+			    beep_config_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(beep_config_enum,
 			    CS42L52_BEEP_TONE_CTL, 6,
@@ -384,9 +447,15 @@ static const char * const beep_bass_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum beep_bass_enum =
 	SOC_ENUM_SINGLE(CS42L52_BEEP_TONE_CTL, 1,
 			ARRAY_SIZE(beep_bass_text), beep_bass_text);
+=======
+static SOC_ENUM_SINGLE_DECL(beep_bass_enum,
+			    CS42L52_BEEP_TONE_CTL, 1,
+			    beep_bass_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(beep_bass_enum,
 			    CS42L52_BEEP_TONE_CTL, 1,
@@ -398,9 +467,15 @@ static const char * const beep_treble_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum beep_treble_enum =
 	SOC_ENUM_SINGLE(CS42L52_BEEP_TONE_CTL, 3,
 			ARRAY_SIZE(beep_treble_text), beep_treble_text);
+=======
+static SOC_ENUM_SINGLE_DECL(beep_treble_enum,
+			    CS42L52_BEEP_TONE_CTL, 3,
+			    beep_treble_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(beep_treble_enum,
 			    CS42L52_BEEP_TONE_CTL, 3,
@@ -413,9 +488,15 @@ static const char * const ng_threshold_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ng_threshold_enum =
 	SOC_ENUM_SINGLE(CS42L52_NOISE_GATE_CTL, 2,
 		ARRAY_SIZE(ng_threshold_text), ng_threshold_text);
+=======
+static SOC_ENUM_SINGLE_DECL(ng_threshold_enum,
+			    CS42L52_NOISE_GATE_CTL, 2,
+			    ng_threshold_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(ng_threshold_enum,
 			    CS42L52_NOISE_GATE_CTL, 2,
@@ -426,9 +507,15 @@ static const char * const cs42l52_ng_delay_text[] = {
 	"50ms", "100ms", "150ms", "200ms"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ng_delay_enum =
 	SOC_ENUM_SINGLE(CS42L52_NOISE_GATE_CTL, 0,
 		ARRAY_SIZE(cs42l52_ng_delay_text), cs42l52_ng_delay_text);
+=======
+static SOC_ENUM_SINGLE_DECL(ng_delay_enum,
+			    CS42L52_NOISE_GATE_CTL, 0,
+			    cs42l52_ng_delay_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(ng_delay_enum,
 			    CS42L52_NOISE_GATE_CTL, 0,
@@ -440,9 +527,15 @@ static const char * const cs42l52_ng_type_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ng_type_enum =
 	SOC_ENUM_SINGLE(CS42L52_NOISE_GATE_CTL, 6,
 		ARRAY_SIZE(cs42l52_ng_type_text), cs42l52_ng_type_text);
+=======
+static SOC_ENUM_SINGLE_DECL(ng_type_enum,
+			    CS42L52_NOISE_GATE_CTL, 6,
+			    cs42l52_ng_type_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(ng_type_enum,
 			    CS42L52_NOISE_GATE_CTL, 6,
@@ -519,7 +612,11 @@ static const struct snd_kcontrol_new cs42l52_snd_controls[] = {
 
 	SOC_DOUBLE_R_SX_TLV("Headphone Volume", CS42L52_HPA_VOL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      CS42L52_HPB_VOL, 0, 0x34, 0xCC, hpd_tlv),
+=======
+			      CS42L52_HPB_VOL, 0, 0x34, 0xC0, hpd_tlv),
+>>>>>>> v3.18
 =======
 			      CS42L52_HPB_VOL, 0, 0x34, 0xC0, hpd_tlv),
 >>>>>>> v3.18
@@ -528,15 +625,21 @@ static const struct snd_kcontrol_new cs42l52_snd_controls[] = {
 
 	SOC_DOUBLE_R_SX_TLV("Speaker Volume", CS42L52_SPKA_VOL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      CS42L52_SPKB_VOL, 0, 0x1, 0xff, hl_tlv),
 
 	SOC_DOUBLE_R_SX_TLV("Bypass Volume", CS42L52_PASSTHRUA_VOL,
 			      CS42L52_PASSTHRUB_VOL, 6, 0x18, 0x90, pga_tlv),
 =======
+=======
+>>>>>>> v3.18
 			      CS42L52_SPKB_VOL, 0, 0x40, 0xC0, hl_tlv),
 
 	SOC_DOUBLE_R_SX_TLV("Bypass Volume", CS42L52_PASSTHRUA_VOL,
 			      CS42L52_PASSTHRUB_VOL, 0, 0x88, 0x90, pga_tlv),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	SOC_DOUBLE("Bypass Mute", CS42L52_MISC_CTL, 4, 5, 1, 0),
@@ -548,15 +651,21 @@ static const struct snd_kcontrol_new cs42l52_snd_controls[] = {
 
 	SOC_DOUBLE_R_SX_TLV("ADC Volume", CS42L52_ADCA_VOL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      CS42L52_ADCB_VOL, 7, 0x80, 0xA0, ipd_tlv),
 	SOC_DOUBLE_R_SX_TLV("ADC Mixer Volume",
 			     CS42L52_ADCA_MIXER_VOL, CS42L52_ADCB_MIXER_VOL,
 				6, 0x7f, 0x19, ipd_tlv),
 =======
+=======
+>>>>>>> v3.18
 			      CS42L52_ADCB_VOL, 0, 0xA0, 0x78, ipd_tlv),
 	SOC_DOUBLE_R_SX_TLV("ADC Mixer Volume",
 			     CS42L52_ADCA_MIXER_VOL, CS42L52_ADCB_MIXER_VOL,
 				0, 0x19, 0x7F, ipd_tlv),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	SOC_DOUBLE("ADC Switch", CS42L52_ADC_MISC_CTL, 0, 1, 1, 0),
@@ -566,17 +675,23 @@ static const struct snd_kcontrol_new cs42l52_snd_controls[] = {
 
 	SOC_DOUBLE_R_SX_TLV("PGA Volume", CS42L52_PGAA_CTL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    CS42L52_PGAB_CTL, 0, 0x28, 0x30, pga_tlv),
 
 	SOC_DOUBLE_R_SX_TLV("PCM Mixer Volume",
 			    CS42L52_PCMA_MIXER_VOL, CS42L52_PCMB_MIXER_VOL,
 				0, 0x7f, 0x19, mix_tlv),
 =======
+=======
+>>>>>>> v3.18
 			    CS42L52_PGAB_CTL, 0, 0x28, 0x24, pga_tlv),
 
 	SOC_DOUBLE_R_SX_TLV("PCM Mixer Volume",
 			    CS42L52_PCMA_MIXER_VOL, CS42L52_PCMB_MIXER_VOL,
 				0, 0x19, 0x7f, mix_tlv),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SOC_DOUBLE_R("PCM Mixer Switch",
 		     CS42L52_PCMA_MIXER_VOL, CS42L52_PCMB_MIXER_VOL, 7, 1, 1),
@@ -586,7 +701,12 @@ static const struct snd_kcontrol_new cs42l52_snd_controls[] = {
 	SOC_ENUM("Beep on Time", beep_ontime_enum),
 	SOC_ENUM("Beep off Time", beep_offtime_enum),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SOC_SINGLE_SX_TLV("Beep Volume", CS42L52_BEEP_VOL, 0, 0x07, 0x1f, hl_tlv),
+=======
+	SOC_SINGLE_SX_TLV("Beep Volume", CS42L52_BEEP_VOL,
+			0, 0x07, 0x1f, beep_tlv),
+>>>>>>> v3.18
 =======
 	SOC_SINGLE_SX_TLV("Beep Volume", CS42L52_BEEP_VOL,
 			0, 0x07, 0x1f, beep_tlv),
@@ -667,7 +787,10 @@ static const struct snd_kcontrol_new cs42l52_snd_controls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_kcontrol_new cs42l52_mica_controls[] = {
 	SOC_ENUM("MICA Select", mica_enum),
 };
@@ -692,6 +815,9 @@ static int cs42l52_add_mic_controls(struct snd_soc_codec *codec)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct snd_soc_dapm_widget cs42l52_dapm_widgets[] = {
 
@@ -713,9 +839,12 @@ static const struct snd_soc_dapm_widget cs42l52_dapm_widgets[] = {
 			SND_SOC_NOPM, 0, 0),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SND_SOC_DAPM_MUX("MICA Mux", SND_SOC_NOPM, 0, 0, &mica_mux),
 	SND_SOC_DAPM_MUX("MICB Mux", SND_SOC_NOPM, 0, 0, &micb_mux),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SND_SOC_DAPM_ADC("ADC Left", NULL, CS42L52_PWRCTL1, 1, 1),
@@ -1105,6 +1234,7 @@ static struct snd_soc_dai_driver cs42l52_dai = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cs42l52_suspend(struct snd_soc_codec *codec)
 {
 	cs42l52_set_bias_level(codec, SND_SOC_BIAS_OFF);
@@ -1120,6 +1250,8 @@ static int cs42l52_resume(struct snd_soc_codec *codec)
 }
 
 #if defined(CONFIG_INPUT) || defined(CONFIG_INPUT_MODULE)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int beep_rates[] = {
@@ -1256,6 +1388,7 @@ static void cs42l52_free_beep(struct snd_soc_codec *codec)
 			    CS42L52_BEEP_EN_MASK, 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static void cs42l52_init_beep(struct snd_soc_codec *codec)
 {
@@ -1267,10 +1400,13 @@ static void cs42l52_free_beep(struct snd_soc_codec *codec)
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 static int cs42l52_probe(struct snd_soc_codec *codec)
 {
 	struct cs42l52_private *cs42l52 = snd_soc_codec_get_drvdata(codec);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -1286,17 +1422,23 @@ static int cs42l52_probe(struct snd_soc_codec *codec)
 
 	cs42l52_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
 =======
+=======
+>>>>>>> v3.18
 
 	regcache_cache_only(cs42l52->regmap, true);
 
 	cs42l52_add_mic_controls(codec);
 
 	cs42l52_init_beep(codec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cs42l52->sysclk = CS42L52_DEFAULT_CLK;
 	cs42l52->config.format = CS42L52_DEFAULT_FORMAT;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Set Platform MICx CFG */
 	snd_soc_update_bits(codec, CS42L52_MICA_CTL,
@@ -1336,13 +1478,19 @@ static int cs42l52_probe(struct snd_soc_codec *codec)
 =======
 	return 0;
 >>>>>>> v3.18
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static int cs42l52_remove(struct snd_soc_codec *codec)
 {
 	cs42l52_free_beep(codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cs42l52_set_bias_level(codec, SND_SOC_BIAS_OFF);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1353,9 +1501,14 @@ static struct snd_soc_codec_driver soc_codec_dev_cs42l52 = {
 	.probe = cs42l52_probe,
 	.remove = cs42l52_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend = cs42l52_suspend,
 	.resume = cs42l52_resume,
 	.set_bias_level = cs42l52_set_bias_level,
+=======
+	.set_bias_level = cs42l52_set_bias_level,
+	.suspend_bias_off = true,
+>>>>>>> v3.18
 =======
 	.set_bias_level = cs42l52_set_bias_level,
 	.suspend_bias_off = true,
@@ -1399,15 +1552,21 @@ static int cs42l52_i2c_probe(struct i2c_client *i2c_client,
 {
 	struct cs42l52_private *cs42l52;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	unsigned int devid = 0;
 	unsigned int reg;
 =======
+=======
+>>>>>>> v3.18
 	struct cs42l52_platform_data *pdata = dev_get_platdata(&i2c_client->dev);
 	int ret;
 	unsigned int devid = 0;
 	unsigned int reg;
 	u32 val32;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cs42l52 = devm_kzalloc(&i2c_client->dev, sizeof(struct cs42l52_private),
@@ -1423,6 +1582,7 @@ static int cs42l52_i2c_probe(struct i2c_client *i2c_client,
 		return ret;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	i2c_set_clientdata(i2c_client, cs42l52);
 
@@ -1430,6 +1590,8 @@ static int cs42l52_i2c_probe(struct i2c_client *i2c_client,
 		memcpy(&cs42l52->pdata, dev_get_platdata(&i2c_client->dev),
 		       sizeof(cs42l52->pdata));
 =======
+=======
+>>>>>>> v3.18
 	if (pdata) {
 		cs42l52->pdata = *pdata;
 	} else {
@@ -1479,6 +1641,9 @@ static int cs42l52_i2c_probe(struct i2c_client *i2c_client,
 	}
 
 	i2c_set_clientdata(i2c_client, cs42l52);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = regmap_register_patch(cs42l52->regmap, cs42l52_threshold_patch,
@@ -1498,8 +1663,11 @@ static int cs42l52_i2c_probe(struct i2c_client *i2c_client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regcache_cache_only(cs42l52->regmap, true);
 =======
+=======
+>>>>>>> v3.18
 	dev_info(&i2c_client->dev, "Cirrus Logic CS42L52, Revision: %02X\n",
 		 reg & CS42L52_CHIP_REV_MASK);
 
@@ -1526,6 +1694,9 @@ static int cs42l52_i2c_probe(struct i2c_client *i2c_client,
 		regmap_update_bits(cs42l52->regmap, CS42L52_IFACE_CTL2,
 				   CS42L52_IFACE_CTL2_BIAS_LVL,
 				cs42l52->pdata.micbias_lvl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret =  snd_soc_register_codec(&i2c_client->dev,
@@ -1542,7 +1713,10 @@ static int cs42l52_i2c_remove(struct i2c_client *client)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id cs42l52_of_match[] = {
 	{ .compatible = "cirrus,cs42l52", },
 	{},
@@ -1550,6 +1724,9 @@ static const struct of_device_id cs42l52_of_match[] = {
 MODULE_DEVICE_TABLE(of, cs42l52_of_match);
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct i2c_device_id cs42l52_id[] = {
 	{ "cs42l52", 0 },
@@ -1562,6 +1739,10 @@ static struct i2c_driver cs42l52_i2c_driver = {
 		.name = "cs42l52",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = cs42l52_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = cs42l52_of_match,
 >>>>>>> v3.18

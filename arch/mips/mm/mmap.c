@@ -93,7 +93,11 @@ static unsigned long arch_get_unmapped_area_common(struct file *filp,
 		vma = find_vma(mm, addr);
 		if (TASK_SIZE - len >= addr &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (!vma || addr + len <= vm_start_gap(vma)))
+=======
+		    (!vma || addr + len <= vma->vm_start))
+>>>>>>> v3.18
 =======
 		    (!vma || addr + len <= vma->vm_start))
 >>>>>>> v3.18
@@ -152,7 +156,11 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
 
 	if (current->flags & PF_RANDOMIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		random_factor = get_random_long();
+=======
+		random_factor = get_random_int();
+>>>>>>> v3.18
 =======
 		random_factor = get_random_int();
 >>>>>>> v3.18
@@ -175,7 +183,11 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
 static inline unsigned long brk_rnd(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long rnd = get_random_long();
+=======
+	unsigned long rnd = get_random_int();
+>>>>>>> v3.18
 =======
 	unsigned long rnd = get_random_int();
 >>>>>>> v3.18

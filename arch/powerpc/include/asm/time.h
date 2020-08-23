@@ -29,6 +29,10 @@ struct rtc_time;
 extern void to_tm(int tim, struct rtc_time * tm);
 extern void GregorianDay(struct rtc_time *tm);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void tick_broadcast_ipi_handler(void);
+>>>>>>> v3.18
 =======
 extern void tick_broadcast_ipi_handler(void);
 >>>>>>> v3.18
@@ -106,7 +110,10 @@ static inline u64 get_rtc(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline u64 get_vtb(void)
 {
 #ifdef CONFIG_PPC_BOOK3S_64
@@ -116,6 +123,9 @@ static inline u64 get_vtb(void)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC64
 static inline u64 get_tb(void)

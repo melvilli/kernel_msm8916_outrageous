@@ -24,8 +24,11 @@
 #include <linux/i2c.h>
 #include <linux/input.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/input/pixcir_ts.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/input/mt.h>
 #include <linux/input/pixcir_ts.h>
 #include <linux/gpio.h>
@@ -34,11 +37,15 @@
 #include <linux/of_device.h>
 
 #define PIXCIR_MAX_SLOTS       5 /* Max fingers supported by driver */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct pixcir_i2c_ts_data {
 	struct i2c_client *client;
 	struct input_dev *input;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct pixcir_ts_platform_data *chip;
 	bool exiting;
@@ -51,6 +58,8 @@ static void pixcir_ts_poscheck(struct pixcir_i2c_ts_data *data)
 	u8 touch;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 	const struct pixcir_ts_platform_data *pdata;
 	bool running;
 	int max_fingers;	/* Max fingers supported in this instance */
@@ -84,6 +93,9 @@ static void pixcir_ts_parse(struct pixcir_i2c_ts_data *tsdata,
 	readsize = 2 + tsdata->max_fingers * (4 + i);
 	if (readsize > sizeof(rdbuf))
 		readsize = sizeof(rdbuf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = i2c_master_send(tsdata->client, wrbuf, sizeof(wrbuf));
@@ -95,7 +107,11 @@ static void pixcir_ts_parse(struct pixcir_i2c_ts_data *tsdata,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = i2c_master_recv(tsdata->client, rdbuf, sizeof(rdbuf));
+=======
+	ret = i2c_master_recv(tsdata->client, rdbuf, readsize);
+>>>>>>> v3.18
 =======
 	ret = i2c_master_recv(tsdata->client, rdbuf, readsize);
 >>>>>>> v3.18
@@ -106,6 +122,7 @@ static void pixcir_ts_parse(struct pixcir_i2c_ts_data *tsdata,
 		return;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	touch = rdbuf[0];
 	if (touch) {
@@ -135,6 +152,8 @@ static void pixcir_ts_parse(struct pixcir_i2c_ts_data *tsdata,
 
 	input_sync(tsdata->input);
 =======
+=======
+>>>>>>> v3.18
 	touch = rdbuf[0] & 0x7;
 	if (touch > tsdata->max_fingers)
 		touch = tsdata->max_fingers;
@@ -206,12 +225,16 @@ static void pixcir_ts_report(struct pixcir_i2c_ts_data *ts,
 
 	input_mt_sync_frame(ts->input);
 	input_sync(ts->input);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static irqreturn_t pixcir_ts_isr(int irq, void *dev_id)
 {
 	struct pixcir_i2c_ts_data *tsdata = dev_id;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	while (!tsdata->exiting) {
@@ -220,6 +243,8 @@ static irqreturn_t pixcir_ts_isr(int irq, void *dev_id)
 		if (tsdata->chip->attb_read_val())
 			break;
 =======
+=======
+>>>>>>> v3.18
 	const struct pixcir_ts_platform_data *pdata = tsdata->pdata;
 	struct pixcir_report_data report;
 
@@ -241,6 +266,9 @@ static irqreturn_t pixcir_ts_isr(int irq, void *dev_id)
 			}
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		msleep(20);
@@ -250,7 +278,10 @@ static irqreturn_t pixcir_ts_isr(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int pixcir_set_power_mode(struct pixcir_i2c_ts_data *ts,
 				 enum pixcir_power_mode mode)
 {
@@ -409,11 +440,15 @@ static void pixcir_input_close(struct input_dev *dev)
 	pixcir_stop(ts);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int pixcir_i2c_ts_suspend(struct device *dev)
 {
 	struct i2c_client *client = to_i2c_client(dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (device_may_wakeup(&client->dev))
@@ -421,6 +456,8 @@ static int pixcir_i2c_ts_suspend(struct device *dev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct pixcir_i2c_ts_data *ts = i2c_get_clientdata(client);
 	struct input_dev *input = ts->input;
 	int ret = 0;
@@ -445,6 +482,9 @@ unlock:
 	mutex_unlock(&input->mutex);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -452,12 +492,15 @@ static int pixcir_i2c_ts_resume(struct device *dev)
 {
 	struct i2c_client *client = to_i2c_client(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (device_may_wakeup(&client->dev))
 		disable_irq_wake(client->irq);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct pixcir_i2c_ts_data *ts = i2c_get_clientdata(client);
 	struct input_dev *input = ts->input;
 	int ret = 0;
@@ -482,6 +525,9 @@ unlock:
 	mutex_unlock(&input->mutex);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif
@@ -490,11 +536,14 @@ static SIMPLE_DEV_PM_OPS(pixcir_dev_pm_ops,
 			 pixcir_i2c_ts_suspend, pixcir_i2c_ts_resume);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pixcir_i2c_ts_probe(struct i2c_client *client,
 					 const struct i2c_device_id *id)
 {
 	const struct pixcir_ts_platform_data *pdata = client->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id pixcir_of_match[];
 
@@ -548,25 +597,35 @@ static int pixcir_i2c_ts_probe(struct i2c_client *client,
 			dev_get_platdata(&client->dev);
 	struct device *dev = &client->dev;
 	struct device_node *np = dev->of_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct pixcir_i2c_ts_data *tsdata;
 	struct input_dev *input;
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (np && !pdata) {
 		pdata = pixcir_parse_dt(dev);
 		if (IS_ERR(pdata))
 			return PTR_ERR(pdata);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!pdata) {
 		dev_err(&client->dev, "platform data not defined\n");
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tsdata = kzalloc(sizeof(*tsdata), GFP_KERNEL);
 	input = input_allocate_device();
@@ -575,6 +634,8 @@ static int pixcir_i2c_ts_probe(struct i2c_client *client,
 		error = -ENOMEM;
 		goto err_free_mem;
 =======
+=======
+>>>>>>> v3.18
 	if (!gpio_is_valid(pdata->gpio_attb)) {
 		dev_err(dev, "Invalid gpio_attb in pdata\n");
 		return -EINVAL;
@@ -593,23 +654,32 @@ static int pixcir_i2c_ts_probe(struct i2c_client *client,
 	if (!input) {
 		dev_err(dev, "Failed to allocate input device\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	tsdata->client = client;
 	tsdata->input = input;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tsdata->chip = pdata;
 
 	input->name = client->name;
 	input->id.bustype = BUS_I2C;
 =======
+=======
+>>>>>>> v3.18
 	tsdata->pdata = pdata;
 
 	input->name = client->name;
 	input->id.bustype = BUS_I2C;
 	input->open = pixcir_input_open;
 	input->close = pixcir_input_close;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	input->dev.parent = &client->dev;
 
@@ -621,6 +691,7 @@ static int pixcir_i2c_ts_probe(struct i2c_client *client,
 	input_set_abs_params(input, ABS_MT_POSITION_X, 0, pdata->x_max, 0, 0);
 	input_set_abs_params(input, ABS_MT_POSITION_Y, 0, pdata->y_max, 0, 0);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	input_set_drvdata(input, tsdata);
 
@@ -636,6 +707,8 @@ static int pixcir_i2c_ts_probe(struct i2c_client *client,
 	if (error)
 		goto err_free_irq;
 =======
+=======
+>>>>>>> v3.18
 	tsdata->max_fingers = tsdata->pdata->chip.max_fingers;
 	if (tsdata->max_fingers > PIXCIR_MAX_SLOTS) {
 		tsdata->max_fingers = PIXCIR_MAX_SLOTS;
@@ -682,12 +755,16 @@ static int pixcir_i2c_ts_probe(struct i2c_client *client,
 	error = input_register_device(input);
 	if (error)
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	i2c_set_clientdata(client, tsdata);
 	device_init_wakeup(&client->dev, 1);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err_free_irq:
@@ -698,10 +775,13 @@ err_free_mem:
 	return error;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int pixcir_i2c_ts_remove(struct i2c_client *client)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pixcir_i2c_ts_data *tsdata = i2c_get_clientdata(client);
 
@@ -718,12 +798,20 @@ static int pixcir_i2c_ts_remove(struct i2c_client *client)
 	device_init_wakeup(&client->dev, 0);
 
 >>>>>>> v3.18
+=======
+	device_init_wakeup(&client->dev, 0);
+
+>>>>>>> v3.18
 	return 0;
 }
 
 static const struct i2c_device_id pixcir_i2c_ts_id[] = {
 	{ "pixcir_ts", 0 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "pixcir_tangoc", 0 },
+>>>>>>> v3.18
 =======
 	{ "pixcir_tangoc", 0 },
 >>>>>>> v3.18
@@ -732,7 +820,10 @@ static const struct i2c_device_id pixcir_i2c_ts_id[] = {
 MODULE_DEVICE_TABLE(i2c, pixcir_i2c_ts_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct pixcir_i2c_chip_data pixcir_ts_data = {
 	.max_fingers = 2,
@@ -752,6 +843,9 @@ static const struct of_device_id pixcir_of_match[] = {
 MODULE_DEVICE_TABLE(of, pixcir_of_match);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct i2c_driver pixcir_i2c_ts_driver = {
 	.driver = {
@@ -759,6 +853,10 @@ static struct i2c_driver pixcir_i2c_ts_driver = {
 		.name	= "pixcir_ts",
 		.pm	= &pixcir_dev_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(pixcir_of_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(pixcir_of_match),
 >>>>>>> v3.18

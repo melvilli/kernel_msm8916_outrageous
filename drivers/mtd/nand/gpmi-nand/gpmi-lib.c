@@ -21,6 +21,10 @@
 #include <linux/delay.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -192,13 +196,19 @@ int gpmi_init(struct gpmi_nand_data *this)
 	writel(BM_GPMI_CTRL1_BCH_MODE, r->gpmi_regs + HW_GPMI_CTRL1_SET);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Decouple the chip select from dma channel. We use dma0 for all
 	 * the chips.
 	 */
 	writel(BM_GPMI_CTRL1_DECOUPLE_CS, r->gpmi_regs + HW_GPMI_CTRL1_SET);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gpmi_disable_clk(this);
 	return 0;
@@ -214,6 +224,7 @@ void gpmi_dump_info(struct gpmi_nand_data *this)
 	u32 reg;
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pr_err("Show GPMI registers :\n");
 	for (i = 0; i <= HW_GPMI_DEBUG / 0x10 + 1; i++) {
@@ -240,6 +251,8 @@ void gpmi_dump_info(struct gpmi_nand_data *this)
 	pr_err("Block Mark Byte Offset : %u\n", geo->block_mark_byte_offset);
 	pr_err("Block Mark Bit Offset  : %u\n", geo->block_mark_bit_offset);
 =======
+=======
+>>>>>>> v3.18
 	dev_err(this->dev, "Show GPMI registers :\n");
 	for (i = 0; i <= HW_GPMI_DEBUG / 0x10 + 1; i++) {
 		reg = readl(r->gpmi_regs + i * 0x10);
@@ -275,6 +288,9 @@ void gpmi_dump_info(struct gpmi_nand_data *this)
 		geo->auxiliary_status_offset,
 		geo->block_mark_byte_offset,
 		geo->block_mark_bit_offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -311,8 +327,13 @@ int bch_set_geometry(struct gpmi_nand_data *this)
 	* On the other hand, the MX28 needs the reset, because one case has been
 	* seen where the BCH produced ECC errors constantly after 10000
 <<<<<<< HEAD
+<<<<<<< HEAD
 	* consecutive reboots. The latter case has not been seen on the MX23 yet,
 	* still we don't know if it could happen there as well.
+=======
+	* consecutive reboots. The latter case has not been seen on the MX23
+	* yet, still we don't know if it could happen there as well.
+>>>>>>> v3.18
 =======
 	* consecutive reboots. The latter case has not been seen on the MX23
 	* yet, still we don't know if it could happen there as well.
@@ -404,7 +425,11 @@ static int gpmi_nfc_compute_hardware_timing(struct gpmi_nand_data *this,
 		(target.tREA_in_ns  >= 0) &&
 		(target.tRLOH_in_ns >= 0) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(target.tRHOH_in_ns >= 0) ;
+=======
+		(target.tRHOH_in_ns >= 0);
+>>>>>>> v3.18
 =======
 		(target.tRHOH_in_ns >= 0);
 >>>>>>> v3.18
@@ -904,7 +929,11 @@ static void gpmi_compute_edo_timing(struct gpmi_nand_data *this,
 	unsigned long rate = clk_get_rate(r->clock[0]);
 	int mode = this->timing_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dll_threshold = 16; /* in ns */
+=======
+	int dll_threshold = this->devdata->max_chain_delay;
+>>>>>>> v3.18
 =======
 	int dll_threshold = this->devdata->max_chain_delay;
 >>>>>>> v3.18
@@ -933,9 +962,12 @@ static void gpmi_compute_edo_timing(struct gpmi_nand_data *this,
 	hw->wrn_dly_sel = BV_GPMI_CTRL1_WRN_DLY_SEL_NO_DELAY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (GPMI_IS_MX6Q(this))
 		dll_threshold = 12;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -973,11 +1005,14 @@ static int enable_edo_mode(struct gpmi_nand_data *this, int mode)
 	struct nand_chip *nand = &this->nand;
 	struct mtd_info	 *mtd = &this->mtd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t feature[ONFI_SUBFEATURE_PARAM_LEN] = {};
 	unsigned long rate;
 	int ret;
 
 =======
+=======
+>>>>>>> v3.18
 	uint8_t *feature;
 	unsigned long rate;
 	int ret;
@@ -986,6 +1021,9 @@ static int enable_edo_mode(struct gpmi_nand_data *this, int mode)
 	if (!feature)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nand->select_chip(mtd, 0);
 
@@ -1015,6 +1053,10 @@ static int enable_edo_mode(struct gpmi_nand_data *this, int mode)
 	this->flags |= GPMI_ASYNC_EDO_ENABLED;
 	this->timing_mode = mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(feature);
+>>>>>>> v3.18
 =======
 	kfree(feature);
 >>>>>>> v3.18
@@ -1024,6 +1066,10 @@ static int enable_edo_mode(struct gpmi_nand_data *this, int mode)
 err_out:
 	nand->select_chip(mtd, -1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(feature);
+>>>>>>> v3.18
 =======
 	kfree(feature);
 >>>>>>> v3.18
@@ -1037,7 +1083,11 @@ int gpmi_extra_init(struct gpmi_nand_data *this)
 
 	/* Enable the asynchronous EDO feature. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (GPMI_IS_MX6Q(this) && chip->onfi_version) {
+=======
+	if (GPMI_IS_MX6(this) && chip->onfi_version) {
+>>>>>>> v3.18
 =======
 	if (GPMI_IS_MX6(this) && chip->onfi_version) {
 >>>>>>> v3.18
@@ -1071,7 +1121,11 @@ void gpmi_begin(struct gpmi_nand_data *this)
 	ret = gpmi_enable_clk(this);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("We failed in enable the clk\n");
+=======
+		dev_err(this->dev, "We failed in enable the clk\n");
+>>>>>>> v3.18
 =======
 		dev_err(this->dev, "We failed in enable the clk\n");
 >>>>>>> v3.18
@@ -1092,7 +1146,11 @@ void gpmi_begin(struct gpmi_nand_data *this)
 	reg = BF_GPMI_TIMING0_ADDRESS_SETUP(hw.address_setup_in_cycles) |
 		BF_GPMI_TIMING0_DATA_HOLD(hw.data_hold_in_cycles)         |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BF_GPMI_TIMING0_DATA_SETUP(hw.data_setup_in_cycles)       ;
+=======
+		BF_GPMI_TIMING0_DATA_SETUP(hw.data_setup_in_cycles);
+>>>>>>> v3.18
 =======
 		BF_GPMI_TIMING0_DATA_SETUP(hw.data_setup_in_cycles);
 >>>>>>> v3.18
@@ -1171,8 +1229,11 @@ int gpmi_is_ready(struct gpmi_nand_data *this, unsigned chip)
 		mask = MX23_BM_GPMI_DEBUG_READY0 << chip;
 		reg = readl(r->gpmi_regs + HW_GPMI_DEBUG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (GPMI_IS_MX28(this) || GPMI_IS_MX6Q(this)) {
 =======
+=======
+>>>>>>> v3.18
 	} else if (GPMI_IS_MX28(this) || GPMI_IS_MX6(this)) {
 		/*
 		 * In the imx6, all the ready/busy pins are bound
@@ -1181,13 +1242,20 @@ int gpmi_is_ready(struct gpmi_nand_data *this, unsigned chip)
 		if (GPMI_IS_MX6(this))
 			chip = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* MX28 shares the same R/B register as MX6Q. */
 		mask = MX28_BF_GPMI_STAT_READY_BUSY(1 << chip);
 		reg = readl(r->gpmi_regs + HW_GPMI_STAT);
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("unknow arch.\n");
+=======
+		dev_err(this->dev, "unknow arch.\n");
+>>>>>>> v3.18
 =======
 		dev_err(this->dev, "unknow arch.\n");
 >>>>>>> v3.18
@@ -1222,10 +1290,15 @@ int gpmi_send_command(struct gpmi_nand_data *this)
 					(struct scatterlist *)pio,
 					ARRAY_SIZE(pio), DMA_TRANS_NONE, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!desc) {
 		pr_err("step 1 error\n");
 		return -1;
 	}
+=======
+	if (!desc)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (!desc)
 		return -EINVAL;
@@ -1240,11 +1313,16 @@ int gpmi_send_command(struct gpmi_nand_data *this)
 				sgl, 1, DMA_MEM_TO_DEV,
 				DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!desc) {
 		pr_err("step 2 error\n");
 		return -1;
 	}
+=======
+	if (!desc)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (!desc)
 		return -EINVAL;
@@ -1278,10 +1356,15 @@ int gpmi_send_data(struct gpmi_nand_data *this)
 	desc = dmaengine_prep_slave_sg(channel, (struct scatterlist *)pio,
 					ARRAY_SIZE(pio), DMA_TRANS_NONE, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!desc) {
 		pr_err("step 1 error\n");
 		return -1;
 	}
+=======
+	if (!desc)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (!desc)
 		return -EINVAL;
@@ -1293,10 +1376,16 @@ int gpmi_send_data(struct gpmi_nand_data *this)
 					1, DMA_MEM_TO_DEV,
 					DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!desc) {
 		pr_err("step 2 error\n");
 		return -1;
 	}
+=======
+	if (!desc)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (!desc)
 		return -EINVAL;
@@ -1326,10 +1415,15 @@ int gpmi_read_data(struct gpmi_nand_data *this)
 					(struct scatterlist *)pio,
 					ARRAY_SIZE(pio), DMA_TRANS_NONE, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!desc) {
 		pr_err("step 1 error\n");
 		return -1;
 	}
+=======
+	if (!desc)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (!desc)
 		return -EINVAL;
@@ -1341,10 +1435,15 @@ int gpmi_read_data(struct gpmi_nand_data *this)
 					1, DMA_DEV_TO_MEM,
 					DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!desc) {
 		pr_err("step 2 error\n");
 		return -1;
 	}
+=======
+	if (!desc)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (!desc)
 		return -EINVAL;
@@ -1394,10 +1493,16 @@ int gpmi_send_page(struct gpmi_nand_data *this,
 					ARRAY_SIZE(pio), DMA_TRANS_NONE,
 					DMA_CTRL_ACK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!desc) {
 		pr_err("step 2 error\n");
 		return -1;
 	}
+=======
+	if (!desc)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (!desc)
 		return -EINVAL;
@@ -1435,10 +1540,15 @@ int gpmi_read_page(struct gpmi_nand_data *this,
 				(struct scatterlist *)pio, 2,
 				DMA_TRANS_NONE, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!desc) {
 		pr_err("step 1 error\n");
 		return -1;
 	}
+=======
+	if (!desc)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (!desc)
 		return -EINVAL;
@@ -1470,10 +1580,15 @@ int gpmi_read_page(struct gpmi_nand_data *this,
 					ARRAY_SIZE(pio), DMA_TRANS_NONE,
 					DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!desc) {
 		pr_err("step 2 error\n");
 		return -1;
 	}
+=======
+	if (!desc)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (!desc)
 		return -EINVAL;
@@ -1496,10 +1611,15 @@ int gpmi_read_page(struct gpmi_nand_data *this,
 				DMA_TRANS_NONE,
 				DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!desc) {
 		pr_err("step 3 error\n");
 		return -1;
 	}
+=======
+	if (!desc)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (!desc)
 		return -EINVAL;

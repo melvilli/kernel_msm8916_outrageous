@@ -20,11 +20,14 @@
 #define __HASH__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/crc32c.h>
 static inline u64 btrfs_name_hash(const char *name, int len)
 {
 	return crc32c((u32)~1, name, len);
 =======
+=======
+>>>>>>> v3.18
 int __init btrfs_hash_init(void);
 
 void btrfs_hash_exit(void);
@@ -34,6 +37,9 @@ u32 btrfs_crc32c(u32 crc, const void *address, unsigned int length);
 static inline u64 btrfs_name_hash(const char *name, int len)
 {
 	return btrfs_crc32c((u32)~1, name, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -44,7 +50,11 @@ static inline u64 btrfs_extref_hash(u64 parent_objectid, const char *name,
 				    int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (u64) crc32c(parent_objectid, name, len);
+=======
+	return (u64) btrfs_crc32c(parent_objectid, name, len);
+>>>>>>> v3.18
 =======
 	return (u64) btrfs_crc32c(parent_objectid, name, len);
 >>>>>>> v3.18

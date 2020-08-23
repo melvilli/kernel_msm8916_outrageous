@@ -4,7 +4,10 @@
  * Copyright (C) 1995-2009 Russell King
  * Copyright (C) 2012 ARM Ltd.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014, NVIDIA CORPORATION.  All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -42,10 +45,13 @@
 #include <asm/exception.h>
 #include <asm/system_misc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/esr.h>
 #include <asm/edac.h>
 
 #include <trace/events/exception.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -144,7 +150,10 @@ static void dump_backtrace(struct pt_regs *regs, struct task_struct *tsk)
 {
 	struct stackframe frame;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const register unsigned long current_sp asm ("sp");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -160,7 +169,11 @@ static void dump_backtrace(struct pt_regs *regs, struct task_struct *tsk)
 	} else if (tsk == current) {
 		frame.fp = (unsigned long)__builtin_frame_address(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		frame.sp = current_sp;
+=======
+		frame.sp = current_stack_pointer;
+>>>>>>> v3.18
 =======
 		frame.sp = current_stack_pointer;
 >>>>>>> v3.18
@@ -175,7 +188,11 @@ static void dump_backtrace(struct pt_regs *regs, struct task_struct *tsk)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("Call trace:\n");
+=======
+	pr_emerg("Call trace:\n");
+>>>>>>> v3.18
 =======
 	pr_emerg("Call trace:\n");
 >>>>>>> v3.18
@@ -229,6 +246,11 @@ static int __die(const char *str, int err, struct thread_info *thread,
 
 	if (!user_mode(regs) || in_interrupt()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dump_mem(KERN_EMERG, "Stack: ", regs->sp,
+			 THREAD_SIZE + (unsigned long)task_stack_page(tsk));
+>>>>>>> v3.18
 =======
 		dump_mem(KERN_EMERG, "Stack: ", regs->sp,
 			 THREAD_SIZE + (unsigned long)task_stack_page(tsk));
@@ -250,7 +272,10 @@ void die(const char *str, struct pt_regs *regs, int err)
 	struct thread_info *thread = current_thread_info();
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum bug_trap_type bug_type = BUG_TRAP_TYPE_NONE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -260,10 +285,13 @@ void die(const char *str, struct pt_regs *regs, int err)
 	console_verbose();
 	bust_spinlocks(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!user_mode(regs))
 		bug_type = report_bug(regs->pc, regs);
 	if (bug_type != BUG_TRAP_TYPE_NONE)
 		str = "Oops - BUG";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = __die(str, err, thread, regs);
@@ -296,6 +324,7 @@ void arm64_notify_die(const char *str, struct pt_regs *regs,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_GENERIC_BUG
 int is_valid_bugaddr(unsigned long pc)
@@ -336,12 +365,17 @@ asmlinkage void __exception do_undefinstr(struct pt_regs *regs)
 asmlinkage void __exception do_undefinstr(struct pt_regs *regs)
 {
 >>>>>>> v3.18
+=======
+asmlinkage void __exception do_undefinstr(struct pt_regs *regs)
+{
+>>>>>>> v3.18
 	siginfo_t info;
 	void __user *pc = (void __user *)instruction_pointer(regs);
 
 	/* check for AArch32 breakpoint instructions */
 	if (!aarch32_break_handler(regs))
 		return;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (user_mode(regs)) {
 		if (compat_thumb_mode(regs)) {
@@ -370,6 +404,11 @@ die_sig:
 
 	if (user_mode(regs) && show_unhandled_signals &&
 		unhandled_signal(current, SIGILL) && printk_ratelimit()) {
+=======
+
+	if (show_unhandled_signals && unhandled_signal(current, SIGILL) &&
+	    printk_ratelimit()) {
+>>>>>>> v3.18
 =======
 
 	if (show_unhandled_signals && unhandled_signal(current, SIGILL) &&
@@ -414,6 +453,7 @@ asmlinkage long do_ni_syscall(struct pt_regs *regs)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * bad_mode handles the impossible case in the exception vector. This is always
  * fatal.
  */
@@ -436,18 +476,28 @@ asmlinkage void bad_mode(struct pt_regs *regs, int reason, unsigned int esr)
 asmlinkage void bad_el0_sync(struct pt_regs *regs, int reason, unsigned int esr)
 {
 =======
+=======
+>>>>>>> v3.18
  * bad_mode handles the impossible case in the exception vector.
  */
 asmlinkage void bad_mode(struct pt_regs *regs, int reason, unsigned int esr)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	siginfo_t info;
 	void __user *pc = (void __user *)instruction_pointer(regs);
 	console_verbose();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_crit("Bad EL0 synchronous exception detected on CPU%d, code 0x%08x\n",
 		smp_processor_id(), esr);
+=======
+	pr_crit("Bad mode in %s handler detected, code 0x%08x\n",
+		handler[reason], esr);
+>>>>>>> v3.18
 =======
 	pr_crit("Bad mode in %s handler detected, code 0x%08x\n",
 		handler[reason], esr);
@@ -460,6 +510,7 @@ asmlinkage void bad_mode(struct pt_regs *regs, int reason, unsigned int esr)
 	info.si_addr  = pc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (esr >> ESR_EL1_EC_SHIFT == ESR_EL1_EC_SERROR) {
 		pr_crit("System error detected. ESR.ISS = %08x\n",
 			esr & 0xffffff);
@@ -470,12 +521,19 @@ asmlinkage void bad_mode(struct pt_regs *regs, int reason, unsigned int esr)
 =======
 	arm64_notify_die("Oops - bad mode", regs, &info, 0);
 >>>>>>> v3.18
+=======
+	arm64_notify_die("Oops - bad mode", regs, &info, 0);
+>>>>>>> v3.18
 }
 
 void __pte_error(const char *file, int line, unsigned long val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s:%d: bad pte %016lx.\n", file, line, val);
+=======
+	pr_crit("%s:%d: bad pte %016lx.\n", file, line, val);
+>>>>>>> v3.18
 =======
 	pr_crit("%s:%d: bad pte %016lx.\n", file, line, val);
 >>>>>>> v3.18
@@ -484,21 +542,31 @@ void __pte_error(const char *file, int line, unsigned long val)
 void __pmd_error(const char *file, int line, unsigned long val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s:%d: bad pmd %016lx.\n", file, line, val);
 =======
+=======
+>>>>>>> v3.18
 	pr_crit("%s:%d: bad pmd %016lx.\n", file, line, val);
 }
 
 void __pud_error(const char *file, int line, unsigned long val)
 {
 	pr_crit("%s:%d: bad pud %016lx.\n", file, line, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void __pgd_error(const char *file, int line, unsigned long val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s:%d: bad pgd %016lx.\n", file, line, val);
+=======
+	pr_crit("%s:%d: bad pgd %016lx.\n", file, line, val);
+>>>>>>> v3.18
 =======
 	pr_crit("%s:%d: bad pgd %016lx.\n", file, line, val);
 >>>>>>> v3.18

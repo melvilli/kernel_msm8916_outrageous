@@ -4,6 +4,7 @@
  *  Copyright (C) 1991, 1992, 1995, 1999, 2000  Linus Torvalds
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This file contains the PC-specific time handling details:
  * reading the RTC at bootup, etc..
  * 1994-07-02    Alan Modra
@@ -11,6 +12,9 @@
  * 1995-03-26    Markus Kuhn
  *      fixed 500 ms bug at call to set_rtc_mmss, fixed DS12887
  *      precision CMOS clock update
+=======
+ * This file contains the clocksource time handling.
+>>>>>>> v3.18
 =======
  * This file contains the clocksource time handling.
 >>>>>>> v3.18
@@ -26,9 +30,12 @@
  *	fixed algorithm in do_gettimeofday() for calculating the precise time
  *	from processor cycle counter (now taking lost_ticks into account)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 2000-08-13	Jan-Benedict Glaw <jbglaw@lug-owl.de>
  * 	Fixed time_init to be aware of epoches != 1900. This prevents
  * 	booting up in 2048 for me;) Code is stolen from rtc.c.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * 2003-06-03	R. Scott Bailey <scott.bailey@eds.com>
@@ -54,7 +61,10 @@
 #include <asm/io.h>
 #include <asm/hwrpb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/rtc.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -63,6 +73,10 @@
 #include <linux/timex.h>
 #include <linux/clocksource.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clockchips.h>
+>>>>>>> v3.18
 =======
 #include <linux/clockchips.h>
 >>>>>>> v3.18
@@ -70,6 +84,7 @@
 #include "proto.h"
 #include "irq_impl.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int set_rtc_mmss(unsigned long);
 
@@ -100,6 +115,11 @@ DEFINE_SPINLOCK(rtc_lock);
 EXPORT_SYMBOL(rtc_lock);
 
 >>>>>>> v3.18
+=======
+DEFINE_SPINLOCK(rtc_lock);
+EXPORT_SYMBOL(rtc_lock);
+
+>>>>>>> v3.18
 unsigned long est_cycle_freq;
 
 #ifdef CONFIG_IRQ_WORK
@@ -107,9 +127,15 @@ unsigned long est_cycle_freq;
 DEFINE_PER_CPU(u8, irq_work_pending);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define set_irq_work_pending_flag()  __get_cpu_var(irq_work_pending) = 1
 #define test_irq_work_pending()      __get_cpu_var(irq_work_pending)
 #define clear_irq_work_pending()     __get_cpu_var(irq_work_pending) = 0
+=======
+#define set_irq_work_pending_flag()  __this_cpu_write(irq_work_pending, 1)
+#define test_irq_work_pending()      __this_cpu_read(irq_work_pending)
+#define clear_irq_work_pending()     __this_cpu_write(irq_work_pending, 0)
+>>>>>>> v3.18
 =======
 #define set_irq_work_pending_flag()  __this_cpu_write(irq_work_pending, 1)
 #define test_irq_work_pending()      __this_cpu_read(irq_work_pending)
@@ -131,6 +157,7 @@ void arch_irq_work_raise(void)
 
 static inline __u32 rpcc(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     __u32 result;
     asm volatile ("rpcc %0" : "=r"(result));
@@ -241,6 +268,8 @@ common_init_rtc(void)
 		CMOS_WRITE(0x26, RTC_FREQ_SELECT);
 	}
 =======
+=======
+>>>>>>> v3.18
 	return __builtin_alpha_rpcc();
 }
 
@@ -394,6 +423,9 @@ common_init_rtc(void)
 		       CONFIG_HZ, sel);
 		CMOS_WRITE(sel, RTC_FREQ_SELECT);
  	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Turn on periodic interrupts.  */
@@ -418,6 +450,7 @@ common_init_rtc(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int common_get_rtc_time(struct rtc_time *time)
 {
 	return __get_rtc_time(time);
@@ -429,6 +462,8 @@ int common_set_rtc_time(struct rtc_time *time)
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 #ifndef CONFIG_ALPHA_WTINT
 /*
@@ -460,6 +495,9 @@ static struct clocksource clocksource_rpcc = {
 #endif /* ALPHA_WTINT */
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Validate a computed cycle counter result against the known bounds for
    the given processor core.  There's too much brokenness in the way of
@@ -572,6 +610,7 @@ rpcc_after_update_in_progress(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_SMP
 /* Until and unless we figure out how to get cpu cycle counters
    in sync and keep them there, we can't use the rpcc.  */
@@ -601,6 +640,8 @@ static inline void register_rpcc_clocksource(long cycle_freq)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void __init
 time_init(void)
 {
@@ -609,7 +650,10 @@ time_init(void)
 	long diff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (alpha_using_qemu) {
 		clocksource_register_hz(&qemu_cs, NSEC_PER_SEC);
 		init_qemu_clockevent();
@@ -619,6 +663,9 @@ time_init(void)
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Calibrate CPU clock -- attempt #1.  */
 	if (!est_cycle_freq)
@@ -654,6 +701,7 @@ time_init(void)
 		       "and unable to estimate a proper value!\n");
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* From John Bowman <bowman@math.ualberta.ca>: allow the values
 	   to settle, as the Update-In-Progress bit going low isn't good
@@ -753,6 +801,8 @@ set_rtc_mmss(unsigned long nowtime)
 	return retval;
 }
 =======
+=======
+>>>>>>> v3.18
 	/* See above for restrictions on using clocksource_rpcc.  */
 #ifndef CONFIG_ALPHA_WTINT
 	if (hwrpb->nr_processors == 1)
@@ -775,4 +825,7 @@ init_clockevent(void)
 		init_rtc_clockevent();
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

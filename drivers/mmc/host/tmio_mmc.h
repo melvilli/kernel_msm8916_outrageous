@@ -43,7 +43,10 @@ struct tmio_mmc_data;
 struct tmio_mmc_host {
 	void __iomem *ctl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long bus_shift;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct mmc_command      *cmd;
@@ -52,9 +55,12 @@ struct tmio_mmc_host {
 	struct mmc_host         *mmc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Controller power state */
 	bool			power;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Callbacks for clock / power control */
@@ -84,14 +90,20 @@ struct tmio_mmc_host {
 	struct work_struct	done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Cache IRQ mask */
 	u32			sdcard_irq_mask;
 	u32			sdio_irq_mask;
 =======
+=======
+>>>>>>> v3.18
 	/* Cache */
 	u32			sdcard_irq_mask;
 	u32			sdio_irq_mask;
 	unsigned int		clk_cache;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spinlock_t		lock;		/* protect host private data */
@@ -99,6 +111,10 @@ struct tmio_mmc_host {
 	struct mutex		ios_lock;	/* protect set_ios() context */
 	bool			native_hotplug;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool			sdio_irq_enabled;
+>>>>>>> v3.18
 =======
 	bool			sdio_irq_enabled;
 >>>>>>> v3.18
@@ -165,6 +181,7 @@ static inline void tmio_mmc_abort_dma(struct tmio_mmc_host *host)
 
 #ifdef CONFIG_PM
 <<<<<<< HEAD
+<<<<<<< HEAD
 int tmio_mmc_host_suspend(struct device *dev);
 int tmio_mmc_host_resume(struct device *dev);
 #else
@@ -179,6 +196,8 @@ static inline u16 sd_ctrl_read16(struct tmio_mmc_host *host, int addr)
 {
 	return readw(host->ctl + (addr << host->bus_shift));
 =======
+=======
+>>>>>>> v3.18
 int tmio_mmc_host_runtime_suspend(struct device *dev);
 int tmio_mmc_host_runtime_resume(struct device *dev);
 #endif
@@ -186,6 +205,9 @@ int tmio_mmc_host_runtime_resume(struct device *dev);
 static inline u16 sd_ctrl_read16(struct tmio_mmc_host *host, int addr)
 {
 	return readw(host->ctl + (addr << host->pdata->bus_shift));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -193,7 +215,11 @@ static inline void sd_ctrl_read16_rep(struct tmio_mmc_host *host, int addr,
 		u16 *buf, int count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	readsw(host->ctl + (addr << host->bus_shift), buf, count);
+=======
+	readsw(host->ctl + (addr << host->pdata->bus_shift), buf, count);
+>>>>>>> v3.18
 =======
 	readsw(host->ctl + (addr << host->pdata->bus_shift), buf, count);
 >>>>>>> v3.18
@@ -202,8 +228,13 @@ static inline void sd_ctrl_read16_rep(struct tmio_mmc_host *host, int addr,
 static inline u32 sd_ctrl_read32(struct tmio_mmc_host *host, int addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return readw(host->ctl + (addr << host->bus_shift)) |
 	       readw(host->ctl + ((addr + 2) << host->bus_shift)) << 16;
+=======
+	return readw(host->ctl + (addr << host->pdata->bus_shift)) |
+	       readw(host->ctl + ((addr + 2) << host->pdata->bus_shift)) << 16;
+>>>>>>> v3.18
 =======
 	return readw(host->ctl + (addr << host->pdata->bus_shift)) |
 	       readw(host->ctl + ((addr + 2) << host->pdata->bus_shift)) << 16;
@@ -218,7 +249,11 @@ static inline void sd_ctrl_write16(struct tmio_mmc_host *host, int addr, u16 val
 	if (host->pdata->write16_hook && host->pdata->write16_hook(host, addr))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writew(val, host->ctl + (addr << host->bus_shift));
+=======
+	writew(val, host->ctl + (addr << host->pdata->bus_shift));
+>>>>>>> v3.18
 =======
 	writew(val, host->ctl + (addr << host->pdata->bus_shift));
 >>>>>>> v3.18
@@ -228,7 +263,11 @@ static inline void sd_ctrl_write16_rep(struct tmio_mmc_host *host, int addr,
 		u16 *buf, int count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writesw(host->ctl + (addr << host->bus_shift), buf, count);
+=======
+	writesw(host->ctl + (addr << host->pdata->bus_shift), buf, count);
+>>>>>>> v3.18
 =======
 	writesw(host->ctl + (addr << host->pdata->bus_shift), buf, count);
 >>>>>>> v3.18
@@ -237,8 +276,13 @@ static inline void sd_ctrl_write16_rep(struct tmio_mmc_host *host, int addr,
 static inline void sd_ctrl_write32(struct tmio_mmc_host *host, int addr, u32 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writew(val, host->ctl + (addr << host->bus_shift));
 	writew(val >> 16, host->ctl + ((addr + 2) << host->bus_shift));
+=======
+	writew(val, host->ctl + (addr << host->pdata->bus_shift));
+	writew(val >> 16, host->ctl + ((addr + 2) << host->pdata->bus_shift));
+>>>>>>> v3.18
 =======
 	writew(val, host->ctl + (addr << host->pdata->bus_shift));
 	writew(val >> 16, host->ctl + ((addr + 2) << host->pdata->bus_shift));

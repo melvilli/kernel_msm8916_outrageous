@@ -71,7 +71,11 @@
  * The page table code is curly enough to need helper functions to keep it
  * clear and clean.  The kernel itself provides many of them; one advantage
 <<<<<<< HEAD
+<<<<<<< HEAD
  * of insisting that the Guest and Host use the same CONFIG_PAE setting.
+=======
+ * of insisting that the Guest and Host use the same CONFIG_X86_PAE setting.
+>>>>>>> v3.18
 =======
  * of insisting that the Guest and Host use the same CONFIG_X86_PAE setting.
 >>>>>>> v3.18
@@ -674,13 +678,19 @@ unsigned long guest_pa(struct lg_cpu *cpu, unsigned long vaddr)
 #ifdef CONFIG_X86_PAE
 	gpmd = lgread(cpu, gpmd_addr(gpgd, vaddr), pmd_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(pmd_flags(gpmd) & _PAGE_PRESENT))
 		kill_guest(cpu, "Bad address %#lx", vaddr);
 =======
+=======
+>>>>>>> v3.18
 	if (!(pmd_flags(gpmd) & _PAGE_PRESENT)) {
 		kill_guest(cpu, "Bad address %#lx", vaddr);
 		return -1UL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gpte = lgread(cpu, gpte_addr(cpu, gpmd, vaddr), pte_t);
 #else
@@ -897,7 +907,11 @@ void guest_new_pagetable(struct lg_cpu *cpu, unsigned long pgtable)
  * they set _PAGE_DIRTY then we can put a writable PTE entry in immediately.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void do_set_pte(struct lg_cpu *cpu, int idx,
+=======
+static void __guest_set_pte(struct lg_cpu *cpu, int idx,
+>>>>>>> v3.18
 =======
 static void __guest_set_pte(struct lg_cpu *cpu, int idx,
 >>>>>>> v3.18
@@ -974,7 +988,11 @@ void guest_set_pte(struct lg_cpu *cpu,
 		for (i = 0; i < ARRAY_SIZE(cpu->lg->pgdirs); i++)
 			if (cpu->lg->pgdirs[i].pgdir)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				do_set_pte(cpu, i, vaddr, gpte);
+=======
+				__guest_set_pte(cpu, i, vaddr, gpte);
+>>>>>>> v3.18
 =======
 				__guest_set_pte(cpu, i, vaddr, gpte);
 >>>>>>> v3.18
@@ -984,7 +1002,11 @@ void guest_set_pte(struct lg_cpu *cpu,
 		if (pgdir != ARRAY_SIZE(cpu->lg->pgdirs))
 			/* If so, do the update. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			do_set_pte(cpu, pgdir, vaddr, gpte);
+=======
+			__guest_set_pte(cpu, pgdir, vaddr, gpte);
+>>>>>>> v3.18
 =======
 			__guest_set_pte(cpu, pgdir, vaddr, gpte);
 >>>>>>> v3.18

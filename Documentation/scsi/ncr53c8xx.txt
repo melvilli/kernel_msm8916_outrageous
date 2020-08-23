@@ -1096,7 +1096,11 @@ SCSI_NCR_SETUP_MASTER_PARITY	(default: defined)
 	If defined, master parity checking is enabled.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SCSI_NCR_SETUP_MASTER_PARITY	(default: defined)
+=======
+SCSI_NCR_SETUP_SCSI_PARITY	(default: defined)
+>>>>>>> v3.18
 =======
 SCSI_NCR_SETUP_SCSI_PARITY	(default: defined)
 >>>>>>> v3.18

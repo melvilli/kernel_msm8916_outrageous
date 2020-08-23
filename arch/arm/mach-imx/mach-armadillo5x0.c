@@ -51,6 +51,10 @@
 #include "devices-imx31.h"
 #include "crmregs-imx3.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 =======
 #include "ehci.h"
 >>>>>>> v3.18
@@ -409,8 +413,12 @@ static int armadillo5x0_sdhc1_init(struct device *dev,
 	/* When supported the trigger type have to be BOTH */
 	ret = request_irq(gpio_to_irq(IOMUX_TO_GPIO(MX31_PIN_ATA_DMACK)),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  detect_irq,
 			  IRQF_DISABLED | IRQF_TRIGGER_FALLING,
+=======
+			  detect_irq, IRQF_TRIGGER_FALLING,
+>>>>>>> v3.18
 =======
 			  detect_irq, IRQF_TRIGGER_FALLING,
 >>>>>>> v3.18
@@ -546,7 +554,11 @@ static void __init armadillo5x0_init(void)
 	}
 	if (armadillo5x0_i2c_rtc.irq == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("armadillo5x0_init: failed to get RTC IRQ\n");
+=======
+		pr_warn("armadillo5x0_init: failed to get RTC IRQ\n");
+>>>>>>> v3.18
 =======
 		pr_warn("armadillo5x0_init: failed to get RTC IRQ\n");
 >>>>>>> v3.18
@@ -576,7 +588,10 @@ MACHINE_START(ARMADILLO5X0, "Armadillo-500")
 	.init_early = imx31_init_early,
 	.init_irq = mx31_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx31_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= armadillo5x0_timer_init,

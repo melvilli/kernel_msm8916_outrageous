@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -17,6 +21,10 @@
 #include <linux/trace_seq.h>
 #include <linux/ftrace_event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 >>>>>>> v3.18
@@ -133,6 +141,10 @@ enum trace_flag_type {
 	TRACE_FLAG_HARDIRQ		= 0x08,
 	TRACE_FLAG_SOFTIRQ		= 0x10,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TRACE_FLAG_PREEMPT_RESCHED	= 0x20,
+>>>>>>> v3.18
 =======
 	TRACE_FLAG_PREEMPT_RESCHED	= 0x20,
 >>>>>>> v3.18
@@ -143,12 +155,15 @@ enum trace_flag_type {
 struct trace_array;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct trace_cpu {
 	struct trace_array	*tr;
 	struct dentry		*dir;
 	int			cpu;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -158,7 +173,10 @@ struct trace_cpu {
  */
 struct trace_array_cpu {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct trace_cpu	trace_cpu;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	atomic_t		disabled;
@@ -213,6 +231,7 @@ struct trace_array {
 	struct trace_buffer	max_buffer;
 	bool			allocated_snapshot;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 	int			buffer_disabled;
 	struct trace_cpu	trace_cpu;	/* place holder */
@@ -222,6 +241,8 @@ struct trace_array {
 	DECLARE_BITMAP(enabled_enter_syscalls, NR_syscalls);
 	DECLARE_BITMAP(enabled_exit_syscalls, NR_syscalls);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long		max_latency;
 #endif
 	/*
@@ -244,6 +265,9 @@ struct trace_array {
 	int			sys_refcount_exit;
 	struct ftrace_event_file __rcu *enter_syscall_files[NR_syscalls];
 	struct ftrace_event_file __rcu *exit_syscall_files[NR_syscalls];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	int			stop_count;
@@ -258,9 +282,12 @@ struct trace_array {
 	struct list_head	systems;
 	struct list_head	events;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct task_struct	*waiter;
 	int			ref;
 =======
+=======
+>>>>>>> v3.18
 	cpumask_var_t		tracing_cpumask; /* only trace on set CPUs */
 	int			ref;
 #ifdef CONFIG_FUNCTION_TRACER
@@ -268,6 +295,9 @@ struct trace_array {
 	/* function tracing enabled */
 	int			function_enabled;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -291,6 +321,12 @@ static inline struct trace_array *top_trace_array(void)
 	struct trace_array *tr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (list_empty(&ftrace_trace_arrays))
+		return NULL;
+
+>>>>>>> v3.18
 =======
 	if (list_empty(&ftrace_trace_arrays))
 		return NULL;
@@ -381,9 +417,15 @@ struct tracer_flags {
  * @start: called when tracing is unpaused (echo 1 > tracing_enabled)
  * @stop: called when tracing is paused (echo 0 > tracing_enabled)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @open: called when the trace file is opened
  * @pipe_open: called when the trace_pipe file is opened
  * @wait_pipe: override how the user waits for traces on trace_pipe
+=======
+ * @update_thresh: called when tracing_thresh is updated
+ * @open: called when the trace file is opened
+ * @pipe_open: called when the trace_pipe file is opened
+>>>>>>> v3.18
 =======
  * @update_thresh: called when tracing_thresh is updated
  * @open: called when the trace file is opened
@@ -406,9 +448,15 @@ struct tracer {
 	void			(*start)(struct trace_array *tr);
 	void			(*stop)(struct trace_array *tr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void			(*open)(struct trace_iterator *iter);
 	void			(*pipe_open)(struct trace_iterator *iter);
 	int			(*wait_pipe)(struct trace_iterator *iter);
+=======
+	int			(*update_thresh)(struct trace_array *tr);
+	void			(*open)(struct trace_iterator *iter);
+	void			(*pipe_open)(struct trace_iterator *iter);
+>>>>>>> v3.18
 =======
 	int			(*update_thresh)(struct trace_array *tr);
 	void			(*open)(struct trace_iterator *iter);
@@ -433,6 +481,7 @@ struct tracer {
 	enum print_line_t	(*print_line)(struct trace_iterator *iter);
 	/* If you handled the flag setting, return 0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			(*set_flag)(u32 old_flags, u32 bit, int set);
 	/* Return 0 if OK with change, else return non-zero */
 	int			(*flag_changed)(struct tracer *tracer,
@@ -442,6 +491,8 @@ struct tracer {
 	bool			print_max;
 	bool			enabled;
 =======
+=======
+>>>>>>> v3.18
 	int			(*set_flag)(struct trace_array *tr,
 					    u32 old_flags, u32 bit, int set);
 	/* Return 0 if OK with change, else return non-zero */
@@ -452,6 +503,9 @@ struct tracer {
 	int			enabled;
 	bool			print_max;
 	bool			allow_instances;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_TRACER_MAX_TRACE
 	bool			use_max_tr;
@@ -499,6 +553,7 @@ enum {
 	TRACE_FTRACE_SIRQ_BIT,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* GLOBAL_BITs must be greater than FTRACE_BITs */
 	TRACE_GLOBAL_BIT,
 	TRACE_GLOBAL_NMI_BIT,
@@ -506,6 +561,9 @@ enum {
 	TRACE_GLOBAL_SIRQ_BIT,
 
 	/* INTERNAL_BITs must be greater than GLOBAL_BITs */
+=======
+	/* INTERNAL_BITs must be greater than FTRACE_BITs */
+>>>>>>> v3.18
 =======
 	/* INTERNAL_BITs must be greater than FTRACE_BITs */
 >>>>>>> v3.18
@@ -517,7 +575,10 @@ enum {
 	TRACE_CONTROL_BIT,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TRACE_BRANCH_BIT,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -540,9 +601,12 @@ enum {
 #define TRACE_FTRACE_MAX	((1 << (TRACE_FTRACE_START + TRACE_CONTEXT_BITS)) - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TRACE_GLOBAL_START	TRACE_GLOBAL_BIT
 #define TRACE_GLOBAL_MAX	((1 << (TRACE_GLOBAL_START + TRACE_CONTEXT_BITS)) - 1)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define TRACE_LIST_START	TRACE_INTERNAL_BIT
@@ -618,6 +682,10 @@ void tracing_reset_current(int cpu);
 void tracing_reset_all_online_cpus(void);
 int tracing_open_generic(struct inode *inode, struct file *filp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool tracing_is_disabled(void);
+>>>>>>> v3.18
 =======
 bool tracing_is_disabled(void);
 >>>>>>> v3.18
@@ -657,6 +725,7 @@ void trace_init_global_iter(struct trace_iterator *iter);
 void tracing_iter_reset(struct trace_iterator *iter, int cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int poll_wait_pipe(struct trace_iterator *iter);
 
 void ftrace(struct trace_array *tr,
@@ -664,6 +733,8 @@ void ftrace(struct trace_array *tr,
 			    unsigned long ip,
 			    unsigned long parent_ip,
 			    unsigned long flags, int pc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void tracing_sched_switch_trace(struct trace_array *tr,
@@ -701,6 +772,11 @@ int register_tracer(struct tracer *type);
 int is_tracing_stopped(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+loff_t tracing_lseek(struct file *file, loff_t offset, int whence);
+
+>>>>>>> v3.18
 =======
 loff_t tracing_lseek(struct file *file, loff_t offset, int whence);
 
@@ -716,8 +792,11 @@ extern unsigned long tracing_thresh;
 
 #ifdef CONFIG_TRACER_MAX_TRACE
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long tracing_max_latency;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void update_max_tr(struct trace_array *tr, struct task_struct *tsk, int cpu);
@@ -796,7 +875,10 @@ extern int trace_selftest_startup_sched_switch(struct tracer *trace,
 extern int trace_selftest_startup_branch(struct tracer *trace,
 					 struct trace_array *tr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Tracer data references selftest functions that only occur
  * on boot up. These can be __init functions. Thus, when selftests
@@ -806,6 +888,9 @@ extern int trace_selftest_startup_branch(struct tracer *trace,
 #else
 /* Tracers are seldom changed. Optimize when selftests are disabled. */
 #define __tracer_data		__read_mostly
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_FTRACE_STARTUP_TEST */
 
@@ -838,11 +923,17 @@ extern unsigned long trace_flags;
 #define TRACE_GRAPH_PRINT_DURATION      0x10
 #define TRACE_GRAPH_PRINT_ABS_TIME      0x20
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define TRACE_GRAPH_PRINT_IRQS          0x40
 #define TRACE_GRAPH_PRINT_TAIL          0x80
 #define TRACE_GRAPH_PRINT_FILL_SHIFT	28
 #define TRACE_GRAPH_PRINT_FILL_MASK	(0x3 << TRACE_GRAPH_PRINT_FILL_SHIFT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern enum print_line_t
@@ -864,14 +955,20 @@ extern void __trace_graph_return(struct trace_array *tr,
 /* TODO: make this variable */
 #define FTRACE_GRAPH_MAX_FUNCS		32
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ftrace_graph_filter_enabled;
 extern int ftrace_graph_count;
 extern unsigned long ftrace_graph_funcs[FTRACE_GRAPH_MAX_FUNCS];
 =======
+=======
+>>>>>>> v3.18
 extern int ftrace_graph_count;
 extern unsigned long ftrace_graph_funcs[FTRACE_GRAPH_MAX_FUNCS];
 extern int ftrace_graph_notrace_count;
 extern unsigned long ftrace_graph_notrace_funcs[FTRACE_GRAPH_MAX_FUNCS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int ftrace_graph_addr(unsigned long addr)
@@ -879,7 +976,11 @@ static inline int ftrace_graph_addr(unsigned long addr)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ftrace_graph_filter_enabled)
+=======
+	if (!ftrace_graph_count)
+>>>>>>> v3.18
 =======
 	if (!ftrace_graph_count)
 >>>>>>> v3.18
@@ -903,7 +1004,10 @@ static inline int ftrace_graph_addr(unsigned long addr)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline int ftrace_graph_notrace_addr(unsigned long addr)
 {
@@ -919,6 +1023,9 @@ static inline int ftrace_graph_notrace_addr(unsigned long addr)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int ftrace_graph_addr(unsigned long addr)
@@ -926,12 +1033,18 @@ static inline int ftrace_graph_addr(unsigned long addr)
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline int ftrace_graph_notrace_addr(unsigned long addr)
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_DYNAMIC_FTRACE */
 #else /* CONFIG_FUNCTION_GRAPH_TRACER */
@@ -946,6 +1059,10 @@ extern struct list_head ftrace_pids;
 
 #ifdef CONFIG_FUNCTION_TRACER
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool ftrace_filter_param __initdata;
+>>>>>>> v3.18
 =======
 extern bool ftrace_filter_param __initdata;
 >>>>>>> v3.18
@@ -958,7 +1075,10 @@ static inline int ftrace_trace_task(struct task_struct *task)
 }
 extern int ftrace_is_dead(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ftrace_create_function_files(struct trace_array *tr,
 				 struct dentry *parent);
 void ftrace_destroy_function_files(struct trace_array *tr);
@@ -966,6 +1086,9 @@ void ftrace_init_global_array_ops(struct trace_array *tr);
 void ftrace_init_array_ops(struct trace_array *tr, ftrace_func_t func);
 void ftrace_reset_array_ops(struct trace_array *tr);
 int using_ftrace_ops_list_func(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int ftrace_trace_task(struct task_struct *task)
@@ -974,8 +1097,11 @@ static inline int ftrace_trace_task(struct task_struct *task)
 }
 static inline int ftrace_is_dead(void) { return 0; }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 =======
+=======
+>>>>>>> v3.18
 static inline int
 ftrace_create_function_files(struct trace_array *tr,
 			     struct dentry *parent)
@@ -1002,6 +1128,9 @@ void ftrace_destroy_filter_files(struct ftrace_ops *ops);
 #define ftrace_create_filter_files(ops, parent) do { } while (0)
 #define ftrace_destroy_filter_files(ops) do { } while (0)
 #endif /* CONFIG_FUNCTION_TRACER && CONFIG_DYNAMIC_FTRACE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int ftrace_event_is_function(struct ftrace_event_call *call);
@@ -1114,12 +1243,15 @@ static inline void trace_branch_disable(void)
 int tracing_update_buffers(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* trace event type bit fields, not numeric */
 enum {
 	TRACE_EVENT_TYPE_PRINTF		= 1,
 	TRACE_EVENT_TYPE_RAW		= 2,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct ftrace_event_field {
@@ -1208,9 +1340,15 @@ struct filter_pred {
 extern enum regex_type
 filter_parse_regex(char *buff, int len, char **search, int *not);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void print_event_filter(struct ftrace_event_call *call,
 			       struct trace_seq *s);
 extern int apply_event_filter(struct ftrace_event_call *call,
+=======
+extern void print_event_filter(struct ftrace_event_file *file,
+			       struct trace_seq *s);
+extern int apply_event_filter(struct ftrace_event_file *file,
+>>>>>>> v3.18
 =======
 extern void print_event_filter(struct ftrace_event_file *file,
 			       struct trace_seq *s);
@@ -1223,16 +1361,23 @@ extern void print_subsystem_event_filter(struct event_subsystem *system,
 					 struct trace_seq *s);
 extern int filter_assign_type(const char *type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int create_event_filter(struct ftrace_event_call *call,
 			       char *filter_str, bool set_str,
 			       struct event_filter **filterp);
 extern void free_event_filter(struct event_filter *filter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct ftrace_event_field *
 trace_find_event_field(struct ftrace_event_call *call, char *name);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline int
 filter_check_discard(struct ftrace_event_call *call, void *rec,
@@ -1250,10 +1395,13 @@ filter_check_discard(struct ftrace_event_call *call, void *rec,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 extern void trace_event_enable_cmd_record(bool enable);
 extern int event_trace_add_tracer(struct dentry *parent, struct trace_array *tr);
 extern int event_trace_del_tracer(struct trace_array *tr);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct mutex event_mutex;
 extern struct list_head ftrace_events;
@@ -1262,6 +1410,8 @@ extern const char *__start___trace_bprintk_fmt[];
 extern const char *__stop___trace_bprintk_fmt[];
 
 =======
+=======
+>>>>>>> v3.18
 extern struct ftrace_event_file *find_event_file(struct trace_array *tr,
 						 const char *system,
 						 const char *event);
@@ -1457,6 +1607,9 @@ extern const char *__stop___trace_bprintk_fmt[];
 extern const char *__start___tracepoint_str[];
 extern const char *__stop___tracepoint_str[];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void trace_printk_init_buffers(void);
 void trace_printk_start_comm(void);
@@ -1478,7 +1631,11 @@ int set_tracer_flag(struct trace_array *tr, unsigned int mask, int enabled);
 #define FTRACE_ENTRY(call, struct_name, id, tstruct, print, filter)	\
 	extern struct ftrace_event_call					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__attribute__((__aligned__(4))) event_##call;
+=======
+	__aligned(4) event_##call;
+>>>>>>> v3.18
 =======
 	__aligned(4) event_##call;
 >>>>>>> v3.18

@@ -25,7 +25,10 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mutex.h>
@@ -143,7 +146,11 @@ enum {
 
 struct ct_effect {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[44];
+=======
+	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
+>>>>>>> v3.18
 =======
 	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
 >>>>>>> v3.18
@@ -278,7 +285,11 @@ enum {
 
 struct ct_tuning_ctl {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[44];
+=======
+	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
+>>>>>>> v3.18
 =======
 	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
 >>>>>>> v3.18
@@ -771,7 +782,11 @@ struct ca0132_spec {
  * CA0132 codec access
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int codec_send_command(struct hda_codec *codec, hda_nid_t nid,
+=======
+static unsigned int codec_send_command(struct hda_codec *codec, hda_nid_t nid,
+>>>>>>> v3.18
 =======
 static unsigned int codec_send_command(struct hda_codec *codec, hda_nid_t nid,
 >>>>>>> v3.18
@@ -884,7 +899,11 @@ static int chipio_write_data_multiple(struct hda_codec *codec,
 
 	if (data == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "chipio_write_data null ptr\n");
+=======
+		codec_dbg(codec, "chipio_write_data null ptr\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "chipio_write_data null ptr\n");
 >>>>>>> v3.18
@@ -1427,7 +1446,11 @@ static int dspio_scp(struct hda_codec *codec,
 
 	if (dir == SCP_GET && reply == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "dspio_scp get but has no buffer\n");
+=======
+		codec_dbg(codec, "dspio_scp get but has no buffer\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "dspio_scp get but has no buffer\n");
 >>>>>>> v3.18
@@ -1436,7 +1459,11 @@ static int dspio_scp(struct hda_codec *codec,
 
 	if (reply != NULL && (reply_len == NULL || (*reply_len == 0))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "dspio_scp bad resp buf len parms\n");
+=======
+		codec_dbg(codec, "dspio_scp bad resp buf len parms\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "dspio_scp bad resp buf len parms\n");
 >>>>>>> v3.18
@@ -1458,7 +1485,11 @@ static int dspio_scp(struct hda_codec *codec,
 
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "dspio_scp: send scp msg failed\n");
+=======
+		codec_dbg(codec, "dspio_scp: send scp msg failed\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "dspio_scp: send scp msg failed\n");
 >>>>>>> v3.18
@@ -1481,15 +1512,21 @@ static int dspio_scp(struct hda_codec *codec,
 
 		if (*reply_len < ret_size*sizeof(unsigned int)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_ERR "reply too long for buf\n");
 			return -EINVAL;
 		} else if (ret_size != reply_data_size) {
 			snd_printdd(KERN_ERR "RetLen and HdrLen .NE.\n");
 =======
+=======
+>>>>>>> v3.18
 			codec_dbg(codec, "reply too long for buf\n");
 			return -EINVAL;
 		} else if (ret_size != reply_data_size) {
 			codec_dbg(codec, "RetLen and HdrLen .NE.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EINVAL;
 		} else {
@@ -1498,7 +1535,11 @@ static int dspio_scp(struct hda_codec *codec,
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "reply ill-formed or errflag set\n");
+=======
+		codec_dbg(codec, "reply ill-formed or errflag set\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "reply ill-formed or errflag set\n");
 >>>>>>> v3.18
@@ -1532,7 +1573,11 @@ static int dspio_alloc_dma_chan(struct hda_codec *codec, unsigned int *dma_chan)
 	unsigned int size = sizeof(dma_chan);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "     dspio_alloc_dma_chan() -- begin\n");
+=======
+	codec_dbg(codec, "     dspio_alloc_dma_chan() -- begin\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "     dspio_alloc_dma_chan() -- begin\n");
 >>>>>>> v3.18
@@ -1541,7 +1586,11 @@ static int dspio_alloc_dma_chan(struct hda_codec *codec, unsigned int *dma_chan)
 
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "dspio_alloc_dma_chan: SCP Failed\n");
+=======
+		codec_dbg(codec, "dspio_alloc_dma_chan: SCP Failed\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "dspio_alloc_dma_chan: SCP Failed\n");
 >>>>>>> v3.18
@@ -1550,6 +1599,7 @@ static int dspio_alloc_dma_chan(struct hda_codec *codec, unsigned int *dma_chan)
 
 	if ((*dma_chan + 1) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "no free dma channels to allocate\n");
 		return -EBUSY;
 	}
@@ -1557,12 +1607,17 @@ static int dspio_alloc_dma_chan(struct hda_codec *codec, unsigned int *dma_chan)
 	snd_printdd("dspio_alloc_dma_chan: chan=%d\n", *dma_chan);
 	snd_printdd(KERN_INFO "     dspio_alloc_dma_chan() -- complete\n");
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "no free dma channels to allocate\n");
 		return -EBUSY;
 	}
 
 	codec_dbg(codec, "dspio_alloc_dma_chan: chan=%d\n", *dma_chan);
 	codec_dbg(codec, "     dspio_alloc_dma_chan() -- complete\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return status;
@@ -1577,8 +1632,13 @@ static int dspio_free_dma_chan(struct hda_codec *codec, unsigned int dma_chan)
 	unsigned int dummy = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "     dspio_free_dma_chan() -- begin\n");
 	snd_printdd("dspio_free_dma_chan: chan=%d\n", dma_chan);
+=======
+	codec_dbg(codec, "     dspio_free_dma_chan() -- begin\n");
+	codec_dbg(codec, "dspio_free_dma_chan: chan=%d\n", dma_chan);
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "     dspio_free_dma_chan() -- begin\n");
 	codec_dbg(codec, "dspio_free_dma_chan: chan=%d\n", dma_chan);
@@ -1589,17 +1649,23 @@ static int dspio_free_dma_chan(struct hda_codec *codec, unsigned int dma_chan)
 
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "dspio_free_dma_chan: SCP Failed\n");
 		return status;
 	}
 
 	snd_printdd(KERN_INFO "     dspio_free_dma_chan() -- complete\n");
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "dspio_free_dma_chan: SCP Failed\n");
 		return status;
 	}
 
 	codec_dbg(codec, "     dspio_free_dma_chan() -- complete\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return status;
@@ -1649,7 +1715,11 @@ static int dsp_reset(struct hda_codec *codec)
 	int retry = 20;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("dsp_reset\n");
+=======
+	codec_dbg(codec, "dsp_reset\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "dsp_reset\n");
 >>>>>>> v3.18
@@ -1660,7 +1730,11 @@ static int dsp_reset(struct hda_codec *codec)
 
 	if (!retry) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("dsp_reset timeout\n");
+=======
+		codec_dbg(codec, "dsp_reset timeout\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "dsp_reset timeout\n");
 >>>>>>> v3.18
@@ -1717,22 +1791,32 @@ static int dsp_dma_setup_common(struct hda_codec *codec,
 	bool code, yram;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "-- dsp_dma_setup_common() -- Begin ---------\n");
 
 	if (dma_chan >= DSPDMAC_DMA_CFG_CHANNEL_COUNT) {
 		snd_printdd(KERN_ERR "dma chan num invalid\n");
 =======
+=======
+>>>>>>> v3.18
 	codec_dbg(codec, "-- dsp_dma_setup_common() -- Begin ---------\n");
 
 	if (dma_chan >= DSPDMAC_DMA_CFG_CHANNEL_COUNT) {
 		codec_dbg(codec, "dma chan num invalid\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	if (dsp_is_dma_active(codec, dma_chan)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "dma already active\n");
+=======
+		codec_dbg(codec, "dma already active\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "dma already active\n");
 >>>>>>> v3.18
@@ -1743,7 +1827,11 @@ static int dsp_dma_setup_common(struct hda_codec *codec,
 
 	if (dsp_addx == INVALID_CHIP_ADDRESS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "invalid chip addr\n");
+=======
+		codec_dbg(codec, "invalid chip addr\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "invalid chip addr\n");
 >>>>>>> v3.18
@@ -1754,7 +1842,11 @@ static int dsp_dma_setup_common(struct hda_codec *codec,
 	active = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "   dsp_dma_setup_common()    start reg pgm\n");
+=======
+	codec_dbg(codec, "   dsp_dma_setup_common()    start reg pgm\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "   dsp_dma_setup_common()    start reg pgm\n");
 >>>>>>> v3.18
@@ -1765,15 +1857,21 @@ static int dsp_dma_setup_common(struct hda_codec *codec,
 
 		if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_ERR "read CHNLPROP Reg fail\n");
 			return status;
 		}
 		snd_printdd(KERN_INFO "dsp_dma_setup_common() Read CHNLPROP\n");
 =======
+=======
+>>>>>>> v3.18
 			codec_dbg(codec, "read CHNLPROP Reg fail\n");
 			return status;
 		}
 		codec_dbg(codec, "dsp_dma_setup_common() Read CHNLPROP\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1787,15 +1885,21 @@ static int dsp_dma_setup_common(struct hda_codec *codec,
 	status = chipio_write(codec, DSPDMAC_CHNLPROP_INST_OFFSET, chnl_prop);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "write CHNLPROP Reg fail\n");
 		return status;
 	}
 	snd_printdd(KERN_INFO "   dsp_dma_setup_common()    Write CHNLPROP\n");
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "write CHNLPROP Reg fail\n");
 		return status;
 	}
 	codec_dbg(codec, "   dsp_dma_setup_common()    Write CHNLPROP\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ovly) {
@@ -1804,15 +1908,21 @@ static int dsp_dma_setup_common(struct hda_codec *codec,
 
 		if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_ERR "read ACTIVE Reg fail\n");
 			return status;
 		}
 		snd_printdd(KERN_INFO "dsp_dma_setup_common() Read ACTIVE\n");
 =======
+=======
+>>>>>>> v3.18
 			codec_dbg(codec, "read ACTIVE Reg fail\n");
 			return status;
 		}
 		codec_dbg(codec, "dsp_dma_setup_common() Read ACTIVE\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1822,37 +1932,50 @@ static int dsp_dma_setup_common(struct hda_codec *codec,
 	status = chipio_write(codec, DSPDMAC_ACTIVE_INST_OFFSET, active);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "write ACTIVE Reg fail\n");
 		return status;
 	}
 
 	snd_printdd(KERN_INFO "   dsp_dma_setup_common()    Write ACTIVE\n");
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "write ACTIVE Reg fail\n");
 		return status;
 	}
 
 	codec_dbg(codec, "   dsp_dma_setup_common()    Write ACTIVE\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	status = chipio_write(codec, DSPDMAC_AUDCHSEL_INST_OFFSET(dma_chan),
 			      port_map_mask);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "write AUDCHSEL Reg fail\n");
 		return status;
 	}
 	snd_printdd(KERN_INFO "   dsp_dma_setup_common()    Write AUDCHSEL\n");
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "write AUDCHSEL Reg fail\n");
 		return status;
 	}
 	codec_dbg(codec, "   dsp_dma_setup_common()    Write AUDCHSEL\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	status = chipio_write(codec, DSPDMAC_IRQCNT_INST_OFFSET(dma_chan),
 			DSPDMAC_IRQCNT_BICNT_MASK | DSPDMAC_IRQCNT_CICNT_MASK);
 	if (status < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		snd_printdd(KERN_ERR "write IRQCNT Reg fail\n");
 		return status;
@@ -1861,12 +1984,17 @@ static int dsp_dma_setup_common(struct hda_codec *codec,
 
 	snd_printdd(
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "write IRQCNT Reg fail\n");
 		return status;
 	}
 	codec_dbg(codec, "   dsp_dma_setup_common()    Write IRQCNT\n");
 
 	codec_dbg(codec,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		   "ChipA=0x%x,DspA=0x%x,dmaCh=%u, "
 		   "CHSEL=0x%x,CHPROP=0x%x,Active=0x%x\n",
@@ -1874,7 +2002,11 @@ static int dsp_dma_setup_common(struct hda_codec *codec,
 		   port_map_mask, chnl_prop, active);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "-- dsp_dma_setup_common() -- Complete ------\n");
+=======
+	codec_dbg(codec, "-- dsp_dma_setup_common() -- Complete ------\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "-- dsp_dma_setup_common() -- Complete ------\n");
 >>>>>>> v3.18
@@ -1904,15 +2036,21 @@ static int dsp_dma_setup(struct hda_codec *codec,
 						DSPDMAC_XFRCNT_BCNT_LOBIT + 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "-- dsp_dma_setup() -- Begin ---------\n");
 
 	if (count > max_dma_count) {
 		snd_printdd(KERN_ERR "count too big\n");
 =======
+=======
+>>>>>>> v3.18
 	codec_dbg(codec, "-- dsp_dma_setup() -- Begin ---------\n");
 
 	if (count > max_dma_count) {
 		codec_dbg(codec, "count too big\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -1920,17 +2058,23 @@ static int dsp_dma_setup(struct hda_codec *codec,
 	dsp_addx = dsp_chip_to_dsp_addx(chip_addx, &code, &yram);
 	if (dsp_addx == INVALID_CHIP_ADDRESS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "invalid chip addr\n");
 		return -ENXIO;
 	}
 
 	snd_printdd(KERN_INFO "   dsp_dma_setup()    start reg pgm\n");
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "invalid chip addr\n");
 		return -ENXIO;
 	}
 
 	codec_dbg(codec, "   dsp_dma_setup()    start reg pgm\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	addr_field = dsp_addx << DSPDMAC_DMACFG_DBADR_LOBIT;
@@ -1949,15 +2093,21 @@ static int dsp_dma_setup(struct hda_codec *codec,
 				dma_cfg);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "write DMACFG Reg fail\n");
 		return status;
 	}
 	snd_printdd(KERN_INFO "   dsp_dma_setup()    Write DMACFG\n");
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "write DMACFG Reg fail\n");
 		return status;
 	}
 	codec_dbg(codec, "   dsp_dma_setup()    Write DMACFG\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	adr_ofs = (count - 1) << (DSPDMAC_DSPADROFS_BOFS_LOBIT +
@@ -1967,15 +2117,21 @@ static int dsp_dma_setup(struct hda_codec *codec,
 				adr_ofs);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "write DSPADROFS Reg fail\n");
 		return status;
 	}
 	snd_printdd(KERN_INFO "   dsp_dma_setup()    Write DSPADROFS\n");
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "write DSPADROFS Reg fail\n");
 		return status;
 	}
 	codec_dbg(codec, "   dsp_dma_setup()    Write DSPADROFS\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	base_cnt = (count - 1) << DSPDMAC_XFRCNT_BCNT_LOBIT;
@@ -1988,6 +2144,7 @@ static int dsp_dma_setup(struct hda_codec *codec,
 				DSPDMAC_XFRCNT_INST_OFFSET(dma_chan), xfr_cnt);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "write XFRCNT Reg fail\n");
 		return status;
 	}
@@ -1995,19 +2152,28 @@ static int dsp_dma_setup(struct hda_codec *codec,
 
 	snd_printdd(
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "write XFRCNT Reg fail\n");
 		return status;
 	}
 	codec_dbg(codec, "   dsp_dma_setup()    Write XFRCNT\n");
 
 	codec_dbg(codec,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		   "ChipA=0x%x, cnt=0x%x, DMACFG=0x%x, "
 		   "ADROFS=0x%x, XFRCNT=0x%x\n",
 		   chip_addx, count, dma_cfg, adr_ofs, xfr_cnt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "-- dsp_dma_setup() -- Complete ---------\n");
+=======
+	codec_dbg(codec, "-- dsp_dma_setup() -- Complete ---------\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "-- dsp_dma_setup() -- Complete ---------\n");
 >>>>>>> v3.18
@@ -2025,7 +2191,11 @@ static int dsp_dma_start(struct hda_codec *codec,
 	int status = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "-- dsp_dma_start() -- Begin ---------\n");
+=======
+	codec_dbg(codec, "-- dsp_dma_start() -- Begin ---------\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "-- dsp_dma_start() -- Begin ---------\n");
 >>>>>>> v3.18
@@ -2036,15 +2206,21 @@ static int dsp_dma_start(struct hda_codec *codec,
 
 		if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_ERR "read CHNLSTART reg fail\n");
 			return status;
 		}
 		snd_printdd(KERN_INFO "-- dsp_dma_start()    Read CHNLSTART\n");
 =======
+=======
+>>>>>>> v3.18
 			codec_dbg(codec, "read CHNLSTART reg fail\n");
 			return status;
 		}
 		codec_dbg(codec, "-- dsp_dma_start()    Read CHNLSTART\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		reg &= ~(DSPDMAC_CHNLSTART_EN_MASK |
@@ -2055,15 +2231,21 @@ static int dsp_dma_start(struct hda_codec *codec,
 			reg | (1 << (dma_chan + DSPDMAC_CHNLSTART_EN_LOBIT)));
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "write CHNLSTART reg fail\n");
 		return status;
 	}
 	snd_printdd(KERN_INFO "-- dsp_dma_start() -- Complete ---------\n");
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "write CHNLSTART reg fail\n");
 		return status;
 	}
 	codec_dbg(codec, "-- dsp_dma_start() -- Complete ---------\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return status;
@@ -2079,7 +2261,11 @@ static int dsp_dma_stop(struct hda_codec *codec,
 	int status = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "-- dsp_dma_stop() -- Begin ---------\n");
+=======
+	codec_dbg(codec, "-- dsp_dma_stop() -- Begin ---------\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "-- dsp_dma_stop() -- Begin ---------\n");
 >>>>>>> v3.18
@@ -2090,15 +2276,21 @@ static int dsp_dma_stop(struct hda_codec *codec,
 
 		if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_ERR "read CHNLSTART reg fail\n");
 			return status;
 		}
 		snd_printdd(KERN_INFO "-- dsp_dma_stop()    Read CHNLSTART\n");
 =======
+=======
+>>>>>>> v3.18
 			codec_dbg(codec, "read CHNLSTART reg fail\n");
 			return status;
 		}
 		codec_dbg(codec, "-- dsp_dma_stop()    Read CHNLSTART\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		reg &= ~(DSPDMAC_CHNLSTART_EN_MASK |
 				DSPDMAC_CHNLSTART_DIS_MASK);
@@ -2108,15 +2300,21 @@ static int dsp_dma_stop(struct hda_codec *codec,
 			reg | (1 << (dma_chan + DSPDMAC_CHNLSTART_DIS_LOBIT)));
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "write CHNLSTART reg fail\n");
 		return status;
 	}
 	snd_printdd(KERN_INFO "-- dsp_dma_stop() -- Complete ---------\n");
 =======
+=======
+>>>>>>> v3.18
 		codec_dbg(codec, "write CHNLSTART reg fail\n");
 		return status;
 	}
 	codec_dbg(codec, "-- dsp_dma_stop() -- Complete ---------\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return status;
@@ -2201,15 +2399,21 @@ static int dsp_allocate_ports(struct hda_codec *codec,
 	int status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "     dsp_allocate_ports() -- begin\n");
 
 	if ((rate_multi != 1) && (rate_multi != 2) && (rate_multi != 4)) {
 		snd_printdd(KERN_ERR "bad rate multiple\n");
 =======
+=======
+>>>>>>> v3.18
 	codec_dbg(codec, "     dsp_allocate_ports() -- begin\n");
 
 	if ((rate_multi != 1) && (rate_multi != 2) && (rate_multi != 4)) {
 		codec_dbg(codec, "bad rate multiple\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -2218,7 +2422,11 @@ static int dsp_allocate_ports(struct hda_codec *codec,
 					   rate_multi, 0, port_map);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "     dsp_allocate_ports() -- complete\n");
+=======
+	codec_dbg(codec, "     dsp_allocate_ports() -- complete\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "     dsp_allocate_ports() -- complete\n");
 >>>>>>> v3.18
@@ -2239,7 +2447,11 @@ static int dsp_allocate_ports_format(struct hda_codec *codec,
 
 	if ((rate_multi != 1) && (rate_multi != 2) && (rate_multi != 4)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "bad rate multiple\n");
+=======
+		codec_dbg(codec, "bad rate multiple\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "bad rate multiple\n");
 >>>>>>> v3.18
@@ -2261,6 +2473,7 @@ static int dsp_free_ports(struct hda_codec *codec)
 	int status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "     dsp_free_ports() -- begin\n");
 
 	status = dsp_free_router_ports(codec);
@@ -2270,6 +2483,8 @@ static int dsp_free_ports(struct hda_codec *codec)
 	}
 	snd_printdd(KERN_INFO "     dsp_free_ports() -- complete\n");
 =======
+=======
+>>>>>>> v3.18
 	codec_dbg(codec, "     dsp_free_ports() -- begin\n");
 
 	status = dsp_free_router_ports(codec);
@@ -2278,6 +2493,9 @@ static int dsp_free_ports(struct hda_codec *codec)
 		return status;
 	}
 	codec_dbg(codec, "     dsp_free_ports() -- complete\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return status;
@@ -2300,7 +2518,11 @@ enum dma_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dma_convert_to_hda_format(
+=======
+static int dma_convert_to_hda_format(struct hda_codec *codec,
+>>>>>>> v3.18
 =======
 static int dma_convert_to_hda_format(struct hda_codec *codec,
 >>>>>>> v3.18
@@ -2311,7 +2533,11 @@ static int dma_convert_to_hda_format(struct hda_codec *codec,
 	unsigned int format_val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	format_val = snd_hda_calc_stream_format(
+=======
+	format_val = snd_hda_calc_stream_format(codec,
+>>>>>>> v3.18
 =======
 	format_val = snd_hda_calc_stream_format(codec,
 >>>>>>> v3.18
@@ -2353,8 +2579,11 @@ static int dma_set_state(struct dma_engine *dma, enum dma_state state)
 	bool cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("dma_set_state state=%d\n", state);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (state) {
@@ -2460,7 +2689,11 @@ static int dspxfr_hci_write(struct hda_codec *codec,
 
 	if (fls == NULL || fls->chip_addr != g_chip_addr_magic_value) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "hci_write invalid params\n");
+=======
+		codec_dbg(codec, "hci_write invalid params\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "hci_write invalid params\n");
 >>>>>>> v3.18
@@ -2473,7 +2706,11 @@ static int dspxfr_hci_write(struct hda_codec *codec,
 		status = chipio_write(codec, data[0], data[1]);
 		if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_ERR "hci_write chipio failed\n");
+=======
+			codec_dbg(codec, "hci_write chipio failed\n");
+>>>>>>> v3.18
 =======
 			codec_dbg(codec, "hci_write chipio failed\n");
 >>>>>>> v3.18
@@ -2537,7 +2774,11 @@ static int dspxfr_one_seg(struct hda_codec *codec,
 
 	if (hci_write && (!fls || is_last(fls))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("hci_write\n");
+=======
+		codec_dbg(codec, "hci_write\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "hci_write\n");
 >>>>>>> v3.18
@@ -2546,7 +2787,11 @@ static int dspxfr_one_seg(struct hda_codec *codec,
 
 	if (fls == NULL || dma_engine == NULL || port_map_mask == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("Invalid Params\n");
+=======
+		codec_dbg(codec, "Invalid Params\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "Invalid Params\n");
 >>>>>>> v3.18
@@ -2566,7 +2811,11 @@ static int dspxfr_one_seg(struct hda_codec *codec,
 	    !X_RANGE_ALL(chip_addx, words_to_write) &&
 	    !Y_RANGE_ALL(chip_addx, words_to_write)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("Invalid chip_addx Params\n");
+=======
+		codec_dbg(codec, "Invalid chip_addx Params\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "Invalid chip_addx Params\n");
 >>>>>>> v3.18
@@ -2580,7 +2829,11 @@ static int dspxfr_one_seg(struct hda_codec *codec,
 
 	if (buffer_addx == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "dma_engine buffer NULL\n");
+=======
+		codec_dbg(codec, "dma_engine buffer NULL\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "dma_engine buffer NULL\n");
 >>>>>>> v3.18
@@ -2597,7 +2850,11 @@ static int dspxfr_one_seg(struct hda_codec *codec,
 
 	if (hda_frame_size_words == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "frmsz zero\n");
+=======
+		codec_dbg(codec, "frmsz zero\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "frmsz zero\n");
 >>>>>>> v3.18
@@ -2609,7 +2866,11 @@ static int dspxfr_one_seg(struct hda_codec *codec,
 				65536 : 32768));
 	buffer_size_words -= buffer_size_words % hda_frame_size_words;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(
+=======
+	codec_dbg(codec,
+>>>>>>> v3.18
 =======
 	codec_dbg(codec,
 >>>>>>> v3.18
@@ -2620,7 +2881,11 @@ static int dspxfr_one_seg(struct hda_codec *codec,
 
 	if (buffer_size_words < hda_frame_size_words) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "dspxfr_one_seg:failed\n");
+=======
+		codec_dbg(codec, "dspxfr_one_seg:failed\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "dspxfr_one_seg:failed\n");
 >>>>>>> v3.18
@@ -2638,7 +2903,11 @@ static int dspxfr_one_seg(struct hda_codec *codec,
 	while (words_to_write != 0) {
 		run_size_words = min(buffer_size_words, words_to_write);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("dspxfr (seg loop)cnt=%u rs=%u remainder=%u\n",
+=======
+		codec_dbg(codec, "dspxfr (seg loop)cnt=%u rs=%u remainder=%u\n",
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "dspxfr (seg loop)cnt=%u rs=%u remainder=%u\n",
 >>>>>>> v3.18
@@ -2664,7 +2933,11 @@ static int dspxfr_one_seg(struct hda_codec *codec,
 			return status;
 		if (!dsp_is_dma_active(codec, dma_chan)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_ERR "dspxfr:DMA did not start\n");
+=======
+			codec_dbg(codec, "dspxfr:DMA did not start\n");
+>>>>>>> v3.18
 =======
 			codec_dbg(codec, "dspxfr:DMA did not start\n");
 >>>>>>> v3.18
@@ -2700,7 +2973,11 @@ static int dspxfr_one_seg(struct hda_codec *codec,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "+++++ DMA complete\n");
+=======
+		codec_dbg(codec, "+++++ DMA complete\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "+++++ DMA complete\n");
 >>>>>>> v3.18
@@ -2767,7 +3044,11 @@ static int dspxfr_image(struct hda_codec *codec,
 
 	dma_engine->codec = codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_convert_to_hda_format(sample_rate, channels, &hda_format);
+=======
+	dma_convert_to_hda_format(codec, sample_rate, channels, &hda_format);
+>>>>>>> v3.18
 =======
 	dma_convert_to_hda_format(codec, sample_rate, channels, &hda_format);
 >>>>>>> v3.18
@@ -2782,7 +3063,11 @@ static int dspxfr_image(struct hda_codec *codec,
 
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "set converter format fail\n");
+=======
+		codec_dbg(codec, "set converter format fail\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "set converter format fail\n");
 >>>>>>> v3.18
@@ -2801,7 +3086,11 @@ static int dspxfr_image(struct hda_codec *codec,
 		status = dspio_alloc_dma_chan(codec, &dma_chan);
 		if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_ERR "alloc dmachan fail\n");
+=======
+			codec_dbg(codec, "alloc dmachan fail\n");
+>>>>>>> v3.18
 =======
 			codec_dbg(codec, "alloc dmachan fail\n");
 >>>>>>> v3.18
@@ -2815,7 +3104,11 @@ static int dspxfr_image(struct hda_codec *codec,
 					&port_map_mask);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "alloc ports fail\n");
+=======
+		codec_dbg(codec, "alloc ports fail\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "alloc ports fail\n");
 >>>>>>> v3.18
@@ -2827,7 +3120,11 @@ static int dspxfr_image(struct hda_codec *codec,
 			WIDGET_CHIP_CTRL, stream_id, 0, &response);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_ERR "set stream chan fail\n");
+=======
+		codec_dbg(codec, "set stream chan fail\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "set stream chan fail\n");
 >>>>>>> v3.18
@@ -2837,7 +3134,11 @@ static int dspxfr_image(struct hda_codec *codec,
 	while ((fls_data != NULL) && !is_last(fls_data)) {
 		if (!is_valid(fls_data)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd(KERN_ERR "FLS check fail\n");
+=======
+			codec_dbg(codec, "FLS check fail\n");
+>>>>>>> v3.18
 =======
 			codec_dbg(codec, "FLS check fail\n");
 >>>>>>> v3.18
@@ -2884,7 +3185,11 @@ exit:
 static void dspload_post_setup(struct hda_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "---- dspload_post_setup ------\n");
+=======
+	codec_dbg(codec, "---- dspload_post_setup ------\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "---- dspload_post_setup ------\n");
 >>>>>>> v3.18
@@ -2926,7 +3231,11 @@ static int dspload_image(struct hda_codec *codec,
 	unsigned short channels;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "---- dspload_image begin ------\n");
+=======
+	codec_dbg(codec, "---- dspload_image begin ------\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "---- dspload_image begin ------\n");
 >>>>>>> v3.18
@@ -2947,7 +3256,11 @@ static int dspload_image(struct hda_codec *codec,
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "Ready to program DMA\n");
+=======
+		codec_dbg(codec, "Ready to program DMA\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "Ready to program DMA\n");
 >>>>>>> v3.18
@@ -2958,7 +3271,11 @@ static int dspload_image(struct hda_codec *codec,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "dsp_reset() complete\n");
+=======
+		codec_dbg(codec, "dsp_reset() complete\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "dsp_reset() complete\n");
 >>>>>>> v3.18
@@ -2969,7 +3286,11 @@ static int dspload_image(struct hda_codec *codec,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "dspxfr_image() complete\n");
+=======
+		codec_dbg(codec, "dspxfr_image() complete\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "dspxfr_image() complete\n");
 >>>>>>> v3.18
@@ -2979,7 +3300,11 @@ static int dspload_image(struct hda_codec *codec,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "LOAD FINISHED\n");
+=======
+		codec_dbg(codec, "LOAD FINISHED\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "LOAD FINISHED\n");
 >>>>>>> v3.18
@@ -3407,7 +3732,11 @@ static int add_tuning_control(struct hda_codec *codec,
 				const char *name, int dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char namestr[44];
+=======
+	char namestr[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
+>>>>>>> v3.18
 =======
 	char namestr[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
 >>>>>>> v3.18
@@ -3496,7 +3825,11 @@ static int ca0132_select_out(struct hda_codec *codec)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "ca0132_select_out\n");
+=======
+	codec_dbg(codec, "ca0132_select_out\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "ca0132_select_out\n");
 >>>>>>> v3.18
@@ -3518,7 +3851,11 @@ static int ca0132_select_out(struct hda_codec *codec)
 
 	if (spec->cur_out_type == SPEAKER_OUT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "ca0132_select_out speaker\n");
+=======
+		codec_dbg(codec, "ca0132_select_out speaker\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "ca0132_select_out speaker\n");
 >>>>>>> v3.18
@@ -3555,7 +3892,11 @@ static int ca0132_select_out(struct hda_codec *codec)
 				    pin_ctl | PIN_OUT);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd(KERN_INFO "ca0132_select_out hp\n");
+=======
+		codec_dbg(codec, "ca0132_select_out hp\n");
+>>>>>>> v3.18
 =======
 		codec_dbg(codec, "ca0132_select_out hp\n");
 >>>>>>> v3.18
@@ -3603,9 +3944,12 @@ static void ca0132_unsol_hp_delayed(struct work_struct *work)
 	struct ca0132_spec *spec = container_of(
 		to_delayed_work(work), struct ca0132_spec, unsol_hp_work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ca0132_select_out(spec->codec);
 	snd_hda_jack_report_sync(spec->codec);
 =======
+=======
+>>>>>>> v3.18
 	struct hda_jack_tbl *jack;
 
 	ca0132_select_out(spec->codec);
@@ -3614,6 +3958,9 @@ static void ca0132_unsol_hp_delayed(struct work_struct *work)
 		jack->block_report = 0;
 		snd_hda_jack_report_sync(spec->codec);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3675,7 +4022,11 @@ static int ca0132_select_mic(struct hda_codec *codec)
 	int auto_jack;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "ca0132_select_mic\n");
+=======
+	codec_dbg(codec, "ca0132_select_mic\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "ca0132_select_mic\n");
 >>>>>>> v3.18
@@ -3801,7 +4152,11 @@ static int ca0132_effects_set(struct hda_codec *codec, hda_nid_t nid, long val)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "ca0132_effect_set: nid=0x%x, val=%ld\n",
+=======
+	codec_dbg(codec, "ca0132_effect_set: nid=0x%x, val=%ld\n",
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "ca0132_effect_set: nid=0x%x, val=%ld\n",
 >>>>>>> v3.18
@@ -3827,7 +4182,11 @@ static int ca0132_pe_switch_set(struct hda_codec *codec)
 	int i, ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "ca0132_pe_switch_set: val=%ld\n",
+=======
+	codec_dbg(codec, "ca0132_pe_switch_set: val=%ld\n",
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "ca0132_pe_switch_set: val=%ld\n",
 >>>>>>> v3.18
@@ -3877,7 +4236,11 @@ static int ca0132_cvoice_switch_set(struct hda_codec *codec)
 	unsigned int oldval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "ca0132_cvoice_switch_set: val=%ld\n",
+=======
+	codec_dbg(codec, "ca0132_cvoice_switch_set: val=%ld\n",
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "ca0132_cvoice_switch_set: val=%ld\n",
 >>>>>>> v3.18
@@ -4011,7 +4374,11 @@ static int ca0132_voicefx_put(struct snd_kcontrol *kcontrol,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "ca0132_voicefx_put: sel=%d, preset=%s\n",
+=======
+	codec_dbg(codec, "ca0132_voicefx_put: sel=%d, preset=%s\n",
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "ca0132_voicefx_put: sel=%d, preset=%s\n",
 >>>>>>> v3.18
@@ -4086,7 +4453,11 @@ static int ca0132_switch_put(struct snd_kcontrol *kcontrol,
 	int changed = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "ca0132_switch_put: nid=0x%x, val=%ld\n",
+=======
+	codec_dbg(codec, "ca0132_switch_put: nid=0x%x, val=%ld\n",
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "ca0132_switch_put: nid=0x%x, val=%ld\n",
 >>>>>>> v3.18
@@ -4290,7 +4661,11 @@ static int add_fx_switch(struct hda_codec *codec, hda_nid_t nid,
 			 const char *pfx, int dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char namestr[44];
+=======
+	char namestr[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
+>>>>>>> v3.18
 =======
 	char namestr[SNDRV_CTL_ELEM_ID_NAME_MAXLEN];
 >>>>>>> v3.18
@@ -4532,12 +4907,15 @@ static void init_input(struct hda_codec *codec, hda_nid_t pin, hda_nid_t adc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ca0132_init_unsol(struct hda_codec *codec)
 {
 	snd_hda_jack_detect_enable(codec, UNSOL_TAG_HP, UNSOL_TAG_HP);
 	snd_hda_jack_detect_enable(codec, UNSOL_TAG_AMIC1, UNSOL_TAG_AMIC1);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void refresh_amp_caps(struct hda_codec *codec, hda_nid_t nid, int dir)
@@ -4560,7 +4938,11 @@ static void ca0132_set_dmic(struct hda_codec *codec, int enable)
 	unsigned int oldval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "ca0132_set_dmic: enable=%d\n", enable);
+=======
+	codec_dbg(codec, "ca0132_set_dmic: enable=%d\n", enable);
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "ca0132_set_dmic: enable=%d\n", enable);
 >>>>>>> v3.18
@@ -4672,7 +5054,11 @@ static void ca0132_refresh_widget_caps(struct hda_codec *codec)
 	hda_nid_t nid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd(KERN_INFO "ca0132_refresh_widget_caps.\n");
+=======
+	codec_dbg(codec, "ca0132_refresh_widget_caps.\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "ca0132_refresh_widget_caps.\n");
 >>>>>>> v3.18
@@ -4819,18 +5205,24 @@ static void ca0132_download_dsp(struct hda_codec *codec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ca0132_process_dsp_response(struct hda_codec *codec)
 {
 	struct ca0132_spec *spec = codec->spec;
 
 	snd_printdd(KERN_INFO "ca0132_process_dsp_response\n");
 =======
+=======
+>>>>>>> v3.18
 static void ca0132_process_dsp_response(struct hda_codec *codec,
 					struct hda_jack_callback *callback)
 {
 	struct ca0132_spec *spec = codec->spec;
 
 	codec_dbg(codec, "ca0132_process_dsp_response\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (spec->wait_scp) {
 		if (dspio_get_response_data(codec) >= 0)
@@ -4840,6 +5232,7 @@ static void ca0132_process_dsp_response(struct hda_codec *codec,
 	dspio_clear_response_queue(codec);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void ca0132_unsol_event(struct hda_codec *codec, unsigned int res)
 {
@@ -4872,6 +5265,8 @@ static void ca0132_unsol_event(struct hda_codec *codec, unsigned int res)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 static void hp_callback(struct hda_codec *codec, struct hda_jack_callback *cb)
 {
 	struct ca0132_spec *spec = codec->spec;
@@ -4897,6 +5292,9 @@ static void ca0132_init_unsol(struct hda_codec *codec)
 					    amic_callback);
 	snd_hda_jack_detect_enable_callback(codec, UNSOL_TAG_DSP,
 					    ca0132_process_dsp_response);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4909,8 +5307,11 @@ static struct hda_verb ca0132_base_init_verbs[] = {
 	/*enable ct extension*/
 	{0x15, VENDOR_CHIPIO_CT_EXTENSIONS_ENABLE, 0x1},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*enable DSP node unsol, needed for DSP download*/
 	{0x16, AC_VERB_SET_UNSOLICITED_ENABLE, AC_USRSP_EN | UNSOL_TAG_DSP},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{}
@@ -5030,6 +5431,11 @@ static int ca0132_init(struct hda_codec *codec)
 	snd_hda_power_up(codec);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ca0132_init_unsol(codec);
+
+>>>>>>> v3.18
 =======
 	ca0132_init_unsol(codec);
 
@@ -5057,8 +5463,11 @@ static int ca0132_init(struct hda_codec *codec)
 		snd_hda_sequence_write(codec, spec->init_verbs[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ca0132_init_unsol(codec);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ca0132_select_out(codec);
@@ -5089,7 +5498,11 @@ static struct hda_codec_ops ca0132_patch_ops = {
 	.init = ca0132_init,
 	.free = ca0132_free,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.unsol_event = ca0132_unsol_event,
+=======
+	.unsol_event = snd_hda_jack_unsol_event,
+>>>>>>> v3.18
 =======
 	.unsol_event = snd_hda_jack_unsol_event,
 >>>>>>> v3.18
@@ -5140,7 +5553,11 @@ static int patch_ca0132(struct hda_codec *codec)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("patch_ca0132\n");
+=======
+	codec_dbg(codec, "patch_ca0132\n");
+>>>>>>> v3.18
 =======
 	codec_dbg(codec, "patch_ca0132\n");
 >>>>>>> v3.18

@@ -117,7 +117,11 @@ struct snd_card_als4000 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_als4000_ids) = {
+=======
+static const struct pci_device_id snd_als4000_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_als4000_ids[] = {
 >>>>>>> v3.18
@@ -583,7 +587,11 @@ static irqreturn_t snd_als4000_interrupt(int irq, void *dev_id)
 					ALS4K_IOB_16_ACK_FOR_CR1E);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* printk(KERN_INFO "als4000: irq 0x%04x 0x%04x\n",
+=======
+	/* dev_dbg(chip->card->dev, "als4000: irq 0x%04x 0x%04x\n",
+>>>>>>> v3.18
 =======
 	/* dev_dbg(chip->card->dev, "als4000: irq 0x%04x 0x%04x\n",
 >>>>>>> v3.18
@@ -800,7 +808,11 @@ static int snd_als4000_create_gameport(struct snd_card_als4000 *acard, int dev)
 
 	if (!r) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "als4000: cannot reserve joystick ports\n");
+=======
+		dev_warn(&acard->pci->dev, "cannot reserve joystick ports\n");
+>>>>>>> v3.18
 =======
 		dev_warn(&acard->pci->dev, "cannot reserve joystick ports\n");
 >>>>>>> v3.18
@@ -810,7 +822,11 @@ static int snd_als4000_create_gameport(struct snd_card_als4000 *acard, int dev)
 	acard->gameport = gp = gameport_allocate_port();
 	if (!gp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "als4000: cannot allocate memory for gameport\n");
+=======
+		dev_err(&acard->pci->dev, "cannot allocate memory for gameport\n");
+>>>>>>> v3.18
 =======
 		dev_err(&acard->pci->dev, "cannot allocate memory for gameport\n");
 >>>>>>> v3.18
@@ -890,7 +906,11 @@ static int snd_card_als4000_probe(struct pci_dev *pci,
 	if (pci_set_dma_mask(pci, DMA_BIT_MASK(24)) < 0 ||
 	    pci_set_consistent_dma_mask(pci, DMA_BIT_MASK(24)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "architecture does not support 24bit PCI busmaster DMA\n");
+=======
+		dev_err(&pci->dev, "architecture does not support 24bit PCI busmaster DMA\n");
+>>>>>>> v3.18
 =======
 		dev_err(&pci->dev, "architecture does not support 24bit PCI busmaster DMA\n");
 >>>>>>> v3.18
@@ -909,9 +929,15 @@ static int snd_card_als4000_probe(struct pci_dev *pci,
 	pci_set_master(pci);
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 
 			      sizeof(*acard) /* private_data: acard */,
 			      &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(*acard) /* private_data: acard */,
+			   &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   sizeof(*acard) /* private_data: acard */,
@@ -947,7 +973,10 @@ static int snd_card_als4000_probe(struct pci_dev *pci,
 	chip->pci = pci;
 	chip->alt_port = iobase;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -964,7 +993,11 @@ static int snd_card_als4000_probe(struct pci_dev *pci,
 					MPU401_INFO_IRQ_HOOK,
 					-1, &chip->rmidi)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "als4000: no MPU-401 device at 0x%lx?\n",
+=======
+		dev_err(&pci->dev, "no MPU-401 device at 0x%lx?\n",
+>>>>>>> v3.18
 =======
 		dev_err(&pci->dev, "no MPU-401 device at 0x%lx?\n",
 >>>>>>> v3.18
@@ -989,7 +1022,11 @@ static int snd_card_als4000_probe(struct pci_dev *pci,
 				iobase + ALS4K_IOB_12_ADLIB_ADDR2,
 			    OPL3_HW_AUTO, 1, &opl3) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "als4000: no OPL device at 0x%lx-0x%lx?\n",
+=======
+		dev_err(&pci->dev, "no OPL device at 0x%lx-0x%lx?\n",
+>>>>>>> v3.18
 =======
 		dev_err(&pci->dev, "no OPL device at 0x%lx-0x%lx?\n",
 >>>>>>> v3.18
@@ -1022,7 +1059,10 @@ static void snd_card_als4000_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1057,8 +1097,12 @@ static int snd_als4000_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "als4000: pci_enable_device failed, "
 		       "disabling device\n");
+=======
+		dev_err(dev, "pci_enable_device failed, disabling device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_enable_device failed, disabling device\n");
 >>>>>>> v3.18

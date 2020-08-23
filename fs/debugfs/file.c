@@ -452,7 +452,11 @@ static ssize_t read_file_bool(struct file *file, char __user *user_buf,
 	char buf[3];
 	u32 *val = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -478,6 +482,10 @@ static ssize_t write_file_bool(struct file *file, const char __user *user_buf,
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	buf[buf_size] = '\0';
+>>>>>>> v3.18
 =======
 	buf[buf_size] = '\0';
 >>>>>>> v3.18

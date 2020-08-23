@@ -14,10 +14,13 @@
  *
  *  GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -48,6 +51,10 @@
 #include "tuner-simple.h"
 #include "dib7000p.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "dib0070.h"
+>>>>>>> v3.18
 =======
 #include "dib0070.h"
 >>>>>>> v3.18
@@ -59,6 +66,10 @@
 #include "lnbh24.h"
 #include "cx24116.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "cx24117.h"
+>>>>>>> v3.18
 =======
 #include "cx24117.h"
 >>>>>>> v3.18
@@ -81,13 +92,19 @@
 #include "tda10071.h"
 #include "a8293.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "mb86a20s.h"
 #include "si2165.h"
 #include "si2168.h"
 #include "si2157.h"
 #include "m88ds3103.h"
 #include "m88ts2022.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static unsigned int debug;
@@ -107,6 +124,7 @@ DVB_DEFINE_MOD_OPT_ADAPTER_NR(adapter_nr);
 
 /* ------------------------------------------------------------------ */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int dvb_buf_setup(struct videobuf_queue *q,
 			 unsigned int *count, unsigned int *size)
@@ -147,6 +165,8 @@ static void cx23885_dvb_gate_ctrl(struct cx23885_tsport  *port, int open)
 	struct videobuf_dvb_frontends *f;
 	struct videobuf_dvb_frontend *fe;
 =======
+=======
+>>>>>>> v3.18
 static int queue_setup(struct vb2_queue *q, const struct v4l2_format *fmt,
 			   unsigned int *num_buffers, unsigned int *num_planes,
 			   unsigned int sizes[], void *alloc_ctxs[])
@@ -197,11 +217,15 @@ static void cx23885_dvb_gate_ctrl(struct cx23885_tsport  *port, int open)
 {
 	struct vb2_dvb_frontends *f;
 	struct vb2_dvb_frontend *fe;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	f = &port->frontends;
 
 	if (f->gate <= 1) /* undefined or fe0 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		fe = videobuf_dvb_get_frontend(f, 1);
 	else
@@ -223,6 +247,8 @@ static struct videobuf_queue_ops dvb_qops = {
 	.buf_queue    = dvb_buf_queue,
 	.buf_release  = dvb_buf_release,
 =======
+=======
+>>>>>>> v3.18
 		fe = vb2_dvb_get_frontend(f, 1);
 	else
 		fe = vb2_dvb_get_frontend(f, f->gate);
@@ -258,6 +284,9 @@ static struct vb2_ops dvb_qops = {
 	.wait_finish = vb2_ops_wait_finish,
 	.start_streaming = cx23885_start_streaming,
 	.stop_streaming = cx23885_stop_streaming,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -420,12 +449,18 @@ static struct tda18271_config hauppauge_hvr1210_tuner_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct tda18271_config hauppauge_hvr4400_tuner_config = {
 	.gate    = TDA18271_GATE_DIGITAL,
 	.output_opt = TDA18271_OUTPUT_LT_OFF,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct tda18271_std_map hauppauge_hvr127x_std_map = {
 	.atsc_6   = { .if_freq = 3250, .agc_mode = 3, .std = 4,
@@ -588,11 +623,17 @@ static struct cx24116_config tbs_cx24116_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct cx24117_config tbs_cx24117_config = {
 	.demod_address = 0x55,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct ds3000_config tevii_ds3000_config = {
 	.demod_address = 0x68,
@@ -602,6 +643,10 @@ static struct ts2020_config tevii_ts2020_config  = {
 	.tuner_address = 0x60,
 	.clk_out_div = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.frequency_div = 1146000,
+>>>>>>> v3.18
 =======
 	.frequency_div = 1146000,
 >>>>>>> v3.18
@@ -631,7 +676,10 @@ static struct xc5000_config mygica_x8506_xc5000_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct mb86a20s_config mygica_x8507_mb86a20s_config = {
 	.demod_address = 0x10,
 };
@@ -641,6 +689,9 @@ static struct xc5000_config mygica_x8507_xc5000_config = {
 	.if_khz = 4000,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct stv090x_config prof_8000_stv090x_config = {
 	.device                 = STV0903,
@@ -679,7 +730,10 @@ static int p8000_set_voltage(struct dvb_frontend *fe, fe_sec_voltage_t voltage)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int dvbsky_t9580_set_voltage(struct dvb_frontend *fe,
 					fe_sec_voltage_t voltage)
 {
@@ -709,6 +763,9 @@ static int dvbsky_t9580_set_voltage(struct dvb_frontend *fe,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int cx23885_dvb_set_frontend(struct dvb_frontend *fe)
 {
@@ -731,6 +788,10 @@ static int cx23885_dvb_set_frontend(struct dvb_frontend *fe)
 		break;
 	case CX23885_BOARD_MYGICA_X8506:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CX23885_BOARD_MYGICA_X8507:
+>>>>>>> v3.18
 =======
 	case CX23885_BOARD_MYGICA_X8507:
 >>>>>>> v3.18
@@ -740,10 +801,13 @@ static int cx23885_dvb_set_frontend(struct dvb_frontend *fe)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 	/* Call the real set_frontend */
 	if (port->set_frontend)
@@ -759,6 +823,9 @@ static void cx23885_set_frontend_hook(struct cx23885_tsport *port,
 	fe->ops.set_frontend = cx23885_dvb_set_frontend;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct lgs8gxx_config magicpro_prohdtve2_lgs8g75_config = {
 	.prod = LGS8GXX_PROD_LGS8G75,
@@ -878,7 +945,10 @@ static const struct a8293_config hauppauge_a8293_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct si2165_config hauppauge_hvr4400_si2165_config = {
 	.i2c_addr	= 0x64,
 	.chip_mode	= SI2165_MODE_PLL_XTAL,
@@ -898,6 +968,9 @@ static const struct m88ds3103_config dvbsky_t9580_m88ds3103_config = {
 	.agc = 0x99,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int netup_altera_fpga_rw(void *device, int flag, int data, int read)
 {
@@ -944,12 +1017,15 @@ static int netup_altera_fpga_rw(void *device, int flag, int data, int read)
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dvb_register(struct cx23885_tsport *port)
 {
 	struct cx23885_dev *dev = port->dev;
 	struct cx23885_i2c *i2c_bus = NULL, *i2c_bus2 = NULL;
 	struct videobuf_dvb_frontend *fe0, *fe1 = NULL;
 =======
+=======
+>>>>>>> v3.18
 static int dib7070_tuner_reset(struct dvb_frontend *fe, int onoff)
 {
 	struct dib7000p_ops *dib7000p_ops = fe->sec_priv;
@@ -1062,11 +1138,15 @@ static int dvb_register(struct cx23885_tsport *port)
 	struct i2c_adapter *adapter;
 	struct i2c_client *client_demod;
 	struct i2c_client *client_tuner;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int mfe_shared = 0; /* bus not shared by default */
 	int ret;
 
 	/* Get the first frontend */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fe0 = videobuf_dvb_get_frontend(&port->frontends, 1);
 	if (!fe0)
@@ -1074,11 +1154,16 @@ static int dvb_register(struct cx23885_tsport *port)
 
 	/* init struct videobuf_dvb */
 =======
+=======
+>>>>>>> v3.18
 	fe0 = vb2_dvb_get_frontend(&port->frontends, 1);
 	if (!fe0)
 		return -EINVAL;
 
 	/* init struct vb2_dvb */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fe0->dvb.name = dev->name;
 
@@ -1113,6 +1198,11 @@ static int dvb_register(struct cx23885_tsport *port)
 				   &hauppauge_hvr127x_config);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (dev->board == CX23885_BOARD_HAUPPAUGE_HVR1275)
+			cx23885_set_frontend_hook(port, fe0->dvb.frontend);
+>>>>>>> v3.18
 =======
 		if (dev->board == CX23885_BOARD_HAUPPAUGE_HVR1275)
 			cx23885_set_frontend_hook(port, fe0->dvb.frontend);
@@ -1249,14 +1339,20 @@ static int dvb_register(struct cx23885_tsport *port)
 	case CX23885_BOARD_HAUPPAUGE_HVR1400:
 		i2c_bus = &dev->i2c_bus[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fe0->dvb.frontend = dvb_attach(dib7000p_attach,
 			&i2c_bus->i2c_adap,
 =======
+=======
+>>>>>>> v3.18
 
 		if (!dvb_attach(dib7000p_attach, &dib7000p_ops))
 			return -ENODEV;
 
 		fe0->dvb.frontend = dib7000p_ops.init(&i2c_bus->i2c_adap,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			0x12, &hauppauge_hvr1400_dib7000_config);
 		if (fe0->dvb.frontend != NULL) {
@@ -1321,7 +1417,10 @@ static int dvb_register(struct cx23885_tsport *port)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CX23885_BOARD_DVICO_FUSIONHDTV_DVB_T_DUAL_EXP2: {
 		i2c_bus = &dev->i2c_bus[port->nr - 1];
 		/* cxusb_ctrl_msg(adap->dev, CMD_DIGITAL, NULL, 0, NULL, 0); */
@@ -1346,6 +1445,9 @@ static int dvb_register(struct cx23885_tsport *port)
 		}
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CX23885_BOARD_LEADTEK_WINFAST_PXDVR3200_H:
 	case CX23885_BOARD_COMPRO_VIDEOMATE_E650F:
@@ -1409,7 +1511,10 @@ static int dvb_register(struct cx23885_tsport *port)
 
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CX23885_BOARD_TBS_6980:
 	case CX23885_BOARD_TBS_6981:
 		i2c_bus = &dev->i2c_bus[1];
@@ -1429,6 +1534,9 @@ static int dvb_register(struct cx23885_tsport *port)
 			break;
 		}
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CX23885_BOARD_TEVII_S470:
 		i2c_bus = &dev->i2c_bus[1];
@@ -1510,7 +1618,10 @@ static int dvb_register(struct cx23885_tsport *port)
 				&mygica_x8506_xc5000_config);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		cx23885_set_frontend_hook(port, fe0->dvb.frontend);
 		break;
 	case CX23885_BOARD_MYGICA_X8507:
@@ -1526,6 +1637,9 @@ static int dvb_register(struct cx23885_tsport *port)
 			&mygica_x8507_xc5000_config);
 		}
 		cx23885_set_frontend_hook(port, fe0->dvb.frontend);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case CX23885_BOARD_MAGICPRO_PROHDTVE2:
@@ -1541,6 +1655,10 @@ static int dvb_register(struct cx23885_tsport *port)
 				&magicpro_prohdtve2_xc5000_config);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		cx23885_set_frontend_hook(port, fe0->dvb.frontend);
+>>>>>>> v3.18
 =======
 		cx23885_set_frontend_hook(port, fe0->dvb.frontend);
 >>>>>>> v3.18
@@ -1620,7 +1738,11 @@ static int dvb_register(struct cx23885_tsport *port)
 		}
 		/* MFE frontend 2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fe1 = videobuf_dvb_get_frontend(&port->frontends, 2);
+=======
+		fe1 = vb2_dvb_get_frontend(&port->frontends, 2);
+>>>>>>> v3.18
 =======
 		fe1 = vb2_dvb_get_frontend(&port->frontends, 2);
 >>>>>>> v3.18
@@ -1703,6 +1825,7 @@ static int dvb_register(struct cx23885_tsport *port)
 	case CX23885_BOARD_HAUPPAUGE_HVR4400:
 		i2c_bus = &dev->i2c_bus[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fe0->dvb.frontend = dvb_attach(tda10071_attach,
 						&hauppauge_tda10071_config,
 						&i2c_bus->i2c_adap);
@@ -1711,6 +1834,8 @@ static int dvb_register(struct cx23885_tsport *port)
 				   &i2c_bus->i2c_adap,
 				   &hauppauge_a8293_config);
 =======
+=======
+>>>>>>> v3.18
 		i2c_bus2 = &dev->i2c_bus[1];
 		switch (port->nr) {
 		/* port b */
@@ -1833,6 +1958,9 @@ static int dvb_register(struct cx23885_tsport *port)
 			}
 			port->i2c_client_tuner = client_tuner;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -1868,7 +1996,11 @@ static int dvb_register(struct cx23885_tsport *port)
 
 	/* register everything */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = videobuf_dvb_register_bus(&port->frontends, THIS_MODULE, port,
+=======
+	ret = vb2_dvb_register_bus(&port->frontends, THIS_MODULE, port,
+>>>>>>> v3.18
 =======
 	ret = vb2_dvb_register_bus(&port->frontends, THIS_MODULE, port,
 >>>>>>> v3.18
@@ -1915,7 +2047,10 @@ static int dvb_register(struct cx23885_tsport *port)
 		break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CX23885_BOARD_DVBSKY_T9580: {
 		u8 eeprom[256]; /* 24C02 i2c eeprom */
 
@@ -1932,6 +2067,9 @@ static int dvb_register(struct cx23885_tsport *port)
 			(port->nr-1) * 8, 6);
 		break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1940,7 +2078,11 @@ static int dvb_register(struct cx23885_tsport *port)
 frontend_detach:
 	port->gate_ctrl = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	videobuf_dvb_dealloc_frontends(&port->frontends);
+=======
+	vb2_dvb_dealloc_frontends(&port->frontends);
+>>>>>>> v3.18
 =======
 	vb2_dvb_dealloc_frontends(&port->frontends);
 >>>>>>> v3.18
@@ -1951,7 +2093,11 @@ int cx23885_dvb_register(struct cx23885_tsport *port)
 {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct videobuf_dvb_frontend *fe0;
+=======
+	struct vb2_dvb_frontend *fe0;
+>>>>>>> v3.18
 =======
 	struct vb2_dvb_frontend *fe0;
 >>>>>>> v3.18
@@ -1972,7 +2118,13 @@ int cx23885_dvb_register(struct cx23885_tsport *port)
 
 	for (i = 1; i <= port->num_frontends; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (videobuf_dvb_alloc_frontend(
+=======
+		struct vb2_queue *q;
+
+		if (vb2_dvb_alloc_frontend(
+>>>>>>> v3.18
 =======
 		struct vb2_queue *q;
 
@@ -1984,7 +2136,11 @@ int cx23885_dvb_register(struct cx23885_tsport *port)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fe0 = videobuf_dvb_get_frontend(&port->frontends, i);
+=======
+		fe0 = vb2_dvb_get_frontend(&port->frontends, i);
+>>>>>>> v3.18
 =======
 		fe0 = vb2_dvb_get_frontend(&port->frontends, i);
 >>>>>>> v3.18
@@ -2004,11 +2160,14 @@ int cx23885_dvb_register(struct cx23885_tsport *port)
 		/* We have to init the queue for each frontend on a port. */
 		printk(KERN_INFO "%s: cx23885 based dvb card\n", dev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		videobuf_queue_sg_init(&fe0->dvb.dvbq, &dvb_qops,
 			    &dev->pci->dev, &port->slock,
 			    V4L2_BUF_TYPE_VIDEO_CAPTURE, V4L2_FIELD_TOP,
 			    sizeof(struct cx23885_buffer), port, NULL);
 =======
+=======
+>>>>>>> v3.18
 		q = &fe0->dvb.dvbq;
 		q->type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 		q->io_modes = VB2_MMAP | VB2_USERPTR | VB2_DMABUF | VB2_READ;
@@ -2024,6 +2183,9 @@ int cx23885_dvb_register(struct cx23885_tsport *port)
 		err = vb2_queue_init(q);
 		if (err < 0)
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	err = dvb_register(port);
@@ -2036,6 +2198,7 @@ int cx23885_dvb_register(struct cx23885_tsport *port)
 
 int cx23885_dvb_unregister(struct cx23885_tsport *port)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct videobuf_dvb_frontend *fe0;
 
@@ -2050,6 +2213,8 @@ int cx23885_dvb_unregister(struct cx23885_tsport *port)
 	if (fe0 && fe0->dvb.frontend)
 		videobuf_dvb_unregister_bus(&port->frontends);
 =======
+=======
+>>>>>>> v3.18
 	struct vb2_dvb_frontend *fe0;
 	struct i2c_client *client;
 
@@ -2071,6 +2236,9 @@ int cx23885_dvb_unregister(struct cx23885_tsport *port)
 
 	if (fe0 && fe0->dvb.frontend)
 		vb2_dvb_unregister_bus(&port->frontends);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (port->dev->board) {
@@ -2087,6 +2255,9 @@ int cx23885_dvb_unregister(struct cx23885_tsport *port)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

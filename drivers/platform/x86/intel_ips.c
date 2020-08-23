@@ -270,7 +270,11 @@ struct ips_mcp_limits {
 /* Max temps are -10 degrees C to avoid PROCHOT# */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ips_mcp_limits ips_sv_limits = {
+=======
+static struct ips_mcp_limits ips_sv_limits = {
+>>>>>>> v3.18
 =======
 static struct ips_mcp_limits ips_sv_limits = {
 >>>>>>> v3.18
@@ -282,7 +286,11 @@ static struct ips_mcp_limits ips_sv_limits = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ips_mcp_limits ips_lv_limits = {
+=======
+static struct ips_mcp_limits ips_lv_limits = {
+>>>>>>> v3.18
 =======
 static struct ips_mcp_limits ips_lv_limits = {
 >>>>>>> v3.18
@@ -294,7 +302,11 @@ static struct ips_mcp_limits ips_lv_limits = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ips_mcp_limits ips_ulv_limits = {
+=======
+static struct ips_mcp_limits ips_ulv_limits = {
+>>>>>>> v3.18
 =======
 static struct ips_mcp_limits ips_ulv_limits = {
 >>>>>>> v3.18
@@ -1491,7 +1503,11 @@ ips_link_to_i915_driver(void)
 EXPORT_SYMBOL_GPL(ips_link_to_i915_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ips_id_table) = {
+=======
+static const struct pci_device_id ips_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ips_id_table[] = {
 >>>>>>> v3.18
@@ -1748,6 +1764,7 @@ static struct pci_driver ips_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init ips_init(void)
 {
 	return pci_register_driver(&ips_pci_driver);
@@ -1760,6 +1777,9 @@ static void ips_exit(void)
 	return;
 }
 module_exit(ips_exit);
+=======
+module_pci_driver(ips_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(ips_pci_driver);
 >>>>>>> v3.18

@@ -40,7 +40,10 @@
 #include <scsi/scsi_bsg_fc.h>
 #include "scsi_priv.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "scsi_transport_fc_internal.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -265,12 +268,18 @@ static const struct {
 	{ FC_PORTSPEED_8GBIT,		"8 Gbit" },
 	{ FC_PORTSPEED_16GBIT,		"16 Gbit" },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{ FC_PORTSPEED_32GBIT,		"32 Gbit" },
 	{ FC_PORTSPEED_20GBIT,		"20 Gbit" },
 	{ FC_PORTSPEED_40GBIT,		"40 Gbit" },
 	{ FC_PORTSPEED_50GBIT,		"50 Gbit" },
 	{ FC_PORTSPEED_100GBIT,		"100 Gbit" },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ FC_PORTSPEED_NOT_NEGOTIATED,	"Not Negotiated" },
 };
@@ -447,7 +456,11 @@ static int fc_host_setup(struct transport_container *tc, struct device *dev,
 	snprintf(fc_host->work_q_name, sizeof(fc_host->work_q_name),
 		 "fc_wq_%d", shost->host_no);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fc_host->work_q = alloc_workqueue(fc_host->work_q_name, 0, 0);
+=======
+	fc_host->work_q = alloc_workqueue("%s", 0, 0, fc_host->work_q_name);
+>>>>>>> v3.18
 =======
 	fc_host->work_q = alloc_workqueue("%s", 0, 0, fc_host->work_q_name);
 >>>>>>> v3.18
@@ -459,8 +472,13 @@ static int fc_host_setup(struct transport_container *tc, struct device *dev,
 		 sizeof(fc_host->devloss_work_q_name),
 		 "fc_dl_%d", shost->host_no);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fc_host->devloss_work_q =
 			alloc_workqueue(fc_host->devloss_work_q_name, 0, 0);
+=======
+	fc_host->devloss_work_q = alloc_workqueue("%s", 0, 0,
+					fc_host->devloss_work_q_name);
+>>>>>>> v3.18
 =======
 	fc_host->devloss_work_q = alloc_workqueue("%s", 0, 0,
 					fc_host->devloss_work_q_name);
@@ -2109,7 +2127,11 @@ fc_timed_out(struct scsi_cmnd *scmd)
  */
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 fc_user_scan_tgt(struct Scsi_Host *shost, uint channel, uint id, uint lun)
+=======
+fc_user_scan_tgt(struct Scsi_Host *shost, uint channel, uint id, u64 lun)
+>>>>>>> v3.18
 =======
 fc_user_scan_tgt(struct Scsi_Host *shost, uint channel, uint id, u64 lun)
 >>>>>>> v3.18
@@ -2145,7 +2167,11 @@ fc_user_scan_tgt(struct Scsi_Host *shost, uint channel, uint id, u64 lun)
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 fc_user_scan(struct Scsi_Host *shost, uint channel, uint id, uint lun)
+=======
+fc_user_scan(struct Scsi_Host *shost, uint channel, uint id, u64 lun)
+>>>>>>> v3.18
 =======
 fc_user_scan(struct Scsi_Host *shost, uint channel, uint id, u64 lun)
 >>>>>>> v3.18
@@ -2577,6 +2603,10 @@ fc_rport_final_delete(struct work_struct *work)
 		if (!cancel_delayed_work(&rport->dev_loss_work))
 			fc_flush_devloss(shost);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		cancel_work_sync(&rport->scan_work);
+>>>>>>> v3.18
 =======
 		cancel_work_sync(&rport->scan_work);
 >>>>>>> v3.18
@@ -3039,10 +3069,13 @@ fc_remote_port_delete(struct fc_rport  *rport)
 	spin_unlock_irqrestore(shost->host_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rport->roles & FC_PORT_ROLE_FCP_INITIATOR &&
 	    shost->active_mode & MODE_TARGET)
 		fc_tgt_it_nexus_destroy(shost, (unsigned long)rport);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	scsi_target_block(&rport->dev);
@@ -3086,7 +3119,10 @@ fc_remote_port_rolechg(struct fc_rport  *rport, u32 roles)
 	unsigned long flags;
 	int create = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3098,12 +3134,15 @@ fc_remote_port_rolechg(struct fc_rport  *rport, u32 roles)
 		} else if (!(rport->roles & FC_PORT_ROLE_FCP_TARGET))
 			create = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (shost->active_mode & MODE_TARGET) {
 		ret = fc_tgt_it_nexus_create(shost, (unsigned long)rport,
 					     (char *)&rport->node_name);
 		if (ret)
 			printk(KERN_ERR "FC Remore Port tgt nexus failed %d\n",
 			       ret);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

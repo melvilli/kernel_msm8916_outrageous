@@ -34,6 +34,12 @@
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -202,7 +208,12 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 					   ib_mad_send_handler send_handler,
 					   ib_mad_recv_handler recv_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   void *context)
+=======
+					   void *context,
+					   u32 registration_flags)
+>>>>>>> v3.18
 =======
 					   void *context,
 					   u32 registration_flags)
@@ -223,6 +234,7 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 	/* Validate parameters */
 	qpn = get_spl_qp_index(qp_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (qpn == -1)
 		goto error1;
 
@@ -236,6 +248,8 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 		if (!recv_handler)
 			goto error1;
 =======
+=======
+>>>>>>> v3.18
 	if (qpn == -1) {
 		dev_notice(&device->dev,
 			   "ib_register_mad_agent: invalid QP Type %d\n",
@@ -263,6 +277,9 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 				   "ib_register_mad_agent: no recv_handler\n");
 			goto error1;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (mad_reg_req->mgmt_class >= MAX_MGMT_CLASS) {
 			/*
@@ -271,15 +288,21 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 			 */
 			if (mad_reg_req->mgmt_class !=
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    IB_MGMT_CLASS_SUBN_DIRECTED_ROUTE)
 				goto error1;
 =======
+=======
+>>>>>>> v3.18
 			    IB_MGMT_CLASS_SUBN_DIRECTED_ROUTE) {
 				dev_notice(&device->dev,
 					   "ib_register_mad_agent: Invalid Mgmt Class 0x%x\n",
 					   mad_reg_req->mgmt_class);
 				goto error1;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (mad_reg_req->mgmt_class == 0) {
 			/*
@@ -287,6 +310,11 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 			 * aliasing of IB_MGMT_CLASS_SUBN_DIRECTED_ROUTE
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			dev_notice(&device->dev,
+				   "ib_register_mad_agent: Invalid Mgmt Class 0\n");
+>>>>>>> v3.18
 =======
 			dev_notice(&device->dev,
 				   "ib_register_mad_agent: Invalid Mgmt Class 0\n");
@@ -298,6 +326,7 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 			 * ensure supplied OUI is not zero
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!is_vendor_oui(mad_reg_req->oui))
 				goto error1;
 		}
@@ -307,6 +336,8 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 				goto error1;
 		}
 =======
+=======
+>>>>>>> v3.18
 			if (!is_vendor_oui(mad_reg_req->oui)) {
 				dev_notice(&device->dev,
 					   "ib_register_mad_agent: No OUI specified for class 0x%x\n",
@@ -324,6 +355,9 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 			}
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Make sure class supplied is consistent with QP type */
 		if (qp_type == IB_QPT_SMI) {
@@ -331,30 +365,42 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 					IB_MGMT_CLASS_SUBN_LID_ROUTED) &&
 			    (mad_reg_req->mgmt_class !=
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IB_MGMT_CLASS_SUBN_DIRECTED_ROUTE))
 				goto error1;
 =======
+=======
+>>>>>>> v3.18
 					IB_MGMT_CLASS_SUBN_DIRECTED_ROUTE)) {
 				dev_notice(&device->dev,
 					   "ib_register_mad_agent: Invalid SM QP type: class 0x%x\n",
 					   mad_reg_req->mgmt_class);
 				goto error1;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			if ((mad_reg_req->mgmt_class ==
 					IB_MGMT_CLASS_SUBN_LID_ROUTED) ||
 			    (mad_reg_req->mgmt_class ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IB_MGMT_CLASS_SUBN_DIRECTED_ROUTE))
 				goto error1;
 =======
+=======
+>>>>>>> v3.18
 					IB_MGMT_CLASS_SUBN_DIRECTED_ROUTE)) {
 				dev_notice(&device->dev,
 					   "ib_register_mad_agent: Invalid GS QP type: class 0x%x\n",
 					   mad_reg_req->mgmt_class);
 				goto error1;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else {
@@ -362,6 +408,11 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 		if (!send_handler)
 			goto error1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (registration_flags & IB_MAD_USER_RMPP)
+			goto error1;
+>>>>>>> v3.18
 =======
 		if (registration_flags & IB_MAD_USER_RMPP)
 			goto error1;
@@ -372,6 +423,10 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 	port_priv = ib_get_mad_port(device, port_num);
 	if (!port_priv) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev_notice(&device->dev, "ib_register_mad_agent: Invalid port\n");
+>>>>>>> v3.18
 =======
 		dev_notice(&device->dev, "ib_register_mad_agent: Invalid port\n");
 >>>>>>> v3.18
@@ -383,6 +438,11 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 	 * will not have QP0 */
 	if (!port_priv->qp_info[qpn].qp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev_notice(&device->dev,
+			   "ib_register_mad_agent: QP %d not supported\n", qpn);
+>>>>>>> v3.18
 =======
 		dev_notice(&device->dev,
 			   "ib_register_mad_agent: QP %d not supported\n", qpn);
@@ -424,6 +484,10 @@ struct ib_mad_agent *ib_register_mad_agent(struct ib_device *device,
 	mad_agent_priv->agent.qp = port_priv->qp_info[qpn].qp;
 	mad_agent_priv->agent.port_num = port_num;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mad_agent_priv->agent.flags = registration_flags;
+>>>>>>> v3.18
 =======
 	mad_agent_priv->agent.flags = registration_flags;
 >>>>>>> v3.18
@@ -818,7 +882,11 @@ static int handle_outgoing_dr_smp(struct ib_mad_agent_private *mad_agent_priv,
 	     IB_SMI_DISCARD) {
 		ret = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "Invalid directed route\n");
+=======
+		dev_err(&device->dev, "Invalid directed route\n");
+>>>>>>> v3.18
 =======
 		dev_err(&device->dev, "Invalid directed route\n");
 >>>>>>> v3.18
@@ -834,7 +902,11 @@ static int handle_outgoing_dr_smp(struct ib_mad_agent_private *mad_agent_priv,
 	if (!local) {
 		ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "No memory for ib_mad_local_private\n");
+=======
+		dev_err(&device->dev, "No memory for ib_mad_local_private\n");
+>>>>>>> v3.18
 =======
 		dev_err(&device->dev, "No memory for ib_mad_local_private\n");
 >>>>>>> v3.18
@@ -846,7 +918,11 @@ static int handle_outgoing_dr_smp(struct ib_mad_agent_private *mad_agent_priv,
 	if (!mad_priv) {
 		ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "No memory for local response MAD\n");
+=======
+		dev_err(&device->dev, "No memory for local response MAD\n");
+>>>>>>> v3.18
 =======
 		dev_err(&device->dev, "No memory for local response MAD\n");
 >>>>>>> v3.18
@@ -961,9 +1037,15 @@ static int alloc_send_rmpp_list(struct ib_mad_send_wr_private *send_wr,
 		seg = kmalloc(sizeof (*seg) + seg_size, gfp_mask);
 		if (!seg) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "alloc_send_rmpp_segs: RMPP mem "
 			       "alloc failed for len %zd, gfp %#x\n",
 			       sizeof (*seg) + seg_size, gfp_mask);
+=======
+			dev_err(&send_buf->mad_agent->device->dev,
+				"alloc_send_rmpp_segs: RMPP mem alloc failed for len %zd, gfp %#x\n",
+				sizeof (*seg) + seg_size, gfp_mask);
+>>>>>>> v3.18
 =======
 			dev_err(&send_buf->mad_agent->device->dev,
 				"alloc_send_rmpp_segs: RMPP mem alloc failed for len %zd, gfp %#x\n",
@@ -992,13 +1074,19 @@ static int alloc_send_rmpp_list(struct ib_mad_send_wr_private *send_wr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ib_mad_kernel_rmpp_agent(struct ib_mad_agent *agent)
 {
 	return agent->rmpp_version && !(agent->flags & IB_MAD_USER_RMPP);
 }
 EXPORT_SYMBOL(ib_mad_kernel_rmpp_agent);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ib_mad_send_buf * ib_create_send_mad(struct ib_mad_agent *mad_agent,
 					    u32 remote_qpn, u16 pkey_index,
@@ -1017,17 +1105,23 @@ struct ib_mad_send_buf * ib_create_send_mad(struct ib_mad_agent *mad_agent,
 	message_size = hdr_len + data_len + pad;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((!mad_agent->rmpp_version &&
 	     (rmpp_active || message_size > sizeof(struct ib_mad))) ||
 	    (!rmpp_active && message_size > sizeof(struct ib_mad)))
 		return ERR_PTR(-EINVAL);
 =======
+=======
+>>>>>>> v3.18
 	if (ib_mad_kernel_rmpp_agent(mad_agent)) {
 		if (!rmpp_active && message_size > sizeof(struct ib_mad))
 			return ERR_PTR(-EINVAL);
 	} else
 		if (rmpp_active || message_size > sizeof(struct ib_mad))
 			return ERR_PTR(-EINVAL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	size = rmpp_active ? hdr_len : sizeof(struct ib_mad);
@@ -1170,6 +1264,12 @@ int ib_send_mad(struct ib_mad_send_wr_private *mad_send_wr)
 					sge[0].length,
 					DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (unlikely(ib_dma_mapping_error(mad_agent->device, sge[0].addr)))
+		return -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	if (unlikely(ib_dma_mapping_error(mad_agent->device, sge[0].addr)))
 		return -ENOMEM;
@@ -1182,13 +1282,19 @@ int ib_send_mad(struct ib_mad_send_wr_private *mad_send_wr)
 					sge[1].length,
 					DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(ib_dma_mapping_error(mad_agent->device, sge[1].addr))) {
 		ib_dma_unmap_single(mad_agent->device,
 				    mad_send_wr->header_mapping,
 				    sge[0].length, DMA_TO_DEVICE);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mad_send_wr->payload_mapping = sge[1].addr;
 
@@ -1289,7 +1395,11 @@ int ib_post_send_mad(struct ib_mad_send_buf *send_buf,
 		spin_unlock_irqrestore(&mad_agent_priv->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mad_agent_priv->agent.rmpp_version) {
+=======
+		if (ib_mad_kernel_rmpp_agent(&mad_agent_priv->agent)) {
+>>>>>>> v3.18
 =======
 		if (ib_mad_kernel_rmpp_agent(&mad_agent_priv->agent)) {
 >>>>>>> v3.18
@@ -1357,7 +1467,12 @@ int ib_process_mad_wc(struct ib_mad_agent *mad_agent,
 		      struct ib_wc *wc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR PFX "ib_process_mad_wc() not implemented yet\n");
+=======
+	dev_err(&mad_agent->device->dev,
+		"ib_process_mad_wc() not implemented yet\n");
+>>>>>>> v3.18
 =======
 	dev_err(&mad_agent->device->dev,
 		"ib_process_mad_wc() not implemented yet\n");
@@ -1374,7 +1489,11 @@ static int method_in_use(struct ib_mad_mgmt_method_table **method,
 	for_each_set_bit(i, mad_reg_req->method_mask, IB_MGMT_MAX_METHODS) {
 		if ((*method)->agent[i]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "Method %d already in use\n", i);
+=======
+			pr_err("Method %d already in use\n", i);
+>>>>>>> v3.18
 =======
 			pr_err("Method %d already in use\n", i);
 >>>>>>> v3.18
@@ -1390,8 +1509,12 @@ static int allocate_method_table(struct ib_mad_mgmt_method_table **method)
 	*method = kzalloc(sizeof **method, GFP_ATOMIC);
 	if (!*method) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "No memory for "
 		       "ib_mad_mgmt_method_table\n");
+=======
+		pr_err("No memory for ib_mad_mgmt_method_table\n");
+>>>>>>> v3.18
 =======
 		pr_err("No memory for ib_mad_mgmt_method_table\n");
 >>>>>>> v3.18
@@ -1490,8 +1613,13 @@ static int add_nonoui_reg_req(struct ib_mad_reg_req *mad_reg_req,
 		*class = kzalloc(sizeof **class, GFP_ATOMIC);
 		if (!*class) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "No memory for "
 			       "ib_mad_mgmt_class_table\n");
+=======
+			dev_err(&agent_priv->agent.device->dev,
+				"No memory for ib_mad_mgmt_class_table\n");
+>>>>>>> v3.18
 =======
 			dev_err(&agent_priv->agent.device->dev,
 				"No memory for ib_mad_mgmt_class_table\n");
@@ -1562,8 +1690,13 @@ static int add_oui_reg_req(struct ib_mad_reg_req *mad_reg_req,
 		vendor = kzalloc(sizeof *vendor, GFP_ATOMIC);
 		if (!vendor) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "No memory for "
 			       "ib_mad_mgmt_vendor_class_table\n");
+=======
+			dev_err(&agent_priv->agent.device->dev,
+				"No memory for ib_mad_mgmt_vendor_class_table\n");
+>>>>>>> v3.18
 =======
 			dev_err(&agent_priv->agent.device->dev,
 				"No memory for ib_mad_mgmt_vendor_class_table\n");
@@ -1578,8 +1711,13 @@ static int add_oui_reg_req(struct ib_mad_reg_req *mad_reg_req,
 		vendor_class = kzalloc(sizeof *vendor_class, GFP_ATOMIC);
 		if (!vendor_class) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "No memory for "
 			       "ib_mad_mgmt_vendor_class\n");
+=======
+			dev_err(&agent_priv->agent.device->dev,
+				"No memory for ib_mad_mgmt_vendor_class\n");
+>>>>>>> v3.18
 =======
 			dev_err(&agent_priv->agent.device->dev,
 				"No memory for ib_mad_mgmt_vendor_class\n");
@@ -1615,7 +1753,11 @@ static int add_oui_reg_req(struct ib_mad_reg_req *mad_reg_req,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR PFX "All OUI slots in use\n");
+=======
+	dev_err(&agent_priv->agent.device->dev, "All OUI slots in use\n");
+>>>>>>> v3.18
 =======
 	dev_err(&agent_priv->agent.device->dev, "All OUI slots in use\n");
 >>>>>>> v3.18
@@ -1797,7 +1939,11 @@ find_mad_agent(struct ib_mad_port_private *port_priv,
 				goto out;
 			if (convert_mgmt_class(mad->mad_hdr.mgmt_class) >=
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    ARRAY_SIZE(class->method_table))
+=======
+			    IB_MGMT_MAX_METHODS)
+>>>>>>> v3.18
 =======
 			    IB_MGMT_MAX_METHODS)
 >>>>>>> v3.18
@@ -1834,9 +1980,15 @@ find_mad_agent(struct ib_mad_port_private *port_priv,
 			atomic_inc(&mad_agent->refcount);
 		else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_NOTICE PFX "No receive handler for client "
 			       "%p on port %d\n",
 			       &mad_agent->agent, port_priv->port_num);
+=======
+			dev_notice(&port_priv->device->dev,
+				   "No receive handler for client %p on port %d\n",
+				   &mad_agent->agent, port_priv->port_num);
+>>>>>>> v3.18
 =======
 			dev_notice(&port_priv->device->dev,
 				   "No receive handler for client %p on port %d\n",
@@ -1858,8 +2010,13 @@ static int validate_mad(struct ib_mad *mad, u32 qp_num)
 	/* Make sure MAD base version is understood */
 	if (mad->mad_hdr.base_version != IB_MGMT_BASE_VERSION) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "MAD received with unsupported base "
 		       "version %d\n", mad->mad_hdr.base_version);
+=======
+		pr_err("MAD received with unsupported base version %d\n",
+			mad->mad_hdr.base_version);
+>>>>>>> v3.18
 =======
 		pr_err("MAD received with unsupported base version %d\n",
 			mad->mad_hdr.base_version);
@@ -1890,6 +2047,10 @@ static int is_data_mad(struct ib_mad_agent_private *mad_agent_priv,
 	rmpp_mad = (struct ib_rmpp_mad *)mad_hdr;
 	return !mad_agent_priv->agent.rmpp_version ||
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		!ib_mad_kernel_rmpp_agent(&mad_agent_priv->agent) ||
+>>>>>>> v3.18
 =======
 		!ib_mad_kernel_rmpp_agent(&mad_agent_priv->agent) ||
 >>>>>>> v3.18
@@ -2021,7 +2182,11 @@ static void ib_mad_complete_recv(struct ib_mad_agent_private *mad_agent_priv,
 	INIT_LIST_HEAD(&mad_recv_wc->rmpp_list);
 	list_add(&mad_recv_wc->recv_buf.list, &mad_recv_wc->rmpp_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mad_agent_priv->agent.rmpp_version) {
+=======
+	if (ib_mad_kernel_rmpp_agent(&mad_agent_priv->agent)) {
+>>>>>>> v3.18
 =======
 	if (ib_mad_kernel_rmpp_agent(&mad_agent_priv->agent)) {
 >>>>>>> v3.18
@@ -2039,6 +2204,7 @@ static void ib_mad_complete_recv(struct ib_mad_agent_private *mad_agent_priv,
 		mad_send_wr = ib_find_send_mad(mad_agent_priv, mad_recv_wc);
 		if (!mad_send_wr) {
 			spin_unlock_irqrestore(&mad_agent_priv->lock, flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			ib_free_recv_mad(mad_recv_wc);
 			deref_mad_agent(mad_agent_priv);
@@ -2058,6 +2224,8 @@ static void ib_mad_complete_recv(struct ib_mad_agent_private *mad_agent_priv,
 		mad_send_wc.send_buf = &mad_send_wr->send_buf;
 		ib_mad_complete_send_wr(mad_send_wr, &mad_send_wc);
 =======
+=======
+>>>>>>> v3.18
 			if (!ib_mad_kernel_rmpp_agent(&mad_agent_priv->agent)
 			   && ib_is_mad_class_rmpp(mad_recv_wc->recv_buf.mad->mad_hdr.mgmt_class)
 			   && (ib_get_rmpp_flags(&((struct ib_rmpp_mad *)mad_recv_wc->recv_buf.mad)->rmpp_hdr)
@@ -2091,6 +2259,9 @@ static void ib_mad_complete_recv(struct ib_mad_agent_private *mad_agent_priv,
 			mad_send_wc.send_buf = &mad_send_wr->send_buf;
 			ib_mad_complete_send_wr(mad_send_wr, &mad_send_wc);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		mad_agent_priv->agent.recv_handler(&mad_agent_priv->agent,
@@ -2160,8 +2331,13 @@ static void ib_mad_recv_done_handler(struct ib_mad_port_private *port_priv,
 	response = kmem_cache_alloc(ib_mad_cache, GFP_KERNEL);
 	if (!response) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "ib_mad_recv_done_handler no memory "
 		       "for response buffer\n");
+=======
+		dev_err(&port_priv->device->dev,
+			"ib_mad_recv_done_handler no memory for response buffer\n");
+>>>>>>> v3.18
 =======
 		dev_err(&port_priv->device->dev,
 			"ib_mad_recv_done_handler no memory for response buffer\n");
@@ -2337,7 +2513,11 @@ void ib_mad_complete_send_wr(struct ib_mad_send_wr_private *mad_send_wr,
 	mad_agent_priv = mad_send_wr->mad_agent_priv;
 	spin_lock_irqsave(&mad_agent_priv->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mad_agent_priv->agent.rmpp_version) {
+=======
+	if (ib_mad_kernel_rmpp_agent(&mad_agent_priv->agent)) {
+>>>>>>> v3.18
 =======
 	if (ib_mad_kernel_rmpp_agent(&mad_agent_priv->agent)) {
 >>>>>>> v3.18
@@ -2434,7 +2614,12 @@ retry:
 				   &bad_send_wr);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "ib_post_send failed: %d\n", ret);
+=======
+			dev_err(&port_priv->device->dev,
+				"ib_post_send failed: %d\n", ret);
+>>>>>>> v3.18
 =======
 			dev_err(&port_priv->device->dev,
 				"ib_post_send failed: %d\n", ret);
@@ -2511,8 +2696,14 @@ static void mad_error_handler(struct ib_mad_port_private *port_priv,
 			kfree(attr);
 			if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR PFX "mad_error_handler - "
 				       "ib_modify_qp to RTS : %d\n", ret);
+=======
+				dev_err(&port_priv->device->dev,
+					"mad_error_handler - ib_modify_qp to RTS : %d\n",
+					ret);
+>>>>>>> v3.18
 =======
 				dev_err(&port_priv->device->dev,
 					"mad_error_handler - ib_modify_qp to RTS : %d\n",
@@ -2677,7 +2868,12 @@ static void local_completions(struct work_struct *work)
 			recv_mad_agent = local->recv_mad_agent;
 			if (!recv_mad_agent) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR PFX "No receive MAD agent for local completion\n");
+=======
+				dev_err(&mad_agent_priv->agent.device->dev,
+					"No receive MAD agent for local completion\n");
+>>>>>>> v3.18
 =======
 				dev_err(&mad_agent_priv->agent.device->dev,
 					"No receive MAD agent for local completion\n");
@@ -2750,7 +2946,11 @@ static int retry_send(struct ib_mad_send_wr_private *mad_send_wr)
 	mad_send_wr->timeout = msecs_to_jiffies(mad_send_wr->send_buf.timeout_ms);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mad_send_wr->mad_agent_priv->agent.rmpp_version) {
+=======
+	if (ib_mad_kernel_rmpp_agent(&mad_send_wr->mad_agent_priv->agent)) {
+>>>>>>> v3.18
 =======
 	if (ib_mad_kernel_rmpp_agent(&mad_send_wr->mad_agent_priv->agent)) {
 >>>>>>> v3.18
@@ -2867,7 +3067,12 @@ static int ib_mad_post_receive_mads(struct ib_mad_qp_info *qp_info,
 			mad_priv = kmem_cache_alloc(ib_mad_cache, GFP_KERNEL);
 			if (!mad_priv) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR PFX "No memory for receive buffer\n");
+=======
+				dev_err(&qp_info->port_priv->device->dev,
+					"No memory for receive buffer\n");
+>>>>>>> v3.18
 =======
 				dev_err(&qp_info->port_priv->device->dev,
 					"No memory for receive buffer\n");
@@ -2882,12 +3087,18 @@ static int ib_mad_post_receive_mads(struct ib_mad_qp_info *qp_info,
 						   sizeof mad_priv->header,
 						 DMA_FROM_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (unlikely(ib_dma_mapping_error(qp_info->port_priv->device,
 						  sg_list.addr))) {
 			ret = -ENOMEM;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mad_priv->header.mapping = sg_list.addr;
 		recv_wr.wr_id = (unsigned long)&mad_priv->header.mad_list;
@@ -2911,7 +3122,12 @@ static int ib_mad_post_receive_mads(struct ib_mad_qp_info *qp_info,
 					    DMA_FROM_DEVICE);
 			kmem_cache_free(ib_mad_cache, mad_priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "ib_post_recv failed: %d\n", ret);
+=======
+			dev_err(&qp_info->port_priv->device->dev,
+				"ib_post_recv failed: %d\n", ret);
+>>>>>>> v3.18
 =======
 			dev_err(&qp_info->port_priv->device->dev,
 				"ib_post_recv failed: %d\n", ret);
@@ -2968,6 +3184,7 @@ static int ib_mad_port_start(struct ib_mad_port_private *port_priv)
 	struct ib_qp_attr *attr;
 	struct ib_qp *qp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	attr = kmalloc(sizeof *attr, GFP_KERNEL);
 	if (!attr) {
@@ -2976,6 +3193,8 @@ static int ib_mad_port_start(struct ib_mad_port_private *port_priv)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	u16 pkey_index;
 
 	attr = kmalloc(sizeof *attr, GFP_KERNEL);
@@ -2990,6 +3209,9 @@ static int ib_mad_port_start(struct ib_mad_port_private *port_priv)
 	if (ret)
 		pkey_index = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < IB_MAD_QPS_CORE; i++) {
 		qp = port_priv->qp_info[i].qp;
@@ -3002,7 +3224,11 @@ static int ib_mad_port_start(struct ib_mad_port_private *port_priv)
 		 */
 		attr->qp_state = IB_QPS_INIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		attr->pkey_index = 0;
+=======
+		attr->pkey_index = pkey_index;
+>>>>>>> v3.18
 =======
 		attr->pkey_index = pkey_index;
 >>>>>>> v3.18
@@ -3011,8 +3237,14 @@ static int ib_mad_port_start(struct ib_mad_port_private *port_priv)
 					     IB_QP_PKEY_INDEX | IB_QP_QKEY);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "Couldn't change QP%d state to "
 			       "INIT: %d\n", i, ret);
+=======
+			dev_err(&port_priv->device->dev,
+				"Couldn't change QP%d state to INIT: %d\n",
+				i, ret);
+>>>>>>> v3.18
 =======
 			dev_err(&port_priv->device->dev,
 				"Couldn't change QP%d state to INIT: %d\n",
@@ -3025,8 +3257,14 @@ static int ib_mad_port_start(struct ib_mad_port_private *port_priv)
 		ret = ib_modify_qp(qp, attr, IB_QP_STATE);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "Couldn't change QP%d state to "
 			       "RTR: %d\n", i, ret);
+=======
+			dev_err(&port_priv->device->dev,
+				"Couldn't change QP%d state to RTR: %d\n",
+				i, ret);
+>>>>>>> v3.18
 =======
 			dev_err(&port_priv->device->dev,
 				"Couldn't change QP%d state to RTR: %d\n",
@@ -3040,8 +3278,14 @@ static int ib_mad_port_start(struct ib_mad_port_private *port_priv)
 		ret = ib_modify_qp(qp, attr, IB_QP_STATE | IB_QP_SQ_PSN);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "Couldn't change QP%d state to "
 			       "RTS: %d\n", i, ret);
+=======
+			dev_err(&port_priv->device->dev,
+				"Couldn't change QP%d state to RTS: %d\n",
+				i, ret);
+>>>>>>> v3.18
 =======
 			dev_err(&port_priv->device->dev,
 				"Couldn't change QP%d state to RTS: %d\n",
@@ -3054,8 +3298,14 @@ static int ib_mad_port_start(struct ib_mad_port_private *port_priv)
 	ret = ib_req_notify_cq(port_priv->cq, IB_CQ_NEXT_COMP);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "Failed to request completion "
 		       "notification: %d\n", ret);
+=======
+		dev_err(&port_priv->device->dev,
+			"Failed to request completion notification: %d\n",
+			ret);
+>>>>>>> v3.18
 =======
 		dev_err(&port_priv->device->dev,
 			"Failed to request completion notification: %d\n",
@@ -3071,7 +3321,12 @@ static int ib_mad_port_start(struct ib_mad_port_private *port_priv)
 		ret = ib_mad_post_receive_mads(&port_priv->qp_info[i], NULL);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "Couldn't post receive WRs\n");
+=======
+			dev_err(&port_priv->device->dev,
+				"Couldn't post receive WRs\n");
+>>>>>>> v3.18
 =======
 			dev_err(&port_priv->device->dev,
 				"Couldn't post receive WRs\n");
@@ -3090,7 +3345,12 @@ static void qp_event_handler(struct ib_event *event, void *qp_context)
 
 	/* It's worse than that! He's dead, Jim! */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR PFX "Fatal error (%d) on MAD QP (%d)\n",
+=======
+	dev_err(&qp_info->port_priv->device->dev,
+		"Fatal error (%d) on MAD QP (%d)\n",
+>>>>>>> v3.18
 =======
 	dev_err(&qp_info->port_priv->device->dev,
 		"Fatal error (%d) on MAD QP (%d)\n",
@@ -3141,8 +3401,14 @@ static int create_mad_qp(struct ib_mad_qp_info *qp_info,
 	qp_info->qp = ib_create_qp(qp_info->port_priv->pd, &qp_init_attr);
 	if (IS_ERR(qp_info->qp)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "Couldn't create ib_mad QP%d\n",
 		       get_spl_qp_index(qp_type));
+=======
+		dev_err(&qp_info->port_priv->device->dev,
+			"Couldn't create ib_mad QP%d\n",
+			get_spl_qp_index(qp_type));
+>>>>>>> v3.18
 =======
 		dev_err(&qp_info->port_priv->device->dev,
 			"Couldn't create ib_mad QP%d\n",
@@ -3186,7 +3452,11 @@ static int ib_mad_port_open(struct ib_device *device,
 	port_priv = kzalloc(sizeof *port_priv, GFP_KERNEL);
 	if (!port_priv) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "No memory for ib_mad_port_private\n");
+=======
+		dev_err(&device->dev, "No memory for ib_mad_port_private\n");
+>>>>>>> v3.18
 =======
 		dev_err(&device->dev, "No memory for ib_mad_port_private\n");
 >>>>>>> v3.18
@@ -3210,7 +3480,11 @@ static int ib_mad_port_open(struct ib_device *device,
 				     NULL, port_priv, cq_size, 0);
 	if (IS_ERR(port_priv->cq)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "Couldn't create ib_mad CQ\n");
+=======
+		dev_err(&device->dev, "Couldn't create ib_mad CQ\n");
+>>>>>>> v3.18
 =======
 		dev_err(&device->dev, "Couldn't create ib_mad CQ\n");
 >>>>>>> v3.18
@@ -3221,7 +3495,11 @@ static int ib_mad_port_open(struct ib_device *device,
 	port_priv->pd = ib_alloc_pd(device);
 	if (IS_ERR(port_priv->pd)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "Couldn't create ib_mad PD\n");
+=======
+		dev_err(&device->dev, "Couldn't create ib_mad PD\n");
+>>>>>>> v3.18
 =======
 		dev_err(&device->dev, "Couldn't create ib_mad PD\n");
 >>>>>>> v3.18
@@ -3232,7 +3510,11 @@ static int ib_mad_port_open(struct ib_device *device,
 	port_priv->mr = ib_get_dma_mr(port_priv->pd, IB_ACCESS_LOCAL_WRITE);
 	if (IS_ERR(port_priv->mr)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "Couldn't get ib_mad DMA MR\n");
+=======
+		dev_err(&device->dev, "Couldn't get ib_mad DMA MR\n");
+>>>>>>> v3.18
 =======
 		dev_err(&device->dev, "Couldn't get ib_mad DMA MR\n");
 >>>>>>> v3.18
@@ -3264,7 +3546,11 @@ static int ib_mad_port_open(struct ib_device *device,
 	ret = ib_mad_port_start(port_priv);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "Couldn't start port\n");
+=======
+		dev_err(&device->dev, "Couldn't start port\n");
+>>>>>>> v3.18
 =======
 		dev_err(&device->dev, "Couldn't start port\n");
 >>>>>>> v3.18
@@ -3312,7 +3598,11 @@ static int ib_mad_port_close(struct ib_device *device, int port_num)
 	if (port_priv == NULL) {
 		spin_unlock_irqrestore(&ib_mad_port_list_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "Port %d not found\n", port_num);
+=======
+		dev_err(&device->dev, "Port %d not found\n", port_num);
+>>>>>>> v3.18
 =======
 		dev_err(&device->dev, "Port %d not found\n", port_num);
 >>>>>>> v3.18
@@ -3354,6 +3644,7 @@ static void ib_mad_init_device(struct ib_device *device)
 	for (i = start; i <= end; i++) {
 		if (ib_mad_port_open(device, i)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "Couldn't open %s port %d\n",
 			       device->name, i);
 			goto error;
@@ -3363,12 +3654,17 @@ static void ib_mad_init_device(struct ib_device *device)
 			       "for agents\n",
 			       device->name, i);
 =======
+=======
+>>>>>>> v3.18
 			dev_err(&device->dev, "Couldn't open port %d\n", i);
 			goto error;
 		}
 		if (ib_agent_port_open(device, i)) {
 			dev_err(&device->dev,
 				"Couldn't open port %d for agents\n", i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto error_agent;
 		}
@@ -3378,8 +3674,12 @@ static void ib_mad_init_device(struct ib_device *device)
 error_agent:
 	if (ib_mad_port_close(device, i))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "Couldn't close %s port %d\n",
 		       device->name, i);
+=======
+		dev_err(&device->dev, "Couldn't close port %d\n", i);
+>>>>>>> v3.18
 =======
 		dev_err(&device->dev, "Couldn't close port %d\n", i);
 >>>>>>> v3.18
@@ -3390,6 +3690,7 @@ error:
 	while (i >= start) {
 		if (ib_agent_port_close(device, i))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "Couldn't close %s port %d "
 			       "for agents\n",
 			       device->name, i);
@@ -3397,10 +3698,15 @@ error:
 			printk(KERN_ERR PFX "Couldn't close %s port %d\n",
 			       device->name, i);
 =======
+=======
+>>>>>>> v3.18
 			dev_err(&device->dev,
 				"Couldn't close port %d for agents\n", i);
 		if (ib_mad_port_close(device, i))
 			dev_err(&device->dev, "Couldn't close port %d\n", i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		i--;
 	}
@@ -3423,6 +3729,7 @@ static void ib_mad_remove_device(struct ib_device *device)
 	for (i = 0; i < num_ports; i++, cur_port++) {
 		if (ib_agent_port_close(device, cur_port))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR PFX "Couldn't close %s port %d "
 			       "for agents\n",
 			       device->name, cur_port);
@@ -3430,12 +3737,17 @@ static void ib_mad_remove_device(struct ib_device *device)
 			printk(KERN_ERR PFX "Couldn't close %s port %d\n",
 			       device->name, cur_port);
 =======
+=======
+>>>>>>> v3.18
 			dev_err(&device->dev,
 				"Couldn't close port %d for agents\n",
 				cur_port);
 		if (ib_mad_port_close(device, cur_port))
 			dev_err(&device->dev, "Couldn't close port %d\n",
 				cur_port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -3463,7 +3775,11 @@ static int __init ib_mad_init_module(void)
 					 NULL);
 	if (!ib_mad_cache) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "Couldn't create ib_mad cache\n");
+=======
+		pr_err("Couldn't create ib_mad cache\n");
+>>>>>>> v3.18
 =======
 		pr_err("Couldn't create ib_mad cache\n");
 >>>>>>> v3.18
@@ -3475,7 +3791,11 @@ static int __init ib_mad_init_module(void)
 
 	if (ib_register_client(&mad_client)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "Couldn't register ib_mad client\n");
+=======
+		pr_err("Couldn't register ib_mad client\n");
+>>>>>>> v3.18
 =======
 		pr_err("Couldn't register ib_mad client\n");
 >>>>>>> v3.18

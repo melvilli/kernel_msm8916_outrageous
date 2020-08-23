@@ -204,9 +204,15 @@ static int wl1271_rx_handle_data(struct wl1271 *wl, u8 *data, u32 length,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wlcore_rx(struct wl1271 *wl, struct wl_fw_status_1 *status)
 {
 	unsigned long active_hlids[BITS_TO_LONGS(WL12XX_MAX_LINKS)] = {0};
+=======
+int wlcore_rx(struct wl1271 *wl, struct wl_fw_status *status)
+{
+	unsigned long active_hlids[BITS_TO_LONGS(WLCORE_MAX_LINKS)] = {0};
+>>>>>>> v3.18
 =======
 int wlcore_rx(struct wl1271 *wl, struct wl_fw_status *status)
 {
@@ -270,6 +276,7 @@ int wlcore_rx(struct wl1271 *wl, struct wl_fw_status *status)
 						  pkt_len, rx_align,
 						  &hlid) == 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (hlid < WL12XX_MAX_LINKS)
 					__set_bit(hlid, active_hlids);
 				else
@@ -277,12 +284,17 @@ int wlcore_rx(struct wl1271 *wl, struct wl_fw_status *status)
 					     "hlid exceeded WL12XX_MAX_LINKS "
 					     "(%d)\n", hlid);
 =======
+=======
+>>>>>>> v3.18
 				if (hlid < wl->num_links)
 					__set_bit(hlid, active_hlids);
 				else
 					WARN(1,
 					     "hlid (%d) exceeded MAX_LINKS\n",
 					     hlid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 
@@ -318,7 +330,11 @@ int wl1271_rx_filter_enable(struct wl1271 *wl,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wl->rx_filter_enabled[index] == enable) {
+=======
+	if (!!test_bit(index, wl->rx_filter_enabled) == enable) {
+>>>>>>> v3.18
 =======
 	if (!!test_bit(index, wl->rx_filter_enabled) == enable) {
 >>>>>>> v3.18
@@ -336,12 +352,18 @@ int wl1271_rx_filter_enable(struct wl1271 *wl,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wl->rx_filter_enabled[index] = enable;
 =======
+=======
+>>>>>>> v3.18
 	if (enable)
 		__set_bit(index, wl->rx_filter_enabled);
 	else
 		__clear_bit(index, wl->rx_filter_enabled);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -353,7 +375,11 @@ int wl1271_rx_filter_clear_all(struct wl1271 *wl)
 
 	for (i = 0; i < WL1271_MAX_RX_FILTERS; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!wl->rx_filter_enabled[i])
+=======
+		if (!test_bit(i, wl->rx_filter_enabled))
+>>>>>>> v3.18
 =======
 		if (!test_bit(i, wl->rx_filter_enabled))
 >>>>>>> v3.18

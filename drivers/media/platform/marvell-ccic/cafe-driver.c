@@ -28,7 +28,10 @@
 #include <linux/videodev2.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/device.h>
@@ -404,7 +407,11 @@ static void cafe_ctlr_init(struct mcam_camera *mcam)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cafe_ctlr_power_up(struct mcam_camera *mcam)
+=======
+static int cafe_ctlr_power_up(struct mcam_camera *mcam)
+>>>>>>> v3.18
 =======
 static int cafe_ctlr_power_up(struct mcam_camera *mcam)
 >>>>>>> v3.18
@@ -423,6 +430,11 @@ static int cafe_ctlr_power_up(struct mcam_camera *mcam)
 	mcam_reg_write(mcam, REG_GPR, GPR_C1EN|GPR_C0EN); /* pwr up, reset */
 	mcam_reg_write(mcam, REG_GPR, GPR_C1EN|GPR_C0EN|GPR_C0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -482,7 +494,11 @@ static int cafe_pci_probe(struct pci_dev *pdev,
 	cam->pdev = pdev;
 	mcam = &cam->mcam;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mcam->chip_id = V4L2_IDENT_CAFE;
+=======
+	mcam->chip_id = MCAM_CAFE;
+>>>>>>> v3.18
 =======
 	mcam->chip_id = MCAM_CAFE;
 >>>>>>> v3.18
@@ -518,6 +534,10 @@ static int cafe_pci_probe(struct pci_dev *pdev,
 		goto out_disable;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mcam->regs_size = pci_resource_len(pdev, 0);
+>>>>>>> v3.18
 =======
 	mcam->regs_size = pci_resource_len(pdev, 0);
 >>>>>>> v3.18

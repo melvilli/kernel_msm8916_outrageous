@@ -185,8 +185,12 @@ More up-to-date information can be found on:
 http://open-osd.org
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Boaz Harrosh <bharrosh@panasas.com>
 Benny Halevy <bhalevy@panasas.com>
+=======
+Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
 Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18

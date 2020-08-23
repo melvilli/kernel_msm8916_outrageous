@@ -39,7 +39,11 @@ static int __hw_addr_create_ex(struct netdev_hw_addr_list *list,
 	ha->refcount = 1;
 	ha->global_use = global;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ha->synced = sync;
+=======
+	ha->synced = sync ? 1 : 0;
+>>>>>>> v3.18
 =======
 	ha->synced = sync ? 1 : 0;
 >>>>>>> v3.18
@@ -53,7 +57,12 @@ static int __hw_addr_create_ex(struct netdev_hw_addr_list *list,
 static int __hw_addr_add_ex(struct netdev_hw_addr_list *list,
 			    const unsigned char *addr, int addr_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    unsigned char addr_type, bool global, bool sync)
+=======
+			    unsigned char addr_type, bool global, bool sync,
+			    int sync_count)
+>>>>>>> v3.18
 =======
 			    unsigned char addr_type, bool global, bool sync,
 			    int sync_count)
@@ -76,15 +85,21 @@ static int __hw_addr_add_ex(struct netdev_hw_addr_list *list,
 			}
 			if (sync) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (ha->synced)
 					return -EEXIST;
 				else
 					ha->synced = true;
 =======
+=======
+>>>>>>> v3.18
 				if (ha->synced && sync_count)
 					return -EEXIST;
 				else
 					ha->synced++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			ha->refcount++;
@@ -101,7 +116,12 @@ static int __hw_addr_add(struct netdev_hw_addr_list *list,
 			 unsigned char addr_type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __hw_addr_add_ex(list, addr, addr_len, addr_type, false, false);
+=======
+	return __hw_addr_add_ex(list, addr, addr_len, addr_type, false, false,
+				0);
+>>>>>>> v3.18
 =======
 	return __hw_addr_add_ex(list, addr, addr_len, addr_type, false, false,
 				0);
@@ -123,7 +143,11 @@ static int __hw_addr_del_entry(struct netdev_hw_addr_list *list,
 
 	if (sync)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ha->synced = false;
+=======
+		ha->synced--;
+>>>>>>> v3.18
 =======
 		ha->synced--;
 >>>>>>> v3.18
@@ -165,7 +189,11 @@ static int __hw_addr_sync_one(struct netdev_hw_addr_list *to_list,
 
 	err = __hw_addr_add_ex(to_list, ha->addr, addr_len, ha->type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       false, true);
+=======
+			       false, true, ha->sync_cnt);
+>>>>>>> v3.18
 =======
 			       false, true, ha->sync_cnt);
 >>>>>>> v3.18
@@ -216,6 +244,7 @@ static int __hw_addr_sync_multiple(struct netdev_hw_addr_list *to_list,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __hw_addr_add_multiple(struct netdev_hw_addr_list *to_list,
 			   struct netdev_hw_addr_list *from_list,
 			   int addr_len, unsigned char addr_type)
@@ -259,6 +288,8 @@ EXPORT_SYMBOL(__hw_addr_del_multiple);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* This function only works where there is a strict 1-1 relationship
  * between source and destionation of they synch. If you ever need to
  * sync addresses to more then 1 destination, you need to use
@@ -297,8 +328,11 @@ void __hw_addr_unsync(struct netdev_hw_addr_list *to_list,
 EXPORT_SYMBOL(__hw_addr_unsync);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __hw_addr_flush(struct netdev_hw_addr_list *list)
 =======
+=======
+>>>>>>> v3.18
 /**
  *  __hw_addr_sync_dev - Synchonize device's multicast list
  *  @list: address list to syncronize
@@ -385,6 +419,9 @@ void __hw_addr_unsync_dev(struct netdev_hw_addr_list *list,
 EXPORT_SYMBOL(__hw_addr_unsync_dev);
 
 static void __hw_addr_flush(struct netdev_hw_addr_list *list)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct netdev_hw_addr *ha, *tmp;
@@ -396,7 +433,10 @@ static void __hw_addr_flush(struct netdev_hw_addr_list *list)
 	list->count = 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(__hw_addr_flush);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -525,6 +565,7 @@ int dev_addr_del(struct net_device *dev, const unsigned char *addr,
 EXPORT_SYMBOL(dev_addr_del);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  *	dev_addr_add_multiple - Add device addresses from another device
  *	@to_dev: device to which addresses will be added
@@ -578,6 +619,8 @@ int dev_addr_del_multiple(struct net_device *to_dev,
 }
 EXPORT_SYMBOL(dev_addr_del_multiple);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -804,7 +847,11 @@ static int __dev_mc_add(struct net_device *dev, const unsigned char *addr,
 	netif_addr_lock_bh(dev);
 	err = __hw_addr_add_ex(&dev->mc, addr, dev->addr_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       NETDEV_HW_ADDR_T_MULTICAST, global, false);
+=======
+			       NETDEV_HW_ADDR_T_MULTICAST, global, false, 0);
+>>>>>>> v3.18
 =======
 			       NETDEV_HW_ADDR_T_MULTICAST, global, false, 0);
 >>>>>>> v3.18
@@ -884,7 +931,11 @@ EXPORT_SYMBOL(dev_mc_del_global);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	dev_mc_sync - Synchronize device's unicast list to another device
+=======
+ *	dev_mc_sync - Synchronize device's multicast list to another device
+>>>>>>> v3.18
 =======
  *	dev_mc_sync - Synchronize device's multicast list to another device
 >>>>>>> v3.18
@@ -916,7 +967,11 @@ EXPORT_SYMBOL(dev_mc_sync);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	dev_mc_sync_multiple - Synchronize device's unicast list to another
+=======
+ *	dev_mc_sync_multiple - Synchronize device's multicast list to another
+>>>>>>> v3.18
 =======
  *	dev_mc_sync_multiple - Synchronize device's multicast list to another
 >>>>>>> v3.18

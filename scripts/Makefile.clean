@@ -11,7 +11,11 @@ __clean:
 # Usage:
 # $(Q)$(MAKE) $(clean)=dir
 <<<<<<< HEAD
+<<<<<<< HEAD
 clean := -f $(if $(KBUILD_SRC),$(srctree)/)scripts/Makefile.clean obj
+=======
+clean := -f $(srctree)/scripts/Makefile.clean obj
+>>>>>>> v3.18
 =======
 clean := -f $(srctree)/scripts/Makefile.clean obj
 >>>>>>> v3.18
@@ -28,8 +32,11 @@ subdir-y	+= $(__subdir-y)
 __subdir-m	:= $(patsubst %/,%,$(filter %/, $(obj-m)))
 subdir-m	+= $(__subdir-m)
 <<<<<<< HEAD
+<<<<<<< HEAD
 __subdir-n	:= $(patsubst %/,%,$(filter %/, $(obj-n)))
 subdir-n	+= $(__subdir-n)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 __subdir-	:= $(patsubst %/,%,$(filter %/, $(obj-)))
@@ -39,7 +46,11 @@ subdir-		+= $(__subdir-)
 
 subdir-ym	:= $(sort $(subdir-y) $(subdir-m))
 <<<<<<< HEAD
+<<<<<<< HEAD
 subdir-ymn      := $(sort $(subdir-ym) $(subdir-n) $(subdir-))
+=======
+subdir-ymn      := $(sort $(subdir-ym) $(subdir-))
+>>>>>>> v3.18
 =======
 subdir-ymn      := $(sort $(subdir-ym) $(subdir-))
 >>>>>>> v3.18
@@ -52,8 +63,13 @@ subdir-ymn	:= $(addprefix $(obj)/,$(subdir-ymn))
 # directory
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __clean-files	:= $(extra-y) $(always)                  \
 		   $(targets) $(clean-files)             \
+=======
+__clean-files	:= $(extra-y) $(extra-m) $(extra-)       \
+		   $(always) $(targets) $(clean-files)   \
+>>>>>>> v3.18
 =======
 __clean-files	:= $(extra-y) $(extra-m) $(extra-)       \
 		   $(always) $(targets) $(clean-files)   \

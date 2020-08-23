@@ -6,6 +6,10 @@
 #include <linux/bitmap.h>
 #include <linux/if.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ip.h>
+>>>>>>> v3.18
 =======
 #include <linux/ip.h>
 >>>>>>> v3.18
@@ -15,6 +19,7 @@
 #include <linux/sysctl.h>
 #include <linux/rtnetlink.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 enum
 {
@@ -51,6 +56,8 @@ enum
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct ipv4_devconf {
 	void	*sysctl;
 	int	data[IPV4_DEVCONF_MAX];
@@ -58,6 +65,11 @@ struct ipv4_devconf {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MC_HASH_SZ_LOG 9
+
+>>>>>>> v3.18
 =======
 #define MC_HASH_SZ_LOG 9
 
@@ -68,12 +80,18 @@ struct in_device {
 	int			dead;
 	struct in_ifaddr	*ifa_list;	/* IP ifaddr chain		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ip_mc_list __rcu	*mc_list;	/* IP multicast filter chain    */
 =======
+=======
+>>>>>>> v3.18
 
 	struct ip_mc_list __rcu	*mc_list;	/* IP multicast filter chain    */
 	struct ip_mc_list __rcu	* __rcu *mc_hash;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			mc_count;	/* Number of installed mcasts	*/
 	spinlock_t		mc_tomb_lock;
@@ -183,8 +201,13 @@ struct in_ifaddr {
 	__be32			ifa_broadcast;
 	unsigned char		ifa_scope;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char		ifa_flags;
 	unsigned char		ifa_prefixlen;
+=======
+	unsigned char		ifa_prefixlen;
+	__u32			ifa_flags;
+>>>>>>> v3.18
 =======
 	unsigned char		ifa_prefixlen;
 	__u32			ifa_flags;
@@ -199,6 +222,7 @@ struct in_ifaddr {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int register_inetaddr_notifier(struct notifier_block *nb);
 extern int unregister_inetaddr_notifier(struct notifier_block *nb);
 
@@ -207,6 +231,8 @@ extern void inet_netconf_notify_devconf(struct net *net, int type, int ifindex,
 
 extern struct net_device *__ip_dev_find(struct net *net, __be32 addr, bool devref);
 =======
+=======
+>>>>>>> v3.18
 int register_inetaddr_notifier(struct notifier_block *nb);
 int unregister_inetaddr_notifier(struct notifier_block *nb);
 
@@ -214,12 +240,16 @@ void inet_netconf_notify_devconf(struct net *net, int type, int ifindex,
 				 struct ipv4_devconf *devconf);
 
 struct net_device *__ip_dev_find(struct net *net, __be32 addr, bool devref);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct net_device *ip_dev_find(struct net *net, __be32 addr)
 {
 	return __ip_dev_find(net, addr, true);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int		inet_addr_onlink(struct in_device *in_dev, __be32 a, __be32 b);
 extern int		devinet_ioctl(struct net *net, unsigned int cmd, void __user *);
@@ -230,6 +260,8 @@ extern __be32		inet_confirm_addr(struct in_device *in_dev, __be32 dst, __be32 lo
 extern struct in_ifaddr *inet_ifa_byprefix(struct in_device *in_dev, __be32 prefix, __be32 mask);
 
 =======
+=======
+>>>>>>> v3.18
 int inet_addr_onlink(struct in_device *in_dev, __be32 a, __be32 b);
 int devinet_ioctl(struct net *net, unsigned int cmd, void __user *);
 void devinet_init(void);
@@ -239,6 +271,9 @@ __be32 inet_confirm_addr(struct net *net, struct in_device *in_dev, __be32 dst,
 			 __be32 local, int scope);
 struct in_ifaddr *inet_ifa_byprefix(struct in_device *in_dev, __be32 prefix,
 				    __be32 mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static __inline__ int inet_ifa_match(__be32 addr, struct in_ifaddr *ifa)
 {
@@ -292,8 +327,11 @@ static inline struct in_device *__in_dev_get_rtnl(const struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void in_dev_finish_destroy(struct in_device *idev);
 =======
+=======
+>>>>>>> v3.18
 static inline struct neigh_parms *__in_dev_arp_parms_get_rcu(const struct net_device *dev)
 {
 	struct in_device *in_dev = __in_dev_get_rcu(dev);
@@ -302,6 +340,9 @@ static inline struct neigh_parms *__in_dev_arp_parms_get_rcu(const struct net_de
 }
 
 void in_dev_finish_destroy(struct in_device *idev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void in_dev_put(struct in_device *idev)

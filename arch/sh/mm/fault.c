@@ -354,8 +354,11 @@ mm_fault_error(struct pt_regs *regs, unsigned long error_code,
 		if (fault & VM_FAULT_SIGBUS)
 			do_sigbus(regs, error_code, address);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (fault & VM_FAULT_SIGSEGV)
 			bad_area(regs, error_code, address);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		else

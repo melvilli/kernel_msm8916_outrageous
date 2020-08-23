@@ -17,7 +17,13 @@
 #define __LINUX_MFD_CROS_EC_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mfd/cros_ec_commands.h>
+=======
+#include <linux/notifier.h>
+#include <linux/mfd/cros_ec_commands.h>
+#include <linux/mutex.h>
+>>>>>>> v3.18
 =======
 #include <linux/notifier.h>
 #include <linux/mfd/cros_ec_commands.h>
@@ -35,6 +41,7 @@ enum {
 	EC_MSG_RX_PROTO_BYTES	= 3,
 
 	/* Max length of messages */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	EC_MSG_BYTES		= EC_HOST_PARAM_SIZE + EC_MSG_TX_PROTO_BYTES,
 
@@ -58,6 +65,8 @@ struct cros_ec_msg {
 	uint8_t *in_buf;
 	int in_len;
 =======
+=======
+>>>>>>> v3.18
 	EC_MSG_BYTES		= EC_PROTO2_MAX_PARAM_SIZE +
 					EC_MSG_TX_PROTO_BYTES,
 };
@@ -79,6 +88,9 @@ struct cros_ec_command {
 	uint8_t *indata;
 	uint32_t insize;
 	uint32_t result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -86,12 +98,15 @@ struct cros_ec_command {
  * struct cros_ec_device - Information about a ChromeOS EC device
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @name: Name of this EC interface
  * @priv: Private data
  * @irq: Interrupt to use
  * @din: input buffer (from EC)
  * @dout: output buffer (to EC)
 =======
+=======
+>>>>>>> v3.18
  * @ec_name: name of EC device (e.g. 'chromeos-ec')
  * @phys_name: name of physical comms layer (e.g. 'i2c-4')
  * @dev: Device pointer
@@ -102,11 +117,15 @@ struct cros_ec_command {
  * @irq: Interrupt to use
  * @din: input buffer (for data from EC)
  * @dout: output buffer (for data to EC)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * \note
  * These two buffers will always be dword-aligned and include enough
  * space for up to 7 word-alignment bytes also, so we can ensure that
  * the body of the message is always dword-aligned (64-bit).
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * We use this alignment to keep ARM and x86 happy. Probably word
@@ -129,6 +148,8 @@ struct cros_ec_command {
 struct cros_ec_device {
 	const char *name;
 =======
+=======
+>>>>>>> v3.18
  * We use this alignment to keep ARM and x86 happy. Probably word
  * alignment would be OK, there might be a small performance advantage
  * to using dword.
@@ -152,6 +173,9 @@ struct cros_ec_device {
 	struct class *cros_class;
 
 	/* These are used to implement the platform-specific interface */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void *priv;
 	int irq;
@@ -159,6 +183,7 @@ struct cros_ec_device {
 	uint8_t *dout;
 	int din_size;
 	int dout_size;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int (*command_send)(struct cros_ec_device *ec,
 			uint16_t cmd, void *out_buf, int out_len);
@@ -181,11 +206,16 @@ struct cros_ec_device {
 	bool was_wake_device;
 	struct blocking_notifier_head event_notifier;
 =======
+=======
+>>>>>>> v3.18
 	struct device *parent;
 	bool wake_enabled;
 	int (*cmd_xfer)(struct cros_ec_device *ec,
 			struct cros_ec_command *msg);
 	struct mutex lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -221,8 +251,11 @@ int cros_ec_resume(struct cros_ec_device *ec_dev);
  */
 int cros_ec_prepare_tx(struct cros_ec_device *ec_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       struct cros_ec_msg *msg);
 =======
+=======
+>>>>>>> v3.18
 		       struct cros_ec_command *msg);
 
 /**
@@ -248,14 +281,21 @@ int cros_ec_check_result(struct cros_ec_device *ec_dev,
  */
 int cros_ec_cmd_xfer(struct cros_ec_device *ec_dev,
 		     struct cros_ec_command *msg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
  * cros_ec_remove - Remove a ChromeOS EC
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Call this to deregister a ChromeOS EC. After this you should call
  * cros_ec_free().
+=======
+ * Call this to deregister a ChromeOS EC, then clean up any private data.
+>>>>>>> v3.18
 =======
  * Call this to deregister a ChromeOS EC, then clean up any private data.
 >>>>>>> v3.18

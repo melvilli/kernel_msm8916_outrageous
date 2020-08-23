@@ -15,7 +15,10 @@
 #include <linux/clk.h>
 #include <linux/clkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/delay.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/err.h>
@@ -24,6 +27,10 @@
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/clock/imx6qdl-clock.h>
+>>>>>>> v3.18
 =======
 #include <dt-bindings/clock/imx6qdl-clock.h>
 >>>>>>> v3.18
@@ -32,6 +39,7 @@
 #include "common.h"
 #include "hardware.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define CCR				0x0
 #define BM_CCR_WB_COUNT			(0x7 << 16)
@@ -184,6 +192,8 @@ int imx6q_set_lpm(enum mxc_cpu_pwr_mode mode)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const char *step_sels[]	= { "osc", "pll2_pfd2_396m", };
 static const char *pll1_sw_sels[]	= { "pll1_sys", "step", };
 static const char *periph_pre_sels[]	= { "pll2_bus", "pll2_pfd2_396m", "pll2_pfd0_352m", "pll2_198m", };
@@ -193,7 +203,11 @@ static const char *periph_sels[]	= { "periph_pre", "periph_clk2", };
 static const char *periph2_sels[]	= { "periph2_pre", "periph2_clk2", };
 static const char *axi_sels[]		= { "periph", "pll2_pfd2_396m", "periph", "pll3_pfd1_540m", };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *audio_sels[]	= { "pll4_post_div", "pll3_pfd2_508m", "pll3_pfd3_454m", "pll3_usb_otg", };
+=======
+static const char *audio_sels[]	= { "pll4_audio_div", "pll3_pfd2_508m", "pll3_pfd3_454m", "pll3_usb_otg", };
+>>>>>>> v3.18
 =======
 static const char *audio_sels[]	= { "pll4_audio_div", "pll3_pfd2_508m", "pll3_pfd3_454m", "pll3_usb_otg", };
 >>>>>>> v3.18
@@ -211,21 +225,28 @@ static const char *ipu2_di1_sels[]	= { "ipu2_di1_pre", "dummy", "dummy", "ldb_di
 static const char *hsi_tx_sels[]	= { "pll3_120m", "pll2_pfd2_396m", };
 static const char *pcie_axi_sels[]	= { "axi", "ahb", };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *ssi_sels[]		= { "pll3_pfd2_508m", "pll3_pfd3_454m", "pll4_post_div", };
 static const char *usdhc_sels[]	= { "pll2_pfd2_396m", "pll2_pfd0_352m", };
 static const char *enfc_sels[]	= { "pll2_pfd0_352m", "pll2_bus", "pll3_usb_otg", "pll2_pfd2_396m", };
 static const char *emi_sels[]		= { "axi", "pll3_usb_otg", "pll2_pfd2_396m", "pll2_pfd0_352m", };
 =======
+=======
+>>>>>>> v3.18
 static const char *ssi_sels[]		= { "pll3_pfd2_508m", "pll3_pfd3_454m", "pll4_audio_div", };
 static const char *usdhc_sels[]	= { "pll2_pfd2_396m", "pll2_pfd0_352m", };
 static const char *enfc_sels[]	= { "pll2_pfd0_352m", "pll2_bus", "pll3_usb_otg", "pll2_pfd2_396m", };
 static const char *eim_sels[]		= { "pll2_pfd2_396m", "pll3_usb_otg", "axi", "pll2_pfd0_352m", };
 static const char *eim_slow_sels[]      = { "axi", "pll3_usb_otg", "pll2_pfd2_396m", "pll2_pfd0_352m", };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char *vdo_axi_sels[]	= { "axi", "ahb", };
 static const char *vpu_axi_sels[]	= { "axi", "pll2_pfd2_396m", "pll2_pfd0_352m", };
 static const char *cko1_sels[]	= { "pll3_usb_otg", "pll2_bus", "pll1_sys", "pll5_video_div",
 				    "dummy", "axi", "enfc", "ipu1_di0", "ipu1_di1", "ipu2_di0",
+<<<<<<< HEAD
 <<<<<<< HEAD
 				    "ipu2_di1", "ahb", "ipg", "ipg_per", "ckil", "pll4_post_div", };
 
@@ -270,6 +291,8 @@ static struct clk_onecell_data clk_data;
 static enum mx6q_clks const clks_init_on[] __initconst = {
 	mmdc_ch0_axi, rom, pll1_sys,
 =======
+=======
+>>>>>>> v3.18
 				    "ipu2_di1", "ahb", "ipg", "ipg_per", "ckil", "pll4_audio_div", };
 static const char *cko2_sels[] = {
 	"mmdc_ch0_axi", "mmdc_ch1_axi", "usdhc4", "usdhc1",
@@ -303,6 +326,9 @@ static unsigned int const clks_init_on[] __initconst = {
 	IMX6QDL_CLK_MMDC_CH0_AXI,
 	IMX6QDL_CLK_ROM,
 	IMX6QDL_CLK_ARM,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -312,6 +338,10 @@ static struct clk_div_table clk_enet_ref_table[] = {
 	{ .val = 2, .div = 5, },
 	{ .val = 3, .div = 4, },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ /* sentinel */ }
+>>>>>>> v3.18
 =======
 	{ /* sentinel */ }
 >>>>>>> v3.18
@@ -322,7 +352,11 @@ static struct clk_div_table post_div_table[] = {
 	{ .val = 1, .div = 2, },
 	{ .val = 0, .div = 4, },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ }
+=======
+	{ /* sentinel */ }
+>>>>>>> v3.18
 =======
 	{ /* sentinel */ }
 >>>>>>> v3.18
@@ -333,6 +367,7 @@ static struct clk_div_table video_div_table[] = {
 	{ .val = 1, .div = 2, },
 	{ .val = 2, .div = 1, },
 	{ .val = 3, .div = 4, },
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ }
 };
@@ -359,6 +394,8 @@ int __init mx6q_clocks_init(void)
 			clk[osc] = imx_clk_fixed("osc", rate);
 	}
 =======
+=======
+>>>>>>> v3.18
 	{ /* sentinel */ }
 };
 
@@ -382,6 +419,9 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 	/* Clock source from external clock via CLK1/2 PADs */
 	clk[IMX6QDL_CLK_ANACLK1] = imx_obtain_fixed_clock("anaclk1", 0);
 	clk[IMX6QDL_CLK_ANACLK2] = imx_obtain_fixed_clock("anaclk2", 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	np = of_find_compatible_node(NULL, NULL, "fsl,imx6q-anatop");
@@ -389,6 +429,7 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 	WARN_ON(!base);
 
 	/* Audio/video PLL post dividers do not work on i.MX6q revision 1.0 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cpu_is_imx6q() && imx6q_revision() == IMX_CHIP_REVISION_1_0) {
 		post_div_table[1].div = 1;
@@ -407,6 +448,8 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 	clk[pll7_usb_host] = imx_clk_pllv3(IMX_PLLV3_USB,	"pll7_usb_host","osc", base + 0x20, 0x3);
 	clk[pll8_mlb]      = imx_clk_pllv3(IMX_PLLV3_MLB,	"pll8_mlb",	"osc", base + 0xd0, 0x0);
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_is_imx6q() && imx_get_soc_revision() == IMX_CHIP_REVISION_1_0) {
 		post_div_table[1].div = 1;
 		post_div_table[2].div = 1;
@@ -455,6 +498,9 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 	clk[IMX6QDL_CLK_PLL5_VIDEO]    = imx_clk_gate("pll5_video",    "pll5_bypass", base + 0xa0, 13);
 	clk[IMX6QDL_CLK_PLL6_ENET]     = imx_clk_gate("pll6_enet",     "pll6_bypass", base + 0xe0, 13);
 	clk[IMX6QDL_CLK_PLL7_USB_HOST] = imx_clk_gate("pll7_usb_host", "pll7_bypass", base + 0x20, 13);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -464,8 +510,13 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 	 * the clk framework may need to enable/disable usbphy's parent
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk[usbphy1] = imx_clk_gate("usbphy1", "pll3_usb_otg", base + 0x10, 20);
 	clk[usbphy2] = imx_clk_gate("usbphy2", "pll7_usb_host", base + 0x20, 20);
+=======
+	clk[IMX6QDL_CLK_USBPHY1] = imx_clk_gate("usbphy1", "pll3_usb_otg", base + 0x10, 20);
+	clk[IMX6QDL_CLK_USBPHY2] = imx_clk_gate("usbphy2", "pll7_usb_host", base + 0x20, 20);
+>>>>>>> v3.18
 =======
 	clk[IMX6QDL_CLK_USBPHY1] = imx_clk_gate("usbphy1", "pll3_usb_otg", base + 0x10, 20);
 	clk[IMX6QDL_CLK_USBPHY2] = imx_clk_gate("usbphy2", "pll7_usb_host", base + 0x20, 20);
@@ -475,6 +526,7 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 	 * usbphy*_gate needs to be on after system boots up, and software
 	 * never needs to control it anymore.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk[usbphy1_gate] = imx_clk_gate("usbphy1_gate", "dummy", base + 0x10, 6);
 	clk[usbphy2_gate] = imx_clk_gate("usbphy2_gate", "dummy", base + 0x20, 6);
@@ -686,6 +738,8 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 			pr_err("i.MX6q clk %d: register failed with %ld\n",
 				i, PTR_ERR(clk[i]));
 =======
+=======
+>>>>>>> v3.18
 	clk[IMX6QDL_CLK_USBPHY1_GATE] = imx_clk_gate("usbphy1_gate", "dummy", base + 0x10, 6);
 	clk[IMX6QDL_CLK_USBPHY2_GATE] = imx_clk_gate("usbphy2_gate", "dummy", base + 0x20, 6);
 
@@ -954,12 +1008,16 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 		clk[IMX6QDL_CLK_GPT_3M] = clk[IMX6QDL_CLK_GPT_IPG_PER];
 
 	imx_check_clocks(clk, ARRAY_SIZE(clk));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	clk_data.clks = clk;
 	clk_data.clk_num = ARRAY_SIZE(clk);
 	of_clk_add_provider(np, of_clk_src_onecell_get, &clk_data);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk_register_clkdev(clk[gpt_ipg], "ipg", "imx-gpt.0");
 	clk_register_clkdev(clk[gpt_ipg_per], "per", "imx-gpt.0");
@@ -974,6 +1032,8 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	clk_register_clkdev(clk[IMX6QDL_CLK_ENET_REF], "enet_ref", NULL);
 
 	if ((imx_get_soc_revision() != IMX_CHIP_REVISION_1_0) ||
@@ -991,6 +1051,9 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 	clk_set_parent(clk[IMX6QDL_CLK_IPU2_DI0_SEL], clk[IMX6QDL_CLK_IPU2_DI0_PRE]);
 	clk_set_parent(clk[IMX6QDL_CLK_IPU2_DI1_SEL], clk[IMX6QDL_CLK_IPU2_DI1_PRE]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * The gpmi needs 100MHz frequency in the EDO/Sync mode,
@@ -998,7 +1061,11 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 	 * So choose pll2_pfd2_396m as enfc_sel's parent.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_set_parent(clk[enfc_sel], clk[pll2_pfd2_396m]);
+=======
+	clk_set_parent(clk[IMX6QDL_CLK_ENFC_SEL], clk[IMX6QDL_CLK_PLL2_PFD2_396M]);
+>>>>>>> v3.18
 =======
 	clk_set_parent(clk[IMX6QDL_CLK_ENFC_SEL], clk[IMX6QDL_CLK_PLL2_PFD2_396M]);
 >>>>>>> v3.18
@@ -1007,6 +1074,7 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 		clk_prepare_enable(clk[clks_init_on[i]]);
 
 	if (IS_ENABLED(CONFIG_USB_MXS_PHY)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		clk_prepare_enable(clk[usbphy1_gate]);
 		clk_prepare_enable(clk[usbphy2_gate]);
@@ -1024,6 +1092,8 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 		clk_prepare_enable(clk[IMX6QDL_CLK_USBPHY1_GATE]);
 		clk_prepare_enable(clk[IMX6QDL_CLK_USBPHY2_GATE]);
 	}
@@ -1049,4 +1119,7 @@ static void __init imx6q_clocks_init(struct device_node *ccm_node)
 	imx6q_set_lpm(WAIT_CLOCKED);
 }
 CLK_OF_DECLARE(imx6q, "fsl,imx6q-ccm", imx6q_clocks_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

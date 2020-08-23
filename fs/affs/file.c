@@ -28,15 +28,21 @@ static int affs_file_release(struct inode *inode, struct file *filp);
 const struct file_operations affs_file_operations = {
 	.llseek		= generic_file_llseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.read		= do_sync_read,
 	.aio_read	= generic_file_aio_read,
 	.write		= do_sync_write,
 	.aio_write	= generic_file_aio_write,
 =======
+=======
+>>>>>>> v3.18
 	.read		= new_sync_read,
 	.read_iter	= generic_file_read_iter,
 	.write		= new_sync_write,
 	.write_iter	= generic_file_write_iter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.mmap		= generic_file_mmap,
 	.open		= affs_file_open,
@@ -53,7 +59,11 @@ static int
 affs_file_open(struct inode *inode, struct file *filp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: open(%lu,%d)\n",
+=======
+	pr_debug("open(%lu,%d)\n",
+>>>>>>> v3.18
 =======
 	pr_debug("open(%lu,%d)\n",
 >>>>>>> v3.18
@@ -66,7 +76,11 @@ static int
 affs_file_release(struct inode *inode, struct file *filp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: release(%lu, %d)\n",
+=======
+	pr_debug("release(%lu, %d)\n",
+>>>>>>> v3.18
 =======
 	pr_debug("release(%lu, %d)\n",
 >>>>>>> v3.18
@@ -340,7 +354,12 @@ affs_get_block(struct inode *inode, sector_t block, struct buffer_head *bh_resul
 	u32			 ext;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: get_block(%u, %lu)\n", (u32)inode->i_ino, (unsigned long)block);
+=======
+	pr_debug("%s(%u, %lu)\n",
+		 __func__, (u32)inode->i_ino, (unsigned long)block);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(%u, %lu)\n",
 		 __func__, (u32)inode->i_ino, (unsigned long)block);
@@ -427,7 +446,11 @@ static void affs_write_failed(struct address_space *mapping, loff_t to)
 
 	if (to > inode->i_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_pagecache(inode, to, inode->i_size);
+=======
+		truncate_pagecache(inode, inode->i_size);
+>>>>>>> v3.18
 =======
 		truncate_pagecache(inode, inode->i_size);
 >>>>>>> v3.18
@@ -523,7 +546,11 @@ affs_getemptyblk_ino(struct inode *inode, int block)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 affs_do_readpage_ofs(struct file *file, struct page *page, unsigned from, unsigned to)
+=======
+affs_do_readpage_ofs(struct page *page, unsigned to)
+>>>>>>> v3.18
 =======
 affs_do_readpage_ofs(struct page *page, unsigned to)
 >>>>>>> v3.18
@@ -532,6 +559,7 @@ affs_do_readpage_ofs(struct page *page, unsigned to)
 	struct super_block *sb = inode->i_sb;
 	struct buffer_head *bh;
 	char *data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 bidx, boff, bsize;
 	u32 tmp;
@@ -556,6 +584,8 @@ affs_do_readpage_ofs(struct page *page, unsigned to)
 		bidx++;
 		from += tmp;
 =======
+=======
+>>>>>>> v3.18
 	unsigned pos = 0;
 	u32 bidx, boff, bsize;
 	u32 tmp;
@@ -580,6 +610,9 @@ affs_do_readpage_ofs(struct page *page, unsigned to)
 		affs_brelse(bh);
 		bidx++;
 		pos += tmp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		boff = 0;
 	}
@@ -598,7 +631,11 @@ affs_extent_file_ofs(struct inode *inode, u32 newsize)
 	u32 tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: extent_file(%u, %d)\n", (u32)inode->i_ino, newsize);
+=======
+	pr_debug("%s(%u, %d)\n", __func__, (u32)inode->i_ino, newsize);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(%u, %d)\n", __func__, (u32)inode->i_ino, newsize);
 >>>>>>> v3.18
@@ -641,12 +678,15 @@ affs_extent_file_ofs(struct inode *inode, u32 newsize)
 		mark_buffer_dirty_inode(bh, inode);
 		if (prev_bh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u32 tmp = be32_to_cpu(AFFS_DATA_HEAD(prev_bh)->next);
 			if (tmp)
 				affs_warning(sb, "extent_file_ofs", "next block already set for %d (%d)", bidx, tmp);
 			AFFS_DATA_HEAD(prev_bh)->next = cpu_to_be32(bh->b_blocknr);
 			affs_adjust_checksum(prev_bh, bh->b_blocknr - tmp);
 =======
+=======
+>>>>>>> v3.18
 			u32 tmp_next = be32_to_cpu(AFFS_DATA_HEAD(prev_bh)->next);
 
 			if (tmp_next)
@@ -655,6 +695,9 @@ affs_extent_file_ofs(struct inode *inode, u32 newsize)
 					     bidx, tmp_next);
 			AFFS_DATA_HEAD(prev_bh)->next = cpu_to_be32(bh->b_blocknr);
 			affs_adjust_checksum(prev_bh, bh->b_blocknr - tmp_next);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			mark_buffer_dirty_inode(prev_bh, inode);
 			affs_brelse(prev_bh);
@@ -679,7 +722,11 @@ affs_readpage_ofs(struct file *file, struct page *page)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: read_page(%u, %ld)\n", (u32)inode->i_ino, page->index);
+=======
+	pr_debug("%s(%u, %ld)\n", __func__, (u32)inode->i_ino, page->index);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(%u, %ld)\n", __func__, (u32)inode->i_ino, page->index);
 >>>>>>> v3.18
@@ -690,7 +737,11 @@ affs_readpage_ofs(struct file *file, struct page *page)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = affs_do_readpage_ofs(file, page, 0, to);
+=======
+	err = affs_do_readpage_ofs(page, to);
+>>>>>>> v3.18
 =======
 	err = affs_do_readpage_ofs(page, to);
 >>>>>>> v3.18
@@ -710,7 +761,12 @@ static int affs_write_begin_ofs(struct file *file, struct address_space *mapping
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: write_begin(%u, %llu, %llu)\n", (u32)inode->i_ino, (unsigned long long)pos, (unsigned long long)pos + len);
+=======
+	pr_debug("%s(%u, %llu, %llu)\n", __func__, (u32)inode->i_ino,
+		 (unsigned long long)pos, (unsigned long long)pos + len);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(%u, %llu, %llu)\n", __func__, (u32)inode->i_ino,
 		 (unsigned long long)pos, (unsigned long long)pos + len);
@@ -735,7 +791,11 @@ static int affs_write_begin_ofs(struct file *file, struct address_space *mapping
 
 	/* XXX: inefficient but safe in the face of short writes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = affs_do_readpage_ofs(file, page, 0, PAGE_CACHE_SIZE);
+=======
+	err = affs_do_readpage_ofs(page, PAGE_CACHE_SIZE);
+>>>>>>> v3.18
 =======
 	err = affs_do_readpage_ofs(page, PAGE_CACHE_SIZE);
 >>>>>>> v3.18
@@ -768,7 +828,13 @@ static int affs_write_end_ofs(struct file *file, struct address_space *mapping,
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: write_begin(%u, %llu, %llu)\n", (u32)inode->i_ino, (unsigned long long)pos, (unsigned long long)pos + len);
+=======
+	pr_debug("%s(%u, %llu, %llu)\n",
+		 __func__, (u32)inode->i_ino, (unsigned long long)pos,
+		(unsigned long long)pos + len);
+>>>>>>> v3.18
 =======
 	pr_debug("%s(%u, %llu, %llu)\n",
 		 __func__, (u32)inode->i_ino, (unsigned long long)pos,
@@ -815,12 +881,15 @@ static int affs_write_end_ofs(struct file *file, struct address_space *mapping,
 			bh->b_state &= ~(1UL << BH_New);
 			if (prev_bh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				u32 tmp = be32_to_cpu(AFFS_DATA_HEAD(prev_bh)->next);
 				if (tmp)
 					affs_warning(sb, "commit_write_ofs", "next block already set for %d (%d)", bidx, tmp);
 				AFFS_DATA_HEAD(prev_bh)->next = cpu_to_be32(bh->b_blocknr);
 				affs_adjust_checksum(prev_bh, bh->b_blocknr - tmp);
 =======
+=======
+>>>>>>> v3.18
 				u32 tmp_next = be32_to_cpu(AFFS_DATA_HEAD(prev_bh)->next);
 
 				if (tmp_next)
@@ -829,6 +898,9 @@ static int affs_write_end_ofs(struct file *file, struct address_space *mapping,
 						     bidx, tmp_next);
 				AFFS_DATA_HEAD(prev_bh)->next = cpu_to_be32(bh->b_blocknr);
 				affs_adjust_checksum(prev_bh, bh->b_blocknr - tmp_next);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				mark_buffer_dirty_inode(prev_bh, inode);
 			}
@@ -857,12 +929,15 @@ static int affs_write_end_ofs(struct file *file, struct address_space *mapping,
 			bh->b_state &= ~(1UL << BH_New);
 			if (prev_bh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				u32 tmp = be32_to_cpu(AFFS_DATA_HEAD(prev_bh)->next);
 				if (tmp)
 					affs_warning(sb, "commit_write_ofs", "next block already set for %d (%d)", bidx, tmp);
 				AFFS_DATA_HEAD(prev_bh)->next = cpu_to_be32(bh->b_blocknr);
 				affs_adjust_checksum(prev_bh, bh->b_blocknr - tmp);
 =======
+=======
+>>>>>>> v3.18
 				u32 tmp_next = be32_to_cpu(AFFS_DATA_HEAD(prev_bh)->next);
 
 				if (tmp_next)
@@ -871,6 +946,9 @@ static int affs_write_end_ofs(struct file *file, struct address_space *mapping,
 						     bidx, tmp_next);
 				AFFS_DATA_HEAD(prev_bh)->next = cpu_to_be32(bh->b_blocknr);
 				affs_adjust_checksum(prev_bh, bh->b_blocknr - tmp_next);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				mark_buffer_dirty_inode(prev_bh, inode);
 			}
@@ -918,7 +996,11 @@ affs_free_prealloc(struct inode *inode)
 	struct super_block *sb = inode->i_sb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: free_prealloc(ino=%lu)\n", inode->i_ino);
+=======
+	pr_debug("free_prealloc(ino=%lu)\n", inode->i_ino);
+>>>>>>> v3.18
 =======
 	pr_debug("free_prealloc(ino=%lu)\n", inode->i_ino);
 >>>>>>> v3.18
@@ -942,7 +1024,11 @@ affs_truncate(struct inode *inode)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("AFFS: truncate(inode=%d, oldsize=%u, newsize=%u)\n",
+=======
+	pr_debug("truncate(inode=%d, oldsize=%u, newsize=%u)\n",
+>>>>>>> v3.18
 =======
 	pr_debug("truncate(inode=%d, oldsize=%u, newsize=%u)\n",
 >>>>>>> v3.18
@@ -960,6 +1046,7 @@ affs_truncate(struct inode *inode)
 		struct page *page;
 		void *fsdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 size = inode->i_size;
 		int res;
 
@@ -967,12 +1054,17 @@ affs_truncate(struct inode *inode)
 		if (!res)
 			res = mapping->a_ops->write_end(NULL, mapping, size, 0, 0, page, fsdata);
 =======
+=======
+>>>>>>> v3.18
 		loff_t isize = inode->i_size;
 		int res;
 
 		res = mapping->a_ops->write_begin(NULL, mapping, isize, 0, 0, &page, &fsdata);
 		if (!res)
 			res = mapping->a_ops->write_end(NULL, mapping, isize, 0, 0, page, fsdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else
 			inode->i_size = AFFS_I(inode)->mmu_private;

@@ -28,6 +28,7 @@
  *
  *   vt6656_probe - module initial (insmod) driver entry
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   device_remove1 - module remove entry
  *   device_open - allocate dma/descripter resource & initial mac/bbp function
  *   device_xmit - asynchronous data tx function
@@ -46,6 +47,10 @@
  *   vnt_free_tx_bufs - free tx buffer function
  *   vnt_init_registers- initial MAC & BBP & RF internal registers.
 >>>>>>> v3.18
+=======
+ *   vnt_free_tx_bufs - free tx buffer function
+ *   vnt_init_registers- initial MAC & BBP & RF internal registers.
+>>>>>>> v3.18
  *
  * Revision History:
  */
@@ -56,6 +61,7 @@
 #include "card.h"
 #include "baseband.h"
 #include "mac.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "tether.h"
 #include "wmgr.h"
@@ -82,6 +88,8 @@
 /* static int msglevel = MSG_LEVEL_DEBUG; */
 static int          msglevel                =MSG_LEVEL_INFO;
 =======
+=======
+>>>>>>> v3.18
 #include "power.h"
 #include "wcmd.h"
 #include "rxtx.h"
@@ -91,6 +99,9 @@ static int          msglevel                =MSG_LEVEL_INFO;
 #include "usbpipe.h"
 #include "channel.h"
 #include "int.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -104,6 +115,7 @@ MODULE_AUTHOR(DRIVER_AUTHOR);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION(DEVICE_FULL_DRV_NAM);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define DEVICE_PARAM(N,D) \
         static int N[MAX_UINTS]=OPTION_DEFAULT;\
@@ -177,6 +189,8 @@ DEVICE_PARAM(ShortRetryLimit, "Short frame retry limits");
 #define LONG_RETRY_DEF     4
 DEVICE_PARAM(LongRetryLimit, "long frame retry limits");
 =======
+=======
+>>>>>>> v3.18
 #define RX_DESC_DEF0 64
 static int vnt_rx_buffers = RX_DESC_DEF0;
 module_param_named(rx_buffers, vnt_rx_buffers, int, 0644);
@@ -191,6 +205,9 @@ MODULE_PARM_DESC(tx_buffers, "Number of receive usb tx buffers");
 #define FRAG_THRESH_DEF     2346
 #define SHORT_RETRY_DEF     8
 #define LONG_RETRY_DEF     4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* BasebandType[] baseband type selected
@@ -200,6 +217,7 @@ MODULE_PARM_DESC(tx_buffers, "Number of receive usb tx buffers");
 */
 
 #define BBP_TYPE_DEF     2
+<<<<<<< HEAD
 <<<<<<< HEAD
 DEVICE_PARAM(BasebandType, "baseband type");
 
@@ -213,6 +231,8 @@ DEVICE_PARAM(BasebandType, "baseband type");
 DEVICE_PARAM(b80211hEnable, "802.11h mode");
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /*
  * Static vars definitions
@@ -223,6 +243,7 @@ static struct usb_device_id vt6656_table[] = {
 	{}
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* frequency list (map channels to frequencies) */
 /*
@@ -331,6 +352,8 @@ static void device_init_diversity_timer(struct vnt_private *pDevice)
 
     return;
 =======
+=======
+>>>>>>> v3.18
 static void vnt_set_options(struct vnt_private *priv)
 {
 	/* Set number of TX buffers */
@@ -353,12 +376,16 @@ static void vnt_set_options(struct vnt_private *priv)
 	priv->auto_fb_ctrl = AUTO_FB_0;
 	priv->preamble_type = 0;
 	priv->exist_sw_net_addr = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*
  * initialization of MAC & BBP registers
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static int device_init_registers(struct vnt_private *pDevice,
@@ -488,6 +515,8 @@ static int device_init_registers(struct vnt_private *pDevice,
                 pDevice->abyOFDMPwrTbl[ii] = pDevice->byOFDMPwrG;
         }
 =======
+=======
+>>>>>>> v3.18
 static int vnt_init_registers(struct vnt_private *priv)
 {
 	struct vnt_cmd_card_init *init_cmd = &priv->init_command;
@@ -572,12 +601,16 @@ static int vnt_init_registers(struct vnt_private *priv)
 		if (priv->ofdm_pwr_tbl[ii] == 0)
 			priv->ofdm_pwr_tbl[ii] = priv->ofdm_pwr_g;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * original zonetype is USA, but custom zonetype is Europe,
 	 * then need to recover 12, 13, 14 channels with 11 channel
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
           if(((pDevice->abyEEPROM[EEP_OFS_ZONETYPE] == ZoneType_Japan) ||
 	        (pDevice->abyEEPROM[EEP_OFS_ZONETYPE] == ZoneType_Europe))&&
@@ -1028,6 +1061,8 @@ free_rx_tx:
 free_tx:
     device_free_tx_bufs(pDevice);
 =======
+=======
+>>>>>>> v3.18
 	for (ii = 11; ii < 14; ii++) {
 		priv->cck_pwr_tbl[ii] = priv->cck_pwr_tbl[10];
 		priv->ofdm_pwr_tbl[ii] = priv->ofdm_pwr_tbl[10];
@@ -1323,11 +1358,15 @@ free_rx_tx:
 
 free_tx:
 	vnt_free_tx_bufs(priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return false;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool device_init_defrag_cb(struct vnt_private *pDevice)
 {
@@ -1897,6 +1936,8 @@ static int device_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 
 	}
 =======
+=======
+>>>>>>> v3.18
 static void vnt_tx_80211(struct ieee80211_hw *hw,
 	struct ieee80211_tx_control *control, struct sk_buff *skb)
 {
@@ -2398,11 +2439,15 @@ vt6656_probe(struct usb_interface *intf, const struct usb_device_id *id)
 
 err_nomem:
 	usb_put_dev(udev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rc;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ethtool_ioctl(struct net_device *dev, void *useraddr)
 {
@@ -2427,6 +2472,8 @@ static int ethtool_ioctl(struct net_device *dev, void *useraddr)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static void vt6656_disconnect(struct usb_interface *intf)
 {
 	struct vnt_private *priv = usb_get_intfdata(intf);
@@ -2459,6 +2506,9 @@ static int vt6656_resume(struct usb_interface *intf)
 
 #endif /* CONFIG_PM */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_DEVICE_TABLE(usb, vt6656_table);
 

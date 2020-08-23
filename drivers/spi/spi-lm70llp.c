@@ -223,7 +223,11 @@ static void spi_lm70llp_attach(struct parport *p)
 	 * SPI and bitbang hookup.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pp->bitbang.master = spi_master_get(master);
+=======
+	pp->bitbang.master = master;
+>>>>>>> v3.18
 =======
 	pp->bitbang.master = master;
 >>>>>>> v3.18

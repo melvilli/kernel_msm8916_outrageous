@@ -207,6 +207,7 @@ static int smsusb_sendrequest(void *context, void *buffer, size_t size)
 {
 	struct smsusb_device_t *dev = (struct smsusb_device_t *) context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sms_msg_hdr *phdr;
 	int dummy, ret;
 
@@ -218,6 +219,8 @@ static int smsusb_sendrequest(void *context, void *buffer, size_t size)
 		return -ENOMEM;
 	memcpy(phdr, buffer, size);
 =======
+=======
+>>>>>>> v3.18
 	struct sms_msg_hdr *phdr = (struct sms_msg_hdr *) buffer;
 	int dummy;
 
@@ -225,6 +228,9 @@ static int smsusb_sendrequest(void *context, void *buffer, size_t size)
 		sms_debug("Device not active yet");
 		return -ENOENT;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sms_debug("sending %s(%d) size: %d",
@@ -233,12 +239,18 @@ static int smsusb_sendrequest(void *context, void *buffer, size_t size)
 
 	smsendian_handle_tx_message((struct sms_msg_data *) phdr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	smsendian_handle_message_header((struct sms_msg_hdr *)phdr);
 	ret = usb_bulk_msg(dev->udev, usb_sndbulkpipe(dev->udev, 2),
 			    phdr, size, &dummy, 1000);
 
 	kfree(phdr);
 	return ret;
+=======
+	smsendian_handle_message_header((struct sms_msg_hdr *)buffer);
+	return usb_bulk_msg(dev->udev, usb_sndbulkpipe(dev->udev, 2),
+			    buffer, size, &dummy, 1000);
+>>>>>>> v3.18
 =======
 	smsendian_handle_message_header((struct sms_msg_hdr *)buffer);
 	return usb_bulk_msg(dev->udev, usb_sndbulkpipe(dev->udev, 2),
@@ -268,6 +280,12 @@ static int smsusb1_load_firmware(struct usb_device *udev, int id, int board_id)
 	char *fw_filename;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (id < 0)
+		id = sms_get_board(board_id)->default_mode;
+
+>>>>>>> v3.18
 =======
 	if (id < 0)
 		id = sms_get_board(board_id)->default_mode;
@@ -303,7 +321,11 @@ static int smsusb1_load_firmware(struct usb_device *udev, int id, int board_id)
 				  fw_buffer, fw->size, &dummy, 1000);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sms_info("sent %zd(%d) bytes, rc %d", fw->size, dummy, rc);
+=======
+		sms_info("sent %zu(%d) bytes, rc %d", fw->size, dummy, rc);
+>>>>>>> v3.18
 =======
 		sms_info("sent %zu(%d) bytes, rc %d", fw->size, dummy, rc);
 >>>>>>> v3.18
@@ -314,7 +336,11 @@ static int smsusb1_load_firmware(struct usb_device *udev, int id, int board_id)
 		rc = -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sms_info("read FW %s, size=%zd", fw_filename, fw->size);
+=======
+	sms_info("read FW %s, size=%zu", fw_filename, fw->size);
+>>>>>>> v3.18
 =======
 	sms_info("read FW %s, size=%zu", fw_filename, fw->size);
 >>>>>>> v3.18
@@ -484,7 +510,12 @@ static int smsusb_probe(struct usb_interface *intf,
 	int i, rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sms_info("interface number %d",
+=======
+	sms_info("board id=%lu, interface number %d",
+		 id->driver_info,
+>>>>>>> v3.18
 =======
 	sms_info("board id=%lu, interface number %d",
 		 id->driver_info,
@@ -494,9 +525,15 @@ static int smsusb_probe(struct usb_interface *intf,
 	if (sms_get_board(id->driver_info)->intf_num !=
 	    intf->cur_altsetting->desc.bInterfaceNumber) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sms_err("interface number is %d expecting %d",
 			sms_get_board(id->driver_info)->intf_num,
 			intf->cur_altsetting->desc.bInterfaceNumber);
+=======
+		sms_debug("interface %d won't be used. Expecting interface %d to popup",
+			intf->cur_altsetting->desc.bInterfaceNumber,
+			sms_get_board(id->driver_info)->intf_num);
+>>>>>>> v3.18
 =======
 		sms_debug("interface %d won't be used. Expecting interface %d to popup",
 			intf->cur_altsetting->desc.bInterfaceNumber,
@@ -533,7 +570,11 @@ static int smsusb_probe(struct usb_interface *intf,
 	if ((udev->actconfig->desc.bNumInterfaces == 2) &&
 	    (intf->cur_altsetting->desc.bInterfaceNumber == 0)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sms_err("rom interface 0 is not used");
+=======
+		sms_debug("rom interface 0 is not used");
+>>>>>>> v3.18
 =======
 		sms_debug("rom interface 0 is not used");
 >>>>>>> v3.18
@@ -541,6 +582,7 @@ static int smsusb_probe(struct usb_interface *intf,
 	}
 
 	if (id->driver_info == SMS1XXX_BOARD_SIANO_STELLAR_ROM) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		sms_info("stellar device was found.");
 		snprintf(devpath, sizeof(devpath), "usb\\%d-%s",
@@ -554,6 +596,8 @@ static int smsusb_probe(struct usb_interface *intf,
 	rc = smsusb_init_device(intf, id->driver_info);
 	sms_info("rc %d", rc);
 =======
+=======
+>>>>>>> v3.18
 		/* Detected a Siano Stellar uninitialized */
 
 		snprintf(devpath, sizeof(devpath), "usb\\%d-%s",
@@ -575,6 +619,9 @@ static int smsusb_probe(struct usb_interface *intf,
 	}
 
 	sms_info("Device initialized with return code %d", rc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sms_board_load_modules(id->driver_info);
 	return rc;
@@ -628,11 +675,14 @@ static int smsusb_resume(struct usb_interface *intf)
 
 static const struct usb_device_id smsusb_id_table[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x187f, 0x0010),
 		.driver_info = SMS1XXX_BOARD_SIANO_STELLAR },
 	{ USB_DEVICE(0x187f, 0x0100),
 		.driver_info = SMS1XXX_BOARD_SIANO_STELLAR },
 =======
+=======
+>>>>>>> v3.18
 	/* This device is only present before firmware load */
 	{ USB_DEVICE(0x187f, 0x0010),
 		.driver_info = SMS1XXX_BOARD_SIANO_STELLAR_ROM },
@@ -640,6 +690,9 @@ static const struct usb_device_id smsusb_id_table[] = {
 	{ USB_DEVICE(0x187f, 0x0100),
 		.driver_info = SMS1XXX_BOARD_SIANO_STELLAR },
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x187f, 0x0200),
 		.driver_info = SMS1XXX_BOARD_SIANO_NOVA_A },
@@ -722,11 +775,17 @@ static const struct usb_device_id smsusb_id_table[] = {
 	{ USB_DEVICE(0x19D2, 0x0078),
 		.driver_info = SMS1XXX_BOARD_ONDA_MDTV_DATA_CARD },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x3275, 0x0080),
 		.driver_info = SMS1XXX_BOARD_SIANO_RIO },
 	{ USB_DEVICE(0x2013, 0x0257),
 		.driver_info = SMS1XXX_BOARD_PCTV_77E },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ } /* Terminating entry */
 	};

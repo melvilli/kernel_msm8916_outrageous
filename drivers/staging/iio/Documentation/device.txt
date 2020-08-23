@@ -57,7 +57,11 @@ Then fill in the following:
 - indio_dev->modes:
 	Specify whether direct access and / or ring buffer access is supported.
 <<<<<<< HEAD
+<<<<<<< HEAD
 - indio_dev->ring:
+=======
+- indio_dev->buffer:
+>>>>>>> v3.18
 =======
 - indio_dev->buffer:
 >>>>>>> v3.18
@@ -72,7 +76,11 @@ Then fill in the following:
 	How many channels are there?
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Once these are set up, a call to iio_device_register(indio_dev),
+=======
+Once these are set up, a call to iio_device_register(indio_dev)
+>>>>>>> v3.18
 =======
 Once these are set up, a call to iio_device_register(indio_dev)
 >>>>>>> v3.18

@@ -8,8 +8,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COMPONENT "zPCI hpc"
 #define pr_fmt(fmt) COMPONENT ": " fmt
+=======
+#define KMSG_COMPONENT "zpci"
+#define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
+>>>>>>> v3.18
 =======
 #define KMSG_COMPONENT "zpci"
 #define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
@@ -21,7 +26,10 @@
 #include <linux/pci.h>
 #include <linux/pci_hotplug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/pci_debug.h>
@@ -50,7 +58,10 @@ struct slot {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int slot_configure(struct slot *slot)
 {
 	int ret = sclp_pci_configure(slot->zdev->fid);
@@ -73,6 +84,9 @@ static inline int slot_deconfigure(struct slot *slot)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int enable_slot(struct hotplug_slot *hotplug_slot)
 {
@@ -83,6 +97,7 @@ static int enable_slot(struct hotplug_slot *hotplug_slot)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = sclp_pci_configure(slot->zdev->fid);
 	zpci_dbg(3, "conf fid:%x, rc:%d\n", slot->zdev->fid, rc);
 	if (!rc) {
@@ -92,6 +107,8 @@ static int enable_slot(struct hotplug_slot *hotplug_slot)
 		zpci_scan_device(slot->zdev);
 	}
 =======
+=======
+>>>>>>> v3.18
 	rc = slot_configure(slot);
 	if (rc)
 		return rc;
@@ -109,6 +126,9 @@ static int enable_slot(struct hotplug_slot *hotplug_slot)
 
 out_deconfigure:
 	slot_deconfigure(slot);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -122,6 +142,7 @@ static int disable_slot(struct hotplug_slot *hotplug_slot)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = zpci_disable_device(slot->zdev);
 	if (rc)
 		return rc;
@@ -134,6 +155,8 @@ static int disable_slot(struct hotplug_slot *hotplug_slot)
 		slot->zdev->state = ZPCI_FN_STATE_STANDBY;
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	if (slot->zdev->pdev)
 		pci_stop_and_remove_bus_device_locked(slot->zdev->pdev);
 
@@ -142,6 +165,9 @@ static int disable_slot(struct hotplug_slot *hotplug_slot)
 		return rc;
 
 	return slot_deconfigure(slot);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -172,7 +198,10 @@ static void release_slot(struct hotplug_slot *hotplug_slot)
 	struct slot *slot = hotplug_slot->private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s - physical_slot = %s\n", __func__, hotplug_slot_name(hotplug_slot));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(slot->hotplug_slot->info);
@@ -188,7 +217,11 @@ static struct hotplug_slot_ops s390_hotplug_slot_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_pci_slot(struct zpci_dev *zdev)
+=======
+int zpci_init_slot(struct zpci_dev *zdev)
+>>>>>>> v3.18
 =======
 int zpci_init_slot(struct zpci_dev *zdev)
 >>>>>>> v3.18
@@ -229,10 +262,16 @@ int zpci_init_slot(struct zpci_dev *zdev)
 	rc = pci_hp_register(slot->hotplug_slot, zdev->bus,
 			     ZPCI_DEVFN, name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc) {
 		pr_err("pci_hp_register failed with error %d\n", rc);
 		goto error_reg;
 	}
+=======
+	if (rc)
+		goto error_reg;
+
+>>>>>>> v3.18
 =======
 	if (rc)
 		goto error_reg;
@@ -252,7 +291,11 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void exit_pci_slot(struct zpci_dev *zdev)
+=======
+void zpci_exit_slot(struct zpci_dev *zdev)
+>>>>>>> v3.18
 =======
 void zpci_exit_slot(struct zpci_dev *zdev)
 >>>>>>> v3.18
@@ -268,6 +311,7 @@ void zpci_exit_slot(struct zpci_dev *zdev)
 		pci_hp_deregister(slot->hotplug_slot);
 	}
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static struct pci_hp_callback_ops hp_ops = {
@@ -326,5 +370,7 @@ static void __exit pci_hotplug_s390_exit(void)
 
 module_init(pci_hotplug_s390_init);
 module_exit(pci_hotplug_s390_exit);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

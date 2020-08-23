@@ -18,7 +18,11 @@ Credits:
     and Mark Studebaker <mdsxyz123@yahoo.com>
   w83792d.c:
 <<<<<<< HEAD
+<<<<<<< HEAD
     Chunhao Huang <DZShen@Winbond.com.tw>,
+=======
+    Shane Huang (Winbond),
+>>>>>>> v3.18
 =======
     Shane Huang (Winbond),
 >>>>>>> v3.18

@@ -24,6 +24,11 @@
  */
 struct si4713_platform_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char * const *supply_names;
+	unsigned supplies;
+>>>>>>> v3.18
 =======
 	const char * const *supply_names;
 	unsigned supplies;

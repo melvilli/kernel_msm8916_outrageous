@@ -28,6 +28,7 @@ Description:	Generic performance monitoring events
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 What: 		/sys/devices/cpu/events/PM_LD_MISS_L1
 		/sys/devices/cpu/events/PM_LD_REF_L1
 		/sys/devices/cpu/events/PM_CYC
@@ -62,6 +63,8 @@ Description:	POWER-systems specific performance monitoring events
 		and separated with comma. All available terms are defined in
 		the /sys/bus/event_source/devices/<dev>/format file.
 =======
+=======
+>>>>>>> v3.18
 What: /sys/bus/event_source/devices/<pmu>/events/<event>
 Date: 2014/02/24
 Contact:	Linux kernel mailing list <linux-kernel@vger.kernel.org>
@@ -121,4 +124,7 @@ Description:	Perf event scaling factors
 
 		This is provided to avoid performing floating point arithmetic
 		in the kernel.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -37,8 +37,13 @@ struct sym_entry {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct text_range {
 	const char *stext, *etext;
+=======
+struct addr_range {
+	const char *start_sym, *end_sym;
+>>>>>>> v3.18
 =======
 struct addr_range {
 	const char *start_sym, *end_sym;
@@ -48,7 +53,11 @@ struct addr_range {
 
 static unsigned long long _text;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct text_range text_ranges[] = {
+=======
+static struct addr_range text_ranges[] = {
+>>>>>>> v3.18
 =======
 static struct addr_range text_ranges[] = {
 >>>>>>> v3.18
@@ -61,10 +70,13 @@ static struct addr_range text_ranges[] = {
 #define text_range_inittext (&text_ranges[1])
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sym_entry *table;
 static unsigned int table_size, table_cnt;
 static int all_symbols = 0;
 =======
+=======
+>>>>>>> v3.18
 static struct addr_range percpu_range = {
 	"__per_cpu_start", "__per_cpu_end", -1ULL, 0
 };
@@ -73,6 +85,9 @@ static struct sym_entry *table;
 static unsigned int table_size, table_cnt;
 static int all_symbols = 0;
 static int absolute_percpu = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static char symbol_prefix_char = '\0';
 static unsigned long long kernel_start_addr = 0;
@@ -100,6 +115,7 @@ static void usage(void)
 static inline int is_arm_mapping_symbol(const char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return str[0] == '$' && strchr("atd", str[1])
 	       && (str[2] == '\0' || str[2] == '.');
 }
@@ -118,6 +134,8 @@ static int read_symbol_tr(const char *sym, unsigned long long addr)
 		} else if (strcmp(sym, tr->etext) == 0) {
 			tr->end = addr;
 =======
+=======
+>>>>>>> v3.18
 	return str[0] == '$' && strchr("axtd", str[1])
 	       && (str[2] == '\0' || str[2] == '.');
 }
@@ -136,6 +154,9 @@ static int check_symbol_range(const char *sym, unsigned long long addr,
 			return 0;
 		} else if (strcmp(sym, ar->end_sym) == 0) {
 			ar->end = addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 0;
 		}
@@ -157,13 +178,19 @@ static int read_symbol(FILE *in, struct sym_entry *s)
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (strlen(str) > KSYM_NAME_LEN) {
 		fprintf(stderr, "Symbol %s too long for kallsyms (%zu vs %d).\n"
 				"Please increase KSYM_NAME_LEN both in kernel and kallsyms.c\n",
 			str, strlen(str), KSYM_NAME_LEN);
 		return -1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sym = str;
@@ -175,7 +202,12 @@ static int read_symbol(FILE *in, struct sym_entry *s)
 	if (strcmp(sym, "_text") == 0)
 		_text = s->addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (read_symbol_tr(sym, s->addr) == 0)
+=======
+	else if (check_symbol_range(sym, s->addr, text_ranges,
+				    ARRAY_SIZE(text_ranges)) == 0)
+>>>>>>> v3.18
 =======
 	else if (check_symbol_range(sym, s->addr, text_ranges,
 				    ARRAY_SIZE(text_ranges)) == 0)
@@ -214,6 +246,7 @@ static int read_symbol(FILE *in, struct sym_entry *s)
 	s->sym[0] = stype;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
@@ -227,6 +260,8 @@ static int symbol_valid_tr(struct sym_entry *s)
 
 		if (s->addr >= tr->start && s->addr <= tr->end)
 =======
+=======
+>>>>>>> v3.18
 	/* Record if we've found __per_cpu_start/end. */
 	check_symbol_range(sym, s->addr, &percpu_range, 1);
 
@@ -243,6 +278,9 @@ static int symbol_in_range(struct sym_entry *s, struct addr_range *ranges,
 		ar = &ranges[i];
 
 		if (s->addr >= ar->start && s->addr <= ar->end)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 1;
 	}
@@ -283,7 +321,12 @@ static int symbol_valid(struct sym_entry *s)
 	 * and inittext sections are discarded */
 	if (!all_symbols) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (symbol_valid_tr(s) == 0)
+=======
+		if (symbol_in_range(s, text_ranges,
+				    ARRAY_SIZE(text_ranges)) == 0)
+>>>>>>> v3.18
 =======
 		if (symbol_in_range(s, text_ranges,
 				    ARRAY_SIZE(text_ranges)) == 0)
@@ -297,15 +340,21 @@ static int symbol_valid(struct sym_entry *s)
 		 */
 		if ((s->addr == text_range_text->end &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 				strcmp((char *)s->sym + offset, text_range_text->etext)) ||
 		    (s->addr == text_range_inittext->end &&
 				strcmp((char *)s->sym + offset, text_range_inittext->etext)))
 =======
+=======
+>>>>>>> v3.18
 				strcmp((char *)s->sym + offset,
 				       text_range_text->end_sym)) ||
 		    (s->addr == text_range_inittext->end &&
 				strcmp((char *)s->sym + offset,
 				       text_range_inittext->end_sym)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 0;
 	}
@@ -380,12 +429,18 @@ static int expand_symbol(unsigned char *data, int len, char *result)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int symbol_absolute(struct sym_entry *s)
 {
 	return toupper(s->sym[0]) == 'A';
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void write_src(void)
 {
@@ -415,7 +470,11 @@ static void write_src(void)
 	output_label("kallsyms_addresses");
 	for (i = 0; i < table_cnt; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (toupper(table[i].sym[0]) != 'A') {
+=======
+		if (!symbol_absolute(&table[i])) {
+>>>>>>> v3.18
 =======
 		if (!symbol_absolute(&table[i])) {
 >>>>>>> v3.18
@@ -740,7 +799,10 @@ static void sort_symbols(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void make_percpus_absolute(void)
 {
 	unsigned int i;
@@ -750,6 +812,9 @@ static void make_percpus_absolute(void)
 			table[i].sym[0] = 'A';
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int main(int argc, char **argv)
 {
@@ -759,6 +824,11 @@ int main(int argc, char **argv)
 			if(strcmp(argv[i], "--all-symbols") == 0)
 				all_symbols = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			else if (strcmp(argv[i], "--absolute-percpu") == 0)
+				absolute_percpu = 1;
+>>>>>>> v3.18
 =======
 			else if (strcmp(argv[i], "--absolute-percpu") == 0)
 				absolute_percpu = 1;
@@ -780,6 +850,11 @@ int main(int argc, char **argv)
 
 	read_map(stdin);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (absolute_percpu)
+		make_percpus_absolute();
+>>>>>>> v3.18
 =======
 	if (absolute_percpu)
 		make_percpus_absolute();

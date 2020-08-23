@@ -181,7 +181,11 @@ int shpchp_unconfigure_device(struct slot *p_slot);
 void cleanup_slots(struct controller *ctrl);
 void shpchp_queue_pushbutton_work(struct work_struct *work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int shpc_init( struct controller *ctrl, struct pci_dev *pdev);
+=======
+int shpc_init(struct controller *ctrl, struct pci_dev *pdev);
+>>>>>>> v3.18
 =======
 int shpc_init(struct controller *ctrl, struct pci_dev *pdev);
 >>>>>>> v3.18
@@ -196,7 +200,11 @@ static inline const char *slot_name(struct slot *slot)
 static inline int get_hp_hw_control_from_firmware(struct pci_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 flags = OSC_SHPC_NATIVE_HP_CONTROL;
+=======
+	u32 flags = OSC_PCI_SHPC_NATIVE_HP_CONTROL;
+>>>>>>> v3.18
 =======
 	u32 flags = OSC_PCI_SHPC_NATIVE_HP_CONTROL;
 >>>>>>> v3.18
@@ -225,6 +233,7 @@ struct ctrl_reg {
 /* offsets to the controller registers based on the above structure layout */
 enum ctrl_offsets {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BASE_OFFSET 	 = offsetof(struct ctrl_reg, base_offset),
 	SLOT_AVAIL1 	 = offsetof(struct ctrl_reg, slot_avail1),
 	SLOT_AVAIL2	 = offsetof(struct ctrl_reg, slot_avail2),
@@ -233,6 +242,8 @@ enum ctrl_offsets {
 	MSI_CTRL	 = offsetof(struct ctrl_reg, msi_ctrl),
 	PROG_INTERFACE 	 = offsetof(struct ctrl_reg, prog_interface),
 =======
+=======
+>>>>>>> v3.18
 	BASE_OFFSET	 = offsetof(struct ctrl_reg, base_offset),
 	SLOT_AVAIL1	 = offsetof(struct ctrl_reg, slot_avail1),
 	SLOT_AVAIL2	 = offsetof(struct ctrl_reg, slot_avail2),
@@ -240,6 +251,9 @@ enum ctrl_offsets {
 	SEC_BUS_CONFIG	 = offsetof(struct ctrl_reg, sec_bus_config),
 	MSI_CTRL	 = offsetof(struct ctrl_reg, msi_ctrl),
 	PROG_INTERFACE	 = offsetof(struct ctrl_reg, prog_interface),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CMD		 = offsetof(struct ctrl_reg, cmd),
 	CMD_STATUS	 = offsetof(struct ctrl_reg, cmd_status),
@@ -314,7 +328,11 @@ static inline void amd_pogo_errata_restore_misc_reg(struct slot *p_slot)
 	}
 	/* restore MiscII register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword( p_slot->ctrl->pci_dev, PCIX_MISCII_OFFSET, &pcix_misc2_temp );
+=======
+	pci_read_config_dword(p_slot->ctrl->pci_dev, PCIX_MISCII_OFFSET, &pcix_misc2_temp );
+>>>>>>> v3.18
 =======
 	pci_read_config_dword(p_slot->ctrl->pci_dev, PCIX_MISCII_OFFSET, &pcix_misc2_temp );
 >>>>>>> v3.18

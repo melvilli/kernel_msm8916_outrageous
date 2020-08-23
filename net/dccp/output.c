@@ -139,7 +139,11 @@ static int dccp_transmit_skb(struct sock *sk, struct sk_buff *skb)
 		DCCP_INC_STATS(DCCP_MIB_OUTSEGS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = icsk->icsk_af_ops->queue_xmit(skb, &inet->cork.fl);
+=======
+		err = icsk->icsk_af_ops->queue_xmit(sk, skb, &inet->cork.fl);
+>>>>>>> v3.18
 =======
 		err = icsk->icsk_af_ops->queue_xmit(sk, skb, &inet->cork.fl);
 >>>>>>> v3.18
@@ -429,8 +433,13 @@ struct sk_buff *dccp_make_response(struct sock *sk, struct dst_entry *dst,
 	dh = dccp_zeroed_hdr(skb, dccp_header_size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dh->dccph_sport	= inet_rsk(req)->loc_port;
 	dh->dccph_dport	= inet_rsk(req)->rmt_port;
+=======
+	dh->dccph_sport	= htons(inet_rsk(req)->ir_num);
+	dh->dccph_dport	= inet_rsk(req)->ir_rmt_port;
+>>>>>>> v3.18
 =======
 	dh->dccph_sport	= htons(inet_rsk(req)->ir_num);
 	dh->dccph_dport	= inet_rsk(req)->ir_rmt_port;

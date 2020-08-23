@@ -10,11 +10,14 @@
  * License version 2.  This program is licensed "as is" without any
  * warranty of any kind, whether express or implied.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 /dts-v1/;
 /include/ "armada-370.dtsi"
 =======
+=======
+>>>>>>> v3.18
  *
  * Note: this Device Tree assumes that the bootloader has remapped the
  * internal registers to 0xf1000000 (instead of the default
@@ -30,6 +33,9 @@
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/gpio/gpio.h>
 #include "armada-370.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
@@ -47,10 +53,13 @@
 
 	soc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		internal-regs {
 			serial@12000 {
 				clock-frequency = <200000000>;
 =======
+=======
+>>>>>>> v3.18
 		ranges = <MBUS_ID(0xf0, 0x01) 0 0xf1000000 0x100000
 			  MBUS_ID(0x01, 0xe0) 0 0xfff00000 0x100000>;
 
@@ -84,6 +93,9 @@
 			};
 
 			serial@12000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "okay";
 			};
@@ -94,6 +106,11 @@
 
 			mdio {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				pinctrl-0 = <&mdio_pins>;
+				pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 				pinctrl-0 = <&mdio_pins>;
 				pinctrl-names = "default";
@@ -114,6 +131,11 @@
 			};
 			ethernet@74000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				pinctrl-0 = <&ge1_rgmii_pins>;
+				pinctrl-names = "default";
+>>>>>>> v3.18
 =======
 				pinctrl-0 = <&ge1_rgmii_pins>;
 				pinctrl-names = "default";
@@ -129,6 +151,10 @@
 				status = "okay";
 				/* No CD or WP GPIOs */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				broken-cd;
+>>>>>>> v3.18
 =======
 				broken-cd;
 >>>>>>> v3.18
@@ -149,9 +175,12 @@
 				button@1 {
 					label = "Software Button";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					linux,code = <116>;
 					gpios = <&gpio0 6 1>;
 =======
+=======
+>>>>>>> v3.18
 					linux,code = <KEY_POWER>;
 					gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
 				};
@@ -195,6 +224,9 @@
 				partition@1000000 {
 					label = "Filesystem";
 					reg = <0x1000000 0x3f000000>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 			};

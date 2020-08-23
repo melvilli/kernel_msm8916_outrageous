@@ -1,11 +1,17 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
 =======
+=======
+>>>>>>> v3.18
 /* arch/arm/mach-msm/clock.h
  *
  * Copyright (C) 2007 Google, Inc.
  * Copyright (c) 2007-2012, The Linux Foundation. All rights reserved.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This software is licensed under the terms of the GNU General Public
@@ -22,6 +28,7 @@
 #ifndef __ARCH_ARM_MACH_MSM_CLOCK_H
 #define __ARCH_ARM_MACH_MSM_CLOCK_H
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/clkdev.h>
 
@@ -79,6 +86,8 @@ static inline int clock_debug_register(struct clk_lookup *t, size_t s)
 static inline void clock_debug_print_enabled(void) { return; }
 #endif
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk-provider.h>
 #include <mach/clk.h>
 
@@ -101,6 +110,9 @@ static inline struct msm_clk *to_msm_clk(struct clk_hw *hw)
 {
 	return container_of(hw, struct msm_clk, hw);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

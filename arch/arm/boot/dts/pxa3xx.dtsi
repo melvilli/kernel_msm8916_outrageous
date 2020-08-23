@@ -29,7 +29,10 @@
 			marvell,intc-nr-irqs = <56>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		gpio: gpio@40e00000 {
 			compatible = "intel,pxa3xx-gpio";
@@ -41,6 +44,9 @@
 			interrupt-controller;
 			#interrupt-cells = <0x2>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

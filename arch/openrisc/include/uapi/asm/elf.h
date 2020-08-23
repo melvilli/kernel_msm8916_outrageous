@@ -56,9 +56,14 @@ typedef elf_greg_t elf_gregset_t[ELF_NGREG];
 typedef unsigned long elf_fpregset_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This should be moved to include/linux/elf.h */
 #define EM_OR32         0x8472
 #define EM_OPENRISC     92     /* OpenRISC 32-bit embedded processor */
+=======
+/* EM_OPENRISC is defined in linux/elf-em.h */
+#define EM_OR32         0x8472
+>>>>>>> v3.18
 =======
 /* EM_OPENRISC is defined in linux/elf-em.h */
 #define EM_OR32         0x8472

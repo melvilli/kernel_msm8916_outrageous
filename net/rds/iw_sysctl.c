@@ -56,7 +56,11 @@ static unsigned long rds_iw_sysctl_max_unsig_bytes_max = ~0UL;
 unsigned int rds_iw_sysctl_flow_control = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table rds_iw_sysctl_table[] = {
+=======
+static struct ctl_table rds_iw_sysctl_table[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table rds_iw_sysctl_table[] = {
 >>>>>>> v3.18
@@ -116,8 +120,12 @@ static struct ctl_table rds_iw_sysctl_table[] = {
 void rds_iw_sysctl_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rds_iw_sysctl_hdr)
 		unregister_net_sysctl_table(rds_iw_sysctl_hdr);
+=======
+	unregister_net_sysctl_table(rds_iw_sysctl_hdr);
+>>>>>>> v3.18
 =======
 	unregister_net_sysctl_table(rds_iw_sysctl_hdr);
 >>>>>>> v3.18

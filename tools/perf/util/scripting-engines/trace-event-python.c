@@ -28,6 +28,11 @@
 
 #include "../../perf.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../debug.h"
+#include "../callchain.h"
+>>>>>>> v3.18
 =======
 #include "../debug.h"
 #include "../callchain.h"
@@ -38,6 +43,10 @@
 #include "../thread.h"
 #include "../trace-event.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../machine.h"
+>>>>>>> v3.18
 =======
 #include "../machine.h"
 >>>>>>> v3.18
@@ -60,6 +69,10 @@ static int zero_flag_atom;
 static PyObject *main_module, *main_dict;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void handler_call_die(const char *handler_name) NORETURN;
+>>>>>>> v3.18
 =======
 static void handler_call_die(const char *handler_name) NORETURN;
 >>>>>>> v3.18
@@ -68,7 +81,10 @@ static void handler_call_die(const char *handler_name)
 	PyErr_Print();
 	Py_FatalError("problem in Python trace event handler");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	// Py_FatalError does not return
 	// but we have to make the compiler happy
 	abort();
@@ -112,6 +128,9 @@ static void try_call_object(const char *handler_name, PyObject *args)
 	handler = get_handler(handler_name);
 	if (handler)
 		call_object(handler, args, handler_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -123,7 +142,11 @@ static void define_value(enum print_arg_type field_type,
 {
 	const char *handler_name = "define_flag_value";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PyObject *handler, *t, *retval;
+=======
+	PyObject *t;
+>>>>>>> v3.18
 =======
 	PyObject *t;
 >>>>>>> v3.18
@@ -145,12 +168,16 @@ static void define_value(enum print_arg_type field_type,
 	PyTuple_SetItem(t, n++, PyString_FromString(field_str));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handler = PyDict_GetItemString(main_dict, handler_name);
 	if (handler && PyCallable_Check(handler)) {
 		retval = PyObject_CallObject(handler, t);
 		if (retval == NULL)
 			handler_call_die(handler_name);
 	}
+=======
+	try_call_object(handler_name, t);
+>>>>>>> v3.18
 =======
 	try_call_object(handler_name, t);
 >>>>>>> v3.18
@@ -177,7 +204,11 @@ static void define_field(enum print_arg_type field_type,
 {
 	const char *handler_name = "define_flag_field";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PyObject *handler, *t, *retval;
+=======
+	PyObject *t;
+>>>>>>> v3.18
 =======
 	PyObject *t;
 >>>>>>> v3.18
@@ -199,12 +230,16 @@ static void define_field(enum print_arg_type field_type,
 		PyTuple_SetItem(t, n++, PyString_FromString(delim));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handler = PyDict_GetItemString(main_dict, handler_name);
 	if (handler && PyCallable_Check(handler)) {
 		retval = PyObject_CallObject(handler, t);
 		if (retval == NULL)
 			handler_call_die(handler_name);
 	}
+=======
+	try_call_object(handler_name, t);
+>>>>>>> v3.18
 =======
 	try_call_object(handler_name, t);
 >>>>>>> v3.18
@@ -226,8 +261,12 @@ static void define_event_symbols(struct event_format *event,
 		break;
 	case PRINT_FIELD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cur_field_name)
 			free(cur_field_name);
+=======
+		free(cur_field_name);
+>>>>>>> v3.18
 =======
 		free(cur_field_name);
 >>>>>>> v3.18
@@ -267,6 +306,10 @@ static void define_event_symbols(struct event_format *event,
 	case PRINT_DYNAMIC_ARRAY:
 	case PRINT_FUNC:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case PRINT_BITMASK:
+>>>>>>> v3.18
 =======
 	case PRINT_BITMASK:
 >>>>>>> v3.18
@@ -304,6 +347,7 @@ static inline struct event_format *find_cache_event(struct perf_evsel *evsel)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void python_process_tracepoint(union perf_event *perf_event
 				      __maybe_unused,
 				 struct perf_sample *sample,
@@ -316,6 +360,8 @@ static void python_process_tracepoint(union perf_event *perf_event
 	struct format_field *field;
 	unsigned long long val;
 =======
+=======
+>>>>>>> v3.18
 static PyObject *get_field_numeric_entry(struct event_format *event,
 		struct format_field *field, void *data)
 {
@@ -443,6 +489,9 @@ static void python_process_tracepoint(struct perf_sample *sample,
 	PyObject *dict = NULL;
 	static char handler_name[256];
 	struct format_field *field;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long s, ns;
 	struct event_format *event;
@@ -452,8 +501,12 @@ static void python_process_tracepoint(struct perf_sample *sample,
 	void *data = sample->raw_data;
 	unsigned long long nsecs = sample->time;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct thread *thread = al->thread;
 	char *comm = thread->comm;
+=======
+	const char *comm = thread__comm_str(thread);
+>>>>>>> v3.18
 =======
 	const char *comm = thread__comm_str(thread);
 >>>>>>> v3.18
@@ -471,9 +524,13 @@ static void python_process_tracepoint(struct perf_sample *sample,
 	sprintf(handler_name, "%s__%s", event->system, event->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handler = PyDict_GetItemString(main_dict, handler_name);
 	if (handler && !PyCallable_Check(handler))
 		handler = NULL;
+=======
+	handler = get_handler(handler_name);
+>>>>>>> v3.18
 =======
 	handler = get_handler(handler_name);
 >>>>>>> v3.18
@@ -494,6 +551,12 @@ static void python_process_tracepoint(struct perf_sample *sample,
 	PyTuple_SetItem(t, n++, context);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* ip unwinding */
+	callchain = python_process_callchain(sample, evsel, al);
+
+>>>>>>> v3.18
 =======
 	/* ip unwinding */
 	callchain = python_process_callchain(sample, evsel, al);
@@ -506,6 +569,7 @@ static void python_process_tracepoint(struct perf_sample *sample,
 		PyTuple_SetItem(t, n++, PyInt_FromLong(pid));
 		PyTuple_SetItem(t, n++, PyString_FromString(comm));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		PyDict_SetItemString(dict, "common_cpu", PyInt_FromLong(cpu));
 		PyDict_SetItemString(dict, "common_s", PyInt_FromLong(s));
@@ -513,6 +577,8 @@ static void python_process_tracepoint(struct perf_sample *sample,
 		PyDict_SetItemString(dict, "common_pid", PyInt_FromLong(pid));
 		PyDict_SetItemString(dict, "common_comm", PyString_FromString(comm));
 =======
+=======
+>>>>>>> v3.18
 		PyTuple_SetItem(t, n++, callchain);
 	} else {
 		pydict_set_item_string_decref(dict, "common_cpu", PyInt_FromLong(cpu));
@@ -521,6 +587,9 @@ static void python_process_tracepoint(struct perf_sample *sample,
 		pydict_set_item_string_decref(dict, "common_pid", PyInt_FromLong(pid));
 		pydict_set_item_string_decref(dict, "common_comm", PyString_FromString(comm));
 		pydict_set_item_string_decref(dict, "common_callchain", callchain);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	for (field = event->format.fields; field; field = field->next) {
@@ -533,6 +602,7 @@ static void python_process_tracepoint(struct perf_sample *sample,
 				offset = field->offset;
 			obj = PyString_FromString((char *)data + offset);
 		} else { /* FIELD_IS_NUMERIC */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			val = read_size(event, data + field->offset,
 					field->size);
@@ -551,19 +621,28 @@ static void python_process_tracepoint(struct perf_sample *sample,
 =======
 			obj = get_field_numeric_entry(event, field, data);
 >>>>>>> v3.18
+=======
+			obj = get_field_numeric_entry(event, field, data);
+>>>>>>> v3.18
 		}
 		if (handler)
 			PyTuple_SetItem(t, n++, obj);
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			PyDict_SetItemString(dict, field->name, obj);
 
 	}
 =======
+=======
+>>>>>>> v3.18
 			pydict_set_item_string_decref(dict, field->name, obj);
 
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!handler)
 		PyTuple_SetItem(t, n++, dict);
@@ -572,6 +651,7 @@ static void python_process_tracepoint(struct perf_sample *sample,
 		Py_FatalError("error resizing Python tuple");
 
 	if (handler) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		retval = PyObject_CallObject(handler, t);
 		if (retval == NULL)
@@ -589,12 +669,18 @@ static void python_process_tracepoint(struct perf_sample *sample,
 	} else {
 		try_call_object("trace_unhandled", t);
 >>>>>>> v3.18
+=======
+		call_object(handler, t, handler_name);
+	} else {
+		try_call_object("trace_unhandled", t);
+>>>>>>> v3.18
 		Py_DECREF(dict);
 	}
 
 	Py_DECREF(t);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void python_process_general_event(union perf_event *perf_event
 					 __maybe_unused,
@@ -608,6 +694,8 @@ static void python_process_general_event(union perf_event *perf_event
 	unsigned n = 0;
 	struct thread *thread = al->thread;
 =======
+=======
+>>>>>>> v3.18
 static void python_process_general_event(struct perf_sample *sample,
 					 struct perf_evsel *evsel,
 					 struct thread *thread,
@@ -616,6 +704,9 @@ static void python_process_general_event(struct perf_sample *sample,
 	PyObject *handler, *t, *dict, *callchain, *dict_sample;
 	static char handler_name[64];
 	unsigned n = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -630,6 +721,7 @@ static void python_process_general_event(struct perf_sample *sample,
 	if (!dict)
 		Py_FatalError("couldn't create Python dictionary");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	snprintf(handler_name, sizeof(handler_name), "%s", "process_event");
 
@@ -656,6 +748,8 @@ static void python_process_general_event(struct perf_sample *sample,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	dict_sample = PyDict_New();
 	if (!dict_sample)
 		Py_FatalError("couldn't create Python dictionary");
@@ -701,15 +795,22 @@ static void python_process_general_event(struct perf_sample *sample,
 	callchain = python_process_callchain(sample, evsel, al);
 	pydict_set_item_string_decref(dict, "callchain", callchain);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	PyTuple_SetItem(t, n++, dict);
 	if (_PyTuple_Resize(&t, n) == -1)
 		Py_FatalError("error resizing Python tuple");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = PyObject_CallObject(handler, t);
 	if (retval == NULL)
 		handler_call_die(handler_name);
+=======
+	call_object(handler, t, handler_name);
+>>>>>>> v3.18
 =======
 	call_object(handler, t, handler_name);
 >>>>>>> v3.18
@@ -719,20 +820,27 @@ exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void python_process_event(union perf_event *perf_event,
 				 struct perf_sample *sample,
 				 struct perf_evsel *evsel,
 				 struct machine *machine,
 =======
+=======
+>>>>>>> v3.18
 static void python_process_event(union perf_event *event __maybe_unused,
 				 struct perf_sample *sample,
 				 struct perf_evsel *evsel,
 				 struct thread *thread,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 struct addr_location *al)
 {
 	switch (evsel->attr.type) {
 	case PERF_TYPE_TRACEPOINT:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		python_process_tracepoint(perf_event, sample, evsel,
 					  machine, al);
@@ -742,11 +850,16 @@ static void python_process_event(union perf_event *event __maybe_unused,
 		python_process_general_event(perf_event, sample, evsel,
 					     machine, al);
 =======
+=======
+>>>>>>> v3.18
 		python_process_tracepoint(sample, evsel, thread, al);
 		break;
 	/* Reserve for future process_hw/sw/raw APIs */
 	default:
 		python_process_general_event(sample, evsel, thread, al);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -754,9 +867,12 @@ static void python_process_event(union perf_event *event __maybe_unused,
 static int run_start_sub(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PyObject *handler, *retval;
 	int err = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	main_module = PyImport_AddModule("__main__");
@@ -765,6 +881,7 @@ static int run_start_sub(void)
 	Py_INCREF(main_module);
 
 	main_dict = PyModule_GetDict(main_module);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (main_dict == NULL) {
 		err = -1;
@@ -788,6 +905,8 @@ error:
 out:
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	if (main_dict == NULL)
 		goto error;
 	Py_INCREF(main_dict);
@@ -800,6 +919,9 @@ error:
 	Py_XDECREF(main_dict);
 	Py_XDECREF(main_module);
 	return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -855,18 +977,25 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int python_flush_script(void)
 {
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Stop trace script
  */
 static int python_stop_script(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	PyObject *handler, *retval;
 	int err = 0;
@@ -885,12 +1014,20 @@ out:
 	try_call_object("trace_end", NULL);
 
 >>>>>>> v3.18
+=======
+	try_call_object("trace_end", NULL);
+
+>>>>>>> v3.18
 	Py_XDECREF(main_dict);
 	Py_XDECREF(main_module);
 	Py_Finalize();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -955,6 +1092,10 @@ static int python_generate_script(struct pevent *pevent, const char *outfile)
 		fprintf(ofp, "common_pid, ");
 		fprintf(ofp, "common_comm,\n\t");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		fprintf(ofp, "common_callchain, ");
+>>>>>>> v3.18
 =======
 		fprintf(ofp, "common_callchain, ");
 >>>>>>> v3.18
@@ -993,6 +1134,10 @@ static int python_generate_script(struct pevent *pevent, const char *outfile)
 			if (f->flags & FIELD_IS_STRING ||
 			    f->flags & FIELD_IS_FLAG ||
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			    f->flags & FIELD_IS_ARRAY ||
+>>>>>>> v3.18
 =======
 			    f->flags & FIELD_IS_ARRAY ||
 >>>>>>> v3.18
@@ -1005,7 +1150,11 @@ static int python_generate_script(struct pevent *pevent, const char *outfile)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fprintf(ofp, "\\n\" %% \\\n\t\t(");
+=======
+		fprintf(ofp, "\" %% \\\n\t\t(");
+>>>>>>> v3.18
 =======
 		fprintf(ofp, "\" %% \\\n\t\t(");
 >>>>>>> v3.18
@@ -1045,8 +1194,11 @@ static int python_generate_script(struct pevent *pevent, const char *outfile)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fprintf(ofp, "),\n\n");
 =======
+=======
+>>>>>>> v3.18
 		fprintf(ofp, ")\n\n");
 
 		fprintf(ofp, "\t\tfor node in common_callchain:");
@@ -1056,6 +1208,9 @@ static int python_generate_script(struct pevent *pevent, const char *outfile)
 		fprintf(ofp, "\n\t\t\t\tprint \"\t[%%x]\" %% (node['ip'])\n\n");
 		fprintf(ofp, "\t\tprint \"\\n\"\n\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1081,6 +1236,10 @@ struct scripting_ops python_scripting_ops = {
 	.name = "Python",
 	.start_script = python_start_script,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flush_script = python_flush_script,
+>>>>>>> v3.18
 =======
 	.flush_script = python_flush_script,
 >>>>>>> v3.18

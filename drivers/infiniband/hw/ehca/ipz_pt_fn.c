@@ -223,7 +223,12 @@ int ipz_queue_ctor(struct ehca_pd *pd, struct ipz_queue *queue,
 
 	/* allocate queue page pointers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	queue->queue_pages = kzalloc(nr_of_pages * sizeof(void *), GFP_KERNEL);
+=======
+	queue->queue_pages = kzalloc(nr_of_pages * sizeof(void *),
+				     GFP_KERNEL | __GFP_NOWARN);
+>>>>>>> v3.18
 =======
 	queue->queue_pages = kzalloc(nr_of_pages * sizeof(void *),
 				     GFP_KERNEL | __GFP_NOWARN);

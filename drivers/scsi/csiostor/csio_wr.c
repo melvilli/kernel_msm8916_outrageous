@@ -233,7 +233,11 @@ csio_wr_alloc_q(struct csio_hw *hw, uint32_t qsize, uint32_t wrsize,
 	q = wrm->q_arr[free_idx];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->vstart = pci_alloc_consistent(hw->pdev, qsz, &q->pstart);
+=======
+	q->vstart = pci_zalloc_consistent(hw->pdev, qsz, &q->pstart);
+>>>>>>> v3.18
 =======
 	q->vstart = pci_zalloc_consistent(hw->pdev, qsz, &q->pstart);
 >>>>>>> v3.18
@@ -245,12 +249,15 @@ csio_wr_alloc_q(struct csio_hw *hw, uint32_t qsize, uint32_t wrsize,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * We need to zero out the contents, importantly for ingress,
 	 * since we start with a generatiom bit of 1 for ingress.
 	 */
 	memset(q->vstart, 0, qsz);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	q->type		= type;

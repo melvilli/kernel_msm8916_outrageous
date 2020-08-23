@@ -236,7 +236,11 @@ static void recover_arm(struct av7110 *av7110)
 	restart_feeds(av7110);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_INPUT_EVDEV)
+=======
+#if IS_ENABLED(CONFIG_DVB_AV7110_IR)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_DVB_AV7110_IR)
 >>>>>>> v3.18
@@ -273,7 +277,11 @@ static int arm_thread(void *data)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_INPUT_EVDEV)
+=======
+#if IS_ENABLED(CONFIG_DVB_AV7110_IR)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_DVB_AV7110_IR)
 >>>>>>> v3.18
@@ -2734,7 +2742,11 @@ static int av7110_attach(struct saa7146_dev* dev,
 	mutex_init(&av7110->ioctl_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_INPUT_EVDEV)
+=======
+#if IS_ENABLED(CONFIG_DVB_AV7110_IR)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_DVB_AV7110_IR)
 >>>>>>> v3.18
@@ -2781,7 +2793,11 @@ static int av7110_detach(struct saa7146_dev* saa)
 	dprintk(4, "%p\n", av7110);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_INPUT_EVDEV)
+=======
+#if IS_ENABLED(CONFIG_DVB_AV7110_IR)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_DVB_AV7110_IR)
 >>>>>>> v3.18

@@ -3,10 +3,13 @@ menu "Kernel hacking"
 source "lib/Kconfig.debug"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DEBUG_STACKOVERFLOW
 	bool "Check for stack overflows"
 	depends on DEBUG_KERNEL
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config DEBUG_DECOMPRESS_KERNEL

@@ -14,7 +14,11 @@
 #include <linux/stat.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -97,7 +101,11 @@ static void coda_flag_children(struct dentry *parent, int flag)
 
 	spin_lock(&parent->d_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(de, &parent->d_subdirs, d_child) {
+=======
+	list_for_each_entry(de, &parent->d_subdirs, d_u.d_child) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(de, &parent->d_subdirs, d_u.d_child) {
 >>>>>>> v3.18

@@ -2,7 +2,11 @@
  * ADF4350/ADF4351 SPI Wideband Synthesizer driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2012 Analog Devices Inc.
+=======
+ * Copyright 2012-2013 Analog Devices Inc.
+>>>>>>> v3.18
 =======
  * Copyright 2012-2013 Analog Devices Inc.
 >>>>>>> v3.18
@@ -22,6 +26,12 @@
 #include <linux/gpio.h>
 #include <asm/div64.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+#include <linux/of.h>
+#include <linux/of_gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 #include <linux/of.h>
@@ -44,6 +54,10 @@ struct adf4350_state {
 	struct regulator		*reg;
 	struct adf4350_platform_data	*pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk			*clk;
+>>>>>>> v3.18
 =======
 	struct clk			*clk;
 >>>>>>> v3.18
@@ -58,7 +72,11 @@ struct adf4350_state {
 	unsigned long			regs[6];
 	unsigned long			regs_hw[6];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	unsigned long long		freq_req;
+>>>>>>> v3.18
 =======
 	unsigned long long		freq_req;
 >>>>>>> v3.18
@@ -71,7 +89,10 @@ struct adf4350_state {
 
 static struct adf4350_platform_data default_pdata = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.clkin = 122880000,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.channel_spacing = 10000,
@@ -257,6 +278,10 @@ static int adf4350_set_freq(struct adf4350_state *st, unsigned long long freq)
 
 	st->regs[ADF4350_REG5] = ADF4350_REG5_LD_PIN_MODE_DIGITAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	st->freq_req = freq;
+>>>>>>> v3.18
 =======
 	st->freq_req = freq;
 >>>>>>> v3.18
@@ -272,6 +297,10 @@ static ssize_t adf4350_write(struct iio_dev *indio_dev,
 	struct adf4350_state *st = iio_priv(indio_dev);
 	unsigned long long readin;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long tmp;
+>>>>>>> v3.18
 =======
 	unsigned long tmp;
 >>>>>>> v3.18
@@ -288,11 +317,14 @@ static ssize_t adf4350_write(struct iio_dev *indio_dev,
 		break;
 	case ADF4350_FREQ_REFIN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (readin > ADF4350_MAX_FREQ_REFIN)
 			ret = -EINVAL;
 		else
 			st->clkin = readin;
 =======
+=======
+>>>>>>> v3.18
 		if (readin > ADF4350_MAX_FREQ_REFIN) {
 			ret = -EINVAL;
 			break;
@@ -310,6 +342,9 @@ static ssize_t adf4350_write(struct iio_dev *indio_dev,
 		}
 		st->clkin = readin;
 		ret = adf4350_set_freq(st, st->freq_req);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case ADF4350_FREQ_RESOLUTION:
@@ -358,6 +393,12 @@ static ssize_t adf4350_read(struct iio_dev *indio_dev,
 		break;
 	case ADF4350_FREQ_REFIN:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (st->clk)
+			st->clkin = clk_get_rate(st->clk);
+
+>>>>>>> v3.18
 =======
 		if (st->clk)
 			st->clkin = clk_get_rate(st->clk);
@@ -374,6 +415,10 @@ static ssize_t adf4350_read(struct iio_dev *indio_dev,
 	default:
 		ret = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		val = 0;
+>>>>>>> v3.18
 =======
 		val = 0;
 >>>>>>> v3.18
@@ -389,6 +434,10 @@ static ssize_t adf4350_read(struct iio_dev *indio_dev,
 	.write = adf4350_write, \
 	.private = _ident, \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.shared = IIO_SEPARATE, \
+>>>>>>> v3.18
 =======
 	.shared = IIO_SEPARATE, \
 >>>>>>> v3.18
@@ -419,6 +468,7 @@ static const struct iio_info adf4350_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adf4350_probe(struct spi_device *spi)
 {
 	struct adf4350_platform_data *pdata = spi->dev.platform_data;
@@ -444,6 +494,8 @@ static int adf4350_probe(struct spi_device *spi)
 		if (ret)
 			goto error_put_reg;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static struct adf4350_platform_data *adf4350_parse_dt(struct device *dev)
 {
@@ -604,6 +656,9 @@ static int adf4350_probe(struct spi_device *spi)
 		ret = regulator_enable(st->reg);
 		if (ret)
 			goto error_disable_clk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -622,14 +677,20 @@ static int adf4350_probe(struct spi_device *spi)
 
 	st->chspc = pdata->channel_spacing;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st->clkin = pdata->clkin;
 =======
+=======
+>>>>>>> v3.18
 	if (clk) {
 		st->clk = clk;
 		st->clkin = clk_get_rate(clk);
 	} else {
 		st->clkin = pdata->clkin;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	st->min_out_freq = spi_get_device_id(spi)->driver_data == 4351 ?
@@ -639,7 +700,12 @@ static int adf4350_probe(struct spi_device *spi)
 
 	if (gpio_is_valid(pdata->gpio_lock_detect)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = gpio_request(pdata->gpio_lock_detect, indio_dev->name);
+=======
+		ret = devm_gpio_request(&spi->dev, pdata->gpio_lock_detect,
+					indio_dev->name);
+>>>>>>> v3.18
 =======
 		ret = devm_gpio_request(&spi->dev, pdata->gpio_lock_detect,
 					indio_dev->name);
@@ -656,7 +722,11 @@ static int adf4350_probe(struct spi_device *spi)
 		ret = adf4350_set_freq(st, pdata->power_up_frequency);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto error_free_gpio;
+=======
+			goto error_disable_reg;
+>>>>>>> v3.18
 =======
 			goto error_disable_reg;
 >>>>>>> v3.18
@@ -664,6 +734,7 @@ static int adf4350_probe(struct spi_device *spi)
 
 	ret = iio_device_register(indio_dev);
 	if (ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto error_free_gpio;
 
@@ -682,6 +753,8 @@ error_put_reg:
 
 	iio_device_free(indio_dev);
 =======
+=======
+>>>>>>> v3.18
 		goto error_disable_reg;
 
 	return 0;
@@ -692,6 +765,9 @@ error_disable_reg:
 error_disable_clk:
 	if (clk)
 		clk_disable_unprepare(clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -709,6 +785,7 @@ static int adf4350_remove(struct spi_device *spi)
 	iio_device_unregister(indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR(reg)) {
 		regulator_disable(reg);
 		regulator_put(reg);
@@ -720,6 +797,8 @@ static int adf4350_remove(struct spi_device *spi)
 	iio_device_free(indio_dev);
 
 =======
+=======
+>>>>>>> v3.18
 	if (st->clk)
 		clk_disable_unprepare(st->clk);
 
@@ -727,6 +806,9 @@ static int adf4350_remove(struct spi_device *spi)
 		regulator_disable(reg);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -749,7 +831,11 @@ static struct spi_driver adf4350_driver = {
 module_spi_driver(adf4350_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Michael Hennerich <hennerich@blackfin.uclinux.org>");
+=======
+MODULE_AUTHOR("Michael Hennerich <michael.hennerich@analog.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Michael Hennerich <michael.hennerich@analog.com>");
 >>>>>>> v3.18

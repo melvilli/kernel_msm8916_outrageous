@@ -11,6 +11,10 @@
 #define __LINUX_MUTEX_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/current.h>
+>>>>>>> v3.18
 =======
 #include <asm/current.h>
 >>>>>>> v3.18
@@ -19,8 +23,14 @@
 #include <linux/linkage.h>
 #include <linux/lockdep.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/atomic.h>
+=======
+#include <linux/atomic.h>
+#include <asm/processor.h>
+#include <linux/osq_lock.h>
+>>>>>>> v3.18
 =======
 #include <linux/atomic.h>
 #include <asm/processor.h>
@@ -61,17 +71,23 @@ struct mutex {
 	spinlock_t		wait_lock;
 	struct list_head	wait_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_DEBUG_MUTEXES) || defined(CONFIG_SMP)
 	struct task_struct	*owner;
 #endif
 #ifdef CONFIG_MUTEX_SPIN_ON_OWNER
 	void			*spin_mlock;	/* Spinner MCS lock */
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_DEBUG_MUTEXES) || defined(CONFIG_MUTEX_SPIN_ON_OWNER)
 	struct task_struct	*owner;
 #endif
 #ifdef CONFIG_MUTEX_SPIN_ON_OWNER
 	struct optimistic_spin_queue osq; /* Spinner MCS lock */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #ifdef CONFIG_DEBUG_MUTEXES
@@ -149,8 +165,13 @@ static inline int mutex_is_locked(struct mutex *lock)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * See kernel/mutex.c for detailed documentation of these APIs.
  * Also see Documentation/mutex-design.txt.
+=======
+ * See kernel/locking/mutex.c for detailed documentation of these APIs.
+ * Also see Documentation/locking/mutex-design.txt.
+>>>>>>> v3.18
 =======
  * See kernel/locking/mutex.c for detailed documentation of these APIs.
  * Also see Documentation/locking/mutex-design.txt.
@@ -160,6 +181,10 @@ static inline int mutex_is_locked(struct mutex *lock)
 extern void mutex_lock_nested(struct mutex *lock, unsigned int subclass);
 extern void _mutex_lock_nest_lock(struct mutex *lock, struct lockdep_map *nest_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -175,7 +200,11 @@ extern int __must_check mutex_lock_killable_nested(struct mutex *lock,
 #define mutex_lock_nest_lock(lock, nest_lock)				\
 do {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	typecheck(struct lockdep_map *, &(nest_lock)->dep_map);		\
+=======
+	typecheck(struct lockdep_map *, &(nest_lock)->dep_map);	\
+>>>>>>> v3.18
 =======
 	typecheck(struct lockdep_map *, &(nest_lock)->dep_map);	\
 >>>>>>> v3.18
@@ -202,6 +231,7 @@ extern int __must_check mutex_lock_killable(struct mutex *lock);
 extern int mutex_trylock(struct mutex *lock);
 extern void mutex_unlock(struct mutex *lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int atomic_dec_and_mutex_lock(atomic_t *cnt, struct mutex *lock);
 
 #ifndef CONFIG_HAVE_ARCH_MUTEX_CPU_RELAX
@@ -210,8 +240,13 @@ extern int atomic_dec_and_mutex_lock(atomic_t *cnt, struct mutex *lock);
 
 #endif
 =======
+=======
+>>>>>>> v3.18
 
 extern int atomic_dec_and_mutex_lock(atomic_t *cnt, struct mutex *lock);
 
 #endif /* __LINUX_MUTEX_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -11,7 +11,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef DEBUG
+=======
+#define DEBUG
+>>>>>>> v3.18
 =======
 #define DEBUG
 >>>>>>> v3.18
@@ -41,6 +45,10 @@
 #include <linux/memblock.h>
 #include <linux/hugetlb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/memory.h>
+>>>>>>> v3.18
 =======
 #include <linux/memory.h>
 >>>>>>> v3.18
@@ -75,8 +83,12 @@
 #include <asm/kvm_ppc.h>
 #include <asm/hugetlb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "setup.h"
+=======
+#include <asm/epapr_hcalls.h>
+>>>>>>> v3.18
 =======
 #include <asm/epapr_hcalls.h>
 >>>>>>> v3.18
@@ -88,7 +100,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int boot_cpuid = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int spinning_secondaries;
@@ -114,7 +129,10 @@ int icache_bsize;
 int ucache_bsize;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_PPC_BOOK3E) && defined(CONFIG_SMP)
 static void setup_tlb_core_data(void)
 {
@@ -147,6 +165,9 @@ static void setup_tlb_core_data(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SMP
 
@@ -169,6 +190,7 @@ static void check_smt_enabled(void)
 			smt_enabled_at_boot = 0;
 		else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			long smt;
 			int rc;
 
@@ -177,6 +199,8 @@ static void check_smt_enabled(void)
 				smt_enabled_at_boot =
 					min(threads_per_core, (int)smt);
 =======
+=======
+>>>>>>> v3.18
 			int smt;
 			int rc;
 
@@ -184,6 +208,9 @@ static void check_smt_enabled(void)
 			if (!rc)
 				smt_enabled_at_boot =
 					min(threads_per_core, smt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else {
@@ -203,6 +230,7 @@ static void check_smt_enabled(void)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * Fixup HFSCR:TM based on CPU features. The bit is set by our
@@ -212,6 +240,8 @@ static void check_smt_enabled(void)
 	 */
 	if (cpu_has_feature(CPU_FTR_HVMODE) && !cpu_has_feature(CPU_FTR_TM_COMP))
 		mtspr(SPRN_HFSCR, mfspr(SPRN_HFSCR) & ~HFSCR_TM);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -238,7 +268,10 @@ static void fixup_boot_paca(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void cpu_ready_for_interrupts(void)
 {
 	/* Set IR and DR in PACA MSR */
@@ -256,6 +289,9 @@ static void cpu_ready_for_interrupts(void)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Early initialization entry point. This is called by head.S
@@ -308,6 +344,11 @@ void __init early_setup(unsigned long dt_ptr)
 	early_init_devtree(__va(dt_ptr));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	epapr_paravirt_early_init();
+
+>>>>>>> v3.18
 =======
 	epapr_paravirt_early_init();
 
@@ -328,7 +369,10 @@ void __init early_setup(unsigned long dt_ptr)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * At this point, we can let interrupts switch to virtual mode
 	 * (the MMU has been setup), so adjust the MSR in the PACA to
 	 * have IR and DR set and enable AIL if it exists
@@ -339,6 +383,9 @@ void __init early_setup(unsigned long dt_ptr)
 	kvm_cma_reserve();
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Reserve any gigantic pages requested on the command line.
 	 * memblock needs to have been initialized by the time this is
@@ -348,7 +395,10 @@ void __init early_setup(unsigned long dt_ptr)
 
 	DBG(" <- early_setup()\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PPC_EARLY_DEBUG_BOOTX
 	/*
@@ -361,6 +411,9 @@ void __init early_setup(unsigned long dt_ptr)
 	 */
 	btext_map();
 #endif /* CONFIG_PPC_EARLY_DEBUG_BOOTX */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -373,7 +426,10 @@ void early_setup_secondary(void)
 	/* Initialize the hash table or TLB handling */
 	early_init_mmu_secondary();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * At this point, we can let interrupts switch to virtual mode
@@ -381,6 +437,9 @@ void early_setup_secondary(void)
 	 * have IR and DR set.
 	 */
 	cpu_ready_for_interrupts();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -403,7 +462,11 @@ void smp_release_cpus(void)
 	ptr  = (unsigned long *)((unsigned long)&__secondary_hold_spinloop
 			- PHYSICAL_START);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ptr = __pa(generic_secondary_smp_init);
+=======
+	*ptr = ppc_function_entry(generic_secondary_smp_init);
+>>>>>>> v3.18
 =======
 	*ptr = ppc_function_entry(generic_secondary_smp_init);
 >>>>>>> v3.18
@@ -445,7 +508,11 @@ static void __init initialize_cache_info(void)
 		 */
 		if (num_cpus == 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			const u32 *sizep, *lsizep;
+=======
+			const __be32 *sizep, *lsizep;
+>>>>>>> v3.18
 =======
 			const __be32 *sizep, *lsizep;
 >>>>>>> v3.18
@@ -456,7 +523,11 @@ static void __init initialize_cache_info(void)
 			sizep = of_get_property(np, "d-cache-size", NULL);
 			if (sizep != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				size = *sizep;
+=======
+				size = be32_to_cpu(*sizep);
+>>>>>>> v3.18
 =======
 				size = be32_to_cpu(*sizep);
 >>>>>>> v3.18
@@ -469,8 +540,13 @@ static void __init initialize_cache_info(void)
 							 NULL);
 			if (lsizep != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				lsize = *lsizep;
 			if (sizep == 0 || lsizep == 0)
+=======
+				lsize = be32_to_cpu(*lsizep);
+			if (sizep == NULL || lsizep == NULL)
+>>>>>>> v3.18
 =======
 				lsize = be32_to_cpu(*lsizep);
 			if (sizep == NULL || lsizep == NULL)
@@ -488,7 +564,11 @@ static void __init initialize_cache_info(void)
 			sizep = of_get_property(np, "i-cache-size", NULL);
 			if (sizep != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				size = *sizep;
+=======
+				size = be32_to_cpu(*sizep);
+>>>>>>> v3.18
 =======
 				size = be32_to_cpu(*sizep);
 >>>>>>> v3.18
@@ -500,8 +580,13 @@ static void __init initialize_cache_info(void)
 							 NULL);
 			if (lsizep != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				lsize = *lsizep;
 			if (sizep == 0 || lsizep == 0)
+=======
+				lsize = be32_to_cpu(*lsizep);
+			if (sizep == NULL || lsizep == NULL)
+>>>>>>> v3.18
 =======
 				lsize = be32_to_cpu(*lsizep);
 			if (sizep == NULL || lsizep == NULL)
@@ -592,9 +677,12 @@ void __init setup_system(void)
 	smp_setup_cpu_maps();
 	check_smt_enabled();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_SMP
 =======
+=======
+>>>>>>> v3.18
 	setup_tlb_core_data();
 
 	/*
@@ -602,6 +690,9 @@ void __init setup_system(void)
 	 * so smp_release_cpus() does nothing for them
 	 */
 #if defined(CONFIG_SMP) && !defined(CONFIG_PPC_FSL_BOOK3E)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Release secondary cpus out of their spinloops at 0x60 now that
 	 * we can map physical -> logical CPU ids
@@ -609,6 +700,7 @@ void __init setup_system(void)
 	smp_release_cpus();
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	printk("Starting Linux PPC64 %s\n", init_utsname()->version);
 
@@ -631,6 +723,8 @@ void __init setup_system(void)
 		       (unsigned long long)PHYSICAL_START);
 	printk("-----------------------------------------------------\n");
 =======
+=======
+>>>>>>> v3.18
 	pr_info("Starting Linux PPC64 %s\n", init_utsname()->version);
 
 	pr_info("-----------------------------------------------------\n");
@@ -661,6 +755,9 @@ void __init setup_system(void)
 		pr_info("physical_start    = 0x%llx\n",
 		       (unsigned long long)PHYSICAL_START);
 	pr_info("-----------------------------------------------------\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	DBG(" <- setup_system()\n");
@@ -710,6 +807,7 @@ static void __init irqstack_early_init(void)
 static void __init exc_lvl_early_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern unsigned int interrupt_base_book3e;
 	extern unsigned int exc_debug_debug_book3e;
 
@@ -728,6 +826,8 @@ static void __init exc_lvl_early_init(void)
 		patch_branch(&interrupt_base_book3e + (0x040 / 4) + 1,
 			     (unsigned long)&exc_debug_debug_book3e, 0);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int i;
 	unsigned long sp;
 
@@ -747,6 +847,9 @@ static void __init exc_lvl_early_init(void)
 
 	if (cpu_has_feature(CPU_FTR_DEBUG_LVL_EXC))
 		patch_exception(0x040, exc_debug_debug_book3e);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #else
@@ -756,7 +859,12 @@ static void __init exc_lvl_early_init(void)
 /*
  * Stack space used when we detect a bad kernel stack pointer, and
 <<<<<<< HEAD
+<<<<<<< HEAD
  * early in SMP boots before relocation is enabled.
+=======
+ * early in SMP boots before relocation is enabled. Exclusive emergency
+ * stack for machine checks.
+>>>>>>> v3.18
 =======
  * early in SMP boots before relocation is enabled. Exclusive emergency
  * stack for machine checks.
@@ -784,7 +892,10 @@ static void __init emergency_stack_init(void)
 		sp += THREAD_SIZE;
 		paca[i].emergency_sp = __va(sp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PPC_BOOK3S_64
 		/* emergency stack for machine check exception handling. */
@@ -792,6 +903,9 @@ static void __init emergency_stack_init(void)
 		sp += THREAD_SIZE;
 		paca[i].mc_emergency_sp = __va(sp);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -805,7 +919,11 @@ void __init setup_arch(char **cmdline_p)
 	ppc64_boot_msg(0x12, "Setup Arch");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*cmdline_p = cmd_line;
+=======
+	*cmdline_p = boot_command_line;
+>>>>>>> v3.18
 =======
 	*cmdline_p = boot_command_line;
 >>>>>>> v3.18
@@ -819,9 +937,12 @@ void __init setup_arch(char **cmdline_p)
 	icache_bsize = ppc64_caches.iline_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* reboot on panic */
 	panic_timeout = 180;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ppc_md.panic)
@@ -839,9 +960,12 @@ void __init setup_arch(char **cmdline_p)
 	emergency_stack_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_STD_MMU_64
 	stabs_alloc();
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* set up the bootmem stuff with available memory */
@@ -861,8 +985,11 @@ void __init setup_arch(char **cmdline_p)
 	mmu_context_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kvm_linear_init();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Interrupt code needs to be 64K-aligned */
@@ -955,6 +1082,7 @@ void __init setup_per_cpu_areas(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_PPC_INDIRECT_IO
 struct ppc_pci_io ppc_pci_io;
@@ -962,6 +1090,8 @@ EXPORT_SYMBOL(ppc_pci_io);
 #endif /* CONFIG_PPC_INDIRECT_IO */
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MEMORY_HOTPLUG_SPARSE
 unsigned long memory_block_size_bytes(void)
 {
@@ -976,4 +1106,7 @@ unsigned long memory_block_size_bytes(void)
 struct ppc_pci_io ppc_pci_io;
 EXPORT_SYMBOL(ppc_pci_io);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

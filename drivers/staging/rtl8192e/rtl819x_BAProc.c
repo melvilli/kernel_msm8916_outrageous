@@ -110,6 +110,7 @@ static struct sk_buff *rtllib_ADDBA(struct rtllib_device *ieee, u8 *Dst,
 
 	tag = (u8 *)skb_put(skb, 9);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*tag ++= ACT_CAT_BA;
 	*tag ++= type;
 	*tag ++= pBA->DialogToken;
@@ -125,6 +126,8 @@ static struct sk_buff *rtllib_ADDBA(struct rtllib_device *ieee, u8 *Dst,
 	tag += 2;
 	tmp = cpu_to_le16(pBA->BaTimeoutValue);
 =======
+=======
+>>>>>>> v3.18
 	*tag++ = ACT_CAT_BA;
 	*tag++ = type;
 	*tag++ = pBA->DialogToken;
@@ -139,6 +142,9 @@ static struct sk_buff *rtllib_ADDBA(struct rtllib_device *ieee, u8 *Dst,
 	memcpy(tag, (u8 *)&tmp, 2);
 	tag += 2;
 	tmp = pBA->BaTimeoutValue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memcpy(tag, (u8 *)&tmp, 2);
 	tag += 2;
@@ -193,6 +199,7 @@ static struct sk_buff *rtllib_DELBA(struct rtllib_device *ieee, u8 *dst,
 	tag = (u8 *)skb_put(skb, 6);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*tag ++= ACT_CAT_BA;
 	*tag ++= ACT_DELBA;
 
@@ -201,6 +208,8 @@ static struct sk_buff *rtllib_DELBA(struct rtllib_device *ieee, u8 *dst,
 	tag += 2;
 	tmp = cpu_to_le16(ReasonCode);
 =======
+=======
+>>>>>>> v3.18
 	*tag++ = ACT_CAT_BA;
 	*tag++ = ACT_DELBA;
 
@@ -208,6 +217,9 @@ static struct sk_buff *rtllib_DELBA(struct rtllib_device *ieee, u8 *dst,
 	memcpy(tag, (u8 *)&tmp, 2);
 	tag += 2;
 	tmp = ReasonCode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memcpy(tag, (u8 *)&tmp, 2);
 	tag += 2;
@@ -224,6 +236,10 @@ static void rtllib_send_ADDBAReq(struct rtllib_device *ieee, u8 *dst,
 {
 	struct sk_buff *skb = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -237,7 +253,10 @@ static void rtllib_send_ADDBAReq(struct rtllib_device *ieee, u8 *dst,
 			     " %s()\n", __func__);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -247,6 +266,10 @@ static void rtllib_send_ADDBARsp(struct rtllib_device *ieee, u8 *dst,
 {
 	struct sk_buff *skb = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -257,7 +280,10 @@ static void rtllib_send_ADDBARsp(struct rtllib_device *ieee, u8 *dst,
 		RTLLIB_DEBUG(RTLLIB_DL_ERR, "alloc skb error in function"
 			     " %s()\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -268,6 +294,10 @@ static void rtllib_send_DELBA(struct rtllib_device *ieee, u8 *dst,
 {
 	struct sk_buff *skb = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -276,9 +306,14 @@ static void rtllib_send_DELBA(struct rtllib_device *ieee, u8 *dst,
 		softmac_mgmt_xmit(skb, ieee);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RTLLIB_DEBUG(RTLLIB_DL_ERR, "alloc skb error in func"
 			     "tion %s()\n", __func__);
 	return ;
+=======
+		RTLLIB_DEBUG(RTLLIB_DL_ERR, "alloc skb error in function"
+			     " %s()\n", __func__);
+>>>>>>> v3.18
 =======
 		RTLLIB_DEBUG(RTLLIB_DL_ERR, "alloc skb error in function"
 			     " %s()\n", __func__);
@@ -363,6 +398,10 @@ OnADDBAReq_Fail:
 	{
 		struct ba_record BA;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -427,7 +466,11 @@ int rtllib_rx_ADDBARsp(struct rtllib_device *ieee, struct sk_buff *skb)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((pAdmittedBA->bValid == true)) {
+=======
+	if (pAdmittedBA->bValid == true) {
+>>>>>>> v3.18
 =======
 	if (pAdmittedBA->bValid == true) {
 >>>>>>> v3.18
@@ -475,6 +518,10 @@ OnADDBARsp_Reject:
 	{
 		struct ba_record BA;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -624,7 +671,10 @@ void RxBaInactTimeout(unsigned long data)
 			  &pRxTs->RxAdmittedBARecord, RX_DIR,
 			  DELBA_REASON_TIMEOUT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

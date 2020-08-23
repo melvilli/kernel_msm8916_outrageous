@@ -33,7 +33,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/errno.h>
@@ -255,8 +258,13 @@ static void mlx4_free_mtt_range(struct mlx4_dev *dev, u32 offset, int order)
 						       MLX4_CMD_WRAPPED);
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_warn(dev, "Failed to free mtt range at:"
 				  "%d order:%d\n", offset, order);
+=======
+			mlx4_warn(dev, "Failed to free mtt range at:%d order:%d\n",
+				  offset, order);
+>>>>>>> v3.18
 =======
 			mlx4_warn(dev, "Failed to free mtt range at:%d order:%d\n",
 				  offset, order);
@@ -308,7 +316,10 @@ static int mlx4_HW2SW_MPT(struct mlx4_dev *dev, struct mlx4_cmd_mailbox *mailbox
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Must protect against concurrent access */
 int mlx4_mr_hw_get_mpt(struct mlx4_dev *dev, struct mlx4_mr *mmr,
 		       struct mlx4_mpt_entry ***mpt_entry)
@@ -433,6 +444,9 @@ int mlx4_mr_hw_change_access(struct mlx4_dev *dev,
 }
 EXPORT_SYMBOL_GPL(mlx4_mr_hw_change_access);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mlx4_mr_alloc_reserved(struct mlx4_dev *dev, u32 mridx, u32 pd,
 			   u64 iova, u64 size, u32 access, int npages,
@@ -482,7 +496,11 @@ void __mlx4_mpt_release(struct mlx4_dev *dev, u32 index)
 	struct mlx4_priv *priv = mlx4_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_bitmap_free(&priv->mr_table.mpt_bitmap, index);
+=======
+	mlx4_bitmap_free(&priv->mr_table.mpt_bitmap, index, MLX4_NO_RR);
+>>>>>>> v3.18
 =======
 	mlx4_bitmap_free(&priv->mr_table.mpt_bitmap, index, MLX4_NO_RR);
 >>>>>>> v3.18
@@ -505,6 +523,7 @@ static void mlx4_mpt_release(struct mlx4_dev *dev, u32 index)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __mlx4_mpt_alloc_icm(struct mlx4_dev *dev, u32 index)
 {
 	struct mlx4_mr_table *mr_table = &mlx4_priv(dev)->mr_table;
@@ -514,6 +533,8 @@ int __mlx4_mpt_alloc_icm(struct mlx4_dev *dev, u32 index)
 
 static int mlx4_mpt_alloc_icm(struct mlx4_dev *dev, u32 index)
 =======
+=======
+>>>>>>> v3.18
 int __mlx4_mpt_alloc_icm(struct mlx4_dev *dev, u32 index, gfp_t gfp)
 {
 	struct mlx4_mr_table *mr_table = &mlx4_priv(dev)->mr_table;
@@ -522,6 +543,9 @@ int __mlx4_mpt_alloc_icm(struct mlx4_dev *dev, u32 index, gfp_t gfp)
 }
 
 static int mlx4_mpt_alloc_icm(struct mlx4_dev *dev, u32 index, gfp_t gfp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u64 param = 0;
@@ -534,7 +558,11 @@ static int mlx4_mpt_alloc_icm(struct mlx4_dev *dev, u32 index, gfp_t gfp)
 							MLX4_CMD_WRAPPED);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __mlx4_mpt_alloc_icm(dev, index);
+=======
+	return __mlx4_mpt_alloc_icm(dev, index, gfp);
+>>>>>>> v3.18
 =======
 	return __mlx4_mpt_alloc_icm(dev, index, gfp);
 >>>>>>> v3.18
@@ -592,8 +620,13 @@ static int mlx4_mr_free_reserved(struct mlx4_dev *dev, struct mlx4_mr *mr)
 				     (dev->caps.num_mpts - 1));
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_warn(dev, "HW2SW_MPT failed (%d),", err);
 			mlx4_warn(dev, "MR has MWs bound to it.\n");
+=======
+			mlx4_warn(dev, "HW2SW_MPT failed (%d), MR has MWs bound to it\n",
+				  err);
+>>>>>>> v3.18
 =======
 			mlx4_warn(dev, "HW2SW_MPT failed (%d), MR has MWs bound to it\n",
 				  err);
@@ -624,7 +657,10 @@ int mlx4_mr_free(struct mlx4_dev *dev, struct mlx4_mr *mr)
 EXPORT_SYMBOL_GPL(mlx4_mr_free);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void mlx4_mr_rereg_mem_cleanup(struct mlx4_dev *dev, struct mlx4_mr *mr)
 {
 	mlx4_mtt_cleanup(dev, &mr->mtt);
@@ -672,6 +708,9 @@ int mlx4_mr_rereg_mem_write(struct mlx4_dev *dev, struct mlx4_mr *mr,
 }
 EXPORT_SYMBOL_GPL(mlx4_mr_rereg_mem_write);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int mlx4_mr_enable(struct mlx4_dev *dev, struct mlx4_mr *mr)
 {
@@ -680,7 +719,11 @@ int mlx4_mr_enable(struct mlx4_dev *dev, struct mlx4_mr *mr)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = mlx4_mpt_alloc_icm(dev, key_to_hw_index(mr->key));
+=======
+	err = mlx4_mpt_alloc_icm(dev, key_to_hw_index(mr->key), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	err = mlx4_mpt_alloc_icm(dev, key_to_hw_index(mr->key), GFP_KERNEL);
 >>>>>>> v3.18
@@ -694,9 +737,12 @@ int mlx4_mr_enable(struct mlx4_dev *dev, struct mlx4_mr *mr)
 	}
 	mpt_entry = mailbox->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	memset(mpt_entry, 0, sizeof *mpt_entry);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mpt_entry->flags = cpu_to_be32(MLX4_MPT_FLAG_MIO	 |
@@ -848,7 +894,11 @@ EXPORT_SYMBOL_GPL(mlx4_write_mtt);
 
 int mlx4_buf_write_mtt(struct mlx4_dev *dev, struct mlx4_mtt *mtt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       struct mlx4_buf *buf)
+=======
+		       struct mlx4_buf *buf, gfp_t gfp)
+>>>>>>> v3.18
 =======
 		       struct mlx4_buf *buf, gfp_t gfp)
 >>>>>>> v3.18
@@ -858,7 +908,12 @@ int mlx4_buf_write_mtt(struct mlx4_dev *dev, struct mlx4_mtt *mtt,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	page_list = kmalloc(buf->npages * sizeof *page_list, GFP_KERNEL);
+=======
+	page_list = kmalloc(buf->npages * sizeof *page_list,
+			    gfp);
+>>>>>>> v3.18
 =======
 	page_list = kmalloc(buf->npages * sizeof *page_list,
 			    gfp);
@@ -910,7 +965,11 @@ int mlx4_mw_enable(struct mlx4_dev *dev, struct mlx4_mw *mw)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = mlx4_mpt_alloc_icm(dev, key_to_hw_index(mw->key));
+=======
+	err = mlx4_mpt_alloc_icm(dev, key_to_hw_index(mw->key), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	err = mlx4_mpt_alloc_icm(dev, key_to_hw_index(mw->key), GFP_KERNEL);
 >>>>>>> v3.18
@@ -925,8 +984,11 @@ int mlx4_mw_enable(struct mlx4_dev *dev, struct mlx4_mw *mw)
 	mpt_entry = mailbox->buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(mpt_entry, 0, sizeof(*mpt_entry));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Note that the MLX4_MPT_FLAG_REGION bit in mpt_entry->flags is turned
@@ -988,9 +1050,12 @@ int mlx4_init_mr_table(struct mlx4_dev *dev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!is_power_of_2(dev->caps.num_mpts))
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Nothing to do for slaves - all MR handling is forwarded
@@ -999,6 +1064,12 @@ int mlx4_init_mr_table(struct mlx4_dev *dev)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!is_power_of_2(dev->caps.num_mpts))
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (!is_power_of_2(dev->caps.num_mpts))
 		return -EINVAL;
@@ -1021,7 +1092,11 @@ int mlx4_init_mr_table(struct mlx4_dev *dev)
 					     fls(dev->caps.reserved_mtts - 1));
 		if (priv->reserved_mtts < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_warn(dev, "MTT table of order %u is too small.\n",
+=======
+			mlx4_warn(dev, "MTT table of order %u is too small\n",
+>>>>>>> v3.18
 =======
 			mlx4_warn(dev, "MTT table of order %u is too small\n",
 >>>>>>> v3.18
@@ -1206,8 +1281,12 @@ void mlx4_fmr_unmap(struct mlx4_dev *dev, struct mlx4_fmr *fmr,
 	if (IS_ERR(mailbox)) {
 		err = PTR_ERR(mailbox);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "mlx4_ib: mlx4_alloc_cmd_mailbox"
 		       " failed (%d)\n", err);
+=======
+		pr_warn("mlx4_ib: mlx4_alloc_cmd_mailbox failed (%d)\n", err);
+>>>>>>> v3.18
 =======
 		pr_warn("mlx4_ib: mlx4_alloc_cmd_mailbox failed (%d)\n", err);
 >>>>>>> v3.18
@@ -1220,8 +1299,12 @@ void mlx4_fmr_unmap(struct mlx4_dev *dev, struct mlx4_fmr *fmr,
 	mlx4_free_cmd_mailbox(dev, mailbox);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "mlx4_ib: mlx4_HW2SW_MPT failed (%d)\n",
 		       err);
+=======
+		pr_warn("mlx4_ib: mlx4_HW2SW_MPT failed (%d)\n", err);
+>>>>>>> v3.18
 =======
 		pr_warn("mlx4_ib: mlx4_HW2SW_MPT failed (%d)\n", err);
 >>>>>>> v3.18

@@ -38,15 +38,21 @@
 #include <asm/mipsregs.h>
 #include <asm/netlogic/haldefs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #if defined(CONFIG_CPU_XLP)
 #include <asm/netlogic/xlp-hal/iomap.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/netlogic/common.h>
 
 #if defined(CONFIG_CPU_XLP)
 #include <asm/netlogic/xlp-hal/iomap.h>
 #include <asm/netlogic/xlp-hal/xlp.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/netlogic/xlp-hal/uart.h>
 #elif defined(CONFIG_CPU_XLR)

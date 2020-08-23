@@ -52,7 +52,11 @@ static char *get_indirect_ea(struct super_block *s, int ano, secno a, int size)
 	char *ret;
 	if (!(ret = kmalloc(size + 1, GFP_NOFS))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("HPFS: out of memory for EA\n");
+=======
+		pr_err("out of memory for EA\n");
+>>>>>>> v3.18
 =======
 		pr_err("out of memory for EA\n");
 >>>>>>> v3.18
@@ -144,7 +148,11 @@ char *hpfs_get_ea(struct super_block *s, struct fnode *fnode, char *key, int *si
 				return get_indirect_ea(s, ea_in_anode(ea), ea_sec(ea), *size = ea_len(ea));
 			if (!(ret = kmalloc((*size = ea_valuelen(ea)) + 1, GFP_NOFS))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("HPFS: out of memory for EA\n");
+=======
+				pr_err("out of memory for EA\n");
+>>>>>>> v3.18
 =======
 				pr_err("out of memory for EA\n");
 >>>>>>> v3.18
@@ -174,7 +182,11 @@ char *hpfs_get_ea(struct super_block *s, struct fnode *fnode, char *key, int *si
 				return get_indirect_ea(s, ea_in_anode(ea), ea_sec(ea), *size = ea_len(ea));
 			if (!(ret = kmalloc((*size = ea_valuelen(ea)) + 1, GFP_NOFS))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("HPFS: out of memory for EA\n");
+=======
+				pr_err("out of memory for EA\n");
+>>>>>>> v3.18
 =======
 				pr_err("out of memory for EA\n");
 >>>>>>> v3.18

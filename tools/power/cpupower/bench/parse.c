@@ -159,8 +159,13 @@ int prepare_config(const char *path, struct config *config)
 {
 	size_t len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *opt, *val, *line = NULL;
 	FILE *configfile = fopen(path, "r");
+=======
+	char opt[16], val[32], *line = NULL;
+	FILE *configfile;
+>>>>>>> v3.18
 =======
 	char opt[16], val[32], *line = NULL;
 	FILE *configfile;
@@ -172,6 +177,10 @@ int prepare_config(const char *path, struct config *config)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	configfile = fopen(path, "r");
+>>>>>>> v3.18
 =======
 	configfile = fopen(path, "r");
 >>>>>>> v3.18
@@ -183,6 +192,7 @@ int prepare_config(const char *path, struct config *config)
 	}
 
 	while (getline(&line, &len, configfile) != -1) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (line[0] == '#' || line[0] == ' ')
 			continue;
@@ -223,6 +233,8 @@ int prepare_config(const char *path, struct config *config)
 
 		else if (strncmp("priority", opt, strlen(opt)) == 0) {
 =======
+=======
+>>>>>>> v3.18
 		if (line[0] == '#' || line[0] == ' ' || line[0] == '\n')
 			continue;
 
@@ -265,6 +277,9 @@ int prepare_config(const char *path, struct config *config)
 		}
 
 		else if (strcmp("priority", opt) == 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (string_to_prio(val) != SCHED_ERR)
 				config->prio = string_to_prio(val);
@@ -273,8 +288,11 @@ int prepare_config(const char *path, struct config *config)
 
 	free(line);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(opt);
 	free(val);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

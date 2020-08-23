@@ -6,6 +6,11 @@ struct sh_msiof_spi_info {
 	int rx_fifo_override;
 	u16 num_chipselect;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int dma_tx_id;
+	unsigned int dma_rx_id;
+>>>>>>> v3.18
 =======
 	unsigned int dma_tx_id;
 	unsigned int dma_rx_id;

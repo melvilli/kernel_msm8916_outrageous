@@ -40,12 +40,15 @@
 #include "name_table.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tipc_named_publish(struct publication *publ);
 void tipc_named_withdraw(struct publication *publ);
 void tipc_named_node_up(unsigned long node);
 void tipc_named_recv(struct sk_buff *buf);
 void tipc_named_reinit(void);
 =======
+=======
+>>>>>>> v3.18
 #define ITEM_SIZE sizeof(struct distr_item)
 
 /**
@@ -81,6 +84,9 @@ void tipc_named_node_up(u32 dnode);
 void tipc_named_rcv(struct sk_buff *buf);
 void tipc_named_reinit(void);
 void tipc_named_process_backlog(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

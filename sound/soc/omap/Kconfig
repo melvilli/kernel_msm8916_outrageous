@@ -1,8 +1,13 @@
 config SND_OMAP_SOC
 	tristate "SoC Audio for the Texas Instruments OMAP chips"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_OMAP && DMA_OMAP
 	select SND_SOC_DMAENGINE_PCM
+=======
+	depends on (ARCH_OMAP && DMA_OMAP) || (ARM && COMPILE_TEST)
+	select SND_DMAENGINE_PCM
+>>>>>>> v3.18
 =======
 	depends on (ARCH_OMAP && DMA_OMAP) || (ARM && COMPILE_TEST)
 	select SND_DMAENGINE_PCM
@@ -32,16 +37,22 @@ config SND_OMAP_SOC_N810
 config SND_OMAP_SOC_RX51
 	tristate "SoC Audio support for Nokia RX-51"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SND_OMAP_SOC && MACH_NOKIA_RX51
 	select SND_OMAP_SOC_MCBSP
 	select SND_SOC_TLV320AIC3X
 	select SND_SOC_TPA6130A2
 =======
+=======
+>>>>>>> v3.18
 	depends on SND_OMAP_SOC && ARM && (MACH_NOKIA_RX51 || COMPILE_TEST) && I2C
 	select SND_OMAP_SOC_MCBSP
 	select SND_SOC_TLV320AIC3X
 	select SND_SOC_TPA6130A2
 	depends on GPIOLIB
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Say Y if you want to add support for SoC audio on Nokia RX-51
@@ -50,7 +61,11 @@ config SND_OMAP_SOC_RX51
 config SND_OMAP_SOC_AMS_DELTA
 	tristate "SoC Audio support for Amstrad E3 (Delta) videophone"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SND_OMAP_SOC && MACH_AMS_DELTA
+=======
+	depends on SND_OMAP_SOC && MACH_AMS_DELTA && TTY
+>>>>>>> v3.18
 =======
 	depends on SND_OMAP_SOC && MACH_AMS_DELTA && TTY
 >>>>>>> v3.18
@@ -75,7 +90,11 @@ config SND_OMAP_SOC_OSK5912
 	depends on SND_OMAP_SOC && MACH_OMAP_OSK && I2C
 	select SND_OMAP_SOC_MCBSP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SND_SOC_TLV320AIC23
+=======
+	select SND_SOC_TLV320AIC23_I2C
+>>>>>>> v3.18
 =======
 	select SND_SOC_TLV320AIC23_I2C
 >>>>>>> v3.18
@@ -87,7 +106,11 @@ config SND_OMAP_SOC_AM3517EVM
 	depends on SND_OMAP_SOC && MACH_OMAP3517EVM && I2C
 	select SND_OMAP_SOC_MCBSP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SND_SOC_TLV320AIC23
+=======
+	select SND_SOC_TLV320AIC23_I2C
+>>>>>>> v3.18
 =======
 	select SND_SOC_TLV320AIC23_I2C
 >>>>>>> v3.18
@@ -113,7 +136,11 @@ config SND_OMAP_SOC_OMAP_TWL4030
 config SND_OMAP_SOC_OMAP_ABE_TWL6040
 	tristate "SoC Audio support for OMAP boards using ABE and twl6040 codec"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on TWL6040_CORE && SND_OMAP_SOC && ARCH_OMAP4
+=======
+	depends on TWL6040_CORE && SND_OMAP_SOC && (ARCH_OMAP4 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on TWL6040_CORE && SND_OMAP_SOC && (ARCH_OMAP4 || COMPILE_TEST)
 >>>>>>> v3.18
@@ -133,7 +160,11 @@ config SND_OMAP_SOC_OMAP_HDMI
 	depends on SND_OMAP_SOC && OMAP4_DSS_HDMI && OMAP2_DSS
 	select SND_OMAP_SOC_HDMI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SND_SOC_OMAP_HDMI_CODEC
+=======
+	select SND_SOC_HDMI_CODEC
+>>>>>>> v3.18
 =======
 	select SND_SOC_HDMI_CODEC
 >>>>>>> v3.18

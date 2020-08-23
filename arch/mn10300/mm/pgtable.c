@@ -79,9 +79,12 @@ struct page *pte_alloc_one(struct mm_struct *mm, unsigned long address)
 	pte = alloc_pages(GFP_KERNEL|__GFP_REPEAT, 0);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pte)
 		clear_highpage(pte);
 =======
+=======
+>>>>>>> v3.18
 	if (!pte)
 		return NULL;
 	clear_highpage(pte);
@@ -89,6 +92,9 @@ struct page *pte_alloc_one(struct mm_struct *mm, unsigned long address)
 		__free_page(pte);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pte;
 }

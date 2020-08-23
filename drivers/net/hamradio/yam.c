@@ -889,7 +889,11 @@ static int yam_open(struct net_device *dev)
 	}
 	outb(0, IER(dev->base_addr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(dev->irq, yam_interrupt, IRQF_DISABLED | IRQF_SHARED, dev->name, dev)) {
+=======
+	if (request_irq(dev->irq, yam_interrupt, IRQF_SHARED, dev->name, dev)) {
+>>>>>>> v3.18
 =======
 	if (request_irq(dev->irq, yam_interrupt, IRQF_SHARED, dev->name, dev)) {
 >>>>>>> v3.18
@@ -980,7 +984,10 @@ static int yam_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 		if ((ym = kmalloc(sizeof(struct yamdrv_ioctl_mcs), GFP_KERNEL)) == NULL)
 			return -ENOBUFS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ym->bitrate = 9600;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (copy_from_user(ym, ifr->ifr_data, sizeof(struct yamdrv_ioctl_mcs))) {
@@ -1156,7 +1163,11 @@ static int __init yam_init_driver(void)
 		
 		dev = alloc_netdev(sizeof(struct yam_port), name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   yam_setup);
+=======
+				   NET_NAME_UNKNOWN, yam_setup);
+>>>>>>> v3.18
 =======
 				   NET_NAME_UNKNOWN, yam_setup);
 >>>>>>> v3.18
@@ -1197,7 +1208,11 @@ static void __exit yam_cleanup_driver(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&yam_timer);
+=======
+	del_timer_sync(&yam_timer);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&yam_timer);
 >>>>>>> v3.18

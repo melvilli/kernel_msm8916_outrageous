@@ -127,6 +127,11 @@ search_module_dbetables(unsigned long addr)
 #elif defined CONFIG_CPU_LOONGSON2
 #define MODULE_PROC_FAMILY "LOONGSON2 "
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#elif defined CONFIG_CPU_LOONGSON3
+#define MODULE_PROC_FAMILY "LOONGSON3 "
+>>>>>>> v3.18
 =======
 #elif defined CONFIG_CPU_LOONGSON3
 #define MODULE_PROC_FAMILY "LOONGSON3 "
@@ -148,6 +153,7 @@ search_module_dbetables(unsigned long addr)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 #define MODULE_KERNEL_SMTC "MT_SMTC "
 #else
@@ -156,6 +162,10 @@ search_module_dbetables(unsigned long addr)
 
 #define MODULE_ARCH_VERMAGIC \
 	MODULE_PROC_FAMILY MODULE_KERNEL_TYPE MODULE_KERNEL_SMTC
+=======
+#define MODULE_ARCH_VERMAGIC \
+	MODULE_PROC_FAMILY MODULE_KERNEL_TYPE
+>>>>>>> v3.18
 =======
 #define MODULE_ARCH_VERMAGIC \
 	MODULE_PROC_FAMILY MODULE_KERNEL_TYPE

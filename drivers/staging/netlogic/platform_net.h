@@ -32,6 +32,12 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define PORTS_PER_CONTROLLER		4
+
+>>>>>>> v3.18
 =======
 
 #define PORTS_PER_CONTROLLER		4
@@ -46,9 +52,15 @@ struct xlr_net_data {
 	int phy_interface;
 	int rfr_station;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int tx_stnid;
 	int *bucket_size;
 	int phy_addr;
+=======
+	int tx_stnid[PORTS_PER_CONTROLLER];
+	int *bucket_size;
+	int phy_addr[PORTS_PER_CONTROLLER];
+>>>>>>> v3.18
 =======
 	int tx_stnid[PORTS_PER_CONTROLLER];
 	int *bucket_size;

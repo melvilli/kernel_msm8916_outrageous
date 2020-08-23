@@ -22,6 +22,10 @@
 #include <linux/input/sh_keysc.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/lv5207lp.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/lv5207lp.h>
 >>>>>>> v3.18
@@ -164,11 +168,14 @@ static struct sh_mobile_lcdc_info kfr2r09_sh_lcdc_info = {
 			.start_transfer = kfr2r09_lcd_start,
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.bl_info = {
 			.name = "sh_mobile_lcdc_bl",
 			.max_brightness = 1,
 			.set_brightness = kfr2r09_lcd_set_brightness,
 		},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.sys_bus_cfg = {
@@ -203,7 +210,10 @@ static struct platform_device kfr2r09_sh_lcdc_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct lv5207lp_platform_data kfr2r09_backlight_data = {
 	.fbdev = &kfr2r09_sh_lcdc_device.dev,
 	.def_value = 13,
@@ -215,6 +225,9 @@ static struct i2c_board_info kfr2r09_backlight_board_info = {
 	.platform_data = &kfr2r09_backlight_data,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct r8a66597_platdata kfr2r09_usb0_gadget_data = {
 	.on_chip = 1,
@@ -649,6 +662,11 @@ static int __init kfr2r09_devices_setup(void)
 	gpio_request(GPIO_FN_SDHI0CLK, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	i2c_register_board_info(0, &kfr2r09_backlight_board_info, 1);
+
+>>>>>>> v3.18
 =======
 	i2c_register_board_info(0, &kfr2r09_backlight_board_info, 1);
 

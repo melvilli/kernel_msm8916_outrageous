@@ -46,6 +46,7 @@ int zlib_inflateReset(z_streamp strm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0
 int zlib_inflatePrime(z_streamp strm, int bits, int value)
 {
@@ -61,6 +62,8 @@ int zlib_inflatePrime(z_streamp strm, int bits, int value)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int zlib_inflateInit2(z_streamp strm, int windowBits)
@@ -765,6 +768,7 @@ int zlib_inflateEnd(z_streamp strm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0
 int zlib_inflateSetDictionary(z_streamp strm, const Byte *dictionary,
         uInt dictLength)
@@ -882,6 +886,8 @@ int zlib_inflateSync(z_streamp strm)
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*

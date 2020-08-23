@@ -13,7 +13,11 @@
 
 /* List of Systems that need fixup instructions around power-down instruction */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int pmc_leon_fixup_ids[] = {
+=======
+static unsigned int pmc_leon_fixup_ids[] = {
+>>>>>>> v3.18
 =======
 static unsigned int pmc_leon_fixup_ids[] = {
 >>>>>>> v3.18
@@ -24,7 +28,11 @@ static unsigned int pmc_leon_fixup_ids[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pmc_leon_need_fixup(void)
+=======
+static int pmc_leon_need_fixup(void)
+>>>>>>> v3.18
 =======
 static int pmc_leon_need_fixup(void)
 >>>>>>> v3.18
@@ -47,7 +55,11 @@ static int pmc_leon_need_fixup(void)
  * See .../arch/sparc/kernel/process.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pmc_leon_idle_fixup(void)
+=======
+static void pmc_leon_idle_fixup(void)
+>>>>>>> v3.18
 =======
 static void pmc_leon_idle_fixup(void)
 >>>>>>> v3.18
@@ -75,7 +87,11 @@ static void pmc_leon_idle_fixup(void)
  * See .../arch/sparc/kernel/process.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pmc_leon_idle(void)
+=======
+static void pmc_leon_idle(void)
+>>>>>>> v3.18
 =======
 static void pmc_leon_idle(void)
 >>>>>>> v3.18

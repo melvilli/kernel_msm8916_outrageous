@@ -222,7 +222,11 @@ enum INDEX_PCB_CONFIG{
 struct cx231xx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 initialize_cx231xx(struct cx231xx *p_dev);
+=======
+int initialize_cx231xx(struct cx231xx *p_dev);
+>>>>>>> v3.18
 =======
 int initialize_cx231xx(struct cx231xx *p_dev);
 >>>>>>> v3.18

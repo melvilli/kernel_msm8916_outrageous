@@ -26,7 +26,11 @@ updated content.
 
 This code implements a Ultra Wide Band stack for Linux, as well as
 <<<<<<< HEAD
+<<<<<<< HEAD
 drivers for the the USB based UWB radio controllers defined in the
+=======
+drivers for the USB based UWB radio controllers defined in the
+>>>>>>> v3.18
 =======
 drivers for the USB based UWB radio controllers defined in the
 >>>>>>> v3.18
@@ -166,6 +170,7 @@ The main building block here is the UWB device (struct uwb_dev). For
 each device that pops up in radio presence (ie: the UWB host receives a
 beacon from it) you get a struct uwb_dev that will show up in
 <<<<<<< HEAD
+<<<<<<< HEAD
 /sys/class/uwb and in /sys/bus/uwb/devices.
 
 For each RC that is detected, a new struct uwb_rc is created. In turn, a
@@ -180,10 +185,15 @@ up in /sys/class/uwb_rc.
       radio (their beacons and stuff), so the handling has to be
       likewise to that of a device.
 =======
+=======
+>>>>>>> v3.18
 /sys/bus/uwb/devices.
 
 For each RC that is detected, a new struct uwb_rc and struct uwb_dev are
 created. An entry is also created in /sys/class/uwb_rc for each RC.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Each RC driver is implemented by a separate driver that plugs into the
@@ -258,7 +268,11 @@ the beacon cache of dead devices].
       Device lists
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 All UWB devices are kept in the list of the struct bus_type uwb_bus.
+=======
+All UWB devices are kept in the list of the struct bus_type uwb_bus_type.
+>>>>>>> v3.18
 =======
 All UWB devices are kept in the list of the struct bus_type uwb_bus_type.
 >>>>>>> v3.18
@@ -333,7 +347,11 @@ into /devconnect/). This process starts the authentication process for
 the device. First we allocate a /fake port/ and assign an
 unauthenticated address (128 to 255--what we really do is
 <<<<<<< HEAD
+<<<<<<< HEAD
 0x80 | fake_port_idx). We fiddle with the fake port status and /khubd/
+=======
+0x80 | fake_port_idx). We fiddle with the fake port status and /hub_wq/
+>>>>>>> v3.18
 =======
 0x80 | fake_port_idx). We fiddle with the fake port status and /hub_wq/
 >>>>>>> v3.18
@@ -346,7 +364,11 @@ exchange (FIXME: not yet done) and issue a /set address 0/ to bring the
 device to the default state. Device is authenticated.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 From here, the USB stack takes control through the usb_hcd ops. khubd
+=======
+From here, the USB stack takes control through the usb_hcd ops. hub_wq
+>>>>>>> v3.18
 =======
 From here, the USB stack takes control through the usb_hcd ops. hub_wq
 >>>>>>> v3.18
@@ -364,7 +386,11 @@ arrives to us as a notification through
 devconnect.c:wusb_handle_dn_alive(). If a device times out, we
 disconnect it from the system (cleaning up internal information and
 <<<<<<< HEAD
+<<<<<<< HEAD
 toggling the bits in the fake hub port, which kicks khubd into removing
+=======
+toggling the bits in the fake hub port, which kicks hub_wq into removing
+>>>>>>> v3.18
 =======
 toggling the bits in the fake hub port, which kicks hub_wq into removing
 >>>>>>> v3.18

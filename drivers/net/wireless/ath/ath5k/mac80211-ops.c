@@ -67,7 +67,11 @@ ath5k_tx(struct ieee80211_hw *hw, struct ieee80211_tx_control *control,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ath5k_tx_queue(hw, skb, &ah->txqs[qnum]);
+=======
+	ath5k_tx_queue(hw, skb, &ah->txqs[qnum], control);
+>>>>>>> v3.18
 =======
 	ath5k_tx_queue(hw, skb, &ah->txqs[qnum], control);
 >>>>>>> v3.18
@@ -207,7 +211,11 @@ ath5k_config(struct ieee80211_hw *hw, u32 changed)
 
 	if (changed & IEEE80211_CONF_CHANGE_CHANNEL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = ath5k_chan_set(ah, conf->chandef.chan);
+=======
+		ret = ath5k_chan_set(ah, &conf->chandef);
+>>>>>>> v3.18
 =======
 		ret = ath5k_chan_set(ah, &conf->chandef);
 >>>>>>> v3.18
@@ -334,7 +342,11 @@ ath5k_prepare_multicast(struct ieee80211_hw *hw,
 
 	mfilt[0] = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfilt[1] = 1;
+=======
+	mfilt[1] = 0;
+>>>>>>> v3.18
 =======
 	mfilt[1] = 0;
 >>>>>>> v3.18
@@ -486,6 +498,11 @@ ath5k_configure_filter(struct ieee80211_hw *hw, unsigned int changed_flags,
 	 * be set in HW */
 	ah->filter_flags = rfilt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Store current FIF filter flags */
+	ah->fif_filter_flags = *new_flags;
+>>>>>>> v3.18
 =======
 	/* Store current FIF filter flags */
 	ah->fif_filter_flags = *new_flags;
@@ -529,7 +546,12 @@ ath5k_set_key(struct ieee80211_hw *hw, enum set_key_cmd cmd,
 		return -EOPNOTSUPP;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EOPNOTSUPP;
+=======
+		WARN_ON(1);
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		WARN_ON(1);
 		return -EINVAL;
@@ -703,6 +725,10 @@ ath5k_get_survey(struct ieee80211_hw *hw, int idx, struct survey_info *survey)
 	survey->noise = ah->ah_noise_floor;
 	survey->filled = SURVEY_INFO_NOISE_DBM |
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			SURVEY_INFO_IN_USE |
+>>>>>>> v3.18
 =======
 			SURVEY_INFO_IN_USE |
 >>>>>>> v3.18
@@ -727,7 +753,11 @@ ath5k_get_survey(struct ieee80211_hw *hw, int idx, struct survey_info *survey)
  */
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 ath5k_set_coverage_class(struct ieee80211_hw *hw, u8 coverage_class)
+=======
+ath5k_set_coverage_class(struct ieee80211_hw *hw, s16 coverage_class)
+>>>>>>> v3.18
 =======
 ath5k_set_coverage_class(struct ieee80211_hw *hw, s16 coverage_class)
 >>>>>>> v3.18

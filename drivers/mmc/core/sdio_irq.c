@@ -54,7 +54,10 @@ static int process_sdio_pending_irqs(struct mmc_host *host)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pending && mmc_card_broken_irq_polling(card) &&
 	    !(host->caps & MMC_CAP_SDIO_IRQ)) {
 		unsigned char dummy;
@@ -66,6 +69,9 @@ static int process_sdio_pending_irqs(struct mmc_host *host)
 		mmc_io_rw_direct(card, 0, 0, 0xff, 0, &dummy);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	count = 0;
 	for (i = 1; i <= 7; i++) {
@@ -73,8 +79,12 @@ static int process_sdio_pending_irqs(struct mmc_host *host)
 			func = card->sdio_func[i - 1];
 			if (!func) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warning("%s: pending IRQ for "
 					"non-existent function\n",
+=======
+				pr_warn("%s: pending IRQ for non-existent function\n",
+>>>>>>> v3.18
 =======
 				pr_warn("%s: pending IRQ for non-existent function\n",
 >>>>>>> v3.18
@@ -85,8 +95,13 @@ static int process_sdio_pending_irqs(struct mmc_host *host)
 				count++;
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warning("%s: pending IRQ with no handler\n",
 				       sdio_func_id(func));
+=======
+				pr_warn("%s: pending IRQ with no handler\n",
+					sdio_func_id(func));
+>>>>>>> v3.18
 =======
 				pr_warn("%s: pending IRQ with no handler\n",
 					sdio_func_id(func));
@@ -103,7 +118,10 @@ static int process_sdio_pending_irqs(struct mmc_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void sdio_run_irqs(struct mmc_host *host)
 {
 	mmc_claim_host(host);
@@ -113,6 +131,9 @@ void sdio_run_irqs(struct mmc_host *host)
 }
 EXPORT_SYMBOL_GPL(sdio_run_irqs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sdio_irq_thread(void *_host)
 {
@@ -121,7 +142,10 @@ static int sdio_irq_thread(void *_host)
 	unsigned long period, idle_period;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool ws;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -158,6 +182,7 @@ static int sdio_irq_thread(void *_host)
 		if (ret)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ws = false;
 		/*
 		 * prevent suspend if it has started when scheduled;
@@ -169,6 +194,8 @@ static int sdio_irq_thread(void *_host)
 			pm_wakeup_event(&host->card->dev, 100);
 			ws = true;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = process_sdio_pending_irqs(host);
@@ -208,12 +235,15 @@ static int sdio_irq_thread(void *_host)
 			mmc_host_clk_release(host);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * function drivers would have processed the event from card
 		 * unless suspended, hence release wake source
 		 */
 		if (ws && (host->dev_status == DEV_RESUMED))
 			pm_relax(&host->card->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (!kthread_should_stop())
@@ -241,6 +271,7 @@ static int sdio_card_irq_get(struct mmc_card *card)
 
 	if (!host->sdio_irqs++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_set(&host->sdio_irq_thread_abort, 0);
 		host->sdio_irq_thread =
 			kthread_run(sdio_irq_thread, host, "ksdioirqd/%s",
@@ -250,6 +281,8 @@ static int sdio_card_irq_get(struct mmc_card *card)
 			host->sdio_irqs--;
 			return err;
 =======
+=======
+>>>>>>> v3.18
 		if (!(host->caps2 & MMC_CAP2_SDIO_IRQ_NOTHREAD)) {
 			atomic_set(&host->sdio_irq_thread_abort, 0);
 			host->sdio_irq_thread =
@@ -264,6 +297,9 @@ static int sdio_card_irq_get(struct mmc_card *card)
 			mmc_host_clk_hold(host);
 			host->ops->enable_sdio_irq(host, 1);
 			mmc_host_clk_release(host);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -280,9 +316,12 @@ static int sdio_card_irq_put(struct mmc_card *card)
 
 	if (!--host->sdio_irqs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_set(&host->sdio_irq_thread_abort, 1);
 		kthread_stop(host->sdio_irq_thread);
 =======
+=======
+>>>>>>> v3.18
 		if (!(host->caps2 & MMC_CAP2_SDIO_IRQ_NOTHREAD)) {
 			atomic_set(&host->sdio_irq_thread_abort, 1);
 			kthread_stop(host->sdio_irq_thread);
@@ -291,6 +330,9 @@ static int sdio_card_irq_put(struct mmc_card *card)
 			host->ops->enable_sdio_irq(host, 0);
 			mmc_host_clk_release(host);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

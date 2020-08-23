@@ -24,6 +24,7 @@
 	.text
 	.align	1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.global	___copy_from_user
 	.type	___copy_from_user, @function
 ___copy_from_user:
@@ -32,6 +33,8 @@ ___copy_from_user:
 	rjmp	__copy_user
 	.size	___copy_from_user, . - ___copy_from_user
 =======
+=======
+>>>>>>> v3.18
 	.global	copy_from_user
 	.type	copy_from_user, @function
 copy_from_user:
@@ -39,6 +42,9 @@ copy_from_user:
 	ret_if_privileged r8, r11, r10, r10
 	rjmp	__copy_user
 	.size	copy_from_user, . - copy_from_user
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.global	copy_to_user

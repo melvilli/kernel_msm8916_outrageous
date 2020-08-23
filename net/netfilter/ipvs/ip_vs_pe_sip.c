@@ -89,7 +89,11 @@ ip_vs_sip_fill_param(struct ip_vs_conn_param *p, struct sk_buff *skb)
 	datalen = skb->len - dataoff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (get_callid(dptr, 0, datalen, &matchoff, &matchlen))
+=======
+	if (get_callid(dptr, dataoff, datalen, &matchoff, &matchlen))
+>>>>>>> v3.18
 =======
 	if (get_callid(dptr, dataoff, datalen, &matchoff, &matchlen))
 >>>>>>> v3.18

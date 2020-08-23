@@ -21,7 +21,10 @@
 #include <linux/init.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -51,11 +54,17 @@ struct cs_spec {
 	unsigned int sense_b:1;
 	hda_nid_t vendor_nid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* for MBP SPDIF control */
 	int (*spdif_sw_put)(struct snd_kcontrol *kcontrol,
 			    struct snd_ctl_elem_value *ucontrol);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -122,6 +131,12 @@ enum {
 /* 0x0015 - visibility reg */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Cirrus Logic CS4208 */
+#define CS4208_VENDOR_NID	0x24
+
+>>>>>>> v3.18
 =======
 /* Cirrus Logic CS4208 */
 #define CS4208_VENDOR_NID	0x24
@@ -146,8 +161,11 @@ enum {
 #define CS421X_IDX_SPK_CTL	0x04
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SPDIF_EVENT		0x04
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Cirrus Logic CS4213 is like CS4210 but does not have SPDIF input/output */
@@ -189,7 +207,11 @@ static void cs_automute(struct hda_codec *codec)
 	snd_hda_gen_update_outputs(codec);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (spec->gpio_eapd_hp) {
+=======
+	if (spec->gpio_eapd_hp || spec->gpio_eapd_speaker) {
+>>>>>>> v3.18
 =======
 	if (spec->gpio_eapd_hp || spec->gpio_eapd_speaker) {
 >>>>>>> v3.18
@@ -247,7 +269,10 @@ static const struct hda_verb cs_coef_init_verbs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct hda_verb cs4208_coef_init_verbs[] = {
 	{0x01, AC_VERB_SET_POWER_STATE, 0x00}, /* AFG: D0 */
 	{0x24, AC_VERB_SET_PROC_STATE, 0x01},  /* VPW: processing on */
@@ -258,6 +283,9 @@ static const struct hda_verb cs4208_coef_init_verbs[] = {
 	{} /* terminator */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Errata: CS4207 rev C0/C1/C2 Silicon
  *
@@ -328,11 +356,14 @@ static int cs_init(struct hda_codec *codec)
 	struct cs_spec *spec = codec->spec;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* init_verb sequence for C0/C1/C2 errata*/
 	snd_hda_sequence_write(codec, cs_errata_init_verbs);
 
 	snd_hda_sequence_write(codec, cs_coef_init_verbs);
 =======
+=======
+>>>>>>> v3.18
 	if (spec->vendor_nid == CS420X_VENDOR_NID) {
 		/* init_verb sequence for C0/C1/C2 errata*/
 		snd_hda_sequence_write(codec, cs_errata_init_verbs);
@@ -340,6 +371,9 @@ static int cs_init(struct hda_codec *codec)
 	} else if (spec->vendor_nid == CS4208_VENDOR_NID) {
 		snd_hda_sequence_write(codec, cs4208_coef_init_verbs);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	snd_hda_gen_init(codec);
@@ -354,24 +388,33 @@ static int cs_init(struct hda_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_input_coef(codec);
 	init_digital_coef(codec);
 =======
+=======
+>>>>>>> v3.18
 	if (spec->vendor_nid == CS420X_VENDOR_NID) {
 		init_input_coef(codec);
 		init_digital_coef(codec);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define cs_free		snd_hda_gen_free
 
 static const struct hda_codec_ops cs_patch_ops = {
 	.build_controls = snd_hda_gen_build_controls,
 =======
+=======
+>>>>>>> v3.18
 static int cs_build_controls(struct hda_codec *codec)
 {
 	int err;
@@ -387,6 +430,9 @@ static int cs_build_controls(struct hda_codec *codec)
 
 static const struct hda_codec_ops cs_patch_ops = {
 	.build_controls = cs_build_controls,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.build_pcms = snd_hda_gen_build_pcms,
 	.init = cs_init,
@@ -435,7 +481,10 @@ static const struct snd_pci_quirk cs420x_fixup_tbl[] = {
 	SND_PCI_QUIRK(0x106b, 0x2000, "iMac 12,2", CS420X_IMAC27_122),
 	SND_PCI_QUIRK(0x106b, 0x2800, "MacBookPro 10,1", CS420X_MBP101),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SND_PCI_QUIRK(0x106b, 0x5600, "MacBookAir 5,2", CS420X_MBP81),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SND_PCI_QUIRK(0x106b, 0x5b00, "MacBookAir 4,2", CS420X_MBA42),
@@ -507,7 +556,10 @@ static const struct hda_pintbl mba42_pincfgs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct hda_pintbl mba6_pincfgs[] = {
 	{ 0x10, 0x032120f0 }, /* HP */
 	{ 0x11, 0x500000f0 },
@@ -531,6 +583,9 @@ static const struct hda_pintbl mba6_pincfgs[] = {
 	{} /* terminator */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void cs420x_fixup_gpio_13(struct hda_codec *codec,
 				 const struct hda_fixup *fix, int action)
@@ -633,7 +688,10 @@ static int patch_cs420x(struct hda_codec *codec)
 
 	spec->gen.automute_hook = cs_automute;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->single_adc_amp = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -658,7 +716,10 @@ static int patch_cs420x(struct hda_codec *codec)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * CS4208 support:
  * Its layout is no longer compatible with CS4206/CS4207
  */
@@ -820,6 +881,9 @@ static int patch_cs4208(struct hda_codec *codec)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Cirrus Logic CS4210
  *
@@ -1038,7 +1102,11 @@ static void cs4210_pinmux_init(struct hda_codec *codec)
 
 static void cs4210_spdif_automute(struct hda_codec *codec,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct hda_jack_tbl *tbl)
+=======
+				  struct hda_jack_callback *tbl)
+>>>>>>> v3.18
 =======
 				  struct hda_jack_callback *tbl)
 >>>>>>> v3.18
@@ -1059,7 +1127,13 @@ static void cs4210_spdif_automute(struct hda_codec *codec,
 	spec->spdif_present = spdif_present;
 	/* SPDIF TX on/off */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_hda_set_pin_ctl(codec, spdif_pin, spdif_present ? PIN_OUT : 0);
+=======
+	if (spdif_present)
+		snd_hda_set_pin_ctl(codec, spdif_pin,
+				    spdif_present ? PIN_OUT : 0);
+>>>>>>> v3.18
 =======
 	if (spdif_present)
 		snd_hda_set_pin_ctl(codec, spdif_pin,
@@ -1081,7 +1155,10 @@ static void parse_cs421x_digital(struct hda_codec *codec)
 			spec->spdif_detect = 1;
 			snd_hda_jack_detect_enable_callback(codec, nid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							    SPDIF_EVENT,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 							    cs4210_spdif_automute);
@@ -1272,6 +1349,10 @@ static const struct hda_codec_preset snd_hda_preset_cirrus[] = {
 	{ .id = 0x10134206, .name = "CS4206", .patch = patch_cs420x },
 	{ .id = 0x10134207, .name = "CS4207", .patch = patch_cs420x },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .id = 0x10134208, .name = "CS4208", .patch = patch_cs4208 },
+>>>>>>> v3.18
 =======
 	{ .id = 0x10134208, .name = "CS4208", .patch = patch_cs4208 },
 >>>>>>> v3.18
@@ -1283,6 +1364,10 @@ static const struct hda_codec_preset snd_hda_preset_cirrus[] = {
 MODULE_ALIAS("snd-hda-codec-id:10134206");
 MODULE_ALIAS("snd-hda-codec-id:10134207");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("snd-hda-codec-id:10134208");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("snd-hda-codec-id:10134208");
 >>>>>>> v3.18

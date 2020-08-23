@@ -25,6 +25,7 @@
 #include "dvb_frontend.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct e4000_config {
 	/*
 	 * I2C address
@@ -32,6 +33,8 @@ struct e4000_config {
 	 */
 	u8 i2c_addr;
 =======
+=======
+>>>>>>> v3.18
 /*
  * I2C address
  * 0x64, 0x65, 0x66, 0x67
@@ -41,6 +44,9 @@ struct e4000_config {
 	 * frontend
 	 */
 	struct dvb_frontend *fe;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -49,6 +55,7 @@ struct e4000_config {
 	u32 clock;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if IS_ENABLED(CONFIG_MEDIA_TUNER_E4000)
 extern struct dvb_frontend *e4000_attach(struct dvb_frontend *fe,
@@ -62,6 +69,8 @@ static inline struct dvb_frontend *e4000_attach(struct dvb_frontend *fe,
 }
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

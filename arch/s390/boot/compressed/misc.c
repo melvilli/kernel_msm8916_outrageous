@@ -48,11 +48,17 @@ static unsigned long free_mem_end_ptr;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KERNEL_LZ4
 #include "../../../../lib/decompress_unlz4.c"
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_KERNEL_LZMA
 #include "../../../../lib/decompress_unlzma.c"
@@ -146,12 +152,15 @@ static void check_ipl_parmblock(void *start, unsigned long size)
 unsigned long decompress_kernel(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *output, *kernel_end;
 
 	output = (void *) ALIGN((unsigned long) &_end + HEAP_SIZE, PAGE_SIZE);
 	kernel_end = output + SZ__bss_start;
 	check_ipl_parmblock((void *) 0, (unsigned long) kernel_end);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long output_addr;
 	unsigned char *output;
 
@@ -161,11 +170,15 @@ unsigned long decompress_kernel(void)
 	free_mem_ptr = (unsigned long)&_end;
 	free_mem_end_ptr = free_mem_ptr + HEAP_SIZE;
 	output = (unsigned char *) output_addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_BLK_DEV_INITRD
 	/*
 	 * Move the initrd right behind the end of the decompressed
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * kernel image. This also prevents initrd corruption caused by
 	 * bss clearing since kernel_end will always be located behind the
@@ -187,6 +200,8 @@ unsigned long decompress_kernel(void)
 	free_mem_end_ptr = free_mem_ptr + HEAP_SIZE;
 
 =======
+=======
+>>>>>>> v3.18
 	 * kernel image.
 	 */
 	if (INITRD_START && INITRD_SIZE &&
@@ -199,6 +214,9 @@ unsigned long decompress_kernel(void)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	puts("Uncompressing Linux... ");
 	decompress(input_data, input_len, NULL, NULL, output, NULL, error);

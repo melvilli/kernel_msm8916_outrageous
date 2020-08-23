@@ -256,7 +256,12 @@ static void ds1wm_up(struct ds1wm_data *ds1wm_data)
 {
 	int divisor;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ds1wm_driver_data *plat = ds1wm_data->pdev->dev.platform_data;
+=======
+	struct device *dev = &ds1wm_data->pdev->dev;
+	struct ds1wm_driver_data *plat = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct device *dev = &ds1wm_data->pdev->dev;
 	struct ds1wm_driver_data *plat = dev_get_platdata(dev);
@@ -267,16 +272,22 @@ static void ds1wm_up(struct ds1wm_data *ds1wm_data)
 
 	divisor = ds1wm_find_divisor(plat->clock_rate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&ds1wm_data->pdev->dev,
 		"found divisor 0x%x for clock %d\n", divisor, plat->clock_rate);
 	if (divisor == 0) {
 		dev_err(&ds1wm_data->pdev->dev,
 			"no suitable divisor for %dHz clock\n",
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(dev, "found divisor 0x%x for clock %d\n",
 		divisor, plat->clock_rate);
 	if (divisor == 0) {
 		dev_err(dev, "no suitable divisor for %dHz clock\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			plat->clock_rate);
 		return;
@@ -494,7 +505,11 @@ static int ds1wm_probe(struct platform_device *pdev)
 	if (!ds1wm_data->cell)
 		return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	plat = pdev->dev.platform_data;
+=======
+	plat = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	plat = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -515,7 +530,11 @@ static int ds1wm_probe(struct platform_device *pdev)
 
 	ret = devm_request_irq(&pdev->dev, ds1wm_data->irq, ds1wm_isr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED | IRQF_SHARED, "ds1wm", ds1wm_data);
+=======
+			IRQF_SHARED, "ds1wm", ds1wm_data);
+>>>>>>> v3.18
 =======
 			IRQF_SHARED, "ds1wm", ds1wm_data);
 >>>>>>> v3.18
@@ -584,7 +603,11 @@ static struct platform_driver ds1wm_driver = {
 static int __init ds1wm_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("DS1WM w1 busmaster driver - (c) 2004 Szabolcs Gyurko\n");
+=======
+	pr_info("DS1WM w1 busmaster driver - (c) 2004 Szabolcs Gyurko\n");
+>>>>>>> v3.18
 =======
 	pr_info("DS1WM w1 busmaster driver - (c) 2004 Szabolcs Gyurko\n");
 >>>>>>> v3.18

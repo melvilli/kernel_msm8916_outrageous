@@ -7,6 +7,12 @@ config HAVE_KVM_IRQCHIP
        bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config HAVE_KVM_IRQFD
+       bool
+
+>>>>>>> v3.18
 =======
 config HAVE_KVM_IRQFD
        bool
@@ -29,11 +35,17 @@ config KVM_ASYNC_PF
        bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # Toggle to switch between direct notification and batch job
 config KVM_ASYNC_PF_SYNC
        bool
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HAVE_KVM_MSI
        bool
@@ -41,6 +53,12 @@ config HAVE_KVM_MSI
 config HAVE_KVM_CPU_RELAX_INTERCEPT
        bool
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+config KVM_VFIO
+       bool
+>>>>>>> v3.18
 =======
 
 config KVM_VFIO

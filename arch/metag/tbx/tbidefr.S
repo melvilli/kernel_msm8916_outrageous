@@ -21,7 +21,11 @@
  * D0Ar3       -- SigNum
  * D0Ar4       -- Triggers
 <<<<<<< HEAD
+<<<<<<< HEAD
  * D1Ar5       -- InstOrSWSId
+=======
+ * D1Ar5       -- Inst
+>>>>>>> v3.18
 =======
  * D1Ar5       -- Inst
 >>>>>>> v3.18

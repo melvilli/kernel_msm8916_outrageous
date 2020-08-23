@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_MVEBU
 	bool "Marvell SOCs with Device Tree support" if ARCH_MULTI_V7
 	select CLKSRC_MMIO
@@ -33,6 +34,8 @@ config MACH_ARMADA_370
 	bool "Marvell Armada 370 boards"
 	select MACH_ARMADA_370_XP
 =======
+=======
+>>>>>>> v3.18
 menuconfig ARCH_MVEBU
 	bool "Marvell Engineering Business Unit (MVEBU) SoCs" if (ARCH_MULTI_V7 || ARCH_MULTI_V5)
 	select ARCH_SUPPORTS_BIG_ENDIAN
@@ -64,6 +67,9 @@ config MACH_ARMADA_370
 	select ARMADA_370_CLK
 	select CPU_PJ4B
 	select MACH_MVEBU_V7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select PINCTRL_ARMADA_370
 	help
@@ -71,10 +77,13 @@ config MACH_ARMADA_370
 	  on the Marvell Armada 370 SoC with device tree.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MACH_ARMADA_XP
 	bool "Marvell Armada XP boards"
 	select MACH_ARMADA_370_XP
 =======
+=======
+>>>>>>> v3.18
 config MACH_ARMADA_375
 	bool "Marvell Armada 375 boards" if ARCH_MULTI_V7
 	select ARM_ERRATA_720789
@@ -110,6 +119,9 @@ config MACH_ARMADA_XP
 	select ARMADA_XP_CLK
 	select CPU_PJ4B
 	select MACH_MVEBU_V7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select PINCTRL_ARMADA_XP
 	help
@@ -117,8 +129,11 @@ config MACH_ARMADA_XP
 	  on the Marvell Armada XP SoC with device tree.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endmenu
 =======
+=======
+>>>>>>> v3.18
 config MACH_DOVE
 	bool "Marvell Dove boards" if ARCH_MULTI_V7
 	select CACHE_L2X0
@@ -153,6 +168,9 @@ config MACH_NETXBIG
 	help
 	  Say 'Y' here if you want your kernel to support the
 	  LaCie 2Big and 5Big Network v2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endif

@@ -103,7 +103,11 @@ static bool cirrus_crtc_mode_fixup(struct drm_crtc *crtc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void cirrus_set_start_address(struct drm_crtc *crtc, unsigned offset)
+=======
+static void cirrus_set_start_address(struct drm_crtc *crtc, unsigned offset)
+>>>>>>> v3.18
 =======
 static void cirrus_set_start_address(struct drm_crtc *crtc, unsigned offset)
 >>>>>>> v3.18
@@ -154,7 +158,11 @@ static int cirrus_crtc_do_set_base(struct drm_crtc *crtc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cirrus_fb = to_cirrus_framebuffer(crtc->fb);
+=======
+	cirrus_fb = to_cirrus_framebuffer(crtc->primary->fb);
+>>>>>>> v3.18
 =======
 	cirrus_fb = to_cirrus_framebuffer(crtc->primary->fb);
 >>>>>>> v3.18
@@ -277,7 +285,11 @@ static int cirrus_crtc_mode_set(struct drm_crtc *crtc,
 	sr07 &= 0xe0;
 	hdr = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (crtc->fb->bits_per_pixel) {
+=======
+	switch (crtc->primary->fb->bits_per_pixel) {
+>>>>>>> v3.18
 =======
 	switch (crtc->primary->fb->bits_per_pixel) {
 >>>>>>> v3.18
@@ -304,7 +316,11 @@ static int cirrus_crtc_mode_set(struct drm_crtc *crtc,
 
 	/* Program the pitch */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp = crtc->fb->pitches[0] / 8;
+=======
+	tmp = crtc->primary->fb->pitches[0] / 8;
+>>>>>>> v3.18
 =======
 	tmp = crtc->primary->fb->pitches[0] / 8;
 >>>>>>> v3.18
@@ -313,8 +329,13 @@ static int cirrus_crtc_mode_set(struct drm_crtc *crtc,
 	/* Enable extended blanking and pitch bits, and enable full memory */
 	tmp = 0x22;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp |= (crtc->fb->pitches[0] >> 7) & 0x10;
 	tmp |= (crtc->fb->pitches[0] >> 6) & 0x40;
+=======
+	tmp |= (crtc->primary->fb->pitches[0] >> 7) & 0x10;
+	tmp |= (crtc->primary->fb->pitches[0] >> 6) & 0x40;
+>>>>>>> v3.18
 =======
 	tmp |= (crtc->primary->fb->pitches[0] >> 7) & 0x10;
 	tmp |= (crtc->primary->fb->pitches[0] >> 6) & 0x40;
@@ -478,7 +499,11 @@ static void cirrus_encoder_commit(struct drm_encoder *encoder)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void cirrus_encoder_destroy(struct drm_encoder *encoder)
+=======
+static void cirrus_encoder_destroy(struct drm_encoder *encoder)
+>>>>>>> v3.18
 =======
 static void cirrus_encoder_destroy(struct drm_encoder *encoder)
 >>>>>>> v3.18
@@ -521,6 +546,7 @@ static struct drm_encoder *cirrus_encoder_init(struct drm_device *dev)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cirrus_vga_get_modes(struct drm_connector *connector)
 {
 	/* Just add a static list of modes */
@@ -557,6 +583,8 @@ struct drm_encoder *cirrus_connector_best_encoder(struct drm_connector
 		return encoder;
 	}
 =======
+=======
+>>>>>>> v3.18
 static int cirrus_vga_get_modes(struct drm_connector *connector)
 {
 	int count;
@@ -574,6 +602,9 @@ static struct drm_encoder *cirrus_connector_best_encoder(struct drm_connector
 	/* pick the encoder ids */
 	if (enc_id)
 		return drm_encoder_find(connector->dev, enc_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NULL;
 }
@@ -593,7 +624,10 @@ static void cirrus_connector_destroy(struct drm_connector *connector)
 struct drm_connector_helper_funcs cirrus_vga_connector_helper_funcs = {
 	.get_modes = cirrus_vga_get_modes,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mode_valid = cirrus_vga_mode_valid,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.best_encoder = cirrus_connector_best_encoder,
@@ -623,6 +657,10 @@ static struct drm_connector *cirrus_vga_init(struct drm_device *dev)
 	drm_connector_helper_add(connector, &cirrus_vga_connector_helper_funcs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	drm_connector_register(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_register(connector);
 >>>>>>> v3.18

@@ -123,7 +123,11 @@ void xmon_printf(const char *format, ...)
 	if (n && rc == 0) {
 		/* No udbg hooks, fallback to printk() - dangerous */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(xmon_outbuf);
+=======
+		printk("%s", xmon_outbuf);
+>>>>>>> v3.18
 =======
 		printk("%s", xmon_outbuf);
 >>>>>>> v3.18

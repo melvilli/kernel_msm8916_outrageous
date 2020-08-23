@@ -47,6 +47,12 @@ enum nfqnl_attr_type {
 	NFQA_CAP_LEN,			/* __u32 length of captured packet */
 	NFQA_SKB_INFO,			/* __u32 skb meta information */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NFQA_EXP,			/* nf_conntrack_netlink.h */
+	NFQA_UID,			/* __u32 sk uid */
+	NFQA_GID,			/* __u32 sk gid */
+>>>>>>> v3.18
 =======
 	NFQA_EXP,			/* nf_conntrack_netlink.h */
 	NFQA_UID,			/* __u32 sk uid */
@@ -105,7 +111,12 @@ enum nfqnl_attr_config {
 #define NFQA_CFG_F_CONNTRACK			(1 << 1)
 #define NFQA_CFG_F_GSO				(1 << 2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NFQA_CFG_F_MAX				(1 << 3)
+=======
+#define NFQA_CFG_F_UID_GID			(1 << 3)
+#define NFQA_CFG_F_MAX				(1 << 4)
+>>>>>>> v3.18
 =======
 #define NFQA_CFG_F_UID_GID			(1 << 3)
 #define NFQA_CFG_F_MAX				(1 << 4)
@@ -117,6 +128,11 @@ enum nfqnl_attr_config {
 /* packet is GSO (i.e., exceeds device mtu) */
 #define NFQA_SKB_GSO (1 << 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* csum not validated (incoming device doesn't support hw checksum, etc.) */
+#define NFQA_SKB_CSUM_NOTVERIFIED (1 << 2)
+>>>>>>> v3.18
 =======
 /* csum not validated (incoming device doesn't support hw checksum, etc.) */
 #define NFQA_SKB_CSUM_NOTVERIFIED (1 << 2)

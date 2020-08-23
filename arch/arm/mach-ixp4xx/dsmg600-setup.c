@@ -27,13 +27,19 @@
 #include <linux/i2c.h>
 #include <linux/i2c-gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/hardware.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/gpio.h>
 
 #include <mach/hardware.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
@@ -168,11 +174,16 @@ static struct platform_device *dsmg600_devices[] __initdata = {
 static void dsmg600_power_off(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable the pwr cntl gpio */
 	gpio_line_config(DSMG600_PO_GPIO, IXP4XX_GPIO_OUT);
 
 	/* poweroff */
 	gpio_line_set(DSMG600_PO_GPIO, IXP4XX_GPIO_HIGH);
+=======
+	/* enable the pwr cntl and drive it high */
+	gpio_direction_output(DSMG600_PO_GPIO, 1);
+>>>>>>> v3.18
 =======
 	/* enable the pwr cntl and drive it high */
 	gpio_direction_output(DSMG600_PO_GPIO, 1);
@@ -214,7 +225,11 @@ static void dsmg600_power_handler(unsigned long data)
 
 			/* Change the state of the power LED to "blink" */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpio_line_set(DSMG600_LED_PWR_GPIO, IXP4XX_GPIO_LOW);
+=======
+			gpio_set_value(DSMG600_LED_PWR_GPIO, 0);
+>>>>>>> v3.18
 =======
 			gpio_set_value(DSMG600_LED_PWR_GPIO, 0);
 >>>>>>> v3.18
@@ -244,7 +259,10 @@ static void __init dsmg600_timer_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init dsmg600_gpio_init(void)
 {
 	if (!machine_is_dsmg600())
@@ -278,6 +296,9 @@ static int __init dsmg600_gpio_init(void)
 }
 device_initcall(dsmg600_gpio_init);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init dsmg600_init(void)
 {
@@ -303,6 +324,7 @@ static void __init dsmg600_init(void)
 
 	pm_power_off = dsmg600_power_off;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (request_irq(gpio_to_irq(DSMG600_RB_GPIO), &dsmg600_reset_handler,
 		IRQF_DISABLED | IRQF_TRIGGER_LOW,
@@ -324,6 +346,8 @@ static void __init dsmg600_init(void)
 	power_button_countdown = PBUTTON_HOLDDOWN_COUNT;
 
 	mod_timer(&dsmg600_power_timer, jiffies + msecs_to_jiffies(500));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

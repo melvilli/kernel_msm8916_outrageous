@@ -617,8 +617,11 @@ ath5k_hw_get_isr(struct ath5k_hw *ah, enum ath5k_int *interrupt_mask)
 		 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pisr_clear = pisr & ~AR5K_ISR_BITS_FROM_SISRS;
 =======
+=======
+>>>>>>> v3.18
 		/* XXX: There seems to be  an issue on some cards
 		 *	with tx interrupt flags not being updated
 		 *	on PISR despite that all Tx interrupt bits
@@ -629,6 +632,9 @@ ath5k_hw_get_isr(struct ath5k_hw *ah, enum ath5k_int *interrupt_mask)
 		 */
 		pisr_clear = (pisr & ~AR5K_ISR_BITS_FROM_SISRS) |
 					(pisr & AR5K_INT_TX_ALL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -675,7 +681,11 @@ ath5k_hw_get_isr(struct ath5k_hw *ah, enum ath5k_int *interrupt_mask)
 						AR5K_SISR1_QCU_TXEOL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Currently this is not much usefull since we treat
+=======
+		/* Currently this is not much useful since we treat
+>>>>>>> v3.18
 =======
 		/* Currently this is not much useful since we treat
 >>>>>>> v3.18

@@ -431,15 +431,21 @@ ufs_validate_entry(struct super_block *sb, char *base,
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 ufs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	loff_t pos = filp->f_pos;
 	struct inode *inode = file_inode(filp);
 =======
+=======
+>>>>>>> v3.18
 ufs_readdir(struct file *file, struct dir_context *ctx)
 {
 	loff_t pos = ctx->pos;
 	struct inode *inode = file_inode(file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct super_block *sb = inode->i_sb;
 	unsigned int offset = pos & ~PAGE_CACHE_MASK;
@@ -447,7 +453,11 @@ ufs_readdir(struct file *file, struct dir_context *ctx)
 	unsigned long npages = ufs_dir_pages(inode);
 	unsigned chunk_mask = ~(UFS_SB(sb)->s_uspi->s_dirblksize - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int need_revalidate = filp->f_version != inode->i_version;
+=======
+	int need_revalidate = file->f_version != inode->i_version;
+>>>>>>> v3.18
 =======
 	int need_revalidate = file->f_version != inode->i_version;
 >>>>>>> v3.18
@@ -469,7 +479,11 @@ ufs_readdir(struct file *file, struct dir_context *ctx)
 				  "bad page in #%lu",
 				  inode->i_ino);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos += PAGE_CACHE_SIZE - offset;
+=======
+			ctx->pos += PAGE_CACHE_SIZE - offset;
+>>>>>>> v3.18
 =======
 			ctx->pos += PAGE_CACHE_SIZE - offset;
 >>>>>>> v3.18
@@ -480,9 +494,15 @@ ufs_readdir(struct file *file, struct dir_context *ctx)
 			if (offset) {
 				offset = ufs_validate_entry(sb, kaddr, offset, chunk_mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				filp->f_pos = (n<<PAGE_CACHE_SHIFT) + offset;
 			}
 			filp->f_version = inode->i_version;
+=======
+				ctx->pos = (n<<PAGE_CACHE_SHIFT) + offset;
+			}
+			file->f_version = inode->i_version;
+>>>>>>> v3.18
 =======
 				ctx->pos = (n<<PAGE_CACHE_SHIFT) + offset;
 			}
@@ -501,11 +521,16 @@ ufs_readdir(struct file *file, struct dir_context *ctx)
 			}
 			if (de->d_ino) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				int over;
 				unsigned char d_type = DT_UNKNOWN;
 
 				offset = (char *)de - kaddr;
 
+=======
+				unsigned char d_type = DT_UNKNOWN;
+
+>>>>>>> v3.18
 =======
 				unsigned char d_type = DT_UNKNOWN;
 
@@ -518,23 +543,33 @@ ufs_readdir(struct file *file, struct dir_context *ctx)
 					d_type = de->d_u.d_44.d_type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				over = filldir(dirent, de->d_name,
 					       ufs_get_de_namlen(sb, de),
 						(n<<PAGE_CACHE_SHIFT) | offset,
 					       fs32_to_cpu(sb, de->d_ino), d_type);
 				if (over) {
 =======
+=======
+>>>>>>> v3.18
 				if (!dir_emit(ctx, de->d_name,
 					       ufs_get_de_namlen(sb, de),
 					       fs32_to_cpu(sb, de->d_ino),
 					       d_type)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					ufs_put_page(page);
 					return 0;
 				}
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos += fs16_to_cpu(sb, de->d_reclen);
+=======
+			ctx->pos += fs16_to_cpu(sb, de->d_reclen);
+>>>>>>> v3.18
 =======
 			ctx->pos += fs16_to_cpu(sb, de->d_reclen);
 >>>>>>> v3.18
@@ -698,7 +733,11 @@ not_empty:
 const struct file_operations ufs_dir_operations = {
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= ufs_readdir,
+=======
+	.iterate	= ufs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= ufs_readdir,
 >>>>>>> v3.18

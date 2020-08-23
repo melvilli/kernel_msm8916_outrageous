@@ -2,6 +2,11 @@ boot/compressed/vmlinux
 tools/test_get_len
 tools/insn_sanity
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+purgatory/kexec-purgatory.c
+purgatory/purgatory.ro
+>>>>>>> v3.18
 =======
 purgatory/kexec-purgatory.c
 purgatory/purgatory.ro

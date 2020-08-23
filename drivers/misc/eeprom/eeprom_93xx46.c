@@ -12,7 +12,10 @@
 #include <linux/device.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -206,7 +209,11 @@ eeprom_93xx46_bin_write(struct file *filp, struct kobject *kobj,
 
 	if (unlikely(off >= edev->bin.size))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return -EFBIG;
+>>>>>>> v3.18
 =======
 		return -EFBIG;
 >>>>>>> v3.18
@@ -386,7 +393,10 @@ static int eeprom_93xx46_remove(struct spi_device *spi)
 
 	sysfs_remove_bin_file(&spi->dev.kobj, &edev->bin);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(edev);

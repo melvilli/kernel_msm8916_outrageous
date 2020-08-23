@@ -52,8 +52,13 @@
  * expectations of harmlessness.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qib_tune_pcie_caps(struct qib_devdata *);
 static int qib_tune_pcie_coalesce(struct qib_devdata *);
+=======
+static void qib_tune_pcie_caps(struct qib_devdata *);
+static void qib_tune_pcie_coalesce(struct qib_devdata *);
+>>>>>>> v3.18
 =======
 static void qib_tune_pcie_caps(struct qib_devdata *);
 static void qib_tune_pcie_coalesce(struct qib_devdata *);
@@ -203,6 +208,7 @@ static void qib_msix_setup(struct qib_devdata *dd, int pos, u32 *msixcnt,
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 tabsize = 0;
 	u16 msix_flags;
 	struct msix_entry *msix_entry;
@@ -244,6 +250,8 @@ do_intx:
 		qib_enable_intx(dd->pcidev);
 
 =======
+=======
+>>>>>>> v3.18
 	int nvec = *msixcnt;
 	struct msix_entry *msix_entry;
 	int i;
@@ -285,6 +293,9 @@ do_intx:
 			"falling back to INTx\n", nvec, ret);
 	*msixcnt = 0;
 	qib_enable_intx(dd->pcidev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -333,7 +344,11 @@ int qib_pcie_params(struct qib_devdata *dd, u32 minw, u32 *nent,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pos = pci_find_capability(dd->pcidev, PCI_CAP_ID_MSIX);
+=======
+	pos = dd->pcidev->msix_cap;
+>>>>>>> v3.18
 =======
 	pos = dd->pcidev->msix_cap;
 >>>>>>> v3.18
@@ -342,7 +357,11 @@ int qib_pcie_params(struct qib_devdata *dd, u32 minw, u32 *nent,
 		ret = 0; /* did it, either MSIx or INTx */
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pos = pci_find_capability(dd->pcidev, PCI_CAP_ID_MSI);
+=======
+		pos = dd->pcidev->msi_cap;
+>>>>>>> v3.18
 =======
 		pos = dd->pcidev->msi_cap;
 >>>>>>> v3.18
@@ -415,7 +434,11 @@ int qib_reinit_intr(struct qib_devdata *dd)
 		goto bail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pos = pci_find_capability(dd->pcidev, PCI_CAP_ID_MSI);
+=======
+	pos = dd->pcidev->msi_cap;
+>>>>>>> v3.18
 =======
 	pos = dd->pcidev->msi_cap;
 >>>>>>> v3.18
@@ -488,7 +511,11 @@ void qib_enable_intx(struct pci_dev *pdev)
 		pci_write_config_word(pdev, PCI_COMMAND, new);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pos = pci_find_capability(pdev, PCI_CAP_ID_MSI);
+=======
+	pos = pdev->msi_cap;
+>>>>>>> v3.18
 =======
 	pos = pdev->msi_cap;
 >>>>>>> v3.18
@@ -500,7 +527,11 @@ void qib_enable_intx(struct pci_dev *pdev)
 			pci_write_config_word(pdev, pos + PCI_MSI_FLAGS, new);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pos = pci_find_capability(pdev, PCI_CAP_ID_MSIX);
+=======
+	pos = pdev->msix_cap;
+>>>>>>> v3.18
 =======
 	pos = pdev->msix_cap;
 >>>>>>> v3.18
@@ -546,6 +577,7 @@ void qib_pcie_reenable(struct qib_devdata *dd, u16 cmd, u8 iline, u8 cline)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* code to adjust PCIe capabilities. */
 
 static int fld2val(int wd, int mask)
@@ -572,6 +604,8 @@ static int val2fld(int wd, int mask)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 static int qib_pcie_coalesce;
 module_param_named(pcie_coalesce, qib_pcie_coalesce, int, S_IRUGO);
@@ -584,7 +618,11 @@ MODULE_PARM_DESC(pcie_coalesce, "tune PCIe colescing on some Intel chipsets");
  * systems may result in the system crashing, and/or data corruption.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qib_tune_pcie_coalesce(struct qib_devdata *dd)
+=======
+static void qib_tune_pcie_coalesce(struct qib_devdata *dd)
+>>>>>>> v3.18
 =======
 static void qib_tune_pcie_coalesce(struct qib_devdata *dd)
 >>>>>>> v3.18
@@ -596,7 +634,11 @@ static void qib_tune_pcie_coalesce(struct qib_devdata *dd)
 
 	if (!qib_pcie_coalesce)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -606,6 +648,7 @@ static void qib_tune_pcie_coalesce(struct qib_devdata *dd)
 	if (parent->bus->parent) {
 		qib_devinfo(dd->pcidev, "Parent not root\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 1;
 	}
 	if (!pci_is_pcie(parent))
@@ -613,12 +656,17 @@ static void qib_tune_pcie_coalesce(struct qib_devdata *dd)
 	if (parent->vendor != 0x8086)
 		return 1;
 =======
+=======
+>>>>>>> v3.18
 		return;
 	}
 	if (!pci_is_pcie(parent))
 		return;
 	if (parent->vendor != 0x8086)
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -653,7 +701,11 @@ static void qib_tune_pcie_coalesce(struct qib_devdata *dd)
 	} else {
 		/* not one of the chipsets that we know about */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 1;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -663,7 +715,10 @@ static void qib_tune_pcie_coalesce(struct qib_devdata *dd)
 	val |= bits;
 	r = pci_write_config_dword(parent, 0x48, val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -676,6 +731,7 @@ static int qib_pcie_caps;
 module_param_named(pcie_caps, qib_pcie_caps, int, S_IRUGO);
 MODULE_PARM_DESC(pcie_caps, "Max PCIe tuning: Payload (0..3), ReadReq (4..7)");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int qib_tune_pcie_caps(struct qib_devdata *dd)
 {
@@ -727,6 +783,8 @@ static int qib_tune_pcie_caps(struct qib_devdata *dd)
 			val2fld(ep_cur, PCI_EXP_DEVCTL_PAYLOAD);
 		pcie_capability_write_word(dd->pcidev, PCI_EXP_DEVCTL, ectl);
 =======
+=======
+>>>>>>> v3.18
 static void qib_tune_pcie_caps(struct qib_devdata *dd)
 {
 	struct pci_dev *parent;
@@ -765,6 +823,9 @@ static void qib_tune_pcie_caps(struct qib_devdata *dd)
 	if (rc_mpss > ep_mps) {
 		ep_mps = rc_mpss;
 		pcie_set_mps(dd->pcidev, 128 << ep_mps);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -773,6 +834,7 @@ static void qib_tune_pcie_caps(struct qib_devdata *dd)
 	 * No field for max supported, but PCIe spec limits it to 4096,
 	 * which is code '5' (log2(4096) - 7)
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc_sup = 5;
 	if (rc_sup > ((qib_pcie_caps >> 4) & 7))
@@ -795,6 +857,8 @@ static void qib_tune_pcie_caps(struct qib_devdata *dd)
 bail:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	max_mrrs = 5;
 	if (max_mrrs > ((qib_pcie_caps >> 4) & 7))
 		max_mrrs = (qib_pcie_caps >> 4) & 7;
@@ -811,6 +875,9 @@ bail:
 		ep_mrrs = max_mrrs;
 		pcie_set_readrq(dd->pcidev, ep_mrrs);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 /* End of PCIe capability tuning */

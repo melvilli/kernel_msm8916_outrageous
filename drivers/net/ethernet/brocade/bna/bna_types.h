@@ -110,6 +110,7 @@ enum bna_rx_mem_type {
 	BNA_RX_RES_MEM_T_CCB		= 0,	/* CQ context */
 	BNA_RX_RES_MEM_T_RCB		= 1,	/* CQ context */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BNA_RX_RES_MEM_T_UNMAPQ		= 2,	/* UnmapQ for RxQs */
 	BNA_RX_RES_MEM_T_CQPT		= 3,	/* CQ QPT */
 	BNA_RX_RES_MEM_T_CSWQPT		= 4,	/* S/W QPT */
@@ -125,6 +126,8 @@ enum bna_rx_mem_type {
 	BNA_RX_RES_T_INTR		= 14,	/* Rx interrupts */
 	BNA_RX_RES_T_MAX		= 15
 =======
+=======
+>>>>>>> v3.18
 	BNA_RX_RES_MEM_T_UNMAPHQ	= 2,
 	BNA_RX_RES_MEM_T_UNMAPDQ	= 3,
 	BNA_RX_RES_MEM_T_CQPT		= 4,
@@ -140,6 +143,9 @@ enum bna_rx_mem_type {
 	BNA_RX_RES_MEM_T_RIT		= 14,
 	BNA_RX_RES_T_INTR		= 15,
 	BNA_RX_RES_T_MAX		= 16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -602,6 +608,11 @@ struct bna_rxq {
 	int			buffer_size;
 	int			q_depth;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32			num_vecs;
+	enum bna_status		multi_buffer;
+>>>>>>> v3.18
 =======
 	u32			num_vecs;
 	enum bna_status		multi_buffer;
@@ -656,6 +667,11 @@ struct bna_ccb {
 	void			*ctrl; /* For bnad */
 	struct bna_pkt_rate pkt_rate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32			pkts_una;
+	u32			bytes_per_intr;
+>>>>>>> v3.18
 =======
 	u32			pkts_una;
 	u32			bytes_per_intr;
@@ -700,6 +716,7 @@ struct bna_rx_config {
 	enum bna_rxp_type rxp_type;
 	int			paused;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			q_depth;
 	int			coalescing_timeo;
 	/*
@@ -709,6 +726,8 @@ struct bna_rx_config {
 	 */
 	int			small_buff_size;
 =======
+=======
+>>>>>>> v3.18
 	int			coalescing_timeo;
 	/*
 	 * Small/Large (or Header/Data) buffer size to be configured
@@ -725,6 +744,9 @@ struct bna_rx_config {
 	u32			q0_buf_size;
 	u32			q0_num_vecs;
 	enum bna_status		q0_multi_buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	enum bna_status rss_status;
@@ -914,8 +936,14 @@ struct bna_rx_mod {
 
 struct bna_ucam_mod {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bna_mac *ucmac;		/* BFI_MAX_UCMAC entries */
 	struct list_head			free_q;
+=======
+	struct bna_mac *ucmac;		/* num_ucmac * 2 entries */
+	struct list_head			free_q;
+	struct list_head			del_q;
+>>>>>>> v3.18
 =======
 	struct bna_mac *ucmac;		/* num_ucmac * 2 entries */
 	struct list_head			free_q;
@@ -934,14 +962,20 @@ struct bna_mcam_handle {
 
 struct bna_mcam_mod {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bna_mac *mcmac;		/* BFI_MAX_MCMAC entries */
 	struct bna_mcam_handle *mchandle;	/* BFI_MAX_MCMAC entries */
 	struct list_head			free_q;
 =======
+=======
+>>>>>>> v3.18
 	struct bna_mac *mcmac;		/* num_mcmac * 2 entries */
 	struct bna_mcam_handle *mchandle;	/* num_mcmac entries */
 	struct list_head			free_q;
 	struct list_head			del_q;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head			free_handle_q;
 

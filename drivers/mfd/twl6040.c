@@ -45,6 +45,7 @@
 #define TWL6040_NUM_SUPPLIES	(2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool twl6040_has_vibra(struct twl6040_platform_data *pdata,
 			      struct device_node *node)
 {
@@ -52,6 +53,8 @@ static bool twl6040_has_vibra(struct twl6040_platform_data *pdata,
 		return true;
 
 =======
+=======
+>>>>>>> v3.18
 static struct reg_default twl6040_defaults[] = {
 	{ 0x01, 0x4B }, /* REG_ASICID	(ro) */
 	{ 0x02, 0x00 }, /* REG_ASICREV	(ro) */
@@ -107,13 +110,19 @@ static struct reg_default twl6040_patch[] = {
 
 static bool twl6040_has_vibra(struct device_node *node)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_OF
 	if (of_find_node_by_name(node, "vibra"))
 		return true;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return false;
@@ -125,6 +134,7 @@ int twl6040_reg_read(struct twl6040 *twl6040, unsigned int reg)
 	unsigned int val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Vibra control registers from cache */
 	if (unlikely(reg == TWL6040_REG_VIBCTLL ||
 		     reg == TWL6040_REG_VIBCTLR)) {
@@ -134,6 +144,11 @@ int twl6040_reg_read(struct twl6040 *twl6040, unsigned int reg)
 		if (ret < 0)
 			return ret;
 	}
+=======
+	ret = regmap_read(twl6040->regmap, reg, &val);
+	if (ret < 0)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = regmap_read(twl6040->regmap, reg, &val);
 	if (ret < 0)
@@ -150,9 +165,12 @@ int twl6040_reg_write(struct twl6040 *twl6040, unsigned int reg, u8 val)
 
 	ret = regmap_write(twl6040->regmap, reg, val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Cache the vibra control registers */
 	if (reg == TWL6040_REG_VIBCTLL || reg == TWL6040_REG_VIBCTLR)
 		twl6040->vibra_ctrl_cache[VIBRACTRL_MEMBER(reg)] = val;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -323,12 +341,18 @@ int twl6040_power(struct twl6040 *twl6040, int on)
 			goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		clk_prepare_enable(twl6040->clk32k);
 
 		/* Allow writes to the chip */
 		regcache_cache_only(twl6040->regmap, false);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (gpio_is_valid(twl6040->audpwron)) {
 			/* use automatic power-up sequence */
@@ -346,11 +370,17 @@ int twl6040_power(struct twl6040 *twl6040, int on)
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* Sync with the HW */
 		regcache_sync(twl6040->regmap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Default PLL configuration after power up */
 		twl6040->pll = TWL6040_SYSCLK_SEL_LPPLL;
@@ -379,9 +409,12 @@ int twl6040_power(struct twl6040 *twl6040, int on)
 			twl6040_power_down_manual(twl6040);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		twl6040->sysclk = 0;
 		twl6040->mclk = 0;
 =======
+=======
+>>>>>>> v3.18
 
 		/* Set regmap to cache only and mark it as dirty */
 		regcache_cache_only(twl6040->regmap, true);
@@ -391,6 +424,9 @@ int twl6040_power(struct twl6040 *twl6040, int on)
 		twl6040->mclk = 0;
 
 		clk_disable_unprepare(twl6040->clk32k);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -484,12 +520,18 @@ int twl6040_set_pll(struct twl6040 *twl6040, int pll_id,
 				break;
 			case 19200000:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/*
 				* PLL disabled
 				* (enable PLL if MCLK jitter quality
 				*  doesn't meet specification)
 				*/
 				hppllctl |= TWL6040_MCLK_19200KHZ;
+=======
+				/* PLL enabled, bypass mode */
+				hppllctl |= TWL6040_MCLK_19200KHZ |
+					    TWL6040_HPLLBP | TWL6040_HPLLENA;
+>>>>>>> v3.18
 =======
 				/* PLL enabled, bypass mode */
 				hppllctl |= TWL6040_MCLK_19200KHZ |
@@ -503,9 +545,15 @@ int twl6040_set_pll(struct twl6040 *twl6040, int pll_id,
 				break;
 			case 38400000:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/* PLL enabled, active mode */
 				hppllctl |= TWL6040_MCLK_38400KHZ |
 					    TWL6040_HPLLENA;
+=======
+				/* PLL enabled, bypass mode */
+				hppllctl |= TWL6040_MCLK_38400KHZ |
+					    TWL6040_HPLLBP | TWL6040_HPLLENA;
+>>>>>>> v3.18
 =======
 				/* PLL enabled, bypass mode */
 				hppllctl |= TWL6040_MCLK_38400KHZ |
@@ -571,10 +619,13 @@ EXPORT_SYMBOL(twl6040_get_sysclk);
 int twl6040_get_vibralr_status(struct twl6040 *twl6040)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 status;
 
 	status = twl6040->vibra_ctrl_cache[0] | twl6040->vibra_ctrl_cache[1];
 =======
+=======
+>>>>>>> v3.18
 	unsigned int reg;
 	int ret;
 	u8 status;
@@ -589,6 +640,9 @@ int twl6040_get_vibralr_status(struct twl6040 *twl6040)
 		return ret;
 	status |= reg;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status &= (TWL6040_VIBENA | TWL6040_VIBSEL);
 
@@ -617,6 +671,7 @@ static bool twl6040_readable_reg(struct device *dev, unsigned int reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct regmap_config twl6040_regmap_config = {
 	.reg_bits = 8,
 	.val_bits = 8,
@@ -624,6 +679,8 @@ static struct regmap_config twl6040_regmap_config = {
 
 	.readable_reg = twl6040_readable_reg,
 =======
+=======
+>>>>>>> v3.18
 static bool twl6040_volatile_reg(struct device *dev, unsigned int reg)
 {
 	switch (reg) {
@@ -665,6 +722,9 @@ static struct regmap_config twl6040_regmap_config = {
 	.writeable_reg = twl6040_writeable_reg,
 
 	.cache_type = REGCACHE_RBTREE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -691,7 +751,10 @@ static int twl6040_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct twl6040_platform_data *pdata = client->dev.platform_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct device_node *node = client->dev.of_node;
@@ -700,8 +763,13 @@ static int twl6040_probe(struct i2c_client *client,
 	int irq, ret, children = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdata && !node) {
 		dev_err(&client->dev, "Platform data is missing\n");
+=======
+	if (!node) {
+		dev_err(&client->dev, "of node is missing\n");
+>>>>>>> v3.18
 =======
 	if (!node) {
 		dev_err(&client->dev, "of node is missing\n");
@@ -717,6 +785,7 @@ static int twl6040_probe(struct i2c_client *client,
 
 	twl6040 = devm_kzalloc(&client->dev, sizeof(struct twl6040),
 			       GFP_KERNEL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!twl6040) {
 		ret = -ENOMEM;
@@ -739,6 +808,8 @@ static int twl6040_probe(struct i2c_client *client,
 		dev_err(&client->dev, "Failed to get supplies: %d\n", ret);
 		goto regulator_get_err;
 =======
+=======
+>>>>>>> v3.18
 	if (!twl6040)
 		return -ENOMEM;
 
@@ -761,6 +832,9 @@ static int twl6040_probe(struct i2c_client *client,
 	if (ret != 0) {
 		dev_err(&client->dev, "Failed to get supplies: %d\n", ret);
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -768,7 +842,11 @@ static int twl6040_probe(struct i2c_client *client,
 	if (ret != 0) {
 		dev_err(&client->dev, "Failed to enable supplies: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto regulator_get_err;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -781,6 +859,7 @@ static int twl6040_probe(struct i2c_client *client,
 	init_completion(&twl6040->ready);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	twl6040->rev = twl6040_reg_read(twl6040, TWL6040_REG_ASICREV);
 
 	/* ERRATA: Automatic power-up is not possible in ES1.0 */
@@ -792,6 +871,8 @@ static int twl6040_probe(struct i2c_client *client,
 						"ti,audpwron-gpio", 0);
 	} else
 =======
+=======
+>>>>>>> v3.18
 	regmap_register_patch(twl6040->regmap, twl6040_patch,
 			      ARRAY_SIZE(twl6040_patch));
 
@@ -808,11 +889,15 @@ static int twl6040_probe(struct i2c_client *client,
 		twl6040->audpwron = of_get_named_gpio(node,
 						      "ti,audpwron-gpio", 0);
 	else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		twl6040->audpwron = -EINVAL;
 
 	if (gpio_is_valid(twl6040->audpwron)) {
 		ret = devm_gpio_request_one(&client->dev, twl6040->audpwron,
+<<<<<<< HEAD
 <<<<<<< HEAD
 					GPIOF_OUT_INIT_LOW, "audpwron");
 		if (ret)
@@ -823,6 +908,8 @@ static int twl6040_probe(struct i2c_client *client,
 			IRQF_ONESHOT, 0, &twl6040_irq_chip,
 			&twl6040->irq_data);
 =======
+=======
+>>>>>>> v3.18
 					    GPIOF_OUT_INIT_LOW, "audpwron");
 		if (ret)
 			goto gpio_err;
@@ -833,11 +920,15 @@ static int twl6040_probe(struct i2c_client *client,
 
 	ret = regmap_add_irq_chip(twl6040->regmap, twl6040->irq, IRQF_ONESHOT,
 				  0, &twl6040_irq_chip, &twl6040->irq_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		goto gpio_err;
 
 	twl6040->irq_ready = regmap_irq_get_virq(twl6040->irq_data,
+<<<<<<< HEAD
 <<<<<<< HEAD
 					       TWL6040_IRQ_READY);
 	twl6040->irq_th = regmap_irq_get_virq(twl6040->irq_data,
@@ -847,6 +938,8 @@ static int twl6040_probe(struct i2c_client *client,
 				   twl6040_readyint_handler, IRQF_ONESHOT,
 				   "twl6040_irq_ready", twl6040);
 =======
+=======
+>>>>>>> v3.18
 						 TWL6040_IRQ_READY);
 	twl6040->irq_th = regmap_irq_get_virq(twl6040->irq_data,
 					      TWL6040_IRQ_TH);
@@ -854,6 +947,9 @@ static int twl6040_probe(struct i2c_client *client,
 	ret = devm_request_threaded_irq(twl6040->dev, twl6040->irq_ready, NULL,
 					twl6040_readyint_handler, IRQF_ONESHOT,
 					"twl6040_irq_ready", twl6040);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		dev_err(twl6040->dev, "READY IRQ request failed: %d\n", ret);
@@ -861,6 +957,7 @@ static int twl6040_probe(struct i2c_client *client,
 	}
 
 	ret = devm_request_threaded_irq(twl6040->dev, twl6040->irq_th, NULL,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				   twl6040_thint_handler, IRQF_ONESHOT,
 				   "twl6040_irq_th", twl6040);
@@ -878,6 +975,8 @@ static int twl6040_probe(struct i2c_client *client,
 	 * The ASoC codec can work without pdata, pass the platform_data only if
 	 * it has been provided.
 =======
+=======
+>>>>>>> v3.18
 					twl6040_thint_handler, IRQF_ONESHOT,
 					"twl6040_irq_th", twl6040);
 	if (ret) {
@@ -888,6 +987,9 @@ static int twl6040_probe(struct i2c_client *client,
 	/*
 	 * The main functionality of twl6040 to provide audio on OMAP4+ systems.
 	 * We can add the ASoC codec child whenever this driver has been loaded.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	irq = regmap_irq_get_virq(twl6040->irq_data, TWL6040_IRQ_PLUG);
@@ -898,6 +1000,7 @@ static int twl6040_probe(struct i2c_client *client,
 	cell->resources = twl6040_codec_rsrc;
 	cell->num_resources = ARRAY_SIZE(twl6040_codec_rsrc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata && pdata->codec) {
 		cell->platform_data = pdata->codec;
 		cell->pdata_size = sizeof(*pdata->codec);
@@ -906,10 +1009,15 @@ static int twl6040_probe(struct i2c_client *client,
 
 	if (twl6040_has_vibra(pdata, node)) {
 =======
+=======
+>>>>>>> v3.18
 	children++;
 
 	/* Vibra input driver support */
 	if (twl6040_has_vibra(node)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		irq = regmap_irq_get_virq(twl6040->irq_data, TWL6040_IRQ_VIB);
 
@@ -919,6 +1027,7 @@ static int twl6040_probe(struct i2c_client *client,
 		twl6040_vibra_rsrc[0].end = irq;
 		cell->resources = twl6040_vibra_rsrc;
 		cell->num_resources = ARRAY_SIZE(twl6040_vibra_rsrc);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (pdata && pdata->vibra) {
@@ -943,6 +1052,8 @@ static int twl6040_probe(struct i2c_client *client,
 		children++;
 	}
 =======
+=======
+>>>>>>> v3.18
 		children++;
 	}
 
@@ -954,11 +1065,15 @@ static int twl6040_probe(struct i2c_client *client,
 	/* The chip is powered down so mark regmap to cache only and dirty */
 	regcache_cache_only(twl6040->regmap, true);
 	regcache_mark_dirty(twl6040->regmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = mfd_add_devices(&client->dev, -1, twl6040->cells, children,
 			      NULL, 0, NULL);
 	if (ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto mfd_err;
 
@@ -969,19 +1084,27 @@ mfd_err:
 thirq_err:
 	devm_free_irq(&client->dev, twl6040->irq_ready, twl6040);
 =======
+=======
+>>>>>>> v3.18
 		goto readyirq_err;
 
 	return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 readyirq_err:
 	regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
 gpio_err:
 	regulator_bulk_disable(TWL6040_NUM_SUPPLIES, twl6040->supplies);
 <<<<<<< HEAD
+<<<<<<< HEAD
 regulator_get_err:
 	i2c_set_clientdata(client, NULL);
 err:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -995,12 +1118,18 @@ static int twl6040_remove(struct i2c_client *client)
 		twl6040_power(twl6040, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devm_free_irq(&client->dev, twl6040->irq_ready, twl6040);
 	devm_free_irq(&client->dev, twl6040->irq_th, twl6040);
 	regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
 
 	mfd_remove_devices(&client->dev);
 	i2c_set_clientdata(client, NULL);
+=======
+	regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
+
+	mfd_remove_devices(&client->dev);
+>>>>>>> v3.18
 =======
 	regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
 

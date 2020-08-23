@@ -20,10 +20,13 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/clk.h>
 #include <linux/platform_data/usb-ohci-s3c2410.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/io.h>
 #include <linux/kernel.h>
@@ -35,6 +38,9 @@
 
 #include "ohci.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define valid_port(idx) ((idx) == 1 || (idx) == 2)
@@ -42,12 +48,18 @@
 /* clock device associated with the hcd */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #define DRIVER_DESC "OHCI S3C2410 driver"
 
 static const char hcd_name[] = "ohci-s3c2410";
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct clk *clk;
 static struct clk *usb_clk;
@@ -61,7 +73,11 @@ static void s3c2410_hcd_oc(struct s3c2410_hcd_info *info, int port_oc);
 static struct s3c2410_hcd_info *to_s3c2410_info(struct usb_hcd *hcd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return hcd->self.controller->platform_data;
+=======
+	return dev_get_platdata(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	return dev_get_platdata(hcd->self.controller);
 >>>>>>> v3.18
@@ -69,6 +85,7 @@ static struct s3c2410_hcd_info *to_s3c2410_info(struct usb_hcd *hcd)
 
 static void s3c2410_start_hc(struct platform_device *dev, struct usb_hcd *hcd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct s3c2410_hcd_info *info = dev->dev.platform_data;
 
@@ -79,6 +96,8 @@ static void s3c2410_start_hc(struct platform_device *dev, struct usb_hcd *hcd)
 
 	clk_enable(clk);
 =======
+=======
+>>>>>>> v3.18
 	struct s3c2410_hcd_info *info = dev_get_platdata(&dev->dev);
 
 	dev_dbg(&dev->dev, "s3c2410_start_hc:\n");
@@ -87,6 +106,9 @@ static void s3c2410_start_hc(struct platform_device *dev, struct usb_hcd *hcd)
 	mdelay(2);			/* let the bus clock stabilise */
 
 	clk_prepare_enable(clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (info != NULL) {
@@ -101,7 +123,11 @@ static void s3c2410_start_hc(struct platform_device *dev, struct usb_hcd *hcd)
 static void s3c2410_stop_hc(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s3c2410_hcd_info *info = dev->dev.platform_data;
+=======
+	struct s3c2410_hcd_info *info = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct s3c2410_hcd_info *info = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -117,8 +143,13 @@ static void s3c2410_stop_hc(struct platform_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(clk);
 	clk_disable(usb_clk);
+=======
+	clk_disable_unprepare(clk);
+	clk_disable_unprepare(usb_clk);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(clk);
 	clk_disable_unprepare(usb_clk);
@@ -140,7 +171,11 @@ ohci_s3c2410_hub_status_data(struct usb_hcd *hcd, char *buf)
 	int portno;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	orig  = ohci_hub_status_data(hcd, buf);
+=======
+	orig = ohci_hub_status_data(hcd, buf);
+>>>>>>> v3.18
 =======
 	orig = ohci_hub_status_data(hcd, buf);
 >>>>>>> v3.18
@@ -390,16 +425,22 @@ static int usb_hcd_s3c2410_probe(const struct hc_driver *driver,
 {
 	struct usb_hcd *hcd = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int retval;
 
 	s3c2410_usb_set_power(dev->dev.platform_data, 1, 1);
 	s3c2410_usb_set_power(dev->dev.platform_data, 2, 1);
 =======
+=======
+>>>>>>> v3.18
 	struct s3c2410_hcd_info *info = dev_get_platdata(&dev->dev);
 	int retval;
 
 	s3c2410_usb_set_power(info, 1, 1);
 	s3c2410_usb_set_power(info, 2, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hcd = usb_create_hcd(driver, &dev->dev, "s3c24xx");
@@ -432,8 +473,11 @@ static int usb_hcd_s3c2410_probe(const struct hc_driver *driver,
 	s3c2410_start_hc(dev, hcd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ohci_hcd_init(hcd_to_ohci(hcd));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	retval = usb_add_hcd(hcd, dev->resource[1].start, 0);
@@ -441,6 +485,10 @@ static int usb_hcd_s3c2410_probe(const struct hc_driver *driver,
 		goto err_ioremap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -456,6 +504,7 @@ static int usb_hcd_s3c2410_probe(const struct hc_driver *driver,
 
 /*-------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 ohci_s3c2410_start(struct usb_hcd *hcd)
@@ -525,6 +574,9 @@ static const struct hc_driver ohci_s3c2410_hc_driver = {
 =======
 static struct hc_driver __read_mostly ohci_s3c2410_hc_driver;
 >>>>>>> v3.18
+=======
+static struct hc_driver __read_mostly ohci_s3c2410_hc_driver;
+>>>>>>> v3.18
 
 static int ohci_hcd_s3c2410_drv_probe(struct platform_device *pdev)
 {
@@ -543,6 +595,7 @@ static int ohci_hcd_s3c2410_drv_remove(struct platform_device *pdev)
 static int ohci_hcd_s3c2410_drv_suspend(struct device *dev)
 {
 	struct usb_hcd *hcd = dev_get_drvdata(dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ohci_hcd *ohci = hcd_to_ohci(hcd);
 	struct platform_device *pdev = to_platform_device(dev);
@@ -567,6 +620,8 @@ static int ohci_hcd_s3c2410_drv_suspend(struct device *dev)
 bail:
 	spin_unlock_irqrestore(&ohci->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct platform_device *pdev = to_platform_device(dev);
 	bool do_wakeup = device_may_wakeup(dev);
 	int rc = 0;
@@ -576,6 +631,9 @@ bail:
 		return rc;
 
 	s3c2410_stop_hc(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rc;
@@ -614,7 +672,10 @@ static struct platform_driver ohci_hcd_s3c2410_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init ohci_s3c2410_init(void)
 {
 	if (usb_disabled())
@@ -647,5 +708,8 @@ module_exit(ohci_s3c2410_cleanup);
 
 MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_ALIAS("platform:s3c2410-ohci");

@@ -112,7 +112,10 @@ typedef struct partition_t {
     uint32_t		state;
     uint32_t		*VirtualBlockMap;
 <<<<<<< HEAD
+<<<<<<< HEAD
     uint32_t		*VirtualPageMap;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     uint32_t		FreeTotal;
@@ -1039,8 +1042,11 @@ static void ftl_freepart(partition_t *part)
 	vfree(part->VirtualBlockMap);
 	part->VirtualBlockMap = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(part->VirtualPageMap);
 	part->VirtualPageMap = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(part->EUNInfo);

@@ -23,7 +23,10 @@
 #include <linux/device.h>
 #include <linux/hrtimer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -138,7 +141,11 @@ struct gianfar_ptp_registers {
 
 struct etsects {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gianfar_ptp_registers *regs;
+=======
+	struct gianfar_ptp_registers __iomem *regs;
+>>>>>>> v3.18
 =======
 	struct gianfar_ptp_registers __iomem *regs;
 >>>>>>> v3.18
@@ -423,6 +430,10 @@ static struct ptp_clock_info ptp_gianfar_caps = {
 	.n_ext_ts	= N_EXT_TS,
 	.n_per_out	= 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.n_pins		= 0,
+>>>>>>> v3.18
 =======
 	.n_pins		= 0,
 >>>>>>> v3.18
@@ -464,7 +475,13 @@ static int gianfar_ptp_probe(struct platform_device *dev)
 
 	etsects->caps = ptp_gianfar_caps;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	etsects->cksel = DEFAULT_CKSEL;
+=======
+
+	if (get_of_u32(node, "fsl,cksel", &etsects->cksel))
+		etsects->cksel = DEFAULT_CKSEL;
+>>>>>>> v3.18
 =======
 
 	if (get_of_u32(node, "fsl,cksel", &etsects->cksel))
@@ -537,7 +554,11 @@ static int gianfar_ptp_probe(struct platform_device *dev)
 	gfar_phc_index = ptp_clock_index(etsects->clock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&dev->dev, etsects);
+=======
+	platform_set_drvdata(dev, etsects);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(dev, etsects);
 >>>>>>> v3.18
@@ -559,7 +580,11 @@ no_memory:
 static int gianfar_ptp_remove(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct etsects *etsects = dev_get_drvdata(&dev->dev);
+=======
+	struct etsects *etsects = platform_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct etsects *etsects = platform_get_drvdata(dev);
 >>>>>>> v3.18

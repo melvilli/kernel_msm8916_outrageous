@@ -84,7 +84,11 @@ static void wl1251_rx_status(struct wl1251 *wl,
 	status->flag |= RX_FLAG_MACTIME_START;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (desc->flags & RX_DESC_ENCRYPTION_MASK) {
+=======
+	if (!wl->monitor_present && (desc->flags & RX_DESC_ENCRYPTION_MASK)) {
+>>>>>>> v3.18
 =======
 	if (!wl->monitor_present && (desc->flags & RX_DESC_ENCRYPTION_MASK)) {
 >>>>>>> v3.18
@@ -185,7 +189,11 @@ static void wl1251_rx_body(struct wl1251 *wl,
 
 	/* The actual length doesn't include the target's alignment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->len = desc->length  - PLCP_HEADER_LENGTH;
+=======
+	skb_trim(skb, desc->length - PLCP_HEADER_LENGTH);
+>>>>>>> v3.18
 =======
 	skb_trim(skb, desc->length - PLCP_HEADER_LENGTH);
 >>>>>>> v3.18

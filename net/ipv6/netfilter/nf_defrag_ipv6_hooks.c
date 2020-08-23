@@ -41,7 +41,11 @@ static enum ip6_defrag_users nf_ct6_defrag_user(unsigned int hooknum,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 >>>>>>> v3.18
@@ -57,7 +61,11 @@ static enum ip6_defrag_users nf_ct6_defrag_user(unsigned int hooknum,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int ipv6_defrag(unsigned int hooknum,
+=======
+static unsigned int ipv6_defrag(const struct nf_hook_ops *ops,
+>>>>>>> v3.18
 =======
 static unsigned int ipv6_defrag(const struct nf_hook_ops *ops,
 >>>>>>> v3.18
@@ -75,7 +83,11 @@ static unsigned int ipv6_defrag(const struct nf_hook_ops *ops,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reasm = nf_ct_frag6_gather(skb, nf_ct6_defrag_user(hooknum, skb));
+=======
+	reasm = nf_ct_frag6_gather(skb, nf_ct6_defrag_user(ops->hooknum, skb));
+>>>>>>> v3.18
 =======
 	reasm = nf_ct_frag6_gather(skb, nf_ct6_defrag_user(ops->hooknum, skb));
 >>>>>>> v3.18
@@ -90,7 +102,11 @@ static unsigned int ipv6_defrag(const struct nf_hook_ops *ops,
 	nf_ct_frag6_consume_orig(reasm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NF_HOOK_THRESH(NFPROTO_IPV6, hooknum, reasm,
+=======
+	NF_HOOK_THRESH(NFPROTO_IPV6, ops->hooknum, reasm,
+>>>>>>> v3.18
 =======
 	NF_HOOK_THRESH(NFPROTO_IPV6, ops->hooknum, reasm,
 >>>>>>> v3.18

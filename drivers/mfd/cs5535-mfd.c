@@ -24,7 +24,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mfd/core.h>
@@ -176,7 +179,11 @@ static void cs5535_mfd_remove(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cs5535_mfd_pci_tbl) = {
+=======
+static const struct pci_device_id cs5535_mfd_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id cs5535_mfd_pci_tbl[] = {
 >>>>>>> v3.18

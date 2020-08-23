@@ -62,7 +62,11 @@ static const char *const version =
  * PCI device identifiers for "new style" Linux PCI Device Drivers
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pcnet32_pci_tbl) = {
+=======
+static const struct pci_device_id pcnet32_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pcnet32_pci_tbl[] = {
 >>>>>>> v3.18
@@ -486,6 +490,7 @@ static void pcnet32_realloc_tx_ring(struct net_device *dev,
 	struct pcnet32_tx_head *new_tx_ring;
 	struct sk_buff **new_skb_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pcnet32_purge_tx_ring(dev);
 
@@ -507,6 +512,8 @@ static void pcnet32_realloc_tx_ring(struct net_device *dev,
 	new_skb_list = kcalloc(1 << size, sizeof(struct sk_buff *),
 			       GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int entries = BIT(size);
 
 	pcnet32_purge_tx_ring(dev);
@@ -523,6 +530,9 @@ static void pcnet32_realloc_tx_ring(struct net_device *dev,
 		goto free_new_tx_ring;
 
 	new_skb_list = kcalloc(entries, sizeof(struct sk_buff *), GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!new_skb_list)
 		goto free_new_lists;
@@ -531,16 +541,22 @@ static void pcnet32_realloc_tx_ring(struct net_device *dev,
 	kfree(lp->tx_dma_addr);
 	pci_free_consistent(lp->pci_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    sizeof(struct pcnet32_tx_head) *
 			    lp->tx_ring_size, lp->tx_ring,
 			    lp->tx_ring_dma_addr);
 
 	lp->tx_ring_size = (1 << size);
 =======
+=======
+>>>>>>> v3.18
 			    sizeof(struct pcnet32_tx_head) * lp->tx_ring_size,
 			    lp->tx_ring, lp->tx_ring_dma_addr);
 
 	lp->tx_ring_size = entries;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lp->tx_mod_mask = lp->tx_ring_size - 1;
 	lp->tx_len_bits = (size << 12);
@@ -555,8 +571,12 @@ free_new_lists:
 free_new_tx_ring:
 	pci_free_consistent(lp->pci_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    sizeof(struct pcnet32_tx_head) *
 			    (1 << size),
+=======
+			    sizeof(struct pcnet32_tx_head) * entries,
+>>>>>>> v3.18
 =======
 			    sizeof(struct pcnet32_tx_head) * entries,
 >>>>>>> v3.18
@@ -584,6 +604,7 @@ static void pcnet32_realloc_rx_ring(struct net_device *dev,
 	struct sk_buff **new_skb_list;
 	int new, overlap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	new_rx_ring = pci_alloc_consistent(lp->pci_dev,
 					   sizeof(struct pcnet32_rx_head) *
@@ -602,6 +623,8 @@ static void pcnet32_realloc_rx_ring(struct net_device *dev,
 	new_skb_list = kcalloc(1 << size, sizeof(struct sk_buff *),
 			       GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int entries = BIT(size);
 
 	new_rx_ring =
@@ -616,13 +639,20 @@ static void pcnet32_realloc_rx_ring(struct net_device *dev,
 		goto free_new_rx_ring;
 
 	new_skb_list = kcalloc(entries, sizeof(struct sk_buff *), GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!new_skb_list)
 		goto free_new_lists;
 
 	/* first copy the current receive buffers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	overlap = min(size, lp->rx_ring_size);
+=======
+	overlap = min(entries, lp->rx_ring_size);
+>>>>>>> v3.18
 =======
 	overlap = min(entries, lp->rx_ring_size);
 >>>>>>> v3.18
@@ -633,7 +663,11 @@ static void pcnet32_realloc_rx_ring(struct net_device *dev,
 	}
 	/* now allocate any new buffers needed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (; new < size; new++) {
+=======
+	for (; new < entries; new++) {
+>>>>>>> v3.18
 =======
 	for (; new < entries; new++) {
 >>>>>>> v3.18
@@ -652,7 +686,10 @@ static void pcnet32_realloc_rx_ring(struct net_device *dev,
 			    pci_map_single(lp->pci_dev, rx_skbuff->data,
 					   PKT_BUF_SIZE, PCI_DMA_FROMDEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (pci_dma_mapping_error(lp->pci_dev,
 					  new_dma_addr_list[new])) {
 			netif_err(lp, drv, dev, "%s dma mapping failed\n",
@@ -660,6 +697,9 @@ static void pcnet32_realloc_rx_ring(struct net_device *dev,
 			dev_kfree_skb(new_skb_list[new]);
 			goto free_all_new;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		new_rx_ring[new].base = cpu_to_le32(new_dma_addr_list[new]);
 		new_rx_ring[new].buf_length = cpu_to_le16(NEG_BUF_SIZE);
@@ -669,15 +709,21 @@ static void pcnet32_realloc_rx_ring(struct net_device *dev,
 	for (; new < lp->rx_ring_size; new++) {
 		if (lp->rx_skbuff[new]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pci_unmap_single(lp->pci_dev, lp->rx_dma_addr[new],
 					 PKT_BUF_SIZE, PCI_DMA_FROMDEVICE);
 =======
+=======
+>>>>>>> v3.18
 			if (!pci_dma_mapping_error(lp->pci_dev,
 						   lp->rx_dma_addr[new]))
 				pci_unmap_single(lp->pci_dev,
 						 lp->rx_dma_addr[new],
 						 PKT_BUF_SIZE,
 						 PCI_DMA_FROMDEVICE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev_kfree_skb(lp->rx_skbuff[new]);
 		}
@@ -691,7 +737,11 @@ static void pcnet32_realloc_rx_ring(struct net_device *dev,
 			    lp->rx_ring_dma_addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp->rx_ring_size = (1 << size);
+=======
+	lp->rx_ring_size = entries;
+>>>>>>> v3.18
 =======
 	lp->rx_ring_size = entries;
 >>>>>>> v3.18
@@ -707,15 +757,21 @@ free_all_new:
 	while (--new >= lp->rx_ring_size) {
 		if (new_skb_list[new]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pci_unmap_single(lp->pci_dev, new_dma_addr_list[new],
 					 PKT_BUF_SIZE, PCI_DMA_FROMDEVICE);
 =======
+=======
+>>>>>>> v3.18
 			if (!pci_dma_mapping_error(lp->pci_dev,
 						   new_dma_addr_list[new]))
 				pci_unmap_single(lp->pci_dev,
 						 new_dma_addr_list[new],
 						 PKT_BUF_SIZE,
 						 PCI_DMA_FROMDEVICE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev_kfree_skb(new_skb_list[new]);
 		}
@@ -726,8 +782,12 @@ free_new_lists:
 free_new_rx_ring:
 	pci_free_consistent(lp->pci_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    sizeof(struct pcnet32_rx_head) *
 			    (1 << size),
+=======
+			    sizeof(struct pcnet32_rx_head) * entries,
+>>>>>>> v3.18
 =======
 			    sizeof(struct pcnet32_rx_head) * entries,
 >>>>>>> v3.18
@@ -746,15 +806,21 @@ static void pcnet32_purge_rx_ring(struct net_device *dev)
 		wmb();		/* Make sure adapter sees owner change */
 		if (lp->rx_skbuff[i]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pci_unmap_single(lp->pci_dev, lp->rx_dma_addr[i],
 					 PKT_BUF_SIZE, PCI_DMA_FROMDEVICE);
 =======
+=======
+>>>>>>> v3.18
 			if (!pci_dma_mapping_error(lp->pci_dev,
 						   lp->rx_dma_addr[i]))
 				pci_unmap_single(lp->pci_dev,
 						 lp->rx_dma_addr[i],
 						 PKT_BUF_SIZE,
 						 PCI_DMA_FROMDEVICE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev_kfree_skb_any(lp->rx_skbuff[i]);
 		}
@@ -1035,13 +1101,19 @@ static int pcnet32_loopback_test(struct net_device *dev, uint64_t * data1)
 			pci_map_single(lp->pci_dev, skb->data, skb->len,
 				       PCI_DMA_TODEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (pci_dma_mapping_error(lp->pci_dev, lp->tx_dma_addr[x])) {
 			netif_printk(lp, hw, KERN_DEBUG, dev,
 				     "DMA mapping error at line: %d!\n",
 				     __LINE__);
 			goto clean_up;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lp->tx_ring[x].base = cpu_to_le32(lp->tx_dma_addr[x]);
 		wmb();	/* Make sure owner changes after all others are visible */
@@ -1256,6 +1328,7 @@ static void pcnet32_rx_entry(struct net_device *dev,
 	if (pkt_len > rx_copybreak) {
 		struct sk_buff *newskb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		newskb = netdev_alloc_skb(dev, PKT_BUF_SKB);
 		if (newskb) {
@@ -1275,6 +1348,8 @@ static void pcnet32_rx_entry(struct net_device *dev,
 			rxp->base = cpu_to_le32(lp->rx_dma_addr[entry]);
 			rx_in_place = 1;
 =======
+=======
+>>>>>>> v3.18
 		dma_addr_t new_dma_addr;
 
 		newskb = netdev_alloc_skb(dev, PKT_BUF_SKB);
@@ -1305,6 +1380,9 @@ static void pcnet32_rx_entry(struct net_device *dev,
 				rxp->base = cpu_to_le32(new_dma_addr);
 				rx_in_place = 1;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else
 			skb = NULL;
@@ -1663,7 +1741,11 @@ pcnet32_probe1(unsigned long ioaddr, int shared, struct pci_dev *pdev)
 	struct pcnet32_private *lp;
 	int i, media;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int fdx, mii, fset, dxsuflo, sram;
+=======
+	int fdx, mii, fset, dxsuflo;
+>>>>>>> v3.18
 =======
 	int fdx, mii, fset, dxsuflo;
 >>>>>>> v3.18
@@ -1672,7 +1754,11 @@ pcnet32_probe1(unsigned long ioaddr, int shared, struct pci_dev *pdev)
 	struct net_device *dev;
 	const struct pcnet32_access *a = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 promaddr[6];
+=======
+	u8 promaddr[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	u8 promaddr[ETH_ALEN];
 >>>>>>> v3.18
@@ -1708,7 +1794,11 @@ pcnet32_probe1(unsigned long ioaddr, int shared, struct pci_dev *pdev)
 
 	/* initialize variables */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fdx = mii = fset = dxsuflo = sram = 0;
+=======
+	fdx = mii = fset = dxsuflo = 0;
+>>>>>>> v3.18
 =======
 	fdx = mii = fset = dxsuflo = 0;
 >>>>>>> v3.18
@@ -1745,7 +1835,10 @@ pcnet32_probe1(unsigned long ioaddr, int shared, struct pci_dev *pdev)
 		fdx = 1;
 		mii = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sram = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -1772,7 +1865,10 @@ pcnet32_probe1(unsigned long ioaddr, int shared, struct pci_dev *pdev)
 		fdx = 1;
 		mii = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sram = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -1804,6 +1900,7 @@ pcnet32_probe1(unsigned long ioaddr, int shared, struct pci_dev *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * The Am79C973/Am79C975 controllers come with 12K of SRAM
 	 * which we can use for the Tx/Rx buffers but most importantly,
@@ -1829,6 +1926,8 @@ pcnet32_probe1(unsigned long ioaddr, int shared, struct pci_dev *pdev)
 		a->write_bcr(ioaddr, 18, a->read_bcr(ioaddr, 18) | (1 << 11));
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev = alloc_etherdev(sizeof(*lp));
@@ -1860,15 +1959,21 @@ pcnet32_probe1(unsigned long ioaddr, int shared, struct pci_dev *pdev)
 
 	/* read PROM address and compare with CSR address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < 6; i++)
 		promaddr[i] = inb(ioaddr + i);
 
 	if (memcmp(promaddr, dev->dev_addr, 6) ||
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ETH_ALEN; i++)
 		promaddr[i] = inb(ioaddr + i);
 
 	if (!ether_addr_equal(promaddr, dev->dev_addr) ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    !is_valid_ether_addr(dev->dev_addr)) {
 		if (is_valid_ether_addr(promaddr)) {
@@ -1877,7 +1982,11 @@ pcnet32_probe1(unsigned long ioaddr, int shared, struct pci_dev *pdev)
 				pr_info("    using instead PROM address of");
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(dev->dev_addr, promaddr, 6);
+=======
+			memcpy(dev->dev_addr, promaddr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 			memcpy(dev->dev_addr, promaddr, ETH_ALEN);
 >>>>>>> v3.18
@@ -2435,16 +2544,22 @@ static void pcnet32_purge_tx_ring(struct net_device *dev)
 		wmb();		/* Make sure adapter sees owner change */
 		if (lp->tx_skbuff[i]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pci_unmap_single(lp->pci_dev, lp->tx_dma_addr[i],
 					 lp->tx_skbuff[i]->len,
 					 PCI_DMA_TODEVICE);
 =======
+=======
+>>>>>>> v3.18
 			if (!pci_dma_mapping_error(lp->pci_dev,
 						   lp->tx_dma_addr[i]))
 				pci_unmap_single(lp->pci_dev,
 						 lp->tx_dma_addr[i],
 						 lp->tx_skbuff[i]->len,
 						 PCI_DMA_TODEVICE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev_kfree_skb_any(lp->tx_skbuff[i]);
 		}
@@ -2479,11 +2594,14 @@ static int pcnet32_init_ring(struct net_device *dev)
 
 		rmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (lp->rx_dma_addr[i] == 0)
 			lp->rx_dma_addr[i] =
 			    pci_map_single(lp->pci_dev, rx_skbuff->data,
 					   PKT_BUF_SIZE, PCI_DMA_FROMDEVICE);
 =======
+=======
+>>>>>>> v3.18
 		if (lp->rx_dma_addr[i] == 0) {
 			lp->rx_dma_addr[i] =
 			    pci_map_single(lp->pci_dev, rx_skbuff->data,
@@ -2497,6 +2615,9 @@ static int pcnet32_init_ring(struct net_device *dev)
 				return -1;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		lp->rx_ring[i].base = cpu_to_le32(lp->rx_dma_addr[i]);
 		lp->rx_ring[i].buf_length = cpu_to_le16(NEG_BUF_SIZE);
@@ -2628,10 +2749,13 @@ static netdev_tx_t pcnet32_start_xmit(struct sk_buff *skb,
 	lp->tx_ring[entry].misc = 0x00000000;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lp->tx_skbuff[entry] = skb;
 	lp->tx_dma_addr[entry] =
 	    pci_map_single(lp->pci_dev, skb->data, skb->len, PCI_DMA_TODEVICE);
 =======
+=======
+>>>>>>> v3.18
 	lp->tx_dma_addr[entry] =
 	    pci_map_single(lp->pci_dev, skb->data, skb->len, PCI_DMA_TODEVICE);
 	if (pci_dma_mapping_error(lp->pci_dev, lp->tx_dma_addr[entry])) {
@@ -2640,6 +2764,9 @@ static netdev_tx_t pcnet32_start_xmit(struct sk_buff *skb,
 		goto drop_packet;
 	}
 	lp->tx_skbuff[entry] = skb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lp->tx_ring[entry].base = cpu_to_le32(lp->tx_dma_addr[entry]);
 	wmb();			/* Make sure owner changes after all others are visible */
@@ -2656,6 +2783,10 @@ static netdev_tx_t pcnet32_start_xmit(struct sk_buff *skb,
 		netif_stop_queue(dev);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+drop_packet:
+>>>>>>> v3.18
 =======
 drop_packet:
 >>>>>>> v3.18
@@ -3064,7 +3195,10 @@ static void pcnet32_remove_one(struct pci_dev *pdev)
 		free_netdev(dev);
 		pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

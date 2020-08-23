@@ -45,7 +45,10 @@ Description:
 		cause -EINVAL to be returned.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 What:		/sys/firmware/acpi/hotplug/force_remove
 Date:		May 2013
 Contact:	Rafael J. Wysocki <rafael.j.wysocki@intel.com>
@@ -56,6 +59,9 @@ Description:
 		viewpoint).  That number can be changed by writing a boolean
 		value to this file.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 What:		/sys/firmware/acpi/interrupts/
 Date:		February 2008

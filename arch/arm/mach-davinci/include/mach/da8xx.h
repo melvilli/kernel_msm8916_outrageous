@@ -22,8 +22,13 @@
 
 #include <mach/serial.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/edma.h>
 #include <mach/pm.h>
+=======
+#include <mach/pm.h>
+#include <linux/platform_data/edma.h>
+>>>>>>> v3.18
 =======
 #include <mach/pm.h>
 #include <linux/platform_data/edma.h>
@@ -86,8 +91,13 @@ extern unsigned int da850_max_speed;
 #define DA8XX_ARM_RAM_BASE	0xffff0000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init da830_init(void);
 void __init da850_init(void);
+=======
+void da830_init(void);
+void da850_init(void);
+>>>>>>> v3.18
 =======
 void da830_init(void);
 void da850_init(void);
@@ -106,6 +116,7 @@ int da8xx_register_lcdc(struct da8xx_lcdc_platform_data *pdata);
 int da8xx_register_mmcsd0(struct davinci_mmc_config *config);
 int da850_register_mmcsd1(struct davinci_mmc_config *config);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init da8xx_register_mcasp(int id, struct snd_platform_data *pdata);
 int da8xx_register_rtc(void);
 int da850_register_cpufreq(char *async_clk);
@@ -118,6 +129,8 @@ int __init da850_register_vpif_display
 			(struct vpif_display_config *display_config);
 int __init da850_register_vpif_capture
 =======
+=======
+>>>>>>> v3.18
 void da8xx_register_mcasp(int id, struct snd_platform_data *pdata);
 int da8xx_register_rtc(void);
 int da8xx_register_gpio(void *pdata);
@@ -130,19 +143,28 @@ int da850_register_vpif(void);
 int da850_register_vpif_display
 			(struct vpif_display_config *display_config);
 int da850_register_vpif_capture
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			(struct vpif_capture_config *capture_config);
 void da8xx_restart(enum reboot_mode mode, const char *cmd);
 void da8xx_rproc_reserve_cma(void);
 int da8xx_register_rproc(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern struct platform_device da8xx_serial_device;
 =======
+=======
+>>>>>>> v3.18
 int da850_register_gpio(void);
 int da830_register_gpio(void);
 
 extern struct platform_device da8xx_serial_device[];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct emac_platform_data da8xx_emac_pdata;
 extern struct da8xx_lcdc_platform_data sharp_lcd035q3dg01_pdata;

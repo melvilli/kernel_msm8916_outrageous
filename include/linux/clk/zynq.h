@@ -1,5 +1,9 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2013 Xilinx Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013 Xilinx Inc.
 >>>>>>> v3.18
@@ -24,9 +28,12 @@
 #define __LINUX_CLK_ZYNQ_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init xilinx_zynq_clocks_init(void __iomem *slcr);
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/spinlock.h>
 
 void zynq_clock_init(void);
@@ -34,5 +41,8 @@ void zynq_clock_init(void);
 struct clk *clk_register_zynq_pll(const char *name, const char *parent,
 		void __iomem *pll_ctrl, void __iomem *pll_status, u8 lock_index,
 		spinlock_t *lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

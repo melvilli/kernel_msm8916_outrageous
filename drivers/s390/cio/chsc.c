@@ -21,6 +21,10 @@
 #include <asm/chsc.h>
 #include <asm/crw.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/isc.h>
+>>>>>>> v3.18
 =======
 #include <asm/isc.h>
 >>>>>>> v3.18
@@ -59,6 +63,10 @@ int chsc_error_from_response(int response)
 		return -EOPNOTSUPP;
 	case 0x000b:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case 0x0107:		/* "Channel busy" for the op 0x003d */
+>>>>>>> v3.18
 =======
 	case 0x0107:		/* "Channel busy" for the op 0x003d */
 >>>>>>> v3.18
@@ -153,7 +161,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * chsc_ssqd() - store subchannel QDIO data (SSQD)
  * @schid: id of the subchannel on which SSQD is performed
@@ -213,6 +224,9 @@ int chsc_sadc(struct subchannel_id schid, struct chsc_scssc_area *scssc,
 }
 EXPORT_SYMBOL_GPL(chsc_sadc);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int s390_subchannel_remove_chpid(struct subchannel *sch, void *data)
 {
@@ -248,6 +262,7 @@ void chsc_chp_offline(struct chp_id chpid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int s390_process_res_acc_new_sch(struct subchannel_id schid, void *data)
 {
 	struct schib schib;
@@ -268,6 +283,8 @@ static int s390_process_res_acc_new_sch(struct subchannel_id schid, void *data)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __s390_process_res_acc(struct subchannel *sch, void *data)
@@ -301,8 +318,13 @@ static void s390_process_res_acc(struct chp_link *link)
 	 * will we have to do.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_subchannel_staged(__s390_process_res_acc,
 				   s390_process_res_acc_new_sch, link);
+=======
+	for_each_subchannel_staged(__s390_process_res_acc, NULL, link);
+	css_schedule_reprobe();
+>>>>>>> v3.18
 =======
 	for_each_subchannel_staged(__s390_process_res_acc, NULL, link);
 	css_schedule_reprobe();
@@ -660,6 +682,10 @@ void chsc_chp_online(struct chp_id chpid)
 		for_each_subchannel_staged(__s390_process_res_acc, NULL,
 					   &link);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		css_schedule_reprobe();
+>>>>>>> v3.18
 =======
 		css_schedule_reprobe();
 >>>>>>> v3.18
@@ -698,6 +724,7 @@ static int s390_subchannel_vary_chpid_on(struct subchannel *sch, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 __s390_vary_chpid_on(struct subchannel_id schid, void *data)
 {
@@ -711,6 +738,8 @@ __s390_vary_chpid_on(struct subchannel_id schid, void *data)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -732,7 +761,12 @@ int chsc_chp_vary(struct chp_id chpid, int on)
 		chp_update_desc(chp);
 		for_each_subchannel_staged(s390_subchannel_vary_chpid_on,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   __s390_vary_chpid_on, &chpid);
+=======
+					   NULL, &chpid);
+		css_schedule_reprobe();
+>>>>>>> v3.18
 =======
 					   NULL, &chpid);
 		css_schedule_reprobe();
@@ -1277,7 +1311,10 @@ out:
 }
 EXPORT_SYMBOL_GPL(chsc_scm_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * chsc_pnso_brinfo() - Perform Network-Subchannel Operation, Bridge Info.
@@ -1310,4 +1347,7 @@ int chsc_pnso_brinfo(struct subchannel_id schid,
 	return chsc_error_from_response(brinfo_area->response.code);
 }
 EXPORT_SYMBOL_GPL(chsc_pnso_brinfo);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

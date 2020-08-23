@@ -22,11 +22,17 @@
 #include <linux/i2c.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #include <linux/regulator/fixed.h>
 #include <linux/regulator/machine.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
@@ -203,9 +209,15 @@ static struct i2c_board_info mx27ads_i2c_devices[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void lcd_power(int on)
 {
 	if (on)
+=======
+static void vgpio_set(struct gpio_chip *chip, unsigned offset, int value)
+{
+	if (value)
+>>>>>>> v3.18
 =======
 static void vgpio_set(struct gpio_chip *chip, unsigned offset, int value)
 {
@@ -217,7 +229,10 @@ static void vgpio_set(struct gpio_chip *chip, unsigned offset, int value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vgpio_dir_out(struct gpio_chip *chip, unsigned offset, int value)
 {
 	return 0;
@@ -262,6 +277,9 @@ static void __init mx27ads_regulator_init(void)
 				      sizeof(mx27ads_lcd_regulator_pdata));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct imx_fb_videomode mx27ads_modes[] = {
 	{
@@ -300,8 +318,11 @@ static const struct imx_fb_platform_data mx27ads_fb_data __initconst = {
 	.lscr1		= 0x00120300,
 	.dmacr		= 0x00020010,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	.lcd_power	= lcd_power,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -368,6 +389,10 @@ static void __init mx27ads_board_init(void)
 				ARRAY_SIZE(mx27ads_i2c_devices));
 	imx27_add_imx_i2c(1, &mx27ads_i2c1_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mx27ads_regulator_init();
+>>>>>>> v3.18
 =======
 	mx27ads_regulator_init();
 >>>>>>> v3.18
@@ -412,7 +437,10 @@ MACHINE_START(MX27ADS, "Freescale i.MX27ADS")
 	.init_early = imx27_init_early,
 	.init_irq = mx27_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx27_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= mx27ads_timer_init,

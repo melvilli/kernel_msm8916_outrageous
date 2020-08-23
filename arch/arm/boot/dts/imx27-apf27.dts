@@ -30,6 +30,10 @@
 		osc26m {
 			compatible = "fsl,imx-osc26m", "fixed-clock";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			#clock-cells = <0>;
+>>>>>>> v3.18
 =======
 			#clock-cells = <0>;
 >>>>>>> v3.18
@@ -39,8 +43,11 @@
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 &uart1 {
 =======
+=======
+>>>>>>> v3.18
 &iomuxc {
 	imx27-apf27 {
 		pinctrl_fec1: fec1grp {
@@ -78,12 +85,20 @@
 &uart1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = "okay";
 };
 
 &fec {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_fec1>;
+>>>>>>> v3.18
 =======
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_fec1>;

@@ -25,6 +25,10 @@
 #include <drm/drm_crtc_helper.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gma_display.h"
+>>>>>>> v3.18
 =======
 #include "gma_display.h"
 >>>>>>> v3.18
@@ -121,17 +125,23 @@ struct psb_intel_i2c_chan {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct psb_intel_encoder {
 	struct drm_encoder base;
 	int type;
 	bool needs_tv_clock;
 	void (*hot_plug)(struct psb_intel_encoder *);
 =======
+=======
+>>>>>>> v3.18
 struct gma_encoder {
 	struct drm_encoder base;
 	int type;
 	bool needs_tv_clock;
 	void (*hot_plug)(struct gma_encoder *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int crtc_mask;
 	int clone_mask;
@@ -149,9 +159,15 @@ struct gma_encoder {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct psb_intel_connector {
 	struct drm_connector base;
 	struct psb_intel_encoder *encoder;
+=======
+struct gma_connector {
+	struct drm_connector base;
+	struct gma_encoder *encoder;
+>>>>>>> v3.18
 =======
 struct gma_connector {
 	struct drm_connector base;
@@ -180,7 +196,11 @@ struct psb_intel_crtc_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct psb_intel_crtc {
+=======
+struct gma_crtc {
+>>>>>>> v3.18
 =======
 struct gma_crtc {
 >>>>>>> v3.18
@@ -211,6 +231,7 @@ struct gma_crtc {
 	/* Saved Crtc HW states */
 	struct psb_intel_crtc_state *crtc_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 #define to_psb_intel_crtc(x)	\
@@ -220,6 +241,8 @@ struct gma_crtc {
 #define to_psb_intel_encoder(x)	\
 		container_of(x, struct psb_intel_encoder, base)
 =======
+=======
+>>>>>>> v3.18
 
 	const struct gma_clock_funcs *clock_funcs;
 };
@@ -230,6 +253,9 @@ struct gma_crtc {
 		container_of(x, struct gma_connector, base)
 #define to_gma_encoder(x)	\
 		container_of(x, struct gma_encoder, base)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define to_psb_intel_framebuffer(x)	\
 		container_of(x, struct psb_intel_framebuffer, base)
@@ -259,6 +285,7 @@ extern void mid_dsi_init(struct drm_device *dev,
 		    struct psb_intel_mode_device *mode_dev, int dsi_num);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void psb_intel_crtc_load_lut(struct drm_crtc *crtc);
 extern void psb_intel_encoder_prepare(struct drm_encoder *encoder);
 extern void psb_intel_encoder_commit(struct drm_encoder *encoder);
@@ -283,6 +310,8 @@ extern void psb_intel_wait_for_vblank(struct drm_device *dev);
 extern int psb_intel_get_pipe_from_crtc_id(struct drm_device *dev, void *data,
 				struct drm_file *file_priv);
 =======
+=======
+>>>>>>> v3.18
 extern struct drm_encoder *gma_best_encoder(struct drm_connector *connector);
 extern void gma_connector_attach_encoder(struct gma_connector *connector,
 					 struct gma_encoder *encoder);
@@ -295,6 +324,9 @@ static inline struct gma_encoder *gma_attached_encoder(
 
 extern struct drm_display_mode *psb_intel_crtc_mode_get(struct drm_device *dev,
 						    struct drm_crtc *crtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct drm_crtc *psb_intel_get_crtc_from_pipe(struct drm_device *dev,
 						 int pipe);
@@ -307,11 +339,14 @@ extern int intelfb_probe(struct drm_device *dev);
 extern int intelfb_remove(struct drm_device *dev,
 			  struct drm_framebuffer *fb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct drm_framebuffer *psb_intel_framebuffer_create(struct drm_device
 							*dev, struct
 							drm_mode_fb_cmd
 							*mode_cmd,
 							void *mm_private);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern bool psb_intel_lvds_mode_fixup(struct drm_encoder *encoder,

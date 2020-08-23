@@ -26,10 +26,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * $Log: mac_NCR5380.c,v $
  */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -62,12 +65,15 @@
 #include "NCR5380.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0
 #define NDEBUG (NDEBUG_INTR | NDEBUG_PSEUDO_DMA | NDEBUG_ARBITRATION | NDEBUG_SELECTION | NDEBUG_RESELECTION)
 #else
 #define NDEBUG (NDEBUG_ABORT)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RESET_BOOT
@@ -267,6 +273,11 @@ int __init macscsi_detect(struct scsi_host_template * tpnt)
        something different here */
     instance = scsi_register (tpnt, sizeof(struct NCR5380_hostdata));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    if (instance == NULL)
+	return 0;
+>>>>>>> v3.18
 =======
     if (instance == NULL)
 	return 0;

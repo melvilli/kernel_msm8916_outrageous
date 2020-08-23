@@ -4,6 +4,10 @@ drbd-y += drbd_main.o drbd_strings.o drbd_nl.o
 drbd-y += drbd_interval.o drbd_state.o
 drbd-y += drbd_nla.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+drbd-$(CONFIG_DEBUG_FS) += drbd_debugfs.o
+>>>>>>> v3.18
 =======
 drbd-$(CONFIG_DEBUG_FS) += drbd_debugfs.o
 >>>>>>> v3.18

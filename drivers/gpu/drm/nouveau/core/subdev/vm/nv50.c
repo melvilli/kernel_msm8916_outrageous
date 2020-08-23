@@ -28,6 +28,10 @@
 #include <subdev/timer.h>
 #include <subdev/fb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <subdev/bar.h>
+>>>>>>> v3.18
 =======
 #include <subdev/bar.h>
 >>>>>>> v3.18
@@ -36,7 +40,10 @@
 struct nv50_vmmgr_priv {
 	struct nouveau_vmmgr base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -94,8 +101,13 @@ nv50_vm_map(struct nouveau_vma *vma, struct nouveau_gpuobj *pgt,
 	/* IGPs don't have real VRAM, re-target to stolen system memory */
 	target = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nouveau_fb(vma->vm->vmm)->ram.stolen) {
 		phys += nouveau_fb(vma->vm->vmm)->ram.stolen;
+=======
+	if (nouveau_fb(vma->vm->vmm)->ram->stolen) {
+		phys += nouveau_fb(vma->vm->vmm)->ram->stolen;
+>>>>>>> v3.18
 =======
 	if (nouveau_fb(vma->vm->vmm)->ram->stolen) {
 		phys += nouveau_fb(vma->vm->vmm)->ram->stolen;
@@ -164,6 +176,7 @@ static void
 nv50_vm_flush(struct nouveau_vm *vm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_engine *engine;
 	int i;
 
@@ -188,6 +201,8 @@ nv50_vm_flush_engine(struct nouveau_subdev *subdev, int engine)
 		nv_error(subdev, "vm flush timeout: engine %d\n", engine);
 	spin_unlock_irqrestore(&priv->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	struct nv50_vmmgr_priv *priv = (void *)vm->vmm;
 	struct nouveau_bar *bar = nouveau_bar(priv);
 	struct nouveau_engine *engine;
@@ -225,6 +240,9 @@ nv50_vm_flush_engine(struct nouveau_subdev *subdev, int engine)
 			nv_error(priv, "vm flush timeout: engine %d\n", vme);
 	}
 	mutex_unlock(&nv_subdev(priv)->mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -264,7 +282,10 @@ nv50_vmmgr_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	priv->base.unmap = nv50_vm_unmap;
 	priv->base.flush = nv50_vm_flush;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&priv->lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

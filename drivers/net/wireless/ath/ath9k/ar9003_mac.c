@@ -102,7 +102,11 @@ ar9003_set_txdesc(struct ath_hw *ah, void *ds, struct ath_tx_info *i)
 	ACCESS_ONCE(ads->ctl11) = (i->pkt_len & AR_FrameLen)
 		| (i->flags & ATH9K_TXDESC_VMF ? AR_VirtMoreFrag : 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		| SM(i->txpower, AR_XmitPower)
+=======
+		| SM(i->txpower, AR_XmitPower0)
+>>>>>>> v3.18
 =======
 		| SM(i->txpower, AR_XmitPower0)
 >>>>>>> v3.18
@@ -156,11 +160,17 @@ ar9003_set_txdesc(struct ath_hw *ah, void *ds, struct ath_tx_info *i)
 
 	ACCESS_ONCE(ads->ctl19) = AR_Not_Sounding;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	ACCESS_ONCE(ads->ctl20) = SM(i->txpower, AR_XmitPower1);
 	ACCESS_ONCE(ads->ctl21) = SM(i->txpower, AR_XmitPower2);
 	ACCESS_ONCE(ads->ctl22) = SM(i->txpower, AR_XmitPower3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -187,7 +197,12 @@ static void ar9003_hw_set_desc_link(void *ds, u32 ds_link)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool ar9003_hw_get_isr(struct ath_hw *ah, enum ath9k_int *masked)
+=======
+static bool ar9003_hw_get_isr(struct ath_hw *ah, enum ath9k_int *masked,
+			      u32 *sync_cause_p)
+>>>>>>> v3.18
 =======
 static bool ar9003_hw_get_isr(struct ath_hw *ah, enum ath9k_int *masked,
 			      u32 *sync_cause_p)
@@ -327,7 +342,12 @@ static bool ar9003_hw_get_isr(struct ath_hw *ah, enum ath9k_int *masked,
 
 	if (sync_cause) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath9k_debug_sync_cause(common, sync_cause);
+=======
+		if (sync_cause_p)
+			*sync_cause_p = sync_cause;
+>>>>>>> v3.18
 =======
 		if (sync_cause_p)
 			*sync_cause_p = sync_cause;
@@ -447,7 +467,10 @@ static int ar9003_hw_proc_txdesc(struct ath_hw *ah, void *ds,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ar9003_hw_get_duration(struct ath_hw *ah, const void *ds, int index)
 {
 	const struct ar9003_txc *adc = ds;
@@ -466,6 +489,9 @@ static int ar9003_hw_get_duration(struct ath_hw *ah, const void *ds, int index)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ar9003_hw_attach_mac_ops(struct ath_hw *hw)
 {
@@ -477,6 +503,10 @@ void ar9003_hw_attach_mac_ops(struct ath_hw *hw)
 	ops->set_txdesc = ar9003_set_txdesc;
 	ops->proc_txdesc = ar9003_hw_proc_txdesc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ops->get_duration = ar9003_hw_get_duration;
+>>>>>>> v3.18
 =======
 	ops->get_duration = ar9003_hw_get_duration;
 >>>>>>> v3.18
@@ -516,6 +546,10 @@ int ath9k_hw_process_rxdesc_edma(struct ath_hw *ah, struct ath_rx_status *rxs,
 	rxs->rs_status = 0;
 	rxs->rs_flags =  0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rxs->flag =  0;
+>>>>>>> v3.18
 =======
 	rxs->flag =  0;
 >>>>>>> v3.18
@@ -526,6 +560,7 @@ int ath9k_hw_process_rxdesc_edma(struct ath_hw *ah, struct ath_rx_status *rxs,
 	/* XXX: Keycache */
 	rxs->rs_rssi = MS(rxsp->status5, AR_RxRSSICombined);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rxs->rs_rssi_ctl0 = MS(rxsp->status1, AR_RxRSSIAnt00);
 	rxs->rs_rssi_ctl1 = MS(rxsp->status1, AR_RxRSSIAnt01);
 	rxs->rs_rssi_ctl2 = MS(rxsp->status1, AR_RxRSSIAnt02);
@@ -533,12 +568,17 @@ int ath9k_hw_process_rxdesc_edma(struct ath_hw *ah, struct ath_rx_status *rxs,
 	rxs->rs_rssi_ext1 = MS(rxsp->status5, AR_RxRSSIAnt11);
 	rxs->rs_rssi_ext2 = MS(rxsp->status5, AR_RxRSSIAnt12);
 =======
+=======
+>>>>>>> v3.18
 	rxs->rs_rssi_ctl[0] = MS(rxsp->status1, AR_RxRSSIAnt00);
 	rxs->rs_rssi_ctl[1] = MS(rxsp->status1, AR_RxRSSIAnt01);
 	rxs->rs_rssi_ctl[2] = MS(rxsp->status1, AR_RxRSSIAnt02);
 	rxs->rs_rssi_ext[0] = MS(rxsp->status5, AR_RxRSSIAnt10);
 	rxs->rs_rssi_ext[1] = MS(rxsp->status5, AR_RxRSSIAnt11);
 	rxs->rs_rssi_ext[2] = MS(rxsp->status5, AR_RxRSSIAnt12);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (rxsp->status11 & AR_RxKeyIdxValid)
@@ -550,18 +590,24 @@ int ath9k_hw_process_rxdesc_edma(struct ath_hw *ah, struct ath_rx_status *rxs,
 	rxs->rs_more = (rxsp->status2 & AR_RxMore) ? 1 : 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rxs->rs_isaggr = (rxsp->status11 & AR_RxAggr) ? 1 : 0;
 	rxs->rs_moreaggr = (rxsp->status11 & AR_RxMoreAggr) ? 1 : 0;
 	rxs->rs_antenna = (MS(rxsp->status4, AR_RxAntenna) & 0x7);
 	rxs->rs_flags  = (rxsp->status4 & AR_GI) ? ATH9K_RX_GI : 0;
 	rxs->rs_flags  |= (rxsp->status4 & AR_2040) ? ATH9K_RX_2040 : 0;
 =======
+=======
+>>>>>>> v3.18
 	rxs->rs_firstaggr = (rxsp->status11 & AR_RxFirstAggr) ? 1 : 0;
 	rxs->rs_isaggr = (rxsp->status11 & AR_RxAggr) ? 1 : 0;
 	rxs->rs_moreaggr = (rxsp->status11 & AR_RxMoreAggr) ? 1 : 0;
 	rxs->rs_antenna = (MS(rxsp->status4, AR_RxAntenna) & 0x7);
 	rxs->flag  |= (rxsp->status4 & AR_GI) ? RX_FLAG_SHORT_GI : 0;
 	rxs->flag  |= (rxsp->status4 & AR_2040) ? RX_FLAG_40MHZ : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rxs->evm0 = rxsp->status6;

@@ -97,7 +97,11 @@ ebt_log_packet(struct net *net, u_int8_t pf, unsigned int hooknum,
 
 	if ((bitmask & EBT_LOG_IP) && eth_hdr(skb)->h_proto ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   htons(ETH_P_IP)){
+=======
+	   htons(ETH_P_IP)) {
+>>>>>>> v3.18
 =======
 	   htons(ETH_P_IP)) {
 >>>>>>> v3.18
@@ -191,11 +195,17 @@ ebt_log_tg(struct sk_buff *skb, const struct xt_action_param *par)
 	li.u.log.logflags = info->bitmask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Remember that we have to use ebt_log_packet() not to break backward
 	 * compatibility. We cannot use the default bridge packet logger via
 	 * nf_log_packet() with NFT_LOG_TYPE_LOG here. --Pablo
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (info->bitmask & EBT_LOG_NFLOG)
 		nf_log_packet(net, NFPROTO_BRIDGE, par->hooknum, skb,
@@ -216,6 +226,7 @@ static struct xt_target ebt_log_tg_reg __read_mostly = {
 	.me		= THIS_MODULE,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct nf_logger ebt_log_logger __read_mostly = {
 	.name 		= "ebt_log",
@@ -264,13 +275,21 @@ static int __init ebt_log_init(void)
 {
 	return xt_register_target(&ebt_log_tg_reg);
 >>>>>>> v3.18
+=======
+static int __init ebt_log_init(void)
+{
+	return xt_register_target(&ebt_log_tg_reg);
+>>>>>>> v3.18
 }
 
 static void __exit ebt_log_fini(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_pernet_subsys(&ebt_log_net_ops);
 	nf_log_unregister(&ebt_log_logger);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	xt_unregister_target(&ebt_log_tg_reg);

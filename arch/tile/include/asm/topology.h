@@ -45,6 +45,7 @@ static inline const struct cpumask *cpumask_of_node(int node)
 #define pcibus_to_node(bus)		((void)(bus), -1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * TILE architecture has many cores integrated in one processor, so we need
  * setup bigger balance_interval for both CPU/NODE scheduling domains to
@@ -80,6 +81,8 @@ static inline const struct cpumask *cpumask_of_node(int node)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* By definition, we create nodes based on online memory. */
 #define node_has_online_mem(nid) 1
 
@@ -93,9 +96,12 @@ static inline const struct cpumask *cpumask_of_node(int node)
 #define topology_core_cpumask(cpu)              ((void)(cpu), cpu_online_mask)
 #define topology_thread_cpumask(cpu)            cpumask_of(cpu)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* indicates that pointers to the topology struct cpumask maps are valid */
 #define arch_provides_topology_pointers         yes
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

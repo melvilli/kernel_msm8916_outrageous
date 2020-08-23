@@ -226,8 +226,11 @@ ath5k_hw_setup_tx_queue(struct ath5k_hw *ah, enum ath5k_tx_queue queue_type,
 		switch (queue_type) {
 		case AR5K_TX_QUEUE_DATA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			queue = queue_info->tqi_subtype;
 =======
+=======
+>>>>>>> v3.18
 			for (queue = AR5K_TX_QUEUE_ID_DATA_MIN;
 				ah->ah_txq[queue].tqi_type !=
 				AR5K_TX_QUEUE_INACTIVE; queue++) {
@@ -235,6 +238,9 @@ ath5k_hw_setup_tx_queue(struct ath5k_hw *ah, enum ath5k_tx_queue queue_type,
 				if (queue > AR5K_TX_QUEUE_ID_DATA_MAX)
 					return -EINVAL;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case AR5K_TX_QUEUE_UAPSD:
@@ -571,15 +577,21 @@ int ath5k_hw_set_ifs_intervals(struct ath5k_hw *ah, unsigned int slot_time)
 	struct ieee80211_channel *channel = ah->ah_current_channel;
 	enum ieee80211_band band;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_rate *rate;
 	u32 ack_tx_time, eifs, eifs_clock, sifs, sifs_clock;
 	u32 slot_time_clock = ath5k_hw_htoclock(ah, slot_time);
 =======
+=======
+>>>>>>> v3.18
 	struct ieee80211_supported_band *sband;
 	struct ieee80211_rate *rate;
 	u32 ack_tx_time, eifs, eifs_clock, sifs, sifs_clock;
 	u32 slot_time_clock = ath5k_hw_htoclock(ah, slot_time);
 	u32 rate_flags, i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (slot_time < 6 || slot_time_clock > AR5K_SLOT_TIME_MAX)
@@ -618,8 +630,11 @@ int ath5k_hw_set_ifs_intervals(struct ath5k_hw *ah, unsigned int slot_time)
 		band = IEEE80211_BAND_2GHZ;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rate = &ah->sbands[band].bitrates[0];
 =======
+=======
+>>>>>>> v3.18
 	switch (ah->ah_bwmode) {
 	case AR5K_BWMODE_5MHZ:
 		rate_flags = IEEE80211_RATE_SUPPORTS_5MHZ;
@@ -642,6 +657,9 @@ int ath5k_hw_set_ifs_intervals(struct ath5k_hw *ah, unsigned int slot_time)
 	if (WARN_ON(!rate))
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ack_tx_time = ath5k_hw_get_frame_duration(ah, band, 10, rate, false);
 

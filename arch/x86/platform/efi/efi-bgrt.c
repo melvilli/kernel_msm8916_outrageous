@@ -41,6 +41,7 @@ void __init efi_bgrt_init(void)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bgrt_tab->header.length < sizeof(*bgrt_tab))
 		return;
 	if (bgrt_tab->version != 1)
@@ -55,6 +56,8 @@ void __init efi_bgrt_init(void)
 		if (!image)
 			return;
 =======
+=======
+>>>>>>> v3.18
 	if (bgrt_tab->header.length < sizeof(*bgrt_tab)) {
 		pr_err("Ignoring BGRT: invalid length %u (expected %zu)\n",
 		       bgrt_tab->header.length, sizeof(*bgrt_tab));
@@ -89,11 +92,15 @@ void __init efi_bgrt_init(void)
 			pr_err("Ignoring BGRT: failed to map image header memory\n");
 			return;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	memcpy_fromio(&bmp_header, image, sizeof(bmp_header));
 	if (ioremapped)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		iounmap(image);
 	bgrt_image_size = bmp_header.size;
@@ -106,6 +113,8 @@ void __init efi_bgrt_init(void)
 		image = ioremap(bgrt_tab->image_address, bmp_header.size);
 		if (!image) {
 =======
+=======
+>>>>>>> v3.18
 		early_iounmap(image, sizeof(bmp_header));
 	bgrt_image_size = bmp_header.size;
 
@@ -121,6 +130,9 @@ void __init efi_bgrt_init(void)
 				       bmp_header.size);
 		if (!image) {
 			pr_err("Ignoring BGRT: failed to map image memory\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			kfree(bgrt_image);
 			bgrt_image = NULL;
@@ -131,7 +143,11 @@ void __init efi_bgrt_init(void)
 	memcpy_fromio(bgrt_image, image, bgrt_image_size);
 	if (ioremapped)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iounmap(image);
+=======
+		early_iounmap(image, bmp_header.size);
+>>>>>>> v3.18
 =======
 		early_iounmap(image, bmp_header.size);
 >>>>>>> v3.18

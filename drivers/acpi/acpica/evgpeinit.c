@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -130,7 +134,10 @@ acpi_status acpi_ev_gpe_initialize(void)
 
 		register_count0 = (u16)(acpi_gbl_FADT.gpe0_block_length / 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		gpe_number_max =
@@ -140,13 +147,19 @@ acpi_status acpi_ev_gpe_initialize(void)
 
 		status = acpi_ev_create_gpe_block(acpi_gbl_fadt_gpe_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						  &acpi_gbl_FADT.xgpe0_block,
 						  register_count0, 0,
 =======
+=======
+>>>>>>> v3.18
 						  acpi_gbl_FADT.xgpe0_block.
 						  address,
 						  acpi_gbl_FADT.xgpe0_block.
 						  space_id, register_count0, 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						  acpi_gbl_FADT.sci_interrupt,
 						  &acpi_gbl_gpe_fadt_blocks[0]);
@@ -185,13 +198,19 @@ acpi_status acpi_ev_gpe_initialize(void)
 			status =
 			    acpi_ev_create_gpe_block(acpi_gbl_fadt_gpe_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						     &acpi_gbl_FADT.xgpe1_block,
 						     register_count1,
 =======
+=======
+>>>>>>> v3.18
 						     acpi_gbl_FADT.xgpe1_block.
 						     address,
 						     acpi_gbl_FADT.xgpe1_block.
 						     space_id, register_count1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						     acpi_gbl_FADT.gpe1_base,
 						     acpi_gbl_FADT.
@@ -226,6 +245,7 @@ acpi_status acpi_ev_gpe_initialize(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check for Max GPE number out-of-range */
 
 	if (gpe_number_max > ACPI_GPE_MAX) {
@@ -237,6 +257,9 @@ acpi_status acpi_ev_gpe_initialize(void)
 	}
 
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -389,6 +412,10 @@ acpi_ev_match_gpe_method(acpi_handle obj_handle,
 	switch (name[1]) {
 	case 'L':
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -397,6 +424,10 @@ acpi_ev_match_gpe_method(acpi_handle obj_handle,
 
 	case 'E':
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -405,6 +436,10 @@ acpi_ev_match_gpe_method(acpi_handle obj_handle,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -466,6 +501,10 @@ acpi_ev_match_gpe_method(acpi_handle obj_handle,
 
 	/* Disable the GPE in case it's been enabled already. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

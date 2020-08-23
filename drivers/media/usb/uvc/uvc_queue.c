@@ -49,6 +49,7 @@ static int uvc_queue_setup(struct vb2_queue *vq, const struct v4l2_format *fmt,
 			container_of(queue, struct uvc_streaming, queue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*nbuffers > UVC_MAX_VIDEO_BUFFERS)
 		*nbuffers = UVC_MAX_VIDEO_BUFFERS;
 
@@ -56,6 +57,8 @@ static int uvc_queue_setup(struct vb2_queue *vq, const struct v4l2_format *fmt,
 
 	sizes[0] = stream->ctrl.dwMaxVideoFrameSize;
 =======
+=======
+>>>>>>> v3.18
 	/* Make sure the image size is large enough. */
 	if (fmt && fmt->fmt.pix.sizeimage < stream->ctrl.dwMaxVideoFrameSize)
 		return -EINVAL;
@@ -64,6 +67,9 @@ static int uvc_queue_setup(struct vb2_queue *vq, const struct v4l2_format *fmt,
 
 	sizes[0] = fmt ? fmt->fmt.pix.sizeimage
 		 : stream->ctrl.dwMaxVideoFrameSize;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -116,7 +122,11 @@ static void uvc_buffer_queue(struct vb2_buffer *vb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int uvc_buffer_finish(struct vb2_buffer *vb)
+=======
+static void uvc_buffer_finish(struct vb2_buffer *vb)
+>>>>>>> v3.18
 =======
 static void uvc_buffer_finish(struct vb2_buffer *vb)
 >>>>>>> v3.18
@@ -127,8 +137,13 @@ static void uvc_buffer_finish(struct vb2_buffer *vb)
 	struct uvc_buffer *buf = container_of(vb, struct uvc_buffer, buf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uvc_video_clock_update(stream, &vb->v4l2_buf, buf);
 	return 0;
+=======
+	if (vb->state == VB2_BUF_STATE_DONE)
+		uvc_video_clock_update(stream, &vb->v4l2_buf, buf);
+>>>>>>> v3.18
 =======
 	if (vb->state == VB2_BUF_STATE_DONE)
 		uvc_video_clock_update(stream, &vb->v4l2_buf, buf);
@@ -170,7 +185,12 @@ int uvc_queue_init(struct uvc_video_queue *queue, enum v4l2_buf_type type,
 	queue->queue.ops = &uvc_queue_qops;
 	queue->queue.mem_ops = &vb2_vmalloc_memops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	queue->queue.timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+=======
+	queue->queue.timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC
+		| V4L2_BUF_FLAG_TSTAMP_SRC_SOE;
+>>>>>>> v3.18
 =======
 	queue->queue.timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC
 		| V4L2_BUF_FLAG_TSTAMP_SRC_SOE;
@@ -222,7 +242,10 @@ int uvc_query_buffer(struct uvc_video_queue *queue, struct v4l2_buffer *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int uvc_create_buffers(struct uvc_video_queue *queue,
 		       struct v4l2_create_buffers *cb)
 {
@@ -235,6 +258,9 @@ int uvc_create_buffers(struct uvc_video_queue *queue,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int uvc_queue_buffer(struct uvc_video_queue *queue, struct v4l2_buffer *buf)
 {
@@ -416,7 +442,11 @@ struct uvc_buffer *uvc_queue_next_buffer(struct uvc_video_queue *queue,
 	spin_unlock_irqrestore(&queue->irqlock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf->state = buf->error ? UVC_BUF_STATE_ERROR : UVC_BUF_STATE_DONE;
+=======
+	buf->state = buf->error ? VB2_BUF_STATE_ERROR : UVC_BUF_STATE_DONE;
+>>>>>>> v3.18
 =======
 	buf->state = buf->error ? VB2_BUF_STATE_ERROR : UVC_BUF_STATE_DONE;
 >>>>>>> v3.18

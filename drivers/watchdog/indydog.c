@@ -42,6 +42,7 @@ MODULE_PARM_DESC(nowayout,
 static void indydog_start(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 mc_ctrl0;
 
 	spin_lock(&indydog_lock);
@@ -52,11 +53,16 @@ static void indydog_start(void)
 	spin_lock(&indydog_lock);
 	sgimc->cpuctrl0 |= SGIMC_CCTRL0_WDOG;
 >>>>>>> v3.18
+=======
+	spin_lock(&indydog_lock);
+	sgimc->cpuctrl0 |= SGIMC_CCTRL0_WDOG;
+>>>>>>> v3.18
 	spin_unlock(&indydog_lock);
 }
 
 static void indydog_stop(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 mc_ctrl0;
 
@@ -65,6 +71,10 @@ static void indydog_stop(void)
 	mc_ctrl0 = sgimc->cpuctrl0;
 	mc_ctrl0 &= ~SGIMC_CCTRL0_WDOG;
 	sgimc->cpuctrl0 = mc_ctrl0;
+=======
+	spin_lock(&indydog_lock);
+	sgimc->cpuctrl0 &= ~SGIMC_CCTRL0_WDOG;
+>>>>>>> v3.18
 =======
 	spin_lock(&indydog_lock);
 	sgimc->cpuctrl0 &= ~SGIMC_CCTRL0_WDOG;
@@ -225,6 +235,9 @@ MODULE_AUTHOR("Guido Guenther <agx@sigxcpu.org>");
 MODULE_DESCRIPTION("Hardware Watchdog Device for SGI IP22");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

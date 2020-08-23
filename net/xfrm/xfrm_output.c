@@ -90,7 +90,11 @@ static int xfrm_output_one(struct sk_buff *skb, int err)
 		err = x->type->output(x, skb);
 		if (err == -EINPROGRESS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out_exit;
+=======
+			goto out;
+>>>>>>> v3.18
 =======
 			goto out;
 >>>>>>> v3.18
@@ -112,10 +116,15 @@ resume:
 	} while (x && !(x->outer_mode->flags & XFRM_MODE_FLAG_TUNNEL));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = 0;
 
 out_exit:
 	return err;
+=======
+	return 0;
+
+>>>>>>> v3.18
 =======
 	return 0;
 
@@ -125,7 +134,12 @@ error:
 error_nolock:
 	kfree_skb(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	goto out_exit;
+=======
+out:
+	return err;
+>>>>>>> v3.18
 =======
 out:
 	return err;
@@ -173,6 +187,11 @@ static int xfrm_output_gso(struct sk_buff *skb)
 	if (IS_ERR(segs))
 		return PTR_ERR(segs);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (segs == NULL)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (segs == NULL)
 		return -EINVAL;
@@ -187,11 +206,15 @@ static int xfrm_output_gso(struct sk_buff *skb)
 
 		if (unlikely(err)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			while ((segs = nskb)) {
 				nskb = segs->next;
 				segs->next = NULL;
 				kfree_skb(segs);
 			}
+=======
+			kfree_skb_list(nskb);
+>>>>>>> v3.18
 =======
 			kfree_skb_list(nskb);
 >>>>>>> v3.18
@@ -224,6 +247,10 @@ int xfrm_output(struct sk_buff *skb)
 	return xfrm_output2(skb);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(xfrm_output);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(xfrm_output);
 >>>>>>> v3.18
@@ -242,10 +269,13 @@ int xfrm_inner_extract_output(struct xfrm_state *x, struct sk_buff *skb)
 	return inner_mode->afinfo->extract_output(x, skb);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL_GPL(xfrm_output);
 EXPORT_SYMBOL_GPL(xfrm_inner_extract_output);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(xfrm_inner_extract_output);
 
 void xfrm_local_error(struct sk_buff *skb, int mtu)
@@ -268,4 +298,7 @@ void xfrm_local_error(struct sk_buff *skb, int mtu)
 	xfrm_state_put_afinfo(afinfo);
 }
 EXPORT_SYMBOL_GPL(xfrm_local_error);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

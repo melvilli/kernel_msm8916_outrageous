@@ -27,7 +27,10 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/i2c.h>
@@ -157,6 +160,10 @@ static int write_pccard(struct cxd *ci, u16 address, u8 *data, u8 n)
 	if (!status) {
 		u8 buf[256] = {3};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -210,6 +217,10 @@ static int write_io_data(struct cxd *ci, u8 *data, u8 n)
 	if (!status) {
 		u8 buf[256] = {3};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -342,12 +353,15 @@ static int init(struct cxd *ci)
 
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = write_reg(ci, 0x09, 0x4D); /* Input Mode C, BYPass Serial, TIVAL = low, MSB */
 		if (status < 0)
 			break;
 #endif
 		status = write_reg(ci, 0x0A, 0xA7); /* TOSTRT = 8, Mode B (gated clock), falling Edge, Serial, POL=HIGH, MSB */
 =======
+=======
+>>>>>>> v3.18
 		/* Input Mode C, BYPass Serial, TIVAL = low, MSB */
 		status = write_reg(ci, 0x09, 0x4D);
 		if (status < 0)
@@ -356,6 +370,9 @@ static int init(struct cxd *ci)
 		/* TOSTRT = 8, Mode B (gated clock), falling Edge,
 		 * Serial, POL=HIGH, MSB */
 		status = write_reg(ci, 0x0A, 0xA7);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (status < 0)
 			break;
@@ -469,6 +486,10 @@ static int read_attribute_mem(struct dvb_ca_en50221 *ca,
 #else
 	u8 val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -617,7 +638,11 @@ static int campoll(struct cxd *ci)
 		if (!(2&slotstat)) {
 			if (!ci->slot_stat) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ci->slot_stat |= DVB_CA_EN50221_POLL_CAM_PRESENT;
+=======
+				ci->slot_stat = DVB_CA_EN50221_POLL_CAM_PRESENT;
+>>>>>>> v3.18
 =======
 				ci->slot_stat = DVB_CA_EN50221_POLL_CAM_PRESENT;
 >>>>>>> v3.18
@@ -633,7 +658,12 @@ static int campoll(struct cxd *ci)
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (istat&8 && ci->slot_stat == DVB_CA_EN50221_POLL_CAM_PRESENT) {
+=======
+		if (istat&8 &&
+		    ci->slot_stat == DVB_CA_EN50221_POLL_CAM_PRESENT) {
+>>>>>>> v3.18
 =======
 		if (istat&8 &&
 		    ci->slot_stat == DVB_CA_EN50221_POLL_CAM_PRESENT) {

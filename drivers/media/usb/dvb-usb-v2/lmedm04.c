@@ -126,6 +126,10 @@ DVB_DEFINE_MOD_OPT_ADAPTER_NR(adapter_nr);
 
 struct lme2510_state {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long int_urb_due;
+>>>>>>> v3.18
 =======
 	unsigned long int_urb_due;
 >>>>>>> v3.18
@@ -136,8 +140,11 @@ struct lme2510_state {
 	u8 signal_sn;
 	u8 time_key;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 last_key;
 	u8 key_timeout;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 i2c_talk_onoff;
@@ -295,6 +302,7 @@ static void lme2510_int_response(struct urb *lme_urb)
 			debug_data_snipet(1, "INT Remote data snipet", ibuf);
 			if ((ibuf[4] + ibuf[5]) == 0xff) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				key = ibuf[5];
 				key += (ibuf[3] > 0)
 					? (ibuf[3] ^ 0xff) << 8 : 0;
@@ -304,6 +312,8 @@ static void lme2510_int_response(struct urb *lme_urb)
 					rc_keydown(adap_to_d(adap)->rc_dev,
 						key, 0);
 =======
+=======
+>>>>>>> v3.18
 				key = RC_SCANCODE_NECX((ibuf[2] ^ 0xff) << 8 |
 						       (ibuf[3] > 0) ? (ibuf[3] ^ 0xff) : 0,
 						       ibuf[5]);
@@ -311,6 +321,9 @@ static void lme2510_int_response(struct urb *lme_urb)
 				if (adap_to_d(adap)->rc_dev != NULL)
 					rc_keydown(adap_to_d(adap)->rc_dev,
 						   RC_TYPE_NEC, key, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			break;
@@ -341,7 +354,11 @@ static void lme2510_int_response(struct urb *lme_urb)
 				break;
 			case TUNER_RS2000:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (ibuf[1] == 0x3 &&  ibuf[6] == 0xff)
+=======
+				if (ibuf[2] & 0x1)
+>>>>>>> v3.18
 =======
 				if (ibuf[2] & 0x1)
 >>>>>>> v3.18
@@ -365,14 +382,20 @@ static void lme2510_int_response(struct urb *lme_urb)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_submit_urb(lme_urb, GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 
 	usb_submit_urb(lme_urb, GFP_ATOMIC);
 
 	/* interrupt urb is due every 48 msecs while streaming
 	 *	add 12msecs for system lag */
 	st->int_urb_due = jiffies + msecs_to_jiffies(60);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -381,7 +404,10 @@ static int lme2510_int_read(struct dvb_usb_adapter *adap)
 	struct dvb_usb_device *d = adap_to_d(adap);
 	struct lme2510_state *lme_int = adap_to_priv(adap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_host_endpoint *ep;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -406,12 +432,15 @@ static int lme2510_int_read(struct dvb_usb_adapter *adap)
 				8);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Quirk of pipe reporting PIPE_BULK but behaves as interrupt */
 	ep = usb_pipe_endpoint(d->udev, lme_int->lme_urb->pipe);
 
 	if (usb_endpoint_type(&ep->desc) == USB_ENDPOINT_XFER_BULK)
 		lme_int->lme_urb->pipe = usb_rcvbulkpipe(d->udev, 0xa),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	lme_int->lme_urb->transfer_flags |= URB_NO_TRANSFER_DMA_MAP;
@@ -628,6 +657,7 @@ static int lme2510_msg(struct dvb_usb_device *d,
 			case 0x8c:
 				rbuf[0] = 0x55;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rbuf[1] = 0xff;
 				if (st->last_key == st->time_key) {
 					st->key_timeout++;
@@ -637,6 +667,8 @@ static int lme2510_msg(struct dvb_usb_device *d,
 					st->key_timeout = 0;
 				st->last_key = st->time_key;
 =======
+=======
+>>>>>>> v3.18
 				rbuf[1] = st->signal_lock;
 
 				/* If int_urb_due overdue
@@ -644,6 +676,9 @@ static int lme2510_msg(struct dvb_usb_device *d,
 				if (time_after(jiffies,	st->int_urb_due))
 					rbuf[1] = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			default:
@@ -1279,7 +1314,11 @@ static int lme2510_identify_state(struct dvb_usb_device *d, const char **name)
 
 	usb_set_interface(d->udev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		d->intf->cur_altsetting->desc.bInterfaceNumber, 1);
+=======
+		d->props->bInterfaceNumber, 1);
+>>>>>>> v3.18
 =======
 		d->props->bInterfaceNumber, 1);
 >>>>>>> v3.18
@@ -1308,7 +1347,11 @@ static int lme2510_get_stream_config(struct dvb_frontend *fe, u8 *ts_type,
 	/* Turn PID filter on the fly by module option */
 	if (pid_filter == 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		adap->pid_filtering  = 1;
+=======
+		adap->pid_filtering  = true;
+>>>>>>> v3.18
 =======
 		adap->pid_filtering  = true;
 >>>>>>> v3.18

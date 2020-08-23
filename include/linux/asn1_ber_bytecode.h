@@ -62,8 +62,12 @@ enum asn1_opcode {
 	ASN1_OP_COMPLETE		= 0x1c,
 	ASN1_OP_ACT			= 0x1d,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ASN1_OP_MAYBE_ACT		= 0x1e,
 	ASN1_OP_RETURN			= 0x1f,
+=======
+	ASN1_OP_RETURN			= 0x1e,
+>>>>>>> v3.18
 =======
 	ASN1_OP_RETURN			= 0x1e,
 >>>>>>> v3.18

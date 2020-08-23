@@ -112,6 +112,7 @@ config SENSORS_AD7418
 	  will be called ad7418.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SENSORS_ADCXX
 	tristate "National Semiconductor ADCxxxSxxx"
 	depends on SPI_MASTER
@@ -128,6 +129,8 @@ config SENSORS_ADCXX
 	  This driver can also be built as a module.  If so, the module
 	  will be called adcxx.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SENSORS_ADM1021
@@ -300,8 +303,13 @@ config SENSORS_K10TEMP
 	  sensor(s) inside your CPU. Supported are later revisions of
 	  the AMD Family 10h and all revisions of the AMD Family 11h,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  12h (Llano), 14h (Brazos), 15h (Bulldozer/Trinity) and
 	  16h (Kabini) microarchitectures.
+=======
+	  12h (Llano), 14h (Brazos), 15h (Bulldozer/Trinity/Kaveri/Carrizo)
+	  and 16h (Kabini/Mullins) microarchitectures.
+>>>>>>> v3.18
 =======
 	  12h (Llano), 14h (Brazos), 15h (Bulldozer/Trinity/Kaveri/Carrizo)
 	  and 16h (Kabini/Mullins) microarchitectures.
@@ -321,7 +329,10 @@ config SENSORS_FAM15H_POWER
 	  will be called fam15h_power.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SENSORS_APPLESMC
 	tristate "Apple SMC (Motion sensor, light sensor, keyboard backlight)"
 	depends on INPUT && X86
@@ -347,6 +358,9 @@ config SENSORS_APPLESMC
 	  Say Y here if you have an applicable laptop and want to experience
 	  the awesome power of applesmc.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_ASB100
 	tristate "Asus ASB100 Bach"
@@ -374,6 +388,7 @@ config SENSORS_ATXP1
 	  will be called atxp1.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SENSORS_BOOST_DYNAMIC_CONTROLLER
 	tristate "Support for Dynamically Mode Change for Boost Regulator"
 	depends on OF
@@ -385,6 +400,8 @@ config SENSORS_BOOST_DYNAMIC_CONTROLLER
 	  This driver can also be built as a module.  If so, the module
 	  will be called boost-dynamic-controller.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SENSORS_DS620
@@ -399,12 +416,15 @@ config SENSORS_DS620
 
 config SENSORS_DS1621
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Dallas Semiconductor DS1621 and DS1625"
 	depends on I2C
 	help
 	  If you say yes here you get support for Dallas Semiconductor
 	  DS1621 and DS1625 sensor chips.
 =======
+=======
+>>>>>>> v3.18
 	tristate "Dallas Semiconductor DS1621 and compatibles"
 	depends on I2C
 	help
@@ -415,6 +435,9 @@ config SENSORS_DS1621
 	  - Maxim Integrated DS1631
 	  - Maxim Integrated DS1721
 	  - Maxim Integrated DS1731
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  This driver can also be built as a module.  If so, the module
@@ -494,13 +517,19 @@ config SENSORS_F75375S
 	  will be called f75375s.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SENSORS_MC13783_ADC
         tristate "Freescale MC13783/MC13892 ADC"
         depends on MFD_MC13XXX
         help
           Support for the A/D converter on MC13783 and MC13892 PMIC.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_FSCHMD
 	tristate "Fujitsu Siemens Computers sensor chips"
@@ -519,6 +548,7 @@ config SENSORS_FSCHMD
 	  will be called fschmd.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SENSORS_G760A
 	tristate "GMT G760A"
 	depends on I2C
@@ -529,6 +559,8 @@ config SENSORS_G760A
 	  This driver can also be built as a module.  If so, the module
 	  will be called g760a.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SENSORS_GL518SM
@@ -553,7 +585,10 @@ config SENSORS_GL520SM
 	  will be called gl520sm.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SENSORS_G760A
 	tristate "GMT G760A"
 	depends on I2C
@@ -574,6 +609,9 @@ config SENSORS_G762
 	  This driver can also be built as a module.  If so, the module
 	  will be called g762.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_GPIO_FAN
 	tristate "GPIO fan"
@@ -595,6 +633,7 @@ config SENSORS_HIH6130
 	  will be called hih6130.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SENSORS_CORETEMP
 	tristate "Intel Core/Core2/Atom temperature sensor"
 	depends on X86
@@ -603,6 +642,8 @@ config SENSORS_CORETEMP
 	  sensor inside your CPU. Most of the family 6 CPUs
 	  are supported. Check Documentation/hwmon/coretemp for details.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SENSORS_IBMAEM
@@ -634,7 +675,10 @@ config SENSORS_IBMPEX
 	  will be called ibmpex.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SENSORS_IBMPOWERNV
 	tristate "IBM POWERNV platform sensors"
 	depends on PPC_POWERNV
@@ -646,6 +690,9 @@ config SENSORS_IBMPOWERNV
 	  This driver can also be built as a module. If so, the module
 	  will be called ibmpowernv.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_IIO_HWMON
 	tristate "Hwmon driver that uses channels specified via iio maps"
@@ -657,7 +704,10 @@ config SENSORS_IIO_HWMON
 	  either via platform data or the device tree bindings.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SENSORS_CORETEMP
 	tristate "Intel Core/Core2/Atom temperature sensor"
 	depends on X86
@@ -666,6 +716,9 @@ config SENSORS_CORETEMP
 	  sensor inside your CPU. Most of the family 6 CPUs
 	  are supported. Check Documentation/hwmon/coretemp for details.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_IT87
 	tristate "ITE IT87xx and compatibles"
@@ -675,8 +728,13 @@ config SENSORS_IT87
 	  If you say yes here you get support for ITE IT8705F, IT8712F,
 	  IT8716F, IT8718F, IT8720F, IT8721F, IT8726F, IT8728F, IT8758E,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  IT8771E, IT8772E, IT8782F, and IT8783E/F sensor chips, and the
 	  SiS950 clone.
+=======
+	  IT8771E, IT8772E, IT8782F, IT8783E/F and IT8603E sensor chips,
+	  and the SiS950 clone.
+>>>>>>> v3.18
 =======
 	  IT8771E, IT8772E, IT8782F, IT8783E/F and IT8603E sensor chips,
 	  and the SiS950 clone.
@@ -710,7 +768,10 @@ config SENSORS_JC42
 	  will be called jc42.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SENSORS_POWR1220
 	tristate "Lattice POWR1220 Power Monitoring"
 	depends on I2C
@@ -723,6 +784,9 @@ config SENSORS_POWR1220
 	  This driver can also be built as a module.  If so, the module
 	  will be called powr1220.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_LINEAGE
 	tristate "Lineage Compact Power Line Power Entry Module"
@@ -735,6 +799,7 @@ config SENSORS_LINEAGE
 	  This driver can also be built as a module.  If so, the module
 	  will be called lineage-pem.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config SENSORS_LM63
 	tristate "National Semiconductor LM63 and compatibles"
@@ -1141,6 +1206,8 @@ config SENSORS_QPNP_CURRENT_MONITOR
 	  thresholds and gives notification to user-space via sysfs if
 	  buck's load current crosses the threshold.
 =======
+=======
+>>>>>>> v3.18
 config SENSORS_LTC2945
 	tristate "Linear Technology LTC2945"
 	depends on I2C
@@ -1554,6 +1621,9 @@ config SENSORS_LM95245
 
 	  This driver can also be built as a module.  If so, the module
 	  will be called lm95245.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SENSORS_PC87360
@@ -1585,7 +1655,10 @@ config SENSORS_PC87427
 	  will be called pc87427.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SENSORS_NTC_THERMISTOR
 	tristate "NTC thermistor support from Murata"
 	depends on !OF || IIO=n || IIO
@@ -1625,6 +1698,9 @@ config SENSORS_NCT6775
 	  This driver can also be built as a module.  If so, the module
 	  will be called nct6775.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_PCF8591
 	tristate "Philips PCF8591 ADC/DAC"
@@ -1643,7 +1719,10 @@ config SENSORS_PCF8591
 source drivers/hwmon/pmbus/Kconfig
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SENSORS_PWM_FAN
 	tristate "PWM fan"
 	depends on (PWM && OF) || COMPILE_TEST
@@ -1655,6 +1734,9 @@ config SENSORS_PWM_FAN
 	  This driver can also be built as a module.  If so, the module
 	  will be called pwm-fan.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_SHT15
 	tristate "Sensiron humidity and temperature sensors. SHT15 and compat."
@@ -1677,7 +1759,10 @@ config SENSORS_SHT21
 	  will be called sht21.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SENSORS_SHTC1
 	tristate "Sensiron humidity and temperature sensors. SHTC1 and compat."
 	depends on I2C
@@ -1688,6 +1773,9 @@ config SENSORS_SHTC1
 	  This driver can also be built as a module.  If so, the module
 	  will be called shtc1.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_S3C
 	tristate "Samsung built-in ADC"
@@ -1717,6 +1805,7 @@ config SENSORS_SIS5595
 	  will be called sis5595.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SENSORS_SMM665
 	tristate "Summit Microelectronics SMM665"
 	depends on I2C
@@ -1732,6 +1821,8 @@ config SENSORS_SMM665
 	  This driver can also be built as a module. If so, the module will
 	  be called smm665.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SENSORS_DME1737
@@ -1750,6 +1841,10 @@ config SENSORS_EMC1403
 	tristate "SMSC EMC1403/23 thermal sensor"
 	depends on I2C
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select REGMAP_I2C
+>>>>>>> v3.18
 =======
 	select REGMAP_I2C
 >>>>>>> v3.18
@@ -1860,7 +1955,10 @@ config SENSORS_SCH5636
 	  will be called sch5636.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SENSORS_SMM665
 	tristate "Summit Microelectronics SMM665"
 	depends on I2C
@@ -1886,14 +1984,22 @@ config SENSORS_ADC128D818
 	  This driver can also be built as a module. If so, the module
 	  will be called adc128d818.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_ADS1015
 	tristate "Texas Instruments ADS1015"
 	depends on I2C
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  If you say yes here you get support for Texas Instruments ADS1015
 	  12-bit 4-input ADC device.
+=======
+	  If you say yes here you get support for Texas Instruments
+	  ADS1015/ADS1115 12/16-bit 4-input ADC device.
+>>>>>>> v3.18
 =======
 	  If you say yes here you get support for Texas Instruments
 	  ADS1015/ADS1115 12/16-bit 4-input ADC device.
@@ -1969,6 +2075,10 @@ config SENSORS_TMP102
 	tristate "Texas Instruments TMP102"
 	depends on I2C
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on THERMAL || !THERMAL_OF
+>>>>>>> v3.18
 =======
 	depends on THERMAL || !THERMAL_OF
 >>>>>>> v3.18
@@ -1980,7 +2090,10 @@ config SENSORS_TMP102
 	  will be called tmp102.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SENSORS_TMP103
 	tristate "Texas Instruments TMP103"
 	depends on I2C
@@ -1992,6 +2105,9 @@ config SENSORS_TMP103
 	  This driver can also be built as a module.  If so, the module
 	  will be called tmp103.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SENSORS_TMP401
 	tristate "Texas Instruments TMP401 and compatibles"
@@ -2009,7 +2125,11 @@ config SENSORS_TMP421
 	help
 	  If you say yes here you get support for Texas Instruments TMP421,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  TMP422 and TMP423 temperature sensor chips.
+=======
+	  TMP422, TMP423, TMP441, and TMP442 temperature sensor chips.
+>>>>>>> v3.18
 =======
 	  TMP422, TMP423, TMP441, and TMP442 temperature sensor chips.
 >>>>>>> v3.18
@@ -2229,6 +2349,7 @@ config SENSORS_ULTRA45
 	  sensors.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SENSORS_APPLESMC
 	tristate "Apple SMC (Motion sensor, light sensor, keyboard backlight)"
 	depends on INPUT && X86
@@ -2260,6 +2381,8 @@ config SENSORS_MC13783_ADC
         help
           Support for the A/D converter on MC13783 and MC13892 PMIC.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 if ACPI

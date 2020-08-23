@@ -31,8 +31,12 @@ extern void kmemleak_free(const void *ptr) __ref;
 extern void kmemleak_free_part(const void *ptr, size_t size) __ref;
 extern void kmemleak_free_percpu(const void __percpu *ptr) __ref;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void kmemleak_padding(const void *ptr, unsigned long offset,
 			     size_t size) __ref;
+=======
+extern void kmemleak_update_trace(const void *ptr) __ref;
+>>>>>>> v3.18
 =======
 extern void kmemleak_update_trace(const void *ptr) __ref;
 >>>>>>> v3.18
@@ -90,6 +94,12 @@ static inline void kmemleak_free_percpu(const void __percpu *ptr)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void kmemleak_update_trace(const void *ptr)
+{
+}
+>>>>>>> v3.18
 =======
 static inline void kmemleak_update_trace(const void *ptr)
 {

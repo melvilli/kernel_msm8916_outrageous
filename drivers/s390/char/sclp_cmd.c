@@ -29,6 +29,7 @@
 #include "sclp.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SCLP_CMDW_READ_SCP_INFO		0x00020001
 #define SCLP_CMDW_READ_SCP_INFO_FORCED	0x00120001
 
@@ -191,6 +192,8 @@ void __init sclp_get_ipl_info(struct sclp_ipl_info *info)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void sclp_sync_callback(struct sclp_req *req, void *data)
 {
 	struct completion *completion = data;
@@ -199,14 +202,20 @@ static void sclp_sync_callback(struct sclp_req *req, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_sync_request(sclp_cmdw_t cmd, void *sccb)
 =======
+=======
+>>>>>>> v3.18
 int sclp_sync_request(sclp_cmdw_t cmd, void *sccb)
 {
 	return sclp_sync_request_timeout(cmd, sccb, 0);
 }
 
 int sclp_sync_request_timeout(sclp_cmdw_t cmd, void *sccb, int timeout)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct completion completion;
@@ -217,6 +226,11 @@ int sclp_sync_request_timeout(sclp_cmdw_t cmd, void *sccb, int timeout)
 	if (!request)
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (timeout)
+		request->queue_timeout = timeout;
+>>>>>>> v3.18
 =======
 	if (timeout)
 		request->queue_timeout = timeout;
@@ -288,7 +302,12 @@ int sclp_get_cpu_info(struct sclp_cpu_info *info)
 		return -ENOMEM;
 	sccb->header.length = sizeof(*sccb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = do_sync_request(SCLP_CMDW_READ_CPU_INFO, sccb);
+=======
+	rc = sclp_sync_request_timeout(SCLP_CMDW_READ_CPU_INFO, sccb,
+				       SCLP_QUEUE_INTERVAL);
+>>>>>>> v3.18
 =======
 	rc = sclp_sync_request_timeout(SCLP_CMDW_READ_CPU_INFO, sccb,
 				       SCLP_QUEUE_INTERVAL);
@@ -327,7 +346,11 @@ static int do_cpu_configure(sclp_cmdw_t cmd)
 		return -ENOMEM;
 	sccb->header.length = sizeof(*sccb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = do_sync_request(cmd, sccb);
+=======
+	rc = sclp_sync_request_timeout(cmd, sccb, SCLP_QUEUE_INTERVAL);
+>>>>>>> v3.18
 =======
 	rc = sclp_sync_request_timeout(cmd, sccb, SCLP_QUEUE_INTERVAL);
 >>>>>>> v3.18
@@ -381,9 +404,15 @@ struct assign_storage_sccb {
 int arch_get_memory_phys_device(unsigned long start_pfn)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rzm)
 		return 0;
 	return PFN_PHYS(start_pfn) >> ilog2(rzm);
+=======
+	if (!sclp_rzm)
+		return 0;
+	return PFN_PHYS(start_pfn) >> ilog2(sclp_rzm);
+>>>>>>> v3.18
 =======
 	if (!sclp_rzm)
 		return 0;
@@ -394,7 +423,11 @@ int arch_get_memory_phys_device(unsigned long start_pfn)
 static unsigned long long rn2addr(u16 rn)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (unsigned long long) (rn - 1) * rzm;
+=======
+	return (unsigned long long) (rn - 1) * sclp_rzm;
+>>>>>>> v3.18
 =======
 	return (unsigned long long) (rn - 1) * sclp_rzm;
 >>>>>>> v3.18
@@ -411,7 +444,11 @@ static int do_assign_storage(sclp_cmdw_t cmd, u16 rn)
 	sccb->header.length = PAGE_SIZE;
 	sccb->rn = rn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = do_sync_request(cmd, sccb);
+=======
+	rc = sclp_sync_request_timeout(cmd, sccb, SCLP_QUEUE_INTERVAL);
+>>>>>>> v3.18
 =======
 	rc = sclp_sync_request_timeout(cmd, sccb, SCLP_QUEUE_INTERVAL);
 >>>>>>> v3.18
@@ -443,7 +480,11 @@ static int sclp_assign_storage(u16 rn)
 		return rc;
 	start = rn2addr(rn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	storage_key_init_range(start, start + rzm);
+=======
+	storage_key_init_range(start, start + sclp_rzm);
+>>>>>>> v3.18
 =======
 	storage_key_init_range(start, start + sclp_rzm);
 >>>>>>> v3.18
@@ -474,7 +515,12 @@ static int sclp_attach_storage(u8 id)
 		return -ENOMEM;
 	sccb->header.length = PAGE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = do_sync_request(0x00080001 | id << 8, sccb);
+=======
+	rc = sclp_sync_request_timeout(0x00080001 | id << 8, sccb,
+				       SCLP_QUEUE_INTERVAL);
+>>>>>>> v3.18
 =======
 	rc = sclp_sync_request_timeout(0x00080001 | id << 8, sccb,
 				       SCLP_QUEUE_INTERVAL);
@@ -510,7 +556,11 @@ static int sclp_mem_change_state(unsigned long start, unsigned long size,
 		if (start + size - 1 < istart)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (start > istart + rzm - 1)
+=======
+		if (start > istart + sclp_rzm - 1)
+>>>>>>> v3.18
 =======
 		if (start > istart + sclp_rzm - 1)
 >>>>>>> v3.18
@@ -578,7 +628,11 @@ static void __init add_memory_merged(u16 rn)
 		goto skip_add;
 	start = rn2addr(first_rn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = (unsigned long long ) num * rzm;
+=======
+	size = (unsigned long long) num * sclp_rzm;
+>>>>>>> v3.18
 =======
 	size = (unsigned long long) num * sclp_rzm;
 >>>>>>> v3.18
@@ -630,7 +684,11 @@ static void __init insert_increment(u16 rn, int standby, int assigned)
 	if (!assigned)
 		new_incr->rn = last_rn + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_incr->rn > rnmax) {
+=======
+	if (new_incr->rn > sclp_rnmax) {
+>>>>>>> v3.18
 =======
 	if (new_incr->rn > sclp_rnmax) {
 >>>>>>> v3.18
@@ -677,8 +735,11 @@ static int __init sclp_detect_standby_memory(void)
 	if (OLDMEM_BASE) /* No standby memory in kdump mode */
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!early_read_info_sccb_valid)
 		return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((sclp_facilities & 0xe00000000000ULL) != 0xe00000000000ULL)
@@ -692,7 +753,11 @@ static int __init sclp_detect_standby_memory(void)
 		memset(sccb, 0, PAGE_SIZE);
 		sccb->header.length = PAGE_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = do_sync_request(0x00040001 | id << 8, sccb);
+=======
+		rc = sclp_sync_request(0x00040001 | id << 8, sccb);
+>>>>>>> v3.18
 =======
 		rc = sclp_sync_request(0x00040001 | id << 8, sccb);
 >>>>>>> v3.18
@@ -728,7 +793,11 @@ static int __init sclp_detect_standby_memory(void)
 	if (rc || list_empty(&sclp_mem_list))
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 1; i <= rnmax - assigned; i++)
+=======
+	for (i = 1; i <= sclp_rnmax - assigned; i++)
+>>>>>>> v3.18
 =======
 	for (i = 1; i <= sclp_rnmax - assigned; i++)
 >>>>>>> v3.18
@@ -741,7 +810,11 @@ static int __init sclp_detect_standby_memory(void)
 		goto out;
 	sclp_pdev = platform_device_register_simple("sclp_mem", -1, NULL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = IS_ERR(sclp_pdev) ? PTR_ERR(sclp_pdev) : 0;
+=======
+	rc = PTR_ERR_OR_ZERO(sclp_pdev);
+>>>>>>> v3.18
 =======
 	rc = PTR_ERR_OR_ZERO(sclp_pdev);
 >>>>>>> v3.18
@@ -791,7 +864,11 @@ static int do_pci_configure(sclp_cmdw_t cmd, u32 fid)
 	sccb->atype = SCLP_RECONFIG_PCI_ATPYE;
 	sccb->aid = fid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = do_sync_request(cmd, sccb);
+=======
+	rc = sclp_sync_request(cmd, sccb);
+>>>>>>> v3.18
 =======
 	rc = sclp_sync_request(cmd, sccb);
 >>>>>>> v3.18
@@ -852,7 +929,11 @@ static int do_chp_configure(sclp_cmdw_t cmd)
 		return -ENOMEM;
 	sccb->header.length = sizeof(*sccb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = do_sync_request(cmd, sccb);
+=======
+	rc = sclp_sync_request(cmd, sccb);
+>>>>>>> v3.18
 =======
 	rc = sclp_sync_request(cmd, sccb);
 >>>>>>> v3.18
@@ -931,7 +1012,11 @@ int sclp_chp_read_info(struct sclp_chp_info *info)
 		return -ENOMEM;
 	sccb->header.length = sizeof(*sccb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = do_sync_request(SCLP_CMDW_READ_CHPATH_INFORMATION, sccb);
+=======
+	rc = sclp_sync_request(SCLP_CMDW_READ_CHPATH_INFORMATION, sccb);
+>>>>>>> v3.18
 =======
 	rc = sclp_sync_request(SCLP_CMDW_READ_CHPATH_INFORMATION, sccb);
 >>>>>>> v3.18
@@ -951,10 +1036,16 @@ out:
 	return rc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 bool sclp_has_sprp(void)
 {
 	return !!(sclp_fac84 & 0x2);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

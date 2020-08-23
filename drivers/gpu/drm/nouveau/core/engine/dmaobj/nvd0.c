@@ -23,6 +23,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/device.h>
 #include <core/gpuobj.h>
 #include <core/class.h>
@@ -42,6 +43,8 @@ nvd0_dmaobj_bind(struct nouveau_dmaeng *dmaeng,
 {
 	u32 flags0 = 0x00000000;
 =======
+=======
+>>>>>>> v3.18
 #include <core/client.h>
 #include <core/device.h>
 #include <core/gpuobj.h>
@@ -63,11 +66,15 @@ nvd0_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 		 struct nouveau_gpuobj **pgpuobj)
 {
 	struct nvd0_dmaobj_priv *priv = (void *)dmaobj;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
 	if (!nv_iclass(parent, NV_ENGCTX_CLASS)) {
 		switch (nv_mclass(parent->parent)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case NVD0_DISP_MAST_CLASS:
 		case NVD0_DISP_SYNC_CLASS:
@@ -79,6 +86,8 @@ nvd0_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 		case NVF0_DISP_SYNC_CLASS:
 		case NVF0_DISP_OVLY_CLASS:
 =======
+=======
+>>>>>>> v3.18
 		case GF110_DISP_CORE_CHANNEL_DMA:
 		case GK104_DISP_CORE_CHANNEL_DMA:
 		case GK110_DISP_CORE_CHANNEL_DMA:
@@ -88,6 +97,9 @@ nvd0_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 		case GK110_DISP_BASE_CHANNEL_DMA:
 		case GF110_DISP_OVERLAY_CONTROL_DMA:
 		case GK104_DISP_OVERLAY_CONTROL_DMA:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		default:
@@ -96,6 +108,7 @@ nvd0_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 	} else
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!(dmaobj->conf0 & NVD0_DMA_CONF0_ENABLE)) {
 		if (dmaobj->target == NV_MEM_TARGET_VM) {
@@ -125,11 +138,16 @@ nvd0_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 		nv_wo32(*pgpuobj, 0x04, dmaobj->start >> 8);
 		nv_wo32(*pgpuobj, 0x08, dmaobj->limit >> 8);
 =======
+=======
+>>>>>>> v3.18
 	ret = nouveau_gpuobj_new(parent, parent, 24, 32, 0, pgpuobj);
 	if (ret == 0) {
 		nv_wo32(*pgpuobj, 0x00, priv->flags0);
 		nv_wo32(*pgpuobj, 0x04, priv->base.start >> 8);
 		nv_wo32(*pgpuobj, 0x08, priv->base.limit >> 8);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nv_wo32(*pgpuobj, 0x0c, 0x00000000);
 		nv_wo32(*pgpuobj, 0x10, 0x00000000);
@@ -140,6 +158,7 @@ nvd0_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 }
 
 static int
+<<<<<<< HEAD
 <<<<<<< HEAD
 nvd0_dmaeng_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		 struct nouveau_oclass *oclass, void *data, u32 size,
@@ -169,6 +188,8 @@ nvd0_dmaeng_oclass = {
 	},
 };
 =======
+=======
+>>>>>>> v3.18
 nvd0_dmaobj_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		 struct nouveau_oclass *oclass, void *data, u32 size,
 		 struct nouveau_object **pobject)
@@ -257,4 +278,7 @@ nvd0_dmaeng_oclass = &(struct nvkm_dmaeng_impl) {
 	.sclass = nvd0_dmaeng_sclass,
 	.bind = nvd0_dmaobj_bind,
 }.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

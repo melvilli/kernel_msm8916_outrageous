@@ -12,6 +12,10 @@
 
 #include <linux/ptrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/opcodes.h>
+>>>>>>> v3.18
 =======
 #include <asm/opcodes.h>
 >>>>>>> v3.18
@@ -46,7 +50,11 @@
 static inline void arch_kgdb_breakpoint(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asm(".word 0xe7ffdeff");
+=======
+	asm(__inst_arm(0xe7ffdeff));
+>>>>>>> v3.18
 =======
 	asm(__inst_arm(0xe7ffdeff));
 >>>>>>> v3.18

@@ -26,6 +26,10 @@
 #include <linux/rtnetlink.h>
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/openvswitch.h>
+>>>>>>> v3.18
 =======
 #include <linux/openvswitch.h>
 >>>>>>> v3.18
@@ -54,7 +58,13 @@ static void netdev_port_receive(struct vport *vport, struct sk_buff *skb)
 
 	skb_push(skb, ETH_HLEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ovs_vport_receive(vport, skb);
+=======
+	ovs_skb_postpush_rcsum(skb, skb->data, ETH_HLEN);
+
+	ovs_vport_receive(vport, skb, NULL);
+>>>>>>> v3.18
 =======
 	ovs_skb_postpush_rcsum(skb, skb->data, ETH_HLEN);
 
@@ -83,7 +93,10 @@ static rx_handler_result_t netdev_frame_hook(struct sk_buff **pskb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct net_device *get_dpdev(struct datapath *dp)
 {
 	struct vport *local;
@@ -93,6 +106,9 @@ static struct net_device *get_dpdev(struct datapath *dp)
 	return netdev_vport_priv(local)->dev;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct vport *netdev_create(const struct vport_parms *parms)
 {
@@ -124,11 +140,14 @@ static struct vport *netdev_create(const struct vport_parms *parms)
 
 	rtnl_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = netdev_rx_handler_register(netdev_vport->dev, netdev_frame_hook,
 					 vport);
 	if (err)
 		goto error_unlock;
 =======
+=======
+>>>>>>> v3.18
 	err = netdev_master_upper_dev_link(netdev_vport->dev,
 					   get_dpdev(vport->dp));
 	if (err)
@@ -138,6 +157,9 @@ static struct vport *netdev_create(const struct vport_parms *parms)
 					 vport);
 	if (err)
 		goto error_master_upper_dev_unlink;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_set_promiscuity(netdev_vport->dev, 1);
@@ -147,6 +169,11 @@ static struct vport *netdev_create(const struct vport_parms *parms)
 	return vport;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+error_master_upper_dev_unlink:
+	netdev_upper_dev_unlink(netdev_vport->dev, get_dpdev(vport->dp));
+>>>>>>> v3.18
 =======
 error_master_upper_dev_unlink:
 	netdev_upper_dev_unlink(netdev_vport->dev, get_dpdev(vport->dp));
@@ -171,6 +198,7 @@ static void free_port_rcu(struct rcu_head *rcu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void netdev_destroy(struct vport *vport)
 {
 	struct netdev_vport *netdev_vport = netdev_vport_priv(vport);
@@ -180,6 +208,8 @@ static void netdev_destroy(struct vport *vport)
 	netdev_rx_handler_unregister(netdev_vport->dev);
 	dev_set_promiscuity(netdev_vport->dev, -1);
 =======
+=======
+>>>>>>> v3.18
 void ovs_netdev_detach_dev(struct vport *vport)
 {
 	struct netdev_vport *netdev_vport = netdev_vport_priv(vport);
@@ -199,6 +229,9 @@ static void netdev_destroy(struct vport *vport)
 	rtnl_lock();
 	if (netdev_vport->dev->priv_flags & IFF_OVS_DATAPATH)
 		ovs_netdev_detach_dev(vport);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtnl_unlock();
 
@@ -232,7 +265,11 @@ static int netdev_send(struct vport *vport, struct sk_buff *skb)
 				     netdev_vport->dev->name,
 				     packet_length(skb), mtu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error;
+=======
+		goto drop;
+>>>>>>> v3.18
 =======
 		goto drop;
 >>>>>>> v3.18
@@ -245,9 +282,14 @@ static int netdev_send(struct vport *vport, struct sk_buff *skb)
 	return len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 error:
 	kfree_skb(skb);
 	ovs_vport_record_error(vport, VPORT_E_TX_DROPPED);
+=======
+drop:
+	kfree_skb(skb);
+>>>>>>> v3.18
 =======
 drop:
 	kfree_skb(skb);

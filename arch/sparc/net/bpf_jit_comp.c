@@ -185,7 +185,11 @@ do {								\
 #define emit_alu_K(OPCODE, K)					\
 do {								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (K) {						\
+=======
+	if (K || OPCODE == AND || OPCODE == MUL) {		\
+>>>>>>> v3.18
 =======
 	if (K || OPCODE == AND || OPCODE == MUL) {		\
 >>>>>>> v3.18
@@ -239,6 +243,7 @@ do {	BUILD_BUG_ON(FIELD_SIZEOF(STRUCT, FIELD) != sizeof(u8));	\
 } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define emit_ldmem(OFF, DEST)					\
 do {	*prog++ = LD32I | RS1(FP) | S13(-(OFF)) | RD(DEST);	\
 } while (0)
@@ -246,6 +251,8 @@ do {	*prog++ = LD32I | RS1(FP) | S13(-(OFF)) | RD(DEST);	\
 #define emit_stmem(OFF, SRC)					\
 do {	*prog++ = LD32I | RS1(FP) | S13(-(OFF)) | RD(SRC);	\
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SPARC64
 #define BIAS (STACK_BIAS - 4)
 #else
@@ -258,6 +265,9 @@ do {	*prog++ = LD32I | RS1(SP) | S13(BIAS - (OFF)) | RD(DEST);	\
 
 #define emit_stmem(OFF, SRC)						\
 do {	*prog++ = ST32I | RS1(SP) | S13(BIAS - (OFF)) | RD(SRC);	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } while (0)
 
@@ -374,7 +384,11 @@ do {	*prog++ = BR_OPC | WDISP22(OFF);		\
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bpf_jit_compile(struct sk_filter *fp)
+=======
+void bpf_jit_compile(struct bpf_prog *fp)
+>>>>>>> v3.18
 =======
 void bpf_jit_compile(struct bpf_prog *fp)
 >>>>>>> v3.18
@@ -439,6 +453,7 @@ void bpf_jit_compile(struct bpf_prog *fp)
 
 		switch (filter[0].code) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BPF_S_RET_K:
 		case BPF_S_LD_W_LEN:
 		case BPF_S_ANC_PROTOCOL:
@@ -454,11 +469,16 @@ void bpf_jit_compile(struct bpf_prog *fp)
 		case BPF_S_LD_H_ABS:
 		case BPF_S_LD_B_ABS:
 =======
+=======
+>>>>>>> v3.18
 		case BPF_RET | BPF_K:
 		case BPF_LD | BPF_W | BPF_LEN:
 		case BPF_LD | BPF_W | BPF_ABS:
 		case BPF_LD | BPF_H | BPF_ABS:
 		case BPF_LD | BPF_B | BPF_ABS:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* The first instruction sets the A register (or is
 			 * a "RET 'constant'")
@@ -476,6 +496,7 @@ void bpf_jit_compile(struct bpf_prog *fp)
 			unsigned int t_offset;
 			unsigned int f_offset;
 			u32 t_op, f_op;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			int ilen;
 
@@ -531,6 +552,8 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				break;
 			case BPF_S_ALU_DIV_K:	/* A /= K with K != 0*/
 =======
+=======
+>>>>>>> v3.18
 			u16 code = bpf_anc_helper(&filter[i]);
 			int ilen;
 
@@ -585,6 +608,9 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				emit_alu_K(MUL, K);
 				break;
 			case BPF_ALU | BPF_DIV | BPF_K:	/* A /= K with K != 0*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (K == 1)
 					break;
@@ -601,7 +627,11 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				emit_alu_K(DIV, K);
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case BPF_S_ALU_DIV_X:	/* A /= X; */
+=======
+			case BPF_ALU | BPF_DIV | BPF_X:	/* A /= X; */
+>>>>>>> v3.18
 =======
 			case BPF_ALU | BPF_DIV | BPF_X:	/* A /= X; */
 >>>>>>> v3.18
@@ -637,15 +667,21 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				emit_alu_X(DIV);
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case BPF_S_ALU_NEG:
 				emit_neg();
 				break;
 			case BPF_S_RET_K:
 =======
+=======
+>>>>>>> v3.18
 			case BPF_ALU | BPF_NEG:
 				emit_neg();
 				break;
 			case BPF_RET | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (!K) {
 					if (pc_ret0 == -1)
@@ -656,7 +692,11 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				}
 				/* Fallthrough */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case BPF_S_RET_A:
+=======
+			case BPF_RET | BPF_A:
+>>>>>>> v3.18
 =======
 			case BPF_RET | BPF_A:
 >>>>>>> v3.18
@@ -676,6 +716,7 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				emit_jmpl(r_saved_O7, 8, G0);
 				emit_reg_move(r_A, O0); /* delay slot */
 				break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			case BPF_S_MISC_TAX:
 				seen |= SEEN_XREG;
@@ -703,6 +744,8 @@ void bpf_jit_compile(struct bpf_prog *fp)
 #endif
 			case BPF_S_ANC_IFINDEX:
 =======
+=======
+>>>>>>> v3.18
 			case BPF_MISC | BPF_TAX:
 				seen |= SEEN_XREG;
 				emit_reg_move(r_A, r_X);
@@ -723,6 +766,9 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				emit_alu_K(SRL, 5);
 				break;
 			case BPF_ANC | SKF_AD_IFINDEX:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				emit_skb_loadptr(dev, r_A);
 				emit_cmpi(r_A, 0);
@@ -730,6 +776,7 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				emit_nop();
 				emit_load32(r_A, struct net_device, ifindex, r_A);
 				break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			case BPF_S_ANC_MARK:
 				emit_skb_load32(mark, r_A);
@@ -739,6 +786,8 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				break;
 			case BPF_S_ANC_HATYPE:
 =======
+=======
+>>>>>>> v3.18
 			case BPF_ANC | SKF_AD_MARK:
 				emit_skb_load32(mark, r_A);
 				break;
@@ -746,6 +795,9 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				emit_skb_load16(queue_mapping, r_A);
 				break;
 			case BPF_ANC | SKF_AD_HATYPE:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				emit_skb_loadptr(dev, r_A);
 				emit_cmpi(r_A, 0);
@@ -753,6 +805,7 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				emit_nop();
 				emit_load16(r_A, struct net_device, type, r_A);
 				break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			case BPF_S_ANC_RXHASH:
 				emit_skb_load32(rxhash, r_A);
@@ -785,6 +838,8 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				break;
 			case BPF_S_STX:
 =======
+=======
+>>>>>>> v3.18
 			case BPF_ANC | SKF_AD_RXHASH:
 				emit_skb_load32(hash, r_A);
 				break;
@@ -825,6 +880,9 @@ void bpf_jit_compile(struct bpf_prog *fp)
 				break;
 			case BPF_STX:
 				seen |= SEEN_MEM | SEEN_XREG;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				emit_stmem(K * 4, r_X);
 				break;
@@ -833,7 +891,11 @@ void bpf_jit_compile(struct bpf_prog *fp)
 	((int)K < 0 ? ((int)K >= SKF_LL_OFF ? func##_negative_offset : func) : func##_positive_offset)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case BPF_S_LD_W_ABS:
+=======
+			case BPF_LD | BPF_W | BPF_ABS:
+>>>>>>> v3.18
 =======
 			case BPF_LD | BPF_W | BPF_ABS:
 >>>>>>> v3.18
@@ -842,6 +904,7 @@ common_load:			seen |= SEEN_DATAREF;
 				emit_loadimm(K, r_OFF);
 				emit_call(func);
 				break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			case BPF_S_LD_H_ABS:
 				func = CHOOSE_LOAD_FUNC(K, bpf_jit_load_half);
@@ -854,6 +917,8 @@ common_load:			seen |= SEEN_DATAREF;
 				goto common_load;
 			case BPF_S_LD_W_IND:
 =======
+=======
+>>>>>>> v3.18
 			case BPF_LD | BPF_H | BPF_ABS:
 				func = CHOOSE_LOAD_FUNC(K, bpf_jit_load_half);
 				goto common_load;
@@ -864,6 +929,9 @@ common_load:			seen |= SEEN_DATAREF;
 				func = CHOOSE_LOAD_FUNC(K, bpf_jit_load_byte_msh);
 				goto common_load;
 			case BPF_LD | BPF_W | BPF_IND:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				func = bpf_jit_load_word;
 common_load_ind:		seen |= SEEN_DATAREF | SEEN_XREG;
@@ -880,6 +948,7 @@ common_load_ind:		seen |= SEEN_DATAREF | SEEN_XREG;
 				emit_call(func);
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case BPF_S_LD_H_IND:
 				func = bpf_jit_load_half;
 				goto common_load_ind;
@@ -888,6 +957,8 @@ common_load_ind:		seen |= SEEN_DATAREF | SEEN_XREG;
 				goto common_load_ind;
 			case BPF_S_JMP_JA:
 =======
+=======
+>>>>>>> v3.18
 			case BPF_LD | BPF_H | BPF_IND:
 				func = bpf_jit_load_half;
 				goto common_load_ind;
@@ -895,6 +966,9 @@ common_load_ind:		seen |= SEEN_DATAREF | SEEN_XREG;
 				func = bpf_jit_load_byte;
 				goto common_load_ind;
 			case BPF_JMP | BPF_JA:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				emit_jump(addrs[i + K]);
 				emit_nop();
@@ -907,6 +981,7 @@ common_load_ind:		seen |= SEEN_DATAREF | SEEN_XREG;
 		goto cond_branch
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			COND_SEL(BPF_S_JMP_JGT_K, BGU, BLEU);
 			COND_SEL(BPF_S_JMP_JGE_K, BGEU, BLU);
 			COND_SEL(BPF_S_JMP_JEQ_K, BE, BNE);
@@ -916,6 +991,8 @@ common_load_ind:		seen |= SEEN_DATAREF | SEEN_XREG;
 			COND_SEL(BPF_S_JMP_JEQ_X, BE, BNE);
 			COND_SEL(BPF_S_JMP_JSET_X, BNE, BE);
 =======
+=======
+>>>>>>> v3.18
 			COND_SEL(BPF_JMP | BPF_JGT | BPF_K, BGU, BLEU);
 			COND_SEL(BPF_JMP | BPF_JGE | BPF_K, BGEU, BLU);
 			COND_SEL(BPF_JMP | BPF_JEQ | BPF_K, BE, BNE);
@@ -924,6 +1001,9 @@ common_load_ind:		seen |= SEEN_DATAREF | SEEN_XREG;
 			COND_SEL(BPF_JMP | BPF_JGE | BPF_X, BGEU, BLU);
 			COND_SEL(BPF_JMP | BPF_JEQ | BPF_X, BE, BNE);
 			COND_SEL(BPF_JMP | BPF_JSET | BPF_X, BNE, BE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 cond_branch:			f_offset = addrs[i + filter[i].jf];
@@ -936,6 +1016,7 @@ cond_branch:			f_offset = addrs[i + filter[i].jf];
 					break;
 				}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				switch (filter[i].code) {
 				case BPF_S_JMP_JGT_X:
@@ -952,6 +1033,8 @@ cond_branch:			f_offset = addrs[i + filter[i].jf];
 				case BPF_S_JMP_JGT_K:
 				case BPF_S_JMP_JGE_K:
 =======
+=======
+>>>>>>> v3.18
 				switch (code) {
 				case BPF_JMP | BPF_JGT | BPF_X:
 				case BPF_JMP | BPF_JGE | BPF_X:
@@ -966,6 +1049,9 @@ cond_branch:			f_offset = addrs[i + filter[i].jf];
 				case BPF_JMP | BPF_JEQ | BPF_K:
 				case BPF_JMP | BPF_JGT | BPF_K:
 				case BPF_JMP | BPF_JGE | BPF_K:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					if (is_simm13(K)) {
 						emit_cmpi(r_A, K);
@@ -975,7 +1061,11 @@ cond_branch:			f_offset = addrs[i + filter[i].jf];
 					}
 					break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				case BPF_S_JMP_JSET_K:
+=======
+				case BPF_JMP | BPF_JSET | BPF_K:
+>>>>>>> v3.18
 =======
 				case BPF_JMP | BPF_JSET | BPF_K:
 >>>>>>> v3.18
@@ -1012,7 +1102,11 @@ cond_branch:			f_offset = addrs[i + filter[i].jf];
 					pr_err("bpb_jit_compile fatal error\n");
 					kfree(addrs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					module_memfree(image);
+=======
+					module_free(NULL, image);
+>>>>>>> v3.18
 =======
 					module_free(NULL, image);
 >>>>>>> v3.18
@@ -1039,9 +1133,13 @@ cond_branch:			f_offset = addrs[i + filter[i].jf];
 		}
 		if (proglen == oldproglen) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			image = module_alloc(max_t(unsigned int,
 						   proglen,
 						   sizeof(struct work_struct)));
+=======
+			image = module_alloc(proglen);
+>>>>>>> v3.18
 =======
 			image = module_alloc(proglen);
 >>>>>>> v3.18
@@ -1058,6 +1156,10 @@ cond_branch:			f_offset = addrs[i + filter[i].jf];
 		bpf_flush_icache(image, image + proglen);
 		fp->bpf_func = (void *)image;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		fp->jited = true;
+>>>>>>> v3.18
 =======
 		fp->jited = true;
 >>>>>>> v3.18
@@ -1067,6 +1169,7 @@ out:
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void jit_free_defer(struct work_struct *arg)
 {
@@ -1085,11 +1188,16 @@ void bpf_jit_free(struct sk_filter *fp)
 		schedule_work(work);
 	}
 =======
+=======
+>>>>>>> v3.18
 void bpf_jit_free(struct bpf_prog *fp)
 {
 	if (fp->jited)
 		module_free(NULL, fp->bpf_func);
 
 	bpf_prog_unlock_free(fp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

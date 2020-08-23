@@ -3,7 +3,11 @@
  * Avishay Traeger (avishay@gmail.com)
  * Copyright (C) 2008, 2009
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Boaz Harrosh <bharrosh@panasas.com>
+=======
+ * Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  * Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18
@@ -582,7 +586,11 @@ static struct page *__r4w_get_page(void *priv, u64 offset, bool *uptodate)
 		if (offset >= i_size) {
 			*uptodate = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			EXOFS_DBGMSG("offset >= i_size index=0x%lx\n", index);
+=======
+			EXOFS_DBGMSG2("offset >= i_size index=0x%lx\n", index);
+>>>>>>> v3.18
 =======
 			EXOFS_DBGMSG2("offset >= i_size index=0x%lx\n", index);
 >>>>>>> v3.18
@@ -605,15 +613,21 @@ static struct page *__r4w_get_page(void *priv, u64 offset, bool *uptodate)
 		else
 			*uptodate = PageUptodate(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		EXOFS_DBGMSG("index=0x%lx uptodate=%d\n", index, *uptodate);
 		return page;
 	} else {
 		EXOFS_DBGMSG("YES that_locked_page index=0x%lx\n",
 =======
+=======
+>>>>>>> v3.18
 		EXOFS_DBGMSG2("index=0x%lx uptodate=%d\n", index, *uptodate);
 		return page;
 	} else {
 		EXOFS_DBGMSG2("YES that_locked_page index=0x%lx\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			     pcol->that_locked_page->index);
 		*uptodate = true;
@@ -627,17 +641,23 @@ static void __r4w_put_page(void *priv, struct page *page)
 
 	if ((pcol->that_locked_page != page) && (ZERO_PAGE(0) != page)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		EXOFS_DBGMSG("index=0x%lx\n", page->index);
 		page_cache_release(page);
 		return;
 	}
 	EXOFS_DBGMSG("that_locked_page index=0x%lx\n",
 =======
+=======
+>>>>>>> v3.18
 		EXOFS_DBGMSG2("index=0x%lx\n", page->index);
 		page_cache_release(page);
 		return;
 	}
 	EXOFS_DBGMSG2("that_locked_page index=0x%lx\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		     ZERO_PAGE(0) == page ? -1 : page->index);
 }
@@ -885,7 +905,11 @@ static void _write_failed(struct inode *inode, loff_t to)
 {
 	if (to > inode->i_size)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_pagecache(inode, to, inode->i_size);
+=======
+		truncate_pagecache(inode, inode->i_size);
+>>>>>>> v3.18
 =======
 		truncate_pagecache(inode, inode->i_size);
 >>>>>>> v3.18
@@ -981,6 +1005,7 @@ static int exofs_releasepage(struct page *page, gfp_t gfp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void exofs_invalidatepage(struct page *page, unsigned long offset)
 {
 	EXOFS_DBGMSG("page 0x%lx offset 0x%lx\n", page->index, offset);
@@ -988,6 +1013,8 @@ static void exofs_invalidatepage(struct page *page, unsigned long offset)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static void exofs_invalidatepage(struct page *page, unsigned int offset,
 				 unsigned int length)
 {
@@ -1004,6 +1031,9 @@ static ssize_t exofs_direct_IO(int rw, struct kiocb *iocb,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 const struct address_space_operations exofs_aops = {
 	.readpage	= exofs_readpage,
@@ -1019,7 +1049,11 @@ const struct address_space_operations exofs_aops = {
 	/* Not implemented Yet */
 	.bmap		= NULL, /* TODO: use osd's OSD_ACT_READ_MAP */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.direct_IO	= NULL, /* TODO: Should be trivial to do */
+=======
+	.direct_IO	= exofs_direct_IO,
+>>>>>>> v3.18
 =======
 	.direct_IO	= exofs_direct_IO,
 >>>>>>> v3.18
@@ -1059,7 +1093,11 @@ static int _do_truncate(struct inode *inode, loff_t newsize)
 		truncate_setsize(inode, newsize);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	EXOFS_DBGMSG("(0x%lx) size=0x%llx ret=>%d\n",
+=======
+	EXOFS_DBGMSG2("(0x%lx) size=0x%llx ret=>%d\n",
+>>>>>>> v3.18
 =======
 	EXOFS_DBGMSG2("(0x%lx) size=0x%llx ret=>%d\n",
 >>>>>>> v3.18
@@ -1147,8 +1185,12 @@ static int exofs_get_inode(struct super_block *sb, struct exofs_i_info *oi,
 		 * delete.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((ret == -ENOENT) || (ret == -EINVAL))
 			ret = 0;
+=======
+		ret = 0;
+>>>>>>> v3.18
 =======
 		ret = 0;
 >>>>>>> v3.18
@@ -1158,7 +1200,11 @@ static int exofs_get_inode(struct super_block *sb, struct exofs_i_info *oi,
 	ret = extract_attr_from_ios(ios, &attrs[0]);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		EXOFS_ERR("%s: extract_attr of inode_data failed\n", __func__);
+=======
+		EXOFS_ERR("%s: extract_attr 0 of inode failed\n", __func__);
+>>>>>>> v3.18
 =======
 		EXOFS_ERR("%s: extract_attr 0 of inode failed\n", __func__);
 >>>>>>> v3.18
@@ -1170,7 +1216,11 @@ static int exofs_get_inode(struct super_block *sb, struct exofs_i_info *oi,
 	ret = extract_attr_from_ios(ios, &attrs[1]);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		EXOFS_ERR("%s: extract_attr of inode_data failed\n", __func__);
+=======
+		EXOFS_ERR("%s: extract_attr 1 of inode failed\n", __func__);
+>>>>>>> v3.18
 =======
 		EXOFS_ERR("%s: extract_attr 1 of inode failed\n", __func__);
 >>>>>>> v3.18
@@ -1189,7 +1239,11 @@ static int exofs_get_inode(struct super_block *sb, struct exofs_i_info *oi,
 	ret = extract_attr_from_ios(ios, &attrs[2]);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		EXOFS_ERR("%s: extract_attr of inode_data failed\n", __func__);
+=======
+		EXOFS_ERR("%s: extract_attr 2 of inode failed\n", __func__);
+>>>>>>> v3.18
 =======
 		EXOFS_ERR("%s: extract_attr 2 of inode failed\n", __func__);
 >>>>>>> v3.18
@@ -1548,7 +1602,11 @@ void exofs_evict_inode(struct inode *inode)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18

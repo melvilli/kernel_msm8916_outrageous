@@ -30,6 +30,7 @@
 #define __IOWPA_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 #define WPA_IE_LEN 64
@@ -42,6 +43,11 @@
   typedef enum { KEY_MGMT_802_1X, KEY_MGMT_PSK, KEY_MGMT_NONE,
   KEY_MGMT_802_1X_NO_WPA, KEY_MGMT_WPA_NONE } wpa_key_mgmt;
 */
+=======
+#define WPA_IE_LEN 64
+
+//WPA related
+>>>>>>> v3.18
 =======
 #define WPA_IE_LEN 64
 
@@ -91,7 +97,11 @@ struct viawget_wpa_param {
 			u8 ssid[32];
 			u8 ssid_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u8 *wpa_ie;
+=======
+			u8 __user *wpa_ie;
+>>>>>>> v3.18
 =======
 			u8 __user *wpa_ie;
 >>>>>>> v3.18
@@ -122,7 +132,11 @@ struct viawget_wpa_param {
 		struct {
 			u16 scan_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u8 *buf;
+=======
+			u8 __user *buf;
+>>>>>>> v3.18
 =======
 			u8 __user *buf;
 >>>>>>> v3.18
@@ -149,6 +163,7 @@ struct viawget_scan_result {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //2006-1116-01,<Add> by NomadZhao
 #pragma pack()
 /*---------------------  Export Classes  ----------------------------*/
@@ -158,6 +173,9 @@ struct viawget_scan_result {
 /*---------------------  Export Types  ------------------------------*/
 
 /*---------------------  Export Functions  --------------------------*/
+=======
+#pragma pack()
+>>>>>>> v3.18
 =======
 #pragma pack()
 >>>>>>> v3.18

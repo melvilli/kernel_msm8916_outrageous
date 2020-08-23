@@ -59,7 +59,11 @@ static struct fb_monspecs __initdata atevklcd10x_default_monspecs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata atevklcd10x_lcdc_data = {
+=======
+static struct atmel_lcdfb_pdata __initdata atevklcd10x_lcdc_data = {
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata __initdata atevklcd10x_lcdc_data = {
 >>>>>>> v3.18
@@ -101,7 +105,11 @@ static struct fb_monspecs __initdata atevklcd10x_default_monspecs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata atevklcd10x_lcdc_data = {
+=======
+static struct atmel_lcdfb_pdata __initdata atevklcd10x_lcdc_data = {
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata __initdata atevklcd10x_lcdc_data = {
 >>>>>>> v3.18
@@ -143,7 +151,11 @@ static struct fb_monspecs __initdata atevklcd10x_default_monspecs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata atevklcd10x_lcdc_data = {
+=======
+static struct atmel_lcdfb_pdata __initdata atevklcd10x_lcdc_data = {
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata __initdata atevklcd10x_lcdc_data = {
 >>>>>>> v3.18
@@ -158,7 +170,11 @@ static struct atmel_lcdfb_pdata __initdata atevklcd10x_lcdc_data = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void atevklcd10x_lcdc_power_control(int on)
+=======
+static void atevklcd10x_lcdc_power_control(struct atmel_lcdfb_pdata *pdata, int on)
+>>>>>>> v3.18
 =======
 static void atevklcd10x_lcdc_power_control(struct atmel_lcdfb_pdata *pdata, int on)
 >>>>>>> v3.18

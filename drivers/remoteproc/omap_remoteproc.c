@@ -28,8 +28,13 @@
 #include <linux/dma-mapping.h>
 #include <linux/remoteproc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <plat/mailbox.h>
+=======
+#include <linux/omap-mailbox.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/omap-mailbox.h>
 

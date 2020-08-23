@@ -41,13 +41,19 @@
 sh7372_resume_core_standby_sysc:
 	ldr     pc, 1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 1:	.long   cpu_resume - PAGE_OFFSET + PLAT_PHYS_OFFSET
 =======
+=======
+>>>>>>> v3.18
 
 	.align	2
 	.globl	sh7372_cpu_resume
 sh7372_cpu_resume:
 1:	.space	4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SPDCR 0xe6180008
@@ -102,6 +108,10 @@ sh7372_do_idle_sysc:
 	b      1b
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.align	2
+>>>>>>> v3.18
 =======
 	.align	2
 >>>>>>> v3.18

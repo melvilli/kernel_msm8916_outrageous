@@ -22,7 +22,10 @@ static inline void writeq(u64 val, void __iomem *reg)
 /** Current process ID */
 #define DRM_CURRENTPID			task_pid_nr(current)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRM_SUSER(p)			capable(CAP_SYS_ADMIN)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DRM_UDELAY(d)			udelay(d)
@@ -39,7 +42,10 @@ static inline void writeq(u64 val, void __iomem *reg)
 /** Write a dword into a MMIO region */
 #define DRM_WRITE32(map, offset, val)	writel(val, ((void __iomem *)(map)->handle) + (offset))
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Read memory barrier */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -48,6 +54,7 @@ static inline void writeq(u64 val, void __iomem *reg)
 /** Write a qword into a MMIO region */
 #define DRM_WRITE64(map, offset, val)	writeq(val, ((void __iomem *)(map)->handle) + (offset))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define DRM_READMEMORYBARRIER()		rmb()
 /** Write memory barrier */
@@ -99,6 +106,8 @@ static __inline__ int mtrr_del(int reg, unsigned long base, unsigned long size)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define DRM_WAIT_ON( ret, queue, timeout, condition )		\
 do {								\
 	DECLARE_WAITQUEUE(entry, current);			\
@@ -123,8 +132,11 @@ do {								\
 	remove_wait_queue(&(queue), &entry);			\
 } while (0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define DRM_WAKEUP( queue ) wake_up( queue )
 #define DRM_INIT_WAITQUEUE( queue ) init_waitqueue_head( queue )
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

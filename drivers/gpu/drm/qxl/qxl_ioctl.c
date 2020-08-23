@@ -69,7 +69,10 @@ static int qxl_map_ioctl(struct drm_device *dev, void *data,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct qxl_reloc_info {
 	int type;
 	struct qxl_bo *dst_bo;
@@ -78,6 +81,9 @@ struct qxl_reloc_info {
 	int src_offset;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * dst must be validated, i.e. whole bo on vram/surfacesram (right now all bo's
@@ -85,6 +91,7 @@ struct qxl_reloc_info {
  * *(dst + dst_off) = qxl_bo_physical_address(src, src_off)
  */
 static void
+<<<<<<< HEAD
 <<<<<<< HEAD
 apply_reloc(struct qxl_device *qdev, struct qxl_bo *dst, uint64_t dst_off,
 	    struct qxl_bo *src, uint64_t src_off)
@@ -101,6 +108,8 @@ static void
 apply_surf_reloc(struct qxl_device *qdev, struct qxl_bo *dst, uint64_t dst_off,
 		 struct qxl_bo *src)
 =======
+=======
+>>>>>>> v3.18
 apply_reloc(struct qxl_device *qdev, struct qxl_reloc_info *info)
 {
 	void *reloc_page;
@@ -113,11 +122,15 @@ apply_reloc(struct qxl_device *qdev, struct qxl_reloc_info *info)
 
 static void
 apply_surf_reloc(struct qxl_device *qdev, struct qxl_reloc_info *info)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	uint32_t id = 0;
 	void *reloc_page;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (src && !src->is_primary)
 		id = src->surface_id;
@@ -126,12 +139,17 @@ apply_surf_reloc(struct qxl_device *qdev, struct qxl_reloc_info *info)
 	*(uint32_t *)(reloc_page + (dst_off & ~PAGE_MASK)) = id;
 	qxl_bo_kunmap_atomic_page(qdev, dst, reloc_page);
 =======
+=======
+>>>>>>> v3.18
 	if (info->src_bo && !info->src_bo->is_primary)
 		id = info->src_bo->surface_id;
 
 	reloc_page = qxl_bo_kmap_atomic_page(qdev, info->dst_bo, info->dst_offset & PAGE_MASK);
 	*(uint32_t *)(reloc_page + (info->dst_offset & ~PAGE_MASK)) = id;
 	qxl_bo_kunmap_atomic_page(qdev, info->dst_bo, reloc_page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -139,7 +157,11 @@ apply_surf_reloc(struct qxl_device *qdev, struct qxl_reloc_info *info)
 static struct qxl_bo *qxlhw_handle_to_bo(struct qxl_device *qdev,
 					 struct drm_file *file_priv, uint64_t handle,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 struct qxl_reloc_list *reloc_list)
+=======
+					 struct qxl_release *release)
+>>>>>>> v3.18
 =======
 					 struct qxl_release *release)
 >>>>>>> v3.18
@@ -150,6 +172,7 @@ static struct qxl_bo *qxlhw_handle_to_bo(struct qxl_device *qdev,
 
 	gobj = drm_gem_object_lookup(qdev->ddev, file_priv, handle);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!gobj) {
 		DRM_ERROR("bad bo handle %lld\n", handle);
 		return NULL;
@@ -158,12 +181,17 @@ static struct qxl_bo *qxlhw_handle_to_bo(struct qxl_device *qdev,
 
 	ret = qxl_bo_list_add(reloc_list, qobj);
 =======
+=======
+>>>>>>> v3.18
 	if (!gobj)
 		return NULL;
 
 	qobj = gem_to_qxl_bo(gobj);
 
 	ret = qxl_release_list_add(release, qobj);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		return NULL;
@@ -177,6 +205,7 @@ static struct qxl_bo *qxlhw_handle_to_bo(struct qxl_device *qdev,
  * However, the command as passed from user space must *not* contain the initial
  * QXLReleaseInfo struct (first XXX bytes)
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int qxl_execbuffer_ioctl(struct drm_device *dev, void *data,
 				struct drm_file *file_priv)
@@ -318,6 +347,8 @@ static int qxl_execbuffer_ioctl(struct drm_device *dev, void *data,
 	}
 	qxl_bo_list_unreserve(&reloc_list, 0);
 =======
+=======
+>>>>>>> v3.18
 static int qxl_process_single_command(struct qxl_device *qdev,
 				      struct drm_qxl_command *cmd,
 				      struct drm_file *file_priv)
@@ -489,6 +520,9 @@ static int qxl_execbuffer_ioctl(struct drm_device *dev, void *data,
 		if (ret)
 			return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -522,7 +556,11 @@ static int qxl_update_area_ioctl(struct drm_device *dev, void *data,
 
 	if (!qobj->pin_count) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		qxl_ttm_placement_from_domain(qobj, qobj->type);
+=======
+		qxl_ttm_placement_from_domain(qobj, qobj->type, false);
+>>>>>>> v3.18
 =======
 		qxl_ttm_placement_from_domain(qobj, qobj->type, false);
 >>>>>>> v3.18
@@ -623,7 +661,11 @@ static int qxl_alloc_surf_ioctl(struct drm_device *dev, void *data,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct drm_ioctl_desc qxl_ioctls[] = {
+=======
+const struct drm_ioctl_desc qxl_ioctls[] = {
+>>>>>>> v3.18
 =======
 const struct drm_ioctl_desc qxl_ioctls[] = {
 >>>>>>> v3.18
@@ -645,7 +687,11 @@ const struct drm_ioctl_desc qxl_ioctls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qxl_max_ioctls = DRM_ARRAY_SIZE(qxl_ioctls);
+=======
+int qxl_max_ioctls = ARRAY_SIZE(qxl_ioctls);
+>>>>>>> v3.18
 =======
 int qxl_max_ioctls = ARRAY_SIZE(qxl_ioctls);
 >>>>>>> v3.18

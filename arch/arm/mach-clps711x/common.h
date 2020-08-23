@@ -7,7 +7,10 @@
 #include <linux/reboot.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CLPS711X_NR_IRQS	(33)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define CLPS711X_NR_GPIO	(4 * 8 + 3)
@@ -17,9 +20,12 @@ extern void clps711x_map_io(void);
 extern void clps711x_init_irq(void);
 extern void clps711x_timer_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void clps711x_handle_irq(struct pt_regs *regs);
 extern void clps711x_restart(enum reboot_mode mode, const char *cmd);
 =======
+=======
+>>>>>>> v3.18
 extern void clps711x_restart(enum reboot_mode mode, const char *cmd);
 
 /* drivers/irqchip/irq-clps711x.c */
@@ -29,4 +35,7 @@ void clps711x_clk_init(void __iomem *base);
 /* drivers/clocksource/clps711x-timer.c */
 void clps711x_clksrc_init(void __iomem *tc1_base, void __iomem *tc2_base,
 			  unsigned int irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

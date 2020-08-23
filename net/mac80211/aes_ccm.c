@@ -3,6 +3,11 @@
  * Copyright 2005-2006, Devicescape Software, Inc.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Rewrite: Copyright (C) 2013 Linaro Ltd <ard.biesheuvel@linaro.org>
+ *
+>>>>>>> v3.18
 =======
  * Rewrite: Copyright (C) 2013 Linaro Ltd <ard.biesheuvel@linaro.org>
  *
@@ -22,6 +27,7 @@
 #include "key.h"
 #include "aes_ccm.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void aes_ccm_prepare(struct crypto_cipher *tfm, u8 *scratch, u8 *a)
 {
@@ -154,6 +160,8 @@ void ieee80211_aes_key_free(struct crypto_cipher *tfm)
 {
 	crypto_free_cipher(tfm);
 =======
+=======
+>>>>>>> v3.18
 void ieee80211_aes_ccm_encrypt(struct crypto_aead *tfm, u8 *b_0, u8 *aad,
 			       u8 *data, size_t data_len, u8 *mic)
 {
@@ -229,5 +237,8 @@ struct crypto_aead *ieee80211_aes_key_setup_encrypt(const u8 key[])
 void ieee80211_aes_key_free(struct crypto_aead *tfm)
 {
 	crypto_free_aead(tfm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

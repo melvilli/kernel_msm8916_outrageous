@@ -3,7 +3,11 @@ lp855x bindings
 Required properties:
   - compatible: "ti,lp8550", "ti,lp8551", "ti,lp8552", "ti,lp8553",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "ti,lp8556", "ti,lp8557"
+=======
+                "ti,lp8555", "ti,lp8556", "ti,lp8557"
+>>>>>>> v3.18
 =======
                 "ti,lp8555", "ti,lp8556", "ti,lp8557"
 >>>>>>> v3.18
@@ -20,7 +24,10 @@ Optional properties:
 Example:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* LP8555 */
 	backlight@2c {
 		compatible = "ti,lp8555";
@@ -48,6 +55,9 @@ Example:
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* LP8556 */
 	backlight@2c {

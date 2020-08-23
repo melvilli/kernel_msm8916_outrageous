@@ -165,7 +165,10 @@ static int __init cmx270_init(void)
 				  GFP_KERNEL);
 	if (!cmx270_nand_mtd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("Unable to allocate CM-X270 NAND MTD device structure.\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = -ENOMEM;

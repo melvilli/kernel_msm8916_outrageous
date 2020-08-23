@@ -15,6 +15,10 @@
 #include <sys/types.h>
 #include <sys/vfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sys/syscall.h>
+>>>>>>> v3.18
 =======
 #include <sys/syscall.h>
 >>>>>>> v3.18
@@ -365,7 +369,10 @@ int rename_file(char *from, char *to)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int rename2_file(char *from, char *to, unsigned int flags)
 {
 	int err;
@@ -393,6 +400,9 @@ int rename2_file(char *from, char *to, unsigned int flags)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int do_statfs(char *root, long *bsize_out, long long *blocks_out,
 	      long long *bfree_out, long long *bavail_out,

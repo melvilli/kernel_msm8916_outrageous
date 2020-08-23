@@ -48,6 +48,10 @@ struct ath5k_txq;
 struct ieee80211_channel;
 struct ath_bus_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct ieee80211_tx_control;
+>>>>>>> v3.18
 =======
 struct ieee80211_tx_control;
 >>>>>>> v3.18
@@ -66,18 +70,24 @@ struct ath5k_srev_name {
 
 struct ath5k_buf {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	list;
 	struct ath5k_desc	*desc;	/* virtual addr of desc */
 	dma_addr_t		daddr;	/* physical addr of desc */
 	struct sk_buff		*skb;	/* skbuff for buf */
 	dma_addr_t		skbaddr;/* physical addr of skb data */
 =======
+=======
+>>>>>>> v3.18
 	struct list_head		list;
 	struct ath5k_desc		*desc;		/* virtual addr of desc */
 	dma_addr_t			daddr;		/* physical addr of desc */
 	struct sk_buff			*skb;		/* skbuff for buf */
 	dma_addr_t			skbaddr;	/* physical addr of skb data */
 	struct ieee80211_tx_rate	rates[4];	/* number of multi-rate stages */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -113,17 +123,23 @@ void ath5k_set_beacon_filter(struct ieee80211_hw *hw, bool enable);
 void ath5k_update_bssid_mask_and_opmode(struct ath5k_hw *ah,
 					struct ieee80211_vif *vif);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ath5k_chan_set(struct ath5k_hw *ah, struct ieee80211_channel *chan);
 void ath5k_txbuf_free_skb(struct ath5k_hw *ah, struct ath5k_buf *bf);
 void ath5k_rxbuf_free_skb(struct ath5k_hw *ah, struct ath5k_buf *bf);
 void ath5k_tx_queue(struct ieee80211_hw *hw, struct sk_buff *skb,
 		    struct ath5k_txq *txq);
 =======
+=======
+>>>>>>> v3.18
 int ath5k_chan_set(struct ath5k_hw *ah, struct cfg80211_chan_def *chandef);
 void ath5k_txbuf_free_skb(struct ath5k_hw *ah, struct ath5k_buf *bf);
 void ath5k_rxbuf_free_skb(struct ath5k_hw *ah, struct ath5k_buf *bf);
 void ath5k_tx_queue(struct ieee80211_hw *hw, struct sk_buff *skb,
 		    struct ath5k_txq *txq, struct ieee80211_tx_control *control);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 const char *ath5k_chip_name(enum ath5k_srev_type type, u_int16_t val);

@@ -562,17 +562,23 @@ static int gdrom_set_interrupt_handlers(void)
 
 	err = request_irq(HW_EVENT_GDROM_CMD, gdrom_command_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IRQF_DISABLED, "gdrom_command", &gd);
 	if (err)
 		return err;
 	err = request_irq(HW_EVENT_GDROM_DMA, gdrom_dma_interrupt,
 		IRQF_DISABLED, "gdrom_dma", &gd);
 =======
+=======
+>>>>>>> v3.18
 		0, "gdrom_command", &gd);
 	if (err)
 		return err;
 	err = request_irq(HW_EVENT_GDROM_DMA, gdrom_dma_interrupt,
 		0, "gdrom_dma", &gd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		free_irq(HW_EVENT_GDROM_CMD, &gd);
@@ -611,7 +617,11 @@ static void gdrom_readdisk_dma(struct work_struct *work)
 		block = blk_rq_pos(req)/GD_TO_BLK + GD_SESSION_OFFSET;
 		block_cnt = blk_rq_sectors(req)/GD_TO_BLK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__raw_writel(virt_to_phys(req->buffer), GDROM_DMA_STARTADDR_REG);
+=======
+		__raw_writel(virt_to_phys(bio_data(req->bio)), GDROM_DMA_STARTADDR_REG);
+>>>>>>> v3.18
 =======
 		__raw_writel(virt_to_phys(bio_data(req->bio)), GDROM_DMA_STARTADDR_REG);
 >>>>>>> v3.18
@@ -843,9 +853,15 @@ probe_fail_cdrom_register:
 probe_fail_no_disk:
 	kfree(gd.cd_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_blkdev(gdrom_major, GDROM_DEV_NAME);
 	gdrom_major = 0;
 probe_fail_no_mem:
+=======
+probe_fail_no_mem:
+	unregister_blkdev(gdrom_major, GDROM_DEV_NAME);
+	gdrom_major = 0;
+>>>>>>> v3.18
 =======
 probe_fail_no_mem:
 	unregister_blkdev(gdrom_major, GDROM_DEV_NAME);

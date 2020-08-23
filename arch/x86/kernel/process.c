@@ -37,11 +37,14 @@
  * on exact cacheline boundaries, to eliminate cacheline ping-pong.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_PER_CPU_SHARED_ALIGNED(struct tss_struct, init_tss) = INIT_TSS;
 
 #ifdef CONFIG_X86_64
 static DEFINE_PER_CPU(unsigned char, is_idle);
 =======
+=======
+>>>>>>> v3.18
 __visible DEFINE_PER_CPU_SHARED_ALIGNED(struct tss_struct, init_tss) = INIT_TSS;
 
 #ifdef CONFIG_X86_64
@@ -59,6 +62,9 @@ void idle_notifier_unregister(struct notifier_block *n)
 	atomic_notifier_chain_unregister(&idle_notifier, n);
 }
 EXPORT_SYMBOL_GPL(idle_notifier_unregister);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -72,6 +78,7 @@ EXPORT_SYMBOL_GPL(task_xstate_cachep);
 int arch_dup_task_struct(struct task_struct *dst, struct task_struct *src)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	*dst = *src;
@@ -81,6 +88,8 @@ int arch_dup_task_struct(struct task_struct *dst, struct task_struct *src)
 		if (ret)
 			return ret;
 =======
+=======
+>>>>>>> v3.18
 	*dst = *src;
 
 	dst->thread.fpu_counter = 0;
@@ -91,6 +100,9 @@ int arch_dup_task_struct(struct task_struct *dst, struct task_struct *src)
 		int err = fpu_alloc(&dst->thread.fpu);
 		if (err)
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		fpu_copy(dst, src);
 	}
@@ -114,6 +126,10 @@ void arch_task_cache_init(void)
 				  __alignof__(union thread_xstate),
 				  SLAB_PANIC | SLAB_NOTRACK, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	setup_xstate_comp();
+>>>>>>> v3.18
 =======
 	setup_xstate_comp();
 >>>>>>> v3.18
@@ -282,7 +298,11 @@ void enter_idle(void)
 {
 	this_cpu_write(is_idle, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idle_notifier_call_chain(IDLE_START);
+=======
+	atomic_notifier_call_chain(&idle_notifier, IDLE_START, NULL);
+>>>>>>> v3.18
 =======
 	atomic_notifier_call_chain(&idle_notifier, IDLE_START, NULL);
 >>>>>>> v3.18
@@ -293,7 +313,11 @@ static void __exit_idle(void)
 	if (x86_test_and_clear_bit_percpu(0, is_idle) == 0)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idle_notifier_call_chain(IDLE_END);
+=======
+	atomic_notifier_call_chain(&idle_notifier, IDLE_END, NULL);
+>>>>>>> v3.18
 =======
 	atomic_notifier_call_chain(&idle_notifier, IDLE_END, NULL);
 >>>>>>> v3.18
@@ -331,10 +355,14 @@ void arch_cpu_idle_dead(void)
 void arch_cpu_idle(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpuidle_idle_call())
 		x86_idle();
 	else
 		local_irq_enable();
+=======
+	x86_idle();
+>>>>>>> v3.18
 =======
 	x86_idle();
 >>>>>>> v3.18
@@ -435,7 +463,11 @@ static void amd_e400_idle(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit select_idle_routine(const struct cpuinfo_x86 *c)
+=======
+void select_idle_routine(const struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 void select_idle_routine(const struct cpuinfo_x86 *c)
 >>>>>>> v3.18

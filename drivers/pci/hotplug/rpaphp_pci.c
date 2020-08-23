@@ -45,7 +45,11 @@ int rpaphp_get_sensor_state(struct slot *slot, int *state)
 			    __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* some slots have to be powered up 
+=======
+			/* some slots have to be powered up
+>>>>>>> v3.18
 =======
 			/* some slots have to be powered up
 >>>>>>> v3.18
@@ -138,6 +142,9 @@ int rpaphp_enable_slot(struct slot *slot)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

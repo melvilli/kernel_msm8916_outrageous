@@ -40,6 +40,10 @@ CONFIG_SPI_SIRF=y
 CONFIG_SPI_SPIDEV=y
 # CONFIG_HWMON is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_WATCHDOG=y
+>>>>>>> v3.18
 =======
 CONFIG_WATCHDOG=y
 >>>>>>> v3.18

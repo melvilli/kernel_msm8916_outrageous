@@ -50,11 +50,14 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Attribute for data that is kept read/write coherent until the end of
  * initialization, then bumped to read/only incoherent for performance.
  */
 #define __write_once __attribute__((__section__(".w1data")))
 =======
+=======
+>>>>>>> v3.18
  * Originally we used small TLB pages for kernel data and grouped some
  * things together as "write once", enforcing the property at the end
  * of initialization by making those pages read-only and non-coherent.
@@ -66,6 +69,9 @@
  * separate in case we change our minds at a future date.
  */
 #define __write_once __read_mostly
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ASM_TILE_CACHE_H */

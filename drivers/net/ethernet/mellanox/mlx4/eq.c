@@ -32,7 +32,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -83,6 +86,10 @@ enum {
 			       (1ull << MLX4_EVENT_TYPE_SRQ_LIMIT)	    | \
 			       (1ull << MLX4_EVENT_TYPE_CMD)		    | \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			       (1ull << MLX4_EVENT_TYPE_OP_REQUIRED)	    | \
+>>>>>>> v3.18
 =======
 			       (1ull << MLX4_EVENT_TYPE_OP_REQUIRED)	    | \
 >>>>>>> v3.18
@@ -109,6 +116,7 @@ static void eq_set_ci(struct mlx4_eq *eq, int req_not)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mlx4_eqe *get_eqe(struct mlx4_eq *eq, u32 entry, u8 eqe_factor)
 {
 	/* (entry & (eq->nent - 1)) gives us a cyclic array */
@@ -118,6 +126,8 @@ static struct mlx4_eqe *get_eqe(struct mlx4_eq *eq, u32 entry, u8 eqe_factor)
 	 * 32 bytes in the 64 byte EQE are reserved and the next 32 bytes
 	 * contain the legacy EQE information.
 =======
+=======
+>>>>>>> v3.18
 static struct mlx4_eqe *get_eqe(struct mlx4_eq *eq, u32 entry, u8 eqe_factor,
 				u8 eqe_size)
 {
@@ -129,15 +139,24 @@ static struct mlx4_eqe *get_eqe(struct mlx4_eq *eq, u32 entry, u8 eqe_factor,
 	 * 32 bytes in the 64 byte EQE are reserved and the next 32 bytes
 	 * contain the legacy EQE information.
 	 * In all other cases, the first 32B contains the legacy EQE info.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	return eq->page_list[offset / PAGE_SIZE].buf + (offset + (eqe_factor ? MLX4_EQ_ENTRY_SIZE : 0)) % PAGE_SIZE;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mlx4_eqe *next_eqe_sw(struct mlx4_eq *eq, u8 eqe_factor)
 {
 	struct mlx4_eqe *eqe = get_eqe(eq, eq->cons_index, eqe_factor);
+=======
+static struct mlx4_eqe *next_eqe_sw(struct mlx4_eq *eq, u8 eqe_factor, u8 size)
+{
+	struct mlx4_eqe *eqe = get_eqe(eq, eq->cons_index, eqe_factor, size);
+>>>>>>> v3.18
 =======
 static struct mlx4_eqe *next_eqe_sw(struct mlx4_eq *eq, u8 eqe_factor, u8 size)
 {
@@ -180,6 +199,7 @@ void mlx4_gen_slave_eqe(struct work_struct *work)
 				    master->slave_state[i].active)
 					if (mlx4_GEN_EQE(dev, i, eqe))
 <<<<<<< HEAD
+<<<<<<< HEAD
 						mlx4_warn(dev, "Failed to "
 							  " generate event "
 							  "for slave %d\n", i);
@@ -189,6 +209,8 @@ void mlx4_gen_slave_eqe(struct work_struct *work)
 				mlx4_warn(dev, "Failed to generate event "
 					       "for slave %d\n", slave);
 =======
+=======
+>>>>>>> v3.18
 						mlx4_warn(dev, "Failed to generate event for slave %d\n",
 							  i);
 			}
@@ -196,6 +218,9 @@ void mlx4_gen_slave_eqe(struct work_struct *work)
 			if (mlx4_GEN_EQE(dev, slave, eqe))
 				mlx4_warn(dev, "Failed to generate event for slave %d\n",
 					  slave);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		++slave_eq->cons;
@@ -215,8 +240,13 @@ static void slave_event(struct mlx4_dev *dev, u8 slave, struct mlx4_eqe *eqe)
 	if ((!!(s_eqe->owner & 0x80)) ^
 	    (!!(slave_eq->prod & SLAVE_EVENT_EQ_SIZE))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_warn(dev, "Master failed to generate an EQE for slave: %d. "
 			  "No free EQE on slave events queue\n", slave);
+=======
+		mlx4_warn(dev, "Master failed to generate an EQE for slave: %d. No free EQE on slave events queue\n",
+			  slave);
+>>>>>>> v3.18
 =======
 		mlx4_warn(dev, "Master failed to generate an EQE for slave: %d. No free EQE on slave events queue\n",
 			  slave);
@@ -226,7 +256,11 @@ static void slave_event(struct mlx4_dev *dev, u8 slave, struct mlx4_eqe *eqe)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(s_eqe, eqe, sizeof(struct mlx4_eqe) - 1);
+=======
+	memcpy(s_eqe, eqe, dev->caps.eqe_size - 1);
+>>>>>>> v3.18
 =======
 	memcpy(s_eqe, eqe, dev->caps.eqe_size - 1);
 >>>>>>> v3.18
@@ -318,12 +352,18 @@ enum slave_port_state mlx4_get_slave_port_state(struct mlx4_dev *dev, int slave,
 	struct mlx4_priv *priv = mlx4_priv(dev);
 	struct mlx4_slave_state *s_state = priv->mfunc.master.slave_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (slave >= dev->num_slaves || port > MLX4_MAX_PORTS) {
 =======
+=======
+>>>>>>> v3.18
 	struct mlx4_active_ports actv_ports = mlx4_get_active_ports(dev, slave);
 
 	if (slave >= dev->num_slaves || port > dev->caps.num_ports ||
 	    port <= 0 || !test_bit(port - 1, actv_ports.ports)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_err("%s: Error: asking for slave:%d, port:%d\n",
 		       __func__, slave, port);
@@ -339,13 +379,19 @@ static int mlx4_set_slave_port_state(struct mlx4_dev *dev, int slave, u8 port,
 	struct mlx4_priv *priv = mlx4_priv(dev);
 	struct mlx4_slave_state *s_state = priv->mfunc.master.slave_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (slave >= dev->num_slaves || port > MLX4_MAX_PORTS || port == 0) {
 =======
+=======
+>>>>>>> v3.18
 	struct mlx4_active_ports actv_ports = mlx4_get_active_ports(dev, slave);
 
 	if (slave >= dev->num_slaves || port > dev->caps.num_ports ||
 	    port <= 0 || !test_bit(port - 1, actv_ports.ports)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_err("%s: Error: asking for slave:%d, port:%d\n",
 		       __func__, slave, port);
@@ -361,10 +407,13 @@ static void set_all_slave_state(struct mlx4_dev *dev, u8 port, int event)
 	int i;
 	enum slave_port_gen_event gen_event;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	for (i = 0; i < dev->num_slaves; i++)
 		set_and_calc_slave_port_state(dev, i, port, event, &gen_event);
 =======
+=======
+>>>>>>> v3.18
 	struct mlx4_slaves_pport slaves_pport = mlx4_phys_to_slaves_pport(dev,
 									  port);
 
@@ -372,6 +421,9 @@ static void set_all_slave_state(struct mlx4_dev *dev, u8 port, int event)
 		if (test_bit(i, slaves_pport.slaves))
 			set_and_calc_slave_port_state(dev, i, port,
 						      event, &gen_event);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 /**************************************************************************
@@ -392,6 +444,10 @@ int set_and_calc_slave_port_state(struct mlx4_dev *dev, int slave,
 	unsigned long flags;
 	int ret = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mlx4_active_ports actv_ports = mlx4_get_active_ports(dev, slave);
+>>>>>>> v3.18
 =======
 	struct mlx4_active_ports actv_ports = mlx4_get_active_ports(dev, slave);
 >>>>>>> v3.18
@@ -401,7 +457,12 @@ int set_and_calc_slave_port_state(struct mlx4_dev *dev, int slave,
 	*gen_event = SLAVE_PORT_GEN_EVENT_NONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (slave >= dev->num_slaves || port > MLX4_MAX_PORTS || port == 0) {
+=======
+	if (slave >= dev->num_slaves || port > dev->caps.num_ports ||
+	    port <= 0 || !test_bit(port - 1, actv_ports.ports)) {
+>>>>>>> v3.18
 =======
 	if (slave >= dev->num_slaves || port > dev->caps.num_ports ||
 	    port <= 0 || !test_bit(port - 1, actv_ports.ports)) {
@@ -444,9 +505,15 @@ int set_and_calc_slave_port_state(struct mlx4_dev *dev, int slave,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("%s: BUG!!! UNKNOWN state: "
 		       "slave:%d, port:%d\n", __func__, slave, port);
 			goto out;
+=======
+		pr_err("%s: BUG!!! UNKNOWN state: slave:%d, port:%d\n",
+		       __func__, slave, port);
+		goto out;
+>>>>>>> v3.18
 =======
 		pr_err("%s: BUG!!! UNKNOWN state: slave:%d, port:%d\n",
 		       __func__, slave, port);
@@ -500,8 +567,13 @@ void mlx4_master_handle_slave_flr(struct work_struct *work)
 
 		if (MLX4_COMM_CMD_FLR == slave_state[i].last_cmd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_dbg(dev, "mlx4_handle_slave_flr: "
 				 "clean slave: %d\n", i);
+=======
+			mlx4_dbg(dev, "mlx4_handle_slave_flr: clean slave: %d\n",
+				 i);
+>>>>>>> v3.18
 =======
 			mlx4_dbg(dev, "mlx4_handle_slave_flr: clean slave: %d\n",
 				 i);
@@ -518,8 +590,13 @@ void mlx4_master_handle_slave_flr(struct work_struct *work)
 				       MLX4_CMD_TIME_CLASS_A, MLX4_CMD_WRAPPED);
 			if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mlx4_warn(dev, "Failed to notify FW on "
 					  "FLR done (slave:%d)\n", i);
+=======
+				mlx4_warn(dev, "Failed to notify FW on FLR done (slave:%d)\n",
+					  i);
+>>>>>>> v3.18
 =======
 				mlx4_warn(dev, "Failed to notify FW on FLR done (slave:%d)\n",
 					  i);
@@ -544,13 +621,19 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 	enum slave_port_gen_event gen_event;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	while ((eqe = next_eqe_sw(eq, dev->caps.eqe_factor))) {
 =======
+=======
+>>>>>>> v3.18
 	struct mlx4_vport_state *s_info;
 	int eqe_size = dev->caps.eqe_size;
 
 	while ((eqe = next_eqe_sw(eq, dev->caps.eqe_factor, eqe_size))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Make sure we read EQ entry contents after we've
@@ -581,9 +664,13 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 						& 0xffffff, &slave);
 				if (ret && ret != -ENOENT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					mlx4_dbg(dev, "QP event %02x(%02x) on "
 						 "EQ %d at index %u: could "
 						 "not get slave id (%d)\n",
+=======
+					mlx4_dbg(dev, "QP event %02x(%02x) on EQ %d at index %u: could not get slave id (%d)\n",
+>>>>>>> v3.18
 =======
 					mlx4_dbg(dev, "QP event %02x(%02x) on EQ %d at index %u: could not get slave id (%d)\n",
 >>>>>>> v3.18
@@ -615,9 +702,13 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 						&slave);
 				if (ret && ret != -ENOENT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					mlx4_warn(dev, "SRQ event %02x(%02x) "
 						  "on EQ %d at index %u: could"
 						  " not get slave id (%d)\n",
+=======
+					mlx4_warn(dev, "SRQ event %02x(%02x) on EQ %d at index %u: could not get slave id (%d)\n",
+>>>>>>> v3.18
 =======
 					mlx4_warn(dev, "SRQ event %02x(%02x) on EQ %d at index %u: could not get slave id (%d)\n",
 >>>>>>> v3.18
@@ -626,9 +717,14 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 					break;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mlx4_warn(dev, "%s: slave:%d, srq_no:0x%x,"
 					  " event: %02x(%02x)\n", __func__,
 					  slave,
+=======
+				mlx4_warn(dev, "%s: slave:%d, srq_no:0x%x, event: %02x(%02x)\n",
+					  __func__, slave,
+>>>>>>> v3.18
 =======
 				mlx4_warn(dev, "%s: slave:%d, srq_no:0x%x, event: %02x(%02x)\n",
 					  __func__, slave,
@@ -638,9 +734,14 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 
 				if (!ret && slave != dev->caps.function) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					mlx4_warn(dev, "%s: sending event "
 						  "%02x(%02x) to slave:%d\n",
 						   __func__, eqe->type,
+=======
+					mlx4_warn(dev, "%s: sending event %02x(%02x) to slave:%d\n",
+						  __func__, eqe->type,
+>>>>>>> v3.18
 =======
 					mlx4_warn(dev, "%s: sending event %02x(%02x) to slave:%d\n",
 						  __func__, eqe->type,
@@ -662,13 +763,19 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case MLX4_EVENT_TYPE_PORT_CHANGE:
 			port = be32_to_cpu(eqe->event.port_change.port) >> 28;
 =======
+=======
+>>>>>>> v3.18
 		case MLX4_EVENT_TYPE_PORT_CHANGE: {
 			struct mlx4_slaves_pport slaves_port;
 			port = be32_to_cpu(eqe->event.port_change.port) >> 28;
 			slaves_port = mlx4_phys_to_slaves_pport(dev, port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (eqe->subtype == MLX4_PORT_CHANGE_SUBTYPE_DOWN) {
 				mlx4_dispatch_event(dev, MLX4_DEV_EVENT_PORT_DOWN,
@@ -676,6 +783,7 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 				mlx4_priv(dev)->sense.do_sense_port[port] = 1;
 				if (!mlx4_is_master(dev))
 					break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 				for (i = 0; i < dev->num_slaves; i++) {
 					if (dev->caps.port_type[port] == MLX4_PORT_TYPE_ETH) {
@@ -686,6 +794,8 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 							 __func__, i, port);
 						mlx4_slave_event(dev, i, eqe);
 =======
+=======
+>>>>>>> v3.18
 				for (i = 0; i < dev->num_vfs + 1; i++) {
 					if (!test_bit(i, slaves_port.slaves))
 						continue;
@@ -702,6 +812,9 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 								| (mlx4_phys_to_slave_port(dev, i, port) << 28));
 							mlx4_slave_event(dev, i, eqe);
 						}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					} else {  /* IB port */
 						set_and_calc_slave_port_state(dev, i, port,
@@ -724,11 +837,14 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 					break;
 				if (dev->caps.port_type[port] == MLX4_PORT_TYPE_ETH)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					for (i = 0; i < dev->num_slaves; i++) {
 						if (i == mlx4_master_func_num(dev))
 							continue;
 						mlx4_slave_event(dev, i, eqe);
 =======
+=======
+>>>>>>> v3.18
 					for (i = 0; i < dev->num_vfs + 1; i++) {
 						if (!test_bit(i, slaves_port.slaves))
 							continue;
@@ -742,6 +858,9 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 								| (mlx4_phys_to_slave_port(dev, i, port) << 28));
 							mlx4_slave_event(dev, i, eqe);
 						}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					}
 				else /* IB port */
@@ -752,6 +871,10 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 			}
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -768,11 +891,17 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 					& 0xffffff, &slave);
 				if (ret && ret != -ENOENT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					mlx4_dbg(dev, "CQ event %02x(%02x) on "
 						 "EQ %d at index %u: could "
 						  "not get slave id (%d)\n",
 						  eqe->type, eqe->subtype,
 						  eq->eqn, eq->cons_index, ret);
+=======
+					mlx4_dbg(dev, "CQ event %02x(%02x) on EQ %d at index %u: could not get slave id (%d)\n",
+						 eqe->type, eqe->subtype,
+						 eq->eqn, eq->cons_index, ret);
+>>>>>>> v3.18
 =======
 					mlx4_dbg(dev, "CQ event %02x(%02x) on EQ %d at index %u: could not get slave id (%d)\n",
 						 eqe->type, eqe->subtype,
@@ -797,11 +926,14 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case MLX4_EVENT_TYPE_COMM_CHANNEL:
 			if (!mlx4_is_master(dev)) {
 				mlx4_warn(dev, "Received comm channel event "
 					       "for non master device\n");
 =======
+=======
+>>>>>>> v3.18
 		case MLX4_EVENT_TYPE_OP_REQUIRED:
 			atomic_inc(&priv->opreq_count);
 			/* FW commands can't be executed from interrupt context
@@ -813,6 +945,9 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 		case MLX4_EVENT_TYPE_COMM_CHANNEL:
 			if (!mlx4_is_master(dev)) {
 				mlx4_warn(dev, "Received comm channel event for non master device\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			}
@@ -827,8 +962,12 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 			flr_slave = be32_to_cpu(eqe->event.flr_event.slave_id);
 			if (!mlx4_is_master(dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mlx4_warn(dev, "Non-master function received"
 					       "FLR event\n");
+=======
+				mlx4_warn(dev, "Non-master function received FLR event\n");
+>>>>>>> v3.18
 =======
 				mlx4_warn(dev, "Non-master function received FLR event\n");
 >>>>>>> v3.18
@@ -861,9 +1000,14 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 				if (mlx4_is_master(dev))
 					for (i = 0; i < dev->num_slaves; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 						mlx4_dbg(dev, "%s: Sending "
 							"MLX4_FATAL_WARNING_SUBTYPE_WARMING"
 							" to slave: %d\n", __func__, i);
+=======
+						mlx4_dbg(dev, "%s: Sending MLX4_FATAL_WARNING_SUBTYPE_WARMING to slave: %d\n",
+							 __func__, i);
+>>>>>>> v3.18
 =======
 						mlx4_dbg(dev, "%s: Sending MLX4_FATAL_WARNING_SUBTYPE_WARMING to slave: %d\n",
 							 __func__, i);
@@ -872,6 +1016,7 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 							continue;
 						mlx4_slave_event(dev, i, eqe);
 					}
+<<<<<<< HEAD
 <<<<<<< HEAD
 				mlx4_err(dev, "Temperature Threshold was reached! "
 					"Threshold: %d celsius degrees; "
@@ -883,11 +1028,16 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 					  "subtype %02x on EQ %d at index %u. owner=%x, "
 					  "nent=0x%x, slave=%x, ownership=%s\n",
 =======
+=======
+>>>>>>> v3.18
 				mlx4_err(dev, "Temperature Threshold was reached! Threshold: %d celsius degrees; Current Temperature: %d\n",
 					 be16_to_cpu(eqe->event.warming.warning_threshold),
 					 be16_to_cpu(eqe->event.warming.current_temperature));
 			} else
 				mlx4_warn(dev, "Unhandled event FATAL WARNING (%02x), subtype %02x on EQ %d at index %u. owner=%x, nent=0x%x, slave=%x, ownership=%s\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					  eqe->type, eqe->subtype, eq->eqn,
 					  eq->cons_index, eqe->owner, eq->nent,
@@ -906,9 +1056,13 @@ static int mlx4_eq_int(struct mlx4_dev *dev, struct mlx4_eq *eq)
 		case MLX4_EVENT_TYPE_ECC_DETECT:
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_warn(dev, "Unhandled event %02x(%02x) on EQ %d at "
 				  "index %u. owner=%x, nent=0x%x, slave=%x, "
 				  "ownership=%s\n",
+=======
+			mlx4_warn(dev, "Unhandled event %02x(%02x) on EQ %d at index %u. owner=%x, nent=0x%x, slave=%x, ownership=%s\n",
+>>>>>>> v3.18
 =======
 			mlx4_warn(dev, "Unhandled event %02x(%02x) on EQ %d at index %u. owner=%x, nent=0x%x, slave=%x, ownership=%s\n",
 >>>>>>> v3.18
@@ -1080,13 +1234,19 @@ static int mlx4_create_eq(struct mlx4_dev *dev, int nent,
 	eq->dev   = dev;
 	eq->nent  = roundup_pow_of_two(max(nent, 2));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* CX3 is capable of extending the CQE/EQE from 32 to 64 bytes */
 	npages = PAGE_ALIGN(eq->nent * (MLX4_EQ_ENTRY_SIZE << dev->caps.eqe_factor)) / PAGE_SIZE;
 =======
+=======
+>>>>>>> v3.18
 	/* CX3 is capable of extending the CQE/EQE from 32 to 64 bytes, with
 	 * strides of 64B,128B and 256B.
 	 */
 	npages = PAGE_ALIGN(eq->nent * dev->caps.eqe_size) / PAGE_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	eq->page_list = kmalloc(npages * sizeof *eq->page_list,
@@ -1137,7 +1297,10 @@ static int mlx4_create_eq(struct mlx4_dev *dev, int nent,
 		goto err_out_free_mtt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(eq_context, 0, sizeof *eq_context);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	eq_context->flags	  = cpu_to_be32(MLX4_EQ_STATUS_OK   |
@@ -1168,7 +1331,11 @@ err_out_free_mtt:
 
 err_out_free_eq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_bitmap_free(&priv->eq_table.bitmap, eq->eqn);
+=======
+	mlx4_bitmap_free(&priv->eq_table.bitmap, eq->eqn, MLX4_USE_RR);
+>>>>>>> v3.18
 =======
 	mlx4_bitmap_free(&priv->eq_table.bitmap, eq->eqn, MLX4_USE_RR);
 >>>>>>> v3.18
@@ -1198,13 +1365,19 @@ static void mlx4_free_eq(struct mlx4_dev *dev,
 	int err;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* CX3 is capable of extending the CQE/EQE from 32 to 64 bytes */
 	int npages = PAGE_ALIGN((MLX4_EQ_ENTRY_SIZE << dev->caps.eqe_factor) * eq->nent) / PAGE_SIZE;
 =======
+=======
+>>>>>>> v3.18
 	/* CX3 is capable of extending the CQE/EQE from 32 to 64 bytes, with
 	 * strides of 64B,128B and 256B
 	 */
 	int npages = PAGE_ALIGN(dev->caps.eqe_size  * eq->nent) / PAGE_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mailbox = mlx4_alloc_cmd_mailbox(dev);
@@ -1226,6 +1399,10 @@ static void mlx4_free_eq(struct mlx4_dev *dev,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	synchronize_irq(eq->irq);
+>>>>>>> v3.18
 =======
 	synchronize_irq(eq->irq);
 >>>>>>> v3.18
@@ -1238,7 +1415,11 @@ static void mlx4_free_eq(struct mlx4_dev *dev,
 
 	kfree(eq->page_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_bitmap_free(&priv->eq_table.bitmap, eq->eqn);
+=======
+	mlx4_bitmap_free(&priv->eq_table.bitmap, eq->eqn, MLX4_USE_RR);
+>>>>>>> v3.18
 =======
 	mlx4_bitmap_free(&priv->eq_table.bitmap, eq->eqn, MLX4_USE_RR);
 >>>>>>> v3.18
@@ -1285,7 +1466,11 @@ static int mlx4_map_clr_int(struct mlx4_dev *dev)
 				 priv->fw.clr_int_base, MLX4_CLR_INT_SIZE);
 	if (!priv->clr_base) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Couldn't map interrupt clear register, aborting.\n");
+=======
+		mlx4_err(dev, "Couldn't map interrupt clear register, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Couldn't map interrupt clear register, aborting\n");
 >>>>>>> v3.18
@@ -1573,6 +1758,10 @@ int mlx4_assign_eq(struct mlx4_dev *dev, char *name, struct cpu_rmap *rmap,
 				/*we dont want to break here*/
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1592,7 +1781,10 @@ int mlx4_assign_eq(struct mlx4_dev *dev, char *name, struct cpu_rmap *rmap,
 EXPORT_SYMBOL(mlx4_assign_eq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int mlx4_eq_get_irq(struct mlx4_dev *dev, int vec)
 {
 	struct mlx4_priv *priv = mlx4_priv(dev);
@@ -1601,6 +1793,9 @@ int mlx4_eq_get_irq(struct mlx4_dev *dev, int vec)
 }
 EXPORT_SYMBOL(mlx4_eq_get_irq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void mlx4_release_eq(struct mlx4_dev *dev, int vec)
 {

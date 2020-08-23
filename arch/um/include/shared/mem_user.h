@@ -50,7 +50,11 @@ extern int init_mem_user(void);
 extern void setup_memory(void *entry);
 extern unsigned long find_iomem(char *driver, unsigned long *len_out);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int init_maps(unsigned long physmem, unsigned long iomem,
+=======
+extern void mem_total_pages(unsigned long physmem, unsigned long iomem,
+>>>>>>> v3.18
 =======
 extern void mem_total_pages(unsigned long physmem, unsigned long iomem,
 >>>>>>> v3.18

@@ -38,6 +38,10 @@
  */
 ssize_t usb_store_new_id(struct usb_dynids *dynids,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			 const struct usb_device_id *id_table,
+>>>>>>> v3.18
 =======
 			 const struct usb_device_id *id_table,
 >>>>>>> v3.18
@@ -49,18 +53,24 @@ ssize_t usb_store_new_id(struct usb_dynids *dynids,
 	u32 idProduct = 0;
 	unsigned int bInterfaceClass = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int fields = 0;
 	int retval = 0;
 
 	fields = sscanf(buf, "%x %x %x", &idVendor, &idProduct,
 					&bInterfaceClass);
 =======
+=======
+>>>>>>> v3.18
 	u32 refVendor, refProduct;
 	int fields = 0;
 	int retval = 0;
 
 	fields = sscanf(buf, "%x %x %x %x %x", &idVendor, &idProduct,
 			&bInterfaceClass, &refVendor, &refProduct);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (fields < 2)
 		return -EINVAL;
@@ -74,21 +84,30 @@ ssize_t usb_store_new_id(struct usb_dynids *dynids,
 	dynid->id.idProduct = idProduct;
 	dynid->id.match_flags = USB_DEVICE_ID_MATCH_DEVICE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fields == 3) {
 =======
+=======
+>>>>>>> v3.18
 	if (fields > 2 && bInterfaceClass) {
 		if (bInterfaceClass > 255) {
 			retval = -EINVAL;
 			goto fail;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dynid->id.bInterfaceClass = (u8)bInterfaceClass;
 		dynid->id.match_flags |= USB_DEVICE_ID_MATCH_INT_CLASS;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (fields > 4) {
 		const struct usb_device_id *id = id_table;
 
@@ -109,6 +128,9 @@ ssize_t usb_store_new_id(struct usb_dynids *dynids,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock(&dynids->lock);
 	list_add_tail(&dynid->node, &dynids->list);
@@ -120,11 +142,17 @@ ssize_t usb_store_new_id(struct usb_dynids *dynids,
 		return retval;
 	return count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 fail:
 	kfree(dynid);
 	return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(usb_store_new_id);
@@ -147,7 +175,11 @@ ssize_t usb_show_dynids(struct usb_dynids *dynids, char *buf)
 EXPORT_SYMBOL_GPL(usb_show_dynids);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_dynids(struct device_driver *driver, char *buf)
+=======
+static ssize_t new_id_show(struct device_driver *driver, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t new_id_show(struct device_driver *driver, char *buf)
 >>>>>>> v3.18
@@ -158,7 +190,11 @@ static ssize_t new_id_show(struct device_driver *driver, char *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t store_new_id(struct device_driver *driver,
+=======
+static ssize_t new_id_store(struct device_driver *driver,
+>>>>>>> v3.18
 =======
 static ssize_t new_id_store(struct device_driver *driver,
 >>>>>>> v3.18
@@ -166,6 +202,7 @@ static ssize_t new_id_store(struct device_driver *driver,
 {
 	struct usb_driver *usb_drv = to_usb_driver(driver);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return usb_store_new_id(&usb_drv->dynids, driver, buf, count);
 }
@@ -182,6 +219,8 @@ static DRIVER_ATTR(new_id, S_IRUGO | S_IWUSR, show_dynids, store_new_id);
 static ssize_t
 store_remove_id(struct device_driver *driver, const char *buf, size_t count)
 =======
+=======
+>>>>>>> v3.18
 	return usb_store_new_id(&usb_drv->dynids, usb_drv->id_table, driver, buf, count);
 }
 static DRIVER_ATTR_RW(new_id);
@@ -191,6 +230,9 @@ static DRIVER_ATTR_RW(new_id);
  */
 static ssize_t remove_id_store(struct device_driver *driver, const char *buf,
 			       size_t count)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct usb_dynid *dynid, *n;
@@ -217,14 +259,20 @@ static ssize_t remove_id_store(struct device_driver *driver, const char *buf,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DRIVER_ATTR(remove_id, S_IRUGO | S_IWUSR, show_dynids, store_remove_id);
 =======
+=======
+>>>>>>> v3.18
 
 static ssize_t remove_id_show(struct device_driver *driver, char *buf)
 {
 	return new_id_show(driver, buf);
 }
 static DRIVER_ATTR_RW(remove_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int usb_create_newid_files(struct usb_driver *usb_drv)
@@ -363,9 +411,15 @@ static int usb_probe_interface(struct device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	id = usb_match_id(intf, driver->id_table);
 	if (!id)
 		id = usb_match_dynamic_id(intf, driver);
+=======
+	id = usb_match_dynamic_id(intf, driver);
+	if (!id)
+		id = usb_match_id(intf, driver->id_table);
+>>>>>>> v3.18
 =======
 	id = usb_match_dynamic_id(intf, driver);
 	if (!id)
@@ -457,8 +511,14 @@ static int usb_unbind_interface(struct device *dev)
 	struct usb_driver *driver = to_usb_driver(dev->driver);
 	struct usb_interface *intf = to_usb_interface(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_device *udev;
 	int error, r, lpm_disable_error;
+=======
+	struct usb_host_endpoint *ep, **eps = NULL;
+	struct usb_device *udev;
+	int i, j, error, r, lpm_disable_error;
+>>>>>>> v3.18
 =======
 	struct usb_host_endpoint *ep, **eps = NULL;
 	struct usb_device *udev;
@@ -479,16 +539,22 @@ static int usb_unbind_interface(struct device *dev)
 	lpm_disable_error = usb_unlocked_disable_lpm(udev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Terminate all URBs for this interface unless the driver
 	 * supports "soft" unbinding.
 	 */
 	if (!driver->soft_unbind)
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Terminate all URBs for this interface unless the driver
 	 * supports "soft" unbinding and the device is still present.
 	 */
 	if (!driver->soft_unbind || udev->state == USB_STATE_NOTATTACHED)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		usb_disable_interface(udev, intf, false);
 
@@ -496,7 +562,10 @@ static int usb_unbind_interface(struct device *dev)
 	usb_cancel_queued_reset(intf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Free streams */
 	for (i = 0, j = 0; i < intf->cur_altsetting->desc.bNumEndpoints; i++) {
 		ep = &intf->cur_altsetting->endpoint[i];
@@ -517,6 +586,9 @@ static int usb_unbind_interface(struct device *dev)
 		kfree(eps);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Reset other interface state.
 	 * We cannot do a Set-Interface if the device is suspended or
@@ -582,6 +654,11 @@ static int usb_unbind_interface(struct device *dev)
  * extra locking, but other call contexts may need to explicitly claim that
  * lock.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return: 0 on success.
+>>>>>>> v3.18
 =======
  *
  * Return: 0 on success.
@@ -591,7 +668,11 @@ int usb_driver_claim_interface(struct usb_driver *driver,
 				struct usb_interface *iface, void *priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev;
+=======
+	struct device *dev = &iface->dev;
+>>>>>>> v3.18
 =======
 	struct device *dev = &iface->dev;
 >>>>>>> v3.18
@@ -600,10 +681,13 @@ int usb_driver_claim_interface(struct usb_driver *driver,
 	int lpm_disable_error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!iface)
 		return -ENODEV;
 
 	dev = &iface->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (dev->driver)
@@ -799,6 +883,11 @@ EXPORT_SYMBOL_GPL(usb_match_one_id);
  * modutils, to support the driver loading functionality of USB hotplugging.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Return: The first matching usb_device_id, or %NULL.
+ *
+>>>>>>> v3.18
 =======
  * Return: The first matching usb_device_id, or %NULL.
  *
@@ -969,7 +1058,12 @@ static int usb_uevent(struct device *dev, struct kobj_uevent_env *env)
  * unattached devices will be rescanned whenever a new driver is
  * added, allowing the new driver to attach to any recognized devices.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns a negative error code on failure and 0 on success.
+=======
+ *
+ * Return: A negative error code on failure and 0 on success.
+>>>>>>> v3.18
 =======
  *
  * Return: A negative error code on failure and 0 on success.
@@ -985,7 +1079,11 @@ int usb_register_device_driver(struct usb_device_driver *new_udriver,
 
 	new_udriver->drvwrap.for_devices = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new_udriver->drvwrap.driver.name = (char *) new_udriver->name;
+=======
+	new_udriver->drvwrap.driver.name = new_udriver->name;
+>>>>>>> v3.18
 =======
 	new_udriver->drvwrap.driver.name = new_udriver->name;
 >>>>>>> v3.18
@@ -1034,7 +1132,12 @@ EXPORT_SYMBOL_GPL(usb_deregister_device_driver);
  * unattached interfaces will be rescanned whenever a new driver is
  * added, allowing the new driver to attach to any recognized interfaces.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns a negative error code on failure and 0 on success.
+=======
+ *
+ * Return: A negative error code on failure and 0 on success.
+>>>>>>> v3.18
 =======
  *
  * Return: A negative error code on failure and 0 on success.
@@ -1054,7 +1157,11 @@ int usb_register_driver(struct usb_driver *new_driver, struct module *owner,
 
 	new_driver->drvwrap.for_devices = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new_driver->drvwrap.driver.name = (char *) new_driver->name;
+=======
+	new_driver->drvwrap.driver.name = new_driver->name;
+>>>>>>> v3.18
 =======
 	new_driver->drvwrap.driver.name = new_driver->name;
 >>>>>>> v3.18
@@ -1355,8 +1462,13 @@ static int usb_resume_interface(struct usb_device *udev,
 		} else {
 			intf->needs_binding = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_warn(&intf->dev, "no %s for driver %s?\n",
 					"reset_resume", driver->name);
+=======
+			dev_dbg(&intf->dev, "no reset_resume for driver %s?\n",
+					driver->name);
+>>>>>>> v3.18
 =======
 			dev_dbg(&intf->dev, "no reset_resume for driver %s?\n",
 					driver->name);
@@ -1400,6 +1512,11 @@ done:
  *
  * This routine can run only in process context.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return: 0 if the suspend succeeded.
+>>>>>>> v3.18
 =======
  *
  * Return: 0 if the suspend succeeded.
@@ -1486,6 +1603,11 @@ static int usb_suspend_both(struct usb_device *udev, pm_message_t msg)
  *
  * This routine can run only in process context.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return: 0 on success.
+>>>>>>> v3.18
 =======
  *
  * Return: 0 on success.
@@ -1524,6 +1646,7 @@ static int usb_resume_both(struct usb_device *udev, pm_message_t msg)
 	return status;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_USB_OTG
 void usb_hnp_polling_work(struct work_struct *work)
@@ -1578,6 +1701,8 @@ out:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void choose_wakeup(struct usb_device *udev, pm_message_t msg)
 {
 	int	w;
@@ -1611,6 +1736,7 @@ int usb_suspend(struct device *dev, pm_message_t msg)
 	struct usb_device	*udev = to_usb_device(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (udev->bus->skip_resume) {
 		if (udev->state == USB_STATE_SUSPENDED) {
 			return 0;
@@ -1620,6 +1746,8 @@ int usb_suspend(struct device *dev, pm_message_t msg)
 		}
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unbind_no_pm_drivers_interfaces(udev);
@@ -1652,6 +1780,7 @@ int usb_resume(struct device *dev, pm_message_t msg)
 	int			status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Some buses would like to keep their devices in suspend
 	 * state after system resume.  Their resume happen when
@@ -1661,6 +1790,8 @@ int usb_resume(struct device *dev, pm_message_t msg)
 	if (udev->bus->skip_resume)
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* For all calls, take the device back to full power and
@@ -1766,6 +1897,11 @@ void usb_autosuspend_device(struct usb_device *udev)
  *
  * This routine can run only in process context.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return: 0 on success. A negative error code otherwise.
+>>>>>>> v3.18
 =======
  *
  * Return: 0 on success. A negative error code otherwise.
@@ -1880,6 +2016,11 @@ EXPORT_SYMBOL_GPL(usb_autopm_put_interface_no_suspend);
  *
  * This routine can run only in process context.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return: 0 on success.
+>>>>>>> v3.18
 =======
  *
  * Return: 0 on success.
@@ -1918,6 +2059,11 @@ EXPORT_SYMBOL_GPL(usb_autopm_get_interface);
  *
  * This routine can run in atomic context.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return: 0 on success. A negative error code otherwise.
+>>>>>>> v3.18
 =======
  *
  * Return: 0 on success. A negative error code otherwise.
@@ -2058,7 +2204,12 @@ int usb_runtime_idle(struct device *dev)
 	if (autosuspend_check(udev) == 0)
 		pm_runtime_autosuspend(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	/* Tell the core not to suspend it, though. */
+	return -EBUSY;
+>>>>>>> v3.18
 =======
 	/* Tell the core not to suspend it, though. */
 	return -EBUSY;
@@ -2071,6 +2222,12 @@ int usb_set_usb2_hardware_lpm(struct usb_device *udev, int enable)
 	int ret = -EPERM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (enable && !udev->usb2_hw_lpm_allowed)
+		return 0;
+
+>>>>>>> v3.18
 =======
 	if (enable && !udev->usb2_hw_lpm_allowed)
 		return 0;

@@ -45,6 +45,10 @@ enum filter_op_ids
 	OP_GT,
 	OP_GE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	OP_BAND,
+>>>>>>> v3.18
 =======
 	OP_BAND,
 >>>>>>> v3.18
@@ -59,6 +63,10 @@ struct filter_op {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Order must be the same as enum filter_op_ids above */
+>>>>>>> v3.18
 =======
 /* Order must be the same as enum filter_op_ids above */
 >>>>>>> v3.18
@@ -73,6 +81,10 @@ static struct filter_op filter_ops[] = {
 	{ OP_GT,	">",		5 },
 	{ OP_GE,	">=",		5 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ OP_BAND,	"&",		6 },
+>>>>>>> v3.18
 =======
 	{ OP_BAND,	"&",		6 },
 >>>>>>> v3.18
@@ -169,6 +181,12 @@ static int filter_pred_##type(struct filter_pred *pred, void *event)	\
 		match = (*addr >= val);					\
 		break;							\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case OP_BAND:							\
+		match = (*addr & val);					\
+		break;							\
+>>>>>>> v3.18
 =======
 	case OP_BAND:							\
 		match = (*addr & val);					\
@@ -650,11 +668,14 @@ static void append_filter_err(struct filter_parse_state *ps,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* caller must hold event_mutex */
 void print_event_filter(struct ftrace_event_call *call, struct trace_seq *s)
 {
 	struct event_filter *filter = call->filter;
 =======
+=======
+>>>>>>> v3.18
 static inline struct event_filter *event_filter(struct ftrace_event_file *file)
 {
 	if (file->event_call->flags & TRACE_EVENT_FL_USE_CALL_FILTER)
@@ -667,13 +688,20 @@ static inline struct event_filter *event_filter(struct ftrace_event_file *file)
 void print_event_filter(struct ftrace_event_file *file, struct trace_seq *s)
 {
 	struct event_filter *filter = event_filter(file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (filter && filter->filter_string)
 		trace_seq_printf(s, "%s\n", filter->filter_string);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		trace_seq_printf(s, "none\n");
+=======
+		trace_seq_puts(s, "none\n");
+>>>>>>> v3.18
 =======
 		trace_seq_puts(s, "none\n");
 >>>>>>> v3.18
@@ -690,7 +718,11 @@ void print_subsystem_event_filter(struct event_subsystem *system,
 		trace_seq_printf(s, "%s\n", filter->filter_string);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		trace_seq_printf(s, DEFAULT_SYS_FILTER_MESSAGE "\n");
+=======
+		trace_seq_puts(s, DEFAULT_SYS_FILTER_MESSAGE "\n");
+>>>>>>> v3.18
 =======
 		trace_seq_puts(s, DEFAULT_SYS_FILTER_MESSAGE "\n");
 >>>>>>> v3.18
@@ -802,10 +834,13 @@ static void __free_preds(struct event_filter *filter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void filter_disable(struct ftrace_event_call *call)
 {
 	call->flags &= ~TRACE_EVENT_FL_FILTERED;
 =======
+=======
+>>>>>>> v3.18
 static void filter_disable(struct ftrace_event_file *file)
 {
 	struct ftrace_event_call *call = file->event_call;
@@ -814,6 +849,9 @@ static void filter_disable(struct ftrace_event_file *file)
 		call->flags &= ~TRACE_EVENT_FL_FILTERED;
 	else
 		file->flags &= ~FTRACE_EVENT_FL_FILTERED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -828,6 +866,7 @@ static void __free_filter(struct event_filter *filter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Called when destroying the ftrace_event_call.
  * The call is being freed, so we do not need to worry about
@@ -838,6 +877,11 @@ void destroy_preds(struct ftrace_event_call *call)
 {
 	__free_filter(call->filter);
 	call->filter = NULL;
+=======
+void free_event_filter(struct event_filter *filter)
+{
+	__free_filter(filter);
+>>>>>>> v3.18
 =======
 void free_event_filter(struct event_filter *filter)
 {
@@ -878,6 +922,7 @@ static int __alloc_preds(struct event_filter *filter, int n_preds)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void filter_free_subsystem_preds(struct event_subsystem *system)
 {
 	struct ftrace_event_call *call;
@@ -901,6 +946,8 @@ static void filter_free_subsystem_filters(struct event_subsystem *system)
 		__free_filter(call->filter);
 		call->filter = NULL;
 =======
+=======
+>>>>>>> v3.18
 static inline void __remove_filter(struct ftrace_event_file *file)
 {
 	struct ftrace_event_call *call = file->event_call;
@@ -946,6 +993,9 @@ static void filter_free_subsystem_filters(struct ftrace_subsystem_dir *dir,
 		if (file->system != dir)
 			continue;
 		__free_subsystem_filter(file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1122,9 +1172,12 @@ static void parse_init(struct filter_parse_state *ps,
 static char infix_next(struct filter_parse_state *ps)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ps->infix.cnt)
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ps->infix.cnt--;
@@ -1143,9 +1196,12 @@ static char infix_peek(struct filter_parse_state *ps)
 static void infix_advance(struct filter_parse_state *ps)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ps->infix.cnt)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ps->infix.cnt--;
@@ -1447,6 +1503,7 @@ static int check_preds(struct filter_parse_state *ps)
 	int n_normal_preds = 0, n_logical_preds = 0;
 	struct postfix_elt *elt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cnt = 0;
 
 	list_for_each_entry(elt, &ps->postfix, list) {
@@ -1457,11 +1514,16 @@ static int check_preds(struct filter_parse_state *ps)
 
 		cnt--;
 =======
+=======
+>>>>>>> v3.18
 
 	list_for_each_entry(elt, &ps->postfix, list) {
 		if (elt->op == OP_NONE)
 			continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (elt->op == OP_AND || elt->op == OP_OR) {
 			n_logical_preds++;
@@ -1469,12 +1531,18 @@ static int check_preds(struct filter_parse_state *ps)
 		}
 		n_normal_preds++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* all ops should have operands */
 		if (cnt < 0)
 			break;
 	}
 
 	if (cnt != 1 || !n_normal_preds || n_logical_preds >= n_normal_preds) {
+=======
+	}
+
+	if (!n_normal_preds || n_logical_preds >= n_normal_preds) {
+>>>>>>> v3.18
 =======
 	}
 
@@ -1651,7 +1719,10 @@ static int replace_preds(struct ftrace_event_call *call,
 			 struct event_filter *filter,
 			 struct filter_parse_state *ps,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 char *filter_string,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			 bool dry_run)
@@ -1754,7 +1825,10 @@ fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void event_set_filtered_flag(struct ftrace_event_file *file)
 {
 	struct ftrace_event_call *call = file->event_call;
@@ -1823,6 +1897,9 @@ event_no_set_filter_flag(struct ftrace_event_file *file)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct filter_list {
 	struct list_head	list;
@@ -1830,18 +1907,24 @@ struct filter_list {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int replace_system_preds(struct event_subsystem *system,
 				struct filter_parse_state *ps,
 				char *filter_string)
 {
 	struct ftrace_event_call *call;
 =======
+=======
+>>>>>>> v3.18
 static int replace_system_preds(struct ftrace_subsystem_dir *dir,
 				struct trace_array *tr,
 				struct filter_parse_state *ps,
 				char *filter_string)
 {
 	struct ftrace_event_file *file;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct filter_list *filter_item;
 	struct filter_list *tmp;
@@ -1850,9 +1933,14 @@ static int replace_system_preds(struct ftrace_subsystem_dir *dir,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(call, &ftrace_events, list) {
 
 		if (strcmp(call->class->system, system->name) != 0)
+=======
+	list_for_each_entry(file, &tr->events, list) {
+		if (file->system != dir)
+>>>>>>> v3.18
 =======
 	list_for_each_entry(file, &tr->events, list) {
 		if (file->system != dir)
@@ -1863,6 +1951,7 @@ static int replace_system_preds(struct ftrace_subsystem_dir *dir,
 		 * Try to see if the filter can be applied
 		 *  (filter arg is ignored on dry_run)
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		err = replace_preds(call, NULL, ps, filter_string, true);
 		if (err)
@@ -1879,6 +1968,8 @@ static int replace_system_preds(struct ftrace_subsystem_dir *dir,
 
 		if (call->flags & TRACE_EVENT_FL_NO_SET_FILTER)
 =======
+=======
+>>>>>>> v3.18
 		err = replace_preds(file->event_call, NULL, ps, true);
 		if (err)
 			event_set_no_set_filter_flag(file);
@@ -1893,6 +1984,9 @@ static int replace_system_preds(struct ftrace_subsystem_dir *dir,
 			continue;
 
 		if (event_no_set_filter_flag(file))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 
@@ -1913,6 +2007,7 @@ static int replace_system_preds(struct ftrace_subsystem_dir *dir,
 			goto fail_mem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = replace_preds(call, filter, ps, filter_string, false);
 		if (err) {
 			filter_disable(call);
@@ -1921,6 +2016,8 @@ static int replace_system_preds(struct ftrace_subsystem_dir *dir,
 		} else
 			call->flags |= TRACE_EVENT_FL_FILTERED;
 =======
+=======
+>>>>>>> v3.18
 		err = replace_preds(file->event_call, filter, ps, false);
 		if (err) {
 			filter_disable(file);
@@ -1928,14 +2025,22 @@ static int replace_system_preds(struct ftrace_subsystem_dir *dir,
 			append_filter_err(ps, filter);
 		} else
 			event_set_filtered_flag(file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Regardless of if this returned an error, we still
 		 * replace the filter for the call.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		filter = call->filter;
 		rcu_assign_pointer(call->filter, filter_item->filter);
+=======
+		filter = event_filter(file);
+		event_set_filter(file, filter_item->filter);
+>>>>>>> v3.18
 =======
 		filter = event_filter(file);
 		event_set_filter(file, filter_item->filter);
@@ -2050,7 +2155,11 @@ static int create_filter(struct ftrace_event_call *call,
 	err = create_filter_start(filter_str, set_str, &ps, &filter);
 	if (!err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = replace_preds(call, filter, ps, filter_str, false);
+=======
+		err = replace_preds(call, filter, ps, false);
+>>>>>>> v3.18
 =======
 		err = replace_preds(call, filter, ps, false);
 >>>>>>> v3.18
@@ -2064,7 +2173,10 @@ static int create_filter(struct ftrace_event_call *call,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int create_event_filter(struct ftrace_event_call *call,
 			char *filter_str, bool set_str,
 			struct event_filter **filterp)
@@ -2072,6 +2184,9 @@ int create_event_filter(struct ftrace_event_call *call,
 	return create_filter(call, filter_str, set_str, filterp);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * create_system_filter - create a filter for an event_subsystem
@@ -2083,7 +2198,12 @@ int create_event_filter(struct ftrace_event_call *call,
  * and always remembers @filter_str.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int create_system_filter(struct event_subsystem *system,
+=======
+static int create_system_filter(struct ftrace_subsystem_dir *dir,
+				struct trace_array *tr,
+>>>>>>> v3.18
 =======
 static int create_system_filter(struct ftrace_subsystem_dir *dir,
 				struct trace_array *tr,
@@ -2097,7 +2217,11 @@ static int create_system_filter(struct ftrace_subsystem_dir *dir,
 	err = create_filter_start(filter_str, true, &ps, &filter);
 	if (!err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = replace_system_preds(system, ps, filter_str);
+=======
+		err = replace_system_preds(dir, tr, ps, filter_str);
+>>>>>>> v3.18
 =======
 		err = replace_system_preds(dir, tr, ps, filter_str);
 >>>>>>> v3.18
@@ -2117,8 +2241,14 @@ static int create_system_filter(struct ftrace_subsystem_dir *dir,
 
 /* caller must hold event_mutex */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int apply_event_filter(struct ftrace_event_call *call, char *filter_string)
 {
+=======
+int apply_event_filter(struct ftrace_event_file *file, char *filter_string)
+{
+	struct ftrace_event_call *call = file->event_call;
+>>>>>>> v3.18
 =======
 int apply_event_filter(struct ftrace_event_file *file, char *filter_string)
 {
@@ -2129,6 +2259,7 @@ int apply_event_filter(struct ftrace_event_file *file, char *filter_string)
 
 	if (!strcmp(strstrip(filter_string), "0")) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		filter_disable(call);
 		filter = call->filter;
 		if (!filter)
@@ -2138,6 +2269,8 @@ int apply_event_filter(struct ftrace_event_file *file, char *filter_string)
 		synchronize_sched();
 		__free_filter(filter);
 =======
+=======
+>>>>>>> v3.18
 		filter_disable(file);
 		filter = event_filter(file);
 
@@ -2150,6 +2283,9 @@ int apply_event_filter(struct ftrace_event_file *file, char *filter_string)
 		synchronize_sched();
 		__free_filter(filter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	}
@@ -2164,6 +2300,7 @@ int apply_event_filter(struct ftrace_event_file *file, char *filter_string)
 	 */
 	if (filter) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct event_filter *tmp = call->filter;
 
 		if (!err)
@@ -2173,6 +2310,8 @@ int apply_event_filter(struct ftrace_event_file *file, char *filter_string)
 
 		rcu_assign_pointer(call->filter, filter);
 =======
+=======
+>>>>>>> v3.18
 		struct event_filter *tmp;
 
 		tmp = event_filter(file);
@@ -2182,6 +2321,9 @@ int apply_event_filter(struct ftrace_event_file *file, char *filter_string)
 			filter_disable(file);
 
 		event_set_filter(file, filter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (tmp) {
@@ -2199,6 +2341,10 @@ int apply_subsystem_event_filter(struct ftrace_subsystem_dir *dir,
 {
 	struct event_subsystem *system = dir->subsystem;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct trace_array *tr = dir->tr;
+>>>>>>> v3.18
 =======
 	struct trace_array *tr = dir->tr;
 >>>>>>> v3.18
@@ -2215,7 +2361,11 @@ int apply_subsystem_event_filter(struct ftrace_subsystem_dir *dir,
 
 	if (!strcmp(strstrip(filter_string), "0")) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		filter_free_subsystem_preds(system);
+=======
+		filter_free_subsystem_preds(dir, tr);
+>>>>>>> v3.18
 =======
 		filter_free_subsystem_preds(dir, tr);
 >>>>>>> v3.18
@@ -2225,7 +2375,11 @@ int apply_subsystem_event_filter(struct ftrace_subsystem_dir *dir,
 		/* Ensure all filters are no longer used */
 		synchronize_sched();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		filter_free_subsystem_filters(system);
+=======
+		filter_free_subsystem_filters(dir, tr);
+>>>>>>> v3.18
 =======
 		filter_free_subsystem_filters(dir, tr);
 >>>>>>> v3.18
@@ -2234,7 +2388,11 @@ int apply_subsystem_event_filter(struct ftrace_subsystem_dir *dir,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = create_system_filter(system, filter_string, &filter);
+=======
+	err = create_system_filter(dir, tr, filter_string, &filter);
+>>>>>>> v3.18
 =======
 	err = create_system_filter(dir, tr, filter_string, &filter);
 >>>>>>> v3.18

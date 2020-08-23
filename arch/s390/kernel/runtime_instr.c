@@ -41,8 +41,11 @@ static void init_runtime_instr_cb(struct runtime_instr_cb *cb)
 {
 	cb->buf_limit = 0xfff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (s390_user_mode == HOME_SPACE_MODE)
 		cb->home_space = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cb->int_requested = 1;
@@ -143,16 +146,22 @@ static int __init runtime_instr_init(void)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	measurement_alert_subclass_register();
 	rc = register_external_interrupt(0x1407, runtime_instr_int_handler);
 	if (rc)
 		measurement_alert_subclass_unregister();
 =======
+=======
+>>>>>>> v3.18
 	irq_subclass_register(IRQ_SUBCLASS_MEASUREMENT_ALERT);
 	rc = register_external_irq(EXT_IRQ_MEASURE_ALERT,
 				   runtime_instr_int_handler);
 	if (rc)
 		irq_subclass_unregister(IRQ_SUBCLASS_MEASUREMENT_ALERT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		pr_info("Runtime instrumentation facility initialized\n");

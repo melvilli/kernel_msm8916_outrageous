@@ -20,6 +20,11 @@
 #include <linux/gpio.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 
@@ -198,7 +203,11 @@ struct samsung_gpio_pm samsung_gpio_pm_2bit = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_ARCH_S3C64XX) || defined(CONFIG_PLAT_S5P)
+=======
+#if defined(CONFIG_ARCH_S3C64XX)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_ARCH_S3C64XX)
 >>>>>>> v3.18
@@ -312,7 +321,11 @@ struct samsung_gpio_pm samsung_gpio_pm_4bit = {
 	.resume = samsung_gpio_pm_4bit_resume,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_ARCH_S3C64XX || CONFIG_PLAT_S5P */
+=======
+#endif /* CONFIG_ARCH_S3C64XX */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_ARCH_S3C64XX */
 >>>>>>> v3.18

@@ -55,6 +55,11 @@ static struct usb_device_id ath9k_hif_usb_ids[] = {
 	{ USB_DEVICE(0x0411, 0x017f),
 	  .driver_info = AR9280_USB },  /* Sony UWA-BR100 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ USB_DEVICE(0x0411, 0x0197),
+	  .driver_info = AR9280_USB },  /* Buffalo WLI-UV-AG300P */
+>>>>>>> v3.18
 =======
 	{ USB_DEVICE(0x0411, 0x0197),
 	  .driver_info = AR9280_USB },  /* Buffalo WLI-UV-AG300P */
@@ -121,15 +126,21 @@ static int hif_usb_send_regout(struct hif_device_usb *hif_dev,
 	cmd->hif_dev = hif_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_fill_bulk_urb(urb, hif_dev->udev,
 			 usb_sndbulkpipe(hif_dev->udev, USB_REG_OUT_PIPE),
 			 skb->data, skb->len,
 			 hif_usb_regout_cb, cmd);
 =======
+=======
+>>>>>>> v3.18
 	usb_fill_int_urb(urb, hif_dev->udev,
 			 usb_sndintpipe(hif_dev->udev, USB_REG_OUT_PIPE),
 			 skb->data, skb->len,
 			 hif_usb_regout_cb, cmd, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	usb_anchor_urb(urb, &hif_dev->regout_submitted);
@@ -247,11 +258,14 @@ static inline void ath9k_skb_queue_complete(struct hif_device_usb *hif_dev,
 
 	while ((skb = __skb_dequeue(queue)) != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath9k_htc_txcompletion_cb(hif_dev->htc_handle,
 					  skb, txok);
 		if (txok)
 			TX_STAT_INC(skb_success);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ATH9K_HTC_DEBUGFS
 		int ln = skb->len;
 #endif
@@ -261,6 +275,9 @@ static inline void ath9k_skb_queue_complete(struct hif_device_usb *hif_dev,
 			TX_STAT_INC(skb_success);
 			TX_STAT_ADD(skb_success_bytes, ln);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else
 			TX_STAT_INC(skb_failed);
@@ -645,6 +662,10 @@ static void ath9k_hif_usb_rx_stream(struct hif_device_usb *hif_dev,
 err:
 	for (i = 0; i < pool_index; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		RX_STAT_ADD(skb_completed_bytes, skb_pool[i]->len);
+>>>>>>> v3.18
 =======
 		RX_STAT_ADD(skb_completed_bytes, skb_pool[i]->len);
 >>>>>>> v3.18
@@ -746,17 +767,23 @@ static void ath9k_hif_usb_reg_in_cb(struct urb *urb)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		usb_fill_bulk_urb(urb, hif_dev->udev,
 				 usb_rcvbulkpipe(hif_dev->udev,
 						 USB_REG_IN_PIPE),
 				 nskb->data, MAX_REG_IN_BUF_SIZE,
 				 ath9k_hif_usb_reg_in_cb, nskb);
 =======
+=======
+>>>>>>> v3.18
 		usb_fill_int_urb(urb, hif_dev->udev,
 				 usb_rcvintpipe(hif_dev->udev,
 						 USB_REG_IN_PIPE),
 				 nskb->data, MAX_REG_IN_BUF_SIZE,
 				 ath9k_hif_usb_reg_in_cb, nskb, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -940,17 +967,23 @@ static int ath9k_hif_usb_alloc_reg_in_urbs(struct hif_device_usb *hif_dev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		usb_fill_bulk_urb(urb, hif_dev->udev,
 				  usb_rcvbulkpipe(hif_dev->udev,
 						  USB_REG_IN_PIPE),
 				  skb->data, MAX_REG_IN_BUF_SIZE,
 				  ath9k_hif_usb_reg_in_cb, skb);
 =======
+=======
+>>>>>>> v3.18
 		usb_fill_int_urb(urb, hif_dev->udev,
 				  usb_rcvintpipe(hif_dev->udev,
 						  USB_REG_IN_PIPE),
 				  skb->data, MAX_REG_IN_BUF_SIZE,
 				  ath9k_hif_usb_reg_in_cb, skb, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Anchor URB */
@@ -1070,9 +1103,13 @@ static int ath9k_hif_usb_download_fw(struct hif_device_usb *hif_dev)
 static int ath9k_hif_usb_dev_init(struct hif_device_usb *hif_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_host_interface *alt = &hif_dev->interface->altsetting[0];
 	struct usb_endpoint_descriptor *endp;
 	int ret, idx;
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -1085,6 +1122,7 @@ static int ath9k_hif_usb_dev_init(struct hif_device_usb *hif_dev)
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* On downloading the firmware to the target, the USB descriptor of EP4
 	 * is 'patched' to change the type of the endpoint to Bulk. This will
@@ -1100,6 +1138,8 @@ static int ath9k_hif_usb_dev_init(struct hif_device_usb *hif_dev)
 		}
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Alloc URBs */
@@ -1128,7 +1168,11 @@ static void ath9k_hif_usb_firmware_fail(struct hif_device_usb *hif_dev)
 	struct device *parent = dev->parent;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	complete(&hif_dev->fw_done);
+=======
+	complete_all(&hif_dev->fw_done);
+>>>>>>> v3.18
 =======
 	complete_all(&hif_dev->fw_done);
 >>>>>>> v3.18
@@ -1181,7 +1225,11 @@ static void ath9k_hif_usb_firmware_cb(const struct firmware *fw, void *context)
 	release_firmware(fw);
 	hif_dev->flags |= HIF_USB_READY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	complete(&hif_dev->fw_done);
+=======
+	complete_all(&hif_dev->fw_done);
+>>>>>>> v3.18
 =======
 	complete_all(&hif_dev->fw_done);
 >>>>>>> v3.18
@@ -1322,7 +1370,11 @@ static void ath9k_hif_usb_reboot(struct usb_device *udev)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = usb_bulk_msg(udev, usb_sndbulkpipe(udev, USB_REG_OUT_PIPE),
+=======
+	ret = usb_interrupt_msg(udev, usb_sndintpipe(udev, USB_REG_OUT_PIPE),
+>>>>>>> v3.18
 =======
 	ret = usb_interrupt_msg(udev, usb_sndintpipe(udev, USB_REG_OUT_PIPE),
 >>>>>>> v3.18
@@ -1376,12 +1428,18 @@ static int ath9k_hif_usb_suspend(struct usb_interface *interface,
 		ath9k_htc_suspend(hif_dev->htc_handle);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ath9k_hif_usb_dealloc_urbs(hif_dev);
 =======
+=======
+>>>>>>> v3.18
 	wait_for_completion(&hif_dev->fw_done);
 
 	if (hif_dev->flags & HIF_USB_READY)
 		ath9k_hif_usb_dealloc_urbs(hif_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

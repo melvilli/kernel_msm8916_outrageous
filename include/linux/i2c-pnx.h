@@ -32,7 +32,10 @@ struct i2c_pnx_algo_data {
 	struct clk		*clk;
 	struct i2c_adapter	adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phys_addr_t		base;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int			irq;

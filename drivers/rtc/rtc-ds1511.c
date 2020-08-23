@@ -90,7 +90,10 @@ struct rtc_plat_data {
 	struct rtc_device *rtc;
 	void __iomem *ioaddr;		/* virtual base address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int size;				/* amount of memory mapped */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int irq;
@@ -108,7 +111,11 @@ static __iomem char *ds1511_base;
 static u32 reg_spacing = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  static noinline void
+=======
+static noinline void
+>>>>>>> v3.18
 =======
 static noinline void
 >>>>>>> v3.18
@@ -118,7 +125,11 @@ rtc_write(uint8_t val, uint32_t reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  static inline void
+=======
+static inline void
+>>>>>>> v3.18
 =======
 static inline void
 >>>>>>> v3.18
@@ -128,7 +139,11 @@ rtc_write_alarm(uint8_t val, enum ds1511reg reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  static noinline uint8_t
+=======
+static noinline uint8_t
+>>>>>>> v3.18
 =======
 static noinline uint8_t
 >>>>>>> v3.18
@@ -138,7 +153,11 @@ rtc_read(enum ds1511reg reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  static inline void
+=======
+static inline void
+>>>>>>> v3.18
 =======
 static inline void
 >>>>>>> v3.18
@@ -148,7 +167,11 @@ rtc_disable_update(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  static void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -169,7 +192,11 @@ rtc_enable_update(void)
  * will reboot the system
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
  void
+=======
+void
+>>>>>>> v3.18
 =======
 void
 >>>>>>> v3.18
@@ -191,7 +218,11 @@ ds1511_wdog_set(unsigned long deciseconds)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  void
+=======
+void
+>>>>>>> v3.18
 =======
 void
 >>>>>>> v3.18
@@ -223,6 +254,7 @@ static int ds1511_rtc_set_time(struct device *dev, struct rtc_time *rtc_tm)
 	 * won't have to change this for a while
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rtc_tm->tm_year < 1900) {
 		rtc_tm->tm_year += 1900;
 	}
@@ -231,12 +263,17 @@ static int ds1511_rtc_set_time(struct device *dev, struct rtc_time *rtc_tm)
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (rtc_tm->tm_year < 1900)
 		rtc_tm->tm_year += 1900;
 
 	if (rtc_tm->tm_year < 1970)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	yrs = rtc_tm->tm_year % 100;
 	cen = rtc_tm->tm_year / 100;
@@ -247,6 +284,7 @@ static int ds1511_rtc_set_time(struct device *dev, struct rtc_time *rtc_tm)
 	min = rtc_tm->tm_min;
 	sec = rtc_tm->tm_sec;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((mon > 12) || (day == 0)) {
 		return -EINVAL;
@@ -260,6 +298,8 @@ static int ds1511_rtc_set_time(struct device *dev, struct rtc_time *rtc_tm)
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if ((mon > 12) || (day == 0))
 		return -EINVAL;
 
@@ -268,6 +308,9 @@ static int ds1511_rtc_set_time(struct device *dev, struct rtc_time *rtc_tm)
 
 	if ((hrs >= 24) || (min >= 60) || (sec >= 60))
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -351,7 +394,11 @@ static int ds1511_rtc_read_time(struct device *dev, struct rtc_time *rtc_tm)
  * permutations, but the kernel doesn't.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
  static void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -378,7 +425,11 @@ ds1511_rtc_update_alarm(struct rtc_plat_data *pdata)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  static int
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -395,9 +446,15 @@ ds1511_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alrm)
 	pdata->alrm_min = alrm->time.tm_min;
 	pdata->alrm_sec = alrm->time.tm_sec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (alrm->enabled) {
 		pdata->irqen |= RTC_AF;
 	}
+=======
+	if (alrm->enabled)
+		pdata->irqen |= RTC_AF;
+
+>>>>>>> v3.18
 =======
 	if (alrm->enabled)
 		pdata->irqen |= RTC_AF;
@@ -408,7 +465,11 @@ ds1511_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alrm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  static int
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -429,7 +490,11 @@ ds1511_rtc_read_alarm(struct device *dev, struct rtc_wkalrm *alrm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  static irqreturn_t
+=======
+static irqreturn_t
+>>>>>>> v3.18
 =======
 static irqreturn_t
 >>>>>>> v3.18
@@ -450,8 +515,12 @@ ds1511_interrupt(int irq, void *dev_id)
 		else
 			events |= RTC_AF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (likely(pdata->rtc))
 			rtc_update_irq(pdata->rtc, 1, events);
+=======
+		rtc_update_irq(pdata->rtc, 1, events);
+>>>>>>> v3.18
 =======
 		rtc_update_irq(pdata->rtc, 1, events);
 >>>>>>> v3.18
@@ -484,7 +553,11 @@ static const struct rtc_class_ops ds1511_rtc_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  static ssize_t
+=======
+static ssize_t
+>>>>>>> v3.18
 =======
 static ssize_t
 >>>>>>> v3.18
@@ -499,6 +572,7 @@ ds1511_nvram_read(struct file *filp, struct kobject *kobj,
 	 * turn it off when you're done
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (size > 1) {
 		rtc_write((rtc_read(RTC_CMD) | DS1511_BME), RTC_CMD);
 	}
@@ -520,6 +594,8 @@ ds1511_nvram_read(struct file *filp, struct kobject *kobj,
 
  static ssize_t
 =======
+=======
+>>>>>>> v3.18
 	if (size > 1)
 		rtc_write((rtc_read(RTC_CMD) | DS1511_BME), RTC_CMD);
 
@@ -540,6 +616,9 @@ ds1511_nvram_read(struct file *filp, struct kobject *kobj,
 }
 
 static ssize_t
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ds1511_nvram_write(struct file *filp, struct kobject *kobj,
 		   struct bin_attribute *bin_attr,
@@ -551,6 +630,7 @@ ds1511_nvram_write(struct file *filp, struct kobject *kobj,
 	 * if count is more than one, turn on "burst" mode
 	 * turn it off when you're done
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (size > 1) {
 		rtc_write((rtc_read(RTC_CMD) | DS1511_BME), RTC_CMD);
@@ -569,6 +649,8 @@ ds1511_nvram_write(struct file *filp, struct kobject *kobj,
 		rtc_write((rtc_read(RTC_CMD) & ~DS1511_BME), RTC_CMD);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (size > 1)
 		rtc_write((rtc_read(RTC_CMD) | DS1511_BME), RTC_CMD);
 
@@ -585,6 +667,9 @@ ds1511_nvram_write(struct file *filp, struct kobject *kobj,
 	if (count > 1)
 		rtc_write((rtc_read(RTC_CMD) & ~DS1511_BME), RTC_CMD);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return count;
 }
@@ -602,13 +687,17 @@ static struct bin_attribute ds1511_nvram_attr = {
 static int ds1511_rtc_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtc_device *rtc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct resource *res;
 	struct rtc_plat_data *pdata;
 	int ret = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
@@ -625,6 +714,8 @@ static int ds1511_rtc_probe(struct platform_device *pdev)
 	if (!ds1511_base)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	pdata = devm_kzalloc(&pdev->dev, sizeof(*pdata), GFP_KERNEL);
 	if (!pdata)
 		return -ENOMEM;
@@ -633,6 +724,9 @@ static int ds1511_rtc_probe(struct platform_device *pdev)
 	ds1511_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(ds1511_base))
 		return PTR_ERR(ds1511_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pdata->ioaddr = ds1511_base;
 	pdata->irq = platform_get_irq(pdev, 0);
@@ -656,6 +750,7 @@ static int ds1511_rtc_probe(struct platform_device *pdev)
 	 * check for a dying bat-tree
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rtc_read(RTC_CMD1) & DS1511_BLF1) {
 		dev_warn(&pdev->dev, "voltage-low detected.\n");
 	}
@@ -663,6 +758,8 @@ static int ds1511_rtc_probe(struct platform_device *pdev)
 	spin_lock_init(&pdata->lock);
 	platform_set_drvdata(pdev, pdata);
 =======
+=======
+>>>>>>> v3.18
 	if (rtc_read(RTC_CMD1) & DS1511_BLF1)
 		dev_warn(&pdev->dev, "voltage-low detected.\n");
 
@@ -674,6 +771,9 @@ static int ds1511_rtc_probe(struct platform_device *pdev)
 	if (IS_ERR(pdata->rtc))
 		return PTR_ERR(pdata->rtc);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * if the platform has an interrupt in mind for this device,
@@ -690,6 +790,7 @@ static int ds1511_rtc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtc = devm_rtc_device_register(&pdev->dev, pdev->name, &ds1511_rtc_ops,
 					THIS_MODULE);
 	if (IS_ERR(rtc))
@@ -700,12 +801,17 @@ static int ds1511_rtc_probe(struct platform_device *pdev)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	ret = sysfs_create_bin_file(&pdev->dev.kobj, &ds1511_nvram_attr);
 	if (ret)
 		dev_err(&pdev->dev, "Unable to create sysfs entry: %s\n",
 			ds1511_nvram_attr.attr.name);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

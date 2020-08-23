@@ -357,8 +357,12 @@ static void cdv_intel_lvds_mode_set(struct drm_encoder *encoder,
 	struct drm_device *dev = encoder->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(
 							encoder->crtc);
+=======
+	struct gma_crtc *gma_crtc = to_gma_crtc(encoder->crtc);
+>>>>>>> v3.18
 =======
 	struct gma_crtc *gma_crtc = to_gma_crtc(encoder->crtc);
 >>>>>>> v3.18
@@ -384,7 +388,11 @@ static void cdv_intel_lvds_mode_set(struct drm_encoder *encoder,
 		pfit_control = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pfit_control |= psb_intel_crtc->pipe << PFIT_PIPE_SHIFT;
+=======
+	pfit_control |= gma_crtc->pipe << PFIT_PIPE_SHIFT;
+>>>>>>> v3.18
 =======
 	pfit_control |= gma_crtc->pipe << PFIT_PIPE_SHIFT;
 >>>>>>> v3.18
@@ -416,6 +424,7 @@ static int cdv_intel_lvds_get_modes(struct drm_connector *connector)
 	struct drm_device *dev = connector->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder =
 					psb_intel_attached_encoder(connector);
 	struct psb_intel_mode_device *mode_dev = &dev_priv->mode_dev;
@@ -423,11 +432,16 @@ static int cdv_intel_lvds_get_modes(struct drm_connector *connector)
 
 	ret = psb_intel_ddc_get_modes(connector, &psb_intel_encoder->i2c_bus->adapter);
 =======
+=======
+>>>>>>> v3.18
 	struct gma_encoder *gma_encoder = gma_attached_encoder(connector);
 	struct psb_intel_mode_device *mode_dev = &dev_priv->mode_dev;
 	int ret;
 
 	ret = psb_intel_ddc_get_modes(connector, &gma_encoder->i2c_bus->adapter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret)
@@ -461,6 +475,7 @@ static int cdv_intel_lvds_get_modes(struct drm_connector *connector)
 static void cdv_intel_lvds_destroy(struct drm_connector *connector)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder =
 					psb_intel_attached_encoder(connector);
 
@@ -468,11 +483,16 @@ static void cdv_intel_lvds_destroy(struct drm_connector *connector)
 		psb_intel_i2c_destroy(psb_intel_encoder->i2c_bus);
 	drm_sysfs_connector_remove(connector);
 =======
+=======
+>>>>>>> v3.18
 	struct gma_encoder *gma_encoder = gma_attached_encoder(connector);
 
 	if (gma_encoder->i2c_bus)
 		psb_intel_i2c_destroy(gma_encoder->i2c_bus);
 	drm_connector_unregister(connector);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	drm_connector_cleanup(connector);
 	kfree(connector);
@@ -486,8 +506,12 @@ static int cdv_intel_lvds_set_property(struct drm_connector *connector,
 
 	if (!strcmp(property->name, "scaling mode") && encoder) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct psb_intel_crtc *crtc =
 					to_psb_intel_crtc(encoder->crtc);
+=======
+		struct gma_crtc *crtc = to_gma_crtc(encoder->crtc);
+>>>>>>> v3.18
 =======
 		struct gma_crtc *crtc = to_gma_crtc(encoder->crtc);
 >>>>>>> v3.18
@@ -527,7 +551,11 @@ static int cdv_intel_lvds_set_property(struct drm_connector *connector,
 						      encoder->crtc->x,
 						      encoder->crtc->y,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						      encoder->crtc->fb))
+=======
+						      encoder->crtc->primary->fb))
+>>>>>>> v3.18
 =======
 						      encoder->crtc->primary->fb))
 >>>>>>> v3.18
@@ -562,7 +590,11 @@ static const struct drm_connector_helper_funcs
 	.get_modes = cdv_intel_lvds_get_modes,
 	.mode_valid = cdv_intel_lvds_mode_valid,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.best_encoder = psb_intel_best_encoder,
+=======
+	.best_encoder = gma_best_encoder,
+>>>>>>> v3.18
 =======
 	.best_encoder = gma_best_encoder,
 >>>>>>> v3.18
@@ -649,8 +681,13 @@ void cdv_intel_lvds_init(struct drm_device *dev,
 		     struct psb_intel_mode_device *mode_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder;
 	struct psb_intel_connector *psb_intel_connector;
+=======
+	struct gma_encoder *gma_encoder;
+	struct gma_connector *gma_connector;
+>>>>>>> v3.18
 =======
 	struct gma_encoder *gma_encoder;
 	struct gma_connector *gma_connector;
@@ -672,6 +709,7 @@ void cdv_intel_lvds_init(struct drm_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_encoder = kzalloc(sizeof(struct psb_intel_encoder),
 				    GFP_KERNEL);
 	if (!psb_intel_encoder)
@@ -681,6 +719,8 @@ void cdv_intel_lvds_init(struct drm_device *dev,
 				      GFP_KERNEL);
 	if (!psb_intel_connector)
 =======
+=======
+>>>>>>> v3.18
 	gma_encoder = kzalloc(sizeof(struct gma_encoder),
 				    GFP_KERNEL);
 	if (!gma_encoder)
@@ -689,6 +729,9 @@ void cdv_intel_lvds_init(struct drm_device *dev,
 	gma_connector = kzalloc(sizeof(struct gma_connector),
 				      GFP_KERNEL);
 	if (!gma_connector)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto failed_connector;
 
@@ -697,15 +740,21 @@ void cdv_intel_lvds_init(struct drm_device *dev,
 		goto failed_lvds_priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_encoder->dev_priv = lvds_priv;
 
 	connector = &psb_intel_connector->base;
 	encoder = &psb_intel_encoder->base;
 =======
+=======
+>>>>>>> v3.18
 	gma_encoder->dev_priv = lvds_priv;
 
 	connector = &gma_connector->base;
 	encoder = &gma_encoder->base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -719,9 +768,14 @@ void cdv_intel_lvds_init(struct drm_device *dev,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_connector_attach_encoder(psb_intel_connector,
 					   psb_intel_encoder);
 	psb_intel_encoder->type = INTEL_OUTPUT_LVDS;
+=======
+	gma_connector_attach_encoder(gma_connector, gma_encoder);
+	gma_encoder->type = INTEL_OUTPUT_LVDS;
+>>>>>>> v3.18
 =======
 	gma_connector_attach_encoder(gma_connector, gma_encoder);
 	gma_encoder->type = INTEL_OUTPUT_LVDS;
@@ -747,23 +801,34 @@ void cdv_intel_lvds_init(struct drm_device *dev,
 	 * FIXME: distroy i2c_bus when exit
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_encoder->i2c_bus = psb_intel_i2c_create(dev,
 							 GPIOB,
 							 "LVDSBLC_B");
 	if (!psb_intel_encoder->i2c_bus) {
 =======
+=======
+>>>>>>> v3.18
 	gma_encoder->i2c_bus = psb_intel_i2c_create(dev,
 							 GPIOB,
 							 "LVDSBLC_B");
 	if (!gma_encoder->i2c_bus) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_printk(KERN_ERR,
 			&dev->pdev->dev, "I2C bus registration failed.\n");
 		goto failed_blc_i2c;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_encoder->i2c_bus->slave_addr = 0x2C;
 	dev_priv->lvds_i2c_bus = psb_intel_encoder->i2c_bus;
+=======
+	gma_encoder->i2c_bus->slave_addr = 0x2C;
+	dev_priv->lvds_i2c_bus = gma_encoder->i2c_bus;
+>>>>>>> v3.18
 =======
 	gma_encoder->i2c_bus->slave_addr = 0x2C;
 	dev_priv->lvds_i2c_bus = gma_encoder->i2c_bus;
@@ -781,15 +846,21 @@ void cdv_intel_lvds_init(struct drm_device *dev,
 
 	/* Set up the DDC bus. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_encoder->ddc_bus = psb_intel_i2c_create(dev,
 							 GPIOC,
 							 "LVDSDDC_C");
 	if (!psb_intel_encoder->ddc_bus) {
 =======
+=======
+>>>>>>> v3.18
 	gma_encoder->ddc_bus = psb_intel_i2c_create(dev,
 							 GPIOC,
 							 "LVDSDDC_C");
 	if (!gma_encoder->ddc_bus) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_printk(KERN_ERR, &dev->pdev->dev,
 			   "DDC bus registration " "failed.\n");
@@ -801,8 +872,14 @@ void cdv_intel_lvds_init(struct drm_device *dev,
 	 * preferred mode is the right one.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_ddc_get_modes(connector,
 				&psb_intel_encoder->ddc_bus->adapter);
+=======
+	mutex_lock(&dev->mode_config.mutex);
+	psb_intel_ddc_get_modes(connector,
+				&gma_encoder->ddc_bus->adapter);
+>>>>>>> v3.18
 =======
 	mutex_lock(&dev->mode_config.mutex);
 	psb_intel_ddc_get_modes(connector,
@@ -867,6 +944,7 @@ void cdv_intel_lvds_init(struct drm_device *dev,
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
 	return;
 
@@ -879,6 +957,8 @@ failed_ddc:
 	if (psb_intel_encoder->i2c_bus)
 		psb_intel_i2c_destroy(psb_intel_encoder->i2c_bus);
 =======
+=======
+>>>>>>> v3.18
 	mutex_unlock(&dev->mode_config.mutex);
 	drm_connector_register(connector);
 	return;
@@ -892,6 +972,9 @@ failed_ddc:
 	printk(KERN_ERR "Failed DDC\n");
 	if (gma_encoder->i2c_bus)
 		psb_intel_i2c_destroy(gma_encoder->i2c_bus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 failed_blc_i2c:
 	printk(KERN_ERR "Failed BLC\n");
@@ -900,9 +983,15 @@ failed_blc_i2c:
 	kfree(lvds_priv);
 failed_lvds_priv:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(psb_intel_connector);
 failed_connector:
 	kfree(psb_intel_encoder);
+=======
+	kfree(gma_connector);
+failed_connector:
+	kfree(gma_encoder);
+>>>>>>> v3.18
 =======
 	kfree(gma_connector);
 failed_connector:

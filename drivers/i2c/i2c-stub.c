@@ -3,7 +3,11 @@
 
     Copyright (c) 2004 Mark M. Hoffman <mhoffman@lightlink.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
     Copyright (C) 2007, 2012 Jean Delvare <khali@linux-fr.org>
+=======
+    Copyright (C) 2007-2014 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
     Copyright (C) 2007-2014 Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -18,10 +22,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -35,12 +42,15 @@
 #include <linux/errno.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define MAX_CHIPS 10
 #define STUB_FUNC (I2C_FUNC_SMBUS_QUICK | I2C_FUNC_SMBUS_BYTE | \
 		   I2C_FUNC_SMBUS_BYTE_DATA | I2C_FUNC_SMBUS_WORD_DATA | \
 		   I2C_FUNC_SMBUS_I2C_BLOCK)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/list.h>
 
 #define MAX_CHIPS 10
@@ -57,6 +67,9 @@
 
 #define STUB_FUNC_ALL \
 		(STUB_FUNC_DEFAULT | I2C_FUNC_SMBUS_BLOCK_DATA)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static unsigned short chip_addr[MAX_CHIPS];
@@ -65,11 +78,14 @@ MODULE_PARM_DESC(chip_addr,
 		 "Chip addresses (up to 10, between 0x03 and 0x77)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long functionality = STUB_FUNC;
 module_param(functionality, ulong, S_IRUGO | S_IWUSR);
 MODULE_PARM_DESC(functionality, "Override functionality bitfield");
 
 =======
+=======
+>>>>>>> v3.18
 static unsigned long functionality = STUB_FUNC_DEFAULT;
 module_param(functionality, ulong, S_IRUGO | S_IWUSR);
 MODULE_PARM_DESC(functionality, "Override functionality bitfield");
@@ -99,16 +115,22 @@ struct smbus_block_data {
 	u8 block[I2C_SMBUS_BLOCK_MAX];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct stub_chip {
 	u8 pointer;
 	u16 words[256];		/* Byte operations use the LSB as per SMBus
 				   specification */
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static struct stub_chip *stub_chips;
 =======
+=======
+>>>>>>> v3.18
 	struct list_head smbus_blocks;
 
 	/* For chips with banks, extra registers are allocated dynamically */
@@ -157,6 +179,9 @@ static u16 *stub_get_wordp(struct stub_chip *chip, u8 offset)
 	else
 		return chip->words + offset;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Return negative errno on error. */
@@ -167,15 +192,21 @@ static s32 stub_xfer(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 	int i, len;
 	struct stub_chip *chip = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Search for the right chip */
 	for (i = 0; i < MAX_CHIPS && chip_addr[i]; i++) {
 =======
+=======
+>>>>>>> v3.18
 	struct smbus_block_data *b;
 	u16 *wordp;
 
 	/* Search for the right chip */
 	for (i = 0; i < stub_chips_nr; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (addr == chip_addr[i]) {
 			chip = stub_chips + i;
@@ -200,7 +231,12 @@ static s32 stub_xfer(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 				addr, command);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			data->byte = chip->words[chip->pointer++] & 0xff;
+=======
+			wordp = stub_get_wordp(chip, chip->pointer++);
+			data->byte = *wordp & 0xff;
+>>>>>>> v3.18
 =======
 			wordp = stub_get_wordp(chip, chip->pointer++);
 			data->byte = *wordp & 0xff;
@@ -215,6 +251,7 @@ static s32 stub_xfer(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 
 	case I2C_SMBUS_BYTE_DATA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (read_write == I2C_SMBUS_WRITE) {
 			chip->words[command] &= 0xff00;
 			chip->words[command] |= data->byte;
@@ -224,6 +261,8 @@ static s32 stub_xfer(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 		} else {
 			data->byte = chip->words[command] & 0xff;
 =======
+=======
+>>>>>>> v3.18
 		wordp = stub_get_wordp(chip, command);
 		if (read_write == I2C_SMBUS_WRITE) {
 			*wordp &= 0xff00;
@@ -243,6 +282,9 @@ static s32 stub_xfer(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 			}
 		} else {
 			data->byte = *wordp & 0xff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dev_dbg(&adap->dev,
 				"smbus byte data - addr 0x%02x, read  0x%02x at 0x%02x.\n",
@@ -255,8 +297,14 @@ static s32 stub_xfer(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 
 	case I2C_SMBUS_WORD_DATA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (read_write == I2C_SMBUS_WRITE) {
 			chip->words[command] = data->word;
+=======
+		wordp = stub_get_wordp(chip, command);
+		if (read_write == I2C_SMBUS_WRITE) {
+			*wordp = data->word;
+>>>>>>> v3.18
 =======
 		wordp = stub_get_wordp(chip, command);
 		if (read_write == I2C_SMBUS_WRITE) {
@@ -267,7 +315,11 @@ static s32 stub_xfer(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 				addr, data->word, command);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			data->word = chip->words[command];
+=======
+			data->word = *wordp;
+>>>>>>> v3.18
 =======
 			data->word = *wordp;
 >>>>>>> v3.18
@@ -281,13 +333,19 @@ static s32 stub_xfer(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 
 	case I2C_SMBUS_I2C_BLOCK_DATA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * We ignore banks here, because banked chips don't use I2C
 		 * block transfers
 		 */
 		if (data->block[0] > 256 - command)	/* Avoid overrun */
 			data->block[0] = 256 - command;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		len = data->block[0];
 		if (read_write == I2C_SMBUS_WRITE) {
@@ -312,7 +370,10 @@ static s32 stub_xfer(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case I2C_SMBUS_BLOCK_DATA:
 		/*
 		 * We ignore banks here, because chips typically don't use both
@@ -362,6 +423,9 @@ static s32 stub_xfer(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 		ret = 0;
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		dev_dbg(&adap->dev, "Unsupported I2C/SMBus command\n");
@@ -375,7 +439,11 @@ static s32 stub_xfer(struct i2c_adapter *adap, u16 addr, unsigned short flags,
 static u32 stub_func(struct i2c_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return STUB_FUNC & functionality;
+=======
+	return STUB_FUNC_ALL & functionality;
+>>>>>>> v3.18
 =======
 	return STUB_FUNC_ALL & functionality;
 >>>>>>> v3.18
@@ -394,7 +462,10 @@ static struct i2c_adapter stub_adapter = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init i2c_stub_allocate_banks(int i)
 {
 	struct stub_chip *chip = stub_chips + i;
@@ -432,6 +503,9 @@ static void i2c_stub_free(void)
 	kfree(stub_chips);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init i2c_stub_init(void)
 {
@@ -454,7 +528,13 @@ static int __init i2c_stub_init(void)
 
 	/* Allocate memory for all chips at once */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stub_chips = kzalloc(i * sizeof(struct stub_chip), GFP_KERNEL);
+=======
+	stub_chips_nr = i;
+	stub_chips = kcalloc(stub_chips_nr, sizeof(struct stub_chip),
+			     GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	stub_chips_nr = i;
 	stub_chips = kcalloc(stub_chips_nr, sizeof(struct stub_chip),
@@ -465,11 +545,14 @@ static int __init i2c_stub_init(void)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = i2c_add_adapter(&stub_adapter);
 	if (ret)
 		kfree(stub_chips);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < stub_chips_nr; i++) {
 		INIT_LIST_HEAD(&stub_chips[i].smbus_blocks);
 
@@ -489,6 +572,9 @@ static int __init i2c_stub_init(void)
 
  fail_free:
 	i2c_stub_free();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -497,7 +583,11 @@ static void __exit i2c_stub_exit(void)
 {
 	i2c_del_adapter(&stub_adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(stub_chips);
+=======
+	i2c_stub_free();
+>>>>>>> v3.18
 =======
 	i2c_stub_free();
 >>>>>>> v3.18

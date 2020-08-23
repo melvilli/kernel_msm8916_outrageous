@@ -35,6 +35,7 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sched.h>
 
 /*
@@ -53,6 +54,8 @@ static inline bool ib_safe_file_access(struct file *filp)
 }
 
 =======
+=======
+>>>>>>> v3.18
 
 struct ib_addr {
 	union {
@@ -105,5 +108,8 @@ struct sockaddr_ib {
 	__u64			sib_scope_id;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _RDMA_IB_H */

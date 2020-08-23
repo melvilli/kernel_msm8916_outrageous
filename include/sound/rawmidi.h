@@ -78,7 +78,10 @@ struct snd_rawmidi_runtime {
 	/* misc */
 	spinlock_t lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
         struct mutex realloc_mutex;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	wait_queue_head_t sleep;
@@ -162,10 +165,15 @@ void snd_rawmidi_set_ops(struct snd_rawmidi *rmidi, int stream,
 /* callbacks */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_rawmidi_receive_reset(struct snd_rawmidi_substream *substream);
 int snd_rawmidi_receive(struct snd_rawmidi_substream *substream,
 			const unsigned char *buffer, int count);
 void snd_rawmidi_transmit_reset(struct snd_rawmidi_substream *substream);
+=======
+int snd_rawmidi_receive(struct snd_rawmidi_substream *substream,
+			const unsigned char *buffer, int count);
+>>>>>>> v3.18
 =======
 int snd_rawmidi_receive(struct snd_rawmidi_substream *substream,
 			const unsigned char *buffer, int count);

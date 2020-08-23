@@ -68,7 +68,10 @@ do {								\
 #define MAX_STOPS_SENT	5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Board ids */
 #define PCI_DEVICE_ID_NEO_4             0x00B0
 #define PCI_DEVICE_ID_NEO_1_422         0x00CC
@@ -79,6 +82,9 @@ do {								\
 #define PCIE_DEVICE_ID_NEO_4RJ45        0x00F2
 #define PCIE_DEVICE_ID_NEO_8RJ45        0x00F3
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Board type definitions */
 

@@ -32,6 +32,7 @@ void perf_read_values_destroy(struct perf_read_values *values)
 
 	for (i = 0; i < values->threads; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(values->value[i]);
 	free(values->value);
 	free(values->pid);
@@ -41,6 +42,8 @@ void perf_read_values_destroy(struct perf_read_values *values)
 		free(values->countername[i]);
 	free(values->countername);
 =======
+=======
+>>>>>>> v3.18
 		zfree(&values->value[i]);
 	zfree(&values->value);
 	zfree(&values->pid);
@@ -49,6 +52,9 @@ void perf_read_values_destroy(struct perf_read_values *values)
 	for (i = 0; i < values->counters; i++)
 		zfree(&values->countername[i]);
 	zfree(&values->countername);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

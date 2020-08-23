@@ -105,6 +105,7 @@ int ipoib_open(struct net_device *dev)
 	ipoib_dbg(priv, "bringing up interface\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(IPOIB_FLAG_ADMIN_UP, &priv->flags);
 
 	if (ipoib_pkey_dev_delay_open(dev))
@@ -113,6 +114,8 @@ int ipoib_open(struct net_device *dev)
 	if (ipoib_ib_dev_open(dev))
 		goto err_disable;
 =======
+=======
+>>>>>>> v3.18
 	netif_carrier_off(dev);
 
 	set_bit(IPOIB_FLAG_ADMIN_UP, &priv->flags);
@@ -122,6 +125,9 @@ int ipoib_open(struct net_device *dev)
 			return 0;
 		goto err_disable;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ipoib_ib_dev_up(dev))
@@ -132,7 +138,11 @@ int ipoib_open(struct net_device *dev)
 
 		/* Bring up any child interfaces too */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock(&priv->vlan_mutex);
+=======
+		down_read(&priv->vlan_rwsem);
+>>>>>>> v3.18
 =======
 		down_read(&priv->vlan_rwsem);
 >>>>>>> v3.18
@@ -146,7 +156,11 @@ int ipoib_open(struct net_device *dev)
 			dev_change_flags(cpriv->dev, flags | IFF_UP);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&priv->vlan_mutex);
+=======
+		up_read(&priv->vlan_rwsem);
+>>>>>>> v3.18
 =======
 		up_read(&priv->vlan_rwsem);
 >>>>>>> v3.18
@@ -183,7 +197,11 @@ static int ipoib_stop(struct net_device *dev)
 
 		/* Bring down any child interfaces too */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock(&priv->vlan_mutex);
+=======
+		down_read(&priv->vlan_rwsem);
+>>>>>>> v3.18
 =======
 		down_read(&priv->vlan_rwsem);
 >>>>>>> v3.18
@@ -197,7 +215,11 @@ static int ipoib_stop(struct net_device *dev)
 			dev_change_flags(cpriv->dev, flags & ~IFF_UP);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&priv->vlan_mutex);
+=======
+		up_read(&priv->vlan_rwsem);
+>>>>>>> v3.18
 =======
 		up_read(&priv->vlan_rwsem);
 >>>>>>> v3.18
@@ -263,7 +285,12 @@ int ipoib_set_mode(struct net_device *dev, const char *buf)
 
 		ipoib_flush_paths(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (!rtnl_trylock()) ? -EBUSY : 0;
+=======
+		rtnl_lock();
+		return 0;
+>>>>>>> v3.18
 =======
 		rtnl_lock();
 		return 0;
@@ -277,7 +304,12 @@ int ipoib_set_mode(struct net_device *dev, const char *buf)
 		rtnl_unlock();
 		ipoib_flush_paths(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (!rtnl_trylock()) ? -EBUSY : 0;
+=======
+		rtnl_lock();
+		return 0;
+>>>>>>> v3.18
 =======
 		rtnl_lock();
 		return 0;
@@ -288,7 +320,11 @@ int ipoib_set_mode(struct net_device *dev, const char *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ipoib_path *__path_find(struct net_device *dev, void *gid)
+=======
+static struct ipoib_path *__path_find(struct net_device *dev, void *gid)
+>>>>>>> v3.18
 =======
 static struct ipoib_path *__path_find(struct net_device *dev, void *gid)
 >>>>>>> v3.18
@@ -534,7 +570,10 @@ static void path_rec_completion(int status,
 									       neigh));
 				if (!ipoib_cm_get(neigh)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					list_del(&neigh->list);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					ipoib_neigh_free(neigh);
@@ -662,7 +701,10 @@ static void neigh_add_path(struct sk_buff *skb, u8 *daddr,
 				ipoib_cm_set(neigh, ipoib_cm_create_tx(dev, path, neigh));
 			if (!ipoib_cm_get(neigh)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				list_del(&neigh->list);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				ipoib_neigh_free(neigh);
@@ -686,7 +728,11 @@ static void neigh_add_path(struct sk_buff *skb, u8 *daddr,
 
 		if (!path->query && path_rec_start(dev, path))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_list;
+=======
+			goto err_path;
+>>>>>>> v3.18
 =======
 			goto err_path;
 >>>>>>> v3.18
@@ -699,9 +745,12 @@ static void neigh_add_path(struct sk_buff *skb, u8 *daddr,
 	return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_list:
 	list_del(&neigh->list);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_path:
@@ -773,7 +822,11 @@ static int ipoib_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	struct ipoib_dev_priv *priv = netdev_priv(dev);
 	struct ipoib_neigh *neigh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ipoib_cb *cb = (struct ipoib_cb *) skb->cb;
+=======
+	struct ipoib_cb *cb = ipoib_skb_cb(skb);
+>>>>>>> v3.18
 =======
 	struct ipoib_cb *cb = ipoib_skb_cb(skb);
 >>>>>>> v3.18
@@ -874,7 +927,11 @@ static int ipoib_hard_header(struct sk_buff *skb,
 {
 	struct ipoib_header *header;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ipoib_cb *cb = (struct ipoib_cb *) skb->cb;
+=======
+	struct ipoib_cb *cb = ipoib_skb_cb(skb);
+>>>>>>> v3.18
 =======
 	struct ipoib_cb *cb = ipoib_skb_cb(skb);
 >>>>>>> v3.18
@@ -949,9 +1006,13 @@ struct ipoib_neigh *ipoib_neigh_get(struct net_device *dev, u8 *daddr)
 				goto out_unlock;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			if (likely(skb_queue_len(&neigh->queue) < IPOIB_MAX_PATH_REC_QUEUE))
 				neigh->alive = jiffies;
+=======
+			neigh->alive = jiffies;
+>>>>>>> v3.18
 =======
 			neigh->alive = jiffies;
 >>>>>>> v3.18
@@ -1166,6 +1227,11 @@ void ipoib_neigh_free(struct ipoib_neigh *neigh)
 					   rcu_dereference_protected(neigh->hnext,
 								     lockdep_is_held(&priv->lock)));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			/* remove from parent list */
+			list_del(&neigh->list);
+>>>>>>> v3.18
 =======
 			/* remove from parent list */
 			list_del(&neigh->list);
@@ -1426,7 +1492,11 @@ void ipoib_setup(struct net_device *dev)
 	ipoib_set_ethtool_ops(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_napi_add(dev, &priv->napi, ipoib_poll, 100);
+=======
+	netif_napi_add(dev, &priv->napi, ipoib_poll, NAPI_POLL_WEIGHT);
+>>>>>>> v3.18
 =======
 	netif_napi_add(dev, &priv->napi, ipoib_poll, NAPI_POLL_WEIGHT);
 >>>>>>> v3.18
@@ -1442,6 +1512,7 @@ void ipoib_setup(struct net_device *dev)
 	dev->features		 = (NETIF_F_VLAN_CHALLENGED	|
 				    NETIF_F_HIGHDMA);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->priv_flags		&= ~IFF_XMIT_DST_RELEASE;
 
 	memcpy(dev->broadcast, ipv4_bcast_addr, INFINIBAND_ALEN);
@@ -1449,17 +1520,26 @@ void ipoib_setup(struct net_device *dev)
 	netif_carrier_off(dev);
 
 =======
+=======
+>>>>>>> v3.18
 	netif_keep_dst(dev);
 
 	memcpy(dev->broadcast, ipv4_bcast_addr, INFINIBAND_ALEN);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	priv->dev = dev;
 
 	spin_lock_init(&priv->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&priv->vlan_mutex);
+=======
+	init_rwsem(&priv->vlan_rwsem);
+>>>>>>> v3.18
 =======
 	init_rwsem(&priv->vlan_rwsem);
 >>>>>>> v3.18
@@ -1470,7 +1550,10 @@ void ipoib_setup(struct net_device *dev)
 	INIT_LIST_HEAD(&priv->multicast_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_DELAYED_WORK(&priv->pkey_poll_task, ipoib_pkey_poll);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INIT_DELAYED_WORK(&priv->mcast_task,   ipoib_mcast_join_task);
@@ -1488,8 +1571,13 @@ struct ipoib_dev_priv *ipoib_intf_alloc(const char *name)
 	struct net_device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev((int) sizeof (struct ipoib_dev_priv), name,
 			   ipoib_setup);
+=======
+	dev = alloc_netdev((int)sizeof(struct ipoib_dev_priv), name,
+			   NET_NAME_UNKNOWN, ipoib_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev((int)sizeof(struct ipoib_dev_priv), name,
 			   NET_NAME_UNKNOWN, ipoib_setup);
@@ -1557,7 +1645,11 @@ static ssize_t create_child(struct device *dev,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pkey < 0 || pkey > 0xffff)
+=======
+	if (pkey <= 0 || pkey > 0xffff || pkey == 0x8000)
+>>>>>>> v3.18
 =======
 	if (pkey <= 0 || pkey > 0xffff || pkey == 0x8000)
 >>>>>>> v3.18

@@ -1545,7 +1545,11 @@ static int dst_send_burst(struct dvb_frontend *fe, fe_sec_mini_cmd_t minicmd)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dst_init(struct dvb_frontend *fe)
+=======
+static int bt8xx_dst_init(struct dvb_frontend *fe)
+>>>>>>> v3.18
 =======
 static int bt8xx_dst_init(struct dvb_frontend *fe)
 >>>>>>> v3.18
@@ -1712,7 +1716,11 @@ static int dst_get_frontend(struct dvb_frontend *fe)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dst_release(struct dvb_frontend *fe)
+=======
+static void bt8xx_dst_release(struct dvb_frontend *fe)
+>>>>>>> v3.18
 =======
 static void bt8xx_dst_release(struct dvb_frontend *fe)
 >>>>>>> v3.18
@@ -1785,8 +1793,13 @@ static struct dvb_frontend_ops dst_dvbt_ops = {
 	},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release = dst_release,
 	.init = dst_init,
+=======
+	.release = bt8xx_dst_release,
+	.init = bt8xx_dst_init,
+>>>>>>> v3.18
 =======
 	.release = bt8xx_dst_release,
 	.init = bt8xx_dst_init,
@@ -1815,8 +1828,13 @@ static struct dvb_frontend_ops dst_dvbs_ops = {
 	},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release = dst_release,
 	.init = dst_init,
+=======
+	.release = bt8xx_dst_release,
+	.init = bt8xx_dst_init,
+>>>>>>> v3.18
 =======
 	.release = bt8xx_dst_release,
 	.init = bt8xx_dst_init,
@@ -1853,8 +1871,13 @@ static struct dvb_frontend_ops dst_dvbc_ops = {
 	},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release = dst_release,
 	.init = dst_init,
+=======
+	.release = bt8xx_dst_release,
+	.init = bt8xx_dst_init,
+>>>>>>> v3.18
 =======
 	.release = bt8xx_dst_release,
 	.init = bt8xx_dst_init,
@@ -1881,8 +1904,13 @@ static struct dvb_frontend_ops dst_atsc_ops = {
 	},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release = dst_release,
 	.init = dst_init,
+=======
+	.release = bt8xx_dst_release,
+	.init = bt8xx_dst_init,
+>>>>>>> v3.18
 =======
 	.release = bt8xx_dst_release,
 	.init = bt8xx_dst_init,

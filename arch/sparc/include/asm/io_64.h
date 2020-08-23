@@ -10,6 +10,7 @@
 #include <asm-generic/pci_iomap.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* PC crapola... */
 #define __SLOW_DOWN_IO	do { } while (0)
 #define SLOW_DOWN_IO	do { } while (0)
@@ -27,6 +28,8 @@ static inline u8 _inb(unsigned long addr)
 			     : "r" (addr), "i" (ASI_PHYS_BYPASS_EC_E_L)
 			     : "memory");
 =======
+=======
+>>>>>>> v3.18
 /* BIO layer definitions. */
 extern unsigned long kern_base, kern_size;
 
@@ -42,11 +45,15 @@ static inline u8 __raw_readb(const volatile void __iomem *addr)
 	__asm__ __volatile__("lduba\t[%1] %2, %0\t/* pci_raw_readb */"
 			     : "=r" (ret)
 			     : "r" (addr), "i" (ASI_PHYS_BYPASS_EC_E));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline u16 _inw(unsigned long addr)
 {
@@ -57,6 +64,8 @@ static inline u16 _inw(unsigned long addr)
 			     : "r" (addr), "i" (ASI_PHYS_BYPASS_EC_E_L)
 			     : "memory");
 =======
+=======
+>>>>>>> v3.18
 #define __raw_readw __raw_readw
 static inline u16 __raw_readw(const volatile void __iomem *addr)
 {
@@ -65,11 +74,15 @@ static inline u16 __raw_readw(const volatile void __iomem *addr)
 	__asm__ __volatile__("lduha\t[%1] %2, %0\t/* pci_raw_readw */"
 			     : "=r" (ret)
 			     : "r" (addr), "i" (ASI_PHYS_BYPASS_EC_E));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline u32 _inl(unsigned long addr)
 {
@@ -80,6 +93,8 @@ static inline u32 _inl(unsigned long addr)
 			     : "r" (addr), "i" (ASI_PHYS_BYPASS_EC_E_L)
 			     : "memory");
 =======
+=======
+>>>>>>> v3.18
 #define __raw_readl __raw_readl
 static inline u32 __raw_readl(const volatile void __iomem *addr)
 {
@@ -88,11 +103,15 @@ static inline u32 __raw_readl(const volatile void __iomem *addr)
 	__asm__ __volatile__("lduwa\t[%1] %2, %0\t/* pci_raw_readl */"
 			     : "=r" (ret)
 			     : "r" (addr), "i" (ASI_PHYS_BYPASS_EC_E));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void _outb(u8 b, unsigned long addr)
 {
@@ -171,6 +190,8 @@ static inline void iowrite32_rep(void __iomem *port, const void *buf, unsigned l
 /* Memory functions, same as I/O accesses on Ultra. */
 static inline u8 _readb(const volatile void __iomem *addr)
 =======
+=======
+>>>>>>> v3.18
 #define __raw_readq __raw_readq
 static inline u64 __raw_readq(const volatile void __iomem *addr)
 {
@@ -221,6 +242,9 @@ static inline void __raw_writeq(u64 q, const volatile void __iomem *addr)
  */
 #define readb readb
 static inline u8 readb(const volatile void __iomem *addr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {	u8 ret;
 
@@ -232,7 +256,12 @@ static inline u8 readb(const volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u16 _readw(const volatile void __iomem *addr)
+=======
+#define readw readw
+static inline u16 readw(const volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 #define readw readw
 static inline u16 readw(const volatile void __iomem *addr)
@@ -248,7 +277,12 @@ static inline u16 readw(const volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 _readl(const volatile void __iomem *addr)
+=======
+#define readl readl
+static inline u32 readl(const volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 #define readl readl
 static inline u32 readl(const volatile void __iomem *addr)
@@ -264,7 +298,12 @@ static inline u32 readl(const volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u64 _readq(const volatile void __iomem *addr)
+=======
+#define readq readq
+static inline u64 readq(const volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 #define readq readq
 static inline u64 readq(const volatile void __iomem *addr)
@@ -280,7 +319,12 @@ static inline u64 readq(const volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void _writeb(u8 b, volatile void __iomem *addr)
+=======
+#define writeb writeb
+static inline void writeb(u8 b, volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 #define writeb writeb
 static inline void writeb(u8 b, volatile void __iomem *addr)
@@ -293,7 +337,12 @@ static inline void writeb(u8 b, volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void _writew(u16 w, volatile void __iomem *addr)
+=======
+#define writew writew
+static inline void writew(u16 w, volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 #define writew writew
 static inline void writew(u16 w, volatile void __iomem *addr)
@@ -306,7 +355,12 @@ static inline void writew(u16 w, volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void _writel(u32 l, volatile void __iomem *addr)
+=======
+#define writel writel
+static inline void writel(u32 l, volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 #define writel writel
 static inline void writel(u32 l, volatile void __iomem *addr)
@@ -319,7 +373,12 @@ static inline void writel(u32 l, volatile void __iomem *addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void _writeq(u64 q, volatile void __iomem *addr)
+=======
+#define writeq writeq
+static inline void writeq(u64 q, volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 #define writeq writeq
 static inline void writeq(u64 q, volatile void __iomem *addr)
@@ -331,6 +390,7 @@ static inline void writeq(u64 q, volatile void __iomem *addr)
 			     : "memory");
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define readb(__addr)		_readb(__addr)
 #define readw(__addr)		_readw(__addr)
@@ -427,6 +487,8 @@ static inline void _raw_writeq(u64 q, unsigned long addr)
 #define __raw_writel(__l, __addr)	(_raw_writel((u32)(__l), (unsigned long)(__addr)))
 #define __raw_writeq(__q, __addr)	(_raw_writeq((u64)(__q), (unsigned long)(__addr)))
 =======
+=======
+>>>>>>> v3.18
 
 #define inb inb
 static inline u8 inb(unsigned long addr)
@@ -512,6 +574,9 @@ static inline void iowrite32_rep(void __iomem *port, const void *buf, unsigned l
 #define readw_relaxed(__addr)	readw(__addr)
 #define readl_relaxed(__addr)	readl(__addr)
 #define readq_relaxed(__addr)	readq(__addr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Valid I/O Space regions are anywhere, because each PCI bus supported
@@ -522,6 +587,7 @@ static inline void iowrite32_rep(void __iomem *port, const void *buf, unsigned l
 /* Now, SBUS variants, only difference from PCI is that we do
  * not use little-endian ASIs.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline u8 _sbus_readb(const volatile void __iomem *addr)
 {
@@ -614,6 +680,8 @@ static inline void _sbus_writeq(u64 l, volatile void __iomem *addr)
 
 static inline void _sbus_memset_io(volatile void __iomem *dst, int c, __kernel_size_t n)
 =======
+=======
+>>>>>>> v3.18
 static inline u8 sbus_readb(const volatile void __iomem *addr)
 {
 	return __raw_readb(addr);
@@ -655,6 +723,9 @@ static inline void sbus_writeq(u64 q, volatile void __iomem *addr)
 }
 
 static inline void sbus_memset_io(volatile void __iomem *dst, int c, __kernel_size_t n)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	while(n--) {
@@ -664,10 +735,14 @@ static inline void sbus_memset_io(volatile void __iomem *dst, int c, __kernel_si
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define sbus_memset_io(d,c,sz)	_sbus_memset_io(d,c,sz)
 
 static inline void
 _memset_io(volatile void __iomem *dst, int c, __kernel_size_t n)
+=======
+static inline void memset_io(volatile void __iomem *dst, int c, __kernel_size_t n)
+>>>>>>> v3.18
 =======
 static inline void memset_io(volatile void __iomem *dst, int c, __kernel_size_t n)
 >>>>>>> v3.18
@@ -681,11 +756,16 @@ static inline void memset_io(volatile void __iomem *dst, int c, __kernel_size_t 
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define memset_io(d,c,sz)	_memset_io(d,c,sz)
 
 static inline void
 _sbus_memcpy_fromio(void *dst, const volatile void __iomem *src,
 		    __kernel_size_t n)
+=======
+static inline void sbus_memcpy_fromio(void *dst, const volatile void __iomem *src,
+				      __kernel_size_t n)
+>>>>>>> v3.18
 =======
 static inline void sbus_memcpy_fromio(void *dst, const volatile void __iomem *src,
 				      __kernel_size_t n)
@@ -701,10 +781,16 @@ static inline void sbus_memcpy_fromio(void *dst, const volatile void __iomem *sr
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define sbus_memcpy_fromio(d, s, sz)	_sbus_memcpy_fromio(d, s, sz)
 
 static inline void
 _memcpy_fromio(void *dst, const volatile void __iomem *src, __kernel_size_t n)
+=======
+
+static inline void memcpy_fromio(void *dst, const volatile void __iomem *src,
+				 __kernel_size_t n)
+>>>>>>> v3.18
 =======
 
 static inline void memcpy_fromio(void *dst, const volatile void __iomem *src,
@@ -721,11 +807,16 @@ static inline void memcpy_fromio(void *dst, const volatile void __iomem *src,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define memcpy_fromio(d,s,sz)	_memcpy_fromio(d,s,sz)
 
 static inline void
 _sbus_memcpy_toio(volatile void __iomem *dst, const void *src,
 		  __kernel_size_t n)
+=======
+static inline void sbus_memcpy_toio(volatile void __iomem *dst, const void *src,
+				    __kernel_size_t n)
+>>>>>>> v3.18
 =======
 static inline void sbus_memcpy_toio(volatile void __iomem *dst, const void *src,
 				    __kernel_size_t n)
@@ -742,10 +833,15 @@ static inline void sbus_memcpy_toio(volatile void __iomem *dst, const void *src,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define sbus_memcpy_toio(d, s, sz)	_sbus_memcpy_toio(d, s, sz)
 
 static inline void
 _memcpy_toio(volatile void __iomem *dst, const void *src, __kernel_size_t n)
+=======
+static inline void memcpy_toio(volatile void __iomem *dst, const void *src,
+			       __kernel_size_t n)
+>>>>>>> v3.18
 =======
 static inline void memcpy_toio(volatile void __iomem *dst, const void *src,
 			       __kernel_size_t n)
@@ -762,8 +858,11 @@ static inline void memcpy_toio(volatile void __iomem *dst, const void *src,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define memcpy_toio(d,s,sz)	_memcpy_toio(d,s,sz)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define mmiowb()
@@ -798,6 +897,7 @@ static inline void iounmap(volatile void __iomem *addr)
 
 /* Create a virtual mapping cookie for an IO port range */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __iomem *ioport_map(unsigned long port, unsigned int nr);
 extern void ioport_unmap(void __iomem *);
 
@@ -805,12 +905,17 @@ extern void ioport_unmap(void __iomem *);
 struct pci_dev;
 extern void pci_iounmap(struct pci_dev *dev, void __iomem *);
 =======
+=======
+>>>>>>> v3.18
 void __iomem *ioport_map(unsigned long port, unsigned int nr);
 void ioport_unmap(void __iomem *);
 
 /* Create a virtual mapping cookie for a PCI BAR (memory or IO) */
 struct pci_dev;
 void pci_iounmap(struct pci_dev *dev, void __iomem *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int sbus_can_dma_64bit(void)
@@ -823,7 +928,11 @@ static inline int sbus_can_burst64(void)
 }
 struct device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void sbus_set_sbus64(struct device *, int);
+=======
+void sbus_set_sbus64(struct device *, int);
+>>>>>>> v3.18
 =======
 void sbus_set_sbus64(struct device *, int);
 >>>>>>> v3.18

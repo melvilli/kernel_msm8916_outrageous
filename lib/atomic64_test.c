@@ -9,6 +9,12 @@
  * (at your option) any later version.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -153,6 +159,7 @@ static __init int test_atomic64(void)
 
 #ifdef CONFIG_X86
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "atomic64 test passed for %s platform %s CX8 and %s SSE\n",
 #ifdef CONFIG_X86_64
 	       "x86-64",
@@ -161,6 +168,8 @@ static __init int test_atomic64(void)
 #else
 	       "i386+",
 =======
+=======
+>>>>>>> v3.18
 	pr_info("passed for %s platform %s CX8 and %s SSE\n",
 #ifdef CONFIG_X86_64
 		"x86-64",
@@ -168,13 +177,20 @@ static __init int test_atomic64(void)
 		"i586+",
 #else
 		"i386+",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	       boot_cpu_has(X86_FEATURE_CX8) ? "with" : "without",
 	       boot_cpu_has(X86_FEATURE_XMM) ? "with" : "without");
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "atomic64 test passed\n");
+=======
+	pr_info("passed\n");
+>>>>>>> v3.18
 =======
 	pr_info("passed\n");
 >>>>>>> v3.18

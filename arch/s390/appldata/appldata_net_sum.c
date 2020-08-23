@@ -30,7 +30,11 @@
  * http://oss.software.ibm.com/developerworks/opensource/linux390/index.shtml
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct appldata_net_sum_data {
+=======
+struct appldata_net_sum_data {
+>>>>>>> v3.18
 =======
 struct appldata_net_sum_data {
 >>>>>>> v3.18
@@ -56,7 +60,11 @@ struct appldata_net_sum_data {
 	u64 tx_dropped;		/* no space available in linux   */
 	u64 collisions;		/* collisions while transmitting */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed)) appldata_net_sum_data;
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -130,7 +138,10 @@ static struct appldata_ops ops = {
 	.size	   = sizeof(struct appldata_net_sum_data),
 	.callback  = &appldata_get_net_sum_data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.data      = &appldata_net_sum_data,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.owner     = THIS_MODULE,
@@ -146,8 +157,11 @@ static struct appldata_ops ops = {
 static int __init appldata_net_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return appldata_register_ops(&ops);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ops.data = kzalloc(sizeof(struct appldata_net_sum_data), GFP_KERNEL);
@@ -159,6 +173,9 @@ static int __init appldata_net_init(void)
 		kfree(ops.data);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -171,6 +188,10 @@ static void __exit appldata_net_exit(void)
 {
 	appldata_unregister_ops(&ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(ops.data);
+>>>>>>> v3.18
 =======
 	kfree(ops.data);
 >>>>>>> v3.18

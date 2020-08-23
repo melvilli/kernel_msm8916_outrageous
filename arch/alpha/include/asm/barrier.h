@@ -4,6 +4,7 @@
 #include <asm/compiler.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define mb() \
 __asm__ __volatile__("mb": : :"memory")
 
@@ -33,6 +34,8 @@ __asm__ __volatile__("mb": : :"memory")
 #define set_mb(var, value) \
 do { var = value; mb(); } while (0)
 =======
+=======
+>>>>>>> v3.18
 #define mb()	__asm__ __volatile__("mb": : :"memory")
 #define rmb()	__asm__ __volatile__("mb": : :"memory")
 #define wmb()	__asm__ __volatile__("wmb": : :"memory")
@@ -46,6 +49,9 @@ do { var = value; mb(); } while (0)
 #endif
 
 #include <asm-generic/barrier.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif		/* __BARRIER_H */

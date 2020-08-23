@@ -10,7 +10,10 @@
 #include <linux/clk.h>
 #include <linux/bitmap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/dw_dmac.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/dmaengine.h>
@@ -29,6 +32,12 @@
 #include <sound/atmel-abdac.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/dma-dw.h>
+#include <linux/dma/dw.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/dma-dw.h>
 #include <linux/dma/dw.h>
@@ -364,16 +373,22 @@ static int set_sample_rates(struct atmel_abdac *dac)
 	while (new_rate >= RATE_MIN && index < (MAX_NUM_RATES + 1)) {
 		new_rate = clk_round_rate(dac->sample_clk, 256 * new_rate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (new_rate < 0)
 			break;
 		/* make sure we are below the ABDAC clock */
 		if (new_rate <= clk_get_rate(dac->pclk)) {
 =======
+=======
+>>>>>>> v3.18
 		if (new_rate <= 0)
 			break;
 		/* make sure we are below the ABDAC clock */
 		if (index < MAX_NUM_RATES &&
 		    new_rate <= clk_get_rate(dac->pclk)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			dac->rates[index] = new_rate / 256;
 			index++;
@@ -446,8 +461,14 @@ static int atmel_abdac_probe(struct platform_device *pdev)
 	clk_enable(pclk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = snd_card_create(SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
 			THIS_MODULE, sizeof(struct atmel_abdac), &card);
+=======
+	retval = snd_card_new(&pdev->dev, SNDRV_DEFAULT_IDX1,
+			      SNDRV_DEFAULT_STR1, THIS_MODULE,
+			      sizeof(struct atmel_abdac), &card);
+>>>>>>> v3.18
 =======
 	retval = snd_card_new(&pdev->dev, SNDRV_DEFAULT_IDX1,
 			      SNDRV_DEFAULT_STR1, THIS_MODULE,
@@ -490,8 +511,11 @@ static int atmel_abdac_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pdev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (pdata->dws.dma_dev) {
@@ -518,7 +542,11 @@ static int atmel_abdac_probe(struct platform_device *pdev)
 		dev_dbg(&pdev->dev, "DMA not available\n");
 		retval = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_unset_card_dev;
+=======
+		goto out_unmap_regs;
+>>>>>>> v3.18
 =======
 		goto out_unmap_regs;
 >>>>>>> v3.18
@@ -551,9 +579,12 @@ out_release_dma:
 	dma_release_channel(dac->dma.chan);
 	dac->dma.chan = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_unset_card_dev:
 	snd_card_set_dev(card, NULL);
 	free_irq(irq, dac);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out_unmap_regs:
@@ -612,7 +643,10 @@ static int atmel_abdac_remove(struct platform_device *pdev)
 	dma_release_channel(dac->dma.chan);
 	dac->dma.chan = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(dac->regs);

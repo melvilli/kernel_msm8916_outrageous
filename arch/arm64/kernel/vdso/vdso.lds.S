@@ -29,6 +29,10 @@ OUTPUT_ARCH(aarch64)
 SECTIONS
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PROVIDE(_vdso_data = . - PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	PROVIDE(_vdso_data = . - PAGE_SIZE);
 >>>>>>> v3.18
@@ -62,9 +66,12 @@ SECTIONS
 	PROVIDE(end = .);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	. = ALIGN(PAGE_SIZE);
 	PROVIDE(_vdso_data = .);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/DISCARD/	: {

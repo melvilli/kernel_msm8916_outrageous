@@ -445,7 +445,11 @@ static u16 b43_aphy_op_read(struct b43_wldev *dev, u16 reg)
 {
 	reg = adjust_phyreg(dev, reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b43_write16(dev, B43_MMIO_PHY_CONTROL, reg);
+=======
+	b43_write16f(dev, B43_MMIO_PHY_CONTROL, reg);
+>>>>>>> v3.18
 =======
 	b43_write16f(dev, B43_MMIO_PHY_CONTROL, reg);
 >>>>>>> v3.18
@@ -456,7 +460,11 @@ static void b43_aphy_op_write(struct b43_wldev *dev, u16 reg, u16 value)
 {
 	reg = adjust_phyreg(dev, reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b43_write16(dev, B43_MMIO_PHY_CONTROL, reg);
+=======
+	b43_write16f(dev, B43_MMIO_PHY_CONTROL, reg);
+>>>>>>> v3.18
 =======
 	b43_write16f(dev, B43_MMIO_PHY_CONTROL, reg);
 >>>>>>> v3.18
@@ -582,7 +590,11 @@ static void b43_aphy_op_pwork_60sec(struct b43_wldev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct b43_phy_operations b43_phyops_a = {
+=======
+static const struct b43_phy_operations b43_phyops_a = {
+>>>>>>> v3.18
 =======
 static const struct b43_phy_operations b43_phyops_a = {
 >>>>>>> v3.18

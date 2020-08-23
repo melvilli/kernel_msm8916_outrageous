@@ -40,7 +40,11 @@ def trace_end():
 def raw_syscalls__sys_exit(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	id, ret):
+=======
+	common_callchain, id, ret):
+>>>>>>> v3.18
 =======
 	common_callchain, id, ret):
 >>>>>>> v3.18
@@ -55,12 +59,18 @@ def raw_syscalls__sys_exit(event_name, context, common_cpu,
 			syscalls[common_comm][common_pid][id][ret] = 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 def syscalls__sys_exit(event_name, context, common_cpu,
 	common_secs, common_nsecs, common_pid, common_comm,
 	id, ret):
 	raw_syscalls__sys_exit(**locals())
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 def print_error_totals():
     if for_comm is not None:

@@ -15,12 +15,18 @@ static inline void sched_clock_postinit(void) { }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void setup_sched_clock(u32 (*read)(void), int bits, unsigned long rate);
 extern void sched_clock_register(u64 (*read)(void), int bits,
 				 unsigned long rate);
 
 extern unsigned long long (*sched_clock_func)(void);
 
+=======
+extern void sched_clock_register(u64 (*read)(void), int bits,
+				 unsigned long rate);
+
+>>>>>>> v3.18
 =======
 extern void sched_clock_register(u64 (*read)(void), int bits,
 				 unsigned long rate);

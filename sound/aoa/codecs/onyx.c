@@ -242,7 +242,11 @@ static int onyx_snd_capture_source_info(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_info *uinfo)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static char *texts[] = { "Line-In", "Microphone" };
+=======
+	static const char * const texts[] = { "Line-In", "Microphone" };
+>>>>>>> v3.18
 =======
 	static const char * const texts[] = { "Line-In", "Microphone" };
 >>>>>>> v3.18
@@ -894,7 +898,11 @@ static int onyx_init_codec(struct aoa_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (aoa_snd_device_new(SNDRV_DEV_LOWLEVEL, onyx, &ops)) {
+=======
+	if (aoa_snd_device_new(SNDRV_DEV_CODEC, onyx, &ops)) {
+>>>>>>> v3.18
 =======
 	if (aoa_snd_device_new(SNDRV_DEV_CODEC, onyx, &ops)) {
 >>>>>>> v3.18

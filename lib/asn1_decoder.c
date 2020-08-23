@@ -34,7 +34,10 @@ static const unsigned char asn1_op_lengths[ASN1_OP__NR] = {
 	[ASN1_OP_COMPLETE]			= 1,
 	[ASN1_OP_ACT]				= 1         + 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[ASN1_OP_MAYBE_ACT]			= 1         + 1,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	[ASN1_OP_RETURN]			= 1,
@@ -74,7 +77,11 @@ next_tag:
 	/* Extract a tag from the data */
 	tag = data[dp++];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tag == ASN1_EOC) {
+=======
+	if (tag == 0) {
+>>>>>>> v3.18
 =======
 	if (tag == 0) {
 >>>>>>> v3.18
@@ -100,13 +107,19 @@ next_tag:
 	/* Extract the length */
 	len = data[dp++];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len <= 0x7f)
 		goto check_length;
 =======
+=======
+>>>>>>> v3.18
 	if (len <= 0x7f) {
 		dp += len;
 		goto next_tag;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(len == ASN1_INDEFINITE_LENGTH)) {
@@ -118,6 +131,7 @@ next_tag:
 	}
 
 	n = len - 0x80;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (unlikely(n > sizeof(len) - 1))
 		goto length_too_long;
@@ -132,6 +146,8 @@ check_length:
 	if (len > datalen - dp)
 		goto data_overrun_error;
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(n > sizeof(size_t) - 1))
 		goto length_too_long;
 	if (unlikely(n > datalen - dp))
@@ -140,6 +156,9 @@ check_length:
 		len <<= 8;
 		len |= data[dp++];
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dp += len;
 	goto next_tag;
@@ -206,7 +225,10 @@ int asn1_ber_decoder(const struct asn1_decoder *decoder,
 #define FLAG_INDEFINITE_LENGTH	0x01
 #define FLAG_MATCHED		0x02
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FLAG_LAST_MATCHED	0x04 /* Last tag matched */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define FLAG_CONS		0x20 /* Corresponds to CONS bit in the opcode tag
@@ -241,9 +263,15 @@ next_op:
 
 		/* Skip conditional matches if possible */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((op & ASN1_OP_MATCH__COND && flags & FLAG_MATCHED) ||
 		    (op & ASN1_OP_MATCH__SKIP && dp == datalen)) {
 			flags &= ~FLAG_LAST_MATCHED;
+=======
+		if ((op & ASN1_OP_MATCH__COND &&
+		     flags & FLAG_MATCHED) ||
+		    dp == datalen) {
+>>>>>>> v3.18
 =======
 		if ((op & ASN1_OP_MATCH__COND &&
 		     flags & FLAG_MATCHED) ||
@@ -461,6 +489,7 @@ next_op:
 		goto next_op;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case ASN1_OP_MAYBE_ACT:
 		if (!(flags & FLAG_LAST_MATCHED)) {
 			pc += asn1_op_lengths[op];
@@ -474,6 +503,10 @@ next_op:
 	case ASN1_OP_ACT:
 		ret = actions[machine[pc + 1]](context, hdr, tag, data + tdp, len);
 >>>>>>> v3.18
+=======
+	case ASN1_OP_ACT:
+		ret = actions[machine[pc + 1]](context, hdr, tag, data + tdp, len);
+>>>>>>> v3.18
 		pc += asn1_op_lengths[op];
 		goto next_op;
 
@@ -482,7 +515,10 @@ next_op:
 			goto jump_stack_underflow;
 		pc = jump_stack[--jsp];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		flags |= FLAG_MATCHED | FLAG_LAST_MATCHED;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto next_op;
@@ -493,8 +529,12 @@ next_op:
 
 	/* Shouldn't reach here */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_err("ASN.1 decoder error: Found reserved opcode (%u) pc=%zu\n",
 	       op, pc);
+=======
+	pr_err("ASN.1 decoder error: Found reserved opcode (%u)\n", op);
+>>>>>>> v3.18
 =======
 	pr_err("ASN.1 decoder error: Found reserved opcode (%u)\n", op);
 >>>>>>> v3.18

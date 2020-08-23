@@ -12,6 +12,7 @@ mtfsf(unsigned int FM, u32 *frB)
 	u32 fpscr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (FM == 0)
 		return 0;
 
@@ -55,6 +56,8 @@ mtfsf(unsigned int FM, u32 *frB)
 	    ((fpscr & FPSCR_XX) && (fpscr & FPSCR_XE)))
 		fpscr |= FPSCR_FEX;
 =======
+=======
+>>>>>>> v3.18
 	if (likely(FM == 1))
 		mask = 0x0f;
 	else if (likely(FM == 0xff))
@@ -85,6 +88,9 @@ mtfsf(unsigned int FM, u32 *frB)
 	if (fpscr & (fpscr >> 22) &  0xf8)
 		fpscr |= FPSCR_FEX;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__FPU_FPSCR = fpscr;
 

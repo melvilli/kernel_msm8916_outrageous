@@ -50,7 +50,10 @@
 #include "stackglue.h"
 #include "userdlm.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "dlmfsver.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -405,11 +408,16 @@ static struct inode *dlmfs_get_root_inode(struct super_block *sb)
 	struct inode *inode = new_inode(sb);
 	umode_t mode = S_IFDIR | 0755;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dlmfs_inode_private *ip;
 
 	if (inode) {
 		ip = DLMFS_I(inode);
 
+=======
+
+	if (inode) {
+>>>>>>> v3.18
 =======
 
 	if (inode) {
@@ -656,8 +664,11 @@ static int __init init_dlmfs_fs(void)
 	int cleanup_inode = 0, cleanup_worker = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dlmfs_print_version();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	status = bdi_init(&dlmfs_backing_dev_info);
@@ -716,6 +727,10 @@ static void __exit exit_dlmfs_fs(void)
 MODULE_AUTHOR("Oracle");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DESCRIPTION("OCFS2 DLM-Filesystem");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("OCFS2 DLM-Filesystem");
 >>>>>>> v3.18

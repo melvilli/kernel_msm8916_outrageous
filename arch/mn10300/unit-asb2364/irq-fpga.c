@@ -77,7 +77,11 @@ static struct irqaction fpga_irq[]  = {
 	[0] = {
 		.handler	= fpga_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags		= IRQF_DISABLED | IRQF_SHARED,
+=======
+		.flags		= IRQF_SHARED,
+>>>>>>> v3.18
 =======
 		.flags		= IRQF_SHARED,
 >>>>>>> v3.18

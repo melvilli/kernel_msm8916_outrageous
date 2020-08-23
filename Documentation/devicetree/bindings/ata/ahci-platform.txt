@@ -4,6 +4,7 @@ SATA nodes are defined to describe on-chip Serial ATA controllers.
 Each SATA controller should have its own node.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Required properties:
 - compatible        : compatible list, contains "calxeda,hb-ahci" or "snps,spear-ahci"
 - interrupts        : <interrupt mapping for SATA IRQ>
@@ -25,6 +26,8 @@ Example:
 
         };
 =======
+=======
+>>>>>>> v3.18
 It is possible, but not required, to represent each port as a sub-node.
 It allows to enable each port independently when dealing with multiple
 PHYs.
@@ -97,4 +100,7 @@ With sub-nodes:
 			phys = <&sata_phy 1>;
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

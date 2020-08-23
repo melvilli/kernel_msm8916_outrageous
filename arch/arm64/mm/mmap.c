@@ -48,7 +48,10 @@ static int mmap_is_legacy(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Since get_random_int() returns the same value within a 1 jiffy window, we
  * will almost always get the same randomisation for the stack and mmap
@@ -57,11 +60,15 @@ static int mmap_is_legacy(void)
  *
  * To avoid this we can shift the randomness by 1 bit.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned long mmap_rnd(void)
 {
 	unsigned long rnd = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (current->flags & PF_RANDOMIZE) {
 #ifdef CONFIG_COMPAT
@@ -73,10 +80,15 @@ static unsigned long mmap_rnd(void)
 	}
 	return rnd << PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 	if (current->flags & PF_RANDOMIZE)
 		rnd = (long)get_random_int() & (STACK_RND_MASK >> 1);
 
 	return rnd << (PAGE_SHIFT + 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -118,7 +130,11 @@ EXPORT_SYMBOL_GPL(arch_pick_mmap_layout);
  * away in the future.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int valid_phys_addr_range(unsigned long addr, size_t size)
+=======
+int valid_phys_addr_range(phys_addr_t addr, size_t size)
+>>>>>>> v3.18
 =======
 int valid_phys_addr_range(phys_addr_t addr, size_t size)
 >>>>>>> v3.18

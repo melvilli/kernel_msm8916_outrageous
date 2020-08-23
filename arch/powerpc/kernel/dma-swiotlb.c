@@ -107,11 +107,14 @@ int __init swiotlb_setup_bus_notifier(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void swiotlb_detect_4g(void)
 {
 	if ((memblock_end_of_DRAM() - 1) > 0xffffffff)
 		ppc_swiotlb_enable = 1;
 =======
+=======
+>>>>>>> v3.18
 void __init swiotlb_detect_4g(void)
 {
 	if ((memblock_end_of_DRAM() - 1) > 0xffffffff) {
@@ -120,6 +123,9 @@ void __init swiotlb_detect_4g(void)
 		limit_zone_pfn(ZONE_DMA32, (1ULL << 32) >> PAGE_SHIFT);
 #endif
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

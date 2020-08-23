@@ -19,8 +19,12 @@
  .
  . You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  . along with this program; if not, write to the Free Software
  . Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ . along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  . along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -214,6 +218,7 @@ SMC_outw(u16 val, void __iomem *ioaddr, int reg)
 #define RPC_LSB_DEFAULT		RPC_LED_100_10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #elif defined(CONFIG_ARCH_MSM)
 
 #define SMC_CAN_USE_8BIT	0
@@ -228,6 +233,8 @@ SMC_outw(u16 val, void __iomem *ioaddr, int reg)
 
 #define SMC_IRQ_FLAGS		IRQF_TRIGGER_HIGH
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #elif defined(CONFIG_MN10300)
@@ -279,7 +286,11 @@ static inline void mcf_outsw(void *a, unsigned char *p, int l)
 #define SMC_outsw(a, r, p, l)	mcf_outsw(a + r, p, l)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SMC_IRQ_FLAGS		(IRQF_DISABLED)
+=======
+#define SMC_IRQ_FLAGS		0
+>>>>>>> v3.18
 =======
 #define SMC_IRQ_FLAGS		0
 >>>>>>> v3.18
@@ -325,6 +336,12 @@ struct smc_local {
 	struct tasklet_struct tx_task;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct gpio_desc *power_gpio;
+	struct gpio_desc *reset_gpio;
+
+>>>>>>> v3.18
 =======
 	struct gpio_desc *power_gpio;
 	struct gpio_desc *reset_gpio;
@@ -925,8 +942,13 @@ static const char * chip_ids[ 16 ] =  {
 		int __b = SMC_CURRENT_BANK(lp);			\
 		if (unlikely((__b & ~0xf0) != (0x3300 | bank))) {	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk( "%s: bank reg screwed (0x%04x)\n",	\
 				CARDNAME, __b );			\
+=======
+			pr_err("%s: bank reg screwed (0x%04x)\n",	\
+			       CARDNAME, __b);				\
+>>>>>>> v3.18
 =======
 			pr_err("%s: bank reg screwed (0x%04x)\n",	\
 			       CARDNAME, __b);				\
@@ -1147,8 +1169,12 @@ static const char * chip_ids[ 16 ] =  {
 			if (__len >= 2 && (unsigned long)__ptr & 2) {	\
 				__len -= 2;				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 				SMC_outw(*(u16 *)__ptr, ioaddr,		\
 					DATA_REG(lp));		\
+=======
+				SMC_outsw(ioaddr, DATA_REG(lp), __ptr, 1); \
+>>>>>>> v3.18
 =======
 				SMC_outsw(ioaddr, DATA_REG(lp), __ptr, 1); \
 >>>>>>> v3.18
@@ -1160,8 +1186,12 @@ static const char * chip_ids[ 16 ] =  {
 			if (__len & 2) {				\
 				__ptr += (__len & ~3);			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 				SMC_outw(*((u16 *)__ptr), ioaddr,	\
 					 DATA_REG(lp));		\
+=======
+				SMC_outsw(ioaddr, DATA_REG(lp), __ptr, 1); \
+>>>>>>> v3.18
 =======
 				SMC_outsw(ioaddr, DATA_REG(lp), __ptr, 1); \
 >>>>>>> v3.18

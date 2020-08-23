@@ -10,6 +10,10 @@ struct thread_map {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct thread_map *thread_map__new_dummy(void);
+>>>>>>> v3.18
 =======
 struct thread_map *thread_map__new_dummy(void);
 >>>>>>> v3.18

@@ -89,8 +89,12 @@ static void *ima_measurements_next(struct seq_file *m, void *v, loff_t *pos)
 	 */
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qe = list_entry_rcu(qe->later.next,
 			    struct ima_queue_entry, later);
+=======
+	qe = list_entry_rcu(qe->later.next, struct ima_queue_entry, later);
+>>>>>>> v3.18
 =======
 	qe = list_entry_rcu(qe->later.next, struct ima_queue_entry, later);
 >>>>>>> v3.18
@@ -105,7 +109,11 @@ static void ima_measurements_stop(struct seq_file *m, void *v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ima_putc(struct seq_file *m, void *data, int datalen)
+=======
+void ima_putc(struct seq_file *m, void *data, int datalen)
+>>>>>>> v3.18
 =======
 void ima_putc(struct seq_file *m, void *data, int datalen)
 >>>>>>> v3.18
@@ -120,6 +128,10 @@ void ima_putc(struct seq_file *m, void *data, int datalen)
  *       32bit-le=template name size
  *       char[n]=template name
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *       [eventdata length]
+>>>>>>> v3.18
 =======
  *       [eventdata length]
 >>>>>>> v3.18
@@ -133,6 +145,11 @@ static int ima_measurements_show(struct seq_file *m, void *v)
 	int namelen;
 	u32 pcr = CONFIG_IMA_MEASURE_PCR_IDX;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool is_ima_template = false;
+	int i;
+>>>>>>> v3.18
 =======
 	bool is_ima_template = false;
 	int i;
@@ -148,6 +165,7 @@ static int ima_measurements_show(struct seq_file *m, void *v)
 	 * PCR used is always the same (config option) in
 	 * little-endian format
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ima_putc(m, &pcr, sizeof pcr);
 
@@ -165,6 +183,8 @@ static int ima_measurements_show(struct seq_file *m, void *v)
 	ima_template_show(m, (struct ima_template_data *)&e->template,
 			  IMA_SHOW_BINARY);
 =======
+=======
+>>>>>>> v3.18
 	ima_putc(m, &pcr, sizeof(pcr));
 
 	/* 2nd: template digest */
@@ -196,6 +216,9 @@ static int ima_measurements_show(struct seq_file *m, void *v)
 			show = IMA_SHOW_BINARY_OLD_STRING_FMT;
 		field->field_show(m, show, &e->template_data[i]);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -219,6 +242,7 @@ static const struct file_operations ima_measurements_ops = {
 	.release = seq_release,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void ima_print_digest(struct seq_file *m, u8 *digest)
 {
@@ -250,6 +274,8 @@ void ima_template_show(struct seq_file *m, void *e, enum ima_show_type show)
 }
 
 =======
+=======
+>>>>>>> v3.18
 void ima_print_digest(struct seq_file *m, u8 *digest, int size)
 {
 	int i;
@@ -258,6 +284,9 @@ void ima_print_digest(struct seq_file *m, u8 *digest, int size)
 		seq_printf(m, "%02x", *(digest + i));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* print in ascii */
 static int ima_ascii_measurements_show(struct seq_file *m, void *v)
@@ -266,6 +295,10 @@ static int ima_ascii_measurements_show(struct seq_file *m, void *v)
 	struct ima_queue_entry *qe = v;
 	struct ima_template_entry *e;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -280,6 +313,7 @@ static int ima_ascii_measurements_show(struct seq_file *m, void *v)
 
 	/* 2nd: SHA1 template hash */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ima_print_digest(m, e->digest);
 
 	/* 3th:  template name */
@@ -289,6 +323,8 @@ static int ima_ascii_measurements_show(struct seq_file *m, void *v)
 	ima_template_show(m, (struct ima_template_data *)&e->template,
 			  IMA_SHOW_ASCII);
 =======
+=======
+>>>>>>> v3.18
 	ima_print_digest(m, e->digest, TPM_DIGEST_SIZE);
 
 	/* 3th:  template name */
@@ -304,6 +340,9 @@ static int ima_ascii_measurements_show(struct seq_file *m, void *v)
 							&e->template_data[i]);
 	}
 	seq_puts(m, "\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -372,7 +411,11 @@ static atomic_t policy_opencount = ATOMIC_INIT(1);
  * ima_open_policy: sequentialize access to the policy file
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ima_open_policy(struct inode * inode, struct file * filp)
+=======
+static int ima_open_policy(struct inode *inode, struct file *filp)
+>>>>>>> v3.18
 =======
 static int ima_open_policy(struct inode *inode, struct file *filp)
 >>>>>>> v3.18

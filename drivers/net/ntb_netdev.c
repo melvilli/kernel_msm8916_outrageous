@@ -79,12 +79,15 @@ static void ntb_netdev_event_handler(void *data, int status)
 		   ntb_transport_link_query(dev->qp));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Currently, only link status event is supported */
 	if (status)
 		netif_carrier_on(ndev);
 	else
 		netif_carrier_off(ndev);
 =======
+=======
+>>>>>>> v3.18
 	switch (status) {
 	case NTB_LINK_DOWN:
 		netif_carrier_off(ndev);
@@ -98,6 +101,9 @@ static void ntb_netdev_event_handler(void *data, int status)
 	default:
 		netdev_warn(ndev, "Unsupported event type %d\n", status);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -199,13 +205,19 @@ static int ntb_netdev_open(struct net_device *ndev)
 		rc = ntb_transport_rx_enqueue(dev->qp, skb, skb->data,
 					      ndev->mtu + ETH_HLEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rc == -EINVAL)
 			goto err;
 =======
+=======
+>>>>>>> v3.18
 		if (rc == -EINVAL) {
 			dev_kfree_skb(skb);
 			goto err;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -312,7 +324,10 @@ static int ntb_get_settings(struct net_device *dev, struct ethtool_cmd *cmd)
 	cmd->supported = SUPPORTED_Backplane;
 	cmd->advertising = ADVERTISED_Backplane;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmd->speed = SPEED_UNKNOWN;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ethtool_cmd_speed_set(cmd, SPEED_UNKNOWN);
@@ -365,7 +380,11 @@ static int ntb_netdev_probe(struct pci_dev *pdev)
 
 	ndev->netdev_ops = &ntb_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(ndev, &ntb_ethtool_ops);
+=======
+	ndev->ethtool_ops = &ntb_ethtool_ops;
+>>>>>>> v3.18
 =======
 	ndev->ethtool_ops = &ntb_ethtool_ops;
 >>>>>>> v3.18
@@ -398,6 +417,7 @@ static void ntb_netdev_remove(struct pci_dev *pdev)
 	struct net_device *ndev;
 	struct ntb_netdev *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	list_for_each_entry(dev, &dev_list, list) {
 		if (dev->pdev == pdev)
@@ -405,6 +425,8 @@ static void ntb_netdev_remove(struct pci_dev *pdev)
 	}
 	if (dev == NULL)
 =======
+=======
+>>>>>>> v3.18
 	bool found = false;
 
 	list_for_each_entry(dev, &dev_list, list) {
@@ -414,6 +436,9 @@ static void ntb_netdev_remove(struct pci_dev *pdev)
 		}
 	}
 	if (!found)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 

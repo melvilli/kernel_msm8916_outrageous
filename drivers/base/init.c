@@ -34,6 +34,10 @@ void __init driver_init(void)
 	cpu_dev_init();
 	memory_dev_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	container_dev_init();
+>>>>>>> v3.18
 =======
 	container_dev_init();
 >>>>>>> v3.18

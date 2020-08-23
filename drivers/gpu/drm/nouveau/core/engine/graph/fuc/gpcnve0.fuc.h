@@ -1,5 +1,6 @@
 uint32_t nve0_grgpc_data[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 0x0000: gpc_id */
 	0x00000000,
 /* 0x0004: gpc_mmio_list_head */
@@ -16,6 +17,8 @@ uint32_t nve0_grgpc_data[] = {
 	0x00000000,
 /* 0x001c: cmd_queue */
 =======
+=======
+>>>>>>> v3.18
 /* 0x0000: gpc_mmio_list_head */
 	0x0000006c,
 /* 0x0004: gpc_mmio_list_tail */
@@ -39,6 +42,11 @@ uint32_t nve0_grgpc_data[] = {
 /* 0x0024: cmd_queue */
 	0x00000000,
 	0x00000000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+	0x00000000,
+	0x00000000,
+=======
 >>>>>>> v3.18
 	0x00000000,
 	0x00000000,
@@ -54,8 +62,7 @@ uint32_t nve0_grgpc_data[] = {
 	0x00000000,
 	0x00000000,
 	0x00000000,
-	0x00000000,
-	0x00000000,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	0x00000000,
 	0x00000000,
@@ -129,10 +136,17 @@ uint32_t nve0_grgpc_data[] = {
 uint32_t nve0_grgpc_code[] = {
 	0x03060ef5,
 =======
+=======
+	0x00000000,
+	0x00000000,
+>>>>>>> v3.18
 };
 
 uint32_t nve0_grgpc_code[] = {
 	0x03a10ef5,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* 0x0004: queue_put */
 	0x9800d898,
@@ -141,7 +155,11 @@ uint32_t nve0_grgpc_code[] = {
 	0xf00c1bf4,
 	0x21f502f7,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	0x00f802ec,
+=======
+	0x00f8037e,
+>>>>>>> v3.18
 =======
 	0x00f8037e,
 >>>>>>> v3.18
@@ -168,6 +186,7 @@ uint32_t nve0_grgpc_code[] = {
 /* 0x0066: queue_get_done */
 	0x00f80132,
 /* 0x0068: nv_rd32 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	0x0728b7f1,
 	0xb906b4b6,
@@ -344,6 +363,8 @@ uint32_t nve0_grgpc_code[] = {
 	0x95220080,
 /* 0x02ba: ctx_init_strand_loop */
 =======
+=======
+>>>>>>> v3.18
 	0xf002ecb9,
 	0x07f11fc9,
 	0x03f0ca00,
@@ -552,6 +573,9 @@ uint32_t nve0_grgpc_code[] = {
 	0x0293f020,
 	0x950099cf,
 /* 0x034a: ctx_init_strand_loop */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	0x8ed008fe,
 	0x408ed000,
@@ -561,6 +585,7 @@ uint32_t nve0_grgpc_code[] = {
 	0xb60480b6,
 	0x1bf40192,
 	0x08e4b6e8,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	0xf1f2efbc,
 	0xb6085c87,
@@ -756,6 +781,8 @@ uint32_t nve0_grgpc_code[] = {
 	0x00000000,
 	0x00000000,
 =======
+=======
+>>>>>>> v3.18
 	0xbdf2efbc,
 	0x0399f094,
 	0x170007f1,
@@ -978,6 +1005,9 @@ uint32_t nve0_grgpc_code[] = {
 /* 0x069b: ctx_xfer_done */
 	0xf5027f21,
 	0xf805a221,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	0x00000000,
 	0x00000000,

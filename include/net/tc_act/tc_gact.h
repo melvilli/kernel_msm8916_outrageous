@@ -12,8 +12,13 @@ struct tcf_gact {
 #endif
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define to_gact(pc) \
 	container_of(pc, struct tcf_gact, common)
+=======
+#define to_gact(a) \
+	container_of(a->priv, struct tcf_gact, common)
+>>>>>>> v3.18
 =======
 #define to_gact(a) \
 	container_of(a->priv, struct tcf_gact, common)

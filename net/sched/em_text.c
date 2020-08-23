@@ -46,7 +46,11 @@ static int em_text_match(struct sk_buff *skb, struct tcf_ematch *m,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int em_text_change(struct tcf_proto *tp, void *data, int len,
+=======
+static int em_text_change(struct net *net, void *data, int len,
+>>>>>>> v3.18
 =======
 static int em_text_change(struct net *net, void *data, int len,
 >>>>>>> v3.18
@@ -105,7 +109,11 @@ retry:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void em_text_destroy(struct tcf_proto *tp, struct tcf_ematch *m)
+=======
+static void em_text_destroy(struct tcf_ematch *m)
+>>>>>>> v3.18
 =======
 static void em_text_destroy(struct tcf_ematch *m)
 >>>>>>> v3.18

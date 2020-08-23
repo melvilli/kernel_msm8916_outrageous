@@ -11,8 +11,12 @@
 #include <linux/init.h>
 #include <linux/of_irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "irqchip.h"
+=======
+#include <linux/irqchip.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqchip.h>
 >>>>>>> v3.18
@@ -25,6 +29,7 @@
  */
 static const struct of_device_id
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqchip_of_match_end __used __section(__irqchip_of_end);
 
 extern struct of_device_id __irqchip_begin[];
@@ -33,6 +38,8 @@ void __init irqchip_init(void)
 {
 	of_irq_init(__irqchip_begin);
 =======
+=======
+>>>>>>> v3.18
 irqchip_of_match_end __used __section(__irqchip_of_table_end);
 
 extern struct of_device_id __irqchip_of_table[];
@@ -40,5 +47,8 @@ extern struct of_device_id __irqchip_of_table[];
 void __init irqchip_init(void)
 {
 	of_irq_init(__irqchip_of_table);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

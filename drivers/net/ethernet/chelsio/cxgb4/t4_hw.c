@@ -2,7 +2,11 @@
  * This file is part of the Chelsio T4 Ethernet driver for Linux.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2003-2010 Chelsio Communications, Inc. All rights reserved.
+=======
+ * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
 >>>>>>> v3.18
@@ -37,7 +41,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -151,7 +158,10 @@ void t4_write_indirect(struct adapter *adap, unsigned int addr_reg,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Read a 32-bit PCI Configuration Space register via the PCI-E backdoor
  * mechanism.  This guarantees that we get the real value even if we're
  * operating within a Virtual Machine and the Hypervisor is trapping our
@@ -204,6 +214,9 @@ static void t4_report_fw_error(struct adapter *adap)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Get the reply to a mailbox command and store it in @rpl in big-endian order.
  */
@@ -338,6 +351,10 @@ int t4_wr_mbox_meat(struct adapter *adap, int mbox, const void *cmd, int size,
 	dev_err(adap->pdev_dev, "command %#x in mailbox %d timed out\n",
 		*(const u8 *)cmd, mbox);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	t4_report_fw_error(adap);
+>>>>>>> v3.18
 =======
 	t4_report_fw_error(adap);
 >>>>>>> v3.18
@@ -363,7 +380,11 @@ int t4_mc_read(struct adapter *adap, int idx, u32 addr, __be32 *data, u64 *ecc)
 	u32 mc_bist_status_rdata, mc_bist_data_pattern;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_t4(adap->chip)) {
+=======
+	if (is_t4(adap->params.chip)) {
+>>>>>>> v3.18
 =======
 	if (is_t4(adap->params.chip)) {
 >>>>>>> v3.18
@@ -420,7 +441,11 @@ int t4_edc_read(struct adapter *adap, int idx, u32 addr, __be32 *data, u64 *ecc)
 	u32 edc_bist_cmd_data_pattern, edc_bist_status_rdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_t4(adap->chip)) {
+=======
+	if (is_t4(adap->params.chip)) {
+>>>>>>> v3.18
 =======
 	if (is_t4(adap->params.chip)) {
 >>>>>>> v3.18
@@ -462,6 +487,7 @@ int t4_edc_read(struct adapter *adap, int idx, u32 addr, __be32 *data, u64 *ecc)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  *	t4_mem_win_rw - read/write memory through PCIE memory window
@@ -506,15 +532,21 @@ static int t4_mem_win_rw(struct adapter *adap, u32 addr, __be32 *data, int dir)
  *	t4_memory_rw - read/write EDC 0, EDC 1 or MC via PCIE memory window
  *	@adap: the adapter
 =======
+=======
+>>>>>>> v3.18
 /**
  *	t4_memory_rw - read/write EDC 0, EDC 1 or MC via PCIE memory window
  *	@adap: the adapter
  *	@win: PCI-E Memory Window to use
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	@mtype: memory type: MEM_EDC0, MEM_EDC1 or MEM_MC
  *	@addr: address within indicated memory type
  *	@len: amount of memory to transfer
  *	@buf: host memory buffer
+<<<<<<< HEAD
 <<<<<<< HEAD
  *	@dir: direction of transfer 1 => read, 0 => write
  *
@@ -543,6 +575,8 @@ static int t4_memory_rw(struct adapter *adap, int mtype, u32 addr, u32 len,
 	if (!data)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
  *	@dir: direction of transfer T4_MEMORY_READ (1) or T4_MEMORY_WRITE (0)
  *
  *	Reads/writes an [almost] arbitrary memory region in the firmware: the
@@ -570,6 +604,9 @@ int t4_memory_rw(struct adapter *adap, int win, int mtype, u32 addr,
 	 */
 	resid = len & 0x3;
 	len -= resid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Offset into the region of memory which is being accessed
@@ -591,6 +628,7 @@ int t4_memory_rw(struct adapter *adap, int win, int mtype, u32 addr,
 	/* Determine the PCIE_MEM_ACCESS_OFFSET */
 	addr = addr + memoffset;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * The underlaying EDC/MC read routines read MEMWIN0_APERTURE bytes
@@ -653,6 +691,8 @@ int t4_memory_write(struct adapter *adap, int mtype, u32 addr, u32 len,
 {
 	return t4_memory_rw(adap, mtype, addr, len, buf, 0);
 =======
+=======
+>>>>>>> v3.18
 	/* Each PCI-E Memory Window is programmed with a window size -- or
 	 * "aperture" -- which controls the granularity of its mapping onto
 	 * adapter memory.  We need to grab that aperture in order to know
@@ -745,6 +785,9 @@ int t4_memory_write(struct adapter *adap, int mtype, u32 addr, u32 len,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -753,6 +796,10 @@ int t4_memory_write(struct adapter *adap, int mtype, u32 addr, u32 len,
 #define VPD_BASE_OLD       0
 #define VPD_LEN            1024
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CHELSIO_VPD_UNIQUE_ID 0x82
+>>>>>>> v3.18
 =======
 #define CHELSIO_VPD_UNIQUE_ID 0x82
 >>>>>>> v3.18
@@ -783,7 +830,11 @@ int get_vpd_params(struct adapter *adapter, struct vpd_params *p)
 	u32 cclk_param, cclk_val;
 	int i, ret, addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ec, sn;
+=======
+	int ec, sn, pn;
+>>>>>>> v3.18
 =======
 	int ec, sn, pn;
 >>>>>>> v3.18
@@ -798,8 +849,11 @@ int get_vpd_params(struct adapter *adapter, struct vpd_params *p)
 	if (ret < 0)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = *vpd == 0x82 ? VPD_BASE : VPD_BASE_OLD;
 =======
+=======
+>>>>>>> v3.18
 
 	/* The VPD shall have a unique identifier specified by the PCI SIG.
 	 * For chelsio adapters, the identifier is 0x82. The first byte of a VPD
@@ -808,6 +862,9 @@ int get_vpd_params(struct adapter *adapter, struct vpd_params *p)
 	 * beginning of the VPD.
 	 */
 	addr = *vpd == CHELSIO_VPD_UNIQUE_ID ? VPD_BASE : VPD_BASE_OLD;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = pci_read_vpd(adapter->pdev, addr, VPD_LEN, vpd);
@@ -863,6 +920,10 @@ int get_vpd_params(struct adapter *adapter, struct vpd_params *p)
 	FIND_VPD_KW(ec, "EC");
 	FIND_VPD_KW(sn, "SN");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FIND_VPD_KW(pn, "PN");
+>>>>>>> v3.18
 =======
 	FIND_VPD_KW(pn, "PN");
 >>>>>>> v3.18
@@ -876,6 +937,12 @@ int get_vpd_params(struct adapter *adapter, struct vpd_params *p)
 	memcpy(p->sn, vpd + sn, min(i, SERNUM_LEN));
 	strim(p->sn);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	i = pci_vpd_info_field_size(vpd + pn - PCI_VPD_INFO_FLD_HDR_SIZE);
+	memcpy(p->pn, vpd + pn, min(i, PN_LEN));
+	strim(p->pn);
+>>>>>>> v3.18
 =======
 	i = pci_vpd_info_field_size(vpd + pn - PCI_VPD_INFO_FLD_HDR_SIZE);
 	memcpy(p->pn, vpd + pn, min(i, PN_LEN));
@@ -914,7 +981,11 @@ enum {
 	SF_ERASE_SECTOR = 0xd8,       /* erase sector */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	FW_MAX_SIZE = 512 * 1024,
+=======
+	FW_MAX_SIZE = 16 * SF_SEC_SIZE,
+>>>>>>> v3.18
 =======
 	FW_MAX_SIZE = 16 * SF_SEC_SIZE,
 >>>>>>> v3.18
@@ -1103,7 +1174,11 @@ unlock:
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	get_fw_version - read the firmware version
+=======
+ *	t4_get_fw_version - read the firmware version
+>>>>>>> v3.18
 =======
  *	t4_get_fw_version - read the firmware version
 >>>>>>> v3.18
@@ -1112,6 +1187,7 @@ unlock:
  *
  *	Reads the FW version from flash.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int get_fw_version(struct adapter *adapter, u32 *vers)
 {
@@ -1122,6 +1198,8 @@ static int get_fw_version(struct adapter *adapter, u32 *vers)
 /**
  *	get_tp_version - read the TP microcode version
 =======
+=======
+>>>>>>> v3.18
 int t4_get_fw_version(struct adapter *adapter, u32 *vers)
 {
 	return t4_read_flash(adapter, FLASH_FW_START +
@@ -1131,12 +1209,16 @@ int t4_get_fw_version(struct adapter *adapter, u32 *vers)
 
 /**
  *	t4_get_tp_version - read the TP microcode version
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	@adapter: the adapter
  *	@vers: where to place the version
  *
  *	Reads the TP microcode version from flash.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int get_tp_version(struct adapter *adapter, u32 *vers)
 {
@@ -1146,10 +1228,16 @@ int t4_get_tp_version(struct adapter *adapter, u32 *vers)
 {
 	return t4_read_flash(adapter, FLASH_FW_START +
 >>>>>>> v3.18
+=======
+int t4_get_tp_version(struct adapter *adapter, u32 *vers)
+{
+	return t4_read_flash(adapter, FLASH_FW_START +
+>>>>>>> v3.18
 			     offsetof(struct fw_hdr, tp_microcode_ver),
 			     1, vers, 0);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  *	t4_check_fw_version - check if the FW is compatible with this driver
@@ -1215,6 +1303,8 @@ int t4_check_fw_version(struct adapter *adapter)
 }
 
 =======
+=======
+>>>>>>> v3.18
 /* Is the given firmware API compatible with the one the driver was compiled
  * with?
  */
@@ -1351,6 +1441,9 @@ bye:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  *	t4_flash_erase_sectors - erase a range of flash sectors
@@ -1365,6 +1458,12 @@ static int t4_flash_erase_sectors(struct adapter *adapter, int start, int end)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (end >= adapter->params.sf_nsec)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (end >= adapter->params.sf_nsec)
 		return -EINVAL;
@@ -1402,6 +1501,7 @@ unsigned int t4_flash_cfg_addr(struct adapter *adapter)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  *	t4_load_cfg - download config file
  *	@adap: the adapter
@@ -1459,6 +1559,8 @@ out:
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *	t4_load_fw - download firmware
@@ -1546,7 +1648,12 @@ out:
 
 #define ADVERT_MASK (FW_PORT_CAP_SPEED_100M | FW_PORT_CAP_SPEED_1G |\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     FW_PORT_CAP_SPEED_10G | FW_PORT_CAP_ANEG)
+=======
+		     FW_PORT_CAP_SPEED_10G | FW_PORT_CAP_SPEED_40G | \
+		     FW_PORT_CAP_ANEG)
+>>>>>>> v3.18
 =======
 		     FW_PORT_CAP_SPEED_10G | FW_PORT_CAP_SPEED_40G | \
 		     FW_PORT_CAP_ANEG)
@@ -1767,6 +1874,7 @@ static void pcie_intr_handler(struct adapter *adapter)
 	int fat;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fat = t4_handle_intr_status(adapter,
 				    PCIE_CORE_UTL_SYSTEM_BUS_AGENT_STATUS,
 				    sysbus_intr_info) +
@@ -1777,6 +1885,8 @@ static void pcie_intr_handler(struct adapter *adapter)
 				    is_t4(adapter->chip) ?
 				    pcie_intr_info : t5_pcie_intr_info);
 =======
+=======
+>>>>>>> v3.18
 	if (is_t4(adapter->params.chip))
 		fat = t4_handle_intr_status(adapter,
 					    PCIE_CORE_UTL_SYSTEM_BUS_AGENT_STATUS,
@@ -1789,6 +1899,9 @@ static void pcie_intr_handler(struct adapter *adapter)
 	else
 		fat = t4_handle_intr_status(adapter, PCIE_INT_CAUSE,
 					    t5_pcie_intr_info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (fat)
@@ -1909,6 +2022,12 @@ static void cim_intr_handler(struct adapter *adapter)
 	int fat;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (t4_read_reg(adapter, MA_PCIE_FW) & FW_PCIE_FW_ERR)
+		t4_report_fw_error(adapter);
+
+>>>>>>> v3.18
 =======
 	if (t4_read_reg(adapter, MA_PCIE_FW) & FW_PCIE_FW_ERR)
 		t4_report_fw_error(adapter);
@@ -2113,7 +2232,11 @@ static void mps_intr_handler(struct adapter *adapter)
 static void mem_intr_handler(struct adapter *adapter, int idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static const char name[3][5] = { "EDC0", "EDC1", "MC" };
+=======
+	static const char name[4][7] = { "EDC0", "EDC1", "MC/MC0", "MC1" };
+>>>>>>> v3.18
 =======
 	static const char name[4][7] = { "EDC0", "EDC1", "MC/MC0", "MC1" };
 >>>>>>> v3.18
@@ -2124,10 +2247,13 @@ static void mem_intr_handler(struct adapter *adapter, int idx)
 		addr = EDC_REG(EDC_INT_CAUSE, idx);
 		cnt_addr = EDC_REG(EDC_ECC_STATUS, idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		addr = MC_INT_CAUSE;
 		cnt_addr = MC_ECC_STATUS;
 =======
+=======
+>>>>>>> v3.18
 	} else if (idx == MEM_MC) {
 		if (is_t4(adapter->params.chip)) {
 			addr = MC_INT_CAUSE;
@@ -2139,6 +2265,9 @@ static void mem_intr_handler(struct adapter *adapter, int idx)
 	} else {
 		addr = MC_REG(MC_P_INT_CAUSE, 1);
 		cnt_addr = MC_REG(MC_P_ECC_STATUS, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2172,11 +2301,14 @@ static void ma_intr_handler(struct adapter *adap)
 	u32 v, status = t4_read_reg(adap, MA_INT_CAUSE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status & MEM_PERR_INT_CAUSE)
 		dev_alert(adap->pdev_dev,
 			  "MA parity error, parity status %#x\n",
 			  t4_read_reg(adap, MA_PARITY_ERROR_STATUS));
 =======
+=======
+>>>>>>> v3.18
 	if (status & MEM_PERR_INT_CAUSE) {
 		dev_alert(adap->pdev_dev,
 			  "MA parity error, parity status %#x\n",
@@ -2187,6 +2319,9 @@ static void ma_intr_handler(struct adapter *adap)
 				  t4_read_reg(adap,
 					      MA_PARITY_ERROR_STATUS2));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (status & MEM_WRAP_INT_CAUSE) {
 		v = t4_read_reg(adap, MA_INT_WRAP_STATUS);
@@ -2240,7 +2375,11 @@ static void xgmac_intr_handler(struct adapter *adap, int port)
 	u32 v, int_cause_reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_t4(adap->chip))
+=======
+	if (is_t4(adap->params.chip))
+>>>>>>> v3.18
 =======
 	if (is_t4(adap->params.chip))
 >>>>>>> v3.18
@@ -2321,6 +2460,11 @@ int t4_slow_intr_handler(struct adapter *adapter)
 	if (cause & MC)
 		mem_intr_handler(adapter, MEM_MC);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!is_t4(adapter->params.chip) && (cause & MC1))
+		mem_intr_handler(adapter, MEM_MC1);
+>>>>>>> v3.18
 =======
 	if (!is_t4(adapter->params.chip) && (cause & MC1))
 		mem_intr_handler(adapter, MEM_MC1);
@@ -2704,7 +2848,10 @@ static unsigned int get_mps_bg_map(struct adapter *adap, int idx)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *      t4_get_port_type_description - return Port Type string description
  *      @port_type: firmware Port Type enumeration
  */
@@ -2735,6 +2882,9 @@ const char *t4_get_port_type_description(enum fw_port_type port_type)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	t4_get_port_stats - collect port statistics
  *	@adap: the adapter
@@ -2750,7 +2900,11 @@ void t4_get_port_stats(struct adapter *adap, int idx, struct port_stats *p)
 #define GET_STAT(name) \
 	t4_read_reg64(adap, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(is_t4(adap->chip) ? PORT_REG(idx, MPS_PORT_STAT_##name##_L) : \
+=======
+	(is_t4(adap->params.chip) ? PORT_REG(idx, MPS_PORT_STAT_##name##_L) : \
+>>>>>>> v3.18
 =======
 	(is_t4(adap->params.chip) ? PORT_REG(idx, MPS_PORT_STAT_##name##_L) : \
 >>>>>>> v3.18
@@ -2836,7 +2990,11 @@ void t4_wol_magic_enable(struct adapter *adap, unsigned int port,
 	u32 mag_id_reg_l, mag_id_reg_h, port_cfg_reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_t4(adap->chip)) {
+=======
+	if (is_t4(adap->params.chip)) {
+>>>>>>> v3.18
 =======
 	if (is_t4(adap->params.chip)) {
 >>>>>>> v3.18
@@ -2882,7 +3040,11 @@ int t4_wol_pat_enable(struct adapter *adap, unsigned int port, unsigned int map,
 	u32 port_cfg_reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_t4(adap->chip))
+=======
+	if (is_t4(adap->params.chip))
+>>>>>>> v3.18
 =======
 	if (is_t4(adap->params.chip))
 >>>>>>> v3.18
@@ -2899,7 +3061,11 @@ int t4_wol_pat_enable(struct adapter *adap, unsigned int port, unsigned int map,
 
 #define EPIO_REG(name) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(is_t4(adap->chip) ? PORT_REG(port, XGMAC_PORT_EPIO_##name) : \
+=======
+	(is_t4(adap->params.chip) ? PORT_REG(port, XGMAC_PORT_EPIO_##name) : \
+>>>>>>> v3.18
 =======
 	(is_t4(adap->params.chip) ? PORT_REG(port, XGMAC_PORT_EPIO_##name) : \
 >>>>>>> v3.18
@@ -2977,6 +3143,7 @@ int t4_fwaddrspace_write(struct adapter *adap, unsigned int mbox,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *     t4_mem_win_read_len - read memory through PCIE memory window
  *     @adap: the adapter
  *     @addr: address of first byte requested aligned on 32b.
@@ -3010,6 +3177,8 @@ int t4_mem_win_read_len(struct adapter *adap, u32 addr, __be32 *data, int len)
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *	t4_mdio_rd - read a PHY register through MDIO
@@ -3072,7 +3241,10 @@ int t4_mdio_wr(struct adapter *adap, unsigned int mbox, unsigned int phy_addr,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *	t4_sge_decode_idma_state - decode the idma state
  *	@adap: the adapter
  *	@state: the state idma is stuck in
@@ -3179,6 +3351,9 @@ void t4_sge_decode_idma_state(struct adapter *adapter, int state)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *      t4_fw_hello - establish communication with FW
  *      @adap: the adapter
@@ -3215,7 +3390,13 @@ retry:
 	 * Issue the HELLO command to the firmware.  If it's not successful
 	 * but indicates that we got a "busy" or "timeout" condition, retry
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * the HELLO until we exhaust our retry limit.
+=======
+	 * the HELLO until we exhaust our retry limit.  If we do exceed our
+	 * retry limit, check to see if the firmware left us any error
+	 * information and report that if so.
+>>>>>>> v3.18
 =======
 	 * the HELLO until we exhaust our retry limit.  If we do exceed our
 	 * retry limit, check to see if the firmware left us any error
@@ -3227,6 +3408,11 @@ retry:
 		if ((ret == -EBUSY || ret == -ETIMEDOUT) && retries-- > 0)
 			goto retry;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (t4_read_reg(adap, MA_PCIE_FW) & FW_PCIE_FW_ERR)
+			t4_report_fw_error(adap);
+>>>>>>> v3.18
 =======
 		if (t4_read_reg(adap, MA_PCIE_FW) & FW_PCIE_FW_ERR)
 			t4_report_fw_error(adap);
@@ -3384,7 +3570,11 @@ int t4_fw_reset(struct adapter *adap, unsigned int mbox, int reset)
  *	...
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int t4_fw_halt(struct adapter *adap, unsigned int mbox, int force)
+=======
+static int t4_fw_halt(struct adapter *adap, unsigned int mbox, int force)
+>>>>>>> v3.18
 =======
 static int t4_fw_halt(struct adapter *adap, unsigned int mbox, int force)
 >>>>>>> v3.18
@@ -3453,7 +3643,11 @@ static int t4_fw_halt(struct adapter *adap, unsigned int mbox, int force)
  *	    flag and automatically RESET itself on startup.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int t4_fw_restart(struct adapter *adap, unsigned int mbox, int reset)
+=======
+static int t4_fw_restart(struct adapter *adap, unsigned int mbox, int reset)
+>>>>>>> v3.18
 =======
 static int t4_fw_restart(struct adapter *adap, unsigned int mbox, int reset)
 >>>>>>> v3.18
@@ -3546,6 +3740,7 @@ int t4_fw_upgrade(struct adapter *adap, unsigned int mbox,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  *	t4_fw_config_file - setup an adapter via a Configuration File
@@ -3620,6 +3815,8 @@ int t4_fw_config_file(struct adapter *adap, unsigned int mbox,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  *	t4_fixup_host_params - fix up host-dependent parameters
  *	@adap: the adapter
@@ -3650,6 +3847,7 @@ int t4_fixup_host_params(struct adapter *adap, unsigned int page_size,
 		     HOSTPAGESIZEPF7(sge_hps));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t4_set_reg_field(adap, SGE_CONTROL,
 			 INGPADBOUNDARY_MASK |
 			 EGRSTATUSPAGESIZE_MASK,
@@ -3657,6 +3855,8 @@ int t4_fixup_host_params(struct adapter *adap, unsigned int page_size,
 			 EGRSTATUSPAGESIZE(stat_len != 64));
 
 =======
+=======
+>>>>>>> v3.18
 	if (is_t4(adap->params.chip)) {
 		t4_set_reg_field(adap, SGE_CONTROL,
 				 INGPADBOUNDARY_MASK |
@@ -3702,6 +3902,9 @@ int t4_fixup_host_params(struct adapter *adap, unsigned int page_size,
 				 INGPACKBOUNDARY_V(fl_align_log -
 						 INGPACKBOUNDARY_SHIFT_X));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Adjust various SGE Free List Host Buffer Sizes.
@@ -3795,7 +3998,10 @@ int t4_query_params(struct adapter *adap, unsigned int mbox, unsigned int pf,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *      t4_set_params_nosleep - sets FW or device parameters
  *      @adap: the adapter
  *      @mbox: mailbox to use for the FW command
@@ -3836,6 +4042,9 @@ int t4_set_params_nosleep(struct adapter *adap, unsigned int mbox,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	t4_set_params - sets FW or device parameters
  *	@adap: the adapter
@@ -4047,7 +4256,11 @@ int t4_alloc_mac_filt(struct adapter *adap, unsigned int mbox,
 	struct fw_vi_mac_cmd c;
 	struct fw_vi_mac_exact *p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int max_naddr = is_t4(adap->chip) ?
+=======
+	unsigned int max_naddr = is_t4(adap->params.chip) ?
+>>>>>>> v3.18
 =======
 	unsigned int max_naddr = is_t4(adap->params.chip) ?
 >>>>>>> v3.18
@@ -4113,7 +4326,11 @@ int t4_change_mac(struct adapter *adap, unsigned int mbox, unsigned int viid,
 	struct fw_vi_mac_cmd c;
 	struct fw_vi_mac_exact *p = c.u.exact;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int max_mac_addr = is_t4(adap->chip) ?
+=======
+	unsigned int max_mac_addr = is_t4(adap->params.chip) ?
+>>>>>>> v3.18
 =======
 	unsigned int max_mac_addr = is_t4(adap->params.chip) ?
 >>>>>>> v3.18
@@ -4170,7 +4387,10 @@ int t4_set_addr_hash(struct adapter *adap, unsigned int mbox, unsigned int viid,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *      t4_enable_vi_params - enable/disable a virtual interface
  *      @adap: the adapter
  *      @mbox: mailbox to use for the FW command
@@ -4198,6 +4418,9 @@ int t4_enable_vi_params(struct adapter *adap, unsigned int mbox,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	t4_enable_vi - enable/disable a virtual interface
  *	@adap: the adapter
@@ -4212,6 +4435,7 @@ int t4_enable_vi(struct adapter *adap, unsigned int mbox, unsigned int viid,
 		 bool rx_en, bool tx_en)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fw_vi_enable_cmd c;
 
 	memset(&c, 0, sizeof(c));
@@ -4220,6 +4444,9 @@ int t4_enable_vi(struct adapter *adap, unsigned int mbox, unsigned int viid,
 	c.ien_to_len16 = htonl(FW_VI_ENABLE_CMD_IEN(rx_en) |
 			       FW_VI_ENABLE_CMD_EEN(tx_en) | FW_LEN16(c));
 	return t4_wr_mbox(adap, mbox, &c, sizeof(c), NULL);
+=======
+	return t4_enable_vi_params(adap, mbox, viid, rx_en, tx_en, 0);
+>>>>>>> v3.18
 =======
 	return t4_enable_vi_params(adap, mbox, viid, rx_en, tx_en, 0);
 >>>>>>> v3.18
@@ -4378,12 +4605,15 @@ int t4_handle_fw_rpl(struct adapter *adap, const __be64 *rpl)
 			fc |= PAUSE_TX;
 		if (stat & FW_PORT_CMD_LSPEED(FW_PORT_CAP_SPEED_100M))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			speed = SPEED_100;
 		else if (stat & FW_PORT_CMD_LSPEED(FW_PORT_CAP_SPEED_1G))
 			speed = SPEED_1000;
 		else if (stat & FW_PORT_CMD_LSPEED(FW_PORT_CAP_SPEED_10G))
 			speed = SPEED_10000;
 =======
+=======
+>>>>>>> v3.18
 			speed = 100;
 		else if (stat & FW_PORT_CMD_LSPEED(FW_PORT_CAP_SPEED_1G))
 			speed = 1000;
@@ -4391,6 +4621,9 @@ int t4_handle_fw_rpl(struct adapter *adap, const __be64 *rpl)
 			speed = 10000;
 		else if (stat & FW_PORT_CMD_LSPEED(FW_PORT_CAP_SPEED_40G))
 			speed = 40000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (link_ok != lc->link_ok || speed != lc->speed ||
@@ -4399,6 +4632,10 @@ int t4_handle_fw_rpl(struct adapter *adap, const __be64 *rpl)
 			lc->speed = speed;
 			lc->fc = fc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			lc->supported = be16_to_cpu(p->u.info.pcap);
+>>>>>>> v3.18
 =======
 			lc->supported = be16_to_cpu(p->u.info.pcap);
 >>>>>>> v3.18
@@ -4448,6 +4685,7 @@ static void init_link_config(struct link_config *lc, unsigned int caps)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int t4_wait_dev_ready(struct adapter *adap)
 {
 	if (t4_read_reg(adap, PL_WHOAMI) != 0xffffffff)
@@ -4459,6 +4697,8 @@ int t4_wait_dev_ready(struct adapter *adap)
 static int get_flash_params(struct adapter *adap)
 {
 =======
+=======
+>>>>>>> v3.18
 #define CIM_PF_NOACCESS 0xeeeeeeee
 
 int t4_wait_dev_ready(void __iomem *regs)
@@ -4488,6 +4728,9 @@ static int get_flash_params(struct adapter *adap)
 		{ 0x150201, 4 << 20 },       /* Spansion 4MB S25FL032P */
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 	u32 info;
@@ -4500,7 +4743,10 @@ static int get_flash_params(struct adapter *adap)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	for (ret = 0; ret < ARRAY_SIZE(supported_flash); ++ret)
 		if (supported_flash[ret].vendor_and_model_id == info) {
 			adap->params.sf_size = supported_flash[ret].size_mb;
@@ -4509,6 +4755,9 @@ static int get_flash_params(struct adapter *adap)
 			return 0;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((info & 0xff) != 0x20)             /* not a Numonix flash */
 		return -EINVAL;
@@ -4523,11 +4772,17 @@ static int get_flash_params(struct adapter *adap)
 	adap->params.sf_fw_start =
 		t4_read_reg(adap, CIM_BOOT_CFG) & BOOTADDR_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (adap->params.sf_size < FLASH_MIN_SIZE)
 		dev_warn(adap->pdev_dev, "WARNING!!! FLASH size %#x < %#x!!!\n",
 			 adap->params.sf_size, FLASH_MIN_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -4546,6 +4801,7 @@ int t4_prep_adapter(struct adapter *adapter)
 	int ret, ver;
 	uint16_t device_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = t4_wait_dev_ready(adapter);
 	if (ret < 0)
@@ -4554,10 +4810,15 @@ int t4_prep_adapter(struct adapter *adapter)
 	get_pci_mode(adapter, &adapter->params.pci);
 	adapter->params.rev = t4_read_reg(adapter, PL_REV);
 =======
+=======
+>>>>>>> v3.18
 	u32 pl_rev;
 
 	get_pci_mode(adapter, &adapter->params.pci);
 	pl_rev = G_REV(t4_read_reg(adapter, PL_REV));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = get_flash_params(adapter);
@@ -4571,6 +4832,7 @@ int t4_prep_adapter(struct adapter *adapter)
 	pci_read_config_word(adapter->pdev, PCI_DEVICE_ID, &device_id);
 	ver = device_id >> 12;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (ver) {
 	case CHELSIO_T4:
 		adapter->chip = CHELSIO_CHIP_CODE(CHELSIO_T4,
@@ -4580,6 +4842,8 @@ int t4_prep_adapter(struct adapter *adapter)
 		adapter->chip = CHELSIO_CHIP_CODE(CHELSIO_T5,
 						  adapter->params.rev);
 =======
+=======
+>>>>>>> v3.18
 	adapter->params.chip = 0;
 	switch (ver) {
 	case CHELSIO_T4:
@@ -4587,6 +4851,9 @@ int t4_prep_adapter(struct adapter *adapter)
 		break;
 	case CHELSIO_T5:
 		adapter->params.chip |= CHELSIO_CHIP_CODE(CHELSIO_T5, pl_rev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -4596,9 +4863,12 @@ int t4_prep_adapter(struct adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Reassign the updated revision field */
 	adapter->params.rev = adapter->chip;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	init_cong_ctrl(adapter->params.a_wnd, adapter->params.b_wnd);
@@ -4613,7 +4883,10 @@ int t4_prep_adapter(struct adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  *      t4_init_tp_params - initialize adap->params.tp
  *      @adap: the adapter
@@ -4717,6 +4990,9 @@ int t4_filter_field_shift(const struct adapter *adap, int filter_sel)
 	return field_shift;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int t4_port_init(struct adapter *adap, int mbox, int pf, int vf)
 {
@@ -4755,7 +5031,11 @@ int t4_port_init(struct adapter *adap, int mbox, int pf, int vf)
 		p->rss_size = rss_size;
 		memcpy(adap->port[i]->dev_addr, addr, ETH_ALEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		adap->port[i]->dev_id = j;
+=======
+		adap->port[i]->dev_port = j;
+>>>>>>> v3.18
 =======
 		adap->port[i]->dev_port = j;
 >>>>>>> v3.18

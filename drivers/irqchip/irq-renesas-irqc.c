@@ -82,6 +82,7 @@ static void irqc_irq_disable(struct irq_data *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INTC_IRQ_SENSE_VALID 0x10
 #define INTC_IRQ_SENSE(x) (x + INTC_IRQ_SENSE_VALID)
 
@@ -92,12 +93,17 @@ static unsigned char irqc_sense[IRQ_TYPE_SENSE_MASK + 1] = {
 	[IRQ_TYPE_EDGE_RISING] = INTC_IRQ_SENSE(0x08), /* Synchronous */
 	[IRQ_TYPE_EDGE_BOTH] = INTC_IRQ_SENSE(0x0c),  /* Synchronous */
 =======
+=======
+>>>>>>> v3.18
 static unsigned char irqc_sense[IRQ_TYPE_SENSE_MASK + 1] = {
 	[IRQ_TYPE_LEVEL_LOW]	= 0x01,
 	[IRQ_TYPE_LEVEL_HIGH]	= 0x02,
 	[IRQ_TYPE_EDGE_FALLING]	= 0x04,	/* Synchronous */
 	[IRQ_TYPE_EDGE_RISING]	= 0x08,	/* Synchronous */
 	[IRQ_TYPE_EDGE_BOTH]	= 0x0c,	/* Synchronous */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -111,7 +117,11 @@ static int irqc_irq_set_type(struct irq_data *d, unsigned int type)
 	irqc_dbg(&p->irq[hw_irq], "sense");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(value & INTC_IRQ_SENSE_VALID))
+=======
+	if (!value)
+>>>>>>> v3.18
 =======
 	if (!value)
 >>>>>>> v3.18
@@ -120,7 +130,11 @@ static int irqc_irq_set_type(struct irq_data *d, unsigned int type)
 	tmp = ioread32(p->iomem + IRQC_CONFIG(hw_irq));
 	tmp &= ~0x3f;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp |= value ^ INTC_IRQ_SENSE_VALID;
+=======
+	tmp |= value;
+>>>>>>> v3.18
 =======
 	tmp |= value;
 >>>>>>> v3.18
@@ -230,10 +244,15 @@ static int irqc_probe(struct platform_device *pdev)
 	irq_chip->irq_mask = irqc_irq_disable;
 	irq_chip->irq_unmask = irqc_irq_enable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_chip->irq_enable = irqc_irq_enable;
 	irq_chip->irq_disable = irqc_irq_disable;
 	irq_chip->irq_set_type = irqc_irq_set_type;
 	irq_chip->flags	= IRQCHIP_SKIP_SET_WAKE;
+=======
+	irq_chip->irq_set_type = irqc_irq_set_type;
+	irq_chip->flags	= IRQCHIP_SKIP_SET_WAKE | IRQCHIP_MASK_ON_SUSPEND;
+>>>>>>> v3.18
 =======
 	irq_chip->irq_set_type = irqc_irq_set_type;
 	irq_chip->flags	= IRQCHIP_SKIP_SET_WAKE | IRQCHIP_MASK_ON_SUSPEND;

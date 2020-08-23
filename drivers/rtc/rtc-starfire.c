@@ -52,11 +52,14 @@ static int __init starfire_rtc_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __exit starfire_rtc_remove(struct platform_device *pdev)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver starfire_rtc_driver = {
@@ -65,7 +68,10 @@ static struct platform_driver starfire_rtc_driver = {
 		.owner	= THIS_MODULE,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= __exit_p(starfire_rtc_remove),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

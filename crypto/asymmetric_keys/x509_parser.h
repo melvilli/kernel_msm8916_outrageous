@@ -10,6 +10,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/time.h>
+>>>>>>> v3.18
 =======
 #include <linux/time.h>
 >>>>>>> v3.18
@@ -17,6 +21,7 @@
 
 struct x509_certificate {
 	struct x509_certificate *next;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct public_key *pub;			/* Public key details */
 	char		*issuer;		/* Name of certificate issuer */
@@ -33,6 +38,8 @@ struct x509_certificate {
 	const void	*sig;			/* Signature data */
 	size_t		sig_size;		/* Size of sigature */
 =======
+=======
+>>>>>>> v3.18
 	struct x509_certificate *signer;	/* Certificate that signed this one */
 	struct public_key *pub;			/* Public key details */
 	struct public_key_signature sig;	/* Signature parameters */
@@ -60,6 +67,9 @@ struct x509_certificate {
 	bool		verified;
 	bool		trusted;
 	bool		unsupported_crypto;	/* T if can't be verified due to missing crypto */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -69,7 +79,10 @@ struct x509_certificate {
 extern void x509_free_certificate(struct x509_certificate *cert);
 extern struct x509_certificate *x509_cert_parse(const void *data, size_t datalen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * x509_public_key.c
@@ -77,4 +90,7 @@ extern struct x509_certificate *x509_cert_parse(const void *data, size_t datalen
 extern int x509_get_sig_params(struct x509_certificate *cert);
 extern int x509_check_signature(const struct public_key *pub,
 				struct x509_certificate *cert);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -8,6 +8,12 @@
  * @offset: The bitnumber to start searching at
  * @size: The bitmap size in bits
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Returns the bit number for the next set bit
+ * If no bits are set, returns @size.
+>>>>>>> v3.18
 =======
  *
  * Returns the bit number for the next set bit
@@ -25,6 +31,12 @@ extern unsigned long find_next_bit(const unsigned long *addr, unsigned long
  * @offset: The bitnumber to start searching at
  * @size: The bitmap size in bits
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Returns the bit number of the next zero bit
+ * If no bits are zero, returns @size.
+>>>>>>> v3.18
 =======
  *
  * Returns the bit number of the next zero bit
@@ -41,14 +53,20 @@ extern unsigned long find_next_zero_bit(const unsigned long *addr, unsigned
  * find_first_bit - find the first set bit in a memory region
  * @addr: The address to start the search at
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @size: The maximum size to search
  *
  * Returns the bit number of the first set bit.
 =======
+=======
+>>>>>>> v3.18
  * @size: The maximum number of bits to search
  *
  * Returns the bit number of the first set bit.
  * If no bits are set, returns @size.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 extern unsigned long find_first_bit(const unsigned long *addr,
@@ -58,14 +76,20 @@ extern unsigned long find_first_bit(const unsigned long *addr,
  * find_first_zero_bit - find the first cleared bit in a memory region
  * @addr: The address to start the search at
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @size: The maximum size to search
  *
  * Returns the bit number of the first cleared bit.
 =======
+=======
+>>>>>>> v3.18
  * @size: The maximum number of bits to search
  *
  * Returns the bit number of the first cleared bit.
  * If no bits are zero, returns @size.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 extern unsigned long find_first_zero_bit(const unsigned long *addr,

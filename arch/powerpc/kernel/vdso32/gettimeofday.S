@@ -233,10 +233,13 @@ __do_get_tspec:
 
 	/* Get a stable TB value */
 <<<<<<< HEAD
+<<<<<<< HEAD
 2:	mftbu	r3
 	mftbl	r4
 	mftbu	r0
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_8xx
 2:	mftbu	r3
 	mftbl	r4
@@ -246,6 +249,9 @@ __do_get_tspec:
 	mfspr	r4, SPRN_TBRL
 	mfspr	r0, SPRN_TBRU
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmplw	cr0,r3,r0
 	bne-	2b

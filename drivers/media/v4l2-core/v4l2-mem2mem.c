@@ -42,6 +42,11 @@ module_param(debug, bool, 0644);
 /* Instance is currently running in hardware */
 #define TRANS_RUNNING		(1 << 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Instance is currently aborting */
+#define TRANS_ABORT		(1 << 2)
+>>>>>>> v3.18
 =======
 /* Instance is currently aborting */
 #define TRANS_ABORT		(1 << 2)
@@ -202,11 +207,17 @@ static void v4l2_m2m_try_run(struct v4l2_m2m_dev *m2m_dev)
  * 3) streaming has to be on.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * If a queue is buffered (for example a decoder hardware ringbuffer that has
  * to be drained before doing streamoff), allow scheduling without v4l2 buffers
  * on that queue.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * There may also be additional, custom requirements. In such case the driver
  * should supply a custom callback (job_ready in v4l2_m2m_ops) that should
@@ -215,7 +226,11 @@ static void v4l2_m2m_try_run(struct v4l2_m2m_dev *m2m_dev)
  * src/dst buffer per transaction.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void v4l2_m2m_try_schedule(struct v4l2_m2m_ctx *m2m_ctx)
+=======
+void v4l2_m2m_try_schedule(struct v4l2_m2m_ctx *m2m_ctx)
+>>>>>>> v3.18
 =======
 void v4l2_m2m_try_schedule(struct v4l2_m2m_ctx *m2m_ctx)
 >>>>>>> v3.18
@@ -234,7 +249,10 @@ void v4l2_m2m_try_schedule(struct v4l2_m2m_ctx *m2m_ctx)
 
 	spin_lock_irqsave(&m2m_dev->job_spinlock, flags_job);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* If the context is aborted then don't schedule it */
 	if (m2m_ctx->job_flags & TRANS_ABORT) {
@@ -243,6 +261,9 @@ void v4l2_m2m_try_schedule(struct v4l2_m2m_ctx *m2m_ctx)
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (m2m_ctx->job_flags & TRANS_QUEUED) {
 		spin_unlock_irqrestore(&m2m_dev->job_spinlock, flags_job);
@@ -252,7 +273,12 @@ void v4l2_m2m_try_schedule(struct v4l2_m2m_ctx *m2m_ctx)
 
 	spin_lock_irqsave(&m2m_ctx->out_q_ctx.rdy_spinlock, flags_out);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (list_empty(&m2m_ctx->out_q_ctx.rdy_queue)) {
+=======
+	if (list_empty(&m2m_ctx->out_q_ctx.rdy_queue)
+	    && !m2m_ctx->out_q_ctx.buffered) {
+>>>>>>> v3.18
 =======
 	if (list_empty(&m2m_ctx->out_q_ctx.rdy_queue)
 	    && !m2m_ctx->out_q_ctx.buffered) {
@@ -265,7 +291,12 @@ void v4l2_m2m_try_schedule(struct v4l2_m2m_ctx *m2m_ctx)
 	}
 	spin_lock_irqsave(&m2m_ctx->cap_q_ctx.rdy_spinlock, flags_cap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (list_empty(&m2m_ctx->cap_q_ctx.rdy_queue)) {
+=======
+	if (list_empty(&m2m_ctx->cap_q_ctx.rdy_queue)
+	    && !m2m_ctx->cap_q_ctx.buffered) {
+>>>>>>> v3.18
 =======
 	if (list_empty(&m2m_ctx->cap_q_ctx.rdy_queue)
 	    && !m2m_ctx->cap_q_ctx.buffered) {
@@ -296,7 +327,10 @@ void v4l2_m2m_try_schedule(struct v4l2_m2m_ctx *m2m_ctx)
 	v4l2_m2m_try_run(m2m_dev);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(v4l2_m2m_try_schedule);
 
 /**
@@ -333,6 +367,9 @@ static void v4l2_m2m_cancel_job(struct v4l2_m2m_ctx *m2m_ctx)
 		spin_unlock_irqrestore(&m2m_dev->job_spinlock, flags);
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -507,6 +544,12 @@ int v4l2_m2m_streamoff(struct file *file, struct v4l2_m2m_ctx *m2m_ctx,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* wait until the current context is dequeued from job_queue */
+	v4l2_m2m_cancel_job(m2m_ctx);
+
+>>>>>>> v3.18
 =======
 	/* wait until the current context is dequeued from job_queue */
 	v4l2_m2m_cancel_job(m2m_ctx);
@@ -521,7 +564,12 @@ int v4l2_m2m_streamoff(struct file *file, struct v4l2_m2m_ctx *m2m_ctx,
 	spin_lock_irqsave(&m2m_dev->job_spinlock, flags_job);
 	/* We should not be scheduled anymore, since we're dropping a queue. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&m2m_ctx->queue);
+=======
+	if (m2m_ctx->job_flags & TRANS_QUEUED)
+		list_del(&m2m_ctx->queue);
+>>>>>>> v3.18
 =======
 	if (m2m_ctx->job_flags & TRANS_QUEUED)
 		list_del(&m2m_ctx->queue);
@@ -533,6 +581,10 @@ int v4l2_m2m_streamoff(struct file *file, struct v4l2_m2m_ctx *m2m_ctx,
 	 * calling reqbufs. */
 	INIT_LIST_HEAD(&q_ctx->rdy_queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	q_ctx->num_rdy = 0;
+>>>>>>> v3.18
 =======
 	q_ctx->num_rdy = 0;
 >>>>>>> v3.18
@@ -594,6 +646,11 @@ unsigned int v4l2_m2m_poll(struct file *file, struct v4l2_m2m_ctx *m2m_ctx,
 	if (m2m_ctx->m2m_dev->m2m_ops->unlock)
 		m2m_ctx->m2m_dev->m2m_ops->unlock(m2m_ctx->priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else if (m2m_ctx->q_lock)
+		mutex_unlock(m2m_ctx->q_lock);
+>>>>>>> v3.18
 =======
 	else if (m2m_ctx->q_lock)
 		mutex_unlock(m2m_ctx->q_lock);
@@ -607,13 +664,19 @@ unsigned int v4l2_m2m_poll(struct file *file, struct v4l2_m2m_ctx *m2m_ctx,
 	if (m2m_ctx->m2m_dev->m2m_ops->lock)
 		m2m_ctx->m2m_dev->m2m_ops->lock(m2m_ctx->priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	else if (m2m_ctx->q_lock) {
 		if (mutex_lock_interruptible(m2m_ctx->q_lock)) {
 			rc |= POLLERR;
 			goto end;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_irqsave(&src_q->done_lock, flags);
@@ -743,7 +806,10 @@ struct v4l2_m2m_ctx *v4l2_m2m_ctx_init(struct v4l2_m2m_dev *m2m_dev,
 	if (ret)
 		goto err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If both queues use same mutex assign it as the common buffer
 	 * queues lock to the m2m context. This lock is used in the
@@ -751,6 +817,9 @@ struct v4l2_m2m_ctx *v4l2_m2m_ctx_init(struct v4l2_m2m_dev *m2m_dev,
 	 */
 	if (out_q_ctx->q.lock == cap_q_ctx->q.lock)
 		m2m_ctx->q_lock = out_q_ctx->q.lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return m2m_ctx;
@@ -767,6 +836,7 @@ EXPORT_SYMBOL_GPL(v4l2_m2m_ctx_init);
  */
 void v4l2_m2m_ctx_release(struct v4l2_m2m_ctx *m2m_ctx)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct v4l2_m2m_dev *m2m_dev;
 	unsigned long flags;
@@ -789,6 +859,10 @@ void v4l2_m2m_ctx_release(struct v4l2_m2m_ctx *m2m_ctx)
 		/* Do nothing, was not on queue/running */
 		spin_unlock_irqrestore(&m2m_dev->job_spinlock, flags);
 	}
+=======
+	/* wait until the current context is dequeued from job_queue */
+	v4l2_m2m_cancel_job(m2m_ctx);
+>>>>>>> v3.18
 =======
 	/* wait until the current context is dequeued from job_queue */
 	v4l2_m2m_cancel_job(m2m_ctx);
@@ -824,7 +898,10 @@ void v4l2_m2m_buf_queue(struct v4l2_m2m_ctx *m2m_ctx, struct vb2_buffer *vb)
 EXPORT_SYMBOL_GPL(v4l2_m2m_buf_queue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Videobuf2 ioctl helpers */
 
 int v4l2_m2m_ioctl_reqbufs(struct file *file, void *priv,
@@ -940,4 +1017,7 @@ unsigned int v4l2_m2m_fop_poll(struct file *file, poll_table *wait)
 }
 EXPORT_SYMBOL_GPL(v4l2_m2m_fop_poll);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

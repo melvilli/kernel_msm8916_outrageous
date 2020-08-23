@@ -23,7 +23,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/device.h>
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -33,10 +37,13 @@
 #include <linux/pm_runtime.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi.h>
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "internal.h"
@@ -126,14 +133,20 @@ int acpi_device_get_power(struct acpi_device *device, int *state)
 	 * If we were unsure about the device parent's power state up to this
 	 * point, the fact that the device is in D0 implies that the parent has
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * to be in D0 too.
 	 */
 	if (device->parent && device->parent->power.state == ACPI_STATE_UNKNOWN
 =======
+=======
+>>>>>>> v3.18
 	 * to be in D0 too, except if ignore_parent is set.
 	 */
 	if (!device->power.flags.ignore_parent && device->parent
 	    && device->parent->power.state == ACPI_STATE_UNKNOWN
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    && result == ACPI_STATE_D0)
 		device->parent->power.state = ACPI_STATE_D0;
@@ -174,7 +187,12 @@ int acpi_device_set_power(struct acpi_device *device, int state)
 	bool cut_power = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!device || (state < ACPI_STATE_D0) || (state > ACPI_STATE_D3_COLD))
+=======
+	if (!device || !device->flags.power_manageable
+	    || (state < ACPI_STATE_D0) || (state > ACPI_STATE_D3_COLD))
+>>>>>>> v3.18
 =======
 	if (!device || !device->flags.power_manageable
 	    || (state < ACPI_STATE_D0) || (state > ACPI_STATE_D3_COLD))
@@ -185,7 +203,12 @@ int acpi_device_set_power(struct acpi_device *device, int state)
 
 	if (state == device->power.state) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ACPI_DEBUG_PRINT((ACPI_DB_INFO, "Device is already at %s\n",
+=======
+		ACPI_DEBUG_PRINT((ACPI_DB_INFO, "Device [%s] already in %s\n",
+				  device->pnp.bus_id,
+>>>>>>> v3.18
 =======
 		ACPI_DEBUG_PRINT((ACPI_DB_INFO, "Device [%s] already in %s\n",
 				  device->pnp.bus_id,
@@ -196,6 +219,7 @@ int acpi_device_set_power(struct acpi_device *device, int state)
 
 	if (!device->power.states[state].flags.valid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING PREFIX "Device does not support %s\n",
 		       acpi_power_state_string(state));
 		return -ENODEV;
@@ -205,6 +229,8 @@ int acpi_device_set_power(struct acpi_device *device, int state)
 			      "Cannot set device to a higher-powered"
 			      " state than parent\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_warn(&device->dev, "Power state %s not supported\n",
 			 acpi_power_state_string(state));
 		return -ENODEV;
@@ -215,6 +241,9 @@ int acpi_device_set_power(struct acpi_device *device, int state)
 			 "Cannot transition to power state %s for parent in %s\n",
 			 acpi_power_state_string(state),
 			 acpi_power_state_string(device->parent->power.state));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENODEV;
 	}
@@ -229,8 +258,13 @@ int acpi_device_set_power(struct acpi_device *device, int state)
 	if (state < device->power.state && state != ACPI_STATE_D0
 	    && device->power.state >= ACPI_STATE_D3_HOT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING PREFIX
 			"Cannot transition to non-D0 state from D3\n");
+=======
+		dev_warn(&device->dev,
+			 "Cannot transition to non-D0 state from D3\n");
+>>>>>>> v3.18
 =======
 		dev_warn(&device->dev,
 			 "Cannot transition to non-D0 state from D3\n");
@@ -262,10 +296,15 @@ int acpi_device_set_power(struct acpi_device *device, int state)
  end:
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING PREFIX
 			      "Device [%s] failed to transition to %s\n",
 			      device->pnp.bus_id,
 			      acpi_power_state_string(state));
+=======
+		dev_warn(&device->dev, "Failed to change power state to %s\n",
+			 acpi_power_state_string(state));
+>>>>>>> v3.18
 =======
 		dev_warn(&device->dev, "Failed to change power state to %s\n",
 			 acpi_power_state_string(state));
@@ -292,6 +331,7 @@ int acpi_bus_set_power(acpi_handle handle, int state)
 		return result;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!device->flags.power_manageable) {
 		ACPI_DEBUG_PRINT((ACPI_DB_INFO,
 				"Device [%s] is not power manageable\n",
@@ -299,6 +339,8 @@ int acpi_bus_set_power(acpi_handle handle, int state)
 		return -ENODEV;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return acpi_device_set_power(device, state);
@@ -315,6 +357,11 @@ int acpi_bus_init_power(struct acpi_device *device)
 
 	device->power.state = ACPI_STATE_UNKNOWN;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!acpi_device_is_present(device))
+		return 0;
+>>>>>>> v3.18
 =======
 	if (!acpi_device_is_present(device))
 		return 0;
@@ -366,6 +413,7 @@ int acpi_device_fix_up_power(struct acpi_device *device)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int acpi_bus_update_power(acpi_handle handle, int *state_p)
 {
 	struct acpi_device *device;
@@ -376,6 +424,8 @@ int acpi_bus_update_power(acpi_handle handle, int *state_p)
 	if (result)
 		return result;
 =======
+=======
+>>>>>>> v3.18
 int acpi_device_update_power(struct acpi_device *device, int *state_p)
 {
 	int state;
@@ -388,6 +438,9 @@ int acpi_device_update_power(struct acpi_device *device, int *state_p)
 
 		return result;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	result = acpi_device_get_power(device, &state);
@@ -417,7 +470,10 @@ int acpi_device_update_power(struct acpi_device *device, int *state_p)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(acpi_device_update_power);
 
 int acpi_bus_update_power(acpi_handle handle, int *state_p)
@@ -428,6 +484,9 @@ int acpi_bus_update_power(acpi_handle handle, int *state_p)
 	result = acpi_bus_get_device(handle, &device);
 	return result ? result : acpi_device_update_power(device, state_p);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(acpi_bus_update_power);
 
@@ -445,11 +504,14 @@ EXPORT_SYMBOL(acpi_bus_power_manageable);
 static DEFINE_MUTEX(acpi_pm_notifier_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * acpi_add_pm_notifier - Register PM notifier for given ACPI device.
  * @adev: ACPI device to add the notifier for.
  * @context: Context information to pass to the notifier routine.
 =======
+=======
+>>>>>>> v3.18
 static void acpi_pm_notify_handler(acpi_handle handle, u32 val, void *not_used)
 {
 	struct acpi_device *adev;
@@ -479,6 +541,9 @@ static void acpi_pm_notify_handler(acpi_handle handle, u32 val, void *not_used)
  * @adev: ACPI device to add the notify handler for.
  * @dev: Device to generate a wakeup event for while handling the notification.
  * @work_func: Work function to execute when handling the notification.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * NOTE: @adev need not be a run-wake or wakeup device to be a valid source of
@@ -487,12 +552,15 @@ static void acpi_pm_notify_handler(acpi_handle handle, u32 val, void *not_used)
  * bridge itself doesn't have a wakeup GPE associated with it.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_add_pm_notifier(struct acpi_device *adev,
 				 acpi_notify_handler handler, void *context)
 {
 	acpi_status status = AE_ALREADY_EXISTS;
 
 =======
+=======
+>>>>>>> v3.18
 acpi_status acpi_add_pm_notifier(struct acpi_device *adev, struct device *dev,
 				 void (*work_func)(struct work_struct *work))
 {
@@ -501,6 +569,9 @@ acpi_status acpi_add_pm_notifier(struct acpi_device *adev, struct device *dev,
 	if (!dev && !work_func)
 		return AE_BAD_PARAMETER;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_lock(&acpi_pm_notifier_lock);
 
@@ -508,10 +579,13 @@ acpi_status acpi_add_pm_notifier(struct acpi_device *adev, struct device *dev,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_install_notify_handler(adev->handle,
 					     ACPI_SYSTEM_NOTIFY,
 					     handler, context);
 =======
+=======
+>>>>>>> v3.18
 	adev->wakeup.ws = wakeup_source_register(dev_name(&adev->dev));
 	adev->wakeup.context.dev = dev;
 	if (work_func)
@@ -519,6 +593,9 @@ acpi_status acpi_add_pm_notifier(struct acpi_device *adev, struct device *dev,
 
 	status = acpi_install_notify_handler(adev->handle, ACPI_SYSTEM_NOTIFY,
 					     acpi_pm_notify_handler, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ACPI_FAILURE(status))
 		goto out;
@@ -535,8 +612,12 @@ acpi_status acpi_add_pm_notifier(struct acpi_device *adev, struct device *dev,
  * @adev: ACPI device to remove the notifier from.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_remove_pm_notifier(struct acpi_device *adev,
 				    acpi_notify_handler handler)
+=======
+acpi_status acpi_remove_pm_notifier(struct acpi_device *adev)
+>>>>>>> v3.18
 =======
 acpi_status acpi_remove_pm_notifier(struct acpi_device *adev)
 >>>>>>> v3.18
@@ -551,11 +632,14 @@ acpi_status acpi_remove_pm_notifier(struct acpi_device *adev)
 	status = acpi_remove_notify_handler(adev->handle,
 					    ACPI_SYSTEM_NOTIFY,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    handler);
 	if (ACPI_FAILURE(status))
 		goto out;
 
 =======
+=======
+>>>>>>> v3.18
 					    acpi_pm_notify_handler);
 	if (ACPI_FAILURE(status))
 		goto out;
@@ -567,6 +651,9 @@ acpi_status acpi_remove_pm_notifier(struct acpi_device *adev)
 	adev->wakeup.context.dev = NULL;
 	wakeup_source_unregister(adev->wakeup.ws);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	adev->wakeup.flags.notifier_present = false;
 
@@ -586,6 +673,7 @@ bool acpi_bus_can_wakeup(acpi_handle handle)
 EXPORT_SYMBOL(acpi_bus_can_wakeup);
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * acpi_device_power_state - Get preferred power state of ACPI device.
  * @dev: Device whose preferred target power state to return.
@@ -633,6 +721,8 @@ int acpi_device_power_state(struct device *dev, struct acpi_device *adev,
 	d_min = ACPI_STATE_D0;
 	d_max = ACPI_STATE_D3;
 =======
+=======
+>>>>>>> v3.18
  * acpi_dev_pm_get_state - Get preferred power state of ACPI device.
  * @dev: Device whose preferred target power state to return.
  * @adev: ACPI device node corresponding to @dev.
@@ -671,12 +761,16 @@ static int acpi_dev_pm_get_state(struct device *dev, struct acpi_device *adev,
 	 */
 	d_min = ACPI_STATE_D0;
 	d_max = ACPI_STATE_D3_COLD;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
 	 * If present, _SxD methods return the minimum D-state (highest power
 	 * state) we can use for the corresponding S-states.  Otherwise, the
 	 * minimum D-state is D0 (ACPI 3.x).
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * NOTE: We rely on acpi_evaluate_integer() not clobbering the integer
@@ -685,6 +779,8 @@ static int acpi_dev_pm_get_state(struct device *dev, struct acpi_device *adev,
 	if (target_state > ACPI_STATE_S0) {
 		acpi_evaluate_integer(adev->handle, acpi_method, NULL, &d_min);
 =======
+=======
+>>>>>>> v3.18
 	 */
 	if (target_state > ACPI_STATE_S0) {
 		/*
@@ -709,6 +805,9 @@ static int acpi_dev_pm_get_state(struct device *dev, struct acpi_device *adev,
 				return -ENODATA;
 		}
 		d_min = ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		wakeup = device_may_wakeup(dev) && adev->wakeup.flags.valid
 			&& adev->wakeup.sleep_state >= target_state;
@@ -725,6 +824,7 @@ static int acpi_dev_pm_get_state(struct device *dev, struct acpi_device *adev,
 	 * can wake the system.  _S0W may be valid, too.
 	 */
 	if (wakeup) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		acpi_status status;
 
@@ -759,6 +859,8 @@ static int acpi_dev_pm_get_state(struct device *dev, struct acpi_device *adev,
 }
 EXPORT_SYMBOL_GPL(acpi_device_power_state);
 =======
+=======
+>>>>>>> v3.18
 		method[3] = 'W';
 		status = acpi_evaluate_integer(handle, method, NULL, &ret);
 		if (status == AE_NOT_FOUND) {
@@ -783,6 +885,9 @@ EXPORT_SYMBOL_GPL(acpi_device_power_state);
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -792,7 +897,12 @@ EXPORT_SYMBOL_GPL(acpi_device_power_state);
  * @d_max_in: Deepest low-power state to take into consideration.
  * Return value: Preferred power state of the device on success, -ENODEV
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (if there's no 'struct acpi_device' for @dev) or -EINVAL on failure
+=======
+ * if there's no 'struct acpi_device' for @dev, -EINVAL if @d_max_in is
+ * incorrect, or -ENODATA on ACPI method failure.
+>>>>>>> v3.18
 =======
  * if there's no 'struct acpi_device' for @dev, -EINVAL if @d_max_in is
  * incorrect, or -ENODATA on ACPI method failure.
@@ -802,6 +912,7 @@ EXPORT_SYMBOL_GPL(acpi_device_power_state);
  */
 int acpi_pm_device_sleep_state(struct device *dev, int *d_min_p, int d_max_in)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	acpi_handle handle = DEVICE_ACPI_HANDLE(dev);
 	struct acpi_device *adev;
@@ -829,6 +940,8 @@ static void acpi_wakeup_device(acpi_handle handle, u32 event, void *context)
 
 	if (event == ACPI_NOTIFY_DEVICE_WAKE && dev) {
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_device *adev;
 	int ret, d_min, d_max;
 
@@ -881,6 +994,9 @@ static void acpi_pm_notify_work_func(struct work_struct *work)
 
 	dev = container_of(work, struct acpi_device_wakeup_context, work)->dev;
 	if (dev) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pm_wakeup_event(dev, 0);
 		pm_runtime_resume(dev);
@@ -889,8 +1005,14 @@ static void acpi_pm_notify_work_func(struct work_struct *work)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * __acpi_device_run_wake - Enable/disable runtime remote wakeup for device.
  * @adev: ACPI device to enable/disable the remote wakeup for.
+=======
+ * acpi_device_wakeup - Enable/disable wakeup functionality for device.
+ * @adev: ACPI device to enable/disable wakeup functionality for.
+ * @target_state: State the system is transitioning into.
+>>>>>>> v3.18
 =======
  * acpi_device_wakeup - Enable/disable wakeup functionality for device.
  * @adev: ACPI device to enable/disable wakeup functionality for.
@@ -906,7 +1028,12 @@ static void acpi_pm_notify_work_func(struct work_struct *work)
  * this function.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __acpi_device_run_wake(struct acpi_device *adev, bool enable)
+=======
+static int acpi_device_wakeup(struct acpi_device *adev, u32 target_state,
+			      bool enable)
+>>>>>>> v3.18
 =======
 static int acpi_device_wakeup(struct acpi_device *adev, u32 target_state,
 			      bool enable)
@@ -919,7 +1046,11 @@ static int acpi_device_wakeup(struct acpi_device *adev, u32 target_state,
 		int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = acpi_enable_wakeup_device_power(adev, ACPI_STATE_S0);
+=======
+		error = acpi_enable_wakeup_device_power(adev, target_state);
+>>>>>>> v3.18
 =======
 		error = acpi_enable_wakeup_device_power(adev, target_state);
 >>>>>>> v3.18
@@ -939,6 +1070,10 @@ static int acpi_device_wakeup(struct acpi_device *adev, u32 target_state,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_RUNTIME
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_RUNTIME
 >>>>>>> v3.18
@@ -951,13 +1086,17 @@ int acpi_pm_device_run_wake(struct device *phys_dev, bool enable)
 {
 	struct acpi_device *adev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle handle;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (!device_run_wake(phys_dev))
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	handle = DEVICE_ACPI_HANDLE(phys_dev);
 	if (!handle || acpi_bus_get_device(handle, &adev)) {
@@ -973,6 +1112,8 @@ EXPORT_SYMBOL(acpi_pm_device_run_wake);
 static inline void acpi_wakeup_device(acpi_handle handle, u32 event,
 				      void *context) {}
 =======
+=======
+>>>>>>> v3.18
 	adev = ACPI_COMPANION(phys_dev);
 	if (!adev) {
 		dev_dbg(phys_dev, "ACPI companion missing in %s!\n", __func__);
@@ -982,11 +1123,15 @@ static inline void acpi_wakeup_device(acpi_handle handle, u32 event,
 	return acpi_device_wakeup(adev, ACPI_STATE_S0, enable);
 }
 EXPORT_SYMBOL(acpi_pm_device_run_wake);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PM_RUNTIME */
 
 #ifdef CONFIG_PM_SLEEP
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * __acpi_device_sleep_wake - Enable or disable device to wake up the system.
  * @dev: Device to enable/desible to wake up the system.
@@ -1004,6 +1149,8 @@ int __acpi_device_sleep_wake(struct acpi_device *adev, u32 target_state,
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * acpi_pm_device_sleep_wake - Enable or disable device to wake up the system.
  * @dev: Device to enable/desible to wake up the system from sleep states.
  * @enable: Whether to enable or disable @dev to wake up the system.
@@ -1011,7 +1158,10 @@ int __acpi_device_sleep_wake(struct acpi_device *adev, u32 target_state,
 int acpi_pm_device_sleep_wake(struct device *dev, bool enable)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle handle;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct acpi_device *adev;
@@ -1020,6 +1170,7 @@ int acpi_pm_device_sleep_wake(struct device *dev, bool enable)
 	if (!device_can_wakeup(dev))
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	handle = DEVICE_ACPI_HANDLE(dev);
 	if (!handle || acpi_bus_get_device(handle, &adev)) {
@@ -1030,6 +1181,8 @@ int acpi_pm_device_sleep_wake(struct device *dev, bool enable)
 	error = __acpi_device_sleep_wake(adev, acpi_target_system_state(),
 					 enable);
 =======
+=======
+>>>>>>> v3.18
 	adev = ACPI_COMPANION(dev);
 	if (!adev) {
 		dev_dbg(dev, "ACPI companion missing in %s!\n", __func__);
@@ -1037,6 +1190,9 @@ int acpi_pm_device_sleep_wake(struct device *dev, bool enable)
 	}
 
 	error = acpi_device_wakeup(adev, acpi_target_system_state(), enable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!error)
 		dev_info(dev, "System wakeup %s by ACPI\n",
@@ -1047,6 +1203,7 @@ int acpi_pm_device_sleep_wake(struct device *dev, bool enable)
 #endif /* CONFIG_PM_SLEEP */
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * acpi_dev_pm_get_node - Get ACPI device node for the given physical device.
  * @dev: Device to get the ACPI node for.
@@ -1062,6 +1219,8 @@ struct acpi_device *acpi_dev_pm_get_node(struct device *dev)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * acpi_dev_pm_low_power - Put ACPI device into a low-power state.
  * @dev: Device to put into a low-power state.
  * @adev: ACPI device node corresponding to @dev.
@@ -1071,7 +1230,11 @@ static int acpi_dev_pm_low_power(struct device *dev, struct acpi_device *adev,
 				 u32 system_state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int power_state;
+=======
+	int ret, state;
+>>>>>>> v3.18
 =======
 	int ret, state;
 >>>>>>> v3.18
@@ -1080,12 +1243,17 @@ static int acpi_dev_pm_low_power(struct device *dev, struct acpi_device *adev,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	power_state = acpi_device_power_state(dev, adev, system_state,
 					      ACPI_STATE_D3, NULL);
 	if (power_state < ACPI_STATE_D0 || power_state > ACPI_STATE_D3)
 		return -EIO;
 
 	return acpi_device_set_power(adev, power_state);
+=======
+	ret = acpi_dev_pm_get_state(dev, adev, system_state, NULL, &state);
+	return ret ? ret : acpi_device_set_power(adev, state);
+>>>>>>> v3.18
 =======
 	ret = acpi_dev_pm_get_state(dev, adev, system_state, NULL, &state);
 	return ret ? ret : acpi_device_set_power(adev, state);
@@ -1115,7 +1283,11 @@ static int acpi_dev_pm_full_power(struct acpi_device *adev)
 int acpi_dev_runtime_suspend(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_device *adev = acpi_dev_pm_get_node(dev);
+=======
+	struct acpi_device *adev = ACPI_COMPANION(dev);
+>>>>>>> v3.18
 =======
 	struct acpi_device *adev = ACPI_COMPANION(dev);
 >>>>>>> v3.18
@@ -1128,7 +1300,11 @@ int acpi_dev_runtime_suspend(struct device *dev)
 	remote_wakeup = dev_pm_qos_flags(dev, PM_QOS_FLAG_REMOTE_WAKEUP) >
 				PM_QOS_FLAGS_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = __acpi_device_run_wake(adev, remote_wakeup);
+=======
+	error = acpi_device_wakeup(adev, ACPI_STATE_S0, remote_wakeup);
+>>>>>>> v3.18
 =======
 	error = acpi_device_wakeup(adev, ACPI_STATE_S0, remote_wakeup);
 >>>>>>> v3.18
@@ -1138,7 +1314,11 @@ int acpi_dev_runtime_suspend(struct device *dev)
 	error = acpi_dev_pm_low_power(dev, adev, ACPI_STATE_S0);
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__acpi_device_run_wake(adev, false);
+=======
+		acpi_device_wakeup(adev, ACPI_STATE_S0, false);
+>>>>>>> v3.18
 =======
 		acpi_device_wakeup(adev, ACPI_STATE_S0, false);
 >>>>>>> v3.18
@@ -1158,7 +1338,11 @@ EXPORT_SYMBOL_GPL(acpi_dev_runtime_suspend);
 int acpi_dev_runtime_resume(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_device *adev = acpi_dev_pm_get_node(dev);
+=======
+	struct acpi_device *adev = ACPI_COMPANION(dev);
+>>>>>>> v3.18
 =======
 	struct acpi_device *adev = ACPI_COMPANION(dev);
 >>>>>>> v3.18
@@ -1169,7 +1353,11 @@ int acpi_dev_runtime_resume(struct device *dev)
 
 	error = acpi_dev_pm_full_power(adev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__acpi_device_run_wake(adev, false);
+=======
+	acpi_device_wakeup(adev, ACPI_STATE_S0, false);
+>>>>>>> v3.18
 =======
 	acpi_device_wakeup(adev, ACPI_STATE_S0, false);
 >>>>>>> v3.18
@@ -1219,7 +1407,11 @@ EXPORT_SYMBOL_GPL(acpi_subsys_runtime_resume);
 int acpi_dev_suspend_late(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_device *adev = acpi_dev_pm_get_node(dev);
+=======
+	struct acpi_device *adev = ACPI_COMPANION(dev);
+>>>>>>> v3.18
 =======
 	struct acpi_device *adev = ACPI_COMPANION(dev);
 >>>>>>> v3.18
@@ -1232,8 +1424,13 @@ int acpi_dev_suspend_late(struct device *dev)
 
 	target_state = acpi_target_system_state();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wakeup = device_may_wakeup(dev);
 	error = __acpi_device_sleep_wake(adev, target_state, wakeup);
+=======
+	wakeup = device_may_wakeup(dev) && acpi_device_can_wakeup(adev);
+	error = acpi_device_wakeup(adev, target_state, wakeup);
+>>>>>>> v3.18
 =======
 	wakeup = device_may_wakeup(dev) && acpi_device_can_wakeup(adev);
 	error = acpi_device_wakeup(adev, target_state, wakeup);
@@ -1244,7 +1441,11 @@ int acpi_dev_suspend_late(struct device *dev)
 	error = acpi_dev_pm_low_power(dev, adev, target_state);
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__acpi_device_sleep_wake(adev, ACPI_STATE_UNKNOWN, false);
+=======
+		acpi_device_wakeup(adev, ACPI_STATE_UNKNOWN, false);
+>>>>>>> v3.18
 =======
 		acpi_device_wakeup(adev, ACPI_STATE_UNKNOWN, false);
 >>>>>>> v3.18
@@ -1264,7 +1465,11 @@ EXPORT_SYMBOL_GPL(acpi_dev_suspend_late);
 int acpi_dev_resume_early(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_device *adev = acpi_dev_pm_get_node(dev);
+=======
+	struct acpi_device *adev = ACPI_COMPANION(dev);
+>>>>>>> v3.18
 =======
 	struct acpi_device *adev = ACPI_COMPANION(dev);
 >>>>>>> v3.18
@@ -1275,7 +1480,11 @@ int acpi_dev_resume_early(struct device *dev)
 
 	error = acpi_dev_pm_full_power(adev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__acpi_device_sleep_wake(adev, ACPI_STATE_UNKNOWN, false);
+=======
+	acpi_device_wakeup(adev, ACPI_STATE_UNKNOWN, false);
+>>>>>>> v3.18
 =======
 	acpi_device_wakeup(adev, ACPI_STATE_UNKNOWN, false);
 >>>>>>> v3.18
@@ -1290,6 +1499,7 @@ EXPORT_SYMBOL_GPL(acpi_dev_resume_early);
 int acpi_subsys_prepare(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Follow PCI and resume devices suspended at run time before running
 	 * their system suspend callbacks.
@@ -1299,6 +1509,8 @@ int acpi_subsys_prepare(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(acpi_subsys_prepare);
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_device *adev = ACPI_COMPANION(dev);
 	u32 sys_target;
 	int ret, state;
@@ -1352,6 +1564,9 @@ int acpi_subsys_suspend(struct device *dev)
 	return pm_generic_suspend(dev);
 }
 EXPORT_SYMBOL_GPL(acpi_subsys_suspend);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1383,7 +1598,10 @@ int acpi_subsys_resume_early(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(acpi_subsys_resume_early);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * acpi_subsys_freeze - Run the device driver's freeze callback.
@@ -1402,6 +1620,9 @@ int acpi_subsys_freeze(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(acpi_subsys_freeze);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PM_SLEEP */
 
@@ -1411,6 +1632,7 @@ static struct dev_pm_domain acpi_general_pm_domain = {
 		.runtime_suspend = acpi_subsys_runtime_suspend,
 		.runtime_resume = acpi_subsys_runtime_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.runtime_idle = pm_generic_runtime_idle,
 #endif
 #ifdef CONFIG_PM_SLEEP
@@ -1418,6 +1640,8 @@ static struct dev_pm_domain acpi_general_pm_domain = {
 		.suspend_late = acpi_subsys_suspend_late,
 		.resume_early = acpi_subsys_resume_early,
 =======
+=======
+>>>>>>> v3.18
 #endif
 #ifdef CONFIG_PM_SLEEP
 		.prepare = acpi_subsys_prepare,
@@ -1427,6 +1651,9 @@ static struct dev_pm_domain acpi_general_pm_domain = {
 		.resume_early = acpi_subsys_resume_early,
 		.freeze = acpi_subsys_freeze,
 		.poweroff = acpi_subsys_suspend,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.poweroff_late = acpi_subsys_suspend_late,
 		.restore_early = acpi_subsys_resume_early,
@@ -1435,6 +1662,7 @@ static struct dev_pm_domain acpi_general_pm_domain = {
 };
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * acpi_dev_pm_attach - Prepare device for ACPI power management.
  * @dev: Device to prepare.
@@ -1474,6 +1702,8 @@ EXPORT_SYMBOL_GPL(acpi_dev_pm_attach);
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * acpi_dev_pm_detach - Remove ACPI power management from the device.
  * @dev: Device to take care of.
  * @power_off: Whether or not to try to remove power from the device.
@@ -1486,6 +1716,7 @@ EXPORT_SYMBOL_GPL(acpi_dev_pm_attach);
  * management callbacks.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void acpi_dev_pm_detach(struct device *dev, bool power_off)
 {
 	struct acpi_device *adev = acpi_dev_pm_get_node(dev);
@@ -1494,6 +1725,8 @@ void acpi_dev_pm_detach(struct device *dev, bool power_off)
 		dev->pm_domain = NULL;
 		acpi_remove_pm_notifier(adev, acpi_wakeup_device);
 =======
+=======
+>>>>>>> v3.18
 static void acpi_dev_pm_detach(struct device *dev, bool power_off)
 {
 	struct acpi_device *adev = ACPI_COMPANION(dev);
@@ -1501,6 +1734,9 @@ static void acpi_dev_pm_detach(struct device *dev, bool power_off)
 	if (adev && dev->pm_domain == &acpi_general_pm_domain) {
 		dev->pm_domain = NULL;
 		acpi_remove_pm_notifier(adev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (power_off) {
 			/*
@@ -1512,7 +1748,11 @@ static void acpi_dev_pm_detach(struct device *dev, bool power_off)
 			dev_pm_qos_hide_latency_limit(dev);
 			dev_pm_qos_hide_flags(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__acpi_device_run_wake(adev, false);
+=======
+			acpi_device_wakeup(adev, ACPI_STATE_S0, false);
+>>>>>>> v3.18
 =======
 			acpi_device_wakeup(adev, ACPI_STATE_S0, false);
 >>>>>>> v3.18
@@ -1520,6 +1760,7 @@ static void acpi_dev_pm_detach(struct device *dev, bool power_off)
 		}
 	}
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL_GPL(acpi_dev_pm_detach);
 
@@ -1579,6 +1820,8 @@ void acpi_dev_pm_remove_dependent(acpi_handle handle, struct device *depdev)
 }
 EXPORT_SYMBOL_GPL(acpi_dev_pm_remove_dependent);
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * acpi_dev_pm_attach - Prepare device for ACPI power management.
@@ -1617,5 +1860,8 @@ int acpi_dev_pm_attach(struct device *dev, bool power_on)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(acpi_dev_pm_attach);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_PM */

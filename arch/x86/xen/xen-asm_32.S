@@ -76,7 +76,10 @@ ENDPROC(xen_sysexit)
  * using a single register which is pushed/popped on the stack.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 .macro POP_FS
 1:
@@ -88,6 +91,9 @@ ENDPROC(xen_sysexit)
 	_ASM_EXTABLE(1b,2b)
 .endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENTRY(xen_iret)
 	/* test eflags for special cases */
@@ -97,6 +103,7 @@ ENTRY(xen_iret)
 	push %eax
 	ESP_OFFSET=4	# bytes pushed onto stack
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Store vcpu_info pointer for easy access.  Do it this way to
@@ -108,6 +115,8 @@ ENTRY(xen_iret)
 	movl %ss:__per_cpu_offset(,%eax,4), %eax
 	mov %ss:xen_vcpu(%eax), %eax
 =======
+=======
+>>>>>>> v3.18
 	/* Store vcpu_info pointer for easy access */
 #ifdef CONFIG_SMP
 	pushw %fs
@@ -115,6 +124,9 @@ ENTRY(xen_iret)
 	movl %eax, %fs
 	movl %fs:xen_vcpu, %eax
 	POP_FS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 	movl %ss:xen_vcpu, %eax

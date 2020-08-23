@@ -41,8 +41,11 @@
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/barrier.h>	/* for smp_rmb() */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -101,8 +104,14 @@ static inline unsigned long __rpte_to_hidx(real_pte_t rpte, unsigned long index)
 
 #define remap_4k_pfn(vma, addr, pfn, prot)				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	remap_pfn_range((vma), (addr), (pfn), PAGE_SIZE,		\
 			__pgprot(pgprot_val((prot)) | _PAGE_4K_PFN))
+=======
+	(WARN_ON(((pfn) >= (1UL << (64 - PTE_RPN_SHIFT)))) ? -EINVAL :	\
+		remap_pfn_range((vma), (addr), (pfn), PAGE_SIZE,	\
+			__pgprot(pgprot_val((prot)) | _PAGE_4K_PFN)))
+>>>>>>> v3.18
 =======
 	(WARN_ON(((pfn) >= (1UL << (64 - PTE_RPN_SHIFT)))) ? -EINVAL :	\
 		remap_pfn_range((vma), (addr), (pfn), PAGE_SIZE,	\

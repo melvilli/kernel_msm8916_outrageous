@@ -15,6 +15,10 @@
 #include <linux/radix-tree.h>
 #include <linux/bitmap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irqdomain.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqdomain.h>
 >>>>>>> v3.18
@@ -96,9 +100,12 @@ static void desc_set_defaults(unsigned int irq, struct irq_desc *desc, int node,
 		*per_cpu_ptr(desc->kstat_irqs, cpu) = 0;
 	desc_smp_init(desc, node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SMP
 	INIT_LIST_HEAD(&desc->affinity_notify);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -160,7 +167,10 @@ static struct irq_desc *alloc_desc(int irq, int node, struct module *owner)
 	raw_spin_lock_init(&desc->lock);
 	lockdep_set_class(&desc->lock, &irq_desc_lock_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&desc->notify_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -293,14 +303,20 @@ EXPORT_SYMBOL(irq_to_desc);
 static void free_desc(unsigned int irq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dynamic_irq_cleanup(irq);
 =======
+=======
+>>>>>>> v3.18
 	struct irq_desc *desc = irq_to_desc(irq);
 	unsigned long flags;
 
 	raw_spin_lock_irqsave(&desc->lock, flags);
 	desc_set_defaults(irq, desc, desc_node(desc), NULL);
 	raw_spin_unlock_irqrestore(&desc->lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -323,7 +339,10 @@ static int irq_expand_nr_irqs(unsigned int nr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void irq_mark_irq(unsigned int irq)
 {
 	mutex_lock(&sparse_irq_lock);
@@ -338,6 +357,9 @@ void irq_init_desc(unsigned int irq)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !CONFIG_SPARSE_IRQ */
 
@@ -358,7 +380,10 @@ int generic_handle_irq(unsigned int irq)
 EXPORT_SYMBOL_GPL(generic_handle_irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HANDLE_DOMAIN_IRQ
 /**
  * __handle_domain_irq - Invoke the handler for a HW irq belonging to a domain
@@ -400,6 +425,9 @@ int __handle_domain_irq(struct irq_domain *domain, unsigned int hwirq,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Dynamic interrupt handling */
 
@@ -448,7 +476,10 @@ __irq_alloc_descs(int irq, unsigned int from, unsigned int cnt, int node,
 			return -EINVAL;
 		from = irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		/*
 		 * For interrupts which are freely allocated the
@@ -456,6 +487,9 @@ __irq_alloc_descs(int irq, unsigned int from, unsigned int cnt, int node,
 		 * argument. x86 uses this to exclude the GSI space.
 		 */
 		from = arch_dynirq_lower_bound(from);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -484,6 +518,7 @@ err:
 EXPORT_SYMBOL_GPL(__irq_alloc_descs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * irq_reserve_irqs - mark irqs allocated
  * @from:	mark from irq number
@@ -509,6 +544,8 @@ int irq_reserve_irqs(unsigned int from, unsigned int cnt)
 	return ret;
 }
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_GENERIC_IRQ_LEGACY_ALLOC_HWIRQ
 /**
  * irq_alloc_hwirqs - Allocate an irq descriptor and initialize the hardware
@@ -559,6 +596,9 @@ void irq_free_hwirqs(unsigned int from, int cnt)
 }
 EXPORT_SYMBOL_GPL(irq_free_hwirqs);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -623,6 +663,7 @@ int irq_set_percpu_devid(unsigned int irq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * dynamic_irq_cleanup - cleanup a dynamically allocated irq
  * @irq:	irq number to initialize
@@ -635,6 +676,11 @@ void dynamic_irq_cleanup(unsigned int irq)
 	raw_spin_lock_irqsave(&desc->lock, flags);
 	desc_set_defaults(irq, desc, desc_node(desc), NULL);
 	raw_spin_unlock_irqrestore(&desc->lock, flags);
+=======
+void kstat_incr_irq_this_cpu(unsigned int irq)
+{
+	kstat_incr_irqs_this_cpu(irq, irq_to_desc(irq));
+>>>>>>> v3.18
 =======
 void kstat_incr_irq_this_cpu(unsigned int irq)
 {

@@ -18,11 +18,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -95,9 +98,12 @@ static int translated_ioctl(struct file *file, unsigned int cmd,
 			    unsigned long arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!file->f_op)
 		return -ENOTTY;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (file->f_op->unlocked_ioctl)
@@ -122,15 +128,21 @@ static int compat_chaninfo(struct file *file, unsigned long arg)
 
 	/* Copy chaninfo structure.  Ignore unused members. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!access_ok(VERIFY_READ, chaninfo32, sizeof(*chaninfo32))
 	    || !access_ok(VERIFY_WRITE, chaninfo, sizeof(*chaninfo))) {
 		return -EFAULT;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!access_ok(VERIFY_READ, chaninfo32, sizeof(*chaninfo32)) ||
 	    !access_ok(VERIFY_WRITE, chaninfo, sizeof(*chaninfo)))
 		return -EFAULT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = 0;
 	err |= __get_user(temp.uint, &chaninfo32->subdev);
@@ -163,15 +175,21 @@ static int compat_rangeinfo(struct file *file, unsigned long arg)
 
 	/* Copy rangeinfo structure. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!access_ok(VERIFY_READ, rangeinfo32, sizeof(*rangeinfo32))
 	    || !access_ok(VERIFY_WRITE, rangeinfo, sizeof(*rangeinfo))) {
 		return -EFAULT;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!access_ok(VERIFY_READ, rangeinfo32, sizeof(*rangeinfo32)) ||
 	    !access_ok(VERIFY_WRITE, rangeinfo, sizeof(*rangeinfo)))
 		return -EFAULT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = 0;
 	err |= __get_user(temp.uint, &rangeinfo32->range_type);
@@ -197,15 +215,21 @@ static int get_compat_cmd(struct comedi_cmd __user *cmd,
 
 	/* Copy cmd structure. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!access_ok(VERIFY_READ, cmd32, sizeof(*cmd32))
 	    || !access_ok(VERIFY_WRITE, cmd, sizeof(*cmd))) {
 		return -EFAULT;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!access_ok(VERIFY_READ, cmd32, sizeof(*cmd32)) ||
 	    !access_ok(VERIFY_WRITE, cmd, sizeof(*cmd)))
 		return -EFAULT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = 0;
 	err |= __get_user(temp.uint, &cmd32->subdev);
@@ -255,15 +279,21 @@ static int put_compat_cmd(struct comedi32_cmd_struct __user *cmd32,
 	/* (Could use ptr_to_compat() to set them, but that wasn't implemented
 	 * until kernel version 2.6.11.) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!access_ok(VERIFY_READ, cmd, sizeof(*cmd))
 	    || !access_ok(VERIFY_WRITE, cmd32, sizeof(*cmd32))) {
 		return -EFAULT;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!access_ok(VERIFY_READ, cmd, sizeof(*cmd)) ||
 	    !access_ok(VERIFY_WRITE, cmd32, sizeof(*cmd32)))
 		return -EFAULT;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = 0;
 	err |= __get_user(temp, &cmd->subdev);
@@ -305,7 +335,11 @@ static int compat_cmd(struct file *file, unsigned long arg)
 	struct comedi_cmd __user *cmd;
 	struct comedi32_cmd_struct __user *cmd32;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc, err;
+=======
+	int rc;
+>>>>>>> v3.18
 =======
 	int rc;
 >>>>>>> v3.18
@@ -318,6 +352,7 @@ static int compat_cmd(struct file *file, unsigned long arg)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = translated_ioctl(file, COMEDI_CMD, (unsigned long)cmd);
 	if (rc == -EAGAIN) {
 		/* Special case: copy cmd back to user. */
@@ -327,6 +362,9 @@ static int compat_cmd(struct file *file, unsigned long arg)
 	}
 
 	return rc;
+=======
+	return translated_ioctl(file, COMEDI_CMD, (unsigned long)cmd);
+>>>>>>> v3.18
 =======
 	return translated_ioctl(file, COMEDI_CMD, (unsigned long)cmd);
 >>>>>>> v3.18
@@ -370,8 +408,13 @@ static int get_compat_insn(struct comedi_insn __user *insn,
 	/* Copy insn structure.  Ignore the unused members. */
 	err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!access_ok(VERIFY_READ, insn32, sizeof(*insn32))
 	    || !access_ok(VERIFY_WRITE, insn, sizeof(*insn)))
+=======
+	if (!access_ok(VERIFY_READ, insn32, sizeof(*insn32)) ||
+	    !access_ok(VERIFY_WRITE, insn, sizeof(*insn)))
+>>>>>>> v3.18
 =======
 	if (!access_ok(VERIFY_READ, insn32, sizeof(*insn32)) ||
 	    !access_ok(VERIFY_WRITE, insn, sizeof(*insn)))

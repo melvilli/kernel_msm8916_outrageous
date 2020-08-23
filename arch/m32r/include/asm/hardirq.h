@@ -4,6 +4,7 @@
 
 #include <asm/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #if NR_IRQS > 256
 #define HARDIRQ_BITS	9
@@ -20,6 +21,8 @@
 # error HARDIRQ_BITS is too low!
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm-generic/hardirq.h>

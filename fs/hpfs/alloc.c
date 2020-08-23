@@ -9,7 +9,10 @@
 #include "hpfs_fn.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void hpfs_claim_alloc(struct super_block *s, secno sec)
 {
 	struct hpfs_sb_info *sbi = hpfs_sb(s);
@@ -62,6 +65,9 @@ static void hpfs_claim_dirband_free(struct super_block *s, secno sec)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Check if a sector is allocated in bitmap
@@ -259,10 +265,13 @@ secno hpfs_alloc_sector(struct super_block *s, secno near, unsigned n, int forwa
 	sec = 0;
 	ret:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sec && f_p) {
 		for (i = 0; i < forward; i++) {
 			if (!hpfs_alloc_if_possible(s, sec + i + 1)) {
 =======
+=======
+>>>>>>> v3.18
 	if (sec) {
 		i = 0;
 		do
@@ -272,6 +281,9 @@ secno hpfs_alloc_sector(struct super_block *s, secno near, unsigned n, int forwa
 	if (sec && f_p) {
 		for (i = 0; i < forward; i++) {
 			if (!hpfs_alloc_if_possible(s, sec + n + i)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				hpfs_error(s, "Prealloc doesn't work! Wanted %d, allocated at %08x, can't allocate %d", forward, sec, i);
 				sec = 0;
@@ -296,6 +308,10 @@ static secno alloc_in_dirband(struct super_block *s, secno near)
 	sec = alloc_in_bmp(s, (~0x3fff) | nr, 1, 0);
 	if (!sec) return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	hpfs_claim_dirband_alloc(s, sec);
+>>>>>>> v3.18
 =======
 	hpfs_claim_dirband_alloc(s, sec);
 >>>>>>> v3.18
@@ -314,6 +330,10 @@ int hpfs_alloc_if_possible(struct super_block *s, secno sec)
 		hpfs_mark_4buffers_dirty(&qbh);
 		hpfs_brelse4(&qbh);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		hpfs_claim_alloc(s, sec);
+>>>>>>> v3.18
 =======
 		hpfs_claim_alloc(s, sec);
 >>>>>>> v3.18
@@ -332,7 +352,11 @@ void hpfs_free_sectors(struct super_block *s, secno sec, unsigned n)
 	__le32 *bmp;
 	struct hpfs_sb_info *sbi = hpfs_sb(s);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*printk("2 - ");*/
+=======
+	/*pr_info("2 - ");*/
+>>>>>>> v3.18
 =======
 	/*pr_info("2 - ");*/
 >>>>>>> v3.18
@@ -355,6 +379,10 @@ void hpfs_free_sectors(struct super_block *s, secno sec, unsigned n)
 	}
 	bmp[(sec & 0x3fff) >> 5] |= cpu_to_le32(1 << (sec & 0x1f));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	hpfs_claim_free(s, sec);
+>>>>>>> v3.18
 =======
 	hpfs_claim_free(s, sec);
 >>>>>>> v3.18
@@ -443,6 +471,10 @@ void hpfs_free_dnode(struct super_block *s, dnode_secno dno)
 		hpfs_mark_4buffers_dirty(&qbh);
 		hpfs_brelse4(&qbh);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		hpfs_claim_dirband_free(s, dno);
+>>>>>>> v3.18
 =======
 		hpfs_claim_dirband_free(s, dno);
 >>>>>>> v3.18
@@ -454,7 +486,11 @@ struct dnode *hpfs_alloc_dnode(struct super_block *s, secno near,
 {
 	struct dnode *d;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hpfs_count_one_bitmap(s, hpfs_sb(s)->sb_dmap) > FREE_DNODES_ADD) {
+=======
+	if (hpfs_get_free_dnodes(s) > FREE_DNODES_ADD) {
+>>>>>>> v3.18
 =======
 	if (hpfs_get_free_dnodes(s) > FREE_DNODES_ADD) {
 >>>>>>> v3.18

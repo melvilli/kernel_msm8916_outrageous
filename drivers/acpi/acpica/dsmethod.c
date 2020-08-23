@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -54,6 +58,11 @@
 #include "acdisasm.h"
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "acparser.h"
+#include "amlcode.h"
+>>>>>>> v3.18
 =======
 #include "acparser.h"
 #include "amlcode.h"
@@ -65,18 +74,27 @@ ACPI_MODULE_NAME("dsmethod")
 /* Local prototypes */
 static acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 acpi_ds_detect_named_opcodes(struct acpi_walk_state *walk_state,
 			     union acpi_parse_object **out_op);
 
 static acpi_status
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 acpi_ds_create_method_mutex(union acpi_operand_object *method_desc);
 
 /*******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_ds_auto_serialize_method
  *
  * PARAMETERS:  node                        - Namespace Node of the method
@@ -210,6 +228,9 @@ acpi_ds_detect_named_opcodes(struct acpi_walk_state *walk_state,
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * FUNCTION:    acpi_ds_method_error
  *
@@ -227,7 +248,11 @@ acpi_ds_detect_named_opcodes(struct acpi_walk_state *walk_state,
 
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ds_method_error(acpi_status status, struct acpi_walk_state *walk_state)
+=======
+acpi_ds_method_error(acpi_status status, struct acpi_walk_state * walk_state)
+>>>>>>> v3.18
 =======
 acpi_ds_method_error(acpi_status status, struct acpi_walk_state * walk_state)
 >>>>>>> v3.18
@@ -374,26 +399,38 @@ acpi_ds_begin_method_execution(struct acpi_namespace_node *method_node,
 		 * The current_sync_level (per-thread) must be less than or equal to
 		 * the sync level of the method. This mechanism provides some
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * deadlock prevention
 =======
+=======
+>>>>>>> v3.18
 		 * deadlock prevention.
 		 *
 		 * If the method was auto-serialized, we just ignore the sync level
 		 * mechanism, because auto-serialization of methods can interfere
 		 * with ASL code that actually uses sync levels.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 *
 		 * Top-level method invocation has no walk state at this point
 		 */
 		if (walk_state &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (walk_state->thread->current_sync_level >
 		     obj_desc->method.mutex->mutex.sync_level)) {
 =======
+=======
+>>>>>>> v3.18
 		    (!(obj_desc->method.
 		       info_flags & ACPI_METHOD_IGNORE_SYNC_LEVEL))
 		    && (walk_state->thread->current_sync_level >
 			obj_desc->method.mutex->mutex.sync_level)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ACPI_ERROR((AE_INFO,
 				    "Cannot acquire Mutex for method [%4.4s], current SyncLevel is too large (%u)",
@@ -439,9 +476,12 @@ acpi_ds_begin_method_execution(struct acpi_namespace_node *method_node,
 				    original_sync_level =
 				    obj_desc->method.mutex->mutex.sync_level;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 				obj_desc->method.mutex->mutex.thread_id =
 				    acpi_os_get_thread_id();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			}
@@ -470,14 +510,20 @@ acpi_ds_begin_method_execution(struct acpi_namespace_node *method_node,
 	 */
 	obj_desc->method.thread_count++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return_ACPI_STATUS(status);
 
       cleanup:
 =======
+=======
+>>>>>>> v3.18
 	acpi_method_count++;
 	return_ACPI_STATUS(status);
 
 cleanup:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* On error, must release the method mutex (if present) */
 
@@ -609,7 +655,11 @@ acpi_ds_call_control_method(struct acpi_thread_state *thread,
 	return_ACPI_STATUS(status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -856,7 +906,12 @@ acpi_ds_terminate_control_method(union acpi_operand_object *method_desc,
 			    ~ACPI_METHOD_SERIALIZED_PENDING;
 			method_desc->method.info_flags |=
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    ACPI_METHOD_SERIALIZED;
+=======
+			    (ACPI_METHOD_SERIALIZED |
+			     ACPI_METHOD_IGNORE_SYNC_LEVEL);
+>>>>>>> v3.18
 =======
 			    (ACPI_METHOD_SERIALIZED |
 			     ACPI_METHOD_IGNORE_SYNC_LEVEL);

@@ -5,6 +5,10 @@
 #include <linux/mutex.h>
 #include <linux/netdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/wait.h>
+>>>>>>> v3.18
 =======
 #include <linux/wait.h>
 >>>>>>> v3.18
@@ -20,7 +24,11 @@ extern int rtnl_put_cacheinfo(struct sk_buff *skb, struct dst_entry *dst,
 			      u32 id, long expires, u32 error);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void rtmsg_ifinfo(int type, struct net_device *dev, unsigned change);
+=======
+void rtmsg_ifinfo(int type, struct net_device *dev, unsigned change, gfp_t flags);
+>>>>>>> v3.18
 =======
 void rtmsg_ifinfo(int type, struct net_device *dev, unsigned change, gfp_t flags);
 >>>>>>> v3.18
@@ -31,9 +39,12 @@ extern void rtnl_unlock(void);
 extern int rtnl_trylock(void);
 extern int rtnl_is_locked(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PROVE_LOCKING
 extern int lockdep_rtnl_is_held(void);
 =======
+=======
+>>>>>>> v3.18
 
 extern wait_queue_head_t netdev_unregistering_wq;
 extern struct mutex net_mutex;
@@ -45,6 +56,9 @@ static inline int lockdep_rtnl_is_held(void)
 {
 	return 1;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* #ifdef CONFIG_PROVE_LOCKING */
 
@@ -60,7 +74,10 @@ static inline int lockdep_rtnl_is_held(void)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * rcu_dereference_bh_rtnl - rcu_dereference_bh with debug checking
  * @p: The pointer to read, prior to dereference
  *
@@ -71,6 +88,9 @@ static inline int lockdep_rtnl_is_held(void)
 	rcu_dereference_bh_check(p, lockdep_rtnl_is_held())
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * rtnl_dereference - fetch RCU pointer when updates are prevented by RTNL
  * @p: The pointer to read, prior to dereferencing
@@ -104,6 +124,10 @@ extern int ndo_dflt_fdb_dump(struct sk_buff *skb,
 			     struct netlink_callback *cb,
 			     struct net_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			     struct net_device *filter_dev,
+>>>>>>> v3.18
 =======
 			     struct net_device *filter_dev,
 >>>>>>> v3.18

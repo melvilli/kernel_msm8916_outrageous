@@ -26,6 +26,11 @@
 #include <linux/tty_flip.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -275,7 +280,11 @@ static unsigned int qe_uart_tx_empty(struct uart_port *port)
 
 		bdp++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -443,6 +452,7 @@ static void qe_uart_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Enable status change interrupts
  *
@@ -453,6 +463,8 @@ static void qe_uart_enable_ms(struct uart_port *port)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Start or stop sending  break signal
@@ -947,7 +959,11 @@ static void qe_uart_set_termios(struct uart_port *port,
 	if (termios->c_iflag & INPCK)
 		port->read_status_mask |= BD_SC_FR | BD_SC_PR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -1117,7 +1133,10 @@ static struct uart_ops qe_uart_pops = {
 	.start_tx       = qe_uart_start_tx,
 	.stop_rx	= qe_uart_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms      = qe_uart_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl      = qe_uart_break_ctl,
@@ -1471,7 +1490,11 @@ static int ucc_uart_probe(struct platform_device *ofdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, qe_port);
+=======
+	platform_set_drvdata(ofdev, qe_port);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, qe_port);
 >>>>>>> v3.18
@@ -1495,7 +1518,11 @@ out_free:
 static int ucc_uart_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uart_qe_port *qe_port = dev_get_drvdata(&ofdev->dev);
+=======
+	struct uart_qe_port *qe_port = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct uart_qe_port *qe_port = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -1505,7 +1532,10 @@ static int ucc_uart_remove(struct platform_device *ofdev)
 	uart_remove_one_port(&ucc_uart_driver, &qe_port->port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(qe_port);
@@ -1549,15 +1579,21 @@ static int __init ucc_uart_init(void)
 
 	ret = platform_driver_register(&ucc_uart_of_driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret)
 		printk(KERN_ERR
 		       "ucc-uart: could not register platform driver\n");
 =======
+=======
+>>>>>>> v3.18
 	if (ret) {
 		printk(KERN_ERR
 		       "ucc-uart: could not register platform driver\n");
 		uart_unregister_driver(&ucc_uart_driver);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;

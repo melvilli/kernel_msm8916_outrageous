@@ -29,11 +29,14 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  *  02110-1301, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -94,6 +97,11 @@ void cx23885_input_rx_work_handler(struct cx23885_dev *dev, u32 events)
 	case CX23885_BOARD_HAUPPAUGE_HVR1250:
 	case CX23885_BOARD_MYGICA_X8507:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CX23885_BOARD_TBS_6980:
+	case CX23885_BOARD_TBS_6981:
+>>>>>>> v3.18
 =======
 	case CX23885_BOARD_TBS_6980:
 	case CX23885_BOARD_TBS_6981:
@@ -177,6 +185,11 @@ static int cx23885_input_ir_start(struct cx23885_dev *dev)
 	case CX23885_BOARD_TERRATEC_CINERGY_T_PCIE_DUAL:
 	case CX23885_BOARD_TEVII_S470:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case CX23885_BOARD_TBS_6980:
+	case CX23885_BOARD_TBS_6981:
+>>>>>>> v3.18
 =======
 	case CX23885_BOARD_TBS_6980:
 	case CX23885_BOARD_TBS_6981:
@@ -312,7 +325,10 @@ int cx23885_input_init(struct cx23885_dev *dev)
 		rc_map = RC_MAP_TOTAL_MEDIA_IN_HAND_02;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CX23885_BOARD_TBS_6980:
 	case CX23885_BOARD_TBS_6981:
 		/* Integrated CX23885 IR controller */
@@ -321,6 +337,9 @@ int cx23885_input_init(struct cx23885_dev *dev)
 		/* A guess at the remote */
 		rc_map = RC_MAP_TBS_NEC;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -ENODEV;
@@ -359,7 +378,11 @@ int cx23885_input_init(struct cx23885_dev *dev)
 	rc->dev.parent = &dev->pci->dev;
 	rc->driver_type = driver_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc->allowed_protos = allowed_protos;
+=======
+	rc->allowed_protocols = allowed_protos;
+>>>>>>> v3.18
 =======
 	rc->allowed_protocols = allowed_protos;
 >>>>>>> v3.18

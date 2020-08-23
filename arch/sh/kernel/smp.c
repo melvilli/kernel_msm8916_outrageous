@@ -38,7 +38,11 @@ struct plat_smp_ops *mp_ops = NULL;
 DEFINE_PER_CPU(int, cpu_state) = { 0 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit register_smp_ops(struct plat_smp_ops *ops)
+=======
+void register_smp_ops(struct plat_smp_ops *ops)
+>>>>>>> v3.18
 =======
 void register_smp_ops(struct plat_smp_ops *ops)
 >>>>>>> v3.18
@@ -50,7 +54,11 @@ void register_smp_ops(struct plat_smp_ops *ops)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __cpuinit smp_store_cpu_info(unsigned int cpu)
+=======
+static inline void smp_store_cpu_info(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static inline void smp_store_cpu_info(unsigned int cpu)
 >>>>>>> v3.18
@@ -120,7 +128,11 @@ void play_dead_common(void)
 	mb();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(cpu_state) = CPU_DEAD;
+=======
+	__this_cpu_write(cpu_state, CPU_DEAD);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(cpu_state, CPU_DEAD);
 >>>>>>> v3.18
@@ -187,7 +199,11 @@ void native_play_dead(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void __cpuinit start_secondary(void)
+=======
+asmlinkage void start_secondary(void)
+>>>>>>> v3.18
 =======
 asmlinkage void start_secondary(void)
 >>>>>>> v3.18
@@ -232,7 +248,11 @@ extern struct {
 } stack_start;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *tsk)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *tsk)
+>>>>>>> v3.18
 =======
 int __cpu_up(unsigned int cpu, struct task_struct *tsk)
 >>>>>>> v3.18

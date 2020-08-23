@@ -21,13 +21,19 @@
 #define _PARSE_EVENTS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <stdarg.h>
 #include <regex.h>
 =======
+=======
+>>>>>>> v3.18
 #include <stdbool.h>
 #include <stdarg.h>
 #include <regex.h>
 #include <string.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef __maybe_unused
@@ -64,13 +70,19 @@ struct pevent_record {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum trace_seq_fail {
 	TRACE_SEQ__GOOD,
 	TRACE_SEQ__BUFFER_POISONED,
 	TRACE_SEQ__MEM_ALLOC_FAILED,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Trace sequences are used to allow a function to call several other functions
@@ -83,15 +95,21 @@ struct trace_seq {
 	unsigned int		len;
 	unsigned int		readpos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 void trace_seq_init(struct trace_seq *s);
 =======
+=======
+>>>>>>> v3.18
 	enum trace_seq_fail	state;
 };
 
 void trace_seq_init(struct trace_seq *s);
 void trace_seq_reset(struct trace_seq *s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void trace_seq_destroy(struct trace_seq *s);
 
@@ -120,15 +138,21 @@ typedef int (*pevent_event_handler_func)(struct trace_seq *s,
 
 typedef int (*pevent_plugin_load_func)(struct pevent *pevent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef int (*pevent_plugin_unload_func)(void);
 
 struct plugin_option {
 	struct plugin_option		*next;
 =======
+=======
+>>>>>>> v3.18
 typedef int (*pevent_plugin_unload_func)(struct pevent *pevent);
 
 struct pevent_plugin_option {
 	struct pevent_plugin_option	*next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void				*handle;
 	char				*file;
@@ -152,7 +176,11 @@ struct pevent_plugin_option {
  *   The function called just before unloading
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   int PEVENT_PLUGIN_UNLOADER(void)
+=======
+ *   int PEVENT_PLUGIN_UNLOADER(struct pevent *pevent)
+>>>>>>> v3.18
 =======
  *   int PEVENT_PLUGIN_UNLOADER(struct pevent *pevent)
 >>>>>>> v3.18
@@ -161,7 +189,11 @@ struct pevent_plugin_option {
  *   Plugin options that can be set before loading
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   struct plugin_option PEVENT_PLUGIN_OPTIONS[] = {
+=======
+ *   struct pevent_plugin_option PEVENT_PLUGIN_OPTIONS[] = {
+>>>>>>> v3.18
 =======
  *   struct pevent_plugin_option PEVENT_PLUGIN_OPTIONS[] = {
 >>>>>>> v3.18
@@ -238,12 +270,18 @@ struct print_arg_string {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct print_arg_bitmask {
 	char			*bitmask;
 	int			offset;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct print_arg_field {
 	char			*name;
@@ -312,6 +350,10 @@ enum print_arg_type {
 	PRINT_OP,
 	PRINT_FUNC,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PRINT_BITMASK,
+>>>>>>> v3.18
 =======
 	PRINT_BITMASK,
 >>>>>>> v3.18
@@ -330,6 +372,10 @@ struct print_arg {
 		struct print_arg_func		func;
 		struct print_arg_string		string;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct print_arg_bitmask	bitmask;
+>>>>>>> v3.18
 =======
 		struct print_arg_bitmask	bitmask;
 >>>>>>> v3.18
@@ -362,6 +408,11 @@ enum {
 	EVENT_FL_ISFUNCENT	= 0x10,
 	EVENT_FL_ISFUNCRET	= 0x20,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	EVENT_FL_NOHANDLE	= 0x40,
+	EVENT_FL_PRINTRAW	= 0x80,
+>>>>>>> v3.18
 =======
 	EVENT_FL_NOHANDLE	= 0x40,
 	EVENT_FL_PRINTRAW	= 0x80,
@@ -403,6 +454,11 @@ enum pevent_func_arg_type {
 enum pevent_flag {
 	PEVENT_NSEC_OUTPUT		= 1,	/* output in NSECS */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PEVENT_DISABLE_SYS_PLUGINS	= 1 << 1,
+	PEVENT_DISABLE_PLUGINS		= 1 << 2,
+>>>>>>> v3.18
 =======
 	PEVENT_DISABLE_SYS_PLUGINS	= 1 << 1,
 	PEVENT_DISABLE_PLUGINS		= 1 << 2,
@@ -417,8 +473,11 @@ enum pevent_flag {
 	_PE(READ_PRINT_FAILED,	"failed to read event print fmt"), 	      \
 	_PE(OLD_FTRACE_ARG_FAILED,"failed to allocate field name for ftrace"),\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_PE(INVALID_ARG_TYPE,	"invalid argument type")
 =======
+=======
+>>>>>>> v3.18
 	_PE(INVALID_ARG_TYPE,	"invalid argument type"),		      \
 	_PE(INVALID_EXP_TYPE,	"invalid expression type"),		      \
 	_PE(INVALID_OP_TYPE,	"invalid operator type"),		      \
@@ -442,6 +501,9 @@ enum pevent_flag {
 	_PE(NOT_A_NUMBER,	"must have number field"),		      \
 	_PE(NO_FILTER,		"no filters exists"),			      \
 	_PE(FILTER_MISS,	"record does not match to filter")
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #undef _PE
@@ -449,6 +511,10 @@ enum pevent_flag {
 enum pevent_errno {
 	PEVENT_ERRNO__SUCCESS			= 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PEVENT_ERRNO__FILTER_MATCH		= PEVENT_ERRNO__SUCCESS,
+>>>>>>> v3.18
 =======
 	PEVENT_ERRNO__FILTER_MATCH		= PEVENT_ERRNO__SUCCESS,
 >>>>>>> v3.18
@@ -469,7 +535,10 @@ enum pevent_errno {
 #undef _PE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct plugin_list;
 
 #define INVALID_PLUGIN_LIST_OPTION	((char **)((unsigned long)-1))
@@ -486,6 +555,9 @@ void traceevent_print_plugins(struct trace_seq *s,
 			      const char *prefix, const char *suffix,
 			      const struct plugin_list *list);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct cmdline;
 struct cmdline_list;
@@ -514,6 +586,10 @@ struct pevent {
 	int cpus;
 	int long_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int page_size;
+>>>>>>> v3.18
 =======
 	int page_size;
 >>>>>>> v3.18
@@ -567,6 +643,11 @@ struct pevent {
 	/* cache */
 	struct event_format *last_event;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	char *trace_clock;
+>>>>>>> v3.18
 =======
 
 	char *trace_clock;
@@ -639,7 +720,10 @@ __data2host8(struct pevent *pevent, unsigned long long data)
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int traceevent_host_bigendian(void)
 {
 	unsigned char str[] = { 0x1, 0x2, 0x3, 0x4 };
@@ -649,6 +733,9 @@ static inline int traceevent_host_bigendian(void)
 	return val == 0x01020304;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* taken from kernel/trace/trace.h */
 enum trace_flag_type {
@@ -661,21 +748,31 @@ enum trace_flag_type {
 
 int pevent_register_comm(struct pevent *pevent, const char *comm, int pid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pevent_register_function(struct pevent *pevent, char *name,
 			     unsigned long long addr, char *mod);
 int pevent_register_print_string(struct pevent *pevent, char *fmt,
 =======
+=======
+>>>>>>> v3.18
 void pevent_register_trace_clock(struct pevent *pevent, char *trace_clock);
 int pevent_register_function(struct pevent *pevent, char *name,
 			     unsigned long long addr, char *mod);
 int pevent_register_print_string(struct pevent *pevent, const char *fmt,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 unsigned long long addr);
 int pevent_pid_is_registered(struct pevent *pevent, int pid);
 
 void pevent_print_event(struct pevent *pevent, struct trace_seq *s,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct pevent_record *record);
+=======
+			struct pevent_record *record, bool use_trace_clock);
+>>>>>>> v3.18
 =======
 			struct pevent_record *record, bool use_trace_clock);
 >>>>>>> v3.18
@@ -686,7 +783,13 @@ int pevent_parse_header_page(struct pevent *pevent, char *buf, unsigned long siz
 enum pevent_errno pevent_parse_event(struct pevent *pevent, const char *buf,
 				     unsigned long size, const char *sys);
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum pevent_errno pevent_parse_format(struct event_format **eventp, const char *buf,
+=======
+enum pevent_errno pevent_parse_format(struct pevent *pevent,
+				      struct event_format **eventp,
+				      const char *buf,
+>>>>>>> v3.18
 =======
 enum pevent_errno pevent_parse_format(struct pevent *pevent,
 				      struct event_format **eventp,
@@ -714,9 +817,12 @@ int pevent_print_num_field(struct trace_seq *s, const char *fmt,
 			   struct pevent_record *record, int err);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pevent_register_event_handler(struct pevent *pevent, int id, char *sys_name, char *event_name,
 				  pevent_event_handler_func func, void *context);
 =======
+=======
+>>>>>>> v3.18
 int pevent_print_func_field(struct trace_seq *s, const char *fmt,
 			   struct event_format *event, const char *name,
 			   struct pevent_record *record, int err);
@@ -727,12 +833,20 @@ int pevent_register_event_handler(struct pevent *pevent, int id,
 int pevent_unregister_event_handler(struct pevent *pevent, int id,
 				    const char *sys_name, const char *event_name,
 				    pevent_event_handler_func func, void *context);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int pevent_register_print_function(struct pevent *pevent,
 				   pevent_func_handler func,
 				   enum pevent_func_arg_type ret_type,
 				   char *name, ...);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int pevent_unregister_print_function(struct pevent *pevent,
+				     pevent_func_handler func, char *name);
+>>>>>>> v3.18
 =======
 int pevent_unregister_print_function(struct pevent *pevent,
 				     pevent_func_handler func, char *name);
@@ -790,7 +904,10 @@ static inline void pevent_set_long_size(struct pevent *pevent, int long_size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int pevent_get_page_size(struct pevent *pevent)
 {
 	return pevent->page_size;
@@ -801,6 +918,9 @@ static inline void pevent_set_page_size(struct pevent *pevent, int _page_size)
 	pevent->page_size = _page_size;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int pevent_is_file_bigendian(struct pevent *pevent)
 {
@@ -972,6 +1092,11 @@ struct filter_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PEVENT_FILTER_ERROR_BUFSZ  1024
+
+>>>>>>> v3.18
 =======
 #define PEVENT_FILTER_ERROR_BUFSZ  1024
 
@@ -981,6 +1106,10 @@ struct event_filter {
 	int			filters;
 	struct filter_type	*event_filters;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char			error_buffer[PEVENT_FILTER_ERROR_BUFSZ];
+>>>>>>> v3.18
 =======
 	char			error_buffer[PEVENT_FILTER_ERROR_BUFSZ];
 >>>>>>> v3.18
@@ -989,16 +1118,22 @@ struct event_filter {
 struct event_filter *pevent_filter_alloc(struct pevent *pevent);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FILTER_NONE		-2
 #define FILTER_NOEXIST		-1
 #define FILTER_MISS		0
 #define FILTER_MATCH		1
 =======
+=======
+>>>>>>> v3.18
 /* for backward compatibility */
 #define FILTER_NONE		PEVENT_ERRNO__NO_FILTER
 #define FILTER_NOEXIST		PEVENT_ERRNO__FILTER_NOT_FOUND
 #define FILTER_MISS		PEVENT_ERRNO__FILTER_MISS
 #define FILTER_MATCH		PEVENT_ERRNO__FILTER_MATCH
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum filter_trivial_type {
@@ -1008,6 +1143,7 @@ enum filter_trivial_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pevent_filter_add_filter_str(struct event_filter *filter,
 				 const char *filter_str,
 				 char **error_str);
@@ -1016,6 +1152,8 @@ int pevent_filter_add_filter_str(struct event_filter *filter,
 int pevent_filter_match(struct event_filter *filter,
 			struct pevent_record *record);
 =======
+=======
+>>>>>>> v3.18
 enum pevent_errno pevent_filter_add_filter_str(struct event_filter *filter,
 					       const char *filter_str);
 
@@ -1024,6 +1162,9 @@ enum pevent_errno pevent_filter_match(struct event_filter *filter,
 
 int pevent_filter_strerror(struct event_filter *filter, enum pevent_errno err,
 			   char *buf, size_t buflen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int pevent_event_filtered(struct event_filter *filter,
@@ -1032,7 +1173,11 @@ int pevent_event_filtered(struct event_filter *filter,
 void pevent_filter_reset(struct event_filter *filter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pevent_filter_clear_trivial(struct event_filter *filter,
+=======
+int pevent_filter_clear_trivial(struct event_filter *filter,
+>>>>>>> v3.18
 =======
 int pevent_filter_clear_trivial(struct event_filter *filter,
 >>>>>>> v3.18

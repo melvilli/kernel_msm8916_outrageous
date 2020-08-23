@@ -5,6 +5,7 @@
 #include <linux/compiler.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline char *__kernel_strcpy(char *dest, const char *src)
 {
 	char *xdest = dest;
@@ -19,6 +20,8 @@ static inline char *__kernel_strcpy(char *dest, const char *src)
 
 #ifndef __IN_STRING_C
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define __HAVE_ARCH_STRNLEN
@@ -38,6 +41,7 @@ static inline size_t strnlen(const char *s, size_t count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __HAVE_ARCH_STRCPY
 #if __GNUC__ >= 4
 #define strcpy(d, s)	(__builtin_constant_p(s) &&	\
@@ -48,6 +52,8 @@ static inline size_t strnlen(const char *s, size_t count)
 #define strcpy(d, s)	__kernel_strcpy(d, s)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define __HAVE_ARCH_STRNCPY
@@ -68,12 +74,15 @@ static inline char *strncpy(char *dest, const char *src, size_t n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __HAVE_ARCH_STRCAT
 #define strcat(d, s)	({			\
 	char *__d = (d);			\
 	strcpy(__d + strlen(__d), (s));		\
 })
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef CONFIG_COLDFIRE
@@ -110,8 +119,11 @@ extern void *memcpy(void *, const void *, __kernel_size_t);
 #define memcpy(d, s, n) __builtin_memcpy(d, s, n)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _M68K_STRING_H_ */

@@ -17,7 +17,10 @@
 #include <linux/bitops.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>
@@ -211,6 +214,7 @@ sp805_wdt_probe(struct amba_device *adev, const struct amba_id *id)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!devm_request_mem_region(&adev->dev, adev->res.start,
 				resource_size(&adev->res), "sp805_wdt")) {
 		dev_warn(&adev->dev, "Failed to get memory region resource\n");
@@ -225,10 +229,15 @@ sp805_wdt_probe(struct amba_device *adev, const struct amba_id *id)
 	wdt = devm_kzalloc(&adev->dev, sizeof(*wdt), GFP_KERNEL);
 	if (!wdt) {
 >>>>>>> v3.18
+=======
+	wdt = devm_kzalloc(&adev->dev, sizeof(*wdt), GFP_KERNEL);
+	if (!wdt) {
+>>>>>>> v3.18
 		ret = -ENOMEM;
 		goto err;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	wdt->base = devm_ioremap(&adev->dev, adev->res.start,
 			resource_size(&adev->res));
@@ -240,11 +249,16 @@ sp805_wdt_probe(struct amba_device *adev, const struct amba_id *id)
 
 	wdt->clk = clk_get(&adev->dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	wdt->base = devm_ioremap_resource(&adev->dev, &adev->res);
 	if (IS_ERR(wdt->base))
 		return PTR_ERR(wdt->base);
 
 	wdt->clk = devm_clk_get(&adev->dev, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(wdt->clk)) {
 		dev_warn(&adev->dev, "Clock not found\n");
@@ -266,7 +280,11 @@ sp805_wdt_probe(struct amba_device *adev, const struct amba_id *id)
 		dev_err(&adev->dev, "watchdog_register_device() failed: %d\n",
 				ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_register;
+=======
+		goto err;
+>>>>>>> v3.18
 =======
 		goto err;
 >>>>>>> v3.18
@@ -277,8 +295,11 @@ sp805_wdt_probe(struct amba_device *adev, const struct amba_id *id)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_register:
 	clk_put(wdt->clk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err:
@@ -292,9 +313,13 @@ static int sp805_wdt_remove(struct amba_device *adev)
 
 	watchdog_unregister_device(&wdt->wdd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amba_set_drvdata(adev, NULL);
 	watchdog_set_drvdata(&wdt->wdd, NULL);
 	clk_put(wdt->clk);
+=======
+	watchdog_set_drvdata(&wdt->wdd, NULL);
+>>>>>>> v3.18
 =======
 	watchdog_set_drvdata(&wdt->wdd, NULL);
 >>>>>>> v3.18

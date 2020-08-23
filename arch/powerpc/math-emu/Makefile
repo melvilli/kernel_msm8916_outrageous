@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 obj-$(CONFIG_MATH_EMULATION)	+= fabs.o fadd.o fadds.o fcmpo.o fcmpu.o \
 					fctiw.o fctiwz.o fdiv.o fdivs.o \
@@ -11,6 +12,8 @@ obj-$(CONFIG_MATH_EMULATION)	+= fabs.o fadd.o fadds.o fcmpo.o fcmpu.o \
 					mtfsf.o mtfsfi.o stfiwx.o stfs.o \
 					math.o fmr.o lfd.o stfd.o
 =======
+=======
+>>>>>>> v3.18
 math-emu-common-objs = math.o fre.o fsqrt.o fsqrts.o frsqrtes.o mtfsf.o mtfsfi.o
 obj-$(CONFIG_MATH_EMULATION_HW_UNIMPLEMENTED) += $(math-emu-common-objs)
 obj-$(CONFIG_MATH_EMULATION_FULL) += $(math-emu-common-objs) fabs.o fadd.o \
@@ -23,6 +26,9 @@ obj-$(CONFIG_MATH_EMULATION_FULL) += $(math-emu-common-objs) fabs.o fadd.o \
 					fsubs.o  mcrfs.o mffs.o mtfsb0.o \
 					mtfsb1.o stfiwx.o stfs.o math.o \
 					fmr.o lfd.o stfd.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 obj-$(CONFIG_SPE)		+= math_efp.o

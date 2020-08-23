@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #!/bin/bash
+=======
+#!/bin/sh
+>>>>>>> v3.18
 =======
 #!/bin/sh
 >>>>>>> v3.18
@@ -139,12 +143,18 @@ all_kconfigs()
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 all_defconfigs()
 {
 	find_sources $ALLSOURCE_ARCHS "defconfig"
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 docscope()
 {
@@ -157,6 +167,7 @@ dogtags()
 	all_target_sources | gtags -i -f -
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # Basic regular expressions with an optional /kind-spec/ for ctags and
 # the following limitations:
@@ -267,11 +278,16 @@ exuberant()
 	-I __initdata,__exitdata,__initconst,			\
 	-I __initdata_memblock					\
 =======
+=======
+>>>>>>> v3.18
 exuberant()
 {
 	all_target_sources | xargs $1 -a                        \
 	-I __initdata,__exitdata,__initconst,			\
 	-I __cpuinitdata,__initdata_memblock			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	-I __refdata,__attribute,__maybe_unused,__always_unused \
 	-I __acquires,__releases,__deprecated			\
@@ -284,6 +300,7 @@ exuberant()
 	-I DEFINE_TRACE,EXPORT_TRACEPOINT_SYMBOL,EXPORT_TRACEPOINT_SYMBOL_GPL \
 	-I static,const						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	--extra=+fq --c-kinds=+px --fields=+iaS --langmap=c:+.h \
 	"${regex[@]}"
 
@@ -292,6 +309,8 @@ exuberant()
 	--langdef=kconfig --language-force=kconfig "${regex[@]}"
 
 =======
+=======
+>>>>>>> v3.18
 	--extra=+f --c-kinds=+px                                \
 	--regex-asm='/^(ENTRY|_GLOBAL)\(([^)]*)\).*/\2/'        \
 	--regex-c='/^SYSCALL_DEFINE[[:digit:]]?\(([^,)]*).*/sys_\1/' \
@@ -351,11 +370,15 @@ exuberant()
 	all_defconfigs | xargs -r $1 -a                         \
 	--langdef=dotconfig --language-force=dotconfig          \
 	--regex-dotconfig='/^#?[[:blank:]]*(CONFIG_[[:alnum:]_]+)/\1/'
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 emacs()
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	setup_regex emacs asm c
 	all_target_sources | xargs $1 -a "${regex[@]}"
@@ -363,6 +386,8 @@ emacs()
 	setup_regex emacs kconfig
 	all_kconfigs | xargs $1 -a "${regex[@]}"
 =======
+=======
+>>>>>>> v3.18
 	all_target_sources | xargs $1 -a                        \
 	--regex='/^\(ENTRY\|_GLOBAL\)(\([^)]*\)).*/\2/'         \
 	--regex='/^SYSCALL_DEFINE[0-9]?(\([^,)]*\).*/sys_\1/'   \
@@ -406,6 +431,9 @@ emacs()
 
 	all_defconfigs | xargs -r $1 -a                         \
 	--regex='/^#?[ \t]?\(CONFIG_[a-zA-Z0-9_]+\)/\1/'
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -23,7 +23,11 @@
 #include "nodelist.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int jffs2_readdir (struct file *, void *, filldir_t);
+=======
+static int jffs2_readdir (struct file *, struct dir_context *);
+>>>>>>> v3.18
 =======
 static int jffs2_readdir (struct file *, struct dir_context *);
 >>>>>>> v3.18
@@ -45,7 +49,11 @@ const struct file_operations jffs2_dir_operations =
 {
 	.read =		generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir =	jffs2_readdir,
+=======
+	.iterate =	jffs2_readdir,
+>>>>>>> v3.18
 =======
 	.iterate =	jffs2_readdir,
 >>>>>>> v3.18
@@ -68,6 +76,10 @@ const struct inode_operations jffs2_dir_inode_operations =
 	.rename =	jffs2_rename,
 	.get_acl =	jffs2_get_acl,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_acl =	jffs2_set_acl,
+>>>>>>> v3.18
 =======
 	.set_acl =	jffs2_set_acl,
 >>>>>>> v3.18
@@ -127,6 +139,7 @@ static struct dentry *jffs2_lookup(struct inode *dir_i, struct dentry *target,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int jffs2_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct jffs2_inode_info *f;
@@ -165,6 +178,8 @@ static int jffs2_readdir(struct file *filp, void *dirent, filldir_t filldir)
 			jffs2_dbg(2, "Skipping dirent: \"%s\", ino #%u, type %d, because curofs %ld < offset %ld\n",
 				  fd->name, fd->ino, fd->type, curofs, offset);
 =======
+=======
+>>>>>>> v3.18
 static int jffs2_readdir(struct file *file, struct dir_context *ctx)
 {
 	struct inode *inode = file_inode(file);
@@ -184,12 +199,16 @@ static int jffs2_readdir(struct file *file, struct dir_context *ctx)
 		if (curofs < ctx->pos) {
 			jffs2_dbg(2, "Skipping dirent: \"%s\", ino #%u, type %d, because curofs %ld < offset %ld\n",
 				  fd->name, fd->ino, fd->type, curofs, (unsigned long)ctx->pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
 		if (!fd->ino) {
 			jffs2_dbg(2, "Skipping deletion dirent \"%s\"\n",
 				  fd->name);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			offset++;
 			continue;
@@ -204,6 +223,8 @@ static int jffs2_readdir(struct file *file, struct dir_context *ctx)
  out:
 	filp->f_pos = offset;
 =======
+=======
+>>>>>>> v3.18
 			ctx->pos++;
 			continue;
 		}
@@ -214,6 +235,9 @@ static int jffs2_readdir(struct file *file, struct dir_context *ctx)
 		ctx->pos++;
 	}
 	mutex_unlock(&f->sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

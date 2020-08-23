@@ -11,7 +11,10 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mutex.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mfd/core.h>
@@ -64,7 +67,10 @@ static int mc13xxx_i2c_probe(struct i2c_client *client,
 {
 	struct mc13xxx *mc13xxx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mc13xxx_platform_data *pdata = dev_get_platdata(&client->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -76,8 +82,12 @@ static int mc13xxx_i2c_probe(struct i2c_client *client,
 	dev_set_drvdata(&client->dev, mc13xxx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mc13xxx->dev = &client->dev;
 	mutex_init(&mc13xxx->lock);
+=======
+	mc13xxx->irq = client->irq;
+>>>>>>> v3.18
 =======
 	mc13xxx->irq = client->irq;
 >>>>>>> v3.18
@@ -87,9 +97,13 @@ static int mc13xxx_i2c_probe(struct i2c_client *client,
 	if (IS_ERR(mc13xxx->regmap)) {
 		ret = PTR_ERR(mc13xxx->regmap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(mc13xxx->dev, "Failed to initialize register map: %d\n",
 				ret);
 		dev_set_drvdata(&client->dev, NULL);
+=======
+		dev_err(&client->dev, "Failed to initialize regmap: %d\n", ret);
+>>>>>>> v3.18
 =======
 		dev_err(&client->dev, "Failed to initialize regmap: %d\n", ret);
 >>>>>>> v3.18
@@ -105,9 +119,13 @@ static int mc13xxx_i2c_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mc13xxx_common_init(mc13xxx, pdata, client->irq);
 
 	return ret;
+=======
+	return mc13xxx_common_init(&client->dev);
+>>>>>>> v3.18
 =======
 	return mc13xxx_common_init(&client->dev);
 >>>>>>> v3.18
@@ -116,11 +134,15 @@ static int mc13xxx_i2c_probe(struct i2c_client *client,
 static int mc13xxx_i2c_remove(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mc13xxx *mc13xxx = dev_get_drvdata(&client->dev);
 
 	mc13xxx_common_cleanup(mc13xxx);
 
 	return 0;
+=======
+	return mc13xxx_common_exit(&client->dev);
+>>>>>>> v3.18
 =======
 	return mc13xxx_common_exit(&client->dev);
 >>>>>>> v3.18

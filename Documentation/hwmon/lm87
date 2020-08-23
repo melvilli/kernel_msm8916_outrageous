@@ -18,7 +18,11 @@ Authors:
         Stephen Rousset <stephen.rousset@rocketlogix.com>,
         Dan Eaton <dan.eaton@rocketlogix.com>,
 <<<<<<< HEAD
+<<<<<<< HEAD
         Jean Delvare <khali@linux-fr.org>,
+=======
+        Jean Delvare <jdelvare@suse.de>,
+>>>>>>> v3.18
 =======
         Jean Delvare <jdelvare@suse.de>,
 >>>>>>> v3.18

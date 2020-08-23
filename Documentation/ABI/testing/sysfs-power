@@ -1,7 +1,11 @@
 What:		/sys/power/
 Date:		August 2006
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Rafael J. Wysocki <rjw@sisk.pl>
+=======
+Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
+>>>>>>> v3.18
 =======
 Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
 >>>>>>> v3.18
@@ -11,6 +15,7 @@ Description:
 		subsystem.
 
 What:		/sys/power/state
+<<<<<<< HEAD
 <<<<<<< HEAD
 Date:		August 2006
 Contact:	Rafael J. Wysocki <rjw@sisk.pl>
@@ -29,6 +34,8 @@ What:		/sys/power/disk
 Date:		September 2006
 Contact:	Rafael J. Wysocki <rjw@sisk.pl>
 =======
+=======
+>>>>>>> v3.18
 Date:		May 2014
 Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
 Description:
@@ -57,6 +64,9 @@ Description:
 What:		/sys/power/disk
 Date:		September 2006
 Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Description:
 		The /sys/power/disk file controls the operating mode of the
@@ -103,7 +113,11 @@ Description:
 What:		/sys/power/image_size
 Date:		August 2006
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Rafael J. Wysocki <rjw@sisk.pl>
+=======
+Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
+>>>>>>> v3.18
 =======
 Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
 >>>>>>> v3.18
@@ -124,7 +138,11 @@ Description:
 What:		/sys/power/pm_trace
 Date:		August 2006
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Rafael J. Wysocki <rjw@sisk.pl>
+=======
+Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
+>>>>>>> v3.18
 =======
 Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
 >>>>>>> v3.18
@@ -177,7 +195,11 @@ Description:
 What:		/sys/power/pm_async
 Date:		January 2009
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Rafael J. Wysocki <rjw@sisk.pl>
+=======
+Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
+>>>>>>> v3.18
 =======
 Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
 >>>>>>> v3.18
@@ -194,7 +216,11 @@ Description:
 What:		/sys/power/wakeup_count
 Date:		July 2010
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Rafael J. Wysocki <rjw@sisk.pl>
+=======
+Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
+>>>>>>> v3.18
 =======
 Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
 >>>>>>> v3.18
@@ -213,7 +239,11 @@ Description:
 What:		/sys/power/reserved_size
 Date:		May 2011
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Rafael J. Wysocki <rjw@sisk.pl>
+=======
+Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
+>>>>>>> v3.18
 =======
 Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
 >>>>>>> v3.18
@@ -231,7 +261,11 @@ Description:
 What:		/sys/power/autosleep
 Date:		April 2012
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Rafael J. Wysocki <rjw@sisk.pl>
+=======
+Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
+>>>>>>> v3.18
 =======
 Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
 >>>>>>> v3.18
@@ -252,7 +286,11 @@ Description:
 What:		/sys/power/wake_lock
 Date:		February 2012
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Rafael J. Wysocki <rjw@sisk.pl>
+=======
+Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
+>>>>>>> v3.18
 =======
 Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
 >>>>>>> v3.18
@@ -283,7 +321,11 @@ Description:
 What:		/sys/power/wake_unlock
 Date:		February 2012
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Rafael J. Wysocki <rjw@sisk.pl>
+=======
+Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
+>>>>>>> v3.18
 =======
 Contact:	Rafael J. Wysocki <rjw@rjwysocki.net>
 >>>>>>> v3.18

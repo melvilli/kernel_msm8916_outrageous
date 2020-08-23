@@ -1,6 +1,11 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2007-2009 Michal Simek <monstr@monstr.eu>
+=======
+ * Copyright (C) 2007-2013 Michal Simek <monstr@monstr.eu>
+ * Copyright (C) 2012-2013 Xilinx, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2007-2013 Michal Simek <monstr@monstr.eu>
  * Copyright (C) 2012-2013 Xilinx, Inc.
@@ -13,6 +18,7 @@
  * for more details.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/kernel.h>
@@ -43,6 +49,8 @@ static unsigned int timer_baseaddr;
 #define TIMER_BASE	timer_baseaddr
 #endif
 =======
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/delay.h>
 #include <linux/sched.h>
@@ -54,6 +62,9 @@ static unsigned int timer_baseaddr;
 #include <asm/cpuinfo.h>
 
 static void __iomem *timer_baseaddr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static unsigned int freq_div_hz;
@@ -79,6 +90,7 @@ static unsigned int timer_clock_freq;
 #define TCSR_ENALL	(1<<10)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void microblaze_timer0_stop(void)
 {
 	out_be32(TIMER_BASE + TCSR0, in_be32(TIMER_BASE + TCSR0) & ~TCSR_ENT);
@@ -93,6 +105,8 @@ static inline void microblaze_timer0_start_periodic(unsigned long load_val)
 	/* load the initial value */
 	out_be32(TIMER_BASE + TCSR0, TCSR_LOAD);
 =======
+=======
+>>>>>>> v3.18
 static unsigned int (*read_fn)(void __iomem *);
 static void (*write_fn)(u32, void __iomem *);
 
@@ -131,6 +145,9 @@ static inline void xilinx_timer0_start_periodic(unsigned long load_val)
 
 	/* load the initial value */
 	write_fn(TCSR_LOAD, timer_baseaddr + TCSR0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* see timer data sheet for detail
@@ -146,6 +163,7 @@ static inline void xilinx_timer0_start_periodic(unsigned long load_val)
 	 * UDT - set the timer as down counter
 	 * !MDT0 - generate mode
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	out_be32(TIMER_BASE + TCSR0,
 			TCSR_TINT|TCSR_ENIT|TCSR_ENT|TCSR_ARHT|TCSR_UDT);
@@ -174,6 +192,8 @@ static int microblaze_timer_set_next_event(unsigned long delta,
 
 static void microblaze_timer_set_mode(enum clock_event_mode mode,
 =======
+=======
+>>>>>>> v3.18
 	write_fn(TCSR_TINT|TCSR_ENIT|TCSR_ENT|TCSR_ARHT|TCSR_UDT,
 		 timer_baseaddr + TCSR0);
 }
@@ -201,6 +221,9 @@ static int xilinx_timer_set_next_event(unsigned long delta,
 }
 
 static void xilinx_timer_set_mode(enum clock_event_mode mode,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				struct clock_event_device *evt)
 {
@@ -208,7 +231,11 @@ static void xilinx_timer_set_mode(enum clock_event_mode mode,
 	case CLOCK_EVT_MODE_PERIODIC:
 		pr_info("%s: periodic\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		microblaze_timer0_start_periodic(freq_div_hz);
+=======
+		xilinx_timer0_start_periodic(freq_div_hz);
+>>>>>>> v3.18
 =======
 		xilinx_timer0_start_periodic(freq_div_hz);
 >>>>>>> v3.18
@@ -222,7 +249,11 @@ static void xilinx_timer_set_mode(enum clock_event_mode mode,
 	case CLOCK_EVT_MODE_SHUTDOWN:
 		pr_info("%s: shutdown\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		microblaze_timer0_stop();
+=======
+		xilinx_timer0_stop();
+>>>>>>> v3.18
 =======
 		xilinx_timer0_stop();
 >>>>>>> v3.18
@@ -234,6 +265,7 @@ static void xilinx_timer_set_mode(enum clock_event_mode mode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct clock_event_device clockevent_microblaze_timer = {
 	.name		= "microblaze_clockevent",
 	.features       = CLOCK_EVT_FEAT_ONESHOT | CLOCK_EVT_FEAT_PERIODIC,
@@ -242,6 +274,8 @@ static struct clock_event_device clockevent_microblaze_timer = {
 	.set_next_event	= microblaze_timer_set_next_event,
 	.set_mode	= microblaze_timer_set_mode,
 =======
+=======
+>>>>>>> v3.18
 static struct clock_event_device clockevent_xilinx_timer = {
 	.name		= "xilinx_clockevent",
 	.features       = CLOCK_EVT_FEAT_ONESHOT | CLOCK_EVT_FEAT_PERIODIC,
@@ -249,13 +283,20 @@ static struct clock_event_device clockevent_xilinx_timer = {
 	.rating		= 300,
 	.set_next_event	= xilinx_timer_set_next_event,
 	.set_mode	= xilinx_timer_set_mode,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static inline void timer_ack(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out_be32(TIMER_BASE + TCSR0, in_be32(TIMER_BASE + TCSR0));
+=======
+	write_fn(read_fn(timer_baseaddr + TCSR0), timer_baseaddr + TCSR0);
+>>>>>>> v3.18
 =======
 	write_fn(read_fn(timer_baseaddr + TCSR0), timer_baseaddr + TCSR0);
 >>>>>>> v3.18
@@ -264,9 +305,15 @@ static inline void timer_ack(void)
 static irqreturn_t timer_interrupt(int irq, void *dev_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clock_event_device *evt = &clockevent_microblaze_timer;
 #ifdef CONFIG_HEART_BEAT
 	heartbeat();
+=======
+	struct clock_event_device *evt = &clockevent_xilinx_timer;
+#ifdef CONFIG_HEART_BEAT
+	microblaze_heartbeat();
+>>>>>>> v3.18
 =======
 	struct clock_event_device *evt = &clockevent_xilinx_timer;
 #ifdef CONFIG_HEART_BEAT
@@ -280,6 +327,7 @@ static irqreturn_t timer_interrupt(int irq, void *dev_id)
 
 static struct irqaction timer_irqaction = {
 	.handler = timer_interrupt,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.flags = IRQF_DISABLED | IRQF_TIMER,
 	.name = "timer",
@@ -317,6 +365,8 @@ static cycle_t microblaze_cc_read(const struct cyclecounter *cc)
 static struct cyclecounter microblaze_cc = {
 	.read = microblaze_cc_read,
 =======
+=======
+>>>>>>> v3.18
 	.flags = IRQF_TIMER,
 	.name = "timer",
 	.dev_id = &clockevent_xilinx_timer,
@@ -357,11 +407,15 @@ static cycle_t xilinx_cc_read(const struct cyclecounter *cc)
 
 static struct cyclecounter xilinx_cc = {
 	.read = xilinx_cc_read,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.mask = CLOCKSOURCE_MASK(32),
 	.shift = 8,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init init_microblaze_timecounter(void)
 {
@@ -370,12 +424,17 @@ static int __init init_microblaze_timecounter(void)
 
 	timecounter_init(&microblaze_tc, &microblaze_cc, sched_clock());
 =======
+=======
+>>>>>>> v3.18
 static int __init init_xilinx_timecounter(void)
 {
 	xilinx_cc.mult = div_sc(timer_clock_freq, NSEC_PER_SEC,
 				xilinx_cc.shift);
 
 	timecounter_init(&xilinx_tc, &xilinx_cc, sched_clock());
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -383,9 +442,15 @@ static int __init init_xilinx_timecounter(void)
 
 static struct clocksource clocksource_microblaze = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "microblaze_clocksource",
 	.rating		= 300,
 	.read		= microblaze_read,
+=======
+	.name		= "xilinx_clocksource",
+	.rating		= 300,
+	.read		= xilinx_read,
+>>>>>>> v3.18
 =======
 	.name		= "xilinx_clocksource",
 	.rating		= 300,
@@ -396,7 +461,11 @@ static struct clocksource clocksource_microblaze = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init microblaze_clocksource_init(void)
+=======
+static int __init xilinx_clocksource_init(void)
+>>>>>>> v3.18
 =======
 static int __init xilinx_clocksource_init(void)
 >>>>>>> v3.18
@@ -405,6 +474,7 @@ static int __init xilinx_clocksource_init(void)
 		panic("failed to register clocksource");
 
 	/* stop timer1 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	out_be32(TIMER_BASE + TCSR1, in_be32(TIMER_BASE + TCSR1) & ~TCSR_ENT);
 	/* start timer1 - up counting without interrupt */
@@ -472,6 +542,8 @@ void __init time_init(void)
 	else
 		timer_clock_freq = cpuinfo.cpu_clock_freq;
 =======
+=======
+>>>>>>> v3.18
 	write_fn(read_fn(timer_baseaddr + TCSR1) & ~TCSR_ENT,
 		 timer_baseaddr + TCSR1);
 	/* start timer1 - up counting without interrupt */
@@ -533,12 +605,16 @@ static void __init xilinx_timer_init(struct device_node *timer)
 		pr_err("ERROR: Using CPU clock frequency\n");
 		timer_clock_freq = cpuinfo.cpu_clock_freq;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	freq_div_hz = timer_clock_freq / HZ;
 
 	setup_irq(irq, &timer_irqaction);
 #ifdef CONFIG_HEART_BEAT
+<<<<<<< HEAD
 <<<<<<< HEAD
 	setup_heartbeat();
 #endif
@@ -558,6 +634,8 @@ unsigned long long notrace sched_clock(void)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	microblaze_setup_heartbeat();
 #endif
 	xilinx_clocksource_init();
@@ -568,4 +646,7 @@ unsigned long long notrace sched_clock(void)
 
 CLOCKSOURCE_OF_DECLARE(xilinx_timer, "xlnx,xps-timer-1.00.a",
 		       xilinx_timer_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

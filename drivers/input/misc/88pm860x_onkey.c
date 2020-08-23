@@ -27,6 +27,10 @@
 #include <linux/mfd/88pm860x.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -73,7 +77,12 @@ static int pm860x_onkey_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = kzalloc(sizeof(struct pm860x_onkey_info), GFP_KERNEL);
+=======
+	info = devm_kzalloc(&pdev->dev, sizeof(struct pm860x_onkey_info),
+			    GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	info = devm_kzalloc(&pdev->dev, sizeof(struct pm860x_onkey_info),
 			    GFP_KERNEL);
@@ -86,16 +95,22 @@ static int pm860x_onkey_probe(struct platform_device *pdev)
 	info->irq = irq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->idev = input_allocate_device();
 	if (!info->idev) {
 		dev_err(chip->dev, "Failed to allocate input dev\n");
 		ret = -ENOMEM;
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	info->idev = devm_input_allocate_device(&pdev->dev);
 	if (!info->idev) {
 		dev_err(chip->dev, "Failed to allocate input dev\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -110,6 +125,7 @@ static int pm860x_onkey_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(chip->dev, "Can't register input device: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_reg;
 	}
 
@@ -120,6 +136,8 @@ static int pm860x_onkey_probe(struct platform_device *pdev)
 			info->irq, ret);
 		goto out_irq;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -130,6 +148,9 @@ static int pm860x_onkey_probe(struct platform_device *pdev)
 		dev_err(chip->dev, "Failed to request IRQ: #%d: %d\n",
 			info->irq, ret);
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -137,6 +158,7 @@ static int pm860x_onkey_probe(struct platform_device *pdev)
 	device_init_wakeup(&pdev->dev, 1);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 out_irq:
@@ -159,6 +181,8 @@ static int pm860x_onkey_remove(struct platform_device *pdev)
 	input_unregister_device(info->idev);
 	kfree(info);
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -194,7 +218,10 @@ static struct platform_driver pm860x_onkey_driver = {
 	},
 	.probe		= pm860x_onkey_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= pm860x_onkey_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

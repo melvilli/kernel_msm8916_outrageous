@@ -59,7 +59,11 @@ static int snd_pmac_probe(struct platform_device *devptr)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index, id, THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&devptr->dev, index, id, THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&devptr->dev, index, id, THIS_MODULE, 0, &card);
 >>>>>>> v3.18
@@ -127,8 +131,11 @@ static int snd_pmac_probe(struct platform_device *devptr)
 		snd_pmac_attach_beep(chip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &devptr->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((err = snd_card_register(card)) < 0)
@@ -147,7 +154,10 @@ static int snd_pmac_remove(struct platform_device *devptr)
 {
 	snd_card_free(platform_get_drvdata(devptr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

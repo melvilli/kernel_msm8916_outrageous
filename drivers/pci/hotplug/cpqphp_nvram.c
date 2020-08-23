@@ -35,7 +35,10 @@
 #include <linux/pci.h>
 #include <linux/pci_hotplug.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/uaccess.h>
@@ -112,7 +115,11 @@ static spinlock_t int15_lock;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 add_byte( u32 **p_buffer, u8 value, u32 *used, u32 *avail)
+=======
+static u32 add_byte(u32 **p_buffer, u8 value, u32 *used, u32 *avail)
+>>>>>>> v3.18
 =======
 static u32 add_byte(u32 **p_buffer, u8 value, u32 *used, u32 *avail)
 >>>>>>> v3.18
@@ -131,7 +138,11 @@ static u32 add_byte(u32 **p_buffer, u8 value, u32 *used, u32 *avail)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 add_dword( u32 **p_buffer, u32 value, u32 *used, u32 *avail)
+=======
+static u32 add_dword(u32 **p_buffer, u32 value, u32 *used, u32 *avail)
+>>>>>>> v3.18
 =======
 static u32 add_dword(u32 **p_buffer, u32 value, u32 *used, u32 *avail)
 >>>>>>> v3.18
@@ -217,9 +228,14 @@ static int load_HRT (void __iomem *rom_start)
 	u32 rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!check_for_compaq_ROM(rom_start)) {
 		return -ENODEV;
 	}
+=======
+	if (!check_for_compaq_ROM(rom_start))
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 	if (!check_for_compaq_ROM(rom_start))
 		return -ENODEV;
@@ -268,9 +284,14 @@ static u32 store_HRT (void __iomem *rom_start)
 	available = 1024;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!check_for_compaq_ROM(rom_start)) {
 		return(1);
 	}
+=======
+	if (!check_for_compaq_ROM(rom_start))
+		return(1);
+>>>>>>> v3.18
 =======
 	if (!check_for_compaq_ROM(rom_start))
 		return(1);
@@ -290,7 +311,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 	/* The revision of this structure */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = add_byte( &pFill, 1 + ctrl->push_flag, &usedbytes, &available);
+=======
+	rc = add_byte(&pFill, 1 + ctrl->push_flag, &usedbytes, &available);
+>>>>>>> v3.18
 =======
 	rc = add_byte(&pFill, 1 + ctrl->push_flag, &usedbytes, &available);
 >>>>>>> v3.18
@@ -299,7 +324,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 	/* The number of controllers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = add_byte( &pFill, 1, &usedbytes, &available);
+=======
+	rc = add_byte(&pFill, 1, &usedbytes, &available);
+>>>>>>> v3.18
 =======
 	rc = add_byte(&pFill, 1, &usedbytes, &available);
 >>>>>>> v3.18
@@ -313,7 +342,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 		/* The bus number */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = add_byte( &pFill, ctrl->bus, &usedbytes, &available);
+=======
+		rc = add_byte(&pFill, ctrl->bus, &usedbytes, &available);
+>>>>>>> v3.18
 =======
 		rc = add_byte(&pFill, ctrl->bus, &usedbytes, &available);
 >>>>>>> v3.18
@@ -322,7 +355,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 		/* The device Number */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = add_byte( &pFill, PCI_SLOT(ctrl->pci_dev->devfn), &usedbytes, &available);
+=======
+		rc = add_byte(&pFill, PCI_SLOT(ctrl->pci_dev->devfn), &usedbytes, &available);
+>>>>>>> v3.18
 =======
 		rc = add_byte(&pFill, PCI_SLOT(ctrl->pci_dev->devfn), &usedbytes, &available);
 >>>>>>> v3.18
@@ -331,7 +368,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 		/* The function Number */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = add_byte( &pFill, PCI_FUNC(ctrl->pci_dev->devfn), &usedbytes, &available);
+=======
+		rc = add_byte(&pFill, PCI_FUNC(ctrl->pci_dev->devfn), &usedbytes, &available);
+>>>>>>> v3.18
 =======
 		rc = add_byte(&pFill, PCI_FUNC(ctrl->pci_dev->devfn), &usedbytes, &available);
 >>>>>>> v3.18
@@ -340,7 +381,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 		/* Skip the number of available entries */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = add_dword( &pFill, 0, &usedbytes, &available);
+=======
+		rc = add_dword(&pFill, 0, &usedbytes, &available);
+>>>>>>> v3.18
 =======
 		rc = add_dword(&pFill, 0, &usedbytes, &available);
 >>>>>>> v3.18
@@ -358,7 +403,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 			/* base */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = add_dword( &pFill, resNode->base, &usedbytes, &available);
+=======
+			rc = add_dword(&pFill, resNode->base, &usedbytes, &available);
+>>>>>>> v3.18
 =======
 			rc = add_dword(&pFill, resNode->base, &usedbytes, &available);
 >>>>>>> v3.18
@@ -367,7 +416,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 			/* length */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = add_dword( &pFill, resNode->length, &usedbytes, &available);
+=======
+			rc = add_dword(&pFill, resNode->length, &usedbytes, &available);
+>>>>>>> v3.18
 =======
 			rc = add_dword(&pFill, resNode->length, &usedbytes, &available);
 >>>>>>> v3.18
@@ -391,7 +444,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 			/* base */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = add_dword( &pFill, resNode->base, &usedbytes, &available);
+=======
+			rc = add_dword(&pFill, resNode->base, &usedbytes, &available);
+>>>>>>> v3.18
 =======
 			rc = add_dword(&pFill, resNode->base, &usedbytes, &available);
 >>>>>>> v3.18
@@ -400,7 +457,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 			/* length */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = add_dword( &pFill, resNode->length, &usedbytes, &available);
+=======
+			rc = add_dword(&pFill, resNode->length, &usedbytes, &available);
+>>>>>>> v3.18
 =======
 			rc = add_dword(&pFill, resNode->length, &usedbytes, &available);
 >>>>>>> v3.18
@@ -424,7 +485,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 			/* base */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = add_dword( &pFill, resNode->base, &usedbytes, &available);
+=======
+			rc = add_dword(&pFill, resNode->base, &usedbytes, &available);
+>>>>>>> v3.18
 =======
 			rc = add_dword(&pFill, resNode->base, &usedbytes, &available);
 >>>>>>> v3.18
@@ -433,7 +498,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 			/* length */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = add_dword( &pFill, resNode->length, &usedbytes, &available);
+=======
+			rc = add_dword(&pFill, resNode->length, &usedbytes, &available);
+>>>>>>> v3.18
 =======
 			rc = add_dword(&pFill, resNode->length, &usedbytes, &available);
 >>>>>>> v3.18
@@ -457,7 +526,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 			/* base */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = add_dword( &pFill, resNode->base, &usedbytes, &available);
+=======
+			rc = add_dword(&pFill, resNode->base, &usedbytes, &available);
+>>>>>>> v3.18
 =======
 			rc = add_dword(&pFill, resNode->base, &usedbytes, &available);
 >>>>>>> v3.18
@@ -466,7 +539,11 @@ static u32 store_HRT (void __iomem *rom_start)
 
 			/* length */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = add_dword( &pFill, resNode->length, &usedbytes, &available);
+=======
+			rc = add_dword(&pFill, resNode->length, &usedbytes, &available);
+>>>>>>> v3.18
 =======
 			rc = add_dword(&pFill, resNode->length, &usedbytes, &available);
 >>>>>>> v3.18
@@ -506,9 +583,15 @@ static u32 store_HRT (void __iomem *rom_start)
 void compaq_nvram_init (void __iomem *rom_start)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rom_start) {
 		compaq_int15_entry_point = (rom_start + ROM_INT15_PHY_ADDR - ROM_PHY_ADDR);
 	}
+=======
+	if (rom_start)
+		compaq_int15_entry_point = (rom_start + ROM_INT15_PHY_ADDR - ROM_PHY_ADDR);
+
+>>>>>>> v3.18
 =======
 	if (rom_start)
 		compaq_int15_entry_point = (rom_start + ROM_INT15_PHY_ADDR - ROM_PHY_ADDR);
@@ -746,9 +829,14 @@ int compaq_nvram_store (void __iomem *rom_start)
 	if (evbuffer_init) {
 		rc = store_HRT(rom_start);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rc) {
 			err(msg_unable_to_save);
 		}
+=======
+		if (rc)
+			err(msg_unable_to_save);
+>>>>>>> v3.18
 =======
 		if (rc)
 			err(msg_unable_to_save);

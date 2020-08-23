@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2003 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2003 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -57,8 +61,11 @@
 #include "tt.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "iwl-test.h"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* CT-KILL constants */
@@ -280,7 +287,11 @@ struct iwl_sensitivity_ranges {
  *
  ****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void iwl_update_chain_flags(struct iwl_priv *priv);
+=======
+void iwl_update_chain_flags(struct iwl_priv *priv);
+>>>>>>> v3.18
 =======
 void iwl_update_chain_flags(struct iwl_priv *priv);
 >>>>>>> v3.18
@@ -554,7 +565,10 @@ enum iwl_scan_type {
 	IWL_SCAN_NORMAL,
 	IWL_SCAN_RADIO_RESET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IWL_SCAN_ROC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -583,6 +597,7 @@ struct iwl_hw_params {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iwl_lib_ops {
 	/* set hw dependent parameters */
 	void (*set_hw_params)(struct iwl_priv *priv);
@@ -594,6 +609,8 @@ struct iwl_lib_ops {
 	/* temperature */
 	void (*temperature)(struct iwl_priv *priv);
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct iwl_dvm_bt_params - DVM specific BT (coex) parameters
  * @advanced_bt_coexist: support advanced bt coexist
@@ -649,6 +666,9 @@ struct iwl_dvm_cfg {
 	bool no_xtal_calib;
 	bool temp_offset_v2;
 	bool adv_pm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -683,7 +703,11 @@ struct iwl_priv {
 	const struct iwl_cfg *cfg;
 	const struct iwl_fw *fw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct iwl_lib_ops *lib;
+=======
+	const struct iwl_dvm_cfg *lib;
+>>>>>>> v3.18
 =======
 	const struct iwl_dvm_cfg *lib;
 >>>>>>> v3.18
@@ -723,10 +747,13 @@ struct iwl_priv {
 	u8 measurement_status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IWL_OWNERSHIP_DRIVER	0
 #define IWL_OWNERSHIP_TM	1
 	u8 ucode_owner;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* ucode beacon time */
@@ -750,6 +777,10 @@ struct iwl_priv {
 	int reload_count;
 	bool ucode_loaded;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool init_ucode_run;		/* Don't run init uCode again */
+>>>>>>> v3.18
 =======
 	bool init_ucode_run;		/* Don't run init uCode again */
 >>>>>>> v3.18
@@ -869,12 +900,15 @@ struct iwl_priv {
 	struct reply_agg_tx_error_statistics reply_agg_tx_stats;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* remain-on-channel offload support */
 	struct ieee80211_channel *hw_roc_channel;
 	struct delayed_work hw_roc_disable_work;
 	int hw_roc_duration;
 	bool hw_roc_setup, hw_roc_start_notified;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* bt coex */
@@ -930,7 +964,11 @@ struct iwl_priv {
 
 	struct iwl_nvm_data *nvm_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* eeprom blob for debugfs/testmode */
+=======
+	/* eeprom blob for debugfs */
+>>>>>>> v3.18
 =======
 	/* eeprom blob for debugfs */
 >>>>>>> v3.18
@@ -946,6 +984,7 @@ struct iwl_priv {
 	struct iwl_event_log event_log;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct led_classdev led;
 	unsigned long blink_on, blink_off;
 	bool led_registered;
@@ -954,10 +993,15 @@ struct iwl_priv {
 	struct iwl_test tst;
 	u32 tm_fixed_rate;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IWLWIFI_LEDS
 	struct led_classdev led;
 	unsigned long blink_on, blink_off;
 	bool led_registered;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -967,6 +1011,12 @@ struct iwl_priv {
 	__le16 last_seq_ctl;
 	bool have_rekey_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_SLEEP
+	struct wiphy_wowlan_support wowlan_support;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 	struct wiphy_wowlan_support wowlan_support;

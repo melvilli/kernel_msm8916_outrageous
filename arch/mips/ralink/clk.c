@@ -27,7 +27,11 @@ void ralink_clk_add(const char *dev, unsigned long rate)
 
 	if (!clk)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		panic("failed to add clock\n");
+=======
+		panic("failed to add clock");
+>>>>>>> v3.18
 =======
 		panic("failed to add clock");
 >>>>>>> v3.18
@@ -74,6 +78,10 @@ void __init plat_time_init(void)
 	mips_hpt_frequency = clk_get_rate(clk) / 2;
 	clk_put(clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clocksource_of_init();
+>>>>>>> v3.18
 =======
 	clocksource_of_init();
 >>>>>>> v3.18

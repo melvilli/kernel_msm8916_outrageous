@@ -193,7 +193,11 @@ void __init early_sn_setup(void)
 
 extern int platform_intr_list[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinitdata shub_1_1_found;
+=======
+static int shub_1_1_found;
+>>>>>>> v3.18
 =======
 static int shub_1_1_found;
 >>>>>>> v3.18
@@ -205,7 +209,11 @@ static int shub_1_1_found;
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __cpuinit is_shub_1_1(int nasid)
+=======
+static inline int is_shub_1_1(int nasid)
+>>>>>>> v3.18
 =======
 static inline int is_shub_1_1(int nasid)
 >>>>>>> v3.18
@@ -221,7 +229,11 @@ static inline int is_shub_1_1(int nasid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit sn_check_for_wars(void)
+=======
+static void sn_check_for_wars(void)
+>>>>>>> v3.18
 =======
 static void sn_check_for_wars(void)
 >>>>>>> v3.18
@@ -571,7 +583,11 @@ static void __init sn_init_pdas(char **cmdline_p)
  * platform_cpu_init() by the ia64 machvec code.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit sn_cpu_init(void)
+=======
+void sn_cpu_init(void)
+>>>>>>> v3.18
 =======
 void sn_cpu_init(void)
 >>>>>>> v3.18
@@ -596,7 +612,11 @@ void sn_cpu_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(pda, 0, sizeof(pda));
+=======
+	memset(pda, 0, sizeof(*pda));
+>>>>>>> v3.18
 =======
 	memset(pda, 0, sizeof(*pda));
 >>>>>>> v3.18
@@ -650,7 +670,11 @@ void sn_cpu_init(void)
 	cnode = nasid_to_cnodeid(nasid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sn_nodepda = nodepdaindr[cnode];
+=======
+	__this_cpu_write(__sn_nodepda, nodepdaindr[cnode]);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(__sn_nodepda, nodepdaindr[cnode]);
 >>>>>>> v3.18

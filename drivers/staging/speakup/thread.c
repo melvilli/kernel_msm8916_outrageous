@@ -22,8 +22,14 @@ int speakup_thread(void *data)
 	while (1) {
 		DEFINE_WAIT(wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (1) {
 			spk_lock(flags);
+=======
+
+		while (1) {
+			spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 
 		while (1) {
@@ -39,7 +45,11 @@ int speakup_thread(void *data)
 					(speakup_info.flushing ||
 					!synth_buffer_empty()));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spk_unlock(flags);
+=======
+			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 			spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18

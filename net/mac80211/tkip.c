@@ -187,7 +187,11 @@ EXPORT_SYMBOL(ieee80211_get_tkip_p1k_iv);
 
 void ieee80211_get_tkip_rx_p1k(struct ieee80211_key_conf *keyconf,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                const u8 *ta, u32 iv32, u16 *p1k)
+=======
+			       const u8 *ta, u32 iv32, u16 *p1k)
+>>>>>>> v3.18
 =======
 			       const u8 *ta, u32 iv32, u16 *p1k)
 >>>>>>> v3.18

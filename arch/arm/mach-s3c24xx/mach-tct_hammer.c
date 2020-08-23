@@ -34,6 +34,10 @@
 #include <linux/platform_device.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -49,7 +53,10 @@
 #include <asm/mach-types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_data/i2c-s3c2410.h>
@@ -143,7 +150,10 @@ static void __init tct_hammer_map_io(void)
 {
 	s3c24xx_init_io(tct_hammer_iodesc, ARRAY_SIZE(tct_hammer_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s3c24xx_init_uarts(tct_hammer_uartcfgs, ARRAY_SIZE(tct_hammer_uartcfgs));
@@ -151,13 +161,19 @@ static void __init tct_hammer_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init tct_hammer_init_time(void)
 {
 	s3c2410_init_clocks(12000000);
 	samsung_timer_init();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init tct_hammer_init(void)
 {
@@ -171,8 +187,12 @@ MACHINE_START(TCT_HAMMER, "TCT_HAMMER")
 	.init_irq	= s3c2410_init_irq,
 	.init_machine	= tct_hammer_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= samsung_timer_init,
 	.restart	= s3c2410_restart,
+=======
+	.init_time	= tct_hammer_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= tct_hammer_init_time,
 >>>>>>> v3.18

@@ -1,7 +1,12 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2006-2010 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2006-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2006-2013 Solarflare Communications Inc.
@@ -21,7 +26,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EFX_WORKAROUND_ALWAYS(efx) 1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EFX_WORKAROUND_FALCON_A(efx) (efx_nic_rev(efx) <= EFX_REV_FALCON_A1)
@@ -29,6 +37,7 @@
 #define EFX_WORKAROUND_SIENA(efx) (efx_nic_rev(efx) == EFX_REV_SIENA_A0)
 #define EFX_WORKAROUND_10G(efx) 1
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* XAUI resets if link not detected */
 #define EFX_WORKAROUND_5147 EFX_WORKAROUND_ALWAYS
@@ -45,6 +54,12 @@
 #define EFX_WORKAROUND_15592 EFX_WORKAROUND_FALCON_AB
 /* Legacy ISR read can return zero once */
 #define EFX_WORKAROUND_15783 EFX_WORKAROUND_ALWAYS
+=======
+/* Bit-bashed I2C reads cause performance drop */
+#define EFX_WORKAROUND_7884 EFX_WORKAROUND_10G
+/* Truncated IPv4 packets can confuse the TX packet parser */
+#define EFX_WORKAROUND_15592 EFX_WORKAROUND_FALCON_AB
+>>>>>>> v3.18
 =======
 /* Bit-bashed I2C reads cause performance drop */
 #define EFX_WORKAROUND_7884 EFX_WORKAROUND_10G
@@ -72,12 +87,18 @@
 #define EFX_WORKAROUND_8071 EFX_WORKAROUND_FALCON_A
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Lockup when writing event block registers at gen2/gen3 */
 #define EFX_EF10_WORKAROUND_35388(efx)					\
 	(((struct efx_ef10_nic_data *)efx->nic_data)->workaround_35388)
 #define EFX_WORKAROUND_35388(efx)					\
 	(efx_nic_rev(efx) == EFX_REV_HUNT_A0 && EFX_EF10_WORKAROUND_35388(efx))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* EFX_WORKAROUNDS_H */

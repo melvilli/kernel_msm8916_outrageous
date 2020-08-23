@@ -13,14 +13,20 @@
 #include <linux/smp.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_fdt.h>
 #include <linux/vexpress.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_address.h>
 #include <linux/vexpress.h>
 
 #include <asm/mcpm.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/smp_scu.h>
 #include <asm/mach/map.h>
@@ -31,6 +37,7 @@
 
 #include "core.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_OF)
 
@@ -171,6 +178,8 @@ void __init vexpress_dt_smp_prepare_cpus(unsigned int max_cpus)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Initialise the CPU possible map early - this describes the CPUs
  * which may be present or become present in the system.
@@ -178,11 +187,15 @@ void __init vexpress_dt_smp_prepare_cpus(unsigned int max_cpus)
 static void __init vexpress_smp_init_cpus(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ct_desc)
 		ct_desc->init_cpu_map();
 	else
 		vexpress_dt_smp_init_cpus();
 
+=======
+	ct_desc->init_cpu_map();
+>>>>>>> v3.18
 =======
 	ct_desc->init_cpu_map();
 >>>>>>> v3.18
@@ -195,10 +208,14 @@ static void __init vexpress_smp_prepare_cpus(unsigned int max_cpus)
 	 * actually populated at the present time.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ct_desc)
 		ct_desc->smp_enable(max_cpus);
 	else
 		vexpress_dt_smp_prepare_cpus(max_cpus);
+=======
+	ct_desc->smp_enable(max_cpus);
+>>>>>>> v3.18
 =======
 	ct_desc->smp_enable(max_cpus);
 >>>>>>> v3.18
@@ -222,7 +239,10 @@ struct smp_operations __initdata vexpress_smp_ops = {
 #endif
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 bool __init vexpress_smp_init_ops(void)
 {
@@ -277,4 +297,7 @@ struct smp_operations __initdata vexpress_smp_dt_ops = {
 };
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

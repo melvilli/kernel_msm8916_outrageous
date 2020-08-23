@@ -32,6 +32,10 @@
 #define KPF_KSM			21
 #define KPF_THP			22
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KPF_BALLOON		23
+>>>>>>> v3.18
 =======
 #define KPF_BALLOON		23
 >>>>>>> v3.18

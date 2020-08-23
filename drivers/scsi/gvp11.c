@@ -311,7 +311,11 @@ static int gvp11_probe(struct zorro_dev *z, const struct zorro_device_id *ent)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs = (struct gvp11_scsiregs *)(ZTWO_VADDR(address));
+=======
+	regs = ZTWO_VADDR(address);
+>>>>>>> v3.18
 =======
 	regs = ZTWO_VADDR(address);
 >>>>>>> v3.18

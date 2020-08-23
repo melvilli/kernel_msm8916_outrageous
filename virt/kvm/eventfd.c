@@ -32,12 +32,15 @@
 #include <linux/eventfd.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/slab.h>
 
 #include "iodev.h"
 
 #ifdef CONFIG_HAVE_KVM_IRQ_ROUTING
 =======
+=======
+>>>>>>> v3.18
 #include <linux/srcu.h>
 #include <linux/slab.h>
 #include <linux/seqlock.h>
@@ -49,6 +52,9 @@
 #include "iodev.h"
 
 #ifdef CONFIG_HAVE_KVM_IRQFD
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * --------------------------------------------------------------------
@@ -89,7 +95,12 @@ struct _irqfd {
 	wait_queue_t wait;
 	/* Update side is protected by irqfds.lock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kvm_kernel_irq_routing_entry __rcu *irq_entry;
+=======
+	struct kvm_kernel_irq_routing_entry irq_entry;
+	seqcount_t irq_entry_sc;
+>>>>>>> v3.18
 =======
 	struct kvm_kernel_irq_routing_entry irq_entry;
 	seqcount_t irq_entry_sc;
@@ -138,6 +149,7 @@ irqfd_resampler_ack(struct kvm_irq_ack_notifier *kian)
 {
 	struct _irqfd_resampler *resampler;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct _irqfd *irqfd;
 
 	resampler = container_of(kian, struct _irqfd_resampler, notifier);
@@ -147,6 +159,8 @@ irqfd_resampler_ack(struct kvm_irq_ack_notifier *kian)
 
 	rcu_read_lock();
 =======
+=======
+>>>>>>> v3.18
 	struct kvm *kvm;
 	struct _irqfd *irqfd;
 	int idx;
@@ -158,13 +172,20 @@ irqfd_resampler_ack(struct kvm_irq_ack_notifier *kian)
 		    resampler->notifier.gsi, 0, false);
 
 	idx = srcu_read_lock(&kvm->irq_srcu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	list_for_each_entry_rcu(irqfd, &resampler->list, resampler_link)
 		eventfd_signal(irqfd->resamplefd, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_unlock();
+=======
+	srcu_read_unlock(&kvm->irq_srcu, idx);
+>>>>>>> v3.18
 =======
 	srcu_read_unlock(&kvm->irq_srcu, idx);
 >>>>>>> v3.18
@@ -180,7 +201,11 @@ irqfd_resampler_shutdown(struct _irqfd *irqfd)
 
 	list_del_rcu(&irqfd->resampler_link);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	synchronize_rcu();
+=======
+	synchronize_srcu(&kvm->irq_srcu);
+>>>>>>> v3.18
 =======
 	synchronize_srcu(&kvm->irq_srcu);
 >>>>>>> v3.18
@@ -261,6 +286,7 @@ irqfd_wakeup(wait_queue_t *wait, unsigned mode, int sync, void *key)
 	struct _irqfd *irqfd = container_of(wait, struct _irqfd, wait);
 	unsigned long flags = (unsigned long)key;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kvm_kernel_irq_routing_entry *irq;
 	struct kvm *kvm = irqfd->kvm;
 
@@ -275,6 +301,8 @@ irqfd_wakeup(wait_queue_t *wait, unsigned mode, int sync, void *key)
 			schedule_work(&irqfd->inject);
 		rcu_read_unlock();
 =======
+=======
+>>>>>>> v3.18
 	struct kvm_kernel_irq_routing_entry irq;
 	struct kvm *kvm = irqfd->kvm;
 	unsigned seq;
@@ -293,6 +321,9 @@ irqfd_wakeup(wait_queue_t *wait, unsigned mode, int sync, void *key)
 		else
 			schedule_work(&irqfd->inject);
 		srcu_read_unlock(&kvm->irq_srcu, idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -330,6 +361,7 @@ irqfd_ptable_queue_proc(struct file *file, wait_queue_head_t *wqh,
 
 /* Must be called under irqfds.lock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void irqfd_update(struct kvm *kvm, struct _irqfd *irqfd,
 			 struct kvm_irq_routing_table *irq_rt)
 {
@@ -348,6 +380,8 @@ static void irqfd_update(struct kvm *kvm, struct _irqfd *irqfd,
 			rcu_assign_pointer(irqfd->irq_entry, NULL);
 	}
 =======
+=======
+>>>>>>> v3.18
 static void irqfd_update(struct kvm *kvm, struct _irqfd *irqfd)
 {
 	struct kvm_kernel_irq_routing_entry *e;
@@ -368,12 +402,16 @@ static void irqfd_update(struct kvm *kvm, struct _irqfd *irqfd)
 	}
 
 	write_seqcount_end(&irqfd->irq_entry_sc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int
 kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct kvm_irq_routing_table *irq_rt;
 	struct _irqfd *irqfd, *tmp;
@@ -382,12 +420,17 @@ kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
 	int ret;
 	unsigned int events;
 =======
+=======
+>>>>>>> v3.18
 	struct _irqfd *irqfd, *tmp;
 	struct fd f;
 	struct eventfd_ctx *eventfd = NULL, *resamplefd = NULL;
 	int ret;
 	unsigned int events;
 	int idx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	irqfd = kzalloc(sizeof(*irqfd), GFP_KERNEL);
@@ -400,6 +443,7 @@ kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
 	INIT_WORK(&irqfd->inject, irqfd_inject);
 	INIT_WORK(&irqfd->shutdown, irqfd_shutdown);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	file = eventfd_fget(args->fd);
 	if (IS_ERR(file)) {
@@ -409,6 +453,8 @@ kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
 
 	eventfd = eventfd_ctx_fileget(file);
 =======
+=======
+>>>>>>> v3.18
 	seqcount_init(&irqfd->irq_entry_sc);
 
 	f = fdget(args->fd);
@@ -418,6 +464,9 @@ kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
 	}
 
 	eventfd = eventfd_ctx_fileget(f.file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(eventfd)) {
 		ret = PTR_ERR(eventfd);
@@ -470,7 +519,11 @@ kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
 
 		list_add_rcu(&irqfd->resampler_link, &irqfd->resampler->list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		synchronize_rcu();
+=======
+		synchronize_srcu(&kvm->irq_srcu);
+>>>>>>> v3.18
 =======
 		synchronize_srcu(&kvm->irq_srcu);
 >>>>>>> v3.18
@@ -498,6 +551,7 @@ kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_rt = rcu_dereference_protected(kvm->irq_routing,
 					   lockdep_is_held(&kvm->irqfds.lock));
 	irqfd_update(kvm, irqfd, irq_rt);
@@ -507,6 +561,8 @@ kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
 	list_add_tail(&irqfd->list, &kvm->irqfds.items);
 
 =======
+=======
+>>>>>>> v3.18
 	idx = srcu_read_lock(&kvm->irq_srcu);
 	irqfd_update(kvm, irqfd);
 	srcu_read_unlock(&kvm->irq_srcu, idx);
@@ -515,11 +571,15 @@ kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
 
 	spin_unlock_irq(&kvm->irqfds.lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Check if there was an event already pending on the eventfd
 	 * before we registered, and trigger it as if we didn't miss it.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (events & POLLIN)
 		schedule_work(&irqfd->inject);
@@ -527,18 +587,27 @@ kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
 	spin_unlock_irq(&kvm->irqfds.lock);
 
 =======
+=======
+>>>>>>> v3.18
 	events = f.file->f_op->poll(f.file, &irqfd->pt);
 
 	if (events & POLLIN)
 		schedule_work(&irqfd->inject);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * do not drop the file until the irqfd is fully initialized, otherwise
 	 * we might race against the POLLHUP
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fput(file);
+=======
+	fdput(f);
+>>>>>>> v3.18
 =======
 	fdput(f);
 >>>>>>> v3.18
@@ -556,6 +625,7 @@ fail:
 		eventfd_ctx_put(eventfd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR(file))
 		fput(file);
 
@@ -563,6 +633,8 @@ fail:
 	return ret;
 }
 =======
+=======
+>>>>>>> v3.18
 	fdput(f);
 
 out:
@@ -630,6 +702,9 @@ void kvm_unregister_irq_ack_notifier(struct kvm *kvm,
 	kvm_vcpu_request_scan_ioapic(kvm);
 #endif
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -637,7 +712,11 @@ void
 kvm_eventfd_init(struct kvm *kvm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HAVE_KVM_IRQ_ROUTING
+=======
+#ifdef CONFIG_HAVE_KVM_IRQFD
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_HAVE_KVM_IRQFD
 >>>>>>> v3.18
@@ -650,7 +729,11 @@ kvm_eventfd_init(struct kvm *kvm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HAVE_KVM_IRQ_ROUTING
+=======
+#ifdef CONFIG_HAVE_KVM_IRQFD
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_HAVE_KVM_IRQFD
 >>>>>>> v3.18
@@ -673,6 +756,7 @@ kvm_irqfd_deassign(struct kvm *kvm, struct kvm_irqfd *args)
 		if (irqfd->eventfd == eventfd && irqfd->gsi == args->gsi) {
 			/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * This rcu_assign_pointer is needed for when
 			 * another thread calls kvm_irq_routing_update before
 			 * we flush workqueue below (we synchronize with
@@ -682,6 +766,8 @@ kvm_irqfd_deassign(struct kvm *kvm, struct kvm_irqfd *args)
 			 */
 			rcu_assign_pointer(irqfd->irq_entry, NULL);
 =======
+=======
+>>>>>>> v3.18
 			 * This clearing of irq_entry.type is needed for when
 			 * another thread calls kvm_irq_routing_update before
 			 * we flush workqueue below (we synchronize with
@@ -690,6 +776,9 @@ kvm_irqfd_deassign(struct kvm *kvm, struct kvm_irqfd *args)
 			write_seqcount_begin(&irqfd->irq_entry_sc);
 			irqfd->irq_entry.type = 0;
 			write_seqcount_end(&irqfd->irq_entry_sc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			irqfd_deactivate(irqfd);
 		}
@@ -746,16 +835,22 @@ kvm_irqfd_release(struct kvm *kvm)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Change irq_routing and irqfd.
  * Caller must invoke synchronize_rcu afterwards.
  */
 void kvm_irq_routing_update(struct kvm *kvm,
 			    struct kvm_irq_routing_table *irq_rt)
 =======
+=======
+>>>>>>> v3.18
  * Take note of a change in irq routing.
  * Caller must invoke synchronize_srcu(&kvm->irq_srcu) afterwards.
  */
 void kvm_irq_routing_update(struct kvm *kvm)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct _irqfd *irqfd;
@@ -763,10 +858,15 @@ void kvm_irq_routing_update(struct kvm *kvm)
 	spin_lock_irq(&kvm->irqfds.lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_assign_pointer(kvm->irq_routing, irq_rt);
 
 	list_for_each_entry(irqfd, &kvm->irqfds.items, list)
 		irqfd_update(kvm, irqfd, irq_rt);
+=======
+	list_for_each_entry(irqfd, &kvm->irqfds.items, list)
+		irqfd_update(kvm, irqfd);
+>>>>>>> v3.18
 =======
 	list_for_each_entry(irqfd, &kvm->irqfds.items, list)
 		irqfd_update(kvm, irqfd);
@@ -835,8 +935,11 @@ ioeventfd_in_range(struct _ioeventfd *p, gpa_t addr, int len, const void *val)
 	u64 _val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(addr == p->addr && len == p->length))
 =======
+=======
+>>>>>>> v3.18
 	if (addr != p->addr)
 		/* address must be precise for a hit */
 		return false;
@@ -846,6 +949,9 @@ ioeventfd_in_range(struct _ioeventfd *p, gpa_t addr, int len, const void *val)
 		return true;
 
 	if (len != p->length)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* address-range must be precise for a hit */
 		return false;
@@ -918,15 +1024,21 @@ ioeventfd_check_collision(struct kvm *kvm, struct _ioeventfd *p)
 	list_for_each_entry(_p, &kvm->ioeventfds, list)
 		if (_p->bus_idx == p->bus_idx &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    _p->addr == p->addr && _p->length == p->length &&
 		    (_p->wildcard || p->wildcard ||
 		     _p->datamatch == p->datamatch))
 =======
+=======
+>>>>>>> v3.18
 		    _p->addr == p->addr &&
 		    (!_p->length || !p->length ||
 		     (_p->length == p->length &&
 		      (_p->wildcard || p->wildcard ||
 		       _p->datamatch == p->datamatch))))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return true;
 
@@ -952,8 +1064,14 @@ kvm_assign_ioeventfd(struct kvm *kvm, struct kvm_ioeventfd *args)
 
 	bus_idx = ioeventfd_bus_from_flags(args->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* must be natural-word sized */
 	switch (args->len) {
+=======
+	/* must be natural-word sized, or 0 to ignore length */
+	switch (args->len) {
+	case 0:
+>>>>>>> v3.18
 =======
 	/* must be natural-word sized, or 0 to ignore length */
 	switch (args->len) {
@@ -977,13 +1095,19 @@ kvm_assign_ioeventfd(struct kvm *kvm, struct kvm_ioeventfd *args)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* ioeventfd with no length can't be combined with DATAMATCH */
 	if (!args->len &&
 	    args->flags & (KVM_IOEVENTFD_FLAG_PIO |
 			   KVM_IOEVENTFD_FLAG_DATAMATCH))
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	eventfd = eventfd_ctx_fdget(args->fd);
 	if (IS_ERR(eventfd))
@@ -1023,7 +1147,10 @@ kvm_assign_ioeventfd(struct kvm *kvm, struct kvm_ioeventfd *args)
 		goto unlock_fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* When length is ignored, MMIO is also put on a separate bus, for
 	 * faster lookups.
 	 */
@@ -1034,6 +1161,9 @@ kvm_assign_ioeventfd(struct kvm *kvm, struct kvm_ioeventfd *args)
 			goto register_fail;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kvm->buses[bus_idx]->ioeventfd_count++;
 	list_add_tail(&p->list, &kvm->ioeventfds);
@@ -1043,6 +1173,11 @@ kvm_assign_ioeventfd(struct kvm *kvm, struct kvm_ioeventfd *args)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+register_fail:
+	kvm_io_bus_unregister_dev(kvm, bus_idx, &p->dev);
+>>>>>>> v3.18
 =======
 register_fail:
 	kvm_io_bus_unregister_dev(kvm, bus_idx, &p->dev);
@@ -1087,14 +1222,20 @@ kvm_deassign_ioeventfd(struct kvm *kvm, struct kvm_ioeventfd *args)
 
 		kvm_io_bus_unregister_dev(kvm, bus_idx, &p->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (kvm->buses[bus_idx])
 			kvm->buses[bus_idx]->ioeventfd_count--;
 =======
+=======
+>>>>>>> v3.18
 		if (!p->length) {
 			kvm_io_bus_unregister_dev(kvm, KVM_FAST_MMIO_BUS,
 						  &p->dev);
 		}
 		kvm->buses[bus_idx]->ioeventfd_count--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ioeventfd_release(p);
 		ret = 0;

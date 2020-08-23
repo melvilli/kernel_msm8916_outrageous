@@ -23,6 +23,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/gpuobj.h>
 #include <core/class.h>
 
@@ -42,6 +43,8 @@ nv50_dmaobj_bind(struct nouveau_dmaeng *dmaeng,
 	u32 flags0 = nv_mclass(dmaobj);
 	u32 flags5 = 0x00000000;
 =======
+=======
+>>>>>>> v3.18
 #include <core/client.h>
 #include <core/gpuobj.h>
 #include <nvif/unpack.h>
@@ -63,11 +66,15 @@ nv50_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 		 struct nouveau_gpuobj **pgpuobj)
 {
 	struct nv50_dmaobj_priv *priv = (void *)dmaobj;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
 	if (!nv_iclass(parent, NV_ENGCTX_CLASS)) {
 		switch (nv_mclass(parent->parent)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case NV50_CHANNEL_DMA_CLASS:
 		case NV84_CHANNEL_DMA_CLASS:
@@ -89,6 +96,8 @@ nv50_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 		case NVA0_DISP_OVLY_CLASS:
 		case NVA3_DISP_OVLY_CLASS:
 =======
+=======
+>>>>>>> v3.18
 		case NV40_CHANNEL_DMA:
 		case NV50_CHANNEL_GPFIFO:
 		case G82_CHANNEL_GPFIFO:
@@ -105,6 +114,9 @@ nv50_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 		case G82_DISP_OVERLAY_CHANNEL_DMA:
 		case GT200_DISP_OVERLAY_CHANNEL_DMA:
 		case GT214_DISP_OVERLAY_CHANNEL_DMA:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		default:
@@ -112,6 +124,7 @@ nv50_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!(dmaobj->conf0 & NV50_DMA_CONF0_ENABLE)) {
 		if (dmaobj->target == NV_MEM_TARGET_VM) {
@@ -145,6 +158,8 @@ nv50_dmaobj_bind(struct nouveau_dmaobj *dmaobj,
 	case NV_MEM_TARGET_PCI_NOSNOOP:
 		flags0 |= 0x00030000;
 =======
+=======
+>>>>>>> v3.18
 	ret = nouveau_gpuobj_new(parent, parent, 24, 32, 0, pgpuobj);
 	if (ret == 0) {
 		nv_wo32(*pgpuobj, 0x00, priv->flags0 | nv_mclass(dmaobj));
@@ -221,12 +236,16 @@ nv50_dmaobj_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		break;
 	case NV_MEM_TARGET_PCI_NOSNOOP:
 		priv->flags0 |= 0x00030000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (dmaobj->access) {
 	case NV_MEM_ACCESS_VM:
@@ -283,6 +302,8 @@ nv50_dmaeng_oclass = {
 	},
 };
 =======
+=======
+>>>>>>> v3.18
 	switch (priv->base.access) {
 	case NV_MEM_ACCESS_VM:
 		break;
@@ -328,4 +349,7 @@ nv50_dmaeng_oclass = &(struct nvkm_dmaeng_impl) {
 	.sclass = nv50_dmaeng_sclass,
 	.bind = nv50_dmaobj_bind,
 }.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

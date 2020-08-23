@@ -2,6 +2,10 @@
 #define __LINUX_SWIOTLB_XEN_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dma-direction.h>
+>>>>>>> v3.18
 =======
 #include <linux/dma-direction.h>
 >>>>>>> v3.18
@@ -60,6 +64,11 @@ extern int
 xen_swiotlb_dma_supported(struct device *hwdev, u64 mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int
+xen_swiotlb_set_dma_mask(struct device *dev, u64 dma_mask);
+>>>>>>> v3.18
 =======
 extern int
 xen_swiotlb_set_dma_mask(struct device *dev, u64 dma_mask);

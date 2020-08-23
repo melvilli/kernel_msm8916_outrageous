@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (C) 2007-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
 =======
 /* Copyright (C) 2007-2014 B.A.T.M.A.N. contributors:
 >>>>>>> v3.18
@@ -17,9 +21,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -50,6 +58,11 @@ enum batadv_hard_if_cleanup {
 extern struct notifier_block batadv_hard_if_notifier;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool batadv_is_wifi_netdev(struct net_device *net_device);
+bool batadv_is_wifi_iface(int ifindex);
+>>>>>>> v3.18
 =======
 bool batadv_is_wifi_netdev(struct net_device *net_device);
 bool batadv_is_wifi_iface(int ifindex);
@@ -65,15 +78,21 @@ int batadv_hardif_min_mtu(struct net_device *soft_iface);
 void batadv_update_min_mtu(struct net_device *soft_iface);
 void batadv_hardif_free_rcu(struct rcu_head *rcu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool batadv_is_wifi_iface(int ifindex);
 
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * batadv_hardif_free_ref - decrement the hard interface refcounter and
  *  possibly free it
  * @hard_iface: the hard interface to free
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void
 batadv_hardif_free_ref(struct batadv_hard_iface *hard_iface)
@@ -83,7 +102,10 @@ batadv_hardif_free_ref(struct batadv_hard_iface *hard_iface)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * batadv_hardif_free_ref_now - decrement the hard interface refcounter and
  *  possibly free it (without rcu callback)
@@ -96,6 +118,9 @@ batadv_hardif_free_ref_now(struct batadv_hard_iface *hard_iface)
 		batadv_hardif_free_rcu(&hard_iface->rcu);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct batadv_hard_iface *
 batadv_primary_if_get_selected(struct batadv_priv *bat_priv)

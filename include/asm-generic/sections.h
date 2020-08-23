@@ -6,7 +6,10 @@
 #include <linux/compiler.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Usage guidelines:
  * _text, _data: architecture specific, don't use them in arch-independent code
@@ -27,6 +30,9 @@
  *	__entry_text_start, __entry_text_end
  *	__ctors_start, __ctors_end
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern char _text[], _stext[], _etext[];
 extern char _data[], _sdata[], _edata[];
@@ -38,7 +44,10 @@ extern char __per_cpu_load[], __per_cpu_start[], __per_cpu_end[];
 extern char __kprobes_text_start[], __kprobes_text_end[];
 extern char __entry_text_start[], __entry_text_end[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern char __initdata_begin[], __initdata_end[];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern char __start_rodata[], __end_rodata[];

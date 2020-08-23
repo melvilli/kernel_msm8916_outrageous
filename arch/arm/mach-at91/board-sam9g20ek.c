@@ -51,6 +51,10 @@
 #include "sam9_smc.h"
 #include "generic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 =======
 #include "gpio.h"
 >>>>>>> v3.18
@@ -414,7 +418,11 @@ static void __init ek_board_init(void)
 MACHINE_START(AT91SAM9G20EK, "Atmel AT91SAM9G20-EK")
 	/* Maintainer: Atmel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= at91_init_time,
 >>>>>>> v3.18
@@ -428,7 +436,11 @@ MACHINE_END
 MACHINE_START(AT91SAM9G20EK_2MMC, "Atmel AT91SAM9G20-EK 2 MMC Slot Mod")
 	/* Maintainer: Atmel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= at91_init_time,
 >>>>>>> v3.18

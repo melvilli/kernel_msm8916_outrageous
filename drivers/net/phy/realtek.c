@@ -24,7 +24,11 @@
 #define RTL821x_INSR		0x13
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	RTL8211E_INER_LINK_STAT	0x10
+=======
+#define	RTL8211E_INER_LINK_STATUS	0x400
+>>>>>>> v3.18
 =======
 #define	RTL8211E_INER_LINK_STATUS	0x400
 >>>>>>> v3.18
@@ -62,7 +66,11 @@ static int rtl8211e_config_intr(struct phy_device *phydev)
 	if (phydev->interrupts == PHY_INTERRUPT_ENABLED)
 		err = phy_write(phydev, RTL821x_INER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				RTL8211E_INER_LINK_STAT);
+=======
+				RTL8211E_INER_LINK_STATUS);
+>>>>>>> v3.18
 =======
 				RTL8211E_INER_LINK_STATUS);
 >>>>>>> v3.18
@@ -72,6 +80,7 @@ static int rtl8211e_config_intr(struct phy_device *phydev)
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* RTL8211B */
 static struct phy_driver rtl8211b_driver = {
@@ -102,6 +111,8 @@ static struct phy_driver rtl8211e_driver = {
 	.resume		= genphy_resume,
 	.driver		= { .owner = THIS_MODULE,},
 =======
+=======
+>>>>>>> v3.18
 static struct phy_driver realtek_drvs[] = {
 	{
 		.phy_id         = 0x00008201,
@@ -137,11 +148,15 @@ static struct phy_driver realtek_drvs[] = {
 		.resume		= genphy_resume,
 		.driver		= { .owner = THIS_MODULE,},
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static int __init realtek_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -152,13 +167,20 @@ static int __init realtek_init(void)
 =======
 	return phy_drivers_register(realtek_drvs, ARRAY_SIZE(realtek_drvs));
 >>>>>>> v3.18
+=======
+	return phy_drivers_register(realtek_drvs, ARRAY_SIZE(realtek_drvs));
+>>>>>>> v3.18
 }
 
 static void __exit realtek_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy_driver_unregister(&rtl8211b_driver);
 	phy_driver_unregister(&rtl8211e_driver);
+=======
+	phy_drivers_unregister(realtek_drvs, ARRAY_SIZE(realtek_drvs));
+>>>>>>> v3.18
 =======
 	phy_drivers_unregister(realtek_drvs, ARRAY_SIZE(realtek_drvs));
 >>>>>>> v3.18

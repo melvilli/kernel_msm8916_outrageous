@@ -1,5 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Generic barrier definitions, based on MN10300 definitions.
+=======
+/*
+ * Generic barrier definitions, originally based on MN10300 definitions.
+>>>>>>> v3.18
 =======
 /*
  * Generic barrier definitions, originally based on MN10300 definitions.
@@ -22,6 +27,7 @@
 #ifndef __ASSEMBLY__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define nop() asm volatile ("nop")
 
 /*
@@ -36,6 +42,8 @@
 #define rmb()	mb()
 #define wmb()	asm volatile ("": : :"memory")
 =======
+=======
+>>>>>>> v3.18
 #include <linux/compiler.h>
 
 #ifndef nop
@@ -64,6 +72,9 @@
 #ifndef read_barrier_depends
 #define read_barrier_depends()		do { } while (0)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_SMP
@@ -71,6 +82,10 @@
 #define smp_rmb()	rmb()
 #define smp_wmb()	wmb()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define smp_read_barrier_depends()	read_barrier_depends()
+>>>>>>> v3.18
 =======
 #define smp_read_barrier_depends()	read_barrier_depends()
 >>>>>>> v3.18
@@ -78,6 +93,7 @@
 #define smp_mb()	barrier()
 #define smp_rmb()	barrier()
 #define smp_wmb()	barrier()
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 
@@ -87,12 +103,17 @@
 #define read_barrier_depends()		do {} while (0)
 #define smp_read_barrier_depends()	do {} while (0)
 =======
+=======
+>>>>>>> v3.18
 #define smp_read_barrier_depends()	do { } while (0)
 #endif
 
 #ifndef set_mb
 #define set_mb(var, value)  do { (var) = (value); mb(); } while (0)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef smp_mb__before_atomic

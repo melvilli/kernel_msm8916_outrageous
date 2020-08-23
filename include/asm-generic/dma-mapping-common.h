@@ -13,7 +13,11 @@ static inline dma_addr_t dma_map_single_attrs(struct device *dev, void *ptr,
 					      struct dma_attrs *attrs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -36,7 +40,11 @@ static inline void dma_unmap_single_attrs(struct device *dev, dma_addr_t addr,
 					  struct dma_attrs *attrs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -52,7 +60,11 @@ static inline int dma_map_sg_attrs(struct device *dev, struct scatterlist *sg,
 				   struct dma_attrs *attrs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -73,7 +85,11 @@ static inline void dma_unmap_sg_attrs(struct device *dev, struct scatterlist *sg
 				      struct dma_attrs *attrs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -89,7 +105,11 @@ static inline dma_addr_t dma_map_page(struct device *dev, struct page *page,
 				      enum dma_data_direction dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -107,7 +127,11 @@ static inline void dma_unmap_page(struct device *dev, dma_addr_t addr,
 				  size_t size, enum dma_data_direction dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -123,7 +147,11 @@ static inline void dma_sync_single_for_cpu(struct device *dev, dma_addr_t addr,
 					   enum dma_data_direction dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -139,7 +167,11 @@ static inline void dma_sync_single_for_device(struct device *dev,
 					      enum dma_data_direction dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -183,7 +215,11 @@ dma_sync_sg_for_cpu(struct device *dev, struct scatterlist *sg,
 		    int nelems, enum dma_data_direction dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -199,7 +235,11 @@ dma_sync_sg_for_device(struct device *dev, struct scatterlist *sg,
 		       int nelems, enum dma_data_direction dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -220,7 +260,10 @@ extern int dma_common_mmap(struct device *dev, struct vm_area_struct *vma,
 			   void *cpu_addr, dma_addr_t dma_addr, size_t size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void *dma_common_contiguous_remap(struct page *page, size_t size,
 			unsigned long vm_flags,
 			pgprot_t prot, const void *caller);
@@ -230,6 +273,9 @@ void *dma_common_pages_remap(struct page **pages, size_t size,
 			const void *caller);
 void dma_common_free_remap(void *cpu_addr, size_t size, unsigned long vm_flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * dma_mmap_attrs - map a coherent DMA allocation into user space
@@ -249,7 +295,11 @@ dma_mmap_attrs(struct device *dev, struct vm_area_struct *vma, void *cpu_addr,
 	       dma_addr_t dma_addr, size_t size, struct dma_attrs *attrs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18
@@ -262,6 +312,7 @@ dma_mmap_attrs(struct device *dev, struct vm_area_struct *vma, void *cpu_addr,
 #define dma_mmap_coherent(d, v, c, h, s) dma_mmap_attrs(d, v, c, h, s, NULL)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int dma_mmap_writecombine(struct device *dev, struct vm_area_struct *vma,
 		      void *cpu_addr, dma_addr_t dma_addr, size_t size)
 {
@@ -270,6 +321,8 @@ static inline int dma_mmap_writecombine(struct device *dev, struct vm_area_struc
 	return dma_mmap_attrs(dev, vma, cpu_addr, dma_addr, size, &attrs);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int
@@ -281,7 +334,11 @@ dma_get_sgtable_attrs(struct device *dev, struct sg_table *sgt, void *cpu_addr,
 		      dma_addr_t dma_addr, size_t size, struct dma_attrs *attrs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *ops = get_dma_ops(dev);
+=======
+	struct dma_map_ops *ops = get_dma_ops(dev);
+>>>>>>> v3.18
 =======
 	struct dma_map_ops *ops = get_dma_ops(dev);
 >>>>>>> v3.18

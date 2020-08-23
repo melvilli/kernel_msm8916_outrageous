@@ -26,6 +26,10 @@ cond_syscall(sys_swapoff);
 cond_syscall(sys_kexec_load);
 cond_syscall(compat_sys_kexec_load);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+cond_syscall(sys_kexec_file_load);
+>>>>>>> v3.18
 =======
 cond_syscall(sys_kexec_file_load);
 >>>>>>> v3.18
@@ -140,6 +144,11 @@ cond_syscall(sys_setresuid16);
 cond_syscall(sys_setreuid16);
 cond_syscall(sys_setuid16);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+cond_syscall(sys_sgetmask);
+cond_syscall(sys_ssetmask);
+>>>>>>> v3.18
 =======
 cond_syscall(sys_sgetmask);
 cond_syscall(sys_ssetmask);
@@ -156,6 +165,10 @@ cond_syscall(sys_io_submit);
 cond_syscall(sys_io_cancel);
 cond_syscall(sys_io_getevents);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+cond_syscall(sys_sysfs);
+>>>>>>> v3.18
 =======
 cond_syscall(sys_sysfs);
 >>>>>>> v3.18
@@ -165,11 +178,17 @@ cond_syscall(sys_process_vm_writev);
 cond_syscall(compat_sys_process_vm_readv);
 cond_syscall(compat_sys_process_vm_writev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 cond_syscall(sys_uselib);
 cond_syscall(sys_fadvise64);
 cond_syscall(sys_fadvise64_64);
 cond_syscall(sys_madvise);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* arch-specific weak syscall entries */
@@ -234,6 +253,12 @@ cond_syscall(sys_kcmp);
 /* operate on Secure Computing state */
 cond_syscall(sys_seccomp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+/* access BPF programs and maps */
+cond_syscall(sys_bpf);
+>>>>>>> v3.18
 =======
 
 /* access BPF programs and maps */

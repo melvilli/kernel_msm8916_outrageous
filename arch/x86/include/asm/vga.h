@@ -18,12 +18,15 @@
 #define vga_writeb(x, y) (*(y) = (x))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_FB_EFI
 #define __ARCH_HAS_VGA_DEFAULT_DEVICE
 extern struct pci_dev *vga_default_device(void);
 extern void vga_set_default_device(struct pci_dev *pdev);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ASM_X86_VGA_H */

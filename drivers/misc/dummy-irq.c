@@ -27,7 +27,11 @@ static irqreturn_t dummy_interrupt(int irq, void *dev_id)
 
 	if (count == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "dummy-irq: interrupt occured on IRQ %d\n",
+=======
+		printk(KERN_INFO "dummy-irq: interrupt occurred on IRQ %d\n",
+>>>>>>> v3.18
 =======
 		printk(KERN_INFO "dummy-irq: interrupt occurred on IRQ %d\n",
 >>>>>>> v3.18
@@ -66,6 +70,10 @@ MODULE_AUTHOR("Jiri Kosina");
 module_param(irq, uint, 0444);
 MODULE_PARM_DESC(irq, "The IRQ to register for");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_DESCRIPTION("Dummy IRQ handler driver");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Dummy IRQ handler driver");
 >>>>>>> v3.18

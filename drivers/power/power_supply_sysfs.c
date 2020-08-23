@@ -45,9 +45,14 @@ static ssize_t power_supply_show_property(struct device *dev,
 					  char *buf) {
 	static char *type_text[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"Unknown", "Battery", "UPS", "Mains", "USB", "USB_DCP",
 		"USB_CDP", "USB_ACA",
 		"USB_HVDCP", "USB_HVDCP3", "Wireless", "BMS", "USB_Parallel"
+=======
+		"Unknown", "Battery", "UPS", "Mains", "USB",
+		"USB_DCP", "USB_CDP", "USB_ACA"
+>>>>>>> v3.18
 =======
 		"Unknown", "Battery", "UPS", "Mains", "USB",
 		"USB_DCP", "USB_CDP", "USB_ACA"
@@ -58,17 +63,23 @@ static ssize_t power_supply_show_property(struct device *dev,
 	};
 	static char *charge_type[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"Unknown", "N/A", "Trickle", "Fast", "Taper"
 	};
 	static char *health_text[] = {
 		"Unknown", "Good", "Overheat", "Warm", "Dead", "Over voltage",
 		"Unspecified failure", "Cold", "Cool", "Watchdog timer expire",
 =======
+=======
+>>>>>>> v3.18
 		"Unknown", "N/A", "Trickle", "Fast"
 	};
 	static char *health_text[] = {
 		"Unknown", "Good", "Overheat", "Dead", "Over voltage",
 		"Unspecified failure", "Cold", "Watchdog timer expire",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"Safety timer expire"
 	};
@@ -88,6 +99,7 @@ static ssize_t power_supply_show_property(struct device *dev,
 	union power_supply_propval value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (off == POWER_SUPPLY_PROP_TYPE)
 		value.intval = psy->type;
 	else
@@ -102,6 +114,8 @@ static ssize_t power_supply_show_property(struct device *dev,
 				attr->attr.name, ret);
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (off == POWER_SUPPLY_PROP_TYPE) {
 		value.intval = psy->type;
 	} else {
@@ -116,6 +130,9 @@ static ssize_t power_supply_show_property(struct device *dev,
 					attr->attr.name, ret);
 			return ret;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -137,10 +154,14 @@ static ssize_t power_supply_show_property(struct device *dev,
 		return sprintf(buf, "%s\n", value.strval);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (off == POWER_SUPPLY_PROP_CHARGE_COUNTER_EXT)
 		return sprintf(buf, "%lld\n", value.int64val);
 	else
 		return sprintf(buf, "%d\n", value.intval);
+=======
+	return sprintf(buf, "%d\n", value.intval);
+>>>>>>> v3.18
 =======
 	return sprintf(buf, "%d\n", value.intval);
 >>>>>>> v3.18
@@ -157,7 +178,11 @@ static ssize_t power_supply_store_property(struct device *dev,
 
 	/* TODO: support other types than int */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtol(buf, 10, &long_val);
+=======
+	ret = kstrtol(buf, 10, &long_val);
+>>>>>>> v3.18
 =======
 	ret = kstrtol(buf, 10, &long_val);
 >>>>>>> v3.18
@@ -183,8 +208,11 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(online),
 	POWER_SUPPLY_ATTR(authentic),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_ATTR(battery_charging_enabled),
 	POWER_SUPPLY_ATTR(charging_enabled),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	POWER_SUPPLY_ATTR(technology),
@@ -197,6 +225,7 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(voltage_avg),
 	POWER_SUPPLY_ATTR(voltage_ocv),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_ATTR(input_voltage_regulation),
 	POWER_SUPPLY_ATTR(current_max),
 	POWER_SUPPLY_ATTR(input_current_max),
@@ -206,11 +235,16 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(current_now),
 	POWER_SUPPLY_ATTR(current_avg),
 =======
+=======
+>>>>>>> v3.18
 	POWER_SUPPLY_ATTR(voltage_boot),
 	POWER_SUPPLY_ATTR(current_max),
 	POWER_SUPPLY_ATTR(current_now),
 	POWER_SUPPLY_ATTR(current_avg),
 	POWER_SUPPLY_ATTR(current_boot),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	POWER_SUPPLY_ATTR(power_now),
 	POWER_SUPPLY_ATTR(power_avg),
@@ -222,7 +256,10 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(charge_avg),
 	POWER_SUPPLY_ATTR(charge_counter),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_ATTR(charge_counter_shadow),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	POWER_SUPPLY_ATTR(constant_charge_current),
@@ -232,6 +269,10 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(charge_control_limit),
 	POWER_SUPPLY_ATTR(charge_control_limit_max),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	POWER_SUPPLY_ATTR(input_current_limit),
+>>>>>>> v3.18
 =======
 	POWER_SUPPLY_ATTR(input_current_limit),
 >>>>>>> v3.18
@@ -242,8 +283,11 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(energy_now),
 	POWER_SUPPLY_ATTR(energy_avg),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_ATTR(hi_power),
 	POWER_SUPPLY_ATTR(low_power),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	POWER_SUPPLY_ATTR(capacity),
@@ -252,15 +296,21 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(capacity_level),
 	POWER_SUPPLY_ATTR(temp),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_ATTR(temp_alert_min),
 	POWER_SUPPLY_ATTR(temp_alert_max),
 	POWER_SUPPLY_ATTR(temp_cool),
 	POWER_SUPPLY_ATTR(temp_warm),
 =======
+=======
+>>>>>>> v3.18
 	POWER_SUPPLY_ATTR(temp_max),
 	POWER_SUPPLY_ATTR(temp_min),
 	POWER_SUPPLY_ATTR(temp_alert_min),
 	POWER_SUPPLY_ATTR(temp_alert_max),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	POWER_SUPPLY_ATTR(temp_ambient),
 	POWER_SUPPLY_ATTR(temp_ambient_alert_min),
@@ -271,6 +321,7 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(time_to_full_avg),
 	POWER_SUPPLY_ATTR(type),
 	POWER_SUPPLY_ATTR(scope),
+<<<<<<< HEAD
 <<<<<<< HEAD
 	POWER_SUPPLY_ATTR(system_temp_level),
 	POWER_SUPPLY_ATTR(resistance),
@@ -309,12 +360,19 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(charge_term_current),
 	POWER_SUPPLY_ATTR(calibrate),
 >>>>>>> v3.18
+=======
+	POWER_SUPPLY_ATTR(charge_term_current),
+	POWER_SUPPLY_ATTR(calibrate),
+>>>>>>> v3.18
 	/* Properties of type `const char *' */
 	POWER_SUPPLY_ATTR(model_name),
 	POWER_SUPPLY_ATTR(manufacturer),
 	POWER_SUPPLY_ATTR(serial_number),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	POWER_SUPPLY_ATTR(battery_type),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

@@ -48,6 +48,12 @@
 #include <linux/i2c/twl.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Register descriptions for audio */
+#include <linux/mfd/twl4030-audio.h>
+
+>>>>>>> v3.18
 =======
 /* Register descriptions for audio */
 #include <linux/mfd/twl4030-audio.h>
@@ -102,13 +108,19 @@
 #define TWL4030_BASEADD_INT		0x002E
 #define TWL4030_BASEADD_PM_MASTER	0x0036
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TWL4030_BASEADD_PM_RECEIVER	0x005B
 =======
+=======
+>>>>>>> v3.18
 
 #define TWL4030_BASEADD_PM_RECEIVER	0x005B
 #define TWL4030_DCDC_GLOBAL_CFG		0x06
 #define SMARTREFLEX_ENABLE		BIT(3)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TWL4030_BASEADD_RTC		0x001C
 #define TWL4030_BASEADD_SECURED_REG	0x0000
@@ -133,7 +145,11 @@
 #define TWL6030_BASEADD_PIH		0x00D0
 #define TWL6030_BASEADD_CHARGER		0x00E0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TWL6025_BASEADD_CHARGER		0x00DA
+=======
+#define TWL6032_BASEADD_CHARGER		0x00DA
+>>>>>>> v3.18
 =======
 #define TWL6032_BASEADD_CHARGER		0x00DA
 >>>>>>> v3.18
@@ -219,7 +235,10 @@ static struct twl_mapping twl4030_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct reg_default twl4030_49_defaults[] = {
 	/* Audio Registers */
 	{ 0x01, 0x00}, /* CODEC_MODE	*/
@@ -319,6 +338,9 @@ static const struct regmap_access_table twl4030_49_volatile_table = {
 	.n_yes_ranges = ARRAY_SIZE(twl4030_49_volatile_ranges),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct regmap_config twl4030_regmap_config[4] = {
 	{
@@ -333,7 +355,10 @@ static struct regmap_config twl4030_regmap_config[4] = {
 		.val_bits = 8,
 		.max_register = 0xff,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		.readable_reg = twl4030_49_nop_reg,
 		.writeable_reg = twl4030_49_nop_reg,
@@ -343,6 +368,9 @@ static struct regmap_config twl4030_regmap_config[4] = {
 		.reg_defaults = twl4030_49_defaults,
 		.num_reg_defaults = ARRAY_SIZE(twl4030_49_defaults),
 		.cache_type = REGCACHE_RBTREE,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{
@@ -435,6 +463,7 @@ EXPORT_SYMBOL(twl_rev);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * twl_i2c_write - Writes a n bit register in TWL4030/TWL5030/TWL60X0
  * @mod_no: module number
  * @value: an array of num_bytes+1 containing data to write
@@ -447,6 +476,8 @@ int twl_i2c_write(u8 mod_no, u8 *value, u8 reg, unsigned num_bytes)
 {
 	int ret;
 =======
+=======
+>>>>>>> v3.18
  * twl_get_regmap - Get the regmap associated with the given module
  * @mod_no: module number
  *
@@ -454,6 +485,9 @@ int twl_i2c_write(u8 mod_no, u8 *value, u8 reg, unsigned num_bytes)
  */
 static struct regmap *twl_get_regmap(u8 mod_no)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int sid;
 	struct twl_client *twl;
@@ -461,17 +495,23 @@ static struct regmap *twl_get_regmap(u8 mod_no)
 	if (unlikely(!twl_priv || !twl_priv->ready)) {
 		pr_err("%s: not initialized\n", DRIVER_NAME);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EPERM;
 	}
 	if (unlikely(mod_no >= twl_get_last_module())) {
 		pr_err("%s: invalid module number %d\n", DRIVER_NAME, mod_no);
 		return -EPERM;
 =======
+=======
+>>>>>>> v3.18
 		return NULL;
 	}
 	if (unlikely(mod_no >= twl_get_last_module())) {
 		pr_err("%s: invalid module number %d\n", DRIVER_NAME, mod_no);
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -479,10 +519,13 @@ static struct regmap *twl_get_regmap(u8 mod_no)
 	twl = &twl_priv->twl_modules[sid];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = regmap_bulk_write(twl->regmap,
 				twl_priv->twl_map[mod_no].base + reg, value,
 				num_bytes);
 =======
+=======
+>>>>>>> v3.18
 	return twl->regmap;
 }
 
@@ -505,6 +548,9 @@ int twl_i2c_write(u8 mod_no, u8 *value, u8 reg, unsigned num_bytes)
 
 	ret = regmap_bulk_write(regmap, twl_priv->twl_map[mod_no].base + reg,
 				value, num_bytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret)
@@ -527,6 +573,7 @@ EXPORT_SYMBOL(twl_i2c_write);
 int twl_i2c_read(u8 mod_no, u8 *value, u8 reg, unsigned num_bytes)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	int sid;
 	struct twl_client *twl;
@@ -547,6 +594,8 @@ int twl_i2c_read(u8 mod_no, u8 *value, u8 reg, unsigned num_bytes)
 			       twl_priv->twl_map[mod_no].base + reg, value,
 			       num_bytes);
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *regmap = twl_get_regmap(mod_no);
 	int ret;
 
@@ -555,6 +604,9 @@ int twl_i2c_read(u8 mod_no, u8 *value, u8 reg, unsigned num_bytes)
 
 	ret = regmap_bulk_read(regmap, twl_priv->twl_map[mod_no].base + reg,
 			       value, num_bytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret)
@@ -566,7 +618,10 @@ int twl_i2c_read(u8 mod_no, u8 *value, u8 reg, unsigned num_bytes)
 EXPORT_SYMBOL(twl_i2c_read);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * twl_regcache_bypass - Configure the regcache bypass for the regmap associated
  *			 with the module
@@ -588,6 +643,9 @@ int twl_set_regcache_bypass(u8 mod_no, bool enable)
 }
 EXPORT_SYMBOL(twl_set_regcache_bypass);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*----------------------------------------------------------------------*/
 
@@ -912,6 +970,7 @@ add_children(struct twl4030_platform_data *pdata, unsigned irq_base,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ENABLED(CONFIG_TWL6030_USB) && pdata->usb &&
 	    twl_class_is_6030()) {
 
@@ -968,6 +1027,8 @@ add_children(struct twl4030_platform_data *pdata, unsigned irq_base,
 			if (IS_ERR(child))
 					return PTR_ERR(child);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1083,6 +1144,7 @@ add_children(struct twl4030_platform_data *pdata, unsigned irq_base,
 			return PTR_ERR(child);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* twl6030 regulators */
 	if (IS_ENABLED(CONFIG_REGULATOR_TWL4030) && twl_class_is_6030() &&
@@ -1228,6 +1290,8 @@ add_children(struct twl4030_platform_data *pdata, unsigned irq_base,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_CHARGER_TWL4030) && pdata->bci &&
 			!(features & (TPS_SUBSET | TWL5031))) {
 		child = add_child(TWL_MODULE_MAIN_CHARGE, "twl4030_bci",
@@ -1240,7 +1304,10 @@ add_children(struct twl4030_platform_data *pdata, unsigned irq_base,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_TWL4030_POWER) && pdata->power) {
 		child = add_child(TWL_MODULE_PM_MASTER, "twl4030_power",
 				  pdata->power, sizeof(*pdata->power), false,
@@ -1249,6 +1316,9 @@ add_children(struct twl4030_platform_data *pdata, unsigned irq_base,
 			return PTR_ERR(child);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1353,19 +1423,29 @@ static int twl_remove(struct i2c_client *client)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct of_dev_auxdata twl_auxdata_lookup[] = {
 	OF_DEV_AUXDATA("ti,twl4030-gpio", 0, "twl4030-gpio", NULL),
 	{ /* sentinel */ },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* NOTE: This driver only handles a single twl4030/tps659x0 chip */
 static int
 twl_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct twl4030_platform_data	*pdata = client->dev.platform_data;
+=======
+	struct twl4030_platform_data	*pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct twl4030_platform_data	*pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -1416,15 +1496,21 @@ twl_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		twl_priv->twl_id = TWL6030_CLASS_ID;
 		twl_priv->twl_map = &twl6030_map[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* The charger base address is different in twl6025 */
 		if ((id->driver_data) & TWL6025_SUBCLASS)
 			twl_priv->twl_map[TWL_MODULE_MAIN_CHARGE].base =
 							TWL6025_BASEADD_CHARGER;
 =======
+=======
+>>>>>>> v3.18
 		/* The charger base address is different in twl6032 */
 		if ((id->driver_data) & TWL6032_SUBCLASS)
 			twl_priv->twl_map[TWL_MODULE_MAIN_CHARGE].base =
 							TWL6032_BASEADD_CHARGER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		twl_regmap_config = twl6030_regmap_config;
 	} else {
@@ -1481,10 +1567,13 @@ twl_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* load power event scripts */
 	if (IS_ENABLED(CONFIG_TWL4030_POWER) && pdata && pdata->power)
 		twl4030_power_init(pdata->power);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Maybe init the T2 Interrupt subsystem */
@@ -1507,12 +1596,18 @@ twl_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	 * Program I2C_SCL_CTRL_PU(bit 0)=0, I2C_SDA_CTRL_PU (bit 2)=0,
 	 * SR_I2C_SCL_CTRL_PU(bit 4)=0 and SR_I2C_SDA_CTRL_PU(bit 6)=0.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 *
 	 * Also, always enable SmartReflex bit as that's needed for omaps to
 	 * to do anything over I2C4 for voltage scaling even if SmartReflex
 	 * is disabled. Without the SmartReflex bit omap sys_clkreq idle
 	 * signal will never trigger for retention idle.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	if (twl_class_is_4030()) {
@@ -1523,6 +1618,7 @@ twl_probe(struct i2c_client *client, const struct i2c_device_id *id)
 			I2C_SDA_CTRL_PU | I2C_SCL_CTRL_PU);
 		twl_i2c_write_u8(TWL4030_MODULE_INTBR, temp, REG_GPPUPDCTR1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	if (node)
@@ -1530,6 +1626,8 @@ twl_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	else
 		status = add_children(pdata, irq_base, id->driver_data);
 =======
+=======
+>>>>>>> v3.18
 
 		twl_i2c_read_u8(TWL_MODULE_PM_RECEIVER, &temp,
 				TWL4030_DCDC_GLOBAL_CFG);
@@ -1546,6 +1644,9 @@ twl_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	} else {
 		status = add_children(pdata, irq_base, id->driver_data);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 fail:
@@ -1569,7 +1670,11 @@ static const struct i2c_device_id twl_ids[] = {
 					   and vibrator. Charger in USB module*/
 	{ "twl6030", TWL6030_CLASS },	/* "Phoenix power chip" */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "twl6025", TWL6030_CLASS | TWL6025_SUBCLASS }, /* "Phoenix lite" */
+=======
+	{ "twl6032", TWL6030_CLASS | TWL6032_SUBCLASS }, /* "Phoenix lite" */
+>>>>>>> v3.18
 =======
 	{ "twl6032", TWL6030_CLASS | TWL6032_SUBCLASS }, /* "Phoenix lite" */
 >>>>>>> v3.18
@@ -1586,6 +1691,7 @@ static struct i2c_driver twl_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init twl_init(void)
 {
 	return i2c_add_driver(&twl_driver);
@@ -1597,6 +1703,9 @@ static void __exit twl_exit(void)
 	i2c_del_driver(&twl_driver);
 }
 module_exit(twl_exit);
+=======
+module_i2c_driver(twl_driver);
+>>>>>>> v3.18
 =======
 module_i2c_driver(twl_driver);
 >>>>>>> v3.18

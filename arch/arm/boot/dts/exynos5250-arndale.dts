@@ -11,12 +11,15 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "exynos5250.dtsi"
 
 / {
 	model = "Insignal Arndale evaluation board based on EXYNOS5250";
 	compatible = "insignal,arndale", "samsung,exynos5250";
 =======
+=======
+>>>>>>> v3.18
 #include "exynos5250.dtsi"
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/input/input.h>
@@ -24,6 +27,9 @@
 / {
 	model = "Insignal Arndale evaluation board based on EXYNOS5250";
 	compatible = "insignal,arndale", "samsung,exynos5250", "samsung,exynos5";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memory {
@@ -35,11 +41,17 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	rtc@101E0000 {
 		status = "okay";
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	codec@11000000 {
 		samsung,mfc-r = <0x43000000 0x800000>;
@@ -51,6 +63,10 @@
 		samsung,i2c-max-bus-freq = <20000>;
 		samsung,i2c-slave-addr = <0x66>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		status = "okay";
+>>>>>>> v3.18
 =======
 		status = "okay";
 >>>>>>> v3.18
@@ -59,7 +75,10 @@
 			compatible = "samsung,s5m8767-pmic";
 			reg = <0x66>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			interrupt-parent = <&gpx3>;
 			interrupts = <2 IRQ_TYPE_LEVEL_LOW>;
 
@@ -82,6 +101,9 @@
 			vinl7-supply = <&main_dc_reg>;
 			vinl8-supply = <&buck8_reg>;
 			vinl9-supply = <&buck8_reg>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			s5m8767,pmic-buck2-dvs-voltage = <1300000>;
@@ -126,6 +148,10 @@
 					regulator-min-microvolt = <1800000>;
 					regulator-max-microvolt = <1800000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					regulator-always-on;
+>>>>>>> v3.18
 =======
 					regulator-always-on;
 >>>>>>> v3.18
@@ -294,7 +320,11 @@
 				buck2_reg: BUCK2 {
 					regulator-name = "vdd_arm";
 <<<<<<< HEAD
+<<<<<<< HEAD
 					regulator-min-microvolt = <925000>;
+=======
+					regulator-min-microvolt = <912500>;
+>>>>>>> v3.18
 =======
 					regulator-min-microvolt = <912500>;
 >>>>>>> v3.18
@@ -332,7 +362,10 @@
 				};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				buck7_reg: BUCK7 {
 					regulator-name = "PVDD_BUCK7";
 					regulator-always-on;
@@ -345,6 +378,9 @@
 					op_mode = <1>;
 				};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				buck9_reg: BUCK9 {
 					regulator-name = "VDD_33_OFF_EXT1";
@@ -356,6 +392,7 @@
 		};
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	i2c@12C70000 {
 		status = "disabled";
@@ -395,6 +432,8 @@
 		broken-cd;
 		fifo-depth = <0x80>;
 =======
+=======
+>>>>>>> v3.18
 	i2c@12C80000 {
 		status = "okay";
 
@@ -468,6 +507,9 @@
 		status = "okay";
 		num-slots = <1>;
 		broken-cd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		card-detect-delay = <200>;
 		samsung,dw-mshc-ciu-div = <3>;
@@ -476,6 +518,7 @@
 		vmmc-supply = <&mmc_reg>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&sd0_clk &sd0_cmd &sd0_bus4 &sd0_bus8>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		slot@0 {
@@ -493,6 +536,8 @@
 		supports-highspeed;
 		fifo-depth = <0x80>;
 =======
+=======
+>>>>>>> v3.18
 		bus-width = <8>;
 		cap-mmc-highspeed;
 	};
@@ -500,6 +545,9 @@
 	mmc_2: mmc@12220000 {
 		status = "okay";
 		num-slots = <1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		card-detect-delay = <200>;
 		samsung,dw-mshc-ciu-div = <3>;
@@ -508,6 +556,7 @@
 		vmmc-supply = <&mmc_reg>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&sd2_clk &sd2_cmd &sd2_cd &sd2_bus4>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		slot@0 {
@@ -532,6 +581,8 @@
 	spi_2: spi@12d40000 {
 		status = "disabled";
 =======
+=======
+>>>>>>> v3.18
 		bus-width = <4>;
 		disable-wp;
 		cap-sd-highspeed;
@@ -539,6 +590,9 @@
 
 	i2s0: i2s@03830000 {
 		status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -549,7 +603,11 @@
 			label = "SW-TACT2";
 			gpios = <&gpx1 4 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <139>;
+=======
+			linux,code = <KEY_MENU>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_MENU>;
 >>>>>>> v3.18
@@ -560,7 +618,11 @@
 			label = "SW-TACT3";
 			gpios = <&gpx1 5 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <102>;
+=======
+			linux,code = <KEY_HOME>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_HOME>;
 >>>>>>> v3.18
@@ -571,7 +633,11 @@
 			label = "SW-TACT4";
 			gpios = <&gpx1 6 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <103>;
+=======
+			linux,code = <KEY_UP>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_UP>;
 >>>>>>> v3.18
@@ -582,7 +648,11 @@
 			label = "SW-TACT5";
 			gpios = <&gpx1 7 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <108>;
+=======
+			linux,code = <KEY_DOWN>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_DOWN>;
 >>>>>>> v3.18
@@ -593,7 +663,11 @@
 			label = "SW-TACT6";
 			gpios = <&gpx2 0 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <158>;
+=======
+			linux,code = <KEY_BACK>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_BACK>;
 >>>>>>> v3.18
@@ -604,7 +678,11 @@
 			label = "SW-TACT7";
 			gpios = <&gpx2 1 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			linux,code = <143>;
+=======
+			linux,code = <KEY_WAKEUP>;
+>>>>>>> v3.18
 =======
 			linux,code = <KEY_WAKEUP>;
 >>>>>>> v3.18
@@ -620,6 +698,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmc_reg: voltage-regulator {
 		compatible = "regulator-fixed";
 		regulator-name = "VDD_33ON_2.8V";
@@ -633,6 +712,8 @@
 		compatible = "regulator-fixed";
 		regulator-name = "hdmi-en";
 =======
+=======
+>>>>>>> v3.18
 	regulators {
 		compatible = "simple-bus";
 		#address-cells = <1>;
@@ -659,6 +740,9 @@
 			reg = <2>;
 			regulator-name = "hdmi-en";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -669,7 +753,10 @@
 		};
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	dp-controller@145B0000 {
 		samsung,color-space = <0>;
@@ -713,5 +800,8 @@
 			connect-gpios = <&gpd1 7 1>;
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

@@ -12,12 +12,18 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sound/pcm.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/sched.h>
 #include <sound/pcm.h>
 #include <sound/pcm_params.h>
 #include <sound/rawmidi.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "amdtp.h"
 
@@ -28,6 +34,7 @@
 #define TRANSFER_DELAY_TICKS	0x2e00 /* 479.17 µs */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TAG_CIP			1
 
 #define CIP_EOH			(1u << 31)
@@ -35,6 +42,8 @@
 #define AMDTP_FDF_AM824		(0 << 19)
 #define AMDTP_FDF_SFC_SHIFT	16
 =======
+=======
+>>>>>>> v3.18
 /* isochronous header parameters */
 #define ISO_DATA_LENGTH_SHIFT	16
 #define TAG_CIP			1
@@ -58,12 +67,16 @@
 #define AMDTP_DBS_MASK		0x00ff0000
 #define AMDTP_DBS_SHIFT		16
 #define AMDTP_DBC_MASK		0x000000ff
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* TODO: make these configurable */
 #define INTERRUPT_INTERVAL	16
 #define QUEUE_LENGTH		48
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void pcm_period_tasklet(unsigned long data);
 
@@ -81,6 +94,8 @@ int amdtp_out_stream_init(struct amdtp_out_stream *s, struct fw_unit *unit,
 
 	s->unit = fw_unit_get(unit);
 =======
+=======
+>>>>>>> v3.18
 #define IN_PACKET_HEADER_SIZE	4
 #define OUT_PACKET_HEADER_SIZE	0
 
@@ -98,6 +113,9 @@ int amdtp_stream_init(struct amdtp_stream *s, struct fw_unit *unit,
 {
 	s->unit = fw_unit_get(unit);
 	s->direction = dir;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s->flags = flags;
 	s->context = ERR_PTR(-1);
@@ -105,6 +123,7 @@ int amdtp_stream_init(struct amdtp_stream *s, struct fw_unit *unit,
 	tasklet_init(&s->period_tasklet, pcm_period_tasklet, (unsigned long)s);
 	s->packet_index = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0;
 }
@@ -206,6 +225,8 @@ void amdtp_out_stream_set_pcm_format(struct amdtp_out_stream *s,
 {
 	if (WARN_ON(!IS_ERR(s->context)))
 =======
+=======
+>>>>>>> v3.18
 	init_waitqueue_head(&s->callback_wait);
 	s->callbacked = false;
 	s->sync_slave = NULL;
@@ -393,6 +414,9 @@ void amdtp_stream_set_pcm_format(struct amdtp_stream *s,
 				 snd_pcm_format_t format)
 {
 	if (WARN_ON(amdtp_stream_pcm_running(s)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 
@@ -401,6 +425,7 @@ void amdtp_stream_set_pcm_format(struct amdtp_stream *s,
 		WARN_ON(1);
 		/* fall through */
 	case SNDRV_PCM_FORMAT_S16:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		s->transfer_samples = amdtp_write_s16;
 		break;
@@ -419,6 +444,8 @@ EXPORT_SYMBOL(amdtp_out_stream_set_pcm_format);
  */
 void amdtp_out_stream_pcm_prepare(struct amdtp_out_stream *s)
 =======
+=======
+>>>>>>> v3.18
 		if (s->direction == AMDTP_OUT_STREAM) {
 			s->transfer_samples = amdtp_write_s16;
 			break;
@@ -442,6 +469,9 @@ EXPORT_SYMBOL(amdtp_stream_set_pcm_format);
  * This function should be called from the PCM device's .prepare callback.
  */
 void amdtp_stream_pcm_prepare(struct amdtp_stream *s)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	tasklet_kill(&s->period_tasklet);
@@ -449,6 +479,7 @@ void amdtp_stream_pcm_prepare(struct amdtp_stream *s)
 	s->pcm_period_pointer = 0;
 	s->pointer_flush = true;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL(amdtp_out_stream_pcm_prepare);
 
@@ -458,6 +489,8 @@ static unsigned int calculate_data_blocks(struct amdtp_out_stream *s)
 
 	if (!cip_sfc_is_base_44100(s->sfc)) {
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(amdtp_stream_pcm_prepare);
 
 static unsigned int calculate_data_blocks(struct amdtp_stream *s)
@@ -467,6 +500,9 @@ static unsigned int calculate_data_blocks(struct amdtp_stream *s)
 	if (s->flags & CIP_BLOCKING)
 		data_blocks = s->syt_interval;
 	else if (!cip_sfc_is_base_44100(s->sfc)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Sample_rate / 8000 is an integer, and precomputed. */
 		data_blocks = s->data_block_state;
@@ -497,7 +533,11 @@ static unsigned int calculate_data_blocks(struct amdtp_stream *s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int calculate_syt(struct amdtp_out_stream *s,
+=======
+static unsigned int calculate_syt(struct amdtp_stream *s,
+>>>>>>> v3.18
 =======
 static unsigned int calculate_syt(struct amdtp_stream *s,
 >>>>>>> v3.18
@@ -534,6 +574,7 @@ static unsigned int calculate_syt(struct amdtp_stream *s,
 
 	if (syt_offset < TICKS_PER_CYCLE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		syt_offset += TRANSFER_DELAY_TICKS - TICKS_PER_CYCLE;
 		syt = (cycle + syt_offset / TICKS_PER_CYCLE) << 12;
 		syt += syt_offset % TICKS_PER_CYCLE;
@@ -546,6 +587,8 @@ static unsigned int calculate_syt(struct amdtp_stream *s,
 
 static void amdtp_write_s32(struct amdtp_out_stream *s,
 =======
+=======
+>>>>>>> v3.18
 		syt_offset += s->transfer_delay;
 		syt = (cycle + syt_offset / TICKS_PER_CYCLE) << 12;
 		syt += syt_offset % TICKS_PER_CYCLE;
@@ -557,13 +600,20 @@ static void amdtp_write_s32(struct amdtp_out_stream *s,
 }
 
 static void amdtp_write_s32(struct amdtp_stream *s,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    struct snd_pcm_substream *pcm,
 			    __be32 *buffer, unsigned int frames)
 {
 	struct snd_pcm_runtime *runtime = pcm->runtime;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int channels, remaining_frames, frame_step, i, c;
+=======
+	unsigned int channels, remaining_frames, i, c;
+>>>>>>> v3.18
 =======
 	unsigned int channels, remaining_frames, i, c;
 >>>>>>> v3.18
@@ -571,6 +621,7 @@ static void amdtp_write_s32(struct amdtp_stream *s,
 
 	channels = s->pcm_channels;
 	src = (void *)runtime->dma_area +
+<<<<<<< HEAD
 <<<<<<< HEAD
 			s->pcm_buffer_pointer * (runtime->frame_bits / 8);
 	remaining_frames = runtime->buffer_size - s->pcm_buffer_pointer;
@@ -584,6 +635,8 @@ static void amdtp_write_s32(struct amdtp_stream *s,
 		}
 		buffer += frame_step;
 =======
+=======
+>>>>>>> v3.18
 			frames_to_bytes(runtime, s->pcm_buffer_pointer);
 	remaining_frames = runtime->buffer_size - s->pcm_buffer_pointer;
 
@@ -594,6 +647,9 @@ static void amdtp_write_s32(struct amdtp_stream *s,
 			src++;
 		}
 		buffer += s->data_block_quadlets;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (--remaining_frames == 0)
 			src = (void *)runtime->dma_area;
@@ -601,7 +657,11 @@ static void amdtp_write_s32(struct amdtp_stream *s,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void amdtp_write_s16(struct amdtp_out_stream *s,
+=======
+static void amdtp_write_s16(struct amdtp_stream *s,
+>>>>>>> v3.18
 =======
 static void amdtp_write_s16(struct amdtp_stream *s,
 >>>>>>> v3.18
@@ -610,7 +670,11 @@ static void amdtp_write_s16(struct amdtp_stream *s,
 {
 	struct snd_pcm_runtime *runtime = pcm->runtime;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int channels, remaining_frames, frame_step, i, c;
+=======
+	unsigned int channels, remaining_frames, i, c;
+>>>>>>> v3.18
 =======
 	unsigned int channels, remaining_frames, i, c;
 >>>>>>> v3.18
@@ -618,6 +682,7 @@ static void amdtp_write_s16(struct amdtp_stream *s,
 
 	channels = s->pcm_channels;
 	src = (void *)runtime->dma_area +
+<<<<<<< HEAD
 <<<<<<< HEAD
 			s->pcm_buffer_pointer * (runtime->frame_bits / 8);
 	remaining_frames = runtime->buffer_size - s->pcm_buffer_pointer;
@@ -631,6 +696,8 @@ static void amdtp_write_s16(struct amdtp_stream *s,
 		}
 		buffer += frame_step;
 =======
+=======
+>>>>>>> v3.18
 			frames_to_bytes(runtime, s->pcm_buffer_pointer);
 	remaining_frames = runtime->buffer_size - s->pcm_buffer_pointer;
 
@@ -641,6 +708,9 @@ static void amdtp_write_s16(struct amdtp_stream *s,
 			src++;
 		}
 		buffer += s->data_block_quadlets;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (--remaining_frames == 0)
 			src = (void *)runtime->dma_area;
@@ -648,8 +718,11 @@ static void amdtp_write_s16(struct amdtp_stream *s,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void amdtp_fill_pcm_silence(struct amdtp_out_stream *s,
 =======
+=======
+>>>>>>> v3.18
 static void amdtp_read_s32(struct amdtp_stream *s,
 			   struct snd_pcm_substream *pcm,
 			   __be32 *buffer, unsigned int frames)
@@ -675,6 +748,9 @@ static void amdtp_read_s32(struct amdtp_stream *s,
 }
 
 static void amdtp_fill_pcm_silence(struct amdtp_stream *s,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				   __be32 *buffer, unsigned int frames)
 {
@@ -683,7 +759,11 @@ static void amdtp_fill_pcm_silence(struct amdtp_stream *s,
 	for (i = 0; i < frames; ++i) {
 		for (c = 0; c < s->pcm_channels; ++c)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			buffer[c] = cpu_to_be32(0x40000000);
+=======
+			buffer[s->pcm_positions[c]] = cpu_to_be32(0x40000000);
+>>>>>>> v3.18
 =======
 			buffer[s->pcm_positions[c]] = cpu_to_be32(0x40000000);
 >>>>>>> v3.18
@@ -691,6 +771,7 @@ static void amdtp_fill_pcm_silence(struct amdtp_stream *s,
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void amdtp_fill_midi(struct amdtp_out_stream *s,
 			    __be32 *buffer, unsigned int frames)
@@ -724,6 +805,8 @@ static void queue_out_packet(struct amdtp_out_stream *s, unsigned int cycle)
 	buffer[1] = cpu_to_be32(CIP_EOH | CIP_FMT_AM | AMDTP_FDF_AM824 |
 				(s->sfc << AMDTP_FDF_SFC_SHIFT) | syt);
 =======
+=======
+>>>>>>> v3.18
 static void amdtp_fill_midi(struct amdtp_stream *s,
 			    __be32 *buffer, unsigned int frames)
 {
@@ -863,6 +946,9 @@ static void handle_out_packet(struct amdtp_stream *s, unsigned int syt)
 				s->data_block_counter);
 	buffer[1] = cpu_to_be32(CIP_EOH | CIP_FMT_AM | AMDTP_FDF_AM824 |
 				(s->sfc << CIP_FDF_SFC_SHIFT) | syt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	buffer += 2;
 
@@ -876,6 +962,7 @@ static void handle_out_packet(struct amdtp_stream *s, unsigned int syt)
 
 	s->data_block_counter = (s->data_block_counter + data_blocks) & 0xff;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	packet.payload_length = 8 + data_blocks * 4 * s->data_block_quadlets;
 	packet.interrupt = IS_ALIGNED(index + 1, INTERRUPT_INTERVAL);
@@ -927,6 +1014,8 @@ static void out_packet_callback(struct fw_iso_context *context, u32 cycle,
 	struct amdtp_out_stream *s = data;
 	unsigned int i, packets = header_length / 4;
 =======
+=======
+>>>>>>> v3.18
 	payload_length = 8 + data_blocks * 4 * s->data_block_quadlets;
 	if (queue_out_packet(s, payload_length, false) < 0) {
 		s->packet_index = -1;
@@ -1048,6 +1137,9 @@ static void out_stream_callback(struct fw_iso_context *context, u32 cycle,
 {
 	struct amdtp_stream *s = private_data;
 	unsigned int i, syt, packets = header_length / 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1057,6 +1149,7 @@ static void out_stream_callback(struct fw_iso_context *context, u32 cycle,
 	 */
 	cycle += QUEUE_LENGTH - packets;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < packets; ++i)
 		queue_out_packet(s, ++cycle);
@@ -1088,6 +1181,8 @@ static int queue_initial_skip_packets(struct amdtp_out_stream *s)
  * amdtp_out_stream_start - start sending packets
  * @s: the AMDTP output stream to start
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < packets; ++i) {
 		syt = calculate_syt(s, ++cycle);
 		handle_out_packet(s, syt);
@@ -1176,11 +1271,15 @@ static void amdtp_stream_first_callback(struct fw_iso_context *context,
 /**
  * amdtp_stream_start - start transferring packets
  * @s: the AMDTP stream to start
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @channel: the isochronous channel on the bus
  * @speed: firewire speed code
  *
  * The stream cannot be started until it has been configured with
+<<<<<<< HEAD
 <<<<<<< HEAD
  * amdtp_out_stream_set_hw_params(), amdtp_out_stream_set_pcm(), and
  * amdtp_out_stream_set_midi(); and it must be started before any
@@ -1188,10 +1287,15 @@ static void amdtp_stream_first_callback(struct fw_iso_context *context,
  */
 int amdtp_out_stream_start(struct amdtp_out_stream *s, int channel, int speed)
 =======
+=======
+>>>>>>> v3.18
  * amdtp_stream_set_parameters() and it must be started before any PCM or MIDI
  * device can be started.
  */
 int amdtp_stream_start(struct amdtp_stream *s, int channel, int speed)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	static const struct {
@@ -1207,6 +1311,7 @@ int amdtp_stream_start(struct amdtp_stream *s, int channel, int speed)
 		[CIP_SFC_176400] = {  0,   67 },
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	mutex_lock(&s->mutex);
@@ -1214,6 +1319,8 @@ int amdtp_stream_start(struct amdtp_stream *s, int channel, int speed)
 	if (WARN_ON(!IS_ERR(s->context) ||
 		    (!s->pcm_channels && !s->midi_ports))) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned int header_size;
 	enum dma_data_direction dir;
 	int type, tag, err;
@@ -1222,28 +1329,40 @@ int amdtp_stream_start(struct amdtp_stream *s, int channel, int speed)
 
 	if (WARN_ON(amdtp_stream_running(s) ||
 		    (s->data_block_quadlets < 1))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = -EBADFD;
 		goto err_unlock;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (s->direction == AMDTP_IN_STREAM &&
 	    s->flags & CIP_SKIP_INIT_DBC_CHECK)
 		s->data_block_counter = UINT_MAX;
 	else
 		s->data_block_counter = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s->data_block_state = initial_state[s->sfc].data_block;
 	s->syt_offset_state = initial_state[s->sfc].syt_offset;
 	s->last_syt_offset = TICKS_PER_CYCLE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = iso_packets_buffer_init(&s->buffer, s->unit, QUEUE_LENGTH,
 				      amdtp_out_stream_get_max_payload(s),
 				      DMA_TO_DEVICE);
 =======
+=======
+>>>>>>> v3.18
 	/* initialize packet buffer */
 	if (s->direction == AMDTP_IN_STREAM) {
 		dir = DMA_FROM_DEVICE;
@@ -1256,11 +1375,15 @@ int amdtp_stream_start(struct amdtp_stream *s, int channel, int speed)
 	}
 	err = iso_packets_buffer_init(&s->buffer, s->unit, QUEUE_LENGTH,
 				      amdtp_stream_get_max_payload(s), dir);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err < 0)
 		goto err_unlock;
 
 	s->context = fw_iso_context_create(fw_parent_device(s->unit)->card,
+<<<<<<< HEAD
 <<<<<<< HEAD
 					   FW_ISO_CONTEXT_TRANSMIT,
 					   channel, speed, 0,
@@ -1269,10 +1392,15 @@ int amdtp_stream_start(struct amdtp_stream *s, int channel, int speed)
 					   type, channel, speed, header_size,
 					   amdtp_stream_first_callback, s);
 >>>>>>> v3.18
+=======
+					   type, channel, speed, header_size,
+					   amdtp_stream_first_callback, s);
+>>>>>>> v3.18
 	if (IS_ERR(s->context)) {
 		err = PTR_ERR(s->context);
 		if (err == -EBUSY)
 			dev_err(&s->unit->device,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				"no free output stream on this controller\n");
 		goto err_buffer;
@@ -1288,6 +1416,8 @@ int amdtp_stream_start(struct amdtp_stream *s, int channel, int speed)
 
 	err = fw_iso_context_start(s->context, -1, 0, 0);
 =======
+=======
+>>>>>>> v3.18
 				"no free stream on this controller\n");
 		goto err_buffer;
 	}
@@ -1311,6 +1441,9 @@ int amdtp_stream_start(struct amdtp_stream *s, int channel, int speed)
 
 	s->callbacked = false;
 	err = fw_iso_context_start(s->context, -1, 0, tag);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err < 0)
 		goto err_context;
@@ -1330,6 +1463,7 @@ err_unlock:
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(amdtp_out_stream_start);
 
 /**
@@ -1343,6 +1477,8 @@ unsigned long amdtp_out_stream_pcm_pointer(struct amdtp_out_stream *s)
 	/* this optimization is allowed to be racy */
 	if (s->pointer_flush)
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(amdtp_stream_start);
 
 /**
@@ -1355,6 +1491,9 @@ unsigned long amdtp_stream_pcm_pointer(struct amdtp_stream *s)
 {
 	/* this optimization is allowed to be racy */
 	if (s->pointer_flush && amdtp_stream_running(s))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		fw_iso_context_flush_completions(s->context);
 	else
@@ -1362,6 +1501,7 @@ unsigned long amdtp_stream_pcm_pointer(struct amdtp_stream *s)
 
 	return ACCESS_ONCE(s->pcm_buffer_pointer);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL(amdtp_out_stream_pcm_pointer);
 
@@ -1371,6 +1511,8 @@ EXPORT_SYMBOL(amdtp_out_stream_pcm_pointer);
  */
 void amdtp_out_stream_update(struct amdtp_out_stream *s)
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(amdtp_stream_pcm_pointer);
 
 /**
@@ -1378,11 +1520,15 @@ EXPORT_SYMBOL(amdtp_stream_pcm_pointer);
  * @s: the AMDTP stream
  */
 void amdtp_stream_update(struct amdtp_stream *s)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	ACCESS_ONCE(s->source_node_id_field) =
 		(fw_parent_device(s->unit)->card->node_id & 0x3f) << 24;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL(amdtp_out_stream_update);
 
@@ -1390,16 +1536,22 @@ EXPORT_SYMBOL(amdtp_out_stream_update);
  * amdtp_out_stream_stop - stop sending packets
  * @s: the AMDTP output stream to stop
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(amdtp_stream_update);
 
 /**
  * amdtp_stream_stop - stop sending packets
  * @s: the AMDTP stream to stop
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * All PCM and MIDI devices of the stream must be stopped before the stream
  * itself can be stopped.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void amdtp_out_stream_stop(struct amdtp_out_stream *s)
 {
@@ -1407,11 +1559,16 @@ void amdtp_out_stream_stop(struct amdtp_out_stream *s)
 
 	if (IS_ERR(s->context)) {
 =======
+=======
+>>>>>>> v3.18
 void amdtp_stream_stop(struct amdtp_stream *s)
 {
 	mutex_lock(&s->mutex);
 
 	if (!amdtp_stream_running(s)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mutex_unlock(&s->mutex);
 		return;
@@ -1424,6 +1581,7 @@ void amdtp_stream_stop(struct amdtp_stream *s)
 	iso_packets_buffer_destroy(&s->buffer, s->unit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&s->mutex);
 }
 EXPORT_SYMBOL(amdtp_out_stream_stop);
@@ -1431,6 +1589,8 @@ EXPORT_SYMBOL(amdtp_out_stream_stop);
 /**
  * amdtp_out_stream_pcm_abort - abort the running PCM device
 =======
+=======
+>>>>>>> v3.18
 	s->callbacked = false;
 
 	mutex_unlock(&s->mutex);
@@ -1439,6 +1599,9 @@ EXPORT_SYMBOL(amdtp_stream_stop);
 
 /**
  * amdtp_stream_pcm_abort - abort the running PCM device
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @s: the AMDTP stream about to be stopped
  *
@@ -1446,7 +1609,11 @@ EXPORT_SYMBOL(amdtp_stream_stop);
  * function first to stop the PCM device.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void amdtp_out_stream_pcm_abort(struct amdtp_out_stream *s)
+=======
+void amdtp_stream_pcm_abort(struct amdtp_stream *s)
+>>>>>>> v3.18
 =======
 void amdtp_stream_pcm_abort(struct amdtp_stream *s)
 >>>>>>> v3.18
@@ -1462,7 +1629,11 @@ void amdtp_stream_pcm_abort(struct amdtp_stream *s)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(amdtp_out_stream_pcm_abort);
+=======
+EXPORT_SYMBOL(amdtp_stream_pcm_abort);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(amdtp_stream_pcm_abort);
 >>>>>>> v3.18

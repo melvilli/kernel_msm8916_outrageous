@@ -22,14 +22,20 @@
 static int reg_read(struct dsa_switch *ds, int addr, int reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mdiobus_read(ds->master_mii_bus, ds->pd->sw_addr + addr, reg);
 =======
+=======
+>>>>>>> v3.18
 	struct mii_bus *bus = dsa_host_dev_to_mii_bus(ds->master_dev);
 
 	if (bus == NULL)
 		return -EINVAL;
 
 	return mdiobus_read(bus, ds->pd->sw_addr + addr, reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -47,15 +53,21 @@ static int reg_read(struct dsa_switch *ds, int addr, int reg)
 static int reg_write(struct dsa_switch *ds, int addr, int reg, u16 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mdiobus_write(ds->master_mii_bus, ds->pd->sw_addr + addr,
 			     reg, val);
 =======
+=======
+>>>>>>> v3.18
 	struct mii_bus *bus = dsa_host_dev_to_mii_bus(ds->master_dev);
 
 	if (bus == NULL)
 		return -EINVAL;
 
 	return mdiobus_write(bus, ds->pd->sw_addr + addr, reg, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -69,11 +81,14 @@ static int reg_write(struct dsa_switch *ds, int addr, int reg, u16 val)
 	})
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char *mv88e6060_probe(struct mii_bus *bus, int sw_addr)
 {
 	int ret;
 
 =======
+=======
+>>>>>>> v3.18
 static char *mv88e6060_probe(struct device *host_dev, int sw_addr)
 {
 	struct mii_bus *bus = dsa_host_dev_to_mii_bus(host_dev);
@@ -82,6 +97,9 @@ static char *mv88e6060_probe(struct device *host_dev, int sw_addr)
 	if (bus == NULL)
 		return NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = mdiobus_read(bus, sw_addr + REG_PORT(0), 0x03);
 	if (ret >= 0) {
@@ -288,7 +306,11 @@ static void mv88e6060_poll_link(struct dsa_switch *ds)
 
 static struct dsa_switch_driver mv88e6060_switch_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.tag_protocol	= htons(ETH_P_TRAILER),
+=======
+	.tag_protocol	= DSA_TAG_PROTO_TRAILER,
+>>>>>>> v3.18
 =======
 	.tag_protocol	= DSA_TAG_PROTO_TRAILER,
 >>>>>>> v3.18

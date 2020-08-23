@@ -44,12 +44,18 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_COHERENT_LOCAL_CACHE()
 
 /*
  * The noallocl2 option suppresses all use of the L2 cache to cache
  * locally from a remote home.  There's no point in using it if we
  * don't have coherent local caching, though.
+=======
+/*
+ * The noallocl2 option suppresses all use of the L2 cache to cache
+ * locally from a remote home.
+>>>>>>> v3.18
 =======
 /*
  * The noallocl2 option suppresses all use of the L2 cache to cache
@@ -65,12 +71,15 @@ static int __init set_noallocl2(char *str)
 early_param("noallocl2", set_noallocl2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 
 #define noallocl2 0
 
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -182,7 +191,12 @@ void flush_remote(unsigned long cache_pfn, unsigned long cache_control,
 static void homecache_finv_page_va(void* va, int home)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (home == smp_processor_id()) {
+=======
+	int cpu = get_cpu();
+	if (home == cpu) {
+>>>>>>> v3.18
 =======
 	int cpu = get_cpu();
 	if (home == cpu) {
@@ -195,6 +209,10 @@ static void homecache_finv_page_va(void* va, int home)
 		finv_buffer_remote(va, PAGE_SIZE, 0);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	put_cpu();
+>>>>>>> v3.18
 =======
 	put_cpu();
 >>>>>>> v3.18
@@ -217,7 +235,11 @@ void homecache_finv_map_page(struct page *page, int home)
 	va = __fix_to_virt(FIX_HOMECACHE_BEGIN + smp_processor_id());
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptep = virt_to_pte(NULL, (unsigned long)va);
+=======
+	ptep = virt_to_kpte(va);
+>>>>>>> v3.18
 =======
 	ptep = virt_to_kpte(va);
 >>>>>>> v3.18
@@ -286,10 +308,15 @@ static int pte_to_home(pte_t pte)
 	case HV_PTE_MODE_UNCACHED:
 		return PAGE_HOME_UNCACHED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_CBOX_HOME_MAP()
 	case HV_PTE_MODE_CACHE_HASH_L3:
 		return PAGE_HOME_HASH;
 #endif
+=======
+	case HV_PTE_MODE_CACHE_HASH_L3:
+		return PAGE_HOME_HASH;
+>>>>>>> v3.18
 =======
 	case HV_PTE_MODE_CACHE_HASH_L3:
 		return PAGE_HOME_HASH;
@@ -351,6 +378,7 @@ pte_t pte_set_home(pte_t pte, int home)
 			}
 		} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_CBOX_HOME_MAP()
 		if (hash_default)
 			pte = hv_pte_set_mode(pte, HV_PTE_MODE_CACHE_HASH_L3);
@@ -361,16 +389,27 @@ pte_t pte_set_home(pte_t pte, int home)
 			pte = hv_pte_set_mode(pte, HV_PTE_MODE_CACHE_HASH_L3);
 		else
 >>>>>>> v3.18
+=======
+		if (hash_default)
+			pte = hv_pte_set_mode(pte, HV_PTE_MODE_CACHE_HASH_L3);
+		else
+>>>>>>> v3.18
 			pte = hv_pte_set_mode(pte, HV_PTE_MODE_CACHE_NO_L3);
 		pte = hv_pte_set_nc(pte);
 		break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if CHIP_HAS_CBOX_HOME_MAP()
 	case PAGE_HOME_HASH:
 		pte = hv_pte_set_mode(pte, HV_PTE_MODE_CACHE_HASH_L3);
 		break;
 #endif
+=======
+	case PAGE_HOME_HASH:
+		pte = hv_pte_set_mode(pte, HV_PTE_MODE_CACHE_HASH_L3);
+		break;
+>>>>>>> v3.18
 =======
 	case PAGE_HOME_HASH:
 		pte = hv_pte_set_mode(pte, HV_PTE_MODE_CACHE_HASH_L3);
@@ -386,7 +425,10 @@ pte_t pte_set_home(pte_t pte, int home)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_NC_AND_NOALLOC_BITS()
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (noallocl2)
@@ -398,7 +440,10 @@ pte_t pte_set_home(pte_t pte, int home)
 		pte = hv_pte_set_mode(pte, HV_PTE_MODE_UNCACHED);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -417,6 +462,7 @@ EXPORT_SYMBOL(pte_set_home);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_CBOX_HOME_MAP()
 static inline int initial_page_home(void) { return PAGE_HOME_HASH; }
 #else
@@ -431,6 +477,8 @@ int page_home(struct page *page)
 		unsigned long kva = (unsigned long)page_address(page);
 		return pte_to_home(*virt_to_pte(NULL, kva));
 =======
+=======
+>>>>>>> v3.18
 int page_home(struct page *page)
 {
 	if (PageHighMem(page)) {
@@ -438,6 +486,9 @@ int page_home(struct page *page)
 	} else {
 		unsigned long kva = (unsigned long)page_address(page);
 		return pte_to_home(*virt_to_kpte(kva));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -458,7 +509,11 @@ void homecache_change_page_home(struct page *page, int order, int home)
 
 	for (i = 0; i < pages; ++i, kva += PAGE_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte_t *ptep = virt_to_pte(NULL, kva);
+=======
+		pte_t *ptep = virt_to_kpte(kva);
+>>>>>>> v3.18
 =======
 		pte_t *ptep = virt_to_kpte(kva);
 >>>>>>> v3.18
@@ -496,9 +551,15 @@ void __homecache_free_pages(struct page *page, unsigned int order)
 {
 	if (put_page_testzero(page)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		homecache_change_page_home(page, order, initial_page_home());
 		if (order == 0) {
 			free_hot_cold_page(page, 0);
+=======
+		homecache_change_page_home(page, order, PAGE_HOME_HASH);
+		if (order == 0) {
+			free_hot_cold_page(page, false);
+>>>>>>> v3.18
 =======
 		homecache_change_page_home(page, order, PAGE_HOME_HASH);
 		if (order == 0) {

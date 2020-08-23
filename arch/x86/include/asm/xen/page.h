@@ -50,11 +50,14 @@ extern unsigned long set_phys_range_identity(unsigned long pfn_s,
 					     unsigned long pfn_e);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int m2p_add_override(unsigned long mfn, struct page *page,
 			    struct gnttab_map_grant_ref *kmap_op);
 extern int m2p_remove_override(struct page *page,
 				struct gnttab_map_grant_ref *kmap_op);
 =======
+=======
+>>>>>>> v3.18
 extern int set_foreign_p2m_mapping(struct gnttab_map_grant_ref *map_ops,
 				   struct gnttab_map_grant_ref *kmap_ops,
 				   struct page **pages, unsigned int count);
@@ -66,6 +69,9 @@ extern int clear_foreign_p2m_mapping(struct gnttab_unmap_grant_ref *unmap_ops,
 extern int m2p_remove_override(struct page *page,
 			       struct gnttab_map_grant_ref *kmap_op,
 			       unsigned long mfn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct page *m2p_find_override(unsigned long mfn);
 extern unsigned long m2p_find_override_pfn(unsigned long mfn, unsigned long pfn);
@@ -136,7 +142,11 @@ static inline unsigned long mfn_to_pfn(unsigned long mfn)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* 
+=======
+	/*
+>>>>>>> v3.18
 =======
 	/*
 >>>>>>> v3.18
@@ -186,14 +196,20 @@ static inline xpaddr_t machine_to_phys(xmaddr_t machine)
 static inline unsigned long mfn_to_local_pfn(unsigned long mfn)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long pfn = mfn_to_pfn(mfn);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long pfn;
 
 	if (xen_feature(XENFEAT_auto_translated_physmap))
 		return mfn;
 
 	pfn = mfn_to_pfn(mfn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (get_phys_to_machine(pfn) != mfn)
 		return -1; /* force !pfn_valid() */
@@ -250,6 +266,10 @@ void make_lowmem_page_readwrite(void *vaddr);
 
 #define xen_remap(cookie, size) ioremap((cookie), (size));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define xen_unmap(cookie) iounmap((cookie))
+>>>>>>> v3.18
 =======
 #define xen_unmap(cookie) iounmap((cookie))
 >>>>>>> v3.18

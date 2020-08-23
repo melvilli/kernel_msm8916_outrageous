@@ -334,7 +334,13 @@ static void __init alloc_masks(struct sysinfo_15_1_x *info,
 	nr_masks = max(nr_masks, 1);
 	for (i = 0; i < nr_masks; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mask->next = alloc_bootmem(sizeof(struct mask_info));
+=======
+		mask->next = alloc_bootmem_align(
+			roundup_pow_of_two(sizeof(struct mask_info)),
+			roundup_pow_of_two(sizeof(struct mask_info)));
+>>>>>>> v3.18
 =======
 		mask->next = alloc_bootmem_align(
 			roundup_pow_of_two(sizeof(struct mask_info)),
@@ -450,6 +456,7 @@ int topology_cpu_init(struct cpu *cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init topology_init(void)
 {
 	if (!MACHINE_HAS_TOPOLOGY) {
@@ -463,6 +470,8 @@ out:
 }
 device_initcall(topology_init);
 =======
+=======
+>>>>>>> v3.18
 const struct cpumask *cpu_coregroup_mask(int cpu)
 {
 	return &cpu_topology[cpu].core_mask;
@@ -496,4 +505,7 @@ static int __init early_topology_init(void)
 	return 0;
 }
 early_initcall(early_topology_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -19,6 +19,11 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_device.h>
@@ -29,6 +34,7 @@
 
 #include "core.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int sh_pfc_ioremap(struct sh_pfc *pfc, struct platform_device *pdev)
 {
@@ -54,6 +60,8 @@ static int sh_pfc_ioremap(struct sh_pfc *pfc, struct platform_device *pdev)
 		if (!pfc->window[k].virt)
 			return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 static int sh_pfc_map_resources(struct sh_pfc *pfc,
 				struct platform_device *pdev)
 {
@@ -115,6 +123,9 @@ static int sh_pfc_map_resources(struct sh_pfc *pfc,
 			*irqs++ = res->start;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -130,7 +141,11 @@ static void __iomem *sh_pfc_phys_to_virt(struct sh_pfc *pfc,
 	/* scan through physical windows and convert address */
 	for (i = 0; i < pfc->num_windows; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		window = pfc->window + i;
+=======
+		window = pfc->windows + i;
+>>>>>>> v3.18
 =======
 		window = pfc->windows + i;
 >>>>>>> v3.18
@@ -154,6 +169,7 @@ int sh_pfc_get_pin_index(struct sh_pfc *pfc, unsigned int pin)
 	unsigned int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pfc->info->ranges == NULL)
 		return pin;
 
@@ -166,6 +182,8 @@ int sh_pfc_get_pin_index(struct sh_pfc *pfc, unsigned int pin)
 
 		offset += range->end - range->begin + 1;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0, offset = 0; i < pfc->nr_ranges; ++i) {
 		const struct sh_pfc_pin_range *range = &pfc->ranges[i];
 
@@ -174,6 +192,9 @@ int sh_pfc_get_pin_index(struct sh_pfc *pfc, unsigned int pin)
 			     ? offset + pin - range->start : -1;
 
 		offset += range->end - range->start + 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -181,8 +202,12 @@ int sh_pfc_get_pin_index(struct sh_pfc *pfc, unsigned int pin)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sh_pfc_enum_in_range(pinmux_enum_t enum_id,
 				const struct pinmux_range *r)
+=======
+static int sh_pfc_enum_in_range(u16 enum_id, const struct pinmux_range *r)
+>>>>>>> v3.18
 =======
 static int sh_pfc_enum_in_range(u16 enum_id, const struct pinmux_range *r)
 >>>>>>> v3.18
@@ -238,7 +263,11 @@ static void sh_pfc_config_reg_helper(struct sh_pfc *pfc,
 				     unsigned long *posp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int k;
+=======
+	unsigned int k;
+>>>>>>> v3.18
 =======
 	unsigned int k;
 >>>>>>> v3.18
@@ -285,7 +314,11 @@ static void sh_pfc_write_config_reg(struct sh_pfc *pfc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sh_pfc_get_config_reg(struct sh_pfc *pfc, pinmux_enum_t enum_id,
+=======
+static int sh_pfc_get_config_reg(struct sh_pfc *pfc, u16 enum_id,
+>>>>>>> v3.18
 =======
 static int sh_pfc_get_config_reg(struct sh_pfc *pfc, u16 enum_id,
 >>>>>>> v3.18
@@ -295,7 +328,11 @@ static int sh_pfc_get_config_reg(struct sh_pfc *pfc, u16 enum_id,
 	const struct pinmux_cfg_reg *config_reg;
 	unsigned long r_width, f_width, curr_width, ncomb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int k, m, n, pos, bit_pos;
+=======
+	unsigned int k, m, n, pos, bit_pos;
+>>>>>>> v3.18
 =======
 	unsigned int k, m, n, pos, bit_pos;
 >>>>>>> v3.18
@@ -337,17 +374,23 @@ static int sh_pfc_get_config_reg(struct sh_pfc *pfc, u16 enum_id,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sh_pfc_mark_to_enum(struct sh_pfc *pfc, pinmux_enum_t mark, int pos,
 			      pinmux_enum_t *enum_idp)
 {
 	const pinmux_enum_t *data = pfc->info->gpio_data;
 	int k;
 =======
+=======
+>>>>>>> v3.18
 static int sh_pfc_mark_to_enum(struct sh_pfc *pfc, u16 mark, int pos,
 			      u16 *enum_idp)
 {
 	const u16 *data = pfc->info->gpio_data;
 	unsigned int k;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pos) {
@@ -371,7 +414,11 @@ int sh_pfc_config_mux(struct sh_pfc *pfc, unsigned mark, int pinmux_type)
 {
 	const struct pinmux_cfg_reg *cr = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinmux_enum_t enum_id;
+=======
+	u16 enum_id;
+>>>>>>> v3.18
 =======
 	u16 enum_id;
 >>>>>>> v3.18
@@ -394,6 +441,7 @@ int sh_pfc_config_mux(struct sh_pfc *pfc, unsigned mark, int pinmux_type)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case PINMUX_TYPE_INPUT_PULLUP:
 		range = &pfc->info->input_pu;
 		break;
@@ -402,6 +450,8 @@ int sh_pfc_config_mux(struct sh_pfc *pfc, unsigned mark, int pinmux_type)
 		range = &pfc->info->input_pd;
 		break;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:
@@ -464,9 +514,12 @@ int sh_pfc_config_mux(struct sh_pfc *pfc, unsigned mark, int pinmux_type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sh_pfc_probe(struct platform_device *pdev)
 {
 =======
+=======
+>>>>>>> v3.18
 static int sh_pfc_init_ranges(struct sh_pfc *pfc)
 {
 	struct sh_pfc_pin_range *range;
@@ -589,15 +642,21 @@ static int sh_pfc_probe(struct platform_device *pdev)
 #ifdef CONFIG_OF
 	struct device_node *np = pdev->dev.of_node;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct sh_pfc_soc_info *info;
 	struct sh_pfc *pfc;
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = pdev->id_entry->driver_data
 	      ? (void *)pdev->id_entry->driver_data : pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 	if (np)
 		info = of_match_device(sh_pfc_of_table, &pdev->dev)->data;
@@ -605,6 +664,9 @@ static int sh_pfc_probe(struct platform_device *pdev)
 #endif
 		info = platid ? (const void *)platid->driver_data : NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (info == NULL)
 		return -ENODEV;
@@ -617,7 +679,11 @@ static int sh_pfc_probe(struct platform_device *pdev)
 	pfc->dev = &pdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = sh_pfc_ioremap(pfc, pdev);
+=======
+	ret = sh_pfc_map_resources(pfc, pdev);
+>>>>>>> v3.18
 =======
 	ret = sh_pfc_map_resources(pfc, pdev);
 >>>>>>> v3.18
@@ -627,9 +693,12 @@ static int sh_pfc_probe(struct platform_device *pdev)
 	spin_lock_init(&pfc->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl_provide_dummies();
 
 =======
+=======
+>>>>>>> v3.18
 	if (info->ops && info->ops->init) {
 		ret = info->ops->init(pfc);
 		if (ret < 0)
@@ -642,6 +711,9 @@ static int sh_pfc_probe(struct platform_device *pdev)
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Initialize pinctrl bindings first
@@ -682,8 +754,11 @@ static int sh_pfc_remove(struct platform_device *pdev)
 	sh_pfc_unregister_pinctrl(pfc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -697,10 +772,13 @@ static const struct platform_device_id sh_pfc_id_table[] = {
 	{ "pfc-r8a7740", (kernel_ulong_t)&r8a7740_pinmux_info },
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PINCTRL_PFC_R8A7779
 	{ "pfc-r8a7779", (kernel_ulong_t)&r8a7779_pinmux_info },
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PINCTRL_PFC_R8A7778
 	{ "pfc-r8a7778", (kernel_ulong_t)&r8a7778_pinmux_info },
 #endif
@@ -713,6 +791,9 @@ static const struct platform_device_id sh_pfc_id_table[] = {
 #ifdef CONFIG_PINCTRL_PFC_R8A7791
 	{ "pfc-r8a7791", (kernel_ulong_t)&r8a7791_pinmux_info },
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PINCTRL_PFC_SH7203
 	{ "pfc-sh7203", (kernel_ulong_t)&sh7203_pinmux_info },
@@ -769,6 +850,10 @@ static struct platform_driver sh_pfc_driver = {
 		.name	= DRV_NAME,
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(sh_pfc_of_table),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(sh_pfc_of_table),
 >>>>>>> v3.18

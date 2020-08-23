@@ -83,6 +83,11 @@ static int ocfs2_do_flock(struct file *file, struct inode *inode,
 
 	ret = flock_lock_file_wait(file, fl);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ret)
+		ocfs2_file_unlock(file);
+>>>>>>> v3.18
 =======
 	if (ret)
 		ocfs2_file_unlock(file);

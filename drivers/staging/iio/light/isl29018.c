@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * A iio driver for the light sensor ISL 29018.
+=======
+ * A iio driver for the light sensor ISL 29018/29023/29035.
+>>>>>>> v3.18
 =======
  * A iio driver for the light sensor ISL 29018/29023/29035.
 >>>>>>> v3.18
@@ -35,6 +39,10 @@
 #include <linux/iio/iio.h>
 #include <linux/iio/sysfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -67,7 +75,10 @@
 #define ISL29018_TEST_MASK		(0xFF << ISL29018_TEST_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ISL29035_REG_DEVICE_ID		0x0F
 #define ISL29035_DEVICE_ID_SHIFT	0x03
 #define ISL29035_DEVICE_ID_MASK		(0x7 << ISL29035_DEVICE_ID_SHIFT)
@@ -75,12 +86,19 @@
 #define ISL29035_BOUT_SHIFT		0x07
 #define ISL29035_BOUT_MASK		(0x01 << ISL29035_BOUT_SHIFT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct isl29018_chip {
 	struct device		*dev;
 	struct regmap		*regmap;
 	struct mutex		lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			type;
+>>>>>>> v3.18
 =======
 	int			type;
 >>>>>>> v3.18
@@ -263,7 +281,11 @@ static ssize_t store_range(struct device *dev,
 	unsigned int new_range;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 10, &lval))
+=======
+	if (kstrtoul(buf, 10, &lval))
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 10, &lval))
 >>>>>>> v3.18
@@ -306,6 +328,7 @@ static ssize_t store_resolution(struct device *dev,
 	struct isl29018_chip *chip = iio_priv(indio_dev);
 	int status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long lval;
 	unsigned int new_adc_bit;
 
@@ -313,12 +336,17 @@ static ssize_t store_resolution(struct device *dev,
 		return -EINVAL;
 	if (!(lval == 4 || lval == 8 || lval == 12 || lval == 16)) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned int val;
 	unsigned int new_adc_bit;
 
 	if (kstrtouint(buf, 10, &val))
 		return -EINVAL;
 	if (!(val == 4 || val == 8 || val == 12 || val == 16)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(dev, "The resolution is not supported\n");
 		return -EINVAL;
@@ -326,7 +354,11 @@ static ssize_t store_resolution(struct device *dev,
 
 	mutex_lock(&chip->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = isl29018_set_resolution(chip, lval, &new_adc_bit);
+=======
+	status = isl29018_set_resolution(chip, val, &new_adc_bit);
+>>>>>>> v3.18
 =======
 	status = isl29018_set_resolution(chip, val, &new_adc_bit);
 >>>>>>> v3.18
@@ -359,17 +391,23 @@ static ssize_t store_prox_infrared_suppression(struct device *dev,
 	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
 	struct isl29018_chip *chip = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long lval;
 
 	if (strict_strtoul(buf, 10, &lval))
 		return -EINVAL;
 	if (!(lval == 0UL || lval == 1UL)) {
 =======
+=======
+>>>>>>> v3.18
 	int val;
 
 	if (kstrtoint(buf, 10, &val))
 		return -EINVAL;
 	if (!(val == 0 || val == 1)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(dev, "The mode is not supported\n");
 		return -EINVAL;
@@ -379,7 +417,11 @@ static ssize_t store_prox_infrared_suppression(struct device *dev,
 	infrared suppression (1 means perform on chip suppression) */
 	mutex_lock(&chip->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->prox_scheme = (int)lval;
+=======
+	chip->prox_scheme = val;
+>>>>>>> v3.18
 =======
 	chip->prox_scheme = val;
 >>>>>>> v3.18
@@ -459,6 +501,7 @@ static int isl29018_read_raw(struct iio_dev *indio_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct iio_chan_spec isl29018_channels[] = {
 	{
 		.type = IIO_LIGHT,
@@ -477,6 +520,8 @@ static const struct iio_chan_spec isl29018_channels[] = {
 		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
 	}
 =======
+=======
+>>>>>>> v3.18
 #define ISL29018_LIGHT_CHANNEL {					\
 	.type = IIO_LIGHT,						\
 	.indexed = 1,							\
@@ -506,6 +551,9 @@ static const struct iio_chan_spec isl29018_channels[] = {
 static const struct iio_chan_spec isl29023_channels[] = {
 	ISL29018_LIGHT_CHANNEL,
 	ISL29018_IR_CHANNEL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -531,6 +579,7 @@ static struct attribute *isl29018_attributes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group isl29108_group = {
 	.attrs = isl29018_attributes,
 };
@@ -542,6 +591,8 @@ static int isl29018_chip_init(struct isl29018_chip *chip)
 	unsigned int new_range;
 
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *isl29023_attributes[] = {
 	ISL29018_DEV_ATTR(range),
 	ISL29018_CONST_ATTR(range_available),
@@ -599,6 +650,9 @@ static int isl29018_chip_init(struct isl29018_chip *chip)
 			return status;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Code added per Intersil Application Note 1534:
 	 *     When VDD sinks to approximately 1.8V or below, some of
@@ -623,8 +677,13 @@ static int isl29018_chip_init(struct isl29018_chip *chip)
 	status = regmap_write(chip->regmap, ISL29018_REG_TEST, 0x0);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(chip->dev, "Failed to clear isl29018 TEST reg."
 					"(%d)\n", status);
+=======
+		dev_err(chip->dev, "Failed to clear isl29018 TEST reg.(%d)\n",
+			status);
+>>>>>>> v3.18
 =======
 		dev_err(chip->dev, "Failed to clear isl29018 TEST reg.(%d)\n",
 			status);
@@ -639,6 +698,7 @@ static int isl29018_chip_init(struct isl29018_chip *chip)
 	status = regmap_write(chip->regmap, ISL29018_REG_ADD_COMMAND1, 0);
 	if (status < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(chip->dev, "Failed to clear isl29018 CMD1 reg."
 					"(%d)\n", status);
 		return status;
@@ -646,12 +706,17 @@ static int isl29018_chip_init(struct isl29018_chip *chip)
 
 	msleep(1);	/* per data sheet, page 10 */
 =======
+=======
+>>>>>>> v3.18
 		dev_err(chip->dev, "Failed to clear isl29018 CMD1 reg.(%d)\n",
 			status);
 		return status;
 	}
 
 	usleep_range(1000, 2000);	/* per data sheet, page 10 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set defaults */
@@ -668,9 +733,12 @@ static int isl29018_chip_init(struct isl29018_chip *chip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct iio_info isl29108_info = {
 	.attrs = &isl29108_group,
 =======
+=======
+>>>>>>> v3.18
 static const struct iio_info isl29018_info = {
 	.attrs = &isl29018_group,
 	.driver_module = THIS_MODULE,
@@ -680,6 +748,9 @@ static const struct iio_info isl29018_info = {
 
 static const struct iio_info isl29023_info = {
 	.attrs = &isl29023_group,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.driver_module = THIS_MODULE,
 	.read_raw = &isl29018_read_raw,
@@ -694,6 +765,10 @@ static bool is_volatile_reg(struct device *dev, unsigned int reg)
 	case ISL29018_REG_ADD_COMMAND1:
 	case ISL29018_REG_TEST:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case ISL29035_REG_DEVICE_ID:
+>>>>>>> v3.18
 =======
 	case ISL29035_REG_DEVICE_ID:
 >>>>>>> v3.18
@@ -717,7 +792,10 @@ static const struct regmap_config isl29018_regmap_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* isl29035_regmap_config: regmap configuration for ISL29035 */
 static const struct regmap_config isl29035_regmap_config = {
 	.reg_bits = 8,
@@ -770,6 +848,9 @@ static const char *isl29018_match_acpi_device(struct device *dev, int *data)
 	return dev_name(dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int isl29018_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
@@ -778,6 +859,7 @@ static int isl29018_probe(struct i2c_client *client,
 	struct iio_dev *indio_dev;
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	indio_dev = iio_device_alloc(sizeof(*chip));
 	if (indio_dev == NULL) {
@@ -785,6 +867,8 @@ static int isl29018_probe(struct i2c_client *client,
 		err = -ENOMEM;
 		goto exit;
 =======
+=======
+>>>>>>> v3.18
 	const char *name = NULL;
 	int dev_id = 0;
 
@@ -792,6 +876,9 @@ static int isl29018_probe(struct i2c_client *client,
 	if (indio_dev == NULL) {
 		dev_err(&client->dev, "iio allocation fails\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	chip = iio_priv(indio_dev);
@@ -800,10 +887,13 @@ static int isl29018_probe(struct i2c_client *client,
 	chip->dev = &client->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&chip->lock);
 
 	chip->lux_scale = 1;
 =======
+=======
+>>>>>>> v3.18
 	if (id) {
 		name = id->name;
 		dev_id = id->driver_data;
@@ -817,11 +907,15 @@ static int isl29018_probe(struct i2c_client *client,
 	chip->type = dev_id;
 	chip->lux_scale = 1;
 	chip->lux_uscale = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	chip->range = 1000;
 	chip->adc_bit = 16;
 	chip->suspended = false;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	chip->regmap = devm_regmap_init_i2c(client, &isl29018_regmap_config);
 	if (IS_ERR(chip->regmap)) {
@@ -829,17 +923,23 @@ static int isl29018_probe(struct i2c_client *client,
 		dev_err(chip->dev, "regmap initialization failed: %d\n", err);
 		goto exit;
 =======
+=======
+>>>>>>> v3.18
 	chip->regmap = devm_regmap_init_i2c(client,
 				chip_info_tbl[dev_id].regmap_cfg);
 	if (IS_ERR(chip->regmap)) {
 		err = PTR_ERR(chip->regmap);
 		dev_err(chip->dev, "regmap initialization failed: %d\n", err);
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	err = isl29018_chip_init(chip);
 	if (err)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto exit_iio_free;
 
@@ -872,6 +972,8 @@ static int isl29018_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		return err;
 
 	indio_dev->info = chip_info_tbl[dev_id].indio_info;
@@ -887,6 +989,9 @@ static int isl29018_remove(struct i2c_client *client)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -929,9 +1034,12 @@ static SIMPLE_DEV_PM_OPS(isl29018_pm_ops, isl29018_suspend, isl29018_resume);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct i2c_device_id isl29018_id[] = {
 	{"isl29018", 0},
 =======
+=======
+>>>>>>> v3.18
 static const struct acpi_device_id isl29018_acpi_match[] = {
 	{"ISL29018", isl29018},
 	{"ISL29023", isl29023},
@@ -944,6 +1052,9 @@ static const struct i2c_device_id isl29018_id[] = {
 	{"isl29018", isl29018},
 	{"isl29023", isl29023},
 	{"isl29035", isl29035},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };
@@ -953,6 +1064,11 @@ MODULE_DEVICE_TABLE(i2c, isl29018_id);
 static const struct of_device_id isl29018_of_match[] = {
 	{ .compatible = "isil,isl29018", },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible = "isil,isl29023", },
+	{ .compatible = "isil,isl29035", },
+>>>>>>> v3.18
 =======
 	{ .compatible = "isil,isl29023", },
 	{ .compatible = "isil,isl29035", },
@@ -966,6 +1082,10 @@ static struct i2c_driver isl29018_driver = {
 	.driver	 = {
 			.name = "isl29018",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			.acpi_match_table = ACPI_PTR(isl29018_acpi_match),
+>>>>>>> v3.18
 =======
 			.acpi_match_table = ACPI_PTR(isl29018_acpi_match),
 >>>>>>> v3.18
@@ -975,7 +1095,10 @@ static struct i2c_driver isl29018_driver = {
 		    },
 	.probe	 = isl29018_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove	 = isl29018_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = isl29018_id,

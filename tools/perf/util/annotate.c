@@ -9,6 +9,11 @@
 
 #include "util.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ui/ui.h"
+#include "sort.h"
+>>>>>>> v3.18
 =======
 #include "ui/ui.h"
 #include "sort.h"
@@ -32,15 +37,21 @@ static int disasm_line__parse(char *line, char **namep, char **rawp);
 static void ins__delete(struct ins_operands *ops)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(ops->source.raw);
 	free(ops->source.name);
 	free(ops->target.raw);
 	free(ops->target.name);
 =======
+=======
+>>>>>>> v3.18
 	zfree(&ops->source.raw);
 	zfree(&ops->source.name);
 	zfree(&ops->target.raw);
 	zfree(&ops->target.name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -123,15 +134,21 @@ static int jump__parse(struct ins_operands *ops)
 	const char *s = strchr(ops->raw, '+');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ops->target.addr = strtoll(ops->raw, NULL, 16);
 
 	if (s++ != NULL)
 		ops->target.offset = strtoll(s, NULL, 16);
 =======
+=======
+>>>>>>> v3.18
 	ops->target.addr = strtoull(ops->raw, NULL, 16);
 
 	if (s++ != NULL)
 		ops->target.offset = strtoull(s, NULL, 16);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		ops->target.offset = UINT64_MAX;
@@ -205,8 +222,12 @@ static int lock__parse(struct ins_operands *ops)
 
 out_free_ops:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(ops->locked.ops);
 	ops->locked.ops = NULL;
+=======
+	zfree(&ops->locked.ops);
+>>>>>>> v3.18
 =======
 	zfree(&ops->locked.ops);
 >>>>>>> v3.18
@@ -229,9 +250,15 @@ static int lock__scnprintf(struct ins *ins, char *bf, size_t size,
 static void lock__delete(struct ins_operands *ops)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(ops->locked.ops);
 	free(ops->target.raw);
 	free(ops->target.name);
+=======
+	zfree(&ops->locked.ops);
+	zfree(&ops->target.raw);
+	zfree(&ops->target.name);
+>>>>>>> v3.18
 =======
 	zfree(&ops->locked.ops);
 	zfree(&ops->target.raw);
@@ -261,10 +288,13 @@ static int mov__parse(struct ins_operands *ops)
 
 	target = ++s;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	while (s[0] != '\0' && !isspace(s[0]))
 		++s;
 =======
+=======
+>>>>>>> v3.18
 	comment = strchr(s, '#');
 
 	if (comment != NULL)
@@ -275,6 +305,9 @@ static int mov__parse(struct ins_operands *ops)
 	while (s > target && isspace(s[0]))
 		--s;
 	s++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	prev = *s;
 	*s = '\0';
@@ -286,7 +319,10 @@ static int mov__parse(struct ins_operands *ops)
 		goto out_free_source;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comment = strchr(s, '#');
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (comment == NULL)
@@ -302,8 +338,12 @@ static int mov__parse(struct ins_operands *ops)
 
 out_free_source:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(ops->source.raw);
 	ops->source.raw = NULL;
+=======
+	zfree(&ops->source.raw);
+>>>>>>> v3.18
 =======
 	zfree(&ops->source.raw);
 >>>>>>> v3.18
@@ -514,6 +554,7 @@ void symbol__annotate_zero_histograms(struct symbol *sym)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int symbol__inc_addr_samples(struct symbol *sym, struct map *map,
 			     int evidx, u64 addr)
 {
@@ -529,6 +570,8 @@ int symbol__inc_addr_samples(struct symbol *sym, struct map *map,
 
 	if (addr < sym->start || addr > sym->end)
 =======
+=======
+>>>>>>> v3.18
 static int __symbol__inc_addr_samples(struct symbol *sym, struct map *map,
 				      struct annotation *notes, int evidx, u64 addr)
 {
@@ -538,6 +581,9 @@ static int __symbol__inc_addr_samples(struct symbol *sym, struct map *map,
 	pr_debug3("%s: addr=%#" PRIx64 "\n", __func__, map->unmap_ip(map, addr));
 
 	if (addr < sym->start || addr >= sym->end)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ERANGE;
 
@@ -553,7 +599,10 @@ static int __symbol__inc_addr_samples(struct symbol *sym, struct map *map,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int symbol__inc_addr_samples(struct symbol *sym, struct map *map,
 				    int evidx, u64 addr)
 {
@@ -581,6 +630,9 @@ int hist_entry__inc_addr_samples(struct hist_entry *he, int evidx, u64 ip)
 	return symbol__inc_addr_samples(he->ms.sym, he->ms.map, evidx, ip);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void disasm_line__init_ins(struct disasm_line *dl)
 {
@@ -630,8 +682,12 @@ static int disasm_line__parse(char *line, char **namep, char **rawp)
 
 out_free_name:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(*namep);
 	*namep = NULL;
+=======
+	zfree(namep);
+>>>>>>> v3.18
 =======
 	zfree(namep);
 >>>>>>> v3.18
@@ -660,7 +716,11 @@ static struct disasm_line *disasm_line__new(s64 offset, char *line, size_t privs
 
 out_free_line:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(dl->line);
+=======
+	zfree(&dl->line);
+>>>>>>> v3.18
 =======
 	zfree(&dl->line);
 >>>>>>> v3.18
@@ -672,8 +732,13 @@ out_delete:
 void disasm_line__free(struct disasm_line *dl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(dl->line);
 	free(dl->name);
+=======
+	zfree(&dl->line);
+	zfree(&dl->name);
+>>>>>>> v3.18
 =======
 	zfree(&dl->line);
 	zfree(&dl->name);
@@ -914,7 +979,11 @@ static int symbol__parse_objdump_line(struct symbol *sym, struct map *map,
 
 		offset = line_ip - start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (offset < 0 || (u64)line_ip > end)
+=======
+		if ((u64)line_ip < start || (u64)line_ip >= end)
+>>>>>>> v3.18
 =======
 		if ((u64)line_ip < start || (u64)line_ip >= end)
 >>>>>>> v3.18
@@ -930,7 +999,10 @@ static int symbol__parse_objdump_line(struct symbol *sym, struct map *map,
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (dl->ops.target.offset == UINT64_MAX)
 		dl->ops.target.offset = dl->ops.target.addr -
 					map__rip_2objdump(map, sym->start);
@@ -947,6 +1019,9 @@ static int symbol__parse_objdump_line(struct symbol *sym, struct map *map,
 			dl->ops.target.name = strdup(target.sym->name);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	disasm__add(&notes->src->source, dl);
 
@@ -954,7 +1029,10 @@ static int symbol__parse_objdump_line(struct symbol *sym, struct map *map,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void delete_last_nop(struct symbol *sym)
 {
 	struct annotation *notes = symbol__annotation(sym);
@@ -979,6 +1057,9 @@ static void delete_last_nop(struct symbol *sym)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int symbol__annotate(struct symbol *sym, struct map *map, size_t privsize)
 {
@@ -990,17 +1071,23 @@ int symbol__annotate(struct symbol *sym, struct map *map, size_t privsize)
 	int err = 0;
 	char symfs_filename[PATH_MAX];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (filename) {
 		snprintf(symfs_filename, sizeof(symfs_filename), "%s%s",
 			 symbol_conf.symfs, filename);
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct kcore_extract kce;
 	bool delete_extract = false;
 
 	if (filename)
 		symbol__join_symfs(symfs_filename, filename);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (filename == NULL) {
@@ -1021,6 +1108,7 @@ fallback:
 		 * DSO is the same as when 'perf record' ran.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		filename = dso->long_name;
 		snprintf(symfs_filename, sizeof(symfs_filename), "%s%s",
 			 symbol_conf.symfs, filename);
@@ -1029,6 +1117,8 @@ fallback:
 
 	if (dso->symtab_type == DSO_BINARY_TYPE__KALLSYMS) {
 =======
+=======
+>>>>>>> v3.18
 		filename = (char *)dso->long_name;
 		symbol__join_symfs(symfs_filename, filename);
 		free_filename = false;
@@ -1036,6 +1126,9 @@ fallback:
 
 	if (dso->symtab_type == DSO_BINARY_TYPE__KALLSYMS &&
 	    !dso__is_kcore(dso)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		char bf[BUILD_ID_SIZE * 2 + 16] = " with build id ";
 		char *build_id_msg = NULL;
@@ -1068,11 +1161,14 @@ fallback:
 		 dso, dso->long_name, sym, sym->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snprintf(command, sizeof(command),
 		 "%s %s%s --start-address=0x%016" PRIx64
 		 " --stop-address=0x%016" PRIx64
 		 " -d %s %s -C %s|grep -v %s|expand",
 =======
+=======
+>>>>>>> v3.18
 	if (dso__is_kcore(dso)) {
 		kce.kcore_filename = symfs_filename;
 		kce.addr = map__rip_2objdump(map, sym->start);
@@ -1094,13 +1190,20 @@ fallback:
 		 "%s %s%s --start-address=0x%016" PRIx64
 		 " --stop-address=0x%016" PRIx64
 		 " -d %s %s -C %s 2>/dev/null|grep -v %s|expand",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 objdump_path ? objdump_path : "objdump",
 		 disassembler_style ? "-M " : "",
 		 disassembler_style ? disassembler_style : "",
 		 map__rip_2objdump(map, sym->start),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 map__rip_2objdump(map, sym->end+1),
+=======
+		 map__rip_2objdump(map, sym->end),
+>>>>>>> v3.18
 =======
 		 map__rip_2objdump(map, sym->end),
 >>>>>>> v3.18
@@ -1119,9 +1222,12 @@ fallback:
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pclose(file);
 out_free_filename:
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * kallsyms does not have symbol sizes so there may a nop at the end.
 	 * Remove it.
@@ -1133,6 +1239,9 @@ out_free_filename:
 out_free_filename:
 	if (delete_extract)
 		kcore_extract__delete(&kce);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (free_filename)
 		free(filename);
@@ -1233,6 +1342,7 @@ static void symbol__free_source_line(struct symbol *sym, int len)
 
 	for (i = 0; i < len; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(src_line->path);
 		src_line = (void *)src_line + sizeof_src_line;
 	}
@@ -1240,11 +1350,16 @@ static void symbol__free_source_line(struct symbol *sym, int len)
 	free(notes->src->lines);
 	notes->src->lines = NULL;
 =======
+=======
+>>>>>>> v3.18
 		free_srcline(src_line->path);
 		src_line = (void *)src_line + sizeof_src_line;
 	}
 
 	zfree(&notes->src->lines);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1252,8 +1367,12 @@ static void symbol__free_source_line(struct symbol *sym, int len)
 static int symbol__get_source_line(struct symbol *sym, struct map *map,
 				   struct perf_evsel *evsel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   struct rb_root *root, int len,
 				   const char *filename)
+=======
+				   struct rb_root *root, int len)
+>>>>>>> v3.18
 =======
 				   struct rb_root *root, int len)
 >>>>>>> v3.18
@@ -1262,7 +1381,10 @@ static int symbol__get_source_line(struct symbol *sym, struct map *map,
 	int i, k;
 	int evidx = evsel->idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char cmd[PATH_MAX * 2];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct source_line *src_line;
@@ -1293,10 +1415,14 @@ static int symbol__get_source_line(struct symbol *sym, struct map *map,
 
 	for (i = 0; i < len; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char *path = NULL;
 		size_t line_len;
 		u64 offset;
 		FILE *fp;
+=======
+		u64 offset;
+>>>>>>> v3.18
 =======
 		u64 offset;
 >>>>>>> v3.18
@@ -1317,6 +1443,7 @@ static int symbol__get_source_line(struct symbol *sym, struct map *map,
 
 		offset = start + i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sprintf(cmd, "addr2line -e %s %016" PRIx64, filename, offset);
 		fp = popen(cmd, "r");
 		if (!fp)
@@ -1334,6 +1461,11 @@ static int symbol__get_source_line(struct symbol *sym, struct map *map,
 
 	next_close:
 		pclose(fp);
+=======
+		src_line->path = get_srcline(map->dso, offset);
+		insert_source_line(&tmp_root, src_line);
+
+>>>>>>> v3.18
 =======
 		src_line->path = get_srcline(map->dso, offset);
 		insert_source_line(&tmp_root, src_line);
@@ -1380,7 +1512,11 @@ static void print_summary(struct rb_root *root, const char *filename)
 		path = src_line->path;
 		color = get_percent_color(percent_max);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		color_fprintf(stdout, color, " %s", path);
+=======
+		color_fprintf(stdout, color, " %s\n", path);
+>>>>>>> v3.18
 =======
 		color_fprintf(stdout, color, " %s\n", path);
 >>>>>>> v3.18
@@ -1410,6 +1546,10 @@ int symbol__annotate_printf(struct symbol *sym, struct map *map,
 	char *filename;
 	const char *d_filename;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *evsel_name = perf_evsel__name(evsel);
+>>>>>>> v3.18
 =======
 	const char *evsel_name = perf_evsel__name(evsel);
 >>>>>>> v3.18
@@ -1421,7 +1561,11 @@ int symbol__annotate_printf(struct symbol *sym, struct map *map,
 	u64 len;
 	int width = 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int namelen;
+=======
+	int namelen, evsel_name_len, graph_dotted_len;
+>>>>>>> v3.18
 =======
 	int namelen, evsel_name_len, graph_dotted_len;
 >>>>>>> v3.18
@@ -1438,6 +1582,10 @@ int symbol__annotate_printf(struct symbol *sym, struct map *map,
 	len = symbol__size(sym);
 	namelen = strlen(d_filename);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	evsel_name_len = strlen(evsel_name);
+>>>>>>> v3.18
 =======
 	evsel_name_len = strlen(evsel_name);
 >>>>>>> v3.18
@@ -1446,17 +1594,23 @@ int symbol__annotate_printf(struct symbol *sym, struct map *map,
 		width *= evsel->nr_members;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf(" %-*.*s|	Source code & Disassembly of %s\n",
 	       width, width, "Percent", d_filename);
 	printf("-%-*.*s-------------------------------------\n",
 	       width+namelen, width+namelen, graph_dotted_line);
 =======
+=======
+>>>>>>> v3.18
 	printf(" %-*.*s|	Source code & Disassembly of %s for %s\n",
 	       width, width, "Percent", d_filename, evsel_name);
 
 	graph_dotted_len = width + namelen + evsel_name_len;
 	printf("-%-*.*s-----------------------------------------\n",
 	       graph_dotted_len, graph_dotted_len, graph_dotted_line);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (verbose)
@@ -1569,7 +1723,10 @@ int symbol__tty_annotate(struct symbol *sym, struct map *map,
 {
 	struct dso *dso = map->dso;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *filename = dso->long_name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct rb_root source_line = RB_ROOT;
@@ -1582,9 +1739,14 @@ int symbol__tty_annotate(struct symbol *sym, struct map *map,
 
 	if (print_lines) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		symbol__get_source_line(sym, map, evsel, &source_line,
 					len, filename);
 		print_summary(&source_line, filename);
+=======
+		symbol__get_source_line(sym, map, evsel, &source_line, len);
+		print_summary(&source_line, dso->long_name);
+>>>>>>> v3.18
 =======
 		symbol__get_source_line(sym, map, evsel, &source_line, len);
 		print_summary(&source_line, dso->long_name);
@@ -1601,7 +1763,10 @@ int symbol__tty_annotate(struct symbol *sym, struct map *map,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int hist_entry__annotate(struct hist_entry *he, size_t privsize)
 {
@@ -1612,4 +1777,7 @@ bool ui__has_annotation(void)
 {
 	return use_browser == 1 && sort__has_sym;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

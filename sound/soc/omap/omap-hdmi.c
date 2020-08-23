@@ -35,6 +35,10 @@
 #include <sound/dmaengine_pcm.h>
 #include <video/omapdss.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <sound/omap-pcm.h>
+>>>>>>> v3.18
 =======
 #include <sound/omap-pcm.h>
 >>>>>>> v3.18
@@ -329,12 +333,18 @@ static int omap_hdmi_probe(struct platform_device *pdev)
 					 &omap_hdmi_dai, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (ret)
 		return ret;
 
 	return omap_pcm_platform_register(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

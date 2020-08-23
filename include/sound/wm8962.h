@@ -38,6 +38,10 @@
 
 struct wm8962_pdata {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *mclk;
+>>>>>>> v3.18
 =======
 	struct clk *mclk;
 >>>>>>> v3.18

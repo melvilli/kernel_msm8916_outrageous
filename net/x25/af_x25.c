@@ -36,6 +36,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "X25: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "X25: " fmt
 
@@ -230,7 +235,11 @@ static int x25_device_event(struct notifier_block *this, unsigned long event,
 			    void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -1072,7 +1081,11 @@ int x25_rx_call_request(struct sk_buff *skb, struct x25_neigh *nb,
 
 	if (!sock_flag(sk, SOCK_DEAD))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sk->sk_data_ready(sk, skb->len);
+=======
+		sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 		sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -1094,7 +1107,11 @@ static int x25_sendmsg(struct kiocb *iocb, struct socket *sock,
 	struct sock *sk = sock->sk;
 	struct x25_sock *x25 = x25_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_x25 *usx25 = (struct sockaddr_x25 *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_x25 *, usx25, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_x25 *, usx25, msg->msg_name);
 >>>>>>> v3.18
@@ -1274,7 +1291,11 @@ static int x25_recvmsg(struct kiocb *iocb, struct socket *sock,
 	struct sock *sk = sock->sk;
 	struct x25_sock *x25 = x25_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_x25 *sx25 = (struct sockaddr_x25 *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_x25 *, sx25, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_x25 *, sx25, msg->msg_name);
 >>>>>>> v3.18
@@ -1831,7 +1852,11 @@ static int __init x25_init(void)
 		goto out_sock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "X.25 for Linux Version 0.2\n");
+=======
+	pr_info("Linux Version 0.2\n");
+>>>>>>> v3.18
 =======
 	pr_info("Linux Version 0.2\n");
 >>>>>>> v3.18

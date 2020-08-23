@@ -120,6 +120,7 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ANDROID_PARANOID_NETWORK
 #include <linux/android_aid.h>
 
@@ -135,6 +136,8 @@ static inline int current_has_network(void)
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /* The inetsw table contains everything that inet_create needs to
  * build a new socket.
@@ -143,9 +146,12 @@ static struct list_head inetsw[SOCK_MAX];
 static DEFINE_SPINLOCK(inetsw_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ipv4_config ipv4_config;
 EXPORT_SYMBOL(ipv4_config);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* New destruction routine */
@@ -161,7 +167,11 @@ void inet_sock_destruct(struct sock *sk)
 
 	if (sk->sk_type == SOCK_STREAM && sk->sk_state != TCP_CLOSE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN(1, "Attempt to release TCP socket in state %d %p\n",
+=======
+		pr_err("Attempt to release TCP socket in state %d %p\n",
+>>>>>>> v3.18
 =======
 		pr_err("Attempt to release TCP socket in state %d %p\n",
 >>>>>>> v3.18
@@ -170,7 +180,11 @@ void inet_sock_destruct(struct sock *sk)
 	}
 	if (!sock_flag(sk, SOCK_DEAD)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN(1, "Attempt to release alive inet socket %p\n", sk);
+=======
+		pr_err("Attempt to release alive inet socket %p\n", sk);
+>>>>>>> v3.18
 =======
 		pr_err("Attempt to release alive inet socket %p\n", sk);
 >>>>>>> v3.18
@@ -273,6 +287,7 @@ out:
 EXPORT_SYMBOL(inet_listen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 inet_ehash_secret __read_mostly;
 EXPORT_SYMBOL(inet_ehash_secret);
 
@@ -298,6 +313,8 @@ EXPORT_SYMBOL(build_ehash_secret);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  *	Create an inet socket.
  */
@@ -310,6 +327,7 @@ static int inet_create(struct net *net, struct socket *sock, int protocol,
 	struct inet_sock *inet;
 	struct proto *answer_prot;
 	unsigned char answer_flags;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char answer_no_check;
 	int try_loading_module = 0;
@@ -325,6 +343,11 @@ static int inet_create(struct net *net, struct socket *sock, int protocol,
 	if (protocol < 0 || protocol >= IPPROTO_MAX)
 		return -EINVAL;
 
+=======
+	int try_loading_module = 0;
+	int err;
+
+>>>>>>> v3.18
 =======
 	int try_loading_module = 0;
 	int err;
@@ -379,7 +402,12 @@ lookup_protocol:
 
 	err = -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sock->type == SOCK_RAW && !kern && !capable(CAP_NET_RAW))
+=======
+	if (sock->type == SOCK_RAW && !kern &&
+	    !ns_capable(net->user_ns, CAP_NET_RAW))
+>>>>>>> v3.18
 =======
 	if (sock->type == SOCK_RAW && !kern &&
 	    !ns_capable(net->user_ns, CAP_NET_RAW))
@@ -389,7 +417,10 @@ lookup_protocol:
 	sock->ops = answer->ops;
 	answer_prot = answer->prot;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	answer_no_check = answer->no_check;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	answer_flags = answer->flags;
@@ -404,7 +435,10 @@ lookup_protocol:
 
 	err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk->sk_no_check = answer_no_check;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (INET_PROTOSW_REUSE & answer_flags)
@@ -422,7 +456,11 @@ lookup_protocol:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ipv4_config.no_pmtu_disc)
+=======
+	if (net->ipv4.sysctl_ip_no_pmtu_disc)
+>>>>>>> v3.18
 =======
 	if (net->ipv4.sysctl_ip_no_pmtu_disc)
 >>>>>>> v3.18
@@ -508,10 +546,13 @@ int inet_release(struct socket *sock)
 EXPORT_SYMBOL(inet_release);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* It is off by default, see below. */
 int sysctl_ip_nonlocal_bind __read_mostly;
 EXPORT_SYMBOL(sysctl_ip_nonlocal_bind);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int inet_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
@@ -554,7 +595,11 @@ int inet_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 	 */
 	err = -EADDRNOTAVAIL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!sysctl_ip_nonlocal_bind &&
+=======
+	if (!net->ipv4.sysctl_ip_nonlocal_bind &&
+>>>>>>> v3.18
 =======
 	if (!net->ipv4.sysctl_ip_nonlocal_bind &&
 >>>>>>> v3.18
@@ -969,7 +1014,10 @@ int inet_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg)
 	case SIOCGIFPFLAGS:
 	case SIOCSIFFLAGS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SIOCKILLADDR:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		err = devinet_ioctl(net, cmd, (void __user *)arg);
@@ -1100,7 +1148,10 @@ static struct inet_protosw inetsw_array[] =
 		.prot =       &tcp_prot,
 		.ops =        &inet_stream_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.no_check =   0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.flags =      INET_PROTOSW_PERMANENT |
@@ -1113,7 +1164,10 @@ static struct inet_protosw inetsw_array[] =
 		.prot =       &udp_prot,
 		.ops =        &inet_dgram_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.no_check =   UDP_CSUM_DEFAULT,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.flags =      INET_PROTOSW_PERMANENT,
@@ -1124,8 +1178,12 @@ static struct inet_protosw inetsw_array[] =
 		.protocol =   IPPROTO_ICMP,
 		.prot =       &ping_prot,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ops =        &inet_sockraw_ops,
 		.no_check =   UDP_CSUM_DEFAULT,
+=======
+		.ops =        &inet_dgram_ops,
+>>>>>>> v3.18
 =======
 		.ops =        &inet_dgram_ops,
 >>>>>>> v3.18
@@ -1138,7 +1196,10 @@ static struct inet_protosw inetsw_array[] =
 	       .prot =       &raw_prot,
 	       .ops =        &inet_sockraw_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       .no_check =   UDP_CSUM_DEFAULT,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	       .flags =      INET_PROTOSW_REUSE,
@@ -1241,7 +1302,11 @@ static int inet_sk_reselect_saddr(struct sock *sk)
 	rt = ip_route_connect(fl4, daddr, 0, RT_CONN_FLAGS(sk),
 			      sk->sk_bound_dev_if, sk->sk_protocol,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      inet->inet_sport, inet->inet_dport, sk, false);
+=======
+			      inet->inet_sport, inet->inet_dport, sk);
+>>>>>>> v3.18
 =======
 			      inet->inet_sport, inet->inet_dport, sk);
 >>>>>>> v3.18
@@ -1323,6 +1388,7 @@ int inet_sk_rebuild_header(struct sock *sk)
 EXPORT_SYMBOL(inet_sk_rebuild_header);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int inet_gso_send_check(struct sk_buff *skb)
 {
 	const struct net_offload *ops;
@@ -1370,6 +1436,8 @@ static struct sk_buff *inet_gso_segment(struct sk_buff *skb,
 	unsigned int offset = 0;
 	bool tunnel;
 =======
+=======
+>>>>>>> v3.18
 static struct sk_buff *inet_gso_segment(struct sk_buff *skb,
 					netdev_features_t features)
 {
@@ -1382,6 +1450,9 @@ static struct sk_buff *inet_gso_segment(struct sk_buff *skb,
 	int nhoff;
 	int ihl;
 	int id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(skb_shinfo(skb)->gso_type &
@@ -1391,12 +1462,15 @@ static struct sk_buff *inet_gso_segment(struct sk_buff *skb,
 		       SKB_GSO_TCP_ECN |
 		       SKB_GSO_GRE |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       SKB_GSO_TCPV6 |
 		       SKB_GSO_UDP_TUNNEL |
 		       0)))
 		goto out;
 
 =======
+=======
+>>>>>>> v3.18
 		       SKB_GSO_GRE_CSUM |
 		       SKB_GSO_IPIP |
 		       SKB_GSO_SIT |
@@ -1409,6 +1483,9 @@ static struct sk_buff *inet_gso_segment(struct sk_buff *skb,
 
 	skb_reset_network_header(skb);
 	nhoff = skb_network_header(skb) - skb_mac_header(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(!pskb_may_pull(skb, sizeof(*iph))))
 		goto out;
@@ -1418,6 +1495,7 @@ static struct sk_buff *inet_gso_segment(struct sk_buff *skb,
 	if (ihl < sizeof(*iph))
 		goto out;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (unlikely(!pskb_may_pull(skb, ihl)))
 		goto out;
@@ -1437,6 +1515,8 @@ static struct sk_buff *inet_gso_segment(struct sk_buff *skb,
 		segs = ops->callbacks.gso_segment(skb, features);
 	rcu_read_unlock();
 =======
+=======
+>>>>>>> v3.18
 	id = ntohs(iph->id);
 	proto = iph->protocol;
 
@@ -1463,6 +1543,9 @@ static struct sk_buff *inet_gso_segment(struct sk_buff *skb,
 	ops = rcu_dereference(inet_offloads[proto]);
 	if (likely(ops && ops->callbacks.gso_segment))
 		segs = ops->callbacks.gso_segment(skb, features);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (IS_ERR_OR_NULL(segs))
@@ -1471,8 +1554,13 @@ static struct sk_buff *inet_gso_segment(struct sk_buff *skb,
 	skb = segs;
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iph = ip_hdr(skb);
 		if (!tunnel && proto == IPPROTO_UDP) {
+=======
+		iph = (struct iphdr *)(skb_mac_header(skb) + nhoff);
+		if (udpfrag) {
+>>>>>>> v3.18
 =======
 		iph = (struct iphdr *)(skb_mac_header(skb) + nhoff);
 		if (udpfrag) {
@@ -1482,6 +1570,7 @@ static struct sk_buff *inet_gso_segment(struct sk_buff *skb,
 			if (skb->next != NULL)
 				iph->frag_off |= htons(IP_MF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset += (skb->len - skb->mac_len - iph->ihl * 4);
 		} else  {
 			iph->id = htons(id++);
@@ -1490,6 +1579,8 @@ static struct sk_buff *inet_gso_segment(struct sk_buff *skb,
 		iph->check = 0;
 		iph->check = ip_fast_csum(skb_network_header(skb), iph->ihl);
 =======
+=======
+>>>>>>> v3.18
 			offset += skb->len - nhoff - ihl;
 		} else {
 			iph->id = htons(id++);
@@ -1499,6 +1590,9 @@ static struct sk_buff *inet_gso_segment(struct sk_buff *skb,
 		if (encap)
 			skb_reset_inner_headers(skb);
 		skb->network_header = (u8 *)iph - skb->head;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while ((skb = skb->next));
 
@@ -1543,7 +1637,11 @@ static struct sk_buff **inet_gro_receive(struct sk_buff **head,
 
 	id = ntohl(*(__be32 *)&iph->id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush = (u16)((ntohl(*(__be32 *)iph) ^ skb_gro_len(skb)) | (id ^ IP_DF));
+=======
+	flush = (u16)((ntohl(*(__be32 *)iph) ^ skb_gro_len(skb)) | (id & ~IP_DF));
+>>>>>>> v3.18
 =======
 	flush = (u16)((ntohl(*(__be32 *)iph) ^ skb_gro_len(skb)) | (id & ~IP_DF));
 >>>>>>> v3.18
@@ -1556,15 +1654,21 @@ static struct sk_buff **inet_gro_receive(struct sk_buff **head,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iph2 = ip_hdr(p);
 
 =======
+=======
+>>>>>>> v3.18
 		iph2 = (struct iphdr *)(p->data + off);
 		/* The above works because, with the exception of the top
 		 * (inner most) layer, we only aggregate pkts with the same
 		 * hdr length so all the hdrs we'll need to verify will start
 		 * at the same offset.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if ((iph->protocol ^ iph2->protocol) |
 		    ((__force u32)iph->saddr ^ (__force u32)iph2->saddr) |
@@ -1578,9 +1682,12 @@ static struct sk_buff **inet_gro_receive(struct sk_buff **head,
 			(iph->ttl ^ iph2->ttl) |
 			(iph->tos ^ iph2->tos) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 			((u16)(ntohs(iph2->id) + NAPI_GRO_CB(p)->count) ^ id);
 
 =======
+=======
+>>>>>>> v3.18
 			((iph->frag_off ^ iph2->frag_off) & htons(IP_DF));
 
 		/* Save the IP ID check to be included later when we get to
@@ -1590,13 +1697,19 @@ static struct sk_buff **inet_gro_receive(struct sk_buff **head,
 		 */
 		NAPI_GRO_CB(p)->flush_id =
 			    ((u16)(ntohs(iph2->id) + NAPI_GRO_CB(p)->count) ^ id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		NAPI_GRO_CB(p)->flush |= flush;
 	}
 
 	NAPI_GRO_CB(skb)->flush |= flush;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	skb_set_network_header(skb, off);
 	/* The above will be needed by the transport layer if there is one
 	 * immediately following this IP hdr.
@@ -1605,6 +1718,9 @@ static struct sk_buff **inet_gro_receive(struct sk_buff **head,
 	/* Note : No need to call skb_gro_postpull_rcsum() here,
 	 * as we already checked checksum over ipv4 header was 0
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	skb_gro_pull(skb, sizeof(*iph));
 	skb_set_transport_header(skb, skb_gro_offset(skb));
@@ -1621,11 +1737,14 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int inet_gro_complete(struct sk_buff *skb)
 {
 	__be16 newlen = htons(skb->len - skb_network_offset(skb));
 	struct iphdr *iph = ip_hdr(skb);
 =======
+=======
+>>>>>>> v3.18
 int inet_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 {
 	if (sk->sk_family == AF_INET)
@@ -1641,12 +1760,21 @@ static int inet_gro_complete(struct sk_buff *skb, int nhoff)
 {
 	__be16 newlen = htons(skb->len - nhoff);
 	struct iphdr *iph = (struct iphdr *)(skb->data + nhoff);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct net_offload *ops;
 	int proto = iph->protocol;
 	int err = -ENOSYS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (skb->encapsulation)
+		skb_set_inner_network_header(skb, nhoff);
+
+>>>>>>> v3.18
 =======
 	if (skb->encapsulation)
 		skb_set_inner_network_header(skb, nhoff);
@@ -1661,13 +1789,19 @@ static int inet_gro_complete(struct sk_buff *skb, int nhoff)
 		goto out_unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = ops->callbacks.gro_complete(skb);
 =======
+=======
+>>>>>>> v3.18
 	/* Only need to add sizeof(*iph) to get to the next hdr below
 	 * because any hdr with option will have been flushed in
 	 * inet_gro_receive().
 	 */
 	err = ops->callbacks.gro_complete(skb, nhoff + sizeof(*iph));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out_unlock:
@@ -1699,6 +1833,7 @@ int inet_ctl_sock_create(struct sock **sk, unsigned short family,
 EXPORT_SYMBOL_GPL(inet_ctl_sock_create);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long snmp_fold_field(void __percpu *mib[], int offt)
 {
 	unsigned long res = 0;
@@ -1709,6 +1844,8 @@ unsigned long snmp_fold_field(void __percpu *mib[], int offt)
 			res += *(((unsigned long *) per_cpu_ptr(mib[j], i)) + offt);
 	}
 =======
+=======
+>>>>>>> v3.18
 unsigned long snmp_fold_field(void __percpu *mib, int offt)
 {
 	unsigned long res = 0;
@@ -1716,6 +1853,9 @@ unsigned long snmp_fold_field(void __percpu *mib, int offt)
 
 	for_each_possible_cpu(i)
 		res += *(((unsigned long *) per_cpu_ptr(mib, i)) + offt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return res;
 }
@@ -1724,7 +1864,11 @@ EXPORT_SYMBOL_GPL(snmp_fold_field);
 #if BITS_PER_LONG==32
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u64 snmp_fold_field64(void __percpu *mib[], int offt, size_t syncp_offset)
+=======
+u64 snmp_fold_field64(void __percpu *mib, int offt, size_t syncp_offset)
+>>>>>>> v3.18
 =======
 u64 snmp_fold_field64(void __percpu *mib, int offt, size_t syncp_offset)
 >>>>>>> v3.18
@@ -1739,6 +1883,7 @@ u64 snmp_fold_field64(void __percpu *mib, int offt, size_t syncp_offset)
 		unsigned int start;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bhptr = per_cpu_ptr(mib[0], cpu);
 		syncp = (struct u64_stats_sync *)(bhptr + syncp_offset);
 		do {
@@ -1746,12 +1891,17 @@ u64 snmp_fold_field64(void __percpu *mib, int offt, size_t syncp_offset)
 			v = *(((u64 *) bhptr) + offt);
 		} while (u64_stats_fetch_retry_bh(syncp, start));
 =======
+=======
+>>>>>>> v3.18
 		bhptr = per_cpu_ptr(mib, cpu);
 		syncp = (struct u64_stats_sync *)(bhptr + syncp_offset);
 		do {
 			start = u64_stats_fetch_begin_irq(syncp);
 			v = *(((u64 *) bhptr) + offt);
 		} while (u64_stats_fetch_retry_irq(syncp, start));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		res += v;
@@ -1761,6 +1911,7 @@ u64 snmp_fold_field64(void __percpu *mib, int offt, size_t syncp_offset)
 EXPORT_SYMBOL_GPL(snmp_fold_field64);
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int snmp_mib_init(void __percpu *ptr[2], size_t mibsize, size_t align)
 {
@@ -1794,6 +1945,8 @@ EXPORT_SYMBOL_GPL(snmp_mib_free);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IP_MULTICAST
 static const struct net_protocol igmp_protocol = {
 	.handler =	igmp_rcv,
@@ -1808,6 +1961,7 @@ static const struct net_protocol tcp_protocol = {
 	.no_policy	=	1,
 	.netns_ok	=	1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static const struct net_offload tcp_offload = {
@@ -1821,11 +1975,16 @@ static const struct net_offload tcp_offload = {
 
 static const struct net_protocol udp_protocol = {
 =======
+=======
+>>>>>>> v3.18
 	.icmp_strict_tag_validation = 1,
 };
 
 static const struct net_protocol udp_protocol = {
 	.early_demux =	udp_v4_early_demux,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.handler =	udp_rcv,
 	.err_handler =	udp_err,
@@ -1834,6 +1993,7 @@ static const struct net_protocol udp_protocol = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct net_offload udp_offload = {
 	.callbacks = {
 		.gso_send_check = udp4_ufo_send_check,
@@ -1841,6 +2001,8 @@ static const struct net_offload udp_offload = {
 	},
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct net_protocol icmp_protocol = {
@@ -1852,6 +2014,7 @@ static const struct net_protocol icmp_protocol = {
 
 static __net_init int ipv4_mib_init_net(struct net *net)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (snmp_mib_init((void __percpu **)net->mib.tcp_statistics,
 			  sizeof(struct tcp_mib),
@@ -1877,6 +2040,8 @@ static __net_init int ipv4_mib_init_net(struct net *net)
 			  sizeof(struct icmp_mib),
 			  __alignof__(struct icmp_mib)) < 0)
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	net->mib.tcp_statistics = alloc_percpu(struct tcp_mib);
@@ -1903,6 +2068,9 @@ static __net_init int ipv4_mib_init_net(struct net *net)
 		goto err_udplite_mib;
 	net->mib.icmp_statistics = alloc_percpu(struct icmp_mib);
 	if (!net->mib.icmp_statistics)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err_icmp_mib;
 	net->mib.icmpmsg_statistics = kzalloc(sizeof(struct icmpmsg_mib),
@@ -1915,6 +2083,7 @@ static __net_init int ipv4_mib_init_net(struct net *net)
 
 err_icmpmsg_mib:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snmp_mib_free((void __percpu **)net->mib.icmp_statistics);
 err_icmp_mib:
 	snmp_mib_free((void __percpu **)net->mib.udplite_statistics);
@@ -1927,6 +2096,8 @@ err_net_mib:
 err_ip_mib:
 	snmp_mib_free((void __percpu **)net->mib.tcp_statistics);
 =======
+=======
+>>>>>>> v3.18
 	free_percpu(net->mib.icmp_statistics);
 err_icmp_mib:
 	free_percpu(net->mib.udplite_statistics);
@@ -1938,6 +2109,9 @@ err_net_mib:
 	free_percpu(net->mib.ip_statistics);
 err_ip_mib:
 	free_percpu(net->mib.tcp_statistics);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_tcp_mib:
 	return -ENOMEM;
@@ -1947,6 +2121,7 @@ static __net_exit void ipv4_mib_exit_net(struct net *net)
 {
 	kfree(net->mib.icmpmsg_statistics);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snmp_mib_free((void __percpu **)net->mib.icmp_statistics);
 	snmp_mib_free((void __percpu **)net->mib.udplite_statistics);
 	snmp_mib_free((void __percpu **)net->mib.udp_statistics);
@@ -1954,12 +2129,17 @@ static __net_exit void ipv4_mib_exit_net(struct net *net)
 	snmp_mib_free((void __percpu **)net->mib.ip_statistics);
 	snmp_mib_free((void __percpu **)net->mib.tcp_statistics);
 =======
+=======
+>>>>>>> v3.18
 	free_percpu(net->mib.icmp_statistics);
 	free_percpu(net->mib.udplite_statistics);
 	free_percpu(net->mib.udp_statistics);
 	free_percpu(net->mib.net_statistics);
 	free_percpu(net->mib.ip_statistics);
 	free_percpu(net->mib.tcp_statistics);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1974,7 +2154,10 @@ static int __init init_ipv4_mibs(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static __net_init int inet_init_net(struct net *net)
 {
 	/*
@@ -2008,6 +2191,9 @@ static int __init init_inet_pernet_ops(void)
 	return register_pernet_subsys(&af_inet_ops);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ipv4_proc_init(void);
 
@@ -2019,7 +2205,10 @@ static struct packet_offload ip_packet_offload __read_mostly = {
 	.type = cpu_to_be16(ETH_P_IP),
 	.callbacks = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.gso_send_check = inet_gso_send_check,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.gso_segment = inet_gso_segment,
@@ -2029,7 +2218,10 @@ static struct packet_offload ip_packet_offload __read_mostly = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct net_offload ipip_offload = {
 	.callbacks = {
 		.gso_segment	= inet_gso_segment,
@@ -2038,12 +2230,16 @@ static const struct net_offload ipip_offload = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init ipv4_offload_init(void)
 {
 	/*
 	 * Add offloads
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (inet_add_offload(&udp_offload, IPPROTO_UDP) < 0)
 		pr_crit("%s: Cannot add UDP protocol offload\n", __func__);
@@ -2052,6 +2248,8 @@ static int __init ipv4_offload_init(void)
 
 	dev_add_offload(&ip_packet_offload);
 =======
+=======
+>>>>>>> v3.18
 	if (udpv4_offload_init() < 0)
 		pr_crit("%s: Cannot add UDP protocol offload\n", __func__);
 	if (tcpv4_offload_init() < 0)
@@ -2059,6 +2257,9 @@ static int __init ipv4_offload_init(void)
 
 	dev_add_offload(&ip_packet_offload);
 	inet_add_offload(&ipip_offload, IPPROTO_IPIP);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2079,6 +2280,7 @@ static int __init inet_init(void)
 	BUILD_BUG_ON(sizeof(struct inet_skb_parm) > FIELD_SIZEOF(struct sk_buff, cb));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysctl_local_reserved_ports = kzalloc(65536 / 8, GFP_KERNEL);
 	if (!sysctl_local_reserved_ports)
 		goto out;
@@ -2086,6 +2288,11 @@ static int __init inet_init(void)
 	rc = proto_register(&tcp_prot, 1);
 	if (rc)
 		goto out_free_reserved_ports;
+=======
+	rc = proto_register(&tcp_prot, 1);
+	if (rc)
+		goto out;
+>>>>>>> v3.18
 =======
 	rc = proto_register(&tcp_prot, 1);
 	if (rc)
@@ -2115,8 +2322,11 @@ static int __init inet_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tcp_prot.sysctl_mem = init_net.ipv4.sysctl_tcp_mem;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -2181,6 +2391,12 @@ static int __init inet_init(void)
 		pr_crit("%s: Cannot init ipv4 mroute\n", __func__);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	if (init_inet_pernet_ops())
+		pr_crit("%s: Cannot init ipv4 inet pernet ops\n", __func__);
+>>>>>>> v3.18
 =======
 
 	if (init_inet_pernet_ops())
@@ -2209,8 +2425,11 @@ out_unregister_udp_proto:
 out_unregister_tcp_proto:
 	proto_unregister(&tcp_prot);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free_reserved_ports:
 	kfree(sysctl_local_reserved_ports);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	goto out;

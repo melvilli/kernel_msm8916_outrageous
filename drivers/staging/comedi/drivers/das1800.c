@@ -16,12 +16,15 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ************************************************************************
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -104,6 +107,10 @@ TODO:
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -113,7 +120,10 @@ TODO:
 #include "../comedidev.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ioport.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/dma.h>
@@ -125,7 +135,10 @@ TODO:
 #define DAS1800_SIZE           16	/* uses 16 io addresses */
 #define FIFO_SIZE              1024	/*  1024 sample fifo */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIMER_BASE             200	/*  5 Mhz master clock */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define UNIPOLAR               0x4	/*  bit that determines whether input range is uni/bipolar */
@@ -199,6 +212,7 @@ enum {
 /* analog input ranges */
 static const struct comedi_lrange range_ai_das1801 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	8,
 	{
 	 RANGE(-5, 5),
@@ -225,6 +239,8 @@ static const struct comedi_lrange range_ai_das1802 = {
 	 RANGE(0, 1.25),
 	 }
 =======
+=======
+>>>>>>> v3.18
 	8, {
 		BIP_RANGE(5),
 		BIP_RANGE(1),
@@ -248,6 +264,9 @@ static const struct comedi_lrange range_ai_das1802 = {
 		UNI_RANGE(2.5),
 		UNI_RANGE(1.25)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -470,10 +489,16 @@ static const struct das1800_board das1800_boards[] = {
 
 struct das1800_private {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	volatile unsigned int count;	/* number of data points left to be taken */
 	unsigned int divisor1;	/* value to load into board's counter 1 for timed conversions */
 	unsigned int divisor2;	/* value to load into board's counter 2 for timed conversions */
 	int do_bits;		/* digital output bits */
+=======
+	unsigned int count;	/* number of data points left to be taken */
+	unsigned int divisor1;	/* value to load into board's counter 1 for timed conversions */
+	unsigned int divisor2;	/* value to load into board's counter 2 for timed conversions */
+>>>>>>> v3.18
 =======
 	unsigned int count;	/* number of data points left to be taken */
 	unsigned int divisor1;	/* value to load into board's counter 1 for timed conversions */
@@ -486,7 +511,11 @@ struct das1800_private {
 	unsigned int dma0;	/* dma channels used */
 	unsigned int dma1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	volatile unsigned int dma_current;	/* dma channel currently in use */
+=======
+	unsigned int dma_current;	/* dma channel currently in use */
+>>>>>>> v3.18
 =======
 	unsigned int dma_current;	/* dma channel currently in use */
 >>>>>>> v3.18
@@ -496,7 +525,12 @@ struct das1800_private {
 	unsigned int dma_transfer_size;	/* size of transfer currently used, in bytes */
 	unsigned long iobase2;	/* secondary io address used for analog out on 'ao' boards */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	short ao_update_bits;	/* remembers the last write to the 'update' dac */
+=======
+	unsigned short ao_update_bits;	/* remembers the last write to the
+					 * 'update' dac */
+>>>>>>> v3.18
 =======
 	unsigned short ao_update_bits;	/* remembers the last write to the
 					 * 'update' dac */
@@ -507,10 +541,16 @@ struct das1800_private {
 /*
 static const struct comedi_lrange range_ao_2 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	2,
 	{
 		RANGE(-10, 10),
 		RANGE(-5, 5),
+=======
+	2, {
+		BIP_RANGE(10),
+		BIP_RANGE(5)
+>>>>>>> v3.18
 =======
 	2, {
 		BIP_RANGE(10),
@@ -524,7 +564,11 @@ static inline uint16_t munge_bipolar_sample(const struct comedi_device *dev,
 					    uint16_t sample)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct das1800_board *thisboard = comedi_board(dev);
+=======
+	const struct das1800_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct das1800_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -534,7 +578,11 @@ static inline uint16_t munge_bipolar_sample(const struct comedi_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void munge_data(struct comedi_device *dev, uint16_t * array,
+=======
+static void munge_data(struct comedi_device *dev, uint16_t *array,
+>>>>>>> v3.18
 =======
 static void munge_data(struct comedi_device *dev, uint16_t *array,
 >>>>>>> v3.18
@@ -571,7 +619,10 @@ static void das1800_handle_fifo_half_full(struct comedi_device *dev,
 	if (cmd->stop_src == TRIG_COUNT)
 		devpriv->count -= numPoints;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -581,7 +632,11 @@ static void das1800_handle_fifo_not_empty(struct comedi_device *dev,
 {
 	struct das1800_private *devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	short dpnt;
+=======
+	unsigned short dpnt;
+>>>>>>> v3.18
 =======
 	unsigned short dpnt;
 >>>>>>> v3.18
@@ -603,8 +658,11 @@ static void das1800_handle_fifo_not_empty(struct comedi_device *dev,
 			devpriv->count--;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -636,10 +694,15 @@ static void das1800_flush_dma_channel(struct comedi_device *dev,
 	munge_data(dev, buffer, num_samples);
 	cfc_write_array_to_buffer(s, buffer, num_bytes);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (s->async->cmd.stop_src == TRIG_COUNT)
 		devpriv->count -= num_samples;
 
 	return;
+=======
+	if (cmd->stop_src == TRIG_COUNT)
+		devpriv->count -= num_samples;
+>>>>>>> v3.18
 =======
 	if (cmd->stop_src == TRIG_COUNT)
 		devpriv->count -= num_samples;
@@ -677,8 +740,11 @@ static void das1800_flush_dma(struct comedi_device *dev,
 	/*  get any remaining samples in fifo */
 	das1800_handle_fifo_not_empty(dev, s);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -716,8 +782,11 @@ static void das1800_handle_dma(struct comedi_device *dev,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -741,7 +810,11 @@ static void das1800_ai_handler(struct comedi_device *dev)
 {
 	struct das1800_private *devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct comedi_subdevice *s = &dev->subdevices[0];
+=======
+	struct comedi_subdevice *s = dev->read_subdev;
+>>>>>>> v3.18
 =======
 	struct comedi_subdevice *s = dev->read_subdev;
 >>>>>>> v3.18
@@ -750,7 +823,10 @@ static void das1800_ai_handler(struct comedi_device *dev)
 	unsigned int status = inb(dev->iobase + DAS1800_STATUS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	async->events = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*  select adc for base address + 0 */
@@ -771,10 +847,16 @@ static void das1800_ai_handler(struct comedi_device *dev)
 		/*  clear OVF interrupt bit */
 		outb(CLEAR_INTR_MASK & ~OVF, dev->iobase + DAS1800_STATUS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev, "DAS1800 FIFO overflow");
 		das1800_cancel(dev, s);
 		async->events |= COMEDI_CB_ERROR | COMEDI_CB_EOA;
 		comedi_event(dev, s);
+=======
+		dev_err(dev->class_dev, "FIFO overflow\n");
+		async->events |= COMEDI_CB_ERROR | COMEDI_CB_EOA;
+		cfc_handle_events(dev, s);
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "FIFO overflow\n");
 		async->events |= COMEDI_CB_ERROR | COMEDI_CB_EOA;
@@ -793,6 +875,7 @@ static void das1800_ai_handler(struct comedi_device *dev)
 		else
 			das1800_handle_fifo_not_empty(dev, s);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		das1800_cancel(dev, s);	/* disable hardware conversions */
 		async->events |= COMEDI_CB_EOA;
 	} else if (cmd->stop_src == TRIG_COUNT && devpriv->count == 0) {	/*  stop_src TRIG_COUNT */
@@ -804,12 +887,17 @@ static void das1800_ai_handler(struct comedi_device *dev)
 
 	return;
 =======
+=======
+>>>>>>> v3.18
 		async->events |= COMEDI_CB_EOA;
 	} else if (cmd->stop_src == TRIG_COUNT && devpriv->count == 0) {	/*  stop_src TRIG_COUNT */
 		async->events |= COMEDI_CB_EOA;
 	}
 
 	cfc_handle_events(dev, s);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -824,7 +912,11 @@ static int das1800_ai_poll(struct comedi_device *dev,
 	spin_unlock_irqrestore(&dev->spinlock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return s->async->buf_write_count - s->async->buf_read_count;
+=======
+	return comedi_buf_n_bytes_ready(s);
+>>>>>>> v3.18
 =======
 	return comedi_buf_n_bytes_ready(s);
 >>>>>>> v3.18
@@ -837,7 +929,11 @@ static irqreturn_t das1800_interrupt(int irq, void *d)
 
 	if (!dev->attached) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev, "premature interrupt");
+=======
+		dev_err(dev->class_dev, "premature interrupt\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "premature interrupt\n");
 >>>>>>> v3.18
@@ -867,7 +963,11 @@ static irqreturn_t das1800_interrupt(int irq, void *d)
  * hardware, used only when card is in 'burst mode'
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int burst_convert_arg(unsigned int convert_arg, int round_mode)
+=======
+static unsigned int burst_convert_arg(unsigned int convert_arg, int flags)
+>>>>>>> v3.18
 =======
 static unsigned int burst_convert_arg(unsigned int convert_arg, int flags)
 >>>>>>> v3.18
@@ -880,6 +980,7 @@ static unsigned int burst_convert_arg(unsigned int convert_arg, int flags)
 
 	/*  the conversion time must be an integral number of microseconds */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (round_mode) {
 	case TRIG_ROUND_NEAREST:
 	default:
@@ -890,6 +991,8 @@ static unsigned int burst_convert_arg(unsigned int convert_arg, int flags)
 		break;
 	case TRIG_ROUND_UP:
 =======
+=======
+>>>>>>> v3.18
 	switch (flags & CMDF_ROUND_MASK) {
 	case CMDF_ROUND_NEAREST:
 	default:
@@ -899,6 +1002,9 @@ static unsigned int burst_convert_arg(unsigned int convert_arg, int flags)
 		micro_sec = convert_arg / 1000;
 		break;
 	case CMDF_ROUND_UP:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		micro_sec = (convert_arg - 1) / 1000 + 1;
 		break;
@@ -909,7 +1015,10 @@ static unsigned int burst_convert_arg(unsigned int convert_arg, int flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int das1800_ai_check_chanlist(struct comedi_device *dev,
 				     struct comedi_subdevice *s,
 				     struct comedi_cmd *cmd)
@@ -930,12 +1039,16 @@ static int das1800_ai_check_chanlist(struct comedi_device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* test analog input cmd */
 static int das1800_ai_do_cmdtest(struct comedi_device *dev,
 				 struct comedi_subdevice *s,
 				 struct comedi_cmd *cmd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct das1800_board *thisboard = comedi_board(dev);
 	struct das1800_private *devpriv = dev->private;
@@ -944,10 +1057,15 @@ static int das1800_ai_do_cmdtest(struct comedi_device *dev,
 	int i;
 	int unipolar;
 =======
+=======
+>>>>>>> v3.18
 	const struct das1800_board *thisboard = dev->board_ptr;
 	struct das1800_private *devpriv = dev->private;
 	int err = 0;
 	unsigned int arg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Step 1 : check if triggers are trivially valid */
@@ -1007,6 +1125,7 @@ static int das1800_ai_do_cmdtest(struct comedi_device *dev,
 	/* step 4: fix up any arguments */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd->convert_src == TRIG_TIMER) {
 		/*  if we are not in burst mode */
 		if (cmd->scan_begin_src == TRIG_FOLLOW) {
@@ -1056,6 +1175,8 @@ static int das1800_ai_do_cmdtest(struct comedi_device *dev,
 					err++;
 			}
 =======
+=======
+>>>>>>> v3.18
 	if (cmd->scan_begin_src == TRIG_FOLLOW &&
 	    cmd->convert_src == TRIG_TIMER) {
 		/* we are not in burst mode */
@@ -1089,6 +1210,9 @@ static int das1800_ai_do_cmdtest(struct comedi_device *dev,
 						  cmd->flags);
 			if (arg != cmd->scan_begin_arg)
 				err++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1096,6 +1220,7 @@ static int das1800_ai_do_cmdtest(struct comedi_device *dev,
 	if (err)
 		return 4;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*  make sure user is not trying to mix unipolar and bipolar ranges */
 	if (cmd->chanlist) {
@@ -1109,6 +1234,11 @@ static int das1800_ai_do_cmdtest(struct comedi_device *dev,
 			}
 		}
 	}
+=======
+	/* Step 5: check channel list if it exists */
+	if (cmd->chanlist && cmd->chanlist_len > 0)
+		err |= das1800_ai_check_chanlist(dev, s, cmd);
+>>>>>>> v3.18
 =======
 	/* Step 5: check channel list if it exists */
 	if (cmd->chanlist && cmd->chanlist_len > 0)
@@ -1192,6 +1322,7 @@ static int control_c_bits(const struct comedi_cmd *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* loads counters with divisor1, divisor2 from private structure */
 static int das1800_set_frequency(struct comedi_device *dev)
 {
@@ -1256,6 +1387,8 @@ static int setup_counters(struct comedi_device *dev,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static void das1800_setup_counters(struct comedi_device *dev,
 				   const struct comedi_cmd *cmd)
 {
@@ -1279,6 +1412,9 @@ static void das1800_setup_counters(struct comedi_device *dev,
 
 		i8254_write(timer_base, 0, 0, 1);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1356,8 +1492,11 @@ static void setup_dma(struct comedi_device *dev, const struct comedi_cmd *cmd)
 	}
 	release_dma_lock(lock_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1387,8 +1526,11 @@ static void program_chanlist(struct comedi_device *dev,
 	outb(n - 1, dev->iobase + DAS1800_QRAM_ADDRESS);	/*finish write to QRAM */
 	spin_unlock_irqrestore(&dev->spinlock, irq_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1399,13 +1541,17 @@ static int das1800_ai_do_cmd(struct comedi_device *dev,
 {
 	struct das1800_private *devpriv = dev->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int control_a, control_c;
 	struct comedi_async *async = s->async;
 	const struct comedi_cmd *cmd = &async->cmd;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!dev->irq) {
 		comedi_error(dev,
@@ -1422,6 +1568,8 @@ static int das1800_ai_do_cmd(struct comedi_device *dev,
 	/*  interrupt on end of conversion for TRIG_WAKE_EOS */
 	if (cmd->flags & TRIG_WAKE_EOS) {
 =======
+=======
+>>>>>>> v3.18
 	/* disable dma on CMDF_WAKE_EOS, or CMDF_PRIORITY
 	 * (because dma in handler is unsafe at hard real-time priority) */
 	if (cmd->flags & (CMDF_WAKE_EOS | CMDF_PRIORITY))
@@ -1430,6 +1578,9 @@ static int das1800_ai_do_cmd(struct comedi_device *dev,
 		devpriv->irq_dma_bits |= devpriv->dma_bits;
 	/*  interrupt on end of conversion for CMDF_WAKE_EOS */
 	if (cmd->flags & CMDF_WAKE_EOS) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*  interrupt fifo not empty */
 		devpriv->irq_dma_bits &= ~FIMD;
@@ -1450,11 +1601,15 @@ static int das1800_ai_do_cmd(struct comedi_device *dev,
 	/* setup card and start */
 	program_chanlist(dev, cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = setup_counters(dev, cmd);
 	if (ret < 0) {
 		comedi_error(dev, "Error setting up counters");
 		return ret;
 	}
+=======
+	das1800_setup_counters(dev, cmd);
+>>>>>>> v3.18
 =======
 	das1800_setup_counters(dev, cmd);
 >>>>>>> v3.18
@@ -1480,17 +1635,23 @@ static int das1800_ai_rinsn(struct comedi_device *dev,
 			    struct comedi_insn *insn, unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct das1800_board *thisboard = comedi_board(dev);
 	int i, n;
 	int chan, range, aref, chan_range;
 	int timeout = 1000;
 	short dpnt;
 =======
+=======
+>>>>>>> v3.18
 	const struct das1800_board *thisboard = dev->board_ptr;
 	int i, n;
 	int chan, range, aref, chan_range;
 	int timeout = 1000;
 	unsigned short dpnt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int conv_flags = 0;
 	unsigned long irq_flags;
@@ -1531,7 +1692,11 @@ static int das1800_ai_rinsn(struct comedi_device *dev,
 		}
 		if (i == timeout) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			comedi_error(dev, "timeout");
+=======
+			dev_err(dev->class_dev, "timeout\n");
+>>>>>>> v3.18
 =======
 			dev_err(dev->class_dev, "timeout\n");
 >>>>>>> v3.18
@@ -1556,7 +1721,11 @@ static int das1800_ao_winsn(struct comedi_device *dev,
 			    struct comedi_insn *insn, unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct das1800_board *thisboard = comedi_board(dev);
+=======
+	const struct das1800_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct das1800_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -1565,7 +1734,11 @@ static int das1800_ao_winsn(struct comedi_device *dev,
 /* int range = CR_RANGE(insn->chanspec); */
 	int update_chan = thisboard->ao_n_chan - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	short output;
+=======
+	unsigned short output;
+>>>>>>> v3.18
 =======
 	unsigned short output;
 >>>>>>> v3.18
@@ -1603,6 +1776,7 @@ static int das1800_di_rbits(struct comedi_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* writes to digital output channels */
 static int das1800_do_wbits(struct comedi_device *dev,
 			    struct comedi_subdevice *s,
@@ -1622,6 +1796,8 @@ static int das1800_do_wbits(struct comedi_device *dev,
 
 	data[1] = devpriv->do_bits;
 =======
+=======
+>>>>>>> v3.18
 static int das1800_do_wbits(struct comedi_device *dev,
 			    struct comedi_subdevice *s,
 			    struct comedi_insn *insn,
@@ -1631,6 +1807,9 @@ static int das1800_do_wbits(struct comedi_device *dev,
 		outb(s->state, dev->iobase + DAS1800_DIGITAL);
 
 	data[1] = s->state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
@@ -1673,7 +1852,10 @@ static int das1800_init_dma(struct comedi_device *dev, unsigned int dma0,
 				"dma 5,6 / 6,7 / or 7,5\n");
 			return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -1717,6 +1899,7 @@ static int das1800_init_dma(struct comedi_device *dev, unsigned int dma0,
 
 static int das1800_probe(struct comedi_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int id;
 	int board;
@@ -1797,6 +1980,8 @@ static int das1800_probe(struct comedi_device *dev)
 	}
 	return -1;
 =======
+=======
+>>>>>>> v3.18
 	const struct das1800_board *board = dev->board_ptr;
 	int index;
 	int id;
@@ -1851,6 +2036,9 @@ static int das1800_probe(struct comedi_device *dev)
 		das1800_boards[index].name);
 
 	return index;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1858,7 +2046,11 @@ static int das1800_attach(struct comedi_device *dev,
 			  struct comedi_devconfig *it)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct das1800_board *thisboard = comedi_board(dev);
+=======
+	const struct das1800_board *thisboard;
+>>>>>>> v3.18
 =======
 	const struct das1800_board *thisboard;
 >>>>>>> v3.18
@@ -1871,10 +2063,16 @@ static int das1800_attach(struct comedi_device *dev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -1893,7 +2091,11 @@ static int das1800_attach(struct comedi_device *dev,
 
 	dev->board_ptr = das1800_boards + board;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	thisboard = comedi_board(dev);
+=======
+	thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -1909,6 +2111,7 @@ static int das1800_attach(struct comedi_device *dev,
 		devpriv->iobase2 = iobase2;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* grab our IRQ */
 	if (irq) {
@@ -1948,6 +2151,8 @@ static int das1800_attach(struct comedi_device *dev,
 		return -EINVAL;
 		break;
 =======
+=======
+>>>>>>> v3.18
 	if (irq == 3 || irq == 5 || irq == 7 || irq == 10 || irq == 11 ||
 	    irq == 15) {
 		ret = request_irq(irq, das1800_interrupt, 0,
@@ -1976,6 +2181,9 @@ static int das1800_attach(struct comedi_device *dev,
 				break;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1997,6 +2205,7 @@ static int das1800_attach(struct comedi_device *dev,
 	/* analog input subdevice */
 	s = &dev->subdevices[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->read_subdev = s;
 	s->type = COMEDI_SUBD_AI;
 	s->subdev_flags = SDF_READABLE | SDF_DIFF | SDF_GROUND | SDF_CMD_READ;
@@ -2012,6 +2221,8 @@ static int das1800_attach(struct comedi_device *dev,
 	s->poll = das1800_ai_poll;
 	s->cancel = das1800_cancel;
 =======
+=======
+>>>>>>> v3.18
 	s->type = COMEDI_SUBD_AI;
 	s->subdev_flags = SDF_READABLE | SDF_DIFF | SDF_GROUND;
 	if (thisboard->common)
@@ -2029,6 +2240,9 @@ static int das1800_attach(struct comedi_device *dev,
 		s->poll = das1800_ai_poll;
 		s->cancel = das1800_cancel;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* analog out */
@@ -2066,7 +2280,11 @@ static int das1800_attach(struct comedi_device *dev,
 
 	/*  initialize digital out channels */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outb(devpriv->do_bits, dev->iobase + DAS1800_DIGITAL);
+=======
+	outb(0, dev->iobase + DAS1800_DIGITAL);
+>>>>>>> v3.18
 =======
 	outb(0, dev->iobase + DAS1800_DIGITAL);
 >>>>>>> v3.18

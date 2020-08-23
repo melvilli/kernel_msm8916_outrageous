@@ -20,6 +20,10 @@
 __kernel_gettimeofday:
 	.cfi_startproc
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ahi	%r15,-16
+>>>>>>> v3.18
 =======
 	ahi	%r15,-16
 >>>>>>> v3.18
@@ -34,8 +38,13 @@ __kernel_gettimeofday:
 	tml	%r4,0x0001			/* pending update ? loop */
 	jnz	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stck	24(%r15)			/* Store TOD clock */
 	lm	%r0,%r1,24(%r15)
+=======
+	stcke	0(%r15)				/* Store TOD clock */
+	lm	%r0,%r1,1(%r15)
+>>>>>>> v3.18
 =======
 	stcke	0(%r15)				/* Store TOD clock */
 	lm	%r0,%r1,1(%r15)
@@ -44,6 +53,7 @@ __kernel_gettimeofday:
 	sl	%r1,__VDSO_XTIME_STAMP+4(%r5)
 	brc	3,3f
 	ahi	%r0,-1
+<<<<<<< HEAD
 <<<<<<< HEAD
 3:	ms	%r0,__VDSO_NTP_MULT(%r5)	/* cyc2ns(clock,cycle_delta) */
 	st	%r0,24(%r15)
@@ -55,6 +65,8 @@ __kernel_gettimeofday:
 4:	al	%r0,24(%r15)
 	srdl	%r0,12
 =======
+=======
+>>>>>>> v3.18
 3:	ms	%r0,__VDSO_TK_MULT(%r5)		/*  * tk->mult */
 	st	%r0,0(%r15)
 	l	%r0,__VDSO_TK_MULT(%r5)
@@ -63,23 +75,32 @@ __kernel_gettimeofday:
 	jnm	4f
 	a	%r0,__VDSO_TK_MULT(%r5)
 4:	al	%r0,0(%r15)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	al	%r0,__VDSO_XTIME_NSEC(%r5)	/*  + xtime */
 	al	%r1,__VDSO_XTIME_NSEC+4(%r5)
 	brc	12,5f
 	ahi	%r0,1
 <<<<<<< HEAD
+<<<<<<< HEAD
 5:	mvc	24(4,%r15),__VDSO_XTIME_SEC+4(%r5)
 	cl	%r4,__VDSO_UPD_COUNT+4(%r5)	/* check update counter */
 	jne	1b
 	l	%r4,24(%r15)			/* get tv_sec from stack */
 =======
+=======
+>>>>>>> v3.18
 5:	mvc	0(4,%r15),__VDSO_XTIME_SEC+4(%r5)
 	cl	%r4,__VDSO_UPD_COUNT+4(%r5)	/* check update counter */
 	jne	1b
 	l	%r4,__VDSO_TK_SHIFT(%r5)	/* Timekeeper shift */
 	srdl	%r0,0(%r4)			/*  >> tk->shift */
 	l	%r4,0(%r15)			/* get tv_sec from stack */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	basr	%r5,0
 6:	ltr	%r0,%r0
@@ -100,6 +121,10 @@ __kernel_gettimeofday:
 	st	%r0,4(%r2)			/* store tv->tv_usec */
 10:	slr	%r2,%r2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ahi	%r15,16
+>>>>>>> v3.18
 =======
 	ahi	%r15,16
 >>>>>>> v3.18

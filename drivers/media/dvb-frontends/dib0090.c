@@ -2558,11 +2558,14 @@ static int dib0090_set_params(struct dvb_frontend *fe)
 	do {
 		ret = dib0090_tune(fe);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret != FE_CALLBACK_TIME_NEVER)
 			msleep(ret / 10);
 		else
 			break;
 =======
+=======
+>>>>>>> v3.18
 		if (ret == FE_CALLBACK_TIME_NEVER)
 			break;
 
@@ -2576,6 +2579,9 @@ static int dib0090_set_params(struct dvb_frontend *fe)
 		 */
 		ret = 10 * (ret + 99)/100;
 		usleep_range(ret * 1000, (ret + 1) * 1000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while (state->tune_state != CT_TUNER_STOP);
 

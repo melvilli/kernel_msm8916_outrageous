@@ -170,7 +170,11 @@ unsigned long oom_badness(struct task_struct *p, struct mem_cgroup *memcg,
 	 * task's rss, pagetable and swap space use.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	points = get_mm_rss(p->mm) + p->mm->nr_ptes +
+=======
+	points = get_mm_rss(p->mm) + atomic_long_read(&p->mm->nr_ptes) +
+>>>>>>> v3.18
 =======
 	points = get_mm_rss(p->mm) + atomic_long_read(&p->mm->nr_ptes) +
 >>>>>>> v3.18
@@ -263,8 +267,11 @@ enum oom_scan_t oom_scan_process_thread(struct task_struct *task,
 		bool force_kill)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (task->exit_state)
 		return OOM_SCAN_CONTINUE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (oom_unkillable_task(task, NULL, nodemask))
@@ -304,7 +311,11 @@ enum oom_scan_t oom_scan_process_thread(struct task_struct *task,
 /*
  * Simple selection loop. We chose the process with the highest
 <<<<<<< HEAD
+<<<<<<< HEAD
  * number of 'points'.
+=======
+ * number of 'points'.  Returns -1 on scan abort.
+>>>>>>> v3.18
 =======
  * number of 'points'.  Returns -1 on scan abort.
 >>>>>>> v3.18
@@ -334,7 +345,11 @@ static struct task_struct *select_bad_process(unsigned int *ppoints,
 		case OOM_SCAN_ABORT:
 			rcu_read_unlock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return ERR_PTR(-1UL);
+=======
+			return (struct task_struct *)(-1UL);
+>>>>>>> v3.18
 =======
 			return (struct task_struct *)(-1UL);
 >>>>>>> v3.18
@@ -343,11 +358,14 @@ static struct task_struct *select_bad_process(unsigned int *ppoints,
 		};
 		points = oom_badness(p, NULL, nodemask, totalpages);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (points > chosen_points) {
 			chosen = p;
 			chosen_points = points;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (!points || points < chosen_points)
 			continue;
 		/* Prefer thread group leaders for display purposes */
@@ -356,6 +374,9 @@ static struct task_struct *select_bad_process(unsigned int *ppoints,
 
 		chosen = p;
 		chosen_points = points;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (chosen)
@@ -378,7 +399,11 @@ static struct task_struct *select_bad_process(unsigned int *ppoints,
  * swapents, oom_score_adj value, and name.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dump_tasks(const struct mem_cgroup *memcg, const nodemask_t *nodemask)
+=======
+static void dump_tasks(const struct mem_cgroup *memcg, const nodemask_t *nodemask)
+>>>>>>> v3.18
 =======
 static void dump_tasks(const struct mem_cgroup *memcg, const nodemask_t *nodemask)
 >>>>>>> v3.18
@@ -403,15 +428,21 @@ static void dump_tasks(const struct mem_cgroup *memcg, const nodemask_t *nodemas
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("[%5d] %5d %5d %8lu %8lu %7lu %8lu         %5hd %s\n",
 			task->pid, from_kuid(&init_user_ns, task_uid(task)),
 			task->tgid, task->mm->total_vm, get_mm_rss(task->mm),
 			task->mm->nr_ptes,
 =======
+=======
+>>>>>>> v3.18
 		pr_info("[%5d] %5d %5d %8lu %8lu %7ld %8lu         %5hd %s\n",
 			task->pid, from_kuid(&init_user_ns, task_uid(task)),
 			task->tgid, task->mm->total_vm, get_mm_rss(task->mm),
 			atomic_long_read(&task->mm->nr_ptes),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			get_mm_counter(task->mm, MM_SWAPENTS),
 			task->signal->oom_score_adj, task->comm);
@@ -610,6 +641,7 @@ EXPORT_SYMBOL_GPL(unregister_oom_notifier);
  * the zonelist.  Otherwise, locks all zones in the zonelist and returns 1.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int try_set_zonelist_oom(struct zonelist *zonelist, gfp_t gfp_mask)
 {
 	struct zoneref *z;
@@ -633,6 +665,8 @@ int try_set_zonelist_oom(struct zonelist *zonelist, gfp_t gfp_mask)
 		zone_set_flag(zone, ZONE_OOM_LOCKED);
 	}
 =======
+=======
+>>>>>>> v3.18
 bool oom_zonelist_trylock(struct zonelist *zonelist, gfp_t gfp_mask)
 {
 	struct zoneref *z;
@@ -652,6 +686,9 @@ bool oom_zonelist_trylock(struct zonelist *zonelist, gfp_t gfp_mask)
 	 */
 	for_each_zone_zonelist(zone, z, zonelist, gfp_zone(gfp_mask))
 		set_bit(ZONE_OOM_LOCKED, &zone->flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -665,7 +702,11 @@ out:
  * killer, if necessary.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void clear_zonelist_oom(struct zonelist *zonelist, gfp_t gfp_mask)
+=======
+void oom_zonelist_unlock(struct zonelist *zonelist, gfp_t gfp_mask)
+>>>>>>> v3.18
 =======
 void oom_zonelist_unlock(struct zonelist *zonelist, gfp_t gfp_mask)
 >>>>>>> v3.18
@@ -675,9 +716,14 @@ void oom_zonelist_unlock(struct zonelist *zonelist, gfp_t gfp_mask)
 
 	spin_lock(&zone_scan_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_zone_zonelist(zone, z, zonelist, gfp_zone(gfp_mask)) {
 		zone_clear_flag(zone, ZONE_OOM_LOCKED);
 	}
+=======
+	for_each_zone_zonelist(zone, z, zonelist, gfp_zone(gfp_mask))
+		clear_bit(ZONE_OOM_LOCKED, &zone->flags);
+>>>>>>> v3.18
 =======
 	for_each_zone_zonelist(zone, z, zonelist, gfp_zone(gfp_mask))
 		clear_bit(ZONE_OOM_LOCKED, &zone->flags);
@@ -750,7 +796,11 @@ void out_of_memory(struct zonelist *zonelist, gfp_t gfp_mask,
 		panic("Out of memory and no killable processes...\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (PTR_ERR(p) != -1UL) {
+=======
+	if (p != (void *)-1UL) {
+>>>>>>> v3.18
 =======
 	if (p != (void *)-1UL) {
 >>>>>>> v3.18
@@ -780,15 +830,21 @@ void pagefault_out_of_memory(void)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zonelist = node_zonelist(first_online_node, GFP_KERNEL);
 	if (try_set_zonelist_oom(zonelist, GFP_KERNEL)) {
 		out_of_memory(NULL, 0, 0, NULL, false);
 		clear_zonelist_oom(zonelist, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	zonelist = node_zonelist(first_memory_node, GFP_KERNEL);
 	if (oom_zonelist_trylock(zonelist, GFP_KERNEL)) {
 		out_of_memory(NULL, 0, 0, NULL, false);
 		oom_zonelist_unlock(zonelist, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

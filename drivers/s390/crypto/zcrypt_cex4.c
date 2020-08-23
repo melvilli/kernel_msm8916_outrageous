@@ -31,14 +31,20 @@
 #define CEX4C_MAX_MESSAGE_SIZE	MSGTYPE06_MAX_MSG_SIZE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CEX4_CLEANUP_TIME	(15*HZ)
 =======
+=======
+>>>>>>> v3.18
 /* Waiting time for requests to be processed.
  * Currently there are some types of request which are not deterministic.
  * But the maximum time limit managed by the stomper code is set to 60sec.
  * Hence we have to wait at least that time period.
  */
 #define CEX4_CLEANUP_TIME	(61*HZ)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct ap_device_id zcrypt_cex4_ids[] = {
@@ -111,7 +117,10 @@ static int zcrypt_cex4_probe(struct ap_device *ap_dev)
 			zdev->ops = zcrypt_msgtype_request(MSGTYPE06_NAME,
 							   MSGTYPE06_VARIANT_DEFAULT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		} else if (ap_test_bit(&ap_dev->functions, AP_FUNC_EP11)) {
 			zdev = zcrypt_device_alloc(CEX4C_MAX_MESSAGE_SIZE);
 			if (!zdev)
@@ -125,6 +134,9 @@ static int zcrypt_cex4_probe(struct ap_device *ap_dev)
 			zdev->speed_rating = CEX4C_SPEED_RATING;
 			zdev->ops = zcrypt_msgtype_request(MSGTYPE06_NAME,
 							MSGTYPE06_VARIANT_EP11);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;

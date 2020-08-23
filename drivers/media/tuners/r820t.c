@@ -2,7 +2,11 @@
  * Rafael Micro R820T driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2013 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (C) 2013 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -369,8 +373,13 @@ static void shadow_store(struct r820t_priv *priv, u8 reg, const u8 *val,
 	if (len <= 0)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len > NUM_REGS)
 		len = NUM_REGS;
+=======
+	if (len > NUM_REGS - r)
+		len = NUM_REGS - r;
+>>>>>>> v3.18
 =======
 	if (len > NUM_REGS - r)
 		len = NUM_REGS - r;
@@ -622,11 +631,14 @@ static int r820t_set_pll(struct r820t_priv *priv, enum v4l2_tuner_type type,
 	vco_fine_tune = (data[4] & 0x30) >> 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vco_fine_tune > VCO_POWER_REF)
 		div_num = div_num - 1;
 	else if (vco_fine_tune < VCO_POWER_REF)
 		div_num = div_num + 1;
 =======
+=======
+>>>>>>> v3.18
 	tuner_dbg("mix_div=%d div_num=%d vco_fine_tune=%d\n",
 			mix_div, div_num, vco_fine_tune);
 
@@ -640,6 +652,9 @@ static int r820t_set_pll(struct r820t_priv *priv, enum v4l2_tuner_type type,
 		else if (vco_fine_tune < VCO_POWER_REF)
 			div_num = div_num + 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rc = r820t_write_reg_mask(priv, 0x10, div_num << 5, 0xe0);
@@ -663,11 +678,14 @@ static int r820t_set_pll(struct r820t_priv *priv, enum v4l2_tuner_type type,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nint > 63) {
 		tuner_info("No valid PLL values for %u kHz!\n", freq);
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ni = (nint - 13) / 4;
@@ -1493,7 +1511,12 @@ static int r820t_multi_read(struct r820t_priv *priv)
 {
 	int rc, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 data[2], min = 0, max = 255, sum = 0;
+=======
+	u16 sum = 0;
+	u8 data[2], min = 255, max = 0;
+>>>>>>> v3.18
 =======
 	u16 sum = 0;
 	u8 data[2], min = 255, max = 0;
@@ -1574,7 +1597,11 @@ static int r820t_imr_cross(struct r820t_priv *priv,
 
 		if (cross[i].value < tmp.value)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(&tmp, &cross[i], sizeof(tmp));
+=======
+			tmp = cross[i];
+>>>>>>> v3.18
 =======
 			tmp = cross[i];
 >>>>>>> v3.18
@@ -1895,9 +1922,15 @@ static int r820t_imr(struct r820t_priv *priv, unsigned imr_mem, bool im_flag)
 
 	if (priv->cfg->xtal > 24000000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ring_ref = priv->cfg->xtal / 2;
 	else
 		ring_ref = priv->cfg->xtal;
+=======
+		ring_ref = priv->cfg->xtal / 2000;
+	else
+		ring_ref = priv->cfg->xtal / 1000;
+>>>>>>> v3.18
 =======
 		ring_ref = priv->cfg->xtal / 2000;
 	else
@@ -2300,7 +2333,10 @@ static int r820t_release(struct dvb_frontend *fe)
 	mutex_unlock(&r820t_list_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(fe->tuner_priv);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fe->tuner_priv = NULL;
@@ -2343,7 +2379,10 @@ struct dvb_frontend *r820t_attach(struct dvb_frontend *fe,
 		/* memory allocation failure */
 		goto err_no_gate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case 1:
@@ -2361,8 +2400,11 @@ struct dvb_frontend *r820t_attach(struct dvb_frontend *fe,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&fe->ops.tuner_ops, &r820t_tuner_ops, sizeof(r820t_tuner_ops));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (fe->ops.i2c_gate_ctrl)
@@ -2380,10 +2422,13 @@ struct dvb_frontend *r820t_attach(struct dvb_frontend *fe,
 	tuner_info("Rafael Micro r820t successfully identified\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fe->tuner_priv = priv;
 	memcpy(&fe->ops.tuner_ops, &r820t_tuner_ops,
 			sizeof(struct dvb_tuner_ops));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (fe->ops.i2c_gate_ctrl)
@@ -2392,6 +2437,12 @@ struct dvb_frontend *r820t_attach(struct dvb_frontend *fe,
 	mutex_unlock(&r820t_list_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memcpy(&fe->ops.tuner_ops, &r820t_tuner_ops,
+			sizeof(struct dvb_tuner_ops));
+
+>>>>>>> v3.18
 =======
 	memcpy(&fe->ops.tuner_ops, &r820t_tuner_ops,
 			sizeof(struct dvb_tuner_ops));
@@ -2413,7 +2464,11 @@ EXPORT_SYMBOL_GPL(r820t_attach);
 
 MODULE_DESCRIPTION("Rafael Micro r820t silicon tuner driver");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

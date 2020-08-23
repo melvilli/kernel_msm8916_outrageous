@@ -14,6 +14,7 @@ struct mtd_partition;
 struct mtd_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum sw_version {
 	VERSION_1 = 0,
 	VERSION_2,
@@ -21,12 +22,17 @@ enum sw_version {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * map_name:	the map probe function name
  * name:	flash device name (eg, as used with mtdparts=)
  * width:	width of mapped device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * interleave:  interleave mode feature support
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * init:	method called at driver/device initialisation
@@ -36,7 +42,10 @@ enum sw_version {
  * parts:	optional array of mtd_partitions for static partitioning
  * nr_parts:	number of mtd_partitions for static partitoning
 <<<<<<< HEAD
+<<<<<<< HEAD
  * version:	software register interface version
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -45,7 +54,10 @@ struct flash_platform_data {
 	const char	*name;
 	unsigned int	width;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int    interleave;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int		(*init)(void);
@@ -55,7 +67,10 @@ struct flash_platform_data {
 	struct mtd_partition *parts;
 	unsigned int	nr_parts;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum sw_version	version;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

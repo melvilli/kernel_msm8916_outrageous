@@ -19,12 +19,15 @@
  * id to a user for him to pass back at a later time.  You then pass
  * that id to this code and it returns your pointer.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
  * You can release ids at any time. When all ids are released, most of
  * the memory is returned (we keep MAX_IDR_FREE) in a local pool so we
  * don't need to go to the memory "store" during an id allocate, just
  * so you don't need to be too concerned about locking and conflicts
  * with the slab allocator.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -155,7 +158,11 @@ static void idr_layer_rcu_free(struct rcu_head *head)
 static inline void free_layer(struct idr *idr, struct idr_layer *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (idr->hint && idr->hint == p)
+=======
+	if (idr->hint == p)
+>>>>>>> v3.18
 =======
 	if (idr->hint == p)
 >>>>>>> v3.18
@@ -204,7 +211,11 @@ static void idr_mark_full(struct idr_layer **pa, int id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __idr_pre_get(struct idr *idp, gfp_t gfp_mask)
+=======
+static int __idr_pre_get(struct idr *idp, gfp_t gfp_mask)
+>>>>>>> v3.18
 =======
 static int __idr_pre_get(struct idr *idp, gfp_t gfp_mask)
 >>>>>>> v3.18
@@ -219,7 +230,10 @@ static int __idr_pre_get(struct idr *idp, gfp_t gfp_mask)
 	return 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(__idr_pre_get);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -389,6 +403,7 @@ static void idr_fill_slot(struct idr *idr, void *ptr, int id,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __idr_get_new_above(struct idr *idp, void *ptr, int starting_id, int *id)
 {
 	struct idr_layer *pa[MAX_IDR_LEVEL + 1];
@@ -403,6 +418,8 @@ int __idr_get_new_above(struct idr *idp, void *ptr, int starting_id, int *id)
 	return 0;
 }
 EXPORT_SYMBOL(__idr_get_new_above);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -542,9 +559,13 @@ EXPORT_SYMBOL(idr_alloc_cyclic);
 static void idr_remove_warning(int id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING
 		"idr_remove called for id=%d which is not allocated.\n", id);
 	dump_stack();
+=======
+	WARN(1, "idr_remove called for id=%d which is not allocated.\n", id);
+>>>>>>> v3.18
 =======
 	WARN(1, "idr_remove called for id=%d which is not allocated.\n", id);
 >>>>>>> v3.18
@@ -572,7 +593,11 @@ static void sub_remove(struct idr *idp, int shift, int id)
 	if (likely(p != NULL && test_bit(n, p->bitmap))) {
 		__clear_bit(n, p->bitmap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcu_assign_pointer(p->ary[n], NULL);
+=======
+		RCU_INIT_POINTER(p->ary[n], NULL);
+>>>>>>> v3.18
 =======
 		RCU_INIT_POINTER(p->ary[n], NULL);
 >>>>>>> v3.18
@@ -605,12 +630,18 @@ void idr_remove(struct idr *idp, int id)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (id > idr_max(idp->layers)) {
 		idr_remove_warning(id);
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sub_remove(idp, (idp->layers - 1) * IDR_BITS, id);
 	if (idp->top && idp->top->count == 1 && (idp->layers > 1) &&
@@ -630,6 +661,7 @@ void idr_remove(struct idr *idp, int id)
 		free_layer(idp, to_free);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (idp->id_free_cnt >= MAX_IDR_FREE) {
 		p = get_from_free_list(idp);
 		/*
@@ -645,10 +677,15 @@ EXPORT_SYMBOL(idr_remove);
 
 void __idr_remove_all(struct idr *idp)
 =======
+=======
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(idr_remove);
 
 static void __idr_remove_all(struct idr *idp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int n, id, max;
@@ -659,8 +696,13 @@ static void __idr_remove_all(struct idr *idp)
 
 	n = idp->layers * IDR_BITS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = idp->top;
 	rcu_assign_pointer(idp->top, NULL);
+=======
+	*paa = idp->top;
+	RCU_INIT_POINTER(idp->top, NULL);
+>>>>>>> v3.18
 =======
 	*paa = idp->top;
 	RCU_INIT_POINTER(idp->top, NULL);
@@ -670,16 +712,22 @@ static void __idr_remove_all(struct idr *idp)
 	id = 0;
 	while (id >= 0 && id <= max) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (n > IDR_BITS && p) {
 			n -= IDR_BITS;
 			*paa++ = p;
 			p = p->ary[(id >> n) & IDR_MASK];
 =======
+=======
+>>>>>>> v3.18
 		p = *paa;
 		while (n > IDR_BITS && p) {
 			n -= IDR_BITS;
 			p = p->ary[(id >> n) & IDR_MASK];
 			*++paa = p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -688,22 +736,31 @@ static void __idr_remove_all(struct idr *idp)
 		/* Get the highest bit that the above add changed from 0->1. */
 		while (n < fls(id ^ bt_mask)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (p)
 				free_layer(idp, p);
 			n += IDR_BITS;
 			p = *--paa;
 =======
+=======
+>>>>>>> v3.18
 			if (*paa)
 				free_layer(idp, *paa);
 			n += IDR_BITS;
 			--paa;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 	idp->layers = 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(__idr_remove_all);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -718,7 +775,11 @@ EXPORT_SYMBOL(__idr_remove_all);
  *
  * A typical clean-up sequence for objects stored in an idr tree will use
 <<<<<<< HEAD
+<<<<<<< HEAD
  * idr_for_each() to free all objects, if necessay, then idr_destroy() to
+=======
+ * idr_for_each() to free all objects, if necessary, then idr_destroy() to
+>>>>>>> v3.18
 =======
  * idr_for_each() to free all objects, if necessary, then idr_destroy() to
 >>>>>>> v3.18
@@ -789,7 +850,11 @@ int idr_for_each(struct idr *idp,
 
 	n = idp->layers * IDR_BITS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = rcu_dereference_raw(idp->top);
+=======
+	*paa = rcu_dereference_raw(idp->top);
+>>>>>>> v3.18
 =======
 	*paa = rcu_dereference_raw(idp->top);
 >>>>>>> v3.18
@@ -798,16 +863,22 @@ int idr_for_each(struct idr *idp,
 	id = 0;
 	while (id >= 0 && id <= max) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (n > 0 && p) {
 			n -= IDR_BITS;
 			*paa++ = p;
 			p = rcu_dereference_raw(p->ary[(id >> n) & IDR_MASK]);
 =======
+=======
+>>>>>>> v3.18
 		p = *paa;
 		while (n > 0 && p) {
 			n -= IDR_BITS;
 			p = rcu_dereference_raw(p->ary[(id >> n) & IDR_MASK]);
 			*++paa = p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -821,7 +892,11 @@ int idr_for_each(struct idr *idp,
 		while (n < fls(id)) {
 			n += IDR_BITS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			p = *--paa;
+=======
+			--paa;
+>>>>>>> v3.18
 =======
 			--paa;
 >>>>>>> v3.18
@@ -853,7 +928,11 @@ void *idr_get_next(struct idr *idp, int *nextidp)
 
 	/* find first ent */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = rcu_dereference_raw(idp->top);
+=======
+	p = *paa = rcu_dereference_raw(idp->top);
+>>>>>>> v3.18
 =======
 	p = *paa = rcu_dereference_raw(idp->top);
 >>>>>>> v3.18
@@ -864,16 +943,22 @@ void *idr_get_next(struct idr *idp, int *nextidp)
 
 	while (id >= 0 && id <= max) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (n > 0 && p) {
 			n -= IDR_BITS;
 			*paa++ = p;
 			p = rcu_dereference_raw(p->ary[(id >> n) & IDR_MASK]);
 =======
+=======
+>>>>>>> v3.18
 		p = *paa;
 		while (n > 0 && p) {
 			n -= IDR_BITS;
 			p = rcu_dereference_raw(p->ary[(id >> n) & IDR_MASK]);
 			*++paa = p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -893,7 +978,11 @@ void *idr_get_next(struct idr *idp, int *nextidp)
 		while (n < fls(id)) {
 			n += IDR_BITS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			p = *--paa;
+=======
+			--paa;
+>>>>>>> v3.18
 =======
 			--paa;
 >>>>>>> v3.18
@@ -927,15 +1016,21 @@ void *idr_replace(struct idr *idp, void *ptr, int id)
 	p = idp->top;
 	if (!p)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ERR_PTR(-EINVAL);
 
 	if (id > idr_max(p->layer + 1))
 		return ERR_PTR(-EINVAL);
 =======
+=======
+>>>>>>> v3.18
 		return ERR_PTR(-ENOENT);
 
 	if (id > idr_max(p->layer + 1))
 		return ERR_PTR(-ENOENT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	n = p->layer * IDR_BITS;
@@ -976,7 +1071,10 @@ void idr_init(struct idr *idp)
 EXPORT_SYMBOL(idr_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int idr_has_entry(int id, void *p, void *data)
 {
 	return 1;
@@ -987,6 +1085,9 @@ bool idr_is_empty(struct idr *idp)
 	return !idr_for_each(idp, idr_has_entry, NULL);
 }
 EXPORT_SYMBOL(idr_is_empty);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -1153,6 +1254,12 @@ void ida_remove(struct ida *ida, int id)
 	struct ida_bitmap *bitmap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (idr_id > idr_max(ida->idr.layers))
+		goto err;
+
+>>>>>>> v3.18
 =======
 	if (idr_id > idr_max(ida->idr.layers))
 		goto err;
@@ -1174,7 +1281,11 @@ void ida_remove(struct ida *ida, int id)
 
 	bitmap = (void *)p->ary[n];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!test_bit(offset, bitmap->bitmap))
+=======
+	if (!bitmap || !test_bit(offset, bitmap->bitmap))
+>>>>>>> v3.18
 =======
 	if (!bitmap || !test_bit(offset, bitmap->bitmap))
 >>>>>>> v3.18
@@ -1192,8 +1303,12 @@ void ida_remove(struct ida *ida, int id)
 
  err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING
 	       "ida_remove called for id=%d which is not allocated.\n", id);
+=======
+	WARN(1, "ida_remove called for id=%d which is not allocated.\n", id);
+>>>>>>> v3.18
 =======
 	WARN(1, "ida_remove called for id=%d which is not allocated.\n", id);
 >>>>>>> v3.18

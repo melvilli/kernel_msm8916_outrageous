@@ -140,7 +140,11 @@ static struct snd_util_memblk *
 search_empty(struct snd_util_memhdr *hdr, int size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_util_memblk *blk, *prev;
+=======
+	struct snd_util_memblk *blk;
+>>>>>>> v3.18
 =======
 	struct snd_util_memblk *blk;
 >>>>>>> v3.18
@@ -149,7 +153,10 @@ search_empty(struct snd_util_memhdr *hdr, int size)
 
 	psize = get_aligned_page(size + ALIGN_PAGE_SIZE -1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prev = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	page = 0;

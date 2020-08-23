@@ -12,7 +12,10 @@ struct lockd_net {
 	struct delayed_work grace_period_end;
 	struct lock_manager lockd_manager;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head grace_list;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -20,7 +23,10 @@ struct lockd_net {
 	unsigned int nsm_users;
 	struct rpc_clnt *nsm_clnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head nsm_handles;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

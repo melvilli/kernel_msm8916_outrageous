@@ -407,7 +407,10 @@ txx9dmac_descriptor_complete(struct txx9dmac_chan *dc,
 	void *param;
 	struct dma_async_tx_descriptor *txd = &desc->txd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct txx9dmac_slave *ds = dc->chan.private;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -422,6 +425,7 @@ txx9dmac_descriptor_complete(struct txx9dmac_chan *dc,
 	list_splice_init(&desc->tx_list, &dc->free_list);
 	list_move(&desc->desc_node, &dc->free_list);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!ds) {
 		dma_addr_t dmaaddr;
@@ -447,6 +451,9 @@ txx9dmac_descriptor_complete(struct txx9dmac_chan *dc,
 		}
 	}
 
+=======
+	dma_descriptor_unmap(txd);
+>>>>>>> v3.18
 =======
 	dma_descriptor_unmap(txd);
 >>>>>>> v3.18
@@ -970,6 +977,7 @@ txx9dmac_tx_status(struct dma_chan *chan, dma_cookie_t cookie,
 
 	ret = dma_cookie_status(chan, cookie, txstate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret != DMA_SUCCESS) {
 		spin_lock_bh(&dc->lock);
 		txx9dmac_scan_descriptors(dc);
@@ -980,6 +988,8 @@ txx9dmac_tx_status(struct dma_chan *chan, dma_cookie_t cookie,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (ret == DMA_COMPLETE)
 		return DMA_COMPLETE;
 
@@ -988,6 +998,9 @@ txx9dmac_tx_status(struct dma_chan *chan, dma_cookie_t cookie,
 	spin_unlock_bh(&dc->lock);
 
 	return dma_cookie_status(chan, cookie, txstate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1137,14 +1150,20 @@ static void txx9dmac_off(struct txx9dmac_dev *ddev)
 static int __init txx9dmac_chan_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct txx9dmac_chan_platform_data *cpdata = pdev->dev.platform_data;
 	struct platform_device *dmac_dev = cpdata->dmac_dev;
 	struct txx9dmac_platform_data *pdata = dmac_dev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	struct txx9dmac_chan_platform_data *cpdata =
 			dev_get_platdata(&pdev->dev);
 	struct platform_device *dmac_dev = cpdata->dmac_dev;
 	struct txx9dmac_platform_data *pdata = dev_get_platdata(&dmac_dev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct txx9dmac_chan *dc;
 	int err;
@@ -1229,7 +1248,11 @@ static int txx9dmac_chan_remove(struct platform_device *pdev)
 static int __init txx9dmac_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct txx9dmac_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct txx9dmac_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct txx9dmac_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1312,7 +1335,11 @@ static int txx9dmac_resume_noirq(struct device *dev)
 	struct platform_device *pdev = to_platform_device(dev);
 	struct txx9dmac_dev *ddev = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct txx9dmac_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct txx9dmac_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct txx9dmac_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

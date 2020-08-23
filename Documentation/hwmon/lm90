@@ -123,9 +123,12 @@ Supported chips:
     Addresses scanned: I2C 0x4c, 0x4d
     Datasheet: Not publicly available from GMT
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 Author: Jean Delvare <khali@linux-fr.org>
 =======
+=======
+>>>>>>> v3.18
   * Texas Instruments TMP451
     Prefix: 'tmp451'
     Addresses scanned: I2C 0x4c
@@ -134,6 +137,9 @@ Author: Jean Delvare <khali@linux-fr.org>
 
 
 Author: Jean Delvare <jdelvare@suse.de>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

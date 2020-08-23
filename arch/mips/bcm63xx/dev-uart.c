@@ -55,7 +55,12 @@ int __init bcm63xx_uart_register(unsigned int id)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id == 1 && (!BCMCPU_IS_6358() && !BCMCPU_IS_6368()))
+=======
+	if (id == 1 && (!BCMCPU_IS_3368() && !BCMCPU_IS_6358() &&
+		!BCMCPU_IS_6368()))
+>>>>>>> v3.18
 =======
 	if (id == 1 && (!BCMCPU_IS_3368() && !BCMCPU_IS_6358() &&
 		!BCMCPU_IS_6368()))

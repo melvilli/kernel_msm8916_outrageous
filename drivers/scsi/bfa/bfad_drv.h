@@ -58,7 +58,11 @@
 #define BFAD_DRIVER_VERSION    BFA_DRIVER_VERSION
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BFAD_DRIVER_VERSION    "3.1.2.1"
+=======
+#define BFAD_DRIVER_VERSION    "3.2.23.0"
+>>>>>>> v3.18
 =======
 #define BFAD_DRIVER_VERSION    "3.2.23.0"
 >>>>>>> v3.18
@@ -245,8 +249,13 @@ enum bfad_sm_event {
 	BFAD_E_INIT			= 3,
 	BFAD_E_INIT_SUCCESS		= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BFAD_E_INIT_FAILED		= 5,
 	BFAD_E_INTR_INIT_FAILED		= 6,
+=======
+	BFAD_E_HAL_INIT_FAILED		= 5,
+	BFAD_E_INIT_FAILED		= 6,
+>>>>>>> v3.18
 =======
 	BFAD_E_HAL_INIT_FAILED		= 5,
 	BFAD_E_INIT_FAILED		= 6,

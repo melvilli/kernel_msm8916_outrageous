@@ -32,6 +32,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -54,6 +59,10 @@
 #include <xen/xen.h>
 #include "xenbus_comms.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "xenbus_probe.h"
+>>>>>>> v3.18
 =======
 #include "xenbus_probe.h"
 >>>>>>> v3.18
@@ -139,9 +148,14 @@ static int get_error(const char *errorstring)
 	for (i = 0; strcmp(errorstring, xsd_errors[i].errstring) != 0; i++) {
 		if (i == ARRAY_SIZE(xsd_errors) - 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING
 			       "XENBUS xen store gave: unknown error %s",
 			       errorstring);
+=======
+			pr_warn("xen store gave: unknown error %s\n",
+				errorstring);
+>>>>>>> v3.18
 =======
 			pr_warn("xen store gave: unknown error %s\n",
 				errorstring);
@@ -153,7 +167,10 @@ static int get_error(const char *errorstring)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool xenbus_ok(void)
 {
 	switch (xen_store_domain_type) {
@@ -177,6 +194,9 @@ static bool xenbus_ok(void)
 	}
 	return false;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void *read_reply(enum xsd_sockmsg_type *type, unsigned int *len)
 {
@@ -188,10 +208,13 @@ static void *read_reply(enum xsd_sockmsg_type *type, unsigned int *len)
 	while (list_empty(&xs_state.reply_list)) {
 		spin_unlock(&xs_state.reply_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* XXX FIXME: Avoid synchronous wait for response here. */
 		wait_event(xs_state.reply_waitq,
 			   !list_empty(&xs_state.reply_list));
 =======
+=======
+>>>>>>> v3.18
 		if (xenbus_ok())
 			/* XXX FIXME: Avoid synchronous wait for response here. */
 			wait_event_timeout(xs_state.reply_waitq,
@@ -206,6 +229,9 @@ static void *read_reply(enum xsd_sockmsg_type *type, unsigned int *len)
 			 */
 			return ERR_PTR(-EIO);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_lock(&xs_state.reply_lock);
 	}
@@ -272,6 +298,12 @@ void *xenbus_dev_request_and_reply(struct xsd_sockmsg *msg)
 	mutex_unlock(&xs_state.request_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (IS_ERR(ret))
+		return ret;
+
+>>>>>>> v3.18
 =======
 	if (IS_ERR(ret))
 		return ret;
@@ -336,10 +368,15 @@ static void *xs_talkv(struct xenbus_transaction t,
 
 	if (msg.type != type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (printk_ratelimit())
 			printk(KERN_WARNING
 			       "XENBUS unexpected type [%d], expected [%d]\n",
 			       msg.type, type);
+=======
+		pr_warn_ratelimited("unexpected type [%d], expected [%d]\n",
+				    msg.type, type);
+>>>>>>> v3.18
 =======
 		pr_warn_ratelimited("unexpected type [%d], expected [%d]\n",
 				    msg.type, type);
@@ -724,7 +761,11 @@ static void xs_reset_watches(void)
 	err = xs_error(xs_single(XBT_NIL, XS_RESET_WATCHES, "", NULL));
 	if (err && err != -EEXIST)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "xs_reset_watches failed: %d\n", err);
+=======
+		pr_warn("xs_reset_watches failed: %d\n", err);
+>>>>>>> v3.18
 =======
 		pr_warn("xs_reset_watches failed: %d\n", err);
 >>>>>>> v3.18
@@ -778,9 +819,13 @@ void unregister_xenbus_watch(struct xenbus_watch *watch)
 	err = xs_unwatch(watch->node, token);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "XENBUS Failed to release watch %s: %i\n",
 		       watch->node, err);
+=======
+		pr_warn("Failed to release watch %s: %i\n", watch->node, err);
+>>>>>>> v3.18
 =======
 		pr_warn("Failed to release watch %s: %i\n", watch->node, err);
 >>>>>>> v3.18
@@ -978,8 +1023,12 @@ static int xenbus_thread(void *unused)
 		err = process_msg();
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "XENBUS error %d while reading "
 			       "message\n", err);
+=======
+			pr_warn("error %d while reading message\n", err);
+>>>>>>> v3.18
 =======
 			pr_warn("error %d while reading message\n", err);
 >>>>>>> v3.18

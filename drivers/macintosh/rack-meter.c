@@ -26,6 +26,11 @@
 #include <linux/dma-mapping.h>
 #include <linux/kernel_stat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>

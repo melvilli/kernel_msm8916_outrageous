@@ -37,8 +37,11 @@ endif
 
 ifeq ($(CONFIG_PPC64),y)
 <<<<<<< HEAD
+<<<<<<< HEAD
 OLDARCH	:= ppc64
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 new_nm := $(shell if $(NM) --help 2>&1 | grep -- '--synthetic' > /dev/null; then echo y; else echo n; fi)
@@ -47,11 +50,14 @@ ifeq ($(new_nm),y)
 NM		:= $(NM) --synthetic
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 else
 OLDARCH	:= ppc
 endif
 =======
+=======
+>>>>>>> v3.18
 endif
 
 ifeq ($(CONFIG_PPC64),y)
@@ -67,6 +73,9 @@ else
 OLDARCH	:= ppc
 endif
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # It seems there are times we use this Makefile without
@@ -78,12 +87,15 @@ endif
 UTS_MACHINE := $(OLDARCH)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifeq ($(HAS_BIARCH),y)
 override AS	+= -a$(CONFIG_WORD_SIZE)
 override LD	+= -m elf$(CONFIG_WORD_SIZE)ppc
 override CC	+= -m$(CONFIG_WORD_SIZE)
 override AR	:= GNUTARGET=elf$(CONFIG_WORD_SIZE)-powerpc $(AR)
 =======
+=======
+>>>>>>> v3.18
 ifeq ($(CONFIG_CPU_LITTLE_ENDIAN),y)
 override CC	+= -mlittle-endian -mno-strict-align
 override AS	+= -mlittle-endian
@@ -110,6 +122,9 @@ override AS	+= -a$(CONFIG_WORD_SIZE)
 override LD	+= -m elf$(CONFIG_WORD_SIZE)$(LDEMULATION)
 override CC	+= -m$(CONFIG_WORD_SIZE)
 override AR	:= GNUTARGET=elf$(CONFIG_WORD_SIZE)-$(GNUTARGET) $(AR)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif
 
@@ -134,6 +149,7 @@ endif
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 CFLAGS-$(CONFIG_PPC64)	:= -mtraceback=no -mcall-aixdesc
 CFLAGS-$(CONFIG_PPC64)	+= $(call cc-option,-mcmodel=medium,-mminimal-toc)
 CFLAGS-$(CONFIG_PPC64)	+= $(call cc-option,-mno-pointers-to-nested-functions)
@@ -141,6 +157,8 @@ CFLAGS-$(CONFIG_PPC32)	:= -ffixed-r2 -mmultiple
 
 CFLAGS-$(CONFIG_GENERIC_CPU) += $(call cc-option,-mtune=power7,-mtune=power4)
 =======
+=======
+>>>>>>> v3.18
 CFLAGS-$(CONFIG_PPC64)	:= -mtraceback=no
 ifeq ($(CONFIG_CPU_LITTLE_ENDIAN),y)
 CFLAGS-$(CONFIG_PPC64)	+= $(call cc-option,-mabi=elfv2,-mcall-aixdesc)
@@ -158,6 +176,9 @@ else
 CFLAGS-$(CONFIG_GENERIC_CPU) += -mcpu=powerpc64
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 CFLAGS-$(CONFIG_CELL_CPU) += $(call cc-option,-mcpu=cell)
 CFLAGS-$(CONFIG_POWER4_CPU) += $(call cc-option,-mcpu=power4)
@@ -165,7 +186,10 @@ CFLAGS-$(CONFIG_POWER5_CPU) += $(call cc-option,-mcpu=power5)
 CFLAGS-$(CONFIG_POWER6_CPU) += $(call cc-option,-mcpu=power6)
 CFLAGS-$(CONFIG_POWER7_CPU) += $(call cc-option,-mcpu=power7)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 CFLAGS-$(CONFIG_POWER8_CPU) += $(call cc-option,-mcpu=power8)
 
 # Altivec option not allowed with e500mc64 in GCC.
@@ -184,6 +208,9 @@ else
 CFLAGS-$(CONFIG_E500) += $(call cc-option,-mcpu=8540 -msoft-float,-mcpu=powerpc)
 endif
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 CFLAGS-$(CONFIG_TUNE_CELL) += $(call cc-option,-mtune=cell)
@@ -192,7 +219,11 @@ asinstr := $(call as-instr,lis 9$(comma)foo@high,-DHAVE_AS_ATHIGH=1)
 
 KBUILD_CPPFLAGS	+= -Iarch/$(ARCH) $(asinstr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 KBUILD_AFLAGS	+= -Iarch/$(ARCH)
+=======
+KBUILD_AFLAGS	+= -Iarch/$(ARCH) $(AFLAGS-y)
+>>>>>>> v3.18
 =======
 KBUILD_AFLAGS	+= -Iarch/$(ARCH) $(AFLAGS-y)
 >>>>>>> v3.18
@@ -204,12 +235,18 @@ CHECKFLAGS	+= -m$(CONFIG_WORD_SIZE) -D__powerpc__ -D__powerpc$(CONFIG_WORD_SIZE)
 KBUILD_LDFLAGS_MODULE += arch/powerpc/lib/crtsavres.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ifeq ($(CONFIG_476FPE_ERR46),y)
 	KBUILD_LDFLAGS_MODULE += --ppc476-workaround \
 		-T $(srctree)/arch/powerpc/platforms/44x/ppc476_modules.lds
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # No AltiVec or VSX instructions when building kernel
 KBUILD_CFLAGS += $(call cc-option,-mno-altivec)
@@ -245,7 +282,10 @@ endif
 cpu-as-$(CONFIG_4xx)		+= -Wa,-m405
 cpu-as-$(CONFIG_ALTIVEC)	+= -Wa,-maltivec
 <<<<<<< HEAD
+<<<<<<< HEAD
 cpu-as-$(CONFIG_E500)		+= -Wa,-me500
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 cpu-as-$(CONFIG_E200)		+= -Wa,-me200
@@ -380,6 +420,7 @@ checkbin:
 		false ; \
 	fi
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@if test "x${CONFIG_CPU_LITTLE_ENDIAN}" = "xy" \
 	    && $(LD) --version | head -1 | grep ' 2\.24$$' >/dev/null ; then \
 		echo -n '*** binutils 2.24 miscompiles weak symbols ' ; \
@@ -388,6 +429,8 @@ checkbin:
 		false ; \
 	fi
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

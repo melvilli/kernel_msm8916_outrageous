@@ -45,7 +45,10 @@ CONFIG_BLK_DEV_RAM=y
 CONFIG_BLK_DEV_XIP=y
 # CONFIG_MISC_DEVICES is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_SCSI_TGT=m
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_BLK_DEV_SD=y

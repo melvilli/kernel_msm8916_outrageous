@@ -31,6 +31,10 @@
 #include <asm/octeon/octeon.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ethernet-mem.h"
+>>>>>>> v3.18
 =======
 #include "ethernet-mem.h"
 >>>>>>> v3.18
@@ -50,6 +54,7 @@ static int cvm_oct_fill_hw_skbuff(int pool, int size, int elements)
 {
 	int freed = elements;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (freed) {
 
 		struct sk_buff *skb = dev_alloc_skb(size + 256);
@@ -61,12 +66,17 @@ static int cvm_oct_fill_hw_skbuff(int pool, int size, int elements)
 		}
 
 =======
+=======
+>>>>>>> v3.18
 
 	while (freed) {
 		struct sk_buff *skb = dev_alloc_skb(size + 256);
 
 		if (unlikely(skb == NULL))
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		skb_reserve(skb, 256 - (((unsigned long)skb->data) & 0x7f));
 		*(struct sk_buff **)(skb->data - sizeof(void *)) = skb;
@@ -98,17 +108,23 @@ static void cvm_oct_free_hw_skbuff(int pool, int size, int elements)
 
 	if (elements < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("Freeing of pool %u had too many skbuffs (%d)\n",
 		     pool, elements);
 	else if (elements > 0)
 		pr_warning("Freeing of pool %u is missing %d skbuffs\n",
 		       pool, elements);
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("Freeing of pool %u had too many skbuffs (%d)\n",
 			pool, elements);
 	else if (elements > 0)
 		pr_warn("Freeing of pool %u is missing %d skbuffs\n",
 			pool, elements);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -140,8 +156,13 @@ static int cvm_oct_fill_hw_memory(int pool, int size, int elements)
 		memory = kmalloc(size + 256, GFP_ATOMIC);
 		if (unlikely(memory == NULL)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("Unable to allocate %u bytes for FPA pool %d\n",
 				   elements * size, pool);
+=======
+			pr_warn("Unable to allocate %u bytes for FPA pool %d\n",
+				elements * size, pool);
+>>>>>>> v3.18
 =======
 			pr_warn("Unable to allocate %u bytes for FPA pool %d\n",
 				elements * size, pool);
@@ -167,6 +188,10 @@ static void cvm_oct_free_hw_memory(int pool, int size, int elements)
 	char *memory;
 	char *fpa;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -182,15 +207,21 @@ static void cvm_oct_free_hw_memory(int pool, int size, int elements)
 
 	if (elements < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("Freeing of pool %u had too many buffers (%d)\n",
 			pool, elements);
 	else if (elements > 0)
 		pr_warning("Warning: Freeing of pool %u is missing %d buffers\n",
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("Freeing of pool %u had too many buffers (%d)\n",
 			pool, elements);
 	else if (elements > 0)
 		pr_warn("Warning: Freeing of pool %u is missing %d buffers\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pool, elements);
 }
@@ -199,6 +230,10 @@ int cvm_oct_mem_fill_fpa(int pool, int size, int elements)
 {
 	int freed;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

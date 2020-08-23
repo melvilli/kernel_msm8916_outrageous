@@ -222,7 +222,11 @@ static LIST_HEAD(pdev_list);
 static DEFINE_MUTEX(pdev_list_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit via_cputemp_device_add(unsigned int cpu)
+=======
+static int via_cputemp_device_add(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static int via_cputemp_device_add(unsigned int cpu)
 >>>>>>> v3.18
@@ -267,7 +271,11 @@ exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit via_cputemp_device_remove(unsigned int cpu)
+=======
+static void via_cputemp_device_remove(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void via_cputemp_device_remove(unsigned int cpu)
 >>>>>>> v3.18
@@ -288,8 +296,13 @@ static void via_cputemp_device_remove(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit via_cputemp_cpu_callback(struct notifier_block *nfb,
 				 unsigned long action, void *hcpu)
+=======
+static int via_cputemp_cpu_callback(struct notifier_block *nfb,
+				    unsigned long action, void *hcpu)
+>>>>>>> v3.18
 =======
 static int via_cputemp_cpu_callback(struct notifier_block *nfb,
 				    unsigned long action, void *hcpu)
@@ -333,7 +346,11 @@ static int __init via_cputemp_init(void)
 		goto exit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_online_cpus();
+=======
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 >>>>>>> v3.18
@@ -357,7 +374,11 @@ static int __init via_cputemp_init(void)
 #ifndef CONFIG_HOTPLUG_CPU
 	if (list_empty(&pdev_list)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_online_cpus();
+=======
+		cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 		cpu_notifier_register_done();
 >>>>>>> v3.18
@@ -367,8 +388,13 @@ static int __init via_cputemp_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_hotcpu_notifier(&via_cputemp_cpu_notifier);
 	put_online_cpus();
+=======
+	__register_hotcpu_notifier(&via_cputemp_cpu_notifier);
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__register_hotcpu_notifier(&via_cputemp_cpu_notifier);
 	cpu_notifier_register_done();
@@ -388,8 +414,13 @@ static void __exit via_cputemp_exit(void)
 	struct pdev_entry *p, *n;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_online_cpus();
 	unregister_hotcpu_notifier(&via_cputemp_cpu_notifier);
+=======
+	cpu_notifier_register_begin();
+	__unregister_hotcpu_notifier(&via_cputemp_cpu_notifier);
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 	__unregister_hotcpu_notifier(&via_cputemp_cpu_notifier);
@@ -402,7 +433,11 @@ static void __exit via_cputemp_exit(void)
 	}
 	mutex_unlock(&pdev_list_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_online_cpus();
+=======
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_done();
 >>>>>>> v3.18

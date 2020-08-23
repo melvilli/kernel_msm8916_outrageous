@@ -45,7 +45,10 @@ enum cxgbi_dbg_flag {
 	} while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define pr_info_ipaddr(fmt_trail,					\
 			addr1, addr2, args_trail...)			\
 do {									\
@@ -55,6 +58,9 @@ do {									\
 		addr1, addr2, args_trail);				\
 } while (0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* max. connections per adapter */
 #define CXGBI_MAX_CONN		16384
@@ -215,9 +221,12 @@ struct cxgbi_sock {
 	struct kref refcnt;
 	unsigned int state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_in saddr;
 	struct sockaddr_in daddr;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int csk_family;
 	union {
 		struct sockaddr_in saddr;
@@ -227,6 +236,9 @@ struct cxgbi_sock {
 		struct sockaddr_in daddr;
 		struct sockaddr_in6 daddr6;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct dst_entry *dst;
 	struct sk_buff_head receive_queue;
@@ -536,6 +548,10 @@ struct cxgbi_ports_map {
 struct cxgbi_device {
 	struct list_head list_head;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct list_head rcu_node;
+>>>>>>> v3.18
 =======
 	struct list_head rcu_node;
 >>>>>>> v3.18
@@ -687,17 +703,23 @@ static inline void *cxgbi_alloc_big_mem(unsigned int size,
 					gfp_t gfp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *p = kmalloc(size, gfp);
 	if (!p)
 		p = vmalloc(size);
 	if (p)
 		memset(p, 0, size);
 =======
+=======
+>>>>>>> v3.18
 	void *p = kzalloc(size, gfp | __GFP_NOWARN);
 
 	if (!p)
 		p = vzalloc(size);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return p;
 }
@@ -720,6 +742,7 @@ static inline void cxgbi_set_iscsi_ipv4(struct cxgbi_hba *chba, __be32 ipaddr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline __be32 cxgbi_get_iscsi_ipv4(struct cxgbi_hba *chba)
 {
 	return chba->ipv4addr;
@@ -727,17 +750,25 @@ static inline __be32 cxgbi_get_iscsi_ipv4(struct cxgbi_hba *chba)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct cxgbi_device *cxgbi_device_register(unsigned int, unsigned int);
 void cxgbi_device_unregister(struct cxgbi_device *);
 void cxgbi_device_unregister_all(unsigned int flag);
 struct cxgbi_device *cxgbi_device_find_by_lldev(void *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cxgbi_hbas_add(struct cxgbi_device *, unsigned int, unsigned int,
 =======
+=======
+>>>>>>> v3.18
 struct cxgbi_device *cxgbi_device_find_by_netdev(struct net_device *, int *);
 struct cxgbi_device *cxgbi_device_find_by_netdev_rcu(struct net_device *,
 						     int *);
 int cxgbi_hbas_add(struct cxgbi_device *, u64, unsigned int,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			struct scsi_host_template *,
 			struct scsi_transport_template *);

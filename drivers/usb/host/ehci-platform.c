@@ -4,6 +4,10 @@
  * Copyright 2007 Steven Brown <sbrown@cortland.com>
  * Copyright 2010-2012 Hauke Mehrtens <hauke@hauke-m.de>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright 2014 Hans de Goede <hdegoede@redhat.com>
+>>>>>>> v3.18
 =======
  * Copyright 2014 Hans de Goede <hdegoede@redhat.com>
 >>>>>>> v3.18
@@ -23,6 +27,10 @@
  * Licensed under the GNU/GPL. See COPYING for details.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -34,7 +42,13 @@
 #include <linux/module.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
+=======
+#include <linux/phy/phy.h>
+#include <linux/platform_device.h>
+#include <linux/reset.h>
+>>>>>>> v3.18
 =======
 #include <linux/phy/phy.h>
 #include <linux/platform_device.h>
@@ -48,7 +62,10 @@
 
 #define DRIVER_DESC "EHCI generic platform driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define EHCI_MAX_CLKS 3
 #define hcd_to_ehci_priv(h) ((struct ehci_platform_priv *)hcd_to_ehci(h)->priv)
 
@@ -57,6 +74,9 @@ struct ehci_platform_priv {
 	struct reset_control *rst;
 	struct phy *phy;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char hcd_name[] = "ehci-platform";
@@ -65,7 +85,11 @@ static int ehci_platform_reset(struct usb_hcd *hcd)
 {
 	struct platform_device *pdev = to_platform_device(hcd->self.controller);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_ehci_pdata *pdata = pdev->dev.platform_data;
+=======
+	struct usb_ehci_pdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct usb_ehci_pdata *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -75,15 +99,21 @@ static int ehci_platform_reset(struct usb_hcd *hcd)
 	hcd->has_tt = pdata->has_tt;
 	ehci->has_synopsys_hc_bug = pdata->has_synopsys_hc_bug;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ehci->big_endian_desc = pdata->big_endian_desc;
 	ehci->big_endian_mmio = pdata->big_endian_mmio;
 =======
+=======
+>>>>>>> v3.18
 
 	if (pdata->pre_setup) {
 		retval = pdata->pre_setup(hcd);
 		if (retval < 0)
 			return retval;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ehci->caps = hcd->regs + pdata->caps_offset;
@@ -97,6 +127,7 @@ static int ehci_platform_reset(struct usb_hcd *hcd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct hc_driver __read_mostly ehci_platform_hc_driver;
 
 static const struct ehci_driver_overrides platform_overrides __initconst = {
@@ -105,6 +136,8 @@ static const struct ehci_driver_overrides platform_overrides __initconst = {
 
 static struct usb_ehci_pdata ehci_platform_defaults;
 =======
+=======
+>>>>>>> v3.18
 static int ehci_platform_power_on(struct platform_device *dev)
 {
 	struct usb_hcd *hcd = platform_get_drvdata(dev);
@@ -166,6 +199,9 @@ static struct usb_ehci_pdata ehci_platform_defaults = {
 	.power_suspend =	ehci_platform_power_off,
 	.power_off =		ehci_platform_power_off,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ehci_platform_probe(struct platform_device *dev)
@@ -173,20 +209,27 @@ static int ehci_platform_probe(struct platform_device *dev)
 	struct usb_hcd *hcd;
 	struct resource *res_mem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_ehci_pdata *pdata;
 	int irq;
 	int err = -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	struct usb_ehci_pdata *pdata = dev_get_platdata(&dev->dev);
 	struct ehci_platform_priv *priv;
 	struct ehci_hcd *ehci;
 	int err, irq, clk = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (usb_disabled())
 		return -ENODEV;
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * use reasonable defaults so platforms don't have to provide these.
 	 * with DT probing on ARM, none of these are set.
@@ -200,6 +243,8 @@ static int ehci_platform_probe(struct platform_device *dev)
 
 	pdata = dev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	 * Use reasonable defaults so platforms don't have to provide these
 	 * with DT probing on ARM.
 	 */
@@ -209,6 +254,9 @@ static int ehci_platform_probe(struct platform_device *dev)
 	err = dma_coerce_mask_and_coherent(&dev->dev, DMA_BIT_MASK(32));
 	if (err)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	irq = platform_get_irq(dev, 0);
@@ -223,6 +271,7 @@ static int ehci_platform_probe(struct platform_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->power_on) {
 		err = pdata->power_on(dev);
 		if (err < 0)
@@ -235,6 +284,8 @@ static int ehci_platform_probe(struct platform_device *dev)
 		err = -ENOMEM;
 		goto err_power;
 =======
+=======
+>>>>>>> v3.18
 	hcd = usb_create_hcd(&ehci_platform_hc_driver, &dev->dev,
 			     dev_name(&dev->dev));
 	if (!hcd)
@@ -313,6 +364,9 @@ static int ehci_platform_probe(struct platform_device *dev)
 		err = pdata->power_on(dev);
 		if (err < 0)
 			goto err_reset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -323,6 +377,7 @@ static int ehci_platform_probe(struct platform_device *dev)
 	if (IS_ERR(hcd->regs)) {
 		err = PTR_ERR(hcd->regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_put_hcd;
 	}
 	err = usb_add_hcd(hcd, irq, IRQF_SHARED);
@@ -330,6 +385,8 @@ static int ehci_platform_probe(struct platform_device *dev)
 		goto err_put_hcd;
 
 =======
+=======
+>>>>>>> v3.18
 		goto err_power;
 	}
 	err = usb_add_hcd(hcd, irq, IRQF_SHARED);
@@ -337,11 +394,15 @@ static int ehci_platform_probe(struct platform_device *dev)
 		goto err_power;
 
 	device_wakeup_enable(hcd->self.controller);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_set_drvdata(dev, hcd);
 
 	return err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_put_hcd:
 	usb_put_hcd(hcd);
@@ -349,6 +410,8 @@ err_power:
 	if (pdata->power_off)
 		pdata->power_off(dev);
 =======
+=======
+>>>>>>> v3.18
 err_power:
 	if (pdata->power_off)
 		pdata->power_off(dev);
@@ -363,6 +426,9 @@ err_put_hcd:
 		dev->dev.platform_data = NULL;
 
 	usb_put_hcd(hcd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
@@ -372,24 +438,33 @@ static int ehci_platform_remove(struct platform_device *dev)
 {
 	struct usb_hcd *hcd = platform_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_ehci_pdata *pdata = dev->dev.platform_data;
 
 	usb_remove_hcd(hcd);
 	usb_put_hcd(hcd);
 	platform_set_drvdata(dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct usb_ehci_pdata *pdata = dev_get_platdata(&dev->dev);
 	struct ehci_platform_priv *priv = hcd_to_ehci_priv(hcd);
 	int clk;
 
 	usb_remove_hcd(hcd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pdata->power_off)
 		pdata->power_off(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (priv->rst)
 		reset_control_assert(priv->rst);
 
@@ -398,6 +473,9 @@ static int ehci_platform_remove(struct platform_device *dev)
 
 	usb_put_hcd(hcd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pdata == &ehci_platform_defaults)
 		dev->dev.platform_data = NULL;
@@ -411,7 +489,11 @@ static int ehci_platform_suspend(struct device *dev)
 {
 	struct usb_hcd *hcd = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_ehci_pdata *pdata = dev->platform_data;
+=======
+	struct usb_ehci_pdata *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct usb_ehci_pdata *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -422,6 +504,11 @@ static int ehci_platform_suspend(struct device *dev)
 
 	ret = ehci_suspend(hcd, do_wakeup);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	if (ret)
 		return ret;
@@ -437,7 +524,11 @@ static int ehci_platform_resume(struct device *dev)
 {
 	struct usb_hcd *hcd = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_ehci_pdata *pdata = dev->platform_data;
+=======
+	struct usb_ehci_pdata *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct usb_ehci_pdata *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -463,13 +554,19 @@ static const struct of_device_id vt8500_ehci_ids[] = {
 	{ .compatible = "via,vt8500-ehci", },
 	{ .compatible = "wm,prizm-ehci", },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{}
 };
 =======
+=======
+>>>>>>> v3.18
 	{ .compatible = "generic-ehci", },
 	{}
 };
 MODULE_DEVICE_TABLE(of, vt8500_ehci_ids);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct platform_device_id ehci_platform_table[] = {
@@ -493,7 +590,11 @@ static struct platform_driver ehci_platform_driver = {
 		.name	= "ehci-platform",
 		.pm	= &ehci_platform_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(vt8500_ehci_ids),
+=======
+		.of_match_table = vt8500_ehci_ids,
+>>>>>>> v3.18
 =======
 		.of_match_table = vt8500_ehci_ids,
 >>>>>>> v3.18

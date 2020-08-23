@@ -109,7 +109,11 @@ static int setup_freqs_table(struct cpufreq_policy *policy,
 	pxa3xx_freqs_table = table;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return cpufreq_frequency_table_cpuinfo(policy, table);
+=======
+	return cpufreq_table_validate_and_show(policy, table);
+>>>>>>> v3.18
 =======
 	return cpufreq_table_validate_and_show(policy, table);
 >>>>>>> v3.18
@@ -155,6 +159,7 @@ static void __update_bus_freq(struct pxa3xx_freq_info *info)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pxa3xx_cpufreq_verify(struct cpufreq_policy *policy)
 {
 	return cpufreq_frequency_table_verify(policy, pxa3xx_freqs_table);
@@ -162,11 +167,14 @@ static int pxa3xx_cpufreq_verify(struct cpufreq_policy *policy)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static unsigned int pxa3xx_cpufreq_get(unsigned int cpu)
 {
 	return pxa3xx_get_clk_frequency_khz(0);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int pxa3xx_cpufreq_set(struct cpufreq_policy *policy,
 			      unsigned int target_freq,
@@ -177,15 +185,21 @@ static int pxa3xx_cpufreq_set(struct cpufreq_policy *policy,
 	unsigned long flags;
 	int idx;
 =======
+=======
+>>>>>>> v3.18
 static int pxa3xx_cpufreq_set(struct cpufreq_policy *policy, unsigned int index)
 {
 	struct pxa3xx_freq_info *next;
 	unsigned long flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (policy->cpu != 0)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Lookup the next frequency */
 	if (cpufreq_frequency_table_target(policy, pxa3xx_freqs_table,
@@ -208,6 +222,9 @@ static int pxa3xx_cpufreq_set(struct cpufreq_policy *policy, unsigned int index)
 =======
 	next = &pxa3xx_freqs[index];
 >>>>>>> v3.18
+=======
+	next = &pxa3xx_freqs[index];
+>>>>>>> v3.18
 
 	local_irq_save(flags);
 	__update_core_freq(next);
@@ -215,8 +232,11 @@ static int pxa3xx_cpufreq_set(struct cpufreq_policy *policy, unsigned int index)
 	local_irq_restore(flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpufreq_notify_transition(policy, &freqs, CPUFREQ_POSTCHANGE);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -227,6 +247,7 @@ static int pxa3xx_cpufreq_init(struct cpufreq_policy *policy)
 	int ret = -EINVAL;
 
 	/* set default policy and cpuinfo */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	policy->cpuinfo.min_freq = 104000;
 	policy->cpuinfo.max_freq = (cpu_is_pxa320()) ? 806000 : 624000;
@@ -240,6 +261,8 @@ static int pxa3xx_cpufreq_init(struct cpufreq_policy *policy)
 	if (cpu_is_pxa320())
 		ret = setup_freqs_table(policy, ARRAY_AND_SIZE(pxa320_freqs));
 =======
+=======
+>>>>>>> v3.18
 	policy->min = policy->cpuinfo.min_freq = 104000;
 	policy->max = policy->cpuinfo.max_freq =
 		(cpu_is_pxa320()) ? 806000 : 624000;
@@ -252,6 +275,9 @@ static int pxa3xx_cpufreq_init(struct cpufreq_policy *policy)
 	if (cpu_is_pxa320())
 		ret = setup_freqs_table(policy, pxa320_freqs,
 					ARRAY_SIZE(pxa320_freqs));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret) {
@@ -265,8 +291,14 @@ static int pxa3xx_cpufreq_init(struct cpufreq_policy *policy)
 
 static struct cpufreq_driver pxa3xx_cpufreq_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.verify		= pxa3xx_cpufreq_verify,
 	.target		= pxa3xx_cpufreq_set,
+=======
+	.flags		= CPUFREQ_NEED_INITIAL_FREQ_CHECK,
+	.verify		= cpufreq_generic_frequency_table_verify,
+	.target_index	= pxa3xx_cpufreq_set,
+>>>>>>> v3.18
 =======
 	.flags		= CPUFREQ_NEED_INITIAL_FREQ_CHECK,
 	.verify		= cpufreq_generic_frequency_table_verify,

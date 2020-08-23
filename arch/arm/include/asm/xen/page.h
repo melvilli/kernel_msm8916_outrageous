@@ -2,7 +2,10 @@
 #define _ASM_ARM_XEN_PAGE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mach/map.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/page.h>
@@ -38,7 +41,10 @@ typedef struct xpaddr {
 
 unsigned long __pfn_to_mfn(unsigned long pfn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long __mfn_to_pfn(unsigned long mfn);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct rb_root phys_to_mach;
@@ -47,7 +53,11 @@ static inline unsigned long pfn_to_mfn(unsigned long pfn)
 {
 	unsigned long mfn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -58,6 +68,7 @@ static inline unsigned long pfn_to_mfn(unsigned long pfn)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xen_initial_domain())
 		return pfn;
 	else
@@ -65,10 +76,14 @@ static inline unsigned long pfn_to_mfn(unsigned long pfn)
 =======
 	return pfn;
 >>>>>>> v3.18
+=======
+	return pfn;
+>>>>>>> v3.18
 }
 
 static inline unsigned long mfn_to_pfn(unsigned long mfn)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long pfn;
 
@@ -82,6 +97,9 @@ static inline unsigned long mfn_to_pfn(unsigned long mfn)
 		return mfn;
 	else
 		return INVALID_P2M_ENTRY;
+=======
+	return mfn;
+>>>>>>> v3.18
 =======
 	return mfn;
 >>>>>>> v3.18
@@ -103,7 +121,10 @@ static inline xpaddr_t machine_to_phys(xmaddr_t machine)
 /* VIRT <-> MACHINE conversion */
 #define virt_to_machine(v)	(phys_to_machine(XPADDR(__pa(v))))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define virt_to_pfn(v)          (PFN_DOWN(__pa(v)))
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define virt_to_mfn(v)		(pfn_to_mfn(virt_to_pfn(v)))
@@ -126,6 +147,7 @@ static inline pte_t *lookup_address(unsigned long address, unsigned int *level)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int m2p_add_override(unsigned long mfn, struct page *page,
 		struct gnttab_map_grant_ref *kmap_op)
 {
@@ -137,6 +159,8 @@ static inline int m2p_remove_override(struct page *page, bool clear_pte)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 extern int set_foreign_p2m_mapping(struct gnttab_map_grant_ref *map_ops,
 				   struct gnttab_map_grant_ref *kmap_ops,
 				   struct page **pages, unsigned int count);
@@ -144,6 +168,9 @@ extern int set_foreign_p2m_mapping(struct gnttab_map_grant_ref *map_ops,
 extern int clear_foreign_p2m_mapping(struct gnttab_unmap_grant_ref *unmap_ops,
 				     struct gnttab_map_grant_ref *kmap_ops,
 				     struct page **pages, unsigned int count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 bool __set_phys_to_machine(unsigned long pfn, unsigned long mfn);
@@ -156,7 +183,12 @@ static inline bool set_phys_to_machine(unsigned long pfn, unsigned long mfn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define xen_remap(cookie, size) ioremap_cache((cookie), (size));
+=======
+#define xen_remap(cookie, size) ioremap_cache((cookie), (size))
+#define xen_unmap(cookie) iounmap((cookie))
+>>>>>>> v3.18
 =======
 #define xen_remap(cookie, size) ioremap_cache((cookie), (size))
 #define xen_unmap(cookie) iounmap((cookie))

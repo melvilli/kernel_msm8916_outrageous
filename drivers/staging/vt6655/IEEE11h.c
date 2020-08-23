@@ -42,7 +42,10 @@
 
 /*---------------------  Static Definitions -------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int          msglevel                = MSG_LEVEL_INFO;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -101,6 +104,7 @@ typedef struct _WLAN_FRAME_TPCREP {
 /*---------------------  Static Variables  --------------------------*/
 
 /*---------------------  Static Functions  --------------------------*/
+<<<<<<< HEAD
 <<<<<<< HEAD
 static bool s_bRxMSRReq(PSMgmtObject pMgmt, PWLAN_FRAME_MSRREQ pMSRReq,
 			unsigned int uLength)
@@ -201,11 +205,14 @@ static bool s_bRxTPCReq(PSMgmtObject pMgmt,
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /*---------------------  Export Variables  --------------------------*/
 
 /*---------------------  Export Functions  --------------------------*/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*+
  *
@@ -290,6 +297,8 @@ IEEE11hbMgrRxAction(void *pMgmtHandle, void *pRxPacket)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 bool IEEE11hbMSRRepTx(void *pMgmtHandle)
 {
 	PSMgmtObject            pMgmt = (PSMgmtObject) pMgmtHandle;
@@ -327,8 +336,11 @@ bool IEEE11hbMSRRepTx(void *pMgmtHandle)
 		return false;
 	return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*    return CARDbSendPacket(pMgmt->pAdapter, pMSRRep, PKT_TYPE_802_11_MNG,
       uLength); */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

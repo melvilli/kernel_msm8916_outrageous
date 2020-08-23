@@ -290,6 +290,9 @@ module_exit(crypto_cbc_module_exit);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("CBC block cipher algorithm");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("cbc");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

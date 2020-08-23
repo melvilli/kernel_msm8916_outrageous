@@ -903,7 +903,12 @@ static void fc_fcp_resp(struct fc_fcp_pkt *fsp, struct fc_frame *fp)
 	 * Check for missing or extra data frames.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(fsp->xfer_len != expected_len)) {
+=======
+	if (unlikely(fsp->cdb_status == SAM_STAT_GOOD &&
+		     fsp->xfer_len != expected_len)) {
+>>>>>>> v3.18
 =======
 	if (unlikely(fsp->cdb_status == SAM_STAT_GOOD &&
 		     fsp->xfer_len != expected_len)) {
@@ -961,6 +966,7 @@ static void fc_fcp_complete_locked(struct fc_fcp_pkt *fsp)
 		 * underrun status.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fsp->xfer_len < fsp->data_len && !fsp->io_status &&
 		    (!(fsp->scsi_comp_flags & FCP_RESID_UNDER) ||
 		     fsp->xfer_len < fsp->data_len - fsp->scsi_resid)) {
@@ -968,11 +974,16 @@ static void fc_fcp_complete_locked(struct fc_fcp_pkt *fsp)
 			fsp->io_status = 0;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (fsp->cdb_status == SAM_STAT_GOOD &&
 		    fsp->xfer_len < fsp->data_len && !fsp->io_status &&
 		    (!(fsp->scsi_comp_flags & FCP_RESID_UNDER) ||
 		     fsp->xfer_len < fsp->data_len - fsp->scsi_resid))
 			fsp->status_code = FC_DATA_UNDRUN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1053,6 +1064,7 @@ restart:
 		spin_unlock_irqrestore(&si->scsi_queue_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock_bh(&fsp->scsi_pkt_lock);
 		if (!(fsp->state & FC_SRB_COMPL)) {
 			fsp->state |= FC_SRB_COMPL;
@@ -1074,11 +1086,16 @@ restart:
 		}
 		spin_unlock_bh(&fsp->scsi_pkt_lock);
 =======
+=======
+>>>>>>> v3.18
 		if (!fc_fcp_lock_pkt(fsp)) {
 			fc_fcp_cleanup_cmd(fsp, error);
 			fc_io_compl(fsp);
 			fc_fcp_unlock_pkt(fsp);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		fc_fcp_pkt_release(fsp);
@@ -2080,7 +2097,11 @@ int fc_eh_abort(struct scsi_cmnd *sc_cmd)
 		return SUCCESS;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* grab a ref so the fsp and sc_cmd cannot be relased from under us */
+=======
+	/* grab a ref so the fsp and sc_cmd cannot be released from under us */
+>>>>>>> v3.18
 =======
 	/* grab a ref so the fsp and sc_cmd cannot be released from under us */
 >>>>>>> v3.18

@@ -307,6 +307,7 @@ void inet_proto_csum_replace4(__sum16 *sum, struct sk_buff *skb,
 			      __be32 from, __be32 to, int pseudohdr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__be32 diff[] = { ~from, to };
 	if (skb->ip_summed != CHECKSUM_PARTIAL) {
 		*sum = csum_fold(csum_partial(diff, sizeof(diff),
@@ -318,6 +319,8 @@ void inet_proto_csum_replace4(__sum16 *sum, struct sk_buff *skb,
 		*sum = ~csum_fold(csum_partial(diff, sizeof(diff),
 				csum_unfold(*sum)));
 =======
+=======
+>>>>>>> v3.18
 	if (skb->ip_summed != CHECKSUM_PARTIAL) {
 		*sum = csum_fold(csum_add(csum_sub(~csum_unfold(*sum), from),
 				 to));
@@ -326,6 +329,9 @@ void inet_proto_csum_replace4(__sum16 *sum, struct sk_buff *skb,
 	} else if (pseudohdr)
 		*sum = ~csum_fold(csum_add(csum_sub(csum_unfold(*sum), from),
 				  to));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(inet_proto_csum_replace4);
@@ -351,6 +357,7 @@ void inet_proto_csum_replace16(__sum16 *sum, struct sk_buff *skb,
 EXPORT_SYMBOL(inet_proto_csum_replace16);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mac_pton(const char *s, u8 *mac)
 {
 	int i;
@@ -373,6 +380,8 @@ int mac_pton(const char *s, u8 *mac)
 }
 EXPORT_SYMBOL(mac_pton);
 =======
+=======
+>>>>>>> v3.18
 struct __net_random_once_work {
 	struct work_struct work;
 	struct static_key *key;
@@ -421,4 +430,7 @@ bool __net_get_random_once(void *buf, int nbytes, bool *done,
 	return true;
 }
 EXPORT_SYMBOL(__net_get_random_once);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

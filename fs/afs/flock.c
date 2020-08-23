@@ -253,7 +253,12 @@ static void afs_defer_unlock(struct afs_vnode *vnode, struct key *key)
 static int afs_do_setlk(struct file *file, struct file_lock *fl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct afs_vnode *vnode = AFS_FS_I(file->f_mapping->host);
+=======
+	struct inode *inode = file_inode(file);
+	struct afs_vnode *vnode = AFS_FS_I(inode);
+>>>>>>> v3.18
 =======
 	struct inode *inode = file_inode(file);
 	struct afs_vnode *vnode = AFS_FS_I(inode);
@@ -279,7 +284,11 @@ static int afs_do_setlk(struct file *file, struct file_lock *fl)
 	type = (fl->fl_type == F_RDLCK) ? AFS_LOCK_READ : AFS_LOCK_WRITE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lock_flocks();
+=======
+	spin_lock(&inode->i_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&inode->i_lock);
 >>>>>>> v3.18
@@ -430,7 +439,11 @@ given_lock:
 
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unlock_flocks();
+=======
+	spin_unlock(&inode->i_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&inode->i_lock);
 >>>>>>> v3.18
@@ -568,10 +581,13 @@ int afs_flock(struct file *file, int cmd, struct file_lock *fl)
 
 	/* we're simulating flock() locks using posix locks on the server */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fl->fl_owner = (fl_owner_t) file;
 	fl->fl_start = 0;
 	fl->fl_end = OFFSET_MAX;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (fl->fl_type == F_UNLCK)

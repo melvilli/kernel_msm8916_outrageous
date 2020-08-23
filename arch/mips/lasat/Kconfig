@@ -5,7 +5,11 @@ config PICVUE
 config PICVUE_PROC
 	tristate "PICVUE LCD display driver /proc interface"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PICVUE
+=======
+	depends on PICVUE && PROC_FS
+>>>>>>> v3.18
 =======
 	depends on PICVUE && PROC_FS
 >>>>>>> v3.18

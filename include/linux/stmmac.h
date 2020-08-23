@@ -81,11 +81,17 @@ struct stmmac_mdio_bus_data {
 	int *irqs;
 	int probed_phy_irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 	int reset_gpio, active_low;
 	u32 delays[3];
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -112,12 +118,15 @@ struct plat_stmmacenet_data {
 	int pmt;
 	int force_sf_dma_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int riwt_off;
 	void (*fix_mac_speed)(void *priv, unsigned int speed);
 	void (*bus_setup)(void __iomem *ioaddr);
 	int (*init)(struct platform_device *pdev);
 	void (*exit)(struct platform_device *pdev);
 =======
+=======
+>>>>>>> v3.18
 	int force_thresh_dma_mode;
 	int riwt_off;
 	int max_speed;
@@ -130,13 +139,19 @@ struct plat_stmmacenet_data {
 	void (*free)(struct platform_device *pdev, void *priv);
 	int (*init)(struct platform_device *pdev, void *priv);
 	void (*exit)(struct platform_device *pdev, void *priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void *custom_cfg;
 	void *custom_data;
 	void *bsp_priv;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* of_data for SoC glue layer device tree bindings */
 
@@ -155,5 +170,8 @@ struct stmmac_of_data {
 	int (*init)(struct platform_device *pdev, void *priv);
 	void (*exit)(struct platform_device *pdev, void *priv);
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

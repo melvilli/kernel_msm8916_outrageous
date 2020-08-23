@@ -26,6 +26,10 @@ config VIRTIO_BALLOON
 	tristate "Virtio balloon driver"
 	depends on VIRTIO
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select MEMORY_BALLOON
+>>>>>>> v3.18
 =======
 	select MEMORY_BALLOON
 >>>>>>> v3.18

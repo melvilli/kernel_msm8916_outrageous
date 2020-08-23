@@ -478,6 +478,12 @@ efi_init (void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	set_bit(EFI_BOOT, &efi.flags);
+	set_bit(EFI_64BIT, &efi.flags);
+
+>>>>>>> v3.18
 =======
 	set_bit(EFI_BOOT, &efi.flags);
 	set_bit(EFI_64BIT, &efi.flags);
@@ -536,6 +542,11 @@ efi_init (void)
 	       efi.systab->hdr.revision & 0xffff, vendor);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	set_bit(EFI_SYSTEM_TABLES, &efi.flags);
+
+>>>>>>> v3.18
 =======
 	set_bit(EFI_SYSTEM_TABLES, &efi.flags);
 
@@ -575,6 +586,10 @@ efi_init (void)
 			const char *unit;
 			unsigned long size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			char buf[64];
+>>>>>>> v3.18
 =======
 			char buf[64];
 >>>>>>> v3.18
@@ -597,14 +612,20 @@ efi_init (void)
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("mem%02d: type=%2u, attr=0x%016lx, "
 			       "range=[0x%016lx-0x%016lx) (%4lu%s)\n",
 			       i, md->type, md->attribute, md->phys_addr,
 =======
+=======
+>>>>>>> v3.18
 			printk("mem%02d: %s "
 			       "range=[0x%016lx-0x%016lx) (%4lu%s)\n",
 			       i, efi_md_typeattr_format(buf, sizeof(buf), md),
 			       md->phys_addr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			       md->phys_addr + efi_md_size(md), size, unit);
 		}
@@ -680,6 +701,11 @@ efi_enter_virtual_mode (void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	set_bit(EFI_RUNTIME_SERVICES, &efi.flags);
+
+>>>>>>> v3.18
 =======
 	set_bit(EFI_RUNTIME_SERVICES, &efi.flags);
 
@@ -1112,11 +1138,14 @@ efi_memmap_init(u64 *s, u64 *e)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CRASH_DUMP
 		/* saved_max_pfn should ignore max_addr= command line arg */
 		if (saved_max_pfn < (efi_md_end(md) >> PAGE_SHIFT))
 			saved_max_pfn = (efi_md_end(md) >> PAGE_SHIFT);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*

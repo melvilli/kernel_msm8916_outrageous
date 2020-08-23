@@ -15,6 +15,10 @@
 #include <linux/of.h>
 #include <linux/of_gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -291,8 +295,13 @@ static struct irq_chip mpc8xxx_irq_chip = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mpc8xxx_gpio_irq_map(struct irq_domain *h, unsigned int virq,
 				irq_hw_number_t hw)
+=======
+static int mpc8xxx_gpio_irq_map(struct irq_domain *h, unsigned int irq,
+				irq_hw_number_t hwirq)
+>>>>>>> v3.18
 =======
 static int mpc8xxx_gpio_irq_map(struct irq_domain *h, unsigned int irq,
 				irq_hw_number_t hwirq)
@@ -304,8 +313,13 @@ static int mpc8xxx_gpio_irq_map(struct irq_domain *h, unsigned int irq,
 		mpc8xxx_irq_chip.irq_set_type = mpc8xxx_gc->of_dev_id_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_set_chip_data(virq, h->host_data);
 	irq_set_chip_and_handler(virq, &mpc8xxx_irq_chip, handle_edge_irq);
+=======
+	irq_set_chip_data(irq, h->host_data);
+	irq_set_chip_and_handler(irq, &mpc8xxx_irq_chip, handle_level_irq);
+>>>>>>> v3.18
 =======
 	irq_set_chip_data(irq, h->host_data);
 	irq_set_chip_and_handler(irq, &mpc8xxx_irq_chip, handle_level_irq);

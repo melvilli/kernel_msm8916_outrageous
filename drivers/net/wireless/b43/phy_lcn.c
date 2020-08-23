@@ -55,6 +55,7 @@ enum lcn_sense_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* In theory it's PHY common function, move if needed */
 /* brcms_b_switch_macfreq */
 static void b43_phy_switch_macfreq(struct b43_wldev *dev, u8 spurmode)
@@ -88,6 +89,8 @@ static void b43_phy_switch_macfreq(struct b43_wldev *dev, u8 spurmode)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**************************************************
@@ -613,7 +616,11 @@ static void b43_phy_lcn_txrx_spur_avoidance_mode(struct b43_wldev *dev,
 		b43_phy_write(dev, 0x93c, ((0 << 13) + 1989));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b43_phy_switch_macfreq(dev, enable);
+=======
+	b43_mac_switch_freq(dev, enable);
+>>>>>>> v3.18
 =======
 	b43_mac_switch_freq(dev, enable);
 >>>>>>> v3.18
@@ -851,6 +858,7 @@ static void b43_phy_lcn_op_adjust_txpower(struct b43_wldev *dev)
  **************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 b43_phy_lcn_op_read(struct b43_wldev *dev, u16 reg)
 {
 	b43_write16(dev, B43_MMIO_PHY_CONTROL, reg);
@@ -868,10 +876,15 @@ static void b43_phy_lcn_op_maskset(struct b43_wldev *dev, u16 reg, u16 mask,
 {
 	b43_write16(dev, B43_MMIO_PHY_CONTROL, reg);
 =======
+=======
+>>>>>>> v3.18
 static void b43_phy_lcn_op_maskset(struct b43_wldev *dev, u16 reg, u16 mask,
 				   u16 set)
 {
 	b43_write16f(dev, B43_MMIO_PHY_CONTROL, reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b43_write16(dev, B43_MMIO_PHY_DATA,
 		    (b43_read16(dev, B43_MMIO_PHY_DATA) & mask) | set);
@@ -883,7 +896,11 @@ static u16 b43_phy_lcn_op_radio_read(struct b43_wldev *dev, u16 reg)
 	reg |= 0x200;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b43_write16(dev, B43_MMIO_RADIO24_CONTROL, reg);
+=======
+	b43_write16f(dev, B43_MMIO_RADIO24_CONTROL, reg);
+>>>>>>> v3.18
 =======
 	b43_write16f(dev, B43_MMIO_RADIO24_CONTROL, reg);
 >>>>>>> v3.18
@@ -894,7 +911,11 @@ static void b43_phy_lcn_op_radio_write(struct b43_wldev *dev, u16 reg,
 				       u16 value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b43_write16(dev, B43_MMIO_RADIO24_CONTROL, reg);
+=======
+	b43_write16f(dev, B43_MMIO_RADIO24_CONTROL, reg);
+>>>>>>> v3.18
 =======
 	b43_write16f(dev, B43_MMIO_RADIO24_CONTROL, reg);
 >>>>>>> v3.18
@@ -911,8 +932,11 @@ const struct b43_phy_operations b43_phyops_lcn = {
 	.prepare_structs	= b43_phy_lcn_op_prepare_structs,
 	.init			= b43_phy_lcn_op_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.phy_read		= b43_phy_lcn_op_read,
 	.phy_write		= b43_phy_lcn_op_write,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.phy_maskset		= b43_phy_lcn_op_maskset,

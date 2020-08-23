@@ -27,10 +27,13 @@
 #include <linux/of.h>
 #include <linux/of_net.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "stmmac.h"
 
 #ifdef CONFIG_OF
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_device.h>
 #include "stmmac.h"
 
@@ -114,6 +117,9 @@ static int dwmac1000_validate_ucast_entries(int ucast_entries)
 	return x;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int stmmac_probe_config_dt(struct platform_device *pdev,
 				  struct plat_stmmacenet_data *plat,
@@ -121,6 +127,11 @@ static int stmmac_probe_config_dt(struct platform_device *pdev,
 {
 	struct device_node *np = pdev->dev.of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct stmmac_dma_cfg *dma_cfg;
+	const struct of_device_id *device;
+>>>>>>> v3.18
 =======
 	struct stmmac_dma_cfg *dma_cfg;
 	const struct of_device_id *device;
@@ -130,12 +141,15 @@ static int stmmac_probe_config_dt(struct platform_device *pdev,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*mac = of_get_mac_address(np);
 	plat->interface = of_get_phy_mode(np);
 	plat->mdio_bus_data = devm_kzalloc(&pdev->dev,
 					   sizeof(struct stmmac_mdio_bus_data),
 					   GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	device = of_match_device(stmmac_dt_ids, &pdev->dev);
 	if (!device)
 		return -ENODEV;
@@ -192,6 +206,9 @@ static int stmmac_probe_config_dt(struct platform_device *pdev,
 	 * parameter is not present in the device tree.
 	 */
 	plat->maxmtu = JUMBO_LEN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -203,7 +220,10 @@ static int stmmac_probe_config_dt(struct platform_device *pdev,
 		of_device_is_compatible(np, "snps,dwmac-3.70a") ||
 		of_device_is_compatible(np, "snps,dwmac")) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Note that the max-frame-size parameter as defined in the
 		 * ePAPR v1.1 spec is defined as max-frame-size, it's
 		 * actually used as the IEEE definition of MAC Client
@@ -220,13 +240,19 @@ static int stmmac_probe_config_dt(struct platform_device *pdev,
 					       plat->unicast_filter_entries);
 		plat->multicast_filter_bins = dwmac1000_validate_mcast_bins(
 					      plat->multicast_filter_bins);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		plat->has_gmac = 1;
 		plat->pmt = 1;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (of_device_is_compatible(np, "snps,dwmac-3.610") ||
 		of_device_is_compatible(np, "snps,dwmac-3.710")) {
 		plat->enh_desc = 1;
@@ -252,6 +278,9 @@ static int stmmac_probe_config_dt(struct platform_device *pdev,
 		pr_warn("force_sf_dma_mode is ignored if force_thresh_dma_mode is set.");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -283,15 +312,19 @@ static int stmmac_pltfr_probe(struct platform_device *pdev)
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	addr = devm_ioremap_resource(dev, res);
 	if (IS_ERR(addr))
 		return PTR_ERR(addr);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (pdev->dev.of_node) {
 		plat_dat = devm_kzalloc(&pdev->dev,
@@ -303,6 +336,8 @@ static int stmmac_pltfr_probe(struct platform_device *pdev)
 		}
 
 =======
+=======
+>>>>>>> v3.18
 	plat_dat = dev_get_platdata(&pdev->dev);
 
 	if (!plat_dat)
@@ -321,6 +356,9 @@ static int stmmac_pltfr_probe(struct platform_device *pdev)
 	plat_dat->unicast_filter_entries = 1;
 
 	if (pdev->dev.of_node) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = stmmac_probe_config_dt(pdev, plat_dat, &mac);
 		if (ret) {
@@ -328,9 +366,12 @@ static int stmmac_pltfr_probe(struct platform_device *pdev)
 			return ret;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		plat_dat = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	/* Custom setup (if needed) */
@@ -338,13 +379,20 @@ static int stmmac_pltfr_probe(struct platform_device *pdev)
 		plat_dat->bsp_priv = plat_dat->setup(pdev);
 		if (IS_ERR(plat_dat->bsp_priv))
 			return PTR_ERR(plat_dat->bsp_priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* Custom initialisation (if needed)*/
 	if (plat_dat->init) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = plat_dat->init(pdev);
+=======
+		ret = plat_dat->init(pdev, plat_dat->bsp_priv);
+>>>>>>> v3.18
 =======
 		ret = plat_dat->init(pdev, plat_dat->bsp_priv);
 >>>>>>> v3.18
@@ -354,9 +402,15 @@ static int stmmac_pltfr_probe(struct platform_device *pdev)
 
 	priv = stmmac_dvr_probe(&(pdev->dev), plat_dat, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!priv) {
 		pr_err("%s: main driver probe failed", __func__);
 		return -ENODEV;
+=======
+	if (IS_ERR(priv)) {
+		pr_err("%s: main driver probe failed", __func__);
+		return PTR_ERR(priv);
+>>>>>>> v3.18
 =======
 	if (IS_ERR(priv)) {
 		pr_err("%s: main driver probe failed", __func__);
@@ -371,17 +425,23 @@ static int stmmac_pltfr_probe(struct platform_device *pdev)
 	/* Get the MAC information */
 	priv->dev->irq = platform_get_irq_byname(pdev, "macirq");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->dev->irq == -ENXIO) {
 		pr_err("%s: ERROR: MAC IRQ configuration "
 		       "information not found\n", __func__);
 		return -ENXIO;
 =======
+=======
+>>>>>>> v3.18
 	if (priv->dev->irq < 0) {
 		if (priv->dev->irq != -EPROBE_DEFER) {
 			netdev_err(priv->dev,
 				   "MAC IRQ configuration information not found\n");
 		}
 		return priv->dev->irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -395,11 +455,14 @@ static int stmmac_pltfr_probe(struct platform_device *pdev)
 	 */
 	priv->wol_irq = platform_get_irq_byname(pdev, "eth_wake_irq");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->wol_irq == -ENXIO)
 		priv->wol_irq = priv->dev->irq;
 
 	priv->lpi_irq = platform_get_irq_byname(pdev, "eth_lpi");
 =======
+=======
+>>>>>>> v3.18
 	if (priv->wol_irq < 0) {
 		if (priv->wol_irq == -EPROBE_DEFER)
 			return -EPROBE_DEFER;
@@ -409,6 +472,9 @@ static int stmmac_pltfr_probe(struct platform_device *pdev)
 	priv->lpi_irq = platform_get_irq_byname(pdev, "eth_lpi");
 	if (priv->lpi_irq == -EPROBE_DEFER)
 		return -EPROBE_DEFER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	platform_set_drvdata(pdev, priv->dev);
@@ -432,14 +498,20 @@ static int stmmac_pltfr_remove(struct platform_device *pdev)
 
 	if (priv->plat->exit)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		priv->plat->exit(pdev);
 
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 		priv->plat->exit(pdev, priv->plat->bsp_priv);
 
 	if (priv->plat->free)
 		priv->plat->free(pdev, priv->plat->bsp_priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -448,6 +520,7 @@ static int stmmac_pltfr_remove(struct platform_device *pdev)
 #ifdef CONFIG_PM
 static int stmmac_pltfr_suspend(struct device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct net_device *ndev = dev_get_drvdata(dev);
 
@@ -472,6 +545,8 @@ int stmmac_pltfr_freeze(struct device *dev)
 	if (plat_dat->exit)
 		plat_dat->exit(pdev);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	struct net_device *ndev = dev_get_drvdata(dev);
 	struct stmmac_priv *priv = netdev_priv(ndev);
@@ -480,11 +555,15 @@ int stmmac_pltfr_freeze(struct device *dev)
 	ret = stmmac_suspend(ndev);
 	if (priv->plat->exit)
 		priv->plat->exit(pdev, priv->plat->bsp_priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int stmmac_pltfr_restore(struct device *dev)
 {
@@ -517,6 +596,8 @@ static const struct of_device_id stmmac_dt_ids[] = {
 };
 MODULE_DEVICE_TABLE(of, stmmac_dt_ids);
 =======
+=======
+>>>>>>> v3.18
 static int stmmac_pltfr_resume(struct device *dev)
 {
 	struct net_device *ndev = dev_get_drvdata(dev);
@@ -533,6 +614,9 @@ static int stmmac_pltfr_resume(struct device *dev)
 
 static SIMPLE_DEV_PM_OPS(stmmac_pltfr_pm_ops,
 			stmmac_pltfr_suspend, stmmac_pltfr_resume);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct platform_driver stmmac_pltfr_driver = {

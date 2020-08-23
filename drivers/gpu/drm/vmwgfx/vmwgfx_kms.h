@@ -124,7 +124,12 @@ void vmw_display_unit_cleanup(struct vmw_display_unit *du);
 int vmw_du_page_flip(struct drm_crtc *crtc,
 		     struct drm_framebuffer *fb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     struct drm_pending_vblank_event *event);
+=======
+		     struct drm_pending_vblank_event *event,
+		     uint32_t page_flip_flags);
+>>>>>>> v3.18
 =======
 		     struct drm_pending_vblank_event *event,
 		     uint32_t page_flip_flags);

@@ -4,6 +4,10 @@
 #include <linux/device.h>
 #include <linux/uuid.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mod_devicetable.h>
+>>>>>>> v3.18
 =======
 #include <linux/mod_devicetable.h>
 >>>>>>> v3.18

@@ -130,8 +130,13 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 				     hw->ident_sta_fw.variant) <
 	    HFA384x_FIRMWARE_VERSION(1, 3, 2)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "HostScan not supported with current firmware (<1.3.2).\n");
+=======
+		netdev_err(wlandev->netdev,
+			   "HostScan not supported with current firmware (<1.3.2).\n");
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "HostScan not supported with current firmware (<1.3.2).\n");
@@ -149,8 +154,13 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 					  &roamingmode);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "getconfig(ROAMMODE) failed. result=%d\n",
 		       result);
+=======
+		netdev_err(wlandev->netdev,
+			   "getconfig(ROAMMODE) failed. result=%d\n", result);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "getconfig(ROAMMODE) failed. result=%d\n", result);
@@ -166,8 +176,14 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 					  HFA384x_ROAMMODE_HOSTSCAN_HOSTROAM);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "setconfig(ROAMINGMODE) failed. result=%d\n",
 		       result);
+=======
+		netdev_err(wlandev->netdev,
+			   "setconfig(ROAMINGMODE) failed. result=%d\n",
+			   result);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "setconfig(ROAMINGMODE) failed. result=%d\n",
@@ -193,8 +209,13 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 					     word);
 		if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "Passive scan not supported with "
 			       "current firmware.  (<1.5.1)\n");
+=======
+			netdev_warn(wlandev->netdev,
+				    "Passive scan not supported with current firmware.  (<1.5.1)\n");
+>>>>>>> v3.18
 =======
 			netdev_warn(wlandev->netdev,
 				    "Passive scan not supported with current firmware.  (<1.5.1)\n");
@@ -211,6 +232,10 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 	for (i = 0; i < msg->channellist.data.len; i++) {
 		u8 channel = msg->channellist.data.data[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -229,8 +254,13 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 	result = hfa384x_drvr_getconfig16(hw, HFA384x_RID_PORTSTATUS, &word);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "getconfig(PORTSTATUS) failed. "
 		       "result=%d\n", result);
+=======
+		netdev_err(wlandev->netdev,
+			   "getconfig(PORTSTATUS) failed. result=%d\n", result);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "getconfig(PORTSTATUS) failed. result=%d\n", result);
@@ -247,9 +277,15 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 					HFA384x_ROAMMODE_HOSTSCAN_HOSTROAM);
 		if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR
 			       "setconfig(ROAMINGMODE) failed. result=%d\n",
 			       result);
+=======
+			netdev_err(wlandev->netdev,
+				   "setconfig(ROAMINGMODE) failed. result=%d\n",
+				   result);
+>>>>>>> v3.18
 =======
 			netdev_err(wlandev->netdev,
 				   "setconfig(ROAMINGMODE) failed. result=%d\n",
@@ -269,7 +305,11 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 						HFA384x_RID_CNFOWNSSID_LEN);
 		if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "Failed to set OwnSSID.\n");
+=======
+			netdev_err(wlandev->netdev, "Failed to set OwnSSID.\n");
+>>>>>>> v3.18
 =======
 			netdev_err(wlandev->netdev, "Failed to set OwnSSID.\n");
 >>>>>>> v3.18
@@ -282,7 +322,12 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 						HFA384x_RID_CNFDESIREDSSID_LEN);
 		if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "Failed to set DesiredSSID.\n");
+=======
+			netdev_err(wlandev->netdev,
+				   "Failed to set DesiredSSID.\n");
+>>>>>>> v3.18
 =======
 			netdev_err(wlandev->netdev,
 				   "Failed to set DesiredSSID.\n");
@@ -297,7 +342,12 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 						  HFA384x_PORTTYPE_IBSS);
 		if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "Failed to set CNFPORTTYPE.\n");
+=======
+			netdev_err(wlandev->netdev,
+				   "Failed to set CNFPORTTYPE.\n");
+>>>>>>> v3.18
 =======
 			netdev_err(wlandev->netdev,
 				   "Failed to set CNFPORTTYPE.\n");
@@ -312,7 +362,12 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 					HFA384x_CREATEIBSS_JOINCREATEIBSS);
 		if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "Failed to set CREATEIBSS.\n");
+=======
+			netdev_err(wlandev->netdev,
+				   "Failed to set CREATEIBSS.\n");
+>>>>>>> v3.18
 =======
 			netdev_err(wlandev->netdev,
 				   "Failed to set CREATEIBSS.\n");
@@ -324,8 +379,14 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 		result = hfa384x_drvr_enable(hw, 0);
 		if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "drvr_enable(0) failed. "
 			       "result=%d\n", result);
+=======
+			netdev_err(wlandev->netdev,
+				   "drvr_enable(0) failed. result=%d\n",
+				   result);
+>>>>>>> v3.18
 =======
 			netdev_err(wlandev->netdev,
 				   "drvr_enable(0) failed. result=%d\n",
@@ -350,8 +411,14 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 					sizeof(hfa384x_HostScanRequest_data_t));
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "setconfig(SCANREQUEST) failed. result=%d\n",
 		       result);
+=======
+		netdev_err(wlandev->netdev,
+			   "setconfig(SCANREQUEST) failed. result=%d\n",
+			   result);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "setconfig(SCANREQUEST) failed. result=%d\n",
@@ -378,8 +445,14 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 		result = hfa384x_drvr_disable(hw, 0);
 		if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "drvr_disable(0) failed. "
 			       "result=%d\n", result);
+=======
+			netdev_err(wlandev->netdev,
+				   "drvr_disable(0) failed. result=%d\n",
+				   result);
+>>>>>>> v3.18
 =======
 			netdev_err(wlandev->netdev,
 				   "drvr_disable(0) failed. result=%d\n",
@@ -396,8 +469,13 @@ int prism2mgmt_scan(wlandevice_t *wlandev, void *msgp)
 					  roamingmode);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "setconfig(ROAMMODE) failed. result=%d\n",
 		       result);
+=======
+		netdev_err(wlandev->netdev,
+			   "setconfig(ROAMMODE) failed. result=%d\n", result);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "setconfig(ROAMMODE) failed. result=%d\n", result);
@@ -451,8 +529,13 @@ int prism2mgmt_scan_results(wlandevice_t *wlandev, void *msgp)
 
 	if (!hw->scanresults) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "dot11req_scan_results can only be used after a successful dot11req_scan.\n");
+=======
+		netdev_err(wlandev->netdev,
+			   "dot11req_scan_results can only be used after a successful dot11req_scan.\n");
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "dot11req_scan_results can only be used after a successful dot11req_scan.\n");
@@ -609,7 +692,11 @@ int prism2mgmt_start(wlandevice_t *wlandev, void *msgp)
 	p80211pstrd_t *pstr;
 	u8 bytebuf[80];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hfa384x_bytestr_t *p2bytestr = (hfa384x_bytestr_t *) bytebuf;
+=======
+	struct hfa384x_bytestr *p2bytestr = (struct hfa384x_bytestr *) bytebuf;
+>>>>>>> v3.18
 =======
 	struct hfa384x_bytestr *p2bytestr = (struct hfa384x_bytestr *) bytebuf;
 >>>>>>> v3.18
@@ -643,7 +730,11 @@ int prism2mgmt_start(wlandevice_t *wlandev, void *msgp)
 					bytebuf, HFA384x_RID_CNFOWNSSID_LEN);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to set CnfOwnSSID\n");
+=======
+		netdev_err(wlandev->netdev, "Failed to set CnfOwnSSID\n");
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev, "Failed to set CnfOwnSSID\n");
 >>>>>>> v3.18
@@ -654,7 +745,11 @@ int prism2mgmt_start(wlandevice_t *wlandev, void *msgp)
 					HFA384x_RID_CNFDESIREDSSID_LEN);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to set CnfDesiredSSID\n");
+=======
+		netdev_err(wlandev->netdev, "Failed to set CnfDesiredSSID\n");
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev, "Failed to set CnfDesiredSSID\n");
 >>>>>>> v3.18
@@ -670,7 +765,12 @@ int prism2mgmt_start(wlandevice_t *wlandev, void *msgp)
 	result = hfa384x_drvr_setconfig16(hw, HFA384x_RID_CNFAPBCNint, word);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to set beacon period=%d.\n", word);
+=======
+		netdev_err(wlandev->netdev,
+			   "Failed to set beacon period=%d.\n", word);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "Failed to set beacon period=%d.\n", word);
@@ -683,7 +783,12 @@ int prism2mgmt_start(wlandevice_t *wlandev, void *msgp)
 	result = hfa384x_drvr_setconfig16(hw, HFA384x_RID_CNFOWNCHANNEL, word);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to set channel=%d.\n", word);
+=======
+		netdev_err(wlandev->netdev,
+			   "Failed to set channel=%d.\n", word);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "Failed to set channel=%d.\n", word);
@@ -716,7 +821,12 @@ int prism2mgmt_start(wlandevice_t *wlandev, void *msgp)
 	result = hfa384x_drvr_setconfig16(hw, HFA384x_RID_CNFBASICRATES, word);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to set basicrates=%d.\n", word);
+=======
+		netdev_err(wlandev->netdev,
+			   "Failed to set basicrates=%d.\n", word);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "Failed to set basicrates=%d.\n", word);
@@ -750,7 +860,12 @@ int prism2mgmt_start(wlandevice_t *wlandev, void *msgp)
 	result = hfa384x_drvr_setconfig16(hw, HFA384x_RID_CNFSUPPRATES, word);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to set supprates=%d.\n", word);
+=======
+		netdev_err(wlandev->netdev,
+			   "Failed to set supprates=%d.\n", word);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "Failed to set supprates=%d.\n", word);
@@ -761,7 +876,12 @@ int prism2mgmt_start(wlandevice_t *wlandev, void *msgp)
 	result = hfa384x_drvr_setconfig16(hw, HFA384x_RID_TXRATECNTL, word);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Failed to set txrates=%d.\n", word);
+=======
+		netdev_err(wlandev->netdev, "Failed to set txrates=%d.\n",
+			   word);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev, "Failed to set txrates=%d.\n",
 			   word);
@@ -780,7 +900,12 @@ int prism2mgmt_start(wlandevice_t *wlandev, void *msgp)
 	result = hfa384x_drvr_enable(hw, 0);
 	if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Enable macport failed, result=%d.\n", result);
+=======
+		netdev_err(wlandev->netdev,
+			   "Enable macport failed, result=%d.\n", result);
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "Enable macport failed, result=%d.\n", result);
@@ -830,8 +955,13 @@ int prism2mgmt_readpda(wlandevice_t *wlandev, void *msgp)
 	 */
 	if (wlandev->msdstate != WLAN_MSD_FWLOAD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "PDA may only be read " "in the fwload state.\n");
+=======
+		netdev_err(wlandev->netdev,
+			   "PDA may only be read in the fwload state.\n");
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "PDA may only be read in the fwload state.\n");
@@ -848,9 +978,15 @@ int prism2mgmt_readpda(wlandevice_t *wlandev, void *msgp)
 					      HFA384x_PDA_LEN_MAX);
 		if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR
 			       "hfa384x_drvr_readpda() failed, "
 			       "result=%d\n", result);
+=======
+			netdev_err(wlandev->netdev,
+				   "hfa384x_drvr_readpda() failed, result=%d\n",
+				   result);
+>>>>>>> v3.18
 =======
 			netdev_err(wlandev->netdev,
 				   "hfa384x_drvr_readpda() failed, result=%d\n",
@@ -903,9 +1039,14 @@ int prism2mgmt_ramdl_state(wlandevice_t *wlandev, void *msgp)
 
 	if (wlandev->msdstate != WLAN_MSD_FWLOAD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "ramdl_state(): may only be called "
 		       "in the fwload state.\n");
+=======
+		netdev_err(wlandev->netdev,
+			   "ramdl_state(): may only be called in the fwload state.\n");
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "ramdl_state(): may only be called in the fwload state.\n");
@@ -967,9 +1108,14 @@ int prism2mgmt_ramdl_write(wlandevice_t *wlandev, void *msgp)
 
 	if (wlandev->msdstate != WLAN_MSD_FWLOAD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "ramdl_write(): may only be called "
 		       "in the fwload state.\n");
+=======
+		netdev_err(wlandev->netdev,
+			   "ramdl_write(): may only be called in the fwload state.\n");
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "ramdl_write(): may only be called in the fwload state.\n");
@@ -1032,9 +1178,14 @@ int prism2mgmt_flashdl_state(wlandevice_t *wlandev, void *msgp)
 
 	if (wlandev->msdstate != WLAN_MSD_FWLOAD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "flashdl_state(): may only be called "
 		       "in the fwload state.\n");
+=======
+		netdev_err(wlandev->netdev,
+			   "flashdl_state(): may only be called in the fwload state.\n");
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "flashdl_state(): may only be called in the fwload state.\n");
@@ -1072,8 +1223,14 @@ int prism2mgmt_flashdl_state(wlandevice_t *wlandev, void *msgp)
 		result = prism2sta_ifstate(wlandev, P80211ENUM_ifstate_fwload);
 		if (result != P80211ENUM_resultcode_success) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "prism2sta_ifstate(fwload) failed,"
 			       "P80211ENUM_resultcode=%d\n", result);
+=======
+			netdev_err(wlandev->netdev,
+				   "prism2sta_ifstate(fwload) failed, P80211ENUM_resultcode=%d\n",
+				   result);
+>>>>>>> v3.18
 =======
 			netdev_err(wlandev->netdev,
 				   "prism2sta_ifstate(fwload) failed, P80211ENUM_resultcode=%d\n",
@@ -1116,9 +1273,14 @@ int prism2mgmt_flashdl_write(wlandevice_t *wlandev, void *msgp)
 
 	if (wlandev->msdstate != WLAN_MSD_FWLOAD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR
 		       "flashdl_write(): may only be called "
 		       "in the fwload state.\n");
+=======
+		netdev_err(wlandev->netdev,
+			   "flashdl_write(): may only be called in the fwload state.\n");
+>>>>>>> v3.18
 =======
 		netdev_err(wlandev->netdev,
 			   "flashdl_write(): may only be called in the fwload state.\n");
@@ -1182,7 +1344,11 @@ int prism2mgmt_autojoin(wlandevice_t *wlandev, void *msgp)
 	p80211pstrd_t *pstr;
 	u8 bytebuf[256];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hfa384x_bytestr_t *p2bytestr = (hfa384x_bytestr_t *) bytebuf;
+=======
+	struct hfa384x_bytestr *p2bytestr = (struct hfa384x_bytestr *) bytebuf;
+>>>>>>> v3.18
 =======
 	struct hfa384x_bytestr *p2bytestr = (struct hfa384x_bytestr *) bytebuf;
 >>>>>>> v3.18
@@ -1263,8 +1429,12 @@ int prism2mgmt_wlansniff(wlandevice_t *wlandev, void *msgp)
 			msg->resultcode.data =
 			    P80211ENUM_resultcode_invalid_parameters;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			result = 0;
 			goto exit;
+=======
+			return 0;
+>>>>>>> v3.18
 =======
 			return 0;
 >>>>>>> v3.18
@@ -1324,11 +1494,17 @@ int prism2mgmt_wlansniff(wlandevice_t *wlandev, void *msgp)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "monitor mode disabled\n");
 		msg->resultcode.data = P80211ENUM_resultcode_success;
 		result = 0;
 		goto exit;
 		break;
+=======
+		netdev_info(wlandev->netdev, "monitor mode disabled\n");
+		msg->resultcode.data = P80211ENUM_resultcode_success;
+		return 0;
+>>>>>>> v3.18
 =======
 		netdev_info(wlandev->netdev, "monitor mode disabled\n");
 		msg->resultcode.data = P80211ENUM_resultcode_success;
@@ -1459,7 +1635,11 @@ int prism2mgmt_wlansniff(wlandevice_t *wlandev, void *msgp)
 
 		if (wlandev->netdev->type == ARPHRD_ETHER)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "monitor mode enabled\n");
+=======
+			netdev_info(wlandev->netdev, "monitor mode enabled\n");
+>>>>>>> v3.18
 =======
 			netdev_info(wlandev->netdev, "monitor mode enabled\n");
 >>>>>>> v3.18
@@ -1483,6 +1663,7 @@ int prism2mgmt_wlansniff(wlandevice_t *wlandev, void *msgp)
 
 		msg->resultcode.data = P80211ENUM_resultcode_success;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = 0;
 		goto exit;
 		break;
@@ -1492,19 +1673,28 @@ int prism2mgmt_wlansniff(wlandevice_t *wlandev, void *msgp)
 		goto exit;
 		break;
 =======
+=======
+>>>>>>> v3.18
 		return 0;
 	default:
 		msg->resultcode.data = P80211ENUM_resultcode_invalid_parameters;
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 failed:
 	msg->resultcode.data = P80211ENUM_resultcode_refused;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = 0;
 exit:
 	return result;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

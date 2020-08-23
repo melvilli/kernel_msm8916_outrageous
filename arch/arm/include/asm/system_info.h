@@ -12,6 +12,10 @@
 #define CPU_ARCH_ARMv6		8
 #define CPU_ARCH_ARMv7		9
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CPU_ARCH_ARMv7M		10
+>>>>>>> v3.18
 =======
 #define CPU_ARCH_ARMv7M		10
 >>>>>>> v3.18

@@ -49,7 +49,10 @@
 #define OMAP3430ES2_USBHOST_MOD				0xc00
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * TI81XX PRM module offsets
  */
@@ -62,6 +65,9 @@
 #define TI816X_PRM_SGX_MOD				0x0f00
 #define TI81XX_PRM_ALWON_MOD			0x1800
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* 24XX register bits shared between CM & PRM registers */
 
@@ -432,7 +438,10 @@
 # ifndef __ASSEMBLER__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 
 /**
@@ -455,6 +464,9 @@
 	}							\
 })
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct omap_prcm_irq - describes a PRCM interrupt bit
@@ -487,6 +499,10 @@ struct omap_prcm_irq {
  * @save_and_clear_irqen: fn ptr to save and clear IRQENABLE regs
  * @restore_irqen: fn ptr to save and clear IRQENABLE regs
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @reconfigure_io_chain: fn ptr to reconfigure IO chain
+>>>>>>> v3.18
 =======
  * @reconfigure_io_chain: fn ptr to reconfigure IO chain
 >>>>>>> v3.18
@@ -512,6 +528,10 @@ struct omap_prcm_irq_setup {
 	void (*save_and_clear_irqen)(u32 *saved_mask);
 	void (*restore_irqen)(u32 *saved_mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*reconfigure_io_chain)(void);
+>>>>>>> v3.18
 =======
 	void (*reconfigure_io_chain)(void);
 >>>>>>> v3.18

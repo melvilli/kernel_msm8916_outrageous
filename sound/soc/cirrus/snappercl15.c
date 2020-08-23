@@ -66,6 +66,7 @@ static const struct snd_soc_dapm_route audio_map[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int snappercl15_tlv320aic23_init(struct snd_soc_pcm_runtime *rtd)
 {
 	struct snd_soc_codec *codec = rtd->codec;
@@ -80,6 +81,8 @@ static int snappercl15_tlv320aic23_init(struct snd_soc_pcm_runtime *rtd)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct snd_soc_dai_link snappercl15_dai = {
 	.name		= "tlv320aic23",
 	.stream_name	= "AIC23",
@@ -87,8 +90,12 @@ static struct snd_soc_dai_link snappercl15_dai = {
 	.codec_dai_name	= "tlv320aic23-hifi",
 	.codec_name	= "tlv320aic23-codec.0-001a",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.platform_name	=  "ep93xx-pcm-audio",
 	.init		= snappercl15_tlv320aic23_init,
+=======
+	.platform_name	= "ep93xx-i2s",
+>>>>>>> v3.18
 =======
 	.platform_name	= "ep93xx-i2s",
 >>>>>>> v3.18
@@ -103,12 +110,18 @@ static struct snd_soc_card snd_soc_snappercl15 = {
 	.dai_link	= &snappercl15_dai,
 	.num_links	= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	.dapm_widgets		= tlv320aic23_dapm_widgets,
 	.num_dapm_widgets	= ARRAY_SIZE(tlv320aic23_dapm_widgets),
 	.dapm_routes		= audio_map,
 	.num_dapm_routes	= ARRAY_SIZE(audio_map),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

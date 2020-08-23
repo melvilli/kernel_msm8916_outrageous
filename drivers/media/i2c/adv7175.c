@@ -33,7 +33,10 @@
 #include <linux/videodev2.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -359,6 +362,7 @@ static int adv7175_s_fmt(struct v4l2_subdev *sd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adv7175_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -366,6 +370,8 @@ static int adv7175_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ide
 	return v4l2_chip_ident_i2c_client(client, chip, V4L2_IDENT_ADV7175, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int adv7175_s_power(struct v4l2_subdev *sd, int on)
@@ -382,7 +388,10 @@ static int adv7175_s_power(struct v4l2_subdev *sd, int on)
 
 static const struct v4l2_subdev_core_ops adv7175_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = adv7175_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init = adv7175_init,
@@ -419,7 +428,11 @@ static int adv7175_probe(struct i2c_client *client,
 			client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	encoder = kzalloc(sizeof(struct adv7175), GFP_KERNEL);
+=======
+	encoder = devm_kzalloc(&client->dev, sizeof(*encoder), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	encoder = devm_kzalloc(&client->dev, sizeof(*encoder), GFP_KERNEL);
 >>>>>>> v3.18
@@ -448,7 +461,10 @@ static int adv7175_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(to_adv7175(sd));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

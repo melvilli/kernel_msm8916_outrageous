@@ -2,7 +2,11 @@
  *	SGI UltraViolet TLB flush routines.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	(c) 2008-2012 Cliff Wickman <cpw@sgi.com>, SGI.
+=======
+ *	(c) 2008-2014 Cliff Wickman <cpw@sgi.com>, SGI.
+>>>>>>> v3.18
 =======
  *	(c) 2008-2014 Cliff Wickman <cpw@sgi.com>, SGI.
 >>>>>>> v3.18
@@ -438,6 +442,7 @@ static void reset_with_ipi(struct pnmask *distribution, struct bau_control *bcp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long cycles_2_us(unsigned long long cyc)
 {
 	unsigned long long ns;
@@ -448,6 +453,8 @@ static inline unsigned long cycles_2_us(unsigned long long cyc)
 	us = ns / 1000;
 	return us;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Not to be confused with cycles_2_ns() from tsc.c; this gives a relative
  * number, not an absolute. It converts a duration in cycles to a duration in
@@ -491,6 +498,9 @@ static inline cycles_t sec_2_cycles(unsigned long sec)
 static inline unsigned long long usec_2_cycles(unsigned long usec)
 {
 	return ns_2_cycles(usec * NSEC_PER_USEC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -580,7 +590,11 @@ static int uv1_wait_completion(struct bau_desc *bau_desc,
  * But not currently used.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long uv2_read_status(unsigned long offset, int rshft, int desc)
+=======
+static unsigned long uv2_3_read_status(unsigned long offset, int rshft, int desc)
+>>>>>>> v3.18
 =======
 static unsigned long uv2_3_read_status(unsigned long offset, int rshft, int desc)
 >>>>>>> v3.18
@@ -627,7 +641,11 @@ int handle_uv2_busy(struct bau_control *bcp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int uv2_wait_completion(struct bau_desc *bau_desc,
+=======
+static int uv2_3_wait_completion(struct bau_desc *bau_desc,
+>>>>>>> v3.18
 =======
 static int uv2_3_wait_completion(struct bau_desc *bau_desc,
 >>>>>>> v3.18
@@ -641,7 +659,11 @@ static int uv2_3_wait_completion(struct bau_desc *bau_desc,
 	struct ptc_stats *stat = bcp->statp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	descriptor_stat = uv2_read_status(mmr_offset, right_shift, desc);
+=======
+	descriptor_stat = uv2_3_read_status(mmr_offset, right_shift, desc);
+>>>>>>> v3.18
 =======
 	descriptor_stat = uv2_3_read_status(mmr_offset, right_shift, desc);
 >>>>>>> v3.18
@@ -687,8 +709,12 @@ static int uv2_3_wait_completion(struct bau_desc *bau_desc,
 				busy_reps = 0;
 				ttm = get_cycles();
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if ((ttm - bcp->send_message) >
 						bcp->timeout_interval)
+=======
+				if ((ttm - bcp->send_message) > bcp->timeout_interval)
+>>>>>>> v3.18
 =======
 				if ((ttm - bcp->send_message) > bcp->timeout_interval)
 >>>>>>> v3.18
@@ -700,8 +726,12 @@ static int uv2_3_wait_completion(struct bau_desc *bau_desc,
 			cpu_relax();
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		descriptor_stat = uv2_read_status(mmr_offset, right_shift,
 									desc);
+=======
+		descriptor_stat = uv2_3_read_status(mmr_offset, right_shift, desc);
+>>>>>>> v3.18
 =======
 		descriptor_stat = uv2_3_read_status(mmr_offset, right_shift, desc);
 >>>>>>> v3.18
@@ -716,8 +746,12 @@ static int uv2_3_wait_completion(struct bau_desc *bau_desc,
  * current hub.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wait_completion(struct bau_desc *bau_desc,
 				struct bau_control *bcp, long try)
+=======
+static int wait_completion(struct bau_desc *bau_desc, struct bau_control *bcp, long try)
+>>>>>>> v3.18
 =======
 static int wait_completion(struct bau_desc *bau_desc, struct bau_control *bcp, long try)
 >>>>>>> v3.18
@@ -736,6 +770,7 @@ static int wait_completion(struct bau_desc *bau_desc, struct bau_control *bcp, l
 
 	if (bcp->uvhub_version == 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return uv1_wait_completion(bau_desc, mmr_offset, right_shift,
 								bcp, try);
 	else
@@ -751,6 +786,11 @@ static inline cycles_t sec_2_cycles(unsigned long sec)
 	ns = sec * 1000000000;
 	cyc = (ns << CYC2NS_SCALE_FACTOR)/(per_cpu(cyc2ns, smp_processor_id()));
 	return cyc;
+=======
+		return uv1_wait_completion(bau_desc, mmr_offset, right_shift, bcp, try);
+	else
+		return uv2_3_wait_completion(bau_desc, mmr_offset, right_shift, bcp, try);
+>>>>>>> v3.18
 =======
 		return uv1_wait_completion(bau_desc, mmr_offset, right_shift, bcp, try);
 	else
@@ -945,7 +985,11 @@ int uv_flush_send_and_wait(struct cpumask *flush_mask, struct bau_control *bcp,
 	struct bau_control *hmaster = bcp->uvhub_master;
 	struct uv1_bau_msg_header *uv1_hdr = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uv2_bau_msg_header *uv2_hdr = NULL;
+=======
+	struct uv2_3_bau_msg_header *uv2_3_hdr = NULL;
+>>>>>>> v3.18
 =======
 	struct uv2_3_bau_msg_header *uv2_3_hdr = NULL;
 >>>>>>> v3.18
@@ -963,7 +1007,12 @@ int uv_flush_send_and_wait(struct cpumask *flush_mask, struct bau_control *bcp,
 		uv1_hdr = &bau_desc->header.uv1_hdr;
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uv2_hdr = &bau_desc->header.uv2_hdr;
+=======
+		/* uv2 and uv3 */
+		uv2_3_hdr = &bau_desc->header.uv2_3_hdr;
+>>>>>>> v3.18
 =======
 		/* uv2 and uv3 */
 		uv2_3_hdr = &bau_desc->header.uv2_3_hdr;
@@ -975,7 +1024,11 @@ int uv_flush_send_and_wait(struct cpumask *flush_mask, struct bau_control *bcp,
 				uv1_hdr->msg_type = MSG_REGULAR;
 			else
 <<<<<<< HEAD
+<<<<<<< HEAD
 				uv2_hdr->msg_type = MSG_REGULAR;
+=======
+				uv2_3_hdr->msg_type = MSG_REGULAR;
+>>>>>>> v3.18
 =======
 				uv2_3_hdr->msg_type = MSG_REGULAR;
 >>>>>>> v3.18
@@ -985,7 +1038,11 @@ int uv_flush_send_and_wait(struct cpumask *flush_mask, struct bau_control *bcp,
 				uv1_hdr->msg_type = MSG_RETRY;
 			else
 <<<<<<< HEAD
+<<<<<<< HEAD
 				uv2_hdr->msg_type = MSG_RETRY;
+=======
+				uv2_3_hdr->msg_type = MSG_RETRY;
+>>>>>>> v3.18
 =======
 				uv2_3_hdr->msg_type = MSG_RETRY;
 >>>>>>> v3.18
@@ -996,7 +1053,11 @@ int uv_flush_send_and_wait(struct cpumask *flush_mask, struct bau_control *bcp,
 			uv1_hdr->sequence = seq_number;
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			uv2_hdr->sequence = seq_number;
+=======
+			uv2_3_hdr->sequence = seq_number;
+>>>>>>> v3.18
 =======
 			uv2_3_hdr->sequence = seq_number;
 >>>>>>> v3.18
@@ -1158,13 +1219,19 @@ static int set_distrib_bits(struct cpumask *flush_mask, struct bau_control *bcp,
  */
 const struct cpumask *uv_flush_tlb_others(const struct cpumask *cpumask,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct mm_struct *mm, unsigned long start,
 				unsigned long end, unsigned int cpu)
 =======
+=======
+>>>>>>> v3.18
 						struct mm_struct *mm,
 						unsigned long start,
 						unsigned long end,
 						unsigned int cpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int locals = 0;
@@ -1179,8 +1246,11 @@ const struct cpumask *uv_flush_tlb_others(const struct cpumask *cpumask,
 
 	bcp = &per_cpu(bau_control, cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stat = bcp->statp;
 	stat->s_enters++;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1188,6 +1258,12 @@ const struct cpumask *uv_flush_tlb_others(const struct cpumask *cpumask,
 		return cpumask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	stat = bcp->statp;
+	stat->s_enters++;
+
+>>>>>>> v3.18
 =======
 	stat = bcp->statp;
 	stat->s_enters++;
@@ -1361,6 +1437,10 @@ void uv_bau_message_interrupt(struct pt_regs *regs)
 			process_uv2_message(&msgdesc, bcp);
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			/* no error workaround for uv1 or uv3 */
+>>>>>>> v3.18
 =======
 			/* no error workaround for uv1 or uv3 */
 >>>>>>> v3.18
@@ -1422,15 +1502,21 @@ static void __init enable_timeouts(void)
 		mmr_image |= (1L << SOFTACK_MSHIFT);
 		if (is_uv2_hub()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* hw bug workaround; do not use extended status */
 			mmr_image &= ~(1L << UV2_EXT_SHFT);
 =======
+=======
+>>>>>>> v3.18
 			/* do not touch the legacy mode bit */
 			/* hw bug workaround; do not use extended status */
 			mmr_image &= ~(1L << UV2_EXT_SHFT);
 		} else if (is_uv3_hub()) {
 			mmr_image &= ~(1L << PREFETCH_HINT_SHFT);
 			mmr_image |= (1L << SB_STATUS_SHFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		write_mmr_misc_control(pnode, mmr_image);
@@ -1457,6 +1543,7 @@ static void ptc_seq_stop(struct seq_file *file, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long long usec_2_cycles(unsigned long microsec)
 {
 	unsigned long ns;
@@ -1467,6 +1554,8 @@ static inline unsigned long long usec_2_cycles(unsigned long microsec)
 	return cyc;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -1595,7 +1684,11 @@ static ssize_t ptc_proc_write(struct file *file, const char __user *user,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtol(optstr, 10, &input_arg) < 0) {
+=======
+	if (kstrtol(optstr, 10, &input_arg) < 0) {
+>>>>>>> v3.18
 =======
 	if (kstrtol(optstr, 10, &input_arg) < 0) {
 >>>>>>> v3.18
@@ -1815,7 +1908,11 @@ static void activation_descriptor_init(int node, int pnode, int base_pnode)
 	struct bau_desc *bd2;
 	struct uv1_bau_msg_header *uv1_hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uv2_bau_msg_header *uv2_hdr;
+=======
+	struct uv2_3_bau_msg_header *uv2_3_hdr;
+>>>>>>> v3.18
 =======
 	struct uv2_3_bau_msg_header *uv2_3_hdr;
 >>>>>>> v3.18
@@ -1866,6 +1963,7 @@ static void activation_descriptor_init(int node, int pnode, int base_pnode)
 		} else {
 			/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * BIOS uses legacy mode, but UV2 hardware always
 			 * uses native mode for selective broadcasts.
 			 */
@@ -1876,6 +1974,8 @@ static void activation_descriptor_init(int node, int pnode, int base_pnode)
 			uv2_hdr->dest_subnodeid =	UV_LB_SUBNODEID;
 			uv2_hdr->command =		UV_NET_ENDPOINT_INTD;
 =======
+=======
+>>>>>>> v3.18
 			 * BIOS uses legacy mode, but uv2 and uv3 hardware always
 			 * uses native mode for selective broadcasts.
 			 */
@@ -1885,6 +1985,9 @@ static void activation_descriptor_init(int node, int pnode, int base_pnode)
 						UV_PNODE_TO_NASID(base_pnode);
 			uv2_3_hdr->dest_subnodeid =	UV_LB_SUBNODEID;
 			uv2_3_hdr->command =		UV_NET_ENDPOINT_INTD;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1997,6 +2100,10 @@ static int calculate_destination_timeout(void)
 		ret = ts_ns / 1000;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* same destination timeout for uv2 and uv3 */
+>>>>>>> v3.18
 =======
 		/* same destination timeout for uv2 and uv3 */
 >>>>>>> v3.18
@@ -2155,13 +2262,19 @@ static int scan_sock(struct socket_desc *sdp, struct uvhub_desc *bdp,
 		else if (is_uv2_hub())
 			bcp->uvhub_version = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else {
 			printk(KERN_EMERG "uvhub version not 1 or 2\n");
 =======
+=======
+>>>>>>> v3.18
 		else if (is_uv3_hub())
 			bcp->uvhub_version = 3;
 		else {
 			printk(KERN_EMERG "uvhub version not 1, 2 or 3\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 1;
 		}
@@ -2288,14 +2401,20 @@ static int __init uv_bau_init(void)
 
 	vector = UV_BAU_MESSAGE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_possible_blade(uvhub)
 		if (uv_blade_nr_possible_cpus(uvhub))
 			init_uvhub(uvhub, vector, uv_base_pnode);
 =======
+=======
+>>>>>>> v3.18
 	for_each_possible_blade(uvhub) {
 		if (uv_blade_nr_possible_cpus(uvhub))
 			init_uvhub(uvhub, vector, uv_base_pnode);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	alloc_intr_gate(vector, uv_bau_message_intr1);

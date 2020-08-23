@@ -38,11 +38,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_DEBUG
 # define ISP1362_DEBUG
 #else
 # undef ISP1362_DEBUG
 #endif
+=======
+#undef ISP1362_DEBUG
+>>>>>>> v3.18
 =======
 #undef ISP1362_DEBUG
 >>>>>>> v3.18
@@ -76,7 +80,10 @@
 #include <linux/slab.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/list.h>
@@ -90,6 +97,11 @@
 #include <linux/bitmap.h>
 #include <linux/prefetch.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/debugfs.h>
+#include <linux/seq_file.h>
+>>>>>>> v3.18
 =======
 #include <linux/debugfs.h>
 #include <linux/seq_file.h>
@@ -105,7 +117,10 @@ module_param(dbg_level, int, 0644);
 #else
 module_param(dbg_level, int, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	STUB_DEBUG_FILE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -366,8 +381,11 @@ static void isp1362_write_ptd(struct isp1362_hcd *isp1362_hcd, struct isp1362_ep
 	int len = PTD_GET_DIR(ptd) == PTD_DIR_IN ? 0 : ep->length;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_BUG_ON(ep->ptd_offset < 0);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	prefetch(ptd);
@@ -1594,7 +1612,11 @@ static int isp1362_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		switch (wValue) {
 		case C_HUB_OVER_CURRENT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_DBG(0, "C_HUB_OVER_CURRENT\n");
+=======
+			DBG(0, "C_HUB_OVER_CURRENT\n");
+>>>>>>> v3.18
 =======
 			DBG(0, "C_HUB_OVER_CURRENT\n");
 >>>>>>> v3.18
@@ -1603,7 +1625,11 @@ static int isp1362_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			spin_unlock_irqrestore(&isp1362_hcd->lock, flags);
 		case C_HUB_LOCAL_POWER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_DBG(0, "C_HUB_LOCAL_POWER\n");
+=======
+			DBG(0, "C_HUB_LOCAL_POWER\n");
+>>>>>>> v3.18
 =======
 			DBG(0, "C_HUB_LOCAL_POWER\n");
 >>>>>>> v3.18
@@ -1618,7 +1644,11 @@ static int isp1362_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		case C_HUB_OVER_CURRENT:
 		case C_HUB_LOCAL_POWER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_DBG(0, "C_HUB_OVER_CURRENT or C_HUB_LOCAL_POWER\n");
+=======
+			DBG(0, "C_HUB_OVER_CURRENT or C_HUB_LOCAL_POWER\n");
+>>>>>>> v3.18
 =======
 			DBG(0, "C_HUB_OVER_CURRENT or C_HUB_LOCAL_POWER\n");
 >>>>>>> v3.18
@@ -1653,6 +1683,7 @@ static int isp1362_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		switch (wValue) {
 		case USB_PORT_FEAT_ENABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_DBG(0, "USB_PORT_FEAT_ENABLE\n");
 			tmp = RH_PS_CCS;
 			break;
@@ -1671,6 +1702,8 @@ static int isp1362_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		case USB_PORT_FEAT_POWER:
 			_DBG(0, "USB_PORT_FEAT_POWER\n");
 =======
+=======
+>>>>>>> v3.18
 			DBG(0, "USB_PORT_FEAT_ENABLE\n");
 			tmp = RH_PS_CCS;
 			break;
@@ -1688,11 +1721,15 @@ static int isp1362_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			break;
 		case USB_PORT_FEAT_POWER:
 			DBG(0, "USB_PORT_FEAT_POWER\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			tmp = RH_PS_LSDA;
 
 			break;
 		case USB_PORT_FEAT_C_CONNECTION:
+<<<<<<< HEAD
 <<<<<<< HEAD
 			_DBG(0, "USB_PORT_FEAT_C_CONNECTION\n");
 			tmp = RH_PS_CSC;
@@ -1704,6 +1741,8 @@ static int isp1362_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		case USB_PORT_FEAT_C_RESET:
 			_DBG(0, "USB_PORT_FEAT_C_RESET\n");
 =======
+=======
+>>>>>>> v3.18
 			DBG(0, "USB_PORT_FEAT_C_CONNECTION\n");
 			tmp = RH_PS_CSC;
 			break;
@@ -1713,6 +1752,9 @@ static int isp1362_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			break;
 		case USB_PORT_FEAT_C_RESET:
 			DBG(0, "USB_PORT_FEAT_C_RESET\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			tmp = RH_PS_PRSC;
 			break;
@@ -1734,7 +1776,11 @@ static int isp1362_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 		switch (wValue) {
 		case USB_PORT_FEAT_SUSPEND:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_DBG(0, "USB_PORT_FEAT_SUSPEND\n");
+=======
+			DBG(0, "USB_PORT_FEAT_SUSPEND\n");
+>>>>>>> v3.18
 =======
 			DBG(0, "USB_PORT_FEAT_SUSPEND\n");
 >>>>>>> v3.18
@@ -1746,7 +1792,11 @@ static int isp1362_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			break;
 		case USB_PORT_FEAT_POWER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_DBG(0, "USB_PORT_FEAT_POWER\n");
+=======
+			DBG(0, "USB_PORT_FEAT_POWER\n");
+>>>>>>> v3.18
 =======
 			DBG(0, "USB_PORT_FEAT_POWER\n");
 >>>>>>> v3.18
@@ -1758,7 +1808,11 @@ static int isp1362_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			break;
 		case USB_PORT_FEAT_RESET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_DBG(0, "USB_PORT_FEAT_RESET\n");
+=======
+			DBG(0, "USB_PORT_FEAT_RESET\n");
+>>>>>>> v3.18
 =======
 			DBG(0, "USB_PORT_FEAT_RESET\n");
 >>>>>>> v3.18
@@ -1796,7 +1850,11 @@ static int isp1362_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
  error:
 		/* "protocol stall" on error */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_DBG(0, "PROTOCOL STALL\n");
+=======
+		DBG(0, "PROTOCOL STALL\n");
+>>>>>>> v3.18
 =======
 		DBG(0, "PROTOCOL STALL\n");
 >>>>>>> v3.18
@@ -1992,6 +2050,7 @@ static int isp1362_bus_resume(struct usb_hcd *hcd)
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef STUB_DEBUG_FILE
 
 static inline void create_debug_file(struct isp1362_hcd *isp1362_hcd)
@@ -2006,6 +2065,8 @@ static inline void remove_debug_file(struct isp1362_hcd *isp1362_hcd)
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void dump_irq(struct seq_file *s, char *label, u16 mask)
@@ -2151,7 +2212,11 @@ static void dump_regs(struct seq_file *s, struct isp1362_hcd *isp1362_hcd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_isp1362_show(struct seq_file *s, void *unused)
+=======
+static int isp1362_show(struct seq_file *s, void *unused)
+>>>>>>> v3.18
 =======
 static int isp1362_show(struct seq_file *s, void *unused)
 >>>>>>> v3.18
@@ -2213,7 +2278,11 @@ static int isp1362_show(struct seq_file *s, void *unused)
 					   s = "?";
 					   break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   };
+=======
+				   }
+>>>>>>> v3.18
 =======
 				   }
 >>>>>>> v3.18
@@ -2263,6 +2332,7 @@ static int isp1362_show(struct seq_file *s, void *unused)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_isp1362_open(struct inode *inode, struct file *file)
 {
 	return single_open(file, proc_isp1362_show, PDE_DATA(inode));
@@ -2271,6 +2341,8 @@ static int proc_isp1362_open(struct inode *inode, struct file *file)
 static const struct file_operations proc_ops = {
 	.open = proc_isp1362_open,
 =======
+=======
+>>>>>>> v3.18
 static int isp1362_open(struct inode *inode, struct file *file)
 {
 	return single_open(file, isp1362_show, inode);
@@ -2278,6 +2350,9 @@ static int isp1362_open(struct inode *inode, struct file *file)
 
 static const struct file_operations debug_ops = {
 	.open = isp1362_open,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.read = seq_read,
 	.llseek = seq_lseek,
@@ -2285,6 +2360,7 @@ static const struct file_operations debug_ops = {
 };
 
 /* expect just one isp1362_hcd per system */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const char proc_filename[] = "driver/isp1362";
 
@@ -2299,16 +2375,22 @@ static void create_debug_file(struct isp1362_hcd *isp1362_hcd)
 	}
 	isp1362_hcd->pde = pde;
 =======
+=======
+>>>>>>> v3.18
 static void create_debug_file(struct isp1362_hcd *isp1362_hcd)
 {
 	isp1362_hcd->debug_file = debugfs_create_file("isp1362", S_IRUGO,
 						      usb_debug_root,
 						      isp1362_hcd, &debug_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void remove_debug_file(struct isp1362_hcd *isp1362_hcd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (isp1362_hcd->pde)
 		remove_proc_entry(proc_filename, NULL);
@@ -2316,6 +2398,11 @@ static void remove_debug_file(struct isp1362_hcd *isp1362_hcd)
 
 #endif
 
+=======
+	debugfs_remove(isp1362_hcd->debug_file);
+}
+
+>>>>>>> v3.18
 =======
 	debugfs_remove(isp1362_hcd->debug_file);
 }
@@ -2760,13 +2847,17 @@ static int isp1362_remove(struct platform_device *pdev)
 	struct usb_hcd *hcd = platform_get_drvdata(pdev);
 	struct isp1362_hcd *isp1362_hcd = hcd_to_isp1362_hcd(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *res;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	remove_debug_file(isp1362_hcd);
 	DBG(0, "%s: Removing HCD\n", __func__);
 	usb_remove_hcd(hcd);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	DBG(0, "%s: Unmapping data_reg @ %p\n", __func__,
@@ -2789,6 +2880,8 @@ static int isp1362_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	DBG(0, "%s: put_hcd\n", __func__);
 	usb_put_hcd(hcd);
 	DBG(0, "%s: Done\n", __func__);
@@ -2801,7 +2894,11 @@ static int isp1362_probe(struct platform_device *pdev)
 	struct usb_hcd *hcd;
 	struct isp1362_hcd *isp1362_hcd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *addr, *data;
+=======
+	struct resource *addr, *data, *irq_res;
+>>>>>>> v3.18
 =======
 	struct resource *addr, *data, *irq_res;
 >>>>>>> v3.18
@@ -2810,7 +2907,10 @@ static int isp1362_probe(struct platform_device *pdev)
 	int irq;
 	int retval = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *irq_res;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int irq_flags = 0;
@@ -2823,6 +2923,7 @@ static int isp1362_probe(struct platform_device *pdev)
 	 * specific platform_data.  we don't probe for IRQs, and do only
 	 * minimal sanity checking.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (pdev->num_resources < 3) {
 		retval = -ENODEV;
@@ -2871,6 +2972,8 @@ static int isp1362_probe(struct platform_device *pdev)
 		goto err5;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (pdev->num_resources < 3)
 		return -ENODEV;
 
@@ -2900,6 +3003,9 @@ static int isp1362_probe(struct platform_device *pdev)
 	if (!hcd)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hcd->rsrc_start = data->start;
 	isp1362_hcd = hcd_to_isp1362_hcd(hcd);
@@ -2913,7 +3019,11 @@ static int isp1362_probe(struct platform_device *pdev)
 	INIT_LIST_HEAD(&isp1362_hcd->isoc);
 	INIT_LIST_HEAD(&isp1362_hcd->remove_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	isp1362_hcd->board = pdev->dev.platform_data;
+=======
+	isp1362_hcd->board = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	isp1362_hcd->board = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -2922,7 +3032,11 @@ static int isp1362_probe(struct platform_device *pdev)
 		dev_err(hcd->self.controller, "No platform delay function given\n");
 		retval = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err6;
+=======
+		goto err;
+>>>>>>> v3.18
 =======
 		goto err;
 >>>>>>> v3.18
@@ -2941,19 +3055,26 @@ static int isp1362_probe(struct platform_device *pdev)
 	retval = usb_add_hcd(hcd, irq, irq_flags | IRQF_SHARED);
 	if (retval != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err6;
 	pr_info("%s, irq %d\n", hcd->product_desc, irq);
 =======
+=======
+>>>>>>> v3.18
 		goto err;
 	device_wakeup_enable(hcd->self.controller);
 
 	dev_info(&pdev->dev, "%s, irq %d\n", hcd->product_desc, irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	create_debug_file(isp1362_hcd);
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
  err6:
 	DBG(0, "%s: Freeing dev %p\n", __func__, isp1362_hcd);
@@ -2972,6 +3093,10 @@ static int isp1362_probe(struct platform_device *pdev)
 	release_mem_region(addr->start, resource_size(addr));
  err1:
 	pr_err("%s: init error, %d\n", __func__, retval);
+=======
+ err:
+	usb_put_hcd(hcd);
+>>>>>>> v3.18
 =======
  err:
 	usb_put_hcd(hcd);
@@ -3037,7 +3162,11 @@ static struct platform_driver isp1362_driver = {
 	.resume = isp1362_resume,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name = (char *)hcd_name,
+=======
+		.name = hcd_name,
+>>>>>>> v3.18
 =======
 		.name = hcd_name,
 >>>>>>> v3.18

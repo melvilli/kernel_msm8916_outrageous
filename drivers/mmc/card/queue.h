@@ -48,10 +48,16 @@ struct mmc_queue {
 	struct task_struct	*thread;
 	struct semaphore	thread_sem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long		flags;
 #define MMC_QUEUE_SUSPENDED		0
 #define MMC_QUEUE_NEW_REQUEST		1
 #define MMC_QUEUE_URGENT_REQUEST	2
+=======
+	unsigned int		flags;
+#define MMC_QUEUE_SUSPENDED	(1 << 0)
+#define MMC_QUEUE_NEW_REQUEST	(1 << 1)
+>>>>>>> v3.18
 =======
 	unsigned int		flags;
 #define MMC_QUEUE_SUSPENDED	(1 << 0)
@@ -65,6 +71,7 @@ struct mmc_queue {
 	struct mmc_queue_req	*mqrq_cur;
 	struct mmc_queue_req	*mqrq_prev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool			wr_packing_enabled;
 	int			num_of_potential_packed_wr_reqs;
 	int			num_wr_reqs_to_start_packing;
@@ -73,13 +80,19 @@ struct mmc_queue {
 	void (*packed_test_fn) (struct request_queue *, struct mmc_queue_req *);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 };
 
 extern int mmc_init_queue(struct mmc_queue *, struct mmc_card *, spinlock_t *,
 			  const char *);
 extern void mmc_cleanup_queue(struct mmc_queue *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int mmc_queue_suspend(struct mmc_queue *, int);
+=======
+extern void mmc_queue_suspend(struct mmc_queue *);
+>>>>>>> v3.18
 =======
 extern void mmc_queue_suspend(struct mmc_queue *);
 >>>>>>> v3.18
@@ -94,9 +107,12 @@ extern int mmc_packed_init(struct mmc_queue *, struct mmc_card *);
 extern void mmc_packed_clean(struct mmc_queue *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void print_mmc_packing_stats(struct mmc_card *card);
 extern int mmc_access_rpmb(struct mmc_queue *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

@@ -4,7 +4,10 @@ config SOC_IMX23
 	select ARM_CPU_SUSPEND if PM
 	select CPU_ARM926T
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_PWM
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select PINCTRL_IMX23
@@ -15,8 +18,11 @@ config SOC_IMX28
 	select ARM_CPU_SUSPEND if PM
 	select CPU_ARM926T
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_CAN_FLEXCAN if CAN
 	select HAVE_PWM
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select PINCTRL_IMX28
@@ -26,12 +32,18 @@ config ARCH_MXS
 	depends on ARCH_MULTI_V5
 	select ARCH_REQUIRE_GPIOLIB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CLKDEV_LOOKUP
 	select CLKSRC_MMIO
 	select CLKSRC_OF
 	select GENERIC_CLOCKEVENTS
 	select HAVE_CLK_PREPARE
 	select PINCTRL
+=======
+	select CLKSRC_MMIO
+	select PINCTRL
+	select SOC_BUS
+>>>>>>> v3.18
 =======
 	select CLKSRC_MMIO
 	select PINCTRL

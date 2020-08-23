@@ -26,6 +26,7 @@
 #define __weak __attribute__((weak))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __vdie(const char *fmt, va_list ap)
 {
 	int ret = errno;
@@ -60,6 +61,8 @@ void __weak die(const char *fmt, ...)
 	va_end(ap);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __vwarning(const char *fmt, va_list ap)
@@ -121,6 +124,7 @@ void __weak pr_stat(const char *fmt, ...)
 	va_end(ap);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void __weak *malloc_or_die(unsigned int size)
 {
@@ -131,5 +135,7 @@ void __weak *malloc_or_die(unsigned int size)
 		die("malloc");
 	return data;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

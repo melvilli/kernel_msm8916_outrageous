@@ -116,7 +116,11 @@ struct scb_platform_data;
 
 #define AHD_BUILD_COL_IDX(target, lun)				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(((lun) << 4) | target)
+=======
+	((((u8)lun) << 4) | target)
+>>>>>>> v3.18
 =======
 	((((u8)lun) << 4) | target)
 >>>>>>> v3.18
@@ -916,7 +920,11 @@ struct vpd_config {
 	uint8_t  revision;
 	uint8_t  device_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t  termnation_menus[2];
+=======
+	uint8_t  termination_menus[2];
+>>>>>>> v3.18
 =======
 	uint8_t  termination_menus[2];
 >>>>>>> v3.18

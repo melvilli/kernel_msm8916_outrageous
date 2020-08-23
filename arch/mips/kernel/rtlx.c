@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2005 MIPS Technologies, Inc.  All rights reserved.
  * Copyright (C) 2005, 06 Ralf Baechle (ralf@linux-mips.org)
  *
@@ -90,6 +91,8 @@ static irqreturn_t rtlx_interrupt(int irq, void *dev_id)
 	return IRQ_HANDLED;
 }
 =======
+=======
+>>>>>>> v3.18
  * This file is subject to the terms and conditions of the GNU General Public
  * License.  See the file "COPYING" in the main directory of this archive
  * for more details.
@@ -116,6 +119,9 @@ struct chan_waitqueues channel_wqs[RTLX_CHANNELS];
 struct vpe_notifications rtlx_notify;
 void (*aprp_hook)(void) = NULL;
 EXPORT_SYMBOL(aprp_hook);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void __used dump_rtlx(void)
@@ -123,7 +129,11 @@ static void __used dump_rtlx(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("id 0x%lx state %d\n", rtlx->id, rtlx->state);
+=======
+	pr_info("id 0x%lx state %d\n", rtlx->id, rtlx->state);
+>>>>>>> v3.18
 =======
 	pr_info("id 0x%lx state %d\n", rtlx->id, rtlx->state);
 >>>>>>> v3.18
@@ -131,6 +141,7 @@ static void __used dump_rtlx(void)
 	for (i = 0; i < RTLX_CHANNELS; i++) {
 		struct rtlx_channel *chan = &rtlx->channel[i];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk(" rt_state %d lx_state %d buffer_size %d\n",
 		       chan->rt_state, chan->lx_state, chan->buffer_size);
@@ -144,6 +155,8 @@ static void __used dump_rtlx(void)
 		printk(" rt_buffer <%s>\n", chan->rt_buffer);
 		printk(" lx_buffer <%s>\n", chan->lx_buffer);
 =======
+=======
+>>>>>>> v3.18
 		pr_info(" rt_state %d lx_state %d buffer_size %d\n",
 			chan->rt_state, chan->lx_state, chan->buffer_size);
 
@@ -155,6 +168,9 @@ static void __used dump_rtlx(void)
 
 		pr_info(" rt_buffer <%s>\n", chan->rt_buffer);
 		pr_info(" lx_buffer <%s>\n", chan->lx_buffer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -164,8 +180,12 @@ static int rtlx_init(struct rtlx_info *rtlxi)
 {
 	if (rtlxi->id != RTLX_ID) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "no valid RTLX id at 0x%p 0x%lx\n",
 			rtlxi, rtlxi->id);
+=======
+		pr_err("no valid RTLX id at 0x%p 0x%lx\n", rtlxi, rtlxi->id);
+>>>>>>> v3.18
 =======
 		pr_err("no valid RTLX id at 0x%p 0x%lx\n", rtlxi, rtlxi->id);
 >>>>>>> v3.18
@@ -179,7 +199,11 @@ static int rtlx_init(struct rtlx_info *rtlxi)
 
 /* notifications */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void starting(int vpe)
+=======
+void rtlx_starting(int vpe)
+>>>>>>> v3.18
 =======
 void rtlx_starting(int vpe)
 >>>>>>> v3.18
@@ -189,7 +213,11 @@ void rtlx_starting(int vpe)
 
 	/* force a reload of rtlx */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtlx=NULL;
+=======
+	rtlx = NULL;
+>>>>>>> v3.18
 =======
 	rtlx = NULL;
 >>>>>>> v3.18
@@ -200,7 +228,11 @@ void rtlx_starting(int vpe)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void stopping(int vpe)
+=======
+void rtlx_stopping(int vpe)
+>>>>>>> v3.18
 =======
 void rtlx_stopping(int vpe)
 >>>>>>> v3.18
@@ -222,7 +254,11 @@ int rtlx_open(int index, int can_sleep)
 
 	if (index >= RTLX_CHANNELS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "rtlx_open index out of range\n");
+=======
+		pr_debug("rtlx_open index out of range\n");
+>>>>>>> v3.18
 =======
 		pr_debug("rtlx_open index out of range\n");
 >>>>>>> v3.18
@@ -231,8 +267,12 @@ int rtlx_open(int index, int can_sleep)
 
 	if (atomic_inc_return(&channel_wqs[index].in_open) > 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "rtlx_open channel %d already opened\n",
 		       index);
+=======
+		pr_debug("rtlx_open channel %d already opened\n", index);
+>>>>>>> v3.18
 =======
 		pr_debug("rtlx_open channel %d already opened\n", index);
 >>>>>>> v3.18
@@ -241,6 +281,7 @@ int rtlx_open(int index, int can_sleep)
 	}
 
 	if (rtlx == NULL) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if( (p = vpe_get_shared(tclimit)) == NULL) {
 		    if (can_sleep) {
@@ -255,6 +296,8 @@ int rtlx_open(int index, int can_sleep)
 			goto out_fail;
 		    }
 =======
+=======
+>>>>>>> v3.18
 		p = vpe_get_shared(aprp_cpu_index());
 		if (p == NULL) {
 			if (can_sleep) {
@@ -268,6 +311,9 @@ int rtlx_open(int index, int can_sleep)
 				ret = -ENOSYS;
 				goto out_fail;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -291,15 +337,21 @@ int rtlx_open(int index, int can_sleep)
 					goto out_fail;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				finish_wait(&channel_wqs[index].lx_queue, &wait);
 			} else {
 				pr_err(" *vpe_get_shared is NULL. "
 				       "Has an SP program been loaded?\n");
 =======
+=======
+>>>>>>> v3.18
 				finish_wait(&channel_wqs[index].lx_queue,
 					    &wait);
 			} else {
 				pr_err(" *vpe_get_shared is NULL. Has an SP program been loaded?\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ret = -ENOSYS;
 				goto out_fail;
@@ -308,9 +360,14 @@ int rtlx_open(int index, int can_sleep)
 
 		if ((unsigned int)*p < KSEG0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "vpe_get_shared returned an "
 			       "invalid pointer maybe an error code %d\n",
 			       (int)*p);
+=======
+			pr_warn("vpe_get_shared returned an invalid pointer maybe an error code %d\n",
+				(int)*p);
+>>>>>>> v3.18
 =======
 			pr_warn("vpe_get_shared returned an invalid pointer maybe an error code %d\n",
 				(int)*p);
@@ -320,7 +377,12 @@ int rtlx_open(int index, int can_sleep)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((ret = rtlx_init(*p)) < 0)
+=======
+		ret = rtlx_init(*p);
+		if (ret < 0)
+>>>>>>> v3.18
 =======
 		ret = rtlx_init(*p);
 		if (ret < 0)
@@ -368,16 +430,22 @@ unsigned int rtlx_read_poll(int index, int can_sleep)
 	if (chan->lx_read == chan->lx_write) {
 		if (can_sleep) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int ret = 0;
 
 			__wait_event_interruptible(channel_wqs[index].lx_queue,
 				(chan->lx_read != chan->lx_write) ||
 				sp_stopping, ret);
 =======
+=======
+>>>>>>> v3.18
 			int ret = __wait_event_interruptible(
 				channel_wqs[index].lx_queue,
 				(chan->lx_read != chan->lx_write) ||
 				sp_stopping);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (ret)
 				return ret;
@@ -464,7 +532,11 @@ ssize_t rtlx_write(int index, const void __user *buffer, size_t count)
 
 	if (rtlx == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return(-ENOSYS);
+=======
+		return -ENOSYS;
+>>>>>>> v3.18
 =======
 		return -ENOSYS;
 >>>>>>> v3.18
@@ -477,8 +549,13 @@ ssize_t rtlx_write(int index, const void __user *buffer, size_t count)
 
 	/* total number of bytes to copy */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	count = min(count, (size_t)write_spacefree(rt_read, rt->rt_write,
 							rt->buffer_size));
+=======
+	count = min_t(size_t, count, write_spacefree(rt_read, rt->rt_write,
+						     rt->buffer_size));
+>>>>>>> v3.18
 =======
 	count = min_t(size_t, count, write_spacefree(rt_read, rt->rt_write,
 						     rt->buffer_size));
@@ -493,9 +570,14 @@ ssize_t rtlx_write(int index, const void __user *buffer, size_t count)
 
 	/* if there's any left copy to the beginning of the buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (count - fl) {
 		failed = copy_from_user(rt->rt_buffer, buffer + fl, count - fl);
 	}
+=======
+	if (count - fl)
+		failed = copy_from_user(rt->rt_buffer, buffer + fl, count - fl);
+>>>>>>> v3.18
 =======
 	if (count - fl)
 		failed = copy_from_user(rt->rt_buffer, buffer + fl, count - fl);
@@ -510,6 +592,11 @@ out:
 	mutex_unlock(&channel_wqs[index].mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	_interrupt_sp();
+
+>>>>>>> v3.18
 =======
 	_interrupt_sp();
 
@@ -529,7 +616,11 @@ static int file_release(struct inode *inode, struct file *filp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int file_poll(struct file *file, poll_table * wait)
+=======
+static unsigned int file_poll(struct file *file, poll_table *wait)
+>>>>>>> v3.18
 =======
 static unsigned int file_poll(struct file *file, poll_table *wait)
 >>>>>>> v3.18
@@ -555,8 +646,13 @@ static unsigned int file_poll(struct file *file, poll_table *wait)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t file_read(struct file *file, char __user * buffer, size_t count,
 			 loff_t * ppos)
+=======
+static ssize_t file_read(struct file *file, char __user *buffer, size_t count,
+			 loff_t *ppos)
+>>>>>>> v3.18
 =======
 static ssize_t file_read(struct file *file, char __user *buffer, size_t count,
 			 loff_t *ppos)
@@ -566,9 +662,14 @@ static ssize_t file_read(struct file *file, char __user *buffer, size_t count,
 
 	/* data available? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rtlx_read_poll(minor, (file->f_flags & O_NONBLOCK) ? 0 : 1)) {
 		return 0;	// -EAGAIN makes cat whinge
 	}
+=======
+	if (!rtlx_read_poll(minor, (file->f_flags & O_NONBLOCK) ? 0 : 1))
+		return 0;	/* -EAGAIN makes 'cat' whine */
+>>>>>>> v3.18
 =======
 	if (!rtlx_read_poll(minor, (file->f_flags & O_NONBLOCK) ? 0 : 1))
 		return 0;	/* -EAGAIN makes 'cat' whine */
@@ -577,6 +678,7 @@ static ssize_t file_read(struct file *file, char __user *buffer, size_t count,
 	return rtlx_read(minor, buffer, count);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t file_write(struct file *file, const char __user * buffer,
 			  size_t count, loff_t * ppos)
@@ -588,6 +690,8 @@ static ssize_t file_write(struct file *file, const char __user * buffer,
 	if (!rtlx_write_poll(minor)) {
 		int ret = 0;
 =======
+=======
+>>>>>>> v3.18
 static ssize_t file_write(struct file *file, const char __user *buffer,
 			  size_t count, loff_t *ppos)
 {
@@ -596,15 +700,23 @@ static ssize_t file_write(struct file *file, const char __user *buffer,
 	/* any space left... */
 	if (!rtlx_write_poll(minor)) {
 		int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (file->f_flags & O_NONBLOCK)
 			return -EAGAIN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__wait_event_interruptible(channel_wqs[minor].rt_queue,
 					   rtlx_write_poll(minor),
 					   ret);
+=======
+		ret = __wait_event_interruptible(channel_wqs[minor].rt_queue,
+					   rtlx_write_poll(minor));
+>>>>>>> v3.18
 =======
 		ret = __wait_event_interruptible(channel_wqs[minor].rt_queue,
 					   rtlx_write_poll(minor));
@@ -616,6 +728,7 @@ static ssize_t file_write(struct file *file, const char __user *buffer,
 	return rtlx_write(minor, buffer, count);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct file_operations rtlx_fops = {
 	.owner =   THIS_MODULE,
@@ -712,6 +825,8 @@ static void __exit rtlx_module_exit(void)
 }
 
 =======
+=======
+>>>>>>> v3.18
 const struct file_operations rtlx_fops = {
 	.owner =   THIS_MODULE,
 	.open =    file_open,
@@ -722,6 +837,9 @@ const struct file_operations rtlx_fops = {
 	.llseek =  noop_llseek,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 module_init(rtlx_module_init);
 module_exit(rtlx_module_exit);

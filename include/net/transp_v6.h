@@ -4,10 +4,14 @@
 #include <net/checksum.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	IPv6 transport protocols
  */
 
+=======
+/* IPv6 transport protocols */
+>>>>>>> v3.18
 =======
 /* IPv6 transport protocols */
 >>>>>>> v3.18
@@ -20,6 +24,7 @@ extern struct proto pingv6_prot;
 struct flowi6;
 
 /* extension headers */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int				ipv6_exthdrs_init(void);
 extern void				ipv6_exthdrs_exit(void);
@@ -63,6 +68,8 @@ extern const struct inet_connection_sock_af_ops ipv4_specific;
 
 extern void inet6_destroy_sock(struct sock *sk);
 =======
+=======
+>>>>>>> v3.18
 int ipv6_exthdrs_init(void);
 void ipv6_exthdrs_exit(void);
 int ipv6_frag_init(void);
@@ -110,6 +117,9 @@ void inet6_destroy_sock(struct sock *sk);
 	"remote_address                        "		       \
 	"st tx_queue rx_queue tr tm->when retrnsmt"		       \
 	"   uid  timeout inode ref pointer drops\n"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

@@ -21,6 +21,10 @@
 #include <linux/spi/flash.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio.h>
 >>>>>>> v3.18
@@ -36,7 +40,11 @@
 const char bfin_board_name[] = "BlackStamp";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_RTC_DRV_BFIN) || defined(CONFIG_RTC_DRV_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_RTC_DRV_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_RTC_DRV_BFIN)
 >>>>>>> v3.18
@@ -50,7 +58,11 @@ static struct platform_device rtc_device = {
  *  Driver needs to know address, irq and flag pin.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SMC91X) || defined(CONFIG_SMC91X_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SMC91X)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SMC91X)
 >>>>>>> v3.18
@@ -87,7 +99,11 @@ static struct platform_device smc91x_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_M25P80) || defined(CONFIG_MTD_M25P80_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_M25P80)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_M25P80)
 >>>>>>> v3.18
@@ -122,7 +138,11 @@ static struct bfin5xx_spi_chip spi_flash_chip_info = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MMC_SPI) || defined(CONFIG_MMC_SPI_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MMC_SPI)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MMC_SPI)
 >>>>>>> v3.18
@@ -133,7 +153,11 @@ static struct bfin5xx_spi_chip mmc_spi_chip_info = {
 
 static struct spi_board_info bfin_spi_board_info[] __initdata = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_M25P80) || defined(CONFIG_MTD_M25P80_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_M25P80)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_M25P80)
 >>>>>>> v3.18
@@ -150,7 +174,11 @@ static struct spi_board_info bfin_spi_board_info[] __initdata = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MMC_SPI) || defined(CONFIG_MMC_SPI_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MMC_SPI)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MMC_SPI)
 >>>>>>> v3.18
@@ -165,7 +193,11 @@ static struct spi_board_info bfin_spi_board_info[] __initdata = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SPI_SPIDEV) || defined(CONFIG_SPI_SPIDEV_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SPI_SPIDEV)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SPI_SPIDEV)
 >>>>>>> v3.18
@@ -179,7 +211,11 @@ static struct spi_board_info bfin_spi_board_info[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SPI_BFIN5XX) || defined(CONFIG_SPI_BFIN5XX_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SPI_BFIN5XX)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SPI_BFIN5XX)
 >>>>>>> v3.18
@@ -221,7 +257,11 @@ static struct platform_device bfin_spi0_device = {
 #endif  /* spi master and devices */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SERIAL_BFIN) || defined(CONFIG_SERIAL_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SERIAL_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SERIAL_BFIN)
 >>>>>>> v3.18
@@ -276,7 +316,11 @@ static struct platform_device bfin_uart0_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_BFIN_SIR) || defined(CONFIG_BFIN_SIR_MODULE)
+=======
+#if IS_ENABLED(CONFIG_BFIN_SIR)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BFIN_SIR)
 >>>>>>> v3.18
@@ -309,7 +353,11 @@ static struct platform_device bfin_sir0_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SERIAL_BFIN_SPORT) || defined(CONFIG_SERIAL_BFIN_SPORT_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SERIAL_BFIN_SPORT)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SERIAL_BFIN_SPORT)
 >>>>>>> v3.18
@@ -384,7 +432,11 @@ static struct platform_device bfin_sport1_uart_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_KEYBOARD_GPIO) || defined(CONFIG_KEYBOARD_GPIO_MODULE)
+=======
+#if IS_ENABLED(CONFIG_KEYBOARD_GPIO)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_KEYBOARD_GPIO)
 >>>>>>> v3.18
@@ -411,7 +463,11 @@ static struct platform_device bfin_device_gpiokeys = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C_GPIO) || defined(CONFIG_I2C_GPIO_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C_GPIO)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C_GPIO)
 >>>>>>> v3.18
@@ -470,22 +526,29 @@ static struct platform_device *stamp_devices[] __initdata = {
 	&bfin_dpmc,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_RTC_DRV_BFIN) || defined(CONFIG_RTC_DRV_BFIN_MODULE)
 	&rtc_device,
 #endif
 
 #if defined(CONFIG_SMC91X) || defined(CONFIG_SMC91X_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_RTC_DRV_BFIN)
 	&rtc_device,
 #endif
 
 #if IS_ENABLED(CONFIG_SMC91X)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&smc91x_device,
 #endif
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_SPI_BFIN5XX) || defined(CONFIG_SPI_BFIN5XX_MODULE)
 	&bfin_spi0_device,
@@ -493,11 +556,16 @@ static struct platform_device *stamp_devices[] __initdata = {
 
 #if defined(CONFIG_SERIAL_BFIN) || defined(CONFIG_SERIAL_BFIN_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_SPI_BFIN5XX)
 	&bfin_spi0_device,
 #endif
 
 #if IS_ENABLED(CONFIG_SERIAL_BFIN)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SERIAL_BFIN_UART0
 	&bfin_uart0_device,
@@ -505,7 +573,11 @@ static struct platform_device *stamp_devices[] __initdata = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_BFIN_SIR) || defined(CONFIG_BFIN_SIR_MODULE)
+=======
+#if IS_ENABLED(CONFIG_BFIN_SIR)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BFIN_SIR)
 >>>>>>> v3.18
@@ -515,7 +587,11 @@ static struct platform_device *stamp_devices[] __initdata = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SERIAL_BFIN_SPORT) || defined(CONFIG_SERIAL_BFIN_SPORT_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SERIAL_BFIN_SPORT)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SERIAL_BFIN_SPORT)
 >>>>>>> v3.18
@@ -528,17 +604,23 @@ static struct platform_device *stamp_devices[] __initdata = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_KEYBOARD_GPIO) || defined(CONFIG_KEYBOARD_GPIO_MODULE)
 	&bfin_device_gpiokeys,
 #endif
 
 #if defined(CONFIG_I2C_GPIO) || defined(CONFIG_I2C_GPIO_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_KEYBOARD_GPIO)
 	&bfin_device_gpiokeys,
 #endif
 
 #if IS_ENABLED(CONFIG_I2C_GPIO)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&i2c_gpio_device,
 #endif
@@ -558,7 +640,11 @@ static int __init blackstamp_init(void)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SMC91X) || defined(CONFIG_SMC91X_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SMC91X)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SMC91X)
 >>>>>>> v3.18

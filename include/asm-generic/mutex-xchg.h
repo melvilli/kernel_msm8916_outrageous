@@ -40,6 +40,7 @@ __mutex_fastpath_lock(atomic_t *count, void (*fail_fn)(atomic_t *))
  *                                 from 1 to a 0 value
  *  @count: pointer of type atomic_t
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  @fail_fn: function to call if the original value was not 1
  *
  * Change the count from 1 to a value lower than 1, and call <fail_fn> if it
@@ -53,6 +54,8 @@ __mutex_fastpath_lock_retval(atomic_t *count, int (*fail_fn)(atomic_t *))
 		if (likely(atomic_xchg(count, -1) != 1))
 			return fail_fn(count);
 =======
+=======
+>>>>>>> v3.18
  *
  * Change the count from 1 to a value lower than 1. This function returns 0
  * if the fastpath succeeds, or -1 otherwise.
@@ -63,6 +66,9 @@ __mutex_fastpath_lock_retval(atomic_t *count)
 	if (unlikely(atomic_xchg(count, 0) != 1))
 		if (likely(atomic_xchg(count, -1) != 1))
 			return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

@@ -296,9 +296,15 @@ in the beginning of ->setattr unconditionally.
 be used instead.  It gets called whenever the inode is evicted, whether it has
 remaining links or not.  Caller does *not* evict the pagecache or inode-associated
 <<<<<<< HEAD
+<<<<<<< HEAD
 metadata buffers; getting rid of those is responsibility of method, as it had
 been for ->delete_inode(). Caller makes sure async writeback cannot be running
 for the inode while (or after) ->evict_inode() is called.
+=======
+metadata buffers; the method has to use truncate_inode_pages_final() to get rid
+of those. Caller makes sure async writeback cannot be running for the inode while
+(or after) ->evict_inode() is called.
+>>>>>>> v3.18
 =======
 metadata buffers; the method has to use truncate_inode_pages_final() to get rid
 of those. Caller makes sure async writeback cannot be running for the inode while
@@ -455,7 +461,10 @@ in your dentry operations instead.
 [mandatory]
 	vfs_readdir() is gone; switch to iterate_dir() instead
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 --
 [mandatory]
 	->readdir() is gone now; switch to ->iterate()
@@ -471,4 +480,7 @@ in your dentry operations instead.
 	of the in-tree instances did).  inode_hash_lock is still held,
 	of course, so they are still serialized wrt removal from inode hash,
 	as well as wrt set() callback of iget5_locked().
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

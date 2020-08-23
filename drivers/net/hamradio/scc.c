@@ -1516,7 +1516,11 @@ static int scc_net_alloc(const char *name, struct scc_channel *scc)
 	struct net_device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(0, name, scc_net_setup);
+=======
+	dev = alloc_netdev(0, name, NET_NAME_UNKNOWN, scc_net_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(0, name, NET_NAME_UNKNOWN, scc_net_setup);
 >>>>>>> v3.18
@@ -1739,7 +1743,11 @@ static int scc_net_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 			{
 				if (request_irq(hwcfg.irq, scc_isr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						IRQF_DISABLED, "AX.25 SCC",
+=======
+						0, "AX.25 SCC",
+>>>>>>> v3.18
 =======
 						0, "AX.25 SCC",
 >>>>>>> v3.18

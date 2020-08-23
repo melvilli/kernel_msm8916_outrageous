@@ -18,6 +18,10 @@
 #include <asm/smp_plat.h>
 #include <asm/tlbflush.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/hugetlb.h>
+>>>>>>> v3.18
 =======
 #include <linux/hugetlb.h>
 >>>>>>> v3.18
@@ -108,6 +112,12 @@ void flush_cache_page(struct vm_area_struct *vma, unsigned long user_addr, unsig
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FLAG_PA_IS_EXEC 1
+#define FLAG_PA_CORE_IN_MM 2
+
+>>>>>>> v3.18
 =======
 #define FLAG_PA_IS_EXEC 1
 #define FLAG_PA_CORE_IN_MM 2
@@ -119,6 +129,7 @@ static void flush_ptrace_access_other(void *args)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static
 void flush_ptrace_access(struct vm_area_struct *vma, struct page *page,
 			 unsigned long uaddr, void *kaddr, unsigned long len)
@@ -126,12 +137,17 @@ void flush_ptrace_access(struct vm_area_struct *vma, struct page *page,
 	if (cache_is_vivt()) {
 		if (cpumask_test_cpu(smp_processor_id(), mm_cpumask(vma->vm_mm))) {
 =======
+=======
+>>>>>>> v3.18
 static inline
 void __flush_ptrace_access(struct page *page, unsigned long uaddr, void *kaddr,
 			   unsigned long len, unsigned int flags)
 {
 	if (cache_is_vivt()) {
 		if (flags & FLAG_PA_CORE_IN_MM) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			unsigned long addr = (unsigned long)kaddr;
 			__cpuc_coherent_kern_range(addr, addr + len);
@@ -147,7 +163,11 @@ void __flush_ptrace_access(struct page *page, unsigned long uaddr, void *kaddr,
 
 	/* VIPT non-aliasing D-cache */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vma->vm_flags & VM_EXEC) {
+=======
+	if (flags & FLAG_PA_IS_EXEC) {
+>>>>>>> v3.18
 =======
 	if (flags & FLAG_PA_IS_EXEC) {
 >>>>>>> v3.18
@@ -163,7 +183,10 @@ void __flush_ptrace_access(struct page *page, unsigned long uaddr, void *kaddr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static
 void flush_ptrace_access(struct vm_area_struct *vma, struct page *page,
 			 unsigned long uaddr, void *kaddr, unsigned long len)
@@ -184,6 +207,9 @@ void flush_uprobe_xol_access(struct page *page, unsigned long uaddr,
 	__flush_ptrace_access(page, uaddr, kaddr, len, flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Copy user data from/to a page which is mapped into a different
@@ -215,6 +241,7 @@ void __flush_dcache_page(struct address_space *mapping, struct page *page)
 	 */
 	if (!PageHighMem(page)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__cpuc_flush_dcache_area(page_address(page), PAGE_SIZE);
 	} else {
 		void *addr;
@@ -229,6 +256,8 @@ void __flush_dcache_page(struct address_space *mapping, struct page *page)
 				__cpuc_flush_dcache_area(addr, PAGE_SIZE);
 				kunmap_high(page);
 =======
+=======
+>>>>>>> v3.18
 		size_t page_size = PAGE_SIZE << compound_order(page);
 		__cpuc_flush_dcache_area(page_address(page), page_size);
 	} else {
@@ -246,6 +275,9 @@ void __flush_dcache_page(struct address_space *mapping, struct page *page)
 					__cpuc_flush_dcache_area(addr, PAGE_SIZE);
 					kunmap_high(page + i);
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -354,7 +386,11 @@ void flush_dcache_page(struct page *page)
 
 	if (!cache_ops_need_broadcast() &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    mapping && !mapping_mapped(mapping))
+=======
+	    mapping && !page_mapped(page))
+>>>>>>> v3.18
 =======
 	    mapping && !page_mapped(page))
 >>>>>>> v3.18
@@ -443,7 +479,10 @@ void __flush_anon_page(struct vm_area_struct *vma, struct page *page, unsigned l
 	__cpuc_flush_dcache_area(page_address(page), PAGE_SIZE);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 #ifdef CONFIG_HAVE_RCU_TABLE_FREE
@@ -459,4 +498,7 @@ void pmdp_splitting_flush(struct vm_area_struct *vma, unsigned long address,
 }
 #endif /* CONFIG_HAVE_RCU_TABLE_FREE */
 #endif /* CONFIG_TRANSPARENT_HUGEPAGE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

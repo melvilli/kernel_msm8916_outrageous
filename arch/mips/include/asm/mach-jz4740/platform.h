@@ -22,6 +22,10 @@
 extern struct platform_device jz4740_usb_ohci_device;
 extern struct platform_device jz4740_udc_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct platform_device jz4740_udc_xceiv_device;
+>>>>>>> v3.18
 =======
 extern struct platform_device jz4740_udc_xceiv_device;
 >>>>>>> v3.18
@@ -37,6 +41,10 @@ extern struct platform_device jz4740_adc_device;
 extern struct platform_device jz4740_wdt_device;
 extern struct platform_device jz4740_pwm_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct platform_device jz4740_dma_device;
+>>>>>>> v3.18
 =======
 extern struct platform_device jz4740_dma_device;
 >>>>>>> v3.18

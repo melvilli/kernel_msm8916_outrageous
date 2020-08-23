@@ -33,6 +33,11 @@
 #include <linux/memblock.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_fdt.h>
+#include <linux/libfdt.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_fdt.h>
 #include <linux/libfdt.h>
@@ -122,7 +127,11 @@ static void __init move_device_tree(void)
 
 	start = __pa(initial_boot_params);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = be32_to_cpu(initial_boot_params->totalsize);
+=======
+	size = fdt_totalsize(initial_boot_params);
+>>>>>>> v3.18
 =======
 	size = fdt_totalsize(initial_boot_params);
 >>>>>>> v3.18
@@ -133,7 +142,11 @@ static void __init move_device_tree(void)
 		p = __va(memblock_alloc(size, PAGE_SIZE));
 		memcpy(p, initial_boot_params, size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		initial_boot_params = (struct boot_param_header *)p;
+=======
+		initial_boot_params = p;
+>>>>>>> v3.18
 =======
 		initial_boot_params = p;
 >>>>>>> v3.18
@@ -167,7 +180,10 @@ static struct ibm_pa_feature {
 	{0, 0, PPC_FEATURE_HAS_MMU,	0, 0, 0},
 	{0, 0, PPC_FEATURE_HAS_FPU,	0, 1, 0},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0, MMU_FTR_SLB, 0,		0, 2, 0},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{CPU_FTR_CTRL, 0, 0,		0, 3, 0},
@@ -175,7 +191,11 @@ static struct ibm_pa_feature {
 	{CPU_FTR_NODSISRALIGN, 0, 0,	1, 1, 1},
 	{0, MMU_FTR_CI_LARGE_PAGE, 0,	1, 2, 0},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{CPU_FTR_REAL_LE, 0, PPC_FEATURE_TRUE_LE, 5, 0, 0},
+=======
+	{CPU_FTR_REAL_LE, PPC_FEATURE_TRUE_LE, 5, 0, 0},
+>>>>>>> v3.18
 =======
 	{CPU_FTR_REAL_LE, PPC_FEATURE_TRUE_LE, 5, 0, 0},
 >>>>>>> v3.18
@@ -235,24 +255,34 @@ static void __init check_cpu_pa_features(unsigned long node)
 static void __init check_cpu_slb_size(unsigned long node)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 *slb_size_ptr;
 
 	slb_size_ptr = of_get_flat_dt_prop(node, "slb-size", NULL);
 	if (slb_size_ptr != NULL) {
 		mmu_slb_size = *slb_size_ptr;
 =======
+=======
+>>>>>>> v3.18
 	const __be32 *slb_size_ptr;
 
 	slb_size_ptr = of_get_flat_dt_prop(node, "slb-size", NULL);
 	if (slb_size_ptr != NULL) {
 		mmu_slb_size = be32_to_cpup(slb_size_ptr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
 	slb_size_ptr = of_get_flat_dt_prop(node, "ibm,slb-size", NULL);
 	if (slb_size_ptr != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mmu_slb_size = *slb_size_ptr;
+=======
+		mmu_slb_size = be32_to_cpup(slb_size_ptr);
+>>>>>>> v3.18
 =======
 		mmu_slb_size = be32_to_cpup(slb_size_ptr);
 >>>>>>> v3.18
@@ -311,17 +341,23 @@ static void __init check_cpu_feature_properties(unsigned long node)
 	unsigned long i;
 	struct feature_property *fp = feature_properties;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *prop;
 
 	for (i = 0; i < ARRAY_SIZE(feature_properties); ++i, ++fp) {
 		prop = of_get_flat_dt_prop(node, fp->name, NULL);
 		if (prop && *prop >= fp->min_value) {
 =======
+=======
+>>>>>>> v3.18
 	const __be32 *prop;
 
 	for (i = 0; i < ARRAY_SIZE(feature_properties); ++i, ++fp) {
 		prop = of_get_flat_dt_prop(node, fp->name, NULL);
 		if (prop && be32_to_cpup(prop) >= fp->min_value) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			cur_cpu_spec->cpu_features |= fp->cpu_feature;
 			cur_cpu_spec->cpu_user_features |= fp->cpu_user_ftr;
@@ -334,9 +370,15 @@ static int __init early_init_dt_scan_cpus(unsigned long node,
 					  void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *type = of_get_flat_dt_prop(node, "device_type", NULL);
 	const u32 *prop;
 	const u32 *intserv;
+=======
+	const char *type = of_get_flat_dt_prop(node, "device_type", NULL);
+	const __be32 *prop;
+	const __be32 *intserv;
+>>>>>>> v3.18
 =======
 	const char *type = of_get_flat_dt_prop(node, "device_type", NULL);
 	const __be32 *prop;
@@ -354,6 +396,7 @@ static int __init early_init_dt_scan_cpus(unsigned long node,
 	/* Get physical cpuid */
 	intserv = of_get_flat_dt_prop(node, "ibm,ppc-interrupt-server#s", &len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (intserv) {
 		nthreads = len / sizeof(int);
 	} else {
@@ -361,10 +404,15 @@ static int __init early_init_dt_scan_cpus(unsigned long node,
 		nthreads = 1;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!intserv)
 		intserv = of_get_flat_dt_prop(node, "reg", &len);
 
 	nthreads = len / sizeof(int);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -377,8 +425,14 @@ static int __init early_init_dt_scan_cpus(unsigned long node,
 		 * booted proc.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (initial_boot_params->version >= 2) {
 			if (intserv[i] == initial_boot_params->boot_cpuid_phys) {
+=======
+		if (fdt_version(initial_boot_params) >= 2) {
+			if (be32_to_cpu(intserv[i]) ==
+			    fdt_boot_cpuid_phys(initial_boot_params)) {
+>>>>>>> v3.18
 =======
 		if (fdt_version(initial_boot_params) >= 2) {
 			if (be32_to_cpu(intserv[i]) ==
@@ -403,6 +457,7 @@ static int __init early_init_dt_scan_cpus(unsigned long node,
 #endif
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (found >= 0) {
 		DBG("boot cpu: logical %d physical %d\n", found,
@@ -431,6 +486,8 @@ static int __init early_init_dt_scan_cpus(unsigned long node,
 		identical_pvr_fixup(node);
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* Not the boot CPU */
 	if (found < 0)
 		return 0;
@@ -459,6 +516,9 @@ static int __init early_init_dt_scan_cpus(unsigned long node,
 		identify_cpu(0, be32_to_cpup(prop));
 
 	identical_pvr_fixup(node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	check_cpu_feature_properties(node);
@@ -466,7 +526,11 @@ static int __init early_init_dt_scan_cpus(unsigned long node,
 	check_cpu_slb_size(node);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_PSERIES
+=======
+#ifdef CONFIG_PPC64
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PPC64
 >>>>>>> v3.18
@@ -475,6 +539,7 @@ static int __init early_init_dt_scan_cpus(unsigned long node,
 	else
 		cur_cpu_spec->cpu_features &= ~CPU_FTR_SMT;
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	return 0;
@@ -485,6 +550,8 @@ int __init early_init_dt_scan_chosen_ppc(unsigned long node, const char *uname,
 {
 	unsigned long *lprop;
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -493,6 +560,9 @@ static int __init early_init_dt_scan_chosen_ppc(unsigned long node,
 						int depth, void *data)
 {
 	const unsigned long *lprop; /* All these set by kernel, so no need to convert endian */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Use common scan routine to determine if this is the chosen node */
@@ -560,7 +630,11 @@ static int __init early_init_dt_scan_drconf_memory(unsigned long node)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n = *dm++;	/* number of entries */
+=======
+	n = of_read_number(dm++, 1);	/* number of entries */
+>>>>>>> v3.18
 =======
 	n = of_read_number(dm++, 1);	/* number of entries */
 >>>>>>> v3.18
@@ -576,7 +650,11 @@ static int __init early_init_dt_scan_drconf_memory(unsigned long node)
 	for (; n != 0; --n) {
 		base = dt_mem_next_cell(dt_root_addr_cells, &dm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		flags = dm[3];
+=======
+		flags = of_read_number(&dm[3], 1);
+>>>>>>> v3.18
 =======
 		flags = of_read_number(&dm[3], 1);
 >>>>>>> v3.18
@@ -635,7 +713,10 @@ static int __init early_init_dt_scan_memory_ppc(unsigned long node,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * For a relocatable kernel, we need to get the memstart_addr first,
  * then use it to calculate the virtual kernel start address. This has
@@ -650,6 +731,9 @@ static int add_mem_to_memblock = 1;
 #define add_mem_to_memblock 1
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init early_init_dt_add_memory_arch(u64 base, u64 size)
 {
@@ -671,6 +755,7 @@ void __init early_init_dt_add_memory_arch(u64 base, u64 size)
 	}
 
 	/* Add the chunk to the MEMBLOCK list */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memblock_add(base, size);
 }
@@ -694,6 +779,8 @@ static void __init early_reserve_mem(void)
 	reserve_map = (u64 *)(((unsigned long)initial_boot_params) +
 					initial_boot_params->off_mem_rsvmap);
 =======
+=======
+>>>>>>> v3.18
 	if (add_mem_to_memblock)
 		memblock_add(base, size);
 }
@@ -736,6 +823,9 @@ static void __init early_reserve_mem(void)
 
 	reserve_map = (__be64 *)(((unsigned long)initial_boot_params) +
 			fdt_off_mem_rsvmap(initial_boot_params));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Look for the new "reserved-regions" property in the DT */
@@ -743,18 +833,24 @@ static void __init early_reserve_mem(void)
 
 #ifdef CONFIG_BLK_DEV_INITRD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* then reserve the initrd, if any */
 	if (initrd_start && (initrd_end > initrd_start))
 		memblock_reserve(_ALIGN_DOWN(__pa(initrd_start), PAGE_SIZE),
 			_ALIGN_UP(initrd_end, PAGE_SIZE) -
 			_ALIGN_DOWN(initrd_start, PAGE_SIZE));
 =======
+=======
+>>>>>>> v3.18
 	/* Then reserve the initrd, if any */
 	if (initrd_start && (initrd_end > initrd_start)) {
 		memblock_reserve(_ALIGN_DOWN(__pa(initrd_start), PAGE_SIZE),
 			_ALIGN_UP(initrd_end, PAGE_SIZE) -
 			_ALIGN_DOWN(initrd_start, PAGE_SIZE));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_BLK_DEV_INITRD */
 
@@ -764,6 +860,7 @@ static void __init early_reserve_mem(void)
 	 * image that setup the mem_rsvmap as pairs of 32-bit values
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*reserve_map > 0xffffffffull) {
 		u32 base_32, size_32;
 		u32 *reserve_map_32 = (u32 *)reserve_map;
@@ -772,6 +869,8 @@ static void __init early_reserve_mem(void)
 			base_32 = *(reserve_map_32++);
 			size_32 = *(reserve_map_32++);
 =======
+=======
+>>>>>>> v3.18
 	if (be64_to_cpup(reserve_map) > 0xffffffffull) {
 		u32 base_32, size_32;
 		__be32 *reserve_map_32 = (__be32 *)reserve_map;
@@ -781,6 +880,9 @@ static void __init early_reserve_mem(void)
 		while (1) {
 			base_32 = be32_to_cpup(reserve_map_32++);
 			size_32 = be32_to_cpup(reserve_map_32++);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (size_32 == 0)
 				break;
@@ -799,11 +901,17 @@ void __init early_init_devtree(void *params)
 	DBG(" -> early_init_devtree(%p)\n", params);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Too early to BUG_ON(), do it by hand */
 	if (!early_init_dt_verify(params))
 		panic("BUG: Failed verifying flat device tree, bad version?");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Setup flat device-tree pointer */
 	initial_boot_params = params;
@@ -824,6 +932,7 @@ void __init early_init_devtree(void *params)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Pre-initialize the cmd_line with the content of boot_commmand_line,
 	 * which will be empty except when the content of the variable has
 	 * been overriden by a bootloading mechanism. This happens typically
@@ -833,12 +942,18 @@ void __init early_init_devtree(void *params)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* Retrieve various informations from the /chosen node of the
 	 * device-tree, including the platform type, initrd location and
 	 * size, TCE reserve, and more ...
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_scan_flat_dt(early_init_dt_scan_chosen_ppc, cmd_line);
+=======
+	of_scan_flat_dt(early_init_dt_scan_chosen_ppc, boot_command_line);
+>>>>>>> v3.18
 =======
 	of_scan_flat_dt(early_init_dt_scan_chosen_ppc, boot_command_line);
 >>>>>>> v3.18
@@ -848,8 +963,11 @@ void __init early_init_devtree(void *params)
 	of_scan_flat_dt(early_init_dt_scan_memory_ppc, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Save command line for /proc/cmdline and then parse parameters */
 	strlcpy(boot_command_line, cmd_line, COMMAND_LINE_SIZE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	parse_early_param();
@@ -899,11 +1017,17 @@ void __init early_init_devtree(void *params)
 	 */
 	of_scan_flat_dt(early_init_dt_scan_cpus, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (boot_cpuid < 0) {
 		printk("Failed to indentify boot CPU !\n");
 		BUG();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if defined(CONFIG_SMP) && defined(CONFIG_PPC64)
@@ -914,10 +1038,13 @@ void __init early_init_devtree(void *params)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DBG(" <- early_init_devtree()\n");
 }
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_POWERNV
 	/* Scan and build the list of machine check recoverable ranges */
 	of_scan_flat_dt(early_init_dt_scan_recoverable_ranges, NULL);
@@ -950,6 +1077,9 @@ void __init early_get_first_memblock_info(void *params, phys_addr_t *size)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*******
  *
@@ -963,6 +1093,7 @@ void __init early_get_first_memblock_info(void *params, phys_addr_t *size)
  *******/
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  *	of_find_next_cache_node - Find a node's subsidiary cache
  *	@np:	node of type "cpu" or "cache"
@@ -1084,6 +1215,8 @@ static int __init export_flat_device_tree(void)
 __initcall(export_flat_device_tree);
 #endif
 =======
+=======
+>>>>>>> v3.18
  * of_get_ibm_chip_id - Returns the IBM "chip-id" of a device
  * @np: device node of the device
  *
@@ -1133,4 +1266,7 @@ bool arch_match_cpu_phys_id(int cpu, u64 phys_id)
 {
 	return (int)phys_id == get_hard_smp_processor_id(cpu);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

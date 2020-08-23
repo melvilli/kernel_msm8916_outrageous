@@ -34,6 +34,7 @@
 
 #include "int.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "mib.h"
 #include "tmacro.h"
 #include "mac.h"
@@ -201,6 +202,8 @@ void INTnsProcessData(struct vnt_private *pDevice)
 	pStats->tx_errors = pDevice->scStatistic.dwTsrErr;
 	pStats->tx_dropped = pDevice->scStatistic.dwTsrErr;
 =======
+=======
+>>>>>>> v3.18
 #include "mac.h"
 #include "power.h"
 #include "usbpipe.h"
@@ -331,5 +334,8 @@ void vnt_int_process_data(struct vnt_private *priv)
 	}
 
 	priv->int_buf.in_use = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

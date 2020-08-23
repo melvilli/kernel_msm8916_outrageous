@@ -22,13 +22,17 @@
 #include <linux/of_platform.h>
 #include <linux/regulator/machine.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/pinctrl-nomadik.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/random.h>
 
 #include <asm/pmu.h>
 #include <asm/mach/map.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <asm/mach/arch.h>
 
@@ -43,6 +47,8 @@
 #include "id.h"
 
 =======
+=======
+>>>>>>> v3.18
 
 #include "setup.h"
 
@@ -61,6 +67,9 @@ static struct prcmu_pdata db8500_prcmu_pdata = {
 	.legacy_offset	= DB8500_PRCMU_LEGACY_OFFSET,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* minimum static i/o mapping required to boot U8500 platforms */
 static struct map_desc u8500_uart_io_desc[] __initdata = {
@@ -102,7 +111,11 @@ static struct map_desc u9540_io_desc[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init u8500_map_io(void)
+=======
+static void __init u8500_map_io(void)
+>>>>>>> v3.18
 =======
 static void __init u8500_map_io(void)
 >>>>>>> v3.18
@@ -123,6 +136,7 @@ static void __init u8500_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct resource db8500_pmu_resources[] = {
 	[0] = {
 		.start		= IRQ_DB8500_PMU,
@@ -131,6 +145,8 @@ static struct resource db8500_pmu_resources[] = {
 	},
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -153,6 +169,7 @@ static irqreturn_t db8500_pmu_handler(int irq, void *dev, irq_handler_t handler)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct arm_pmu_platdata db8500_pmu_platdata = {
 	.handle_irq		= db8500_pmu_handler,
@@ -217,10 +234,15 @@ static int usb_db8500_tx_dma_cfg[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 static struct arm_pmu_platdata db8500_pmu_platdata = {
 	.handle_irq		= db8500_pmu_handler,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char *db8500_read_soc_id(void)
 {
@@ -241,6 +263,7 @@ static struct device * __init db8500_soc_device_init(void)
 	return ux500_soc_device_init(soc_id);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * This function is called from the board init
@@ -288,10 +311,13 @@ static struct device * __init u8500_of_init_devices(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct of_dev_auxdata u8500_auxdata_lookup[] __initdata = {
 	/* Requires call-back bindings. */
 	OF_DEV_AUXDATA("arm,cortex-a9-pmu", 0, "arm-pmu", &db8500_pmu_platdata),
 	/* Requires DMA bindings. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	OF_DEV_AUXDATA("arm,pl011", 0x80120000, "uart0", &uart0_plat),
 	OF_DEV_AUXDATA("arm,pl011", 0x80121000, "uart1", &uart1_plat),
@@ -332,6 +358,8 @@ static struct of_dev_auxdata u8500_auxdata_lookup[] __initdata = {
 	OF_DEV_AUXDATA("stericsson,ux500-msp-i2s", 0x80125000,
 		"ux500-msp-i2s.3", &msp3_platform_data),
 =======
+=======
+>>>>>>> v3.18
 	OF_DEV_AUXDATA("stericsson,ux500-msp-i2s", 0x80123000,
 		       "ux500-msp-i2s.0", &msp0_platform_data),
 	OF_DEV_AUXDATA("stericsson,ux500-msp-i2s", 0x80124000,
@@ -353,6 +381,9 @@ static struct of_dev_auxdata u8500_auxdata_lookup[] __initdata = {
 static struct of_dev_auxdata u8540_auxdata_lookup[] __initdata = {
 	OF_DEV_AUXDATA("stericsson,db8500-prcmu", 0x80157000, "db8500-prcmu",
 			&db8500_prcmu_pdata),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{},
 };
@@ -367,6 +398,7 @@ static const struct of_device_id u8500_local_bus_nodes[] = {
 
 static void __init u8500_init_machine(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device *parent = NULL;
 
@@ -387,6 +419,8 @@ static void __init u8500_init_machine(void)
 	/* automatically probe child nodes of db8500 device */
 	of_platform_populate(NULL, u8500_local_bus_nodes, u8500_auxdata_lookup, parent);
 =======
+=======
+>>>>>>> v3.18
 	struct device *parent = db8500_soc_device_init();
 
 	/* automatically probe child nodes of dbx5x0 devices */
@@ -396,6 +430,9 @@ static void __init u8500_init_machine(void)
 	else
 		of_platform_populate(NULL, u8500_local_bus_nodes,
 				     u8500_auxdata_lookup, parent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -417,9 +454,14 @@ DT_MACHINE_START(U8500_DT, "ST-Ericsson Ux5x0 platform (Device Tree Support)")
 	.init_late	= NULL,
 	.dt_compat      = stericsson_dt_platform_compat,
 <<<<<<< HEAD
+<<<<<<< HEAD
 MACHINE_END
 
 #endif
+=======
+	.restart        = ux500_restart,
+MACHINE_END
+>>>>>>> v3.18
 =======
 	.restart        = ux500_restart,
 MACHINE_END

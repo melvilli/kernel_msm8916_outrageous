@@ -215,6 +215,7 @@ csum_partial:
 				
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
 unsigned int csum_partial_copy_generic (const char *src, char *dst,
@@ -454,5 +455,7 @@ DST(	movb %dl, (%edi)         )
 #undef ROUND1		
 		
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

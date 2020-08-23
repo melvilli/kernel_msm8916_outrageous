@@ -20,6 +20,10 @@ obj-$(CONFIG_VIDEO_SAA7127) += saa7127.o
 obj-$(CONFIG_VIDEO_SAA7185) += saa7185.o
 obj-$(CONFIG_VIDEO_SAA7191) += saa7191.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_VIDEO_SAA6752HS) += saa6752hs.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_VIDEO_SAA6752HS) += saa6752hs.o
 >>>>>>> v3.18
@@ -31,7 +35,13 @@ obj-$(CONFIG_VIDEO_ADV7343) += adv7343.o
 obj-$(CONFIG_VIDEO_ADV7393) += adv7393.o
 obj-$(CONFIG_VIDEO_ADV7604) += adv7604.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_VIDEO_AD9389B) += ad9389b.o
+=======
+obj-$(CONFIG_VIDEO_ADV7842) += adv7842.o
+obj-$(CONFIG_VIDEO_AD9389B) += ad9389b.o
+obj-$(CONFIG_VIDEO_ADV7511) += adv7511.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_VIDEO_ADV7842) += adv7842.o
 obj-$(CONFIG_VIDEO_AD9389B) += ad9389b.o
@@ -45,6 +55,10 @@ obj-$(CONFIG_VIDEO_BT866) += bt866.o
 obj-$(CONFIG_VIDEO_KS0127) += ks0127.o
 obj-$(CONFIG_VIDEO_THS7303) += ths7303.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_VIDEO_THS8200) += ths8200.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_VIDEO_THS8200) += ths8200.o
 >>>>>>> v3.18
@@ -69,7 +83,10 @@ obj-$(CONFIG_VIDEO_OV7640) += ov7640.o
 obj-$(CONFIG_VIDEO_OV7670) += ov7670.o
 obj-$(CONFIG_VIDEO_OV9650) += ov9650.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_VIDEO_TCM825X) += tcm825x.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_VIDEO_MT9M032) += mt9m032.o
@@ -81,6 +98,7 @@ obj-$(CONFIG_VIDEO_SR030PC30)	+= sr030pc30.o
 obj-$(CONFIG_VIDEO_NOON010PC30)	+= noon010pc30.o
 obj-$(CONFIG_VIDEO_S5K6AA)	+= s5k6aa.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_VIDEO_S5K4ECGX)	+= s5k4ecgx.o
 obj-$(CONFIG_VIDEO_S5C73M3)	+= s5c73m3/
 obj-$(CONFIG_VIDEO_ADP1653)	+= adp1653.o
@@ -89,6 +107,8 @@ obj-$(CONFIG_VIDEO_SMIAPP_PLL)	+= smiapp-pll.o
 obj-$(CONFIG_VIDEO_AK881X)		+= ak881x.o
 obj-$(CONFIG_VIDEO_IR_I2C)  += ir-kbd-i2c.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_VIDEO_S5K6A3)	+= s5k6a3.o
 obj-$(CONFIG_VIDEO_S5K4ECGX)	+= s5k4ecgx.o
 obj-$(CONFIG_VIDEO_S5K5BAF)	+= s5k5baf.o
@@ -101,4 +121,7 @@ obj-$(CONFIG_VIDEO_SMIAPP_PLL)	+= smiapp-pll.o
 obj-$(CONFIG_VIDEO_AK881X)		+= ak881x.o
 obj-$(CONFIG_VIDEO_IR_I2C)  += ir-kbd-i2c.o
 obj-$(CONFIG_VIDEO_ML86V7667)	+= ml86v7667.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

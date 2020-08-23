@@ -7,7 +7,12 @@
 
 ENTRY(tegra_secondary_startup)
 <<<<<<< HEAD
+<<<<<<< HEAD
         bl      v7_invalidate_l1
+=======
+        check_cpu_part_num 0xc09, r8, r9
+        bleq    v7_invalidate_l1
+>>>>>>> v3.18
 =======
         check_cpu_part_num 0xc09, r8, r9
         bleq    v7_invalidate_l1

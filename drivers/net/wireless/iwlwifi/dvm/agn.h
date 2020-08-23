@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -85,6 +93,7 @@
 
 /* device operations */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct iwl_lib_ops iwl1000_lib;
 extern struct iwl_lib_ops iwl2000_lib;
 extern struct iwl_lib_ops iwl2030_lib;
@@ -93,6 +102,8 @@ extern struct iwl_lib_ops iwl5150_lib;
 extern struct iwl_lib_ops iwl6000_lib;
 extern struct iwl_lib_ops iwl6030_lib;
 =======
+=======
+>>>>>>> v3.18
 extern const struct iwl_dvm_cfg iwl_dvm_1000_cfg;
 extern const struct iwl_dvm_cfg iwl_dvm_2000_cfg;
 extern const struct iwl_dvm_cfg iwl_dvm_105_cfg;
@@ -103,6 +114,9 @@ extern const struct iwl_dvm_cfg iwl_dvm_6000_cfg;
 extern const struct iwl_dvm_cfg iwl_dvm_6005_cfg;
 extern const struct iwl_dvm_cfg iwl_dvm_6050_cfg;
 extern const struct iwl_dvm_cfg iwl_dvm_6030_cfg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -125,16 +139,22 @@ extern const struct iwl_dvm_cfg iwl_dvm_6030_cfg;
 #define STATUS_SCAN_COMPLETE	12
 #define STATUS_POWER_PMI	13
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define STATUS_SCAN_ROC_EXPIRED 14
 
 struct iwl_ucode_capabilities;
 
 extern struct ieee80211_ops iwlagn_hw_ops;
 =======
+=======
+>>>>>>> v3.18
 
 struct iwl_ucode_capabilities;
 
 extern const struct ieee80211_ops iwlagn_hw_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void iwl_set_calib_hdr(struct iwl_calib_hdr *hdr, u8 cmd)
@@ -276,7 +296,10 @@ u8 iwl_toggle_tx_ant(struct iwl_priv *priv, u8 ant_idx, u8 valid);
 /* scan */
 void iwlagn_post_scan(struct iwl_priv *priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void iwlagn_disable_roc(struct iwl_priv *priv);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int iwl_force_rf_reset(struct iwl_priv *priv, bool external);
@@ -294,10 +317,13 @@ int __must_check iwl_scan_initiate(struct iwl_priv *priv,
 				   enum ieee80211_band band);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void iwl_scan_roc_expired(struct iwl_priv *priv);
 void iwl_scan_offchannel_skb(struct iwl_priv *priv);
 void iwl_scan_offchannel_skb_status(struct iwl_priv *priv);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* For faster active scanning, scan will move to the next channel if fewer than
@@ -326,8 +352,13 @@ void iwlagn_bt_adjust_rssi_monitor(struct iwl_priv *priv, bool rssi_ena);
 static inline bool iwl_advanced_bt_coexist(struct iwl_priv *priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return priv->cfg->bt_params &&
 	       priv->cfg->bt_params->advanced_bt_coexist;
+=======
+	return priv->lib->bt_params &&
+	       priv->lib->bt_params->advanced_bt_coexist;
+>>>>>>> v3.18
 =======
 	return priv->lib->bt_params &&
 	       priv->lib->bt_params->advanced_bt_coexist;
@@ -440,6 +471,7 @@ static inline __le32 iwl_hw_set_rate_n_flags(u8 rate, u32 flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int iwl_alive_start(struct iwl_priv *priv);
 
 /* testmode support */
@@ -478,6 +510,9 @@ static inline void iwl_testmode_free(struct iwl_priv *priv)
 {
 }
 #endif
+=======
+int iwl_alive_start(struct iwl_priv *priv);
+>>>>>>> v3.18
 =======
 int iwl_alive_start(struct iwl_priv *priv);
 >>>>>>> v3.18
@@ -564,7 +599,11 @@ do {									\
 #endif				/* CONFIG_IWLWIFI_DEBUG */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const char *iwl_dvm_cmd_strings[REPLY_MAX];
+=======
+extern const char *const iwl_dvm_cmd_strings[REPLY_MAX];
+>>>>>>> v3.18
 =======
 extern const char *const iwl_dvm_cmd_strings[REPLY_MAX];
 >>>>>>> v3.18

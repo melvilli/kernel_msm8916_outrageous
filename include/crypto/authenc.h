@@ -24,9 +24,12 @@ struct crypto_authenc_key_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* _CRYPTO_AUTHENC_H */
 
 =======
+=======
+>>>>>>> v3.18
 struct crypto_authenc_keys {
 	const u8 *authkey;
 	const u8 *enckey;
@@ -39,4 +42,7 @@ int crypto_authenc_extractkeys(struct crypto_authenc_keys *keys, const u8 *key,
 			       unsigned int keylen);
 
 #endif	/* _CRYPTO_AUTHENC_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

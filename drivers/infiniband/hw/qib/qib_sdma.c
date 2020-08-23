@@ -424,14 +424,20 @@ void qib_sdma_intr(struct qib_pportdata *ppd)
 void __qib_sdma_intr(struct qib_pportdata *ppd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__qib_sdma_running(ppd))
 		qib_sdma_make_progress(ppd);
 =======
+=======
+>>>>>>> v3.18
 	if (__qib_sdma_running(ppd)) {
 		qib_sdma_make_progress(ppd);
 		if (!list_empty(&ppd->sdma_userpending))
 			qib_user_sdma_send_desc(ppd, &ppd->sdma_userpending);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -461,6 +467,12 @@ int qib_setup_sdma(struct qib_pportdata *ppd)
 	ppd->sdma_descq_added = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ppd->sdma_intrequest = 0;
+	INIT_LIST_HEAD(&ppd->sdma_userpending);
+
+>>>>>>> v3.18
 =======
 	ppd->sdma_intrequest = 0;
 	INIT_LIST_HEAD(&ppd->sdma_userpending);
@@ -723,7 +735,10 @@ unlock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * sdma_lock should be acquired before calling this routine
  */
@@ -780,6 +795,9 @@ void dump_sdma_state(struct qib_pportdata *ppd)
 			txp->start_idx, txp->next_descq_idx);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void qib_sdma_process_event(struct qib_pportdata *ppd,
 	enum qib_sdma_events event)

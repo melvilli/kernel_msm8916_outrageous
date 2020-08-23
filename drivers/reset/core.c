@@ -44,7 +44,11 @@ struct reset_control {
  * with 1:1 mapping, where reset lines can be indexed by number without gaps.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int of_reset_simple_xlate(struct reset_controller_dev *rcdev,
+=======
+static int of_reset_simple_xlate(struct reset_controller_dev *rcdev,
+>>>>>>> v3.18
 =======
 static int of_reset_simple_xlate(struct reset_controller_dev *rcdev,
 >>>>>>> v3.18
@@ -59,7 +63,10 @@ static int of_reset_simple_xlate(struct reset_controller_dev *rcdev,
 	return reset_spec->args[0];
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(of_reset_simple_xlate);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -135,8 +142,13 @@ EXPORT_SYMBOL_GPL(reset_control_deassert);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * reset_control_get - Lookup and obtain a reference to a reset controller.
  * @dev: device to be reset by the controller
+=======
+ * of_reset_control_get - Lookup and obtain a reference to a reset controller.
+ * @node: device to be reset by the controller
+>>>>>>> v3.18
 =======
  * of_reset_control_get - Lookup and obtain a reference to a reset controller.
  * @node: device to be reset by the controller
@@ -148,7 +160,12 @@ EXPORT_SYMBOL_GPL(reset_control_deassert);
  * Use of id names is optional.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct reset_control *reset_control_get(struct device *dev, const char *id)
+=======
+struct reset_control *of_reset_control_get(struct device_node *node,
+					   const char *id)
+>>>>>>> v3.18
 =======
 struct reset_control *of_reset_control_get(struct device_node *node,
 					   const char *id)
@@ -162,6 +179,7 @@ struct reset_control *of_reset_control_get(struct device_node *node,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev)
 		return ERR_PTR(-EINVAL);
 
@@ -170,10 +188,15 @@ struct reset_control *of_reset_control_get(struct device_node *node,
 						 "reset-names", id);
 	ret = of_parse_phandle_with_args(dev->of_node, "resets", "#reset-cells",
 =======
+=======
+>>>>>>> v3.18
 	if (id)
 		index = of_property_match_string(node,
 						 "reset-names", id);
 	ret = of_parse_phandle_with_args(node, "resets", "#reset-cells",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 index, &args);
 	if (ret)
@@ -192,7 +215,11 @@ struct reset_control *of_reset_control_get(struct device_node *node,
 	if (!rcdev) {
 		mutex_unlock(&reset_controller_list_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ERR_PTR(-ENODEV);
+=======
+		return ERR_PTR(-EPROBE_DEFER);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(-EPROBE_DEFER);
 >>>>>>> v3.18
@@ -214,7 +241,10 @@ struct reset_control *of_reset_control_get(struct device_node *node,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rstc->dev = dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	rstc->rcdev = rcdev;
@@ -223,7 +253,10 @@ struct reset_control *of_reset_control_get(struct device_node *node,
 	return rstc;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(of_reset_control_get);
 
 /**
@@ -248,6 +281,9 @@ struct reset_control *reset_control_get(struct device *dev, const char *id)
 
 	return rstc;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(reset_control_get);
 
@@ -302,6 +338,7 @@ struct reset_control *devm_reset_control_get(struct device *dev, const char *id)
 EXPORT_SYMBOL_GPL(devm_reset_control_get);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int devm_reset_control_match(struct device *dev, void *res, void *data)
 {
 	struct reset_control **rstc = res;
@@ -329,6 +366,8 @@ void devm_reset_control_put(struct reset_control *rstc)
 }
 EXPORT_SYMBOL_GPL(devm_reset_control_put);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**

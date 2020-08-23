@@ -195,6 +195,7 @@ struct gpio_port_t {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct gpio_port_s {
 	unsigned short fer;
 	unsigned short data;
@@ -203,6 +204,8 @@ struct gpio_port_s {
 	unsigned int mux;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

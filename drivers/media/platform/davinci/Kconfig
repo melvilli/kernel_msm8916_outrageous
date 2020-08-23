@@ -1,7 +1,13 @@
 config VIDEO_DAVINCI_VPIF_DISPLAY
 	tristate "TI DaVinci VPIF V4L2-Display driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIDEO_DEV && ARCH_DAVINCI
+=======
+	depends on VIDEO_DEV
+	depends on ARCH_DAVINCI || COMPILE_TEST
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on VIDEO_DEV
 	depends on ARCH_DAVINCI || COMPILE_TEST
@@ -21,7 +27,13 @@ config VIDEO_DAVINCI_VPIF_DISPLAY
 config VIDEO_DAVINCI_VPIF_CAPTURE
 	tristate "TI DaVinci VPIF video capture driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIDEO_DEV && ARCH_DAVINCI
+=======
+	depends on VIDEO_DEV
+	depends on ARCH_DAVINCI || COMPILE_TEST
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on VIDEO_DEV
 	depends on ARCH_DAVINCI || COMPILE_TEST
@@ -39,7 +51,13 @@ config VIDEO_DAVINCI_VPIF_CAPTURE
 config VIDEO_DM6446_CCDC
 	tristate "TI DM6446 CCDC video capture driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIDEO_V4L2 && (ARCH_DAVINCI || ARCH_OMAP3)
+=======
+	depends on VIDEO_V4L2
+	depends on ARCH_DAVINCI || COMPILE_TEST
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on VIDEO_V4L2
 	depends on ARCH_DAVINCI || COMPILE_TEST
@@ -59,7 +77,13 @@ config VIDEO_DM6446_CCDC
 config VIDEO_DM355_CCDC
 	tristate "TI DM355 CCDC video capture driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on VIDEO_V4L2 && ARCH_DAVINCI
+=======
+	depends on VIDEO_V4L2
+	depends on ARCH_DAVINCI || COMPILE_TEST
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on VIDEO_V4L2
 	depends on ARCH_DAVINCI || COMPILE_TEST
@@ -80,6 +104,10 @@ config VIDEO_DM365_ISIF
 	tristate "TI DM365 ISIF video capture driver"
 	depends on VIDEO_V4L2 && ARCH_DAVINCI
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 >>>>>>> v3.18
@@ -96,6 +124,10 @@ config VIDEO_DAVINCI_VPBE_DISPLAY
 	tristate "TI DaVinci VPBE V4L2-Display driver"
 	depends on ARCH_DAVINCI
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 >>>>>>> v3.18

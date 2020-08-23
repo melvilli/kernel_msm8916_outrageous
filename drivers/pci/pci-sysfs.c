@@ -11,7 +11,11 @@
  * File attributes for PCI devices
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Modeled after usb's driverfs.c 
+=======
+ * Modeled after usb's driverfs.c
+>>>>>>> v3.18
 =======
  * Modeled after usb's driverfs.c
 >>>>>>> v3.18
@@ -34,6 +38,10 @@
 #include <linux/vgaarb.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -49,14 +57,20 @@ field##_show(struct device *dev, struct device_attribute *attr, char *buf)				\
 	struct pci_dev *pdev;						\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev = to_pci_dev (dev);					\
 	return sprintf (buf, format_string, pdev->field);		\
 }
 =======
+=======
+>>>>>>> v3.18
 	pdev = to_pci_dev(dev);						\
 	return sprintf(buf, format_string, pdev->field);		\
 }									\
 static DEVICE_ATTR_RO(field)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 pci_config_attr(vendor, "0x%04x\n");
@@ -72,7 +86,11 @@ static ssize_t broken_parity_status_show(struct device *dev,
 {
 	struct pci_dev *pdev = to_pci_dev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sprintf (buf, "%u\n", pdev->broken_parity_status);
+=======
+	return sprintf(buf, "%u\n", pdev->broken_parity_status);
+>>>>>>> v3.18
 =======
 	return sprintf(buf, "%u\n", pdev->broken_parity_status);
 >>>>>>> v3.18
@@ -86,7 +104,11 @@ static ssize_t broken_parity_status_store(struct device *dev,
 	unsigned long val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val) < 0)
+=======
+	if (kstrtoul(buf, 0, &val) < 0)
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &val) < 0)
 >>>>>>> v3.18
@@ -97,16 +119,22 @@ static ssize_t broken_parity_status_store(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t local_cpus_show(struct device *dev,
 			struct device_attribute *attr, char *buf)
 {		
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RW(broken_parity_status);
 
 static ssize_t pci_dev_show_local_cpu(struct device *dev, int type,
 				      struct device_attribute *attr, char *buf)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const struct cpumask *mask;
 	int len;
@@ -118,18 +146,25 @@ static ssize_t pci_dev_show_local_cpu(struct device *dev, int type,
 	mask = cpumask_of_pcibus(to_pci_dev(dev)->bus);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len = cpumask_scnprintf(buf, PAGE_SIZE-2, mask);
 =======
+=======
+>>>>>>> v3.18
 	len = type ?
 		cpumask_scnprintf(buf, PAGE_SIZE-2, mask) :
 		cpulist_scnprintf(buf, PAGE_SIZE-2, mask);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	buf[len++] = '\n';
 	buf[len] = '\0';
 	return len;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static ssize_t local_cpulist_show(struct device *dev,
@@ -150,6 +185,8 @@ static ssize_t local_cpulist_show(struct device *dev,
 	return len;
 }
 =======
+=======
+>>>>>>> v3.18
 static ssize_t local_cpus_show(struct device *dev,
 			       struct device_attribute *attr, char *buf)
 {
@@ -163,14 +200,21 @@ static ssize_t local_cpulist_show(struct device *dev,
 	return pci_dev_show_local_cpu(dev, 0, attr, buf);
 }
 static DEVICE_ATTR_RO(local_cpulist);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * PCI Bus Class Devices
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pci_bus_show_cpuaffinity(struct device *dev,
 					int type,
+=======
+static ssize_t pci_bus_show_cpuaffinity(struct device *dev, int type,
+>>>>>>> v3.18
 =======
 static ssize_t pci_bus_show_cpuaffinity(struct device *dev, int type,
 >>>>>>> v3.18
@@ -189,6 +233,7 @@ static ssize_t pci_bus_show_cpuaffinity(struct device *dev, int type,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline ssize_t pci_bus_show_cpumaskaffinity(struct device *dev,
 					struct device_attribute *attr,
@@ -211,6 +256,8 @@ resource_show(struct device * dev, struct device_attribute *attr, char * buf)
 	struct pci_dev * pci_dev = to_pci_dev(dev);
 	char * str = buf;
 =======
+=======
+>>>>>>> v3.18
 static ssize_t cpuaffinity_show(struct device *dev,
 				struct device_attribute *attr, char *buf)
 {
@@ -231,6 +278,9 @@ static ssize_t resource_show(struct device *dev, struct device_attribute *attr,
 {
 	struct pci_dev *pci_dev = to_pci_dev(dev);
 	char *str = buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i;
 	int max;
@@ -245,7 +295,11 @@ static ssize_t resource_show(struct device *dev, struct device_attribute *attr,
 		struct resource *res =  &pci_dev->resource[i];
 		pci_resource_to_user(pci_dev, i, res, &start, &end);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		str += sprintf(str,"0x%016llx 0x%016llx 0x%016llx\n",
+=======
+		str += sprintf(str, "0x%016llx 0x%016llx 0x%016llx\n",
+>>>>>>> v3.18
 =======
 		str += sprintf(str, "0x%016llx 0x%016llx 0x%016llx\n",
 >>>>>>> v3.18
@@ -256,13 +310,19 @@ static ssize_t resource_show(struct device *dev, struct device_attribute *attr,
 	return (str - buf);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t modalias_show(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(resource);
 
 static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
 			     char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pci_dev *pci_dev = to_pci_dev(dev);
@@ -274,6 +334,7 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
 		       (u8)(pci_dev->class));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t is_enabled_store(struct device *dev,
 				struct device_attribute *attr, const char *buf,
@@ -283,6 +344,8 @@ static ssize_t is_enabled_store(struct device *dev,
 	unsigned long val;
 	ssize_t result = strict_strtoul(buf, 0, &val);
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(modalias);
 
 static ssize_t enable_store(struct device *dev, struct device_attribute *attr,
@@ -291,6 +354,9 @@ static ssize_t enable_store(struct device *dev, struct device_attribute *attr,
 	struct pci_dev *pdev = to_pci_dev(dev);
 	unsigned long val;
 	ssize_t result = kstrtoul(buf, 0, &val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (result < 0)
@@ -311,6 +377,7 @@ static ssize_t enable_store(struct device *dev, struct device_attribute *attr,
 	return result < 0 ? result : count;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t is_enabled_show(struct device *dev,
 			       struct device_attribute *attr, char *buf)
@@ -390,6 +457,8 @@ msi_bus_store(struct device *dev, struct device_attribute *attr,
 
 static DEFINE_MUTEX(pci_remove_rescan_mutex);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t enable_show(struct device *dev, struct device_attribute *attr,
 			    char *buf)
 {
@@ -473,6 +542,9 @@ static ssize_t msi_bus_store(struct device *dev, struct device_attribute *attr,
 }
 static DEVICE_ATTR_RW(msi_bus);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t bus_rescan_store(struct bus_type *bus, const char *buf,
 				size_t count)
@@ -480,6 +552,7 @@ static ssize_t bus_rescan_store(struct bus_type *bus, const char *buf,
 	unsigned long val;
 	struct pci_bus *b = NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val) < 0)
 		return -EINVAL;
@@ -502,6 +575,8 @@ static ssize_t
 dev_rescan_store(struct device *dev, struct device_attribute *attr,
 		 const char *buf, size_t count)
 =======
+=======
+>>>>>>> v3.18
 	if (kstrtoul(buf, 0, &val) < 0)
 		return -EINVAL;
 
@@ -532,11 +607,15 @@ const struct attribute_group *pci_bus_groups[] = {
 static ssize_t dev_rescan_store(struct device *dev,
 				struct device_attribute *attr, const char *buf,
 				size_t count)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long val;
 	struct pci_dev *pdev = to_pci_dev(dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val) < 0)
 		return -EINVAL;
@@ -582,6 +661,8 @@ static ssize_t
 dev_bus_rescan_store(struct device *dev, struct device_attribute *attr,
 		 const char *buf, size_t count)
 =======
+=======
+>>>>>>> v3.18
 	if (kstrtoul(buf, 0, &val) < 0)
 		return -EINVAL;
 
@@ -615,11 +696,15 @@ static struct device_attribute dev_remove_attr = __ATTR(remove,
 static ssize_t dev_bus_rescan_store(struct device *dev,
 				    struct device_attribute *attr,
 				    const char *buf, size_t count)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long val;
 	struct pci_bus *bus = to_pci_bus(dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val) < 0)
 		return -EINVAL;
@@ -627,27 +712,38 @@ static ssize_t dev_bus_rescan_store(struct device *dev,
 	if (val) {
 		mutex_lock(&pci_remove_rescan_mutex);
 =======
+=======
+>>>>>>> v3.18
 	if (kstrtoul(buf, 0, &val) < 0)
 		return -EINVAL;
 
 	if (val) {
 		pci_lock_rescan_remove();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!pci_is_root_bus(bus) && list_empty(&bus->devices))
 			pci_rescan_bus_bridge_resize(bus->self);
 		else
 			pci_rescan_bus(bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&pci_remove_rescan_mutex);
 	}
 	return count;
 }
 =======
+=======
+>>>>>>> v3.18
 		pci_unlock_rescan_remove();
 	}
 	return count;
 }
 static DEVICE_ATTR(rescan, (S_IWUSR|S_IWGRP), NULL, dev_bus_rescan_store);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if defined(CONFIG_PM_RUNTIME) && defined(CONFIG_ACPI)
@@ -659,7 +755,11 @@ static ssize_t d3cold_allowed_store(struct device *dev,
 	unsigned long val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val) < 0)
+=======
+	if (kstrtoul(buf, 0, &val) < 0)
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &val) < 0)
 >>>>>>> v3.18
@@ -676,9 +776,12 @@ static ssize_t d3cold_allowed_show(struct device *dev,
 {
 	struct pci_dev *pdev = to_pci_dev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sprintf (buf, "%u\n", pdev->d3cold_allowed);
 }
 =======
+=======
+>>>>>>> v3.18
 	return sprintf(buf, "%u\n", pdev->d3cold_allowed);
 }
 static DEVICE_ATTR_RW(d3cold_allowed);
@@ -696,6 +799,9 @@ static ssize_t devspec_show(struct device *dev,
 	return sprintf(buf, "%s", np->full_name);
 }
 static DEVICE_ATTR_RO(devspec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -783,6 +889,7 @@ static struct device_attribute sriov_numvfs_attr =
 #endif /* CONFIG_PCI_IOV */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct device_attribute pci_dev_attrs[] = {
 	__ATTR_RO(resource),
 	__ATTR_RO(vendor),
@@ -821,6 +928,8 @@ struct device_attribute pcibus_dev_attrs[] = {
 static ssize_t
 boot_vga_show(struct device *dev, struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static ssize_t driver_override_store(struct device *dev,
 				     struct device_attribute *attr,
 				     const char *buf, size_t count)
@@ -916,6 +1025,9 @@ const struct attribute_group *pcibus_groups[] = {
 
 static ssize_t boot_vga_show(struct device *dev, struct device_attribute *attr,
 			     char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pci_dev *pdev = to_pci_dev(dev);
@@ -928,6 +1040,7 @@ static ssize_t boot_vga_show(struct device *dev, struct device_attribute *attr,
 		!!(pdev->resource[PCI_ROM_RESOURCE].flags &
 		   IORESOURCE_ROM_SHADOW));
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct device_attribute vga_attr = __ATTR_RO(boot_vga);
 
@@ -948,6 +1061,8 @@ pci_read_config(struct file *filp, struct kobject *kobj,
 		size = 128;
 	}
 =======
+=======
+>>>>>>> v3.18
 static struct device_attribute vga_attr = __ATTR_RO(boot_vga);
 
 static ssize_t pci_read_config(struct file *filp, struct kobject *kobj,
@@ -965,6 +1080,9 @@ static ssize_t pci_read_config(struct file *filp, struct kobject *kobj,
 		size = dev->cfg_size;
 	else if (dev->hdr_type == PCI_HEADER_TYPE_CARDBUS)
 		size = 128;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (off > size)
@@ -1029,6 +1147,7 @@ static ssize_t pci_read_config(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 pci_write_config(struct file* filp, struct kobject *kobj,
 		 struct bin_attribute *bin_attr,
@@ -1039,6 +1158,8 @@ pci_write_config(struct file* filp, struct kobject *kobj,
 	loff_t init_off = off;
 	u8 *data = (u8*) buf;
 =======
+=======
+>>>>>>> v3.18
 static ssize_t pci_write_config(struct file *filp, struct kobject *kobj,
 				struct bin_attribute *bin_attr, char *buf,
 				loff_t off, size_t count)
@@ -1048,6 +1169,9 @@ static ssize_t pci_write_config(struct file *filp, struct kobject *kobj,
 	unsigned int size = count;
 	loff_t init_off = off;
 	u8 *data = (u8 *) buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (off > dev->cfg_size)
@@ -1057,7 +1181,11 @@ static ssize_t pci_write_config(struct file *filp, struct kobject *kobj,
 		count = size;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1069,6 +1197,7 @@ static ssize_t pci_write_config(struct file *filp, struct kobject *kobj,
 		size--;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	if ((off & 3) && size > 2) {
 		u16 val = data[off - init_off];
@@ -1078,6 +1207,8 @@ static ssize_t pci_write_config(struct file *filp, struct kobject *kobj,
                 size -= 2;
         }
 =======
+=======
+>>>>>>> v3.18
 
 	if ((off & 3) && size > 2) {
 		u16 val = data[off - init_off];
@@ -1086,6 +1217,9 @@ static ssize_t pci_write_config(struct file *filp, struct kobject *kobj,
 		off += 2;
 		size -= 2;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (size > 3) {
@@ -1098,7 +1232,11 @@ static ssize_t pci_write_config(struct file *filp, struct kobject *kobj,
 		size -= 4;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1122,10 +1260,16 @@ static ssize_t pci_write_config(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 read_vpd_attr(struct file *filp, struct kobject *kobj,
 	      struct bin_attribute *bin_attr,
 	      char *buf, loff_t off, size_t count)
+=======
+static ssize_t read_vpd_attr(struct file *filp, struct kobject *kobj,
+			     struct bin_attribute *bin_attr, char *buf,
+			     loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t read_vpd_attr(struct file *filp, struct kobject *kobj,
 			     struct bin_attribute *bin_attr, char *buf,
@@ -1144,10 +1288,16 @@ static ssize_t read_vpd_attr(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 write_vpd_attr(struct file *filp, struct kobject *kobj,
 	       struct bin_attribute *bin_attr,
 	       char *buf, loff_t off, size_t count)
+=======
+static ssize_t write_vpd_attr(struct file *filp, struct kobject *kobj,
+			      struct bin_attribute *bin_attr, char *buf,
+			      loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t write_vpd_attr(struct file *filp, struct kobject *kobj,
 			      struct bin_attribute *bin_attr, char *buf,
@@ -1179,6 +1329,7 @@ static ssize_t write_vpd_attr(struct file *filp, struct kobject *kobj,
  * callback routine (pci_legacy_read).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 pci_read_legacy_io(struct file *filp, struct kobject *kobj,
 		   struct bin_attribute *bin_attr,
@@ -1194,6 +1345,8 @@ pci_read_legacy_io(struct file *filp, struct kobject *kobj,
 
         return pci_legacy_read(bus, off, (u32 *)buf, count);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t pci_read_legacy_io(struct file *filp, struct kobject *kobj,
 				  struct bin_attribute *bin_attr, char *buf,
 				  loff_t off, size_t count)
@@ -1206,6 +1359,9 @@ static ssize_t pci_read_legacy_io(struct file *filp, struct kobject *kobj,
 		return -EINVAL;
 
 	return pci_legacy_read(bus, off, (u32 *)buf, count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1222,6 +1378,7 @@ static ssize_t pci_read_legacy_io(struct file *filp, struct kobject *kobj,
  * callback routine (pci_legacy_write).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 pci_write_legacy_io(struct file *filp, struct kobject *kobj,
 		    struct bin_attribute *bin_attr,
@@ -1236,6 +1393,8 @@ pci_write_legacy_io(struct file *filp, struct kobject *kobj,
 
         return pci_legacy_write(bus, off, *(u32 *)buf, count);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t pci_write_legacy_io(struct file *filp, struct kobject *kobj,
 				   struct bin_attribute *bin_attr, char *buf,
 				   loff_t off, size_t count)
@@ -1248,6 +1407,9 @@ static ssize_t pci_write_legacy_io(struct file *filp, struct kobject *kobj,
 		return -EINVAL;
 
 	return pci_legacy_write(bus, off, *(u32 *)buf, count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1263,6 +1425,7 @@ static ssize_t pci_write_legacy_io(struct file *filp, struct kobject *kobj,
  * memory space.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 pci_mmap_legacy_mem(struct file *filp, struct kobject *kobj,
 		    struct bin_attribute *attr,
@@ -1274,6 +1437,8 @@ pci_mmap_legacy_mem(struct file *filp, struct kobject *kobj,
 
         return pci_mmap_legacy_page_range(bus, vma, pci_mmap_mem);
 =======
+=======
+>>>>>>> v3.18
 static int pci_mmap_legacy_mem(struct file *filp, struct kobject *kobj,
 			       struct bin_attribute *attr,
 			       struct vm_area_struct *vma)
@@ -1282,6 +1447,9 @@ static int pci_mmap_legacy_mem(struct file *filp, struct kobject *kobj,
 						      kobj));
 
 	return pci_mmap_legacy_page_range(bus, vma, pci_mmap_mem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1297,6 +1465,7 @@ static int pci_mmap_legacy_mem(struct file *filp, struct kobject *kobj,
  * memory space. Returns -ENOSYS if the operation isn't supported
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 pci_mmap_legacy_io(struct file *filp, struct kobject *kobj,
 		   struct bin_attribute *attr,
@@ -1308,6 +1477,8 @@ pci_mmap_legacy_io(struct file *filp, struct kobject *kobj,
 
         return pci_mmap_legacy_page_range(bus, vma, pci_mmap_io);
 =======
+=======
+>>>>>>> v3.18
 static int pci_mmap_legacy_io(struct file *filp, struct kobject *kobj,
 			      struct bin_attribute *attr,
 			      struct vm_area_struct *vma)
@@ -1316,6 +1487,9 @@ static int pci_mmap_legacy_io(struct file *filp, struct kobject *kobj,
 						      kobj));
 
 	return pci_mmap_legacy_page_range(bus, vma, pci_mmap_io);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1327,10 +1501,16 @@ static int pci_mmap_legacy_io(struct file *filp, struct kobject *kobj,
  * Stub implementation. Can be overridden by arch if necessary.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __weak
 pci_adjust_legacy_attr(struct pci_bus *b, enum pci_mmap_state mmap_type)
 {
 	return;
+=======
+void __weak pci_adjust_legacy_attr(struct pci_bus *b,
+				   enum pci_mmap_state mmap_type)
+{
+>>>>>>> v3.18
 =======
 void __weak pci_adjust_legacy_attr(struct pci_bus *b,
 				   enum pci_mmap_state mmap_type)
@@ -1391,8 +1571,12 @@ legacy_io_err:
 	b->legacy_io = NULL;
 kzalloc_err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING "pci: warning: could not create legacy I/O port "
 	       "and ISA memory resources to sysfs\n");
+=======
+	printk(KERN_WARNING "pci: warning: could not create legacy I/O port and ISA memory resources to sysfs\n");
+>>>>>>> v3.18
 =======
 	printk(KERN_WARNING "pci: warning: could not create legacy I/O port and ISA memory resources to sysfs\n");
 >>>>>>> v3.18
@@ -1439,9 +1623,14 @@ int pci_mmap_fits(struct pci_dev *pdev, int resno, struct vm_area_struct *vma,
  * Use the regular PCI mapping routines to map a PCI resource into userspace.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 pci_mmap_resource(struct kobject *kobj, struct bin_attribute *attr,
 		  struct vm_area_struct *vma, int write_combine)
+=======
+static int pci_mmap_resource(struct kobject *kobj, struct bin_attribute *attr,
+			     struct vm_area_struct *vma, int write_combine)
+>>>>>>> v3.18
 =======
 static int pci_mmap_resource(struct kobject *kobj, struct bin_attribute *attr,
 			     struct vm_area_struct *vma, int write_combine)
@@ -1462,8 +1651,12 @@ static int pci_mmap_resource(struct kobject *kobj, struct bin_attribute *attr,
 
 	if (!pci_mmap_fits(pdev, i, vma, PCI_MMAP_SYSFS)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN(1, "process \"%s\" tried to map 0x%08lx bytes "
 			"at page 0x%08lx on %s BAR %d (start 0x%16Lx, size 0x%16Lx)\n",
+=======
+		WARN(1, "process \"%s\" tried to map 0x%08lx bytes at page 0x%08lx on %s BAR %d (start 0x%16Lx, size 0x%16Lx)\n",
+>>>>>>> v3.18
 =======
 		WARN(1, "process \"%s\" tried to map 0x%08lx bytes at page 0x%08lx on %s BAR %d (start 0x%16Lx, size 0x%16Lx)\n",
 >>>>>>> v3.18
@@ -1489,10 +1682,16 @@ static int pci_mmap_resource(struct kobject *kobj, struct bin_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 pci_mmap_resource_uc(struct file *filp, struct kobject *kobj,
 		     struct bin_attribute *attr,
 		     struct vm_area_struct *vma)
+=======
+static int pci_mmap_resource_uc(struct file *filp, struct kobject *kobj,
+				struct bin_attribute *attr,
+				struct vm_area_struct *vma)
+>>>>>>> v3.18
 =======
 static int pci_mmap_resource_uc(struct file *filp, struct kobject *kobj,
 				struct bin_attribute *attr,
@@ -1503,10 +1702,16 @@ static int pci_mmap_resource_uc(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 pci_mmap_resource_wc(struct file *filp, struct kobject *kobj,
 		     struct bin_attribute *attr,
 		     struct vm_area_struct *vma)
+=======
+static int pci_mmap_resource_wc(struct file *filp, struct kobject *kobj,
+				struct bin_attribute *attr,
+				struct vm_area_struct *vma)
+>>>>>>> v3.18
 =======
 static int pci_mmap_resource_wc(struct file *filp, struct kobject *kobj,
 				struct bin_attribute *attr,
@@ -1517,10 +1722,16 @@ static int pci_mmap_resource_wc(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 pci_resource_io(struct file *filp, struct kobject *kobj,
 		struct bin_attribute *attr, char *buf,
 		loff_t off, size_t count, bool write)
+=======
+static ssize_t pci_resource_io(struct file *filp, struct kobject *kobj,
+			       struct bin_attribute *attr, char *buf,
+			       loff_t off, size_t count, bool write)
+>>>>>>> v3.18
 =======
 static ssize_t pci_resource_io(struct file *filp, struct kobject *kobj,
 			       struct bin_attribute *attr, char *buf,
@@ -1571,10 +1782,16 @@ static ssize_t pci_resource_io(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 pci_read_resource_io(struct file *filp, struct kobject *kobj,
 		     struct bin_attribute *attr, char *buf,
 		     loff_t off, size_t count)
+=======
+static ssize_t pci_read_resource_io(struct file *filp, struct kobject *kobj,
+				    struct bin_attribute *attr, char *buf,
+				    loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t pci_read_resource_io(struct file *filp, struct kobject *kobj,
 				    struct bin_attribute *attr, char *buf,
@@ -1585,10 +1802,16 @@ static ssize_t pci_read_resource_io(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 pci_write_resource_io(struct file *filp, struct kobject *kobj,
 		      struct bin_attribute *attr, char *buf,
 		      loff_t off, size_t count)
+=======
+static ssize_t pci_write_resource_io(struct file *filp, struct kobject *kobj,
+				     struct bin_attribute *attr, char *buf,
+				     loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t pci_write_resource_io(struct file *filp, struct kobject *kobj,
 				     struct bin_attribute *attr, char *buf,
@@ -1606,8 +1829,12 @@ static ssize_t pci_write_resource_io(struct file *filp, struct kobject *kobj,
  * free their resources.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 pci_remove_resource_files(struct pci_dev *pdev)
+=======
+static void pci_remove_resource_files(struct pci_dev *pdev)
+>>>>>>> v3.18
 =======
 static void pci_remove_resource_files(struct pci_dev *pdev)
 >>>>>>> v3.18
@@ -1714,10 +1941,16 @@ void __weak pci_remove_resource_files(struct pci_dev *dev) { return; }
  * writing anything except 0 enables it
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 pci_write_rom(struct file *filp, struct kobject *kobj,
 	      struct bin_attribute *bin_attr,
 	      char *buf, loff_t off, size_t count)
+=======
+static ssize_t pci_write_rom(struct file *filp, struct kobject *kobj,
+			     struct bin_attribute *bin_attr, char *buf,
+			     loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t pci_write_rom(struct file *filp, struct kobject *kobj,
 			     struct bin_attribute *bin_attr, char *buf,
@@ -1747,10 +1980,16 @@ static ssize_t pci_write_rom(struct file *filp, struct kobject *kobj,
  * device corresponding to @kobj.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 pci_read_rom(struct file *filp, struct kobject *kobj,
 	     struct bin_attribute *bin_attr,
 	     char *buf, loff_t off, size_t count)
+=======
+static ssize_t pci_read_rom(struct file *filp, struct kobject *kobj,
+			    struct bin_attribute *bin_attr, char *buf,
+			    loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t pci_read_rom(struct file *filp, struct kobject *kobj,
 			    struct bin_attribute *bin_attr, char *buf,
@@ -1764,17 +2003,23 @@ static ssize_t pci_read_rom(struct file *filp, struct kobject *kobj,
 	if (!pdev->rom_attr_enabled)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	rom = pci_map_rom(pdev, &size);	/* size starts out as PCI window size */
 	if (!rom || !size)
 		return -EIO;
 		
 =======
+=======
+>>>>>>> v3.18
 
 	rom = pci_map_rom(pdev, &size);	/* size starts out as PCI window size */
 	if (!rom || !size)
 		return -EIO;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (off >= size)
 		count = 0;
@@ -1782,17 +2027,23 @@ static ssize_t pci_read_rom(struct file *filp, struct kobject *kobj,
 		if (off + count > size)
 			count = size - off;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		memcpy_fromio(buf, rom + off, count);
 	}
 	pci_unmap_rom(pdev, rom);
 		
 =======
+=======
+>>>>>>> v3.18
 
 		memcpy_fromio(buf, rom + off, count);
 	}
 	pci_unmap_rom(pdev, rom);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return count;
 }
@@ -1818,6 +2069,7 @@ static struct bin_attribute pcie_config_attr = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __weak pcibios_add_platform_entries(struct pci_dev *dev)
 {
 	return 0;
@@ -1831,12 +2083,17 @@ static ssize_t reset_store(struct device *dev,
 	unsigned long val;
 	ssize_t result = strict_strtoul(buf, 0, &val);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t reset_store(struct device *dev, struct device_attribute *attr,
 			   const char *buf, size_t count)
 {
 	struct pci_dev *pdev = to_pci_dev(dev);
 	unsigned long val;
 	ssize_t result = kstrtoul(buf, 0, &val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (result < 0)
@@ -1901,7 +2158,11 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __must_check pci_create_sysfs_dev_files (struct pci_dev *pdev)
+=======
+int __must_check pci_create_sysfs_dev_files(struct pci_dev *pdev)
+>>>>>>> v3.18
 =======
 int __must_check pci_create_sysfs_dev_files(struct pci_dev *pdev)
 >>>>>>> v3.18
@@ -1914,15 +2175,21 @@ int __must_check pci_create_sysfs_dev_files(struct pci_dev *pdev)
 		return -EACCES;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->cfg_size > PCI_CFG_SPACE_SIZE)
 		retval = sysfs_create_bin_file(&pdev->dev.kobj, &pcie_config_attr);
 	else
 		retval = sysfs_create_bin_file(&pdev->dev.kobj, &pci_config_attr);
 =======
+=======
+>>>>>>> v3.18
 	if (pdev->cfg_size < PCI_CFG_SPACE_EXP_SIZE)
 		retval = sysfs_create_bin_file(&pdev->dev.kobj, &pci_config_attr);
 	else
 		retval = sysfs_create_bin_file(&pdev->dev.kobj, &pcie_config_attr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (retval)
 		goto err;
@@ -1958,11 +2225,14 @@ int __must_check pci_create_sysfs_dev_files(struct pci_dev *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* add platform-specific attributes */
 	retval = pcibios_add_platform_entries(pdev);
 	if (retval)
 		goto err_rom_file;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* add sysfs entries for various capabilities */
@@ -1984,15 +2254,21 @@ err_resource_files:
 	pci_remove_resource_files(pdev);
 err_config_file:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->cfg_size > PCI_CFG_SPACE_SIZE)
 		sysfs_remove_bin_file(&pdev->dev.kobj, &pcie_config_attr);
 	else
 		sysfs_remove_bin_file(&pdev->dev.kobj, &pci_config_attr);
 =======
+=======
+>>>>>>> v3.18
 	if (pdev->cfg_size < PCI_CFG_SPACE_EXP_SIZE)
 		sysfs_remove_bin_file(&pdev->dev.kobj, &pci_config_attr);
 	else
 		sysfs_remove_bin_file(&pdev->dev.kobj, &pcie_config_attr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err:
 	return retval;
@@ -2028,15 +2304,21 @@ void pci_remove_sysfs_dev_files(struct pci_dev *pdev)
 	pci_remove_capabilities_sysfs(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->cfg_size > PCI_CFG_SPACE_SIZE)
 		sysfs_remove_bin_file(&pdev->dev.kobj, &pcie_config_attr);
 	else
 		sysfs_remove_bin_file(&pdev->dev.kobj, &pci_config_attr);
 =======
+=======
+>>>>>>> v3.18
 	if (pdev->cfg_size < PCI_CFG_SPACE_EXP_SIZE)
 		sysfs_remove_bin_file(&pdev->dev.kobj, &pci_config_attr);
 	else
 		sysfs_remove_bin_file(&pdev->dev.kobj, &pcie_config_attr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pci_remove_resource_files(pdev);
@@ -2072,7 +2354,10 @@ static int __init pci_sysfs_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 late_initcall(pci_sysfs_init);
@@ -2084,7 +2369,11 @@ static struct attribute *pci_dev_dev_attrs[] = {
 
 static umode_t pci_dev_attrs_are_visible(struct kobject *kobj,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						struct attribute *a, int n)
+=======
+					 struct attribute *a, int n)
+>>>>>>> v3.18
 =======
 					 struct attribute *a, int n)
 >>>>>>> v3.18
@@ -2100,7 +2389,10 @@ static umode_t pci_dev_attrs_are_visible(struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *pci_dev_hp_attrs[] = {
 	&dev_remove_attr.attr,
 	&dev_rescan_attr.attr,
@@ -2124,6 +2416,9 @@ static struct attribute_group pci_dev_hp_attr_group = {
 	.is_visible = pci_dev_hp_attrs_are_visible,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PCI_IOV
 static struct attribute *sriov_dev_attrs[] = {
@@ -2134,7 +2429,11 @@ static struct attribute *sriov_dev_attrs[] = {
 
 static umode_t sriov_attrs_are_visible(struct kobject *kobj,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 struct attribute *a, int n)
+=======
+				       struct attribute *a, int n)
+>>>>>>> v3.18
 =======
 				       struct attribute *a, int n)
 >>>>>>> v3.18
@@ -2161,6 +2460,10 @@ static struct attribute_group pci_dev_attr_group = {
 static const struct attribute_group *pci_dev_attr_groups[] = {
 	&pci_dev_attr_group,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&pci_dev_hp_attr_group,
+>>>>>>> v3.18
 =======
 	&pci_dev_hp_attr_group,
 >>>>>>> v3.18

@@ -25,6 +25,11 @@
 #include <linux/irq.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+#include <linux/swab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 #include <linux/swab.h>
@@ -34,7 +39,10 @@
 #include <linux/wl12xx.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/slab.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -81,10 +89,14 @@
 #define SPI_AGGR_BUFFER_SIZE (4 * PAGE_SIZE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Maximum number of SPI write chunks */
 #define WSPI_MAX_NUM_OF_CHUNKS \
 	((SPI_AGGR_BUFFER_SIZE / WSPI_MAX_CHUNK_SIZE) + 1)
 
+=======
+#define WSPI_MAX_NUM_OF_CHUNKS (SPI_AGGR_BUFFER_SIZE / WSPI_MAX_CHUNK_SIZE)
+>>>>>>> v3.18
 =======
 #define WSPI_MAX_NUM_OF_CHUNKS (SPI_AGGR_BUFFER_SIZE / WSPI_MAX_CHUNK_SIZE)
 >>>>>>> v3.18
@@ -126,16 +138,22 @@ static void wl12xx_spi_init(struct device *child)
 {
 	struct wl12xx_spi_glue *glue = dev_get_drvdata(child->parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 crc[WSPI_INIT_CMD_CRC_LEN], *cmd;
 	struct spi_transfer t;
 	struct spi_message m;
 
 	cmd = kzalloc(WSPI_INIT_CMD_LEN, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	struct spi_transfer t;
 	struct spi_message m;
 	u8 *cmd = kzalloc(WSPI_INIT_CMD_LEN, GFP_KERNEL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!cmd) {
 		dev_err(child->parent,
@@ -144,7 +162,10 @@ static void wl12xx_spi_init(struct device *child)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(crc, 0, sizeof(crc));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memset(&t, 0, sizeof(t));
@@ -154,6 +175,7 @@ static void wl12xx_spi_init(struct device *child)
 	 * Set WSPI_INIT_COMMAND
 	 * the data is being send from the MSB to LSB
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cmd[2] = 0xff;
 	cmd[3] = 0xff;
@@ -180,6 +202,8 @@ static void wl12xx_spi_init(struct device *child)
 	cmd[4] |= crc7(0, crc, WSPI_INIT_CMD_CRC_LEN) << 1;
 	cmd[4] |= WSPI_INIT_CMD_END;
 =======
+=======
+>>>>>>> v3.18
 	cmd[0] = 0xff;
 	cmd[1] = 0xff;
 	cmd[2] = WSPI_INIT_CMD_START | WSPI_INIT_CMD_TX;
@@ -203,6 +227,9 @@ static void wl12xx_spi_init(struct device *child)
 	 */
 	__swab32s((u32 *)cmd);
 	__swab32s((u32 *)cmd+1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	t.tx_buf = cmd;
@@ -263,7 +290,11 @@ static int __must_check wl12xx_spi_raw_read(struct device *child, int addr,
 
 	while (len > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chunk_len = min((size_t)WSPI_MAX_CHUNK_SIZE, len);
+=======
+		chunk_len = min_t(size_t, WSPI_MAX_CHUNK_SIZE, len);
+>>>>>>> v3.18
 =======
 		chunk_len = min_t(size_t, WSPI_MAX_CHUNK_SIZE, len);
 >>>>>>> v3.18
@@ -326,10 +357,16 @@ static int __must_check wl12xx_spi_raw_write(struct device *child, int addr,
 {
 	struct wl12xx_spi_glue *glue = dev_get_drvdata(child->parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* SPI write buffers - 2 for each chunk */
 	struct spi_transfer t[2 * WSPI_MAX_NUM_OF_CHUNKS];
 	struct spi_message m;
 	u32 commands[WSPI_MAX_NUM_OF_CHUNKS]; /* 1 command per chunk */
+=======
+	struct spi_transfer t[2 * (WSPI_MAX_NUM_OF_CHUNKS + 1)];
+	struct spi_message m;
+	u32 commands[WSPI_MAX_NUM_OF_CHUNKS];
+>>>>>>> v3.18
 =======
 	struct spi_transfer t[2 * (WSPI_MAX_NUM_OF_CHUNKS + 1)];
 	struct spi_message m;
@@ -348,7 +385,11 @@ static int __must_check wl12xx_spi_raw_write(struct device *child, int addr,
 	i = 0;
 	while (len > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chunk_len = min((size_t)WSPI_MAX_CHUNK_SIZE, len);
+=======
+		chunk_len = min_t(size_t, WSPI_MAX_CHUNK_SIZE, len);
+>>>>>>> v3.18
 =======
 		chunk_len = min_t(size_t, WSPI_MAX_CHUNK_SIZE, len);
 >>>>>>> v3.18
@@ -394,6 +435,7 @@ static int wl1271_probe(struct spi_device *spi)
 {
 	struct wl12xx_spi_glue *glue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wlcore_platdev_data *pdev_data;
 	struct resource res[1];
 	int ret = -ENOMEM;
@@ -416,6 +458,8 @@ static int wl1271_probe(struct spi_device *spi)
 		dev_err(&spi->dev, "can't allocate glue\n");
 		goto out_free_pdev_data;
 =======
+=======
+>>>>>>> v3.18
 	struct wlcore_platdev_data pdev_data;
 	struct resource res[1];
 	int ret;
@@ -434,6 +478,9 @@ static int wl1271_probe(struct spi_device *spi)
 	if (!glue) {
 		dev_err(&spi->dev, "can't allocate glue\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -449,7 +496,11 @@ static int wl1271_probe(struct spi_device *spi)
 	if (ret < 0) {
 		dev_err(glue->dev, "spi_setup failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free_glue;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -459,8 +510,12 @@ static int wl1271_probe(struct spi_device *spi)
 	if (!glue->core) {
 		dev_err(glue->dev, "can't allocate platform_device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		goto out_free_glue;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -481,8 +536,13 @@ static int wl1271_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = platform_device_add_data(glue->core, pdev_data,
 				       sizeof(*pdev_data));
+=======
+	ret = platform_device_add_data(glue->core, &pdev_data,
+				       sizeof(pdev_data));
+>>>>>>> v3.18
 =======
 	ret = platform_device_add_data(glue->core, &pdev_data,
 				       sizeof(pdev_data));
@@ -503,6 +563,7 @@ static int wl1271_probe(struct spi_device *spi)
 out_dev_put:
 	platform_device_put(glue->core);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 out_free_glue:
 	kfree(glue);
@@ -511,6 +572,8 @@ out_free_pdev_data:
 	kfree(pdev_data);
 
 out:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -522,7 +585,10 @@ static int wl1271_remove(struct spi_device *spi)
 
 	platform_device_unregister(glue->core);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(glue);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -541,6 +607,7 @@ static struct spi_driver wl1271_spi_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init wl1271_init(void)
 {
 	return spi_register_driver(&wl1271_spi_driver);
@@ -554,6 +621,9 @@ static void __exit wl1271_exit(void)
 module_init(wl1271_init);
 module_exit(wl1271_exit);
 
+=======
+module_spi_driver(wl1271_spi_driver);
+>>>>>>> v3.18
 =======
 module_spi_driver(wl1271_spi_driver);
 >>>>>>> v3.18

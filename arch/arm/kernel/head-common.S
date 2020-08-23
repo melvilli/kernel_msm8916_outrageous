@@ -11,6 +11,10 @@
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -66,15 +70,21 @@ __vet_atags:
 	bne	1f
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 2:	mov	pc, lr				@ atag/dtb pointer is ok
 
 1:	mov	r2, #0
 	mov	pc, lr
 =======
+=======
+>>>>>>> v3.18
 2:	ret	lr				@ atag/dtb pointer is ok
 
 1:	mov	r2, #0
 	ret	lr
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENDPROC(__vet_atags)
 
@@ -111,8 +121,12 @@ __mmap_switched:
 	str	r2, [r6]			@ Save atags pointer
 	cmp	r7, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bicne	r4, r0, #CR_A			@ Clear 'A' bit
 	stmneia	r7, {r0, r4}			@ Save control register values
+=======
+	strne	r0, [r7]			@ Save control register values
+>>>>>>> v3.18
 =======
 	strne	r0, [r7]			@ Save control register values
 >>>>>>> v3.18
@@ -149,6 +163,12 @@ ENTRY(lookup_processor_type)
 ENDPROC(lookup_processor_type)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__FINIT
+	.text
+
+>>>>>>> v3.18
 =======
 	__FINIT
 	.text
@@ -168,7 +188,10 @@ ENDPROC(lookup_processor_type)
  *	r9 = cpuid (preserved)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__CPUINIT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 __lookup_processor_type:
@@ -186,7 +209,11 @@ __lookup_processor_type:
 	blo	1b
 	mov	r5, #0				@ unknown processor
 <<<<<<< HEAD
+<<<<<<< HEAD
 2:	mov	pc, lr
+=======
+2:	ret	lr
+>>>>>>> v3.18
 =======
 2:	ret	lr
 >>>>>>> v3.18
@@ -204,7 +231,10 @@ __lookup_processor_type_data:
 	.size	__lookup_processor_type_data, . - __lookup_processor_type_data
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 __error_lpae:
 #ifdef CONFIG_DEBUG_LL
 	adr	r0, str_lpae
@@ -217,6 +247,9 @@ str_lpae: .asciz "\nError: Kernel with LPAE support, but CPU does not support LP
 	.align
 ENDPROC(__error_lpae)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 __error_p:
 #ifdef CONFIG_DEBUG_LL

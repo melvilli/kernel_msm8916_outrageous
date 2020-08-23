@@ -32,12 +32,15 @@
 #include "ttype.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 //typedef uint32_t u32;
 //typedef uint16_t u16;
 //typedef uint8_t u8;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 // ioctl Command code
@@ -104,7 +107,11 @@ typedef enum tagWZONETYPE {
 typedef struct tagSCmdRequest {
 	u8	    name[16];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void	*data;
+=======
+	void __user *data;
+>>>>>>> v3.18
 =======
 	void __user *data;
 >>>>>>> v3.18
@@ -175,10 +182,13 @@ typedef struct tagSBSSIDItem {
 	u8      abyBSSID[BSSID_LEN];
 	u8      abySSID[SSID_MAXLEN + 1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//2006-1116-01,<Modify> by NomadZhao
 	//u16	    wBeaconInterval;
 	//u16	    wCapInfo;
 	//u8      byNetType;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8      byNetType;
@@ -239,9 +249,14 @@ typedef struct tagSStatMIBCount {
 	u32   dwIsrSoftInterrupt;
 	u32   dwIsrRxNoBuf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/////////////////////////////////////
 
 	u32   dwIsrUnknown;               // unknown interrupt count
+=======
+
+	u32   dwIsrUnknown;
+>>>>>>> v3.18
 =======
 
 	u32   dwIsrUnknown;
@@ -365,7 +380,10 @@ typedef struct tagSCmdValue {
 //
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // VIAGWET_IOCTL_HOSTAPD ioctl() cmd:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum {
@@ -434,6 +452,7 @@ struct viawget_hostapd_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //2006-1116-01,<Add> by NomadZhao
 #pragma pack()
 
@@ -445,6 +464,10 @@ struct viawget_hostapd_param {
 
 /*---------------------  Export Functions  --------------------------*/
 
+=======
+#pragma pack()
+
+>>>>>>> v3.18
 =======
 #pragma pack()
 

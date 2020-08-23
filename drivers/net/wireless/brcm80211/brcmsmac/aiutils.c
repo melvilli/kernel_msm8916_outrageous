@@ -680,6 +680,7 @@ bool ai_clkctl_cc(struct si_pub *sih, enum bcma_clkmode mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ai_pci_up(struct si_pub *sih)
 {
 	struct si_info *sii;
@@ -701,6 +702,8 @@ void ai_pci_down(struct si_pub *sih)
 		bcma_core_pci_extend_L1timer(&sii->icbus->drv_pci[0], false);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Enable BT-COEX & Ex-PA for 4313 */

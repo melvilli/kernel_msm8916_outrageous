@@ -209,7 +209,11 @@ MODULE_DEVICE_TABLE(eisa, hp100_eisa_tbl);
 
 #ifdef CONFIG_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(hp100_pci_tbl) = {
+=======
+static const struct pci_device_id hp100_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id hp100_pci_tbl[] = {
 >>>>>>> v3.18
@@ -1102,8 +1106,13 @@ static int hp100_open(struct net_device *dev)
 	if (request_irq(dev->irq, hp100_interrupt,
 			lp->bus == HP100_BUS_PCI || lp->bus ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 			HP100_BUS_EISA ? IRQF_SHARED : IRQF_DISABLED,
 			"hp100", dev)) {
+=======
+			HP100_BUS_EISA ? IRQF_SHARED : 0,
+			dev->name, dev)) {
+>>>>>>> v3.18
 =======
 			HP100_BUS_EISA ? IRQF_SHARED : 0,
 			dev->name, dev)) {
@@ -1637,7 +1646,11 @@ static void hp100_clean_txring(struct net_device *dev)
 		/* Conversion to new PCI API : NOP */
 		pci_unmap_single(lp->pci_dev, (dma_addr_t) lp->txrhead->pdl[1], lp->txrhead->pdl[2], PCI_DMA_TODEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb_any(lp->txrhead->skb);
+=======
+		dev_consume_skb_any(lp->txrhead->skb);
+>>>>>>> v3.18
 =======
 		dev_consume_skb_any(lp->txrhead->skb);
 >>>>>>> v3.18
@@ -1759,7 +1772,11 @@ static netdev_tx_t hp100_start_xmit(struct sk_buff *skb,
 	spin_unlock_irqrestore(&lp->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb_any(skb);
+=======
+	dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_consume_skb_any(skb);
 >>>>>>> v3.18

@@ -6,12 +6,18 @@ config ARCH_ORION5X_DT
 	bool "Marvell Orion5x Flattened Device Tree"
 	select USE_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	select ORION_CLK
 	select ORION_IRQCHIP
 	select ORION_TIMER
 	select PINCTRL
 	select PINCTRL_ORION
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Say 'Y' here if you want your kernel to support the
@@ -32,7 +38,10 @@ config MACH_RD88F5182
 	  Marvell Orion-NAS (88F5182) RD2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MACH_RD88F5182_DT
 	bool "Marvell Orion-NAS Reference Design (Flattened Device Tree)"
 	select ARCH_ORION5X_DT
@@ -41,6 +50,9 @@ config MACH_RD88F5182_DT
 	  Say 'Y' here if you want your kernel to support the Marvell
 	  Orion-NAS (88F5182) RD2, Flattened Device Tree.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MACH_KUROBOX_PRO
 	bool "KuroBox Pro"
@@ -53,7 +65,10 @@ config MACH_DNS323
 	bool "D-Link DNS-323"
 	select I2C_BOARDINFO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select PHYLIB
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -126,6 +141,7 @@ config MACH_MV2120
 	  HP Media Vault mv2120 or mv5100.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MACH_EDMINI_V2_DT
 	bool "LaCie Ethernet Disk mini V2 (Flattened Device Tree)"
 	select I2C_BOARDINFO
@@ -149,6 +165,8 @@ config MACH_BIGDISK
 	  LaCie Big Disk Network NAS.
 
 =======
+=======
+>>>>>>> v3.18
 config MACH_D2NET_DT
 	bool "LaCie d2 Network / Big Disk Network (Flattened Device Tree)"
 	select ARCH_ORION5X_DT
@@ -156,6 +174,9 @@ config MACH_D2NET_DT
 	  Say 'Y' here if you want your kernel to support the
 	  LaCie d2 Network NAS.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MACH_NET2BIG
 	bool "LaCie 2Big Network"
@@ -165,8 +186,14 @@ config MACH_NET2BIG
 	  LaCie 2Big Network NAS.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MACH_MSS2
 	bool "Maxtor Shared Storage II"
+=======
+config MACH_MSS2_DT
+	bool "Maxtor Shared Storage II (Flattened Device Tree)"
+	select ARCH_ORION5X_DT
+>>>>>>> v3.18
 =======
 config MACH_MSS2_DT
 	bool "Maxtor Shared Storage II (Flattened Device Tree)"

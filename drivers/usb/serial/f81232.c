@@ -13,7 +13,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -59,7 +62,10 @@ static void f81232_update_line_status(struct usb_serial_port *port,
 				      unsigned int actual_length)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * FIXME: Update port->icount, and call
 	 *
@@ -67,6 +73,9 @@ static void f81232_update_line_status(struct usb_serial_port *port,
 	 *
 	 *	  on MSR changes.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -124,7 +133,10 @@ static void f81232_process_read_urb(struct urb *urb)
 	priv->line_status &= ~UART_STATE_TRANSIENT_MASK;
 	spin_unlock_irqrestore(&priv->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wake_up_interruptible(&port->port.delta_msr_wait);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -224,7 +236,10 @@ static int f81232_open(struct tty_struct *tty, struct usb_serial_port *port)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port->port.drain_delay = 256;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -261,6 +276,7 @@ static int f81232_carrier_raised(struct usb_serial_port *port)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int f81232_tiocmiwait(struct tty_struct *tty, unsigned long arg)
 {
@@ -304,6 +320,8 @@ static int f81232_tiocmiwait(struct tty_struct *tty, unsigned long arg)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int f81232_ioctl(struct tty_struct *tty,
 			unsigned int cmd, unsigned long arg)
 {
@@ -311,9 +329,12 @@ static int f81232_ioctl(struct tty_struct *tty,
 	struct usb_serial_port *port = tty->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s (%d) cmd = 0x%04x\n", __func__,
 		port->number, cmd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (cmd) {
@@ -321,8 +342,13 @@ static int f81232_ioctl(struct tty_struct *tty,
 		memset(&ser, 0, sizeof ser);
 		ser.type = PORT_16654;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ser.line = port->serial->minor;
 		ser.port = port->number;
+=======
+		ser.line = port->minor;
+		ser.port = port->port_number;
+>>>>>>> v3.18
 =======
 		ser.line = port->minor;
 		ser.port = port->port_number;
@@ -335,8 +361,11 @@ static int f81232_ioctl(struct tty_struct *tty,
 		return 0;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&port->dev, "%s not supported = 0x%04x\n",
 			__func__, cmd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -357,6 +386,11 @@ static int f81232_port_probe(struct usb_serial_port *port)
 	usb_set_serial_port_data(port, priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	port->port.drain_delay = 256;
+
+>>>>>>> v3.18
 =======
 	port->port.drain_delay = 256;
 
@@ -393,7 +427,11 @@ static struct usb_serial_driver f81232_device = {
 	.tiocmget =		f81232_tiocmget,
 	.tiocmset =		f81232_tiocmset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.tiocmiwait =		f81232_tiocmiwait,
+=======
+	.tiocmiwait =		usb_serial_generic_tiocmiwait,
+>>>>>>> v3.18
 =======
 	.tiocmiwait =		usb_serial_generic_tiocmiwait,
 >>>>>>> v3.18

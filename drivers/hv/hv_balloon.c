@@ -674,7 +674,11 @@ static bool pfn_covered(unsigned long start_pfn, unsigned long pfn_cnt)
 		 * "hot add block", move on.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (start_pfn < has->start_pfn || start_pfn >= has->end_pfn)
+=======
+		if ((start_pfn >= has->end_pfn))
+>>>>>>> v3.18
 =======
 		if ((start_pfn >= has->end_pfn))
 >>>>>>> v3.18
@@ -733,7 +737,11 @@ static unsigned long handle_pg_range(unsigned long pg_start,
 		 * "hot add block", move on.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (start_pfn < has->start_pfn || start_pfn >= has->end_pfn)
+=======
+		if ((start_pfn >= has->end_pfn))
+>>>>>>> v3.18
 =======
 		if ((start_pfn >= has->end_pfn))
 >>>>>>> v3.18
@@ -841,7 +849,10 @@ static void hot_add_req(struct work_struct *dummy)
 	resp.hdr.type = DM_MEM_HOT_ADD_RESPONSE;
 	resp.hdr.size = sizeof(struct dm_hot_add_response);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	resp.hdr.trans_id = atomic_inc_return(&trans_id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -906,6 +917,10 @@ static void hot_add_req(struct work_struct *dummy)
 
 	dm->state = DM_INITIALIZED;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	resp.hdr.trans_id = atomic_inc_return(&trans_id);
+>>>>>>> v3.18
 =======
 	resp.hdr.trans_id = atomic_inc_return(&trans_id);
 >>>>>>> v3.18
@@ -1118,7 +1133,10 @@ static void balloon_up(struct work_struct *dummy)
 		memset(send_buffer, 0, PAGE_SIZE);
 		bl_resp->hdr.type = DM_BALLOON_RESPONSE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bl_resp->hdr.trans_id = atomic_inc_return(&trans_id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		bl_resp->hdr.size = sizeof(struct dm_balloon_response);
@@ -1149,6 +1167,10 @@ static void balloon_up(struct work_struct *dummy)
 
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			bl_resp->hdr.trans_id = atomic_inc_return(&trans_id);
+>>>>>>> v3.18
 =======
 			bl_resp->hdr.trans_id = atomic_inc_return(&trans_id);
 >>>>>>> v3.18
@@ -1217,7 +1239,12 @@ static int dm_thread_func(void *dm_dev)
 
 	while (!kthread_should_stop()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		t = wait_for_completion_timeout(&dm_device.config_event, 1*HZ);
+=======
+		t = wait_for_completion_interruptible_timeout(
+						&dm_device.config_event, 1*HZ);
+>>>>>>> v3.18
 =======
 		t = wait_for_completion_interruptible_timeout(
 						&dm_device.config_event, 1*HZ);
@@ -1577,7 +1604,10 @@ module_init(init_balloon_drv);
 
 MODULE_DESCRIPTION("Hyper-V Balloon");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_VERSION(HV_DRV_VERSION);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");

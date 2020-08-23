@@ -319,7 +319,10 @@ int v4l2_event_subdev_unsubscribe(struct v4l2_subdev *sd, struct v4l2_fh *fh,
 }
 EXPORT_SYMBOL_GPL(v4l2_event_subdev_unsubscribe);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void v4l2_event_src_replace(struct v4l2_event *old,
 				const struct v4l2_event *new)
@@ -356,4 +359,7 @@ int v4l2_src_change_event_subdev_subscribe(struct v4l2_subdev *sd,
 	return v4l2_src_change_event_subscribe(fh, sub);
 }
 EXPORT_SYMBOL_GPL(v4l2_src_change_event_subdev_subscribe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

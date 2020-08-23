@@ -11,7 +11,10 @@ Recommended properties:
  - ti,hwmods: Name of the hwmod associated to the LCDC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Optional properties:
  - max-bandwidth: The maximum pixels per second that the memory
    interface / lcd controller combination can sustain
@@ -20,6 +23,9 @@ Optional properties:
  - max-pixelclock: The maximum pixel clock that can be supported
    by the lcd controller in KHz.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 

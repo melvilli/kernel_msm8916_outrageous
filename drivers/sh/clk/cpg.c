@@ -37,10 +37,13 @@ static void sh_clk_write(int value, struct clk *clk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sh_clk_mstp_enable(struct clk *clk)
 {
 	sh_clk_write(sh_clk_read(clk) & ~(1 << clk->enable_bit), clk);
 =======
+=======
+>>>>>>> v3.18
 static unsigned int r8(const void __iomem *addr)
 {
 	return ioread8(addr);
@@ -82,6 +85,9 @@ static int sh_clk_mstp_enable(struct clk *clk)
 			return -ETIMEDOUT;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

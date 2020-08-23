@@ -174,7 +174,11 @@ static inline void palmld_nor_init(void) {}
  ******************************************************************************/
 #if defined(CONFIG_KEYBOARD_PXA27x) || defined(CONFIG_KEYBOARD_PXA27x_MODULE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int palmld_matrix_keys[] = {
+=======
+static const unsigned int palmld_matrix_keys[] = {
+>>>>>>> v3.18
 =======
 static const unsigned int palmld_matrix_keys[] = {
 >>>>>>> v3.18
@@ -195,12 +199,15 @@ static const unsigned int palmld_matrix_keys[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pxa27x_keypad_platform_data palmld_keypad_platform_data = {
 	.matrix_key_rows	= 4,
 	.matrix_key_cols	= 3,
 	.matrix_key_map		= palmld_matrix_keys,
 	.matrix_key_map_size	= ARRAY_SIZE(palmld_matrix_keys),
 =======
+=======
+>>>>>>> v3.18
 static struct matrix_keymap_data palmld_matrix_keymap_data = {
 	.keymap			= palmld_matrix_keys,
 	.keymap_size		= ARRAY_SIZE(palmld_matrix_keys),
@@ -210,6 +217,9 @@ static struct pxa27x_keypad_platform_data palmld_keypad_platform_data = {
 	.matrix_key_rows	= 4,
 	.matrix_key_cols	= 3,
 	.matrix_keymap_data	= &palmld_matrix_keymap_data,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.debounce_interval	= 30,

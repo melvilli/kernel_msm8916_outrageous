@@ -26,6 +26,7 @@ struct siginfo;
  * Careful to keep union _sifields from shifting ...
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_32BIT
 #define __ARCH_SI_PREAMBLE_SIZE (3 * sizeof(int))
 #endif
@@ -34,6 +35,8 @@ struct siginfo;
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #if _MIPS_SZLONG == 32
 #define __ARCH_SI_PREAMBLE_SIZE (3 * sizeof(int))
 #elif _MIPS_SZLONG == 64
@@ -44,6 +47,9 @@ struct siginfo;
 
 #define __ARCH_SIGSYS
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm-generic/siginfo.h>
 
@@ -59,7 +65,11 @@ typedef struct siginfo {
 		/* kill() */
 		struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__kernel_pid_t _pid;	/* sender's pid */
+=======
+			pid_t _pid;		/* sender's pid */
+>>>>>>> v3.18
 =======
 			pid_t _pid;		/* sender's pid */
 >>>>>>> v3.18
@@ -69,7 +79,11 @@ typedef struct siginfo {
 		/* POSIX.1b timers */
 		struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__kernel_timer_t _tid;	/* timer id */
+=======
+			timer_t _tid;		/* timer id */
+>>>>>>> v3.18
 =======
 			timer_t _tid;		/* timer id */
 >>>>>>> v3.18
@@ -82,7 +96,11 @@ typedef struct siginfo {
 		/* POSIX.1b signals */
 		struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__kernel_pid_t _pid;	/* sender's pid */
+=======
+			pid_t _pid;		/* sender's pid */
+>>>>>>> v3.18
 =======
 			pid_t _pid;		/* sender's pid */
 >>>>>>> v3.18
@@ -93,32 +111,44 @@ typedef struct siginfo {
 		/* SIGCHLD */
 		struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__kernel_pid_t _pid;	/* which child */
 			__ARCH_SI_UID_T _uid;	/* sender's uid */
 			int _status;		/* exit code */
 			__kernel_clock_t _utime;
 			__kernel_clock_t _stime;
 =======
+=======
+>>>>>>> v3.18
 			pid_t _pid;		/* which child */
 			__ARCH_SI_UID_T _uid;	/* sender's uid */
 			int _status;		/* exit code */
 			clock_t _utime;
 			clock_t _stime;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} _sigchld;
 
 		/* IRIX SIGCHLD */
 		struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__kernel_pid_t _pid;	/* which child */
 			__kernel_clock_t _utime;
 			int _status;		/* exit code */
 			__kernel_clock_t _stime;
 =======
+=======
+>>>>>>> v3.18
 			pid_t _pid;		/* which child */
 			clock_t _utime;
 			int _status;		/* exit code */
 			clock_t _stime;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} _irix_sigchld;
 
@@ -137,7 +167,10 @@ typedef struct siginfo {
 			int _fd;
 		} _sigpoll;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* SIGSYS */
 		struct {
@@ -145,6 +178,9 @@ typedef struct siginfo {
 			int _syscall;	/* triggering system call number */
 			unsigned int _arch;	/* AUDIT_ARCH_* of syscall */
 		} _sigsys;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} _sifields;
 } siginfo_t;

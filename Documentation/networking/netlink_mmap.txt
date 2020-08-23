@@ -46,7 +46,11 @@ processing.
 Conversion of the reception path involves calling poll() on the file
 descriptor, once the socket is readable the frames from the ring are
 <<<<<<< HEAD
+<<<<<<< HEAD
 processsed in order until no more messages are available, as indicated by
+=======
+processed in order until no more messages are available, as indicated by
+>>>>>>> v3.18
 =======
 processed in order until no more messages are available, as indicated by
 >>>>>>> v3.18
@@ -59,9 +63,15 @@ it will use an allocated socket buffer as usual and the contents will be
 Dumps of kernel databases automatically support memory mapped I/O.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Conversion of the transmit path involves changing message contruction to
 use memory from the TX ring instead of (usually) a buffer declared on the
 stack and setting up the frame header approriately. Optionally poll() can
+=======
+Conversion of the transmit path involves changing message construction to
+use memory from the TX ring instead of (usually) a buffer declared on the
+stack and setting up the frame header appropriately. Optionally poll() can
+>>>>>>> v3.18
 =======
 Conversion of the transmit path involves changing message construction to
 use memory from the TX ring instead of (usually) a buffer declared on the
@@ -76,8 +86,13 @@ RX and TX rings
 ----------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Each ring contains a number of continous memory blocks, containing frames of
 fixed size dependant on the parameters used for ring setup.
+=======
+Each ring contains a number of continuous memory blocks, containing frames of
+fixed size dependent on the parameters used for ring setup.
+>>>>>>> v3.18
 =======
 Each ring contains a number of continuous memory blocks, containing frames of
 fixed size dependent on the parameters used for ring setup.
@@ -96,7 +111,11 @@ Ring:	[ block 0 ]
 
 The blocks are only visible to the kernel, from the point of view of user-space
 <<<<<<< HEAD
+<<<<<<< HEAD
 the ring just contains the frames in a continous memory zone.
+=======
+the ring just contains the frames in a continuous memory zone.
+>>>>>>> v3.18
 =======
 the ring just contains the frames in a continuous memory zone.
 >>>>>>> v3.18
@@ -111,7 +130,11 @@ struct nl_mmap_req {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Frames are grouped into blocks, where each block is a continous region of memory
+=======
+Frames are grouped into blocks, where each block is a continuous region of memory
+>>>>>>> v3.18
 =======
 Frames are grouped into blocks, where each block is a continuous region of memory
 >>>>>>> v3.18
@@ -137,8 +160,13 @@ Some parameters are constrained, specifically:
 - nm_frame_nr must equal the actual number of frames as specified above.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 When the kernel can't allocate phsyically continous memory for a ring block,
 it will fall back to use physically discontinous memory. This might affect
+=======
+When the kernel can't allocate physically continuous memory for a ring block,
+it will fall back to use physically discontinuous memory. This might affect
+>>>>>>> v3.18
 =======
 When the kernel can't allocate physically continuous memory for a ring block,
 it will fall back to use physically discontinuous memory. This might affect
@@ -255,6 +283,7 @@ Ring setup:
 
 	/* Configure ring parameters */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (setsockopt(fd, NETLINK_RX_RING, &req, sizeof(req)) < 0)
 		exit(1);
 	if (setsockopt(fd, NETLINK_TX_RING, &req, sizeof(req)) < 0)
@@ -262,12 +291,17 @@ Ring setup:
 
 	/* Calculate size of each invididual ring */
 =======
+=======
+>>>>>>> v3.18
 	if (setsockopt(fd, SOL_NETLINK, NETLINK_RX_RING, &req, sizeof(req)) < 0)
 		exit(1);
 	if (setsockopt(fd, SOL_NETLINK, NETLINK_TX_RING, &req, sizeof(req)) < 0)
 		exit(1)
 
 	/* Calculate size of each individual ring */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ring_size = req.nm_block_nr * req.nm_block_size;
 
@@ -312,9 +346,15 @@ This example assumes some ring parameters of the ring setup are available.
 			hdr = rx_ring + frame_offset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (hdr->nm_status == NL_MMAP_STATUS_VALID)
 				/* Regular memory mapped frame */
 				nlh = (void *hdr) + NL_MMAP_HDRLEN;
+=======
+			if (hdr->nm_status == NL_MMAP_STATUS_VALID) {
+				/* Regular memory mapped frame */
+				nlh = (void *)hdr + NL_MMAP_HDRLEN;
+>>>>>>> v3.18
 =======
 			if (hdr->nm_status == NL_MMAP_STATUS_VALID) {
 				/* Regular memory mapped frame */

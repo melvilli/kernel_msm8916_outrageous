@@ -7,6 +7,10 @@ obj-$(CONFIG_W1_SLAVE_SMEM)	+= w1_smem.o
 obj-$(CONFIG_W1_SLAVE_DS2408)	+= w1_ds2408.o
 obj-$(CONFIG_W1_SLAVE_DS2413)	+= w1_ds2413.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_W1_SLAVE_DS2406)	+= w1_ds2406.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_W1_SLAVE_DS2406)	+= w1_ds2406.o
 >>>>>>> v3.18

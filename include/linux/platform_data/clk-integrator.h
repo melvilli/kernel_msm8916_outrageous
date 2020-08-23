@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 void integrator_clk_init(bool is_cp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void integrator_impd1_clk_init(void __iomem *base, unsigned int id);

@@ -24,7 +24,11 @@
 #include <linux/clk.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -600,7 +604,11 @@ static struct i2c_algorithm pnx_algorithm = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -637,11 +645,17 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 	u32 speed = I2C_PNX_SPEED_KHZ_DEFAULT * 1000;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	alg_data = kzalloc(sizeof(*alg_data), GFP_KERNEL);
 	if (!alg_data) {
 		ret = -ENOMEM;
 		goto err_kzalloc;
 	}
+=======
+	alg_data = devm_kzalloc(&pdev->dev, sizeof(*alg_data), GFP_KERNEL);
+	if (!alg_data)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	alg_data = devm_kzalloc(&pdev->dev, sizeof(*alg_data), GFP_KERNEL);
 	if (!alg_data)
@@ -672,11 +686,17 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	alg_data->clk = clk_get(&pdev->dev, NULL);
 	if (IS_ERR(alg_data->clk)) {
 		ret = PTR_ERR(alg_data->clk);
 		goto out_drvdata;
 	}
+=======
+	alg_data->clk = devm_clk_get(&pdev->dev, NULL);
+	if (IS_ERR(alg_data->clk))
+		return PTR_ERR(alg_data->clk);
+>>>>>>> v3.18
 =======
 	alg_data->clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(alg_data->clk))
@@ -692,6 +712,7 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 
 	/* Register I/O resource */
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!res) {
 		dev_err(&pdev->dev, "Unable to get mem resource.\n");
@@ -719,6 +740,8 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 	if (ret)
 		goto out_unmap;
 =======
+=======
+>>>>>>> v3.18
 	alg_data->ioaddr = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(alg_data->ioaddr))
 		return PTR_ERR(alg_data->ioaddr);
@@ -726,6 +749,9 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 	ret = clk_enable(alg_data->clk);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	freq = clk_get_rate(alg_data->clk);
@@ -758,16 +784,22 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 	if (alg_data->irq < 0) {
 		dev_err(&pdev->dev, "Failed to get IRQ from platform resource\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_irq;
 	}
 	ret = request_irq(alg_data->irq, i2c_pnx_interrupt,
 			0, pdev->name, alg_data);
 =======
+=======
+>>>>>>> v3.18
 		ret = alg_data->irq;
 		goto out_clock;
 	}
 	ret = devm_request_irq(&pdev->dev, alg_data->irq, i2c_pnx_interrupt,
 			       0, pdev->name, alg_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		goto out_clock;
@@ -776,6 +808,7 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 	ret = i2c_add_numbered_adapter(&alg_data->adapter);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "I2C: Failed to add bus\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out_irq;
 	}
@@ -787,11 +820,17 @@ static int i2c_pnx_probe(struct platform_device *pdev)
 	}
 
 >>>>>>> v3.18
+=======
+		goto out_clock;
+	}
+
+>>>>>>> v3.18
 	dev_dbg(&pdev->dev, "%s: Master at %#8x, irq %d.\n",
 		alg_data->adapter.name, res->start, alg_data->irq);
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 out_irq:
 	free_irq(alg_data->irq, alg_data);
@@ -810,6 +849,10 @@ err_kzalloc:
 out_clock:
 	clk_disable(alg_data->clk);
 >>>>>>> v3.18
+=======
+out_clock:
+	clk_disable(alg_data->clk);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -818,6 +861,7 @@ static int i2c_pnx_remove(struct platform_device *pdev)
 	struct i2c_pnx_algo_data *alg_data = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(alg_data->irq, alg_data);
 	i2c_del_adapter(&alg_data->adapter);
 	clk_disable(alg_data->clk);
@@ -825,6 +869,10 @@ static int i2c_pnx_remove(struct platform_device *pdev)
 	release_mem_region(alg_data->base, I2C_PNX_REGION_SIZE);
 	clk_put(alg_data->clk);
 	kfree(alg_data);
+=======
+	i2c_del_adapter(&alg_data->adapter);
+	clk_disable(alg_data->clk);
+>>>>>>> v3.18
 =======
 	i2c_del_adapter(&alg_data->adapter);
 	clk_disable(alg_data->clk);

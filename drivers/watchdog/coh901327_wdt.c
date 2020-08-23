@@ -355,9 +355,15 @@ static int __init coh901327_probe(struct platform_device *pdev)
 	clk_disable(clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (margin < 1 || margin > 327)
 		margin = 60;
 	coh901327_wdt.timeout = margin;
+=======
+	ret = watchdog_init_timeout(&coh901327_wdt, margin, &pdev->dev);
+	if (ret < 0)
+		coh901327_wdt.timeout = 60;
+>>>>>>> v3.18
 =======
 	ret = watchdog_init_timeout(&coh901327_wdt, margin, &pdev->dev);
 	if (ret < 0)
@@ -448,18 +454,28 @@ void coh901327_watchdog_reset(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id coh901327_dt_match[] = {
 	{ .compatible = "stericsson,coh901327" },
 	{},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver coh901327_driver = {
 	.driver = {
 		.owner	= THIS_MODULE,
 		.name	= "coh901327_wdog",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = coh901327_dt_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = coh901327_dt_match,
 >>>>>>> v3.18

@@ -53,6 +53,7 @@ struct nf_conntrack_helper {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct nf_conntrack_helper *
 __nf_conntrack_helper_find(const char *name, u16 l3num, u8 protonum);
 
@@ -69,6 +70,8 @@ extern int __nf_ct_try_assign_helper(struct nf_conn *ct, struct nf_conn *tmpl,
 
 extern void nf_ct_helper_destroy(struct nf_conn *ct);
 =======
+=======
+>>>>>>> v3.18
 struct nf_conntrack_helper *__nf_conntrack_helper_find(const char *name,
 						       u16 l3num, u8 protonum);
 
@@ -87,6 +90,9 @@ int __nf_ct_try_assign_helper(struct nf_conn *ct, struct nf_conn *tmpl,
 			      gfp_t flags);
 
 void nf_ct_helper_destroy(struct nf_conn *ct);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct nf_conn_help *nfct_help(const struct nf_conn *ct)
@@ -104,6 +110,7 @@ static inline void *nfct_help_data(const struct nf_conn *ct)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int nf_conntrack_helper_pernet_init(struct net *net);
 extern void nf_conntrack_helper_pernet_fini(struct net *net);
 
@@ -116,6 +123,8 @@ extern int nf_conntrack_broadcast_help(struct sk_buff *skb,
 				       enum ip_conntrack_info ctinfo,
 				       unsigned int timeout);
 =======
+=======
+>>>>>>> v3.18
 int nf_conntrack_helper_pernet_init(struct net *net);
 void nf_conntrack_helper_pernet_fini(struct net *net);
 
@@ -126,6 +135,9 @@ int nf_conntrack_broadcast_help(struct sk_buff *skb, unsigned int protoff,
 				struct nf_conn *ct,
 				enum ip_conntrack_info ctinfo,
 				unsigned int timeout);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct nf_ct_helper_expectfn {

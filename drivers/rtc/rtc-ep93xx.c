@@ -43,7 +43,11 @@ static int ep93xx_rtc_get_swcomp(struct device *dev, unsigned short *preload,
 				unsigned short *delete)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ep93xx_rtc *ep93xx_rtc = dev->platform_data;
+=======
+	struct ep93xx_rtc *ep93xx_rtc = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct ep93xx_rtc *ep93xx_rtc = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -65,7 +69,11 @@ static int ep93xx_rtc_get_swcomp(struct device *dev, unsigned short *preload,
 static int ep93xx_rtc_read_time(struct device *dev, struct rtc_time *tm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ep93xx_rtc *ep93xx_rtc = dev->platform_data;
+=======
+	struct ep93xx_rtc *ep93xx_rtc = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct ep93xx_rtc *ep93xx_rtc = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -80,7 +88,11 @@ static int ep93xx_rtc_read_time(struct device *dev, struct rtc_time *tm)
 static int ep93xx_rtc_set_mmss(struct device *dev, unsigned long secs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ep93xx_rtc *ep93xx_rtc = dev->platform_data;
+=======
+	struct ep93xx_rtc *ep93xx_rtc = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct ep93xx_rtc *ep93xx_rtc = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -151,6 +163,7 @@ static int ep93xx_rtc_probe(struct platform_device *pdev)
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -ENXIO;
 
@@ -162,6 +175,11 @@ static int ep93xx_rtc_probe(struct platform_device *pdev)
 					     resource_size(res));
 	if (!ep93xx_rtc->mmio_base)
 		return -ENXIO;
+=======
+	ep93xx_rtc->mmio_base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(ep93xx_rtc->mmio_base))
+		return PTR_ERR(ep93xx_rtc->mmio_base);
+>>>>>>> v3.18
 =======
 	ep93xx_rtc->mmio_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(ep93xx_rtc->mmio_base))
@@ -186,7 +204,10 @@ static int ep93xx_rtc_probe(struct platform_device *pdev)
 
 exit:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pdev->dev.platform_data = NULL;
@@ -197,7 +218,10 @@ static int ep93xx_rtc_remove(struct platform_device *pdev)
 {
 	sysfs_remove_group(&pdev->dev.kobj, &ep93xx_rtc_sysfs_files);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pdev->dev.platform_data = NULL;

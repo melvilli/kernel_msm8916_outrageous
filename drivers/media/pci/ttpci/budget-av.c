@@ -1129,7 +1129,11 @@ static struct stb0899_config knc1_dvbs2_config = {
 
 	.xtal_freq		= 27000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.inversion		= IQ_SWAP_OFF, /* 1 */
+=======
+	.inversion		= IQ_SWAP_OFF,
+>>>>>>> v3.18
 =======
 	.inversion		= IQ_SWAP_OFF,
 >>>>>>> v3.18

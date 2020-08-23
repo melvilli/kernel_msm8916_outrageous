@@ -7,6 +7,10 @@
 #define SETUP_DTB			2
 #define SETUP_PCI			3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SETUP_EFI			4
+>>>>>>> v3.18
 =======
 #define SETUP_EFI			4
 >>>>>>> v3.18
@@ -28,6 +32,10 @@
 #define XLF_EFI_HANDOVER_32		(1<<2)
 #define XLF_EFI_HANDOVER_64		(1<<3)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define XLF_EFI_KEXEC			(1<<4)
+>>>>>>> v3.18
 =======
 #define XLF_EFI_KEXEC			(1<<4)
 >>>>>>> v3.18
@@ -167,7 +175,11 @@ enum {
 	X86_SUBARCH_LGUEST,
 	X86_SUBARCH_XEN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	X86_SUBARCH_MRST,
+=======
+	X86_SUBARCH_INTEL_MID,
+>>>>>>> v3.18
 =======
 	X86_SUBARCH_INTEL_MID,
 >>>>>>> v3.18

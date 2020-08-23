@@ -23,7 +23,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rtc_hctosys(void)
+=======
+static int __init rtc_hctosys(void)
+>>>>>>> v3.18
 =======
 static int __init rtc_hctosys(void)
 >>>>>>> v3.18

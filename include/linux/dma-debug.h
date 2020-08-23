@@ -86,6 +86,11 @@ extern void debug_dma_sync_sg_for_device(struct device *dev,
 extern void debug_dma_dump_mappings(struct device *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void debug_dma_assert_idle(struct page *page);
+
+>>>>>>> v3.18
 =======
 extern void debug_dma_assert_idle(struct page *page);
 
@@ -189,11 +194,17 @@ static inline void debug_dma_dump_mappings(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void debug_dma_assert_idle(struct page *page)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_DMA_API_DEBUG */
 

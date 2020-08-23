@@ -24,6 +24,10 @@
 #include <linux/migrate.h>
 #include <linux/perf_event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ksm.h>
+>>>>>>> v3.18
 =======
 #include <linux/ksm.h>
 >>>>>>> v3.18
@@ -32,6 +36,7 @@
 #include <asm/cacheflush.h>
 #include <asm/tlbflush.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef pgprot_modify
 static inline pgprot_t pgprot_modify(pgprot_t oldprot, pgprot_t newprot)
@@ -44,6 +49,8 @@ static unsigned long change_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 		unsigned long addr, unsigned long end, pgprot_t newprot,
 		int dirty_accountable, int prot_numa, bool *ret_all_same_node)
 =======
+=======
+>>>>>>> v3.18
 /*
  * For a prot_numa update we only hold mmap_sem for read so there is a
  * potential race with faulting where a pmd was temporarily none. This
@@ -75,6 +82,9 @@ static pte_t *lock_pte_protection(struct vm_area_struct *vma, pmd_t *pmd,
 static unsigned long change_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 		unsigned long addr, unsigned long end, pgprot_t newprot,
 		int dirty_accountable, int prot_numa)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct mm_struct *mm = vma->vm_mm;
@@ -82,16 +92,22 @@ static unsigned long change_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 	spinlock_t *ptl;
 	unsigned long pages = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool all_same_node = true;
 	int last_nid = -1;
 
 	pte = pte_offset_map_lock(mm, pmd, addr, &ptl);
 =======
+=======
+>>>>>>> v3.18
 
 	pte = lock_pte_protection(vma, pmd, addr, prot_numa, &ptl);
 	if (!pte)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	arch_enter_lazy_mmu_mode();
 	do {
@@ -101,10 +117,13 @@ static unsigned long change_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 			bool updated = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ptent = ptep_modify_prot_start(mm, addr, pte);
 			if (!prot_numa) {
 				ptent = pte_modify(ptent, newprot);
 =======
+=======
+>>>>>>> v3.18
 			if (!prot_numa) {
 				ptent = ptep_modify_prot_start(mm, addr, pte);
 				if (pte_numa(ptent))
@@ -119,12 +138,16 @@ static unsigned long change_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 				     !(vma->vm_flags & VM_SOFTDIRTY)))
 					ptent = pte_mkwrite(ptent);
 				ptep_modify_prot_commit(mm, addr, pte, ptent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				updated = true;
 			} else {
 				struct page *page;
 
 				page = vm_normal_page(vma, addr, oldpte);
+<<<<<<< HEAD
 <<<<<<< HEAD
 				if (page) {
 					int this_nid = page_to_nid(page);
@@ -142,10 +165,16 @@ static unsigned long change_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 					if (!pte_numa(oldpte)) {
 						ptep_set_numa(mm, addr, pte);
 >>>>>>> v3.18
+=======
+				if (page && !PageKsm(page)) {
+					if (!pte_numa(oldpte)) {
+						ptep_set_numa(mm, addr, pte);
+>>>>>>> v3.18
 						updated = true;
 					}
 				}
 			}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 			/*
@@ -164,11 +193,19 @@ static unsigned long change_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 			if (updated)
 				pages++;
 >>>>>>> v3.18
+=======
+			if (updated)
+				pages++;
+>>>>>>> v3.18
 		} else if (IS_ENABLED(CONFIG_MIGRATION) && !pte_file(oldpte)) {
 			swp_entry_t entry = pte_to_swp_entry(oldpte);
 
 			if (is_write_migration_entry(entry)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				pte_t newpte;
+>>>>>>> v3.18
 =======
 				pte_t newpte;
 >>>>>>> v3.18
@@ -178,11 +215,14 @@ static unsigned long change_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 				 */
 				make_migration_entry_read(&entry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				set_pte_at(mm, addr, pte,
 					swp_entry_to_pte(entry));
 			}
 			pages++;
 =======
+=======
+>>>>>>> v3.18
 				newpte = swp_entry_to_pte(entry);
 				if (pte_swp_soft_dirty(oldpte))
 					newpte = pte_swp_mksoft_dirty(newpte);
@@ -190,12 +230,16 @@ static unsigned long change_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 
 				pages++;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} while (pte++, addr += PAGE_SIZE, addr != end);
 	arch_leave_lazy_mmu_mode();
 	pte_unmap_unlock(pte - 1, ptl);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	*ret_all_same_node = all_same_node;
 	return pages;
@@ -222,11 +266,17 @@ static inline void change_pmd_protnuma(struct mm_struct *mm, unsigned long addr,
 }
 
 >>>>>>> v3.18
+=======
+	return pages;
+}
+
+>>>>>>> v3.18
 static inline unsigned long change_pmd_range(struct vm_area_struct *vma,
 		pud_t *pud, unsigned long addr, unsigned long end,
 		pgprot_t newprot, int dirty_accountable, int prot_numa)
 {
 	pmd_t *pmd;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long next;
 	unsigned long pages = 0;
@@ -266,6 +316,8 @@ static inline unsigned long change_pmd_range(struct vm_area_struct *vma,
 		count_vm_numa_events(NUMA_HUGE_PTE_UPDATES, nr_huge_updates);
 
 =======
+=======
+>>>>>>> v3.18
 	struct mm_struct *mm = vma->vm_mm;
 	unsigned long next;
 	unsigned long pages = 0;
@@ -315,6 +367,9 @@ static inline unsigned long change_pmd_range(struct vm_area_struct *vma,
 
 	if (nr_huge_updates)
 		count_vm_numa_events(NUMA_HUGE_PTE_UPDATES, nr_huge_updates);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return pages;
 }
@@ -374,10 +429,15 @@ unsigned long change_protection(struct vm_area_struct *vma, unsigned long start,
 		       int dirty_accountable, int prot_numa)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mm_struct *mm = vma->vm_mm;
 	unsigned long pages;
 
 	mmu_notifier_invalidate_range_start(mm, start, end);
+=======
+	unsigned long pages;
+
+>>>>>>> v3.18
 =======
 	unsigned long pages;
 
@@ -387,7 +447,10 @@ unsigned long change_protection(struct vm_area_struct *vma, unsigned long start,
 	else
 		pages = change_protection_range(vma, start, end, newprot, dirty_accountable, prot_numa);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mmu_notifier_invalidate_range_end(mm, start, end);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -433,8 +496,12 @@ mprotect_fixup(struct vm_area_struct *vma, struct vm_area_struct **pprev,
 	pgoff = vma->vm_pgoff + ((start - vma->vm_start) >> PAGE_SHIFT);
 	*pprev = vma_merge(mm, *pprev, start, end, newflags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vma->anon_vma, vma->vm_file, pgoff, vma_policy(vma),
 			vma_get_anon_name(vma));
+=======
+			vma->anon_vma, vma->vm_file, pgoff, vma_policy(vma));
+>>>>>>> v3.18
 =======
 			vma->anon_vma, vma->vm_file, pgoff, vma_policy(vma));
 >>>>>>> v3.18
@@ -464,6 +531,7 @@ success:
 	 */
 	vma->vm_flags = newflags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma->vm_page_prot = pgprot_modify(vma->vm_page_prot,
 					  vm_get_page_prot(newflags));
 
@@ -471,6 +539,10 @@ success:
 		vma->vm_page_prot = vm_get_page_prot(newflags & ~VM_SHARED);
 		dirty_accountable = 1;
 	}
+=======
+	dirty_accountable = vma_wants_writenotify(vma);
+	vma_set_page_prot(vma);
+>>>>>>> v3.18
 =======
 	dirty_accountable = vma_wants_writenotify(vma);
 	vma_set_page_prot(vma);

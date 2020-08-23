@@ -61,6 +61,7 @@ enum {
 	PINMUX_INPUT_END,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PINMUX_INPUT_PULLUP_BEGIN,
 	PA7_IN_PU, PA6_IN_PU, PA5_IN_PU, PA4_IN_PU,
 	PA3_IN_PU, PA2_IN_PU, PA1_IN_PU, PA0_IN_PU,
@@ -80,6 +81,8 @@ enum {
 	PJ3_IN_PU, PJ2_IN_PU, PJ1_IN_PU,
 	PINMUX_INPUT_PULLUP_END,
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	PINMUX_OUTPUT_BEGIN,
@@ -195,6 +198,7 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const pinmux_enum_t pinmux_data[] = {
 
 	/* PA GPIO */
@@ -275,6 +279,8 @@ static const pinmux_enum_t pinmux_data[] = {
 	PINMUX_DATA(PJ2_DATA, PJ2_IN, PJ2_OUT, PJ2_IN_PU),
 	PINMUX_DATA(PJ1_DATA, PJ1_IN, PJ1_OUT, PJ1_IN_PU),
 =======
+=======
+>>>>>>> v3.18
 static const u16 pinmux_data[] = {
 	/* PA GPIO */
 	PINMUX_DATA(PA7_DATA, PA7_IN, PA7_OUT),
@@ -353,6 +359,9 @@ static const u16 pinmux_data[] = {
 	PINMUX_DATA(PJ3_DATA, PJ3_IN, PJ3_OUT),
 	PINMUX_DATA(PJ2_DATA, PJ2_IN, PJ2_OUT),
 	PINMUX_DATA(PJ1_DATA, PJ1_IN, PJ1_OUT),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* PA FN */
@@ -512,6 +521,7 @@ static const u16 pinmux_data[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sh_pfc_pin pinmux_pins[] = {
 	/* PA */
 	PINMUX_GPIO(GPIO_PA7, PA7_DATA),
@@ -591,6 +601,8 @@ static struct sh_pfc_pin pinmux_pins[] = {
 	PINMUX_GPIO(GPIO_PJ2, PJ2_DATA),
 	PINMUX_GPIO(GPIO_PJ1, PJ1_DATA),
 =======
+=======
+>>>>>>> v3.18
 static const struct sh_pfc_pin pinmux_pins[] = {
 	/* PA */
 	PINMUX_GPIO(PA7),
@@ -669,6 +681,9 @@ static const struct sh_pfc_pin pinmux_pins[] = {
 	PINMUX_GPIO(PJ3),
 	PINMUX_GPIO(PJ2),
 	PINMUX_GPIO(PJ1),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -817,6 +832,7 @@ static const struct pinmux_func pinmux_func_gpios[] = {
 static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 	{ PINMUX_CFG_REG("PACR", 0xffcc0000, 16, 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PA7_FN, PA7_OUT, PA7_IN, PA7_IN_PU,
 		PA6_FN, PA6_OUT, PA6_IN, PA6_IN_PU,
 		PA5_FN, PA5_OUT, PA5_IN, PA5_IN_PU,
@@ -860,6 +876,8 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		PE7_FN, PE7_OUT, PE7_IN, PE7_IN_PU,
 		PE6_FN, PE6_OUT, PE6_IN, PE6_IN_PU,
 =======
+=======
+>>>>>>> v3.18
 		PA7_FN, PA7_OUT, PA7_IN, 0,
 		PA6_FN, PA6_OUT, PA6_IN, 0,
 		PA5_FN, PA5_OUT, PA5_IN, 0,
@@ -902,6 +920,9 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 	{ PINMUX_CFG_REG("PECR", 0xffcc0008, 16, 2) {
 		PE7_FN, PE7_OUT, PE7_IN, 0,
 		PE6_FN, PE6_OUT, PE6_IN, 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		0, 0, 0, 0,
 		0, 0, 0, 0,
@@ -911,6 +932,7 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		0, 0, 0, 0, }
 	},
 	{ PINMUX_CFG_REG("PFCR", 0xffcc000a, 16, 2) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		PF7_FN, PF7_OUT, PF7_IN, PF7_IN_PU,
 		PF6_FN, PF6_OUT, PF6_IN, PF6_IN_PU,
@@ -926,6 +948,8 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		PG6_FN, PG6_OUT, PG6_IN, PG6_IN_PU,
 		PG5_FN, PG5_OUT, PG5_IN, PG5_IN_PU,
 =======
+=======
+>>>>>>> v3.18
 		PF7_FN, PF7_OUT, PF7_IN, 0,
 		PF6_FN, PF6_OUT, PF6_IN, 0,
 		PF5_FN, PF5_OUT, PF5_IN, 0,
@@ -939,6 +963,9 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		PG7_FN, PG7_OUT, PG7_IN, 0,
 		PG6_FN, PG6_OUT, PG6_IN, 0,
 		PG5_FN, PG5_OUT, PG5_IN, 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		0, 0, 0, 0,
 		0, 0, 0, 0,
@@ -947,6 +974,7 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		0, 0, 0, 0, }
 	},
 	{ PINMUX_CFG_REG("PHCR", 0xffcc000e, 16, 2) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		PH7_FN, PH7_OUT, PH7_IN, PH7_IN_PU,
 		PH6_FN, PH6_OUT, PH6_IN, PH6_IN_PU,
@@ -966,6 +994,8 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		PJ2_FN, PJ2_OUT, PJ2_IN, PJ2_IN_PU,
 		PJ1_FN, PJ1_OUT, PJ1_IN, PJ1_IN_PU,
 =======
+=======
+>>>>>>> v3.18
 		PH7_FN, PH7_OUT, PH7_IN, 0,
 		PH6_FN, PH6_OUT, PH6_IN, 0,
 		PH5_FN, PH5_OUT, PH5_IN, 0,
@@ -983,6 +1013,9 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
 		PJ3_FN, PJ3_OUT, PJ3_IN, 0,
 		PJ2_FN, PJ2_OUT, PJ2_IN, 0,
 		PJ1_FN, PJ1_OUT, PJ1_IN, 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		0, 0, 0, 0, }
 	},
@@ -1069,7 +1102,10 @@ const struct sh_pfc_soc_info sh7786_pinmux_info = {
 	.name = "sh7786_pfc",
 	.input = { PINMUX_INPUT_BEGIN, PINMUX_INPUT_END },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.input_pu = { PINMUX_INPUT_PULLUP_BEGIN, PINMUX_INPUT_PULLUP_END },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.output = { PINMUX_OUTPUT_BEGIN, PINMUX_OUTPUT_END },

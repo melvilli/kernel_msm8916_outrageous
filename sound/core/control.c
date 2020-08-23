@@ -151,10 +151,15 @@ void snd_ctl_notify(struct snd_card *card, unsigned int mask,
 	if (snd_BUG_ON(!card || !id))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (card->shutdown)
 		return;
 	read_lock(&card->ctl_files_rwlock);
 #if defined(CONFIG_SND_MIXER_OSS) || defined(CONFIG_SND_MIXER_OSS_MODULE)
+=======
+	read_lock(&card->ctl_files_rwlock);
+#if IS_ENABLED(CONFIG_SND_MIXER_OSS)
+>>>>>>> v3.18
 =======
 	read_lock(&card->ctl_files_rwlock);
 #if IS_ENABLED(CONFIG_SND_MIXER_OSS)
@@ -178,7 +183,11 @@ void snd_ctl_notify(struct snd_card *card, unsigned int mask,
 			list_add_tail(&ev->list, &ctl->events);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "No memory available to allocate event\n");
+=======
+			dev_err(card->dev, "No memory available to allocate event\n");
+>>>>>>> v3.18
 =======
 			dev_err(card->dev, "No memory available to allocate event\n");
 >>>>>>> v3.18
@@ -218,7 +227,11 @@ static struct snd_kcontrol *snd_ctl_new(struct snd_kcontrol *control,
 	kctl = kzalloc(sizeof(*kctl) + sizeof(struct snd_kcontrol_volatile) * control->count, GFP_KERNEL);
 	if (kctl == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Cannot allocate control instance\n");
+=======
+		pr_err("ALSA: Cannot allocate control instance\n");
+>>>>>>> v3.18
 =======
 		pr_err("ALSA: Cannot allocate control instance\n");
 >>>>>>> v3.18
@@ -257,9 +270,14 @@ struct snd_kcontrol *snd_ctl_new1(const struct snd_kcontrol_new *ncontrol,
 		strlcpy(kctl.id.name, ncontrol->name, sizeof(kctl.id.name));
 		if (strcmp(ncontrol->name, kctl.id.name) != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_WARNING
 				   "Control name '%s' truncated to '%s'\n",
 				   ncontrol->name, kctl.id.name);
+=======
+			pr_warn("ALSA: Control name '%s' truncated to '%s'\n",
+				ncontrol->name, kctl.id.name);
+>>>>>>> v3.18
 =======
 			pr_warn("ALSA: Control name '%s' truncated to '%s'\n",
 				ncontrol->name, kctl.id.name);
@@ -331,7 +349,11 @@ static int snd_ctl_find_hole(struct snd_card *card, unsigned int count)
 		if (--iter == 0) {
 			/* this situation is very unlikely */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "unable to allocate new control numid\n");
+=======
+			dev_err(card->dev, "unable to allocate new control numid\n");
+>>>>>>> v3.18
 =======
 			dev_err(card->dev, "unable to allocate new control numid\n");
 >>>>>>> v3.18
@@ -374,7 +396,11 @@ int snd_ctl_add(struct snd_card *card, struct snd_kcontrol *kcontrol)
 	if (snd_ctl_find_id(card, &id)) {
 		up_write(&card->controls_rwsem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd(KERN_ERR "control %i:%i:%i:%s:%i is already present\n",
+=======
+		dev_err(card->dev, "control %i:%i:%i:%s:%i is already present\n",
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "control %i:%i:%i:%s:%i is already present\n",
 >>>>>>> v3.18
@@ -1115,7 +1141,11 @@ static int snd_ctl_elem_user_tlv(struct snd_kcontrol *kcontrol,
 		change = ue->tlv_data_size != size;
 		if (!change)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			change = memcmp(ue->tlv_data, new_data, size) != 0;
+=======
+			change = memcmp(ue->tlv_data, new_data, size);
+>>>>>>> v3.18
 =======
 			change = memcmp(ue->tlv_data, new_data, size);
 >>>>>>> v3.18
@@ -1201,10 +1231,13 @@ static int snd_ctl_elem_add(struct snd_ctl_file *file,
 	if (info->count < 1)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!*info->id.name)
 		return -EINVAL;
 	if (strnlen(info->id.name, sizeof(info->id.name)) >= sizeof(info->id.name))
 		return -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	access = info->access == 0 ? SNDRV_CTL_ELEM_ACCESS_READWRITE :
@@ -1361,8 +1394,11 @@ static int snd_ctl_tlv_ioctl(struct snd_ctl_file *file,
 	if (tlv.length < sizeof(unsigned int) * 2)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tlv.numid)
 		return -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	down_read(&card->controls_rwsem);
@@ -1452,17 +1488,23 @@ static long snd_ctl_ioctl(struct file *file, unsigned int cmd, unsigned long arg
 		return snd_ctl_subscribe_events(ctl, ip);
 	case SNDRV_CTL_IOCTL_TLV_READ:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return snd_ctl_tlv_ioctl(ctl, argp, 0);
 	case SNDRV_CTL_IOCTL_TLV_WRITE:
 		return snd_ctl_tlv_ioctl(ctl, argp, 1);
 	case SNDRV_CTL_IOCTL_TLV_COMMAND:
 		return snd_ctl_tlv_ioctl(ctl, argp, -1);
 =======
+=======
+>>>>>>> v3.18
 		return snd_ctl_tlv_ioctl(ctl, argp, SNDRV_CTL_TLV_OP_READ);
 	case SNDRV_CTL_IOCTL_TLV_WRITE:
 		return snd_ctl_tlv_ioctl(ctl, argp, SNDRV_CTL_TLV_OP_WRITE);
 	case SNDRV_CTL_IOCTL_TLV_COMMAND:
 		return snd_ctl_tlv_ioctl(ctl, argp, SNDRV_CTL_TLV_OP_CMD);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case SNDRV_CTL_IOCTL_POWER:
 		return -ENOPROTOOPT;
@@ -1483,7 +1525,11 @@ static long snd_ctl_ioctl(struct file *file, unsigned int cmd, unsigned long arg
 	}
 	up_read(&snd_ioctl_rwsem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("unknown ioctl = 0x%x\n", cmd);
+=======
+	dev_dbg(card->dev, "unknown ioctl = 0x%x\n", cmd);
+>>>>>>> v3.18
 =======
 	dev_dbg(card->dev, "unknown ioctl = 0x%x\n", cmd);
 >>>>>>> v3.18

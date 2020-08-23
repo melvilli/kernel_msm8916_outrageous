@@ -54,14 +54,20 @@ MODULE_ALIAS("wmi:5FB7F034-2C63-45e9-BE91-3D44E2C707E4");
 #define HPWMI_HARDWARE_QUERY 0x4
 #define HPWMI_WIRELESS_QUERY 0x5
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HPWMI_HOTKEY_QUERY 0xc
 #define HPWMI_WIRELESS2_QUERY 0x1b
 =======
+=======
+>>>>>>> v3.18
 #define HPWMI_BIOS_QUERY 0x9
 #define HPWMI_HOTKEY_QUERY 0xc
 #define HPWMI_FEATURE_QUERY 0xd
 #define HPWMI_WIRELESS2_QUERY 0x1b
 #define HPWMI_POSTCODEERROR_QUERY 0x2a
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum hp_wmi_radio {
@@ -151,6 +157,10 @@ static const struct key_entry hp_wmi_keymap[] = {
 	{ KE_KEY, 0x213b, { KEY_INFO } },
 	{ KE_KEY, 0x2169, { KEY_DIRECTION } },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ KE_KEY, 0x216a, { KEY_SETUP } },
+>>>>>>> v3.18
 =======
 	{ KE_KEY, 0x216a, { KEY_SETUP } },
 >>>>>>> v3.18
@@ -304,7 +314,10 @@ static int hp_wmi_tablet_state(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init hp_wmi_bios_2009_later(void)
 {
 	int state = 0;
@@ -329,6 +342,9 @@ static int hp_wmi_enable_hotkeys(void)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int hp_wmi_set_block(void *data, bool blocked)
 {
@@ -426,7 +442,10 @@ static int hp_wmi_rfkill2_refresh(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int hp_wmi_post_code_state(void)
 {
 	int state = 0;
@@ -437,6 +456,9 @@ static int hp_wmi_post_code_state(void)
 	return state;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t show_display(struct device *dev, struct device_attribute *attr,
 			    char *buf)
@@ -484,7 +506,10 @@ static ssize_t show_tablet(struct device *dev, struct device_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t show_postcode(struct device *dev, struct device_attribute *attr,
 			 char *buf)
 {
@@ -495,6 +520,9 @@ static ssize_t show_postcode(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "0x%x\n", value);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t set_als(struct device *dev, struct device_attribute *attr,
 		       const char *buf, size_t count)
@@ -509,7 +537,10 @@ static ssize_t set_als(struct device *dev, struct device_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t set_postcode(struct device *dev, struct device_attribute *attr,
 		       const char *buf, size_t count)
 {
@@ -531,6 +562,9 @@ static ssize_t set_postcode(struct device *dev, struct device_attribute *attr,
 	return count;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEVICE_ATTR(display, S_IRUGO, show_display, NULL);
 static DEVICE_ATTR(hddtemp, S_IRUGO, show_hddtemp, NULL);
@@ -538,6 +572,10 @@ static DEVICE_ATTR(als, S_IRUGO | S_IWUSR, show_als, set_als);
 static DEVICE_ATTR(dock, S_IRUGO, show_dock, NULL);
 static DEVICE_ATTR(tablet, S_IRUGO, show_tablet, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(postcode, S_IRUGO | S_IWUSR, show_postcode, set_postcode);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(postcode, S_IRUGO | S_IWUSR, show_postcode, set_postcode);
 >>>>>>> v3.18
@@ -687,6 +725,12 @@ static int __init hp_wmi_input_setup(void)
 	input_sync(hp_wmi_input_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (hp_wmi_bios_2009_later() == 4)
+		hp_wmi_enable_hotkeys();
+
+>>>>>>> v3.18
 =======
 	if (hp_wmi_bios_2009_later() == 4)
 		hp_wmi_enable_hotkeys();
@@ -728,14 +772,20 @@ static void cleanup_sysfs(struct platform_device *device)
 	device_remove_file(&device->dev, &dev_attr_dock);
 	device_remove_file(&device->dev, &dev_attr_tablet);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static int hp_wmi_rfkill_setup(struct platform_device *device)
 =======
+=======
+>>>>>>> v3.18
 	device_remove_file(&device->dev, &dev_attr_postcode);
 }
 
 static int __init hp_wmi_rfkill_setup(struct platform_device *device)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int err;
@@ -747,11 +797,14 @@ static int __init hp_wmi_rfkill_setup(struct platform_device *device)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = hp_wmi_perform_query(HPWMI_WIRELESS_QUERY, 1, &wireless,
 				   sizeof(wireless), 0);
 	if (err)
 		return err;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (wireless & 0x1) {
@@ -796,7 +849,11 @@ static int __init hp_wmi_rfkill_setup(struct platform_device *device)
 		if (!wwan_rfkill) {
 			err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto register_gps_error;
+=======
+			goto register_bluetooth_error;
+>>>>>>> v3.18
 =======
 			goto register_bluetooth_error;
 >>>>>>> v3.18
@@ -808,7 +865,11 @@ static int __init hp_wmi_rfkill_setup(struct platform_device *device)
 		err = rfkill_register(wwan_rfkill);
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto register_wwan_err;
+=======
+			goto register_wwan_error;
+>>>>>>> v3.18
 =======
 			goto register_wwan_error;
 >>>>>>> v3.18
@@ -822,7 +883,11 @@ static int __init hp_wmi_rfkill_setup(struct platform_device *device)
 		if (!gps_rfkill) {
 			err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto register_bluetooth_error;
+=======
+			goto register_wwan_error;
+>>>>>>> v3.18
 =======
 			goto register_wwan_error;
 >>>>>>> v3.18
@@ -838,11 +903,14 @@ static int __init hp_wmi_rfkill_setup(struct platform_device *device)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 register_wwan_err:
 	rfkill_destroy(wwan_rfkill);
 	wwan_rfkill = NULL;
 	if (gps_rfkill)
 		rfkill_unregister(gps_rfkill);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 register_gps_error:
@@ -851,12 +919,18 @@ register_gps_error:
 	if (bluetooth_rfkill)
 		rfkill_unregister(bluetooth_rfkill);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 register_wwan_error:
 	rfkill_destroy(wwan_rfkill);
 	wwan_rfkill = NULL;
 	if (gps_rfkill)
 		rfkill_unregister(gps_rfkill);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 register_bluetooth_error:
 	rfkill_destroy(bluetooth_rfkill);
@@ -870,7 +944,11 @@ register_wifi_error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hp_wmi_rfkill2_setup(struct platform_device *device)
+=======
+static int __init hp_wmi_rfkill2_setup(struct platform_device *device)
+>>>>>>> v3.18
 =======
 static int __init hp_wmi_rfkill2_setup(struct platform_device *device)
 >>>>>>> v3.18
@@ -969,7 +1047,11 @@ static int __init hp_wmi_bios_setup(struct platform_device *device)
 	rfkill2_count = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hp_wmi_rfkill_setup(device))
+=======
+	if (hp_wmi_bios_2009_later() || hp_wmi_rfkill_setup(device))
+>>>>>>> v3.18
 =======
 	if (hp_wmi_bios_2009_later() || hp_wmi_rfkill_setup(device))
 >>>>>>> v3.18
@@ -991,6 +1073,12 @@ static int __init hp_wmi_bios_setup(struct platform_device *device)
 	if (err)
 		goto add_sysfs_error;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	err = device_create_file(&device->dev, &dev_attr_postcode);
+	if (err)
+		goto add_sysfs_error;
+>>>>>>> v3.18
 =======
 	err = device_create_file(&device->dev, &dev_attr_postcode);
 	if (err)

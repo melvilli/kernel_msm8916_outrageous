@@ -391,7 +391,10 @@ static int usb_dsbr100_probe(struct usb_interface *intf,
 	radio->videodev.lock = &radio->v4l2_lock;
 	radio->videodev.ctrl_handler = &radio->hdl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &radio->videodev.flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

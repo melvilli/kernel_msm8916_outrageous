@@ -29,7 +29,11 @@ config PROCESSOR_ID
 	hex 'Hard wire the processor ID'
 	default 0x00007700
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on !CPU_CP15
+=======
+	depends on !(CPU_CP15 || CPU_V7M)
+>>>>>>> v3.18
 =======
 	depends on !(CPU_CP15 || CPU_V7M)
 >>>>>>> v3.18
@@ -55,7 +59,10 @@ config REMAP_VECTORS_TO_RAM
 	  external support to redirect the hardware exception vectors to
 	  the writable versions located at DRAM_BASE.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config ARM_MPU
        bool 'Use the ARM v7 PMSA Compliant MPU'
@@ -68,4 +75,7 @@ config ARM_MPU
 
          If your CPU has an MPU then you should choose 'y' here unless you
          know that you do not want to use the MPU.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -18,7 +18,10 @@
 #include <linux/moduleparam.h>
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/sched.h>
@@ -29,7 +32,10 @@
 #include "mei_dev.h"
 #include "hbm.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "hw-me.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "client.h"
@@ -38,12 +44,15 @@ static const u8 mei_start_wd_params[] = { 0x02, 0x12, 0x13, 0x10 };
 static const u8 mei_stop_wd_params[] = { 0x02, 0x02, 0x14, 0x10 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const u8 mei_wd_state_independence_msg[3][4] = {
 	{0x05, 0x02, 0x51, 0x10},
 	{0x05, 0x02, 0x52, 0x10},
 	{0x07, 0x02, 0x01, 0x10}
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -59,7 +68,11 @@ const uuid_le mei_wd_guid = UUID_LE(0x05B79A6F, 0x4628, 0x4D7F, 0x89,
 static void mei_wd_set_start_timeout(struct mei_device *dev, u16 timeout)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&dev->pdev->dev, "wd: set timeout=%d.\n", timeout);
+=======
+	dev_dbg(dev->dev, "wd: set timeout=%d.\n", timeout);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev->dev, "wd: set timeout=%d.\n", timeout);
 >>>>>>> v3.18
@@ -73,7 +86,11 @@ static void mei_wd_set_start_timeout(struct mei_device *dev, u16 timeout)
  * @dev: the device structure
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns -ENENT if wd client cannot be found
+=======
+ * Return: -ENOTTY if wd client cannot be found
+>>>>>>> v3.18
 =======
  * Return: -ENOTTY if wd client cannot be found
 >>>>>>> v3.18
@@ -84,7 +101,11 @@ int mei_wd_host_init(struct mei_device *dev)
 {
 	struct mei_cl *cl = &dev->wd_cl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+	struct mei_me_client *me_cl;
+>>>>>>> v3.18
 =======
 	struct mei_me_client *me_cl;
 >>>>>>> v3.18
@@ -98,6 +119,7 @@ int mei_wd_host_init(struct mei_device *dev)
 
 	/* check for valid client id */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i = mei_me_cl_by_uuid(dev, &mei_wd_guid);
 	if (i < 0) {
 		dev_info(&dev->pdev->dev, "wd: failed to find the client\n");
@@ -106,6 +128,8 @@ int mei_wd_host_init(struct mei_device *dev)
 
 	cl->me_client_id = dev->me_clients[i].client_id;
 =======
+=======
+>>>>>>> v3.18
 	me_cl = mei_me_cl_by_uuid(dev, &mei_wd_guid);
 	if (!me_cl) {
 		dev_info(dev->dev, "wd: failed to find the client\n");
@@ -114,11 +138,15 @@ int mei_wd_host_init(struct mei_device *dev)
 
 	cl->me_client_id = me_cl->client_id;
 	cl->cl_uuid = me_cl->props.protocol_name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = mei_cl_link(cl, MEI_WD_HOST_CLIENT_ID);
 
 	if (ret < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_info(&dev->pdev->dev, "wd: failed link client\n");
 		return -ENOENT;
@@ -136,6 +164,8 @@ int mei_wd_host_init(struct mei_device *dev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		dev_info(dev->dev, "wd: failed link client\n");
 		return ret;
 	}
@@ -154,6 +184,9 @@ int mei_wd_host_init(struct mei_device *dev)
 		mei_cl_unlink(cl);
 	}
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -162,6 +195,7 @@ int mei_wd_host_init(struct mei_device *dev)
  *
  * @dev: the device structure
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * returns 0 if success,
  *	-EIO when message send fails
@@ -176,6 +210,8 @@ int mei_wd_send(struct mei_device *dev)
 	hdr.msg_complete = 1;
 	hdr.reserved = 0;
 =======
+=======
+>>>>>>> v3.18
  * Return: 0 if success,
  *	-EIO when message send fails
  *	-EINVAL when invalid message is to be sent
@@ -192,6 +228,9 @@ int mei_wd_send(struct mei_device *dev)
 	hdr.msg_complete = 1;
 	hdr.reserved = 0;
 	hdr.internal = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!memcmp(dev->wd_data, mei_start_wd_params, MEI_WD_HDR_SIZE))
@@ -199,11 +238,14 @@ int mei_wd_send(struct mei_device *dev)
 	else if (!memcmp(dev->wd_data, mei_stop_wd_params, MEI_WD_HDR_SIZE))
 		hdr.length = MEI_WD_STOP_MSG_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		return -EINVAL;
 
 	return mei_write_message(dev, &hdr, dev->wd_data);
 =======
+=======
+>>>>>>> v3.18
 	else {
 		dev_err(dev->dev, "wd: invalid message is to be sent, aborting\n");
 		return -EINVAL;
@@ -222,6 +264,9 @@ int mei_wd_send(struct mei_device *dev)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -230,18 +275,24 @@ int mei_wd_send(struct mei_device *dev)
  *
  * @dev: the device structure
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @preserve: indicate if to keep the timeout value
  *
  * returns 0 if success,
  *	-EIO when message send fails
  *	-EINVAL when invalid message is to be sent
 =======
+=======
+>>>>>>> v3.18
  *
  * Return: 0 if success
  * on error:
  *	-EIO    when message send fails
  *	-EINVAL when invalid message is to be sent
  *	-ETIME  on message timeout
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int mei_wd_stop(struct mei_device *dev)
@@ -259,6 +310,7 @@ int mei_wd_stop(struct mei_device *dev)
 	ret = mei_cl_flow_ctrl_creds(&dev->wd_cl);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
 
 	if (ret && dev->hbuf_is_ready) {
@@ -274,12 +326,17 @@ int mei_wd_stop(struct mei_device *dev)
 		}
 
 =======
+=======
+>>>>>>> v3.18
 		goto err;
 
 	if (ret && mei_hbuf_acquire(dev)) {
 		ret = mei_wd_send(dev);
 		if (ret)
 			goto err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev->wd_pending = false;
 	} else {
@@ -288,6 +345,7 @@ int mei_wd_stop(struct mei_device *dev)
 
 	mutex_unlock(&dev->device_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = wait_event_interruptible_timeout(dev->wait_stop_wd,
 					dev->wd_state == MEI_WD_IDLE,
@@ -305,6 +363,8 @@ int mei_wd_stop(struct mei_device *dev)
 
 out:
 =======
+=======
+>>>>>>> v3.18
 	ret = wait_event_timeout(dev->wait_stop_wd,
 				dev->wd_state == MEI_WD_IDLE,
 				msecs_to_jiffies(MEI_WD_STOP_TIMEOUT));
@@ -319,6 +379,9 @@ out:
 			MEI_WD_STOP_TIMEOUT - jiffies_to_msecs(ret));
 	return 0;
 err:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -329,7 +392,11 @@ err:
  * @wd_dev - watchdog device struct
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns 0 if success, negative errno code for failure
+=======
+ * Return: 0 if success, negative errno code for failure
+>>>>>>> v3.18
 =======
  * Return: 0 if success, negative errno code for failure
 >>>>>>> v3.18
@@ -347,8 +414,12 @@ static int mei_wd_ops_start(struct watchdog_device *wd_dev)
 
 	if (dev->dev_state != MEI_DEV_ENABLED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&dev->pdev->dev,
 			"wd: dev_state != MEI_DEV_ENABLED  dev_state = %s\n",
+=======
+		dev_dbg(dev->dev, "wd: dev_state != MEI_DEV_ENABLED  dev_state = %s\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(dev->dev, "wd: dev_state != MEI_DEV_ENABLED  dev_state = %s\n",
 >>>>>>> v3.18
@@ -358,8 +429,12 @@ static int mei_wd_ops_start(struct watchdog_device *wd_dev)
 
 	if (dev->wd_cl.state != MEI_FILE_CONNECTED)	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&dev->pdev->dev,
 			"MEI Driver is not connected to Watchdog Client\n");
+=======
+		dev_dbg(dev->dev, "MEI Driver is not connected to Watchdog Client\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(dev->dev, "MEI Driver is not connected to Watchdog Client\n");
 >>>>>>> v3.18
@@ -380,7 +455,11 @@ end_unlock:
  * @wd_dev - watchdog device struct
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns 0 if success, negative errno code for failure
+=======
+ * Return: 0 if success, negative errno code for failure
+>>>>>>> v3.18
 =======
  * Return: 0 if success, negative errno code for failure
 >>>>>>> v3.18
@@ -406,6 +485,7 @@ static int mei_wd_ops_stop(struct watchdog_device *wd_dev)
  * @wd_dev - watchdog device struct
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns 0 if success, negative errno code for failure
  */
 static int mei_wd_ops_ping(struct watchdog_device *wd_dev)
@@ -413,12 +493,17 @@ static int mei_wd_ops_ping(struct watchdog_device *wd_dev)
 	int ret = 0;
 	struct mei_device *dev;
 =======
+=======
+>>>>>>> v3.18
  * Return: 0 if success, negative errno code for failure
  */
 static int mei_wd_ops_ping(struct watchdog_device *wd_dev)
 {
 	struct mei_device *dev;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev = watchdog_get_drvdata(wd_dev);
@@ -429,7 +514,11 @@ static int mei_wd_ops_ping(struct watchdog_device *wd_dev)
 
 	if (dev->wd_cl.state != MEI_FILE_CONNECTED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->pdev->dev, "wd: not connected.\n");
+=======
+		dev_err(dev->dev, "wd: not connected.\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->dev, "wd: not connected.\n");
 >>>>>>> v3.18
@@ -439,6 +528,7 @@ static int mei_wd_ops_ping(struct watchdog_device *wd_dev)
 
 	dev->wd_state = MEI_WD_RUNNING;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Check if we can send the ping to HW*/
 	if (dev->hbuf_is_ready && mei_cl_flow_ctrl_creds(&dev->wd_cl) > 0) {
@@ -460,6 +550,8 @@ static int mei_wd_ops_ping(struct watchdog_device *wd_dev)
 		}
 
 =======
+=======
+>>>>>>> v3.18
 	ret = mei_cl_flow_ctrl_creds(&dev->wd_cl);
 	if (ret < 0)
 		goto end;
@@ -472,6 +564,9 @@ static int mei_wd_ops_ping(struct watchdog_device *wd_dev)
 		if (ret)
 			goto end;
 		dev->wd_pending = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		dev->wd_pending = true;
@@ -489,7 +584,11 @@ end:
  * @timeout - timeout value to set
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns 0 if success, negative errno code for failure
+=======
+ * Return: 0 if success, negative errno code for failure
+>>>>>>> v3.18
 =======
  * Return: 0 if success, negative errno code for failure
 >>>>>>> v3.18
@@ -545,6 +644,7 @@ static struct watchdog_device amt_wd_dev = {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mei_watchdog_register(struct mei_device *dev)
 {
 	if (watchdog_register_device(&amt_wd_dev)) {
@@ -557,6 +657,8 @@ void mei_watchdog_register(struct mei_device *dev)
 		"wd: successfully register watchdog interface.\n");
 	watchdog_set_drvdata(&amt_wd_dev, dev);
 =======
+=======
+>>>>>>> v3.18
 int mei_watchdog_register(struct mei_device *dev)
 {
 
@@ -575,6 +677,9 @@ int mei_watchdog_register(struct mei_device *dev)
 	dev_dbg(dev->dev, "wd: successfully register watchdog interface.\n");
 	watchdog_set_drvdata(&amt_wd_dev, dev);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -1,7 +1,11 @@
 /*
  * QLogic Fibre Channel HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2013 QLogic Corporation
+=======
+ * Copyright (c)  2003-2014 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2014 QLogic Corporation
 >>>>>>> v3.18
@@ -635,7 +639,11 @@ qla25xx_create_req_que(struct qla_hw_data *ha, uint16_t options,
 	struct scsi_qla_host *base_vha = pci_get_drvdata(ha->pdev);
 	uint16_t que_id = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_reg_t __iomem *reg;
+=======
+	device_reg_t *reg;
+>>>>>>> v3.18
 =======
 	device_reg_t *reg;
 >>>>>>> v3.18
@@ -708,12 +716,18 @@ qla25xx_create_req_que(struct qla_hw_data *ha, uint16_t options,
 	req->id = que_id;
 	reg = ISP_QUE_REG(ha, que_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req->max_q_depth = ha->req_q_map[0]->max_q_depth;
 =======
+=======
+>>>>>>> v3.18
 	req->req_q_in = &reg->isp25mq.req_q_in;
 	req->req_q_out = &reg->isp25mq.req_q_out;
 	req->max_q_depth = ha->req_q_map[0]->max_q_depth;
 	req->out_ptr = (void *)(req->ring + req->length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&ha->vport_lock);
 	ql_dbg(ql_dbg_multiq, base_vha, 0xc004,
@@ -768,7 +782,11 @@ qla25xx_create_rsp_que(struct qla_hw_data *ha, uint16_t options,
 	struct scsi_qla_host *base_vha = pci_get_drvdata(ha->pdev);
 	uint16_t que_id = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_reg_t __iomem *reg;
+=======
+	device_reg_t *reg;
+>>>>>>> v3.18
 =======
 	device_reg_t *reg;
 >>>>>>> v3.18
@@ -829,6 +847,10 @@ qla25xx_create_rsp_que(struct qla_hw_data *ha, uint16_t options,
 	rsp->rsp_q_in = &reg->isp25mq.rsp_q_in;
 	rsp->rsp_q_out = &reg->isp25mq.rsp_q_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rsp->in_ptr = (void *)(rsp->ring + rsp->length);
+>>>>>>> v3.18
 =======
 	rsp->in_ptr = (void *)(rsp->ring + rsp->length);
 >>>>>>> v3.18

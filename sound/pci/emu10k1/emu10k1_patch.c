@@ -51,7 +51,12 @@ snd_emu10k1_sample_new(struct snd_emux *rec, struct snd_sf_sample *sp,
 
 	if (sp->v.size == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("emu: rom font for sample %d\n", sp->v.sample);
+=======
+		dev_dbg(emu->card->dev,
+			"emu: rom font for sample %d\n", sp->v.sample);
+>>>>>>> v3.18
 =======
 		dev_dbg(emu->card->dev,
 			"emu: rom font for sample %d\n", sp->v.sample);
@@ -98,7 +103,12 @@ snd_emu10k1_sample_new(struct snd_emux *rec, struct snd_sf_sample *sp,
 	sp->block = snd_emu10k1_synth_alloc(emu, blocksize);
 	if (sp->block == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printd("emu10k1: synth malloc failed (size=%d)\n", blocksize);
+=======
+		dev_dbg(emu->card->dev,
+			"synth malloc failed (size=%d)\n", blocksize);
+>>>>>>> v3.18
 =======
 		dev_dbg(emu->card->dev,
 			"synth malloc failed (size=%d)\n", blocksize);

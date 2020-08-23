@@ -72,6 +72,7 @@ static int gup_huge_pmd(pmd_t *pmdp, pmd_t pmd, unsigned long addr,
 {
 	struct page *head, *page, *tail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 mask;
 	int refs;
 
@@ -80,12 +81,17 @@ static int gup_huge_pmd(pmd_t *pmdp, pmd_t pmd, unsigned long addr,
 		mask |= PMD_HUGE_WRITE;
 	if ((pmd_val(pmd) & mask) != mask)
 =======
+=======
+>>>>>>> v3.18
 	int refs;
 
 	if (!(pmd_val(pmd) & _PAGE_VALID))
 		return 0;
 
 	if (write && !pmd_write(pmd))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -171,7 +177,10 @@ static int gup_pud_range(pgd_t pgd, unsigned long addr, unsigned long end,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int __get_user_pages_fast(unsigned long start, int nr_pages, int write,
 			  struct page **pages)
 {
@@ -202,6 +211,9 @@ int __get_user_pages_fast(unsigned long start, int nr_pages, int write,
 	return nr;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int get_user_pages_fast(unsigned long start, int nr_pages, int write,
 			struct page **pages)

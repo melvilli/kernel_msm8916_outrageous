@@ -12,7 +12,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>
@@ -217,17 +220,23 @@ static void mv_otg_start_host(struct mv_otg *mvotg, int on)
 	hcd = bus_to_hcd(otg->host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (on)
 		usb_add_hcd(hcd, hcd->irq, IRQF_SHARED);
 	else
 		usb_remove_hcd(hcd);
 =======
+=======
+>>>>>>> v3.18
 	if (on) {
 		usb_add_hcd(hcd, hcd->irq, IRQF_SHARED);
 		device_wakeup_enable(hcd->self.controller);
 	} else {
 		usb_remove_hcd(hcd);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_USB */
 }
@@ -666,7 +675,11 @@ static struct attribute_group inputs_attr_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mv_otg_remove(struct platform_device *pdev)
+=======
+static int mv_otg_remove(struct platform_device *pdev)
+>>>>>>> v3.18
 =======
 static int mv_otg_remove(struct platform_device *pdev)
 >>>>>>> v3.18
@@ -690,7 +703,11 @@ static int mv_otg_remove(struct platform_device *pdev)
 static int mv_otg_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mv_usb_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct mv_usb_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct mv_usb_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -914,7 +931,11 @@ static int mv_otg_resume(struct platform_device *pdev)
 static struct platform_driver mv_otg_driver = {
 	.probe = mv_otg_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = __exit_p(mv_otg_remove),
+=======
+	.remove = mv_otg_remove,
+>>>>>>> v3.18
 =======
 	.remove = mv_otg_remove,
 >>>>>>> v3.18

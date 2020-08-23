@@ -7,14 +7,20 @@ microcontroller to turn the power off. This driver adds a handler to
 pm_power_off which is called to turn the power off.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Required Properties:
 - compatible: Should be "qnap,power-off"
 =======
+=======
+>>>>>>> v3.18
 Synology NAS devices use a similar scheme, but a different baud rate,
 9600, and a different character, '1'.
 
 Required Properties:
 - compatible: Should be "qnap,power-off" or "synology,power-off"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - reg: Address and length of the register set for UART1

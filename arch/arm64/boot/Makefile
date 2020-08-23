@@ -15,6 +15,7 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 include $(srctree)/arch/arm64/boot/dts/qcom/Makefile
 
 targets := Image Image.gz
@@ -40,6 +41,8 @@ $(obj)/Image.gz-dtb: $(obj)/Image.gz $(DTB_OBJS) FORCE
 	$(call if_changed,cat)
 
 =======
+=======
+>>>>>>> v3.18
 targets := Image Image.gz
 
 $(obj)/Image: vmlinux FORCE
@@ -48,6 +51,9 @@ $(obj)/Image: vmlinux FORCE
 $(obj)/Image.gz: $(obj)/Image FORCE
 	$(call if_changed,gzip)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 install: $(obj)/Image
 	$(CONFIG_SHELL) $(srctree)/$(src)/install.sh $(KERNELRELEASE) \

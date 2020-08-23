@@ -33,10 +33,16 @@ static int tps65912_spi_write(struct tps65912 *tps65912, u8 addr,
 	struct spi_transfer xfer;
 	struct spi_message msg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 tx_buf, rx_buf;
 
 	tx_buf = spi_data;
 	rx_buf = 0;
+=======
+	u32 tx_buf;
+
+	tx_buf = spi_data;
+>>>>>>> v3.18
 =======
 	u32 tx_buf;
 
@@ -92,7 +98,12 @@ static int tps65912_spi_probe(struct spi_device *spi)
 	struct tps65912 *tps65912;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tps65912 = kzalloc(sizeof(struct tps65912), GFP_KERNEL);
+=======
+	tps65912 = devm_kzalloc(&spi->dev,
+				sizeof(struct tps65912), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	tps65912 = devm_kzalloc(&spi->dev,
 				sizeof(struct tps65912), GFP_KERNEL);

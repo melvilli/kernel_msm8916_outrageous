@@ -686,10 +686,13 @@
 #define F_BUSY    V_BUSY(1U)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S_BUSY    31
 #define V_BUSY(x) ((x) << S_BUSY)
 #define F_BUSY    V_BUSY(1U)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define A_MC7_EXT_MODE1 0x108
@@ -753,6 +756,7 @@
 #define A_MC7_CAL 0x128
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S_BUSY    31
 #define V_BUSY(x) ((x) << S_BUSY)
 #define F_BUSY    V_BUSY(1U)
@@ -761,6 +765,8 @@
 #define V_BUSY(x) ((x) << S_BUSY)
 #define F_BUSY    V_BUSY(1U)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define S_CAL_FAULT    30
@@ -822,9 +828,12 @@
 #define F_OP    V_OP(1U)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define F_OP    V_OP(1U)
 #define A_SF_OP 0x6dc
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define A_MC7_BIST_ADDR_BEG 0x168
@@ -840,8 +849,11 @@
 #define F_CONT    V_CONT(1U)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define F_CONT    V_CONT(1U)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define A_MC7_INT_ENABLE 0x178
@@ -1030,8 +1042,11 @@
 #define F_NICMODE    V_NICMODE(1U)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define F_NICMODE    V_NICMODE(1U)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define S_IPV6ENABLE    15
@@ -1578,6 +1593,7 @@
 
 #define A_ULPRX_RQ_LLIMIT 0x534
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define A_ULPRX_RQ_LLIMIT 0x534
 
 #define A_ULPRX_RQ_ULIMIT 0x538
@@ -1586,10 +1602,15 @@
 
 #define A_ULPRX_RQ_ULIMIT 0x538
 >>>>>>> v3.18
+=======
+
+#define A_ULPRX_RQ_ULIMIT 0x538
+>>>>>>> v3.18
 
 #define A_ULPRX_PBL_LLIMIT 0x53c
 
 #define A_ULPRX_PBL_ULIMIT 0x540
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define A_ULPRX_PBL_ULIMIT 0x540
 
@@ -1604,6 +1625,11 @@
 #define A_ULPRX_PBL_ULIMIT 0x540
 #define A_ULPRX_PBL_ULIMIT 0x540
 
+=======
+
+#define A_ULPRX_TDDP_TAGMASK 0x524
+
+>>>>>>> v3.18
 =======
 
 #define A_ULPRX_TDDP_TAGMASK 0x524
@@ -2080,8 +2106,11 @@
 #define F_TMMODE    V_TMMODE(1U)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define F_TMMODE    V_TMMODE(1U)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define A_MC5_DB_ROUTING_TABLE_INDEX 0x70c
@@ -2484,8 +2513,11 @@
 #define F_TXACTENABLE    V_TXACTENABLE(1U)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define A_XGM_SERDES_CTRL0 0x8e0
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define S_RESET3    23

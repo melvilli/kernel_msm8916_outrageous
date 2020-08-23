@@ -24,6 +24,10 @@
 
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/jiffies.h>
+>>>>>>> v3.18
 =======
 #include <linux/jiffies.h>
 >>>>>>> v3.18
@@ -38,7 +42,10 @@
 #include "em28xx.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DRIVER_AUTHOR "Ludovico Cavedon <cavedon@sssup.it>, " \
 		      "Markus Rechberger <mrechberger@gmail.com>, " \
 		      "Mauro Carvalho Chehab <mchehab@infradead.org>, " \
@@ -49,6 +56,9 @@ MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL");
 MODULE_VERSION(EM28XX_VERSION);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* #define ENABLE_DEBUG_ISOC_FRAMES */
 
@@ -71,6 +81,7 @@ MODULE_PARM_DESC(reg_debug, "enable debug messages [URB reg]");
 			 dev->name, __func__ , ##arg); } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int alt;
 module_param(alt, int, 0644);
 MODULE_PARM_DESC(alt, "alternate setting to use for video endpoint");
@@ -79,6 +90,8 @@ static unsigned int disable_vbi;
 module_param(disable_vbi, int, 0644);
 MODULE_PARM_DESC(disable_vbi, "disable vbi support");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* FIXME */
@@ -214,6 +227,7 @@ int em28xx_write_regs_req(struct em28xx *dev, u8 req, u16 reg, char *buf,
 int em28xx_write_regs(struct em28xx *dev, u16 reg, char *buf, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
 
 	rc = em28xx_write_regs_req(dev, USB_REQ_GET_STATUS, reg, buf, len);
@@ -231,6 +245,9 @@ int em28xx_write_regs(struct em28xx *dev, u16 reg, char *buf, int len)
 	}
 
 	return rc;
+=======
+	return em28xx_write_regs_req(dev, USB_REQ_GET_STATUS, reg, buf, len);
+>>>>>>> v3.18
 =======
 	return em28xx_write_regs_req(dev, USB_REQ_GET_STATUS, reg, buf, len);
 >>>>>>> v3.18
@@ -256,6 +273,7 @@ int em28xx_write_reg_bits(struct em28xx *dev, u16 reg, u8 val,
 	u8 newval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Uses cache for gpo/gpio registers */
 	if (reg == dev->reg_gpo_num)
 		oldval = dev->reg_gpo;
@@ -264,6 +282,9 @@ int em28xx_write_reg_bits(struct em28xx *dev, u16 reg, u8 val,
 	else
 		oldval = em28xx_read_reg(dev, reg);
 
+=======
+	oldval = em28xx_read_reg(dev, reg);
+>>>>>>> v3.18
 =======
 	oldval = em28xx_read_reg(dev, reg);
 >>>>>>> v3.18
@@ -278,7 +299,10 @@ EXPORT_SYMBOL_GPL(em28xx_write_reg_bits);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * em28xx_toggle_reg_bits()
  * toggles/inverts the bits (specified by bitmask) of a register
  */
@@ -298,6 +322,9 @@ int em28xx_toggle_reg_bits(struct em28xx *dev, u16 reg, u8 bitmask)
 EXPORT_SYMBOL_GPL(em28xx_toggle_reg_bits);
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * em28xx_is_ac97_ready()
  * Checks if ac97 is ready
@@ -305,16 +332,22 @@ EXPORT_SYMBOL_GPL(em28xx_toggle_reg_bits);
 static int em28xx_is_ac97_ready(struct em28xx *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, i;
 
 	/* Wait up to 50 ms for AC97 command to complete */
 	for (i = 0; i < 10; i++, msleep(5)) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned long timeout = jiffies + msecs_to_jiffies(EM28XX_AC97_XFER_TIMEOUT);
 	int ret;
 
 	/* Wait up to 50 ms for AC97 command to complete */
 	while (time_is_after_jiffies(timeout)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = em28xx_read_reg(dev, EM28XX_R43_AC97BUSY);
 		if (ret < 0)
@@ -323,6 +356,10 @@ static int em28xx_is_ac97_ready(struct em28xx *dev)
 		if (!(ret & 0x01))
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		msleep(5);
+>>>>>>> v3.18
 =======
 		msleep(5);
 >>>>>>> v3.18
@@ -341,7 +378,11 @@ int em28xx_read_ac97(struct em28xx *dev, u8 reg)
 	int ret;
 	u8 addr = (reg & 0x7f) | 0x80;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 val;
+=======
+	__le16 val;
+>>>>>>> v3.18
 =======
 	__le16 val;
 >>>>>>> v3.18
@@ -499,7 +540,11 @@ int em28xx_audio_analog_set(struct em28xx *dev)
 	u8 xclk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev->audio_mode.has_audio)
+=======
+	if (dev->int_audio_type == EM28XX_INT_AUDIO_NONE)
+>>>>>>> v3.18
 =======
 	if (dev->int_audio_type == EM28XX_INT_AUDIO_NONE)
 >>>>>>> v3.18
@@ -574,6 +619,7 @@ int em28xx_audio_setup(struct em28xx *dev)
 {
 	int vid1, vid2, feat, cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 vid;
 
 	if (dev->chip_id == CHIP_ID_EM2870 || dev->chip_id == CHIP_ID_EM2874
@@ -613,6 +659,8 @@ int em28xx_audio_setup(struct em28xx *dev)
 		dev->audio_mode.ac97 = EM28XX_NO_AC97;
 		goto init_audio;
 =======
+=======
+>>>>>>> v3.18
 	u32 vid = 0;
 	u8 i2s_samplerates;
 
@@ -656,6 +704,9 @@ int em28xx_audio_setup(struct em28xx *dev)
 		goto init_audio;
 	} else {
 		dev->int_audio_type = EM28XX_INT_AUDIO_AC97;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -671,8 +722,14 @@ int em28xx_audio_setup(struct em28xx *dev)
 		em28xx_warn("AC97 chip type couldn't be determined\n");
 		dev->audio_mode.ac97 = EM28XX_NO_AC97;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->has_alsa_audio = false;
 		dev->audio_mode.has_audio = false;
+=======
+		if (dev->usb_audio_type == EM28XX_USB_AUDIO_VENDOR)
+			dev->usb_audio_type = EM28XX_USB_AUDIO_NONE;
+		dev->int_audio_type = EM28XX_INT_AUDIO_NONE;
+>>>>>>> v3.18
 =======
 		if (dev->usb_audio_type == EM28XX_USB_AUDIO_VENDOR)
 			dev->usb_audio_type = EM28XX_USB_AUDIO_NONE;
@@ -687,8 +744,11 @@ int em28xx_audio_setup(struct em28xx *dev)
 
 	vid = vid1 << 16 | vid2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dev->audio_mode.ac97_vendor_id = vid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	em28xx_warn("AC97 vendor ID = 0x%08x\n", vid);
@@ -698,7 +758,10 @@ int em28xx_audio_setup(struct em28xx *dev)
 		goto init_audio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->audio_mode.ac97_feat = feat;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	em28xx_warn("AC97 features = 0x%04x\n", feat);
@@ -720,8 +783,13 @@ init_audio:
 		break;
 	case EM28XX_AC97_SIGMATEL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		em28xx_info("Sigmatel audio processor detected(stac 97%02x)\n",
 			    dev->audio_mode.ac97_vendor_id & 0xff);
+=======
+		em28xx_info("Sigmatel audio processor detected (stac 97%02x)\n",
+			    vid & 0xff);
+>>>>>>> v3.18
 =======
 		em28xx_info("Sigmatel audio processor detected (stac 97%02x)\n",
 			    vid & 0xff);
@@ -738,6 +806,7 @@ init_audio:
 }
 EXPORT_SYMBOL_GPL(em28xx_audio_setup);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int em28xx_colorlevels_set_default(struct em28xx *dev)
 {
@@ -757,6 +826,8 @@ int em28xx_colorlevels_set_default(struct em28xx *dev)
 	return em28xx_write_reg(dev, EM28XX_R1A_BOFFSET, 0x00);
 }
 =======
+=======
+>>>>>>> v3.18
 const struct em28xx_led *em28xx_find_led(struct em28xx *dev,
 					 enum em28xx_led_role role)
 {
@@ -772,11 +843,15 @@ const struct em28xx_led *em28xx_find_led(struct em28xx *dev,
 	return NULL;
 }
 EXPORT_SYMBOL_GPL(em28xx_find_led);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int em28xx_capture_start(struct em28xx *dev, int start)
 {
 	int rc;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (dev->chip_id == CHIP_ID_EM2874 ||
@@ -1047,6 +1122,8 @@ set_alt:
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	const struct em28xx_led *led = NULL;
 
 	if (dev->chip_id == CHIP_ID_EM2874 ||
@@ -1103,6 +1180,9 @@ set_alt:
 				      led->gpio_mask);
 
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1472,6 +1552,7 @@ EXPORT_SYMBOL_GPL(em28xx_init_usb_xfer);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * em28xx_wake_i2c()
  * configure i2c attached devices
  */
@@ -1484,6 +1565,8 @@ void em28xx_wake_i2c(struct em28xx *dev)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Device control list
@@ -1509,7 +1592,11 @@ int em28xx_register_extension(struct em28xx_ops *ops)
 	}
 	mutex_unlock(&em28xx_devlist_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Em28xx: Initialized (%s) extension\n", ops->name);
+=======
+	printk(KERN_INFO "em28xx: Registered (%s) extension\n", ops->name);
+>>>>>>> v3.18
 =======
 	printk(KERN_INFO "em28xx: Registered (%s) extension\n", ops->name);
 >>>>>>> v3.18
@@ -1557,7 +1644,10 @@ void em28xx_close_extension(struct em28xx *dev)
 	mutex_unlock(&em28xx_devlist_mutex);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int em28xx_suspend_extension(struct em28xx *dev)
 {
@@ -1586,4 +1676,7 @@ int em28xx_resume_extension(struct em28xx *dev)
 	mutex_unlock(&em28xx_devlist_mutex);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

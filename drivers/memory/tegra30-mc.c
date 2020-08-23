@@ -219,7 +219,11 @@ static void tegra30_mc_decode(struct tegra30_mc *mc, int n)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = readl(mc + MC_ERR_STATUS);
+=======
+	err = mc_readl(mc, MC_ERR_STATUS);
+>>>>>>> v3.18
 =======
 	err = mc_readl(mc, MC_ERR_STATUS);
 >>>>>>> v3.18
@@ -240,7 +244,11 @@ static void tegra30_mc_decode(struct tegra30_mc *mc, int n)
 		client = tegra30_mc_client[cid];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr = readl(mc + MC_ERR_ADR);
+=======
+	addr = mc_readl(mc, MC_ERR_ADR);
+>>>>>>> v3.18
 =======
 	addr = mc_readl(mc, MC_ERR_ADR);
 >>>>>>> v3.18
@@ -322,14 +330,20 @@ static irqreturn_t tegra30_mc_isr(int irq, void *data)
 	if (!mask)
 		return IRQ_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((bit = ffs(mask)) != 0)
 		tegra30_mc_decode(mc, bit - 1);
 =======
+=======
+>>>>>>> v3.18
 	while ((bit = ffs(mask)) != 0) {
 		tegra30_mc_decode(mc, bit - 1);
 		mask &= ~BIT(bit - 1);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mc_writel(mc, stat, MC_INTSTATUS);
 	return IRQ_HANDLED;
@@ -354,8 +368,11 @@ static int tegra30_mc_probe(struct platform_device *pdev)
 
 		res = platform_get_resource(pdev, IORESOURCE_MEM, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!res)
 			return -ENODEV;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		mc->regs[i] = devm_ioremap_resource(&pdev->dev, res);

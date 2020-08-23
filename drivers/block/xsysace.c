@@ -408,7 +408,11 @@ static void ace_dump_regs(struct ace_device *ace)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ace_fix_driveid(u16 *id)
+=======
+static void ace_fix_driveid(u16 *id)
+>>>>>>> v3.18
 =======
 static void ace_fix_driveid(u16 *id)
 >>>>>>> v3.18
@@ -468,7 +472,11 @@ static inline void ace_fsm_yieldirq(struct ace_device *ace)
 
 /* Get the next read/write request; ending requests that we don't handle */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct request *ace_get_next_request(struct request_queue * q)
+=======
+static struct request *ace_get_next_request(struct request_queue *q)
+>>>>>>> v3.18
 =======
 static struct request *ace_get_next_request(struct request_queue *q)
 >>>>>>> v3.18
@@ -670,7 +678,11 @@ static void ace_fsm_dostate(struct ace_device *ace)
 
 		ace->req = req;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ace->data_ptr = req->buffer;
+=======
+		ace->data_ptr = bio_data(req->bio);
+>>>>>>> v3.18
 =======
 		ace->data_ptr = bio_data(req->bio);
 >>>>>>> v3.18
@@ -746,7 +758,11 @@ static void ace_fsm_dostate(struct ace_device *ace)
 			 *      blk_rq_cur_sectors(ace->req));
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ace->data_ptr = ace->req->buffer;
+=======
+			ace->data_ptr = bio_data(ace->req->bio);
+>>>>>>> v3.18
 =======
 			ace->data_ptr = bio_data(ace->req->bio);
 >>>>>>> v3.18
@@ -1220,7 +1236,10 @@ static struct platform_driver ace_platform_driver = {
 	.remove = ace_remove,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name = "xsysace",

@@ -20,9 +20,13 @@
 #include <linux/i2c.h>
 #include <linux/i2c-mux.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/of_i2c.h>
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -136,7 +140,11 @@ static int i2c_arbitrator_probe(struct platform_device *pdev)
 		return -ENODEV;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->platform_data) {
+=======
+	if (dev_get_platdata(dev)) {
+>>>>>>> v3.18
 =======
 	if (dev_get_platdata(dev)) {
 >>>>>>> v3.18
@@ -210,7 +218,11 @@ static int i2c_arbitrator_probe(struct platform_device *pdev)
 	if (!arb->parent) {
 		dev_err(dev, "Cannot find parent bus\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return -EPROBE_DEFER;
+>>>>>>> v3.18
 =======
 		return -EPROBE_DEFER;
 >>>>>>> v3.18
@@ -252,7 +264,11 @@ static struct platform_driver i2c_arbitrator_driver = {
 		.owner	= THIS_MODULE,
 		.name	= "i2c-arb-gpio-challenge",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(i2c_arbitrator_of_match),
+=======
+		.of_match_table = i2c_arbitrator_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = i2c_arbitrator_of_match,
 >>>>>>> v3.18

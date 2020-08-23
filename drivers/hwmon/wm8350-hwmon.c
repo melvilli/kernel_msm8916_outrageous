@@ -29,12 +29,15 @@
 #include <linux/mfd/wm8350/comparator.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_name(struct device *dev,
 			 struct device_attribute *attr, char *buf)
 {
 	return sprintf(buf, "wm8350\n");
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const char * const input_names[] = {
@@ -44,7 +47,10 @@ static const char * const input_names[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static ssize_t show_voltage(struct device *dev,
@@ -75,8 +81,11 @@ static ssize_t show_label(struct device *dev,
 				  NULL, name)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(name, S_IRUGO, show_name, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 WM8350_NAMED_VOLTAGE(0, WM8350_AUXADC_USB);
@@ -84,9 +93,13 @@ WM8350_NAMED_VOLTAGE(1, WM8350_AUXADC_BATT);
 WM8350_NAMED_VOLTAGE(2, WM8350_AUXADC_LINE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *wm8350_attributes[] = {
 	&dev_attr_name.attr,
 
+=======
+static struct attribute *wm8350_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *wm8350_attrs[] = {
 >>>>>>> v3.18
@@ -101,9 +114,13 @@ static struct attribute *wm8350_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group wm8350_attr_group = {
 	.attrs	= wm8350_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(wm8350);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(wm8350);
 >>>>>>> v3.18
@@ -111,6 +128,7 @@ ATTRIBUTE_GROUPS(wm8350);
 static int wm8350_hwmon_probe(struct platform_device *pdev)
 {
 	struct wm8350 *wm8350 = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -141,19 +159,27 @@ static int wm8350_hwmon_remove(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct device *hwmon_dev;
 
 	hwmon_dev = devm_hwmon_device_register_with_groups(&pdev->dev, "wm8350",
 							   wm8350,
 							   wm8350_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct platform_driver wm8350_hwmon_driver = {
 	.probe = wm8350_hwmon_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = wm8350_hwmon_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver = {

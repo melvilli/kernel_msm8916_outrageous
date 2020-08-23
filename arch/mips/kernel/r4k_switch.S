@@ -23,6 +23,12 @@
 #include <asm/asmmacro.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* preprocessor replaces the fp in ".set fp=64" with $30 otherwise */
+#undef fp
+
+>>>>>>> v3.18
 =======
 /* preprocessor replaces the fp in ".set fp=64" with $30 otherwise */
 #undef fp
@@ -34,6 +40,7 @@
  */
 #define ST_OFF (_THREAD_SIZE - 32 - PT_SIZE + PT_STATUS)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * FPU context is saved iff the process has used it's FPU in the current
@@ -49,10 +56,15 @@
  * task_struct *resume(task_struct *prev, task_struct *next,
  *		       struct thread_info *next_ti, int usedfpu)
 =======
+=======
+>>>>>>> v3.18
 #ifndef USE_ALTERNATE_RESUME_IMPL
 /*
  * task_struct *resume(task_struct *prev, task_struct *next,
  *		       struct thread_info *next_ti, s32 fp_save)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 	.align	5
@@ -64,6 +76,7 @@
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * check if we need to save FPU registers
 	 */
 
@@ -74,6 +87,8 @@
 	 * clear saved user stack CU1 bit
 	 */
 =======
+=======
+>>>>>>> v3.18
 	 * Check whether we need to save any FP context. FP context is saved
 	 * iff the process has used the context with the scalar FPU or the MSA
 	 * ASE in the current time slice, as indicated by _TIF_USEDFPU and
@@ -89,6 +104,9 @@
 	 * This allows us to lazily restore the FP context.
 	 */
 	PTR_L	t3, TASK_THREAD_INFO(a0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	LONG_L	t0, ST_OFF(t3)
 	li	t1, ~ST0_CU1
@@ -96,10 +114,13 @@
 	LONG_S	t0, ST_OFF(t3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fpu_save_double a0 t0 t1		# c0_status passed in t0
 						# clobbers t1
 1:
 =======
+=======
+>>>>>>> v3.18
 	/* Check whether we're saving scalar or vector context. */
 	bgtz	a3, 1f
 
@@ -123,6 +144,9 @@
 	LONG_L	t9, TASK_STACK_CANARY(a1)
 	LONG_S	t9, 0(t8)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -134,6 +158,7 @@
 
 	PTR_ADDU	t0, $28, _THREAD_SIZE - 32
 	set_saved_sp	t0, t1, t2
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	/* Read-modify-writes of Status must be atomic on a VPE */
@@ -149,6 +174,8 @@
 #endif /* CONFIG_MIPS_MT_SMTC */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	mfc0	t1, CP0_STATUS		/* Do we really need this? */
 	li	a3, 0xff01
 	and	t1, a3
@@ -157,6 +184,7 @@
 	and	a2, a3
 	or	a2, t1
 	mtc0	a2, CP0_STATUS
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	_ehb
@@ -172,11 +200,18 @@
 #endif /* CONFIG_MIPS_MT_SMTC */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	move	v0, a0
 	jr	ra
 	END(resume)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* USE_ALTERNATE_RESUME_IMPL */
+
+>>>>>>> v3.18
 =======
 #endif /* USE_ALTERNATE_RESUME_IMPL */
 
@@ -186,7 +221,11 @@
  */
 LEAF(_save_fp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_64BIT
+=======
+#if defined(CONFIG_64BIT) || defined(CONFIG_CPU_MIPS32_R2)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_64BIT) || defined(CONFIG_CPU_MIPS32_R2)
 >>>>>>> v3.18
@@ -201,7 +240,11 @@ LEAF(_save_fp)
  */
 LEAF(_restore_fp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_64BIT
+=======
+#if defined(CONFIG_64BIT) || defined(CONFIG_CPU_MIPS32_R2)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_64BIT) || defined(CONFIG_CPU_MIPS32_R2)
 >>>>>>> v3.18
@@ -212,7 +255,10 @@ LEAF(_restore_fp)
 	END(_restore_fp)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_HAS_MSA
 
 /*
@@ -238,6 +284,9 @@ LEAF(_init_msa_upper)
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Load the FPU with signalling NANS.  This bit pattern we're using has
@@ -250,6 +299,7 @@ LEAF(_init_msa_upper)
 #define FPU_DEFAULT  0x00000000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 LEAF(_init_fpu)
 #ifdef CONFIG_MIPS_MT_SMTC
 	/* Rather than manipulate per-VPE Status, set per-TC bit in TCStatus */
@@ -260,17 +310,25 @@ LEAF(_init_fpu)
 	mtc0	t0, CP0_TCSTATUS
 #else /* Normal MIPS CU1 enable */
 =======
+=======
+>>>>>>> v3.18
 	.set push
 	SET_HARDFLOAT
 
 LEAF(_init_fpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mfc0	t0, CP0_STATUS
 	li	t1, ST0_CU1
 	or	t0, t1
 	mtc0	t0, CP0_STATUS
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	enable_fpu_hazard
@@ -337,9 +395,12 @@ LEAF(_init_fpu)
 	mtc1	t1, $f30
 	mtc1	t1, $f31
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 	.set	mips3
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_CPU_MIPS32_R2
 	.set    push
@@ -384,6 +445,9 @@ LEAF(_init_fpu)
 #endif /* CONFIG_CPU_MIPS32_R2 */
 #else
 	.set	arch=r4000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dmtc1	t1, $f0
 	dmtc1	t1, $f2
@@ -405,6 +469,11 @@ LEAF(_init_fpu)
 	jr	ra
 	END(_init_fpu)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	.set pop	/* SET_HARDFLOAT */
+>>>>>>> v3.18
 =======
 
 	.set pop	/* SET_HARDFLOAT */

@@ -65,7 +65,12 @@ static inline __wsum csum_tcpudp_nofold(__be32 saddr, __be32 daddr,
 {
 	unsigned long len_proto = (proto + len) << 8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asm ("ADD    %0, %0, %1\n"
+=======
+	asm ("ADDS   %0, %0, %1\n"
+	     "ADDCS  %0, %0, #1\n"
+>>>>>>> v3.18
 =======
 	asm ("ADDS   %0, %0, %1\n"
 	     "ADDCS  %0, %0, #1\n"

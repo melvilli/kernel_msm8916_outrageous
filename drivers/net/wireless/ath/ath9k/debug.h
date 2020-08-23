@@ -19,7 +19,10 @@
 
 #include "hw.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "rc.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "dfs_debug.h"
@@ -31,11 +34,14 @@ struct fft_sample_tlv;
 #ifdef CONFIG_ATH9K_DEBUGFS
 #define TX_STAT_INC(q, c) sc->debug.stats.txstats[q].c++
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RESET_STAT_INC(sc, type) sc->debug.stats.reset[type]++
 #else
 #define TX_STAT_INC(q, c) do { } while (0)
 #define RESET_STAT_INC(sc, type) do { } while (0)
 =======
+=======
+>>>>>>> v3.18
 #define RX_STAT_INC(c) (sc->debug.stats.rxstats.c++)
 #define RESET_STAT_INC(sc, type) sc->debug.stats.reset[type]++
 #define ANT_STAT_INC(i, c) sc->debug.stats.ant_stats[i].c++
@@ -46,6 +52,9 @@ struct fft_sample_tlv;
 #define RESET_STAT_INC(sc, type) do { } while (0)
 #define ANT_STAT_INC(i, c) do { } while (0)
 #define ANT_LNA_INC(i, c) do { } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -55,6 +64,10 @@ enum ath_reset_type {
 	RESET_TYPE_FATAL_INT,
 	RESET_TYPE_TX_ERROR,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	RESET_TYPE_TX_GTT,
+>>>>>>> v3.18
 =======
 	RESET_TYPE_TX_GTT,
 >>>>>>> v3.18
@@ -210,6 +223,7 @@ struct ath_tx_stats {
 #define PR(str, elem)							\
 	do {								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len += snprintf(buf + len, size - len,			\
 				"%s%13u%11u%10u%10u\n", str,		\
 				TXSTATS[PR_QNUM(IEEE80211_AC_BE)].elem,	\
@@ -263,6 +277,8 @@ struct ath_rx_stats {
 	u32 rx_frags;
 	u32 rx_spectral;
 =======
+=======
+>>>>>>> v3.18
 		len += scnprintf(buf + len, size - len,			\
 				 "%s%13u%11u%10u%10u\n", str,		\
 				 TXSTATS[PR_QNUM(IEEE80211_AC_BE)].elem,\
@@ -297,6 +313,9 @@ struct ath_antenna_stats {
 	u32 rssi_avg;
 	u32 lna_recv_cnt[4];
 	u32 lna_attempt_cnt[4];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -305,6 +324,7 @@ struct ath_stats {
 	struct ath_tx_stats txstats[ATH9K_NUM_TX_QUEUES];
 	struct ath_rx_stats rxstats;
 	struct ath_dfs_stats dfs_stats;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 reset[__RESET_TYPE_MAX];
 };
@@ -349,15 +369,21 @@ struct ath_dbg_bb_mac_samp {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct ath_antenna_stats ant_stats[2];
 	u32 reset[__RESET_TYPE_MAX];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ath9k_debug {
 	struct dentry *debugfs_phy;
 	u32 regidx;
 	struct ath_stats stats;
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_ATH9K_MAC_DEBUG
 	spinlock_t samp_lock;
@@ -366,6 +392,8 @@ struct ath9k_debug {
 	u8 tsidx;
 	u8 rsidx;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -391,6 +419,7 @@ void ath9k_sta_add_debugfs(struct ieee80211_hw *hw,
 			   struct ieee80211_sta *sta,
 			   struct dentry *dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ath9k_sta_remove_debugfs(struct ieee80211_hw *hw,
 			      struct ieee80211_vif *vif,
 			      struct ieee80211_sta *sta,
@@ -404,6 +433,8 @@ void ath_debug_send_fft_sample(struct ath_softc *sc,
 #define RX_STAT_INC(c) /* NOP */
 
 =======
+=======
+>>>>>>> v3.18
 void ath9k_debug_stat_ant(struct ath_softc *sc,
 			  struct ath_hw_antcomb_conf *div_ant_conf,
 			  int main_rssi_avg, int alt_rssi_avg);
@@ -411,6 +442,9 @@ void ath9k_debug_sync_cause(struct ath_softc *sc, u32 sync_cause);
 
 #else
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int ath9k_init_debug(struct ath_hw *ah)
 {
@@ -421,7 +455,10 @@ static inline void ath9k_deinit_debug(struct ath_softc *sc)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void ath_debug_stat_interrupt(struct ath_softc *sc,
@@ -429,7 +466,10 @@ static inline void ath_debug_stat_interrupt(struct ath_softc *sc,
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void ath_debug_stat_tx(struct ath_softc *sc,
@@ -440,13 +480,17 @@ static inline void ath_debug_stat_tx(struct ath_softc *sc,
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void ath_debug_stat_rx(struct ath_softc *sc,
 				     struct ath_rx_status *rs)
 {
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #endif /* CONFIG_ATH9K_DEBUGFS */
@@ -464,6 +508,8 @@ static inline void ath9k_debug_samp_bb_mac(struct ath_softc *sc)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 static inline void ath9k_debug_stat_ant(struct ath_softc *sc,
 					struct ath_hw_antcomb_conf *div_ant_conf,
 					int main_rssi_avg, int alt_rssi_avg)
@@ -489,6 +535,9 @@ static inline void ath_debug_rate_stats(struct ath_softc *sc,
 {
 }
 #endif /* CONFIG_ATH9K_STATION_STATISTICS */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* DEBUG_H */

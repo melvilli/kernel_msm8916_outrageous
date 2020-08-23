@@ -12,7 +12,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/of.h>
@@ -135,10 +138,16 @@ static int pm860x_led_dt_init(struct platform_device *pdev,
 	int iset = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nproot = of_node_get(pdev->dev.parent->of_node);
 	if (!nproot)
 		return -ENODEV;
 	nproot = of_find_node_by_name(nproot, "leds");
+=======
+	if (!pdev->dev.parent->of_node)
+		return -ENODEV;
+	nproot = of_get_child_by_name(pdev->dev.parent->of_node, "leds");
+>>>>>>> v3.18
 =======
 	if (!pdev->dev.parent->of_node)
 		return -ENODEV;
@@ -167,7 +176,11 @@ static int pm860x_led_probe(struct platform_device *pdev)
 {
 	struct pm860x_chip *chip = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pm860x_led_pdata *pdata = pdev->dev.platform_data;
+=======
+	struct pm860x_led_pdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct pm860x_led_pdata *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -218,7 +231,11 @@ static int pm860x_led_probe(struct platform_device *pdev)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, data);
+=======
+	platform_set_drvdata(pdev, data);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, data);
 >>>>>>> v3.18

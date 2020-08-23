@@ -69,7 +69,11 @@ static int eseqiv_givencrypt(struct skcipher_givcrypt_request *req)
 	struct eseqiv_request_ctx *reqctx = skcipher_givcrypt_reqctx(req);
 	struct ablkcipher_request *subreq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crypto_completion_t complete;
+=======
+	crypto_completion_t compl;
+>>>>>>> v3.18
 =======
 	crypto_completion_t compl;
 >>>>>>> v3.18
@@ -91,7 +95,11 @@ static int eseqiv_givencrypt(struct skcipher_givcrypt_request *req)
 
 	giv = req->giv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	complete = req->creq.base.complete;
+=======
+	compl = req->creq.base.complete;
+>>>>>>> v3.18
 =======
 	compl = req->creq.base.complete;
 >>>>>>> v3.18
@@ -110,17 +118,23 @@ static int eseqiv_givencrypt(struct skcipher_givcrypt_request *req)
 		giv = PTR_ALIGN((u8 *)reqctx->tail,
 				crypto_ablkcipher_alignmask(geniv) + 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		complete = eseqiv_complete;
 		data = req;
 	}
 
 	ablkcipher_request_set_callback(subreq, req->creq.base.flags, complete,
 =======
+=======
+>>>>>>> v3.18
 		compl = eseqiv_complete;
 		data = req;
 	}
 
 	ablkcipher_request_set_callback(subreq, req->creq.base.flags, compl,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					data);
 
@@ -284,6 +298,9 @@ module_exit(eseqiv_module_exit);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Encrypted Sequence Number IV Generator");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("eseqiv");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -8,6 +8,7 @@
    NAT module, and the compatibility layer's use of NAT for masquerading. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int nf_nat_packet(struct nf_conn *ct,
 				  enum ip_conntrack_info ctinfo,
 				  unsigned int hooknum,
@@ -15,10 +16,15 @@ extern unsigned int nf_nat_packet(struct nf_conn *ct,
 
 extern int nf_xfrm_me_harder(struct sk_buff *skb, unsigned int family);
 =======
+=======
+>>>>>>> v3.18
 unsigned int nf_nat_packet(struct nf_conn *ct, enum ip_conntrack_info ctinfo,
 			   unsigned int hooknum, struct sk_buff *skb);
 
 int nf_xfrm_me_harder(struct sk_buff *skb, unsigned int family);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int nf_nat_initialized(struct nf_conn *ct,

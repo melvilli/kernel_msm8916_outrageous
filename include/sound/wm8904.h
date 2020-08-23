@@ -120,7 +120,11 @@
 #define WM8904_GPIO_REGS 4
 #define WM8904_DRC_REGS  4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WM8904_EQ_REGS   24
+=======
+#define WM8904_EQ_REGS   25
+>>>>>>> v3.18
 =======
 #define WM8904_EQ_REGS   25
 >>>>>>> v3.18

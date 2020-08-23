@@ -33,8 +33,11 @@
 static void vx_write_codec_reg(struct vx_core *chip, int codec, unsigned int data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (snd_BUG_ON(!chip->ops->write_codec))
@@ -44,9 +47,15 @@ static void vx_write_codec_reg(struct vx_core *chip, int codec, unsigned int dat
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&chip->lock, flags);
 	chip->ops->write_codec(chip, codec, data);
 	spin_unlock_irqrestore(&chip->lock, flags);
+=======
+	mutex_lock(&chip->lock);
+	chip->ops->write_codec(chip, codec, data);
+	mutex_unlock(&chip->lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&chip->lock);
 	chip->ops->write_codec(chip, codec, data);
@@ -188,6 +197,7 @@ void vx_reset_codec(struct vx_core *chip, int cold_reset)
 static void vx_change_audio_source(struct vx_core *chip, int src)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	if (chip->chip_status & VX_STAT_IS_STALE)
@@ -197,12 +207,17 @@ static void vx_change_audio_source(struct vx_core *chip, int src)
 	chip->ops->change_audio_source(chip, src);
 	spin_unlock_irqrestore(&chip->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	if (chip->chip_status & VX_STAT_IS_STALE)
 		return;
 
 	mutex_lock(&chip->lock);
 	chip->ops->change_audio_source(chip, src);
 	mutex_unlock(&chip->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

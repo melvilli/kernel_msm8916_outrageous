@@ -37,7 +37,11 @@
 /*
  * i2c read
 <<<<<<< HEAD
+<<<<<<< HEAD
  * bulk write: 0x02 ((7bit i2c_addr << 1) & 0x01) register_bytes length_word
+=======
+ * bulk write: 0x02 ((7bit i2c_addr << 1) | 0x01) register_bytes length_word
+>>>>>>> v3.18
 =======
  * bulk write: 0x02 ((7bit i2c_addr << 1) | 0x01) register_bytes length_word
 >>>>>>> v3.18

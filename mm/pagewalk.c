@@ -178,7 +178,11 @@ int walk_page_range(unsigned long addr, unsigned long end,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!rwsem_is_locked(&walk->mm->mmap_sem));
+=======
+	VM_BUG_ON_MM(!rwsem_is_locked(&walk->mm->mmap_sem), walk->mm);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_MM(!rwsem_is_locked(&walk->mm->mmap_sem), walk->mm);
 >>>>>>> v3.18
@@ -204,10 +208,14 @@ int walk_page_range(unsigned long addr, unsigned long end,
 			if ((vma->vm_start <= addr) &&
 			    (vma->vm_flags & VM_PFNMAP)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (walk->pte_hole)
 					err = walk->pte_hole(addr, next, walk);
 				if (err)
 					break;
+=======
+				next = vma->vm_end;
+>>>>>>> v3.18
 =======
 				next = vma->vm_end;
 >>>>>>> v3.18

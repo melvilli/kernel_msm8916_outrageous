@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_SIRF
 	bool "CSR SiRF" if ARCH_MULTI_V7
 	select ARCH_REQUIRE_GPIOLIB
@@ -6,11 +7,16 @@ config ARCH_SIRF
 	select GENERIC_IRQ_CHIP
 	select MIGHT_HAVE_CACHE_L2X0
 =======
+=======
+>>>>>>> v3.18
 menuconfig ARCH_SIRF
 	bool "CSR SiRF" if ARCH_MULTI_V7
 	select ARCH_HAS_RESET_CONTROLLER
 	select ARCH_REQUIRE_GPIOLIB
 	select GENERIC_IRQ_CHIP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select NO_IOPORT_MAP
 	select PINCTRL
@@ -21,7 +27,11 @@ menuconfig ARCH_SIRF
 if ARCH_SIRF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 menu "CSR SiRF atlas6/primaII/Marco/Polo Specific Features"
+=======
+comment "CSR SiRF atlas6/primaII/Marco/Polo Specific Features"
+>>>>>>> v3.18
 =======
 comment "CSR SiRF atlas6/primaII/Marco/Polo Specific Features"
 >>>>>>> v3.18
@@ -30,7 +40,10 @@ config ARCH_ATLAS6
 	bool "CSR SiRFSoC ATLAS6 ARM Cortex A9 Platform"
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_V7
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select SIRF_IRQ
@@ -41,7 +54,10 @@ config ARCH_PRIMA2
 	bool "CSR SiRFSoC PRIMA2 ARM Cortex A9 Platform"
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_V7
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select SIRF_IRQ
@@ -54,9 +70,13 @@ config ARCH_MARCO
 	default y
 	select ARM_GIC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CPU_V7
 	select HAVE_ARM_SCU if SMP
 	select HAVE_SMP
+=======
+	select HAVE_ARM_SCU if SMP
+>>>>>>> v3.18
 =======
 	select HAVE_ARM_SCU if SMP
 >>>>>>> v3.18
@@ -65,8 +85,11 @@ config ARCH_MARCO
           Support for CSR SiRFSoC ARM Cortex A9 Platform
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endmenu
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SIRF_IRQ

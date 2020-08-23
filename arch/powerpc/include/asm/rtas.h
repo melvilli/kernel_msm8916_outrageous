@@ -45,6 +45,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef u32 rtas_arg_t;
 
 struct rtas_args {
@@ -52,12 +53,17 @@ struct rtas_args {
 	u32 nargs;
 	u32 nret; 
 =======
+=======
+>>>>>>> v3.18
 typedef __be32 rtas_arg_t;
 
 struct rtas_args {
 	__be32 token;
 	__be32 nargs;
 	__be32 nret; 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtas_arg_t args[16];
 	rtas_arg_t *rets;     /* Pointer to return values in args[]. */
@@ -160,6 +166,7 @@ struct rtas_suspend_me_data {
 
 struct rtas_error_log {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long version:8;		/* Architectural version */
 	unsigned long severity:3;		/* Severity level of error */
 	unsigned long disposition:2;		/* Degree of recovery */
@@ -174,6 +181,8 @@ struct rtas_error_log {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	/* Byte 0 */
 	uint8_t		byte0;			/* Architectural version */
 
@@ -221,6 +230,9 @@ uint32_t rtas_error_extended_log_length(const struct rtas_error_log *elog)
 	return be32_to_cpu(elog->extended_log_length);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RTAS_V6EXT_LOG_FORMAT_EVENT_LOG	14
 
@@ -231,6 +243,7 @@ uint32_t rtas_error_extended_log_length(const struct rtas_error_log *elog)
  */
 struct rtas_ext_event_log_v6 {
 	/* Byte 0 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	uint32_t log_valid:1;		/* 1:Log valid */
 	uint32_t unrecoverable_error:1;	/* 1:Unrecoverable error */
@@ -259,6 +272,8 @@ struct rtas_ext_event_log_v6 {
 	/* Byte 12-15 */
 	uint32_t company_id;		/* Company ID of the company	*/
 =======
+=======
+>>>>>>> v3.18
 	uint8_t byte0;
 	/* XXXXXXXX
 	 * X		1: Log valid
@@ -288,6 +303,9 @@ struct rtas_ext_event_log_v6 {
 	uint8_t reserved[8];		/* reserved */
 	/* Byte 12-15 */
 	__be32  company_id;		/* Company ID of the company	*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					/* that defines the format for	*/
 					/* the vendor specific log type	*/
@@ -297,7 +315,10 @@ struct rtas_ext_event_log_v6 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static
 inline uint8_t rtas_ext_event_log_format(struct rtas_ext_event_log_v6 *ext_log)
 {
@@ -310,6 +331,9 @@ inline uint32_t rtas_ext_event_company_id(struct rtas_ext_event_log_v6 *ext_log)
 	return be32_to_cpu(ext_log->company_id);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* pSeries event log format */
 
@@ -334,6 +358,7 @@ inline uint32_t rtas_ext_event_company_id(struct rtas_ext_event_log_v6 *ext_log)
 /* Vendor specific Platform Event Log Format, Version 6, section header */
 struct pseries_errorlog {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t id;			/* 0x00 2-byte ASCII section ID	*/
 	uint16_t length;		/* 0x02 Section length in bytes	*/
 	uint8_t version;		/* 0x04 Section version		*/
@@ -343,6 +368,8 @@ struct pseries_errorlog {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	__be16 id;			/* 0x00 2-byte ASCII section ID	*/
 	__be16 length;			/* 0x02 Section length in bytes	*/
 	uint8_t version;		/* 0x04 Section version		*/
@@ -363,6 +390,9 @@ inline uint16_t pseries_errorlog_length(struct pseries_errorlog *sect)
 	return be16_to_cpu(sect->length);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct pseries_errorlog *get_pseries_errorlog(struct rtas_error_log *log,
 					      uint16_t section_id);
@@ -385,7 +415,10 @@ extern void rtas_halt(void);
 extern void rtas_os_term(char *str);
 extern int rtas_get_sensor(int sensor, int index, int *state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int rtas_get_sensor_fast(int sensor, int index, int *state);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int rtas_get_power_level(int powerdomain, int *level);
@@ -417,6 +450,10 @@ extern void pSeries_log_error(char *buf, unsigned int err_type, int fatal);
 #ifdef CONFIG_PPC_PSERIES
 extern int pseries_devicetree_update(s32 scope);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void post_mobility_fixup(void);
+>>>>>>> v3.18
 =======
 extern void post_mobility_fixup(void);
 >>>>>>> v3.18
@@ -488,8 +525,13 @@ static inline u32 rtas_config_addr(int busno, int devfn, int reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __cpuinit rtas_give_timebase(void);
 extern void __cpuinit rtas_take_timebase(void);
+=======
+extern void rtas_give_timebase(void);
+extern void rtas_take_timebase(void);
+>>>>>>> v3.18
 =======
 extern void rtas_give_timebase(void);
 extern void rtas_take_timebase(void);

@@ -23,6 +23,10 @@
 
 #include <linux/uuid.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/trace_seq.h>
+>>>>>>> v3.18
 =======
 #include <linux/trace_seq.h>
 >>>>>>> v3.18
@@ -41,7 +45,10 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * CPER record length contains the CPER fields which are relevant for further
  * handling of a memory error in userspace (we don't carry all the fields
  * defined in the UEFI spec because some of them don't make any sense.)
@@ -49,6 +56,9 @@
  */
 #define CPER_REC_LEN					256
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Severity difinition for error_severity in struct cper_record_header
  * and section_severity in struct cper_section_descriptor
@@ -233,8 +243,13 @@ enum {
 
 #define CPER_MEM_VALID_ERROR_STATUS		0x0001
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CPER_MEM_VALID_PHYSICAL_ADDRESS		0x0002
 #define CPER_MEM_VALID_PHYSICAL_ADDRESS_MASK	0x0004
+=======
+#define CPER_MEM_VALID_PA			0x0002
+#define CPER_MEM_VALID_PA_MASK			0x0004
+>>>>>>> v3.18
 =======
 #define CPER_MEM_VALID_PA			0x0002
 #define CPER_MEM_VALID_PA_MASK			0x0004
@@ -252,6 +267,12 @@ enum {
 #define CPER_MEM_VALID_TARGET_ID		0x2000
 #define CPER_MEM_VALID_ERROR_TYPE		0x4000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CPER_MEM_VALID_RANK_NUMBER		0x8000
+#define CPER_MEM_VALID_CARD_HANDLE		0x10000
+#define CPER_MEM_VALID_MODULE_HANDLE		0x20000
+>>>>>>> v3.18
 =======
 #define CPER_MEM_VALID_RANK_NUMBER		0x8000
 #define CPER_MEM_VALID_CARD_HANDLE		0x10000
@@ -373,7 +394,10 @@ struct cper_sec_mem_err {
 	__u64	target_id;
 	__u8	error_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	__u8	reserved;
 	__u16	rank;
 	__u16	mem_array_handle;	/* card handle in UEFI 2.4 */
@@ -396,6 +420,9 @@ struct cper_mem_err_compact {
 	__u16	rank;
 	__u16	mem_array_handle;
 	__u16	mem_dev_handle;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -439,9 +466,12 @@ struct cper_sec_pcie {
 
 u64 cper_next_record_id(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void cper_print_bits(const char *prefix, unsigned int bits,
 		     const char *strs[], unsigned int strs_size);
 =======
+=======
+>>>>>>> v3.18
 const char *cper_severity_str(unsigned int);
 const char *cper_mem_err_type_str(unsigned int);
 void cper_print_bits(const char *prefix, unsigned int bits,
@@ -450,6 +480,9 @@ void cper_mem_err_pack(const struct cper_sec_mem_err *,
 		       struct cper_mem_err_compact *);
 const char *cper_mem_err_unpack(struct trace_seq *,
 				struct cper_mem_err_compact *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

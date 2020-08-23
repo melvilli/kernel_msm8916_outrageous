@@ -213,6 +213,12 @@
 #define GPIO_ST_HP		0x0080
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GPIO_XENSE_OUTPUT_ENABLE	(0x0001 | 0x0010 | 0x0020)
+#define GPIO_XENSE_SPEAKERS		0x0080
+
+>>>>>>> v3.18
 =======
 #define GPIO_XENSE_OUTPUT_ENABLE	(0x0001 | 0x0010 | 0x0020)
 #define GPIO_XENSE_SPEAKERS		0x0080
@@ -426,6 +432,10 @@ static void xonar_st_init_common(struct oxygen *chip)
 	data->generic.output_enable_bit = GPIO_ST_OUTPUT_ENABLE;
 	data->dacs = chip->model.dac_channels_mixer / 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	data->h6 = chip->model.dac_channels_mixer > 2;
+>>>>>>> v3.18
 =======
 	data->h6 = chip->model.dac_channels_mixer > 2;
 >>>>>>> v3.18
@@ -510,7 +520,10 @@ static void xonar_stx_init(struct oxygen *chip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void xonar_xense_init(struct oxygen *chip)
 {
 	struct xonar_pcm179x *data = chip->model_data;
@@ -556,6 +569,9 @@ static void xonar_xense_init(struct oxygen *chip)
 	snd_component_add(chip->card, "CS2000");
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void xonar_d2_cleanup(struct oxygen *chip)
 {
@@ -854,17 +870,23 @@ static int st_hp_volume_offset_info(struct snd_kcontrol *ctl,
 				    struct snd_ctl_elem_info *info)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static const char *const names[3] = {
 		"< 64 ohms", "64-300 ohms", "300-600 ohms"
 	};
 
 	return snd_ctl_enum_info(info, 1, 3, names);
 =======
+=======
+>>>>>>> v3.18
 	static const char *const names[4] = {
 		"< 32 ohms", "32-64 ohms", "64-300 ohms", "300-600 ohms"
 	};
 
 	return snd_ctl_enum_info(info, 1, 4, names);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -876,6 +898,7 @@ static int st_hp_volume_offset_get(struct snd_kcontrol *ctl,
 
 	mutex_lock(&chip->mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data->hp_gain_offset < 2*-6)
 		value->value.enumerated.item[0] = 0;
 	else if (data->hp_gain_offset < 0)
@@ -883,6 +906,8 @@ static int st_hp_volume_offset_get(struct snd_kcontrol *ctl,
 	else
 		value->value.enumerated.item[0] = 2;
 =======
+=======
+>>>>>>> v3.18
 	if (data->hp_gain_offset < 2*-12)
 		value->value.enumerated.item[0] = 0;
 	else if (data->hp_gain_offset < 2*-6)
@@ -891,6 +916,9 @@ static int st_hp_volume_offset_get(struct snd_kcontrol *ctl,
 		value->value.enumerated.item[0] = 2;
 	else
 		value->value.enumerated.item[0] = 3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&chip->mutex);
 	return 0;
@@ -901,7 +929,11 @@ static int st_hp_volume_offset_put(struct snd_kcontrol *ctl,
 				   struct snd_ctl_elem_value *value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static const s8 offsets[] = { 2*-18, 2*-6, 0 };
+=======
+	static const s8 offsets[] = { 2*-18, 2*-12, 2*-6, 0 };
+>>>>>>> v3.18
 =======
 	static const s8 offsets[] = { 2*-18, 2*-12, 2*-6, 0 };
 >>>>>>> v3.18
@@ -911,7 +943,11 @@ static int st_hp_volume_offset_put(struct snd_kcontrol *ctl,
 	int changed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (value->value.enumerated.item[0] > 2)
+=======
+	if (value->value.enumerated.item[0] > 3)
+>>>>>>> v3.18
 =======
 	if (value->value.enumerated.item[0] > 3)
 >>>>>>> v3.18
@@ -945,7 +981,10 @@ static const struct snd_kcontrol_new st_controls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int xense_output_switch_get(struct snd_kcontrol *ctl,
 				   struct snd_ctl_elem_value *value)
 {
@@ -1007,6 +1046,9 @@ static const struct snd_kcontrol_new xense_controls[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void xonar_line_mic_ac97_switch(struct oxygen *chip,
 				       unsigned int reg, unsigned int mute)
@@ -1096,7 +1138,10 @@ static int xonar_st_mixer_init(struct oxygen *chip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int xonar_xense_mixer_init(struct oxygen *chip)
 {
 	unsigned int i;
@@ -1114,6 +1159,9 @@ static int xonar_xense_mixer_init(struct oxygen *chip)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void dump_pcm1796_registers(struct oxygen *chip,
 				   struct snd_info_buffer *buffer)
@@ -1310,9 +1358,12 @@ int get_xonar_pcm179x_model(struct oxygen *chip,
 	case 0x85f4:
 		chip->model = model_xonar_st;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* TODO: daughterboard support */
 		chip->model.shortname = "Xonar STX II";
 =======
+=======
+>>>>>>> v3.18
 		oxygen_clear_bits16(chip, OXYGEN_GPIO_CONTROL, GPIO_DB_MASK);
 		switch (oxygen_read16(chip, OXYGEN_GPIO_DATA) & GPIO_DB_MASK) {
 		default:
@@ -1325,13 +1376,19 @@ int get_xonar_pcm179x_model(struct oxygen *chip,
 			chip->model.dac_mclks = OXYGEN_MCLKS(256, 128, 128);
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		chip->model.init = xonar_stx_init;
 		chip->model.resume = xonar_stx_resume;
 		chip->model.set_dac_params = set_pcm1796_params;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case 0x8428:
 		chip->model = model_xonar_st;
 		chip->model.shortname = "Xonar Xense";
@@ -1339,6 +1396,9 @@ int get_xonar_pcm179x_model(struct oxygen *chip,
 		chip->model.init = xonar_xense_init;
 		chip->model.mixer_init = xonar_xense_mixer_init;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -EINVAL;

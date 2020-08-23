@@ -4,6 +4,7 @@ ARM Allwinner SoCs
 This document lists all the ARM Allwinner SoCs that are currently
 supported in mainline by the Linux kernel. This document will also
 <<<<<<< HEAD
+<<<<<<< HEAD
 provide links to documentation and or datasheet for these SoCs.
 
 SunXi family
@@ -19,6 +20,8 @@ SunXi family
   Core: Cortex A8
   Linux kernel mach directory: arch/arm/mach-sunxi
 =======
+=======
+>>>>>>> v3.18
 provide links to documentation and/or datasheet for these SoCs.
 
 SunXi family
@@ -65,5 +68,9 @@ SunXi family
 
     * Quad ARM Cortex-A15, Quad ARM Cortex-A7 based SoCs
       - Allwinner A80
+<<<<<<< HEAD
+        + Not Supported
+>>>>>>> v3.18
+=======
         + Not Supported
 >>>>>>> v3.18

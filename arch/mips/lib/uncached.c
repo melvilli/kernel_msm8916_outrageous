@@ -9,7 +9,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -40,7 +43,11 @@
  * and the uncached mode.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long __cpuinit run_uncached(void *func)
+=======
+unsigned long run_uncached(void *func)
+>>>>>>> v3.18
 =======
 unsigned long run_uncached(void *func)
 >>>>>>> v3.18

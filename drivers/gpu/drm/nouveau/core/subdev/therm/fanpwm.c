@@ -26,6 +26,11 @@
 #include <core/option.h>
 #include <subdev/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <subdev/bios.h>
+#include <subdev/bios/fan.h>
+>>>>>>> v3.18
 =======
 #include <subdev/bios.h>
 #include <subdev/bios/fan.h>
@@ -73,7 +78,11 @@ nouveau_fanpwm_set(struct nouveau_therm *therm, int percent)
 		divs = 1;
 		if (therm->pwm_clock)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			divs = therm->pwm_clock(therm);
+=======
+			divs = therm->pwm_clock(therm, priv->func.line);
+>>>>>>> v3.18
 =======
 			divs = therm->pwm_clock(therm, priv->func.line);
 >>>>>>> v3.18
@@ -96,12 +105,15 @@ nouveau_fanpwm_create(struct nouveau_therm *therm, struct dcb_gpio_func *func)
 	struct nouveau_device *device = nv_device(therm);
 	struct nouveau_therm_priv *tpriv = (void *)therm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_fanpwm_priv *priv;
 	u32 divs, duty;
 
 	if (!nouveau_boolopt(device->cfgopt, "NvFanPWM", func->param) ||
 	    !therm->pwm_ctrl ||
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_bios *bios = nouveau_bios(therm);
 	struct nouveau_fanpwm_priv *priv;
 	struct nvbios_therm_fan fan;
@@ -111,6 +123,9 @@ nouveau_fanpwm_create(struct nouveau_therm *therm, struct dcb_gpio_func *func)
 
 	if (!nouveau_boolopt(device->cfgopt, "NvFanPWM", func->param) ||
 	    !therm->pwm_ctrl || fan.type == NVBIOS_THERM_FAN_TOGGLE ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	     therm->pwm_get(therm, func->line, &divs, &duty) == -ENODEV)
 		return -ENODEV;

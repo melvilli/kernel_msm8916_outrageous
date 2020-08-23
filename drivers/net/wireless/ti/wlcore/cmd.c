@@ -61,7 +61,12 @@ static int __wlcore_cmd_send(struct wl1271 *wl, u16 id, void *buf,
 	u16 poll_count = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (WARN_ON(unlikely(wl->state == WLCORE_STATE_RESTARTING)))
+=======
+	if (unlikely(wl->state == WLCORE_STATE_RESTARTING &&
+		     id != CMD_STOP_FWLOGGER))
+>>>>>>> v3.18
 =======
 	if (unlikely(wl->state == WLCORE_STATE_RESTARTING &&
 		     id != CMD_STOP_FWLOGGER))
@@ -317,8 +322,13 @@ int wl12xx_allocate_link(struct wl1271 *wl, struct wl12xx_vif *wlvif, u8 *hlid)
 {
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 link = find_first_zero_bit(wl->links_map, WL12XX_MAX_LINKS);
 	if (link >= WL12XX_MAX_LINKS)
+=======
+	u8 link = find_first_zero_bit(wl->links_map, wl->num_links);
+	if (link >= wl->num_links)
+>>>>>>> v3.18
 =======
 	u8 link = find_first_zero_bit(wl->links_map, wl->num_links);
 	if (link >= wl->num_links)
@@ -334,10 +344,13 @@ int wl12xx_allocate_link(struct wl1271 *wl, struct wl12xx_vif *wlvif, u8 *hlid)
 	spin_unlock_irqrestore(&wl->wl_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* take the last "freed packets" value from the current FW status */
 	wl->links[link].prev_freed_pkts =
 			wl->fw_status_2->counters.tx_lnk_free_pkts[link];
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * take the last "freed packets" value from the current FW status.
 	 * on recovery, we might not have fw_status yet, and
@@ -346,6 +359,9 @@ int wl12xx_allocate_link(struct wl1271 *wl, struct wl12xx_vif *wlvif, u8 *hlid)
 	if (wl->fw_status->counters.tx_lnk_free_pkts)
 		wl->links[link].prev_freed_pkts =
 			wl->fw_status->counters.tx_lnk_free_pkts[link];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wl->links[link].wlvif = wlvif;
 
@@ -388,9 +404,15 @@ void wl12xx_free_link(struct wl1271 *wl, struct wl12xx_vif *wlvif, u8 *hlid)
 	wl->links[*hlid].wlvif = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wlvif->bss_type == BSS_TYPE_STA_BSS ||
 	    (wlvif->bss_type == BSS_TYPE_AP_BSS &&
 	     *hlid == wlvif->ap.bcast_hlid)) {
+=======
+	if (wlvif->bss_type == BSS_TYPE_AP_BSS &&
+	    *hlid == wlvif->ap.bcast_hlid) {
+		u32 sqn_padding = WL1271_TX_SQN_POST_RECOVERY_PADDING;
+>>>>>>> v3.18
 =======
 	if (wlvif->bss_type == BSS_TYPE_AP_BSS &&
 	    *hlid == wlvif->ap.bcast_hlid) {
@@ -407,15 +429,21 @@ void wl12xx_free_link(struct wl1271 *wl, struct wl12xx_vif *wlvif, u8 *hlid)
 		 * transmitted packets that we haven't yet got in the FW status
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(WL1271_FLAG_RECOVERY_IN_PROGRESS, &wl->flags))
 			wlvif->total_freed_pkts +=
 					WL1271_TX_SQN_POST_RECOVERY_PADDING;
 =======
+=======
+>>>>>>> v3.18
 		if (wlvif->encryption_type == KEY_GEM)
 			sqn_padding = WL1271_TX_SQN_POST_RECOVERY_PADDING_GEM;
 
 		if (test_bit(WL1271_FLAG_RECOVERY_IN_PROGRESS, &wl->flags))
 			wlvif->total_freed_pkts += sqn_padding;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -881,7 +909,12 @@ EXPORT_SYMBOL_GPL(wl1271_cmd_test);
  * @len: length of buf
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wl1271_cmd_interrogate(struct wl1271 *wl, u16 id, void *buf, size_t len)
+=======
+int wl1271_cmd_interrogate(struct wl1271 *wl, u16 id, void *buf,
+			   size_t cmd_len, size_t res_len)
+>>>>>>> v3.18
 =======
 int wl1271_cmd_interrogate(struct wl1271 *wl, u16 id, void *buf,
 			   size_t cmd_len, size_t res_len)
@@ -895,15 +928,21 @@ int wl1271_cmd_interrogate(struct wl1271 *wl, u16 id, void *buf,
 	acx->id = cpu_to_le16(id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* payload length, does not include any headers */
 	acx->len = cpu_to_le16(len - sizeof(*acx));
 
 	ret = wl1271_cmd_send(wl, CMD_INTERROGATE, acx, sizeof(*acx), len);
 =======
+=======
+>>>>>>> v3.18
 	/* response payload length, does not include any headers */
 	acx->len = cpu_to_le16(res_len - sizeof(*acx));
 
 	ret = wl1271_cmd_send(wl, CMD_INTERROGATE, acx, cmd_len, res_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		wl1271_error("INTERROGATE command failed");
@@ -1165,7 +1204,12 @@ int wl12xx_cmd_build_probe_req(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 			       u8 role_id, u8 band,
 			       const u8 *ssid, size_t ssid_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       const u8 *ie, size_t ie_len, bool sched_scan)
+=======
+			       const u8 *ie0, size_t ie0_len, const u8 *ie1,
+			       size_t ie1_len, bool sched_scan)
+>>>>>>> v3.18
 =======
 			       const u8 *ie0, size_t ie0_len, const u8 *ie1,
 			       size_t ie1_len, bool sched_scan)
@@ -1179,28 +1223,40 @@ int wl12xx_cmd_build_probe_req(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 	u16 template_id_5 = wl->scan_templ_id_5;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb = ieee80211_probereq_get(wl->hw, vif, ssid, ssid_len,
 				     ie_len);
 =======
+=======
+>>>>>>> v3.18
 	wl1271_debug(DEBUG_SCAN, "build probe request band %d", band);
 
 	skb = ieee80211_probereq_get(wl->hw, vif, ssid, ssid_len,
 				     ie0_len + ie1_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!skb) {
 		ret = -ENOMEM;
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ie_len)
 		memcpy(skb_put(skb, ie_len), ie, ie_len);
 
 	wl1271_dump(DEBUG_SCAN, "PROBE REQ: ", skb->data, skb->len);
 =======
+=======
+>>>>>>> v3.18
 	if (ie0_len)
 		memcpy(skb_put(skb, ie0_len), ie0, ie0_len);
 	if (ie1_len)
 		memcpy(skb_put(skb, ie1_len), ie1, ie1_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (sched_scan &&
@@ -1239,7 +1295,11 @@ struct sk_buff *wl1271_cmd_build_ap_probe_req(struct wl1271 *wl,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wl1271_dump(DEBUG_SCAN, "AP PROBE REQ: ", skb->data, skb->len);
+=======
+	wl1271_debug(DEBUG_SCAN, "set ap probe request template");
+>>>>>>> v3.18
 =======
 	wl1271_debug(DEBUG_SCAN, "set ap probe request template");
 >>>>>>> v3.18
@@ -1596,6 +1656,10 @@ int wl12xx_cmd_add_peer(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 	cmd->wmm = sta->wme ? 1 : 0;
 	cmd->session_id = wl->session_ids[hlid];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cmd->role_id = wlvif->role_id;
+>>>>>>> v3.18
 =======
 	cmd->role_id = wlvif->role_id;
 >>>>>>> v3.18
@@ -1636,7 +1700,12 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wl12xx_cmd_remove_peer(struct wl1271 *wl, u8 hlid)
+=======
+int wl12xx_cmd_remove_peer(struct wl1271 *wl, struct wl12xx_vif *wlvif,
+			   u8 hlid)
+>>>>>>> v3.18
 =======
 int wl12xx_cmd_remove_peer(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 			   u8 hlid)
@@ -1659,6 +1728,10 @@ int wl12xx_cmd_remove_peer(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 	cmd->reason_opcode = 0;
 	cmd->send_deauth_flag = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cmd->role_id = wlvif->role_id;
+>>>>>>> v3.18
 =======
 	cmd->role_id = wlvif->role_id;
 >>>>>>> v3.18
@@ -1691,6 +1764,7 @@ out:
 static int wlcore_get_reg_conf_ch_idx(enum ieee80211_band band, u16 ch)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int idx = -1;
 
 	switch (band) {
@@ -1719,6 +1793,8 @@ static int wlcore_get_reg_conf_ch_idx(enum ieee80211_band band, u16 ch)
 
 	return idx;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * map the given band/channel to the respective predefined
 	 * bit expected by the fw
@@ -1756,6 +1832,9 @@ static int wlcore_get_reg_conf_ch_idx(enum ieee80211_band band, u16 ch)
 
 	wl1271_error("%s: unknown band/channel: %d/%d", __func__, band, ch);
 	return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1770,7 +1849,11 @@ void wlcore_set_pending_regdomain_ch(struct wl1271 *wl, u16 channel,
 	ch_bit_idx = wlcore_get_reg_conf_ch_idx(band, channel);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ch_bit_idx > 0 && ch_bit_idx <= WL1271_MAX_CHANNELS)
+=======
+	if (ch_bit_idx >= 0 && ch_bit_idx <= WL1271_MAX_CHANNELS)
+>>>>>>> v3.18
 =======
 	if (ch_bit_idx >= 0 && ch_bit_idx <= WL1271_MAX_CHANNELS)
 >>>>>>> v3.18
@@ -1804,7 +1887,11 @@ int wlcore_cmd_regdomain_config_locked(struct wl1271 *wl)
 			if (channel->flags & (IEEE80211_CHAN_DISABLED |
 					      IEEE80211_CHAN_RADAR |
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      IEEE80211_CHAN_PASSIVE_SCAN))
+=======
+					      IEEE80211_CHAN_NO_IR))
+>>>>>>> v3.18
 =======
 					      IEEE80211_CHAN_NO_IR))
 >>>>>>> v3.18

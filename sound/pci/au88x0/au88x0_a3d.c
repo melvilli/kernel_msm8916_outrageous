@@ -464,7 +464,11 @@ static void a3dsrc_ZeroState(a3dsrc_t * a)
 {
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "vortex: ZeroState slice: %d, source %d\n",
+=======
+	pr_debug( "vortex: ZeroState slice: %d, source %d\n",
+>>>>>>> v3.18
 =======
 	pr_debug( "vortex: ZeroState slice: %d, source %d\n",
 >>>>>>> v3.18
@@ -494,7 +498,11 @@ static void a3dsrc_ZeroStateA3D(a3dsrc_t * a)
 
 	if ((a->vortex) == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "vortex: ZeroStateA3D: ERROR: a->vortex is NULL\n");
+=======
+		pr_err( "vortex: ZeroStateA3D: ERROR: a->vortex is NULL\n");
+>>>>>>> v3.18
 =======
 		pr_err( "vortex: ZeroStateA3D: ERROR: a->vortex is NULL\n");
 >>>>>>> v3.18
@@ -637,7 +645,11 @@ static void vortex_Vort3D_connect(vortex_t * v, int en)
 	    vortex_adb_checkinout(v, v->fixed_res, en, VORTEX_RESOURCE_MIXIN);
 	if (v->mixxtlk[0] < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk
+=======
+		pr_warn
+>>>>>>> v3.18
 =======
 		pr_warn
 >>>>>>> v3.18
@@ -648,7 +660,11 @@ static void vortex_Vort3D_connect(vortex_t * v, int en)
 	    vortex_adb_checkinout(v, v->fixed_res, en, VORTEX_RESOURCE_MIXIN);
 	if (v->mixxtlk[1] < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk
+=======
+		pr_warn
+>>>>>>> v3.18
 =======
 		pr_warn
 >>>>>>> v3.18
@@ -696,7 +712,11 @@ static void vortex_Vort3D_InitializeSource(a3dsrc_t * a, int en)
 {
 	if (a->vortex == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk
+=======
+		pr_warn
+>>>>>>> v3.18
 =======
 		pr_warn
 >>>>>>> v3.18

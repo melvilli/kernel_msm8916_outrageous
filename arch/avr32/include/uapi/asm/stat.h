@@ -6,8 +6,13 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_AVR32_STAT_H
 #define __ASM_AVR32_STAT_H
+=======
+#ifndef _UAPI__ASM_AVR32_STAT_H
+#define _UAPI__ASM_AVR32_STAT_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI__ASM_AVR32_STAT_H
 #define _UAPI__ASM_AVR32_STAT_H
@@ -82,7 +87,11 @@ struct stat64 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __ASM_AVR32_STAT_H */
+=======
+#endif /* _UAPI__ASM_AVR32_STAT_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI__ASM_AVR32_STAT_H */
 >>>>>>> v3.18

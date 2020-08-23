@@ -3,6 +3,10 @@
  *
  * Copyright 2008 Johannes Berg <johannes@sipsolutions.net>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright 2013-2014  Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright 2013-2014  Intel Mobile Communications GmbH
 >>>>>>> v3.18
@@ -60,6 +64,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Limit the number of BSS entries stored in mac80211. Each one is
  * a bit over 4k at most, so this limits to roughly 4-5M of memory.
@@ -74,6 +79,9 @@ MODULE_PARM_DESC(bss_entries_limit,
                  "limit to number of scan BSS entries (per wiphy, default 1000)");
 
 #define IEEE80211_SCAN_RESULT_EXPIRE	(3 * HZ)
+=======
+#define IEEE80211_SCAN_RESULT_EXPIRE	(30 * HZ)
+>>>>>>> v3.18
 =======
 #define IEEE80211_SCAN_RESULT_EXPIRE	(30 * HZ)
 >>>>>>> v3.18
@@ -103,15 +111,21 @@ static void bss_free(struct cfg80211_internal_bss *bss)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void bss_ref_get(struct cfg80211_registered_device *dev,
 			       struct cfg80211_internal_bss *bss)
 {
 	lockdep_assert_held(&dev->bss_lock);
 =======
+=======
+>>>>>>> v3.18
 static inline void bss_ref_get(struct cfg80211_registered_device *rdev,
 			       struct cfg80211_internal_bss *bss)
 {
 	lockdep_assert_held(&rdev->bss_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bss->refcount++;
@@ -124,15 +138,21 @@ static inline void bss_ref_get(struct cfg80211_registered_device *rdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void bss_ref_put(struct cfg80211_registered_device *dev,
 			       struct cfg80211_internal_bss *bss)
 {
 	lockdep_assert_held(&dev->bss_lock);
 =======
+=======
+>>>>>>> v3.18
 static inline void bss_ref_put(struct cfg80211_registered_device *rdev,
 			       struct cfg80211_internal_bss *bss)
 {
 	lockdep_assert_held(&rdev->bss_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (bss->pub.hidden_beacon_bss) {
@@ -150,15 +170,21 @@ static inline void bss_ref_put(struct cfg80211_registered_device *rdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool __cfg80211_unlink_bss(struct cfg80211_registered_device *dev,
 				  struct cfg80211_internal_bss *bss)
 {
 	lockdep_assert_held(&dev->bss_lock);
 =======
+=======
+>>>>>>> v3.18
 static bool __cfg80211_unlink_bss(struct cfg80211_registered_device *rdev,
 				  struct cfg80211_internal_bss *bss)
 {
 	lockdep_assert_held(&rdev->bss_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!list_empty(&bss->hidden_list)) {
@@ -177,6 +203,7 @@ static bool __cfg80211_unlink_bss(struct cfg80211_registered_device *rdev,
 
 	list_del_init(&bss->list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rb_erase(&bss->rbn, &dev->bss_tree);
 	dev->bss_entries--;
 	WARN_ONCE((dev->bss_entries == 0) ^ list_empty(&dev->bss_list),
@@ -188,12 +215,17 @@ static bool __cfg80211_unlink_bss(struct cfg80211_registered_device *rdev,
 
 static void __cfg80211_bss_expire(struct cfg80211_registered_device *dev,
 =======
+=======
+>>>>>>> v3.18
 	rb_erase(&bss->rbn, &rdev->bss_tree);
 	bss_ref_put(rdev, bss);
 	return true;
 }
 
 static void __cfg80211_bss_expire(struct cfg80211_registered_device *rdev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  unsigned long expire_time)
 {
@@ -201,9 +233,15 @@ static void __cfg80211_bss_expire(struct cfg80211_registered_device *rdev,
 	bool expired = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lockdep_assert_held(&dev->bss_lock);
 
 	list_for_each_entry_safe(bss, tmp, &dev->bss_list, list) {
+=======
+	lockdep_assert_held(&rdev->bss_lock);
+
+	list_for_each_entry_safe(bss, tmp, &rdev->bss_list, list) {
+>>>>>>> v3.18
 =======
 	lockdep_assert_held(&rdev->bss_lock);
 
@@ -215,7 +253,11 @@ static void __cfg80211_bss_expire(struct cfg80211_registered_device *rdev,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (__cfg80211_unlink_bss(dev, bss))
+=======
+		if (__cfg80211_unlink_bss(rdev, bss))
+>>>>>>> v3.18
 =======
 		if (__cfg80211_unlink_bss(rdev, bss))
 >>>>>>> v3.18
@@ -223,6 +265,7 @@ static void __cfg80211_bss_expire(struct cfg80211_registered_device *rdev,
 	}
 
 	if (expired)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev->bss_generation++;
 }
@@ -232,6 +275,8 @@ void ___cfg80211_scan_done(struct cfg80211_registered_device *rdev, bool leak)
 	struct cfg80211_scan_request *request;
 	struct wireless_dev *wdev;
 =======
+=======
+>>>>>>> v3.18
 		rdev->bss_generation++;
 }
 
@@ -241,17 +286,23 @@ void ___cfg80211_scan_done(struct cfg80211_registered_device *rdev,
 	struct cfg80211_scan_request *request;
 	struct wireless_dev *wdev;
 	struct sk_buff *msg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_CFG80211_WEXT
 	union iwreq_data wrqu;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lockdep_assert_held(&rdev->sched_scan_mtx);
 
 	request = rdev->scan_req;
 
 =======
+=======
+>>>>>>> v3.18
 	ASSERT_RTNL();
 
 	if (rdev->scan_msg) {
@@ -261,6 +312,9 @@ void ___cfg80211_scan_done(struct cfg80211_registered_device *rdev,
 	}
 
 	request = rdev->scan_req;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!request)
 		return;
@@ -276,6 +330,7 @@ void ___cfg80211_scan_done(struct cfg80211_registered_device *rdev,
 		cfg80211_sme_scan_done(wdev->netdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request->aborted) {
 		nl80211_send_scan_aborted(rdev, wdev);
 	} else {
@@ -289,6 +344,8 @@ void ___cfg80211_scan_done(struct cfg80211_registered_device *rdev,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (!request->aborted &&
 	    request->flags & NL80211_SCAN_FLAG_FLUSH) {
 		/* flush entries from previous scans */
@@ -299,6 +356,9 @@ void ___cfg80211_scan_done(struct cfg80211_registered_device *rdev,
 
 	msg = nl80211_build_scan_msg(rdev, wdev, request->aborted);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_CFG80211_WEXT
 	if (wdev->netdev && !request->aborted) {
@@ -313,6 +373,7 @@ void ___cfg80211_scan_done(struct cfg80211_registered_device *rdev,
 
 	rdev->scan_req = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * OK. If this is invoked with "leak" then we can't
@@ -325,12 +386,17 @@ void ___cfg80211_scan_done(struct cfg80211_registered_device *rdev,
 	if (!leak)
 		kfree(request);
 =======
+=======
+>>>>>>> v3.18
 	kfree(request);
 
 	if (!send_message)
 		rdev->scan_msg = msg;
 	else
 		nl80211_send_scan_result(rdev, msg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -342,9 +408,15 @@ void __cfg80211_scan_done(struct work_struct *wk)
 			    scan_done_wk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&rdev->sched_scan_mtx);
 	___cfg80211_scan_done(rdev, false);
 	mutex_unlock(&rdev->sched_scan_mtx);
+=======
+	rtnl_lock();
+	___cfg80211_scan_done(rdev, true);
+	rtnl_unlock();
+>>>>>>> v3.18
 =======
 	rtnl_lock();
 	___cfg80211_scan_done(rdev, true);
@@ -356,16 +428,22 @@ void cfg80211_scan_done(struct cfg80211_scan_request *request, bool aborted)
 {
 	trace_cfg80211_scan_done(request, aborted);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(request != wiphy_to_dev(request->wiphy)->scan_req);
 
 	request->aborted = aborted;
 	queue_work(cfg80211_wq, &wiphy_to_dev(request->wiphy)->scan_done_wk);
 =======
+=======
+>>>>>>> v3.18
 	WARN_ON(request != wiphy_to_rdev(request->wiphy)->scan_req);
 
 	request->aborted = aborted;
 	request->notified = true;
 	queue_work(cfg80211_wq, &wiphy_to_rdev(request->wiphy)->scan_done_wk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(cfg80211_scan_done);
@@ -379,7 +457,11 @@ void __cfg80211_sched_scan_results(struct work_struct *wk)
 			    sched_scan_results_wk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&rdev->sched_scan_mtx);
+=======
+	rtnl_lock();
+>>>>>>> v3.18
 =======
 	rtnl_lock();
 >>>>>>> v3.18
@@ -400,7 +482,11 @@ void __cfg80211_sched_scan_results(struct work_struct *wk)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&rdev->sched_scan_mtx);
+=======
+	rtnl_unlock();
+>>>>>>> v3.18
 =======
 	rtnl_unlock();
 >>>>>>> v3.18
@@ -410,6 +496,7 @@ void cfg80211_sched_scan_results(struct wiphy *wiphy)
 {
 	trace_cfg80211_sched_scan_results(wiphy);
 	/* ignore if we're not scanning */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (wiphy_to_dev(wiphy)->sched_scan_req)
 		queue_work(cfg80211_wq,
@@ -427,6 +514,8 @@ void cfg80211_sched_scan_stopped(struct wiphy *wiphy)
 	__cfg80211_stop_sched_scan(rdev, true);
 	mutex_unlock(&rdev->sched_scan_mtx);
 =======
+=======
+>>>>>>> v3.18
 	if (wiphy_to_rdev(wiphy)->sched_scan_req)
 		queue_work(cfg80211_wq,
 			   &wiphy_to_rdev(wiphy)->sched_scan_results_wk);
@@ -450,6 +539,9 @@ void cfg80211_sched_scan_stopped(struct wiphy *wiphy)
 	rtnl_lock();
 	cfg80211_sched_scan_stopped_rtnl(wiphy);
 	rtnl_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(cfg80211_sched_scan_stopped);
@@ -460,7 +552,11 @@ int __cfg80211_stop_sched_scan(struct cfg80211_registered_device *rdev,
 	struct net_device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lockdep_assert_held(&rdev->sched_scan_mtx);
+=======
+	ASSERT_RTNL();
+>>>>>>> v3.18
 =======
 	ASSERT_RTNL();
 >>>>>>> v3.18
@@ -485,7 +581,11 @@ int __cfg80211_stop_sched_scan(struct cfg80211_registered_device *rdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void cfg80211_bss_age(struct cfg80211_registered_device *dev,
+=======
+void cfg80211_bss_age(struct cfg80211_registered_device *rdev,
+>>>>>>> v3.18
 =======
 void cfg80211_bss_age(struct cfg80211_registered_device *rdev,
 >>>>>>> v3.18
@@ -494,6 +594,7 @@ void cfg80211_bss_age(struct cfg80211_registered_device *rdev,
 	struct cfg80211_internal_bss *bss;
 	unsigned long age_jiffies = msecs_to_jiffies(age_secs * MSEC_PER_SEC);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_bh(&dev->bss_lock);
 	list_for_each_entry(bss, &dev->bss_list, list)
@@ -539,6 +640,8 @@ static bool cfg80211_bss_expire_oldest(struct cfg80211_registered_device *rdev)
 	WARN_ON(!ret);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&rdev->bss_lock);
 	list_for_each_entry(bss, &rdev->bss_list, list)
 		bss->ts -= age_jiffies;
@@ -548,6 +651,9 @@ static bool cfg80211_bss_expire_oldest(struct cfg80211_registered_device *rdev)
 void cfg80211_bss_expire(struct cfg80211_registered_device *rdev)
 {
 	__cfg80211_bss_expire(rdev, jiffies - IEEE80211_SCAN_RESULT_EXPIRE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -678,10 +784,13 @@ static int cmp_bss(struct cfg80211_bss *a,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * we can't use compare_ether_addr here since we need a < > operator.
 	 * The binary return value of compare_ether_addr isn't enough
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	r = memcmp(a->bssid, b->bssid, sizeof(a->bssid));
@@ -739,6 +848,10 @@ static int cmp_bss(struct cfg80211_bss *a,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Returned bss is reference counted and must be cleaned up appropriately. */
+>>>>>>> v3.18
 =======
 /* Returned bss is reference counted and must be cleaned up appropriately. */
 >>>>>>> v3.18
@@ -749,7 +862,11 @@ struct cfg80211_bss *cfg80211_get_bss(struct wiphy *wiphy,
 				      u16 capa_mask, u16 capa_val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cfg80211_registered_device *dev = wiphy_to_dev(wiphy);
+=======
+	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wiphy);
+>>>>>>> v3.18
 =======
 	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wiphy);
 >>>>>>> v3.18
@@ -760,9 +877,15 @@ struct cfg80211_bss *cfg80211_get_bss(struct wiphy *wiphy,
 			       capa_val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&dev->bss_lock);
 
 	list_for_each_entry(bss, &dev->bss_list, list) {
+=======
+	spin_lock_bh(&rdev->bss_lock);
+
+	list_for_each_entry(bss, &rdev->bss_list, list) {
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&rdev->bss_lock);
 
@@ -773,6 +896,11 @@ struct cfg80211_bss *cfg80211_get_bss(struct wiphy *wiphy,
 		if (channel && bss->pub.channel != channel)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (!is_valid_ether_addr(bss->pub.bssid))
+			continue;
+>>>>>>> v3.18
 =======
 		if (!is_valid_ether_addr(bss->pub.bssid))
 			continue;
@@ -784,7 +912,11 @@ struct cfg80211_bss *cfg80211_get_bss(struct wiphy *wiphy,
 		if (is_bss(&bss->pub, bssid, ssid, ssid_len)) {
 			res = bss;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bss_ref_get(dev, res);
+=======
+			bss_ref_get(rdev, res);
+>>>>>>> v3.18
 =======
 			bss_ref_get(rdev, res);
 >>>>>>> v3.18
@@ -793,7 +925,11 @@ struct cfg80211_bss *cfg80211_get_bss(struct wiphy *wiphy,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&dev->bss_lock);
+=======
+	spin_unlock_bh(&rdev->bss_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&rdev->bss_lock);
 >>>>>>> v3.18
@@ -805,15 +941,21 @@ struct cfg80211_bss *cfg80211_get_bss(struct wiphy *wiphy,
 EXPORT_SYMBOL(cfg80211_get_bss);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void rb_insert_bss(struct cfg80211_registered_device *dev,
 			  struct cfg80211_internal_bss *bss)
 {
 	struct rb_node **p = &dev->bss_tree.rb_node;
 =======
+=======
+>>>>>>> v3.18
 static void rb_insert_bss(struct cfg80211_registered_device *rdev,
 			  struct cfg80211_internal_bss *bss)
 {
 	struct rb_node **p = &rdev->bss_tree.rb_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rb_node *parent = NULL;
 	struct cfg80211_internal_bss *tbss;
@@ -838,6 +980,7 @@ static void rb_insert_bss(struct cfg80211_registered_device *rdev,
 
 	rb_link_node(&bss->rbn, parent, p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rb_insert_color(&bss->rbn, &dev->bss_tree);
 }
 
@@ -848,6 +991,8 @@ rb_find_bss(struct cfg80211_registered_device *dev,
 {
 	struct rb_node *n = dev->bss_tree.rb_node;
 =======
+=======
+>>>>>>> v3.18
 	rb_insert_color(&bss->rbn, &rdev->bss_tree);
 }
 
@@ -857,6 +1002,9 @@ rb_find_bss(struct cfg80211_registered_device *rdev,
 	    enum bss_compare_mode mode)
 {
 	struct rb_node *n = rdev->bss_tree.rb_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct cfg80211_internal_bss *bss;
 	int r;
@@ -877,7 +1025,11 @@ rb_find_bss(struct cfg80211_registered_device *rdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool cfg80211_combine_bsses(struct cfg80211_registered_device *dev,
+=======
+static bool cfg80211_combine_bsses(struct cfg80211_registered_device *rdev,
+>>>>>>> v3.18
 =======
 static bool cfg80211_combine_bsses(struct cfg80211_registered_device *rdev,
 >>>>>>> v3.18
@@ -889,7 +1041,10 @@ static bool cfg80211_combine_bsses(struct cfg80211_registered_device *rdev,
 	int i, ssidlen;
 	u8 fold = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 n_entries = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -915,6 +1070,7 @@ static bool cfg80211_combine_bsses(struct cfg80211_registered_device *rdev,
 	/* This is the bad part ... */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(bss, &dev->bss_list, list) {
 		/*
 		 * we're iterating all the entries anyway, so take the
@@ -925,11 +1081,19 @@ static bool cfg80211_combine_bsses(struct cfg80211_registered_device *rdev,
 =======
 	list_for_each_entry(bss, &rdev->bss_list, list) {
 >>>>>>> v3.18
+=======
+	list_for_each_entry(bss, &rdev->bss_list, list) {
+>>>>>>> v3.18
 		if (!ether_addr_equal(bss->pub.bssid, new->pub.bssid))
 			continue;
 		if (bss->pub.channel != new->pub.channel)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (bss->pub.scan_width != new->pub.scan_width)
+			continue;
+>>>>>>> v3.18
 =======
 		if (bss->pub.scan_width != new->pub.scan_width)
 			continue;
@@ -945,9 +1109,12 @@ static bool cfg80211_combine_bsses(struct cfg80211_registered_device *rdev,
 		if (ssidlen && ie[1] != ssidlen)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* that would be odd ... */
 		if (bss->pub.beacon_ies)
 			continue;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (WARN_ON_ONCE(bss->pub.hidden_beacon_bss))
@@ -963,6 +1130,7 @@ static bool cfg80211_combine_bsses(struct cfg80211_registered_device *rdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ONCE(n_entries != dev->bss_entries,
 		  "rdev bss entries[%d]/list[len:%d] corruption\n",
 		  dev->bss_entries, n_entries);
@@ -974,6 +1142,8 @@ static struct cfg80211_internal_bss *
 cfg80211_bss_update(struct cfg80211_registered_device *dev,
 		    struct cfg80211_internal_bss *tmp)
 =======
+=======
+>>>>>>> v3.18
 	return true;
 }
 
@@ -982,6 +1152,9 @@ static struct cfg80211_internal_bss *
 cfg80211_bss_update(struct cfg80211_registered_device *rdev,
 		    struct cfg80211_internal_bss *tmp,
 		    bool signal_valid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct cfg80211_internal_bss *found = NULL;
@@ -992,6 +1165,7 @@ cfg80211_bss_update(struct cfg80211_registered_device *rdev,
 	tmp->ts = jiffies;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&dev->bss_lock);
 
 	if (WARN_ON(!rcu_access_pointer(tmp->pub.ies))) {
@@ -1001,6 +1175,8 @@ cfg80211_bss_update(struct cfg80211_registered_device *rdev,
 
 	found = rb_find_bss(dev, tmp, BSS_CMP_REGULAR);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&rdev->bss_lock);
 
 	if (WARN_ON(!rcu_access_pointer(tmp->pub.ies))) {
@@ -1009,6 +1185,9 @@ cfg80211_bss_update(struct cfg80211_registered_device *rdev,
 	}
 
 	found = rb_find_bss(rdev, tmp, BSS_CMP_REGULAR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (found) {
@@ -1079,14 +1258,20 @@ cfg80211_bss_update(struct cfg80211_registered_device *rdev,
 
 		found->pub.beacon_interval = tmp->pub.beacon_interval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		found->pub.signal = tmp->pub.signal;
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * don't update the signal if beacon was heard on
 		 * adjacent channel.
 		 */
 		if (signal_valid)
 			found->pub.signal = tmp->pub.signal;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		found->pub.capability = tmp->pub.capability;
 		found->ts = tmp->ts;
@@ -1101,7 +1286,11 @@ cfg80211_bss_update(struct cfg80211_registered_device *rdev,
 		 * more common case of an update
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		new = kzalloc(sizeof(*new) + dev->wiphy.bss_priv_size,
+=======
+		new = kzalloc(sizeof(*new) + rdev->wiphy.bss_priv_size,
+>>>>>>> v3.18
 =======
 		new = kzalloc(sizeof(*new) + rdev->wiphy.bss_priv_size,
 >>>>>>> v3.18
@@ -1121,9 +1310,15 @@ cfg80211_bss_update(struct cfg80211_registered_device *rdev,
 
 		if (rcu_access_pointer(tmp->pub.proberesp_ies)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hidden = rb_find_bss(dev, tmp, BSS_CMP_HIDE_ZLEN);
 			if (!hidden)
 				hidden = rb_find_bss(dev, tmp,
+=======
+			hidden = rb_find_bss(rdev, tmp, BSS_CMP_HIDE_ZLEN);
+			if (!hidden)
+				hidden = rb_find_bss(rdev, tmp,
+>>>>>>> v3.18
 =======
 			hidden = rb_find_bss(rdev, tmp, BSS_CMP_HIDE_ZLEN);
 			if (!hidden)
@@ -1146,7 +1341,11 @@ cfg80211_bss_update(struct cfg80211_registered_device *rdev,
 			 * be grouped with this beacon for updates ...
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!cfg80211_combine_bsses(dev, new)) {
+=======
+			if (!cfg80211_combine_bsses(rdev, new)) {
+>>>>>>> v3.18
 =======
 			if (!cfg80211_combine_bsses(rdev, new)) {
 >>>>>>> v3.18
@@ -1155,6 +1354,7 @@ cfg80211_bss_update(struct cfg80211_registered_device *rdev,
 			}
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (dev->bss_entries >= bss_entries_limit &&
 		    !cfg80211_bss_expire_oldest(dev)) {
@@ -1176,6 +1376,8 @@ cfg80211_bss_update(struct cfg80211_registered_device *rdev,
  drop:
 	spin_unlock_bh(&dev->bss_lock);
 =======
+=======
+>>>>>>> v3.18
 		list_add_tail(&new->list, &rdev->bss_list);
 		rb_insert_bss(rdev, new);
 		found = new;
@@ -1188,6 +1390,9 @@ cfg80211_bss_update(struct cfg80211_registered_device *rdev,
 	return found;
  drop:
 	spin_unlock_bh(&rdev->bss_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NULL;
 }
@@ -1225,6 +1430,7 @@ cfg80211_get_bss_channel(struct wiphy *wiphy, const u8 *ie, size_t ielen,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cfg80211_bss*
 cfg80211_inform_bss(struct wiphy *wiphy,
 		    struct ieee80211_channel *channel,
@@ -1235,6 +1441,8 @@ cfg80211_inform_bss(struct wiphy *wiphy,
 	struct cfg80211_bss_ies *ies;
 	struct cfg80211_internal_bss tmp = {}, *res;
 =======
+=======
+>>>>>>> v3.18
 /* Returned bss is reference counted and must be cleaned up appropriately. */
 struct cfg80211_bss*
 cfg80211_inform_bss_width(struct wiphy *wiphy,
@@ -1249,6 +1457,9 @@ cfg80211_inform_bss_width(struct wiphy *wiphy,
 	struct ieee80211_channel *channel;
 	struct cfg80211_internal_bss tmp = {}, *res;
 	bool signal_valid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (WARN_ON(!wiphy))
@@ -1259,7 +1470,11 @@ cfg80211_inform_bss_width(struct wiphy *wiphy,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	channel = cfg80211_get_bss_channel(wiphy, ie, ielen, channel);
+=======
+	channel = cfg80211_get_bss_channel(wiphy, ie, ielen, rx_channel);
+>>>>>>> v3.18
 =======
 	channel = cfg80211_get_bss_channel(wiphy, ie, ielen, rx_channel);
 >>>>>>> v3.18
@@ -1269,6 +1484,10 @@ cfg80211_inform_bss_width(struct wiphy *wiphy,
 	memcpy(tmp.pub.bssid, bssid, ETH_ALEN);
 	tmp.pub.channel = channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tmp.pub.scan_width = scan_width;
+>>>>>>> v3.18
 =======
 	tmp.pub.scan_width = scan_width;
 >>>>>>> v3.18
@@ -1277,7 +1496,11 @@ cfg80211_inform_bss_width(struct wiphy *wiphy,
 	tmp.pub.capability = capability;
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Since we do not know here whether the IEs are from a Beacon or Probe
+=======
+	 * If we do not know here whether the IEs are from a Beacon or Probe
+>>>>>>> v3.18
 =======
 	 * If we do not know here whether the IEs are from a Beacon or Probe
 >>>>>>> v3.18
@@ -1296,11 +1519,14 @@ cfg80211_inform_bss_width(struct wiphy *wiphy,
 	memcpy(ies->data, ie, ielen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_assign_pointer(tmp.pub.beacon_ies, ies);
 	rcu_assign_pointer(tmp.pub.ies, ies);
 
 	res = cfg80211_bss_update(wiphy_to_dev(wiphy), &tmp);
 =======
+=======
+>>>>>>> v3.18
 	switch (ftype) {
 	case CFG80211_BSS_FTYPE_BEACON:
 		ies->from_beacon = true;
@@ -1317,6 +1543,9 @@ cfg80211_inform_bss_width(struct wiphy *wiphy,
 	signal_valid = abs(rx_channel->center_freq - channel->center_freq) <=
 		wiphy->max_adj_channel_rssi_comp;
 	res = cfg80211_bss_update(wiphy_to_rdev(wiphy), &tmp, signal_valid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!res)
 		return NULL;
@@ -1329,6 +1558,7 @@ cfg80211_inform_bss_width(struct wiphy *wiphy,
 	return &res->pub;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(cfg80211_inform_bss);
 
 struct cfg80211_bss *
@@ -1340,6 +1570,8 @@ cfg80211_inform_bss_frame(struct wiphy *wiphy,
 	struct cfg80211_internal_bss tmp = {}, *res;
 	struct cfg80211_bss_ies *ies;
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(cfg80211_inform_bss_width);
 
 /* Returned bss is reference counted and must be cleaned up appropriately. */
@@ -1354,6 +1586,9 @@ cfg80211_inform_bss_width_frame(struct wiphy *wiphy,
 	struct cfg80211_bss_ies *ies;
 	struct ieee80211_channel *channel;
 	bool signal_valid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	size_t ielen = len - offsetof(struct ieee80211_mgmt,
 				      u.probe_resp.variable);
@@ -1362,7 +1597,12 @@ cfg80211_inform_bss_width_frame(struct wiphy *wiphy,
 			offsetof(struct ieee80211_mgmt, u.beacon.variable));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_cfg80211_inform_bss_frame(wiphy, channel, mgmt, len, signal);
+=======
+	trace_cfg80211_inform_bss_width_frame(wiphy, rx_channel, scan_width, mgmt,
+					      len, signal);
+>>>>>>> v3.18
 =======
 	trace_cfg80211_inform_bss_width_frame(wiphy, rx_channel, scan_width, mgmt,
 					      len, signal);
@@ -1383,7 +1623,11 @@ cfg80211_inform_bss_width_frame(struct wiphy *wiphy,
 
 	channel = cfg80211_get_bss_channel(wiphy, mgmt->u.beacon.variable,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   ielen, channel);
+=======
+					   ielen, rx_channel);
+>>>>>>> v3.18
 =======
 					   ielen, rx_channel);
 >>>>>>> v3.18
@@ -1407,6 +1651,10 @@ cfg80211_inform_bss_width_frame(struct wiphy *wiphy,
 	memcpy(tmp.pub.bssid, mgmt->bssid, ETH_ALEN);
 	tmp.pub.channel = channel;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tmp.pub.scan_width = scan_width;
+>>>>>>> v3.18
 =======
 	tmp.pub.scan_width = scan_width;
 >>>>>>> v3.18
@@ -1415,7 +1663,13 @@ cfg80211_inform_bss_width_frame(struct wiphy *wiphy,
 	tmp.pub.capability = le16_to_cpu(mgmt->u.probe_resp.capab_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = cfg80211_bss_update(wiphy_to_dev(wiphy), &tmp);
+=======
+	signal_valid = abs(rx_channel->center_freq - channel->center_freq) <=
+		wiphy->max_adj_channel_rssi_comp;
+	res = cfg80211_bss_update(wiphy_to_rdev(wiphy), &tmp, signal_valid);
+>>>>>>> v3.18
 =======
 	signal_valid = abs(rx_channel->center_freq - channel->center_freq) <=
 		wiphy->max_adj_channel_rssi_comp;
@@ -1432,17 +1686,23 @@ cfg80211_inform_bss_width_frame(struct wiphy *wiphy,
 	return &res->pub;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(cfg80211_inform_bss_frame);
 
 void cfg80211_ref_bss(struct wiphy *wiphy, struct cfg80211_bss *pub)
 {
 	struct cfg80211_registered_device *dev = wiphy_to_dev(wiphy);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(cfg80211_inform_bss_width_frame);
 
 void cfg80211_ref_bss(struct wiphy *wiphy, struct cfg80211_bss *pub)
 {
 	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wiphy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct cfg80211_internal_bss *bss;
 
@@ -1452,9 +1712,15 @@ void cfg80211_ref_bss(struct wiphy *wiphy, struct cfg80211_bss *pub)
 	bss = container_of(pub, struct cfg80211_internal_bss, pub);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&dev->bss_lock);
 	bss_ref_get(dev, bss);
 	spin_unlock_bh(&dev->bss_lock);
+=======
+	spin_lock_bh(&rdev->bss_lock);
+	bss_ref_get(rdev, bss);
+	spin_unlock_bh(&rdev->bss_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&rdev->bss_lock);
 	bss_ref_get(rdev, bss);
@@ -1466,7 +1732,11 @@ EXPORT_SYMBOL(cfg80211_ref_bss);
 void cfg80211_put_bss(struct wiphy *wiphy, struct cfg80211_bss *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cfg80211_registered_device *dev = wiphy_to_dev(wiphy);
+=======
+	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wiphy);
+>>>>>>> v3.18
 =======
 	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wiphy);
 >>>>>>> v3.18
@@ -1478,9 +1748,15 @@ void cfg80211_put_bss(struct wiphy *wiphy, struct cfg80211_bss *pub)
 	bss = container_of(pub, struct cfg80211_internal_bss, pub);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&dev->bss_lock);
 	bss_ref_put(dev, bss);
 	spin_unlock_bh(&dev->bss_lock);
+=======
+	spin_lock_bh(&rdev->bss_lock);
+	bss_ref_put(rdev, bss);
+	spin_unlock_bh(&rdev->bss_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&rdev->bss_lock);
 	bss_ref_put(rdev, bss);
@@ -1492,7 +1768,11 @@ EXPORT_SYMBOL(cfg80211_put_bss);
 void cfg80211_unlink_bss(struct wiphy *wiphy, struct cfg80211_bss *pub)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cfg80211_registered_device *dev = wiphy_to_dev(wiphy);
+=======
+	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wiphy);
+>>>>>>> v3.18
 =======
 	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wiphy);
 >>>>>>> v3.18
@@ -1504,6 +1784,7 @@ void cfg80211_unlink_bss(struct wiphy *wiphy, struct cfg80211_bss *pub)
 	bss = container_of(pub, struct cfg80211_internal_bss, pub);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&dev->bss_lock);
 	if (!list_empty(&bss->list)) {
 		if (__cfg80211_unlink_bss(dev, bss))
@@ -1511,19 +1792,27 @@ void cfg80211_unlink_bss(struct wiphy *wiphy, struct cfg80211_bss *pub)
 	}
 	spin_unlock_bh(&dev->bss_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&rdev->bss_lock);
 	if (!list_empty(&bss->list)) {
 		if (__cfg80211_unlink_bss(rdev, bss))
 			rdev->bss_generation++;
 	}
 	spin_unlock_bh(&rdev->bss_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(cfg80211_unlink_bss);
 
 #ifdef CONFIG_CFG80211_WEXT
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct cfg80211_registered_device *
 cfg80211_get_dev_from_ifindex(struct net *net, int ifindex)
 {
@@ -1543,6 +1832,9 @@ cfg80211_get_dev_from_ifindex(struct net *net, int ifindex)
 	return rdev;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int cfg80211_wext_siwscan(struct net_device *dev,
 			  struct iw_request_info *info,
@@ -1567,8 +1859,12 @@ int cfg80211_wext_siwscan(struct net_device *dev,
 		return PTR_ERR(rdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&rdev->sched_scan_mtx);
 	if (rdev->scan_req) {
+=======
+	if (rdev->scan_req || rdev->scan_msg) {
+>>>>>>> v3.18
 =======
 	if (rdev->scan_req || rdev->scan_msg) {
 >>>>>>> v3.18
@@ -1582,11 +1878,16 @@ int cfg80211_wext_siwscan(struct net_device *dev,
 	if (wreq && wreq->num_channels)
 		n_channels = wreq->num_channels;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else {
 		for (band = 0; band < IEEE80211_NUM_BANDS; band++)
 			if (wiphy->bands[band])
 				n_channels += wiphy->bands[band]->n_channels;
 	}
+=======
+	else
+		n_channels = ieee80211_get_num_supported_channels(wiphy);
+>>>>>>> v3.18
 =======
 	else
 		n_channels = ieee80211_get_num_supported_channels(wiphy);
@@ -1631,13 +1932,19 @@ int cfg80211_wext_siwscan(struct net_device *dev,
 				int wiphy_freq = wiphy->bands[band]->channels[j].center_freq;
 				for (k = 0; k < wreq->num_channels; k++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					int wext_freq = cfg80211_wext_freq(wiphy, &wreq->channel_list[k]);
 =======
+=======
+>>>>>>> v3.18
 					struct iw_freq *freq =
 						&wreq->channel_list[k];
 					int wext_freq =
 						cfg80211_wext_freq(freq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					if (wext_freq == wiphy_freq)
 						goto wext_freq_found;
@@ -1691,9 +1998,13 @@ int cfg80211_wext_siwscan(struct net_device *dev,
 	}
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&rdev->sched_scan_mtx);
 	kfree(creq);
 	cfg80211_unlock_rdev(rdev);
+=======
+	kfree(creq);
+>>>>>>> v3.18
 =======
 	kfree(creq);
 >>>>>>> v3.18
@@ -1957,7 +2268,11 @@ ieee80211_bss(struct wiphy *wiphy, struct iw_request_info *info,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ieee80211_scan_results(struct cfg80211_registered_device *dev,
+=======
+static int ieee80211_scan_results(struct cfg80211_registered_device *rdev,
+>>>>>>> v3.18
 =======
 static int ieee80211_scan_results(struct cfg80211_registered_device *rdev,
 >>>>>>> v3.18
@@ -1968,6 +2283,7 @@ static int ieee80211_scan_results(struct cfg80211_registered_device *rdev,
 	char *end_buf = buf + len;
 	struct cfg80211_internal_bss *bss;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_bh(&dev->bss_lock);
 	cfg80211_bss_expire(dev);
@@ -1982,6 +2298,8 @@ static int ieee80211_scan_results(struct cfg80211_registered_device *rdev,
 	}
 	spin_unlock_bh(&dev->bss_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&rdev->bss_lock);
 	cfg80211_bss_expire(rdev);
 
@@ -1994,6 +2312,9 @@ static int ieee80211_scan_results(struct cfg80211_registered_device *rdev,
 					   current_ev, end_buf);
 	}
 	spin_unlock_bh(&rdev->bss_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return current_ev - buf;
 }
@@ -2015,10 +2336,15 @@ int cfg80211_wext_giwscan(struct net_device *dev,
 		return PTR_ERR(rdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rdev->scan_req) {
 		res = -EAGAIN;
 		goto out;
 	}
+=======
+	if (rdev->scan_req || rdev->scan_msg)
+		return -EAGAIN;
+>>>>>>> v3.18
 =======
 	if (rdev->scan_req || rdev->scan_msg)
 		return -EAGAIN;
@@ -2032,8 +2358,11 @@ int cfg80211_wext_giwscan(struct net_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  out:
 	cfg80211_unlock_rdev(rdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return res;

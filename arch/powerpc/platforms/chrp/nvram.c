@@ -67,7 +67,11 @@ void __init chrp_nvram_init(void)
 {
 	struct device_node *nvram;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const unsigned int *nbytes_p;
+=======
+	const __be32 *nbytes_p;
+>>>>>>> v3.18
 =======
 	const __be32 *nbytes_p;
 >>>>>>> v3.18
@@ -84,7 +88,11 @@ void __init chrp_nvram_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nvram_size = *nbytes_p;
+=======
+	nvram_size = be32_to_cpup(nbytes_p);
+>>>>>>> v3.18
 =======
 	nvram_size = be32_to_cpup(nbytes_p);
 >>>>>>> v3.18

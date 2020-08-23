@@ -24,6 +24,12 @@
 #include <linux/err.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_platform.h>
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_platform.h>
@@ -39,7 +45,10 @@
 #include "soc.h"
 #include "iomap.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "mux.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "control.h"
@@ -112,6 +121,7 @@ static const struct omap_dss_hwmod_data omap4_dss_hwmod_data[] __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init omap4_tpd12s015_mux_pads(void)
 {
 	omap_mux_init_signal("hdmi_cec",
@@ -141,6 +151,8 @@ static void __init omap4_hdmi_mux_pads(enum omap_hdmi_flags flags)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int omap4_dsi_mux_pads(int dsi_id, unsigned lanes)
@@ -177,6 +189,7 @@ static int omap4_dsi_mux_pads(int dsi_id, unsigned lanes)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init omap_hdmi_init(enum omap_hdmi_flags flags)
 {
 	if (cpu_is_omap44xx()) {
@@ -187,6 +200,8 @@ int __init omap_hdmi_init(enum omap_hdmi_flags flags)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int omap_dsi_enable_pads(int dsi_id, unsigned lane_mask)
@@ -332,6 +347,11 @@ static enum omapdss_version __init omap_display_get_version(void)
 	else if (soc_is_omap54xx())
 		return OMAPDSS_VER_OMAP5;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else if (soc_is_am43xx())
+		return OMAPDSS_VER_AM43xx;
+>>>>>>> v3.18
 =======
 	else if (soc_is_am43xx())
 		return OMAPDSS_VER_AM43xx;
@@ -362,7 +382,10 @@ int __init omap_display_init(struct omap_dss_board_info *board_data)
 	board_data->dsi_enable_pads = omap_dsi_enable_pads;
 	board_data->dsi_disable_pads = omap_dsi_disable_pads;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	board_data->get_context_loss_count = omap_pm_get_dev_context_loss_count;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	board_data->set_min_bus_tput = omap_dss_set_min_bus_tput;
@@ -424,7 +447,11 @@ int __init omap_display_init(struct omap_dss_board_info *board_data)
 	/* Create devices for DPI and SDI */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev = create_simple_dss_pdev("omapdss_dpi", -1,
+=======
+	pdev = create_simple_dss_pdev("omapdss_dpi", 0,
+>>>>>>> v3.18
 =======
 	pdev = create_simple_dss_pdev("omapdss_dpi", 0,
 >>>>>>> v3.18
@@ -436,7 +463,11 @@ int __init omap_display_init(struct omap_dss_board_info *board_data)
 
 	if (cpu_is_omap34xx()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pdev = create_simple_dss_pdev("omapdss_sdi", -1,
+=======
+		pdev = create_simple_dss_pdev("omapdss_sdi", 0,
+>>>>>>> v3.18
 =======
 		pdev = create_simple_dss_pdev("omapdss_sdi", 0,
 >>>>>>> v3.18
@@ -448,7 +479,10 @@ int __init omap_display_init(struct omap_dss_board_info *board_data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* create DRM device */
 	r = omap_init_drm();
 	if (r < 0) {
@@ -477,6 +511,9 @@ int __init omap_display_init(struct omap_dss_board_info *board_data)
 		return r;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -615,7 +652,11 @@ int omap_dss_reset(struct omap_hwmod *oh)
 
 	if (c == MAX_MODULE_SOFTRESET_WAIT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("dss_core: waiting for reset to finish failed\n");
+=======
+		pr_warn("dss_core: waiting for reset to finish failed\n");
+>>>>>>> v3.18
 =======
 		pr_warn("dss_core: waiting for reset to finish failed\n");
 >>>>>>> v3.18
@@ -631,7 +672,10 @@ int omap_dss_reset(struct omap_hwmod *oh)
 	return r;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void __init omapdss_early_init_of(void)
 {
@@ -743,4 +787,7 @@ int __init omapdss_init_of(void)
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

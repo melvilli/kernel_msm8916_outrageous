@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	comedi/drivers/ii_pci20kc.c
  *	Driver for Intelligent Instruments PCI-20001C carrier board
  *	and modules.
@@ -659,6 +660,8 @@ static struct comedi_driver pci20xxx_driver = {
 };
 module_comedi_driver(pci20xxx_driver);
 =======
+=======
+>>>>>>> v3.18
  * ii_pci20kc.c
  * Driver for Intelligent Instruments PCI-20001C carrier board and modules.
  *
@@ -1181,6 +1184,9 @@ static struct comedi_driver ii20k_driver = {
 	.detach		= ii20k_detach,
 };
 module_comedi_driver(ii20k_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");

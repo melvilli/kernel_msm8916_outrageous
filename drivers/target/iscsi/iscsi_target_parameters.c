@@ -2,9 +2,13 @@
  * This file contains main functions related to iSCSI Parameter negotiation.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * \u00a9 Copyright 2007-2011 RisingTide Systems LLC.
  *
  * Licensed to the Linux Foundation under the General Public License (GPL) version 2.
+=======
+ * (c) Copyright 2007-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2007-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -481,15 +485,21 @@ int iscsi_set_keys_to_negotiate(
 			SET_PSTATE_NEGOTIATE(param);
 		} else if (!strcmp(param->name, HEADERDIGEST)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (iser == false)
 				SET_PSTATE_NEGOTIATE(param);
 		} else if (!strcmp(param->name, DATADIGEST)) {
 			if (iser == false)
 =======
+=======
+>>>>>>> v3.18
 			if (!iser)
 				SET_PSTATE_NEGOTIATE(param);
 		} else if (!strcmp(param->name, DATADIGEST)) {
 			if (!iser)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				SET_PSTATE_NEGOTIATE(param);
 		} else if (!strcmp(param->name, MAXCONNECTIONS)) {
@@ -511,7 +521,11 @@ int iscsi_set_keys_to_negotiate(
 			SET_PSTATE_NEGOTIATE(param);
 		} else if (!strcmp(param->name, MAXRECVDATASEGMENTLENGTH)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (iser == false)
+=======
+			if (!iser)
+>>>>>>> v3.18
 =======
 			if (!iser)
 >>>>>>> v3.18
@@ -546,6 +560,7 @@ int iscsi_set_keys_to_negotiate(
 			SET_PSTATE_NEGOTIATE(param);
 		} else if (!strcmp(param->name, RDMAEXTENSIONS)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (iser == true)
 				SET_PSTATE_NEGOTIATE(param);
 		} else if (!strcmp(param->name, INITIATORRECVDATASEGMENTLENGTH)) {
@@ -554,6 +569,8 @@ int iscsi_set_keys_to_negotiate(
 		} else if (!strcmp(param->name, TARGETRECVDATASEGMENTLENGTH)) {
 			if (iser == true)
 =======
+=======
+>>>>>>> v3.18
 			if (iser)
 				SET_PSTATE_NEGOTIATE(param);
 		} else if (!strcmp(param->name, INITIATORRECVDATASEGMENTLENGTH)) {
@@ -561,6 +578,9 @@ int iscsi_set_keys_to_negotiate(
 				SET_PSTATE_NEGOTIATE(param);
 		} else if (!strcmp(param->name, TARGETRECVDATASEGMENTLENGTH)) {
 			if (iser)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				SET_PSTATE_NEGOTIATE(param);
 		}
@@ -832,7 +852,10 @@ static void iscsi_check_proposer_for_optional_reply(struct iscsi_param *param)
 			SET_PSTATE_REPLY_OPTIONAL(param);
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		 * The GlobalSAN iSCSI Initiator for MacOSX does
 		 * not respond to MaxBurstLength, FirstBurstLength,
 		 * DefaultTime2Wait or DefaultTime2Retain parameter keys.
@@ -849,6 +872,9 @@ static void iscsi_check_proposer_for_optional_reply(struct iscsi_param *param)
 		if (!strcmp(param->name, DEFAULTTIME2RETAIN))
 			SET_PSTATE_REPLY_OPTIONAL(param);
 		/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * Required for gPXE iSCSI boot client
 		 */
@@ -1211,7 +1237,11 @@ static int iscsi_check_acceptor_state(struct iscsi_param *param, char *value,
 			int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rc = strict_strtoull(param->value, 0, &tmp);
+=======
+			rc = kstrtoull(param->value, 0, &tmp);
+>>>>>>> v3.18
 =======
 			rc = kstrtoull(param->value, 0, &tmp);
 >>>>>>> v3.18
@@ -1640,7 +1670,11 @@ int iscsi_decode_text_input(
 	tmpbuf = kzalloc(length + 1, GFP_KERNEL);
 	if (!tmpbuf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Unable to allocate memory for tmpbuf.\n");
+=======
+		pr_err("Unable to allocate %u + 1 bytes for tmpbuf.\n", length);
+>>>>>>> v3.18
 =======
 		pr_err("Unable to allocate %u + 1 bytes for tmpbuf.\n", length);
 >>>>>>> v3.18
@@ -1836,9 +1870,12 @@ void iscsi_set_connection_parameters(
 		 */
 		if (!strcmp(param->name, MAXXMITDATASEGMENTLENGTH)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (param_list->iser == true)
 				continue;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			ops->MaxXmitDataSegmentLength =

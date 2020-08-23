@@ -3,6 +3,7 @@ this_cpu operations
 
 this_cpu operations are a way of optimizing access to per cpu
 <<<<<<< HEAD
+<<<<<<< HEAD
 variables associated with the *currently* executing processor through
 the use of segment registers (or a dedicated register where the cpu
 permanently stored the beginning of the per cpu area for a specific
@@ -16,6 +17,8 @@ This means there are no atomicity issues between the calculation of
 the offset and the operation on the data. Therefore it is not
 necessary to disable preempt or interrupts to ensure that the
 =======
+=======
+>>>>>>> v3.18
 variables associated with the *currently* executing processor. This is
 done through the use of segment registers (or a dedicated register where
 the cpu permanently stored the beginning of the per cpu	area for a
@@ -28,6 +31,9 @@ operating on the per cpu variable.
 This means that there are no atomicity issues between the calculation of
 the offset and the operation on the data. Therefore it is not
 necessary to disable preemption or interrupts to ensure that the
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 processor is not changed between the calculation of the address and
 the operation on the data.
@@ -35,9 +41,15 @@ the operation on the data.
 Read-modify-write operations are of particular interest. Frequently
 processors have special lower latency instructions that can operate
 <<<<<<< HEAD
+<<<<<<< HEAD
 without the typical synchronization overhead but still provide some
 sort of relaxed atomicity guarantee. The x86 for example can execute
 RMV (Read Modify Write) instructions like inc/dec/cmpxchg without the
+=======
+without the typical synchronization overhead, but still provide some
+sort of relaxed atomicity guarantees. The x86, for example, can execute
+RMW (Read Modify Write) instructions like inc/dec/cmpxchg without the
+>>>>>>> v3.18
 =======
 without the typical synchronization overhead, but still provide some
 sort of relaxed atomicity guarantees. The x86, for example, can execute
@@ -52,7 +64,10 @@ processor should be accessing that variable and therefore there are no
 concurrency issues with other processors in the system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Please note that accesses by remote processors to a per cpu area are
 exceptional situations and may impact performance and/or correctness
 (remote write operations) of local RMW operations via this_cpu_*.
@@ -84,6 +99,9 @@ preemption and interrupts.
 Inner working of this_cpu operations
 ------------------------------------
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 On x86 the fs: or the gs: segment registers contain the base of the
 per cpu area. It is then possible to simply use the segment override
@@ -104,7 +122,11 @@ results in a single instruction
 
 instead of a sequence of calculation of the address and then a fetch
 <<<<<<< HEAD
+<<<<<<< HEAD
 from that address which occurs with the percpu operations. Before
+=======
+from that address which occurs with the per cpu operations. Before
+>>>>>>> v3.18
 =======
 from that address which occurs with the per cpu operations. Before
 >>>>>>> v3.18
@@ -113,6 +135,7 @@ prevent the kernel from moving the thread to a different processor
 while the calculation is performed.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The main use of the this_cpu operations has been to optimize counter
 operations.
 
@@ -120,18 +143,27 @@ operations.
 
 results in the following single instruction (no lock prefix!)
 =======
+=======
+>>>>>>> v3.18
 Consider the following this_cpu operation:
 
 	this_cpu_inc(x)
 
 The above results in the following single instruction (no lock prefix!)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	inc gs:[x]
 
 instead of the following operations required if there is no segment
 <<<<<<< HEAD
+<<<<<<< HEAD
 register.
+=======
+register:
+>>>>>>> v3.18
 =======
 register:
 >>>>>>> v3.18
@@ -145,15 +177,21 @@ register:
 	put_cpu();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Note that these operations can only be used on percpu data that is
 reserved for a specific processor. Without disabling preemption in the
 surrounding code this_cpu_inc() will only guarantee that one of the
 percpu counters is correctly incremented. However, there is no
 =======
+=======
+>>>>>>> v3.18
 Note that these operations can only be used on per cpu data that is
 reserved for a specific processor. Without disabling preemption in the
 surrounding code this_cpu_inc() will only guarantee that one of the
 per cpu counters is correctly incremented. However, there is no
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 guarantee that the OS will not move the process directly before or
 after the this_cpu instruction is executed. In general this means that
@@ -165,9 +203,15 @@ Per cpu variables are used for performance reasons. Bouncing cache
 lines can be avoided if multiple processors concurrently go through
 the same code paths.  Since each processor has its own per cpu
 <<<<<<< HEAD
+<<<<<<< HEAD
 variables no concurrent cacheline updates take place. The price that
 has to be paid for this optimization is the need to add up the per cpu
 counters when the value of the counter is needed.
+=======
+variables no concurrent cache line updates take place. The price that
+has to be paid for this optimization is the need to add up the per cpu
+counters when the value of a counter is needed.
+>>>>>>> v3.18
 =======
 variables no concurrent cache line updates take place. The price that
 has to be paid for this optimization is the need to add up the per cpu
@@ -185,10 +229,13 @@ of the per cpu variable that belongs to the currently executing
 processor.  this_cpu_ptr avoids multiple steps that the common
 get_cpu/put_cpu sequence requires. No processor number is
 <<<<<<< HEAD
+<<<<<<< HEAD
 available. Instead the offset of the local per cpu area is simply
 added to the percpu offset.
 
 =======
+=======
+>>>>>>> v3.18
 available. Instead, the offset of the local per cpu area is simply
 added to the per cpu offset.
 
@@ -197,6 +244,9 @@ preemption has been disabled. The pointer is then used to
 access local per cpu data in a critical section. When preemption
 is re-enabled this pointer is usually no longer useful since it may
 no longer point to per cpu data of the current processor.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -204,15 +254,21 @@ Per cpu variables and offsets
 -----------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Per cpu variables have *offsets* to the beginning of the percpu
 area. They do not have addresses although they look like that in the
 code. Offsets cannot be directly dereferenced. The offset must be
 added to a base pointer of a percpu area of a processor in order to
 =======
+=======
+>>>>>>> v3.18
 Per cpu variables have *offsets* to the beginning of the per cpu
 area. They do not have addresses although they look like that in the
 code. Offsets cannot be directly dereferenced. The offset must be
 added to a base pointer of a per cpu area of a processor in order to
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 form a valid address.
 
@@ -220,6 +276,7 @@ Therefore the use of x or &x outside of the context of per cpu
 operations is invalid and will generally be treated like a NULL
 pointer dereference.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 In the context of per cpu operations
 
@@ -231,6 +288,8 @@ In the context of per cpu operations
 	strange.
 
 =======
+=======
+>>>>>>> v3.18
 	DEFINE_PER_CPU(int, x);
 
 In the context of per cpu operations the above implies that x is a per
@@ -241,6 +300,9 @@ cpu variable. Most this_cpu operations take a cpu variable.
 &x and hence p is the *offset* of a per cpu variable. this_cpu_ptr()
 takes the offset of a per cpu variable which makes this look a bit
 strange.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -268,7 +330,11 @@ If we have an offset to struct s:
 	struct s __percpu *ps = &p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	z = this_cpu_dec(ps->m);
+=======
+	this_cpu_dec(ps->m);
+>>>>>>> v3.18
 =======
 	this_cpu_dec(ps->m);
 >>>>>>> v3.18
@@ -292,6 +358,7 @@ Variants of this_cpu ops
 -------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 this_cpu ops are interrupt safe. Some architecture do not support
 these per cpu local operations. In that case the operation must be
 replaced by code that disables interrupts, then does the operations
@@ -305,6 +372,8 @@ provided. For example.
 
 Will increment x and will not fallback to code that disables
 =======
+=======
+>>>>>>> v3.18
 this_cpu ops are interrupt safe. Some architectures do not support
 these per cpu local operations. In that case the operation must be
 replaced by code that disables interrupts, then does the operations
@@ -339,6 +408,9 @@ safe.
 
 
 Will increment x and will not fall-back to code that disables
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 interrupts on platforms that cannot accomplish atomicity through
 address relocation and a Read-Modify-Write operation in the same
@@ -346,7 +418,10 @@ instruction.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 &this_cpu_ptr(pp)->n vs this_cpu_ptr(&pp->n)
@@ -354,7 +429,12 @@ instruction.
 
 The first operation takes the offset and forms an address and then
 <<<<<<< HEAD
+<<<<<<< HEAD
 adds the offset of the n field.
+=======
+adds the offset of the n field. This may result in two add
+instructions emitted by the compiler.
+>>>>>>> v3.18
 =======
 adds the offset of the n field. This may result in two add
 instructions emitted by the compiler.
@@ -367,8 +447,11 @@ this_cpu_read() and friends are used.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Christoph Lameter, April 3rd, 2013
 =======
+=======
+>>>>>>> v3.18
 Remote access to per cpu data
 ------------------------------
 
@@ -439,4 +522,7 @@ the wake up times will be affected.
 
 Christoph Lameter, August 4th, 2014
 Pranith Kumar, Aug 2nd, 2014
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -133,7 +133,11 @@ endef
 # Usage: bool-value = $(call is-absolute,path)
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 is-absolute = $(shell echo $(shell-sq) | grep ^/ -q && echo y)
+=======
+is-absolute = $(shell echo $(shell-sq) | grep -q ^/ && echo y)
+>>>>>>> v3.18
 =======
 is-absolute = $(shell echo $(shell-sq) | grep -q ^/ && echo y)
 >>>>>>> v3.18
@@ -183,6 +187,7 @@ _ge_attempt = $(if $(get-executable),$(get-executable),$(_gea_warn)$(call _gea_e
 _gea_warn = $(warning The path '$(1)' is not executable.)
 _gea_err  = $(if $(1),$(error Please set '$(1)' appropriately))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # try-cc
 # Usage: option = $(call try-cc, source-to-build, cc-options, msg)
@@ -197,5 +202,7 @@ try-cc = $(shell sh -c						  \
 	 echo "$(1)" |						  \
 	 $(CC) -x c - $(2) -o "$$TMP" $(TRY_CC_OUTPUT) && echo y; \
 	 rm -f "$$TMP"')
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -21,6 +24,7 @@
  *
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
@@ -36,6 +40,8 @@ s64 ieee754dp_tlong(ieee754dp x)
 
 	CLEARCX;
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
@@ -51,6 +57,9 @@ s64 ieee754dp_tlong(union ieee754dp x)
 	COMPXDP;
 
 	ieee754_clearcx();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	EXPLODEXDP;
@@ -61,17 +70,23 @@ s64 ieee754dp_tlong(union ieee754dp x)
 	case IEEE754_CLASS_QNAN:
 	case IEEE754_CLASS_INF:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754di_xcpt(ieee754di_indef(), "dp_tlong", x);
 	case IEEE754_CLASS_ZERO:
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754di_indef();
 
 	case IEEE754_CLASS_ZERO:
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IEEE754_CLASS_DNORM:
 	case IEEE754_CLASS_NORM:
@@ -83,6 +98,7 @@ s64 ieee754dp_tlong(union ieee754dp x)
 			return -0x8000000000000000LL;
 		/* Set invalid. We will only use overflow for floating
 		   point overflow */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754di_xcpt(ieee754di_indef(), "dp_tlong", x);
@@ -97,6 +113,8 @@ s64 ieee754dp_tlong(union ieee754dp x)
 		int odd;
 
 =======
+=======
+>>>>>>> v3.18
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754di_indef();
 	}
@@ -104,6 +122,9 @@ s64 ieee754dp_tlong(union ieee754dp x)
 	if (xe > DP_FBITS) {
 		xm <<= xe - DP_FBITS;
 	} else if (xe < DP_FBITS) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (xe < -1) {
 			residue = xm;
@@ -115,6 +136,7 @@ s64 ieee754dp_tlong(union ieee754dp x)
 			* so we do it in two steps. Be aware that xe
 			* may be -1 */
 			residue = xm << (xe + 1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			residue <<= 63 - DP_MBITS;
 			round = (residue >> 63) != 0;
@@ -135,6 +157,8 @@ s64 ieee754dp_tlong(union ieee754dp x)
 			break;
 		case IEEE754_RD:	/* toward -Infinity */
 =======
+=======
+>>>>>>> v3.18
 			residue <<= 63 - DP_FBITS;
 			round = (residue >> 63) != 0;
 			sticky = (residue << 1) != 0;
@@ -153,6 +177,9 @@ s64 ieee754dp_tlong(union ieee754dp x)
 				xm++;
 			break;
 		case FPU_CSR_RD:	/* toward -Infinity */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if ((round || sticky) && xs)
 				xm++;
@@ -161,17 +188,23 @@ s64 ieee754dp_tlong(union ieee754dp x)
 		if ((xm >> 63) != 0) {
 			/* This can happen after rounding */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			SETCX(IEEE754_INVALID_OPERATION);
 			return ieee754di_xcpt(ieee754di_indef(), "dp_tlong", x);
 		}
 		if (round || sticky)
 			SETCX(IEEE754_INEXACT);
 =======
+=======
+>>>>>>> v3.18
 			ieee754_setcx(IEEE754_INVALID_OPERATION);
 			return ieee754di_indef();
 		}
 		if (round || sticky)
 			ieee754_setcx(IEEE754_INEXACT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (xs)
@@ -179,6 +212,7 @@ s64 ieee754dp_tlong(union ieee754dp x)
 	else
 		return xm;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -193,5 +227,7 @@ u64 ieee754dp_tulong(ieee754dp x)
 	return (u64) ieee754dp_tlong(ieee754dp_sub(x, hb)) |
 	    (1ULL << 63);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

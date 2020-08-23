@@ -78,9 +78,15 @@ pcibios_align_resource(void *data, const struct resource *res,
 	if (res->flags & IORESOURCE_IO) {
 		if (size > 0x100) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "PCI: I/O Region %s/%d too large"
 			       " (%ld bytes)\n", pci_name(dev),
 			       dev->resource - res, size);
+=======
+			pr_err("PCI: I/O Region %s/%d too large (%u bytes)\n",
+					pci_name(dev), dev->resource - res,
+					size);
+>>>>>>> v3.18
 =======
 			pr_err("PCI: I/O Region %s/%d too large (%u bytes)\n",
 					pci_name(dev), dev->resource - res,
@@ -181,7 +187,11 @@ static int __init pcibios_init(void)
 	struct list_head resources;
 	struct pci_bus *bus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int next_busno = 0, i;
+=======
+	int next_busno = 0;
+>>>>>>> v3.18
 =======
 	int next_busno = 0;
 >>>>>>> v3.18
@@ -208,7 +218,11 @@ static int __init pcibios_init(void)
 subsys_initcall(pcibios_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init pcibios_fixup_bus(struct pci_bus *bus)
+=======
+void pcibios_fixup_bus(struct pci_bus *bus)
+>>>>>>> v3.18
 =======
 void pcibios_fixup_bus(struct pci_bus *bus)
 >>>>>>> v3.18

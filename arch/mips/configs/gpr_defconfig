@@ -20,6 +20,10 @@ CONFIG_MODULE_UNLOAD=y
 CONFIG_PCI=y
 CONFIG_BINFMT_MISC=m
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_NET=y
+>>>>>>> v3.18
 =======
 CONFIG_NET=y
 >>>>>>> v3.18
@@ -170,7 +174,10 @@ CONFIG_CFG80211=y
 CONFIG_MAC80211=y
 CONFIG_MTD=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_MTD_PARTITIONS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_MTD_CHAR=y

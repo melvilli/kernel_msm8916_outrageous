@@ -586,11 +586,14 @@ static const struct consw mda_con = {
 int __init mda_console_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mda_first_vc > mda_last_vc)
 		return 1;
 
 	return take_over_console(&mda_con, mda_first_vc-1, mda_last_vc-1, 0);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	if (mda_first_vc > mda_last_vc)
@@ -599,6 +602,9 @@ int __init mda_console_init(void)
 	err = do_take_over_console(&mda_con, mda_first_vc-1, mda_last_vc-1, 0);
 	console_unlock();
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

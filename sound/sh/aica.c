@@ -599,7 +599,10 @@ static int snd_aica_remove(struct platform_device *devptr)
 	snd_card_free(dreamcastcard->card);
 	kfree(dreamcastcard);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -613,8 +616,13 @@ static int snd_aica_probe(struct platform_device *devptr)
 	if (unlikely(!dreamcastcard))
 		return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index, SND_AICA_DRIVER, THIS_MODULE, 0,
 			      &dreamcastcard->card);
+=======
+	err = snd_card_new(&devptr->dev, index, SND_AICA_DRIVER,
+			   THIS_MODULE, 0, &dreamcastcard->card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&devptr->dev, index, SND_AICA_DRIVER,
 			   THIS_MODULE, 0, &dreamcastcard->card);
@@ -634,7 +642,10 @@ static int snd_aica_probe(struct platform_device *devptr)
 	if (unlikely(err < 0))
 		goto freedreamcast;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(dreamcastcard->card, &devptr->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dreamcastcard->timer.data = 0;

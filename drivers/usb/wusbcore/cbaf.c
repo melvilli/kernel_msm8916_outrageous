@@ -145,7 +145,11 @@ static int cbaf_check(struct cbaf *cbaf)
 		USB_DIR_IN | USB_TYPE_CLASS | USB_RECIP_INTERFACE,
 		0, cbaf->usb_iface->cur_altsetting->desc.bInterfaceNumber,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cbaf->buffer, cbaf->buffer_size, 1000 /* FIXME: arbitrary */);
+=======
+		cbaf->buffer, cbaf->buffer_size, USB_CTRL_GET_TIMEOUT);
+>>>>>>> v3.18
 =======
 		cbaf->buffer, cbaf->buffer_size, USB_CTRL_GET_TIMEOUT);
 >>>>>>> v3.18
@@ -189,7 +193,11 @@ static int cbaf_check(struct cbaf *cbaf)
 
 		if (top - itr < sizeof(*assoc_request)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(dev, "Not enough data to decode associaton "
+=======
+			dev_err(dev, "Not enough data to decode association "
+>>>>>>> v3.18
 =======
 			dev_err(dev, "Not enough data to decode association "
 >>>>>>> v3.18
@@ -217,9 +225,15 @@ static int cbaf_check(struct cbaf *cbaf)
 				ar_assoc = 1;
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			};
 			break;
 		};
+=======
+			}
+			break;
+		}
+>>>>>>> v3.18
 =======
 			}
 			break;
@@ -250,7 +264,11 @@ static int cbaf_check(struct cbaf *cbaf)
 static const struct wusb_cbaf_host_info cbaf_host_info_defaults = {
 	.AssociationTypeId_hdr    = WUSB_AR_AssociationTypeId,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.AssociationTypeId    	  = cpu_to_le16(AR_TYPE_WUSB),
+=======
+	.AssociationTypeId	  = cpu_to_le16(AR_TYPE_WUSB),
+>>>>>>> v3.18
 =======
 	.AssociationTypeId	  = cpu_to_le16(AR_TYPE_WUSB),
 >>>>>>> v3.18
@@ -279,7 +297,12 @@ static int cbaf_send_host_info(struct cbaf *cbaf)
 	hi_size = sizeof(*hi) + name_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return usb_control_msg(cbaf->usb_dev, usb_sndctrlpipe(cbaf->usb_dev, 0),
+=======
+	return usb_control_msg(cbaf->usb_dev,
+			usb_sndctrlpipe(cbaf->usb_dev, 0),
+>>>>>>> v3.18
 =======
 	return usb_control_msg(cbaf->usb_dev,
 			usb_sndctrlpipe(cbaf->usb_dev, 0),
@@ -289,7 +312,11 @@ static int cbaf_send_host_info(struct cbaf *cbaf)
 			0x0101,
 			cbaf->usb_iface->cur_altsetting->desc.bInterfaceNumber,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hi, hi_size, 1000 /* FIXME: arbitrary */);
+=======
+			hi, hi_size, USB_CTRL_SET_TIMEOUT);
+>>>>>>> v3.18
 =======
 			hi, hi_size, USB_CTRL_SET_TIMEOUT);
 >>>>>>> v3.18
@@ -316,14 +343,20 @@ static int cbaf_cdid_get(struct cbaf *cbaf)
 		USB_DIR_IN | USB_TYPE_CLASS | USB_RECIP_INTERFACE,
 		0x0200, cbaf->usb_iface->cur_altsetting->desc.bInterfaceNumber,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		di, cbaf->buffer_size, 1000 /* FIXME: arbitrary */);
 	if (result < 0) {
 		dev_err(dev, "Cannot request device information: %d\n", result);
 =======
+=======
+>>>>>>> v3.18
 		di, cbaf->buffer_size, USB_CTRL_GET_TIMEOUT);
 	if (result < 0) {
 		dev_err(dev, "Cannot request device information: %d\n",
 			result);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return result;
 	}
@@ -526,17 +559,23 @@ static DEVICE_ATTR(wusb_device_name, 0600, cbaf_wusb_device_name_show, NULL);
 static const struct wusb_cbaf_cc_data cbaf_cc_data_defaults = {
 	.AssociationTypeId_hdr    = WUSB_AR_AssociationTypeId,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.AssociationTypeId    	  = cpu_to_le16(AR_TYPE_WUSB),
 	.AssociationSubTypeId_hdr = WUSB_AR_AssociationSubTypeId,
 	.AssociationSubTypeId     = cpu_to_le16(AR_TYPE_WUSB_ASSOCIATE),
 	.Length_hdr               = WUSB_AR_Length,
 	.Length               	  = cpu_to_le32(sizeof(struct wusb_cbaf_cc_data)),
 =======
+=======
+>>>>>>> v3.18
 	.AssociationTypeId	  = cpu_to_le16(AR_TYPE_WUSB),
 	.AssociationSubTypeId_hdr = WUSB_AR_AssociationSubTypeId,
 	.AssociationSubTypeId     = cpu_to_le16(AR_TYPE_WUSB_ASSOCIATE),
 	.Length_hdr               = WUSB_AR_Length,
 	.Length		= cpu_to_le32(sizeof(struct wusb_cbaf_cc_data)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ConnectionContext_hdr    = WUSB_AR_ConnectionContext,
 	.BandGroups_hdr           = WUSB_AR_BandGroups,
@@ -579,7 +618,11 @@ static int cbaf_cc_upload(struct cbaf *cbaf)
 		USB_DIR_OUT | USB_TYPE_CLASS | USB_RECIP_INTERFACE,
 		0x0201, cbaf->usb_iface->cur_altsetting->desc.bInterfaceNumber,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ccd, sizeof(*ccd), 1000 /* FIXME: arbitrary */);
+=======
+		ccd, sizeof(*ccd), USB_CTRL_SET_TIMEOUT);
+>>>>>>> v3.18
 =======
 		ccd, sizeof(*ccd), USB_CTRL_SET_TIMEOUT);
 >>>>>>> v3.18
@@ -670,6 +713,11 @@ static int cbaf_probe(struct usb_interface *iface,
 error_create_group:
 error_check:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usb_put_intf(iface);
+	usb_put_dev(cbaf->usb_dev);
+>>>>>>> v3.18
 =======
 	usb_put_intf(iface);
 	usb_put_dev(cbaf->usb_dev);
@@ -689,6 +737,10 @@ static void cbaf_disconnect(struct usb_interface *iface)
 	usb_set_intfdata(iface, NULL);
 	usb_put_intf(iface);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usb_put_dev(cbaf->usb_dev);
+>>>>>>> v3.18
 =======
 	usb_put_dev(cbaf->usb_dev);
 >>>>>>> v3.18

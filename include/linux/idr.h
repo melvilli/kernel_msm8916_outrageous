@@ -30,12 +30,15 @@
 struct idr_layer {
 	int			prefix;	/* the ID prefix of this idr_layer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DECLARE_BITMAP(bitmap, IDR_SIZE); /* A zero bit means "space here" */
 	struct idr_layer __rcu	*ary[1<<IDR_BITS];
 	int			count;	/* When zero, we can release it */
 	int			layer;	/* distance from leaf */
 	struct rcu_head		rcu_head;
 =======
+=======
+>>>>>>> v3.18
 	int			layer;	/* distance from leaf */
 	struct idr_layer __rcu	*ary[1<<IDR_BITS];
 	int			count;	/* When zero, we can release it */
@@ -44,6 +47,9 @@ struct idr_layer {
 		DECLARE_BITMAP(bitmap, IDR_SIZE);
 		struct rcu_head		rcu_head;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -51,17 +57,23 @@ struct idr {
 	struct idr_layer __rcu	*hint;	/* the last layer allocated from */
 	struct idr_layer __rcu	*top;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct idr_layer	*id_free;
 	int			layers;	/* only valid w/o concurrent changes */
 	int			id_free_cnt;
 	int			cur;	/* current pos for cyclic allocation */
 	spinlock_t		lock;
 =======
+=======
+>>>>>>> v3.18
 	int			layers;	/* only valid w/o concurrent changes */
 	int			cur;	/* current pos for cyclic allocation */
 	spinlock_t		lock;
 	int			id_free_cnt;
 	struct idr_layer	*id_free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -102,9 +114,15 @@ void *idr_get_next(struct idr *idp, int *nextid);
 void *idr_replace(struct idr *idp, void *ptr, int id);
 void idr_remove(struct idr *idp, int id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void idr_free(struct idr *idp, int id);
 void idr_destroy(struct idr *idp);
 void idr_init(struct idr *idp);
+=======
+void idr_destroy(struct idr *idp);
+void idr_init(struct idr *idp);
+bool idr_is_empty(struct idr *idp);
+>>>>>>> v3.18
 =======
 void idr_destroy(struct idr *idp);
 void idr_init(struct idr *idp);
@@ -158,6 +176,7 @@ static inline void *idr_find(struct idr *idr, int id)
 	for (id = 0; ((entry) = idr_get_next(idp, &(id))) != NULL; ++id)
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Don't use the following functions.  These exist only to suppress
  * deprecated warnings on EXPORT_SYMBOL()s.
@@ -222,6 +241,8 @@ static inline void __deprecated idr_remove_all(struct idr *idp)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * IDA - IDR based id allocator, use when translation from id to

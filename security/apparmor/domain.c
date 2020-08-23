@@ -51,6 +51,7 @@ void aa_free_domain_entries(struct aa_domain *domain)
 /**
  * may_change_ptraced_domain - check if can change profile on ptraced task
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @task: task we want to change profile of   (NOT NULL)
  * @to_profile: profile to change to  (NOT NULL)
  *
@@ -60,10 +61,16 @@ void aa_free_domain_entries(struct aa_domain *domain)
  *
  * Check if current is ptraced and if so if the tracing task is allowed
 >>>>>>> v3.18
+=======
+ * @to_profile: profile to change to  (NOT NULL)
+ *
+ * Check if current is ptraced and if so if the tracing task is allowed
+>>>>>>> v3.18
  * to trace the new domain
  *
  * Returns: %0 or error if change not allowed
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int may_change_ptraced_domain(struct task_struct *task,
 				     struct aa_profile *to_profile)
@@ -75,10 +82,16 @@ static int may_change_ptraced_domain(struct aa_profile *to_profile)
 {
 	struct task_struct *tracer;
 >>>>>>> v3.18
+=======
+static int may_change_ptraced_domain(struct aa_profile *to_profile)
+{
+	struct task_struct *tracer;
+>>>>>>> v3.18
 	struct aa_profile *tracerp = NULL;
 	int error = 0;
 
 	rcu_read_lock();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tracer = ptrace_parent(task);
 	if (tracer) {
@@ -87,16 +100,22 @@ static int may_change_ptraced_domain(struct aa_profile *to_profile)
 		tracerp = aa_cred_profile(cred);
 	}
 =======
+=======
+>>>>>>> v3.18
 	tracer = ptrace_parent(current);
 	if (tracer)
 		/* released below */
 		tracerp = aa_get_task_profile(tracer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* not ptraced */
 	if (!tracer || unconfined(tracerp))
 		goto out;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	error = aa_may_ptrace(tracer, tracerp, to_profile, PTRACE_MODE_ATTACH);
 
@@ -105,11 +124,16 @@ out:
 	if (cred)
 		put_cred(cred);
 =======
+=======
+>>>>>>> v3.18
 	error = aa_may_ptrace(tracerp, to_profile, PTRACE_MODE_ATTACH);
 
 out:
 	rcu_read_unlock();
 	aa_put_profile(tracerp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return error;
@@ -176,7 +200,11 @@ static struct aa_profile *__attach_match(const char *name,
 	struct aa_profile *profile, *candidate = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(profile, head, base.list) {
+=======
+	list_for_each_entry_rcu(profile, head, base.list) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry_rcu(profile, head, base.list) {
 >>>>>>> v3.18
@@ -213,9 +241,15 @@ static struct aa_profile *find_attach(struct aa_namespace *ns,
 	struct aa_profile *profile;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_lock(&ns->lock);
 	profile = aa_get_profile(__attach_match(name, list));
 	read_unlock(&ns->lock);
+=======
+	rcu_read_lock();
+	profile = aa_get_profile(__attach_match(name, list));
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 	profile = aa_get_profile(__attach_match(name, list));
@@ -398,15 +432,21 @@ int apparmor_bprm_set_creds(struct linux_binprm *bprm)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cxt = bprm->cred->security;
 	BUG_ON(!cxt);
 
 	profile = aa_get_profile(aa_newest_version(cxt->profile));
 =======
+=======
+>>>>>>> v3.18
 	cxt = cred_cxt(bprm->cred);
 	BUG_ON(!cxt);
 
 	profile = aa_get_newest_profile(cxt->profile);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * get the namespace from the replacement profile as replacement
@@ -420,8 +460,13 @@ int apparmor_bprm_set_creds(struct linux_binprm *bprm)
 			     &name, &info);
 	if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (profile->flags &
 		    (PFLAG_IX_ON_NAME_ERROR | PFLAG_UNCONFINED))
+=======
+		if (unconfined(profile) ||
+		    (profile->flags & PFLAG_IX_ON_NAME_ERROR))
+>>>>>>> v3.18
 =======
 		if (unconfined(profile) ||
 		    (profile->flags & PFLAG_IX_ON_NAME_ERROR))
@@ -471,7 +516,11 @@ int apparmor_bprm_set_creds(struct linux_binprm *bprm)
 		if (!(cp.allow & AA_MAY_ONEXEC))
 			goto audit;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		new_profile = aa_get_profile(aa_newest_version(cxt->onexec));
+=======
+		new_profile = aa_get_newest_profile(cxt->onexec);
+>>>>>>> v3.18
 =======
 		new_profile = aa_get_newest_profile(cxt->onexec);
 >>>>>>> v3.18
@@ -492,12 +541,15 @@ int apparmor_bprm_set_creds(struct linux_binprm *bprm)
 				goto x_clear;
 			} else if (perms.xindex & AA_X_UNCONFINED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				new_profile = aa_get_profile(ns->unconfined);
 				info = "ux fallback";
 			} else {
 				error = -EACCES;
 				info = "profile not found";
 =======
+=======
+>>>>>>> v3.18
 				new_profile = aa_get_newest_profile(ns->unconfined);
 				info = "ux fallback";
 			} else {
@@ -505,6 +557,9 @@ int apparmor_bprm_set_creds(struct linux_binprm *bprm)
 				info = "profile not found";
 				/* remove MAY_EXEC to audit as failure */
 				perms.allow &= ~MAY_EXEC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -543,7 +598,11 @@ int apparmor_bprm_set_creds(struct linux_binprm *bprm)
 
 	if (bprm->unsafe & (LSM_UNSAFE_PTRACE | LSM_UNSAFE_PTRACE_CAP)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = may_change_ptraced_domain(current, new_profile);
+=======
+		error = may_change_ptraced_domain(new_profile);
+>>>>>>> v3.18
 =======
 		error = may_change_ptraced_domain(new_profile);
 >>>>>>> v3.18
@@ -582,11 +641,15 @@ x_clear:
 
 	/* clear out all temporary/transitional state from the context */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aa_put_profile(cxt->previous);
 	aa_put_profile(cxt->onexec);
 	cxt->previous = NULL;
 	cxt->onexec = NULL;
 	cxt->token = 0;
+=======
+	aa_clear_task_cxt_trans(cxt);
+>>>>>>> v3.18
 =======
 	aa_clear_task_cxt_trans(cxt);
 >>>>>>> v3.18
@@ -629,7 +692,11 @@ void apparmor_bprm_committing_creds(struct linux_binprm *bprm)
 {
 	struct aa_profile *profile = __aa_current_profile();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct aa_task_cxt *new_cxt = bprm->cred->security;
+=======
+	struct aa_task_cxt *new_cxt = cred_cxt(bprm->cred);
+>>>>>>> v3.18
 =======
 	struct aa_task_cxt *new_cxt = cred_cxt(bprm->cred);
 >>>>>>> v3.18
@@ -710,7 +777,11 @@ int aa_change_hat(const char *hats[], int count, u64 token, bool permtest)
 	/* released below */
 	cred = get_current_cred();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cxt = cred->security;
+=======
+	cxt = cred_cxt(cred);
+>>>>>>> v3.18
 =======
 	cxt = cred_cxt(cred);
 >>>>>>> v3.18
@@ -727,12 +798,18 @@ int aa_change_hat(const char *hats[], int count, u64 token, bool permtest)
 		/* attempting to change into a new hat or switch to a sibling */
 		struct aa_profile *root;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		root = PROFILE_IS_HAT(profile) ? profile->parent : profile;
 =======
+=======
+>>>>>>> v3.18
 		if (PROFILE_IS_HAT(profile))
 			root = aa_get_profile_rcu(&profile->parent);
 		else
 			root = aa_get_profile(profile);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* find first matching hat */
@@ -746,6 +823,10 @@ int aa_change_hat(const char *hats[], int count, u64 token, bool permtest)
 				else
 					error = -ENOENT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				aa_put_profile(root);
+>>>>>>> v3.18
 =======
 				aa_put_profile(root);
 >>>>>>> v3.18
@@ -764,6 +845,10 @@ int aa_change_hat(const char *hats[], int count, u64 token, bool permtest)
 			/* freed below */
 			name = new_compound_name(root->base.hname, hats[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			aa_put_profile(root);
+>>>>>>> v3.18
 =======
 			aa_put_profile(root);
 >>>>>>> v3.18
@@ -777,6 +862,10 @@ int aa_change_hat(const char *hats[], int count, u64 token, bool permtest)
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			aa_put_profile(root);
+>>>>>>> v3.18
 =======
 			aa_put_profile(root);
 >>>>>>> v3.18
@@ -789,7 +878,11 @@ int aa_change_hat(const char *hats[], int count, u64 token, bool permtest)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = may_change_ptraced_domain(current, hat);
+=======
+		error = may_change_ptraced_domain(hat);
+>>>>>>> v3.18
 =======
 		error = may_change_ptraced_domain(hat);
 >>>>>>> v3.18
@@ -853,7 +946,10 @@ int aa_change_profile(const char *ns_name, const char *hname, bool onexec,
 {
 	const struct cred *cred;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct aa_task_cxt *cxt;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct aa_profile *profile, *target = NULL;
@@ -876,7 +972,10 @@ int aa_change_profile(const char *ns_name, const char *hname, bool onexec,
 
 	cred = get_current_cred();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cxt = cred->security;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	profile = aa_cred_profile(cred);
@@ -940,7 +1039,11 @@ int aa_change_profile(const char *ns_name, const char *hname, bool onexec,
 
 	/* check if tracing task is allowed to trace target domain */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = may_change_ptraced_domain(current, target);
+=======
+	error = may_change_ptraced_domain(target);
+>>>>>>> v3.18
 =======
 	error = may_change_ptraced_domain(target);
 >>>>>>> v3.18

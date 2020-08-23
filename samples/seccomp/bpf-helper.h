@@ -139,7 +139,11 @@ union arg64 {
 	BPF_STMT(BPF_LD+BPF_W+BPF_ABS, LO_ARG(idx))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Loads lo into M[0] and hi into M[1] and A */
+=======
+/* Loads hi into A and lo in X */
+>>>>>>> v3.18
 =======
 /* Loads hi into A and lo in X */
 >>>>>>> v3.18
@@ -157,6 +161,7 @@ union arg64 {
 	BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, (value), 1, 0), \
 	jt
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define JA32(value, jt) \
 	BPF_JUMP(BPF_JMP+BPF_JSET+BPF_K, (value), 0, 1), \
@@ -260,6 +265,8 @@ union arg64 {
 	jt, \
 	BPF_STMT(BPF_LD+BPF_MEM, 1)
 =======
+=======
+>>>>>>> v3.18
 /* Checks the lo, then swaps to check the hi. A=lo,X=hi */
 #define JEQ64(lo, hi, jt) \
 	BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, (hi), 0, 5), \
@@ -342,6 +349,9 @@ union arg64 {
 	BPF_STMT(BPF_LD+BPF_MEM, 1), /* passed: swap hi back in */ \
 	jt, \
 	BPF_STMT(BPF_LD+BPF_MEM, 1) /* failed: swap hi back in */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define LOAD_SYSCALL_NR \

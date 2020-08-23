@@ -30,6 +30,10 @@ enum iio_chan_type {
 	IIO_CCT,
 	IIO_PRESSURE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IIO_HUMIDITYRELATIVE,
+>>>>>>> v3.18
 =======
 	IIO_HUMIDITYRELATIVE,
 >>>>>>> v3.18
@@ -57,7 +61,10 @@ enum iio_modifier {
 	IIO_MOD_LIGHT_GREEN,
 	IIO_MOD_LIGHT_BLUE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IIO_MOD_QUATERNION,
 	IIO_MOD_TEMP_AMBIENT,
 	IIO_MOD_TEMP_OBJECT,
@@ -86,6 +93,9 @@ enum iio_event_direction {
 	IIO_EV_DIR_EITHER,
 	IIO_EV_DIR_RISING,
 	IIO_EV_DIR_FALLING,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -94,6 +104,10 @@ enum iio_event_direction {
 #define IIO_VAL_INT_PLUS_NANO 3
 #define IIO_VAL_INT_PLUS_MICRO_DB 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IIO_VAL_INT_MULTIPLE 5
+>>>>>>> v3.18
 =======
 #define IIO_VAL_INT_MULTIPLE 5
 >>>>>>> v3.18

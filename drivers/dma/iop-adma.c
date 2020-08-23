@@ -62,6 +62,7 @@ static void iop_adma_free_slots(struct iop_adma_desc_slot *slot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 iop_desc_unmap(struct iop_adma_chan *iop_chan, struct iop_adma_desc_slot *desc)
 {
@@ -138,6 +139,8 @@ iop_desc_unmap_pq(struct iop_adma_chan *iop_chan, struct iop_adma_desc_slot *des
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static dma_cookie_t
 iop_adma_run_tx_complete_actions(struct iop_adma_desc_slot *desc,
 	struct iop_adma_chan *iop_chan, dma_cookie_t cookie)
@@ -156,6 +159,7 @@ iop_adma_run_tx_complete_actions(struct iop_adma_desc_slot *desc,
 			tx->callback(tx->callback_param);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* unmap dma addresses
 		 * (unmap_single vs unmap_page?)
 		 */
@@ -165,6 +169,11 @@ iop_adma_run_tx_complete_actions(struct iop_adma_desc_slot *desc,
 			else
 				iop_desc_unmap(iop_chan, desc);
 		}
+=======
+		dma_descriptor_unmap(tx);
+		if (desc->group_head)
+			desc->group_head = NULL;
+>>>>>>> v3.18
 =======
 		dma_descriptor_unmap(tx);
 		if (desc->group_head)
@@ -528,7 +537,11 @@ static int iop_adma_alloc_chan_resources(struct dma_chan *chan)
 	int init = iop_chan->slots_allocated ? 0 : 1;
 	struct iop_adma_platform_data *plat_data =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iop_chan->device->pdev->dev.platform_data;
+=======
+		dev_get_platdata(&iop_chan->device->pdev->dev);
+>>>>>>> v3.18
 =======
 		dev_get_platdata(&iop_chan->device->pdev->dev);
 >>>>>>> v3.18
@@ -605,7 +618,10 @@ iop_adma_prep_dma_interrupt(struct dma_chan *chan, unsigned long flags)
 		grp_start = sw_desc->group_head;
 		iop_desc_init_interrupt(grp_start, iop_chan);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		grp_start->unmap_len = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		sw_desc->async_tx.flags = flags;
@@ -639,6 +655,7 @@ iop_adma_prep_dma_memcpy(struct dma_chan *chan, dma_addr_t dma_dest,
 		iop_desc_set_byte_count(grp_start, iop_chan, len);
 		iop_desc_set_dest_addr(grp_start, iop_chan, dma_dest);
 		iop_desc_set_memcpy_src_addr(grp_start, dma_src);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		sw_desc->unmap_src_cnt = 1;
 		sw_desc->unmap_len = len;
@@ -677,6 +694,8 @@ iop_adma_prep_dma_memset(struct dma_chan *chan, dma_addr_t dma_dest,
 		sw_desc->unmap_len = len;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		sw_desc->async_tx.flags = flags;
 	}
 	spin_unlock_bh(&iop_chan->lock);
@@ -710,8 +729,11 @@ iop_adma_prep_dma_xor(struct dma_chan *chan, dma_addr_t dma_dest,
 		iop_desc_set_byte_count(grp_start, iop_chan, len);
 		iop_desc_set_dest_addr(grp_start, iop_chan, dma_dest);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sw_desc->unmap_src_cnt = src_cnt;
 		sw_desc->unmap_len = len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		sw_desc->async_tx.flags = flags;
@@ -750,8 +772,11 @@ iop_adma_prep_dma_xor_val(struct dma_chan *chan, dma_addr_t *dma_src,
 		pr_debug("\t%s: grp_start->xor_check_result: %p\n",
 			__func__, grp_start->xor_check_result);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sw_desc->unmap_src_cnt = src_cnt;
 		sw_desc->unmap_len = len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		sw_desc->async_tx.flags = flags;
@@ -807,8 +832,11 @@ iop_adma_prep_dma_pq(struct dma_chan *chan, dma_addr_t *dst, dma_addr_t *src,
 
 		iop_desc_set_pq_addr(g, dst);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sw_desc->unmap_src_cnt = src_cnt;
 		sw_desc->unmap_len = len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		sw_desc->async_tx.flags = flags;
@@ -866,8 +894,11 @@ iop_adma_prep_dma_pq_val(struct dma_chan *chan, dma_addr_t *pq, dma_addr_t *src,
 		pr_debug("\t%s: g->pq_check_result: %p\n",
 			__func__, g->pq_check_result);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sw_desc->unmap_src_cnt = src_cnt+2;
 		sw_desc->unmap_len = len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		sw_desc->async_tx.flags = flags;
@@ -929,7 +960,11 @@ static enum dma_status iop_adma_status(struct dma_chan *chan,
 
 	ret = dma_cookie_status(chan, cookie, txstate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == DMA_SUCCESS)
+=======
+	if (ret == DMA_COMPLETE)
+>>>>>>> v3.18
 =======
 	if (ret == DMA_COMPLETE)
 >>>>>>> v3.18
@@ -1052,7 +1087,11 @@ static int iop_adma_memcpy_self_test(struct iop_adma_device *device)
 
 	if (iop_adma_status(dma_chan, cookie, NULL) !=
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DMA_SUCCESS) {
+=======
+			DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 			DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -1090,7 +1129,11 @@ iop_adma_xor_val_self_test(struct iop_adma_device *device)
 	struct page *zero_sum_srcs[IOP_ADMA_NUM_SRC_TEST + 1];
 	dma_addr_t dma_srcs[IOP_ADMA_NUM_SRC_TEST + 1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_addr_t dma_addr, dest_dma;
+=======
+	dma_addr_t dest_dma;
+>>>>>>> v3.18
 =======
 	dma_addr_t dest_dma;
 >>>>>>> v3.18
@@ -1160,7 +1203,11 @@ iop_adma_xor_val_self_test(struct iop_adma_device *device)
 
 	if (iop_adma_status(dma_chan, cookie, NULL) !=
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMA_SUCCESS) {
+=======
+		DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 		DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -1210,7 +1257,11 @@ iop_adma_xor_val_self_test(struct iop_adma_device *device)
 	msleep(8);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iop_adma_status(dma_chan, cookie, NULL) != DMA_SUCCESS) {
+=======
+	if (iop_adma_status(dma_chan, cookie, NULL) != DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 	if (iop_adma_status(dma_chan, cookie, NULL) != DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -1227,6 +1278,7 @@ iop_adma_xor_val_self_test(struct iop_adma_device *device)
 		goto free_resources;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* test memset */
 	dma_addr = dma_map_page(dma_chan->device->dev, dest, 0,
@@ -1257,6 +1309,8 @@ iop_adma_xor_val_self_test(struct iop_adma_device *device)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* test for non-zero parity sum */
 	zero_sum_result = 0;
 	for (i = 0; i < IOP_ADMA_NUM_SRC_TEST + 1; i++)
@@ -1273,7 +1327,11 @@ iop_adma_xor_val_self_test(struct iop_adma_device *device)
 	msleep(8);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iop_adma_status(dma_chan, cookie, NULL) != DMA_SUCCESS) {
+=======
+	if (iop_adma_status(dma_chan, cookie, NULL) != DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 	if (iop_adma_status(dma_chan, cookie, NULL) != DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -1373,7 +1431,11 @@ iop_adma_pq_zero_sum_self_test(struct iop_adma_device *device)
 
 	if (iop_adma_status(dma_chan, cookie, NULL) !=
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMA_SUCCESS) {
+=======
+		DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 		DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -1414,7 +1476,11 @@ iop_adma_pq_zero_sum_self_test(struct iop_adma_device *device)
 
 	if (iop_adma_status(dma_chan, cookie, NULL) !=
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMA_SUCCESS) {
+=======
+		DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 		DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -1450,7 +1516,11 @@ iop_adma_pq_zero_sum_self_test(struct iop_adma_device *device)
 
 	if (iop_adma_status(dma_chan, cookie, NULL) !=
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DMA_SUCCESS) {
+=======
+		DMA_COMPLETE) {
+>>>>>>> v3.18
 =======
 		DMA_COMPLETE) {
 >>>>>>> v3.18
@@ -1482,7 +1552,11 @@ static int iop_adma_remove(struct platform_device *dev)
 	struct dma_chan *chan, *_chan;
 	struct iop_adma_chan *iop_chan;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iop_adma_platform_data *plat_data = dev->dev.platform_data;
+=======
+	struct iop_adma_platform_data *plat_data = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct iop_adma_platform_data *plat_data = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -1511,7 +1585,11 @@ static int iop_adma_probe(struct platform_device *pdev)
 	struct iop_adma_chan *iop_chan;
 	struct dma_device *dma_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iop_adma_platform_data *plat_data = pdev->dev.platform_data;
+=======
+	struct iop_adma_platform_data *plat_data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct iop_adma_platform_data *plat_data = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1566,8 +1644,11 @@ static int iop_adma_probe(struct platform_device *pdev)
 	if (dma_has_cap(DMA_MEMCPY, dma_dev->cap_mask))
 		dma_dev->device_prep_dma_memcpy = iop_adma_prep_dma_memcpy;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dma_has_cap(DMA_MEMSET, dma_dev->cap_mask))
 		dma_dev->device_prep_dma_memset = iop_adma_prep_dma_memset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (dma_has_cap(DMA_XOR, dma_dev->cap_mask)) {
@@ -1638,8 +1719,12 @@ static int iop_adma_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dma_has_cap(DMA_XOR, dma_dev->cap_mask) ||
 	    dma_has_cap(DMA_MEMSET, dma_dev->cap_mask)) {
+=======
+	if (dma_has_cap(DMA_XOR, dma_dev->cap_mask)) {
+>>>>>>> v3.18
 =======
 	if (dma_has_cap(DMA_XOR, dma_dev->cap_mask)) {
 >>>>>>> v3.18
@@ -1665,7 +1750,11 @@ static int iop_adma_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(&pdev->dev, "Intel(R) IOP: ( %s%s%s%s%s%s%s)\n",
+=======
+	dev_info(&pdev->dev, "Intel(R) IOP: ( %s%s%s%s%s%s)\n",
+>>>>>>> v3.18
 =======
 	dev_info(&pdev->dev, "Intel(R) IOP: ( %s%s%s%s%s%s)\n",
 >>>>>>> v3.18
@@ -1674,7 +1763,10 @@ static int iop_adma_probe(struct platform_device *pdev)
 		 dma_has_cap(DMA_XOR, dma_dev->cap_mask) ? "xor " : "",
 		 dma_has_cap(DMA_XOR_VAL, dma_dev->cap_mask) ? "xor_val " : "",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 dma_has_cap(DMA_MEMSET, dma_dev->cap_mask)  ? "fill " : "",
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		 dma_has_cap(DMA_MEMCPY, dma_dev->cap_mask) ? "cpy " : "",

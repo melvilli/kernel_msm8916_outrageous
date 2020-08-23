@@ -25,8 +25,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program;  if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+=======
+ * along with this program;  if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program;  if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -48,6 +52,7 @@
 
 /* Domain mapping definition structures */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define netlbl_domhsh_addr4_entry(iter) \
 	container_of(iter, struct netlbl_domaddr4_map, list)
 struct netlbl_domaddr4_map {
@@ -56,6 +61,8 @@ struct netlbl_domaddr4_map {
 		struct cipso_v4_doi *cipsov4;
 	} type_def;
 =======
+=======
+>>>>>>> v3.18
 struct netlbl_domaddr_map {
 	struct list_head list4;
 	struct list_head list6;
@@ -71,6 +78,9 @@ struct netlbl_dommap_def {
 	container_of(iter, struct netlbl_domaddr4_map, list)
 struct netlbl_domaddr4_map {
 	struct netlbl_dommap_def def;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct netlbl_af4list list;
@@ -78,6 +88,7 @@ struct netlbl_domaddr4_map {
 #define netlbl_domhsh_addr6_entry(iter) \
 	container_of(iter, struct netlbl_domaddr6_map, list)
 struct netlbl_domaddr6_map {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 type;
 
@@ -98,6 +109,8 @@ struct netlbl_dom_map {
 		struct netlbl_domaddr_map *addrsel;
 	} type_def;
 =======
+=======
+>>>>>>> v3.18
 	struct netlbl_dommap_def def;
 
 	struct netlbl_af6list list;
@@ -106,6 +119,9 @@ struct netlbl_dom_map {
 struct netlbl_dom_map {
 	char *domain;
 	struct netlbl_dommap_def def;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	u32 valid;
@@ -131,9 +147,12 @@ int netlbl_domhsh_remove(const char *domain, struct netlbl_audit *audit_info);
 int netlbl_domhsh_remove_default(struct netlbl_audit *audit_info);
 struct netlbl_dom_map *netlbl_domhsh_getentry(const char *domain);
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct netlbl_domaddr4_map *netlbl_domhsh_getentry_af4(const char *domain,
 						       __be32 addr);
 =======
+=======
+>>>>>>> v3.18
 struct netlbl_dommap_def *netlbl_domhsh_getentry_af4(const char *domain,
 						     __be32 addr);
 #if IS_ENABLED(CONFIG_IPV6)
@@ -141,6 +160,9 @@ struct netlbl_dommap_def *netlbl_domhsh_getentry_af6(const char *domain,
 						   const struct in6_addr *addr);
 #endif /* IPv6 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int netlbl_domhsh_walk(u32 *skip_bkt,
 		     u32 *skip_chain,
@@ -148,11 +170,14 @@ int netlbl_domhsh_walk(u32 *skip_bkt,
 		     void *cb_arg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_IPV6)
 struct netlbl_domaddr6_map *netlbl_domhsh_getentry_af6(const char *domain,
 						  const struct in6_addr *addr);
 #endif /* IPv6 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

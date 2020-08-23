@@ -23,6 +23,10 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Jean-Francois Dagenais <dagenaisj@sonatest.com>");
 MODULE_DESCRIPTION("w1 family 29 driver for DS2408 8 Pin IO");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("w1-family-" __stringify(W1_FAMILY_DS2408));
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("w1-family-" __stringify(W1_FAMILY_DS2408));
 >>>>>>> v3.18
@@ -76,10 +80,16 @@ static int _read_reg(struct w1_slave *sl, u8 address, unsigned char* buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f29_read_state(
 	struct file *filp, struct kobject *kobj,
 	struct bin_attribute *bin_attr,
 	char *buf, loff_t off, size_t count)
+=======
+static ssize_t state_read(struct file *filp, struct kobject *kobj,
+			  struct bin_attribute *bin_attr, char *buf, loff_t off,
+			  size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t state_read(struct file *filp, struct kobject *kobj,
 			  struct bin_attribute *bin_attr, char *buf, loff_t off,
@@ -95,10 +105,16 @@ static ssize_t state_read(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f29_read_output(
 	struct file *filp, struct kobject *kobj,
 	struct bin_attribute *bin_attr,
 	char *buf, loff_t off, size_t count)
+=======
+static ssize_t output_read(struct file *filp, struct kobject *kobj,
+			   struct bin_attribute *bin_attr, char *buf,
+			   loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t output_read(struct file *filp, struct kobject *kobj,
 			   struct bin_attribute *bin_attr, char *buf,
@@ -115,10 +131,16 @@ static ssize_t output_read(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f29_read_activity(
 	struct file *filp, struct kobject *kobj,
 	struct bin_attribute *bin_attr,
 	char *buf, loff_t off, size_t count)
+=======
+static ssize_t activity_read(struct file *filp, struct kobject *kobj,
+			     struct bin_attribute *bin_attr, char *buf,
+			     loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t activity_read(struct file *filp, struct kobject *kobj,
 			     struct bin_attribute *bin_attr, char *buf,
@@ -135,10 +157,16 @@ static ssize_t activity_read(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f29_read_cond_search_mask(
 	struct file *filp, struct kobject *kobj,
 	struct bin_attribute *bin_attr,
 	char *buf, loff_t off, size_t count)
+=======
+static ssize_t cond_search_mask_read(struct file *filp, struct kobject *kobj,
+				     struct bin_attribute *bin_attr, char *buf,
+				     loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t cond_search_mask_read(struct file *filp, struct kobject *kobj,
 				     struct bin_attribute *bin_attr, char *buf,
@@ -155,15 +183,21 @@ static ssize_t cond_search_mask_read(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f29_read_cond_search_polarity(
 	struct file *filp, struct kobject *kobj,
 	struct bin_attribute *bin_attr,
 	char *buf, loff_t off, size_t count)
 =======
+=======
+>>>>>>> v3.18
 static ssize_t cond_search_polarity_read(struct file *filp,
 					 struct kobject *kobj,
 					 struct bin_attribute *bin_attr,
 					 char *buf, loff_t off, size_t count)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (count != 1 || off != 0)
@@ -173,10 +207,16 @@ static ssize_t cond_search_polarity_read(struct file *filp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f29_read_status_control(
 	struct file *filp, struct kobject *kobj,
 	struct bin_attribute *bin_attr,
 	char *buf, loff_t off, size_t count)
+=======
+static ssize_t status_control_read(struct file *filp, struct kobject *kobj,
+				   struct bin_attribute *bin_attr, char *buf,
+				   loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t status_control_read(struct file *filp, struct kobject *kobj,
 				   struct bin_attribute *bin_attr, char *buf,
@@ -190,6 +230,7 @@ static ssize_t status_control_read(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
@@ -197,6 +238,11 @@ static ssize_t w1_f29_write_output(
 	struct file *filp, struct kobject *kobj,
 	struct bin_attribute *bin_attr,
 	char *buf, loff_t off, size_t count)
+=======
+static ssize_t output_write(struct file *filp, struct kobject *kobj,
+			    struct bin_attribute *bin_attr, char *buf,
+			    loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t output_write(struct file *filp, struct kobject *kobj,
 			    struct bin_attribute *bin_attr, char *buf,
@@ -271,10 +317,16 @@ error:
  * Writing to the activity file resets the activity latches.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f29_write_activity(
 	struct file *filp, struct kobject *kobj,
 	struct bin_attribute *bin_attr,
 	char *buf, loff_t off, size_t count)
+=======
+static ssize_t activity_write(struct file *filp, struct kobject *kobj,
+			      struct bin_attribute *bin_attr, char *buf,
+			      loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t activity_write(struct file *filp, struct kobject *kobj,
 			      struct bin_attribute *bin_attr, char *buf,
@@ -308,6 +360,7 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f29_write_status_control(
 	struct file *filp,
 	struct kobject *kobj,
@@ -315,6 +368,11 @@ static ssize_t w1_f29_write_status_control(
 	char *buf,
 	loff_t off,
 	size_t count)
+=======
+static ssize_t status_control_write(struct file *filp, struct kobject *kobj,
+				    struct bin_attribute *bin_attr, char *buf,
+				    loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t status_control_write(struct file *filp, struct kobject *kobj,
 				    struct bin_attribute *bin_attr, char *buf,
@@ -360,6 +418,7 @@ error:
 	return -EIO;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -445,6 +504,8 @@ static struct w1_family_ops w1_f29_fops = {
 	.add_slave      = w1_f29_add_slave,
 	.remove_slave   = w1_f29_remove_slave,
 =======
+=======
+>>>>>>> v3.18
 /*
  * This is a special sequence we must do to ensure the P0 output is not stuck
  * in test mode. This is described in rev 2 of the ds2408's datasheet
@@ -502,6 +563,9 @@ static const struct attribute_group *w1_f29_groups[] = {
 static struct w1_family_ops w1_f29_fops = {
 	.add_slave      = w1_f29_disable_test_mode,
 	.groups		= w1_f29_groups,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

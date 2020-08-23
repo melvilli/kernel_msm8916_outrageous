@@ -71,7 +71,11 @@ Remote Controller chapter.</contrib>
 	<affiliation>
 	  <address>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <email>mchehab@redhat.com</email>
+=======
+	    <email>m.chehab@samsung.com</email>
+>>>>>>> v3.18
 =======
 	    <email>m.chehab@samsung.com</email>
 >>>>>>> v3.18
@@ -112,7 +116,10 @@ Remote Controller chapter.</contrib>
 	</affiliation>
       </author>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
       <author>
 	<firstname>Antti</firstname>
 	<surname>Palosaari</surname>
@@ -123,6 +130,9 @@ Remote Controller chapter.</contrib>
 	  </address>
 	</affiliation>
       </author>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     </authorgroup>
 
@@ -143,6 +153,10 @@ Remote Controller chapter.</contrib>
       <year>2012</year>
       <year>2013</year>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      <year>2014</year>
+>>>>>>> v3.18
 =======
       <year>2014</year>
 >>>>>>> v3.18
@@ -163,7 +177,10 @@ applications. -->
 
       <revision>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	<revnumber>3.17</revnumber>
 	<date>2014-08-04</date>
 	<authorinitials>lp, hv</authorinitials>
@@ -199,6 +216,9 @@ and VIDIOC_QUERY_EXT_CTRL.
       </revision>
 
       <revision>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	<revnumber>3.10</revnumber>
 	<date>2013-03-25</date>
@@ -553,7 +573,11 @@ and discussions on the V4L mailing list.</revremark>
 
 <title>Video for Linux Two API Specification</title>
 <<<<<<< HEAD
+<<<<<<< HEAD
  <subtitle>Revision 3.10</subtitle>
+=======
+ <subtitle>Revision 3.17</subtitle>
+>>>>>>> v3.18
 =======
  <subtitle>Revision 3.17</subtitle>
 >>>>>>> v3.18
@@ -585,6 +609,10 @@ and discussions on the V4L mailing list.</revremark>
     <section id="radio"> &sub-dev-radio; </section>
     <section id="rds"> &sub-dev-rds; </section>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <section id="sdr"> &sub-dev-sdr; </section>
+>>>>>>> v3.18
 =======
     <section id="sdr"> &sub-dev-sdr; </section>
 >>>>>>> v3.18
@@ -615,7 +643,10 @@ and discussions on the V4L mailing list.</revremark>
     &sub-create-bufs;
     &sub-cropcap;
 <<<<<<< HEAD
+<<<<<<< HEAD
     &sub-dbg-g-chip-ident;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     &sub-dbg-g-chip-info;
@@ -641,6 +672,10 @@ and discussions on the V4L mailing list.</revremark>
     &sub-g-ctrl;
     &sub-g-dv-timings;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    &sub-g-edid;
+>>>>>>> v3.18
 =======
     &sub-g-edid;
 >>>>>>> v3.18
@@ -676,7 +711,10 @@ and discussions on the V4L mailing list.</revremark>
     &sub-subdev-enum-mbus-code;
     &sub-subdev-g-crop;
 <<<<<<< HEAD
+<<<<<<< HEAD
     &sub-subdev-g-edid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     &sub-subdev-g-fmt;

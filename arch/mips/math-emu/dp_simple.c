@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -21,6 +24,7 @@
  *
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
@@ -45,19 +49,28 @@ ieee754dp ieee754dp_copysign(ieee754dp x, ieee754dp y)
 
 ieee754dp ieee754dp_neg(ieee754dp x)
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
 #include "ieee754dp.h"
 
 union ieee754dp ieee754dp_neg(union ieee754dp x)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	COMPXDP;
 
 	EXPLODEXDP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLEARCX;
+=======
+	ieee754_clearcx();
+>>>>>>> v3.18
 =======
 	ieee754_clearcx();
 >>>>>>> v3.18
@@ -72,15 +85,21 @@ union ieee754dp ieee754dp_neg(union ieee754dp x)
 
 	if (xc == IEEE754_CLASS_SNAN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ieee754dp y = ieee754dp_indef();
 		SETCX(IEEE754_INVALID_OPERATION);
 		DPSIGN(y) = DPSIGN(x);
 		return ieee754dp_nanxcpt(y, "neg");
 =======
+=======
+>>>>>>> v3.18
 		union ieee754dp y = ieee754dp_indef();
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		DPSIGN(y) = DPSIGN(x);
 		return ieee754dp_nanxcpt(y);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -88,8 +107,12 @@ union ieee754dp ieee754dp_neg(union ieee754dp x)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ieee754dp ieee754dp_abs(ieee754dp x)
+=======
+union ieee754dp ieee754dp_abs(union ieee754dp x)
+>>>>>>> v3.18
 =======
 union ieee754dp ieee754dp_abs(union ieee754dp x)
 >>>>>>> v3.18
@@ -98,7 +121,11 @@ union ieee754dp ieee754dp_abs(union ieee754dp x)
 
 	EXPLODEXDP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLEARCX;
+=======
+	ieee754_clearcx();
+>>>>>>> v3.18
 =======
 	ieee754_clearcx();
 >>>>>>> v3.18
@@ -109,8 +136,13 @@ union ieee754dp ieee754dp_abs(union ieee754dp x)
 
 	if (xc == IEEE754_CLASS_SNAN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754dp_nanxcpt(ieee754dp_indef(), "abs");
+=======
+		ieee754_setcx(IEEE754_INVALID_OPERATION);
+		return ieee754dp_nanxcpt(ieee754dp_indef());
+>>>>>>> v3.18
 =======
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754dp_nanxcpt(ieee754dp_indef());

@@ -28,6 +28,7 @@
 #include <net/netlink.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tcf_hash_destroy(struct tcf_common *p, struct tcf_hashinfo *hinfo)
 {
 	unsigned int h = tcf_hash(p->tcfc_index, hinfo->hmask);
@@ -56,6 +57,8 @@ int tcf_hash_release(struct tcf_common *p, int bind,
 		     struct tcf_hashinfo *hinfo)
 {
 =======
+=======
+>>>>>>> v3.18
 void tcf_hash_destroy(struct tc_action *a)
 {
 	struct tcf_common *p = a->priv;
@@ -77,6 +80,9 @@ EXPORT_SYMBOL(tcf_hash_destroy);
 int tcf_hash_release(struct tc_action *a, int bind)
 {
 	struct tcf_common *p = a->priv;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret = 0;
 
@@ -84,11 +90,14 @@ int tcf_hash_release(struct tc_action *a, int bind)
 		if (bind)
 			p->tcfc_bindcnt--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		p->tcfc_refcnt--;
 		if (p->tcfc_bindcnt <= 0 && p->tcfc_refcnt <= 0) {
 			tcf_hash_destroy(p, hinfo);
 =======
+=======
+>>>>>>> v3.18
 		else if (p->tcfc_bindcnt > 0)
 			return -EPERM;
 
@@ -97,6 +106,9 @@ int tcf_hash_release(struct tc_action *a, int bind)
 			if (a->ops->cleanup)
 				a->ops->cleanup(a, bind);
 			tcf_hash_destroy(a);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = 1;
 		}
@@ -107,20 +119,30 @@ EXPORT_SYMBOL(tcf_hash_release);
 
 static int tcf_dump_walker(struct sk_buff *skb, struct netlink_callback *cb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   struct tc_action *a, struct tcf_hashinfo *hinfo)
 {
 =======
+=======
+>>>>>>> v3.18
 			   struct tc_action *a)
 {
 	struct tcf_hashinfo *hinfo = a->ops->hinfo;
 	struct hlist_head *head;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct tcf_common *p;
 	int err = 0, index = -1, i = 0, s_i = 0, n_i = 0;
 	struct nlattr *nest;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_lock_bh(hinfo->lock);
+=======
+	spin_lock_bh(&hinfo->lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&hinfo->lock);
 >>>>>>> v3.18
@@ -129,9 +151,15 @@ static int tcf_dump_walker(struct sk_buff *skb, struct netlink_callback *cb,
 
 	for (i = 0; i < (hinfo->hmask + 1); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p = hinfo->htab[tcf_hash(i, hinfo->hmask)];
 
 		for (; p; p = p->tcfc_next) {
+=======
+		head = &hinfo->htab[tcf_hash(i, hinfo->hmask)];
+
+		hlist_for_each_entry_rcu(p, head, tcfc_head) {
+>>>>>>> v3.18
 =======
 		head = &hinfo->htab[tcf_hash(i, hinfo->hmask)];
 
@@ -160,7 +188,11 @@ static int tcf_dump_walker(struct sk_buff *skb, struct netlink_callback *cb,
 	}
 done:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_unlock_bh(hinfo->lock);
+=======
+	spin_unlock_bh(&hinfo->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&hinfo->lock);
 >>>>>>> v3.18
@@ -174,6 +206,7 @@ nla_put_failure:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tcf_del_walker(struct sk_buff *skb, struct tc_action *a,
 			  struct tcf_hashinfo *hinfo)
 {
@@ -181,6 +214,8 @@ static int tcf_del_walker(struct sk_buff *skb, struct tc_action *a,
 	struct nlattr *nest;
 	int i = 0, n_i = 0;
 =======
+=======
+>>>>>>> v3.18
 static int tcf_del_walker(struct sk_buff *skb, struct tc_action *a)
 {
 	struct tcf_hashinfo *hinfo = a->ops->hinfo;
@@ -190,6 +225,9 @@ static int tcf_del_walker(struct sk_buff *skb, struct tc_action *a)
 	struct nlattr *nest;
 	int i = 0, n_i = 0;
 	int ret = -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	nest = nla_nest_start(skb, a->order);
@@ -198,6 +236,7 @@ static int tcf_del_walker(struct sk_buff *skb, struct tc_action *a)
 	if (nla_put_string(skb, TCA_KIND, a->ops->kind))
 		goto nla_put_failure;
 	for (i = 0; i < (hinfo->hmask + 1); i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		p = hinfo->htab[tcf_hash(i, hinfo->hmask)];
 
@@ -208,6 +247,8 @@ static int tcf_del_walker(struct sk_buff *skb, struct tc_action *a)
 			n_i++;
 			p = s_p;
 =======
+=======
+>>>>>>> v3.18
 		head = &hinfo->htab[tcf_hash(i, hinfo->hmask)];
 		hlist_for_each_entry_safe(p, n, head, tcfc_head) {
 			a->priv = p;
@@ -217,6 +258,9 @@ static int tcf_del_walker(struct sk_buff *skb, struct tc_action *a)
 				n_i++;
 			} else if (ret < 0)
 				goto nla_put_failure;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -227,6 +271,7 @@ static int tcf_del_walker(struct sk_buff *skb, struct tc_action *a)
 	return n_i;
 nla_put_failure:
 	nla_nest_cancel(skb, nest);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return -EINVAL;
 }
@@ -241,6 +286,8 @@ int tcf_generic_walker(struct sk_buff *skb, struct netlink_callback *cb,
 	} else if (type == RTM_GETACTION) {
 		return tcf_dump_walker(skb, cb, a, hinfo);
 =======
+=======
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -251,12 +298,16 @@ static int tcf_generic_walker(struct sk_buff *skb, struct netlink_callback *cb,
 		return tcf_del_walker(skb, a);
 	} else if (type == RTM_GETACTION) {
 		return tcf_dump_walker(skb, cb, a);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		WARN(1, "tcf_generic_walker: unknown action %d\n", type);
 		return -EINVAL;
 	}
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL(tcf_generic_walker);
 
@@ -280,6 +331,8 @@ u32 tcf_hash_new_index(u32 *idx_gen, struct tcf_hashinfo *hinfo)
 {
 	u32 val = *idx_gen;
 =======
+=======
+>>>>>>> v3.18
 
 static struct tcf_common *tcf_hash_lookup(u32 index, struct tcf_hashinfo *hinfo)
 {
@@ -299,6 +352,9 @@ static struct tcf_common *tcf_hash_lookup(u32 index, struct tcf_hashinfo *hinfo)
 u32 tcf_hash_new_index(struct tcf_hashinfo *hinfo)
 {
 	u32 val = hinfo->index;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	do {
@@ -307,7 +363,12 @@ u32 tcf_hash_new_index(struct tcf_hashinfo *hinfo)
 	} while (tcf_hash_lookup(val, hinfo));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (*idx_gen = val);
+=======
+	hinfo->index = val;
+	return val;
+>>>>>>> v3.18
 =======
 	hinfo->index = val;
 	return val;
@@ -329,9 +390,15 @@ int tcf_hash_search(struct tc_action *a, u32 index)
 EXPORT_SYMBOL(tcf_hash_search);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct tcf_common *tcf_hash_check(u32 index, struct tc_action *a, int bind,
 				  struct tcf_hashinfo *hinfo)
 {
+=======
+int tcf_hash_check(u32 index, struct tc_action *a, int bind)
+{
+	struct tcf_hashinfo *hinfo = a->ops->hinfo;
+>>>>>>> v3.18
 =======
 int tcf_hash_check(u32 index, struct tc_action *a, int bind)
 {
@@ -343,6 +410,7 @@ int tcf_hash_check(u32 index, struct tc_action *a, int bind)
 			p->tcfc_bindcnt++;
 		p->tcfc_refcnt++;
 		a->priv = p;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 	return p;
@@ -358,6 +426,8 @@ struct tcf_common *tcf_hash_create(u32 index, struct nlattr *est,
 	if (unlikely(!p))
 		return ERR_PTR(-ENOMEM);
 =======
+=======
+>>>>>>> v3.18
 		return 1;
 	}
 	return 0;
@@ -382,12 +452,16 @@ int tcf_hash_create(u32 index, struct nlattr *est, struct tc_action *a,
 
 	if (unlikely(!p))
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	p->tcfc_refcnt = 1;
 	if (bind)
 		p->tcfc_bindcnt = 1;
 
 	spin_lock_init(&p->tcfc_lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	p->tcfc_index = index ? index : tcf_hash_new_index(idx_gen, hinfo);
 	p->tcfc_tm.install = jiffies;
@@ -399,6 +473,8 @@ int tcf_hash_create(u32 index, struct nlattr *est, struct tc_action *a,
 			kfree(p);
 			return ERR_PTR(err);
 =======
+=======
+>>>>>>> v3.18
 	INIT_HLIST_NODE(&p->tcfc_head);
 	p->tcfc_index = index ? index : tcf_hash_new_index(hinfo);
 	p->tcfc_tm.install = jiffies;
@@ -410,11 +486,15 @@ int tcf_hash_create(u32 index, struct nlattr *est, struct tc_action *a,
 		if (err) {
 			kfree(p);
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	a->priv = (void *) p;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return p;
 }
@@ -448,6 +528,8 @@ int tcf_register_action(struct tc_action_ops *act)
 	act->next = NULL;
 	*ap = act;
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 EXPORT_SYMBOL(tcf_hash_create);
@@ -501,6 +583,9 @@ int tcf_register_action(struct tc_action_ops *act, unsigned int mask)
 		}
 	}
 	list_add_tail(&act->head, &act_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	write_unlock(&act_mod_lock);
 	return 0;
@@ -509,6 +594,7 @@ EXPORT_SYMBOL(tcf_register_action);
 
 int tcf_unregister_action(struct tc_action_ops *act)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tc_action_ops *a, **ap;
 	int err = -ENOENT;
@@ -522,6 +608,8 @@ int tcf_unregister_action(struct tc_action_ops *act)
 		a->next = NULL;
 		err = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct tc_action_ops *a;
 	int err = -ENOENT;
 
@@ -534,6 +622,9 @@ int tcf_unregister_action(struct tc_action_ops *act)
 			err = 0;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	write_unlock(&act_mod_lock);
@@ -545,6 +636,7 @@ EXPORT_SYMBOL(tcf_unregister_action);
 static struct tc_action_ops *tc_lookup_action_n(char *kind)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc_action_ops *a = NULL;
 
 	if (kind) {
@@ -556,6 +648,8 @@ static struct tc_action_ops *tc_lookup_action_n(char *kind)
 					return NULL;
 				}
 =======
+=======
+>>>>>>> v3.18
 	struct tc_action_ops *a, *res = NULL;
 
 	if (kind) {
@@ -564,6 +658,9 @@ static struct tc_action_ops *tc_lookup_action_n(char *kind)
 			if (strcmp(kind, a->kind) == 0) {
 				if (try_module_get(a->owner))
 					res = a;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			}
@@ -571,7 +668,11 @@ static struct tc_action_ops *tc_lookup_action_n(char *kind)
 		read_unlock(&act_mod_lock);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return a;
+=======
+	return res;
+>>>>>>> v3.18
 =======
 	return res;
 >>>>>>> v3.18
@@ -581,6 +682,7 @@ static struct tc_action_ops *tc_lookup_action_n(char *kind)
 static struct tc_action_ops *tc_lookup_action(struct nlattr *kind)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc_action_ops *a = NULL;
 
 	if (kind) {
@@ -592,6 +694,8 @@ static struct tc_action_ops *tc_lookup_action(struct nlattr *kind)
 					return NULL;
 				}
 =======
+=======
+>>>>>>> v3.18
 	struct tc_action_ops *a, *res = NULL;
 
 	if (kind) {
@@ -600,12 +704,16 @@ static struct tc_action_ops *tc_lookup_action(struct nlattr *kind)
 			if (nla_strcmp(kind, a->kind) == 0) {
 				if (try_module_get(a->owner))
 					res = a;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			}
 		}
 		read_unlock(&act_mod_lock);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return a;
 }
@@ -635,10 +743,15 @@ static struct tc_action_ops *tc_lookup_action_id(u32 type)
 
 int tcf_action_exec(struct sk_buff *skb, const struct tc_action *act,
 =======
+=======
+>>>>>>> v3.18
 	return res;
 }
 
 int tcf_action_exec(struct sk_buff *skb, const struct list_head *actions,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    struct tcf_result *res)
 {
@@ -650,6 +763,7 @@ int tcf_action_exec(struct sk_buff *skb, const struct list_head *actions,
 		ret = TC_ACT_OK;
 		goto exec_done;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while ((a = act) != NULL) {
 repeat:
@@ -667,6 +781,8 @@ repeat:
 		}
 		act = a->next;
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry(a, actions, list) {
 repeat:
 		ret = a->ops->act(skb, a, res);
@@ -679,6 +795,9 @@ repeat:
 			goto repeat;	/* we need a ttl - JHS */
 		if (ret != TC_ACT_PIPE)
 			goto exec_done;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 exec_done:
@@ -686,6 +805,7 @@ exec_done:
 }
 EXPORT_SYMBOL(tcf_action_exec);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void tcf_action_destroy(struct tc_action *act, int bind)
 {
@@ -705,6 +825,8 @@ void tcf_action_destroy(struct tc_action *act, int bind)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 int tcf_action_destroy(struct list_head *actions, int bind)
 {
 	struct tc_action *a, *tmp;
@@ -720,6 +842,9 @@ int tcf_action_destroy(struct list_head *actions, int bind)
 		kfree(a);
 	}
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -727,10 +852,13 @@ int
 tcf_action_dump_old(struct sk_buff *skb, struct tc_action *a, int bind, int ref)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = -EINVAL;
 
 	if (a->ops == NULL || a->ops->dump == NULL)
 		return err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return a->ops->dump(skb, a, bind, ref);
@@ -744,9 +872,12 @@ tcf_action_dump_1(struct sk_buff *skb, struct tc_action *a, int bind, int ref)
 	struct nlattr *nest;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (a->ops == NULL || a->ops->dump == NULL)
 		return err;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (nla_put_string(skb, TCA_KIND, a->ops->kind))
@@ -770,7 +901,11 @@ EXPORT_SYMBOL(tcf_action_dump_1);
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 tcf_action_dump(struct sk_buff *skb, struct tc_action *act, int bind, int ref)
+=======
+tcf_action_dump(struct sk_buff *skb, struct list_head *actions, int bind, int ref)
+>>>>>>> v3.18
 =======
 tcf_action_dump(struct sk_buff *skb, struct list_head *actions, int bind, int ref)
 >>>>>>> v3.18
@@ -780,8 +915,12 @@ tcf_action_dump(struct sk_buff *skb, struct list_head *actions, int bind, int re
 	struct nlattr *nest;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((a = act) != NULL) {
 		act = a->next;
+=======
+	list_for_each_entry(a, actions, list) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(a, actions, list) {
 >>>>>>> v3.18
@@ -860,6 +999,11 @@ struct tc_action *tcf_action_init_1(struct net *net, struct nlattr *nla,
 		goto err_mod;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	a->ops = a_o;
+	INIT_LIST_HEAD(&a->list);
+>>>>>>> v3.18
 =======
 	a->ops = a_o;
 	INIT_LIST_HEAD(&a->list);
@@ -879,7 +1023,10 @@ struct tc_action *tcf_action_init_1(struct net *net, struct nlattr *nla,
 	if (err != ACT_P_CREATED)
 		module_put(a_o->owner);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	a->ops = a_o;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -894,6 +1041,7 @@ err_out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct tc_action *tcf_action_init(struct net *net, struct nlattr *nla,
 				  struct nlattr *est, char *name, int ovr,
 				  int bind)
@@ -901,18 +1049,24 @@ struct tc_action *tcf_action_init(struct net *net, struct nlattr *nla,
 	struct nlattr *tb[TCA_ACT_MAX_PRIO + 1];
 	struct tc_action *head = NULL, *act, *act_prev = NULL;
 =======
+=======
+>>>>>>> v3.18
 int tcf_action_init(struct net *net, struct nlattr *nla,
 				  struct nlattr *est, char *name, int ovr,
 				  int bind, struct list_head *actions)
 {
 	struct nlattr *tb[TCA_ACT_MAX_PRIO + 1];
 	struct tc_action *act;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err;
 	int i;
 
 	err = nla_parse_nested(tb, TCA_ACT_MAX_PRIO, nla, NULL);
 	if (err < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return ERR_PTR(err);
 
@@ -935,6 +1089,8 @@ err:
 		tcf_action_destroy(head, bind);
 	return act;
 =======
+=======
+>>>>>>> v3.18
 		return err;
 
 	for (i = 1; i <= TCA_ACT_MAX_PRIO && tb[i]; i++) {
@@ -951,6 +1107,9 @@ err:
 err:
 	tcf_action_destroy(actions, bind);
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -960,9 +1119,15 @@ int tcf_action_copy_stats(struct sk_buff *skb, struct tc_action *a,
 	int err = 0;
 	struct gnet_dump d;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcf_act_hdr *h = a->priv;
 
 	if (h == NULL)
+=======
+	struct tcf_common *p = a->priv;
+
+	if (p == NULL)
+>>>>>>> v3.18
 =======
 	struct tcf_common *p = a->priv;
 
@@ -977,7 +1142,11 @@ int tcf_action_copy_stats(struct sk_buff *skb, struct tc_action *a,
 		if (a->type == TCA_OLD_COMPAT)
 			err = gnet_stats_start_copy_compat(skb, 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				TCA_STATS, TCA_XSTATS, &h->tcf_lock, &d);
+=======
+				TCA_STATS, TCA_XSTATS, &p->tcfc_lock, &d);
+>>>>>>> v3.18
 =======
 				TCA_STATS, TCA_XSTATS, &p->tcfc_lock, &d);
 >>>>>>> v3.18
@@ -986,7 +1155,11 @@ int tcf_action_copy_stats(struct sk_buff *skb, struct tc_action *a,
 	} else
 		err = gnet_stats_start_copy(skb, TCA_ACT_STATS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    &h->tcf_lock, &d);
+=======
+					    &p->tcfc_lock, &d);
+>>>>>>> v3.18
 =======
 					    &p->tcfc_lock, &d);
 >>>>>>> v3.18
@@ -994,6 +1167,7 @@ int tcf_action_copy_stats(struct sk_buff *skb, struct tc_action *a,
 	if (err < 0)
 		goto errout;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (a->ops != NULL && a->ops->get_stats != NULL)
 		if (a->ops->get_stats(skb, a) < 0)
@@ -1004,12 +1178,17 @@ int tcf_action_copy_stats(struct sk_buff *skb, struct tc_action *a,
 				     &h->tcf_rate_est) < 0 ||
 	    gnet_stats_copy_queue(&d, &h->tcf_qstats) < 0)
 =======
+=======
+>>>>>>> v3.18
 	if (gnet_stats_copy_basic(&d, NULL, &p->tcfc_bstats) < 0 ||
 	    gnet_stats_copy_rate_est(&d, &p->tcfc_bstats,
 				     &p->tcfc_rate_est) < 0 ||
 	    gnet_stats_copy_queue(&d, NULL,
 				  &p->tcfc_qstats,
 				  p->tcfc_qstats.qlen) < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto errout;
 
@@ -1024,7 +1203,11 @@ errout:
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 tca_get_fill(struct sk_buff *skb, struct tc_action *a, u32 portid, u32 seq,
+=======
+tca_get_fill(struct sk_buff *skb, struct list_head *actions, u32 portid, u32 seq,
+>>>>>>> v3.18
 =======
 tca_get_fill(struct sk_buff *skb, struct list_head *actions, u32 portid, u32 seq,
 >>>>>>> v3.18
@@ -1048,7 +1231,11 @@ tca_get_fill(struct sk_buff *skb, struct list_head *actions, u32 portid, u32 seq
 		goto out_nlmsg_trim;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tcf_action_dump(skb, a, bind, ref) < 0)
+=======
+	if (tcf_action_dump(skb, actions, bind, ref) < 0)
+>>>>>>> v3.18
 =======
 	if (tcf_action_dump(skb, actions, bind, ref) < 0)
 >>>>>>> v3.18
@@ -1067,7 +1254,11 @@ out_nlmsg_trim:
 static int
 act_get_notify(struct net *net, u32 portid, struct nlmsghdr *n,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       struct tc_action *a, int event)
+=======
+	       struct list_head *actions, int event)
+>>>>>>> v3.18
 =======
 	       struct list_head *actions, int event)
 >>>>>>> v3.18
@@ -1078,7 +1269,11 @@ act_get_notify(struct net *net, u32 portid, struct nlmsghdr *n,
 	if (!skb)
 		return -ENOBUFS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tca_get_fill(skb, a, portid, n->nlmsg_seq, 0, event, 0, 0) <= 0) {
+=======
+	if (tca_get_fill(skb, actions, portid, n->nlmsg_seq, 0, event, 0, 0) <= 0) {
+>>>>>>> v3.18
 =======
 	if (tca_get_fill(skb, actions, portid, n->nlmsg_seq, 0, event, 0, 0) <= 0) {
 >>>>>>> v3.18
@@ -1090,7 +1285,10 @@ act_get_notify(struct net *net, u32 portid, struct nlmsghdr *n,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct tc_action *create_a(int i)
 {
 	struct tc_action *act;
@@ -1105,6 +1303,9 @@ static struct tc_action *create_a(int i)
 	return act;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct tc_action *
 tcf_action_get_1(struct nlattr *nla, struct nlmsghdr *n, u32 portid)
@@ -1126,7 +1327,11 @@ tcf_action_get_1(struct nlattr *nla, struct nlmsghdr *n, u32 portid)
 
 	err = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	a = kzalloc(sizeof(struct tc_action), GFP_KERNEL);
+=======
+	a = create_a(0);
+>>>>>>> v3.18
 =======
 	a = create_a(0);
 >>>>>>> v3.18
@@ -1136,10 +1341,15 @@ tcf_action_get_1(struct nlattr *nla, struct nlmsghdr *n, u32 portid)
 	err = -EINVAL;
 	a->ops = tc_lookup_action(tb[TCA_ACT_KIND]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (a->ops == NULL)
 		goto err_free;
 	if (a->ops->lookup == NULL)
 		goto err_mod;
+=======
+	if (a->ops == NULL) /* could happen in batch of actions */
+		goto err_free;
+>>>>>>> v3.18
 =======
 	if (a->ops == NULL) /* could happen in batch of actions */
 		goto err_free;
@@ -1160,6 +1370,7 @@ err_out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cleanup_a(struct tc_action *act)
 {
 	struct tc_action *a;
@@ -1167,17 +1378,23 @@ static void cleanup_a(struct tc_action *act)
 	for (a = act; a; a = act) {
 		act = a->next;
 =======
+=======
+>>>>>>> v3.18
 static void cleanup_a(struct list_head *actions)
 {
 	struct tc_action *a, *tmp;
 
 	list_for_each_entry_safe(a, tmp, actions, list) {
 		list_del(&a->list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree(a);
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct tc_action *create_a(int i)
 {
@@ -1194,6 +1411,8 @@ static struct tc_action *create_a(int i)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int tca_action_flush(struct net *net, struct nlattr *nla,
 			    struct nlmsghdr *n, u32 portid)
 {
@@ -1205,6 +1424,7 @@ static int tca_action_flush(struct net *net, struct nlattr *nla,
 	struct nlattr *nest;
 	struct nlattr *tb[TCA_ACT_MAX + 1];
 	struct nlattr *kind;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tc_action *a = create_a(0);
 	int err = -ENOMEM;
@@ -1219,12 +1439,17 @@ static int tca_action_flush(struct net *net, struct nlattr *nla,
 		pr_debug("tca_action_flush: failed skb alloc\n");
 		kfree(a);
 =======
+=======
+>>>>>>> v3.18
 	struct tc_action a;
 	int err = -ENOMEM;
 
 	skb = alloc_skb(NLMSG_GOODSIZE, GFP_KERNEL);
 	if (!skb) {
 		pr_debug("tca_action_flush: failed skb alloc\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return err;
 	}
@@ -1238,13 +1463,19 @@ static int tca_action_flush(struct net *net, struct nlattr *nla,
 	err = -EINVAL;
 	kind = tb[TCA_ACT_KIND];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	a->ops = tc_lookup_action(kind);
 	if (a->ops == NULL)
 =======
+=======
+>>>>>>> v3.18
 	memset(&a, 0, sizeof(struct tc_action));
 	INIT_LIST_HEAD(&a.list);
 	a.ops = tc_lookup_action(kind);
 	if (a.ops == NULL) /*some idjot trying to flush unknown action */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err_out;
 
@@ -1261,15 +1492,21 @@ static int tca_action_flush(struct net *net, struct nlattr *nla,
 		goto out_module_put;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = a->ops->walk(skb, &dcb, RTM_DELACTION, a);
 	if (err <= 0)
 		goto out_module_put;
 =======
+=======
+>>>>>>> v3.18
 	err = a.ops->walk(skb, &dcb, RTM_DELACTION, &a);
 	if (err < 0)
 		goto out_module_put;
 	if (err == 0)
 		goto noflush_out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	nla_nest_end(skb, nest);
@@ -1277,8 +1514,12 @@ static int tca_action_flush(struct net *net, struct nlattr *nla,
 	nlh->nlmsg_len = skb_tail_pointer(skb) - b;
 	nlh->nlmsg_flags |= NLM_F_ROOT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	module_put(a->ops->owner);
 	kfree(a);
+=======
+	module_put(a.ops->owner);
+>>>>>>> v3.18
 =======
 	module_put(a.ops->owner);
 >>>>>>> v3.18
@@ -1291,22 +1532,31 @@ static int tca_action_flush(struct net *net, struct nlattr *nla,
 
 out_module_put:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	module_put(a->ops->owner);
 err_out:
 	kfree_skb(skb);
 	kfree(a);
 =======
+=======
+>>>>>>> v3.18
 	module_put(a.ops->owner);
 err_out:
 noflush_out:
 	kfree_skb(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 tcf_del_notify(struct net *net, struct nlmsghdr *n, struct list_head *actions,
 	       u32 portid)
 {
@@ -1338,6 +1588,9 @@ tcf_del_notify(struct net *net, struct nlmsghdr *n, struct list_head *actions,
 }
 
 static int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 tca_action_gd(struct net *net, struct nlattr *nla, struct nlmsghdr *n,
 	      u32 portid, int event)
@@ -1345,7 +1598,12 @@ tca_action_gd(struct net *net, struct nlattr *nla, struct nlmsghdr *n,
 	int i, ret;
 	struct nlattr *tb[TCA_ACT_MAX_PRIO + 1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tc_action *head = NULL, *act, *act_prev = NULL;
+=======
+	struct tc_action *act;
+	LIST_HEAD(actions);
+>>>>>>> v3.18
 =======
 	struct tc_action *act;
 	LIST_HEAD(actions);
@@ -1369,6 +1627,7 @@ tca_action_gd(struct net *net, struct nlattr *nla, struct nlmsghdr *n,
 			goto err;
 		}
 		act->order = i;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (head == NULL)
@@ -1418,6 +1677,8 @@ static int tcf_add_notify(struct net *net, struct tc_action *a,
 	struct nlattr *nest;
 	unsigned char *b;
 =======
+=======
+>>>>>>> v3.18
 		list_add_tail(&act->list, &actions);
 	}
 
@@ -1439,6 +1700,9 @@ tcf_add_notify(struct net *net, struct nlmsghdr *n, struct list_head *actions,
 	       u32 portid)
 {
 	struct sk_buff *skb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err = 0;
 
@@ -1446,6 +1710,7 @@ tcf_add_notify(struct net *net, struct nlmsghdr *n, struct list_head *actions,
 	if (!skb)
 		return -ENOBUFS;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	b = skb_tail_pointer(skb);
 
@@ -1481,6 +1746,8 @@ out_kfree_skb:
 
 
 =======
+=======
+>>>>>>> v3.18
 	if (tca_get_fill(skb, actions, portid, n->nlmsg_seq, n->nlmsg_flags,
 			 RTM_NEWACTION, 0, 0) <= 0) {
 		kfree_skb(skb);
@@ -1494,12 +1761,16 @@ out_kfree_skb:
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 tcf_action_add(struct net *net, struct nlattr *nla, struct nlmsghdr *n,
 	       u32 portid, int ovr)
 {
 	int ret = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tc_action *act;
 	struct tc_action *a;
@@ -1513,22 +1784,32 @@ tcf_action_add(struct net *net, struct nlattr *nla, struct nlmsghdr *n,
 		goto done;
 	}
 =======
+=======
+>>>>>>> v3.18
 	LIST_HEAD(actions);
 
 	ret = tcf_action_init(net, nla, NULL, NULL, ovr, 0, &actions);
 	if (ret)
 		goto done;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* dump then free all the actions after update; inserted policy
 	 * stays intact
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = tcf_add_notify(net, act, portid, seq, RTM_NEWACTION, n->nlmsg_flags);
 	for (a = act; a; a = act) {
 		act = a->next;
 		kfree(a);
 	}
+=======
+	ret = tcf_add_notify(net, n, &actions, portid);
+	cleanup_a(&actions);
+>>>>>>> v3.18
 =======
 	ret = tcf_add_notify(net, n, &actions, portid);
 	cleanup_a(&actions);
@@ -1640,12 +1921,15 @@ tc_dump_action(struct sk_buff *skb, struct netlink_callback *cb)
 	a.ops = a_o;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (a_o->walk == NULL) {
 		WARN(1, "tc_dump_action: %s !capable of dumping table\n",
 		     a_o->kind);
 		goto out_module_put;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nlh = nlmsg_put(skb, NETLINK_CB(cb->skb).portid, cb->nlh->nlmsg_seq,

@@ -28,6 +28,7 @@
  */
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "internal.h"
 
@@ -36,10 +37,15 @@
 #define PREFIX "ACPI: "
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/container.h>
 
 #include "internal.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define _COMPONENT			ACPI_CONTAINER_COMPONENT
 ACPI_MODULE_NAME("container");
@@ -51,6 +57,7 @@ static const struct acpi_device_id container_device_ids[] = {
 	{"", 0},
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int container_device_attach(struct acpi_device *device,
 				   const struct acpi_device_id *not_used)
@@ -66,6 +73,8 @@ static struct acpi_scan_handler container_handler = {
 		.enabled = true,
 		.mode = AHM_CONTAINER,
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ACPI_CONTAINER
 
 static int acpi_container_offline(struct container_dev *cdev)
@@ -139,6 +148,9 @@ static struct acpi_scan_handler container_handler = {
 		.enabled = true,
 		.demand_offline = true,
 		.notify_online = container_device_online,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -146,9 +158,12 @@ static struct acpi_scan_handler container_handler = {
 void __init acpi_container_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_scan_add_handler_with_hotplug(&container_handler, "container");
 }
 =======
+=======
+>>>>>>> v3.18
 	acpi_scan_add_handler(&container_handler);
 }
 
@@ -164,4 +179,7 @@ void __init acpi_container_init(void)
 }
 
 #endif /* CONFIG_ACPI_CONTAINER */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

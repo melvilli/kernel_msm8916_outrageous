@@ -11,9 +11,15 @@
 #define _LINUX_IF_TEAM_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/netpoll.h>
 #include <net/sch_generic.h>
+=======
+#include <linux/netpoll.h>
+#include <net/sch_generic.h>
+#include <linux/types.h>
+>>>>>>> v3.18
 =======
 #include <linux/netpoll.h>
 #include <net/sch_generic.h>
@@ -76,6 +82,10 @@ struct team_port {
 	u16 queue_id;
 	struct list_head qom_list; /* node in queue override mapping list */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rcu_head	rcu;
+>>>>>>> v3.18
 =======
 	struct rcu_head	rcu;
 >>>>>>> v3.18
@@ -205,7 +215,10 @@ struct team {
 	struct list_head *qom_lists; /* array of queue override mapping lists */
 	bool port_mtu_change_allowed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct {
 		unsigned int count;
 		unsigned int interval; /* in ms */
@@ -218,6 +231,9 @@ struct team {
 		atomic_t count_pending;
 		struct delayed_work dw;
 	} mcast_rejoin;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	long mode_priv[TEAM_MODE_PRIV_LONGS];
 };
@@ -255,7 +271,10 @@ static inline struct team_port *team_get_port_by_index(struct team *team,
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline int team_num_to_port_index(struct team *team, int num)
 {
@@ -266,6 +285,9 @@ static inline int team_num_to_port_index(struct team *team, int num)
 	return num % en_port_count;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct team_port *team_get_port_by_index_rcu(struct team *team,
 							   int port_index)

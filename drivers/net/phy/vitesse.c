@@ -4,7 +4,11 @@
  * Author: Kriston Carson
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2005, 2009 Freescale Semiconductor, Inc.
+=======
+ * Copyright (c) 2005, 2009, 2011 Freescale Semiconductor, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2005, 2009, 2011 Freescale Semiconductor, Inc.
 >>>>>>> v3.18
@@ -23,12 +27,18 @@
 #include <linux/phy.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Vitesse Extended Page Magic Register(s) */
 #define MII_VSC82X4_EXT_PAGE_16E	0x10
 #define MII_VSC82X4_EXT_PAGE_17E	0x11
 #define MII_VSC82X4_EXT_PAGE_18E	0x12
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Vitesse Extended Control Register 1 */
 #define MII_VSC8244_EXT_CON1           0x17
@@ -57,6 +67,7 @@
 
 /* Vitesse Auxiliary Control/Status Register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MII_VSC8244_AUX_CONSTAT        	0x1c
 #define MII_VSC8244_AUXCONSTAT_INIT    	0x0000
 #define MII_VSC8244_AUXCONSTAT_DUPLEX  	0x0020
@@ -64,21 +75,29 @@
 #define MII_VSC8244_AUXCONSTAT_GBIT    	0x0010
 #define MII_VSC8244_AUXCONSTAT_100     	0x0008
 =======
+=======
+>>>>>>> v3.18
 #define MII_VSC8244_AUX_CONSTAT		0x1c
 #define MII_VSC8244_AUXCONSTAT_INIT	0x0000
 #define MII_VSC8244_AUXCONSTAT_DUPLEX	0x0020
 #define MII_VSC8244_AUXCONSTAT_SPEED	0x0018
 #define MII_VSC8244_AUXCONSTAT_GBIT	0x0010
 #define MII_VSC8244_AUXCONSTAT_100	0x0008
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MII_VSC8221_AUXCONSTAT_INIT	0x0004 /* need to set this bit? */
 #define MII_VSC8221_AUXCONSTAT_RESERVED	0x0004
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PHY_ID_VSC8244			0x000fc6c0
 #define PHY_ID_VSC8221			0x000fc550
 =======
+=======
+>>>>>>> v3.18
 /* Vitesse Extended Page Access Register */
 #define MII_VSC82X4_EXT_PAGE_ACCESS	0x1f
 
@@ -89,6 +108,9 @@
 #define PHY_ID_VSC8662			0x00070660
 #define PHY_ID_VSC8221			0x000fc550
 #define PHY_ID_VSC8211			0x000fc4b0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_DESCRIPTION("Vitesse PHY driver");
@@ -135,9 +157,14 @@ static int vsc824x_ack_interrupt(struct phy_device *phydev)
 {
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	/*
 	 * Don't bother to ACK the interrupts if interrupts
+=======
+
+	/* Don't bother to ACK the interrupts if interrupts
+>>>>>>> v3.18
 =======
 
 	/* Don't bother to ACK the interrupts if interrupts
@@ -158,6 +185,7 @@ static int vsc82xx_config_intr(struct phy_device *phydev)
 	if (phydev->interrupts == PHY_INTERRUPT_ENABLED)
 		err = phy_write(phydev, MII_VSC8244_IMASK,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			phydev->drv->phy_id == PHY_ID_VSC8244 ?
 				MII_VSC8244_IMASK_MASK :
 				MII_VSC8221_IMASK_MASK);
@@ -165,6 +193,8 @@ static int vsc82xx_config_intr(struct phy_device *phydev)
 		/*
 		 * The Vitesse PHY cannot clear the interrupt
 =======
+=======
+>>>>>>> v3.18
 			(phydev->drv->phy_id == PHY_ID_VSC8234 ||
 			 phydev->drv->phy_id == PHY_ID_VSC8244 ||
 			 phydev->drv->phy_id == PHY_ID_VSC8514 ||
@@ -173,6 +203,9 @@ static int vsc82xx_config_intr(struct phy_device *phydev)
 				MII_VSC8221_IMASK_MASK);
 	else {
 		/* The Vitesse PHY cannot clear the interrupt
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * once it has disabled them, so we clear them first
 		 */
@@ -197,6 +230,7 @@ static int vsc8221_config_init(struct phy_device *phydev)
 
 	/* Perhaps we should set EXT_CON1 based on the interface?
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   Options are 802.3Z SerDes or SGMII */
 }
 
@@ -204,6 +238,8 @@ static int vsc8221_config_init(struct phy_device *phydev)
 static struct phy_driver vsc82xx_driver[] = {
 {
 =======
+=======
+>>>>>>> v3.18
 	 * Options are 802.3Z SerDes or SGMII
 	 */
 }
@@ -280,6 +316,9 @@ static struct phy_driver vsc82xx_driver[] = {
 	.config_intr    = &vsc82xx_config_intr,
 	.driver         = { .owner = THIS_MODULE,},
 }, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.phy_id		= PHY_ID_VSC8244,
 	.name		= "Vitesse VSC8244",
@@ -288,7 +327,11 @@ static struct phy_driver vsc82xx_driver[] = {
 	.flags		= PHY_HAS_INTERRUPT,
 	.config_init	= &vsc824x_config_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.config_aneg	= &genphy_config_aneg,
+=======
+	.config_aneg	= &vsc82x4_config_aneg,
+>>>>>>> v3.18
 =======
 	.config_aneg	= &vsc82x4_config_aneg,
 >>>>>>> v3.18
@@ -298,7 +341,10 @@ static struct phy_driver vsc82xx_driver[] = {
 	.driver		= { .owner = THIS_MODULE,},
 }, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.phy_id		= PHY_ID_VSC8514,
 	.name		= "Vitesse VSC8514",
 	.phy_id_mask	= 0x000ffff0,
@@ -335,6 +381,9 @@ static struct phy_driver vsc82xx_driver[] = {
 	.config_intr    = &vsc82xx_config_intr,
 	.driver         = { .owner = THIS_MODULE,},
 }, {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Vitesse 8221 */
 	.phy_id		= PHY_ID_VSC8221,
@@ -349,7 +398,10 @@ static struct phy_driver vsc82xx_driver[] = {
 	.config_intr	= &vsc82xx_config_intr,
 	.driver		= { .owner = THIS_MODULE,},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }, {
 	/* Vitesse 8211 */
 	.phy_id		= PHY_ID_VSC8211,
@@ -363,6 +415,9 @@ static struct phy_driver vsc82xx_driver[] = {
 	.ack_interrupt	= &vsc824x_ack_interrupt,
 	.config_intr	= &vsc82xx_config_intr,
 	.driver		= { .owner = THIS_MODULE,},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } };
 
@@ -375,8 +430,12 @@ static int __init vsc82xx_init(void)
 static void __exit vsc82xx_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return phy_drivers_unregister(vsc82xx_driver,
 		ARRAY_SIZE(vsc82xx_driver));
+=======
+	phy_drivers_unregister(vsc82xx_driver, ARRAY_SIZE(vsc82xx_driver));
+>>>>>>> v3.18
 =======
 	phy_drivers_unregister(vsc82xx_driver, ARRAY_SIZE(vsc82xx_driver));
 >>>>>>> v3.18
@@ -387,9 +446,12 @@ module_exit(vsc82xx_exit);
 
 static struct mdio_device_id __maybe_unused vitesse_tbl[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ PHY_ID_VSC8244, 0x000fffc0 },
 	{ PHY_ID_VSC8221, 0x000ffff0 },
 =======
+=======
+>>>>>>> v3.18
 	{ PHY_ID_VSC8234, 0x000ffff0 },
 	{ PHY_ID_VSC8244, 0x000fffc0 },
 	{ PHY_ID_VSC8514, 0x000ffff0 },
@@ -397,6 +459,9 @@ static struct mdio_device_id __maybe_unused vitesse_tbl[] = {
 	{ PHY_ID_VSC8662, 0x000ffff0 },
 	{ PHY_ID_VSC8221, 0x000ffff0 },
 	{ PHY_ID_VSC8211, 0x000ffff0 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };

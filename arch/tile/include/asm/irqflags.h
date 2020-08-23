@@ -125,13 +125,19 @@ DECLARE_PER_CPU(unsigned long long, interrupts_enabled_mask);
 #define INITIAL_INTERRUPTS_ENABLED (1ULL << INT_MEM_ERROR)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_PREEMPT
 /* Due to inclusion issues, we can't rely on <linux/smp.h> here. */
 extern unsigned int debug_smp_processor_id(void);
 # define smp_processor_id() debug_smp_processor_id()
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Disable interrupts. */
 #define arch_local_irq_disable() \
@@ -142,10 +148,13 @@ extern unsigned int debug_smp_processor_id(void);
 	interrupt_mask_set_mask(-1ULL)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Re-enable all maskable interrupts. */
 #define arch_local_irq_enable() \
 	interrupt_mask_reset_mask(__get_cpu_var(interrupts_enabled_mask))
 =======
+=======
+>>>>>>> v3.18
 /*
  * Read the set of maskable interrupts.
  * We avoid the preemption warning here via raw_cpu_ptr since even
@@ -158,6 +167,9 @@ extern unsigned int debug_smp_processor_id(void);
 /* Re-enable all maskable interrupts. */
 #define arch_local_irq_enable() \
 	interrupt_mask_reset_mask(arch_local_irqs_enabled())
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Disable or enable interrupts based on flag argument. */
@@ -186,7 +198,11 @@ extern unsigned int debug_smp_processor_id(void);
 /* Prevent the given interrupt from being enabled next time we enable irqs. */
 #define arch_local_irq_mask(interrupt) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(__get_cpu_var(interrupts_enabled_mask) &= ~(1ULL << (interrupt)))
+=======
+	this_cpu_and(interrupts_enabled_mask, ~(1ULL << (interrupt)))
+>>>>>>> v3.18
 =======
 	this_cpu_and(interrupts_enabled_mask, ~(1ULL << (interrupt)))
 >>>>>>> v3.18
@@ -200,7 +216,11 @@ extern unsigned int debug_smp_processor_id(void);
 /* Allow the given interrupt to be enabled next time we enable irqs. */
 #define arch_local_irq_unmask(interrupt) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(__get_cpu_var(interrupts_enabled_mask) |= (1ULL << (interrupt)))
+=======
+	this_cpu_or(interrupts_enabled_mask, (1ULL << (interrupt)))
+>>>>>>> v3.18
 =======
 	this_cpu_or(interrupts_enabled_mask, (1ULL << (interrupt)))
 >>>>>>> v3.18

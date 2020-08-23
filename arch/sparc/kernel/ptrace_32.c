@@ -27,6 +27,11 @@
 #include <asm/cacheflush.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "kernel.h"
+
+>>>>>>> v3.18
 =======
 #include "kernel.h"
 

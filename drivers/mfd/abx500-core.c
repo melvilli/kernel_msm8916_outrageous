@@ -37,7 +37,13 @@ int abx500_register_ops(struct device *dev, struct abx500_ops *ops)
 	struct abx500_device_entry *dev_entry;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_entry = kzalloc(sizeof(struct abx500_device_entry), GFP_KERNEL);
+=======
+	dev_entry = devm_kzalloc(dev,
+				 sizeof(struct abx500_device_entry),
+				 GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	dev_entry = devm_kzalloc(dev,
 				 sizeof(struct abx500_device_entry),
@@ -61,12 +67,17 @@ void abx500_remove_ops(struct device *dev)
 
 	list_for_each_entry_safe(dev_entry, tmp, &abx500_list, list)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		if (dev_entry->dev == dev) {
 			list_del(&dev_entry->list);
 			kfree(dev_entry);
 		}
 	}
+=======
+		if (dev_entry->dev == dev)
+			list_del(&dev_entry->list);
+>>>>>>> v3.18
 =======
 		if (dev_entry->dev == dev)
 			list_del(&dev_entry->list);
@@ -165,6 +176,7 @@ int abx500_startup_irq_enabled(struct device *dev, unsigned int irq)
 EXPORT_SYMBOL(abx500_startup_irq_enabled);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void abx500_dump_all_banks(void)
 {
 	struct abx500_ops *ops;
@@ -181,6 +193,8 @@ void abx500_dump_all_banks(void)
 }
 EXPORT_SYMBOL(abx500_dump_all_banks);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_AUTHOR("Mattias Wallin <mattias.wallin@stericsson.com>");

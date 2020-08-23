@@ -7,6 +7,10 @@
 #include <linux/slab.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sched.h>
+>>>>>>> v3.18
 =======
 #include <linux/sched.h>
 >>>>>>> v3.18
@@ -45,6 +49,11 @@ int hashtab_insert(struct hashtab *h, void *key, void *datum)
 	struct hashtab_node *prev, *cur, *newnode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cond_resched();
+
+>>>>>>> v3.18
 =======
 	cond_resched();
 

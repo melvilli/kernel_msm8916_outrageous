@@ -23,7 +23,11 @@ struct svc_sock {
 	/* We keep the old state_change and data_ready CB's here */
 	void			(*sk_ostate)(struct sock *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void			(*sk_odata)(struct sock *, int bytes);
+=======
+	void			(*sk_odata)(struct sock *);
+>>>>>>> v3.18
 =======
 	void			(*sk_odata)(struct sock *);
 >>>>>>> v3.18

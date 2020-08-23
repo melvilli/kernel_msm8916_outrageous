@@ -209,7 +209,11 @@ MODULE_PARM_DESC(use_io, "Force use of i/o access mode");
 	PCI_VENDOR_ID_INTEL, device_id, PCI_ANY_ID, PCI_ANY_ID, \
 	PCI_CLASS_NETWORK_ETHERNET << 8, 0xFFFF00, ich }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(e100_id_table) = {
+=======
+static const struct pci_device_id e100_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id e100_id_table[] = {
 >>>>>>> v3.18
@@ -1180,6 +1184,7 @@ static int e100_configure(struct nic *nic, struct cb *cb, struct sk_buff *skb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_printk(nic, hw, KERN_DEBUG, nic->netdev,
 		     "[00-07]=%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X\n",
 		     c[0], c[1], c[2], c[3], c[4], c[5], c[6], c[7]);
@@ -1190,12 +1195,17 @@ static int e100_configure(struct nic *nic, struct cb *cb, struct sk_buff *skb)
 		     "[16-23]=%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X\n",
 		     c[16], c[17], c[18], c[19], c[20], c[21], c[22], c[23]);
 =======
+=======
+>>>>>>> v3.18
 	netif_printk(nic, hw, KERN_DEBUG, nic->netdev, "[00-07]=%8ph\n",
 		     c + 0);
 	netif_printk(nic, hw, KERN_DEBUG, nic->netdev, "[08-15]=%8ph\n",
 		     c + 8);
 	netif_printk(nic, hw, KERN_DEBUG, nic->netdev, "[16-23]=%8ph\n",
 		     c + 16);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1795,9 +1805,15 @@ static int e100_xmit_prepare(struct nic *nic, struct cb *cb,
 	 */
 	if (unlikely(skb->no_fcs))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cb->command |= __constant_cpu_to_le16(cb_tx_nc);
 	else
 		cb->command &= ~__constant_cpu_to_le16(cb_tx_nc);
+=======
+		cb->command |= cpu_to_le16(cb_tx_nc);
+	else
+		cb->command &= ~cpu_to_le16(cb_tx_nc);
+>>>>>>> v3.18
 =======
 		cb->command |= cpu_to_le16(cb_tx_nc);
 	else
@@ -2877,7 +2893,11 @@ static int e100_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	netdev->netdev_ops = &e100_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &e100_ethtool_ops);
+=======
+	netdev->ethtool_ops = &e100_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &e100_ethtool_ops;
 >>>>>>> v3.18
@@ -3012,7 +3032,10 @@ err_out_disable_pdev:
 	pci_disable_device(pdev);
 err_out_free_dev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(netdev);
@@ -3033,7 +3056,10 @@ static void e100_remove(struct pci_dev *pdev)
 		pci_release_regions(pdev);
 		pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -3099,7 +3125,11 @@ static int e100_resume(struct pci_dev *pdev)
 	pci_restore_state(pdev);
 	/* ack any pending wake events, disable PME */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_enable_wake(pdev, 0, 0);
+=======
+	pci_enable_wake(pdev, PCI_D0, 0);
+>>>>>>> v3.18
 =======
 	pci_enable_wake(pdev, PCI_D0, 0);
 >>>>>>> v3.18
@@ -3194,7 +3224,11 @@ static void e100_io_resume(struct pci_dev *pdev)
 
 	/* ack any pending wake events, disable PME */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_enable_wake(pdev, 0, 0);
+=======
+	pci_enable_wake(pdev, PCI_D0, 0);
+>>>>>>> v3.18
 =======
 	pci_enable_wake(pdev, PCI_D0, 0);
 >>>>>>> v3.18

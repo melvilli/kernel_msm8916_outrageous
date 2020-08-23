@@ -1188,7 +1188,12 @@ static void snd_mixer_oss_proc_write(struct snd_info_entry *entry,
 				break;
 		if (ch >= SNDRV_OSS_MAX_MIXERS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "mixer_oss: invalid OSS volume '%s'\n", str);
+=======
+			pr_err("ALSA: mixer_oss: invalid OSS volume '%s'\n",
+			       str);
+>>>>>>> v3.18
 =======
 			pr_err("ALSA: mixer_oss: invalid OSS volume '%s'\n",
 			       str);
@@ -1207,7 +1212,11 @@ static void snd_mixer_oss_proc_write(struct snd_info_entry *entry,
 		idx = simple_strtoul(idxstr, NULL, 10);
 		if (idx >= 0x4000) { /* too big */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "mixer_oss: invalid index %d\n", idx);
+=======
+			pr_err("ALSA: mixer_oss: invalid index %d\n", idx);
+>>>>>>> v3.18
 =======
 			pr_err("ALSA: mixer_oss: invalid index %d\n", idx);
 >>>>>>> v3.18
@@ -1222,7 +1231,11 @@ static void snd_mixer_oss_proc_write(struct snd_info_entry *entry,
 		tbl = kmalloc(sizeof(*tbl), GFP_KERNEL);
 		if (! tbl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "mixer_oss: no memory\n");
+=======
+			pr_err("ALSA: mixer_oss: no memory\n");
+>>>>>>> v3.18
 =======
 			pr_err("ALSA: mixer_oss: no memory\n");
 >>>>>>> v3.18
@@ -1357,7 +1370,10 @@ static int snd_mixer_oss_notify_handler(struct snd_card *card, int cmd)
 
 	if (cmd == SND_MIXER_OSS_NOTIFY_REGISTER) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char name[128];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		int idx, err;
@@ -1367,6 +1383,7 @@ static int snd_mixer_oss_notify_handler(struct snd_card *card, int cmd)
 			return -ENOMEM;
 		mutex_init(&mixer->reg_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sprintf(name, "mixer%i%i", card->number, 0);
 		if ((err = snd_register_oss_device(SNDRV_OSS_DEVICE_TYPE_MIXER,
 						   card, 0,
@@ -1375,12 +1392,17 @@ static int snd_mixer_oss_notify_handler(struct snd_card *card, int cmd)
 			snd_printk(KERN_ERR "unable to register OSS mixer device %i:%i\n",
 				   card->number, 0);
 =======
+=======
+>>>>>>> v3.18
 		if ((err = snd_register_oss_device(SNDRV_OSS_DEVICE_TYPE_MIXER,
 						   card, 0,
 						   &snd_mixer_oss_f_ops, card)) < 0) {
 			dev_err(card->dev,
 				"unable to register OSS mixer device %i:%i\n",
 				card->number, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			kfree(mixer);
 			return err;
@@ -1391,7 +1413,12 @@ static int snd_mixer_oss_notify_handler(struct snd_card *card, int cmd)
 			strlcpy(mixer->name, card->mixername, sizeof(mixer->name));
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			strlcpy(mixer->name, name, sizeof(mixer->name));
+=======
+			snprintf(mixer->name, sizeof(mixer->name),
+				 "mixer%i", card->number);
+>>>>>>> v3.18
 =======
 			snprintf(mixer->name, sizeof(mixer->name),
 				 "mixer%i", card->number);

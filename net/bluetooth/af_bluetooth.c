@@ -26,6 +26,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/debugfs.h>
+>>>>>>> v3.18
 =======
 #include <linux/debugfs.h>
 >>>>>>> v3.18
@@ -35,12 +39,16 @@
 #include <linux/proc_fs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_BT_SOCK_DEBUG
 #undef  BT_DBG
 #define BT_DBG(D...)
 #endif
 
 #define VERSION "2.16"
+=======
+#define VERSION "2.19"
+>>>>>>> v3.18
 =======
 #define VERSION "2.19"
 >>>>>>> v3.18
@@ -117,6 +125,7 @@ void bt_sock_unregister(int proto)
 EXPORT_SYMBOL(bt_sock_unregister);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PARANOID_NETWORK
 static inline int current_has_bt_admin(void)
 {
@@ -141,11 +150,14 @@ static inline int current_has_bt(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int bt_sock_create(struct net *net, struct socket *sock, int proto,
 			  int kern)
 {
 	int err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (proto == BTPROTO_RFCOMM || proto == BTPROTO_SCO ||
 			proto == BTPROTO_L2CAP) {
@@ -154,6 +166,8 @@ static int bt_sock_create(struct net *net, struct socket *sock, int proto,
 	} else if (!current_has_bt_admin())
 		return -EPERM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (net != &init_net)
@@ -200,7 +214,11 @@ EXPORT_SYMBOL(bt_sock_unlink);
 void bt_accept_enqueue(struct sock *parent, struct sock *sk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("parent %pK, sk %pK", parent, sk);
+=======
+	BT_DBG("parent %p, sk %p", parent, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("parent %p, sk %p", parent, sk);
 >>>>>>> v3.18
@@ -215,7 +233,11 @@ EXPORT_SYMBOL(bt_accept_enqueue);
 void bt_accept_unlink(struct sock *sk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK state %d", sk, sk->sk_state);
+=======
+	BT_DBG("sk %p state %d", sk, sk->sk_state);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p state %d", sk, sk->sk_state);
 >>>>>>> v3.18
@@ -233,7 +255,11 @@ struct sock *bt_accept_dequeue(struct sock *parent, struct socket *newsock)
 	struct sock *sk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("parent %pK", parent);
+=======
+	BT_DBG("parent %p", parent);
+>>>>>>> v3.18
 =======
 	BT_DBG("parent %p", parent);
 >>>>>>> v3.18
@@ -277,7 +303,11 @@ int bt_sock_recvmsg(struct kiocb *iocb, struct socket *sock,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK sk %pK len %zu", sock, sk, len);
+=======
+	BT_DBG("sock %p sk %p len %zu", sock, sk, len);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p sk %p len %zu", sock, sk, len);
 >>>>>>> v3.18
@@ -290,6 +320,10 @@ int bt_sock_recvmsg(struct kiocb *iocb, struct socket *sock,
 		if (sk->sk_shutdown & RCV_SHUTDOWN)
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -305,10 +339,13 @@ int bt_sock_recvmsg(struct kiocb *iocb, struct socket *sock,
 	skb_reset_transport_header(skb);
 	err = skb_copy_datagram_iovec(skb, 0, msg->msg_iov, copied);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err == 0)
 		sock_recv_ts_and_drops(msg, sk, skb);
 
 =======
+=======
+>>>>>>> v3.18
 	if (err == 0) {
 		sock_recv_ts_and_drops(msg, sk, skb);
 
@@ -317,6 +354,9 @@ int bt_sock_recvmsg(struct kiocb *iocb, struct socket *sock,
 						&msg->msg_namelen);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	skb_free_datagram(sk, skb);
 
@@ -365,7 +405,11 @@ int bt_sock_stream_recvmsg(struct kiocb *iocb, struct socket *sock,
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK size %zu", sk, size);
+=======
+	BT_DBG("sk %p size %zu", sk, size);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p size %zu", sk, size);
 >>>>>>> v3.18
@@ -485,7 +529,11 @@ unsigned int bt_sock_poll(struct file *file, struct socket *sock,
 	unsigned int mask = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK, sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p, sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p, sk %p", sock, sk);
 >>>>>>> v3.18
@@ -533,7 +581,11 @@ int bt_sock_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK cmd %x arg %lx", sk, cmd, arg);
+=======
+	BT_DBG("sk %p cmd %x arg %lx", sk, cmd, arg);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p cmd %x arg %lx", sk, cmd, arg);
 >>>>>>> v3.18
@@ -578,6 +630,10 @@ int bt_sock_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg)
 EXPORT_SYMBOL(bt_sock_ioctl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* This function expects the sk lock to be held when called */
+>>>>>>> v3.18
 =======
 /* This function expects the sk lock to be held when called */
 >>>>>>> v3.18
@@ -587,7 +643,11 @@ int bt_sock_wait_state(struct sock *sk, int state, unsigned long timeo)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sk %pK", sk);
+=======
+	BT_DBG("sk %p", sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sk %p", sk);
 >>>>>>> v3.18
@@ -621,7 +681,10 @@ int bt_sock_wait_state(struct sock *sk, int state, unsigned long timeo)
 EXPORT_SYMBOL(bt_sock_wait_state);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This function expects the sk lock to be held when called */
 int bt_sock_wait_ready(struct sock *sk, unsigned long flags)
 {
@@ -662,6 +725,9 @@ int bt_sock_wait_ready(struct sock *sk, unsigned long flags)
 }
 EXPORT_SYMBOL(bt_sock_wait_ready);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PROC_FS
 struct bt_seq_state {
@@ -702,7 +768,11 @@ static int bt_seq_show(struct seq_file *seq, void *v)
 
 	if (v == SEQ_START_TOKEN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_puts(seq ,"sk               RefCnt Rmem   Wmem   User   Inode  Src Dst Parent");
+=======
+		seq_puts(seq ,"sk               RefCnt Rmem   Wmem   User   Inode  Parent");
+>>>>>>> v3.18
 =======
 		seq_puts(seq ,"sk               RefCnt Rmem   Wmem   User   Inode  Parent");
 >>>>>>> v3.18
@@ -719,7 +789,11 @@ static int bt_seq_show(struct seq_file *seq, void *v)
 
 		seq_printf(seq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   "%pK %-6d %-6u %-6u %-6u %-6lu %pMR %pMR %-6lu",
+=======
+			   "%pK %-6d %-6u %-6u %-6u %-6lu %-6lu",
+>>>>>>> v3.18
 =======
 			   "%pK %-6d %-6u %-6u %-6u %-6lu %-6lu",
 >>>>>>> v3.18
@@ -730,8 +804,11 @@ static int bt_seq_show(struct seq_file *seq, void *v)
 			   from_kuid(seq_user_ns(seq), sock_i_uid(sk)),
 			   sock_i_ino(sk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   &bt->src,
 			   &bt->dst,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			   bt->parent? sock_i_ino(bt->parent): 0LU);
@@ -747,7 +824,11 @@ static int bt_seq_show(struct seq_file *seq, void *v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct seq_operations bt_seq_ops = {
+=======
+static const struct seq_operations bt_seq_ops = {
+>>>>>>> v3.18
 =======
 static const struct seq_operations bt_seq_ops = {
 >>>>>>> v3.18
@@ -816,6 +897,7 @@ static struct net_proto_family bt_sock_family_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init bt_init(void)
 {
 	int err;
@@ -823,6 +905,8 @@ static int __init bt_init(void)
 	BT_INFO("Core ver %s", VERSION);
 
 =======
+=======
+>>>>>>> v3.18
 struct dentry *bt_debugfs;
 EXPORT_SYMBOL_GPL(bt_debugfs);
 
@@ -837,6 +921,9 @@ static int __init bt_init(void)
 
 	bt_debugfs = debugfs_create_dir("bluetooth", NULL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = bt_sysfs_init();
 	if (err < 0)
@@ -879,7 +966,10 @@ error:
 static void __exit bt_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sco_exit();
@@ -892,6 +982,11 @@ static void __exit bt_exit(void)
 
 	bt_sysfs_cleanup();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	debugfs_remove_recursive(bt_debugfs);
+>>>>>>> v3.18
 =======
 
 	debugfs_remove_recursive(bt_debugfs);

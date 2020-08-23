@@ -176,7 +176,11 @@ static int_handler_prototype int_handler_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 long (*g_st_write) (struct sk_buff *skb);
+=======
+static long (*g_st_write) (struct sk_buff *skb);
+>>>>>>> v3.18
 =======
 static long (*g_st_write) (struct sk_buff *skb);
 >>>>>>> v3.18
@@ -445,7 +449,11 @@ static int fm_send_cmd(struct fmdev *fmdev, u8 fm_op, u16 type,	void *payload,
 		 */
 		if (payload != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*(u16 *)payload = cpu_to_be16(*(u16 *)payload);
+=======
+			*(__be16 *)payload = cpu_to_be16(*(u16 *)payload);
+>>>>>>> v3.18
 =======
 			*(__be16 *)payload = cpu_to_be16(*(u16 *)payload);
 >>>>>>> v3.18
@@ -604,7 +612,11 @@ static void fm_irq_handle_flag_getcmd_resp(struct fmdev *fmdev)
 	memcpy(&fmdev->irq_info.flag, skb->data, fm_evt_hdr->dlen);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fmdev->irq_info.flag = be16_to_cpu(fmdev->irq_info.flag);
+=======
+	fmdev->irq_info.flag = be16_to_cpu((__force __be16)fmdev->irq_info.flag);
+>>>>>>> v3.18
 =======
 	fmdev->irq_info.flag = be16_to_cpu((__force __be16)fmdev->irq_info.flag);
 >>>>>>> v3.18
@@ -728,7 +740,11 @@ static void fm_irq_handle_rdsdata_getcmd_resp(struct fmdev *fmdev)
 	struct fm_rds *rds = &fmdev->rx.rds;
 	unsigned long group_idx, flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *rds_data, meta_data, tmpbuf[3];
+=======
+	u8 *rds_data, meta_data, tmpbuf[FM_RDS_BLK_SIZE];
+>>>>>>> v3.18
 =======
 	u8 *rds_data, meta_data, tmpbuf[FM_RDS_BLK_SIZE];
 >>>>>>> v3.18
@@ -781,7 +797,11 @@ static void fm_irq_handle_rdsdata_getcmd_resp(struct fmdev *fmdev)
 			 * We need this during AF switch processing.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cur_picode = be16_to_cpu(rds_fmt.data.groupgeneral.pidata);
+=======
+			cur_picode = be16_to_cpu((__force __be16)rds_fmt.data.groupgeneral.pidata);
+>>>>>>> v3.18
 =======
 			cur_picode = be16_to_cpu((__force __be16)rds_fmt.data.groupgeneral.pidata);
 >>>>>>> v3.18
@@ -1010,7 +1030,11 @@ static void fm_irq_afjump_rd_freq_resp(struct fmdev *fmdev)
 	skb_pull(skb, sizeof(struct fm_event_msg_hdr));
 	memcpy(&read_freq, skb->data, sizeof(read_freq));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	read_freq = be16_to_cpu(read_freq);
+=======
+	read_freq = be16_to_cpu((__force __be16)read_freq);
+>>>>>>> v3.18
 =======
 	read_freq = be16_to_cpu((__force __be16)read_freq);
 >>>>>>> v3.18
@@ -1098,6 +1122,10 @@ int fmc_transfer_rds_from_internal_buff(struct fmdev *fmdev, struct file *file,
 {
 	u32 block_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 tmpbuf[FM_RDS_BLK_SIZE];
+>>>>>>> v3.18
 =======
 	u8 tmpbuf[FM_RDS_BLK_SIZE];
 >>>>>>> v3.18
@@ -1116,6 +1144,7 @@ int fmc_transfer_rds_from_internal_buff(struct fmdev *fmdev, struct file *file,
 
 	/* Calculate block count from byte count */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	count /= 3;
 	block_count = 0;
 	ret = 0;
@@ -1131,6 +1160,8 @@ int fmc_transfer_rds_from_internal_buff(struct fmdev *fmdev, struct file *file,
 			break;
 
 =======
+=======
+>>>>>>> v3.18
 	count /= FM_RDS_BLK_SIZE;
 	block_count = 0;
 	ret = 0;
@@ -1144,25 +1175,37 @@ int fmc_transfer_rds_from_internal_buff(struct fmdev *fmdev, struct file *file,
 		}
 		memcpy(tmpbuf, &fmdev->rx.rds.buff[fmdev->rx.rds.rd_idx],
 					FM_RDS_BLK_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		fmdev->rx.rds.rd_idx += FM_RDS_BLK_SIZE;
 		if (fmdev->rx.rds.rd_idx >= fmdev->rx.rds.buf_size)
 			fmdev->rx.rds.rd_idx = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		spin_unlock_irqrestore(&fmdev->rds_buff_lock, flags);
 
 		if (copy_to_user(buf, tmpbuf, FM_RDS_BLK_SIZE))
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		block_count++;
 		buf += FM_RDS_BLK_SIZE;
 		ret += FM_RDS_BLK_SIZE;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&fmdev->rds_buff_lock, flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1308,7 +1351,11 @@ static int fm_download_firmware(struct fmdev *fmdev, const u8 *fw_name)
 		return ret;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fmdbg("Firmware(%s) length : %d bytes\n", fw_name, fw_entry->size);
+=======
+	fmdbg("Firmware(%s) length : %zu bytes\n", fw_name, fw_entry->size);
+>>>>>>> v3.18
 =======
 	fmdbg("Firmware(%s) length : %zu bytes\n", fw_name, fw_entry->size);
 >>>>>>> v3.18
@@ -1373,7 +1420,12 @@ static int load_default_rx_configuration(struct fmdev *fmdev)
 static int fm_power_up(struct fmdev *fmdev, u8 mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 payload, asic_id, asic_ver;
+=======
+	u16 payload;
+	__be16 asic_id, asic_ver;
+>>>>>>> v3.18
 =======
 	u16 payload;
 	__be16 asic_id, asic_ver;

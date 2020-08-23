@@ -51,8 +51,12 @@ static int __init sead3_mtd_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 module_init(sead3_mtd_init)
+=======
+device_initcall(sead3_mtd_init);
+>>>>>>> v3.18
 =======
 device_initcall(sead3_mtd_init);
 >>>>>>> v3.18

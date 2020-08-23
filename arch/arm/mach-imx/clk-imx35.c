@@ -46,6 +46,11 @@ static char hsp_div_532[] = { 4, 8, 3, 0 };
 static char hsp_div_400[] = { 3, 6, 3, 0 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct clk_onecell_data clk_data;
+
+>>>>>>> v3.18
 =======
 static struct clk_onecell_data clk_data;
 
@@ -79,7 +84,10 @@ int __init mx35_clocks_init(void)
 	struct arm_ahb_div *aad;
 	unsigned char *hsp_div;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -207,10 +215,14 @@ int __init mx35_clocks_init(void)
 	clk[gpu2d_gate] = imx_clk_gate2("gpu2d_gate", "ahb", base + MX35_CCM_CGR3,  4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < ARRAY_SIZE(clk); i++)
 		if (IS_ERR(clk[i]))
 			pr_err("i.MX35 clk %d: register failed with %ld\n",
 				i, PTR_ERR(clk[i]));
+=======
+	imx_check_clocks(clk, ARRAY_SIZE(clk));
+>>>>>>> v3.18
 =======
 	imx_check_clocks(clk, ARRAY_SIZE(clk));
 >>>>>>> v3.18
@@ -299,7 +311,10 @@ int __init mx35_clocks_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void __init mx35_clocks_init_dt(struct device_node *ccm_node)
 {
@@ -310,4 +325,7 @@ static void __init mx35_clocks_init_dt(struct device_node *ccm_node)
 	mx35_clocks_init();
 }
 CLK_OF_DECLARE(imx35, "fsl,imx35-ccm", mx35_clocks_init_dt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

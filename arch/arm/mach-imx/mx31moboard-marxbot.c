@@ -29,6 +29,10 @@
 #include "common.h"
 #include "devices-imx31.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 =======
 #include "ehci.h"
 >>>>>>> v3.18
@@ -332,10 +336,15 @@ static int __init marxbot_usbh1_init(void)
 
 	pdev = imx31_add_mxc_ehci_hs(1, &usbh1_pdata);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(pdev))
 		return PTR_ERR(pdev);
 
 	return 0;
+=======
+
+	return PTR_ERR_OR_ZERO(pdev);
+>>>>>>> v3.18
 =======
 
 	return PTR_ERR_OR_ZERO(pdev);

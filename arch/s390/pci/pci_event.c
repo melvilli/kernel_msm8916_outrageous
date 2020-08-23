@@ -6,12 +6,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define COMPONENT "zPCI"
 #define pr_fmt(fmt) COMPONENT ": " fmt
 
 #include <linux/kernel.h>
 #include <linux/pci.h>
 =======
+=======
+>>>>>>> v3.18
 #define KMSG_COMPONENT "zpci"
 #define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
 
@@ -19,6 +22,9 @@
 #include <linux/pci.h>
 #include <asm/pci_debug.h>
 #include <asm/sclp.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Content Code Description for PCI Function Error */
@@ -52,6 +58,7 @@ struct zpci_ccdf_avail {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void zpci_event_log_err(struct zpci_ccdf_err *ccdf)
 {
 	struct zpci_dev *zdev = get_zdev_by_fid(ccdf->fid);
@@ -82,6 +89,8 @@ static void zpci_event_log_avail(struct zpci_ccdf_avail *ccdf)
 	case 0x0306:
 		clp_find_pci_devices();
 =======
+=======
+>>>>>>> v3.18
 static void __zpci_event_error(struct zpci_ccdf_err *ccdf)
 {
 	struct zpci_dev *zdev = get_zdev_by_fid(ccdf->fid);
@@ -162,6 +171,9 @@ static void __zpci_event_availability(struct zpci_ccdf_avail *ccdf)
 			break;
 		pci_stop_root_bus(zdev->bus);
 		pci_remove_root_bus(zdev->bus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -169,6 +181,7 @@ static void __zpci_event_availability(struct zpci_ccdf_avail *ccdf)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void zpci_event_error(void *data)
 {
@@ -187,9 +200,14 @@ void zpci_event_availability(void *data)
 {
 	zpci_event_log_avail(data);
 =======
+=======
+>>>>>>> v3.18
 void zpci_event_availability(void *data)
 {
 	if (zpci_is_enabled())
 		__zpci_event_availability(data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

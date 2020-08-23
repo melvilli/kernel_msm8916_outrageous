@@ -69,9 +69,12 @@ static inline void set_uart_info(u32 phys)
 	_DEBUG_LL_ENTRY(machine, DA8XX_UART##port##_BASE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEBUG_LL_TNETV107X(machine, port)			\
 	_DEBUG_LL_ENTRY(machine, TNETV107X_UART##port##_BASE)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void __arch_decomp_setup(unsigned long arch_id)
@@ -98,9 +101,12 @@ static inline void __arch_decomp_setup(unsigned long arch_id)
 		DEBUG_LL_DA8XX(mityomapl138,		1);
 		DEBUG_LL_DA8XX(omapl138_hawkboard,	2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* TNETV107x boards */
 		DEBUG_LL_TNETV107X(tnetv107x,		1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} while (0);

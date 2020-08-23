@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <title>Remote Controllers</title>
 =======
+=======
+>>>>>>> v3.18
 <partinfo>
 <authorgroup>
 <author>
@@ -38,6 +41,9 @@
 
 <title>Remote Controllers</title>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 <section id="Remote_controllers_Intro">
 <title>Introduction</title>
@@ -46,7 +52,10 @@
 manufacturer has their own type of control. It is not rare for the same manufacturer to ship different
 types of controls, depending on the device.</para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 <para>A Remote Controller interface is mapped as a normal evdev/input interface, just like a keyboard or a mouse.
 So, it uses all ioctls already defined for any other input devices.</para>
 <para>However, remove controllers are more flexible than a normal input device, as the IR
@@ -153,6 +162,9 @@ Otherwise the write will fail with an error.</para>
 
 <section id="Remote_controllers_tables">
 <title>Remote controller tables</title>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 <para>Unfortunately, for several years, there was no effort to create uniform IR keycodes for
 different devices.  This caused the same IR keyname to be mapped completely differently on
@@ -325,6 +337,10 @@ keymapping.</para>
 
 &sub-lirc_device_interface;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+</chapter>
+>>>>>>> v3.18
 =======
 </chapter>
 >>>>>>> v3.18

@@ -14,22 +14,31 @@
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/device.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/component.h>
 #include <linux/device.h>
 #include <linux/fb.h>
 #include <linux/module.h>
 #include <linux/of_graph.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <drm/drmP.h>
 #include <drm/drm_fb_helper.h>
 #include <drm/drm_crtc_helper.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/fb.h>
 #include <linux/module.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <drm/drm_gem_cma_helper.h>
@@ -40,20 +49,27 @@
 #define MAX_CRTC	4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct crtc_cookie {
 	void *cookie;
 	int id;
 =======
+=======
+>>>>>>> v3.18
 struct imx_drm_crtc;
 
 struct imx_drm_component {
 	struct device_node *of_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head list;
 };
 
 struct imx_drm_device {
 	struct drm_device			*drm;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device				*dev;
 	struct list_head			crtc_list;
@@ -64,12 +80,16 @@ struct imx_drm_device {
 =======
 	struct imx_drm_crtc			*crtc[MAX_CRTC];
 >>>>>>> v3.18
+=======
+	struct imx_drm_crtc			*crtc[MAX_CRTC];
+>>>>>>> v3.18
 	int					pipes;
 	struct drm_fbdev_cma			*fbhelper;
 };
 
 struct imx_drm_crtc {
 	struct drm_crtc				*crtc;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct list_head			list;
 	struct imx_drm_device			*imxdrm;
@@ -103,6 +123,8 @@ static int imx_drm_driver_firstopen(struct drm_device *drm)
 static void imx_drm_driver_lastclose(struct drm_device *drm)
 {
 =======
+=======
+>>>>>>> v3.18
 	int					pipe;
 	struct imx_drm_crtc_helper_funcs	imx_drm_helper_funcs;
 	struct device_node			*port;
@@ -120,14 +142,21 @@ EXPORT_SYMBOL_GPL(imx_drm_crtc_id);
 static void imx_drm_driver_lastclose(struct drm_device *drm)
 {
 #if IS_ENABLED(CONFIG_DRM_IMX_FB_HELPER)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct imx_drm_device *imxdrm = drm->dev_private;
 
 	if (imxdrm->fbhelper)
 		drm_fbdev_cma_restore_mode(imxdrm->fbhelper);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	imx_drm_device_put();
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -136,11 +165,14 @@ static void imx_drm_driver_lastclose(struct drm_device *drm)
 static int imx_drm_driver_unload(struct drm_device *drm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct imx_drm_device *imxdrm = drm->dev_private;
 
 	drm_mode_config_cleanup(imxdrm->drm);
 	drm_kms_helper_poll_fini(imxdrm->drm);
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_DRM_IMX_FB_HELPER)
 	struct imx_drm_device *imxdrm = drm->dev_private;
 #endif
@@ -158,11 +190,15 @@ static int imx_drm_driver_unload(struct drm_device *drm)
 	drm_mode_config_cleanup(drm);
 
 	platform_set_drvdata(drm->platformdev, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * We don't care at all for crtc numbers, but the core expects the
@@ -219,6 +255,8 @@ int imx_drm_crtc_vblank_get(struct imx_drm_crtc *imx_drm_crtc)
 {
 	return drm_vblank_get(imx_drm_crtc->imxdrm->drm, imx_drm_crtc->pipe);
 =======
+=======
+>>>>>>> v3.18
 static struct imx_drm_crtc *imx_drm_find_crtc(struct drm_crtc *crtc)
 {
 	struct imx_drm_device *imxdrm = crtc->dev->dev_private;
@@ -259,6 +297,9 @@ EXPORT_SYMBOL_GPL(imx_drm_panel_format);
 int imx_drm_crtc_vblank_get(struct imx_drm_crtc *imx_drm_crtc)
 {
 	return drm_vblank_get(imx_drm_crtc->crtc->dev, imx_drm_crtc->pipe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(imx_drm_crtc_vblank_get);
@@ -266,7 +307,11 @@ EXPORT_SYMBOL_GPL(imx_drm_crtc_vblank_get);
 void imx_drm_crtc_vblank_put(struct imx_drm_crtc *imx_drm_crtc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_vblank_put(imx_drm_crtc->imxdrm->drm, imx_drm_crtc->pipe);
+=======
+	drm_vblank_put(imx_drm_crtc->crtc->dev, imx_drm_crtc->pipe);
+>>>>>>> v3.18
 =======
 	drm_vblank_put(imx_drm_crtc->crtc->dev, imx_drm_crtc->pipe);
 >>>>>>> v3.18
@@ -276,7 +321,11 @@ EXPORT_SYMBOL_GPL(imx_drm_crtc_vblank_put);
 void imx_drm_handle_vblank(struct imx_drm_crtc *imx_drm_crtc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_handle_vblank(imx_drm_crtc->imxdrm->drm, imx_drm_crtc->pipe);
+=======
+	drm_handle_vblank(imx_drm_crtc->crtc->dev, imx_drm_crtc->pipe);
+>>>>>>> v3.18
 =======
 	drm_handle_vblank(imx_drm_crtc->crtc->dev, imx_drm_crtc->pipe);
 >>>>>>> v3.18
@@ -287,10 +336,16 @@ static int imx_drm_enable_vblank(struct drm_device *drm, int crtc)
 {
 	struct imx_drm_device *imxdrm = drm->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct imx_drm_crtc *imx_drm_crtc;
 	int ret;
 
 	imx_drm_crtc = imx_drm_crtc_by_num(imxdrm, crtc);
+=======
+	struct imx_drm_crtc *imx_drm_crtc = imxdrm->crtc[crtc];
+	int ret;
+
+>>>>>>> v3.18
 =======
 	struct imx_drm_crtc *imx_drm_crtc = imxdrm->crtc[crtc];
 	int ret;
@@ -312,9 +367,14 @@ static void imx_drm_disable_vblank(struct drm_device *drm, int crtc)
 {
 	struct imx_drm_device *imxdrm = drm->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct imx_drm_crtc *imx_drm_crtc;
 
 	imx_drm_crtc = imx_drm_crtc_by_num(imxdrm, crtc);
+=======
+	struct imx_drm_crtc *imx_drm_crtc = imxdrm->crtc[crtc];
+
+>>>>>>> v3.18
 =======
 	struct imx_drm_crtc *imx_drm_crtc = imxdrm->crtc[crtc];
 
@@ -329,7 +389,10 @@ static void imx_drm_disable_vblank(struct drm_device *drm, int crtc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void imx_drm_driver_preclose(struct drm_device *drm,
 		struct drm_file *file)
 {
@@ -342,6 +405,9 @@ static void imx_drm_driver_preclose(struct drm_device *drm,
 		imx_drm_disable_vblank(drm, i);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct file_operations imx_drm_driver_fops = {
 	.owner = THIS_MODULE,
@@ -351,13 +417,17 @@ static const struct file_operations imx_drm_driver_fops = {
 	.mmap = drm_gem_cma_mmap,
 	.poll = drm_poll,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fasync = drm_fasync,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.read = drm_read,
 	.llseek = noop_llseek,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct imx_drm_device *imx_drm_device;
 
@@ -556,6 +626,8 @@ static int imx_drm_driver_load(struct drm_device *drm, unsigned long flags)
 	int ret;
 
 =======
+=======
+>>>>>>> v3.18
 void imx_drm_connector_destroy(struct drm_connector *connector)
 {
 	drm_connector_unregister(connector);
@@ -597,6 +669,9 @@ static int imx_drm_driver_load(struct drm_device *drm, unsigned long flags)
 	if (!imxdrm)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	imxdrm->drm = drm;
 
@@ -605,7 +680,11 @@ static int imx_drm_driver_load(struct drm_device *drm, unsigned long flags)
 	/*
 	 * enable drm irq mode.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * - with irq_enabled = 1, we can use the vblank feature.
+=======
+	 * - with irq_enabled = true, we can use the vblank feature.
+>>>>>>> v3.18
 =======
 	 * - with irq_enabled = true, we can use the vblank feature.
 >>>>>>> v3.18
@@ -615,6 +694,7 @@ static int imx_drm_driver_load(struct drm_device *drm, unsigned long flags)
 	 *      drm framework supports only one irq handler and
 	 *      drivers can well take care of their interrupts
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	drm->irq_enabled = 1;
 
@@ -672,6 +752,8 @@ static void imx_drm_update_possible_crtcs(void)
 		enc->encoder->possible_clones = possible_crtcs;
 	}
 =======
+=======
+>>>>>>> v3.18
 	drm->irq_enabled = true;
 
 	/*
@@ -752,11 +834,15 @@ err_kms:
 	drm_mode_config_cleanup(drm);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*
  * imx_drm_add_crtc - add a new crtc
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * The return value if !NULL is a cookie for the caller to pass to
@@ -809,6 +895,8 @@ int imx_drm_add_crtc(struct drm_crtc *crtc,
 
 	mutex_unlock(&imxdrm->mutex);
 =======
+=======
+>>>>>>> v3.18
  */
 int imx_drm_add_crtc(struct drm_device *drm, struct drm_crtc *crtc,
 		struct imx_drm_crtc **new_crtc,
@@ -851,16 +939,24 @@ int imx_drm_add_crtc(struct drm_device *drm, struct drm_crtc *crtc,
 
 	drm_crtc_init(drm, crtc,
 			imx_drm_crtc->imx_drm_helper_funcs.crtc_funcs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 
 err_register:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(imx_drm_crtc);
 err_alloc:
 err_busy:
 	mutex_unlock(&imxdrm->mutex);
+=======
+	imxdrm->crtc[imx_drm_crtc->pipe] = NULL;
+	kfree(imx_drm_crtc);
+>>>>>>> v3.18
 =======
 	imxdrm->crtc[imx_drm_crtc->pipe] = NULL;
 	kfree(imx_drm_crtc);
@@ -875,6 +971,7 @@ EXPORT_SYMBOL_GPL(imx_drm_add_crtc);
 int imx_drm_remove_crtc(struct imx_drm_crtc *imx_drm_crtc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct imx_drm_device *imxdrm = imx_drm_crtc->imxdrm;
 
 	mutex_lock(&imxdrm->mutex);
@@ -887,11 +984,16 @@ int imx_drm_remove_crtc(struct imx_drm_crtc *imx_drm_crtc)
 
 	mutex_unlock(&imxdrm->mutex);
 =======
+=======
+>>>>>>> v3.18
 	struct imx_drm_device *imxdrm = imx_drm_crtc->crtc->dev->dev_private;
 
 	drm_crtc_cleanup(imx_drm_crtc->crtc);
 
 	imxdrm->crtc[imx_drm_crtc->pipe] = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(imx_drm_crtc);
@@ -901,6 +1003,7 @@ int imx_drm_remove_crtc(struct imx_drm_crtc *imx_drm_crtc)
 EXPORT_SYMBOL_GPL(imx_drm_remove_crtc);
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * imx_drm_add_encoder - add a new encoder
  */
@@ -1125,6 +1228,8 @@ EXPORT_SYMBOL_GPL(imx_drm_remove_connector);
 
 static struct drm_ioctl_desc imx_drm_ioctls[] = {
 =======
+=======
+>>>>>>> v3.18
  * Find the DRM CRTC possible mask for the connected endpoint.
  *
  * The encoder possible masks are defined by their position in the
@@ -1237,11 +1342,15 @@ int imx_drm_encoder_get_mux_id(struct device_node *node,
 EXPORT_SYMBOL_GPL(imx_drm_encoder_get_mux_id);
 
 static const struct drm_ioctl_desc imx_drm_ioctls[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* none so far */
 };
 
 static struct drm_driver imx_drm_driver = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.driver_features	= DRIVER_MODESET | DRIVER_GEM,
 	.load			= imx_drm_driver_load,
@@ -1249,21 +1358,29 @@ static struct drm_driver imx_drm_driver = {
 	.firstopen		= imx_drm_driver_firstopen,
 	.lastclose		= imx_drm_driver_lastclose,
 =======
+=======
+>>>>>>> v3.18
 	.driver_features	= DRIVER_MODESET | DRIVER_GEM | DRIVER_PRIME,
 	.load			= imx_drm_driver_load,
 	.unload			= imx_drm_driver_unload,
 	.lastclose		= imx_drm_driver_lastclose,
 	.preclose		= imx_drm_driver_preclose,
 	.set_busid		= drm_platform_set_busid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.gem_free_object	= drm_gem_cma_free_object,
 	.gem_vm_ops		= &drm_gem_cma_vm_ops,
 	.dumb_create		= drm_gem_cma_dumb_create,
 	.dumb_map_offset	= drm_gem_cma_dumb_map_offset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dumb_destroy		= drm_gem_cma_dumb_destroy,
 
 =======
+=======
+>>>>>>> v3.18
 	.dumb_destroy		= drm_gem_dumb_destroy,
 
 	.prime_handle_to_fd	= drm_gem_prime_handle_to_fd,
@@ -1275,6 +1392,9 @@ static struct drm_driver imx_drm_driver = {
 	.gem_prime_vmap		= drm_gem_cma_prime_vmap,
 	.gem_prime_vunmap	= drm_gem_cma_prime_vunmap,
 	.gem_prime_mmap		= drm_gem_cma_prime_mmap,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.get_vblank_counter	= drm_vblank_count,
 	.enable_vblank		= imx_drm_enable_vblank,
@@ -1290,6 +1410,7 @@ static struct drm_driver imx_drm_driver = {
 	.patchlevel		= 0,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int imx_drm_platform_probe(struct platform_device *pdev)
 {
@@ -1362,6 +1483,8 @@ static void __exit imx_drm_exit(void)
 module_init(imx_drm_init);
 module_exit(imx_drm_exit);
 =======
+=======
+>>>>>>> v3.18
 static int compare_of(struct device *dev, void *data)
 {
 	struct device_node *np = data;
@@ -1499,6 +1622,9 @@ static struct platform_driver imx_drm_pdrv = {
 	},
 };
 module_platform_driver(imx_drm_pdrv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_AUTHOR("Sascha Hauer <s.hauer@pengutronix.de>");

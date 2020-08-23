@@ -15,7 +15,11 @@ oprofile-$(CONFIG_OPROFILE_CELL) += op_model_cell.o \
 		cell/spu_profiler.o cell/vma_map.o \
 		cell/spu_task_sync.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 oprofile-$(CONFIG_PPC_BOOK3S_64) += op_model_rs64.o op_model_power4.o op_model_pa6t.o
+=======
+oprofile-$(CONFIG_PPC_BOOK3S_64) += op_model_power4.o op_model_pa6t.o
+>>>>>>> v3.18
 =======
 oprofile-$(CONFIG_PPC_BOOK3S_64) += op_model_power4.o op_model_pa6t.o
 >>>>>>> v3.18

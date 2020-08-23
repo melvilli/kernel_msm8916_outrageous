@@ -22,7 +22,11 @@ def main():
 			   wakeup_events = 1, watermark = 1,
 			   sample_id_all = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   sample_type = perf.SAMPLE_PERIOD | perf.SAMPLE_TID | perf.SAMPLE_CPU | perf.SAMPLE_TID)
+=======
+			   sample_type = perf.SAMPLE_PERIOD | perf.SAMPLE_TID | perf.SAMPLE_CPU)
+>>>>>>> v3.18
 =======
 			   sample_type = perf.SAMPLE_PERIOD | perf.SAMPLE_TID | perf.SAMPLE_CPU)
 >>>>>>> v3.18

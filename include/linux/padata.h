@@ -130,10 +130,16 @@ struct parallel_data {
 	atomic_t			reorder_objects;
 	atomic_t			refcnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct padata_cpumask		cpumask;
 	spinlock_t                      lock ____cacheline_aligned;
 	spinlock_t                      seq_lock;
 	unsigned int			seq_nr;
+=======
+	atomic_t			seq_nr;
+	struct padata_cpumask		cpumask;
+	spinlock_t                      lock ____cacheline_aligned;
+>>>>>>> v3.18
 =======
 	atomic_t			seq_nr;
 	struct padata_cpumask		cpumask;

@@ -104,7 +104,11 @@ static int ar9003_hw_set_channel(struct ath_hw *ah, struct ath9k_channel *chan)
 				channelSel = CHANSEL_2G(freq) >> 1;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (AR_SREV_9550(ah)) {
+=======
+		} else if (AR_SREV_9550(ah) || AR_SREV_9531(ah)) {
+>>>>>>> v3.18
 =======
 		} else if (AR_SREV_9550(ah) || AR_SREV_9531(ah)) {
 >>>>>>> v3.18
@@ -123,7 +127,11 @@ static int ar9003_hw_set_channel(struct ath_hw *ah, struct ath9k_channel *chan)
 		bMode = 1;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((AR_SREV_9340(ah) || AR_SREV_9550(ah)) &&
+=======
+		if ((AR_SREV_9340(ah) || AR_SREV_9550(ah) || AR_SREV_9531(ah)) &&
+>>>>>>> v3.18
 =======
 		if ((AR_SREV_9340(ah) || AR_SREV_9550(ah) || AR_SREV_9531(ah)) &&
 >>>>>>> v3.18
@@ -526,7 +534,10 @@ static void ar9003_hw_spur_mitigate(struct ath_hw *ah,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 ar9003_hw_compute_pll_control_soc(struct ath_hw *ah,
 					     struct ath9k_channel *chan)
 {
@@ -544,6 +555,9 @@ static u32 ar9003_hw_compute_pll_control_soc(struct ath_hw *ah,
 	return pll;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u32 ar9003_hw_compute_pll_control(struct ath_hw *ah,
 					 struct ath9k_channel *chan)
@@ -580,8 +594,12 @@ static void ar9003_hw_set_channel_regs(struct ath_hw *ah,
 		phymode |= AR_PHY_GC_DYN2040_EN;
 		/* Configure control (primary) channel at +-10MHz */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((chan->chanmode == CHANNEL_A_HT40PLUS) ||
 		    (chan->chanmode == CHANNEL_G_HT40PLUS))
+=======
+		if (IS_CHAN_HT40PLUS(chan))
+>>>>>>> v3.18
 =======
 		if (IS_CHAN_HT40PLUS(chan))
 >>>>>>> v3.18
@@ -598,7 +616,11 @@ static void ar9003_hw_set_channel_regs(struct ath_hw *ah,
 
 	/* Configure MAC for 20/40 operation */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ath9k_hw_set11nmac2040(ah);
+=======
+	ath9k_hw_set11nmac2040(ah, chan);
+>>>>>>> v3.18
 =======
 	ath9k_hw_set11nmac2040(ah, chan);
 >>>>>>> v3.18
@@ -664,12 +686,15 @@ static void ar9003_hw_override_ini(struct ath_hw *ah)
 	 */
 	val = REG_READ(ah, AR_PCU_MISC_MODE2) & (~AR_ADHOC_MCAST_KEYID_ENABLE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REG_WRITE(ah, AR_PCU_MISC_MODE2,
 		  val | AR_AGG_WEP_ENABLE_FIX | AR_AGG_WEP_ENABLE);
 
 	REG_SET_BIT(ah, AR_PHY_CCK_DETECT,
 		    AR_PHY_CCK_DETECT_BB_ENABLE_ANT_FAST_DIV);
 =======
+=======
+>>>>>>> v3.18
 	val |= AR_AGG_WEP_ENABLE_FIX |
 	       AR_AGG_WEP_ENABLE |
 	       AR_PCU_MISC_MODE2_CFP_IGNORE;
@@ -704,6 +729,9 @@ static void ar9003_hw_override_ini(struct ath_hw *ah)
 		}
 		udelay(100);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -740,6 +768,7 @@ static int ar9550_hw_get_modes_txgain_index(struct ath_hw *ah,
 {
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (chan->chanmode) {
 	case CHANNEL_A:
@@ -779,6 +808,8 @@ static int ar9550_hw_get_modes_txgain_index(struct ath_hw *ah,
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (IS_CHAN_2GHZ(chan)) {
 		if (IS_CHAN_HT40(chan))
 			return 7;
@@ -845,6 +876,9 @@ static void ar9003_doubler_fix(struct ath_hw *ah)
 			1 << AR_PHY_65NM_CH0_RXTX2_SYNTHON_MASK_S |
 			1 << AR_PHY_65NM_CH0_RXTX2_SYNTHOVR_MASK_S);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -854,6 +888,7 @@ static int ar9003_hw_process_ini(struct ath_hw *ah,
 	unsigned int regWrites = 0, i;
 	u32 modesIndex;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (chan->chanmode) {
 	case CHANNEL_A:
@@ -879,6 +914,8 @@ static int ar9003_hw_process_ini(struct ath_hw *ah,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (IS_CHAN_5GHZ(chan))
 		modesIndex = IS_CHAN_HT40(chan) ? 2 : 1;
 	else
@@ -887,6 +924,9 @@ static int ar9003_hw_process_ini(struct ath_hw *ah,
 	/*
 	 * SOC, MAC, BB, RADIO initvals.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < ATH_INI_NUM_SPLIT; i++) {
 		ar9003_hw_prog_ini(ah, &ah->iniSOC[i], modesIndex);
@@ -894,7 +934,11 @@ static int ar9003_hw_process_ini(struct ath_hw *ah,
 		ar9003_hw_prog_ini(ah, &ah->iniBB[i], modesIndex);
 		ar9003_hw_prog_ini(ah, &ah->iniRadio[i], modesIndex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (i == ATH_INI_POST && AR_SREV_9462_20(ah))
+=======
+		if (i == ATH_INI_POST && AR_SREV_9462_20_OR_LATER(ah))
+>>>>>>> v3.18
 =======
 		if (i == ATH_INI_POST && AR_SREV_9462_20_OR_LATER(ah))
 >>>>>>> v3.18
@@ -904,8 +948,11 @@ static int ar9003_hw_process_ini(struct ath_hw *ah,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REG_WRITE_ARRAY(&ah->iniModesRxGain, 1, regWrites);
 =======
+=======
+>>>>>>> v3.18
 	ar9003_doubler_fix(ah);
 
 	/*
@@ -934,17 +981,23 @@ static int ar9003_hw_process_ini(struct ath_hw *ah,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (AR_SREV_9550(ah))
 		REG_WRITE_ARRAY(&ah->ini_modes_rx_gain_bounds, modesIndex,
 				regWrites);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (AR_SREV_9550(ah)) {
 		int modes_txgain_index;
 
 		modes_txgain_index = ar9550_hw_get_modes_txgain_index(ah, chan);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * TXGAIN initvals.
 	 */
@@ -954,6 +1007,9 @@ static int ar9003_hw_process_ini(struct ath_hw *ah,
 		if (AR_SREV_9550(ah))
 			modes_txgain_index = ar9550_hw_get_modes_txgain_index(ah, chan);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (modes_txgain_index < 0)
 			return -EINVAL;
@@ -973,6 +1029,7 @@ static int ar9003_hw_process_ini(struct ath_hw *ah,
 				modesIndex, regWrites);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REG_WRITE_ARRAY(&ah->iniAdditional, 1, regWrites);
 
 	if (chan->channel == 2484)
@@ -983,6 +1040,8 @@ static int ar9003_hw_process_ini(struct ath_hw *ah,
 			  AR_GLB_SWREG_DISCONT_EN_BT_WLAN);
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Clock frequency initvals.
 	 */
@@ -994,6 +1053,9 @@ static int ar9003_hw_process_ini(struct ath_hw *ah,
 	if (chan->channel == 2484)
 		ar9003_hw_prog_ini(ah, &ah->iniCckfirJapan2484, 1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ah->modes_index = modesIndex;
 	ar9003_hw_override_ini(ah);
@@ -1001,6 +1063,7 @@ static int ar9003_hw_process_ini(struct ath_hw *ah,
 	ar9003_hw_set_chain_masks(ah, ah->rxchainmask, ah->txchainmask);
 	ath9k_hw_apply_txpower(ah, chan, false);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (AR_SREV_9462(ah) || AR_SREV_9565(ah)) {
 		if (REG_READ_FIELD(ah, AR_PHY_TX_IQCAL_CONTROL_0,
@@ -1017,6 +1080,8 @@ static int ar9003_hw_process_ini(struct ath_hw *ah,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1029,6 +1094,7 @@ static void ar9003_hw_set_rfmode(struct ath_hw *ah,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rfMode |= (IS_CHAN_B(chan) || IS_CHAN_G(chan))
 		? AR_PHY_MODE_DYNAMIC : AR_PHY_MODE_OFDM;
 
@@ -1039,6 +1105,8 @@ static void ar9003_hw_set_rfmode(struct ath_hw *ah,
 	if (IS_CHAN_HALF_RATE(chan))
 		rfMode |= AR_PHY_MODE_HALF;
 =======
+=======
+>>>>>>> v3.18
 	if (IS_CHAN_2GHZ(chan))
 		rfMode |= AR_PHY_MODE_DYNAMIC;
 	else
@@ -1046,6 +1114,9 @@ static void ar9003_hw_set_rfmode(struct ath_hw *ah,
 
 	if (IS_CHAN_A_FAST_CLOCK(ah, chan))
 		rfMode |= (AR_PHY_MODE_DYNAMIC | AR_PHY_MODE_DYN_CCK_DISABLE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (rfMode & (AR_PHY_MODE_QUARTER | AR_PHY_MODE_HALF))
@@ -1133,14 +1204,20 @@ static bool ar9003_hw_ani_control(struct ath_hw *ah,
 	struct ath_common *common = ath9k_hw_common(ah);
 	struct ath9k_channel *chan = ah->curchan;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ar5416AniState *aniState = &chan->ani;
 =======
+=======
+>>>>>>> v3.18
 	struct ar5416AniState *aniState = &ah->ani;
 	int m1ThreshLow, m2ThreshLow;
 	int m1Thresh, m2Thresh;
 	int m2CountThr, m2CountThrLow;
 	int m1ThreshLowExt, m2ThreshLowExt;
 	int m1ThreshExt, m2ThreshExt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s32 value, value2;
 
@@ -1156,7 +1233,10 @@ static bool ar9003_hw_ani_control(struct ath_hw *ah,
 		u32 on = param ? 1 : 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (AR_SREV_9462(ah) || AR_SREV_9565(ah))
 			goto skip_ws_det;
 
@@ -1212,6 +1292,9 @@ static bool ar9003_hw_ani_control(struct ath_hw *ah,
 			      AR_PHY_SFCORR_EXT_M2_THRESH,
 			      m2ThreshExt);
 skip_ws_det:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (on)
 			REG_SET_BIT(ah, AR_PHY_SFCORR_LOW,
@@ -1392,8 +1475,11 @@ skip_ws_det:
 	break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case ATH9K_ANI_PRESENT:
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:
@@ -1475,6 +1561,7 @@ static void ar9003_hw_ani_cache_ini_regs(struct ath_hw *ah)
 	u32 val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aniState = &ah->curchan->ani;
 	iniDef = &aniState->iniDef;
 
@@ -1485,6 +1572,8 @@ static void ar9003_hw_ani_cache_ini_regs(struct ath_hw *ah)
 		chan->channel,
 		chan->channelFlags);
 =======
+=======
+>>>>>>> v3.18
 	aniState = &ah->ani;
 	iniDef = &aniState->iniDef;
 
@@ -1493,6 +1582,9 @@ static void ar9003_hw_ani_cache_ini_regs(struct ath_hw *ah)
 		ah->hw_version.macRev,
 		ah->opmode,
 		chan->channel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	val = REG_READ(ah, AR_PHY_SFCORR);
@@ -1527,7 +1619,11 @@ static void ar9003_hw_ani_cache_ini_regs(struct ath_hw *ah)
 	aniState->spurImmunityLevel = ATH9K_ANI_SPUR_IMMUNE_LVL;
 	aniState->firstepLevel = ATH9K_ANI_FIRSTEP_LVL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aniState->ofdmWeakSigDetect = ATH9K_ANI_USE_OFDM_WEAK_SIG;
+=======
+	aniState->ofdmWeakSigDetect = true;
+>>>>>>> v3.18
 =======
 	aniState->ofdmWeakSigDetect = true;
 >>>>>>> v3.18
@@ -1538,6 +1634,10 @@ static void ar9003_hw_set_radar_params(struct ath_hw *ah,
 				       struct ath_hw_radar_conf *conf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int regWrites = 0;
+>>>>>>> v3.18
 =======
 	unsigned int regWrites = 0;
 >>>>>>> v3.18
@@ -1568,12 +1668,18 @@ static void ar9003_hw_set_radar_params(struct ath_hw *ah,
 	else
 		REG_CLR_BIT(ah, AR_PHY_RADAR_EXT, AR_PHY_RADAR_EXT_ENA);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (AR_SREV_9300(ah) || AR_SREV_9340(ah) || AR_SREV_9580(ah)) {
 		REG_WRITE_ARRAY(&ah->ini_dfs,
 				IS_CHAN_HT40(ah->curchan) ? 2 : 1, regWrites);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1606,6 +1712,7 @@ static void ar9003_hw_antdiv_comb_conf_get(struct ath_hw *ah,
 
 	if (AR_SREV_9330_11(ah)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		antconf->lna1_lna2_delta = -9;
 		antconf->div_group = 1;
 	} else if (AR_SREV_9485(ah)) {
@@ -1616,6 +1723,8 @@ static void ar9003_hw_antdiv_comb_conf_get(struct ath_hw *ah,
 		antconf->div_group = 3;
 	} else {
 =======
+=======
+>>>>>>> v3.18
 		antconf->lna1_lna2_switch_delta = -1;
 		antconf->lna1_lna2_delta = -9;
 		antconf->div_group = 1;
@@ -1629,6 +1738,9 @@ static void ar9003_hw_antdiv_comb_conf_get(struct ath_hw *ah,
 		antconf->div_group = 3;
 	} else {
 		antconf->lna1_lna2_switch_delta = -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		antconf->lna1_lna2_delta = -3;
 		antconf->div_group = 0;
@@ -1660,6 +1772,7 @@ static void ar9003_hw_antdiv_comb_conf_set(struct ath_hw *ah,
 	REG_WRITE(ah, AR_PHY_MC_GAIN_CTRL, regval);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void ar9003_hw_antctrl_shared_chain_lnadiv(struct ath_hw *ah,
 						  bool enable)
@@ -1721,6 +1834,8 @@ static void ar9003_hw_antctrl_shared_chain_lnadiv(struct ath_hw *ah,
 }
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ATH9K_BTCOEX_SUPPORT
 
 static void ar9003_hw_set_bt_ant_diversity(struct ath_hw *ah, bool enable)
@@ -1833,12 +1948,16 @@ static void ar9003_hw_set_bt_ant_diversity(struct ath_hw *ah, bool enable)
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ar9003_hw_fast_chan_change(struct ath_hw *ah,
 				      struct ath9k_channel *chan,
 				      u8 *ini_reloaded)
 {
 	unsigned int regWrites = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 modesIndex;
 
@@ -1865,6 +1984,8 @@ static int ar9003_hw_fast_chan_change(struct ath_hw *ah,
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	u32 modesIndex, txgain_index;
 
 	if (IS_CHAN_5GHZ(chan))
@@ -1873,6 +1994,9 @@ static int ar9003_hw_fast_chan_change(struct ath_hw *ah,
 		modesIndex = IS_CHAN_HT40(chan) ? 3 : 4;
 
 	txgain_index = AR_SREV_9531(ah) ? 1 : modesIndex;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (modesIndex == ah->modes_index) {
@@ -1886,12 +2010,15 @@ static int ar9003_hw_fast_chan_change(struct ath_hw *ah,
 	ar9003_hw_prog_ini(ah, &ah->iniRadio[ATH_INI_POST], modesIndex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (AR_SREV_9462_20(ah))
 		ar9003_hw_prog_ini(ah, &ah->ini_radio_post_sys2ant,
 				   modesIndex);
 
 	REG_WRITE_ARRAY(&ah->iniModesTxGain, modesIndex, regWrites);
 =======
+=======
+>>>>>>> v3.18
 	if (AR_SREV_9462_20_OR_LATER(ah))
 		ar9003_hw_prog_ini(ah, &ah->ini_radio_post_sys2ant,
 				   modesIndex);
@@ -1909,6 +2036,9 @@ static int ar9003_hw_fast_chan_change(struct ath_hw *ah,
 					modesIndex, regWrites);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1922,13 +2052,19 @@ static int ar9003_hw_fast_chan_change(struct ath_hw *ah,
 		REG_WRITE_ARRAY(&ah->iniModesFastClock, 1, regWrites);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	REG_WRITE_ARRAY(&ah->iniAdditional, 1, regWrites);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * JAPAN regulatory.
 	 */
 	if (chan->channel == 2484)
 		ar9003_hw_prog_ini(ah, &ah->iniCckfirJapan2484, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ah->modes_index = modesIndex;
@@ -2001,7 +2137,10 @@ static void ar9003_hw_spectral_scan_wait(struct ath_hw *ah)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ar9003_hw_tx99_start(struct ath_hw *ah, u32 qnum)
 {
 	REG_SET_BIT(ah, AR_PHY_TEST, PHY_AGC_CLR);
@@ -2094,6 +2233,9 @@ static void ar9003_hw_tx99_set_txpower(struct ath_hw *ah, u8 txpower)
 		  ATH9K_POW_SM(p_pwr_array[ALL_TARGET_HT40_14],  0));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ar9003_hw_attach_phy_ops(struct ath_hw *ah)
 {
@@ -2111,14 +2253,20 @@ void ar9003_hw_attach_phy_ops(struct ath_hw *ah)
 	priv_ops->rf_set_freq = ar9003_hw_set_channel;
 	priv_ops->spur_mitigate_freq = ar9003_hw_spur_mitigate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv_ops->compute_pll_control = ar9003_hw_compute_pll_control;
 =======
+=======
+>>>>>>> v3.18
 
 	if (AR_SREV_9340(ah) || AR_SREV_9550(ah) || AR_SREV_9531(ah))
 		priv_ops->compute_pll_control = ar9003_hw_compute_pll_control_soc;
 	else
 		priv_ops->compute_pll_control = ar9003_hw_compute_pll_control;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	priv_ops->set_channel_regs = ar9003_hw_set_channel_regs;
 	priv_ops->init_bb = ar9003_hw_init_bb;
@@ -2137,7 +2285,10 @@ void ar9003_hw_attach_phy_ops(struct ath_hw *ah)
 	ops->antdiv_comb_conf_get = ar9003_hw_antdiv_comb_conf_get;
 	ops->antdiv_comb_conf_set = ar9003_hw_antdiv_comb_conf_set;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ops->antctrl_shared_chain_lnadiv = ar9003_hw_antctrl_shared_chain_lnadiv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ops->spectral_scan_config = ar9003_hw_spectral_scan_config;
@@ -2145,7 +2296,10 @@ void ar9003_hw_attach_phy_ops(struct ath_hw *ah)
 	ops->spectral_scan_wait = ar9003_hw_spectral_scan_wait;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ATH9K_BTCOEX_SUPPORT
 	ops->set_bt_ant_diversity = ar9003_hw_set_bt_ant_diversity;
 #endif
@@ -2153,6 +2307,9 @@ void ar9003_hw_attach_phy_ops(struct ath_hw *ah)
 	ops->tx99_stop = ar9003_hw_tx99_stop;
 	ops->tx99_set_txpower = ar9003_hw_tx99_set_txpower;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ar9003_hw_set_nf_limits(ah);
 	ar9003_hw_set_radar_conf(ah);
@@ -2160,7 +2317,10 @@ void ar9003_hw_attach_phy_ops(struct ath_hw *ah)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Baseband Watchdog signatures:
  *
@@ -2223,6 +2383,9 @@ bool ar9003_hw_bb_watchdog_check(struct ath_hw *ah)
 }
 EXPORT_SYMBOL(ar9003_hw_bb_watchdog_check);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ar9003_hw_bb_watchdog_config(struct ath_hw *ah)
 {
@@ -2341,6 +2504,10 @@ EXPORT_SYMBOL(ar9003_hw_bb_watchdog_dbg_info);
 void ar9003_hw_disable_phy_restart(struct ath_hw *ah)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 result;
+>>>>>>> v3.18
 =======
 	u8 result;
 >>>>>>> v3.18
@@ -2351,6 +2518,7 @@ void ar9003_hw_disable_phy_restart(struct ath_hw *ah)
 	 * state, BB would go hang. If RXSM is in 0xb state after
 	 * first bb panic, ensure to disable the phy_restart.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!((MS(ah->bb_watchdog_last_status,
 		  AR_PHY_WATCHDOG_RX_OFDM_SM) == 0xb) ||
@@ -2363,6 +2531,8 @@ void ar9003_hw_disable_phy_restart(struct ath_hw *ah)
 
 	REG_WRITE(ah, AR_PHY_RESTART, val);
 =======
+=======
+>>>>>>> v3.18
 	result = MS(ah->bb_watchdog_last_status, AR_PHY_WATCHDOG_RX_OFDM_SM);
 
 	if ((result == 0xb) || ah->bb_hang_rx_ofdm) {
@@ -2371,6 +2541,9 @@ void ar9003_hw_disable_phy_restart(struct ath_hw *ah)
 		val &= ~AR_PHY_RESTART_ENA;
 		REG_WRITE(ah, AR_PHY_RESTART, val);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(ar9003_hw_disable_phy_restart);

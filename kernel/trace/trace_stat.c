@@ -44,6 +44,7 @@ static DEFINE_MUTEX(all_stat_sessions_mutex);
 static struct dentry		*stat_dir;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Iterate through the rbtree using a post order traversal path
  * to release the next node.
@@ -85,6 +86,8 @@ static void __reset_stat_session(struct stat_session *session)
 	while (node)
 		node = release_next(session->ts, node);
 =======
+=======
+>>>>>>> v3.18
 static void __reset_stat_session(struct stat_session *session)
 {
 	struct stat_node *snode, *n;
@@ -94,6 +97,9 @@ static void __reset_stat_session(struct stat_session *session)
 			session->ts->stat_release(snode->stat);
 		kfree(snode);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	session->stat_root = RB_ROOT;

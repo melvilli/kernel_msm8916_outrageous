@@ -182,7 +182,11 @@ static const struct platform_suspend_ops avr32_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long avr32_pm_offset(void *symbol)
+=======
+static unsigned long __init avr32_pm_offset(void *symbol)
+>>>>>>> v3.18
 =======
 static unsigned long __init avr32_pm_offset(void *symbol)
 >>>>>>> v3.18

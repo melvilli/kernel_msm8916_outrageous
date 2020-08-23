@@ -34,6 +34,7 @@
 #include "wcmd.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 /*---------------------  Export Classes  ----------------------------*/
@@ -51,11 +52,16 @@ device_receive_frame(
 void	MngWorkItem(void *Context);
 
 =======
+=======
+>>>>>>> v3.18
 bool
 device_receive_frame(
 	struct vnt_private *,
 	PSRxDesc pCurrRD
 );
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif // __RXTX_H__

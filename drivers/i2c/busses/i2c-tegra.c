@@ -26,10 +26,16 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
 #include <linux/of_device.h>
 #include <linux/module.h>
 #include <linux/clk/tegra.h>
+=======
+#include <linux/of_device.h>
+#include <linux/module.h>
+#include <linux/reset.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 #include <linux/module.h>
@@ -168,6 +174,10 @@ struct tegra_i2c_dev {
 	struct clk *div_clk;
 	struct clk *fast_clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct reset_control *rst;
+>>>>>>> v3.18
 =======
 	struct reset_control *rst;
 >>>>>>> v3.18
@@ -391,7 +401,11 @@ static inline int tegra_i2c_clock_enable(struct tegra_i2c_dev *i2c_dev)
 	int ret;
 	if (!i2c_dev->hw->has_single_clk_source) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = clk_prepare_enable(i2c_dev->fast_clk);
+=======
+		ret = clk_enable(i2c_dev->fast_clk);
+>>>>>>> v3.18
 =======
 		ret = clk_enable(i2c_dev->fast_clk);
 >>>>>>> v3.18
@@ -402,17 +416,23 @@ static inline int tegra_i2c_clock_enable(struct tegra_i2c_dev *i2c_dev)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = clk_prepare_enable(i2c_dev->div_clk);
 	if (ret < 0) {
 		dev_err(i2c_dev->dev,
 			"Enabling div clk failed, err %d\n", ret);
 		clk_disable_unprepare(i2c_dev->fast_clk);
 =======
+=======
+>>>>>>> v3.18
 	ret = clk_enable(i2c_dev->div_clk);
 	if (ret < 0) {
 		dev_err(i2c_dev->dev,
 			"Enabling div clk failed, err %d\n", ret);
 		clk_disable(i2c_dev->fast_clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return ret;
@@ -421,9 +441,15 @@ static inline int tegra_i2c_clock_enable(struct tegra_i2c_dev *i2c_dev)
 static inline void tegra_i2c_clock_disable(struct tegra_i2c_dev *i2c_dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable_unprepare(i2c_dev->div_clk);
 	if (!i2c_dev->hw->has_single_clk_source)
 		clk_disable_unprepare(i2c_dev->fast_clk);
+=======
+	clk_disable(i2c_dev->div_clk);
+	if (!i2c_dev->hw->has_single_clk_source)
+		clk_disable(i2c_dev->fast_clk);
+>>>>>>> v3.18
 =======
 	clk_disable(i2c_dev->div_clk);
 	if (!i2c_dev->hw->has_single_clk_source)
@@ -436,7 +462,10 @@ static int tegra_i2c_init(struct tegra_i2c_dev *i2c_dev)
 	u32 val;
 	int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int clk_multiplier = I2C_CLK_MULTIPLIER_STD_FAST_MODE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 clk_divisor;
@@ -448,9 +477,15 @@ static int tegra_i2c_init(struct tegra_i2c_dev *i2c_dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tegra_periph_reset_assert(i2c_dev->div_clk);
 	udelay(2);
 	tegra_periph_reset_deassert(i2c_dev->div_clk);
+=======
+	reset_control_assert(i2c_dev->rst);
+	udelay(2);
+	reset_control_deassert(i2c_dev->rst);
+>>>>>>> v3.18
 =======
 	reset_control_assert(i2c_dev->rst);
 	udelay(2);
@@ -466,9 +501,12 @@ static int tegra_i2c_init(struct tegra_i2c_dev *i2c_dev)
 	i2c_writel(i2c_dev, 0, I2C_INT_MASK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_multiplier *= (i2c_dev->hw->clk_divisor_std_fast_mode + 1);
 	clk_set_rate(i2c_dev->div_clk, i2c_dev->bus_clk_rate * clk_multiplier);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Make sure clock divisor programmed correctly */
@@ -586,7 +624,11 @@ static int tegra_i2c_xfer_msg(struct tegra_i2c_dev *i2c_dev,
 	i2c_dev->msg_err = I2C_ERR_NONE;
 	i2c_dev->msg_read = (msg->flags & I2C_M_RD);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(i2c_dev->msg_complete);
+=======
+	reinit_completion(&i2c_dev->msg_complete);
+>>>>>>> v3.18
 =======
 	reinit_completion(&i2c_dev->msg_complete);
 >>>>>>> v3.18
@@ -757,6 +799,10 @@ static int tegra_i2c_probe(struct platform_device *pdev)
 	int irq;
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int clk_multiplier = I2C_CLK_MULTIPLIER_STD_FAST_MODE;
+>>>>>>> v3.18
 =======
 	int clk_multiplier = I2C_CLK_MULTIPLIER_STD_FAST_MODE;
 >>>>>>> v3.18
@@ -781,10 +827,15 @@ static int tegra_i2c_probe(struct platform_device *pdev)
 
 	i2c_dev = devm_kzalloc(&pdev->dev, sizeof(*i2c_dev), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!i2c_dev) {
 		dev_err(&pdev->dev, "Could not allocate struct tegra_i2c_dev");
 		return -ENOMEM;
 	}
+=======
+	if (!i2c_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!i2c_dev)
 		return -ENOMEM;
@@ -798,13 +849,19 @@ static int tegra_i2c_probe(struct platform_device *pdev)
 	i2c_dev->dev = &pdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	i2c_dev->rst = devm_reset_control_get(&pdev->dev, "i2c");
 	if (IS_ERR(i2c_dev->rst)) {
 		dev_err(&pdev->dev, "missing controller reset");
 		return PTR_ERR(i2c_dev->rst);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = of_property_read_u32(i2c_dev->dev->of_node, "clock-frequency",
 					&i2c_dev->bus_clk_rate);
@@ -836,11 +893,14 @@ static int tegra_i2c_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, i2c_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = tegra_i2c_init(i2c_dev);
 	if (ret) {
 		dev_err(&pdev->dev, "Failed to initialize i2c controller");
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (!i2c_dev->hw->has_single_clk_source) {
 		ret = clk_prepare(i2c_dev->fast_clk);
 		if (ret < 0) {
@@ -867,6 +927,9 @@ static int tegra_i2c_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "Failed to initialize i2c controller");
 		goto unprepare_div_clk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -875,7 +938,11 @@ static int tegra_i2c_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "Failed to request irq %i\n", i2c_dev->irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ret;
+=======
+		goto unprepare_div_clk;
+>>>>>>> v3.18
 =======
 		goto unprepare_div_clk;
 >>>>>>> v3.18
@@ -884,7 +951,11 @@ static int tegra_i2c_probe(struct platform_device *pdev)
 	i2c_set_adapdata(&i2c_dev->adapter, i2c_dev);
 	i2c_dev->adapter.owner = THIS_MODULE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_dev->adapter.class = I2C_CLASS_HWMON;
+=======
+	i2c_dev->adapter.class = I2C_CLASS_DEPRECATED;
+>>>>>>> v3.18
 =======
 	i2c_dev->adapter.class = I2C_CLASS_DEPRECATED;
 >>>>>>> v3.18
@@ -899,6 +970,7 @@ static int tegra_i2c_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "Failed to add I2C adapter\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ret;
 	}
 
@@ -906,6 +978,8 @@ static int tegra_i2c_probe(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		goto unprepare_div_clk;
 	}
 
@@ -919,6 +993,9 @@ unprepare_fast_clk:
 		clk_unprepare(i2c_dev->fast_clk);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -927,12 +1004,18 @@ static int tegra_i2c_remove(struct platform_device *pdev)
 	struct tegra_i2c_dev *i2c_dev = platform_get_drvdata(pdev);
 	i2c_del_adapter(&i2c_dev->adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	clk_unprepare(i2c_dev->div_clk);
 	if (!i2c_dev->hw->has_single_clk_source)
 		clk_unprepare(i2c_dev->fast_clk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

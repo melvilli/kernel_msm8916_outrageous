@@ -3,6 +3,9 @@ mk_elfconfig
 modpost
 devicetable-offsets.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

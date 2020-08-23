@@ -194,8 +194,14 @@ static int snd_card_als100_probe(int dev,
 	struct snd_opl3 *opl3;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = snd_card_create(index[dev], id[dev], THIS_MODULE,
 				sizeof(struct snd_card_als100), &card);
+=======
+	error = snd_card_new(&pcard->card->dev,
+			     index[dev], id[dev], THIS_MODULE,
+			     sizeof(struct snd_card_als100), &card);
+>>>>>>> v3.18
 =======
 	error = snd_card_new(&pcard->card->dev,
 			     index[dev], id[dev], THIS_MODULE,
@@ -210,7 +216,10 @@ static int snd_card_als100_probe(int dev,
 		return error;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pcard->card->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

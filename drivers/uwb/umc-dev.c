@@ -67,6 +67,10 @@ int umc_device_register(struct umc_dev *umc)
 
 error_device_register:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	put_device(&umc->dev);
+>>>>>>> v3.18
 =======
 	put_device(&umc->dev);
 >>>>>>> v3.18

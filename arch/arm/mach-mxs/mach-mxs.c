@@ -14,8 +14,11 @@
 #include <linux/clk/mxs.h>
 #include <linux/clkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/clocksource.h>
 #include <linux/can/platform/flexcan.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -23,7 +26,10 @@
 #include <linux/gpio.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irqchip.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/irqchip/mxs.h>
@@ -34,6 +40,10 @@
 #include <linux/phy.h>
 #include <linux/pinctrl/consumer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sys_soc.h>
+>>>>>>> v3.18
 =======
 #include <linux/sys_soc.h>
 >>>>>>> v3.18
@@ -51,7 +61,10 @@
 #define MXS_DIGCTL_SAIF_CLKMUX_EXTMSTR1		0x3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define HW_DIGCTL_CHIPID	0x310
 #define HW_DIGCTL_CHIPID_MASK	(0xffff << 16)
 #define HW_DIGCTL_REV_MASK	0xff
@@ -65,6 +78,9 @@
 #define MXS_CHIP_REVISION_1_4	0x14
 #define MXS_CHIP_REV_UNKNOWN	0xff
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MXS_GPIO_NR(bank, nr)	((bank) * 32 + (nr))
 
@@ -73,12 +89,18 @@
 #define MXS_TOG_ADDR		0xc
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 chipid;
 static u32 socid;
 
 static void __iomem *reset_addr;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void __mxs_setl(u32 mask, void __iomem *reg)
 {
@@ -95,6 +117,7 @@ static inline void __mxs_togl(u32 mask, void __iomem *reg)
 	__raw_writel(mask, reg + MXS_TOG_ADDR);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * MX28EVK_FLEXCAN_SWITCH is shared between both flexcan controllers
@@ -131,6 +154,8 @@ static struct of_dev_auxdata mxs_auxdata_lookup[] __initdata = {
 	{ /* sentinel */ }
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define OCOTP_WORD_OFFSET		0x20
@@ -214,6 +239,11 @@ enum mac_oui {
 	OUI_DENX,
 	OUI_CRYSTALFONTZ,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	OUI_I2SE,
+	OUI_ARMADEUS,
+>>>>>>> v3.18
 =======
 	OUI_I2SE,
 	OUI_ARMADEUS,
@@ -273,7 +303,10 @@ static void __init update_fec_mac_prop(enum mac_oui oui)
 			macaddr[2] = 0xe1;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case OUI_I2SE:
 			macaddr[0] = 0x00;
 			macaddr[1] = 0x01;
@@ -284,6 +317,9 @@ static void __init update_fec_mac_prop(enum mac_oui oui)
 			macaddr[1] = 0x1e;
 			macaddr[2] = 0xac;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		val = ocotp[i];
@@ -311,6 +347,7 @@ static void __init imx28_evk_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init imx28_evk_post_init(void)
 {
 	if (!gpio_request_one(MX28EVK_FLEXCAN_SWITCH, GPIOF_DIR_OUT,
@@ -318,6 +355,11 @@ static void __init imx28_evk_post_init(void)
 		flexcan_pdata[0].transceiver_switch = mx28evk_flexcan0_switch;
 		flexcan_pdata[1].transceiver_switch = mx28evk_flexcan1_switch;
 	}
+=======
+static void __init imx28_apf28_init(void)
+{
+	update_fec_mac_prop(OUI_ARMADEUS);
+>>>>>>> v3.18
 =======
 static void __init imx28_apf28_init(void)
 {
@@ -415,6 +457,7 @@ static void __init tx28_post_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init cfa10049_init(void)
 =======
 static void __init crystalfontz_init(void)
@@ -425,10 +468,14 @@ static void __init crystalfontz_init(void)
 
 <<<<<<< HEAD
 static void __init cfa10037_init(void)
+=======
+static void __init crystalfontz_init(void)
+>>>>>>> v3.18
 {
 	update_fec_mac_prop(OUI_CRYSTALFONTZ);
 }
 
+<<<<<<< HEAD
 static void __init mxs_machine_init(void)
 {
 	if (of_machine_is_compatible("fsl,imx28-evk"))
@@ -449,6 +496,8 @@ static void __init mxs_machine_init(void)
 	if (of_machine_is_compatible("fsl,imx28-evk"))
 		imx28_evk_post_init();
 =======
+=======
+>>>>>>> v3.18
 static void __init duckbill_init(void)
 {
 	update_fec_mac_prop(OUI_I2SE);
@@ -527,11 +576,15 @@ static const char __init *mxs_get_revision(void)
 				rev & 0xf);
 	else
 		return kasprintf(GFP_KERNEL, "%s", "Unknown");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 #define MX23_CLKCTRL_RESET_OFFSET	0x120
 #define MX28_CLKCTRL_RESET_OFFSET	0x1e0
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MXS_CLKCTRL_RESET_CHIP		(1 << 1)
 
@@ -543,17 +596,26 @@ static void mxs_restart(enum reboot_mode mode, const char *cmd)
 	struct device_node *np;
 	void __iomem *reset_addr;
 =======
+=======
+>>>>>>> v3.18
 
 static int __init mxs_restart_init(void)
 {
 	struct device_node *np;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	np = of_find_compatible_node(NULL, NULL, "fsl,clkctrl");
 	reset_addr = of_iomap(np, 0);
 	if (!reset_addr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto soft;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -562,6 +624,7 @@ static int __init mxs_restart_init(void)
 		reset_addr += MX23_CLKCTRL_RESET_OFFSET;
 	else
 		reset_addr += MX28_CLKCTRL_RESET_OFFSET;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* reset the chip */
@@ -585,6 +648,8 @@ static void __init mxs_timer_init(void)
 		mx28_clocks_init();
 	clocksource_of_init();
 =======
+=======
+>>>>>>> v3.18
 	of_node_put(np);
 
 	return 0;
@@ -668,6 +733,9 @@ static void mxs_restart(enum reboot_mode mode, const char *cmd)
 
 	/* We'll take a jump through zero as a poor second */
 	soft_restart(0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -679,10 +747,14 @@ static const char *mxs_dt_compat[] __initdata = {
 
 DT_MACHINE_START(MXS, "Freescale MXS (Device Tree)")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.map_io		= debug_ll_io_init,
 	.init_irq	= irqchip_init,
 	.handle_irq	= icoll_handle_irq,
 	.init_time	= mxs_timer_init,
+=======
+	.handle_irq	= icoll_handle_irq,
+>>>>>>> v3.18
 =======
 	.handle_irq	= icoll_handle_irq,
 >>>>>>> v3.18

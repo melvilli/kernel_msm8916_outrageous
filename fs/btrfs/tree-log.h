@@ -20,12 +20,15 @@
 #define __TREE_LOG_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* return value for btrfs_log_dentry_safe that means we don't need to log it at all */
 #define BTRFS_NO_LOG_SYNC 256
 
 int btrfs_sync_log(struct btrfs_trans_handle *trans,
 		   struct btrfs_root *root);
 =======
+=======
+>>>>>>> v3.18
 #include "ctree.h"
 #include "transaction.h"
 
@@ -62,6 +65,9 @@ static inline int btrfs_need_log_full_commit(struct btrfs_fs_info *fs_info,
 
 int btrfs_sync_log(struct btrfs_trans_handle *trans,
 		   struct btrfs_root *root, struct btrfs_log_ctx *ctx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int btrfs_free_log(struct btrfs_trans_handle *trans, struct btrfs_root *root);
 int btrfs_free_log_root_tree(struct btrfs_trans_handle *trans,
@@ -69,12 +75,18 @@ int btrfs_free_log_root_tree(struct btrfs_trans_handle *trans,
 int btrfs_recover_log_trees(struct btrfs_root *tree_root);
 int btrfs_log_dentry_safe(struct btrfs_trans_handle *trans,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct btrfs_root *root, struct dentry *dentry);
 =======
+=======
+>>>>>>> v3.18
 			  struct btrfs_root *root, struct dentry *dentry,
 			  const loff_t start,
 			  const loff_t end,
 			  struct btrfs_log_ctx *ctx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int btrfs_del_dir_entries_in_log(struct btrfs_trans_handle *trans,
 				 struct btrfs_root *root,

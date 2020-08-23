@@ -23,6 +23,10 @@ struct mm_context {
 	 */
 	unsigned long priority_cached;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long vdso_base;
+>>>>>>> v3.18
 =======
 	unsigned long vdso_base;
 >>>>>>> v3.18

@@ -66,7 +66,12 @@
 #define SCA3000_RING_BUF_ENABLE			0x80
 #define SCA3000_RING_BUF_8BIT			0x40
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Free fall detection triggers an interrupt if the acceleration
+=======
+/*
+ * Free fall detection triggers an interrupt if the acceleration
+>>>>>>> v3.18
 =======
 /*
  * Free fall detection triggers an interrupt if the acceleration
@@ -79,8 +84,14 @@
 #define SCA3000_MEAS_MODE_OP_2			0x02
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* In motion detection mode the accelerations are band pass filtered
  * (aprox 1 - 25Hz) and then a programmable threshold used to trigger
+=======
+/*
+ * In motion detection mode the accelerations are band pass filtered
+ * (approx 1 - 25Hz) and then a programmable threshold used to trigger
+>>>>>>> v3.18
 =======
 /*
  * In motion detection mode the accelerations are band pass filtered
@@ -111,13 +122,19 @@
 #define SCA3000_REG_CTRL_SEL_MD_X_TH		0x04
 #define SCA3000_REG_CTRL_SEL_MD_Z_TH		0x05
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* BE VERY CAREFUL WITH THIS, IF 3 BITS ARE NOT SET the device
    will not function */
 =======
+=======
+>>>>>>> v3.18
 /*
  * BE VERY CAREFUL WITH THIS, IF 3 BITS ARE NOT SET the device
  * will not function
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SCA3000_REG_CTRL_SEL_OUT_CTRL		0x0B
 #define SCA3000_OUT_CTRL_PROT_MASK		0xE0
@@ -128,8 +145,14 @@
 #define SCA3000_OUT_CTRL_BUF_DIV_2		0x01
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Control which motion detector interrupts are on.
  * For now only OR combinations are supported.x
+=======
+/*
+ * Control which motion detector interrupts are on.
+ * For now only OR combinations are supported.
+>>>>>>> v3.18
 =======
 /*
  * Control which motion detector interrupts are on.
@@ -146,7 +169,12 @@
 #define SAC3000_MD_CTRL_AND_Z			0x20
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Some control registers of complex access methods requiring this register to
+=======
+/*
+ * Some control registers of complex access methods requiring this register to
+>>>>>>> v3.18
 =======
 /*
  * Some control registers of complex access methods requiring this register to
@@ -169,7 +197,12 @@
 #define SCA3000_REG_ADDR_CTRL_DATA		0x22
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Measurement modes available on some sca3000 series chips. Code assumes others
+=======
+/*
+ * Measurement modes available on some sca3000 series chips. Code assumes others
+>>>>>>> v3.18
 =======
 /*
  * Measurement modes available on some sca3000 series chips. Code assumes others
@@ -195,7 +228,10 @@
  * @us:			the associated spi device
  * @info:			chip variant information
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @indio_dev:			device information used by the IIO core
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @interrupt_handler_ws:	event interrupt handler for all events

@@ -35,10 +35,14 @@
 #include <linux/can/dev.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/of_platform.h>
 #include <asm/prom.h>
 
+=======
+#include <linux/of_platform.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_platform.h>
 >>>>>>> v3.18
@@ -1586,6 +1590,10 @@ static const struct net_device_ops grcan_netdev_ops = {
 	.ndo_stop	= grcan_close,
 	.ndo_start_xmit	= grcan_start_xmit,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu = can_change_mtu,
+>>>>>>> v3.18
 =======
 	.ndo_change_mtu = can_change_mtu,
 >>>>>>> v3.18
@@ -1655,7 +1663,11 @@ static int grcan_setup_netdev(struct platform_device *ofdev,
 		goto exit_free_candev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, dev);
+=======
+	platform_set_drvdata(ofdev, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, dev);
 >>>>>>> v3.18
@@ -1696,10 +1708,16 @@ static int grcan_probe(struct platform_device *ofdev)
 
 	res = platform_get_resource(ofdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	base = devm_request_and_ioremap(&ofdev->dev, res);
 	if (!base) {
 		dev_err(&ofdev->dev, "couldn't map IO resource\n");
 		err = -EADDRNOTAVAIL;
+=======
+	base = devm_ioremap_resource(&ofdev->dev, res);
+	if (IS_ERR(base)) {
+		err = PTR_ERR(base);
+>>>>>>> v3.18
 =======
 	base = devm_ioremap_resource(&ofdev->dev, res);
 	if (IS_ERR(base)) {
@@ -1735,7 +1753,11 @@ exit_error:
 static int grcan_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -1745,7 +1767,10 @@ static int grcan_remove(struct platform_device *ofdev)
 
 	irq_dispose_mapping(dev->irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	netif_napi_del(&priv->napi);

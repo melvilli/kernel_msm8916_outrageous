@@ -3,6 +3,12 @@ PERF_HAVE_DWARF_REGS := 1
 LIB_OBJS += $(OUTPUT)arch/$(ARCH)/util/dwarf-regs.o
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+LIB_OBJS += $(OUTPUT)arch/$(ARCH)/util/header.o
+HAVE_KVM_STAT_SUPPORT := 1
+LIB_OBJS += $(OUTPUT)arch/$(ARCH)/util/kvm-stat.o
+>>>>>>> v3.18
 =======
 LIB_OBJS += $(OUTPUT)arch/$(ARCH)/util/header.o
 HAVE_KVM_STAT_SUPPORT := 1

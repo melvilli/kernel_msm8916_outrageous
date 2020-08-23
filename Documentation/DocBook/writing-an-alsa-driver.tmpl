@@ -469,8 +469,11 @@
           }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
           snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
           *rchip = chip;
@@ -496,7 +499,12 @@
 
           /* (2) */
 <<<<<<< HEAD
+<<<<<<< HEAD
           err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+          err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+                             0, &card);
+>>>>>>> v3.18
 =======
           err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
                              0, &card);
@@ -600,7 +608,12 @@
   int err;
   ....
 <<<<<<< HEAD
+<<<<<<< HEAD
   err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+  err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+                     0, &card);
+>>>>>>> v3.18
 =======
   err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
                      0, &card);
@@ -823,7 +836,11 @@
       <para>
         As mentioned above, to create a card instance, call
 <<<<<<< HEAD
+<<<<<<< HEAD
       <function>snd_card_create()</function>.
+=======
+      <function>snd_card_new()</function>.
+>>>>>>> v3.18
 =======
       <function>snd_card_new()</function>.
 >>>>>>> v3.18
@@ -834,7 +851,11 @@
   struct snd_card *card;
   int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
   err = snd_card_create(index, id, module, extra_size, &card);
+=======
+  err = snd_card_new(&pci->dev, index, id, module, extra_size, &card);
+>>>>>>> v3.18
 =======
   err = snd_card_new(&pci->dev, index, id, module, extra_size, &card);
 >>>>>>> v3.18
@@ -845,8 +866,13 @@
 
       <para>
 <<<<<<< HEAD
+<<<<<<< HEAD
         The function takes five arguments, the card-index number, the
         id string, the module pointer (usually
+=======
+        The function takes six arguments: the parent device pointer,
+        the card-index number, the id string, the module pointer (usually
+>>>>>>> v3.18
 =======
         The function takes six arguments: the parent device pointer,
         the card-index number, the id string, the module pointer (usually
@@ -857,8 +883,11 @@
         allocate card-&gt;private_data for the
         chip-specific data.  Note that these data
 <<<<<<< HEAD
+<<<<<<< HEAD
         are allocated by <function>snd_card_create()</function>.
 =======
+=======
+>>>>>>> v3.18
         are allocated by <function>snd_card_new()</function>.
       </para>
 
@@ -866,6 +895,9 @@
 	The first argument, the pointer of struct
 	<structname>device</structname>, specifies the parent device.
 	For PCI devices, typically &amp;pci-&gt; is passed there.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       </para>
     </section>
@@ -953,23 +985,34 @@
 
       <section id="card-management-chip-specific-snd-card-new">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <title>1. Allocating via <function>snd_card_create()</function>.</title>
         <para>
           As mentioned above, you can pass the extra-data-length
 	  to the 4th argument of <function>snd_card_create()</function>, i.e.
 =======
+=======
+>>>>>>> v3.18
         <title>1. Allocating via <function>snd_card_new()</function>.</title>
         <para>
           As mentioned above, you can pass the extra-data-length
 	  to the 5th argument of <function>snd_card_new()</function>, i.e.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
           <informalexample>
             <programlisting>
 <![CDATA[
 <<<<<<< HEAD
+<<<<<<< HEAD
   err = snd_card_create(index[dev], id[dev], THIS_MODULE,
                         sizeof(struct mychip), &card);
+=======
+  err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+                     sizeof(struct mychip), &card);
+>>>>>>> v3.18
 =======
   err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
                      sizeof(struct mychip), &card);
@@ -1003,7 +1046,11 @@
         <para>
           After allocating a card instance via
 <<<<<<< HEAD
+<<<<<<< HEAD
           <function>snd_card_create()</function> (with
+=======
+          <function>snd_card_new()</function> (with
+>>>>>>> v3.18
 =======
           <function>snd_card_new()</function> (with
 >>>>>>> v3.18
@@ -1016,7 +1063,12 @@
   struct snd_card *card;
   struct mychip *chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
   err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+  err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+                     0, &card);
+>>>>>>> v3.18
 =======
   err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
                      0, &card);
@@ -1228,8 +1280,11 @@
           }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
           snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
           *rchip = chip;
@@ -1587,6 +1642,7 @@
     </section>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <section id="pci-resource-device-struct">
       <title>Registration of Device Struct</title>
       <para>
@@ -1611,6 +1667,8 @@
       </para>
     </section>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     <section id="pci-resource-entries">
@@ -2825,7 +2883,13 @@ struct _snd_pcm_runtime {
         <para>
           Another note is that this callback is non-atomic
 <<<<<<< HEAD
+<<<<<<< HEAD
         (schedulable). This is important, because the
+=======
+        (schedulable) as default, i.e. when no
+	<structfield>nonatomic</structfield> flag set.
+	This is important, because the
+>>>>>>> v3.18
 =======
         (schedulable) as default, i.e. when no
 	<structfield>nonatomic</structfield> flag set.
@@ -2989,8 +3053,14 @@ struct _snd_pcm_runtime {
 
         <para>
 <<<<<<< HEAD
+<<<<<<< HEAD
           As mentioned, this callback is atomic.  You cannot call
 	  functions which may sleep.
+=======
+          As mentioned, this callback is atomic as default unless
+	  <structfield>nonatomic</structfield> flag set, and
+	  you cannot call functions which may sleep.
+>>>>>>> v3.18
 =======
           As mentioned, this callback is atomic as default unless
 	  <structfield>nonatomic</structfield> flag set, and
@@ -3031,7 +3101,11 @@ struct _snd_pcm_runtime {
 
         <para>
 <<<<<<< HEAD
+<<<<<<< HEAD
           This callback is also atomic.
+=======
+          This callback is also atomic as default.
+>>>>>>> v3.18
 =======
           This callback is also atomic as default.
 >>>>>>> v3.18
@@ -3071,7 +3145,11 @@ struct _snd_pcm_runtime {
 	</para>
 	<para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  This callback is atomic.
+=======
+	  This callback is atomic as default.
+>>>>>>> v3.18
 =======
 	  This callback is atomic as default.
 >>>>>>> v3.18
@@ -3278,7 +3356,10 @@ struct _snd_pcm_runtime {
       </para>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
       <para>
       The recent changes in PCM core code, however, allow all PCM
       operations to be non-atomic.  This assumes that the all caller
@@ -3294,6 +3375,9 @@ struct _snd_pcm_runtime {
       all PCM functions safely in a non-atomic context.
       </para>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     </section>
     <section id="pcm-interface-constraints">
@@ -5817,7 +5901,11 @@ struct _snd_pcm_runtime {
 	<function>snd_pcm_suspend_all()</function> or
 	<function>snd_pcm_suspend()</function>.  It means that the PCM
 <<<<<<< HEAD
+<<<<<<< HEAD
 	streams are already stoppped when the register snapshot is
+=======
+	streams are already stopped when the register snapshot is
+>>>>>>> v3.18
 =======
 	streams are already stopped when the register snapshot is
 >>>>>>> v3.18
@@ -5846,7 +5934,12 @@ struct _snd_pcm_runtime {
           int err;
           ....
 <<<<<<< HEAD
+<<<<<<< HEAD
           err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+          err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+                             0, &card);
+>>>>>>> v3.18
 =======
           err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
                              0, &card);
@@ -5863,7 +5956,11 @@ struct _snd_pcm_runtime {
 
 	When you created the chip data with
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<function>snd_card_create()</function>, it's anyway accessible
+=======
+	<function>snd_card_new()</function>, it's anyway accessible
+>>>>>>> v3.18
 =======
 	<function>snd_card_new()</function>, it's anyway accessible
 >>>>>>> v3.18
@@ -5881,8 +5978,13 @@ struct _snd_pcm_runtime {
           int err;
           ....
 <<<<<<< HEAD
+<<<<<<< HEAD
           err = snd_card_create(index[dev], id[dev], THIS_MODULE,
                                 sizeof(struct mychip), &card);
+=======
+          err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+                             sizeof(struct mychip), &card);
+>>>>>>> v3.18
 =======
           err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
                              sizeof(struct mychip), &card);

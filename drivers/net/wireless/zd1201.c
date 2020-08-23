@@ -19,7 +19,11 @@
 #include <linux/etherdevice.h>
 #include <linux/wireless.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ieee80211.h>
+=======
+#include <net/cfg80211.h>
+>>>>>>> v3.18
 =======
 #include <net/cfg80211.h>
 >>>>>>> v3.18
@@ -80,13 +84,19 @@ static int zd1201_fw_upload(struct usb_device *dev, int apfw)
 
 	buf = kmalloc(1024, GFP_ATOMIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!buf)
 		goto exit;
 =======
+=======
+>>>>>>> v3.18
 	if (!buf) {
 		err = -ENOMEM;
 		goto exit;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	
 	while (len > 0) {
@@ -924,11 +934,16 @@ static int zd1201_set_freq(struct net_device *dev,
 	if (freq->e == 0)
 		channel = freq->m;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else {
 		channel = ieee80211_freq_to_dsss_chan(freq->m);
 		if (channel < 0)
 			channel = 0;
 	}
+=======
+	else
+		channel = ieee80211_frequency_to_channel(freq->m);
+>>>>>>> v3.18
 =======
 	else
 		channel = ieee80211_frequency_to_channel(freq->m);
@@ -1781,13 +1796,19 @@ static int zd1201_probe(struct usb_interface *interface,
 	zd->rx_urb = usb_alloc_urb(0, GFP_KERNEL);
 	zd->tx_urb = usb_alloc_urb(0, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!zd->rx_urb || !zd->tx_urb)
 		goto err_zd;
 =======
+=======
+>>>>>>> v3.18
 	if (!zd->rx_urb || !zd->tx_urb) {
 		err = -ENOMEM;
 		goto err_zd;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mdelay(100);

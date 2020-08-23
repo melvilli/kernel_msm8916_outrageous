@@ -9,6 +9,10 @@
 #include <linux/io.h>
 #include <linux/memblock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kernel.h>
+>>>>>>> v3.18
 =======
 #include <linux/kernel.h>
 >>>>>>> v3.18
@@ -20,12 +24,15 @@
 #include <asm/traps.h>
 #include <asm/mach/arch.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "mm.h"
 
 void __init arm_mm_memblock_reserve(void)
 {
 =======
+=======
+>>>>>>> v3.18
 #include <asm/cputype.h>
 #include <asm/mpu.h>
 #include <asm/procinfo.h>
@@ -290,6 +297,9 @@ static void __init mpu_setup(void) {}
 void __init arm_mm_memblock_reserve(void)
 {
 #ifndef CONFIG_CPU_V7M
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Register the exception vector page.
@@ -298,22 +308,31 @@ void __init arm_mm_memblock_reserve(void)
 	 */
 	memblock_reserve(CONFIG_VECTORS_BASE, PAGE_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else /* ifndef CONFIG_CPU_V7M */
 	/*
 	 * There is no dedicated vector page on V7-M. So nothing needs to be
 	 * reserved here.
 	 */
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void __init sanity_check_meminfo(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phys_addr_t end = bank_phys_end(&meminfo.bank[meminfo.nr_banks - 1]);
 	high_memory = __va(end - 1) + 1;
 =======
+=======
+>>>>>>> v3.18
 	phys_addr_t end;
 	sanity_check_meminfo_mpu();
 	end = memblock_end_of_DRAM();
@@ -328,6 +347,9 @@ void __init sanity_check_meminfo(void)
 void __init early_paging_init(const struct machine_desc *mdesc,
 			      struct proc_info_list *procinfo)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -339,6 +361,10 @@ void __init paging_init(const struct machine_desc *mdesc)
 {
 	early_trap_init((void *)CONFIG_VECTORS_BASE);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mpu_setup();
+>>>>>>> v3.18
 =======
 	mpu_setup();
 >>>>>>> v3.18

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -348,8 +352,13 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 {
 	union acpi_operand_object *ddb_handle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_table_header *table;
 	struct acpi_table_desc table_desc;
+=======
+	struct acpi_table_header *table_header;
+	struct acpi_table_header *table;
+>>>>>>> v3.18
 =======
 	struct acpi_table_header *table_header;
 	struct acpi_table_header *table;
@@ -361,8 +370,11 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 	ACPI_FUNCTION_TRACE(ex_load_op);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_MEMSET(&table_desc, 0, sizeof(struct acpi_table_desc));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Source Object can be either an op_region or a Buffer/Field */
@@ -393,8 +405,13 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 		/* Get the table header first so we can get the table length */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		table = ACPI_ALLOCATE(sizeof(struct acpi_table_header));
 		if (!table) {
+=======
+		table_header = ACPI_ALLOCATE(sizeof(struct acpi_table_header));
+		if (!table_header) {
+>>>>>>> v3.18
 =======
 		table_header = ACPI_ALLOCATE(sizeof(struct acpi_table_header));
 		if (!table_header) {
@@ -406,9 +423,15 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 		    acpi_ex_region_read(obj_desc,
 					sizeof(struct acpi_table_header),
 <<<<<<< HEAD
+<<<<<<< HEAD
 					ACPI_CAST_PTR(u8, table));
 		length = table->length;
 		ACPI_FREE(table);
+=======
+					ACPI_CAST_PTR(u8, table_header));
+		length = table_header->length;
+		ACPI_FREE(table_header);
+>>>>>>> v3.18
 =======
 					ACPI_CAST_PTR(u8, table_header));
 		length = table_header->length;
@@ -444,8 +467,13 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 		/* Allocate a buffer for the table */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		table_desc.pointer = ACPI_ALLOCATE(length);
 		if (!table_desc.pointer) {
+=======
+		table = ACPI_ALLOCATE(length);
+		if (!table) {
+>>>>>>> v3.18
 =======
 		table = ACPI_ALLOCATE(length);
 		if (!table) {
@@ -457,6 +485,7 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 
 		status = acpi_ex_region_read(obj_desc, length,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					     ACPI_CAST_PTR(u8,
 							   table_desc.pointer));
 		if (ACPI_FAILURE(status)) {
@@ -466,11 +495,16 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 
 		table_desc.address = obj_desc->region.address;
 =======
+=======
+>>>>>>> v3.18
 					     ACPI_CAST_PTR(u8, table));
 		if (ACPI_FAILURE(status)) {
 			ACPI_FREE(table);
 			return_ACPI_STATUS(status);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -489,15 +523,21 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 		/* Get the actual table length from the table header */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		table =
 		    ACPI_CAST_PTR(struct acpi_table_header,
 				  obj_desc->buffer.pointer);
 		length = table->length;
 =======
+=======
+>>>>>>> v3.18
 		table_header =
 		    ACPI_CAST_PTR(struct acpi_table_header,
 				  obj_desc->buffer.pointer);
 		length = table_header->length;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Table cannot extend beyond the buffer */
@@ -513,6 +553,7 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 		 * Copy the table from the buffer because the buffer could be modified
 		 * or even deleted in the future
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		table_desc.pointer = ACPI_ALLOCATE(length);
 		if (!table_desc.pointer) {
@@ -544,6 +585,8 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 
 	status = acpi_tb_add_table(&table_desc, &table_index);
 =======
+=======
+>>>>>>> v3.18
 		table = ACPI_ALLOCATE(length);
 		if (!table) {
 			return_ACPI_STATUS(AE_NO_MEMORY);
@@ -567,14 +610,20 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 						TRUE, TRUE, &table_index);
 
 	(void)acpi_ut_release_mutex(ACPI_MTX_TABLES);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ACPI_FAILURE(status)) {
 
 		/* Delete allocated table buffer */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		acpi_tb_delete_table(&table_desc);
 =======
+=======
+>>>>>>> v3.18
 		ACPI_FREE(table);
 		return_ACPI_STATUS(status);
 	}
@@ -587,6 +636,9 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 	    acpi_tb_validate_table(&acpi_gbl_root_table_list.
 				   tables[table_index]);
 	if (ACPI_FAILURE(status)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return_ACPI_STATUS(status);
 	}
@@ -620,9 +672,12 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_INFO((AE_INFO, "Dynamic OEM Table Load:"));
 	acpi_tb_print_table_header(0, table_desc.pointer);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Remove the reference by added by acpi_ex_store above */
@@ -633,8 +688,12 @@ acpi_ex_load_op(union acpi_operand_object *obj_desc,
 
 	if (acpi_gbl_table_handler) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(void)acpi_gbl_table_handler(ACPI_TABLE_EVENT_LOAD,
 					     table_desc.pointer,
+=======
+		(void)acpi_gbl_table_handler(ACPI_TABLE_EVENT_LOAD, table,
+>>>>>>> v3.18
 =======
 		(void)acpi_gbl_table_handler(ACPI_TABLE_EVENT_LOAD, table,
 >>>>>>> v3.18
@@ -667,7 +726,10 @@ acpi_status acpi_ex_unload_table(union acpi_operand_object *ddb_handle)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Temporarily emit a warning so that the ASL for the machine can be
 	 * hopefully obtained. This is to say that the Unload() operator is
 	 * extremely rare if not completely unused.
@@ -675,6 +737,9 @@ acpi_status acpi_ex_unload_table(union acpi_operand_object *ddb_handle)
 	ACPI_WARNING((AE_INFO, "Received request to unload an ACPI table"));
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Validate the handle
 	 * Although the handle is partially validated in acpi_ex_reconfiguration()
@@ -690,7 +755,11 @@ acpi_status acpi_ex_unload_table(union acpi_operand_object *ddb_handle)
 	    (ddb_handle->common.type != ACPI_TYPE_LOCAL_REFERENCE) ||
 	    (!(ddb_handle->common.flags & AOPOBJ_DATA_VALID))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return_ACPI_STATUS(AE_BAD_PARAMETER);
+=======
+		return_ACPI_STATUS(AE_AML_OPERAND_TYPE);
+>>>>>>> v3.18
 =======
 		return_ACPI_STATUS(AE_AML_OPERAND_TYPE);
 >>>>>>> v3.18

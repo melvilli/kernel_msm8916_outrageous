@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -76,11 +80,17 @@ static const u8 acpi_gbl_argument_count[] =
 const struct acpi_opcode_info *acpi_ps_get_opcode_info(u16 opcode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef ACPI_DEBUG_OUTPUT
 	const char *opcode_name = "Unknown AML opcode";
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ACPI_FUNCTION_NAME(ps_get_opcode_info);
 
@@ -104,12 +114,15 @@ const struct acpi_opcode_info *acpi_ps_get_opcode_info(u16 opcode)
 			[acpi_gbl_long_op_index[(u8)opcode]]);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Unknown AML opcode */
 
 	ACPI_DEBUG_PRINT((ACPI_DB_EXEC,
 			  "Unknown AML opcode [%4.4X]\n", opcode));
 =======
+=======
+>>>>>>> v3.18
 #if defined ACPI_ASL_COMPILER && defined ACPI_DEBUG_OUTPUT
 #include "asldefine.h"
 
@@ -158,6 +171,9 @@ const struct acpi_opcode_info *acpi_ps_get_opcode_info(u16 opcode)
 	/* Unknown AML opcode */
 
 	ACPI_DEBUG_PRINT((ACPI_DB_EXEC, "%s [%4.4X]\n", opcode_name, opcode));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return (&acpi_gbl_aml_op_info[_UNK]);

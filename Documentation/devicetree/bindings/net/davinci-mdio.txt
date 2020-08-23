@@ -1,15 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 TI SoC Davinci MDIO Controller Device Tree Bindings
 ---------------------------------------------------
 
 Required properties:
 - compatible		: Should be "ti,davinci_mdio"
 =======
+=======
+>>>>>>> v3.18
 TI SoC Davinci/Keystone2 MDIO Controller Device Tree Bindings
 ---------------------------------------------------
 
 Required properties:
 - compatible		: Should be "ti,davinci_mdio" or "ti,keystone_mdio"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - reg			: physical base address and size of the davinci mdio
 			  registers map
@@ -28,7 +34,11 @@ Examples:
 
 	mdio: davinci_mdio@4A101000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "ti,cpsw";
+=======
+		compatible = "ti,davinci_mdio";
+>>>>>>> v3.18
 =======
 		compatible = "ti,davinci_mdio";
 >>>>>>> v3.18
@@ -40,7 +50,11 @@ Examples:
 
 	mdio: davinci_mdio@4A101000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "ti,cpsw";
+=======
+		compatible = "ti,davinci_mdio";
+>>>>>>> v3.18
 =======
 		compatible = "ti,davinci_mdio";
 >>>>>>> v3.18

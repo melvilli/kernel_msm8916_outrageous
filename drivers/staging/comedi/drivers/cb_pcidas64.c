@@ -29,12 +29,16 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ************************************************************************/
+=======
+*/
+>>>>>>> v3.18
 =======
 */
 >>>>>>> v3.18
@@ -90,8 +94,12 @@ TODO:
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -107,6 +115,7 @@ TODO:
 #include "comedi_fc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef PCIDAS64_DEBUG		/*  disable debugging code */
 /* #define PCIDAS64_DEBUG         enable debugging code */
 
@@ -116,6 +125,8 @@ TODO:
 #define DEBUG_PRINT(format, args...)  no_printk(format, ## args)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define TIMER_BASE 25		/*  40MHz master clock */
@@ -204,7 +215,11 @@ enum read_write_registers {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* devpriv->dio_counter_iobase registers */
+=======
+/* dev->mmio registers */
+>>>>>>> v3.18
 =======
 /* dev->mmio registers */
 >>>>>>> v3.18
@@ -458,6 +473,7 @@ static inline uint8_t attenuate_bit(unsigned int channel)
 /* analog input ranges for 64xx boards */
 static const struct comedi_lrange ai_ranges_64xx = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	8,
 	{
 	 BIP_RANGE(10),
@@ -484,12 +500,17 @@ static const struct comedi_lrange ai_ranges_64_mx = {
 		BIP_RANGE(1.25),
 		BIP_RANGE(0.625),
 =======
+=======
+>>>>>>> v3.18
 	8, {
 		BIP_RANGE(10),
 		BIP_RANGE(5),
 		BIP_RANGE(2.5),
 		BIP_RANGE(1.25),
 		UNI_RANGE(10),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		UNI_RANGE(5),
 		UNI_RANGE(2.5),
@@ -497,6 +518,7 @@ static const struct comedi_lrange ai_ranges_64_mx = {
 	}
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const uint8_t ai_range_code_64_mx[7] = {
 	0x0, 0x1, 0x2, 0x3,	/* bipolar 5, 2.5, 1.25, 0.625 */
@@ -517,6 +539,8 @@ static const struct comedi_lrange ai_ranges_60xx = {
 static const uint8_t ai_range_code_60xx[4] = {
 	0x0, 0x1, 0x4, 0x7	/* bipolar 10, 5, 0.5, 0.05 */
 =======
+=======
+>>>>>>> v3.18
 /* analog input ranges for 60xx boards */
 static const struct comedi_lrange ai_ranges_60xx = {
 	4, {
@@ -525,11 +549,15 @@ static const struct comedi_lrange ai_ranges_60xx = {
 		BIP_RANGE(0.5),
 		BIP_RANGE(0.05)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* analog input ranges for 6030, etc boards */
 static const struct comedi_lrange ai_ranges_6030 = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	14,
 	{
@@ -554,6 +582,8 @@ static const uint8_t ai_range_code_6030[14] = {
 	0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, /* bip 10, 5, 2, 1, 0.5, 0.2, 0.1 */
 	0x9, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf  /* uni 10, 5, 2, 1, 0.5, 0.2, 0.1 */
 =======
+=======
+>>>>>>> v3.18
 	14, {
 		BIP_RANGE(10),
 		BIP_RANGE(5),
@@ -570,11 +600,15 @@ static const uint8_t ai_range_code_6030[14] = {
 		UNI_RANGE(0.2),
 		UNI_RANGE(0.1)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* analog input ranges for 6052, etc boards */
 static const struct comedi_lrange ai_ranges_6052 = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	15,
 	{
@@ -600,6 +634,8 @@ static const uint8_t ai_range_code_6052[15] = {
 	0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7,	/* bipolar 10 ... 0.05 */
 	0x9, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf	/* unipolar 10 ... 0.1 */
 =======
+=======
+>>>>>>> v3.18
 	15, {
 		BIP_RANGE(10),
 		BIP_RANGE(5),
@@ -617,11 +653,15 @@ static const uint8_t ai_range_code_6052[15] = {
 		UNI_RANGE(0.2),
 		UNI_RANGE(0.1)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* analog input ranges for 4020 board */
 static const struct comedi_lrange ai_ranges_4020 = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	2,
 	{
@@ -629,15 +669,21 @@ static const struct comedi_lrange ai_ranges_4020 = {
 	 BIP_RANGE(1),
 	 }
 =======
+=======
+>>>>>>> v3.18
 	2, {
 		BIP_RANGE(5),
 		BIP_RANGE(1)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* analog output ranges */
 static const struct comedi_lrange ao_ranges_64xx = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	4,
 	{
@@ -647,12 +693,17 @@ static const struct comedi_lrange ao_ranges_64xx = {
 	 UNI_RANGE(10),
 	 }
 =======
+=======
+>>>>>>> v3.18
 	4, {
 		BIP_RANGE(5),
 		BIP_RANGE(10),
 		UNI_RANGE(5),
 		UNI_RANGE(10)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -669,16 +720,22 @@ static const int ao_range_code_60xx[] = {
 
 static const struct comedi_lrange ao_ranges_6030 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	2,
 	{
 	 BIP_RANGE(10),
 	 UNI_RANGE(10),
 	 }
 =======
+=======
+>>>>>>> v3.18
 	2, {
 		BIP_RANGE(10),
 		UNI_RANGE(10)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -689,16 +746,22 @@ static const int ao_range_code_6030[] = {
 
 static const struct comedi_lrange ao_ranges_4020 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	2,
 	{
 	 BIP_RANGE(5),
 	 BIP_RANGE(10),
 	 }
 =======
+=======
+>>>>>>> v3.18
 	2, {
 		BIP_RANGE(5),
 		BIP_RANGE(10)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -758,7 +821,10 @@ struct pcidas64_board {
 	int ai_speed;		/*  fastest conversion period in ns */
 	const struct comedi_lrange *ai_range_table;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const uint8_t *ai_range_code;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ao_nchan;		/*  number of analog out channels */
@@ -803,8 +869,13 @@ static inline unsigned int ai_dma_ring_count(const struct pcidas64_board *board)
 	if (board->layout == LAYOUT_4020)
 		return MAX_AI_DMA_RING_COUNT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		return MIN_AI_DMA_RING_COUNT;
+=======
+
+	return MIN_AI_DMA_RING_COUNT;
+>>>>>>> v3.18
 =======
 
 	return MIN_AI_DMA_RING_COUNT;
@@ -825,7 +896,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_64XX,
 		.ai_range_table	= &ai_ranges_64xx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_64xx,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &ao_ranges_64xx,
@@ -844,7 +918,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_64XX,
 		.ai_range_table	= &ai_ranges_64xx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_64xx,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &ao_ranges_64xx,
@@ -862,8 +939,12 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.ao_scan_speed	= 10000,
 		.layout		= LAYOUT_64XX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_table	= &ai_ranges_64_mx,
 		.ai_range_code	= ai_range_code_64_mx,
+=======
+		.ai_range_table	= &ai_ranges_64xx,
+>>>>>>> v3.18
 =======
 		.ai_range_table	= &ai_ranges_64xx,
 >>>>>>> v3.18
@@ -882,8 +963,12 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.ao_scan_speed	= 10000,
 		.layout		= LAYOUT_64XX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_table	= &ai_ranges_64_mx,
 		.ai_range_code	= ai_range_code_64_mx,
+=======
+		.ai_range_table	= &ai_ranges_64xx,
+>>>>>>> v3.18
 =======
 		.ai_range_table	= &ai_ranges_64xx,
 >>>>>>> v3.18
@@ -902,8 +987,12 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.ao_scan_speed	= 10000,
 		.layout		= LAYOUT_64XX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_table	= &ai_ranges_64_mx,
 		.ai_range_code	= ai_range_code_64_mx,
+=======
+		.ai_range_table	= &ai_ranges_64xx,
+>>>>>>> v3.18
 =======
 		.ai_range_table	= &ai_ranges_64xx,
 >>>>>>> v3.18
@@ -922,7 +1011,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_60xx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_60xx,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &range_bipolar10,
@@ -941,7 +1033,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_60xx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_60xx,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &range_bipolar10,
@@ -959,7 +1054,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_60xx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_60xx,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &range_bipolar10,
@@ -978,7 +1076,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_60xx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_60xx,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &range_bipolar10,
@@ -997,7 +1098,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_6030,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_6030,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &ao_ranges_6030,
@@ -1016,7 +1120,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_6030,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_6030,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &ao_ranges_6030,
@@ -1033,7 +1140,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_6030,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_6030,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ai_fifo	= &ai_fifo_60xx,
@@ -1048,7 +1158,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_6030,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_6030,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ai_fifo	= &ai_fifo_60xx,
@@ -1064,7 +1177,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_60xx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_60xx,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ai_fifo	= &ai_fifo_60xx,
@@ -1081,7 +1197,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_60xx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_60xx,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &range_bipolar10,
@@ -1100,7 +1219,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_60xx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_60xx,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &range_bipolar10,
@@ -1119,7 +1241,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_6052,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_6052,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &ao_ranges_6030,
@@ -1138,7 +1263,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_6052,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_6052,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &ao_ranges_6030,
@@ -1157,7 +1285,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_6052,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_6052,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &ao_ranges_6030,
@@ -1176,7 +1307,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_60XX,
 		.ai_range_table	= &ai_ranges_6052,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_6052,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ao_range_table	= &ao_ranges_6030,
@@ -1214,7 +1348,10 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.layout		= LAYOUT_64XX,
 		.ai_range_table	= &ai_ranges_64xx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_code	= ai_range_code_64xx,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.ai_fifo	= ai_fifo_64xx,
@@ -1229,8 +1366,12 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.ao_scan_speed	= 10000,
 		.layout		= LAYOUT_64XX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_table	= &ai_ranges_64_mx,
 		.ai_range_code	= ai_range_code_64_mx,
+=======
+		.ai_range_table	= &ai_ranges_64xx,
+>>>>>>> v3.18
 =======
 		.ai_range_table	= &ai_ranges_64xx,
 >>>>>>> v3.18
@@ -1246,8 +1387,12 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.ao_scan_speed	= 10000,
 		.layout		= LAYOUT_64XX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_table	= &ai_ranges_64_mx,
 		.ai_range_code	= ai_range_code_64_mx,
+=======
+		.ai_range_table	= &ai_ranges_64xx,
+>>>>>>> v3.18
 =======
 		.ai_range_table	= &ai_ranges_64xx,
 >>>>>>> v3.18
@@ -1263,8 +1408,12 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.ao_scan_speed	= 10000,
 		.layout		= LAYOUT_64XX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_table	= &ai_ranges_64_mx,
 		.ai_range_code	= ai_range_code_64_mx,
+=======
+		.ai_range_table	= &ai_ranges_64xx,
+>>>>>>> v3.18
 =======
 		.ai_range_table	= &ai_ranges_64xx,
 >>>>>>> v3.18
@@ -1280,8 +1429,12 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.ao_scan_speed	= 10000,
 		.layout		= LAYOUT_64XX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_table	= &ai_ranges_64_mx,
 		.ai_range_code	= ai_range_code_64_mx,
+=======
+		.ai_range_table	= &ai_ranges_64xx,
+>>>>>>> v3.18
 =======
 		.ai_range_table	= &ai_ranges_64xx,
 >>>>>>> v3.18
@@ -1297,8 +1450,12 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.ao_scan_speed	= 10000,
 		.layout		= LAYOUT_64XX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_table	= &ai_ranges_64_mx,
 		.ai_range_code	= ai_range_code_64_mx,
+=======
+		.ai_range_table	= &ai_ranges_64xx,
+>>>>>>> v3.18
 =======
 		.ai_range_table	= &ai_ranges_64xx,
 >>>>>>> v3.18
@@ -1314,8 +1471,12 @@ static const struct pcidas64_board pcidas64_boards[] = {
 		.ao_scan_speed	= 10000,
 		.layout		= LAYOUT_64XX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ai_range_table	= &ai_ranges_64_mx,
 		.ai_range_code	= ai_range_code_64_mx,
+=======
+		.ai_range_table	= &ai_ranges_64xx,
+>>>>>>> v3.18
 =======
 		.ai_range_table	= &ai_ranges_64xx,
 >>>>>>> v3.18
@@ -1329,7 +1490,11 @@ static inline unsigned short se_diff_bit_6xxx(struct comedi_device *dev,
 					      int use_differential)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -1338,9 +1503,15 @@ static inline unsigned short se_diff_bit_6xxx(struct comedi_device *dev,
 	    (thisboard->layout == LAYOUT_60XX && use_differential))
 		return ADC_SE_DIFF_BIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		return 0;
 };
+=======
+
+	return 0;
+}
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -1363,7 +1534,10 @@ struct pcidas64_private {
 	void __iomem *plx9080_iobase;
 	void __iomem *main_iobase;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *dio_counter_iobase;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*  local address (used by dma controller) */
@@ -1371,7 +1545,11 @@ struct pcidas64_private {
 	uint32_t local1_iobase;
 	/*  number of analog input samples remaining */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	volatile unsigned int ai_count;
+=======
+	unsigned int ai_count;
+>>>>>>> v3.18
 =======
 	unsigned int ai_count;
 >>>>>>> v3.18
@@ -1387,7 +1565,11 @@ struct pcidas64_private {
 	/*  index of the ai dma descriptor/buffer
 	 *  that is currently being used */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	volatile unsigned int ai_dma_index;
+=======
+	unsigned int ai_dma_index;
+>>>>>>> v3.18
 =======
 	unsigned int ai_dma_index;
 >>>>>>> v3.18
@@ -1398,6 +1580,7 @@ struct pcidas64_private {
 	struct plx_dma_desc *ao_dma_desc;
 	dma_addr_t ao_dma_desc_bus_addr;
 	/*  keeps track of buffer where the next ao sample should go */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	volatile unsigned int ao_dma_index;
 	/*  number of analog output samples remaining */
@@ -1432,6 +1615,8 @@ struct pcidas64_private {
 	struct ext_clock_info ext_clock;
 	short ao_bounce_buffer[DAC_FIFO_SIZE];
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ao_dma_index;
 	/*  number of analog output samples remaining */
 	unsigned long ao_count;
@@ -1462,6 +1647,9 @@ struct pcidas64_private {
 	unsigned int ai_fifo_segment_length;
 	struct ext_clock_info ext_clock;
 	unsigned short ao_bounce_buffer[DAC_FIFO_SIZE];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1469,10 +1657,13 @@ static unsigned int ai_range_bits_6xxx(const struct comedi_device *dev,
 				       unsigned int range_index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
 
 	return thisboard->ai_range_code[range_index] << 8;
 =======
+=======
+>>>>>>> v3.18
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 	const struct comedi_krange *range =
 		&thisboard->ai_range_table->range[range_index];
@@ -1513,6 +1704,9 @@ static unsigned int ai_range_bits_6xxx(const struct comedi_device *dev,
 	if (range->min == 0)
 		bits += 0x900;
 	return bits;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1520,7 +1714,11 @@ static unsigned int hw_revision(const struct comedi_device *dev,
 				uint16_t hw_status_bits)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -1533,6 +1731,7 @@ static unsigned int hw_revision(const struct comedi_device *dev,
 
 static void set_dac_range_bits(struct comedi_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       volatile uint16_t *bits, unsigned int channel,
 			       unsigned int range)
 {
@@ -1544,6 +1743,8 @@ static void set_dac_range_bits(struct comedi_device *dev,
 	if (code & ~0x3)
 		comedi_error(dev, "bug! bad range code?");
 =======
+=======
+>>>>>>> v3.18
 			       uint16_t *bits, unsigned int channel,
 			       unsigned int range)
 {
@@ -1554,6 +1755,9 @@ static void set_dac_range_bits(struct comedi_device *dev,
 		dev_err(dev->class_dev, "bug! bad channel?\n");
 	if (code & ~0x3)
 		dev_err(dev->class_dev, "bug! bad range code?\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*bits &= ~(0x3 << (2 * channel));
@@ -1601,8 +1805,11 @@ static void disable_ai_interrupts(struct comedi_device *dev)
 	       devpriv->main_iobase + INTR_ENABLE_REG);
 	spin_unlock_irqrestore(&dev->spinlock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	DEBUG_PRINT("intr enable bits 0x%x\n", devpriv->intr_enable_bits);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1611,7 +1818,11 @@ static void enable_ai_interrupts(struct comedi_device *dev,
 				 const struct comedi_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -1623,8 +1834,13 @@ static void enable_ai_interrupts(struct comedi_device *dev,
 	       EN_ADC_ACTIVE_INTR_BIT | EN_ADC_STOP_INTR_BIT;
 	/*  Use pio transfer and interrupt on end of conversion
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *  if TRIG_WAKE_EOS flag is set. */
 	if (cmd->flags & TRIG_WAKE_EOS) {
+=======
+	 *  if CMDF_WAKE_EOS flag is set. */
+	if (cmd->flags & CMDF_WAKE_EOS) {
+>>>>>>> v3.18
 =======
 	 *  if CMDF_WAKE_EOS flag is set. */
 	if (cmd->flags & CMDF_WAKE_EOS) {
@@ -1638,7 +1854,10 @@ static void enable_ai_interrupts(struct comedi_device *dev,
 	writew(devpriv->intr_enable_bits,
 	       devpriv->main_iobase + INTR_ENABLE_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("intr enable bits 0x%x\n", devpriv->intr_enable_bits);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&dev->spinlock, flags);
@@ -1648,7 +1867,11 @@ static void enable_ai_interrupts(struct comedi_device *dev,
 static void init_plx9080(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -1659,6 +1882,7 @@ static void init_plx9080(struct comedi_device *dev)
 	devpriv->plx_control_bits =
 		readl(devpriv->plx9080_iobase + PLX_CONTROL_REG);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*  plx9080 dump */
 	DEBUG_PRINT(" plx interrupt status 0x%x\n",
@@ -1692,6 +1916,8 @@ static void init_plx9080(struct comedi_device *dev)
 		    readl(plx_iobase + PLX_DMA0_THRESHOLD_REG));
 	DEBUG_PRINT(" plx bigend 0x%x\n", readl(plx_iobase + PLX_BIGEND_REG));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef __BIG_ENDIAN
@@ -1765,7 +1991,11 @@ static int set_ai_fifo_segment_length(struct comedi_device *dev,
 				      unsigned int num_entries)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -1792,9 +2022,12 @@ static int set_ai_fifo_segment_length(struct comedi_device *dev,
 	devpriv->ai_fifo_segment_length = num_increments * increment_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("set hardware fifo segment length to %i\n",
 		    devpriv->ai_fifo_segment_length);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return devpriv->ai_fifo_segment_length;
@@ -1804,7 +2037,11 @@ static int set_ai_fifo_segment_length(struct comedi_device *dev,
 static int set_ai_fifo_size(struct comedi_device *dev, unsigned int num_samples)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -1823,8 +2060,11 @@ static int set_ai_fifo_size(struct comedi_device *dev, unsigned int num_samples)
 	num_samples = retval * fifo->num_segments * fifo->sample_packing_ratio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("set hardware fifo size to %i\n", num_samples);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return num_samples;
@@ -1834,7 +2074,11 @@ static int set_ai_fifo_size(struct comedi_device *dev, unsigned int num_samples)
 static unsigned int ai_fifo_size(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -1848,7 +2092,11 @@ static unsigned int ai_fifo_size(struct comedi_device *dev)
 static void init_stc_registers(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -1898,7 +2146,11 @@ static void init_stc_registers(struct comedi_device *dev)
 static int alloc_and_init_dma_members(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -1935,8 +2187,11 @@ static int alloc_and_init_dma_members(struct comedi_device *dev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("ai dma descriptors start at bus addr 0x%llx\n",
 		    (unsigned long long)devpriv->ai_dma_desc_bus_addr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ao_cmd_is_supported(thisboard)) {
@@ -1948,9 +2203,12 @@ static int alloc_and_init_dma_members(struct comedi_device *dev)
 		if (devpriv->ao_dma_desc == NULL)
 			return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		DEBUG_PRINT("ao dma descriptors start at bus addr 0x%llx\n",
 			    (unsigned long long)devpriv->ao_dma_desc_bus_addr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1994,6 +2252,7 @@ static int alloc_and_init_dma_members(struct comedi_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void warn_external_queue(struct comedi_device *dev)
 {
 	comedi_error(dev,
@@ -2001,6 +2260,8 @@ static inline void warn_external_queue(struct comedi_device *dev)
 	comedi_error(dev,
 		     "Use internal AI channel queue (channels must be consecutive and use same range/aref)");
 =======
+=======
+>>>>>>> v3.18
 static void cb_pcidas64_free_dma(struct comedi_device *dev)
 {
 	const struct pcidas64_board *thisboard = dev->board_ptr;
@@ -2047,6 +2308,9 @@ static inline void warn_external_queue(struct comedi_device *dev)
 		"AO command and AI external channel queue cannot be used simultaneously\n");
 	dev_err(dev->class_dev,
 		"Use internal AI channel queue (channels must be consecutive and use same range/aref)\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2102,8 +2366,11 @@ static void i2c_write_byte(struct comedi_device *dev, uint8_t byte)
 	unsigned int num_bits = 8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("writing to i2c byte 0x%x\n", byte);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (bit = 1 << (num_bits - 1); bit; bit >>= 1) {
@@ -2167,7 +2434,12 @@ static void i2c_write(struct comedi_device *dev, unsigned int address,
 	/*  get acknowledge */
 	if (i2c_read_ack(dev) != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev, "i2c write failed: no acknowledge");
+=======
+		dev_err(dev->class_dev, "%s failed: no acknowledge\n",
+			__func__);
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "%s failed: no acknowledge\n",
 			__func__);
@@ -2180,7 +2452,12 @@ static void i2c_write(struct comedi_device *dev, unsigned int address,
 		i2c_write_byte(dev, data[i]);
 		if (i2c_read_ack(dev) != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			comedi_error(dev, "i2c write failed: no acknowledge");
+=======
+			dev_err(dev->class_dev, "%s failed: no acknowledge\n",
+				__func__);
+>>>>>>> v3.18
 =======
 			dev_err(dev->class_dev, "%s failed: no acknowledge\n",
 				__func__);
@@ -2192,6 +2469,7 @@ static void i2c_write(struct comedi_device *dev, unsigned int address,
 	i2c_stop(dev);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ai_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 		    struct comedi_insn *insn, unsigned int *data)
@@ -2205,6 +2483,8 @@ static int ai_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 
 	DEBUG_PRINT("chanspec 0x%x\n", insn->chanspec);
 =======
+=======
+>>>>>>> v3.18
 static int cb_pcidas64_ai_eoc(struct comedi_device *dev,
 			      struct comedi_subdevice *s,
 			      struct comedi_insn *insn,
@@ -2236,6 +2516,9 @@ static int ai_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 	unsigned long flags;
 	int ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	channel = CR_CHAN(insn->chanspec);
 	range = CR_RANGE(insn->chanspec);
@@ -2265,7 +2548,10 @@ static int ai_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 			unsigned int cal_en_bit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DEBUG_PRINT("reading calibration source\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			if (thisboard->layout == LAYOUT_60XX)
@@ -2302,7 +2588,10 @@ static int ai_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 		devpriv->i2c_cal_range_bits &= ~ADC_SRC_4020_MASK;
 		if (insn->chanspec & CR_ALT_SOURCE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DEBUG_PRINT("reading calibration source\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			devpriv->i2c_cal_range_bits |=
@@ -2320,6 +2609,10 @@ static int ai_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 		if (old_cal_range_bits != devpriv->i2c_cal_range_bits) {
 			uint8_t i2c_data = devpriv->i2c_cal_range_bits;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2346,6 +2639,7 @@ static int ai_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 
 		/*  wait for data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < timeout; i++) {
 			bits = readw(devpriv->main_iobase + HW_STATUS_REG);
 			DEBUG_PRINT(" pipe bits 0x%x\n", pipe_full_bits(bits));
@@ -2369,12 +2663,17 @@ static int ai_rinsn(struct comedi_device *dev, struct comedi_subdevice *s,
 			data[n] = readl(devpriv->dio_counter_iobase +
 					ADC_FIFO_REG) & 0xffff;
 =======
+=======
+>>>>>>> v3.18
 		ret = comedi_timeout(dev, s, insn, cb_pcidas64_ai_eoc, 0);
 		if (ret)
 			return ret;
 
 		if (thisboard->layout == LAYOUT_4020)
 			data[n] = readl(dev->mmio + ADC_FIFO_REG) & 0xffff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		else
 			data[n] = readw(devpriv->main_iobase + PIPE1_READ_REG);
@@ -2387,7 +2686,11 @@ static int ai_config_calibration_source(struct comedi_device *dev,
 					unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -2406,7 +2709,10 @@ static int ai_config_calibration_source(struct comedi_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("setting calibration source to %i\n", source);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	devpriv->calibration_source = source;
@@ -2417,7 +2723,11 @@ static int ai_config_calibration_source(struct comedi_device *dev,
 static int ai_config_block_size(struct comedi_device *dev, unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -2465,7 +2775,10 @@ static int ai_config_master_clock_4020(struct comedi_device *dev,
 	default:
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -2479,7 +2792,11 @@ static int ai_config_master_clock_4020(struct comedi_device *dev,
 static int ai_config_master_clock(struct comedi_device *dev, unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -2488,10 +2805,15 @@ static int ai_config_master_clock(struct comedi_device *dev, unsigned int *data)
 	case LAYOUT_4020:
 		return ai_config_master_clock_4020(dev, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	default:
 		return -EINVAL;
 		break;
+=======
+	default:
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	default:
 		return -EINVAL;
@@ -2510,6 +2832,7 @@ static int ai_config_insn(struct comedi_device *dev, struct comedi_subdevice *s,
 	case INSN_CONFIG_ALT_SOURCE:
 		return ai_config_calibration_source(dev, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case INSN_CONFIG_BLOCK_SIZE:
 		return ai_config_block_size(dev, data);
@@ -2521,12 +2844,17 @@ static int ai_config_insn(struct comedi_device *dev, struct comedi_subdevice *s,
 		return -EINVAL;
 		break;
 =======
+=======
+>>>>>>> v3.18
 	case INSN_CONFIG_BLOCK_SIZE:
 		return ai_config_block_size(dev, data);
 	case INSN_CONFIG_TIMER_1:
 		return ai_config_master_clock(dev, data);
 	default:
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return -EINVAL;
@@ -2540,6 +2868,7 @@ static unsigned int get_divisor(unsigned int ns, unsigned int flags)
 	unsigned int divisor;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (flags & TRIG_ROUND_MASK) {
 	case TRIG_ROUND_UP:
 		divisor = (ns + TIMER_BASE - 1) / TIMER_BASE;
@@ -2549,6 +2878,8 @@ static unsigned int get_divisor(unsigned int ns, unsigned int flags)
 		break;
 	case TRIG_ROUND_NEAREST:
 =======
+=======
+>>>>>>> v3.18
 	switch (flags & CMDF_ROUND_MASK) {
 	case CMDF_ROUND_UP:
 		divisor = (ns + TIMER_BASE - 1) / TIMER_BASE;
@@ -2557,6 +2888,9 @@ static unsigned int get_divisor(unsigned int ns, unsigned int flags)
 		divisor = ns / TIMER_BASE;
 		break;
 	case CMDF_ROUND_NEAREST:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		divisor = (ns + TIMER_BASE / 2) / TIMER_BASE;
@@ -2572,7 +2906,11 @@ static unsigned int get_divisor(unsigned int ns, unsigned int flags)
 static void check_adc_timing(struct comedi_device *dev, struct comedi_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -2618,9 +2956,12 @@ static void check_adc_timing(struct comedi_device *dev, struct comedi_cmd *cmd)
 		cmd->scan_begin_arg = scan_divisor * TIMER_BASE;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
 =======
+=======
+>>>>>>> v3.18
 }
 
 static int cb_pcidas64_ai_check_chanlist(struct comedi_device *dev,
@@ -2661,6 +3002,9 @@ static int cb_pcidas64_ai_check_chanlist(struct comedi_device *dev,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2668,11 +3012,17 @@ static int ai_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 		      struct comedi_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
 	int err = 0;
 	unsigned int tmp_arg, tmp_arg2;
 	int i;
 	int aref;
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+	int err = 0;
+	unsigned int tmp_arg, tmp_arg2;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 	int err = 0;
@@ -2716,9 +3066,12 @@ static int ai_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 	if (cmd->convert_src == TRIG_EXT && cmd->scan_begin_src == TRIG_TIMER)
 		err |= -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd->stop_src != TRIG_COUNT &&
 	    cmd->stop_src != TRIG_NONE && cmd->stop_src != TRIG_EXT)
 		err |= -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2728,7 +3081,10 @@ static int ai_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 	/* Step 3: check if arguments are trivially valid */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	switch (cmd->start_src) {
 	case TRIG_NOW:
 		err |= cfc_check_trigger_arg_is(&cmd->start_arg, 0);
@@ -2741,6 +3097,9 @@ static int ai_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cmd->convert_src == TRIG_TIMER) {
 		if (thisboard->layout == LAYOUT_4020) {
@@ -2792,6 +3151,7 @@ static int ai_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 		return 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*  make sure user is doesn't change analog reference mid chanlist */
 	if (cmd->chanlist) {
 		aref = CR_AREF(cmd->chanlist[0]);
@@ -2827,6 +3187,11 @@ static int ai_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 	if (cmd->chanlist && cmd->chanlist_len > 0)
 		err |= cb_pcidas64_ai_check_chanlist(dev, s, cmd);
 >>>>>>> v3.18
+=======
+	/* Step 5: check channel list if it exists */
+	if (cmd->chanlist && cmd->chanlist_len > 0)
+		err |= cb_pcidas64_ai_check_chanlist(dev, s, cmd);
+>>>>>>> v3.18
 
 	if (err)
 		return 5;
@@ -2842,8 +3207,13 @@ static int use_hw_sample_counter(struct comedi_cmd *cmd)
 	if (cmd->stop_src == TRIG_COUNT && cmd->stop_arg <= max_counter_value)
 		return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		return 0;
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -2873,7 +3243,11 @@ static void setup_sample_counters(struct comedi_device *dev,
 static inline unsigned int dma_transfer_size(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -2913,7 +3287,10 @@ static uint32_t ai_scan_counter_6xxx(struct comedi_device *dev,
 	default:
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -2935,7 +3312,11 @@ static uint32_t ai_convert_counter_4020(struct comedi_device *dev,
 		break;
 	default:		/*  should never happen */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev, "bug! failed to set ai pacing!");
+=======
+		dev_err(dev->class_dev, "bug! failed to set ai pacing!\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "bug! failed to set ai pacing!\n");
 >>>>>>> v3.18
@@ -2972,7 +3353,11 @@ static void select_master_clock(struct comedi_device *dev,
 				const struct comedi_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -3008,7 +3393,11 @@ static inline void dma_start_sync(struct comedi_device *dev,
 static void set_ai_pacing(struct comedi_device *dev, struct comedi_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -3030,7 +3419,10 @@ static void set_ai_pacing(struct comedi_device *dev, struct comedi_cmd *cmd)
 	writew(convert_counter & 0xffff,
 	       devpriv->main_iobase + ADC_SAMPLE_INTERVAL_LOWER_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("convert counter 0x%x\n", convert_counter);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*  load upper 8 bits of convert interval */
@@ -3043,7 +3435,10 @@ static void set_ai_pacing(struct comedi_device *dev, struct comedi_cmd *cmd)
 	writew((scan_counter >> 16) & 0xff,
 	       devpriv->main_iobase + ADC_DELAY_INTERVAL_UPPER_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("scan counter 0x%x\n", scan_counter);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -3069,7 +3464,11 @@ static int setup_channel_queue(struct comedi_device *dev,
 			       const struct comedi_cmd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -3141,9 +3540,12 @@ static int setup_channel_queue(struct comedi_device *dev,
 				       devpriv->main_iobase +
 				       ADC_QUEUE_FIFO_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				DEBUG_PRINT(
 					    "wrote 0x%x to external channel queue\n",
 					    bits);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			}
@@ -3176,6 +3578,10 @@ static int setup_channel_queue(struct comedi_device *dev,
 		if (old_cal_range_bits != devpriv->i2c_cal_range_bits) {
 			uint8_t i2c_data = devpriv->i2c_cal_range_bits;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -3219,7 +3625,11 @@ static inline void load_first_dma_descriptor(struct comedi_device *dev,
 static int ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -3276,7 +3686,10 @@ static int ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	writew(devpriv->adc_control1_bits,
 	       devpriv->main_iobase + ADC_CONTROL1_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("control1 bits 0x%x\n", devpriv->adc_control1_bits);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&dev->spinlock, flags);
@@ -3285,7 +3698,11 @@ static int ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	writew(0, devpriv->main_iobase + ADC_BUFFER_CLEAR_REG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((cmd->flags & TRIG_WAKE_EOS) == 0 ||
+=======
+	if ((cmd->flags & CMDF_WAKE_EOS) == 0 ||
+>>>>>>> v3.18
 =======
 	if ((cmd->flags & CMDF_WAKE_EOS) == 0 ||
 >>>>>>> v3.18
@@ -3323,7 +3740,11 @@ static int ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	/* enable pacing, triggering, etc */
 	bits = ADC_ENABLE_BIT | ADC_SOFT_GATE_BITS | ADC_GATE_LEVEL_BIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd->flags & TRIG_WAKE_EOS)
+=======
+	if (cmd->flags & CMDF_WAKE_EOS)
+>>>>>>> v3.18
 =======
 	if (cmd->flags & CMDF_WAKE_EOS)
 >>>>>>> v3.18
@@ -3339,7 +3760,10 @@ static int ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 		bits |= ADC_SAMPLE_COUNTER_EN_BIT;
 	writew(bits, devpriv->main_iobase + ADC_CONTROL0_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("control0 bits 0x%x\n", bits);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3349,10 +3773,15 @@ static int ai_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 
 	/*  start acquisition */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd->start_src == TRIG_NOW) {
 		writew(0, devpriv->main_iobase + ADC_START_REG);
 		DEBUG_PRINT("soft trig\n");
 	}
+=======
+	if (cmd->start_src == TRIG_NOW)
+		writew(0, devpriv->main_iobase + ADC_START_REG);
+>>>>>>> v3.18
 =======
 	if (cmd->start_src == TRIG_NOW)
 		writew(0, devpriv->main_iobase + ADC_START_REG);
@@ -3392,10 +3821,13 @@ static void pio_drain_ai_fifo_16(struct comedi_device *dev)
 		write_segment = adc_upper_write_ptr_code(prepost_bits);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG_PRINT(" rd seg %i, wrt seg %i, rd idx %i, wrt idx %i\n",
 			    read_segment, write_segment, read_index,
 			    write_index);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (read_segment != write_segment)
@@ -3420,8 +3852,11 @@ static void pio_drain_ai_fifo_16(struct comedi_device *dev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG_PRINT(" read %i samples from fifo\n", num_samples);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		for (i = 0; i < num_samples; i++) {
@@ -3459,7 +3894,11 @@ static void pio_drain_ai_fifo_32(struct comedi_device *dev)
 	}
 	for (i = 0; read_code != write_code && i < max_transfer;) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fifo_data = readl(devpriv->dio_counter_iobase + ADC_FIFO_REG);
+=======
+		fifo_data = readl(dev->mmio + ADC_FIFO_REG);
+>>>>>>> v3.18
 =======
 		fifo_data = readl(dev->mmio + ADC_FIFO_REG);
 >>>>>>> v3.18
@@ -3479,7 +3918,11 @@ static void pio_drain_ai_fifo_32(struct comedi_device *dev)
 static void pio_drain_ai_fifo(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -3493,14 +3936,20 @@ static void pio_drain_ai_fifo(struct comedi_device *dev)
 static void drain_dma_buffers(struct comedi_device *dev, unsigned int channel)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
 	struct pcidas64_private *devpriv = dev->private;
 	struct comedi_async *async = dev->read_subdev->async;
 =======
+=======
+>>>>>>> v3.18
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 	struct pcidas64_private *devpriv = dev->private;
 	struct comedi_async *async = dev->read_subdev->async;
 	struct comedi_cmd *cmd = &async->cmd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint32_t next_transfer_addr;
 	int j;
@@ -3524,7 +3973,11 @@ static void drain_dma_buffers(struct comedi_device *dev, unsigned int channel)
 		/*  transfer data from dma buffer to comedi buffer */
 		num_samples = dma_transfer_size(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (async->cmd.stop_src == TRIG_COUNT) {
+=======
+		if (cmd->stop_src == TRIG_COUNT) {
+>>>>>>> v3.18
 =======
 		if (cmd->stop_src == TRIG_COUNT) {
 >>>>>>> v3.18
@@ -3539,11 +3992,14 @@ static void drain_dma_buffers(struct comedi_device *dev, unsigned int channel)
 		devpriv->ai_dma_index = (devpriv->ai_dma_index + 1) %
 					ai_dma_ring_count(thisboard);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		DEBUG_PRINT("next buffer addr 0x%lx\n",
 			    (unsigned long)devpriv->
 			    ai_buffer_bus_addr[devpriv->ai_dma_index]);
 		DEBUG_PRINT("pci addr reg 0x%x\n", next_transfer_addr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -3556,7 +4012,11 @@ static void handle_ai_interrupt(struct comedi_device *dev,
 				unsigned int plx_status)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -3570,7 +4030,11 @@ static void handle_ai_interrupt(struct comedi_device *dev,
 	/*  check for fifo overrun */
 	if (status & ADC_OVERRUN_BIT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev, "fifo overrun");
+=======
+		dev_err(dev->class_dev, "fifo overrun\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "fifo overrun\n");
 >>>>>>> v3.18
@@ -3582,6 +4046,7 @@ static void handle_ai_interrupt(struct comedi_device *dev,
 	if (plx_status & ICS_DMA1_A) {	/*  dma chan 1 interrupt */
 		writeb((dma1_status & PLX_DMA_EN_BIT) | PLX_CLEAR_DMA_INTR_BIT,
 		       devpriv->plx9080_iobase + PLX_DMA1_CS_REG);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		DEBUG_PRINT("dma1 status 0x%x\n", dma1_status);
 
@@ -3602,6 +4067,8 @@ static void handle_ai_interrupt(struct comedi_device *dev,
 	     (thisboard->layout != LAYOUT_4020))) {
 		DEBUG_PRINT("pio fifo drain\n");
 =======
+=======
+>>>>>>> v3.18
 
 		if (dma1_status & PLX_DMA_EN_BIT)
 			drain_dma_buffers(dev, 1);
@@ -3613,6 +4080,9 @@ static void handle_ai_interrupt(struct comedi_device *dev,
 	    ((cmd->flags & CMDF_WAKE_EOS) &&
 	     (status & ADC_INTR_PENDING_BIT) &&
 	     (thisboard->layout != LAYOUT_4020))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_lock_irqsave(&dev->spinlock, flags);
 		if (devpriv->ai_cmd_running) {
@@ -3699,7 +4169,10 @@ static void restart_ao_dma(struct comedi_device *dev)
 		readl(devpriv->plx9080_iobase + PLX_DMA0_DESCRIPTOR_REG);
 	dma_desc_bits &= ~PLX_END_OF_CHAIN_BIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("restarting ao dma, descriptor reg 0x%x\n", dma_desc_bits);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	load_first_dma_descriptor(dev, 0, dma_desc_bits);
@@ -3718,11 +4191,15 @@ static unsigned int load_ao_dma_buffer(struct comedi_device *dev,
 	prev_buffer_index = prev_ao_dma_index(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("attempting to load ao buffer %i (0x%llx)\n", buffer_index,
 		    (unsigned long long)devpriv->ao_buffer_bus_addr[
 								buffer_index]);
 
 	num_bytes = comedi_buf_read_n_available(dev->write_subdev->async);
+=======
+	num_bytes = comedi_buf_read_n_available(dev->write_subdev);
+>>>>>>> v3.18
 =======
 	num_bytes = comedi_buf_read_n_available(dev->write_subdev);
 >>>>>>> v3.18
@@ -3736,8 +4213,11 @@ static unsigned int load_ao_dma_buffer(struct comedi_device *dev,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("loading %i bytes\n", num_bytes);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	num_bytes = cfc_read_array_from_buffer(dev->write_subdev,
@@ -3814,7 +4294,10 @@ static void handle_ao_interrupt(struct comedi_device *dev,
 			       devpriv->plx9080_iobase + PLX_DMA0_CS_REG);
 		spin_unlock_irqrestore(&dev->spinlock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG_PRINT("dma0 status 0x%x\n", dma0_status);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (dma0_status & PLX_DMA_EN_BIT) {
@@ -3824,7 +4307,10 @@ static void handle_ao_interrupt(struct comedi_device *dev,
 				restart_ao_dma(dev);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG_PRINT(" cleared dma ch0 interrupt\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {
@@ -3836,12 +4322,15 @@ static void handle_ao_interrupt(struct comedi_device *dev,
 		if (ao_stopped_by_error(dev, cmd))
 			async->events |= COMEDI_CB_ERROR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG_PRINT("plx dma0 desc reg 0x%x\n",
 			    readl(devpriv->plx9080_iobase +
 				  PLX_DMA0_DESCRIPTOR_REG));
 		DEBUG_PRINT("plx dma0 address reg 0x%x\n",
 			    readl(devpriv->plx9080_iobase +
 				  PLX_DMA0_PCI_ADDRESS_REG));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -3860,6 +4349,7 @@ static irqreturn_t handle_interrupt(int irq, void *d)
 	status = readw(devpriv->main_iobase + HW_STATUS_REG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("hw status 0x%x, plx status 0x%x\n", status, plx_status);
 
 	/* an interrupt before all the postconfig stuff gets done could
@@ -3870,12 +4360,17 @@ static irqreturn_t handle_interrupt(int irq, void *d)
 		return IRQ_HANDLED;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* an interrupt before all the postconfig stuff gets done could
 	 * cause a NULL dereference if we continue through the
 	 * interrupt handler */
 	if (!dev->attached)
 		return IRQ_HANDLED;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	handle_ai_interrupt(dev, status, plx_status);
 	handle_ao_interrupt(dev, status, plx_status);
@@ -3885,11 +4380,16 @@ static irqreturn_t handle_interrupt(int irq, void *d)
 		plx_bits = readl(devpriv->plx9080_iobase + PLX_DBR_OUT_REG);
 		writel(plx_bits, devpriv->plx9080_iobase + PLX_DBR_OUT_REG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DEBUG_PRINT(" cleared local doorbell bits 0x%x\n", plx_bits);
 	}
 
 	DEBUG_PRINT("exiting handler\n");
 
+=======
+	}
+
+>>>>>>> v3.18
 =======
 	}
 
@@ -3915,7 +4415,10 @@ static int ai_cancel(struct comedi_device *dev, struct comedi_subdevice *s)
 	abort_dma(dev, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT("ai canceled\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -3925,7 +4428,11 @@ static int ao_winsn(struct comedi_device *dev, struct comedi_subdevice *s,
 		    struct comedi_insn *insn, unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -3953,6 +4460,7 @@ static int ao_winsn(struct comedi_device *dev, struct comedi_subdevice *s,
 
 	/*  remember output value */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv->ao_value[chan] = data[0];
 
 	return 1;
@@ -3965,6 +4473,9 @@ static int ao_readback_insn(struct comedi_device *dev,
 	struct pcidas64_private *devpriv = dev->private;
 
 	data[0] = devpriv->ao_value[CR_CHAN(insn->chanspec)];
+=======
+	s->readback[chan] = data[0];
+>>>>>>> v3.18
 =======
 	s->readback[chan] = data[0];
 >>>>>>> v3.18
@@ -4024,7 +4535,12 @@ static void set_dac_select_reg(struct comedi_device *dev,
 	last_channel = CR_CHAN(cmd->chanlist[cmd->chanlist_len - 1]);
 	if (last_channel < first_channel)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev, "bug! last ao channel < first ao channel");
+=======
+		dev_err(dev->class_dev,
+			"bug! last ao channel < first ao channel\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev,
 			"bug! last ao channel < first ao channel\n");
@@ -4052,7 +4568,11 @@ static void set_dac_interval_regs(struct comedi_device *dev,
 	divisor = get_ao_divisor(cmd->scan_begin_arg, cmd->flags);
 	if (divisor > max_counter_value) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev, "bug! ao divisor too big");
+=======
+		dev_err(dev->class_dev, "bug! ao divisor too big\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "bug! ao divisor too big\n");
 >>>>>>> v3.18
@@ -4100,6 +4620,7 @@ static int prep_ao_dma(struct comedi_device *dev, const struct comedi_cmd *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int external_ai_queue_in_use(struct comedi_device *dev)
 {
 	const struct pcidas64_board *thisboard = comedi_board(dev);
@@ -4110,6 +4631,8 @@ static inline int external_ai_queue_in_use(struct comedi_device *dev)
 		return 0;
 	else if (use_internal_queue_6xxx(&dev->read_subdev->async->cmd))
 =======
+=======
+>>>>>>> v3.18
 static inline int external_ai_queue_in_use(struct comedi_device *dev,
 					   struct comedi_subdevice *s,
 					   struct comedi_cmd *cmd)
@@ -4121,6 +4644,9 @@ static inline int external_ai_queue_in_use(struct comedi_device *dev,
 	if (thisboard->layout == LAYOUT_4020)
 		return 0;
 	else if (use_internal_queue_6xxx(cmd))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	return 1;
@@ -4134,7 +4660,11 @@ static int ao_inttrig(struct comedi_device *dev, struct comedi_subdevice *s,
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (trig_num != 0)
+=======
+	if (trig_num != cmd->start_arg)
+>>>>>>> v3.18
 =======
 	if (trig_num != cmd->start_arg)
 >>>>>>> v3.18
@@ -4160,7 +4690,11 @@ static int ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 	struct comedi_cmd *cmd = &s->async->cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (external_ai_queue_in_use(dev)) {
+=======
+	if (external_ai_queue_in_use(dev, s, cmd)) {
+>>>>>>> v3.18
 =======
 	if (external_ai_queue_in_use(dev, s, cmd)) {
 >>>>>>> v3.18
@@ -4185,6 +4719,7 @@ static int ao_cmd(struct comedi_device *dev, struct comedi_subdevice *s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 		      struct comedi_cmd *cmd)
 {
@@ -4193,6 +4728,8 @@ static int ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 	unsigned int tmp_arg;
 	int i;
 =======
+=======
+>>>>>>> v3.18
 static int cb_pcidas64_ao_check_chanlist(struct comedi_device *dev,
 					 struct comedi_subdevice *s,
 					 struct comedi_cmd *cmd)
@@ -4219,6 +4756,9 @@ static int ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 	int err = 0;
 	unsigned int tmp_arg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Step 1 : check if triggers are trivially valid */
@@ -4252,6 +4792,11 @@ static int ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 	/* Step 3: check if arguments are trivially valid */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	err |= cfc_check_trigger_arg_is(&cmd->start_arg, 0);
+
+>>>>>>> v3.18
 =======
 	err |= cfc_check_trigger_arg_is(&cmd->start_arg, 0);
 
@@ -4287,6 +4832,7 @@ static int ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 		return 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cmd->chanlist) {
 		unsigned int first_channel = CR_CHAN(cmd->chanlist[0]);
 		for (i = 1; i < cmd->chanlist_len; i++) {
@@ -4298,6 +4844,11 @@ static int ao_cmdtest(struct comedi_device *dev, struct comedi_subdevice *s,
 			}
 		}
 	}
+=======
+	/* Step 5: check channel list if it exists */
+	if (cmd->chanlist && cmd->chanlist_len > 0)
+		err |= cb_pcidas64_ao_check_chanlist(dev, s, cmd);
+>>>>>>> v3.18
 =======
 	/* Step 5: check channel list if it exists */
 	if (cmd->chanlist && cmd->chanlist_len > 0)
@@ -4319,6 +4870,7 @@ static int ao_cancel(struct comedi_device *dev, struct comedi_subdevice *s)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int dio_callback(int dir, int port, int data, unsigned long arg)
 {
@@ -4342,6 +4894,8 @@ static int dio_callback_4020(int dir, int port, int data, unsigned long arg)
 		return readw(iobase + 2 * port);
 	}
 =======
+=======
+>>>>>>> v3.18
 static int dio_callback_4020(struct comedi_device *dev,
 			     int dir, int port, int data, unsigned long iobase)
 {
@@ -4352,6 +4906,9 @@ static int dio_callback_4020(struct comedi_device *dev,
 		return 0;
 	}
 	return readw(devpriv->main_iobase + iobase + 2 * port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4359,10 +4916,16 @@ static int di_rbits(struct comedi_device *dev, struct comedi_subdevice *s,
 		    struct comedi_insn *insn, unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pcidas64_private *devpriv = dev->private;
 	unsigned int bits;
 
 	bits = readb(devpriv->dio_counter_iobase + DI_REG);
+=======
+	unsigned int bits;
+
+	bits = readb(dev->mmio + DI_REG);
+>>>>>>> v3.18
 =======
 	unsigned int bits;
 
@@ -4375,6 +4938,7 @@ static int di_rbits(struct comedi_device *dev, struct comedi_subdevice *s,
 	return insn->n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int do_wbits(struct comedi_device *dev, struct comedi_subdevice *s,
 		    struct comedi_insn *insn, unsigned int *data)
@@ -4389,6 +4953,8 @@ static int do_wbits(struct comedi_device *dev, struct comedi_subdevice *s,
 
 	writeb(s->state, devpriv->dio_counter_iobase + DO_REG);
 =======
+=======
+>>>>>>> v3.18
 static int do_wbits(struct comedi_device *dev,
 		    struct comedi_subdevice *s,
 		    struct comedi_insn *insn,
@@ -4396,6 +4962,9 @@ static int do_wbits(struct comedi_device *dev,
 {
 	if (comedi_dio_update_state(s, data))
 		writeb(s->state, dev->mmio + DO_REG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data[1] = s->state;
@@ -4405,6 +4974,7 @@ static int do_wbits(struct comedi_device *dev,
 
 static int dio_60xx_config_insn(struct comedi_device *dev,
 				struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				struct comedi_insn *insn, unsigned int *data)
 {
@@ -4447,6 +5017,8 @@ static int dio_60xx_wbits(struct comedi_device *dev, struct comedi_subdevice *s,
 
 	data[1] = readb(devpriv->dio_counter_iobase + DIO_DATA_60XX_REG);
 =======
+=======
+>>>>>>> v3.18
 				struct comedi_insn *insn,
 				unsigned int *data)
 {
@@ -4470,6 +5042,9 @@ static int dio_60xx_wbits(struct comedi_device *dev,
 		writeb(s->state, dev->mmio + DIO_DATA_60XX_REG);
 
 	data[1] = readb(dev->mmio + DIO_DATA_60XX_REG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
@@ -4508,7 +5083,11 @@ static int caldac_8800_write(struct comedi_device *dev, unsigned int address,
 
 	if (address >= num_caldac_channels) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev, "illegal caldac channel");
+=======
+		dev_err(dev->class_dev, "illegal caldac channel\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "illegal caldac channel\n");
 >>>>>>> v3.18
@@ -4584,9 +5163,14 @@ static int caldac_i2c_write(struct comedi_device *dev,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev, "invalid caldac channel\n");
 		return -1;
 		break;
+=======
+		dev_err(dev->class_dev, "invalid caldac channel\n");
+		return -1;
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev, "invalid caldac channel\n");
 		return -1;
@@ -4602,7 +5186,11 @@ static void caldac_write(struct comedi_device *dev, unsigned int channel,
 			 unsigned int value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 >>>>>>> v3.18
@@ -4792,10 +5380,16 @@ static int eeprom_read_insn(struct comedi_device *dev,
 static int setup_subdevices(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
 	struct pcidas64_private *devpriv = dev->private;
 	struct comedi_subdevice *s;
 	void __iomem *dio_8255_iobase;
+=======
+	const struct pcidas64_board *thisboard = dev->board_ptr;
+	struct pcidas64_private *devpriv = dev->private;
+	struct comedi_subdevice *s;
+>>>>>>> v3.18
 =======
 	const struct pcidas64_board *thisboard = dev->board_ptr;
 	struct pcidas64_private *devpriv = dev->private;
@@ -4849,9 +5443,12 @@ static int setup_subdevices(struct comedi_device *dev)
 		s->maxdata = (1 << thisboard->ao_bits) - 1;
 		s->range_table = thisboard->ao_range_table;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		s->insn_read = ao_readback_insn;
 		s->insn_write = ao_winsn;
 =======
+=======
+>>>>>>> v3.18
 		s->insn_write = ao_winsn;
 		s->insn_read = comedi_readback_insn_read;
 
@@ -4859,6 +5456,9 @@ static int setup_subdevices(struct comedi_device *dev)
 		if (ret)
 			return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ao_cmd_is_supported(thisboard)) {
 			dev->write_subdev = s;
@@ -4900,6 +5500,7 @@ static int setup_subdevices(struct comedi_device *dev)
 	if (thisboard->has_8255) {
 		if (thisboard->layout == LAYOUT_4020) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dio_8255_iobase = devpriv->main_iobase + I8255_4020_REG;
 			subdev_8255_init(dev, s, dio_callback_4020,
 					 (unsigned long)dio_8255_iobase);
@@ -4912,6 +5513,8 @@ static int setup_subdevices(struct comedi_device *dev)
 	} else
 		s->type = COMEDI_SUBD_UNUSED;
 =======
+=======
+>>>>>>> v3.18
 			ret = subdev_8255_init(dev, s, dio_callback_4020,
 					       I8255_4020_REG);
 		} else {
@@ -4923,6 +5526,9 @@ static int setup_subdevices(struct comedi_device *dev)
 	} else {
 		s->type = COMEDI_SUBD_UNUSED;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*  8 channel dio for 60xx */
@@ -5000,10 +5606,16 @@ static int auto_attach(struct comedi_device *dev,
 	dev->board_ptr = thisboard;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -5024,10 +5636,16 @@ static int auto_attach(struct comedi_device *dev,
 	devpriv->plx9080_iobase = pci_ioremap_bar(pcidev, 0);
 	devpriv->main_iobase = pci_ioremap_bar(pcidev, 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv->dio_counter_iobase = pci_ioremap_bar(pcidev, 3);
 
 	if (!devpriv->plx9080_iobase || !devpriv->main_iobase
 	    || !devpriv->dio_counter_iobase) {
+=======
+	dev->mmio = pci_ioremap_bar(pcidev, 3);
+
+	if (!devpriv->plx9080_iobase || !devpriv->main_iobase || !dev->mmio) {
+>>>>>>> v3.18
 =======
 	dev->mmio = pci_ioremap_bar(pcidev, 3);
 
@@ -5038,11 +5656,14 @@ static int auto_attach(struct comedi_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT(" plx9080 remapped to 0x%p\n", devpriv->plx9080_iobase);
 	DEBUG_PRINT(" main remapped to 0x%p\n", devpriv->main_iobase);
 	DEBUG_PRINT(" diocounter remapped to 0x%p\n",
 		    devpriv->dio_counter_iobase);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*  figure out what local addresses are */
@@ -5060,9 +5681,12 @@ static int auto_attach(struct comedi_device *dev,
 				  ~local_range) | local_decode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEBUG_PRINT(" local 0 io addr 0x%x\n", devpriv->local0_iobase);
 	DEBUG_PRINT(" local 1 io addr 0x%x\n", devpriv->local1_iobase);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	retval = alloc_and_init_dma_members(dev);
@@ -5076,6 +5700,7 @@ static int auto_attach(struct comedi_device *dev,
 	init_plx9080(dev);
 	init_stc_registers(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*  get irq */
 	if (request_irq(pcidev->irq, handle_interrupt, IRQF_SHARED,
 			"cb_pcidas64", dev)) {
@@ -5083,6 +5708,8 @@ static int auto_attach(struct comedi_device *dev,
 			pcidev->irq);
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 
 	retval = request_irq(pcidev->irq, handle_interrupt, IRQF_SHARED,
 			     dev->board_name, dev);
@@ -5090,6 +5717,9 @@ static int auto_attach(struct comedi_device *dev,
 		dev_dbg(dev->class_dev, "unable to allocate irq %u\n",
 			pcidev->irq);
 		return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	dev->irq = pcidev->irq;
@@ -5105,6 +5735,7 @@ static int auto_attach(struct comedi_device *dev,
 static void detach(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pcidas64_board *thisboard = comedi_board(dev);
 	struct pci_dev *pcidev = comedi_to_pci_dev(dev);
 	struct pcidas64_private *devpriv = dev->private;
@@ -5112,10 +5743,14 @@ static void detach(struct comedi_device *dev)
 =======
 	struct pcidas64_private *devpriv = dev->private;
 >>>>>>> v3.18
+=======
+	struct pcidas64_private *devpriv = dev->private;
+>>>>>>> v3.18
 
 	if (dev->irq)
 		free_irq(dev->irq, dev);
 	if (devpriv) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (pcidev) {
 			if (devpriv->plx9080_iobase) {
@@ -5159,6 +5794,8 @@ static void detach(struct comedi_device *dev)
 	comedi_spriv_free(dev, 4);
 	comedi_pci_disable(dev);
 =======
+=======
+>>>>>>> v3.18
 		if (devpriv->plx9080_iobase) {
 			disable_plx_interrupts(dev);
 			iounmap(devpriv->plx9080_iobase);
@@ -5170,6 +5807,9 @@ static void detach(struct comedi_device *dev)
 	}
 	comedi_pci_disable(dev);
 	cb_pcidas64_free_dma(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -5188,7 +5828,11 @@ static int cb_pcidas64_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cb_pcidas64_pci_table) = {
+=======
+static const struct pci_device_id cb_pcidas64_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id cb_pcidas64_pci_table[] = {
 >>>>>>> v3.18

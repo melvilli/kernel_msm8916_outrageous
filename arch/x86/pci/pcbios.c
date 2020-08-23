@@ -80,7 +80,11 @@ static struct {
 	unsigned long address;
 	unsigned short segment;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } bios32_indirect = { 0, __KERNEL_CS };
+=======
+} bios32_indirect __initdata = { 0, __KERNEL_CS };
+>>>>>>> v3.18
 =======
 } bios32_indirect __initdata = { 0, __KERNEL_CS };
 >>>>>>> v3.18
@@ -90,7 +94,11 @@ static struct {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long bios32_service(unsigned long service)
+=======
+static unsigned long __init bios32_service(unsigned long service)
+>>>>>>> v3.18
 =======
 static unsigned long __init bios32_service(unsigned long service)
 >>>>>>> v3.18
@@ -133,7 +141,11 @@ static struct {
 static int pci_bios_present;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int check_pcibios(void)
+=======
+static int __init check_pcibios(void)
+>>>>>>> v3.18
 =======
 static int __init check_pcibios(void)
 >>>>>>> v3.18
@@ -325,7 +337,11 @@ static const struct pci_raw_ops pci_bios_access = {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct pci_raw_ops *pci_find_bios(void)
+=======
+static const struct pci_raw_ops *__init pci_find_bios(void)
+>>>>>>> v3.18
 =======
 static const struct pci_raw_ops *__init pci_find_bios(void)
 >>>>>>> v3.18

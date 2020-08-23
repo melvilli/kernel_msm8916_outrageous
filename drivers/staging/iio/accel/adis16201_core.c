@@ -112,6 +112,10 @@ static int adis16201_write_raw(struct iio_dev *indio_dev,
 	s16 val16;
 	u8 addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -136,6 +140,7 @@ static int adis16201_write_raw(struct iio_dev *indio_dev,
 
 static const struct iio_chan_spec adis16201_channels[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ADIS_SUPPLY_CHAN(ADIS16201_SUPPLY_OUT, ADIS16201_SCAN_SUPPLY, 12),
 	ADIS_TEMP_CHAN(ADIS16201_TEMP_OUT, ADIS16201_SCAN_TEMP, 12),
 	ADIS_ACCEL_CHAN(X, ADIS16201_XACCL_OUT, ADIS16201_SCAN_ACC_X,
@@ -148,6 +153,8 @@ static const struct iio_chan_spec adis16201_channels[] = {
 	ADIS_INCLI_CHAN(X, ADIS16201_YINCL_OUT, ADIS16201_SCAN_INCLI_Y,
 		BIT(IIO_CHAN_INFO_CALIBBIAS), 14),
 =======
+=======
+>>>>>>> v3.18
 	ADIS_SUPPLY_CHAN(ADIS16201_SUPPLY_OUT, ADIS16201_SCAN_SUPPLY, 0, 12),
 	ADIS_TEMP_CHAN(ADIS16201_TEMP_OUT, ADIS16201_SCAN_TEMP, 0, 12),
 	ADIS_ACCEL_CHAN(X, ADIS16201_XACCL_OUT, ADIS16201_SCAN_ACC_X,
@@ -159,6 +166,9 @@ static const struct iio_chan_spec adis16201_channels[] = {
 		BIT(IIO_CHAN_INFO_CALIBBIAS), 0, 14),
 	ADIS_INCLI_CHAN(X, ADIS16201_YINCL_OUT, ADIS16201_SCAN_INCLI_Y,
 		BIT(IIO_CHAN_INFO_CALIBBIAS), 0, 14),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	IIO_CHAN_SOFT_TIMESTAMP(7)
 };
@@ -201,16 +211,22 @@ static int adis16201_probe(struct spi_device *spi)
 
 	/* setup the industrialio driver allocated elements */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	st = iio_priv(indio_dev);
 	/* this is only used for removal purposes */
@@ -227,15 +243,21 @@ static int adis16201_probe(struct spi_device *spi)
 	ret = adis_init(st, indio_dev, spi, &adis16201_data);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
 	ret = adis_setup_buffer_and_trigger(st, indio_dev, NULL);
 	if (ret)
 		goto error_free_dev;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	ret = adis_setup_buffer_and_trigger(st, indio_dev, NULL);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Get the device into a sane initial state */
@@ -251,9 +273,12 @@ static int adis16201_probe(struct spi_device *spi)
 error_cleanup_buffer_trigger:
 	adis_cleanup_buffer_and_trigger(st, indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_dev:
 	iio_device_free(indio_dev);
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -267,7 +292,10 @@ static int adis16201_remove(struct spi_device *spi)
 	iio_device_unregister(indio_dev);
 	adis_cleanup_buffer_and_trigger(st, indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

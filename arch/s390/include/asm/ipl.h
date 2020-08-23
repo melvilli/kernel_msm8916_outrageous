@@ -8,6 +8,10 @@
 #define _ASM_S390_IPL_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/lowcore.h>
+>>>>>>> v3.18
 =======
 #include <asm/lowcore.h>
 >>>>>>> v3.18
@@ -21,7 +25,11 @@
 			      sizeof(struct ipl_block_fcp))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IPL_PARM_BLK0_FCP_LEN (sizeof(struct ipl_block_fcp) + 8)
+=======
+#define IPL_PARM_BLK0_FCP_LEN (sizeof(struct ipl_block_fcp) + 16)
+>>>>>>> v3.18
 =======
 #define IPL_PARM_BLK0_FCP_LEN (sizeof(struct ipl_block_fcp) + 16)
 >>>>>>> v3.18
@@ -30,7 +38,11 @@
 			      sizeof(struct ipl_block_ccw))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IPL_PARM_BLK0_CCW_LEN (sizeof(struct ipl_block_ccw) + 8)
+=======
+#define IPL_PARM_BLK0_CCW_LEN (sizeof(struct ipl_block_ccw) + 16)
+>>>>>>> v3.18
 =======
 #define IPL_PARM_BLK0_CCW_LEN (sizeof(struct ipl_block_ccw) + 16)
 >>>>>>> v3.18
@@ -50,16 +62,22 @@ struct ipl_list_hdr {
 	u8  flags;
 	u16 reserved2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
 
 struct ipl_block_fcp {
 	u8  reserved1[313-1];
 =======
+=======
+>>>>>>> v3.18
 	u8  loadparm[8];
 } __attribute__((packed));
 
 struct ipl_block_fcp {
 	u8  reserved1[305-1];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8  opt;
 	u8  reserved2[3];
@@ -82,7 +100,10 @@ struct ipl_block_fcp {
 
 struct ipl_block_ccw {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8  load_parm[8];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8  reserved1[84];
@@ -110,8 +131,11 @@ struct ipl_parameter_block {
 extern u32 ipl_flags;
 extern u32 dump_prefix_page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int zfcpdump_prefix_array[];
 =======
+=======
+>>>>>>> v3.18
 
 struct dump_save_areas {
 	struct save_area_ext **areas;
@@ -120,6 +144,9 @@ struct dump_save_areas {
 
 extern struct dump_save_areas dump_save_areas;
 struct save_area_ext *dump_save_area_create(int cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern void do_reipl(void);

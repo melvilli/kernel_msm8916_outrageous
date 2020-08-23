@@ -852,7 +852,11 @@ int ocfs2_seek_data_hole_offset(struct file *file, loff_t *offset, int whence)
 	down_read(&OCFS2_I(inode)->ip_alloc_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*offset >= inode->i_size) {
+=======
+	if (*offset >= i_size_read(inode)) {
+>>>>>>> v3.18
 =======
 	if (*offset >= i_size_read(inode)) {
 >>>>>>> v3.18
@@ -863,7 +867,11 @@ int ocfs2_seek_data_hole_offset(struct file *file, loff_t *offset, int whence)
 	if (OCFS2_I(inode)->ip_dyn_features & OCFS2_INLINE_DATA_FL) {
 		if (whence == SEEK_HOLE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*offset = inode->i_size;
+=======
+			*offset = i_size_read(inode);
+>>>>>>> v3.18
 =======
 			*offset = i_size_read(inode);
 >>>>>>> v3.18
@@ -873,7 +881,11 @@ int ocfs2_seek_data_hole_offset(struct file *file, loff_t *offset, int whence)
 	clen = 0;
 	cpos = *offset >> cs_bits;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cend = ocfs2_clusters_for_bytes(inode->i_sb, inode->i_size);
+=======
+	cend = ocfs2_clusters_for_bytes(inode->i_sb, i_size_read(inode));
+>>>>>>> v3.18
 =======
 	cend = ocfs2_clusters_for_bytes(inode->i_sb, i_size_read(inode));
 >>>>>>> v3.18
@@ -916,8 +928,13 @@ int ocfs2_seek_data_hole_offset(struct file *file, loff_t *offset, int whence)
 		extlen <<=  cs_bits;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((extoff + extlen) > inode->i_size)
 			extlen = inode->i_size - extoff;
+=======
+		if ((extoff + extlen) > i_size_read(inode))
+			extlen = i_size_read(inode) - extoff;
+>>>>>>> v3.18
 =======
 		if ((extoff + extlen) > i_size_read(inode))
 			extlen = i_size_read(inode) - extoff;

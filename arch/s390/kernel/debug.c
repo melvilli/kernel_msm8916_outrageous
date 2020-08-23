@@ -868,7 +868,11 @@ debug_finish_entry(debug_info_t * id, debug_entry_t* active, int level,
 			int exception)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	active->id.stck = get_tod_clock();
+=======
+	active->id.stck = get_tod_clock_fast();
+>>>>>>> v3.18
 =======
 	active->id.stck = get_tod_clock_fast();
 >>>>>>> v3.18
@@ -894,7 +898,11 @@ static int debug_active=1;
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 s390dbf_procactive(ctl_table *table, int write,
+=======
+s390dbf_procactive(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 s390dbf_procactive(struct ctl_table *table, int write,
 >>>>>>> v3.18

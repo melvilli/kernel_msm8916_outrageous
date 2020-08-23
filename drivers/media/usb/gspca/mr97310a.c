@@ -522,7 +522,11 @@ static int start_cif_cam(struct gspca_dev *gspca_dev)
 		data[5] = 0xbb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -623,7 +627,11 @@ static int start_vga_cam(struct gspca_dev *gspca_dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18
@@ -856,7 +864,11 @@ static void setexposure(struct gspca_dev *gspca_dev, s32 expo, s32 min_clockdiv)
 
 		/* Limit framerate to not exceed usb bandwidth */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (clockdiv < min_clockdiv && gspca_dev->width >= 320)
+=======
+		if (clockdiv < min_clockdiv && gspca_dev->pixfmt.width >= 320)
+>>>>>>> v3.18
 =======
 		if (clockdiv < min_clockdiv && gspca_dev->pixfmt.width >= 320)
 >>>>>>> v3.18

@@ -15,6 +15,10 @@
 #include <crypto/hash.h>
 #include <keys/asymmetric-type.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <keys/system_keyring.h>
+>>>>>>> v3.18
 =======
 #include <keys/system_keyring.h>
 >>>>>>> v3.18
@@ -33,7 +37,11 @@
 struct module_signature {
 	u8	algo;		/* Public-key crypto algorithm [enum pkey_algo] */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	hash;		/* Digest algorithm [enum pkey_hash_algo] */
+=======
+	u8	hash;		/* Digest algorithm [enum hash_algo] */
+>>>>>>> v3.18
 =======
 	u8	hash;		/* Digest algorithm [enum hash_algo] */
 >>>>>>> v3.18
@@ -48,7 +56,11 @@ struct module_signature {
  * Digest the module contents.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct public_key_signature *mod_make_digest(enum pkey_hash_algo hash,
+=======
+static struct public_key_signature *mod_make_digest(enum hash_algo hash,
+>>>>>>> v3.18
 =======
 static struct public_key_signature *mod_make_digest(enum hash_algo hash,
 >>>>>>> v3.18
@@ -67,7 +79,11 @@ static struct public_key_signature *mod_make_digest(enum hash_algo hash,
 	 * big the hash operational data will be.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tfm = crypto_alloc_shash(pkey_hash_algo[hash], 0, 0);
+=======
+	tfm = crypto_alloc_shash(hash_algo_name[hash], 0, 0);
+>>>>>>> v3.18
 =======
 	tfm = crypto_alloc_shash(hash_algo_name[hash], 0, 0);
 >>>>>>> v3.18
@@ -174,7 +190,11 @@ static struct key *request_asymmetric_key(const char *signer, size_t signer_len,
 	pr_debug("Look up: \"%s\"\n", id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key = keyring_search(make_key_ref(modsign_keyring, 1),
+=======
+	key = keyring_search(make_key_ref(system_trusted_keyring, 1),
+>>>>>>> v3.18
 =======
 	key = keyring_search(make_key_ref(system_trusted_keyring, 1),
 >>>>>>> v3.18
@@ -238,7 +258,11 @@ int mod_verify_sig(const void *mod, unsigned long *_modlen)
 
 	if (ms.hash >= PKEY_HASH__LAST ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !pkey_hash_algo[ms.hash])
+=======
+	    !hash_algo_name[ms.hash])
+>>>>>>> v3.18
 =======
 	    !hash_algo_name[ms.hash])
 >>>>>>> v3.18

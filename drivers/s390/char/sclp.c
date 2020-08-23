@@ -51,7 +51,10 @@ static char sclp_init_sccb[PAGE_SIZE] __attribute__((__aligned__(PAGE_SIZE)));
 static DECLARE_COMPLETION(sclp_request_queue_flushed);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Number of console pages to allocate, used by sclp_con.c and sclp_vt220.c */
 int sclp_console_pages = SCLP_CONSOLE_PAGES;
 /* Flag to indicate if buffer pages are dropped on buffer full condition */
@@ -59,6 +62,9 @@ int sclp_console_drop = 0;
 /* Number of times the console dropped buffer pages */
 unsigned long sclp_console_full;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void sclp_suspend_req_cb(struct sclp_req *req, void *data)
 {
@@ -66,7 +72,10 @@ static void sclp_suspend_req_cb(struct sclp_req *req, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init sclp_setup_console_pages(char *str)
 {
 	int pages, rc;
@@ -91,6 +100,9 @@ static int __init sclp_setup_console_drop(char *str)
 
 __setup("sclp_con_drop=", sclp_setup_console_drop);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct sclp_req sclp_suspend_req;
 
@@ -98,6 +110,12 @@ static struct sclp_req sclp_suspend_req;
 static struct timer_list sclp_request_timer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Timer for queued requests. */
+static struct timer_list sclp_queue_timer;
+
+>>>>>>> v3.18
 =======
 /* Timer for queued requests. */
 static struct timer_list sclp_queue_timer;
@@ -161,6 +179,7 @@ int
 sclp_service_call(sclp_cmdw_t command, void *sccb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cc;
 
 	asm volatile(
@@ -170,6 +189,8 @@ sclp_service_call(sclp_cmdw_t command, void *sccb)
 		: "=&d" (cc) : "d" (command), "a" (__pa(sccb))
 		: "cc", "memory");
 =======
+=======
+>>>>>>> v3.18
 	int cc = 4; /* Initialize for program check handling */
 
 	asm volatile(
@@ -183,6 +204,9 @@ sclp_service_call(sclp_cmdw_t command, void *sccb)
 		: "cc", "memory");
 	if (cc == 4)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cc == 3)
 		return -EIO;
@@ -239,7 +263,10 @@ sclp_request_timeout(unsigned long data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Returns the expire value in jiffies of the next pending request timeout,
  * if any. Needs to be called with sclp_lock.
@@ -310,6 +337,9 @@ static void sclp_req_queue_timeout(unsigned long data)
 	spin_unlock_irqrestore(&sclp_lock, flags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Try to start a request. Return zero if the request was successfully
  * started or if it will be started at a later time. Return non-zero otherwise.
@@ -414,7 +444,10 @@ sclp_add_request(struct sclp_req *req)
 	list_add_tail(&req->list, &sclp_req_queue);
 	rc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (req->queue_timeout) {
 		req->queue_expires = jiffies + req->queue_timeout * HZ;
 		if (!timer_pending(&sclp_queue_timer) ||
@@ -422,6 +455,9 @@ sclp_add_request(struct sclp_req *req)
 			mod_timer(&sclp_queue_timer, req->queue_expires);
 	} else
 		req->queue_expires = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Start if request is first in list */
 	if (sclp_running_state == sclp_running_state_idle &&
@@ -593,7 +629,11 @@ sclp_sync_wait(void)
 	if (timer_pending(&sclp_request_timer)) {
 		/* Get timeout TOD value */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		timeout = get_tod_clock() +
+=======
+		timeout = get_tod_clock_fast() +
+>>>>>>> v3.18
 =======
 		timeout = get_tod_clock_fast() +
 >>>>>>> v3.18
@@ -619,7 +659,11 @@ sclp_sync_wait(void)
 		/* Check for expired request timer */
 		if (timer_pending(&sclp_request_timer) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    get_tod_clock() > timeout &&
+=======
+		    get_tod_clock_fast() > timeout &&
+>>>>>>> v3.18
 =======
 		    get_tod_clock_fast() > timeout &&
 >>>>>>> v3.18
@@ -1007,7 +1051,11 @@ sclp_check_interface(void)
 	spin_lock_irqsave(&sclp_lock, flags);
 	/* Prepare init mask command */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = register_external_interrupt(0x2401, sclp_check_handler);
+=======
+	rc = register_external_irq(EXT_IRQ_SERVICE_SIG, sclp_check_handler);
+>>>>>>> v3.18
 =======
 	rc = register_external_irq(EXT_IRQ_SERVICE_SIG, sclp_check_handler);
 >>>>>>> v3.18
@@ -1029,7 +1077,11 @@ sclp_check_interface(void)
 		/* Enable service-signal interruption - needs to happen
 		 * with IRQs enabled. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		service_subclass_irq_register();
+=======
+		irq_subclass_register(IRQ_SUBCLASS_SERVICE_SIGNAL);
+>>>>>>> v3.18
 =======
 		irq_subclass_register(IRQ_SUBCLASS_SERVICE_SIGNAL);
 >>>>>>> v3.18
@@ -1038,7 +1090,11 @@ sclp_check_interface(void)
 		/* Disable service-signal interruption - needs to happen
 		 * with IRQs enabled. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		service_subclass_irq_unregister();
+=======
+		irq_subclass_unregister(IRQ_SUBCLASS_SERVICE_SIGNAL);
+>>>>>>> v3.18
 =======
 		irq_subclass_unregister(IRQ_SUBCLASS_SERVICE_SIGNAL);
 >>>>>>> v3.18
@@ -1052,7 +1108,11 @@ sclp_check_interface(void)
 			rc = -EBUSY;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_external_interrupt(0x2401, sclp_check_handler);
+=======
+	unregister_external_irq(EXT_IRQ_SERVICE_SIG, sclp_check_handler);
+>>>>>>> v3.18
 =======
 	unregister_external_irq(EXT_IRQ_SERVICE_SIG, sclp_check_handler);
 >>>>>>> v3.18
@@ -1180,7 +1240,10 @@ static const struct dev_pm_ops sclp_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t sclp_show_console_pages(struct device_driver *dev, char *buf)
 {
 	return sprintf(buf, "%i\n", sclp_console_pages);
@@ -1216,6 +1279,9 @@ static const struct attribute_group *sclp_drv_attr_groups[] = {
 	NULL,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver sclp_pdrv = {
 	.driver = {
@@ -1223,6 +1289,10 @@ static struct platform_driver sclp_pdrv = {
 		.owner	= THIS_MODULE,
 		.pm	= &sclp_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.groups = sclp_drv_attr_groups,
+>>>>>>> v3.18
 =======
 		.groups = sclp_drv_attr_groups,
 >>>>>>> v3.18
@@ -1250,6 +1320,11 @@ sclp_init(void)
 	list_add(&sclp_state_change_event.list, &sclp_reg_list);
 	init_timer(&sclp_request_timer);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	init_timer(&sclp_queue_timer);
+	sclp_queue_timer.function = sclp_req_queue_timeout;
+>>>>>>> v3.18
 =======
 	init_timer(&sclp_queue_timer);
 	sclp_queue_timer.function = sclp_req_queue_timeout;
@@ -1266,7 +1341,11 @@ sclp_init(void)
 		goto fail_init_state_uninitialized;
 	/* Register interrupt handler */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = register_external_interrupt(0x2401, sclp_interrupt_handler);
+=======
+	rc = register_external_irq(EXT_IRQ_SERVICE_SIG, sclp_interrupt_handler);
+>>>>>>> v3.18
 =======
 	rc = register_external_irq(EXT_IRQ_SERVICE_SIG, sclp_interrupt_handler);
 >>>>>>> v3.18
@@ -1277,7 +1356,11 @@ sclp_init(void)
 	/* Enable service-signal external interruption - needs to happen with
 	 * IRQs enabled. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	service_subclass_irq_register();
+=======
+	irq_subclass_register(IRQ_SUBCLASS_SERVICE_SIGNAL);
+>>>>>>> v3.18
 =======
 	irq_subclass_register(IRQ_SUBCLASS_SERVICE_SIGNAL);
 >>>>>>> v3.18
@@ -1318,17 +1401,23 @@ static __init int sclp_initcall(void)
 	if (rc)
 		return rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sclp_pdev = platform_device_register_simple("sclp", -1, NULL, 0);
 	rc = IS_ERR(sclp_pdev) ? PTR_ERR(sclp_pdev) : 0;
 	if (rc)
 		goto fail_platform_driver_unregister;
 =======
+=======
+>>>>>>> v3.18
 
 	sclp_pdev = platform_device_register_simple("sclp", -1, NULL, 0);
 	rc = PTR_ERR_OR_ZERO(sclp_pdev);
 	if (rc)
 		goto fail_platform_driver_unregister;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = atomic_notifier_chain_register(&panic_notifier_list,
 					    &sclp_on_panic_nb);

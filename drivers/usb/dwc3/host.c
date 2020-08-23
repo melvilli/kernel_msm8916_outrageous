@@ -6,6 +6,7 @@
  * Authors: Felipe Balbi <balbi@ti.com>,
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -41,6 +42,8 @@
 #include "core.h"
 #include "xhci.h"
 =======
+=======
+>>>>>>> v3.18
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2  of
  * the License as published by the Free Software Foundation.
@@ -55,14 +58,22 @@
 #include <linux/usb/xhci_pdriver.h>
 
 #include "core.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int dwc3_host_init(struct dwc3 *dwc)
 {
 	struct platform_device	*xhci;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			ret;
 	struct xhci_plat_data	pdata;
+=======
+	struct usb_xhci_pdata	pdata;
+	int			ret;
+>>>>>>> v3.18
 =======
 	struct usb_xhci_pdata	pdata;
 	int			ret;
@@ -82,6 +93,7 @@ int dwc3_host_init(struct dwc3 *dwc)
 	xhci->dev.dma_parms	= dwc->dev->dma_parms;
 
 	dwc->xhci = xhci;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pdata.vendor = ((dwc->revision & DWC3_GSNPSID_MASK) >>
 			__ffs(DWC3_GSNPSID_MASK) & DWC3_GSNPSREV_MASK);
@@ -109,6 +121,8 @@ int dwc3_host_init(struct dwc3 *dwc)
 			goto err1;
 		}
 =======
+=======
+>>>>>>> v3.18
 
 	ret = platform_device_add_resources(xhci, dwc->xhci_resources,
 						DWC3_XHCI_RESOURCES_NUM);
@@ -133,6 +147,9 @@ int dwc3_host_init(struct dwc3 *dwc)
 	if (ret) {
 		dev_err(dwc->dev, "failed to register xHCI device\n");
 		goto err1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -148,8 +165,12 @@ err0:
 void dwc3_host_exit(struct dwc3 *dwc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dwc->dotg)
 		platform_device_unregister(dwc->xhci);
+=======
+	platform_device_unregister(dwc->xhci);
+>>>>>>> v3.18
 =======
 	platform_device_unregister(dwc->xhci);
 >>>>>>> v3.18

@@ -14,7 +14,11 @@ import string
 
 def usage():
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print """usage: show_delta [<options>] <filename>
+=======
+	print ("""usage: show_delta [<options>] <filename>
+>>>>>>> v3.18
 =======
 	print ("""usage: show_delta [<options>] <filename>
 >>>>>>> v3.18
@@ -40,7 +44,11 @@ ex: $ dmesg >timefile
 will show times relative to the line in the kernel output
 starting with "NET4".
 <<<<<<< HEAD
+<<<<<<< HEAD
 """
+=======
+""")
+>>>>>>> v3.18
 =======
 """)
 >>>>>>> v3.18
@@ -103,17 +111,23 @@ def main():
 		lines = open(filein,"r").readlines()
 	except:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		print "Problem opening file: %s" % filein
 		sys.exit(1)
 
 	if base_str:
 		print 'base= "%s"' % base_str
 =======
+=======
+>>>>>>> v3.18
 		print ("Problem opening file: %s" % filein)
 		sys.exit(1)
 
 	if base_str:
 		print ('base= "%s"' % base_str)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		# assume a numeric base.  If that fails, try searching
 		# for a matching line.
@@ -134,7 +148,11 @@ def main():
 					break
 			if not found:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				print 'Couldn\'t find line matching base pattern "%s"' % base_str
+=======
+				print ('Couldn\'t find line matching base pattern "%s"' % base_str)
+>>>>>>> v3.18
 =======
 				print ('Couldn\'t find line matching base pattern "%s"' % base_str)
 >>>>>>> v3.18
@@ -144,10 +162,16 @@ def main():
 
 	for line in lines:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		print convert_line(line, base_time),
 
 main()
 
+=======
+		print (convert_line(line, base_time),)
+
+main()
+>>>>>>> v3.18
 =======
 		print (convert_line(line, base_time),)
 

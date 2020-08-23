@@ -76,6 +76,12 @@ struct hv_ops {
 	int (*tiocmget)(struct hvc_struct *hp);
 	int (*tiocmset)(struct hvc_struct *hp, unsigned int set, unsigned int clear);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* Callbacks to handle tty ports */
+	void (*dtr_rts)(struct hvc_struct *hp, int raise);
+>>>>>>> v3.18
 =======
 
 	/* Callbacks to handle tty ports */

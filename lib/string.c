@@ -28,9 +28,15 @@
 #include <linux/errno.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __HAVE_ARCH_STRNICMP
 /**
  * strnicmp - Case insensitive, length-limited string comparison
+=======
+#ifndef __HAVE_ARCH_STRNCASECMP
+/**
+ * strncasecmp - Case insensitive, length-limited string comparison
+>>>>>>> v3.18
 =======
 #ifndef __HAVE_ARCH_STRNCASECMP
 /**
@@ -41,7 +47,11 @@
  * @len: the maximum number of characters to compare
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int strnicmp(const char *s1, const char *s2, size_t len)
+=======
+int strncasecmp(const char *s1, const char *s2, size_t len)
+>>>>>>> v3.18
 =======
 int strncasecmp(const char *s1, const char *s2, size_t len)
 >>>>>>> v3.18
@@ -67,7 +77,10 @@ int strncasecmp(const char *s1, const char *s2, size_t len)
 	return (int)c1 - (int)c2;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(strncasecmp);
 #endif
 #ifndef __HAVE_ARCH_STRNICMP
@@ -76,6 +89,9 @@ int strnicmp(const char *s1, const char *s2, size_t len)
 {
 	return strncasecmp(s1, s2, len);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(strnicmp);
 #endif
@@ -95,6 +111,7 @@ EXPORT_SYMBOL(strcasecmp);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __HAVE_ARCH_STRNCASECMP
 int strncasecmp(const char *s1, const char *s2, size_t n)
 {
@@ -109,6 +126,8 @@ int strncasecmp(const char *s1, const char *s2, size_t n)
 EXPORT_SYMBOL(strncasecmp);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef __HAVE_ARCH_STRCPY
@@ -132,7 +151,11 @@ EXPORT_SYMBOL(strcpy);
 #ifndef __HAVE_ARCH_STRNCPY
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * strncpy - Copy a length-limited, %NUL-terminated string
+=======
+ * strncpy - Copy a length-limited, C-string
+>>>>>>> v3.18
 =======
  * strncpy - Copy a length-limited, C-string
 >>>>>>> v3.18
@@ -165,7 +188,11 @@ EXPORT_SYMBOL(strncpy);
 #ifndef __HAVE_ARCH_STRLCPY
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * strlcpy - Copy a %NUL terminated string into a sized buffer
+=======
+ * strlcpy - Copy a C-string into a sized buffer
+>>>>>>> v3.18
 =======
  * strlcpy - Copy a C-string into a sized buffer
 >>>>>>> v3.18
@@ -215,7 +242,11 @@ EXPORT_SYMBOL(strcat);
 #ifndef __HAVE_ARCH_STRNCAT
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * strncat - Append a length-limited, %NUL-terminated string to another
+=======
+ * strncat - Append a length-limited, C-string to another
+>>>>>>> v3.18
 =======
  * strncat - Append a length-limited, C-string to another
 >>>>>>> v3.18
@@ -248,7 +279,11 @@ EXPORT_SYMBOL(strncat);
 #ifndef __HAVE_ARCH_STRLCAT
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * strlcat - Append a length-limited, %NUL-terminated string to another
+=======
+ * strlcat - Append a length-limited, C-string to another
+>>>>>>> v3.18
 =======
  * strlcat - Append a length-limited, C-string to another
 >>>>>>> v3.18
@@ -342,7 +377,10 @@ EXPORT_SYMBOL(strchr);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef __HAVE_ARCH_STRCHRNUL
 /**
  * strchrnul - Find and return a character in a string, or end of string
@@ -361,6 +399,9 @@ char *strchrnul(const char *s, int c)
 EXPORT_SYMBOL(strchrnul);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef __HAVE_ARCH_STRRCHR
 /**
@@ -660,7 +701,11 @@ void memzero_explicit(void *s, size_t count)
 {
 	memset(s, 0, count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	barrier();
+=======
+	OPTIMIZER_HIDE_VAR(s);
+>>>>>>> v3.18
 =======
 	OPTIMIZER_HIDE_VAR(s);
 >>>>>>> v3.18
@@ -730,7 +775,11 @@ EXPORT_SYMBOL(memmove);
  */
 #undef memcmp
 <<<<<<< HEAD
+<<<<<<< HEAD
 int memcmp(const void *cs, const void *ct, size_t count)
+=======
+__visible int memcmp(const void *cs, const void *ct, size_t count)
+>>>>>>> v3.18
 =======
 __visible int memcmp(const void *cs, const void *ct, size_t count)
 >>>>>>> v3.18
@@ -875,9 +924,15 @@ void *memchr_inv(const void *start, int c, size_t bytes)
 
 	value64 = value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(ARCH_HAS_FAST_MULTIPLIER) && BITS_PER_LONG == 64
 	value64 *= 0x0101010101010101;
 #elif defined(ARCH_HAS_FAST_MULTIPLIER)
+=======
+#if defined(CONFIG_ARCH_HAS_FAST_MULTIPLIER) && BITS_PER_LONG == 64
+	value64 *= 0x0101010101010101;
+#elif defined(CONFIG_ARCH_HAS_FAST_MULTIPLIER)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_ARCH_HAS_FAST_MULTIPLIER) && BITS_PER_LONG == 64
 	value64 *= 0x0101010101010101;

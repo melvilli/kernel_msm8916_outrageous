@@ -18,6 +18,7 @@
 #include <asm/hw_irq.h>
 #include <asm/kvm_book3s_asm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #undef DEBUG
 
@@ -33,6 +34,8 @@ _GLOBAL(power7_idle)
 
 _GLOBAL(power7_nap)
 =======
+=======
+>>>>>>> v3.18
 #include <asm/opal.h>
 
 #undef DEBUG
@@ -62,6 +65,9 @@ _GLOBAL(power7_nap)
  */
 _GLOBAL(power7_powersave_common)
 	/* Use r3 to pass state nap/sleep/winkle */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* NAP is a state loss, we create a regs frame on the
 	 * stack, fill it up with the state we care about and
@@ -80,7 +86,11 @@ _GLOBAL(power7_powersave_common)
 	 * state when going to nap mode
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.discard_lazy_cpu_state
+=======
+	bl	discard_lazy_cpu_state
+>>>>>>> v3.18
 =======
 	bl	discard_lazy_cpu_state
 >>>>>>> v3.18
@@ -95,7 +105,13 @@ _GLOBAL(power7_powersave_common)
 	/* Check if something happened while soft-disabled */
 	lbz	r0,PACAIRQHAPPENED(r13)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmpwi	cr0,r0,0
+=======
+	andi.	r0,r0,~PACA_IRQ_HARD_DIS@l
+	beq	1f
+	cmpwi	cr0,r4,0
+>>>>>>> v3.18
 =======
 	andi.	r0,r0,~PACA_IRQ_HARD_DIS@l
 	beq	1f
@@ -122,6 +138,7 @@ _GLOBAL(power7_powersave_common)
 	SAVE_GPR(2, r1)
 	SAVE_NVGPRS(r1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfcr	r3
 	std	r3,_CCR(r1)
 	std	r9,_MSR(r1)
@@ -129,6 +146,8 @@ _GLOBAL(power7_powersave_common)
 
 #ifdef CONFIG_KVM_BOOK3S_64_HV
 =======
+=======
+>>>>>>> v3.18
 	mfcr	r4
 	std	r4,_CCR(r1)
 	std	r9,_MSR(r1)
@@ -136,11 +155,15 @@ _GLOBAL(power7_powersave_common)
 
 _GLOBAL(power7_enter_nap_mode)
 #ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Tell KVM we're napping */
 	li	r4,KVM_HWTHREAD_IN_NAP
 	stb	r4,HSTATE_HWTHREAD_STATE(r13)
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* Magic NAP mode enter sequence */
@@ -155,6 +178,8 @@ _GLOBAL(power7_enter_nap_mode)
 _GLOBAL(power7_wakeup_loss)
 	ld	r1,PACAR1(r13)
 =======
+=======
+>>>>>>> v3.18
 	cmpwi	cr0,r3,1
 	beq	2f
 	IDLE_STATE_ENTER_SEQ(PPC_NAP)
@@ -265,6 +290,9 @@ _GLOBAL(power7_wakeup_loss)
 BEGIN_FTR_SECTION
 	CHECK_HMI_INTERRUPT
 END_FTR_SECTION_IFSET(CPU_FTR_HVMODE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	REST_NVGPRS(r1)
 	REST_GPR(2, r1)
@@ -281,12 +309,18 @@ _GLOBAL(power7_wakeup_noloss)
 	lbz	r0,PACA_NAPSTATELOST(r13)
 	cmpwi	r0,0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bne	.power7_wakeup_loss
 =======
+=======
+>>>>>>> v3.18
 	bne	power7_wakeup_loss
 BEGIN_FTR_SECTION
 	CHECK_HMI_INTERRUPT
 END_FTR_SECTION_IFSET(CPU_FTR_HVMODE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ld	r1,PACAR1(r13)
 	ld	r4,_MSR(r1)

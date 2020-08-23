@@ -21,6 +21,11 @@
  *
  * Changes/Revisions:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *	0.4	01/09/2014 (Benjamin Tissoires <benjamin.tissoires@redhat.com>)
+ *		- add UI_GET_SYSNAME ioctl
+>>>>>>> v3.18
 =======
  *	0.4	01/09/2014 (Benjamin Tissoires <benjamin.tissoires@redhat.com>)
  *		- add UI_GET_SYSNAME ioctl
@@ -41,7 +46,11 @@
 #include <linux/input.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UINPUT_VERSION		3
+=======
+#define UINPUT_VERSION		4
+>>>>>>> v3.18
 =======
 #define UINPUT_VERSION		4
 >>>>>>> v3.18
@@ -83,7 +92,10 @@ struct uinput_ff_erase {
 #define UI_END_FF_ERASE		_IOW(UINPUT_IOCTL_BASE, 203, struct uinput_ff_erase)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * UI_GET_SYSNAME - get the sysfs name of the created uinput device
  *
@@ -102,6 +114,9 @@ struct uinput_ff_erase {
  */
 #define UI_GET_VERSION		_IOR(UINPUT_IOCTL_BASE, 301, unsigned int)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * To write a force-feedback-capable driver, the upload_effect

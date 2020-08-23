@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -150,7 +160,10 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * CSR HW resources monitor registers
  */
 #define CSR_MONITOR_CFG_REG		(CSR_BASE+0x214)
@@ -158,6 +171,9 @@
 #define CSR_MONITOR_XTAL_RESOURCES	(0x00000010)
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * CSR Hardware Revision Workaround Register.  Indicates hardware rev;
  * "step" determines CCK backoff for txpower calculation.  Used for 4965 only.
@@ -194,6 +210,10 @@
 #define CSR_HW_IF_CONFIG_REG_BIT_NIC_PREPARE_DONE (0x02000000) /* ME_OWN */
 #define CSR_HW_IF_CONFIG_REG_PREPARE		  (0x08000000) /* WAKE_ME */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CSR_HW_IF_CONFIG_REG_PERSIST_MODE	  (0x40000000) /* PERSISTENCE */
+>>>>>>> v3.18
 =======
 #define CSR_HW_IF_CONFIG_REG_PERSIST_MODE	  (0x40000000) /* PERSISTENCE */
 >>>>>>> v3.18
@@ -223,7 +243,12 @@
 				 CSR_INT_BIT_SW_RX   | \
 				 CSR_INT_BIT_WAKEUP  | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 CSR_INT_BIT_ALIVE)
+=======
+				 CSR_INT_BIT_ALIVE   | \
+				 CSR_INT_BIT_RX_PERIODIC)
+>>>>>>> v3.18
 =======
 				 CSR_INT_BIT_ALIVE   | \
 				 CSR_INT_BIT_RX_PERIODIC)
@@ -269,6 +294,10 @@
  *         010 -- PHY (radio) power-down
  *         011 -- Error
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *    10:  XTAL ON request
+>>>>>>> v3.18
 =======
  *    10:  XTAL ON request
 >>>>>>> v3.18
@@ -304,6 +333,10 @@
 #define CSR_GP_CNTRL_REG_FLAG_MAC_ACCESS_REQ         (0x00000008)
 #define CSR_GP_CNTRL_REG_FLAG_GOING_TO_SLEEP         (0x00000010)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CSR_GP_CNTRL_REG_FLAG_XTAL_ON		     (0x00000400)
+>>>>>>> v3.18
 =======
 #define CSR_GP_CNTRL_REG_FLAG_XTAL_ON		     (0x00000400)
 >>>>>>> v3.18
@@ -320,7 +353,10 @@
 #define CSR_HW_REV_STEP(_val)          (((_val) & 0x000000C) >> 2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  *  hw_rev values
@@ -331,6 +367,9 @@ enum {
 };
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CSR_HW_REV_TYPE_MSK            (0x000FFF0)
 #define CSR_HW_REV_TYPE_5300           (0x0000020)
@@ -446,7 +485,10 @@ enum {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * SHR target access (Shared block memory space)
  *
  * Shared internal registers can be accessed directly from PCI bus through SHR
@@ -475,6 +517,9 @@ enum {
 #define HEEP_CTRL_WRD_PCIEX_DATA_REG	(CSR_BASE+0x0f4)
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * HBUS (Host-side Bus)
  *
@@ -551,7 +596,10 @@ enum {
 #define IWL_HOST_INT_OPER_MODE		BIT(31)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*****************************************************************************
  *                        7000/3000 series SHR DTS addresses                 *
  *****************************************************************************/
@@ -571,5 +619,8 @@ enum dtd_diode_reg {
 	DTS_DIODE_REG_FLAGS_PASS_ONCE		= 0x00000080, /* bits [7:7] */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !__iwl_csr_h__ */

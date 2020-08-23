@@ -46,7 +46,11 @@
  * The current implementation switches between _STD (default) and _ISO (when
  * isochronous transfers are scheduled), in order to optimize the throughput
 <<<<<<< HEAD
+<<<<<<< HEAD
  * in normal cicrumstances, but also provide good isochronous behaviour.
+=======
+ * in normal circumstances, but also provide good isochronous behaviour.
+>>>>>>> v3.18
 =======
  * in normal circumstances, but also provide good isochronous behaviour.
 >>>>>>> v3.18

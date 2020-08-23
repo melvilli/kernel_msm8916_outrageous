@@ -15,6 +15,10 @@ config HSI_BOARDINFO
 	default y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/hsi/controllers/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/hsi/controllers/Kconfig"
 >>>>>>> v3.18

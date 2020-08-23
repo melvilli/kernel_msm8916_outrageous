@@ -113,9 +113,15 @@ static void ath6kl_credit_init(struct ath6kl_htc_credit_info *cred_info,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cur_ep_dist->svc_id == WMI_CONTROL_SVC)
 			cur_ep_dist->cred_norm = cur_ep_dist->cred_per_msg;
 		else {
+=======
+		if (cur_ep_dist->svc_id == WMI_CONTROL_SVC) {
+			cur_ep_dist->cred_norm = cur_ep_dist->cred_per_msg;
+		} else {
+>>>>>>> v3.18
 =======
 		if (cur_ep_dist->svc_id == WMI_CONTROL_SVC) {
 			cur_ep_dist->cred_norm = cur_ep_dist->cred_per_msg;
@@ -136,7 +142,10 @@ static void ath6kl_credit_init(struct ath6kl_htc_credit_info *cred_info,
 			count = max(count, cur_ep_dist->cred_per_msg);
 			cur_ep_dist->cred_norm = count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -559,7 +568,10 @@ static int htc_check_credits(struct htc_target *target,
 			     int *req_cred)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*req_cred = (len > target->tgt_cred_sz) ?
@@ -621,7 +633,10 @@ static void ath6kl_htc_tx_pkts_get(struct htc_target *target,
 
 	while (true) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		flags = 0;
@@ -905,7 +920,10 @@ static void ath6kl_htc_tx_from_queue(struct htc_target *target,
 
 	while (true) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (list_empty(&endpoint->txq))
@@ -1209,7 +1227,10 @@ static void ath6kl_htc_mbox_flush_txep(struct htc_target *target,
 		htc_tx_complete(endpoint, &container);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1416,7 +1437,10 @@ static int ath6kl_htc_rx_setup(struct htc_target *target,
 	ep_cb = ep->ep_cb;
 	for (j = 0; j < n_msg; j++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -1449,9 +1473,15 @@ static int ath6kl_htc_rx_setup(struct htc_target *target,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (list_empty(&ep->rx_bufq))
 				packet = NULL;
 			else {
+=======
+			if (list_empty(&ep->rx_bufq)) {
+				packet = NULL;
+			} else {
+>>>>>>> v3.18
 =======
 			if (list_empty(&ep->rx_bufq)) {
 				packet = NULL;
@@ -1518,7 +1548,10 @@ static int ath6kl_htc_rx_alloc(struct htc_target *target,
 
 	for (i = 0; i < msg; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		htc_hdr = (struct htc_frame_hdr *)&lk_ahds[i];
@@ -1742,7 +1775,10 @@ static int htc_parse_trailer(struct htc_target *target,
 		if ((lk_ahd->pre_valid == ((~lk_ahd->post_valid) & 0xFF)) &&
 		    next_lk_ahds) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			ath6kl_dbg(ATH6KL_DBG_HTC,
@@ -1792,7 +1828,10 @@ static int htc_parse_trailer(struct htc_target *target,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1816,7 +1855,10 @@ static int htc_proc_trailer(struct htc_target *target,
 
 	while (len > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (len < sizeof(struct htc_record_hdr)) {
@@ -2141,7 +2183,10 @@ static int ath6kl_htc_rx_fetch(struct htc_target *target,
 
 		if (!fetched_pkts) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			packet = list_first_entry(rx_pktq, struct htc_packet,
@@ -2219,7 +2264,10 @@ int ath6kl_htc_rxmsg_pending_handler(struct htc_target *target,
 
 	while (true) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -2874,8 +2922,14 @@ static int ath6kl_htc_reset(struct htc_target *target)
 			packet->endpoint = ENDPOINT_0;
 			list_add_tail(&packet->list, &target->free_ctrl_rxbuf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
 			list_add_tail(&packet->list, &target->free_ctrl_txbuf);
+=======
+		} else {
+			list_add_tail(&packet->list, &target->free_ctrl_txbuf);
+		}
+>>>>>>> v3.18
 =======
 		} else {
 			list_add_tail(&packet->list, &target->free_ctrl_txbuf);

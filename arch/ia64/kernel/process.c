@@ -216,7 +216,11 @@ static inline void play_dead(void)
 
 	/* Ack it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(cpu_state) = CPU_DEAD;
+=======
+	__this_cpu_write(cpu_state, CPU_DEAD);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(cpu_state, CPU_DEAD);
 >>>>>>> v3.18
@@ -278,7 +282,11 @@ ia64_save_extra (struct task_struct *task)
 		pfm_save_regs(task);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = __get_cpu_var(pfm_syst_info);
+=======
+	info = __this_cpu_read(pfm_syst_info);
+>>>>>>> v3.18
 =======
 	info = __this_cpu_read(pfm_syst_info);
 >>>>>>> v3.18
@@ -302,7 +310,11 @@ ia64_load_extra (struct task_struct *task)
 		pfm_load_regs(task);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = __get_cpu_var(pfm_syst_info);
+=======
+	info = __this_cpu_read(pfm_syst_info);
+>>>>>>> v3.18
 =======
 	info = __this_cpu_read(pfm_syst_info);
 >>>>>>> v3.18
@@ -675,7 +687,11 @@ machine_restart (char *restart_cmd)
 {
 	(void) notify_die(DIE_MACHINE_RESTART, restart_cmd, NULL, 0, 0, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(*efi.reset_system)(EFI_RESET_WARM, 0, 0, NULL);
+=======
+	efi_reboot(REBOOT_WARM, NULL);
+>>>>>>> v3.18
 =======
 	efi_reboot(REBOOT_WARM, NULL);
 >>>>>>> v3.18

@@ -17,6 +17,10 @@ struct vmemmap_backing {
 	unsigned long virt_addr;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct vmemmap_backing *vmemmap_list;
+>>>>>>> v3.18
 =======
 extern struct vmemmap_backing *vmemmap_list;
 >>>>>>> v3.18
@@ -96,12 +100,18 @@ static inline pgtable_t pte_alloc_one(struct mm_struct *mm,
 		return NULL;
 	page = virt_to_page(pte);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgtable_page_ctor(page);
 =======
+=======
+>>>>>>> v3.18
 	if (!pgtable_page_ctor(page)) {
 		__free_page(page);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return page;
 }
@@ -231,7 +241,11 @@ static inline void __pte_free_tlb(struct mmu_gather *tlb, pgtable_t table,
 static inline pmd_t *pmd_alloc_one(struct mm_struct *mm, unsigned long addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return kmem_cache_alloc(PGT_CACHE(PMD_INDEX_SIZE),
+=======
+	return kmem_cache_alloc(PGT_CACHE(PMD_CACHE_INDEX),
+>>>>>>> v3.18
 =======
 	return kmem_cache_alloc(PGT_CACHE(PMD_CACHE_INDEX),
 >>>>>>> v3.18
@@ -241,17 +255,23 @@ static inline pmd_t *pmd_alloc_one(struct mm_struct *mm, unsigned long addr)
 static inline void pmd_free(struct mm_struct *mm, pmd_t *pmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kmem_cache_free(PGT_CACHE(PMD_INDEX_SIZE), pmd);
 }
 
 #define __pmd_free_tlb(tlb, pmd, addr)		      \
 	pgtable_free_tlb(tlb, pmd, PMD_INDEX_SIZE)
 =======
+=======
+>>>>>>> v3.18
 	kmem_cache_free(PGT_CACHE(PMD_CACHE_INDEX), pmd);
 }
 
 #define __pmd_free_tlb(tlb, pmd, addr)		      \
 	pgtable_free_tlb(tlb, pmd, PMD_CACHE_INDEX)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef CONFIG_PPC_64K_PAGES
 #define __pud_free_tlb(tlb, pud, addr)		      \

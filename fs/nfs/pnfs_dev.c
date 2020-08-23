@@ -30,6 +30,12 @@
 
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/nfs_fs.h>
+#include "nfs4session.h"
+#include "internal.h"
+>>>>>>> v3.18
 =======
 #include <linux/nfs_fs.h>
 #include "nfs4session.h"
@@ -96,7 +102,10 @@ _lookup_deviceid(const struct pnfs_layoutdriver_type *ld,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct nfs4_deviceid_node *
 nfs4_get_device_info(struct nfs_server *server,
 		const struct nfs4_deviceid *dev_id,
@@ -165,6 +174,9 @@ out_free_pdev:
 	return d;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Lookup a deviceid in cache and get a reference count on it if found
@@ -174,9 +186,14 @@ out_free_pdev:
  */
 static struct nfs4_deviceid_node *
 <<<<<<< HEAD
+<<<<<<< HEAD
 _find_get_deviceid(const struct pnfs_layoutdriver_type *ld,
 		   const struct nfs_client *clp, const struct nfs4_deviceid *id,
 		   long hash)
+=======
+__nfs4_find_get_deviceid(struct nfs_server *server,
+		const struct nfs4_deviceid *id, long hash)
+>>>>>>> v3.18
 =======
 __nfs4_find_get_deviceid(struct nfs_server *server,
 		const struct nfs4_deviceid *id, long hash)
@@ -186,7 +203,12 @@ __nfs4_find_get_deviceid(struct nfs_server *server,
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	d = _lookup_deviceid(ld, clp, id, hash);
+=======
+	d = _lookup_deviceid(server->pnfs_curr_ld, server->nfs_client, id,
+			hash);
+>>>>>>> v3.18
 =======
 	d = _lookup_deviceid(server->pnfs_curr_ld, server->nfs_client, id,
 			hash);
@@ -199,11 +221,14 @@ __nfs4_find_get_deviceid(struct nfs_server *server,
 
 struct nfs4_deviceid_node *
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfs4_find_get_deviceid(const struct pnfs_layoutdriver_type *ld,
 		       const struct nfs_client *clp, const struct nfs4_deviceid *id)
 {
 	return _find_get_deviceid(ld, clp, id, nfs4_deviceid_hash(id));
 =======
+=======
+>>>>>>> v3.18
 nfs4_find_get_deviceid(struct nfs_server *server,
 		const struct nfs4_deviceid *id, struct rpc_cred *cred,
 		gfp_t gfp_mask)
@@ -231,6 +256,9 @@ nfs4_find_get_deviceid(struct nfs_server *server,
 	spin_unlock(&nfs4_deviceid_lock);
 
 	return new;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(nfs4_find_get_deviceid);
@@ -269,9 +297,13 @@ EXPORT_SYMBOL_GPL(nfs4_delete_deviceid);
 
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfs4_init_deviceid_node(struct nfs4_deviceid_node *d,
 			const struct pnfs_layoutdriver_type *ld,
 			const struct nfs_client *nfs_client,
+=======
+nfs4_init_deviceid_node(struct nfs4_deviceid_node *d, struct nfs_server *server,
+>>>>>>> v3.18
 =======
 nfs4_init_deviceid_node(struct nfs4_deviceid_node *d, struct nfs_server *server,
 >>>>>>> v3.18
@@ -280,8 +312,13 @@ nfs4_init_deviceid_node(struct nfs4_deviceid_node *d, struct nfs_server *server,
 	INIT_HLIST_NODE(&d->node);
 	INIT_HLIST_NODE(&d->tmpnode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	d->ld = ld;
 	d->nfs_client = nfs_client;
+=======
+	d->ld = server->pnfs_curr_ld;
+	d->nfs_client = server->nfs_client;
+>>>>>>> v3.18
 =======
 	d->ld = server->pnfs_curr_ld;
 	d->nfs_client = server->nfs_client;
@@ -293,6 +330,7 @@ nfs4_init_deviceid_node(struct nfs4_deviceid_node *d, struct nfs_server *server,
 EXPORT_SYMBOL_GPL(nfs4_init_deviceid_node);
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Uniquely initialize and insert a deviceid node into cache
  *
@@ -327,6 +365,8 @@ nfs4_insert_deviceid_node(struct nfs4_deviceid_node *new)
 EXPORT_SYMBOL_GPL(nfs4_insert_deviceid_node);
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Dereference a deviceid node and delete it when its reference count drops
@@ -429,6 +469,9 @@ nfs4_deviceid_mark_client_invalid(struct nfs_client *clp)
 	rcu_read_unlock();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

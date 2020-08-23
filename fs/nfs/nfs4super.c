@@ -10,6 +10,10 @@
 #include "internal.h"
 #include "nfs4_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "dns_resolve.h"
+>>>>>>> v3.18
 =======
 #include "dns_resolve.h"
 >>>>>>> v3.18
@@ -81,6 +85,7 @@ static int nfs4_write_inode(struct inode *inode, struct writeback_control *wbc)
 	int ret = nfs_write_inode(inode, wbc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret >= 0 && test_bit(NFS_INO_LAYOUTCOMMIT, &NFS_I(inode)->flags)) {
 		int status;
 		bool sync = true;
@@ -97,6 +102,11 @@ static int nfs4_write_inode(struct inode *inode, struct writeback_control *wbc)
 		ret = pnfs_layoutcommit_inode(inode,
 				wbc->sync_mode == WB_SYNC_ALL);
 >>>>>>> v3.18
+=======
+	if (ret == 0)
+		ret = pnfs_layoutcommit_inode(inode,
+				wbc->sync_mode == WB_SYNC_ALL);
+>>>>>>> v3.18
 	return ret;
 }
 
@@ -108,7 +118,11 @@ static int nfs4_write_inode(struct inode *inode, struct writeback_control *wbc)
 static void nfs4_evict_inode(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -267,8 +281,11 @@ struct dentry *nfs4_try_mount(int flags, const char *dev_name,
 	dfprintk(MOUNT, "--> nfs4_try_mount()\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data->auth_flavors[0] == RPC_AUTH_MAXFLAVOR)
 		data->auth_flavors[0] = RPC_AUTH_UNIX;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	export_path = data->nfs_server.export_path;
@@ -280,9 +297,15 @@ struct dentry *nfs4_try_mount(int flags, const char *dev_name,
 	res = nfs_follow_remote_path(root_mnt, export_path);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dfprintk(MOUNT, "<-- nfs4_try_mount() = %ld%s\n",
 			IS_ERR(res) ? PTR_ERR(res) : 0,
 			IS_ERR(res) ? " [error]" : "");
+=======
+	dfprintk(MOUNT, "<-- nfs4_try_mount() = %d%s\n",
+		 PTR_ERR_OR_ZERO(res),
+		 IS_ERR(res) ? " [error]" : "");
+>>>>>>> v3.18
 =======
 	dfprintk(MOUNT, "<-- nfs4_try_mount() = %d%s\n",
 		 PTR_ERR_OR_ZERO(res),
@@ -344,9 +367,15 @@ static struct dentry *nfs4_referral_mount(struct file_system_type *fs_type,
 
 	res = nfs_follow_remote_path(root_mnt, export_path);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("<-- nfs4_referral_mount() = %ld%s\n",
 			IS_ERR(res) ? PTR_ERR(res) : 0,
 			IS_ERR(res) ? " [error]" : "");
+=======
+	dprintk("<-- nfs4_referral_mount() = %d%s\n",
+		PTR_ERR_OR_ZERO(res),
+		IS_ERR(res) ? " [error]" : "");
+>>>>>>> v3.18
 =======
 	dprintk("<-- nfs4_referral_mount() = %d%s\n",
 		PTR_ERR_OR_ZERO(res),
@@ -361,6 +390,7 @@ static int __init init_nfs_v4(void)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = nfs_idmap_init();
 	if (err)
 		goto out;
@@ -374,6 +404,8 @@ static int __init init_nfs_v4(void)
 out1:
 	nfs_idmap_quit();
 =======
+=======
+>>>>>>> v3.18
 	err = nfs_dns_resolver_init();
 	if (err)
 		goto out;
@@ -392,6 +424,9 @@ out2:
 	nfs_idmap_quit();
 out1:
 	nfs_dns_resolver_destroy();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	return err;
@@ -403,6 +438,10 @@ static void __exit exit_nfs_v4(void)
 	nfs4_unregister_sysctl();
 	nfs_idmap_quit();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nfs_dns_resolver_destroy();
+>>>>>>> v3.18
 =======
 	nfs_dns_resolver_destroy();
 >>>>>>> v3.18

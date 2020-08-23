@@ -59,7 +59,11 @@ AllocMidQEntry(const struct smb_hdr *smb_buffer, struct TCP_Server_Info *server)
 	else {
 		memset(temp, 0, sizeof(struct mid_q_entry));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		temp->mid = smb_buffer->Mid;	/* always LE */
+=======
+		temp->mid = get_mid(smb_buffer);
+>>>>>>> v3.18
 =======
 		temp->mid = get_mid(smb_buffer);
 >>>>>>> v3.18
@@ -275,7 +279,10 @@ cifs_rqst_page_to_kvec(struct smb_rqst *rqst, unsigned int idx,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned long
 rqst_len(struct smb_rqst *rqst)
 {
@@ -296,6 +303,9 @@ rqst_len(struct smb_rqst *rqst)
 	return buflen;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 smb_send_rqst(struct TCP_Server_Info *server, struct smb_rqst *rqst)
@@ -305,6 +315,10 @@ smb_send_rqst(struct TCP_Server_Info *server, struct smb_rqst *rqst)
 	int n_vec = rqst->rq_nvec;
 	unsigned int smb_buf_length = get_rfc1002_length(iov[0].iov_base);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long send_length;
+>>>>>>> v3.18
 =======
 	unsigned long send_length;
 >>>>>>> v3.18
@@ -317,7 +331,10 @@ smb_send_rqst(struct TCP_Server_Info *server, struct smb_rqst *rqst)
 		return -ENOTSOCK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* sanity check send length */
 	send_length = rqst_len(rqst);
 	if (send_length != smb_buf_length + 4) {
@@ -326,6 +343,9 @@ smb_send_rqst(struct TCP_Server_Info *server, struct smb_rqst *rqst)
 		return -EIO;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cifs_dbg(FYI, "Sending smb: smb_len=%u\n", smb_buf_length);
 	dump_smb(iov[0].iov_base, iov[0].iov_len);
@@ -453,9 +473,12 @@ wait_for_free_request(struct TCP_Server_Info *server, const int timeout,
 		      const int optype)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return wait_for_free_credits(server, timeout,
 				server->ops->get_credits_field(server, optype));
 =======
+=======
+>>>>>>> v3.18
 	int *val;
 
 	val = server->ops->get_credits_field(server, optype);
@@ -472,6 +495,9 @@ cifs_wait_mtu_credits(struct TCP_Server_Info *server, unsigned int size,
 	*num = size;
 	*credits = 0;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -488,8 +514,12 @@ static int allocate_mid(struct cifs_ses *ses, struct smb_hdr *in_buf,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ses->status != CifsGood) {
 		/* check if SMB session is bad because we are setting it up */
+=======
+	if (ses->status == CifsNew) {
+>>>>>>> v3.18
 =======
 	if (ses->status == CifsNew) {
 >>>>>>> v3.18
@@ -499,7 +529,10 @@ static int allocate_mid(struct cifs_ses *ses, struct smb_hdr *in_buf,
 		/* else ok - we are setting up session */
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (ses->status == CifsExiting) {
 		/* check if SMB session is bad because we are setting it up */
@@ -508,6 +541,9 @@ static int allocate_mid(struct cifs_ses *ses, struct smb_hdr *in_buf,
 		/* else ok - we are shutting down session */
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*ppmidQ = AllocMidQEntry(in_buf, ses->server);
 	if (*ppmidQ == NULL)
@@ -540,7 +576,11 @@ cifs_setup_async_request(struct TCP_Server_Info *server, struct smb_rqst *rqst)
 
 	/* enable signing if server requires it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (server->sec_mode & (SECMODE_SIGN_REQUIRED | SECMODE_SIGN_ENABLED))
+=======
+	if (server->sign)
+>>>>>>> v3.18
 =======
 	if (server->sign)
 >>>>>>> v3.18
@@ -571,6 +611,10 @@ cifs_call_async(struct TCP_Server_Info *server, struct smb_rqst *rqst,
 	int rc, timeout, optype;
 	struct mid_q_entry *mid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int credits = 0;
+>>>>>>> v3.18
 =======
 	unsigned int credits = 0;
 >>>>>>> v3.18
@@ -579,16 +623,22 @@ cifs_call_async(struct TCP_Server_Info *server, struct smb_rqst *rqst,
 	optype = flags & CIFS_OP_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = wait_for_free_request(server, timeout, optype);
 	if (rc)
 		return rc;
 =======
+=======
+>>>>>>> v3.18
 	if ((flags & CIFS_HAS_CREDITS) == 0) {
 		rc = wait_for_free_request(server, timeout, optype);
 		if (rc)
 			return rc;
 		credits = 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&server->srv_mutex);
@@ -596,8 +646,12 @@ cifs_call_async(struct TCP_Server_Info *server, struct smb_rqst *rqst,
 	if (IS_ERR(mid)) {
 		mutex_unlock(&server->srv_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		add_credits(server, 1, optype);
 		wake_up(&server->request_q);
+=======
+		add_credits_and_wake_if(server, credits, optype);
+>>>>>>> v3.18
 =======
 		add_credits_and_wake_if(server, credits, optype);
 >>>>>>> v3.18
@@ -629,8 +683,12 @@ cifs_call_async(struct TCP_Server_Info *server, struct smb_rqst *rqst,
 
 	cifs_delete_mid(mid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	add_credits(server, 1, optype);
 	wake_up(&server->request_q);
+=======
+	add_credits_and_wake_if(server, credits, optype);
+>>>>>>> v3.18
 =======
 	add_credits_and_wake_if(server, credits, optype);
 >>>>>>> v3.18
@@ -714,7 +772,11 @@ cifs_check_receive(struct mid_q_entry *mid, struct TCP_Server_Info *server,
 
 	/* convert the length into a more usable form */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (server->sec_mode & (SECMODE_SIGN_REQUIRED | SECMODE_SIGN_ENABLED)) {
+=======
+	if (server->sign) {
+>>>>>>> v3.18
 =======
 	if (server->sign) {
 >>>>>>> v3.18

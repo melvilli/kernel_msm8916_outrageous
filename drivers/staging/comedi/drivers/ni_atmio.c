@@ -15,10 +15,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -97,21 +100,28 @@ are not supported.
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include "../comedidev.h"
 
 #include <linux/delay.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/interrupt.h>
 #include "../comedidev.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/isapnp.h>
 
 #include "ni_stc.h"
 #include "8255.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #undef DEBUG
 
@@ -120,10 +130,13 @@ are not supported.
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  *  AT specific setup
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define NI_SIZE 0x20
 
@@ -281,6 +294,8 @@ static const struct ni_board_struct ni_boards[] = {
 	 .has_8255 = 0,
 	 }
 =======
+=======
+>>>>>>> v3.18
 static const struct ni_board_struct ni_boards[] = {
 	{
 		.name		= "at-mio-16e-1",
@@ -399,6 +414,9 @@ static const struct ni_board_struct ni_boards[] = {
 		.ai_speed	= 10000,
 		.caldac		= { dac8800, dac8043, ad8522 },
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -406,6 +424,7 @@ static const int ni_irqpin[] = {
 	-1, -1, -1, 0, 1, 2, -1, 3, -1, -1, 4, 5, 6, -1, -1, 7
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define interrupt_pin(a)	(ni_irqpin[(a)])
 
@@ -469,6 +488,9 @@ static uint16_t ni_atmio_win_in(struct comedi_device *dev, int addr)
 =======
 #include "ni_mio_common.c"
 >>>>>>> v3.18
+=======
+#include "ni_mio_common.c"
+>>>>>>> v3.18
 
 static struct pnp_device_id device_ids[] = {
 	{.id = "NIC1900", .driver_data = 0},
@@ -482,8 +504,11 @@ static struct pnp_device_id device_ids[] = {
 MODULE_DEVICE_TABLE(pnp, device_ids);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ni_mio_common.c"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ni_isapnp_find_board(struct pnp_dev **dev)
@@ -501,6 +526,7 @@ static int ni_isapnp_find_board(struct pnp_dev **dev)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pnp_device_attach(isapnp_dev) < 0) {
 			printk
 			 ("ni_atmio: %s found but already active, skipping.\n",
@@ -512,20 +538,31 @@ static int ni_isapnp_find_board(struct pnp_dev **dev)
 			continue;
 
 >>>>>>> v3.18
+=======
+		if (pnp_device_attach(isapnp_dev) < 0)
+			continue;
+
+>>>>>>> v3.18
 		if (pnp_activate_dev(isapnp_dev) < 0) {
 			pnp_device_detach(isapnp_dev);
 			return -EAGAIN;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!pnp_port_valid(isapnp_dev, 0)
 		    || !pnp_irq_valid(isapnp_dev, 0)) {
 			pnp_device_detach(isapnp_dev);
 			printk("ni_atmio: pnp invalid port or irq, aborting\n");
 =======
+=======
+>>>>>>> v3.18
 
 		if (!pnp_port_valid(isapnp_dev, 0) ||
 		    !pnp_irq_valid(isapnp_dev, 0)) {
 			pnp_device_detach(isapnp_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -ENOMEM;
 		}
@@ -549,12 +586,15 @@ static int ni_getboardtype(struct comedi_device *dev)
 	}
 	if (device_id == 255)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(" can't find board\n");
 	 else if (device_id == 0)
 		printk(" EEPROM read error (?) or device not found\n");
 	 else
 		printk(" unknown device ID %d -- contact author\n", device_id);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev->class_dev, "can't find board\n");
 	 else if (device_id == 0)
 		dev_err(dev->class_dev,
@@ -562,6 +602,9 @@ static int ni_getboardtype(struct comedi_device *dev)
 	 else
 		dev_err(dev->class_dev,
 			"unknown device ID %d -- contact author\n", device_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return -1;
@@ -584,11 +627,14 @@ static int ni_atmio_attach(struct comedi_device *dev,
 	devpriv = dev->private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv->stc_writew = &ni_atmio_win_out;
 	devpriv->stc_readw = &ni_atmio_win_in;
 	devpriv->stc_writel = &win_out2;
 	devpriv->stc_readl = &win_in2;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iobase = it->options[0];
@@ -601,6 +647,7 @@ static int ni_atmio_attach(struct comedi_device *dev,
 
 		iobase = pnp_port_start(isapnp_dev, 0);
 		irq = pnp_irq(isapnp_dev, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		devpriv->isapnp_dev = isapnp_dev;
 	}
@@ -623,6 +670,8 @@ static int ni_atmio_attach(struct comedi_device *dev,
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 		comedi_set_hw_dev(dev, &isapnp_dev->dev);
 	}
 
@@ -630,6 +679,9 @@ static int ni_atmio_attach(struct comedi_device *dev,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* get board type */
 
@@ -639,9 +691,13 @@ static int ni_atmio_attach(struct comedi_device *dev,
 
 	dev->board_ptr = ni_boards + board;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	boardtype = comedi_board(dev);
 
 	printk(" %s", boardtype->name);
+=======
+	boardtype = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	boardtype = dev->board_ptr;
 >>>>>>> v3.18
@@ -650,6 +706,7 @@ static int ni_atmio_attach(struct comedi_device *dev,
 	/* irq stuff */
 
 	if (irq != 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (irq > 15 || ni_irqpin[irq] == -1) {
 			printk(" invalid irq %u\n", irq);
@@ -664,12 +721,17 @@ static int ni_atmio_attach(struct comedi_device *dev,
 			return -EINVAL;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (irq > 15 || ni_irqpin[irq] == -1)
 			return -EINVAL;
 		ret = request_irq(irq, ni_E_interrupt, 0,
 				  dev->board_name, dev);
 		if (ret < 0)
 			return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev->irq = irq;
 	}
@@ -677,7 +739,11 @@ static int ni_atmio_attach(struct comedi_device *dev,
 	/* generic E series stuff in ni_mio_common.c */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ni_E_init(dev);
+=======
+	ret = ni_E_init(dev, ni_irqpin[dev->irq], 0);
+>>>>>>> v3.18
 =======
 	ret = ni_E_init(dev, ni_irqpin[dev->irq], 0);
 >>>>>>> v3.18
@@ -691,6 +757,7 @@ static int ni_atmio_attach(struct comedi_device *dev,
 static void ni_atmio_detach(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ni_private *devpriv = dev->private;
 
 	mio_common_detach(dev);
@@ -698,6 +765,8 @@ static void ni_atmio_detach(struct comedi_device *dev)
 	if (devpriv->isapnp_dev)
 		pnp_device_detach(devpriv->isapnp_dev);
 =======
+=======
+>>>>>>> v3.18
 	struct pnp_dev *isapnp_dev;
 
 	mio_common_detach(dev);
@@ -706,6 +775,9 @@ static void ni_atmio_detach(struct comedi_device *dev)
 	isapnp_dev = dev->hw_dev ? to_pnp_dev(dev->hw_dev) : NULL;
 	if (isapnp_dev)
 		pnp_device_detach(isapnp_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

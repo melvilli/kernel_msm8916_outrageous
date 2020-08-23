@@ -12,7 +12,11 @@ read-write.
 add_random (RW)
 ----------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 This file allows to trun off the disk entropy contribution. Default
+=======
+This file allows to turn off the disk entropy contribution. Default
+>>>>>>> v3.18
 =======
 This file allows to turn off the disk entropy contribution. Default
 >>>>>>> v3.18
@@ -77,7 +81,11 @@ Maximum segment size of the device.
 minimum_io_size (RO)
 --------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 This is the smallest preferred io size reported by the device.
+=======
+This is the smallest preferred IO size reported by the device.
+>>>>>>> v3.18
 =======
 This is the smallest preferred IO size reported by the device.
 >>>>>>> v3.18
@@ -102,7 +110,11 @@ queue maintains a separate request pool per each cgroup when
 CONFIG_BLK_CGROUP is enabled, and this parameter applies to each such
 per-block-cgroup request pool.  IOW, if there are N block cgroups,
 <<<<<<< HEAD
+<<<<<<< HEAD
 each request queue may have upto N request pools, each independently
+=======
+each request queue may have up to N request pools, each independently
+>>>>>>> v3.18
 =======
 each request queue may have up to N request pools, each independently
 >>>>>>> v3.18
@@ -111,7 +123,11 @@ regulated by nr_requests.
 optimal_io_size (RO)
 --------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 This is the optimal io size reported by the device.
+=======
+This is the optimal IO size reported by the device.
+>>>>>>> v3.18
 =======
 This is the optimal IO size reported by the device.
 >>>>>>> v3.18

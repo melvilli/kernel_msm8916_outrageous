@@ -88,7 +88,11 @@ static void __iomem *ndregaddr(struct platform_device *dev, unsigned int reg)
 {
 	struct txx9ndfmc_drvdata *drvdata = platform_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct txx9ndfmc_platform_data *plat = dev->dev.platform_data;
+=======
+	struct txx9ndfmc_platform_data *plat = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct txx9ndfmc_platform_data *plat = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -143,7 +147,11 @@ static void txx9ndfmc_cmd_ctrl(struct mtd_info *mtd, int cmd,
 	struct txx9ndfmc_priv *txx9_priv = chip->priv;
 	struct platform_device *dev = txx9_priv->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct txx9ndfmc_platform_data *plat = dev->dev.platform_data;
+=======
+	struct txx9ndfmc_platform_data *plat = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct txx9ndfmc_platform_data *plat = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -234,7 +242,11 @@ static void txx9ndfmc_enable_hwecc(struct mtd_info *mtd, int mode)
 static void txx9ndfmc_initialize(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct txx9ndfmc_platform_data *plat = dev->dev.platform_data;
+=======
+	struct txx9ndfmc_platform_data *plat = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct txx9ndfmc_platform_data *plat = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -287,7 +299,11 @@ static int txx9ndfmc_nand_scan(struct mtd_info *mtd)
 static int __init txx9ndfmc_probe(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct txx9ndfmc_platform_data *plat = dev->dev.platform_data;
+=======
+	struct txx9ndfmc_platform_data *plat = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct txx9ndfmc_platform_data *plat = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -298,6 +314,7 @@ static int __init txx9ndfmc_probe(struct platform_device *dev)
 	struct resource *res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(dev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -ENODEV;
@@ -305,10 +322,15 @@ static int __init txx9ndfmc_probe(struct platform_device *dev)
 	if (!drvdata)
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	drvdata = devm_kzalloc(&dev->dev, sizeof(*drvdata), GFP_KERNEL);
 	if (!drvdata)
 		return -ENOMEM;
 	res = platform_get_resource(dev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	drvdata->base = devm_ioremap_resource(&dev->dev, res);
 	if (IS_ERR(drvdata->base))
@@ -345,11 +367,16 @@ static int __init txx9ndfmc_probe(struct platform_device *dev)
 		txx9_priv = kzalloc(sizeof(struct txx9ndfmc_priv),
 				    GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!txx9_priv) {
 			dev_err(&dev->dev, "Unable to allocate "
 				"TXx9 NDFMC MTD device structure.\n");
 			continue;
 		}
+=======
+		if (!txx9_priv)
+			continue;
+>>>>>>> v3.18
 =======
 		if (!txx9_priv)
 			continue;
@@ -416,7 +443,10 @@ static int __exit txx9ndfmc_remove(struct platform_device *dev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!drvdata)

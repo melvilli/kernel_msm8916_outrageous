@@ -61,7 +61,10 @@ Mellon the rights to redistribute these changes without encumbrance.
 #if defined(__linux__)
 typedef unsigned long long u_quad_t;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

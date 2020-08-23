@@ -56,7 +56,11 @@ Version 1.9.4.4
 * Associated with the above, console colors are now obtained from a LUT
   called 'palette' instead of from the VGA registers.  This code was
 <<<<<<< HEAD
+<<<<<<< HEAD
   modeled after that in atyfb and matroxfb.
+=======
+  modelled after that in atyfb and matroxfb.
+>>>>>>> v3.18
 =======
   modelled after that in atyfb and matroxfb.
 >>>>>>> v3.18

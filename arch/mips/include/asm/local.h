@@ -34,7 +34,11 @@ static __inline__ long local_add_return(long i, local_t * l)
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -52,7 +56,11 @@ static __inline__ long local_add_return(long i, local_t * l)
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -87,7 +95,11 @@ static __inline__ long local_sub_return(long i, local_t * l)
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -105,7 +117,11 @@ static __inline__ long local_sub_return(long i, local_t * l)
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18

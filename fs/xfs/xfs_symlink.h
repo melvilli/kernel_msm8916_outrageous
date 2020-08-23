@@ -18,6 +18,7 @@
 #define __XFS_SYMLINK_H 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct xfs_mount;
 struct xfs_trans;
 struct xfs_inode;
@@ -60,14 +61,22 @@ extern const struct xfs_buf_ops xfs_symlink_buf_ops;
 =======
 /* Kernel only symlink defintions */
 >>>>>>> v3.18
+=======
+/* Kernel only symlink defintions */
+>>>>>>> v3.18
 
 int xfs_symlink(struct xfs_inode *dp, struct xfs_name *link_name,
 		const char *target_path, umode_t mode, struct xfs_inode **ipp);
 int xfs_readlink(struct xfs_inode *ip, char *link);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int xfs_inactive_symlink_rmt(struct xfs_inode *ip, struct xfs_trans **tpp);
 
 #endif /* __KERNEL__ */
+=======
+int xfs_inactive_symlink(struct xfs_inode *ip);
+
+>>>>>>> v3.18
 =======
 int xfs_inactive_symlink(struct xfs_inode *ip);
 

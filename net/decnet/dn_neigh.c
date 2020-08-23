@@ -103,6 +103,7 @@ struct neigh_table dn_neigh_table = {
 	.parms ={
 		.tbl =			&dn_neigh_table,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.base_reachable_time =	30 * HZ,
 		.retrans_time =	1 * HZ,
 		.gc_staletime =	60 * HZ,
@@ -117,6 +118,8 @@ struct neigh_table dn_neigh_table = {
 		.proxy_qlen =		0,
 		.locktime =		1 * HZ,
 =======
+=======
+>>>>>>> v3.18
 		.reachable_time =	30 * HZ,
 		.data = {
 			[NEIGH_VAR_MCAST_PROBES] = 0,
@@ -132,6 +135,9 @@ struct neigh_table dn_neigh_table = {
 			[NEIGH_VAR_PROXY_DELAY] = 0,
 			[NEIGH_VAR_LOCKTIME] = 1 * HZ,
 		},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.gc_interval =			30 * HZ,

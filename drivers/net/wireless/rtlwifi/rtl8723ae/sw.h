@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -34,15 +37,21 @@
 #define __RTL8723E_SW_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rtl8723ae_init_sw_vars(struct ieee80211_hw *hw);
 void rtl8723ae_deinit_sw_vars(struct ieee80211_hw *hw);
 void rtl8723ae_init_var_map(struct ieee80211_hw *hw);
 =======
+=======
+>>>>>>> v3.18
 int rtl8723e_init_sw_vars(struct ieee80211_hw *hw);
 void rtl8723e_deinit_sw_vars(struct ieee80211_hw *hw);
 void rtl8723e_init_var_map(struct ieee80211_hw *hw);
 bool rtl8723e_get_btc_status(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

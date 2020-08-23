@@ -430,6 +430,7 @@ static void ib_port_release(struct kobject *kobj)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; (a = p->gid_group.attrs[i]); ++i)
 		kfree(a);
 
@@ -440,6 +441,8 @@ static void ib_port_release(struct kobject *kobj)
 
 	kfree(p->pkey_group.attrs);
 =======
+=======
+>>>>>>> v3.18
 	if (p->gid_group.attrs) {
 		for (i = 0; (a = p->gid_group.attrs[i]); ++i)
 			kfree(a);
@@ -453,6 +456,9 @@ static void ib_port_release(struct kobject *kobj)
 
 		kfree(p->pkey_group.attrs);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(p);
@@ -551,17 +557,23 @@ static int add_port(struct ib_device *device, int port_num,
 
 	ret = kobject_init_and_add(&p->kobj, &port_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   kobject_get(device->ports_parent),
 				   "%d", port_num);
 	if (ret)
 		goto err_put;
 =======
+=======
+>>>>>>> v3.18
 				   device->ports_parent,
 				   "%d", port_num);
 	if (ret) {
 		kfree(p);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = sysfs_create_group(&p->kobj, &pma_group);
@@ -571,13 +583,19 @@ static int add_port(struct ib_device *device, int port_num,
 	p->gid_group.name  = "gids";
 	p->gid_group.attrs = alloc_group_attrs(show_port_gid, attr.gid_tbl_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!p->gid_group.attrs)
 		goto err_remove_pma;
 =======
+=======
+>>>>>>> v3.18
 	if (!p->gid_group.attrs) {
 		ret = -ENOMEM;
 		goto err_remove_pma;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = sysfs_create_group(&p->kobj, &p->gid_group);
@@ -588,13 +606,19 @@ static int add_port(struct ib_device *device, int port_num,
 	p->pkey_group.attrs = alloc_group_attrs(show_port_pkey,
 						attr.pkey_tbl_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!p->pkey_group.attrs)
 		goto err_remove_gid;
 =======
+=======
+>>>>>>> v3.18
 	if (!p->pkey_group.attrs) {
 		ret = -ENOMEM;
 		goto err_remove_gid;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = sysfs_create_group(&p->kobj, &p->pkey_group);
@@ -621,6 +645,10 @@ err_free_pkey:
 
 	kfree(p->pkey_group.attrs);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	p->pkey_group.attrs = NULL;
+>>>>>>> v3.18
 =======
 	p->pkey_group.attrs = NULL;
 >>>>>>> v3.18
@@ -634,6 +662,10 @@ err_free_gid:
 
 	kfree(p->gid_group.attrs);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	p->gid_group.attrs = NULL;
+>>>>>>> v3.18
 =======
 	p->gid_group.attrs = NULL;
 >>>>>>> v3.18
@@ -643,8 +675,12 @@ err_remove_pma:
 
 err_put:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kobject_put(device->ports_parent);
 	kfree(p);
+=======
+	kobject_put(&p->kobj);
+>>>>>>> v3.18
 =======
 	kobject_put(&p->kobj);
 >>>>>>> v3.18
@@ -660,6 +696,11 @@ static ssize_t show_node_type(struct device *device,
 	case RDMA_NODE_IB_CA:	  return sprintf(buf, "%d: CA\n", dev->node_type);
 	case RDMA_NODE_RNIC:	  return sprintf(buf, "%d: RNIC\n", dev->node_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case RDMA_NODE_USNIC:	  return sprintf(buf, "%d: usNIC\n", dev->node_type);
+	case RDMA_NODE_USNIC_UDP: return sprintf(buf, "%d: usNIC UDP\n", dev->node_type);
+>>>>>>> v3.18
 =======
 	case RDMA_NODE_USNIC:	  return sprintf(buf, "%d: usNIC\n", dev->node_type);
 	case RDMA_NODE_USNIC_UDP: return sprintf(buf, "%d: usNIC UDP\n", dev->node_type);
@@ -860,7 +901,10 @@ static struct attribute_group iw_stats_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void free_port_list_attributes(struct ib_device *device)
 {
 	struct kobject *p, *t;
@@ -877,6 +921,9 @@ static void free_port_list_attributes(struct ib_device *device)
 	kobject_put(device->ports_parent);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int ib_device_register_sysfs(struct ib_device *device,
 			     int (*port_callback)(struct ib_device *,
@@ -889,7 +936,11 @@ int ib_device_register_sysfs(struct ib_device *device,
 	class_dev->class      = &ib_class;
 	class_dev->parent     = device->dma_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_name(class_dev, device->name);
+=======
+	dev_set_name(class_dev, "%s", device->name);
+>>>>>>> v3.18
 =======
 	dev_set_name(class_dev, "%s", device->name);
 >>>>>>> v3.18
@@ -909,7 +960,11 @@ int ib_device_register_sysfs(struct ib_device *device,
 
 	device->ports_parent = kobject_create_and_add("ports",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					kobject_get(&class_dev->kobj));
+=======
+						      &class_dev->kobj);
+>>>>>>> v3.18
 =======
 						      &class_dev->kobj);
 >>>>>>> v3.18
@@ -940,6 +995,7 @@ int ib_device_register_sysfs(struct ib_device *device,
 
 err_put:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		struct kobject *p, *t;
 		struct ib_port *port;
@@ -958,6 +1014,9 @@ err_put:
 =======
 	free_port_list_attributes(device);
 >>>>>>> v3.18
+=======
+	free_port_list_attributes(device);
+>>>>>>> v3.18
 
 err_unregister:
 	device_unregister(class_dev);
@@ -968,6 +1027,7 @@ err:
 
 void ib_device_unregister_sysfs(struct ib_device *device)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct kobject *p, *t;
 	struct ib_port *port;
@@ -986,6 +1046,8 @@ void ib_device_unregister_sysfs(struct ib_device *device)
 
 	kobject_put(device->ports_parent);
 =======
+=======
+>>>>>>> v3.18
 	/* Hold kobject until ib_dealloc_device() */
 	struct kobject *kobj_dev = kobject_get(&device->dev.kobj);
 	int i;
@@ -998,6 +1060,9 @@ void ib_device_unregister_sysfs(struct ib_device *device)
 	for (i = 0; i < ARRAY_SIZE(ib_class_attributes); ++i)
 		device_remove_file(&device->dev, ib_class_attributes[i]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	device_unregister(&device->dev);
 }

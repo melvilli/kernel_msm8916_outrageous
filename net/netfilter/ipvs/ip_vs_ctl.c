@@ -461,7 +461,11 @@ __ip_vs_bind_svc(struct ip_vs_dest *dest, struct ip_vs_service *svc)
 {
 	atomic_inc(&svc->refcnt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dest->svc = svc;
+=======
+	rcu_assign_pointer(dest->svc, svc);
+>>>>>>> v3.18
 =======
 	rcu_assign_pointer(dest->svc, svc);
 >>>>>>> v3.18
@@ -475,6 +479,7 @@ static void ip_vs_service_free(struct ip_vs_service *svc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 __ip_vs_unbind_svc(struct ip_vs_dest *dest)
 {
@@ -482,6 +487,8 @@ __ip_vs_unbind_svc(struct ip_vs_dest *dest)
 
 	dest->svc = NULL;
 =======
+=======
+>>>>>>> v3.18
 static void ip_vs_service_rcu_free(struct rcu_head *head)
 {
 	struct ip_vs_service *svc;
@@ -492,6 +499,9 @@ static void ip_vs_service_rcu_free(struct rcu_head *head)
 
 static void __ip_vs_svc_put(struct ip_vs_service *svc, bool do_delay)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (atomic_dec_and_test(&svc->refcnt)) {
 		IP_VS_DBG_BUF(3, "Removing service %u/%s:%u\n",
@@ -499,12 +509,18 @@ static void __ip_vs_svc_put(struct ip_vs_service *svc, bool do_delay)
 			      IP_VS_DBG_ADDR(svc->af, &svc->addr),
 			      ntohs(svc->port));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ip_vs_service_free(svc);
 =======
+=======
+>>>>>>> v3.18
 		if (do_delay)
 			call_rcu(&svc->rcu_head, ip_vs_service_rcu_free);
 		else
 			ip_vs_service_free(svc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -592,8 +608,13 @@ bool ip_vs_has_real_service(struct net *net, int af, __u16 protocol,
  */
 static struct ip_vs_dest *
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip_vs_lookup_dest(struct ip_vs_service *svc, const union nf_inet_addr *daddr,
 		  __be16 dport)
+=======
+ip_vs_lookup_dest(struct ip_vs_service *svc, int dest_af,
+		  const union nf_inet_addr *daddr, __be16 dport)
+>>>>>>> v3.18
 =======
 ip_vs_lookup_dest(struct ip_vs_service *svc, int dest_af,
 		  const union nf_inet_addr *daddr, __be16 dport)
@@ -606,9 +627,15 @@ ip_vs_lookup_dest(struct ip_vs_service *svc, int dest_af,
 	 */
 	list_for_each_entry_rcu(dest, &svc->destinations, n_list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((dest->af == svc->af)
 		    && ip_vs_addr_equal(svc->af, &dest->addr, daddr)
 		    && (dest->port == dport)) {
+=======
+		if ((dest->af == dest_af) &&
+		    ip_vs_addr_equal(dest_af, &dest->addr, daddr) &&
+		    (dest->port == dport)) {
+>>>>>>> v3.18
 =======
 		if ((dest->af == dest_af) &&
 		    ip_vs_addr_equal(dest_af, &dest->addr, daddr) &&
@@ -631,7 +658,11 @@ ip_vs_lookup_dest(struct ip_vs_service *svc, int dest_af,
  * Called under RCU lock, no refcnt is returned.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ip_vs_dest *ip_vs_find_dest(struct net  *net, int af,
+=======
+struct ip_vs_dest *ip_vs_find_dest(struct net  *net, int svc_af, int dest_af,
+>>>>>>> v3.18
 =======
 struct ip_vs_dest *ip_vs_find_dest(struct net  *net, int svc_af, int dest_af,
 >>>>>>> v3.18
@@ -646,7 +677,11 @@ struct ip_vs_dest *ip_vs_find_dest(struct net  *net, int svc_af, int dest_af,
 	__be16 port = dport;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	svc = ip_vs_service_find(net, af, fwmark, protocol, vaddr, vport);
+=======
+	svc = ip_vs_service_find(net, svc_af, fwmark, protocol, vaddr, vport);
+>>>>>>> v3.18
 =======
 	svc = ip_vs_service_find(net, svc_af, fwmark, protocol, vaddr, vport);
 >>>>>>> v3.18
@@ -655,9 +690,15 @@ struct ip_vs_dest *ip_vs_find_dest(struct net  *net, int svc_af, int dest_af,
 	if (fwmark && (flags & IP_VS_CONN_F_FWD_MASK) != IP_VS_CONN_F_MASQ)
 		port = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dest = ip_vs_lookup_dest(svc, daddr, port);
 	if (!dest)
 		dest = ip_vs_lookup_dest(svc, daddr, port ^ dport);
+=======
+	dest = ip_vs_lookup_dest(svc, dest_af, daddr, port);
+	if (!dest)
+		dest = ip_vs_lookup_dest(svc, dest_af, daddr, port ^ dport);
+>>>>>>> v3.18
 =======
 	dest = ip_vs_lookup_dest(svc, dest_af, daddr, port);
 	if (!dest)
@@ -700,8 +741,13 @@ static void __ip_vs_dst_cache_reset(struct ip_vs_dest *dest)
  */
 static struct ip_vs_dest *
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip_vs_trash_get_dest(struct ip_vs_service *svc, const union nf_inet_addr *daddr,
 		     __be16 dport)
+=======
+ip_vs_trash_get_dest(struct ip_vs_service *svc, int dest_af,
+		     const union nf_inet_addr *daddr, __be16 dport)
+>>>>>>> v3.18
 =======
 ip_vs_trash_get_dest(struct ip_vs_service *svc, int dest_af,
 		     const union nf_inet_addr *daddr, __be16 dport)
@@ -719,6 +765,7 @@ ip_vs_trash_get_dest(struct ip_vs_service *svc, int dest_af,
 			      "dest->refcnt=%d\n",
 			      dest->vfwmark,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      IP_VS_DBG_ADDR(svc->af, &dest->addr),
 			      ntohs(dest->port),
 			      atomic_read(&dest->refcnt));
@@ -730,11 +777,16 @@ ip_vs_trash_get_dest(struct ip_vs_service *svc, int dest_af,
 		if (dest->af == svc->af &&
 		    ip_vs_addr_equal(svc->af, &dest->addr, daddr) &&
 =======
+=======
+>>>>>>> v3.18
 			      IP_VS_DBG_ADDR(dest->af, &dest->addr),
 			      ntohs(dest->port),
 			      atomic_read(&dest->refcnt));
 		if (dest->af == dest_af &&
 		    ip_vs_addr_equal(dest_af, &dest->addr, daddr) &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    dest->port == dport &&
 		    dest->vfwmark == svc->fwmark &&
@@ -760,17 +812,23 @@ out:
 static void ip_vs_dest_free(struct ip_vs_dest *dest)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ip_vs_dst_cache_reset(dest);
 	__ip_vs_unbind_svc(dest);
 	free_percpu(dest->stats.cpustats);
 	kfree(dest);
 =======
+=======
+>>>>>>> v3.18
 	struct ip_vs_service *svc = rcu_dereference_protected(dest->svc, 1);
 
 	__ip_vs_dst_cache_reset(dest);
 	__ip_vs_svc_put(svc, false);
 	free_percpu(dest->stats.cpustats);
 	ip_vs_dest_put_and_free(dest);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -843,10 +901,13 @@ __ip_vs_update_dest(struct ip_vs_service *svc, struct ip_vs_dest *dest,
 {
 	struct netns_ipvs *ipvs = net_ipvs(svc->net);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ip_vs_scheduler *sched;
 	int conn_flags;
 
 =======
+=======
+>>>>>>> v3.18
 	struct ip_vs_service *old_svc;
 	struct ip_vs_scheduler *sched;
 	int conn_flags;
@@ -857,6 +918,9 @@ __ip_vs_update_dest(struct ip_vs_service *svc, struct ip_vs_dest *dest,
 	if (add && udest->af != svc->af)
 		ipvs->mixed_address_family_dests++;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* set the weight and the flags */
 	atomic_set(&dest->weight, udest->weight);
@@ -877,6 +941,7 @@ __ip_vs_update_dest(struct ip_vs_service *svc, struct ip_vs_dest *dest,
 
 	/* bind the service */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dest->svc) {
 		__ip_vs_bind_svc(dest, svc);
 	} else {
@@ -885,6 +950,8 @@ __ip_vs_update_dest(struct ip_vs_service *svc, struct ip_vs_dest *dest,
 			ip_vs_zero_stats(&dest->stats);
 			__ip_vs_bind_svc(dest, svc);
 =======
+=======
+>>>>>>> v3.18
 	old_svc = rcu_dereference_protected(dest->svc, 1);
 	if (!old_svc) {
 		__ip_vs_bind_svc(dest, svc);
@@ -893,6 +960,9 @@ __ip_vs_update_dest(struct ip_vs_service *svc, struct ip_vs_dest *dest,
 			ip_vs_zero_stats(&dest->stats);
 			__ip_vs_bind_svc(dest, svc);
 			__ip_vs_svc_put(old_svc, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -906,6 +976,11 @@ __ip_vs_update_dest(struct ip_vs_service *svc, struct ip_vs_dest *dest,
 	dest->l_threshold = udest->l_threshold;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dest->af = udest->af;
+
+>>>>>>> v3.18
 =======
 	dest->af = udest->af;
 
@@ -937,7 +1012,11 @@ ip_vs_new_dest(struct ip_vs_service *svc, struct ip_vs_dest_user_kern *udest,
 {
 	struct ip_vs_dest *dest;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int atype;
+=======
+	unsigned int atype, i;
+>>>>>>> v3.18
 =======
 	unsigned int atype, i;
 >>>>>>> v3.18
@@ -946,7 +1025,11 @@ ip_vs_new_dest(struct ip_vs_service *svc, struct ip_vs_dest_user_kern *udest,
 
 #ifdef CONFIG_IP_VS_IPV6
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (svc->af == AF_INET6) {
+=======
+	if (udest->af == AF_INET6) {
+>>>>>>> v3.18
 =======
 	if (udest->af == AF_INET6) {
 >>>>>>> v3.18
@@ -972,8 +1055,11 @@ ip_vs_new_dest(struct ip_vs_service *svc, struct ip_vs_dest_user_kern *udest,
 		goto err_alloc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dest->af = svc->af;
 =======
+=======
+>>>>>>> v3.18
 	for_each_possible_cpu(i) {
 		struct ip_vs_cpu_stats *ip_vs_dest_stats;
 		ip_vs_dest_stats = per_cpu_ptr(dest->stats.cpustats, i);
@@ -981,13 +1067,20 @@ ip_vs_new_dest(struct ip_vs_service *svc, struct ip_vs_dest_user_kern *udest,
 	}
 
 	dest->af = udest->af;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dest->protocol = svc->protocol;
 	dest->vaddr = svc->addr;
 	dest->vport = svc->port;
 	dest->vfwmark = svc->fwmark;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ip_vs_addr_copy(svc->af, &dest->addr, &udest->addr);
+=======
+	ip_vs_addr_copy(udest->af, &dest->addr, &udest->addr);
+>>>>>>> v3.18
 =======
 	ip_vs_addr_copy(udest->af, &dest->addr, &udest->addr);
 >>>>>>> v3.18
@@ -1039,17 +1132,23 @@ ip_vs_add_dest(struct ip_vs_service *svc, struct ip_vs_dest_user_kern *udest)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ip_vs_addr_copy(svc->af, &daddr, &udest->addr);
 
 	/* We use function that requires RCU lock */
 	rcu_read_lock();
 	dest = ip_vs_lookup_dest(svc, &daddr, dport);
 =======
+=======
+>>>>>>> v3.18
 	ip_vs_addr_copy(udest->af, &daddr, &udest->addr);
 
 	/* We use function that requires RCU lock */
 	rcu_read_lock();
 	dest = ip_vs_lookup_dest(svc, udest->af, &daddr, dport);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rcu_read_unlock();
 
@@ -1063,7 +1162,11 @@ ip_vs_add_dest(struct ip_vs_service *svc, struct ip_vs_dest_user_kern *udest)
 	 * is from the same service
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dest = ip_vs_trash_get_dest(svc, &daddr, dport);
+=======
+	dest = ip_vs_trash_get_dest(svc, udest->af, &daddr, dport);
+>>>>>>> v3.18
 =======
 	dest = ip_vs_trash_get_dest(svc, udest->af, &daddr, dport);
 >>>>>>> v3.18
@@ -1072,7 +1175,11 @@ ip_vs_add_dest(struct ip_vs_service *svc, struct ip_vs_dest_user_kern *udest)
 		IP_VS_DBG_BUF(3, "Get destination %s:%u from trash, "
 			      "dest->refcnt=%d, service %u/%s:%u\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      IP_VS_DBG_ADDR(svc->af, &daddr), ntohs(dport),
+=======
+			      IP_VS_DBG_ADDR(udest->af, &daddr), ntohs(dport),
+>>>>>>> v3.18
 =======
 			      IP_VS_DBG_ADDR(udest->af, &daddr), ntohs(dport),
 >>>>>>> v3.18
@@ -1119,17 +1226,23 @@ ip_vs_edit_dest(struct ip_vs_service *svc, struct ip_vs_dest_user_kern *udest)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ip_vs_addr_copy(svc->af, &daddr, &udest->addr);
 
 	/* We use function that requires RCU lock */
 	rcu_read_lock();
 	dest = ip_vs_lookup_dest(svc, &daddr, dport);
 =======
+=======
+>>>>>>> v3.18
 	ip_vs_addr_copy(udest->af, &daddr, &udest->addr);
 
 	/* We use function that requires RCU lock */
 	rcu_read_lock();
 	dest = ip_vs_lookup_dest(svc, udest->af, &daddr, dport);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rcu_read_unlock();
 
@@ -1145,6 +1258,7 @@ ip_vs_edit_dest(struct ip_vs_service *svc, struct ip_vs_dest_user_kern *udest)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ip_vs_dest_wait_readers(struct rcu_head *head)
 {
 	struct ip_vs_dest *dest = container_of(head, struct ip_vs_dest,
@@ -1155,6 +1269,8 @@ static void ip_vs_dest_wait_readers(struct rcu_head *head)
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -1173,11 +1289,14 @@ static void __ip_vs_del_dest(struct net *net, struct ip_vs_dest *dest,
 	ip_vs_rs_unhash(dest);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cleanup) {
 		set_bit(IP_VS_DEST_STATE_REMOVING, &dest->state);
 		call_rcu(&dest->rcu_head, ip_vs_dest_wait_readers);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_bh(&ipvs->dest_trash_lock);
@@ -1187,14 +1306,20 @@ static void __ip_vs_del_dest(struct net *net, struct ip_vs_dest *dest,
 	if (list_empty(&ipvs->dest_trash) && !cleanup)
 		mod_timer(&ipvs->dest_trash_timer,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  jiffies + IP_VS_DEST_TRASH_PERIOD);
 	/* dest lives in trash without reference */
 	list_add(&dest->t_list, &ipvs->dest_trash);
 =======
+=======
+>>>>>>> v3.18
 			  jiffies + (IP_VS_DEST_TRASH_PERIOD >> 1));
 	/* dest lives in trash without reference */
 	list_add(&dest->t_list, &ipvs->dest_trash);
 	dest->idle_start = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_bh(&ipvs->dest_trash_lock);
 	ip_vs_dest_put(dest);
@@ -1217,6 +1342,12 @@ static void __ip_vs_unlink_dest(struct ip_vs_service *svc,
 	svc->num_dests--;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (dest->af != svc->af)
+		net_ipvs(svc->net)->mixed_address_family_dests--;
+
+>>>>>>> v3.18
 =======
 	if (dest->af != svc->af)
 		net_ipvs(svc->net)->mixed_address_family_dests--;
@@ -1246,7 +1377,11 @@ ip_vs_del_dest(struct ip_vs_service *svc, struct ip_vs_dest_user_kern *udest)
 	/* We use function that requires RCU lock */
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dest = ip_vs_lookup_dest(svc, &udest->addr, dport);
+=======
+	dest = ip_vs_lookup_dest(svc, udest->af, &udest->addr, dport);
+>>>>>>> v3.18
 =======
 	dest = ip_vs_lookup_dest(svc, udest->af, &udest->addr, dport);
 >>>>>>> v3.18
@@ -1278,6 +1413,7 @@ static void ip_vs_dest_trash_expire(unsigned long data)
 	struct netns_ipvs *ipvs = net_ipvs(net);
 	struct ip_vs_dest *dest, *next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_lock(&ipvs->dest_trash_lock);
 	list_for_each_entry_safe(dest, next, &ipvs->dest_trash, t_list) {
@@ -1290,6 +1426,8 @@ static void ip_vs_dest_trash_expire(unsigned long data)
 			      dest->vfwmark,
 			      IP_VS_DBG_ADDR(dest->svc->af, &dest->addr),
 =======
+=======
+>>>>>>> v3.18
 	unsigned long now = jiffies;
 
 	spin_lock(&ipvs->dest_trash_lock);
@@ -1307,6 +1445,9 @@ static void ip_vs_dest_trash_expire(unsigned long data)
 		IP_VS_DBG_BUF(3, "Removing destination %u/%s:%u from trash\n",
 			      dest->vfwmark,
 			      IP_VS_DBG_ADDR(dest->af, &dest->addr),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      ntohs(dest->port));
 		list_del(&dest->t_list);
@@ -1315,7 +1456,11 @@ static void ip_vs_dest_trash_expire(unsigned long data)
 	if (!list_empty(&ipvs->dest_trash))
 		mod_timer(&ipvs->dest_trash_timer,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  jiffies + IP_VS_DEST_TRASH_PERIOD);
+=======
+			  jiffies + (IP_VS_DEST_TRASH_PERIOD >> 1));
+>>>>>>> v3.18
 =======
 			  jiffies + (IP_VS_DEST_TRASH_PERIOD >> 1));
 >>>>>>> v3.18
@@ -1330,7 +1475,11 @@ ip_vs_add_service(struct net *net, struct ip_vs_service_user_kern *u,
 		  struct ip_vs_service **svc_p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+	int ret = 0, i;
+>>>>>>> v3.18
 =======
 	int ret = 0, i;
 >>>>>>> v3.18
@@ -1384,7 +1533,10 @@ ip_vs_add_service(struct net *net, struct ip_vs_service_user_kern *u,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	for_each_possible_cpu(i) {
 		struct ip_vs_cpu_stats *ip_vs_stats;
 		ip_vs_stats = per_cpu_ptr(svc->stats.cpustats, i);
@@ -1392,6 +1544,9 @@ ip_vs_add_service(struct net *net, struct ip_vs_service_user_kern *u,
 	}
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* I'm the first user of the service */
 	atomic_set(&svc->refcnt, 0);
@@ -1528,6 +1683,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ip_vs_service_rcu_free(struct rcu_head *head)
 {
 	struct ip_vs_service *svc;
@@ -1536,6 +1692,8 @@ static void ip_vs_service_rcu_free(struct rcu_head *head)
 	ip_vs_service_free(svc);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -1587,6 +1745,7 @@ static void __ip_vs_del_service(struct ip_vs_service *svc, bool cleanup)
 	 *    Free the service if nobody refers to it
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_dec_and_test(&svc->refcnt)) {
 		IP_VS_DBG_BUF(3, "Removing service %u/%s:%u\n",
 			      svc->fwmark,
@@ -1594,6 +1753,9 @@ static void __ip_vs_del_service(struct ip_vs_service *svc, bool cleanup)
 			      ntohs(svc->port));
 		call_rcu(&svc->rcu_head, ip_vs_service_rcu_free);
 	}
+=======
+	__ip_vs_svc_put(svc, true);
+>>>>>>> v3.18
 =======
 	__ip_vs_svc_put(svc, true);
 >>>>>>> v3.18
@@ -1702,9 +1864,15 @@ ip_vs_forget_dev(struct ip_vs_dest *dest, struct net_device *dev)
  */
 static int ip_vs_dst_event(struct notifier_block *this, unsigned long event,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    void *ptr)
 {
 	struct net_device *dev = ptr;
+=======
+			   void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 			   void *ptr)
 {
@@ -1796,7 +1964,11 @@ static int three = 3;
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 proc_do_defense_mode(ctl_table *table, int write,
+=======
+proc_do_defense_mode(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 proc_do_defense_mode(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -1821,7 +1993,11 @@ proc_do_defense_mode(struct ctl_table *table, int write,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 proc_do_sync_threshold(ctl_table *table, int write,
+=======
+proc_do_sync_threshold(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 proc_do_sync_threshold(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -1845,7 +2021,11 @@ proc_do_sync_threshold(struct ctl_table *table, int write,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 proc_do_sync_mode(ctl_table *table, int write,
+=======
+proc_do_sync_mode(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 proc_do_sync_mode(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -1867,7 +2047,11 @@ proc_do_sync_mode(struct ctl_table *table, int write,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 proc_do_sync_ports(ctl_table *table, int write,
+=======
+proc_do_sync_ports(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 proc_do_sync_ports(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -1952,7 +2136,11 @@ static struct ctl_table vs_vars[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.procname	= "sync_qlen_max",
+=======
+		.procname	= "sync_persist_mode",
+>>>>>>> v3.18
 =======
 		.procname	= "sync_persist_mode",
 >>>>>>> v3.18
@@ -1962,13 +2150,19 @@ static struct ctl_table vs_vars[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.procname	= "sync_qlen_max",
 		.maxlen		= sizeof(unsigned long),
 		.mode		= 0644,
 		.proc_handler	= proc_doulongvec_minmax,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.procname	= "sync_sock_size",
 		.maxlen		= sizeof(int),
@@ -1989,7 +2183,10 @@ static struct ctl_table vs_vars[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.procname	= "sloppy_tcp",
 		.maxlen		= sizeof(int),
 		.mode		= 0644,
@@ -2002,6 +2199,9 @@ static struct ctl_table vs_vars[] = {
 		.proc_handler	= proc_dointvec,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.procname	= "expire_quiescent_template",
 		.maxlen		= sizeof(int),
@@ -2056,6 +2256,7 @@ static struct ctl_table vs_vars[] = {
 		.proc_handler	= proc_dointvec,
 	},
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if 0
 	{
@@ -2143,6 +2344,8 @@ static struct ctl_table vs_vars[] = {
 		.proc_handler	= proc_dointvec_jiffies,
 	},
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ }
@@ -2430,15 +2633,21 @@ static int ip_vs_stats_percpu_show(struct seq_file *seq, void *v)
 
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			start = u64_stats_fetch_begin_bh(&u->syncp);
 			inbytes = u->ustats.inbytes;
 			outbytes = u->ustats.outbytes;
 		} while (u64_stats_fetch_retry_bh(&u->syncp, start));
 =======
+=======
+>>>>>>> v3.18
 			start = u64_stats_fetch_begin_irq(&u->syncp);
 			inbytes = u->ustats.inbytes;
 			outbytes = u->ustats.outbytes;
 		} while (u64_stats_fetch_retry_irq(&u->syncp, start));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		seq_printf(seq, "%3X %8X %8X %8X %16LX %16LX\n",
@@ -2525,6 +2734,7 @@ static int ip_vs_set_timeout(struct net *net, struct ip_vs_timeout_user *u)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define SET_CMDID(cmd)		(cmd - IP_VS_BASE_CTL)
 #define SERVICE_ARG_LEN		(sizeof(struct ip_vs_service_user))
@@ -2549,6 +2759,8 @@ static const unsigned char set_arglen[SET_CMDID(IP_VS_SO_SET_MAX)+1] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #define CMDID(cmd)		(cmd - IP_VS_BASE_CTL)
 
 struct ip_vs_svcdest_user {
@@ -2584,6 +2796,9 @@ union ip_vs_set_arglen {
 
 #define MAX_SET_ARGLEN	sizeof(union ip_vs_set_arglen)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ip_vs_copy_usvc_compat(struct ip_vs_service_user_kern *usvc,
 				  struct ip_vs_service_user *usvc_compat)
@@ -2616,6 +2831,10 @@ static void ip_vs_copy_udest_compat(struct ip_vs_dest_user_kern *udest,
 	udest->u_threshold	= udest_compat->u_threshold;
 	udest->l_threshold	= udest_compat->l_threshold;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	udest->af		= AF_INET;
+>>>>>>> v3.18
 =======
 	udest->af		= AF_INET;
 >>>>>>> v3.18
@@ -2627,7 +2846,11 @@ do_ip_vs_set_ctl(struct sock *sk, int cmd, void __user *user, unsigned int len)
 	struct net *net = sock_net(sk);
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char arg[MAX_ARG_LEN];
+=======
+	unsigned char arg[MAX_SET_ARGLEN];
+>>>>>>> v3.18
 =======
 	unsigned char arg[MAX_SET_ARGLEN];
 >>>>>>> v3.18
@@ -2639,6 +2862,10 @@ do_ip_vs_set_ctl(struct sock *sk, int cmd, void __user *user, unsigned int len)
 	struct netns_ipvs *ipvs = net_ipvs(net);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUILD_BUG_ON(sizeof(arg) > 255);
+>>>>>>> v3.18
 =======
 	BUILD_BUG_ON(sizeof(arg) > 255);
 >>>>>>> v3.18
@@ -2648,11 +2875,17 @@ do_ip_vs_set_ctl(struct sock *sk, int cmd, void __user *user, unsigned int len)
 	if (cmd < IP_VS_BASE_CTL || cmd > IP_VS_SO_SET_MAX)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len < 0 || len >  MAX_ARG_LEN)
 		return -EINVAL;
 	if (len != set_arglen[SET_CMDID(cmd)]) {
 		pr_err("set_ctl: len %u != %u\n",
 		       len, set_arglen[SET_CMDID(cmd)]);
+=======
+	if (len != set_arglen[CMDID(cmd)]) {
+		IP_VS_DBG(1, "set_ctl: len %u != %u\n",
+			  len, set_arglen[CMDID(cmd)]);
+>>>>>>> v3.18
 =======
 	if (len != set_arglen[CMDID(cmd)]) {
 		IP_VS_DBG(1, "set_ctl: len %u != %u\n",
@@ -2673,10 +2906,14 @@ do_ip_vs_set_ctl(struct sock *sk, int cmd, void __user *user, unsigned int len)
 		struct ip_vs_daemon_user *dm = (struct ip_vs_daemon_user *)arg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mutex_lock_interruptible(&ipvs->sync_mutex)) {
 			ret = -ERESTARTSYS;
 			goto out_dec;
 		}
+=======
+		mutex_lock(&ipvs->sync_mutex);
+>>>>>>> v3.18
 =======
 		mutex_lock(&ipvs->sync_mutex);
 >>>>>>> v3.18
@@ -2690,11 +2927,15 @@ do_ip_vs_set_ctl(struct sock *sk, int cmd, void __user *user, unsigned int len)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mutex_lock_interruptible(&__ip_vs_mutex)) {
 		ret = -ERESTARTSYS;
 		goto out_dec;
 	}
 
+=======
+	mutex_lock(&__ip_vs_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&__ip_vs_mutex);
 >>>>>>> v3.18
@@ -2886,13 +3127,19 @@ __ip_vs_get_dest_entries(struct net *net, const struct ip_vs_get_dests *get,
 				break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/* Cannot expose heterogeneous members via sockopt
 			 * interface
 			 */
 			if (dest->af != svc->af)
 				continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			entry.addr = dest->addr.ip;
 			entry.port = dest->port;
@@ -2938,6 +3185,7 @@ __ip_vs_get_timeouts(struct net *net, struct ip_vs_timeout_user *u)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define GET_CMDID(cmd)		(cmd - IP_VS_BASE_CTL)
 #define GET_INFO_ARG_LEN	(sizeof(struct ip_vs_getinfo))
@@ -2962,6 +3210,8 @@ do_ip_vs_get_ctl(struct sock *sk, int cmd, void __user *user, int *len)
 {
 	unsigned char arg[128];
 =======
+=======
+>>>>>>> v3.18
 static const unsigned char get_arglen[CMDID(IP_VS_SO_GET_MAX) + 1] = {
 	[CMDID(IP_VS_SO_GET_VERSION)]  = 64,
 	[CMDID(IP_VS_SO_GET_INFO)]     = sizeof(struct ip_vs_getinfo),
@@ -2988,6 +3238,9 @@ static int
 do_ip_vs_get_ctl(struct sock *sk, int cmd, void __user *user, int *len)
 {
 	unsigned char arg[MAX_GET_ARGLEN];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret = 0;
 	unsigned int copylen;
@@ -2996,6 +3249,10 @@ do_ip_vs_get_ctl(struct sock *sk, int cmd, void __user *user, int *len)
 
 	BUG_ON(!net);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUILD_BUG_ON(sizeof(arg) > 255);
+>>>>>>> v3.18
 =======
 	BUILD_BUG_ON(sizeof(arg) > 255);
 >>>>>>> v3.18
@@ -3005,6 +3262,7 @@ do_ip_vs_get_ctl(struct sock *sk, int cmd, void __user *user, int *len)
 	if (cmd < IP_VS_BASE_CTL || cmd > IP_VS_SO_GET_MAX)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (*len < get_arglen[GET_CMDID(cmd)]) {
 		pr_err("get_ctl: len %u < %u\n",
@@ -3017,12 +3275,17 @@ do_ip_vs_get_ctl(struct sock *sk, int cmd, void __user *user, int *len)
 		return -EINVAL;
 
 =======
+=======
+>>>>>>> v3.18
 	copylen = get_arglen[CMDID(cmd)];
 	if (*len < (int) copylen) {
 		IP_VS_DBG(1, "get_ctl: len %d < %u\n", *len, copylen);
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (copy_from_user(arg, user, copylen) != 0)
 		return -EFAULT;
@@ -3034,9 +3297,13 @@ do_ip_vs_get_ctl(struct sock *sk, int cmd, void __user *user, int *len)
 
 		memset(&d, 0, sizeof(d));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mutex_lock_interruptible(&ipvs->sync_mutex))
 			return -ERESTARTSYS;
 
+=======
+		mutex_lock(&ipvs->sync_mutex);
+>>>>>>> v3.18
 =======
 		mutex_lock(&ipvs->sync_mutex);
 >>>>>>> v3.18
@@ -3059,9 +3326,13 @@ do_ip_vs_get_ctl(struct sock *sk, int cmd, void __user *user, int *len)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mutex_lock_interruptible(&__ip_vs_mutex))
 		return -ERESTARTSYS;
 
+=======
+	mutex_lock(&__ip_vs_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&__ip_vs_mutex);
 >>>>>>> v3.18
@@ -3246,6 +3517,10 @@ static const struct nla_policy ip_vs_dest_policy[IPVS_DEST_ATTR_MAX + 1] = {
 	[IPVS_DEST_ATTR_PERSIST_CONNS]	= { .type = NLA_U32 },
 	[IPVS_DEST_ATTR_STATS]		= { .type = NLA_NESTED },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[IPVS_DEST_ATTR_ADDR_FAMILY]	= { .type = NLA_U16 },
+>>>>>>> v3.18
 =======
 	[IPVS_DEST_ATTR_ADDR_FAMILY]	= { .type = NLA_U16 },
 >>>>>>> v3.18
@@ -3505,7 +3780,12 @@ static int ip_vs_genl_fill_dest(struct sk_buff *skb, struct ip_vs_dest *dest)
 			atomic_read(&dest->inactconns)) ||
 	    nla_put_u32(skb, IPVS_DEST_ATTR_PERSIST_CONNS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			atomic_read(&dest->persistconns)))
+=======
+			atomic_read(&dest->persistconns)) ||
+	    nla_put_u16(skb, IPVS_DEST_ATTR_ADDR_FAMILY, dest->af))
+>>>>>>> v3.18
 =======
 			atomic_read(&dest->persistconns)) ||
 	    nla_put_u16(skb, IPVS_DEST_ATTR_ADDR_FAMILY, dest->af))
@@ -3591,6 +3871,10 @@ static int ip_vs_genl_parse_dest(struct ip_vs_dest_user_kern *udest,
 	struct nlattr *attrs[IPVS_DEST_ATTR_MAX + 1];
 	struct nlattr *nla_addr, *nla_port;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nlattr *nla_addr_family;
+>>>>>>> v3.18
 =======
 	struct nlattr *nla_addr_family;
 >>>>>>> v3.18
@@ -3603,6 +3887,10 @@ static int ip_vs_genl_parse_dest(struct ip_vs_dest_user_kern *udest,
 	nla_addr	= attrs[IPVS_DEST_ATTR_ADDR];
 	nla_port	= attrs[IPVS_DEST_ATTR_PORT];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nla_addr_family	= attrs[IPVS_DEST_ATTR_ADDR_FAMILY];
+>>>>>>> v3.18
 =======
 	nla_addr_family	= attrs[IPVS_DEST_ATTR_ADDR_FAMILY];
 >>>>>>> v3.18
@@ -3616,12 +3904,18 @@ static int ip_vs_genl_parse_dest(struct ip_vs_dest_user_kern *udest,
 	udest->port = nla_get_be16(nla_port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (nla_addr_family)
 		udest->af = nla_get_u16(nla_addr_family);
 	else
 		udest->af = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* If a full entry was requested, check for the additional fields */
 	if (full_entry) {
@@ -3728,13 +4022,19 @@ static int ip_vs_genl_new_daemon(struct net *net, struct nlattr **attrs)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* The synchronization protocol is incompatible with mixed family
 	 * services
 	 */
 	if (net_ipvs(net)->mixed_address_family_dests > 0)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return start_sync_thread(net,
 				 nla_get_u32(attrs[IPVS_DAEMON_ATTR_STATE]),
@@ -3860,7 +4160,10 @@ static int ip_vs_genl_set_cmd(struct sk_buff *skb, struct genl_info *info)
 		if (ret)
 			goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* Old protocols did not allow the user to specify address
 		 * family, so we set it to zero instead.  We also didn't
@@ -3890,6 +4193,9 @@ static int ip_vs_genl_set_cmd(struct sk_buff *skb, struct genl_info *info)
 				goto out;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -4029,7 +4335,11 @@ out:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct genl_ops ip_vs_genl_ops[] __read_mostly = {
+=======
+static const struct genl_ops ip_vs_genl_ops[] = {
+>>>>>>> v3.18
 =======
 static const struct genl_ops ip_vs_genl_ops[] = {
 >>>>>>> v3.18
@@ -4132,7 +4442,11 @@ static int __init ip_vs_genl_register(void)
 {
 	return genl_register_family_with_ops(&ip_vs_genl_family,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ip_vs_genl_ops, ARRAY_SIZE(ip_vs_genl_ops));
+=======
+					     ip_vs_genl_ops);
+>>>>>>> v3.18
 =======
 					     ip_vs_genl_ops);
 >>>>>>> v3.18
@@ -4189,6 +4503,10 @@ static int __net_init ip_vs_control_net_init_sysctl(struct net *net)
 	ipvs->sysctl_sync_ports = 1;
 	tbl[idx++].data = &ipvs->sysctl_sync_ports;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tbl[idx++].data = &ipvs->sysctl_sync_persist_mode;
+>>>>>>> v3.18
 =======
 	tbl[idx++].data = &ipvs->sysctl_sync_persist_mode;
 >>>>>>> v3.18
@@ -4199,6 +4517,11 @@ static int __net_init ip_vs_control_net_init_sysctl(struct net *net)
 	tbl[idx++].data = &ipvs->sysctl_cache_bypass;
 	tbl[idx++].data = &ipvs->sysctl_expire_nodest_conn;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tbl[idx++].data = &ipvs->sysctl_sloppy_tcp;
+	tbl[idx++].data = &ipvs->sysctl_sloppy_sctp;
+>>>>>>> v3.18
 =======
 	tbl[idx++].data = &ipvs->sysctl_sloppy_tcp;
 	tbl[idx++].data = &ipvs->sysctl_sloppy_sctp;
@@ -4241,6 +4564,10 @@ static void __net_exit ip_vs_control_net_cleanup_sysctl(struct net *net)
 	cancel_work_sync(&ipvs->defense_work.work);
 	unregister_net_sysctl_table(ipvs->sysctl_hdr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ip_vs_stop_estimator(net, &ipvs->tot_stats);
+>>>>>>> v3.18
 =======
 	ip_vs_stop_estimator(net, &ipvs->tot_stats);
 >>>>>>> v3.18
@@ -4260,7 +4587,11 @@ static struct notifier_block ip_vs_dst_notifier = {
 int __net_init ip_vs_control_net_init(struct net *net)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int idx;
+=======
+	int i, idx;
+>>>>>>> v3.18
 =======
 	int i, idx;
 >>>>>>> v3.18
@@ -4283,13 +4614,19 @@ int __net_init ip_vs_control_net_init(struct net *net)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	for_each_possible_cpu(i) {
 		struct ip_vs_cpu_stats *ipvs_tot_stats;
 		ipvs_tot_stats = per_cpu_ptr(ipvs->tot_stats.cpustats, i);
 		u64_stats_init(&ipvs_tot_stats->syncp);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_init(&ipvs->tot_stats.lock);
 
@@ -4313,12 +4650,16 @@ void __net_exit ip_vs_control_net_cleanup(struct net *net)
 	struct netns_ipvs *ipvs = net_ipvs(net);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Some dest can be in grace period even before cleanup, we have to
 	 * defer ip_vs_trash_cleanup until ip_vs_dest_wait_readers is called.
 	 */
 	rcu_barrier();
 	ip_vs_trash_cleanup(net);
 	ip_vs_stop_estimator(net, &ipvs->tot_stats);
+=======
+	ip_vs_trash_cleanup(net);
+>>>>>>> v3.18
 =======
 	ip_vs_trash_cleanup(net);
 >>>>>>> v3.18

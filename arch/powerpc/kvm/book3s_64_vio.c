@@ -137,7 +137,11 @@ long kvm_vm_ioctl_create_spapr_tce(struct kvm *kvm,
 
 	return anon_inode_getfd("kvm-spapr-tce", &kvm_spapr_tce_fops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				stt, O_RDWR);
+=======
+				stt, O_RDWR | O_CLOEXEC);
+>>>>>>> v3.18
 =======
 				stt, O_RDWR | O_CLOEXEC);
 >>>>>>> v3.18

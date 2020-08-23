@@ -3,7 +3,11 @@
  *	    monitoring
  * Copyright (c) 1998, 1999  Frodo Looijaard <frodol@dds.nl>
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2007, 2011  Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (c) 2007, 2011  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (c) 2007, 2011  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -128,7 +132,10 @@ static inline int TEMP_FROM_REG(s8 val)
 struct lm78_data {
 	struct i2c_client *client;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct mutex lock;
@@ -476,7 +483,11 @@ static SENSOR_DEVICE_ATTR(fan3_alarm, S_IRUGO, show_alarm, NULL, 11);
 static SENSOR_DEVICE_ATTR(temp1_alarm, S_IRUGO, show_alarm, NULL, 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *lm78_attributes[] = {
+=======
+static struct attribute *lm78_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *lm78_attrs[] = {
 >>>>>>> v3.18
@@ -531,9 +542,13 @@ static struct attribute *lm78_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group lm78_group = {
 	.attrs = lm78_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(lm78);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(lm78);
 >>>>>>> v3.18
@@ -549,6 +564,7 @@ static struct platform_device *pdev;
 static unsigned short isa_address = 0x290;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * I2C devices get this name attribute automatically, but for ISA devices
  * we must create it by ourselves.
@@ -562,6 +578,8 @@ static ssize_t show_name(struct device *dev, struct device_attribute
 }
 static DEVICE_ATTR(name, S_IRUGO, show_name, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct lm78_data *lm78_data_if_isa(void)
@@ -680,6 +698,7 @@ static int lm78_i2c_probe(struct i2c_client *client,
 			  const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lm78_data *data;
 	int err;
 
@@ -689,6 +708,8 @@ static int lm78_i2c_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, data);
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct device *hwmon_dev;
 	struct lm78_data *data;
@@ -697,6 +718,9 @@ static int lm78_i2c_probe(struct i2c_client *client,
 	if (!data)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data->client = client;
 	data->type = id->driver_data;
@@ -704,6 +728,7 @@ static int lm78_i2c_probe(struct i2c_client *client,
 	/* Initialize the LM78 chip */
 	lm78_init_device(data);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register sysfs hooks */
 	err = sysfs_create_group(&client->dev.kobj, &lm78_group);
@@ -736,6 +761,11 @@ static int lm78_i2c_remove(struct i2c_client *client)
 							   data, lm78_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
 >>>>>>> v3.18
+=======
+	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
+							   data, lm78_groups);
+	return PTR_ERR_OR_ZERO(hwmon_dev);
+>>>>>>> v3.18
 }
 
 static const struct i2c_device_id lm78_i2c_id[] = {
@@ -752,7 +782,10 @@ static struct i2c_driver lm78_driver = {
 	},
 	.probe		= lm78_i2c_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= lm78_i2c_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= lm78_i2c_id,
@@ -878,7 +911,12 @@ static struct lm78_data *lm78_update_device(struct device *dev)
 static int lm78_isa_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+	struct device *dev = &pdev->dev;
+	struct device *hwmon_dev;
+>>>>>>> v3.18
 =======
 	struct device *dev = &pdev->dev;
 	struct device *hwmon_dev;
@@ -889,17 +927,23 @@ static int lm78_isa_probe(struct platform_device *pdev)
 	/* Reserve the ISA region */
 	res = platform_get_resource(pdev, IORESOURCE_IO, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!devm_request_region(&pdev->dev, res->start + LM78_ADDR_REG_OFFSET,
 				 2, "lm78"))
 		return -EBUSY;
 
 	data = devm_kzalloc(&pdev->dev, sizeof(struct lm78_data), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	if (!devm_request_region(dev, res->start + LM78_ADDR_REG_OFFSET,
 				 2, "lm78"))
 		return -EBUSY;
 
 	data = devm_kzalloc(dev, sizeof(struct lm78_data), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!data)
 		return -ENOMEM;
@@ -919,6 +963,7 @@ static int lm78_isa_probe(struct platform_device *pdev)
 	/* Initialize the LM78 chip */
 	lm78_init_device(data);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register sysfs hooks */
 	err = sysfs_create_group(&pdev->dev.kobj, &lm78_group);
@@ -956,6 +1001,11 @@ static int lm78_isa_remove(struct platform_device *pdev)
 							   data, lm78_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
 >>>>>>> v3.18
+=======
+	hwmon_dev = devm_hwmon_device_register_with_groups(dev, data->name,
+							   data, lm78_groups);
+	return PTR_ERR_OR_ZERO(hwmon_dev);
+>>>>>>> v3.18
 }
 
 static struct platform_driver lm78_isa_driver = {
@@ -965,7 +1015,10 @@ static struct platform_driver lm78_isa_driver = {
 	},
 	.probe		= lm78_isa_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= lm78_isa_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1169,7 +1222,11 @@ static void __exit sm_lm78_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Frodo Looijaard, Jean Delvare <khali@linux-fr.org>");
+=======
+MODULE_AUTHOR("Frodo Looijaard, Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Frodo Looijaard, Jean Delvare <jdelvare@suse.de>");
 >>>>>>> v3.18

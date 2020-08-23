@@ -63,7 +63,11 @@ MODULE_LICENSE("GPL");
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct btuart_info_t {
+=======
+struct btuart_info {
+>>>>>>> v3.18
 =======
 struct btuart_info {
 >>>>>>> v3.18
@@ -80,7 +84,11 @@ struct btuart_info {
 	unsigned long rx_count;
 	struct sk_buff *rx_skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } btuart_info_t;
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -136,7 +144,11 @@ static int btuart_write(unsigned int iobase, int fifo_size, __u8 *buf, int len)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void btuart_write_wakeup(btuart_info_t *info)
+=======
+static void btuart_write_wakeup(struct btuart_info *info)
+>>>>>>> v3.18
 =======
 static void btuart_write_wakeup(struct btuart_info *info)
 >>>>>>> v3.18
@@ -162,7 +174,12 @@ static void btuart_write_wakeup(struct btuart_info *info)
 			return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(skb = skb_dequeue(&(info->txq))))
+=======
+		skb = skb_dequeue(&(info->txq));
+		if (!skb)
+>>>>>>> v3.18
 =======
 		skb = skb_dequeue(&(info->txq));
 		if (!skb)
@@ -189,7 +206,11 @@ static void btuart_write_wakeup(struct btuart_info *info)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void btuart_receive(btuart_info_t *info)
+=======
+static void btuart_receive(struct btuart_info *info)
+>>>>>>> v3.18
 =======
 static void btuart_receive(struct btuart_info *info)
 >>>>>>> v3.18
@@ -212,7 +233,12 @@ static void btuart_receive(struct btuart_info *info)
 			info->rx_state = RECV_WAIT_PACKET_TYPE;
 			info->rx_count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(info->rx_skb = bt_skb_alloc(HCI_MAX_FRAME_SIZE, GFP_ATOMIC))) {
+=======
+			info->rx_skb = bt_skb_alloc(HCI_MAX_FRAME_SIZE, GFP_ATOMIC);
+			if (!info->rx_skb) {
+>>>>>>> v3.18
 =======
 			info->rx_skb = bt_skb_alloc(HCI_MAX_FRAME_SIZE, GFP_ATOMIC);
 			if (!info->rx_skb) {
@@ -225,7 +251,10 @@ static void btuart_receive(struct btuart_info *info)
 		if (info->rx_state == RECV_WAIT_PACKET_TYPE) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			info->rx_skb->dev = (void *) info->hdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			bt_cb(info->rx_skb)->pkt_type = inb(iobase + UART_RX);
@@ -295,7 +324,11 @@ static void btuart_receive(struct btuart_info *info)
 
 				case RECV_WAIT_DATA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 					hci_recv_frame(info->rx_skb);
+=======
+					hci_recv_frame(info->hdev, info->rx_skb);
+>>>>>>> v3.18
 =======
 					hci_recv_frame(info->hdev, info->rx_skb);
 >>>>>>> v3.18
@@ -319,7 +352,11 @@ static void btuart_receive(struct btuart_info *info)
 static irqreturn_t btuart_interrupt(int irq, void *dev_inst)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	btuart_info_t *info = dev_inst;
+=======
+	struct btuart_info *info = dev_inst;
+>>>>>>> v3.18
 =======
 	struct btuart_info *info = dev_inst;
 >>>>>>> v3.18
@@ -377,7 +414,12 @@ static irqreturn_t btuart_interrupt(int irq, void *dev_inst)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void btuart_change_speed(btuart_info_t *info, unsigned int speed)
+=======
+static void btuart_change_speed(struct btuart_info *info,
+				unsigned int speed)
+>>>>>>> v3.18
 =======
 static void btuart_change_speed(struct btuart_info *info,
 				unsigned int speed)
@@ -439,7 +481,11 @@ static void btuart_change_speed(struct btuart_info *info,
 static int btuart_hci_flush(struct hci_dev *hdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	btuart_info_t *info = hci_get_drvdata(hdev);
+=======
+	struct btuart_info *info = hci_get_drvdata(hdev);
+>>>>>>> v3.18
 =======
 	struct btuart_info *info = hci_get_drvdata(hdev);
 >>>>>>> v3.18
@@ -471,6 +517,7 @@ static int btuart_hci_close(struct hci_dev *hdev)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int btuart_hci_send_frame(struct sk_buff *skb)
 {
 	btuart_info_t *info;
@@ -482,6 +529,11 @@ static int btuart_hci_send_frame(struct sk_buff *skb)
 	}
 
 	info = hci_get_drvdata(hdev);
+=======
+static int btuart_hci_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
+{
+	struct btuart_info *info = hci_get_drvdata(hdev);
+>>>>>>> v3.18
 =======
 static int btuart_hci_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 {
@@ -511,6 +563,7 @@ static int btuart_hci_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int btuart_hci_ioctl(struct hci_dev *hdev, unsigned int cmd, unsigned long arg)
 {
 	return -ENOIOCTLCMD;
@@ -519,12 +572,18 @@ static int btuart_hci_ioctl(struct hci_dev *hdev, unsigned int cmd, unsigned lon
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /* ======================== Card services HCI interaction ======================== */
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int btuart_open(btuart_info_t *info)
+=======
+static int btuart_open(struct btuart_info *info)
+>>>>>>> v3.18
 =======
 static int btuart_open(struct btuart_info *info)
 >>>>>>> v3.18
@@ -555,16 +614,22 @@ static int btuart_open(struct btuart_info *info)
 	SET_HCIDEV_DEV(hdev, &info->p_dev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hdev->open     = btuart_hci_open;
 	hdev->close    = btuart_hci_close;
 	hdev->flush    = btuart_hci_flush;
 	hdev->send     = btuart_hci_send_frame;
 	hdev->ioctl    = btuart_hci_ioctl;
 =======
+=======
+>>>>>>> v3.18
 	hdev->open  = btuart_hci_open;
 	hdev->close = btuart_hci_close;
 	hdev->flush = btuart_hci_flush;
 	hdev->send  = btuart_hci_send_frame;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_irqsave(&(info->lock), flags);
@@ -602,7 +667,11 @@ static int btuart_open(struct btuart_info *info)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int btuart_close(btuart_info_t *info)
+=======
+static int btuart_close(struct btuart_info *info)
+>>>>>>> v3.18
 =======
 static int btuart_close(struct btuart_info *info)
 >>>>>>> v3.18
@@ -635,7 +704,11 @@ static int btuart_close(struct btuart_info *info)
 static int btuart_probe(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	btuart_info_t *info;
+=======
+	struct btuart_info *info;
+>>>>>>> v3.18
 =======
 	struct btuart_info *info;
 >>>>>>> v3.18
@@ -702,7 +775,11 @@ static int btuart_check_config_notpicky(struct pcmcia_device *p_dev,
 static int btuart_config(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	btuart_info_t *info = link->priv;
+=======
+	struct btuart_info *info = link->priv;
+>>>>>>> v3.18
 =======
 	struct btuart_info *info = link->priv;
 >>>>>>> v3.18
@@ -747,7 +824,11 @@ failed:
 static void btuart_release(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	btuart_info_t *info = link->priv;
+=======
+	struct btuart_info *info = link->priv;
+>>>>>>> v3.18
 =======
 	struct btuart_info *info = link->priv;
 >>>>>>> v3.18

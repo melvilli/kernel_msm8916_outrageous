@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -34,9 +37,15 @@
 #define __RTL92C_REG_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TXPKT_BUF_SELECT			0x69
 #define RXPKT_BUF_SELECT			0xA5
 #define DISABLE_TRXPKT_BUF_ACCESS		0x0
+=======
+#define TXPKT_BUF_SELECT				0x69
+#define RXPKT_BUF_SELECT				0xA5
+#define DISABLE_TRXPKT_BUF_ACCESS			0x0
+>>>>>>> v3.18
 =======
 #define TXPKT_BUF_SELECT				0x69
 #define RXPKT_BUF_SELECT				0xA5
@@ -48,8 +57,13 @@
 #define REG_APS_FSMCO				0x0004
 #define REG_SYS_CLKR				0x0008
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_9346CR				0x000A
 #define REG_EE_VPD				0x000C
+=======
+#define REG_9346CR					0x000A
+#define REG_EE_VPD					0x000C
+>>>>>>> v3.18
 =======
 #define REG_9346CR					0x000A
 #define REG_EE_VPD					0x000C
@@ -59,7 +73,11 @@
 #define REG_SPS_OCP_CFG				0x0018
 #define REG_RSV_CTRL				0x001C
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_RF_CTRL				0x001F
+=======
+#define REG_RF_CTRL					0x001F
+>>>>>>> v3.18
 =======
 #define REG_RF_CTRL					0x001F
 >>>>>>> v3.18
@@ -69,9 +87,14 @@
 #define REG_LPLDO_CTRL				0x0023
 #define REG_AFE_XTAL_CTRL			0x0024
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_AFE_LDO_CTRL			0x0027 /* 1.5v for 8188EE test
 							* chip, 1.4v for MP chip
 							*/
+=======
+/* 1.5v for 8188EE test chip, 1.4v for MP chip */
+#define REG_AFE_LDO_CTRL			0x0027
+>>>>>>> v3.18
 =======
 /* 1.5v for 8188EE test chip, 1.4v for MP chip */
 #define REG_AFE_LDO_CTRL			0x0027
@@ -82,6 +105,7 @@
 #define REG_PWR_DATA				0x0038
 #define REG_CAL_TIMER				0x003C
 #define REG_ACLK_MON				0x003E
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define REG_GPIO_MUXCFG				0x0040
 #define REG_GPIO_IO_SEL				0x0042
@@ -101,6 +125,8 @@
 #define REG_GPIO_OUTPUT				0x006c
 #define REG_AFE_XTAL_CTRL_EXT			0x0078
 =======
+=======
+>>>>>>> v3.18
 #define REG_GPIO_MUXCFG			0x0040
 #define REG_GPIO_IO_SEL				0x0042
 #define REG_MAC_PINMUX_CFG		0x0043
@@ -118,6 +144,9 @@
 #define REG_GPIO_IO_SEL_2			0x0062
 #define REG_GPIO_OUTPUT			0x006c
 #define REG_AFE_XTAL_CTRL_EXT		0x0078
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REG_XCK_OUT_CTRL			0x007c
 #define REG_MCUFWDL				0x0080
@@ -125,16 +154,22 @@
 #define REG_MCUTSTCFG				0x0084
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define REG_HIMR				0x00B0
 #define REG_HISR				0x00B4
 #define REG_HIMRE				0x00B8
 #define REG_HISRE				0x00BC
 =======
+=======
+>>>>>>> v3.18
 #define REG_HIMR					0x00B0
 #define REG_HISR					0x00B4
 #define REG_HIMRE					0x00B8
 #define REG_HISRE					0x00BC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define REG_EFUSE_ACCESS			0x00CF
@@ -147,23 +182,30 @@
 #define REG_PCIE_MIO_INTD			0x00E8
 #define REG_HPON_FSM				0x00EC
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_SYS_CFG				0x00F0
 
 #define REG_CR					0x0100
 #define REG_PBP					0x0104
 #define REG_PKT_BUFF_ACCESS_CTRL		0x0106
 =======
+=======
+>>>>>>> v3.18
 #define REG_SYS_CFG					0x00F0
 
 #define REG_CR						0x0100
 #define REG_PBP						0x0104
 #define REG_PKT_BUFF_ACCESS_CTRL	0x0106
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REG_TRXDMA_CTRL				0x010C
 #define REG_TRXFF_BNDY				0x0114
 #define REG_TRXFF_STATUS			0x0118
 #define REG_RXFF_PTR				0x011C
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define REG_CPWM				0x012F
 #define REG_FWIMR				0x0130
@@ -173,6 +215,8 @@
 #define REG_PKTBUF_DBG_DATA_H			0x0148
 #define REG_RXPKTBUF_CTRL			(REG_PKTBUF_DBG_CTRL+2)
 =======
+=======
+>>>>>>> v3.18
 #define REG_CPWM					0x012F
 #define REG_FWIMR					0x0130
 #define REG_FWISR					0x0134
@@ -180,6 +224,9 @@
 #define REG_PKTBUF_DBG_DATA_L		0x0144
 #define REG_PKTBUF_DBG_DATA_H		0x0148
 #define REG_RXPKTBUF_CTRL	(REG_PKTBUF_DBG_CTRL+2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define REG_TC0_CTRL				0x0150
@@ -192,6 +239,7 @@
 #define REG_MBIST_DONE				0x0178
 #define REG_MBIST_FAIL				0x017C
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_32K_CTRL				0x0194
 #define REG_C2HEVT_MSG_NORMAL			0x01A0
 #define REG_C2HEVT_CLEAR			0x01AF
@@ -200,6 +248,8 @@
 #define REG_FMETHR				0x01C8
 #define REG_HMETFR				0x01CC
 =======
+=======
+>>>>>>> v3.18
 #define REG_32K_CTRL					0x0194
 #define REG_C2HEVT_MSG_NORMAL		0x01A0
 #define REG_C2HEVT_CLEAR			0x01AF
@@ -207,6 +257,9 @@
 #define REG_MCUTST_1				0x01c0
 #define REG_FMETHR					0x01C8
 #define REG_HMETFR					0x01CC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REG_HMEBOX_0				0x01D0
 #define REG_HMEBOX_1				0x01D4
@@ -222,6 +275,7 @@
 #define REG_HMEBOX_EXT_2			0x01F8
 #define REG_HMEBOX_EXT_3			0x01FC
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define REG_RQPN				0x0200
 #define REG_FIFOPAGE				0x0204
@@ -244,6 +298,8 @@
 #define	REG_BCNQ_DESA				0x0308
 #define	REG_HQ_DESA				0x0310
 =======
+=======
+>>>>>>> v3.18
 #define REG_RQPN					0x0200
 #define REG_FIFOPAGE				0x0204
 #define REG_TDECTRL					0x0208
@@ -265,6 +321,9 @@
 #define	REG_INT_MIG					0x0304
 #define	REG_BCNQ_DESA				0x0308
 #define	REG_HQ_DESA					0x0310
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	REG_MGQ_DESA				0x0318
 #define	REG_VOQ_DESA				0x0320
@@ -272,17 +331,23 @@
 #define	REG_BEQ_DESA				0x0330
 #define	REG_BKQ_DESA				0x0338
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	REG_RX_DESA				0x0340
 
 #define	REG_DBI					0x0348
 #define	REG_MDIO				0x0354
 #define	REG_DBG_SEL				0x0360
 =======
+=======
+>>>>>>> v3.18
 #define	REG_RX_DESA					0x0340
 
 #define	REG_DBI						0x0348
 #define	REG_MDIO					0x0354
 #define	REG_DBG_SEL					0x0360
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	REG_PCIE_HRPWM				0x0361
 #define	REG_PCIE_HCPWM				0x0363
@@ -292,7 +357,10 @@
 #define	REG_UART_RX_DESA			0x0378
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define	REG_HDAQ_DESA_NODEF			0x0000
@@ -304,6 +372,7 @@
 #define REG_BKQ_INFORMATION			0x040C
 #define REG_MGQ_INFORMATION			0x0410
 #define REG_HGQ_INFORMATION			0x0414
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define REG_BCNQ_INFORMATION			0x0418
 #define REG_TXPKT_EMPTY				0x041A
@@ -333,6 +402,8 @@
 #define REG_INIRTS_RATE_SEL			0x0480
 #define REG_INIDATA_RATE_SEL			0x0484
 =======
+=======
+>>>>>>> v3.18
 #define REG_BCNQ_INFORMATION		0x0418
 #define REG_TXPKT_EMPTY				0x041A
 
@@ -359,6 +430,9 @@
 #define REG_RD_RESP_PKT_TH			0x0463
 #define REG_INIRTS_RATE_SEL			0x0480
 #define REG_INIDATA_RATE_SEL		0x0484
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REG_POWER_STATUS			0x04A4
 #define REG_POWER_STAGE1			0x04B4
@@ -368,15 +442,21 @@
 #define REG_PROT_MODE_CTRL			0x04C8
 #define REG_BAR_MODE_CTRL			0x04CC
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_RA_TRY_RATE_AGG_LMT			0x04CF
 #define REG_EARLY_MODE_CONTROL			0x04D0
 #define REG_NQOS_SEQ				0x04DC
 #define REG_QOS_SEQ				0x04DE
 =======
+=======
+>>>>>>> v3.18
 #define REG_RA_TRY_RATE_AGG_LMT		0x04CF
 #define REG_EARLY_MODE_CONTROL		0x04D0
 #define REG_NQOS_SEQ				0x04DC
 #define REG_QOS_SEQ					0x04DE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REG_NEED_CPU_HANDLE			0x04E0
 #define REG_PKT_LOSE_RPT			0x04E1
@@ -384,7 +464,11 @@
 #define REG_TX_RPT_CTRL				0x04EC
 #define REG_TX_RPT_TIME				0x04F0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_DUMMY				0x04FC
+=======
+#define REG_DUMMY					0x04FC
+>>>>>>> v3.18
 =======
 #define REG_DUMMY					0x04FC
 >>>>>>> v3.18
@@ -394,8 +478,13 @@
 #define REG_EDCA_BE_PARAM			0x0508
 #define REG_EDCA_BK_PARAM			0x050C
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_BCNTCFG				0x0510
 #define REG_PIFS				0x0512
+=======
+#define REG_BCNTCFG					0x0510
+#define REG_PIFS					0x0512
+>>>>>>> v3.18
 =======
 #define REG_BCNTCFG					0x0510
 #define REG_PIFS					0x0512
@@ -405,17 +494,23 @@
 #define REG_SIFS_TRX				0x0516
 #define REG_AGGR_BREAK_TIME			0x051A
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_SLOT				0x051B
 #define REG_TX_PTCL_CTRL			0x0520
 #define REG_TXPAUSE				0x0522
 #define REG_DIS_TXREQ_CLR			0x0523
 #define REG_RD_CTRL				0x0524
 =======
+=======
+>>>>>>> v3.18
 #define REG_SLOT					0x051B
 #define REG_TX_PTCL_CTRL			0x0520
 #define REG_TXPAUSE					0x0522
 #define REG_DIS_TXREQ_CLR			0x0523
 #define REG_RD_CTRL					0x0524
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REG_TBTT_PROHIBIT			0x0540
 #define REG_RD_NAV_NXT				0x0544
@@ -425,6 +520,7 @@
 #define REG_MBID_NUM				0x0552
 #define REG_DUAL_TSF_RST			0x0553
 #define REG_BCN_INTERVAL			0x0554
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define REG_MBSSID_BCN_SPACE			0x0554
 #define REG_DRVERLYINT				0x0558
@@ -442,6 +538,8 @@
 #define REG_ACMRSTCTRL				0x05C1
 #define REG_ACMAVG				0x05C2
 =======
+=======
+>>>>>>> v3.18
 #define REG_MBSSID_BCN_SPACE		0x0554
 #define REG_DRVERLYINT				0x0558
 #define REG_BCNDMATIM				0x0559
@@ -457,6 +555,9 @@
 #define REG_ACMHWCTRL				0x05C0
 #define REG_ACMRSTCTRL				0x05C1
 #define REG_ACMAVG					0x05C2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REG_VO_ADMTIME				0x05C4
 #define REG_VI_ADMTIME				0x05C6
@@ -467,8 +568,13 @@
 #define REG_APSD_CTRL				0x0600
 #define REG_BWOPMODE				0x0603
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_TCR					0x0604
 #define REG_RCR					0x0608
+=======
+#define REG_TCR						0x0604
+#define REG_RCR						0x0608
+>>>>>>> v3.18
 =======
 #define REG_TCR						0x0604
 #define REG_RCR						0x0608
@@ -478,9 +584,15 @@
 #define REG_RX_DRVINFO_SZ			0x060F
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_MACID				0x0610
 #define REG_BSSID				0x0618
 #define REG_MAR					0x0620
+=======
+#define REG_MACID					0x0610
+#define REG_BSSID					0x0618
+#define REG_MAR						0x0620
+>>>>>>> v3.18
 =======
 #define REG_MACID					0x0610
 #define REG_BSSID					0x0618
@@ -493,9 +605,15 @@
 #define REG_RESP_SIFS_CCK			0x063C
 #define REG_RESP_SIFS_OFDM			0x063E
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_ACKTO				0x0640
 #define REG_CTS2TO				0x0641
 #define REG_EIFS				0x0642
+=======
+#define REG_ACKTO					0x0640
+#define REG_CTS2TO					0x0641
+#define REG_EIFS					0x0642
+>>>>>>> v3.18
 =======
 #define REG_ACKTO					0x0640
 #define REG_CTS2TO					0x0641
@@ -505,6 +623,7 @@
 #define REG_NAV_CTRL				0x0650
 #define REG_BACAMCMD				0x0654
 #define REG_BACAMCONTENT			0x0658
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define REG_LBDLY				0x0660
 #define REG_FWDLY				0x0661
@@ -517,6 +636,8 @@
 #define REG_CAMDBG				0x067C
 #define REG_SECCFG				0x0680
 =======
+=======
+>>>>>>> v3.18
 #define REG_LBDLY					0x0660
 #define REG_FWDLY					0x0661
 #define REG_RXERR_RPT				0x0664
@@ -527,6 +648,9 @@
 #define REG_CAMREAD					0x0678
 #define REG_CAMDBG					0x067C
 #define REG_SECCFG					0x0680
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define REG_WOW_CTRL				0x0690
@@ -544,15 +668,21 @@
 #define REG_PKT_MON_CTRL			0x06B4
 #define REG_BT_COEX_TABLE			0x06C0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_WMAC_RESP_TXINFO			0x06D8
 
 #define REG_USB_INFO				0xFE17
 #define REG_USB_SPECIAL_OPTION			0xFE55
 =======
+=======
+>>>>>>> v3.18
 #define REG_WMAC_RESP_TXINFO		0x06D8
 
 #define REG_USB_INFO				0xFE17
 #define REG_USB_SPECIAL_OPTION		0xFE55
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REG_USB_DMA_AGG_TO			0xFE5B
 #define REG_USB_AGG_TO				0xFE5C
@@ -562,20 +692,27 @@
 #define REG_TEST_SIE_VID			0xFE60
 #define REG_TEST_SIE_PID			0xFE62
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define REG_TEST_SIE_OPTIONAL			0xFE64
 #define REG_TEST_SIE_CHIRP_K			0xFE65
 #define REG_TEST_SIE_PHY			0xFE66
 #define REG_TEST_SIE_MAC_ADDR			0xFE70
 =======
+=======
+>>>>>>> v3.18
 #define REG_TEST_SIE_OPTIONAL		0xFE64
 #define REG_TEST_SIE_CHIRP_K		0xFE65
 #define REG_TEST_SIE_PHY			0xFE66
 #define REG_TEST_SIE_MAC_ADDR		0xFE70
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REG_TEST_SIE_STRING			0xFE80
 
 #define REG_NORMAL_SIE_VID			0xFE60
 #define REG_NORMAL_SIE_PID			0xFE62
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define REG_NORMAL_SIE_OPTIONAL			0xFE64
 #define REG_NORMAL_SIE_EP			0xFE65
@@ -623,6 +760,8 @@
 
 /* 8723/8188E Host System Interrupt Mask Register (offset 0x58, 32 byte) */
 =======
+=======
+>>>>>>> v3.18
 #define REG_NORMAL_SIE_OPTIONAL		0xFE64
 #define REG_NORMAL_SIE_EP			0xFE65
 #define REG_NORMAL_SIE_PHY			0xFE68
@@ -670,6 +809,9 @@
 /*8723/8188E Host System Interrupt
  *Mask Register (offset 0x58, 32 byte)
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	HSIMR_GPIO12_0_INT_EN			BIT(0)
 #define	HSIMR_SPS_OCP_INT_EN			BIT(5)
@@ -678,8 +820,14 @@
 #define	HSIMR_GPIO9_INT_EN			BIT(25)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* 8723/8188E Host System Interrupt Status Register (offset 0x5C, 32 byte) */
+=======
+/*       8723/8188E Host System Interrupt
+ *		Status Register (offset 0x5C, 32 byte)
+ */
+>>>>>>> v3.18
 =======
 /*       8723/8188E Host System Interrupt
  *		Status Register (offset 0x5C, 32 byte)
@@ -692,15 +840,21 @@
 #define	HSISR_GPIO9_INT				BIT(25)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	MSR_NOLINK				0x00
 #define	MSR_ADHOC				0x01
 #define	MSR_INFRA				0x02
 #define	MSR_AP					0x03
 =======
+=======
+>>>>>>> v3.18
 #define	MSR_NOLINK					0x00
 #define	MSR_ADHOC					0x01
 #define	MSR_INFRA					0x02
 #define	MSR_AP						0x03
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	RRSR_RSC_OFFSET				21
@@ -708,6 +862,7 @@
 #define	RRSR_RSC_BW_40M				0x600000
 #define	RRSR_RSC_UPSUBCHNL			0x400000
 #define	RRSR_RSC_LOWSUBCHNL			0x200000
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	RRSR_SHORT				0x800000
 #define	RRSR_1M					BIT(0)
@@ -799,6 +954,8 @@
 #define	RATE_ALL_OFDM_2SS	(RATR_MCS8 | RATR_MCS9 | RATR_MCS10 | \
 				RATR_MCS11 | RATR_MCS12 | RATR_MCS13 | \
 =======
+=======
+>>>>>>> v3.18
 #define	RRSR_SHORT					0x800000
 #define	RRSR_1M						BIT(0)
 #define	RRSR_2M						BIT(1)
@@ -888,6 +1045,9 @@
 				RATR_MCS6 | RATR_MCS7)
 #define	RATE_ALL_OFDM_2SS	(RATR_MCS8 | RATR_MCS9 | RATR_MCS10 |\
 				RATR_MCS11 | RATR_MCS12 | RATR_MCS13 |\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				RATR_MCS14 | RATR_MCS15)
 
@@ -895,6 +1055,7 @@
 #define	BW_OPMODE_5G				BIT(1)
 #define	BW_OPMODE_11J				BIT(0)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	CAM_VALID				BIT(15)
 #define	CAM_NOTVALID				0x0000
@@ -906,6 +1067,8 @@
 #define	CAM_AES					0x04
 #define	CAM_WEP104				0x05
 =======
+=======
+>>>>>>> v3.18
 #define	CAM_VALID					BIT(15)
 #define	CAM_NOTVALID				0x0000
 #define	CAM_USEDK					BIT(5)
@@ -915,11 +1078,15 @@
 #define	CAM_TKIP					0x02
 #define	CAM_AES						0x04
 #define	CAM_WEP104					0x05
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	TOTAL_CAM_ENTRY				32
 #define	HALF_CAM_ENTRY				16
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	CAM_WRITE				BIT(16)
 #define	CAM_READ				0x00000000
@@ -934,6 +1101,8 @@
 #define	WOW_MAGIC				BIT(2)
 #define	WOW_UWF					BIT(3)
 =======
+=======
+>>>>>>> v3.18
 #define	CAM_WRITE					BIT(16)
 #define	CAM_READ					0x00000000
 #define	CAM_POLLINIG				BIT(31)
@@ -946,11 +1115,15 @@
 #define	WOW_WOMEN					BIT(1)
 #define	WOW_MAGIC					BIT(2)
 #define	WOW_UWF						BIT(3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*********************************************
 *       8188 IMR/ISR bits
 **********************************************/
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	IMR_DISABLED				0x0
 /* IMR DW0(0x0060-0063) Bit 0-31 */
@@ -1044,6 +1217,8 @@
 #define	EEPROM_DEFAULT_HT40_2SDIFF		0x0
 #define EEPROM_DEFAULT_HT20_DIFF		2
 =======
+=======
+>>>>>>> v3.18
 #define	IMR_DISABLED			0x0
 /* IMR DW0(0x0060-0063) Bit 0-31 */
 /* TXRPT interrupt when CCX bit of the packet is set	*/
@@ -1155,11 +1330,15 @@
 #define	EEPROM_DEFAULT_TXPOWERLEVEL			0x22
 #define	EEPROM_DEFAULT_HT40_2SDIFF			0x0
 #define EEPROM_DEFAULT_HT20_DIFF			2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	EEPROM_DEFAULT_LEGACYHTTXPOWERDIFF	0x3
 #define EEPROM_DEFAULT_HT40_PWRMAXOFFSET	0
 #define EEPROM_DEFAULT_HT20_PWRMAXOFFSET	0
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define RF_OPTION1				0x79
 #define RF_OPTION2				0x7A
@@ -1263,6 +1442,8 @@
 #define REG_USB_INFO				0xFE17
 #define REG_USB_SPECIAL_OPTION			0xFE55
 =======
+=======
+>>>>>>> v3.18
 #define RF_OPTION1							0x79
 #define RF_OPTION2							0x7A
 #define RF_OPTION3							0x7B
@@ -1364,11 +1545,15 @@
 
 #define REG_USB_INFO				0xFE17
 #define REG_USB_SPECIAL_OPTION		0xFE55
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REG_USB_DMA_AGG_TO			0xFE5B
 #define REG_USB_AGG_TO				0xFE5C
 #define REG_USB_AGG_TH				0xFE5D
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define REG_USB_VID				0xFE60
 #define REG_USB_PID				0xFE62
@@ -1376,16 +1561,22 @@
 #define REG_USB_CHIRP_K				0xFE65
 #define REG_USB_PHY				0xFE66
 =======
+=======
+>>>>>>> v3.18
 #define REG_USB_VID					0xFE60
 #define REG_USB_PID					0xFE62
 #define REG_USB_OPTIONAL			0xFE64
 #define REG_USB_CHIRP_K				0xFE65
 #define REG_USB_PHY					0xFE66
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REG_USB_MAC_ADDR			0xFE70
 #define REG_USB_HRPWM				0xFE58
 #define REG_USB_HCPWM				0xFE57
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SW18_FPWM				BIT(3)
 
@@ -1451,6 +1642,8 @@
 #define ANA8M					BIT(1)
 #define MACSLP					BIT(4)
 =======
+=======
+>>>>>>> v3.18
 #define SW18_FPWM					BIT(3)
 
 #define ISO_MD2PP					BIT(0)
@@ -1514,11 +1707,15 @@
 #define ANAD16V_EN					BIT(0)
 #define ANA8M						BIT(1)
 #define MACSLP						BIT(4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define LOADER_CLK_EN				BIT(5)
 #define _80M_SSC_DIS				BIT(7)
 #define _80M_SSC_EN_HO				BIT(8)
 #define PHY_SSC_RSTB				BIT(9)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SEC_CLK_EN				BIT(10)
 #define MAC_CLK_EN				BIT(11)
@@ -1560,6 +1757,8 @@
 #define XTAL_EN					BIT(0)
 #define XTAL_BSEL				BIT(1)
 =======
+=======
+>>>>>>> v3.18
 #define SEC_CLK_EN					BIT(10)
 #define MAC_CLK_EN					BIT(11)
 #define SYS_CLK_EN					BIT(12)
@@ -1599,6 +1798,9 @@
 
 #define XTAL_EN						BIT(0)
 #define XTAL_BSEL					BIT(1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define _XTAL_BOSC(x)				(((x) & 0x3) << 2)
 #define _XTAL_CADJ(x)				(((x) & 0xF) << 4)
@@ -1614,6 +1816,7 @@
 #define _XTAL_BT_DRV(x)				(((x) & 0x3) << 21)
 #define _XTAL_GPIO(x)				(((x) & 0x7) << 23)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define CKDLY_AFE				BIT(26)
 #define CKDLY_USB				BIT(27)
@@ -1694,6 +1897,8 @@
 #define BD_HCI_SEL				BIT(26)
 #define TYPE_ID					BIT(27)
 =======
+=======
+>>>>>>> v3.18
 #define CKDLY_AFE					BIT(26)
 #define CKDLY_USB					BIT(27)
 #define CKDLY_DIG					BIT(28)
@@ -1772,11 +1977,15 @@
 #define BD_PKG_SEL					BIT(25)
 #define BD_HCI_SEL					BIT(26)
 #define TYPE_ID						BIT(27)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define CHIP_VER_RTL_MASK			0xF000
 #define CHIP_VER_RTL_SHIFT			12
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define REG_LBMODE				(REG_CR + 3)
 
@@ -1803,6 +2012,8 @@
 #define LOOPBACK_NORMAL				0x0
 #define LOOPBACK_IMMEDIATELY			0xB
 =======
+=======
+>>>>>>> v3.18
 #define REG_LBMODE					(REG_CR + 3)
 
 #define HCI_TXDMA_EN				BIT(0)
@@ -1827,6 +2038,9 @@
 #define MASK_LBMODE					0xF000000
 #define LOOPBACK_NORMAL				0x0
 #define LOOPBACK_IMMEDIATELY		0xB
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define LOOPBACK_MAC_DELAY			0x3
 #define LOOPBACK_PHY				0x1
@@ -1834,6 +2048,7 @@
 
 #define GET_RX_PAGE_SIZE(value)		((value) & 0xF)
 #define GET_TX_PAGE_SIZE(value)		(((value) & 0xF0) >> 4)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define _PSRX_MASK				0xF
 #define _PSTX_MASK				0xF0
@@ -1863,6 +2078,8 @@
 #define HQSEL_MGTQ				BIT(4)
 #define HQSEL_HIQ				BIT(5)
 =======
+=======
+>>>>>>> v3.18
 #define _PSRX_MASK					0xF
 #define _PSTX_MASK					0xF0
 #define _PSRX(x)					(x)
@@ -1890,6 +2107,9 @@
 #define HQSEL_BKQ					BIT(3)
 #define HQSEL_MGTQ					BIT(4)
 #define HQSEL_HIQ					BIT(5)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define _TXDMA_HIQ_MAP(x)			(((x)&0x3) << 14)
@@ -1900,9 +2120,15 @@
 #define _TXDMA_VOQ_MAP(x)			(((x)&0x3) << 4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QUEUE_LOW				1
 #define QUEUE_NORMAL				2
 #define QUEUE_HIGH				3
+=======
+#define QUEUE_LOW					1
+#define QUEUE_NORMAL				2
+#define QUEUE_HIGH					3
+>>>>>>> v3.18
 =======
 #define QUEUE_LOW					1
 #define QUEUE_NORMAL				2
@@ -1915,6 +2141,7 @@
 
 #define _LLT_INIT_DATA(x)			((x) & 0xFF)
 #define _LLT_INIT_ADDR(x)			(((x) & 0xFF) << 8)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define _LLT_OP(x)				(((x) & 0x3) << 30)
 #define _LLT_OP_VALUE(x)			(((x) >> 30) & 0x3)
@@ -1936,6 +2163,8 @@
 #define BCN_HEAD(x)				(((x) & 0xFF) << 8)
 #define	BCN_HEAD_MASK				0xFF00
 =======
+=======
+>>>>>>> v3.18
 #define _LLT_OP(x)					(((x) & 0x3) << 30)
 #define _LLT_OP_VALUE(x)			(((x) >> 30) & 0x3)
 
@@ -1955,6 +2184,9 @@
 #define BCN_VALID		BIT(16)
 #define BCN_HEAD(x)		(((x) & 0xFF) << 8)
 #define	BCN_HEAD_MASK		0xFF00
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define BLK_DESC_NUM_SHIFT			4
@@ -1976,9 +2208,15 @@
 #define _RRSR_RSC(x)				(((x) & 0x3) << 21)
 #define RRSR_RSC_RESERVED			0x0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RRSR_RSC_UPPER_SUBCHANNEL		0x1
 #define RRSR_RSC_LOWER_SUBCHANNEL		0x2
 #define RRSR_RSC_DUPLICATE_MODE			0x3
+=======
+#define RRSR_RSC_UPPER_SUBCHANNEL	0x1
+#define RRSR_RSC_LOWER_SUBCHANNEL	0x2
+#define RRSR_RSC_DUPLICATE_MODE		0x3
+>>>>>>> v3.18
 =======
 #define RRSR_RSC_UPPER_SUBCHANNEL	0x1
 #define RRSR_RSC_LOWER_SUBCHANNEL	0x2
@@ -1997,8 +2235,13 @@
 #define _AGGLMT_MCS7(x)				(((x) & 0xF) << 28)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	RETRY_LIMIT_SHORT_SHIFT			8
 #define	RETRY_LIMIT_LONG_SHIFT			0
+=======
+#define	RETRY_LIMIT_SHORT_SHIFT		8
+#define	RETRY_LIMIT_LONG_SHIFT		0
+>>>>>>> v3.18
 =======
 #define	RETRY_LIMIT_SHORT_SHIFT		8
 #define	RETRY_LIMIT_LONG_SHIFT		0
@@ -2023,6 +2266,7 @@
 #define _RARF_RC8(x)				(((x) & 0x1F) << 24)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AC_PARAM_TXOP_LIMIT_OFFSET		16
 #define AC_PARAM_ECW_MAX_OFFSET			12
 #define AC_PARAM_ECW_MIN_OFFSET			8
@@ -2038,6 +2282,8 @@
 #define _LRL(x)					((x) & 0x3F)
 #define _SRL(x)					(((x) & 0x3F) << 8)
 =======
+=======
+>>>>>>> v3.18
 #define AC_PARAM_TXOP_LIMIT_OFFSET	16
 #define AC_PARAM_ECW_MAX_OFFSET		12
 #define AC_PARAM_ECW_MIN_OFFSET		8
@@ -2052,6 +2298,9 @@
 
 #define _LRL(x)						((x) & 0x3F)
 #define _SRL(x)						(((x) & 0x3F) << 8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define _SIFS_CCK_CTX(x)			((x) & 0xFF)
@@ -2060,6 +2309,7 @@
 #define _SIFS_OFDM_CTX(x)			((x) & 0xFF)
 #define _SIFS_OFDM_TRX(x)			(((x) & 0xFF) << 8);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define _TBTT_PROHIBIT_HOLD(x)			(((x) & 0xFF) << 8)
 
@@ -2082,6 +2332,8 @@
 #define	ACMHW_VIQEN				BIT(2)
 #define	ACMHW_VOQEN				BIT(3)
 =======
+=======
+>>>>>>> v3.18
 #define _TBTT_PROHIBIT_HOLD(x)		(((x) & 0xFF) << 8)
 
 #define DIS_EDCA_CNT_DWN			BIT(11)
@@ -2102,11 +2354,15 @@
 #define	ACMHW_BEQEN					BIT(1)
 #define	ACMHW_VIQEN					BIT(2)
 #define	ACMHW_VOQEN					BIT(3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	ACMHW_BEQSTATUS				BIT(4)
 #define	ACMHW_VIQSTATUS				BIT(5)
 #define	ACMHW_VOQSTATUS				BIT(6)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define APSDOFF					BIT(6)
 #define APSDOFF_STATUS				BIT(7)
@@ -2181,6 +2437,8 @@
 #define	SCR_SKBYA2				BIT(4)
 #define	SCR_NOSKMC				BIT(5)
 =======
+=======
+>>>>>>> v3.18
 #define APSDOFF						BIT(6)
 #define APSDOFF_STATUS				BIT(7)
 
@@ -2253,6 +2511,9 @@
 #define	SCR_RXDECENABLE				BIT(3)
 #define	SCR_SKBYA2					BIT(4)
 #define	SCR_NOSKMC					BIT(5)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SCR_TXBCUSEDK				BIT(6)
 #define SCR_RXBCUSEDK				BIT(7)
@@ -2262,8 +2523,13 @@
 #define USB_SPEED_MASK				BIT(5)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USB_NORMAL_SIE_EP_MASK			0xF
 #define USB_NORMAL_SIE_EP_SHIFT			4
+=======
+#define USB_NORMAL_SIE_EP_MASK		0xF
+#define USB_NORMAL_SIE_EP_SHIFT		4
+>>>>>>> v3.18
 =======
 #define USB_NORMAL_SIE_EP_MASK		0xF
 #define USB_NORMAL_SIE_EP_SHIFT		4
@@ -2273,6 +2539,7 @@
 #define USB_TEST_EP_SHIFT			4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USB_AGG_EN				BIT(3)
 
 #define MAC_ADDR_LEN				6
@@ -2280,12 +2547,17 @@
 
 #define POLLING_LLT_THRESHOLD			20
 =======
+=======
+>>>>>>> v3.18
 #define USB_AGG_EN					BIT(3)
 
 #define MAC_ADDR_LEN				6
 #define LAST_ENTRY_OF_TX_PKT_BUFFER	175/*255    88e*/
 
 #define POLLING_LLT_THRESHOLD		20
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define POLLING_READY_TIMEOUT_COUNT		3000
 
@@ -2293,7 +2565,11 @@
 #define	MAX_MSS_DENSITY_1T			0x0A
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EPROM_CMD_OPERATING_MODE_MASK		((1<<7)|(1<<6))
+=======
+#define EPROM_CMD_OPERATING_MODE_MASK	((1<<7)|(1<<6))
+>>>>>>> v3.18
 =======
 #define EPROM_CMD_OPERATING_MODE_MASK	((1<<7)|(1<<6))
 >>>>>>> v3.18
@@ -2303,9 +2579,15 @@
 #define	HWSET_MAX_SIZE_92S			HWSET_MAX_SIZE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	HAL_8192C_HW_GPIO_WPS_BIT		BIT(2)
 
 #define	RPMAC_RESET				0x100
+=======
+#define	HAL_8192C_HW_GPIO_WPS_BIT	BIT(2)
+
+#define	RPMAC_RESET					0x100
+>>>>>>> v3.18
 =======
 #define	HAL_8192C_HW_GPIO_WPS_BIT	BIT(2)
 
@@ -2327,6 +2609,7 @@
 #define	RPMAC_TXDADATYPE			0x138
 #define	RPMAC_TXRANDOMSEED			0x13c
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	RPMAC_CCKPLCPPREAMBLE			0x140
 #define	RPMAC_CCKPLCPHEADER			0x144
 #define	RPMAC_CCKCRC16				0x148
@@ -2334,12 +2617,17 @@
 #define	RPMAC_OFDMRXCRC32Er			0x174
 #define	RPMAC_OFDMRXPARITYER			0x178
 =======
+=======
+>>>>>>> v3.18
 #define	RPMAC_CCKPLCPPREAMBLE		0x140
 #define	RPMAC_CCKPLCPHEADER			0x144
 #define	RPMAC_CCKCRC16				0x148
 #define	RPMAC_OFDMRXCRC32OK			0x170
 #define	RPMAC_OFDMRXCRC32ER			0x174
 #define	RPMAC_OFDMRXPARITYER		0x178
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	RPMAC_OFDMRXCRC8ER			0x17c
 #define	RPMAC_CCKCRXRC16ER			0x180
@@ -2357,6 +2645,7 @@
 #define	RFPGA0_RFTIMING1			0x810
 #define	RFPGA0_RFTIMING2			0x814
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	RFPGA0_XA_HSSIPARAMETER1		0x820
 #define	RFPGA0_XA_HSSIPARAMETER2		0x824
@@ -2398,6 +2687,8 @@
 #define	RFPGA0_XAB_RFINTERFACERB		0x8e0
 #define	RFPGA0_XCD_RFINTERFACERB		0x8e4
 =======
+=======
+>>>>>>> v3.18
 #define	RFPGA0_XA_HSSIPARAMETER1	0x820
 #define	RFPGA0_XA_HSSIPARAMETER2	0x824
 #define	RFPGA0_XB_HSSIPARAMETER1	0x828
@@ -2437,6 +2728,9 @@
 #define	REG_SC_CNT						0x8c4
 #define	RFPGA0_XAB_RFINTERFACERB	0x8e0
 #define	RFPGA0_XCD_RFINTERFACERB	0x8e4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	RFPGA1_RFMOD				0x900
@@ -2449,7 +2743,11 @@
 
 #define	RCCK0_AFESETTING			0xa04
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	RCCK0_CCA				0xa08
+=======
+#define	RCCK0_CCA					0xa08
+>>>>>>> v3.18
 =======
 #define	RCCK0_CCA					0xa08
 >>>>>>> v3.18
@@ -2458,7 +2756,11 @@
 #define	RCCK0_RXAGC2				0xa10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	RCCK0_RXHP				0xa14
+=======
+#define	RCCK0_RXHP					0xa14
+>>>>>>> v3.18
 =======
 #define	RCCK0_RXHP					0xa14
 >>>>>>> v3.18
@@ -2469,6 +2771,7 @@
 #define	RCCK0_TXFILTER1				0xa20
 #define	RCCK0_TXFILTER2				0xa24
 #define	RCCK0_DEBUGPORT				0xa28
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	RCCK0_FALSEALARMREPORT			0xa2c
 #define	RCCK0_TRSSIREPORT			0xa50
@@ -2540,6 +2843,8 @@
 #define	ROFDM0_XDRXAFE				0xc28
 #define	ROFDM0_XDRXIQIMBAL			0xc2c
 =======
+=======
+>>>>>>> v3.18
 #define	RCCK0_FALSEALARMREPORT		0xa2c
 #define	RCCK0_TRSSIREPORT		0xa50
 #define	RCCK0_RXREPORT			0xa54
@@ -2608,6 +2913,9 @@
 #define	ROFDM0_XCRXIQIMBANLANCE		0xc24
 #define	ROFDM0_XDRXAFE			0xc28
 #define	ROFDM0_XDRXIQIMBALANCE		0xc2c
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	ROFDM0_RXDETECTOR1			0xc30
@@ -2618,8 +2926,13 @@
 #define	ROFDM0_RXDSP				0xc40
 #define	ROFDM0_CFOANDDAGC			0xc44
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	ROFDM0_CCADROPTHRES			0xc48
 #define	ROFDM0_ECCATHRES			0xc4c
+=======
+#define	ROFDM0_CCADROPTHRESHOLD		0xc48
+#define	ROFDM0_ECCATHRESHOLD		0xc4c
+>>>>>>> v3.18
 =======
 #define	ROFDM0_CCADROPTHRESHOLD		0xc48
 #define	ROFDM0_ECCATHRESHOLD		0xc4c
@@ -2635,6 +2948,7 @@
 #define	ROFDM0_XDAGCCORE2			0xc6c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	ROFDM0_AGCPARAMETER1			0xc70
 #define	ROFDM0_AGCPARAMETER2			0xc74
 #define	ROFDM0_AGCRSSITABLE			0xc78
@@ -2648,6 +2962,8 @@
 #define	ROFDM0_XCTXAFE				0xc94
 #define	ROFDM0_XDTXIQIMBAL			0xc98
 =======
+=======
+>>>>>>> v3.18
 #define	ROFDM0_AGCPARAMETER1		0xc70
 #define	ROFDM0_AGCPARAMETER2		0xc74
 #define	ROFDM0_AGCRSSITABLE			0xc78
@@ -2660,6 +2976,9 @@
 #define	ROFDM0_XCTXIQIMBALANCE		0xc90
 #define	ROFDM0_XCTXAFE			0xc94
 #define	ROFDM0_XDTXIQIMBALANCE		0xc98
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	ROFDM0_XDTXAFE				0xc9c
 
@@ -2671,6 +2990,7 @@
 #define	ROFDM0_TXCOEFF5				0xcb4
 #define	ROFDM0_TXCOEFF6				0xcb8
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	ROFDM0_RXHPPARAMETER			0xce0
 #define	ROFDM0_TXPSEUDONOISEWGT			0xce4
@@ -2692,6 +3012,8 @@
 #define	ROFDM1_PSEUDONOISESTATECD		0xd54
 #define	ROFDM1_RXPSEUDONOISEWGT			0xd58
 =======
+=======
+>>>>>>> v3.18
 #define	ROFDM0_RXHPPARAMETER		0xce0
 #define	ROFDM0_TXPSEUDONOISEWGT		0xce4
 #define	ROFDM0_FRAMESYNC			0xcf0
@@ -2710,6 +3032,9 @@
 #define	ROFDM1_PSEUDONOISESTATEAB	0xd50
 #define	ROFDM1_PSEUDONOISESTATECD	0xd54
 #define	ROFDM1_RXPSEUDONOISEWGT		0xd58
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define	ROFDM_PHYCOUNTER1			0xda0
@@ -2723,17 +3048,23 @@
 #define	ROFDM_TAILCF0AB				0xdbc
 #define	ROFDM_TAILCF0CD				0xdc0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	ROFDM_PWMEASURE1			0xdc4
 #define	ROFDM_PWMEASURE2			0xdc8
 #define	ROFDM_BWREPORT				0xdcc
 #define	ROFDM_AGCREPORT				0xdd0
 #define	ROFDM_RXSNR				0xdd4
 =======
+=======
+>>>>>>> v3.18
 #define	ROFDM_PWMEASURE1		0xdc4
 #define	ROFDM_PWMEASURE2		0xdc8
 #define	ROFDM_BWREPORT				0xdcc
 #define	ROFDM_AGCREPORT				0xdd0
 #define	ROFDM_RXSNR					0xdd4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	ROFDM_RXEVMCSI				0xdd8
 #define	ROFDM_SIGREPORT				0xddc
@@ -2741,6 +3072,7 @@
 #define	RTXAGC_A_RATE18_06			0xe00
 #define	RTXAGC_A_RATE54_24			0xe04
 #define	RTXAGC_A_CCK1_MCS32			0xe08
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	RTXAGC_A_MCS03_MCS00			0xe10
 #define	RTXAGC_A_MCS07_MCS04			0xe14
@@ -2804,6 +3136,8 @@
 #define	RSTANDBY				0xedc
 #define	RSLEEP					0xee0
 =======
+=======
+>>>>>>> v3.18
 #define	RTXAGC_A_MCS03_MCS00		0xe10
 #define	RTXAGC_A_MCS07_MCS04		0xe14
 #define	RTXAGC_A_MCS11_MCS08		0xe18
@@ -2865,6 +3199,9 @@
 #define	RRX_TO_RX					0xed8
 #define	RSTANDBY						0xedc
 #define	RSLEEP						0xee0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	RPMPD_ANAEN				0xeec
 
@@ -2872,7 +3209,11 @@
 #define	RZEBRA1_TRXENABLE1			0x1
 #define	RZEBRA1_TRXENABLE2			0x2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	RZEBRA1_AGC				0x4
+=======
+#define	RZEBRA1_AGC					0x4
+>>>>>>> v3.18
 =======
 #define	RZEBRA1_AGC					0x4
 >>>>>>> v3.18
@@ -2885,7 +3226,11 @@
 #define	RZEBRA1_RXHPFCORNER			0xc
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	RGLOBALCTRL				0
+=======
+#define	RGLOBALCTRL					0
+>>>>>>> v3.18
 =======
 #define	RGLOBALCTRL					0
 >>>>>>> v3.18
@@ -2895,6 +3240,7 @@
 #define	RRTL8258_RXLPF				0x13
 #define	RRTL8258_RSSILPF			0xa
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	RF_AC					0x00
 
@@ -2980,6 +3326,8 @@
 #define	BTXHTLENGTH				0xffff00
 #define	BTXHTSIG2				0xffffff
 =======
+=======
+>>>>>>> v3.18
 #define	RF_AC						0x00
 
 #define	RF_IQADJ_G1					0x01
@@ -3063,11 +3411,15 @@
 #define	BTXHTBW						0x80
 #define	BTXHTLENGTH					0xffff00
 #define	BTXHTSIG2					0xffffff
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	BTXHTSMOOTHING				0x1
 #define	BTXHTSOUNDING				0x2
 #define	BTXHTRESERVED				0x4
 #define	BTXHTAGGREATION				0x8
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	BTXHTSTBC				0x30
 #define	BTXHTADVANCECODING			0x40
@@ -3092,6 +3444,8 @@
 #define	BCCKTXLENGHT				0xffff0000
 #define	BCCKTXCRC16				0xffff
 =======
+=======
+>>>>>>> v3.18
 #define	BTXHTSTBC					0x30
 #define	BTXHTADVANCECODING			0x40
 #define	BTXHTSHORTGI				0x80
@@ -3114,12 +3468,16 @@
 #define	BCCKLENGTHEXT				0x8000
 #define	BCCKTXLENGHT				0xffff0000
 #define	BCCKTXCRC16					0xffff
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define	BCCKTXSTATUS				0x1
 #define	BOFDMTXSTATUS				0x2
 #define IS_BB_REG_OFFSET_92S(_offset)	\
 	((_offset >= 0x800) && (_offset <= 0xfff))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	BRFMOD					0x1
 #define	BJAPANMODE				0x2
@@ -3665,6 +4023,8 @@
 
 #define	REG_UN_USED_REGISTER			0x01bf
 =======
+=======
+>>>>>>> v3.18
 #define	BRFMOD						0x1
 #define	BJAPANMODE					0x2
 #define	BCCKTXSC					0x30
@@ -4208,6 +4568,9 @@
 #define	TUPDATE_RXCOUNTER		100
 
 #define	REG_UN_used_register		0x01bf
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* WOL bit information */
@@ -4215,6 +4578,7 @@
 #define	HAL92C_WOL_GTK_UPDATE_EVENT		BIT(1)
 #define	HAL92C_WOL_DISASSOC_EVENT		BIT(2)
 #define	HAL92C_WOL_DEAUTH_EVENT			BIT(3)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	HAL92C_WOL_FW_DISCONNECT_EVENT		BIT(4)
 
@@ -4225,6 +4589,8 @@
 #define		WOL_REASON_FW_DISCONNECT	BIT(4)
 
 =======
+=======
+>>>>>>> v3.18
 #define	HAL92C_WOL_FW_DISCONNECT_EVENT	BIT(4)
 
 #define		WOL_REASON_PTK_UPDATE		BIT(0)
@@ -4232,5 +4598,8 @@
 #define		WOL_REASON_DISASSOC			BIT(2)
 #define		WOL_REASON_DEAUTH			BIT(3)
 #define		WOL_REASON_FW_DISCONNECT	BIT(4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

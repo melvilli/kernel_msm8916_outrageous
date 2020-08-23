@@ -8,9 +8,15 @@
  */
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/leds.h>
+=======
+#include <linux/leds.h>
+#include <linux/platform_device.h>
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/leds.h>
 #include <linux/platform_device.h>
@@ -35,6 +41,12 @@ struct platform_device *__init gpio_led_register_device(
 	struct gpio_led_platform_data _pdata = *pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!pdata->num_leds)
+		return ERR_PTR(-EINVAL);
+
+>>>>>>> v3.18
 =======
 	if (!pdata->num_leds)
 		return ERR_PTR(-EINVAL);

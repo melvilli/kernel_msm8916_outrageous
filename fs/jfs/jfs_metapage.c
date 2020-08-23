@@ -417,7 +417,11 @@ static int metapage_writepage(struct page *page, struct writeback_control *wbc)
 			 */
 			inc_io(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!bio->bi_size)
+=======
+			if (!bio->bi_iter.bi_size)
+>>>>>>> v3.18
 =======
 			if (!bio->bi_iter.bi_size)
 >>>>>>> v3.18
@@ -443,7 +447,11 @@ static int metapage_writepage(struct page *page, struct writeback_control *wbc)
 		bio = bio_alloc(GFP_NOFS, 1);
 		bio->bi_bdev = inode->i_sb->s_bdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio->bi_sector = pblock << (inode->i_blkbits - 9);
+=======
+		bio->bi_iter.bi_sector = pblock << (inode->i_blkbits - 9);
+>>>>>>> v3.18
 =======
 		bio->bi_iter.bi_sector = pblock << (inode->i_blkbits - 9);
 >>>>>>> v3.18
@@ -461,7 +469,11 @@ static int metapage_writepage(struct page *page, struct writeback_control *wbc)
 		if (bio_add_page(bio, page, bio_bytes, bio_offset) < bio_bytes)
 				goto add_failed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!bio->bi_size)
+=======
+		if (!bio->bi_iter.bi_size)
+>>>>>>> v3.18
 =======
 		if (!bio->bi_iter.bi_size)
 >>>>>>> v3.18
@@ -530,7 +542,12 @@ static int metapage_readpage(struct file *fp, struct page *page)
 			bio = bio_alloc(GFP_NOFS, 1);
 			bio->bi_bdev = inode->i_sb->s_bdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bio->bi_sector = pblock << (inode->i_blkbits - 9);
+=======
+			bio->bi_iter.bi_sector =
+				pblock << (inode->i_blkbits - 9);
+>>>>>>> v3.18
 =======
 			bio->bi_iter.bi_sector =
 				pblock << (inode->i_blkbits - 9);
@@ -589,14 +606,20 @@ static int metapage_releasepage(struct page *page, gfp_t gfp_mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void metapage_invalidatepage(struct page *page, unsigned long offset)
 {
 	BUG_ON(offset);
 =======
+=======
+>>>>>>> v3.18
 static void metapage_invalidatepage(struct page *page, unsigned int offset,
 				    unsigned int length)
 {
 	BUG_ON(offset || length < PAGE_CACHE_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	BUG_ON(PageWriteback(page));
@@ -671,7 +694,11 @@ struct metapage *__get_metapage(struct inode *inode, unsigned long lblock,
 		if (mp->logical_size != size) {
 			jfs_error(inode->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  "__get_metapage: mp->logical_size != size");
+=======
+				  "get_mp->logical_size != size\n");
+>>>>>>> v3.18
 =======
 				  "get_mp->logical_size != size\n");
 >>>>>>> v3.18
@@ -686,8 +713,12 @@ struct metapage *__get_metapage(struct inode *inode, unsigned long lblock,
 			if (!new) {
 				jfs_error(inode->i_sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  "__get_metapage: using a "
 					  "discarded metapage");
+=======
+					  "using a discarded metapage\n");
+>>>>>>> v3.18
 =======
 					  "using a discarded metapage\n");
 >>>>>>> v3.18

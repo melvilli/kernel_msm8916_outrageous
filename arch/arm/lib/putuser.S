@@ -37,7 +37,11 @@ ENTRY(__put_user_1)
 1: TUSER(strb)	r2, [r0]
 	mov	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -65,7 +69,11 @@ ENTRY(__put_user_2)
 #endif	/* CONFIG_THUMB2_KERNEL */
 	mov	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -76,7 +84,11 @@ ENTRY(__put_user_4)
 4: TUSER(str)	r2, [r0]
 	mov	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -93,7 +105,11 @@ ENTRY(__put_user_8)
 #endif
 	mov	r0, #0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -102,7 +118,11 @@ ENDPROC(__put_user_8)
 __put_user_bad:
 	mov	r0, #-EFAULT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

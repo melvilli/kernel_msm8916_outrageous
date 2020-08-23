@@ -330,7 +330,10 @@ MACHINE_START(CM_T3517, "Compulab CM-T3517")
 	.init_early	= am35xx_init_early,
 	.init_irq	= omap3_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= cm_t3517_init,

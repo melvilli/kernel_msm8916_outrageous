@@ -4,7 +4,11 @@
  *
  * This code is based on drivers/scsi/mpt3sas/mpt3sas_base.h
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012  LSI Corporation
+=======
+ * Copyright (C) 2012-2014  LSI Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2014  LSI Corporation
 >>>>>>> v3.18
@@ -75,15 +79,21 @@
 #define MPT3SAS_AUTHOR	"LSI Corporation <DL-MPTFusionLinux@lsi.com>"
 #define MPT3SAS_DESCRIPTION	"LSI MPT Fusion SAS 3.0 Device Driver"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MPT3SAS_DRIVER_VERSION		"01.100.01.00"
 #define MPT3SAS_MAJOR_VERSION		1
 #define MPT3SAS_MINOR_VERSION		100
 #define MPT3SAS_BUILD_VERSION		1
 =======
+=======
+>>>>>>> v3.18
 #define MPT3SAS_DRIVER_VERSION		"04.100.00.00"
 #define MPT3SAS_MAJOR_VERSION		4
 #define MPT3SAS_MINOR_VERSION		100
 #define MPT3SAS_BUILD_VERSION		0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MPT3SAS_RELEASE_VERSION	00
 
@@ -142,8 +152,11 @@
 #define MPT_TARGET_FASTPATH_IO		0x08
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * Intel HBA branding
  */
@@ -163,6 +176,9 @@
 #define MPT3SAS_INTEL_RS3GC008_SSDID	0x3522
 #define MPT3SAS_INTEL_RS3FC044_SSDID	0x3523
 #define MPT3SAS_INTEL_RS3UC080_SSDID    0x3524
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -253,7 +269,10 @@ struct MPT3SAS_TARGET {
  * @eedp_type: 0(type_1), 1(type_2), 2(type_3)
  * @eedp_block_length: block size
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ata_command_pending: SATL passthrough outstanding for device
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -264,6 +283,7 @@ struct MPT3SAS_DEVICE {
 	u8	configured_lun;
 	u8	block;
 	u8	tlr_snoop_check;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Bug workaround for SATL handling: the mpt2/3sas firmware
@@ -276,6 +296,8 @@ struct MPT3SAS_DEVICE {
 	 * thing while a SATL command is pending.
 	 */
 	unsigned long ata_command_pending;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -324,13 +346,19 @@ struct _internal_cmd {
  * @slot: number number
  * @phy: phy identifier provided in sas device page 0
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @fast_path: fast path feature enable bit
  * @responding: used in _scsih_sas_device_mark_responding
 =======
+=======
+>>>>>>> v3.18
  * @responding: used in _scsih_sas_device_mark_responding
  * @fast_path: fast path feature enable bit
  * @pfa_led_on: flag for PFA LED status
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct _sas_device {
@@ -352,6 +380,10 @@ struct _sas_device {
 	u8	responding;
 	u8	fast_path;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8	pfa_led_on;
+>>>>>>> v3.18
 =======
 	u8	pfa_led_on;
 >>>>>>> v3.18
@@ -611,12 +643,18 @@ struct mpt3sas_port_facts {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct reply_post_struct {
 	Mpi2ReplyDescriptorsUnion_t	*reply_post_free;
 	dma_addr_t			reply_post_free_dma;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * enum mutex_type - task management mutex type
@@ -647,6 +685,10 @@ typedef void (*MPT3SAS_FLUSH_RUNNING_CMDS)(struct MPT3SAS_ADAPTER *ioc);
  * @bars: bitmask of BAR's that must be configured
  * @mask_interrupts: ignore interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @dma_mask: used to set the consistent dma mask
+>>>>>>> v3.18
 =======
  * @dma_mask: used to set the consistent dma mask
 >>>>>>> v3.18
@@ -766,14 +808,20 @@ typedef void (*MPT3SAS_FLUSH_RUNNING_CMDS)(struct MPT3SAS_ADAPTER *ioc);
  * @reply_free_host_index: tail index in pool to insert free replys
  * @reply_post_queue_depth: reply post queue depth
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @reply_post_free: pool for reply post (64bit descriptor)
  * @reply_post_free_dma:
 =======
+=======
+>>>>>>> v3.18
  * @reply_post_struct: struct for reply_post_free physical & virt address
  * @rdpq_array_capable: FW supports multiple reply queue addresses in ioc_init
  * @rdpq_array_enable: rdpq_array support is enabled in the driver
  * @rdpq_array_enable_assigned: this ensures that rdpq_array_enable flag
  *				is assigned only ones
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @reply_queue_count: number of reply queue's
  * @reply_queue_list: link list contaning the reply queue info
@@ -797,6 +845,10 @@ struct MPT3SAS_ADAPTER {
 	int		bars;
 	u8		mask_interrupts;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int		dma_mask;
+>>>>>>> v3.18
 =======
 	int		dma_mask;
 >>>>>>> v3.18
@@ -980,13 +1032,19 @@ struct MPT3SAS_ADAPTER {
 	/* reply post queue */
 	u16		reply_post_queue_depth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Mpi2ReplyDescriptorsUnion_t *reply_post_free;
 	dma_addr_t	reply_post_free_dma;
 =======
+=======
+>>>>>>> v3.18
 	struct reply_post_struct *reply_post;
 	u8		rdpq_array_capable;
 	u8		rdpq_array_enable;
 	u8		rdpq_array_enable_assigned;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct dma_pool *reply_post_free_dma_pool;
 	u8		reply_queue_count;
@@ -1087,7 +1145,11 @@ void mpt3sas_scsih_reset_handler(struct MPT3SAS_ADAPTER *ioc, int reset_phase);
 int mpt3sas_scsih_issue_tm(struct MPT3SAS_ADAPTER *ioc, u16 handle,
 	uint channel, uint id, uint lun, u8 type, u16 smid_task,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ulong timeout, unsigned long serial_number,  enum mutex_type m_type);
+=======
+	ulong timeout, enum mutex_type m_type);
+>>>>>>> v3.18
 =======
 	ulong timeout, enum mutex_type m_type);
 >>>>>>> v3.18

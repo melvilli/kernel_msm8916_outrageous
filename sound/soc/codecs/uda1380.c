@@ -109,7 +109,11 @@ static int uda1380_write(struct snd_soc_codec *codec, unsigned int reg,
 	 * codec DAI is active.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!codec->active && (reg >= UDA1380_MVOL))
+=======
+	if (!snd_soc_codec_is_active(codec) && (reg >= UDA1380_MVOL))
+>>>>>>> v3.18
 =======
 	if (!snd_soc_codec_is_active(codec) && (reg >= UDA1380_MVOL))
 >>>>>>> v3.18
@@ -242,6 +246,7 @@ static const char *uda1380_os_setting[] = {
 
 static const struct soc_enum uda1380_deemp_enum[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SOC_ENUM_SINGLE(UDA1380_DEEMP, 8, 5, uda1380_deemp),
 	SOC_ENUM_SINGLE(UDA1380_DEEMP, 0, 5, uda1380_deemp),
 };
@@ -262,6 +267,8 @@ static const struct soc_enum uda1380_sdet_enum =
 static const struct soc_enum uda1380_os_enum =
 	SOC_ENUM_SINGLE(UDA1380_MIXER, 0, 3, uda1380_os_setting);	/* OS */
 =======
+=======
+>>>>>>> v3.18
 	SOC_ENUM_SINGLE(UDA1380_DEEMP, 8, ARRAY_SIZE(uda1380_deemp),
 			uda1380_deemp),
 	SOC_ENUM_SINGLE(UDA1380_DEEMP, 0, ARRAY_SIZE(uda1380_deemp),
@@ -283,6 +290,9 @@ static SOC_ENUM_SINGLE_DECL(uda1380_sdet_enum,
 			    UDA1380_MIXER, 4, uda1380_sdet_setting);	/* SD_VALUE */
 static SOC_ENUM_SINGLE_DECL(uda1380_os_enum,
 			    UDA1380_MIXER, 0, uda1380_os_setting);	/* OS */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -593,8 +603,12 @@ static void uda1380_pcm_shutdown(struct snd_pcm_substream *substream,
 				 struct snd_soc_dai *dai)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct snd_soc_codec *codec = rtd->codec;
+=======
+	struct snd_soc_codec *codec = dai->codec;
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = dai->codec;
 >>>>>>> v3.18
@@ -827,7 +841,11 @@ static struct snd_soc_codec_driver soc_codec_dev_uda1380 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -877,7 +895,11 @@ static int __init uda1380_modinit(void)
 {
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -892,7 +914,11 @@ module_init(uda1380_modinit);
 static void __exit uda1380_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18

@@ -363,9 +363,12 @@ static int ar724x_pci_probe(struct platform_device *pdev)
 
 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "ctrl_base");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	apc->ctrl_base = devm_ioremap_resource(&pdev->dev, res);
@@ -374,9 +377,12 @@ static int ar724x_pci_probe(struct platform_device *pdev)
 
 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "cfg_base");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	apc->devcfg_base = devm_ioremap_resource(&pdev->dev, res);
@@ -385,9 +391,12 @@ static int ar724x_pci_probe(struct platform_device *pdev)
 
 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "crp_base");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	apc->crp_base = devm_ioremap_resource(&pdev->dev, res);

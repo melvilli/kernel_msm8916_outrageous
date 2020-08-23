@@ -39,13 +39,19 @@ struct rpc_cred *rpc_lookup_cred(void)
 EXPORT_SYMBOL_GPL(rpc_lookup_cred);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct rpc_cred *rpc_lookup_cred_nonblock(void)
 {
 	return rpcauth_lookupcred(&generic_auth, RPCAUTH_LOOKUP_RCU);
 }
 EXPORT_SYMBOL_GPL(rpc_lookup_cred_nonblock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Public call interface for looking up machine creds.
@@ -99,6 +105,10 @@ generic_create_cred(struct rpc_auth *auth, struct auth_cred *acred, int flags)
 	gcred->acred.gid = acred->gid;
 	gcred->acred.group_info = acred->group_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	gcred->acred.ac_flags = 0;
+>>>>>>> v3.18
 =======
 	gcred->acred.ac_flags = 0;
 >>>>>>> v3.18
@@ -196,7 +206,10 @@ void rpc_destroy_generic_auth(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Test the the current time (now) against the underlying credential key expiry
  * minus a timeout and setup notification.
@@ -263,6 +276,9 @@ out_put:
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct rpc_authops generic_auth_ops = {
 	.owner = THIS_MODULE,
@@ -270,6 +286,10 @@ static const struct rpc_authops generic_auth_ops = {
 	.lookup_cred = generic_lookup_cred,
 	.crcreate = generic_create_cred,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.key_timeout = generic_key_timeout,
+>>>>>>> v3.18
 =======
 	.key_timeout = generic_key_timeout,
 >>>>>>> v3.18
@@ -281,7 +301,10 @@ static struct rpc_auth generic_auth = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool generic_key_to_expire(struct rpc_cred *cred)
 {
 	struct auth_cred *acred = &container_of(cred, struct generic_cred,
@@ -295,6 +318,9 @@ static bool generic_key_to_expire(struct rpc_cred *cred)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct rpc_credops generic_credops = {
 	.cr_name = "Generic cred",
@@ -302,6 +328,10 @@ static const struct rpc_credops generic_credops = {
 	.crbind = generic_bind_cred,
 	.crmatch = generic_match,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.crkey_to_expire = generic_key_to_expire,
+>>>>>>> v3.18
 =======
 	.crkey_to_expire = generic_key_to_expire,
 >>>>>>> v3.18

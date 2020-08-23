@@ -30,6 +30,10 @@
 
 #include <mach/hardware.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18
@@ -83,8 +87,12 @@ static void usb_simtec_enableoc(struct s3c2410_hcd_info *info, int on)
 	if (on) {
 		ret = request_irq(BAST_IRQ_USBOC, usb_simtec_ocirq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  IRQF_DISABLED | IRQF_TRIGGER_RISING |
 				   IRQF_TRIGGER_FALLING,
+=======
+				  IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING,
+>>>>>>> v3.18
 =======
 				  IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING,
 >>>>>>> v3.18

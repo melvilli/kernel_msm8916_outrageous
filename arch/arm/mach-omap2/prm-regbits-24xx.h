@@ -17,6 +17,7 @@
 #include "prm2xxx.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Bits shared between registers */
 
 /* PRCM_IRQSTATUS_MPU, PM_IRQSTATUS_DSP, PRCM_IRQSTATUS_IVA shared bits */
@@ -288,6 +289,8 @@
 /* 2420 only */
 
 =======
+=======
+>>>>>>> v3.18
 #define OMAP24XX_EN_CORE_SHIFT 				0
 #define OMAP24XX_FORCESTATE_MASK			(1 << 18)
 #define OMAP24XX_AUTOIDLE_MASK				(1 << 0)
@@ -311,5 +314,8 @@
 #define OMAP24XX_SECU_WD_RST_SHIFT			5
 #define OMAP24XX_MPU_WD_RST_SHIFT			4
 #define OMAP24XX_SECU_VIOL_RST_SHIFT			3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

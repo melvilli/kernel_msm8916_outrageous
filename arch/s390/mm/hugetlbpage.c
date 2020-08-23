@@ -9,6 +9,7 @@
 #include <linux/hugetlb.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void set_huge_pte_at(struct mm_struct *mm, unsigned long addr,
 				   pte_t *pteptr, pte_t pteval)
@@ -25,6 +26,8 @@ void set_huge_pte_at(struct mm_struct *mm, unsigned long addr,
 
 	pmd_val(*pmdp) = pte_val(pteval);
 =======
+=======
+>>>>>>> v3.18
 static inline pmd_t __pte_to_pmd(pte_t pte)
 {
 	pmd_t pmd;
@@ -134,6 +137,9 @@ pte_t huge_ptep_get_and_clear(struct mm_struct *mm,
 	pmdp_flush_direct(mm, addr, pmdp);
 	pmd_val(*pmdp) = _SEGMENT_ENTRY_EMPTY;
 	return pte;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -171,7 +177,11 @@ void arch_release_hugepage(struct page *page)
 	if (!ptep)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_table((unsigned long *) ptep, _PAGE_TYPE_EMPTY,
+=======
+	clear_table((unsigned long *) ptep, _PAGE_INVALID,
+>>>>>>> v3.18
 =======
 	clear_table((unsigned long *) ptep, _PAGE_INVALID,
 >>>>>>> v3.18
@@ -234,11 +244,14 @@ int pud_huge(pud_t pud)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pmd_huge_support(void)
 {
 	return 1;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct page *follow_huge_pmd(struct mm_struct *mm, unsigned long address,

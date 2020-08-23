@@ -56,15 +56,21 @@ struct nouveau_vm {
 	struct nouveau_vmmgr *vmm;
 	struct nouveau_mm mm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int refcount;
 
 	struct list_head pgd_list;
 	atomic_t engref[64]; //NVDEV_SUBDEV_NR];
 =======
+=======
+>>>>>>> v3.18
 	struct kref refcount;
 
 	struct list_head pgd_list;
 	atomic_t engref[NVDEV_SUBDEV_NR];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct nouveau_vm_pgt *pgt;
@@ -125,9 +131,12 @@ int  nv04_vm_create(struct nouveau_vmmgr *, u64, u64, u64,
 void nv04_vmmgr_dtor(struct nouveau_object *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nv50_vm_flush_engine(struct nouveau_subdev *, int engine);
 void nvc0_vm_flush_engine(struct nouveau_subdev *, u64 addr, int type);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* nouveau_vm.c */
@@ -145,10 +154,13 @@ void nouveau_vm_map_at(struct nouveau_vma *, u64 offset, struct nouveau_mem *);
 void nouveau_vm_unmap(struct nouveau_vma *);
 void nouveau_vm_unmap_at(struct nouveau_vma *, u64 offset, u64 length);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nouveau_vm_map_sg(struct nouveau_vma *, u64 offset, u64 length,
 		       struct nouveau_mem *);
 void nouveau_vm_map_sg_table(struct nouveau_vma *vma, u64 delta, u64 length,
 		     struct nouveau_mem *mem);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

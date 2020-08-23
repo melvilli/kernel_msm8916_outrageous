@@ -22,6 +22,10 @@
 #include <linux/module.h>
 #include <linux/relay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/ieee80211_radiotap.h>
+>>>>>>> v3.18
 =======
 #include <net/ieee80211_radiotap.h>
 >>>>>>> v3.18
@@ -56,6 +60,7 @@ static int ath9k_btcoex_enable;
 module_param_named(btcoex_enable, ath9k_btcoex_enable, int, 0444);
 MODULE_PARM_DESC(btcoex_enable, "Enable wifi-BT coexistence");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ath9k_enable_diversity;
 module_param_named(enable_diversity, ath9k_enable_diversity, int, 0444);
@@ -160,6 +165,8 @@ static struct ieee80211_rate ath9k_legacy_rates[] = {
 	RATE(540, 0x0c, 0),
 };
 =======
+=======
+>>>>>>> v3.18
 static int ath9k_bt_ant_diversity;
 module_param_named(bt_ant_diversity, ath9k_bt_ant_diversity, int, 0444);
 MODULE_PARM_DESC(bt_ant_diversity, "Enable WLAN/BT RX antenna diversity");
@@ -177,6 +184,9 @@ MODULE_PARM_DESC(use_chanctx, "Enable channel context for concurrency");
 #endif /* CONFIG_ATH9K_CHANNEL_CONTEXT */
 
 bool is_ath9k_unloaded;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_MAC80211_LEDS
@@ -270,6 +280,7 @@ static unsigned int ath9k_reg_rmw(void *hw_priv, u32 reg_offset, u32 set, u32 cl
 /**************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void setup_ht_cap(struct ath_softc *sc,
 			 struct ieee80211_sta_ht_cap *ht_info)
 {
@@ -330,6 +341,8 @@ static void setup_ht_cap(struct ath_softc *sc,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void ath9k_reg_notifier(struct wiphy *wiphy,
 			       struct regulatory_request *request)
 {
@@ -343,9 +356,15 @@ static void ath9k_reg_notifier(struct wiphy *wiphy,
 	/* Set tx power */
 	if (ah->curchan) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sc->config.txpowlimit = 2 * ah->curchan->chan->max_power;
 		ath9k_ps_wakeup(sc);
 		ath9k_hw_set_txpowerlimit(ah, sc->config.txpowlimit, false);
+=======
+		sc->cur_chan->txpower = 2 * ah->curchan->chan->max_power;
+		ath9k_ps_wakeup(sc);
+		ath9k_hw_set_txpowerlimit(ah, sc->cur_chan->txpower, false);
+>>>>>>> v3.18
 =======
 		sc->cur_chan->txpower = 2 * ah->curchan->chan->max_power;
 		ath9k_ps_wakeup(sc);
@@ -372,7 +391,10 @@ int ath_descdma_setup(struct ath_softc *sc, struct ath_descdma *dd,
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 	u8 *ds;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ath_buf *bf;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i, bsize, desc_len;
@@ -427,6 +449,7 @@ int ath_descdma_setup(struct ath_softc *sc, struct ath_descdma *dd,
 
 	/* allocate buffers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bsize = sizeof(struct ath_buf) * nbuf;
 	bf = devm_kzalloc(sc->dev, bsize, GFP_KERNEL);
 	if (!bf)
@@ -455,6 +478,8 @@ int ath_descdma_setup(struct ath_softc *sc, struct ath_descdma *dd,
 		}
 		list_add_tail(&bf->list, head);
 =======
+=======
+>>>>>>> v3.18
 	if (is_tx) {
 		struct ath_buf *bf;
 
@@ -517,6 +542,9 @@ int ath_descdma_setup(struct ath_softc *sc, struct ath_descdma *dd,
 			}
 			list_add_tail(&bf->list, head);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -529,15 +557,21 @@ static int ath9k_init_queues(struct ath_softc *sc)
 	sc->beacon.beaconq = ath9k_hw_beaconq_setup(sc->sc_ah);
 	sc->beacon.cabq = ath_txq_setup(sc, ATH9K_TX_QUEUE_CAB, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	sc->config.cabqReadytime = ATH_CABQ_READY_TIME;
 	ath_cabq_update(sc);
 
 =======
+=======
+>>>>>>> v3.18
 	ath_cabq_update(sc);
 
 	sc->tx.uapsdq = ath_txq_setup(sc, ATH9K_TX_QUEUE_UAPSD, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < IEEE80211_NUM_ACS; i++) {
 		sc->tx.txq_map[i] = ath_txq_setup(sc, ATH9K_TX_QUEUE_DATA, i);
@@ -547,6 +581,7 @@ static int ath9k_init_queues(struct ath_softc *sc)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ath9k_init_channels_rates(struct ath_softc *sc)
 {
@@ -595,6 +630,8 @@ static int ath9k_init_channels_rates(struct ath_softc *sc)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void ath9k_init_misc(struct ath_softc *sc)
 {
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
@@ -603,8 +640,12 @@ static void ath9k_init_misc(struct ath_softc *sc)
 	setup_timer(&common->ani.timer, ath_ani_calibrate, (unsigned long)sc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sc->last_rssi = ATH_RSSI_DUMMY_MARKER;
 	sc->config.txpowlimit = ATH_TXPOWER_MAX;
+=======
+	common->last_rssi = ATH_RSSI_DUMMY_MARKER;
+>>>>>>> v3.18
 =======
 	common->last_rssi = ATH_RSSI_DUMMY_MARKER;
 >>>>>>> v3.18
@@ -626,7 +667,10 @@ static void ath9k_init_misc(struct ath_softc *sc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ath9k_init_pcoem_platform(struct ath_softc *sc)
 {
 	struct ath_hw *ah = sc->sc_ah;
@@ -692,6 +736,9 @@ static void ath9k_init_pcoem_platform(struct ath_softc *sc)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ath9k_eeprom_request_cb(const struct firmware *eeprom_blob,
 				    void *ctx)
@@ -739,7 +786,10 @@ static void ath9k_eeprom_release(struct ath_softc *sc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ath9k_init_soc_platform(struct ath_softc *sc)
 {
 	struct ath9k_platform_data *pdata = sc->dev->platform_data;
@@ -761,6 +811,9 @@ static int ath9k_init_soc_platform(struct ath_softc *sc)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 			    const struct ath_bus_ops *bus_ops)
@@ -768,6 +821,10 @@ static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 	struct ath9k_platform_data *pdata = sc->dev->platform_data;
 	struct ath_hw *ah = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ath9k_hw_capabilities *pCap;
+>>>>>>> v3.18
 =======
 	struct ath9k_hw_capabilities *pCap;
 >>>>>>> v3.18
@@ -786,6 +843,7 @@ static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 	ah->reg_ops.write = ath9k_iowrite32;
 	ah->reg_ops.rmw = ath9k_reg_rmw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&ah->intr_ref_cnt, -1);
 	sc->sc_ah = ah;
 
@@ -793,6 +851,8 @@ static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 
 	if (!pdata) {
 =======
+=======
+>>>>>>> v3.18
 	sc->sc_ah = ah;
 	pCap = &ah->caps;
 
@@ -805,6 +865,9 @@ static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 		sc->cur_chan->hw_queue_base = 0;
 
 	if (!pdata || pdata->use_eeprom) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ah->ah_flags |= AH_USE_EEPROM;
 		sc->sc_ah->led_pin = -1;
@@ -818,7 +881,10 @@ static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	common = ath9k_hw_common(ah);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	common->ops = &ah->reg_ops;
@@ -831,6 +897,7 @@ static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 	common->disable_ani = false;
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Enable Antenna diversity only when BTCOEX is disabled
 	 * and the user manually requests the feature.
@@ -847,6 +914,8 @@ static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 	spin_lock_init(&sc->debug.samp_lock);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	 * Platform quirks.
 	 */
 	ath9k_init_pcoem_platform(sc);
@@ -871,11 +940,15 @@ static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 	spin_lock_init(&sc->sc_pm_lock);
 	spin_lock_init(&sc->chan_lock);
 	mutex_init(&sc->mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tasklet_init(&sc->intr_tq, ath9k_tasklet, (unsigned long)sc);
 	tasklet_init(&sc->bcon_tasklet, ath9k_beacon_tasklet,
 		     (unsigned long)sc);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	INIT_WORK(&sc->hw_reset_work, ath_reset_work);
 	INIT_WORK(&sc->hw_check_work, ath_hw_check);
@@ -883,12 +956,17 @@ static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 	INIT_DELAYED_WORK(&sc->hw_pll_work, ath_hw_pll_work);
 	setup_timer(&sc->rx_poll_timer, ath_rx_poll, (unsigned long)sc);
 =======
+=======
+>>>>>>> v3.18
 	setup_timer(&sc->sleep_timer, ath_ps_full_sleep, (unsigned long)sc);
 	INIT_WORK(&sc->hw_reset_work, ath_reset_work);
 	INIT_WORK(&sc->paprd_work, ath_paprd_calibrate);
 	INIT_DELAYED_WORK(&sc->hw_pll_work, ath_hw_pll_work);
 
 	ath9k_init_channel_context(sc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -899,12 +977,15 @@ static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 	common->cachelsz = csz << 2; /* convert to bytes */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata && pdata->eeprom_name) {
 		ret = ath9k_eeprom_request(sc, pdata->eeprom_name);
 		if (ret)
 			return ret;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Initializes the hardware for all supported chipsets */
@@ -924,13 +1005,19 @@ static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 		goto err_btcoex;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ath9k_init_channels_rates(sc);
 =======
+=======
+>>>>>>> v3.18
 	ret = ath9k_cmn_init_channels_rates(common);
 	if (ret)
 		goto err_btcoex;
 
 	ret = ath9k_init_p2p(sc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		goto err_btcoex;
@@ -939,6 +1026,11 @@ static int ath9k_init_softc(u16 devid, struct ath_softc *sc,
 	ath9k_init_misc(sc);
 	ath_fill_led_pin(sc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ath_chanctx_init(sc);
+	ath9k_offchannel_init(sc);
+>>>>>>> v3.18
 =======
 	ath_chanctx_init(sc);
 	ath9k_offchannel_init(sc);
@@ -958,6 +1050,10 @@ err_queues:
 err_hw:
 	ath9k_eeprom_release(sc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev_kfree_skb_any(sc->tx99_skb);
+>>>>>>> v3.18
 =======
 	dev_kfree_skb_any(sc->tx99_skb);
 >>>>>>> v3.18
@@ -970,6 +1066,7 @@ static void ath9k_init_band_txpower(struct ath_softc *sc, int band)
 	struct ieee80211_channel *chan;
 	struct ath_hw *ah = sc->sc_ah;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 
 	sband = &sc->sbands[band];
@@ -978,6 +1075,8 @@ static void ath9k_init_band_txpower(struct ath_softc *sc, int band)
 		ah->curchan = &ah->channels[chan->hw_value];
 		ath9k_cmn_update_ichannel(ah->curchan, chan, NL80211_CHAN_HT20);
 =======
+=======
+>>>>>>> v3.18
 	struct ath_common *common = ath9k_hw_common(ah);
 	struct cfg80211_chan_def chandef;
 	int i;
@@ -988,6 +1087,9 @@ static void ath9k_init_band_txpower(struct ath_softc *sc, int band)
 		ah->curchan = &ah->channels[chan->hw_value];
 		cfg80211_chandef_create(&chandef, chan, NL80211_CHAN_HT20);
 		ath9k_cmn_get_channel(sc->hw, ah, &chandef);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ath9k_hw_set_txpowerlimit(ah, MAX_RATE_POWER, true);
 	}
@@ -1006,6 +1108,7 @@ static void ath9k_init_txpower_limits(struct ath_softc *sc)
 	ah->curchan = curchan;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void ath9k_reload_chainmask_settings(struct ath_softc *sc)
 {
@@ -1026,10 +1129,15 @@ static const struct ieee80211_iface_limit if_limits[] = {
 static const struct ieee80211_iface_limit if_limits[] = {
 	{ .max = 2048,	.types = BIT(NL80211_IFTYPE_STATION) },
 >>>>>>> v3.18
+=======
+static const struct ieee80211_iface_limit if_limits[] = {
+	{ .max = 2048,	.types = BIT(NL80211_IFTYPE_STATION) },
+>>>>>>> v3.18
 	{ .max = 8,	.types =
 #ifdef CONFIG_MAC80211_MESH
 				 BIT(NL80211_IFTYPE_MESH_POINT) |
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 				 BIT(NL80211_IFTYPE_AP) |
 				 BIT(NL80211_IFTYPE_P2P_GO) },
@@ -1039,6 +1147,8 @@ static const struct ieee80211_iface_limit if_limits[] = {
 static const struct ieee80211_iface_limit if_dfs_limits[] = {
 	{ .max = 1,	.types = BIT(NL80211_IFTYPE_AP) },
 =======
+=======
+>>>>>>> v3.18
 				 BIT(NL80211_IFTYPE_AP) },
 	{ .max = 1,	.types = BIT(NL80211_IFTYPE_P2P_CLIENT) |
 				 BIT(NL80211_IFTYPE_P2P_GO) },
@@ -1076,6 +1186,9 @@ static const struct ieee80211_iface_limit if_dfs_limits[] = {
 				 BIT(NL80211_IFTYPE_MESH_POINT) |
 #endif
 				 BIT(NL80211_IFTYPE_ADHOC) },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1089,7 +1202,10 @@ static const struct ieee80211_iface_combination if_comb[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.limits = wds_limits,
 		.n_limits = ARRAY_SIZE(wds_limits),
 		.max_interfaces = 2048,
@@ -1098,12 +1214,16 @@ static const struct ieee80211_iface_combination if_comb[] = {
 	},
 #ifdef CONFIG_ATH9K_DFS_CERTIFIED
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.limits = if_dfs_limits,
 		.n_limits = ARRAY_SIZE(if_dfs_limits),
 		.max_interfaces = 1,
 		.num_different_channels = 1,
 		.beacon_int_infra_match = true,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.radar_detect_widths =	BIT(NL80211_CHAN_NO_HT) |
 					BIT(NL80211_CHAN_HT20),
@@ -1112,6 +1232,8 @@ static const struct ieee80211_iface_combination if_comb[] = {
 
 void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 =======
+=======
+>>>>>>> v3.18
 		.radar_detect_widths =	BIT(NL80211_CHAN_WIDTH_20_NOHT) |
 					BIT(NL80211_CHAN_WIDTH_20),
 	}
@@ -1145,6 +1267,9 @@ static void ath9k_set_mcc_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 #endif /* CONFIG_ATH9K_CHANNEL_CONTEXT */
 
 static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ath_hw *ah = sc->sc_ah;
@@ -1154,7 +1279,10 @@ static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 		IEEE80211_HW_HOST_BROADCAST_PS_BUFFERING |
 		IEEE80211_HW_SIGNAL_DBM |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IEEE80211_HW_SUPPORTS_PS |
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		IEEE80211_HW_PS_NULLFUNC_STACK |
@@ -1164,9 +1292,12 @@ static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 		IEEE80211_HW_SUPPORTS_HT_CCK_RATES;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sc->sc_ah->caps.hw_caps & ATH9K_HW_CAP_HT)
 		 hw->flags |= IEEE80211_HW_AMPDU_AGGREGATION;
 =======
+=======
+>>>>>>> v3.18
 	if (ath9k_ps_enable)
 		hw->flags |= IEEE80211_HW_SUPPORTS_PS;
 
@@ -1177,11 +1308,15 @@ static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 			hw->radiotap_mcs_details |=
 				IEEE80211_RADIOTAP_MCS_HAVE_STBC;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (AR_SREV_9160_10_OR_LATER(sc->sc_ah) || ath9k_modparam_nohwcrypt)
 		hw->flags |= IEEE80211_HW_MFP_CAPABLE;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hw->wiphy->interface_modes =
 		BIT(NL80211_IFTYPE_P2P_GO) |
@@ -1195,6 +1330,8 @@ static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 	hw->wiphy->iface_combinations = if_comb;
 	hw->wiphy->n_iface_combinations = ARRAY_SIZE(if_comb);
 =======
+=======
+>>>>>>> v3.18
 	hw->wiphy->features |= NL80211_FEATURE_ACTIVE_MONITOR |
 			       NL80211_FEATURE_AP_MODE_CHAN_WIDTH_CHANGE |
 			       NL80211_FEATURE_P2P_GO_CTWIN;
@@ -1212,6 +1349,9 @@ static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 			hw->wiphy->iface_combinations = if_comb;
 			hw->wiphy->n_iface_combinations = ARRAY_SIZE(if_comb);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hw->wiphy->flags &= ~WIPHY_FLAG_PS_ON_BY_DEFAULT;
@@ -1219,6 +1359,7 @@ static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 	hw->wiphy->flags |= WIPHY_FLAG_IBSS_RSN;
 	hw->wiphy->flags |= WIPHY_FLAG_SUPPORTS_TDLS;
 	hw->wiphy->flags |= WIPHY_FLAG_HAS_REMAIN_ON_CHANNEL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #ifdef CONFIG_PM_SLEEP
@@ -1248,6 +1389,8 @@ static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 	hw->vif_data_size = sizeof(struct ath_vif);
 	hw->extra_tx_headroom = 4;
 =======
+=======
+>>>>>>> v3.18
 	hw->wiphy->flags |= WIPHY_FLAG_SUPPORTS_5_10_MHZ;
 	hw->wiphy->flags |= WIPHY_FLAG_HAS_CHANNEL_SWITCH;
 	hw->wiphy->flags |= WIPHY_FLAG_AP_UAPSD;
@@ -1258,6 +1401,9 @@ static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 	hw->max_rate_tries = 10;
 	hw->sta_data_size = sizeof(struct ath_node);
 	hw->vif_data_size = sizeof(struct ath_vif);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hw->wiphy->available_antennas_rx = BIT(ah->caps.max_rxchains) - 1;
@@ -1273,6 +1419,7 @@ static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 	if (sc->sc_ah->caps.hw_caps & ATH9K_HW_CAP_2GHZ)
 		hw->wiphy->bands[IEEE80211_BAND_2GHZ] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			&sc->sbands[IEEE80211_BAND_2GHZ];
 	if (sc->sc_ah->caps.hw_caps & ATH9K_HW_CAP_5GHZ)
 		hw->wiphy->bands[IEEE80211_BAND_5GHZ] =
@@ -1280,6 +1427,8 @@ static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 
 	ath9k_reload_chainmask_settings(sc);
 =======
+=======
+>>>>>>> v3.18
 			&common->sbands[IEEE80211_BAND_2GHZ];
 	if (sc->sc_ah->caps.hw_caps & ATH9K_HW_CAP_5GHZ)
 		hw->wiphy->bands[IEEE80211_BAND_5GHZ] =
@@ -1290,6 +1439,9 @@ static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 #endif
 	ath9k_init_wow(hw);
 	ath9k_cmn_reload_chainmask(ah);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	SET_IEEE80211_PERM_ADDR(hw, common->macaddr);
@@ -1314,6 +1466,12 @@ int ath9k_init_device(u16 devid, struct ath_softc *sc,
 	ath9k_set_hw_capab(sc, hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Will be cleared in ath9k_start() */
+	set_bit(ATH_OP_INVALID, &common->op_flags);
+
+>>>>>>> v3.18
 =======
 	/* Will be cleared in ath9k_start() */
 	set_bit(ATH_OP_INVALID, &common->op_flags);
@@ -1389,6 +1547,10 @@ static void ath9k_deinit_softc(struct ath_softc *sc)
 	int i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ath9k_deinit_p2p(sc);
+>>>>>>> v3.18
 =======
 	ath9k_deinit_p2p(sc);
 >>>>>>> v3.18
@@ -1399,6 +1561,10 @@ static void ath9k_deinit_softc(struct ath_softc *sc)
 			ath_tx_cleanupq(sc, &sc->tx.txq[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	del_timer_sync(&sc->sleep_timer);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&sc->sleep_timer);
 >>>>>>> v3.18
@@ -1435,6 +1601,7 @@ static int __init ath9k_init(void)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Register rate control algorithm */
 	error = ath_rate_control_register();
 	if (error != 0) {
@@ -1445,12 +1612,18 @@ static int __init ath9k_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	error = ath_pci_init();
 	if (error < 0) {
 		pr_err("No PCI devices found, driver not installed\n");
 		error = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_rate_unregister;
+=======
+		goto err_out;
+>>>>>>> v3.18
 =======
 		goto err_out;
 >>>>>>> v3.18
@@ -1467,9 +1640,12 @@ static int __init ath9k_init(void)
  err_pci_exit:
 	ath_pci_exit();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
  err_rate_unregister:
 	ath_rate_control_unregister();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  err_out:
@@ -1483,7 +1659,10 @@ static void __exit ath9k_exit(void)
 	ath_ahb_exit();
 	ath_pci_exit();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ath_rate_control_unregister();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pr_info("%s: Driver unloaded\n", dev_info);

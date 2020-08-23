@@ -787,7 +787,11 @@ int fast_timer_init(void)
 #endif /* PROC_FS */
 		if (request_irq(TIMER0_INTR_VECT, timer_trig_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				IRQF_SHARED | IRQF_DISABLED,
+=======
+				IRQF_SHARED,
+>>>>>>> v3.18
 =======
 				IRQF_SHARED,
 >>>>>>> v3.18

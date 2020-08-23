@@ -42,7 +42,11 @@ static ssize_t version_show(struct kobject *kobj, struct kobj_attribute *attr,
 }
 static struct kobj_attribute attr_version =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ATTR(interface_revision, S_IFREG | S_IRUGO, version_show, NULL);
+=======
+	__ATTR(interface_revision, S_IRUGO, version_show, NULL);
+>>>>>>> v3.18
 =======
 	__ATTR(interface_revision, S_IRUGO, version_show, NULL);
 >>>>>>> v3.18

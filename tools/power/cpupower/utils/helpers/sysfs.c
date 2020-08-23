@@ -82,7 +82,11 @@ int sysfs_is_cpu_online(unsigned int cpu)
 
 	value = strtoull(linebuf, &endp, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (value > 1 || value < 0)
+=======
+	if (value > 1)
+>>>>>>> v3.18
 =======
 	if (value > 1)
 >>>>>>> v3.18
@@ -94,7 +98,10 @@ int sysfs_is_cpu_online(unsigned int cpu)
 /* CPUidle idlestate specific /sys/devices/system/cpu/cpuX/cpuidle/ access */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* CPUidle idlestate specific /sys/devices/system/cpu/cpuX/cpuidle/ access */
 
@@ -122,6 +129,9 @@ unsigned int sysfs_idlestate_file_exists(unsigned int cpu,
 	return 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * helper function to read file from /sys into given buffer
@@ -156,7 +166,10 @@ unsigned int sysfs_idlestate_read_file(unsigned int cpu, unsigned int idlestate,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* 
  * helper function to write a new value to a /sys file
  * fname is a relative path under "../cpuX/cpuidle/cstateY/" dir
@@ -191,6 +204,9 @@ unsigned int sysfs_idlestate_write_file(unsigned int cpu,
 	return (unsigned int) numwrite;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* read access to files which contain one numeric value */
 
@@ -200,6 +216,10 @@ enum idlestate_value {
 	IDLESTATE_LATENCY,
 	IDLESTATE_TIME,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	IDLESTATE_DISABLE,
+>>>>>>> v3.18
 =======
 	IDLESTATE_DISABLE,
 >>>>>>> v3.18
@@ -212,6 +232,10 @@ static const char *idlestate_value_files[MAX_IDLESTATE_VALUE_FILES] = {
 	[IDLESTATE_LATENCY] = "latency",
 	[IDLESTATE_TIME]  = "time",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[IDLESTATE_DISABLE]  = "disable",
+>>>>>>> v3.18
 =======
 	[IDLESTATE_DISABLE]  = "disable",
 >>>>>>> v3.18
@@ -285,9 +309,12 @@ static char *sysfs_idlestate_get_one_string(unsigned int cpu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long sysfs_get_idlestate_latency(unsigned int cpu,
 					unsigned int idlestate)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Returns:
  *    1  if disabled
@@ -341,6 +368,9 @@ int sysfs_idlestate_disable(unsigned int cpu,
 
 unsigned long sysfs_get_idlestate_latency(unsigned int cpu,
 					  unsigned int idlestate)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return sysfs_idlestate_get_one_value(cpu, idlestate, IDLESTATE_LATENCY);
@@ -374,7 +404,11 @@ char *sysfs_get_idlestate_desc(unsigned int cpu, unsigned int idlestate)
  * Zero if cpuidle does not export any C-states
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int sysfs_get_idlestate_count(unsigned int cpu)
+=======
+unsigned int sysfs_get_idlestate_count(unsigned int cpu)
+>>>>>>> v3.18
 =======
 unsigned int sysfs_get_idlestate_count(unsigned int cpu)
 >>>>>>> v3.18

@@ -53,7 +53,10 @@ struct proc_dir_entry {
 union proc_op {
 	int (*proc_get_link)(struct dentry *, struct path *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*proc_read)(struct task_struct *task, char *page);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int (*proc_show)(struct seq_file *m,
@@ -116,15 +119,21 @@ static inline int task_dumpable(struct task_struct *task)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned name_to_int(struct dentry *dentry)
 {
 	const char *name = dentry->d_name.name;
 	int len = dentry->d_name.len;
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned name_to_int(const struct qstr *qstr)
 {
 	const char *name = qstr->name;
 	int len = qstr->len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned n = 0;
 
@@ -176,7 +185,11 @@ extern struct inode *proc_pid_make_inode(struct super_block *, struct task_struc
 extern int pid_revalidate(struct dentry *, unsigned int);
 extern int pid_delete_dentry(const struct dentry *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int proc_pid_readdir(struct file *, void *, filldir_t);
+=======
+extern int proc_pid_readdir(struct file *, struct dir_context *);
+>>>>>>> v3.18
 =======
 extern int proc_pid_readdir(struct file *, struct dir_context *);
 >>>>>>> v3.18
@@ -185,9 +198,15 @@ extern loff_t mem_lseek(struct file *, loff_t, int);
 
 /* Lookups */
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct dentry *instantiate_t(struct inode *, struct dentry *,
 				     struct task_struct *, const void *);
 extern int proc_fill_cache(struct file *, void *, filldir_t, const char *, int,
+=======
+typedef int instantiate_t(struct inode *, struct dentry *,
+				     struct task_struct *, const void *);
+extern bool proc_fill_cache(struct file *, struct dir_context *, const char *, int,
+>>>>>>> v3.18
 =======
 typedef int instantiate_t(struct inode *, struct dentry *,
 				     struct task_struct *, const void *);
@@ -199,6 +218,7 @@ extern bool proc_fill_cache(struct file *, struct dir_context *, const char *, i
  * generic.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern spinlock_t proc_subdir_lock;
 
 extern struct dentry *proc_lookup(struct inode *, struct dentry *, unsigned int);
@@ -207,11 +227,16 @@ extern struct dentry *proc_lookup_de(struct proc_dir_entry *, struct inode *,
 extern int proc_readdir(struct file *, void *, filldir_t);
 extern int proc_readdir_de(struct proc_dir_entry *, struct file *, void *, filldir_t);
 =======
+=======
+>>>>>>> v3.18
 extern struct dentry *proc_lookup(struct inode *, struct dentry *, unsigned int);
 extern struct dentry *proc_lookup_de(struct proc_dir_entry *, struct inode *,
 				     struct dentry *);
 extern int proc_readdir(struct file *, struct dir_context *);
 extern int proc_readdir_de(struct proc_dir_entry *, struct file *, struct dir_context *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct proc_dir_entry *pde_get(struct proc_dir_entry *pde)
@@ -231,10 +256,15 @@ struct pde_opener {
 	struct completion *c;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct inode_operations proc_link_inode_operations;
 
 extern const struct inode_operations proc_pid_link_inode_operations;
 extern const struct file_operations proc_reclaim_operations;
+=======
+
+extern const struct inode_operations proc_pid_link_inode_operations;
+>>>>>>> v3.18
 =======
 
 extern const struct inode_operations proc_pid_link_inode_operations;
@@ -247,6 +277,7 @@ extern void proc_entry_rundown(struct proc_dir_entry *);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * proc_devtree.c
  */
 #ifdef CONFIG_PROC_DEVICETREE
@@ -254,6 +285,8 @@ extern void proc_device_tree_init(void);
 #endif
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * proc_namespaces.c
@@ -280,13 +313,19 @@ extern int proc_setup_self(struct super_block *);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * proc_thread_self.c
  */
 extern int proc_setup_thread_self(struct super_block *);
 extern void proc_thread_self_init(void);
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * proc_sysctl.c
  */
@@ -320,8 +359,14 @@ extern int proc_remount(struct super_block *, int *, char *);
  */
 struct proc_maps_private {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pid *pid;
 	struct task_struct *task;
+=======
+	struct inode *inode;
+	struct task_struct *task;
+	struct mm_struct *mm;
+>>>>>>> v3.18
 =======
 	struct inode *inode;
 	struct task_struct *task;
@@ -336,6 +381,11 @@ struct proc_maps_private {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct mm_struct *proc_mem_open(struct inode *inode, unsigned int mode);
+
+>>>>>>> v3.18
 =======
 struct mm_struct *proc_mem_open(struct inode *inode, unsigned int mode);
 

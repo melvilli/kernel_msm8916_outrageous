@@ -24,7 +24,11 @@
  *
  * Compile Options
 <<<<<<< HEAD
+<<<<<<< HEAD
  * - CONFIG_USB_GADGET_DEBUG_FILES: enable debug facilities
+=======
+ * - CONFIG_USB_CHIPIDEA_DEBUG: enable debug facilities
+>>>>>>> v3.18
 =======
  * - CONFIG_USB_CHIPIDEA_DEBUG: enable debug facilities
 >>>>>>> v3.18
@@ -47,11 +51,15 @@
  *
  * TODO List
 <<<<<<< HEAD
+<<<<<<< HEAD
  * - OTG
  * - Isochronous & Interrupt Traffic
  * - Handle requests which spawns into several TDs
  * - GET_STATUS(device) - always reports 0
  * - Gadget API (majority of optional features)
+=======
+ * - Suspend & Remote Wakeup
+>>>>>>> v3.18
 =======
  * - Suspend & Remote Wakeup
 >>>>>>> v3.18
@@ -72,11 +80,17 @@
 #include <linux/usb/otg.h>
 #include <linux/usb/chipidea.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/usb/of.h>
 #include <linux/of.h>
 #include <linux/phy.h>
 #include <linux/regulator/consumer.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "ci.h"
@@ -84,6 +98,7 @@
 #include "bits.h"
 #include "host.h"
 #include "debug.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* Controller register map */
@@ -145,6 +160,8 @@ static int hw_alloc_regmap(struct ci13xxx *ci, bool is_lpm)
 		return -ENOMEM;
 
 =======
+=======
+>>>>>>> v3.18
 #include "otg.h"
 #include "otg_fsm.h"
 
@@ -197,6 +214,9 @@ static int hw_alloc_regmap(struct ci_hdrc *ci, bool is_lpm)
 {
 	int i;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < OP_ENDPTCTRL; i++)
 		ci->hw_bank.regmap[i] =
@@ -215,7 +235,10 @@ static int hw_alloc_regmap(struct ci_hdrc *ci, bool is_lpm)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * hw_read_intr_enable: returns interrupt enable register
  *
  * @ci: the controller
@@ -240,6 +263,9 @@ u32 hw_read_intr_status(struct ci_hdrc *ci)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * hw_port_test_set: writes port test mode (execute without interruption)
  * @mode: new value
@@ -247,7 +273,11 @@ u32 hw_read_intr_status(struct ci_hdrc *ci)
  * This function returns an error code
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hw_port_test_set(struct ci13xxx *ci, u8 mode)
+=======
+int hw_port_test_set(struct ci_hdrc *ci, u8 mode)
+>>>>>>> v3.18
 =======
 int hw_port_test_set(struct ci_hdrc *ci, u8 mode)
 >>>>>>> v3.18
@@ -265,23 +295,32 @@ int hw_port_test_set(struct ci_hdrc *ci, u8 mode)
  * hw_port_test_get: reads port test mode value
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This function returns port test mode value
  */
 u8 hw_port_test_get(struct ci13xxx *ci)
 =======
+=======
+>>>>>>> v3.18
  * @ci: the controller
  *
  * This function returns port test mode value
  */
 u8 hw_port_test_get(struct ci_hdrc *ci)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return hw_read(ci, OP_PORTSC, PORTSC_PTC) >> __ffs(PORTSC_PTC);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hw_device_init(struct ci13xxx *ci, void __iomem *base)
 =======
+=======
+>>>>>>> v3.18
 /* The PHY enters/leaves low power mode */
 static void ci_hdrc_enter_lpm(struct ci_hdrc *ci, bool enable)
 {
@@ -303,6 +342,9 @@ static void ci_hdrc_enter_lpm(struct ci_hdrc *ci, bool enable)
 }
 
 static int hw_device_init(struct ci_hdrc *ci, void __iomem *base)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 reg;
@@ -319,7 +361,12 @@ static int hw_device_init(struct ci_hdrc *ci, void __iomem *base)
 		__ffs(HCCPARAMS_LEN);
 	ci->hw_bank.lpm  = reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw_alloc_regmap(ci, !!reg);
+=======
+	if (reg)
+		hw_alloc_regmap(ci, !!reg);
+>>>>>>> v3.18
 =======
 	if (reg)
 		hw_alloc_regmap(ci, !!reg);
@@ -336,7 +383,10 @@ static int hw_device_init(struct ci_hdrc *ci, void __iomem *base)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ci_hdrc_enter_lpm(ci, false);
 
 	/* Disable all interrupts bits */
@@ -345,6 +395,9 @@ static int hw_device_init(struct ci_hdrc *ci, void __iomem *base)
 	/* Clear all interrupts status bits*/
 	hw_write(ci, OP_USBSTS, 0xffffffff, 0xffffffff);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_dbg(ci->dev, "ChipIdea HDRC found, lpm: %d; cap: %p op: %p\n",
 		ci->hw_bank.lpm, ci->hw_bank.cap, ci->hw_bank.op);
@@ -359,7 +412,10 @@ static int hw_device_init(struct ci_hdrc *ci, void __iomem *base)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void hw_phymode_configure(struct ci_hdrc *ci)
 {
 	u32 portsc, lpm, sts = 0;
@@ -434,6 +490,9 @@ static int ci_usb_phy_init(struct ci_hdrc *ci)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * hw_device_reset: resets chip (execute without interruption)
@@ -442,10 +501,15 @@ static int ci_usb_phy_init(struct ci_hdrc *ci)
  * This function returns an error code
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hw_device_reset(struct ci13xxx *ci, u32 mode)
 {
 	int delay_count = 25; /* 250 usec */
 
+=======
+int hw_device_reset(struct ci_hdrc *ci, u32 mode)
+{
+>>>>>>> v3.18
 =======
 int hw_device_reset(struct ci_hdrc *ci, u32 mode)
 {
@@ -456,6 +520,7 @@ int hw_device_reset(struct ci_hdrc *ci, u32 mode)
 
 	hw_write(ci, OP_USBCMD, USBCMD_RST, USBCMD_RST);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (delay_count-- && hw_read(ci, OP_USBCMD, USBCMD_RST))
 		udelay(10);
 	if (delay_count < 0)
@@ -465,6 +530,8 @@ int hw_device_reset(struct ci_hdrc *ci, u32 mode)
 		ci->platdata->notify_event(ci,
 			CI13XXX_CONTROLLER_RESET_EVENT);
 =======
+=======
+>>>>>>> v3.18
 	while (hw_read(ci, OP_USBCMD, USBCMD_RST))
 		udelay(10);		/* not RTOS friendly */
 
@@ -481,6 +548,9 @@ int hw_device_reset(struct ci_hdrc *ci, u32 mode)
 		else
 			hw_write(ci, OP_PORTSC, PORTSC_PFSC, PORTSC_PFSC);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* USBMODE should be configured step by step */
@@ -489,6 +559,7 @@ int hw_device_reset(struct ci_hdrc *ci, u32 mode)
 	/* HW >= 2.3 */
 	hw_write(ci, OP_USBMODE, USBMODE_SLOM, USBMODE_SLOM);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * ITC (Interrupt Threshold Control) field is to set the maximum
@@ -507,6 +578,8 @@ int hw_device_reset(struct ci_hdrc *ci, u32 mode)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (hw_read(ci, OP_USBMODE, USBMODE_CM) != mode) {
 		pr_err("cannot enter in %s mode", ci_role(ci)->name);
 		pr_err("lpm = %i", ci->hw_bank.lpm);
@@ -517,6 +590,7 @@ int hw_device_reset(struct ci_hdrc *ci, u32 mode)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * ci_otg_role - pick role based on ID pin state
  * @ci: the controller
@@ -550,6 +624,8 @@ static void ci_role_work(struct work_struct *work)
 
 	enable_irq(ci->irq);
 =======
+=======
+>>>>>>> v3.18
  * hw_wait_reg: wait the register value
  *
  * Sometimes, it needs to wait register value before going on.
@@ -579,11 +655,15 @@ int hw_wait_reg(struct ci_hdrc *ci, enum ci_hw_regs reg, u32 mask,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static irqreturn_t ci_irq(int irq, void *data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ci13xxx *ci = data;
 	irqreturn_t ret = IRQ_NONE;
@@ -604,6 +684,8 @@ static irqreturn_t ci_irq(int irq, void *data)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	struct ci_hdrc *ci = data;
 	irqreturn_t ret = IRQ_NONE;
 	u32 otgsc = 0;
@@ -683,15 +765,24 @@ static int ci_get_platdata(struct device *dev,
 		platdata->flags |= CI_HDRC_FORCE_FULLSPEED;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static DEFINE_IDA(ci_ida);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct platform_device *ci13xxx_add_device(struct device *dev,
 			struct resource *res, int nres,
 			struct ci13xxx_platform_data *platdata)
+=======
+struct platform_device *ci_hdrc_add_device(struct device *dev,
+			struct resource *res, int nres,
+			struct ci_hdrc_platform_data *platdata)
+>>>>>>> v3.18
 =======
 struct platform_device *ci_hdrc_add_device(struct device *dev,
 			struct resource *res, int nres,
@@ -702,11 +793,17 @@ struct platform_device *ci_hdrc_add_device(struct device *dev,
 	int id, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = ci_get_platdata(dev, platdata);
 	if (ret)
 		return ERR_PTR(ret);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	id = ida_simple_get(&ci_ida, 0, 0, GFP_KERNEL);
 	if (id < 0)
@@ -744,9 +841,15 @@ put_id:
 	return ERR_PTR(ret);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(ci13xxx_add_device);
 
 void ci13xxx_remove_device(struct platform_device *pdev)
+=======
+EXPORT_SYMBOL_GPL(ci_hdrc_add_device);
+
+void ci_hdrc_remove_device(struct platform_device *pdev)
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(ci_hdrc_add_device);
 
@@ -758,8 +861,11 @@ void ci_hdrc_remove_device(struct platform_device *pdev)
 	ida_simple_remove(&ci_ida, id);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(ci13xxx_remove_device);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(ci_hdrc_remove_device);
 
 static inline void ci_role_destroy(struct ci_hdrc *ci)
@@ -781,11 +887,15 @@ static void ci_get_otg_capable(struct ci_hdrc *ci)
 	if (ci->is_otg)
 		dev_dbg(ci->dev, "It is OTG capable controller\n");
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ci_hdrc_probe(struct platform_device *pdev)
 {
 	struct device	*dev = &pdev->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ci13xxx	*ci;
 	struct resource	*res;
@@ -794,6 +904,8 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 
 	if (!dev->platform_data) {
 =======
+=======
+>>>>>>> v3.18
 	struct ci_hdrc	*ci;
 	struct resource	*res;
 	void __iomem	*base;
@@ -801,6 +913,9 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 	enum usb_dr_mode dr_mode;
 
 	if (!dev_get_platdata(dev)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(dev, "platform data missing\n");
 		return -ENODEV;
@@ -818,6 +933,7 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&ci->lock);
 	ci->dev = dev;
 	ci->platdata = dev->platform_data;
@@ -828,10 +944,15 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 
 	ci->gadget.l1_supported = ci->platdata->l1_supported;
 =======
+=======
+>>>>>>> v3.18
 	ci->dev = dev;
 	ci->platdata = dev_get_platdata(dev);
 	ci->imx28_write_fix = !!(ci->platdata->flags &
 		CI_HDRC_IMX28_WRITE_FIX);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = hw_device_init(ci, base);
@@ -841,7 +962,10 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ci->platdata->phy)
 		ci->transceiver = ci->platdata->phy;
 	else
@@ -874,12 +998,16 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 		usleep_range(2000, 2500);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ci->hw_bank.phys = res->start;
 
 	ci->irq = platform_get_irq(pdev, 0);
 	if (ci->irq < 0) {
 		dev_err(dev, "missing IRQ\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return -ENODEV;
 	}
@@ -900,6 +1028,8 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 	if (ret)
 		dev_info(dev, "doesn't support gadget\n");
 =======
+=======
+>>>>>>> v3.18
 		ret = ci->irq;
 		goto deinit_phy;
 	}
@@ -919,11 +1049,15 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 		if (ret)
 			dev_info(dev, "doesn't support gadget\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!ci->roles[CI_ROLE_HOST] && !ci->roles[CI_ROLE_GADGET]) {
 		dev_err(dev, "no supported roles\n");
 		ret = -ENODEV;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto rm_wq;
 	}
@@ -934,6 +1068,8 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 		mdelay(2);
 		ci->role = ci_otg_role(ci);
 =======
+=======
+>>>>>>> v3.18
 		goto deinit_phy;
 	}
 
@@ -961,6 +1097,9 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 			 */
 			ci->role = CI_ROLE_GADGET;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		ci->role = ci->roles[CI_ROLE_HOST]
@@ -969,12 +1108,15 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ci_role_start(ci, ci->role);
 	if (ret) {
 		dev_err(dev, "can't start %s role\n", ci_role(ci)->name);
 		ret = -ENODEV;
 		goto rm_wq;
 =======
+=======
+>>>>>>> v3.18
 	/* only update vbus status for peripheral */
 	if (ci->role == CI_ROLE_GADGET)
 		ci_handle_vbus_change(ci);
@@ -986,6 +1128,9 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 						ci_role(ci)->name);
 			goto stop;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -996,8 +1141,13 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 		goto stop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ci->is_otg)
 		hw_write(ci, OP_OTGSC, OTGSC_IDIE, OTGSC_IDIE);
+=======
+	if (ci_otg_is_fsm_mode(ci))
+		ci_hdrc_otg_fsm_start(ci);
+>>>>>>> v3.18
 =======
 	if (ci_otg_is_fsm_mode(ci))
 		ci_hdrc_otg_fsm_start(ci);
@@ -1010,10 +1160,16 @@ static int ci_hdrc_probe(struct platform_device *pdev)
 	free_irq(ci->irq, ci);
 stop:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ci_role_stop(ci);
 rm_wq:
 	flush_workqueue(ci->wq);
 	destroy_workqueue(ci->wq);
+=======
+	ci_role_destroy(ci);
+deinit_phy:
+	usb_phy_shutdown(ci->transceiver);
+>>>>>>> v3.18
 =======
 	ci_role_destroy(ci);
 deinit_phy:
@@ -1026,6 +1182,7 @@ deinit_phy:
 static int ci_hdrc_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ci13xxx *ci = platform_get_drvdata(pdev);
 
 	dbg_remove_files(ci);
@@ -1034,6 +1191,8 @@ static int ci_hdrc_remove(struct platform_device *pdev)
 	free_irq(ci->irq, ci);
 	ci_role_stop(ci);
 =======
+=======
+>>>>>>> v3.18
 	struct ci_hdrc *ci = platform_get_drvdata(pdev);
 
 	dbg_remove_files(ci);
@@ -1041,6 +1200,9 @@ static int ci_hdrc_remove(struct platform_device *pdev)
 	ci_role_destroy(ci);
 	ci_hdrc_enter_lpm(ci, true);
 	usb_phy_shutdown(ci->transceiver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1052,6 +1214,10 @@ static struct platform_driver ci_hdrc_driver = {
 	.driver	= {
 		.name	= "ci_hdrc",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.owner	= THIS_MODULE,
+>>>>>>> v3.18
 =======
 		.owner	= THIS_MODULE,
 >>>>>>> v3.18
@@ -1062,7 +1228,10 @@ module_platform_driver(ci_hdrc_driver);
 
 MODULE_ALIAS("platform:ci_hdrc");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS("platform:ci13xxx");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL v2");

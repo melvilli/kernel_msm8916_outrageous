@@ -39,6 +39,11 @@ enum {
 	DFS_CHANNELS_CONFIG_COMPLETE_EVENT       = BIT(19),
 	PERIODIC_SCAN_REPORT_EVENT_ID            = BIT(20),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SMART_CONFIG_SYNC_EVENT_ID		 = BIT(22),
+	SMART_CONFIG_DECODE_EVENT_ID		 = BIT(23),
+>>>>>>> v3.18
 =======
 	SMART_CONFIG_SYNC_EVENT_ID		 = BIT(22),
 	SMART_CONFIG_DECODE_EVENT_ID		 = BIT(23),
@@ -74,7 +79,10 @@ struct wl18xx_event_mailbox {
 	/* bitmap of inactive stations (by HLID) */
 	__le32 inactive_sta_bitmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* rx BA win size indicated by RX_BA_WIN_SIZE_CHANGE_EVENT_ID */
 	u8 rx_ba_role_id;
@@ -95,6 +103,9 @@ struct wl18xx_event_mailbox {
 	u8 sc_sync_channel;
 	u8 sc_sync_band;
 	u8 padding2[2];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 

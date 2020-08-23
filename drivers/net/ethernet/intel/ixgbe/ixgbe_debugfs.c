@@ -21,6 +21,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -257,8 +261,12 @@ void ixgbe_dbg_adapter_init(struct ixgbe_adapter *adapter)
 void ixgbe_dbg_adapter_exit(struct ixgbe_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (adapter->ixgbe_dbg_adapter)
 		debugfs_remove_recursive(adapter->ixgbe_dbg_adapter);
+=======
+	debugfs_remove_recursive(adapter->ixgbe_dbg_adapter);
+>>>>>>> v3.18
 =======
 	debugfs_remove_recursive(adapter->ixgbe_dbg_adapter);
 >>>>>>> v3.18

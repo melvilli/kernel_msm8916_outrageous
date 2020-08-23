@@ -64,13 +64,19 @@ static int xfrm6_mode_tunnel_output(struct xfrm_state *x, struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define for_each_input_rcu(head, handler)	\
 	for (handler = rcu_dereference(head);	\
 	     handler != NULL;			\
 	     handler = rcu_dereference(handler->next))
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int xfrm6_mode_tunnel_input(struct xfrm_state *x, struct sk_buff *skb)
 {

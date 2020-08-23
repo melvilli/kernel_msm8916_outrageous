@@ -17,7 +17,10 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -134,7 +137,10 @@ static int mxs_pwm_probe(struct platform_device *pdev)
 	struct mxs_pwm_chip *mxs;
 	struct resource *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pinctrl *pinctrl;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -149,10 +155,13 @@ static int mxs_pwm_probe(struct platform_device *pdev)
 		return PTR_ERR(mxs->base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
 	if (IS_ERR(pinctrl))
 		return PTR_ERR(pinctrl);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mxs->clk = devm_clk_get(&pdev->dev, NULL);
@@ -163,6 +172,10 @@ static int mxs_pwm_probe(struct platform_device *pdev)
 	mxs->chip.ops = &mxs_pwm_ops;
 	mxs->chip.base = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mxs->chip.can_sleep = true;
+>>>>>>> v3.18
 =======
 	mxs->chip.can_sleep = true;
 >>>>>>> v3.18
@@ -181,10 +194,13 @@ static int mxs_pwm_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, mxs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stmp_reset_block(mxs->base);
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ret = stmp_reset_block(mxs->base);
 	if (ret)
 		goto pwm_remove;
@@ -194,6 +210,9 @@ static int mxs_pwm_probe(struct platform_device *pdev)
 pwm_remove:
 	pwmchip_remove(&mxs->chip);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -214,7 +233,12 @@ static struct platform_driver mxs_pwm_driver = {
 	.driver = {
 		.name = "mxs-pwm",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(mxs_pwm_dt_ids),
+=======
+		.owner = THIS_MODULE,
+		.of_match_table = mxs_pwm_dt_ids,
+>>>>>>> v3.18
 =======
 		.owner = THIS_MODULE,
 		.of_match_table = mxs_pwm_dt_ids,

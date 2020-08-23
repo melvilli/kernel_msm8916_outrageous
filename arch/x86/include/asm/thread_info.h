@@ -10,6 +10,10 @@
 #include <linux/compiler.h>
 #include <asm/page.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/percpu.h>
+>>>>>>> v3.18
 =======
 #include <asm/percpu.h>
 >>>>>>> v3.18
@@ -33,6 +37,7 @@ struct thread_info {
 	__u32			status;		/* thread synchronous flags */
 	__u32			cpu;		/* current CPU */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			preempt_count;	/* 0 => preemptable,
 						   <0 => BUG */
 	mm_segment_t		addr_limit;
@@ -45,10 +50,15 @@ struct thread_info {
 	__u8			supervisor_stack[0];
 #endif
 =======
+=======
+>>>>>>> v3.18
 	int			saved_preempt_count;
 	mm_segment_t		addr_limit;
 	struct restart_block    restart_block;
 	void __user		*sysenter_return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int		sig_on_uaccess_error:1;
 	unsigned int		uaccess_err:1;	/* uaccess failed */
@@ -61,7 +71,11 @@ struct thread_info {
 	.flags		= 0,			\
 	.cpu		= 0,			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.preempt_count	= INIT_PREEMPT_COUNT,	\
+=======
+	.saved_preempt_count = INIT_PREEMPT_COUNT,	\
+>>>>>>> v3.18
 =======
 	.saved_preempt_count = INIT_PREEMPT_COUNT,	\
 >>>>>>> v3.18
@@ -105,7 +119,11 @@ struct thread_info {
 #define TIF_NOHZ		19	/* in adaptive nohz mode */
 #define TIF_MEMDIE		20	/* is terminating due to OOM killer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIF_DEBUG		21	/* uses debug registers */
+=======
+#define TIF_POLLING_NRFLAG	21	/* idle is polling for TIF_NEED_RESCHED */
+>>>>>>> v3.18
 =======
 #define TIF_POLLING_NRFLAG	21	/* idle is polling for TIF_NEED_RESCHED */
 >>>>>>> v3.18
@@ -133,7 +151,11 @@ struct thread_info {
 #define _TIF_FORK		(1 << TIF_FORK)
 #define _TIF_NOHZ		(1 << TIF_NOHZ)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _TIF_DEBUG		(1 << TIF_DEBUG)
+=======
+#define _TIF_POLLING_NRFLAG	(1 << TIF_POLLING_NRFLAG)
+>>>>>>> v3.18
 =======
 #define _TIF_POLLING_NRFLAG	(1 << TIF_POLLING_NRFLAG)
 >>>>>>> v3.18
@@ -178,6 +200,7 @@ struct thread_info {
 
 #define _TIF_WORK_CTXSW_PREV (_TIF_WORK_CTXSW|_TIF_USER_RETURN_NOTIFY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _TIF_WORK_CTXSW_NEXT (_TIF_WORK_CTXSW|_TIF_DEBUG)
 
 #define PREEMPT_ACTIVE		0x10000000
@@ -186,11 +209,16 @@ struct thread_info {
 
 #define STACK_WARN	(THREAD_SIZE/8)
 =======
+=======
+>>>>>>> v3.18
 #define _TIF_WORK_CTXSW_NEXT (_TIF_WORK_CTXSW)
 
 #define STACK_WARN		(THREAD_SIZE/8)
 #define KERNEL_STACK_OFFSET	(5*(BITS_PER_LONG/8))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * macros/functions for gaining access to the thread information structure
@@ -199,6 +227,7 @@ struct thread_info {
  */
 #ifndef __ASSEMBLY__
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* how to get the current stack pointer from C */
@@ -236,6 +265,8 @@ static inline struct thread_info *current_thread_info(void)
 #ifndef __ASSEMBLY__
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 DECLARE_PER_CPU(unsigned long, kernel_stack);
 
 static inline struct thread_info *current_thread_info(void)
@@ -251,8 +282,13 @@ static inline struct thread_info *current_thread_info(void)
 /* how to get the thread information struct from ASM */
 #define GET_THREAD_INFO(reg) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movq PER_CPU_VAR(kernel_stack),reg ; \
 	subq $(THREAD_SIZE-KERNEL_STACK_OFFSET),reg
+=======
+	_ASM_MOV PER_CPU_VAR(kernel_stack),reg ; \
+	_ASM_SUB $(THREAD_SIZE-KERNEL_STACK_OFFSET),reg ;
+>>>>>>> v3.18
 =======
 	_ASM_MOV PER_CPU_VAR(kernel_stack),reg ; \
 	_ASM_SUB $(THREAD_SIZE-KERNEL_STACK_OFFSET),reg ;
@@ -267,8 +303,11 @@ static inline struct thread_info *current_thread_info(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* !X86_32 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -280,8 +319,11 @@ static inline struct thread_info *current_thread_info(void)
  */
 #define TS_COMPAT		0x0002	/* 32bit syscall active (64BIT)*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TS_POLLING		0x0004	/* idle task polling need_resched,
 					   skip sending interrupt */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define TS_RESTORE_SIGMASK	0x0008	/* restore signal mask in do_signal() */

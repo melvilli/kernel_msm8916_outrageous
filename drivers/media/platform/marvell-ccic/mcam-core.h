@@ -54,12 +54,18 @@ enum mcam_buffer_mode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum mcam_chip_id {
 	MCAM_CAFE,
 	MCAM_ARMADA610,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Is a given buffer mode supported by the current kernel configuration?
@@ -92,6 +98,11 @@ struct mcam_frame_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NR_MCAM_CLK 3
+
+>>>>>>> v3.18
 =======
 #define NR_MCAM_CLK 3
 
@@ -110,6 +121,7 @@ struct mcam_camera {
 	struct i2c_adapter *i2c_adapter;
 	unsigned char __iomem *regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t dev_lock;
 	struct device *dev; /* For messages, dma alloc */
 	unsigned int chip_id;
@@ -122,6 +134,8 @@ struct mcam_camera {
 	void (*plat_power_up) (struct mcam_camera *cam);
 	void (*plat_power_down) (struct mcam_camera *cam);
 =======
+=======
+>>>>>>> v3.18
 	unsigned regs_size; /* size in bytes of the register space */
 	spinlock_t dev_lock;
 	struct device *dev; /* For messages, dma alloc */
@@ -156,6 +170,9 @@ struct mcam_camera {
 	void (*plat_power_down) (struct mcam_camera *cam);
 	void (*calc_dphy) (struct mcam_camera *cam);
 	void (*ctlr_reset) (struct mcam_camera *cam);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -203,7 +220,10 @@ struct mcam_camera {
 
 	/* Current operating parameters */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 sensor_type;		/* Currently ov7670 only */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct v4l2_pix_format pix_format;
@@ -274,7 +294,10 @@ int mccic_resume(struct mcam_camera *cam);
 #define REG_Y1BAR	0x04
 #define REG_Y2BAR	0x08
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define REG_U0BAR	0x0c
 #define REG_U1BAR	0x10
 #define REG_U2BAR	0x14
@@ -292,6 +315,9 @@ int mccic_resume(struct mcam_camera *cam);
 #define REG_CSI2_DPHY5	0x134
 #define REG_CSI2_DPHY6	0x138
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* ... */
 
@@ -362,6 +388,11 @@ int mccic_resume(struct mcam_camera *cam);
 #define	  C0_YUVE_XVUY	  0x00030000	/* 420: .VUY		*/
 /* Bayer bits 18,19 if needed */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	  C0_EOF_VSYNC	  0x00400000	/* Generate EOF by VSYNC */
+#define	  C0_VEDGE_CTRL   0x00800000	/* Detect falling edge of VSYNC */
+>>>>>>> v3.18
 =======
 #define	  C0_EOF_VSYNC	  0x00400000	/* Generate EOF by VSYNC */
 #define	  C0_VEDGE_CTRL   0x00800000	/* Detect falling edge of VSYNC */
@@ -371,14 +402,20 @@ int mccic_resume(struct mcam_camera *cam);
 #define	  C0_VCLK_LOW	  0x04000000	/* VCLK on falling edge */
 #define	  C0_DOWNSCALE	  0x08000000	/* Enable downscaler */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	  C0_SIFM_MASK	  0xc0000000	/* SIF mode bits */
 #define	  C0_SIF_HVSYNC	  0x00000000	/* Use H/VSYNC */
 #define	  CO_SOF_NOSYNC	  0x40000000	/* Use inband active signaling */
 =======
+=======
+>>>>>>> v3.18
 /* SIFMODE */
 #define	  C0_SIF_HVSYNC	  0x00000000	/* Use H/VSYNC */
 #define	  C0_SOF_NOSYNC	  0x40000000	/* Use inband active signaling */
 #define	  C0_SIFM_MASK	  0xc0000000	/* SIF mode bits */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Bits below C1_444ALPHA are not present in Cafe */

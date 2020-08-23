@@ -85,7 +85,11 @@
 #define MCE_PORT_SYS		0x7	/* (0x7 << 5) | MCE_CMD = 0xff */
 #define MCE_PORT_SER		0x6	/* 0xc0 thru 0xdf flush & 0x1f bytes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MCE_PORT_MASK	0xe0	/* Mask out command bits */
+=======
+#define MCE_PORT_MASK		0xe0	/* Mask out command bits */
+>>>>>>> v3.18
 =======
 #define MCE_PORT_MASK		0xe0	/* Mask out command bits */
 >>>>>>> v3.18
@@ -158,6 +162,7 @@
 #define MCE_PACKET_LENGTH_MASK	0x1f /* Packet length mask */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* module parameters */
 #ifdef CONFIG_USB_DEBUG
 static bool debug = 1;
@@ -171,6 +176,8 @@ static bool debug;
 			dev_info(dev, fmt, ## __VA_ARGS__);	\
 	} while (0)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* general constants */
@@ -207,6 +214,11 @@ static bool debug;
 #define VENDOR_CONEXANT		0x0572
 #define VENDOR_TWISTEDMELON	0x2596
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define VENDOR_HAUPPAUGE	0x2040
+#define VENDOR_PCTV		0x2013
+>>>>>>> v3.18
 =======
 #define VENDOR_HAUPPAUGE	0x2040
 #define VENDOR_PCTV		0x2013
@@ -223,6 +235,10 @@ enum mceusb_model_type {
 	TIVO_KIT,
 	MCE_GEN2_NO_TX,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	HAUPPAUGE_CX_HYBRID_TV,
+>>>>>>> v3.18
 =======
 	HAUPPAUGE_CX_HYBRID_TV,
 >>>>>>> v3.18
@@ -268,7 +284,10 @@ static const struct mceusb_model mceusb_model[] = {
 		 * to allow testing it
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.rc_map = RC_MAP_HAUPPAUGE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name = "Conexant Hybrid TV (cx231xx) MCE IR",
@@ -278,11 +297,17 @@ static const struct mceusb_model mceusb_model[] = {
 		.name = "Conexant Hybrid TV (cx231xx) MCE IR",
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[HAUPPAUGE_CX_HYBRID_TV] = {
 		.no_tx = 1, /* eeprom says it has no tx */
 		.name = "Conexant Hybrid TV (cx231xx) MCE IR no TX",
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[MULTIFUNCTION] = {
 		.mce_gen2 = 1,
@@ -426,7 +451,10 @@ static struct usb_device_id mceusb_dev_table[] = {
 	/* Twisted Melon Inc. - Manta Transceiver */
 	{ USB_DEVICE(VENDOR_TWISTEDMELON, 0x8042) },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Hauppauge WINTV-HVR-HVR 930C-HD - based on cx231xx */
 	{ USB_DEVICE(VENDOR_HAUPPAUGE, 0xb130),
 	  .driver_info = HAUPPAUGE_CX_HYBRID_TV },
@@ -441,6 +469,9 @@ static struct usb_device_id mceusb_dev_table[] = {
 	{ USB_DEVICE(VENDOR_PCTV, 0x025e),
 	  .driver_info = HAUPPAUGE_CX_HYBRID_TV },
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Terminating entry */
 	{ }
@@ -575,6 +606,7 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 				 int offset, int len, bool out)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char codes[USB_BUFLEN * 3 + 1];
 	char inout[9];
 	u8 cmd, subcmd, data1, data2, data3, data4;
@@ -586,6 +618,8 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 		return;
 
 =======
+=======
+>>>>>>> v3.18
 #if defined(DEBUG) || defined(CONFIG_DYNAMIC_DEBUG)
 	char *inout;
 	u8 cmd, subcmd, data1, data2, data3, data4;
@@ -593,6 +627,9 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 	int start, skip = 0;
 	u32 carrier, period;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* skip meaningless 0xb1 0x60 header bytes on orig receiver */
 	if (ir->flags.microsoft_gen1 && !out && !offset)
@@ -601,6 +638,7 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 	if (len <= skip)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < len && i < USB_BUFLEN; i++)
 		snprintf(codes + i * 3, 4, "%02x ", buf[i + offset] & 0xff);
@@ -613,10 +651,15 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 	else
 		strcpy(inout, "Got\0");
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(dev, "%cx data: %*ph (length=%d)",
 		(out ? 't' : 'r'), min(len, USB_BUFLEN), buf, len);
 
 	inout = out ? "Request" : "Got";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	start  = offset + skip;
@@ -634,9 +677,15 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 		if ((subcmd == MCE_CMD_PORT_SYS) &&
 		    (data1 == MCE_CMD_RESUME))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_info(dev, "Device resume requested\n");
 		else
 			dev_info(dev, "Unknown command 0x%02x 0x%02x\n",
+=======
+			dev_dbg(dev, "Device resume requested");
+		else
+			dev_dbg(dev, "Unknown command 0x%02x 0x%02x",
+>>>>>>> v3.18
 =======
 			dev_dbg(dev, "Device resume requested");
 		else
@@ -649,7 +698,11 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 		case MCE_RSP_EQEMVER:
 			if (!out)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_info(dev, "Emulator interface version %x\n",
+=======
+				dev_dbg(dev, "Emulator interface version %x",
+>>>>>>> v3.18
 =======
 				dev_dbg(dev, "Emulator interface version %x",
 >>>>>>> v3.18
@@ -657,6 +710,7 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 			break;
 		case MCE_CMD_G_REVISION:
 			if (len == 2)
+<<<<<<< HEAD
 <<<<<<< HEAD
 				dev_info(dev, "Get hw/sw rev?\n");
 			else
@@ -676,6 +730,8 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 					 "payload: 0x%02x, address: 0x%02x, "
 					 "version: 0x%02x\n",
 =======
+=======
+>>>>>>> v3.18
 				dev_dbg(dev, "Get hw/sw rev?");
 			else
 				dev_dbg(dev, "hw/sw rev 0x%02x 0x%02x 0x%02x 0x%02x",
@@ -693,12 +749,16 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 				dev_dbg(dev, "Wake version, proto: 0x%02x, "
 					 "payload: 0x%02x, address: 0x%02x, "
 					 "version: 0x%02x",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 data1, data2, data3, data4);
 			break;
 		case MCE_RSP_GETPORTSTATUS:
 			if (!out)
 				/* We use data1 + 1 here, to match hw labels */
+<<<<<<< HEAD
 <<<<<<< HEAD
 				dev_info(dev, "TX port %d: blaster is%s connected\n",
 					 data1 + 1, data4 ? " not" : "");
@@ -709,6 +769,8 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 		default:
 			dev_info(dev, "Unknown command 0x%02x 0x%02x\n",
 =======
+=======
+>>>>>>> v3.18
 				dev_dbg(dev, "TX port %d: blaster is%s connected",
 					 data1 + 1, data4 ? " not" : "");
 			break;
@@ -717,6 +779,9 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 			break;
 		default:
 			dev_dbg(dev, "Unknown command 0x%02x 0x%02x",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 cmd, subcmd);
 			break;
@@ -726,6 +791,7 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 		switch (subcmd) {
 		case MCE_CMD_SIG_END:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_info(dev, "End of signal\n");
 			break;
 		case MCE_CMD_PING:
@@ -734,6 +800,8 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 		case MCE_CMD_UNKNOWN:
 			dev_info(dev, "Resp to 9f 05 of 0x%02x 0x%02x\n",
 =======
+=======
+>>>>>>> v3.18
 			dev_dbg(dev, "End of signal");
 			break;
 		case MCE_CMD_PING:
@@ -741,6 +809,9 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 			break;
 		case MCE_CMD_UNKNOWN:
 			dev_dbg(dev, "Resp to 9f 05 of 0x%02x 0x%02x",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 data1, data2);
 			break;
@@ -751,6 +822,7 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 				break;
 			carrier = (1000 * 1000) / period;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_info(dev, "%s carrier of %u Hz (period %uus)\n",
 				 inout, carrier, period);
 			break;
@@ -760,6 +832,8 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 		case MCE_RSP_EQIRTXPORTS:
 			dev_info(dev, "%s transmit blaster mask of 0x%02x\n",
 =======
+=======
+>>>>>>> v3.18
 			dev_dbg(dev, "%s carrier of %u Hz (period %uus)",
 				 inout, carrier, period);
 			break;
@@ -768,12 +842,16 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 			break;
 		case MCE_RSP_EQIRTXPORTS:
 			dev_dbg(dev, "%s transmit blaster mask of 0x%02x",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 inout, data1);
 			break;
 		case MCE_RSP_EQIRTIMEOUT:
 			/* value is in units of 50us, so x*50/1000 ms */
 			period = ((data1 << 8) | data2) * MCE_TIME_UNIT / 1000;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			dev_info(dev, "%s receive timeout of %d ms\n",
 				 inout, period);
@@ -787,6 +865,8 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 		case MCE_RSP_EQIRRXPORTEN:
 			dev_info(dev, "%s %s-range receive sensor in use\n",
 =======
+=======
+>>>>>>> v3.18
 			dev_dbg(dev, "%s receive timeout of %d ms",
 				 inout, period);
 			break;
@@ -798,6 +878,9 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 			break;
 		case MCE_RSP_EQIRRXPORTEN:
 			dev_dbg(dev, "%s %s-range receive sensor in use",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 inout, data1 == 0x02 ? "short" : "long");
 			break;
@@ -805,9 +888,15 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 		/* aka MCE_RSP_EQIRRXCFCNT */
 			if (out)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dev_info(dev, "Get receive sensor\n");
 			else if (ir->learning_enabled)
 				dev_info(dev, "RX pulse count: %d\n",
+=======
+				dev_dbg(dev, "Get receive sensor");
+			else if (ir->learning_enabled)
+				dev_dbg(dev, "RX pulse count: %d",
+>>>>>>> v3.18
 =======
 				dev_dbg(dev, "Get receive sensor");
 			else if (ir->learning_enabled)
@@ -819,6 +908,7 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 			if (out)
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_info(dev, "Num TX ports: %x, num RX ports: %x\n",
 				 data1, data2);
 			break;
@@ -828,6 +918,8 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 		default:
 			dev_info(dev, "Unknown command 0x%02x 0x%02x\n",
 =======
+=======
+>>>>>>> v3.18
 			dev_dbg(dev, "Num TX ports: %x, num RX ports: %x",
 				 data1, data2);
 			break;
@@ -836,6 +928,9 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 			break;
 		default:
 			dev_dbg(dev, "Unknown command 0x%02x 0x%02x",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 cmd, subcmd);
 			break;
@@ -847,16 +942,22 @@ static void mceusb_dev_printdata(struct mceusb_dev *ir, char *buf,
 
 	if (cmd == MCE_IRDATA_TRAILER)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(dev, "End of raw IR data\n");
 	else if ((cmd != MCE_CMD_PORT_IR) &&
 		 ((cmd & MCE_PORT_MASK) == MCE_COMMAND_IRDATA))
 		dev_info(dev, "Raw IR data, %d pulse/space samples\n", ir->rem);
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(dev, "End of raw IR data");
 	else if ((cmd != MCE_CMD_PORT_IR) &&
 		 ((cmd & MCE_PORT_MASK) == MCE_COMMAND_IRDATA))
 		dev_dbg(dev, "Raw IR data, %d pulse/space samples", ir->rem);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -870,11 +971,14 @@ static void mce_async_callback(struct urb *urb)
 
 	ir = urb->context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ir) {
 		len = urb->actual_length;
 
 		mceusb_dev_printdata(ir, urb->transfer_buffer, 0, len, true);
 =======
+=======
+>>>>>>> v3.18
 
 	switch (urb->status) {
 	/* success */
@@ -894,6 +998,9 @@ static void mce_async_callback(struct urb *urb)
 	default:
 		dev_err(ir->dev, "Error: request urb status = %d", urb->status);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -927,12 +1034,15 @@ static void mce_request_packet(struct mceusb_dev *ir, unsigned char *data,
 
 		/* outbound data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pipe = usb_sndintpipe(ir->usbdev,
 				      ir->usb_ep_out->bEndpointAddress);
 		usb_fill_int_urb(async_urb, ir->usbdev, pipe,
 			async_buf, size, mce_async_callback,
 			ir, ir->usb_ep_out->bInterval);
 =======
+=======
+>>>>>>> v3.18
 		if (usb_endpoint_xfer_int(ir->usb_ep_out)) {
 			pipe = usb_sndintpipe(ir->usbdev,
 					 ir->usb_ep_out->bEndpointAddress);
@@ -946,6 +1056,9 @@ static void mce_request_packet(struct mceusb_dev *ir, unsigned char *data,
 					 async_buf, size, mce_async_callback,
 					 ir);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memcpy(async_buf, data, size);
 
@@ -960,7 +1073,11 @@ static void mce_request_packet(struct mceusb_dev *ir, unsigned char *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mce_dbg(dev, "receive request called (size=%#x)\n", size);
+=======
+	dev_dbg(dev, "receive request called (size=%#x)", size);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "receive request called (size=%#x)", size);
 >>>>>>> v3.18
@@ -971,15 +1088,21 @@ static void mce_request_packet(struct mceusb_dev *ir, unsigned char *data,
 	res = usb_submit_urb(async_urb, GFP_ATOMIC);
 	if (res) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mce_dbg(dev, "receive request FAILED! (res=%d)\n", res);
 		return;
 	}
 	mce_dbg(dev, "receive request complete (res=%d)\n", res);
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev, "receive request FAILED! (res=%d)", res);
 		return;
 	}
 	dev_dbg(dev, "receive request complete (res=%d)", res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1096,8 +1219,12 @@ static int mceusb_set_tx_carrier(struct rc_dev *dev, u32 carrier)
 			cmdbuf[2] = MCE_CMD_SIG_END;
 			cmdbuf[3] = MCE_IRDATA_TRAILER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mce_dbg(ir->dev, "%s: disabling carrier "
 				"modulation\n", __func__);
+=======
+			dev_dbg(ir->dev, "disabling carrier modulation");
+>>>>>>> v3.18
 =======
 			dev_dbg(ir->dev, "disabling carrier modulation");
 >>>>>>> v3.18
@@ -1112,8 +1239,13 @@ static int mceusb_set_tx_carrier(struct rc_dev *dev, u32 carrier)
 				cmdbuf[2] = prescaler;
 				cmdbuf[3] = divisor;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mce_dbg(ir->dev, "%s: requesting %u HZ "
 					"carrier\n", __func__, carrier);
+=======
+				dev_dbg(ir->dev, "requesting %u HZ carrier",
+								carrier);
+>>>>>>> v3.18
 =======
 				dev_dbg(ir->dev, "requesting %u HZ carrier",
 								carrier);
@@ -1208,7 +1340,11 @@ static void mceusb_process_ir_data(struct mceusb_dev *ir, int buf_len)
 					 * US_TO_NS(MCE_TIME_UNIT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mce_dbg(ir->dev, "Storing %s with duration %d\n",
+=======
+			dev_dbg(ir->dev, "Storing %s with duration %d",
+>>>>>>> v3.18
 =======
 			dev_dbg(ir->dev, "Storing %s with duration %d",
 >>>>>>> v3.18
@@ -1246,7 +1382,11 @@ static void mceusb_process_ir_data(struct mceusb_dev *ir, int buf_len)
 	}
 	if (event) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mce_dbg(ir->dev, "processed IR data, calling ir_raw_event_handle\n");
+=======
+		dev_dbg(ir->dev, "processed IR data");
+>>>>>>> v3.18
 =======
 		dev_dbg(ir->dev, "processed IR data");
 >>>>>>> v3.18
@@ -1273,7 +1413,11 @@ static void mceusb_dev_recv(struct urb *urb)
 	if (ir->send_flags == RECV_FLAG_IN_PROGRESS) {
 		ir->send_flags = SEND_FLAG_COMPLETE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mce_dbg(ir->dev, "setup answer received %d bytes\n",
+=======
+		dev_dbg(ir->dev, "setup answer received %d bytes\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(ir->dev, "setup answer received %d bytes\n",
 >>>>>>> v3.18
@@ -1289,6 +1433,10 @@ static void mceusb_dev_recv(struct urb *urb)
 	case -ECONNRESET:
 	case -ENOENT:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case -EILSEQ:
+>>>>>>> v3.18
 =======
 	case -EILSEQ:
 >>>>>>> v3.18
@@ -1299,7 +1447,11 @@ static void mceusb_dev_recv(struct urb *urb)
 	case -EPIPE:
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mce_dbg(ir->dev, "Error: urb status = %d\n", urb->status);
+=======
+		dev_err(ir->dev, "Error: urb status = %d", urb->status);
+>>>>>>> v3.18
 =======
 		dev_err(ir->dev, "Error: urb status = %d", urb->status);
 >>>>>>> v3.18
@@ -1325,7 +1477,11 @@ static void mceusb_gen1_init(struct mceusb_dev *ir)
 	data = kzalloc(USB_CTRL_MSG_SZ, GFP_KERNEL);
 	if (!data) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev, "%s: memory allocation failed!\n", __func__);
+=======
+		dev_err(dev, "%s: memory allocation failed!", __func__);
+>>>>>>> v3.18
 =======
 		dev_err(dev, "%s: memory allocation failed!", __func__);
 >>>>>>> v3.18
@@ -1340,9 +1496,15 @@ static void mceusb_gen1_init(struct mceusb_dev *ir)
 			      USB_REQ_SET_ADDRESS, USB_TYPE_VENDOR, 0, 0,
 			      data, USB_CTRL_MSG_SZ, HZ * 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mce_dbg(dev, "%s - ret = %d\n", __func__, ret);
 	mce_dbg(dev, "%s - data[0] = %d, data[1] = %d\n",
 		__func__, data[0], data[1]);
+=======
+	dev_dbg(dev, "set address - ret = %d", ret);
+	dev_dbg(dev, "set address - data[0] = %d, data[1] = %d",
+						data[0], data[1]);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "set address - ret = %d", ret);
 	dev_dbg(dev, "set address - data[0] = %d, data[1] = %d",
@@ -1355,7 +1517,11 @@ static void mceusb_gen1_init(struct mceusb_dev *ir)
 			      0xc04e, 0x0000, NULL, 0, HZ * 3);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mce_dbg(dev, "%s - ret = %d\n", __func__, ret);
+=======
+	dev_dbg(dev, "set feature - ret = %d", ret);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "set feature - ret = %d", ret);
 >>>>>>> v3.18
@@ -1365,7 +1531,11 @@ static void mceusb_gen1_init(struct mceusb_dev *ir)
 			      4, USB_TYPE_VENDOR,
 			      0x0808, 0x0000, NULL, 0, HZ * 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mce_dbg(dev, "%s - retB = %d\n", __func__, ret);
+=======
+	dev_dbg(dev, "set char length - retB = %d", ret);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "set char length - retB = %d", ret);
 >>>>>>> v3.18
@@ -1375,7 +1545,11 @@ static void mceusb_gen1_init(struct mceusb_dev *ir)
 			      2, USB_TYPE_VENDOR,
 			      0x0000, 0x0100, NULL, 0, HZ * 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mce_dbg(dev, "%s - retC = %d\n", __func__, ret);
+=======
+	dev_dbg(dev, "set handshake  - retC = %d", ret);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "set handshake  - retC = %d", ret);
 >>>>>>> v3.18
@@ -1444,6 +1618,10 @@ static void mceusb_flash_led(struct mceusb_dev *ir)
 static struct rc_dev *mceusb_init_rc_dev(struct mceusb_dev *ir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct usb_device *udev = ir->usbdev;
+>>>>>>> v3.18
 =======
 	struct usb_device *udev = ir->usbdev;
 >>>>>>> v3.18
@@ -1454,7 +1632,11 @@ static struct rc_dev *mceusb_init_rc_dev(struct mceusb_dev *ir)
 	rc = rc_allocate_device();
 	if (!rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev, "remote dev allocation failed\n");
+=======
+		dev_err(dev, "remote dev allocation failed");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "remote dev allocation failed");
 >>>>>>> v3.18
@@ -1477,7 +1659,11 @@ static struct rc_dev *mceusb_init_rc_dev(struct mceusb_dev *ir)
 	rc->priv = ir;
 	rc->driver_type = RC_DRIVER_IR_RAW;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc->allowed_protos = RC_BIT_ALL;
+=======
+	rc->allowed_protocols = RC_BIT_ALL;
+>>>>>>> v3.18
 =======
 	rc->allowed_protocols = RC_BIT_ALL;
 >>>>>>> v3.18
@@ -1489,6 +1675,7 @@ static struct rc_dev *mceusb_init_rc_dev(struct mceusb_dev *ir)
 	}
 	rc->driver_name = DRIVER_NAME;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc->map_name = mceusb_model[ir->model].rc_map ?
 			mceusb_model[ir->model].rc_map : RC_MAP_RC6_MCE;
 
@@ -1496,6 +1683,8 @@ static struct rc_dev *mceusb_init_rc_dev(struct mceusb_dev *ir)
 	if (ret < 0) {
 		dev_err(dev, "remote dev registration failed\n");
 =======
+=======
+>>>>>>> v3.18
 
 	switch (le16_to_cpu(udev->descriptor.idVendor)) {
 	case VENDOR_HAUPPAUGE:
@@ -1513,6 +1702,9 @@ static struct rc_dev *mceusb_init_rc_dev(struct mceusb_dev *ir)
 	ret = rc_register_device(rc);
 	if (ret < 0) {
 		dev_err(dev, "remote dev registration failed");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -1542,7 +1734,11 @@ static int mceusb_dev_probe(struct usb_interface *intf,
 	int ir_intfnum;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mce_dbg(&intf->dev, "%s called\n", __func__);
+=======
+	dev_dbg(&intf->dev, "%s called", __func__);
+>>>>>>> v3.18
 =======
 	dev_dbg(&intf->dev, "%s called", __func__);
 >>>>>>> v3.18
@@ -1562,6 +1758,7 @@ static int mceusb_dev_probe(struct usb_interface *intf,
 	for (i = 0; i < idesc->desc.bNumEndpoints; ++i) {
 		ep = &idesc->endpoint[i].desc;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ((ep_in == NULL)
 			&& ((ep->bEndpointAddress & USB_ENDPOINT_DIR_MASK)
@@ -1600,6 +1797,8 @@ static int mceusb_dev_probe(struct usb_interface *intf,
 
 	pipe = usb_rcvintpipe(dev, ep_in->bEndpointAddress);
 =======
+=======
+>>>>>>> v3.18
 		if (ep_in == NULL) {
 			if (usb_endpoint_is_bulk_in(ep)) {
 				ep_in = ep;
@@ -1631,6 +1830,9 @@ static int mceusb_dev_probe(struct usb_interface *intf,
 		pipe = usb_rcvintpipe(dev, ep_in->bEndpointAddress);
 	else
 		pipe = usb_rcvbulkpipe(dev, ep_in->bEndpointAddress);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	maxp = usb_maxpacket(dev, pipe, usb_pipeout(pipe));
 
@@ -1647,7 +1849,11 @@ static int mceusb_dev_probe(struct usb_interface *intf,
 		goto urb_in_alloc_fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ir->usbdev = dev;
+=======
+	ir->usbdev = usb_get_dev(dev);
+>>>>>>> v3.18
 =======
 	ir->usbdev = usb_get_dev(dev);
 >>>>>>> v3.18
@@ -1683,7 +1889,11 @@ static int mceusb_dev_probe(struct usb_interface *intf,
 
 	/* flush buffers on the device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mce_dbg(&intf->dev, "Flushing receive buffers\n");
+=======
+	dev_dbg(&intf->dev, "Flushing receive buffers\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(&intf->dev, "Flushing receive buffers\n");
 >>>>>>> v3.18
@@ -1712,10 +1922,16 @@ static int mceusb_dev_probe(struct usb_interface *intf,
 	device_set_wakeup_enable(ir->dev, true);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(&intf->dev, "Registered %s with mce emulator interface "
 		 "version %x\n", name, ir->emver);
 	dev_info(&intf->dev, "%x tx ports (0x%x cabled) and "
 		 "%x rx sensors (0x%x active)\n",
+=======
+	dev_info(&intf->dev, "Registered %s with mce emulator interface version %x",
+		name, ir->emver);
+	dev_info(&intf->dev, "%x tx ports (0x%x cabled) and %x rx sensors (0x%x active)",
+>>>>>>> v3.18
 =======
 	dev_info(&intf->dev, "Registered %s with mce emulator interface version %x",
 		name, ir->emver);
@@ -1729,6 +1945,10 @@ static int mceusb_dev_probe(struct usb_interface *intf,
 	/* Error-handling path */
 rc_dev_fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usb_put_dev(ir->usbdev);
+>>>>>>> v3.18
 =======
 	usb_put_dev(ir->usbdev);
 >>>>>>> v3.18
@@ -1739,7 +1959,11 @@ buf_in_alloc_fail:
 	kfree(ir);
 mem_alloc_fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_err(&intf->dev, "%s: device setup failed!\n", __func__);
+=======
+	dev_err(&intf->dev, "%s: device setup failed!", __func__);
+>>>>>>> v3.18
 =======
 	dev_err(&intf->dev, "%s: device setup failed!", __func__);
 >>>>>>> v3.18
@@ -1764,6 +1988,10 @@ static void mceusb_dev_disconnect(struct usb_interface *intf)
 	usb_free_urb(ir->urb_in);
 	usb_free_coherent(dev, ir->len_in, ir->buf_in, ir->dma_in);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usb_put_dev(dev);
+>>>>>>> v3.18
 =======
 	usb_put_dev(dev);
 >>>>>>> v3.18
@@ -1775,7 +2003,11 @@ static int mceusb_dev_suspend(struct usb_interface *intf, pm_message_t message)
 {
 	struct mceusb_dev *ir = usb_get_intfdata(intf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(ir->dev, "suspend\n");
+=======
+	dev_info(ir->dev, "suspend");
+>>>>>>> v3.18
 =======
 	dev_info(ir->dev, "suspend");
 >>>>>>> v3.18
@@ -1787,7 +2019,11 @@ static int mceusb_dev_resume(struct usb_interface *intf)
 {
 	struct mceusb_dev *ir = usb_get_intfdata(intf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(ir->dev, "resume\n");
+=======
+	dev_info(ir->dev, "resume");
+>>>>>>> v3.18
 =======
 	dev_info(ir->dev, "resume");
 >>>>>>> v3.18
@@ -1813,8 +2049,11 @@ MODULE_AUTHOR(DRIVER_AUTHOR);
 MODULE_LICENSE("GPL");
 MODULE_DEVICE_TABLE(usb, mceusb_dev_table);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 module_param(debug, bool, S_IRUGO | S_IWUSR);
 MODULE_PARM_DESC(debug, "Debug enabled or not");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

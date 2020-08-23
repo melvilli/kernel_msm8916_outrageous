@@ -41,7 +41,10 @@ unsigned long mmu_context_cache_dat;
 unsigned long mmu_context_cache_dat[NR_CPUS];
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long hole_pages;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -61,7 +64,11 @@ void free_initrd_mem(unsigned long, unsigned long);
 
 #ifndef CONFIG_DISCONTIGMEM
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long __init zone_sizes_init(void)
+=======
+void __init zone_sizes_init(void)
+>>>>>>> v3.18
 =======
 void __init zone_sizes_init(void)
 >>>>>>> v3.18
@@ -91,11 +98,17 @@ void __init zone_sizes_init(void)
 
 	free_area_init_node(0, zones_size, start_pfn, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 }
 #else	/* CONFIG_DISCONTIGMEM */
 extern unsigned long zone_sizes_init(void);
+=======
+}
+#else	/* CONFIG_DISCONTIGMEM */
+extern void zone_sizes_init(void);
+>>>>>>> v3.18
 =======
 }
 #else	/* CONFIG_DISCONTIGMEM */
@@ -119,6 +132,7 @@ void __init paging_init(void)
 		pgd_val(pg_dir[i]) = 0;
 #endif /* CONFIG_MMU */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hole_pages = zone_sizes_init();
 }
 
@@ -140,6 +154,9 @@ int __init reservedpages_count(void)
 =======
 	zone_sizes_init();
 >>>>>>> v3.18
+=======
+	zone_sizes_init();
+>>>>>>> v3.18
 }
 
 /*======================================================================*
@@ -148,6 +165,7 @@ int __init reservedpages_count(void)
  *======================================================================*/
 void __init mem_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int codesize, reservedpages, datasize, initsize;
 	int nid;
@@ -170,18 +188,24 @@ void __init mem_init(void)
 #else
 	high_memory = (void *)(memory_end & PAGE_MASK);
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_MMU
 	extern unsigned long memory_end;
 
 	high_memory = (void *)(memory_end & PAGE_MASK);
 #else
 	high_memory = (void *)__va(PFN_PHYS(MAX_LOW_PFN(0)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_MMU */
 
 	/* clear the zero-page */
 	memset(empty_zero_page, 0, PAGE_SIZE);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* this will put all low memory onto the freelists */
 	for_each_online_node(nid)
@@ -205,6 +229,11 @@ void __init mem_init(void)
 	free_all_bootmem();
 	mem_init_print_info(NULL);
 >>>>>>> v3.18
+=======
+	set_max_mapnr(get_num_physpages());
+	free_all_bootmem();
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 }
 
 /*======================================================================*
@@ -214,7 +243,11 @@ void __init mem_init(void)
 void free_initmem(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_initmem_default(0);
+=======
+	free_initmem_default(-1);
+>>>>>>> v3.18
 =======
 	free_initmem_default(-1);
 >>>>>>> v3.18
@@ -228,7 +261,11 @@ void free_initmem(void)
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area(start, end, 0, "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, -1, "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, -1, "initrd");
 >>>>>>> v3.18

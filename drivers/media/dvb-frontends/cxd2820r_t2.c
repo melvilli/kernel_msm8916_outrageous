@@ -48,6 +48,10 @@ int cxd2820r_set_frontend_t2(struct dvb_frontend *fe)
 		{ 0x020cb, priv->cfg.if_agc_polarity << 6, 0x40 },
 		{ 0x02070, priv->cfg.ts_mode, 0xff },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		{ 0x02071, !priv->cfg.ts_clock_inv << 6, 0x40 },
+>>>>>>> v3.18
 =======
 		{ 0x02071, !priv->cfg.ts_clock_inv << 6, 0x40 },
 >>>>>>> v3.18

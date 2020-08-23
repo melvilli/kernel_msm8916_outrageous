@@ -298,7 +298,11 @@ static bool tegra20_i2s_wr_rd_reg(struct device *dev, unsigned int reg)
 	default:
 		return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -315,7 +319,11 @@ static bool tegra20_i2s_volatile_reg(struct device *dev, unsigned int reg)
 	default:
 		return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -330,7 +338,11 @@ static bool tegra20_i2s_precious_reg(struct device *dev, unsigned int reg)
 	default:
 		return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -346,7 +358,11 @@ static const struct regmap_config tegra20_i2s_regmap_config = {
 	.volatile_reg = tegra20_i2s_volatile_reg,
 	.precious_reg = tegra20_i2s_precious_reg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cache_type = REGCACHE_RBTREE,
+=======
+	.cache_type = REGCACHE_FLAT,
+>>>>>>> v3.18
 =======
 	.cache_type = REGCACHE_FLAT,
 >>>>>>> v3.18
@@ -356,9 +372,13 @@ static int tegra20_i2s_platform_probe(struct platform_device *pdev)
 {
 	struct tegra20_i2s *i2s;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *mem, *memregion, *dmareq;
 	u32 of_dma[2];
 	u32 dma_ch;
+=======
+	struct resource *mem, *memregion;
+>>>>>>> v3.18
 =======
 	struct resource *mem, *memregion;
 >>>>>>> v3.18
@@ -391,6 +411,7 @@ static int tegra20_i2s_platform_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dmareq = platform_get_resource(pdev, IORESOURCE_DMA, 0);
 	if (!dmareq) {
 		if (of_property_read_u32_array(pdev->dev.of_node,
@@ -405,6 +426,8 @@ static int tegra20_i2s_platform_probe(struct platform_device *pdev)
 		dma_ch = dmareq->start;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memregion = devm_request_mem_region(&pdev->dev, mem->start,
@@ -434,7 +457,10 @@ static int tegra20_i2s_platform_probe(struct platform_device *pdev)
 	i2s->capture_dma_data.addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
 	i2s->capture_dma_data.maxburst = 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2s->capture_dma_data.slave_id = dma_ch;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -442,7 +468,10 @@ static int tegra20_i2s_platform_probe(struct platform_device *pdev)
 	i2s->playback_dma_data.addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
 	i2s->playback_dma_data.maxburst = 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2s->playback_dma_data.slave_id = dma_ch;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

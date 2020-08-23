@@ -11,6 +11,10 @@
 #include <linux/bio.h>
 #include <linux/blkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/math64.h>
+>>>>>>> v3.18
 =======
 #include <linux/math64.h>
 >>>>>>> v3.18
@@ -27,7 +31,10 @@ typedef enum { STATUSTYPE_INFO, STATUSTYPE_TABLE } status_type_t;
 union map_info {
 	void *ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long long ll;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -123,12 +130,15 @@ typedef int (*dm_busy_fn) (struct dm_target *ti);
 void dm_error(const char *message);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Combine device limits.
  */
 int dm_set_device_limits(struct dm_target *ti, struct dm_dev *dev,
 			 sector_t start, sector_t len, void *data);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct dm_dev {
@@ -143,7 +153,11 @@ struct dm_dev {
  */
 int dm_get_device(struct dm_target *ti, const char *path, fmode_t mode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						 struct dm_dev **result);
+=======
+		  struct dm_dev **result);
+>>>>>>> v3.18
 =======
 		  struct dm_dev **result);
 >>>>>>> v3.18
@@ -305,8 +319,13 @@ struct dm_target_io {
 	struct dm_io *io;
 	struct dm_target *ti;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union map_info info;
 	unsigned target_bio_nr;
+=======
+	unsigned target_bio_nr;
+	unsigned *len_ptr;
+>>>>>>> v3.18
 =======
 	unsigned target_bio_nr;
 	unsigned *len_ptr;
@@ -422,7 +441,11 @@ struct gendisk *dm_disk(struct mapped_device *md);
 int dm_suspended(struct dm_target *ti);
 int dm_noflush_suspending(struct dm_target *ti);
 <<<<<<< HEAD
+<<<<<<< HEAD
 union map_info *dm_get_mapinfo(struct bio *bio);
+=======
+void dm_accept_partial_bio(struct bio *bio, unsigned n_sectors);
+>>>>>>> v3.18
 =======
 void dm_accept_partial_bio(struct bio *bio, unsigned n_sectors);
 >>>>>>> v3.18
@@ -471,9 +494,15 @@ int __must_check dm_set_target_max_io_len(struct dm_target *ti, sector_t len);
  * Table reference counting.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dm_table *dm_get_live_table(struct mapped_device *md);
 void dm_table_get(struct dm_table *t);
 void dm_table_put(struct dm_table *t);
+=======
+struct dm_table *dm_get_live_table(struct mapped_device *md, int *srcu_idx);
+void dm_put_live_table(struct mapped_device *md, int srcu_idx);
+void dm_sync_table(struct mapped_device *md);
+>>>>>>> v3.18
 =======
 struct dm_table *dm_get_live_table(struct mapped_device *md, int *srcu_idx);
 void dm_put_live_table(struct mapped_device *md, int srcu_idx);
@@ -495,12 +524,18 @@ void dm_table_event(struct dm_table *t);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Run the queue for request-based targets.
  */
 void dm_table_run_md_queue_async(struct dm_table *t);
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * The device must be suspended before calling this method.
  * Returns the previous table, which the caller must destroy.
@@ -589,7 +624,10 @@ extern struct ratelimit_state dm_ratelimit_state;
 #define DM_MAPIO_REQUEUE	DM_ENDIO_REQUEUE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define dm_sector_div64(x, y)( \
 { \
 	u64 _res; \
@@ -598,6 +636,9 @@ extern struct ratelimit_state dm_ratelimit_state;
 } \
 )
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Ceiling(n / sz)
@@ -644,7 +685,10 @@ void dm_requeue_unmapped_request(struct request *rq);
 void dm_kill_unmapped_request(struct request *rq, int error);
 int dm_underlying_device_busy(struct request_queue *q);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dm_end_request(struct request *clone, int error);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

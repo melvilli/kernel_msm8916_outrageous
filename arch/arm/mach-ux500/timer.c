@@ -11,6 +11,7 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/clocksource-nomadik-mtu.h>
 
 #include <asm/smp_twd.h>
@@ -21,10 +22,15 @@
 
 #include "setup.h"
 >>>>>>> v3.18
+=======
+
+#include "setup.h"
+>>>>>>> v3.18
 
 #include "db8500-regs.h"
 #include "id.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_HAVE_ARM_TWD
 static DEFINE_TWD_LOCAL_TIMER(u8500_twd_local_timer,
@@ -54,6 +60,9 @@ const static struct of_device_id prcmu_timer_of_match[] __initconst = {
 =======
 static const struct of_device_id prcmu_timer_of_match[] __initconst = {
 >>>>>>> v3.18
+=======
+static const struct of_device_id prcmu_timer_of_match[] __initconst = {
+>>>>>>> v3.18
 	{ .compatible = "stericsson,db8500-prcmu-timer-4", },
 	{ },
 };
@@ -61,13 +70,17 @@ static const struct of_device_id prcmu_timer_of_match[] __initconst = {
 void __init ux500_timer_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *mtu_timer_base;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void __iomem *prcmu_timer_base;
 	void __iomem *tmp_base;
 	struct device_node *np;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cpu_is_u8500_family() || cpu_is_ux540_family()) {
 		mtu_timer_base = __io_address(U8500_MTU0_BASE);
@@ -115,6 +128,8 @@ dt_fail:
 	clksrc_dbx500_prcmu_init(prcmu_timer_base);
 	ux500_twd_init();
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_is_u8500_family() || cpu_is_ux540_family())
 		prcmu_timer_base = __io_address(U8500_PRCMU_TIMER_4_BASE);
 	else
@@ -133,5 +148,8 @@ dt_fail:
 dt_fail:
 	clksrc_dbx500_prcmu_init(prcmu_timer_base);
 	clocksource_of_init();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

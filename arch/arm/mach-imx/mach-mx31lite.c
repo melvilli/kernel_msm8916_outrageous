@@ -43,6 +43,10 @@
 #include "common.h"
 #include "devices-imx31.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 =======
 #include "ehci.h"
 >>>>>>> v3.18
@@ -274,7 +278,11 @@ static void __init mx31lite_init(void)
 	ret = gpio_request(IOMUX_TO_GPIO(MX31_PIN_SFS6), "sms9117-irq");
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("could not get LAN irq gpio\n");
+=======
+		pr_warn("could not get LAN irq gpio\n");
+>>>>>>> v3.18
 =======
 		pr_warn("could not get LAN irq gpio\n");
 >>>>>>> v3.18
@@ -300,7 +308,10 @@ MACHINE_START(MX31LITE, "LogicPD i.MX31 SOM")
 	.init_early = imx31_init_early,
 	.init_irq = mx31_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx31_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= mx31lite_timer_init,

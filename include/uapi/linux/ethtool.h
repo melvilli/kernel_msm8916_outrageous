@@ -17,6 +17,7 @@
 #include <linux/if_ether.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This should work for both 32 and 64 bit userland. */
 struct ethtool_cmd {
 	__u32	cmd;
@@ -49,6 +50,8 @@ struct ethtool_cmd {
 				   */
 	__u32	lp_advertising;	/* Features the link partner advertises */
 =======
+=======
+>>>>>>> v3.18
 /* All structures exposed to userland should be defined such that they
  * have the same layout for 32-bit and 64-bit userland.
  */
@@ -140,6 +143,9 @@ struct ethtool_cmd {
 	__u8	eth_tp_mdix;
 	__u8	eth_tp_mdix_ctrl;
 	__u32	lp_advertising;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u32	reserved[2];
 };
@@ -174,6 +180,7 @@ static inline __u32 ethtool_cmd_speed(const struct ethtool_cmd *ep)
 #define ETHTOOL_FWVERS_LEN	32
 #define ETHTOOL_BUSINFO_LEN	32
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* these strings are set to whatever the driver author decides... */
 struct ethtool_drvinfo {
 	__u32	cmd;
@@ -201,6 +208,8 @@ struct ethtool_drvinfo {
 #define SOPASS_MAX	6
 /* wake-on-lan settings */
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * struct ethtool_drvinfo - general driver and device information
@@ -258,13 +267,20 @@ struct ethtool_drvinfo {
  * @sopass: SecureOn(tm) password; meaningful only if %WAKE_MAGICSECURE
  *	is set in @wolopts.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ethtool_wolinfo {
 	__u32	cmd;
 	__u32	supported;
 	__u32	wolopts;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8	sopass[SOPASS_MAX]; /* SecureOn(tm) password */
+=======
+	__u8	sopass[SOPASS_MAX];
+>>>>>>> v3.18
 =======
 	__u8	sopass[SOPASS_MAX];
 >>>>>>> v3.18
@@ -276,6 +292,7 @@ struct ethtool_value {
 	__u32	data;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* for passing big chunks of data */
 struct ethtool_regs {
@@ -292,6 +309,8 @@ struct ethtool_eeprom {
 	__u32	offset; /* in bytes */
 	__u32	len; /* in bytes */
 =======
+=======
+>>>>>>> v3.18
 enum tunable_id {
 	ETHTOOL_ID_UNSPEC,
 	ETHTOOL_RX_COPYBREAK,
@@ -364,6 +383,9 @@ struct ethtool_eeprom {
 	__u32	magic;
 	__u32	offset;
 	__u32	len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u8	data[0];
 };
@@ -463,16 +485,22 @@ struct ethtool_modinfo {
  *	sampling, measured in seconds.  Must not be zero.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Each pair of (usecs, max_frames) fields specifies this exit
  * condition for interrupt coalescing:
  *	(usecs > 0 && time_since_first_completion >= usecs) ||
  *	(max_frames > 0 && completed_frames >= max_frames)
 =======
+=======
+>>>>>>> v3.18
  * Each pair of (usecs, max_frames) fields specifies that interrupts
  * should be coalesced until
  *	(usecs > 0 && time_since_first_completion >= usecs) ||
  *	(max_frames > 0 && completed_frames >= max_frames)
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * It is illegal to set both usecs and max_frames to zero as this
  * would cause interrupts to never be generated.  To disable
@@ -480,8 +508,13 @@ struct ethtool_modinfo {
  *
  * Some implementations ignore the value of max_frames and use the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * condition:
  *	time_since_first_completion >= usecs
+=======
+ * condition time_since_first_completion >= usecs
+ *
+>>>>>>> v3.18
 =======
  * condition time_since_first_completion >= usecs
  *
@@ -526,6 +559,7 @@ struct ethtool_coalesce {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* for configuring RX/TX ring parameters */
 struct ethtool_ringparam {
 	__u32	cmd;	/* ETHTOOL_{G,S}RINGPARAM */
@@ -535,6 +569,8 @@ struct ethtool_ringparam {
 	 * user to set.
 	 */
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct ethtool_ringparam - RX/TX ring parameters
  * @cmd: Command number = %ETHTOOL_GRINGPARAM or %ETHTOOL_SRINGPARAM
@@ -562,16 +598,22 @@ struct ethtool_ringparam {
  */
 struct ethtool_ringparam {
 	__u32	cmd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u32	rx_max_pending;
 	__u32	rx_mini_max_pending;
 	__u32	rx_jumbo_max_pending;
 	__u32	tx_max_pending;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Values changeable by the user.  The valid values are
 	 * in the range 1 to the "*_max_pending" counterpart above.
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__u32	rx_pending;
@@ -609,6 +651,7 @@ struct ethtool_channels {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* for configuring link flow control parameters */
 struct ethtool_pauseparam {
 	__u32	cmd;	/* ETHTOOL_{G,S}PAUSEPARAM */
@@ -624,6 +667,8 @@ struct ethtool_pauseparam {
 	 * flow control.
 	 */
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct ethtool_pauseparam - Ethernet pause (flow control) parameters
  * @cmd: Command number = %ETHTOOL_GPAUSEPARAM or %ETHTOOL_SPAUSEPARAM
@@ -648,6 +693,9 @@ struct ethtool_pauseparam {
  */
 struct ethtool_pauseparam {
 	__u32	cmd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u32	autoneg;
 	__u32	rx_pause;
@@ -656,7 +704,10 @@ struct ethtool_pauseparam {
 
 #define ETH_GSTRING_LEN		32
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * enum ethtool_stringset - string set ID
@@ -668,11 +719,15 @@ struct ethtool_pauseparam {
  *	now deprecated
  * @ETH_SS_FEATURES: Device feature names
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum ethtool_stringset {
 	ETH_SS_TEST		= 0,
 	ETH_SS_STATS,
 	ETH_SS_PRIV_FLAGS,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ETH_SS_NTUPLE_FILTERS,	/* Do not use, GRXNTUPLE is now deprecated */
 	ETH_SS_FEATURES,
@@ -696,6 +751,8 @@ struct ethtool_sset_info {
 				   __u32, two bits implies two
 				   __u32's, etc. */
 =======
+=======
+>>>>>>> v3.18
 	ETH_SS_NTUPLE_FILTERS,
 	ETH_SS_FEATURES,
 };
@@ -741,6 +798,9 @@ struct ethtool_sset_info {
 	__u32	reserved;
 	__u64	sset_mask;
 	__u32	data[0];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -762,6 +822,7 @@ enum ethtool_test_flags {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* for requesting NIC test and getting results*/
 struct ethtool_test {
 	__u32	cmd;		/* ETHTOOL_TEST */
@@ -781,6 +842,8 @@ struct ethtool_stats {
 struct ethtool_perm_addr {
 	__u32	cmd;		/* ETHTOOL_GPERMADDR */
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct ethtool_test - device self-test invocation
  * @cmd: Command number = %ETHTOOL_TEST
@@ -833,6 +896,9 @@ struct ethtool_stats {
  */
 struct ethtool_perm_addr {
 	__u32	cmd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u32	size;
 	__u8	data[0];
@@ -1017,7 +1083,11 @@ struct ethtool_rx_flow_spec {
  * location, and may remove a rule at a later location (lower
  * priority) that matches exactly the same set of flows.  The special
 <<<<<<< HEAD
+<<<<<<< HEAD
  * values are: %RX_CLS_LOC_ANY, selecting any location;
+=======
+ * values are %RX_CLS_LOC_ANY, selecting any location;
+>>>>>>> v3.18
 =======
  * values are %RX_CLS_LOC_ANY, selecting any location;
 >>>>>>> v3.18
@@ -1058,7 +1128,10 @@ struct ethtool_rxfh_indir {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct ethtool_rxfh - command to get/set RX flow hash indir or/and hash key.
  * @cmd: Specific command number - %ETHTOOL_GRSSH or %ETHTOOL_SRSSH
  * @rss_context: RSS context identifier.
@@ -1091,6 +1164,9 @@ struct ethtool_rxfh {
 #define ETH_RXFH_INDIR_NO_CHANGE	0xffffffff
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * struct ethtool_rx_ntuple_flow_spec - specification for RX flow filter
  * @flow_type: Type of match to perform, e.g. %TCP_V4_FLOW
@@ -1167,9 +1243,12 @@ struct ethtool_flash {
  * @data: data collected for get dump data operation
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define ETH_FW_DUMP_DISABLE 0
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct ethtool_dump {
@@ -1181,6 +1260,11 @@ struct ethtool_dump {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ETH_FW_DUMP_DISABLE 0
+
+>>>>>>> v3.18
 =======
 #define ETH_FW_DUMP_DISABLE 0
 
@@ -1205,8 +1289,14 @@ struct ethtool_get_features_block {
  * struct ethtool_gfeatures - command to get state of device's features
  * @cmd: command number = %ETHTOOL_GFEATURES
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @size: in: number of elements in the features[] array;
  *       out: number of elements in features[] needed to hold all features
+=======
+ * @size: On entry, the number of elements in the features[] array;
+ *	on return, the number of elements in features[] needed to hold
+ *	all features
+>>>>>>> v3.18
 =======
  * @size: On entry, the number of elements in the features[] array;
  *	on return, the number of elements in features[] needed to hold
@@ -1378,19 +1468,28 @@ enum ethtool_sfeatures_retval_bits {
 #define ETHTOOL_SEEE		0x00000045 /* Set EEE settings */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ETHTOOL_GRSSH		0x00000046 /* Get RX flow hash configuration */
 #define ETHTOOL_SRSSH		0x00000047 /* Set RX flow hash configuration */
 #define ETHTOOL_GTUNABLE	0x00000048 /* Get tunable configuration */
 #define ETHTOOL_STUNABLE	0x00000049 /* Set tunable configuration */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* compatibility with older code */
 #define SPARC_ETH_GSET		ETHTOOL_GSET
 #define SPARC_ETH_SSET		ETHTOOL_SSET
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Indicates what features are supported by the interface. */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SUPPORTED_10baseT_Half		(1 << 0)
@@ -1422,7 +1521,10 @@ enum ethtool_sfeatures_retval_bits {
 #define SUPPORTED_40000baseLR4_Full	(1 << 26)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Indicates what features are advertised by the interface. */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define ADVERTISED_10baseT_Half		(1 << 0)
@@ -1484,8 +1586,13 @@ enum ethtool_sfeatures_retval_bits {
 
 /* Which transceiver to use. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XCVR_INTERNAL		0x00
 #define XCVR_EXTERNAL		0x01
+=======
+#define XCVR_INTERNAL		0x00 /* PHY and MAC are in the same package */
+#define XCVR_EXTERNAL		0x01 /* PHY and MAC are in different packages */
+>>>>>>> v3.18
 =======
 #define XCVR_INTERNAL		0x00 /* PHY and MAC are in the same package */
 #define XCVR_EXTERNAL		0x01 /* PHY and MAC are in different packages */
@@ -1495,9 +1602,13 @@ enum ethtool_sfeatures_retval_bits {
 #define XCVR_DUMMY3		0x04
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Enable or disable autonegotiation.  If this is set to enable,
  * the forced link modes above are completely ignored.
  */
+=======
+/* Enable or disable autonegotiation. */
+>>>>>>> v3.18
 =======
 /* Enable or disable autonegotiation. */
 >>>>>>> v3.18

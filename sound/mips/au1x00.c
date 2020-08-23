@@ -38,6 +38,10 @@
 #include <linux/interrupt.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_device.h>
 >>>>>>> v3.18
@@ -103,6 +107,10 @@ struct snd_au1000 {
 	struct snd_pcm *pcm;
 	struct audio_stream *stream[2];	/* playback & capture */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int dmaid[2];		/* tx(0)/rx(1) DMA ids */
+>>>>>>> v3.18
 =======
 	int dmaid[2];		/* tx(0)/rx(1) DMA ids */
 >>>>>>> v3.18
@@ -474,6 +482,7 @@ snd_au1000_pcm_new(struct snd_au1000 *au1000)
 
 	flags = claim_dma_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((au1000->stream[PLAYBACK]->dma = request_au1000_dma(DMA_ID_AC97C_TX,
 			"AC97 TX", au1000_dma_interrupt, 0,
 			au1000->stream[PLAYBACK])) < 0) {
@@ -484,6 +493,8 @@ snd_au1000_pcm_new(struct snd_au1000 *au1000)
 			"AC97 RX", au1000_dma_interrupt, 0,
 			au1000->stream[CAPTURE])) < 0){
 =======
+=======
+>>>>>>> v3.18
 	au1000->stream[PLAYBACK]->dma = request_au1000_dma(au1000->dmaid[0],
 			"AC97 TX", au1000_dma_interrupt, 0,
 			au1000->stream[PLAYBACK]);
@@ -495,6 +506,9 @@ snd_au1000_pcm_new(struct snd_au1000 *au1000)
 			"AC97 RX", au1000_dma_interrupt, 0,
 			au1000->stream[CAPTURE]);
 	if (au1000->stream[CAPTURE]->dma < 0){
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		release_dma_lock(flags);
 		return -EBUSY;
@@ -575,6 +589,7 @@ get the interrupt driven case to work efficiently */
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 snd_au1000_ac97_new(struct snd_au1000 *au1000)
 {
@@ -639,12 +654,17 @@ snd_au1000_free(struct snd_card *card)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 /*------------------------------ Setup / Destroy ----------------------------*/
 
 static void snd_au1000_free(struct snd_card *card)
 {
 	struct snd_au1000 *au1000 = card->private_data;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (au1000->stream[PLAYBACK]) {
 	  	if (au1000->stream[PLAYBACK]->dma >= 0)
@@ -657,6 +677,7 @@ static void snd_au1000_free(struct snd_card *card)
 			free_au1000_dma(au1000->stream[CAPTURE]->dma);
 		kfree(au1000->stream[CAPTURE]);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -705,6 +726,8 @@ au1000_init(void)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (au1000->ac97_res_port) {
 		/* put internal AC97 block into reset */
@@ -824,11 +847,15 @@ static int au1000_ac97_probe(struct platform_device *pdev)
 	if (err < 0)
 		goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	strcpy(card->driver, "Au1000-AC97");
 	strcpy(card->shortname, "AMD Au1000-AC97");
 	sprintf(card->longname, "AMD Au1000--AC97 ALSA Driver");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((err = snd_card_register(card)) < 0) {
 		snd_card_free(card);
@@ -849,6 +876,8 @@ module_init(au1000_init);
 module_exit(au1000_exit);
 
 =======
+=======
+>>>>>>> v3.18
 	err = snd_card_register(card);
 	if (err < 0)
 		goto out;
@@ -879,4 +908,7 @@ struct platform_driver au1000_ac97c_driver = {
 };
 
 module_platform_driver(au1000_ac97c_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

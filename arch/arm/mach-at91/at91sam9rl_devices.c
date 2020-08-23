@@ -22,11 +22,14 @@
 #include <mach/at91_matrix.h>
 #include <mach/at91sam9_smc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/dma-atmel.h>
 
 #include "board.h"
 #include "generic.h"
 =======
+=======
+>>>>>>> v3.18
 #include <mach/hardware.h>
 #include <linux/platform_data/dma-atmel.h>
 #include <linux/platform_data/at91_adc.h>
@@ -34,6 +37,9 @@
 #include "board.h"
 #include "generic.h"
 #include "gpio.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -509,7 +515,11 @@ void __init at91_add_device_ac97(struct ac97c_platform_data *data) {}
 #if defined(CONFIG_FB_ATMEL) || defined(CONFIG_FB_ATMEL_MODULE)
 static u64 lcdc_dmamask = DMA_BIT_MASK(32);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info lcdc_data;
+=======
+static struct atmel_lcdfb_pdata lcdc_data;
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata lcdc_data;
 >>>>>>> v3.18
@@ -540,7 +550,11 @@ static struct platform_device at91_lcdc_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data)
+=======
+void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data)
+>>>>>>> v3.18
 =======
 void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data)
 >>>>>>> v3.18
@@ -576,7 +590,11 @@ void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data) {}
+=======
+void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data) {}
+>>>>>>> v3.18
 =======
 void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data) {}
 >>>>>>> v3.18
@@ -630,6 +648,7 @@ static void __init at91_add_device_tc(void) { }
 
 /* --------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Touchscreen
  * -------------------------------------------------------------------- */
 
@@ -639,6 +658,8 @@ static struct at91_tsadcc_data tsadcc_data;
 
 static struct resource tsadcc_resources[] = {
 =======
+=======
+>>>>>>> v3.18
  *  ADC and Touchscreen
  * -------------------------------------------------------------------- */
 
@@ -646,6 +667,9 @@ static struct resource tsadcc_resources[] = {
 static struct at91_adc_data adc_data;
 
 static struct resource adc_resources[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[0] = {
 		.start	= AT91SAM9RL_BASE_TSC,
@@ -659,6 +683,7 @@ static struct resource adc_resources[] = {
 	}
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct platform_device at91sam9rl_tsadcc_device = {
 	.name		= "atmel_tsadcc",
@@ -674,6 +699,8 @@ static struct platform_device at91sam9rl_tsadcc_device = {
 
 void __init at91_add_device_tsadcc(struct at91_tsadcc_data *data)
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device at91_adc_device = {
 	.name           = "at91sam9rl-adc",
 	.id             = -1,
@@ -708,11 +735,15 @@ static struct at91_adc_trigger at91_adc_triggers[] = {
 };
 
 void __init at91_add_device_adc(struct at91_adc_data *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (!data)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	at91_set_A_periph(AT91_PIN_PA17, 0);	/* AD0_XR */
 	at91_set_A_periph(AT91_PIN_PA18, 0);	/* AD1_XL */
@@ -728,6 +759,8 @@ void __init at91_add_device_tsadcc(struct at91_tsadcc_data *data) {}
 
 
 =======
+=======
+>>>>>>> v3.18
 	if (test_bit(0, &data->channels_used))
 		at91_set_A_periph(AT91_PIN_PA17, 0);
 	if (test_bit(1, &data->channels_used))
@@ -755,6 +788,9 @@ void __init at91_add_device_tsadcc(struct at91_tsadcc_data *data) {}
 void __init at91_add_device_adc(struct at91_adc_data *data) {}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* --------------------------------------------------------------------
  *  RTC
@@ -862,9 +898,13 @@ static void __init at91_add_device_watchdog(void) {}
  * --------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_ATMEL_PWM)
 static u32 pwm_mask;
 
+=======
+#if IS_ENABLED(CONFIG_PWM_ATMEL)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_PWM_ATMEL)
 >>>>>>> v3.18
@@ -883,11 +923,16 @@ static struct resource pwm_resources[] = {
 
 static struct platform_device at91sam9rl_pwm0_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name	= "atmel_pwm",
 	.id	= -1,
 	.dev	= {
 		.platform_data		= &pwm_mask,
 	},
+=======
+	.name	= "at91sam9rl-pwm",
+	.id	= -1,
+>>>>>>> v3.18
 =======
 	.name	= "at91sam9rl-pwm",
 	.id	= -1,
@@ -911,8 +956,11 @@ void __init at91_add_device_pwm(u32 mask)
 		at91_set_B_periph(AT91_PIN_PD8, 1);	/* enable PWM3 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pwm_mask = mask;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	platform_device_register(&at91sam9rl_pwm0_device);

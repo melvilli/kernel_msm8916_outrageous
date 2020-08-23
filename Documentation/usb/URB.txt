@@ -196,6 +196,7 @@ by the completion handler.
 The handler is of the following type:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	typedef void (*usb_complete_t)(struct urb *, struct pt_regs *)
 
 I.e., it gets the URB that caused the completion call, plus the
@@ -204,12 +205,17 @@ In the completion handler, you should have a look at urb->status to
 detect any USB errors. Since the context parameter is included in the URB,
 you can pass information to the completion handler. 
 =======
+=======
+>>>>>>> v3.18
 	typedef void (*usb_complete_t)(struct urb *)
 
 I.e., it gets the URB that caused the completion call. In the completion
 handler, you should have a look at urb->status to detect any USB errors.
 Since the context parameter is included in the URB, you can pass
 information to the completion handler.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Note that even when an error (or unlink) is reported, data may have been
@@ -220,6 +226,7 @@ have transferred successfully before the completion was called.
 
 NOTE:  ***** WARNING *****
 <<<<<<< HEAD
+<<<<<<< HEAD
 NEVER SLEEP IN A COMPLETION HANDLER.  These are normally called
 during hardware interrupt processing.  If you can, defer substantial
 work to a tasklet (bottom half) to keep system latencies low.  You'll
@@ -227,12 +234,17 @@ probably need to use spinlocks to protect data structures you manipulate
 in completion handlers.
 
 =======
+=======
+>>>>>>> v3.18
 NEVER SLEEP IN A COMPLETION HANDLER.  These are often called in atomic
 context.
 
 In the current kernel, completion handlers run with local interrupts
 disabled, but in the future this will be changed, so don't assume that
 local IRQs are always disabled inside completion handlers.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 1.8. How to do isochronous (ISO) transfers?

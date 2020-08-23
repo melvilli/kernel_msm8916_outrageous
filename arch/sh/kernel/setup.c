@@ -173,7 +173,11 @@ disable:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit calibrate_delay(void)
+=======
+void calibrate_delay(void)
+>>>>>>> v3.18
 =======
 void calibrate_delay(void)
 >>>>>>> v3.18
@@ -235,8 +239,13 @@ void __init __add_active_range(unsigned int nid, unsigned long start_pfn,
 			 PAGE_KERNEL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memblock_set_node(PFN_PHYS(start_pfn),
 			  PFN_PHYS(end_pfn - start_pfn), nid);
+=======
+	memblock_set_node(PFN_PHYS(start_pfn), PFN_PHYS(end_pfn - start_pfn),
+			  &memblock.memory, nid);
+>>>>>>> v3.18
 =======
 	memblock_set_node(PFN_PHYS(start_pfn), PFN_PHYS(end_pfn - start_pfn),
 			  &memblock.memory, nid);

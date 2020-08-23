@@ -143,15 +143,21 @@ static inline __attribute_const__ int get_order(unsigned long size)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Each memory controller has PAs distinct in their high bits. */
 #define NR_PA_HIGHBIT_SHIFT (CHIP_PA_WIDTH() - CHIP_LOG_NUM_MSHIMS())
 =======
+=======
+>>>>>>> v3.18
 /* Allow overriding how much VA or PA the kernel will use. */
 #define MAX_PA_WIDTH CHIP_PA_WIDTH()
 #define MAX_VA_WIDTH CHIP_VA_WIDTH()
 
 /* Each memory controller has PAs distinct in their high bits. */
 #define NR_PA_HIGHBIT_SHIFT (MAX_PA_WIDTH - CHIP_LOG_NUM_MSHIMS())
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define NR_PA_HIGHBIT_VALUES (1 << CHIP_LOG_NUM_MSHIMS())
 #define __pa_to_highbits(pa) ((phys_addr_t)(pa) >> NR_PA_HIGHBIT_SHIFT)
@@ -164,7 +170,11 @@ static inline __attribute_const__ int get_order(unsigned long size)
  * upper half for system code.  We re-map all of physical memory in the
  * upper half, which takes a quarter of our VA space.  Then we have
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the vmalloc regions.  The supervisor code lives at 0xfffffff700000000,
+=======
+ * the vmalloc regions.  The supervisor code lives at the highest address,
+>>>>>>> v3.18
 =======
  * the vmalloc regions.  The supervisor code lives at the highest address,
 >>>>>>> v3.18
@@ -179,6 +189,7 @@ static inline __attribute_const__ int get_order(unsigned long size)
  * Similarly, for now we don't play any struct page mapping games.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if CHIP_PA_WIDTH() + 2 > CHIP_VA_WIDTH()
 # error Too much PA to map with the VA available!
@@ -201,6 +212,8 @@ static inline __attribute_const__ int get_order(unsigned long size)
 /* Highest DTLB address we will use */
 #define KERNEL_HIGH_VADDR	MEM_SV_START
 =======
+=======
+>>>>>>> v3.18
 #if MAX_PA_WIDTH + 2 > MAX_VA_WIDTH
 # error Too much PA to map with the VA available!
 #endif
@@ -213,6 +226,9 @@ static inline __attribute_const__ int get_order(unsigned long size)
 #define MEM_SV_START		(KERNEL_HIGH_VADDR - 0x100000000) /* 256 MB */
 #define MEM_MODULE_START	(MEM_SV_START + (256*1024*1024)) /* 256 MB */
 #define MEM_MODULE_END		(MEM_MODULE_START + (256*1024*1024))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else /* !__tilegx__ */
@@ -236,6 +252,7 @@ static inline __attribute_const__ int get_order(unsigned long size)
  * addresses depend on kernel #defines.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * MEM_HV_INTRPT                   0xfe000000
  * MEM_SV_INTRPT (kernel code)     0xfd000000
  * MEM_USER_INTRPT (user vector)   0xfc000000
@@ -244,17 +261,23 @@ static inline __attribute_const__ int get_order(unsigned long size)
  * HUGE_VMAP                       0xf3000000 (via CONFIG_NR_HUGE_VMAPS)
  * VMALLOC_START                   0xf0000000 (via __VMALLOC_RESERVE)
 =======
+=======
+>>>>>>> v3.18
  * MEM_HV_START                    0xfe000000
  * MEM_SV_START  (kernel code)     0xfd000000
  * MEM_USER_INTRPT (user vector)   0xfc000000
  * FIX_KMAP_xxx                    0xfa000000 (via NR_CPUS * KM_TYPE_NR)
  * PKMAP_BASE                      0xf9000000 (via LAST_PKMAP)
  * VMALLOC_START                   0xf7000000 (via VMALLOC_RESERVE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * mapped LOWMEM                   0xc0000000
  */
 
 #define MEM_USER_INTRPT		_AC(0xfc000000, UL)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if CONFIG_KERNEL_PL == 1
 #define MEM_SV_INTRPT		_AC(0xfd000000, UL)
@@ -264,6 +287,10 @@ static inline __attribute_const__ int get_order(unsigned long size)
 #define MEM_SV_INTRPT		_AC(0xfe000000, UL)
 #define MEM_HV_INTRPT		_AC(0xff000000, UL)
 #endif
+=======
+#define MEM_SV_START		_AC(0xfd000000, UL)
+#define MEM_HV_START		_AC(0xfe000000, UL)
+>>>>>>> v3.18
 =======
 #define MEM_SV_START		_AC(0xfd000000, UL)
 #define MEM_HV_START		_AC(0xfe000000, UL)
@@ -289,7 +316,11 @@ static inline __attribute_const__ int get_order(unsigned long size)
 #endif /* __tilegx__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASSEMBLY__
+=======
+#if !defined(__ASSEMBLY__) && !defined(VDSO_BUILD)
+>>>>>>> v3.18
 =======
 #if !defined(__ASSEMBLY__) && !defined(VDSO_BUILD)
 >>>>>>> v3.18
@@ -379,6 +410,10 @@ static inline int pfn_valid(unsigned long pfn)
 struct mm_struct;
 extern pte_t *virt_to_pte(struct mm_struct *mm, unsigned long addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern pte_t *virt_to_kpte(unsigned long kaddr);
+>>>>>>> v3.18
 =======
 extern pte_t *virt_to_kpte(unsigned long kaddr);
 >>>>>>> v3.18

@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * arch/arm/mach-kirkwood/include/mach/leds-ns2.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Platform data structure for Network Space v2 LED driver
@@ -12,8 +15,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __MACH_LEDS_NS2_H
 #define __MACH_LEDS_NS2_H
+=======
+#ifndef __LEDS_KIRKWOOD_NS2_H
+#define __LEDS_KIRKWOOD_NS2_H
+>>>>>>> v3.18
 =======
 #ifndef __LEDS_KIRKWOOD_NS2_H
 #define __LEDS_KIRKWOOD_NS2_H
@@ -32,7 +40,11 @@ struct ns2_led_platform_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* __MACH_LEDS_NS2_H */
+=======
+#endif /* __LEDS_KIRKWOOD_NS2_H */
+>>>>>>> v3.18
 =======
 #endif /* __LEDS_KIRKWOOD_NS2_H */
 >>>>>>> v3.18

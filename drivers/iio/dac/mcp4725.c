@@ -13,6 +13,7 @@
  * (7-bit I2C slave address 0x60, the three LSBs can be configured in
  * hardware)
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * writing the DAC value to EEPROM is not supported
  */
@@ -22,12 +23,17 @@
 #include <linux/i2c.h>
 #include <linux/err.h>
 =======
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/module.h>
 #include <linux/i2c.h>
 #include <linux/err.h>
 #include <linux/delay.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/iio/iio.h>
@@ -42,6 +48,7 @@ struct mcp4725_data {
 	u16 vref_mv;
 	u16 dac_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 #ifdef CONFIG_PM_SLEEP
@@ -54,6 +61,8 @@ static int mcp4725_suspend(struct device *dev)
 
 	return i2c_master_send(to_i2c_client(dev), outbuf, 2);
 =======
+=======
+>>>>>>> v3.18
 	bool powerdown;
 	unsigned powerdown_mode;
 };
@@ -69,14 +78,22 @@ static int mcp4725_suspend(struct device *dev)
 	data->powerdown = true;
 
 	return i2c_master_send(data->client, outbuf, 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int mcp4725_resume(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
 	struct mcp4725_data *data = iio_priv(indio_dev);
+=======
+	struct mcp4725_data *data = iio_priv(i2c_get_clientdata(
+		to_i2c_client(dev)));
+>>>>>>> v3.18
 =======
 	struct mcp4725_data *data = iio_priv(i2c_get_clientdata(
 		to_i2c_client(dev)));
@@ -87,17 +104,23 @@ static int mcp4725_resume(struct device *dev)
 	outbuf[0] = (data->dac_value >> 8) & 0xf;
 	outbuf[1] = data->dac_value & 0xff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return i2c_master_send(to_i2c_client(dev), outbuf, 2);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	data->powerdown = false;
 
 	return i2c_master_send(data->client, outbuf, 2);
 }
 
 #ifdef CONFIG_PM_SLEEP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static SIMPLE_DEV_PM_OPS(mcp4725_pm_ops, mcp4725_suspend, mcp4725_resume);
 #define MCP4725_PM_OPS (&mcp4725_pm_ops)
@@ -106,7 +129,10 @@ static SIMPLE_DEV_PM_OPS(mcp4725_pm_ops, mcp4725_suspend, mcp4725_resume);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t mcp4725_store_eeprom(struct device *dev,
 	struct device_attribute *attr, const char *buf, size_t len)
 {
@@ -240,6 +266,9 @@ static const struct iio_chan_spec_ext_info mcp4725_ext_info[] = {
 	{ },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct iio_chan_spec mcp4725_channel = {
 	.type		= IIO_VOLTAGE,
@@ -249,7 +278,11 @@ static const struct iio_chan_spec mcp4725_channel = {
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_type	= IIO_ST('u', 12, 16, 0),
+=======
+	.ext_info	= mcp4725_ext_info,
+>>>>>>> v3.18
 =======
 	.ext_info	= mcp4725_ext_info,
 >>>>>>> v3.18
@@ -282,7 +315,10 @@ static int mcp4725_read_raw(struct iio_dev *indio_dev,
 {
 	struct mcp4725_data *data = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long scale_uv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -292,10 +328,16 @@ static int mcp4725_read_raw(struct iio_dev *indio_dev,
 		return IIO_VAL_INT;
 	case IIO_CHAN_INFO_SCALE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scale_uv = (data->vref_mv * 1000) >> 12;
 		*val =  scale_uv / 1000000;
 		*val2 = scale_uv % 1000000;
 		return IIO_VAL_INT_PLUS_MICRO;
+=======
+		*val = data->vref_mv;
+		*val2 = 12;
+		return IIO_VAL_FRACTIONAL_LOG2;
+>>>>>>> v3.18
 =======
 		*val = data->vref_mv;
 		*val2 = 12;
@@ -329,6 +371,10 @@ static const struct iio_info mcp4725_info = {
 	.read_raw = mcp4725_read_raw,
 	.write_raw = mcp4725_write_raw,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.attrs = &mcp4725_attribute_group,
+>>>>>>> v3.18
 =======
 	.attrs = &mcp4725_attribute_group,
 >>>>>>> v3.18
@@ -343,6 +389,10 @@ static int mcp4725_probe(struct i2c_client *client,
 	struct mcp4725_platform_data *platform_data = client->dev.platform_data;
 	u8 inbuf[3];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 pd;
+>>>>>>> v3.18
 =======
 	u8 pd;
 >>>>>>> v3.18
@@ -350,6 +400,7 @@ static int mcp4725_probe(struct i2c_client *client,
 
 	if (!platform_data || !platform_data->vref_mv) {
 		dev_err(&client->dev, "invalid platform data");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		err = -EINVAL;
 		goto exit;
@@ -361,12 +412,17 @@ static int mcp4725_probe(struct i2c_client *client,
 		goto exit;
 	}
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*data));
 	if (indio_dev == NULL)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data = iio_priv(indio_dev);
 	i2c_set_clientdata(client, indio_dev);
@@ -374,7 +430,10 @@ static int mcp4725_probe(struct i2c_client *client,
 
 	indio_dev->dev.parent = &client->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev->name = id->name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	indio_dev->info = &mcp4725_info;
@@ -388,6 +447,7 @@ static int mcp4725_probe(struct i2c_client *client,
 	err = i2c_master_recv(client, inbuf, 3);
 	if (err < 0) {
 		dev_err(&client->dev, "failed to read DAC value");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto exit_free_device;
 	}
@@ -406,6 +466,8 @@ exit_free_device:
 exit:
 	return err;
 =======
+=======
+>>>>>>> v3.18
 		return err;
 	}
 	pd = (inbuf[0] >> 1) & 0x3;
@@ -414,17 +476,24 @@ exit:
 	data->dac_value = (inbuf[1] << 4) | (inbuf[2] >> 4);
 
 	return iio_device_register(indio_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int mcp4725_remove(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iio_dev *indio_dev = i2c_get_clientdata(client);
 
 	iio_device_unregister(indio_dev);
 	iio_device_free(indio_dev);
 
+=======
+	iio_device_unregister(i2c_get_clientdata(client));
+>>>>>>> v3.18
 =======
 	iio_device_unregister(i2c_get_clientdata(client));
 >>>>>>> v3.18

@@ -96,8 +96,13 @@ int vnic_dev_hang_notify(struct vnic_dev *vdev);
 int vnic_dev_packet_filter(struct vnic_dev *vdev, int directed, int multicast,
 	int broadcast, int promisc, int allmulti);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int vnic_dev_add_addr(struct vnic_dev *vdev, u8 *addr);
 int vnic_dev_del_addr(struct vnic_dev *vdev, u8 *addr);
+=======
+int vnic_dev_add_addr(struct vnic_dev *vdev, const u8 *addr);
+int vnic_dev_del_addr(struct vnic_dev *vdev, const u8 *addr);
+>>>>>>> v3.18
 =======
 int vnic_dev_add_addr(struct vnic_dev *vdev, const u8 *addr);
 int vnic_dev_del_addr(struct vnic_dev *vdev, const u8 *addr);
@@ -133,6 +138,10 @@ struct vnic_dev *vnic_dev_register(struct vnic_dev *vdev,
 	void *priv, struct pci_dev *pdev, struct vnic_dev_bar *bar,
 	unsigned int num_bars);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct pci_dev *vnic_dev_get_pdev(struct vnic_dev *vdev);
+>>>>>>> v3.18
 =======
 struct pci_dev *vnic_dev_get_pdev(struct vnic_dev *vdev);
 >>>>>>> v3.18
@@ -142,6 +151,11 @@ int vnic_dev_enable2_done(struct vnic_dev *vdev, int *status);
 int vnic_dev_deinit_done(struct vnic_dev *vdev, int *status);
 int vnic_dev_set_mac_addr(struct vnic_dev *vdev, u8 *mac_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int vnic_dev_classifier(struct vnic_dev *vdev, u8 cmd, u16 *entry,
+			struct filter *data);
+>>>>>>> v3.18
 =======
 int vnic_dev_classifier(struct vnic_dev *vdev, u8 cmd, u16 *entry,
 			struct filter *data);

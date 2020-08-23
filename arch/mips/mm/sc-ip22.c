@@ -168,7 +168,11 @@ static struct bcache_ops indy_sc_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit indy_sc_init(void)
+=======
+void indy_sc_init(void)
+>>>>>>> v3.18
 =======
 void indy_sc_init(void)
 >>>>>>> v3.18

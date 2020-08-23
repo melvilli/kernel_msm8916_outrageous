@@ -17,6 +17,7 @@
  */
 #include "xfs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_sb.h"
 #include "xfs_log.h"
 #include "xfs_ag.h"
@@ -29,6 +30,8 @@
 #include "xfs_btree.h"
 #include "xfs_inode.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_format.h"
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
@@ -39,6 +42,9 @@
 #include "xfs_inode.h"
 #include "xfs_btree.h"
 #include "xfs_alloc_btree.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_alloc.h"
 #include "xfs_error.h"
@@ -46,6 +52,10 @@
 #include "xfs_discard.h"
 #include "xfs_trace.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "xfs_log.h"
+>>>>>>> v3.18
 =======
 #include "xfs_log.h"
 >>>>>>> v3.18
@@ -142,7 +152,11 @@ xfs_trim_extents(
 
 		trace_xfs_discard_extent(mp, agno, fbno, flen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -blkdev_issue_discard(bdev, dbno, dlen, GFP_NOFS, 0);
+=======
+		error = blkdev_issue_discard(bdev, dbno, dlen, GFP_NOFS, 0);
+>>>>>>> v3.18
 =======
 		error = blkdev_issue_discard(bdev, dbno, dlen, GFP_NOFS, 0);
 >>>>>>> v3.18
@@ -179,7 +193,11 @@ xfs_ioc_trim(
 	struct fstrim_range __user	*urange)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct request_queue	*q = mp->m_ddev_targp->bt_bdev->bd_disk->queue;
+=======
+	struct request_queue	*q = bdev_get_queue(mp->m_ddev_targp->bt_bdev);
+>>>>>>> v3.18
 =======
 	struct request_queue	*q = bdev_get_queue(mp->m_ddev_targp->bt_bdev);
 >>>>>>> v3.18
@@ -192,17 +210,23 @@ xfs_ioc_trim(
 
 	if (!capable(CAP_SYS_ADMIN))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EPERM);
 	if (!blk_queue_discard(q))
 		return -XFS_ERROR(EOPNOTSUPP);
 	if (copy_from_user(&range, urange, sizeof(range)))
 		return -XFS_ERROR(EFAULT);
 =======
+=======
+>>>>>>> v3.18
 		return -EPERM;
 	if (!blk_queue_discard(q))
 		return -EOPNOTSUPP;
 	if (copy_from_user(&range, urange, sizeof(range)))
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -214,8 +238,14 @@ xfs_ioc_trim(
 	 */
 	if (range.start >= XFS_FSB_TO_B(mp, mp->m_sb.sb_dblocks) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    range.minlen > XFS_FSB_TO_B(mp, XFS_ALLOC_AG_MAX_USABLE(mp)))
 		return -XFS_ERROR(EINVAL);
+=======
+	    range.minlen > XFS_FSB_TO_B(mp, XFS_ALLOC_AG_MAX_USABLE(mp)) ||
+	    range.len < mp->m_sb.sb_blocksize)
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	    range.minlen > XFS_FSB_TO_B(mp, XFS_ALLOC_AG_MAX_USABLE(mp)) ||
 	    range.len < mp->m_sb.sb_blocksize)
@@ -234,7 +264,11 @@ xfs_ioc_trim(
 
 	for (agno = start_agno; agno <= end_agno; agno++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -xfs_trim_extents(mp, agno, start, end, minlen,
+=======
+		error = xfs_trim_extents(mp, agno, start, end, minlen,
+>>>>>>> v3.18
 =======
 		error = xfs_trim_extents(mp, agno, start, end, minlen,
 >>>>>>> v3.18
@@ -249,7 +283,11 @@ xfs_ioc_trim(
 	range.len = XFS_FSB_TO_B(mp, blocks_trimmed);
 	if (copy_to_user(urange, &range, sizeof(range)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -269,17 +307,23 @@ xfs_discard_extents(
 					 busyp->length);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -blkdev_issue_discard(mp->m_ddev_targp->bt_bdev,
 				XFS_AGB_TO_DADDR(mp, busyp->agno, busyp->bno),
 				XFS_FSB_TO_BB(mp, busyp->length),
 				GFP_NOFS, 0);
 		if (error && error != EOPNOTSUPP) {
 =======
+=======
+>>>>>>> v3.18
 		error = blkdev_issue_discard(mp->m_ddev_targp->bt_bdev,
 				XFS_AGB_TO_DADDR(mp, busyp->agno, busyp->bno),
 				XFS_FSB_TO_BB(mp, busyp->length),
 				GFP_NOFS, 0);
 		if (error && error != -EOPNOTSUPP) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			xfs_info(mp,
 	 "discard failed for extent [0x%llu,%u], error %d",

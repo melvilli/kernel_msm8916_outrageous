@@ -37,6 +37,10 @@
 
 #include <drm/drm_pciids.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_legacy.h>
+>>>>>>> v3.18
 =======
 #include <drm/drm_legacy.h>
 >>>>>>> v3.18
@@ -51,9 +55,14 @@ static const struct file_operations tdfx_driver_fops = {
 	.release = drm_release,
 	.unlocked_ioctl = drm_ioctl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mmap = drm_mmap,
 	.poll = drm_poll,
 	.fasync = drm_fasync,
+=======
+	.mmap = drm_legacy_mmap,
+	.poll = drm_poll,
+>>>>>>> v3.18
 =======
 	.mmap = drm_legacy_mmap,
 	.poll = drm_poll,
@@ -66,7 +75,11 @@ static const struct file_operations tdfx_driver_fops = {
 
 static struct drm_driver driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.driver_features = DRIVER_USE_MTRR,
+=======
+	.set_busid = drm_pci_set_busid,
+>>>>>>> v3.18
 =======
 	.set_busid = drm_pci_set_busid,
 >>>>>>> v3.18

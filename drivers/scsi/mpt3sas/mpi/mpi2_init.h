@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2000-2012 LSI Corporation.
+=======
+ * Copyright (c) 2000-2014 LSI Corporation.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2000-2014 LSI Corporation.
 >>>>>>> v3.18
@@ -11,7 +15,11 @@
  * Creation Date:  June 23, 2006
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * mpi2_init.h Version:  02.00.14
+=======
+ * mpi2_init.h Version:  02.00.15
+>>>>>>> v3.18
 =======
  * mpi2_init.h Version:  02.00.15
 >>>>>>> v3.18
@@ -53,6 +61,11 @@
  *                     Added EEDPErrorOffset to MPI2_SCSI_IO_REPLY.
  * 07-10-12  02.00.14  Added MPI2_SCSIIO_CONTROL_SHIFT_DATADIRECTION.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * 04-09-13  02.00.15  Added SCSIStatusQualifier field to MPI2_SCSI_IO_REPLY,
+ *                     replacing the Reserved4 field.
+>>>>>>> v3.18
 =======
  * 04-09-13  02.00.15  Added SCSIStatusQualifier field to MPI2_SCSI_IO_REPLY,
  *                     replacing the Reserved4 field.
@@ -361,7 +374,11 @@ typedef struct _MPI2_SCSI_IO_REPLY {
 	U32 ResponseInfo;	/*0x1C */
 	U16 TaskTag;		/*0x20 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	U16 Reserved4;		/*0x22 */
+=======
+	U16 SCSIStatusQualifier; /* 0x22 */
+>>>>>>> v3.18
 =======
 	U16 SCSIStatusQualifier; /* 0x22 */
 >>>>>>> v3.18

@@ -2,12 +2,15 @@
 #define _ASM_S390_FUTEX_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/futex.h>
 #include <linux/uaccess.h>
 #include <asm/errno.h>
 
 static inline int futex_atomic_op_inuser (int encoded_op, u32 __user *uaddr)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/uaccess.h>
 #include <linux/futex.h>
 #include <asm/mmu_context.h>
@@ -29,6 +32,9 @@ static inline int futex_atomic_op_inuser (int encoded_op, u32 __user *uaddr)
 		  "m" (*uaddr) : "cc");
 
 static inline int futex_atomic_op_inuser(int encoded_op, u32 __user *uaddr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int op = (encoded_op >> 28) & 7;
@@ -36,8 +42,14 @@ static inline int futex_atomic_op_inuser(int encoded_op, u32 __user *uaddr)
 	int oparg = (encoded_op << 8) >> 20;
 	int cmparg = (encoded_op << 20) >> 20;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int oldval, ret;
 
+=======
+	int oldval = 0, newval, ret;
+
+	load_kernel_asce();
+>>>>>>> v3.18
 =======
 	int oldval = 0, newval, ret;
 
@@ -48,8 +60,11 @@ static inline int futex_atomic_op_inuser(int encoded_op, u32 __user *uaddr)
 
 	pagefault_disable();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = uaccess.futex_atomic_op(op, uaddr, oparg, &oldval);
 =======
+=======
+>>>>>>> v3.18
 	switch (op) {
 	case FUTEX_OP_SET:
 		__futex_atomic_op("lr %2,%5\n",
@@ -74,6 +89,9 @@ static inline int futex_atomic_op_inuser(int encoded_op, u32 __user *uaddr)
 	default:
 		ret = -ENOSYS;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pagefault_enable();
 
@@ -95,8 +113,11 @@ static inline int futex_atomic_cmpxchg_inatomic(u32 *uval, u32 __user *uaddr,
 						u32 oldval, u32 newval)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return uaccess.futex_atomic_cmpxchg(uval, uaddr, oldval, newval);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	load_kernel_asce();
@@ -111,6 +132,9 @@ static inline int futex_atomic_cmpxchg_inatomic(u32 *uval, u32 __user *uaddr,
 		: "cc", "memory");
 	*uval = oldval;
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -352,7 +352,11 @@ static inline void smp_setup_percpu_timer(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -447,7 +451,11 @@ smp_callin (void)
  * Activate a secondary processor.  head.S calls this.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit
+=======
+int
+>>>>>>> v3.18
 =======
 int
 >>>>>>> v3.18
@@ -468,7 +476,11 @@ start_secondary (void *unused)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -741,7 +753,11 @@ static inline void set_cpu_sibling_map(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit
+=======
+int
+>>>>>>> v3.18
 =======
 int
 >>>>>>> v3.18

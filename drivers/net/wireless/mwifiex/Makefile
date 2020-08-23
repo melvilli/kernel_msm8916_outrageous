@@ -1,6 +1,10 @@
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Copyright (C) 2011, Marvell International Ltd.
+=======
+# Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
 # Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -45,6 +49,11 @@ mwifiex-y += uap_txrx.o
 mwifiex-y += cfg80211.o
 mwifiex-y += ethtool.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+mwifiex-y += 11h.o
+mwifiex-y += tdls.o
+>>>>>>> v3.18
 =======
 mwifiex-y += 11h.o
 mwifiex-y += tdls.o

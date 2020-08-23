@@ -33,7 +33,10 @@
 #define PPC_LR_STKOFF	16
 #define PPC_MIN_STKFRM	112
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef __BIG_ENDIAN__
 #define LWZX_BE	stringify_in_c(lwzx)
@@ -47,6 +50,9 @@
 #define STDX_BE	stringify_in_c(stdbrx)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* 32-bit */
 

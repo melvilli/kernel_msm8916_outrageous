@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  arch/arm/mach-pxa/include/mach/pxafb.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  Support for the xscale frame buffer.

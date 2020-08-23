@@ -128,7 +128,10 @@ static void netx_pci_remove(struct pci_dev *dev)
 	pci_release_regions(dev);
 	pci_disable_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(info->mem[0].internal_addr);
@@ -178,6 +181,7 @@ static struct pci_driver netx_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init netx_init_module(void)
 {
 	return pci_register_driver(&netx_pci_driver);
@@ -191,6 +195,9 @@ static void __exit netx_exit_module(void)
 module_init(netx_init_module);
 module_exit(netx_exit_module);
 
+=======
+module_pci_driver(netx_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(netx_pci_driver);
 >>>>>>> v3.18

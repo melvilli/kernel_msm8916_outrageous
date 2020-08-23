@@ -70,7 +70,10 @@
  *	we want to do SE based card emulation.
  * @NFC_CMD_DISABLE_SE: Disable the physical link to a specific secure element.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @NFC_CMD_FW_DOWNLOAD: Request to Load/flash firmware, or event to inform
  *	that some firmware was loaded
  * @NFC_EVENT_SE_ADDED: Event emitted when a new secure element is discovered.
@@ -88,6 +91,9 @@
  *	for this event is the application ID (AID).
  * @NFC_CMD_GET_SE: Dump all discovered secure elements from an NFC controller.
  * @NFC_CMD_SE_IO: Send/Receive APDUs to/from the selected secure element.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 enum nfc_commands {
@@ -113,7 +119,10 @@ enum nfc_commands {
 	NFC_CMD_LLC_SDREQ,
 	NFC_EVENT_LLC_SDRES,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	NFC_CMD_FW_DOWNLOAD,
 	NFC_EVENT_SE_ADDED,
 	NFC_EVENT_SE_REMOVED,
@@ -121,6 +130,9 @@ enum nfc_commands {
 	NFC_EVENT_SE_TRANSACTION,
 	NFC_CMD_GET_SE,
 	NFC_CMD_SE_IO,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* private: internal use only */
 	__NFC_CMD_AFTER_LAST
@@ -152,7 +164,10 @@ enum nfc_commands {
  * @NFC_ATTR_LLC_PARAM_MIUX: MIU eXtension parameter
  * @NFC_ATTR_SE: Available Secure Elements
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @NFC_ATTR_FIRMWARE_NAME: Free format firmware version
  * @NFC_ATTR_SE_INDEX: Secure element index
  * @NFC_ATTR_SE_TYPE: Secure element type (UICC or EMBEDDED)
@@ -160,6 +175,9 @@ enum nfc_commands {
  * @NFC_ATTR_APDU: Secure element APDU
  * @NFC_ATTR_TARGET_ISO15693_DSFID: ISO 15693 Data Storage Format Identifier
  * @NFC_ATTR_TARGET_ISO15693_UID: ISO 15693 Unique Identifier
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 enum nfc_attrs {
@@ -184,7 +202,10 @@ enum nfc_attrs {
 	NFC_ATTR_SE,
 	NFC_ATTR_LLC_SDP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	NFC_ATTR_FIRMWARE_NAME,
 	NFC_ATTR_SE_INDEX,
 	NFC_ATTR_SE_TYPE,
@@ -193,6 +214,9 @@ enum nfc_attrs {
 	NFC_ATTR_SE_APDU,
 	NFC_ATTR_TARGET_ISO15693_DSFID,
 	NFC_ATTR_TARGET_ISO15693_UID,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* private: internal use only */
 	__NFC_ATTR_AFTER_LAST
@@ -211,10 +235,13 @@ enum nfc_sdp_attr {
 #define NFC_DEVICE_NAME_MAXSIZE 8
 #define NFC_NFCID1_MAXSIZE 10
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NFC_SENSB_RES_MAXSIZE 12
 #define NFC_SENSF_RES_MAXSIZE 18
 #define NFC_GB_MAXSIZE        48
 =======
+=======
+>>>>>>> v3.18
 #define NFC_NFCID2_MAXSIZE 8
 #define NFC_NFCID3_MAXSIZE 10
 #define NFC_SENSB_RES_MAXSIZE 12
@@ -222,6 +249,9 @@ enum nfc_sdp_attr {
 #define NFC_GB_MAXSIZE        48
 #define NFC_FIRMWARE_NAME_MAXSIZE 32
 #define NFC_ISO15693_UID_MAXSIZE 8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* NFC protocols */
@@ -232,8 +262,14 @@ enum nfc_sdp_attr {
 #define NFC_PROTO_NFC_DEP	5
 #define NFC_PROTO_ISO14443_B	6
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define NFC_PROTO_MAX		7
+=======
+#define NFC_PROTO_ISO15693	7
+
+#define NFC_PROTO_MAX		8
+>>>>>>> v3.18
 =======
 #define NFC_PROTO_ISO15693	7
 
@@ -257,6 +293,7 @@ enum nfc_sdp_attr {
 #define NFC_PROTO_NFC_DEP_MASK	  (1 << NFC_PROTO_NFC_DEP)
 #define NFC_PROTO_ISO14443_B_MASK (1 << NFC_PROTO_ISO14443_B)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* NFC Secure Elements */
 #define NFC_SE_NONE     0x0
@@ -264,6 +301,8 @@ enum nfc_sdp_attr {
 #define NFC_SE_EMBEDDED 0x2
 
 =======
+=======
+>>>>>>> v3.18
 #define NFC_PROTO_ISO15693_MASK	  (1 << NFC_PROTO_ISO15693)
 
 /* NFC Secure Elements */
@@ -273,6 +312,9 @@ enum nfc_sdp_attr {
 #define NFC_SE_DISABLED 0x0
 #define NFC_SE_ENABLED  0x1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct sockaddr_nfc {
 	sa_family_t sa_family;
@@ -306,12 +348,15 @@ struct sockaddr_nfc_llcp {
  * Second byte contains flags
  *  - 0x01 - Direction (0=RX, 1=TX)
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  - 0x02-0x80 - Reserved
  **/
 #define NFC_LLCP_RAW_HEADER_SIZE	2
 #define NFC_LLCP_DIRECTION_RX		0x00
 #define NFC_LLCP_DIRECTION_TX		0x01
 =======
+=======
+>>>>>>> v3.18
  *  - 0x02-0x04 - Payload type (000=LLCP, 001=NCI, 010=HCI, 011=Digital,
  *                              100=Proprietary)
  *  - 0x05-0x80 - Reserved
@@ -325,6 +370,9 @@ struct sockaddr_nfc_llcp {
 #define RAW_PAYLOAD_HCI	2
 #define RAW_PAYLOAD_DIGITAL	3
 #define RAW_PAYLOAD_PROPRIETARY	4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* socket option names */

@@ -23,6 +23,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/libc-compat.h>
+>>>>>>> v3.18
 =======
 #include <linux/libc-compat.h>
 >>>>>>> v3.18
@@ -31,6 +35,7 @@
  *	IPv6 address structure
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct in6_addr {
 	union {
@@ -44,6 +49,8 @@ struct in6_addr {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #if __UAPI_DEF_IN6_ADDR
 struct in6_addr {
 	union {
@@ -62,6 +69,9 @@ struct in6_addr {
 #endif /* __UAPI_DEF_IN6_ADDR */
 
 #if __UAPI_DEF_SOCKADDR_IN6
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct sockaddr_in6 {
 	unsigned short int	sin6_family;    /* AF_INET6 */
@@ -71,7 +81,13 @@ struct sockaddr_in6 {
 	__u32			sin6_scope_id;  /* scope id (new in RFC2553) */
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#endif /* __UAPI_DEF_SOCKADDR_IN6 */
+
+#if __UAPI_DEF_IPV6_MREQ
+>>>>>>> v3.18
 =======
 #endif /* __UAPI_DEF_SOCKADDR_IN6 */
 
@@ -85,6 +101,10 @@ struct ipv6_mreq {
 	int		ipv6mr_ifindex;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* __UAPI_DEF_IVP6_MREQ */
+>>>>>>> v3.18
 =======
 #endif /* __UAPI_DEF_IVP6_MREQ */
 >>>>>>> v3.18
@@ -110,6 +130,11 @@ struct in6_flowlabel_req {
 #define IPV6_FL_F_CREATE	1
 #define IPV6_FL_F_EXCL		2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IPV6_FL_F_REFLECT	4
+#define IPV6_FL_F_REMOTE	8
+>>>>>>> v3.18
 =======
 #define IPV6_FL_F_REFLECT	4
 #define IPV6_FL_F_REMOTE	8
@@ -155,6 +180,10 @@ struct in6_flowlabel_req {
  *	IPV6 extension headers
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if __UAPI_DEF_IPPROTO_V6
+>>>>>>> v3.18
 =======
 #if __UAPI_DEF_IPPROTO_V6
 >>>>>>> v3.18
@@ -166,6 +195,10 @@ struct in6_flowlabel_req {
 #define IPPROTO_DSTOPTS		60	/* IPv6 destination options	*/
 #define IPPROTO_MH		135	/* IPv6 mobility header		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* __UAPI_DEF_IPPROTO_V6 */
+>>>>>>> v3.18
 =======
 #endif /* __UAPI_DEF_IPPROTO_V6 */
 >>>>>>> v3.18
@@ -215,7 +248,10 @@ struct in6_flowlabel_req {
 #define IPV6_PMTUDISC_DO		2
 #define IPV6_PMTUDISC_PROBE		3
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* same as IPV6_PMTUDISC_PROBE, provided for symetry with IPv4
  * also see comments on IP_PMTUDISC_INTERFACE
  */
@@ -224,6 +260,9 @@ struct in6_flowlabel_req {
  * get fragmented if they exceed the interface mtu
  */
 #define IPV6_PMTUDISC_OMIT		5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Flowlabel */
@@ -298,6 +337,10 @@ struct in6_flowlabel_req {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IPV6_AUTOFLOWLABEL	70
+>>>>>>> v3.18
 =======
 #define IPV6_AUTOFLOWLABEL	70
 >>>>>>> v3.18

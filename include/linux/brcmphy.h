@@ -14,7 +14,10 @@
 #define PHY_ID_BCM57780			0x03625d90
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PHY_ID_BCM7250			0xae025280
 #define PHY_ID_BCM7364			0xae025260
 #define PHY_ID_BCM7366			0x600d8490
@@ -23,13 +26,22 @@
 #define PHY_ID_BCM7439			0x600d8480
 #define PHY_ID_BCM7445			0x600d8510
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PHY_BCM_OUI_MASK		0xfffffc00
 #define PHY_BCM_OUI_1			0x00206000
 #define PHY_BCM_OUI_2			0x0143bc00
 #define PHY_BCM_OUI_3			0x03625c00
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#define PHY_BCM_OUI_4			0x600d8400
+#define PHY_BCM_OUI_5			0x03625e00
+#define PHY_BCM_OUI_6			0xae025000
+>>>>>>> v3.18
 =======
 #define PHY_BCM_OUI_4			0x600d8400
 #define PHY_BCM_OUI_5			0x03625e00
@@ -49,9 +61,12 @@
 #define PHY_BRCM_CLEAR_RGMII_MODE	0x00004000
 #define PHY_BRCM_DIS_TXCRXC_NOENRGY	0x00008000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PHY_BCM_FLAGS_VALID		0x80000000
 
 =======
+=======
+>>>>>>> v3.18
 /* Broadcom BCM7xxx specific workarounds */
 #define PHY_BRCM_7XXX_REV(x)		(((x) >> 8) & 0xff)
 #define PHY_BRCM_7XXX_PATCH(x)		((x) & 0xff)
@@ -234,5 +249,8 @@ static inline int bcm54xx_shadow_write(struct phy_device *phydev, u16 shadow,
 #define LPI_FEATURE_EN			0x8000
 #define LPI_FEATURE_EN_DIG1000X		0x4000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _LINUX_BRCMPHY_H */

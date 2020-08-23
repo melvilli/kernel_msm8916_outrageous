@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Hardware monitoring driver for LM25056 / LM25066 / LM5064 / LM5066
+=======
+ * Hardware monitoring driver for LM25056 / LM25063 / LM25066 / LM5064 / LM5066
+>>>>>>> v3.18
 =======
  * Hardware monitoring driver for LM25056 / LM25063 / LM25066 / LM5064 / LM5066
 >>>>>>> v3.18
@@ -32,7 +36,11 @@
 #include "pmbus.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum chips { lm25056, lm25066, lm5064, lm5066 };
+=======
+enum chips { lm25056, lm25063, lm25066, lm5064, lm5066 };
+>>>>>>> v3.18
 =======
 enum chips { lm25056, lm25063, lm25066, lm5064, lm5066 };
 >>>>>>> v3.18
@@ -61,12 +69,18 @@ enum chips { lm25056, lm25063, lm25066, lm5064, lm5066 };
 #define LM25056_MFR_STS_VAUX_UV_WARN	(1 << 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* LM25063 only */
 
 #define LM25063_READ_VOUT_MAX		0xe5
 #define LM25063_READ_VOUT_MIN		0xe6
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct __coeff {
 	short m, b, R;
@@ -76,7 +90,11 @@ struct __coeff {
 #define PSC_POWER_L		(PSC_NUM_CLASSES + 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __coeff lm25066_coeff[4][PSC_NUM_CLASSES + 2] = {
+=======
+static struct __coeff lm25066_coeff[5][PSC_NUM_CLASSES + 2] = {
+>>>>>>> v3.18
 =======
 static struct __coeff lm25066_coeff[5][PSC_NUM_CLASSES + 2] = {
 >>>>>>> v3.18
@@ -137,7 +155,10 @@ static struct __coeff lm25066_coeff[5][PSC_NUM_CLASSES + 2] = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[lm25063] = {
 		[PSC_VOLTAGE_IN] = {
 			.m = 16000,
@@ -168,6 +189,9 @@ static struct __coeff lm25066_coeff[5][PSC_NUM_CLASSES + 2] = {
 			.R = -3,
 		},
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[lm5064] = {
 		[PSC_VOLTAGE_IN] = {
@@ -232,6 +256,10 @@ static struct __coeff lm25066_coeff[5][PSC_NUM_CLASSES + 2] = {
 struct lm25066_data {
 	int id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 rlimit;			/* Maximum register value */
+>>>>>>> v3.18
 =======
 	u16 rlimit;			/* Maximum register value */
 >>>>>>> v3.18
@@ -258,11 +286,17 @@ static int lm25066_read_word_data(struct i2c_client *client, int page, int reg)
 			ret = DIV_ROUND_CLOSEST(ret * 293, 6140);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case lm25063:
 			/* VIN: 6.25 mV VAUX: 200.0 uV LSB */
 			ret = DIV_ROUND_CLOSEST(ret * 20, 625);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case lm25066:
 			/* VIN: 4.54 mV VAUX: 283.2 uV LSB */
@@ -318,7 +352,10 @@ static int lm25066_read_word_data(struct i2c_client *client, int page, int reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int lm25063_read_word_data(struct i2c_client *client, int page, int reg)
 {
 	int ret;
@@ -337,6 +374,9 @@ static int lm25063_read_word_data(struct i2c_client *client, int page, int reg)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int lm25056_read_word_data(struct i2c_client *client, int page, int reg)
 {
@@ -394,6 +434,7 @@ static int lm25066_write_word_data(struct i2c_client *client, int page, int reg,
 				   u16 word)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	switch (reg) {
@@ -404,6 +445,8 @@ static int lm25066_write_word_data(struct i2c_client *client, int page, int reg,
 	case PMBUS_VIN_OV_WARN_LIMIT:
 		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, 0x0fff);
 =======
+=======
+>>>>>>> v3.18
 	const struct pmbus_driver_info *info = pmbus_get_driver_info(client);
 	const struct lm25066_data *data = to_lm25066_data(info);
 	int ret;
@@ -420,13 +463,20 @@ static int lm25066_write_word_data(struct i2c_client *client, int page, int reg,
 	case PMBUS_VIN_OV_FAULT_LIMIT:
 	case PMBUS_VIN_OV_WARN_LIMIT:
 		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, data->rlimit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = pmbus_write_word_data(client, 0, reg, word);
 		pmbus_clear_cache(client);
 		break;
 	case PMBUS_IIN_OC_WARN_LIMIT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, 0x0fff);
+=======
+		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, data->rlimit);
+>>>>>>> v3.18
 =======
 		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, data->rlimit);
 >>>>>>> v3.18
@@ -437,7 +487,11 @@ static int lm25066_write_word_data(struct i2c_client *client, int page, int reg,
 		break;
 	case PMBUS_PIN_OP_WARN_LIMIT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, 0x0fff);
+=======
+		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, data->rlimit);
+>>>>>>> v3.18
 =======
 		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, data->rlimit);
 >>>>>>> v3.18
@@ -450,7 +504,11 @@ static int lm25066_write_word_data(struct i2c_client *client, int page, int reg,
 		/* Adjust from VIN coefficients (for LM25056) */
 		word = DIV_ROUND_CLOSEST((int)word * 6140, 293);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, 0x0fff);
+=======
+		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, data->rlimit);
+>>>>>>> v3.18
 =======
 		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, data->rlimit);
 >>>>>>> v3.18
@@ -462,7 +520,11 @@ static int lm25066_write_word_data(struct i2c_client *client, int page, int reg,
 		/* Adjust from VIN coefficients (for LM25056) */
 		word = DIV_ROUND_CLOSEST((int)word * 6140, 293);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, 0x0fff);
+=======
+		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, data->rlimit);
+>>>>>>> v3.18
 =======
 		word = ((s16)word < 0) ? 0 : clamp_val(word, 0, data->rlimit);
 >>>>>>> v3.18
@@ -520,10 +582,13 @@ static int lm25066_probe(struct i2c_client *client,
 		info->read_word_data = lm25056_read_word_data;
 		info->read_byte_data = lm25056_read_byte_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		info->func[0] |= PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT;
 		info->read_word_data = lm25066_read_word_data;
 =======
+=======
+>>>>>>> v3.18
 		data->rlimit = 0x0fff;
 	} else if (data->id == lm25063) {
 		info->func[0] |= PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
@@ -534,6 +599,9 @@ static int lm25066_probe(struct i2c_client *client,
 		info->func[0] |= PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT;
 		info->read_word_data = lm25066_read_word_data;
 		data->rlimit = 0x0fff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	info->write_word_data = lm25066_write_word_data;
@@ -566,6 +634,10 @@ static int lm25066_probe(struct i2c_client *client,
 static const struct i2c_device_id lm25066_id[] = {
 	{"lm25056", lm25056},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"lm25063", lm25063},
+>>>>>>> v3.18
 =======
 	{"lm25063", lm25063},
 >>>>>>> v3.18
@@ -591,7 +663,11 @@ module_i2c_driver(lm25066_driver);
 
 MODULE_AUTHOR("Guenter Roeck");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("PMBus driver for LM25056/LM25066/LM5064/LM5066");
+=======
+MODULE_DESCRIPTION("PMBus driver for LM25066 and compatible chips");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("PMBus driver for LM25066 and compatible chips");
 >>>>>>> v3.18

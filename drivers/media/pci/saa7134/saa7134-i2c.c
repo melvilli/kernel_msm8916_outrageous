@@ -428,6 +428,7 @@ int saa7134_i2c_unregister(struct saa7134_dev *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* ----------------------------------------------------------- */
 /*
@@ -435,5 +436,7 @@ int saa7134_i2c_unregister(struct saa7134_dev *dev)
  * c-basic-offset: 8
  * End:
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -238,7 +238,11 @@ int ipmi_set_maintenance_mode(ipmi_user_t user, int mode);
  * have been queued while no one was waiting for events.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ipmi_set_gets_events(ipmi_user_t user, int val);
+=======
+int ipmi_set_gets_events(ipmi_user_t user, bool val);
+>>>>>>> v3.18
 =======
 int ipmi_set_gets_events(ipmi_user_t user, bool val);
 >>>>>>> v3.18

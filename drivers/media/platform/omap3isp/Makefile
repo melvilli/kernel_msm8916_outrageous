@@ -4,7 +4,11 @@ ccflags-$(CONFIG_VIDEO_OMAP3_DEBUG) += -DDEBUG
 
 omap3-isp-objs += \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	isp.o ispqueue.o ispvideo.o \
+=======
+	isp.o ispvideo.o \
+>>>>>>> v3.18
 =======
 	isp.o ispvideo.o \
 >>>>>>> v3.18

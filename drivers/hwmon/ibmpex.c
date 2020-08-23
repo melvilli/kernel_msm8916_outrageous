@@ -3,7 +3,11 @@
  * Copyright (C) 2007 IBM
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Author: Darrick J. Wong <djwong@us.ibm.com>
+=======
+ * Author: Darrick J. Wong <darrick.wong@oracle.com>
+>>>>>>> v3.18
 =======
  * Author: Darrick J. Wong <darrick.wong@oracle.com>
 >>>>>>> v3.18
@@ -468,10 +472,15 @@ static void ibmpex_register_bmc(int iface, struct device *dev)
 
 	data = kzalloc(sizeof(*data), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!data) {
 		dev_err(dev, "Insufficient memory for BMC interface.\n");
 		return;
 	}
+=======
+	if (!data)
+		return;
+>>>>>>> v3.18
 =======
 	if (!data)
 		return;
@@ -616,7 +625,11 @@ static void __exit ibmpex_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Darrick J. Wong <djwong@us.ibm.com>");
+=======
+MODULE_AUTHOR("Darrick J. Wong <darrick.wong@oracle.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Darrick J. Wong <darrick.wong@oracle.com>");
 >>>>>>> v3.18

@@ -240,10 +240,16 @@ static int ad5064_read_raw(struct iio_dev *indio_dev,
 			return scale_uv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scale_uv = (scale_uv * 100) >> chan->scan_type.realbits;
 		*val =  scale_uv / 100000;
 		*val2 = (scale_uv % 100000) * 10;
 		return IIO_VAL_INT_PLUS_MICRO;
+=======
+		*val = scale_uv / 1000;
+		*val2 = chan->scan_type.realbits;
+		return IIO_VAL_FRACTIONAL_LOG2;
+>>>>>>> v3.18
 =======
 		*val = scale_uv / 1000;
 		*val2 = chan->scan_type.realbits;
@@ -292,8 +298,14 @@ static const struct iio_chan_spec_ext_info ad5064_ext_info[] = {
 		.read = ad5064_read_dac_powerdown,
 		.write = ad5064_write_dac_powerdown,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	IIO_ENUM("powerdown_mode", false, &ad5064_powerdown_mode_enum),
+=======
+		.shared = IIO_SEPARATE,
+	},
+	IIO_ENUM("powerdown_mode", IIO_SEPARATE, &ad5064_powerdown_mode_enum),
+>>>>>>> v3.18
 =======
 		.shared = IIO_SEPARATE,
 	},
@@ -312,14 +324,20 @@ static const struct iio_chan_spec_ext_info ad5064_ext_info[] = {
 	BIT(IIO_CHAN_INFO_SCALE),					\
 	.address = addr,					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_type = IIO_ST('u', (bits), 16, 20 - (bits)),	\
 =======
+=======
+>>>>>>> v3.18
 	.scan_type = {						\
 		.sign = 'u',					\
 		.realbits = (bits),				\
 		.storagebits = 16,				\
 		.shift = 20 - bits,				\
 	},							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ext_info = ad5064_ext_info,				\
 }
@@ -464,7 +482,11 @@ static int ad5064_probe(struct device *dev, enum ad5064_type type,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(dev, sizeof(*st));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(dev, sizeof(*st));
 >>>>>>> v3.18
@@ -482,17 +504,23 @@ static int ad5064_probe(struct device *dev, enum ad5064_type type,
 		st->vref_reg[i].supply = ad5064_vref_name(st, i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = regulator_bulk_get(dev, ad5064_num_vref(st),
 		st->vref_reg);
 	if (ret) {
 		if (!st->chip_info->internal_vref)
 			goto error_free;
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_regulator_bulk_get(dev, ad5064_num_vref(st),
 		st->vref_reg);
 	if (ret) {
 		if (!st->chip_info->internal_vref)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		st->use_internal_vref = true;
 		ret = ad5064_write(st, AD5064_CMD_CONFIG, 0,
@@ -501,7 +529,11 @@ static int ad5064_probe(struct device *dev, enum ad5064_type type,
 			dev_err(dev, "Failed to enable internal vref: %d\n",
 				ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto error_free;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -510,7 +542,11 @@ static int ad5064_probe(struct device *dev, enum ad5064_type type,
 		ret = regulator_bulk_enable(ad5064_num_vref(st), st->vref_reg);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto error_free_reg;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -540,11 +576,14 @@ error_disable_reg:
 	if (!st->use_internal_vref)
 		regulator_bulk_disable(ad5064_num_vref(st), st->vref_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_reg:
 	if (!st->use_internal_vref)
 		regulator_bulk_free(ad5064_num_vref(st), st->vref_reg);
 error_free:
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -559,12 +598,17 @@ static int ad5064_remove(struct device *dev)
 	iio_device_unregister(indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!st->use_internal_vref) {
 		regulator_bulk_disable(ad5064_num_vref(st), st->vref_reg);
 		regulator_bulk_free(ad5064_num_vref(st), st->vref_reg);
 	}
 
 	iio_device_free(indio_dev);
+=======
+	if (!st->use_internal_vref)
+		regulator_bulk_disable(ad5064_num_vref(st), st->vref_reg);
+>>>>>>> v3.18
 =======
 	if (!st->use_internal_vref)
 		regulator_bulk_disable(ad5064_num_vref(st), st->vref_reg);
@@ -652,6 +696,7 @@ static int ad5064_i2c_write(struct ad5064_state *st, unsigned int cmd,
 {
 	struct i2c_client *i2c = to_i2c_client(st->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	st->data.i2c[0] = (cmd << 4) | addr;
@@ -663,10 +708,15 @@ static int ad5064_i2c_write(struct ad5064_state *st, unsigned int cmd,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 
 	st->data.i2c[0] = (cmd << 4) | addr;
 	put_unaligned_be16(val, &st->data.i2c[1]);
 	return i2c_master_send(i2c, st->data.i2c, 3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

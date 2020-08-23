@@ -18,7 +18,10 @@
 	.globl __kernel_sigreturn
 	.type __kernel_sigreturn,@function
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nop /* this guy is needed for .LSTARTFDEDLSI1 below (watch for HACK) */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ALIGN

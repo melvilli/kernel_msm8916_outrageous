@@ -70,7 +70,11 @@ static void *rtllib_ccmp_init(int key_idx)
 	priv->tfm = (void *)crypto_alloc_cipher("aes", 0, CRYPTO_ALG_ASYNC);
 	if (IS_ERR(priv->tfm)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "rtllib_crypt_ccmp: could not allocate "
+=======
+		pr_debug("rtllib_crypt_ccmp: could not allocate "
+>>>>>>> v3.18
 =======
 		pr_debug("rtllib_crypt_ccmp: could not allocate "
 >>>>>>> v3.18
@@ -95,6 +99,10 @@ static void rtllib_ccmp_deinit(void *priv)
 {
 	struct rtllib_ccmp_data *_priv = priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -108,6 +116,10 @@ static inline void xor_block(u8 *b, u8 *a, size_t len)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -289,7 +301,11 @@ static int rtllib_ccmp_decrypt(struct sk_buff *skb, int hdr_len, void *priv)
 	if (!(keyidx & (1 << 5))) {
 		if (net_ratelimit()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "CCMP: received packet without ExtIV"
+=======
+			pr_debug("CCMP: received packet without ExtIV"
+>>>>>>> v3.18
 =======
 			pr_debug("CCMP: received packet without ExtIV"
 >>>>>>> v3.18
@@ -301,7 +317,11 @@ static int rtllib_ccmp_decrypt(struct sk_buff *skb, int hdr_len, void *priv)
 	keyidx >>= 6;
 	if (key->key_idx != keyidx) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "CCMP: RX tkey->key_idx=%d frame "
+=======
+		pr_debug("CCMP: RX tkey->key_idx=%d frame "
+>>>>>>> v3.18
 =======
 		pr_debug("CCMP: RX tkey->key_idx=%d frame "
 >>>>>>> v3.18
@@ -311,7 +331,11 @@ static int rtllib_ccmp_decrypt(struct sk_buff *skb, int hdr_len, void *priv)
 	if (!key->key_set) {
 		if (net_ratelimit()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "CCMP: received packet from %pM"
+=======
+			pr_debug("CCMP: received packet from %pM"
+>>>>>>> v3.18
 =======
 			pr_debug("CCMP: received packet from %pM"
 >>>>>>> v3.18
@@ -364,7 +388,11 @@ static int rtllib_ccmp_decrypt(struct sk_buff *skb, int hdr_len, void *priv)
 		if (memcmp(mic, a, CCMP_MIC_LEN) != 0) {
 			if (net_ratelimit()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_DEBUG "CCMP: decrypt failed: STA="
+=======
+				pr_debug("CCMP: decrypt failed: STA="
+>>>>>>> v3.18
 =======
 				pr_debug("CCMP: decrypt failed: STA="
 >>>>>>> v3.18
@@ -444,6 +472,10 @@ static void rtllib_ccmp_print_stats(struct seq_file *m, void *priv)
 {
 	struct rtllib_ccmp_data *ccmp = priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -476,7 +508,11 @@ static struct lib80211_crypto_ops rtllib_crypt_ccmp = {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init rtllib_crypto_ccmp_init(void)
+=======
+static int __init rtllib_crypto_ccmp_init(void)
+>>>>>>> v3.18
 =======
 static int __init rtllib_crypto_ccmp_init(void)
 >>>>>>> v3.18
@@ -486,7 +522,11 @@ static int __init rtllib_crypto_ccmp_init(void)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __exit rtllib_crypto_ccmp_exit(void)
+=======
+static void __exit rtllib_crypto_ccmp_exit(void)
+>>>>>>> v3.18
 =======
 static void __exit rtllib_crypto_ccmp_exit(void)
 >>>>>>> v3.18

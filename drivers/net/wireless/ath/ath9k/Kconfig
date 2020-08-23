@@ -29,7 +29,11 @@ config ATH9K
 	  of chipsets. For a specific list of supported external
 	  cards, laptops that already ship with these cards and
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  APs that come with these cards refer to to ath9k wiki
+=======
+	  APs that come with these cards refer to ath9k wiki
+>>>>>>> v3.18
 =======
 	  APs that come with these cards refer to ath9k wiki
 >>>>>>> v3.18
@@ -61,7 +65,11 @@ config ATH9K_AHB
 config ATH9K_DEBUGFS
 	bool "Atheros ath9k debugging"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ATH9K
+=======
+	depends on ATH9K && DEBUG_FS
+>>>>>>> v3.18
 =======
 	depends on ATH9K && DEBUG_FS
 >>>>>>> v3.18
@@ -74,7 +82,10 @@ config ATH9K_DEBUGFS
 	  Also required for changing debug message flags at run time.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ATH9K_STATION_STATISTICS
 	bool "Detailed station statistics"
 	depends on ATH9K && ATH9K_DEBUGFS && DEBUG_FS
@@ -83,6 +94,9 @@ config ATH9K_STATION_STATISTICS
 	---help---
 	  This option enables detailed statistics for association stations.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ATH9K_DFS_CERTIFIED
 	bool "Atheros DFS support for certified platforms"
@@ -104,6 +118,7 @@ config ATH9K_DFS_CERTIFIED
 	  except increase code size.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ATH9K_MAC_DEBUG
 	bool "Atheros MAC statistics"
 	depends on ATH9K_DEBUGFS
@@ -124,6 +139,8 @@ config ATH9K_LEGACY_RATE_CONTROL
 	  has to be passed to mac80211 using the module parameter,
 	  ieee80211_default_rc_algo.
 =======
+=======
+>>>>>>> v3.18
 config ATH9K_DYNACK
 	bool "Atheros ath9k ACK timeout estimation algorithm (EXPERIMENTAL)"
 	depends on ATH9K
@@ -179,6 +196,9 @@ config ATH9K_CHANNEL_CONTEXT
          This option enables channel context support in ath9k, which is needed
 	 for multi-channel concurrency. Enable this if P2P PowerSave support
 	 is required.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ATH9K_HTC

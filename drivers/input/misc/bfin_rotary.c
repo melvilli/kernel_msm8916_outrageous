@@ -7,7 +7,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -96,7 +99,11 @@ static irqreturn_t bfin_rotary_isr(int irq, void *dev_id)
 static int bfin_rotary_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bfin_rotary_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct bfin_rotary_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct bfin_rotary_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -216,7 +223,10 @@ static int bfin_rotary_remove(struct platform_device *pdev)
 
 	kfree(rotary);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

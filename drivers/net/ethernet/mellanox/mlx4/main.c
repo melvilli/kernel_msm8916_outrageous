@@ -42,7 +42,11 @@
 #include <linux/io-mapping.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/netdevice.h>
+=======
+#include <linux/kmod.h>
+>>>>>>> v3.18
 =======
 #include <linux/kmod.h>
 >>>>>>> v3.18
@@ -82,6 +86,7 @@ MODULE_PARM_DESC(msi_x, "attempt to use MSI-X if nonzero");
 #endif /* CONFIG_PCI_MSI */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int num_vfs;
 module_param(num_vfs, int, 0444);
 MODULE_PARM_DESC(num_vfs, "enable #num_vfs functions if num_vfs > 0");
@@ -90,6 +95,8 @@ static int probe_vf;
 module_param(probe_vf, int, 0644);
 MODULE_PARM_DESC(probe_vf, "number of vfs to probe by pf driver (num_vfs > 0)");
 =======
+=======
+>>>>>>> v3.18
 static uint8_t num_vfs[3] = {0, 0, 0};
 static int num_vfs_argc;
 module_param_array(num_vfs, byte , &num_vfs_argc, 0444);
@@ -101,6 +108,9 @@ static int probe_vfs_argc;
 module_param_array(probe_vf, byte, &probe_vfs_argc, 0444);
 MODULE_PARM_DESC(probe_vf, "number of vfs to probe by pf driver (num_vfs > 0)\n"
 			   "probe_vf=port1,port2,port1+2");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int mlx4_log_num_mgm_entry_size = MLX4_DEFAULT_MGM_LOG_ENTRY_SIZE;
@@ -114,6 +124,7 @@ MODULE_PARM_DESC(log_num_mgm_entry_size, "log mgm size, that defines the num"
 					 " flow steering when available, set to -1");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool enable_64b_cqe_eqe;
 module_param(enable_64b_cqe_eqe, bool, 0444);
 MODULE_PARM_DESC(enable_64b_cqe_eqe,
@@ -123,6 +134,8 @@ MODULE_PARM_DESC(enable_64b_cqe_eqe,
 
 #define PF_CONTEXT_BEHAVIOUR_MASK	MLX4_FUNC_CAP_64B_EQE_CQE
 =======
+=======
+>>>>>>> v3.18
 static bool enable_64b_cqe_eqe = true;
 module_param(enable_64b_cqe_eqe, bool, 0444);
 MODULE_PARM_DESC(enable_64b_cqe_eqe,
@@ -130,6 +143,9 @@ MODULE_PARM_DESC(enable_64b_cqe_eqe,
 
 #define PF_CONTEXT_BEHAVIOUR_MASK	(MLX4_FUNC_CAP_64B_EQE_CQE | \
 					 MLX4_FUNC_CAP_EQE_CQE_STRIDE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static char mlx4_version[] =
@@ -147,7 +163,10 @@ static struct mlx4_profile default_profile = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct mlx4_profile low_mem_profile = {
 	.num_qp		= 1 << 17,
 	.num_srq	= 1 << 6,
@@ -158,6 +177,9 @@ static struct mlx4_profile low_mem_profile = {
 	.num_mtt	= 1 << 7,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int log_num_mac = 7;
 module_param_named(log_num_mac, log_num_mac, int, 0444);
@@ -169,18 +191,24 @@ MODULE_PARM_DESC(log_num_vlan, "Log2 max number of VLANs per ETH port (0-7)");
 /* Log2 max number of VLANs per ETH port (0-7) */
 #define MLX4_LOG_NUM_VLANS 7
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static bool use_prio;
 module_param_named(use_prio, use_prio, bool, 0444);
 MODULE_PARM_DESC(use_prio, "Enable steering by VLAN priority on ETH ports "
 		  "(0/1, default 0)");
 =======
+=======
+>>>>>>> v3.18
 #define MLX4_MIN_LOG_NUM_VLANS 0
 #define MLX4_MIN_LOG_NUM_MAC 1
 
 static bool use_prio;
 module_param_named(use_prio, use_prio, bool, 0444);
 MODULE_PARM_DESC(use_prio, "Enable steering by VLAN priority on ETH ports (deprecated)");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int log_mtts_per_seg = ilog2(MLX4_MTT_ENTRY_PER_SEG);
@@ -200,6 +228,11 @@ struct mlx4_port_config {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static atomic_t pf_loading = ATOMIC_INIT(0);
+
+>>>>>>> v3.18
 =======
 static atomic_t pf_loading = ATOMIC_INIT(0);
 
@@ -213,8 +246,12 @@ int mlx4_check_port_params(struct mlx4_dev *dev,
 		if (port_type[i] != port_type[i + 1]) {
 			if (!(dev->caps.flags & MLX4_DEV_CAP_FLAG_DPDP)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mlx4_err(dev, "Only same port types supported "
 					 "on this HCA, aborting.\n");
+=======
+				mlx4_err(dev, "Only same port types supported on this HCA, aborting\n");
+>>>>>>> v3.18
 =======
 				mlx4_err(dev, "Only same port types supported on this HCA, aborting\n");
 >>>>>>> v3.18
@@ -226,8 +263,13 @@ int mlx4_check_port_params(struct mlx4_dev *dev,
 	for (i = 0; i < dev->caps.num_ports; i++) {
 		if (!(port_type[i] & dev->caps.supported_type[i+1])) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_err(dev, "Requested port type for port %d is not "
 				      "supported on this HCA\n", i + 1);
+=======
+			mlx4_err(dev, "Requested port type for port %d is not supported on this HCA\n",
+				 i + 1);
+>>>>>>> v3.18
 =======
 			mlx4_err(dev, "Requested port type for port %d is not supported on this HCA\n",
 				 i + 1);
@@ -247,7 +289,10 @@ static void mlx4_set_port_mask(struct mlx4_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void mlx4_enable_cqe_eqe_stride(struct mlx4_dev *dev)
 {
 	struct mlx4_caps *dev_cap = &dev->caps;
@@ -282,6 +327,9 @@ static void mlx4_enable_cqe_eqe_stride(struct mlx4_dev *dev)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 {
@@ -291,7 +339,11 @@ static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 	err = mlx4_QUERY_DEV_CAP(dev, dev_cap);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "QUERY_DEV_CAP command failed, aborting.\n");
+=======
+		mlx4_err(dev, "QUERY_DEV_CAP command failed, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "QUERY_DEV_CAP command failed, aborting\n");
 >>>>>>> v3.18
@@ -300,8 +352,12 @@ static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 
 	if (dev_cap->min_page_sz > PAGE_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "HCA minimum page size of %d bigger than "
 			 "kernel PAGE_SIZE of %ld, aborting.\n",
+=======
+		mlx4_err(dev, "HCA minimum page size of %d bigger than kernel PAGE_SIZE of %ld, aborting\n",
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "HCA minimum page size of %d bigger than kernel PAGE_SIZE of %ld, aborting\n",
 >>>>>>> v3.18
@@ -310,8 +366,12 @@ static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 	}
 	if (dev_cap->num_ports > MLX4_MAX_PORTS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "HCA has %d ports, but we only support %d, "
 			 "aborting.\n",
+=======
+		mlx4_err(dev, "HCA has %d ports, but we only support %d, aborting\n",
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "HCA has %d ports, but we only support %d, aborting\n",
 >>>>>>> v3.18
@@ -321,8 +381,12 @@ static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 
 	if (dev_cap->uar_size > pci_resource_len(dev->pdev, 2)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "HCA reported UAR size of 0x%x bigger than "
 			 "PCI resource 2 size of 0x%llx, aborting.\n",
+=======
+		mlx4_err(dev, "HCA reported UAR size of 0x%x bigger than PCI resource 2 size of 0x%llx, aborting\n",
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "HCA reported UAR size of 0x%x bigger than PCI resource 2 size of 0x%llx, aborting\n",
 >>>>>>> v3.18
@@ -406,10 +470,13 @@ static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 		dev->caps.flags &= ~MLX4_DEV_CAP_FLAG_SENSE_SUPPORT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->caps.log_num_macs  = log_num_mac;
 	dev->caps.log_num_vlans = MLX4_LOG_NUM_VLANS;
 	dev->caps.log_num_prios = use_prio ? 3 : 0;
 =======
+=======
+>>>>>>> v3.18
 	if (mlx4_low_memory_profile()) {
 		dev->caps.log_num_macs  = MLX4_MIN_LOG_NUM_MAC;
 		dev->caps.log_num_vlans = MLX4_MIN_LOG_NUM_VLANS;
@@ -417,6 +484,9 @@ static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 		dev->caps.log_num_macs  = log_num_mac;
 		dev->caps.log_num_vlans = MLX4_LOG_NUM_VLANS;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 1; i <= dev->caps.num_ports; ++i) {
@@ -469,8 +539,12 @@ static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 		if (dev->caps.log_num_macs > dev_cap->log_max_macs[i]) {
 			dev->caps.log_num_macs = dev_cap->log_max_macs[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_warn(dev, "Requested number of MACs is too much "
 				  "for port %d, reducing to %d.\n",
+=======
+			mlx4_warn(dev, "Requested number of MACs is too much for port %d, reducing to %d\n",
+>>>>>>> v3.18
 =======
 			mlx4_warn(dev, "Requested number of MACs is too much for port %d, reducing to %d\n",
 >>>>>>> v3.18
@@ -479,8 +553,12 @@ static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 		if (dev->caps.log_num_vlans > dev_cap->log_max_vlans[i]) {
 			dev->caps.log_num_vlans = dev_cap->log_max_vlans[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_warn(dev, "Requested number of VLANs is too much "
 				  "for port %d, reducing to %d.\n",
+=======
+			mlx4_warn(dev, "Requested number of VLANs is too much for port %d, reducing to %d\n",
+>>>>>>> v3.18
 =======
 			mlx4_warn(dev, "Requested number of VLANs is too much for port %d, reducing to %d\n",
 >>>>>>> v3.18
@@ -496,7 +574,10 @@ static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 		(1 << dev->caps.log_num_macs) *
 		(1 << dev->caps.log_num_vlans) *
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(1 << dev->caps.log_num_prios) *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		dev->caps.num_ports;
@@ -517,7 +598,10 @@ static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 			dev->caps.flags &= ~MLX4_DEV_CAP_FLAG_64B_EQE;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (dev_cap->flags2 &
 		    (MLX4_DEV_CAP_FLAG2_CQE_STRIDE |
@@ -526,6 +610,9 @@ static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 			dev_cap->flags2 &= ~MLX4_DEV_CAP_FLAG2_CQE_STRIDE;
 			dev_cap->flags2 &= ~MLX4_DEV_CAP_FLAG2_EQE_STRIDE;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -535,9 +622,12 @@ static int mlx4_dev_cap(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
 		dev->caps.function_caps |= MLX4_FUNC_CAP_64B_EQE_CQE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	if (!mlx4_is_slave(dev))
 		mlx4_enable_cqe_eqe_stride(dev);
 
@@ -621,6 +711,9 @@ static void mlx4_check_pcie_caps(struct mlx4_dev *dev)
 	return;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*The function checks if there are live vf, return the num of them*/
 static int mlx4_how_many_lives_vf(struct mlx4_dev *dev)
@@ -736,6 +829,7 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 	err = mlx4_QUERY_HCA(dev, &hca_param);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "QUERY_HCA command failed, aborting.\n");
 		return err;
 	}
@@ -744,6 +838,8 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 	if ((hca_param.global_caps | HCA_GLOBAL_CAP_MASK) !=
 	    HCA_GLOBAL_CAP_MASK) {
 =======
+=======
+>>>>>>> v3.18
 		mlx4_err(dev, "QUERY_HCA command failed, aborting\n");
 		return err;
 	}
@@ -752,12 +848,20 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 	 * at this time global_caps should be always zeroed
 	 */
 	if (hca_param.global_caps) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mlx4_err(dev, "Unknown hca global capabilities\n");
 		return -ENOSYS;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mlx4_log_num_mgm_entry_size = hca_param.log_mc_entry_sz;
+
+>>>>>>> v3.18
 =======
 	mlx4_log_num_mgm_entry_size = hca_param.log_mc_entry_sz;
 
@@ -769,7 +873,11 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 	err = mlx4_dev_cap(dev, &dev_cap);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "QUERY_DEV_CAP command failed, aborting.\n");
+=======
+		mlx4_err(dev, "QUERY_DEV_CAP command failed, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "QUERY_DEV_CAP command failed, aborting\n");
 >>>>>>> v3.18
@@ -779,7 +887,11 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 	err = mlx4_QUERY_FW(dev);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "QUERY_FW command failed: could not get FW version.\n");
+=======
+		mlx4_err(dev, "QUERY_FW command failed: could not get FW version\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "QUERY_FW command failed: could not get FW version\n");
 >>>>>>> v3.18
@@ -788,8 +900,12 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 	mlx4_warn(dev, "HCA minimum page size:%d\n", page_size);
 	if (page_size > PAGE_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "HCA minimum page size of %d bigger than "
 			 "kernel PAGE_SIZE of %ld, aborting.\n",
+=======
+		mlx4_err(dev, "HCA minimum page size of %d bigger than kernel PAGE_SIZE of %ld, aborting\n",
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "HCA minimum page size of %d bigger than kernel PAGE_SIZE of %ld, aborting\n",
 >>>>>>> v3.18
@@ -811,8 +927,13 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 	err = mlx4_QUERY_FUNC_CAP(dev, 0, &func_cap);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "QUERY_FUNC_CAP general command failed, aborting (%d).\n",
 			  err);
+=======
+		mlx4_err(dev, "QUERY_FUNC_CAP general command failed, aborting (%d)\n",
+			 err);
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "QUERY_FUNC_CAP general command failed, aborting (%d)\n",
 			 err);
@@ -828,6 +949,7 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 
 	dev->caps.num_ports		= func_cap.num_ports;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->caps.num_qps		= func_cap.qp_quota;
 	dev->caps.num_srqs		= func_cap.srq_quota;
 	dev->caps.num_cqs		= func_cap.cq_quota;
@@ -836,6 +958,8 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 	dev->caps.num_mpts		= func_cap.mpt_quota;
 	dev->caps.num_mtts		= func_cap.mtt_quota;
 =======
+=======
+>>>>>>> v3.18
 	dev->quotas.qp			= func_cap.qp_quota;
 	dev->quotas.srq			= func_cap.srq_quota;
 	dev->quotas.cq			= func_cap.cq_quota;
@@ -847,6 +971,9 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 	dev->caps.num_mpts		= 1 << hca_param.log_mpt_sz;
 	dev->caps.num_eqs		= func_cap.max_eq;
 	dev->caps.reserved_eqs		= func_cap.reserved_eq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->caps.num_pds               = MLX4_NUM_PDS;
 	dev->caps.num_mgms              = 0;
@@ -854,18 +981,24 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 
 	if (dev->caps.num_ports > MLX4_MAX_PORTS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "HCA has %d ports, but we only support %d, "
 			 "aborting.\n", dev->caps.num_ports, MLX4_MAX_PORTS);
 		return -ENODEV;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		mlx4_err(dev, "HCA has %d ports, but we only support %d, aborting\n",
 			 dev->caps.num_ports, MLX4_MAX_PORTS);
 		return -ENODEV;
 	}
 
 	dev->caps.qp0_qkey = kcalloc(dev->caps.num_ports, sizeof(u32), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->caps.qp0_tunnel = kcalloc(dev->caps.num_ports, sizeof (u32), GFP_KERNEL);
 	dev->caps.qp0_proxy = kcalloc(dev->caps.num_ports, sizeof (u32), GFP_KERNEL);
@@ -874,7 +1007,12 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 
 	if (!dev->caps.qp0_tunnel || !dev->caps.qp0_proxy ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !dev->caps.qp1_tunnel || !dev->caps.qp1_proxy) {
+=======
+	    !dev->caps.qp1_tunnel || !dev->caps.qp1_proxy ||
+	    !dev->caps.qp0_qkey) {
+>>>>>>> v3.18
 =======
 	    !dev->caps.qp1_tunnel || !dev->caps.qp1_proxy ||
 	    !dev->caps.qp0_qkey) {
@@ -887,16 +1025,22 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 		err = mlx4_QUERY_FUNC_CAP(dev, (u32) i, &func_cap);
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_err(dev, "QUERY_FUNC_CAP port command failed for"
 				 " port %d, aborting (%d).\n", i, err);
 			goto err_mem;
 		}
 =======
+=======
+>>>>>>> v3.18
 			mlx4_err(dev, "QUERY_FUNC_CAP port command failed for port %d, aborting (%d)\n",
 				 i, err);
 			goto err_mem;
 		}
 		dev->caps.qp0_qkey[i - 1] = func_cap.qp0_qkey;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev->caps.qp0_tunnel[i - 1] = func_cap.qp0_tunnel_qpn;
 		dev->caps.qp0_proxy[i - 1] = func_cap.qp0_proxy_qpn;
@@ -904,6 +1048,10 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 		dev->caps.qp1_proxy[i - 1] = func_cap.qp1_proxy_qpn;
 		dev->caps.port_mask[i] = dev->caps.port_type[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev->caps.phys_port_id[i] = func_cap.phys_port_id;
+>>>>>>> v3.18
 =======
 		dev->caps.phys_port_id[i] = func_cap.phys_port_id;
 >>>>>>> v3.18
@@ -917,8 +1065,12 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 				       dev->caps.reserved_uars) >
 				       pci_resource_len(dev->pdev, 2)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "HCA reported UAR region size of 0x%x bigger than "
 			 "PCI resource 2 size of 0x%llx, aborting.\n",
+=======
+		mlx4_err(dev, "HCA reported UAR region size of 0x%x bigger than PCI resource 2 size of 0x%llx, aborting\n",
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "HCA reported UAR region size of 0x%x bigger than PCI resource 2 size of 0x%llx, aborting\n",
 >>>>>>> v3.18
@@ -938,7 +1090,11 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 	if (hca_param.dev_cap_enabled & MLX4_DEV_CAP_64B_CQE_ENABLED) {
 		dev->caps.cqe_size   = 64;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->caps.userspace_caps |= MLX4_USER_DEV_CAP_64B_CQE;
+=======
+		dev->caps.userspace_caps |= MLX4_USER_DEV_CAP_LARGE_CQE;
+>>>>>>> v3.18
 =======
 		dev->caps.userspace_caps |= MLX4_USER_DEV_CAP_LARGE_CQE;
 >>>>>>> v3.18
@@ -947,9 +1103,12 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->caps.flags2 &= ~MLX4_DEV_CAP_FLAG2_TS;
 	mlx4_warn(dev, "Timestamping is not supported in slave mode.\n");
 =======
+=======
+>>>>>>> v3.18
 	if (hca_param.dev_cap_enabled & MLX4_DEV_CAP_EQE_STRIDE_ENABLED) {
 		dev->caps.eqe_size = hca_param.eqe_size;
 		dev->caps.eqe_factor = 0;
@@ -963,6 +1122,9 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 
 	dev->caps.flags2 &= ~MLX4_DEV_CAP_FLAG2_TS;
 	mlx4_warn(dev, "Timestamping is not supported in slave mode\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	slave_adjust_steering_mode(dev, &dev_cap, &hca_param);
@@ -971,6 +1133,10 @@ static int mlx4_slave_cap(struct mlx4_dev *dev)
 
 err_mem:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(dev->caps.qp0_qkey);
+>>>>>>> v3.18
 =======
 	kfree(dev->caps.qp0_qkey);
 >>>>>>> v3.18
@@ -979,21 +1145,30 @@ err_mem:
 	kfree(dev->caps.qp1_tunnel);
 	kfree(dev->caps.qp1_proxy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->caps.qp0_tunnel = dev->caps.qp0_proxy =
 		dev->caps.qp1_tunnel = dev->caps.qp1_proxy = NULL;
 =======
+=======
+>>>>>>> v3.18
 	dev->caps.qp0_qkey = NULL;
 	dev->caps.qp0_tunnel = NULL;
 	dev->caps.qp0_proxy = NULL;
 	dev->caps.qp1_tunnel = NULL;
 	dev->caps.qp1_proxy = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void mlx4_request_modules(struct mlx4_dev *dev)
 {
 	int port;
@@ -1015,6 +1190,9 @@ static void mlx4_request_modules(struct mlx4_dev *dev)
 		request_module_nowait(IB_DRV_NAME);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Change the port configuration of the device.
@@ -1041,8 +1219,13 @@ int mlx4_change_port_types(struct mlx4_dev *dev,
 			err = mlx4_SET_PORT(dev, port, -1);
 			if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mlx4_err(dev, "Failed to set port %d, "
 					      "aborting\n", port);
+=======
+				mlx4_err(dev, "Failed to set port %d, aborting\n",
+					 port);
+>>>>>>> v3.18
 =======
 				mlx4_err(dev, "Failed to set port %d, aborting\n",
 					 port);
@@ -1053,12 +1236,18 @@ int mlx4_change_port_types(struct mlx4_dev *dev,
 		mlx4_set_port_mask(dev);
 		err = mlx4_register_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (err) {
 			mlx4_err(dev, "Failed to register device\n");
 			goto out;
 		}
 		mlx4_request_modules(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1133,9 +1322,13 @@ static ssize_t set_port_type(struct device *dev,
 	}
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(mdev, "Auto sensing is not supported on this HCA. "
 			       "Set only 'eth' or 'ib' for both ports "
 			       "(should be the same)\n");
+=======
+		mlx4_err(mdev, "Auto sensing is not supported on this HCA. Set only 'eth' or 'ib' for both ports (should be the same)\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(mdev, "Auto sensing is not supported on this HCA. Set only 'eth' or 'ib' for both ports (should be the same)\n");
 >>>>>>> v3.18
@@ -1226,17 +1419,23 @@ static ssize_t set_port_ib_mtu(struct device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = sscanf(buf, "%d", &mtu);
 	if (err > 0)
 		ibta_mtu = int_to_ibta_mtu(mtu);
 
 	if (err <= 0 || ibta_mtu < 0) {
 =======
+=======
+>>>>>>> v3.18
 	err = kstrtoint(buf, 0, &mtu);
 	if (!err)
 		ibta_mtu = int_to_ibta_mtu(mtu);
 
 	if (err || ibta_mtu < 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mlx4_err(mdev, "%s is invalid IBTA mtu\n", buf);
 		return -EINVAL;
@@ -1252,8 +1451,13 @@ static ssize_t set_port_ib_mtu(struct device *dev,
 		err = mlx4_SET_PORT(mdev, port, -1);
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_err(mdev, "Failed to set port %d, "
 				      "aborting\n", port);
+=======
+			mlx4_err(mdev, "Failed to set port %d, aborting\n",
+				 port);
+>>>>>>> v3.18
 =======
 			mlx4_err(mdev, "Failed to set port %d, aborting\n",
 				 port);
@@ -1277,7 +1481,11 @@ static int mlx4_load_fw(struct mlx4_dev *dev)
 					 GFP_HIGHUSER | __GFP_NOWARN, 0);
 	if (!priv->fw.fw_icm) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Couldn't allocate FW area, aborting.\n");
+=======
+		mlx4_err(dev, "Couldn't allocate FW area, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Couldn't allocate FW area, aborting\n");
 >>>>>>> v3.18
@@ -1287,7 +1495,11 @@ static int mlx4_load_fw(struct mlx4_dev *dev)
 	err = mlx4_MAP_FA(dev, priv->fw.fw_icm);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "MAP_FA command failed, aborting.\n");
+=======
+		mlx4_err(dev, "MAP_FA command failed, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "MAP_FA command failed, aborting\n");
 >>>>>>> v3.18
@@ -1297,7 +1509,11 @@ static int mlx4_load_fw(struct mlx4_dev *dev)
 	err = mlx4_RUN_FW(dev);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "RUN_FW command failed, aborting.\n");
+=======
+		mlx4_err(dev, "RUN_FW command failed, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "RUN_FW command failed, aborting\n");
 >>>>>>> v3.18
@@ -1385,17 +1601,23 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 	err = mlx4_SET_ICM_SIZE(dev, icm_size, &aux_pages);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "SET_ICM_SIZE command failed, aborting.\n");
 		return err;
 	}
 
 	mlx4_dbg(dev, "%lld KB of HCA context requires %lld KB aux memory.\n",
 =======
+=======
+>>>>>>> v3.18
 		mlx4_err(dev, "SET_ICM_SIZE command failed, aborting\n");
 		return err;
 	}
 
 	mlx4_dbg(dev, "%lld KB of HCA context requires %lld KB aux memory\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 (unsigned long long) icm_size >> 10,
 		 (unsigned long long) aux_pages << 2);
@@ -1404,7 +1626,11 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 					  GFP_HIGHUSER | __GFP_NOWARN, 0);
 	if (!priv->fw.aux_icm) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Couldn't allocate aux memory, aborting.\n");
+=======
+		mlx4_err(dev, "Couldn't allocate aux memory, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Couldn't allocate aux memory, aborting\n");
 >>>>>>> v3.18
@@ -1414,7 +1640,11 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 	err = mlx4_MAP_ICM_AUX(dev, priv->fw.aux_icm);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "MAP_ICM_AUX command failed, aborting.\n");
+=======
+		mlx4_err(dev, "MAP_ICM_AUX command failed, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "MAP_ICM_AUX command failed, aborting\n");
 >>>>>>> v3.18
@@ -1424,7 +1654,11 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 	err = mlx4_init_cmpt_table(dev, init_hca->cmpt_base, dev_cap->cmpt_entry_sz);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to map cMPT context memory, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to map cMPT context memory, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to map cMPT context memory, aborting\n");
 >>>>>>> v3.18
@@ -1439,7 +1673,11 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 				  num_eqs, num_eqs, 0, 0);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to map EQ context memory, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to map EQ context memory, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to map EQ context memory, aborting\n");
 >>>>>>> v3.18
@@ -1464,7 +1702,11 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 				  dev->caps.reserved_mtts, 1, 0);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to map MTT context memory, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to map MTT context memory, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to map MTT context memory, aborting\n");
 >>>>>>> v3.18
@@ -1478,7 +1720,11 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 				  dev->caps.reserved_mrws, 1, 1);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to map dMPT context memory, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to map dMPT context memory, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to map dMPT context memory, aborting\n");
 >>>>>>> v3.18
@@ -1493,7 +1739,11 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 				  0, 0);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to map QP context memory, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to map QP context memory, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to map QP context memory, aborting\n");
 >>>>>>> v3.18
@@ -1508,7 +1758,11 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 				  0, 0);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to map AUXC context memory, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to map AUXC context memory, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to map AUXC context memory, aborting\n");
 >>>>>>> v3.18
@@ -1523,7 +1777,11 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 				  0, 0);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to map ALTC context memory, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to map ALTC context memory, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to map ALTC context memory, aborting\n");
 >>>>>>> v3.18
@@ -1548,7 +1806,11 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 				  dev->caps.reserved_cqs, 0, 0);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to map CQ context memory, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to map CQ context memory, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to map CQ context memory, aborting\n");
 >>>>>>> v3.18
@@ -1562,7 +1824,11 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 				  dev->caps.reserved_srqs, 0, 0);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to map SRQ context memory, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to map SRQ context memory, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to map SRQ context memory, aborting\n");
 >>>>>>> v3.18
@@ -1584,7 +1850,11 @@ static int mlx4_init_icm(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap,
 				  0, 0);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to map MCG context memory, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to map MCG context memory, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to map MCG context memory, aborting\n");
 >>>>>>> v3.18
@@ -1665,7 +1935,11 @@ static void mlx4_slave_exit(struct mlx4_dev *dev)
 	mutex_lock(&priv->cmd.slave_cmd_mutex);
 	if (mlx4_comm_cmd(dev, MLX4_COMM_CMD_RESET, 0, MLX4_COMM_TIME))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_warn(dev, "Failed to close slave function.\n");
+=======
+		mlx4_warn(dev, "Failed to close slave function\n");
+>>>>>>> v3.18
 =======
 		mlx4_warn(dev, "Failed to close slave function\n");
 >>>>>>> v3.18
@@ -1766,12 +2040,18 @@ static int mlx4_init_slave(struct mlx4_dev *dev)
 	u32 cmd_channel_ver;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (atomic_read(&pf_loading)) {
 		mlx4_warn(dev, "PF is not ready - Deferring probe\n");
 		return -EPROBE_DEFER;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_lock(&priv->cmd.slave_cmd_mutex);
 	priv->cmd.max_cmds = 1;
@@ -1783,8 +2063,12 @@ static int mlx4_init_slave(struct mlx4_dev *dev)
 	if (ret_from_reset) {
 		if (MLX4_DELAY_RESET_SLAVE == ret_from_reset) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_warn(dev, "slave is currently in the "
 				  "middle of FLR. Deferring probe.\n");
+=======
+			mlx4_warn(dev, "slave is currently in the middle of FLR - Deferring probe\n");
+>>>>>>> v3.18
 =======
 			mlx4_warn(dev, "slave is currently in the middle of FLR - Deferring probe\n");
 >>>>>>> v3.18
@@ -1802,8 +2086,12 @@ static int mlx4_init_slave(struct mlx4_dev *dev)
 	if (MLX4_COMM_GET_IF_REV(cmd_channel_ver) !=
 		MLX4_COMM_GET_IF_REV(slave_read)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "slave driver version is not supported"
 			 " by the master\n");
+=======
+		mlx4_err(dev, "slave driver version is not supported by the master\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "slave driver version is not supported by the master\n");
 >>>>>>> v3.18
@@ -1838,13 +2126,19 @@ static void mlx4_parav_master_pf_caps(struct mlx4_dev *dev)
 
 	for (i = 1; i <= dev->caps.num_ports; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->caps.gid_table_len[i] = 1;
 =======
+=======
+>>>>>>> v3.18
 		if (dev->caps.port_type[i] == MLX4_PORT_TYPE_ETH)
 			dev->caps.gid_table_len[i] =
 				mlx4_get_slave_num_gids(dev, 0, i);
 		else
 			dev->caps.gid_table_len[i] = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev->caps.pkey_table_len[i] =
 			dev->phys_caps.pkey_phys_table_len[i] - 1;
@@ -1871,7 +2165,11 @@ static void choose_steering_mode(struct mlx4_dev *dev,
 	    dev_cap->flags2 & MLX4_DEV_CAP_FLAG2_FS_EN &&
 	    (!mlx4_is_mfunc(dev) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     (dev_cap->fs_max_num_qp_per_entry >= (num_vfs + 1))) &&
+=======
+	     (dev_cap->fs_max_num_qp_per_entry >= (dev->num_vfs + 1))) &&
+>>>>>>> v3.18
 =======
 	     (dev_cap->fs_max_num_qp_per_entry >= (dev->num_vfs + 1))) &&
 >>>>>>> v3.18
@@ -1893,8 +2191,12 @@ static void choose_steering_mode(struct mlx4_dev *dev,
 			if (dev->caps.flags & MLX4_DEV_CAP_FLAG_VEP_UC_STEER ||
 			    dev->caps.flags & MLX4_DEV_CAP_FLAG_VEP_MC_STEER)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mlx4_warn(dev, "Must have both UC_STEER and MC_STEER flags "
 					  "set to use B0 steering. Falling back to A0 steering mode.\n");
+=======
+				mlx4_warn(dev, "Must have both UC_STEER and MC_STEER flags set to use B0 steering - falling back to A0 steering mode\n");
+>>>>>>> v3.18
 =======
 				mlx4_warn(dev, "Must have both UC_STEER and MC_STEER flags set to use B0 steering - falling back to A0 steering mode\n");
 >>>>>>> v3.18
@@ -1906,8 +2208,12 @@ static void choose_steering_mode(struct mlx4_dev *dev,
 		dev->caps.num_qp_per_mgm = mlx4_get_qp_per_mgm(dev);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_dbg(dev, "Steering mode is: %s, oper_log_mgm_entry_size = %d, "
 		 "modparam log_num_mgm_entry_size = %d\n",
+=======
+	mlx4_dbg(dev, "Steering mode is: %s, oper_log_mgm_entry_size = %d, modparam log_num_mgm_entry_size = %d\n",
+>>>>>>> v3.18
 =======
 	mlx4_dbg(dev, "Steering mode is: %s, oper_log_mgm_entry_size = %d, modparam log_num_mgm_entry_size = %d\n",
 >>>>>>> v3.18
@@ -1917,7 +2223,10 @@ static void choose_steering_mode(struct mlx4_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void choose_tunnel_offload_mode(struct mlx4_dev *dev,
 				       struct mlx4_dev_cap *dev_cap)
 {
@@ -1931,6 +2240,9 @@ static void choose_tunnel_offload_mode(struct mlx4_dev *dev,
 		 == MLX4_TUNNEL_OFFLOAD_MODE_VXLAN) ? "vxlan" : "none");
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mlx4_init_hca(struct mlx4_dev *dev)
 {
@@ -1948,9 +2260,15 @@ static int mlx4_init_hca(struct mlx4_dev *dev)
 		if (err) {
 			if (err == -EACCES)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mlx4_info(dev, "non-primary physical function, skipping.\n");
 			else
 				mlx4_err(dev, "QUERY_FW command failed, aborting.\n");
+=======
+				mlx4_info(dev, "non-primary physical function, skipping\n");
+			else
+				mlx4_err(dev, "QUERY_FW command failed, aborting\n");
+>>>>>>> v3.18
 =======
 				mlx4_info(dev, "non-primary physical function, skipping\n");
 			else
@@ -1962,7 +2280,11 @@ static int mlx4_init_hca(struct mlx4_dev *dev)
 		err = mlx4_load_fw(dev);
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_err(dev, "Failed to start FW, aborting.\n");
+=======
+			mlx4_err(dev, "Failed to start FW, aborting\n");
+>>>>>>> v3.18
 =======
 			mlx4_err(dev, "Failed to start FW, aborting\n");
 >>>>>>> v3.18
@@ -1978,7 +2300,11 @@ static int mlx4_init_hca(struct mlx4_dev *dev)
 		err = mlx4_dev_cap(dev, &dev_cap);
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_err(dev, "QUERY_DEV_CAP command failed, aborting.\n");
+=======
+			mlx4_err(dev, "QUERY_DEV_CAP command failed, aborting\n");
+>>>>>>> v3.18
 =======
 			mlx4_err(dev, "QUERY_DEV_CAP command failed, aborting\n");
 >>>>>>> v3.18
@@ -1987,26 +2313,38 @@ static int mlx4_init_hca(struct mlx4_dev *dev)
 
 		choose_steering_mode(dev, &dev_cap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		choose_tunnel_offload_mode(dev, &dev_cap);
 
 		err = mlx4_get_phys_port_id(dev);
 		if (err)
 			mlx4_err(dev, "Fail to get physical port id\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (mlx4_is_master(dev))
 			mlx4_parav_master_pf_caps(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		profile = default_profile;
 =======
+=======
+>>>>>>> v3.18
 		if (mlx4_low_memory_profile()) {
 			mlx4_info(dev, "Running from within kdump kernel. Using low memory profile\n");
 			profile = low_mem_profile;
 		} else {
 			profile = default_profile;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (dev->caps.steering_mode ==
 		    MLX4_STEERING_MODE_DEVICE_MANAGED)
@@ -2035,7 +2373,11 @@ static int mlx4_init_hca(struct mlx4_dev *dev)
 		err = mlx4_INIT_HCA(dev, &init_hca);
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_err(dev, "INIT_HCA command failed, aborting.\n");
+=======
+			mlx4_err(dev, "INIT_HCA command failed, aborting\n");
+>>>>>>> v3.18
 =======
 			mlx4_err(dev, "INIT_HCA command failed, aborting\n");
 >>>>>>> v3.18
@@ -2050,7 +2392,11 @@ static int mlx4_init_hca(struct mlx4_dev *dev)
 			err = mlx4_QUERY_HCA(dev, &init_hca);
 			if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mlx4_err(dev, "QUERY_HCA command failed, disable timestamp.\n");
+=======
+				mlx4_err(dev, "QUERY_HCA command failed, disable timestamp\n");
+>>>>>>> v3.18
 =======
 				mlx4_err(dev, "QUERY_HCA command failed, disable timestamp\n");
 >>>>>>> v3.18
@@ -2067,7 +2413,11 @@ static int mlx4_init_hca(struct mlx4_dev *dev)
 				dev->caps.flags2 &= ~MLX4_DEV_CAP_FLAG2_TS;
 				mlx4_err(dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 "HCA frequency is 0. Timestamping is not supported.");
+=======
+					 "HCA frequency is 0 - timestamping is not supported\n");
+>>>>>>> v3.18
 =======
 					 "HCA frequency is 0 - timestamping is not supported\n");
 >>>>>>> v3.18
@@ -2078,7 +2428,11 @@ static int mlx4_init_hca(struct mlx4_dev *dev)
 				 */
 				dev->caps.flags2 &= ~MLX4_DEV_CAP_FLAG2_TS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mlx4_err(dev, "Failed to map internal clock. Timestamping is not supported.\n");
+=======
+				mlx4_err(dev, "Failed to map internal clock. Timestamping is not supported\n");
+>>>>>>> v3.18
 =======
 				mlx4_err(dev, "Failed to map internal clock. Timestamping is not supported\n");
 >>>>>>> v3.18
@@ -2109,7 +2463,11 @@ static int mlx4_init_hca(struct mlx4_dev *dev)
 	err = mlx4_QUERY_ADAPTER(dev, &adapter);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "QUERY_ADAPTER command failed, aborting.\n");
+=======
+		mlx4_err(dev, "QUERY_ADAPTER command failed, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "QUERY_ADAPTER command failed, aborting\n");
 >>>>>>> v3.18
@@ -2126,7 +2484,10 @@ unmap_bf:
 	unmap_bf_area(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (mlx4_is_slave(dev)) {
 		kfree(dev->caps.qp0_qkey);
 		kfree(dev->caps.qp0_tunnel);
@@ -2135,6 +2496,9 @@ unmap_bf:
 		kfree(dev->caps.qp1_proxy);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_close:
 	if (mlx4_is_slave(dev))
@@ -2206,7 +2570,11 @@ EXPORT_SYMBOL_GPL(mlx4_counter_alloc);
 void __mlx4_counter_free(struct mlx4_dev *dev, u32 idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_bitmap_free(&mlx4_priv(dev)->counters_bitmap, idx);
+=======
+	mlx4_bitmap_free(&mlx4_priv(dev)->counters_bitmap, idx, MLX4_USE_RR);
+>>>>>>> v3.18
 =======
 	mlx4_bitmap_free(&mlx4_priv(dev)->counters_bitmap, idx, MLX4_USE_RR);
 >>>>>>> v3.18
@@ -2238,9 +2606,14 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 	err = mlx4_init_uar_table(dev);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to initialize "
 			 "user access region table, aborting.\n");
 		return err;
+=======
+		mlx4_err(dev, "Failed to initialize user access region table, aborting\n");
+		 return err;
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to initialize user access region table, aborting\n");
 		 return err;
@@ -2250,8 +2623,12 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 	err = mlx4_uar_alloc(dev, &priv->driver_uar);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to allocate driver access region, "
 			 "aborting.\n");
+=======
+		mlx4_err(dev, "Failed to allocate driver access region, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to allocate driver access region, aborting\n");
 >>>>>>> v3.18
@@ -2261,8 +2638,12 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 	priv->kar = ioremap((phys_addr_t) priv->driver_uar.pfn << PAGE_SHIFT, PAGE_SIZE);
 	if (!priv->kar) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Couldn't map kernel access region, "
 			 "aborting.\n");
+=======
+		mlx4_err(dev, "Couldn't map kernel access region, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Couldn't map kernel access region, aborting\n");
 >>>>>>> v3.18
@@ -2273,8 +2654,12 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 	err = mlx4_init_pd_table(dev);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to initialize "
 			 "protection domain table, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to initialize protection domain table, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to initialize protection domain table, aborting\n");
 >>>>>>> v3.18
@@ -2284,8 +2669,12 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 	err = mlx4_init_xrcd_table(dev);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to initialize "
 			 "reliable connection domain table, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to initialize reliable connection domain table, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to initialize reliable connection domain table, aborting\n");
 >>>>>>> v3.18
@@ -2294,6 +2683,7 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 
 	err = mlx4_init_mr_table(dev);
 	if (err) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		mlx4_err(dev, "Failed to initialize "
 			 "memory region table, aborting.\n");
@@ -2306,6 +2696,8 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 			 "event queue table, aborting.\n");
 		goto err_mr_table_free;
 =======
+=======
+>>>>>>> v3.18
 		mlx4_err(dev, "Failed to initialize memory region table, aborting\n");
 		goto err_xrcd_table_free;
 	}
@@ -2327,14 +2719,21 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 	if (err) {
 		mlx4_err(dev, "Failed to initialize event queue table, aborting\n");
 		goto err_mcg_table_free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	err = mlx4_cmd_use_events(dev);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to switch to event-driven "
 			 "firmware commands, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to switch to event-driven firmware commands, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to switch to event-driven firmware commands, aborting\n");
 >>>>>>> v3.18
@@ -2345,6 +2744,7 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 	if (err) {
 		if (dev->flags & MLX4_FLAG_MSI_X) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_warn(dev, "NOP command failed to generate MSI-X "
 				  "interrupt IRQ %d).\n",
 				  priv->eq_table.eq[dev->caps.num_comp_vectors].irq);
@@ -2353,11 +2753,16 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 			mlx4_err(dev, "NOP command failed to generate interrupt "
 				 "(IRQ %d), aborting.\n",
 =======
+=======
+>>>>>>> v3.18
 			mlx4_warn(dev, "NOP command failed to generate MSI-X interrupt IRQ %d)\n",
 				  priv->eq_table.eq[dev->caps.num_comp_vectors].irq);
 			mlx4_warn(dev, "Trying again without MSI-X\n");
 		} else {
 			mlx4_err(dev, "NOP command failed to generate interrupt (IRQ %d), aborting\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 priv->eq_table.eq[dev->caps.num_comp_vectors].irq);
 			mlx4_err(dev, "BIOS or ACPI interrupt routing problem?\n");
@@ -2371,8 +2776,12 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 	err = mlx4_init_cq_table(dev);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to initialize "
 			 "completion queue table, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to initialize completion queue table, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to initialize completion queue table, aborting\n");
 >>>>>>> v3.18
@@ -2382,8 +2791,12 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 	err = mlx4_init_srq_table(dev);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to initialize "
 			 "shared receive queue table, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to initialize shared receive queue table, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to initialize shared receive queue table, aborting\n");
 >>>>>>> v3.18
@@ -2392,6 +2805,7 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 
 	err = mlx4_init_qp_table(dev);
 	if (err) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		mlx4_err(dev, "Failed to initialize "
 			 "queue pair table, aborting.\n");
@@ -2412,6 +2826,8 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 		mlx4_err(dev, "Failed to initialize counters table, aborting.\n");
 		goto err_mcg_table_free;
 =======
+=======
+>>>>>>> v3.18
 		mlx4_err(dev, "Failed to initialize queue pair table, aborting\n");
 		goto err_srq_table_free;
 	}
@@ -2420,6 +2836,9 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 	if (err && err != -ENOENT) {
 		mlx4_err(dev, "Failed to initialize counters table, aborting\n");
 		goto err_qp_table_free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2430,9 +2849,14 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 						    &ib_port_default_caps);
 			if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mlx4_warn(dev, "failed to get port %d default "
 					  "ib capabilities (%d). Continuing "
 					  "with caps = 0\n", port, err);
+=======
+				mlx4_warn(dev, "failed to get port %d default ib capabilities (%d). Continuing with caps = 0\n",
+					  port, err);
+>>>>>>> v3.18
 =======
 				mlx4_warn(dev, "failed to get port %d default ib capabilities (%d). Continuing with caps = 0\n",
 					  port, err);
@@ -2447,7 +2871,11 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 						continue;
 					priv->mfunc.master.slave_state[i].ib_cap_mask[port] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							ib_port_default_caps;
+=======
+						ib_port_default_caps;
+>>>>>>> v3.18
 =======
 						ib_port_default_caps;
 >>>>>>> v3.18
@@ -2464,7 +2892,11 @@ static int mlx4_setup_hca(struct mlx4_dev *dev)
 			if (err) {
 				mlx4_err(dev, "Failed to set port %d, aborting\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					port);
+=======
+					 port);
+>>>>>>> v3.18
 =======
 					 port);
 >>>>>>> v3.18
@@ -2479,9 +2911,12 @@ err_counters_table_free:
 	mlx4_cleanup_counters_table(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_mcg_table_free:
 	mlx4_cleanup_mcg_table(dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_qp_table_free:
@@ -2500,11 +2935,17 @@ err_eq_table_free:
 	mlx4_cleanup_eq_table(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 err_mcg_table_free:
 	if (!mlx4_is_slave(dev))
 		mlx4_cleanup_mcg_table(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_mr_table_free:
 	mlx4_cleanup_mr_table(dev);
@@ -2532,9 +2973,14 @@ static void mlx4_enable_msi_x(struct mlx4_dev *dev)
 	struct msix_entry *entries;
 	int nreq = min_t(int, dev->caps.num_ports *
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 min_t(int, netif_get_num_default_rss_queues() + 1,
 			       MAX_MSIX_P_PORT) + MSIX_LEGACY_SZ, MAX_MSIX);
 	int err;
+=======
+			 min_t(int, num_online_cpus() + 1,
+			       MAX_MSIX_P_PORT) + MSIX_LEGACY_SZ, MAX_MSIX);
+>>>>>>> v3.18
 =======
 			 min_t(int, num_online_cpus() + 1,
 			       MAX_MSIX_P_PORT) + MSIX_LEGACY_SZ, MAX_MSIX);
@@ -2552,6 +2998,7 @@ static void mlx4_enable_msi_x(struct mlx4_dev *dev)
 		for (i = 0; i < nreq; ++i)
 			entries[i].entry = i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	retry:
 		err = pci_enable_msix(dev->pdev, entries, nreq);
@@ -2571,6 +3018,8 @@ static void mlx4_enable_msi_x(struct mlx4_dev *dev)
 		if (nreq <
 		    MSIX_LEGACY_SZ + dev->caps.num_ports * MIN_MSIX_P_PORT) {
 =======
+=======
+>>>>>>> v3.18
 		nreq = pci_enable_msix_range(dev->pdev, entries, 2, nreq);
 
 		if (nreq < 0) {
@@ -2578,6 +3027,9 @@ static void mlx4_enable_msi_x(struct mlx4_dev *dev)
 			goto no_msi;
 		} else if (nreq < MSIX_LEGACY_SZ +
 			   dev->caps.num_ports * MIN_MSIX_P_PORT) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*Working in legacy mode , all EQ's shared*/
 			dev->caps.comp_pool           = 0;
@@ -2614,6 +3066,10 @@ static int mlx4_init_port_info(struct mlx4_dev *dev, int port)
 		mlx4_init_mac_table(dev, &info->mac_table);
 		mlx4_init_vlan_table(dev, &info->vlan_table);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		mlx4_init_roce_gid_table(dev, &info->gid_table);
+>>>>>>> v3.18
 =======
 		mlx4_init_roce_gid_table(dev, &info->gid_table);
 >>>>>>> v3.18
@@ -2765,6 +3221,7 @@ static void mlx4_free_ownership(struct mlx4_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __mlx4_init_one(struct pci_dev *pdev, int pci_dev_data)
 {
 	struct mlx4_priv *priv;
@@ -2838,6 +3295,8 @@ static int __mlx4_init_one(struct pci_dev *pdev, int pci_dev_data)
 	priv      = mlx4_priv(dev);
 	dev->pdev = pdev;
 =======
+=======
+>>>>>>> v3.18
 static int mlx4_load_one(struct pci_dev *pdev, int pci_dev_data,
 			 int total_vfs, int *nvfs, struct mlx4_priv *priv)
 {
@@ -2850,6 +3309,9 @@ static int mlx4_load_one(struct pci_dev *pdev, int pci_dev_data,
 
 	dev = &priv->dev;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&priv->ctx_list);
 	spin_lock_init(&priv->ctx_lock);
@@ -2864,6 +3326,7 @@ static int mlx4_load_one(struct pci_dev *pdev, int pci_dev_data,
 
 	dev->rev_id = pdev->revision;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Detect if this device is a virtual function */
 	if (pci_dev_data & MLX4_PCI_DEV_IS_VF) {
 		/* When acting as pf, we normally skip vfs unless explicitly
@@ -2875,10 +3338,15 @@ static int mlx4_load_one(struct pci_dev *pdev, int pci_dev_data,
 			goto err_free_dev;
 		}
 =======
+=======
+>>>>>>> v3.18
 	dev->numa_node = dev_to_node(&pdev->dev);
 
 	/* Detect if this device is a virtual function */
 	if (pci_dev_data & MLX4_PCI_DEV_IS_VF) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mlx4_warn(dev, "Detected virtual function - running in slave mode\n");
 		dev->flags |= MLX4_FLAG_SLAVE;
@@ -2889,6 +3357,7 @@ static int mlx4_load_one(struct pci_dev *pdev, int pci_dev_data,
 		err = mlx4_get_ownership(dev);
 		if (err) {
 			if (err < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 				goto err_free_dev;
 			else {
@@ -2915,6 +3384,8 @@ static int mlx4_load_one(struct pci_dev *pdev, int pci_dev_data,
 		}
 
 =======
+=======
+>>>>>>> v3.18
 				return err;
 			else {
 				mlx4_warn(dev, "Multiple PFs not yet supported - Skipping PF\n");
@@ -2959,6 +3430,9 @@ static int mlx4_load_one(struct pci_dev *pdev, int pci_dev_data,
 		atomic_set(&priv->opreq_count, 0);
 		INIT_WORK(&priv->opreq_task, mlx4_opreq_action);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Now reset the HCA before we touch the PCI capabilities or
@@ -2968,8 +3442,13 @@ static int mlx4_load_one(struct pci_dev *pdev, int pci_dev_data,
 		err = mlx4_reset(dev);
 		if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mlx4_err(dev, "Failed to reset HCA, aborting.\n");
 			goto err_rel_own;
+=======
+			mlx4_err(dev, "Failed to reset HCA, aborting\n");
+			goto err_sriov;
+>>>>>>> v3.18
 =======
 			mlx4_err(dev, "Failed to reset HCA, aborting\n");
 			goto err_sriov;
@@ -2981,7 +3460,11 @@ slave_start:
 	err = mlx4_cmd_init(dev);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "Failed to init command interface, aborting.\n");
+=======
+		mlx4_err(dev, "Failed to init command interface, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "Failed to init command interface, aborting\n");
 >>>>>>> v3.18
@@ -2999,8 +3482,12 @@ slave_start:
 			err = mlx4_multi_func_init(dev);
 			if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mlx4_err(dev, "Failed to init slave mfunc"
 					 " interface, aborting.\n");
+=======
+				mlx4_err(dev, "Failed to init slave mfunc interface, aborting\n");
+>>>>>>> v3.18
 =======
 				mlx4_err(dev, "Failed to init slave mfunc interface, aborting\n");
 >>>>>>> v3.18
@@ -3023,6 +3510,7 @@ slave_start:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* In master functions, the communication channel must be initialized
 	 * after obtaining its address from fw */
 	if (mlx4_is_master(dev)) {
@@ -3031,6 +3519,8 @@ slave_start:
 			mlx4_err(dev, "Failed to init master mfunc"
 				 "interface, aborting.\n");
 =======
+=======
+>>>>>>> v3.18
 	/* check if the device is functioning at its maximum possible speed.
 	 * No return code for this call, just warn the user in case of PCI
 	 * express device capabilities are under-satisfied by the bus.
@@ -3079,6 +3569,9 @@ slave_start:
 		err = mlx4_multi_func_init(dev);
 		if (err) {
 			mlx4_err(dev, "Failed to init master mfunc interface, aborting.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto err_close;
 		}
@@ -3096,8 +3589,12 @@ slave_start:
 	    !(dev->flags & MLX4_FLAG_MSI_X)) {
 		err = -ENOSYS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mlx4_err(dev, "INTx is not supported in multi-function mode."
 			 " aborting.\n");
+=======
+		mlx4_err(dev, "INTx is not supported in multi-function mode, aborting\n");
+>>>>>>> v3.18
 =======
 		mlx4_err(dev, "INTx is not supported in multi-function mode, aborting\n");
 >>>>>>> v3.18
@@ -3108,7 +3605,11 @@ slave_start:
 		err = mlx4_init_steering(dev);
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_free_eq;
+=======
+			goto err_disable_msix;
+>>>>>>> v3.18
 =======
 			goto err_disable_msix;
 >>>>>>> v3.18
@@ -3128,6 +3629,11 @@ slave_start:
 		goto err_steer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mlx4_init_quotas(dev);
+
+>>>>>>> v3.18
 =======
 	mlx4_init_quotas(dev);
 
@@ -3143,6 +3649,11 @@ slave_start:
 		goto err_port;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mlx4_request_modules(dev);
+
+>>>>>>> v3.18
 =======
 	mlx4_request_modules(dev);
 
@@ -3153,6 +3664,12 @@ slave_start:
 	priv->removed = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (mlx4_is_master(dev) && dev->num_vfs)
+		atomic_dec(&pf_loading);
+
+>>>>>>> v3.18
 =======
 	if (mlx4_is_master(dev) && dev->num_vfs)
 		atomic_dec(&pf_loading);
@@ -3166,7 +3683,10 @@ err_port:
 
 	mlx4_cleanup_counters_table(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mlx4_cleanup_mcg_table(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mlx4_cleanup_qp_table(dev);
@@ -3175,6 +3695,10 @@ err_port:
 	mlx4_cmd_use_polling(dev);
 	mlx4_cleanup_eq_table(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mlx4_cleanup_mcg_table(dev);
+>>>>>>> v3.18
 =======
 	mlx4_cleanup_mcg_table(dev);
 >>>>>>> v3.18
@@ -3188,11 +3712,17 @@ err_steer:
 		mlx4_clear_steering(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 err_disable_msix:
 	if (dev->flags & MLX4_FLAG_MSI_X)
 		pci_disable_msix(pdev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_free_eq:
 	mlx4_free_eq_table(dev);
@@ -3202,11 +3732,14 @@ err_master_mfunc:
 		mlx4_multi_func_cleanup(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_close:
 	if (dev->flags & MLX4_FLAG_MSI_X)
 		pci_disable_msix(pdev);
 
 =======
+=======
+>>>>>>> v3.18
 	if (mlx4_is_slave(dev)) {
 		kfree(dev->caps.qp0_qkey);
 		kfree(dev->caps.qp0_tunnel);
@@ -3216,6 +3749,9 @@ err_close:
 	}
 
 err_close:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mlx4_close_hca(dev);
 
@@ -3228,6 +3764,7 @@ err_cmd:
 
 err_sriov:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->flags & MLX4_FLAG_SRIOV)
 		pci_disable_sriov(pdev);
 
@@ -3238,6 +3775,8 @@ err_rel_own:
 err_free_dev:
 	kfree(priv);
 =======
+=======
+>>>>>>> v3.18
 	if (dev->flags & MLX4_FLAG_SRIOV && !existing_vfs)
 		pci_disable_sriov(pdev);
 
@@ -3386,6 +3925,9 @@ static int __mlx4_init_one(struct pci_dev *pdev, int pci_dev_data,
 	if (err)
 		goto err_release_regions;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 err_release_regions:
@@ -3402,6 +3944,10 @@ static int mlx4_init_one(struct pci_dev *pdev, const struct pci_device_id *id)
 	struct mlx4_priv *priv;
 	struct mlx4_dev *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -3414,6 +3960,7 @@ static int mlx4_init_one(struct pci_dev *pdev, const struct pci_device_id *id)
 
 	dev       = &priv->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, dev);
 	priv->pci_dev_data = id->driver_data;
 
@@ -3422,6 +3969,8 @@ static int mlx4_init_one(struct pci_dev *pdev, const struct pci_device_id *id)
 
 static void __mlx4_remove_one(struct pci_dev *pdev)
 =======
+=======
+>>>>>>> v3.18
 	dev->pdev = pdev;
 	pci_set_drvdata(pdev, dev);
 	priv->pci_dev_data = id->driver_data;
@@ -3434,6 +3983,9 @@ static void __mlx4_remove_one(struct pci_dev *pdev)
 }
 
 static void mlx4_unload_one(struct pci_dev *pdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct mlx4_dev  *dev  = pci_get_drvdata(pdev);
@@ -3441,6 +3993,10 @@ static void mlx4_unload_one(struct pci_dev *pdev)
 	int               pci_dev_data;
 	int p;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int active_vfs = 0;
+>>>>>>> v3.18
 =======
 	int active_vfs = 0;
 >>>>>>> v3.18
@@ -3451,12 +4007,15 @@ static void mlx4_unload_one(struct pci_dev *pdev)
 	pci_dev_data = priv->pci_dev_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* in SRIOV it is not allowed to unload the pf's
 	 * driver while there are alive vf's */
 	if (mlx4_is_master(dev)) {
 		if (mlx4_how_many_lives_vf(dev))
 			printk(KERN_ERR "Removing PF when there are assigned VF's !!!\n");
 =======
+=======
+>>>>>>> v3.18
 	/* Disabling SR-IOV is not allowed while there are active vf's */
 	if (mlx4_is_master(dev)) {
 		active_vfs = mlx4_how_many_lives_vf(dev);
@@ -3464,6 +4023,9 @@ static void mlx4_unload_one(struct pci_dev *pdev)
 			pr_warn("Removing PF when there are active VF's !!\n");
 			pr_warn("Will not disable SR-IOV.\n");
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	mlx4_stop_sense(dev);
@@ -3509,14 +4071,20 @@ static void mlx4_unload_one(struct pci_dev *pdev)
 	if (dev->flags & MLX4_FLAG_MSI_X)
 		pci_disable_msix(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->flags & MLX4_FLAG_SRIOV) {
 		mlx4_warn(dev, "Disabling SR-IOV\n");
 		pci_disable_sriov(pdev);
 =======
+=======
+>>>>>>> v3.18
 	if (dev->flags & MLX4_FLAG_SRIOV && !active_vfs) {
 		mlx4_warn(dev, "Disabling SR-IOV\n");
 		pci_disable_sriov(pdev);
 		dev->num_vfs = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -3524,6 +4092,10 @@ static void mlx4_unload_one(struct pci_dev *pdev)
 		mlx4_free_ownership(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(dev->caps.qp0_qkey);
+>>>>>>> v3.18
 =======
 	kfree(dev->caps.qp0_qkey);
 >>>>>>> v3.18
@@ -3532,9 +4104,14 @@ static void mlx4_unload_one(struct pci_dev *pdev)
 	kfree(dev->caps.qp1_tunnel);
 	kfree(dev->caps.qp1_proxy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
+=======
+	kfree(dev->dev_vfs);
+
+>>>>>>> v3.18
 =======
 	kfree(dev->dev_vfs);
 
@@ -3550,7 +4127,13 @@ static void mlx4_remove_one(struct pci_dev *pdev)
 	struct mlx4_priv *priv = mlx4_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__mlx4_remove_one(pdev);
+=======
+	mlx4_unload_one(pdev);
+	pci_release_regions(pdev);
+	pci_disable_device(pdev);
+>>>>>>> v3.18
 =======
 	mlx4_unload_one(pdev);
 	pci_release_regions(pdev);
@@ -3565,6 +4148,7 @@ int mlx4_restart_one(struct pci_dev *pdev)
 	struct mlx4_dev	 *dev  = pci_get_drvdata(pdev);
 	struct mlx4_priv *priv = mlx4_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		  pci_dev_data;
 
 	pci_dev_data = priv->pci_dev_data;
@@ -3574,6 +4158,8 @@ int mlx4_restart_one(struct pci_dev *pdev)
 
 static DEFINE_PCI_DEVICE_TABLE(mlx4_pci_table) = {
 =======
+=======
+>>>>>>> v3.18
 	int nvfs[MLX4_MAX_PORTS + 1] = {0, 0, 0};
 	int pci_dev_data, err, total_vfs;
 
@@ -3593,6 +4179,9 @@ static DEFINE_PCI_DEVICE_TABLE(mlx4_pci_table) = {
 }
 
 static const struct pci_device_id mlx4_pci_table[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* MT25408 "Hermon" SDR */
 	{ PCI_VDEVICE(MELLANOX, 0x6340), MLX4_PCI_DEV_FORCE_SENSE_PORT },
@@ -3645,7 +4234,11 @@ static pci_ers_result_t mlx4_pci_err_detected(struct pci_dev *pdev,
 					      pci_channel_state_t state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__mlx4_remove_one(pdev);
+=======
+	mlx4_unload_one(pdev);
+>>>>>>> v3.18
 =======
 	mlx4_unload_one(pdev);
 >>>>>>> v3.18
@@ -3661,7 +4254,11 @@ static pci_ers_result_t mlx4_pci_slot_reset(struct pci_dev *pdev)
 	int               ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = __mlx4_init_one(pdev, priv->pci_dev_data);
+=======
+	ret = __mlx4_init_one(pdev, priv->pci_dev_data, priv);
+>>>>>>> v3.18
 =======
 	ret = __mlx4_init_one(pdev, priv->pci_dev_data, priv);
 >>>>>>> v3.18
@@ -3679,6 +4276,10 @@ static struct pci_driver mlx4_driver = {
 	.id_table	= mlx4_pci_table,
 	.probe		= mlx4_init_one,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.shutdown	= mlx4_unload_one,
+>>>>>>> v3.18
 =======
 	.shutdown	= mlx4_unload_one,
 >>>>>>> v3.18
@@ -3690,7 +4291,11 @@ static int __init mlx4_verify_params(void)
 {
 	if ((log_num_mac < 0) || (log_num_mac > 7)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("mlx4_core: bad num_mac: %d\n", log_num_mac);
+=======
+		pr_warn("mlx4_core: bad num_mac: %d\n", log_num_mac);
+>>>>>>> v3.18
 =======
 		pr_warn("mlx4_core: bad num_mac: %d\n", log_num_mac);
 >>>>>>> v3.18
@@ -3699,12 +4304,15 @@ static int __init mlx4_verify_params(void)
 
 	if (log_num_vlan != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("mlx4_core: log_num_vlan - obsolete module param, using %d\n",
 			   MLX4_LOG_NUM_VLANS);
 
 	if ((log_mtts_per_seg < 1) || (log_mtts_per_seg > 7)) {
 		pr_warning("mlx4_core: bad log_mtts_per_seg: %d\n", log_mtts_per_seg);
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("mlx4_core: log_num_vlan - obsolete module param, using %d\n",
 			MLX4_LOG_NUM_VLANS);
 
@@ -3714,6 +4322,9 @@ static int __init mlx4_verify_params(void)
 	if ((log_mtts_per_seg < 1) || (log_mtts_per_seg > 7)) {
 		pr_warn("mlx4_core: bad log_mtts_per_seg: %d\n",
 			log_mtts_per_seg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -1;
 	}
@@ -3721,7 +4332,11 @@ static int __init mlx4_verify_params(void)
 	/* Check if module param for ports type has legal combination */
 	if (port_type_array[0] == false && port_type_array[1] == true) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "Module parameter configuration ETH/IB is not supported. Switching to default configuration IB/IB\n");
+=======
+		pr_warn("Module parameter configuration ETH/IB is not supported. Switching to default configuration IB/IB\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Module parameter configuration ETH/IB is not supported. Switching to default configuration IB/IB\n");
 >>>>>>> v3.18
@@ -3732,16 +4347,22 @@ static int __init mlx4_verify_params(void)
 	    (mlx4_log_num_mgm_entry_size < MLX4_MIN_MGM_LOG_ENTRY_SIZE ||
 	     mlx4_log_num_mgm_entry_size > MLX4_MAX_MGM_LOG_ENTRY_SIZE)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("mlx4_core: mlx4_log_num_mgm_entry_size (%d) not "
 			   "in legal range (-1 or %d..%d)\n",
 			   mlx4_log_num_mgm_entry_size,
 			   MLX4_MIN_MGM_LOG_ENTRY_SIZE,
 			   MLX4_MAX_MGM_LOG_ENTRY_SIZE);
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("mlx4_core: mlx4_log_num_mgm_entry_size (%d) not in legal range (-1 or %d..%d)\n",
 			mlx4_log_num_mgm_entry_size,
 			MLX4_MIN_MGM_LOG_ENTRY_SIZE,
 			MLX4_MAX_MGM_LOG_ENTRY_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -1;
 	}
@@ -3764,6 +4385,11 @@ static int __init mlx4_init(void)
 
 	ret = pci_register_driver(&mlx4_driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ret < 0)
+		destroy_workqueue(mlx4_wq);
+>>>>>>> v3.18
 =======
 	if (ret < 0)
 		destroy_workqueue(mlx4_wq);

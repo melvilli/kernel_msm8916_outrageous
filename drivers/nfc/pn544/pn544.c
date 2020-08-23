@@ -14,17 +14,23 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the
  * Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 =======
+=======
+>>>>>>> v3.18
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/slab.h>
@@ -40,9 +46,12 @@
 #define PN544_HCI_RESETVEN_TIME		30
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HCI_MODE 0
 #define FW_MODE 1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum pn544_state {
@@ -56,6 +65,10 @@ enum pn544_state {
 /* Proprietary commands */
 #define PN544_WRITE		0x3f
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PN544_TEST_SWP		0x21
+>>>>>>> v3.18
 =======
 #define PN544_TEST_SWP		0x21
 >>>>>>> v3.18
@@ -100,13 +113,19 @@ enum pn544_state {
 
 #define PN544_SWP_MGMT_GATE			0xA0
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define PN544_NFC_WI_MGMT_GATE			0xA1
 =======
+=======
+>>>>>>> v3.18
 #define PN544_SWP_DEFAULT_MODE			0x01
 
 #define PN544_NFC_WI_MGMT_GATE			0xA1
 #define PN544_NFC_ESE_DEFAULT_MODE		0x01
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PN544_HCI_EVT_SND_DATA			0x01
@@ -115,6 +134,10 @@ enum pn544_state {
 #define PN544_HCI_EVT_RCV_DATA			0x04
 #define PN544_HCI_EVT_CONTINUE_MI		0x05
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PN544_HCI_EVT_SWITCH_MODE		0x03
+>>>>>>> v3.18
 =======
 #define PN544_HCI_EVT_SWITCH_MODE		0x03
 >>>>>>> v3.18
@@ -157,6 +180,11 @@ struct pn544_hci_info {
 	data_exchange_cb_t async_cb;
 	void *async_cb_context;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	fw_download_t fw_download;
+>>>>>>> v3.18
 =======
 
 	fw_download_t fw_download;
@@ -220,6 +248,7 @@ static int pn544_hci_ready(struct nfc_hci_dev *hdev)
 		{{0x9e, 0xb4}, 0x00},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{{0x9e, 0xd9}, 0xff},
 		{{0x9e, 0xda}, 0xff},
 		{{0x9e, 0xdb}, 0x23},
@@ -229,10 +258,13 @@ static int pn544_hci_ready(struct nfc_hci_dev *hdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		{{0x9c, 0x01}, 0x08},
 
 		{{0x9e, 0xaa}, 0x01},
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		{{0x9b, 0xd1}, 0x0d},
 		{{0x9b, 0xd2}, 0x24},
@@ -250,6 +282,8 @@ static int pn544_hci_ready(struct nfc_hci_dev *hdev)
 
 		{{0x9f, 0x09}, 0x00},
 =======
+=======
+>>>>>>> v3.18
 		{{0x9b, 0xd1}, 0x17},
 		{{0x9b, 0xd2}, 0x58},
 		{{0x9b, 0xd3}, 0x10},
@@ -265,11 +299,15 @@ static int pn544_hci_ready(struct nfc_hci_dev *hdev)
 		{{0x98, 0x00}, 0x3f},
 
 		{{0x9f, 0x09}, 0x02},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		{{0x9f, 0x0a}, 0x05},
 
 		{{0x9e, 0xd1}, 0xa1},
+<<<<<<< HEAD
 <<<<<<< HEAD
 		{{0x99, 0x23}, 0x00},
 
@@ -289,6 +327,8 @@ static int pn544_hci_ready(struct nfc_hci_dev *hdev)
 
 		{{0x9c, 0x1a}, 0x40},
 =======
+=======
+>>>>>>> v3.18
 		{{0x99, 0x23}, 0x01},
 
 		{{0x9e, 0x74}, 0x00},
@@ -306,6 +346,9 @@ static int pn544_hci_ready(struct nfc_hci_dev *hdev)
 		{{0x9c, 0x19}, 0x0a},
 
 		{{0x9c, 0x1a}, 0x0a},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		{{0x9c, 0x0c}, 0x00},
@@ -317,6 +360,7 @@ static int pn544_hci_ready(struct nfc_hci_dev *hdev)
 		{{0x9c, 0x13}, 0x00},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{{0x98, 0xa2}, 0x0e},
 
 		{{0x98, 0x93}, 0x40},
@@ -325,6 +369,8 @@ static int pn544_hci_ready(struct nfc_hci_dev *hdev)
 		{{0x98, 0x7e}, 0x00},
 		{{0x9f, 0xc8}, 0x01},
 =======
+=======
+>>>>>>> v3.18
 		{{0x98, 0xa2}, 0x09},
 
 		{{0x98, 0x93}, 0x00},
@@ -332,6 +378,9 @@ static int pn544_hci_ready(struct nfc_hci_dev *hdev)
 		{{0x98, 0x7d}, 0x08},
 		{{0x98, 0x7e}, 0x00},
 		{{0x9f, 0xc8}, 0x00},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 	struct hw_config *p = hw_config;
@@ -478,7 +527,11 @@ static int pn544_hci_start_poll(struct nfc_hci_dev *hdev,
 		hdev->gb = nfc_get_local_general_bytes(hdev->ndev,
 							&hdev->gb_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("generate local bytes %p", hdev->gb);
+=======
+		pr_debug("generate local bytes %p\n", hdev->gb);
+>>>>>>> v3.18
 =======
 		pr_debug("generate local bytes %p\n", hdev->gb);
 >>>>>>> v3.18
@@ -638,6 +691,7 @@ static int pn544_hci_complete_target_discovered(struct nfc_hci_dev *hdev,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		r = nfc_hci_send_cmd(hdev, PN544_RF_READER_F_GATE,
 				     PN544_RF_READER_CMD_ACTIVATE_NEXT,
 				     uid_skb->data, uid_skb->len, NULL);
@@ -653,6 +707,8 @@ static int pn544_hci_complete_target_discovered(struct nfc_hci_dev *hdev,
 		target->hci_reader_gate = PN544_RF_READER_NFCIP1_INITIATOR_GATE;
 		target->supported_protocols = NFC_PROTO_NFC_DEP_MASK;
 =======
+=======
+>>>>>>> v3.18
 		/* Type F NFC-DEP IDm has prefix 0x01FE */
 		if ((uid_skb->data[0] == 0x01) && (uid_skb->data[1] == 0xfe)) {
 			kfree_skb(uid_skb);
@@ -672,6 +728,9 @@ static int pn544_hci_complete_target_discovered(struct nfc_hci_dev *hdev,
 					     uid_skb->data, uid_skb->len, NULL);
 			kfree_skb(uid_skb);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (target->supported_protocols & NFC_PROTO_ISO14443_MASK) {
 		/*
@@ -801,7 +860,11 @@ static int pn544_hci_check_presence(struct nfc_hci_dev *hdev,
 				   struct nfc_target *target)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("supported protocol %d", target->supported_protocols);
+=======
+	pr_debug("supported protocol %d\b", target->supported_protocols);
+>>>>>>> v3.18
 =======
 	pr_debug("supported protocol %d\b", target->supported_protocols);
 >>>>>>> v3.18
@@ -819,12 +882,18 @@ static int pn544_hci_check_presence(struct nfc_hci_dev *hdev,
 				     PN544_RF_READER_CMD_ACTIVATE_NEXT,
 				     target->nfcid1, target->nfcid1_len, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (target->supported_protocols & NFC_PROTO_JEWEL_MASK) {
 		return nfc_hci_send_cmd(hdev, target->hci_reader_gate,
 					PN544_JEWEL_RAW_CMD, NULL, 0, NULL);
 	} else if (target->supported_protocols & NFC_PROTO_FELICA_MASK) {
 		return nfc_hci_send_cmd(hdev, PN544_RF_READER_F_GATE,
 					PN544_FELICA_RAW, NULL, 0, NULL);
+=======
+	} else if (target->supported_protocols & (NFC_PROTO_JEWEL_MASK |
+						NFC_PROTO_FELICA_MASK)) {
+		return -EOPNOTSUPP;
+>>>>>>> v3.18
 =======
 	} else if (target->supported_protocols & (NFC_PROTO_JEWEL_MASK |
 						NFC_PROTO_FELICA_MASK)) {
@@ -851,7 +920,11 @@ static int pn544_hci_event_received(struct nfc_hci_dev *hdev, u8 gate, u8 event,
 	int r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("hci event %d", event);
+=======
+	pr_debug("hci event %d\n", event);
+>>>>>>> v3.18
 =======
 	pr_debug("hci event %d\n", event);
 >>>>>>> v3.18
@@ -886,7 +959,11 @@ static int pn544_hci_event_received(struct nfc_hci_dev *hdev, u8 gate, u8 event,
 
 		if (skb->data[0] != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_debug("data0 %d", skb->data[0]);
+=======
+			pr_debug("data0 %d\n", skb->data[0]);
+>>>>>>> v3.18
 =======
 			pr_debug("data0 %d\n", skb->data[0]);
 >>>>>>> v3.18
@@ -907,7 +984,10 @@ exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int pn544_hci_fw_download(struct nfc_hci_dev *hdev,
 				 const char *firmware_name)
 {
@@ -1021,6 +1101,9 @@ static int pn544_hci_disable_se(struct nfc_hci_dev *hdev, u32 se_idx)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct nfc_hci_ops pn544_hci_ops = {
 	.open = pn544_hci_open,
@@ -1037,26 +1120,38 @@ static struct nfc_hci_ops pn544_hci_ops = {
 	.check_presence = pn544_hci_check_presence,
 	.event_received = pn544_hci_event_received,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.fw_download = pn544_hci_fw_download,
 	.discover_se = pn544_hci_discover_se,
 	.enable_se = pn544_hci_enable_se,
 	.disable_se = pn544_hci_disable_se,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 int pn544_hci_probe(void *phy_id, struct nfc_phy_ops *phy_ops, char *llc_name,
 		    int phy_headroom, int phy_tailroom, int phy_payload,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    struct nfc_hci_dev **hdev)
 {
 	struct pn544_hci_info *info;
 	u32 protocols, se;
 =======
+=======
+>>>>>>> v3.18
 		    fw_download_t fw_download, struct nfc_hci_dev **hdev)
 {
 	struct pn544_hci_info *info;
 	u32 protocols;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nfc_hci_init_data init_data;
 	int r;
@@ -1064,7 +1159,10 @@ int pn544_hci_probe(void *phy_id, struct nfc_phy_ops *phy_ops, char *llc_name,
 	info = kzalloc(sizeof(struct pn544_hci_info), GFP_KERNEL);
 	if (!info) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Cannot allocate memory for pn544_hci_info.\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		r = -ENOMEM;
@@ -1074,6 +1172,10 @@ int pn544_hci_probe(void *phy_id, struct nfc_phy_ops *phy_ops, char *llc_name,
 	info->phy_ops = phy_ops;
 	info->phy_id = phy_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	info->fw_download = fw_download;
+>>>>>>> v3.18
 =======
 	info->fw_download = fw_download;
 >>>>>>> v3.18
@@ -1098,6 +1200,7 @@ int pn544_hci_probe(void *phy_id, struct nfc_phy_ops *phy_ops, char *llc_name,
 		    NFC_PROTO_NFC_DEP_MASK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	se = NFC_SE_UICC | NFC_SE_EMBEDDED;
 
 	info->hdev = nfc_hci_allocate_device(&pn544_hci_ops, &init_data, 0,
@@ -1107,12 +1210,17 @@ int pn544_hci_probe(void *phy_id, struct nfc_phy_ops *phy_ops, char *llc_name,
 	if (!info->hdev) {
 		pr_err("Cannot allocate nfc hdev.\n");
 =======
+=======
+>>>>>>> v3.18
 	info->hdev = nfc_hci_allocate_device(&pn544_hci_ops, &init_data, 0,
 					     protocols, llc_name,
 					     phy_headroom + PN544_CMDS_HEADROOM,
 					     phy_tailroom, phy_payload);
 	if (!info->hdev) {
 		pr_err("Cannot allocate nfc hdev\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		r = -ENOMEM;
 		goto err_alloc_hdev;

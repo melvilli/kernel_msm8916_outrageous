@@ -25,10 +25,14 @@ mcount:
 	/* Do nothing, the retl/nop below is all we need.  */
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sethi		%hi(function_trace_stop), %g1
 	lduw		[%g1 + %lo(function_trace_stop)], %g2
 	brnz,pn		%g2, 2f
 	 sethi		%hi(ftrace_trace_function), %g1
+=======
+	sethi		%hi(ftrace_trace_function), %g1
+>>>>>>> v3.18
 =======
 	sethi		%hi(ftrace_trace_function), %g1
 >>>>>>> v3.18
@@ -85,11 +89,16 @@ ftrace_stub:
 	.type		ftrace_caller,#function
 ftrace_caller:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sethi		%hi(function_trace_stop), %g1
 	mov		%i7, %g2
 	lduw		[%g1 + %lo(function_trace_stop)], %g1
 	brnz,pn		%g1, ftrace_stub
 	 mov		%fp, %g3
+=======
+	mov		%i7, %g2
+	mov		%fp, %g3
+>>>>>>> v3.18
 =======
 	mov		%i7, %g2
 	mov		%fp, %g3

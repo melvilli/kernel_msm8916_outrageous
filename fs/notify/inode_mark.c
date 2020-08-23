@@ -195,6 +195,10 @@ int fsnotify_add_inode_mark(struct fsnotify_mark *mark,
 	struct fsnotify_mark *lmark, *last = NULL;
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int cmp;
+>>>>>>> v3.18
 =======
 	int cmp;
 >>>>>>> v3.18
@@ -224,11 +228,16 @@ int fsnotify_add_inode_mark(struct fsnotify_mark *mark,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (mark->group->priority < lmark->group->priority)
 			continue;
 
 		if ((mark->group->priority == lmark->group->priority) &&
 		    (mark->group < lmark->group))
+=======
+		cmp = fsnotify_compare_groups(lmark->group, mark->group);
+		if (cmp < 0)
+>>>>>>> v3.18
 =======
 		cmp = fsnotify_compare_groups(lmark->group, mark->group);
 		if (cmp < 0)
@@ -242,7 +251,11 @@ int fsnotify_add_inode_mark(struct fsnotify_mark *mark,
 	BUG_ON(last == NULL);
 	/* mark should be the last entry.  last is the current last entry */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hlist_add_after_rcu(&last->i.i_list, &mark->i.i_list);
+=======
+	hlist_add_behind_rcu(&mark->i.i_list, &last->i.i_list);
+>>>>>>> v3.18
 =======
 	hlist_add_behind_rcu(&mark->i.i_list, &last->i.i_list);
 >>>>>>> v3.18

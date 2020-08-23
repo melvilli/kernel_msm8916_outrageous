@@ -3,7 +3,11 @@
  * (DB-78460-BP)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012 Marvell
+=======
+ * Copyright (C) 2012-2014 Marvell
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2014 Marvell
 >>>>>>> v3.18
@@ -16,11 +20,14 @@
  * License version 2.  This program is licensed "as is" without any
  * warranty of any kind, whether express or implied.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 /dts-v1/;
 /include/ "armada-xp-mv78460.dtsi"
 =======
+=======
+>>>>>>> v3.18
   *
  * Note: this Device Tree assumes that the bootloader has remapped the
  * internal registers to 0xf1000000 (instead of the default
@@ -34,6 +41,9 @@
 
 /dts-v1/;
 #include "armada-xp-mv78460.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
@@ -51,6 +61,7 @@
 
 	soc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		internal-regs {
 			serial@12000 {
 				clock-frequency = <250000000>;
@@ -67,6 +78,8 @@
 			serial@12300 {
 				clock-frequency = <250000000>;
 =======
+=======
+>>>>>>> v3.18
 		ranges = <MBUS_ID(0xf0, 0x01) 0 0 0xf1000000 0x100000
 			  MBUS_ID(0x01, 0x1d) 0 0 0xfff00000 0x100000
 			  MBUS_ID(0x01, 0x2f) 0 0 0xf0000000 0x1000000>;
@@ -143,6 +156,9 @@
 				status = "okay";
 			};
 			serial@12300 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "okay";
 			};
@@ -197,6 +213,10 @@
 				status = "okay";
 				/* No CD or WP GPIOs */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				broken-cd;
+>>>>>>> v3.18
 =======
 				broken-cd;
 >>>>>>> v3.18
@@ -225,6 +245,7 @@
 					spi-max-frequency = <20000000>;
 				};
 			};
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 			pcie-controller {
@@ -259,6 +280,8 @@
 					status = "okay";
 				};
 			};
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		};

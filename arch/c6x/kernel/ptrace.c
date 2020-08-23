@@ -70,7 +70,10 @@ static int gpr_get(struct task_struct *target,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int gpr_set(struct task_struct *target,
 		   const struct user_regset *regset,
 		   unsigned int pos, unsigned int count,
@@ -111,6 +114,9 @@ static int gpr_set(struct task_struct *target,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum c6x_regset {
 	REGSET_GPR,
@@ -124,6 +130,10 @@ static const struct user_regset c6x_regsets[] = {
 		.align = sizeof(u32),
 		.get = gpr_get,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.set = gpr_set
+>>>>>>> v3.18
 =======
 		.set = gpr_set
 >>>>>>> v3.18

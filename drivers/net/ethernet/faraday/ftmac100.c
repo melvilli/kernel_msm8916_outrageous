@@ -733,15 +733,21 @@ static int ftmac100_alloc_buffers(struct ftmac100 *priv)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->descs = dma_alloc_coherent(priv->dev,
 					 sizeof(struct ftmac100_descs),
 					 &priv->descs_dma_addr,
 					 GFP_KERNEL | __GFP_ZERO);
 =======
+=======
+>>>>>>> v3.18
 	priv->descs = dma_zalloc_coherent(priv->dev,
 					  sizeof(struct ftmac100_descs),
 					  &priv->descs_dma_addr,
 					  GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!priv->descs)
 		return -ENOMEM;
@@ -1093,7 +1099,11 @@ static int ftmac100_probe(struct platform_device *pdev)
 
 	SET_NETDEV_DEV(netdev, &pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &ftmac100_ethtool_ops);
+=======
+	netdev->ethtool_ops = &ftmac100_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &ftmac100_ethtool_ops;
 >>>>>>> v3.18
@@ -1161,7 +1171,10 @@ err_ioremap:
 err_req_mem:
 	netif_napi_del(&priv->napi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(netdev);
@@ -1184,7 +1197,10 @@ static int __exit ftmac100_remove(struct platform_device *pdev)
 
 	netif_napi_del(&priv->napi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(netdev);

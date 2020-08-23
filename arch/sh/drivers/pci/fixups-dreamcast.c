@@ -32,6 +32,11 @@ static void gapspci_fixup_resources(struct pci_dev *dev)
 {
 	struct pci_channel *p = dev->sysdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct resource res;
+	struct pci_bus_region region;
+>>>>>>> v3.18
 =======
 	struct resource res;
 	struct pci_bus_region region;
@@ -56,12 +61,15 @@ static void gapspci_fixup_resources(struct pci_dev *dev)
 		/*
 		 * Redirect dma memory allocations to special memory window.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 */
 		BUG_ON(!dma_declare_coherent_memory(&dev->dev,
 						GAPSPCI_DMA_BASE,
 						GAPSPCI_DMA_BASE,
 						GAPSPCI_DMA_SIZE,
 =======
+=======
+>>>>>>> v3.18
 		 *
 		 * If this GAPSPCI region were mapped by a BAR, the CPU
 		 * phys_addr_t would be pci_resource_start(), and the bus
@@ -77,6 +85,9 @@ static void gapspci_fixup_resources(struct pci_dev *dev)
 						res.start,
 						region.start,
 						resource_size(&res),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						DMA_MEMORY_MAP |
 						DMA_MEMORY_EXCLUSIVE));

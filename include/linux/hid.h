@@ -168,6 +168,10 @@ struct hid_item {
 #define HID_UP_CUSTOM		0x00ff0000
 #define HID_UP_LOGIVENDOR	0xffbc0000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HID_UP_LNVENDOR		0xffa00000
+>>>>>>> v3.18
 =======
 #define HID_UP_LNVENDOR		0xffa00000
 >>>>>>> v3.18
@@ -206,6 +210,10 @@ struct hid_item {
 #define HID_GD_VNO		0x00010046
 #define HID_GD_FEATURE		0x00010047
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HID_GD_SYSTEM_CONTROL	0x00010080
+>>>>>>> v3.18
 =======
 #define HID_GD_SYSTEM_CONTROL	0x00010080
 >>>>>>> v3.18
@@ -217,6 +225,11 @@ struct hid_item {
 #define HID_DC_BATTERYSTRENGTH	0x00060020
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HID_CP_CONSUMER_CONTROL	0x000c0001
+
+>>>>>>> v3.18
 =======
 #define HID_CP_CONSUMER_CONTROL	0x000c0001
 
@@ -244,11 +257,14 @@ struct hid_item {
 #define HID_DG_ERASER		0x000d0045
 #define HID_DG_TABLETPICK	0x000d0046
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * as of May 20, 2009 the usages below are not yet in the official USB spec
  * but are being pushed by Microsft as described in their paper "Digitizer
  * Drivers for Windows Touch and Pen-Based Computers"
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define HID_DG_CONFIDENCE	0x000d0047
@@ -260,6 +276,11 @@ struct hid_item {
 #define HID_DG_CONTACTCOUNT	0x000d0054
 #define HID_DG_CONTACTMAX	0x000d0055
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HID_DG_BARRELSWITCH2	0x000d005a
+#define HID_DG_TOOLSERIALNUMBER	0x000d005b
+>>>>>>> v3.18
 =======
 #define HID_DG_BARRELSWITCH2	0x000d005a
 #define HID_DG_TOOLSERIALNUMBER	0x000d005b
@@ -274,6 +295,11 @@ struct hid_item {
 #define HID_FEATURE_REPORT	2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HID_REPORT_TYPES	3
+
+>>>>>>> v3.18
 =======
 #define HID_REPORT_TYPES	3
 
@@ -289,6 +315,10 @@ struct hid_item {
 #define HID_CONNECT_HIDDEV_FORCE	0x10
 #define HID_CONNECT_FF			0x20
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HID_CONNECT_DRIVER		0x40
+>>>>>>> v3.18
 =======
 #define HID_CONNECT_DRIVER		0x40
 >>>>>>> v3.18
@@ -314,13 +344,19 @@ struct hid_item {
 #define HID_QUIRK_HIDINPUT_FORCE		0x00000080
 #define HID_QUIRK_NO_EMPTY_INPUT		0x00000100
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HID_QUIRK_SKIP_OUTPUT_REPORTS		0x00010000
 =======
+=======
+>>>>>>> v3.18
 #define HID_QUIRK_NO_INIT_INPUT_REPORTS		0x00000200
 #define HID_QUIRK_ALWAYS_POLL			0x00000400
 #define HID_QUIRK_SKIP_OUTPUT_REPORTS		0x00010000
 #define HID_QUIRK_SKIP_OUTPUT_REPORT_ID		0x00020000
 #define HID_QUIRK_NO_OUTPUT_REPORTS_ON_INTR_EP	0x00040000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define HID_QUIRK_FULLSPEED_INTERVAL		0x10000000
 #define HID_QUIRK_NO_INIT_REPORTS		0x20000000
@@ -330,6 +366,12 @@ struct hid_item {
 /*
  * HID device groups
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Note: HID_GROUP_ANY is declared in linux/mod_devicetable.h
+ * and has a value of 0x0000
+>>>>>>> v3.18
 =======
  *
  * Note: HID_GROUP_ANY is declared in linux/mod_devicetable.h
@@ -340,7 +382,10 @@ struct hid_item {
 #define HID_GROUP_MULTITOUCH			0x0002
 #define HID_GROUP_SENSOR_HUB			0x0003
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define HID_GROUP_MULTITOUCH_WIN_8		0x0004
 
 /*
@@ -352,6 +397,9 @@ struct hid_item {
  * Vendor specific HID device groups
  */
 #define HID_GROUP_WACOM				0x0101
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -460,8 +508,11 @@ struct hid_report_enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HID_REPORT_TYPES 3
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define HID_MIN_BUFFER_SIZE	64		/* make sure there is at least a packet size of space */
@@ -484,6 +535,10 @@ struct hid_output_fifo {
 #define HID_CLAIMED_HIDDEV	2
 #define HID_CLAIMED_HIDRAW	4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HID_CLAIMED_DRIVER	8
+>>>>>>> v3.18
 =======
 #define HID_CLAIMED_DRIVER	8
 >>>>>>> v3.18
@@ -524,6 +579,10 @@ struct hid_device {							/* device report descriptor */
 	unsigned country;						/* HID country */
 	struct hid_report_enum report_enum[HID_REPORT_TYPES];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct work_struct led_work;					/* delayed LED worker */
+>>>>>>> v3.18
 =======
 	struct work_struct led_work;					/* delayed LED worker */
 >>>>>>> v3.18
@@ -575,12 +634,15 @@ struct hid_device {							/* device report descriptor */
 	void (*hiddev_report_event) (struct hid_device *, struct hid_report *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* handler for raw input (Get_Report) data, used by hidraw */
 	int (*hid_get_raw_report) (struct hid_device *, unsigned char, __u8 *, size_t, unsigned char);
 
 	/* handler for raw output data, used by hidraw */
 	int (*hid_output_raw_report) (struct hid_device *, __u8 *, size_t, unsigned char);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* debugging support via debugfs */
@@ -607,6 +669,11 @@ static inline void hid_set_drvdata(struct hid_device *hdev, void *data)
 #define HID_COLLECTION_STACK_SIZE 4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HID_SCAN_FLAG_MT_WIN_8			0x00000001
+
+>>>>>>> v3.18
 =======
 #define HID_SCAN_FLAG_MT_WIN_8			0x00000001
 
@@ -620,6 +687,10 @@ struct hid_parser {
 	unsigned              collection_stack_ptr;
 	struct hid_device    *device;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned              scan_flags;
+>>>>>>> v3.18
 =======
 	unsigned              scan_flags;
 >>>>>>> v3.18
@@ -647,6 +718,11 @@ struct hid_descriptor {
 #define HID_BLUETOOTH_DEVICE(ven, prod)					\
 	.bus = BUS_BLUETOOTH, .vendor = (ven), .product = (prod)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HID_I2C_DEVICE(ven, prod)				\
+	.bus = BUS_I2C, .vendor = (ven), .product = (prod)
+>>>>>>> v3.18
 =======
 #define HID_I2C_DEVICE(ven, prod)				\
 	.bus = BUS_I2C, .vendor = (ven), .product = (prod)
@@ -736,8 +812,13 @@ struct hid_driver {
 			struct hid_input *hidinput, struct hid_field *field,
 			struct hid_usage *usage, unsigned long **bit, int *max);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*input_configured)(struct hid_device *hdev,
 				struct hid_input *hidinput);
+=======
+	void (*input_configured)(struct hid_device *hdev,
+				 struct hid_input *hidinput);
+>>>>>>> v3.18
 =======
 	void (*input_configured)(struct hid_device *hdev,
 				 struct hid_input *hidinput);
@@ -761,7 +842,10 @@ struct hid_driver {
  * @open: called by input layer on open
  * @close: called by input layer on close
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @hidinput_input_event: event input event (e.g. ff or leds)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @parse: this method is called only once to parse the device data,
@@ -769,6 +853,11 @@ struct hid_driver {
  * @request: send report request to device (e.g. feature report)
  * @wait: wait for buffered io to complete (send/recv reports)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @raw_request: send raw report request to device (e.g. feature report)
+ * @output_report: send output report to device
+>>>>>>> v3.18
 =======
  * @raw_request: send raw report request to device (e.g. feature report)
  * @output_report: send output report to device
@@ -785,9 +874,12 @@ struct hid_ll_driver {
 	int (*power)(struct hid_device *hdev, int level);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*hidinput_input_event) (struct input_dev *idev, unsigned int type,
 			unsigned int code, int value);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int (*parse)(struct hid_device *hdev);
@@ -797,9 +889,12 @@ struct hid_ll_driver {
 
 	int (*wait)(struct hid_device *hdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*idle)(struct hid_device *hdev, int report, int idle, int reqtype);
 
 =======
+=======
+>>>>>>> v3.18
 
 	int (*raw_request) (struct hid_device *hdev, unsigned char reportnum,
 			    __u8 *buf, size_t len, unsigned char rtype,
@@ -808,6 +903,9 @@ struct hid_ll_driver {
 	int (*output_report) (struct hid_device *hdev, __u8 *buf, size_t len);
 
 	int (*idle)(struct hid_device *hdev, int report, int idle, int reqtype);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -860,6 +958,10 @@ unsigned int hidinput_count_leds(struct hid_device *hid);
 __s32 hidinput_calc_abs_res(const struct hid_field *field, __u16 code);
 void hid_output_report(struct hid_report *report, __u8 *data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void __hid_request(struct hid_device *hid, struct hid_report *rep, int reqtype);
+>>>>>>> v3.18
 =======
 void __hid_request(struct hid_device *hid, struct hid_report *rep, int reqtype);
 >>>>>>> v3.18
@@ -1076,8 +1178,11 @@ static inline void hid_hw_request(struct hid_device *hdev,
 {
 	if (hdev->ll_driver->request)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hdev->ll_driver->request(hdev, report, reqtype);
 =======
+=======
+>>>>>>> v3.18
 		return hdev->ll_driver->request(hdev, report, reqtype);
 
 	__hid_request(hdev, report, reqtype);
@@ -1127,6 +1232,9 @@ static inline int hid_hw_output_report(struct hid_device *hdev, __u8 *buf,
 		return hdev->ll_driver->output_report(hdev, buf, len);
 
 	return -ENOSYS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1166,7 +1274,10 @@ u32 usbhid_lookup_quirk(const u16 idVendor, const u16 idProduct);
 int usbhid_quirks_init(char **quirks_param);
 void usbhid_quirks_exit(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void usbhid_set_leds(struct hid_device *hid);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

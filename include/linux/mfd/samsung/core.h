@@ -15,8 +15,11 @@
 #define __LINUX_MFD_SEC_CORE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NUM_IRQ_REGS	4
 =======
+=======
+>>>>>>> v3.18
 /* Macros to represent minimum voltages for LDO/BUCK */
 #define MIN_3000_MV		3000000
 #define MIN_2500_MV		2500000
@@ -37,12 +40,16 @@
 #define STEP_25_MV		25000
 #define STEP_12_5_MV		12500
 #define STEP_6_25_MV		6250
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum sec_device_type {
 	S5M8751X,
 	S5M8763X,
 	S5M8767X,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	S2MPS11X,
 };
@@ -62,6 +69,8 @@ enum sec_device_type {
  * @irq_masks_cache: cached hardware value
  * @type: indicate which s5m87xx "variant" is used
 =======
+=======
+>>>>>>> v3.18
 	S2MPA01,
 	S2MPS11X,
 	S2MPS14X,
@@ -86,11 +95,15 @@ enum sec_device_type {
  *			after PWRHOLD falling) and Sudden Momentary Power Loss
  *			(PMIC will enter power on sequence after short drop in
  *			VBATT voltage).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct sec_pmic_dev {
 	struct device *dev;
 	struct sec_platform_data *pdata;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct regmap *regmap;
 	struct i2c_client *i2c;
@@ -100,10 +113,15 @@ struct sec_pmic_dev {
 
 	int device_type;
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *regmap_pmic;
 	struct i2c_client *i2c;
 
 	unsigned long device_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int irq_base;
 	int irq;
@@ -111,10 +129,15 @@ struct sec_pmic_dev {
 
 	int ono;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 irq_masks_cur[NUM_IRQ_REGS];
 	u8 irq_masks_cache[NUM_IRQ_REGS];
 	int type;
 	bool wakeup;
+=======
+	bool wakeup;
+	bool wtsr_smpl;
+>>>>>>> v3.18
 =======
 	bool wakeup;
 	bool wtsr_smpl;
@@ -126,12 +149,15 @@ void sec_irq_exit(struct sec_pmic_dev *sec_pmic);
 int sec_irq_resume(struct sec_pmic_dev *sec_pmic);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int sec_reg_read(struct sec_pmic_dev *sec_pmic, u8 reg, void *dest);
 extern int sec_bulk_read(struct sec_pmic_dev *sec_pmic, u8 reg, int count, u8 *buf);
 extern int sec_reg_write(struct sec_pmic_dev *sec_pmic, u8 reg, u8 value);
 extern int sec_bulk_write(struct sec_pmic_dev *sec_pmic, u8 reg, int count, u8 *buf);
 extern int sec_reg_update(struct sec_pmic_dev *sec_pmic, u8 reg, u8 val, u8 mask);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct sec_platform_data {
@@ -168,7 +194,11 @@ struct sec_platform_data {
 	int				buck4_default_idx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int                             buck_ramp_delay;
+=======
+	int				buck_ramp_delay;
+>>>>>>> v3.18
 =======
 	int				buck_ramp_delay;
 >>>>>>> v3.18
@@ -180,11 +210,14 @@ struct sec_platform_data {
 	int				buck7810_ramp_delay;
 	int				buck9_ramp_delay;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	bool                            buck2_ramp_enable;
 	bool                            buck3_ramp_enable;
 	bool                            buck4_ramp_enable;
 =======
+=======
+>>>>>>> v3.18
 	int				buck24_ramp_delay;
 	int				buck3_ramp_delay;
 	int				buck7_ramp_delay;
@@ -194,6 +227,9 @@ struct sec_platform_data {
 	bool				buck2_ramp_enable;
 	bool				buck3_ramp_enable;
 	bool				buck4_ramp_enable;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bool				buck6_ramp_enable;
 
@@ -211,7 +247,12 @@ struct sec_regulator_data {
 	int				id;
 	struct regulator_init_data	*initdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device_node *reg_node;
+=======
+	struct device_node		*reg_node;
+	int				ext_control_gpio;
+>>>>>>> v3.18
 =======
 	struct device_node		*reg_node;
 	int				ext_control_gpio;

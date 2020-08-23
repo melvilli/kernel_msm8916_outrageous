@@ -93,7 +93,11 @@ static int dt_remember_or_free_map(struct pinctrl *p, const char *statename,
 	list_add_tail(&dt_map->node, &p->dt_maps);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pinctrl_register_map(map, num_maps, false);
+=======
+	return pinctrl_register_map(map, num_maps, false, true);
+>>>>>>> v3.18
 =======
 	return pinctrl_register_map(map, num_maps, false, true);
 >>>>>>> v3.18
@@ -191,7 +195,13 @@ int pinctrl_dt_to_map(struct pinctrl *p)
 	/* CONFIG_OF enabled, p->dev not instantiated from DT */
 	if (!np) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(p->dev, "no of_node; not parsing pinctrl DT\n");
+=======
+		if (of_have_populated_dt())
+			dev_dbg(p->dev,
+				"no of_node; not parsing pinctrl DT\n");
+>>>>>>> v3.18
 =======
 		if (of_have_populated_dt())
 			dev_dbg(p->dev,
@@ -210,6 +220,7 @@ int pinctrl_dt_to_map(struct pinctrl *p)
 		prop = of_find_property(np, propname, &size);
 		kfree(propname);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!prop) {
 			if (!state) {
 				ret = -EINVAL;
@@ -217,6 +228,10 @@ int pinctrl_dt_to_map(struct pinctrl *p)
 			}
 			break;
 		}
+=======
+		if (!prop)
+			break;
+>>>>>>> v3.18
 =======
 		if (!prop)
 			break;

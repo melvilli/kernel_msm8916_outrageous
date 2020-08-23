@@ -1,10 +1,13 @@
 if ARCH_IXP4XX
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_SUPPORTS_BIG_ENDIAN
 	bool
 	default y
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 menu "Intel IXP4xx Implementation Options"
@@ -239,7 +242,10 @@ config IXP4XX_NPE
 	tristate "IXP4xx Network Processor Engine support"
 	select FW_LOADER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HOTPLUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help

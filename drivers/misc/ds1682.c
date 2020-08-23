@@ -33,7 +33,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/i2c.h>
@@ -90,7 +93,10 @@ static ssize_t ds1682_store(struct device *dev, struct device_attribute *attr,
 	struct sensor_device_attribute_2 *sattr = to_sensor_dev_attr_2(attr);
 	struct i2c_client *client = to_i2c_client(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *endp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u64 val;
@@ -101,8 +107,13 @@ static ssize_t ds1682_store(struct device *dev, struct device_attribute *attr,
 
 	/* Decode input */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = simple_strtoull(buf, &endp, 0);
 	if (buf == endp) {
+=======
+	rc = kstrtoull(buf, 0, &val);
+	if (rc < 0) {
+>>>>>>> v3.18
 =======
 	rc = kstrtoull(buf, 0, &val);
 	if (rc < 0) {

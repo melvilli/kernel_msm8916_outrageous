@@ -35,7 +35,10 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/errno.h>
@@ -180,7 +183,11 @@ iop3xx_i2c_wait_event(struct i2c_algo_iop3xx_data *iop3xx_adap,
 			iop3xx_adap->waitq,
 			(done = compare( sr = iop3xx_i2c_get_srstat(iop3xx_adap) ,flags )),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			1 * HZ;
+=======
+			1 * HZ
+>>>>>>> v3.18
 =======
 			1 * HZ
 >>>>>>> v3.18

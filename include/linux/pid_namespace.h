@@ -24,6 +24,10 @@ struct pid_namespace {
 	struct kref kref;
 	struct pidmap pidmap[PIDMAP_ENTRIES];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rcu_head rcu;
+>>>>>>> v3.18
 =======
 	struct rcu_head rcu;
 >>>>>>> v3.18
@@ -37,6 +41,10 @@ struct pid_namespace {
 	struct vfsmount *proc_mnt;
 	struct dentry *proc_self;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dentry *proc_thread_self;
+>>>>>>> v3.18
 =======
 	struct dentry *proc_thread_self;
 >>>>>>> v3.18

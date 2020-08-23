@@ -34,7 +34,11 @@ static int hidp_sock_release(struct socket *sock)
 	struct sock *sk = sock->sk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK sk %pK", sock, sk);
+=======
+	BT_DBG("sock %p sk %p", sock, sk);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p sk %p", sock, sk);
 >>>>>>> v3.18
@@ -235,7 +239,11 @@ static int hidp_sock_create(struct net *net, struct socket *sock, int protocol,
 	struct sock *sk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("sock %pK", sock);
+=======
+	BT_DBG("sock %p", sock);
+>>>>>>> v3.18
 =======
 	BT_DBG("sock %p", sock);
 >>>>>>> v3.18

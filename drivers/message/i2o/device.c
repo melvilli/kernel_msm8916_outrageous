@@ -139,7 +139,11 @@ static void i2o_device_release(struct device *dev)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	i2o_device_show_class_id - Displays class id of I2O device
+=======
+ *	class_id_show - Displays class id of I2O device
+>>>>>>> v3.18
 =======
  *	class_id_show - Displays class id of I2O device
 >>>>>>> v3.18
@@ -150,9 +154,14 @@ static void i2o_device_release(struct device *dev)
  *	Returns the number of bytes which are printed into the buffer.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t i2o_device_show_class_id(struct device *dev,
 					struct device_attribute *attr,
 					char *buf)
+=======
+static ssize_t class_id_show(struct device *dev, struct device_attribute *attr,
+			     char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t class_id_show(struct device *dev, struct device_attribute *attr,
 			     char *buf)
@@ -164,14 +173,20 @@ static ssize_t class_id_show(struct device *dev, struct device_attribute *attr,
 	return strlen(buf) + 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  *	i2o_device_show_tid - Displays TID of I2O device
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(class_id);
 
 /**
  *	tid_show - Displays TID of I2O device
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	@dev: device of which the TID should be displayed
  *	@attr: pointer to device attribute
@@ -180,8 +195,13 @@ static DEVICE_ATTR_RO(class_id);
  *	Returns the number of bytes which are printed into the buffer.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t i2o_device_show_tid(struct device *dev,
 				   struct device_attribute *attr, char *buf)
+=======
+static ssize_t tid_show(struct device *dev, struct device_attribute *attr,
+			char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t tid_show(struct device *dev, struct device_attribute *attr,
 			char *buf)
@@ -193,6 +213,7 @@ static ssize_t tid_show(struct device *dev, struct device_attribute *attr,
 	return strlen(buf) + 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* I2O device attributes */
 struct device_attribute i2o_device_attrs[] = {
@@ -200,6 +221,8 @@ struct device_attribute i2o_device_attrs[] = {
 	__ATTR(tid, S_IRUGO, i2o_device_show_tid, NULL),
 	__ATTR_NULL
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(tid);
 
 /* I2O device attributes */
@@ -216,6 +239,9 @@ static const struct attribute_group i2o_device_group = {
 const struct attribute_group *i2o_device_groups[] = {
 	&i2o_device_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

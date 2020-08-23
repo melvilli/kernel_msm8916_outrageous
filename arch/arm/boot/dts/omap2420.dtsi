@@ -9,7 +9,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap2.dtsi"
+=======
+#include "omap2.dtsi"
+>>>>>>> v3.18
 =======
 #include "omap2.dtsi"
 >>>>>>> v3.18
@@ -19,7 +23,10 @@
 
 	ocp {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		prcm: prcm@48008000 {
 			compatible = "ti,omap2-prcm";
 			reg = <0x48008000 0x1000>;
@@ -46,6 +53,9 @@
 			};
 		};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		counter32k: counter@48004000 {
 			compatible = "ti,omap-counter32k";
@@ -133,6 +143,10 @@
 			       <&sdma 32>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -150,7 +164,10 @@
 			       <&sdma 34>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			status = "disabled";
 		};
 
@@ -179,6 +196,9 @@
 				ti,mbox-tx = <2 1 3>;
 				ti,mbox-rx = <3 1 3>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -190,9 +210,12 @@
 			ti,timer-alwon;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 };
 =======
+=======
+>>>>>>> v3.18
 
 		wd_timer2: wdt@48022000 {
 			compatible = "ti,omap2-wdt";
@@ -212,4 +235,7 @@
 
 /include/ "omap24xx-clocks.dtsi"
 /include/ "omap2420-clocks.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

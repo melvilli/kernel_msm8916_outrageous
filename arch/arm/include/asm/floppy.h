@@ -26,7 +26,11 @@
 #define fd_inb(port)		inb((port))
 #define fd_request_irq()	request_irq(IRQ_FLOPPYDISK,floppy_interrupt,\
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    IRQF_DISABLED,"floppy",NULL)
+=======
+					    0,"floppy",NULL)
+>>>>>>> v3.18
 =======
 					    0,"floppy",NULL)
 >>>>>>> v3.18

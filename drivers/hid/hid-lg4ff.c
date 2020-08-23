@@ -44,6 +44,10 @@
 #define G27_REV_MAJ 0x12
 #define G27_REV_MIN 0x38
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define G27_2_REV_MIN 0x39
+>>>>>>> v3.18
 =======
 #define G27_2_REV_MIN 0x39
 >>>>>>> v3.18
@@ -56,7 +60,11 @@ static ssize_t lg4ff_range_show(struct device *dev, struct device_attribute *att
 static ssize_t lg4ff_range_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(range, S_IRWXU | S_IRWXG | S_IRWXO, lg4ff_range_show, lg4ff_range_store);
+=======
+static DEVICE_ATTR(range, S_IRWXU | S_IRWXG | S_IROTH, lg4ff_range_show, lg4ff_range_store);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(range, S_IRWXU | S_IRWXG | S_IROTH, lg4ff_range_show, lg4ff_range_store);
 >>>>>>> v3.18
@@ -139,6 +147,10 @@ static const struct lg4ff_usb_revision lg4ff_revs[] = {
 	{G25_REV_MAJ,  G25_REV_MIN,  &native_g25},	/* G25 */
 	{G27_REV_MAJ,  G27_REV_MIN,  &native_g27},	/* G27 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{G27_REV_MAJ,  G27_2_REV_MIN,  &native_g27},	/* G27 v2 */
+>>>>>>> v3.18
 =======
 	{G27_REV_MAJ,  G27_2_REV_MIN,  &native_g27},	/* G27 v2 */
 >>>>>>> v3.18
@@ -209,7 +221,10 @@ static int hid_lg4ff_play(struct input_dev *dev, void *data, struct ff_effect *e
 		x = effect->u.ramp.start_level + 0x80;	/* 0x80 is no force */
 		CLAMP(x);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (x == 0x80) {
 			/* De-activate force in slot-1*/
@@ -225,6 +240,9 @@ static int hid_lg4ff_play(struct input_dev *dev, void *data, struct ff_effect *e
 			return 0;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		value[0] = 0x11;	/* Slot 1 */
 		value[1] = 0x08;
@@ -250,7 +268,10 @@ static void hid_lg4ff_set_autocenter_default(struct input_dev *dev, u16 magnitud
 	__s32 *value = report->field[0]->value;
 	__u32 expand_a, expand_b;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct lg4ff_device_entry *entry;
 	struct lg_drv_data *drv_data;
 
@@ -265,6 +286,9 @@ static void hid_lg4ff_set_autocenter_default(struct input_dev *dev, u16 magnitud
 		hid_err(hid, "Device properties not found!\n");
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* De-activate Auto-Center */
@@ -290,7 +314,10 @@ static void hid_lg4ff_set_autocenter_default(struct input_dev *dev, u16 magnitud
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Adjust for non-MOMO wheels */
 	switch (entry->product_id) {
 	case USB_DEVICE_ID_LOGITECH_MOMO_WHEEL:
@@ -301,6 +328,9 @@ static void hid_lg4ff_set_autocenter_default(struct input_dev *dev, u16 magnitud
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	value[0] = 0xfe;
 	value[1] = 0x0d;
@@ -471,7 +501,11 @@ static ssize_t lg4ff_range_store(struct device *dev, struct device_attribute *at
 	if (!drv_data) {
 		hid_err(hid, "Private driver data not found!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -481,7 +515,11 @@ static ssize_t lg4ff_range_store(struct device *dev, struct device_attribute *at
 	if (!entry) {
 		hid_err(hid, "Device properties not found!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18

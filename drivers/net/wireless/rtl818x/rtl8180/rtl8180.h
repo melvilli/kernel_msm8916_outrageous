@@ -25,7 +25,10 @@
 #define ANAPARAM_PWR1_MASK	(0x7F << ANAPARAM_PWR1_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* rtl8180/rtl8185 have 3 queue + beacon queue.
  * mac80211 can use just one, + beacon = 2 tot.
  */
@@ -39,6 +42,9 @@
 /* for array static allocation, it is the max of above */
 #define RTL818X_NR_TX_QUEUES 5
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rtl8180_tx_desc {
 	__le32 flags;
@@ -46,8 +52,11 @@ struct rtl8180_tx_desc {
 	__le16 plcp_len;
 	__le32 tx_buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32 frame_len;
 =======
+=======
+>>>>>>> v3.18
 	union{
 		__le32 frame_len;
 		struct {
@@ -55,6 +64,9 @@ struct rtl8180_tx_desc {
 			__le16 frame_duration;
 		} __packed;
 	} __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__le32 next_tx_desc;
 	u8 cw;
@@ -62,8 +74,11 @@ struct rtl8180_tx_desc {
 	u8 agc;
 	u8 flags2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reserved[2];
 =======
+=======
+>>>>>>> v3.18
 	/* rsvd for 8180/8185.
 	 * valid for 8187se but we dont use it
 	 */
@@ -77,6 +92,9 @@ struct rtl818x_rx_cmd_desc {
 	__le32 flags;
 	u32 reserved;
 	__le32 rx_buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
@@ -84,11 +102,14 @@ struct rtl8180_rx_desc {
 	__le32 flags;
 	__le32 flags2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union {
 		__le32 rx_buf;
 		__le64 tsft;
 	};
 =======
+=======
+>>>>>>> v3.18
 	__le64 tsft;
 
 } __packed;
@@ -99,6 +120,9 @@ struct rtl8187se_rx_desc {
 	__le32 flags2;
 	__le32 flags3;
 	u32 reserved[3];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
@@ -126,6 +150,7 @@ struct rtl8180_priv {
 
 	/* rtl8180 driver specific */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t lock;
 	struct rtl8180_rx_desc *rx_ring;
 	dma_addr_t rx_ring_dma;
@@ -144,6 +169,8 @@ struct rtl8180_priv {
 	u8 csthreshold;
 
 =======
+=======
+>>>>>>> v3.18
 	bool map_pio;
 	spinlock_t lock;
 	void *rx_ring;
@@ -178,6 +205,9 @@ struct rtl8180_priv {
 	u8 thermal_meter_en;
 	u8 antenna_diversity_en;
 	u8 antenna_diversity_default;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* sequence # */
 	u16 seqno;
@@ -186,6 +216,10 @@ struct rtl8180_priv {
 void rtl8180_write_phy(struct ieee80211_hw *dev, u8 addr, u32 data);
 void rtl8180_set_anaparam(struct rtl8180_priv *priv, u32 anaparam);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void rtl8180_set_anaparam2(struct rtl8180_priv *priv, u32 anaparam2);
+>>>>>>> v3.18
 =======
 void rtl8180_set_anaparam2(struct rtl8180_priv *priv, u32 anaparam2);
 >>>>>>> v3.18

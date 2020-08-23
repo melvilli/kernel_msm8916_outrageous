@@ -3,6 +3,7 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y     = fork.o exec_domain.o panic.o printk.o \
 	    cpu.o exit.o itimer.o time.o softirq.o resource.o \
 	    sysctl.o sysctl_binary.o capability.o ptrace.o timer.o user.o \
@@ -20,6 +21,8 @@ CFLAGS_REMOVE_lockdep_proc.o = -pg
 CFLAGS_REMOVE_mutex-debug.o = -pg
 CFLAGS_REMOVE_rtmutex-debug.o = -pg
 =======
+=======
+>>>>>>> v3.18
 obj-y     = fork.o exec_domain.o panic.o \
 	    cpu.o exit.o softirq.o resource.o \
 	    sysctl.o sysctl_binary.o capability.o ptrace.o user.o \
@@ -31,16 +34,22 @@ obj-y     = fork.o exec_domain.o panic.o \
 
 ifdef CONFIG_FUNCTION_TRACER
 # Do not trace debug files and internal ftrace files
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 CFLAGS_REMOVE_cgroup-debug.o = -pg
 CFLAGS_REMOVE_irq_work.o = -pg
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y += sched/
 obj-y += power/
 obj-y += cpu/
 =======
+=======
+>>>>>>> v3.18
 # cond_syscall is currently not LTO compatible
 CFLAGS_sys_ni.o = $(DISABLE_LTO)
 
@@ -48,6 +57,9 @@ obj-y += sched/
 obj-y += locking/
 obj-y += power/
 obj-y += printk/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-y += irq/
 obj-y += rcu/
@@ -58,6 +70,7 @@ obj-$(CONFIG_PROFILING) += profile.o
 obj-$(CONFIG_STACKTRACE) += stacktrace.o
 obj-y += time/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_DEBUG_MUTEXES) += mutex-debug.o
 obj-$(CONFIG_LOCKDEP) += lockdep.o
 ifeq ($(CONFIG_PROC_FS),y)
@@ -65,14 +78,19 @@ obj-$(CONFIG_LOCKDEP) += lockdep_proc.o
 endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_FUTEX) += futex.o
 ifeq ($(CONFIG_COMPAT),y)
 obj-$(CONFIG_FUTEX) += futex_compat.o
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_RT_MUTEXES) += rtmutex.o
 obj-$(CONFIG_DEBUG_RT_MUTEXES) += rtmutex-debug.o
 obj-$(CONFIG_RT_MUTEX_TESTER) += rtmutex-tester.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_GENERIC_ISA_DMA) += dma.o
@@ -81,6 +99,7 @@ ifneq ($(CONFIG_SMP),y)
 obj-y += up.o
 endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SMP) += spinlock.o
 obj-$(CONFIG_DEBUG_SPINLOCK) += spinlock.o
 obj-$(CONFIG_PROVE_LOCKING) += spinlock.o
@@ -88,10 +107,15 @@ obj-$(CONFIG_UID16) += uid16.o
 obj-$(CONFIG_MODULES) += module.o
 obj-$(CONFIG_MODULE_SIG) += module_signing.o modsign_pubkey.o modsign_certificate.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_UID16) += uid16.o
 obj-$(CONFIG_SYSTEM_TRUSTED_KEYRING) += system_keyring.o system_certificates.o
 obj-$(CONFIG_MODULES) += module.o
 obj-$(CONFIG_MODULE_SIG) += module_signing.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_KALLSYMS) += kallsyms.o
 obj-$(CONFIG_BSD_PROCESS_ACCT) += acct.o
@@ -135,6 +159,10 @@ obj-$(CONFIG_TRACEPOINTS) += trace/
 obj-$(CONFIG_IRQ_WORK) += irq_work.o
 obj-$(CONFIG_CPU_PM) += cpu_pm.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_BPF) += bpf/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_BPF) += bpf/
 >>>>>>> v3.18
@@ -147,6 +175,10 @@ obj-$(CONFIG_CRASH_DUMP) += crash_dump.o
 obj-$(CONFIG_JUMP_LABEL) += jump_label.o
 obj-$(CONFIG_CONTEXT_TRACKING) += context_tracking.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_TORTURE_TEST) += torture.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_TORTURE_TEST) += torture.o
 >>>>>>> v3.18
@@ -160,7 +192,11 @@ $(obj)/config_data.gz: $(KCONFIG_CONFIG) FORCE
 	$(call if_changed,gzip)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       filechk_ikconfiggz = (echo "static const char kernel_config_data[] __used = MAGIC_START"; cat $< | scripts/bin2c; echo "MAGIC_END;")
+=======
+      filechk_ikconfiggz = (echo "static const char kernel_config_data[] __used = MAGIC_START"; cat $< | scripts/basic/bin2c; echo "MAGIC_END;")
+>>>>>>> v3.18
 =======
       filechk_ikconfiggz = (echo "static const char kernel_config_data[] __used = MAGIC_START"; cat $< | scripts/basic/bin2c; echo "MAGIC_END;")
 >>>>>>> v3.18
@@ -168,6 +204,7 @@ targets += config_data.h
 $(obj)/config_data.h: $(obj)/config_data.gz FORCE
 	$(call filechk,ikconfiggz)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 $(obj)/time.o: $(obj)/timeconst.h
 
@@ -199,6 +236,8 @@ extra_certificates:
 kernel/modsign_certificate.o: signing_key.x509 extra_certificates
 
 =======
+=======
+>>>>>>> v3.18
 ###############################################################################
 #
 # Roll all the X.509 certificates that we can find together and pull them into
@@ -246,6 +285,9 @@ endif
 clean-files := x509_certificate_list .x509.list
 
 ifeq ($(CONFIG_MODULE_SIG),y)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ###############################################################################
 #

@@ -21,6 +21,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -30,7 +34,10 @@
 *******************************************************************************/
 #include "ixgbe.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ptp_classify.h>
@@ -106,15 +113,21 @@
 #define IXGBE_PTP_TX_TIMEOUT     (HZ * 15)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef NSECS_PER_SEC
 #define NSECS_PER_SEC 1000000000ULL
 #endif
 =======
+=======
+>>>>>>> v3.18
 /* half of a one second clock period, for use with PPS signal. We have to use
  * this instead of something pre-defined like IXGBE_PTP_PPS_HALF_SECOND, in
  * order to force at least 64bits of precision for shifting
  */
 #define IXGBE_PTP_PPS_HALF_SECOND 500000000ULL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -162,8 +175,13 @@ static void ixgbe_ptp_setup_sdp(struct ixgbe_adapter *adapter)
 
 		/* clock period (or pulse length) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clktiml = (u32)(NSECS_PER_SEC << shift);
 		clktimh = (u32)((NSECS_PER_SEC << shift) >> 32);
+=======
+		clktiml = (u32)(IXGBE_PTP_PPS_HALF_SECOND << shift);
+		clktimh = (u32)((IXGBE_PTP_PPS_HALF_SECOND << shift) >> 32);
+>>>>>>> v3.18
 =======
 		clktiml = (u32)(IXGBE_PTP_PPS_HALF_SECOND << shift);
 		clktimh = (u32)((IXGBE_PTP_PPS_HALF_SECOND << shift) >> 32);
@@ -179,8 +197,13 @@ static void ixgbe_ptp_setup_sdp(struct ixgbe_adapter *adapter)
 		ns = timecounter_cyc2time(&adapter->tc, clock_edge);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		div_u64_rem(ns, NSECS_PER_SEC, &rem);
 		clock_edge += ((NSECS_PER_SEC - (u64)rem) << shift);
+=======
+		div_u64_rem(ns, IXGBE_PTP_PPS_HALF_SECOND, &rem);
+		clock_edge += ((IXGBE_PTP_PPS_HALF_SECOND - (u64)rem) << shift);
+>>>>>>> v3.18
 =======
 		div_u64_rem(ns, IXGBE_PTP_PPS_HALF_SECOND, &rem);
 		clock_edge += ((IXGBE_PTP_PPS_HALF_SECOND - (u64)rem) << shift);
@@ -359,7 +382,11 @@ static int ixgbe_ptp_settime(struct ptp_clock_info *ptp,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ixgbe_ptp_enable
+=======
+ * ixgbe_ptp_feature_enable
+>>>>>>> v3.18
 =======
  * ixgbe_ptp_feature_enable
 >>>>>>> v3.18
@@ -371,8 +398,13 @@ static int ixgbe_ptp_settime(struct ptp_clock_info *ptp,
  * our driver only supports the PPS feature on the X540
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ixgbe_ptp_enable(struct ptp_clock_info *ptp,
 			    struct ptp_clock_request *rq, int on)
+=======
+static int ixgbe_ptp_feature_enable(struct ptp_clock_info *ptp,
+				    struct ptp_clock_request *rq, int on)
+>>>>>>> v3.18
 =======
 static int ixgbe_ptp_feature_enable(struct ptp_clock_info *ptp,
 				    struct ptp_clock_request *rq, int on)
@@ -469,10 +501,15 @@ void ixgbe_ptp_rx_hang(struct ixgbe_adapter *adapter)
 {
 	struct ixgbe_hw *hw = &adapter->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ixgbe_ring *rx_ring;
 	u32 tsyncrxctl = IXGBE_READ_REG(hw, IXGBE_TSYNCRXCTL);
 	unsigned long rx_event;
 	int n;
+=======
+	u32 tsyncrxctl = IXGBE_READ_REG(hw, IXGBE_TSYNCRXCTL);
+	unsigned long rx_event;
+>>>>>>> v3.18
 =======
 	u32 tsyncrxctl = IXGBE_READ_REG(hw, IXGBE_TSYNCRXCTL);
 	unsigned long rx_event;
@@ -489,11 +526,16 @@ void ixgbe_ptp_rx_hang(struct ixgbe_adapter *adapter)
 	/* determine the most recent watchdog or rx_timestamp event */
 	rx_event = adapter->last_rx_ptp_check;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (n = 0; n < adapter->num_rx_queues; n++) {
 		rx_ring = adapter->rx_ring[n];
 		if (time_after(rx_ring->last_rx_timestamp, rx_event))
 			rx_event = rx_ring->last_rx_timestamp;
 	}
+=======
+	if (time_after(adapter->last_rx_timestamp, rx_event))
+		rx_event = adapter->last_rx_timestamp;
+>>>>>>> v3.18
 =======
 	if (time_after(adapter->last_rx_timestamp, rx_event))
 		rx_event = adapter->last_rx_timestamp;
@@ -505,7 +547,11 @@ void ixgbe_ptp_rx_hang(struct ixgbe_adapter *adapter)
 		adapter->last_rx_ptp_check = jiffies;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		e_warn(drv, "clearing RX Timestamp hang");
+=======
+		e_warn(drv, "clearing RX Timestamp hang\n");
+>>>>>>> v3.18
 =======
 		e_warn(drv, "clearing RX Timestamp hang\n");
 >>>>>>> v3.18
@@ -541,6 +587,10 @@ static void ixgbe_ptp_tx_hwtstamp(struct ixgbe_adapter *adapter)
 	dev_kfree_skb_any(adapter->ptp_tx_skb);
 	adapter->ptp_tx_skb = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clear_bit_unlock(__IXGBE_PTP_TX_IN_PROGRESS, &adapter->state);
+>>>>>>> v3.18
 =======
 	clear_bit_unlock(__IXGBE_PTP_TX_IN_PROGRESS, &adapter->state);
 >>>>>>> v3.18
@@ -564,6 +614,7 @@ static void ixgbe_ptp_tx_hwtstamp_work(struct work_struct *work)
 	u32 tsynctxctl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* we have to have a valid skb */
 	if (!adapter->ptp_tx_skb)
 		return;
@@ -573,11 +624,16 @@ static void ixgbe_ptp_tx_hwtstamp_work(struct work_struct *work)
 		adapter->ptp_tx_skb = NULL;
 		e_warn(drv, "clearing Tx Timestamp hang");
 =======
+=======
+>>>>>>> v3.18
 	if (timeout) {
 		dev_kfree_skb_any(adapter->ptp_tx_skb);
 		adapter->ptp_tx_skb = NULL;
 		clear_bit_unlock(__IXGBE_PTP_TX_IN_PROGRESS, &adapter->state);
 		e_warn(drv, "clearing Tx Timestamp hang\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -592,8 +648,13 @@ static void ixgbe_ptp_tx_hwtstamp_work(struct work_struct *work)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * __ixgbe_ptp_rx_hwtstamp - utility function which checks for RX time stamp
  * @q_vector: structure containing interrupt and ring information
+=======
+ * ixgbe_ptp_rx_hwtstamp - utility function which checks for RX time stamp
+ * @adapter: pointer to adapter struct
+>>>>>>> v3.18
 =======
  * ixgbe_ptp_rx_hwtstamp - utility function which checks for RX time stamp
  * @adapter: pointer to adapter struct
@@ -605,6 +666,7 @@ static void ixgbe_ptp_tx_hwtstamp_work(struct work_struct *work)
  * is passed up the network stack
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __ixgbe_ptp_rx_hwtstamp(struct ixgbe_q_vector *q_vector,
 			     struct sk_buff *skb)
 {
@@ -615,11 +677,17 @@ void ixgbe_ptp_rx_hwtstamp(struct ixgbe_adapter *adapter, struct sk_buff *skb)
 {
 	struct ixgbe_hw *hw = &adapter->hw;
 >>>>>>> v3.18
+=======
+void ixgbe_ptp_rx_hwtstamp(struct ixgbe_adapter *adapter, struct sk_buff *skb)
+{
+	struct ixgbe_hw *hw = &adapter->hw;
+>>>>>>> v3.18
 	struct skb_shared_hwtstamps *shhwtstamps;
 	u64 regval = 0, ns;
 	u32 tsyncrxctl;
 	unsigned long flags;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* we cannot process timestamps on a ring without a q_vector */
 	if (!q_vector || !q_vector->adapter)
@@ -634,6 +702,8 @@ void ixgbe_ptp_rx_hwtstamp(struct ixgbe_adapter *adapter, struct sk_buff *skb)
 	 */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	tsyncrxctl = IXGBE_READ_REG(hw, IXGBE_TSYNCRXCTL);
 	if (!(tsyncrxctl & IXGBE_TSYNCRXCTL_VALID))
 		return;
@@ -642,7 +712,10 @@ void ixgbe_ptp_rx_hwtstamp(struct ixgbe_adapter *adapter, struct sk_buff *skb)
 	regval |= (u64)IXGBE_READ_REG(hw, IXGBE_RXSTMPH) << 32;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&adapter->tmreg_lock, flags);
@@ -651,6 +724,7 @@ void ixgbe_ptp_rx_hwtstamp(struct ixgbe_adapter *adapter, struct sk_buff *skb)
 
 	shhwtstamps = skb_hwtstamps(skb);
 	shhwtstamps->hwtstamp = ns_to_ktime(ns);
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -663,6 +737,8 @@ void ixgbe_ptp_rx_hwtstamp(struct ixgbe_adapter *adapter, struct sk_buff *skb)
  * Outgoing time stamping can be enabled and disabled. Play nice and
  * disable it when requested, although it shouldn't case any overhead
 =======
+=======
+>>>>>>> v3.18
 
 	/* Update the last_rx_timestamp timer in order to enable watchdog check
 	 * for error case of latched timestamp on a dropped packet.
@@ -685,6 +761,9 @@ int ixgbe_ptp_get_ts_config(struct ixgbe_adapter *adapter, struct ifreq *ifr)
  *
  * Outgoing time stamping can be enabled and disabled. Play nice and
  * disable it when requested, although it shouldn't cause any overhead
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * when no packet needs it. At most one packet in the queue may be
  * marked for time stamping, otherwise it would be impossible to tell
@@ -701,6 +780,7 @@ int ixgbe_ptp_get_ts_config(struct ixgbe_adapter *adapter, struct ifreq *ifr)
  * Event mode. This more accurately tells the user what the hardware is going
  * to do anyways.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 int ixgbe_ptp_hwtstamp_ioctl(struct ixgbe_adapter *adapter,
 			     struct ifreq *ifr, int cmd)
@@ -708,6 +788,8 @@ int ixgbe_ptp_hwtstamp_ioctl(struct ixgbe_adapter *adapter,
 	struct ixgbe_hw *hw = &adapter->hw;
 	struct hwtstamp_config config;
 =======
+=======
+>>>>>>> v3.18
  *
  * Note: this may modify the hwtstamp configuration towards a more general
  * mode, if required to support the specifically requested mode.
@@ -716,6 +798,9 @@ static int ixgbe_ptp_set_timestamp_mode(struct ixgbe_adapter *adapter,
 				 struct hwtstamp_config *config)
 {
 	struct ixgbe_hw *hw = &adapter->hw;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 tsync_tx_ctl = IXGBE_TSYNCTXCTL_ENABLED;
 	u32 tsync_rx_ctl = IXGBE_TSYNCRXCTL_ENABLED;
@@ -723,6 +808,7 @@ static int ixgbe_ptp_set_timestamp_mode(struct ixgbe_adapter *adapter,
 	bool is_l2 = false;
 	u32 regval;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (copy_from_user(&config, ifr->ifr_data, sizeof(config)))
 		return -EFAULT;
@@ -733,11 +819,16 @@ static int ixgbe_ptp_set_timestamp_mode(struct ixgbe_adapter *adapter,
 
 	switch (config.tx_type) {
 =======
+=======
+>>>>>>> v3.18
 	/* reserved for future extensions */
 	if (config->flags)
 		return -EINVAL;
 
 	switch (config->tx_type) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case HWTSTAMP_TX_OFF:
 		tsync_tx_ctl = 0;
@@ -748,7 +839,11 @@ static int ixgbe_ptp_set_timestamp_mode(struct ixgbe_adapter *adapter,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (config.rx_filter) {
+=======
+	switch (config->rx_filter) {
+>>>>>>> v3.18
 =======
 	switch (config->rx_filter) {
 >>>>>>> v3.18
@@ -776,7 +871,11 @@ static int ixgbe_ptp_set_timestamp_mode(struct ixgbe_adapter *adapter,
 		tsync_rx_ctl |= IXGBE_TSYNCRXCTL_TYPE_EVENT_V2;
 		is_l2 = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		config.rx_filter = HWTSTAMP_FILTER_PTP_V2_EVENT;
+=======
+		config->rx_filter = HWTSTAMP_FILTER_PTP_V2_EVENT;
+>>>>>>> v3.18
 =======
 		config->rx_filter = HWTSTAMP_FILTER_PTP_V2_EVENT;
 >>>>>>> v3.18
@@ -791,7 +890,11 @@ static int ixgbe_ptp_set_timestamp_mode(struct ixgbe_adapter *adapter,
 		 * timestamping all packets => return error
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		config.rx_filter = HWTSTAMP_FILTER_NONE;
+=======
+		config->rx_filter = HWTSTAMP_FILTER_NONE;
+>>>>>>> v3.18
 =======
 		config->rx_filter = HWTSTAMP_FILTER_NONE;
 >>>>>>> v3.18
@@ -814,7 +917,10 @@ static int ixgbe_ptp_set_timestamp_mode(struct ixgbe_adapter *adapter,
 		IXGBE_WRITE_REG(hw, IXGBE_ETQF(IXGBE_ETQF_FILTER_1588), 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* enable/disable TX */
@@ -839,7 +945,10 @@ static int ixgbe_ptp_set_timestamp_mode(struct ixgbe_adapter *adapter,
 	regval = IXGBE_READ_REG(hw, IXGBE_RXSTMPH);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -867,6 +976,9 @@ int ixgbe_ptp_set_ts_config(struct ixgbe_adapter *adapter, struct ifreq *ifr)
 	memcpy(&adapter->tstamp_config, &config,
 	       sizeof(adapter->tstamp_config));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return copy_to_user(ifr->ifr_data, &config, sizeof(config)) ?
 		-EFAULT : 0;
@@ -962,10 +1074,13 @@ void ixgbe_ptp_start_cyclecounter(struct ixgbe_adapter *adapter)
  * @adapter: the ixgbe private board structure
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * When the MAC resets, all timesync features are reset. This function should be
  * called to re-enable the PTP clock structure. It will re-init the timecounter
  * structure based on the kernel time as well as setup the cycle counter data.
 =======
+=======
+>>>>>>> v3.18
  * When the MAC resets, all the hardware bits for timesync are reset. This
  * function is used to re-enable the device for PTP based on current settings.
  * We do lose the current clock time, so just reset the cyclecounter to the
@@ -973,6 +1088,9 @@ void ixgbe_ptp_start_cyclecounter(struct ixgbe_adapter *adapter)
  *
  * This function will maintain hwtstamp_config settings, and resets the SDP
  * output if it was enabled.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void ixgbe_ptp_reset(struct ixgbe_adapter *adapter)
@@ -986,6 +1104,12 @@ void ixgbe_ptp_reset(struct ixgbe_adapter *adapter)
 	IXGBE_WRITE_FLUSH(hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* reset the hardware timestamping mode */
+	ixgbe_ptp_set_timestamp_mode(adapter, &adapter->tstamp_config);
+
+>>>>>>> v3.18
 =======
 	/* reset the hardware timestamping mode */
 	ixgbe_ptp_set_timestamp_mode(adapter, &adapter->tstamp_config);
@@ -1010,6 +1134,7 @@ void ixgbe_ptp_reset(struct ixgbe_adapter *adapter)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ixgbe_ptp_init
  * @adapter: the ixgbe private adapter structure
  *
@@ -1025,6 +1150,8 @@ void ixgbe_ptp_init(struct ixgbe_adapter *adapter)
 	case ixgbe_mac_X540:
 		snprintf(adapter->ptp_caps.name, 16, "%s", netdev->name);
 =======
+=======
+>>>>>>> v3.18
  * ixgbe_ptp_create_clock
  * @adapter: the ixgbe private adapter structure
  *
@@ -1048,6 +1175,9 @@ static int ixgbe_ptp_create_clock(struct ixgbe_adapter *adapter)
 		snprintf(adapter->ptp_caps.name,
 			 sizeof(adapter->ptp_caps.name),
 			 "%s", netdev->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		adapter->ptp_caps.owner = THIS_MODULE;
 		adapter->ptp_caps.max_adj = 250000000;
@@ -1060,17 +1190,23 @@ static int ixgbe_ptp_create_clock(struct ixgbe_adapter *adapter)
 		adapter->ptp_caps.gettime = ixgbe_ptp_gettime;
 		adapter->ptp_caps.settime = ixgbe_ptp_settime;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		adapter->ptp_caps.enable = ixgbe_ptp_enable;
 		break;
 	case ixgbe_mac_82599EB:
 		snprintf(adapter->ptp_caps.name, 16, "%s", netdev->name);
 =======
+=======
+>>>>>>> v3.18
 		adapter->ptp_caps.enable = ixgbe_ptp_feature_enable;
 		break;
 	case ixgbe_mac_82599EB:
 		snprintf(adapter->ptp_caps.name,
 			 sizeof(adapter->ptp_caps.name),
 			 "%s", netdev->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		adapter->ptp_caps.owner = THIS_MODULE;
 		adapter->ptp_caps.max_adj = 250000000;
@@ -1082,6 +1218,7 @@ static int ixgbe_ptp_create_clock(struct ixgbe_adapter *adapter)
 		adapter->ptp_caps.adjtime = ixgbe_ptp_adjtime;
 		adapter->ptp_caps.gettime = ixgbe_ptp_gettime;
 		adapter->ptp_caps.settime = ixgbe_ptp_settime;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		adapter->ptp_caps.enable = ixgbe_ptp_enable;
 		break;
@@ -1106,6 +1243,8 @@ static int ixgbe_ptp_create_clock(struct ixgbe_adapter *adapter)
 	/* set the flag that PTP has been enabled */
 	adapter->flags2 |= IXGBE_FLAG2_PTP_ENABLED;
 =======
+=======
+>>>>>>> v3.18
 		adapter->ptp_caps.enable = ixgbe_ptp_feature_enable;
 		break;
 	default:
@@ -1161,12 +1300,16 @@ void ixgbe_ptp_init(struct ixgbe_adapter *adapter)
 
 	/* enter the IXGBE_PTP_RUNNING state */
 	set_bit(__IXGBE_PTP_RUNNING, &adapter->state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return;
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * ixgbe_ptp_stop - disable ptp device and stop the overflow check
  * @adapter: pointer to adapter struct
@@ -1182,6 +1325,8 @@ void ixgbe_ptp_stop(struct ixgbe_adapter *adapter)
 	ixgbe_ptp_setup_sdp(adapter);
 
 =======
+=======
+>>>>>>> v3.18
  * ixgbe_ptp_suspend - stop PTP work items
  * @ adapter: pointer to adapter struct
  *
@@ -1200,15 +1345,21 @@ void ixgbe_ptp_suspend(struct ixgbe_adapter *adapter)
 	IXGBE_WRITE_REG(&adapter->hw, IXGBE_TSAUXC, 0x0);
 
 	/* ensure that we cancel any pending PTP Tx work item in progress */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cancel_work_sync(&adapter->ptp_tx_work);
 	if (adapter->ptp_tx_skb) {
 		dev_kfree_skb_any(adapter->ptp_tx_skb);
 		adapter->ptp_tx_skb = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		clear_bit_unlock(__IXGBE_PTP_TX_IN_PROGRESS, &adapter->state);
 	}
 }
@@ -1226,6 +1377,9 @@ void ixgbe_ptp_stop(struct ixgbe_adapter *adapter)
 	ixgbe_ptp_suspend(adapter);
 
 	/* disable the PTP clock device */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (adapter->ptp_clock) {
 		ptp_clock_unregister(adapter->ptp_clock);

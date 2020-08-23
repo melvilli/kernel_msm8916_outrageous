@@ -33,6 +33,7 @@ extern void flush_dcache_page(struct page *page);
 extern void __flush_disable_L1(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __flush_icache_range(unsigned long, unsigned long);
 static inline void flush_icache_range(unsigned long start, unsigned long stop)
 {
@@ -40,6 +41,9 @@ static inline void flush_icache_range(unsigned long start, unsigned long stop)
 		__flush_icache_range(start, stop);
 }
 
+=======
+extern void flush_icache_range(unsigned long, unsigned long);
+>>>>>>> v3.18
 =======
 extern void flush_icache_range(unsigned long, unsigned long);
 >>>>>>> v3.18

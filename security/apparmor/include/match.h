@@ -5,7 +5,11 @@
  *
  * Copyright (C) 1998-2008 Novell/SUSE
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2009-2010 Canonical Ltd.
+=======
+ * Copyright 2009-2012 Canonical Ltd.
+>>>>>>> v3.18
 =======
  * Copyright 2009-2012 Canonical Ltd.
 >>>>>>> v3.18
@@ -21,7 +25,10 @@
 
 #include <linux/kref.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/workqueue.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -29,8 +36,11 @@
 #define DFA_START			1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DFA_VALID_PERM_MASK		0xffffffff
 #define DFA_VALID_PERM2_MASK		0xffffffff
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -40,6 +50,7 @@
  * info pages and the flex sources for documentation). The magic number
  * used in the header is 0x1B5E783D instead of 0xF13C57B1 though, because
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the YY_ID_CHK (check) and YY_ID_DEF (default) tables are used
  * slightly differently (see the apparmor-parser package).
  */
@@ -47,6 +58,8 @@
 #define YYTH_MAGIC	0x1B5E783D
 #define YYTH_DEF_RECURSE 0x1			/* DEF Table is recursive */
 =======
+=======
+>>>>>>> v3.18
  * new tables have been defined and others YY_ID_CHK (check) and YY_ID_DEF
  * (default) tables are used slightly differently (see the apparmor-parser
  * package).
@@ -61,6 +74,9 @@
  */
 
 #define YYTH_MAGIC	0x1B5E783D
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct table_set_header {
@@ -85,7 +101,10 @@ struct table_set_header {
 #define YYTD_ID_NXT	7
 #define YYTD_ID_TSIZE	8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define YYTD_ID_MAX	8
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -95,7 +114,11 @@ struct table_set_header {
 #define YYTD_DATA64	8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Each ACCEPT2 table gets 6 dedicated flags, YYTD_DATAX define the
+=======
+/* ACCEPT & ACCEPT2 tables gets 6 dedicated flags, YYTD_DATAX define the
+>>>>>>> v3.18
 =======
 /* ACCEPT & ACCEPT2 tables gets 6 dedicated flags, YYTD_DATAX define the
 >>>>>>> v3.18

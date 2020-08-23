@@ -13,7 +13,10 @@
 #include <linux/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/smtc_ipi.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm/time.h>
@@ -21,12 +24,15 @@
 #include <asm/gic.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * The SMTC Kernel for the 34K, 1004K, et. al. replaces several
  * of these routines with SMTC-specific variants.
  */
 
 #ifndef CONFIG_MIPS_MT_SMTC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int mips_next_event(unsigned long delta,
@@ -43,8 +49,11 @@ static int mips_next_event(unsigned long delta,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_MIPS_MT_SMTC */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void mips_set_clock_mode(enum clock_event_mode mode,
@@ -57,7 +66,10 @@ DEFINE_PER_CPU(struct clock_event_device, mips_clockevent_device);
 int cp0_timer_irq_installed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_MIPS_MT_SMTC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 irqreturn_t c0_compare_interrupt(int irq, void *dev_id)
@@ -85,9 +97,12 @@ irqreturn_t c0_compare_interrupt(int irq, void *dev_id)
 		write_c0_compare(read_c0_compare());
 		cd = &per_cpu(mips_clockevent_device, cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CEVT_GIC
 		if (!gic_present)
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		cd->event_handler(cd);
@@ -98,8 +113,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* Not CONFIG_MIPS_MT_SMTC */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct irqaction c0_compare_irqaction = {
@@ -189,8 +207,12 @@ int c0_compare_int_usable(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_MIPS_MT_SMTC
 int __cpuinit r4k_clockevent_init(void)
+=======
+int r4k_clockevent_init(void)
+>>>>>>> v3.18
 =======
 int r4k_clockevent_init(void)
 >>>>>>> v3.18
@@ -218,7 +240,13 @@ int r4k_clockevent_init(void)
 
 	cd->name		= "MIPS";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cd->features		= CLOCK_EVT_FEAT_ONESHOT;
+=======
+	cd->features		= CLOCK_EVT_FEAT_ONESHOT |
+				  CLOCK_EVT_FEAT_C3STOP |
+				  CLOCK_EVT_FEAT_PERCPU;
+>>>>>>> v3.18
 =======
 	cd->features		= CLOCK_EVT_FEAT_ONESHOT |
 				  CLOCK_EVT_FEAT_C3STOP |
@@ -239,9 +267,12 @@ int r4k_clockevent_init(void)
 	cd->event_handler	= mips_event_handler;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CEVT_GIC
 	if (!gic_present)
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clockevents_register_device(cd);
@@ -257,6 +288,9 @@ int r4k_clockevent_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* Not CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

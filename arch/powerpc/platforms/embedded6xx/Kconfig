@@ -35,7 +35,10 @@ config MPC7448HPC2
 	select DEFAULT_UIMAGE
 	select PPC_UDBG_16550
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select TSI108_BRIDGE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -48,13 +51,17 @@ config PPC_HOLLY
 	select TSI108_BRIDGE
 	select PPC_UDBG_16550
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select TSI108_BRIDGE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
 	  Select PPC_HOLLY if configuring for an IBM 750GX/CL Eval
 	  Board with TSI108/9 bridge (Hickory/Holly)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config PPC_PRPMC2800
 	bool "Motorola-PrPMC2800"
@@ -64,6 +71,8 @@ config PPC_PRPMC2800
 	help
 	  This option enables support for the Motorola PrPMC2800 board
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config PPC_C2K
@@ -77,7 +86,10 @@ config PPC_C2K
 	  an SBS board).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MVME5100
 	bool "Motorola/Emerson MVME5100"
 	depends on EMBEDDED6xx
@@ -91,6 +103,9 @@ config MVME5100
 	  This option enables support for the Motorola (now Emerson) MVME5100
 	  board.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config TSI108_BRIDGE
 	bool
@@ -139,6 +154,9 @@ config WII
 	  Select WII if configuring for the Nintendo Wii.
 	  More information at: <http://gc-linux.sourceforge.net/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

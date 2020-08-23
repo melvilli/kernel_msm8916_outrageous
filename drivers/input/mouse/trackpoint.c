@@ -394,6 +394,12 @@ int trackpoint_detect(struct psmouse *psmouse, bool set_properties)
 		__set_bit(BTN_MIDDLE, psmouse->dev->keybit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__set_bit(INPUT_PROP_POINTER, psmouse->dev->propbit);
+	__set_bit(INPUT_PROP_POINTING_STICK, psmouse->dev->propbit);
+
+>>>>>>> v3.18
 =======
 	__set_bit(INPUT_PROP_POINTER, psmouse->dev->propbit);
 	__set_bit(INPUT_PROP_POINTING_STICK, psmouse->dev->propbit);

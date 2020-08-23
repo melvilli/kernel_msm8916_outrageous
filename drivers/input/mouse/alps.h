@@ -13,6 +13,11 @@
 #define _ALPS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/input/mt.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/input/mt.h>
 
@@ -23,7 +28,10 @@
 #define ALPS_PROTO_V4	4
 #define ALPS_PROTO_V5	5
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ALPS_PROTO_V6	6
 #define ALPS_PROTO_V7	7	/* t3btl t4s */
 
@@ -49,6 +57,9 @@ enum V7_PACKET_ID {
 	 V7_PACKET_ID_NEW,
 	 V7_PACKET_ID_UNKNOWN,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -75,7 +86,11 @@ struct alps_model_info {
 	unsigned char proto_version;
 	unsigned char byte0, mask0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char flags;
+=======
+	int flags;
+>>>>>>> v3.18
 =======
 	int flags;
 >>>>>>> v3.18
@@ -98,12 +113,18 @@ struct alps_nibble_commands {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct alps_bitmap_point {
 	int start_bit;
 	int num_bits;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * struct alps_fields - decoded version of the report packet
@@ -111,9 +132,15 @@ struct alps_bitmap_point {
  * @y_map: Bitmap of active Y positions for MT.
  * @fingers: Number of fingers for MT.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @x: X position for ST.
  * @y: Y position for ST.
  * @z: Z position for ST.
+=======
+ * @pressure: Pressure.
+ * @st: position for ST.
+ * @mt: position for MT.
+>>>>>>> v3.18
 =======
  * @pressure: Pressure.
  * @st: position for ST.
@@ -133,15 +160,21 @@ struct alps_fields {
 	unsigned int y_map;
 	unsigned int fingers;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int x;
 	unsigned int y;
 	unsigned int z;
 =======
+=======
+>>>>>>> v3.18
 
 	int pressure;
 	struct input_mt_pos st;
 	struct input_mt_pos mt[MAX_TOUCHES];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int first_mp:1;
 	unsigned int is_mp:1;
@@ -168,6 +201,10 @@ struct alps_fields {
  *   mask0, should match byte0.
  * @mask0: The mask used to check the first byte of the report.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @fw_ver: cached copy of firmware version (EC report)
+>>>>>>> v3.18
 =======
  * @fw_ver: cached copy of firmware version (EC report)
 >>>>>>> v3.18
@@ -184,11 +221,15 @@ struct alps_fields {
  * @multi_packet: Multi-packet data in progress.
  * @multi_data: Saved multi-packet data.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @x1: First X coordinate from last MT report.
  * @x2: Second X coordinate from last MT report.
  * @y1: First Y coordinate from last MT report.
  * @y2: Second Y coordinate from last MT report.
  * @fingers: Number of fingers from last MT report.
+=======
+ * @f: Decoded packet data fields.
+>>>>>>> v3.18
 =======
  * @f: Decoded packet data fields.
 >>>>>>> v3.18
@@ -205,7 +246,12 @@ struct alps_data {
 	unsigned char proto_version;
 	unsigned char byte0, mask0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char flags;
+=======
+	unsigned char fw_ver[3];
+	int flags;
+>>>>>>> v3.18
 =======
 	unsigned char fw_ver[3];
 	int flags;
@@ -215,11 +261,14 @@ struct alps_data {
 	int x_bits;
 	int y_bits;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	int (*hw_init)(struct psmouse *psmouse);
 	void (*process_packet)(struct psmouse *psmouse);
 	void (*decode_fields)(struct alps_fields *f, unsigned char *p);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int x_res;
 	unsigned int y_res;
 
@@ -227,6 +276,9 @@ struct alps_data {
 	void (*process_packet)(struct psmouse *psmouse);
 	int (*decode_fields)(struct alps_fields *f, unsigned char *p,
 			      struct psmouse *psmouse);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void (*set_abs_params)(struct alps_data *priv, struct input_dev *dev1);
 
@@ -234,8 +286,12 @@ struct alps_data {
 	int multi_packet;
 	unsigned char multi_data[6];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int x1, x2, y1, y2;
 	int fingers;
+=======
+	struct alps_fields f;
+>>>>>>> v3.18
 =======
 	struct alps_fields f;
 >>>>>>> v3.18

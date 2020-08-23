@@ -67,7 +67,11 @@ static inline struct netns_proto_gre *gre_pernet(struct net *net)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nf_ct_gre_keymap_flush(struct net *net)
+=======
+static void nf_ct_gre_keymap_flush(struct net *net)
+>>>>>>> v3.18
 =======
 static void nf_ct_gre_keymap_flush(struct net *net)
 >>>>>>> v3.18
@@ -83,7 +87,10 @@ static void nf_ct_gre_keymap_flush(struct net *net)
 	write_unlock_bh(&net_gre->keymap_lock);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(nf_ct_gre_keymap_flush);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -564,8 +564,11 @@ out_unlock:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *ccw_device_get_chp_desc(struct ccw_device *cdev, int chp_no)
 =======
+=======
+>>>>>>> v3.18
 /**
  * chp_get_chp_desc - return newly allocated channel-path descriptor
  * @cdev: device to obtain the descriptor for
@@ -576,6 +579,9 @@ void *ccw_device_get_chp_desc(struct ccw_device *cdev, int chp_no)
  */
 struct channel_path_desc *ccw_device_get_chp_desc(struct ccw_device *cdev,
 						  int chp_idx)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct subchannel *sch;
@@ -584,7 +590,11 @@ struct channel_path_desc *ccw_device_get_chp_desc(struct ccw_device *cdev,
 	sch = to_subchannel(cdev->dev.parent);
 	chp_id_init(&chpid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chpid.id = sch->schib.pmcw.chpid[chp_no];
+=======
+	chpid.id = sch->schib.pmcw.chpid[chp_idx];
+>>>>>>> v3.18
 =======
 	chpid.id = sch->schib.pmcw.chpid[chp_idx];
 >>>>>>> v3.18

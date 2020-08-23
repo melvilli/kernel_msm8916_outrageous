@@ -19,6 +19,7 @@
 #define NUM_DEFAULT_KEYS 4
 #define NUM_DEFAULT_MGMT_KEYS 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define WEP_IV_LEN		4
 #define WEP_ICV_LEN		4
@@ -30,6 +31,9 @@
 #define TKIP_IV_LEN		8
 #define TKIP_ICV_LEN		4
 #define CMAC_PN_LEN		6
+=======
+#define MAX_PN_LEN 16
+>>>>>>> v3.18
 =======
 #define MAX_PN_LEN 16
 >>>>>>> v3.18
@@ -98,8 +102,13 @@ struct ieee80211_key {
 			 * Management frames.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u8 rx_pn[IEEE80211_NUM_TIDS + 1][CCMP_PN_LEN];
 			struct crypto_cipher *tfm;
+=======
+			u8 rx_pn[IEEE80211_NUM_TIDS + 1][IEEE80211_CCMP_PN_LEN];
+			struct crypto_aead *tfm;
+>>>>>>> v3.18
 =======
 			u8 rx_pn[IEEE80211_NUM_TIDS + 1][IEEE80211_CCMP_PN_LEN];
 			struct crypto_aead *tfm;
@@ -109,7 +118,11 @@ struct ieee80211_key {
 		struct {
 			atomic64_t tx_pn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u8 rx_pn[CMAC_PN_LEN];
+=======
+			u8 rx_pn[IEEE80211_CMAC_PN_LEN];
+>>>>>>> v3.18
 =======
 			u8 rx_pn[IEEE80211_CMAC_PN_LEN];
 >>>>>>> v3.18
@@ -118,11 +131,17 @@ struct ieee80211_key {
 			u32 icverrors; /* dot11RSNAStatsCMACICVErrors */
 		} aes_cmac;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		struct {
 			/* generic cipher scheme */
 			u8 rx_pn[IEEE80211_NUM_TIDS + 1][MAX_PN_LEN];
 		} gen;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} u;
 
@@ -145,15 +164,21 @@ struct ieee80211_key {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ieee80211_key *ieee80211_key_alloc(u32 cipher, int idx, size_t key_len,
 					  const u8 *key_data,
 					  size_t seq_len, const u8 *seq);
 =======
+=======
+>>>>>>> v3.18
 struct ieee80211_key *
 ieee80211_key_alloc(u32 cipher, int idx, size_t key_len,
 		    const u8 *key_data,
 		    size_t seq_len, const u8 *seq,
 		    const struct ieee80211_cipher_scheme *cs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Insert a key into data structures (sdata, sta if necessary)
@@ -169,7 +194,12 @@ void ieee80211_set_default_key(struct ieee80211_sub_if_data *sdata, int idx,
 void ieee80211_set_default_mgmt_key(struct ieee80211_sub_if_data *sdata,
 				    int idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ieee80211_free_keys(struct ieee80211_sub_if_data *sdata);
+=======
+void ieee80211_free_keys(struct ieee80211_sub_if_data *sdata,
+			 bool force_synchronize);
+>>>>>>> v3.18
 =======
 void ieee80211_free_keys(struct ieee80211_sub_if_data *sdata,
 			 bool force_synchronize);

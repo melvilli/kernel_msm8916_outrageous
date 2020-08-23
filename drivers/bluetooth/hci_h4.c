@@ -56,6 +56,7 @@ struct h4_struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* H4 receiver States */
 #define H4_W4_PACKET_TYPE	0
 #define H4_W4_EVENT_HDR		1
@@ -65,13 +66,19 @@ struct h4_struct {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Initialize protocol */
 static int h4_open(struct hci_uart *hu)
 {
 	struct h4_struct *h4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("hu %pK", hu);
+=======
+	BT_DBG("hu %p", hu);
+>>>>>>> v3.18
 =======
 	BT_DBG("hu %p", hu);
 >>>>>>> v3.18
@@ -92,7 +99,11 @@ static int h4_flush(struct hci_uart *hu)
 	struct h4_struct *h4 = hu->priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("hu %pK", hu);
+=======
+	BT_DBG("hu %p", hu);
+>>>>>>> v3.18
 =======
 	BT_DBG("hu %p", hu);
 >>>>>>> v3.18
@@ -110,7 +121,11 @@ static int h4_close(struct hci_uart *hu)
 	hu->priv = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("hu %pK", hu);
+=======
+	BT_DBG("hu %p", hu);
+>>>>>>> v3.18
 =======
 	BT_DBG("hu %p", hu);
 >>>>>>> v3.18
@@ -131,7 +146,11 @@ static int h4_enqueue(struct hci_uart *hu, struct sk_buff *skb)
 	struct h4_struct *h4 = hu->priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("hu %pK skb %pK", hu, skb);
+=======
+	BT_DBG("hu %p skb %p", hu, skb);
+>>>>>>> v3.18
 =======
 	BT_DBG("hu %p skb %p", hu, skb);
 >>>>>>> v3.18
@@ -143,6 +162,7 @@ static int h4_enqueue(struct hci_uart *hu, struct sk_buff *skb)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline int h4_check_data_len(struct h4_struct *h4, int len)
 {
@@ -168,6 +188,8 @@ static inline int h4_check_data_len(struct h4_struct *h4, int len)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Recv data */

@@ -60,7 +60,12 @@ int orinoco_wiphy_register(struct wiphy *wiphy)
 		if (priv->channel_mask & (1 << i)) {
 			priv->channels[i].center_freq =
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ieee80211_dsss_chan_to_freq(i + 1);
+=======
+				ieee80211_channel_to_frequency(i + 1,
+							   IEEE80211_BAND_2GHZ);
+>>>>>>> v3.18
 =======
 				ieee80211_channel_to_frequency(i + 1,
 							   IEEE80211_BAND_2GHZ);
@@ -183,7 +188,11 @@ static int orinoco_set_monitor_channel(struct wiphy *wiphy,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	channel = ieee80211_freq_to_dsss_chan(chandef->chan->center_freq);
+=======
+	channel = ieee80211_frequency_to_channel(chandef->chan->center_freq);
+>>>>>>> v3.18
 =======
 	channel = ieee80211_frequency_to_channel(chandef->chan->center_freq);
 >>>>>>> v3.18

@@ -7,6 +7,7 @@
 #define _PCI_SUN4V_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern long pci_sun4v_iommu_map(unsigned long devhandle,
 				unsigned long tsbid,
 				unsigned long num_ttes,
@@ -90,6 +91,8 @@ extern unsigned long pci_sun4v_msg_setvalid(unsigned long devhandle,
 					    unsigned long msinum,
 					    unsigned long valid);
 =======
+=======
+>>>>>>> v3.18
 long pci_sun4v_iommu_map(unsigned long devhandle,
 			 unsigned long tsbid,
 			 unsigned long num_ttes,
@@ -172,6 +175,9 @@ unsigned long pci_sun4v_msg_getvalid(unsigned long devhandle,
 unsigned long pci_sun4v_msg_setvalid(unsigned long devhandle,
 				     unsigned long msinum,
 				     unsigned long valid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* !(_PCI_SUN4V_H) */

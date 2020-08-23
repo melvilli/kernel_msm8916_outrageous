@@ -103,7 +103,11 @@ static int mlx4_ib_alloc_cq_buf(struct mlx4_ib_dev *dev, struct mlx4_ib_cq_buf *
 
 	err = mlx4_buf_alloc(dev->dev, nent * dev->dev->caps.cqe_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     PAGE_SIZE * 2, &buf->buf);
+=======
+			     PAGE_SIZE * 2, &buf->buf, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 			     PAGE_SIZE * 2, &buf->buf, GFP_KERNEL);
 >>>>>>> v3.18
@@ -118,7 +122,11 @@ static int mlx4_ib_alloc_cq_buf(struct mlx4_ib_dev *dev, struct mlx4_ib_cq_buf *
 		goto err_buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = mlx4_buf_write_mtt(dev->dev, &buf->mtt, &buf->buf);
+=======
+	err = mlx4_buf_write_mtt(dev->dev, &buf->mtt, &buf->buf, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	err = mlx4_buf_write_mtt(dev->dev, &buf->mtt, &buf->buf, GFP_KERNEL);
 >>>>>>> v3.18
@@ -218,7 +226,11 @@ struct ib_cq *mlx4_ib_create_cq(struct ib_device *ibdev, int entries, int vector
 		uar = &to_mucontext(context)->uar;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = mlx4_db_alloc(dev->dev, &cq->db, 1);
+=======
+		err = mlx4_db_alloc(dev->dev, &cq->db, 1, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		err = mlx4_db_alloc(dev->dev, &cq->db, 1, GFP_KERNEL);
 >>>>>>> v3.18
@@ -252,7 +264,11 @@ struct ib_cq *mlx4_ib_create_cq(struct ib_device *ibdev, int entries, int vector
 		if (ib_copy_to_udata(udata, &cq->mcq.cqn, sizeof (__u32))) {
 			err = -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_cq_free;
+=======
+			goto err_dbmap;
+>>>>>>> v3.18
 =======
 			goto err_dbmap;
 >>>>>>> v3.18
@@ -261,9 +277,12 @@ struct ib_cq *mlx4_ib_create_cq(struct ib_device *ibdev, int entries, int vector
 	return &cq->ibcq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_cq_free:
 	mlx4_cq_free(dev->dev, &cq->mcq);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_dbmap:
@@ -347,7 +366,11 @@ static int mlx4_ib_get_outstanding_cqes(struct mlx4_ib_cq *cq)
 
 	i = cq->mcq.cons_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (get_sw_cqe(cq, i & cq->ibcq.cqe))
+=======
+	while (get_sw_cqe(cq, i))
+>>>>>>> v3.18
 =======
 	while (get_sw_cqe(cq, i))
 >>>>>>> v3.18
@@ -392,7 +415,11 @@ int mlx4_ib_resize_cq(struct ib_cq *ibcq, int entries, struct ib_udata *udata)
 	mutex_lock(&cq->resize_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (entries < 1 || entries > dev->dev->caps.max_cqes) {
+=======
+	if (entries < 1) {
+>>>>>>> v3.18
 =======
 	if (entries < 1) {
 >>>>>>> v3.18
@@ -407,12 +434,18 @@ int mlx4_ib_resize_cq(struct ib_cq *ibcq, int entries, struct ib_udata *udata)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (entries > dev->dev->caps.max_cqes) {
 		err = -EINVAL;
 		goto out;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ibcq->uobject) {
 		err = mlx4_alloc_resize_umem(dev, cq, entries, udata);
@@ -598,7 +631,11 @@ static int mlx4_ib_ipoib_csum_ok(__be16 status, __be16 checksum)
 
 static int use_tunnel_data(struct mlx4_ib_qp *qp, struct mlx4_ib_cq *cq, struct ib_wc *wc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   unsigned tail, struct mlx4_cqe *cqe)
+=======
+			   unsigned tail, struct mlx4_cqe *cqe, int is_eth)
+>>>>>>> v3.18
 =======
 			   unsigned tail, struct mlx4_cqe *cqe, int is_eth)
 >>>>>>> v3.18
@@ -612,8 +649,11 @@ static int use_tunnel_data(struct mlx4_ib_qp *qp, struct mlx4_ib_cq *cq, struct 
 	hdr = (struct mlx4_ib_proxy_sqp_hdr *) (qp->sqp_proxy_rcv[tail].addr);
 	wc->pkey_index	= be16_to_cpu(hdr->tun.pkey_index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wc->slid	= be16_to_cpu(hdr->tun.slid_mac_47_32);
 	wc->sl		= (u8) (be16_to_cpu(hdr->tun.sl_vid) >> 12);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	wc->src_qp	= be32_to_cpu(hdr->tun.flags_src_qp) & 0xFFFFFF;
@@ -621,7 +661,10 @@ static int use_tunnel_data(struct mlx4_ib_qp *qp, struct mlx4_ib_cq *cq, struct 
 	wc->dlid_path_bits = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (is_eth) {
 		wc->vlan_id = be16_to_cpu(hdr->tun.sl_vid);
 		memcpy(&(wc->smac[0]), (char *)&hdr->tun.mac_31_0, 4);
@@ -632,6 +675,9 @@ static int use_tunnel_data(struct mlx4_ib_qp *qp, struct mlx4_ib_cq *cq, struct 
 		wc->sl          = (u8) (be16_to_cpu(hdr->tun.sl_vid) >> 12);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -648,6 +694,10 @@ static int mlx4_ib_poll_one(struct mlx4_ib_cq *cq,
 	int is_send;
 	int is_error;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int is_eth;
+>>>>>>> v3.18
 =======
 	int is_eth;
 >>>>>>> v3.18
@@ -836,6 +886,12 @@ repoll:
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		is_eth = (rdma_port_get_link_layer(wc->qp->device,
+						  (*cur_qp)->port) ==
+			  IB_LINK_LAYER_ETHERNET);
+>>>>>>> v3.18
 =======
 		is_eth = (rdma_port_get_link_layer(wc->qp->device,
 						  (*cur_qp)->port) ==
@@ -846,7 +902,12 @@ repoll:
 			    (MLX4_IB_QPT_PROXY_SMI_OWNER |
 			     MLX4_IB_QPT_PROXY_SMI | MLX4_IB_QPT_PROXY_GSI))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return use_tunnel_data(*cur_qp, cq, wc, tail, cqe);
+=======
+				return use_tunnel_data(*cur_qp, cq, wc, tail,
+						       cqe, is_eth);
+>>>>>>> v3.18
 =======
 				return use_tunnel_data(*cur_qp, cq, wc, tail,
 						       cqe, is_eth);
@@ -862,12 +923,15 @@ repoll:
 		wc->wc_flags	  |= mlx4_ib_ipoib_csum_ok(cqe->status,
 					cqe->checksum) ? IB_WC_IP_CSUM_OK : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (rdma_port_get_link_layer(wc->qp->device,
 				(*cur_qp)->port) == IB_LINK_LAYER_ETHERNET)
 			wc->sl  = be16_to_cpu(cqe->sl_vid) >> 13;
 		else
 			wc->sl  = be16_to_cpu(cqe->sl_vid) >> 12;
 =======
+=======
+>>>>>>> v3.18
 		if (is_eth) {
 			wc->sl  = be16_to_cpu(cqe->sl_vid) >> 13;
 			if (be32_to_cpu(cqe->vlan_my_qpn) &
@@ -883,6 +947,9 @@ repoll:
 			wc->sl  = be16_to_cpu(cqe->sl_vid) >> 12;
 			wc->vlan_id = 0xffff;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

@@ -79,8 +79,12 @@ asmlinkage void __exception_irq_entry icoll_handle_irq(struct pt_regs *regs)
 	irqnr = __raw_readl(icoll_base + HW_ICOLL_STAT_OFFSET);
 	__raw_writel(irqnr, icoll_base + HW_ICOLL_VECTOR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irqnr = irq_find_mapping(icoll_domain, irqnr);
 	handle_IRQ(irqnr, regs);
+=======
+	handle_domain_irq(icoll_domain, irqnr, regs);
+>>>>>>> v3.18
 =======
 	handle_domain_irq(icoll_domain, irqnr, regs);
 >>>>>>> v3.18
@@ -101,7 +105,11 @@ static struct irq_domain_ops icoll_irq_domain_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init icoll_of_init(struct device_node *np,
+=======
+static int __init icoll_of_init(struct device_node *np,
+>>>>>>> v3.18
 =======
 static int __init icoll_of_init(struct device_node *np,
 >>>>>>> v3.18
@@ -119,7 +127,11 @@ static int __init icoll_of_init(struct device_node *np,
 	icoll_domain = irq_domain_add_linear(np, ICOLL_NUM_IRQS,
 					     &icoll_irq_domain_ops, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(!icoll_domain);
+=======
+	return icoll_domain ? 0 : -ENODEV;
+>>>>>>> v3.18
 =======
 	return icoll_domain ? 0 : -ENODEV;
 >>>>>>> v3.18

@@ -21,6 +21,7 @@
 /* AR9485 1.1 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ar9485_1_1_mac_postamble ar9300_2p2_mac_postamble
 
 static const u32 ar9485_1_1_pcie_phy_pll_on_clkreq_disable_L1[][2] = {
@@ -30,11 +31,16 @@ static const u32 ar9485_1_1_pcie_phy_pll_on_clkreq_disable_L1[][2] = {
 	{0x00018c08, 0x0000080c},
 };
 =======
+=======
+>>>>>>> v3.18
 #define ar9485_modes_lowest_ob_db_tx_gain_1_1 ar9485Modes_low_ob_db_tx_gain_1_1
 
 #define ar9485_1_1_mac_postamble ar9331_1p1_mac_postamble
 
 #define ar9485_1_1_baseband_core_txfir_coeff_japan_2484 ar9300_2p2_baseband_core_txfir_coeff_japan_2484
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const u32 ar9485Common_wo_xlna_rx_gain_1_1[][2] = {
@@ -43,6 +49,10 @@ static const u32 ar9485Common_wo_xlna_rx_gain_1_1[][2] = {
 	{0x00009e04, 0x00182020},
 	{0x00009e18, 0x00000000},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x00009e20, 0x000003a8},
+>>>>>>> v3.18
 =======
 	{0x00009e20, 0x000003a8},
 >>>>>>> v3.18
@@ -187,7 +197,11 @@ static const u32 ar9485Modes_high_power_tx_gain_1_1[][5] = {
 	{0x0000a2e4, 0x00000000, 0x00000000, 0xfe2d3552, 0xfe2d3552},
 	{0x0000a2e8, 0x00000000, 0x00000000, 0xfe2d3552, 0xfe2d3552},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x0000a410, 0x000050d9, 0x000050d9, 0x000050d8, 0x000050d8},
+=======
+	{0x0000a410, 0x000050d9, 0x000050d9, 0x000050da, 0x000050da},
+>>>>>>> v3.18
 =======
 	{0x0000a410, 0x000050d9, 0x000050d9, 0x000050da, 0x000050da},
 >>>>>>> v3.18
@@ -217,6 +231,7 @@ static const u32 ar9485Modes_high_power_tx_gain_1_1[][5] = {
 	{0x0000a558, 0x8407ff0b, 0x8407ff0b, 0x5a001ceb, 0x5a001ceb},
 	{0x0000a55c, 0x8907ffcb, 0x8907ffcb, 0x5e001eeb, 0x5e001eeb},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x0000a560, 0x900fff0b, 0x900fff0b, 0x5e001eeb, 0x5e001eeb},
 	{0x0000a564, 0x960fffcb, 0x960fffcb, 0x5e001eeb, 0x5e001eeb},
 	{0x0000a568, 0x9c1fff0b, 0x9c1fff0b, 0x5e001eeb, 0x5e001eeb},
@@ -226,6 +241,8 @@ static const u32 ar9485Modes_high_power_tx_gain_1_1[][5] = {
 	{0x0000a578, 0x9c1fff0b, 0x9c1fff0b, 0x5e001eeb, 0x5e001eeb},
 	{0x0000a57c, 0x9c1fff0b, 0x9c1fff0b, 0x5e001eeb, 0x5e001eeb},
 =======
+=======
+>>>>>>> v3.18
 	{0x0000a560, 0x900fff0b, 0x900fff0b, 0x62001eee, 0x62001eee},
 	{0x0000a564, 0x960fffcb, 0x960fffcb, 0x66001ff6, 0x66001ff6},
 	{0x0000a568, 0x9c1fff0b, 0x9c1fff0b, 0x66001ff6, 0x66001ff6},
@@ -234,6 +251,9 @@ static const u32 ar9485Modes_high_power_tx_gain_1_1[][5] = {
 	{0x0000a574, 0x9c1fff0b, 0x9c1fff0b, 0x66001ff6, 0x66001ff6},
 	{0x0000a578, 0x9c1fff0b, 0x9c1fff0b, 0x66001ff6, 0x66001ff6},
 	{0x0000a57c, 0x9c1fff0b, 0x9c1fff0b, 0x66001ff6, 0x66001ff6},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{0x0000a580, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
 	{0x0000a584, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
@@ -291,12 +311,18 @@ static const u32 ar9485Modes_green_ob_db_tx_gain_1_1[][5] = {
 	/* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
 	{0x000098bc, 0x00000003, 0x00000003, 0x00000003, 0x00000003},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{0x0000a2d8, 0xf999a83a, 0xf999a83a, 0x7999a83a, 0x7999a83a},
 	{0x0000a2dc, 0x00000000, 0x00000000, 0xfe2d3552, 0xfe2d3552},
 	{0x0000a2e0, 0x00000000, 0x00000000, 0xfe2d3552, 0xfe2d3552},
 	{0x0000a2e4, 0x00000000, 0x00000000, 0xfe2d3552, 0xfe2d3552},
 	{0x0000a2e8, 0x00000000, 0x00000000, 0xfe2d3552, 0xfe2d3552},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{0x0000a410, 0x000050d9, 0x000050d9, 0x000050d8, 0x000050d8},
 	{0x0000a458, 0x80000000, 0x80000000, 0x80000000, 0x80000000},
@@ -333,7 +359,10 @@ static const u32 ar9485Modes_green_ob_db_tx_gain_1_1[][5] = {
 	{0x0000a578, 0x9c1fff0b, 0x9c1fff0b, 0x5e001eeb, 0x5e001eeb},
 	{0x0000a57c, 0x9c1fff0b, 0x9c1fff0b, 0x5e001eeb, 0x5e001eeb},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{0x0000a580, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
 	{0x0000a584, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
 	{0x0000a588, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
@@ -350,6 +379,9 @@ static const u32 ar9485Modes_green_ob_db_tx_gain_1_1[][5] = {
 	{0x0000a5b4, 0x00000000, 0x00000000, 0x04c15305, 0x04c15305},
 	{0x0000a5b8, 0x00000000, 0x00000000, 0x04c15305, 0x04c15305},
 	{0x0000a5bc, 0x00000000, 0x00000000, 0x04c15305, 0x04c15305},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{0x0000b500, 0x0000001a, 0x0000001a, 0x0000001a, 0x0000001a},
 	{0x0000b504, 0x0000001a, 0x0000001a, 0x0000001a, 0x0000001a},
@@ -396,7 +428,11 @@ static const u32 ar9485Modes_high_ob_db_tx_gain_1_1[][5] = {
 	{0x0000a2e4, 0x00000000, 0x00000000, 0xfe0fc000, 0xfe0fc000},
 	{0x0000a2e8, 0x00000000, 0x00000000, 0xfff00000, 0xfff00000},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x0000a410, 0x000050d9, 0x000050d9, 0x000050d8, 0x000050d8},
+=======
+	{0x0000a410, 0x000050d9, 0x000050d9, 0x000050da, 0x000050da},
+>>>>>>> v3.18
 =======
 	{0x0000a410, 0x000050d9, 0x000050d9, 0x000050da, 0x000050da},
 >>>>>>> v3.18
@@ -426,6 +462,7 @@ static const u32 ar9485Modes_high_ob_db_tx_gain_1_1[][5] = {
 	{0x0000a558, 0x8407ff0b, 0x8407ff0b, 0x5a001ceb, 0x5a001ceb},
 	{0x0000a55c, 0x8907ffcb, 0x8907ffcb, 0x5e001eeb, 0x5e001eeb},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x0000a560, 0x900fff0b, 0x900fff0b, 0x5e001eeb, 0x5e001eeb},
 	{0x0000a564, 0x960fffcb, 0x960fffcb, 0x5e001eeb, 0x5e001eeb},
 	{0x0000a568, 0x9c1fff0b, 0x9c1fff0b, 0x5e001eeb, 0x5e001eeb},
@@ -435,6 +472,8 @@ static const u32 ar9485Modes_high_ob_db_tx_gain_1_1[][5] = {
 	{0x0000a578, 0x9c1fff0b, 0x9c1fff0b, 0x5e001eeb, 0x5e001eeb},
 	{0x0000a57c, 0x9c1fff0b, 0x9c1fff0b, 0x5e001eeb, 0x5e001eeb},
 =======
+=======
+>>>>>>> v3.18
 	{0x0000a560, 0x900fff0b, 0x900fff0b, 0x62001eee, 0x62001eee},
 	{0x0000a564, 0x960fffcb, 0x960fffcb, 0x66001ff6, 0x66001ff6},
 	{0x0000a568, 0x9c1fff0b, 0x9c1fff0b, 0x66001ff6, 0x66001ff6},
@@ -443,6 +482,9 @@ static const u32 ar9485Modes_high_ob_db_tx_gain_1_1[][5] = {
 	{0x0000a574, 0x9c1fff0b, 0x9c1fff0b, 0x66001ff6, 0x66001ff6},
 	{0x0000a578, 0x9c1fff0b, 0x9c1fff0b, 0x66001ff6, 0x66001ff6},
 	{0x0000a57c, 0x9c1fff0b, 0x9c1fff0b, 0x66001ff6, 0x66001ff6},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{0x0000a580, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
 	{0x0000a584, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
@@ -591,6 +633,7 @@ static const u32 ar9485Modes_low_ob_db_tx_gain_1_1[][5] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ar9485_modes_lowest_ob_db_tx_gain_1_1 ar9485Modes_low_ob_db_tx_gain_1_1
 
 static const u32 ar9485Modes_green_spur_ob_db_tx_gain_1_1[][5] = {
@@ -598,6 +641,8 @@ static const u32 ar9485Modes_green_spur_ob_db_tx_gain_1_1[][5] = {
 	{0x000098bc, 0x00000003, 0x00000003, 0x00000003, 0x00000003},
 	{0x0000a410, 0x000050d9, 0x000050d9, 0x000050d8, 0x000050d8},
 =======
+=======
+>>>>>>> v3.18
 static const u32 ar9485Modes_green_spur_ob_db_tx_gain_1_1[][5] = {
 	/* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
 	{0x000098bc, 0x00000003, 0x00000003, 0x00000003, 0x00000003},
@@ -607,6 +652,9 @@ static const u32 ar9485Modes_green_spur_ob_db_tx_gain_1_1[][5] = {
 	{0x0000a2e4, 0x00000000, 0x00000000, 0xfff60780, 0xfff60780},
 	{0x0000a2e8, 0x00000000, 0x00000000, 0xfffff800, 0xfffff800},
 	{0x0000a410, 0x000050d9, 0x000050d9, 0x000050d9, 0x000050d9},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{0x0000a458, 0x80000000, 0x80000000, 0x80000000, 0x80000000},
 	{0x0000a500, 0x00022200, 0x00022200, 0x00000006, 0x00000006},
@@ -624,6 +672,7 @@ static const u32 ar9485Modes_green_spur_ob_db_tx_gain_1_1[][5] = {
 	{0x0000a530, 0x48023ec6, 0x48023ec6, 0x310006e0, 0x310006e0},
 	{0x0000a534, 0x4d023f01, 0x4d023f01, 0x330006e0, 0x330006e0},
 	{0x0000a538, 0x53023f4b, 0x53023f4b, 0x3e0008e3, 0x3e0008e3},
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{0x0000a53c, 0x5a027f09, 0x5a027f09, 0x410008e5, 0x410008e5},
 	{0x0000a540, 0x5f027fc9, 0x5f027fc9, 0x430008e6, 0x430008e6},
@@ -643,6 +692,8 @@ static const u32 ar9485Modes_green_spur_ob_db_tx_gain_1_1[][5] = {
 	{0x0000a578, 0x9c1fff0b, 0x9c1fff0b, 0x62000ef6, 0x62000ef6},
 	{0x0000a57c, 0x9c1fff0b, 0x9c1fff0b, 0x62000ef6, 0x62000ef6},
 =======
+=======
+>>>>>>> v3.18
 	{0x0000a53c, 0x5a027f09, 0x5a027f09, 0x430008e6, 0x430008e6},
 	{0x0000a540, 0x5f027fc9, 0x5f027fc9, 0x4a0008ec, 0x4a0008ec},
 	{0x0000a544, 0x6502feca, 0x6502feca, 0x4e0008f1, 0x4e0008f1},
@@ -676,6 +727,9 @@ static const u32 ar9485Modes_green_spur_ob_db_tx_gain_1_1[][5] = {
 	{0x0000a5b4, 0x00000000, 0x00000000, 0x06415905, 0x06415905},
 	{0x0000a5b8, 0x00000000, 0x00000000, 0x06415905, 0x06415905},
 	{0x0000a5bc, 0x00000000, 0x00000000, 0x06415905, 0x06415905},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{0x0000b500, 0x0000001a, 0x0000001a, 0x0000001a, 0x0000001a},
 	{0x0000b504, 0x0000001a, 0x0000001a, 0x0000001a, 0x0000001a},
@@ -941,6 +995,10 @@ static const u32 ar9485_common_rx_gain_1_1[][2] = {
 	{0x00009e04, 0x00082020},
 	{0x00009e18, 0x0300501e},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{0x00009e20, 0x000003ba},
+>>>>>>> v3.18
 =======
 	{0x00009e20, 0x000003ba},
 >>>>>>> v3.18
@@ -1077,6 +1135,7 @@ static const u32 ar9485_common_rx_gain_1_1[][2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const u32 ar9485_1_1_pcie_phy_pll_on_clkreq_enable_L1[][2] = {
 	/* Addr      allmodes  */
 	{0x00018c00, 0x18052e5e},
@@ -1091,6 +1150,8 @@ static const u32 ar9485_1_1_pcie_phy_clkreq_enable_L1[][2] = {
 	{0x00018c08, 0x0000080c},
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const u32 ar9485_1_1_soc_preamble[][2] = {
@@ -1126,7 +1187,10 @@ static const u32 ar9485_1_1_baseband_postamble[][5] = {
 	{0x00009e14, 0x31395d53, 0x31396053, 0x312e6053, 0x312e5d53},
 	{0x00009e1c, 0x0001cf9c, 0x0001cf9c, 0x00021f9c, 0x00021f9c},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x00009e20, 0x000003b5, 0x000003b5, 0x000003ce, 0x000003ce},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{0x00009e3c, 0xcf946220, 0xcf946220, 0xcf946222, 0xcf946222},
@@ -1148,7 +1212,11 @@ static const u32 ar9485_1_1_baseband_postamble[][5] = {
 	{0x0000a288, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
 	{0x0000a28c, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{0x0000a2c4, 0x00158d18, 0x00158d18, 0x00058d18, 0x00058d18},
+=======
+	{0x0000a2c4, 0x00158d18, 0x00158d18, 0x00158d18, 0x00158d18},
+>>>>>>> v3.18
 =======
 	{0x0000a2c4, 0x00158d18, 0x00158d18, 0x00158d18, 0x00158d18},
 >>>>>>> v3.18
@@ -1160,6 +1228,7 @@ static const u32 ar9485_1_1_baseband_postamble[][5] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const u32 ar9485_1_1_pcie_phy_clkreq_disable_L1[][2] = {
 	/* Addr      allmodes  */
 	{0x00018c00, 0x18013e5e},
@@ -1167,6 +1236,8 @@ static const u32 ar9485_1_1_pcie_phy_clkreq_disable_L1[][2] = {
 	{0x00018c08, 0x0000080c},
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const u32 ar9485_1_1_radio_postamble[][2] = {
@@ -1341,8 +1412,11 @@ static const u32 ar9485_1_1_mac_core[][2] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ar9485_1_1_baseband_core_txfir_coeff_japan_2484 ar9462_2p0_baseband_core_txfir_coeff_japan_2484
 =======
+=======
+>>>>>>> v3.18
 static const u32 ar9485_1_1_pcie_phy_clkreq_disable_L1[][2] = {
 	/* Addr      allmodes  */
 	{0x00018c00, 0x18013e5e},
@@ -1356,6 +1430,9 @@ static const u32 ar9485_1_1_pll_on_cdr_on_clkreq_disable_L1[][2] = {
 	{0x00018c04, 0x000801d8},
 	{0x00018c08, 0x0000080c},
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* INITVALS_9485_H */

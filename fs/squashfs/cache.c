@@ -57,6 +57,10 @@
 #include "squashfs_fs_sb.h"
 #include "squashfs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "page_actor.h"
+>>>>>>> v3.18
 =======
 #include "page_actor.h"
 >>>>>>> v3.18
@@ -124,9 +128,14 @@ struct squashfs_cache_entry *squashfs_cache_get(struct super_block *sb,
 			spin_unlock(&cache->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			entry->length = squashfs_read_data(sb, entry->data,
 				block, length, &entry->next_index,
 				cache->block_size, cache->pages);
+=======
+			entry->length = squashfs_read_data(sb, block, length,
+				&entry->next_index, entry->actor);
+>>>>>>> v3.18
 =======
 			entry->length = squashfs_read_data(sb, block, length,
 				&entry->next_index, entry->actor);
@@ -230,6 +239,10 @@ void squashfs_cache_delete(struct squashfs_cache *cache)
 			kfree(cache->entry[i].data);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		kfree(cache->entry[i].actor);
+>>>>>>> v3.18
 =======
 		kfree(cache->entry[i].actor);
 >>>>>>> v3.18
@@ -294,7 +307,10 @@ struct squashfs_cache *squashfs_cache_init(char *name, int entries,
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		entry->actor = squashfs_page_actor_init(entry->data,
 						cache->pages, 0);
@@ -302,6 +318,9 @@ struct squashfs_cache *squashfs_cache_init(char *name, int entries,
 			ERROR("Failed to allocate %s cache entry\n", name);
 			goto cleanup;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -434,6 +453,10 @@ void *squashfs_read_table(struct super_block *sb, u64 block, int length)
 	int i, res;
 	void *table, *buffer, **data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct squashfs_page_actor *actor;
+>>>>>>> v3.18
 =======
 	struct squashfs_page_actor *actor;
 >>>>>>> v3.18
@@ -449,6 +472,7 @@ void *squashfs_read_table(struct super_block *sb, u64 block, int length)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < pages; i++, buffer += PAGE_CACHE_SIZE)
 		data[i] = buffer;
 
@@ -457,6 +481,8 @@ void *squashfs_read_table(struct super_block *sb, u64 block, int length)
 
 	kfree(data);
 =======
+=======
+>>>>>>> v3.18
 	actor = squashfs_page_actor_init(data, pages, length);
 	if (actor == NULL) {
 		res = -ENOMEM;
@@ -471,6 +497,9 @@ void *squashfs_read_table(struct super_block *sb, u64 block, int length)
 
 	kfree(data);
 	kfree(actor);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (res < 0)
@@ -479,6 +508,11 @@ void *squashfs_read_table(struct super_block *sb, u64 block, int length)
 	return table;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+failed2:
+	kfree(data);
+>>>>>>> v3.18
 =======
 failed2:
 	kfree(data);

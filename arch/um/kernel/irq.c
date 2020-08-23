@@ -338,6 +338,11 @@ static struct irq_chip normal_irq_type = {
 	.irq_enable = dummy,
 	.irq_ack = dummy,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.irq_mask = dummy,
+	.irq_unmask = dummy,
+>>>>>>> v3.18
 =======
 	.irq_mask = dummy,
 	.irq_unmask = dummy,
@@ -350,6 +355,11 @@ static struct irq_chip SIGVTALRM_irq_type = {
 	.irq_enable = dummy,
 	.irq_ack = dummy,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.irq_mask = dummy,
+	.irq_unmask = dummy,
+>>>>>>> v3.18
 =======
 	.irq_mask = dummy,
 	.irq_unmask = dummy,

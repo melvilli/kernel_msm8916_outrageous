@@ -53,7 +53,11 @@ struct lp8788_bl {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct lp8788_bl_config default_bl_config = {
+=======
+static struct lp8788_bl_config default_bl_config = {
+>>>>>>> v3.18
 =======
 static struct lp8788_bl_config default_bl_config = {
 >>>>>>> v3.18
@@ -68,7 +72,11 @@ static struct lp8788_bl_config default_bl_config = {
 static inline bool is_brightness_ctrl_by_pwm(enum lp8788_bl_ctrl_mode mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (mode == LP8788_BL_COMB_PWM_BASED);
+=======
+	return mode == LP8788_BL_COMB_PWM_BASED;
+>>>>>>> v3.18
 =======
 	return mode == LP8788_BL_COMB_PWM_BASED;
 >>>>>>> v3.18
@@ -77,8 +85,13 @@ static inline bool is_brightness_ctrl_by_pwm(enum lp8788_bl_ctrl_mode mode)
 static inline bool is_brightness_ctrl_by_register(enum lp8788_bl_ctrl_mode mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (mode == LP8788_BL_REGISTER_ONLY ||
 		mode == LP8788_BL_COMB_REGISTER_BASED);
+=======
+	return mode == LP8788_BL_REGISTER_ONLY ||
+		mode == LP8788_BL_COMB_REGISTER_BASED;
+>>>>>>> v3.18
 =======
 	return mode == LP8788_BL_REGISTER_ONLY ||
 		mode == LP8788_BL_COMB_REGISTER_BASED;
@@ -190,6 +203,7 @@ static int lp8788_bl_update_status(struct backlight_device *bl_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int lp8788_bl_get_brightness(struct backlight_device *bl_dev)
 {
 	return bl_dev->props.brightness;
@@ -199,6 +213,11 @@ static const struct backlight_ops lp8788_bl_ops = {
 	.options = BL_CORE_SUSPENDRESUME,
 	.update_status = lp8788_bl_update_status,
 	.get_brightness = lp8788_bl_get_brightness,
+=======
+static const struct backlight_ops lp8788_bl_ops = {
+	.options = BL_CORE_SUSPENDRESUME,
+	.update_status = lp8788_bl_update_status,
+>>>>>>> v3.18
 =======
 static const struct backlight_ops lp8788_bl_ops = {
 	.options = BL_CORE_SUSPENDRESUME,
@@ -332,7 +351,10 @@ static int lp8788_backlight_remove(struct platform_device *pdev)
 	sysfs_remove_group(&pdev->dev.kobj, &lp8788_attr_group);
 	lp8788_backlight_unregister(bl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -345,7 +367,10 @@ static struct platform_driver lp8788_bl_driver = {
 	.driver = {
 		.name = LP8788_DEV_BACKLIGHT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},

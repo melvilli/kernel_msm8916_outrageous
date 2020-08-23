@@ -13,7 +13,11 @@
  * consent.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+>>>>>>> v3.18
 =======
  * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
 >>>>>>> v3.18
@@ -35,10 +39,15 @@
 
 /* forward declarations of dcbx related functions */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bnx2x_dcbx_stop_hw_tx(struct bnx2x *bp);
 static void bnx2x_pfc_set_pfc(struct bnx2x *bp);
 static void bnx2x_dcbx_update_ets_params(struct bnx2x *bp);
 static int bnx2x_dcbx_resume_hw_tx(struct bnx2x *bp);
+=======
+static void bnx2x_pfc_set_pfc(struct bnx2x *bp);
+static void bnx2x_dcbx_update_ets_params(struct bnx2x *bp);
+>>>>>>> v3.18
 =======
 static void bnx2x_pfc_set_pfc(struct bnx2x *bp);
 static void bnx2x_dcbx_update_ets_params(struct bnx2x *bp);
@@ -263,7 +272,10 @@ static void bnx2x_dcbx_get_ets_feature(struct bnx2x *bp,
 	memset(&pg_help_data, 0, sizeof(struct pg_help_data));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (GET_FLAGS(error, DCBX_LOCAL_ETS_ERROR))
@@ -311,7 +323,10 @@ static void  bnx2x_dcbx_get_pfc_feature(struct bnx2x *bp,
 					struct dcbx_pfc_feature *pfc, u32 error)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (GET_FLAGS(error, DCBX_LOCAL_PFC_ERROR))
@@ -383,7 +398,10 @@ static int bnx2x_dcbx_read_mib(struct bnx2x *bp,
 	struct lldp_local_mib  *local_mib;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (read_mib_type) {
@@ -447,19 +465,26 @@ static void bnx2x_pfc_set_pfc(struct bnx2x *bp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bnx2x_dcbx_stop_hw_tx(struct bnx2x *bp)
 {
 	struct bnx2x_func_state_params func_params = {NULL};
 =======
+=======
+>>>>>>> v3.18
 int bnx2x_dcbx_stop_hw_tx(struct bnx2x *bp)
 {
 	struct bnx2x_func_state_params func_params = {NULL};
 	int rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	func_params.f_obj = &bp->func_obj;
 	func_params.cmd = BNX2X_F_CMD_TX_STOP;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DP(BNX2X_MSG_DCB, "STOP TRAFFIC\n");
 	return bnx2x_func_state_change(bp, &func_params);
@@ -467,6 +492,8 @@ int bnx2x_dcbx_stop_hw_tx(struct bnx2x *bp)
 
 static int bnx2x_dcbx_resume_hw_tx(struct bnx2x *bp)
 =======
+=======
+>>>>>>> v3.18
 	__set_bit(RAMROD_COMP_WAIT, &func_params.ramrod_flags);
 	__set_bit(RAMROD_RETRY, &func_params.ramrod_flags);
 
@@ -482,12 +509,19 @@ static int bnx2x_dcbx_resume_hw_tx(struct bnx2x *bp)
 }
 
 int bnx2x_dcbx_resume_hw_tx(struct bnx2x *bp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct bnx2x_func_state_params func_params = {NULL};
 	struct bnx2x_func_tx_start_params *tx_params =
 		&func_params.params.tx_start;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int rc;
+>>>>>>> v3.18
 =======
 	int rc;
 >>>>>>> v3.18
@@ -496,11 +530,14 @@ int bnx2x_dcbx_resume_hw_tx(struct bnx2x *bp)
 	func_params.cmd = BNX2X_F_CMD_TX_START;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bnx2x_dcbx_fw_struct(bp, tx_params);
 
 	DP(BNX2X_MSG_DCB, "START TRAFFIC\n");
 	return bnx2x_func_state_change(bp, &func_params);
 =======
+=======
+>>>>>>> v3.18
 	__set_bit(RAMROD_COMP_WAIT, &func_params.ramrod_flags);
 	__set_bit(RAMROD_RETRY, &func_params.ramrod_flags);
 
@@ -515,6 +552,9 @@ int bnx2x_dcbx_resume_hw_tx(struct bnx2x *bp)
 	}
 
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -694,7 +734,10 @@ static int bnx2x_dcbx_read_shmem_neg_results(struct bnx2x *bp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef BCM_DCBNL
@@ -759,16 +802,22 @@ static inline void bnx2x_dcbx_update_tc_mapping(struct bnx2x *bp)
 
 	/* setup tc must be called under rtnl lock, but we can't take it here
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * as we are handling an attetntion on a work queue which must be
 	 * flushed at some rtnl-locked contexts (e.g. if down)
 	 */
 	if (!test_and_set_bit(BNX2X_SP_RTNL_SETUP_TC, &bp->sp_rtnl_state))
 		schedule_delayed_work(&bp->sp_rtnl_task, 0);
 =======
+=======
+>>>>>>> v3.18
 	 * as we are handling an attention on a work queue which must be
 	 * flushed at some rtnl-locked contexts (e.g. if down)
 	 */
 	bnx2x_schedule_sp_rtnl(bp, BNX2X_SP_RTNL_SETUP_TC, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -786,7 +835,11 @@ void bnx2x_dcbx_set_params(struct bnx2x *bp, u32 state)
 			bnx2x_dcbnl_update_applist(bp, true);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Read rmeote mib if dcbx is in the FW */
+=======
+			/* Read remote mib if dcbx is in the FW */
+>>>>>>> v3.18
 =======
 			/* Read remote mib if dcbx is in the FW */
 >>>>>>> v3.18
@@ -821,7 +874,11 @@ void bnx2x_dcbx_set_params(struct bnx2x *bp, u32 state)
 
 			/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * allow other funtions to update their netdevices
+=======
+			 * allow other functions to update their netdevices
+>>>>>>> v3.18
 =======
 			 * allow other functions to update their netdevices
 >>>>>>> v3.18
@@ -831,8 +888,12 @@ void bnx2x_dcbx_set_params(struct bnx2x *bp, u32 state)
 				bnx2x_link_sync_notify(bp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bnx2x_dcbx_stop_hw_tx(bp);
 
+=======
+			bnx2x_schedule_sp_rtnl(bp, BNX2X_SP_RTNL_TX_STOP, 0);
+>>>>>>> v3.18
 =======
 			bnx2x_schedule_sp_rtnl(bp, BNX2X_SP_RTNL_TX_STOP, 0);
 >>>>>>> v3.18
@@ -844,8 +905,14 @@ void bnx2x_dcbx_set_params(struct bnx2x *bp, u32 state)
 
 		bnx2x_dcbx_update_ets_params(bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bnx2x_dcbx_resume_hw_tx(bp);
 
+=======
+
+		/* ets may affect cmng configuration: reinit it in hw */
+		bnx2x_set_local_cmng(bp);
+>>>>>>> v3.18
 =======
 
 		/* ets may affect cmng configuration: reinit it in hw */
@@ -957,7 +1024,11 @@ static void bnx2x_dcbx_admin_mib_updated_params(struct bnx2x *bp,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*For IEEE admin_recommendation_bw_precentage
+=======
+		/*For IEEE admin_recommendation_bw_percentage
+>>>>>>> v3.18
 =======
 		/*For IEEE admin_recommendation_bw_percentage
 >>>>>>> v3.18
@@ -993,7 +1064,10 @@ static void bnx2x_dcbx_admin_mib_updated_params(struct bnx2x *bp,
 
 		af->app.default_pri = (u8)dp->admin_default_priority;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1002,7 +1076,10 @@ static void bnx2x_dcbx_admin_mib_updated_params(struct bnx2x *bp,
 	bnx2x_write_data(bp, (u32 *)&admin_mib, offset,
 			 sizeof(struct lldp_admin_mib));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1179,7 +1256,11 @@ static void bnx2x_dcbx_get_num_pg_traf_type(struct bnx2x *bp,
 	u32 i, traf_type, add_traf_type, add_pg;
 	u32 *ttp = bp->dcbx_port_params.app.traffic_type_priority;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pg_entry_help_data *data = help_data->data; /*shotcut*/
+=======
+	struct pg_entry_help_data *data = help_data->data; /*shortcut*/
+>>>>>>> v3.18
 =======
 	struct pg_entry_help_data *data = help_data->data; /*shortcut*/
 >>>>>>> v3.18
@@ -1279,7 +1360,12 @@ static void bnx2x_dcbx_separate_pauseable_from_non(struct bnx2x *bp,
 		else
 			/* If we join a group and one is strict
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * than the bw rulls */
+=======
+			 * than the bw rules
+			 */
+>>>>>>> v3.18
 =======
 			 * than the bw rules
 			 */
@@ -1293,7 +1379,10 @@ static void bnx2x_dcbx_separate_pauseable_from_non(struct bnx2x *bp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef POWER_OF_2
@@ -1399,7 +1488,11 @@ static void bnx2x_dcbx_2cos_limit_cee_single_pg_to_cos_params(struct bnx2x *bp,
 			/* If there are only pauseable priorities or
 			 * only non-pauseable,* the lower priorities go
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * to the first queue and the higherpriorities go
+=======
+			 * to the first queue and the higher priorities go
+>>>>>>> v3.18
 =======
 			 * to the first queue and the higher priorities go
 >>>>>>> v3.18
@@ -1603,7 +1696,11 @@ static void bnx2x_dcbx_2cos_limit_cee_three_pg_to_cos_params(
 		 *
 		 * We will join this two cases:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * if one is BW limited it will go to the secoend queue
+=======
+		 * if one is BW limited it will go to the second queue
+>>>>>>> v3.18
 =======
 		 * if one is BW limited it will go to the second queue
 >>>>>>> v3.18
@@ -1627,7 +1724,12 @@ static void bnx2x_dcbx_2cos_limit_cee_three_pg_to_cos_params(
 					/* last entry will be handled separately
 					 * If no priority is strict than last
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 * enty goes to last queue.*/
+=======
+					 * entry goes to last queue.
+					 */
+>>>>>>> v3.18
 =======
 					 * entry goes to last queue.
 					 */
@@ -1644,7 +1746,12 @@ static void bnx2x_dcbx_2cos_limit_cee_three_pg_to_cos_params(
 				cos_data->data[1].pri_join_mask |= pri_tested;
 				/* If we join a group and one is strict
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 * than the bw rulls */
+=======
+				 * than the bw rules
+				 */
+>>>>>>> v3.18
 =======
 				 * than the bw rules
 				 */
@@ -1657,7 +1764,10 @@ static void bnx2x_dcbx_2cos_limit_cee_three_pg_to_cos_params(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void bnx2x_dcbx_2cos_limit_cee_fill_cos_params(struct bnx2x *bp,
@@ -1669,7 +1779,10 @@ static void bnx2x_dcbx_2cos_limit_cee_fill_cos_params(struct bnx2x *bp,
 				       u8 num_of_dif_pri)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* default E2 settings */
@@ -1768,7 +1881,10 @@ static u8 bnx2x_dcbx_cee_fill_strict_pri(struct bnx2x *bp,
 					 u8 strict_app_pris)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (bnx2x_dcbx_spread_strict_pri(bp, cos_data, entry,
@@ -1990,7 +2106,11 @@ static void bnx2x_dcbx_fw_struct(struct bnx2x *bp,
 void bnx2x_dcbx_pmf_update(struct bnx2x *bp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* if we need to syncronize DCBX result from prev PMF
+=======
+	/* if we need to synchronize DCBX result from prev PMF
+>>>>>>> v3.18
 =======
 	/* if we need to synchronize DCBX result from prev PMF
 >>>>>>> v3.18
@@ -2022,7 +2142,10 @@ void bnx2x_dcbx_pmf_update(struct bnx2x *bp)
 		 */
 		bnx2x_dcbx_update_tc_mapping(bp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -2092,6 +2215,7 @@ static void bnx2x_dcbnl_set_pg_tccfg_tx(struct net_device *netdev, int prio,
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * bw_pct ingnored -	band-width percentage devision between user
 	 *			priorities within the same group is not
 	 *			standard and hence not supported
@@ -2101,6 +2225,8 @@ static void bnx2x_dcbnl_set_pg_tccfg_tx(struct net_device *netdev, int prio,
 	 *			to the standard pgid 15 is dedicated to strict
 	 *			prioirty traffic (on the port level).
 =======
+=======
+>>>>>>> v3.18
 	 * bw_pct ignored -	band-width percentage devision between user
 	 *			priorities within the same group is not
 	 *			standard and hence not supported
@@ -2109,6 +2235,9 @@ static void bnx2x_dcbnl_set_pg_tccfg_tx(struct net_device *netdev, int prio,
 	 *			standard and hence are not supported. According
 	 *			to the standard pgid 15 is dedicated to strict
 	 *			priority traffic (on the port level).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 *
 	 * up_map ignored
@@ -2155,6 +2284,7 @@ static void bnx2x_dcbnl_get_pg_tccfg_tx(struct net_device *netdev, int prio,
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * bw_pct ingnored -	band-width percentage devision between user
 	 *			priorities within the same group is not
 	 *			standard and hence not supported
@@ -2164,6 +2294,8 @@ static void bnx2x_dcbnl_get_pg_tccfg_tx(struct net_device *netdev, int prio,
 	 *			to the standard pgid 15 is dedicated to strict
 	 *			prioirty traffic (on the port level).
 =======
+=======
+>>>>>>> v3.18
 	 * bw_pct ignored -	band-width percentage devision between user
 	 *			priorities within the same group is not
 	 *			standard and hence not supported
@@ -2172,6 +2304,9 @@ static void bnx2x_dcbnl_get_pg_tccfg_tx(struct net_device *netdev, int prio,
 	 *			standard and hence are not supported. According
 	 *			to the standard pgid 15 is dedicated to strict
 	 *			priority traffic (on the port level).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 *
 	 * up_map ignored
@@ -2252,7 +2387,10 @@ static u8 bnx2x_dcbnl_set_all(struct net_device *netdev)
 {
 	struct bnx2x *bp = netdev_priv(netdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2273,9 +2411,13 @@ static u8 bnx2x_dcbnl_set_all(struct net_device *netdev)
 		bnx2x_dcbx_init(bp, true);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DP(BNX2X_MSG_DCB, "set_dcbx_params done (%d)\n", rc);
 	if (rc)
 		return 1;
+=======
+	DP(BNX2X_MSG_DCB, "set_dcbx_params done\n");
+>>>>>>> v3.18
 =======
 	DP(BNX2X_MSG_DCB, "set_dcbx_params done\n");
 >>>>>>> v3.18
@@ -2470,8 +2612,13 @@ static int bnx2x_set_admin_app_up(struct bnx2x *bp, u8 idtype, u16 idval, u8 up)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 bnx2x_dcbnl_set_app_up(struct net_device *netdev, u8 idtype,
 				 u16 idval, u8 up)
+=======
+static int bnx2x_dcbnl_set_app_up(struct net_device *netdev, u8 idtype,
+				  u16 idval, u8 up)
+>>>>>>> v3.18
 =======
 static int bnx2x_dcbnl_set_app_up(struct net_device *netdev, u8 idtype,
 				  u16 idval, u8 up)
@@ -2554,7 +2701,12 @@ static u8 bnx2x_dcbnl_get_featcfg(struct net_device *netdev, int featid,
 			if (bp->dcbx_local_feat.ets.enabled)
 				*flags |= DCB_FEATCFG_ENABLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (bp->dcbx_error & DCBX_LOCAL_ETS_ERROR)
+=======
+			if (bp->dcbx_error & (DCBX_LOCAL_ETS_ERROR |
+					      DCBX_REMOTE_MIB_ERROR))
+>>>>>>> v3.18
 =======
 			if (bp->dcbx_error & (DCBX_LOCAL_ETS_ERROR |
 					      DCBX_REMOTE_MIB_ERROR))
@@ -2566,7 +2718,12 @@ static u8 bnx2x_dcbnl_get_featcfg(struct net_device *netdev, int featid,
 				*flags |= DCB_FEATCFG_ENABLE;
 			if (bp->dcbx_error & (DCBX_LOCAL_PFC_ERROR |
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    DCBX_LOCAL_PFC_MISMATCH))
+=======
+					      DCBX_LOCAL_PFC_MISMATCH |
+					      DCBX_REMOTE_MIB_ERROR))
+>>>>>>> v3.18
 =======
 					      DCBX_LOCAL_PFC_MISMATCH |
 					      DCBX_REMOTE_MIB_ERROR))
@@ -2578,18 +2735,24 @@ static u8 bnx2x_dcbnl_get_featcfg(struct net_device *netdev, int featid,
 				*flags |= DCB_FEATCFG_ENABLE;
 			if (bp->dcbx_error & (DCBX_LOCAL_APP_ERROR |
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    DCBX_LOCAL_APP_MISMATCH))
 				*flags |= DCB_FEATCFG_ERROR;
 			break;
 		default:
 			BNX2X_ERR("Non valid featrue-ID\n");
 =======
+=======
+>>>>>>> v3.18
 					      DCBX_LOCAL_APP_MISMATCH |
 					      DCBX_REMOTE_MIB_ERROR))
 				*flags |= DCB_FEATCFG_ERROR;
 			break;
 		default:
 			BNX2X_ERR("Non valid feature-ID\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			rval = 1;
 			break;
@@ -2632,7 +2795,11 @@ static u8 bnx2x_dcbnl_set_featcfg(struct net_device *netdev, int featid,
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			BNX2X_ERR("Non valid featrue-ID\n");
+=======
+			BNX2X_ERR("Non valid feature-ID\n");
+>>>>>>> v3.18
 =======
 			BNX2X_ERR("Non valid feature-ID\n");
 >>>>>>> v3.18

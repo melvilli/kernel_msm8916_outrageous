@@ -33,7 +33,11 @@ void __spin_yield(arch_spinlock_t *lock)
 	holder_cpu = lock_value & 0xffff;
 	BUG_ON(holder_cpu >= NR_CPUS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	yield_count = lppaca_of(holder_cpu).yield_count;
+=======
+	yield_count = be32_to_cpu(lppaca_of(holder_cpu).yield_count);
+>>>>>>> v3.18
 =======
 	yield_count = be32_to_cpu(lppaca_of(holder_cpu).yield_count);
 >>>>>>> v3.18
@@ -62,7 +66,11 @@ void __rw_yield(arch_rwlock_t *rw)
 	holder_cpu = lock_value & 0xffff;
 	BUG_ON(holder_cpu >= NR_CPUS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	yield_count = lppaca_of(holder_cpu).yield_count;
+=======
+	yield_count = be32_to_cpu(lppaca_of(holder_cpu).yield_count);
+>>>>>>> v3.18
 =======
 	yield_count = be32_to_cpu(lppaca_of(holder_cpu).yield_count);
 >>>>>>> v3.18
@@ -79,6 +87,11 @@ void __rw_yield(arch_rwlock_t *rw)
 void arch_spin_unlock_wait(arch_spinlock_t *lock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	smp_mb();
+
+>>>>>>> v3.18
 =======
 	smp_mb();
 
@@ -90,6 +103,11 @@ void arch_spin_unlock_wait(arch_spinlock_t *lock)
 	}
 	HMT_medium();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	smp_mb();
+>>>>>>> v3.18
 =======
 
 	smp_mb();

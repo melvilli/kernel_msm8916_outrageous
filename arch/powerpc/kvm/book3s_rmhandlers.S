@@ -37,6 +37,7 @@
 #if defined(CONFIG_PPC_BOOK3S_64)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FUNC(name) 		GLUE(.,name)
 
 	.globl	kvmppc_skip_interrupt
@@ -65,11 +66,16 @@ kvmppc_skip_Hinterrupt:
 	hrfid
 	b	.
 =======
+=======
+>>>>>>> v3.18
 #if defined(_CALL_ELF) && _CALL_ELF == 2
 #define FUNC(name) 		name
 #else
 #define FUNC(name) 		GLUE(.,name)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #elif defined(CONFIG_PPC_BOOK3S_32)
@@ -181,7 +187,11 @@ kvmppc_handler_skip_ins:
  * MSR.EE has to be 0 when calling this function
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(kvmppc_entry_trampoline)
+=======
+_GLOBAL_TOC(kvmppc_entry_trampoline)
+>>>>>>> v3.18
 =======
 _GLOBAL_TOC(kvmppc_entry_trampoline)
 >>>>>>> v3.18
@@ -194,7 +204,11 @@ _GLOBAL_TOC(kvmppc_entry_trampoline)
 	/*
 	 * Set EE in HOST_MSR so that it's enabled when we get into our
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * C exit handler function
+=======
+	 * C exit handler function.
+>>>>>>> v3.18
 =======
 	 * C exit handler function.
 >>>>>>> v3.18
@@ -204,6 +218,7 @@ _GLOBAL_TOC(kvmppc_entry_trampoline)
 	mtsrr1	r6
 	RFI
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_PPC_BOOK3S_32)
 #define STACK_LR	INT_FRAME_SIZE+4
@@ -252,6 +267,8 @@ define_load_up(fpu)
 define_load_up(altivec)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "book3s_segment.S"

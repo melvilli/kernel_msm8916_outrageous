@@ -77,6 +77,10 @@ struct nouveau_therm_priv {
 	struct nouveau_therm_trip_point *last_trip;
 	int mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int cstate;
+>>>>>>> v3.18
 =======
 	int cstate;
 >>>>>>> v3.18
@@ -118,6 +122,11 @@ int nouveau_therm_sensor_ctor(struct nouveau_therm *therm);
 
 int nouveau_therm_fan_ctor(struct nouveau_therm *therm);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int nouveau_therm_fan_init(struct nouveau_therm *therm);
+int nouveau_therm_fan_fini(struct nouveau_therm *therm, bool suspend);
+>>>>>>> v3.18
 =======
 int nouveau_therm_fan_init(struct nouveau_therm *therm);
 int nouveau_therm_fan_fini(struct nouveau_therm *therm, bool suspend);
@@ -132,6 +141,11 @@ int nouveau_therm_fan_sense(struct nouveau_therm *therm);
 int nouveau_therm_preinit(struct nouveau_therm *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int nouveau_therm_sensor_init(struct nouveau_therm *therm);
+int nouveau_therm_sensor_fini(struct nouveau_therm *therm, bool suspend);
+>>>>>>> v3.18
 =======
 int nouveau_therm_sensor_init(struct nouveau_therm *therm);
 int nouveau_therm_sensor_fini(struct nouveau_therm *therm, bool suspend);
@@ -153,12 +167,15 @@ int nv50_fan_pwm_ctrl(struct nouveau_therm *, int, bool);
 int nv50_fan_pwm_get(struct nouveau_therm *, int, u32 *, u32 *);
 int nv50_fan_pwm_set(struct nouveau_therm *, int, u32, u32);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int nv50_fan_pwm_clock(struct nouveau_therm *);
 int nv84_temp_get(struct nouveau_therm *therm);
 
 int nva3_therm_fan_sense(struct nouveau_therm *);
 
 =======
+=======
+>>>>>>> v3.18
 int nv50_fan_pwm_clock(struct nouveau_therm *, int);
 int nv84_temp_get(struct nouveau_therm *therm);
 void nv84_sensor_setup(struct nouveau_therm *therm);
@@ -168,6 +185,9 @@ int nva3_therm_fan_sense(struct nouveau_therm *);
 
 int nvd0_therm_init(struct nouveau_object *object);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int nouveau_fanpwm_create(struct nouveau_therm *, struct dcb_gpio_func *);
 int nouveau_fantog_create(struct nouveau_therm *, struct dcb_gpio_func *);

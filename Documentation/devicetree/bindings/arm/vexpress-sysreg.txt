@@ -9,6 +9,11 @@ Required node properties:
 - compatible value : = "arm,vexpress,sysreg";
 - reg : physical base address and the size of the registers window
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+Deprecated properties, replaced by GPIO subnodes (see below):
+>>>>>>> v3.18
 =======
 
 Deprecated properties, replaced by GPIO subnodes (see below):
@@ -22,7 +27,10 @@ Deprecated properties, replaced by GPIO subnodes (see below):
   - second cell can take standard GPIO flags (currently ignored).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Control registers providing pseudo-GPIO lines must be represented
 by subnodes, each of them requiring the following properties:
 - compatible value : one of
@@ -37,15 +45,21 @@ by subnodes, each of them requiring the following properties:
     - for sys_flash : 0 = NOR FLASH WPn
   - second cell can take standard GPIO flags (currently ignored).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 	v2m_sysreg: sysreg@10000000 {
  		compatible = "arm,vexpress-sysreg";
  		reg = <0x10000000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpio-controller;
 		#gpio-cells = <2>;
 =======
+=======
+>>>>>>> v3.18
 
 		v2m_led_gpios: sys_led@08 {
 			compatible = "arm,vexpress-sysreg,sys_led";
@@ -64,12 +78,16 @@ Example:
 			gpio-controller;
 			#gpio-cells = <2>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  	};
 
 This block also can also act a bridge to the platform's configuration
 bus via "system control" interface, addressing devices with site number,
 position in the board stack, config controller, function and device
+<<<<<<< HEAD
 <<<<<<< HEAD
 numbers - see motherboard's TRM for more details.
 
@@ -86,6 +104,8 @@ following property:
 Example:
 	mcc {
 =======
+=======
+>>>>>>> v3.18
 numbers - see motherboard's TRM for more details. All configuration
 controller accessible via this interface must reference the sysreg
 node via "arm,vexpress,config-bridge" phandle and define appropriate
@@ -116,6 +136,9 @@ define the following properties:
 Example:
 	mcc {
 		compatible = "arm,vexpress,config-bus";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		arm,vexpress,config-bridge = <&v2m_sysreg>;
 
@@ -124,11 +147,17 @@ Example:
 			arm,vexpress-sysreg,func = <1 0>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		energy@0 {
 			compatible = "arm,vexpress-energy";
 			arm,vexpress-sysreg,func = <13 0>, <13 1>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};

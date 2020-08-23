@@ -256,7 +256,10 @@ static int mxs_gpio_probe(struct platform_device *pdev)
 	static void __iomem *base;
 	struct mxs_gpio_port *port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *iores = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int irq_base;
@@ -266,6 +269,7 @@ static int mxs_gpio_probe(struct platform_device *pdev)
 	if (!port)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (np) {
 		port->id = of_alias_get_id(np, "gpio");
@@ -278,10 +282,15 @@ static int mxs_gpio_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	port->id = of_alias_get_id(np, "gpio");
 	if (port->id < 0)
 		return port->id;
 	port->devid = (enum mxs_gpio_id) of_id->data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	port->irq = platform_get_irq(pdev, 0);
 	if (port->irq < 0)
@@ -292,6 +301,7 @@ static int mxs_gpio_probe(struct platform_device *pdev)
 	 * share the same one
 	 */
 	if (!base) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (np) {
 			parent = of_get_parent(np);
@@ -306,11 +316,16 @@ static int mxs_gpio_probe(struct platform_device *pdev)
 				return PTR_ERR(base);
 		}
 =======
+=======
+>>>>>>> v3.18
 		parent = of_get_parent(np);
 		base = of_iomap(parent, 0);
 		of_node_put(parent);
 		if (!base)
 			return -EADDRNOTAVAIL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	port->base = base;

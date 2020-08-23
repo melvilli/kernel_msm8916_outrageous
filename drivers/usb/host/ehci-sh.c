@@ -37,7 +37,11 @@ static const struct hc_driver ehci_sh_hc_driver = {
 	 */
 	.irq				= ehci_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags				= HCD_USB2 | HCD_MEMORY,
+=======
+	.flags				= HCD_USB2 | HCD_MEMORY | HCD_BH,
+>>>>>>> v3.18
 =======
 	.flags				= HCD_USB2 | HCD_MEMORY | HCD_BH,
 >>>>>>> v3.18
@@ -109,7 +113,11 @@ static int ehci_hcd_sh_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -160,6 +168,10 @@ static int ehci_hcd_sh_probe(struct platform_device *pdev)
 		goto fail_add_hcd;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -189,7 +201,10 @@ static int ehci_hcd_sh_remove(struct platform_device *pdev)
 	usb_remove_hcd(hcd);
 	usb_put_hcd(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

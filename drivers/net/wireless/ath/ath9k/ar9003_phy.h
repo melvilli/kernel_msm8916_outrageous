@@ -149,6 +149,11 @@
 #define AR_PHY_EXT_CCA_THRESH62 0x007F0000
 #define AR_PHY_EXT_CCA_THRESH62_S       16
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AR_PHY_EXTCHN_PWRTHR1_ANT_DIV_ALT_ANT_MINGAINIDX    0x0000FF00
+#define AR_PHY_EXTCHN_PWRTHR1_ANT_DIV_ALT_ANT_MINGAINIDX_S  8
+>>>>>>> v3.18
 =======
 #define AR_PHY_EXTCHN_PWRTHR1_ANT_DIV_ALT_ANT_MINGAINIDX    0x0000FF00
 #define AR_PHY_EXTCHN_PWRTHR1_ANT_DIV_ALT_ANT_MINGAINIDX_S  8
@@ -274,7 +279,11 @@
 #define AR_PHY_EXT_ATTEN_CTL_0  (AR_AGC_BASE + 0x18)
 #define AR_PHY_CCA_0            (AR_AGC_BASE + 0x1c)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AR_PHY_EXT_CCA0         (AR_AGC_BASE + 0x20)
+=======
+#define AR_PHY_CCA_CTRL_0       (AR_AGC_BASE + 0x20)
+>>>>>>> v3.18
 =======
 #define AR_PHY_CCA_CTRL_0       (AR_AGC_BASE + 0x20)
 >>>>>>> v3.18
@@ -306,11 +315,14 @@
 #define AR_PHY_ANT_DIV_MAIN_GAINTB_S            30
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AR_PHY_ANT_DIV_LNA1_MINUS_LNA2          0x0
 #define AR_PHY_ANT_DIV_LNA2                     0x1
 #define AR_PHY_ANT_DIV_LNA1                     0x2
 #define AR_PHY_ANT_DIV_LNA1_PLUS_LNA2           0x3
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define AR_PHY_EXTCHN_PWRTHR1   (AR_AGC_BASE + 0x2c)
@@ -354,6 +366,7 @@
 #define AR_PHY_CCA_MIN_GOOD_VAL_9300_2GHZ     -125
 #define AR_PHY_CCA_MIN_GOOD_VAL_9300_5GHZ     -125
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AR_PHY_CCA_MAX_GOOD_VAL_9300_2GHZ     -95
 #define AR_PHY_CCA_MAX_GOOD_VAL_9300_5GHZ     -100
 
@@ -362,6 +375,8 @@
 #define AR_PHY_CCA_NOM_VAL_9462_5GHZ          -127
 #define AR_PHY_CCA_MIN_GOOD_VAL_9462_5GHZ     -127
 =======
+=======
+>>>>>>> v3.18
 #define AR_PHY_CCA_MAX_GOOD_VAL_9300_2GHZ     -60
 #define AR_PHY_CCA_MAX_GOOD_VAL_9300_5GHZ     -60
 #define AR_PHY_CCA_MAX_GOOD_VAL_9300_FCC_2GHZ -95
@@ -373,6 +388,9 @@
 #define AR_PHY_CCA_NOM_VAL_9462_5GHZ          -127
 #define AR_PHY_CCA_MIN_GOOD_VAL_9462_5GHZ     -127
 #define AR_PHY_CCA_MAX_GOOD_VAL_9462_5GHZ     -60
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define AR_PHY_CCA_NOM_VAL_9330_2GHZ          -118
@@ -423,6 +441,11 @@
 #define AR_PHY_EXT_CCA0_THRESH62    0x000000FF
 #define AR_PHY_EXT_CCA0_THRESH62_S  0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AR_PHY_EXT_CCA0_THRESH62_1    0x000001FF
+#define AR_PHY_EXT_CCA0_THRESH62_1_S  0
+>>>>>>> v3.18
 =======
 #define AR_PHY_EXT_CCA0_THRESH62_1    0x000001FF
 #define AR_PHY_EXT_CCA0_THRESH62_1_S  0
@@ -687,10 +710,13 @@
 #define AR_PHY_SYNTH4_LONG_SHIFT_SELECT_S ((AR_SREV_9462(ah) || AR_SREV_9565(ah)) ? 0 : 1)
 #define AR_PHY_65NM_CH0_SYNTH7      0x16098
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AR_PHY_65NM_CH0_BIAS1       0x160c0
 #define AR_PHY_65NM_CH0_BIAS2       0x160c4
 #define AR_PHY_65NM_CH0_BIAS4       0x160cc
 =======
+=======
+>>>>>>> v3.18
 #define AR_PHY_65NM_CH0_SYNTH12     0x160ac
 #define AR_PHY_65NM_CH0_BIAS1       0x160c0
 #define AR_PHY_65NM_CH0_BIAS2       0x160c4
@@ -698,13 +724,19 @@
 #define AR_PHY_65NM_CH0_RXTX2       0x16104
 #define AR_PHY_65NM_CH1_RXTX2       0x16504
 #define AR_PHY_65NM_CH2_RXTX2       0x16904
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AR_PHY_65NM_CH0_RXTX4       0x1610c
 #define AR_PHY_65NM_CH1_RXTX4       0x1650c
 #define AR_PHY_65NM_CH2_RXTX4       0x1690c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AR_PHY_65NM_CH0_BB1         0x16140
 #define AR_PHY_65NM_CH0_BB2         0x16144
 #define AR_PHY_65NM_CH0_BB3         0x16148
@@ -722,6 +754,9 @@
 #define AR_PHY_65NM_CH0_RXTX2_SYNTHOVR_MASK        0x00000008
 #define AR_PHY_65NM_CH0_RXTX2_SYNTHOVR_MASK_S      3
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AR_CH0_TOP	(AR_SREV_9300(ah) ? 0x16288 : \
 			 (((AR_SREV_9462(ah) || AR_SREV_9565(ah)) ? 0x1628c : 0x16280)))
@@ -1016,7 +1051,11 @@
 #define AR_PHY_TPC_6_B1         (AR_SM1_BASE + 0x20c)
 #define AR_PHY_TPC_11_B1        (AR_SM1_BASE + 0x220)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AR_PHY_PDADC_TAB_1	(AR_SM1_BASE + (AR_SREV_AR9462(ah) ? \
+=======
+#define AR_PHY_PDADC_TAB_1	(AR_SM1_BASE + (AR_SREV_9462_20_OR_LATER(ah) ? \
+>>>>>>> v3.18
 =======
 #define AR_PHY_PDADC_TAB_1	(AR_SM1_BASE + (AR_SREV_9462_20_OR_LATER(ah) ? \
 >>>>>>> v3.18
@@ -1114,7 +1153,11 @@
 #define AR_PHY_GLB_CONTROL	(AR_GLB_BASE + 0x44)
 #define AR_GLB_SCRATCH(_ah)	(AR_GLB_BASE + \
 <<<<<<< HEAD
+<<<<<<< HEAD
 					(AR_SREV_9462_20(_ah) ? 0x4c : 0x50))
+=======
+					(AR_SREV_9462_20_OR_LATER(_ah) ? 0x4c : 0x50))
+>>>>>>> v3.18
 =======
 					(AR_SREV_9462_20_OR_LATER(_ah) ? 0x4c : 0x50))
 >>>>>>> v3.18
@@ -1389,6 +1432,11 @@
 #define AR_PHY_65NM_RXRF_AGC_AGC_OUT_S                 2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AR9300_DFS_FIRPWR -28
+
+>>>>>>> v3.18
 =======
 #define AR9300_DFS_FIRPWR -28
 

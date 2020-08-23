@@ -28,7 +28,11 @@
 #include <linux/spi/spi.h>
 #include <linux/spi/ads7846.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 >>>>>>> v3.18
@@ -37,6 +41,11 @@
 #include <linux/input.h>
 #include <linux/leds.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pwm.h>
+#include <linux/leds_pwm.h>
+>>>>>>> v3.18
 =======
 #include <linux/pwm.h>
 #include <linux/leds_pwm.h>
@@ -58,15 +67,21 @@
 
 #include "at91_aic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "at91_shdwc.h"
 #include "board.h"
 #include "sam9_smc.h"
 #include "generic.h"
 =======
+=======
+>>>>>>> v3.18
 #include "board.h"
 #include "sam9_smc.h"
 #include "generic.h"
 #include "gpio.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -292,7 +307,11 @@ static struct fb_monspecs at91fb_default_monspecs = {
 					| ATMEL_LCDC_CLKMOD_ALWAYSACTIVE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void at91_lcdc_power_control(int on)
+=======
+static void at91_lcdc_power_control(struct atmel_lcdfb_pdata *pdata, int on)
+>>>>>>> v3.18
 =======
 static void at91_lcdc_power_control(struct atmel_lcdfb_pdata *pdata, int on)
 >>>>>>> v3.18
@@ -302,7 +321,11 @@ static void at91_lcdc_power_control(struct atmel_lcdfb_pdata *pdata, int on)
 
 /* Driver datas */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata ek_lcdc_data = {
+=======
+static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
 >>>>>>> v3.18
@@ -317,7 +340,11 @@ static struct atmel_lcdfb_pdata __initdata ek_lcdc_data = {
 
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info __initdata ek_lcdc_data;
+=======
+static struct atmel_lcdfb_pdata __initdata ek_lcdc_data;
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata __initdata ek_lcdc_data;
 >>>>>>> v3.18
@@ -397,8 +424,11 @@ static struct gpio_led ek_leds[] = {
 		.gpio			= AT91_PIN_PB7,
 		.default_trigger	= "heartbeat",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 =======
+=======
+>>>>>>> v3.18
 	},
 #if !IS_ENABLED(CONFIG_LEDS_PWM)
 	{
@@ -408,12 +438,16 @@ static struct gpio_led ek_leds[] = {
 		.default_trigger	= "none",
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /*
  * PWM Leds
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct gpio_led ek_pwm_led[] = {
 	/* For now only DS1 is PWM-driven (by pwm1) */
@@ -426,6 +460,8 @@ static struct gpio_led ek_pwm_led[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 static struct pwm_lookup pwm_lookup[] = {
 	PWM_LOOKUP("at91sam9rl-pwm", 1, "leds_pwm", "ds1",
 		   5000, PWM_POLARITY_INVERSED),
@@ -454,6 +490,9 @@ static struct platform_device leds_pwm = {
 #endif
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * CAN
@@ -474,9 +513,12 @@ static struct at91_can_data ek_can_data = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init ek_board_init(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device *devices[] __initdata = {
 #if IS_ENABLED(CONFIG_LEDS_PWM)
 	&leds_pwm,
@@ -487,6 +529,9 @@ static void __init ek_board_init(void)
 {
 	at91_register_devices();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Serial */
 	/* DBGU on ttyS0. (Rx & Tx only) */
@@ -521,10 +566,13 @@ static void __init ek_board_init(void)
 	/* LEDs */
 	at91_gpio_leds(ek_leds, ARRAY_SIZE(ek_leds));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	at91_pwm_leds(ek_pwm_led, ARRAY_SIZE(ek_pwm_led));
 	/* CAN */
 	at91_add_device_can(&ek_can_data);
 =======
+=======
+>>>>>>> v3.18
 	pwm_add_table(pwm_lookup, ARRAY_SIZE(pwm_lookup));
 #if IS_ENABLED(CONFIG_LEDS_PWM)
 	at91_add_device_pwm(1 << AT91_PWM1);
@@ -533,13 +581,20 @@ static void __init ek_board_init(void)
 	at91_add_device_can(&ek_can_data);
 	/* Other platform devices */
 	platform_add_devices(devices, ARRAY_SIZE(devices));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 MACHINE_START(AT91SAM9263EK, "Atmel AT91SAM9263-EK")
 	/* Maintainer: Atmel */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= at91_init_time,
 >>>>>>> v3.18

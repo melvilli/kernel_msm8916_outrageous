@@ -4,7 +4,11 @@
  * This file contains the generic target mode <-> Linux SCSI subsystem plugin.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (c) Copyright 2003-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2003-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2003-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -162,7 +166,11 @@ static void pscsi_tape_read_blocksize(struct se_device *dev,
 	buf = kzalloc(12, GFP_KERNEL);
 	if (!buf)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -181,10 +189,16 @@ static void pscsi_tape_read_blocksize(struct se_device *dev,
 	 */
 	sdev->sector_size = (buf[9] << 16) | (buf[10] << 8) | (buf[11]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free:
 	if (!sdev->sector_size)
 		sdev->sector_size = 1024;
 
+=======
+	if (!sdev->sector_size)
+		sdev->sector_size = 1024;
+out_free:
+>>>>>>> v3.18
 =======
 	if (!sdev->sector_size)
 		sdev->sector_size = 1024;
@@ -328,7 +342,11 @@ static int pscsi_add_device_to_list(struct se_device *dev,
 		sd->queue_depth = PSCSI_DEFAULT_QUEUEDEPTH;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Set broken SCSI Device %d:%d:%d"
+=======
+		pr_err("Set broken SCSI Device %d:%d:%llu"
+>>>>>>> v3.18
 =======
 		pr_err("Set broken SCSI Device %d:%d:%llu"
 >>>>>>> v3.18
@@ -337,10 +355,16 @@ static int pscsi_add_device_to_list(struct se_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->dev_attrib.hw_block_size =
 		min_not_zero((int)sd->sector_size, 512);
 	dev->dev_attrib.hw_max_sectors =
 		min_not_zero((unsigned)sd->host->max_sectors, queue_max_hw_sectors(q));
+=======
+	dev->dev_attrib.hw_block_size = sd->sector_size;
+	dev->dev_attrib.hw_max_sectors =
+		min_t(int, sd->host->max_sectors, queue_max_hw_sectors(q));
+>>>>>>> v3.18
 =======
 	dev->dev_attrib.hw_block_size = sd->sector_size;
 	dev->dev_attrib.hw_max_sectors =
@@ -369,10 +393,15 @@ static int pscsi_add_device_to_list(struct se_device *dev,
 	 * For TYPE_TAPE, attempt to determine blocksize with MODE_SENSE.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sd->type == TYPE_TAPE) {
 		pscsi_tape_read_blocksize(dev, sd);
 		dev->dev_attrib.hw_block_size = sd->sector_size;
 	}
+=======
+	if (sd->type == TYPE_TAPE)
+		pscsi_tape_read_blocksize(dev, sd);
+>>>>>>> v3.18
 =======
 	if (sd->type == TYPE_TAPE)
 		pscsi_tape_read_blocksize(dev, sd);
@@ -409,7 +438,11 @@ static int pscsi_create_type_disk(struct se_device *dev, struct scsi_device *sd)
 
 	if (scsi_device_get(sd)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("scsi_device_get() failed for %d:%d:%d:%d\n",
+=======
+		pr_err("scsi_device_get() failed for %d:%d:%d:%llu\n",
+>>>>>>> v3.18
 =======
 		pr_err("scsi_device_get() failed for %d:%d:%d:%llu\n",
 >>>>>>> v3.18
@@ -439,7 +472,11 @@ static int pscsi_create_type_disk(struct se_device *dev, struct scsi_device *sd)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("CORE_PSCSI[%d] - Added TYPE_DISK for %d:%d:%d:%d\n",
+=======
+	pr_debug("CORE_PSCSI[%d] - Added TYPE_DISK for %d:%d:%d:%llu\n",
+>>>>>>> v3.18
 =======
 	pr_debug("CORE_PSCSI[%d] - Added TYPE_DISK for %d:%d:%d:%llu\n",
 >>>>>>> v3.18
@@ -451,7 +488,11 @@ static int pscsi_create_type_disk(struct se_device *dev, struct scsi_device *sd)
  * Called with struct Scsi_Host->host_lock called.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pscsi_create_type_nondisk(struct se_device *dev, struct scsi_device *sd)
+=======
+static int pscsi_create_type_rom(struct se_device *dev, struct scsi_device *sd)
+>>>>>>> v3.18
 =======
 static int pscsi_create_type_rom(struct se_device *dev, struct scsi_device *sd)
 >>>>>>> v3.18
@@ -463,7 +504,11 @@ static int pscsi_create_type_rom(struct se_device *dev, struct scsi_device *sd)
 
 	if (scsi_device_get(sd)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("scsi_device_get() failed for %d:%d:%d:%d\n",
+=======
+		pr_err("scsi_device_get() failed for %d:%d:%d:%llu\n",
+>>>>>>> v3.18
 =======
 		pr_err("scsi_device_get() failed for %d:%d:%d:%llu\n",
 >>>>>>> v3.18
@@ -479,7 +524,11 @@ static int pscsi_create_type_rom(struct se_device *dev, struct scsi_device *sd)
 		return ret;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("CORE_PSCSI[%d] - Added Type: %s for %d:%d:%d:%d\n",
+=======
+	pr_debug("CORE_PSCSI[%d] - Added Type: %s for %d:%d:%d:%llu\n",
+>>>>>>> v3.18
 =======
 	pr_debug("CORE_PSCSI[%d] - Added Type: %s for %d:%d:%d:%llu\n",
 >>>>>>> v3.18
@@ -490,7 +539,10 @@ static int pscsi_create_type_rom(struct se_device *dev, struct scsi_device *sd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Called with struct Scsi_Host->host_lock called.
  */
@@ -513,6 +565,9 @@ static int pscsi_create_type_other(struct se_device *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pscsi_configure_device(struct se_device *dev)
 {
@@ -577,7 +632,10 @@ static int pscsi_configure_device(struct se_device *dev)
 				return -EINVAL;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pdv->pdv_lld_host = sh;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -605,14 +663,20 @@ static int pscsi_configure_device(struct se_device *dev)
 			ret = pscsi_create_type_disk(dev, sd);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:
 			ret = pscsi_create_type_nondisk(dev, sd);
 =======
+=======
+>>>>>>> v3.18
 		case TYPE_ROM:
 			ret = pscsi_create_type_rom(dev, sd);
 			break;
 		default:
 			ret = pscsi_create_type_other(dev, sd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -668,10 +732,16 @@ static void pscsi_free_device(struct se_device *dev)
 		    (phv->phv_lld_host != NULL))
 			scsi_host_put(phv->phv_lld_host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (pdv->pdv_lld_host)
 			scsi_host_put(pdv->pdv_lld_host);
 
 		scsi_device_put(sd);
+=======
+
+		if ((sd->type == TYPE_DISK) || (sd->type == TYPE_ROM))
+			scsi_device_put(sd);
+>>>>>>> v3.18
 =======
 
 		if ((sd->type == TYPE_DISK) || (sd->type == TYPE_ROM))
@@ -822,7 +892,13 @@ static ssize_t pscsi_set_configfs_dev_params(struct se_device *dev,
 				goto out;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			match_int(args, &arg);
+=======
+			ret = match_int(args, &arg);
+			if (ret)
+				goto out;
+>>>>>>> v3.18
 =======
 			ret = match_int(args, &arg);
 			if (ret)
@@ -835,7 +911,13 @@ static ssize_t pscsi_set_configfs_dev_params(struct se_device *dev,
 			break;
 		case Opt_scsi_channel_id:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			match_int(args, &arg);
+=======
+			ret = match_int(args, &arg);
+			if (ret)
+				goto out;
+>>>>>>> v3.18
 =======
 			ret = match_int(args, &arg);
 			if (ret)
@@ -849,7 +931,13 @@ static ssize_t pscsi_set_configfs_dev_params(struct se_device *dev,
 			break;
 		case Opt_scsi_target_id:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			match_int(args, &arg);
+=======
+			ret = match_int(args, &arg);
+			if (ret)
+				goto out;
+>>>>>>> v3.18
 =======
 			ret = match_int(args, &arg);
 			if (ret)
@@ -863,7 +951,13 @@ static ssize_t pscsi_set_configfs_dev_params(struct se_device *dev,
 			break;
 		case Opt_scsi_lun_id:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			match_int(args, &arg);
+=======
+			ret = match_int(args, &arg);
+			if (ret)
+				goto out;
+>>>>>>> v3.18
 =======
 			ret = match_int(args, &arg);
 			if (ret)
@@ -1147,9 +1241,14 @@ pscsi_execute_cmd(struct se_cmd *cmd)
 				(data_direction == DMA_TO_DEVICE),
 				GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!req || IS_ERR(req)) {
 			pr_err("PSCSI: blk_get_request() failed: %ld\n",
 					req ? IS_ERR(req) : -ENOMEM);
+=======
+		if (IS_ERR(req)) {
+			pr_err("PSCSI: blk_get_request() failed\n");
+>>>>>>> v3.18
 =======
 		if (IS_ERR(req)) {
 			pr_err("PSCSI: blk_get_request() failed\n");
@@ -1215,7 +1314,11 @@ static u32 pscsi_get_device_type(struct se_device *dev)
 	struct scsi_device *sd = pdv->pdv_sd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (sd) ? sd->type : TYPE_NO_LUN;
+=======
+	return sd->type;
+>>>>>>> v3.18
 =======
 	return sd->type;
 >>>>>>> v3.18
@@ -1229,6 +1332,10 @@ static sector_t pscsi_get_blocks(struct se_device *dev)
 		return pdv->pdv_bd->bd_part->nr_sects;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dump_stack();
+>>>>>>> v3.18
 =======
 	dump_stack();
 >>>>>>> v3.18

@@ -248,6 +248,7 @@ static void octeon_mgmt_rx_fill_ring(struct net_device *netdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ktime_t ptp_to_ktime(u64 ptptime)
 {
 	ktime_t ktimebase;
@@ -270,6 +271,8 @@ static ktime_t ptp_to_ktime(u64 ptptime)
 	return ktime_sub_ns(ktimebase, ptpbase - ptptime);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void octeon_mgmt_clean_tx_buffers(struct octeon_mgmt *p)
@@ -316,6 +319,7 @@ static void octeon_mgmt_clean_tx_buffers(struct octeon_mgmt *p)
 		if (unlikely(re.s.tstamp)) {
 			struct skb_shared_hwtstamps ts;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Read the timestamp */
 			u64 ns = cvmx_read_csr(CVMX_MIXX_TSTAMP(p->port));
 			/* Remove the timestamp from the FIFO */
@@ -323,6 +327,8 @@ static void octeon_mgmt_clean_tx_buffers(struct octeon_mgmt *p)
 			/* Tell the kernel about the timestamp */
 			ts.syststamp = ptp_to_ktime(ns);
 =======
+=======
+>>>>>>> v3.18
 			u64 ns;
 
 			memset(&ts, 0, sizeof(ts));
@@ -331,6 +337,9 @@ static void octeon_mgmt_clean_tx_buffers(struct octeon_mgmt *p)
 			/* Remove the timestamp from the FIFO */
 			cvmx_write_csr(CVMX_MIXX_TSCTL(p->port), 0);
 			/* Tell the kernel about the timestamp */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ts.hwtstamp = ns_to_ktime(ns);
 			skb_tstamp_tx(skb, &ts);
@@ -444,7 +453,10 @@ good:
 			ts = skb_hwtstamps(skb);
 			ts->hwtstamp = ns_to_ktime(ns);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ts->syststamp = ptp_to_ktime(ns);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			__skb_pull(skb, 8);
@@ -1466,7 +1478,11 @@ static int octeon_mgmt_probe(struct platform_device *pdev)
 	SET_NETDEV_DEV(netdev, &pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, netdev);
+=======
+	platform_set_drvdata(pdev, netdev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, netdev);
 >>>>>>> v3.18
@@ -1567,7 +1583,11 @@ static int octeon_mgmt_probe(struct platform_device *pdev)
 	mac = of_get_mac_address(pdev->dev.of_node);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mac && is_valid_ether_addr(mac))
+=======
+	if (mac)
+>>>>>>> v3.18
 =======
 	if (mac)
 >>>>>>> v3.18
@@ -1578,8 +1598,14 @@ static int octeon_mgmt_probe(struct platform_device *pdev)
 	p->phy_np = of_parse_phandle(pdev->dev.of_node, "phy-handle", 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev->dev.coherent_dma_mask = DMA_BIT_MASK(64);
 	pdev->dev.dma_mask = &pdev->dev.coherent_dma_mask;
+=======
+	result = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(64));
+	if (result)
+		goto err;
+>>>>>>> v3.18
 =======
 	result = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(64));
 	if (result)
@@ -1602,7 +1628,11 @@ err:
 static int octeon_mgmt_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *netdev = dev_get_drvdata(&pdev->dev);
+=======
+	struct net_device *netdev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct net_device *netdev = platform_get_drvdata(pdev);
 >>>>>>> v3.18

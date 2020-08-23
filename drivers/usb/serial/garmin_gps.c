@@ -26,7 +26,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -279,6 +282,7 @@ static int pkt_add(struct garmin_data *garmin_data_p,
 	struct garmin_packet *pkt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* process only packets containg data ... */
 	if (data_length) {
 		pkt = kmalloc(sizeof(struct garmin_packet)+data_length,
@@ -288,6 +292,8 @@ static int pkt_add(struct garmin_data *garmin_data_p,
 			return 0;
 		}
 =======
+=======
+>>>>>>> v3.18
 	/* process only packets containing data ... */
 	if (data_length) {
 		pkt = kmalloc(sizeof(struct garmin_packet)+data_length,
@@ -295,6 +301,9 @@ static int pkt_add(struct garmin_data *garmin_data_p,
 		if (!pkt)
 			return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pkt->size = data_length;
 		memcpy(pkt->data, data, data_length);
@@ -962,9 +971,15 @@ static void garmin_close(struct usb_serial_port *port)
 	struct garmin_data *garmin_data_p = usb_get_serial_port_data(port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s - port %d - mode=%d state=%d flags=0x%X\n",
 		__func__, port->number, garmin_data_p->mode,
 		garmin_data_p->state, garmin_data_p->flags);
+=======
+	dev_dbg(&port->dev, "%s - mode=%d state=%d flags=0x%X\n",
+		__func__, garmin_data_p->mode, garmin_data_p->state,
+		garmin_data_p->flags);
+>>>>>>> v3.18
 =======
 	dev_dbg(&port->dev, "%s - mode=%d state=%d flags=0x%X\n",
 		__func__, garmin_data_p->mode, garmin_data_p->state,
@@ -1026,6 +1041,7 @@ static int garmin_write_bulk(struct usb_serial_port *port,
 
 	buffer = kmalloc(count, GFP_ATOMIC);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!buffer) {
 		dev_err(&port->dev, "out of memory\n");
 		return -ENOMEM;
@@ -1035,11 +1051,16 @@ static int garmin_write_bulk(struct usb_serial_port *port,
 	if (!urb) {
 		dev_err(&port->dev, "no more free urbs\n");
 =======
+=======
+>>>>>>> v3.18
 	if (!buffer)
 		return -ENOMEM;
 
 	urb = usb_alloc_urb(0, GFP_ATOMIC);
 	if (!urb) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree(buffer);
 		return -ENOMEM;
@@ -1077,7 +1098,10 @@ static int garmin_write_bulk(struct usb_serial_port *port,
 				__func__, status);
 		count = status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(buffer);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1180,7 +1204,11 @@ static void garmin_read_process(struct garmin_data *garmin_data_p,
 
 	if (garmin_data_p->flags & FLAGS_DROP_DATA) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* abort-transfer cmd is actice */
+=======
+		/* abort-transfer cmd is active */
+>>>>>>> v3.18
 =======
 		/* abort-transfer cmd is active */
 >>>>>>> v3.18
@@ -1429,10 +1457,16 @@ static int garmin_port_probe(struct usb_serial_port *port)
 
 	garmin_data_p = kzalloc(sizeof(struct garmin_data), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (garmin_data_p == NULL) {
 		dev_err(&port->dev, "%s - Out of memory\n", __func__);
 		return -ENOMEM;
 	}
+=======
+	if (!garmin_data_p)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	if (!garmin_data_p)
 		return -ENOMEM;

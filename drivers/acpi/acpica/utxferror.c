@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,15 +50,21 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
 #include <acpi/acpi.h>
 #include "accommon.h"
 #include "acnamesp.h"
 =======
+=======
+>>>>>>> v3.18
 #define EXPORT_ACPI_INTERFACES
 
 #include <acpi/acpi.h>
 #include "accommon.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define _COMPONENT          ACPI_UTILITIES
@@ -63,6 +73,7 @@ ACPI_MODULE_NAME("utxferror")
 /*
  * This module is used for the in-kernel ACPICA as well as the ACPICA
  * tools/applications.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * For the iASL compiler case, the output is redirected to stderr so that
@@ -101,6 +112,10 @@ extern FILE *acpi_gbl_output_file;
  */
 #define ACPI_MSG_SUFFIX \
 	acpi_os_printf (" (%8.8X/%s-%u)\n", ACPI_CA_VERSION, module_name, line_number)
+=======
+ */
+#ifndef ACPI_NO_ERROR_MESSAGES	/* Entire module */
+>>>>>>> v3.18
 =======
  */
 #ifndef ACPI_NO_ERROR_MESSAGES	/* Entire module */
@@ -302,6 +317,7 @@ acpi_bios_warning(const char *module_name,
 
 ACPI_EXPORT_SYMBOL(acpi_bios_warning)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * The remainder of this module contains internal error functions that may
@@ -498,6 +514,8 @@ acpi_ut_method_error(const char *module_name,
 	ACPI_MSG_REDIRECT_END;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif				/* ACPI_NO_ERROR_MESSAGES */

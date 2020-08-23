@@ -320,6 +320,7 @@ static int pca9532_destroy_devices(struct pca9532_data *data, int n_devs)
 
 #ifdef CONFIG_LEDS_PCA9532_GPIO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data->gpio.dev) {
 		int err = gpiochip_remove(&data->gpio);
 		if (err) {
@@ -328,6 +329,10 @@ static int pca9532_destroy_devices(struct pca9532_data *data, int n_devs)
 			return err;
 		}
 	}
+=======
+	if (data->gpio.dev)
+		gpiochip_remove(&data->gpio);
+>>>>>>> v3.18
 =======
 	if (data->gpio.dev)
 		gpiochip_remove(&data->gpio);
@@ -452,7 +457,12 @@ static int pca9532_probe(struct i2c_client *client,
 {
 	struct pca9532_data *data = i2c_get_clientdata(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pca9532_platform_data *pca9532_pdata = client->dev.platform_data;
+=======
+	struct pca9532_platform_data *pca9532_pdata =
+			dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct pca9532_platform_data *pca9532_pdata =
 			dev_get_platdata(&client->dev);

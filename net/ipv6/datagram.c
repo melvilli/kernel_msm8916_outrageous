@@ -41,6 +41,7 @@ static bool ipv6_mapped_addr_any(const struct in6_addr *a)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __ip6_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 {
 	struct sockaddr_in6	*usin = (struct sockaddr_in6 *) uaddr;
@@ -52,6 +53,8 @@ static int __ip6_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int a
 	struct ip6_flowlabel	*flowlabel = NULL;
 	struct ipv6_txoptions   *opt;
 =======
+=======
+>>>>>>> v3.18
 int ip6_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 {
 	struct sockaddr_in6	*usin = (struct sockaddr_in6 *) uaddr;
@@ -62,6 +65,9 @@ int ip6_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 	struct flowi6		fl6;
 	struct ip6_flowlabel	*flowlabel = NULL;
 	struct ipv6_txoptions	*opt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			addr_type;
 	int			err;
@@ -70,7 +76,11 @@ int ip6_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 		if (__ipv6_only_sock(sk))
 			return -EAFNOSUPPORT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = __ip4_datagram_connect(sk, uaddr, addr_len);
+=======
+		err = ip4_datagram_connect(sk, uaddr, addr_len);
+>>>>>>> v3.18
 =======
 		err = ip4_datagram_connect(sk, uaddr, addr_len);
 >>>>>>> v3.18
@@ -91,7 +101,10 @@ int ip6_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 			if (flowlabel == NULL)
 				return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			usin->sin6_addr = flowlabel->dst;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -120,9 +133,15 @@ int ip6_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 		sin.sin_port = usin->sin6_port;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = __ip4_datagram_connect(sk,
 					     (struct sockaddr *) &sin,
 					     sizeof(sin));
+=======
+		err = ip4_datagram_connect(sk,
+					   (struct sockaddr *) &sin,
+					   sizeof(sin));
+>>>>>>> v3.18
 =======
 		err = ip4_datagram_connect(sk,
 					   (struct sockaddr *) &sin,
@@ -134,7 +153,11 @@ ipv4_connected:
 			goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ipv6_addr_set_v4mapped(inet->inet_daddr, &np->daddr);
+=======
+		ipv6_addr_set_v4mapped(inet->inet_daddr, &sk->sk_v6_daddr);
+>>>>>>> v3.18
 =======
 		ipv6_addr_set_v4mapped(inet->inet_daddr, &sk->sk_v6_daddr);
 >>>>>>> v3.18
@@ -144,15 +167,21 @@ ipv4_connected:
 			ipv6_addr_set_v4mapped(inet->inet_saddr, &np->saddr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ipv6_addr_any(&np->rcv_saddr) ||
 		    ipv6_mapped_addr_any(&np->rcv_saddr)) {
 			ipv6_addr_set_v4mapped(inet->inet_rcv_saddr,
 					       &np->rcv_saddr);
 =======
+=======
+>>>>>>> v3.18
 		if (ipv6_addr_any(&sk->sk_v6_rcv_saddr) ||
 		    ipv6_mapped_addr_any(&sk->sk_v6_rcv_saddr)) {
 			ipv6_addr_set_v4mapped(inet->inet_rcv_saddr,
 					       &sk->sk_v6_rcv_saddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (sk->sk_prot->rehash)
 				sk->sk_prot->rehash(sk);
@@ -183,7 +212,11 @@ ipv4_connected:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np->daddr = *daddr;
+=======
+	sk->sk_v6_daddr = *daddr;
+>>>>>>> v3.18
 =======
 	sk->sk_v6_daddr = *daddr;
 >>>>>>> v3.18
@@ -198,7 +231,11 @@ ipv4_connected:
 
 	fl6.flowi6_proto = sk->sk_protocol;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fl6.daddr = np->daddr;
+=======
+	fl6.daddr = sk->sk_v6_daddr;
+>>>>>>> v3.18
 =======
 	fl6.daddr = sk->sk_v6_daddr;
 >>>>>>> v3.18
@@ -208,7 +245,10 @@ ipv4_connected:
 	fl6.fl6_dport = inet->inet_dport;
 	fl6.fl6_sport = inet->inet_sport;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fl6.flowi6_uid = sock_i_uid(sk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -218,6 +258,7 @@ ipv4_connected:
 	security_sk_classify_flow(sk, flowi6_to_flowi(&fl6));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_lock();
 	opt = flowlabel ? flowlabel->opt : rcu_dereference(np->opt);
 	final_p = fl6_update_dst(&fl6, opt, &final);
@@ -225,10 +266,15 @@ ipv4_connected:
 
 	dst = ip6_dst_lookup_flow(sk, &fl6, final_p, true);
 =======
+=======
+>>>>>>> v3.18
 	opt = flowlabel ? flowlabel->opt : np->opt;
 	final_p = fl6_update_dst(&fl6, opt, &final);
 
 	dst = ip6_dst_lookup_flow(sk, &fl6, final_p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = 0;
 	if (IS_ERR(dst)) {
@@ -242,8 +288,13 @@ ipv4_connected:
 		np->saddr = fl6.saddr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ipv6_addr_any(&np->rcv_saddr)) {
 		np->rcv_saddr = fl6.saddr;
+=======
+	if (ipv6_addr_any(&sk->sk_v6_rcv_saddr)) {
+		sk->sk_v6_rcv_saddr = fl6.saddr;
+>>>>>>> v3.18
 =======
 	if (ipv6_addr_any(&sk->sk_v6_rcv_saddr)) {
 		sk->sk_v6_rcv_saddr = fl6.saddr;
@@ -255,8 +306,13 @@ ipv4_connected:
 
 	ip6_dst_store(sk, dst,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      ipv6_addr_equal(&fl6.daddr, &np->daddr) ?
 		      &np->daddr : NULL,
+=======
+		      ipv6_addr_equal(&fl6.daddr, &sk->sk_v6_daddr) ?
+		      &sk->sk_v6_daddr : NULL,
+>>>>>>> v3.18
 =======
 		      ipv6_addr_equal(&fl6.daddr, &sk->sk_v6_daddr) ?
 		      &sk->sk_v6_daddr : NULL,
@@ -269,6 +325,10 @@ ipv4_connected:
 
 	sk->sk_state = TCP_ESTABLISHED;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ip6_set_txhash(sk);
+>>>>>>> v3.18
 =======
 	ip6_set_txhash(sk);
 >>>>>>> v3.18
@@ -276,6 +336,7 @@ out:
 	fl6_sock_release(flowlabel);
 	return err;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int ip6_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
@@ -289,6 +350,8 @@ int ip6_datagram_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 }
 EXPORT_SYMBOL_GPL(ip6_datagram_connect);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(ip6_datagram_connect);
 
 int ip6_datagram_connect_v6_only(struct sock *sk, struct sockaddr *uaddr,
@@ -300,6 +363,9 @@ int ip6_datagram_connect_v6_only(struct sock *sk, struct sockaddr *uaddr,
 	return ip6_datagram_connect(sk, uaddr, addr_len);
 }
 EXPORT_SYMBOL_GPL(ip6_datagram_connect_v6_only);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void ipv6_icmp_error(struct sock *sk, struct sk_buff *skb, int err,
@@ -419,8 +485,13 @@ int ipv6_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 	struct ipv6_pinfo *np = inet6_sk(sk);
 	struct sock_exterr_skb *serr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_buff *skb, *skb2;
 	struct sockaddr_in6 *sin;
+=======
+	struct sk_buff *skb;
+	DECLARE_SOCKADDR(struct sockaddr_in6 *, sin, msg->msg_name);
+>>>>>>> v3.18
 =======
 	struct sk_buff *skb;
 	DECLARE_SOCKADDR(struct sockaddr_in6 *, sin, msg->msg_name);
@@ -434,7 +505,11 @@ int ipv6_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 
 	err = -EAGAIN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb = skb_dequeue(&sk->sk_error_queue);
+=======
+	skb = sock_dequeue_err_skb(sk);
+>>>>>>> v3.18
 =======
 	skb = sock_dequeue_err_skb(sk);
 >>>>>>> v3.18
@@ -455,7 +530,10 @@ int ipv6_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 	serr = SKB_EXT_ERR(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sin = (struct sockaddr_in6 *)msg->msg_name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sin) {
@@ -483,6 +561,7 @@ int ipv6_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 	memcpy(&errhdr.ee, &serr->ee, sizeof(struct sock_extended_err));
 	sin = &errhdr.offender;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(sin, 0, sizeof(*sin));
 
 	if (serr->ee.ee_origin != SO_EE_ORIGIN_LOCAL) {
@@ -492,6 +571,8 @@ int ipv6_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 			if (np->rxopt.all)
 				ip6_datagram_recv_ctl(sk, msg, skb);
 =======
+=======
+>>>>>>> v3.18
 	sin->sin6_family = AF_UNSPEC;
 	if (serr->ee.ee_origin != SO_EE_ORIGIN_LOCAL) {
 		sin->sin6_family = AF_INET6;
@@ -503,22 +584,31 @@ int ipv6_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 			sin->sin6_addr = ipv6_hdr(skb)->saddr;
 			if (np->rxopt.all)
 				ip6_datagram_recv_specific_ctl(sk, msg, skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sin->sin6_scope_id =
 				ipv6_iface_scope_id(&sin->sin6_addr,
 						    IP6CB(skb)->iif);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ipv6_addr_set_v4mapped(ip_hdr(skb)->saddr,
 					       &sin->sin6_addr);
 			if (inet_sk(sk)->cmsg_flags)
 =======
+=======
+>>>>>>> v3.18
 			struct inet_sock *inet = inet_sk(sk);
 
 			ipv6_addr_set_v4mapped(ip_hdr(skb)->saddr,
 					       &sin->sin6_addr);
 			sin->sin6_scope_id = 0;
 			if (inet->cmsg_flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ip_cmsg_recv(msg, skb);
 		}
@@ -532,6 +622,7 @@ int ipv6_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 	err = copied;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Reset and regenerate socket error */
 	spin_lock_bh(&sk->sk_error_queue.lock);
 	sk->sk_err = 0;
@@ -543,6 +634,8 @@ int ipv6_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 		spin_unlock_bh(&sk->sk_error_queue.lock);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out_free_skb:
@@ -561,8 +654,13 @@ int ipv6_recv_rxpmtu(struct sock *sk, struct msghdr *msg, int len,
 	struct ipv6_pinfo *np = inet6_sk(sk);
 	struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_in6 *sin;
 	struct ip6_mtuinfo mtu_info;
+=======
+	struct ip6_mtuinfo mtu_info;
+	DECLARE_SOCKADDR(struct sockaddr_in6 *, sin, msg->msg_name);
+>>>>>>> v3.18
 =======
 	struct ip6_mtuinfo mtu_info;
 	DECLARE_SOCKADDR(struct sockaddr_in6 *, sin, msg->msg_name);
@@ -589,7 +687,10 @@ int ipv6_recv_rxpmtu(struct sock *sk, struct msghdr *msg, int len,
 	memcpy(&mtu_info, IP6CBMTU(skb), sizeof(mtu_info));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sin = (struct sockaddr_in6 *)msg->msg_name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sin) {
@@ -613,6 +714,7 @@ out:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ip6_datagram_recv_ctl(struct sock *sk, struct msghdr *msg,
 			  struct sk_buff *skb)
 {
@@ -620,22 +722,30 @@ int ip6_datagram_recv_ctl(struct sock *sk, struct msghdr *msg,
 	struct inet6_skb_parm *opt = IP6CB(skb);
 	unsigned char *nh = skb_network_header(skb);
 =======
+=======
+>>>>>>> v3.18
 void ip6_datagram_recv_common_ctl(struct sock *sk, struct msghdr *msg,
 				 struct sk_buff *skb)
 {
 	struct ipv6_pinfo *np = inet6_sk(sk);
 	bool is_ipv6 = skb->protocol == htons(ETH_P_IPV6);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (np->rxopt.bits.rxinfo) {
 		struct in6_pktinfo src_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		src_info.ipi6_ifindex = opt->iif;
 		src_info.ipi6_addr = ipv6_hdr(skb)->daddr;
 		put_cmsg(msg, SOL_IPV6, IPV6_PKTINFO, sizeof(src_info), &src_info);
 	}
 =======
+=======
+>>>>>>> v3.18
 		if (is_ipv6) {
 			src_info.ipi6_ifindex = IP6CB(skb)->iif;
 			src_info.ipi6_addr = ipv6_hdr(skb)->daddr;
@@ -655,6 +765,9 @@ void ip6_datagram_recv_specific_ctl(struct sock *sk, struct msghdr *msg,
 	struct ipv6_pinfo *np = inet6_sk(sk);
 	struct inet6_skb_parm *opt = IP6CB(skb);
 	unsigned char *nh = skb_network_header(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (np->rxopt.bits.rxhlim) {
@@ -774,8 +887,11 @@ void ip6_datagram_recv_specific_ctl(struct sock *sk, struct msghdr *msg,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 }
 
 void ip6_datagram_recv_ctl(struct sock *sk, struct msghdr *msg,
@@ -783,6 +899,9 @@ void ip6_datagram_recv_ctl(struct sock *sk, struct msghdr *msg,
 {
 	ip6_datagram_recv_common_ctl(sk, msg, skb);
 	ip6_datagram_recv_specific_ctl(sk, msg, skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(ip6_datagram_recv_ctl);
@@ -849,7 +968,13 @@ int ip6_datagram_send_ctl(struct net *net, struct sock *sk,
 				if (!(inet_sk(sk)->freebind || inet_sk(sk)->transparent) &&
 				    !ipv6_chk_addr(net, &src_info->ipi6_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						   strict ? dev : NULL, 0))
+=======
+						   strict ? dev : NULL, 0) &&
+				    !ipv6_chk_acast_addr_src(net, dev,
+							     &src_info->ipi6_addr))
+>>>>>>> v3.18
 =======
 						   strict ? dev : NULL, 0) &&
 				    !ipv6_chk_acast_addr_src(net, dev,
@@ -1068,7 +1193,10 @@ exit_f:
 }
 EXPORT_SYMBOL_GPL(ip6_datagram_send_ctl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void ip6_dgram_sock_seq_show(struct seq_file *seq, struct sock *sp,
 			     __u16 srcp, __u16 destp, int bucket)
@@ -1095,4 +1223,7 @@ void ip6_dgram_sock_seq_show(struct seq_file *seq, struct sock *sp,
 		   atomic_read(&sp->sk_refcnt), sp,
 		   atomic_read(&sp->sk_drops));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

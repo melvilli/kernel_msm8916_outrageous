@@ -28,7 +28,10 @@
 #include <linux/errno.h>
 #include <linux/firmware.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -892,7 +895,11 @@ static int speedtch_bind(struct usbatm_data *usbatm,
 				 usb_rcvintpipe(usb_dev, ENDPOINT_INT),
 				 instance->int_data, sizeof(instance->int_data),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 speedtch_handle_int, instance, 50);
+=======
+				 speedtch_handle_int, instance, 16);
+>>>>>>> v3.18
 =======
 				 speedtch_handle_int, instance, 16);
 >>>>>>> v3.18

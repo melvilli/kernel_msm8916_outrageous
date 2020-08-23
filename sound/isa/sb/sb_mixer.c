@@ -819,6 +819,7 @@ int snd_sbmixer_new(struct snd_sb *chip)
 		break;
 	case SB_HW_DT019X:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((err = snd_sbmixer_init(chip,
 					    snd_dt019x_controls,
 					    ARRAY_SIZE(snd_dt019x_controls),
@@ -826,6 +827,8 @@ int snd_sbmixer_new(struct snd_sb *chip)
 					    ARRAY_SIZE(snd_dt019x_init_values),
 					    "DT019X")) < 0)
 =======
+=======
+>>>>>>> v3.18
 		err = snd_sbmixer_init(chip,
 				       snd_dt019x_controls,
 				       ARRAY_SIZE(snd_dt019x_controls),
@@ -834,6 +837,9 @@ int snd_sbmixer_new(struct snd_sb *chip)
 				       "DT019X");
 		if (err < 0)
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:

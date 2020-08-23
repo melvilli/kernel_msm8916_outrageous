@@ -5,6 +5,10 @@ config MAC80211
 	select CRYPTO_ARC4
 	select CRYPTO_AES
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select CRYPTO_CCM
+>>>>>>> v3.18
 =======
 	select CRYPTO_CCM
 >>>>>>> v3.18
@@ -23,6 +27,7 @@ config MAC80211_HAS_RC
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MAC80211_RC_PID
 	bool "PID controller based rate control algorithm" if EXPERT
 	select MAC80211_HAS_RC
@@ -31,6 +36,8 @@ config MAC80211_RC_PID
 	  mac80211 that uses a PID controller to select the TX
 	  rate.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MAC80211_RC_MINSTREL
@@ -58,6 +65,7 @@ choice
 	  parameter if different algorithms are available.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MAC80211_RC_DEFAULT_PID
 	bool "PID controller based rate control algorithm"
 	depends on MAC80211_RC_PID
@@ -66,6 +74,8 @@ config MAC80211_RC_DEFAULT_PID
 	  default rate control algorithm. You should choose
 	  this unless you know what you are doing.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MAC80211_RC_DEFAULT_MINSTREL
@@ -82,7 +92,10 @@ config MAC80211_RC_DEFAULT
 	default "minstrel_ht" if MAC80211_RC_DEFAULT_MINSTREL && MAC80211_RC_MINSTREL_HT
 	default "minstrel" if MAC80211_RC_DEFAULT_MINSTREL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default "pid" if MAC80211_RC_DEFAULT_PID
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default ""
@@ -272,7 +285,10 @@ config MAC80211_MESH_SYNC_DEBUG
 	  Do not select this option.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MAC80211_MESH_CSA_DEBUG
 	bool "Verbose mesh channel switch debugging"
 	depends on MAC80211_DEBUG_MENU
@@ -284,6 +300,9 @@ config MAC80211_MESH_CSA_DEBUG
 
 	  Do not select this option.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MAC80211_MESH_PS_DEBUG
 	bool "Verbose mesh powersave debugging"

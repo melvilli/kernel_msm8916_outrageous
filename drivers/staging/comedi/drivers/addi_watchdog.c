@@ -17,12 +17,18 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+=======
+ */
+
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
  */
 
@@ -137,7 +143,11 @@ int addi_watchdog_init(struct comedi_subdevice *s, unsigned long iobase)
 	struct addi_watchdog_private *spriv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spriv = kzalloc(sizeof(*spriv), GFP_KERNEL);
+=======
+	spriv = comedi_alloc_spriv(s, sizeof(*spriv));
+>>>>>>> v3.18
 =======
 	spriv = comedi_alloc_spriv(s, sizeof(*spriv));
 >>>>>>> v3.18
@@ -147,8 +157,11 @@ int addi_watchdog_init(struct comedi_subdevice *s, unsigned long iobase)
 	spriv->iobase = iobase;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->private	= spriv;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s->type		= COMEDI_SUBD_TIMER;

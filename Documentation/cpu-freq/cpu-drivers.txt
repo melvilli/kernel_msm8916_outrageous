@@ -27,6 +27,10 @@ Contents:
 1.5  target/target_index
 1.6  setpolicy
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+1.7  get_intermediate and target_intermediate
+>>>>>>> v3.18
 =======
 1.7  get_intermediate and target_intermediate
 >>>>>>> v3.18
@@ -66,8 +70,11 @@ target_index		-	See below on the differences.
 And optionally
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 cpufreq_driver.exit -		A pointer to a per-CPU cleanup function.
 =======
+=======
+>>>>>>> v3.18
 cpufreq_driver.exit -		A pointer to a per-CPU cleanup
 				function called during CPU_POST_DEAD
 				phase of cpu hotplug process.
@@ -75,6 +82,9 @@ cpufreq_driver.exit -		A pointer to a per-CPU cleanup
 cpufreq_driver.stop_cpu -	A pointer to a per-CPU stop function
 				called during CPU_DOWN_PREPARE phase of
 				cpu hotplug process.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 cpufreq_driver.resume -		A pointer to a per-CPU resume function
@@ -88,11 +98,17 @@ cpufreq_driver.attr -		A pointer to a NULL-terminated list of
 				export values to sysfs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 cpufreq_driver.get_intermediate
 and target_intermediate		Used to switch to stable frequency while
 				changing CPU frequency.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 1.2 Per-CPU Initialization
@@ -167,7 +183,11 @@ limits on their own. These shall use the ->setpolicy call
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 1.4. target/target_index
+=======
+1.5. target/target_index
+>>>>>>> v3.18
 =======
 1.5. target/target_index
 >>>>>>> v3.18
@@ -180,6 +200,12 @@ The CPUfreq driver must set the new frequency when called here. The
 actual frequency must be determined by freq_table[index].frequency.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+It should always restore to earlier frequency (i.e. policy->restore_freq) in
+case of errors, even if we switched to intermediate frequency earlier.
+
+>>>>>>> v3.18
 =======
 It should always restore to earlier frequency (i.e. policy->restore_freq) in
 case of errors, even if we switched to intermediate frequency earlier.
@@ -205,7 +231,11 @@ for details.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 1.5 setpolicy
+=======
+1.6 setpolicy
+>>>>>>> v3.18
 =======
 1.6 setpolicy
 >>>>>>> v3.18
@@ -220,7 +250,10 @@ powersaving-oriented setting when CPUFREQ_POLICY_POWERSAVE. Also check
 the reference implementation in drivers/cpufreq/longrun.c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 1.7 get_intermediate and target_intermediate
 --------------------------------------------
 
@@ -238,6 +271,9 @@ directly call ->target_index().
 
 NOTE: ->target_index() should restore to policy->restore_freq in case of
 failures as core would send notifications for that.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -278,7 +314,10 @@ stage. Just pass the values to this function, and the unsigned int
 index returns the number of the frequency table entry which contains
 the frequency the CPU shall be set to.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 The following macros can be used as iterators over cpufreq_frequency_table:
 
@@ -298,4 +337,7 @@ For example:
 		/* Do something with pos */
 		pos->frequency = ...
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

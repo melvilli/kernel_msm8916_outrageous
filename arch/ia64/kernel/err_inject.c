@@ -226,7 +226,11 @@ static struct attribute_group err_inject_attr_group = {
 };
 /* Add/Remove err_inject interface for CPU device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit err_inject_add_dev(struct device * sys_dev)
+=======
+static int err_inject_add_dev(struct device *sys_dev)
+>>>>>>> v3.18
 =======
 static int err_inject_add_dev(struct device *sys_dev)
 >>>>>>> v3.18
@@ -235,7 +239,11 @@ static int err_inject_add_dev(struct device *sys_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit err_inject_remove_dev(struct device * sys_dev)
+=======
+static int err_inject_remove_dev(struct device *sys_dev)
+>>>>>>> v3.18
 =======
 static int err_inject_remove_dev(struct device *sys_dev)
 >>>>>>> v3.18
@@ -244,7 +252,11 @@ static int err_inject_remove_dev(struct device *sys_dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit err_inject_cpu_callback(struct notifier_block *nfb,
+=======
+static int err_inject_cpu_callback(struct notifier_block *nfb,
+>>>>>>> v3.18
 =======
 static int err_inject_cpu_callback(struct notifier_block *nfb,
 >>>>>>> v3.18
@@ -269,7 +281,11 @@ static int err_inject_cpu_callback(struct notifier_block *nfb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata err_inject_cpu_notifier =
+=======
+static struct notifier_block err_inject_cpu_notifier =
+>>>>>>> v3.18
 =======
 static struct notifier_block err_inject_cpu_notifier =
 >>>>>>> v3.18
@@ -286,6 +302,12 @@ err_inject_init(void)
 	printk(KERN_INFO "Enter error injection driver.\n");
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	cpu_notifier_register_begin();
+
+>>>>>>> v3.18
 =======
 
 	cpu_notifier_register_begin();
@@ -297,7 +319,13 @@ err_inject_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_hotcpu_notifier(&err_inject_cpu_notifier);
+=======
+	__register_hotcpu_notifier(&err_inject_cpu_notifier);
+
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__register_hotcpu_notifier(&err_inject_cpu_notifier);
 
@@ -317,6 +345,12 @@ err_inject_exit(void)
 	printk(KERN_INFO "Exit error injection driver.\n");
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	cpu_notifier_register_begin();
+
+>>>>>>> v3.18
 =======
 
 	cpu_notifier_register_begin();
@@ -327,12 +361,18 @@ err_inject_exit(void)
 		sysfs_remove_group(&sys_dev->kobj, &err_inject_attr_group);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_hotcpu_notifier(&err_inject_cpu_notifier);
 =======
+=======
+>>>>>>> v3.18
 
 	__unregister_hotcpu_notifier(&err_inject_cpu_notifier);
 
 	cpu_notifier_register_done();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

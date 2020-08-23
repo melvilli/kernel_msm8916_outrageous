@@ -43,7 +43,10 @@ static __init int map_switcher(void)
 {
 	int i, err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct page **pagep;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -114,11 +117,17 @@ static __init int map_switcher(void)
 	 * switcher_addr.  map_vm_area() takes the vma we allocated above, the
 	 * kind of pages we're mapping (kernel pages), and a pointer to our
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * array of struct pages.  It increments that pointer, but we don't
 	 * care.
 	 */
 	pagep = lg_switcher_pages;
 	err = map_vm_area(switcher_vma, PAGE_KERNEL_EXEC, &pagep);
+=======
+	 * array of struct pages.
+	 */
+	err = map_vm_area(switcher_vma, PAGE_KERNEL_EXEC, lg_switcher_pages);
+>>>>>>> v3.18
 =======
 	 * array of struct pages.
 	 */
@@ -186,7 +195,11 @@ bool lguest_address_ok(const struct lguest *lg,
 		       unsigned long addr, unsigned long len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return addr+len <= lg->pfn_limit * PAGE_SIZE && (addr+len >= addr);
+=======
+	return (addr+len) / PAGE_SIZE < lg->pfn_limit && (addr+len >= addr);
+>>>>>>> v3.18
 =======
 	return (addr+len) / PAGE_SIZE < lg->pfn_limit && (addr+len >= addr);
 >>>>>>> v3.18

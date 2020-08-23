@@ -24,10 +24,13 @@
 #include <linux/rtc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Format: HID-SENSOR-usage_id_in_hex */
 /* Usage ID from spec for Time: 0x2000A0 */
 #define DRIVER_NAME "HID-SENSOR-2000a0" /* must be lowercase */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum hid_time_channel {
@@ -80,7 +83,10 @@ static int hid_time_proc_event(struct hid_sensor_hub_device *hsdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 hid_time_value(size_t raw_len, char *raw_data)
 {
 	switch (raw_len) {
@@ -95,6 +101,9 @@ static u32 hid_time_value(size_t raw_len, char *raw_data)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int hid_time_capture_sample(struct hid_sensor_hub_device *hsdev,
 				unsigned usage_id, size_t raw_len,
@@ -105,6 +114,7 @@ static int hid_time_capture_sample(struct hid_sensor_hub_device *hsdev,
 
 	switch (usage_id) {
 	case HID_USAGE_SENSOR_TIME_YEAR:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		time_buf->tm_year = *(u8 *)raw_data;
 		if (time_buf->tm_year < 70)
@@ -127,6 +137,8 @@ static int hid_time_capture_sample(struct hid_sensor_hub_device *hsdev,
 	case HID_USAGE_SENSOR_TIME_SECOND:
 		time_buf->tm_sec = *(u8 *)raw_data;
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * The draft for HID-sensors (HUTRR39) currently doesn't define
 		 * the range for the year attribute. Therefor we support
@@ -156,6 +168,9 @@ static int hid_time_capture_sample(struct hid_sensor_hub_device *hsdev,
 		break;
 	case HID_USAGE_SENSOR_TIME_SECOND:
 		time_buf->tm_sec = (int)hid_time_value(raw_len, raw_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -203,14 +218,20 @@ static int hid_time_parse_report(struct platform_device *pdev,
 			return -EINVAL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (time_state->info[i].size != 1) {
 			dev_err(&pdev->dev,
 				"attribute '%s' not 8 bits wide!\n",
 =======
+=======
+>>>>>>> v3.18
 		if (time_state->info[i].size == 3 ||
 				time_state->info[i].size > 4) {
 			dev_err(&pdev->dev,
 				"attribute '%s' not 8, 16 or 32 bits wide!\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				hid_time_attrib_name(
 					time_state->info[i].attrib_id));
@@ -249,7 +270,11 @@ static int hid_rtc_read_time(struct device *dev, struct rtc_time *tm)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(time_state->comp_last_time);
+=======
+	reinit_completion(&time_state->comp_last_time);
+>>>>>>> v3.18
 =======
 	reinit_completion(&time_state->comp_last_time);
 >>>>>>> v3.18
@@ -280,7 +305,11 @@ static int hid_time_probe(struct platform_device *pdev)
 {
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hid_sensor_hub_device *hsdev = pdev->dev.platform_data;
+=======
+	struct hid_sensor_hub_device *hsdev = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct hid_sensor_hub_device *hsdev = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -323,7 +352,10 @@ static int hid_time_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = sensor_hub_device_open(hsdev);
 	if (ret) {
 		dev_err(&pdev->dev, "failed to open sensor hub device!\n");
@@ -336,11 +368,15 @@ static int hid_time_probe(struct platform_device *pdev)
 	 */
 	hid_device_io_start(hsdev->hdev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	time_state->rtc = devm_rtc_device_register(&pdev->dev,
 					"hid-sensor-time", &hid_time_rtc_ops,
 					THIS_MODULE);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (IS_ERR(time_state->rtc)) {
 		dev_err(&pdev->dev, "rtc device register failed!\n");
@@ -349,6 +385,8 @@ static int hid_time_probe(struct platform_device *pdev)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ERR_OR_NULL(time_state->rtc)) {
 		hid_device_io_stop(hsdev->hdev);
 		ret = time_state->rtc ? PTR_ERR(time_state->rtc) : -ENODEV;
@@ -364,14 +402,23 @@ err_rtc:
 err_open:
 	sensor_hub_remove_callback(hsdev, HID_USAGE_SENSOR_TIME);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int hid_time_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hid_sensor_hub_device *hsdev = pdev->dev.platform_data;
 
+=======
+	struct hid_sensor_hub_device *hsdev = dev_get_platdata(&pdev->dev);
+
+	sensor_hub_device_close(hsdev);
+>>>>>>> v3.18
 =======
 	struct hid_sensor_hub_device *hsdev = dev_get_platdata(&pdev->dev);
 
@@ -383,10 +430,13 @@ static int hid_time_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct platform_driver hid_time_platform_driver = {
 	.driver = {
 		.name	= DRIVER_NAME,
 =======
+=======
+>>>>>>> v3.18
 static struct platform_device_id hid_time_ids[] = {
 	{
 		/* Format: HID-SENSOR-usage_id_in_hex_lowercase */
@@ -400,6 +450,9 @@ static struct platform_driver hid_time_platform_driver = {
 	.id_table = hid_time_ids,
 	.driver = {
 		.name	= KBUILD_MODNAME,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.owner	= THIS_MODULE,
 	},

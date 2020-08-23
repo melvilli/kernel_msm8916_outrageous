@@ -301,7 +301,11 @@ static ssize_t store_ctlr_mode(struct device *dev,
 	switch (ctlr->enabled) {
 	case FCOE_CTLR_ENABLED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		LIBFCOE_SYSFS_DBG(ctlr, "Cannot change mode when enabled.");
+=======
+		LIBFCOE_SYSFS_DBG(ctlr, "Cannot change mode when enabled.\n");
+>>>>>>> v3.18
 =======
 		LIBFCOE_SYSFS_DBG(ctlr, "Cannot change mode when enabled.\n");
 >>>>>>> v3.18
@@ -310,7 +314,11 @@ static ssize_t store_ctlr_mode(struct device *dev,
 		if (!ctlr->f->set_fcoe_ctlr_mode) {
 			LIBFCOE_SYSFS_DBG(ctlr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  "Mode change not supported by LLD.");
+=======
+					  "Mode change not supported by LLD.\n");
+>>>>>>> v3.18
 =======
 					  "Mode change not supported by LLD.\n");
 >>>>>>> v3.18
@@ -320,8 +328,13 @@ static ssize_t store_ctlr_mode(struct device *dev,
 		ctlr->mode = fcoe_parse_mode(mode);
 		if (ctlr->mode == FIP_CONN_TYPE_UNKNOWN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			LIBFCOE_SYSFS_DBG(ctlr,
 					  "Unknown mode %s provided.", buf);
+=======
+			LIBFCOE_SYSFS_DBG(ctlr, "Unknown mode %s provided.\n",
+					  buf);
+>>>>>>> v3.18
 =======
 			LIBFCOE_SYSFS_DBG(ctlr, "Unknown mode %s provided.\n",
 					  buf);
@@ -331,7 +344,11 @@ static ssize_t store_ctlr_mode(struct device *dev,
 
 		ctlr->f->set_fcoe_ctlr_mode(ctlr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		LIBFCOE_SYSFS_DBG(ctlr, "Mode changed to %s.", buf);
+=======
+		LIBFCOE_SYSFS_DBG(ctlr, "Mode changed to %s.\n", buf);
+>>>>>>> v3.18
 =======
 		LIBFCOE_SYSFS_DBG(ctlr, "Mode changed to %s.\n", buf);
 >>>>>>> v3.18
@@ -340,7 +357,11 @@ static ssize_t store_ctlr_mode(struct device *dev,
 	case FCOE_CTLR_UNUSED:
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		LIBFCOE_SYSFS_DBG(ctlr, "Mode change not supported.");
+=======
+		LIBFCOE_SYSFS_DBG(ctlr, "Mode change not supported.\n");
+>>>>>>> v3.18
 =======
 		LIBFCOE_SYSFS_DBG(ctlr, "Mode change not supported.\n");
 >>>>>>> v3.18
@@ -529,7 +550,11 @@ static const struct attribute_group *fcoe_fcf_attr_groups[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct bus_type fcoe_bus_type;
+=======
+static struct bus_type fcoe_bus_type;
+>>>>>>> v3.18
 =======
 static struct bus_type fcoe_bus_type;
 >>>>>>> v3.18
@@ -567,7 +592,11 @@ static void fcoe_fcf_device_release(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct device_type fcoe_ctlr_device_type = {
+=======
+static struct device_type fcoe_ctlr_device_type = {
+>>>>>>> v3.18
 =======
 static struct device_type fcoe_ctlr_device_type = {
 >>>>>>> v3.18
@@ -577,7 +606,11 @@ static struct device_type fcoe_ctlr_device_type = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct device_type fcoe_fcf_device_type = {
+=======
+static struct device_type fcoe_fcf_device_type = {
+>>>>>>> v3.18
 =======
 static struct device_type fcoe_fcf_device_type = {
 >>>>>>> v3.18
@@ -586,6 +619,7 @@ static struct device_type fcoe_fcf_device_type = {
 	.release = fcoe_fcf_device_release,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct bus_attribute fcoe_bus_attr_group[] = {
 	__ATTR(ctlr_create, S_IWUSR, NULL, fcoe_ctlr_create_store),
@@ -598,6 +632,8 @@ struct bus_type fcoe_bus_type = {
 	.match = &fcoe_bus_match,
 	.bus_attrs = fcoe_bus_attr_group,
 =======
+=======
+>>>>>>> v3.18
 static BUS_ATTR(ctlr_create, S_IWUSR, NULL, fcoe_ctlr_create_store);
 static BUS_ATTR(ctlr_destroy, S_IWUSR, NULL, fcoe_ctlr_destroy_store);
 
@@ -612,6 +648,9 @@ static struct bus_type fcoe_bus_type = {
 	.name = "fcoe",
 	.match = &fcoe_bus_match,
 	.bus_groups = fcoe_bus_groups,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -620,7 +659,11 @@ static struct bus_type fcoe_bus_type = {
  * @ctlr: Pointer to the FIP ctlr whose workqueue is to be flushed
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fcoe_ctlr_device_flush_work(struct fcoe_ctlr_device *ctlr)
+=======
+static void fcoe_ctlr_device_flush_work(struct fcoe_ctlr_device *ctlr)
+>>>>>>> v3.18
 =======
 static void fcoe_ctlr_device_flush_work(struct fcoe_ctlr_device *ctlr)
 >>>>>>> v3.18
@@ -645,8 +688,13 @@ static void fcoe_ctlr_device_flush_work(struct fcoe_ctlr_device *ctlr)
  *	1 on success / 0 already queued / < 0 for error
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fcoe_ctlr_device_queue_work(struct fcoe_ctlr_device *ctlr,
 			       struct work_struct *work)
+=======
+static int fcoe_ctlr_device_queue_work(struct fcoe_ctlr_device *ctlr,
+				       struct work_struct *work)
+>>>>>>> v3.18
 =======
 static int fcoe_ctlr_device_queue_work(struct fcoe_ctlr_device *ctlr,
 				       struct work_struct *work)
@@ -669,7 +717,11 @@ static int fcoe_ctlr_device_queue_work(struct fcoe_ctlr_device *ctlr,
  * @ctlr: Pointer to FIP ctlr whose workqueue is to be flushed
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fcoe_ctlr_device_flush_devloss(struct fcoe_ctlr_device *ctlr)
+=======
+static void fcoe_ctlr_device_flush_devloss(struct fcoe_ctlr_device *ctlr)
+>>>>>>> v3.18
 =======
 static void fcoe_ctlr_device_flush_devloss(struct fcoe_ctlr_device *ctlr)
 >>>>>>> v3.18
@@ -695,9 +747,15 @@ static void fcoe_ctlr_device_flush_devloss(struct fcoe_ctlr_device *ctlr)
  *	1 on success / 0 already queued / < 0 for error
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fcoe_ctlr_device_queue_devloss_work(struct fcoe_ctlr_device *ctlr,
 				       struct delayed_work *work,
 				       unsigned long delay)
+=======
+static int fcoe_ctlr_device_queue_devloss_work(struct fcoe_ctlr_device *ctlr,
+					       struct delayed_work *work,
+					       unsigned long delay)
+>>>>>>> v3.18
 =======
 static int fcoe_ctlr_device_queue_devloss_work(struct fcoe_ctlr_device *ctlr,
 					       struct delayed_work *work,
@@ -723,7 +781,11 @@ static int fcoe_fcf_device_match(struct fcoe_fcf_device *new,
 	    new->fabric_name == old->fabric_name &&
 	    new->fc_map == old->fc_map &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    compare_ether_addr(new->mac, old->mac) == 0)
+=======
+	    ether_addr_equal(new->mac, old->mac))
+>>>>>>> v3.18
 =======
 	    ether_addr_equal(new->mac, old->mac))
 >>>>>>> v3.18

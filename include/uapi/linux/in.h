@@ -25,6 +25,7 @@
 enum {
   IPPROTO_IP = 0,		/* Dummy protocol for TCP		*/
 <<<<<<< HEAD
+<<<<<<< HEAD
   IPPROTO_ICMP = 1,		/* Internet Control Message Protocol	*/
   IPPROTO_IGMP = 2,		/* Internet Group Management Protocol	*/
   IPPROTO_IPIP = 4,		/* IPIP tunnels (older KA9Q tunnels use 94) */
@@ -50,6 +51,8 @@ enum {
 
   IPPROTO_RAW	 = 255,		/* Raw IP packets			*/
 =======
+=======
+>>>>>>> v3.18
 #define IPPROTO_IP		IPPROTO_IP
   IPPROTO_ICMP = 1,		/* Internet Control Message Protocol	*/
 #define IPPROTO_ICMP		IPPROTO_ICMP
@@ -97,6 +100,9 @@ enum {
 #define IPPROTO_UDPLITE		IPPROTO_UDPLITE
   IPPROTO_RAW = 255,		/* Raw IP packets			*/
 #define IPPROTO_RAW		IPPROTO_RAW
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   IPPROTO_MAX
 };
@@ -143,7 +149,10 @@ struct in_addr {
 #define IP_PMTUDISC_DO			2	/* Always DF		*/
 #define IP_PMTUDISC_PROBE		3       /* Ignore dst pmtu      */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Always use interface mtu (ignores dst pmtu) but don't set DF flag.
  * Also incoming ICMP frag_needed notifications will be ignored on
  * this socket to prevent accepting spoofed ones.
@@ -153,6 +162,9 @@ struct in_addr {
  * fragmented if they exeed the interface mtu
  */
 #define IP_PMTUDISC_OMIT		5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define IP_MULTICAST_IF			32

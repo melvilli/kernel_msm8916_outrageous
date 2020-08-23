@@ -892,7 +892,11 @@ static int inia100_build_scb(struct orc_host * host, struct orc_scb * scb, struc
 		scb->cdb_len = IMAX_CDB;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scb->ident = cmd->device->lun | DISC_ALLOW;
+=======
+	scb->ident = (u8)(cmd->device->lun & 0xff) | DISC_ALLOW;
+>>>>>>> v3.18
 =======
 	scb->ident = (u8)(cmd->device->lun & 0xff) | DISC_ALLOW;
 >>>>>>> v3.18
@@ -1130,8 +1134,12 @@ static int inia100_probe_one(struct pci_dev *pdev,
 	/* Get total memory needed for SCB */
 	sz = ORC_MAXQUEUE * sizeof(struct orc_scb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->scb_virt = pci_alloc_consistent(pdev, sz,
 			&host->scb_phys);
+=======
+	host->scb_virt = pci_zalloc_consistent(pdev, sz, &host->scb_phys);
+>>>>>>> v3.18
 =======
 	host->scb_virt = pci_zalloc_consistent(pdev, sz, &host->scb_phys);
 >>>>>>> v3.18
@@ -1140,6 +1148,7 @@ static int inia100_probe_one(struct pci_dev *pdev,
 		goto out_host_put;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(host->scb_virt, 0, sz);
 
 	/* Get total memory needed for ESCB */
@@ -1147,17 +1156,25 @@ static int inia100_probe_one(struct pci_dev *pdev,
 	host->escb_virt = pci_alloc_consistent(pdev, sz,
 			&host->escb_phys);
 =======
+=======
+>>>>>>> v3.18
 
 	/* Get total memory needed for ESCB */
 	sz = ORC_MAXQUEUE * sizeof(struct orc_extended_scb);
 	host->escb_virt = pci_zalloc_consistent(pdev, sz, &host->escb_phys);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!host->escb_virt) {
 		printk("inia100: ESCB memory allocation error\n");
 		goto out_free_scb_array;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(host->escb_virt, 0, sz);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2007-2012 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2007-2014 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2007-2014 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -274,7 +278,11 @@ lpfc_debugfs_hbqinfo_data(struct lpfc_hba *phba, char *buf, int size)
 {
 	int len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cnt, i, j, found, posted, low;
+=======
+	int i, j, found, posted, low;
+>>>>>>> v3.18
 =======
 	int i, j, found, posted, low;
 >>>>>>> v3.18
@@ -288,7 +296,11 @@ lpfc_debugfs_hbqinfo_data(struct lpfc_hba *phba, char *buf, int size)
 	if (phba->sli_rev != 3)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cnt = LPFC_HBQINFO_SIZE;
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1178,6 +1190,7 @@ static loff_t
 lpfc_debugfs_lseek(struct file *file, loff_t off, int whence)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lpfc_debug *debug;
 	loff_t pos = -1;
 
@@ -1194,6 +1207,10 @@ lpfc_debugfs_lseek(struct file *file, loff_t off, int whence)
 		pos = debug->len + off;
 	}
 	return (pos < 0 || pos > debug->len) ? -EINVAL : (file->f_pos = pos);
+=======
+	struct lpfc_debug *debug = file->private_data;
+	return fixed_size_llseek(file, off, whence, debug->len);
+>>>>>>> v3.18
 =======
 	struct lpfc_debug *debug = file->private_data;
 	return fixed_size_llseek(file, off, whence, debug->len);
@@ -2312,7 +2329,10 @@ proc_cq:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (phba->cfg_fof) {
 		/* FOF EQ */
 		qp = phba->sli4_hba.fof_eq;
@@ -2411,6 +2431,9 @@ proc_cq:
 		}
 	}
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irq(&phba->hbalock);
 	return simple_read_from_buffer(buf, nbytes, ppos, pbuffer, len);
@@ -4060,6 +4083,10 @@ lpfc_debugfs_initialize(struct lpfc_vport *vport)
 	char name[64];
 	uint32_t num, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool pport_setup = false;
+>>>>>>> v3.18
 =======
 	bool pport_setup = false;
 >>>>>>> v3.18
@@ -4084,6 +4111,10 @@ lpfc_debugfs_initialize(struct lpfc_vport *vport)
 	snprintf(name, sizeof(name), "fn%d", phba->brd_no);
 	if (!phba->hba_debugfs_root) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pport_setup = true;
+>>>>>>> v3.18
 =======
 		pport_setup = true;
 >>>>>>> v3.18
@@ -4142,7 +4173,11 @@ lpfc_debugfs_initialize(struct lpfc_vport *vport)
 			}
 		} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			phba->debug_dumpHBASlim = NULL;
+=======
+			phba->debug_dumpHostSlim = NULL;
+>>>>>>> v3.18
 =======
 			phba->debug_dumpHostSlim = NULL;
 >>>>>>> v3.18
@@ -4384,7 +4419,10 @@ lpfc_debugfs_initialize(struct lpfc_vport *vport)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * The following section is for additional directories/files for the
 	 * physical port.
 	 */
@@ -4393,6 +4431,9 @@ lpfc_debugfs_initialize(struct lpfc_vport *vport)
 		goto debug_failed;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * iDiag debugfs root entry points for SLI4 device only
 	 */

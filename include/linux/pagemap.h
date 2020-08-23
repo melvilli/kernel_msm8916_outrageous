@@ -25,7 +25,11 @@ enum mapping_flags {
 	AS_MM_ALL_LOCKS	= __GFP_BITS_SHIFT + 2,	/* under mm_take_all_locks() */
 	AS_UNEVICTABLE	= __GFP_BITS_SHIFT + 3,	/* e.g., ramdisk, SHM_LOCK */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	AS_BALLOON_MAP  = __GFP_BITS_SHIFT + 4, /* balloon page special map */
+=======
+	AS_EXITING	= __GFP_BITS_SHIFT + 4, /* final truncate in progress */
+>>>>>>> v3.18
 =======
 	AS_EXITING	= __GFP_BITS_SHIFT + 4, /* final truncate in progress */
 >>>>>>> v3.18
@@ -59,6 +63,7 @@ static inline int mapping_unevictable(struct address_space *mapping)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void mapping_set_balloon(struct address_space *mapping)
 {
 	set_bit(AS_BALLOON_MAP, &mapping->flags);
@@ -73,6 +78,8 @@ static inline int mapping_balloon(struct address_space *mapping)
 {
 	return mapping && test_bit(AS_BALLOON_MAP, &mapping->flags);
 =======
+=======
+>>>>>>> v3.18
 static inline void mapping_set_exiting(struct address_space *mapping)
 {
 	set_bit(AS_EXITING, &mapping->flags);
@@ -81,6 +88,9 @@ static inline void mapping_set_exiting(struct address_space *mapping)
 static inline int mapping_exiting(struct address_space *mapping)
 {
 	return test_bit(AS_EXITING, &mapping->flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -101,7 +111,11 @@ static inline void mapping_set_gfp_mask(struct address_space *m, gfp_t mask)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The page cache can done in larger chunks than
+=======
+ * The page cache can be done in larger chunks than
+>>>>>>> v3.18
 =======
  * The page cache can be done in larger chunks than
 >>>>>>> v3.18
@@ -119,7 +133,11 @@ static inline void mapping_set_gfp_mask(struct address_space *m, gfp_t mask)
 #define page_cache_get(page)		get_page(page)
 #define page_cache_release(page)	put_page(page)
 <<<<<<< HEAD
+<<<<<<< HEAD
 void release_pages(struct page **pages, int nr, int cold);
+=======
+void release_pages(struct page **pages, int nr, bool cold);
+>>>>>>> v3.18
 =======
 void release_pages(struct page **pages, int nr, bool cold);
 >>>>>>> v3.18
@@ -186,7 +204,11 @@ static inline int page_cache_get_speculative(struct page *page)
 	 * SMP requires.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(page_count(page) == 0);
+=======
+	VM_BUG_ON_PAGE(page_count(page) == 0, page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(page_count(page) == 0, page);
 >>>>>>> v3.18
@@ -203,7 +225,11 @@ static inline int page_cache_get_speculative(struct page *page)
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(PageTail(page));
+=======
+	VM_BUG_ON_PAGE(PageTail(page), page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(PageTail(page), page);
 >>>>>>> v3.18
@@ -223,7 +249,11 @@ static inline int page_cache_add_speculative(struct page *page, int count)
 	VM_BUG_ON(!in_atomic());
 # endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(page_count(page) == 0);
+=======
+	VM_BUG_ON_PAGE(page_count(page) == 0, page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(page_count(page) == 0, page);
 >>>>>>> v3.18
@@ -234,7 +264,11 @@ static inline int page_cache_add_speculative(struct page *page, int count)
 		return 0;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(PageCompound(page) && page != compound_head(page));
+=======
+	VM_BUG_ON_PAGE(PageCompound(page) && page != compound_head(page), page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(PageCompound(page) && page != compound_head(page), page);
 >>>>>>> v3.18
@@ -250,7 +284,11 @@ static inline int page_freeze_refs(struct page *page, int count)
 static inline void page_unfreeze_refs(struct page *page, int count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(page_count(page) != 0);
+=======
+	VM_BUG_ON_PAGE(page_count(page) != 0, page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(page_count(page) != 0, page);
 >>>>>>> v3.18
@@ -265,6 +303,7 @@ extern struct page *__page_cache_alloc(gfp_t gfp);
 static inline struct page *__page_cache_alloc(gfp_t gfp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct page *page;
 
 	page = alloc_pages(gfp, 0);
@@ -275,6 +314,9 @@ static inline struct page *__page_cache_alloc(gfp_t gfp)
 	}
 
 	return page;
+=======
+	return alloc_pages(gfp, 0);
+>>>>>>> v3.18
 =======
 	return alloc_pages(gfp, 0);
 >>>>>>> v3.18
@@ -300,6 +342,7 @@ static inline struct page *page_cache_alloc_readahead(struct address_space *x)
 typedef int filler_t(void *, struct page *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct page * find_get_page(struct address_space *mapping,
 				pgoff_t index);
 extern struct page * find_lock_page(struct address_space *mapping,
@@ -307,6 +350,8 @@ extern struct page * find_lock_page(struct address_space *mapping,
 extern struct page * find_or_create_page(struct address_space *mapping,
 				pgoff_t index, gfp_t gfp_mask);
 =======
+=======
+>>>>>>> v3.18
 pgoff_t page_cache_next_hole(struct address_space *mapping,
 			     pgoff_t index, unsigned long max_scan);
 pgoff_t page_cache_prev_hole(struct address_space *mapping,
@@ -418,6 +463,9 @@ struct page *find_lock_entry(struct address_space *mapping, pgoff_t offset);
 unsigned find_get_entries(struct address_space *mapping, pgoff_t start,
 			  unsigned int nr_entries, struct page **entries,
 			  pgoff_t *indices);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned find_get_pages(struct address_space *mapping, pgoff_t start,
 			unsigned int nr_pages, struct page **pages);
@@ -439,10 +487,13 @@ static inline struct page *grab_cache_page(struct address_space *mapping,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct page * grab_cache_page_nowait(struct address_space *mapping,
 				pgoff_t index);
 extern struct page * read_cache_page_async(struct address_space *mapping,
 				pgoff_t index, filler_t *filler, void *data);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct page * read_cache_page(struct address_space *mapping,
@@ -452,6 +503,7 @@ extern struct page * read_cache_page_gfp(struct address_space *mapping,
 extern int read_cache_pages(struct address_space *mapping,
 		struct list_head *pages, filler_t *filler, void *data);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline struct page *read_mapping_page_async(
 				struct address_space *mapping,
@@ -467,6 +519,8 @@ static inline struct page *read_mapping_page(struct address_space *mapping,
 	filler_t *filler = (filler_t *)mapping->a_ops->readpage;
 	return read_cache_page(mapping, index, filler, data);
 =======
+=======
+>>>>>>> v3.18
 static inline struct page *read_mapping_page(struct address_space *mapping,
 				pgoff_t index, void *data)
 {
@@ -484,6 +538,9 @@ static inline pgoff_t page_to_pgoff(struct page *page)
 		return page->index << compound_order(page);
 	else
 		return page->index << (PAGE_CACHE_SHIFT - PAGE_SHIFT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -562,6 +619,12 @@ static inline int lock_page_killable(struct page *page)
  * lock_page_or_retry - Lock the page, unless this would block and the
  * caller indicated that it can handle a retry.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return value and mmap_sem implications depend on flags; see
+ * __lock_page_or_retry().
+>>>>>>> v3.18
 =======
  *
  * Return value and mmap_sem implications depend on flags; see
@@ -577,8 +640,13 @@ static inline int lock_page_or_retry(struct page *page, struct mm_struct *mm,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This is exported only for wait_on_page_locked/wait_on_page_writeback.
  * Never use this directly!
+=======
+ * This is exported only for wait_on_page_locked/wait_on_page_writeback,
+ * and for filesystems which need to wait on PG_private.
+>>>>>>> v3.18
 =======
  * This is exported only for wait_on_page_locked/wait_on_page_writeback,
  * and for filesystems which need to wait on PG_private.
@@ -588,6 +656,11 @@ extern void wait_on_page_bit(struct page *page, int bit_nr);
 
 extern int wait_on_page_bit_killable(struct page *page, int bit_nr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int wait_on_page_bit_killable_timeout(struct page *page,
+					     int bit_nr, unsigned long timeout);
+>>>>>>> v3.18
 =======
 extern int wait_on_page_bit_killable_timeout(struct page *page,
 					     int bit_nr, unsigned long timeout);
@@ -601,13 +674,19 @@ static inline int wait_on_page_locked_killable(struct page *page)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern wait_queue_head_t *page_waitqueue(struct page *page);
 static inline void wake_up_page(struct page *page, int bit)
 {
 	__wake_up_bit(page_waitqueue(page), &page->flags, bit);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* 
  * Wait for a page to be unlocked.
@@ -635,6 +714,11 @@ extern void end_page_writeback(struct page *page);
 void wait_for_stable_page(struct page *page);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void page_endio(struct page *page, int rw, int err);
+
+>>>>>>> v3.18
 =======
 void page_endio(struct page *page, int rw, int err);
 
@@ -706,6 +790,7 @@ static inline int fault_in_pages_readable(const char __user *uaddr, int size)
 static inline int fault_in_multipages_writeable(char __user *uaddr, int size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char __user *end = uaddr + size - 1;
 
 	if (unlikely(size == 0))
@@ -714,17 +799,23 @@ static inline int fault_in_multipages_writeable(char __user *uaddr, int size)
 	if (unlikely(uaddr > end))
 		return -EFAULT;
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 	char __user *end = uaddr + size - 1;
 
 	if (unlikely(size == 0))
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Writing zeroes into userspace here is OK, because we know that if
 	 * the zero gets there, we'll be overwriting it.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	do {
 		if (unlikely(__put_user(0, uaddr) != 0))
@@ -732,21 +823,32 @@ static inline int fault_in_multipages_writeable(char __user *uaddr, int size)
 		uaddr += PAGE_SIZE;
 	} while (uaddr <= end);
 =======
+=======
+>>>>>>> v3.18
 	while (uaddr <= end) {
 		ret = __put_user(0, uaddr);
 		if (ret != 0)
 			return ret;
 		uaddr += PAGE_SIZE;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Check whether the range spilled into the next page. */
 	if (((unsigned long)uaddr & PAGE_MASK) ==
 			((unsigned long)end & PAGE_MASK))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return __put_user(0, end);
 
 	return 0;
+=======
+		ret = __put_user(0, end);
+
+	return ret;
+>>>>>>> v3.18
 =======
 		ret = __put_user(0, end);
 
@@ -758,6 +860,7 @@ static inline int fault_in_multipages_readable(const char __user *uaddr,
 					       int size)
 {
 	volatile char c;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const char __user *end = uaddr + size - 1;
 
@@ -773,6 +876,8 @@ static inline int fault_in_multipages_readable(const char __user *uaddr,
 		uaddr += PAGE_SIZE;
 	} while (uaddr <= end);
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 	const char __user *end = uaddr + size - 1;
 
@@ -785,22 +890,31 @@ static inline int fault_in_multipages_readable(const char __user *uaddr,
 			return ret;
 		uaddr += PAGE_SIZE;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Check whether the range spilled into the next page. */
 	if (((unsigned long)uaddr & PAGE_MASK) ==
 			((unsigned long)end & PAGE_MASK)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return __get_user(c, end);
 	}
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		ret = __get_user(c, end);
 		(void)c;
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -810,7 +924,11 @@ int add_to_page_cache_lru(struct page *page, struct address_space *mapping,
 				pgoff_t index, gfp_t gfp_mask);
 extern void delete_from_page_cache(struct page *page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __delete_from_page_cache(struct page *page);
+=======
+extern void __delete_from_page_cache(struct page *page, void *shadow);
+>>>>>>> v3.18
 =======
 extern void __delete_from_page_cache(struct page *page, void *shadow);
 >>>>>>> v3.18

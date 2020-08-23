@@ -245,6 +245,10 @@ static struct ptp_clock_info ptp_ixp_caps = {
 	.max_adj	= 66666655,
 	.n_ext_ts	= N_EXT_TS,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.n_pins		= 0,
+>>>>>>> v3.18
 =======
 	.n_pins		= 0,
 >>>>>>> v3.18
@@ -264,9 +268,12 @@ static int setup_interrupt(int gpio)
 {
 	int irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	gpio_line_config(gpio, IXP4XX_GPIO_IN);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	err = gpio_request(gpio, "ixp4-ptp");
@@ -276,6 +283,9 @@ static int setup_interrupt(int gpio)
 	err = gpio_direction_input(gpio);
 	if (err)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	irq = gpio_to_irq(gpio);

@@ -23,7 +23,10 @@ struct mcp23s08_platform_data {
 	 */
 	unsigned	base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Marks the device as a interrupt controller.
 	 * NOTE: The interrupt functionality is only supported for i2c
 	 * versions of the chips. The spi chips can also do the interrupts,
@@ -42,5 +45,8 @@ struct mcp23s08_platform_data {
 	 * On devices with only one interrupt output this property is useless.
 	 */
 	bool		mirror;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

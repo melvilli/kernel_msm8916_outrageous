@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* linux/arch/arm/mach-exynos4/platsmp.c
  *
+=======
+ /*
+>>>>>>> v3.18
 =======
  /*
 >>>>>>> v3.18
@@ -25,6 +29,10 @@
 #include <linux/smp.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -34,6 +42,7 @@
 #include <asm/smp_scu.h>
 #include <asm/firmware.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <mach/hardware.h>
 #include <mach/regs-clock.h>
@@ -51,6 +60,8 @@ static inline void __iomem *cpu_boot_reg_base(void)
 		return S5P_INFORM5;
 	return S5P_VA_SYSRAM;
 =======
+=======
+>>>>>>> v3.18
 #include <mach/map.h>
 
 #include "common.h"
@@ -129,6 +140,9 @@ static inline void __iomem *cpu_boot_reg_base(void)
 	if (soc_is_exynos4210() && samsung_rev() == EXYNOS4210_REV_1_1)
 		return pmu_base_addr + S5P_INFORM5;
 	return sysram_base_addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -138,15 +152,21 @@ static inline void __iomem *cpu_boot_reg(int cpu)
 
 	boot_reg = cpu_boot_reg_base();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (soc_is_exynos4412())
 		boot_reg += 4*cpu;
 =======
+=======
+>>>>>>> v3.18
 	if (!boot_reg)
 		return ERR_PTR(-ENODEV);
 	if (soc_is_exynos4412())
 		boot_reg += 4*cpu;
 	else if (soc_is_exynos5420() || soc_is_exynos5800())
 		boot_reg += 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return boot_reg;
 }
@@ -161,8 +181,12 @@ static void write_pen_release(int val)
 	pen_release = val;
 	smp_wmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__cpuc_flush_dcache_area((void *)&pen_release, sizeof(pen_release));
 	outer_clean_range(__pa(&pen_release), __pa(&pen_release + 1));
+=======
+	sync_cache_w(&pen_release);
+>>>>>>> v3.18
 =======
 	sync_cache_w(&pen_release);
 >>>>>>> v3.18
@@ -176,7 +200,11 @@ static void __iomem *scu_base_addr(void)
 static DEFINE_SPINLOCK(boot_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit exynos_secondary_init(unsigned int cpu)
+=======
+static void exynos_secondary_init(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void exynos_secondary_init(unsigned int cpu)
 >>>>>>> v3.18
@@ -195,17 +223,23 @@ static void exynos_secondary_init(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit exynos_boot_secondary(unsigned int cpu, struct task_struct *idle)
 {
 	unsigned long timeout;
 	unsigned long phys_cpu = cpu_logical_map(cpu);
 =======
+=======
+>>>>>>> v3.18
 static int exynos_boot_secondary(unsigned int cpu, struct task_struct *idle)
 {
 	unsigned long timeout;
 	u32 mpidr = cpu_logical_map(cpu);
 	u32 core_id = MPIDR_AFFINITY_LEVEL(mpidr, 0);
 	int ret = -ENOSYS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -219,6 +253,7 @@ static int exynos_boot_secondary(unsigned int cpu, struct task_struct *idle)
 	 * the holding pen - release it, then wait for it to flag
 	 * that it has been released by resetting pen_release.
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Note that "pen_release" is the hardware CPU ID, whereas
 	 * "cpu" is Linux's internal ID.
@@ -235,6 +270,8 @@ static int exynos_boot_secondary(unsigned int cpu, struct task_struct *idle)
 		while ((__raw_readl(S5P_ARM_CORE1_STATUS)
 			& S5P_CORE_LOCAL_PWR_EN) != S5P_CORE_LOCAL_PWR_EN) {
 =======
+=======
+>>>>>>> v3.18
 	 * Note that "pen_release" is the hardware CPU core ID, whereas
 	 * "cpu" is Linux's internal ID.
 	 */
@@ -247,6 +284,9 @@ static int exynos_boot_secondary(unsigned int cpu, struct task_struct *idle)
 		/* wait max 10 ms until cpu1 is on */
 		while (exynos_cpu_power_state(core_id)
 		       != S5P_CORE_LOCAL_PWR_EN) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (timeout-- == 0)
 				break;
@@ -279,11 +319,14 @@ static int exynos_boot_secondary(unsigned int cpu, struct task_struct *idle)
 		 * and fall back to boot register if it fails.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (call_firmware_op(set_cpu_boot_addr, phys_cpu, boot_addr))
 			__raw_writel(boot_addr, cpu_boot_reg(phys_cpu));
 
 		call_firmware_op(cpu_boot, phys_cpu);
 =======
+=======
+>>>>>>> v3.18
 		ret = call_firmware_op(set_cpu_boot_addr, core_id, boot_addr);
 		if (ret && ret != -ENOSYS)
 			goto fail;
@@ -298,6 +341,9 @@ static int exynos_boot_secondary(unsigned int cpu, struct task_struct *idle)
 		}
 
 		call_firmware_op(cpu_boot, core_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		arch_send_wakeup_ipi_mask(cpumask_of(cpu));
@@ -313,14 +359,20 @@ static int exynos_boot_secondary(unsigned int cpu, struct task_struct *idle)
 	 * calibrations, then wait for it to finish
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock(&boot_lock);
 
 	return pen_release != -1 ? -ENOSYS : 0;
 =======
+=======
+>>>>>>> v3.18
 fail:
 	spin_unlock(&boot_lock);
 
 	return pen_release != -1 ? ret : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -335,11 +387,14 @@ static void __init exynos_smp_init_cpus(void)
 	unsigned int i, ncores;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (soc_is_exynos5250())
 		ncores = 2;
 	else
 		ncores = scu_base ? scu_get_core_count(scu_base) : 1;
 =======
+=======
+>>>>>>> v3.18
 	if (read_cpuid_part() == ARM_CPU_PART_CORTEX_A9)
 		ncores = scu_base ? scu_get_core_count(scu_base) : 1;
 	else
@@ -348,6 +403,9 @@ static void __init exynos_smp_init_cpus(void)
 		 * is set by "arm_dt_init_cpu_maps".
 		 */
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* sanity check */
@@ -366,7 +424,13 @@ static void __init exynos_smp_prepare_cpus(unsigned int max_cpus)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(soc_is_exynos5250() || soc_is_exynos5440()))
+=======
+	exynos_sysram_init();
+
+	if (read_cpuid_part() == ARM_CPU_PART_CORTEX_A9)
+>>>>>>> v3.18
 =======
 	exynos_sysram_init();
 
@@ -385,6 +449,7 @@ static void __init exynos_smp_prepare_cpus(unsigned int max_cpus)
 	 */
 	for (i = 1; i < max_cpus; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long phys_cpu;
 		unsigned long boot_addr;
 
@@ -394,6 +459,8 @@ static void __init exynos_smp_prepare_cpus(unsigned int max_cpus)
 		if (call_firmware_op(set_cpu_boot_addr, phys_cpu, boot_addr))
 			__raw_writel(boot_addr, cpu_boot_reg(phys_cpu));
 =======
+=======
+>>>>>>> v3.18
 		unsigned long boot_addr;
 		u32 mpidr;
 		u32 core_id;
@@ -413,6 +480,9 @@ static void __init exynos_smp_prepare_cpus(unsigned int max_cpus)
 				break;
 			__raw_writel(boot_addr, boot_reg);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

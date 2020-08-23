@@ -410,15 +410,21 @@ static void print_deps(void)
 	}
 	if (fstat(fd, &st) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 fprintf(stderr, "fixdep: error fstat'ing depfile: ");
                 perror(depfile);
                 exit(2);
         }
 =======
+=======
+>>>>>>> v3.18
 		fprintf(stderr, "fixdep: error fstat'ing depfile: ");
 		perror(depfile);
 		exit(2);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (st.st_size == 0) {
 		fprintf(stderr,"fixdep: %s is empty\n",depfile);

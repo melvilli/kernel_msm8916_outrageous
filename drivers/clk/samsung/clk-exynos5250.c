@@ -11,6 +11,10 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/clock/exynos5250.h>
+>>>>>>> v3.18
 =======
 #include <dt-bindings/clock/exynos5250.h>
 >>>>>>> v3.18
@@ -19,6 +23,7 @@
 #include <linux/clk-provider.h>
 #include <linux/of.h>
 #include <linux/of_address.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #include "clk.h"
@@ -30,6 +35,8 @@
 #define SRC_TOP0		0x10210
 #define SRC_TOP2		0x10218
 =======
+=======
+>>>>>>> v3.18
 #include <linux/syscore_ops.h>
 
 #include "clk.h"
@@ -58,6 +65,9 @@
 #define SRC_TOP1		0x10214
 #define SRC_TOP2		0x10218
 #define SRC_TOP3		0x1021c
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SRC_GSCL		0x10220
 #define SRC_DISP1_0		0x1022c
@@ -90,7 +100,13 @@
 #define DIV_PERIC5		0x1056c
 #define GATE_IP_GSCL		0x10920
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GATE_IP_MFC		0x1092c
+=======
+#define GATE_IP_DISP1		0x10928
+#define GATE_IP_MFC		0x1092c
+#define GATE_IP_G3D		0x10930
+>>>>>>> v3.18
 =======
 #define GATE_IP_DISP1		0x10928
 #define GATE_IP_MFC		0x1092c
@@ -100,6 +116,7 @@
 #define GATE_IP_FSYS		0x10944
 #define GATE_IP_PERIC		0x10950
 #define GATE_IP_PERIS		0x10960
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SRC_CDREX		0x20200
 #define PLL_DIV2_SEL		0x20a24
@@ -146,6 +163,8 @@ enum exynos5250_clks {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #define BPLL_LOCK		0x20010
 #define BPLL_CON0		0x20110
 #define SRC_CDREX		0x20200
@@ -179,11 +198,15 @@ static void __iomem *reg_base;
 #ifdef CONFIG_PM_SLEEP
 static struct samsung_clk_reg_dump *exynos5250_save;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * list of controller registers to be saved and restored during a
  * suspend/resume cycle.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static __initdata unsigned long exynos5250_clk_regs[] = {
 	SRC_CPU,
@@ -192,6 +215,8 @@ static __initdata unsigned long exynos5250_clk_regs[] = {
 	SRC_TOP0,
 	SRC_TOP2,
 =======
+=======
+>>>>>>> v3.18
 static unsigned long exynos5250_clk_regs[] __initdata = {
 	SRC_CPU,
 	DIV_CPU0,
@@ -202,6 +227,9 @@ static unsigned long exynos5250_clk_regs[] __initdata = {
 	SRC_TOP1,
 	SRC_TOP2,
 	SRC_TOP3,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SRC_GSCL,
 	SRC_DISP1_0,
@@ -235,6 +263,10 @@ static unsigned long exynos5250_clk_regs[] __initdata = {
 	GATE_IP_GSCL,
 	GATE_IP_MFC,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	GATE_IP_G3D,
+>>>>>>> v3.18
 =======
 	GATE_IP_G3D,
 >>>>>>> v3.18
@@ -246,12 +278,15 @@ static unsigned long exynos5250_clk_regs[] __initdata = {
 	PLL_DIV2_SEL,
 	GATE_IP_DISP1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 /* list of all parent clock list */
 PNAME(mout_apll_p)	= { "fin_pll", "fout_apll", };
 PNAME(mout_cpu_p)	= { "mout_apll", "sclk_mpll", };
 =======
+=======
+>>>>>>> v3.18
 	GATE_IP_ACP,
 	GATE_IP_ISP0,
 	GATE_IP_ISP1,
@@ -295,6 +330,9 @@ static void exynos5250_clk_sleep_init(void) {}
 /* list of all parent clock list */
 PNAME(mout_apll_p)	= { "fin_pll", "fout_apll", };
 PNAME(mout_cpu_p)	= { "mout_apll", "mout_mpll", };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 PNAME(mout_mpll_fout_p)	= { "fout_mplldiv2", "fout_mpll" };
 PNAME(mout_mpll_p)	= { "fin_pll", "mout_mpll_fout" };
@@ -304,6 +342,7 @@ PNAME(mout_vpllsrc_p)	= { "fin_pll", "sclk_hdmi27m" };
 PNAME(mout_vpll_p)	= { "mout_vpllsrc", "fout_vpll" };
 PNAME(mout_cpll_p)	= { "fin_pll", "fout_cpll" };
 PNAME(mout_epll_p)	= { "fin_pll", "fout_epll" };
+<<<<<<< HEAD
 <<<<<<< HEAD
 PNAME(mout_mpll_user_p)	= { "fin_pll", "sclk_mpll" };
 PNAME(mout_bpll_user_p)	= { "fin_pll", "sclk_bpll" };
@@ -328,6 +367,8 @@ PNAME(mout_audio2_p)	= { "cdclk2", "fin_pll", "sclk_hdmi27m", "sclk_dptxphy",
 				"sclk_mpll_user", "sclk_epll", "sclk_vpll",
 				"sclk_cpll" };
 =======
+=======
+>>>>>>> v3.18
 PNAME(mout_gpll_p)	= { "fin_pll", "fout_gpll" };
 PNAME(mout_mpll_user_p)	= { "fin_pll", "mout_mpll" };
 PNAME(mout_bpll_user_p)	= { "fin_pll", "mout_bpll" };
@@ -364,11 +405,15 @@ PNAME(mout_audio2_p)	= { "cdclk2", "fin_pll", "sclk_hdmi27m", "sclk_dptxphy",
 				"mout_cpll", "none", "none",
 				"none", "none", "none",
 				"none" };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 PNAME(mout_spdif_p)	= { "sclk_audio0", "sclk_audio1", "sclk_audio2",
 				"spdif_extclk" };
 
 /* fixed rate clocks generated outside the soc */
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct samsung_fixed_rate_clock exynos5250_fixed_rate_ext_clks[] __initdata = {
 	FRATE(fin_pll, "fin_pll", NULL, CLK_IS_ROOT, 0),
@@ -647,6 +692,8 @@ struct samsung_gate_clock exynos5250_gate_clks[] __initdata = {
 
 static __initdata struct of_device_id ext_clk_match[] = {
 =======
+=======
+>>>>>>> v3.18
 static struct samsung_fixed_rate_clock exynos5250_fixed_rate_ext_clks[] __initdata = {
 	FRATE(CLK_FIN_PLL, "fin_pll", NULL, CLK_IS_ROOT, 0),
 };
@@ -1138,6 +1185,9 @@ static struct samsung_pll_clock exynos5250_plls[nr_plls] __initdata = {
 };
 
 static const struct of_device_id ext_clk_match[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "samsung,clock-xxti", .data = (void *)0, },
 	{ },
@@ -1145,15 +1195,21 @@ static const struct of_device_id ext_clk_match[] __initconst = {
 
 /* register exynox5250 clocks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init exynos5250_clk_init(struct device_node *np)
 {
 	void __iomem *reg_base;
 	struct clk *apll, *mpll, *epll, *vpll, *bpll, *gpll, *cpll;
 =======
+=======
+>>>>>>> v3.18
 static void __init exynos5250_clk_init(struct device_node *np)
 {
 	struct samsung_clk_provider *ctx;
 	unsigned int tmp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (np) {
@@ -1164,6 +1220,7 @@ static void __init exynos5250_clk_init(struct device_node *np)
 		panic("%s: unable to determine soc\n", __func__);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	samsung_clk_init(np, reg_base, nr_clks,
 			exynos5250_clk_regs, ARRAY_SIZE(exynos5250_clk_regs),
@@ -1201,6 +1258,8 @@ static void __init exynos5250_clk_init(struct device_node *np)
 	pr_info("Exynos5250: clock setup completed, armclk=%ld\n",
 			_get_rate("armclk"));
 =======
+=======
+>>>>>>> v3.18
 	ctx = samsung_clk_init(np, reg_base, CLK_NR_CLKS);
 	if (!ctx)
 		panic("%s: unable to allocate context.\n", __func__);
@@ -1258,6 +1317,9 @@ static void __init exynos5250_clk_init(struct device_node *np)
 
 	pr_info("Exynos5250: clock setup completed, armclk=%ld\n",
 			_get_rate("div_arm2"));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 CLK_OF_DECLARE(exynos5250_clk, "samsung,exynos5250-clock", exynos5250_clk_init);

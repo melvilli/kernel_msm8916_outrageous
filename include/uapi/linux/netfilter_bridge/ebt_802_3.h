@@ -3,6 +3,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/if_ether.h>
+>>>>>>> v3.18
 =======
 #include <linux/if_ether.h>
 >>>>>>> v3.18
@@ -47,8 +51,13 @@ struct hdr_ni {
 
 struct ebt_802_3_hdr {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8  daddr[6];
 	__u8  saddr[6];
+=======
+	__u8  daddr[ETH_ALEN];
+	__u8  saddr[ETH_ALEN];
+>>>>>>> v3.18
 =======
 	__u8  daddr[ETH_ALEN];
 	__u8  saddr[ETH_ALEN];

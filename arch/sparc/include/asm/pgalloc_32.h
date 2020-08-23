@@ -15,6 +15,11 @@ void *srmmu_get_nocache(int size, int align);
 void srmmu_free_nocache(void *addr, int size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct resource sparc_iomap;
+
+>>>>>>> v3.18
 =======
 extern struct resource sparc_iomap;
 

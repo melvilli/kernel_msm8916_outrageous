@@ -61,7 +61,11 @@ int udl_dumb_create(struct drm_file *file,
 		    struct drm_mode_create_dumb *args)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	args->pitch = args->width * ((args->bpp + 1) / 8);
+=======
+	args->pitch = args->width * DIV_ROUND_UP(args->bpp, 8);
+>>>>>>> v3.18
 =======
 	args->pitch = args->width * DIV_ROUND_UP(args->bpp, 8);
 >>>>>>> v3.18
@@ -71,12 +75,15 @@ int udl_dumb_create(struct drm_file *file,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int udl_dumb_destroy(struct drm_file *file, struct drm_device *dev,
 		     uint32_t handle)
 {
 	return drm_gem_handle_delete(file, handle);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int udl_drm_gem_mmap(struct file *filp, struct vm_area_struct *vma)
@@ -111,7 +118,10 @@ int udl_gem_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	switch (ret) {
 	case -EAGAIN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_need_resched();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case 0:
@@ -124,6 +134,7 @@ int udl_gem_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int udl_gem_init_object(struct drm_gem_object *obj)
 {
@@ -143,10 +154,16 @@ static int udl_gem_get_pages(struct udl_gem_object *obj)
 {
 	struct page **pages;
 >>>>>>> v3.18
+=======
+static int udl_gem_get_pages(struct udl_gem_object *obj)
+{
+	struct page **pages;
+>>>>>>> v3.18
 
 	if (obj->pages)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	page_count = obj->base.size / PAGE_SIZE;
 	BUG_ON(obj->pages != NULL);
@@ -173,6 +190,8 @@ err_pages:
 	obj->pages = NULL;
 	return PTR_ERR(page);
 =======
+=======
+>>>>>>> v3.18
 	pages = drm_gem_get_pages(&obj->base);
 	if (IS_ERR(pages))
 		return PTR_ERR(pages);
@@ -180,15 +199,21 @@ err_pages:
 	obj->pages = pages;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void udl_gem_put_pages(struct udl_gem_object *obj)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int page_count = obj->base.size / PAGE_SIZE;
 	int i;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (obj->base.import_attach) {
@@ -198,10 +223,14 @@ static void udl_gem_put_pages(struct udl_gem_object *obj)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < page_count; i++)
 		page_cache_release(obj->pages[i]);
 
 	drm_free_large(obj->pages);
+=======
+	drm_gem_put_pages(&obj->base, obj->pages, false, false);
+>>>>>>> v3.18
 =======
 	drm_gem_put_pages(&obj->base, obj->pages, false, false);
 >>>>>>> v3.18
@@ -221,7 +250,11 @@ int udl_gem_vmap(struct udl_gem_object *obj)
 	}
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = udl_gem_get_pages(obj, GFP_KERNEL);
+=======
+	ret = udl_gem_get_pages(obj);
+>>>>>>> v3.18
 =======
 	ret = udl_gem_get_pages(obj);
 >>>>>>> v3.18
@@ -255,21 +288,31 @@ void udl_gem_free_object(struct drm_gem_object *gem_obj)
 		udl_gem_vunmap(obj);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gem_obj->import_attach)
 		drm_prime_gem_destroy(gem_obj, obj->sg);
 =======
+=======
+>>>>>>> v3.18
 	if (gem_obj->import_attach) {
 		drm_prime_gem_destroy(gem_obj, obj->sg);
 		put_device(gem_obj->dev->dev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (obj->pages)
 		udl_gem_put_pages(obj);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gem_obj->map_list.map)
 		drm_gem_free_mmap_offset(gem_obj);
+=======
+	drm_gem_free_mmap_offset(gem_obj);
+>>>>>>> v3.18
 =======
 	drm_gem_free_mmap_offset(gem_obj);
 >>>>>>> v3.18
@@ -293,6 +336,7 @@ int udl_gem_mmap(struct drm_file *file, struct drm_device *dev,
 	gobj = to_udl_bo(obj);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = udl_gem_get_pages(gobj, GFP_KERNEL);
 	if (ret)
 		goto out;
@@ -304,6 +348,8 @@ int udl_gem_mmap(struct drm_file *file, struct drm_device *dev,
 
 	*offset = (u64)gobj->base.map_list.hash.key << PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 	ret = udl_gem_get_pages(gobj);
 	if (ret)
 		goto out;
@@ -312,6 +358,9 @@ int udl_gem_mmap(struct drm_file *file, struct drm_device *dev,
 		goto out;
 
 	*offset = drm_vma_node_offset_addr(&gobj->base.vma_node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -359,16 +408,22 @@ struct drm_gem_object *udl_gem_prime_import(struct drm_device *dev,
 
 	/* need to attach */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	attach = dma_buf_attach(dma_buf, dev->dev);
 	if (IS_ERR(attach))
 		return ERR_CAST(attach);
 =======
+=======
+>>>>>>> v3.18
 	get_device(dev->dev);
 	attach = dma_buf_attach(dma_buf, dev->dev);
 	if (IS_ERR(attach)) {
 		put_device(dev->dev);
 		return ERR_CAST(attach);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	get_dma_buf(dma_buf);
@@ -394,7 +449,11 @@ fail_detach:
 	dma_buf_detach(dma_buf, attach);
 	dma_buf_put(dma_buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	put_device(dev->dev);
+>>>>>>> v3.18
 =======
 	put_device(dev->dev);
 >>>>>>> v3.18

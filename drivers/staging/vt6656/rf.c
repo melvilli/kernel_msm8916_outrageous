@@ -27,16 +27,22 @@
  *
  * Functions:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      IFRFbWriteEmbedded      - Embedded write RF register via MAC
  *
  * Revision History:
 =======
+=======
+>>>>>>> v3.18
  *	vnt_rf_write_embedded	- Embedded write RF register via MAC
  *
  * Revision History:
  *	RF_VT3226: RobertYu:20051111, VT3226C0 and before
  *	RF_VT3226D0: RobertYu:20051228
  *	RF_VT3342A0: RobertYu:20060609
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  */
@@ -44,6 +50,7 @@
 #include "mac.h"
 #include "rf.h"
 #include "baseband.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "control.h"
 #include "rndis.h"
@@ -726,6 +733,8 @@ int IFRFbWriteEmbedded(struct vnt_private *pDevice, u32 dwData)
 	CONTROLnsRequestOut(pDevice,
 		MESSAGE_TYPE_WRITE_IFRF, 0, 0, 4, pbyData);
 =======
+=======
+>>>>>>> v3.18
 #include "usbpipe.h"
 
 #define CB_AL2230_INIT_SEQ    15
@@ -1304,11 +1313,15 @@ int vnt_rf_write_embedded(struct vnt_private *priv, u32 data)
 
 	vnt_control_out(priv, MESSAGE_TYPE_WRITE_IFRF,
 				0, 0, ARRAY_SIZE(reg_data), reg_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return true;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Description: Set Tx power
@@ -1688,6 +1701,8 @@ void RFbRFTableDownload(struct vnt_private *pDevice)
     }
 
 =======
+=======
+>>>>>>> v3.18
 /* Set Tx power by rate and channel number */
 int vnt_rf_setpower(struct vnt_private *priv, u32 rate, u32 channel)
 {
@@ -2015,5 +2030,8 @@ void vnt_rf_table_download(struct vnt_private *priv)
 			addr2 += length;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

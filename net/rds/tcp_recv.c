@@ -235,6 +235,7 @@ static int rds_tcp_data_recv(read_descriptor_t *desc, struct sk_buff *skb,
 
 			to_copy = min(tc->t_tinc_data_rem, left);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!pskb_pull(clone, offset) ||
 			    pskb_trim(clone, to_copy)) {
 				pr_warn("rds_tcp_data_recv: pull/trim failed "
@@ -244,6 +245,10 @@ static int rds_tcp_data_recv(read_descriptor_t *desc, struct sk_buff *skb,
 				desc->error = -ENOMEM;
 				goto out;
 			}
+=======
+			pskb_pull(clone, offset);
+			pskb_trim(clone, to_copy);
+>>>>>>> v3.18
 =======
 			pskb_pull(clone, offset);
 			pskb_trim(clone, to_copy);
@@ -327,6 +332,7 @@ int rds_tcp_recv(struct rds_connection *conn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rds_tcp_data_ready(struct sock *sk, int bytes)
 {
 	void (*ready)(struct sock *sk, int bytes);
@@ -335,6 +341,8 @@ void rds_tcp_data_ready(struct sock *sk, int bytes)
 
 	rdsdebug("data ready sk %p bytes %d\n", sk, bytes);
 =======
+=======
+>>>>>>> v3.18
 void rds_tcp_data_ready(struct sock *sk)
 {
 	void (*ready)(struct sock *sk);
@@ -342,6 +350,9 @@ void rds_tcp_data_ready(struct sock *sk)
 	struct rds_tcp_connection *tc;
 
 	rdsdebug("data ready sk %p\n", sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	read_lock(&sk->sk_callback_lock);
@@ -360,7 +371,11 @@ void rds_tcp_data_ready(struct sock *sk)
 out:
 	read_unlock(&sk->sk_callback_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ready(sk, bytes);
+=======
+	ready(sk);
+>>>>>>> v3.18
 =======
 	ready(sk);
 >>>>>>> v3.18

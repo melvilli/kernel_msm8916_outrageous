@@ -24,6 +24,7 @@
 # define wmb()	do { barrier(); smp_mark_barrier(); } while (0)
 # define read_barrier_depends()	do { barrier(); smp_check_barrier(); } while (0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 # define mb()	barrier()
 # define rmb()	barrier()
@@ -46,6 +47,8 @@
 #define set_mb(var, value) do { var = value; mb(); } while (0)
 #define smp_read_barrier_depends()	read_barrier_depends()
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 #endif /* !CONFIG_SMP */
@@ -54,6 +57,9 @@
 #define smp_mb__after_atomic()	barrier()
 
 #include <asm-generic/barrier.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _BLACKFIN_BARRIER_H */

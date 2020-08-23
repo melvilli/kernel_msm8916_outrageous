@@ -25,7 +25,11 @@ asmlinkage int sys_modify_ldt(int, void __user *, unsigned long);
 
 /* kernel/signal.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 long sys_rt_sigreturn(void);
+=======
+asmlinkage long sys_rt_sigreturn(void);
+>>>>>>> v3.18
 =======
 asmlinkage long sys_rt_sigreturn(void);
 >>>>>>> v3.18
@@ -39,7 +43,11 @@ asmlinkage long sys_get_thread_area(struct user_desc __user *);
 
 /* kernel/signal.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long sys_sigreturn(void);
+=======
+asmlinkage unsigned long sys_sigreturn(void);
+>>>>>>> v3.18
 =======
 asmlinkage unsigned long sys_sigreturn(void);
 >>>>>>> v3.18
@@ -53,7 +61,11 @@ asmlinkage long sys_vm86(unsigned long, unsigned long);
 /* X86_64 only */
 /* kernel/process_64.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 long sys_arch_prctl(int, unsigned long);
+=======
+asmlinkage long sys_arch_prctl(int, unsigned long);
+>>>>>>> v3.18
 =======
 asmlinkage long sys_arch_prctl(int, unsigned long);
 >>>>>>> v3.18

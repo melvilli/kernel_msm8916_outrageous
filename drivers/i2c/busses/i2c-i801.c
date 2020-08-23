@@ -3,7 +3,11 @@
     Philip Edelbrock <phil@netroedge.com>, and Mark D. Studebaker
     <mdsxyz123@yahoo.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
     Copyright (C) 2007 - 2012  Jean Delvare <khali@linux-fr.org>
+=======
+    Copyright (C) 2007 - 2012  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
     Copyright (C) 2007 - 2012  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -19,6 +23,7 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
@@ -79,6 +84,8 @@
   See the file Documentation/i2c/busses/i2c-i801 for details.
 */
 =======
+=======
+>>>>>>> v3.18
 */
 
 /*
@@ -135,6 +142,9 @@
  *
  * See the file Documentation/i2c/busses/i2c-i801 for details.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/interrupt.h>
@@ -153,7 +163,10 @@
 #include <linux/wait.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -230,6 +243,7 @@
 
 /* Older devices have their ID defined in <linux/pci_ids.h> */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_INTEL_BAYTRAIL_SMBUS	0x0f12
 #define PCI_DEVICE_ID_INTEL_COUGARPOINT_SMBUS	0x1c22
 #define PCI_DEVICE_ID_INTEL_PATSBURG_SMBUS	0x1d22
@@ -250,6 +264,8 @@
 #define PCI_DEVICE_ID_INTEL_LYNXPOINT_LP_SMBUS	0x9c22
 #define PCI_DEVICE_ID_INTEL_WILDCATPOINT_LP_SMBUS	0x9ca2
 =======
+=======
+>>>>>>> v3.18
 #define PCI_DEVICE_ID_INTEL_BAYTRAIL_SMBUS		0x0f12
 #define PCI_DEVICE_ID_INTEL_BRASWELL_SMBUS		0x2292
 #define PCI_DEVICE_ID_INTEL_COUGARPOINT_SMBUS		0x1c22
@@ -272,6 +288,9 @@
 #define PCI_DEVICE_ID_INTEL_LYNXPOINT_LP_SMBUS		0x9c22
 #define PCI_DEVICE_ID_INTEL_WILDCATPOINT_LP_SMBUS	0x9ca2
 #define PCI_DEVICE_ID_INTEL_SUNRISEPOINT_H_SMBUS	0xa123
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct i801_mux_config {
@@ -884,7 +903,11 @@ static const struct i2c_algorithm smbus_algorithm = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i801_ids) = {
+=======
+static const struct pci_device_id i801_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id i801_ids[] = {
 >>>>>>> v3.18
@@ -920,14 +943,20 @@ static const struct pci_device_id i801_ids[] = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_WELLSBURG_SMBUS_MS2) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_COLETOCREEK_SMBUS) },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_WILDCATPOINT_LP_SMBUS) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_BAYTRAIL_SMBUS) },
 =======
+=======
+>>>>>>> v3.18
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_WILDCATPOINT_SMBUS) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_WILDCATPOINT_LP_SMBUS) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_BAYTRAIL_SMBUS) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_BRASWELL_SMBUS) },
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_SUNRISEPOINT_H_SMBUS) },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0, }
 };
@@ -1340,7 +1369,10 @@ static int i801_probe(struct pci_dev *dev, const struct pci_device_id *id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_i2c_register_devices(&priv->adapter);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	i801_probe_optional_slaves(priv);
@@ -1424,8 +1456,12 @@ static void __exit i2c_i801_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mark D. Studebaker <mdsxyz123@yahoo.com>, "
 	      "Jean Delvare <khali@linux-fr.org>");
+=======
+MODULE_AUTHOR("Mark D. Studebaker <mdsxyz123@yahoo.com>, Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mark D. Studebaker <mdsxyz123@yahoo.com>, Jean Delvare <jdelvare@suse.de>");
 >>>>>>> v3.18

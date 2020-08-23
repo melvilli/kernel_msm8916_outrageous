@@ -124,10 +124,15 @@ static int tps65910_gpio_probe(struct platform_device *pdev)
 	tps65910_gpio = devm_kzalloc(&pdev->dev,
 				sizeof(*tps65910_gpio), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tps65910_gpio) {
 		dev_err(&pdev->dev, "Could not allocate tps65910_gpio\n");
 		return -ENOMEM;
 	}
+=======
+	if (!tps65910_gpio)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!tps65910_gpio)
 		return -ENOMEM;
@@ -149,7 +154,11 @@ static int tps65910_gpio_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tps65910_gpio->gpio_chip.can_sleep = 1;
+=======
+	tps65910_gpio->gpio_chip.can_sleep = true;
+>>>>>>> v3.18
 =======
 	tps65910_gpio->gpio_chip.can_sleep = true;
 >>>>>>> v3.18
@@ -202,7 +211,12 @@ static int tps65910_gpio_remove(struct platform_device *pdev)
 	struct tps65910_gpio *tps65910_gpio = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_remove(&tps65910_gpio->gpio_chip);
+=======
+	gpiochip_remove(&tps65910_gpio->gpio_chip);
+	return 0;
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&tps65910_gpio->gpio_chip);
 	return 0;

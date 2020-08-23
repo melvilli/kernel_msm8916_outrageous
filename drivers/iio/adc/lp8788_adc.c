@@ -195,7 +195,11 @@ static int lp8788_adc_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*adc));
+=======
+	indio_dev = devm_iio_device_alloc(&pdev->dev, sizeof(*adc));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&pdev->dev, sizeof(*adc));
 >>>>>>> v3.18
@@ -210,7 +214,11 @@ static int lp8788_adc_probe(struct platform_device *pdev)
 	ret = lp8788_iio_map_register(indio_dev, lp->pdata, adc);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_iio_map;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -235,8 +243,11 @@ static int lp8788_adc_probe(struct platform_device *pdev)
 err_iio_device:
 	iio_map_array_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_iio_map:
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -249,7 +260,10 @@ static int lp8788_adc_remove(struct platform_device *pdev)
 	iio_device_unregister(indio_dev);
 	iio_map_array_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -262,7 +276,10 @@ static struct platform_driver lp8788_adc_driver = {
 	.driver = {
 		.name = LP8788_DEV_ADC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},

@@ -51,12 +51,18 @@ struct vnic_cq_ctrl {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct vnic_rx_bytes_counter {
 	unsigned int small_pkt_bytes_cnt;
 	unsigned int large_pkt_bytes_cnt;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct vnic_cq {
 	unsigned int index;
@@ -67,11 +73,17 @@ struct vnic_cq {
 	unsigned int last_color;
 	unsigned int interrupt_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct vnic_rx_bytes_counter pkt_size_counter;
 	unsigned int cur_rx_coal_timeval;
 	unsigned int tobe_rx_coal_timeval;
 	ktime_t prev_ts;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

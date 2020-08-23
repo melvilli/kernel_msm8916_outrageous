@@ -38,7 +38,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -524,6 +527,10 @@ static void carl9170_ps_beacon(struct ar9170 *ar, void *data, unsigned int len)
 	struct ieee80211_hdr *hdr = data;
 	struct ieee80211_tim_ie *tim_ie;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ath_common *common = &ar->common;
+>>>>>>> v3.18
 =======
 	struct ath_common *common = &ar->common;
 >>>>>>> v3.18
@@ -535,10 +542,13 @@ static void carl9170_ps_beacon(struct ar9170 *ar, void *data, unsigned int len)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* check if this really is a beacon */
 	if (!ieee80211_is_beacon(hdr->frame_control))
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* min. beacon length + FCS_LEN */
@@ -546,9 +556,15 @@ static void carl9170_ps_beacon(struct ar9170 *ar, void *data, unsigned int len)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* and only beacons from the associated BSSID, please */
 	if (!ether_addr_equal(hdr->addr3, ar->common.curbssid) ||
 	    !ar->common.curaid)
+=======
+	/* check if this really is a beacon */
+	/* and only beacons from the associated BSSID, please */
+	if (!ath_is_mybeacon(common, hdr) || !common->curaid)
+>>>>>>> v3.18
 =======
 	/* check if this really is a beacon */
 	/* and only beacons from the associated BSSID, please */
@@ -593,7 +609,11 @@ static void carl9170_ps_beacon(struct ar9170 *ar, void *data, unsigned int len)
 static void carl9170_ba_check(struct ar9170 *ar, void *data, unsigned int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_bar *bar = (void *) data;
+=======
+	struct ieee80211_bar *bar = data;
+>>>>>>> v3.18
 =======
 	struct ieee80211_bar *bar = data;
 >>>>>>> v3.18
@@ -623,8 +643,13 @@ static void carl9170_ba_check(struct ar9170 *ar, void *data, unsigned int len)
 		if (bar->start_seq_num == entry_bar->start_seq_num &&
 		    TID_CHECK(bar->control, entry_bar->control) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    compare_ether_addr(bar->ra, entry_bar->ta) == 0 &&
 		    compare_ether_addr(bar->ta, entry_bar->ra) == 0) {
+=======
+		    ether_addr_equal_64bits(bar->ra, entry_bar->ta) &&
+		    ether_addr_equal_64bits(bar->ta, entry_bar->ra)) {
+>>>>>>> v3.18
 =======
 		    ether_addr_equal_64bits(bar->ra, entry_bar->ta) &&
 		    ether_addr_equal_64bits(bar->ta, entry_bar->ra)) {

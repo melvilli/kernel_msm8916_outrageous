@@ -12,11 +12,17 @@ static inline int is_bcm63xx_internal_registers(phys_t offset)
 {
 	switch (bcm63xx_get_cpu_id()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case BCM3368_CPU_ID:
 		if (offset >= 0xfff80000)
 			return 1;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case BCM6338_CPU_ID:
 	case BCM6345_CPU_ID:

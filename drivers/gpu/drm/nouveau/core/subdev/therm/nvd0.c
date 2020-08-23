@@ -33,6 +33,10 @@ pwm_info(struct nouveau_therm *therm, int line)
 {
 	u32 gpio = nv_rd32(therm, 0x00d610 + (line * 0x04));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -41,13 +45,19 @@ pwm_info(struct nouveau_therm *therm, int line)
 	case 0x00000040: /* nvio special */
 		switch (gpio & 0x0000001f) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case 0x19: return 1;
 		case 0x1c: return 0;
 =======
+=======
+>>>>>>> v3.18
 		case 0x00: return 2;
 		case 0x19: return 1;
 		case 0x1c: return 0;
 		case 0x1e: return 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			break;
@@ -68,8 +78,14 @@ nvd0_fan_pwm_ctrl(struct nouveau_therm *therm, int line, bool enable)
 	if (indx < 0)
 		return indx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	nv_mask(therm, 0x00d610 + (line * 0x04), 0x000000c0, data);
+=======
+	else if (indx < 2)
+		nv_mask(therm, 0x00d610 + (line * 0x04), 0x000000c0, data);
+	/* nothing to do for indx == 2, it seems hardwired to PTHERM */
+>>>>>>> v3.18
 =======
 	else if (indx < 2)
 		nv_mask(therm, 0x00d610 + (line * 0x04), 0x000000c0, data);
@@ -85,11 +101,14 @@ nvd0_fan_pwm_get(struct nouveau_therm *therm, int line, u32 *divs, u32 *duty)
 	if (indx < 0)
 		return indx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (nv_rd32(therm, 0x00d610 + (line * 0x04)) & 0x00000040) {
 		*divs = nv_rd32(therm, 0x00e114 + (indx * 8));
 		*duty = nv_rd32(therm, 0x00e118 + (indx * 8));
 =======
+=======
+>>>>>>> v3.18
 	else if (indx < 2) {
 		if (nv_rd32(therm, 0x00d610 + (line * 0x04)) & 0x00000040) {
 			*divs = nv_rd32(therm, 0x00e114 + (indx * 8));
@@ -99,6 +118,9 @@ nvd0_fan_pwm_get(struct nouveau_therm *therm, int line, u32 *divs, u32 *duty)
 	} else if (indx == 2) {
 		*divs = nv_rd32(therm, 0x0200d8) & 0x1fff;
 		*duty = nv_rd32(therm, 0x0200dc) & 0x1fff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	}
@@ -113,10 +135,13 @@ nvd0_fan_pwm_set(struct nouveau_therm *therm, int line, u32 divs, u32 duty)
 	if (indx < 0)
 		return indx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	nv_wr32(therm, 0x00e114 + (indx * 8), divs);
 	nv_wr32(therm, 0x00e118 + (indx * 8), duty | 0x80000000);
 =======
+=======
+>>>>>>> v3.18
 	else if (indx < 2) {
 		nv_wr32(therm, 0x00e114 + (indx * 8), divs);
 		nv_wr32(therm, 0x00e118 + (indx * 8), duty | 0x80000000);
@@ -124,11 +149,15 @@ nvd0_fan_pwm_set(struct nouveau_therm *therm, int line, u32 divs, u32 duty)
 		nv_mask(therm, 0x0200d8, 0x1fff, divs); /* keep the high bits */
 		nv_wr32(therm, 0x0200dc, duty | 0x40000000);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static int
+<<<<<<< HEAD
 <<<<<<< HEAD
 nvd0_fan_pwm_clock(struct nouveau_therm *therm)
 {
@@ -137,6 +166,8 @@ nvd0_fan_pwm_clock(struct nouveau_therm *therm)
 
 static int
 =======
+=======
+>>>>>>> v3.18
 nvd0_fan_pwm_clock(struct nouveau_therm *therm, int line)
 {
 	int indx = pwm_info(therm, line);
@@ -149,6 +180,9 @@ nvd0_fan_pwm_clock(struct nouveau_therm *therm, int line)
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nvd0_therm_init(struct nouveau_object *object)
 {
@@ -186,6 +220,11 @@ nvd0_therm_ctor(struct nouveau_object *parent,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nv84_sensor_setup(&priv->base.base);
+
+>>>>>>> v3.18
 =======
 	nv84_sensor_setup(&priv->base.base);
 
@@ -208,7 +247,11 @@ nvd0_therm_oclass = {
 		.dtor = _nouveau_therm_dtor,
 		.init = nvd0_therm_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.fini = _nouveau_therm_fini,
+=======
+		.fini = nv84_therm_fini,
+>>>>>>> v3.18
 =======
 		.fini = nv84_therm_fini,
 >>>>>>> v3.18

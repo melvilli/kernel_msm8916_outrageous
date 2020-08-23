@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2011 Xilinx
+=======
+ *  Copyright (C) 2011 - 2014 Xilinx
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2011 - 2014 Xilinx
 >>>>>>> v3.18
@@ -29,6 +33,7 @@
 
 	chosen {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bootargs = "console=ttyPS1,115200 earlyprintk";
 	};
 
@@ -37,6 +42,8 @@
 &ps_clk {
 	clock-frequency = <33333330>;
 =======
+=======
+>>>>>>> v3.18
 		bootargs = "console=ttyPS0,115200 earlyprintk";
 	};
 
@@ -147,5 +154,8 @@
 
 &uart1 {
 	status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

@@ -28,6 +28,10 @@
 #include <linux/device.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -41,12 +45,18 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Evgeniy Polyakov <zbr@ioremap.net>");
 MODULE_DESCRIPTION("Driver for 1-wire Dallas network protocol, temperature family.");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 MODULE_ALIAS("w1-family-" __stringify(W1_THERM_DS18S20));
 MODULE_ALIAS("w1-family-" __stringify(W1_THERM_DS1822));
 MODULE_ALIAS("w1-family-" __stringify(W1_THERM_DS18B20));
 MODULE_ALIAS("w1-family-" __stringify(W1_THERM_DS1825));
 MODULE_ALIAS("w1-family-" __stringify(W1_THERM_DS28EA00));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Allow the strong pullup to be disabled, but default to enabled.
@@ -66,6 +76,7 @@ static int w1_strong_pullup = 1;
 module_param_named(strong_pullup, w1_strong_pullup, int, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t w1_therm_read(struct device *device,
 	struct device_attribute *attr, char *buf);
@@ -77,17 +88,23 @@ static int w1_therm_add_slave(struct w1_slave *sl)
 {
 	return device_create_file(&sl->dev, &w1_therm_attr);
 =======
+=======
+>>>>>>> v3.18
 static int w1_therm_add_slave(struct w1_slave *sl)
 {
 	sl->family_data = kzalloc(9, GFP_KERNEL);
 	if (!sl->family_data)
 		return -ENOMEM;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void w1_therm_remove_slave(struct w1_slave *sl)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	device_remove_file(&sl->dev, &w1_therm_attr);
 }
@@ -96,6 +113,8 @@ static struct w1_family_ops w1_therm_fops = {
 	.add_slave	= w1_therm_add_slave,
 	.remove_slave	= w1_therm_remove_slave,
 =======
+=======
+>>>>>>> v3.18
 	kfree(sl->family_data);
 	sl->family_data = NULL;
 }
@@ -115,6 +134,9 @@ static struct w1_family_ops w1_therm_fops = {
 	.add_slave	= w1_therm_add_slave,
 	.remove_slave	= w1_therm_remove_slave,
 	.groups		= w1_therm_groups,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -217,7 +239,11 @@ static inline int w1_convert_temp(u8 rom[9], u8 fid)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_therm_read(struct device *device,
+=======
+static ssize_t w1_slave_show(struct device *device,
+>>>>>>> v3.18
 =======
 static ssize_t w1_slave_show(struct device *device,
 >>>>>>> v3.18
@@ -302,7 +328,11 @@ static ssize_t w1_slave_show(struct device *device,
 			   crc, (verdict) ? "YES" : "NO");
 	if (verdict)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(sl->rom, rom, sizeof(sl->rom));
+=======
+		memcpy(sl->family_data, rom, sizeof(rom));
+>>>>>>> v3.18
 =======
 		memcpy(sl->family_data, rom, sizeof(rom));
 >>>>>>> v3.18
@@ -311,7 +341,12 @@ static ssize_t w1_slave_show(struct device *device,
 
 	for (i = 0; i < 9; ++i)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		c -= snprintf(buf + PAGE_SIZE - c, c, "%02x ", sl->rom[i]);
+=======
+		c -= snprintf(buf + PAGE_SIZE - c, c, "%02x ",
+			      ((u8 *)sl->family_data)[i]);
+>>>>>>> v3.18
 =======
 		c -= snprintf(buf + PAGE_SIZE - c, c, "%02x ",
 			      ((u8 *)sl->family_data)[i]);

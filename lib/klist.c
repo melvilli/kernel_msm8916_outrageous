@@ -141,17 +141,23 @@ EXPORT_SYMBOL_GPL(klist_add_tail);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * klist_add_after - Init a klist_node and add it after an existing node
  * @n: node we're adding.
  * @pos: node to put @n after
  */
 void klist_add_after(struct klist_node *n, struct klist_node *pos)
 =======
+=======
+>>>>>>> v3.18
  * klist_add_behind - Init a klist_node and add it after an existing node
  * @n: node we're adding.
  * @pos: node to put @n after
  */
 void klist_add_behind(struct klist_node *n, struct klist_node *pos)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct klist *k = knode_klist(pos);
@@ -162,7 +168,11 @@ void klist_add_behind(struct klist_node *n, struct klist_node *pos)
 	spin_unlock(&k->k_lock);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(klist_add_after);
+=======
+EXPORT_SYMBOL_GPL(klist_add_behind);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(klist_add_behind);
 >>>>>>> v3.18
@@ -295,9 +305,15 @@ void klist_iter_init_node(struct klist *k, struct klist_iter *i,
 {
 	i->i_klist = k;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i->i_cur = NULL;
 	if (n && kref_get_unless_zero(&n->n_ref))
 		i->i_cur = n;
+=======
+	i->i_cur = n;
+	if (n)
+		kref_get(&n->n_ref);
+>>>>>>> v3.18
 =======
 	i->i_cur = n;
 	if (n)

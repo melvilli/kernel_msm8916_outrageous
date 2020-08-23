@@ -22,7 +22,11 @@ int cfg80211_mgd_wext_connect(struct cfg80211_registered_device *rdev,
 	int err, i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ASSERT_RDEV_LOCK(rdev);
+=======
+	ASSERT_RTNL();
+>>>>>>> v3.18
 =======
 	ASSERT_RTNL();
 >>>>>>> v3.18
@@ -59,15 +63,21 @@ int cfg80211_mgd_wext_connect(struct cfg80211_registered_device *rdev,
 		prev_bssid = wdev->wext.prev_bssid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = __cfg80211_connect(rdev, wdev->netdev,
 				 &wdev->wext.connect, ck, prev_bssid);
 	if (err)
 		kfree(ck);
 =======
+=======
+>>>>>>> v3.18
 	err = cfg80211_connect(rdev, wdev->netdev,
 			       &wdev->wext.connect, ck, prev_bssid);
 	if (err)
 		kzfree(ck);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;
@@ -79,7 +89,11 @@ int cfg80211_mgd_wext_siwfreq(struct net_device *dev,
 {
 	struct wireless_dev *wdev = dev->ieee80211_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cfg80211_registered_device *rdev = wiphy_to_dev(wdev->wiphy);
+=======
+	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wdev->wiphy);
+>>>>>>> v3.18
 =======
 	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wdev->wiphy);
 >>>>>>> v3.18
@@ -91,7 +105,11 @@ int cfg80211_mgd_wext_siwfreq(struct net_device *dev,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	freq = cfg80211_wext_freq(wdev->wiphy, wextfreq);
+=======
+	freq = cfg80211_wext_freq(wextfreq);
+>>>>>>> v3.18
 =======
 	freq = cfg80211_wext_freq(wextfreq);
 >>>>>>> v3.18
@@ -107,12 +125,18 @@ int cfg80211_mgd_wext_siwfreq(struct net_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg80211_lock_rdev(rdev);
 	mutex_lock(&rdev->devlist_mtx);
 	mutex_lock(&rdev->sched_scan_mtx);
 	wdev_lock(wdev);
 
 	if (wdev->sme_state != CFG80211_SME_IDLE) {
+=======
+	wdev_lock(wdev);
+
+	if (wdev->conn) {
+>>>>>>> v3.18
 =======
 	wdev_lock(wdev);
 
@@ -129,8 +153,13 @@ int cfg80211_mgd_wext_siwfreq(struct net_device *dev,
 		if (wdev->wext.connect.ssid_len)
 			event = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = __cfg80211_disconnect(rdev, dev,
 					    WLAN_REASON_DEAUTH_LEAVING, event);
+=======
+		err = cfg80211_disconnect(rdev, dev,
+					  WLAN_REASON_DEAUTH_LEAVING, event);
+>>>>>>> v3.18
 =======
 		err = cfg80211_disconnect(rdev, dev,
 					  WLAN_REASON_DEAUTH_LEAVING, event);
@@ -167,9 +196,12 @@ int cfg80211_mgd_wext_siwfreq(struct net_device *dev,
  out:
 	wdev_unlock(wdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&rdev->sched_scan_mtx);
 	mutex_unlock(&rdev->devlist_mtx);
 	cfg80211_unlock_rdev(rdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;
@@ -209,7 +241,11 @@ int cfg80211_mgd_wext_siwessid(struct net_device *dev,
 {
 	struct wireless_dev *wdev = dev->ieee80211_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cfg80211_registered_device *rdev = wiphy_to_dev(wdev->wiphy);
+=======
+	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wdev->wiphy);
+>>>>>>> v3.18
 =======
 	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wdev->wiphy);
 >>>>>>> v3.18
@@ -228,9 +264,12 @@ int cfg80211_mgd_wext_siwessid(struct net_device *dev,
 		len--;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg80211_lock_rdev(rdev);
 	mutex_lock(&rdev->devlist_mtx);
 	mutex_lock(&rdev->sched_scan_mtx);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	wdev_lock(wdev);
@@ -238,7 +277,11 @@ int cfg80211_mgd_wext_siwessid(struct net_device *dev,
 	err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wdev->sme_state != CFG80211_SME_IDLE) {
+=======
+	if (wdev->conn) {
+>>>>>>> v3.18
 =======
 	if (wdev->conn) {
 >>>>>>> v3.18
@@ -253,8 +296,13 @@ int cfg80211_mgd_wext_siwessid(struct net_device *dev,
 		if (len)
 			event = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = __cfg80211_disconnect(rdev, dev,
 					    WLAN_REASON_DEAUTH_LEAVING, event);
+=======
+		err = cfg80211_disconnect(rdev, dev,
+					  WLAN_REASON_DEAUTH_LEAVING, event);
+>>>>>>> v3.18
 =======
 		err = cfg80211_disconnect(rdev, dev,
 					  WLAN_REASON_DEAUTH_LEAVING, event);
@@ -276,9 +324,12 @@ int cfg80211_mgd_wext_siwessid(struct net_device *dev,
  out:
 	wdev_unlock(wdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&rdev->sched_scan_mtx);
 	mutex_unlock(&rdev->devlist_mtx);
 	cfg80211_unlock_rdev(rdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;
@@ -325,7 +376,11 @@ int cfg80211_mgd_wext_siwap(struct net_device *dev,
 {
 	struct wireless_dev *wdev = dev->ieee80211_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cfg80211_registered_device *rdev = wiphy_to_dev(wdev->wiphy);
+=======
+	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wdev->wiphy);
+>>>>>>> v3.18
 =======
 	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wdev->wiphy);
 >>>>>>> v3.18
@@ -344,12 +399,18 @@ int cfg80211_mgd_wext_siwap(struct net_device *dev,
 		bssid = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfg80211_lock_rdev(rdev);
 	mutex_lock(&rdev->devlist_mtx);
 	mutex_lock(&rdev->sched_scan_mtx);
 	wdev_lock(wdev);
 
 	if (wdev->sme_state != CFG80211_SME_IDLE) {
+=======
+	wdev_lock(wdev);
+
+	if (wdev->conn) {
+>>>>>>> v3.18
 =======
 	wdev_lock(wdev);
 
@@ -366,8 +427,13 @@ int cfg80211_mgd_wext_siwap(struct net_device *dev,
 			goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = __cfg80211_disconnect(rdev, dev,
 					    WLAN_REASON_DEAUTH_LEAVING, false);
+=======
+		err = cfg80211_disconnect(rdev, dev,
+					  WLAN_REASON_DEAUTH_LEAVING, false);
+>>>>>>> v3.18
 =======
 		err = cfg80211_disconnect(rdev, dev,
 					  WLAN_REASON_DEAUTH_LEAVING, false);
@@ -386,9 +452,12 @@ int cfg80211_mgd_wext_siwap(struct net_device *dev,
  out:
 	wdev_unlock(wdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&rdev->sched_scan_mtx);
 	mutex_unlock(&rdev->devlist_mtx);
 	cfg80211_unlock_rdev(rdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;
@@ -422,7 +491,11 @@ int cfg80211_wext_siwgenie(struct net_device *dev,
 {
 	struct wireless_dev *wdev = dev->ieee80211_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cfg80211_registered_device *rdev = wiphy_to_dev(wdev->wiphy);
+=======
+	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wdev->wiphy);
+>>>>>>> v3.18
 =======
 	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wdev->wiphy);
 >>>>>>> v3.18
@@ -457,9 +530,15 @@ int cfg80211_wext_siwgenie(struct net_device *dev,
 	wdev->wext.ie_len = ie_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (wdev->sme_state != CFG80211_SME_IDLE) {
 		err = __cfg80211_disconnect(rdev, dev,
 					    WLAN_REASON_DEAUTH_LEAVING, false);
+=======
+	if (wdev->conn) {
+		err = cfg80211_disconnect(rdev, dev,
+					  WLAN_REASON_DEAUTH_LEAVING, false);
+>>>>>>> v3.18
 =======
 	if (wdev->conn) {
 		err = cfg80211_disconnect(rdev, dev,
@@ -489,7 +568,11 @@ int cfg80211_wext_siwmlme(struct net_device *dev,
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev = wiphy_to_dev(wdev->wiphy);
+=======
+	rdev = wiphy_to_rdev(wdev->wiphy);
+>>>>>>> v3.18
 =======
 	rdev = wiphy_to_rdev(wdev->wiphy);
 >>>>>>> v3.18
@@ -505,8 +588,12 @@ int cfg80211_wext_siwmlme(struct net_device *dev,
 	case IW_MLME_DEAUTH:
 	case IW_MLME_DISASSOC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = __cfg80211_disconnect(rdev, dev, mlme->reason_code,
 					    true);
+=======
+		err = cfg80211_disconnect(rdev, dev, mlme->reason_code, true);
+>>>>>>> v3.18
 =======
 		err = cfg80211_disconnect(rdev, dev, mlme->reason_code, true);
 >>>>>>> v3.18

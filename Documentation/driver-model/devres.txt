@@ -234,6 +234,7 @@ certainly invest a bit more effort into libata core layer).
   -----------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MEM
   devm_kzalloc()
   devm_kfree()
@@ -264,6 +265,8 @@ PCI
   pcim_enable_device()	: after success, all PCI ops become managed
   pcim_pin_device()	: keep PCI device enabled after release
 =======
+=======
+>>>>>>> v3.18
 CLOCK
   devm_clk_get()
   devm_clk_put()
@@ -299,6 +302,9 @@ IO region
   devm_request_mem_region()
   devm_request_region()
   devm_request_resource()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 IOMAP
@@ -306,6 +312,7 @@ IOMAP
   devm_ioport_unmap()
   devm_ioremap()
   devm_ioremap_nocache()
+<<<<<<< HEAD
 <<<<<<< HEAD
   devm_iounmap()
   devm_ioremap_resource() : checks resource, requests memory region, ioremaps
@@ -324,6 +331,8 @@ CLOCK
   devm_clk_get()
   devm_clk_put()
 =======
+=======
+>>>>>>> v3.18
   devm_ioremap_resource() : checks resource, requests memory region, ioremaps
   devm_iounmap()
   pcim_iomap()
@@ -362,6 +371,9 @@ PCI
 PHY
   devm_usb_get_phy()
   devm_usb_put_phy()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 PINCTRL
@@ -373,10 +385,13 @@ PWM
   devm_pwm_put()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 PHY
   devm_usb_get_phy()
   devm_usb_put_phy()
 =======
+=======
+>>>>>>> v3.18
 REGULATOR
   devm_regulator_bulk_get()
   devm_regulator_get()
@@ -388,4 +403,7 @@ SLAVE DMA ENGINE
 
 SPI
   devm_spi_register_master()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -18,6 +18,10 @@
 #include <linux/cpufreq.h>
 #include <linux/regulator/consumer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/gpio-davinci.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/gpio-davinci.h>
 >>>>>>> v3.18
@@ -33,7 +37,10 @@
 #include <mach/cpufreq.h>
 #include <mach/pm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/gpio-davinci.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -451,7 +458,11 @@ static struct clk_lookup da850_clks[] = {
 	CLK("i2c_davinci.1",	NULL,		&i2c0_clk),
 	CLK(NULL,		"timer0",	&timerp64_0_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLK("watchdog",		NULL,		&timerp64_1_clk),
+=======
+	CLK("davinci-wdt",	NULL,		&timerp64_1_clk),
+>>>>>>> v3.18
 =======
 	CLK("davinci-wdt",	NULL,		&timerp64_1_clk),
 >>>>>>> v3.18
@@ -463,9 +474,15 @@ static struct clk_lookup da850_clks[] = {
 	CLK(NULL,		"tptc2",	&tptc2_clk),
 	CLK("pruss_uio",	"pruss",	&pruss_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLK(NULL,		"uart0",	&uart0_clk),
 	CLK(NULL,		"uart1",	&uart1_clk),
 	CLK(NULL,		"uart2",	&uart2_clk),
+=======
+	CLK("serial8250.0",	NULL,		&uart0_clk),
+	CLK("serial8250.1",	NULL,		&uart1_clk),
+	CLK("serial8250.2",	NULL,		&uart2_clk),
+>>>>>>> v3.18
 =======
 	CLK("serial8250.0",	NULL,		&uart0_clk),
 	CLK("serial8250.1",	NULL,		&uart1_clk),
@@ -479,6 +496,10 @@ static struct clk_lookup da850_clks[] = {
 	CLK(NULL,		"rmii",		&rmii_clk),
 	CLK("davinci_emac.1",	NULL,		&emac_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CLK("davinci_mdio.0",	"fck",		&emac_clk),
+>>>>>>> v3.18
 =======
 	CLK("davinci_mdio.0",	"fck",		&emac_clk),
 >>>>>>> v3.18
@@ -493,7 +514,11 @@ static struct clk_lookup da850_clks[] = {
 	CLK("spi_davinci.1",	NULL,		&spi1_clk),
 	CLK("vpif",		NULL,		&vpif_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLK("ahci",		NULL,		&sata_clk),
+=======
+	CLK("ahci_da850",		NULL,		&sata_clk),
+>>>>>>> v3.18
 =======
 	CLK("ahci_da850",		NULL,		&sata_clk),
 >>>>>>> v3.18
@@ -1117,6 +1142,7 @@ int da850_register_cpufreq(char *async_clk)
 static int da850_round_armrate(struct clk *clk, unsigned long rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, ret = 0, diff;
 	unsigned int best = (unsigned int) -1;
 	struct cpufreq_frequency_table *table = cpufreq_info.freq_table;
@@ -1126,6 +1152,8 @@ static int da850_round_armrate(struct clk *clk, unsigned long rate)
 	for (i = 0; table[i].frequency != CPUFREQ_TABLE_END; i++) {
 		diff = table[i].frequency - rate;
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0, diff;
 	unsigned int best = (unsigned int) -1;
 	struct cpufreq_frequency_table *table = cpufreq_info.freq_table;
@@ -1135,6 +1163,9 @@ static int da850_round_armrate(struct clk *clk, unsigned long rate)
 
 	cpufreq_for_each_entry(pos, table) {
 		diff = pos->frequency - rate;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (diff < 0)
 			diff = -diff;
@@ -1142,7 +1173,11 @@ static int da850_round_armrate(struct clk *clk, unsigned long rate)
 		if (diff < best) {
 			best = diff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = table[i].frequency;
+=======
+			ret = pos->frequency;
+>>>>>>> v3.18
 =======
 			ret = pos->frequency;
 >>>>>>> v3.18
@@ -1322,7 +1357,10 @@ int __init da850_register_vpif_capture(struct vpif_capture_config
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct davinci_gpio_platform_data da850_gpio_platform_data = {
 	.ngpio = 144,
 };
@@ -1332,6 +1370,9 @@ int __init da850_register_gpio(void)
 	return da8xx_register_gpio(&da850_gpio_platform_data);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct davinci_soc_info davinci_soc_info_da850 = {
 	.io_desc		= da850_io_desc,
@@ -1351,11 +1392,14 @@ static struct davinci_soc_info davinci_soc_info_da850 = {
 	.intc_irq_num		= DA850_N_CP_INTC_IRQ,
 	.timer_info		= &da850_timer_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.gpio_type		= GPIO_TYPE_DAVINCI,
 	.gpio_base		= DA8XX_GPIO_BASE,
 	.gpio_num		= 144,
 	.gpio_irq		= IRQ_DA8XX_GPIO0,
 	.serial_dev		= &da8xx_serial_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.emac_pdata		= &da8xx_emac_pdata,

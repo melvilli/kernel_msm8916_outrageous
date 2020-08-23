@@ -27,7 +27,11 @@ static int minix_remount (struct super_block * sb, int * flags, char * data);
 static void minix_evict_inode(struct inode *inode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -91,7 +95,11 @@ static void init_once(void *foo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_inodecache(void)
+=======
+static int __init init_inodecache(void)
+>>>>>>> v3.18
 =======
 static int __init init_inodecache(void)
 >>>>>>> v3.18
@@ -132,6 +140,10 @@ static int minix_remount (struct super_block * sb, int * flags, char * data)
 	struct minix_super_block * ms;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -279,7 +291,11 @@ static int minix_fill_super(struct super_block *s, void *data, int silent)
 	if (sbi->s_imap_blocks < block) {
 		printk("MINIX-fs: file system does not have enough "
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"imap blocks allocated.  Refusing to mount\n");
+=======
+				"imap blocks allocated.  Refusing to mount.\n");
+>>>>>>> v3.18
 =======
 				"imap blocks allocated.  Refusing to mount.\n");
 >>>>>>> v3.18
@@ -288,7 +304,11 @@ static int minix_fill_super(struct super_block *s, void *data, int silent)
 
 	block = minix_blocks_needed(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(sbi->s_nzones - (sbi->s_firstdatazone + 1)),
+=======
+			(sbi->s_nzones - sbi->s_firstdatazone + 1),
+>>>>>>> v3.18
 =======
 			(sbi->s_nzones - sbi->s_firstdatazone + 1),
 >>>>>>> v3.18
@@ -421,7 +441,11 @@ static void minix_write_failed(struct address_space *mapping, loff_t to)
 
 	if (to > inode->i_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_pagecache(inode, to, inode->i_size);
+=======
+		truncate_pagecache(inode, inode->i_size);
+>>>>>>> v3.18
 =======
 		truncate_pagecache(inode, inode->i_size);
 >>>>>>> v3.18

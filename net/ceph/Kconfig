@@ -4,6 +4,10 @@ config CEPH_LIB
 	select LIBCRC32C
 	select CRYPTO_AES
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select CRYPTO_CBC
+>>>>>>> v3.18
 =======
 	select CRYPTO_CBC
 >>>>>>> v3.18

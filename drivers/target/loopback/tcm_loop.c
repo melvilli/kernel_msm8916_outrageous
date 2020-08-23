@@ -4,7 +4,11 @@
  * for emulated SAS initiator ports
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * © Copyright 2011 RisingTide Systems LLC.
+=======
+ * © Copyright 2011-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * © Copyright 2011-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -140,6 +144,7 @@ static int tcm_loop_change_queue_depth(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Locate the SAM Task Attr from struct scsi_cmnd *
  */
@@ -156,6 +161,8 @@ static int tcm_loop_sam_attr(struct scsi_cmnd *sc)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 static int tcm_loop_change_queue_type(struct scsi_device *sdev, int tag)
 {
 	if (sdev->tagged_supported) {
@@ -179,6 +186,9 @@ static int tcm_loop_sam_attr(struct scsi_cmnd *sc, int tag)
 	if (sc->device->tagged_supported &&
 	    sc->device->ordered_tags && tag >= 0)
 		return MSG_ORDERED_TAG;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return MSG_SIMPLE_TAG;
@@ -195,7 +205,11 @@ static void tcm_loop_submission_work(struct work_struct *work)
 	struct tcm_loop_tpg *tl_tpg;
 	struct scatterlist *sgl_bidi = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 sgl_bidi_count = 0;
+=======
+	u32 sgl_bidi_count = 0, transfer_length;
+>>>>>>> v3.18
 =======
 	u32 sgl_bidi_count = 0, transfer_length;
 >>>>>>> v3.18
@@ -213,14 +227,20 @@ static void tcm_loop_submission_work(struct work_struct *work)
 		goto out_done;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	tl_nexus = tl_tpg->tl_nexus;
 =======
+=======
+>>>>>>> v3.18
 	if (tl_tpg->tl_transport_status == TCM_TRANSPORT_OFFLINE) {
 		set_host_byte(sc, DID_TRANSPORT_DISRUPTED);
 		goto out_done;
 	}
 	tl_nexus = tl_hba->tl_nexus;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!tl_nexus) {
 		scmd_printk(KERN_ERR, sc, "TCM_Loop I_T Nexus"
@@ -237,6 +257,7 @@ static void tcm_loop_submission_work(struct work_struct *work)
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = target_submit_cmd_map_sgls(se_cmd, tl_nexus->se_sess, sc->cmnd,
 			&tl_cmd->tl_sense_buf[0], tl_cmd->sc->device->lun,
 			scsi_bufflen(sc), tcm_loop_sam_attr(sc),
@@ -244,6 +265,8 @@ static void tcm_loop_submission_work(struct work_struct *work)
 			scsi_sglist(sc), scsi_sg_count(sc),
 			sgl_bidi, sgl_bidi_count);
 =======
+=======
+>>>>>>> v3.18
 
 	transfer_length = scsi_transfer_length(sc);
 	if (!scsi_prot_sg_count(sc) &&
@@ -264,6 +287,9 @@ static void tcm_loop_submission_work(struct work_struct *work)
 			scsi_sglist(sc), scsi_sg_count(sc),
 			sgl_bidi, sgl_bidi_count,
 			scsi_prot_sglist(sc), scsi_prot_sg_count(sc));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc < 0) {
 		set_host_byte(sc, DID_NO_CONNECT);
@@ -273,6 +299,10 @@ static void tcm_loop_submission_work(struct work_struct *work)
 
 out_done:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kmem_cache_free(tcm_loop_cmd_cache, tl_cmd);
+>>>>>>> v3.18
 =======
 	kmem_cache_free(tcm_loop_cmd_cache, tl_cmd);
 >>>>>>> v3.18
@@ -289,7 +319,11 @@ static int tcm_loop_queuecommand(struct Scsi_Host *sh, struct scsi_cmnd *sc)
 	struct tcm_loop_cmd *tl_cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("tcm_loop_queuecommand() %d:%d:%d:%d got CDB: 0x%02x"
+=======
+	pr_debug("tcm_loop_queuecommand() %d:%d:%d:%llu got CDB: 0x%02x"
+>>>>>>> v3.18
 =======
 	pr_debug("tcm_loop_queuecommand() %d:%d:%d:%llu got CDB: 0x%02x"
 >>>>>>> v3.18
@@ -307,6 +341,10 @@ static int tcm_loop_queuecommand(struct Scsi_Host *sh, struct scsi_cmnd *sc)
 
 	tl_cmd->sc = sc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tl_cmd->sc_cmd_tag = sc->request->tag;
+>>>>>>> v3.18
 =======
 	tl_cmd->sc_cmd_tag = sc->request->tag;
 >>>>>>> v3.18
@@ -319,6 +357,7 @@ static int tcm_loop_queuecommand(struct Scsi_Host *sh, struct scsi_cmnd *sc)
  * Called from SCSI EH process context to issue a LUN_RESET TMR
  * to struct scsi_device
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int tcm_loop_device_reset(struct scsi_cmnd *sc)
 {
@@ -351,6 +390,8 @@ static int tcm_loop_device_reset(struct scsi_cmnd *sc)
 	}
 	se_sess = tl_nexus->se_sess;
 =======
+=======
+>>>>>>> v3.18
 static int tcm_loop_issue_tmr(struct tcm_loop_tpg *tl_tpg,
 			      struct tcm_loop_nexus *tl_nexus,
 			      int lun, int task, enum tcm_tmreq_table tmr)
@@ -361,13 +402,20 @@ static int tcm_loop_issue_tmr(struct tcm_loop_tpg *tl_tpg,
 	struct tcm_loop_cmd *tl_cmd = NULL;
 	struct tcm_loop_tmr *tl_tmr = NULL;
 	int ret = TMR_FUNCTION_FAILED, rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tl_cmd = kmem_cache_zalloc(tcm_loop_cmd_cache, GFP_KERNEL);
 	if (!tl_cmd) {
 		pr_err("Unable to allocate memory for tl_cmd\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return FAILED;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -382,6 +430,11 @@ static int tcm_loop_issue_tmr(struct tcm_loop_tpg *tl_tpg,
 
 	se_cmd = &tl_cmd->tl_se_cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	se_tpg = &tl_tpg->tl_se_tpg;
+	se_sess = tl_nexus->se_sess;
+>>>>>>> v3.18
 =======
 	se_tpg = &tl_tpg->tl_se_tpg;
 	se_sess = tl_nexus->se_sess;
@@ -393,6 +446,7 @@ static int tcm_loop_issue_tmr(struct tcm_loop_tpg *tl_tpg,
 				DMA_NONE, MSG_SIMPLE_TAG,
 				&tl_cmd->tl_sense_buf[0]);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = core_tmr_alloc_req(se_cmd, tl_tmr, TMR_LUN_RESET, GFP_KERNEL);
 	if (rc < 0)
@@ -406,6 +460,8 @@ static int tcm_loop_issue_tmr(struct tcm_loop_tpg *tl_tpg,
 	 * Queue the TMR to TCM Core and sleep waiting for tcm_loop_queue_tm_rsp()
 	 * to wake us up.
 =======
+=======
+>>>>>>> v3.18
 	rc = core_tmr_alloc_req(se_cmd, tl_tmr, tmr, GFP_KERNEL);
 	if (rc < 0)
 		goto release;
@@ -423,6 +479,9 @@ static int tcm_loop_issue_tmr(struct tcm_loop_tpg *tl_tpg,
 	/*
 	 * Queue the TMR to TCM Core and sleep waiting for
 	 * tcm_loop_queue_tm_rsp() to wake us up.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	transport_generic_handle_tmr(se_cmd);
@@ -432,8 +491,12 @@ static int tcm_loop_issue_tmr(struct tcm_loop_tpg *tl_tpg,
 	 * then release allocations.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = (se_cmd->se_tmr_req->response == TMR_FUNCTION_COMPLETE) ?
 		SUCCESS : FAILED;
+=======
+	ret = se_cmd->se_tmr_req->response;
+>>>>>>> v3.18
 =======
 	ret = se_cmd->se_tmr_req->response;
 >>>>>>> v3.18
@@ -447,7 +510,10 @@ release:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int tcm_loop_abort_task(struct scsi_cmnd *sc)
 {
 	struct tcm_loop_hba *tl_hba;
@@ -536,6 +602,9 @@ static int tcm_loop_target_reset(struct scsi_cmnd *sc)
 	return FAILED;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int tcm_loop_slave_alloc(struct scsi_device *sd)
 {
@@ -546,7 +615,10 @@ static int tcm_loop_slave_alloc(struct scsi_device *sd)
 static int tcm_loop_slave_configure(struct scsi_device *sd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (sd->tagged_supported) {
 		scsi_activate_tcq(sd, sd->queue_depth);
 		scsi_adjust_queue_depth(sd, MSG_SIMPLE_TAG,
@@ -556,6 +628,9 @@ static int tcm_loop_slave_configure(struct scsi_device *sd)
 					sd->host->cmd_per_lun);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -567,12 +642,18 @@ static struct scsi_host_template tcm_loop_driver_template = {
 	.queuecommand		= tcm_loop_queuecommand,
 	.change_queue_depth	= tcm_loop_change_queue_depth,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.eh_device_reset_handler = tcm_loop_device_reset,
 =======
+=======
+>>>>>>> v3.18
 	.change_queue_type	= tcm_loop_change_queue_type,
 	.eh_abort_handler = tcm_loop_abort_task,
 	.eh_device_reset_handler = tcm_loop_device_reset,
 	.eh_target_reset_handler = tcm_loop_target_reset,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.can_queue		= 1024,
 	.this_id		= -1,
@@ -590,7 +671,11 @@ static int tcm_loop_driver_probe(struct device *dev)
 	struct tcm_loop_hba *tl_hba;
 	struct Scsi_Host *sh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int error;
+=======
+	int error, host_prot;
+>>>>>>> v3.18
 =======
 	int error, host_prot;
 >>>>>>> v3.18
@@ -618,7 +703,10 @@ static int tcm_loop_driver_probe(struct device *dev)
 	sh->max_cmd_len = TL_SCSI_MAX_CMD_LEN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	host_prot = SHOST_DIF_TYPE1_PROTECTION | SHOST_DIF_TYPE2_PROTECTION |
 		    SHOST_DIF_TYPE3_PROTECTION | SHOST_DIX_TYPE1_PROTECTION |
 		    SHOST_DIX_TYPE2_PROTECTION | SHOST_DIX_TYPE3_PROTECTION;
@@ -626,6 +714,9 @@ static int tcm_loop_driver_probe(struct device *dev)
 	scsi_host_set_prot(sh, host_prot);
 	scsi_host_set_guard(sh, SHOST_DIX_GUARD_CRC);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	error = scsi_add_host(sh, &tl_hba->dev);
 	if (error) {
@@ -947,12 +1038,18 @@ static void tcm_loop_set_default_node_attributes(struct se_node_acl *se_acl)
 static u32 tcm_loop_get_task_tag(struct se_cmd *se_cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 	struct tcm_loop_cmd *tl_cmd = container_of(se_cmd,
 			struct tcm_loop_cmd, tl_se_cmd);
 
 	return tl_cmd->sc_cmd_tag;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1041,7 +1138,11 @@ static int tcm_loop_queue_status(struct se_cmd *se_cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tcm_loop_queue_tm_rsp(struct se_cmd *se_cmd)
+=======
+static void tcm_loop_queue_tm_rsp(struct se_cmd *se_cmd)
+>>>>>>> v3.18
 =======
 static void tcm_loop_queue_tm_rsp(struct se_cmd *se_cmd)
 >>>>>>> v3.18
@@ -1055,13 +1156,19 @@ static void tcm_loop_queue_tm_rsp(struct se_cmd *se_cmd)
 	atomic_set(&tl_tmr->tmr_complete, 1);
 	wake_up(&tl_tmr->tl_tmr_wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void tcm_loop_aborted_task(struct se_cmd *se_cmd)
 {
 	return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1092,8 +1199,12 @@ static int tcm_loop_port_link(
 	struct tcm_loop_hba *tl_hba = tl_tpg->tl_hba;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_inc(&tl_tpg->tl_tpg_port_count);
 	smp_mb__after_atomic();
+=======
+	atomic_inc_mb(&tl_tpg->tl_tpg_port_count);
+>>>>>>> v3.18
 =======
 	atomic_inc_mb(&tl_tpg->tl_tpg_port_count);
 >>>>>>> v3.18
@@ -1131,8 +1242,12 @@ static void tcm_loop_port_unlink(
 	scsi_device_put(sd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_dec(&tl_tpg->tl_tpg_port_count);
 	smp_mb__after_atomic();
+=======
+	atomic_dec_mb(&tl_tpg->tl_tpg_port_count);
+>>>>>>> v3.18
 =======
 	atomic_dec_mb(&tl_tpg->tl_tpg_port_count);
 >>>>>>> v3.18
@@ -1154,8 +1269,13 @@ static int tcm_loop_make_nexus(
 	int ret = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tl_tpg->tl_nexus) {
 		pr_debug("tl_tpg->tl_nexus already exists\n");
+=======
+	if (tl_tpg->tl_hba->tl_nexus) {
+		pr_debug("tl_tpg->tl_hba->tl_nexus already exists\n");
+>>>>>>> v3.18
 =======
 	if (tl_tpg->tl_hba->tl_nexus) {
 		pr_debug("tl_tpg->tl_hba->tl_nexus already exists\n");
@@ -1173,7 +1293,11 @@ static int tcm_loop_make_nexus(
 	 * Initialize the struct se_session pointer
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tl_nexus->se_sess = transport_init_session();
+=======
+	tl_nexus->se_sess = transport_init_session(TARGET_PROT_ALL);
+>>>>>>> v3.18
 =======
 	tl_nexus->se_sess = transport_init_session(TARGET_PROT_ALL);
 >>>>>>> v3.18
@@ -1199,7 +1323,11 @@ static int tcm_loop_make_nexus(
 	__transport_register_session(se_tpg, tl_nexus->se_sess->se_node_acl,
 			tl_nexus->se_sess, tl_nexus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tl_tpg->tl_nexus = tl_nexus;
+=======
+	tl_tpg->tl_hba->tl_nexus = tl_nexus;
+>>>>>>> v3.18
 =======
 	tl_tpg->tl_hba->tl_nexus = tl_nexus;
 >>>>>>> v3.18
@@ -1219,15 +1347,21 @@ static int tcm_loop_drop_nexus(
 	struct se_session *se_sess;
 	struct tcm_loop_nexus *tl_nexus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	tl_nexus = tpg->tl_nexus;
 =======
+=======
+>>>>>>> v3.18
 	struct tcm_loop_hba *tl_hba = tpg->tl_hba;
 
 	if (!tl_hba)
 		return -ENODEV;
 
 	tl_nexus = tl_hba->tl_nexus;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!tl_nexus)
 		return -ENODEV;
@@ -1245,7 +1379,11 @@ static int tcm_loop_drop_nexus(
 
 	pr_debug("TCM_Loop_ConfigFS: Removing I_T Nexus to emulated"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		" %s Initiator Port: %s\n", tcm_loop_dump_proto_id(tpg->tl_hba),
+=======
+		" %s Initiator Port: %s\n", tcm_loop_dump_proto_id(tl_hba),
+>>>>>>> v3.18
 =======
 		" %s Initiator Port: %s\n", tcm_loop_dump_proto_id(tl_hba),
 >>>>>>> v3.18
@@ -1255,7 +1393,11 @@ static int tcm_loop_drop_nexus(
 	 */
 	transport_deregister_session(tl_nexus->se_sess);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tpg->tl_nexus = NULL;
+=======
+	tpg->tl_hba->tl_nexus = NULL;
+>>>>>>> v3.18
 =======
 	tpg->tl_hba->tl_nexus = NULL;
 >>>>>>> v3.18
@@ -1275,7 +1417,11 @@ static ssize_t tcm_loop_tpg_show_nexus(
 	ssize_t ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tl_nexus = tl_tpg->tl_nexus;
+=======
+	tl_nexus = tl_tpg->tl_hba->tl_nexus;
+>>>>>>> v3.18
 =======
 	tl_nexus = tl_tpg->tl_hba->tl_nexus;
 >>>>>>> v3.18
@@ -1370,9 +1516,12 @@ check_newline:
 TF_TPG_BASE_ATTR(tcm_loop, nexus, S_IRUGO | S_IWUSR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct configfs_attribute *tcm_loop_tpg_attrs[] = {
 	&tcm_loop_tpg_nexus.attr,
 =======
+=======
+>>>>>>> v3.18
 static ssize_t tcm_loop_tpg_show_transport_status(
 	struct se_portal_group *se_tpg,
 	char *page)
@@ -1423,6 +1572,9 @@ TF_TPG_BASE_ATTR(tcm_loop, transport_status, S_IRUGO | S_IWUSR);
 static struct configfs_attribute *tcm_loop_tpg_attrs[] = {
 	&tcm_loop_tpg_nexus.attr,
 	&tcm_loop_tpg_transport_status.attr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NULL,
 };
@@ -1430,7 +1582,11 @@ static struct configfs_attribute *tcm_loop_tpg_attrs[] = {
 /* Start items for tcm_loop_naa_cit */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct se_portal_group *tcm_loop_make_naa_tpg(
+=======
+static struct se_portal_group *tcm_loop_make_naa_tpg(
+>>>>>>> v3.18
 =======
 static struct se_portal_group *tcm_loop_make_naa_tpg(
 >>>>>>> v3.18
@@ -1479,7 +1635,11 @@ static struct se_portal_group *tcm_loop_make_naa_tpg(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tcm_loop_drop_naa_tpg(
+=======
+static void tcm_loop_drop_naa_tpg(
+>>>>>>> v3.18
 =======
 static void tcm_loop_drop_naa_tpg(
 >>>>>>> v3.18
@@ -1515,7 +1675,11 @@ static void tcm_loop_drop_naa_tpg(
 /* Start items for tcm_loop_cit */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct se_wwn *tcm_loop_make_scsi_hba(
+=======
+static struct se_wwn *tcm_loop_make_scsi_hba(
+>>>>>>> v3.18
 =======
 static struct se_wwn *tcm_loop_make_scsi_hba(
 >>>>>>> v3.18
@@ -1589,7 +1753,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tcm_loop_drop_scsi_hba(
+=======
+static void tcm_loop_drop_scsi_hba(
+>>>>>>> v3.18
 =======
 static void tcm_loop_drop_scsi_hba(
 >>>>>>> v3.18
@@ -1693,6 +1861,10 @@ static int tcm_loop_register_configfs(void)
 	fabric->tf_ops.queue_status = &tcm_loop_queue_status;
 	fabric->tf_ops.queue_tm_rsp = &tcm_loop_queue_tm_rsp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fabric->tf_ops.aborted_task = &tcm_loop_aborted_task;
+>>>>>>> v3.18
 =======
 	fabric->tf_ops.aborted_task = &tcm_loop_aborted_task;
 >>>>>>> v3.18
@@ -1716,17 +1888,23 @@ static int tcm_loop_register_configfs(void)
 	 * Setup default attribute lists for various fabric->tf_cit_tmpl
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TF_CIT_TMPL(fabric)->tfc_wwn_cit.ct_attrs = tcm_loop_wwn_attrs;
 	TF_CIT_TMPL(fabric)->tfc_tpg_base_cit.ct_attrs = tcm_loop_tpg_attrs;
 	TF_CIT_TMPL(fabric)->tfc_tpg_attrib_cit.ct_attrs = NULL;
 	TF_CIT_TMPL(fabric)->tfc_tpg_param_cit.ct_attrs = NULL;
 	TF_CIT_TMPL(fabric)->tfc_tpg_np_base_cit.ct_attrs = NULL;
 =======
+=======
+>>>>>>> v3.18
 	fabric->tf_cit_tmpl.tfc_wwn_cit.ct_attrs = tcm_loop_wwn_attrs;
 	fabric->tf_cit_tmpl.tfc_tpg_base_cit.ct_attrs = tcm_loop_tpg_attrs;
 	fabric->tf_cit_tmpl.tfc_tpg_attrib_cit.ct_attrs = NULL;
 	fabric->tf_cit_tmpl.tfc_tpg_param_cit.ct_attrs = NULL;
 	fabric->tf_cit_tmpl.tfc_tpg_np_base_cit.ct_attrs = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Once fabric->tf_ops has been setup, now register the fabric for

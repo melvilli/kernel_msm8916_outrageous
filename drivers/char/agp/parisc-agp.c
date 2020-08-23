@@ -336,7 +336,11 @@ parisc_agp_setup(void __iomem *ioc_hpa, void __iomem *lba_hpa)
 	int error = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fake_bridge_dev = alloc_pci_dev();
+=======
+	fake_bridge_dev = pci_alloc_dev(NULL);
+>>>>>>> v3.18
 =======
 	fake_bridge_dev = pci_alloc_dev(NULL);
 >>>>>>> v3.18

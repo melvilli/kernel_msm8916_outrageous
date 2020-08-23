@@ -38,9 +38,12 @@
 	void __iomem *base
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BOARD_NORMAL	0
 #define BOARD_NCR53C400	1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "../NCR5380.h"

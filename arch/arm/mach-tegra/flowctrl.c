@@ -19,6 +19,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/io.h>
@@ -28,6 +29,8 @@
 #include "iomap.h"
 #include "fuse.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/cpumask.h>
 #include <linux/init.h>
 #include <linux/io.h>
@@ -38,6 +41,9 @@
 #include <soc/tegra/fuse.h>
 
 #include "flowctrl.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static u8 flowctrl_offset_halt_cpu[] = {
@@ -55,6 +61,7 @@ static u8 flowctrl_offset_cpu_csr[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void flowctrl_update(u8 offset, u32 value)
 {
 	void __iomem *addr = IO_ADDRESS(TEGRA_FLOW_CTRL_BASE) + offset;
@@ -65,6 +72,8 @@ static void flowctrl_update(u8 offset, u32 value)
 	wmb();
 	readl_relaxed(addr);
 =======
+=======
+>>>>>>> v3.18
 static void __iomem *tegra_flowctrl_base;
 
 static void flowctrl_update(u8 offset, u32 value)
@@ -74,6 +83,9 @@ static void flowctrl_update(u8 offset, u32 value)
 	/* ensure the update has reached the flow controller */
 	wmb();
 	readl_relaxed(tegra_flowctrl_base + offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -81,9 +93,14 @@ u32 flowctrl_read_cpu_csr(unsigned int cpuid)
 {
 	u8 offset = flowctrl_offset_cpu_csr[cpuid];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *addr = IO_ADDRESS(TEGRA_FLOW_CTRL_BASE) + offset;
 
 	return readl(addr);
+=======
+
+	return readl(tegra_flowctrl_base + offset);
+>>>>>>> v3.18
 =======
 
 	return readl(tegra_flowctrl_base + offset);
@@ -107,7 +124,11 @@ void flowctrl_cpu_suspend_enter(unsigned int cpuid)
 
 	reg = flowctrl_read_cpu_csr(cpuid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (tegra_chip_id) {
+=======
+	switch (tegra_get_chip_id()) {
+>>>>>>> v3.18
 =======
 	switch (tegra_get_chip_id()) {
 >>>>>>> v3.18
@@ -121,6 +142,11 @@ void flowctrl_cpu_suspend_enter(unsigned int cpuid)
 		break;
 	case TEGRA30:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case TEGRA114:
+	case TEGRA124:
+>>>>>>> v3.18
 =======
 	case TEGRA114:
 	case TEGRA124:
@@ -155,7 +181,11 @@ void flowctrl_cpu_suspend_exit(unsigned int cpuid)
 	/* Disable powergating via flow controller for CPU0 */
 	reg = flowctrl_read_cpu_csr(cpuid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (tegra_chip_id) {
+=======
+	switch (tegra_get_chip_id()) {
+>>>>>>> v3.18
 =======
 	switch (tegra_get_chip_id()) {
 >>>>>>> v3.18
@@ -167,6 +197,11 @@ void flowctrl_cpu_suspend_exit(unsigned int cpuid)
 		break;
 	case TEGRA30:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case TEGRA114:
+	case TEGRA124:
+>>>>>>> v3.18
 =======
 	case TEGRA114:
 	case TEGRA124:
@@ -183,7 +218,10 @@ void flowctrl_cpu_suspend_exit(unsigned int cpuid)
 	flowctrl_write_cpu_csr(cpuid, reg);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static const struct of_device_id matches[] __initconst = {
 	{ .compatible = "nvidia,tegra124-flowctrl" },
@@ -214,4 +252,7 @@ void __init tegra_flowctrl_init(void)
 
 	tegra_flowctrl_base = ioremap_nocache(base, size);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -47,9 +47,12 @@
 #include <linux/cpumask.h>
 #include <asm/r4kcache.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern struct plat_smp_ops bmips_smp_ops;
 =======
+=======
+>>>>>>> v3.18
 #include <asm/smp-ops.h>
 
 extern struct plat_smp_ops bmips43xx_smp_ops;
@@ -79,6 +82,9 @@ static inline int register_bmips_smp_ops(void)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern char bmips_reset_nmi_vec;
 extern char bmips_reset_nmi_vec_end;
@@ -97,6 +103,7 @@ static inline unsigned long bmips_read_zscm_reg(unsigned int offset)
 {
 	unsigned long ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__asm__ __volatile__(
 		".set push\n"
@@ -117,6 +124,8 @@ static inline unsigned long bmips_read_zscm_reg(unsigned int offset)
 		: "i" (Index_Load_Tag_S), "r" (ZSCM_REG_BASE + offset)
 		: "memory");
 =======
+=======
+>>>>>>> v3.18
 	barrier();
 	cache_op(Index_Load_Tag_S, ZSCM_REG_BASE + offset);
 	__sync();
@@ -130,12 +139,16 @@ static inline unsigned long bmips_read_zscm_reg(unsigned int offset)
 	ret = read_c0_ddatalo();
 	_ssnop();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
 
 static inline void bmips_write_zscm_reg(unsigned int offset, unsigned long data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__asm__ __volatile__(
 		".set push\n"
@@ -153,6 +166,8 @@ static inline void bmips_write_zscm_reg(unsigned int offset, unsigned long data)
 		  "i" (Index_Store_Tag_S), "r" (ZSCM_REG_BASE + offset)
 		: "memory");
 =======
+=======
+>>>>>>> v3.18
 	write_c0_ddatalo(data);
 	_ssnop();
 	_ssnop();
@@ -162,6 +177,9 @@ static inline void bmips_write_zscm_reg(unsigned int offset, unsigned long data)
 	_ssnop();
 	_ssnop();
 	barrier();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

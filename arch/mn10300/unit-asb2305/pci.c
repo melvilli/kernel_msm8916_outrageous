@@ -25,7 +25,10 @@
 unsigned int pci_probe = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pcibios_last_bus = -1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct pci_ops *pci_root_ops;
@@ -396,10 +399,13 @@ char *__init pcibios_setup(char *str)
 		pci_probe = 0;
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	} else if (!strncmp(str, "lastbus=", 8)) {
 		pcibios_last_bus = simple_strtol(str+8, NULL, 0);
 		return NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

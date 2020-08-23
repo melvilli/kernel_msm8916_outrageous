@@ -217,6 +217,10 @@ static void r8712_usb_read_port_complete(struct urb *purb)
 			} else {
 				_pkt *pskb = precvbuf->pskb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -387,7 +391,12 @@ static void usb_write_port_complete(struct urb *purb)
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netdev_warn(padapter->pnetdev, "r8712u: pipe error: (%d)\n", purb->status);
+=======
+		netdev_warn(padapter->pnetdev,
+				"r8712u: pipe error: (%d)\n", purb->status);
+>>>>>>> v3.18
 =======
 		netdev_warn(padapter->pnetdev,
 				"r8712u: pipe error: (%d)\n", purb->status);
@@ -505,12 +514,18 @@ int r8712_usbctrl_vendorreq(struct intf_priv *pintfpriv, u8 request, u16 value,
 	u8 *palloc_buf, *pIo_buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	palloc_buf = _malloc((u32) len + 16);
 	if (palloc_buf == NULL) {
 		dev_err(&udev->dev, "%s: Can't alloc memory for vendor request\n",
 			__func__);
 		return -1;
 	}
+=======
+	palloc_buf = kmalloc((u32)len + 16, GFP_ATOMIC);
+	if (palloc_buf == NULL)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	palloc_buf = kmalloc((u32)len + 16, GFP_ATOMIC);
 	if (palloc_buf == NULL)

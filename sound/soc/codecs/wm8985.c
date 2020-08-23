@@ -227,6 +227,7 @@ static const DECLARE_TLV_DB_SCALE(pga_boost_tlv, 0, 2000, 0);
 
 static const char *alc_sel_text[] = { "Off", "Right", "Left", "Stereo" };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const SOC_ENUM_SINGLE_DECL(alc_sel, WM8985_ALC_CONTROL_1, 7,
 				  alc_sel_text);
 
@@ -242,6 +243,8 @@ static const char *eq_bw_text[] = { "Narrow", "Wide" };
 static const char *eqmode_text[] = { "Capture", "Playback" };
 static const SOC_ENUM_SINGLE_EXT_DECL(eqmode, eqmode_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(alc_sel, WM8985_ALC_CONTROL_1, 7, alc_sel_text);
 
 static const char *alc_mode_text[] = { "ALC", "Limiter" };
@@ -254,11 +257,15 @@ static SOC_ENUM_SINGLE_DECL(filter_mode, WM8985_ADC_CONTROL, 7,
 static const char *eq_bw_text[] = { "Narrow", "Wide" };
 static const char *eqmode_text[] = { "Capture", "Playback" };
 static SOC_ENUM_SINGLE_EXT_DECL(eqmode, eqmode_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char *eq1_cutoff_text[] = {
 	"80Hz", "105Hz", "135Hz", "175Hz"
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const SOC_ENUM_SINGLE_DECL(eq1_cutoff, WM8985_EQ1_LOW_SHELF, 5,
 				  eq1_cutoff_text);
@@ -289,6 +296,8 @@ static const SOC_ENUM_SINGLE_DECL(eq5_cutoff, WM8985_EQ5_HIGH_SHELF, 5,
 static const char *speaker_mode_text[] = { "Class A/B", "Class D" };
 static const SOC_ENUM_SINGLE_DECL(speaker_mode, 0x17, 8, speaker_mode_text);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(eq1_cutoff, WM8985_EQ1_LOW_SHELF, 5,
 			    eq1_cutoff_text);
 static const char *eq2_cutoff_text[] = {
@@ -315,6 +324,9 @@ static SOC_ENUM_SINGLE_DECL(eq5_cutoff, WM8985_EQ5_HIGH_SHELF, 5,
 
 static const char *speaker_mode_text[] = { "Class A/B", "Class D" };
 static SOC_ENUM_SINGLE_DECL(speaker_mode, 0x17, 8, speaker_mode_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const char *depth_3d_text[] = {
@@ -336,8 +348,12 @@ static const char *depth_3d_text[] = {
 	"100%"
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const SOC_ENUM_SINGLE_DECL(depth_3d, WM8985_3D_CONTROL, 0,
 				  depth_3d_text);
+=======
+static SOC_ENUM_SINGLE_DECL(depth_3d, WM8985_3D_CONTROL, 0, depth_3d_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(depth_3d, WM8985_3D_CONTROL, 0, depth_3d_text);
 >>>>>>> v3.18
@@ -580,7 +596,11 @@ static int eqmode_get(struct snd_kcontrol *kcontrol,
 		      struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -599,7 +619,11 @@ static int eqmode_put(struct snd_kcontrol *kcontrol,
 		      struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -760,6 +784,7 @@ static int wm8985_hw_params(struct snd_pcm_substream *substream,
 		return wm8985->bclk;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		blen = 0x0;
@@ -772,6 +797,8 @@ static int wm8985_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		blen = 0x0;
@@ -783,13 +810,20 @@ static int wm8985_hw_params(struct snd_pcm_substream *substream,
 		blen = 0x2;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		blen = 0x3;
 		break;
 	default:
 		dev_err(dai->dev, "Unsupported word length %u\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			params_format(params));
+=======
+			params_width(params));
+>>>>>>> v3.18
 =======
 			params_width(params));
 >>>>>>> v3.18
@@ -1060,11 +1094,15 @@ static int wm8985_resume(struct snd_soc_codec *codec)
 static int wm8985_remove(struct snd_soc_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm8985_priv *wm8985;
 
 	wm8985 = snd_soc_codec_get_drvdata(codec);
 	wm8985_set_bias_level(codec, SND_SOC_BIAS_OFF);
 	regulator_bulk_free(ARRAY_SIZE(wm8985->supplies), wm8985->supplies);
+=======
+	wm8985_set_bias_level(codec, SND_SOC_BIAS_OFF);
+>>>>>>> v3.18
 =======
 	wm8985_set_bias_level(codec, SND_SOC_BIAS_OFF);
 >>>>>>> v3.18
@@ -1079,6 +1117,7 @@ static int wm8985_probe(struct snd_soc_codec *codec)
 
 	wm8985 = snd_soc_codec_get_drvdata(codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->control_data = wm8985->regmap;
 
 	ret = snd_soc_codec_set_cache_io(codec, 7, 9, SND_SOC_REGMAP);
@@ -1088,12 +1127,18 @@ static int wm8985_probe(struct snd_soc_codec *codec)
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(wm8985->supplies); i++)
 		wm8985->supplies[i].supply = wm8985_supply_names[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = regulator_bulk_get(codec->dev, ARRAY_SIZE(wm8985->supplies),
+=======
+	ret = devm_regulator_bulk_get(codec->dev, ARRAY_SIZE(wm8985->supplies),
+>>>>>>> v3.18
 =======
 	ret = devm_regulator_bulk_get(codec->dev, ARRAY_SIZE(wm8985->supplies),
 >>>>>>> v3.18
@@ -1108,7 +1153,11 @@ static int wm8985_probe(struct snd_soc_codec *codec)
 	if (ret) {
 		dev_err(codec->dev, "Failed to enable supplies: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_reg_get;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -1134,8 +1183,11 @@ static int wm8985_probe(struct snd_soc_codec *codec)
 err_reg_enable:
 	regulator_bulk_disable(ARRAY_SIZE(wm8985->supplies), wm8985->supplies);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_reg_get:
 	regulator_bulk_free(ARRAY_SIZE(wm8985->supplies), wm8985->supplies);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1241,7 +1293,11 @@ static struct spi_driver wm8985_spi_driver = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -1298,7 +1354,11 @@ static int __init wm8985_modinit(void)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -1322,7 +1382,11 @@ module_init(wm8985_modinit);
 static void __exit wm8985_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18

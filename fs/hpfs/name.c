@@ -57,6 +57,7 @@ unsigned char *hpfs_translate_name(struct super_block *s, unsigned char *from,
 	int i;
 	if (hpfs_sb(s)->sb_chk >= 2) if (hpfs_is_name_long(from, len) != lng) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("HPFS: Long name flag mismatch - name ");
 		for (i=0; i<len; i++) printk("%c", from[i]);
 		printk(" misidentified as %s.\n", lng ? "short" : "long");
@@ -66,6 +67,8 @@ unsigned char *hpfs_translate_name(struct super_block *s, unsigned char *from,
 	if (!(to = kmalloc(len, GFP_KERNEL))) {
 		printk("HPFS: can't allocate memory for name conversion buffer\n");
 =======
+=======
+>>>>>>> v3.18
 		pr_err("Long name flag mismatch - name ");
 		for (i = 0; i < len; i++)
 			pr_cont("%c", from[i]);
@@ -75,6 +78,9 @@ unsigned char *hpfs_translate_name(struct super_block *s, unsigned char *from,
 	if (!lc) return from;
 	if (!(to = kmalloc(len, GFP_KERNEL))) {
 		pr_err("can't allocate memory for name conversion buffer\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return from;
 	}

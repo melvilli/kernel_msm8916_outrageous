@@ -7,7 +7,11 @@ config VSOCKETS
 	help
 	  Virtual Socket Protocol is a socket protocol similar to TCP/IP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  allowing comunication between Virtual Machines and hypervisor
+=======
+	  allowing communication between Virtual Machines and hypervisor
+>>>>>>> v3.18
 =======
 	  allowing communication between Virtual Machines and hypervisor
 >>>>>>> v3.18

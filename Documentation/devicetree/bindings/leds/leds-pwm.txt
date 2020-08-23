@@ -14,6 +14,11 @@ LED sub-node properties:
   Documentation/devicetree/bindings/pwm/pwm.txt
 - max-brightness : Maximum brightness possible for the LED
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- active-low : (optional) For PWMs where the LED is wired to supply
+  rather than ground.
+>>>>>>> v3.18
 =======
 - active-low : (optional) For PWMs where the LED is wired to supply
   rather than ground.

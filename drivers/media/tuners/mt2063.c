@@ -2,7 +2,11 @@
  * Driver for mt2063 Micronas tuner
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2011 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (c) 2011 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (c) 2011 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -1200,7 +1204,11 @@ static u32 mt2063_set_dnc_output_enable(struct mt2063_state *state,
  *
  * @state:	ptr to mt2063_state structure
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @Mode:	desired reciever delivery system
+=======
+ * @Mode:	desired receiver delivery system
+>>>>>>> v3.18
 =======
  * @Mode:	desired receiver delivery system
 >>>>>>> v3.18
@@ -1225,7 +1233,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 		val =
 		    (state->
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     reg[MT2063_REG_PD1_TGT] & (u8) ~0x40) | (RFAGCEN[Mode]
+=======
+		     reg[MT2063_REG_PD1_TGT] & ~0x40) | (RFAGCEN[Mode]
+>>>>>>> v3.18
 =======
 		     reg[MT2063_REG_PD1_TGT] & ~0x40) | (RFAGCEN[Mode]
 >>>>>>> v3.18
@@ -1238,7 +1250,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 	/* LNARin */
 	if (status >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8 val = (state->reg[MT2063_REG_CTRL_2C] & (u8) ~0x03) |
+=======
+		u8 val = (state->reg[MT2063_REG_CTRL_2C] & ~0x03) |
+>>>>>>> v3.18
 =======
 		u8 val = (state->reg[MT2063_REG_CTRL_2C] & ~0x03) |
 >>>>>>> v3.18
@@ -1252,7 +1268,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 		val =
 		    (state->
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     reg[MT2063_REG_FIFF_CTRL2] & (u8) ~0xF0) |
+=======
+		     reg[MT2063_REG_FIFF_CTRL2] & ~0xF0) |
+>>>>>>> v3.18
 =======
 		     reg[MT2063_REG_FIFF_CTRL2] & ~0xF0) |
 >>>>>>> v3.18
@@ -1263,7 +1283,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 			/* trigger FIFF calibration, needed after changing FIFFQ */
 			val =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    (state->reg[MT2063_REG_FIFF_CTRL] | (u8) 0x01);
+=======
+			    (state->reg[MT2063_REG_FIFF_CTRL] | 0x01);
+>>>>>>> v3.18
 =======
 			    (state->reg[MT2063_REG_FIFF_CTRL] | 0x01);
 >>>>>>> v3.18
@@ -1272,7 +1296,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 			val =
 			    (state->
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     reg[MT2063_REG_FIFF_CTRL] & (u8) ~0x01);
+=======
+			     reg[MT2063_REG_FIFF_CTRL] & ~0x01);
+>>>>>>> v3.18
 =======
 			     reg[MT2063_REG_FIFF_CTRL] & ~0x01);
 >>>>>>> v3.18
@@ -1288,7 +1316,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 	/* acLNAmax */
 	if (status >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8 val = (state->reg[MT2063_REG_LNA_OV] & (u8) ~0x1F) |
+=======
+		u8 val = (state->reg[MT2063_REG_LNA_OV] & ~0x1F) |
+>>>>>>> v3.18
 =======
 		u8 val = (state->reg[MT2063_REG_LNA_OV] & ~0x1F) |
 >>>>>>> v3.18
@@ -1300,7 +1332,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 	/* LNATGT */
 	if (status >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8 val = (state->reg[MT2063_REG_LNA_TGT] & (u8) ~0x3F) |
+=======
+		u8 val = (state->reg[MT2063_REG_LNA_TGT] & ~0x3F) |
+>>>>>>> v3.18
 =======
 		u8 val = (state->reg[MT2063_REG_LNA_TGT] & ~0x3F) |
 >>>>>>> v3.18
@@ -1312,7 +1348,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 	/* ACRF */
 	if (status >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8 val = (state->reg[MT2063_REG_RF_OV] & (u8) ~0x1F) |
+=======
+		u8 val = (state->reg[MT2063_REG_RF_OV] & ~0x1F) |
+>>>>>>> v3.18
 =======
 		u8 val = (state->reg[MT2063_REG_RF_OV] & ~0x1F) |
 >>>>>>> v3.18
@@ -1324,7 +1364,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 	/* PD1TGT */
 	if (status >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8 val = (state->reg[MT2063_REG_PD1_TGT] & (u8) ~0x3F) |
+=======
+		u8 val = (state->reg[MT2063_REG_PD1_TGT] & ~0x3F) |
+>>>>>>> v3.18
 =======
 		u8 val = (state->reg[MT2063_REG_PD1_TGT] & ~0x3F) |
 >>>>>>> v3.18
@@ -1339,7 +1383,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 		if (state->reg[MT2063_REG_PART_REV] != MT2063_B3 && val > 5)
 			val = 5;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = (state->reg[MT2063_REG_FIF_OV] & (u8) ~0x1F) |
+=======
+		val = (state->reg[MT2063_REG_FIF_OV] & ~0x1F) |
+>>>>>>> v3.18
 =======
 		val = (state->reg[MT2063_REG_FIF_OV] & ~0x1F) |
 >>>>>>> v3.18
@@ -1351,7 +1399,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 	/* PD2TGT */
 	if (status >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8 val = (state->reg[MT2063_REG_PD2_TGT] & (u8) ~0x3F) |
+=======
+		u8 val = (state->reg[MT2063_REG_PD2_TGT] & ~0x3F) |
+>>>>>>> v3.18
 =======
 		u8 val = (state->reg[MT2063_REG_PD2_TGT] & ~0x3F) |
 >>>>>>> v3.18
@@ -1363,7 +1415,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 	/* Ignore ATN Overload */
 	if (status >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = (state->reg[MT2063_REG_LNA_TGT] & (u8) ~0x80) |
+=======
+		val = (state->reg[MT2063_REG_LNA_TGT] & ~0x80) |
+>>>>>>> v3.18
 =======
 		val = (state->reg[MT2063_REG_LNA_TGT] & ~0x80) |
 >>>>>>> v3.18
@@ -1375,7 +1431,11 @@ static u32 MT2063_SetReceiverMode(struct mt2063_state *state,
 	/* Ignore FIF Overload */
 	if (status >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = (state->reg[MT2063_REG_PD1_TGT] & (u8) ~0x80) |
+=======
+		val = (state->reg[MT2063_REG_PD1_TGT] & ~0x80) |
+>>>>>>> v3.18
 =======
 		val = (state->reg[MT2063_REG_PD1_TGT] & ~0x80) |
 >>>>>>> v3.18
@@ -2180,7 +2240,11 @@ static int mt2063_set_analog_params(struct dvb_frontend *fe,
 /*
  * As defined on EN 300 429, the DVB-C roll-off factor is 0.15.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * So, the amount of the needed bandwith is given by:
+=======
+ * So, the amount of the needed bandwidth is given by:
+>>>>>>> v3.18
 =======
  * So, the amount of the needed bandwidth is given by:
 >>>>>>> v3.18
@@ -2363,7 +2427,11 @@ static int tuner_MT2063_ClearPowerMaskBits(struct dvb_frontend *fe)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

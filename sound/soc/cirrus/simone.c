@@ -28,7 +28,11 @@ static struct snd_soc_dai_link simone_dai = {
 	.codec_dai_name	= "ac97-hifi",
 	.codec_name	= "ac97-codec",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.platform_name	= "ep93xx-pcm-audio",
+=======
+	.platform_name	= "ep93xx-ac97",
+>>>>>>> v3.18
 =======
 	.platform_name	= "ep93xx-ac97",
 >>>>>>> v3.18

@@ -73,7 +73,12 @@ static int pcxhr_init_board(struct pcxhr_mgr *mgr)
 	if (((rmh.stat[1] >> 7) & 0x5F) < PCXHR_PLAYBACK_STREAMS)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("supported formats : playback=%x capture=%x\n",
+=======
+	dev_dbg(&mgr->pci->dev,
+		"supported formats : playback=%x capture=%x\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev,
 		"supported formats : playback=%x capture=%x\n",
@@ -90,7 +95,12 @@ static int pcxhr_init_board(struct pcxhr_mgr *mgr)
 	if (err)
 		return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("PCXHR DSP version is %d.%d.%d\n", (rmh.stat[0]>>16)&0xff,
+=======
+	dev_dbg(&mgr->pci->dev,
+		"PCXHR DSP version is %d.%d.%d\n", (rmh.stat[0]>>16)&0xff,
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev,
 		"PCXHR DSP version is %d.%d.%d\n", (rmh.stat[0]>>16)&0xff,
@@ -190,7 +200,11 @@ static int pcxhr_dsp_allocate_pipe(struct pcxhr_mgr *mgr,
 		audio_count = 2;	/* always stereo */
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("snd_add_ref_pipe pin(%d) pcm%c0\n",
+=======
+	dev_dbg(&mgr->pci->dev, "snd_add_ref_pipe pin(%d) pcm%c0\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev, "snd_add_ref_pipe pin(%d) pcm%c0\n",
 >>>>>>> v3.18
@@ -209,7 +223,11 @@ static int pcxhr_dsp_allocate_pipe(struct pcxhr_mgr *mgr,
 	err = pcxhr_send_msg(mgr, &rmh);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "error pipe allocation "
+=======
+		dev_err(&mgr->pci->dev, "error pipe allocation "
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev, "error pipe allocation "
 >>>>>>> v3.18
@@ -241,7 +259,11 @@ static int pcxhr_dsp_free_pipe( struct pcxhr_mgr *mgr, struct pcxhr_pipe *pipe)
 	err = pcxhr_set_pipe_state(mgr, playback_mask, capture_mask, 0);
 	if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "error stopping pipe!\n");
+=======
+		dev_err(&mgr->pci->dev, "error stopping pipe!\n");
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev, "error stopping pipe!\n");
 >>>>>>> v3.18
@@ -252,7 +274,11 @@ static int pcxhr_dsp_free_pipe( struct pcxhr_mgr *mgr, struct pcxhr_pipe *pipe)
 	err = pcxhr_send_msg(mgr, &rmh);
 	if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "error pipe release "
+=======
+		dev_err(&mgr->pci->dev, "error pipe release "
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev, "error pipe release "
 >>>>>>> v3.18
@@ -316,7 +342,12 @@ static int pcxhr_dsp_load(struct pcxhr_mgr *mgr, int index,
 	int err, card_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("loading dsp [%d] size = %Zd\n", index, dsp->size);
+=======
+	dev_dbg(&mgr->pci->dev,
+		"loading dsp [%d] size = %Zd\n", index, dsp->size);
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev,
 		"loading dsp [%d] size = %Zd\n", index, dsp->size);
@@ -345,7 +376,11 @@ static int pcxhr_dsp_load(struct pcxhr_mgr *mgr, int index,
 		break;	/* continue with first init */
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "wrong file index\n");
+=======
+		dev_err(&mgr->pci->dev, "wrong file index\n");
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev, "wrong file index\n");
 >>>>>>> v3.18
@@ -356,7 +391,11 @@ static int pcxhr_dsp_load(struct pcxhr_mgr *mgr, int index,
 	err = pcxhr_init_board(mgr);
         if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "pcxhr could not be set up\n");
+=======
+		dev_err(&mgr->pci->dev, "pcxhr could not be set up\n");
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev, "pcxhr could not be set up\n");
 >>>>>>> v3.18
@@ -365,7 +404,11 @@ static int pcxhr_dsp_load(struct pcxhr_mgr *mgr, int index,
 	err = pcxhr_config_pipes(mgr);
         if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "pcxhr pipes could not be set up\n");
+=======
+		dev_err(&mgr->pci->dev, "pcxhr pipes could not be set up\n");
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev, "pcxhr pipes could not be set up\n");
 >>>>>>> v3.18
@@ -388,16 +431,22 @@ static int pcxhr_dsp_load(struct pcxhr_mgr *mgr, int index,
 	err = pcxhr_start_pipes(mgr);
         if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "pcxhr pipes could not be started\n");
 		return err;
 	}
 	snd_printdd("pcxhr firmware downloaded and successfully set up\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_err(&mgr->pci->dev, "pcxhr pipes could not be started\n");
 		return err;
 	}
 	dev_dbg(&mgr->pci->dev,
 		"pcxhr firmware downloaded and successfully set up\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -434,7 +483,12 @@ int pcxhr_setup_firmware(struct pcxhr_mgr *mgr)
 		sprintf(path, "pcxhr/%s", fw_files[fw_set][i]);
 		if (request_firmware(&fw_entry, path, &mgr->pci->dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "pcxhr: can't load firmware %s\n",
+=======
+			dev_err(&mgr->pci->dev,
+				"pcxhr: can't load firmware %s\n",
+>>>>>>> v3.18
 =======
 			dev_err(&mgr->pci->dev,
 				"pcxhr: can't load firmware %s\n",

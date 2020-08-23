@@ -208,14 +208,20 @@ static void dma_callback(void *data)
 	dst_vb = v4l2_m2m_dst_buf_remove(curr_ctx->m2m_ctx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	src_vb->v4l2_buf.timestamp = dst_vb->v4l2_buf.timestamp;
 	src_vb->v4l2_buf.timecode = dst_vb->v4l2_buf.timecode;
 =======
+=======
+>>>>>>> v3.18
 	dst_vb->v4l2_buf.timestamp = src_vb->v4l2_buf.timestamp;
 	dst_vb->v4l2_buf.flags &= ~V4L2_BUF_FLAG_TSTAMP_SRC_MASK;
 	dst_vb->v4l2_buf.flags |=
 		src_vb->v4l2_buf.flags & V4L2_BUF_FLAG_TSTAMP_SRC_MASK;
 	dst_vb->v4l2_buf.timecode = src_vb->v4l2_buf.timecode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	v4l2_m2m_buf_done(src_vb, VB2_BUF_STATE_DONE);
@@ -350,8 +356,12 @@ static void deinterlace_issue_dma(struct deinterlace_ctx *ctx, int op,
 	ctx->xt->src_sgl = false;
 	ctx->xt->dst_sgl = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flags = DMA_CTRL_ACK | DMA_PREP_INTERRUPT |
 		DMA_COMPL_SKIP_DEST_UNMAP | DMA_COMPL_SKIP_SRC_UNMAP;
+=======
+	flags = DMA_CTRL_ACK | DMA_PREP_INTERRUPT;
+>>>>>>> v3.18
 =======
 	flags = DMA_CTRL_ACK | DMA_PREP_INTERRUPT;
 >>>>>>> v3.18
@@ -882,7 +892,11 @@ static int queue_init(void *priv, struct vb2_queue *src_vq,
 	src_vq->ops = &deinterlace_qops;
 	src_vq->mem_ops = &vb2_dma_contig_memops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	src_vq->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+=======
+	src_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+>>>>>>> v3.18
 =======
 	src_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
 >>>>>>> v3.18
@@ -903,7 +917,11 @@ static int queue_init(void *priv, struct vb2_queue *src_vq,
 	dst_vq->ops = &deinterlace_qops;
 	dst_vq->mem_ops = &vb2_dma_contig_memops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dst_vq->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+=======
+	dst_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
+>>>>>>> v3.18
 =======
 	dst_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
 >>>>>>> v3.18
@@ -940,7 +958,11 @@ static int deinterlace_open(struct file *file)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctx->xt = kzalloc(sizeof(struct dma_async_tx_descriptor) +
+=======
+	ctx->xt = kzalloc(sizeof(struct dma_interleaved_template) +
+>>>>>>> v3.18
 =======
 	ctx->xt = kzalloc(sizeof(struct dma_interleaved_template) +
 >>>>>>> v3.18
@@ -1025,7 +1047,11 @@ static int deinterlace_probe(struct platform_device *pdev)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcdev = kzalloc(sizeof *pcdev, GFP_KERNEL);
+=======
+	pcdev = devm_kzalloc(&pdev->dev, sizeof(*pcdev), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	pcdev = devm_kzalloc(&pdev->dev, sizeof(*pcdev), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1039,7 +1065,11 @@ static int deinterlace_probe(struct platform_device *pdev)
 	pcdev->dma_chan = dma_request_channel(mask, NULL, pcdev);
 	if (!pcdev->dma_chan)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto free_dev;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -1066,6 +1096,10 @@ static int deinterlace_probe(struct platform_device *pdev)
 	*vfd = deinterlace_videodev;
 	vfd->lock = &pcdev->dev_mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vfd->v4l2_dev = &pcdev->v4l2_dev;
+>>>>>>> v3.18
 =======
 	vfd->v4l2_dev = &pcdev->v4l2_dev;
 >>>>>>> v3.18
@@ -1112,8 +1146,11 @@ unreg_dev:
 rel_dma:
 	dma_release_channel(pcdev->dma_chan);
 <<<<<<< HEAD
+<<<<<<< HEAD
 free_dev:
 	kfree(pcdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1123,8 +1160,12 @@ free_dev:
 static int deinterlace_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct deinterlace_dev *pcdev =
 		(struct deinterlace_dev *)platform_get_drvdata(pdev);
+=======
+	struct deinterlace_dev *pcdev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct deinterlace_dev *pcdev = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -1136,7 +1177,10 @@ static int deinterlace_remove(struct platform_device *pdev)
 	vb2_dma_contig_cleanup_ctx(pcdev->alloc_ctx);
 	dma_release_channel(pcdev->dma_chan);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(pcdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

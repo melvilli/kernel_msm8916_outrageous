@@ -5,6 +5,7 @@
 #include <linux/spinlock.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/paravirt.h>
 
@@ -24,6 +25,8 @@ struct pv_lock_ops pv_lock_ops = {
 	.spin_trylock = __ticket_spin_trylock,
 	.spin_unlock = __ticket_spin_unlock,
 =======
+=======
+>>>>>>> v3.18
 #include <linux/jump_label.h>
 
 #include <asm/paravirt.h>
@@ -32,12 +35,20 @@ struct pv_lock_ops pv_lock_ops = {
 #ifdef CONFIG_SMP
 	.lock_spinning = __PV_IS_CALLEE_SAVE(paravirt_nop),
 	.unlock_kick = paravirt_nop,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };
 EXPORT_SYMBOL(pv_lock_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct static_key paravirt_ticketlocks_enabled = STATIC_KEY_INIT_FALSE;
+EXPORT_SYMBOL(paravirt_ticketlocks_enabled);
+>>>>>>> v3.18
 =======
 struct static_key paravirt_ticketlocks_enabled = STATIC_KEY_INIT_FALSE;
 EXPORT_SYMBOL(paravirt_ticketlocks_enabled);

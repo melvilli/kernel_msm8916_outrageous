@@ -35,6 +35,7 @@ unsigned long branch_target(const unsigned int *instr);
 unsigned int translate_branch(const unsigned int *dest,
 			      const unsigned int *src);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static inline unsigned long ppc_function_entry(void *func)
 {
@@ -46,6 +47,8 @@ static inline unsigned long ppc_function_entry(void *func)
 	 */
 	return ((func_descr_t *)func)->entry;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3E_64
 void __patch_exception(int exc, unsigned long addr);
 #define patch_exception(exc, name) do { \
@@ -95,6 +98,9 @@ static inline unsigned long ppc_function_entry(void *func)
 	 */
 	return ((func_descr_t *)func)->entry;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 	return (unsigned long)func;
@@ -102,7 +108,10 @@ static inline unsigned long ppc_function_entry(void *func)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long ppc_global_function_entry(void *func)
 {
 #if defined(CONFIG_PPC64) && defined(_CALL_ELF) && _CALL_ELF == 2
@@ -114,5 +123,8 @@ static inline unsigned long ppc_global_function_entry(void *func)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_POWERPC_CODE_PATCHING_H */

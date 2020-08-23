@@ -252,7 +252,10 @@ static int ivtv_prep_dev(struct ivtv *itv, int type)
 		v4l2_disable_ioctl(s->vdev, VIDIOC_S_STD);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &s->vdev->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ivtv_set_funcs(s->vdev);

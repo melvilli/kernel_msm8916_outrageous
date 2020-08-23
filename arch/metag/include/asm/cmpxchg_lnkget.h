@@ -74,7 +74,11 @@ static inline unsigned long __cmpxchg_u32(volatile int *m, unsigned long old,
 #endif
 		      "2:\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      : "=&d" (temp), "=&d" (retval)
+=======
+		      : "=&d" (temp), "=&da" (retval)
+>>>>>>> v3.18
 =======
 		      : "=&d" (temp), "=&da" (retval)
 >>>>>>> v3.18

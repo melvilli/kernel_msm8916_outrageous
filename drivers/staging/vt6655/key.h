@@ -54,6 +54,7 @@
 #define KEY_CTL_INVALID     0xFF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct tagSKeyItem
 {
 	bool bKeyValid;
@@ -61,11 +62,16 @@ typedef struct tagSKeyItem
 	unsigned char abyKey[MAX_KEY_LEN];
 	QWORD       KeyRSC;
 =======
+=======
+>>>>>>> v3.18
 typedef struct tagSKeyItem {
 	bool bKeyValid;
 	unsigned long uKeyLength;
 	unsigned char abyKey[MAX_KEY_LEN];
 	u64 KeyRSC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long dwTSC47_16;
 	unsigned short wTSC15_0;
@@ -76,8 +82,12 @@ typedef struct tagSKeyItem {
 } SKeyItem, *PSKeyItem; //64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct tagSKeyTable
 {
+=======
+typedef struct tagSKeyTable {
+>>>>>>> v3.18
 =======
 typedef struct tagSKeyTable {
 >>>>>>> v3.18
@@ -89,8 +99,11 @@ typedef struct tagSKeyTable {
 	bool bInUse;
 	//2006-1116-01,<Modify> by NomadZhao
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//unsigned short wKeyCtl;
 	//bool bSoftWEP;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool bSoftWEP;
@@ -100,8 +113,12 @@ typedef struct tagSKeyTable {
 } SKeyTable, *PSKeyTable; //348
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct tagSKeyManagement
 {
+=======
+typedef struct tagSKeyManagement {
+>>>>>>> v3.18
 =======
 typedef struct tagSKeyManagement {
 >>>>>>> v3.18
@@ -119,7 +136,11 @@ typedef struct tagSKeyManagement {
 /*---------------------  Export Functions  --------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void KeyvInitTable(PSKeyManagement pTable, unsigned long dwIoBase);
+=======
+void KeyvInitTable(PSKeyManagement pTable, void __iomem *dwIoBase);
+>>>>>>> v3.18
 =======
 void KeyvInitTable(PSKeyManagement pTable, void __iomem *dwIoBase);
 >>>>>>> v3.18
@@ -137,15 +158,21 @@ bool KeybSetKey(
 	unsigned long dwKeyIndex,
 	unsigned long uKeyLength,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PQWORD          pKeyRSC,
 	unsigned char *pbyKey,
 	unsigned char byKeyDecMode,
 	unsigned long dwIoBase,
 =======
+=======
+>>>>>>> v3.18
 	u64 *pKeyRSC,
 	unsigned char *pbyKey,
 	unsigned char byKeyDecMode,
 	void __iomem *dwIoBase,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char byLocalID
 );
@@ -155,15 +182,21 @@ bool KeybSetDefaultKey(
 	unsigned long dwKeyIndex,
 	unsigned long uKeyLength,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PQWORD          pKeyRSC,
 	unsigned char *pbyKey,
 	unsigned char byKeyDecMode,
 	unsigned long dwIoBase,
 =======
+=======
+>>>>>>> v3.18
 	u64 *pKeyRSC,
 	unsigned char *pbyKey,
 	unsigned char byKeyDecMode,
 	void __iomem *dwIoBase,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char byLocalID
 );
@@ -173,7 +206,11 @@ bool KeybRemoveKey(
 	unsigned char *pbyBSSID,
 	unsigned long dwKeyIndex,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long dwIoBase
+=======
+	void __iomem *dwIoBase
+>>>>>>> v3.18
 =======
 	void __iomem *dwIoBase
 >>>>>>> v3.18
@@ -195,7 +232,11 @@ bool KeybRemoveAllKey(
 	PSKeyManagement pTable,
 	unsigned char *pbyBSSID,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long dwIoBase
+=======
+	void __iomem *dwIoBase
+>>>>>>> v3.18
 =======
 	void __iomem *dwIoBase
 >>>>>>> v3.18
@@ -205,7 +246,11 @@ void KeyvRemoveWEPKey(
 	PSKeyManagement pTable,
 	unsigned long dwKeyIndex,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long dwIoBase
+=======
+	void __iomem *dwIoBase
+>>>>>>> v3.18
 =======
 	void __iomem *dwIoBase
 >>>>>>> v3.18
@@ -214,7 +259,11 @@ void KeyvRemoveWEPKey(
 void KeyvRemoveAllWEPKey(
 	PSKeyManagement pTable,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long dwIoBase
+=======
+	void __iomem *dwIoBase
+>>>>>>> v3.18
 =======
 	void __iomem *dwIoBase
 >>>>>>> v3.18
@@ -225,15 +274,21 @@ bool KeybSetAllGroupKey(
 	unsigned long dwKeyIndex,
 	unsigned long uKeyLength,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PQWORD          pKeyRSC,
 	unsigned char *pbyKey,
 	unsigned char byKeyDecMode,
 	unsigned long dwIoBase,
 =======
+=======
+>>>>>>> v3.18
 	u64 *pKeyRSC,
 	unsigned char *pbyKey,
 	unsigned char byKeyDecMode,
 	void __iomem *dwIoBase,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned char byLocalID
 );

@@ -152,7 +152,11 @@ To send a request to the controller:
 
     - The host read the outbound list copy pointer shadow register and compare
 <<<<<<< HEAD
+<<<<<<< HEAD
       with previous saved read ponter N. If they are different, the host will
+=======
+      with previous saved read pointer N. If they are different, the host will
+>>>>>>> v3.18
 =======
       with previous saved read pointer N. If they are different, the host will
 >>>>>>> v3.18

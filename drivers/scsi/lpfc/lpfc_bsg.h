@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2010-2012 Emulex.  All rights reserved.                *
+=======
+ * Copyright (C) 2010-2014 Emulex.  All rights reserved.                *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2010-2014 Emulex.  All rights reserved.                *
 >>>>>>> v3.18
@@ -236,6 +240,11 @@ struct lpfc_sli_config_emb0_subsys {
 #define FCOE_OPCODE_READ_FCF		0x08
 #define FCOE_OPCODE_ADD_FCF		0x09
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FCOE_OPCODE_SET_DPORT_MODE	0x27
+#define FCOE_OPCODE_GET_DPORT_RESULTS	0x28
+>>>>>>> v3.18
 =======
 #define FCOE_OPCODE_SET_DPORT_MODE	0x27
 #define FCOE_OPCODE_GET_DPORT_RESULTS	0x28

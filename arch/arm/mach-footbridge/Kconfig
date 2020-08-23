@@ -53,6 +53,10 @@ config ARCH_EBSA285_HOST
 	select ISA
 	select ISA_DMA
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_MAY_HAVE_PC_FDC
+>>>>>>> v3.18
 =======
 	select ARCH_MAY_HAVE_PC_FDC
 >>>>>>> v3.18
@@ -90,6 +94,10 @@ config FOOTBRIDGE
 config FOOTBRIDGE_HOST
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_MIGHT_HAVE_PC_SERIO
+>>>>>>> v3.18
 =======
 	select ARCH_MIGHT_HAVE_PC_SERIO
 >>>>>>> v3.18
@@ -102,7 +110,10 @@ config FOOTBRIDGE_ADDIN
 config ARCH_EBSA285
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_MAY_HAVE_PC_FDC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

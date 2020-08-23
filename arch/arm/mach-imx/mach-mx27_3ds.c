@@ -41,6 +41,10 @@
 #include "common.h"
 #include "devices-imx27.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 =======
 #include "ehci.h"
 >>>>>>> v3.18
@@ -549,7 +553,10 @@ MACHINE_START(MX27_3DS, "Freescale MX27PDK")
 	.init_early = imx27_init_early,
 	.init_irq = mx27_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx27_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= mx27pdk_timer_init,

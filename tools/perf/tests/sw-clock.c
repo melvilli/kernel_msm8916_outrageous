@@ -10,7 +10,11 @@
 #include "util/thread_map.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NR_LOOPS  1000000
+=======
+#define NR_LOOPS  10000000
+>>>>>>> v3.18
 =======
 #define NR_LOOPS  10000000
 >>>>>>> v3.18
@@ -27,6 +31,10 @@ static int __test__sw_clock_freq(enum perf_sw_ids clock_id)
 	u64 total_periods = 0;
 	int nr_samples = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char sbuf[STRERR_BUFSIZE];
+>>>>>>> v3.18
 =======
 	char sbuf[STRERR_BUFSIZE];
 >>>>>>> v3.18
@@ -43,7 +51,11 @@ static int __test__sw_clock_freq(enum perf_sw_ids clock_id)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	attr.sample_freq = 10000;
+=======
+	attr.sample_freq = 500;
+>>>>>>> v3.18
 =======
 	attr.sample_freq = 500;
 >>>>>>> v3.18
@@ -55,15 +67,21 @@ static int __test__sw_clock_freq(enum perf_sw_ids clock_id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	evsel = perf_evsel__new(&attr, 0);
 	if (evsel == NULL) {
 		pr_debug("perf_evsel__new\n");
 		goto out_free_evlist;
 =======
+=======
+>>>>>>> v3.18
 	evsel = perf_evsel__new(&attr);
 	if (evsel == NULL) {
 		pr_debug("perf_evsel__new\n");
 		goto out_delete_evlist;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	perf_evlist__add(evlist, evsel);
@@ -74,11 +92,14 @@ static int __test__sw_clock_freq(enum perf_sw_ids clock_id)
 		err = -ENOMEM;
 		pr_debug("Not enough memory to create thread/cpu maps\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_delete_maps;
 	}
 
 	perf_evlist__open(evlist);
 =======
+=======
+>>>>>>> v3.18
 		goto out_delete_evlist;
 	}
 
@@ -91,14 +112,22 @@ static int __test__sw_clock_freq(enum perf_sw_ids clock_id)
 			 knob, (u64)attr.sample_freq);
 		goto out_delete_evlist;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = perf_evlist__mmap(evlist, 128, true);
 	if (err < 0) {
 		pr_debug("failed to mmap event: %d (%s)\n", errno,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 strerror(errno));
 		goto out_close_evlist;
+=======
+			 strerror_r(errno, sbuf, sizeof(sbuf)));
+		goto out_delete_evlist;
+>>>>>>> v3.18
 =======
 			 strerror_r(errno, sbuf, sizeof(sbuf)));
 		goto out_delete_evlist;
@@ -118,7 +147,11 @@ static int __test__sw_clock_freq(enum perf_sw_ids clock_id)
 
 		if (event->header.type != PERF_RECORD_SAMPLE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			continue;
+=======
+			goto next_event;
+>>>>>>> v3.18
 =======
 			goto next_event;
 >>>>>>> v3.18
@@ -127,7 +160,11 @@ static int __test__sw_clock_freq(enum perf_sw_ids clock_id)
 		if (err < 0) {
 			pr_debug("Error during parse sample\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out_unmap_evlist;
+=======
+			goto out_delete_evlist;
+>>>>>>> v3.18
 =======
 			goto out_delete_evlist;
 >>>>>>> v3.18
@@ -136,6 +173,11 @@ static int __test__sw_clock_freq(enum perf_sw_ids clock_id)
 		total_periods += sample.period;
 		nr_samples++;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+next_event:
+		perf_evlist__mmap_consume(evlist, 0);
+>>>>>>> v3.18
 =======
 next_event:
 		perf_evlist__mmap_consume(evlist, 0);
@@ -149,6 +191,7 @@ next_event:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_unmap_evlist:
 	perf_evlist__munmap(evlist);
 out_close_evlist:
@@ -156,6 +199,9 @@ out_close_evlist:
 out_delete_maps:
 	perf_evlist__delete_maps(evlist);
 out_free_evlist:
+=======
+out_delete_evlist:
+>>>>>>> v3.18
 =======
 out_delete_evlist:
 >>>>>>> v3.18

@@ -93,12 +93,15 @@ static inline int __gen_sigismember(sigset_t *set, int _sig)
 	 : __gen_sigismember((set), (sig)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int sigfindinword(unsigned long word)
 {
 	asm("bsfl %1,%0" : "=r"(word) : "rm"(word) : "cc");
 	return word;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct pt_regs;

@@ -2,7 +2,11 @@
  * This file is part of the Chelsio T4 Ethernet driver for Linux.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2010 Chelsio Communications, Inc. All rights reserved.
+=======
+ * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
 >>>>>>> v3.18
@@ -77,17 +81,23 @@
 #define  PIDX_SHIFT  0
 #define  PIDX(x)     ((x) << PIDX_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define  S_PIDX_T5   0
 #define  M_PIDX_T5   0x1fffU
 #define  PIDX_T5(x)  (((x) >> S_PIDX_T5) & M_PIDX_T5)
 
 
 =======
+=======
+>>>>>>> v3.18
 #define  PIDX_SHIFT_T5   0
 #define  PIDX_T5(x)  ((x) << PIDX_SHIFT_T5)
 
 
 #define SGE_TIMERREGS	6
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SGE_PF_GTS 0x4
 #define  INGRESSQID_MASK   0xffff0000U
@@ -108,6 +118,10 @@
 
 #define SGE_CONTROL 0x1008
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SGE_CONTROL2_A		0x1124
+>>>>>>> v3.18
 =======
 #define SGE_CONTROL2_A		0x1124
 >>>>>>> v3.18
@@ -123,6 +137,10 @@
 #define  PKTSHIFT(x)            ((x) << PKTSHIFT_SHIFT)
 #define  PKTSHIFT_GET(x)	(((x) & PKTSHIFT_MASK) >> PKTSHIFT_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define  INGPCIEBOUNDARY_32B_X	0
+>>>>>>> v3.18
 =======
 #define  INGPCIEBOUNDARY_32B_X	0
 >>>>>>> v3.18
@@ -135,7 +153,10 @@
 #define  INGPADBOUNDARY_GET(x)	(((x) & INGPADBOUNDARY_MASK) \
 				 >> INGPADBOUNDARY_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define  INGPACKBOUNDARY_16B_X	0
 #define  INGPACKBOUNDARY_SHIFT_X 5
 
@@ -144,6 +165,9 @@
 #define  INGPACKBOUNDARY_V(x)	((x) << INGPACKBOUNDARY_S)
 #define  INGPACKBOUNDARY_G(x)	(((x) >> INGPACKBOUNDARY_S) \
 				 & INGPACKBOUNDARY_M)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define  EGRPCIEBOUNDARY_MASK   0x0000000eU
 #define  EGRPCIEBOUNDARY_SHIFT  1
@@ -189,9 +213,12 @@
 #define  QUEUESPERPAGEPF0_GET(x) ((x) & QUEUESPERPAGEPF0_MASK)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define QUEUESPERPAGEPF1    4
 
 =======
+=======
+>>>>>>> v3.18
 #define QUEUESPERPAGEPF0    0
 #define QUEUESPERPAGEPF1    4
 
@@ -213,6 +240,9 @@
 #define SGE_UDB_GTS             20
 #define SGE_UDB_WCDOORBELL      64
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SGE_INT_CAUSE1 0x1024
 #define SGE_INT_CAUSE2 0x1030
@@ -286,13 +316,19 @@
 #define  EGRTHRESHOLD_GET(x) (((x) & EGRTHRESHOLD_MASK) >> EGRTHRESHOLDshift)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define EGRTHRESHOLDPACKING_MASK	0x3fU
 #define EGRTHRESHOLDPACKING_SHIFT	14
 #define EGRTHRESHOLDPACKING(x)		((x) << EGRTHRESHOLDPACKING_SHIFT)
 #define EGRTHRESHOLDPACKING_GET(x)	(((x) >> EGRTHRESHOLDPACKING_SHIFT) & \
 					  EGRTHRESHOLDPACKING_MASK)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SGE_DBFIFO_STATUS 0x10a4
 #define  HP_INT_THRESH_SHIFT 28
@@ -310,13 +346,19 @@
 #define F_NOCOALESCE    V_NOCOALESCE(1U)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SGE_TIMESTAMP_LO 0x1098
 #define SGE_TIMESTAMP_HI 0x109c
 #define S_TSVAL    0
 #define M_TSVAL    0xfffffffU
 #define GET_TSVAL(x) (((x) >> S_TSVAL) & M_TSVAL)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SGE_TIMER_VALUE_0_AND_1 0x10b8
 #define  TIMERVALUE0_MASK   0xffff0000U
@@ -352,6 +394,12 @@
 #define SGE_DEBUG_DATA_HIGH 0x10d0
 #define SGE_DEBUG_DATA_LOW 0x10d4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SGE_DEBUG_DATA_LOW_INDEX_2	0x12c8
+#define SGE_DEBUG_DATA_LOW_INDEX_3	0x12cc
+#define SGE_DEBUG_DATA_HIGH_INDEX_10	0x12a8
+>>>>>>> v3.18
 =======
 #define SGE_DEBUG_DATA_LOW_INDEX_2	0x12c8
 #define SGE_DEBUG_DATA_LOW_INDEX_3	0x12cc
@@ -458,6 +506,11 @@
 
 #define PCIE_NONFAT_ERR 0x3010
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PCIE_CFG_SPACE_REQ 0x3060
+#define PCIE_CFG_SPACE_DATA 0x3064
+>>>>>>> v3.18
 =======
 #define PCIE_CFG_SPACE_REQ 0x3060
 #define PCIE_CFG_SPACE_DATA 0x3064
@@ -474,13 +527,19 @@
 #define  WINDOW_SHIFT    0
 #define  WINDOW(x)       ((x) << WINDOW_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCIE_MEM_ACCESS_OFFSET 0x306c
 =======
+=======
+>>>>>>> v3.18
 #define  GET_WINDOW(x)	 (((x) >> WINDOW_SHIFT) & WINDOW_MASK)
 #define PCIE_MEM_ACCESS_OFFSET 0x306c
 #define ENABLE	(1U << 30)
 #define FUNCTION(x) ((x) << 12)
 #define F_LOCALCFG    (1U << 28)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define S_PFNUM    0
@@ -520,6 +579,10 @@
 
 #define MC_INT_CAUSE 0x7518
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MC_P_INT_CAUSE 0x41318
+>>>>>>> v3.18
 =======
 #define MC_P_INT_CAUSE 0x41318
 >>>>>>> v3.18
@@ -529,6 +592,10 @@
 
 #define MC_ECC_STATUS 0x751c
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MC_P_ECC_STATUS 0x4131c
+>>>>>>> v3.18
 =======
 #define MC_P_ECC_STATUS 0x4131c
 >>>>>>> v3.18
@@ -589,6 +656,10 @@
 #define MA_PCIE_FW 0x30b8
 #define MA_PARITY_ERROR_STATUS 0x77f4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MA_PARITY_ERROR_STATUS2 0x7804
+>>>>>>> v3.18
 =======
 #define MA_PARITY_ERROR_STATUS2 0x7804
 >>>>>>> v3.18
@@ -1041,6 +1112,10 @@
 
 #define MPS_TRC_RSS_CONTROL 0x9808
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MPS_T5_TRC_RSS_CONTROL 0xa00c
+>>>>>>> v3.18
 =======
 #define MPS_T5_TRC_RSS_CONTROL 0xa00c
 >>>>>>> v3.18
@@ -1189,6 +1264,10 @@
 #define  CIM        0x00000001U
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MC1 0x31
+>>>>>>> v3.18
 =======
 #define MC1 0x31
 >>>>>>> v3.18
@@ -1205,12 +1284,18 @@
 #define PL_REV 0x1943c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define S_REV    0
 #define M_REV    0xfU
 #define V_REV(x) ((x) << S_REV)
 #define G_REV(x) (((x) >> S_REV) & M_REV)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define LE_DB_CONFIG 0x19c04
 #define  HASHEN 0x00100000U
@@ -1287,7 +1372,10 @@
 #define A_TP_TX_SCHED_PCMD 0x25
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define S_VNIC    11
 #define V_VNIC(x) ((x) << S_VNIC)
 #define F_VNIC    V_VNIC(1U)
@@ -1324,17 +1412,26 @@
 #define V_VNIC_ID(x) ((x) << S_VNIC_ID)
 #define F_VNIC_ID    V_VNIC_ID(1U)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define S_PORT    1
 #define V_PORT(x) ((x) << S_PORT)
 #define F_PORT    V_PORT(1U)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define S_FCOE    0
 #define V_FCOE(x) ((x) << S_FCOE)
 #define F_FCOE    V_FCOE(1U)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define NUM_MPS_CLS_SRAM_L_INSTANCES 336
 #define NUM_MPS_T5_CLS_SRAM_L_INSTANCES 512
@@ -1366,7 +1463,10 @@
 #define EDC_REG_T5(reg, idx) (reg + EDC_STRIDE_T5 * idx)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define A_PL_VF_REV 0x4
 #define A_PL_VF_WHOAMI 0x0
 #define A_PL_VF_REVISION 0x8
@@ -1409,5 +1509,8 @@
 #define S_FT_VNID_ID_VLD                16
 #define V_FT_VNID_ID_VLD(x)             ((x) << S_FT_VNID_ID_VLD)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __T4_REGS_H */

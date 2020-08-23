@@ -52,7 +52,11 @@ static void ft_sess_delete_all(struct ft_tport *);
  * Caller holds ft_lport_lock.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct ft_tport *ft_tport_create(struct fc_lport *lport)
+=======
+static struct ft_tport *ft_tport_get(struct fc_lport *lport)
+>>>>>>> v3.18
 =======
 static struct ft_tport *ft_tport_get(struct fc_lport *lport)
 >>>>>>> v3.18
@@ -103,7 +107,11 @@ static void ft_tport_delete(struct ft_tport *tport)
 	lport = tport->lport;
 	BUG_ON(tport != lport->prov[FC_TYPE_FCP]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_assign_pointer(lport->prov[FC_TYPE_FCP], NULL);
+=======
+	RCU_INIT_POINTER(lport->prov[FC_TYPE_FCP], NULL);
+>>>>>>> v3.18
 =======
 	RCU_INIT_POINTER(lport->prov[FC_TYPE_FCP], NULL);
 >>>>>>> v3.18
@@ -124,7 +132,11 @@ void ft_lport_add(struct fc_lport *lport, void *arg)
 {
 	mutex_lock(&ft_lport_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ft_tport_create(lport);
+=======
+	ft_tport_get(lport);
+>>>>>>> v3.18
 =======
 	ft_tport_get(lport);
 >>>>>>> v3.18
@@ -224,7 +236,13 @@ static struct ft_sess *ft_sess_create(struct ft_tport *tport, u32 port_id,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sess->se_sess = transport_init_session();
+=======
+	sess->se_sess = transport_init_session_tags(TCM_FC_DEFAULT_TAGS,
+						    sizeof(struct ft_cmd),
+						    TARGET_PROT_NORMAL);
+>>>>>>> v3.18
 =======
 	sess->se_sess = transport_init_session_tags(TCM_FC_DEFAULT_TAGS,
 						    sizeof(struct ft_cmd),
@@ -369,7 +387,11 @@ static int ft_prli_locked(struct fc_rport_priv *rdata, u32 spp_len,
 	u32 fcp_parm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tport = ft_tport_create(rdata->local_port);
+=======
+	tport = ft_tport_get(rdata->local_port);
+>>>>>>> v3.18
 =======
 	tport = ft_tport_get(rdata->local_port);
 >>>>>>> v3.18

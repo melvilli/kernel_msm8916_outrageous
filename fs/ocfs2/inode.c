@@ -131,6 +131,10 @@ struct inode *ocfs2_iget(struct ocfs2_super *osb, u64 blkno, unsigned flags,
 	struct super_block *sb = osb->sb;
 	struct ocfs2_find_inode_args args;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	journal_t *journal = OCFS2_SB(sb)->journal->j_journal;
+>>>>>>> v3.18
 =======
 	journal_t *journal = OCFS2_SB(sb)->journal->j_journal;
 >>>>>>> v3.18
@@ -174,7 +178,10 @@ struct inode *ocfs2_iget(struct ocfs2_super *osb, u64 blkno, unsigned flags,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Set transaction id's of transactions that have to be committed
 	 * to finish f[data]sync. We set them to currently running transaction
@@ -201,6 +208,9 @@ struct inode *ocfs2_iget(struct ocfs2_super *osb, u64 blkno, unsigned flags,
 		oi->i_datasync_tid = tid;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 bail:
 	if (!IS_ERR(inode)) {
@@ -420,6 +430,7 @@ static int ocfs2_read_locked_inode(struct inode *inode,
 
 	status = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inode == NULL || inode->i_sb == NULL) {
 		mlog(ML_ERROR, "bad inode\n");
 		return status;
@@ -433,6 +444,11 @@ static int ocfs2_read_locked_inode(struct inode *inode,
 		return status;
 	}
 
+=======
+	sb = inode->i_sb;
+	osb = OCFS2_SB(sb);
+
+>>>>>>> v3.18
 =======
 	sb = inode->i_sb;
 	osb = OCFS2_SB(sb);
@@ -854,12 +870,15 @@ static int ocfs2_inode_is_valid_to_delete(struct inode *inode)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If we're coming from downconvert_thread we can't go into our own
 	 * voting [hello, deadlock city!], so unforuntately we just
 	 * have to skip deleting this guy. That's OK though because
 	 * the node who's doing the actual deleting should handle it
 	 * anyway. */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If we're coming from downconvert_thread we can't go into our own
 	 * voting [hello, deadlock city!] so we cannot delete the inode. But
@@ -867,6 +886,9 @@ static int ocfs2_inode_is_valid_to_delete(struct inode *inode)
 	 * we cannot have the file open and thus the node doing unlink will
 	 * take care of deleting the inode.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (current == osb->dc_task)
 		goto bail;
@@ -882,12 +904,15 @@ static int ocfs2_inode_is_valid_to_delete(struct inode *inode)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If we have allowd wipe of this inode for another node, it
 	 * will be marked here so we can safely skip it. Recovery will
 	 * cleanup any inodes we might inadvertently skip here. */
 	if (oi->ip_flags & OCFS2_INODE_SKIP_DELETE)
 		goto bail_unlock;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = 1;
@@ -1004,7 +1029,11 @@ static void ocfs2_cleanup_delete_inode(struct inode *inode,
 	if (sync_data)
 		filemap_write_and_wait(inode->i_mapping);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -1027,8 +1056,11 @@ static void ocfs2_delete_inode(struct inode *inode)
 		goto bail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dquot_initialize(inode);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!ocfs2_inode_is_valid_to_delete(inode)) {
@@ -1040,6 +1072,11 @@ static void ocfs2_delete_inode(struct inode *inode)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dquot_initialize(inode);
+
+>>>>>>> v3.18
 =======
 	dquot_initialize(inode);
 
@@ -1132,6 +1169,10 @@ static void ocfs2_clear_inode(struct inode *inode)
 	int status;
 	struct ocfs2_inode_info *oi = OCFS2_I(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ocfs2_super *osb = OCFS2_SB(inode->i_sb);
+>>>>>>> v3.18
 =======
 	struct ocfs2_super *osb = OCFS2_SB(inode->i_sb);
 >>>>>>> v3.18
@@ -1152,9 +1193,15 @@ static void ocfs2_clear_inode(struct inode *inode)
 	/* Do these before all the other work so that we don't bounce
 	 * the downconvert thread while waiting to destroy the locks. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ocfs2_mark_lockres_freeing(&oi->ip_rw_lockres);
 	ocfs2_mark_lockres_freeing(&oi->ip_inode_lockres);
 	ocfs2_mark_lockres_freeing(&oi->ip_open_lockres);
+=======
+	ocfs2_mark_lockres_freeing(osb, &oi->ip_rw_lockres);
+	ocfs2_mark_lockres_freeing(osb, &oi->ip_inode_lockres);
+	ocfs2_mark_lockres_freeing(osb, &oi->ip_open_lockres);
+>>>>>>> v3.18
 =======
 	ocfs2_mark_lockres_freeing(osb, &oi->ip_rw_lockres);
 	ocfs2_mark_lockres_freeing(osb, &oi->ip_inode_lockres);
@@ -1242,7 +1289,11 @@ void ocfs2_evict_inode(struct inode *inode)
 		ocfs2_delete_inode(inode);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_inode_pages(&inode->i_data, 0);
+=======
+		truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 		truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -1349,6 +1400,10 @@ int ocfs2_mark_inode_dirty(handle_t *handle,
 
 	ocfs2_journal_dirty(handle, bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, inode, 1);
+>>>>>>> v3.18
 =======
 	ocfs2_update_inode_fsync_trans(handle, inode, 1);
 >>>>>>> v3.18

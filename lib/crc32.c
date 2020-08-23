@@ -30,16 +30,22 @@
 #include <linux/module.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "crc32defs.h"
 
 #if CRC_LE_BITS > 8
 # define tole(x) ((__force u32) __constant_cpu_to_le32(x))
 =======
+=======
+>>>>>>> v3.18
 #include <linux/sched.h>
 #include "crc32defs.h"
 
 #if CRC_LE_BITS > 8
 # define tole(x) ((__force u32) cpu_to_le32(x))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 # define tole(x) (x)
@@ -47,7 +53,11 @@
 
 #if CRC_BE_BITS > 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define tobe(x) ((__force u32) __constant_cpu_to_be32(x))
+=======
+# define tobe(x) ((__force u32) cpu_to_be32(x))
+>>>>>>> v3.18
 =======
 # define tobe(x) ((__force u32) cpu_to_be32(x))
 >>>>>>> v3.18
@@ -65,7 +75,11 @@ MODULE_LICENSE("GPL");
 
 /* implements slicing-by-4 or slicing-by-8 algorithm */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32
+=======
+static inline u32 __pure
+>>>>>>> v3.18
 =======
 static inline u32 __pure
 >>>>>>> v3.18
@@ -147,6 +161,7 @@ crc32_body(u32 crc, unsigned char const *buf, size_t len, const u32 (*tab)[256])
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * crc32_le() - Calculate bitwise little-endian Ethernet AUTODIN II CRC32
  * @crc: seed value for computation.  ~0 for Ethernet, sometimes 0 for
@@ -154,6 +169,8 @@ crc32_body(u32 crc, unsigned char const *buf, size_t len, const u32 (*tab)[256])
  * @p: pointer to buffer over which CRC is run
  * @len: length of buffer @p
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * crc32_le_generic() - Calculate bitwise little-endian Ethernet AUTODIN II
@@ -164,6 +181,9 @@ crc32_body(u32 crc, unsigned char const *buf, size_t len, const u32 (*tab)[256])
  * @len: length of buffer @p
  * @tab: little-endian Ethernet table
  * @polynomial: CRC32/CRC32c LE polynomial
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static inline u32 __pure crc32_le_generic(u32 crc, unsigned char const *p,
@@ -230,6 +250,7 @@ EXPORT_SYMBOL(crc32_le);
 EXPORT_SYMBOL(__crc32c_le);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * crc32_be() - Calculate bitwise big-endian Ethernet AUTODIN II CRC32
  * @crc: seed value for computation.  ~0 for Ethernet, sometimes 0 for
@@ -237,6 +258,8 @@ EXPORT_SYMBOL(__crc32c_le);
  * @p: pointer to buffer over which CRC is run
  * @len: length of buffer @p
 =======
+=======
+>>>>>>> v3.18
 /*
  * This multiplies the polynomials x and y modulo the given modulus.
  * This follows the "little-endian" CRC convention that the lsbit
@@ -318,6 +341,9 @@ EXPORT_SYMBOL(__crc32c_le_shift);
  * @len: length of buffer @p
  * @tab: big-endian Ethernet table
  * @polynomial: CRC32 BE polynomial
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static inline u32 __pure crc32_be_generic(u32 crc, unsigned char const *p,
@@ -378,7 +404,11 @@ EXPORT_SYMBOL(crc32_be);
 
 /* 4096 random bytes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 __attribute__((__aligned__(8))) test_buf[] =
+=======
+static u8 const __aligned(8) test_buf[] __initconst =
+>>>>>>> v3.18
 =======
 static u8 const __aligned(8) test_buf[] __initconst =
 >>>>>>> v3.18
@@ -906,6 +936,7 @@ static struct crc_test {
 	u32 crc_be;	/* expected crc32_be result */
 	u32 crc32c_le;	/* expected crc32c_le result */
 <<<<<<< HEAD
+<<<<<<< HEAD
 } test[] =
 {
 	{0x674bf11d, 0x00000038, 0x00000542, 0x0af6d466, 0xd8b6e4c1,
@@ -1109,6 +1140,8 @@ static struct crc_test {
 	{0xb18a0319, 0x00000026, 0x000007db, 0x1cf98dcc, 0x8fa9ad6a,
 	 0x9dc0bb48},
 =======
+=======
+>>>>>>> v3.18
 } const test[] __initconst =
 {
 	{0x674bf11d, 0x00000038, 0x00000542, 0x0af6d466, 0xd8b6e4c1, 0xf6e93d6c},
@@ -1211,6 +1244,9 @@ static struct crc_test {
 	{0x4793cc85, 0x0000000d, 0x00000706, 0xe82e04f6, 0xed3db6b7, 0xc18bdc86},
 	{0x82ebf64e, 0x00000009, 0x000007c3, 0x69d590a9, 0x9efa8499, 0xa874fcdd},
 	{0xb18a0319, 0x00000026, 0x000007db, 0x1cf98dcc, 0x8fa9ad6a, 0x9dc0bb48},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1268,7 +1304,10 @@ static int __init crc32c_test(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init crc32c_combine_test(void)
 {
 	int i, j;
@@ -1304,6 +1343,9 @@ static int __init crc32c_combine_test(void)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init crc32_test(void)
 {
@@ -1365,7 +1407,10 @@ static int __init crc32_test(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init crc32_combine_test(void)
 {
 	int i, j;
@@ -1401,17 +1446,26 @@ static int __init crc32_combine_test(void)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init crc32test_init(void)
 {
 	crc32_test();
 	crc32c_test();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	crc32_combine_test();
 	crc32c_combine_test();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

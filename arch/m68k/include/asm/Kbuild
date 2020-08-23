@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+generic-y += barrier.h
+>>>>>>> v3.18
 =======
 generic-y += barrier.h
 >>>>>>> v3.18
@@ -11,6 +15,10 @@ generic-y += emergency-restart.h
 generic-y += errno.h
 generic-y += exec.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += hash.h
+>>>>>>> v3.18
 =======
 generic-y += hash.h
 >>>>>>> v3.18
@@ -19,6 +27,10 @@ generic-y += ioctl.h
 generic-y += ipcbuf.h
 generic-y += irq_regs.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += irq_work.h
+>>>>>>> v3.18
 =======
 generic-y += irq_work.h
 >>>>>>> v3.18
@@ -32,6 +44,10 @@ generic-y += mman.h
 generic-y += mutex.h
 generic-y += percpu.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += preempt.h
+>>>>>>> v3.18
 =======
 generic-y += preempt.h
 >>>>>>> v3.18

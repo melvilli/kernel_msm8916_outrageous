@@ -18,7 +18,10 @@
 #include <linux/device.h>
 #include <linux/fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>
@@ -43,7 +46,11 @@
 #include <asm/nmi.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HPWDT_VERSION			"1.3.1"
+=======
+#define HPWDT_VERSION			"1.3.3"
+>>>>>>> v3.18
 =======
 #define HPWDT_VERSION			"1.3.3"
 >>>>>>> v3.18
@@ -63,7 +70,11 @@ static unsigned long __iomem *hpwdt_timer_reg;
 static unsigned long __iomem *hpwdt_timer_con;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(hpwdt_devices) = {
+=======
+static const struct pci_device_id hpwdt_devices[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id hpwdt_devices[] = {
 >>>>>>> v3.18
@@ -160,6 +171,10 @@ static unsigned int hpwdt_nmi_decoding;
 static unsigned int allow_kdump = 1;
 static unsigned int is_icru;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static unsigned int is_uefi;
+>>>>>>> v3.18
 =======
 static unsigned int is_uefi;
 >>>>>>> v3.18
@@ -177,7 +192,12 @@ extern asmlinkage void asminline_call(struct cmn_registers *pi86Regs,
 
 asm(".text                          \n\t"
 <<<<<<< HEAD
+<<<<<<< HEAD
     ".align 4                       \n"
+=======
+    ".align 4                       \n\t"
+    ".globl asminline_call	    \n"
+>>>>>>> v3.18
 =======
     ".align 4                       \n\t"
     ".globl asminline_call	    \n"
@@ -372,7 +392,12 @@ static int detect_cru_service(void)
 
 asm(".text                      \n\t"
 <<<<<<< HEAD
+<<<<<<< HEAD
     ".align 4                   \n"
+=======
+    ".align 4                   \n\t"
+    ".globl asminline_call	\n"
+>>>>>>> v3.18
 =======
     ".align 4                   \n\t"
     ".globl asminline_call	\n"
@@ -510,7 +535,11 @@ static int hpwdt_pretimeout(unsigned int ulReason, struct pt_regs *regs)
 
 	spin_lock_irqsave(&rom_lock, rom_pl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!die_nmi_called && !is_icru)
+=======
+	if (!die_nmi_called && !is_icru && !is_uefi)
+>>>>>>> v3.18
 =======
 	if (!die_nmi_called && !is_icru && !is_uefi)
 >>>>>>> v3.18
@@ -522,7 +551,11 @@ static int hpwdt_pretimeout(unsigned int ulReason, struct pt_regs *regs)
 		hpwdt_stop();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!is_icru) {
+=======
+	if (!is_icru && !is_uefi) {
+>>>>>>> v3.18
 =======
 	if (!is_icru && !is_uefi) {
 >>>>>>> v3.18
@@ -532,9 +565,12 @@ static int hpwdt_pretimeout(unsigned int ulReason, struct pt_regs *regs)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	panic("An NMI occurred, please see the Integrated "
 		"Management Log for details.\n");
 =======
+=======
+>>>>>>> v3.18
 	panic("An NMI occurred. Depending on your system the reason "
 		"for the NMI is logged in any one of the following "
 		"resources:\n"
@@ -542,6 +578,9 @@ static int hpwdt_pretimeout(unsigned int ulReason, struct pt_regs *regs)
 		"2. OA Syslog\n"
 		"3. OA Forward Progress Log\n"
 		"4. iLO Event Log");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -723,6 +762,11 @@ static void dmi_find_icru(const struct dmi_header *dm, void *dummy)
 		if (smbios_proliant_ptr->misc_features & 0x01)
 			is_icru = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (smbios_proliant_ptr->misc_features & 0x408)
+			is_uefi = 1;
+>>>>>>> v3.18
 =======
 		if (smbios_proliant_ptr->misc_features & 0x408)
 			is_uefi = 1;
@@ -746,7 +790,11 @@ static int hpwdt_init_nmi_decoding(struct pci_dev *dev)
 	 */
 	dmi_walk(dmi_find_icru, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!is_icru) {
+=======
+	if (!is_icru && !is_uefi) {
+>>>>>>> v3.18
 =======
 	if (!is_icru && !is_uefi) {
 >>>>>>> v3.18
@@ -850,13 +898,19 @@ static int hpwdt_init_one(struct pci_dev *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Ignore all auxilary iLO devices with the following PCI ID
 	 */
 	if (dev->subsystem_device == 0x1979)
 		return -ENODEV;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pci_enable_device(dev)) {
 		dev_warn(&dev->dev,
@@ -932,7 +986,10 @@ MODULE_DESCRIPTION("hp watchdog driver");
 MODULE_LICENSE("GPL");
 MODULE_VERSION(HPWDT_VERSION);
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

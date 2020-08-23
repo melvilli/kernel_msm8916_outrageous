@@ -36,6 +36,10 @@
 
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -653,7 +657,11 @@ _armv4_AES_set_encrypt_key:
 .Ldone:	mov	r0,#0
 	ldmia   sp!,{r4-r12,lr}
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Labrt:	mov	pc,lr
+=======
+.Labrt:	ret	lr
+>>>>>>> v3.18
 =======
 .Labrt:	ret	lr
 >>>>>>> v3.18

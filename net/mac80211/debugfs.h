@@ -2,6 +2,11 @@
 #define __MAC80211_DEBUGFS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ieee80211_i.h"
+
+>>>>>>> v3.18
 =======
 #include "ieee80211_i.h"
 

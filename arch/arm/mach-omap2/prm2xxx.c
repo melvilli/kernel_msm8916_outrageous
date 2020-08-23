@@ -19,9 +19,12 @@
 #include <linux/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "soc.h"
 #include "common.h"
 #include "vp.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "powerdomain.h"
@@ -121,7 +124,10 @@ void omap2xxx_prm_dpll_reset(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * omap2xxx_prm_clear_mod_irqs - clear wakeup status bits for a module
  * @module: PRM module to clear wakeups from
@@ -140,6 +146,9 @@ void omap2xxx_prm_clear_mod_irqs(s16 module, u8 regs, u32 wkst_mask)
 	omap2_prm_write_mod_reg(wkst, module, regs);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int omap2xxx_clkdm_sleep(struct clockdomain *clkdm)
 {
@@ -226,9 +235,12 @@ static struct prm_ll_data omap2xxx_prm_ll_data = {
 int __init omap2xxx_prm_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpu_is_omap24xx())
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return prm_register(&omap2xxx_prm_ll_data);
@@ -237,12 +249,16 @@ int __init omap2xxx_prm_init(void)
 static void __exit omap2xxx_prm_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpu_is_omap24xx())
 		return;
 
 	/* Should never happen */
 	WARN(prm_unregister(&omap2xxx_prm_ll_data),
 	     "%s: prm_ll_data function pointer mismatch\n", __func__);
+=======
+	prm_unregister(&omap2xxx_prm_ll_data);
+>>>>>>> v3.18
 =======
 	prm_unregister(&omap2xxx_prm_ll_data);
 >>>>>>> v3.18

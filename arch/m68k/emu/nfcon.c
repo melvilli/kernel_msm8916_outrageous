@@ -16,6 +16,10 @@
 #include <linux/err.h>
 #include <linux/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
@@ -30,6 +34,10 @@ static void nfputs(const char *str, unsigned int count)
 {
 	char buf[68];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long phys = virt_to_phys(buf);
+>>>>>>> v3.18
 =======
 	unsigned long phys = virt_to_phys(buf);
 >>>>>>> v3.18
@@ -38,7 +46,11 @@ static void nfputs(const char *str, unsigned int count)
 	while (count > 64) {
 		memcpy(buf, str, 64);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nf_call(stderr_id, buf);
+=======
+		nf_call(stderr_id, phys);
+>>>>>>> v3.18
 =======
 		nf_call(stderr_id, phys);
 >>>>>>> v3.18
@@ -48,7 +60,11 @@ static void nfputs(const char *str, unsigned int count)
 	memcpy(buf, str, count);
 	buf[count] = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf_call(stderr_id, buf);
+=======
+	nf_call(stderr_id, phys);
+>>>>>>> v3.18
 =======
 	nf_call(stderr_id, phys);
 >>>>>>> v3.18
@@ -96,7 +112,11 @@ static int nfcon_tty_put_char(struct tty_struct *tty, unsigned char ch)
 	char temp[2] = { ch, 0 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nf_call(stderr_id, temp);
+=======
+	nf_call(stderr_id, virt_to_phys(temp));
+>>>>>>> v3.18
 =======
 	nf_call(stderr_id, virt_to_phys(temp));
 >>>>>>> v3.18

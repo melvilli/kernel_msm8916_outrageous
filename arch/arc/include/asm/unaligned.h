@@ -15,6 +15,7 @@
 #include <asm/ptrace.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARC_MISALIGN_ACCESS
 int misaligned_fixup(unsigned long address, struct pt_regs *regs,
 		     unsigned long cause, struct callee_regs *cregs);
@@ -25,6 +26,8 @@ misaligned_fixup(unsigned long address, struct pt_regs *regs,
 {
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ARC_EMUL_UNALIGNED
 int misaligned_fixup(unsigned long address, struct pt_regs *regs,
 		     struct callee_regs *cregs);
@@ -35,6 +38,9 @@ misaligned_fixup(unsigned long address, struct pt_regs *regs,
 {
 	/* Not fixed */
 	return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif

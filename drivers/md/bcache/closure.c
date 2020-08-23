@@ -12,6 +12,7 @@
 #include "closure.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void closure_queue(struct closure *cl)
 {
 	struct workqueue_struct *wq = cl->wq;
@@ -49,13 +50,19 @@ static struct timer_list *closure_timer(struct closure *cl)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline void closure_put_after_sub(struct closure *cl, int flags)
 {
 	int r = flags & CLOSURE_REMAINING_MASK;
 
 	BUG_ON(flags & CLOSURE_GUARD_MASK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!r && (flags & ~(CLOSURE_DESTRUCTOR|CLOSURE_BLOCKING)));
+=======
+	BUG_ON(!r && (flags & ~CLOSURE_DESTRUCTOR));
+>>>>>>> v3.18
 =======
 	BUG_ON(!r && (flags & ~CLOSURE_DESTRUCTOR));
 >>>>>>> v3.18
@@ -67,7 +74,10 @@ static inline void closure_put_after_sub(struct closure *cl, int flags)
 	if (!r) {
 		if (cl->fn && !(flags & CLOSURE_DESTRUCTOR)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* CLOSURE_BLOCKING might be set - clear it */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			atomic_set(&cl->remaining,
@@ -76,7 +86,10 @@ static inline void closure_put_after_sub(struct closure *cl, int flags)
 		} else {
 			struct closure *parent = cl->parent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct closure_waitlist *wait = closure_waitlist(cl);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			closure_fn *destructor = cl->fn;
@@ -84,12 +97,15 @@ static inline void closure_put_after_sub(struct closure *cl, int flags)
 			closure_debug_destroy(cl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			smp_mb();
 			atomic_set(&cl->remaining, -1);
 
 			if (wait)
 				closure_wake_up(wait);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			if (destructor)
@@ -107,19 +123,26 @@ void closure_sub(struct closure *cl, int v)
 	closure_put_after_sub(cl, atomic_sub_return(v, &cl->remaining));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(closure_sub);
 
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(closure_sub);
 
 /**
  * closure_put - decrement a closure's refcount
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void closure_put(struct closure *cl)
 {
 	closure_put_after_sub(cl, atomic_dec_return(&cl->remaining));
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL_GPL(closure_put);
 
@@ -131,11 +154,16 @@ static void set_waiting(struct closure *cl, unsigned long f)
 }
 
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(closure_put);
 
 /**
  * closure_wake_up - wake up all closures on a wait list, without memory barrier
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __closure_wake_up(struct closure_waitlist *wait_list)
 {
@@ -162,6 +190,7 @@ void __closure_wake_up(struct closure_waitlist *wait_list)
 		reverse = llist_next(reverse);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_waiting(cl, 0);
 		closure_sub(cl, CLOSURE_WAITING + 1);
 	}
@@ -170,6 +199,8 @@ EXPORT_SYMBOL_GPL(__closure_wake_up);
 
 bool closure_wait(struct closure_waitlist *list, struct closure *cl)
 =======
+=======
+>>>>>>> v3.18
 		closure_set_waiting(cl, 0);
 		closure_sub(cl, CLOSURE_WAITING + 1);
 	}
@@ -184,11 +215,15 @@ EXPORT_SYMBOL(__closure_wake_up);
  *
  */
 bool closure_wait(struct closure_waitlist *waitlist, struct closure *cl)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (atomic_read(&cl->remaining) & CLOSURE_WAITING)
 		return false;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	set_waiting(cl, _RET_IP_);
 	atomic_add(CLOSURE_WAITING + 1, &cl->remaining);
@@ -201,6 +236,8 @@ EXPORT_SYMBOL_GPL(closure_wait);
 /**
  * closure_sync() - sleep until a closure a closure has nothing left to wait on
 =======
+=======
+>>>>>>> v3.18
 	closure_set_waiting(cl, _RET_IP_);
 	atomic_add(CLOSURE_WAITING + 1, &cl->remaining);
 	llist_add(&cl->list, &waitlist->list);
@@ -211,6 +248,9 @@ EXPORT_SYMBOL(closure_wait);
 
 /**
  * closure_sync - sleep until a closure a closure has nothing left to wait on
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Sleeps until the refcount hits 1 - the thread that's running the closure owns
@@ -231,6 +271,7 @@ void closure_sync(struct closure *cl)
 
 	__closure_end_sleep(cl);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL_GPL(closure_sync);
 
@@ -322,6 +363,9 @@ EXPORT_SYMBOL_GPL(__closure_flush_sync);
 =======
 EXPORT_SYMBOL(closure_sync);
 >>>>>>> v3.18
+=======
+EXPORT_SYMBOL(closure_sync);
+>>>>>>> v3.18
 
 #ifdef CONFIG_BCACHE_CLOSURES_DEBUG
 
@@ -340,7 +384,11 @@ void closure_debug_create(struct closure *cl)
 	spin_unlock_irqrestore(&closure_list_lock, flags);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(closure_debug_create);
+=======
+EXPORT_SYMBOL(closure_debug_create);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(closure_debug_create);
 >>>>>>> v3.18
@@ -357,7 +405,11 @@ void closure_debug_destroy(struct closure *cl)
 	spin_unlock_irqrestore(&closure_list_lock, flags);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(closure_debug_destroy);
+=======
+EXPORT_SYMBOL(closure_debug_destroy);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(closure_debug_destroy);
 >>>>>>> v3.18
@@ -379,6 +431,7 @@ static int debug_seq_show(struct seq_file *f, void *data)
 			   r & CLOSURE_REMAINING_MASK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(f, "%s%s%s%s%s%s\n",
 			   test_bit(WORK_STRUCT_PENDING,
 				    work_data_bits(&cl->work)) ? "Q" : "",
@@ -388,12 +441,17 @@ static int debug_seq_show(struct seq_file *f, void *data)
 			   r & CLOSURE_SLEEPING	? "Sl" : "",
 			   r & CLOSURE_TIMER	? "T" : "");
 =======
+=======
+>>>>>>> v3.18
 		seq_printf(f, "%s%s%s%s\n",
 			   test_bit(WORK_STRUCT_PENDING,
 				    work_data_bits(&cl->work)) ? "Q" : "",
 			   r & CLOSURE_RUNNING	? "R" : "",
 			   r & CLOSURE_STACK	? "S" : "",
 			   r & CLOSURE_SLEEPING	? "Sl" : "");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (r & CLOSURE_WAITING)

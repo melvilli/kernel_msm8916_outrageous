@@ -312,9 +312,15 @@ sci_mpc_agent_validate_phy_configuration(struct isci_host *ihost,
 
 			assigned_phy_mask |= (1 << phy_index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 
 		phy_index++;
+=======
+			phy_index++;
+		}
+
+>>>>>>> v3.18
 =======
 			phy_index++;
 		}

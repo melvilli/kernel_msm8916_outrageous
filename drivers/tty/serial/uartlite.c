@@ -251,11 +251,14 @@ static void ulite_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ulite_enable_ms(struct uart_port *port)
 {
 	/* N/A */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void ulite_break_ctl(struct uart_port *port, int ctl)
@@ -399,7 +402,10 @@ static struct uart_ops ulite_ops = {
 	.start_tx	= ulite_start_tx,
 	.stop_rx	= ulite_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= ulite_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= ulite_break_ctl,
@@ -425,6 +431,7 @@ static struct uart_ops ulite_ops = {
 static void ulite_console_wait_tx(struct uart_port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	u8 val;
 
@@ -434,6 +441,8 @@ static void ulite_console_wait_tx(struct uart_port *port)
 		if ((val & ULITE_STATUS_TXFULL) == 0)
 			break;
 =======
+=======
+>>>>>>> v3.18
 	u8 val;
 	unsigned long timeout;
 
@@ -451,6 +460,9 @@ static void ulite_console_wait_tx(struct uart_port *port)
 				 "timeout waiting for TX buffer empty\n");
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cpu_relax();
 	}
@@ -689,7 +701,10 @@ static struct platform_driver ulite_platform_driver = {
 	.remove = ulite_remove,
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.name  = "uartlite",

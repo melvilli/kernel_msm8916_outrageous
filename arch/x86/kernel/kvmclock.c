@@ -49,10 +49,16 @@ static struct pvclock_wall_clock wall_clock;
  * that with system time
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long kvm_get_wallclock(void)
 {
 	struct pvclock_vcpu_time_info *vcpu_time;
 	struct timespec ts;
+=======
+static void kvm_get_wallclock(struct timespec *now)
+{
+	struct pvclock_vcpu_time_info *vcpu_time;
+>>>>>>> v3.18
 =======
 static void kvm_get_wallclock(struct timespec *now)
 {
@@ -71,6 +77,7 @@ static void kvm_get_wallclock(struct timespec *now)
 
 	vcpu_time = &hv_clock[cpu].pvti;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pvclock_read_wallclock(&wall_clock, vcpu_time, &ts);
 
 	preempt_enable();
@@ -80,12 +87,17 @@ static void kvm_get_wallclock(struct timespec *now)
 
 static int kvm_set_wallclock(unsigned long now)
 =======
+=======
+>>>>>>> v3.18
 	pvclock_read_wallclock(&wall_clock, vcpu_time, now);
 
 	preempt_enable();
 }
 
 static int kvm_set_wallclock(const struct timespec *now)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return -1;
@@ -158,6 +170,10 @@ bool kvm_check_and_clear_guest_paused(void)
 	if ((src->flags & PVCLOCK_GUEST_STOPPED) != 0) {
 		src->flags &= ~PVCLOCK_GUEST_STOPPED;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pvclock_touch_watchdogs();
+>>>>>>> v3.18
 =======
 		pvclock_touch_watchdogs();
 >>>>>>> v3.18
@@ -205,7 +221,11 @@ static void kvm_restore_sched_clock_state(void)
 
 #ifdef CONFIG_X86_LOCAL_APIC
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit kvm_setup_secondary_clock(void)
+=======
+static void kvm_setup_secondary_clock(void)
+>>>>>>> v3.18
 =======
 static void kvm_setup_secondary_clock(void)
 >>>>>>> v3.18
@@ -268,7 +288,11 @@ void __init kvmclock_init(void)
 	memset(hv_clock, 0, size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (kvm_register_clock("boot clock")) {
+=======
+	if (kvm_register_clock("primary cpu clock")) {
+>>>>>>> v3.18
 =======
 	if (kvm_register_clock("primary cpu clock")) {
 >>>>>>> v3.18
@@ -293,6 +317,10 @@ void __init kvmclock_init(void)
 	kvm_get_preset_lpj();
 	clocksource_register_hz(&kvm_clock, NSEC_PER_SEC);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pv_info.paravirt_enabled = 1;
+>>>>>>> v3.18
 =======
 	pv_info.paravirt_enabled = 1;
 >>>>>>> v3.18

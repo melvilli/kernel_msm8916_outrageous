@@ -26,8 +26,14 @@
 #include "common.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __skip_singlestep(struct kprobe *p, struct pt_regs *regs,
 			     struct kprobe_ctlblk *kcb)
+=======
+static nokprobe_inline
+int __skip_singlestep(struct kprobe *p, struct pt_regs *regs,
+		      struct kprobe_ctlblk *kcb)
+>>>>>>> v3.18
 =======
 static nokprobe_inline
 int __skip_singlestep(struct kprobe *p, struct pt_regs *regs,
@@ -48,8 +54,13 @@ int __skip_singlestep(struct kprobe *p, struct pt_regs *regs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __kprobes skip_singlestep(struct kprobe *p, struct pt_regs *regs,
 			      struct kprobe_ctlblk *kcb)
+=======
+int skip_singlestep(struct kprobe *p, struct pt_regs *regs,
+		    struct kprobe_ctlblk *kcb)
+>>>>>>> v3.18
 =======
 int skip_singlestep(struct kprobe *p, struct pt_regs *regs,
 		    struct kprobe_ctlblk *kcb)
@@ -61,16 +72,22 @@ int skip_singlestep(struct kprobe *p, struct pt_regs *regs,
 		return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Ftrace callback handler for kprobes */
 void __kprobes kprobe_ftrace_handler(unsigned long ip, unsigned long parent_ip,
 				     struct ftrace_ops *ops, struct pt_regs *regs)
 =======
+=======
+>>>>>>> v3.18
 NOKPROBE_SYMBOL(skip_singlestep);
 
 /* Ftrace callback handler for kprobes */
 void kprobe_ftrace_handler(unsigned long ip, unsigned long parent_ip,
 			   struct ftrace_ops *ops, struct pt_regs *regs)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kprobe *p;
@@ -104,8 +121,14 @@ end:
 	local_irq_restore(flags);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int __kprobes arch_prepare_kprobe_ftrace(struct kprobe *p)
+=======
+NOKPROBE_SYMBOL(kprobe_ftrace_handler);
+
+int arch_prepare_kprobe_ftrace(struct kprobe *p)
+>>>>>>> v3.18
 =======
 NOKPROBE_SYMBOL(kprobe_ftrace_handler);
 

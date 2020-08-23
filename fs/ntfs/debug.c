@@ -19,6 +19,7 @@
  * Foundation,Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "debug.h"
 
@@ -29,6 +30,11 @@
 static char err_buf[1024];
 static DEFINE_SPINLOCK(err_buf_lock);
 
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+#include "debug.h"
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 #include "debug.h"
@@ -57,6 +63,10 @@ void __ntfs_warning(const char *function, const struct super_block *sb,
 		const char *fmt, ...)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct va_format vaf;
+>>>>>>> v3.18
 =======
 	struct va_format vaf;
 >>>>>>> v3.18
@@ -70,6 +80,7 @@ void __ntfs_warning(const char *function, const struct super_block *sb,
 	if (function)
 		flen = strlen(function);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&err_buf_lock);
 	va_start(args, fmt);
 	vsnprintf(err_buf, sizeof(err_buf), fmt, args);
@@ -82,6 +93,8 @@ void __ntfs_warning(const char *function, const struct super_block *sb,
 				flen ? function : "", err_buf);
 	spin_unlock(&err_buf_lock);
 =======
+=======
+>>>>>>> v3.18
 	va_start(args, fmt);
 	vaf.fmt = fmt;
 	vaf.va = &args;
@@ -91,6 +104,9 @@ void __ntfs_warning(const char *function, const struct super_block *sb,
 	else
 		pr_warn("%s(): %pV\n", flen ? function : "", &vaf);
 	va_end(args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -117,6 +133,10 @@ void __ntfs_error(const char *function, const struct super_block *sb,
 		const char *fmt, ...)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct va_format vaf;
+>>>>>>> v3.18
 =======
 	struct va_format vaf;
 >>>>>>> v3.18
@@ -130,6 +150,7 @@ void __ntfs_error(const char *function, const struct super_block *sb,
 	if (function)
 		flen = strlen(function);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&err_buf_lock);
 	va_start(args, fmt);
 	vsnprintf(err_buf, sizeof(err_buf), fmt, args);
@@ -142,6 +163,8 @@ void __ntfs_error(const char *function, const struct super_block *sb,
 				flen ? function : "", err_buf);
 	spin_unlock(&err_buf_lock);
 =======
+=======
+>>>>>>> v3.18
 	va_start(args, fmt);
 	vaf.fmt = fmt;
 	vaf.va = &args;
@@ -151,6 +174,9 @@ void __ntfs_error(const char *function, const struct super_block *sb,
 	else
 		pr_err("%s(): %pV\n", flen ? function : "", &vaf);
 	va_end(args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -160,14 +186,20 @@ void __ntfs_error(const char *function, const struct super_block *sb,
 int debug_msgs = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __ntfs_debug (const char *file, int line, const char *function,
 		const char *fmt, ...)
 {
 =======
+=======
+>>>>>>> v3.18
 void __ntfs_debug(const char *file, int line, const char *function,
 		const char *fmt, ...)
 {
 	struct va_format vaf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	va_list args;
 	int flen = 0;
@@ -177,6 +209,7 @@ void __ntfs_debug(const char *file, int line, const char *function,
 	if (function)
 		flen = strlen(function);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&err_buf_lock);
 	va_start(args, fmt);
 	vsnprintf(err_buf, sizeof(err_buf), fmt, args);
@@ -185,11 +218,16 @@ void __ntfs_debug(const char *file, int line, const char *function,
 			flen ? function : "", err_buf);
 	spin_unlock(&err_buf_lock);
 =======
+=======
+>>>>>>> v3.18
 	va_start(args, fmt);
 	vaf.fmt = fmt;
 	vaf.va = &args;
 	pr_debug("(%s, %d): %s(): %pV", file, line, flen ? function : "", &vaf);
 	va_end(args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -203,6 +241,7 @@ void ntfs_debug_dump_runlist(const runlist_element *rl)
 	if (!debug_msgs)
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "NTFS-fs DEBUG: Dumping runlist (values in hex):\n");
 	if (!rl) {
 		printk(KERN_DEBUG "Run list not present.\n");
@@ -210,12 +249,17 @@ void ntfs_debug_dump_runlist(const runlist_element *rl)
 	}
 	printk(KERN_DEBUG "VCN              LCN               Run length\n");
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("Dumping runlist (values in hex):\n");
 	if (!rl) {
 		pr_debug("Run list not present.\n");
 		return;
 	}
 	pr_debug("VCN              LCN               Run length\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; ; i++) {
 		LCN lcn = (rl + i)->lcn;
@@ -226,7 +270,11 @@ void ntfs_debug_dump_runlist(const runlist_element *rl)
 			if (index > -LCN_ENOENT - 1)
 				index = 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "%-16Lx %s %-16Lx%s\n",
+=======
+			pr_debug("%-16Lx %s %-16Lx%s\n",
+>>>>>>> v3.18
 =======
 			pr_debug("%-16Lx %s %-16Lx%s\n",
 >>>>>>> v3.18
@@ -236,7 +284,11 @@ void ntfs_debug_dump_runlist(const runlist_element *rl)
 						" (runlist end)");
 		} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "%-16Lx %-16Lx  %-16Lx%s\n",
+=======
+			pr_debug("%-16Lx %-16Lx  %-16Lx%s\n",
+>>>>>>> v3.18
 =======
 			pr_debug("%-16Lx %-16Lx  %-16Lx%s\n",
 >>>>>>> v3.18

@@ -2,7 +2,11 @@
  *   Sharp s921 driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Copyright (C) 2009 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *   Copyright (C) 2009 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  *   Copyright (C) 2009 Mauro Carvalho Chehab
 >>>>>>> v3.18

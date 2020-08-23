@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * OMAP DMA Engine support
  *
@@ -19,6 +20,11 @@ static inline bool omap_dma_filter_fn(struct dma_chan *c, void *d)
 	return false;
 }
 #endif
+=======
+#ifndef __LINUX_OMAP_DMA_H
+#define __LINUX_OMAP_DMA_H
+#include <linux/omap-dmaengine.h>
+>>>>>>> v3.18
 =======
 #ifndef __LINUX_OMAP_DMA_H
 #define __LINUX_OMAP_DMA_H
@@ -154,6 +160,10 @@ static inline bool omap_dma_filter_fn(struct dma_chan *c, void *d)
 #define ENABLE_16XX_MODE		BIT(0xe)
 #define HS_CHANNELS_RESERVED		BIT(0xf)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DMA_ENGINE_HANDLE_IRQ		BIT(0x10)
+>>>>>>> v3.18
 =======
 #define DMA_ENGINE_HANDLE_IRQ		BIT(0x10)
 >>>>>>> v3.18
@@ -279,8 +289,11 @@ struct omap_dma_dev_attr {
 	u16 lch_count;
 	u16 chan_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_dma_lch *chan;
 =======
+=======
+>>>>>>> v3.18
 };
 
 enum {
@@ -294,20 +307,29 @@ struct omap_dma_reg {
 	u16	offset;
 	u8	stride;
 	u8	type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /* System DMA platform data structure */
 struct omap_system_dma_plat_info {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_dma_dev_attr *dma_attr;
 	u32 errata;
 	void (*disable_irq_lch)(int lch);
 =======
+=======
+>>>>>>> v3.18
 	const struct omap_dma_reg *reg_map;
 	unsigned channel_stride;
 	struct omap_dma_dev_attr *dma_attr;
 	u32 errata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void (*show_dma_caps)(void);
 	void (*clear_lch_regs)(int lch);
@@ -323,15 +345,21 @@ struct omap_system_dma_plat_info {
 #endif
 #define dma_omap1()	(!dma_omap2plus())
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define dma_omap15xx()	((dma_omap1() && (d->dev_caps & ENABLE_1510_MODE)))
 #define dma_omap16xx()	((dma_omap1() && (d->dev_caps & ENABLE_16XX_MODE)))
 =======
+=======
+>>>>>>> v3.18
 #define __dma_omap15xx(d) (dma_omap1() && (d)->dev_caps & ENABLE_1510_MODE)
 #define __dma_omap16xx(d) (dma_omap1() && (d)->dev_caps & ENABLE_16XX_MODE)
 #define dma_omap15xx()	__dma_omap15xx(d)
 #define dma_omap16xx()	__dma_omap16xx(d)
 
 extern struct omap_system_dma_plat_info *omap_get_plat_info(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern void omap_set_dma_priority(int lch, int dst_port, int priority);
@@ -348,8 +376,11 @@ extern void omap_set_dma_transfer_params(int lch, int data_type,
 					 int sync_mode,
 					 int dma_trigger, int src_or_dst_synch);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void omap_set_dma_color_mode(int lch, enum omap_dma_color_mode mode,
 				    u32 color);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void omap_set_dma_write_mode(int lch, enum omap_dma_write_mode mode);
@@ -359,7 +390,10 @@ extern void omap_set_dma_src_params(int lch, int src_port, int src_amode,
 				    unsigned long src_start,
 				    int src_ei, int src_fi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void omap_set_dma_src_index(int lch, int eidx, int fidx);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void omap_set_dma_src_data_pack(int lch, int enable);
@@ -370,7 +404,10 @@ extern void omap_set_dma_dest_params(int lch, int dest_port, int dest_amode,
 				     unsigned long dest_start,
 				     int dst_ei, int dst_fi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void omap_set_dma_dest_index(int lch, int eidx, int fidx);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void omap_set_dma_dest_data_pack(int lch, int enable);
@@ -382,7 +419,10 @@ extern void omap_set_dma_params(int lch,
 
 extern void omap_dma_link_lch(int lch_head, int lch_queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void omap_dma_unlink_lch(int lch_head, int lch_queue);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -392,13 +432,17 @@ extern int omap_set_dma_callback(int lch,
 extern dma_addr_t omap_get_dma_src_pos(int lch);
 extern dma_addr_t omap_get_dma_dst_pos(int lch);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void omap_clear_dma(int lch);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int omap_get_dma_active_status(int lch);
 extern int omap_dma_running(void);
 extern void omap_dma_set_global_params(int arb_rate, int max_fifo_depth,
 				       int tparams);
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int omap_dma_set_prio_lch(int lch, unsigned char read_prio,
 				 unsigned char write_prio);
@@ -436,10 +480,15 @@ extern int omap_dma_chain_status(int chain_id);
 
 #if defined(CONFIG_ARCH_OMAP1) && defined(CONFIG_FB_OMAP)
 =======
+=======
+>>>>>>> v3.18
 void omap_dma_global_context_save(void);
 void omap_dma_global_context_restore(void);
 
 #if defined(CONFIG_ARCH_OMAP1) && IS_ENABLED(CONFIG_FB_OMAP)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <mach/lcd_dma.h>
 #else

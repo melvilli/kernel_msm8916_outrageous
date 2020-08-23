@@ -44,10 +44,16 @@ DEFINE_EVENT(timer_class, timer_init,
 TRACE_EVENT(timer_start,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(struct timer_list *timer,
 		 unsigned long expires, char deferrable),
 
 	TP_ARGS(timer, expires, deferrable),
+=======
+	TP_PROTO(struct timer_list *timer, unsigned long expires),
+
+	TP_ARGS(timer, expires),
+>>>>>>> v3.18
 =======
 	TP_PROTO(struct timer_list *timer, unsigned long expires),
 
@@ -60,7 +66,10 @@ TRACE_EVENT(timer_start,
 		__field( unsigned long,	expires		)
 		__field( unsigned long,	now		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(char,	deferrable)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	),
@@ -71,6 +80,7 @@ TRACE_EVENT(timer_start,
 		__entry->expires	= expires;
 		__entry->now		= jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__entry->deferrable     = deferrable;
 	),
 
@@ -78,11 +88,16 @@ TRACE_EVENT(timer_start,
 		  __entry->timer, __entry->function, __entry->expires,
 		  (long)__entry->expires - __entry->now, __entry->deferrable)
 =======
+=======
+>>>>>>> v3.18
 	),
 
 	TP_printk("timer=%p function=%pf expires=%lu [timeout=%ld]",
 		  __entry->timer, __entry->function, __entry->expires,
 		  (long)__entry->expires - __entry->now)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 

@@ -54,7 +54,11 @@ config LIBERTAS_THINFIRM_USB
 config AIRO
 	tristate "Cisco/Aironet 34X/35X/4500/4800 ISA and PCI cards"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ISA_DMA_API && (PCI || BROKEN)
+=======
+	depends on CFG80211 && ISA_DMA_API && (PCI || BROKEN)
+>>>>>>> v3.18
 =======
 	depends on CFG80211 && ISA_DMA_API && (PCI || BROKEN)
 >>>>>>> v3.18
@@ -78,7 +82,11 @@ config AIRO
 config ATMEL
       tristate "Atmel at76c50x chipset  802.11b support"
 <<<<<<< HEAD
+<<<<<<< HEAD
       depends on (PCI || PCMCIA)
+=======
+      depends on CFG80211 && (PCI || PCMCIA)
+>>>>>>> v3.18
 =======
       depends on CFG80211 && (PCI || PCMCIA)
 >>>>>>> v3.18
@@ -125,7 +133,11 @@ config AT76C50X_USB
 config AIRO_CS
 	tristate "Cisco/Aironet 34X/35X/4500/4800 PCMCIA cards"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCMCIA && (BROKEN || !M32R)
+=======
+	depends on CFG80211 && PCMCIA && (BROKEN || !M32R)
+>>>>>>> v3.18
 =======
 	depends on CFG80211 && PCMCIA && (BROKEN || !M32R)
 >>>>>>> v3.18
@@ -151,7 +163,11 @@ config AIRO_CS
 config PCMCIA_WL3501
 	tristate "Planet WL3501 PCMCIA cards"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCMCIA
+=======
+	depends on CFG80211 && PCMCIA
+>>>>>>> v3.18
 =======
 	depends on CFG80211 && PCMCIA
 >>>>>>> v3.18
@@ -185,7 +201,11 @@ config PRISM54
 config USB_ZD1201
 	tristate "USB ZD1201 based Wireless device support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on USB
+=======
+	depends on CFG80211 && USB
+>>>>>>> v3.18
 =======
 	depends on CFG80211 && USB
 >>>>>>> v3.18
@@ -210,6 +230,10 @@ config USB_NET_RNDIS_WLAN
 	depends on USB
 	depends on CFG80211
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select USB_NET_DRIVERS
+>>>>>>> v3.18
 =======
 	select USB_NET_DRIVERS
 >>>>>>> v3.18
@@ -288,6 +312,7 @@ config MWL8K
 	  To compile this driver as a module, choose M here: the module
 	  will be called mwl8k.  If unsure, say N.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config WIFI_CONTROL_FUNC
 	bool "Enable WiFi control function abstraction"
@@ -389,6 +414,8 @@ config CLD_LL_CORE
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 source "drivers/net/wireless/ath/Kconfig"
 source "drivers/net/wireless/b43/Kconfig"
 source "drivers/net/wireless/b43legacy/Kconfig"
@@ -406,6 +433,11 @@ source "drivers/net/wireless/ti/Kconfig"
 source "drivers/net/wireless/zd1211rw/Kconfig"
 source "drivers/net/wireless/mwifiex/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/net/wireless/cw1200/Kconfig"
+source "drivers/net/wireless/rsi/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/net/wireless/cw1200/Kconfig"
 source "drivers/net/wireless/rsi/Kconfig"

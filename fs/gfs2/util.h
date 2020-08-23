@@ -11,17 +11,24 @@
 #define __UTIL_DOT_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef pr_fmt
 #undef pr_fmt
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/mempool.h>
 
 #include "incore.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define fs_printk(level, fs, fmt, arg...) \
 	printk(level "GFS2: fsid=%s: " fmt , (fs)->sd_fsname , ## arg)
@@ -36,6 +43,8 @@
 	fs_printk(KERN_ERR, fs , fmt , ## arg)
 
 =======
+=======
+>>>>>>> v3.18
 #define fs_emerg(fs, fmt, ...)						\
 	pr_emerg("fsid=%s: " fmt, (fs)->sd_fsname, ##__VA_ARGS__)
 #define fs_warn(fs, fmt, ...)						\
@@ -44,6 +53,9 @@
 	pr_err("fsid=%s: " fmt, (fs)->sd_fsname, ##__VA_ARGS__)
 #define fs_info(fs, fmt, ...)						\
 	pr_info("fsid=%s: " fmt, (fs)->sd_fsname, ##__VA_ARGS__)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void gfs2_assert_i(struct gfs2_sbd *sdp);
@@ -105,7 +117,11 @@ static inline int gfs2_meta_check(struct gfs2_sbd *sdp,
 	u32 magic = be32_to_cpu(mh->mh_magic);
 	if (unlikely(magic != GFS2_MAGIC)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "GFS2: Magic number missing at %llu\n",
+=======
+		pr_err("Magic number missing at %llu\n",
+>>>>>>> v3.18
 =======
 		pr_err("Magic number missing at %llu\n",
 >>>>>>> v3.18
@@ -188,6 +204,7 @@ static inline unsigned int gfs2_tune_get_i(struct gfs2_tune *gt,
 gfs2_tune_get_i(&(sdp)->sd_tune, &(sdp)->sd_tune.field)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void gfs2_icbit_munge(struct gfs2_sbd *sdp, unsigned char **bitmap,
 		      unsigned int bit, int new_value);
 int gfs2_lm_withdraw(struct gfs2_sbd *sdp, char *fmt, ...);
@@ -195,8 +212,13 @@ int gfs2_lm_withdraw(struct gfs2_sbd *sdp, char *fmt, ...);
 #endif /* __UTIL_DOT_H__ */
 
 =======
+=======
+>>>>>>> v3.18
 __printf(2, 3)
 int gfs2_lm_withdraw(struct gfs2_sbd *sdp, const char *fmt, ...);
 
 #endif /* __UTIL_DOT_H__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

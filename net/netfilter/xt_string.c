@@ -30,7 +30,10 @@ string_mt(const struct sk_buff *skb, struct xt_action_param *par)
 	bool invert;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(&state, 0, sizeof(struct ts_state));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	invert = conf->u.v1.flags & XT_STRING_FLAG_INVERT;

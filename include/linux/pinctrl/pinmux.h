@@ -40,7 +40,11 @@ struct pinctrl_dev;
  *	actual pins affected. The applicable groups will be returned in
  *	@groups and the number of groups in @num_groups
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @enable: enable a certain muxing function with a certain pin group. The
+=======
+ * @set_mux: enable a certain muxing function with a certain pin group. The
+>>>>>>> v3.18
 =======
  * @set_mux: enable a certain muxing function with a certain pin group. The
 >>>>>>> v3.18
@@ -50,7 +54,10 @@ struct pinctrl_dev;
  *	certain function whereas @group_selector selects a certain set of pins
  *	to be used. On simple controllers the latter argument may be ignored
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @disable: disable a certain muxing selector with a certain pin group
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @gpio_request_enable: requests and enables GPIO on a certain pin.
@@ -76,10 +83,15 @@ struct pinmux_ops {
 				  const char * const **groups,
 				  unsigned * const num_groups);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*enable) (struct pinctrl_dev *pctldev, unsigned func_selector,
 		       unsigned group_selector);
 	void (*disable) (struct pinctrl_dev *pctldev, unsigned func_selector,
 			 unsigned group_selector);
+=======
+	int (*set_mux) (struct pinctrl_dev *pctldev, unsigned func_selector,
+			unsigned group_selector);
+>>>>>>> v3.18
 =======
 	int (*set_mux) (struct pinctrl_dev *pctldev, unsigned func_selector,
 			unsigned group_selector);

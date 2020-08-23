@@ -877,11 +877,14 @@ found:
 		sonypi_report_input_event(event);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ACPI
 	if (sonypi_acpi_device)
 		acpi_bus_generate_proc_event(sonypi_acpi_device, 1, event);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfifo_in_locked(&sonypi_device.fifo, (unsigned char *)&event,

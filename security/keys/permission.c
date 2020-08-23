@@ -29,7 +29,11 @@
  */
 int key_task_permission(const key_ref_t key_ref, const struct cred *cred,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			key_perm_t perm)
+=======
+			unsigned perm)
+>>>>>>> v3.18
 =======
 			unsigned perm)
 >>>>>>> v3.18
@@ -73,7 +77,11 @@ use_these_perms:
 		kperm |= key->perm >> 24;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kperm = kperm & perm & KEY_ALL;
+=======
+	kperm = kperm & perm & KEY_NEED_ALL;
+>>>>>>> v3.18
 =======
 	kperm = kperm & perm & KEY_NEED_ALL;
 >>>>>>> v3.18

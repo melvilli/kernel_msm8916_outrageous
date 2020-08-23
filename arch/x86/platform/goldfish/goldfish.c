@@ -43,6 +43,7 @@ static struct resource goldfish_pdev_bus_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool goldfish_enable __initdata;
 
 static int __init goldfish_setup(char *str)
@@ -60,10 +61,15 @@ static int __init goldfish_init(void)
 	platform_device_register_simple("goldfish_pdev_bus", -1,
 					goldfish_pdev_bus_resources, 2);
 =======
+=======
+>>>>>>> v3.18
 static int __init goldfish_init(void)
 {
 	platform_device_register_simple("goldfish_pdev_bus", -1,
 						goldfish_pdev_bus_resources, 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

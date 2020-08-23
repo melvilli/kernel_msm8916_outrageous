@@ -27,6 +27,7 @@
 
 /* DDR Ctrlr Error Registers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HB_DDR_ECC_OPT			0x128
 #define HB_DDR_ECC_U_ERR_ADDR		0x130
 #define HB_DDR_ECC_U_ERR_STAT		0x134
@@ -46,6 +47,8 @@
 #define HB_DDR_ECC_INT_STAT_UE		0x20
 #define HB_DDR_ECC_INT_STAT_DOUBLE_UE	0x40
 =======
+=======
+>>>>>>> v3.18
 
 #define HB_DDR_ECC_ERR_BASE		0x128
 #define MW_DDR_ECC_ERR_BASE		0x1b4
@@ -59,6 +62,9 @@
 #define HB_DDR_ECC_C_ERR_STAT		0x1c
 #define HB_DDR_ECC_C_ERR_DATAL		0x20
 #define HB_DDR_ECC_C_ERR_DATAH		0x24
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define HB_DDR_ECC_OPT_MODE_MASK	0x3
@@ -66,9 +72,12 @@
 #define HB_DDR_ECC_OPT_XOR_SHIFT	16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct hb_mc_drvdata {
 	void __iomem *mc_vbase;
 =======
+=======
+>>>>>>> v3.18
 /* DDR Ctrlr Interrupt Registers */
 
 #define HB_DDR_ECC_INT_BASE		0x180
@@ -85,6 +94,9 @@ struct hb_mc_drvdata {
 struct hb_mc_drvdata {
 	void __iomem *mc_err_base;
 	void __iomem *mc_int_base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -96,15 +108,21 @@ static irqreturn_t highbank_mc_err_handler(int irq, void *dev_id)
 
 	/* Read the interrupt status register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = readl(drvdata->mc_vbase + HB_DDR_ECC_INT_STATUS);
 
 	if (status & HB_DDR_ECC_INT_STAT_UE) {
 		err_addr = readl(drvdata->mc_vbase + HB_DDR_ECC_U_ERR_ADDR);
 =======
+=======
+>>>>>>> v3.18
 	status = readl(drvdata->mc_int_base + HB_DDR_ECC_INT_STATUS);
 
 	if (status & HB_DDR_ECC_INT_STAT_UE) {
 		err_addr = readl(drvdata->mc_err_base + HB_DDR_ECC_U_ERR_ADDR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		edac_mc_handle_error(HW_EVENT_ERR_UNCORRECTED, mci, 1,
 				     err_addr >> PAGE_SHIFT,
@@ -114,9 +132,15 @@ static irqreturn_t highbank_mc_err_handler(int irq, void *dev_id)
 	}
 	if (status & HB_DDR_ECC_INT_STAT_CE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 syndrome = readl(drvdata->mc_vbase + HB_DDR_ECC_C_ERR_STAT);
 		syndrome = (syndrome >> 8) & 0xff;
 		err_addr = readl(drvdata->mc_vbase + HB_DDR_ECC_C_ERR_ADDR);
+=======
+		u32 syndrome = readl(drvdata->mc_err_base + HB_DDR_ECC_C_ERR_STAT);
+		syndrome = (syndrome >> 8) & 0xff;
+		err_addr = readl(drvdata->mc_err_base + HB_DDR_ECC_C_ERR_ADDR);
+>>>>>>> v3.18
 =======
 		u32 syndrome = readl(drvdata->mc_err_base + HB_DDR_ECC_C_ERR_STAT);
 		syndrome = (syndrome >> 8) & 0xff;
@@ -130,6 +154,7 @@ static irqreturn_t highbank_mc_err_handler(int irq, void *dev_id)
 	}
 
 	/* clear the error, clears the interrupt */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	writel(status, drvdata->mc_vbase + HB_DDR_ECC_INT_ACK);
 	return IRQ_HANDLED;
@@ -159,6 +184,8 @@ static ssize_t highbank_mc_err_inject_write(struct file *file,
 		writel(reg, pdata->mc_vbase + HB_DDR_ECC_OPT);
 	}
 =======
+=======
+>>>>>>> v3.18
 	writel(status, drvdata->mc_int_base + HB_DDR_ECC_INT_ACK);
 	return IRQ_HANDLED;
 }
@@ -186,11 +213,15 @@ static ssize_t highbank_mc_inject_ctrl(struct device *dev,
 		return -EINVAL;
 
 	highbank_mc_err_inject(mci, synd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return count;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct file_operations highbank_mc_debug_inject_fops = {
 	.open = simple_open,
@@ -213,6 +244,8 @@ static void highbank_mc_create_debugfs_nodes(struct mem_ctl_info *mci)
 static int highbank_mc_probe(struct platform_device *pdev)
 {
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(inject_ctrl, S_IWUSR, NULL, highbank_mc_inject_ctrl);
 
 struct hb_mc_settings {
@@ -241,6 +274,9 @@ static int highbank_mc_probe(struct platform_device *pdev)
 {
 	const struct of_device_id *id;
 	const struct hb_mc_settings *settings;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct edac_mc_layer layers[2];
 	struct mem_ctl_info *mci;
@@ -248,6 +284,10 @@ static int highbank_mc_probe(struct platform_device *pdev)
 	struct dimm_info *dimm;
 	struct resource *r;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem *base;
+>>>>>>> v3.18
 =======
 	void __iomem *base;
 >>>>>>> v3.18
@@ -256,11 +296,17 @@ static int highbank_mc_probe(struct platform_device *pdev)
 	int res = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	id = of_match_device(hb_ddr_ctrl_of_match, &pdev->dev);
 	if (!id)
 		return -ENODEV;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	layers[0].type = EDAC_MC_LAYER_CHIP_SELECT;
 	layers[0].size = 1;
@@ -295,9 +341,14 @@ static int highbank_mc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drvdata->mc_vbase = devm_ioremap(&pdev->dev,
 					  r->start, resource_size(r));
 	if (!drvdata->mc_vbase) {
+=======
+	base = devm_ioremap(&pdev->dev, r->start, resource_size(r));
+	if (!base) {
+>>>>>>> v3.18
 =======
 	base = devm_ioremap(&pdev->dev, r->start, resource_size(r));
 	if (!base) {
@@ -308,13 +359,19 @@ static int highbank_mc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	control = readl(drvdata->mc_vbase + HB_DDR_ECC_OPT) & 0x3;
 =======
+=======
+>>>>>>> v3.18
 	settings = id->data;
 	drvdata->mc_err_base = base + settings->err_offset;
 	drvdata->mc_int_base = base + settings->int_offset;
 
 	control = readl(drvdata->mc_err_base + HB_DDR_ECC_OPT) & 0x3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!control || (control == 0x2)) {
 		dev_err(&pdev->dev, "No ECC present, or ECC disabled\n");
@@ -326,14 +383,20 @@ static int highbank_mc_probe(struct platform_device *pdev)
 	mci->edac_ctl_cap = EDAC_FLAG_NONE | EDAC_FLAG_SECDED;
 	mci->edac_cap = EDAC_FLAG_SECDED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mci->mod_name = dev_name(&pdev->dev);
 	mci->mod_ver = "1";
 	mci->ctl_name = dev_name(&pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 	mci->mod_name = pdev->dev.driver->name;
 	mci->mod_ver = "1";
 	mci->ctl_name = id->compatible;
 	mci->dev_name = dev_name(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mci->scrub_mode = SCRUB_SW_SRC;
 
@@ -358,7 +421,11 @@ static int highbank_mc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	highbank_mc_create_debugfs_nodes(mci);
+=======
+	device_create_file(&mci->dev, &dev_attr_inject_ctrl);
+>>>>>>> v3.18
 =======
 	device_create_file(&mci->dev, &dev_attr_inject_ctrl);
 >>>>>>> v3.18
@@ -378,6 +445,10 @@ static int highbank_mc_remove(struct platform_device *pdev)
 	struct mem_ctl_info *mci = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_remove_file(&mci->dev, &dev_attr_inject_ctrl);
+>>>>>>> v3.18
 =======
 	device_remove_file(&mci->dev, &dev_attr_inject_ctrl);
 >>>>>>> v3.18
@@ -387,12 +458,15 @@ static int highbank_mc_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id hb_ddr_ctrl_of_match[] = {
 	{ .compatible = "calxeda,hb-ddr-ctrl", },
 	{},
 };
 MODULE_DEVICE_TABLE(of, hb_ddr_ctrl_of_match);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver highbank_mc_edac_driver = {

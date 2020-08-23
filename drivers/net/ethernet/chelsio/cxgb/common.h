@@ -12,8 +12,12 @@
  *                                                                           *
  * You should have received a copy of the GNU General Public License along   *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * with this program; if not, write to the Free Software Foundation, Inc.,   *
  * 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.                 *
+=======
+ * with this program; if not, see <http://www.gnu.org/licenses/>.            *
+>>>>>>> v3.18
 =======
  * with this program; if not, see <http://www.gnu.org/licenses/>.            *
 >>>>>>> v3.18
@@ -55,7 +59,10 @@
 #include <linux/mdio.h>
 #include <linux/crc32.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -332,6 +339,7 @@ static inline unsigned int core_ticks_per_usec(const adapter_t *adap)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __t1_tpi_read(adapter_t *adapter, u32 addr, u32 *valp);
 extern int __t1_tpi_write(adapter_t *adapter, u32 addr, u32 value);
 extern int t1_tpi_write(adapter_t *adapter, u32 addr, u32 value);
@@ -358,6 +366,8 @@ extern void t1_fatal_err(adapter_t *adapter);
 extern void t1_link_changed(adapter_t *adapter, int port_id);
 extern void t1_link_negotiated(adapter_t *adapter, int port_id, int link_stat,
 =======
+=======
+>>>>>>> v3.18
 int __t1_tpi_read(adapter_t *adapter, u32 addr, u32 *valp);
 int __t1_tpi_write(adapter_t *adapter, u32 addr, u32 value);
 int t1_tpi_write(adapter_t *adapter, u32 addr, u32 value);
@@ -383,6 +393,9 @@ void t1_free_sw_modules(adapter_t *adapter);
 void t1_fatal_err(adapter_t *adapter);
 void t1_link_changed(adapter_t *adapter, int port_id);
 void t1_link_negotiated(adapter_t *adapter, int port_id, int link_stat,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    int speed, int duplex, int pause);
 #endif /* _CXGB_COMMON_H_ */

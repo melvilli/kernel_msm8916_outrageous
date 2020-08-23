@@ -35,6 +35,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/socket.h>
+>>>>>>> v3.18
 =======
 #include <linux/socket.h>
 >>>>>>> v3.18
@@ -50,8 +54,13 @@ enum {
 	RDMA_USER_CM_CMD_CREATE_ID,
 	RDMA_USER_CM_CMD_DESTROY_ID,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RDMA_USER_CM_CMD_BIND_ADDR,
 	RDMA_USER_CM_CMD_RESOLVE_ADDR,
+=======
+	RDMA_USER_CM_CMD_BIND_IP,
+	RDMA_USER_CM_CMD_RESOLVE_IP,
+>>>>>>> v3.18
 =======
 	RDMA_USER_CM_CMD_BIND_IP,
 	RDMA_USER_CM_CMD_RESOLVE_IP,
@@ -69,10 +78,13 @@ enum {
 	RDMA_USER_CM_CMD_SET_OPTION,
 	RDMA_USER_CM_CMD_NOTIFY,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RDMA_USER_CM_CMD_JOIN_MCAST,
 	RDMA_USER_CM_CMD_LEAVE_MCAST,
 	RDMA_USER_CM_CMD_MIGRATE_ID
 =======
+=======
+>>>>>>> v3.18
 	RDMA_USER_CM_CMD_JOIN_IP_MCAST,
 	RDMA_USER_CM_CMD_LEAVE_MCAST,
 	RDMA_USER_CM_CMD_MIGRATE_ID,
@@ -80,6 +92,9 @@ enum {
 	RDMA_USER_CM_CMD_BIND,
 	RDMA_USER_CM_CMD_RESOLVE_ADDR,
 	RDMA_USER_CM_CMD_JOIN_MCAST
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -115,7 +130,11 @@ struct rdma_ucm_destroy_id_resp {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rdma_ucm_bind_addr {
+=======
+struct rdma_ucm_bind_ip {
+>>>>>>> v3.18
 =======
 struct rdma_ucm_bind_ip {
 >>>>>>> v3.18
@@ -125,8 +144,11 @@ struct rdma_ucm_bind_ip {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rdma_ucm_resolve_addr {
 =======
+=======
+>>>>>>> v3.18
 struct rdma_ucm_bind {
 	__u32 id;
 	__u16 addr_size;
@@ -135,6 +157,9 @@ struct rdma_ucm_bind {
 };
 
 struct rdma_ucm_resolve_ip {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct sockaddr_in6 src_addr;
 	struct sockaddr_in6 dst_addr;
@@ -143,7 +168,10 @@ struct rdma_ucm_resolve_ip {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct rdma_ucm_resolve_addr {
 	__u32 id;
 	__u32 timeout_ms;
@@ -154,6 +182,9 @@ struct rdma_ucm_resolve_addr {
 	struct sockaddr_storage dst_addr;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rdma_ucm_resolve_route {
 	__u32 id;
@@ -161,11 +192,14 @@ struct rdma_ucm_resolve_route {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rdma_ucm_query_route {
 	__u64 response;
 	__u32 id;
 	__u32 reserved;
 =======
+=======
+>>>>>>> v3.18
 enum {
 	RDMA_USER_CM_QUERY_ADDR,
 	RDMA_USER_CM_QUERY_PATH,
@@ -176,6 +210,9 @@ struct rdma_ucm_query {
 	__u64 response;
 	__u32 id;
 	__u32 option;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -190,10 +227,13 @@ struct rdma_ucm_query_route_resp {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rdma_ucm_conn_param {
 	__u32 qp_num;
 	__u32 reserved;
 =======
+=======
+>>>>>>> v3.18
 struct rdma_ucm_query_addr_resp {
 	__u64 node_guid;
 	__u8  port_num;
@@ -214,6 +254,9 @@ struct rdma_ucm_query_path_resp {
 struct rdma_ucm_conn_param {
 	__u32 qp_num;
 	__u32 qkey;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__u8  private_data[RDMA_MAX_PRIVATE_DATA];
 	__u8  private_data_len;
@@ -276,7 +319,11 @@ struct rdma_ucm_notify {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rdma_ucm_join_mcast {
+=======
+struct rdma_ucm_join_ip_mcast {
+>>>>>>> v3.18
 =======
 struct rdma_ucm_join_ip_mcast {
 >>>>>>> v3.18
@@ -287,7 +334,10 @@ struct rdma_ucm_join_ip_mcast {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct rdma_ucm_join_mcast {
 	__u64 response;		/* rdma_ucma_create_id_resp */
 	__u64 uid;
@@ -297,6 +347,9 @@ struct rdma_ucm_join_mcast {
 	struct sockaddr_storage addr;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rdma_ucm_get_event {
 	__u64 response;

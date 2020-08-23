@@ -23,17 +23,23 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <engine/disp.h>
 
 #include <core/event.h>
 #include <core/class.h>
 =======
+=======
+>>>>>>> v3.18
 #include "priv.h"
 
 #include <core/client.h>
 #include <core/event.h>
 #include <nvif/unpack.h>
 #include <nvif/class.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct nv04_disp_priv {
@@ -41,10 +47,13 @@ struct nv04_disp_priv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct nouveau_oclass
 nv04_disp_sclass[] = {
 	{ NV04_DISP_CLASS, &nouveau_object_ofuncs },
 =======
+=======
+>>>>>>> v3.18
 static int
 nv04_disp_scanoutpos(struct nouveau_object *object, struct nv04_disp_priv *priv,
 		     void *data, u32 size, int head)
@@ -130,6 +139,9 @@ nv04_disp_ofuncs = {
 static struct nouveau_oclass
 nv04_disp_sclass[] = {
 	{ NV04_DISP, &nv04_disp_ofuncs },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{},
 };
@@ -139,6 +151,7 @@ nv04_disp_sclass[] = {
  ******************************************************************************/
 
 static void
+<<<<<<< HEAD
 <<<<<<< HEAD
 nv04_disp_vblank_enable(struct nouveau_event *event, int head)
 {
@@ -152,6 +165,8 @@ nv04_disp_vblank_disable(struct nouveau_event *event, int head)
 }
 
 =======
+=======
+>>>>>>> v3.18
 nv04_disp_vblank_init(struct nvkm_event *event, int type, int head)
 {
 	struct nouveau_disp *disp = container_of(event, typeof(*disp), vblank);
@@ -172,6 +187,9 @@ nv04_disp_vblank_func = {
 	.fini = nv04_disp_vblank_fini,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void
 nv04_disp_intr(struct nouveau_subdev *subdev)
@@ -180,24 +198,33 @@ nv04_disp_intr(struct nouveau_subdev *subdev)
 	u32 crtc0 = nv_rd32(priv, 0x600100);
 	u32 crtc1 = nv_rd32(priv, 0x602100);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (crtc0 & 0x00000001) {
 		nouveau_event_trigger(priv->base.vblank, 0);
 =======
+=======
+>>>>>>> v3.18
 	u32 pvideo;
 
 	if (crtc0 & 0x00000001) {
 		nouveau_disp_vblank(&priv->base, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nv_wr32(priv, 0x600100, 0x00000001);
 	}
 
 	if (crtc1 & 0x00000001) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nouveau_event_trigger(priv->base.vblank, 1);
 		nv_wr32(priv, 0x602100, 0x00000001);
 	}
 =======
+=======
+>>>>>>> v3.18
 		nouveau_disp_vblank(&priv->base, 1);
 		nv_wr32(priv, 0x602100, 0x00000001);
 	}
@@ -209,6 +236,9 @@ nv04_disp_intr(struct nouveau_subdev *subdev)
 			nv_info(priv, "PVIDEO intr: %08x\n", pvideo);
 		nv_wr32(priv, 0x8100, pvideo);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -229,6 +259,7 @@ nv04_disp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	nv_engine(priv)->sclass = nv04_disp_sclass;
 	nv_subdev(priv)->intr = nv04_disp_intr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->base.vblank->priv = priv;
 	priv->base.vblank->enable = nv04_disp_vblank_enable;
 	priv->base.vblank->disable = nv04_disp_vblank_disable;
@@ -240,6 +271,8 @@ nv04_disp_oclass = {
 	.handle = NV_ENGINE(DISP, 0x04),
 	.ofuncs = &(struct nouveau_ofuncs) {
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -247,6 +280,9 @@ struct nouveau_oclass *
 nv04_disp_oclass = &(struct nouveau_disp_impl) {
 	.base.handle = NV_ENGINE(DISP, 0x04),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ctor = nv04_disp_ctor,
 		.dtor = _nouveau_disp_dtor,
@@ -254,7 +290,12 @@ nv04_disp_oclass = &(struct nouveau_disp_impl) {
 		.fini = _nouveau_disp_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.vblank = &nv04_disp_vblank_func,
+}.base;
+>>>>>>> v3.18
 =======
 	.vblank = &nv04_disp_vblank_func,
 }.base;

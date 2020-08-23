@@ -24,7 +24,10 @@
 #include <sound/soc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_soc_dapm_widget wm8727_dapm_widgets[] = {
 SND_SOC_DAPM_OUTPUT("VOUTL"),
 SND_SOC_DAPM_OUTPUT("VOUTR"),
@@ -35,6 +38,9 @@ static const struct snd_soc_dapm_route wm8727_dapm_routes[] = {
 	{ "VOUTR", NULL, "Playback" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Note this is a simple chip with no configuration interface, sample rate is
@@ -57,14 +63,20 @@ static struct snd_soc_dai_driver wm8727_dai = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct snd_soc_codec_driver soc_codec_dev_wm8727;
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_codec_driver soc_codec_dev_wm8727 = {
 	.dapm_widgets = wm8727_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(wm8727_dapm_widgets),
 	.dapm_routes = wm8727_dapm_routes,
 	.num_dapm_routes = ARRAY_SIZE(wm8727_dapm_routes),
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int wm8727_probe(struct platform_device *pdev)

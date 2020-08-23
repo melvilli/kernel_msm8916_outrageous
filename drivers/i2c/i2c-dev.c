@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
     MA 02110-1301 USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -106,8 +109,13 @@ static void return_i2c_dev(struct i2c_dev *i2c_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_adapter_name(struct device *dev,
 				 struct device_attribute *attr, char *buf)
+=======
+static ssize_t name_show(struct device *dev,
+			 struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t name_show(struct device *dev,
 			 struct device_attribute *attr, char *buf)
@@ -120,8 +128,11 @@ static ssize_t name_show(struct device *dev,
 	return sprintf(buf, "%s\n", i2c_dev->adap->name);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(name, S_IRUGO, show_adapter_name, NULL);
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(name);
 
 static struct attribute *i2c_attrs[] = {
@@ -129,6 +140,9 @@ static struct attribute *i2c_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(i2c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* ------------------------------------------------------------------------- */
@@ -347,7 +361,11 @@ static noinline int i2cdev_ioctl_smbus(struct i2c_client *client,
 {
 	struct i2c_smbus_ioctl_data data_arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union i2c_smbus_data temp = {};
+=======
+	union i2c_smbus_data temp;
+>>>>>>> v3.18
 =======
 	union i2c_smbus_data temp;
 >>>>>>> v3.18
@@ -585,9 +603,12 @@ static int i2cdev_attach_adapter(struct device *dev, void *dummy)
 		goto error;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = device_create_file(i2c_dev->dev, &dev_attr_name);
 	if (res)
 		goto error_destroy;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -595,8 +616,11 @@ static int i2cdev_attach_adapter(struct device *dev, void *dummy)
 		 adap->name, adap->nr);
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_destroy:
 	device_destroy(i2c_dev_class, MKDEV(I2C_MAJOR, adap->nr));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 error:
@@ -618,7 +642,10 @@ static int i2cdev_detach_adapter(struct device *dev, void *dummy)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_remove_file(i2c_dev->dev, &dev_attr_name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return_i2c_dev(i2c_dev);
@@ -669,6 +696,10 @@ static int __init i2c_dev_init(void)
 		goto out_unreg_chrdev;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	i2c_dev_class->dev_groups = i2c_groups;
+>>>>>>> v3.18
 =======
 	i2c_dev_class->dev_groups = i2c_groups;
 >>>>>>> v3.18

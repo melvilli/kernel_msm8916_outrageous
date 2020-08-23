@@ -20,6 +20,10 @@
 #include <mach/hardware.h>
 #include <asm/setup.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/irq.h>
+>>>>>>> v3.18
 =======
 #include <asm/irq.h>
 >>>>>>> v3.18

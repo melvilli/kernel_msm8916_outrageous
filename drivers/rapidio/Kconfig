@@ -68,12 +68,18 @@ config RAPIDIO_ENUM_BASIC
 endchoice
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/rapidio/switches/Kconfig"
 =======
+=======
+>>>>>>> v3.18
 menu "RapidIO Switch drivers"
 	depends on RAPIDIO
 
 source "drivers/rapidio/switches/Kconfig"
 
 endmenu
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

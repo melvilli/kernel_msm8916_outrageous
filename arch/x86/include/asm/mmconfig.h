@@ -3,8 +3,13 @@
 
 #ifdef CONFIG_PCI_MMCONFIG
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __cpuinit fam10h_check_enable_mmcfg(void);
 extern void __cpuinit check_enable_amd_mmconf_dmi(void);
+=======
+extern void fam10h_check_enable_mmcfg(void);
+extern void check_enable_amd_mmconf_dmi(void);
+>>>>>>> v3.18
 =======
 extern void fam10h_check_enable_mmcfg(void);
 extern void check_enable_amd_mmconf_dmi(void);

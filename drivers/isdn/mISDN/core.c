@@ -38,8 +38,13 @@ static void mISDN_dev_release(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t _show_id(struct device *dev,
 			struct device_attribute *attr, char *buf)
+=======
+static ssize_t id_show(struct device *dev,
+		       struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t id_show(struct device *dev,
 		       struct device_attribute *attr, char *buf)
@@ -52,14 +57,20 @@ static ssize_t id_show(struct device *dev,
 	return sprintf(buf, "%d\n", mdev->id);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t _show_nrbchan(struct device *dev,
 			     struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(id);
 
 static ssize_t nrbchan_show(struct device *dev,
 			    struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct mISDNdevice *mdev = dev_to_mISDN(dev);
@@ -69,14 +80,20 @@ static ssize_t nrbchan_show(struct device *dev,
 	return sprintf(buf, "%d\n", mdev->nrbchan);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t _show_d_protocols(struct device *dev,
 				 struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(nrbchan);
 
 static ssize_t d_protocols_show(struct device *dev,
 				struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct mISDNdevice *mdev = dev_to_mISDN(dev);
@@ -86,14 +103,20 @@ static ssize_t d_protocols_show(struct device *dev,
 	return sprintf(buf, "%d\n", mdev->Dprotocols);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t _show_b_protocols(struct device *dev,
 				 struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(d_protocols);
 
 static ssize_t b_protocols_show(struct device *dev,
 				struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct mISDNdevice *mdev = dev_to_mISDN(dev);
@@ -103,14 +126,20 @@ static ssize_t b_protocols_show(struct device *dev,
 	return sprintf(buf, "%d\n", mdev->Bprotocols | get_all_Bprotocols());
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t _show_protocol(struct device *dev,
 			      struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(b_protocols);
 
 static ssize_t protocol_show(struct device *dev,
 			     struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct mISDNdevice *mdev = dev_to_mISDN(dev);
@@ -120,30 +149,42 @@ static ssize_t protocol_show(struct device *dev,
 	return sprintf(buf, "%d\n", mdev->D.protocol);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t _show_name(struct device *dev,
 			  struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(protocol);
 
 static ssize_t name_show(struct device *dev,
 			 struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	strcpy(buf, dev_name(dev));
 	return strlen(buf);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #if 0 /* hangs */
 static ssize_t _set_name(struct device *dev, struct device_attribute *attr,
 			 const char *buf, size_t count)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(name);
 
 #if 0 /* hangs */
 static ssize_t name_set(struct device *dev, struct device_attribute *attr,
 			const char *buf, size_t count)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int err = 0;
@@ -162,16 +203,22 @@ static ssize_t name_set(struct device *dev, struct device_attribute *attr,
 	return (err < 0) ? err : count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 static ssize_t _show_channelmap(struct device *dev,
 				struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RW(name);
 #endif
 
 static ssize_t channelmap_show(struct device *dev,
 			       struct device_attribute *attr, char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct mISDNdevice *mdev = dev_to_mISDN(dev);
@@ -183,6 +230,7 @@ static ssize_t channelmap_show(struct device *dev,
 
 	return bp - buf;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static struct device_attribute mISDN_dev_attrs[] = {
@@ -197,6 +245,8 @@ static struct device_attribute mISDN_dev_attrs[] = {
 	{}
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(channelmap);
 
 static struct attribute *mISDN_attrs[] = {
@@ -210,6 +260,9 @@ static struct attribute *mISDN_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(mISDN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int mISDN_uevent(struct device *dev, struct kobj_uevent_env *env)
@@ -235,7 +288,11 @@ static struct class mISDN_class = {
 	.owner = THIS_MODULE,
 	.dev_uevent = mISDN_uevent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs = mISDN_dev_attrs,
+=======
+	.dev_groups = mISDN_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups = mISDN_groups,
 >>>>>>> v3.18

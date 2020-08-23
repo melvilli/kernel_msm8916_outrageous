@@ -8,6 +8,10 @@
 #define GREPROTO_PPTP		1
 #define GREPROTO_MAX		2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GRE_IP_PROTO_MAX	2
+>>>>>>> v3.18
 =======
 #define GRE_IP_PROTO_MAX	2
 >>>>>>> v3.18
@@ -27,7 +31,10 @@ int gre_add_protocol(const struct gre_protocol *proto, u8 version);
 int gre_del_protocol(const struct gre_protocol *proto, u8 version);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct gre_cisco_protocol {
 	int (*handler)(struct sk_buff *skb, const struct tnl_ptk_info *tpi);
 	int (*err_handler)(struct sk_buff *skb, u32 info,
@@ -62,6 +69,9 @@ static inline int ip_gre_calc_hlen(__be16 o_flags)
 	return addend;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline __be16 gre_flags_to_tnl_flags(__be16 flags)
 {

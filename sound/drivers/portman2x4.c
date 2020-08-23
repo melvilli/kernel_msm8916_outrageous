@@ -749,7 +749,12 @@ static int snd_portman_probe(struct platform_device *pdev)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pdev->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pdev->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -804,8 +809,11 @@ static int snd_portman_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, card);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pdev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* At this point card will be usable */

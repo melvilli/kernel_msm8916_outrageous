@@ -26,8 +26,14 @@ struct vm_area_struct;
 struct page;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void load_mmu(void);
 extern unsigned long calc_highpages(void);
+=======
+void load_mmu(void);
+unsigned long calc_highpages(void);
+unsigned long __init bootmem_init(unsigned long *pages_avail);
+>>>>>>> v3.18
 =======
 void load_mmu(void);
 unsigned long calc_highpages(void);
@@ -63,7 +69,11 @@ unsigned long __init bootmem_init(unsigned long *pages_avail);
 #define swapper_pg_dir NULL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void paging_init(void);
+=======
+void paging_init(void);
+>>>>>>> v3.18
 =======
 void paging_init(void);
 >>>>>>> v3.18
@@ -439,8 +449,13 @@ extern unsigned long *sparc_valid_addr_bitmap;
 #define GET_PFN(pfn)			(pfn & 0x0fffffffUL)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int remap_pfn_range(struct vm_area_struct *, unsigned long, unsigned long,
 			   unsigned long, pgprot_t);
+=======
+int remap_pfn_range(struct vm_area_struct *, unsigned long, unsigned long,
+		    unsigned long, pgprot_t);
+>>>>>>> v3.18
 =======
 int remap_pfn_range(struct vm_area_struct *, unsigned long, unsigned long,
 		    unsigned long, pgprot_t);

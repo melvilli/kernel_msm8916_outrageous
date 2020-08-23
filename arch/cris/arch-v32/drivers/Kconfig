@@ -3,9 +3,13 @@ if ETRAX_ARCH_V32
 config ETRAX_ETHERNET
 	bool "Ethernet support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ETRAX_ARCH_V32
 	select ETHERNET
 	select NET_CORE
+=======
+	depends on ETRAX_ARCH_V32 && NETDEVICES
+>>>>>>> v3.18
 =======
 	depends on ETRAX_ARCH_V32 && NETDEVICES
 >>>>>>> v3.18
@@ -18,7 +22,10 @@ config ETRAX_NO_PHY
 	bool "PHY not present"
 	depends on ETRAX_ETHERNET
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default N
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -28,6 +35,7 @@ config ETRAX_NO_PHY
 	  switch. This option should normally be disabled. If enabled,
 	  speed and duplex will be locked to 100 Mbit and full duplex.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ETRAX_ETHERNET_IFACE0
 	depends on ETRAX_ETHERNET
@@ -89,6 +97,8 @@ endchoice
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config ETRAXFS_SERIAL
 	bool "Serial-port support"
 	depends on ETRAX_ARCH_V32
@@ -120,6 +130,7 @@ config ETRAX_SERIAL_PORT0
 	  if you do not need DMA to something else.
 	  ser0 can use dma4 or dma6 for output and dma5 or dma7 for input.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 choice
 	prompt "Ser0 default port type "
@@ -164,12 +175,15 @@ config ETRAX_SER0_CD_BIT
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config ETRAX_SERIAL_PORT1
 	bool "Serial port 1 enabled"
 	depends on ETRAXFS_SERIAL
 	help
 	  Enables the ETRAX FS serial driver for ser1 (ttyS1).
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 choice
 	prompt "Ser1 default port type"
@@ -214,12 +228,15 @@ config ETRAX_SER1_CD_BIT
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config ETRAX_SERIAL_PORT2
 	bool "Serial port 2 enabled"
 	depends on ETRAXFS_SERIAL
 	help
 	  Enables the ETRAX FS serial driver for ser2 (ttyS2).
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 choice
 	prompt "Ser2 default port type"
@@ -265,12 +282,15 @@ config ETRAX_SER2_CD_BIT
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config ETRAX_SERIAL_PORT3
 	bool "Serial port 3 enabled"
 	depends on ETRAXFS_SERIAL
 	help
 	  Enables the ETRAX FS serial driver for ser3 (ttyS3).
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 choice
 	prompt "Ser3 default port type"
@@ -387,6 +407,8 @@ config ETRAX_SER4_CD_BIT
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config ETRAX_SYNCHRONOUS_SERIAL
 	bool "Synchronous serial-port support"
 	depends on ETRAX_ARCH_V32
@@ -436,7 +458,10 @@ config ETRAX_AXISFLASHMAP_MTD0WHOLE
 	bool "MTD0 is whole boot flash device"
 	depends on ETRAX_AXISFLASHMAP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default N
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -643,7 +668,10 @@ config ETRAX_CARDBUS
         bool "Cardbus support"
         depends on ETRAX_ARCH_V32
 <<<<<<< HEAD
+<<<<<<< HEAD
         select HOTPLUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
         help
@@ -670,8 +698,11 @@ config ETRAX_STREAMCOPROC
 	  for cryptographic operations.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source drivers/mmc/Kconfig
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ETRAX_MMC_IOP
@@ -740,6 +771,7 @@ config ETRAX_SPI_SSER0
 	  (You need to select MMC separately.)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ETRAX_SPI_SSER0_DMA
 	bool "DMA for SPI on sser0 enabled"
 	depends on ETRAX_SPI_SSER0
@@ -768,6 +800,8 @@ config ETRAX_SPI_MMC_WP_SSER0_PIN
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config ETRAX_SPI_SSER1
 	tristate "SPI using synchronous serial port 1 (sser1)"
 	depends on ETRAX_SPI_MMC
@@ -781,6 +815,7 @@ config ETRAX_SPI_SSER1
 	  want to build it as a module, which will be named spi_crisv32_sser.
 	  (You need to select MMC separately.)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ETRAX_SPI_SSER1_DMA
 	bool "DMA for SPI on sser1 enabled"
@@ -810,6 +845,8 @@ config ETRAX_SPI_MMC_WP_SSER1_PIN
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config ETRAX_SPI_GPIO
 	tristate "Bitbanged SPI using gpio pins"
 	depends on ETRAX_SPI_MMC
@@ -824,6 +861,7 @@ config ETRAX_SPI_GPIO
 	  Say m to build it as a module, which will be called spi_crisv32_gpio.
 	  (You need to select MMC separately.)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # The default match that of sser0, only because that's how it was tested.
 config ETRAX_SPI_CS_PIN
@@ -877,6 +915,8 @@ if ETRAX_SPI_MMC
 source drivers/spi/Kconfig
 endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif

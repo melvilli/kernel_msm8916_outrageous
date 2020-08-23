@@ -29,7 +29,12 @@
 #define NFSEXP_ASYNC		0x0010
 #define NFSEXP_GATHERED_WRITES	0x0020
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 40 80 100 currently unused */
+=======
+#define NFSEXP_NOREADDIRPLUS    0x0040
+/* 80 100 currently unused */
+>>>>>>> v3.18
 =======
 #define NFSEXP_NOREADDIRPLUS    0x0040
 /* 80 100 currently unused */
@@ -53,7 +58,11 @@
 #define	NFSEXP_V4ROOT		0x10000
 /* All flags that we claim to support.  (Note we don't support NOACL.) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NFSEXP_ALLFLAGS		0x17E3F
+=======
+#define NFSEXP_ALLFLAGS		0x1FE7F
+>>>>>>> v3.18
 =======
 #define NFSEXP_ALLFLAGS		0x1FE7F
 >>>>>>> v3.18

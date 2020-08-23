@@ -6,12 +6,18 @@ Required properties:
 - interrupts : Should contain WDT interrupt
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Optional property:
 - big-endian: If present the watchdog device's registers are implemented
   in big endian mode, otherwise in native mode(same with CPU), for more
   detail please see: Documentation/devicetree/bindings/regmap/regmap.txt.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Examples:
 
@@ -20,6 +26,10 @@ wdt@73f98000 {
 	reg = <0x73f98000 0x4000>;
 	interrupts = <58>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	big-endian;
+>>>>>>> v3.18
 =======
 	big-endian;
 >>>>>>> v3.18

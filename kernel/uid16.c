@@ -177,7 +177,11 @@ SYSCALL_DEFINE2(setgroups16, int, gidsetsize, old_gid_t __user *, grouplist)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!may_setgroups())
+=======
+	if (!ns_capable(current_user_ns(), CAP_SETGID))
+>>>>>>> v3.18
 =======
 	if (!ns_capable(current_user_ns(), CAP_SETGID))
 >>>>>>> v3.18

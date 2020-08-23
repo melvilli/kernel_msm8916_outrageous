@@ -57,8 +57,13 @@ static struct fimc_fmt fimc_formats[] = {
 		.flags		= FMT_FLAGS_M2M,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name		= "ARGB8888, 32 bpp",
 		.fourcc		= V4L2_PIX_FMT_RGB32,
+=======
+		.name		= "BGRA8888, 32 bpp",
+		.fourcc		= V4L2_PIX_FMT_BGR32,
+>>>>>>> v3.18
 =======
 		.name		= "BGRA8888, 32 bpp",
 		.fourcc		= V4L2_PIX_FMT_BGR32,
@@ -128,7 +133,11 @@ static struct fimc_fmt fimc_formats[] = {
 		.name		= "YUV 4:2:2 planar, Y/Cb/Cr",
 		.fourcc		= V4L2_PIX_FMT_YUV422P,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.depth		= { 12 },
+=======
+		.depth		= { 16 },
+>>>>>>> v3.18
 =======
 		.depth		= { 16 },
 >>>>>>> v3.18
@@ -223,6 +232,7 @@ struct fimc_fmt *fimc_get_format(unsigned int index)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __fimc_vidioc_querycap(struct device *dev, struct v4l2_capability *cap,
 						unsigned int caps)
 {
@@ -234,6 +244,8 @@ void __fimc_vidioc_querycap(struct device *dev, struct v4l2_capability *cap,
 	cap->capabilities = cap->device_caps | V4L2_CAP_DEVICE_CAPS;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int fimc_check_scaler_ratio(struct fimc_ctx *ctx, int sw, int sh,
@@ -474,7 +486,11 @@ void fimc_prepare_dma_offset(struct fimc_ctx *ctx, struct fimc_frame *f)
 	u32 i, depth = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < f->fmt->colplanes; i++)
+=======
+	for (i = 0; i < f->fmt->memplanes; i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < f->fmt->memplanes; i++)
 >>>>>>> v3.18
@@ -860,6 +876,10 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_PM_RUNTIME) || defined(CONFIG_PM_SLEEP)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_PM_RUNTIME) || defined(CONFIG_PM_SLEEP)
 >>>>>>> v3.18
@@ -902,6 +922,10 @@ static int fimc_m2m_resume(struct fimc_dev *fimc)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_PM_RUNTIME || CONFIG_PM_SLEEP */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PM_RUNTIME || CONFIG_PM_SLEEP */
 >>>>>>> v3.18
@@ -1034,6 +1058,7 @@ static int fimc_probe(struct platform_device *pdev)
 	ret = devm_request_irq(dev, res->start, fimc_irq_handler,
 			       0, dev_name(dev), fimc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret) {
 		dev_err(dev, "failed to install irq (%d)\n", ret);
 		goto err_clk;
@@ -1049,6 +1074,8 @@ static int fimc_probe(struct platform_device *pdev)
 	if (ret < 0)
 		goto err_sd;
 =======
+=======
+>>>>>>> v3.18
 	if (ret < 0) {
 		dev_err(dev, "failed to install irq (%d)\n", ret);
 		goto err_sclk;
@@ -1067,11 +1094,15 @@ static int fimc_probe(struct platform_device *pdev)
 			goto err_sd;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Initialize contiguous memory allocator */
 	fimc->alloc_ctx = vb2_dma_contig_init_ctx(dev);
 	if (IS_ERR(fimc->alloc_ctx)) {
 		ret = PTR_ERR(fimc->alloc_ctx);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_pm;
 	}
@@ -1086,6 +1117,8 @@ err_sd:
 	fimc_unregister_capture_subdev(fimc);
 err_clk:
 =======
+=======
+>>>>>>> v3.18
 		goto err_gclk;
 	}
 
@@ -1098,6 +1131,9 @@ err_gclk:
 err_sd:
 	fimc_unregister_capture_subdev(fimc);
 err_sclk:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk_disable(fimc->clock[CLK_BUS]);
 	fimc_clk_put(fimc);
@@ -1105,6 +1141,10 @@ err_sclk:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_RUNTIME
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_RUNTIME
 >>>>>>> v3.18
@@ -1115,7 +1155,11 @@ static int fimc_runtime_resume(struct device *dev)
 	dbg("fimc%d: state: 0x%lx", fimc->id, fimc->state);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Enable clocks and perform basic initalization */
+=======
+	/* Enable clocks and perform basic initialization */
+>>>>>>> v3.18
 =======
 	/* Enable clocks and perform basic initialization */
 >>>>>>> v3.18
@@ -1145,6 +1189,10 @@ static int fimc_runtime_suspend(struct device *dev)
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -1194,6 +1242,11 @@ static int fimc_remove(struct platform_device *pdev)
 
 	pm_runtime_disable(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!pm_runtime_status_suspended(&pdev->dev))
+		clk_disable(fimc->clock[CLK_GATE]);
+>>>>>>> v3.18
 =======
 	if (!pm_runtime_status_suspended(&pdev->dev))
 		clk_disable(fimc->clock[CLK_GATE]);

@@ -156,11 +156,17 @@ static char *tomoyo_print_header(struct tomoyo_request_info *r)
 	if (!buffer)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		struct timeval tv;
 		do_gettimeofday(&tv);
 		tomoyo_convert_time(tv.tv_sec, &stamp);
 	}
+=======
+
+	tomoyo_convert_time(get_seconds(), &stamp);
+
+>>>>>>> v3.18
 =======
 
 	tomoyo_convert_time(get_seconds(), &stamp);

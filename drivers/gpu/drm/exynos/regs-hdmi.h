@@ -579,7 +579,10 @@
 #define HDMI_TG_3D			HDMI_TG_BASE(0x00F0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* HDMI PHY Registers Offsets*/
 #define HDMIPHY_POWER		(0x74 >> 2)
 #define HDMIPHY_MODE_SET_DONE		(0x7c >> 2)
@@ -596,5 +599,8 @@
 #define PMU_HDMI_PHY_CONTROL		0x700
 #define PMU_HDMI_PHY_ENABLE_BIT		BIT(0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* SAMSUNG_REGS_HDMI_H */

@@ -8,6 +8,7 @@ Required properties:
   - Tegra114 requires an additional entry, for the APBIF2 register block.
 - interrupts : Should contain AHUB interrupt
 <<<<<<< HEAD
+<<<<<<< HEAD
 - nvidia,dma-request-selector : A list of the DMA channel specifiers. Each
   entry contains the Tegra DMA controller's phandle and request selector.
   If a single entry is present, the request selectors for the channels are
@@ -21,6 +22,8 @@ Required properties:
 - ranges : The bus address mapping for the configlink register bus.
   Can be empty since the mapping is 1:1.
 =======
+=======
+>>>>>>> v3.18
 - clocks : Must contain an entry for each entry in clock-names.
   See ../clocks/clock-bindings.txt for details.
 - clock-names : Must include the following entries:
@@ -63,6 +66,9 @@ Required properties:
   ... where n is:
   Tegra30: 3
   Tegra114, Tegra124: 9
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - #address-cells : For the configlink bus. Should be <1>;
 - #size-cells : For the configlink bus. Should be <1>.
@@ -81,6 +87,7 @@ ahub@70080000 {
 	interrupts = < 0 103 0x04 >;
 	nvidia,dma-request-selector = <&apbdma 1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clocks = <&tegra_car 106>, <&tegra_car 107>, <&tegra_car 30>,
 		<&tegra_car 11>, <&tegra_car 18>, <&tegra_car 101>,
 		<&tegra_car 102>, <&tegra_car 108>, <&tegra_car 109>,
@@ -89,6 +96,8 @@ ahub@70080000 {
 		"i2s3", "i2s4", "dam0", "dam1", "dam2",
 		"spdif_in";
 =======
+=======
+>>>>>>> v3.18
 	clocks = <&tegra_car 106>, <&tegra_car 107>;
 	clock-names = "d_audio", "apbif";
 	resets = <&tegra_car 106>, <&tegra_car 107>, <&tegra_car 30>,
@@ -103,6 +112,9 @@ ahub@70080000 {
 	       <&apbdma 3>, <&apbdma 3>;
 	       <&apbdma 4>, <&apbdma 4>;
 	dma-names = "rx0", "tx0", "rx1", "tx1", "rx2", "tx2", "rx3", "tx3";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ranges;
 	#address-cells = <1>;

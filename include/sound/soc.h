@@ -14,6 +14,10 @@
 #define __LINUX_SND_SOC_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -26,7 +30,10 @@
 #include <linux/regmap.h>
 #include <linux/log2.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/async.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <sound/core.h>
@@ -39,6 +46,7 @@
  * Convenience kcontrol builders
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SOC_DOUBLE_VALUE(xreg, shift_left, shift_right, xmax, xinvert) \
 	((unsigned long)&(struct soc_mixer_control) \
 	{.reg = xreg, .rreg = xreg, .shift = shift_left, \
@@ -47,6 +55,8 @@
 #define SOC_SINGLE_VALUE(xreg, xshift, xmax, xinvert) \
 	SOC_DOUBLE_VALUE(xreg, xshift, xshift, xmax, xinvert)
 =======
+=======
+>>>>>>> v3.18
 #define SOC_DOUBLE_VALUE(xreg, shift_left, shift_right, xmax, xinvert, xautodisable) \
 	((unsigned long)&(struct soc_mixer_control) \
 	{.reg = xreg, .rreg = xreg, .shift = shift_left, \
@@ -54,6 +64,9 @@
 	.invert = xinvert, .autodisable = xautodisable})
 #define SOC_SINGLE_VALUE(xreg, xshift, xmax, xinvert, xautodisable) \
 	SOC_DOUBLE_VALUE(xreg, xshift, xshift, xmax, xinvert, xautodisable)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SOC_SINGLE_VALUE_EXT(xreg, xmax, xinvert) \
 	((unsigned long)&(struct soc_mixer_control) \
@@ -63,12 +76,18 @@
 	{.reg = xlreg, .rreg = xrreg, .shift = xshift, .rshift = xshift, \
 	.max = xmax, .platform_max = xmax, .invert = xinvert})
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SOC_DOUBLE_R_S_VALUE(xlreg, xrreg, xshift, xmin, xmax, xsign_bit, xinvert) \
 	((unsigned long)&(struct soc_mixer_control) \
 	{.reg = xlreg, .rreg = xrreg, .shift = xshift, .rshift = xshift, \
 	.max = xmax, .min = xmin, .platform_max = xmax, .sign_bit = xsign_bit, \
 	.invert = xinvert})
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SOC_DOUBLE_R_RANGE_VALUE(xlreg, xrreg, xshift, xmin, xmax, xinvert) \
 	((unsigned long)&(struct soc_mixer_control) \
@@ -79,7 +98,11 @@
 	.info = snd_soc_info_volsw, .get = snd_soc_get_volsw,\
 	.put = snd_soc_put_volsw, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.private_value =  SOC_SINGLE_VALUE(reg, shift, max, invert) }
+=======
+	.private_value = SOC_SINGLE_VALUE(reg, shift, max, invert, 0) }
+>>>>>>> v3.18
 =======
 	.private_value = SOC_SINGLE_VALUE(reg, shift, max, invert, 0) }
 >>>>>>> v3.18
@@ -99,7 +122,11 @@
 	.info = snd_soc_info_volsw, .get = snd_soc_get_volsw,\
 	.put = snd_soc_put_volsw, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.private_value =  SOC_SINGLE_VALUE(reg, shift, max, invert) }
+=======
+	.private_value = SOC_SINGLE_VALUE(reg, shift, max, invert, 0) }
+>>>>>>> v3.18
 =======
 	.private_value = SOC_SINGLE_VALUE(reg, shift, max, invert, 0) }
 >>>>>>> v3.18
@@ -132,7 +159,11 @@
 	.put = snd_soc_put_volsw, \
 	.private_value = SOC_DOUBLE_VALUE(reg, shift_left, shift_right, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  max, invert) }
+=======
+					  max, invert, 0) }
+>>>>>>> v3.18
 =======
 					  max, invert, 0) }
 >>>>>>> v3.18
@@ -158,7 +189,11 @@
 	.put = snd_soc_put_volsw, \
 	.private_value = SOC_DOUBLE_VALUE(reg, shift_left, shift_right, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  max, invert) }
+=======
+					  max, invert, 0) }
+>>>>>>> v3.18
 =======
 					  max, invert, 0) }
 >>>>>>> v3.18
@@ -194,7 +229,10 @@
 		.shift = xshift, .rshift = xshift, \
 		.max = xmax, .min = xmin} }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SOC_DOUBLE_R_S_TLV(xname, reg_left, reg_right, xshift, xmin, xmax, xsign_bit, xinvert, tlv_array) \
 {	.iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = (xname),\
 	.access = SNDRV_CTL_ELEM_ACCESS_TLV_READ |\
@@ -204,6 +242,9 @@
 	.get = snd_soc_get_volsw, .put = snd_soc_put_volsw, \
 	.private_value = SOC_DOUBLE_R_S_VALUE(reg_left, reg_right, xshift, \
 					    xmin, xmax, xsign_bit, xinvert) }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SOC_DOUBLE_S8_TLV(xname, xreg, xmin, xmax, tlv_array) \
 {	.iface  = SNDRV_CTL_ELEM_IFACE_MIXER, .name = (xname), \
@@ -215,6 +256,7 @@
 	.private_value = (unsigned long)&(struct soc_mixer_control) \
 		{.reg = xreg, .min = xmin, .max = xmax, \
 		 .platform_max = xmax} }
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SOC_ENUM_DOUBLE(xreg, xshift_l, xshift_r, xmax, xtexts) \
 {	.reg = xreg, .shift_l = xshift_l, .shift_r = xshift_r, \
@@ -230,6 +272,8 @@
 #define SOC_VALUE_ENUM_SINGLE(xreg, xshift, xmask, xmax, xtexts, xvalues) \
 	SOC_VALUE_ENUM_DOUBLE(xreg, xshift, xshift, xmask, xmax, xtexts, xvalues)
 =======
+=======
+>>>>>>> v3.18
 #define SOC_ENUM_DOUBLE(xreg, xshift_l, xshift_r, xitems, xtexts) \
 {	.reg = xreg, .shift_l = xshift_l, .shift_r = xshift_r, \
 	.items = xitems, .texts = xtexts, \
@@ -245,12 +289,16 @@
 	SOC_VALUE_ENUM_DOUBLE(xreg, xshift, xshift, xmask, xnitmes, xtexts, xvalues)
 #define SOC_ENUM_SINGLE_VIRT(xitems, xtexts) \
 	SOC_ENUM_SINGLE(SND_SOC_NOPM, 0, xitems, xtexts)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SOC_ENUM(xname, xenum) \
 {	.iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = xname,\
 	.info = snd_soc_info_enum_double, \
 	.get = snd_soc_get_enum_double, .put = snd_soc_put_enum_double, \
 	.private_value = (unsigned long)&xenum }
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SOC_VALUE_ENUM(xname, xenum) \
 {	.iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = xname,\
@@ -260,13 +308,19 @@
 	.private_value = (unsigned long)&xenum }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define SOC_SINGLE_EXT(xname, xreg, xshift, xmax, xinvert,\
 	 xhandler_get, xhandler_put) \
 {	.iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = xname, \
 	.info = snd_soc_info_volsw, \
 	.get = xhandler_get, .put = xhandler_put, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.private_value = SOC_SINGLE_VALUE(xreg, xshift, xmax, xinvert) }
+=======
+	.private_value = SOC_SINGLE_VALUE(xreg, xshift, xmax, xinvert, 0) }
+>>>>>>> v3.18
 =======
 	.private_value = SOC_SINGLE_VALUE(xreg, xshift, xmax, xinvert, 0) }
 >>>>>>> v3.18
@@ -276,6 +330,7 @@
 	.info = snd_soc_info_volsw, \
 	.get = xhandler_get, .put = xhandler_put, \
 	.private_value = \
+<<<<<<< HEAD
 <<<<<<< HEAD
 		SOC_DOUBLE_VALUE(reg, shift_left, shift_right, max, invert) }
 #define SOC_SINGLE_MULTI_EXT(xname, xreg, xshift, xmax, xinvert, xcount,\
@@ -289,6 +344,9 @@
 =======
 		SOC_DOUBLE_VALUE(reg, shift_left, shift_right, max, invert, 0) }
 >>>>>>> v3.18
+=======
+		SOC_DOUBLE_VALUE(reg, shift_left, shift_right, max, invert, 0) }
+>>>>>>> v3.18
 #define SOC_SINGLE_EXT_TLV(xname, xreg, xshift, xmax, xinvert,\
 	 xhandler_get, xhandler_put, tlv_array) \
 {	.iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = xname, \
@@ -298,7 +356,11 @@
 	.info = snd_soc_info_volsw, \
 	.get = xhandler_get, .put = xhandler_put, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.private_value = SOC_SINGLE_VALUE(xreg, xshift, xmax, xinvert) }
+=======
+	.private_value = SOC_SINGLE_VALUE(xreg, xshift, xmax, xinvert, 0) }
+>>>>>>> v3.18
 =======
 	.private_value = SOC_SINGLE_VALUE(xreg, xshift, xmax, xinvert, 0) }
 >>>>>>> v3.18
@@ -312,7 +374,11 @@
 	.get = xhandler_get, .put = xhandler_put, \
 	.private_value = SOC_DOUBLE_VALUE(xreg, shift_left, shift_right, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  xmax, xinvert) }
+=======
+					  xmax, xinvert, 0) }
+>>>>>>> v3.18
 =======
 					  xmax, xinvert, 0) }
 >>>>>>> v3.18
@@ -334,15 +400,21 @@
 #define SOC_ENUM_EXT(xname, xenum, xhandler_get, xhandler_put) \
 {	.iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = xname, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.info = snd_soc_info_enum_ext, \
 	.get = xhandler_get, .put = xhandler_put, \
 	.private_value = (unsigned long)&xenum }
 =======
+=======
+>>>>>>> v3.18
 	.info = snd_soc_info_enum_double, \
 	.get = xhandler_get, .put = xhandler_put, \
 	.private_value = (unsigned long)&xenum }
 #define SOC_VALUE_ENUM_EXT(xname, xenum, xhandler_get, xhandler_put) \
 	SOC_ENUM_EXT(xname, xenum, xhandler_get, xhandler_put)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SND_SOC_BYTES(xname, xbase, xregs)		      \
@@ -361,7 +433,10 @@
 		 .mask = xmask }) }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SND_SOC_BYTES_EXT(xname, xcount, xhandler_get, xhandler_put) \
 {	.iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = xname, \
 	.info = snd_soc_bytes_info_ext, \
@@ -376,6 +451,9 @@
 	.info = snd_soc_bytes_info_ext, \
 	.private_value = (unsigned long)&(struct soc_bytes_ext) \
 		{.max = xcount, .get = xhandler_get, .put = xhandler_put, } }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SOC_SINGLE_XR_SX(xname, xregbase, xregcount, xnbits, \
 		xmin, xmax, xinvert) \
@@ -396,7 +474,11 @@
  */
 #define SOC_ENUM_DOUBLE_DECL(name, xreg, xshift_l, xshift_r, xtexts) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct soc_enum name = SOC_ENUM_DOUBLE(xreg, xshift_l, xshift_r, \
+=======
+	const struct soc_enum name = SOC_ENUM_DOUBLE(xreg, xshift_l, xshift_r, \
+>>>>>>> v3.18
 =======
 	const struct soc_enum name = SOC_ENUM_DOUBLE(xreg, xshift_l, xshift_r, \
 >>>>>>> v3.18
@@ -405,6 +487,7 @@
 	SOC_ENUM_DOUBLE_DECL(name, xreg, xshift, xshift, xtexts)
 #define SOC_ENUM_SINGLE_EXT_DECL(name, xtexts) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct soc_enum name = SOC_ENUM_SINGLE_EXT(ARRAY_SIZE(xtexts), xtexts)
 #define SOC_VALUE_ENUM_DOUBLE_DECL(name, xreg, xshift_l, xshift_r, xmask, xtexts, xvalues) \
 	struct soc_enum name = SOC_VALUE_ENUM_DOUBLE(xreg, xshift_l, xshift_r, xmask, \
@@ -412,6 +495,8 @@
 #define SOC_VALUE_ENUM_SINGLE_DECL(name, xreg, xshift, xmask, xtexts, xvalues) \
 	SOC_VALUE_ENUM_DOUBLE_DECL(name, xreg, xshift, xshift, xmask, xtexts, xvalues)
 =======
+=======
+>>>>>>> v3.18
 	const struct soc_enum name = SOC_ENUM_SINGLE_EXT(ARRAY_SIZE(xtexts), xtexts)
 #define SOC_VALUE_ENUM_DOUBLE_DECL(name, xreg, xshift_l, xshift_r, xmask, xtexts, xvalues) \
 	const struct soc_enum name = SOC_VALUE_ENUM_DOUBLE(xreg, xshift_l, xshift_r, xmask, \
@@ -420,6 +505,9 @@
 	SOC_VALUE_ENUM_DOUBLE_DECL(name, xreg, xshift, xshift, xmask, xtexts, xvalues)
 #define SOC_ENUM_SINGLE_VIRT_DECL(name, xtexts) \
 	const struct soc_enum name = SOC_ENUM_SINGLE_VIRT(ARRAY_SIZE(xtexts), xtexts)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -433,10 +521,13 @@
 #define SND_SOC_COMP_ORDER_LAST		2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* DAI Link Host Mode Support */
 #define SND_SOC_DAI_LINK_NO_HOST		0x1
 #define SND_SOC_DAI_LINK_OPT_HOST		0x2
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -477,6 +568,7 @@ struct snd_soc_jack;
 struct snd_soc_jack_zone;
 struct snd_soc_jack_pin;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_soc_cache_ops;
 #include <sound/soc-dapm.h>
 #include <sound/soc-dpcm.h>
@@ -499,6 +591,8 @@ enum snd_soc_compress_type {
 	SND_SOC_FLAT_COMPRESSION = 1,
 };
 =======
+=======
+>>>>>>> v3.18
 #include <sound/soc-dapm.h>
 #include <sound/soc-dpcm.h>
 
@@ -507,6 +601,9 @@ struct snd_soc_jack_gpio;
 typedef int (*hw_write_t)(void *,const char* ,int);
 
 extern struct snd_ac97_bus_ops *soc_ac97_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum snd_soc_pcm_subclass {
@@ -527,6 +624,10 @@ int snd_soc_codec_set_pll(struct snd_soc_codec *codec, int pll_id, int source,
 int snd_soc_register_card(struct snd_soc_card *card);
 int snd_soc_unregister_card(struct snd_soc_card *card);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int devm_snd_soc_register_card(struct device *dev, struct snd_soc_card *card);
+>>>>>>> v3.18
 =======
 int devm_snd_soc_register_card(struct device *dev, struct snd_soc_card *card);
 >>>>>>> v3.18
@@ -536,6 +637,11 @@ int snd_soc_poweroff(struct device *dev);
 int snd_soc_register_platform(struct device *dev,
 		const struct snd_soc_platform_driver *platform_drv);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int devm_snd_soc_register_platform(struct device *dev,
+		const struct snd_soc_platform_driver *platform_drv);
+>>>>>>> v3.18
 =======
 int devm_snd_soc_register_platform(struct device *dev,
 		const struct snd_soc_platform_driver *platform_drv);
@@ -553,6 +659,7 @@ int snd_soc_register_component(struct device *dev,
 			 const struct snd_soc_component_driver *cmpnt_drv,
 			 struct snd_soc_dai_driver *dai_drv, int num_dai);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_soc_unregister_component(struct device *dev);
 int snd_soc_codec_volatile_register(struct snd_soc_codec *codec,
 				    unsigned int reg);
@@ -564,10 +671,15 @@ int snd_soc_codec_set_cache_io(struct snd_soc_codec *codec,
 			       int addr_bits, int data_bits,
 			       enum snd_soc_control_type control);
 =======
+=======
+>>>>>>> v3.18
 int devm_snd_soc_register_component(struct device *dev,
 			 const struct snd_soc_component_driver *cmpnt_drv,
 			 struct snd_soc_dai_driver *dai_drv, int num_dai);
 void snd_soc_unregister_component(struct device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int snd_soc_cache_sync(struct snd_soc_codec *codec);
 int snd_soc_cache_init(struct snd_soc_codec *codec);
@@ -577,12 +689,15 @@ int snd_soc_cache_write(struct snd_soc_codec *codec,
 int snd_soc_cache_read(struct snd_soc_codec *codec,
 		       unsigned int reg, unsigned int *value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_soc_default_volatile_register(struct snd_soc_codec *codec,
 				      unsigned int reg);
 int snd_soc_default_readable_register(struct snd_soc_codec *codec,
 				      unsigned int reg);
 int snd_soc_default_writable_register(struct snd_soc_codec *codec,
 				      unsigned int reg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int snd_soc_platform_read(struct snd_soc_platform *platform,
@@ -598,11 +713,17 @@ struct snd_soc_pcm_runtime *snd_soc_get_pcm_runtime(struct snd_soc_card *card,
 		const char *dai_link);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool snd_soc_runtime_ignore_pmdown_time(struct snd_soc_pcm_runtime *rtd);
 void snd_soc_runtime_activate(struct snd_soc_pcm_runtime *rtd, int stream);
 void snd_soc_runtime_deactivate(struct snd_soc_pcm_runtime *rtd, int stream);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Utility functions to get clock rates from various things */
 int snd_soc_calc_frame_size(int sample_size, int channels, int tdm_slots);
@@ -618,19 +739,28 @@ int snd_soc_platform_trigger(struct snd_pcm_substream *substream,
 		int cmd, struct snd_soc_platform *platform);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int soc_dai_hw_params(struct snd_pcm_substream *substream,
 		      struct snd_pcm_hw_params *params,
 		      struct snd_soc_dai *dai);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Jack reporting */
 int snd_soc_jack_new(struct snd_soc_codec *codec, const char *id, int type,
 		     struct snd_soc_jack *jack);
 void snd_soc_jack_report(struct snd_soc_jack *jack, int status, int mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_soc_jack_report_no_dapm(struct snd_soc_jack *jack, int status,
 				 int mask);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int snd_soc_jack_add_pins(struct snd_soc_jack *jack, int count,
@@ -646,6 +776,7 @@ int snd_soc_jack_get_type(struct snd_soc_jack *jack, int micbias_voltage);
 int snd_soc_jack_add_gpios(struct snd_soc_jack *jack, int count,
 			struct snd_soc_jack_gpio *gpios);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_soc_jack_free_gpios(struct snd_soc_jack *jack, int count,
 			struct snd_soc_jack_gpio *gpios);
 #endif
@@ -658,6 +789,8 @@ int snd_soc_update_bits_locked(struct snd_soc_codec *codec,
 			       unsigned int value);
 int snd_soc_test_bits(struct snd_soc_codec *codec, unsigned short reg,
 =======
+=======
+>>>>>>> v3.18
 int snd_soc_jack_add_gpiods(struct device *gpiod_dev,
 			    struct snd_soc_jack *jack,
 			    int count, struct snd_soc_jack_gpio *gpios);
@@ -691,6 +824,9 @@ int snd_soc_update_bits_locked(struct snd_soc_codec *codec,
 			       unsigned int reg, unsigned int mask,
 			       unsigned int value);
 int snd_soc_test_bits(struct snd_soc_codec *codec, unsigned int reg,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				unsigned int mask, unsigned int value);
 
@@ -699,8 +835,14 @@ int snd_soc_new_ac97_codec(struct snd_soc_codec *codec,
 void snd_soc_free_ac97_codec(struct snd_soc_codec *codec);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_soc_card_change_online_state(struct snd_soc_card *soc_card,
 				      int online);
+=======
+int snd_soc_set_ac97_ops(struct snd_ac97_bus_ops *ops);
+int snd_soc_set_ac97_ops_of_reset(struct snd_ac97_bus_ops *ops,
+		struct platform_device *pdev);
+>>>>>>> v3.18
 =======
 int snd_soc_set_ac97_ops(struct snd_ac97_bus_ops *ops);
 int snd_soc_set_ac97_ops_of_reset(struct snd_ac97_bus_ops *ops,
@@ -714,11 +856,14 @@ struct snd_kcontrol *snd_soc_cnew(const struct snd_kcontrol_new *_template,
 				  void *data, const char *long_name,
 				  const char *prefix);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_soc_add_codec_controls(struct snd_soc_codec *codec,
 	const struct snd_kcontrol_new *controls, int num_controls);
 int snd_soc_add_platform_controls(struct snd_soc_platform *platform,
 	const struct snd_kcontrol_new *controls, int num_controls);
 =======
+=======
+>>>>>>> v3.18
 struct snd_kcontrol *snd_soc_card_get_kcontrol(struct snd_soc_card *soc_card,
 					       const char *name);
 int snd_soc_add_component_controls(struct snd_soc_component *component,
@@ -727,6 +872,9 @@ int snd_soc_add_codec_controls(struct snd_soc_codec *codec,
 	const struct snd_kcontrol_new *controls, unsigned int num_controls);
 int snd_soc_add_platform_controls(struct snd_soc_platform *platform,
 	const struct snd_kcontrol_new *controls, unsigned int num_controls);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int snd_soc_add_card_controls(struct snd_soc_card *soc_card,
 	const struct snd_kcontrol_new *controls, int num_controls);
@@ -735,14 +883,18 @@ int snd_soc_add_dai_controls(struct snd_soc_dai *dai,
 int snd_soc_info_enum_double(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_info *uinfo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_soc_info_enum_ext(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_info *uinfo);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int snd_soc_get_enum_double(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol);
 int snd_soc_put_enum_double(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol);
+<<<<<<< HEAD
 <<<<<<< HEAD
 int snd_soc_get_value_enum_double(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol);
@@ -752,6 +904,10 @@ int snd_soc_info_volsw(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_info *uinfo);
 int snd_soc_info_volsw_ext(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_info *uinfo);
+=======
+int snd_soc_info_volsw(struct snd_kcontrol *kcontrol,
+	struct snd_ctl_elem_info *uinfo);
+>>>>>>> v3.18
 =======
 int snd_soc_info_volsw(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_info *uinfo);
@@ -788,11 +944,17 @@ int snd_soc_bytes_get(struct snd_kcontrol *kcontrol,
 int snd_soc_bytes_put(struct snd_kcontrol *kcontrol,
 		      struct snd_ctl_elem_value *ucontrol);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int snd_soc_bytes_info_ext(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_info *ucontrol);
 int snd_soc_bytes_tlv_callback(struct snd_kcontrol *kcontrol, int op_flag,
 	unsigned int size, unsigned int __user *tlv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int snd_soc_info_xr_sx(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_info *uinfo);
@@ -804,6 +966,7 @@ int snd_soc_get_strobe(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol);
 int snd_soc_put_strobe(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol);
+<<<<<<< HEAD
 <<<<<<< HEAD
 int snd_soc_info_multi_ext(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_info *uinfo);
@@ -824,6 +987,8 @@ struct snd_soc_reg_access {
 	u16 write;
 	u16 vol;
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -863,15 +1028,21 @@ struct snd_soc_jack_zone {
  * struct snd_soc_jack_gpio - Describes a gpio pin for jack detection
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @gpio:         gpio number
  * @name:         gpio name
 =======
+=======
+>>>>>>> v3.18
  * @gpio:         legacy gpio number
  * @idx:          gpio descriptor index within the function of the GPIO
  *                consumer device
  * @gpiod_dev     GPIO consumer device
  * @name:         gpio name. Also as connection ID for the GPIO consumer
  *                device function name lookup
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @report:       value to report when jack detected
  * @invert:       report presence in low state
@@ -882,14 +1053,20 @@ struct snd_soc_jack_zone {
  *		       ADC).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_GPIOLIB
 struct snd_soc_jack_gpio {
 	unsigned int gpio;
 =======
+=======
+>>>>>>> v3.18
 struct snd_soc_jack_gpio {
 	unsigned int gpio;
 	unsigned int idx;
 	struct device *gpiod_dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const char *name;
 	int report;
@@ -900,16 +1077,22 @@ struct snd_soc_jack_gpio {
 	struct snd_soc_jack *jack;
 	struct delayed_work work;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	int (*jack_status_check)(void);
 };
 #endif
 =======
+=======
+>>>>>>> v3.18
 	struct gpio_desc *desc;
 
 	void *data;
 	int (*jack_status_check)(void *data);
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct snd_soc_jack {
@@ -933,7 +1116,10 @@ struct snd_soc_pcm_stream {
 	unsigned int channels_max;	/* max channels */
 	unsigned int sig_bits;		/* number of bits of content */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *aif_name;	/* DAPM AIF widget name */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -956,6 +1142,7 @@ struct snd_soc_compr_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* SoC cache ops */
 struct snd_soc_cache_ops {
 	const char *name;
@@ -975,6 +1162,8 @@ struct snd_soc_codec {
 	const char *name_prefix;
 	int id;
 =======
+=======
+>>>>>>> v3.18
 /* component interface */
 struct snd_soc_component_driver {
 	const char *name;
@@ -1066,11 +1255,15 @@ struct snd_soc_component {
 
 /* SoC Audio Codec device */
 struct snd_soc_codec {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct device *dev;
 	const struct snd_soc_codec_driver *driver;
 
 	struct mutex mutex;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct snd_soc_card *card;
 	struct list_head list;
@@ -1095,6 +1288,8 @@ struct snd_soc_codec {
 	unsigned int using_regmap:1; /* using regmap access */
 	u32 cache_only;  /* Suppress writes to hardware */
 =======
+=======
+>>>>>>> v3.18
 	struct list_head list;
 	struct list_head card_list;
 
@@ -1105,11 +1300,15 @@ struct snd_soc_codec {
 	unsigned int ac97_registered:1; /* Codec has been AC97 registered */
 	unsigned int ac97_created:1; /* Codec has been created by SoC */
 	unsigned int cache_init:1; /* codec cache has been initialized */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 cache_sync; /* Cache needs to be synced to hardware */
 
 	/* codec IO */
 	void *control_data; /* codec control (i2c/3wire) data */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	enum snd_soc_control_type control_type;
 	hw_write_t hw_write;
@@ -1132,6 +1331,8 @@ struct snd_soc_codec {
 	struct dentry *debugfs_reg;
 	struct dentry *debugfs_dapm;
 =======
+=======
+>>>>>>> v3.18
 	hw_write_t hw_write;
 	void *reg_cache;
 	struct mutex cache_rw_mutex;
@@ -1144,6 +1345,9 @@ struct snd_soc_codec {
 
 #ifdef CONFIG_DEBUG_FS
 	struct dentry *debugfs_reg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };
@@ -1157,6 +1361,10 @@ struct snd_soc_codec_driver {
 	int (*suspend)(struct snd_soc_codec *);
 	int (*resume)(struct snd_soc_codec *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_soc_component_driver component_driver;
+>>>>>>> v3.18
 =======
 	struct snd_soc_component_driver component_driver;
 >>>>>>> v3.18
@@ -1177,6 +1385,7 @@ struct snd_soc_codec_driver {
 
 	/* codec IO */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int (*read)(struct snd_soc_codec *, unsigned int);
 	int (*write)(struct snd_soc_codec *, unsigned int, unsigned int);
 	int (*display_register)(struct snd_soc_codec *, char *,
@@ -1189,14 +1398,22 @@ struct snd_soc_codec_driver {
 	unsigned int (*read)(struct snd_soc_codec *, unsigned int);
 	int (*write)(struct snd_soc_codec *, unsigned int, unsigned int);
 >>>>>>> v3.18
+=======
+	struct regmap *(*get_regmap)(struct device *);
+	unsigned int (*read)(struct snd_soc_codec *, unsigned int);
+	int (*write)(struct snd_soc_codec *, unsigned int, unsigned int);
+>>>>>>> v3.18
 	unsigned int reg_cache_size;
 	short reg_cache_step;
 	short reg_word_size;
 	const void *reg_cache_default;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	short reg_access_size;
 	const struct snd_soc_reg_access *reg_access_default;
 	enum snd_soc_compress_type compress_type;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1205,6 +1422,10 @@ struct snd_soc_codec_driver {
 			      enum snd_soc_bias_level level);
 	bool idle_bias_off;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool suspend_bias_off;
+>>>>>>> v3.18
 =======
 	bool suspend_bias_off;
 >>>>>>> v3.18
@@ -1212,6 +1433,7 @@ struct snd_soc_codec_driver {
 	void (*seq_notifier)(struct snd_soc_dapm_context *,
 			     enum snd_soc_dapm_type, int);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* codec stream completion event */
 	int (*stream_event)(struct snd_soc_dapm_context *dapm, int event);
@@ -1221,6 +1443,9 @@ struct snd_soc_codec_driver {
 	/* probe ordering - for components with runtime dependencies */
 	int probe_order;
 	int remove_order;
+=======
+	bool ignore_pmdown_time;  /* Doesn't benefit from pmdown delay */
+>>>>>>> v3.18
 =======
 	bool ignore_pmdown_time;  /* Doesn't benefit from pmdown delay */
 >>>>>>> v3.18
@@ -1234,6 +1459,10 @@ struct snd_soc_platform_driver {
 	int (*suspend)(struct snd_soc_dai *dai);
 	int (*resume)(struct snd_soc_dai *dai);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_soc_component_driver component_driver;
+>>>>>>> v3.18
 =======
 	struct snd_soc_component_driver component_driver;
 >>>>>>> v3.18
@@ -1242,6 +1471,7 @@ struct snd_soc_platform_driver {
 	int (*pcm_new)(struct snd_soc_pcm_runtime *);
 	void (*pcm_free)(struct snd_pcm *);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Default control and setup, added after probe() is run */
 	const struct snd_kcontrol_new *controls;
@@ -1253,6 +1483,8 @@ struct snd_soc_platform_driver {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/*
 	 * For platform caused delay reporting.
 	 * Optional.
@@ -1260,6 +1492,7 @@ struct snd_soc_platform_driver {
 	snd_pcm_sframes_t (*delay)(struct snd_pcm_substream *,
 		struct snd_soc_dai *);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * For platform-caused delay reporting, where the thread blocks waiting
@@ -1273,12 +1506,15 @@ struct snd_soc_platform_driver {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* platform stream pcm ops */
 	const struct snd_pcm_ops *ops;
 
 	/* platform stream compress ops */
 	const struct snd_compr_ops *compr_ops;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* platform stream completion event */
 	int (*stream_event)(struct snd_soc_dapm_context *dapm, int event);
@@ -1336,6 +1572,8 @@ enum snd_soc_async_ops {
 	ASYNC_DPCM_SND_SOC_HW_PARAMS = 1 << 3,
 	ASYNC_DPCM_SND_SOC_FREE = 1 << 4,
 =======
+=======
+>>>>>>> v3.18
 	int (*bespoke_trigger)(struct snd_pcm_substream *, int);
 };
 
@@ -1354,6 +1592,9 @@ struct snd_soc_platform {
 	struct list_head list;
 
 	struct snd_soc_component component;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1370,7 +1611,11 @@ struct snd_soc_dai_link {
 	 */
 	const char *cpu_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct device_node *cpu_of_node;
+=======
+	struct device_node *cpu_of_node;
+>>>>>>> v3.18
 =======
 	struct device_node *cpu_of_node;
 >>>>>>> v3.18
@@ -1386,10 +1631,13 @@ struct snd_soc_dai_link {
 	 */
 	const char *codec_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct device_node *codec_of_node;
 	/* You MUST specify the DAI name within the codec */
 	const char *codec_dai_name;
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *codec_of_node;
 	/* You MUST specify the DAI name within the codec */
 	const char *codec_dai_name;
@@ -1397,6 +1645,9 @@ struct snd_soc_dai_link {
 	struct snd_soc_dai_link_component *codecs;
 	unsigned int num_codecs;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * You MAY specify the link's platform/PCM/DMA driver, either by
@@ -1405,7 +1656,11 @@ struct snd_soc_dai_link {
 	 */
 	const char *platform_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct device_node *platform_of_node;
+=======
+	struct device_node *platform_of_node;
+>>>>>>> v3.18
 =======
 	struct device_node *platform_of_node;
 >>>>>>> v3.18
@@ -1423,6 +1678,11 @@ struct snd_soc_dai_link {
 	/* Symmetry requirements */
 	unsigned int symmetric_rates:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int symmetric_channels:1;
+	unsigned int symmetric_samplebits:1;
+>>>>>>> v3.18
 =======
 	unsigned int symmetric_channels:1;
 	unsigned int symmetric_samplebits:1;
@@ -1435,8 +1695,14 @@ struct snd_soc_dai_link {
 	unsigned int dynamic:1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* This DAI can support no host IO (no pcm data is copied to from host) */
 	unsigned int no_host_mode:2;
+=======
+	/* DPCM capture and Playback support */
+	unsigned int dpcm_capture:1;
+	unsigned int dpcm_playback:1;
+>>>>>>> v3.18
 =======
 	/* DPCM capture and Playback support */
 	unsigned int dpcm_capture:1;
@@ -1458,6 +1724,7 @@ struct snd_soc_dai_link {
 	const struct snd_soc_compr_ops *compr_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* this value determines what all ops can be started asynchronously */
 	enum snd_soc_async_ops async_ops;
 };
@@ -1465,6 +1732,8 @@ struct snd_soc_dai_link {
 struct snd_soc_codec_conf {
 	const char *dev_name;
 =======
+=======
+>>>>>>> v3.18
 	/* For unidirectional dai links */
 	bool playback_only;
 	bool capture_only;
@@ -1477,6 +1746,9 @@ struct snd_soc_codec_conf {
 	 */
 	const char *dev_name;
 	const struct device_node *of_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1484,6 +1756,7 @@ struct snd_soc_codec_conf {
 	 * associated per device
 	 */
 	const char *name_prefix;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/*
@@ -1493,16 +1766,21 @@ struct snd_soc_codec_conf {
 	enum snd_soc_compress_type compress_type;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 };
 
 struct snd_soc_aux_dev {
 	const char *name;		/* Codec name */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const char *codec_name;		/* for multi-codec */
 
 	/* codec/machine specific init - e.g. add machine controls */
 	int (*init)(struct snd_soc_dapm_context *dapm);
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * specify multi-codec either by device name, or by
@@ -1513,6 +1791,9 @@ struct snd_soc_aux_dev {
 
 	/* codec/machine specific init - e.g. add machine controls */
 	int (*init)(struct snd_soc_component *component);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1526,10 +1807,15 @@ struct snd_soc_card {
 	struct module *owner;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head list;
 	struct mutex mutex;
 	struct mutex dapm_mutex;
 	struct mutex dapm_power_mutex;
+=======
+	struct mutex mutex;
+	struct mutex dapm_mutex;
+>>>>>>> v3.18
 =======
 	struct mutex mutex;
 	struct mutex dapm_mutex;
@@ -1594,8 +1880,11 @@ struct snd_soc_card {
 	/* lists of probed devices belonging to this card */
 	struct list_head codec_dev_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head platform_dev_list;
 	struct list_head dai_dev_list;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1608,6 +1897,10 @@ struct snd_soc_card {
 	struct snd_soc_dapm_context dapm;
 	struct snd_soc_dapm_stats dapm_stats;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_soc_dapm_update *update;
+>>>>>>> v3.18
 =======
 	struct snd_soc_dapm_update *update;
 >>>>>>> v3.18
@@ -1640,9 +1933,12 @@ struct snd_soc_pcm_runtime {
 	unsigned char pop_wait:1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* err in case of ops failed */
 	int err_ops;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* runtime devices */
@@ -1653,11 +1949,17 @@ struct snd_soc_pcm_runtime {
 	struct snd_soc_dai *codec_dai;
 	struct snd_soc_dai *cpu_dai;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_component *component; /* Only valid for AUX dev rtds */
 
 	struct snd_soc_dai **codec_dais;
 	unsigned int num_codecs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct delayed_work delayed_work;
@@ -1671,13 +1973,19 @@ struct snd_soc_pcm_runtime {
 struct soc_mixer_control {
 	int min, max, platform_max;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int reg, rreg, shift, rshift, invert;
 =======
+=======
+>>>>>>> v3.18
 	int reg, rreg;
 	unsigned int shift, rshift;
 	unsigned int sign_bit;
 	unsigned int invert:1;
 	unsigned int autodisable:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1688,7 +1996,10 @@ struct soc_bytes {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct soc_bytes_ext {
 	int max;
 	/* used for TLV byte control */
@@ -1696,6 +2007,9 @@ struct soc_bytes_ext {
 	int (*put)(const unsigned int __user *bytes, unsigned int size);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* multi register control */
 struct soc_mreg_control {
@@ -1703,6 +2017,7 @@ struct soc_mreg_control {
 	unsigned int regbase, regcount, nbits, invert;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct soc_multi_mixer_control {
 	int min, max, platform_max, count;
@@ -1717,18 +2032,24 @@ struct soc_enum {
 	unsigned char shift_r;
 	unsigned int max;
 =======
+=======
+>>>>>>> v3.18
 /* enumerated kcontrol */
 struct soc_enum {
 	int reg;
 	unsigned char shift_l;
 	unsigned char shift_r;
 	unsigned int items;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int mask;
 	const char * const *texts;
 	const unsigned int *values;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* codec IO */
 unsigned int snd_soc_read(struct snd_soc_codec *codec, unsigned int reg);
@@ -1737,6 +2058,8 @@ unsigned int snd_soc_write(struct snd_soc_codec *codec,
 unsigned int snd_soc_bulk_write_raw(struct snd_soc_codec *codec,
 				    unsigned int reg, const void *data, size_t len);
 =======
+=======
+>>>>>>> v3.18
 /**
  * snd_soc_component_to_codec() - Casts a component to the CODEC it is embedded in
  * @component: The component to cast to a CODEC
@@ -1833,6 +2156,9 @@ int snd_soc_component_update_bits_async(struct snd_soc_component *component,
 void snd_soc_component_async_complete(struct snd_soc_component *component);
 int snd_soc_component_test_bits(struct snd_soc_component *component,
 	unsigned int reg, unsigned int mask, unsigned int value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* device driver data */
@@ -1849,11 +2175,14 @@ static inline void *snd_soc_card_get_drvdata(struct snd_soc_card *card)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void snd_soc_codec_set_drvdata(struct snd_soc_codec *codec,
 		void *data)
 {
 	dev_set_drvdata(codec->dev, data);
 =======
+=======
+>>>>>>> v3.18
 static inline void snd_soc_component_set_drvdata(struct snd_soc_component *c,
 		void *data)
 {
@@ -1869,13 +2198,20 @@ static inline void snd_soc_codec_set_drvdata(struct snd_soc_codec *codec,
 		void *data)
 {
 	snd_soc_component_set_drvdata(&codec->component, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void *snd_soc_codec_get_drvdata(struct snd_soc_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dev_get_drvdata(codec->dev);
+=======
+	return snd_soc_component_get_drvdata(&codec->component);
+>>>>>>> v3.18
 =======
 	return snd_soc_component_get_drvdata(&codec->component);
 >>>>>>> v3.18
@@ -1885,7 +2221,11 @@ static inline void snd_soc_platform_set_drvdata(struct snd_soc_platform *platfor
 		void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(platform->dev, data);
+=======
+	snd_soc_component_set_drvdata(&platform->component, data);
+>>>>>>> v3.18
 =======
 	snd_soc_component_set_drvdata(&platform->component, data);
 >>>>>>> v3.18
@@ -1894,7 +2234,11 @@ static inline void snd_soc_platform_set_drvdata(struct snd_soc_platform *platfor
 static inline void *snd_soc_platform_get_drvdata(struct snd_soc_platform *platform)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dev_get_drvdata(platform->dev);
+=======
+	return snd_soc_component_get_drvdata(&platform->component);
+>>>>>>> v3.18
 =======
 	return snd_soc_component_get_drvdata(&platform->component);
 >>>>>>> v3.18
@@ -1914,9 +2258,13 @@ static inline void *snd_soc_pcm_get_drvdata(struct snd_soc_pcm_runtime *rtd)
 static inline void snd_soc_initialize_card_lists(struct snd_soc_card *card)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&card->dai_dev_list);
 	INIT_LIST_HEAD(&card->codec_dev_list);
 	INIT_LIST_HEAD(&card->platform_dev_list);
+=======
+	INIT_LIST_HEAD(&card->codec_dev_list);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&card->codec_dev_list);
 >>>>>>> v3.18
@@ -1938,7 +2286,10 @@ static inline bool snd_soc_volsw_is_stereo(struct soc_mixer_control *mc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned int snd_soc_enum_val_to_item(struct soc_enum *e,
 	unsigned int val)
 {
@@ -2018,6 +2369,9 @@ static inline struct snd_soc_platform *snd_soc_kcontrol_platform(
 	return snd_soc_component_to_platform(snd_soc_kcontrol_component(kcontrol));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int snd_soc_util_init(void);
 void snd_soc_util_exit(void);
@@ -2025,12 +2379,15 @@ void snd_soc_util_exit(void);
 int snd_soc_of_parse_card_name(struct snd_soc_card *card,
 			       const char *propname);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_soc_of_parse_audio_routing(struct snd_soc_card *card,
 				   const char *propname);
 unsigned int snd_soc_of_parse_daifmt(struct device_node *np,
 				     const char *prefix);
 int soc_check_aux_dev_byname(struct snd_soc_card *card, const char *codec_name);
 =======
+=======
+>>>>>>> v3.18
 int snd_soc_of_parse_audio_simple_widgets(struct snd_soc_card *card,
 					  const char *propname);
 int snd_soc_of_parse_tdm_slot(struct device_node *np,
@@ -2044,6 +2401,9 @@ unsigned int snd_soc_of_parse_daifmt(struct device_node *np,
 				     struct device_node **framemaster);
 int snd_soc_of_get_dai_name(struct device_node *of_node,
 			    const char **dai_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <sound/soc-dai.h>
@@ -2055,7 +2415,10 @@ extern struct dentry *snd_soc_debugfs_root;
 extern const struct dev_pm_ops snd_soc_pm_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Helper functions */
 static inline void snd_soc_dapm_mutex_lock(struct snd_soc_dapm_context *dapm)
 {
@@ -2067,5 +2430,8 @@ static inline void snd_soc_dapm_mutex_unlock(struct snd_soc_dapm_context *dapm)
 	mutex_unlock(&dapm->card->dapm_mutex);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

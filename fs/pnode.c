@@ -201,7 +201,11 @@ static struct user_namespace *user_ns;
 static struct mount *last_dest, *last_source, *dest_master;
 static struct mountpoint *mp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct list_head *list;
+=======
+static struct hlist_head *list;
+>>>>>>> v3.18
 =======
 static struct hlist_head *list;
 >>>>>>> v3.18
@@ -251,17 +255,23 @@ static int propagate_one(struct mount *m)
 	last_source = child;
 	if (m->mnt_master != dest_master) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		br_write_lock(&vfsmount_lock);
 		SET_MNT_MARK(m->mnt_master);
 		br_write_unlock(&vfsmount_lock);
 	}
 	list_add_tail(&child->mnt_hash, list);
 =======
+=======
+>>>>>>> v3.18
 		read_seqlock_excl(&mount_lock);
 		SET_MNT_MARK(m->mnt_master);
 		read_sequnlock_excl(&mount_lock);
 	}
 	hlist_add_head(&child->mnt_hash, list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -281,7 +291,11 @@ static int propagate_one(struct mount *m)
  */
 int propagate_mnt(struct mount *dest_mnt, struct mountpoint *dest_mp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    struct mount *source_mnt, struct list_head *tree_list)
+=======
+		    struct mount *source_mnt, struct hlist_head *tree_list)
+>>>>>>> v3.18
 =======
 		    struct mount *source_mnt, struct hlist_head *tree_list)
 >>>>>>> v3.18
@@ -322,8 +336,13 @@ int propagate_mnt(struct mount *dest_mnt, struct mountpoint *dest_mp,
 	}
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	br_write_lock(&vfsmount_lock);
 	list_for_each_entry(n, tree_list, mnt_hash) {
+=======
+	read_seqlock_excl(&mount_lock);
+	hlist_for_each_entry(n, tree_list, mnt_hash) {
+>>>>>>> v3.18
 =======
 	read_seqlock_excl(&mount_lock);
 	hlist_for_each_entry(n, tree_list, mnt_hash) {
@@ -333,7 +352,11 @@ out:
 			CLEAR_MNT_MARK(m->mnt_master);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	br_write_unlock(&vfsmount_lock);
+=======
+	read_sequnlock_excl(&mount_lock);
+>>>>>>> v3.18
 =======
 	read_sequnlock_excl(&mount_lock);
 >>>>>>> v3.18
@@ -346,8 +369,12 @@ out:
 static inline int do_refcount_check(struct mount *mnt, int count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int mycount = mnt_get_count(mnt) - mnt->mnt_ghosts;
 	return (mycount > count);
+=======
+	return mnt_get_count(mnt) > count;
+>>>>>>> v3.18
 =======
 	return mnt_get_count(mnt) > count;
 >>>>>>> v3.18
@@ -383,7 +410,11 @@ int propagate_mount_busy(struct mount *mnt, int refcnt)
 	for (m = propagation_next(parent, parent); m;
 	     		m = propagation_next(m, parent)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		child = __lookup_mnt(&m->mnt, mnt->mnt_mountpoint, 0);
+=======
+		child = __lookup_mnt_last(&m->mnt, mnt->mnt_mountpoint);
+>>>>>>> v3.18
 =======
 		child = __lookup_mnt_last(&m->mnt, mnt->mnt_mountpoint);
 >>>>>>> v3.18
@@ -409,8 +440,13 @@ static void __propagate_umount(struct mount *mnt)
 			m = propagation_next(m, parent)) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct mount *child = __lookup_mnt(&m->mnt,
 					mnt->mnt_mountpoint, 0);
+=======
+		struct mount *child = __lookup_mnt_last(&m->mnt,
+						mnt->mnt_mountpoint);
+>>>>>>> v3.18
 =======
 		struct mount *child = __lookup_mnt_last(&m->mnt,
 						mnt->mnt_mountpoint);
@@ -420,14 +456,20 @@ static void __propagate_umount(struct mount *mnt)
 		 * other children
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (child && list_empty(&child->mnt_mounts))
 			list_move_tail(&child->mnt_hash, &mnt->mnt_hash);
 =======
+=======
+>>>>>>> v3.18
 		if (child && list_empty(&child->mnt_mounts)) {
 			list_del_init(&child->mnt_child);
 			hlist_del_init_rcu(&child->mnt_hash);
 			hlist_add_before_rcu(&child->mnt_hash, &mnt->mnt_hash);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -439,6 +481,7 @@ static void __propagate_umount(struct mount *mnt)
  *
  * vfsmount lock must be held for write
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int propagate_umount(struct list_head *list)
 {
@@ -483,6 +526,8 @@ void propagate_remount(struct mount *mnt)
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 int propagate_umount(struct hlist_head *list)
 {
 	struct mount *mnt;
@@ -491,4 +536,7 @@ int propagate_umount(struct hlist_head *list)
 		__propagate_umount(mnt);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

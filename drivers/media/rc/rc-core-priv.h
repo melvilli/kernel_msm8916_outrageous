@@ -2,7 +2,11 @@
  * Remote Controller core raw events header
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2010 by Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (C) 2010 by Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (C) 2010 by Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -59,7 +63,11 @@ struct ir_raw_event_ctrl {
 		u32 bits;
 		unsigned count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned wanted_bits;
+=======
+		bool is_rc5x;
+>>>>>>> v3.18
 =======
 		bool is_rc5x;
 >>>>>>> v3.18
@@ -86,6 +94,7 @@ struct ir_raw_event_ctrl {
 		bool toggle;
 	} jvc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rc5_sz_dec {
 		int state;
 		u32 bits;
@@ -94,19 +103,27 @@ struct ir_raw_event_ctrl {
 	} rc5_sz;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	struct sanyo_dec {
 		int state;
 		unsigned count;
 		u64 bits;
 	} sanyo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct sharp_dec {
 		int state;
 		unsigned count;
 		u32 bits;
 		unsigned int pulse_len;
 	} sharp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mce_kbd_dec {
 		struct input_dev *idev;
@@ -131,12 +148,18 @@ struct ir_raw_event_ctrl {
 
 	} lirc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct xmp_dec {
 		int state;
 		unsigned count;
 		u32 durations[16];
 	} xmp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -233,7 +256,10 @@ static inline void load_sanyo_decode(void) { }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* from ir-sharp-decoder.c */
 #ifdef CONFIG_IR_SHARP_DECODER_MODULE
 #define load_sharp_decode()	request_module_nowait("ir-sharp-decoder")
@@ -241,6 +267,9 @@ static inline void load_sanyo_decode(void) { }
 static inline void load_sharp_decode(void) { }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* from ir-mce_kbd-decoder.c */
 #ifdef CONFIG_IR_MCE_KBD_DECODER_MODULE
@@ -257,7 +286,10 @@ static inline void load_lirc_codec(void) { }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* from ir-xmp-decoder.c */
 #ifdef CONFIG_IR_XMP_DECODER_MODULE
 #define load_xmp_decode()      request_module_nowait("ir-xmp-decoder")
@@ -265,6 +297,9 @@ static inline void load_lirc_codec(void) { }
 static inline void load_xmp_decode(void) { }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _RC_CORE_PRIV */

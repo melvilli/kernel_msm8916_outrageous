@@ -13,6 +13,10 @@
 	.text
 	.set noat
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cfi_sections	.debug_frame
+>>>>>>> v3.18
 =======
 	.cfi_sections	.debug_frame
 >>>>>>> v3.18
@@ -22,7 +26,10 @@
 #define SWITCH_STACK_SIZE	320
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 .macro	CFI_START_OSF_FRAME	func
 	.align	4
 	.globl	\func
@@ -43,6 +50,9 @@
 	.size	\func, . - \func
 .endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * This defines the normal kernel pt-regs layout.
@@ -54,6 +64,7 @@
  * the palcode-provided values are available to the signal handler.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define SAVE_ALL			\
 	subq	$sp, SP_OFF, $sp;	\
@@ -114,6 +125,8 @@
 	ldq	$28, 144($sp);		\
 	addq	$sp, SP_OFF, $sp
 =======
+=======
+>>>>>>> v3.18
 .macro	SAVE_ALL
 	subq	$sp, SP_OFF, $sp
 	.cfi_adjust_cfa_offset	SP_OFF
@@ -238,6 +251,9 @@
 	.cfi_restore	$15
 	.cfi_adjust_cfa_offset	-SWITCH_STACK_SIZE
 .endm
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -245,10 +261,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.align	4
 	.globl	entInt
 	.ent	entInt
 entInt:
+=======
+CFI_START_OSF_FRAME entInt
+>>>>>>> v3.18
 =======
 CFI_START_OSF_FRAME entInt
 >>>>>>> v3.18
@@ -258,6 +278,7 @@ CFI_START_OSF_FRAME entInt
 	bic	$sp, $8, $8
 	mov	$sp, $19
 	jsr	$31, do_entInt
+<<<<<<< HEAD
 <<<<<<< HEAD
 .end entInt
 
@@ -270,12 +291,18 @@ CFI_END_OSF_FRAME entInt
 
 CFI_START_OSF_FRAME entArith
 >>>>>>> v3.18
+=======
+CFI_END_OSF_FRAME entInt
+
+CFI_START_OSF_FRAME entArith
+>>>>>>> v3.18
 	SAVE_ALL
 	lda	$8, 0x3fff
 	lda	$26, ret_from_sys_call
 	bic	$sp, $8, $8
 	mov	$sp, $18
 	jsr	$31, do_entArith
+<<<<<<< HEAD
 <<<<<<< HEAD
 .end entArith
 
@@ -287,6 +314,8 @@ entMM:
 /* save $9 - $15 so the inline exception code can manipulate them.  */
 	subq	$sp, 56, $sp
 =======
+=======
+>>>>>>> v3.18
 CFI_END_OSF_FRAME entArith
 
 CFI_START_OSF_FRAME entMM
@@ -294,6 +323,9 @@ CFI_START_OSF_FRAME entMM
 /* save $9 - $15 so the inline exception code can manipulate them.  */
 	subq	$sp, 56, $sp
 	.cfi_adjust_cfa_offset	56
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	stq	$9, 0($sp)
 	stq	$10, 8($sp)
@@ -303,7 +335,10 @@ CFI_START_OSF_FRAME entMM
 	stq	$14, 40($sp)
 	stq	$15, 48($sp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.cfi_rel_offset	$9, 0
 	.cfi_rel_offset	$10, 8
 	.cfi_rel_offset	$11, 16
@@ -311,6 +346,9 @@ CFI_START_OSF_FRAME entMM
 	.cfi_rel_offset	$13, 32
 	.cfi_rel_offset	$14, 40
 	.cfi_rel_offset	$15, 48
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	addq	$sp, 56, $19
 /* handle the fault */
@@ -327,6 +365,7 @@ CFI_START_OSF_FRAME entMM
 	ldq	$15, 48($sp)
 	addq	$sp, 56, $sp
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* finish up the syscall as normal.  */
 	br	ret_from_sys_call
 .end entMM
@@ -336,6 +375,8 @@ CFI_START_OSF_FRAME entMM
 	.ent	entIF
 entIF:
 =======
+=======
+>>>>>>> v3.18
 	.cfi_restore	$9
 	.cfi_restore	$10
 	.cfi_restore	$11
@@ -349,6 +390,9 @@ entIF:
 CFI_END_OSF_FRAME entMM
 
 CFI_START_OSF_FRAME entIF
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SAVE_ALL
 	lda	$8, 0x3fff
@@ -356,6 +400,7 @@ CFI_START_OSF_FRAME entIF
 	bic	$sp, $8, $8
 	mov	$sp, $17
 	jsr	$31, do_entIF
+<<<<<<< HEAD
 <<<<<<< HEAD
 .end entIF
 
@@ -366,6 +411,8 @@ entUna:
 	lda	$sp, -256($sp)
 	stq	$0, 0($sp)
 =======
+=======
+>>>>>>> v3.18
 CFI_END_OSF_FRAME entIF
 
 CFI_START_OSF_FRAME entUna
@@ -374,6 +421,9 @@ CFI_START_OSF_FRAME entUna
 	stq	$0, 0($sp)
 	.cfi_rel_offset	$0, 0
 	.cfi_remember_state
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ldq	$0, 256($sp)	/* get PS */
 	stq	$1, 8($sp)
@@ -407,7 +457,10 @@ CFI_START_OSF_FRAME entUna
 	mov	$sp, $19
 	stq	$gp, 232($sp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.cfi_rel_offset	$1, 1*8
 	.cfi_rel_offset	$2, 2*8
 	.cfi_rel_offset	$3, 3*8
@@ -434,6 +487,9 @@ CFI_START_OSF_FRAME entUna
 	.cfi_rel_offset	$27, 27*8
 	.cfi_rel_offset	$28, 28*8
 	.cfi_rel_offset	$29, 29*8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lda	$8, 0x3fff
 	stq	$31, 248($sp)
@@ -469,6 +525,7 @@ CFI_START_OSF_FRAME entUna
 	ldq	$gp, 232($sp)
 	lda	$sp, 256($sp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call_pal PAL_rti
 .end entUna
 
@@ -480,6 +537,8 @@ entUnaUser:
 	SAVE_ALL		/* setup normal kernel stack */
 	lda	$sp, -56($sp)
 =======
+=======
+>>>>>>> v3.18
 	.cfi_restore	$1
 	.cfi_restore	$2
 	.cfi_restore	$3
@@ -519,6 +578,9 @@ entUnaUser:
 	SAVE_ALL		/* setup normal kernel stack */
 	lda	$sp, -56($sp)
 	.cfi_adjust_cfa_offset	56
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	stq	$9, 0($sp)
 	stq	$10, 8($sp)
@@ -528,7 +590,10 @@ entUnaUser:
 	stq	$14, 40($sp)
 	stq	$15, 48($sp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.cfi_rel_offset	$9, 0
 	.cfi_rel_offset	$10, 8
 	.cfi_rel_offset	$11, 16
@@ -536,6 +601,9 @@ entUnaUser:
 	.cfi_rel_offset	$13, 32
 	.cfi_rel_offset	$14, 40
 	.cfi_rel_offset	$15, 48
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lda	$8, 0x3fff
 	addq	$sp, 56, $19
@@ -550,6 +618,7 @@ entUnaUser:
 	ldq	$15, 48($sp)
 	lda	$sp, 56($sp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	br	ret_from_sys_call
 .end entUnaUser
 
@@ -558,6 +627,8 @@ entUnaUser:
 	.ent	entDbg
 entDbg:
 =======
+=======
+>>>>>>> v3.18
 	.cfi_restore	$9
 	.cfi_restore	$10
 	.cfi_restore	$11
@@ -570,6 +641,9 @@ entDbg:
 CFI_END_OSF_FRAME entUna
 
 CFI_START_OSF_FRAME entDbg
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SAVE_ALL
 	lda	$8, 0x3fff
@@ -578,7 +652,11 @@ CFI_START_OSF_FRAME entDbg
 	mov	$sp, $16
 	jsr	$31, do_entDbg
 <<<<<<< HEAD
+<<<<<<< HEAD
 .end entDbg
+=======
+CFI_END_OSF_FRAME entDbg
+>>>>>>> v3.18
 =======
 CFI_END_OSF_FRAME entDbg
 >>>>>>> v3.18
@@ -597,15 +675,21 @@ CFI_END_OSF_FRAME entDbg
 	.align	4
 	.globl	entSys
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.globl	ret_from_sys_call
 	.ent	entSys
 =======
+=======
+>>>>>>> v3.18
 	.type	entSys, @function
 	.cfi_startproc simple
 	.cfi_return_column 64
 	.cfi_def_cfa	$sp, 48
 	.cfi_rel_offset	64, 8
 	.cfi_rel_offset	$gp, 16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 entSys:
 	SAVE_ALL
@@ -621,8 +705,11 @@ entSys:
 	s8addq	$0, $5, $5
 	stq	$18, SP_OFF+40($sp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blbs	$3, strace
 =======
+=======
+>>>>>>> v3.18
 	.cfi_rel_offset	$16, SP_OFF+24
 	.cfi_rel_offset	$17, SP_OFF+32
 	.cfi_rel_offset	$18, SP_OFF+40
@@ -631,6 +718,9 @@ entSys:
 	and     $3, $6, $3
 #endif
 	bne     $3, strace
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	beq	$4, 1f
 	ldq	$27, 0($5)
@@ -642,6 +732,10 @@ entSys:
 
 	.align	4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.globl	ret_from_sys_call
+>>>>>>> v3.18
 =======
 	.globl	ret_from_sys_call
 >>>>>>> v3.18
@@ -660,6 +754,10 @@ ret_to_user:
 	bne	$2, work_pending
 restore_all:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cfi_remember_state
+>>>>>>> v3.18
 =======
 	.cfi_remember_state
 >>>>>>> v3.18
@@ -668,6 +766,10 @@ restore_all:
 
 ret_to_kernel:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.cfi_restore_state
+>>>>>>> v3.18
 =======
 	.cfi_restore_state
 >>>>>>> v3.18
@@ -700,7 +802,10 @@ $ret_success:
 	stq	$31, 72($sp)	/* a3=0 => no error */
 	br	ret_from_sys_call
 <<<<<<< HEAD
+<<<<<<< HEAD
 .end entSys
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -717,7 +822,11 @@ $ret_success:
 
 	.align	4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ent	work_pending
+=======
+	.type	work_pending, @function
+>>>>>>> v3.18
 =======
 	.type	work_pending, @function
 >>>>>>> v3.18
@@ -738,16 +847,22 @@ $work_resched:
 $work_notifysig:
 	mov	$sp, $16
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bsr	$1, do_switch_stack
 	jsr	$26, do_work_pending
 	bsr	$1, undo_switch_stack
 	br	restore_all
 .end work_pending
 =======
+=======
+>>>>>>> v3.18
 	DO_SWITCH_STACK
 	jsr	$26, do_work_pending
 	UNDO_SWITCH_STACK
 	br	restore_all
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -756,6 +871,7 @@ $work_notifysig:
 
 	.align	4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ent	strace
 strace:
 	/* set up signal stack, call syscall_trace */
@@ -763,12 +879,17 @@ strace:
 	jsr	$26, syscall_trace_enter /* returns the syscall number */
 	bsr	$1, undo_switch_stack
 =======
+=======
+>>>>>>> v3.18
 	.type	strace, @function
 strace:
 	/* set up signal stack, call syscall_trace */
 	DO_SWITCH_STACK
 	jsr	$26, syscall_trace_enter /* returns the syscall number */
 	UNDO_SWITCH_STACK
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* get the arguments back.. */
@@ -798,9 +919,15 @@ $strace_success:
 	stq	$0, 0($sp)		/* save return value */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bsr	$1, do_switch_stack
 	jsr	$26, syscall_trace_leave
 	bsr	$1, undo_switch_stack
+=======
+	DO_SWITCH_STACK
+	jsr	$26, syscall_trace_leave
+	UNDO_SWITCH_STACK
+>>>>>>> v3.18
 =======
 	DO_SWITCH_STACK
 	jsr	$26, syscall_trace_leave
@@ -820,7 +947,11 @@ $strace_error:
 	stq	$1, 72($sp)	/* a3 for return */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bsr	$1, do_switch_stack
+=======
+	DO_SWITCH_STACK
+>>>>>>> v3.18
 =======
 	DO_SWITCH_STACK
 >>>>>>> v3.18
@@ -830,17 +961,23 @@ $strace_error:
 	mov	$9, $18
 	mov	$10, $19
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bsr	$1, undo_switch_stack
 
 	mov	$31, $26	/* tell "ret_from_sys_call" we can restart */
 	br	ret_from_sys_call
 .end strace
 =======
+=======
+>>>>>>> v3.18
 	UNDO_SWITCH_STACK
 
 	mov	$31, $26	/* tell "ret_from_sys_call" we can restart */
 	br	ret_from_sys_call
 CFI_END_OSF_FRAME entSys
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -849,10 +986,13 @@ CFI_END_OSF_FRAME entSys
 
 	.align	4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ent	do_switch_stack
 do_switch_stack:
 	lda	$sp, -SWITCH_STACK_SIZE($sp)
 =======
+=======
+>>>>>>> v3.18
 	.type	do_switch_stack, @function
 	.cfi_startproc simple
 	.cfi_return_column 64
@@ -861,6 +1001,9 @@ do_switch_stack:
 do_switch_stack:
 	lda	$sp, -SWITCH_STACK_SIZE($sp)
 	.cfi_adjust_cfa_offset	SWITCH_STACK_SIZE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	stq	$9, 0($sp)
 	stq	$10, 8($sp)
@@ -906,11 +1049,14 @@ do_switch_stack:
 	ldt	$f0, 64($sp)	# dont let "do_switch_stack" change fp state.
 	ret	$31, ($1), 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 .end do_switch_stack
 
 	.align	4
 	.ent	undo_switch_stack
 =======
+=======
+>>>>>>> v3.18
 	.cfi_endproc
 	.size	do_switch_stack, .-do_switch_stack
 
@@ -919,6 +1065,9 @@ do_switch_stack:
 	.cfi_startproc simple
 	.cfi_def_cfa $sp, 0
 	.cfi_register 64, $1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 undo_switch_stack:
 	ldq	$9, 0($sp)
@@ -965,7 +1114,12 @@ undo_switch_stack:
 	lda	$sp, SWITCH_STACK_SIZE($sp)
 	ret	$31, ($1), 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 .end undo_switch_stack
+=======
+	.cfi_endproc
+	.size	undo_switch_stack, .-undo_switch_stack
+>>>>>>> v3.18
 =======
 	.cfi_endproc
 	.size	undo_switch_stack, .-undo_switch_stack
@@ -977,6 +1131,7 @@ undo_switch_stack:
 
 	.align	4
 	.globl	alpha_switch_to
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.ent	alpha_switch_to
 alpha_switch_to:
@@ -990,6 +1145,8 @@ alpha_switch_to:
 	ret
 .end alpha_switch_to
 =======
+=======
+>>>>>>> v3.18
 	.type	alpha_switch_to, @function
 	.cfi_startproc
 alpha_switch_to:
@@ -1002,6 +1159,9 @@ alpha_switch_to:
 	ret
 	.cfi_endproc
 	.size	alpha_switch_to, .-alpha_switch_to
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

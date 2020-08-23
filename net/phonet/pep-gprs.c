@@ -38,7 +38,11 @@ struct gprs_dev {
 	struct sock		*sk;
 	void			(*old_state_change)(struct sock *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void			(*old_data_ready)(struct sock *, int);
+=======
+	void			(*old_data_ready)(struct sock *);
+>>>>>>> v3.18
 =======
 	void			(*old_data_ready)(struct sock *);
 >>>>>>> v3.18
@@ -151,7 +155,11 @@ drop:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void gprs_data_ready(struct sock *sk, int len)
+=======
+static void gprs_data_ready(struct sock *sk)
+>>>>>>> v3.18
 =======
 static void gprs_data_ready(struct sock *sk)
 >>>>>>> v3.18
@@ -276,7 +284,11 @@ int gprs_attach(struct sock *sk)
 
 	/* Create net device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(*gp), ifname, gprs_setup);
+=======
+	dev = alloc_netdev(sizeof(*gp), ifname, NET_NAME_UNKNOWN, gprs_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(sizeof(*gp), ifname, NET_NAME_UNKNOWN, gprs_setup);
 >>>>>>> v3.18

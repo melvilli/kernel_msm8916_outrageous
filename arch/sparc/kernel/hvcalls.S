@@ -822,7 +822,10 @@ ENTRY(sun4v_vt_set_perfreg)
 	 nop
 ENDPROC(sun4v_vt_set_perfreg)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 ENTRY(sun4v_t5_get_perfreg)
 	mov	%o1, %o4
@@ -839,4 +842,7 @@ ENTRY(sun4v_t5_set_perfreg)
 	retl
 	 nop
 ENDPROC(sun4v_t5_set_perfreg)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

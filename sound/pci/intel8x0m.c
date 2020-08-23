@@ -220,7 +220,11 @@ struct intel8x0m {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_intel8x0m_ids) = {
+=======
+static const struct pci_device_id snd_intel8x0m_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_intel8x0m_ids[] = {
 >>>>>>> v3.18
@@ -339,7 +343,12 @@ static int snd_intel8x0m_codec_semaphore(struct intel8x0m *chip, unsigned int co
 	 * reset the semaphore. So even if you don't get the semaphore, still
 	 * continue the access. We don't need the semaphore anyway. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "codec_semaphore: semaphore is not ready [0x%x][0x%x]\n",
+=======
+	dev_err(chip->card->dev,
+		"codec_semaphore: semaphore is not ready [0x%x][0x%x]\n",
+>>>>>>> v3.18
 =======
 	dev_err(chip->card->dev,
 		"codec_semaphore: semaphore is not ready [0x%x][0x%x]\n",
@@ -359,7 +368,13 @@ static void snd_intel8x0m_codec_write(struct snd_ac97 *ac97,
 	if (snd_intel8x0m_codec_semaphore(chip, ac97->num) < 0) {
 		if (! chip->in_ac97_init)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "codec_write %d: semaphore is not ready for register 0x%x\n", ac97->num, reg);
+=======
+			dev_err(chip->card->dev,
+				"codec_write %d: semaphore is not ready for register 0x%x\n",
+				ac97->num, reg);
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"codec_write %d: semaphore is not ready for register 0x%x\n",
@@ -379,7 +394,13 @@ static unsigned short snd_intel8x0m_codec_read(struct snd_ac97 *ac97,
 	if (snd_intel8x0m_codec_semaphore(chip, ac97->num) < 0) {
 		if (! chip->in_ac97_init)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "codec_read %d: semaphore is not ready for register 0x%x\n", ac97->num, reg);
+=======
+			dev_err(chip->card->dev,
+				"codec_read %d: semaphore is not ready for register 0x%x\n",
+				ac97->num, reg);
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"codec_read %d: semaphore is not ready for register 0x%x\n",
@@ -394,7 +415,13 @@ static unsigned short snd_intel8x0m_codec_read(struct snd_ac97 *ac97,
 				  tmp & ~(ICH_SRI|ICH_PRI|ICH_TRI|ICH_GSCI));
 			if (! chip->in_ac97_init)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk(KERN_ERR "codec_read %d: read timeout for register 0x%x\n", ac97->num, reg);
+=======
+				dev_err(chip->card->dev,
+					"codec_read %d: read timeout for register 0x%x\n",
+					ac97->num, reg);
+>>>>>>> v3.18
 =======
 				dev_err(chip->card->dev,
 					"codec_read %d: read timeout for register 0x%x\n",
@@ -440,7 +467,11 @@ static void snd_intel8x0m_setup_periods(struct intel8x0m *chip, struct ichdev *i
 						     ichdev->fragsize >> chip->pcm_pos_shift);
 			/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "bdbar[%i] = 0x%x [0x%x]\n",
+=======
+			dev_dbg(chip->card->dev, "bdbar[%i] = 0x%x [0x%x]\n",
+>>>>>>> v3.18
 =======
 			dev_dbg(chip->card->dev, "bdbar[%i] = 0x%x [0x%x]\n",
 >>>>>>> v3.18
@@ -456,8 +487,13 @@ static void snd_intel8x0m_setup_periods(struct intel8x0m *chip, struct ichdev *i
 	ichdev->position = 0;
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "lvi_frag = %i, frags = %i, period_size = 0x%x, "
 	       "period_size1 = 0x%x\n",
+=======
+	dev_dbg(chip->card->dev,
+		"lvi_frag = %i, frags = %i, period_size = 0x%x, period_size1 = 0x%x\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev,
 		"lvi_frag = %i, frags = %i, period_size = 0x%x, period_size1 = 0x%x\n",
@@ -507,8 +543,13 @@ static inline void snd_intel8x0m_update(struct intel8x0m *chip, struct ichdev *i
 							     ichdev->fragsize1);
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "new: bdbar[%i] = 0x%x [0x%x], "
 		       "prefetch = %i, all = 0x%x, 0x%x\n",
+=======
+		dev_dbg(chip->card->dev,
+			"new: bdbar[%i] = 0x%x [0x%x], prefetch = %i, all = 0x%x, 0x%x\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(chip->card->dev,
 			"new: bdbar[%i] = 0x%x [0x%x], prefetch = %i, all = 0x%x, 0x%x\n",
@@ -892,7 +933,12 @@ static int snd_intel8x0m_mixer(struct intel8x0m *chip, int ac97_clock)
 	ac97.num = glob_sta & ICH_SCR ? 1 : 0;
 	if ((err = snd_ac97_mixer(pbus, &ac97, &x97)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Unable to initialize codec #%d\n", ac97.num);
+=======
+		dev_err(chip->card->dev,
+			"Unable to initialize codec #%d\n", ac97.num);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"Unable to initialize codec #%d\n", ac97.num);
@@ -948,7 +994,11 @@ static int snd_intel8x0m_ich_chip_init(struct intel8x0m *chip, int probing)
 		schedule_timeout_uninterruptible(1);
 	} while (time_after_eq(end_time, jiffies));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "AC'97 warm reset still in progress? [0x%x]\n",
+=======
+	dev_err(chip->card->dev, "AC'97 warm reset still in progress? [0x%x]\n",
+>>>>>>> v3.18
 =======
 	dev_err(chip->card->dev, "AC'97 warm reset still in progress? [0x%x]\n",
 >>>>>>> v3.18
@@ -972,7 +1022,12 @@ static int snd_intel8x0m_ich_chip_init(struct intel8x0m *chip, int probing)
 		if (! status) {
 			/* no codec is found */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "codec_ready: codec is not ready [0x%x]\n",
+=======
+			dev_err(chip->card->dev,
+				"codec_ready: codec is not ready [0x%x]\n",
+>>>>>>> v3.18
 =======
 			dev_err(chip->card->dev,
 				"codec_ready: codec is not ready [0x%x]\n",
@@ -1098,8 +1153,12 @@ static int intel8x0m_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "intel8x0m: pci_enable_device failed, "
 		       "disabling device\n");
+=======
+		dev_err(dev, "pci_enable_device failed, disabling device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_enable_device failed, disabling device\n");
 >>>>>>> v3.18
@@ -1110,8 +1169,13 @@ static int intel8x0m_resume(struct device *dev)
 	if (request_irq(pci->irq, snd_intel8x0m_interrupt,
 			IRQF_SHARED, KBUILD_MODNAME, chip)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "intel8x0m: unable to grab IRQ %d, "
 		       "disabling device\n", pci->irq);
+=======
+		dev_err(dev, "unable to grab IRQ %d, disabling device\n",
+			pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(dev, "unable to grab IRQ %d, disabling device\n",
 			pci->irq);
@@ -1230,7 +1294,11 @@ static int snd_intel8x0m_create(struct snd_card *card,
 		chip->addr = pci_iomap(pci, 0, 0);
 	if (!chip->addr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "AC'97 space ioremap problem\n");
+=======
+		dev_err(card->dev, "AC'97 space ioremap problem\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "AC'97 space ioremap problem\n");
 >>>>>>> v3.18
@@ -1243,7 +1311,11 @@ static int snd_intel8x0m_create(struct snd_card *card,
 		chip->bmaddr = pci_iomap(pci, 1, 0);
 	if (!chip->bmaddr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Controller space ioremap problem\n");
+=======
+		dev_err(card->dev, "Controller space ioremap problem\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "Controller space ioremap problem\n");
 >>>>>>> v3.18
@@ -1255,7 +1327,11 @@ static int snd_intel8x0m_create(struct snd_card *card,
 	if (request_irq(pci->irq, snd_intel8x0m_interrupt, IRQF_SHARED,
 			KBUILD_MODNAME, chip)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to grab IRQ %d\n", pci->irq);
+=======
+		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to grab IRQ %d\n", pci->irq);
 >>>>>>> v3.18
@@ -1320,8 +1396,11 @@ static int snd_intel8x0m_create(struct snd_card *card,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*r_intel8x0m = chip;
@@ -1363,7 +1442,11 @@ static int snd_intel8x0m_probe(struct pci_dev *pci,
 	struct shortname_table *name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index, id, THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index, id, THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index, id, THIS_MODULE, 0, &card);
 >>>>>>> v3.18
@@ -1412,7 +1495,10 @@ static void snd_intel8x0m_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

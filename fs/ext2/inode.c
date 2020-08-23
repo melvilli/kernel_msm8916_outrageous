@@ -59,7 +59,11 @@ static void ext2_write_failed(struct address_space *mapping, loff_t to)
 
 	if (to > inode->i_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		truncate_pagecache(inode, to, inode->i_size);
+=======
+		truncate_pagecache(inode, inode->i_size);
+>>>>>>> v3.18
 =======
 		truncate_pagecache(inode, inode->i_size);
 >>>>>>> v3.18
@@ -83,7 +87,11 @@ void ext2_evict_inode(struct inode * inode)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -859,8 +867,13 @@ static sector_t ext2_bmap(struct address_space *mapping, sector_t block)
 
 static ssize_t
 <<<<<<< HEAD
+<<<<<<< HEAD
 ext2_direct_IO(int rw, struct kiocb *iocb, const struct iovec *iov,
 			loff_t offset, unsigned long nr_segs)
+=======
+ext2_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
+			loff_t offset)
+>>>>>>> v3.18
 =======
 ext2_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
 			loff_t offset)
@@ -870,6 +883,7 @@ ext2_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
 	struct address_space *mapping = file->f_mapping;
 	struct inode *inode = mapping->host;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssize_t ret;
 
 	ret = blockdev_direct_IO(rw, iocb, inode, iov, offset, nr_segs,
@@ -877,12 +891,17 @@ ext2_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
 	if (ret < 0 && (rw & WRITE))
 		ext2_write_failed(mapping, offset + iov_length(iov, nr_segs));
 =======
+=======
+>>>>>>> v3.18
 	size_t count = iov_iter_count(iter);
 	ssize_t ret;
 
 	ret = blockdev_direct_IO(rw, iocb, inode, iter, offset, ext2_get_block);
 	if (ret < 0 && (rw & WRITE))
 		ext2_write_failed(mapping, offset + count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1589,7 +1608,11 @@ int ext2_setattr(struct dentry *dentry, struct iattr *iattr)
 	setattr_copy(inode, iattr);
 	if (iattr->ia_valid & ATTR_MODE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = ext2_acl_chmod(inode);
+=======
+		error = posix_acl_chmod(inode, inode->i_mode);
+>>>>>>> v3.18
 =======
 		error = posix_acl_chmod(inode, inode->i_mode);
 >>>>>>> v3.18

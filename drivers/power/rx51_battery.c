@@ -25,6 +25,11 @@
 #include <linux/slab.h>
 #include <linux/i2c/twl4030-madc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/iio/consumer.h>
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/iio/consumer.h>
 #include <linux/of.h>
@@ -34,6 +39,12 @@ struct rx51_device_info {
 	struct device *dev;
 	struct power_supply bat;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct iio_channel *channel_temp;
+	struct iio_channel *channel_bsi;
+	struct iio_channel *channel_vbat;
+>>>>>>> v3.18
 =======
 	struct iio_channel *channel_temp;
 	struct iio_channel *channel_bsi;
@@ -44,6 +55,7 @@ struct rx51_device_info {
 /*
  * Read ADCIN channel value, code copied from maemo kernel
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int rx51_battery_read_adc(int channel)
 {
@@ -61,6 +73,8 @@ static int rx51_battery_read_adc(int channel)
 
 	return req.rbuf[channel];
 =======
+=======
+>>>>>>> v3.18
 static int rx51_battery_read_adc(struct iio_channel *channel)
 {
 	int val, err;
@@ -68,6 +82,9 @@ static int rx51_battery_read_adc(struct iio_channel *channel)
 	if (err < 0)
 		return err;
 	return val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -78,17 +95,23 @@ static int rx51_battery_read_adc(struct iio_channel *channel)
 static int rx51_battery_read_voltage(struct rx51_device_info *di)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int voltage = rx51_battery_read_adc(12);
 
 	if (voltage < 0)
 		return voltage;
 =======
+=======
+>>>>>>> v3.18
 	int voltage = rx51_battery_read_adc(di->channel_vbat);
 
 	if (voltage < 0) {
 		dev_err(di->dev, "Could not read ADC: %d\n", voltage);
 		return voltage;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1000 * (10000 * voltage / 1705);
@@ -139,12 +162,18 @@ static int rx51_battery_read_temperature(struct rx51_device_info *di)
 	int min = 0;
 	int max = ARRAY_SIZE(rx51_temp_table2) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int raw = rx51_battery_read_adc(0);
 =======
+=======
+>>>>>>> v3.18
 	int raw = rx51_battery_read_adc(di->channel_temp);
 
 	if (raw < 0)
 		dev_err(di->dev, "Could not read ADC: %d\n", raw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Zero and negative values are undefined */
@@ -180,17 +209,23 @@ static int rx51_battery_read_temperature(struct rx51_device_info *di)
 static int rx51_battery_read_capacity(struct rx51_device_info *di)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int capacity = rx51_battery_read_adc(4);
 
 	if (capacity < 0)
 		return capacity;
 =======
+=======
+>>>>>>> v3.18
 	int capacity = rx51_battery_read_adc(di->channel_bsi);
 
 	if (capacity < 0) {
 		dev_err(di->dev, "Could not read ADC: %d\n", capacity);
 		return capacity;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1280 * (1200 * capacity)/(1024 - capacity);
@@ -256,6 +291,10 @@ static int rx51_battery_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, di);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	di->dev = &pdev->dev;
+>>>>>>> v3.18
 =======
 	di->dev = &pdev->dev;
 >>>>>>> v3.18
@@ -266,6 +305,7 @@ static int rx51_battery_probe(struct platform_device *pdev)
 	di->bat.get_property = rx51_battery_get_property;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = power_supply_register(di->dev, &di->bat);
 	if (ret) {
 		platform_set_drvdata(pdev, NULL);
@@ -274,6 +314,8 @@ static int rx51_battery_probe(struct platform_device *pdev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	di->channel_temp = iio_channel_get(di->dev, "temp");
 	if (IS_ERR(di->channel_temp)) {
 		ret = PTR_ERR(di->channel_temp);
@@ -307,6 +349,9 @@ error_channel_temp:
 error:
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -316,19 +361,28 @@ static int rx51_battery_remove(struct platform_device *pdev)
 
 	power_supply_unregister(&di->bat);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 
 	iio_channel_release(di->channel_vbat);
 	iio_channel_release(di->channel_bsi);
 	iio_channel_release(di->channel_temp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id n900_battery_of_match[] = {
 	{.compatible = "nokia,n900-battery", },
@@ -337,6 +391,9 @@ static const struct of_device_id n900_battery_of_match[] = {
 MODULE_DEVICE_TABLE(of, n900_battery_of_match);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver rx51_battery_driver = {
 	.probe = rx51_battery_probe,
@@ -345,6 +402,10 @@ static struct platform_driver rx51_battery_driver = {
 		.name = "rx51-battery",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(n900_battery_of_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(n900_battery_of_match),
 >>>>>>> v3.18

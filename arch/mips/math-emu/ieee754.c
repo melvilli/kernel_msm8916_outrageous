@@ -11,8 +11,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -26,6 +29,7 @@
  *
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
@@ -130,6 +134,8 @@ s64 ieee754di_xcpt(s64 r, const char *op, ...)
 	return ax.rv.di;
 }
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
@@ -201,4 +207,7 @@ const union ieee754sp __ieee754sp_spcvals[] = {
 	SPCNST(0, 31,	       0x000000),	/* + 1.0e31 */
 	SPCNST(0, 63,	       0x000000),	/* + 1.0e63 */
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

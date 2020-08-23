@@ -57,7 +57,10 @@
  *	SOL_IP control messages.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PKTINFO_SKB_CB(__skb) ((struct in_pktinfo *)((__skb)->cb))
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -191,14 +194,20 @@ void ip_cmsg_recv(struct msghdr *msg, struct sk_buff *skb)
 EXPORT_SYMBOL(ip_cmsg_recv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ip_cmsg_send(struct net *net, struct msghdr *msg, struct ipcm_cookie *ipc)
 {
 	int err;
 =======
+=======
+>>>>>>> v3.18
 int ip_cmsg_send(struct net *net, struct msghdr *msg, struct ipcm_cookie *ipc,
 		 bool allow_ipv6)
 {
 	int err, val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct cmsghdr *cmsg;
 
@@ -206,7 +215,10 @@ int ip_cmsg_send(struct net *net, struct msghdr *msg, struct ipcm_cookie *ipc,
 		if (!CMSG_OK(msg, cmsg))
 			return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_IPV6)
 		if (allow_ipv6 &&
 		    cmsg->cmsg_level == SOL_IPV6 &&
@@ -223,6 +235,9 @@ int ip_cmsg_send(struct net *net, struct msghdr *msg, struct ipcm_cookie *ipc,
 			continue;
 		}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (cmsg->cmsg_level != SOL_IP)
 			continue;
@@ -245,7 +260,10 @@ int ip_cmsg_send(struct net *net, struct msghdr *msg, struct ipcm_cookie *ipc,
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case IP_TTL:
 			if (cmsg->cmsg_len != CMSG_LEN(sizeof(int)))
 				return -EINVAL;
@@ -264,6 +282,9 @@ int ip_cmsg_send(struct net *net, struct msghdr *msg, struct ipcm_cookie *ipc,
 			ipc->priority = rt_tos2priority(ipc->tos);
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			return -EINVAL;
@@ -320,7 +341,11 @@ int ip_ra_control(struct sock *sk, unsigned char on,
 			/* dont let ip_call_ra_chain() use sk again */
 			ra->sk = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rcu_assign_pointer(*rap, ra->next);
+=======
+			RCU_INIT_POINTER(*rap, ra->next);
+>>>>>>> v3.18
 =======
 			RCU_INIT_POINTER(*rap, ra->next);
 >>>>>>> v3.18
@@ -346,7 +371,11 @@ int ip_ra_control(struct sock *sk, unsigned char on,
 	new_ra->destructor = destructor;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new_ra->next = ra;
+=======
+	RCU_INIT_POINTER(new_ra->next, ra);
+>>>>>>> v3.18
 =======
 	RCU_INIT_POINTER(new_ra->next, ra);
 >>>>>>> v3.18
@@ -430,8 +459,13 @@ int ip_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 {
 	struct sock_exterr_skb *serr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sk_buff *skb, *skb2;
 	struct sockaddr_in *sin;
+=======
+	struct sk_buff *skb;
+	DECLARE_SOCKADDR(struct sockaddr_in *, sin, msg->msg_name);
+>>>>>>> v3.18
 =======
 	struct sk_buff *skb;
 	DECLARE_SOCKADDR(struct sockaddr_in *, sin, msg->msg_name);
@@ -445,7 +479,11 @@ int ip_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 
 	err = -EAGAIN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb = skb_dequeue(&sk->sk_error_queue);
+=======
+	skb = sock_dequeue_err_skb(sk);
+>>>>>>> v3.18
 =======
 	skb = sock_dequeue_err_skb(sk);
 >>>>>>> v3.18
@@ -466,7 +504,10 @@ int ip_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 	serr = SKB_EXT_ERR(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sin = (struct sockaddr_in *)msg->msg_name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sin) {
@@ -481,12 +522,15 @@ int ip_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 	memcpy(&errhdr.ee, &serr->ee, sizeof(struct sock_extended_err));
 	sin = &errhdr.offender;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(sin, 0, sizeof(*sin));
 	if (serr->ee.ee_origin == SO_EE_ORIGIN_ICMP) {
 		sin->sin_family = AF_INET;
 		sin->sin_addr.s_addr = ip_hdr(skb)->saddr;
 		if (inet_sk(sk)->cmsg_flags)
 =======
+=======
+>>>>>>> v3.18
 	sin->sin_family = AF_UNSPEC;
 	if (serr->ee.ee_origin == SO_EE_ORIGIN_ICMP) {
 		struct inet_sock *inet = inet_sk(sk);
@@ -496,6 +540,9 @@ int ip_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 		sin->sin_port = 0;
 		memset(&sin->sin_zero, 0, sizeof(sin->sin_zero));
 		if (inet->cmsg_flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ip_cmsg_recv(msg, skb);
 	}
@@ -508,6 +555,7 @@ int ip_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 	err = copied;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Reset and regenerate socket error */
 	spin_lock_bh(&sk->sk_error_queue.lock);
 	sk->sk_err = 0;
@@ -519,6 +567,8 @@ int ip_recv_error(struct sock *sk, struct msghdr *msg, int len, int *addr_len)
 	} else
 		spin_unlock_bh(&sk->sk_error_queue.lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out_free_skb:
@@ -692,7 +742,11 @@ static int do_ip_setsockopt(struct sock *sk, int level,
 		break;
 	case IP_MTU_DISCOVER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (val < IP_PMTUDISC_DONT || val > IP_PMTUDISC_PROBE)
+=======
+		if (val < IP_PMTUDISC_DONT || val > IP_PMTUDISC_OMIT)
+>>>>>>> v3.18
 =======
 		if (val < IP_PMTUDISC_DONT || val > IP_PMTUDISC_OMIT)
 >>>>>>> v3.18
@@ -1119,6 +1173,7 @@ e_inval:
  * To support IP_CMSG_PKTINFO option, we store rt_iif and specific
  * destination in skb->cb[] before dst drop.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This way, receiver doesnt make cache line misses to read rtable.
  */
 void ipv4_pktinfo_prepare(struct sk_buff *skb)
@@ -1127,6 +1182,8 @@ void ipv4_pktinfo_prepare(struct sk_buff *skb)
 
 	if (skb_rtable(skb)) {
 =======
+=======
+>>>>>>> v3.18
  * This way, receiver doesn't make cache line misses to read rtable.
  */
 void ipv4_pktinfo_prepare(const struct sock *sk, struct sk_buff *skb)
@@ -1136,6 +1193,9 @@ void ipv4_pktinfo_prepare(const struct sock *sk, struct sk_buff *skb)
 		       ipv6_sk_rxinfo(sk);
 
 	if (prepare && skb_rtable(skb)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pktinfo->ipi_ifindex = inet_iif(skb);
 		pktinfo->ipi_spec_dst.s_addr = fib_compute_spec_dst(skb);
@@ -1143,6 +1203,7 @@ void ipv4_pktinfo_prepare(const struct sock *sk, struct sk_buff *skb)
 		pktinfo->ipi_ifindex = 0;
 		pktinfo->ipi_spec_dst.s_addr = 0;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* We need to keep the dst for __ip_options_echo()
 	 * We could restrict the test to opt.ts_needtime || opt.srr,
@@ -1152,6 +1213,9 @@ void ipv4_pktinfo_prepare(const struct sock *sk, struct sk_buff *skb)
 		skb_dst_force(skb);
 	else
 		skb_dst_drop(skb);
+=======
+	skb_dst_drop(skb);
+>>>>>>> v3.18
 =======
 	skb_dst_drop(skb);
 >>>>>>> v3.18
@@ -1393,7 +1457,11 @@ static int do_ip_getsockopt(struct sock *sk, int level, int optname,
 			return -ENOPROTOOPT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		msg.msg_control = optval;
+=======
+		msg.msg_control = (__force void *) optval;
+>>>>>>> v3.18
 =======
 		msg.msg_control = (__force void *) optval;
 >>>>>>> v3.18

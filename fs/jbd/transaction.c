@@ -27,7 +27,10 @@
 #include <linux/highmem.h>
 #include <linux/hrtimer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/backing-dev.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -104,16 +107,22 @@ static int start_this_handle(journal_t *journal, handle_t *handle)
 alloc_transaction:
 	if (!journal->j_running_transaction) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		new_transaction = kzalloc(sizeof(*new_transaction), GFP_NOFS);
 		if (!new_transaction) {
 			congestion_wait(BLK_RW_ASYNC, HZ/50);
 			goto alloc_transaction;
 =======
+=======
+>>>>>>> v3.18
 		new_transaction = kzalloc(sizeof(*new_transaction),
 						GFP_NOFS|__GFP_NOFAIL);
 		if (!new_transaction) {
 			ret = -ENOMEM;
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -687,7 +696,11 @@ repeat:
 							 GFP_NOFS);
 				if (!frozen_buffer) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					printk(KERN_EMERG
+=======
+					printk(KERN_ERR
+>>>>>>> v3.18
 =======
 					printk(KERN_ERR
 >>>>>>> v3.18
@@ -914,7 +927,11 @@ repeat:
 		committed_data = jbd_alloc(jh2bh(jh)->b_size, GFP_NOFS);
 		if (!committed_data) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_EMERG "%s: No memory for committed data\n",
+=======
+			printk(KERN_ERR "%s: No memory for committed data\n",
+>>>>>>> v3.18
 =======
 			printk(KERN_ERR "%s: No memory for committed data\n",
 >>>>>>> v3.18
@@ -2039,6 +2056,7 @@ zap_buffer_unlocked:
  * @journal: journal to use for flush
  * @page:    page to flush
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @offset:  length of page to invalidate.
  *
  * Reap page buffers containing data after offset in page.
@@ -2050,6 +2068,8 @@ void journal_invalidatepage(journal_t *journal,
 	struct buffer_head *head, *bh, *next;
 	unsigned int curr_off = 0;
 =======
+=======
+>>>>>>> v3.18
  * @offset:  offset of the range to invalidate
  * @length:  length of the range to invalidate
  *
@@ -2064,6 +2084,9 @@ void journal_invalidatepage(journal_t *journal,
 	unsigned int stop = offset + length;
 	unsigned int curr_off = 0;
 	int partial_page = (offset || length < PAGE_CACHE_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int may_free = 1;
 
@@ -2073,6 +2096,11 @@ void journal_invalidatepage(journal_t *journal,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BUG_ON(stop > PAGE_CACHE_SIZE || stop < length);
+
+>>>>>>> v3.18
 =======
 	BUG_ON(stop > PAGE_CACHE_SIZE || stop < length);
 
@@ -2087,6 +2115,12 @@ void journal_invalidatepage(journal_t *journal,
 		next = bh->b_this_page;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (next_off > stop)
+			return;
+
+>>>>>>> v3.18
 =======
 		if (next_off > stop)
 			return;
@@ -2097,7 +2131,11 @@ void journal_invalidatepage(journal_t *journal,
 			lock_buffer(bh);
 			may_free &= journal_unmap_buffer(journal, bh,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							 offset > 0);
+=======
+							 partial_page);
+>>>>>>> v3.18
 =======
 							 partial_page);
 >>>>>>> v3.18
@@ -2109,7 +2147,11 @@ void journal_invalidatepage(journal_t *journal,
 	} while (bh != head);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!offset) {
+=======
+	if (!partial_page) {
+>>>>>>> v3.18
 =======
 	if (!partial_page) {
 >>>>>>> v3.18

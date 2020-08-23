@@ -17,6 +17,7 @@
 #define _PAGE_BIT_PAT		7	/* on 4KB pages */
 #define _PAGE_BIT_GLOBAL	8	/* Global TLB entry PPro+ */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PAGE_BIT_UNUSED1	9	/* available for programmer */
 #define _PAGE_BIT_IOMAP		10	/* flag used to indicate IO mapping */
 #define _PAGE_BIT_HIDDEN	11	/* hidden by kmemcheck */
@@ -27,6 +28,8 @@
 #define _PAGE_BIT_NX           63       /* No execute: only valid after cpuid check */
 
 =======
+=======
+>>>>>>> v3.18
 #define _PAGE_BIT_SOFTW1	9	/* available for programmer */
 #define _PAGE_BIT_SOFTW2	10	/* " */
 #define _PAGE_BIT_SOFTW3	11	/* " */
@@ -46,6 +49,9 @@
  */
 #define _PAGE_BIT_NUMA		(_PAGE_BIT_GLOBAL+1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* If _PAGE_BIT_PRESENT is clear, we use these: */
 /* - if the user mapped it with PROT_NONE; pte_present gives true */
@@ -63,8 +69,13 @@
 #define _PAGE_PSE	(_AT(pteval_t, 1) << _PAGE_BIT_PSE)
 #define _PAGE_GLOBAL	(_AT(pteval_t, 1) << _PAGE_BIT_GLOBAL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define _PAGE_UNUSED1	(_AT(pteval_t, 1) << _PAGE_BIT_UNUSED1)
 #define _PAGE_IOMAP	(_AT(pteval_t, 1) << _PAGE_BIT_IOMAP)
+=======
+#define _PAGE_SOFTW1	(_AT(pteval_t, 1) << _PAGE_BIT_SOFTW1)
+#define _PAGE_SOFTW2	(_AT(pteval_t, 1) << _PAGE_BIT_SOFTW2)
+>>>>>>> v3.18
 =======
 #define _PAGE_SOFTW1	(_AT(pteval_t, 1) << _PAGE_BIT_SOFTW1)
 #define _PAGE_SOFTW2	(_AT(pteval_t, 1) << _PAGE_BIT_SOFTW2)
@@ -83,6 +94,7 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_X86_64) || defined(CONFIG_X86_PAE)
 #define _PAGE_NX	(_AT(pteval_t, 1) << _PAGE_BIT_NX)
 #else
@@ -100,6 +112,8 @@
  * require changes to the swp entry format because that bit is always
  * zero when the pte is not present.
 =======
+=======
+>>>>>>> v3.18
 /*
  * The same hidden bit is used by kmemcheck, but since kmemcheck
  * works on kernel pages while soft-dirty engine on user space,
@@ -116,11 +130,15 @@
  * _PAGE_NUMA distinguishes between a numa hinting minor fault and a page
  * that is not present. The hinting fault gathers numa placement statistics
  * (see pte_numa()). The bit is always zero when the PTE is not present.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * The bit picked must be always zero when the pmd is present and not
  * present, so that we don't lose information when we set it while
  * atomically clearing the present bit.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * Because we shared the same bit (8) with _PAGE_PROTNONE this can be
@@ -131,6 +149,8 @@
  */
 #define _PAGE_NUMA	_PAGE_PROTNONE
 =======
+=======
+>>>>>>> v3.18
  */
 #ifdef CONFIG_NUMA_BALANCING
 #define _PAGE_NUMA	(_AT(pteval_t, 1) << _PAGE_BIT_NUMA)
@@ -162,6 +182,9 @@
 
 #define _PAGE_FILE	(_AT(pteval_t, 1) << _PAGE_BIT_FILE)
 #define _PAGE_PROTNONE	(_AT(pteval_t, 1) << _PAGE_BIT_PROTNONE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define _PAGE_TABLE	(_PAGE_PRESENT | _PAGE_RW | _PAGE_USER |	\
@@ -172,8 +195,14 @@
 /* Set of bits not changed in pte_modify */
 #define _PAGE_CHG_MASK	(PTE_PFN_MASK | _PAGE_PCD | _PAGE_PWT |		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 _PAGE_SPECIAL | _PAGE_ACCESSED | _PAGE_DIRTY)
 #define _HPAGE_CHG_MASK (_PAGE_CHG_MASK | _PAGE_PSE)
+=======
+			 _PAGE_SPECIAL | _PAGE_ACCESSED | _PAGE_DIRTY |	\
+			 _PAGE_SOFT_DIRTY | _PAGE_NUMA)
+#define _HPAGE_CHG_MASK (_PAGE_CHG_MASK | _PAGE_PSE | _PAGE_NUMA)
+>>>>>>> v3.18
 =======
 			 _PAGE_SPECIAL | _PAGE_ACCESSED | _PAGE_DIRTY |	\
 			 _PAGE_SOFT_DIRTY | _PAGE_NUMA)
@@ -220,15 +249,21 @@
 #define __PAGE_KERNEL_LARGE_EXEC	(__PAGE_KERNEL_EXEC | _PAGE_PSE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __PAGE_KERNEL_IO		(__PAGE_KERNEL | _PAGE_IOMAP)
 #define __PAGE_KERNEL_IO_NOCACHE	(__PAGE_KERNEL_NOCACHE | _PAGE_IOMAP)
 #define __PAGE_KERNEL_IO_UC_MINUS	(__PAGE_KERNEL_UC_MINUS | _PAGE_IOMAP)
 #define __PAGE_KERNEL_IO_WC		(__PAGE_KERNEL_WC | _PAGE_IOMAP)
 =======
+=======
+>>>>>>> v3.18
 #define __PAGE_KERNEL_IO		(__PAGE_KERNEL)
 #define __PAGE_KERNEL_IO_NOCACHE	(__PAGE_KERNEL_NOCACHE)
 #define __PAGE_KERNEL_IO_UC_MINUS	(__PAGE_KERNEL_UC_MINUS)
 #define __PAGE_KERNEL_IO_WC		(__PAGE_KERNEL_WC)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PAGE_KERNEL			__pgprot(__PAGE_KERNEL)
@@ -277,6 +312,7 @@
 #define __PAGE_KERNEL_IDENT_LARGE_EXEC	__PAGE_KERNEL_LARGE_EXEC
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * For PDE_IDENT_ATTR include USER bit. As the PDE and PTE protection
  * bits are combined, this will alow user to access the high address mapped
@@ -284,6 +320,10 @@
  */
 #define PTE_IDENT_ATTR	 0x003		/* PRESENT+RW */
 #define PDE_IDENT_ATTR	 0x067		/* PRESENT+RW+USER+DIRTY+ACCESSED */
+=======
+#define PTE_IDENT_ATTR	 0x003		/* PRESENT+RW */
+#define PDE_IDENT_ATTR	 0x063		/* PRESENT+RW+DIRTY+ACCESSED */
+>>>>>>> v3.18
 =======
 #define PTE_IDENT_ATTR	 0x003		/* PRESENT+RW */
 #define PDE_IDENT_ATTR	 0x063		/* PRESENT+RW+DIRTY+ACCESSED */
@@ -394,7 +434,10 @@ static inline pteval_t pte_flags(pte_t pte)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NUMA_BALANCING
 /* Set of bits that distinguishes present, prot_none and numa ptes */
 #define _PAGE_NUMA_MASK (_PAGE_NUMA|_PAGE_PROTNONE|_PAGE_PRESENT)
@@ -409,6 +452,9 @@ static inline pmdval_t pmdnuma_flags(pmd_t pmd)
 }
 #endif /* CONFIG_NUMA_BALANCING */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define pgprot_val(x)	((x).pgprot)
 #define __pgprot(x)	((pgprot_t) { (x) } )
@@ -467,9 +513,12 @@ static inline void update_page_count(int level, unsigned long pages) { }
  */
 extern pte_t *lookup_address(unsigned long address, unsigned int *level);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern phys_addr_t slow_virt_to_phys(void *__address);
 
 =======
+=======
+>>>>>>> v3.18
 extern pte_t *lookup_address_in_pgd(pgd_t *pgd, unsigned long address,
 				    unsigned int *level);
 extern phys_addr_t slow_virt_to_phys(void *__address);
@@ -477,6 +526,9 @@ extern int kernel_map_pages_in_pgd(pgd_t *pgd, u64 pfn, unsigned long address,
 				   unsigned numpages, unsigned long page_flags);
 void kernel_unmap_pages_in_pgd(pgd_t *root, unsigned long address,
 			       unsigned numpages);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* !__ASSEMBLY__ */
 

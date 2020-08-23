@@ -92,6 +92,7 @@ extern struct ia64_tr_entry *ia64_idtrs[NR_CPUS];
 #define RR_TO_RID(val) 	((val >> 8) & 0xffffff)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Flush the TLB for address range START to END and, if not in fast mode, release the
  * freed pages that where gathered up to this point.
@@ -104,6 +105,11 @@ ia64_tlb_flush_mmu (struct mmu_gather *tlb, unsigned long start, unsigned long e
 
 	if (!tlb->need_flush)
 		return;
+=======
+static inline void
+ia64_tlb_flush_mmu_tlbonly(struct mmu_gather *tlb, unsigned long start, unsigned long end)
+{
+>>>>>>> v3.18
 =======
 static inline void
 ia64_tlb_flush_mmu_tlbonly(struct mmu_gather *tlb, unsigned long start, unsigned long end)
@@ -142,7 +148,10 @@ ia64_tlb_flush_mmu_tlbonly(struct mmu_gather *tlb, unsigned long start, unsigned
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }
 
 static inline void
@@ -151,6 +160,9 @@ ia64_tlb_flush_mmu_free(struct mmu_gather *tlb)
 	unsigned long i;
 	unsigned int nr;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* lastly, release the freed pages */
 	nr = tlb->nr;
@@ -162,7 +174,10 @@ ia64_tlb_flush_mmu_free(struct mmu_gather *tlb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Flush the TLB for address range START to END and, if not in fast mode, release the
  * freed pages that where gathered up to this point.
@@ -176,6 +191,9 @@ ia64_tlb_flush_mmu (struct mmu_gather *tlb, unsigned long start, unsigned long e
 	ia64_tlb_flush_mmu_free(tlb);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void __tlb_alloc_page(struct mmu_gather *tlb)
 {
@@ -240,7 +258,10 @@ static inline int __tlb_remove_page(struct mmu_gather *tlb, struct page *page)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void tlb_flush_mmu_tlbonly(struct mmu_gather *tlb)
 {
 	ia64_tlb_flush_mmu_tlbonly(tlb, tlb->start_addr, tlb->end_addr);
@@ -251,6 +272,9 @@ static inline void tlb_flush_mmu_free(struct mmu_gather *tlb)
 	ia64_tlb_flush_mmu_free(tlb);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void tlb_flush_mmu(struct mmu_gather *tlb)
 {

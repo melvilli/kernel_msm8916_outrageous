@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _ASM_POWERPC_RWSEM_H
 #define _ASM_POWERPC_RWSEM_H
+=======
+#ifndef _ASM_GENERIC_RWSEM_H
+#define _ASM_GENERIC_RWSEM_H
+>>>>>>> v3.18
 =======
 #ifndef _ASM_GENERIC_RWSEM_H
 #define _ASM_GENERIC_RWSEM_H
@@ -14,7 +19,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * R/W semaphores for PPC using the stuff in lib/rwsem.c.
+=======
+ * R/W semaphores originally for PPC using the stuff in lib/rwsem.c.
+>>>>>>> v3.18
 =======
  * R/W semaphores originally for PPC using the stuff in lib/rwsem.c.
 >>>>>>> v3.18
@@ -26,7 +35,11 @@
  * the semaphore definition
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC64
+=======
+#ifdef CONFIG_64BIT
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_64BIT
 >>>>>>> v3.18
@@ -143,7 +156,11 @@ static inline long rwsem_atomic_update(long delta, struct rw_semaphore *sem)
 
 #endif	/* __KERNEL__ */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* _ASM_POWERPC_RWSEM_H */
+=======
+#endif	/* _ASM_GENERIC_RWSEM_H */
+>>>>>>> v3.18
 =======
 #endif	/* _ASM_GENERIC_RWSEM_H */
 >>>>>>> v3.18

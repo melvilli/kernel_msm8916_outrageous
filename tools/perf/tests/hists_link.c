@@ -9,6 +9,7 @@
 #include "thread.h"
 #include "parse-events.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct {
 	u32 pid;
@@ -149,6 +150,9 @@ out:
 =======
 #include "hists_common.h"
 >>>>>>> v3.18
+=======
+#include "hists_common.h"
+>>>>>>> v3.18
 
 struct sample {
 	u32 pid;
@@ -158,6 +162,7 @@ struct sample {
 	struct symbol *sym;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct sample fake_common_samples[] = {
 	/* perf [kernel] schedule() */
@@ -171,6 +176,8 @@ static struct sample fake_common_samples[] = {
 	/* bash [libc]   malloc() */
 	{ .pid = 300, .ip = 0x50000 + 700, },
 =======
+=======
+>>>>>>> v3.18
 /* For the numbers, see hists_common.c */
 static struct sample fake_common_samples[] = {
 	/* perf [kernel] schedule() */
@@ -183,12 +190,16 @@ static struct sample fake_common_samples[] = {
 	{ .pid = FAKE_PID_BASH,  .ip = FAKE_IP_BASH_XMALLOC, },
 	/* bash [libc]   malloc() */
 	{ .pid = FAKE_PID_BASH,  .ip = FAKE_IP_LIBC_MALLOC, },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static struct sample fake_samples[][5] = {
 	{
 		/* perf [perf]   run_command() */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		{ .pid = 100, .ip = 0x40000 + 800, },
 		/* perf [libc]   malloc() */
@@ -212,6 +223,8 @@ static struct sample fake_samples[][5] = {
 		/* bash [kernel] page_fault() */
 		{ .pid = 300, .ip = 0xf0000 + 800, },
 =======
+=======
+>>>>>>> v3.18
 		{ .pid = FAKE_PID_PERF1, .ip = FAKE_IP_PERF_RUN_COMMAND, },
 		/* perf [libc]   malloc() */
 		{ .pid = FAKE_PID_PERF1, .ip = FAKE_IP_LIBC_MALLOC, },
@@ -233,6 +246,9 @@ static struct sample fake_samples[][5] = {
 		{ .pid = FAKE_PID_BASH,  .ip = FAKE_IP_LIBC_REALLOC, },
 		/* bash [kernel] page_fault() */
 		{ .pid = FAKE_PID_BASH,  .ip = FAKE_IP_KERNEL_PAGE_FAULT, },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -243,7 +259,11 @@ static int add_hist_entries(struct perf_evlist *evlist, struct machine *machine)
 	struct addr_location al;
 	struct hist_entry *he;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct perf_sample sample = { .cpu = 0, };
+=======
+	struct perf_sample sample = { .period = 1, };
+>>>>>>> v3.18
 =======
 	struct perf_sample sample = { .period = 1, };
 >>>>>>> v3.18
@@ -254,6 +274,7 @@ static int add_hist_entries(struct perf_evlist *evlist, struct machine *machine)
 	 * However the second evsel also has a collapsed entry for
 	 * "bash [libc] malloc" so total 9 entries will be in the tree.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each_entry(evsel, &evlist->entries, node) {
 		for (k = 0; k < ARRAY_SIZE(fake_common_samples); k++) {
@@ -273,6 +294,8 @@ static int add_hist_entries(struct perf_evlist *evlist, struct machine *machine)
 
 			he = __hists__add_entry(&evsel->hists, &al, NULL, 1, 1);
 =======
+=======
+>>>>>>> v3.18
 	evlist__for_each(evlist, evsel) {
 		struct hists *hists = evsel__hists(evsel);
 
@@ -292,6 +315,9 @@ static int add_hist_entries(struct perf_evlist *evlist, struct machine *machine)
 
 			he = __hists__add_entry(hists, &al, NULL,
 						NULL, NULL, 1, 1, 0, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (he == NULL)
 				goto out;
@@ -303,6 +329,7 @@ static int add_hist_entries(struct perf_evlist *evlist, struct machine *machine)
 
 		for (k = 0; k < ARRAY_SIZE(fake_samples[i]); k++) {
 			const union perf_event event = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				.ip = {
 					.header = {
@@ -319,6 +346,8 @@ static int add_hist_entries(struct perf_evlist *evlist, struct machine *machine)
 
 			he = __hists__add_entry(&evsel->hists, &al, NULL, 1, 1);
 =======
+=======
+>>>>>>> v3.18
 				.header = {
 					.misc = PERF_RECORD_MISC_USER,
 				},
@@ -333,6 +362,9 @@ static int add_hist_entries(struct perf_evlist *evlist, struct machine *machine)
 
 			he = __hists__add_entry(hists, &al, NULL,
 						NULL, NULL, 1, 1, 0, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (he == NULL)
 				goto out;
@@ -490,6 +522,7 @@ static int validate_link(struct hists *leader, struct hists *other)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void print_hists(struct hists *hists)
 {
 	int i = 0;
@@ -521,10 +554,15 @@ int test__hists_link(void)
 {
 	int err = -1;
 =======
+=======
+>>>>>>> v3.18
 int test__hists_link(void)
 {
 	int err = -1;
 	struct hists *hists, *first_hists;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct machines machines;
 	struct machine *machine = NULL;
@@ -561,18 +599,24 @@ int test__hists_link(void)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(evsel, &evlist->entries, node) {
 		hists__collapse_resort(&evsel->hists);
 
 		if (verbose > 2)
 			print_hists(&evsel->hists);
 =======
+=======
+>>>>>>> v3.18
 	evlist__for_each(evlist, evsel) {
 		hists = evsel__hists(evsel);
 		hists__collapse_resort(hists, NULL);
 
 		if (verbose > 2)
 			print_hists_in(hists);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -580,24 +624,35 @@ int test__hists_link(void)
 	evsel = perf_evlist__last(evlist);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* match common entries */
 	hists__match(&first->hists, &evsel->hists);
 	err = validate_match(&first->hists, &evsel->hists);
 =======
+=======
+>>>>>>> v3.18
 	first_hists = evsel__hists(first);
 	hists = evsel__hists(evsel);
 
 	/* match common entries */
 	hists__match(first_hists, hists);
 	err = validate_match(first_hists, hists);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		goto out;
 
 	/* link common and/or dummy entries */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hists__link(&first->hists, &evsel->hists);
 	err = validate_link(&first->hists, &evsel->hists);
+=======
+	hists__link(first_hists, hists);
+	err = validate_link(first_hists, hists);
+>>>>>>> v3.18
 =======
 	hists__link(first_hists, hists);
 	err = validate_link(first_hists, hists);
@@ -611,6 +666,10 @@ out:
 	/* tear down everything */
 	perf_evlist__delete(evlist);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	reset_output_field();
+>>>>>>> v3.18
 =======
 	reset_output_field();
 >>>>>>> v3.18

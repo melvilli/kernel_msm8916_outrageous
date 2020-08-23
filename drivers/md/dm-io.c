@@ -21,8 +21,11 @@
 
 #define DM_IO_MAX_REGIONS	BITS_PER_LONG
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MIN_IOS		16
 #define MIN_BIOS	16
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -39,7 +42,10 @@ struct io {
 	unsigned long error_bits;
 	atomic_t count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct completion *wait;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dm_io_client *client;
@@ -58,6 +64,10 @@ struct dm_io_client *dm_io_client_create(void)
 {
 	struct dm_io_client *client;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned min_ios = dm_get_reserved_bio_based_ios();
+>>>>>>> v3.18
 =======
 	unsigned min_ios = dm_get_reserved_bio_based_ios();
 >>>>>>> v3.18
@@ -67,17 +77,23 @@ struct dm_io_client *dm_io_client_create(void)
 		return ERR_PTR(-ENOMEM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	client->pool = mempool_create_slab_pool(MIN_IOS, _dm_io_cache);
 	if (!client->pool)
 		goto bad;
 
 	client->bios = bioset_create(MIN_BIOS, 0);
 =======
+=======
+>>>>>>> v3.18
 	client->pool = mempool_create_slab_pool(min_ios, _dm_io_cache);
 	if (!client->pool)
 		goto bad;
 
 	client->bios = bioset_create(min_ios, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!client->bios)
 		goto bad;
@@ -132,6 +148,7 @@ static void retrieve_io_and_region_from_bio(struct bio *bio, struct io **io,
  * have been dispatched for a particular io.
  *---------------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dec_count(struct io *io, unsigned int region, int error)
 {
 	if (error)
@@ -155,6 +172,8 @@ static void dec_count(struct io *io, unsigned int region, int error)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 static void complete_io(struct io *io)
 {
 	unsigned long error_bits = io->error_bits;
@@ -176,6 +195,9 @@ static void dec_count(struct io *io, unsigned int region, int error)
 
 	if (atomic_dec_and_test(&io->count))
 		complete_io(io);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -246,6 +268,7 @@ static void list_dp_init(struct dpages *dp, struct page_list *pl, unsigned offse
  * Functions for getting the pages from a bvec.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bvec_get_page(struct dpages *dp,
 		  struct page **p, unsigned long *len, unsigned *offset)
 {
@@ -267,6 +290,8 @@ static void bvec_dp_init(struct dpages *dp, struct bio_vec *bvec)
 	dp->next_page = bvec_next_page;
 	dp->context_ptr = bvec;
 =======
+=======
+>>>>>>> v3.18
 static void bio_get_page(struct dpages *dp, struct page **p,
 			 unsigned long *len, unsigned *offset)
 {
@@ -289,6 +314,9 @@ static void bio_dp_init(struct dpages *dp, struct bio *bio)
 	dp->next_page = bio_next_page;
 	dp->context_ptr = __bvec_iter_bvec(bio->bi_io_vec, bio->bi_iter);
 	dp->context_u = bio->bi_iter.bi_bvec_done;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -359,12 +387,15 @@ static void do_region(int rw, unsigned region, struct dm_io_region *where,
 	sector_t num_sectors;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Reject unsupported discard requests */
 	if ((rw & REQ_DISCARD) && !blk_queue_discard(q)) {
 		dec_count(io, region, -EOPNOTSUPP);
 		return;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -383,7 +414,11 @@ static void do_region(int rw, unsigned region, struct dm_io_region *where,
 
 		bio = bio_alloc_bioset(GFP_NOIO, num_bvecs, io->client->bios);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio->bi_sector = where->sector + (where->count - remaining);
+=======
+		bio->bi_iter.bi_sector = where->sector + (where->count - remaining);
+>>>>>>> v3.18
 =======
 		bio->bi_iter.bi_sector = where->sector + (where->count - remaining);
 >>>>>>> v3.18
@@ -394,7 +429,11 @@ static void do_region(int rw, unsigned region, struct dm_io_region *where,
 		if (rw & REQ_DISCARD) {
 			num_sectors = min_t(sector_t, q->limits.max_discard_sectors, remaining);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bio->bi_size = num_sectors << SECTOR_SHIFT;
+=======
+			bio->bi_iter.bi_size = num_sectors << SECTOR_SHIFT;
+>>>>>>> v3.18
 =======
 			bio->bi_iter.bi_size = num_sectors << SECTOR_SHIFT;
 >>>>>>> v3.18
@@ -407,7 +446,11 @@ static void do_region(int rw, unsigned region, struct dm_io_region *where,
 			bio_add_page(bio, page, logical_block_size, offset);
 			num_sectors = min_t(sector_t, q->limits.max_write_same_sectors, remaining);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bio->bi_size = num_sectors << SECTOR_SHIFT;
+=======
+			bio->bi_iter.bi_size = num_sectors << SECTOR_SHIFT;
+>>>>>>> v3.18
 =======
 			bio->bi_iter.bi_size = num_sectors << SECTOR_SHIFT;
 >>>>>>> v3.18
@@ -464,7 +507,10 @@ static void dispatch_io(int rw, unsigned int num_regions,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct sync_io {
 	unsigned long error_bits;
 	struct completion wait;
@@ -478,11 +524,15 @@ static void sync_io_complete(unsigned long error, void *context)
 	complete(&sio->wait);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sync_io(struct dm_io_client *client, unsigned int num_regions,
 		   struct dm_io_region *where, int rw, struct dpages *dp,
 		   unsigned long *error_bits)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * gcc <= 4.3 can't do the alignment for stack variables, so we must
@@ -497,6 +547,10 @@ static int sync_io(struct dm_io_client *client, unsigned int num_regions,
 	struct io *io;
 	struct sync_io sio;
 >>>>>>> v3.18
+=======
+	struct io *io;
+	struct sync_io sio;
+>>>>>>> v3.18
 
 	if (num_regions > 1 && (rw & RW_MASK) != WRITE) {
 		WARN_ON(1);
@@ -504,11 +558,14 @@ static int sync_io(struct dm_io_client *client, unsigned int num_regions,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	io->error_bits = 0;
 	atomic_set(&io->count, 1); /* see dispatch_io() */
 	io->wait = &wait;
 	io->client = client;
 =======
+=======
+>>>>>>> v3.18
 	init_completion(&sio.wait);
 
 	io = mempool_alloc(client->pool, GFP_NOIO);
@@ -517,6 +574,9 @@ static int sync_io(struct dm_io_client *client, unsigned int num_regions,
 	io->client = client;
 	io->callback = sync_io_complete;
 	io->context = &sio;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	io->vma_invalidate_address = dp->vma_invalidate_address;
@@ -525,6 +585,7 @@ static int sync_io(struct dm_io_client *client, unsigned int num_regions,
 	dispatch_io(rw, num_regions, where, dp, io, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_for_completion_io(&wait);
 
 	if (error_bits)
@@ -532,12 +593,17 @@ static int sync_io(struct dm_io_client *client, unsigned int num_regions,
 
 	return io->error_bits ? -EIO : 0;
 =======
+=======
+>>>>>>> v3.18
 	wait_for_completion_io(&sio.wait);
 
 	if (error_bits)
 		*error_bits = sio.error_bits;
 
 	return sio.error_bits ? -EIO : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -557,7 +623,10 @@ static int async_io(struct dm_io_client *client, unsigned int num_regions,
 	io->error_bits = 0;
 	atomic_set(&io->count, 1); /* see dispatch_io() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	io->wait = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	io->client = client;
@@ -585,8 +654,13 @@ static int dp_init(struct dm_io_request *io_req, struct dpages *dp,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case DM_IO_BVEC:
 		bvec_dp_init(dp, io_req->mem.ptr.bvec);
+=======
+	case DM_IO_BIO:
+		bio_dp_init(dp, io_req->mem.ptr.bio);
+>>>>>>> v3.18
 =======
 	case DM_IO_BIO:
 		bio_dp_init(dp, io_req->mem.ptr.bio);
@@ -618,9 +692,15 @@ static int dp_init(struct dm_io_request *io_req, struct dpages *dp,
  *
  * If the IO is asynchronous (i.e. it has notify.fn), you must either unplug
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the queue with blk_unplug() some time later or set REQ_SYNC in
 io_req->bi_rw. If you fail to do one of these, the IO will be submitted to
  * the disk after q->unplug_delay, which defaults to 3ms in blk-settings.c.
+=======
+ * the queue with blk_unplug() some time later or set REQ_SYNC in io_req->bi_rw.
+ * If you fail to do one of these, the IO will be submitted to the disk after
+ * q->unplug_delay, which defaults to 3ms in blk-settings.c.
+>>>>>>> v3.18
 =======
  * the queue with blk_unplug() some time later or set REQ_SYNC in io_req->bi_rw.
  * If you fail to do one of these, the IO will be submitted to the disk after

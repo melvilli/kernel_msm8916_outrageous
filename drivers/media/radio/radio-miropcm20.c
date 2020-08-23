@@ -1,5 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Miro PCM20 radio driver for Linux radio support
+=======
+/*
+ * Miro PCM20 radio driver for Linux radio support
+>>>>>>> v3.18
 =======
 /*
  * Miro PCM20 radio driver for Linux radio support
@@ -11,12 +16,15 @@
  * ALSA driver.
  * Look there for further info...
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 /* What ever you think about the ACI, version 0x07 is not very well!
  * I can't get frequency, 'tuner status', 'tuner flags' or mute/mono
  * conditions...                Robert
 =======
+=======
+>>>>>>> v3.18
  *
  * From the original miro RDS sources:
  *
@@ -34,18 +42,27 @@
  * the new V4L2 RDS API by:
  *
  * Hans Verkuil <hans.verkuil@cisco.com>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
 #include <linux/module.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/videodev2.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/delay.h>
 #include <linux/videodev2.h>
 #include <linux/kthread.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <media/v4l2-device.h>
 #include <media/v4l2-ioctl.h>
@@ -55,7 +72,10 @@
 #include <sound/aci.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define RDS_DATASHIFT          2   /* Bit 2 */
 #define RDS_DATAMASK        (1 << RDS_DATASHIFT)
 #define RDS_BUSYMASK        0x10   /* Bit 4 */
@@ -72,6 +92,9 @@
 #define RDS_RESET       0x08
 #define RDS_RXVALUE     0x09
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int radio_nr = -1;
 module_param(radio_nr, int, 0);
@@ -82,7 +105,10 @@ struct pcm20 {
 	struct video_device vdev;
 	struct v4l2_ctrl_handler ctrl_handler;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_ctrl *rds_pty;
 	struct v4l2_ctrl *rds_ps_name;
 	struct v4l2_ctrl *rds_radio_test;
@@ -91,6 +117,9 @@ struct pcm20 {
 	struct v4l2_ctrl *rds_ms;
 	/* thread for periodic RDS status checking */
 	struct task_struct *kthread;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long freq;
 	u32 audmode;
@@ -104,7 +133,10 @@ static struct pcm20 pcm20_card = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int rds_waitread(struct snd_miro_aci *aci)
 {
@@ -202,6 +234,9 @@ static int rds_cmd(struct snd_miro_aci *aci, u8 cmd, u8 databuffer[], u8 datasiz
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pcm20_setfreq(struct pcm20 *dev, unsigned long freq)
 {
@@ -217,6 +252,7 @@ static int pcm20_setfreq(struct pcm20 *dev, unsigned long freq)
 	freqh = freq >> 8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snd_aci_cmd(aci, ACI_WRITE_TUNE, freql, freqh);
 }
 
@@ -229,10 +265,15 @@ static const struct v4l2_file_operations pcm20_fops = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	rds_cmd(aci, RDS_RESET, NULL, 0);
 	return snd_aci_cmd(aci, ACI_WRITE_TUNE, freql, freqh);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int vidioc_querycap(struct file *file, void *priv,
 				struct v4l2_capability *v)
@@ -243,7 +284,11 @@ static int vidioc_querycap(struct file *file, void *priv,
 	strlcpy(v->card, "Miro PCM20", sizeof(v->card));
 	snprintf(v->bus_info, sizeof(v->bus_info), "ISA:%s", dev->v4l2_dev.name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v->device_caps = V4L2_CAP_TUNER | V4L2_CAP_RADIO;
+=======
+	v->device_caps = V4L2_CAP_TUNER | V4L2_CAP_RADIO | V4L2_CAP_RDS_CAPTURE;
+>>>>>>> v3.18
 =======
 	v->device_caps = V4L2_CAP_TUNER | V4L2_CAP_RADIO | V4L2_CAP_RDS_CAPTURE;
 >>>>>>> v3.18
@@ -252,7 +297,10 @@ static int vidioc_querycap(struct file *file, void *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool sanitize(char *p, int size)
 {
 	int i;
@@ -267,6 +315,9 @@ static bool sanitize(char *p, int size)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int vidioc_g_tuner(struct file *file, void *priv,
 				struct v4l2_tuner *v)
@@ -274,6 +325,10 @@ static int vidioc_g_tuner(struct file *file, void *priv,
 	struct pcm20 *dev = video_drvdata(file);
 	int res;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 buf;
+>>>>>>> v3.18
 =======
 	u8 buf;
 >>>>>>> v3.18
@@ -292,15 +347,21 @@ static int vidioc_g_tuner(struct file *file, void *priv,
 	v->rxsubchans = (res & 0x40) ? V4L2_TUNER_SUB_MONO :
 					V4L2_TUNER_SUB_STEREO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v->capability = V4L2_TUNER_CAP_LOW | V4L2_TUNER_CAP_STEREO;
 	v->audmode = dev->audmode;
 =======
+=======
+>>>>>>> v3.18
 	v->capability = V4L2_TUNER_CAP_LOW | V4L2_TUNER_CAP_STEREO |
 			V4L2_TUNER_CAP_RDS | V4L2_TUNER_CAP_RDS_CONTROLS;
 	v->audmode = dev->audmode;
 	res = rds_cmd(dev->aci, RDS_RXVALUE, &buf, 1);
 	if (res >= 0 && buf)
 		v->rxsubchans |= V4L2_TUNER_SUB_RDS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -361,7 +422,10 @@ static int pcm20_s_ctrl(struct v4l2_ctrl *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int pcm20_thread(void *data)
 {
 	struct pcm20 *dev = data;
@@ -471,6 +535,9 @@ static const struct v4l2_file_operations pcm20_fops = {
 	.unlocked_ioctl	= video_ioctl2,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct v4l2_ioctl_ops pcm20_ioctl_ops = {
 	.vidioc_querycap    = vidioc_querycap,
@@ -511,10 +578,13 @@ static int __init pcm20_init(void)
 
 	hdl = &dev->ctrl_handler;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_ctrl_handler_init(hdl, 1);
 	v4l2_ctrl_new_std(hdl, &pcm20_ctrl_ops,
 			V4L2_CID_AUDIO_MUTE, 0, 1, 1, 1);
 =======
+=======
+>>>>>>> v3.18
 	v4l2_ctrl_handler_init(hdl, 7);
 	v4l2_ctrl_new_std(hdl, &pcm20_ctrl_ops,
 			V4L2_CID_AUDIO_MUTE, 0, 1, 1, 1);
@@ -530,6 +600,9 @@ static int __init pcm20_init(void)
 			V4L2_CID_RDS_RX_TRAFFIC_PROGRAM, 0, 1, 1, 0);
 	dev->rds_ms = v4l2_ctrl_new_std(hdl, NULL,
 			V4L2_CID_RDS_RX_MUSIC_SPEECH, 0, 1, 1, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	v4l2_dev->ctrl_handler = hdl;
 	if (hdl->error) {
@@ -544,7 +617,10 @@ static int __init pcm20_init(void)
 	dev->vdev.release = video_device_release_empty;
 	dev->vdev.lock = &dev->lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &dev->vdev.flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	video_set_drvdata(&dev->vdev, dev);

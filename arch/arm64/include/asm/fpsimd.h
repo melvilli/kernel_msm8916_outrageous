@@ -38,6 +38,11 @@ struct fpsimd_state {
 		};
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* the id of the last cpu to have restored this state */
+	unsigned int cpu;
+>>>>>>> v3.18
 =======
 	/* the id of the last cpu to have restored this state */
 	unsigned int cpu;
@@ -76,14 +81,20 @@ extern void fpsimd_flush_thread(void);
 
 extern void fpsimd_preserve_current_state(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void fpsimd_update_current_state(struct fpsimd_state *state);
 
 =======
+=======
+>>>>>>> v3.18
 extern void fpsimd_restore_current_state(void);
 extern void fpsimd_update_current_state(struct fpsimd_state *state);
 
 extern void fpsimd_flush_task_state(struct task_struct *target);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void fpsimd_save_partial_state(struct fpsimd_partial_state *state,
 				      u32 num_regs);

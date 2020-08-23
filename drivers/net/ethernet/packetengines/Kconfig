@@ -22,7 +22,10 @@ config HAMACHI
 	tristate "Packet Engines Hamachi GNIC-II support"
 	depends on PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII

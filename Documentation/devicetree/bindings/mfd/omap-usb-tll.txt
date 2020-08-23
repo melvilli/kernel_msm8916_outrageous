@@ -8,7 +8,10 @@ Required properties:
 - ti,hwmod : must contain "usb_tll_hs"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Optional properties:
 
 - clocks: a list of phandles and clock-specifier pairs, one for each entry in
@@ -19,6 +22,9 @@ Optional properties:
   * "usb_tll_hs_usb_ch1_clk" - USB TLL channel 1 clock
   * "usb_tll_hs_usb_ch2_clk" - USB TLL channel 2 clock
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 

@@ -30,6 +30,10 @@
 #include <asm/prom.h>
 #include <asm/ppc-pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "pseries.h"
+>>>>>>> v3.18
 =======
 #include "pseries.h"
 >>>>>>> v3.18
@@ -118,7 +122,12 @@ int pseries_root_bridge_prepare(struct pci_host_bridge *bridge)
 	struct device_node *dn, *pdn;
 	struct pci_bus *bus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const uint32_t *pcie_link_speed_stats;
+=======
+	u32 pcie_link_speed_stats[2];
+	int rc;
+>>>>>>> v3.18
 =======
 	u32 pcie_link_speed_stats[2];
 	int rc;
@@ -132,14 +141,20 @@ int pseries_root_bridge_prepare(struct pci_host_bridge *bridge)
 
 	for (pdn = dn; pdn != NULL; pdn = of_get_next_parent(pdn)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pcie_link_speed_stats = (const uint32_t *) of_get_property(pdn,
 			"ibm,pcie-link-speed-stats", NULL);
 		if (pcie_link_speed_stats)
 =======
+=======
+>>>>>>> v3.18
 		rc = of_property_read_u32_array(pdn,
 				"ibm,pcie-link-speed-stats",
 				&pcie_link_speed_stats[0], 2);
 		if (!rc)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 	}
@@ -147,7 +162,11 @@ int pseries_root_bridge_prepare(struct pci_host_bridge *bridge)
 	of_node_put(pdn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pcie_link_speed_stats) {
+=======
+	if (rc) {
+>>>>>>> v3.18
 =======
 	if (rc) {
 >>>>>>> v3.18
@@ -163,6 +182,12 @@ int pseries_root_bridge_prepare(struct pci_host_bridge *bridge)
 		bus->max_bus_speed = PCIE_SPEED_5_0GT;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case 0x04:
+		bus->max_bus_speed = PCIE_SPEED_8_0GT;
+		break;
+>>>>>>> v3.18
 =======
 	case 0x04:
 		bus->max_bus_speed = PCIE_SPEED_8_0GT;
@@ -181,6 +206,12 @@ int pseries_root_bridge_prepare(struct pci_host_bridge *bridge)
 		bus->cur_bus_speed = PCIE_SPEED_5_0GT;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case 0x04:
+		bus->cur_bus_speed = PCIE_SPEED_8_0GT;
+		break;
+>>>>>>> v3.18
 =======
 	case 0x04:
 		bus->cur_bus_speed = PCIE_SPEED_8_0GT;

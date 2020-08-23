@@ -2,7 +2,11 @@
  * This file is part of the Chelsio T4 Ethernet driver for Linux.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2009-2010 Chelsio Communications, Inc. All rights reserved.
+=======
+ * Copyright (c) 2009-2014 Chelsio Communications, Inc. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2009-2014 Chelsio Communications, Inc. All rights reserved.
 >>>>>>> v3.18
@@ -51,15 +55,21 @@ enum fw_retval {
 	FW_EBUSY		= 16,	/* resource busy */
 	FW_EEXIST		= 17,	/* file exists */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	FW_EINVAL		= 22,	/* invalid argument */
 	FW_ENOSPC		= 28,	/* no space left on device */
 	FW_ENOSYS		= 38,	/* functionality not implemented */
 =======
+=======
+>>>>>>> v3.18
 	FW_ENODEV		= 19,	/* no such device */
 	FW_EINVAL		= 22,	/* invalid argument */
 	FW_ENOSPC		= 28,	/* no space left on device */
 	FW_ENOSYS		= 38,	/* functionality not implemented */
 	FW_ENODATA		= 61,	/* no data available */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	FW_EPROTO		= 71,	/* protocol error */
 	FW_EADDRINUSE		= 98,	/* address already in use */
@@ -629,6 +639,10 @@ enum fw_cmd_opcodes {
 	FW_RSS_GLB_CONFIG_CMD          = 0x22,
 	FW_RSS_VI_CONFIG_CMD           = 0x23,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FW_CLIP_CMD                    = 0x28,
+>>>>>>> v3.18
 =======
 	FW_CLIP_CMD                    = 0x28,
 >>>>>>> v3.18
@@ -948,6 +962,12 @@ enum fw_params_param_dev {
 	FW_PARAMS_PARAM_DEV_TPREV = 0x0C,
 	FW_PARAMS_PARAM_DEV_CF = 0x0D,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FW_PARAMS_PARAM_DEV_MAXORDIRD_QP = 0x13, /* max supported QP IRD/ORD */
+	FW_PARAMS_PARAM_DEV_MAXIRD_ADAPTER = 0x14, /* max supported adap IRD */
+	FW_PARAMS_PARAM_DEV_ULPTX_MEMWRITE_DSGL = 0x17,
+>>>>>>> v3.18
 =======
 	FW_PARAMS_PARAM_DEV_MAXORDIRD_QP = 0x13, /* max supported QP IRD/ORD */
 	FW_PARAMS_PARAM_DEV_MAXIRD_ADAPTER = 0x14, /* max supported adap IRD */
@@ -1010,6 +1030,10 @@ enum fw_params_param_dmaq {
 	FW_PARAMS_PARAM_DMAQ_EQ_CMPLIQID_CTRL = 0x11,
 	FW_PARAMS_PARAM_DMAQ_EQ_SCHEDCLASS_ETH = 0x12,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FW_PARAMS_PARAM_DMAQ_EQ_DCBPRIO_ETH = 0x13,
+>>>>>>> v3.18
 =======
 	FW_PARAMS_PARAM_DMAQ_EQ_DCBPRIO_ETH = 0x13,
 >>>>>>> v3.18
@@ -1247,6 +1271,10 @@ struct fw_eq_eth_cmd {
 #define FW_EQ_ETH_CMD_EQSIZE(x) ((x) << 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FW_EQ_ETH_CMD_AUTOEQUEQE (1U << 30)
+>>>>>>> v3.18
 =======
 #define FW_EQ_ETH_CMD_AUTOEQUEQE (1U << 30)
 >>>>>>> v3.18
@@ -1451,6 +1479,10 @@ struct fw_vi_enable_cmd {
 #define FW_VI_ENABLE_CMD_IEN(x) ((x) << 31)
 #define FW_VI_ENABLE_CMD_EEN(x) ((x) << 30)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FW_VI_ENABLE_CMD_DCB_INFO(x) ((x) << 28)
+>>>>>>> v3.18
 =======
 #define FW_VI_ENABLE_CMD_DCB_INFO(x) ((x) << 28)
 >>>>>>> v3.18
@@ -1627,6 +1659,12 @@ enum fw_port_action {
 	FW_PORT_ACTION_L2_PPP_CFG	= 0x0004,
 	FW_PORT_ACTION_L2_DCB_CFG	= 0x0005,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FW_PORT_ACTION_DCB_READ_TRANS	= 0x0006,
+	FW_PORT_ACTION_DCB_READ_RECV	= 0x0007,
+	FW_PORT_ACTION_DCB_READ_DET	= 0x0008,
+>>>>>>> v3.18
 =======
 	FW_PORT_ACTION_DCB_READ_TRANS	= 0x0006,
 	FW_PORT_ACTION_DCB_READ_RECV	= 0x0007,
@@ -1659,7 +1697,10 @@ enum fw_port_l2cfg_ctlbf {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum fw_port_dcb_versions {
 	FW_PORT_DCB_VER_UNKNOWN,
 	FW_PORT_DCB_VER_CEE1D0,
@@ -1668,6 +1709,9 @@ enum fw_port_dcb_versions {
 	FW_PORT_DCB_VER_AUTO = 7
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum fw_port_dcb_cfg {
 	FW_PORT_DCB_CFG_PG	= 0x01,
@@ -1687,7 +1731,10 @@ enum fw_port_dcb_type {
 	FW_PORT_DCB_TYPE_PFC		= 0x03,
 	FW_PORT_DCB_TYPE_APP_ID		= 0x04,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	FW_PORT_DCB_TYPE_CONTROL	= 0x05,
 };
 
@@ -1696,6 +1743,9 @@ enum fw_port_dcb_feature_state {
 	FW_PORT_DCB_FEATURE_STATE_SUCCESS = 0x1,
 	FW_PORT_DCB_FEATURE_STATE_ERROR	= 0x2,
 	FW_PORT_DCB_FEATURE_STATE_TIMEOUT = 0x3,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1709,15 +1759,21 @@ struct fw_port_cmd {
 		} l1cfg;
 		struct fw_port_l2cfg {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__be16 ctlbf_to_ivlan0;
 			__be16 ivlantype;
 			__be32 txipg_pkd;
 =======
+=======
+>>>>>>> v3.18
 			__u8   ctlbf;
 			__u8   ovlan3_to_ivlan0;
 			__be16 ivlantype;
 			__be16 txipg_force_pinfo;
 			__be16 mtu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			__be16 ovlan0mask;
 			__be16 ovlan0type;
@@ -1734,6 +1790,7 @@ struct fw_port_cmd {
 			__be16 acap;
 			__be16 mtu;
 			__u8   cbllen;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			__u8   r9;
 			__be32 r10;
@@ -1754,6 +1811,8 @@ struct fw_port_cmd {
 			__be32 numTCs_oui;
 			u8 pgpc[8];
 =======
+=======
+>>>>>>> v3.18
 			__u8   auxlinfo;
 			__u8   dcbxdis_pkd;
 			__u8   r8_lo[3];
@@ -1809,6 +1868,9 @@ struct fw_port_cmd {
 				__be32 r11;
 				__be64 r12;
 			} control;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} dcb;
 	} u;
@@ -1847,12 +1909,18 @@ struct fw_port_cmd {
 #define FW_PORT_CMD_MODTYPE_GET(x) (((x) >> 0) & FW_PORT_CMD_MODTYPE_MASK)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define FW_PORT_CMD_DCBXDIS (1U << 7)
 #define FW_PORT_CMD_APPLY (1U <<  7)
 #define FW_PORT_CMD_ALL_SYNCD (1U << 7)
 #define FW_PORT_CMD_DCB_VERSION_GET(x) (((x) >> 8) & 0xf)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FW_PORT_CMD_PPPEN(x) ((x) << 31)
 #define FW_PORT_CMD_TPSRC(x) ((x) << 28)
@@ -1878,6 +1946,12 @@ enum fw_port_type {
 	FW_PORT_TYPE_BP_AP,
 	FW_PORT_TYPE_BP4_AP,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	FW_PORT_TYPE_QSFP_10G,
+	FW_PORT_TYPE_QSFP,
+	FW_PORT_TYPE_BP40_BA,
+>>>>>>> v3.18
 =======
 	FW_PORT_TYPE_QSFP_10G,
 	FW_PORT_TYPE_QSFP,
@@ -2205,7 +2279,10 @@ struct fw_rss_vi_config_cmd {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct fw_clip_cmd {
 	__be32 op_to_write;
 	__be32 alloc_to_len16;
@@ -2228,6 +2305,9 @@ struct fw_clip_cmd {
 	(((x) >> S_FW_CLIP_CMD_FREE) & M_FW_CLIP_CMD_FREE)
 #define F_FW_CLIP_CMD_FREE      V_FW_CLIP_CMD_FREE(1U)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum fw_error_type {
 	FW_ERROR_TYPE_EXCEPTION		= 0x0,
@@ -2299,11 +2379,14 @@ struct fw_debug_cmd {
 #define FW_PCIE_FW_MASTER_GET(x) (((x) >> FW_PCIE_FW_MASTER_SHIFT) & \
 				 FW_PCIE_FW_MASTER_MASK)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct fw_hdr {
 	u8 ver;
 	u8 reserved1;
 =======
+=======
+>>>>>>> v3.18
 #define FW_PCIE_FW_EVAL_MASK   0x7
 #define FW_PCIE_FW_EVAL_SHIFT  24
 #define FW_PCIE_FW_EVAL_GET(x) (((x) >> FW_PCIE_FW_EVAL_SHIFT) & \
@@ -2312,6 +2395,9 @@ struct fw_hdr {
 struct fw_hdr {
 	u8 ver;
 	u8 chip;			/* terminator chip type */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__be16	len512;			/* bin length in units of 512-bytes */
 	__be32	fw_ver;			/* firmware version */
@@ -2332,12 +2418,18 @@ struct fw_hdr {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum fw_hdr_chip {
 	FW_HDR_CHIP_T4,
 	FW_HDR_CHIP_T5
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FW_HDR_FW_VER_MAJOR_GET(x) (((x) >> 24) & 0xff)
 #define FW_HDR_FW_VER_MINOR_GET(x) (((x) >> 16) & 0xff)

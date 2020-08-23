@@ -12,7 +12,10 @@
 #include <linux/module.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>
@@ -32,7 +35,10 @@
 
 struct octeon_spi {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_master *my_master;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u64 register_base;
@@ -41,6 +47,7 @@ struct octeon_spi {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct octeon_spi_setup {
 	u32 max_speed_hz;
 	u8 chip_select;
@@ -48,6 +55,8 @@ struct octeon_spi_setup {
 	u8 bits_per_word;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void octeon_spi_wait_ready(struct octeon_spi *p)
@@ -68,6 +77,10 @@ static int octeon_spi_do_transfer(struct octeon_spi *p,
 				  bool last_xfer)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct spi_device *spi = msg->spi;
+>>>>>>> v3.18
 =======
 	struct spi_device *spi = msg->spi;
 >>>>>>> v3.18
@@ -78,7 +91,10 @@ static int octeon_spi_do_transfer(struct octeon_spi *p,
 	int mode;
 	bool cpha, cpol;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int bits_per_word;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	const u8 *tx_buf;
@@ -86,6 +102,7 @@ static int octeon_spi_do_transfer(struct octeon_spi *p,
 	int len;
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct octeon_spi_setup *msg_setup = spi_get_ctldata(msg->spi);
 
@@ -103,11 +120,16 @@ static int octeon_spi_do_transfer(struct octeon_spi *p,
 	if (speed_hz > OCTEON_SPI_MAX_CLOCK_HZ)
 		speed_hz = OCTEON_SPI_MAX_CLOCK_HZ;
 =======
+=======
+>>>>>>> v3.18
 	mode = spi->mode;
 	cpha = mode & SPI_CPHA;
 	cpol = mode & SPI_CPOL;
 
 	speed_hz = xfer->speed_hz ? : spi->max_speed_hz;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	clkdiv = octeon_get_io_clock_rate() / (2 * speed_hz);
@@ -123,8 +145,13 @@ static int octeon_spi_do_transfer(struct octeon_spi *p,
 	mpi_cfg.s.enable = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (msg_setup->chip_select < 4)
 		p->cs_enax |= 1ull << (12 + msg_setup->chip_select);
+=======
+	if (spi->chip_select < 4)
+		p->cs_enax |= 1ull << (12 + spi->chip_select);
+>>>>>>> v3.18
 =======
 	if (spi->chip_select < 4)
 		p->cs_enax |= 1ull << (12 + spi->chip_select);
@@ -149,7 +176,11 @@ static int octeon_spi_do_transfer(struct octeon_spi *p,
 		}
 		mpi_tx.u64 = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mpi_tx.s.csid = msg_setup->chip_select;
+=======
+		mpi_tx.s.csid = spi->chip_select;
+>>>>>>> v3.18
 =======
 		mpi_tx.s.csid = spi->chip_select;
 >>>>>>> v3.18
@@ -178,7 +209,11 @@ static int octeon_spi_do_transfer(struct octeon_spi *p,
 
 	mpi_tx.u64 = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mpi_tx.s.csid = msg_setup->chip_select;
+=======
+	mpi_tx.s.csid = spi->chip_select;
+>>>>>>> v3.18
 =======
 	mpi_tx.s.csid = spi->chip_select;
 >>>>>>> v3.18
@@ -204,6 +239,7 @@ static int octeon_spi_do_transfer(struct octeon_spi *p,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int octeon_spi_validate_bpw(struct spi_device *spi, u32 speed)
 {
 	switch (speed) {
@@ -219,6 +255,8 @@ static int octeon_spi_validate_bpw(struct spi_device *spi, u32 speed)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int octeon_spi_transfer_one_message(struct spi_master *master,
 					   struct spi_message *msg)
 {
@@ -227,6 +265,7 @@ static int octeon_spi_transfer_one_message(struct spi_master *master,
 	int status = 0;
 	struct spi_transfer *xfer;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * We better have set the configuration via a call to .setup
@@ -253,6 +292,11 @@ static int octeon_spi_transfer_one_message(struct spi_master *master,
 		bool last_xfer = list_is_last(&xfer->transfer_list,
 					      &msg->transfers);
 >>>>>>> v3.18
+=======
+	list_for_each_entry(xfer, &msg->transfers, transfer_list) {
+		bool last_xfer = list_is_last(&xfer->transfer_list,
+					      &msg->transfers);
+>>>>>>> v3.18
 		int r = octeon_spi_do_transfer(p, msg, xfer, last_xfer);
 		if (r < 0) {
 			status = r;
@@ -267,6 +311,7 @@ err:
 	return status;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct octeon_spi_setup *octeon_spi_new_setup(struct spi_device *spi)
 {
@@ -320,6 +365,10 @@ static int octeon_spi_probe(struct platform_device *pdev)
 static int octeon_spi_probe(struct platform_device *pdev)
 {
 >>>>>>> v3.18
+=======
+static int octeon_spi_probe(struct platform_device *pdev)
+{
+>>>>>>> v3.18
 	struct resource *res_mem;
 	struct spi_master *master;
 	struct octeon_spi *p;
@@ -330,8 +379,12 @@ static int octeon_spi_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	p = spi_master_get_devdata(master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, p);
 	p->my_master = master;
+=======
+	platform_set_drvdata(pdev, master);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, master);
 >>>>>>> v3.18
@@ -352,8 +405,11 @@ static int octeon_spi_probe(struct platform_device *pdev)
 					     resource_size(res_mem));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Dynamic bus numbering */
 	master->bus_num = -1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	master->num_chipselect = 4;
@@ -364,6 +420,7 @@ static int octeon_spi_probe(struct platform_device *pdev)
 			    SPI_3WIRE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->setup = octeon_spi_setup;
 	master->cleanup = octeon_spi_cleanup;
 	master->prepare_transfer_hardware = octeon_spi_nop_transfer_hardware;
@@ -373,12 +430,17 @@ static int octeon_spi_probe(struct platform_device *pdev)
 	master->dev.of_node = pdev->dev.of_node;
 	err = spi_register_master(master);
 =======
+=======
+>>>>>>> v3.18
 	master->transfer_one_message = octeon_spi_transfer_one_message;
 	master->bits_per_word_mask = SPI_BPW_MASK(8);
 	master->max_speed_hz = OCTEON_SPI_MAX_CLOCK_HZ;
 
 	master->dev.of_node = pdev->dev.of_node;
 	err = devm_spi_register_master(&pdev->dev, master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err) {
 		dev_err(&pdev->dev, "register master failed: %d\n", err);
@@ -396,16 +458,22 @@ fail:
 static int octeon_spi_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct octeon_spi *p = platform_get_drvdata(pdev);
 	u64 register_base = p->register_base;
 
 	spi_unregister_master(p->my_master);
 
 =======
+=======
+>>>>>>> v3.18
 	struct spi_master *master = platform_get_drvdata(pdev);
 	struct octeon_spi *p = spi_master_get_devdata(master);
 	u64 register_base = p->register_base;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Clear the CSENA* and put everything in a known state. */
 	cvmx_write_csr(register_base + OCTEON_SPI_CFG, 0);

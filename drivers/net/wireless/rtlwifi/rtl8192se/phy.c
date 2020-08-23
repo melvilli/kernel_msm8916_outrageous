@@ -31,6 +31,10 @@
 #include "../pci.h"
 #include "../ps.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../core.h"
+>>>>>>> v3.18
 =======
 #include "../core.h"
 >>>>>>> v3.18
@@ -403,6 +407,11 @@ static bool _rtl92s_phy_sw_chnl_step_by_step(struct ieee80211_hw *hw,
 			currentcmd = &postcommoncmd[*step];
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		default:
+			return true;
+>>>>>>> v3.18
 =======
 		default:
 			return true;
@@ -843,6 +852,7 @@ static bool _rtl92s_phy_config_bb(struct ieee80211_hw *hw, u8 configtype)
 	if (configtype == BASEBAND_CONFIG_PHY_REG) {
 		for (i = 0; i < phy_reg_len; i = i + 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (phy_reg_table[i] == 0xfe)
 				mdelay(50);
 			else if (phy_reg_table[i] == 0xfd)
@@ -855,6 +865,9 @@ static bool _rtl92s_phy_config_bb(struct ieee80211_hw *hw, u8 configtype)
 				udelay(5);
 			else if (phy_reg_table[i] == 0xf9)
 				udelay(1);
+=======
+			rtl_addr_delay(phy_reg_table[i]);
+>>>>>>> v3.18
 =======
 			rtl_addr_delay(phy_reg_table[i]);
 >>>>>>> v3.18
@@ -900,6 +913,7 @@ static bool _rtl92s_phy_set_bb_to_diff_rf(struct ieee80211_hw *hw,
 	if (configtype == BASEBAND_CONFIG_PHY_REG) {
 		for (i = 0; i < phy_regarray2xtxr_len; i = i + 3) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (phy_regarray2xtxr_table[i] == 0xfe)
 				mdelay(50);
 			else if (phy_regarray2xtxr_table[i] == 0xfd)
@@ -912,6 +926,9 @@ static bool _rtl92s_phy_set_bb_to_diff_rf(struct ieee80211_hw *hw,
 				udelay(5);
 			else if (phy_regarray2xtxr_table[i] == 0xf9)
 				udelay(1);
+=======
+			rtl_addr_delay(phy_regarray2xtxr_table[i]);
+>>>>>>> v3.18
 =======
 			rtl_addr_delay(phy_regarray2xtxr_table[i]);
 >>>>>>> v3.18
@@ -938,6 +955,7 @@ static bool _rtl92s_phy_config_bb_with_pg(struct ieee80211_hw *hw,
 	if (configtype == BASEBAND_CONFIG_PHY_REG) {
 		for (i = 0; i < phy_pg_len; i = i + 3) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (phy_table_pg[i] == 0xfe)
 				mdelay(50);
 			else if (phy_table_pg[i] == 0xfd)
@@ -950,6 +968,9 @@ static bool _rtl92s_phy_config_bb_with_pg(struct ieee80211_hw *hw,
 				udelay(5);
 			else if (phy_table_pg[i] == 0xf9)
 				udelay(1);
+=======
+			rtl_addr_delay(phy_table_pg[i]);
+>>>>>>> v3.18
 =======
 			rtl_addr_delay(phy_table_pg[i]);
 >>>>>>> v3.18
@@ -1056,6 +1077,7 @@ u8 rtl92s_phy_config_rf(struct ieee80211_hw *hw, enum radio_path rfpath)
 	case RF90_PATH_A:
 		for (i = 0; i < radio_a_tblen; i = i + 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (radio_a_table[i] == 0xfe)
 				/* Delay specific ms. Only RF configuration
 				 * requires delay. */
@@ -1083,6 +1105,11 @@ u8 rtl92s_phy_config_rf(struct ieee80211_hw *hw, enum radio_path rfpath)
 					MASK20BITS, radio_a_table[i + 1]);
 
 >>>>>>> v3.18
+=======
+			rtl_rfreg_delay(hw, rfpath, radio_a_table[i],
+					MASK20BITS, radio_a_table[i + 1]);
+
+>>>>>>> v3.18
 		}
 
 		/* PA Bias current for inferiority IC */
@@ -1090,6 +1117,7 @@ u8 rtl92s_phy_config_rf(struct ieee80211_hw *hw, enum radio_path rfpath)
 		break;
 	case RF90_PATH_B:
 		for (i = 0; i < radio_b_tblen; i = i + 2) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (radio_b_table[i] == 0xfe)
 				/* Delay specific ms. Only RF configuration
@@ -1113,6 +1141,10 @@ u8 rtl92s_phy_config_rf(struct ieee80211_hw *hw, enum radio_path rfpath)
 
 			/* Add delay for ECS T20 & LG malow platform */
 			udelay(1);
+=======
+			rtl_rfreg_delay(hw, rfpath, radio_b_table[i],
+					MASK20BITS, radio_b_table[i + 1]);
+>>>>>>> v3.18
 =======
 			rtl_rfreg_delay(hw, rfpath, radio_b_table[i],
 					MASK20BITS, radio_b_table[i + 1]);

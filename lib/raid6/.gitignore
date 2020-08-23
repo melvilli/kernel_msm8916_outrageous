@@ -3,6 +3,10 @@ altivec*.c
 int*.c
 tables.c
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+neon?.c
+>>>>>>> v3.18
 =======
 neon?.c
 >>>>>>> v3.18

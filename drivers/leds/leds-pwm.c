@@ -15,7 +15,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -70,10 +73,13 @@ static void led_pwm_set(struct led_classdev *led_cdev,
 		container_of(led_cdev, struct led_pwm_data, cdev);
 	unsigned int max = led_dat->cdev.max_brightness;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int period =  led_dat->period;
 
 	led_dat->duty = brightness * period / max;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long long duty =  led_dat->period;
 
 	duty *= brightness;
@@ -83,6 +89,9 @@ static void led_pwm_set(struct led_classdev *led_cdev,
 		duty = led_dat->period - duty;
 
 	led_dat->duty = duty;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (led_dat->can_sleep)
@@ -106,6 +115,7 @@ static void led_pwm_cleanup(struct led_pwm_priv *priv)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct led_pwm_priv *led_pwm_create_of(struct platform_device *pdev)
 {
@@ -168,6 +178,8 @@ err:
 
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 static int led_pwm_add(struct device *dev, struct led_pwm_priv *priv,
 		       struct led_pwm *led, struct device_node *child)
 {
@@ -241,11 +253,15 @@ static int led_pwm_create_of(struct device *dev, struct led_pwm_priv *priv)
 	}
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int led_pwm_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct led_pwm_platform_data *pdata = pdev->dev.platform_data;
 	struct led_pwm_priv *priv;
@@ -294,6 +310,8 @@ static int led_pwm_probe(struct platform_device *pdev)
 		if (!priv)
 			return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	struct led_pwm_platform_data *pdata = dev_get_platdata(&pdev->dev);
 	struct led_pwm_priv *priv;
 	int count, i;
@@ -326,6 +344,9 @@ static int led_pwm_probe(struct platform_device *pdev)
 	if (ret) {
 		led_pwm_cleanup(priv);
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -333,12 +354,15 @@ static int led_pwm_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err:
 	priv->num_leds = i;
 	led_pwm_cleanup(priv);
 
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -365,7 +389,11 @@ static struct platform_driver led_pwm_driver = {
 		.name	= "leds_pwm",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(of_pwm_leds_match),
+=======
+		.of_match_table = of_pwm_leds_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = of_pwm_leds_match,
 >>>>>>> v3.18

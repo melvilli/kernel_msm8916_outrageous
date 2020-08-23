@@ -84,7 +84,11 @@ void __init gpmc_smsc911x_init(struct omap_smsc911x_platform_data *gpmc_cfg)
 		 gpmc_smsc911x_resources, ARRAY_SIZE(gpmc_smsc911x_resources),
 		 &gpmc_smsc911x_config, sizeof(gpmc_smsc911x_config));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdev) {
+=======
+	if (IS_ERR(pdev)) {
+>>>>>>> v3.18
 =======
 	if (IS_ERR(pdev)) {
 >>>>>>> v3.18

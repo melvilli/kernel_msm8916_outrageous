@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,7 +50,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -110,9 +119,12 @@ acpi_status acpi_get_timer(u32 * ticks)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_hw_read(ticks, &acpi_gbl_FADT.xpm_timer_block);
 
 =======
+=======
+>>>>>>> v3.18
 	/* ACPI 5.0A: PM Timer is optional */
 
 	if (!acpi_gbl_FADT.xpm_timer_block.address) {
@@ -120,6 +132,9 @@ acpi_status acpi_get_timer(u32 * ticks)
 	}
 
 	status = acpi_hw_read(ticks, &acpi_gbl_FADT.xpm_timer_block);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return_ACPI_STATUS(status);
 }
@@ -168,13 +183,19 @@ acpi_get_timer_duration(u32 start_ticks, u32 end_ticks, u32 * time_elapsed)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* ACPI 5.0A: PM Timer is optional */
 
 	if (!acpi_gbl_FADT.xpm_timer_block.address) {
 		return_ACPI_STATUS(AE_SUPPORT);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Compute Tick Delta:

@@ -6,6 +6,10 @@
 #include <linux/stringify.h>
 #include <asm/asm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/ptrace.h>
+>>>>>>> v3.18
 =======
 #include <asm/ptrace.h>
 >>>>>>> v3.18
@@ -165,7 +169,10 @@ static inline int alternatives_text_reserved(void *start, void *end)
 		: : "i" (0), ## input)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * This is similar to alternative_input. But it has two features and
  * respective instructions.
@@ -180,6 +187,9 @@ static inline int alternatives_text_reserved(void *start, void *end)
 		newinstr2, feature2)					     \
 		: : "i" (0), ## input)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Like alternative_input, but with a single output argument */
 #define alternative_io(oldinstr, newinstr, feature, output, input...)	\
@@ -242,6 +252,7 @@ extern void *text_poke_early(void *addr, const void *opcode, size_t len);
  * invalid instruction possible) or if the instructions are changed from a
  * consistent state to another consistent state atomically.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * More care must be taken when modifying code in the SMP case because of
  * Intel's errata. text_poke_smp() takes care that errata, but still
  * doesn't support NMI/MCE handler code modifying.
@@ -258,12 +269,17 @@ extern void *text_poke(void *addr, const void *opcode, size_t len);
 extern void *text_poke_smp(void *addr, const void *opcode, size_t len);
 extern void text_poke_smp_batch(struct text_poke_param *params, int n);
 =======
+=======
+>>>>>>> v3.18
  * On the local CPU you need to be protected again NMI or MCE handlers seeing an
  * inconsistent instruction while you patch.
  */
 extern void *text_poke(void *addr, const void *opcode, size_t len);
 extern int poke_int3_handler(struct pt_regs *regs);
 extern void *text_poke_bp(void *addr, const void *opcode, size_t len, void *handler);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ASM_X86_ALTERNATIVE_H */

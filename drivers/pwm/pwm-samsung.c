@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* drivers/pwm/pwm-samsung.c
  *
  * Copyright (c) 2007 Ben Dooks
@@ -7,6 +8,8 @@
  *
  * S3C series PWM device core
 =======
+=======
+>>>>>>> v3.18
 /*
  * Copyright (c) 2007 Ben Dooks
  * Copyright (c) 2008 Simtec Electronics
@@ -14,11 +17,15 @@
  * Copyright (c) 2013 Tomasz Figa <tomasz.figa@gmail.com>
  *
  * PWM driver for Samsung SoCs
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License.
+<<<<<<< HEAD
 <<<<<<< HEAD
 */
 
@@ -201,6 +208,8 @@ static int s3c_pwm_config(struct pwm_chip *chip, struct pwm_device *pwm,
 
 	local_irq_restore(flags);
 =======
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/bitops.h>
@@ -567,11 +576,15 @@ static int pwm_samsung_set_polarity(struct pwm_chip *chip,
 
 	/* Inverted means normal in the hardware. */
 	pwm_samsung_set_invert(our_chip, pwm->hwpwm, invert);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct pwm_ops s3c_pwm_ops = {
 	.enable = s3c_pwm_enable,
@@ -666,6 +679,8 @@ static int s3c_pwm_remove(struct platform_device *pdev)
 	clk_disable(s3c->clk_div);
 	clk_disable(s3c->clk);
 =======
+=======
+>>>>>>> v3.18
 static const struct pwm_ops pwm_samsung_ops = {
 	.request	= pwm_samsung_request,
 	.free		= pwm_samsung_free,
@@ -834,12 +849,16 @@ static int pwm_samsung_remove(struct platform_device *pdev)
 		return ret;
 
 	clk_disable_unprepare(chip->base_clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 #ifdef CONFIG_PM_SLEEP
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int s3c_pwm_suspend(struct device *dev)
 {
@@ -852,6 +871,8 @@ static int s3c_pwm_suspend(struct device *dev)
 	s3c->period_ns = 0;
 	s3c->duty_ns = 0;
 =======
+=======
+>>>>>>> v3.18
 static int pwm_samsung_suspend(struct device *dev)
 {
 	struct samsung_pwm_chip *chip = dev_get_drvdata(dev);
@@ -872,11 +893,15 @@ static int pwm_samsung_suspend(struct device *dev)
 		chan->period_ns = 0;
 		chan->duty_ns = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int s3c_pwm_resume(struct device *dev)
 {
@@ -888,6 +913,8 @@ static int s3c_pwm_resume(struct device *dev)
 	tcon |= pwm_tcon_invert(s3c);
 	__raw_writel(tcon, S3C2410_TCON);
 =======
+=======
+>>>>>>> v3.18
 static int pwm_samsung_resume(struct device *dev)
 {
 	struct samsung_pwm_chip *chip = dev_get_drvdata(dev);
@@ -902,12 +929,16 @@ static int pwm_samsung_resume(struct device *dev)
 			pwm_samsung_set_invert(chip, chan,
 					chip->inverter_mask & BIT(chan));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static SIMPLE_DEV_PM_OPS(s3c_pwm_pm_ops, s3c_pwm_suspend,
 			s3c_pwm_resume);
@@ -943,6 +974,8 @@ static int __init pwm_init(void)
 
 arch_initcall(pwm_init);
 =======
+=======
+>>>>>>> v3.18
 static SIMPLE_DEV_PM_OPS(pwm_samsung_pm_ops, pwm_samsung_suspend,
 			 pwm_samsung_resume);
 
@@ -961,4 +994,7 @@ module_platform_driver(pwm_samsung_driver);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Tomasz Figa <tomasz.figa@gmail.com>");
 MODULE_ALIAS("platform:samsung-pwm");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -351,15 +351,21 @@ PD Record codes
 /*-------------------------------------------------------------*/
 /* Commonly used basic types */
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct hfa384x_bytestr {
 	u16 len;
 	u8 data[0];
 } __packed hfa384x_bytestr_t;
 =======
+=======
+>>>>>>> v3.18
 struct hfa384x_bytestr {
 	u16 len;
 	u8 data[0];
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 typedef struct hfa384x_bytestr32 {
@@ -539,7 +545,11 @@ typedef struct hfa384x_rx_frame {
 
 	/*-- 802.11 Header Information (802.11 byte order) --*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 frame_control;
+=======
+	__le16 frame_control;
+>>>>>>> v3.18
 =======
 	__le16 frame_control;
 >>>>>>> v3.18
@@ -550,7 +560,11 @@ typedef struct hfa384x_rx_frame {
 	u16 sequence_control;
 	u8 address4[6];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 data_len;		/* hfa384x (little endian) format */
+=======
+	__le16 data_len;		/* hfa384x (little endian) format */
+>>>>>>> v3.18
 =======
 	__le16 data_len;		/* hfa384x (little endian) format */
 >>>>>>> v3.18

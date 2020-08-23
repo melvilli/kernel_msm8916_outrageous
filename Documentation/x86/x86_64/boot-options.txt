@@ -79,6 +79,7 @@ APICs
    no_timer_check Don't check the IO-APIC timer. This can work around
 		 problems with incorrect timer initialization on some boards.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
    apicmaintimer Run time keeping from the local APIC timer instead
                  of using the PIT/HPET interrupt for this. This is useful
@@ -87,6 +88,8 @@ APICs
    noapicmaintimer  Don't do time keeping using the APIC timer.
 		 Useful when this option was auto selected, but doesn't work.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
    apicpmtimer
@@ -148,11 +151,14 @@ Non Executable Mappings
   off     Disable
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SMP
 
   additional_cpus=NUM Allow NUM more CPUs for hotplug
 		 (defaults are specified by the BIOS, see Documentation/x86/x86_64/cpu-hotplug-spec)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 NUMA
@@ -183,12 +189,18 @@ ACPI
   acpi=noirq	Don't route interrupts
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   acpi=nocmcff	Disable firmware first mode for corrected errors. This
 		disables parsing the HEST CMC error source to check if
 		firmware has set the FF flag. This may result in
 		duplicate corrected error reports.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 PCI
 
@@ -299,6 +311,7 @@ Debugging
   kstack=N	Print N words from the kernel stack in oops dumps.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   pagefaulttrace  Dump all page faults. Only useful for extreme debugging
 		and will create a lot of output.
 
@@ -309,6 +322,8 @@ Debugging
 		newfallback: use new unwinder but fall back to old if it gets
 			stuck (default)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 Miscellaneous

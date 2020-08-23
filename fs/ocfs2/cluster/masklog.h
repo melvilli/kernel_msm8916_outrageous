@@ -200,7 +200,12 @@ extern struct mlog_bits mlog_and_bits, mlog_not_bits;
 	int _st = (st);							\
 	if (_st != -ERESTARTSYS && _st != -EINTR &&			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    _st != AOP_TRUNCATED_PAGE && _st != -ENOSPC)		\
+=======
+	    _st != AOP_TRUNCATED_PAGE && _st != -ENOSPC &&		\
+	    _st != -EDQUOT)						\
+>>>>>>> v3.18
 =======
 	    _st != AOP_TRUNCATED_PAGE && _st != -ENOSPC &&		\
 	    _st != -EDQUOT)						\

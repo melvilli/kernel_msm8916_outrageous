@@ -7,6 +7,7 @@ This binding uses the common clock binding[1].
 Required properties:
 - compatible : shall be one of the following:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"allwinner,sun4i-osc-clk" - for a gatable oscillator
 	"allwinner,sun4i-pll1-clk" - for the main PLL clock
 	"allwinner,sun4i-cpu-clk" - for the CPU multiplexer clock
@@ -44,6 +45,8 @@ pll1: pll1@01c20000 {
 	reg = <0x01c20000 0x4>;
 	clocks = <&osc24M>;
 =======
+=======
+>>>>>>> v3.18
 	"allwinner,sun4i-a10-osc-clk" - for a gatable oscillator
 	"allwinner,sun4i-a10-pll1-clk" - for the main PLL clock and PLL4
 	"allwinner,sun6i-a31-pll1-clk" - for the main PLL clock on A31
@@ -142,11 +145,15 @@ pll5: clk@01c20020 {
 	reg = <0x01c20020 0x4>;
 	clocks = <&osc24M>;
 	clock-output-names = "pll5_ddr", "pll5_other";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 cpu: cpu@01c20054 {
 	#clock-cells = <0>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	compatible = "allwinner,sun4i-cpu-clk";
 	reg = <0x01c20054 0x4>;
@@ -252,6 +259,8 @@ Notation:
  [*]:  The datasheet didn't mention these, but they are present on AW code
  [**]: The datasheet had this marked as "NC" but they are used on AW code
 =======
+=======
+>>>>>>> v3.18
 	compatible = "allwinner,sun4i-a10-cpu-clk";
 	reg = <0x01c20054 0x4>;
 	clocks = <&osc32k>, <&osc24M>, <&pll1>;
@@ -291,4 +300,7 @@ gmac_clk: clk@01c20164 {
 	clocks = <&mii_phy_tx_clk>, <&gmac_int_tx_clk>;
 	clock-output-names = "gmac";
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -18,6 +18,7 @@
 
 struct dev_archdata {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dma_map_ops *dma_ops;
 #ifdef CONFIG_IOMMU_API
 	void *iommu;			/* private IOMMU data */
@@ -38,6 +39,8 @@ struct pdev_archdata {
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	struct dma_map_ops *dma_ops;
 #ifdef CONFIG_IOMMU_API
 	void *iommu;			/* private IOMMU data */
@@ -47,5 +50,8 @@ struct pdev_archdata {
 struct pdev_archdata {
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

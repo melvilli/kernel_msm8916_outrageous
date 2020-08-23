@@ -56,15 +56,21 @@ kconf_id_hash (register const char *str, register unsigned int len)
       73, 73, 73, 73, 73, 73, 73, 73, 73, 73,
       73, 73, 73, 73, 73, 73, 73, 73, 73, 73,
 <<<<<<< HEAD
+<<<<<<< HEAD
       73, 73, 73, 73, 73, 73, 73, 73, 25, 25,
        0,  0,  0,  5,  0,  0, 73, 73,  5,  0,
       10,  5, 45, 73, 20, 20,  0, 15, 15, 73,
       20, 73, 73, 73, 73, 73, 73, 73, 73, 73,
 =======
+=======
+>>>>>>> v3.18
       73, 73, 73, 73, 73, 73, 73,  5, 25, 25,
        0,  0,  0,  5,  0,  0, 73, 73,  5,  0,
       10,  5, 45, 73, 20, 20,  0, 15, 15, 73,
       20,  5, 73, 73, 73, 73, 73, 73, 73, 73,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       73, 73, 73, 73, 73, 73, 73, 73, 73, 73,
       73, 73, 73, 73, 73, 73, 73, 73, 73, 73,
@@ -114,6 +120,10 @@ struct kconf_id_strings_t
     char kconf_id_strings_str25[sizeof("menuconfig")];
     char kconf_id_strings_str27[sizeof("modules")];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    char kconf_id_strings_str28[sizeof("allnoconfig_y")];
+>>>>>>> v3.18
 =======
     char kconf_id_strings_str28[sizeof("allnoconfig_y")];
 >>>>>>> v3.18
@@ -153,6 +163,10 @@ static const struct kconf_id_strings_t kconf_id_strings_contents =
     "menuconfig",
     "modules",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "allnoconfig_y",
+>>>>>>> v3.18
 =======
     "allnoconfig_y",
 >>>>>>> v3.18
@@ -186,7 +200,11 @@ kconf_id_lookup (register const char *str, register unsigned int len)
   enum
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
       TOTAL_KEYWORDS = 32,
+=======
+      TOTAL_KEYWORDS = 33,
+>>>>>>> v3.18
 =======
       TOTAL_KEYWORDS = 33,
 >>>>>>> v3.18
@@ -239,7 +257,12 @@ kconf_id_lookup (register const char *str, register unsigned int len)
 #line 44 "scripts/kconfig/zconf.gperf"
       {(int)(long)&((struct kconf_id_strings_t *)0)->kconf_id_strings_str27,	T_OPT_MODULES,	TF_OPTION},
 <<<<<<< HEAD
+<<<<<<< HEAD
       {-1},
+=======
+#line 47 "scripts/kconfig/zconf.gperf"
+      {(int)(long)&((struct kconf_id_strings_t *)0)->kconf_id_strings_str28,	T_OPT_ALLNOCONFIG_Y,TF_OPTION},
+>>>>>>> v3.18
 =======
 #line 47 "scripts/kconfig/zconf.gperf"
       {(int)(long)&((struct kconf_id_strings_t *)0)->kconf_id_strings_str28,	T_OPT_ALLNOCONFIG_Y,TF_OPTION},
@@ -307,7 +330,11 @@ kconf_id_lookup (register const char *str, register unsigned int len)
   return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 47 "scripts/kconfig/zconf.gperf"
+=======
+#line 48 "scripts/kconfig/zconf.gperf"
+>>>>>>> v3.18
 =======
 #line 48 "scripts/kconfig/zconf.gperf"
 >>>>>>> v3.18

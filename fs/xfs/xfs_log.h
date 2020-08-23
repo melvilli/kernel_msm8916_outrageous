@@ -19,6 +19,7 @@
 #define __XFS_LOG_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* get lsn fields */
 #define CYCLE_LSN(lsn) ((uint)((lsn)>>32))
 #define BLOCK_LSN(lsn) ((uint)(lsn))
@@ -28,6 +29,8 @@
 
 #ifdef __KERNEL__
 =======
+=======
+>>>>>>> v3.18
 struct xfs_log_vec {
 	struct xfs_log_vec	*lv_next;	/* next lv in build list */
 	int			lv_niovecs;	/* number of iovecs in lv */
@@ -103,6 +106,9 @@ typedef struct xfs_log_callback {
 	void			*cb_arg;
 } xfs_log_callback_t;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * By comparing each component, we don't have to worry about extra
@@ -137,6 +143,7 @@ static inline xfs_lsn_t	_lsn_cmp(xfs_lsn_t lsn1, xfs_lsn_t lsn2)
  */
 #define XFS_LOG_SYNC		0x1
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif	/* __KERNEL__ */
 
@@ -198,6 +205,8 @@ typedef struct xfs_log_callback {
 #ifdef __KERNEL__
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* Log manager interfaces */
 struct xfs_mount;
 struct xlog_in_core;
@@ -206,11 +215,15 @@ struct xfs_log_item;
 struct xfs_item_ops;
 struct xfs_trans;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void	xfs_log_item_init(struct xfs_mount	*mp,
 			struct xfs_log_item	*item,
 			int			type,
 			const struct xfs_item_ops *ops);
+=======
+struct xfs_log_callback;
+>>>>>>> v3.18
 =======
 struct xfs_log_callback;
 >>>>>>> v3.18
@@ -242,7 +255,11 @@ void	  xfs_log_space_wake(struct xfs_mount *mp);
 int	  xfs_log_notify(struct xfs_mount	*mp,
 			 struct xlog_in_core	*iclog,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 xfs_log_callback_t	*callback_entry);
+=======
+			 struct xfs_log_callback *callback_entry);
+>>>>>>> v3.18
 =======
 			 struct xfs_log_callback *callback_entry);
 >>>>>>> v3.18
@@ -267,7 +284,11 @@ struct xlog_ticket *xfs_log_ticket_get(struct xlog_ticket *ticket);
 void	  xfs_log_ticket_put(struct xlog_ticket *ticket);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int	xfs_log_commit_cil(struct xfs_mount *mp, struct xfs_trans *tp,
+=======
+void	xfs_log_commit_cil(struct xfs_mount *mp, struct xfs_trans *tp,
+>>>>>>> v3.18
 =======
 void	xfs_log_commit_cil(struct xfs_mount *mp, struct xfs_trans *tp,
 >>>>>>> v3.18
@@ -279,7 +300,10 @@ void	xfs_log_worker(struct work_struct *work);
 void	xfs_log_quiesce(struct xfs_mount *mp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif	/* __XFS_LOG_H__ */

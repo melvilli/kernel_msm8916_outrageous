@@ -1,8 +1,14 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2005-2011 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2005-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
@@ -34,16 +40,22 @@
 #include <linux/vmalloc.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "enum.h"
 #include "bitfield.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/mtd/mtd.h>
 #include <net/busy_poll.h>
 
 #include "enum.h"
 #include "bitfield.h"
 #include "filter.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**************************************************************************
@@ -53,7 +65,11 @@
  **************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EFX_DRIVER_VERSION	"3.2"
+=======
+#define EFX_DRIVER_VERSION	"4.0"
+>>>>>>> v3.18
 =======
 #define EFX_DRIVER_VERSION	"4.0"
 >>>>>>> v3.18
@@ -109,6 +125,10 @@
 /* Forward declare Precision Time Protocol (PTP) support structure. */
 struct efx_ptp_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct hwtstamp_config;
+>>>>>>> v3.18
 =======
 struct hwtstamp_config;
 >>>>>>> v3.18
@@ -116,6 +136,7 @@ struct hwtstamp_config;
 struct efx_self_tests;
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * struct efx_special_buffer - An Efx special buffer
  * @addr: CPU base address of the buffer
@@ -133,6 +154,8 @@ struct efx_special_buffer {
 	dma_addr_t dma_addr;
 	unsigned int len;
 =======
+=======
+>>>>>>> v3.18
  * struct efx_buffer - A general-purpose DMA buffer
  * @addr: host base address of the buffer
  * @dma_addr: DMA base address of the buffer
@@ -163,6 +186,9 @@ struct efx_buffer {
  */
 struct efx_special_buffer {
 	struct efx_buffer buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int index;
 	unsigned int entries;
@@ -175,6 +201,10 @@ struct efx_special_buffer {
  * @heap_buf: When @flags & %EFX_TX_BUF_HEAP, the associated heap buffer to be
  *	freed when descriptor completes.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @option: When @flags & %EFX_TX_BUF_OPTION, a NIC-specific option descriptor.
+>>>>>>> v3.18
 =======
  * @option: When @flags & %EFX_TX_BUF_OPTION, a NIC-specific option descriptor.
 >>>>>>> v3.18
@@ -184,6 +214,11 @@ struct efx_special_buffer {
  *	This field is zero when the queue slot is empty.
  * @unmap_len: Length of this fragment to unmap
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @dma_offset: Offset of @dma_addr from the address of the backing DMA mapping.
+ * Only valid if @unmap_len != 0.
+>>>>>>> v3.18
 =======
  * @dma_offset: Offset of @dma_addr from the address of the backing DMA mapping.
  * Only valid if @unmap_len != 0.
@@ -195,11 +230,14 @@ struct efx_tx_buffer {
 		void *heap_buf;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_addr_t dma_addr;
 	unsigned short flags;
 	unsigned short len;
 	unsigned short unmap_len;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		efx_qword_t option;
 		dma_addr_t dma_addr;
@@ -208,6 +246,9 @@ struct efx_tx_buffer {
 	unsigned short len;
 	unsigned short unmap_len;
 	unsigned short dma_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 #define EFX_TX_BUF_CONT		1	/* not last descriptor of packet */
@@ -215,6 +256,10 @@ struct efx_tx_buffer {
 #define EFX_TX_BUF_HEAP		4	/* buffer was allocated with kmalloc() */
 #define EFX_TX_BUF_MAP_SINGLE	8	/* buffer was mapped with dma_map_single() */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EFX_TX_BUF_OPTION	0x10	/* empty buffer for option descriptor */
+>>>>>>> v3.18
 =======
 #define EFX_TX_BUF_OPTION	0x10	/* empty buffer for option descriptor */
 >>>>>>> v3.18
@@ -241,6 +286,12 @@ struct efx_tx_buffer {
  * @txd: The hardware descriptor ring
  * @ptr_mask: The size of the ring minus 1.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @piobuf: PIO buffer region for this TX queue (shared with its partner).
+ *	Size of the region is efx_piobuf_size.
+ * @piobuf_offset: Buffer offset to be specified in PIO descriptors
+>>>>>>> v3.18
 =======
  * @piobuf: PIO buffer region for this TX queue (shared with its partner).
  *	Size of the region is efx_piobuf_size.
@@ -256,6 +307,10 @@ struct efx_tx_buffer {
  *	avoid cache-line ping-pong between the xmit path and the
  *	completion path.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @merge_events: Number of TX merged completion events
+>>>>>>> v3.18
 =======
  * @merge_events: Number of TX merged completion events
 >>>>>>> v3.18
@@ -277,6 +332,10 @@ struct efx_tx_buffer {
  * @tso_packets: Number of packets via the TSO xmit path
  * @pushes: Number of times the TX push feature has been used
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @pio_packets: Number of times the TX PIO feature has been used
+>>>>>>> v3.18
 =======
  * @pio_packets: Number of times the TX PIO feature has been used
 >>>>>>> v3.18
@@ -295,6 +354,11 @@ struct efx_tx_queue {
 	struct efx_special_buffer txd;
 	unsigned int ptr_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void __iomem *piobuf;
+	unsigned int piobuf_offset;
+>>>>>>> v3.18
 =======
 	void __iomem *piobuf;
 	unsigned int piobuf_offset;
@@ -305,6 +369,10 @@ struct efx_tx_queue {
 	unsigned int read_count ____cacheline_aligned_in_smp;
 	unsigned int old_write_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int merge_events;
+>>>>>>> v3.18
 =======
 	unsigned int merge_events;
 >>>>>>> v3.18
@@ -318,6 +386,12 @@ struct efx_tx_queue {
 	unsigned int tso_packets;
 	unsigned int pushes;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int pio_packets;
+	/* Statistics to supplement MAC stats */
+	unsigned long tx_packets;
+>>>>>>> v3.18
 =======
 	unsigned int pio_packets;
 	/* Statistics to supplement MAC stats */
@@ -353,6 +427,11 @@ struct efx_rx_buffer {
 #define EFX_RX_PKT_CSUMMED	0x0002
 #define EFX_RX_PKT_DISCARD	0x0004
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EFX_RX_PKT_TCP		0x0040
+#define EFX_RX_PKT_PREFIX_LEN	0x0080	/* length is in prefix only */
+>>>>>>> v3.18
 =======
 #define EFX_RX_PKT_TCP		0x0040
 #define EFX_RX_PKT_PREFIX_LEN	0x0080	/* length is in prefix only */
@@ -366,12 +445,18 @@ struct efx_rx_buffer {
  * and those passed up to the kernel.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @refcnt: Number of struct efx_rx_buffer's referencing this page.
  *	When refcnt falls to zero, the page is unmapped for dma
  * @dma_addr: The dma address of this page.
  */
 struct efx_rx_page_state {
 	unsigned refcnt;
+=======
+ * @dma_addr: The dma address of this page.
+ */
+struct efx_rx_page_state {
+>>>>>>> v3.18
 =======
  * @dma_addr: The dma address of this page.
  */
@@ -391,7 +476,11 @@ struct efx_rx_page_state {
  * @rxd: The hardware descriptor ring
  * @ptr_mask: The size of the ring minus 1.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @enabled: Receive queue enabled indicator.
+=======
+ * @refill_enabled: Enable refill whenever fill level is low
+>>>>>>> v3.18
 =======
  * @refill_enabled: Enable refill whenever fill level is low
 >>>>>>> v3.18
@@ -401,7 +490,12 @@ struct efx_rx_page_state {
  * @notified_count: Number of buffers given to NIC (<= @added_count).
  * @removed_count: Number of buffers removed from the receive queue.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @scatter_n: Number of buffers used by current packet
+=======
+ * @scatter_n: Used by NIC specific receive code.
+ * @scatter_len: Used by NIC specific receive code.
+>>>>>>> v3.18
 =======
  * @scatter_n: Used by NIC specific receive code.
  * @scatter_len: Used by NIC specific receive code.
@@ -431,7 +525,11 @@ struct efx_rx_queue {
 	struct efx_special_buffer rxd;
 	unsigned int ptr_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool enabled;
+=======
+	bool refill_enabled;
+>>>>>>> v3.18
 =======
 	bool refill_enabled;
 >>>>>>> v3.18
@@ -442,6 +540,10 @@ struct efx_rx_queue {
 	unsigned int removed_count;
 	unsigned int scatter_n;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int scatter_len;
+>>>>>>> v3.18
 =======
 	unsigned int scatter_len;
 >>>>>>> v3.18
@@ -459,6 +561,7 @@ struct efx_rx_queue {
 	unsigned int recycle_count;
 	struct timer_list slow_fill;
 	unsigned int slow_fill_count;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -483,6 +586,8 @@ enum efx_rx_alloc_method {
 	RX_ALLOC_METHOD_SKB = 1,
 	RX_ALLOC_METHOD_PAGE = 2,
 =======
+=======
+>>>>>>> v3.18
 	/* Statistics to supplement MAC stats */
 	unsigned long rx_packets;
 };
@@ -492,6 +597,9 @@ enum efx_sync_events_state {
 	SYNC_EVENTS_QUIESCENT,
 	SYNC_EVENTS_REQUESTED,
 	SYNC_EVENTS_VALID,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -506,6 +614,10 @@ enum efx_sync_events_state {
  * @channel: Channel instance number
  * @type: Channel type definition
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @eventq_init: Event queue initialised flag
+>>>>>>> v3.18
 =======
  * @eventq_init: Event queue initialised flag
 >>>>>>> v3.18
@@ -515,7 +627,12 @@ enum efx_sync_events_state {
  * @napi_dev: Net device used with NAPI
  * @napi_str: NAPI control structure
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @work_pending: Is work pending via NAPI?
+=======
+ * @state: state for NAPI vs busy polling
+ * @state_lock: lock protecting @state
+>>>>>>> v3.18
 =======
  * @state: state for NAPI vs busy polling
  * @state_lock: lock protecting @state
@@ -536,6 +653,11 @@ enum efx_sync_events_state {
  * @n_rx_nodesc_trunc: Number of RX packets truncated and then dropped due to
  *	lack of descriptors
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @n_rx_merge_events: Number of RX merged completion events
+ * @n_rx_merge_packets: Number of RX packets completed by merged events
+>>>>>>> v3.18
 =======
  * @n_rx_merge_events: Number of RX merged completion events
  * @n_rx_merge_packets: Number of RX packets completed by merged events
@@ -547,6 +669,12 @@ enum efx_sync_events_state {
  * @rx_queue: RX queue for this channel
  * @tx_queue: TX queues for this channel
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @sync_events_state: Current state of sync events on this channel
+ * @sync_timestamp_major: Major part of the last ptp sync event
+ * @sync_timestamp_minor: Minor part of the last ptp sync event
+>>>>>>> v3.18
 =======
  * @sync_events_state: Current state of sync events on this channel
  * @sync_timestamp_major: Major part of the last ptp sync event
@@ -558,6 +686,10 @@ struct efx_channel {
 	int channel;
 	const struct efx_channel_type *type;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool eventq_init;
+>>>>>>> v3.18
 =======
 	bool eventq_init;
 >>>>>>> v3.18
@@ -567,8 +699,11 @@ struct efx_channel {
 	struct net_device *napi_dev;
 	struct napi_struct napi_str;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool work_pending;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NET_RX_BUSY_POLL
 	unsigned int state;
 	spinlock_t state_lock;
@@ -585,6 +720,9 @@ struct efx_channel {
 #define EFX_CHANNEL_USER_PEND \
 	(EFX_CHANNEL_STATE_POLL | EFX_CHANNEL_STATE_POLL_YIELD)
 #endif /* CONFIG_NET_RX_BUSY_POLL */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct efx_special_buffer eventq;
 	unsigned int eventq_mask;
@@ -606,6 +744,11 @@ struct efx_channel {
 	unsigned n_skbuff_leaks;
 	unsigned int n_rx_nodesc_trunc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int n_rx_merge_events;
+	unsigned int n_rx_merge_packets;
+>>>>>>> v3.18
 =======
 	unsigned int n_rx_merge_events;
 	unsigned int n_rx_merge_packets;
@@ -617,7 +760,10 @@ struct efx_channel {
 	struct efx_rx_queue rx_queue;
 	struct efx_tx_queue tx_queue[EFX_TXQ_TYPES];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	enum efx_sync_events_state sync_events_state;
 	u32 sync_timestamp_major;
@@ -766,6 +912,9 @@ struct efx_msi_context {
 	struct efx_nic *efx;
 	unsigned int index;
 	char name[IFNAMSIZ + 6];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -828,6 +977,7 @@ enum nic_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Alignment of the skb->head which wraps a page-allocated RX buffer
  *
@@ -837,6 +987,8 @@ enum nic_state {
  */
 #define EFX_PAGE_SKB_ALIGN 2
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Forward declaration */
@@ -930,6 +1082,7 @@ static inline bool efx_phy_mode_disabled(enum efx_phy_mode mode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Efx extended statistics
  *
@@ -1000,6 +1153,8 @@ struct efx_mac_stats {
 	u64 rx_internal_error;
 	u64 rx_good_lt64;
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct efx_hw_stat_desc - Description of a hardware statistic
  * @name: Name of the statistic as visible through ethtool, or %NULL if
@@ -1011,6 +1166,9 @@ struct efx_hw_stat_desc {
 	const char *name;
 	u16 dma_width;
 	u16 offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1027,7 +1185,10 @@ union efx_multicast_hash {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct efx_filter_state;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct efx_vf;
@@ -1038,10 +1199,13 @@ struct vfdi_status;
  * @name: Device name (net device name or bus id before net device registered)
  * @pci_dev: The PCI device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @type: Controller type attributes
  * @legacy_irq: IRQ number
  * @legacy_irq_enabled: Are IRQs enabled on NIC (INT_EN_KER register)?
 =======
+=======
+>>>>>>> v3.18
  * @node: List node for maintaning primary/secondary function lists
  * @primary: &struct efx_nic instance for the primary function of this
  *	controller.  May be the same structure, and may be %NULL if no
@@ -1051,6 +1215,9 @@ struct vfdi_status;
  *	Serialised by rtnl_lock.
  * @type: Controller type attributes
  * @legacy_irq: IRQ number
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @workqueue: Workqueue for port reconfigures and the HW monitor.
  *	Work items do not hold and must not acquire RTNL.
@@ -1069,7 +1236,11 @@ struct vfdi_status;
  * @rx_queue: RX DMA queues
  * @channel: Channels
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @channel_name: Names for channels and their IRQs
+=======
+ * @msi_context: Context for each MSI
+>>>>>>> v3.18
 =======
  * @msi_context: Context for each MSI
 >>>>>>> v3.18
@@ -1087,6 +1258,11 @@ struct vfdi_status;
  * @n_rx_channels: Number of channels used for RX (= number of RX queues)
  * @n_tx_channels: Number of channels used for TX
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @rx_ip_align: RX DMA address offset to have IP header aligned in
+ *	in accordance with NET_IP_ALIGN
+>>>>>>> v3.18
 =======
  * @rx_ip_align: RX DMA address offset to have IP header aligned in
  *	in accordance with NET_IP_ALIGN
@@ -1096,7 +1272,10 @@ struct vfdi_status;
  * @rx_buffer_truesize: Amortised allocation size of an RX buffer,
  *	for use in sk_buff::truesize
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @rx_prefix_size: Size of RX prefix before packet data
  * @rx_packet_hash_offset: Offset of RX flow hash from start of packet data
  *	(valid only if @rx_prefix_size != 0; always negative)
@@ -1104,6 +1283,9 @@ struct vfdi_status;
  *	(valid only for NICs that set %EFX_RX_PKT_PREFIX_LEN; always negative)
  * @rx_packet_ts_offset: Offset of timestamp from start of packet data
  *	(valid only if channel->sync_timestamps_enabled; always negative)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @rx_hash_key: Toeplitz hash key for RSS
  * @rx_indir_table: Indirection table for RSS
@@ -1111,6 +1293,11 @@ struct vfdi_status;
  * @int_error_count: Number of internal errors seen recently
  * @int_error_expire: Time at which error count will be expired
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @irq_soft_enabled: Are IRQs soft-enabled? If not, IRQ handler will
+ *	acknowledge but do nothing else.
+>>>>>>> v3.18
 =======
  * @irq_soft_enabled: Are IRQs soft-enabled? If not, IRQ handler will
  *	acknowledge but do nothing else.
@@ -1122,6 +1309,10 @@ struct vfdi_status;
  * @mtd_list: List of MTDs attached to the NIC
  * @nic_data: Hardware dependent state
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @mcdi: Management-Controller-to-Driver Interface state
+>>>>>>> v3.18
 =======
  * @mcdi: Management-Controller-to-Driver Interface state
 >>>>>>> v3.18
@@ -1145,13 +1336,19 @@ struct vfdi_status;
  * @link_state: Current state of the link
  * @n_link_state_changes: Number of times the link has changed state
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @promiscuous: Promiscuous flag. Protected by netif_tx_lock.
  * @multicast_hash: Multicast hash table
 =======
+=======
+>>>>>>> v3.18
  * @unicast_filter: Flag for Falcon-arch simple unicast filter.
  *	Protected by @mac_lock.
  * @multicast_hash: Multicast hash table for Falcon-arch.
  *	Protected by @mac_lock.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @wanted_fc: Wanted flow control flags
  * @fc_disable: When non-zero flow control is disabled. Typically used to
@@ -1162,14 +1359,20 @@ struct vfdi_status;
  * @loopback_modes: Supported loopback mode bitmask
  * @loopback_selftest: Offline self-test private state
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @drain_pending: Count of RX and TX queues that haven't been flushed and drained.
 =======
+=======
+>>>>>>> v3.18
  * @filter_lock: Filter table lock
  * @filter_state: Architecture-dependent filter table state
  * @rps_flow_id: Flow IDs of filters allocated for accelerated RFS,
  *	indexed by filter ID
  * @rps_expire_index: Next index to check for expiry in @rps_flow_id
  * @active_queues: Count of RX and TX queues that haven't been flushed and drained.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @rxq_flush_pending: Count of number of receive queues that need to be flushed.
  *	Decremented when the efx_flush_rx_queue() is called.
@@ -1190,6 +1393,10 @@ struct vfdi_status;
  * @peer_work: Work item to broadcast peer addresses to VMs.
  * @ptp_data: PTP state data
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @vpd_sn: Serial number read from VPD
+>>>>>>> v3.18
 =======
  * @vpd_sn: Serial number read from VPD
 >>>>>>> v3.18
@@ -1199,12 +1406,18 @@ struct vfdi_status;
  *	field is used by efx_test_interrupts() to verify that an
  *	interrupt has occurred.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @n_rx_nodesc_drop_cnt: RX no descriptor drop count
  * @mac_stats: MAC statistics. These include all statistics the MACs
  *	can provide.  Generic code converts these into a standard
  *	&struct net_device_stats.
  * @stats_lock: Statistics update lock. Serialises statistics fetches
  *	and access to @mac_stats.
+=======
+ * @stats_lock: Statistics update lock. Must be held when calling
+ *	efx_nic_type::{update,start,stop}_stats.
+ * @n_rx_noskb_drops: Count of RX packets dropped due to failure to allocate an skb
+>>>>>>> v3.18
 =======
  * @stats_lock: Statistics update lock. Must be held when calling
  *	efx_nic_type::{update,start,stop}_stats.
@@ -1218,11 +1431,14 @@ struct efx_nic {
 
 	char name[IFNAMSIZ];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev *pci_dev;
 	const struct efx_nic_type *type;
 	int legacy_irq;
 	bool legacy_irq_enabled;
 =======
+=======
+>>>>>>> v3.18
 	struct list_head node;
 	struct efx_nic *primary;
 	struct list_head secondary_list;
@@ -1231,6 +1447,9 @@ struct efx_nic {
 	const struct efx_nic_type *type;
 	int legacy_irq;
 	bool eeh_disabled_legacy_irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct workqueue_struct *workqueue;
 	char workqueue_name[16];
@@ -1249,7 +1468,11 @@ struct efx_nic {
 
 	struct efx_channel *channel[EFX_MAX_CHANNELS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char channel_name[EFX_MAX_CHANNELS][IFNAMSIZ + 6];
+=======
+	struct efx_msi_context msi_context[EFX_MAX_CHANNELS];
+>>>>>>> v3.18
 =======
 	struct efx_msi_context msi_context[EFX_MAX_CHANNELS];
 >>>>>>> v3.18
@@ -1266,6 +1489,11 @@ struct efx_nic {
 	unsigned sram_lim_qw;
 	unsigned next_buffer_table;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	unsigned int max_channels;
+>>>>>>> v3.18
 =======
 
 	unsigned int max_channels;
@@ -1276,6 +1504,10 @@ struct efx_nic {
 	unsigned tx_channel_offset;
 	unsigned n_tx_channels;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int rx_ip_align;
+>>>>>>> v3.18
 =======
 	unsigned int rx_ip_align;
 >>>>>>> v3.18
@@ -1286,11 +1518,17 @@ struct efx_nic {
 	unsigned int rx_bufs_per_page;
 	unsigned int rx_pages_per_batch;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned int rx_prefix_size;
 	int rx_packet_hash_offset;
 	int rx_packet_len_offset;
 	int rx_packet_ts_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 rx_hash_key[40];
 	u32 rx_indir_table[128];
@@ -1300,6 +1538,10 @@ struct efx_nic {
 	unsigned long int_error_expire;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool irq_soft_enabled;
+>>>>>>> v3.18
 =======
 	bool irq_soft_enabled;
 >>>>>>> v3.18
@@ -1314,6 +1556,10 @@ struct efx_nic {
 
 	void *nic_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct efx_mcdi_data *mcdi;
+>>>>>>> v3.18
 =======
 	struct efx_mcdi_data *mcdi;
 >>>>>>> v3.18
@@ -1323,6 +1569,10 @@ struct efx_nic {
 	bool port_enabled;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool mc_bist_for_other_fn;
+>>>>>>> v3.18
 =======
 	bool mc_bist_for_other_fn;
 >>>>>>> v3.18
@@ -1331,6 +1581,12 @@ struct efx_nic {
 
 	struct efx_buffer stats_buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 rx_nodesc_drops_total;
+	u64 rx_nodesc_drops_while_down;
+	bool rx_nodesc_drops_prev_state;
+>>>>>>> v3.18
 =======
 	u64 rx_nodesc_drops_total;
 	u64 rx_nodesc_drops_while_down;
@@ -1349,7 +1605,11 @@ struct efx_nic {
 	unsigned int n_link_state_changes;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool promiscuous;
+=======
+	bool unicast_filter;
+>>>>>>> v3.18
 =======
 	bool unicast_filter;
 >>>>>>> v3.18
@@ -1364,10 +1624,13 @@ struct efx_nic {
 	void *loopback_selftest;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct efx_filter_state *filter_state;
 
 	atomic_t drain_pending;
 =======
+=======
+>>>>>>> v3.18
 	spinlock_t filter_lock;
 	void *filter_state;
 #ifdef CONFIG_RFS_ACCEL
@@ -1376,6 +1639,9 @@ struct efx_nic {
 #endif
 
 	atomic_t active_queues;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	atomic_t rxq_flush_pending;
 	atomic_t rxq_flush_outstanding;
@@ -1398,6 +1664,11 @@ struct efx_nic {
 	struct efx_ptp_data *ptp_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char *vpd_sn;
+
+>>>>>>> v3.18
 =======
 	char *vpd_sn;
 
@@ -1408,9 +1679,14 @@ struct efx_nic {
 	spinlock_t biu_lock;
 	int last_irq_cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned n_rx_nodesc_drop_cnt;
 	struct efx_mac_stats mac_stats;
 	spinlock_t stats_lock;
+=======
+	spinlock_t stats_lock;
+	atomic_t n_rx_noskb_drops;
+>>>>>>> v3.18
 =======
 	spinlock_t stats_lock;
 	atomic_t n_rx_noskb_drops;
@@ -1425,12 +1701,15 @@ static inline int efx_dev_registered(struct efx_nic *efx)
 static inline unsigned int efx_port_num(struct efx_nic *efx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return efx->net_dev->dev_id;
 }
 
 /**
  * struct efx_nic_type - Efx device type definition
 =======
+=======
+>>>>>>> v3.18
 	return efx->port_num;
 }
 
@@ -1445,6 +1724,9 @@ struct efx_mtd_partition {
 /**
  * struct efx_nic_type - Efx device type definition
  * @mem_map_size: Get memory BAR mapped size
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @probe: Probe the controller
  * @remove: Free resources allocated by probe()
@@ -1461,11 +1743,14 @@ struct efx_mtd_partition {
  * @remove_port: Free resources allocated by probe_port()
  * @handle_global_event: Handle a "global" event (may be %NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @prepare_flush: Prepare the hardware for flushing the DMA queues
  * @finish_flush: Clean up after flushing the DMA queues
  * @update_stats: Update statistics not provided by event handling
  * @start_stats: Start the regular fetching of statistics
 =======
+=======
+>>>>>>> v3.18
  * @fini_dmaq: Flush and finalise DMA queues (RX and TX queues)
  * @prepare_flush: Prepare the hardware for flushing the DMA queues
  *	(for Falcon architecture)
@@ -1478,12 +1763,19 @@ struct efx_mtd_partition {
  *	Either argument may be %NULL.
  * @start_stats: Start the regular fetching of statistics
  * @pull_stats: Pull stats from the NIC and wait until they arrive.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @stop_stats: Stop the regular fetching of statistics
  * @set_id_led: Set state of identifying LED or revert to automatic function
  * @push_irq_moderation: Apply interrupt moderation value
  * @reconfigure_port: Push loopback/power/txdis changes to the MAC and PHY
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @prepare_enable_fc_tx: Prepare MAC to enable pause frame TX (may be %NULL)
+>>>>>>> v3.18
 =======
  * @prepare_enable_fc_tx: Prepare MAC to enable pause frame TX (may be %NULL)
 >>>>>>> v3.18
@@ -1494,12 +1786,15 @@ struct efx_mtd_partition {
  * @set_wol: Push WoL configuration to the NIC
  * @resume_wol: Synchronise WoL state between driver and MC (e.g. after resume)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @test_chip: Test registers.  Should use efx_nic_test_registers(), and is
  *	expected to reset the NIC.
  * @test_nvram: Test validity of NVRAM contents
  * @revision: Hardware architecture revision
  * @mem_map_size: Memory BAR mapped size
 =======
+=======
+>>>>>>> v3.18
  * @test_chip: Test registers.  May use efx_farch_test_registers(), and is
  *	expected to reset the NIC.
  * @test_nvram: Test validity of NVRAM contents
@@ -1575,6 +1870,9 @@ struct efx_mtd_partition {
  *	and tx_type will already have been validated but this operation
  *	must validate and update rx_filter.
  * @revision: Hardware architecture revision
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @txd_ptr_tbl_base: TX descriptor ring base address
  * @rxd_ptr_tbl_base: RX descriptor ring base address
@@ -1582,6 +1880,7 @@ struct efx_mtd_partition {
  * @evq_ptr_tbl_base: Event queue pointer table base address
  * @evq_rptr_tbl_base: Event queue read-pointer table base address
  * @max_dma_mask: Maximum possible DMA mask
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @rx_buffer_hash_size: Size of hash at start of RX packet
  * @rx_buffer_padding: Size of padding at end of RX packet
@@ -1600,6 +1899,8 @@ struct efx_nic_type {
 	int (*init)(struct efx_nic *efx);
 	void (*dimension_resources)(struct efx_nic *efx);
 =======
+=======
+>>>>>>> v3.18
  * @rx_prefix_size: Size of RX prefix before packet data
  * @rx_hash_offset: Offset of RX flow hash within prefix
  * @rx_ts_offset: Offset of timestamp within prefix
@@ -1620,6 +1921,9 @@ struct efx_nic_type {
 	void (*remove)(struct efx_nic *efx);
 	int (*init)(struct efx_nic *efx);
 	int (*dimension_resources)(struct efx_nic *efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void (*fini)(struct efx_nic *efx);
 	void (*monitor)(struct efx_nic *efx);
@@ -1630,11 +1934,14 @@ struct efx_nic_type {
 	void (*remove_port)(struct efx_nic *efx);
 	bool (*handle_global_event)(struct efx_channel *channel, efx_qword_t *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*prepare_flush)(struct efx_nic *efx);
 	void (*finish_flush)(struct efx_nic *efx);
 	void (*update_stats)(struct efx_nic *efx);
 	void (*start_stats)(struct efx_nic *efx);
 =======
+=======
+>>>>>>> v3.18
 	int (*fini_dmaq)(struct efx_nic *efx);
 	void (*prepare_flush)(struct efx_nic *efx);
 	void (*finish_flush)(struct efx_nic *efx);
@@ -1645,12 +1952,19 @@ struct efx_nic_type {
 			       struct rtnl_link_stats64 *core_stats);
 	void (*start_stats)(struct efx_nic *efx);
 	void (*pull_stats)(struct efx_nic *efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void (*stop_stats)(struct efx_nic *efx);
 	void (*set_id_led)(struct efx_nic *efx, enum efx_led_mode mode);
 	void (*push_irq_moderation)(struct efx_channel *channel);
 	int (*reconfigure_port)(struct efx_nic *efx);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*prepare_enable_fc_tx)(struct efx_nic *efx);
+>>>>>>> v3.18
 =======
 	void (*prepare_enable_fc_tx)(struct efx_nic *efx);
 >>>>>>> v3.18
@@ -1662,10 +1976,13 @@ struct efx_nic_type {
 	int (*test_chip)(struct efx_nic *efx, struct efx_self_tests *tests);
 	int (*test_nvram)(struct efx_nic *efx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	int revision;
 	unsigned int mem_map_size;
 =======
+=======
+>>>>>>> v3.18
 	void (*mcdi_request)(struct efx_nic *efx,
 			     const efx_dword_t *hdr, size_t hdr_len,
 			     const efx_dword_t *sdu, size_t sdu_len);
@@ -1737,6 +2054,9 @@ struct efx_nic_type {
 				 struct hwtstamp_config *init);
 
 	int revision;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int txd_ptr_tbl_base;
 	unsigned int rxd_ptr_tbl_base;
@@ -1744,6 +2064,7 @@ struct efx_nic_type {
 	unsigned int evq_ptr_tbl_base;
 	unsigned int evq_rptr_tbl_base;
 	u64 max_dma_mask;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int rx_buffer_hash_size;
 	unsigned int rx_buffer_padding;
@@ -1753,6 +2074,8 @@ struct efx_nic_type {
 	unsigned int timer_period_max;
 	netdev_features_t offload_features;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int rx_prefix_size;
 	unsigned int rx_hash_offset;
 	unsigned int rx_ts_offset;
@@ -1765,6 +2088,9 @@ struct efx_nic_type {
 	int mcdi_max_ver;
 	unsigned int max_rx_ip_filters;
 	u32 hwtstamp_filters;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1884,7 +2210,10 @@ static inline struct efx_rx_buffer *efx_rx_buffer(struct efx_rx_queue *rx_queue,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**

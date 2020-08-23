@@ -19,7 +19,12 @@ such as pull-up, multi drive, etc.
 
 Required properties for iomux controller:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: "atmel,at91rm9200-pinctrl"
+=======
+- compatible: "atmel,at91rm9200-pinctrl" or "atmel,at91sam9x5-pinctrl"
+		or "atmel,sama5d3-pinctrl"
+>>>>>>> v3.18
 =======
 - compatible: "atmel,at91rm9200-pinctrl" or "atmel,at91sam9x5-pinctrl"
 		or "atmel,sama5d3-pinctrl"
@@ -43,7 +48,11 @@ Bank: 3 (A, B and C)
   0xffffffff 0x007fffff  /* pioC */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 For each peripheral/bank we will descibe in a u32 if a pin can can be
+=======
+For each peripheral/bank we will descibe in a u32 if a pin can be
+>>>>>>> v3.18
 =======
 For each peripheral/bank we will descibe in a u32 if a pin can be
 >>>>>>> v3.18
@@ -95,6 +104,7 @@ Required properties for pin configuration node:
 
 Bits used for CONFIG:
 <<<<<<< HEAD
+<<<<<<< HEAD
 PULL_UP		(1 << 0): indicate this pin need a pull up.
 MULTIDRIVE	(1 << 1): indicate this pin need to be configured as multidrive.
 DEGLITCH	(1 << 2): indicate this pin need deglitch.
@@ -103,6 +113,8 @@ DIS_SCHMIT	(1 << 4): indicate this pin need to disable schmit trigger.
 DEBOUNCE	(1 << 16): indicate this pin need debounce.
 DEBOUNCE_VAL	(0x3fff << 17): debounce val.
 =======
+=======
+>>>>>>> v3.18
 PULL_UP		(1 << 0): indicate this pin needs a pull up.
 MULTIDRIVE	(1 << 1): indicate this pin needs to be configured as multi-drive.
 			Multi-drive is equivalent to open-drain type output.
@@ -117,6 +129,9 @@ DRIVE_STRENGTH (3 << 5): indicate the drive strength of the pin using the
 				11 - High
 DEBOUNCE	(1 << 16): indicate this pin needs debounce.
 DEBOUNCE_VAL	(0x3fff << 17): debounce value.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 NOTE:

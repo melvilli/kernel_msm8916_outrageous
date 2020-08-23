@@ -80,7 +80,11 @@ MODULE_PARM_DESC(delay_pcm_irq, "Delay PCM interrupt by specified number of samp
  * Class 0401: 1102:0008 (rev 00) Subsystem: 1102:1001 -> Audigy2 Value  Model:SB0400
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_emu10k1_ids) = {
+=======
+static const struct pci_device_id snd_emu10k1_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_emu10k1_ids[] = {
 >>>>>>> v3.18
@@ -122,7 +126,12 @@ static int snd_card_emu10k1_probe(struct pci_dev *pci,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE, 0, &card);
+=======
+	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
+			   0, &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&pci->dev, index[dev], id[dev], THIS_MODULE,
 			   0, &card);
@@ -179,7 +188,12 @@ static int snd_card_emu10k1_probe(struct pci_dev *pci,
 			       sizeof(struct snd_emu10k1_synth_arg), &wave) < 0 ||
 	    wave == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_WARNING "can't initialize Emu10k1 wavetable synth\n");
+=======
+		dev_warn(emu->card->dev,
+			 "can't initialize Emu10k1 wavetable synth\n");
+>>>>>>> v3.18
 =======
 		dev_warn(emu->card->dev,
 			 "can't initialize Emu10k1 wavetable synth\n");
@@ -196,10 +210,15 @@ static int snd_card_emu10k1_probe(struct pci_dev *pci,
 #endif
  
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strlcpy(card->driver, emu->card_capabilities->driver,
 		sizeof(card->driver));
 	strlcpy(card->shortname, emu->card_capabilities->name,
 		sizeof(card->shortname));
+=======
+	strcpy(card->driver, emu->card_capabilities->driver);
+	strcpy(card->shortname, emu->card_capabilities->name);
+>>>>>>> v3.18
 =======
 	strcpy(card->driver, emu->card_capabilities->driver);
 	strcpy(card->shortname, emu->card_capabilities->name);
@@ -224,7 +243,10 @@ static void snd_card_emu10k1_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -272,8 +294,12 @@ static int snd_emu10k1_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "emu10k1: pci_enable_device failed, "
 		       "disabling device\n");
+=======
+		dev_err(dev, "pci_enable_device failed, disabling device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_enable_device failed, disabling device\n");
 >>>>>>> v3.18

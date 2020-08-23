@@ -21,10 +21,13 @@ source "drivers/net/ethernet/3com/Kconfig"
 source "drivers/net/ethernet/adaptec/Kconfig"
 source "drivers/net/ethernet/aeroflex/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/net/ethernet/alteon/Kconfig"
 source "drivers/net/ethernet/amd/Kconfig"
 source "drivers/net/ethernet/apple/Kconfig"
 =======
+=======
+>>>>>>> v3.18
 source "drivers/net/ethernet/agere/Kconfig"
 source "drivers/net/ethernet/allwinner/Kconfig"
 source "drivers/net/ethernet/alteon/Kconfig"
@@ -33,6 +36,9 @@ source "drivers/net/ethernet/amd/Kconfig"
 source "drivers/net/ethernet/apm/Kconfig"
 source "drivers/net/ethernet/apple/Kconfig"
 source "drivers/net/ethernet/arc/Kconfig"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "drivers/net/ethernet/atheros/Kconfig"
 source "drivers/net/ethernet/cadence/Kconfig"
@@ -44,7 +50,10 @@ source "drivers/net/ethernet/chelsio/Kconfig"
 source "drivers/net/ethernet/cirrus/Kconfig"
 source "drivers/net/ethernet/cisco/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config CX_ECAT
 	tristate "Beckhoff CX5020 EtherCAT master support"
@@ -58,6 +67,9 @@ config CX_ECAT
 	  To compile this driver as a module, choose M here. The module
 	  will be called ec_bhf.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "drivers/net/ethernet/davicom/Kconfig"
 
@@ -80,6 +92,10 @@ source "drivers/net/ethernet/faraday/Kconfig"
 source "drivers/net/ethernet/freescale/Kconfig"
 source "drivers/net/ethernet/fujitsu/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/net/ethernet/hisilicon/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/net/ethernet/hisilicon/Kconfig"
 >>>>>>> v3.18
@@ -95,7 +111,10 @@ config JME
 	depends on PCI
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -124,7 +143,11 @@ source "drivers/net/ethernet/mellanox/Kconfig"
 source "drivers/net/ethernet/micrel/Kconfig"
 source "drivers/net/ethernet/microchip/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/net/ethernet/msm/Kconfig"
+=======
+source "drivers/net/ethernet/moxa/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/net/ethernet/moxa/Kconfig"
 >>>>>>> v3.18
@@ -135,7 +158,10 @@ config FEALNX
 	depends on PCI
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -149,7 +175,10 @@ source "drivers/net/ethernet/8390/Kconfig"
 config NET_NETX
 	tristate "NetX Ethernet support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -170,7 +199,10 @@ config ETHOC
 	tristate "OpenCores 10/100 Mbps Ethernet MAC support"
 	depends on HAS_IOMEM && HAS_DMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -184,6 +216,10 @@ source "drivers/net/ethernet/packetengines/Kconfig"
 source "drivers/net/ethernet/pasemi/Kconfig"
 source "drivers/net/ethernet/qlogic/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/net/ethernet/qualcomm/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/net/ethernet/qualcomm/Kconfig"
 >>>>>>> v3.18
@@ -203,6 +239,10 @@ config S6GMAC
 	  will be called s6gmac.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/net/ethernet/samsung/Kconfig"
+>>>>>>> v3.18
 =======
 source "drivers/net/ethernet/samsung/Kconfig"
 >>>>>>> v3.18

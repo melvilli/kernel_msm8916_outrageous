@@ -18,9 +18,12 @@
 
 #include "xfs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_da_btree.h"
 #include "xfs_bmap_btree.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_format.h"
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
@@ -28,13 +31,19 @@
 #include "xfs_ag.h"
 #include "xfs_mount.h"
 #include "xfs_da_format.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_inode.h"
 #include "xfs_attr.h"
 #include "xfs_attr_leaf.h"
 #include "xfs_acl.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_vnodeops.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -59,7 +68,11 @@ xfs_xattr_get(struct dentry *dentry, const char *name,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = -xfs_attr_get(ip, (unsigned char *)name, value, &asize, xflags);
+=======
+	error = xfs_attr_get(ip, (unsigned char *)name, value, &asize, xflags);
+>>>>>>> v3.18
 =======
 	error = xfs_attr_get(ip, (unsigned char *)name, value, &asize, xflags);
 >>>>>>> v3.18
@@ -85,8 +98,13 @@ xfs_xattr_set(struct dentry *dentry, const char *name, const void *value,
 
 	if (!value)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -xfs_attr_remove(ip, (unsigned char *)name, xflags);
 	return -xfs_attr_set(ip, (unsigned char *)name,
+=======
+		return xfs_attr_remove(ip, (unsigned char *)name, xflags);
+	return xfs_attr_set(ip, (unsigned char *)name,
+>>>>>>> v3.18
 =======
 		return xfs_attr_remove(ip, (unsigned char *)name, xflags);
 	return xfs_attr_set(ip, (unsigned char *)name,
@@ -121,8 +139,13 @@ const struct xattr_handler *xfs_xattr_handlers[] = {
 	&xfs_xattr_security_handler,
 #ifdef CONFIG_XFS_POSIX_ACL
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&xfs_xattr_acl_access_handler,
 	&xfs_xattr_acl_default_handler,
+=======
+	&posix_acl_access_xattr_handler,
+	&posix_acl_default_xattr_handler,
+>>>>>>> v3.18
 =======
 	&posix_acl_access_xattr_handler,
 	&posix_acl_default_xattr_handler,

@@ -42,6 +42,10 @@
 #include <linux/seq_file.h>
 #include <linux/compat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/rculist.h>
+>>>>>>> v3.18
 =======
 #include <linux/rculist.h>
 >>>>>>> v3.18
@@ -138,15 +142,21 @@ struct nested_calls {
  */
 struct epitem {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* RB tree node used to link this structure to the eventpoll RB tree */
 	struct rb_node rbn;
 =======
+=======
+>>>>>>> v3.18
 	union {
 		/* RB tree node links this structure to the eventpoll RB tree */
 		struct rb_node rbn;
 		/* Used to free the struct epitem */
 		struct rcu_head rcu;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* List header used to link this structure to the eventpoll ready list */
@@ -302,7 +312,11 @@ static long zero;
 static long long_max = LONG_MAX;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ctl_table epoll_table[] = {
+=======
+struct ctl_table epoll_table[] = {
+>>>>>>> v3.18
 =======
 struct ctl_table epoll_table[] = {
 >>>>>>> v3.18
@@ -598,6 +612,10 @@ static inline void ep_pm_stay_awake_rcu(struct epitem *epi)
  * @priv: Private opaque data passed to the @sproc callback.
  * @depth: The current depth of recursive f_op->poll calls.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @ep_locked: caller already holds ep->mtx
+>>>>>>> v3.18
 =======
  * @ep_locked: caller already holds ep->mtx
 >>>>>>> v3.18
@@ -608,8 +626,12 @@ static int ep_scan_ready_list(struct eventpoll *ep,
 			      int (*sproc)(struct eventpoll *,
 					   struct list_head *, void *),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      void *priv,
 			      int depth)
+=======
+			      void *priv, int depth, bool ep_locked)
+>>>>>>> v3.18
 =======
 			      void *priv, int depth, bool ep_locked)
 >>>>>>> v3.18
@@ -624,7 +646,13 @@ static int ep_scan_ready_list(struct eventpoll *ep,
 	 * eventpoll_release_file() and epoll_ctl().
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock_nested(&ep->mtx, depth);
+=======
+
+	if (!ep_locked)
+		mutex_lock_nested(&ep->mtx, depth);
+>>>>>>> v3.18
 =======
 
 	if (!ep_locked)
@@ -694,7 +722,12 @@ static int ep_scan_ready_list(struct eventpoll *ep,
 	spin_unlock_irqrestore(&ep->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&ep->mtx);
+=======
+	if (!ep_locked)
+		mutex_unlock(&ep->mtx);
+>>>>>>> v3.18
 =======
 	if (!ep_locked)
 		mutex_unlock(&ep->mtx);
@@ -708,13 +741,19 @@ static int ep_scan_ready_list(struct eventpoll *ep,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void epi_rcu_free(struct rcu_head *head)
 {
 	struct epitem *epi = container_of(head, struct epitem, rcu);
 	kmem_cache_free(epi_cache, epi);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Removes a "struct epitem" from the eventpoll RB tree and deallocates
@@ -738,8 +777,12 @@ static int ep_remove(struct eventpoll *ep, struct epitem *epi)
 	/* Remove the current item from the list of epoll hooks */
 	spin_lock(&file->f_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ep_is_linked(&epi->fllink))
 		list_del_init(&epi->fllink);
+=======
+	list_del_rcu(&epi->fllink);
+>>>>>>> v3.18
 =======
 	list_del_rcu(&epi->fllink);
 >>>>>>> v3.18
@@ -754,10 +797,13 @@ static int ep_remove(struct eventpoll *ep, struct epitem *epi)
 
 	wakeup_source_unregister(ep_wakeup_source(epi));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* At this point it is safe to free the eventpoll item */
 	kmem_cache_free(epi_cache, epi);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * At this point it is safe to free the eventpoll item. Use the union
 	 * field epi->rcu, since we are trying to minimize the size of
@@ -766,6 +812,9 @@ static int ep_remove(struct eventpoll *ep, struct epitem *epi)
 	 * use of the rbn field.
 	 */
 	call_rcu(&epi->rcu, epi_rcu_free);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	atomic_long_dec(&ep->user->epoll_watches);
@@ -800,6 +849,10 @@ static void ep_free(struct eventpoll *ep)
 
 		ep_unregister_pollwait(ep, epi);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		cond_resched();
+>>>>>>> v3.18
 =======
 		cond_resched();
 >>>>>>> v3.18
@@ -818,6 +871,10 @@ static void ep_free(struct eventpoll *ep)
 		epi = rb_entry(rbp, struct epitem, rbn);
 		ep_remove(ep, epi);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		cond_resched();
+>>>>>>> v3.18
 =======
 		cond_resched();
 >>>>>>> v3.18
@@ -874,10 +931,13 @@ static int ep_read_events_proc(struct eventpoll *ep, struct list_head *head,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ep_poll_readyevents_proc(void *priv, void *cookie, int call_nests)
 {
 	return ep_scan_ready_list(priv, ep_read_events_proc, NULL, call_nests + 1);
 =======
+=======
+>>>>>>> v3.18
 static void ep_ptable_queue_proc(struct file *file, wait_queue_head_t *whead,
 				 poll_table *pt);
 
@@ -892,6 +952,9 @@ static int ep_poll_readyevents_proc(void *priv, void *cookie, int call_nests)
 
 	return ep_scan_ready_list(arg->ep, ep_read_events_proc, NULL,
 				  call_nests + 1, arg->locked);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -900,7 +963,10 @@ static unsigned int ep_eventpoll_poll(struct file *file, poll_table *wait)
 	int pollflags;
 	struct eventpoll *ep = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct readyevents_arg arg;
 
 	/*
@@ -909,6 +975,9 @@ static unsigned int ep_eventpoll_poll(struct file *file, poll_table *wait)
 	 */
 	arg.locked = wait && (wait->_qproc == ep_ptable_queue_proc);
 	arg.ep = ep;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Insert inside our poll wait queue */
@@ -922,7 +991,11 @@ static unsigned int ep_eventpoll_poll(struct file *file, poll_table *wait)
 	 */
 	pollflags = ep_call_nested(&poll_readywalk_ncalls, EP_MAX_NESTS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   ep_poll_readyevents_proc, ep, ep, current);
+=======
+				   ep_poll_readyevents_proc, &arg, ep, current);
+>>>>>>> v3.18
 =======
 				   ep_poll_readyevents_proc, &arg, ep, current);
 >>>>>>> v3.18
@@ -971,9 +1044,14 @@ static const struct file_operations eventpoll_fops = {
 void eventpoll_release_file(struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *lsthead = &file->f_ep_links;
 	struct eventpoll *ep;
 	struct epitem *epi;
+=======
+	struct eventpoll *ep;
+	struct epitem *epi, *next;
+>>>>>>> v3.18
 =======
 	struct eventpoll *ep;
 	struct epitem *epi, *next;
@@ -994,6 +1072,7 @@ void eventpoll_release_file(struct file *file)
 	 */
 	mutex_lock(&epmutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	while (!list_empty(lsthead)) {
 		epi = list_first_entry(lsthead, struct epitem, fllink);
@@ -1004,12 +1083,19 @@ void eventpoll_release_file(struct file *file)
 	list_for_each_entry_safe(epi, next, &file->f_ep_links, fllink) {
 		ep = epi->ep;
 >>>>>>> v3.18
+=======
+	list_for_each_entry_safe(epi, next, &file->f_ep_links, fllink) {
+		ep = epi->ep;
+>>>>>>> v3.18
 		mutex_lock_nested(&ep->mtx, 0);
 		ep_remove(ep, epi);
 		mutex_unlock(&ep->mtx);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_unlock(&epmutex);
@@ -1250,7 +1336,13 @@ static int reverse_path_check_proc(void *priv, void *cookie, int call_nests)
 	struct epitem *epi;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(epi, &file->f_ep_links, fllink) {
+=======
+	/* CTL_DEL can remove links here, but that can't increase our count */
+	rcu_read_lock();
+	list_for_each_entry_rcu(epi, &file->f_ep_links, fllink) {
+>>>>>>> v3.18
 =======
 	/* CTL_DEL can remove links here, but that can't increase our count */
 	rcu_read_lock();
@@ -1278,6 +1370,10 @@ static int reverse_path_check_proc(void *priv, void *cookie, int call_nests)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rcu_read_unlock();
+>>>>>>> v3.18
 =======
 	rcu_read_unlock();
 >>>>>>> v3.18
@@ -1353,7 +1449,11 @@ static noinline void ep_destroy_wakeup_source(struct epitem *epi)
  */
 static int ep_insert(struct eventpoll *ep, struct epoll_event *event,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     struct file *tfile, int fd)
+=======
+		     struct file *tfile, int fd, int full_check)
+>>>>>>> v3.18
 =======
 		     struct file *tfile, int fd, int full_check)
 >>>>>>> v3.18
@@ -1412,7 +1512,11 @@ static int ep_insert(struct eventpoll *ep, struct epoll_event *event,
 	/* Add the current item to the list of active epoll hook for this file */
 	spin_lock(&tfile->f_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add_tail(&epi->fllink, &tfile->f_ep_links);
+=======
+	list_add_tail_rcu(&epi->fllink, &tfile->f_ep_links);
+>>>>>>> v3.18
 =======
 	list_add_tail_rcu(&epi->fllink, &tfile->f_ep_links);
 >>>>>>> v3.18
@@ -1427,7 +1531,11 @@ static int ep_insert(struct eventpoll *ep, struct epoll_event *event,
 	/* now check if we've created too many backpaths */
 	error = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (reverse_path_check())
+=======
+	if (full_check && reverse_path_check())
+>>>>>>> v3.18
 =======
 	if (full_check && reverse_path_check())
 >>>>>>> v3.18
@@ -1461,8 +1569,12 @@ static int ep_insert(struct eventpoll *ep, struct epoll_event *event,
 error_remove_epi:
 	spin_lock(&tfile->f_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ep_is_linked(&epi->fllink))
 		list_del_init(&epi->fllink);
+=======
+	list_del_rcu(&epi->fllink);
+>>>>>>> v3.18
 =======
 	list_del_rcu(&epi->fllink);
 >>>>>>> v3.18
@@ -1659,7 +1771,11 @@ static int ep_send_events(struct eventpoll *ep,
 	esed.events = events;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ep_scan_ready_list(ep, ep_send_events_proc, &esed, 0);
+=======
+	return ep_scan_ready_list(ep, ep_send_events_proc, &esed, 0, false);
+>>>>>>> v3.18
 =======
 	return ep_scan_ready_list(ep, ep_send_events_proc, &esed, 0, false);
 >>>>>>> v3.18
@@ -1933,18 +2049,24 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 {
 	int error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int did_lock_epmutex = 0;
 	struct file *file, *tfile;
 	struct eventpoll *ep;
 	struct epitem *epi;
 	struct epoll_event epds;
 =======
+=======
+>>>>>>> v3.18
 	int full_check = 0;
 	struct fd f, tf;
 	struct eventpoll *ep;
 	struct epitem *epi;
 	struct epoll_event epds;
 	struct eventpoll *tep = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	error = -EFAULT;
@@ -1952,6 +2074,7 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 	    copy_from_user(&epds, event, sizeof(struct epoll_event)))
 		goto error_return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Get the "struct file *" for the eventpoll file */
 	error = -EBADF;
@@ -1963,6 +2086,8 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 	tfile = fget(fd);
 	if (!tfile)
 =======
+=======
+>>>>>>> v3.18
 	error = -EBADF;
 	f = fdget(epfd);
 	if (!f.file)
@@ -1971,11 +2096,15 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 	/* Get the "struct file *" for the target file */
 	tf = fdget(fd);
 	if (!tf.file)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto error_fput;
 
 	/* The target file descriptor must support poll */
 	error = -EPERM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!tfile->f_op || !tfile->f_op->poll)
 		goto error_tgt_fput;
@@ -1984,12 +2113,17 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 	if ((epds.events & EPOLLWAKEUP) && !capable(CAP_BLOCK_SUSPEND))
 		epds.events &= ~EPOLLWAKEUP;
 =======
+=======
+>>>>>>> v3.18
 	if (!tf.file->f_op->poll)
 		goto error_tgt_fput;
 
 	/* Check if EPOLLWAKEUP is allowed */
 	if (ep_op_has_event(op))
 		ep_take_care_of_epollwakeup(&epds);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1999,7 +2133,11 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 	 */
 	error = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (file == tfile || !is_file_epoll(file))
+=======
+	if (f.file == tf.file || !is_file_epoll(f.file))
+>>>>>>> v3.18
 =======
 	if (f.file == tf.file || !is_file_epoll(f.file))
 >>>>>>> v3.18
@@ -2010,7 +2148,11 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 	 * our own data structure.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ep = file->private_data;
+=======
+	ep = f.file->private_data;
+>>>>>>> v3.18
 =======
 	ep = f.file->private_data;
 >>>>>>> v3.18
@@ -2023,6 +2165,7 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 	 * and hang them on the tfile_check_list, so we can check that we
 	 * haven't created too many possible wakeup paths.
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * We need to hold the epmutex across both ep_insert and ep_remove
 	 * b/c we want to make sure we are looking at a coherent view of
@@ -2046,6 +2189,8 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 	mutex_lock_nested(&ep->mtx, 0);
 
 =======
+=======
+>>>>>>> v3.18
 	 * We do not need to take the global 'epumutex' on EPOLL_CTL_ADD when
 	 * the epoll file descriptor is attaching directly to a wakeup source,
 	 * unless the epoll file descriptor is nested. The purpose of taking the
@@ -2077,6 +2222,9 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Try to lookup the file inside our RB tree, Since we grabbed "mtx"
@@ -2084,7 +2232,11 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 	 * ep_find() till we release the mutex.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	epi = ep_find(ep, tfile, fd);
+=======
+	epi = ep_find(ep, tf.file, fd);
+>>>>>>> v3.18
 =======
 	epi = ep_find(ep, tf.file, fd);
 >>>>>>> v3.18
@@ -2095,16 +2247,22 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 		if (!epi) {
 			epds.events |= POLLERR | POLLHUP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = ep_insert(ep, &epds, tfile, fd);
 		} else
 			error = -EEXIST;
 		clear_tfile_check_list();
 =======
+=======
+>>>>>>> v3.18
 			error = ep_insert(ep, &epds, tf.file, fd, full_check);
 		} else
 			error = -EEXIST;
 		if (full_check)
 			clear_tfile_check_list();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case EPOLL_CTL_DEL:
@@ -2122,6 +2280,7 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&ep->mtx);
 
 error_tgt_fput:
@@ -2132,6 +2291,8 @@ error_tgt_fput:
 error_fput:
 	fput(file);
 =======
+=======
+>>>>>>> v3.18
 	if (tep != NULL)
 		mutex_unlock(&tep->mtx);
 	mutex_unlock(&ep->mtx);
@@ -2143,6 +2304,9 @@ error_tgt_fput:
 	fdput(tf);
 error_fput:
 	fdput(f);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error_return:
 
@@ -2216,8 +2380,13 @@ SYSCALL_DEFINE6(epoll_pwait, int, epfd, struct epoll_event __user *, events,
 		if (copy_from_user(&ksigmask, sigmask, sizeof(ksigmask)))
 			return -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sigdelsetmask(&ksigmask, sigmask(SIGKILL) | sigmask(SIGSTOP));
 		sigprocmask(SIG_SETMASK, &ksigmask, &sigsaved);
+=======
+		sigsaved = current->blocked;
+		set_current_blocked(&ksigmask);
+>>>>>>> v3.18
 =======
 		sigsaved = current->blocked;
 		set_current_blocked(&ksigmask);
@@ -2239,7 +2408,11 @@ SYSCALL_DEFINE6(epoll_pwait, int, epfd, struct epoll_event __user *, events,
 			set_restore_sigmask();
 		} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sigprocmask(SIG_SETMASK, &sigsaved, NULL);
+=======
+			set_current_blocked(&sigsaved);
+>>>>>>> v3.18
 =======
 			set_current_blocked(&sigsaved);
 >>>>>>> v3.18
@@ -2270,8 +2443,13 @@ COMPAT_SYSCALL_DEFINE6(epoll_pwait, int, epfd,
 			return -EFAULT;
 		sigset_from_compat(&ksigmask, &csigmask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sigdelsetmask(&ksigmask, sigmask(SIGKILL) | sigmask(SIGSTOP));
 		sigprocmask(SIG_SETMASK, &ksigmask, &sigsaved);
+=======
+		sigsaved = current->blocked;
+		set_current_blocked(&ksigmask);
+>>>>>>> v3.18
 =======
 		sigsaved = current->blocked;
 		set_current_blocked(&ksigmask);
@@ -2293,7 +2471,11 @@ COMPAT_SYSCALL_DEFINE6(epoll_pwait, int, epfd,
 			set_restore_sigmask();
 		} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sigprocmask(SIG_SETMASK, &sigsaved, NULL);
+=======
+			set_current_blocked(&sigsaved);
+>>>>>>> v3.18
 =======
 			set_current_blocked(&sigsaved);
 >>>>>>> v3.18

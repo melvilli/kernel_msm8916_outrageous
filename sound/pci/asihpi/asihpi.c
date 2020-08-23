@@ -1254,18 +1254,24 @@ static int snd_card_asihpi_pcm_new(struct snd_card_asihpi *asihpi, int device)
 	if (err < 0)
 		return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* pointer to ops struct is stored, dont change ops afterwards! */
 		snd_pcm_set_ops(pcm, SNDRV_PCM_STREAM_PLAYBACK,
 				&snd_card_asihpi_playback_mmap_ops);
 		snd_pcm_set_ops(pcm, SNDRV_PCM_STREAM_CAPTURE,
 				&snd_card_asihpi_capture_mmap_ops);
 =======
+=======
+>>>>>>> v3.18
 
 	/* pointer to ops struct is stored, dont change ops afterwards! */
 	snd_pcm_set_ops(pcm, SNDRV_PCM_STREAM_PLAYBACK,
 			&snd_card_asihpi_playback_mmap_ops);
 	snd_pcm_set_ops(pcm, SNDRV_PCM_STREAM_CAPTURE,
 			&snd_card_asihpi_capture_mmap_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pcm->private_data = asihpi;
@@ -1291,7 +1297,11 @@ struct hpi_control {
 	u16 dst_node_index;
 	u16 band;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[44]; /* copied to snd_ctl_elem_id.name[44]; */
+=======
+	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN]; /* copied to snd_ctl_elem_id.name[44]; */
+>>>>>>> v3.18
 =======
 	char name[SNDRV_CTL_ELEM_ID_NAME_MAXLEN]; /* copied to snd_ctl_elem_id.name[44]; */
 >>>>>>> v3.18
@@ -1927,6 +1937,10 @@ static int snd_asihpi_tuner_band_put(struct snd_kcontrol *kcontrol,
 	*/
 	u32 h_control = kcontrol->private_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int idx;
+>>>>>>> v3.18
 =======
 	unsigned int idx;
 >>>>>>> v3.18
@@ -1938,12 +1952,18 @@ static int snd_asihpi_tuner_band_put(struct snd_kcontrol *kcontrol,
 			HPI_TUNER_BAND_LAST);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	band = tuner_bands[ucontrol->value.enumerated.item[0]];
 =======
+=======
+>>>>>>> v3.18
 	idx = ucontrol->value.enumerated.item[0];
 	if (idx >= ARRAY_SIZE(tuner_bands))
 		idx = ARRAY_SIZE(tuner_bands) - 1;
 	band = tuner_bands[idx];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hpi_handle_error(hpi_tuner_set_band(h_control, band));
 
@@ -2408,7 +2428,12 @@ static int snd_asihpi_clksrc_put(struct snd_kcontrol *kcontrol,
 			(struct snd_card_asihpi *)(kcontrol->private_data);
 	struct clk_cache *clkcache = &asihpi->cc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int change, item;
+=======
+	unsigned int item;
+	int change;
+>>>>>>> v3.18
 =======
 	unsigned int item;
 	int change;
@@ -2852,6 +2877,7 @@ static int snd_asihpi_probe(struct pci_dev *pci_dev,
 	adapter_index = hpi->adapter->index;
 	/* first try to give the card the same index as its hardware index */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(adapter_index,
 			      id[adapter_index], THIS_MODULE,
 			      sizeof(struct snd_card_asihpi),
@@ -2864,6 +2890,8 @@ static int snd_asihpi_probe(struct pci_dev *pci_dev,
 				    sizeof(struct snd_card_asihpi),
 				    &card);
 =======
+=======
+>>>>>>> v3.18
 	err = snd_card_new(&pci_dev->dev, adapter_index, id[adapter_index],
 			   THIS_MODULE, sizeof(struct snd_card_asihpi), &card);
 	if (err < 0) {
@@ -2871,6 +2899,9 @@ static int snd_asihpi_probe(struct pci_dev *pci_dev,
 		err = snd_card_new(&pci_dev->dev, index[dev], id[dev],
 				   THIS_MODULE, sizeof(struct snd_card_asihpi),
 				   &card);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err < 0)
 			return err;
@@ -2880,8 +2911,11 @@ static int snd_asihpi_probe(struct pci_dev *pci_dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci_dev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	asihpi = card->private_data;
@@ -2998,7 +3032,11 @@ static void snd_asihpi_remove(struct pci_dev *pci_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(asihpi_pci_tbl) = {
+=======
+static const struct pci_device_id asihpi_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id asihpi_pci_tbl[] = {
 >>>>>>> v3.18

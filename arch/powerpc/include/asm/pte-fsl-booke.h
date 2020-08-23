@@ -38,6 +38,11 @@
 #define _PMD_BAD	(~PAGE_MASK)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PTE_WIMGE_SHIFT (6)
+
+>>>>>>> v3.18
 =======
 #define PTE_WIMGE_SHIFT (6)
 

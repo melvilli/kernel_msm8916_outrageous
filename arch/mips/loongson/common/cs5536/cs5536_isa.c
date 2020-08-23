@@ -14,6 +14,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pci.h>
+>>>>>>> v3.18
 =======
 #include <linux/pci.h>
 >>>>>>> v3.18
@@ -319,7 +323,10 @@ u32 pci_isa_read_reg(int reg)
 	return conf_data;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * The mfgpt timer interrupt is running early, so we must keep the south bridge
@@ -333,4 +340,7 @@ static void cs5536_isa_mmio_always_on(struct pci_dev *dev)
 }
 DECLARE_PCI_FIXUP_CLASS_EARLY(PCI_VENDOR_ID_AMD, PCI_DEVICE_ID_AMD_CS5536_ISA,
 	PCI_CLASS_BRIDGE_ISA, 8, cs5536_isa_mmio_always_on);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

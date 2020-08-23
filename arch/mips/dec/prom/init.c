@@ -14,6 +14,10 @@
 #include <asm/bootinfo.h>
 #include <asm/cpu.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu-type.h>
 >>>>>>> v3.18
@@ -108,7 +112,11 @@ void __init prom_init(void)
 		rex_clear_cache();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Register the early console.	*/
+=======
+	/* Register the early console.  */
+>>>>>>> v3.18
 =======
 	/* Register the early console.  */
 >>>>>>> v3.18

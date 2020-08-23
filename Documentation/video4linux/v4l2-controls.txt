@@ -78,9 +78,15 @@ Basic usage for V4L2 and sub-device drivers
   Where foo->v4l2_dev is of type struct v4l2_device.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   Finally, remove all control functions from your v4l2_ioctl_ops:
   vidioc_queryctrl, vidioc_querymenu, vidioc_g_ctrl, vidioc_s_ctrl,
   vidioc_g_ext_ctrls, vidioc_try_ext_ctrls and vidioc_s_ext_ctrls.
+=======
+  Finally, remove all control functions from your v4l2_ioctl_ops (if any):
+  vidioc_queryctrl, vidioc_query_ext_ctrl, vidioc_querymenu, vidioc_g_ctrl,
+  vidioc_s_ctrl, vidioc_g_ext_ctrls, vidioc_try_ext_ctrls and vidioc_s_ext_ctrls.
+>>>>>>> v3.18
 =======
   Finally, remove all control functions from your v4l2_ioctl_ops (if any):
   vidioc_queryctrl, vidioc_query_ext_ctrl, vidioc_querymenu, vidioc_g_ctrl,
@@ -131,7 +137,11 @@ You add non-menu controls by calling v4l2_ctrl_new_std:
 			u32 id, s32 min, s32 max, u32 step, s32 def);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Menu controls are added by calling v4l2_ctrl_new_std_menu:
+=======
+Menu and integer menu controls are added by calling v4l2_ctrl_new_std_menu:
+>>>>>>> v3.18
 =======
 Menu and integer menu controls are added by calling v4l2_ctrl_new_std_menu:
 >>>>>>> v3.18
@@ -141,8 +151,11 @@ Menu and integer menu controls are added by calling v4l2_ctrl_new_std_menu:
 			u32 id, s32 max, s32 skip_mask, s32 def);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Or alternatively for integer menu controls, by calling v4l2_ctrl_new_int_menu:
 =======
+=======
+>>>>>>> v3.18
 Menu controls with a driver specific menu are added by calling
 v4l2_ctrl_new_std_menu_items:
 
@@ -153,12 +166,16 @@ v4l2_ctrl_new_std_menu_items:
 
 Integer menu controls with a driver specific menu can be added by calling
 v4l2_ctrl_new_int_menu:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct v4l2_ctrl *v4l2_ctrl_new_int_menu(struct v4l2_ctrl_handler *hdl,
 			const struct v4l2_ctrl_ops *ops,
 			u32 id, s32 max, s32 def, const s64 *qmenu_int);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Standard menu controls with a driver specific menu are added by calling
 v4l2_ctrl_new_std_menu_items:
@@ -168,6 +185,8 @@ v4l2_ctrl_new_std_menu_items:
 		const struct v4l2_ctrl_ops *ops, u32 id, s32 max,
 		s32 skip_mask, s32 def, const char * const *qmenu);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 These functions are typically called right after the v4l2_ctrl_handler_init:
@@ -284,8 +303,13 @@ to actually update the hardware registers.
 
 You're done! And this is sufficient for most of the drivers we have. No need
 <<<<<<< HEAD
+<<<<<<< HEAD
 to do any validation of control values, or implement QUERYCTRL/QUERYMENU. And
 G/S_CTRL as well as G/TRY/S_EXT_CTRLS are automatically supported.
+=======
+to do any validation of control values, or implement QUERYCTRL, QUERY_EXT_CTRL
+and QUERYMENU. And G/S_CTRL as well as G/TRY/S_EXT_CTRLS are automatically supported.
+>>>>>>> v3.18
 =======
 to do any validation of control values, or implement QUERYCTRL, QUERY_EXT_CTRL
 and QUERYMENU. And G/S_CTRL as well as G/TRY/S_EXT_CTRLS are automatically supported.
@@ -319,6 +343,7 @@ Accessing Control Values
 ========================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The v4l2_ctrl struct contains these two unions:
 
 	/* The current control value. */
@@ -344,6 +369,8 @@ a new control this value is made identical to the default value. After calling
 v4l2_ctrl_handler_setup() this value is passed to the hardware. It is generally
 a good idea to call this function.
 =======
+=======
+>>>>>>> v3.18
 The following union is used inside the control framework to access control
 values:
 
@@ -383,6 +410,9 @@ current cached control value. When you create a new control this value is made
 identical to the default value. After calling v4l2_ctrl_handler_setup() this
 value is passed to the hardware. It is generally a good idea to call this
 function.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Whenever a new value is set that new value is automatically cached. This means
@@ -435,8 +465,13 @@ You can also take the handler lock yourself:
 
 	mutex_lock(&state->ctrl_handler.lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "String value is '%s'\n", ctrl1->cur.string);
 	printk(KERN_INFO "Integer value is '%s'\n", ctrl2->cur.val);
+=======
+	pr_info("String value is '%s'\n", ctrl1->p_cur.p_char);
+	pr_info("Integer value is '%s'\n", ctrl2->cur.val);
+>>>>>>> v3.18
 =======
 	pr_info("String value is '%s'\n", ctrl1->p_cur.p_char);
 	pr_info("Integer value is '%s'\n", ctrl2->cur.val);

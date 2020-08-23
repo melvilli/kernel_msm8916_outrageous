@@ -31,8 +31,13 @@
  */
 	.macro	act_mm, rd
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	\rd, sp, lsr #12 + THREAD_SIZE_ORDER
 	mov	\rd, \rd, lsl #12 + THREAD_SIZE_ORDER
+=======
+	bic	\rd, sp, #8128
+	bic	\rd, \rd, #63
+>>>>>>> v3.18
 =======
 	bic	\rd, sp, #8128
 	bic	\rd, \rd, #63
@@ -285,7 +290,11 @@ ENTRY(\name\()_processor_functions)
 	.if \suspend
 	.word	cpu_\name\()_suspend_size
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
+=======
+#ifdef CONFIG_ARM_CPU_SUSPEND
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_ARM_CPU_SUSPEND
 >>>>>>> v3.18
@@ -319,8 +328,11 @@ ENTRY(\name\()_cache_fns)
 	.long	\name\()_dma_map_area
 	.long	\name\()_dma_unmap_area
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.long   \name\()_dma_inv_range
 	.long   \name\()_dma_clean_range
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.long	\name\()_dma_flush_range

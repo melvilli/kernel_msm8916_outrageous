@@ -313,6 +313,12 @@ int r520_init(struct radeon_device *rdev)
 	rv515_set_safe_registers(rdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Initialize power management */
+	radeon_pm_init(rdev);
+
+>>>>>>> v3.18
 =======
 	/* Initialize power management */
 	radeon_pm_init(rdev);

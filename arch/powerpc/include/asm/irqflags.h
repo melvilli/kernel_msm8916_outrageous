@@ -21,9 +21,15 @@
 #define TRACE_WITH_FRAME_BUFFER(func)		\
 	mflr	r0;				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stdu	r1, -32(r1);			\
 	std	r0, 16(r1);			\
 	stdu	r1, -32(r1);			\
+=======
+	stdu	r1, -STACK_FRAME_OVERHEAD(r1);	\
+	std	r0, 16(r1);			\
+	stdu	r1, -STACK_FRAME_OVERHEAD(r1);	\
+>>>>>>> v3.18
 =======
 	stdu	r1, -STACK_FRAME_OVERHEAD(r1);	\
 	std	r0, 16(r1);			\
@@ -39,6 +45,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Most of the CPU's IRQ-state tracing is done from assembly code; we
  * have to call a C function so call a wrapper that saves all the
  * C-clobbered registers.
@@ -51,6 +58,8 @@
  */
 #define SOFT_DISABLE_INTS(__rA, __rB)		\
 =======
+=======
+>>>>>>> v3.18
  * These are calls to C code, so the caller must be prepared for volatiles to
  * be clobbered.
  */
@@ -65,6 +74,9 @@
  * be clobbered.
  */
 #define RECONCILE_IRQ_STATE(__rA, __rB)		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lbz	__rA,PACASOFTIRQEN(r13);	\
 	lbz	__rB,PACAIRQHAPPENED(r13);	\
@@ -82,7 +94,11 @@
 #define TRACE_DISABLE_INTS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SOFT_DISABLE_INTS(__rA, __rB)		\
+=======
+#define RECONCILE_IRQ_STATE(__rA, __rB)		\
+>>>>>>> v3.18
 =======
 #define RECONCILE_IRQ_STATE(__rA, __rB)		\
 >>>>>>> v3.18

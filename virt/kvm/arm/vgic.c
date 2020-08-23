@@ -37,22 +37,29 @@
  *
  * - At any time, the dist->irq_pending_on_cpu is the oracle that knows if
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   something is pending
  * - VGIC pending interrupts are stored on the vgic.irq_state vgic
  *   bitmap (this bitmap is updated by both user land ioctls and guest
  *   mmio ops, and other in-kernel peripherals such as the
  *   arch. timers) and indicate the 'wire' state.
 =======
+=======
+>>>>>>> v3.18
  *   something is pending on the CPU interface.
  * - Interrupts that are pending on the distributor are stored on the
  *   vgic.irq_pending vgic bitmap (this bitmap is updated by both user land
  *   ioctls and guest mmio ops, and other in-kernel peripherals such as the
  *   arch. timers).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * - Every time the bitmap changes, the irq_pending_on_cpu oracle is
  *   recalculated
  * - To calculate the oracle, we need info for each cpu from
  *   compute_pending_for_cpu, which considers:
+<<<<<<< HEAD
 <<<<<<< HEAD
  *   - PPI: dist->irq_state & dist->irq_enable
  *   - SPI: dist->irq_state & dist->irq_enable & dist->irq_spi_target
@@ -61,6 +68,8 @@
  *     information per interrupt, making sure that only one vcpu can
  *     accept the interrupt.
 =======
+=======
+>>>>>>> v3.18
  *   - PPI: dist->irq_pending & dist->irq_enable
  *   - SPI: dist->irq_pending & dist->irq_enable & dist->irq_spi_target
  *   - irq_spi_target is a 'formatted' version of the GICD_ITARGETSRn
@@ -68,6 +77,9 @@
  *     information per interrupt, making sure that only one vcpu can
  *     accept the interrupt.
  * - If any of the above state changes, we must recalculate the oracle.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * - The same is true when injecting an interrupt, except that we only
  *   consider a single interrupt at a time. The irq_spi_cpu array
@@ -79,7 +91,11 @@
  *
  * - When a level interrupt is moved onto a vcpu, the corresponding
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   bit in irq_active is set. As long as this bit is set, the line
+=======
+ *   bit in irq_queued is set. As long as this bit is set, the line
+>>>>>>> v3.18
 =======
  *   bit in irq_queued is set. As long as this bit is set, the line
 >>>>>>> v3.18
@@ -88,9 +104,12 @@
  *   maintenance interrupt on EOI).
  * - When the interrupt is EOIed, the maintenance interrupt fires,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   and clears the corresponding bit in irq_active. This allow the
  *   interrupt line to be sampled again.
 =======
+=======
+>>>>>>> v3.18
  *   and clears the corresponding bit in irq_queued. This allows the
  *   interrupt line to be sampled again.
  * - Note that level-triggered interrupts can also be set to pending from
@@ -98,12 +117,16 @@
  *   cause the interrupt to become inactive in such a situation.
  *   Conversely, writes to GICD_ICPENDRn do not cause the interrupt to become
  *   inactive as long as the external input line is held high.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
 #define VGIC_ADDR_UNDEF		(-1)
 #define IS_VGIC_ADDR_UNDEF(_x)  ((_x) == VGIC_ADDR_UNDEF)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Physical address of vgic virtual cpu interface */
 static phys_addr_t vgic_vcpu_base;
@@ -112,6 +135,11 @@ static phys_addr_t vgic_vcpu_base;
 static void __iomem *vgic_vctrl_base;
 
 static struct device_node *vgic_node;
+=======
+#define PRODUCT_ID_KVM		0x4b	/* ASCII code K */
+#define IMPLEMENTER_ARM		0x43b
+#define GICC_ARCH_VERSION_V2	0x2
+>>>>>>> v3.18
 =======
 #define PRODUCT_ID_KVM		0x4b	/* ASCII code K */
 #define IMPLEMENTER_ARM		0x43b
@@ -129,6 +157,7 @@ static struct device_node *vgic_node;
 
 static void vgic_retire_disabled_irqs(struct kvm_vcpu *vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void vgic_update_state(struct kvm *kvm);
 static void vgic_kick_vcpus(struct kvm *kvm);
 static void vgic_dispatch_sgi(struct kvm_vcpu *vcpu, u32 reg);
@@ -136,6 +165,8 @@ static u32 vgic_nr_lr;
 
 static unsigned int vgic_maint_irq;
 =======
+=======
+>>>>>>> v3.18
 static void vgic_retire_lr(int lr_nr, int irq, struct kvm_vcpu *vcpu);
 static void vgic_update_state(struct kvm *kvm);
 static void vgic_kick_vcpus(struct kvm *kvm);
@@ -202,6 +233,9 @@ static unsigned long *u64_to_bitmask(u64 *val)
 #endif
 	return (unsigned long *)val;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static u32 *vgic_bitmap_get_reg(struct vgic_bitmap *x,
@@ -210,9 +244,15 @@ static u32 *vgic_bitmap_get_reg(struct vgic_bitmap *x,
 	offset >>= 2;
 	if (!offset)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return x->percpu[cpuid].reg;
 	else
 		return x->shared.reg + offset - 1;
+=======
+		return (u32 *)(x->private + cpuid) + REG_OFFSET_SWIZZLE;
+	else
+		return (u32 *)(x->shared) + ((offset - 1) ^ REG_OFFSET_SWIZZLE);
+>>>>>>> v3.18
 =======
 		return (u32 *)(x->private + cpuid) + REG_OFFSET_SWIZZLE;
 	else
@@ -225,9 +265,15 @@ static int vgic_bitmap_get_irq_val(struct vgic_bitmap *x,
 {
 	if (irq < VGIC_NR_PRIVATE_IRQS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return test_bit(irq, x->percpu[cpuid].reg_ul);
 
 	return test_bit(irq - VGIC_NR_PRIVATE_IRQS, x->shared.reg_ul);
+=======
+		return test_bit(irq, x->private + cpuid);
+
+	return test_bit(irq - VGIC_NR_PRIVATE_IRQS, x->shared);
+>>>>>>> v3.18
 =======
 		return test_bit(irq, x->private + cpuid);
 
@@ -242,9 +288,15 @@ static void vgic_bitmap_set_irq_val(struct vgic_bitmap *x, int cpuid,
 
 	if (irq < VGIC_NR_PRIVATE_IRQS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg = x->percpu[cpuid].reg_ul;
 	} else {
 		reg =  x->shared.reg_ul;
+=======
+		reg = x->private + cpuid;
+	} else {
+		reg = x->shared;
+>>>>>>> v3.18
 =======
 		reg = x->private + cpuid;
 	} else {
@@ -262,9 +314,13 @@ static void vgic_bitmap_set_irq_val(struct vgic_bitmap *x, int cpuid,
 static unsigned long *vgic_bitmap_get_cpu_map(struct vgic_bitmap *x, int cpuid)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(cpuid >= VGIC_MAX_CPUS))
 		return NULL;
 	return x->percpu[cpuid].reg_ul;
+=======
+	return x->private + cpuid;
+>>>>>>> v3.18
 =======
 	return x->private + cpuid;
 >>>>>>> v3.18
@@ -273,8 +329,11 @@ static unsigned long *vgic_bitmap_get_cpu_map(struct vgic_bitmap *x, int cpuid)
 static unsigned long *vgic_bitmap_get_shared_map(struct vgic_bitmap *x)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return x->shared.reg_ul;
 =======
+=======
+>>>>>>> v3.18
 	return x->shared;
 }
 
@@ -298,11 +357,15 @@ static void vgic_free_bytemap(struct vgic_bytemap *b)
 	kfree(b->private);
 	b->private = NULL;
 	b->shared = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static u32 *vgic_bytemap_get_reg(struct vgic_bytemap *x, int cpuid, u32 offset)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	offset >>= 2;
 	BUG_ON(offset > (VGIC_NR_IRQS / 4));
@@ -311,6 +374,8 @@ static u32 *vgic_bytemap_get_reg(struct vgic_bytemap *x, int cpuid, u32 offset)
 	else
 		return x->shared + offset - 8;
 =======
+=======
+>>>>>>> v3.18
 	u32 *reg;
 
 	if (offset < VGIC_NR_PRIVATE_IRQS) {
@@ -322,6 +387,9 @@ static u32 *vgic_bytemap_get_reg(struct vgic_bytemap *x, int cpuid, u32 offset)
 	}
 
 	return reg + (offset / sizeof(u32));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -345,6 +413,7 @@ static int vgic_irq_is_enabled(struct kvm_vcpu *vcpu, int irq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vgic_irq_is_active(struct kvm_vcpu *vcpu, int irq)
 {
 	struct vgic_dist *dist = &vcpu->kvm->arch.vgic;
@@ -365,6 +434,8 @@ static void vgic_irq_clear_active(struct kvm_vcpu *vcpu, int irq)
 
 	vgic_bitmap_set_irq_val(&dist->irq_active, vcpu->vcpu_id, irq, 0);
 =======
+=======
+>>>>>>> v3.18
 static int vgic_irq_is_queued(struct kvm_vcpu *vcpu, int irq)
 {
 	struct vgic_dist *dist = &vcpu->kvm->arch.vgic;
@@ -419,6 +490,9 @@ static void vgic_dist_irq_clear_soft_pend(struct kvm_vcpu *vcpu, int irq)
 	struct vgic_dist *dist = &vcpu->kvm->arch.vgic;
 
 	vgic_bitmap_set_irq_val(&dist->irq_soft_pend, vcpu->vcpu_id, irq, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -426,6 +500,7 @@ static int vgic_dist_irq_is_pending(struct kvm_vcpu *vcpu, int irq)
 {
 	struct vgic_dist *dist = &vcpu->kvm->arch.vgic;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return vgic_bitmap_get_irq_val(&dist->irq_state, vcpu->vcpu_id, irq);
 }
@@ -443,6 +518,8 @@ static void vgic_dist_irq_clear(struct kvm_vcpu *vcpu, int irq)
 
 	vgic_bitmap_set_irq_val(&dist->irq_state, vcpu->vcpu_id, irq, 0);
 =======
+=======
+>>>>>>> v3.18
 	return vgic_bitmap_get_irq_val(&dist->irq_pending, vcpu->vcpu_id, irq);
 }
 
@@ -458,6 +535,9 @@ static void vgic_dist_irq_clear_pending(struct kvm_vcpu *vcpu, int irq)
 	struct vgic_dist *dist = &vcpu->kvm->arch.vgic;
 
 	vgic_bitmap_set_irq_val(&dist->irq_pending, vcpu->vcpu_id, irq, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -480,10 +560,13 @@ static void vgic_cpu_irq_clear(struct kvm_vcpu *vcpu, int irq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 mmio_data_read(struct kvm_exit_mmio *mmio, u32 mask)
 {
 	return *((u32 *)mmio->data) & mask;
 =======
+=======
+>>>>>>> v3.18
 static bool vgic_can_sample_irq(struct kvm_vcpu *vcpu, int irq)
 {
 	return vgic_irq_is_edge(vcpu, irq) || !vgic_irq_is_queued(vcpu, irq);
@@ -492,13 +575,20 @@ static bool vgic_can_sample_irq(struct kvm_vcpu *vcpu, int irq)
 static u32 mmio_data_read(struct kvm_exit_mmio *mmio, u32 mask)
 {
 	return le32_to_cpu(*((u32 *)mmio->data)) & mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void mmio_data_write(struct kvm_exit_mmio *mmio, u32 mask, u32 value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*((u32 *)mmio->data) = value & mask;
+=======
+	*((u32 *)mmio->data) = cpu_to_le32(value) & mask;
+>>>>>>> v3.18
 =======
 	*((u32 *)mmio->data) = cpu_to_le32(value) & mask;
 >>>>>>> v3.18
@@ -573,7 +663,11 @@ static bool handle_mmio_misc(struct kvm_vcpu *vcpu,
 
 	switch (offset & ~3) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 0:			/* CTLR */
+=======
+	case 0:			/* GICD_CTLR */
+>>>>>>> v3.18
 =======
 	case 0:			/* GICD_CTLR */
 >>>>>>> v3.18
@@ -588,9 +682,15 @@ static bool handle_mmio_misc(struct kvm_vcpu *vcpu,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 4:			/* TYPER */
 		reg  = (atomic_read(&vcpu->kvm->online_vcpus) - 1) << 5;
 		reg |= (VGIC_NR_IRQS >> 5) - 1;
+=======
+	case 4:			/* GICD_TYPER */
+		reg  = (atomic_read(&vcpu->kvm->online_vcpus) - 1) << 5;
+		reg |= (vcpu->kvm->arch.vgic.nr_irqs >> 5) - 1;
+>>>>>>> v3.18
 =======
 	case 4:			/* GICD_TYPER */
 		reg  = (atomic_read(&vcpu->kvm->online_vcpus) - 1) << 5;
@@ -601,8 +701,13 @@ static bool handle_mmio_misc(struct kvm_vcpu *vcpu,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 8:			/* IIDR */
 		reg = 0x4B00043B;
+=======
+	case 8:			/* GICD_IIDR */
+		reg = (PRODUCT_ID_KVM << 24) | (IMPLEMENTER_ARM << 0);
+>>>>>>> v3.18
 =======
 	case 8:			/* GICD_IIDR */
 		reg = (PRODUCT_ID_KVM << 24) | (IMPLEMENTER_ARM << 0);
@@ -663,12 +768,15 @@ static bool handle_mmio_set_pending_reg(struct kvm_vcpu *vcpu,
 					phys_addr_t offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 *reg = vgic_bitmap_get_reg(&vcpu->kvm->arch.vgic.irq_state,
 				       vcpu->vcpu_id, offset);
 	vgic_reg_access(mmio, reg, offset,
 			ACCESS_READ_VALUE | ACCESS_WRITE_SETBIT);
 	if (mmio->is_write) {
 =======
+=======
+>>>>>>> v3.18
 	u32 *reg, orig;
 	u32 level_mask;
 	struct vgic_dist *dist = &vcpu->kvm->arch.vgic;
@@ -696,6 +804,9 @@ static bool handle_mmio_set_pending_reg(struct kvm_vcpu *vcpu,
 			*reg |= orig & 0xffff;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		vgic_update_state(vcpu->kvm);
 		return true;
@@ -709,12 +820,15 @@ static bool handle_mmio_clear_pending_reg(struct kvm_vcpu *vcpu,
 					  phys_addr_t offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 *reg = vgic_bitmap_get_reg(&vcpu->kvm->arch.vgic.irq_state,
 				       vcpu->vcpu_id, offset);
 	vgic_reg_access(mmio, reg, offset,
 			ACCESS_READ_VALUE | ACCESS_WRITE_CLEARBIT);
 	if (mmio->is_write) {
 =======
+=======
+>>>>>>> v3.18
 	u32 *level_active;
 	u32 *reg, orig;
 	struct vgic_dist *dist = &vcpu->kvm->arch.vgic;
@@ -743,6 +857,9 @@ static bool handle_mmio_clear_pending_reg(struct kvm_vcpu *vcpu,
 		vgic_reg_access(mmio, reg, offset,
 				ACCESS_READ_VALUE | ACCESS_WRITE_CLEARBIT);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		vgic_update_state(vcpu->kvm);
 		return true;
@@ -769,9 +886,13 @@ static u32 vgic_get_target_reg(struct kvm *kvm, int irq)
 {
 	struct vgic_dist *dist = &kvm->arch.vgic;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kvm_vcpu *vcpu;
 	int i, c;
 	unsigned long *bmap;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -780,12 +901,17 @@ static u32 vgic_get_target_reg(struct kvm *kvm, int irq)
 	irq -= VGIC_NR_PRIVATE_IRQS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kvm_for_each_vcpu(c, vcpu, kvm) {
 		bmap = vgic_bitmap_get_shared_map(&dist->irq_spi_target[c]);
 		for (i = 0; i < GICD_IRQS_PER_ITARGETSR; i++)
 			if (test_bit(irq + i, bmap))
 				val |= 1 << (c + i * 8);
 	}
+=======
+	for (i = 0; i < GICD_IRQS_PER_ITARGETSR; i++)
+		val |= 1 << (dist->irq_spi_cpu[irq + i] + i * 8);
+>>>>>>> v3.18
 =======
 	for (i = 0; i < GICD_IRQS_PER_ITARGETSR; i++)
 		val |= 1 << (dist->irq_spi_cpu[irq + i] + i * 8);
@@ -893,16 +1019,22 @@ static bool handle_mmio_cfg_reg(struct kvm_vcpu *vcpu,
 {
 	u32 val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 *reg = vgic_bitmap_get_reg(&vcpu->kvm->arch.vgic.irq_cfg,
 				       vcpu->vcpu_id, offset >> 1);
 	if (offset & 2)
 =======
+=======
+>>>>>>> v3.18
 	u32 *reg;
 
 	reg = vgic_bitmap_get_reg(&vcpu->kvm->arch.vgic.irq_cfg,
 				  vcpu->vcpu_id, offset >> 1);
 
 	if (offset & 4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val = *reg >> 16;
 	else
@@ -913,7 +1045,11 @@ static bool handle_mmio_cfg_reg(struct kvm_vcpu *vcpu,
 			ACCESS_READ_VALUE | ACCESS_WRITE_VALUE);
 	if (mmio->is_write) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (offset < 4) {
+=======
+		if (offset < 8) {
+>>>>>>> v3.18
 =======
 		if (offset < 8) {
 >>>>>>> v3.18
@@ -923,7 +1059,11 @@ static bool handle_mmio_cfg_reg(struct kvm_vcpu *vcpu,
 
 		val = vgic_cfg_compress(val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (offset & 2) {
+=======
+		if (offset & 4) {
+>>>>>>> v3.18
 =======
 		if (offset & 4) {
 >>>>>>> v3.18
@@ -954,7 +1094,10 @@ static bool handle_mmio_sgi_reg(struct kvm_vcpu *vcpu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * vgic_unqueue_irqs - move pending IRQs from LRs to the distributor
  * @vgic_cpu: Pointer to the vgic_cpu struct holding the LRs
@@ -1094,6 +1237,9 @@ static bool handle_mmio_sgi_clear(struct kvm_vcpu *vcpu,
 		return write_set_clear_sgi_pend_reg(vcpu, mmio, offset, false);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * I would have liked to use the kvm_bus_io_*() API instead, but it
@@ -1105,6 +1251,10 @@ struct mmio_range {
 	phys_addr_t base;
 	unsigned long len;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int bits_per_irq;
+>>>>>>> v3.18
 =======
 	int bits_per_irq;
 >>>>>>> v3.18
@@ -1113,23 +1263,34 @@ struct mmio_range {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct mmio_range vgic_ranges[] = {
 	{
 		.base		= GIC_DIST_CTRL,
 		.len		= 12,
 =======
+=======
+>>>>>>> v3.18
 static const struct mmio_range vgic_dist_ranges[] = {
 	{
 		.base		= GIC_DIST_CTRL,
 		.len		= 12,
 		.bits_per_irq	= 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.handle_mmio	= handle_mmio_misc,
 	},
 	{
 		.base		= GIC_DIST_IGROUP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.len		= VGIC_NR_IRQS / 8,
+=======
+		.len		= VGIC_MAX_IRQS / 8,
+		.bits_per_irq	= 1,
+>>>>>>> v3.18
 =======
 		.len		= VGIC_MAX_IRQS / 8,
 		.bits_per_irq	= 1,
@@ -1139,7 +1300,12 @@ static const struct mmio_range vgic_dist_ranges[] = {
 	{
 		.base		= GIC_DIST_ENABLE_SET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.len		= VGIC_NR_IRQS / 8,
+=======
+		.len		= VGIC_MAX_IRQS / 8,
+		.bits_per_irq	= 1,
+>>>>>>> v3.18
 =======
 		.len		= VGIC_MAX_IRQS / 8,
 		.bits_per_irq	= 1,
@@ -1149,7 +1315,12 @@ static const struct mmio_range vgic_dist_ranges[] = {
 	{
 		.base		= GIC_DIST_ENABLE_CLEAR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.len		= VGIC_NR_IRQS / 8,
+=======
+		.len		= VGIC_MAX_IRQS / 8,
+		.bits_per_irq	= 1,
+>>>>>>> v3.18
 =======
 		.len		= VGIC_MAX_IRQS / 8,
 		.bits_per_irq	= 1,
@@ -1159,7 +1330,12 @@ static const struct mmio_range vgic_dist_ranges[] = {
 	{
 		.base		= GIC_DIST_PENDING_SET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.len		= VGIC_NR_IRQS / 8,
+=======
+		.len		= VGIC_MAX_IRQS / 8,
+		.bits_per_irq	= 1,
+>>>>>>> v3.18
 =======
 		.len		= VGIC_MAX_IRQS / 8,
 		.bits_per_irq	= 1,
@@ -1169,7 +1345,12 @@ static const struct mmio_range vgic_dist_ranges[] = {
 	{
 		.base		= GIC_DIST_PENDING_CLEAR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.len		= VGIC_NR_IRQS / 8,
+=======
+		.len		= VGIC_MAX_IRQS / 8,
+		.bits_per_irq	= 1,
+>>>>>>> v3.18
 =======
 		.len		= VGIC_MAX_IRQS / 8,
 		.bits_per_irq	= 1,
@@ -1179,7 +1360,12 @@ static const struct mmio_range vgic_dist_ranges[] = {
 	{
 		.base		= GIC_DIST_ACTIVE_SET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.len		= VGIC_NR_IRQS / 8,
+=======
+		.len		= VGIC_MAX_IRQS / 8,
+		.bits_per_irq	= 1,
+>>>>>>> v3.18
 =======
 		.len		= VGIC_MAX_IRQS / 8,
 		.bits_per_irq	= 1,
@@ -1189,7 +1375,12 @@ static const struct mmio_range vgic_dist_ranges[] = {
 	{
 		.base		= GIC_DIST_ACTIVE_CLEAR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.len		= VGIC_NR_IRQS / 8,
+=======
+		.len		= VGIC_MAX_IRQS / 8,
+		.bits_per_irq	= 1,
+>>>>>>> v3.18
 =======
 		.len		= VGIC_MAX_IRQS / 8,
 		.bits_per_irq	= 1,
@@ -1199,7 +1390,12 @@ static const struct mmio_range vgic_dist_ranges[] = {
 	{
 		.base		= GIC_DIST_PRI,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.len		= VGIC_NR_IRQS,
+=======
+		.len		= VGIC_MAX_IRQS,
+		.bits_per_irq	= 8,
+>>>>>>> v3.18
 =======
 		.len		= VGIC_MAX_IRQS,
 		.bits_per_irq	= 8,
@@ -1209,7 +1405,12 @@ static const struct mmio_range vgic_dist_ranges[] = {
 	{
 		.base		= GIC_DIST_TARGET,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.len		= VGIC_NR_IRQS,
+=======
+		.len		= VGIC_MAX_IRQS,
+		.bits_per_irq	= 8,
+>>>>>>> v3.18
 =======
 		.len		= VGIC_MAX_IRQS,
 		.bits_per_irq	= 8,
@@ -1219,7 +1420,12 @@ static const struct mmio_range vgic_dist_ranges[] = {
 	{
 		.base		= GIC_DIST_CONFIG,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.len		= VGIC_NR_IRQS / 4,
+=======
+		.len		= VGIC_MAX_IRQS / 4,
+		.bits_per_irq	= 2,
+>>>>>>> v3.18
 =======
 		.len		= VGIC_MAX_IRQS / 4,
 		.bits_per_irq	= 2,
@@ -1232,7 +1438,10 @@ static const struct mmio_range vgic_dist_ranges[] = {
 		.handle_mmio	= handle_mmio_sgi_reg,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		.base		= GIC_DIST_SGI_PENDING_CLEAR,
 		.len		= VGIC_NR_SGIS,
@@ -1243,6 +1452,9 @@ static const struct mmio_range vgic_dist_ranges[] = {
 		.len		= VGIC_NR_SGIS,
 		.handle_mmio	= handle_mmio_sgi_set,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };
@@ -1250,6 +1462,7 @@ static const struct mmio_range vgic_dist_ranges[] = {
 static const
 struct mmio_range *find_matching_range(const struct mmio_range *ranges,
 				       struct kvm_exit_mmio *mmio,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				       phys_addr_t base)
 {
@@ -1260,6 +1473,8 @@ struct mmio_range *find_matching_range(const struct mmio_range *ranges,
 		if (addr >= r->base &&
 		    (addr + mmio->len) <= (r->base + r->len))
 =======
+=======
+>>>>>>> v3.18
 				       phys_addr_t offset)
 {
 	const struct mmio_range *r = ranges;
@@ -1267,6 +1482,9 @@ struct mmio_range *find_matching_range(const struct mmio_range *ranges,
 	while (r->len) {
 		if (offset >= r->base &&
 		    (offset + mmio->len) <= (r->base + r->len))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return r;
 		r++;
@@ -1276,7 +1494,10 @@ struct mmio_range *find_matching_range(const struct mmio_range *ranges,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool vgic_validate_access(const struct vgic_dist *dist,
 				 const struct mmio_range *range,
 				 unsigned long offset)
@@ -1293,6 +1514,9 @@ static bool vgic_validate_access(const struct vgic_dist *dist,
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * vgic_handle_mmio - handle an in-kernel MMIO access
@@ -1324,7 +1548,12 @@ bool vgic_handle_mmio(struct kvm_vcpu *vcpu, struct kvm_run *run,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	range = find_matching_range(vgic_ranges, mmio, base);
+=======
+	offset = mmio->phys_addr - base;
+	range = find_matching_range(vgic_dist_ranges, mmio, offset);
+>>>>>>> v3.18
 =======
 	offset = mmio->phys_addr - base;
 	range = find_matching_range(vgic_dist_ranges, mmio, offset);
@@ -1338,8 +1567,11 @@ bool vgic_handle_mmio(struct kvm_vcpu *vcpu, struct kvm_run *run,
 	spin_lock(&vcpu->kvm->arch.vgic.lock);
 	offset = mmio->phys_addr - range->base - base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	updated_state = range->handle_mmio(vcpu, mmio, offset);
 =======
+=======
+>>>>>>> v3.18
 	if (vgic_validate_access(dist, range, offset)) {
 		updated_state = range->handle_mmio(vcpu, mmio, offset);
 	} else {
@@ -1347,6 +1579,9 @@ bool vgic_handle_mmio(struct kvm_vcpu *vcpu, struct kvm_run *run,
 				ACCESS_READ_RAZ | ACCESS_WRITE_IGNORED);
 		updated_state = false;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&vcpu->kvm->arch.vgic.lock);
 	kvm_prepare_mmio(run, mmio);
@@ -1359,12 +1594,18 @@ bool vgic_handle_mmio(struct kvm_vcpu *vcpu, struct kvm_run *run,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u8 *vgic_get_sgi_sources(struct vgic_dist *dist, int vcpu_id, int sgi)
 {
 	return dist->irq_sgi_sources + vcpu_id * VGIC_NR_SGIS + sgi;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void vgic_dispatch_sgi(struct kvm_vcpu *vcpu, u32 reg)
 {
@@ -1385,6 +1626,10 @@ static void vgic_dispatch_sgi(struct kvm_vcpu *vcpu, u32 reg)
 		if (!target_cpus)
 			return;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18
@@ -1402,8 +1647,13 @@ static void vgic_dispatch_sgi(struct kvm_vcpu *vcpu, u32 reg)
 		if (target_cpus & 1) {
 			/* Flag the SGI as pending */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vgic_dist_irq_set(vcpu, sgi);
 			dist->irq_sgi_sources[c][sgi] |= 1 << vcpu_id;
+=======
+			vgic_dist_irq_set_pending(vcpu, sgi);
+			*vgic_get_sgi_sources(dist, c, sgi) |= 1 << vcpu_id;
+>>>>>>> v3.18
 =======
 			vgic_dist_irq_set_pending(vcpu, sgi);
 			*vgic_get_sgi_sources(dist, c, sgi) |= 1 << vcpu_id;
@@ -1416,12 +1666,18 @@ static void vgic_dispatch_sgi(struct kvm_vcpu *vcpu, u32 reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vgic_nr_shared_irqs(struct vgic_dist *dist)
 {
 	return dist->nr_irqs - VGIC_NR_PRIVATE_IRQS;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int compute_pending_for_cpu(struct kvm_vcpu *vcpu)
 {
@@ -1429,6 +1685,10 @@ static int compute_pending_for_cpu(struct kvm_vcpu *vcpu)
 	unsigned long *pending, *enabled, *pend_percpu, *pend_shared;
 	unsigned long pending_private, pending_shared;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int nr_shared = vgic_nr_shared_irqs(dist);
+>>>>>>> v3.18
 =======
 	int nr_shared = vgic_nr_shared_irqs(dist);
 >>>>>>> v3.18
@@ -1438,6 +1698,7 @@ static int compute_pending_for_cpu(struct kvm_vcpu *vcpu)
 	pend_percpu = vcpu->arch.vgic_cpu.pending_percpu;
 	pend_shared = vcpu->arch.vgic_cpu.pending_shared;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pending = vgic_bitmap_get_cpu_map(&dist->irq_state, vcpu_id);
 	enabled = vgic_bitmap_get_cpu_map(&dist->irq_enabled, vcpu_id);
@@ -1455,6 +1716,8 @@ static int compute_pending_for_cpu(struct kvm_vcpu *vcpu)
 	return (pending_private < VGIC_NR_PRIVATE_IRQS ||
 		pending_shared < VGIC_NR_SHARED_IRQS);
 =======
+=======
+>>>>>>> v3.18
 	pending = vgic_bitmap_get_cpu_map(&dist->irq_pending, vcpu_id);
 	enabled = vgic_bitmap_get_cpu_map(&dist->irq_enabled, vcpu_id);
 	bitmap_and(pend_percpu, pending, enabled, VGIC_NR_PRIVATE_IRQS);
@@ -1470,6 +1733,9 @@ static int compute_pending_for_cpu(struct kvm_vcpu *vcpu)
 	pending_shared = find_first_bit(pend_shared, nr_shared);
 	return (pending_private < VGIC_NR_PRIVATE_IRQS ||
 		pending_shared < vgic_nr_shared_irqs(dist));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1485,7 +1751,11 @@ static void vgic_update_state(struct kvm *kvm)
 
 	if (!dist->enabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_bit(0, &dist->irq_pending_on_cpu);
+=======
+		set_bit(0, dist->irq_pending_on_cpu);
+>>>>>>> v3.18
 =======
 		set_bit(0, dist->irq_pending_on_cpu);
 >>>>>>> v3.18
@@ -1496,7 +1766,11 @@ static void vgic_update_state(struct kvm *kvm)
 		if (compute_pending_for_cpu(vcpu)) {
 			pr_debug("CPU%d has pending interrupts\n", c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			set_bit(c, &dist->irq_pending_on_cpu);
+=======
+			set_bit(c, dist->irq_pending_on_cpu);
+>>>>>>> v3.18
 =======
 			set_bit(c, dist->irq_pending_on_cpu);
 >>>>>>> v3.18
@@ -1505,11 +1779,14 @@ static void vgic_update_state(struct kvm *kvm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LR_CPUID(lr)	\
 	(((lr) & GICH_LR_PHYSID_CPUID) >> GICH_LR_PHYSID_CPUID_SHIFT)
 #define MK_LR_PEND(src, irq)	\
 	(GICH_LR_PENDING_BIT | ((src) << GICH_LR_PHYSID_CPUID_SHIFT) | (irq))
 =======
+=======
+>>>>>>> v3.18
 static struct vgic_lr vgic_get_lr(const struct kvm_vcpu *vcpu, int lr)
 {
 	return vgic_ops->get_lr(vcpu, lr);
@@ -1577,6 +1854,9 @@ static void vgic_retire_lr(int lr_nr, int irq, struct kvm_vcpu *vcpu)
 	clear_bit(lr_nr, vgic_cpu->lr_used);
 	vgic_cpu->vgic_irq_lr_map[irq] = LR_EMPTY;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1594,6 +1874,7 @@ static void vgic_retire_disabled_irqs(struct kvm_vcpu *vcpu)
 	int lr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_set_bit(lr, vgic_cpu->lr_used, vgic_cpu->nr_lr) {
 		int irq = vgic_cpu->vgic_lr[lr] & GICH_LR_VIRTUALID;
 
@@ -1604,6 +1885,8 @@ static void vgic_retire_disabled_irqs(struct kvm_vcpu *vcpu)
 			if (vgic_irq_is_active(vcpu, irq))
 				vgic_irq_clear_active(vcpu, irq);
 =======
+=======
+>>>>>>> v3.18
 	for_each_set_bit(lr, vgic_cpu->lr_used, vgic->nr_lr) {
 		struct vgic_lr vlr = vgic_get_lr(vcpu, lr);
 
@@ -1611,6 +1894,9 @@ static void vgic_retire_disabled_irqs(struct kvm_vcpu *vcpu)
 			vgic_retire_lr(lr, vlr.irq, vcpu);
 			if (vgic_irq_is_queued(vcpu, vlr.irq))
 				vgic_irq_clear_queued(vcpu, vlr.irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1624,6 +1910,11 @@ static bool vgic_queue_irq(struct kvm_vcpu *vcpu, u8 sgi_source_id, int irq)
 {
 	struct vgic_cpu *vgic_cpu = &vcpu->arch.vgic_cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct vgic_dist *dist = &vcpu->kvm->arch.vgic;
+	struct vgic_lr vlr;
+>>>>>>> v3.18
 =======
 	struct vgic_dist *dist = &vcpu->kvm->arch.vgic;
 	struct vgic_lr vlr;
@@ -1634,7 +1925,11 @@ static bool vgic_queue_irq(struct kvm_vcpu *vcpu, u8 sgi_source_id, int irq)
 	BUG_ON(sgi_source_id & ~7);
 	BUG_ON(sgi_source_id && irq >= VGIC_NR_SGIS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(irq >= VGIC_NR_IRQS);
+=======
+	BUG_ON(irq >= dist->nr_irqs);
+>>>>>>> v3.18
 =======
 	BUG_ON(irq >= dist->nr_irqs);
 >>>>>>> v3.18
@@ -1645,6 +1940,7 @@ static bool vgic_queue_irq(struct kvm_vcpu *vcpu, u8 sgi_source_id, int irq)
 
 	/* Do we have an active interrupt for the same CPUID? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (lr != LR_EMPTY &&
 	    (LR_CPUID(vgic_cpu->vgic_lr[lr]) == sgi_source_id)) {
 		kvm_debug("LR%d piggyback for IRQ%d %x\n",
@@ -1653,6 +1949,8 @@ static bool vgic_queue_irq(struct kvm_vcpu *vcpu, u8 sgi_source_id, int irq)
 		vgic_cpu->vgic_lr[lr] |= GICH_LR_PENDING_BIT;
 		return true;
 =======
+=======
+>>>>>>> v3.18
 	if (lr != LR_EMPTY) {
 		vlr = vgic_get_lr(vcpu, lr);
 		if (vlr.source == sgi_source_id) {
@@ -1662,11 +1960,15 @@ static bool vgic_queue_irq(struct kvm_vcpu *vcpu, u8 sgi_source_id, int irq)
 			vgic_set_lr(vcpu, lr, vlr);
 			return true;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* Try to use another LR for this interrupt */
 	lr = find_first_zero_bit((unsigned long *)vgic_cpu->lr_used,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			       vgic_cpu->nr_lr);
 	if (lr >= vgic_cpu->nr_lr)
@@ -1680,6 +1982,8 @@ static bool vgic_queue_irq(struct kvm_vcpu *vcpu, u8 sgi_source_id, int irq)
 	if (!vgic_irq_is_edge(vcpu, irq))
 		vgic_cpu->vgic_lr[lr] |= GICH_LR_EOI;
 =======
+=======
+>>>>>>> v3.18
 			       vgic->nr_lr);
 	if (lr >= vgic->nr_lr)
 		return false;
@@ -1695,6 +1999,9 @@ static bool vgic_queue_irq(struct kvm_vcpu *vcpu, u8 sgi_source_id, int irq)
 		vlr.state |= LR_EOI_INT;
 
 	vgic_set_lr(vcpu, lr, vlr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return true;
@@ -1708,9 +2015,15 @@ static bool vgic_queue_sgi(struct kvm_vcpu *vcpu, int irq)
 	int c;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sources = dist->irq_sgi_sources[vcpu_id][irq];
 
 	for_each_set_bit(c, &sources, VGIC_MAX_CPUS) {
+=======
+	sources = *vgic_get_sgi_sources(dist, vcpu_id, irq);
+
+	for_each_set_bit(c, &sources, dist->nr_cpus) {
+>>>>>>> v3.18
 =======
 	sources = *vgic_get_sgi_sources(dist, vcpu_id, irq);
 
@@ -1721,7 +2034,11 @@ static bool vgic_queue_sgi(struct kvm_vcpu *vcpu, int irq)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dist->irq_sgi_sources[vcpu_id][irq] = sources;
+=======
+	*vgic_get_sgi_sources(dist, vcpu_id, irq) = sources;
+>>>>>>> v3.18
 =======
 	*vgic_get_sgi_sources(dist, vcpu_id, irq) = sources;
 >>>>>>> v3.18
@@ -1734,7 +2051,11 @@ static bool vgic_queue_sgi(struct kvm_vcpu *vcpu, int irq)
 	 */
 	if (!sources) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vgic_dist_irq_clear(vcpu, irq);
+=======
+		vgic_dist_irq_clear_pending(vcpu, irq);
+>>>>>>> v3.18
 =======
 		vgic_dist_irq_clear_pending(vcpu, irq);
 >>>>>>> v3.18
@@ -1748,7 +2069,11 @@ static bool vgic_queue_sgi(struct kvm_vcpu *vcpu, int irq)
 static bool vgic_queue_hwirq(struct kvm_vcpu *vcpu, int irq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vgic_irq_is_active(vcpu, irq))
+=======
+	if (!vgic_can_sample_irq(vcpu, irq))
+>>>>>>> v3.18
 =======
 	if (!vgic_can_sample_irq(vcpu, irq))
 >>>>>>> v3.18
@@ -1757,15 +2082,21 @@ static bool vgic_queue_hwirq(struct kvm_vcpu *vcpu, int irq)
 	if (vgic_queue_irq(vcpu, 0, irq)) {
 		if (vgic_irq_is_edge(vcpu, irq)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vgic_dist_irq_clear(vcpu, irq);
 			vgic_cpu_irq_clear(vcpu, irq);
 		} else {
 			vgic_irq_set_active(vcpu, irq);
 =======
+=======
+>>>>>>> v3.18
 			vgic_dist_irq_clear_pending(vcpu, irq);
 			vgic_cpu_irq_clear(vcpu, irq);
 		} else {
 			vgic_irq_set_queued(vcpu, irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1812,7 +2143,11 @@ static void __kvm_vgic_flush_hwstate(struct kvm_vcpu *vcpu)
 
 	/* SPIs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_set_bit(i, vgic_cpu->pending_shared, VGIC_NR_SHARED_IRQS) {
+=======
+	for_each_set_bit(i, vgic_cpu->pending_shared, vgic_nr_shared_irqs(dist)) {
+>>>>>>> v3.18
 =======
 	for_each_set_bit(i, vgic_cpu->pending_shared, vgic_nr_shared_irqs(dist)) {
 >>>>>>> v3.18
@@ -1823,9 +2158,15 @@ static void __kvm_vgic_flush_hwstate(struct kvm_vcpu *vcpu)
 epilog:
 	if (overflow) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vgic_cpu->vgic_hcr |= GICH_HCR_UIE;
 	} else {
 		vgic_cpu->vgic_hcr &= ~GICH_HCR_UIE;
+=======
+		vgic_enable_underflow(vcpu);
+	} else {
+		vgic_disable_underflow(vcpu);
+>>>>>>> v3.18
 =======
 		vgic_enable_underflow(vcpu);
 	} else {
@@ -1838,7 +2179,11 @@ epilog:
 		 * adjust that if needed while exiting.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(vcpu_id, &dist->irq_pending_on_cpu);
+=======
+		clear_bit(vcpu_id, dist->irq_pending_on_cpu);
+>>>>>>> v3.18
 =======
 		clear_bit(vcpu_id, dist->irq_pending_on_cpu);
 >>>>>>> v3.18
@@ -1848,6 +2193,7 @@ epilog:
 static bool vgic_process_maintenance(struct kvm_vcpu *vcpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vgic_cpu *vgic_cpu = &vcpu->arch.vgic_cpu;
 	bool level_pending = false;
 
@@ -1855,17 +2201,23 @@ static bool vgic_process_maintenance(struct kvm_vcpu *vcpu)
 
 	if (vgic_cpu->vgic_misr & GICH_MISR_EOI) {
 =======
+=======
+>>>>>>> v3.18
 	u32 status = vgic_get_interrupt_status(vcpu);
 	bool level_pending = false;
 
 	kvm_debug("STATUS = %08x\n", status);
 
 	if (status & INT_STATUS_EOI) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Some level interrupts have been EOIed. Clear their
 		 * active bit.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		int lr, irq;
 
@@ -1883,6 +2235,8 @@ static bool vgic_process_maintenance(struct kvm_vcpu *vcpu)
 			} else {
 				vgic_cpu_irq_clear(vcpu, irq);
 =======
+=======
+>>>>>>> v3.18
 		u64 eisr = vgic_get_eisr(vcpu);
 		unsigned long *eisr_ptr = u64_to_bitmask(&eisr);
 		int lr;
@@ -1916,6 +2270,9 @@ static bool vgic_process_maintenance(struct kvm_vcpu *vcpu)
 			} else {
 				vgic_dist_irq_clear_pending(vcpu, vlr.irq);
 				vgic_cpu_irq_clear(vcpu, vlr.irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 
@@ -1923,6 +2280,7 @@ static bool vgic_process_maintenance(struct kvm_vcpu *vcpu)
 			 * Despite being EOIed, the LR may not have
 			 * been marked as empty.
 			 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			set_bit(lr, (unsigned long *)vgic_cpu->vgic_elrsr);
 			vgic_cpu->vgic_lr[lr] &= ~GICH_LR_ACTIVE_BIT;
@@ -1932,12 +2290,17 @@ static bool vgic_process_maintenance(struct kvm_vcpu *vcpu)
 	if (vgic_cpu->vgic_misr & GICH_MISR_U)
 		vgic_cpu->vgic_hcr &= ~GICH_HCR_UIE;
 =======
+=======
+>>>>>>> v3.18
 			vgic_sync_lr_elrsr(vcpu, lr, vlr);
 		}
 	}
 
 	if (status & INT_STATUS_UNDERFLOW)
 		vgic_disable_underflow(vcpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return level_pending;
@@ -1952,6 +2315,11 @@ static void __kvm_vgic_sync_hwstate(struct kvm_vcpu *vcpu)
 	struct vgic_cpu *vgic_cpu = &vcpu->arch.vgic_cpu;
 	struct vgic_dist *dist = &vcpu->kvm->arch.vgic;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 elrsr;
+	unsigned long *elrsr_ptr;
+>>>>>>> v3.18
 =======
 	u64 elrsr;
 	unsigned long *elrsr_ptr;
@@ -1961,23 +2329,30 @@ static void __kvm_vgic_sync_hwstate(struct kvm_vcpu *vcpu)
 
 	level_pending = vgic_process_maintenance(vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Clear mappings for empty LRs */
 	for_each_set_bit(lr, (unsigned long *)vgic_cpu->vgic_elrsr,
 			 vgic_cpu->nr_lr) {
 		int irq;
 =======
+=======
+>>>>>>> v3.18
 	elrsr = vgic_get_elrsr(vcpu);
 	elrsr_ptr = u64_to_bitmask(&elrsr);
 
 	/* Clear mappings for empty LRs */
 	for_each_set_bit(lr, elrsr_ptr, vgic->nr_lr) {
 		struct vgic_lr vlr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!test_and_clear_bit(lr, vgic_cpu->lr_used))
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		irq = vgic_cpu->vgic_lr[lr] & GICH_LR_VIRTUALID;
 
@@ -1991,6 +2366,8 @@ static void __kvm_vgic_sync_hwstate(struct kvm_vcpu *vcpu)
 	if (level_pending || pending < vgic_cpu->nr_lr)
 		set_bit(vcpu->vcpu_id, &dist->irq_pending_on_cpu);
 =======
+=======
+>>>>>>> v3.18
 		vlr = vgic_get_lr(vcpu, lr);
 
 		BUG_ON(vlr.irq >= dist->nr_irqs);
@@ -2001,6 +2378,9 @@ static void __kvm_vgic_sync_hwstate(struct kvm_vcpu *vcpu)
 	pending = find_first_zero_bit(elrsr_ptr, vgic->nr_lr);
 	if (level_pending || pending < vgic->nr_lr)
 		set_bit(vcpu->vcpu_id, dist->irq_pending_on_cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2036,7 +2416,11 @@ int kvm_vgic_vcpu_pending_irq(struct kvm_vcpu *vcpu)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return test_bit(vcpu->vcpu_id, &dist->irq_pending_on_cpu);
+=======
+	return test_bit(vcpu->vcpu_id, dist->irq_pending_on_cpu);
+>>>>>>> v3.18
 =======
 	return test_bit(vcpu->vcpu_id, dist->irq_pending_on_cpu);
 >>>>>>> v3.18
@@ -2060,8 +2444,12 @@ static void vgic_kick_vcpus(struct kvm *kvm)
 static int vgic_validate_injection(struct kvm_vcpu *vcpu, int irq, int level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int is_edge = vgic_irq_is_edge(vcpu, irq);
 	int state = vgic_dist_irq_is_pending(vcpu, irq);
+=======
+	int edge_triggered = vgic_irq_is_edge(vcpu, irq);
+>>>>>>> v3.18
 =======
 	int edge_triggered = vgic_irq_is_edge(vcpu, irq);
 >>>>>>> v3.18
@@ -2072,6 +2460,7 @@ static int vgic_validate_injection(struct kvm_vcpu *vcpu, int irq, int level)
 	 * - level triggered and we change level
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_edge)
 		return level > state;
 	else
@@ -2080,6 +2469,8 @@ static int vgic_validate_injection(struct kvm_vcpu *vcpu, int irq, int level)
 
 static bool vgic_update_irq_state(struct kvm *kvm, int cpuid,
 =======
+=======
+>>>>>>> v3.18
 	if (edge_triggered) {
 		int state = vgic_dist_irq_is_pending(vcpu, irq);
 		return level > state;
@@ -2090,13 +2481,20 @@ static bool vgic_update_irq_state(struct kvm *kvm, int cpuid,
 }
 
 static bool vgic_update_irq_pending(struct kvm *kvm, int cpuid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  unsigned int irq_num, bool level)
 {
 	struct vgic_dist *dist = &kvm->arch.vgic;
 	struct kvm_vcpu *vcpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int is_edge, is_level;
+=======
+	int edge_triggered, level_triggered;
+>>>>>>> v3.18
 =======
 	int edge_triggered, level_triggered;
 >>>>>>> v3.18
@@ -2107,8 +2505,13 @@ static bool vgic_update_irq_pending(struct kvm *kvm, int cpuid,
 
 	vcpu = kvm_get_vcpu(kvm, cpuid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	is_edge = vgic_irq_is_edge(vcpu, irq_num);
 	is_level = !is_edge;
+=======
+	edge_triggered = vgic_irq_is_edge(vcpu, irq_num);
+	level_triggered = !edge_triggered;
+>>>>>>> v3.18
 =======
 	edge_triggered = vgic_irq_is_edge(vcpu, irq_num);
 	level_triggered = !edge_triggered;
@@ -2127,11 +2530,14 @@ static bool vgic_update_irq_pending(struct kvm *kvm, int cpuid,
 	kvm_debug("Inject IRQ%d level %d CPU%d\n", irq_num, level, cpuid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (level)
 		vgic_dist_irq_set(vcpu, irq_num);
 	else
 		vgic_dist_irq_clear(vcpu, irq_num);
 =======
+=======
+>>>>>>> v3.18
 	if (level) {
 		if (level_triggered)
 			vgic_dist_irq_set_level(vcpu, irq_num);
@@ -2145,6 +2551,9 @@ static bool vgic_update_irq_pending(struct kvm *kvm, int cpuid,
 			vgic_dist_irq_clear_pending(vcpu, irq_num);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	enabled = vgic_irq_is_enabled(vcpu, irq_num);
@@ -2155,7 +2564,11 @@ static bool vgic_update_irq_pending(struct kvm *kvm, int cpuid,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_level && vgic_irq_is_active(vcpu, irq_num)) {
+=======
+	if (!vgic_can_sample_irq(vcpu, irq_num)) {
+>>>>>>> v3.18
 =======
 	if (!vgic_can_sample_irq(vcpu, irq_num)) {
 >>>>>>> v3.18
@@ -2170,7 +2583,11 @@ static bool vgic_update_irq_pending(struct kvm *kvm, int cpuid,
 	if (level) {
 		vgic_cpu_irq_set(vcpu, irq_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_bit(cpuid, &dist->irq_pending_on_cpu);
+=======
+		set_bit(cpuid, dist->irq_pending_on_cpu);
+>>>>>>> v3.18
 =======
 		set_bit(cpuid, dist->irq_pending_on_cpu);
 >>>>>>> v3.18
@@ -2200,7 +2617,12 @@ int kvm_vgic_inject_irq(struct kvm *kvm, int cpuid, unsigned int irq_num,
 			bool level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vgic_update_irq_state(kvm, cpuid, irq_num, level))
+=======
+	if (likely(vgic_initialized(kvm)) &&
+	    vgic_update_irq_pending(kvm, cpuid, irq_num, level))
+>>>>>>> v3.18
 =======
 	if (likely(vgic_initialized(kvm)) &&
 	    vgic_update_irq_pending(kvm, cpuid, irq_num, level))
@@ -2222,6 +2644,7 @@ static irqreturn_t vgic_maintenance_handler(int irq, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvm_vgic_vcpu_init(struct kvm_vcpu *vcpu)
 {
 	struct vgic_cpu *vgic_cpu = &vcpu->arch.vgic_cpu;
@@ -2236,6 +2659,8 @@ int kvm_vgic_vcpu_init(struct kvm_vcpu *vcpu)
 
 	for (i = 0; i < VGIC_NR_IRQS; i++) {
 =======
+=======
+>>>>>>> v3.18
 void kvm_vgic_vcpu_destroy(struct kvm_vcpu *vcpu)
 {
 	struct vgic_cpu *vgic_cpu = &vcpu->arch.vgic_cpu;
@@ -2276,6 +2701,9 @@ static void kvm_vgic_vcpu_init(struct kvm_vcpu *vcpu)
 	int i;
 
 	for (i = 0; i < dist->nr_irqs; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (i < VGIC_NR_PPIS)
 			vgic_bitmap_set_irq_val(&dist->irq_enabled,
@@ -2288,6 +2716,7 @@ static void kvm_vgic_vcpu_init(struct kvm_vcpu *vcpu)
 	}
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * By forcing VMCR to zero, the GIC will restore the binary
 	 * points to their reset values. Anything else resets to zero
@@ -2410,6 +2839,8 @@ int kvm_vgic_init(struct kvm *kvm)
 	int ret = 0, i;
 
 =======
+=======
+>>>>>>> v3.18
 	 * Store the number of LRs per vcpu, so we don't have to go
 	 * all the way to the distributor structure to find out. Only
 	 * assembly code should use this one.
@@ -2543,6 +2974,9 @@ int kvm_vgic_init(struct kvm *kvm)
 	if (!irqchip_in_kernel(kvm))
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_lock(&kvm->lock);
 
@@ -2557,9 +2991,12 @@ int kvm_vgic_init(struct kvm *kvm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = kvm_phys_addr_ioremap(kvm, kvm->arch.vgic.vgic_cpu_base,
 				    vgic_vcpu_base, KVM_VGIC_V2_CPU_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	ret = vgic_init_maps(kvm);
 	if (ret) {
 		kvm_err("Unable to allocate maps\n");
@@ -2569,12 +3006,16 @@ int kvm_vgic_init(struct kvm *kvm)
 	ret = kvm_phys_addr_ioremap(kvm, kvm->arch.vgic.vgic_cpu_base,
 				    vgic->vcpu_base, KVM_VGIC_V2_CPU_SIZE,
 				    true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		kvm_err("Unable to remap VGIC CPU to VCPU\n");
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = VGIC_NR_PRIVATE_IRQS; i < VGIC_NR_IRQS; i += 4)
 		vgic_set_target_reg(kvm, 0, i);
@@ -2583,6 +3024,8 @@ int kvm_vgic_init(struct kvm *kvm)
 	kvm->arch.vgic.ready = true;
 out:
 =======
+=======
+>>>>>>> v3.18
 	kvm_for_each_vcpu(i, vcpu, kvm)
 		kvm_vgic_vcpu_init(vcpu);
 
@@ -2590,6 +3033,9 @@ out:
 out:
 	if (ret)
 		kvm_vgic_destroy(kvm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&kvm->lock);
 	return ret;
@@ -2598,23 +3044,30 @@ out:
 int kvm_vgic_create(struct kvm *kvm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 	mutex_lock(&kvm->lock);
 
 	if (atomic_read(&kvm->online_vcpus) || kvm->arch.vgic.vctrl_base) {
 =======
+=======
+>>>>>>> v3.18
 	int i, vcpu_lock_idx = -1, ret;
 	struct kvm_vcpu *vcpu;
 
 	mutex_lock(&kvm->lock);
 
 	if (kvm->arch.vgic.vctrl_base) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = -EEXIST;
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_init(&kvm->arch.vgic.lock);
 	kvm->arch.vgic.vctrl_base = vgic_vctrl_base;
@@ -2622,6 +3075,8 @@ int kvm_vgic_create(struct kvm *kvm)
 	kvm->arch.vgic.vgic_cpu_base = VGIC_ADDR_UNDEF;
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Any time a vcpu is run, vcpu_load is called which tries to grab the
 	 * vcpu->mutex.  By grabbing the vcpu->mutex of all VCPUs we ensure
@@ -2652,6 +3107,9 @@ out_unlock:
 		mutex_unlock(&vcpu->mutex);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	mutex_unlock(&kvm->lock);
@@ -2659,7 +3117,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool vgic_ioaddr_overlap(struct kvm *kvm)
+=======
+static int vgic_ioaddr_overlap(struct kvm *kvm)
+>>>>>>> v3.18
 =======
 static int vgic_ioaddr_overlap(struct kvm *kvm)
 >>>>>>> v3.18
@@ -2681,19 +3143,26 @@ static int vgic_ioaddr_assign(struct kvm *kvm, phys_addr_t *ioaddr,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (addr & ~KVM_PHYS_MASK)
 		return -E2BIG;
 
 	if (addr & (SZ_4K - 1))
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!IS_VGIC_ADDR_UNDEF(*ioaddr))
 		return -EEXIST;
 	if (addr + size < addr)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = vgic_ioaddr_overlap(kvm);
 	if (ret)
@@ -2704,6 +3173,8 @@ static int vgic_ioaddr_assign(struct kvm *kvm, phys_addr_t *ioaddr,
 
 int kvm_vgic_set_addr(struct kvm *kvm, unsigned long type, u64 addr)
 =======
+=======
+>>>>>>> v3.18
 	*ioaddr = addr;
 	ret = vgic_ioaddr_overlap(kvm);
 	if (ret)
@@ -2726,11 +3197,15 @@ int kvm_vgic_set_addr(struct kvm *kvm, unsigned long type, u64 addr)
  * information.
  */
 int kvm_vgic_addr(struct kvm *kvm, unsigned long type, u64 *addr, bool write)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int r = 0;
 	struct vgic_dist *vgic = &kvm->arch.vgic;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (addr & ~KVM_PHYS_MASK)
 		return -E2BIG;
@@ -2748,6 +3223,8 @@ int kvm_vgic_addr(struct kvm *kvm, unsigned long type, u64 *addr, bool write)
 		r = vgic_ioaddr_assign(kvm, &vgic->vgic_cpu_base,
 				       addr, KVM_VGIC_V2_CPU_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&kvm->lock);
 	switch (type) {
 	case KVM_VGIC_V2_ADDR_TYPE_DIST:
@@ -2765,6 +3242,9 @@ int kvm_vgic_addr(struct kvm *kvm, unsigned long type, u64 *addr, bool write)
 		} else {
 			*addr = vgic->vgic_cpu_base;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -2775,7 +3255,10 @@ int kvm_vgic_addr(struct kvm *kvm, unsigned long type, u64 *addr, bool write)
 	return r;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static bool handle_cpu_mmio_misc(struct kvm_vcpu *vcpu,
 				 struct kvm_exit_mmio *mmio, phys_addr_t offset)
@@ -3195,4 +3678,7 @@ out_free_irq:
 	free_percpu_irq(vgic->maint_irq, kvm_get_running_vcpus());
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

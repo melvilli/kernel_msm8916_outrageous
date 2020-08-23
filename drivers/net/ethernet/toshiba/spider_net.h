@@ -30,8 +30,13 @@
 #include <linux/sungem_phy.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int spider_net_stop(struct net_device *netdev);
 extern int spider_net_open(struct net_device *netdev);
+=======
+int spider_net_stop(struct net_device *netdev);
+int spider_net_open(struct net_device *netdev);
+>>>>>>> v3.18
 =======
 int spider_net_stop(struct net_device *netdev);
 int spider_net_open(struct net_device *netdev);

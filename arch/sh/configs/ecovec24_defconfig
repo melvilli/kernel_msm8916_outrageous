@@ -108,7 +108,10 @@ CONFIG_SND_SOC_SH4_FSI=y
 CONFIG_SND_FSI_DA7210=y
 CONFIG_USB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_USB_MON=y

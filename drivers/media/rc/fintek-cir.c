@@ -149,7 +149,10 @@ static int fintek_hw_detect(struct fintek_dev *fintek)
 	u8 portsel, ir_class;
 	u16 vendor, chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -212,7 +215,11 @@ static int fintek_hw_detect(struct fintek_dev *fintek)
 	spin_unlock_irqrestore(&fintek->fintek_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -549,7 +556,11 @@ static int fintek_probe(struct pnp_dev *pdev, const struct pnp_device_id *dev_id
 	rdev->priv = fintek;
 	rdev->driver_type = RC_DRIVER_IR_RAW;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev->allowed_protos = RC_BIT_ALL;
+=======
+	rdev->allowed_protocols = RC_BIT_ALL;
+>>>>>>> v3.18
 =======
 	rdev->allowed_protocols = RC_BIT_ALL;
 >>>>>>> v3.18
@@ -656,7 +667,10 @@ static int fintek_suspend(struct pnp_dev *pdev, pm_message_t state)
 static int fintek_resume(struct pnp_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct fintek_dev *fintek = pnp_get_drvdata(pdev);
@@ -676,7 +690,11 @@ static int fintek_resume(struct pnp_dev *pdev)
 	fintek_cir_regs_init(fintek);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -705,7 +723,11 @@ static struct pnp_driver fintek_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fintek_init(void)
+=======
+static int __init fintek_init(void)
+>>>>>>> v3.18
 =======
 static int __init fintek_init(void)
 >>>>>>> v3.18
@@ -714,7 +736,11 @@ static int __init fintek_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void fintek_exit(void)
+=======
+static void __exit fintek_exit(void)
+>>>>>>> v3.18
 =======
 static void __exit fintek_exit(void)
 >>>>>>> v3.18

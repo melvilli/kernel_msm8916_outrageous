@@ -19,9 +19,12 @@ omapdrm-y := omap_drv.o \
 	tcm-sita.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # temporary:
 omapdrm-y += omap_gem_helpers.o
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_DRM_OMAP)	+= omapdrm.o

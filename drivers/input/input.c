@@ -268,8 +268,11 @@ static int input_get_disposition(struct input_dev *dev,
 		switch (code) {
 		case SYN_CONFIG:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case SYN_TIME_SEC:
 		case SYN_TIME_NSEC:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			disposition = INPUT_PASS_TO_ALL;
@@ -504,7 +507,12 @@ void input_set_abs_params(struct input_dev *dev, unsigned int axis,
 	absinfo->flat = flat;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->absbit[BIT_WORD(axis)] |= BIT_MASK(axis);
+=======
+	__set_bit(EV_ABS, dev->evbit);
+	__set_bit(axis, dev->absbit);
+>>>>>>> v3.18
 =======
 	__set_bit(EV_ABS, dev->evbit);
 	__set_bit(axis, dev->absbit);
@@ -1666,6 +1674,7 @@ static void input_dev_toggle(struct input_dev *dev, bool activate)
 void input_reset_device(struct input_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&dev->mutex);
 
 	if (dev->users) {
@@ -1683,6 +1692,8 @@ void input_reset_device(struct input_dev *dev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	mutex_lock(&dev->mutex);
@@ -1692,13 +1703,20 @@ void input_reset_device(struct input_dev *dev)
 	input_dev_release_keys(dev);
 
 	spin_unlock_irqrestore(&dev->event_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&dev->mutex);
 }
 EXPORT_SYMBOL(input_reset_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -1707,6 +1725,7 @@ static int input_dev_suspend(struct device *dev)
 	struct input_dev *input_dev = to_input_dev(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&input_dev->mutex);
 
 	if (input_dev->users)
@@ -1714,6 +1733,8 @@ static int input_dev_suspend(struct device *dev)
 
 	mutex_unlock(&input_dev->mutex);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irq(&input_dev->event_lock);
 
 	/*
@@ -1726,6 +1747,9 @@ static int input_dev_suspend(struct device *dev)
 	input_dev_toggle(input_dev, false);
 
 	spin_unlock_irq(&input_dev->event_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1736,8 +1760,11 @@ static int input_dev_resume(struct device *dev)
 	struct input_dev *input_dev = to_input_dev(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input_reset_device(input_dev);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irq(&input_dev->event_lock);
 
 	/* Restore state of LEDs and sounds, if any were active. */
@@ -1775,6 +1802,9 @@ static int input_dev_poweroff(struct device *dev)
 	input_dev_toggle(input_dev, false);
 
 	spin_unlock_irq(&input_dev->event_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1784,7 +1814,12 @@ static const struct dev_pm_ops input_dev_pm_ops = {
 	.suspend	= input_dev_suspend,
 	.resume		= input_dev_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.poweroff	= input_dev_suspend,
+=======
+	.freeze		= input_dev_freeze,
+	.poweroff	= input_dev_poweroff,
+>>>>>>> v3.18
 =======
 	.freeze		= input_dev_freeze,
 	.poweroff	= input_dev_poweroff,
@@ -1798,7 +1833,11 @@ static struct device_type input_dev_type = {
 	.release	= input_dev_release,
 	.uevent		= input_dev_uevent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -1829,6 +1868,10 @@ EXPORT_SYMBOL_GPL(input_class);
 struct input_dev *input_allocate_device(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	static atomic_t input_no = ATOMIC_INIT(0);
+>>>>>>> v3.18
 =======
 	static atomic_t input_no = ATOMIC_INIT(0);
 >>>>>>> v3.18
@@ -1842,10 +1885,13 @@ struct input_dev *input_allocate_device(void)
 		mutex_init(&dev->mutex);
 		spin_lock_init(&dev->event_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_LIST_HEAD(&dev->h_list);
 		INIT_LIST_HEAD(&dev->node);
 
 =======
+=======
+>>>>>>> v3.18
 		init_timer(&dev->timer);
 		INIT_LIST_HEAD(&dev->h_list);
 		INIT_LIST_HEAD(&dev->node);
@@ -1853,6 +1899,9 @@ struct input_dev *input_allocate_device(void)
 		dev_set_name(&dev->dev, "input%lu",
 			     (unsigned long) atomic_inc_return(&input_no) - 1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__module_get(THIS_MODULE);
 	}
@@ -2132,7 +2181,10 @@ static void devm_input_device_unregister(struct device *dev, void *res)
 int input_register_device(struct input_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static atomic_t input_no = ATOMIC_INIT(0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct input_devres *devres = NULL;
@@ -2164,7 +2216,11 @@ int input_register_device(struct input_dev *dev)
 		dev->hint_events_per_packet = packet_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->max_vals = max(dev->hint_events_per_packet, packet_size) + 2;
+=======
+	dev->max_vals = dev->hint_events_per_packet + 2;
+>>>>>>> v3.18
 =======
 	dev->max_vals = dev->hint_events_per_packet + 2;
 >>>>>>> v3.18
@@ -2179,7 +2235,10 @@ int input_register_device(struct input_dev *dev)
 	 * is handled by the driver itself and we don't do it in input.c.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_timer(&dev->timer);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!dev->rep[REP_DELAY] && !dev->rep[REP_PERIOD]) {
@@ -2196,9 +2255,12 @@ int input_register_device(struct input_dev *dev)
 		dev->setkeycode = input_default_setkeycode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_name(&dev->dev, "input%ld",
 		     (unsigned long) atomic_inc_return(&input_no) - 1);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	error = device_add(&dev->dev);

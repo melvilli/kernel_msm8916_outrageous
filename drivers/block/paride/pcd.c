@@ -70,8 +70,13 @@
                         idle CPU time, at the expense of some speed.
  
 <<<<<<< HEAD
+<<<<<<< HEAD
 	If this driver is built into the kernel, you can use kernel
         the following command line parameters, with the same values
+=======
+	If this driver is built into the kernel, you can use the
+        following kernel command line parameters, with the same values
+>>>>>>> v3.18
 =======
 	If this driver is built into the kernel, you can use the
         following kernel command line parameters, with the same values
@@ -753,7 +758,11 @@ static void do_pcd_request(struct request_queue * q)
 			pcd_sector = blk_rq_pos(pcd_req);
 			pcd_count = blk_rq_cur_sectors(pcd_req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pcd_buf = pcd_req->buffer;
+=======
+			pcd_buf = bio_data(pcd_req->bio);
+>>>>>>> v3.18
 =======
 			pcd_buf = bio_data(pcd_req->bio);
 >>>>>>> v3.18

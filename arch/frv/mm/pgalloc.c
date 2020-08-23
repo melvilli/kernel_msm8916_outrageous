@@ -38,12 +38,15 @@ pgtable_t pte_alloc_one(struct mm_struct *mm, unsigned long address)
 	page = alloc_pages(GFP_KERNEL|__GFP_REPEAT, 0);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (page) {
 		clear_highpage(page);
 		pgtable_page_ctor(page);
 		flush_dcache_page(page);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!page)
 		return NULL;
 
@@ -53,6 +56,9 @@ pgtable_t pte_alloc_one(struct mm_struct *mm, unsigned long address)
 		return NULL;
 	}
 	flush_dcache_page(page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return page;
 }

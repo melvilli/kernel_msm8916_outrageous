@@ -31,6 +31,11 @@
 #define POLLFREE	0x4000	/* currently only for epoll */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define POLL_BUSY_LOOP	0x8000
+
+>>>>>>> v3.18
 =======
 #define POLL_BUSY_LOOP	0x8000
 

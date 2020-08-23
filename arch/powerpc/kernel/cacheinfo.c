@@ -13,7 +13,10 @@
 #include <linux/cpu.h>
 #include <linux/cpumask.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -135,7 +138,12 @@ static const char *cache_type_string(const struct cache *cache)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cache_init(struct cache *cache, int type, int level, struct device_node *ofnode)
+=======
+static void cache_init(struct cache *cache, int type, int level,
+		       struct device_node *ofnode)
+>>>>>>> v3.18
 =======
 static void cache_init(struct cache *cache, int type, int level,
 		       struct device_node *ofnode)
@@ -149,7 +157,11 @@ static void cache_init(struct cache *cache, int type, int level,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cache *__cpuinit new_cache(int type, int level, struct device_node *ofnode)
+=======
+static struct cache *new_cache(int type, int level, struct device_node *ofnode)
+>>>>>>> v3.18
 =======
 static struct cache *new_cache(int type, int level, struct device_node *ofnode)
 >>>>>>> v3.18
@@ -208,7 +220,11 @@ static int cache_size(const struct cache *cache, unsigned int *ret)
 {
 	const char *propname;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *cache_size;
+=======
+	const __be32 *cache_size;
+>>>>>>> v3.18
 =======
 	const __be32 *cache_size;
 >>>>>>> v3.18
@@ -220,7 +236,11 @@ static int cache_size(const struct cache *cache, unsigned int *ret)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ret = *cache_size;
+=======
+	*ret = of_read_number(cache_size, 1);
+>>>>>>> v3.18
 =======
 	*ret = of_read_number(cache_size, 1);
 >>>>>>> v3.18
@@ -242,7 +262,11 @@ static int cache_size_kb(const struct cache *cache, unsigned int *ret)
 static int cache_get_line_size(const struct cache *cache, unsigned int *ret)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *line_size;
+=======
+	const __be32 *line_size;
+>>>>>>> v3.18
 =======
 	const __be32 *line_size;
 >>>>>>> v3.18
@@ -263,7 +287,11 @@ static int cache_get_line_size(const struct cache *cache, unsigned int *ret)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ret = *line_size;
+=======
+	*ret = of_read_number(line_size, 1);
+>>>>>>> v3.18
 =======
 	*ret = of_read_number(line_size, 1);
 >>>>>>> v3.18
@@ -274,7 +302,11 @@ static int cache_nr_sets(const struct cache *cache, unsigned int *ret)
 {
 	const char *propname;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *nr_sets;
+=======
+	const __be32 *nr_sets;
+>>>>>>> v3.18
 =======
 	const __be32 *nr_sets;
 >>>>>>> v3.18
@@ -286,7 +318,11 @@ static int cache_nr_sets(const struct cache *cache, unsigned int *ret)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ret = *nr_sets;
+=======
+	*ret = of_read_number(nr_sets, 1);
+>>>>>>> v3.18
 =======
 	*ret = of_read_number(nr_sets, 1);
 >>>>>>> v3.18
@@ -361,7 +397,12 @@ static bool cache_node_is_unified(const struct device_node *np)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cache *__cpuinit cache_do_one_devnode_unified(struct device_node *node, int level)
+=======
+static struct cache *cache_do_one_devnode_unified(struct device_node *node,
+						  int level)
+>>>>>>> v3.18
 =======
 static struct cache *cache_do_one_devnode_unified(struct device_node *node,
 						  int level)
@@ -377,7 +418,12 @@ static struct cache *cache_do_one_devnode_unified(struct device_node *node,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cache *__cpuinit cache_do_one_devnode_split(struct device_node *node, int level)
+=======
+static struct cache *cache_do_one_devnode_split(struct device_node *node,
+						int level)
+>>>>>>> v3.18
 =======
 static struct cache *cache_do_one_devnode_split(struct device_node *node,
 						int level)
@@ -404,7 +450,11 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cache *__cpuinit cache_do_one_devnode(struct device_node *node, int level)
+=======
+static struct cache *cache_do_one_devnode(struct device_node *node, int level)
+>>>>>>> v3.18
 =======
 static struct cache *cache_do_one_devnode(struct device_node *node, int level)
 >>>>>>> v3.18
@@ -420,7 +470,12 @@ static struct cache *cache_do_one_devnode(struct device_node *node, int level)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cache *__cpuinit cache_lookup_or_instantiate(struct device_node *node, int level)
+=======
+static struct cache *cache_lookup_or_instantiate(struct device_node *node,
+						 int level)
+>>>>>>> v3.18
 =======
 static struct cache *cache_lookup_or_instantiate(struct device_node *node,
 						 int level)
@@ -441,7 +496,11 @@ static struct cache *cache_lookup_or_instantiate(struct device_node *node,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit link_cache_lists(struct cache *smaller, struct cache *bigger)
+=======
+static void link_cache_lists(struct cache *smaller, struct cache *bigger)
+>>>>>>> v3.18
 =======
 static void link_cache_lists(struct cache *smaller, struct cache *bigger)
 >>>>>>> v3.18
@@ -456,7 +515,11 @@ static void link_cache_lists(struct cache *smaller, struct cache *bigger)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit do_subsidiary_caches_debugcheck(struct cache *cache)
+=======
+static void do_subsidiary_caches_debugcheck(struct cache *cache)
+>>>>>>> v3.18
 =======
 static void do_subsidiary_caches_debugcheck(struct cache *cache)
 >>>>>>> v3.18
@@ -466,7 +529,11 @@ static void do_subsidiary_caches_debugcheck(struct cache *cache)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit do_subsidiary_caches(struct cache *cache)
+=======
+static void do_subsidiary_caches(struct cache *cache)
+>>>>>>> v3.18
 =======
 static void do_subsidiary_caches(struct cache *cache)
 >>>>>>> v3.18
@@ -491,7 +558,11 @@ static void do_subsidiary_caches(struct cache *cache)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cache *__cpuinit cache_chain_instantiate(unsigned int cpu_id)
+=======
+static struct cache *cache_chain_instantiate(unsigned int cpu_id)
+>>>>>>> v3.18
 =======
 static struct cache *cache_chain_instantiate(unsigned int cpu_id)
 >>>>>>> v3.18
@@ -520,7 +591,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cache_dir *__cpuinit cacheinfo_create_cache_dir(unsigned int cpu_id)
+=======
+static struct cache_dir *cacheinfo_create_cache_dir(unsigned int cpu_id)
+>>>>>>> v3.18
 =======
 static struct cache_dir *cacheinfo_create_cache_dir(unsigned int cpu_id)
 >>>>>>> v3.18
@@ -729,7 +804,11 @@ static struct kobj_type cache_index_type = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cacheinfo_create_index_opt_attrs(struct cache_index_dir *dir)
+=======
+static void cacheinfo_create_index_opt_attrs(struct cache_index_dir *dir)
+>>>>>>> v3.18
 =======
 static void cacheinfo_create_index_opt_attrs(struct cache_index_dir *dir)
 >>>>>>> v3.18
@@ -776,7 +855,12 @@ static void cacheinfo_create_index_opt_attrs(struct cache_index_dir *dir)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cacheinfo_create_index_dir(struct cache *cache, int index, struct cache_dir *cache_dir)
+=======
+static void cacheinfo_create_index_dir(struct cache *cache, int index,
+				       struct cache_dir *cache_dir)
+>>>>>>> v3.18
 =======
 static void cacheinfo_create_index_dir(struct cache *cache, int index,
 				       struct cache_dir *cache_dir)
@@ -807,7 +891,12 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cacheinfo_sysfs_populate(unsigned int cpu_id, struct cache *cache_list)
+=======
+static void cacheinfo_sysfs_populate(unsigned int cpu_id,
+				     struct cache *cache_list)
+>>>>>>> v3.18
 =======
 static void cacheinfo_sysfs_populate(unsigned int cpu_id,
 				     struct cache *cache_list)
@@ -830,7 +919,11 @@ static void cacheinfo_sysfs_populate(unsigned int cpu_id,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit cacheinfo_cpu_online(unsigned int cpu_id)
+=======
+void cacheinfo_cpu_online(unsigned int cpu_id)
+>>>>>>> v3.18
 =======
 void cacheinfo_cpu_online(unsigned int cpu_id)
 >>>>>>> v3.18
@@ -845,12 +938,18 @@ void cacheinfo_cpu_online(unsigned int cpu_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HOTPLUG_CPU /* functions needed for cpu offline */
 =======
+=======
+>>>>>>> v3.18
 /* functions needed to remove cache entry for cpu offline or suspend/resume */
 
 #if (defined(CONFIG_PPC_PSERIES) && defined(CONFIG_SUSPEND)) || \
     defined(CONFIG_HOTPLUG_CPU)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct cache *cache_lookup_by_cpu(unsigned int cpu_id)
@@ -939,7 +1038,11 @@ void cacheinfo_cpu_offline(unsigned int cpu_id)
 		cache_cpu_clear(cache, cpu_id);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_HOTPLUG_CPU */
+=======
+#endif /* (CONFIG_PPC_PSERIES && CONFIG_SUSPEND) || CONFIG_HOTPLUG_CPU */
+>>>>>>> v3.18
 =======
 #endif /* (CONFIG_PPC_PSERIES && CONFIG_SUSPEND) || CONFIG_HOTPLUG_CPU */
 >>>>>>> v3.18

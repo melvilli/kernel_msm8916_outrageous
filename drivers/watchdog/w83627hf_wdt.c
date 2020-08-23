@@ -2,6 +2,12 @@
  *	w83627hf/thf WDT driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *	(c) Copyright 2013 Guenter Roeck
+ *		converted to watchdog infrastructure
+ *
+>>>>>>> v3.18
 =======
  *	(c) Copyright 2013 Guenter Roeck
  *		converted to watchdog infrastructure
@@ -38,9 +44,13 @@
 #include <linux/moduleparam.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>
 #include <linux/watchdog.h>
 #include <linux/fs.h>
+=======
+#include <linux/watchdog.h>
+>>>>>>> v3.18
 =======
 #include <linux/watchdog.h>
 >>>>>>> v3.18
@@ -49,6 +59,7 @@
 #include <linux/reboot.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/spinlock.h>
 #include <linux/io.h>
 #include <linux/uaccess.h>
@@ -56,10 +67,14 @@
 =======
 #include <linux/io.h>
 >>>>>>> v3.18
+=======
+#include <linux/io.h>
+>>>>>>> v3.18
 
 #define WATCHDOG_NAME "w83627hf/thf/hg/dhg WDT"
 #define WATCHDOG_TIMEOUT 60		/* 60 sec default timeout */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned long wdt_is_open;
 static char expect_close;
@@ -72,6 +87,8 @@ MODULE_PARM_DESC(wdt_io, "w83627hf/thf WDT io port (default 0x2E)");
 
 static int timeout = WATCHDOG_TIMEOUT;	/* in seconds */
 =======
+=======
+>>>>>>> v3.18
 static int wdt_io;
 static int cr_wdt_timeout;	/* WDT timeout register */
 static int cr_wdt_control;	/* WDT control register */
@@ -81,6 +98,9 @@ enum chips { w83627hf, w83627s, w83697hf, w83697ug, w83637hf, w83627thf,
 	     w83667hg_b, nct6775, nct6776, nct6779 };
 
 static int timeout;			/* in seconds */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 module_param(timeout, int, 0);
 MODULE_PARM_DESC(timeout,
@@ -94,11 +114,17 @@ MODULE_PARM_DESC(nowayout,
 				__MODULE_STRING(WATCHDOG_NOWAYOUT) ")");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int early_disable;
 module_param(early_disable, int, 0);
 MODULE_PARM_DESC(early_disable, "Disable watchdog at boot time (default=0)");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *	Kernel methods.
@@ -109,6 +135,7 @@ MODULE_PARM_DESC(early_disable, "Disable watchdog at boot time (default=0)");
 							(same as EFER) */
 #define WDT_EFDR (WDT_EFIR+1) /* Extended Function Data Register */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void w83627hf_select_wd_register(void)
 {
@@ -330,6 +357,8 @@ static int wdt_close(struct inode *inode, struct file *file)
 	clear_bit(0, &wdt_is_open);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 #define W83627HF_LD_WDT		0x08
 
 #define W83627HF_ID		0x52
@@ -534,6 +563,9 @@ static unsigned int wdt_get_time(struct watchdog_device *wdog)
 	superio_exit();
 
 	return timeleft;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -541,7 +573,10 @@ static unsigned int wdt_get_time(struct watchdog_device *wdog)
  *	Notifier for system down
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int wdt_notify_sys(struct notifier_block *this, unsigned long code,
@@ -549,7 +584,11 @@ static int wdt_notify_sys(struct notifier_block *this, unsigned long code,
 {
 	if (code == SYS_DOWN || code == SYS_HALT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wdt_disable();	/* Turn the WDT off */
+=======
+		wdt_set_time(0);	/* Turn the WDT off */
+>>>>>>> v3.18
 =======
 		wdt_set_time(0);	/* Turn the WDT off */
 >>>>>>> v3.18
@@ -561,6 +600,7 @@ static int wdt_notify_sys(struct notifier_block *this, unsigned long code,
  *	Kernel Interfaces
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct file_operations wdt_fops = {
 	.owner		= THIS_MODULE,
@@ -576,6 +616,8 @@ static struct miscdevice wdt_miscdev = {
 	.name = "watchdog",
 	.fops = &wdt_fops,
 =======
+=======
+>>>>>>> v3.18
 static struct watchdog_info wdt_info = {
 	.options = WDIOF_SETTIMEOUT | WDIOF_KEEPALIVEPING | WDIOF_MAGICCLOSE,
 	.identity = "W83627HF Watchdog",
@@ -595,6 +637,9 @@ static struct watchdog_device wdt_dev = {
 	.timeout = WATCHDOG_TIMEOUT,
 	.min_timeout = 1,
 	.max_timeout = 255,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -607,6 +652,7 @@ static struct notifier_block wdt_notifier = {
 	.notifier_call = wdt_notify_sys,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init wdt_init(void)
 {
@@ -628,6 +674,8 @@ static int __init wdt_init(void)
 
 	w83627hf_init();
 =======
+=======
+>>>>>>> v3.18
 static int wdt_find(int addr)
 {
 	u8 val;
@@ -749,11 +797,15 @@ static int __init wdt_init(void)
 		pr_err("failed to initialize watchdog (err=%d)\n", ret);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = register_reboot_notifier(&wdt_notifier);
 	if (ret != 0) {
 		pr_err("cannot register reboot notifier (err=%d)\n", ret);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto unreg_regions;
 	}
@@ -776,6 +828,8 @@ unreg_regions:
 	release_region(wdt_io, 1);
 	goto out;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -791,15 +845,23 @@ unreg_regions:
 unreg_reboot:
 	unregister_reboot_notifier(&wdt_notifier);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __exit wdt_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	misc_deregister(&wdt_miscdev);
 	unregister_reboot_notifier(&wdt_notifier);
 	release_region(wdt_io, 1);
+=======
+	watchdog_unregister_device(&wdt_dev);
+	unregister_reboot_notifier(&wdt_notifier);
+>>>>>>> v3.18
 =======
 	watchdog_unregister_device(&wdt_dev);
 	unregister_reboot_notifier(&wdt_notifier);
@@ -813,6 +875,9 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Pádraig  Brady <P@draigBrady.com>");
 MODULE_DESCRIPTION("w83627hf/thf WDT driver");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

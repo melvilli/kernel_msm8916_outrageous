@@ -36,8 +36,11 @@
 #include "card.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MAX_NODE_NUM             64
@@ -71,6 +74,7 @@
 #define MAX_WPA_IE_LEN      64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Classes  ----------------------------*/
 
 /*---------------------  Export Variables  --------------------------*/
@@ -79,13 +83,19 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 //
 // IEEE 802.11 Structures and definitions
 //
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef enum _NDIS_802_11_NETWORK_TYPE
 {
+=======
+typedef enum _NDIS_802_11_NETWORK_TYPE {
+>>>>>>> v3.18
 =======
 typedef enum _NDIS_802_11_NETWORK_TYPE {
 >>>>>>> v3.18
@@ -110,7 +120,10 @@ typedef struct tagSRSNCapObject {
 #pragma pack(1)
 typedef struct tagKnownBSS {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// BSS info
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool bActive;
@@ -126,7 +139,10 @@ typedef struct tagKnownBSS {
 	unsigned char byRxRate;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //    unsigned short wATIMWindow;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char byRSSIStatCnt;
@@ -134,10 +150,15 @@ typedef struct tagKnownBSS {
 	long            ldBmAverage[RSSI_STAT_COUNT];
 	long            ldBmAverRange;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//For any BSSID selection improvment
 	bool bSelected;
 
 	//++ WPA informations
+=======
+	bool bSelected;
+
+>>>>>>> v3.18
 =======
 	bool bSelected;
 
@@ -151,9 +172,13 @@ typedef struct tagKnownBSS {
 	unsigned char byDefaultK_as_PK;
 	unsigned char byReplayIdx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//--
 
 	//++ WPA2 informations
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -165,7 +190,10 @@ typedef struct tagKnownBSS {
 	unsigned char abyAKMSSAuthType[4];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//++  wpactl
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char byWPAIE[MAX_WPA_IE_LEN];
@@ -173,6 +201,7 @@ typedef struct tagKnownBSS {
 	unsigned short wWPALen;
 	unsigned short wRSNLen;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Clear count
 	unsigned int	uClearCount;
@@ -183,16 +212,22 @@ typedef struct tagKnownBSS {
 
 //    NDIS_802_11_NETWORK_TYPE    NetworkTypeInUse;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int	uClearCount;
 	unsigned int	uIELength;
 	u64 qwBSSTimestamp;
 	u64 qwLocalTSF;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CARD_PHY_TYPE   eNetworkTypeInUse;
 
 	ERPObject       sERP;
 	SRSNCapObject   sRSNCapObj;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned char abyIEs[1024];   // don't move this field !!
 } __attribute__ ((__packed__))
@@ -200,10 +235,15 @@ KnownBSS , *PKnownBSS;
 
 //2006-1116-01,<Add> by NomadZhao
 =======
+=======
+>>>>>>> v3.18
 	unsigned char abyIEs[1024];
 } __attribute__ ((__packed__))
 KnownBSS , *PKnownBSS;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #pragma pack()
 
@@ -218,7 +258,10 @@ typedef enum tagNODE_STATE {
 // STA node info
 typedef struct tagKnownNodeDB {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// STA info
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bool bActive;
@@ -260,7 +303,10 @@ typedef struct tagKnownNodeDB {
 	unsigned int	uWepKeyLength;
 	unsigned char abyWepKey[WLAN_WEPMAX_KEYLEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	// Auto rate fallback vars
@@ -280,8 +326,11 @@ typedef struct tagKnownNodeDB {
 } KnownNodeDB, *PKnownNodeDB;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Functions  --------------------------*/
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 PKnownBSS
@@ -310,7 +359,11 @@ BSSbInsertToBSSList(
 	void *hDeviceContext,
 	unsigned char *abyBSSIDAddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	QWORD qwTimestamp,
+=======
+	__le64 qwTimestamp,
+>>>>>>> v3.18
 =======
 	__le64 qwTimestamp,
 >>>>>>> v3.18
@@ -334,7 +387,11 @@ bool
 BSSbUpdateToBSSList(
 	void *hDeviceContext,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	QWORD qwTimestamp,
+=======
+	__le64 qwTimestamp,
+>>>>>>> v3.18
 =======
 	__le64 qwTimestamp,
 >>>>>>> v3.18

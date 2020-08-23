@@ -27,6 +27,12 @@
 #define TOPOLOGY_REGISTER_OFFSET 0x10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Flag below is initialized once during vSMP PCI initialization. */
+static int irq_routing_comply = 1;
+
+>>>>>>> v3.18
 =======
 /* Flag below is initialized once during vSMP PCI initialization. */
 static int irq_routing_comply = 1;
@@ -40,7 +46,11 @@ static int irq_routing_comply = 1;
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long vsmp_save_fl(void)
+=======
+asmlinkage __visible unsigned long vsmp_save_fl(void)
+>>>>>>> v3.18
 =======
 asmlinkage __visible unsigned long vsmp_save_fl(void)
 >>>>>>> v3.18
@@ -54,7 +64,11 @@ asmlinkage __visible unsigned long vsmp_save_fl(void)
 PV_CALLEE_SAVE_REGS_THUNK(vsmp_save_fl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void vsmp_restore_fl(unsigned long flags)
+=======
+__visible void vsmp_restore_fl(unsigned long flags)
+>>>>>>> v3.18
 =======
 __visible void vsmp_restore_fl(unsigned long flags)
 >>>>>>> v3.18
@@ -68,7 +82,11 @@ __visible void vsmp_restore_fl(unsigned long flags)
 PV_CALLEE_SAVE_REGS_THUNK(vsmp_restore_fl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void vsmp_irq_disable(void)
+=======
+asmlinkage __visible void vsmp_irq_disable(void)
+>>>>>>> v3.18
 =======
 asmlinkage __visible void vsmp_irq_disable(void)
 >>>>>>> v3.18
@@ -80,7 +98,11 @@ asmlinkage __visible void vsmp_irq_disable(void)
 PV_CALLEE_SAVE_REGS_THUNK(vsmp_irq_disable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void vsmp_irq_enable(void)
+=======
+asmlinkage __visible void vsmp_irq_enable(void)
+>>>>>>> v3.18
 =======
 asmlinkage __visible void vsmp_irq_enable(void)
 >>>>>>> v3.18
@@ -124,11 +146,17 @@ static void __init set_vsmp_pv_ops(void)
 	if (cap & ctl & BIT(8)) {
 		ctl &= ~BIT(8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* Interrupt routing set to ignore */
 		irq_routing_comply = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PROC_FS
 		/* Don't let users change irq affinity via procfs */
@@ -175,7 +203,11 @@ static void __init detect_vsmp_box(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int is_vsmp_box(void)
+=======
+static int is_vsmp_box(void)
+>>>>>>> v3.18
 =======
 static int is_vsmp_box(void)
 >>>>>>> v3.18
@@ -193,7 +225,11 @@ static void __init detect_vsmp_box(void)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 int is_vsmp_box(void)
+=======
+static int is_vsmp_box(void)
+>>>>>>> v3.18
 =======
 static int is_vsmp_box(void)
 >>>>>>> v3.18
@@ -256,7 +292,13 @@ static void vsmp_apic_post_init(void)
 	/* need to update phys_pkg_id */
 	apic->phys_pkg_id = apicid_phys_pkg_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	apic->vector_allocation_domain = fill_vector_allocation_domain;
+=======
+
+	if (!irq_routing_comply)
+		apic->vector_allocation_domain = fill_vector_allocation_domain;
+>>>>>>> v3.18
 =======
 
 	if (!irq_routing_comply)

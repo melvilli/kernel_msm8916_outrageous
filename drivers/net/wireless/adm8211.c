@@ -16,7 +16,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -46,7 +49,11 @@ module_param(tx_ring_size, uint, 0);
 module_param(rx_ring_size, uint, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(adm8211_pci_id_table) = {
+=======
+static const struct pci_device_id adm8211_pci_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id adm8211_pci_id_table[] = {
 >>>>>>> v3.18
@@ -1322,7 +1329,11 @@ static void adm8211_bss_info_changed(struct ieee80211_hw *dev,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(conf->bssid, priv->bssid, ETH_ALEN)) {
+=======
+	if (!ether_addr_equal(conf->bssid, priv->bssid)) {
+>>>>>>> v3.18
 =======
 	if (!ether_addr_equal(conf->bssid, priv->bssid)) {
 >>>>>>> v3.18
@@ -1878,7 +1889,10 @@ static int adm8211_probe(struct pci_dev *pdev,
 	dev->wiphy->interface_modes = BIT(NL80211_IFTYPE_STATION);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->channel_change_time = 1000;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev->max_signal = 100;    /* FIXME: find better value */
@@ -1939,7 +1953,10 @@ static int adm8211_probe(struct pci_dev *pdev,
 
  err_free_dev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ieee80211_free_hw(dev);

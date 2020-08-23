@@ -8,8 +8,11 @@
 	#address-cells = <2>;
 	#size-cells = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpus { };
 	soc { };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	chosen { };

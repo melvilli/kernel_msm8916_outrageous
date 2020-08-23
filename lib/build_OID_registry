@@ -51,8 +51,11 @@ my @lengths = ();
 my $total_length = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 print "Compiling ", $#names + 1, " OIDs\n";
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 for (my $i = 0; $i <= $#names; $i++) {

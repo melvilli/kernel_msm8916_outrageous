@@ -15,7 +15,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/bug.h>
@@ -502,7 +505,12 @@ int wm8350_irq_init(struct wm8350 *wm8350, int irq,
 		irq_base = pdata->irq_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wm8350->irq_base = irq_alloc_descs(irq_base, 0, ARRAY_SIZE(wm8350_irqs), 0);
+=======
+	wm8350->irq_base =
+		irq_alloc_descs(irq_base, 0, ARRAY_SIZE(wm8350_irqs), 0);
+>>>>>>> v3.18
 =======
 	wm8350->irq_base =
 		irq_alloc_descs(irq_base, 0, ARRAY_SIZE(wm8350_irqs), 0);

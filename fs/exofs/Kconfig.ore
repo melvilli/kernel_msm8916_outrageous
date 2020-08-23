@@ -10,6 +10,11 @@ config ORE
 	depends on EXOFS_FS || PNFS_OBJLAYOUT
 	select ASYNC_XOR
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select RAID6_PQ
+	select ASYNC_PQ
+>>>>>>> v3.18
 =======
 	select RAID6_PQ
 	select ASYNC_PQ

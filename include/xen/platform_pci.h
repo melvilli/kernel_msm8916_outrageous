@@ -47,9 +47,12 @@ static inline int xen_must_unplug_disks(void) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int xen_platform_pci_unplug;
 
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_XEN_PVHVM)
 extern bool xen_has_pv_devices(void);
 extern bool xen_has_pv_disk_devices(void);
@@ -73,5 +76,8 @@ static inline bool xen_has_pv_and_legacy_disk_devices(void)
 	return false;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _XEN_PLATFORM_PCI_H */

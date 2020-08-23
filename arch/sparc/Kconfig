@@ -13,6 +13,11 @@ config SPARC
 	bool
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_MIGHT_HAVE_PC_PARPORT if SPARC64 && PCI
+	select ARCH_MIGHT_HAVE_PC_SERIO
+>>>>>>> v3.18
 =======
 	select ARCH_MIGHT_HAVE_PC_PARPORT if SPARC64 && PCI
 	select ARCH_MIGHT_HAVE_PC_SERIO
@@ -46,6 +51,10 @@ config SPARC
 	select ODD_RT_SIGACTION
 	select OLD_SIGSUSPEND
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_HAS_SG_CHAIN
+>>>>>>> v3.18
 =======
 	select ARCH_HAS_SG_CHAIN
 >>>>>>> v3.18
@@ -60,11 +69,17 @@ config SPARC32
 config SPARC64
 	def_bool 64BIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_SUPPORTS_MSI
 	select HAVE_FUNCTION_TRACER
 	select HAVE_FUNCTION_GRAPH_TRACER
 	select HAVE_FUNCTION_GRAPH_FP_TEST
 	select HAVE_FUNCTION_TRACE_MCOUNT_TEST
+=======
+	select HAVE_FUNCTION_TRACER
+	select HAVE_FUNCTION_GRAPH_TRACER
+	select HAVE_FUNCTION_GRAPH_FP_TEST
+>>>>>>> v3.18
 =======
 	select HAVE_FUNCTION_TRACER
 	select HAVE_FUNCTION_GRAPH_TRACER
@@ -80,7 +95,13 @@ config SPARC64
 	select HAVE_FTRACE_MCOUNT_RECORD
 	select HAVE_SYSCALL_TRACEPOINTS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HAVE_DEBUG_KMEMLEAK
+=======
+	select HAVE_CONTEXT_TRACKING
+	select HAVE_DEBUG_KMEMLEAK
+	select SPARSE_IRQ
+>>>>>>> v3.18
 =======
 	select HAVE_CONTEXT_TRACKING
 	select HAVE_DEBUG_KMEMLEAK
@@ -97,6 +118,10 @@ config SPARC64
 	select HAVE_C_RECORDMCOUNT
 	select NO_BOOTMEM
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_ARCH_AUDITSYSCALL
+>>>>>>> v3.18
 =======
 	select HAVE_ARCH_AUDITSYSCALL
 >>>>>>> v3.18
@@ -178,15 +203,21 @@ config SMP
 	  than one CPU, say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  If you say N here, the kernel will run on single and multiprocessor
 	  machines, but will use only one CPU of a multiprocessor machine. If
 	  you say Y here, the kernel will run on many, but not all,
 	  singleprocessor machines. On a singleprocessor machine, the kernel
 =======
+=======
+>>>>>>> v3.18
 	  If you say N here, the kernel will run on uni- and multiprocessor
 	  machines, but will use only one CPU of a multiprocessor machine. If
 	  you say Y here, the kernel will run on many, but not all,
 	  uniprocessor machines. On a uniprocessor machine, the kernel
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  will run faster if you say N here.
 
@@ -275,7 +306,10 @@ config HOTPLUG_CPU
 	bool "Support for hot-pluggable CPUs"
 	depends on SPARC64 && SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HOTPLUG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -544,7 +578,11 @@ config SUN_OPENPROMFS
 	  OpenPROM settings on the running system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Makefile helper
+=======
+# Makefile helpers
+>>>>>>> v3.18
 =======
 # Makefile helpers
 >>>>>>> v3.18
@@ -554,12 +592,18 @@ config SPARC64_PCI
 	depends on SPARC64 && PCI
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SPARC64_PCI_MSI
 	bool
 	default y
 	depends on SPARC64_PCI && PCI_MSI
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu
 

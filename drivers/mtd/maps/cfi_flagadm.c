@@ -56,7 +56,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct map_info flagadm_map = {
+=======
+static struct map_info flagadm_map = {
+>>>>>>> v3.18
 =======
 static struct map_info flagadm_map = {
 >>>>>>> v3.18
@@ -66,7 +70,11 @@ static struct map_info flagadm_map = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct mtd_partition flagadm_parts[] = {
+=======
+static struct mtd_partition flagadm_parts[] = {
+>>>>>>> v3.18
 =======
 static struct mtd_partition flagadm_parts[] = {
 >>>>>>> v3.18
@@ -121,7 +129,11 @@ static int __init init_flagadm(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap((void *)flagadm_map.virt);
+=======
+	iounmap((void __iomem *)flagadm_map.virt);
+>>>>>>> v3.18
 =======
 	iounmap((void __iomem *)flagadm_map.virt);
 >>>>>>> v3.18
@@ -136,8 +148,13 @@ static void __exit cleanup_flagadm(void)
 	}
 	if (flagadm_map.virt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iounmap((void *)flagadm_map.virt);
 		flagadm_map.virt = 0;
+=======
+		iounmap((void __iomem *)flagadm_map.virt);
+		flagadm_map.virt = NULL;
+>>>>>>> v3.18
 =======
 		iounmap((void __iomem *)flagadm_map.virt);
 		flagadm_map.virt = NULL;

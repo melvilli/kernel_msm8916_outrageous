@@ -24,7 +24,10 @@
 
 #include <core/os.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <core/engctx.h>
@@ -139,8 +142,13 @@ nv04_software_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nouveau_oclass
 nv04_software_oclass = {
+=======
+struct nouveau_oclass *
+nv04_software_oclass = &(struct nouveau_oclass) {
+>>>>>>> v3.18
 =======
 struct nouveau_oclass *
 nv04_software_oclass = &(struct nouveau_oclass) {

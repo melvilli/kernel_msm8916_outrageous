@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: AP specific command handling
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012, Marvell International Ltd.
+=======
+ * Copyright (C) 2012-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -164,6 +168,10 @@ mwifiex_set_ht_params(struct mwifiex_private *priv,
 {
 	const u8 *ht_ie;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16 cap_info;
+>>>>>>> v3.18
 =======
 	u16 cap_info;
 >>>>>>> v3.18
@@ -177,7 +185,10 @@ mwifiex_set_ht_params(struct mwifiex_private *priv,
 		memcpy(&bss_cfg->ht_cap, ht_ie + 2,
 		       sizeof(struct ieee80211_ht_cap));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		cap_info = le16_to_cpu(bss_cfg->ht_cap.cap_info);
 		memset(&bss_cfg->ht_cap.mcs, 0,
 		       priv->adapter->number_of_antenna);
@@ -199,6 +210,9 @@ mwifiex_set_ht_params(struct mwifiex_private *priv,
 			bss_cfg->ht_cap.mcs.rx_mask[1] = 0xff;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		priv->ap_11n_enabled = 1;
 	} else {
@@ -259,8 +273,13 @@ void mwifiex_set_vht_width(struct mwifiex_private *priv,
 		vht_cfg.misc_config |= VHT_BW_80_160_80P80;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mwifiex_send_cmd_sync(priv, HostCmd_CMD_11AC_CFG,
 			      HostCmd_ACT_GEN_SET, 0, &vht_cfg);
+=======
+	mwifiex_send_cmd(priv, HostCmd_CMD_11AC_CFG,
+			 HostCmd_ACT_GEN_SET, 0, &vht_cfg, true);
+>>>>>>> v3.18
 =======
 	mwifiex_send_cmd(priv, HostCmd_CMD_11AC_CFG,
 			 HostCmd_ACT_GEN_SET, 0, &vht_cfg, true);
@@ -331,9 +350,15 @@ mwifiex_uap_bss_wpa(u8 **tlv_buf, void *cmd_buf, u16 *param_size)
 
 	tlv_akmp = (struct host_cmd_tlv_akmp *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tlv_akmp->tlv.type = cpu_to_le16(TLV_TYPE_UAP_AKMP);
 	tlv_akmp->tlv.len = cpu_to_le16(sizeof(struct host_cmd_tlv_akmp) -
 					sizeof(struct host_cmd_tlv));
+=======
+	tlv_akmp->header.type = cpu_to_le16(TLV_TYPE_UAP_AKMP);
+	tlv_akmp->header.len = cpu_to_le16(sizeof(struct host_cmd_tlv_akmp) -
+					sizeof(struct mwifiex_ie_types_header));
+>>>>>>> v3.18
 =======
 	tlv_akmp->header.type = cpu_to_le16(TLV_TYPE_UAP_AKMP);
 	tlv_akmp->header.len = cpu_to_le16(sizeof(struct host_cmd_tlv_akmp) -
@@ -347,15 +372,21 @@ mwifiex_uap_bss_wpa(u8 **tlv_buf, void *cmd_buf, u16 *param_size)
 	if (bss_cfg->wpa_cfg.pairwise_cipher_wpa & VALID_CIPHER_BITMAP) {
 		pwk_cipher = (struct host_cmd_tlv_pwk_cipher *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pwk_cipher->tlv.type = cpu_to_le16(TLV_TYPE_PWK_CIPHER);
 		pwk_cipher->tlv.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_pwk_cipher) -
 				    sizeof(struct host_cmd_tlv));
 =======
+=======
+>>>>>>> v3.18
 		pwk_cipher->header.type = cpu_to_le16(TLV_TYPE_PWK_CIPHER);
 		pwk_cipher->header.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_pwk_cipher) -
 				    sizeof(struct mwifiex_ie_types_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pwk_cipher->proto = cpu_to_le16(PROTOCOL_WPA);
 		pwk_cipher->cipher = bss_cfg->wpa_cfg.pairwise_cipher_wpa;
@@ -366,15 +397,21 @@ mwifiex_uap_bss_wpa(u8 **tlv_buf, void *cmd_buf, u16 *param_size)
 	if (bss_cfg->wpa_cfg.pairwise_cipher_wpa2 & VALID_CIPHER_BITMAP) {
 		pwk_cipher = (struct host_cmd_tlv_pwk_cipher *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pwk_cipher->tlv.type = cpu_to_le16(TLV_TYPE_PWK_CIPHER);
 		pwk_cipher->tlv.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_pwk_cipher) -
 				    sizeof(struct host_cmd_tlv));
 =======
+=======
+>>>>>>> v3.18
 		pwk_cipher->header.type = cpu_to_le16(TLV_TYPE_PWK_CIPHER);
 		pwk_cipher->header.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_pwk_cipher) -
 				    sizeof(struct mwifiex_ie_types_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pwk_cipher->proto = cpu_to_le16(PROTOCOL_WPA2);
 		pwk_cipher->cipher = bss_cfg->wpa_cfg.pairwise_cipher_wpa2;
@@ -385,15 +422,21 @@ mwifiex_uap_bss_wpa(u8 **tlv_buf, void *cmd_buf, u16 *param_size)
 	if (bss_cfg->wpa_cfg.group_cipher & VALID_CIPHER_BITMAP) {
 		gwk_cipher = (struct host_cmd_tlv_gwk_cipher *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gwk_cipher->tlv.type = cpu_to_le16(TLV_TYPE_GWK_CIPHER);
 		gwk_cipher->tlv.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_gwk_cipher) -
 				    sizeof(struct host_cmd_tlv));
 =======
+=======
+>>>>>>> v3.18
 		gwk_cipher->header.type = cpu_to_le16(TLV_TYPE_GWK_CIPHER);
 		gwk_cipher->header.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_gwk_cipher) -
 				    sizeof(struct mwifiex_ie_types_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gwk_cipher->cipher = bss_cfg->wpa_cfg.group_cipher;
 		cmd_size += sizeof(struct host_cmd_tlv_gwk_cipher);
@@ -403,6 +446,7 @@ mwifiex_uap_bss_wpa(u8 **tlv_buf, void *cmd_buf, u16 *param_size)
 	if (bss_cfg->wpa_cfg.length) {
 		passphrase = (struct host_cmd_tlv_passphrase *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		passphrase->tlv.type = cpu_to_le16(TLV_TYPE_UAP_WPA_PASSPHRASE);
 		passphrase->tlv.len = cpu_to_le16(bss_cfg->wpa_cfg.length);
 		memcpy(passphrase->passphrase, bss_cfg->wpa_cfg.passphrase,
@@ -411,6 +455,8 @@ mwifiex_uap_bss_wpa(u8 **tlv_buf, void *cmd_buf, u16 *param_size)
 			    bss_cfg->wpa_cfg.length;
 		tlv += sizeof(struct host_cmd_tlv) + bss_cfg->wpa_cfg.length;
 =======
+=======
+>>>>>>> v3.18
 		passphrase->header.type =
 				cpu_to_le16(TLV_TYPE_UAP_WPA_PASSPHRASE);
 		passphrase->header.len = cpu_to_le16(bss_cfg->wpa_cfg.length);
@@ -420,6 +466,9 @@ mwifiex_uap_bss_wpa(u8 **tlv_buf, void *cmd_buf, u16 *param_size)
 			    bss_cfg->wpa_cfg.length;
 		tlv += sizeof(struct mwifiex_ie_types_header) +
 				bss_cfg->wpa_cfg.length;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -480,8 +529,14 @@ mwifiex_uap_bss_wep(u8 **tlv_buf, void *cmd_buf, u16 *param_size)
 		     bss_cfg->wep_cfg[i].length == WLAN_KEY_LEN_WEP104)) {
 			wep_key = (struct host_cmd_tlv_wep_key *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			wep_key->tlv.type = cpu_to_le16(TLV_TYPE_UAP_WEP_KEY);
 			wep_key->tlv.len =
+=======
+			wep_key->header.type =
+				cpu_to_le16(TLV_TYPE_UAP_WEP_KEY);
+			wep_key->header.len =
+>>>>>>> v3.18
 =======
 			wep_key->header.type =
 				cpu_to_le16(TLV_TYPE_UAP_WEP_KEY);
@@ -493,9 +548,15 @@ mwifiex_uap_bss_wep(u8 **tlv_buf, void *cmd_buf, u16 *param_size)
 			memcpy(wep_key->key, bss_cfg->wep_cfg[i].key,
 			       bss_cfg->wep_cfg[i].length);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cmd_size += sizeof(struct host_cmd_tlv) + 2 +
 				    bss_cfg->wep_cfg[i].length;
 			tlv += sizeof(struct host_cmd_tlv) + 2 +
+=======
+			cmd_size += sizeof(struct mwifiex_ie_types_header) + 2 +
+				    bss_cfg->wep_cfg[i].length;
+			tlv += sizeof(struct mwifiex_ie_types_header) + 2 +
+>>>>>>> v3.18
 =======
 			cmd_size += sizeof(struct mwifiex_ie_types_header) + 2 +
 				    bss_cfg->wep_cfg[i].length;
@@ -538,6 +599,7 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 	if (bss_cfg->ssid.ssid_len) {
 		ssid = (struct host_cmd_tlv_ssid *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ssid->tlv.type = cpu_to_le16(TLV_TYPE_UAP_SSID);
 		ssid->tlv.len = cpu_to_le16((u16)bss_cfg->ssid.ssid_len);
 		memcpy(ssid->ssid, bss_cfg->ssid.ssid, bss_cfg->ssid.ssid_len);
@@ -549,6 +611,8 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 		bcast_ssid->tlv.type = cpu_to_le16(TLV_TYPE_UAP_BCAST_SSID);
 		bcast_ssid->tlv.len =
 =======
+=======
+>>>>>>> v3.18
 		ssid->header.type = cpu_to_le16(TLV_TYPE_UAP_SSID);
 		ssid->header.len = cpu_to_le16((u16)bss_cfg->ssid.ssid_len);
 		memcpy(ssid->ssid, bss_cfg->ssid.ssid, bss_cfg->ssid.ssid_len);
@@ -560,6 +624,9 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 		bcast_ssid = (struct host_cmd_tlv_bcast_ssid *)tlv;
 		bcast_ssid->header.type = cpu_to_le16(TLV_TYPE_UAP_BCAST_SSID);
 		bcast_ssid->header.len =
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				cpu_to_le16(sizeof(bcast_ssid->bcast_ctl));
 		bcast_ssid->bcast_ctl = bss_cfg->bcast_ssid_ctl;
@@ -569,7 +636,11 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 	if (bss_cfg->rates[0]) {
 		tlv_rates = (struct host_cmd_tlv_rates *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tlv_rates->tlv.type = cpu_to_le16(TLV_TYPE_UAP_RATES);
+=======
+		tlv_rates->header.type = cpu_to_le16(TLV_TYPE_UAP_RATES);
+>>>>>>> v3.18
 =======
 		tlv_rates->header.type = cpu_to_le16(TLV_TYPE_UAP_RATES);
 >>>>>>> v3.18
@@ -579,7 +650,11 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 			tlv_rates->rates[i] = bss_cfg->rates[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tlv_rates->tlv.len = cpu_to_le16(i);
+=======
+		tlv_rates->header.len = cpu_to_le16(i);
+>>>>>>> v3.18
 =======
 		tlv_rates->header.len = cpu_to_le16(i);
 >>>>>>> v3.18
@@ -593,15 +668,21 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 	     bss_cfg->channel <= MAX_CHANNEL_BAND_A))) {
 		chan_band = (struct host_cmd_tlv_channel_band *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chan_band->tlv.type = cpu_to_le16(TLV_TYPE_CHANNELBANDLIST);
 		chan_band->tlv.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_channel_band) -
 				    sizeof(struct host_cmd_tlv));
 =======
+=======
+>>>>>>> v3.18
 		chan_band->header.type = cpu_to_le16(TLV_TYPE_CHANNELBANDLIST);
 		chan_band->header.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_channel_band) -
 				    sizeof(struct mwifiex_ie_types_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		chan_band->band_config = bss_cfg->band_cfg;
 		chan_band->channel = bss_cfg->channel;
@@ -612,17 +693,23 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 	    bss_cfg->beacon_period <= MAX_BEACON_PERIOD) {
 		beacon_period = (struct host_cmd_tlv_beacon_period *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		beacon_period->tlv.type =
 					cpu_to_le16(TLV_TYPE_UAP_BEACON_PERIOD);
 		beacon_period->tlv.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_beacon_period) -
 				    sizeof(struct host_cmd_tlv));
 =======
+=======
+>>>>>>> v3.18
 		beacon_period->header.type =
 					cpu_to_le16(TLV_TYPE_UAP_BEACON_PERIOD);
 		beacon_period->header.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_beacon_period) -
 				    sizeof(struct mwifiex_ie_types_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		beacon_period->period = cpu_to_le16(bss_cfg->beacon_period);
 		cmd_size += sizeof(struct host_cmd_tlv_beacon_period);
@@ -632,16 +719,22 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 	    bss_cfg->dtim_period <= MAX_DTIM_PERIOD) {
 		dtim_period = (struct host_cmd_tlv_dtim_period *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dtim_period->tlv.type = cpu_to_le16(TLV_TYPE_UAP_DTIM_PERIOD);
 		dtim_period->tlv.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_dtim_period) -
 				    sizeof(struct host_cmd_tlv));
 =======
+=======
+>>>>>>> v3.18
 		dtim_period->header.type =
 			cpu_to_le16(TLV_TYPE_UAP_DTIM_PERIOD);
 		dtim_period->header.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_dtim_period) -
 				    sizeof(struct mwifiex_ie_types_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dtim_period->period = bss_cfg->dtim_period;
 		cmd_size += sizeof(struct host_cmd_tlv_dtim_period);
@@ -650,17 +743,23 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 	if (bss_cfg->rts_threshold <= MWIFIEX_RTS_MAX_VALUE) {
 		rts_threshold = (struct host_cmd_tlv_rts_threshold *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rts_threshold->tlv.type =
 					cpu_to_le16(TLV_TYPE_UAP_RTS_THRESHOLD);
 		rts_threshold->tlv.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_rts_threshold) -
 				    sizeof(struct host_cmd_tlv));
 =======
+=======
+>>>>>>> v3.18
 		rts_threshold->header.type =
 					cpu_to_le16(TLV_TYPE_UAP_RTS_THRESHOLD);
 		rts_threshold->header.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_rts_threshold) -
 				    sizeof(struct mwifiex_ie_types_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rts_threshold->rts_thr = cpu_to_le16(bss_cfg->rts_threshold);
 		cmd_size += sizeof(struct host_cmd_tlv_frag_threshold);
@@ -670,17 +769,23 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 	    (bss_cfg->frag_threshold <= MWIFIEX_FRAG_MAX_VALUE)) {
 		frag_threshold = (struct host_cmd_tlv_frag_threshold *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		frag_threshold->tlv.type =
 				cpu_to_le16(TLV_TYPE_UAP_FRAG_THRESHOLD);
 		frag_threshold->tlv.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_frag_threshold) -
 				    sizeof(struct host_cmd_tlv));
 =======
+=======
+>>>>>>> v3.18
 		frag_threshold->header.type =
 				cpu_to_le16(TLV_TYPE_UAP_FRAG_THRESHOLD);
 		frag_threshold->header.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_frag_threshold) -
 				    sizeof(struct mwifiex_ie_types_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		frag_threshold->frag_thr = cpu_to_le16(bss_cfg->frag_threshold);
 		cmd_size += sizeof(struct host_cmd_tlv_frag_threshold);
@@ -689,16 +794,22 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 	if (bss_cfg->retry_limit <= MWIFIEX_RETRY_LIMIT) {
 		retry_limit = (struct host_cmd_tlv_retry_limit *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retry_limit->tlv.type = cpu_to_le16(TLV_TYPE_UAP_RETRY_LIMIT);
 		retry_limit->tlv.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_retry_limit) -
 				    sizeof(struct host_cmd_tlv));
 =======
+=======
+>>>>>>> v3.18
 		retry_limit->header.type =
 			cpu_to_le16(TLV_TYPE_UAP_RETRY_LIMIT);
 		retry_limit->header.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_retry_limit) -
 				    sizeof(struct mwifiex_ie_types_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		retry_limit->limit = (u8)bss_cfg->retry_limit;
 		cmd_size += sizeof(struct host_cmd_tlv_retry_limit);
@@ -715,15 +826,21 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 	    (bss_cfg->auth_mode == MWIFIEX_AUTH_MODE_AUTO)) {
 		auth_type = (struct host_cmd_tlv_auth_type *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auth_type->tlv.type = cpu_to_le16(TLV_TYPE_AUTH_TYPE);
 		auth_type->tlv.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_auth_type) -
 			sizeof(struct host_cmd_tlv));
 =======
+=======
+>>>>>>> v3.18
 		auth_type->header.type = cpu_to_le16(TLV_TYPE_AUTH_TYPE);
 		auth_type->header.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_auth_type) -
 			sizeof(struct mwifiex_ie_types_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		auth_type->auth_type = (u8)bss_cfg->auth_mode;
 		cmd_size += sizeof(struct host_cmd_tlv_auth_type);
@@ -732,17 +849,23 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 	if (bss_cfg->protocol) {
 		encrypt_protocol = (struct host_cmd_tlv_encrypt_protocol *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		encrypt_protocol->tlv.type =
 			cpu_to_le16(TLV_TYPE_UAP_ENCRY_PROTOCOL);
 		encrypt_protocol->tlv.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_encrypt_protocol)
 			- sizeof(struct host_cmd_tlv));
 =======
+=======
+>>>>>>> v3.18
 		encrypt_protocol->header.type =
 			cpu_to_le16(TLV_TYPE_UAP_ENCRY_PROTOCOL);
 		encrypt_protocol->header.len =
 			cpu_to_le16(sizeof(struct host_cmd_tlv_encrypt_protocol)
 			- sizeof(struct mwifiex_ie_types_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		encrypt_protocol->proto = cpu_to_le16(bss_cfg->protocol);
 		cmd_size += sizeof(struct host_cmd_tlv_encrypt_protocol);
@@ -781,9 +904,15 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 	if (bss_cfg->sta_ao_timer) {
 		ao_timer = (struct host_cmd_tlv_ageout_timer *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ao_timer->tlv.type = cpu_to_le16(TLV_TYPE_UAP_AO_TIMER);
 		ao_timer->tlv.len = cpu_to_le16(sizeof(*ao_timer) -
 						sizeof(struct host_cmd_tlv));
+=======
+		ao_timer->header.type = cpu_to_le16(TLV_TYPE_UAP_AO_TIMER);
+		ao_timer->header.len = cpu_to_le16(sizeof(*ao_timer) -
+					sizeof(struct mwifiex_ie_types_header));
+>>>>>>> v3.18
 =======
 		ao_timer->header.type = cpu_to_le16(TLV_TYPE_UAP_AO_TIMER);
 		ao_timer->header.len = cpu_to_le16(sizeof(*ao_timer) -
@@ -797,14 +926,20 @@ mwifiex_uap_bss_param_prepare(u8 *tlv, void *cmd_buf, u16 *param_size)
 	if (bss_cfg->ps_sta_ao_timer) {
 		ps_ao_timer = (struct host_cmd_tlv_ageout_timer *)tlv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ps_ao_timer->tlv.type = cpu_to_le16(TLV_TYPE_UAP_PS_AO_TIMER);
 		ps_ao_timer->tlv.len = cpu_to_le16(sizeof(*ps_ao_timer) -
 						   sizeof(struct host_cmd_tlv));
 =======
+=======
+>>>>>>> v3.18
 		ps_ao_timer->header.type =
 				cpu_to_le16(TLV_TYPE_UAP_PS_AO_TIMER);
 		ps_ao_timer->header.len = cpu_to_le16(sizeof(*ps_ao_timer) -
 				sizeof(struct mwifiex_ie_types_header));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ps_ao_timer->sta_ao_timer =
 					cpu_to_le32(bss_cfg->ps_sta_ao_timer);
@@ -822,7 +957,11 @@ static int mwifiex_uap_custom_ie_prepare(u8 *tlv, void *cmd_buf, u16 *ie_size)
 {
 	struct mwifiex_ie_list *ap_ie = cmd_buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct host_cmd_tlv *tlv_ie = (struct host_cmd_tlv *)tlv;
+=======
+	struct mwifiex_ie_types_header *tlv_ie = (void *)tlv;
+>>>>>>> v3.18
 =======
 	struct mwifiex_ie_types_header *tlv_ie = (void *)tlv;
 >>>>>>> v3.18
@@ -831,18 +970,24 @@ static int mwifiex_uap_custom_ie_prepare(u8 *tlv, void *cmd_buf, u16 *ie_size)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*ie_size += le16_to_cpu(ap_ie->len) + sizeof(struct host_cmd_tlv);
 
 	tlv_ie->type = cpu_to_le16(TLV_TYPE_MGMT_IE);
 	tlv_ie->len = ap_ie->len;
 	tlv += sizeof(struct host_cmd_tlv);
 =======
+=======
+>>>>>>> v3.18
 	*ie_size += le16_to_cpu(ap_ie->len) +
 			sizeof(struct mwifiex_ie_types_header);
 
 	tlv_ie->type = cpu_to_le16(TLV_TYPE_MGMT_IE);
 	tlv_ie->len = ap_ie->len;
 	tlv += sizeof(struct mwifiex_ie_types_header);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memcpy(tlv, ap_ie->ie_list, le16_to_cpu(ap_ie->len));
@@ -888,7 +1033,10 @@ mwifiex_cmd_uap_sys_config(struct host_cmd_ds_command *cmd, u16 cmd_action,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This function prepares AP specific deauth command with mac supplied in
  * function parameter.
  */
@@ -906,6 +1054,9 @@ static int mwifiex_cmd_uap_sta_deauth(struct mwifiex_private *priv,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* This function prepares the AP specific commands before sending them
  * to the firmware.
@@ -929,11 +1080,17 @@ int mwifiex_uap_prepare_cmd(struct mwifiex_private *priv, u16 cmd_no,
 		cmd->size = cpu_to_le16(S_DS_GEN);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case HostCmd_CMD_UAP_STA_DEAUTH:
 		if (mwifiex_cmd_uap_sta_deauth(priv, cmd, data_buf))
 			return -1;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		dev_err(priv->adapter->dev,

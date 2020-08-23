@@ -47,15 +47,21 @@
  * tdm_count is # channels NOT / 8 ! */
 int sport_set_multichannel(struct sport_device *sport,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int tdm_count, u32 mask, int packed)
 {
 	pr_debug("%s tdm_count=%d mask:0x%08x packed=%d\n", __func__,
 			tdm_count, mask, packed);
 =======
+=======
+>>>>>>> v3.18
 		int tdm_count, u32 tx_mask, u32 rx_mask, int packed)
 {
 	pr_debug("%s tdm_count=%d tx_mask:0x%08x rx_mask:0x%08x packed=%d\n",
 			__func__, tdm_count, tx_mask, rx_mask, packed);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((sport->regs->tcr1 & TSPEN) || (sport->regs->rcr1 & RSPEN))
@@ -73,8 +79,13 @@ int sport_set_multichannel(struct sport_device *sport,
 				(packed ? (MCDTXPE|MCDRXPE) : 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sport->regs->mtcs0 = mask;
 		sport->regs->mrcs0 = mask;
+=======
+		sport->regs->mtcs0 = tx_mask;
+		sport->regs->mrcs0 = rx_mask;
+>>>>>>> v3.18
 =======
 		sport->regs->mtcs0 = tx_mask;
 		sport->regs->mrcs0 = rx_mask;
@@ -192,8 +203,14 @@ static inline int sport_hook_rx_dummy(struct sport_device *sport)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(sport->dummy_rx_desc == NULL);
 	BUG_ON(sport->curr_rx_desc == sport->dummy_rx_desc);
+=======
+	if (WARN_ON(!sport->dummy_rx_desc) ||
+	    WARN_ON(sport->curr_rx_desc == sport->dummy_rx_desc))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!sport->dummy_rx_desc) ||
 	    WARN_ON(sport->curr_rx_desc == sport->dummy_rx_desc))
@@ -269,8 +286,14 @@ int sport_rx_start(struct sport_device *sport)
 	if (sport->tx_run) {
 		/* tx is running, rx is not running */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG_ON(sport->dma_rx_desc == NULL);
 		BUG_ON(sport->curr_rx_desc != sport->dummy_rx_desc);
+=======
+		if (WARN_ON(!sport->dma_rx_desc) ||
+		    WARN_ON(sport->curr_rx_desc != sport->dummy_rx_desc))
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 		if (WARN_ON(!sport->dma_rx_desc) ||
 		    WARN_ON(sport->curr_rx_desc != sport->dummy_rx_desc))
@@ -323,8 +346,14 @@ static inline int sport_hook_tx_dummy(struct sport_device *sport)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(sport->dummy_tx_desc == NULL);
 	BUG_ON(sport->curr_tx_desc == sport->dummy_tx_desc);
+=======
+	if (WARN_ON(!sport->dummy_tx_desc) ||
+	    WARN_ON(sport->curr_tx_desc == sport->dummy_tx_desc))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!sport->dummy_tx_desc) ||
 	    WARN_ON(sport->curr_tx_desc == sport->dummy_tx_desc))
@@ -362,8 +391,14 @@ int sport_tx_start(struct sport_device *sport)
 		return -EBUSY;
 	if (sport->rx_run) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG_ON(sport->dma_tx_desc == NULL);
 		BUG_ON(sport->curr_tx_desc != sport->dummy_tx_desc);
+=======
+		if (WARN_ON(!sport->dma_tx_desc) ||
+		    WARN_ON(sport->curr_tx_desc != sport->dummy_tx_desc))
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 		if (WARN_ON(!sport->dma_tx_desc) ||
 		    WARN_ON(sport->curr_tx_desc != sport->dummy_tx_desc))
@@ -804,7 +839,12 @@ int sport_set_rx_callback(struct sport_device *sport,
 		       void (*rx_callback)(void *), void *rx_data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(rx_callback == NULL);
+=======
+	if (WARN_ON(!rx_callback))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!rx_callback))
 		return -EINVAL;
@@ -820,7 +860,12 @@ int sport_set_tx_callback(struct sport_device *sport,
 		void (*tx_callback)(void *), void *tx_data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(tx_callback == NULL);
+=======
+	if (WARN_ON(!tx_callback))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!tx_callback))
 		return -EINVAL;
@@ -836,7 +881,12 @@ int sport_set_err_callback(struct sport_device *sport,
 		void (*err_callback)(void *), void *err_data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(err_callback == NULL);
+=======
+	if (WARN_ON(!err_callback))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!err_callback))
 		return -EINVAL;
@@ -908,7 +958,12 @@ struct sport_device *sport_init(struct platform_device *pdev,
 	param.wdsize = wdsize;
 	param.dummy_count = dummy_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(param.wdsize == 0 || param.dummy_count == 0);
+=======
+	if (WARN_ON(param.wdsize == 0 || param.dummy_count == 0))
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(param.wdsize == 0 || param.dummy_count == 0))
 		return NULL;

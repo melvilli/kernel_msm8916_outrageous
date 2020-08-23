@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -48,6 +51,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _E1000_REGS_H_
@@ -67,6 +73,10 @@
 #define E1000_CONNSW   0x00034  /* Copper/Fiber switch control - RW */
 #define E1000_VET      0x00038  /* VLAN Ether Type - RW */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define E1000_TSSDP    0x0003C  /* Time Sync SDP Configuration Register - RW */
+>>>>>>> v3.18
 =======
 #define E1000_TSSDP    0x0003C  /* Time Sync SDP Configuration Register - RW */
 >>>>>>> v3.18
@@ -99,6 +109,10 @@
 #define E1000_PBS      0x01008  /* Packet Buffer Size */
 #define E1000_EEMNGCTL 0x01010  /* MNG EEprom Control */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define E1000_EEARBC_I210 0x12024  /* EEPROM Auto Read Bus Control */
+>>>>>>> v3.18
 =======
 #define E1000_EEARBC_I210 0x12024  /* EEPROM Auto Read Bus Control */
 >>>>>>> v3.18
@@ -136,7 +150,10 @@
 #define E1000_TIMINCA    0x0B608 /* Increment attributes register - RW */
 #define E1000_TSAUXC     0x0B640 /* Timesync Auxiliary Control register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define E1000_TRGTTIML0  0x0B644 /* Target Time Register 0 Low  - RW */
 #define E1000_TRGTTIMH0  0x0B648 /* Target Time Register 0 High - RW */
 #define E1000_TRGTTIML1  0x0B64C /* Target Time Register 1 Low  - RW */
@@ -145,6 +162,9 @@
 #define E1000_AUXSTMPH0  0x0B660 /* Auxiliary Time Stamp 0 Register High - RO */
 #define E1000_AUXSTMPL1  0x0B664 /* Auxiliary Time Stamp 1 Register Low  - RO */
 #define E1000_AUXSTMPH1  0x0B668 /* Auxiliary Time Stamp 1 Register High - RO */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define E1000_SYSTIMR    0x0B6F8 /* System time register Residue */
 #define E1000_TSICR      0x0B66C /* Interrupt Cause Register */
@@ -232,11 +252,17 @@
 #define E1000_TDWBAH(_n)  ((_n) < 4 ? (0x0383C + ((_n) * 0x100)) \
 				    : (0x0E03C + ((_n) * 0x40)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #define E1000_RXPBS	0x02404  /* Rx Packet Buffer Size - RW */
 #define E1000_TXPBS	0x03404  /* Tx Packet Buffer Size - RW */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define E1000_TDFH     0x03410  /* TX Data FIFO Head - RW */
 #define E1000_TDFT     0x03418  /* TX Data FIFO Tail - RW */
@@ -345,9 +371,15 @@
 #define E1000_PSRTYPE(_i)       (0x05480 + ((_i) * 4))
 #define E1000_RAL(_i)  (((_i) <= 15) ? (0x05400 + ((_i) * 8)) : \
 <<<<<<< HEAD
+<<<<<<< HEAD
                                        (0x054E0 + ((_i - 16) * 8)))
 #define E1000_RAH(_i)  (((_i) <= 15) ? (0x05404 + ((_i) * 8)) : \
                                        (0x054E4 + ((_i - 16) * 8)))
+=======
+					(0x054E0 + ((_i - 16) * 8)))
+#define E1000_RAH(_i)  (((_i) <= 15) ? (0x05404 + ((_i) * 8)) : \
+					(0x054E4 + ((_i - 16) * 8)))
+>>>>>>> v3.18
 =======
 					(0x054E0 + ((_i - 16) * 8)))
 #define E1000_RAH(_i)  (((_i) <= 15) ? (0x05404 + ((_i) * 8)) : \
@@ -403,6 +435,10 @@
 #define E1000_IOVTCL    0x05BBC /* IOV Control Register */
 #define E1000_TXSWC     0x05ACC /* Tx Switch Control */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define E1000_LVMMC	0x03548 /* Last VM Misbehavior cause */
+>>>>>>> v3.18
 =======
 #define E1000_LVMMC	0x03548 /* Last VM Misbehavior cause */
 >>>>>>> v3.18
@@ -410,6 +446,7 @@
 #define E1000_P2VMAILBOX(_n)   (0x00C00 + (4 * (_n)))
 #define E1000_VMBMEM(_n)       (0x00800 + (64 * (_n)))
 #define E1000_VMOLR(_n)        (0x05AD0 + (4 * (_n)))
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define E1000_VLVF(_n)         (0x05D00 + (4 * (_n))) /* VLAN Virtual Machine
                                                        * Filter - RW */
@@ -422,6 +459,8 @@
 #define array_wr32(reg, offset, value) \
 	(writel(value, hw->hw_addr + reg + ((offset) << 2)))
 =======
+=======
+>>>>>>> v3.18
 #define E1000_DVMOLR(_n)       (0x0C038 + (64 * (_n)))
 #define E1000_VLVF(_n)         (0x05D00 + (4 * (_n))) /* VLAN VM Filter */
 #define E1000_VMVIR(_n)        (0x03700 + (4 * (_n)))
@@ -445,6 +484,9 @@ do { \
 #define array_wr32(reg, offset, value) \
 	wr32((reg) + ((offset) << 2), (value))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define array_rd32(reg, offset) \
 	(readl(hw->hw_addr + reg + ((offset) << 2)))
@@ -485,6 +527,11 @@ do { \
 #define E1000_INVM_SIZE		64 /* Number of INVM Data Registers */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define E1000_REMOVED(h) unlikely(!(h))
+
+>>>>>>> v3.18
 =======
 #define E1000_REMOVED(h) unlikely(!(h))
 

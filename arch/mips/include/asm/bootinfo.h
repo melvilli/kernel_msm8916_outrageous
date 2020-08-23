@@ -62,6 +62,7 @@
  * Valid machtype for Loongson family
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MACH_LOONGSON_UNKNOWN  0
 #define MACH_LEMOTE_FL2E       1
 #define MACH_LEMOTE_FL2F       2
@@ -72,6 +73,8 @@
 #define MACH_LEMOTE_LL2F       7
 #define MACH_LOONGSON_END      8
 =======
+=======
+>>>>>>> v3.18
 enum loongson_machine_type {
 	MACH_LOONGSON_UNKNOWN,
 	MACH_LEMOTE_FL2E,
@@ -87,6 +90,9 @@ enum loongson_machine_type {
 	MACH_LEMOTE_A1205,
 	MACH_LOONGSON_END
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -131,6 +137,11 @@ extern void free_init_pages(const char *what,
 			    unsigned long begin, unsigned long end);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void (*free_init_pages_eva)(void *begin, void *end);
+
+>>>>>>> v3.18
 =======
 extern void (*free_init_pages_eva)(void *begin, void *end);
 

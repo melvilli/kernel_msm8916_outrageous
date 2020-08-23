@@ -36,11 +36,14 @@
 #define _ASM_NLM_XLR_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Platform UART functions */
 struct uart_port;
 unsigned int nlm_xlr_uart_in(struct uart_port *, int);
 void nlm_xlr_uart_out(struct uart_port *, int, int);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* SMP helpers */

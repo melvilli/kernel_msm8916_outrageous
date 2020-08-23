@@ -34,7 +34,11 @@ struct hypervisor_x86 {
 
 	/* Detection routine */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool		(*detect)(void);
+=======
+	uint32_t	(*detect)(void);
+>>>>>>> v3.18
 =======
 	uint32_t	(*detect)(void);
 >>>>>>> v3.18

@@ -261,7 +261,10 @@ static void pci200_pci_remove_one(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (card->ports[0].netdev)
@@ -419,7 +422,11 @@ static int pci200_pci_init_one(struct pci_dev *pdev,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pci200_pci_tbl) = {
+=======
+static const struct pci_device_id pci200_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pci200_pci_tbl[] = {
 >>>>>>> v3.18

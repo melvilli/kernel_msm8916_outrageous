@@ -119,7 +119,11 @@ static void __init sn_fixup_ionodes(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * sn_pci_legacy_window_fixup - Create PCI controller windows for
+=======
+ * sn_pci_legacy_window_fixup - Setup PCI resources for
+>>>>>>> v3.18
 =======
  * sn_pci_legacy_window_fixup - Setup PCI resources for
 >>>>>>> v3.18
@@ -129,6 +133,7 @@ static void __init sn_fixup_ionodes(void)
  *				and their resources (_CRS),
  */
 static void
+<<<<<<< HEAD
 <<<<<<< HEAD
 sn_legacy_pci_window_fixup(struct pci_controller *controller,
 			   u64 legacy_io, u64 legacy_mem)
@@ -194,6 +199,8 @@ sn_pci_window_fixup(struct pci_dev *dev, unsigned int count,
 	controller->windows = new_count;
 	controller->window = new_window;
 =======
+=======
+>>>>>>> v3.18
 sn_legacy_pci_window_fixup(struct resource *res,
 		u64 legacy_io, u64 legacy_mem)
 {
@@ -207,6 +214,9 @@ sn_legacy_pci_window_fixup(struct resource *res,
 		res[1].start = legacy_mem;
 		res[1].end = res[1].start + (1024 * 1024) - 1;
 		res[1].parent = &iomem_resource;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -220,9 +230,13 @@ void
 sn_io_slot_fixup(struct pci_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int count = 0;
 	int idx;
 	s64 pci_addrs[PCI_ROM_RESOURCE + 1];
+=======
+	int idx;
+>>>>>>> v3.18
 =======
 	int idx;
 >>>>>>> v3.18
@@ -254,7 +268,10 @@ sn_io_slot_fixup(struct pci_dev *dev)
 
 		if (!pcidev_info->pdi_pio_mapped_addr[idx]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pci_addrs[idx] = -1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			continue;
@@ -265,11 +282,16 @@ sn_io_slot_fixup(struct pci_dev *dev)
 		size = end - start;
 		if (size == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pci_addrs[idx] = -1;
 			continue;
 		}
 		pci_addrs[idx] = start;
 		count++;
+=======
+			continue;
+		}
+>>>>>>> v3.18
 =======
 			continue;
 		}
@@ -309,11 +331,14 @@ sn_io_slot_fixup(struct pci_dev *dev)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Create a pci_window in the pci_controller struct for
 	 * each device resource.
 	 */
 	if (count > 0)
 		sn_pci_window_fixup(dev, count, pci_addrs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -333,8 +358,13 @@ sn_pci_controller_fixup(int segment, int busnum, struct pci_bus *bus)
 	struct pci_controller *controller;
 	struct pcibus_bussoft *prom_bussoft_ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LIST_HEAD(resources);
 	int i;
+=======
+	struct resource *res;
+	LIST_HEAD(resources);
+>>>>>>> v3.18
 =======
 	struct resource *res;
 	LIST_HEAD(resources);
@@ -351,6 +381,12 @@ sn_pci_controller_fixup(int segment, int busnum, struct pci_bus *bus)
 	controller->segment = segment;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	res = kcalloc(2, sizeof(struct resource), GFP_KERNEL);
+	BUG_ON(!res);
+
+>>>>>>> v3.18
 =======
 	res = kcalloc(2, sizeof(struct resource), GFP_KERNEL);
 	BUG_ON(!res);
@@ -362,6 +398,7 @@ sn_pci_controller_fixup(int segment, int busnum, struct pci_bus *bus)
 	 */
 	controller->platform_data = prom_bussoft_ptr;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sn_legacy_pci_window_fixup(controller,
 				   prom_bussoft_ptr->bs_legacy_io,
@@ -384,6 +421,8 @@ error_return:
 	kfree(controller);
 	return;
 =======
+=======
+>>>>>>> v3.18
 	sn_legacy_pci_window_fixup(res,
 			prom_bussoft_ptr->bs_legacy_io,
 			prom_bussoft_ptr->bs_legacy_mem);
@@ -398,6 +437,9 @@ error_return:
 		kfree(res);
 		kfree(controller);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

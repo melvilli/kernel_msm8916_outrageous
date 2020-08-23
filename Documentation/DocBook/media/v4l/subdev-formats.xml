@@ -90,7 +90,11 @@
       </para>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       <para>The following tables list existing packet RGB formats.</para>
+=======
+      <para>The following tables list existing packed RGB formats.</para>
+>>>>>>> v3.18
 =======
       <para>The following tables list existing packed RGB formats.</para>
 >>>>>>> v3.18
@@ -101,6 +105,7 @@
 	  <colspec colname="id" align="left" />
 	  <colspec colname="code" align="center"/>
 	  <colspec colname="bit" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  <colspec colnum="4" colname="b23" align="center" />
 	  <colspec colnum="5" colname="b22" align="center" />
@@ -128,6 +133,8 @@
 	  <colspec colnum="27" colname="b00" align="center" />
 	  <spanspec namest="b23" nameend="b00" spanname="b0" />
 =======
+=======
+>>>>>>> v3.18
 	  <colspec colnum="4" colname="b31" align="center" />
 	  <colspec colnum="5" colname="b20" align="center" />
 	  <colspec colnum="6" colname="b29" align="center" />
@@ -161,6 +168,9 @@
 	  <colspec colnum="34" colname="b01" align="center" />
 	  <colspec colnum="35" colname="b00" align="center" />
 	  <spanspec namest="b31" nameend="b00" spanname="b0" />
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  <thead>
 	    <row>
@@ -174,7 +184,10 @@
 	      <entry></entry>
 	      <entry>Bit</entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	      <entry>31</entry>
 	      <entry>30</entry>
 	      <entry>29</entry>
@@ -183,6 +196,9 @@
 	      <entry>26</entry>
 	      <entry>25</entry>
 	      <entry>24</entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>23</entry>
 	      <entry>22</entry>
@@ -216,7 +232,11 @@
 	      <entry>0x1001</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -234,7 +254,11 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -252,7 +276,11 @@
 	      <entry>0x1002</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -270,7 +298,11 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -288,7 +320,11 @@
 	      <entry>0x1003</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -306,7 +342,11 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -324,7 +364,11 @@
 	      <entry>0x1004</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -342,7 +386,11 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -360,7 +408,11 @@
 	      <entry>0x1005</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -378,7 +430,11 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -396,7 +452,11 @@
 	      <entry>0x1006</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -414,7 +474,11 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -432,7 +496,11 @@
 	      <entry>0x1007</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -450,7 +518,11 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -468,7 +540,11 @@
 	      <entry>0x1008</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -486,7 +562,11 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-16;
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -504,12 +584,16 @@
 	      <entry>0x1009</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-14;
+>>>>>>> v3.18
 =======
 	      &dash-ent-14;
 >>>>>>> v3.18
@@ -537,6 +621,10 @@
 	      <entry>0x100a</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	      &dash-ent-8;
+>>>>>>> v3.18
 =======
 	      &dash-ent-8;
 >>>>>>> v3.18
@@ -570,9 +658,13 @@
 	      <entry>0x100b</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-20;
+>>>>>>> v3.18
 =======
 	      &dash-ent-20;
 >>>>>>> v3.18
@@ -594,9 +686,13 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-20;
+>>>>>>> v3.18
 =======
 	      &dash-ent-20;
 >>>>>>> v3.18
@@ -618,9 +714,13 @@
 	      <entry>0x100c</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-20;
+>>>>>>> v3.18
 =======
 	      &dash-ent-20;
 >>>>>>> v3.18
@@ -642,10 +742,13 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
 =======
+=======
+>>>>>>> v3.18
 	      &dash-ent-20;
 	      <entry>r<subscript>7</subscript></entry>
 	      <entry>r<subscript>6</subscript></entry>
@@ -672,6 +775,9 @@
 	      <entry>a<subscript>2</subscript></entry>
 	      <entry>a<subscript>1</subscript></entry>
 	      <entry>a<subscript>0</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>r<subscript>7</subscript></entry>
 	      <entry>r<subscript>6</subscript></entry>
@@ -686,7 +792,10 @@
 	      <entry>g<subscript>5</subscript></entry>
 	      <entry>g<subscript>4</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	      <entry>g<subscript>3</subscript></entry>
 	      <entry>g<subscript>2</subscript></entry>
 	      <entry>g<subscript>1</subscript></entry>
@@ -699,6 +808,9 @@
 	      <entry>b<subscript>2</subscript></entry>
 	      <entry>b<subscript>1</subscript></entry>
 	      <entry>b<subscript>0</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    </row>
 	  </tbody>
@@ -754,7 +866,11 @@
       </figure>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       <para>The following table lists existing packet Bayer formats. The data
+=======
+      <para>The following table lists existing packed Bayer formats. The data
+>>>>>>> v3.18
 =======
       <para>The following table lists existing packed Bayer formats. The data
 >>>>>>> v3.18
@@ -1321,7 +1437,11 @@
       </para>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<para><xref linkend="v4l2-mbus-pixelcode-yuv8"/> list existing packet YUV
+=======
+	<para><xref linkend="v4l2-mbus-pixelcode-yuv8"/> lists existing packed YUV
+>>>>>>> v3.18
 =======
 	<para><xref linkend="v4l2-mbus-pixelcode-yuv8"/> lists existing packed YUV
 >>>>>>> v3.18
@@ -1337,6 +1457,10 @@
 	   <listitem><para>u<subscript>x</subscript> for blue chroma component bit number x</para></listitem>
 	   <listitem><para>v<subscript>x</subscript> for red chroma component bit number x</para></listitem>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	   <listitem><para>a<subscript>x</subscript> for alpha component bit number x</para></listitem>
+>>>>>>> v3.18
 =======
 	   <listitem><para>a<subscript>x</subscript> for alpha component bit number x</para></listitem>
 >>>>>>> v3.18
@@ -1350,6 +1474,7 @@
 	  <colspec colname="id" align="left" />
 	  <colspec colname="code" align="center"/>
 	  <colspec colname="bit" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 	  <colspec colnum="4" colname="b29" align="center" />
 	  <colspec colnum="5" colname="b28" align="center" />
@@ -1383,6 +1508,8 @@
 	  <colspec colnum="33" colname="b00" align="center" />
 	  <spanspec namest="b29" nameend="b00" spanname="b0" />
 =======
+=======
+>>>>>>> v3.18
 	  <colspec colnum="4" colname="b31" align="center" />
 	  <colspec colnum="5" colname="b20" align="center" />
 	  <colspec colnum="6" colname="b29" align="center" />
@@ -1416,6 +1543,9 @@
 	  <colspec colnum="34" colname="b01" align="center" />
 	  <colspec colnum="35" colname="b00" align="center" />
 	  <spanspec namest="b31" nameend="b00" spanname="b0" />
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  <thead>
 	    <row>
@@ -1429,6 +1559,11 @@
 	      <entry></entry>
 	      <entry>Bit</entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	      <entry>31</entry>
+	      <entry>30</entry>
+>>>>>>> v3.18
 =======
 	      <entry>31</entry>
 	      <entry>30</entry>
@@ -1471,10 +1606,14 @@
 	      <entry>0x2001</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1492,6 +1631,7 @@
 	      <entry>0x2015</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
@@ -1504,6 +1644,9 @@
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1521,6 +1664,7 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
@@ -1533,6 +1677,9 @@
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1550,10 +1697,14 @@
 	      <entry>0x2002</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1571,10 +1722,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1592,10 +1747,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1613,10 +1772,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1634,10 +1797,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1655,10 +1822,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1676,10 +1847,14 @@
 	      <entry>0x2003</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1697,10 +1872,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1718,10 +1897,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1739,10 +1922,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1760,10 +1947,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1781,10 +1972,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1802,10 +1997,14 @@
 	      <entry>0x2004</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1823,10 +2022,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1844,10 +2047,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1865,10 +2072,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1886,10 +2097,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1907,10 +2122,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1928,10 +2147,14 @@
 	      <entry>0x2005</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1949,10 +2172,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1970,10 +2197,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -1991,10 +2222,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2012,10 +2247,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2033,10 +2272,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2054,10 +2297,14 @@
 	      <entry>0x2006</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2075,10 +2322,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2096,10 +2347,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2117,10 +2372,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2138,10 +2397,14 @@
 	      <entry>0x2007</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2159,10 +2422,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2180,10 +2447,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2201,10 +2472,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2222,10 +2497,14 @@
 	      <entry>0x2008</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2243,10 +2522,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2264,10 +2547,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2285,10 +2572,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2306,10 +2597,14 @@
 	      <entry>0x2009</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2327,10 +2622,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2348,10 +2647,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2369,10 +2672,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-24;
+>>>>>>> v3.18
 =======
 	      &dash-ent-24;
 >>>>>>> v3.18
@@ -2390,6 +2697,7 @@
 	      <entry>0x200a</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
 	      <entry>y<subscript>9</subscript></entry>
@@ -2412,6 +2720,9 @@
 =======
 	      &dash-ent-22;
 >>>>>>> v3.18
+=======
+	      &dash-ent-22;
+>>>>>>> v3.18
 	      <entry>y<subscript>9</subscript></entry>
 	      <entry>y<subscript>8</subscript></entry>
 	      <entry>y<subscript>7</subscript></entry>
@@ -2424,6 +2735,7 @@
 	      <entry>y<subscript>0</subscript></entry>
 	    </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <row>
 	      <entry></entry>
 	      <entry></entry>
@@ -2431,11 +2743,16 @@
 	      &dash-ent-10;
 	      &dash-ent-10;
 =======
+=======
+>>>>>>> v3.18
 	    <row id="V4L2-MBUS-FMT-UYVY10-2X10">
 	      <entry>V4L2_MBUS_FMT_UYVY10_2X10</entry>
 	      <entry>0x2018</entry>
 	      <entry></entry>
 	      &dash-ent-22;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>u<subscript>9</subscript></entry>
 	      <entry>u<subscript>8</subscript></entry>
@@ -2453,8 +2770,12 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
+=======
+	      &dash-ent-22;
+>>>>>>> v3.18
 =======
 	      &dash-ent-22;
 >>>>>>> v3.18
@@ -2474,8 +2795,12 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
+=======
+	      &dash-ent-22;
+>>>>>>> v3.18
 =======
 	      &dash-ent-22;
 >>>>>>> v3.18
@@ -2490,6 +2815,7 @@
 	      <entry>v<subscript>1</subscript></entry>
 	      <entry>v<subscript>0</subscript></entry>
 	    </row>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    <row id="V4L2-MBUS-FMT-YVYU10-2X10">
 	      <entry>V4L2_MBUS_FMT_YVYU10_2X10</entry>
@@ -2498,11 +2824,16 @@
 	      &dash-ent-10;
 	      &dash-ent-10;
 =======
+=======
+>>>>>>> v3.18
 	    <row>
 	      <entry></entry>
 	      <entry></entry>
 	      <entry></entry>
 	      &dash-ent-22;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>y<subscript>9</subscript></entry>
 	      <entry>y<subscript>8</subscript></entry>
@@ -2516,6 +2847,7 @@
 	      <entry>y<subscript>0</subscript></entry>
 	    </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <row>
 	      <entry></entry>
 	      <entry></entry>
@@ -2523,11 +2855,16 @@
 	      &dash-ent-10;
 	      &dash-ent-10;
 =======
+=======
+>>>>>>> v3.18
 	    <row id="V4L2-MBUS-FMT-VYUY10-2X10">
 	      <entry>V4L2_MBUS_FMT_VYUY10_2X10</entry>
 	      <entry>0x2019</entry>
 	      <entry></entry>
 	      &dash-ent-22;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>v<subscript>9</subscript></entry>
 	      <entry>v<subscript>8</subscript></entry>
@@ -2545,8 +2882,12 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
+=======
+	      &dash-ent-22;
+>>>>>>> v3.18
 =======
 	      &dash-ent-22;
 >>>>>>> v3.18
@@ -2566,8 +2907,12 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      &dash-ent-10;
+=======
+	      &dash-ent-22;
+>>>>>>> v3.18
 =======
 	      &dash-ent-22;
 >>>>>>> v3.18
@@ -2582,6 +2927,7 @@
 	      <entry>u<subscript>1</subscript></entry>
 	      <entry>u<subscript>0</subscript></entry>
 	    </row>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    <row id="V4L2-MBUS-FMT-Y12-1X12">
 	      <entry>V4L2_MBUS_FMT_Y12_1X12</entry>
@@ -2599,11 +2945,16 @@
 	      <entry>y<subscript>11</subscript></entry>
 	      <entry>y<subscript>10</subscript></entry>
 =======
+=======
+>>>>>>> v3.18
 	    <row>
 	      <entry></entry>
 	      <entry></entry>
 	      <entry></entry>
 	      &dash-ent-22;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>y<subscript>9</subscript></entry>
 	      <entry>y<subscript>8</subscript></entry>
@@ -2617,6 +2968,7 @@
 	      <entry>y<subscript>0</subscript></entry>
 	    </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <row id="V4L2-MBUS-FMT-UYVY8-1X16">
 	      <entry>V4L2_MBUS_FMT_UYVY8_1X16</entry>
 	      <entry>0x200f</entry>
@@ -2627,6 +2979,8 @@
 	      <entry>-</entry>
 	      <entry>-</entry>
 =======
+=======
+>>>>>>> v3.18
 	    <row id="V4L2-MBUS-FMT-YUYV10-2X10">
 	      <entry>V4L2_MBUS_FMT_YUYV10_2X10</entry>
 	      <entry>0x200b</entry>
@@ -2650,6 +3004,9 @@
 	      &dash-ent-22;
 	      <entry>u<subscript>9</subscript></entry>
 	      <entry>u<subscript>8</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>u<subscript>7</subscript></entry>
 	      <entry>u<subscript>6</subscript></entry>
@@ -2660,7 +3017,10 @@
 	      <entry>u<subscript>1</subscript></entry>
 	      <entry>u<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    </row>
 	    <row>
 	      <entry></entry>
@@ -2669,6 +3029,9 @@
 	      &dash-ent-22;
 	      <entry>y<subscript>9</subscript></entry>
 	      <entry>y<subscript>8</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>y<subscript>7</subscript></entry>
 	      <entry>y<subscript>6</subscript></entry>
@@ -2684,11 +3047,17 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-22;
+	      <entry>v<subscript>9</subscript></entry>
+	      <entry>v<subscript>8</subscript></entry>
+>>>>>>> v3.18
 =======
 	      &dash-ent-22;
 	      <entry>v<subscript>9</subscript></entry>
@@ -2703,6 +3072,7 @@
 	      <entry>v<subscript>1</subscript></entry>
 	      <entry>v<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      <entry>y<subscript>7</subscript></entry>
 	      <entry>y<subscript>6</subscript></entry>
 	      <entry>y<subscript>5</subscript></entry>
@@ -2710,6 +3080,8 @@
 	      <entry>y<subscript>3</subscript></entry>
 	      <entry>y<subscript>2</subscript></entry>
 =======
+=======
+>>>>>>> v3.18
 	    </row>
 	    <row id="V4L2-MBUS-FMT-YVYU10-2X10">
 	      <entry>V4L2_MBUS_FMT_YVYU10_2X10</entry>
@@ -2834,6 +3206,9 @@
 	      <entry>y<subscript>4</subscript></entry>
 	      <entry>y<subscript>3</subscript></entry>
 	      <entry>y<subscript>2</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>y<subscript>1</subscript></entry>
 	      <entry>y<subscript>0</subscript></entry>
@@ -2843,11 +3218,15 @@
 	      <entry>0x2010</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-16;
+>>>>>>> v3.18
 =======
 	      &dash-ent-16;
 >>>>>>> v3.18
@@ -2873,11 +3252,15 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-16;
+>>>>>>> v3.18
 =======
 	      &dash-ent-16;
 >>>>>>> v3.18
@@ -2903,11 +3286,15 @@
 	      <entry>0x2011</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-16;
+>>>>>>> v3.18
 =======
 	      &dash-ent-16;
 >>>>>>> v3.18
@@ -2933,11 +3320,15 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-16;
+>>>>>>> v3.18
 =======
 	      &dash-ent-16;
 >>>>>>> v3.18
@@ -2963,11 +3354,15 @@
 	      <entry>0x2012</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-16;
+>>>>>>> v3.18
 =======
 	      &dash-ent-16;
 >>>>>>> v3.18
@@ -2993,11 +3388,15 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      &dash-ent-10;
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-16;
+>>>>>>> v3.18
 =======
 	      &dash-ent-16;
 >>>>>>> v3.18
@@ -3023,10 +3422,14 @@
 	      <entry>0x2014</entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-16;
+>>>>>>> v3.18
 =======
 	      &dash-ent-16;
 >>>>>>> v3.18
@@ -3052,10 +3455,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-16;
+>>>>>>> v3.18
 =======
 	      &dash-ent-16;
 >>>>>>> v3.18
@@ -3081,10 +3488,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-16;
+>>>>>>> v3.18
 =======
 	      &dash-ent-16;
 >>>>>>> v3.18
@@ -3110,10 +3521,14 @@
 	      <entry></entry>
 	      <entry></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
 	      <entry>-</entry>
+=======
+	      &dash-ent-16;
+>>>>>>> v3.18
 =======
 	      &dash-ent-16;
 >>>>>>> v3.18
@@ -3134,6 +3549,7 @@
 	      <entry>v<subscript>1</subscript></entry>
 	      <entry>v<subscript>0</subscript></entry>
 	    </row>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    <row id="V4L2-MBUS-FMT-YUYV10-1X20">
 	      <entry>V4L2_MBUS_FMT_YUYV10_1X20</entry>
@@ -3151,11 +3567,16 @@
 	      <entry>y<subscript>1</subscript></entry>
 	      <entry>y<subscript>0</subscript></entry>
 =======
+=======
+>>>>>>> v3.18
 	    <row id="V4L2-MBUS-FMT-UYVY10-1X20">
 	      <entry>V4L2_MBUS_FMT_UYVY10_1X20</entry>
 	      <entry>0x201a</entry>
 	      <entry></entry>
 	      &dash-ent-12;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>u<subscript>9</subscript></entry>
 	      <entry>u<subscript>8</subscript></entry>
@@ -3168,12 +3589,15 @@
 	      <entry>u<subscript>1</subscript></entry>
 	      <entry>u<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    </row>
 	    <row>
 	      <entry></entry>
 	      <entry></entry>
 	      <entry></entry>
 	      &dash-ent-10;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	      <entry>y<subscript>9</subscript></entry>
@@ -3187,13 +3611,19 @@
 	      <entry>y<subscript>1</subscript></entry>
 	      <entry>y<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    </row>
 	    <row>
 	      <entry></entry>
 	      <entry></entry>
 	      <entry></entry>
 	      &dash-ent-12;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>v<subscript>9</subscript></entry>
 	      <entry>v<subscript>8</subscript></entry>
@@ -3205,6 +3635,7 @@
 	      <entry>v<subscript>2</subscript></entry>
 	      <entry>v<subscript>1</subscript></entry>
 	      <entry>v<subscript>0</subscript></entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    </row>
 	    <row id="V4L2-MBUS-FMT-YVYU10-1X20">
@@ -3214,6 +3645,8 @@
 	      &dash-ent-10;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	      <entry>y<subscript>9</subscript></entry>
 	      <entry>y<subscript>8</subscript></entry>
 	      <entry>y<subscript>7</subscript></entry>
@@ -3225,13 +3658,19 @@
 	      <entry>y<subscript>1</subscript></entry>
 	      <entry>y<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    </row>
 	    <row id="V4L2-MBUS-FMT-VYUY10-1X20">
 	      <entry>V4L2_MBUS_FMT_VYUY10_1X20</entry>
 	      <entry>0x201b</entry>
 	      <entry></entry>
 	      &dash-ent-12;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>v<subscript>9</subscript></entry>
 	      <entry>v<subscript>8</subscript></entry>
@@ -3244,12 +3683,15 @@
 	      <entry>v<subscript>1</subscript></entry>
 	      <entry>v<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    </row>
 	    <row>
 	      <entry></entry>
 	      <entry></entry>
 	      <entry></entry>
 	      &dash-ent-10;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	      <entry>y<subscript>9</subscript></entry>
@@ -3263,13 +3705,19 @@
 	      <entry>y<subscript>1</subscript></entry>
 	      <entry>y<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    </row>
 	    <row>
 	      <entry></entry>
 	      <entry></entry>
 	      <entry></entry>
 	      &dash-ent-12;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>u<subscript>9</subscript></entry>
 	      <entry>u<subscript>8</subscript></entry>
@@ -3282,12 +3730,15 @@
 	      <entry>u<subscript>1</subscript></entry>
 	      <entry>u<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    </row>
 	    <row id="V4L2-MBUS-FMT-YUV10-1X30">
 	      <entry>V4L2_MBUS_FMT_YUV10_1X30</entry>
 	      <entry>0x2014</entry>
 	      <entry></entry>
 =======
+=======
+>>>>>>> v3.18
 	      <entry>y<subscript>9</subscript></entry>
 	      <entry>y<subscript>8</subscript></entry>
 	      <entry>y<subscript>7</subscript></entry>
@@ -3304,6 +3755,9 @@
 	      <entry>0x200d</entry>
 	      <entry></entry>
 	      &dash-ent-12;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>y<subscript>9</subscript></entry>
 	      <entry>y<subscript>8</subscript></entry>
@@ -3326,7 +3780,10 @@
 	      <entry>u<subscript>1</subscript></entry>
 	      <entry>u<subscript>0</subscript></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    </row>
 	    <row>
 	      <entry></entry>
@@ -3343,6 +3800,9 @@
 	      <entry>y<subscript>2</subscript></entry>
 	      <entry>y<subscript>1</subscript></entry>
 	      <entry>y<subscript>0</subscript></entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	      <entry>v<subscript>9</subscript></entry>
 	      <entry>v<subscript>8</subscript></entry>
@@ -3356,7 +3816,10 @@
 	      <entry>v<subscript>0</subscript></entry>
 	    </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    <row id="V4L2-MBUS-FMT-YVYU10-1X20">
 	      <entry>V4L2_MBUS_FMT_YVYU10_1X20</entry>
 	      <entry>0x200e</entry>
@@ -4168,6 +4631,9 @@
 	      <entry>v<subscript>1</subscript></entry>
 	      <entry>v<subscript>0</subscript></entry>
 	    </row>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  </tbody>
 	</tgroup>

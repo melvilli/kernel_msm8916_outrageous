@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -34,6 +37,7 @@
 #define __RTL92C_PHY_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*It must always set to 4, otherwise read efuse table secquence will be wrong.*/
 #define	MAX_TX_COUNT				4
 
@@ -46,6 +50,8 @@
 #define RT_CANNOT_IO(hw)			false
 #define HIGHPOWER_RADIOA_ARRAYLEN		22
 =======
+=======
+>>>>>>> v3.18
 /* MAX_TX_COUNT must always set to 4, otherwise read efuse
  * table secquence will be wrong.
  */
@@ -59,6 +65,9 @@
 
 #define RT_CANNOT_IO(hw)			false
 #define HIGHPOWER_RADIOA_ARRAYLEN	22
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define IQK_ADDA_REG_NUM			16
@@ -66,7 +75,11 @@
 #define MAX_TOLERANCE				5
 #define	IQK_DELAY_TIME				10
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	IDX_MAP					15
+=======
+#define	INDEX_MAPPING_NUM	15
+>>>>>>> v3.18
 =======
 #define	INDEX_MAPPING_NUM	15
 >>>>>>> v3.18
@@ -75,6 +88,7 @@
 #define	APK_AFE_REG_NUM				16
 #define	APK_CURVE_REG_NUM			4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	PATH_NUM				2
 
 #define LOOP_LIMIT				5
@@ -82,12 +96,17 @@
 #define ANTENNADIVERSITYVALUE			0x80
 #define MAX_TXPWR_IDX_NMODE_92S			63
 =======
+=======
+>>>>>>> v3.18
 #define	PATH_NUM					2
 
 #define LOOP_LIMIT					5
 #define MAX_STALL_TIME				50
 #define ANTENNADIVERSITYVALUE		0x80
 #define MAX_TXPWR_IDX_NMODE_92S		63
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RESET_CNT_LIMIT				3
 
@@ -99,8 +118,13 @@
 #define CT_OFFSET_MAC_ADDR			0X16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CT_OFFSET_CCK_TX_PWR_IDX		0x5A
 #define CT_OFFSET_HT401S_TX_PWR_IDX		0x60
+=======
+#define CT_OFFSET_CCK_TX_PWR_IDX			0x5A
+#define CT_OFFSET_HT401S_TX_PWR_IDX			0x60
+>>>>>>> v3.18
 =======
 #define CT_OFFSET_CCK_TX_PWR_IDX			0x5A
 #define CT_OFFSET_HT401S_TX_PWR_IDX			0x60
@@ -113,6 +137,7 @@
 #define CT_OFFSET_HT20_MAX_PWR_OFFSET		0x72
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CT_OFFSET_CHANNEL_PLAH			0x75
 #define CT_OFFSET_THERMAL_METER			0x78
 #define CT_OFFSET_RF_OPTION			0x79
@@ -121,6 +146,8 @@
 
 #define RTL92C_MAX_PATH_NUM			2
 =======
+=======
+>>>>>>> v3.18
 #define CT_OFFSET_CHANNEL_PLAH				0x75
 #define CT_OFFSET_THERMAL_METER				0x78
 #define CT_OFFSET_RF_OPTION					0x79
@@ -128,6 +155,9 @@
 #define CT_OFFSET_CUSTOMER_ID				0x7F
 
 #define RTL92C_MAX_PATH_NUM					2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum swchnlcmd_id {
@@ -208,7 +238,10 @@ struct r_antenna_select_cck {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct efuse_contents {
@@ -243,20 +276,27 @@ struct tx_power_struct {
 
 enum _ANT_DIV_TYPE {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NO_ANTDIV			= 0xFF,
 	CG_TRX_HW_ANTDIV		= 0x01,
 	CGCS_RX_HW_ANTDIV		= 0x02,
 	FIXED_HW_ANTDIV			= 0x03,
 =======
+=======
+>>>>>>> v3.18
 	NO_ANTDIV				= 0xFF,
 	CG_TRX_HW_ANTDIV		= 0x01,
 	CGCS_RX_HW_ANTDIV		= 0x02,
 	FIXED_HW_ANTDIV         = 0x03,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	CG_TRX_SMART_ANTDIV		= 0x04,
 	CGCS_RX_SW_ANTDIV		= 0x05,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern u32 rtl88e_phy_query_bb_reg(struct ieee80211_hw *hw,
 				   u32 regaddr, u32 bitmask);
@@ -284,6 +324,8 @@ extern void rtl88e_phy_sw_chnl_callback(struct ieee80211_hw *hw);
 extern u8 rtl88e_phy_sw_chnl(struct ieee80211_hw *hw);
 extern void rtl88e_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery);
 =======
+=======
+>>>>>>> v3.18
 u32 rtl88e_phy_query_bb_reg(struct ieee80211_hw *hw,
 			    u32 regaddr, u32 bitmask);
 void rtl88e_phy_set_bb_reg(struct ieee80211_hw *hw,
@@ -309,6 +351,9 @@ void rtl88e_phy_set_bw_mode(struct ieee80211_hw *hw,
 void rtl88e_phy_sw_chnl_callback(struct ieee80211_hw *hw);
 u8 rtl88e_phy_sw_chnl(struct ieee80211_hw *hw);
 void rtl88e_phy_iq_calibrate(struct ieee80211_hw *hw, bool b_recovery);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void rtl88e_phy_lc_calibrate(struct ieee80211_hw *hw);
 void rtl88e_phy_set_rfpath_switch(struct ieee80211_hw *hw, bool bmain);
@@ -316,8 +361,13 @@ bool rtl88e_phy_config_rf_with_headerfile(struct ieee80211_hw *hw,
 					  enum radio_path rfpath);
 bool rtl88e_phy_set_io_cmd(struct ieee80211_hw *hw, enum io_type iotype);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool rtl88e_phy_set_rf_power_state(struct ieee80211_hw *hw,
 					  enum rf_pwrstate rfpwr_state);
+=======
+bool rtl88e_phy_set_rf_power_state(struct ieee80211_hw *hw,
+				   enum rf_pwrstate rfpwr_state);
+>>>>>>> v3.18
 =======
 bool rtl88e_phy_set_rf_power_state(struct ieee80211_hw *hw,
 				   enum rf_pwrstate rfpwr_state);

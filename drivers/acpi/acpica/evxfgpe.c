@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -46,7 +50,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -115,8 +124,13 @@ ACPI_EXPORT_SYMBOL(acpi_update_all_gpes)
  * FUNCTION:    acpi_enable_gpe
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PARAMETERS:  gpe_device      - Parent GPE Device. NULL for GPE0/GPE1
  *              gpe_number      - GPE level within the GPE block
+=======
+ * PARAMETERS:  gpe_device          - Parent GPE Device. NULL for GPE0/GPE1
+ *              gpe_number          - GPE level within the GPE block
+>>>>>>> v3.18
 =======
  * PARAMETERS:  gpe_device          - Parent GPE Device. NULL for GPE0/GPE1
  *              gpe_number          - GPE level within the GPE block
@@ -129,7 +143,10 @@ ACPI_EXPORT_SYMBOL(acpi_update_all_gpes)
  *
  ******************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 acpi_status acpi_enable_gpe(acpi_handle gpe_device, u32 gpe_number)
@@ -143,12 +160,15 @@ acpi_status acpi_enable_gpe(acpi_handle gpe_device, u32 gpe_number)
 	flags = acpi_os_acquire_lock(acpi_gbl_gpe_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Ensure that we have a valid GPE number */
 
 	gpe_event_info = acpi_ev_get_gpe_event_info(gpe_device, gpe_number);
 	if (gpe_event_info) {
 		status = acpi_ev_add_gpe_reference(gpe_event_info);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Ensure that we have a valid GPE number and that there is some way
 	 * of handling the GPE (handler or a GPE method). In other words, we
@@ -162,6 +182,9 @@ acpi_status acpi_enable_gpe(acpi_handle gpe_device, u32 gpe_number)
 		} else {
 			status = AE_NO_HANDLER;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -212,7 +235,10 @@ ACPI_EXPORT_SYMBOL(acpi_disable_gpe)
 /*******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_mark_gpe_for_wake
  *
  * PARAMETERS:  gpe_device          - Parent GPE Device. NULL for GPE0/GPE1
@@ -260,6 +286,9 @@ ACPI_EXPORT_SYMBOL(acpi_mark_gpe_for_wake)
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * FUNCTION:    acpi_setup_gpe_for_wake
  *
@@ -450,6 +479,10 @@ acpi_set_gpe_wake_mask(acpi_handle gpe_device, u32 gpe_number, u8 action)
 	switch (action) {
 	case ACPI_GPE_ENABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -459,6 +492,10 @@ acpi_set_gpe_wake_mask(acpi_handle gpe_device, u32 gpe_number, u8 action)
 
 	case ACPI_GPE_DISABLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -468,6 +505,10 @@ acpi_set_gpe_wake_mask(acpi_handle gpe_device, u32 gpe_number, u8 action)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -527,8 +568,13 @@ ACPI_EXPORT_SYMBOL(acpi_clear_gpe)
  * FUNCTION:    acpi_get_gpe_status
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * PARAMETERS:  gpe_device      - Parent GPE Device. NULL for GPE0/GPE1
  *              gpe_number      - GPE level within the GPE block
+=======
+ * PARAMETERS:  gpe_device          - Parent GPE Device. NULL for GPE0/GPE1
+ *              gpe_number          - GPE level within the GPE block
+>>>>>>> v3.18
 =======
  * PARAMETERS:  gpe_device          - Parent GPE Device. NULL for GPE0/GPE1
  *              gpe_number          - GPE level within the GPE block
@@ -566,10 +612,14 @@ acpi_get_gpe_status(acpi_handle gpe_device,
 	status = acpi_hw_get_gpe_status(gpe_event_info, event_status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpe_event_info->flags & ACPI_GPE_DISPATCH_MASK)
 		*event_status |= ACPI_EVENT_FLAG_HANDLE;
 
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18
@@ -642,7 +692,10 @@ acpi_status acpi_enable_all_runtime_gpes(void)
 ACPI_EXPORT_SYMBOL(acpi_enable_all_runtime_gpes)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /******************************************************************************
  *
  * FUNCTION:    acpi_enable_all_wakeup_gpes
@@ -675,6 +728,9 @@ acpi_status acpi_enable_all_wakeup_gpes(void)
 
 ACPI_EXPORT_SYMBOL(acpi_enable_all_wakeup_gpes)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*******************************************************************************
  *
@@ -719,7 +775,10 @@ acpi_install_gpe_block(acpi_handle gpe_device,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Validate the parent device */
 
 	if (node->type != ACPI_TYPE_DEVICE) {
@@ -732,20 +791,29 @@ acpi_install_gpe_block(acpi_handle gpe_device,
 		goto unlock_and_exit;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * For user-installed GPE Block Devices, the gpe_block_base_number
 	 * is always zero
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status =
 	    acpi_ev_create_gpe_block(node, gpe_block_address, register_count, 0,
 				     interrupt_number, &gpe_block);
 =======
+=======
+>>>>>>> v3.18
 	status = acpi_ev_create_gpe_block(node, gpe_block_address->address,
 					  gpe_block_address->space_id,
 					  register_count, 0, interrupt_number,
 					  &gpe_block);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ACPI_FAILURE(status)) {
 		goto unlock_and_exit;
@@ -783,7 +851,11 @@ acpi_install_gpe_block(acpi_handle gpe_device,
 	obj_desc->device.gpe_block = gpe_block;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18
@@ -828,7 +900,10 @@ acpi_status acpi_remove_gpe_block(acpi_handle gpe_device)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Validate the parent device */
 
 	if (node->type != ACPI_TYPE_DEVICE) {
@@ -836,6 +911,9 @@ acpi_status acpi_remove_gpe_block(acpi_handle gpe_device)
 		goto unlock_and_exit;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Get the device_object attached to the node */
 
@@ -852,7 +930,11 @@ acpi_status acpi_remove_gpe_block(acpi_handle gpe_device)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18

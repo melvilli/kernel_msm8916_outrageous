@@ -28,6 +28,10 @@
 #include <sound/initval.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/vmalloc.h>
+>>>>>>> v3.18
 =======
 #include <linux/vmalloc.h>
 >>>>>>> v3.18
@@ -279,7 +283,10 @@ static int snd_card_saa7134_capture_trigger(struct snd_pcm_substream * substream
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int saa7134_alsa_dma_init(struct saa7134_dev *dev, int nr_pages)
 {
 	struct saa7134_dmasound *dma = &dev->dmasound;
@@ -356,6 +363,9 @@ static int saa7134_alsa_dma_free(struct saa7134_dmasound *dma)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * DMA buffer initialization
@@ -375,9 +385,14 @@ static int dsp_buffer_init(struct saa7134_dev *dev)
 	BUG_ON(!dev->dmasound.bufsize);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	videobuf_dma_init(&dev->dmasound.dma);
 	err = videobuf_dma_init_kernel(&dev->dmasound.dma, PCI_DMA_FROMDEVICE,
 				       (dev->dmasound.bufsize + PAGE_SIZE) >> PAGE_SHIFT);
+=======
+	err = saa7134_alsa_dma_init(dev,
+			       (dev->dmasound.bufsize + PAGE_SIZE) >> PAGE_SHIFT);
+>>>>>>> v3.18
 =======
 	err = saa7134_alsa_dma_init(dev,
 			       (dev->dmasound.bufsize + PAGE_SIZE) >> PAGE_SHIFT);
@@ -399,7 +414,11 @@ static int dsp_buffer_free(struct saa7134_dev *dev)
 	BUG_ON(!dev->dmasound.blksize);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	videobuf_dma_free(&dev->dmasound.dma);
+=======
+	saa7134_alsa_dma_free(&dev->dmasound);
+>>>>>>> v3.18
 =======
 	saa7134_alsa_dma_free(&dev->dmasound);
 >>>>>>> v3.18
@@ -725,7 +744,11 @@ static int snd_card_saa7134_hw_params(struct snd_pcm_substream * substream,
 	if (substream->runtime->dma_area) {
 		saa7134_pgtable_free(dev->pci, &dev->dmasound.pt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		videobuf_dma_unmap(&dev->pci->dev, &dev->dmasound.dma);
+=======
+		saa7134_alsa_dma_unmap(dev);
+>>>>>>> v3.18
 =======
 		saa7134_alsa_dma_unmap(dev);
 >>>>>>> v3.18
@@ -745,6 +768,7 @@ static int snd_card_saa7134_hw_params(struct snd_pcm_substream * substream,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (0 != (err = videobuf_dma_map(&dev->pci->dev, &dev->dmasound.dma))) {
 		dsp_buffer_free(dev);
 		return err;
@@ -761,6 +785,8 @@ static int snd_card_saa7134_hw_params(struct snd_pcm_substream * substream,
 		saa7134_pgtable_free(dev->pci, &dev->dmasound.pt);
 		videobuf_dma_unmap(&dev->pci->dev, &dev->dmasound.dma);
 =======
+=======
+>>>>>>> v3.18
 	err = saa7134_alsa_dma_map(dev);
 	if (err) {
 		dsp_buffer_free(dev);
@@ -777,6 +803,9 @@ static int snd_card_saa7134_hw_params(struct snd_pcm_substream * substream,
 	if (err) {
 		saa7134_pgtable_free(dev->pci, &dev->dmasound.pt);
 		saa7134_alsa_dma_unmap(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dsp_buffer_free(dev);
 		return err;
@@ -787,7 +816,11 @@ static int snd_card_saa7134_hw_params(struct snd_pcm_substream * substream,
 	   V4L functions, and force ALSA to use that as the DMA area */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	substream->runtime->dma_area = dev->dmasound.dma.vaddr;
+=======
+	substream->runtime->dma_area = dev->dmasound.vaddr;
+>>>>>>> v3.18
 =======
 	substream->runtime->dma_area = dev->dmasound.vaddr;
 >>>>>>> v3.18
@@ -818,7 +851,11 @@ static int snd_card_saa7134_hw_free(struct snd_pcm_substream * substream)
 	if (substream->runtime->dma_area) {
 		saa7134_pgtable_free(dev->pci, &dev->dmasound.pt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		videobuf_dma_unmap(&dev->pci->dev, &dev->dmasound.dma);
+=======
+		saa7134_alsa_dma_unmap(dev);
+>>>>>>> v3.18
 =======
 		saa7134_alsa_dma_unmap(dev);
 >>>>>>> v3.18
@@ -1196,8 +1233,13 @@ static int alsa_card_saa7134_create(struct saa7134_dev *dev, int devnum)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[devnum], id[devnum], THIS_MODULE,
 			      sizeof(snd_card_saa7134_t), &card);
+=======
+	err = snd_card_new(&dev->pci->dev, index[devnum], id[devnum],
+			   THIS_MODULE, sizeof(snd_card_saa7134_t), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&dev->pci->dev, index[devnum], id[devnum],
 			   THIS_MODULE, sizeof(snd_card_saa7134_t), &card);
@@ -1225,7 +1267,11 @@ static int alsa_card_saa7134_create(struct saa7134_dev *dev, int devnum)
 
 	err = request_irq(dev->pci->irq, saa7134_alsa_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				IRQF_SHARED | IRQF_DISABLED, dev->name,
+=======
+				IRQF_SHARED, dev->name,
+>>>>>>> v3.18
 =======
 				IRQF_SHARED, dev->name,
 >>>>>>> v3.18
@@ -1248,8 +1294,11 @@ static int alsa_card_saa7134_create(struct saa7134_dev *dev, int devnum)
 		goto __nodev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &chip->pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* End of "creation" */
@@ -1281,8 +1330,11 @@ static int alsa_device_init(struct saa7134_dev *dev)
 static int alsa_device_exit(struct saa7134_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!snd_saa7134_cards[dev->nr])
 		return 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1335,8 +1387,12 @@ static void saa7134_alsa_exit(void)
 
 	for (idx = 0; idx < SNDRV_CARDS; idx++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (snd_saa7134_cards[idx])
 			snd_card_free(snd_saa7134_cards[idx]);
+=======
+		snd_card_free(snd_saa7134_cards[idx]);
+>>>>>>> v3.18
 =======
 		snd_card_free(snd_saa7134_cards[idx]);
 >>>>>>> v3.18

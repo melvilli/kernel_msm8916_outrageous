@@ -56,6 +56,7 @@ static inline u32 tfrc_ewma(const u32 avg, const u32 newval, const u8 weight)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32  tfrc_calc_x(u16 s, u32 R, u32 p);
 extern u32  tfrc_calc_x_reverse_lookup(u32 fvalue);
 extern u32  tfrc_invert_loss_event_rate(u32 loss_event_rate);
@@ -72,6 +73,8 @@ extern void tfrc_li_exit(void);
 extern int  tfrc_lib_init(void);
 extern void tfrc_lib_exit(void);
 =======
+=======
+>>>>>>> v3.18
 u32 tfrc_calc_x(u16 s, u32 R, u32 p);
 u32 tfrc_calc_x_reverse_lookup(u32 fvalue);
 u32 tfrc_invert_loss_event_rate(u32 loss_event_rate);
@@ -87,6 +90,9 @@ void tfrc_li_exit(void);
 #ifdef CONFIG_IP_DCCP_TFRC_LIB
 int tfrc_lib_init(void);
 void tfrc_lib_exit(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 #define tfrc_lib_init() (0)

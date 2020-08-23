@@ -19,7 +19,11 @@
 #include "of.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *of_stdout_handle;
+=======
+static unsigned int of_stdout_handle;
+>>>>>>> v3.18
 =======
 static unsigned int of_stdout_handle;
 >>>>>>> v3.18
@@ -32,13 +36,19 @@ static int of_console_open(void)
 	    && (of_getprop(devp, "stdout", &of_stdout_handle,
 			   sizeof(of_stdout_handle))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		== sizeof(of_stdout_handle)))
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 		== sizeof(of_stdout_handle))) {
 		of_stdout_handle = be32_to_cpu(of_stdout_handle);
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return -1;

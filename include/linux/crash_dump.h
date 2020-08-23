@@ -7,6 +7,11 @@
 #include <linux/elf.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/pgtable.h> /* for pgprot_t */
+
+>>>>>>> v3.18
 =======
 #include <asm/pgtable.h> /* for pgprot_t */
 
@@ -18,9 +23,12 @@ extern unsigned long long elfcorehdr_addr;
 extern unsigned long long elfcorehdr_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern ssize_t copy_oldmem_page(unsigned long, char *, size_t,
 						unsigned long, int);
 =======
+=======
+>>>>>>> v3.18
 extern int elfcorehdr_alloc(unsigned long long *addr, unsigned long long *size);
 extern void elfcorehdr_free(unsigned long long addr);
 extern ssize_t elfcorehdr_read(char *buf, size_t count, u64 *ppos);
@@ -32,6 +40,9 @@ extern int remap_oldmem_pfn_range(struct vm_area_struct *vma,
 extern ssize_t copy_oldmem_page(unsigned long, char *, size_t,
 						unsigned long, int);
 void vmcore_cleanup(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Architecture code defines this if there are other possible ELF

@@ -78,7 +78,11 @@ Description:	Read/Write attribute file that controls memory scrubbing.
 What:		/sys/devices/system/edac/mc/mc*/max_location
 Date:		April 2012
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
+>>>>>>> v3.18
 =======
 Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
 >>>>>>> v3.18
@@ -90,7 +94,11 @@ Description:	This attribute file displays the information about the last
 What:		/sys/devices/system/edac/mc/mc*/(dimm|rank)*/size
 Date:		April 2012
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
+>>>>>>> v3.18
 =======
 Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
 >>>>>>> v3.18
@@ -105,7 +113,11 @@ Description:	This attribute file will display the size of dimm or rank.
 What:		/sys/devices/system/edac/mc/mc*/(dimm|rank)*/dimm_dev_type
 Date:		April 2012
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
+>>>>>>> v3.18
 =======
 Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
 >>>>>>> v3.18
@@ -116,7 +128,11 @@ Description:	This attribute file will display what type of DRAM device is
 What:		/sys/devices/system/edac/mc/mc*/(dimm|rank)*/dimm_edac_mode
 Date:		April 2012
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
+>>>>>>> v3.18
 =======
 Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
 >>>>>>> v3.18
@@ -128,7 +144,11 @@ Description:	This attribute file will display what type of Error detection
 What:		/sys/devices/system/edac/mc/mc*/(dimm|rank)*/dimm_label
 Date:		April 2012
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
+>>>>>>> v3.18
 =======
 Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
 >>>>>>> v3.18
@@ -147,7 +167,11 @@ Description:	This control file allows this DIMM to have a label assigned
 What:		/sys/devices/system/edac/mc/mc*/(dimm|rank)*/dimm_location
 Date:		April 2012
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
+>>>>>>> v3.18
 =======
 Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
 >>>>>>> v3.18
@@ -158,7 +182,11 @@ Description:	This attribute file will display the location (csrow/channel,
 What:		/sys/devices/system/edac/mc/mc*/(dimm|rank)*/dimm_mem_type
 Date:		April 2012
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
+>>>>>>> v3.18
 =======
 Contact:	Mauro Carvalho Chehab <m.chehab@samsung.com>
 >>>>>>> v3.18

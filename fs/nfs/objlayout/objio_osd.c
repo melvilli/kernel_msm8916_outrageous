@@ -6,7 +6,11 @@
  *
  *  Benny Halevy <bhalevy@panasas.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Boaz Harrosh <bharrosh@panasas.com>
+=======
+ *  Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  *  Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18
@@ -65,6 +69,7 @@ objio_free_deviceid_node(struct nfs4_deviceid_node *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct objio_dev_ent *_dev_list_find(const struct nfs_server *nfss,
 	const struct nfs4_deviceid *d_id)
 {
@@ -113,6 +118,8 @@ _dev_list_add(const struct nfs_server *nfss,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct objio_segment {
 	struct pnfs_layout_segment lseg;
 
@@ -138,6 +145,7 @@ struct objio_state {
 /* Send and wait for a get_device_info of devices in the layout,
    then look them up with the osd_initiator library */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int objio_devices_lookup(struct pnfs_layout_hdr *pnfslay,
 	struct objio_segment *objio_seg, unsigned c, struct nfs4_deviceid *d_id,
 	gfp_t gfp_flags)
@@ -162,6 +170,8 @@ static int objio_devices_lookup(struct pnfs_layout_hdr *pnfslay,
 		return err;
 	}
 =======
+=======
+>>>>>>> v3.18
 struct nfs4_deviceid_node *
 objio_alloc_deviceid_node(struct nfs_server *server, struct pnfs_device *pdev,
 			gfp_t gfp_flags)
@@ -180,6 +190,9 @@ objio_alloc_deviceid_node(struct nfs_server *server, struct pnfs_device *pdev,
 
 	p = page_address(pdev->pages[0]);
 	pnfs_osd_xdr_decode_deviceaddr(deviceaddr, p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	odi.systemid_len = deviceaddr->oda_systemid.len;
@@ -217,6 +230,7 @@ retry_lookup:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ode = _dev_list_add(NFS_SERVER(pnfslay->plh_inode), d_id, od,
 			    gfp_flags);
 	objio_seg->oc.ods[c] = &ode->od; /* must use container_of */
@@ -226,6 +240,8 @@ out:
 	objlayout_put_deviceinfo(deviceaddr);
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	dprintk("Adding new dev_id(%llx:%llx)\n",
 		_DEVID_LO(&pdev->dev_id), _DEVID_HI(&pdev->dev_id));
 
@@ -244,6 +260,9 @@ out:
 out:
 	kfree(deviceaddr);
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -304,6 +323,10 @@ int objio_alloc_lseg(struct pnfs_layout_segment **outp,
 	gfp_t gfp_flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nfs_server *server = NFS_SERVER(pnfslay->plh_inode);
+>>>>>>> v3.18
 =======
 	struct nfs_server *server = NFS_SERVER(pnfslay->plh_inode);
 >>>>>>> v3.18
@@ -337,6 +360,7 @@ int objio_alloc_lseg(struct pnfs_layout_segment **outp,
 	cur_comp = 0;
 	while (pnfs_osd_xdr_decode_layout_comp(&src_comp, &iter, xdr, &err)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		copy_single_comp(&objio_seg->oc, cur_comp, &src_comp);
 		err = objio_devices_lookup(pnfslay, objio_seg, cur_comp,
 					   &src_comp.oc_object_id.oid_device_id,
@@ -345,6 +369,8 @@ int objio_alloc_lseg(struct pnfs_layout_segment **outp,
 			goto err;
 		++cur_comp;
 =======
+=======
+>>>>>>> v3.18
 		struct nfs4_deviceid_node *d;
 		struct objio_dev_ent *ode;
 
@@ -360,6 +386,9 @@ int objio_alloc_lseg(struct pnfs_layout_segment **outp,
 
 		ode = container_of(d, struct objio_dev_ent, id_node);
 		objio_seg->oc.ods[cur_comp++] = &ode->od;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	/* pnfs_osd_xdr_decode_layout_comp returns false on error */
@@ -511,9 +540,14 @@ static void _read_done(struct ore_io_state *ios, void *private)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int objio_read_pagelist(struct nfs_read_data *rdata)
 {
 	struct nfs_pgio_header *hdr = rdata->header;
+=======
+int objio_read_pagelist(struct nfs_pgio_header *hdr)
+{
+>>>>>>> v3.18
 =======
 int objio_read_pagelist(struct nfs_pgio_header *hdr)
 {
@@ -523,8 +557,13 @@ int objio_read_pagelist(struct nfs_pgio_header *hdr)
 
 	ret = objio_alloc_io_state(NFS_I(hdr->inode)->layout, true,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hdr->lseg, rdata->args.pages, rdata->args.pgbase,
 			rdata->args.offset, rdata->args.count, rdata,
+=======
+			hdr->lseg, hdr->args.pages, hdr->args.pgbase,
+			hdr->args.offset, hdr->args.count, hdr,
+>>>>>>> v3.18
 =======
 			hdr->lseg, hdr->args.pages, hdr->args.pgbase,
 			hdr->args.offset, hdr->args.count, hdr,
@@ -536,7 +575,11 @@ int objio_read_pagelist(struct nfs_pgio_header *hdr)
 	objios->ios->done = _read_done;
 	dprintk("%s: offset=0x%llx length=0x%x\n", __func__,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rdata->args.offset, rdata->args.count);
+=======
+		hdr->args.offset, hdr->args.count);
+>>>>>>> v3.18
 =======
 		hdr->args.offset, hdr->args.count);
 >>>>>>> v3.18
@@ -573,17 +616,23 @@ static struct page *__r4w_get_page(void *priv, u64 offset, bool *uptodate)
 {
 	struct objio_state *objios = priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfs_write_data *wdata = objios->oir.rpcdata;
 	struct address_space *mapping = wdata->header->inode->i_mapping;
 	pgoff_t index = offset / PAGE_SIZE;
 	struct page *page;
 	loff_t i_size = i_size_read(wdata->header->inode);
 =======
+=======
+>>>>>>> v3.18
 	struct nfs_pgio_header *hdr = objios->oir.rpcdata;
 	struct address_space *mapping = hdr->inode->i_mapping;
 	pgoff_t index = offset / PAGE_SIZE;
 	struct page *page;
 	loff_t i_size = i_size_read(hdr->inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (offset >= i_size) {
@@ -625,9 +674,14 @@ static const struct _ore_r4w_op _r4w_op = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int objio_write_pagelist(struct nfs_write_data *wdata, int how)
 {
 	struct nfs_pgio_header *hdr = wdata->header;
+=======
+int objio_write_pagelist(struct nfs_pgio_header *hdr, int how)
+{
+>>>>>>> v3.18
 =======
 int objio_write_pagelist(struct nfs_pgio_header *hdr, int how)
 {
@@ -637,8 +691,13 @@ int objio_write_pagelist(struct nfs_pgio_header *hdr, int how)
 
 	ret = objio_alloc_io_state(NFS_I(hdr->inode)->layout, false,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hdr->lseg, wdata->args.pages, wdata->args.pgbase,
 			wdata->args.offset, wdata->args.count, wdata, GFP_NOFS,
+=======
+			hdr->lseg, hdr->args.pages, hdr->args.pgbase,
+			hdr->args.offset, hdr->args.count, hdr, GFP_NOFS,
+>>>>>>> v3.18
 =======
 			hdr->lseg, hdr->args.pages, hdr->args.pgbase,
 			hdr->args.offset, hdr->args.count, hdr, GFP_NOFS,
@@ -655,7 +714,11 @@ int objio_write_pagelist(struct nfs_pgio_header *hdr, int how)
 
 	dprintk("%s: offset=0x%llx length=0x%x\n", __func__,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wdata->args.offset, wdata->args.count);
+=======
+		hdr->args.offset, hdr->args.count);
+>>>>>>> v3.18
 =======
 		hdr->args.offset, hdr->args.count);
 >>>>>>> v3.18
@@ -672,6 +735,7 @@ int objio_write_pagelist(struct nfs_pgio_header *hdr, int how)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool objio_pg_test(struct nfs_pageio_descriptor *pgio,
 			  struct nfs_page *prev, struct nfs_page *req)
 {
@@ -681,6 +745,8 @@ static bool objio_pg_test(struct nfs_pageio_descriptor *pgio,
 	return pgio->pg_count + req->wb_bytes <=
 			(unsigned long)pgio->pg_layout_private;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Return 0 if @req cannot be coalesced into @pgio, otherwise return the number
  * of bytes (maximum @req->wb_bytes) that can be coalesced.
@@ -697,6 +763,9 @@ static size_t objio_pg_test(struct nfs_pageio_descriptor *pgio,
 		return 0;
 
 	return min(size, req->wb_bytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -774,6 +843,10 @@ static struct pnfs_layoutdriver_type objlayout_type = {
 				   PNFS_LAYOUTRET_ON_ERROR,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.max_deviceinfo_size	 = PAGE_SIZE,
+>>>>>>> v3.18
 =======
 	.max_deviceinfo_size	 = PAGE_SIZE,
 >>>>>>> v3.18

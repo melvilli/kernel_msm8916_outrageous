@@ -27,7 +27,10 @@
 #include <linux/slab.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/usb/input.h>
@@ -345,9 +348,12 @@ static int hanwang_probe(struct usb_interface *intf, const struct usb_device_id 
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (intf->cur_altsetting->desc.bNumEndpoints < 1)
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hanwang = kzalloc(sizeof(struct hanwang), GFP_KERNEL);

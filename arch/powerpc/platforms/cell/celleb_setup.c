@@ -103,7 +103,11 @@ static void __init celleb_setup_arch_common(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id celleb_bus_ids[] __initdata = {
+=======
+static const struct of_device_id celleb_bus_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id celleb_bus_ids[] __initconst = {
 >>>>>>> v3.18

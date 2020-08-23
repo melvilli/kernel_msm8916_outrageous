@@ -389,7 +389,10 @@ enum {
 #define TCA_CGROUP_MAX (__TCA_CGROUP_MAX - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* BPF classifier */
 
 enum {
@@ -404,6 +407,9 @@ enum {
 
 #define TCA_BPF_MAX (__TCA_BPF_MAX - 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Extended Matches */
 

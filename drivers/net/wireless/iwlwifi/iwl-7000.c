@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -78,6 +88,7 @@
 
 /* Highest firmware API version supported */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IWL7260_UCODE_API_MAX	7
 #define IWL3160_UCODE_API_MAX	7
 
@@ -89,6 +100,8 @@
 #define IWL7260_UCODE_API_MIN	7
 #define IWL3160_UCODE_API_MIN	7
 =======
+=======
+>>>>>>> v3.18
 #define IWL7260_UCODE_API_MAX	10
 #define IWL3160_UCODE_API_MAX	10
 
@@ -99,6 +112,9 @@
 /* Lowest firmware API version supported */
 #define IWL7260_UCODE_API_MIN	8
 #define IWL3160_UCODE_API_MIN	8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* NVM versions */
@@ -107,11 +123,17 @@
 #define IWL3160_NVM_VERSION		0x709
 #define IWL3160_TX_POWER_VERSION	0xffff /* meaningless */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IWL3165_NVM_VERSION		0x709
 #define IWL3165_TX_POWER_VERSION	0xffff /* meaningless */
 #define IWL7265_NVM_VERSION		0x0a1d
 #define IWL7265_TX_POWER_VERSION	0xffff /* meaningless */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define IWL7260_FW_PRE "iwlwifi-7260-"
@@ -121,9 +143,12 @@
 #define IWL3160_MODULE_FIRMWARE(api) IWL3160_FW_PRE __stringify(api) ".ucode"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct iwl_base_params iwl7000_base_params = {
 	.eeprom_size = OTP_LOW_IMAGE_SIZE,
 =======
+=======
+>>>>>>> v3.18
 #define IWL3165_FW_PRE "iwlwifi-3165-"
 #define IWL3165_MODULE_FIRMWARE(api) IWL3165_FW_PRE __stringify(api) ".ucode"
 
@@ -134,11 +159,15 @@ static const struct iwl_base_params iwl7000_base_params = {
 
 static const struct iwl_base_params iwl7000_base_params = {
 	.eeprom_size = OTP_LOW_IMAGE_SIZE_FAMILY_7000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.num_of_queues = IWLAGN_NUM_QUEUES,
 	.pll_cfg_val = 0,
 	.shadow_ram_support = true,
 	.led_compensation = 57,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.adv_thermal_throttle = true,
 	.support_ct_kill_exit = true,
@@ -152,6 +181,8 @@ static const struct iwl_base_params iwl7000_base_params = {
 static const struct iwl_ht_params iwl7000_ht_params = {
 	.use_rts_for_aggregation = true, /* use rts/cts protection */
 =======
+=======
+>>>>>>> v3.18
 	.wd_timeout = IWL_LONG_WD_TIMEOUT,
 	.max_event_log_size = 512,
 	.shadow_reg_enable = true,
@@ -161,6 +192,9 @@ static const struct iwl_ht_params iwl7000_ht_params = {
 
 static const struct iwl_ht_params iwl7000_ht_params = {
 	.stbc = true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ht40_bands = BIT(IEEE80211_BAND_2GHZ) | BIT(IEEE80211_BAND_5GHZ),
 };
@@ -174,10 +208,16 @@ static const struct iwl_ht_params iwl7000_ht_params = {
 	.max_data_size = IWL60_RTC_DATA_SIZE,			\
 	.base_params = &iwl7000_base_params,			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* TODO: .bt_params? */					\
 	.need_temp_offset_calib = true,				\
 	.led_mode = IWL_LED_RF_STATE,				\
 	.adv_pm = true						\
+=======
+	.led_mode = IWL_LED_RF_STATE,				\
+	.nvm_hw_section_num = NVM_HW_SECTION_NUM_FAMILY_7000,	\
+	.non_shared_ant = ANT_A
+>>>>>>> v3.18
 =======
 	.led_mode = IWL_LED_RF_STATE,				\
 	.nvm_hw_section_num = NVM_HW_SECTION_NUM_FAMILY_7000,	\
@@ -194,7 +234,10 @@ const struct iwl_cfg iwl7260_2ac_cfg = {
 	.nvm_calib_ver = IWL7260_TX_POWER_VERSION,
 	.host_interrupt_operation_mode = true,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.lp_xtal_workaround = true,
 };
 
@@ -208,6 +251,9 @@ const struct iwl_cfg iwl7260_2ac_cfg_high_temp = {
 	.high_temp = true,
 	.host_interrupt_operation_mode = true,
 	.lp_xtal_workaround = true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -220,6 +266,10 @@ const struct iwl_cfg iwl7260_2n_cfg = {
 	.nvm_calib_ver = IWL7260_TX_POWER_VERSION,
 	.host_interrupt_operation_mode = true,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.lp_xtal_workaround = true,
+>>>>>>> v3.18
 =======
 	.lp_xtal_workaround = true,
 >>>>>>> v3.18
@@ -234,6 +284,10 @@ const struct iwl_cfg iwl7260_n_cfg = {
 	.nvm_calib_ver = IWL7260_TX_POWER_VERSION,
 	.host_interrupt_operation_mode = true,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.lp_xtal_workaround = true,
+>>>>>>> v3.18
 =======
 	.lp_xtal_workaround = true,
 >>>>>>> v3.18
@@ -270,9 +324,12 @@ const struct iwl_cfg iwl3160_n_cfg = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_FIRMWARE(IWL7260_MODULE_FIRMWARE(IWL7260_UCODE_API_OK));
 MODULE_FIRMWARE(IWL3160_MODULE_FIRMWARE(IWL3160_UCODE_API_OK));
 =======
+=======
+>>>>>>> v3.18
 static const struct iwl_pwr_tx_backoff iwl7265_pwr_tx_backoffs[] = {
 	{.pwr = 1600, .backoff = 0},
 	{.pwr = 1300, .backoff = 467},
@@ -334,4 +391,7 @@ MODULE_FIRMWARE(IWL7260_MODULE_FIRMWARE(IWL7260_UCODE_API_OK));
 MODULE_FIRMWARE(IWL3160_MODULE_FIRMWARE(IWL3160_UCODE_API_OK));
 MODULE_FIRMWARE(IWL3165_MODULE_FIRMWARE(IWL3160_UCODE_API_OK));
 MODULE_FIRMWARE(IWL7265_MODULE_FIRMWARE(IWL7260_UCODE_API_OK));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

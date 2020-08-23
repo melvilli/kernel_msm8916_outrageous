@@ -44,7 +44,11 @@
 #define HOST_DIAG_RESET_ADAPTER			    0x4
 #define MEGASAS_FUSION_MAX_RESET_TRIES		    3
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_MSIX_QUEUES_FUSION			    16
+=======
+#define MAX_MSIX_QUEUES_FUSION			    128
+>>>>>>> v3.18
 =======
 #define MAX_MSIX_QUEUES_FUSION			    128
 >>>>>>> v3.18
@@ -67,6 +71,12 @@
 #define MEGASAS_RD_WR_PROTECT_CHECK_NONE	    0x60
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MPI2_SUP_REPLY_POST_HOST_INDEX_OFFSET   (0x0000030C)
+#define MPI2_REPLY_POST_HOST_INDEX_OFFSET	(0x0000006C)
+
+>>>>>>> v3.18
 =======
 #define MPI2_SUP_REPLY_POST_HOST_INDEX_OFFSET   (0x0000030C)
 #define MPI2_REPLY_POST_HOST_INDEX_OFFSET	(0x0000006C)
@@ -94,23 +104,32 @@ enum MR_RAID_FLAGS_IO_SUB_TYPE {
 #define MEGASAS_FP_CMD_LEN	16
 #define MEGASAS_FUSION_IN_RESET 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * Raid Context structure which describes MegaRAID specific IO Paramenters
 =======
+=======
+>>>>>>> v3.18
 #define THRESHOLD_REPLY_COUNT 50
 
 /*
  * Raid Context structure which describes MegaRAID specific IO Parameters
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This resides at offset 0x60 where the SGL normally starts in MPT IO Frames
  */
 
 struct RAID_CONTEXT {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	Type:4;
 	u8	nseg:4;
 =======
+=======
+>>>>>>> v3.18
 #if   defined(__BIG_ENDIAN_BITFIELD)
 	u8	nseg:4;
 	u8	Type:4;
@@ -118,6 +137,9 @@ struct RAID_CONTEXT {
 	u8	Type:4;
 	u8	nseg:4;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8	resvd0;
 	u16     timeoutValue;
@@ -323,9 +345,12 @@ struct MPI2_RAID_SCSI_IO_REQUEST {
  */
 struct MEGASAS_RAID_MFA_IO_REQUEST_DESCRIPTOR {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32     RequestFlags:8;
 	u32     MessageAddress1:24; /* bits 31:8*/
 =======
+=======
+>>>>>>> v3.18
 #if   defined(__BIG_ENDIAN_BITFIELD)
 	u32     MessageAddress1:24; /* bits 31:8*/
 	u32     RequestFlags:8;
@@ -333,6 +358,9 @@ struct MEGASAS_RAID_MFA_IO_REQUEST_DESCRIPTOR {
 	u32     RequestFlags:8;
 	u32     MessageAddress1:24; /* bits 31:8*/
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32     MessageAddress2;      /* bits 61:32 */
 };
@@ -498,6 +526,10 @@ struct MPI2_IOC_INIT_REQUEST {
 #define MR_PD_INVALID 0xFFFF
 #define MAX_SPAN_DEPTH 8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MAX_QUAD_DEPTH	MAX_SPAN_DEPTH
+>>>>>>> v3.18
 =======
 #define MAX_QUAD_DEPTH	MAX_SPAN_DEPTH
 >>>>>>> v3.18
@@ -506,6 +538,10 @@ struct MPI2_IOC_INIT_REQUEST {
 #define MAX_RAIDMAP_ROW_SIZE (MAX_ROW_SIZE)
 #define MAX_LOGICAL_DRIVES 64
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MAX_LOGICAL_DRIVES_EXT 256
+>>>>>>> v3.18
 =======
 #define MAX_LOGICAL_DRIVES_EXT 256
 >>>>>>> v3.18
@@ -514,10 +550,13 @@ struct MPI2_IOC_INIT_REQUEST {
 #define MAX_ARRAYS 128
 #define MAX_RAIDMAP_ARRAYS (MAX_ARRAYS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_PHYSICAL_DEVICES 256
 #define MAX_RAIDMAP_PHYSICAL_DEVICES (MAX_PHYSICAL_DEVICES)
 #define MR_DCMD_LD_MAP_GET_INFO             0x0300e101
 =======
+=======
+>>>>>>> v3.18
 #define MAX_ARRAYS_EXT	256
 #define MAX_API_ARRAYS_EXT (MAX_ARRAYS_EXT)
 #define MAX_PHYSICAL_DEVICES 256
@@ -526,6 +565,9 @@ struct MPI2_IOC_INIT_REQUEST {
 #define MR_DCMD_CTRL_SHARED_HOST_MEM_ALLOC  0x010e8485   /* SR-IOV HB alloc*/
 #define MR_DCMD_LD_VF_MAP_GET_ALL_LDS_111   0x03200200
 #define MR_DCMD_LD_VF_MAP_GET_ALL_LDS       0x03150200
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct MR_DEV_HANDLE_INFO {
@@ -558,7 +600,13 @@ struct MR_LD_SPAN {
 	u64      numBlks;
 	u16      arrayRef;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8       reserved[6];
+=======
+	u8       spanRowSize;
+	u8       spanRowDataSize;
+	u8       reserved[4];
+>>>>>>> v3.18
 =======
 	u8       spanRowSize;
 	u8       spanRowDataSize;
@@ -575,7 +623,10 @@ struct MR_SPAN_BLOCK_INFO {
 struct MR_LD_RAID {
 	struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if   defined(__BIG_ENDIAN_BITFIELD)
 		u32     reserved4:7;
 		u32	fpNonRWCapable:1;
@@ -589,6 +640,9 @@ struct MR_LD_RAID {
 		u32     reserved5:3;
 		u32     fpCapable:1;
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		u32     fpCapable:1;
 		u32     reserved5:3;
@@ -600,7 +654,13 @@ struct MR_LD_RAID {
 		u32     fpWriteAcrossStripe:1;
 		u32     fpReadAcrossStripe:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32     reserved4:8;
+=======
+		u32	fpNonRWCapable:1;
+		u32     reserved4:7;
+#endif
+>>>>>>> v3.18
 =======
 		u32	fpNonRWCapable:1;
 		u32     reserved4:7;
@@ -630,7 +690,13 @@ struct MR_LD_RAID {
 	} flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8      reserved3[0x5C];
+=======
+	u8	LUN[8]; /* 0x24 8 byte LUN field used for SCSI IO's */
+	u8	fpIoTimeoutForLd;/*0x2C timeout value used by driver in FP IO*/
+	u8      reserved3[0x80-0x2D]; /* 0x2D */
+>>>>>>> v3.18
 =======
 	u8	LUN[8]; /* 0x24 8 byte LUN field used for SCSI IO's */
 	u8	fpIoTimeoutForLd;/*0x2C timeout value used by driver in FP IO*/
@@ -656,7 +722,10 @@ struct MR_FW_RAID_MAP {
 		} validationInfo;
 		u32             version[5];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32             reserved1[5];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	};
@@ -681,13 +750,19 @@ struct IO_REQUEST_INFO {
 	u64 pdBlock;
 	u8 fpOkForIo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8 IoforUnevenSpan;
 	u8 start_span;
 	u8 reserved;
 	u64 start_row;
 	u8  span_arm;	/* span[7:5], arm[4:0] */
 	u8  pd_after_lb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -741,6 +816,10 @@ struct megasas_cmd_fusion {
 	u32 index;
 	u8 flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 pd_r1_lb;
+>>>>>>> v3.18
 =======
 	u8 pd_r1_lb;
 >>>>>>> v3.18
@@ -750,11 +829,14 @@ struct LD_LOAD_BALANCE_INFO {
 	u8	loadBalanceFlag;
 	u8	reserved1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16     raid1DevHandle[2];
 	atomic_t     scsi_pending_cmds[2];
 	u64     last_accessed_block[2];
 };
 =======
+=======
+>>>>>>> v3.18
 	atomic_t     scsi_pending_cmds[MAX_PHYSICAL_DEVICES];
 	u64     last_accessed_block[MAX_PHYSICAL_DEVICES];
 };
@@ -778,6 +860,9 @@ typedef struct _LD_SPAN_SET {
 typedef struct LOG_BLOCK_SPAN_INFO {
 	LD_SPAN_SET  span_set[MAX_SPAN_DEPTH];
 } LD_SPAN_INFO, *PLD_SPAN_INFO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct MR_FW_RAID_MAP_ALL {
@@ -786,7 +871,10 @@ struct MR_FW_RAID_MAP_ALL {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct MR_DRV_RAID_MAP {
 	/* total size of this structure, including this field.
 	 * This feild will be manupulated by driver for ext raid map,
@@ -862,13 +950,20 @@ struct MR_FW_RAID_MAP_EXT {
 	struct MR_LD_SPAN_MAP      ldSpanMap[MAX_LOGICAL_DRIVES_EXT];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct fusion_context {
 	struct megasas_cmd_fusion **cmd_list;
 	struct list_head cmd_pool;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t cmd_pool_lock;
+=======
+	spinlock_t mpt_pool_lock;
+>>>>>>> v3.18
 =======
 	spinlock_t mpt_pool_lock;
 >>>>>>> v3.18
@@ -904,10 +999,13 @@ struct fusion_context {
 	dma_addr_t ld_map_phys[2];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 map_sz;
 	u8 fast_path_io;
 	struct LD_LOAD_BALANCE_INFO load_balance_info[MAX_LOGICAL_DRIVES];
 =======
+=======
+>>>>>>> v3.18
 	/*Non dma-able memory. Driver local copy.*/
 	struct MR_DRV_RAID_MAP_ALL *ld_drv_map[2];
 
@@ -920,6 +1018,9 @@ struct fusion_context {
 	u8 fast_path_io;
 	struct LD_LOAD_BALANCE_INFO load_balance_info[MAX_LOGICAL_DRIVES_EXT];
 	LD_SPAN_INFO log_to_span[MAX_LOGICAL_DRIVES_EXT];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -932,6 +1033,10 @@ union desc_value {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

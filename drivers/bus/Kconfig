@@ -5,7 +5,10 @@
 menu "Bus devices"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BRCMSTB_GISB_ARB
 	bool "Broadcom STB GISB bus arbiter"
 	depends on ARM
@@ -22,6 +25,9 @@ config IMX_WEIM
 	  The WEIM(Wireless External Interface Module) works like a bus.
 	  You can attach many different devices on it, such as NOR, onenand.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MVEBU_MBUS
 	bool
@@ -49,11 +55,14 @@ config OMAP_INTERCONNECT
 config ARM_CCI
 	bool "ARM CCI driver support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARM64
 	help
 	  Driver supporting the CCI cache coherent interconnect for ARM
 	  platforms.
 =======
+=======
+>>>>>>> v3.18
 	depends on ARM && OF && CPU_V7
 	help
 	  Driver supporting the CCI cache coherent interconnect for ARM
@@ -76,5 +85,8 @@ config VEXPRESS_CONFIG
 	help
 	  Platform configuration infrastructure for the ARM Ltd.
 	  Versatile Express.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu

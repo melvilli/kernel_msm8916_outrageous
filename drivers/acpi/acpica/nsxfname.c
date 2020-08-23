@@ -7,7 +7,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -47,7 +51,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -168,6 +177,10 @@ acpi_get_name(acpi_handle handle, u32 name_type, struct acpi_buffer * buffer)
 	acpi_status status;
 	struct acpi_namespace_node *node;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char *node_name;
+>>>>>>> v3.18
 =======
 	char *node_name;
 >>>>>>> v3.18
@@ -216,18 +229,24 @@ acpi_get_name(acpi_handle handle, u32 name_type, struct acpi_buffer * buffer)
 	/* Just copy the ACPI name from the Node and zero terminate it */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_MOVE_NAME(buffer->pointer, acpi_ut_get_node_name(node));
 	((char *)buffer->pointer)[ACPI_NAME_SIZE] = 0;
 	status = AE_OK;
 
       unlock_and_exit:
 =======
+=======
+>>>>>>> v3.18
 	node_name = acpi_ut_get_node_name(node);
 	ACPI_MOVE_NAME(buffer->pointer, node_name);
 	((char *)buffer->pointer)[ACPI_NAME_SIZE] = 0;
 	status = AE_OK;
 
 unlock_and_exit:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
@@ -402,10 +421,13 @@ acpi_get_object_info(acpi_handle handle,
 		 * Run the _STA, _ADR and, sx_w, and _sx_d methods.
 		 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Note: none of these methods are required, so they may or may
 		 * not be present for this device. The Info->Valid bitfield is used
 		 * to indicate which methods were found and run successfully.
 =======
+=======
+>>>>>>> v3.18
 		 * Notes: none of these methods are required, so they may or may
 		 * not be present for this device. The Info->Valid bitfield is used
 		 * to indicate which methods were found and run successfully.
@@ -414,6 +436,9 @@ acpi_get_object_info(acpi_handle handle,
 		 * specification), the returned current_status flags will indicate
 		 * that the device is present/functional/enabled. Otherwise, the
 		 * current_status flags reflect the value returned from _STA.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 
@@ -523,7 +548,11 @@ acpi_get_object_info(acpi_handle handle,
 	status = AE_OK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18

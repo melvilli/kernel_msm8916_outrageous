@@ -222,7 +222,10 @@ static void dma_intr_coal_auto_tune(struct rsxx_cardinfo *card)
 
 /*----------------- RSXX DMA Handling -------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void rsxx_free_dma(struct rsxx_dma_ctrl *ctrl, struct rsxx_dma *dma)
 {
 	if (dma->cmd != HW_CMD_BLK_DISCARD) {
@@ -238,6 +241,9 @@ static void rsxx_free_dma(struct rsxx_dma_ctrl *ctrl, struct rsxx_dma *dma)
 	kmem_cache_free(rsxx_dma_pool, dma);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void rsxx_complete_dma(struct rsxx_dma_ctrl *ctrl,
 				  struct rsxx_dma *dma,
@@ -251,6 +257,7 @@ static void rsxx_complete_dma(struct rsxx_dma_ctrl *ctrl,
 		ctrl->stats.dma_cancelled++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dma->dma_addr)
 		pci_unmap_page(ctrl->card->dev, dma->dma_addr,
 			       get_dma_size(dma),
@@ -263,6 +270,8 @@ static void rsxx_complete_dma(struct rsxx_dma_ctrl *ctrl,
 
 	kmem_cache_free(rsxx_dma_pool, dma);
 =======
+=======
+>>>>>>> v3.18
 	if (dma->cb)
 		dma->cb(ctrl->card, dma->cb_data, status ? 1 : 0);
 
@@ -286,6 +295,9 @@ int rsxx_cleanup_dma_queue(struct rsxx_dma_ctrl *ctrl,
 	}
 
 	return cnt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -297,14 +309,20 @@ static void rsxx_requeue_dma(struct rsxx_dma_ctrl *ctrl,
 	 * first.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&ctrl->queue_lock);
 	list_add(&dma->list, &ctrl->queue);
 	spin_unlock(&ctrl->queue_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&ctrl->queue_lock);
 	ctrl->stats.sw_q_depth++;
 	list_add(&dma->list, &ctrl->queue);
 	spin_unlock_bh(&ctrl->queue_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -381,6 +399,10 @@ static void dma_engine_stalled(unsigned long data)
 {
 	struct rsxx_dma_ctrl *ctrl = (struct rsxx_dma_ctrl *)data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int cnt;
+>>>>>>> v3.18
 =======
 	int cnt;
 >>>>>>> v3.18
@@ -405,6 +427,7 @@ static void dma_engine_stalled(unsigned long data)
 			ctrl->id);
 		ctrl->card->dma_fault = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 }
 
@@ -412,6 +435,8 @@ static void rsxx_issue_dmas(struct work_struct *work)
 {
 	struct rsxx_dma_ctrl *ctrl;
 =======
+=======
+>>>>>>> v3.18
 
 		/* Clean up the DMA queue */
 		spin_lock(&ctrl->queue_lock);
@@ -429,14 +454,22 @@ static void rsxx_issue_dmas(struct work_struct *work)
 
 static void rsxx_issue_dmas(struct rsxx_dma_ctrl *ctrl)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rsxx_dma *dma;
 	int tag;
 	int cmds_pending = 0;
 	struct hw_cmd *hw_cmd_buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ctrl = container_of(work, struct rsxx_dma_ctrl, issue_dma_work);
+=======
+	int dir;
+
+>>>>>>> v3.18
 =======
 	int dir;
 
@@ -449,6 +482,7 @@ static void rsxx_issue_dmas(struct rsxx_dma_ctrl *ctrl)
 
 	while (1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock(&ctrl->queue_lock);
 		if (list_empty(&ctrl->queue)) {
 			spin_unlock(&ctrl->queue_lock);
@@ -456,12 +490,17 @@ static void rsxx_issue_dmas(struct rsxx_dma_ctrl *ctrl)
 		}
 		spin_unlock(&ctrl->queue_lock);
 =======
+=======
+>>>>>>> v3.18
 		spin_lock_bh(&ctrl->queue_lock);
 		if (list_empty(&ctrl->queue)) {
 			spin_unlock_bh(&ctrl->queue_lock);
 			break;
 		}
 		spin_unlock_bh(&ctrl->queue_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		tag = pop_tracker(ctrl->trackers);
@@ -469,17 +508,23 @@ static void rsxx_issue_dmas(struct rsxx_dma_ctrl *ctrl)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock(&ctrl->queue_lock);
 		dma = list_entry(ctrl->queue.next, struct rsxx_dma, list);
 		list_del(&dma->list);
 		ctrl->stats.sw_q_depth--;
 		spin_unlock(&ctrl->queue_lock);
 =======
+=======
+>>>>>>> v3.18
 		spin_lock_bh(&ctrl->queue_lock);
 		dma = list_entry(ctrl->queue.next, struct rsxx_dma, list);
 		list_del(&dma->list);
 		ctrl->stats.sw_q_depth--;
 		spin_unlock_bh(&ctrl->queue_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -494,7 +539,10 @@ static void rsxx_issue_dmas(struct rsxx_dma_ctrl *ctrl)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (dma->cmd != HW_CMD_BLK_DISCARD) {
 			if (dma->cmd == HW_CMD_BLK_WRITE)
 				dir = PCI_DMA_TODEVICE;
@@ -520,6 +568,9 @@ static void rsxx_issue_dmas(struct rsxx_dma_ctrl *ctrl)
 			}
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		set_tracker_dma(ctrl->trackers, tag, dma);
 		hw_cmd_buf[ctrl->cmd.idx].command  = dma->cmd;
@@ -566,9 +617,14 @@ static void rsxx_issue_dmas(struct rsxx_dma_ctrl *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void rsxx_dma_done(struct work_struct *work)
 {
 	struct rsxx_dma_ctrl *ctrl;
+=======
+static void rsxx_dma_done(struct rsxx_dma_ctrl *ctrl)
+{
+>>>>>>> v3.18
 =======
 static void rsxx_dma_done(struct rsxx_dma_ctrl *ctrl)
 {
@@ -581,7 +637,10 @@ static void rsxx_dma_done(struct rsxx_dma_ctrl *ctrl)
 	struct hw_status *hw_st_buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctrl = container_of(work, struct rsxx_dma_ctrl, dma_done_work);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hw_st_buf = ctrl->status.buf;
@@ -654,6 +713,7 @@ static void rsxx_dma_done(struct rsxx_dma_ctrl *ctrl)
 	spin_unlock_irqrestore(&ctrl->card->irq_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&ctrl->queue_lock);
 	if (ctrl->stats.sw_q_depth)
 		queue_work(ctrl->issue_wq, &ctrl->issue_dma_work);
@@ -682,6 +742,8 @@ static int rsxx_cleanup_dma_queue(struct rsxx_cardinfo *card,
 
 	return cnt;
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_bh(&ctrl->queue_lock);
 	if (ctrl->stats.sw_q_depth)
 		queue_work(ctrl->issue_wq, &ctrl->issue_dma_work);
@@ -708,6 +770,9 @@ static void rsxx_schedule_done(struct work_struct *work)
 	mutex_lock(&ctrl->work_lock);
 	rsxx_dma_done(ctrl);
 	mutex_unlock(&ctrl->work_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -758,6 +823,7 @@ static int rsxx_queue_dma(struct rsxx_cardinfo *card,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma->dma_addr = pci_map_page(card->dev, page, pg_off, dma_len,
 				     dir ? PCI_DMA_TODEVICE :
 				     PCI_DMA_FROMDEVICE);
@@ -766,6 +832,8 @@ static int rsxx_queue_dma(struct rsxx_cardinfo *card,
 		return -ENOMEM;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dma->cmd          = dir ? HW_CMD_BLK_WRITE : HW_CMD_BLK_READ;
@@ -796,7 +864,12 @@ int rsxx_dma_queue_bio(struct rsxx_cardinfo *card,
 {
 	struct list_head dma_list[RSXX_MAX_TARGETS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bvec;
+=======
+	struct bio_vec bvec;
+	struct bvec_iter iter;
+>>>>>>> v3.18
 =======
 	struct bio_vec bvec;
 	struct bvec_iter iter;
@@ -813,7 +886,11 @@ int rsxx_dma_queue_bio(struct rsxx_cardinfo *card,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	addr8 = bio->bi_sector << 9; /* sectors are 512 bytes */
+=======
+	addr8 = bio->bi_iter.bi_sector << 9; /* sectors are 512 bytes */
+>>>>>>> v3.18
 =======
 	addr8 = bio->bi_iter.bi_sector << 9; /* sectors are 512 bytes */
 >>>>>>> v3.18
@@ -826,7 +903,11 @@ int rsxx_dma_queue_bio(struct rsxx_cardinfo *card,
 
 	if (bio->bi_rw & REQ_DISCARD) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bv_len = bio->bi_size;
+=======
+		bv_len = bio->bi_iter.bi_size;
+>>>>>>> v3.18
 =======
 		bv_len = bio->bi_iter.bi_size;
 >>>>>>> v3.18
@@ -847,9 +928,15 @@ int rsxx_dma_queue_bio(struct rsxx_cardinfo *card,
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bio_for_each_segment(bvec, bio, i) {
 			bv_len = bvec->bv_len;
 			bv_off = bvec->bv_offset;
+=======
+		bio_for_each_segment(bvec, bio, iter) {
+			bv_len = bvec.bv_len;
+			bv_off = bvec.bv_offset;
+>>>>>>> v3.18
 =======
 		bio_for_each_segment(bvec, bio, iter) {
 			bv_len = bvec.bv_len;
@@ -867,7 +954,11 @@ int rsxx_dma_queue_bio(struct rsxx_cardinfo *card,
 							bio_data_dir(bio),
 							dma_off, dma_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							laddr, bvec->bv_page,
+=======
+							laddr, bvec.bv_page,
+>>>>>>> v3.18
 =======
 							laddr, bvec.bv_page,
 >>>>>>> v3.18
@@ -887,15 +978,21 @@ int rsxx_dma_queue_bio(struct rsxx_cardinfo *card,
 	for (i = 0; i < card->n_targets; i++) {
 		if (!list_empty(&dma_list[i])) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_lock(&card->ctrl[i].queue_lock);
 			card->ctrl[i].stats.sw_q_depth += dma_cnt[i];
 			list_splice_tail(&dma_list[i], &card->ctrl[i].queue);
 			spin_unlock(&card->ctrl[i].queue_lock);
 =======
+=======
+>>>>>>> v3.18
 			spin_lock_bh(&card->ctrl[i].queue_lock);
 			card->ctrl[i].stats.sw_q_depth += dma_cnt[i];
 			list_splice_tail(&dma_list[i], &card->ctrl[i].queue);
 			spin_unlock_bh(&card->ctrl[i].queue_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			queue_work(card->ctrl[i].issue_wq,
@@ -908,7 +1005,12 @@ int rsxx_dma_queue_bio(struct rsxx_cardinfo *card,
 bvec_err:
 	for (i = 0; i < card->n_targets; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rsxx_cleanup_dma_queue(card, &dma_list[i]);
+=======
+		rsxx_cleanup_dma_queue(&card->ctrl[i], &dma_list[i],
+					FREE_DMA);
+>>>>>>> v3.18
 =======
 		rsxx_cleanup_dma_queue(&card->ctrl[i], &dma_list[i],
 					FREE_DMA);
@@ -981,6 +1083,10 @@ static int rsxx_dma_ctrl_init(struct pci_dev *dev,
 
 	spin_lock_init(&ctrl->queue_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&ctrl->work_lock);
+>>>>>>> v3.18
 =======
 	mutex_init(&ctrl->work_lock);
 >>>>>>> v3.18
@@ -998,8 +1104,13 @@ static int rsxx_dma_ctrl_init(struct pci_dev *dev,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&ctrl->issue_dma_work, rsxx_issue_dmas);
 	INIT_WORK(&ctrl->dma_done_work, rsxx_dma_done);
+=======
+	INIT_WORK(&ctrl->issue_dma_work, rsxx_schedule_issue);
+	INIT_WORK(&ctrl->dma_done_work, rsxx_schedule_done);
+>>>>>>> v3.18
 =======
 	INIT_WORK(&ctrl->issue_dma_work, rsxx_schedule_issue);
 	INIT_WORK(&ctrl->dma_done_work, rsxx_schedule_done);
@@ -1128,7 +1239,10 @@ failed_dma_setup:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int rsxx_dma_cancel(struct rsxx_dma_ctrl *ctrl)
 {
 	struct rsxx_dma *dma;
@@ -1148,15 +1262,22 @@ int rsxx_dma_cancel(struct rsxx_dma_ctrl *ctrl)
 
 	return cnt;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void rsxx_dma_destroy(struct rsxx_cardinfo *card)
 {
 	struct rsxx_dma_ctrl *ctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rsxx_dma *dma;
 	int i, j;
 	int cnt = 0;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -1178,6 +1299,7 @@ void rsxx_dma_destroy(struct rsxx_cardinfo *card)
 			del_timer_sync(&ctrl->activity_timer);
 
 		/* Clean up the DMA queue */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		spin_lock(&ctrl->queue_lock);
 		cnt = rsxx_cleanup_dma_queue(card, &ctrl->queue);
@@ -1207,11 +1329,16 @@ void rsxx_dma_destroy(struct rsxx_cardinfo *card)
 				"Freed %d pending DMAs on channel %d\n",
 				cnt, i);
 =======
+=======
+>>>>>>> v3.18
 		spin_lock_bh(&ctrl->queue_lock);
 		rsxx_cleanup_dma_queue(ctrl, &ctrl->queue, COMPLETE_DMA);
 		spin_unlock_bh(&ctrl->queue_lock);
 
 		rsxx_dma_cancel(ctrl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		vfree(ctrl->trackers);
@@ -1252,7 +1379,10 @@ int rsxx_eeh_save_issued_dmas(struct rsxx_cardinfo *card)
 				card->ctrl[i].stats.reads_issued--;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (dma->cmd != HW_CMD_BLK_DISCARD) {
 				pci_unmap_page(card->dev, dma->dma_addr,
 					       get_dma_size(dma),
@@ -1261,6 +1391,9 @@ int rsxx_eeh_save_issued_dmas(struct rsxx_cardinfo *card)
 					       PCI_DMA_FROMDEVICE);
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			list_add_tail(&dma->list, &issued_dmas[i]);
 			push_tracker(card->ctrl[i].trackers, j);
@@ -1268,7 +1401,11 @@ int rsxx_eeh_save_issued_dmas(struct rsxx_cardinfo *card)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_lock(&card->ctrl[i].queue_lock);
+=======
+		spin_lock_bh(&card->ctrl[i].queue_lock);
+>>>>>>> v3.18
 =======
 		spin_lock_bh(&card->ctrl[i].queue_lock);
 >>>>>>> v3.18
@@ -1277,6 +1414,7 @@ int rsxx_eeh_save_issued_dmas(struct rsxx_cardinfo *card)
 		atomic_sub(cnt, &card->ctrl[i].stats.hw_q_depth);
 		card->ctrl[i].stats.sw_q_depth += cnt;
 		card->ctrl[i].e_cnt = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		list_for_each_entry(dma, &card->ctrl[i].queue, list) {
@@ -1291,6 +1429,9 @@ int rsxx_eeh_save_issued_dmas(struct rsxx_cardinfo *card)
 =======
 		spin_unlock_bh(&card->ctrl[i].queue_lock);
 >>>>>>> v3.18
+=======
+		spin_unlock_bh(&card->ctrl[i].queue_lock);
+>>>>>>> v3.18
 	}
 
 	kfree(issued_dmas);
@@ -1298,6 +1439,7 @@ int rsxx_eeh_save_issued_dmas(struct rsxx_cardinfo *card)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void rsxx_eeh_cancel_dmas(struct rsxx_cardinfo *card)
 {
@@ -1341,6 +1483,8 @@ int rsxx_eeh_remap_dmas(struct rsxx_cardinfo *card)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int rsxx_dma_init(void)

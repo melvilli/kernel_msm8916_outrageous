@@ -128,7 +128,12 @@ void qlcnic_reset_rx_buffers_list(struct qlcnic_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void qlcnic_release_tx_buffers(struct qlcnic_adapter *adapter)
+=======
+void qlcnic_release_tx_buffers(struct qlcnic_adapter *adapter,
+			       struct qlcnic_host_tx_ring *tx_ring)
+>>>>>>> v3.18
 =======
 void qlcnic_release_tx_buffers(struct qlcnic_adapter *adapter,
 			       struct qlcnic_host_tx_ring *tx_ring)
@@ -138,7 +143,12 @@ void qlcnic_release_tx_buffers(struct qlcnic_adapter *adapter,
 	struct qlcnic_skb_frag *buffrag;
 	int i, j;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qlcnic_host_tx_ring *tx_ring = adapter->tx_ring;
+=======
+
+	spin_lock(&tx_ring->tx_clean_lock);
+>>>>>>> v3.18
 =======
 
 	spin_lock(&tx_ring->tx_clean_lock);
@@ -153,7 +163,11 @@ void qlcnic_release_tx_buffers(struct qlcnic_adapter *adapter,
 			buffrag->dma = 0ULL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (j = 0; j < cmd_buf->frag_count; j++) {
+=======
+		for (j = 1; j < cmd_buf->frag_count; j++) {
+>>>>>>> v3.18
 =======
 		for (j = 1; j < cmd_buf->frag_count; j++) {
 >>>>>>> v3.18
@@ -172,6 +186,11 @@ void qlcnic_release_tx_buffers(struct qlcnic_adapter *adapter,
 		cmd_buf++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	spin_unlock(&tx_ring->tx_clean_lock);
+>>>>>>> v3.18
 =======
 
 	spin_unlock(&tx_ring->tx_clean_lock);
@@ -256,7 +275,11 @@ int qlcnic_alloc_sw_resources(struct qlcnic_adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (ring = 0; ring < adapter->max_sds_rings; ring++) {
+=======
+	for (ring = 0; ring < adapter->drv_sds_rings; ring++) {
+>>>>>>> v3.18
 =======
 	for (ring = 0; ring < adapter->drv_sds_rings; ring++) {
 >>>>>>> v3.18
@@ -265,8 +288,11 @@ int qlcnic_alloc_sw_resources(struct qlcnic_adapter *adapter)
 		sds_ring->adapter = adapter;
 		sds_ring->num_desc = adapter->num_rxd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 		if (qlcnic_82xx_check(adapter)) {
 			if (qlcnic_check_multi_tx(adapter) &&
 			    !adapter->ahw->diag_test)
@@ -274,6 +300,9 @@ int qlcnic_alloc_sw_resources(struct qlcnic_adapter *adapter)
 			else
 				sds_ring->tx_ring = &adapter->tx_ring[0];
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		for (i = 0; i < NUM_RCV_DESC_RINGS; i++)
 			INIT_LIST_HEAD(&sds_ring->free_list[i]);
@@ -320,16 +349,22 @@ static int qlcnic_wait_rom_done(struct qlcnic_adapter *adapter)
 	long timeout = 0;
 	long done = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	cond_resched();
 	while (done == 0) {
 		done = QLCRD32(adapter, QLCNIC_ROMUSB_GLB_STATUS);
 =======
+=======
+>>>>>>> v3.18
 	int err = 0;
 
 	cond_resched();
 	while (done == 0) {
 		done = QLCRD32(adapter, QLCNIC_ROMUSB_GLB_STATUS, &err);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		done &= 2;
 		if (++timeout >= QLCNIC_MAX_ROM_WAIT_USEC) {
@@ -346,6 +381,11 @@ static int do_rom_fast_read(struct qlcnic_adapter *adapter,
 			    u32 addr, u32 *valp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int err = 0;
+
+>>>>>>> v3.18
 =======
 	int err = 0;
 
@@ -364,7 +404,13 @@ static int do_rom_fast_read(struct qlcnic_adapter *adapter,
 	QLCWR32(adapter, QLCNIC_ROMUSB_ROM_DUMMY_BYTE_CNT, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*valp = QLCRD32(adapter, QLCNIC_ROMUSB_ROM_RDATA);
+=======
+	*valp = QLCRD32(adapter, QLCNIC_ROMUSB_ROM_RDATA, &err);
+	if (err == -EIO)
+		return err;
+>>>>>>> v3.18
 =======
 	*valp = QLCRD32(adapter, QLCNIC_ROMUSB_ROM_RDATA, &err);
 	if (err == -EIO)
@@ -422,17 +468,23 @@ int qlcnic_rom_fast_read(struct qlcnic_adapter *adapter, u32 addr, u32 *valp)
 int qlcnic_pinit_from_rom(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int addr, val;
 	int i, n, init_delay;
 	struct crb_addr_pair *buf;
 	unsigned offset;
 	u32 off;
 =======
+=======
+>>>>>>> v3.18
 	int addr, err = 0;
 	int i, n, init_delay;
 	struct crb_addr_pair *buf;
 	unsigned offset;
 	u32 off, val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct pci_dev *pdev = adapter->pdev;
 
@@ -463,7 +515,13 @@ int qlcnic_pinit_from_rom(struct qlcnic_adapter *adapter)
 
 	/* halt sre */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = QLCRD32(adapter, QLCNIC_CRB_SRE + 0x1000);
+=======
+	val = QLCRD32(adapter, QLCNIC_CRB_SRE + 0x1000, &err);
+	if (err == -EIO)
+		return err;
+>>>>>>> v3.18
 =======
 	val = QLCRD32(adapter, QLCNIC_CRB_SRE + 0x1000, &err);
 	if (err == -EIO)
@@ -587,7 +645,11 @@ int qlcnic_pinit_from_rom(struct qlcnic_adapter *adapter)
 	QLCWR32(adapter, QLCNIC_CRB_PEG_NET_4 + 0x8, 0);
 	QLCWR32(adapter, QLCNIC_CRB_PEG_NET_4 + 0xc, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msleep(1);
+=======
+	usleep_range(1000, 1500);
+>>>>>>> v3.18
 =======
 	usleep_range(1000, 1500);
 >>>>>>> v3.18
@@ -790,17 +852,23 @@ static int
 qlcnic_has_mn(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 capability;
 	capability = 0;
 
 	capability = QLCRD32(adapter, QLCNIC_PEG_TUNE_CAPABILITY);
 =======
+=======
+>>>>>>> v3.18
 	u32 capability = 0;
 	int err = 0;
 
 	capability = QLCRD32(adapter, QLCNIC_PEG_TUNE_CAPABILITY, &err);
 	if (err == -EIO)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (capability & QLCNIC_PEG_TUNE_MN_PRESENT)
 		return 1;
@@ -1259,7 +1327,11 @@ qlcnic_load_firmware(struct qlcnic_adapter *adapter)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msleep(1);
+=======
+	usleep_range(1000, 1500);
+>>>>>>> v3.18
 =======
 	usleep_range(1000, 1500);
 >>>>>>> v3.18
@@ -1360,7 +1432,11 @@ next:
 		if (rc != 0) {
 			release_firmware(adapter->fw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			msleep(1);
+=======
+			usleep_range(1000, 1500);
+>>>>>>> v3.18
 =======
 			usleep_range(1000, 1500);
 >>>>>>> v3.18

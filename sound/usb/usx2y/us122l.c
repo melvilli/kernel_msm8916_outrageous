@@ -536,7 +536,13 @@ static void snd_us122l_free(struct snd_card *card)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int usx2y_create_card(struct usb_device *device, struct snd_card **cardp)
+=======
+static int usx2y_create_card(struct usb_device *device,
+			     struct usb_interface *intf,
+			     struct snd_card **cardp)
+>>>>>>> v3.18
 =======
 static int usx2y_create_card(struct usb_device *device,
 			     struct usb_interface *intf,
@@ -553,8 +559,13 @@ static int usx2y_create_card(struct usb_device *device,
 	if (dev >= SNDRV_CARDS)
 		return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct us122l), &card);
+=======
+	err = snd_card_new(&intf->dev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct us122l), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&intf->dev, index[dev], id[dev], THIS_MODULE,
 			   sizeof(struct us122l), &card);
@@ -590,16 +601,22 @@ static int us122l_usb_probe(struct usb_interface *intf,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = usx2y_create_card(device, &card);
 	if (err < 0)
 		return err;
 
 	snd_card_set_dev(card, &intf->dev);
 =======
+=======
+>>>>>>> v3.18
 	err = usx2y_create_card(device, intf, &card);
 	if (err < 0)
 		return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!us122l_create_card(card)) {
 		snd_card_free(card);

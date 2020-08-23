@@ -89,6 +89,7 @@ struct brcms_info {
 
 /* misc callbacks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void brcms_init(struct brcms_info *wl);
 extern uint brcms_reset(struct brcms_info *wl);
 extern void brcms_intrson(struct brcms_info *wl);
@@ -111,6 +112,8 @@ extern void brcms_dpc(unsigned long data);
 extern void brcms_timer(struct brcms_timer *t);
 extern void brcms_fatal_error(struct brcms_info *wl);
 =======
+=======
+>>>>>>> v3.18
 void brcms_init(struct brcms_info *wl);
 uint brcms_reset(struct brcms_info *wl);
 void brcms_intrson(struct brcms_info *wl);
@@ -132,6 +135,9 @@ bool brcms_del_timer(struct brcms_timer *timer);
 void brcms_dpc(unsigned long data);
 void brcms_timer(struct brcms_timer *t);
 void brcms_fatal_error(struct brcms_info *wl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* _BRCM_MAC80211_IF_H_ */

@@ -267,6 +267,7 @@ struct brcms_antselcfg {
 
 /* common functions for every port */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct brcms_c_info *
 brcms_c_attach(struct brcms_info *wl, struct bcma_device *core, uint unit,
 	       bool piomode, uint *perr);
@@ -346,6 +347,8 @@ extern void brcms_c_enable_probe_resp(struct brcms_c_info *wlc, bool enable);
 extern void brcms_c_set_ssid(struct brcms_c_info *wlc, u8 *ssid,
 			     size_t ssid_len);
 =======
+=======
+>>>>>>> v3.18
 struct brcms_c_info *brcms_c_attach(struct brcms_info *wl,
 				    struct bcma_device *core, uint unit,
 				    bool piomode, uint *perr);
@@ -417,6 +420,9 @@ void brcms_c_set_new_probe_resp(struct brcms_c_info *wlc,
 				struct sk_buff *probe_resp);
 void brcms_c_enable_probe_resp(struct brcms_c_info *wlc, bool enable);
 void brcms_c_set_ssid(struct brcms_c_info *wlc, u8 *ssid, size_t ssid_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* _BRCM_PUB_H_ */

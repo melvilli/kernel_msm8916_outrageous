@@ -30,13 +30,17 @@
 #include <linux/acpi.h>
 #include <linux/pci-acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "pci.h"
 
 #define	DEVICE_LABEL_DSM	0x07
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef CONFIG_DMI
 
@@ -56,6 +60,9 @@ pci_remove_smbiosname_file(struct pci_dev *pdev)
 =======
 #ifdef CONFIG_DMI
 >>>>>>> v3.18
+=======
+#ifdef CONFIG_DMI
+>>>>>>> v3.18
 enum smbios_attr_enum {
 	SMBIOS_ATTR_NONE = 0,
 	SMBIOS_ATTR_LABEL_SHOW,
@@ -63,9 +70,14 @@ enum smbios_attr_enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static size_t
 find_smbios_instance_string(struct pci_dev *pdev, char *buf,
 			    enum smbios_attr_enum attribute)
+=======
+static size_t find_smbios_instance_string(struct pci_dev *pdev, char *buf,
+					  enum smbios_attr_enum attribute)
+>>>>>>> v3.18
 =======
 static size_t find_smbios_instance_string(struct pci_dev *pdev, char *buf,
 					  enum smbios_attr_enum attribute)
@@ -102,9 +114,14 @@ static size_t find_smbios_instance_string(struct pci_dev *pdev, char *buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static umode_t
 smbios_instance_string_exist(struct kobject *kobj, struct attribute *attr,
 			     int n)
+=======
+static umode_t smbios_instance_string_exist(struct kobject *kobj,
+					    struct attribute *attr, int n)
+>>>>>>> v3.18
 =======
 static umode_t smbios_instance_string_exist(struct kobject *kobj,
 					    struct attribute *attr, int n)
@@ -121,8 +138,13 @@ static umode_t smbios_instance_string_exist(struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 smbioslabel_show(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static ssize_t smbioslabel_show(struct device *dev,
+				struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t smbioslabel_show(struct device *dev,
 				struct device_attribute *attr, char *buf)
@@ -136,9 +158,14 @@ static ssize_t smbioslabel_show(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t
 smbiosinstance_show(struct device *dev,
 		    struct device_attribute *attr, char *buf)
+=======
+static ssize_t smbiosinstance_show(struct device *dev,
+				   struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t smbiosinstance_show(struct device *dev,
 				   struct device_attribute *attr, char *buf)
@@ -173,8 +200,12 @@ static struct attribute_group smbios_attr_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 pci_create_smbiosname_file(struct pci_dev *pdev)
+=======
+static int pci_create_smbiosname_file(struct pci_dev *pdev)
+>>>>>>> v3.18
 =======
 static int pci_create_smbiosname_file(struct pci_dev *pdev)
 >>>>>>> v3.18
@@ -182,6 +213,7 @@ static int pci_create_smbiosname_file(struct pci_dev *pdev)
 	return sysfs_create_group(&pdev->dev.kobj, &smbios_attr_group);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void
 pci_remove_smbiosname_file(struct pci_dev *pdev)
@@ -202,17 +234,23 @@ pci_create_acpi_index_label_files(struct pci_dev *pdev)
 static inline int
 pci_remove_acpi_index_label_files(struct pci_dev *pdev)
 =======
+=======
+>>>>>>> v3.18
 static void pci_remove_smbiosname_file(struct pci_dev *pdev)
 {
 	sysfs_remove_group(&pdev->dev.kobj, &smbios_attr_group);
 }
 #else
 static inline int pci_create_smbiosname_file(struct pci_dev *pdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return -1;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline bool
 device_has_dsm(struct device *dev)
@@ -223,12 +261,17 @@ device_has_dsm(struct device *dev)
 #else
 
 =======
+=======
+>>>>>>> v3.18
 static inline void pci_remove_smbiosname_file(struct pci_dev *pdev)
 {
 }
 #endif
 
 #ifdef CONFIG_ACPI
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char device_label_dsm_uuid[] = {
 	0xD0, 0x37, 0xC9, 0xE5, 0x53, 0x35, 0x7A, 0x4D,
@@ -237,7 +280,10 @@ static const char device_label_dsm_uuid[] = {
 
 enum acpi_attr_enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_ATTR_NONE = 0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ACPI_ATTR_LABEL_SHOW,
@@ -248,9 +294,14 @@ static void dsm_label_utf16s_to_utf8s(union acpi_object *obj, char *buf)
 {
 	int len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len = utf16s_to_utf8s((const wchar_t *)obj->
 			      package.elements[1].string.pointer,
 			      obj->package.elements[1].string.length,
+=======
+	len = utf16s_to_utf8s((const wchar_t *)obj->buffer.pointer,
+			      obj->buffer.length,
+>>>>>>> v3.18
 =======
 	len = utf16s_to_utf8s((const wchar_t *)obj->buffer.pointer,
 			      obj->buffer.length,
@@ -260,6 +311,7 @@ static void dsm_label_utf16s_to_utf8s(union acpi_object *obj, char *buf)
 	buf[len] = '\n';
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int
 dsm_get_label(acpi_handle handle, int func,
@@ -336,6 +388,8 @@ device_has_dsm(struct device *dev)
 static umode_t
 acpi_index_string_exist(struct kobject *kobj, struct attribute *attr, int n)
 =======
+=======
+>>>>>>> v3.18
 static int dsm_get_label(struct device *dev, char *buf,
 			 enum acpi_attr_enum attr)
 {
@@ -393,6 +447,9 @@ static bool device_has_dsm(struct device *dev)
 
 static umode_t acpi_index_string_exist(struct kobject *kobj,
 				       struct attribute *attr, int n)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct device *dev;
@@ -405,6 +462,7 @@ static umode_t acpi_index_string_exist(struct kobject *kobj,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t
 acpilabel_show(struct device *dev, struct device_attribute *attr, char *buf)
@@ -448,6 +506,8 @@ acpiindex_show(struct device *dev, struct device_attribute *attr, char *buf)
 	return length;
 
 =======
+=======
+>>>>>>> v3.18
 static ssize_t acpilabel_show(struct device *dev,
 			      struct device_attribute *attr, char *buf)
 {
@@ -458,6 +518,9 @@ static ssize_t acpiindex_show(struct device *dev,
 			      struct device_attribute *attr, char *buf)
 {
 	return dsm_get_label(dev, buf, ACPI_ATTR_INDEX_SHOW);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -483,8 +546,12 @@ static struct attribute_group acpi_attr_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 pci_create_acpi_index_label_files(struct pci_dev *pdev)
+=======
+static int pci_create_acpi_index_label_files(struct pci_dev *pdev)
+>>>>>>> v3.18
 =======
 static int pci_create_acpi_index_label_files(struct pci_dev *pdev)
 >>>>>>> v3.18
@@ -493,8 +560,12 @@ static int pci_create_acpi_index_label_files(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 pci_remove_acpi_index_label_files(struct pci_dev *pdev)
+=======
+static int pci_remove_acpi_index_label_files(struct pci_dev *pdev)
+>>>>>>> v3.18
 =======
 static int pci_remove_acpi_index_label_files(struct pci_dev *pdev)
 >>>>>>> v3.18
@@ -503,7 +574,10 @@ static int pci_remove_acpi_index_label_files(struct pci_dev *pdev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 static inline int pci_create_acpi_index_label_files(struct pci_dev *pdev)
 {
@@ -519,6 +593,9 @@ static inline bool device_has_dsm(struct device *dev)
 {
 	return false;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

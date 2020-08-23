@@ -181,6 +181,7 @@ int ext4_setup_system_zone(struct super_block *sb)
 void ext4_release_system_zone(struct super_block *sb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rb_node	*n = EXT4_SB(sb)->system_blks.rb_node;
 	struct rb_node	*parent;
 	struct ext4_system_zone	*entry;
@@ -213,12 +214,17 @@ void ext4_release_system_zone(struct super_block *sb)
 		n = parent;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct ext4_system_zone	*entry, *n;
 
 	rbtree_postorder_for_each_entry_safe(entry, n,
 			&EXT4_SB(sb)->system_blks, node)
 		kmem_cache_free(ext4_system_zone_cachep, entry);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	EXT4_SB(sb)->system_blks = RB_ROOT;
 }

@@ -34,9 +34,15 @@
  * MegaRAID SAS Driver meta data
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MEGASAS_VERSION				"06.506.00.00-rc1"
 #define MEGASAS_RELDATE				"Feb. 9, 2013"
 #define MEGASAS_EXT_VERSION			"Sat. Feb. 9 17:00:00 PDT 2013"
+=======
+#define MEGASAS_VERSION				"06.805.06.00-rc1"
+#define MEGASAS_RELDATE				"Sep. 4, 2014"
+#define MEGASAS_EXT_VERSION			"Thu. Sep. 4 17:00:00 PDT 2014"
+>>>>>>> v3.18
 =======
 #define MEGASAS_VERSION				"06.805.06.00-rc1"
 #define MEGASAS_RELDATE				"Sep. 4, 2014"
@@ -55,8 +61,11 @@
 #define	PCI_DEVICE_ID_LSI_SAS0071SKINNY		0x0071
 #define	PCI_DEVICE_ID_LSI_FUSION		0x005b
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_DEVICE_ID_LSI_INVADER		0x005d
 =======
+=======
+>>>>>>> v3.18
 #define PCI_DEVICE_ID_LSI_PLASMA		0x002f
 #define PCI_DEVICE_ID_LSI_INVADER		0x005d
 #define PCI_DEVICE_ID_LSI_FURY			0x005f
@@ -86,6 +95,9 @@
 	"Intel(R) RAID Controller RS3WC080"
 #define MEGARAID_INTEL_RS3WC040_BRANDING	\
 	"Intel(R) RAID Controller RS3WC040"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -116,6 +128,12 @@
 #define MFI_STATE_OPERATIONAL			0xC0000000
 #define MFI_STATE_FAULT				0xF0000000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MFI_STATE_FORCE_OCR			0x00000080
+#define MFI_STATE_DMADONE			0x00000008
+#define MFI_STATE_CRASH_DUMP_DONE		0x00000004
+>>>>>>> v3.18
 =======
 #define MFI_STATE_FORCE_OCR			0x00000080
 #define MFI_STATE_DMADONE			0x00000008
@@ -188,6 +206,10 @@
 #define MR_DCMD_CTRL_GET_INFO			0x01010000
 #define MR_DCMD_LD_GET_LIST			0x03010000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MR_DCMD_LD_LIST_QUERY			0x03010100
+>>>>>>> v3.18
 =======
 #define MR_DCMD_LD_LIST_QUERY			0x03010100
 >>>>>>> v3.18
@@ -211,7 +233,10 @@
 #define MR_DCMD_PD_LIST_QUERY                   0x02010100
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MR_DCMD_CTRL_SET_CRASH_DUMP_PARAMS	0x01190100
 #define MR_DRIVER_SET_APP_CRASHDUMP_MODE	(0xF0010000 | 0x0600)
 
@@ -221,6 +246,9 @@
 extern u8 MR_ValidateMapInfo(struct megasas_instance *instance);
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * MFI command completion codes
@@ -290,7 +318,10 @@ enum MFI_STAT {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Crash dump related defines
  */
 #define MAX_CRASH_DUMP_SIZE 512
@@ -310,6 +341,9 @@ enum _MR_CRASH_BUF_STATUS {
 };
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Number of mailbox bytes in DCMD message frame
  */
@@ -383,8 +417,11 @@ enum MR_EVT_ARGS {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define SGE_BUFFER_SIZE	4096
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -400,7 +437,10 @@ enum MR_PD_QUERY_TYPE {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum MR_LD_QUERY_TYPE {
 	MR_LD_QUERY_TYPE_ALL	         = 0,
 	MR_LD_QUERY_TYPE_EXPOSED_TO_HOST = 1,
@@ -410,6 +450,9 @@ enum MR_LD_QUERY_TYPE {
 };
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MR_EVT_CFG_CLEARED                              0x0004
 #define MR_EVT_LD_STATE_CHANGE                          0x0051
@@ -421,7 +464,10 @@ enum MR_LD_QUERY_TYPE {
 #define MR_EVT_LD_OFFLINE                               0x00fc
 #define MR_EVT_CTRL_HOST_BUS_SCAN_REQUESTED             0x0152
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_LOGICAL_DRIVES				64
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -502,10 +548,13 @@ struct MR_LD_LIST {
 		u8          reserved[3];
 		u64         size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} ldList[MAX_LOGICAL_DRIVES];
 } __packed;
 
 =======
+=======
+>>>>>>> v3.18
 	} ldList[MAX_LOGICAL_DRIVES_EXT];
 } __packed;
 
@@ -517,6 +566,9 @@ struct MR_LD_TARGETID_LIST {
 };
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * SAS controller properties
@@ -558,6 +610,7 @@ struct megasas_ctrl_prop {
 	*/
 	struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32     copyBackDisabled            : 1;
 		u32     SMARTerEnabled              : 1;
 		u32     prCorrectUnconfiguredAreas  : 1;
@@ -574,6 +627,8 @@ struct megasas_ctrl_prop {
 		u32     enableJBOD                  : 1;
 		u32     reserved                    :18;
 =======
+=======
+>>>>>>> v3.18
 #if   defined(__BIG_ENDIAN_BITFIELD)
 		u32     reserved:18;
 		u32     enableJBOD:1;
@@ -607,6 +662,9 @@ struct megasas_ctrl_prop {
 		u32     enableJBOD:1;
 		u32     reserved:18;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} OnOffProperties;
 	u8 autoSnapVDSpace;
@@ -643,7 +701,12 @@ struct megasas_ctrl_info {
 		u8 iSCSI:1;
 		u8 SAS_3G:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u8 reserved_0:4;
+=======
+		u8 SRIOV:1;
+		u8 reserved_0:3;
+>>>>>>> v3.18
 =======
 		u8 SRIOV:1;
 		u8 reserved_0:3;
@@ -860,9 +923,12 @@ struct megasas_ctrl_info {
 	char package_version[0x60];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 pad[0x800 - 0x6a0];
 
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	* If adapterOperations.supportMoreThan8Phys is set,
@@ -1054,6 +1120,9 @@ struct megasas_ctrl_info {
 	} adapterOperations3;
 
 	u8          pad[0x800-0x7EC];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
@@ -1070,7 +1139,10 @@ struct megasas_ctrl_info {
 #define MEGASAS_DEFAULT_INIT_ID			-1
 #define MEGASAS_MAX_LUN				8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MEGASAS_MAX_LD				64
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MEGASAS_DEFAULT_CMD_PER_LUN		256
@@ -1086,7 +1158,10 @@ struct megasas_ctrl_info {
 #define MEGASAS_FW_BUSY				1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define VD_EXT_DEBUG 0
 
 enum MR_MFI_MPT_PTHR_FLAGS {
@@ -1095,6 +1170,9 @@ enum MR_MFI_MPT_PTHR_FLAGS {
 	MFI_MPT_ATTACHED = 2,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Frame Type */
 #define IO_FRAME				0
@@ -1114,7 +1192,11 @@ enum MR_MFI_MPT_PTHR_FLAGS {
 #define MEGASAS_DEFAULT_CMD_TIMEOUT		90
 #define MEGASAS_THROTTLE_QUEUE_DEPTH		16
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#define MEGASAS_BLOCKED_CMD_TIMEOUT		60
+>>>>>>> v3.18
 =======
 #define MEGASAS_BLOCKED_CMD_TIMEOUT		60
 >>>>>>> v3.18
@@ -1129,7 +1211,11 @@ enum MR_MFI_MPT_PTHR_FLAGS {
 #define MEGASAS_SKINNY_INT_CMDS			5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MEGASAS_MAX_MSIX_QUEUES			16
+=======
+#define MEGASAS_MAX_MSIX_QUEUES			128
+>>>>>>> v3.18
 =======
 #define MEGASAS_MAX_MSIX_QUEUES			128
 >>>>>>> v3.18
@@ -1148,7 +1234,13 @@ enum MR_MFI_MPT_PTHR_FLAGS {
 #define MFI_OB_INTR_STATUS_MASK			0x00000002
 #define MFI_POLL_TIMEOUT_SECS			60
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#define MEGASAS_SRIOV_HEARTBEAT_INTERVAL_VF	(5 * HZ)
+#define MEGASAS_OCR_SETTLE_TIME_VF		(1000 * 30)
+#define MEGASAS_ROUTINE_WAIT_TIME_VF		300
+>>>>>>> v3.18
 =======
 #define MEGASAS_SRIOV_HEARTBEAT_INTERVAL_VF	(5 * HZ)
 #define MEGASAS_OCR_SETTLE_TIME_VF		(1000 * 30)
@@ -1164,12 +1256,18 @@ enum MR_MFI_MPT_PTHR_FLAGS {
 #define MFI_1068_FW_HANDSHAKE_OFFSET		0x64
 #define MFI_1068_FW_READY			0xDDDD0000
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #define MR_MAX_REPLY_QUEUES_OFFSET              0X0000001F
 #define MR_MAX_REPLY_QUEUES_EXT_OFFSET          0X003FC000
 #define MR_MAX_REPLY_QUEUES_EXT_OFFSET_SHIFT    14
 #define MR_MAX_MSIX_REG_ARRAY                   16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
 * register set for both 1068 and 1078 controllers
@@ -1281,7 +1379,10 @@ union megasas_sgl_frame {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef union _MFI_CAPABILITIES {
 	struct {
 #if   defined(__BIG_ENDIAN_BITFIELD)
@@ -1303,6 +1404,9 @@ typedef union _MFI_CAPABILITIES {
 	u32     reg;
 } MFI_CAPABILITIES;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct megasas_init_frame {
 
@@ -1312,7 +1416,11 @@ struct megasas_init_frame {
 
 	u8 reserved_1;		/*03h */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reserved_2;		/*04h */
+=======
+	MFI_CAPABILITIES driver_operations; /*04h*/
+>>>>>>> v3.18
 =======
 	MFI_CAPABILITIES driver_operations; /*04h*/
 >>>>>>> v3.18
@@ -1531,10 +1639,13 @@ union megasas_evt_class_locale {
 
 	struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u16 locale;
 		u8 reserved;
 		s8 class;
 =======
+=======
+>>>>>>> v3.18
 #ifndef __BIG_ENDIAN_BITFIELD
 		u16 locale;
 		u8 reserved;
@@ -1544,6 +1655,9 @@ union megasas_evt_class_locale {
 		u8 reserved;
 		u16 locale;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} __attribute__ ((packed)) members;
 
@@ -1719,23 +1833,32 @@ struct megasas_instance {
 	u32 *consumer;
 	dma_addr_t consumer_h;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct MR_LD_VF_AFFILIATION *vf_affiliation;
 	dma_addr_t vf_affiliation_h;
 	struct MR_LD_VF_AFFILIATION_111 *vf_affiliation_111;
 	dma_addr_t vf_affiliation_111_h;
 	struct MR_CTRL_HB_HOST_MEM *hb_host_mem;
 	dma_addr_t hb_host_mem_h;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	u32 *reply_queue;
 	dma_addr_t reply_queue_h;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct megasas_register_set __iomem *reg_set;
 
 	struct megasas_pd_list          pd_list[MEGASAS_MAX_PD];
 =======
+=======
+>>>>>>> v3.18
 	u32 *crash_dump_buf;
 	dma_addr_t crash_dump_h;
 	void *crash_buf[MAX_CRASH_DUMP_SIZE];
@@ -1754,6 +1877,9 @@ struct megasas_instance {
 	u32 *reply_post_host_index_addr[MR_MAX_MSIX_REG_ARRAY];
 	struct megasas_pd_list          pd_list[MEGASAS_MAX_PD];
 	struct megasas_pd_list          local_pd_list[MEGASAS_MAX_PD];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8     ld_ids[MEGASAS_MAX_LD_IDS];
 	s8 init_id;
@@ -1770,7 +1896,11 @@ struct megasas_instance {
 	struct list_head cmd_pool;
 	/* used to sync fire the cmd to fw */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t cmd_pool_lock;
+=======
+	spinlock_t mfi_pool_lock;
+>>>>>>> v3.18
 =======
 	spinlock_t mfi_pool_lock;
 >>>>>>> v3.18
@@ -1803,6 +1933,10 @@ struct megasas_instance {
 	struct tasklet_struct isr_tasklet;
 	struct work_struct work_init;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct work_struct crash_init;
+>>>>>>> v3.18
 =======
 	struct work_struct crash_init;
 >>>>>>> v3.18
@@ -1813,7 +1947,10 @@ struct megasas_instance {
 	u8 issuepend_done;
 	u8 disableOnlineCtrlReset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u8 UnevenSpanSupport;
 
 	u8 supportmax256vd;
@@ -1823,6 +1960,9 @@ struct megasas_instance {
 	u16 drv_supported_vd_count;
 	u16 drv_supported_pd_count;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 adprecovery;
 	unsigned long last_time;
@@ -1834,6 +1974,11 @@ struct megasas_instance {
 	/* Ptr to hba specific information */
 	void *ctrl_context;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 ctrl_context_pages;
+	struct megasas_ctrl_info *ctrl_info;
+>>>>>>> v3.18
 =======
 	u32 ctrl_context_pages;
 	struct megasas_ctrl_info *ctrl_info;
@@ -1847,8 +1992,11 @@ struct megasas_instance {
 	long reset_flags;
 	struct mutex reset_mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int throttlequeuedepth;
 =======
+=======
+>>>>>>> v3.18
 	struct timer_list sriov_heartbeat_timer;
 	char skip_heartbeat_timer_del;
 	u8 requestorId;
@@ -1914,6 +2062,9 @@ struct MR_CTRL_HB_HOST_MEM {
 		u32 reserved_driver[7];
 	} HB;
 	u8 pad[0x400-0x40];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1924,6 +2075,10 @@ enum {
 	MEGASAS_ADPRESET_SM_OPERATIONAL		= 3,
 	MEGASAS_HW_CRITICAL_ERROR		= 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	MEGASAS_ADPRESET_SM_POLLING		= 5,
+>>>>>>> v3.18
 =======
 	MEGASAS_ADPRESET_SM_POLLING		= 5,
 >>>>>>> v3.18
@@ -1935,8 +2090,13 @@ struct megasas_instance_template {
 		u32, struct megasas_register_set __iomem *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*enable_intr)(struct megasas_register_set __iomem *) ;
 	void (*disable_intr)(struct megasas_register_set __iomem *);
+=======
+	void (*enable_intr)(struct megasas_instance *);
+	void (*disable_intr)(struct megasas_instance *);
+>>>>>>> v3.18
 =======
 	void (*enable_intr)(struct megasas_instance *);
 	void (*disable_intr)(struct megasas_instance *);
@@ -1960,7 +2120,11 @@ struct megasas_instance_template {
 
 #define MEGASAS_IS_LOGICAL(scp)						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	((scp->device->channel < MEGASAS_MAX_PD_CHANNELS) ? 0 : 1)
+=======
+	(scp->device->channel < MEGASAS_MAX_PD_CHANNELS) ? 0 : 1
+>>>>>>> v3.18
 =======
 	(scp->device->channel < MEGASAS_MAX_PD_CHANNELS) ? 0 : 1
 >>>>>>> v3.18
@@ -1986,12 +2150,18 @@ struct megasas_cmd {
 	struct list_head list;
 	struct scsi_cmnd *scmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	void *mpt_pthr_cmd_blocked;
 	atomic_t mfi_mpt_pthr;
 	u8 is_wait_event;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct megasas_instance *instance;
 	union {
@@ -2059,7 +2229,10 @@ struct megasas_mgmt_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 u8
 MR_BuildRaidContext(struct megasas_instance *instance,
 		    struct IO_REQUEST_INFO *io_info,
@@ -2093,5 +2266,8 @@ void __megasas_return_cmd(struct megasas_instance *instance,
 void megasas_return_mfi_mpt_pthr(struct megasas_instance *instance,
 	struct megasas_cmd *cmd_mfi, struct megasas_cmd_fusion *cmd_fusion);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/*LSI_MEGARAID_SAS_H */

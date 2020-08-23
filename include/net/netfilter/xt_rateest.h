@@ -7,7 +7,11 @@ struct xt_rateest {
 	spinlock_t			lock;
 	/* keep rstats and lock on same cache line to speedup xt_rateest_mt() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gnet_stats_rate_est	rstats;
+=======
+	struct gnet_stats_rate_est64	rstats;
+>>>>>>> v3.18
 =======
 	struct gnet_stats_rate_est64	rstats;
 >>>>>>> v3.18
@@ -21,8 +25,13 @@ struct xt_rateest {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct xt_rateest *xt_rateest_lookup(const char *name);
 extern void xt_rateest_put(struct xt_rateest *est);
+=======
+struct xt_rateest *xt_rateest_lookup(const char *name);
+void xt_rateest_put(struct xt_rateest *est);
+>>>>>>> v3.18
 =======
 struct xt_rateest *xt_rateest_lookup(const char *name);
 void xt_rateest_put(struct xt_rateest *est);

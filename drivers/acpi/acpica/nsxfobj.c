@@ -7,7 +7,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -47,7 +51,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/export.h>
+=======
+#define EXPORT_ACPI_INTERFACES
+
+>>>>>>> v3.18
 =======
 #define EXPORT_ACPI_INTERFACES
 
@@ -210,7 +219,11 @@ acpi_status acpi_get_parent(acpi_handle handle, acpi_handle * ret_handle)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18
@@ -294,7 +307,11 @@ acpi_get_next_object(acpi_object_type type,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       unlock_and_exit:
+=======
+unlock_and_exit:
+>>>>>>> v3.18
 =======
 unlock_and_exit:
 >>>>>>> v3.18

@@ -93,13 +93,19 @@ void prism2mgmt_bytearea2pstr(u8 *bytearea, p80211pstrd_t *pstr, int len);
 
 /* byte string conversion functions*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void prism2mgmt_pstr2bytestr(hfa384x_bytestr_t *bytestr, p80211pstrd_t *pstr);
 void prism2mgmt_bytestr2pstr(hfa384x_bytestr_t *bytestr, p80211pstrd_t *pstr);
 =======
+=======
+>>>>>>> v3.18
 void prism2mgmt_pstr2bytestr(struct hfa384x_bytestr *bytestr,
 			     p80211pstrd_t *pstr);
 void prism2mgmt_bytestr2pstr(struct hfa384x_bytestr *bytestr,
 			     p80211pstrd_t *pstr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* functions to convert Group Addresses */
@@ -115,11 +121,17 @@ void prism2sta_commsqual_defer(struct work_struct *data);
 void prism2sta_commsqual_timer(unsigned long data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Interface callback functions, passing data back up to the cfg80211 layer */
 void prism2_connect_result(wlandevice_t *wlandev, u8 failed);
 void prism2_disconnected(wlandevice_t *wlandev);
 void prism2_roamed(wlandevice_t *wlandev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

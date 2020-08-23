@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -105,6 +109,7 @@ void acpi_ex_enter_interpreter(void)
 /*******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * FUNCTION:    acpi_ex_reacquire_interpreter
  *
  * PARAMETERS:  None
@@ -138,6 +143,8 @@ void acpi_ex_reacquire_interpreter(void)
  *
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_ex_exit_interpreter
  *
  * PARAMETERS:  None
@@ -147,8 +154,11 @@ void acpi_ex_reacquire_interpreter(void)
  * DESCRIPTION: Exit the interpreter execution region. This is the top level
  *              routine used to exit the interpreter when all processing has
 <<<<<<< HEAD
+<<<<<<< HEAD
  *              been completed.
 =======
+=======
+>>>>>>> v3.18
  *              been completed, or when the method blocks.
  *
  * Cases where the interpreter is unlocked internally:
@@ -159,6 +169,9 @@ void acpi_ex_reacquire_interpreter(void)
  *      5) Method will be blocked waiting to execute a serialized control
  *          method that is currently executing
  *      6) About to invoke a user-installed opregion handler
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  ******************************************************************************/
@@ -180,6 +193,7 @@ void acpi_ex_exit_interpreter(void)
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * FUNCTION:    acpi_ex_relinquish_interpreter
  *
@@ -219,6 +233,8 @@ void acpi_ex_relinquish_interpreter(void)
 
 /*******************************************************************************
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * FUNCTION:    acpi_ex_truncate_for32bit_table

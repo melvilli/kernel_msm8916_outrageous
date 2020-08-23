@@ -2,8 +2,14 @@ config DRM_UDL
 	tristate "DisplayLink"
 	depends on DRM
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on USB_ARCH_HAS_HCD
 	select DRM_USB
+=======
+	depends on USB_SUPPORT
+	depends on USB_ARCH_HAS_HCD
+	select USB
+>>>>>>> v3.18
 =======
 	depends on USB_SUPPORT
 	depends on USB_ARCH_HAS_HCD
@@ -15,6 +21,10 @@ config DRM_UDL
 	select FB_DEFERRED_IO
 	select DRM_KMS_HELPER
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        select DRM_KMS_FB_HELPER
+>>>>>>> v3.18
 =======
         select DRM_KMS_FB_HELPER
 >>>>>>> v3.18

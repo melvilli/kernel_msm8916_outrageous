@@ -158,6 +158,10 @@ struct mousevsc_dev {
 	struct hv_input_dev_info hid_dev_info;
 	struct hid_device       *hid_device;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8			input_buf[HID_MAX_BUFFER_SIZE];
+>>>>>>> v3.18
 =======
 	u8			input_buf[HID_MAX_BUFFER_SIZE];
 >>>>>>> v3.18
@@ -204,7 +208,11 @@ static void mousevsc_on_receive_device_info(struct mousevsc_dev *input_device,
 		goto cleanup;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input_device->hid_desc = kzalloc(desc->bLength, GFP_ATOMIC);
+=======
+	input_device->hid_desc = kmemdup(desc, desc->bLength, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	input_device->hid_desc = kmemdup(desc, desc->bLength, GFP_ATOMIC);
 >>>>>>> v3.18
@@ -213,8 +221,11 @@ static void mousevsc_on_receive_device_info(struct mousevsc_dev *input_device,
 		goto cleanup;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(input_device->hid_desc, desc, desc->bLength);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	input_device->report_desc_size = desc->desc[0].wDescriptorLength;
@@ -270,6 +281,10 @@ static void mousevsc_on_receive(struct hv_device *device,
 	struct mousevsc_dev *input_dev = hv_get_drvdata(device);
 	struct synthhid_input_report *input_report;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	size_t len;
+>>>>>>> v3.18
 =======
 	size_t len;
 >>>>>>> v3.18
@@ -318,10 +333,13 @@ static void mousevsc_on_receive(struct hv_device *device,
 		if (!input_dev->init_complete)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hid_input_report(input_dev->hid_device,
 				HID_INPUT_REPORT, input_report->buffer,
 				input_report->header.size, 1);
 =======
+=======
+>>>>>>> v3.18
 
 		len = min(input_report->header.size,
 			  (u32)sizeof(input_dev->input_buf));
@@ -331,6 +349,9 @@ static void mousevsc_on_receive(struct hv_device *device,
 
 		pm_wakeup_event(&input_dev->device->device, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -485,7 +506,10 @@ static void mousevsc_hid_stop(struct hid_device *hid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int mousevsc_hid_raw_request(struct hid_device *hid,
 				    unsigned char report_num,
 				    __u8 *buf, size_t len,
@@ -495,6 +519,9 @@ static int mousevsc_hid_raw_request(struct hid_device *hid,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct hid_ll_driver mousevsc_ll_driver = {
 	.parse = mousevsc_hid_parse,
@@ -503,6 +530,10 @@ static struct hid_ll_driver mousevsc_ll_driver = {
 	.start = mousevsc_hid_start,
 	.stop = mousevsc_hid_stop,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.raw_request = mousevsc_hid_raw_request,
+>>>>>>> v3.18
 =======
 	.raw_request = mousevsc_hid_raw_request,
 >>>>>>> v3.18
@@ -580,6 +611,11 @@ static int mousevsc_probe(struct hv_device *device,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_init_wakeup(&device->device, true);
+
+>>>>>>> v3.18
 =======
 	device_init_wakeup(&device->device, true);
 
@@ -607,6 +643,10 @@ static int mousevsc_remove(struct hv_device *dev)
 	struct mousevsc_dev *input_dev = hv_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_init_wakeup(&dev->device, false);
+>>>>>>> v3.18
 =======
 	device_init_wakeup(&dev->device, false);
 >>>>>>> v3.18
@@ -645,7 +685,10 @@ static void __exit mousevsc_exit(void)
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_VERSION(HV_DRV_VERSION);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 module_init(mousevsc_init);

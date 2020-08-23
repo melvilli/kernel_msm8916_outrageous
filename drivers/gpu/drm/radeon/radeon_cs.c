@@ -25,6 +25,10 @@
  *    Jerome Glisse <glisse@freedesktop.org>
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/list_sort.h>
+>>>>>>> v3.18
 =======
 #include <linux/list_sort.h>
 >>>>>>> v3.18
@@ -33,7 +37,10 @@
 #include "radeon_reg.h"
 #include "radeon.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "radeon_trace.h"
 
 #define RADEON_CS_MAX_PRIORITY		32u
@@ -76,6 +83,9 @@ static void radeon_cs_buckets_get_list(struct radeon_cs_buckets *b,
 		list_splice(&b->bucket[i], out_list);
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int radeon_cs_parser_relocs(struct radeon_cs_parser *p)
@@ -83,13 +93,19 @@ static int radeon_cs_parser_relocs(struct radeon_cs_parser *p)
 	struct drm_device *ddev = p->rdev->ddev;
 	struct radeon_cs_chunk *chunk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned i, j;
 	bool duplicate;
 =======
+=======
+>>>>>>> v3.18
 	struct radeon_cs_buckets buckets;
 	unsigned i, j;
 	bool duplicate, need_mmap_lock = false;
 	int r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (p->chunk_relocs_idx == -1) {
@@ -108,15 +124,21 @@ static int radeon_cs_parser_relocs(struct radeon_cs_parser *p)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < p->nrelocs; i++) {
 		struct drm_radeon_cs_reloc *r;
 =======
+=======
+>>>>>>> v3.18
 
 	radeon_cs_buckets_init(&buckets);
 
 	for (i = 0; i < p->nrelocs; i++) {
 		struct drm_radeon_cs_reloc *r;
 		unsigned priority;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		duplicate = false;
@@ -143,6 +165,7 @@ static int radeon_cs_parser_relocs(struct radeon_cs_parser *p)
 		p->relocs_ptr[i] = &p->relocs[i];
 		p->relocs[i].robj = gem_to_radeon_bo(p->relocs[i].gobj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p->relocs[i].lobj.bo = p->relocs[i].robj;
 		p->relocs[i].lobj.written = !!r->write_domain;
 
@@ -159,6 +182,8 @@ static int radeon_cs_parser_relocs(struct radeon_cs_parser *p)
 				RADEON_GEM_DOMAIN_VRAM;
 
 =======
+=======
+>>>>>>> v3.18
 
 		/* The userspace buffer priorities are from 0 to 15. A higher
 		 * number means the buffer is more important.
@@ -186,6 +211,9 @@ static int radeon_cs_parser_relocs(struct radeon_cs_parser *p)
 
 			/* prioritize this over any other relocation */
 			priority = RADEON_CS_MAX_PRIORITY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			uint32_t domain = r->write_domain ?
@@ -197,6 +225,7 @@ static int radeon_cs_parser_relocs(struct radeon_cs_parser *p)
 				return -EINVAL;
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			p->relocs[i].lobj.domain = domain;
 			if (domain == RADEON_GEM_DOMAIN_VRAM)
@@ -212,6 +241,8 @@ static int radeon_cs_parser_relocs(struct radeon_cs_parser *p)
 	}
 	return radeon_bo_list_validate(&p->validated, p->ring);
 =======
+=======
+>>>>>>> v3.18
 			p->relocs[i].prefered_domains = domain;
 			if (domain == RADEON_GEM_DOMAIN_VRAM)
 				domain |= RADEON_GEM_DOMAIN_GTT;
@@ -253,6 +284,9 @@ static int radeon_cs_parser_relocs(struct radeon_cs_parser *p)
 		up_read(&current->mm->mmap_sem);
 
 	return r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -283,7 +317,11 @@ static int radeon_cs_get_ring(struct radeon_cs_parser *p, u32 ring, s32 priority
 			else
 				p->ring = CAYMAN_RING_TYPE_DMA1_INDEX;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (p->rdev->family >= CHIP_R600) {
+=======
+		} else if (p->rdev->family >= CHIP_RV770) {
+>>>>>>> v3.18
 =======
 		} else if (p->rdev->family >= CHIP_RV770) {
 >>>>>>> v3.18
@@ -296,16 +334,23 @@ static int radeon_cs_get_ring(struct radeon_cs_parser *p, u32 ring, s32 priority
 		p->ring = R600_RING_TYPE_UVD_INDEX;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case RADEON_CS_RING_VCE:
 		/* TODO: only use the low priority ring for now */
 		p->ring = TN_RING_TYPE_VCE1_INDEX;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void radeon_cs_sync_rings(struct radeon_cs_parser *p)
 {
@@ -318,6 +363,8 @@ static void radeon_cs_sync_rings(struct radeon_cs_parser *p)
 		radeon_ib_sync_to(&p->ib, p->relocs[i].robj->tbo.sync_obj);
 	}
 =======
+=======
+>>>>>>> v3.18
 static int radeon_cs_sync_rings(struct radeon_cs_parser *p)
 {
 	struct radeon_cs_reloc *reloc;
@@ -333,6 +380,9 @@ static int radeon_cs_sync_rings(struct radeon_cs_parser *p)
 			return r;
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -346,6 +396,7 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 	s32 priority = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&p->validated);
 
 	if (!cs->num_chunks) {
@@ -354,11 +405,16 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 
 	/* get chunks */
 =======
+=======
+>>>>>>> v3.18
 	if (!cs->num_chunks) {
 		return 0;
 	}
 	/* get chunks */
 	INIT_LIST_HEAD(&p->validated);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	p->idx = 0;
 	p->ib.sa_bo = NULL;
@@ -375,7 +431,11 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 	}
 	chunk_array_ptr = (uint64_t *)(unsigned long)(cs->chunks);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DRM_COPY_FROM_USER(p->chunks_array, chunk_array_ptr,
+=======
+	if (copy_from_user(p->chunks_array, chunk_array_ptr,
+>>>>>>> v3.18
 =======
 	if (copy_from_user(p->chunks_array, chunk_array_ptr,
 >>>>>>> v3.18
@@ -395,7 +455,11 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 
 		chunk_ptr = (void __user*)(unsigned long)p->chunks_array[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(&user_chunk, chunk_ptr,
+=======
+		if (copy_from_user(&user_chunk, chunk_ptr,
+>>>>>>> v3.18
 =======
 		if (copy_from_user(&user_chunk, chunk_ptr,
 >>>>>>> v3.18
@@ -404,9 +468,13 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 		}
 		p->chunks[i].length_dw = user_chunk.length_dw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p->chunks[i].kdata = NULL;
 		p->chunks[i].chunk_id = user_chunk.chunk_id;
 		p->chunks[i].user_ptr = (void __user *)(unsigned long)user_chunk.chunk_data;
+=======
+		p->chunks[i].chunk_id = user_chunk.chunk_id;
+>>>>>>> v3.18
 =======
 		p->chunks[i].chunk_id = user_chunk.chunk_id;
 >>>>>>> v3.18
@@ -433,6 +501,7 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cdata = (uint32_t *)(unsigned long)user_chunk.chunk_data;
 		if ((p->chunks[i].chunk_id == RADEON_CHUNK_ID_RELOCS) ||
 		    (p->chunks[i].chunk_id == RADEON_CHUNK_ID_FLAGS)) {
@@ -453,6 +522,8 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 					priority = (s32)p->chunks[i].kdata[2];
 			}
 =======
+=======
+>>>>>>> v3.18
 		size = p->chunks[i].length_dw;
 		cdata = (void __user *)(unsigned long)user_chunk.chunk_data;
 		p->chunks[i].user_ptr = cdata;
@@ -478,6 +549,9 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 				ring = p->chunks[i].kdata[1];
 			if (p->chunks[i].length_dw > 2)
 				priority = (s32)p->chunks[i].kdata[2];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -494,6 +568,7 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 			return -EINVAL;
 
 		/* we only support VM on some SI+ rings */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ((p->rdev->asic->ring[p->ring].cs_parse == NULL) &&
 		   ((p->cs_flags & RADEON_CS_USE_VM) == 0)) {
@@ -529,6 +604,8 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 		p->chunks[p->chunk_ib_idx].last_page_index =
 			((p->chunks[p->chunk_ib_idx].length_dw * 4) - 1) / PAGE_SIZE;
 =======
+=======
+>>>>>>> v3.18
 		if ((p->cs_flags & RADEON_CS_USE_VM) == 0) {
 			if (p->rdev->asic->ring[p->ring]->cs_parse == NULL) {
 				DRM_ERROR("Ring %d requires VM!\n", p->ring);
@@ -541,6 +618,9 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 				return -EINVAL;
 			}
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -548,7 +628,10 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int cmp_size_smaller_first(void *priv, struct list_head *a,
 				  struct list_head *b)
 {
@@ -559,6 +642,9 @@ static int cmp_size_smaller_first(void *priv, struct list_head *a,
 	return (int)la->robj->tbo.num_pages - (int)lb->robj->tbo.num_pages;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * cs_parser_fini() - clean parser states
@@ -569,7 +655,11 @@ static int cmp_size_smaller_first(void *priv, struct list_head *a,
  * used by parsing context.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void radeon_cs_parser_fini(struct radeon_cs_parser *parser, int error)
+=======
+static void radeon_cs_parser_fini(struct radeon_cs_parser *parser, int error, bool backoff)
+>>>>>>> v3.18
 =======
 static void radeon_cs_parser_fini(struct radeon_cs_parser *parser, int error, bool backoff)
 >>>>>>> v3.18
@@ -578,11 +668,14 @@ static void radeon_cs_parser_fini(struct radeon_cs_parser *parser, int error, bo
 
 	if (!error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ttm_eu_fence_buffer_objects(&parser->validated,
 					    parser->ib.fence);
 	} else {
 		ttm_eu_backoff_reservation(&parser->validated);
 =======
+=======
+>>>>>>> v3.18
 		/* Sort the buffer list from the smallest to largest buffer,
 		 * which affects the order of buffers in the LRU list.
 		 * This assures that the smallest buffers are added first
@@ -601,6 +694,9 @@ static void radeon_cs_parser_fini(struct radeon_cs_parser *parser, int error, bo
 	} else if (backoff) {
 		ttm_eu_backoff_reservation(&parser->ticket,
 					   &parser->validated);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -614,6 +710,7 @@ static void radeon_cs_parser_fini(struct radeon_cs_parser *parser, int error, bo
 	kfree(parser->relocs);
 	kfree(parser->relocs_ptr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < parser->nchunks; i++) {
 		kfree(parser->chunks[i].kdata);
 		if ((parser->rdev->flags & RADEON_IS_AGP)) {
@@ -621,6 +718,11 @@ static void radeon_cs_parser_fini(struct radeon_cs_parser *parser, int error, bo
 			kfree(parser->chunks[i].kpage[1]);
 		}
 	}
+=======
+	drm_free_large(parser->vm_bos);
+	for (i = 0; i < parser->nchunks; i++)
+		drm_free_large(parser->chunks[i].kdata);
+>>>>>>> v3.18
 =======
 	drm_free_large(parser->vm_bos);
 	for (i = 0; i < parser->nchunks; i++)
@@ -636,7 +738,10 @@ static int radeon_cs_ib_chunk(struct radeon_device *rdev,
 			      struct radeon_cs_parser *parser)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct radeon_cs_chunk *ib_chunk;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int r;
@@ -647,6 +752,7 @@ static int radeon_cs_ib_chunk(struct radeon_device *rdev,
 	if (parser->cs_flags & RADEON_CS_USE_VM)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ib_chunk = &parser->chunks[parser->chunk_ib_idx];
 	/* Copy the packet into the IB, the parser will read from the
@@ -662,11 +768,14 @@ static int radeon_cs_ib_chunk(struct radeon_device *rdev,
 	parser->ib.length_dw = ib_chunk->length_dw;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	r = radeon_cs_parse(rdev, parser->ring, parser);
 	if (r || parser->parser_error) {
 		DRM_ERROR("Invalid command stream !\n");
 		return r;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	r = radeon_cs_finish_pages(parser);
 	if (r) {
@@ -676,6 +785,8 @@ static int radeon_cs_ib_chunk(struct radeon_device *rdev,
 	radeon_cs_sync_rings(parser);
 	r = radeon_ib_schedule(rdev, &parser->ib, NULL);
 =======
+=======
+>>>>>>> v3.18
 
 	r = radeon_cs_sync_rings(parser);
 	if (r) {
@@ -691,6 +802,9 @@ static int radeon_cs_ib_chunk(struct radeon_device *rdev,
 		radeon_vce_note_usage(rdev);
 
 	r = radeon_ib_schedule(rdev, &parser->ib, NULL, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (r) {
 		DRM_ERROR("Failed to schedule IB !\n");
@@ -698,6 +812,7 @@ static int radeon_cs_ib_chunk(struct radeon_device *rdev,
 	return r;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int radeon_bo_vm_update_pte(struct radeon_cs_parser *parser,
 				   struct radeon_vm *vm)
@@ -720,6 +835,8 @@ static int radeon_bo_vm_update_pte(struct radeon_cs_parser *parser,
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static int radeon_bo_vm_update_pte(struct radeon_cs_parser *p,
 				   struct radeon_vm *vm)
 {
@@ -765,6 +882,9 @@ static int radeon_bo_vm_update_pte(struct radeon_cs_parser *p,
 	}
 
 	return radeon_vm_clear_invalids(rdev, vm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -772,7 +892,10 @@ static int radeon_cs_ib_vm_chunk(struct radeon_device *rdev,
 				 struct radeon_cs_parser *parser)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct radeon_cs_chunk *ib_chunk;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct radeon_fpriv *fpriv = parser->filp->driver_priv;
@@ -784,6 +907,7 @@ static int radeon_cs_ib_vm_chunk(struct radeon_device *rdev,
 	if ((parser->cs_flags & RADEON_CS_USE_VM) == 0)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((rdev->family >= CHIP_TAHITI) &&
 	    (parser->chunk_const_ib_idx != -1)) {
@@ -808,12 +932,16 @@ static int radeon_cs_ib_vm_chunk(struct radeon_device *rdev,
 =======
 	if (parser->const_ib.length_dw) {
 >>>>>>> v3.18
+=======
+	if (parser->const_ib.length_dw) {
+>>>>>>> v3.18
 		r = radeon_ring_ib_parse(rdev, parser->ring, &parser->const_ib);
 		if (r) {
 			return r;
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ib_chunk = &parser->chunks[parser->chunk_ib_idx];
 	if (ib_chunk->length_dw > RADEON_IB_VM_MAX_SIZE) {
@@ -834,11 +962,14 @@ static int radeon_cs_ib_vm_chunk(struct radeon_device *rdev,
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	r = radeon_ring_ib_parse(rdev, parser->ring, &parser->ib);
 	if (r) {
 		return r;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&rdev->vm_manager.lock);
 	mutex_lock(&vm->mutex);
@@ -871,6 +1002,8 @@ out:
 	mutex_unlock(&vm->mutex);
 	mutex_unlock(&rdev->vm_manager.lock);
 =======
+=======
+>>>>>>> v3.18
 	if (parser->ring == R600_RING_TYPE_UVD_INDEX)
 		radeon_uvd_note_usage(rdev);
 
@@ -897,6 +1030,9 @@ out:
 
 out:
 	mutex_unlock(&vm->mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return r;
 }
@@ -912,7 +1048,10 @@ static int radeon_cs_handle_lockup(struct radeon_device *rdev, int r)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int radeon_cs_ib_fill(struct radeon_device *rdev, struct radeon_cs_parser *parser)
 {
 	struct radeon_cs_chunk *ib_chunk;
@@ -969,6 +1108,9 @@ static int radeon_cs_ib_fill(struct radeon_device *rdev, struct radeon_cs_parser
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int radeon_cs_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
 {
@@ -982,7 +1124,10 @@ int radeon_cs_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
 		return -EBUSY;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (rdev->in_reset) {
 		up_read(&rdev->exclusive_lock);
 		r = radeon_gpu_reset(rdev);
@@ -990,6 +1135,9 @@ int radeon_cs_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
 			r = -EAGAIN;
 		return r;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* initialize parser */
 	memset(&parser, 0, sizeof(struct radeon_cs_parser));
@@ -1001,7 +1149,11 @@ int radeon_cs_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
 	if (r) {
 		DRM_ERROR("Failed to initialize parser !\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		radeon_cs_parser_fini(&parser, r);
+=======
+		radeon_cs_parser_fini(&parser, r, false);
+>>>>>>> v3.18
 =======
 		radeon_cs_parser_fini(&parser, r, false);
 >>>>>>> v3.18
@@ -1010,12 +1162,15 @@ int radeon_cs_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
 		return r;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = radeon_cs_parser_relocs(&parser);
 	if (r) {
 		if (r != -ERESTARTSYS)
 			DRM_ERROR("Failed to parse relocation %d!\n", r);
 		radeon_cs_parser_fini(&parser, r);
 =======
+=======
+>>>>>>> v3.18
 
 	r = radeon_cs_ib_fill(rdev, &parser);
 	if (!r) {
@@ -1026,6 +1181,9 @@ int radeon_cs_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
 
 	if (r) {
 		radeon_cs_parser_fini(&parser, r, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		up_read(&rdev->exclusive_lock);
 		r = radeon_cs_handle_lockup(rdev, r);
@@ -1033,8 +1191,12 @@ int radeon_cs_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (parser.ring == R600_RING_TYPE_UVD_INDEX)
 		radeon_uvd_note_usage(rdev);
+=======
+	trace_radeon_cs(&parser);
+>>>>>>> v3.18
 =======
 	trace_radeon_cs(&parser);
 >>>>>>> v3.18
@@ -1049,7 +1211,11 @@ int radeon_cs_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
 	}
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_cs_parser_fini(&parser, r);
+=======
+	radeon_cs_parser_fini(&parser, r, true);
+>>>>>>> v3.18
 =======
 	radeon_cs_parser_fini(&parser, r, true);
 >>>>>>> v3.18
@@ -1058,6 +1224,7 @@ out:
 	return r;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int radeon_cs_finish_pages(struct radeon_cs_parser *p)
 {
@@ -1150,6 +1317,8 @@ u32 radeon_get_ib_value(struct radeon_cs_parser *p, int idx)
 	return idx_value;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -1294,9 +1463,15 @@ int radeon_cs_packet_next_reloc(struct radeon_cs_parser *p,
 	if (nomm) {
 		*cs_reloc = p->relocs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(*cs_reloc)->lobj.gpu_offset =
 			(u64)relocs_chunk->kdata[idx + 3] << 32;
 		(*cs_reloc)->lobj.gpu_offset |= relocs_chunk->kdata[idx + 0];
+=======
+		(*cs_reloc)->gpu_offset =
+			(u64)relocs_chunk->kdata[idx + 3] << 32;
+		(*cs_reloc)->gpu_offset |= relocs_chunk->kdata[idx + 0];
+>>>>>>> v3.18
 =======
 		(*cs_reloc)->gpu_offset =
 			(u64)relocs_chunk->kdata[idx + 3] << 32;

@@ -66,7 +66,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/exportfs.h>
@@ -176,6 +179,7 @@ static void ufs_print_super_stuff(struct super_block *sb,
 	u32 magic = fs32_to_cpu(sb, usb3->fs_magic);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("ufs_print_super_stuff\n");
 	printk("  magic:     0x%x\n", magic);
 	if (fs32_to_cpu(sb, usb3->fs_magic) == UFS2_MAGIC) {
@@ -244,6 +248,8 @@ static void ufs_print_super_stuff(struct super_block *sb,
 	}
 	printk("\n");
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("ufs_print_super_stuff\n");
 	pr_debug("  magic:     0x%x\n", magic);
 	if (fs32_to_cpu(sb, usb3->fs_magic) == UFS2_MAGIC) {
@@ -311,6 +317,9 @@ static void ufs_print_super_stuff(struct super_block *sb,
 			 fs32_to_cpu(sb, usb1->fs_cstotal.cs_nffree));
 	}
 	pr_debug("\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -320,6 +329,7 @@ static void ufs_print_super_stuff(struct super_block *sb,
 static void ufs_print_cylinder_stuff(struct super_block *sb,
 				     struct ufs_cylinder_group *cg)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	printk("\nufs_print_cylinder_stuff\n");
 	printk("size of ucg: %zu\n", sizeof(struct ufs_cylinder_group));
@@ -338,6 +348,8 @@ static void ufs_print_cylinder_stuff(struct super_block *sb,
 	printk("  irotor:       %u\n", fs32_to_cpu(sb, cg->cg_irotor));
 	printk("  frsum:        %u, %u, %u, %u, %u, %u, %u, %u\n",
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("\nufs_print_cylinder_stuff\n");
 	pr_debug("size of ucg: %zu\n", sizeof(struct ufs_cylinder_group));
 	pr_debug("  magic:        %x\n", fs32_to_cpu(sb, cg->cg_magic));
@@ -354,11 +366,15 @@ static void ufs_print_cylinder_stuff(struct super_block *sb,
 	pr_debug("  frotor:       %u\n", fs32_to_cpu(sb, cg->cg_frotor));
 	pr_debug("  irotor:       %u\n", fs32_to_cpu(sb, cg->cg_irotor));
 	pr_debug("  frsum:        %u, %u, %u, %u, %u, %u, %u, %u\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    fs32_to_cpu(sb, cg->cg_frsum[0]), fs32_to_cpu(sb, cg->cg_frsum[1]),
 	    fs32_to_cpu(sb, cg->cg_frsum[2]), fs32_to_cpu(sb, cg->cg_frsum[3]),
 	    fs32_to_cpu(sb, cg->cg_frsum[4]), fs32_to_cpu(sb, cg->cg_frsum[5]),
 	    fs32_to_cpu(sb, cg->cg_frsum[6]), fs32_to_cpu(sb, cg->cg_frsum[7]));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	printk("  btotoff:      %u\n", fs32_to_cpu(sb, cg->cg_btotoff));
 	printk("  boff:         %u\n", fs32_to_cpu(sb, cg->cg_boff));
@@ -373,6 +389,8 @@ static void ufs_print_cylinder_stuff(struct super_block *sb,
 	       fs32_to_cpu(sb, cg->cg_u.cg_44.cg_nclusterblks));
 	printk("\n");
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("  btotoff:      %u\n", fs32_to_cpu(sb, cg->cg_btotoff));
 	pr_debug("  boff:         %u\n", fs32_to_cpu(sb, cg->cg_boff));
 	pr_debug("  iuseoff:      %u\n", fs32_to_cpu(sb, cg->cg_iusedoff));
@@ -385,6 +403,9 @@ static void ufs_print_cylinder_stuff(struct super_block *sb,
 	pr_debug("  nclusterblks  %u\n",
 		 fs32_to_cpu(sb, cg->cg_u.cg_44.cg_nclusterblks));
 	pr_debug("\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #else
@@ -395,8 +416,11 @@ static void ufs_print_cylinder_stuff(struct super_block *sb,
 static const struct super_operations ufs_super_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char error_buf[1024];
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void ufs_error (struct super_block * sb, const char * function,
@@ -405,6 +429,10 @@ void ufs_error (struct super_block * sb, const char * function,
 	struct ufs_sb_private_info * uspi;
 	struct ufs_super_block_first * usb1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct va_format vaf;
+>>>>>>> v3.18
 =======
 	struct va_format vaf;
 >>>>>>> v3.18
@@ -420,6 +448,7 @@ void ufs_error (struct super_block * sb, const char * function,
 		sb->s_flags |= MS_RDONLY;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	va_start (args, fmt);
 	vsnprintf (error_buf, sizeof(error_buf), fmt, args);
 	va_end (args);
@@ -428,6 +457,8 @@ void ufs_error (struct super_block * sb, const char * function,
 		panic ("UFS-fs panic (device %s): %s: %s\n", 
 			sb->s_id, function, error_buf);
 =======
+=======
+>>>>>>> v3.18
 	va_start(args, fmt);
 	vaf.fmt = fmt;
 	vaf.va = &args;
@@ -435,20 +466,29 @@ void ufs_error (struct super_block * sb, const char * function,
 	case UFS_MOUNT_ONERROR_PANIC:
 		panic("panic (device %s): %s: %pV\n",
 		      sb->s_id, function, &vaf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case UFS_MOUNT_ONERROR_LOCK:
 	case UFS_MOUNT_ONERROR_UMOUNT:
 	case UFS_MOUNT_ONERROR_REPAIR:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk (KERN_CRIT "UFS-fs error (device %s): %s: %s\n",
 			sb->s_id, function, error_buf);
 	}		
 =======
+=======
+>>>>>>> v3.18
 		pr_crit("error (device %s): %s: %pV\n",
 			sb->s_id, function, &vaf);
 	}
 	va_end(args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -458,6 +498,10 @@ void ufs_panic (struct super_block * sb, const char * function,
 	struct ufs_sb_private_info * uspi;
 	struct ufs_super_block_first * usb1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct va_format vaf;
+>>>>>>> v3.18
 =======
 	struct va_format vaf;
 >>>>>>> v3.18
@@ -472,6 +516,7 @@ void ufs_panic (struct super_block * sb, const char * function,
 		ufs_mark_sb_dirty(sb);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	va_start (args, fmt);
 	vsnprintf (error_buf, sizeof(error_buf), fmt, args);
 	va_end (args);
@@ -479,6 +524,8 @@ void ufs_panic (struct super_block * sb, const char * function,
 	printk (KERN_CRIT "UFS-fs panic (device %s): %s: %s\n",
 		sb->s_id, function, error_buf);
 =======
+=======
+>>>>>>> v3.18
 	va_start(args, fmt);
 	vaf.fmt = fmt;
 	vaf.va = &args;
@@ -486,12 +533,16 @@ void ufs_panic (struct super_block * sb, const char * function,
 	pr_crit("panic (device %s): %s: %pV\n",
 		sb->s_id, function, &vaf);
 	va_end(args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void ufs_warning (struct super_block * sb, const char * function,
 	const char * fmt, ...)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	va_list args;
 
@@ -501,6 +552,8 @@ void ufs_warning (struct super_block * sb, const char * function,
 	printk (KERN_WARNING "UFS-fs warning (device %s): %s: %s\n",
 		sb->s_id, function, error_buf);
 =======
+=======
+>>>>>>> v3.18
 	struct va_format vaf;
 	va_list args;
 
@@ -510,6 +563,9 @@ void ufs_warning (struct super_block * sb, const char * function,
 	pr_warn("(device %s): %s: %pV\n",
 		sb->s_id, function, &vaf);
 	va_end(args);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -622,8 +678,12 @@ static int ufs_parse_options (char * options, unsigned * mount_options)
 			break;
 		case Opt_onerror_repair:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("UFS-fs: Unable to do repair on error, "
 				"will lock lock instead\n");
+=======
+			pr_err("Unable to do repair on error, will lock lock instead\n");
+>>>>>>> v3.18
 =======
 			pr_err("Unable to do repair on error, will lock lock instead\n");
 >>>>>>> v3.18
@@ -632,8 +692,12 @@ static int ufs_parse_options (char * options, unsigned * mount_options)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("UFS-fs: Invalid option: \"%s\" "
 					"or missing value\n", p);
+=======
+			pr_err("Invalid option: \"%s\" or missing value\n", p);
+>>>>>>> v3.18
 =======
 			pr_err("Invalid option: \"%s\" or missing value\n", p);
 >>>>>>> v3.18
@@ -690,11 +754,17 @@ static int ufs_read_cylinder_structures(struct super_block *sb)
 	unsigned char * base, * space;
 	unsigned size, blks, i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ufs_super_block_third *usb3;
 
 	UFSD("ENTER\n");
 
 	usb3 = ubh_get_usb_third(uspi);
+=======
+
+	UFSD("ENTER\n");
+
+>>>>>>> v3.18
 =======
 
 	UFSD("ENTER\n");
@@ -871,7 +941,10 @@ static int ufs_sync_fs(struct super_block *sb, int wait)
 
 	lock_ufs(sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&UFS_SB(sb)->s_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -892,7 +965,10 @@ static int ufs_sync_fs(struct super_block *sb, int wait)
 
 	UFSD("EXIT\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unlock_ufs(sb);
@@ -940,6 +1016,10 @@ static void ufs_put_super(struct super_block *sb)
 	ubh_brelse_uspi (sbi->s_uspi);
 	kfree (sbi->s_uspi);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_destroy(&sbi->mutex);
+>>>>>>> v3.18
 =======
 	mutex_destroy(&sbi->mutex);
 >>>>>>> v3.18
@@ -970,7 +1050,10 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 	
 	UFSD("ENTER\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifndef CONFIG_UFS_FS_WRITE
 	if (!(sb->s_flags & MS_RDONLY)) {
@@ -978,6 +1061,9 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 		return -EROFS;
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		
 	sbi = kzalloc(sizeof(struct ufs_sb_info), GFP_KERNEL);
@@ -988,6 +1074,7 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 
 	UFSD("flag %u\n", (int)(sb->s_flags & MS_RDONLY));
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef CONFIG_UFS_FS_WRITE
 	if (!(sb->s_flags & MS_RDONLY)) {
@@ -1001,6 +1088,9 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 =======
 	mutex_init(&sbi->mutex);
 >>>>>>> v3.18
+=======
+	mutex_init(&sbi->mutex);
+>>>>>>> v3.18
 	spin_lock_init(&sbi->work_lock);
 	INIT_DELAYED_WORK(&sbi->sync_work, delayed_sync_fs);
 	/*
@@ -1011,7 +1101,11 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 	ufs_set_opt (sbi->s_mount_opt, ONERROR_LOCK);
 	if (!ufs_parse_options ((char *) data, &sbi->s_mount_opt)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("wrong mount options\n");
+=======
+		pr_err("wrong mount options\n");
+>>>>>>> v3.18
 =======
 		pr_err("wrong mount options\n");
 >>>>>>> v3.18
@@ -1020,7 +1114,11 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 	if (!(sbi->s_mount_opt & UFS_MOUNT_UFSTYPE)) {
 		if (!silent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("You didn't specify the type of your ufs filesystem\n\n"
+=======
+			pr_err("You didn't specify the type of your ufs filesystem\n\n"
+>>>>>>> v3.18
 =======
 			pr_err("You didn't specify the type of your ufs filesystem\n\n"
 >>>>>>> v3.18
@@ -1075,7 +1173,11 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 
 	case UFS_MOUNT_UFSTYPE_SUNOS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		UFSD(("ufstype=sunos\n"))
+=======
+		UFSD("ufstype=sunos\n");
+>>>>>>> v3.18
 =======
 		UFSD("ufstype=sunos\n");
 >>>>>>> v3.18
@@ -1111,7 +1213,11 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 		if (!(sb->s_flags & MS_RDONLY)) {
 			if (!silent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_INFO "ufstype=old is supported read-only\n");
+=======
+				pr_info("ufstype=old is supported read-only\n");
+>>>>>>> v3.18
 =======
 				pr_info("ufstype=old is supported read-only\n");
 >>>>>>> v3.18
@@ -1131,7 +1237,11 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 		if (!(sb->s_flags & MS_RDONLY)) {
 			if (!silent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_INFO "ufstype=nextstep is supported read-only\n");
+=======
+				pr_info("ufstype=nextstep is supported read-only\n");
+>>>>>>> v3.18
 =======
 				pr_info("ufstype=nextstep is supported read-only\n");
 >>>>>>> v3.18
@@ -1151,7 +1261,11 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 		if (!(sb->s_flags & MS_RDONLY)) {
 			if (!silent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_INFO "ufstype=nextstep-cd is supported read-only\n");
+=======
+				pr_info("ufstype=nextstep-cd is supported read-only\n");
+>>>>>>> v3.18
 =======
 				pr_info("ufstype=nextstep-cd is supported read-only\n");
 >>>>>>> v3.18
@@ -1171,7 +1285,11 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 		if (!(sb->s_flags & MS_RDONLY)) {
 			if (!silent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_INFO "ufstype=openstep is supported read-only\n");
+=======
+				pr_info("ufstype=openstep is supported read-only\n");
+>>>>>>> v3.18
 =======
 				pr_info("ufstype=openstep is supported read-only\n");
 >>>>>>> v3.18
@@ -1190,7 +1308,11 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 		if (!(sb->s_flags & MS_RDONLY)) {
 			if (!silent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_INFO "ufstype=hp is supported read-only\n");
+=======
+				pr_info("ufstype=hp is supported read-only\n");
+>>>>>>> v3.18
 =======
 				pr_info("ufstype=hp is supported read-only\n");
 >>>>>>> v3.18
@@ -1200,7 +1322,11 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 	default:
 		if (!silent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("unknown ufstype\n");
+=======
+			pr_err("unknown ufstype\n");
+>>>>>>> v3.18
 =======
 			pr_err("unknown ufstype\n");
 >>>>>>> v3.18
@@ -1210,7 +1336,11 @@ static int ufs_fill_super(struct super_block *sb, void *data, int silent)
 again:	
 	if (!sb_set_blocksize(sb, block_size)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "UFS: failed to set blocksize\n");
+=======
+		pr_err("failed to set blocksize\n");
+>>>>>>> v3.18
 =======
 		pr_err("failed to set blocksize\n");
 >>>>>>> v3.18
@@ -1273,7 +1403,11 @@ again:
 	}
 	if (!silent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("ufs_read_super: bad magic number\n");
+=======
+		pr_err("%s(): bad magic number\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_err("%s(): bad magic number\n", __func__);
 >>>>>>> v3.18
@@ -1290,6 +1424,7 @@ magic_found:
 	uspi->s_fshift = fs32_to_cpu(sb, usb1->fs_fshift);
 
 	if (!is_power_of_2(uspi->s_fsize)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk(KERN_ERR "ufs_read_super: fragment size %u is not a power of 2\n",
 			uspi->s_fsize);
@@ -1319,6 +1454,8 @@ magic_found:
 		printk(KERN_ERR "ufs_read_super: too many fragments per block (%u)\n",
 			uspi->s_bsize / uspi->s_fsize);
 =======
+=======
+>>>>>>> v3.18
 		pr_err("%s(): fragment size %u is not a power of 2\n",
 		       __func__, uspi->s_fsize);
 		goto failed;
@@ -1346,6 +1483,9 @@ magic_found:
 	if (uspi->s_bsize / uspi->s_fsize > 8) {
 		pr_err("%s(): too many fragments per block (%u)\n",
 		       __func__, uspi->s_bsize / uspi->s_fsize);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto failed;
 	}
@@ -1386,6 +1526,7 @@ magic_found:
 			break;
 		case UFS_FSACTIVE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("ufs_read_super: fs is active\n");
 			sb->s_flags |= MS_RDONLY;
 			break;
@@ -1396,6 +1537,8 @@ magic_found:
 		default:
 			printk("ufs_read_super: can't grok fs_clean 0x%x\n", usb1->fs_clean);
 =======
+=======
+>>>>>>> v3.18
 			pr_err("%s(): fs is active\n", __func__);
 			sb->s_flags |= MS_RDONLY;
 			break;
@@ -1406,13 +1549,20 @@ magic_found:
 		default:
 			pr_err("%s(): can't grok fs_clean 0x%x\n",
 			       __func__, usb1->fs_clean);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sb->s_flags |= MS_RDONLY;
 			break;
 		}
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("ufs_read_super: fs needs fsck\n");
+=======
+		pr_err("%s(): fs needs fsck\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_err("%s(): fs needs fsck\n", __func__);
 >>>>>>> v3.18
@@ -1546,6 +1696,10 @@ magic_found:
 
 failed:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_destroy(&sbi->mutex);
+>>>>>>> v3.18
 =======
 	mutex_destroy(&sbi->mutex);
 >>>>>>> v3.18
@@ -1571,8 +1725,13 @@ static int ufs_remount (struct super_block *sb, int *mount_flags, char *data)
 	unsigned flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lock_ufs(sb);
 	mutex_lock(&UFS_SB(sb)->s_lock);
+=======
+	sync_filesystem(sb);
+	lock_ufs(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 	lock_ufs(sb);
@@ -1591,7 +1750,10 @@ static int ufs_remount (struct super_block *sb, int *mount_flags, char *data)
 	ufs_set_opt (new_mount_opt, ONERROR_LOCK);
 	if (!ufs_parse_options (data, &new_mount_opt)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		unlock_ufs(sb);
@@ -1601,8 +1763,12 @@ static int ufs_remount (struct super_block *sb, int *mount_flags, char *data)
 		new_mount_opt |= ufstype;
 	} else if ((new_mount_opt & UFS_MOUNT_UFSTYPE) != ufstype) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("ufstype can't be changed during remount\n");
 		mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+		pr_err("ufstype can't be changed during remount\n");
+>>>>>>> v3.18
 =======
 		pr_err("ufstype can't be changed during remount\n");
 >>>>>>> v3.18
@@ -1613,7 +1779,10 @@ static int ufs_remount (struct super_block *sb, int *mount_flags, char *data)
 	if ((*mount_flags & MS_RDONLY) == (sb->s_flags & MS_RDONLY)) {
 		UFS_SB(sb)->s_mount_opt = new_mount_opt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		unlock_ufs(sb);
@@ -1639,9 +1808,13 @@ static int ufs_remount (struct super_block *sb, int *mount_flags, char *data)
 	 */
 #ifndef CONFIG_UFS_FS_WRITE
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("ufs was compiled with read-only support, "
 		"can't be mounted as read-write\n");
 		mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+		pr_err("ufs was compiled with read-only support, can't be mounted as read-write\n");
+>>>>>>> v3.18
 =======
 		pr_err("ufs was compiled with read-only support, can't be mounted as read-write\n");
 >>>>>>> v3.18
@@ -1654,8 +1827,12 @@ static int ufs_remount (struct super_block *sb, int *mount_flags, char *data)
 		    ufstype != UFS_MOUNT_UFSTYPE_SUNx86 &&
 		    ufstype != UFS_MOUNT_UFSTYPE_UFS2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("this ufstype is read-only supported\n");
 			mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+			pr_err("this ufstype is read-only supported\n");
+>>>>>>> v3.18
 =======
 			pr_err("this ufstype is read-only supported\n");
 >>>>>>> v3.18
@@ -1664,8 +1841,12 @@ static int ufs_remount (struct super_block *sb, int *mount_flags, char *data)
 		}
 		if (!ufs_read_cylinder_structures(sb)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("failed during remounting\n");
 			mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+			pr_err("failed during remounting\n");
+>>>>>>> v3.18
 =======
 			pr_err("failed during remounting\n");
 >>>>>>> v3.18
@@ -1677,7 +1858,10 @@ static int ufs_remount (struct super_block *sb, int *mount_flags, char *data)
 	}
 	UFS_SB(sb)->s_mount_opt = new_mount_opt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unlock_ufs(sb);
@@ -1710,8 +1894,11 @@ static int ufs_statfs(struct dentry *dentry, struct kstatfs *buf)
 	struct ufs_sb_private_info *uspi= UFS_SB(sb)->s_uspi;
 	unsigned  flags = UFS_SB(sb)->s_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ufs_super_block_first *usb1;
 	struct ufs_super_block_second *usb2;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ufs_super_block_third *usb3;
@@ -1720,8 +1907,11 @@ static int ufs_statfs(struct dentry *dentry, struct kstatfs *buf)
 	lock_ufs(sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb1 = ubh_get_usb_first(uspi);
 	usb2 = ubh_get_usb_second(uspi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	usb3 = ubh_get_usb_third(uspi);
@@ -1780,7 +1970,11 @@ static void init_once(void *foo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_inodecache(void)
+=======
+static int __init init_inodecache(void)
+>>>>>>> v3.18
 =======
 static int __init init_inodecache(void)
 >>>>>>> v3.18

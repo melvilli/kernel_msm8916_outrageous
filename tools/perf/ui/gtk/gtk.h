@@ -13,7 +13,11 @@ struct perf_gtk_context {
 	GtkWidget *notebook;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HAVE_GTK_INFO_BAR
+=======
+#ifdef HAVE_GTK_INFO_BAR_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_GTK_INFO_BAR_SUPPORT
 >>>>>>> v3.18
@@ -25,6 +29,12 @@ struct perf_gtk_context {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int perf_gtk__init(void);
+void perf_gtk__exit(bool wait_for_ok);
+
+>>>>>>> v3.18
 =======
 int perf_gtk__init(void);
 void perf_gtk__exit(bool wait_for_ok);
@@ -42,7 +52,11 @@ int perf_gtk__deactivate_context(struct perf_gtk_context **ctx);
 
 void perf_gtk__init_helpline(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void perf_gtk__init_progress(void);
+=======
+void gtk_ui_progress__init(void);
+>>>>>>> v3.18
 =======
 void gtk_ui_progress__init(void);
 >>>>>>> v3.18
@@ -54,7 +68,11 @@ const char *perf_gtk__get_percent_color(double percent);
 GtkWidget *perf_gtk__setup_statusbar(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef HAVE_GTK_INFO_BAR
+=======
+#ifdef HAVE_GTK_INFO_BAR_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_GTK_INFO_BAR_SUPPORT
 >>>>>>> v3.18
@@ -67,7 +85,10 @@ static inline GtkWidget *perf_gtk__setup_info_bar(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct perf_evsel;
 struct perf_evlist;
 struct hist_entry;
@@ -81,5 +102,8 @@ int hist_entry__gtk_annotate(struct hist_entry *he,
 			     struct hist_browser_timer *hbt);
 void perf_gtk__show_annotations(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _PERF_GTK_H_ */

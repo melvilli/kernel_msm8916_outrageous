@@ -16,14 +16,20 @@ CFLAGS_REMOVE_return_address.o = -pg
 # Object file lists.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y		:= elf.o entry-armv.o entry-common.o irq.o opcodes.o \
 		   process.o ptrace.o return_address.o \
 		   setup.o signal.o stacktrace.o sys_arm.o time.o traps.o
 =======
+=======
+>>>>>>> v3.18
 obj-y		:= elf.o entry-common.o irq.o opcodes.o \
 		   process.o ptrace.o return_address.o \
 		   setup.o signal.o sigreturn_codes.o \
 		   stacktrace.o sys_arm.o time.o traps.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 obj-$(CONFIG_ATAGS)		+= atags_parse.o
@@ -31,13 +37,19 @@ obj-$(CONFIG_ATAGS_PROC)	+= atags_proc.o
 obj-$(CONFIG_DEPRECATED_PARAM_STRUCT) += atags_compat.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ifeq ($(CONFIG_CPU_V7M),y)
 obj-y		+= entry-v7m.o v7m.o
 else
 obj-y		+= entry-armv.o
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_OC_ETM)		+= etm.o
 obj-$(CONFIG_CPU_IDLE)		+= cpuidle.o
@@ -49,13 +61,19 @@ obj-$(CONFIG_ISA_DMA)		+= dma-isa.o
 obj-$(CONFIG_PCI)		+= bios32.o isa.o
 obj-$(CONFIG_ARM_CPU_SUSPEND)	+= sleep.o suspend.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SMP)		+= smp.o smp_tlb.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_HIBERNATION)	+= hibernate.o
 obj-$(CONFIG_SMP)		+= smp.o
 ifdef CONFIG_MMU
 obj-$(CONFIG_SMP)		+= smp_tlb.o
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_HAVE_ARM_SCU)	+= smp_scu.o
 obj-$(CONFIG_HAVE_ARM_TWD)	+= smp_twd.o
@@ -65,18 +83,24 @@ obj-$(CONFIG_FUNCTION_GRAPH_TRACER)	+= ftrace.o insn.o
 obj-$(CONFIG_JUMP_LABEL)	+= jump_label.o insn.o patch.o
 obj-$(CONFIG_KEXEC)		+= machine_kexec.o relocate_kernel.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_KPROBES)		+= kprobes.o kprobes-common.o patch.o
 ifdef CONFIG_THUMB2_KERNEL
 obj-$(CONFIG_KPROBES)		+= kprobes-thumb.o
 else
 obj-$(CONFIG_KPROBES)		+= kprobes-arm.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_UPROBES)		+= probes.o probes-arm.o uprobes.o uprobes-arm.o
 obj-$(CONFIG_KPROBES)		+= probes.o kprobes.o kprobes-common.o patch.o
 ifdef CONFIG_THUMB2_KERNEL
 obj-$(CONFIG_KPROBES)		+= kprobes-thumb.o probes-thumb.o
 else
 obj-$(CONFIG_KPROBES)		+= kprobes-arm.o probes-arm.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif
 obj-$(CONFIG_ARM_KPROBES_TEST)	+= test-kprobes.o
@@ -102,7 +126,13 @@ obj-$(CONFIG_CPU_XSC3)		+= xscale-cp0.o
 obj-$(CONFIG_CPU_MOHAWK)	+= xscale-cp0.o
 obj-$(CONFIG_CPU_PJ4)		+= pj4-cp0.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_IWMMXT)		+= iwmmxt.o
+=======
+obj-$(CONFIG_CPU_PJ4B)		+= pj4-cp0.o
+obj-$(CONFIG_IWMMXT)		+= iwmmxt.o
+obj-$(CONFIG_PERF_EVENTS)	+= perf_regs.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_CPU_PJ4B)		+= pj4-cp0.o
 obj-$(CONFIG_IWMMXT)		+= iwmmxt.o

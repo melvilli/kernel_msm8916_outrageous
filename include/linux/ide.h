@@ -19,6 +19,7 @@
 #include <linux/pm.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BLK_DEV_IDEACPI
 #include <acpi/acpi.h>
 #endif
@@ -28,10 +29,15 @@
 /* for request_sense */
 #include <linux/cdrom.h>
 =======
+=======
+>>>>>>> v3.18
 /* for request_sense */
 #include <linux/cdrom.h>
 #include <asm/byteorder.h>
 #include <asm/io.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if defined(CONFIG_CRIS) || defined(CONFIG_FRV) || defined(CONFIG_MN10300)
@@ -1522,7 +1528,11 @@ static inline void ide_set_max_pio(ide_drive_t *drive)
 char *ide_media_string(ide_drive_t *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct device_attribute ide_dev_attrs[];
+=======
+extern const struct attribute_group *ide_dev_groups[];
+>>>>>>> v3.18
 =======
 extern const struct attribute_group *ide_dev_groups[];
 >>>>>>> v3.18

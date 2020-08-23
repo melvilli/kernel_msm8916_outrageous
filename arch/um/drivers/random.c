@@ -80,7 +80,10 @@ static ssize_t rng_dev_read (struct file *filp, char __user *buf, size_t size,
 
 			schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			set_task_state(current, TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			remove_wait_queue(&host_read_wait, &wait);

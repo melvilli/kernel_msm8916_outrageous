@@ -1,5 +1,6 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Linux device driver for RTL8180 / RTL8185
  *
@@ -12,6 +13,8 @@
  * Thanks to Realtek for their support!
  *
 =======
+=======
+>>>>>>> v3.18
 /* Linux device driver for RTL8180 / RTL8185 / RTL8187SE
  *
  * Copyright 2007 Michael Wu <flamingice@sourmilk.net>
@@ -51,6 +54,9 @@
  *
  ************************************************************************
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -58,7 +64,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -76,6 +85,7 @@
 #include "max2820.h"
 #include "grf5101.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 MODULE_AUTHOR("Michael Wu <flamingice@sourmilk.net>");
 MODULE_AUTHOR("Andrea Merello <andreamrl@tiscali.it>");
@@ -84,6 +94,8 @@ MODULE_LICENSE("GPL");
 
 static DEFINE_PCI_DEVICE_TABLE(rtl8180_table) = {
 =======
+=======
+>>>>>>> v3.18
 #include "rtl8225se.h"
 
 MODULE_AUTHOR("Michael Wu <flamingice@sourmilk.net>");
@@ -96,6 +108,9 @@ static const struct pci_device_id rtl8180_table[] = {
 	/* rtl8187se */
 	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8199) },
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* rtl8185 */
 	{ PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8185) },
@@ -147,7 +162,10 @@ static const struct ieee80211_channel rtl818x_channels[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Queues for rtl8187se card
  *
  * name | reg  |  queue
@@ -221,6 +239,9 @@ static const int rtl8180_queues_map[RTL8180_NR_TX_QUEUES] = {4, 7};
 
 /* LNA gain table for rtl8187se */
 static const u8 rtl8187se_lna_gain[4] = {02, 17, 29, 39};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void rtl8180_write_phy(struct ieee80211_hw *dev, u8 addr, u32 data)
@@ -243,6 +264,7 @@ static void rtl8180_handle_rx(struct ieee80211_hw *dev)
 {
 	struct rtl8180_priv *priv = dev->priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int count = 32;
 	u8 signal, agc, sq;
 
@@ -251,6 +273,8 @@ static void rtl8180_handle_rx(struct ieee80211_hw *dev)
 		struct sk_buff *skb = priv->rx_buf[priv->rx_idx];
 		u32 flags = le32_to_cpu(entry->flags);
 =======
+=======
+>>>>>>> v3.18
 	struct rtl818x_rx_cmd_desc *cmd_desc;
 	unsigned int count = 32;
 	u8 agc, sq;
@@ -285,6 +309,9 @@ static void rtl8180_handle_rx(struct ieee80211_hw *dev)
 			flags2 = le32_to_cpu(desc->flags2);
 			tsft = le64_to_cpu(desc->tsft);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (flags & RTL818X_RX_DESC_FLAG_OWN)
@@ -296,7 +323,10 @@ static void rtl8180_handle_rx(struct ieee80211_hw *dev)
 			goto done;
 		else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u32 flags2 = le32_to_cpu(entry->flags2);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			struct ieee80211_rx_status rx_status = {0};
@@ -306,7 +336,10 @@ static void rtl8180_handle_rx(struct ieee80211_hw *dev)
 				goto done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			mapping = pci_map_single(priv->pdev,
 					       skb_tail_pointer(new_skb),
 					       MAX_RX_SIZE, PCI_DMA_FROMDEVICE);
@@ -318,6 +351,9 @@ static void rtl8180_handle_rx(struct ieee80211_hw *dev)
 				goto done;
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pci_unmap_single(priv->pdev,
 					 *((dma_addr_t *)skb->cb),
@@ -328,6 +364,7 @@ static void rtl8180_handle_rx(struct ieee80211_hw *dev)
 			rx_status.rate_idx = (flags >> 20) & 0xF;
 			agc = (flags2 >> 17) & 0x7F;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (priv->r8185) {
 				if (rx_status.rate_idx > 3)
 					signal = 90 - clamp_t(u8, agc, 25, 90);
@@ -337,6 +374,8 @@ static void rtl8180_handle_rx(struct ieee80211_hw *dev)
 				sq = flags2 & 0xff;
 				signal = priv->rf->calc_rssi(agc, sq);
 =======
+=======
+>>>>>>> v3.18
 
 			switch (priv->chip_family) {
 			case RTL818X_CHIP_FAMILY_RTL8185:
@@ -366,19 +405,28 @@ static void rtl8180_handle_rx(struct ieee80211_hw *dev)
 					signal = 4 - bb - rtl8187se_lna_gain[idx];
 				}
 				break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			rx_status.signal = signal;
 			rx_status.freq = dev->conf.chandef.chan->center_freq;
 			rx_status.band = dev->conf.chandef.chan->band;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			rx_status.mactime = le64_to_cpu(entry->tsft);
 			rx_status.flag |= RX_FLAG_MACTIME_START;
 =======
+=======
+>>>>>>> v3.18
 			rx_status.mactime = tsft;
 			rx_status.flag |= RX_FLAG_MACTIME_START;
 			if (flags & RTL818X_RX_DESC_FLAG_SPLCP)
 				rx_status.flag |= RX_FLAG_SHORTPRE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (flags & RTL818X_RX_DESC_FLAG_CRC32_ERR)
 				rx_status.flag |= RX_FLAG_FAILED_FCS_CRC;
@@ -388,6 +436,7 @@ static void rtl8180_handle_rx(struct ieee80211_hw *dev)
 
 			skb = new_skb;
 			priv->rx_buf[priv->rx_idx] = skb;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			*((dma_addr_t *) skb->cb) =
 				pci_map_single(priv->pdev, skb_tail_pointer(skb),
@@ -401,6 +450,8 @@ static void rtl8180_handle_rx(struct ieee80211_hw *dev)
 		if (priv->rx_idx == 31)
 			entry->flags |= cpu_to_le32(RTL818X_RX_DESC_FLAG_EOR);
 =======
+=======
+>>>>>>> v3.18
 			*((dma_addr_t *) skb->cb) = mapping;
 		}
 
@@ -412,6 +463,9 @@ static void rtl8180_handle_rx(struct ieee80211_hw *dev)
 		if (priv->rx_idx == 31)
 			cmd_desc->flags |=
 				cpu_to_le32(RTL818X_RX_DESC_FLAG_EOR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		priv->rx_idx = (priv->rx_idx + 1) % 32;
 	}
@@ -445,7 +499,10 @@ static void rtl8180_handle_tx(struct ieee80211_hw *dev, unsigned int prio)
 
 		info->status.rates[0].count = (flags & 0xFF) + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		info->status.rates[1].idx = -1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -456,7 +513,10 @@ static void rtl8180_handle_tx(struct ieee80211_hw *dev, unsigned int prio)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static irqreturn_t rtl8187se_interrupt(int irq, void *dev_id)
 {
 	struct ieee80211_hw *dev = dev_id;
@@ -506,6 +566,9 @@ static irqreturn_t rtl8187se_interrupt(int irq, void *dev_id)
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static irqreturn_t rtl8180_interrupt(int irq, void *dev_id)
 {
@@ -524,12 +587,15 @@ static irqreturn_t rtl8180_interrupt(int irq, void *dev_id)
 
 	if (reg & (RTL818X_INT_TXB_OK | RTL818X_INT_TXB_ERR))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtl8180_handle_tx(dev, 3);
 
 	if (reg & (RTL818X_INT_TXH_OK | RTL818X_INT_TXH_ERR))
 		rtl8180_handle_tx(dev, 2);
 
 	if (reg & (RTL818X_INT_TXN_OK | RTL818X_INT_TXN_ERR))
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		rtl8180_handle_tx(dev, 1);
@@ -556,7 +622,11 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 	struct rtl8180_tx_desc *entry;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int idx, prio;
+=======
+	unsigned int idx, prio, hw_prio;
+>>>>>>> v3.18
 =======
 	unsigned int idx, prio, hw_prio;
 >>>>>>> v3.18
@@ -566,6 +636,11 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 	u16 plcp_len = 0;
 	__le16 rts_duration = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* do arithmetic and then convert to le16 */
+	u16 frame_duration = 0;
+>>>>>>> v3.18
 =======
 	/* do arithmetic and then convert to le16 */
 	u16 frame_duration = 0;
@@ -578,13 +653,19 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 				 skb->len, PCI_DMA_TODEVICE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pci_dma_mapping_error(priv->pdev, mapping)) {
 		kfree_skb(skb);
 		dev_err(&priv->pdev->dev, "TX DMA mapping error\n");
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tx_flags = RTL818X_TX_DESC_FLAG_OWN | RTL818X_TX_DESC_FLAG_FS |
 		   RTL818X_TX_DESC_FLAG_LS |
@@ -592,7 +673,11 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 		   skb->len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->r8185)
+=======
+	if (priv->chip_family != RTL818X_CHIP_FAMILY_RTL8180)
+>>>>>>> v3.18
 =======
 	if (priv->chip_family != RTL818X_CHIP_FAMILY_RTL8180)
 >>>>>>> v3.18
@@ -600,6 +685,7 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 			    RTL818X_TX_DESC_FLAG_NO_ENC;
 
 	rc_flags = info->control.rates[0].flags;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (rc_flags & IEEE80211_TX_RC_USE_RTS_CTS) {
 		tx_flags |= RTL818X_TX_DESC_FLAG_RTS;
@@ -615,6 +701,8 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 
 	if (!priv->r8185) {
 =======
+=======
+>>>>>>> v3.18
 
 	/* HW will perform RTS-CTS when only RTS flags is set.
 	 * HW will perform CTS-to-self when both RTS and CTS flags are set.
@@ -633,6 +721,9 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 	}
 
 	if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8180) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		unsigned int remainder;
 
@@ -645,7 +736,10 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8187SE) {
 		__le16 duration;
 		/* SIFS time (required by HW) is already included by
@@ -658,6 +752,9 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 		frame_duration =  priv->ack_time + le16_to_cpu(duration);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&priv->lock, flags);
 
@@ -672,6 +769,7 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 	entry = &ring->desc[idx];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	entry->rts_duration = rts_duration;
 	entry->plcp_len = cpu_to_le16(plcp_len);
 	entry->tx_buf = cpu_to_le32(mapping);
@@ -681,6 +779,8 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 	entry->retry_limit = info->control.rates[0].count;
 	entry->flags = cpu_to_le32(tx_flags);
 =======
+=======
+>>>>>>> v3.18
 	if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8187SE) {
 		entry->frame_duration = cpu_to_le16(frame_duration);
 		entry->frame_len_se = cpu_to_le16(skb->len);
@@ -707,6 +807,9 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 	 */
 	wmb();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__skb_queue_tail(&ring->queue, skb);
 	if (ring->entries - skb_queue_len(&ring->queue) < 2)
@@ -715,8 +818,11 @@ static void rtl8180_tx(struct ieee80211_hw *dev,
 	spin_unlock_irqrestore(&priv->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl818x_iowrite8(priv, &priv->map->TX_DMA_POLLING, (1 << (prio + 4)));
 =======
+=======
+>>>>>>> v3.18
 	if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8187SE) {
 		/* just poll: rings are stopped with TPPollStop reg */
 		hw_prio = rtl8187se_queues_map[prio];
@@ -768,6 +874,9 @@ void rtl8180_set_anaparam2(struct rtl8180_priv *priv, u32 anaparam2)
 
 	rtl818x_iowrite8(priv, &priv->map->EEPROM_CMD,
 			 RTL818X_EEPROM_CMD_NORMAL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -786,7 +895,10 @@ void rtl8180_set_anaparam(struct rtl8180_priv *priv, u32 anaparam)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void rtl8187se_mac_config(struct ieee80211_hw *dev)
 {
 	struct rtl8180_priv *priv = dev->priv;
@@ -953,12 +1065,19 @@ static void rtl8180_config_cardbus(struct ieee80211_hw *dev)
 
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int rtl8180_init_hw(struct ieee80211_hw *dev)
 {
 	struct rtl8180_priv *priv = dev->priv;
 	u16 reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 reg32;
+>>>>>>> v3.18
 =======
 	u32 reg32;
 >>>>>>> v3.18
@@ -969,7 +1088,11 @@ static int rtl8180_init_hw(struct ieee80211_hw *dev)
 
 	/* reset */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl818x_iowrite16(priv, &priv->map->INT_MASK, 0);
+=======
+	rtl8180_int_disable(dev);
+>>>>>>> v3.18
 =======
 	rtl8180_int_disable(dev);
 >>>>>>> v3.18
@@ -994,6 +1117,7 @@ static int rtl8180_init_hw(struct ieee80211_hw *dev)
 
 	if (rtl818x_ioread8(priv, &priv->map->CONFIG3) & (1 << 3)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* For cardbus */
 		reg = rtl818x_ioread8(priv, &priv->map->CONFIG3);
 		reg |= 1 << 1;
@@ -1014,6 +1138,8 @@ static int rtl8180_init_hw(struct ieee80211_hw *dev)
 	rtl818x_iowrite32(priv, &priv->map->TNPDA, priv->tx_ring[1].dma);
 	rtl818x_iowrite32(priv, &priv->map->TLPDA, priv->tx_ring[0].dma);
 =======
+=======
+>>>>>>> v3.18
 		rtl8180_config_cardbus(dev);
 	}
 
@@ -1047,6 +1173,9 @@ static int rtl8180_init_hw(struct ieee80211_hw *dev)
 		rtl818x_iowrite32(priv, &priv->map->TBKDA,
 				  priv->tx_ring[3].dma);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* TODO: necessary? specs indicate not */
@@ -1054,7 +1183,11 @@ static int rtl8180_init_hw(struct ieee80211_hw *dev)
 	reg = rtl818x_ioread8(priv, &priv->map->CONFIG2);
 	rtl818x_iowrite8(priv, &priv->map->CONFIG2, reg & ~(1 << 3));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->r8185) {
+=======
+	if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8185) {
+>>>>>>> v3.18
 =======
 	if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8185) {
 >>>>>>> v3.18
@@ -1070,6 +1203,7 @@ static int rtl8180_init_hw(struct ieee80211_hw *dev)
 	rtl818x_iowrite32(priv, &priv->map->INT_TIMEOUT, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->r8185) {
 		rtl818x_iowrite8(priv, &priv->map->WPA_CONF, 0);
 		rtl818x_iowrite8(priv, &priv->map->RATE_FALLBACK, 0x81);
@@ -1078,6 +1212,8 @@ static int rtl8180_init_hw(struct ieee80211_hw *dev)
 		rtl818x_iowrite16(priv, &priv->map->BRSR, 0x01F3);
 
 =======
+=======
+>>>>>>> v3.18
 	if (priv->chip_family != RTL818X_CHIP_FAMILY_RTL8180) {
 		rtl818x_iowrite8(priv, &priv->map->WPA_CONF, 0);
 		rtl818x_iowrite8(priv, &priv->map->RATE_FALLBACK, 0);
@@ -1089,6 +1225,9 @@ static int rtl8180_init_hw(struct ieee80211_hw *dev)
 	}
 
 	if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8185) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* TODO: set ClkRun enable? necessary? */
 		reg = rtl818x_ioread8(priv, &priv->map->GP_ENABLE);
@@ -1097,6 +1236,7 @@ static int rtl8180_init_hw(struct ieee80211_hw *dev)
 		reg = rtl818x_ioread8(priv, &priv->map->CONFIG3);
 		rtl818x_iowrite8(priv, &priv->map->CONFIG3, reg | (1 << 2));
 		rtl818x_iowrite8(priv, &priv->map->EEPROM_CMD, RTL818X_EEPROM_CMD_NORMAL);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else {
 		rtl818x_iowrite16(priv, &priv->map->BRSR, 0x1);
@@ -1110,6 +1250,8 @@ static int rtl8180_init_hw(struct ieee80211_hw *dev)
 	if (priv->r8185)
 		rtl818x_iowrite16(priv, &priv->map->BRSR, 0x01F3);
 =======
+=======
+>>>>>>> v3.18
 		/* fix eccessive IFS after CTS-to-self */
 		if (priv->map_pio) {
 			u8 reg;
@@ -1191,6 +1333,9 @@ static int rtl8180_init_hw(struct ieee80211_hw *dev)
 		rtl8187se_set_antenna_config(dev,
 					     priv->antenna_diversity_default,
 					     priv->antenna_diversity_en);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1198,6 +1343,7 @@ static int rtl8180_init_hw(struct ieee80211_hw *dev)
 static int rtl8180_init_rx_ring(struct ieee80211_hw *dev)
 {
 	struct rtl8180_priv *priv = dev->priv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct rtl8180_rx_desc *entry;
 	int i;
@@ -1207,6 +1353,8 @@ static int rtl8180_init_rx_ring(struct ieee80211_hw *dev)
 					     &priv->rx_ring_dma);
 
 =======
+=======
+>>>>>>> v3.18
 	struct rtl818x_rx_cmd_desc *entry;
 	int i;
 
@@ -1217,6 +1365,9 @@ static int rtl8180_init_rx_ring(struct ieee80211_hw *dev)
 
 	priv->rx_ring = pci_zalloc_consistent(priv->pdev, priv->rx_ring_sz * 32,
 					      &priv->rx_ring_dma);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!priv->rx_ring || (unsigned long)priv->rx_ring & 0xFF) {
 		wiphy_err(dev->wiphy, "Cannot allocate RX ring\n");
@@ -1224,7 +1375,10 @@ static int rtl8180_init_rx_ring(struct ieee80211_hw *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(priv->rx_ring, 0, sizeof(*priv->rx_ring) * 32);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	priv->rx_idx = 0;
@@ -1233,23 +1387,32 @@ static int rtl8180_init_rx_ring(struct ieee80211_hw *dev)
 		struct sk_buff *skb = dev_alloc_skb(MAX_RX_SIZE);
 		dma_addr_t *mapping;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entry = &priv->rx_ring[i];
 		if (!skb)
 			return 0;
 
 =======
+=======
+>>>>>>> v3.18
 		entry = priv->rx_ring + priv->rx_ring_sz*i;
 		if (!skb) {
 			wiphy_err(dev->wiphy, "Cannot allocate RX skb\n");
 			return -ENOMEM;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		priv->rx_buf[i] = skb;
 		mapping = (dma_addr_t *)skb->cb;
 		*mapping = pci_map_single(priv->pdev, skb_tail_pointer(skb),
 					  MAX_RX_SIZE, PCI_DMA_FROMDEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (pci_dma_mapping_error(priv->pdev, *mapping)) {
 			kfree_skb(skb);
@@ -1257,6 +1420,9 @@ static int rtl8180_init_rx_ring(struct ieee80211_hw *dev)
 			return -ENOMEM;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		entry->rx_buf = cpu_to_le32(*mapping);
 		entry->flags = cpu_to_le32(RTL818X_RX_DESC_FLAG_OWN |
@@ -1283,7 +1449,11 @@ static void rtl8180_free_rx_ring(struct ieee80211_hw *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_free_consistent(priv->pdev, sizeof(*priv->rx_ring) * 32,
+=======
+	pci_free_consistent(priv->pdev, priv->rx_ring_sz * 32,
+>>>>>>> v3.18
 =======
 	pci_free_consistent(priv->pdev, priv->rx_ring_sz * 32,
 >>>>>>> v3.18
@@ -1300,7 +1470,12 @@ static int rtl8180_init_tx_ring(struct ieee80211_hw *dev,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ring = pci_alloc_consistent(priv->pdev, sizeof(*ring) * entries, &dma);
+=======
+	ring = pci_zalloc_consistent(priv->pdev, sizeof(*ring) * entries,
+				     &dma);
+>>>>>>> v3.18
 =======
 	ring = pci_zalloc_consistent(priv->pdev, sizeof(*ring) * entries,
 				     &dma);
@@ -1312,7 +1487,10 @@ static int rtl8180_init_tx_ring(struct ieee80211_hw *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(ring, 0, sizeof(*ring)*entries);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	priv->tx_ring[prio].desc = ring;
@@ -1359,7 +1537,11 @@ static int rtl8180_start(struct ieee80211_hw *dev)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < 4; i++)
+=======
+	for (i = 0; i < (dev->queues + 1); i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < (dev->queues + 1); i++)
 >>>>>>> v3.18
@@ -1371,6 +1553,7 @@ static int rtl8180_start(struct ieee80211_hw *dev)
 		goto err_free_rings;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl818x_iowrite32(priv, &priv->map->RDSAR, priv->rx_ring_dma);
 	rtl818x_iowrite32(priv, &priv->map->TBDA, priv->tx_ring[3].dma);
 	rtl818x_iowrite32(priv, &priv->map->THPDA, priv->tx_ring[2].dma);
@@ -1380,6 +1563,8 @@ static int rtl8180_start(struct ieee80211_hw *dev)
 	ret = request_irq(priv->pdev->irq, rtl8180_interrupt,
 			  IRQF_SHARED, KBUILD_MODNAME, dev);
 =======
+=======
+>>>>>>> v3.18
 	if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8187SE) {
 		ret = request_irq(priv->pdev->irq, rtl8187se_interrupt,
 			  IRQF_SHARED, KBUILD_MODNAME, dev);
@@ -1388,6 +1573,9 @@ static int rtl8180_start(struct ieee80211_hw *dev)
 			  IRQF_SHARED, KBUILD_MODNAME, dev);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		wiphy_err(dev->wiphy, "failed to register IRQ handler\n");
@@ -1395,11 +1583,14 @@ static int rtl8180_start(struct ieee80211_hw *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl818x_iowrite16(priv, &priv->map->INT_MASK, 0xFFFF);
 
 	rtl818x_iowrite32(priv, &priv->map->MAR[0], ~0);
 	rtl818x_iowrite32(priv, &priv->map->MAR[1], ~0);
 =======
+=======
+>>>>>>> v3.18
 	rtl8180_int_enable(dev);
 
 	/* in rtl8187se at MAR regs offset there is the management
@@ -1409,6 +1600,9 @@ static int rtl8180_start(struct ieee80211_hw *dev)
 		rtl818x_iowrite32(priv, &priv->map->MAR[0], ~0);
 		rtl818x_iowrite32(priv, &priv->map->MAR[1], ~0);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	reg = RTL818X_RX_CONF_ONLYERLPKT |
@@ -1420,9 +1614,15 @@ static int rtl8180_start(struct ieee80211_hw *dev)
 	      RTL818X_RX_CONF_NICMAC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->r8185)
 		reg |= RTL818X_RX_CONF_CSDM1 | RTL818X_RX_CONF_CSDM2;
 	else {
+=======
+	if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8185)
+		reg |= RTL818X_RX_CONF_CSDM1 | RTL818X_RX_CONF_CSDM2;
+	else if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8180) {
+>>>>>>> v3.18
 =======
 	if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8185)
 		reg |= RTL818X_RX_CONF_CSDM1 | RTL818X_RX_CONF_CSDM2;
@@ -1433,6 +1633,11 @@ static int rtl8180_start(struct ieee80211_hw *dev)
 		reg |= (priv->rfparam & RF_PARAM_CARRIERSENSE2)
 			? RTL818X_RX_CONF_CSDM2 : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	} else {
+		reg &= ~(RTL818X_RX_CONF_CSDM1 | RTL818X_RX_CONF_CSDM2);
+>>>>>>> v3.18
 =======
 	} else {
 		reg &= ~(RTL818X_RX_CONF_CSDM1 | RTL818X_RX_CONF_CSDM2);
@@ -1442,6 +1647,7 @@ static int rtl8180_start(struct ieee80211_hw *dev)
 	priv->rx_conf = reg;
 	rtl818x_iowrite32(priv, &priv->map->RX_CONF, reg);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (priv->r8185) {
 		reg = rtl818x_ioread8(priv, &priv->map->CW_CONF);
@@ -1453,6 +1659,8 @@ static int rtl8180_start(struct ieee80211_hw *dev)
 		reg &= ~RTL818X_TX_AGC_CTL_PERPACKET_GAIN_SHIFT;
 		reg &= ~RTL818X_TX_AGC_CTL_PERPACKET_ANTSEL_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 	if (priv->chip_family != RTL818X_CHIP_FAMILY_RTL8180) {
 		reg = rtl818x_ioread8(priv, &priv->map->CW_CONF);
 
@@ -1475,6 +1683,9 @@ static int rtl8180_start(struct ieee80211_hw *dev)
 		 */
 		reg &= ~RTL818X_TX_AGC_CTL_PERPACKET_GAIN;
 		reg &= ~RTL818X_TX_AGC_CTL_PERPACKET_ANTSEL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		reg |=  RTL818X_TX_AGC_CTL_FEEDBACK_ANT;
 		rtl818x_iowrite8(priv, &priv->map->TX_AGC_CTL, reg);
@@ -1488,18 +1699,29 @@ static int rtl8180_start(struct ieee80211_hw *dev)
 	       RTL818X_TX_CONF_NO_ICV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->r8185)
 =======
+=======
+>>>>>>> v3.18
 	if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8187SE)
 		reg |= 1<<30;  /*  "duration procedure mode" */
 
 	if (priv->chip_family != RTL818X_CHIP_FAMILY_RTL8180)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		reg &= ~RTL818X_TX_CONF_PROBE_DTS;
 	else
 		reg &= ~RTL818X_TX_CONF_HW_SEQNUM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	reg &= ~RTL818X_TX_CONF_DISCW;
+
+>>>>>>> v3.18
 =======
 	reg &= ~RTL818X_TX_CONF_DISCW;
 
@@ -1519,7 +1741,11 @@ static int rtl8180_start(struct ieee80211_hw *dev)
  err_free_rings:
 	rtl8180_free_rx_ring(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < 4; i++)
+=======
+	for (i = 0; i < (dev->queues + 1); i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < (dev->queues + 1); i++)
 >>>>>>> v3.18
@@ -1536,7 +1762,11 @@ static void rtl8180_stop(struct ieee80211_hw *dev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtl818x_iowrite16(priv, &priv->map->INT_MASK, 0);
+=======
+	rtl8180_int_disable(dev);
+>>>>>>> v3.18
 =======
 	rtl8180_int_disable(dev);
 >>>>>>> v3.18
@@ -1557,7 +1787,11 @@ static void rtl8180_stop(struct ieee80211_hw *dev)
 
 	rtl8180_free_rx_ring(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < 4; i++)
+=======
+	for (i = 0; i < (dev->queues + 1); i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < (dev->queues + 1); i++)
 >>>>>>> v3.18
@@ -1669,7 +1903,10 @@ static int rtl8180_config(struct ieee80211_hw *dev, u32 changed)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void rtl8187se_conf_ac_parm(struct ieee80211_hw *dev, u8 queue)
 {
 	const struct ieee80211_tx_queue_params *params;
@@ -1787,6 +2024,9 @@ static void rtl8180_conf_erp(struct ieee80211_hw *dev,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void rtl8180_bss_info_changed(struct ieee80211_hw *dev,
 				     struct ieee80211_vif *vif,
@@ -1802,14 +2042,20 @@ static void rtl8180_bss_info_changed(struct ieee80211_hw *dev,
 
 	if (changed & BSS_CHANGED_BSSID) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < ETH_ALEN; i++)
 			rtl818x_iowrite8(priv, &priv->map->BSSID[i],
 					 info->bssid[i]);
 =======
+=======
+>>>>>>> v3.18
 		rtl818x_iowrite16(priv, (__le16 __iomem *)&priv->map->BSSID[0],
 				  le16_to_cpu(*(__le16 *)info->bssid));
 		rtl818x_iowrite32(priv, (__le32 __iomem *)&priv->map->BSSID[2],
 				  le32_to_cpu(*(__le32 *)(info->bssid + 2)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (is_valid_ether_addr(info->bssid)) {
@@ -1820,12 +2066,15 @@ static void rtl8180_bss_info_changed(struct ieee80211_hw *dev,
 		} else
 			reg = RTL818X_MSR_NO_LINK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rtl818x_iowrite8(priv, &priv->map->MSR, reg);
 	}
 
 	if (changed & BSS_CHANGED_ERP_SLOT && priv->rf->conf_erp)
 		priv->rf->conf_erp(dev, info);
 =======
+=======
+>>>>>>> v3.18
 
 		if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8187SE)
 			reg |= RTL818X_MSR_ENEDCA;
@@ -1860,6 +2109,9 @@ static void rtl8180_bss_info_changed(struct ieee80211_hw *dev,
 				rtl8187se_conf_ac_parm(dev, i);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (changed & BSS_CHANGED_BEACON_ENABLED)
@@ -1919,6 +2171,10 @@ static const struct ieee80211_ops rtl8180_ops = {
 	.config			= rtl8180_config,
 	.bss_info_changed	= rtl8180_bss_info_changed,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.conf_tx		= rtl8180_conf_tx,
+>>>>>>> v3.18
 =======
 	.conf_tx		= rtl8180_conf_tx,
 >>>>>>> v3.18
@@ -1930,8 +2186,12 @@ static const struct ieee80211_ops rtl8180_ops = {
 static void rtl8180_eeprom_register_read(struct eeprom_93cx6 *eeprom)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_hw *dev = eeprom->data;
 	struct rtl8180_priv *priv = dev->priv;
+=======
+	struct rtl8180_priv *priv = eeprom->data;
+>>>>>>> v3.18
 =======
 	struct rtl8180_priv *priv = eeprom->data;
 >>>>>>> v3.18
@@ -1946,8 +2206,12 @@ static void rtl8180_eeprom_register_read(struct eeprom_93cx6 *eeprom)
 static void rtl8180_eeprom_register_write(struct eeprom_93cx6 *eeprom)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_hw *dev = eeprom->data;
 	struct rtl8180_priv *priv = dev->priv;
+=======
+	struct rtl8180_priv *priv = eeprom->data;
+>>>>>>> v3.18
 =======
 	struct rtl8180_priv *priv = eeprom->data;
 >>>>>>> v3.18
@@ -1968,7 +2232,10 @@ static void rtl8180_eeprom_register_write(struct eeprom_93cx6 *eeprom)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void rtl8180_eeprom_read(struct rtl8180_priv *priv)
 {
 	struct eeprom_93cx6 eeprom;
@@ -2046,6 +2313,9 @@ static void rtl8180_eeprom_read(struct rtl8180_priv *priv)
 			RTL818X_EEPROM_CMD_NORMAL);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int rtl8180_probe(struct pci_dev *pdev,
 				   const struct pci_device_id *id)
@@ -2055,12 +2325,18 @@ static int rtl8180_probe(struct pci_dev *pdev,
 	unsigned long mem_addr, mem_len;
 	unsigned int io_addr, io_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err, i;
 	struct eeprom_93cx6 eeprom;
 	const char *chip_name, *rf_name = NULL;
 	u32 reg;
 	u16 eeprom_val;
 	u8 mac_addr[ETH_ALEN];
+=======
+	int err;
+	const char *chip_name, *rf_name = NULL;
+	u32 reg;
+>>>>>>> v3.18
 =======
 	int err;
 	const char *chip_name, *rf_name = NULL;
@@ -2115,6 +2391,7 @@ static int rtl8180_probe(struct pci_dev *pdev,
 	priv->pdev = pdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->max_rates = 2;
 	SET_IEEE80211_DEV(dev, &pdev->dev);
 	pci_set_drvdata(pdev, dev);
@@ -2127,6 +2404,8 @@ static int rtl8180_probe(struct pci_dev *pdev,
 		printk(KERN_ERR "%s (rtl8180): Cannot map device memory\n",
 		       pci_name(pdev));
 =======
+=======
+>>>>>>> v3.18
 	dev->max_rates = 1;
 	SET_IEEE80211_DEV(dev, &pdev->dev);
 	pci_set_drvdata(pdev, dev);
@@ -2141,6 +2420,9 @@ static int rtl8180_probe(struct pci_dev *pdev,
 	if (!priv->map) {
 		dev_err(&pdev->dev, "Cannot map device memory/PIO\n");
 		err = -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err_free_dev;
 	}
@@ -2160,6 +2442,7 @@ static int rtl8180_probe(struct pci_dev *pdev,
 
 	dev->flags = IEEE80211_HW_HOST_BROADCAST_PS_BUFFERING |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     IEEE80211_HW_RX_INCLUDES_FCS |
 		     IEEE80211_HW_SIGNAL_UNSPEC;
 	dev->vif_data_size = sizeof(struct rtl8180_vif);
@@ -2167,10 +2450,15 @@ static int rtl8180_probe(struct pci_dev *pdev,
 					BIT(NL80211_IFTYPE_ADHOC);
 	dev->queues = 1;
 =======
+=======
+>>>>>>> v3.18
 		IEEE80211_HW_RX_INCLUDES_FCS;
 	dev->vif_data_size = sizeof(struct rtl8180_vif);
 	dev->wiphy->interface_modes = BIT(NL80211_IFTYPE_STATION) |
 					BIT(NL80211_IFTYPE_ADHOC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->max_signal = 65;
 
@@ -2179,6 +2467,7 @@ static int rtl8180_probe(struct pci_dev *pdev,
 	switch (reg) {
 	case RTL818X_TX_CONF_R8180_ABCD:
 		chip_name = "RTL8180";
+<<<<<<< HEAD
 <<<<<<< HEAD
 		break;
 	case RTL818X_TX_CONF_R8180_F:
@@ -2199,6 +2488,8 @@ static int rtl8180_probe(struct pci_dev *pdev,
 	priv->r8185 = reg & RTL818X_TX_CONF_R8185_ABC;
 	if (priv->r8185) {
 =======
+=======
+>>>>>>> v3.18
 		priv->chip_family = RTL818X_CHIP_FAMILY_RTL8180;
 		break;
 
@@ -2248,11 +2539,15 @@ static int rtl8180_probe(struct pci_dev *pdev,
 		dev->queues = RTL8180_NR_TX_QUEUES - 1;
 
 	if (priv->chip_family != RTL818X_CHIP_FAMILY_RTL8180) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		priv->band.n_bitrates = ARRAY_SIZE(rtl818x_rates);
 		pci_try_set_mwi(pdev);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	eeprom.data = dev;
 	eeprom.register_read = rtl8180_eeprom_register_read;
@@ -2270,6 +2565,8 @@ static int rtl8180_probe(struct pci_dev *pdev,
 	eeprom_val &= 0xFF;
 	switch (eeprom_val) {
 =======
+=======
+>>>>>>> v3.18
 	if (priv->chip_family != RTL818X_CHIP_FAMILY_RTL8180)
 		dev->flags |= IEEE80211_HW_SIGNAL_DBM;
 	else
@@ -2278,6 +2575,9 @@ static int rtl8180_probe(struct pci_dev *pdev,
 	rtl8180_eeprom_read(priv);
 
 	switch (priv->rf_type) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 1:	rf_name = "Intersil";
 		break;
@@ -2290,13 +2590,19 @@ static int rtl8180_probe(struct pci_dev *pdev,
 	case 5:	priv->rf = &grf5101_rf_ops;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 9:	priv->rf = rtl8180_detect_rf(dev);
 =======
+=======
+>>>>>>> v3.18
 	case 9:
 		if (priv->chip_family == RTL818X_CHIP_FAMILY_RTL8187SE)
 			priv->rf = rtl8187se_detect_rf(dev);
 		else
 			priv->rf = rtl8180_detect_rf(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case 10:
@@ -2305,7 +2611,12 @@ static int rtl8180_probe(struct pci_dev *pdev,
 	default:
 		printk(KERN_ERR "%s (rtl8180): Unknown RF! (0x%x)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       pci_name(pdev), eeprom_val);
+=======
+		       pci_name(pdev), priv->rf_type);
+		err = -ENODEV;
+>>>>>>> v3.18
 =======
 		       pci_name(pdev), priv->rf_type);
 		err = -ENODEV;
@@ -2316,6 +2627,7 @@ static int rtl8180_probe(struct pci_dev *pdev,
 	if (!priv->rf) {
 		printk(KERN_ERR "%s (rtl8180): %s RF frontend not supported!\n",
 		       pci_name(pdev), rf_name);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_iounmap;
 	}
@@ -2357,6 +2669,8 @@ static int rtl8180_probe(struct pci_dev *pdev,
 
 	rtl818x_iowrite8(priv, &priv->map->EEPROM_CMD, RTL818X_EEPROM_CMD_NORMAL);
 =======
+=======
+>>>>>>> v3.18
 		err = -ENODEV;
 		goto err_iounmap;
 	}
@@ -2367,6 +2681,9 @@ static int rtl8180_probe(struct pci_dev *pdev,
 		eth_random_addr(priv->mac_addr);
 	}
 	SET_IEEE80211_PERM_ADDR(dev, priv->mac_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_init(&priv->lock);
@@ -2380,7 +2697,11 @@ static int rtl8180_probe(struct pci_dev *pdev,
 
 	wiphy_info(dev->wiphy, "hwaddr %pm, %s + %s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   mac_addr, chip_name, priv->rf->name);
+=======
+		   priv->mac_addr, chip_name, priv->rf->name);
+>>>>>>> v3.18
 =======
 		   priv->mac_addr, chip_name, priv->rf->name);
 >>>>>>> v3.18
@@ -2389,10 +2710,16 @@ static int rtl8180_probe(struct pci_dev *pdev,
 
  err_iounmap:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(priv->map);
 
  err_free_dev:
 	pci_set_drvdata(pdev, NULL);
+=======
+	pci_iounmap(pdev, priv->map);
+
+ err_free_dev:
+>>>>>>> v3.18
 =======
 	pci_iounmap(pdev, priv->map);
 

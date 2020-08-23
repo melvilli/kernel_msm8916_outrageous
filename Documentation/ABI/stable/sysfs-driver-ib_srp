@@ -55,7 +55,10 @@ Description:	Interface for making ib_srp connect to a new target.
 		  only safe with partial memory descriptor list support enabled
 		  (allow_ext_sg=1).
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		* comp_vector, a number in the range 0..n-1 specifying the
 		  MSI-X completion vector. Some HCA's allocate multiple (n)
 		  MSI-X vectors per HCA port. If the IRQ affinity masks of
@@ -69,6 +72,9 @@ Description:	Interface for making ib_srp connect to a new target.
 		  initiator is allowed to queue per SCSI host. The default
 		  value for this parameter is 62. The lowest supported value
 		  is 2.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 What:		/sys/class/infiniband_srp/srp-<hca>-<port_number>/ibdev
@@ -163,7 +169,10 @@ Description:	InfiniBand service ID used for establishing communication with
 		the SRP	target.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 What:		/sys/class/scsi_host/host<n>/sgid
 Date:		February 1, 2014
 KernelVersion:	3.13
@@ -171,6 +180,9 @@ Contact:	linux-rdma@vger.kernel.org
 Description:	InfiniBand GID of the source port used for communication with
 		the SRP target.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 What:		/sys/class/scsi_host/host<n>/zero_req_lim
 Date:		September 20, 2006

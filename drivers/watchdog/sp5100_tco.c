@@ -304,7 +304,11 @@ static struct miscdevice sp5100_tco_miscdev = {
  * want to register another driver on the same PCI id.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(sp5100_tco_pci_tbl) = {
+=======
+static const struct pci_device_id sp5100_tco_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id sp5100_tco_pci_tbl[] = {
 >>>>>>> v3.18
@@ -585,6 +589,9 @@ MODULE_AUTHOR("Priyanka Gupta");
 MODULE_DESCRIPTION("TCO timer driver for SP5100/SB800 chipset");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

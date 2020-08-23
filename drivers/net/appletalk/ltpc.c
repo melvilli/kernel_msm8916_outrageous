@@ -1244,7 +1244,11 @@ static int __init ltpc_module_init(void)
 
 	dev_ltpc = ltpc_probe();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(dev_ltpc);
+=======
+	return PTR_ERR_OR_ZERO(dev_ltpc);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(dev_ltpc);
 >>>>>>> v3.18

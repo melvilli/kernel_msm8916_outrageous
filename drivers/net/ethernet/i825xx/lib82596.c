@@ -79,7 +79,10 @@
 #include <linux/etherdevice.h>
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -611,7 +614,11 @@ static int init_i596_mem(struct net_device *dev)
 
 	DEB(DEB_INIT, printk(KERN_DEBUG "%s: queuing CmdSASetup\n", dev->name));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dma->sa_cmd.eth_addr, dev->dev_addr, 6);
+=======
+	memcpy(dma->sa_cmd.eth_addr, dev->dev_addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(dma->sa_cmd.eth_addr, dev->dev_addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -1002,7 +1009,11 @@ static int i596_start_xmit(struct sk_buff *skb, struct net_device *dev)
 		dev->stats.tx_dropped++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 		dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -1408,7 +1419,11 @@ static void set_multicast_list(struct net_device *dev)
 			if (!cnt--)
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memcpy(cp, ha->addr, 6);
+=======
+			memcpy(cp, ha->addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 			memcpy(cp, ha->addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -1418,7 +1433,11 @@ static void set_multicast_list(struct net_device *dev)
 					   "%s: Adding address %pM\n",
 					   dev->name, cp));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cp += 6;
+=======
+			cp += ETH_ALEN;
+>>>>>>> v3.18
 =======
 			cp += ETH_ALEN;
 >>>>>>> v3.18

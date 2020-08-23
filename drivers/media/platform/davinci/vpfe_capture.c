@@ -126,7 +126,11 @@ static DEFINE_MUTEX(ccdc_lock);
 static struct ccdc_config *ccdc_cfg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct vpfe_standard vpfe_standards[] = {
+=======
+static const struct vpfe_standard vpfe_standards[] = {
+>>>>>>> v3.18
 =======
 static const struct vpfe_standard vpfe_standards[] = {
 >>>>>>> v3.18
@@ -447,16 +451,22 @@ static int vpfe_config_image_format(struct vpfe_device *vpfe_dev,
 
 	/* Update the values of sizeimage and bytesperline */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ret) {
 		pix->bytesperline = ccdc_dev->hw_ops.get_line_length();
 		pix->sizeimage = pix->bytesperline * pix->height;
 	}
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	pix->bytesperline = ccdc_dev->hw_ops.get_line_length();
 	pix->sizeimage = pix->bytesperline * pix->height;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -510,6 +520,10 @@ static int vpfe_open(struct file *file)
 {
 	struct vpfe_device *vpfe_dev = video_drvdata(file);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct video_device *vdev = video_devdata(file);
+>>>>>>> v3.18
 =======
 	struct video_device *vdev = video_devdata(file);
 >>>>>>> v3.18
@@ -533,6 +547,10 @@ static int vpfe_open(struct file *file)
 	file->private_data = fh;
 	fh->vpfe_dev = vpfe_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l2_fh_init(&fh->fh, vdev);
+>>>>>>> v3.18
 =======
 	v4l2_fh_init(&fh->fh, vdev);
 >>>>>>> v3.18
@@ -549,9 +567,13 @@ static int vpfe_open(struct file *file)
 	/* Set io_allowed member to false */
 	fh->io_allowed = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Initialize priority of this instance to default priority */
 	fh->prio = V4L2_PRIORITY_UNSET;
 	v4l2_prio_open(&vpfe_dev->prio, &fh->prio);
+=======
+	v4l2_fh_add(&fh->fh);
+>>>>>>> v3.18
 =======
 	v4l2_fh_add(&fh->fh);
 >>>>>>> v3.18
@@ -712,7 +734,11 @@ static int vpfe_attach_irq(struct vpfe_device *vpfe_dev)
 	if (frame_format == CCDC_FRMFMT_PROGRESSIVE) {
 		return request_irq(vpfe_dev->ccdc_irq1, vdint1_isr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    IRQF_DISABLED, "vpfe_capture1",
+=======
+				    0, "vpfe_capture1",
+>>>>>>> v3.18
 =======
 				    0, "vpfe_capture1",
 >>>>>>> v3.18
@@ -762,6 +788,11 @@ static int vpfe_release(struct file *file)
 		vpfe_dev->io_usrs = 0;
 		vpfe_dev->numbuffers = config_params.numbuffers;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		videobuf_stop(&vpfe_dev->buffer_queue);
+		videobuf_mmap_free(&vpfe_dev->buffer_queue);
+>>>>>>> v3.18
 =======
 		videobuf_stop(&vpfe_dev->buffer_queue);
 		videobuf_mmap_free(&vpfe_dev->buffer_queue);
@@ -771,8 +802,13 @@ static int vpfe_release(struct file *file)
 	/* Decrement device usrs counter */
 	vpfe_dev->usrs--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Close the priority */
 	v4l2_prio_close(&vpfe_dev->prio, fh->prio);
+=======
+	v4l2_fh_del(&fh->fh);
+	v4l2_fh_exit(&fh->fh);
+>>>>>>> v3.18
 =======
 	v4l2_fh_del(&fh->fh);
 	v4l2_fh_exit(&fh->fh);
@@ -979,7 +1015,10 @@ static int vpfe_g_fmt_vid_cap(struct file *file, void *priv,
 {
 	struct vpfe_device *vpfe_dev = video_drvdata(file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -987,7 +1026,11 @@ static int vpfe_g_fmt_vid_cap(struct file *file, void *priv,
 	/* Fill in the information about format */
 	*fmt = vpfe_dev->fmt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1260,7 +1303,11 @@ static int vpfe_s_std(struct file *file, void *priv, v4l2_std_id std_id)
 
 	ret = v4l2_device_call_until_err(&vpfe_dev->v4l2_dev, sdinfo->grp_id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 core, s_std, std_id);
+=======
+					 video, s_std, std_id);
+>>>>>>> v3.18
 =======
 					 video, s_std, std_id);
 >>>>>>> v3.18
@@ -1755,10 +1802,13 @@ static long vpfe_param_handler(struct file *file, void *priv,
 	switch (cmd) {
 	case VPFE_CMD_S_CCDC_RAW_PARAMS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EINVAL;
 		v4l2_warn(&vpfe_dev->v4l2_dev,
 			"VPFE_CMD_S_CCDC_RAW_PARAMS not supported\n");
 =======
+=======
+>>>>>>> v3.18
 		v4l2_warn(&vpfe_dev->v4l2_dev,
 			  "VPFE_CMD_S_CCDC_RAW_PARAMS: experimental ioctl\n");
 		if (ccdc_dev->hw_ops.set_params) {
@@ -1780,6 +1830,9 @@ static long vpfe_param_handler(struct file *file, void *priv,
 			v4l2_dbg(1, debug, &vpfe_dev->v4l2_dev,
 				"VPFE_CMD_S_CCDC_RAW_PARAMS not supported\n");
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -1918,7 +1971,11 @@ static int vpfe_probe(struct platform_device *pdev)
 	vpfe_dev->ccdc_irq1 = res1->start;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_irq(vpfe_dev->ccdc_irq0, vpfe_isr, IRQF_DISABLED,
+=======
+	ret = request_irq(vpfe_dev->ccdc_irq0, vpfe_isr, 0,
+>>>>>>> v3.18
 =======
 	ret = request_irq(vpfe_dev->ccdc_irq0, vpfe_isr, 0,
 >>>>>>> v3.18
@@ -1967,8 +2024,11 @@ static int vpfe_probe(struct platform_device *pdev)
 	vpfe_dev->numbuffers = config_params.numbuffers;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Initialize prio member of device object */
 	v4l2_prio_init(&vpfe_dev->prio);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* register video device */
@@ -1976,7 +2036,11 @@ static int vpfe_probe(struct platform_device *pdev)
 		"trying to register vpfe device.\n");
 	v4l2_dbg(1, debug, &vpfe_dev->v4l2_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"video_dev=%x\n", (int)&vpfe_dev->video_dev);
+=======
+		"video_dev=%p\n", &vpfe_dev->video_dev);
+>>>>>>> v3.18
 =======
 		"video_dev=%p\n", &vpfe_dev->video_dev);
 >>>>>>> v3.18

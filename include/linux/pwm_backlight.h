@@ -14,6 +14,11 @@ struct platform_pwm_backlight_data {
 	unsigned int pwm_period_ns;
 	unsigned int *levels;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* TODO remove once all users are switched to gpiod_* API */
+	int enable_gpio;
+>>>>>>> v3.18
 =======
 	/* TODO remove once all users are switched to gpiod_* API */
 	int enable_gpio;

@@ -39,7 +39,11 @@ static inline void stmpe_dump_bytes(const char *str, const void *buf,
  */
 struct stmpe_variant_block {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mfd_cell		*cell;
+=======
+	const struct mfd_cell	*cell;
+>>>>>>> v3.18
 =======
 	const struct mfd_cell	*cell;
 >>>>>>> v3.18
@@ -102,7 +106,11 @@ struct stmpe_client_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int stmpe_probe(struct stmpe_client_info *ci, int partnum);
+=======
+int stmpe_probe(struct stmpe_client_info *ci, enum stmpe_partnum partnum);
+>>>>>>> v3.18
 =======
 int stmpe_probe(struct stmpe_client_info *ci, enum stmpe_partnum partnum);
 >>>>>>> v3.18
@@ -201,7 +209,11 @@ int stmpe_remove(struct stmpe *stmpe);
 #define STMPE1601_SYS_CTRL_ENABLE_GPIO		(1 << 3)
 #define STMPE1601_SYS_CTRL_ENABLE_KPC		(1 << 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define STMPE1601_SYSCON_ENABLE_SPWM		(1 << 0)
+=======
+#define STMPE1601_SYS_CTRL_ENABLE_SPWM		(1 << 0)
+>>>>>>> v3.18
 =======
 #define STMPE1601_SYS_CTRL_ENABLE_SPWM		(1 << 0)
 >>>>>>> v3.18
@@ -282,7 +294,11 @@ int stmpe_remove(struct stmpe *stmpe);
 #define STMPE24XX_REG_IEGPIOR_LSB	0x18
 #define STMPE24XX_REG_ISGPIOR_MSB	0x19
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define STMPE24XX_REG_GPMR_LSB		0xA5
+=======
+#define STMPE24XX_REG_GPMR_LSB		0xA4
+>>>>>>> v3.18
 =======
 #define STMPE24XX_REG_GPMR_LSB		0xA4
 >>>>>>> v3.18

@@ -7,7 +7,10 @@
  */
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -23,6 +26,10 @@
 #include <asm/cacheops.h>
 #include <asm/cpu-features.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu-type.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu-type.h>
 >>>>>>> v3.18
@@ -145,13 +152,19 @@ static void octeon_flush_cache_sigtramp(unsigned long addr)
 	struct vm_area_struct *vma;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma = find_vma(current->mm, addr);
 	octeon_flush_icache_all_cores(vma);
 =======
+=======
+>>>>>>> v3.18
 	down_read(&current->mm->mmap_sem);
 	vma = find_vma(current->mm, addr);
 	octeon_flush_icache_all_cores(vma);
 	up_read(&current->mm->mmap_sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -195,7 +208,11 @@ static void octeon_flush_kernel_vmap_range(unsigned long vaddr, int size)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit probe_octeon(void)
+=======
+static void probe_octeon(void)
+>>>>>>> v3.18
 =======
 static void probe_octeon(void)
 >>>>>>> v3.18
@@ -205,14 +222,20 @@ static void probe_octeon(void)
 	unsigned int config1;
 	struct cpuinfo_mips *c = &current_cpu_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	config1 = read_c0_config1();
 	switch (c->cputype) {
 =======
+=======
+>>>>>>> v3.18
 	int cputype = current_cpu_type();
 
 	config1 = read_c0_config1();
 	switch (cputype) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CPU_CAVIUM_OCTEON:
 	case CPU_CAVIUM_OCTEON_PLUS:
@@ -225,7 +248,11 @@ static void probe_octeon(void)
 		c->icache.waybit = ffs(icache_size / c->icache.ways) - 1;
 		c->dcache.linesz = 128;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (c->cputype == CPU_CAVIUM_OCTEON_PLUS)
+=======
+		if (cputype == CPU_CAVIUM_OCTEON_PLUS)
+>>>>>>> v3.18
 =======
 		if (cputype == CPU_CAVIUM_OCTEON_PLUS)
 >>>>>>> v3.18
@@ -254,7 +281,10 @@ static void probe_octeon(void)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CPU_CAVIUM_OCTEON3:
 		c->icache.linesz = 128;
 		c->icache.sets = 16;
@@ -269,6 +299,9 @@ static void probe_octeon(void)
 		c->options |= MIPS_CPU_PREFETCH;
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		panic("Unsupported Cavium Networks CPU type");
@@ -298,7 +331,11 @@ static void probe_octeon(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void  __cpuinit octeon_cache_error_setup(void)
+=======
+static void  octeon_cache_error_setup(void)
+>>>>>>> v3.18
 =======
 static void  octeon_cache_error_setup(void)
 >>>>>>> v3.18
@@ -312,7 +349,11 @@ static void  octeon_cache_error_setup(void)
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit octeon_cache_init(void)
+=======
+void octeon_cache_init(void)
+>>>>>>> v3.18
 =======
 void octeon_cache_init(void)
 >>>>>>> v3.18

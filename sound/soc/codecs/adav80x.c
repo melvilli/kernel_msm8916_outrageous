@@ -9,6 +9,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
@@ -21,6 +22,8 @@
 #include <sound/tlv.h>
 #include <sound/soc.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/regmap.h>
@@ -30,6 +33,9 @@
 #include <sound/pcm_params.h>
 #include <sound/soc.h>
 #include <sound/tlv.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "adav80x.h"
@@ -128,6 +134,7 @@
 #define ADAV80X_PLL_OUTE_SYSCLKPD(x)		BIT(2 - (x))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 adav80x_default_regs[] = {
 	0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x02, 0x01, 0x80, 0x26, 0x00, 0x00,
 	0x02, 0x40, 0x20, 0x00, 0x09, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -145,6 +152,8 @@ static u8 adav80x_default_regs[] = {
 struct adav80x {
 	enum snd_soc_control_type control_type;
 =======
+=======
+>>>>>>> v3.18
 static struct reg_default adav80x_reg_defaults[] = {
 	{ ADAV80X_PLAYBACK_CTRL,	0x01 },
 	{ ADAV80X_AUX_IN_CTRL,		0x01 },
@@ -173,6 +182,9 @@ static struct reg_default adav80x_reg_defaults[] = {
 
 struct adav80x {
 	struct regmap *regmap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	enum adav80x_clk_src clk_src;
@@ -206,6 +218,7 @@ static ADAV80X_MUX_ENUM_DECL(adav80x_dac_enum, ADAV80X_DPATH_CTRL2, 3);
 
 static const struct snd_kcontrol_new adav80x_aux_capture_mux_ctrl =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SOC_DAPM_VALUE_ENUM("Route", adav80x_aux_capture_enum);
 static const struct snd_kcontrol_new adav80x_capture_mux_ctrl =
 	SOC_DAPM_VALUE_ENUM("Route", adav80x_capture_enum);
@@ -215,6 +228,8 @@ static const struct snd_kcontrol_new adav80x_dac_mux_ctrl =
 #define ADAV80X_MUX(name, ctrl) \
 	SND_SOC_DAPM_VALUE_MUX(name, SND_SOC_NOPM, 0, 0, ctrl)
 =======
+=======
+>>>>>>> v3.18
 	SOC_DAPM_ENUM("Route", adav80x_aux_capture_enum);
 static const struct snd_kcontrol_new adav80x_capture_mux_ctrl =
 	SOC_DAPM_ENUM("Route", adav80x_capture_enum);
@@ -223,6 +238,9 @@ static const struct snd_kcontrol_new adav80x_dac_mux_ctrl =
 
 #define ADAV80X_MUX(name, ctrl) \
 	SND_SOC_DAPM_MUX(name, SND_SOC_NOPM, 0, 0, ctrl)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_soc_dapm_widget adav80x_dapm_widgets[] = {
@@ -353,7 +371,11 @@ static int adav80x_set_deemph(struct snd_soc_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snd_soc_update_bits(codec, ADAV80X_DAC_CTRL2,
+=======
+	return regmap_update_bits(adav80x->regmap, ADAV80X_DAC_CTRL2,
+>>>>>>> v3.18
 =======
 	return regmap_update_bits(adav80x->regmap, ADAV80X_DAC_CTRL2,
 >>>>>>> v3.18
@@ -364,9 +386,15 @@ static int adav80x_put_deemph(struct snd_kcontrol *kcontrol,
 		struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
 	unsigned int deemph = ucontrol->value.integer.value[0];
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
+	unsigned int deemph = ucontrol->value.enumerated.item[0];
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
@@ -385,15 +413,21 @@ static int adav80x_get_deemph(struct snd_kcontrol *kcontrol,
 				struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
 
 	ucontrol->value.integer.value[0] = adav80x->deemph;
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
 
 	ucontrol->value.enumerated.item[0] = adav80x->deemph;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 };
@@ -466,16 +500,22 @@ static int adav80x_set_dai_fmt(struct snd_soc_dai *dai, unsigned int fmt)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, adav80x_port_ctrl_regs[dai->id][0],
 		ADAV80X_CAPTURE_MODE_MASK | ADAV80X_CAPTURE_MODE_MASTER,
 		capture);
 	snd_soc_write(codec, adav80x_port_ctrl_regs[dai->id][1], playback);
 =======
+=======
+>>>>>>> v3.18
 	regmap_update_bits(adav80x->regmap, adav80x_port_ctrl_regs[dai->id][0],
 		ADAV80X_CAPTURE_MODE_MASK | ADAV80X_CAPTURE_MODE_MASTER,
 		capture);
 	regmap_write(adav80x->regmap, adav80x_port_ctrl_regs[dai->id][1],
 		playback);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	adav80x->dai_fmt[dai->id] = fmt & SND_SOC_DAIFMT_FORMAT_MASK;
@@ -487,6 +527,10 @@ static int adav80x_set_adc_clock(struct snd_soc_codec *codec,
 		unsigned int sample_rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
+>>>>>>> v3.18
 =======
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
 >>>>>>> v3.18
@@ -498,7 +542,11 @@ static int adav80x_set_adc_clock(struct snd_soc_codec *codec,
 		val = ADAV80X_ADC_CTRL1_MODULATOR_64FS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, ADAV80X_ADC_CTRL1,
+=======
+	regmap_update_bits(adav80x->regmap, ADAV80X_ADC_CTRL1,
+>>>>>>> v3.18
 =======
 	regmap_update_bits(adav80x->regmap, ADAV80X_ADC_CTRL1,
 >>>>>>> v3.18
@@ -511,6 +559,10 @@ static int adav80x_set_dac_clock(struct snd_soc_codec *codec,
 		unsigned int sample_rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
+>>>>>>> v3.18
 =======
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
 >>>>>>> v3.18
@@ -522,7 +574,11 @@ static int adav80x_set_dac_clock(struct snd_soc_codec *codec,
 		val = ADAV80X_DAC_CTRL2_DIV2 | ADAV80X_DAC_CTRL2_INTERPOL_128FS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, ADAV80X_DAC_CTRL2,
+=======
+	regmap_update_bits(adav80x->regmap, ADAV80X_DAC_CTRL2,
+>>>>>>> v3.18
 =======
 	regmap_update_bits(adav80x->regmap, ADAV80X_DAC_CTRL2,
 >>>>>>> v3.18
@@ -534,6 +590,7 @@ static int adav80x_set_dac_clock(struct snd_soc_codec *codec,
 
 static int adav80x_set_capture_pcm_format(struct snd_soc_codec *codec,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct snd_soc_dai *dai, snd_pcm_format_t format)
 {
 	unsigned int val;
@@ -550,6 +607,8 @@ static int adav80x_set_capture_pcm_format(struct snd_soc_codec *codec,
 		break;
 	case SNDRV_PCM_FORMAT_S24_LE:
 =======
+=======
+>>>>>>> v3.18
 		struct snd_soc_dai *dai, struct snd_pcm_hw_params *params)
 {
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
@@ -566,6 +625,9 @@ static int adav80x_set_capture_pcm_format(struct snd_soc_codec *codec,
 		val = ADAV80X_CAPTURE_WORD_LEN20;
 		break;
 	case 24:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val = ADAV80X_CAPTURE_WORD_LEN24;
 		break;
@@ -574,7 +636,11 @@ static int adav80x_set_capture_pcm_format(struct snd_soc_codec *codec,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, adav80x_port_ctrl_regs[dai->id][0],
+=======
+	regmap_update_bits(adav80x->regmap, adav80x_port_ctrl_regs[dai->id][0],
+>>>>>>> v3.18
 =======
 	regmap_update_bits(adav80x->regmap, adav80x_port_ctrl_regs[dai->id][0],
 >>>>>>> v3.18
@@ -585,7 +651,11 @@ static int adav80x_set_capture_pcm_format(struct snd_soc_codec *codec,
 
 static int adav80x_set_playback_pcm_format(struct snd_soc_codec *codec,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct snd_soc_dai *dai, snd_pcm_format_t format)
+=======
+		struct snd_soc_dai *dai, struct snd_pcm_hw_params *params)
+>>>>>>> v3.18
 =======
 		struct snd_soc_dai *dai, struct snd_pcm_hw_params *params)
 >>>>>>> v3.18
@@ -597,6 +667,7 @@ static int adav80x_set_playback_pcm_format(struct snd_soc_codec *codec,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (format) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		val = ADAV80X_PLAYBACK_MODE_RIGHT_J_16;
@@ -609,6 +680,8 @@ static int adav80x_set_playback_pcm_format(struct snd_soc_codec *codec,
 		break;
 	case SNDRV_PCM_FORMAT_S24_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		val = ADAV80X_PLAYBACK_MODE_RIGHT_J_16;
@@ -620,6 +693,9 @@ static int adav80x_set_playback_pcm_format(struct snd_soc_codec *codec,
 		val = ADAV80X_PLAYBACK_MODE_RIGHT_J_20;
 		break;
 	case 24:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		val = ADAV80X_PLAYBACK_MODE_RIGHT_J_24;
 		break;
@@ -628,7 +704,11 @@ static int adav80x_set_playback_pcm_format(struct snd_soc_codec *codec,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, adav80x_port_ctrl_regs[dai->id][1],
+=======
+	regmap_update_bits(adav80x->regmap, adav80x_port_ctrl_regs[dai->id][1],
+>>>>>>> v3.18
 =======
 	regmap_update_bits(adav80x->regmap, adav80x_port_ctrl_regs[dai->id][1],
 >>>>>>> v3.18
@@ -649,6 +729,7 @@ static int adav80x_hw_params(struct snd_pcm_substream *substream,
 
 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		adav80x_set_playback_pcm_format(codec, dai,
 			params_format(params));
 		adav80x_set_dac_clock(codec, rate);
@@ -656,10 +737,15 @@ static int adav80x_hw_params(struct snd_pcm_substream *substream,
 		adav80x_set_capture_pcm_format(codec, dai,
 			params_format(params));
 =======
+=======
+>>>>>>> v3.18
 		adav80x_set_playback_pcm_format(codec, dai, params);
 		adav80x_set_dac_clock(codec, rate);
 	} else {
 		adav80x_set_capture_pcm_format(codec, dai, params);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		adav80x_set_adc_clock(codec, rate);
 	}
@@ -675,6 +761,10 @@ static int adav80x_set_sysclk(struct snd_soc_codec *codec,
 {
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct snd_soc_dapm_context *dapm = &codec->dapm;
+>>>>>>> v3.18
 =======
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 >>>>>>> v3.18
@@ -706,17 +796,23 @@ static int adav80x_set_sysclk(struct snd_soc_codec *codec,
 			iclk_ctrl2 = ADAV80X_ICLK_CTRL2_ICLK1_SRC(clk_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_soc_write(codec, ADAV80X_ICLK_CTRL1, iclk_ctrl1);
 			snd_soc_write(codec, ADAV80X_ICLK_CTRL2, iclk_ctrl2);
 
 			snd_soc_dapm_sync(&codec->dapm);
 =======
+=======
+>>>>>>> v3.18
 			regmap_write(adav80x->regmap, ADAV80X_ICLK_CTRL1,
 				iclk_ctrl1);
 			regmap_write(adav80x->regmap, ADAV80X_ICLK_CTRL2,
 				iclk_ctrl2);
 
 			snd_soc_dapm_sync(dapm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else {
@@ -735,6 +831,7 @@ static int adav80x_set_sysclk(struct snd_soc_codec *codec,
 		mask = ADAV80X_PLL_OUTE_SYSCLKPD(clk_id);
 
 		if (freq == 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			snd_soc_update_bits(codec, ADAV80X_PLL_OUTE, mask, mask);
 			adav80x->sysclk_pd[clk_id] = true;
@@ -755,6 +852,8 @@ static int adav80x_set_sysclk(struct snd_soc_codec *codec,
 
 		snd_soc_dapm_sync(&codec->dapm);
 =======
+=======
+>>>>>>> v3.18
 			regmap_update_bits(adav80x->regmap, ADAV80X_PLL_OUTE,
 				mask, mask);
 			adav80x->sysclk_pd[clk_id] = true;
@@ -779,6 +878,9 @@ static int adav80x_set_sysclk(struct snd_soc_codec *codec,
 		snd_soc_dapm_sync_unlocked(dapm);
 
 		snd_soc_dapm_mutex_unlock(dapm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -838,9 +940,15 @@ static int adav80x_set_pll(struct snd_soc_codec *codec, int pll_id,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, ADAV80X_PLL_CTRL1, ADAV80X_PLL_CTRL1_PLLDIV,
 		pll_ctrl1);
 	snd_soc_update_bits(codec, ADAV80X_PLL_CTRL2,
+=======
+	regmap_update_bits(adav80x->regmap, ADAV80X_PLL_CTRL1,
+			ADAV80X_PLL_CTRL1_PLLDIV, pll_ctrl1);
+	regmap_update_bits(adav80x->regmap, ADAV80X_PLL_CTRL2,
+>>>>>>> v3.18
 =======
 	regmap_update_bits(adav80x->regmap, ADAV80X_PLL_CTRL1,
 			ADAV80X_PLL_CTRL1_PLLDIV, pll_ctrl1);
@@ -855,7 +963,11 @@ static int adav80x_set_pll(struct snd_soc_codec *codec, int pll_id,
 			pll_src = ADAV80X_PLL_CLK_SRC_PLL_XIN(pll_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_soc_update_bits(codec, ADAV80X_PLL_CLK_SRC,
+=======
+		regmap_update_bits(adav80x->regmap, ADAV80X_PLL_CLK_SRC,
+>>>>>>> v3.18
 =======
 		regmap_update_bits(adav80x->regmap, ADAV80X_PLL_CLK_SRC,
 >>>>>>> v3.18
@@ -873,6 +985,10 @@ static int adav80x_set_bias_level(struct snd_soc_codec *codec,
 		enum snd_soc_bias_level level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
+>>>>>>> v3.18
 =======
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
 >>>>>>> v3.18
@@ -885,17 +1001,23 @@ static int adav80x_set_bias_level(struct snd_soc_codec *codec,
 		break;
 	case SND_SOC_BIAS_STANDBY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_soc_update_bits(codec, ADAV80X_DAC_CTRL1, mask, 0x00);
 		break;
 	case SND_SOC_BIAS_OFF:
 		snd_soc_update_bits(codec, ADAV80X_DAC_CTRL1, mask, mask);
 =======
+=======
+>>>>>>> v3.18
 		regmap_update_bits(adav80x->regmap, ADAV80X_DAC_CTRL1, mask,
 			0x00);
 		break;
 	case SND_SOC_BIAS_OFF:
 		regmap_update_bits(adav80x->regmap, ADAV80X_DAC_CTRL1, mask,
 			mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -912,7 +1034,11 @@ static int adav80x_dai_startup(struct snd_pcm_substream *substream,
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!codec->active || !adav80x->rate)
+=======
+	if (!snd_soc_codec_is_active(codec) || !adav80x->rate)
+>>>>>>> v3.18
 =======
 	if (!snd_soc_codec_is_active(codec) || !adav80x->rate)
 >>>>>>> v3.18
@@ -929,7 +1055,11 @@ static void adav80x_dai_shutdown(struct snd_pcm_substream *substream,
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!codec->active)
+=======
+	if (!snd_soc_codec_is_active(codec))
+>>>>>>> v3.18
 =======
 	if (!snd_soc_codec_is_active(codec))
 >>>>>>> v3.18
@@ -996,6 +1126,7 @@ static struct snd_soc_dai_driver adav80x_dais[] = {
 static int adav80x_probe(struct snd_soc_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
 
@@ -1009,11 +1140,16 @@ static int adav80x_probe(struct snd_soc_codec *codec)
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
 
 >>>>>>> v3.18
+=======
+	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
+
+>>>>>>> v3.18
 	/* Force PLLs on for SYSCLK output */
 	snd_soc_dapm_force_enable_pin(&codec->dapm, "PLL1");
 	snd_soc_dapm_force_enable_pin(&codec->dapm, "PLL2");
 
 	/* Power down S/PDIF receiver, since it is currently not supported */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	snd_soc_write(codec, ADAV80X_PLL_OUTE, 0x20);
 	/* Disable DAC zero flag */
@@ -1026,16 +1162,22 @@ static int adav80x_suspend(struct snd_soc_codec *codec)
 {
 	return adav80x_set_bias_level(codec, SND_SOC_BIAS_OFF);
 =======
+=======
+>>>>>>> v3.18
 	regmap_write(adav80x->regmap, ADAV80X_PLL_OUTE, 0x20);
 	/* Disable DAC zero flag */
 	regmap_write(adav80x->regmap, ADAV80X_DAC_CTRL3, 0x6);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int adav80x_resume(struct snd_soc_codec *codec)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	adav80x_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
 	codec->cache_sync = 1;
@@ -1048,16 +1190,22 @@ static int adav80x_remove(struct snd_soc_codec *codec)
 {
 	return adav80x_set_bias_level(codec, SND_SOC_BIAS_OFF);
 =======
+=======
+>>>>>>> v3.18
 	struct adav80x *adav80x = snd_soc_codec_get_drvdata(codec);
 
 	regcache_sync(adav80x->regmap);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct snd_soc_codec_driver adav80x_codec_driver = {
 	.probe = adav80x_probe,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.remove = adav80x_remove,
 	.suspend = adav80x_suspend,
@@ -1068,15 +1216,23 @@ static struct snd_soc_codec_driver adav80x_codec_driver = {
 	.set_bias_level = adav80x_set_bias_level,
 	.suspend_bias_off = true,
 >>>>>>> v3.18
+=======
+	.resume = adav80x_resume,
+	.set_bias_level = adav80x_set_bias_level,
+	.suspend_bias_off = true,
+>>>>>>> v3.18
 
 	.set_pll = adav80x_set_pll,
 	.set_sysclk = adav80x_set_sysclk,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.reg_word_size = sizeof(u8),
 	.reg_cache_size = ARRAY_SIZE(adav80x_default_regs),
 	.reg_cache_default = adav80x_default_regs,
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.controls = adav80x_controls,
@@ -1088,6 +1244,7 @@ static struct snd_soc_codec_driver adav80x_codec_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adav80x_bus_probe(struct device *dev,
 			     enum snd_soc_control_type control_type)
 {
@@ -1096,6 +1253,8 @@ static int adav80x_bus_probe(struct device *dev,
 
 	adav80x = kzalloc(sizeof(*adav80x), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 int adav80x_bus_probe(struct device *dev, struct regmap *regmap)
 {
 	struct adav80x *adav80x;
@@ -1104,11 +1263,15 @@ int adav80x_bus_probe(struct device *dev, struct regmap *regmap)
 		return PTR_ERR(regmap);
 
 	adav80x = devm_kzalloc(dev, sizeof(*adav80x), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!adav80x)
 		return -ENOMEM;
 
 	dev_set_drvdata(dev, adav80x);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	adav80x->control_type = control_type;
 
@@ -1206,6 +1369,8 @@ static void __exit adav80x_exit(void)
 }
 module_exit(adav80x_exit);
 =======
+=======
+>>>>>>> v3.18
 	adav80x->regmap = regmap;
 
 	return snd_soc_register_codec(dev, &adav80x_codec_driver,
@@ -1226,6 +1391,9 @@ const struct regmap_config adav80x_regmap_config = {
 	.num_reg_defaults = ARRAY_SIZE(adav80x_reg_defaults),
 };
 EXPORT_SYMBOL_GPL(adav80x_regmap_config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_DESCRIPTION("ASoC ADAV80x driver");

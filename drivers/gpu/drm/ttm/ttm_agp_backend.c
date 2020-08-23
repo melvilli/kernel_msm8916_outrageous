@@ -127,6 +127,10 @@ struct ttm_tt *ttm_agp_tt_create(struct ttm_bo_device *bdev,
 
 	if (ttm_tt_init(&agp_be->ttm, bdev, size, page_flags, dummy_read_page)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		kfree(agp_be);
+>>>>>>> v3.18
 =======
 		kfree(agp_be);
 >>>>>>> v3.18

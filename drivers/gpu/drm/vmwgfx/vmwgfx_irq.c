@@ -31,7 +31,11 @@
 #define VMW_FENCE_WRAP (1 << 24)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t vmw_irq_handler(DRM_IRQ_ARGS)
+=======
+irqreturn_t vmw_irq_handler(int irq, void *arg)
+>>>>>>> v3.18
 =======
 irqreturn_t vmw_irq_handler(int irq, void *arg)
 >>>>>>> v3.18

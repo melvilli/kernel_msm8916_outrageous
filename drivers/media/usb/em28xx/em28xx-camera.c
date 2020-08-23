@@ -23,6 +23,10 @@
 #include <media/soc_camera.h>
 #include <media/mt9v011.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/v4l2-clk.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-clk.h>
 >>>>>>> v3.18
@@ -52,6 +56,10 @@ static struct soc_camera_link camlink = {
 	.flags = 0,
 	.module_name = "em28xx",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.unbalanced_power = true,
+>>>>>>> v3.18
 =======
 	.unbalanced_power = true,
 >>>>>>> v3.18
@@ -127,7 +135,11 @@ static int em28xx_probe_sensor_micron(struct em28xx *dev)
 		ret = i2c_master_send(&client, &reg, 1);
 		if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ret != -ENODEV)
+=======
+			if (ret != -ENXIO)
+>>>>>>> v3.18
 =======
 			if (ret != -ENXIO)
 >>>>>>> v3.18
@@ -229,7 +241,11 @@ static int em28xx_probe_sensor_omnivision(struct em28xx *dev)
 		ret = i2c_smbus_read_byte_data(&client, reg);
 		if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ret != -ENODEV)
+=======
+			if (ret != -ENXIO)
+>>>>>>> v3.18
 =======
 			if (ret != -ENXIO)
 >>>>>>> v3.18
@@ -342,7 +358,10 @@ int em28xx_detect_sensor(struct em28xx *dev)
 int em28xx_init_camera(struct em28xx *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	char clk_name[V4L2_SUBDEV_NAME_SIZE];
 	struct i2c_client *client = &dev->i2c_client[dev->def_i2c_bus];
 	struct i2c_adapter *adap = &dev->i2c_adap[dev->def_i2c_bus];
@@ -355,6 +374,9 @@ int em28xx_init_camera(struct em28xx *dev)
 	if (IS_ERR(v4l2->clk))
 		return PTR_ERR(v4l2->clk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (dev->em28xx_sensor) {
 	case EM28XX_MT9V011:
@@ -363,6 +385,7 @@ int em28xx_init_camera(struct em28xx *dev)
 		struct i2c_board_info mt9v011_info = {
 			.type = "mt9v011",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.addr = dev->i2c_client[dev->def_i2c_bus].addr,
 			.platform_data = &pdata,
 		};
@@ -370,12 +393,17 @@ int em28xx_init_camera(struct em28xx *dev)
 		dev->sensor_xres = 640;
 		dev->sensor_yres = 480;
 =======
+=======
+>>>>>>> v3.18
 			.addr = client->addr,
 			.platform_data = &pdata,
 		};
 
 		v4l2->sensor_xres = 640;
 		v4l2->sensor_yres = 480;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -390,6 +418,7 @@ int em28xx_init_camera(struct em28xx *dev)
 		dev->board.xclk = EM28XX_XCLK_FREQUENCY_4_3MHZ;
 		em28xx_write_reg(dev, EM28XX_R0F_XCLK, dev->board.xclk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->sensor_xtal = 4300000;
 		pdata.xtal = dev->sensor_xtal;
 		if (NULL ==
@@ -401,6 +430,8 @@ int em28xx_init_camera(struct em28xx *dev)
 		dev->vinmode = 0x0d;
 		dev->vinctl = 0x00;
 =======
+=======
+>>>>>>> v3.18
 		v4l2->sensor_xtal = 4300000;
 		pdata.xtal = v4l2->sensor_xtal;
 		if (NULL ==
@@ -412,14 +443,22 @@ int em28xx_init_camera(struct em28xx *dev)
 		/* probably means GRGB 16 bit bayer */
 		v4l2->vinmode = 0x0d;
 		v4l2->vinctl = 0x00;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		break;
 	}
 	case EM28XX_MT9M001:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->sensor_xres = 1280;
 		dev->sensor_yres = 1024;
+=======
+		v4l2->sensor_xres = 1280;
+		v4l2->sensor_yres = 1024;
+>>>>>>> v3.18
 =======
 		v4l2->sensor_xres = 1280;
 		v4l2->sensor_yres = 1024;
@@ -429,6 +468,7 @@ int em28xx_init_camera(struct em28xx *dev)
 
 		/* probably means BGGR 16 bit bayer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->vinmode = 0x0c;
 		dev->vinctl = 0x00;
 
@@ -437,6 +477,8 @@ int em28xx_init_camera(struct em28xx *dev)
 		dev->sensor_xres = 640;
 		dev->sensor_yres = 512;
 =======
+=======
+>>>>>>> v3.18
 		v4l2->vinmode = 0x0c;
 		v4l2->vinctl = 0x00;
 
@@ -444,6 +486,9 @@ int em28xx_init_camera(struct em28xx *dev)
 	case EM28XX_MT9M111:
 		v4l2->sensor_xres = 640;
 		v4l2->sensor_yres = 512;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		dev->board.xclk = EM28XX_XCLK_FREQUENCY_48MHZ;
@@ -451,8 +496,13 @@ int em28xx_init_camera(struct em28xx *dev)
 		em28xx_initialize_mt9m111(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->vinmode = 0x0a;
 		dev->vinctl = 0x00;
+=======
+		v4l2->vinmode = 0x0a;
+		v4l2->vinctl = 0x00;
+>>>>>>> v3.18
 =======
 		v4l2->vinmode = 0x0a;
 		v4l2->vinctl = 0x00;
@@ -466,7 +516,11 @@ int em28xx_init_camera(struct em28xx *dev)
 			.type = "ov2640",
 			.flags = I2C_CLIENT_SCCB,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.addr = dev->i2c_client[dev->def_i2c_bus].addr,
+=======
+			.addr = client->addr,
+>>>>>>> v3.18
 =======
 			.addr = client->addr,
 >>>>>>> v3.18
@@ -483,6 +537,7 @@ int em28xx_init_camera(struct em28xx *dev)
 		 * - disable 16 bit (12 bit) output formats on high resolutions
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->sensor_xres = 640;
 		dev->sensor_yres = 480;
 
@@ -491,6 +546,8 @@ int em28xx_init_camera(struct em28xx *dev)
 					       &dev->i2c_adap[dev->def_i2c_bus],
 					       &ov2640_info, NULL);
 =======
+=======
+>>>>>>> v3.18
 		v4l2->sensor_xres = 640;
 		v4l2->sensor_yres = 480;
 
@@ -501,6 +558,9 @@ int em28xx_init_camera(struct em28xx *dev)
 			ret = -ENODEV;
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		fmt.code = V4L2_MBUS_FMT_YUYV8_2X8;
@@ -512,8 +572,13 @@ int em28xx_init_camera(struct em28xx *dev)
 		dev->board.xclk = EM28XX_XCLK_FREQUENCY_24MHZ;
 		em28xx_write_reg(dev, EM28XX_R0F_XCLK, dev->board.xclk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->vinmode = 0x08;
 		dev->vinctl = 0x00;
+=======
+		v4l2->vinmode = 0x08;
+		v4l2->vinctl = 0x00;
+>>>>>>> v3.18
 =======
 		v4l2->vinmode = 0x08;
 		v4l2->vinctl = 0x00;
@@ -524,12 +589,15 @@ int em28xx_init_camera(struct em28xx *dev)
 	case EM28XX_NOSENSOR:
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
 	}
 
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 		ret = -EINVAL;
 	}
 
@@ -541,4 +609,7 @@ int em28xx_init_camera(struct em28xx *dev)
 	return ret;
 }
 EXPORT_SYMBOL_GPL(em28xx_init_camera);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

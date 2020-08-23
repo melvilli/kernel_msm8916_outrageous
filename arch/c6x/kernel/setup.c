@@ -69,6 +69,7 @@ static unsigned long dma_start __initdata;
 static unsigned long dma_size __initdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 char c6x_command_line[COMMAND_LINE_SIZE];
 
 #if defined(CONFIG_CMDLINE_BOOL)
@@ -76,6 +77,8 @@ static const char default_command_line[COMMAND_LINE_SIZE] __section(.cmdline) =
 	CONFIG_CMDLINE;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct cpuinfo_c6x {
@@ -276,8 +279,13 @@ int __init c6x_add_memory(phys_addr_t start, unsigned long size)
 notrace void __init machine_init(unsigned long dt_ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct boot_param_header *dtb = __va(dt_ptr);
 	struct boot_param_header *fdt = (struct boot_param_header *)_fdt_start;
+=======
+	const void *dtb = __va(dt_ptr);
+	const void *fdt = _fdt_start;
+>>>>>>> v3.18
 =======
 	const void *dtb = __va(dt_ptr);
 	const void *fdt = _fdt_start;
@@ -303,10 +311,15 @@ notrace void __init machine_init(unsigned long dt_ptr)
 
 	/* Do some early initialization based on the flat device tree */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	early_init_devtree(fdt);
 
 	/* parse_early_param needs a boot_command_line */
 	strlcpy(boot_command_line, c6x_command_line, COMMAND_LINE_SIZE);
+=======
+	early_init_dt_scan(fdt);
+
+>>>>>>> v3.18
 =======
 	early_init_dt_scan(fdt);
 
@@ -323,7 +336,11 @@ void __init setup_arch(char **cmdline_p)
 
 	/* Initialize command line */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*cmdline_p = c6x_command_line;
+=======
+	*cmdline_p = boot_command_line;
+>>>>>>> v3.18
 =======
 	*cmdline_p = boot_command_line;
 >>>>>>> v3.18

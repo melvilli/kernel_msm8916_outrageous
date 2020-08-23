@@ -27,7 +27,11 @@
  */
 static DEFINE_MUTEX(xip_sparse_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static seqcount_t xip_sparse_seq = SEQCNT_ZERO;
+=======
+static seqcount_t xip_sparse_seq = SEQCNT_ZERO(xip_sparse_seq);
+>>>>>>> v3.18
 =======
 static seqcount_t xip_sparse_seq = SEQCNT_ZERO(xip_sparse_seq);
 >>>>>>> v3.18

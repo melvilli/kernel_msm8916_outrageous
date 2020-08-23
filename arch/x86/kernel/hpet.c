@@ -75,9 +75,12 @@ static inline void hpet_set_mapping(void)
 {
 	hpet_virt_address = ioremap_nocache(hpet_address, HPET_MMAP_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_64
 	__set_fixmap(VSYSCALL_HPET, hpet_address, PAGE_KERNEL_VVAR_NOCACHE);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -92,7 +95,11 @@ static inline void hpet_clear_mapping(void)
  * HPET command line enable / disable
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int boot_hpet_disable;
+=======
+int boot_hpet_disable;
+>>>>>>> v3.18
 =======
 int boot_hpet_disable;
 >>>>>>> v3.18
@@ -487,7 +494,11 @@ static int hpet_setup_msi_irq(unsigned int irq)
 {
 	if (x86_msi.setup_hpet_msi(irq, hpet_blockid)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		destroy_irq(irq);
+=======
+		irq_free_hwirq(irq);
+>>>>>>> v3.18
 =======
 		irq_free_hwirq(irq);
 >>>>>>> v3.18
@@ -499,9 +510,14 @@ static int hpet_setup_msi_irq(unsigned int irq)
 static int hpet_assign_irq(struct hpet_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int irq;
 
 	irq = create_irq_nr(0, -1);
+=======
+	unsigned int irq = irq_alloc_hwirq(-1);
+
+>>>>>>> v3.18
 =======
 	unsigned int irq = irq_alloc_hwirq(-1);
 
@@ -538,7 +554,11 @@ static int hpet_setup_irq(struct hpet_dev *dev)
 
 	if (request_irq(dev->irq, hpet_interrupt_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_TIMER | IRQF_DISABLED | IRQF_NOBALANCING,
+=======
+			IRQF_TIMER | IRQF_NOBALANCING,
+>>>>>>> v3.18
 =======
 			IRQF_TIMER | IRQF_NOBALANCING,
 >>>>>>> v3.18
@@ -720,7 +740,11 @@ static int hpet_cpuhp_notify(struct notifier_block *n,
 		schedule_delayed_work_on(cpu, &work.work, 0);
 		wait_for_completion(&work.complete);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		destroy_timer_on_stack(&work.work.timer);
+=======
+		destroy_delayed_work_on_stack(&work.work);
+>>>>>>> v3.18
 =======
 		destroy_delayed_work_on_stack(&work.work);
 >>>>>>> v3.18
@@ -777,9 +801,13 @@ static struct clocksource clocksource_hpet = {
 	.flags		= CLOCK_SOURCE_IS_CONTINUOUS,
 	.resume		= hpet_resume_counter,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_64
 	.archdata	= { .vclock_mode = VCLOCK_HPET },
 #endif
+=======
+	.archdata	= { .vclock_mode = VCLOCK_HPET },
+>>>>>>> v3.18
 =======
 	.archdata	= { .vclock_mode = VCLOCK_HPET },
 >>>>>>> v3.18
@@ -972,6 +1000,10 @@ static __init int hpet_late_init(void)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 >>>>>>> v3.18
@@ -981,7 +1013,12 @@ static __init int hpet_late_init(void)
 
 	/* This notifier should be called after workqueue is ready */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hotcpu_notifier(hpet_cpuhp_notify, -20);
+=======
+	__hotcpu_notifier(hpet_cpuhp_notify, -20);
+	cpu_notifier_register_done();
+>>>>>>> v3.18
 =======
 	__hotcpu_notifier(hpet_cpuhp_notify, -20);
 	cpu_notifier_register_done();

@@ -80,6 +80,7 @@ const struct imx_spi_imx_data imx35_cspi_data[] __initconst = {
 #endif /* ifdef CONFIG_SOC_IMX35 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SOC_IMX51
 /* i.mx51 has the i.mx35 type cspi */
 const struct imx_spi_imx_data imx51_cspi_data __initconst =
@@ -107,6 +108,8 @@ const struct imx_spi_imx_data imx53_ecspi_data[] __initconst = {
 };
 #endif /* ifdef CONFIG_SOC_IMX53 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct platform_device *__init imx_add_spi_imx(

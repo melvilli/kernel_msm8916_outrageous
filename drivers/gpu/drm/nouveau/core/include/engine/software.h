@@ -4,13 +4,17 @@
 #include <core/engine.h>
 #include <core/engctx.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/event.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 struct nouveau_software_chan {
 	struct nouveau_engctx base;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct {
 		struct nouveau_eventh event;
@@ -20,6 +24,8 @@ struct nouveau_software_chan {
 		u32 value;
 	} vblank;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int (*flip)(void *);
@@ -57,15 +63,21 @@ struct nouveau_software {
 #define _nouveau_software_fini _nouveau_engine_fini
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct nouveau_oclass nv04_software_oclass;
 extern struct nouveau_oclass nv10_software_oclass;
 extern struct nouveau_oclass nv50_software_oclass;
 extern struct nouveau_oclass nvc0_software_oclass;
 =======
+=======
+>>>>>>> v3.18
 extern struct nouveau_oclass *nv04_software_oclass;
 extern struct nouveau_oclass *nv10_software_oclass;
 extern struct nouveau_oclass *nv50_software_oclass;
 extern struct nouveau_oclass *nvc0_software_oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void nv04_software_intr(struct nouveau_subdev *);

@@ -22,11 +22,17 @@ Optional properties:
   entry then driver will just configure this rails as external control
   and will not provide any enable/disable APIs.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - ti,overcurrent-wait: This is applicable to FET registers, which have a
   poorly defined "overcurrent wait" field.  If this property is present it
   should be between 0 - 3.  If this property isn't present we won't touch the
   "overcurrent wait" field and we'll leave it to the BIOS/EC to deal with.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Each regulator is defined using the standard binding for regulators.
@@ -49,8 +55,13 @@ Example:
 		infet6-supply = <&some_reg>;
 		infet7-supply = <&some_reg>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vsys_l1-supply = <&some_reg>;
 		vsys_l2-supply = <&some_reg>;
+=======
+		vsys-l1-supply = <&some_reg>;
+		vsys-l2-supply = <&some_reg>;
+>>>>>>> v3.18
 =======
 		vsys-l1-supply = <&some_reg>;
 		vsys-l2-supply = <&some_reg>;

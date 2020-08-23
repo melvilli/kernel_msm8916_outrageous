@@ -40,11 +40,17 @@ extern void __uc32_iounmap(volatile void __iomem *addr);
 #define iounmap(cookie)			__uc32_iounmap(cookie)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define readb_relaxed readb
 #define readw_relaxed readw
 #define readl_relaxed readl
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define HAVE_ARCH_PIO_SIZE
 #define PIO_OFFSET		(unsigned int)(PCI_IOBASE)
@@ -52,7 +58,10 @@ extern void __uc32_iounmap(volatile void __iomem *addr);
 #define PIO_RESERVED		(PIO_OFFSET + PIO_MASK + 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_STRICT_DEVMEM
 
 #include <linux/ioport.h>
@@ -76,6 +85,9 @@ static inline int devmem_is_allowed(unsigned long pfn)
 
 #endif /* CONFIG_STRICT_DEVMEM */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* __KERNEL__ */
 #endif	/* __UNICORE_IO_H__ */

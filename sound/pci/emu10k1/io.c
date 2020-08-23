@@ -72,11 +72,16 @@ void snd_emu10k1_ptr_write(struct snd_emu10k1 *emu, unsigned int reg, unsigned i
 	unsigned int mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!emu) {
 		snd_printk(KERN_ERR "ptr_write: emu is null!\n");
 		dump_stack();
 		return;
 	}
+=======
+	if (snd_BUG_ON(!emu))
+		return;
+>>>>>>> v3.18
 =======
 	if (snd_BUG_ON(!emu))
 		return;
@@ -205,7 +210,11 @@ int snd_emu10k1_i2c_write(struct snd_emu10k1 *emu,
 
 	if ((reg > 0x7f) || (value > 0x1ff)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "i2c_write: invalid values.\n");
+=======
+		dev_err(emu->card->dev, "i2c_write: invalid values.\n");
+>>>>>>> v3.18
 =======
 		dev_err(emu->card->dev, "i2c_write: invalid values.\n");
 >>>>>>> v3.18
@@ -237,7 +246,11 @@ int snd_emu10k1_i2c_write(struct snd_emu10k1 *emu,
 
 			if (timeout > 1000) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 		snd_printk(KERN_WARNING
+=======
+				dev_warn(emu->card->dev,
+>>>>>>> v3.18
 =======
 				dev_warn(emu->card->dev,
 >>>>>>> v3.18
@@ -253,8 +266,13 @@ int snd_emu10k1_i2c_write(struct snd_emu10k1 *emu,
 
 	if (retry == 10) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Writing to ADC failed!\n");
 		snd_printk(KERN_ERR "status=0x%x, reg=%d, value=%d\n",
+=======
+		dev_err(emu->card->dev, "Writing to ADC failed!\n");
+		dev_err(emu->card->dev, "status=0x%x, reg=%d, value=%d\n",
+>>>>>>> v3.18
 =======
 		dev_err(emu->card->dev, "Writing to ADC failed!\n");
 		dev_err(emu->card->dev, "status=0x%x, reg=%d, value=%d\n",

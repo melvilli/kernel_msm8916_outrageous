@@ -11,6 +11,10 @@
 #include <linux/writeback.h>
 #include <linux/workqueue.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/llist.h>
+>>>>>>> v3.18
 =======
 #include <linux/llist.h>
 >>>>>>> v3.18
@@ -239,7 +243,11 @@ ssize_t ocfs2_quota_write(struct super_block *sb, int type,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gqinode->i_size < off + len) {
+=======
+	if (i_size_read(gqinode) < off + len) {
+>>>>>>> v3.18
 =======
 	if (i_size_read(gqinode) < off + len) {
 >>>>>>> v3.18
@@ -344,8 +352,13 @@ int ocfs2_global_read_info(struct super_block *sb, int type)
 {
 	struct inode *gqinode = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ino[MAXQUOTAS] = { USER_QUOTA_SYSTEM_INODE,
 					GROUP_QUOTA_SYSTEM_INODE };
+=======
+	unsigned int ino[OCFS2_MAXQUOTAS] = { USER_QUOTA_SYSTEM_INODE,
+					      GROUP_QUOTA_SYSTEM_INODE };
+>>>>>>> v3.18
 =======
 	unsigned int ino[OCFS2_MAXQUOTAS] = { USER_QUOTA_SYSTEM_INODE,
 					      GROUP_QUOTA_SYSTEM_INODE };
@@ -693,7 +706,10 @@ static int ocfs2_calc_qdel_credits(struct super_block *sb, int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void ocfs2_drop_dquot_refs(struct work_struct *work)
 {
 	struct ocfs2_super *osb = container_of(work, struct ocfs2_super,
@@ -715,6 +731,9 @@ void ocfs2_drop_dquot_refs(struct work_struct *work)
  * other cluster lock to proceed but with blocked downconvert thread we cannot
  * release any lock).
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ocfs2_release_dquot(struct dquot *dquot)
 {
@@ -732,7 +751,10 @@ static int ocfs2_release_dquot(struct dquot *dquot)
 	if (atomic_read(&dquot->dq_count) > 1)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Running from downconvert thread? Postpone quota processing to wq */
 	if (current == osb->dc_task) {
 		/*
@@ -746,6 +768,9 @@ static int ocfs2_release_dquot(struct dquot *dquot)
 			queue_work(ocfs2_wq, &osb->dquot_drop_work);
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	status = ocfs2_lock_global_qf(oinfo, 1);
 	if (status < 0)
@@ -839,8 +864,13 @@ static int ocfs2_acquire_dquot(struct dquot *dquot)
 		WARN_ON(journal_current_handle());
 		status = ocfs2_extend_no_holes(gqinode, NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gqinode->i_size + (need_alloc << sb->s_blocksize_bits),
 			gqinode->i_size);
+=======
+			i_size_read(gqinode) + (need_alloc << sb->s_blocksize_bits),
+			i_size_read(gqinode));
+>>>>>>> v3.18
 =======
 			i_size_read(gqinode) + (need_alloc << sb->s_blocksize_bits),
 			i_size_read(gqinode));

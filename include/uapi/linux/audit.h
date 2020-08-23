@@ -69,6 +69,11 @@
 #define AUDIT_TTY_GET		1016	/* Get TTY auditing status */
 #define AUDIT_TTY_SET		1017	/* Set TTY auditing status */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AUDIT_SET_FEATURE	1018	/* Turn an audit feature on or off */
+#define AUDIT_GET_FEATURE	1019	/* Get which features are enabled */
+>>>>>>> v3.18
 =======
 #define AUDIT_SET_FEATURE	1018	/* Turn an audit feature on or off */
 #define AUDIT_GET_FEATURE	1019	/* Get which features are enabled */
@@ -112,6 +117,11 @@
 #define AUDIT_NETFILTER_CFG	1325	/* Netfilter chain modifications */
 #define AUDIT_SECCOMP		1326	/* Secure Computing event */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AUDIT_PROCTITLE		1327	/* Proctitle emit event */
+#define AUDIT_FEATURE_CHANGE	1328	/* audit log listing feature changes */
+>>>>>>> v3.18
 =======
 #define AUDIT_PROCTITLE		1327	/* Proctitle emit event */
 #define AUDIT_FEATURE_CHANGE	1328	/* audit log listing feature changes */
@@ -327,13 +337,19 @@ enum {
 #define AUDIT_STATUS_RATE_LIMIT		0x0008
 #define AUDIT_STATUS_BACKLOG_LIMIT	0x0010
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AUDIT_STATUS_BACKLOG_WAIT_TIME	0x0020
 
 #define AUDIT_VERSION_BACKLOG_LIMIT	1
 #define AUDIT_VERSION_BACKLOG_WAIT_TIME	2
 #define AUDIT_VERSION_LATEST AUDIT_VERSION_BACKLOG_WAIT_TIME
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				/* Failure-to-log actions */
 #define AUDIT_FAIL_SILENT	0
@@ -341,7 +357,10 @@ enum {
 #define AUDIT_FAIL_PANIC	2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * These bits disambiguate different calling conventions that share an
  * ELF machine type, bitness, and endianness
@@ -349,6 +368,9 @@ enum {
 #define __AUDIT_ARCH_CONVENTION_MASK 0x30000000
 #define __AUDIT_ARCH_CONVENTION_MIPS64_N32 0x20000000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* distinguish syscall tables */
 #define __AUDIT_ARCH_64BIT 0x80000000
@@ -361,7 +383,10 @@ enum {
 #define AUDIT_ARCH_CRIS		(EM_CRIS|__AUDIT_ARCH_LE)
 #define AUDIT_ARCH_FRV		(EM_FRV)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AUDIT_ARCH_H8300	(EM_H8_300)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define AUDIT_ARCH_I386		(EM_386|__AUDIT_ARCH_LE)
@@ -369,11 +394,14 @@ enum {
 #define AUDIT_ARCH_M32R		(EM_M32R)
 #define AUDIT_ARCH_M68K		(EM_68K)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AUDIT_ARCH_MIPS		(EM_MIPS)
 #define AUDIT_ARCH_MIPSEL	(EM_MIPS|__AUDIT_ARCH_LE)
 #define AUDIT_ARCH_MIPS64	(EM_MIPS|__AUDIT_ARCH_64BIT)
 #define AUDIT_ARCH_MIPSEL64	(EM_MIPS|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)
 =======
+=======
+>>>>>>> v3.18
 #define AUDIT_ARCH_MICROBLAZE	(EM_MICROBLAZE)
 #define AUDIT_ARCH_MIPS		(EM_MIPS)
 #define AUDIT_ARCH_MIPSEL	(EM_MIPS|__AUDIT_ARCH_LE)
@@ -383,6 +411,9 @@ enum {
 #define AUDIT_ARCH_MIPSEL64	(EM_MIPS|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)
 #define AUDIT_ARCH_MIPSEL64N32	(EM_MIPS|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE|\
 				 __AUDIT_ARCH_CONVENTION_MIPS64_N32)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AUDIT_ARCH_OPENRISC	(EM_OPENRISC)
 #define AUDIT_ARCH_PARISC	(EM_PARISC)
@@ -405,7 +436,10 @@ enum {
 #define AUDIT_PERM_ATTR		8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* MAX_AUDIT_MESSAGE_LENGTH is set in audit:lib/libaudit.h as:
  * 8970 // PATH_MAX*2+CONTEXT_SIZE*2+11+256+1
  * max header+body+tailer: 44 + 29 + 32 + 262 + 7 + pad
@@ -420,6 +454,9 @@ enum audit_nlgrps {
 };
 #define AUDIT_NLGRP_MAX                (__AUDIT_NLGRP_MAX - 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct audit_status {
 	__u32		mask;		/* Bit mask for valid entries */
@@ -431,9 +468,12 @@ struct audit_status {
 	__u32		lost;		/* messages lost */
 	__u32		backlog;	/* messages waiting in queue */
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	__u32		version;	/* audit api version number */
 	__u32		backlog_wait_time;/* message queue wait timeout */
 };
@@ -453,6 +493,9 @@ struct audit_features {
 #define audit_feature_valid(x)		((x) >= 0 && (x) <= AUDIT_LAST_FEATURE)
 #define AUDIT_FEATURE_TO_MASK(x)	(1 << ((x) & 31)) /* mask for __u32 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct audit_tty_status {
 	__u32		enabled;	/* 1 = enabled, 0 = disabled */
@@ -460,6 +503,11 @@ struct audit_tty_status {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define AUDIT_UID_UNSET (unsigned int)-1
+
+>>>>>>> v3.18
 =======
 #define AUDIT_UID_UNSET (unsigned int)-1
 
@@ -481,6 +529,7 @@ struct audit_rule_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* audit_rule is supported to maintain backward compatibility with
  * userspace.  It supports integer fields only and corresponds to
  * AUDIT_ADD, AUDIT_DEL and AUDIT_LIST requests.
@@ -494,6 +543,8 @@ struct audit_rule {		/* for AUDIT_LIST, AUDIT_ADD, and AUDIT_DEL */
 	__u32		values[AUDIT_MAX_FIELDS];
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _UAPI_LINUX_AUDIT_H_ */

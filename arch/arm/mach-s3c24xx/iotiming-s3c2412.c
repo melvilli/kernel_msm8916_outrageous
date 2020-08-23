@@ -30,9 +30,14 @@
 #include <plat/cpu.h>
 #include <plat/cpu-freq-core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/clock.h>
 
 #include "s3c2412.h"
+=======
+
+#include <mach/s3c2412.h>
+>>>>>>> v3.18
 =======
 
 #include <mach/s3c2412.h>

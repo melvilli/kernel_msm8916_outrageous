@@ -19,7 +19,11 @@ int adis16400_update_scan_mode(struct iio_dev *indio_dev,
 	struct adis16400_state *st = iio_priv(indio_dev);
 	struct adis *adis = &st->adis;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t *tx, *rx;
+=======
+	uint16_t *tx;
+>>>>>>> v3.18
 =======
 	uint16_t *tx;
 >>>>>>> v3.18
@@ -40,7 +44,10 @@ int adis16400_update_scan_mode(struct iio_dev *indio_dev,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rx = adis->buffer;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tx = adis->buffer + indio_dev->scan_bytes;
@@ -90,6 +97,7 @@ irqreturn_t adis16400_trigger_handler(int irq, void *p)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Guaranteed to be aligned with 8 byte boundary */
 	if (indio_dev->scan_timestamp) {
 		void *b = adis->buffer + indio_dev->scan_bytes - sizeof(s64);
@@ -97,6 +105,10 @@ irqreturn_t adis16400_trigger_handler(int irq, void *p)
 	}
 
 	iio_push_to_buffers(indio_dev, adis->buffer);
+=======
+	iio_push_to_buffers_with_timestamp(indio_dev, adis->buffer,
+		pf->timestamp);
+>>>>>>> v3.18
 =======
 	iio_push_to_buffers_with_timestamp(indio_dev, adis->buffer,
 		pf->timestamp);

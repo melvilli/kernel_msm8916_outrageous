@@ -26,7 +26,11 @@ MODULE_LICENSE("GPL");
 
 /* PCI core routines */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i82092aa_pci_ids) = {
+=======
+static const struct pci_device_id i82092aa_pci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id i82092aa_pci_ids[] = {
 >>>>>>> v3.18
@@ -613,7 +617,11 @@ static int i82092aa_set_mem_map(struct pcmcia_socket *socket, struct pccard_mem_
 	enter("i82092aa_set_mem_map");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcibios_resource_to_bus(sock_info->dev, &region, mem->res);
+=======
+	pcibios_resource_to_bus(sock_info->dev->bus, &region, mem->res);
+>>>>>>> v3.18
 =======
 	pcibios_resource_to_bus(sock_info->dev->bus, &region, mem->res);
 >>>>>>> v3.18

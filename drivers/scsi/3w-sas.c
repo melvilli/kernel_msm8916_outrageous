@@ -304,7 +304,10 @@ static int twl_post_command_packet(TW_Device_Extension *tw_dev, int request_id)
 } /* End twl_post_command_packet() */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This function will perform a pci-dma mapping for a scatter gather list */
 static int twl_map_scsi_sg_data(TW_Device_Extension *tw_dev, int request_id)
 {
@@ -325,6 +328,9 @@ static int twl_map_scsi_sg_data(TW_Device_Extension *tw_dev, int request_id)
 	return use_sg;
 } /* End twl_map_scsi_sg_data() */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* This function hands scsi cdb's to the firmware */
 static int twl_scsiop_execute_scsi(TW_Device_Extension *tw_dev, int request_id, char *cdb, int use_sg, TW_SG_Entry_ISO *sglistarg)
@@ -374,8 +380,13 @@ static int twl_scsiop_execute_scsi(TW_Device_Extension *tw_dev, int request_id, 
 		/* Map sglist from scsi layer to cmd packet */
 		if (scsi_sg_count(srb)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sg_count = scsi_dma_map(srb);
 			if (sg_count <= 0)
+=======
+			sg_count = twl_map_scsi_sg_data(tw_dev, request_id);
+			if (sg_count == 0)
+>>>>>>> v3.18
 =======
 			sg_count = twl_map_scsi_sg_data(tw_dev, request_id);
 			if (sg_count == 0)
@@ -692,7 +703,12 @@ static int twl_allocate_memory(TW_Device_Extension *tw_dev, int size, int which)
 	int retval = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_addr = pci_alloc_consistent(tw_dev->tw_pci_dev, size*TW_Q_LENGTH, &dma_handle);
+=======
+	cpu_addr = pci_zalloc_consistent(tw_dev->tw_pci_dev, size * TW_Q_LENGTH,
+					 &dma_handle);
+>>>>>>> v3.18
 =======
 	cpu_addr = pci_zalloc_consistent(tw_dev->tw_pci_dev, size * TW_Q_LENGTH,
 					 &dma_handle);
@@ -703,8 +719,11 @@ static int twl_allocate_memory(TW_Device_Extension *tw_dev, int size, int which)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(cpu_addr, 0, size*TW_Q_LENGTH);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < TW_Q_LENGTH; i++) {
@@ -1133,7 +1152,10 @@ out:
 } /* End twl_initialize_device_extension() */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This function will perform a pci-dma unmap */
 static void twl_unmap_scsi_data(TW_Device_Extension *tw_dev, int request_id)
 {
@@ -1143,6 +1165,9 @@ static void twl_unmap_scsi_data(TW_Device_Extension *tw_dev, int request_id)
 		scsi_dma_unmap(cmd);
 } /* End twl_unmap_scsi_data() */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* This function will handle attention interrupts */
 static int twl_handle_attention_interrupt(TW_Device_Extension *tw_dev)
@@ -1285,17 +1310,23 @@ static irqreturn_t twl_interrupt(int irq, void *dev_instance)
 
 			/* Now complete the io */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			scsi_dma_unmap(cmd);
 			cmd->scsi_done(cmd);
 			tw_dev->state[request_id] = TW_S_COMPLETED;
 			twl_free_request_id(tw_dev, request_id);
 			tw_dev->posted_request_count--;
 =======
+=======
+>>>>>>> v3.18
 			tw_dev->state[request_id] = TW_S_COMPLETED;
 			twl_free_request_id(tw_dev, request_id);
 			tw_dev->posted_request_count--;
 			tw_dev->srb[request_id]->scsi_done(tw_dev->srb[request_id]);
 			twl_unmap_scsi_data(tw_dev, request_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1442,6 +1473,7 @@ static int twl_reset_device_extension(TW_Device_Extension *tw_dev, int ioctl_res
 		    (tw_dev->state[i] != TW_S_INITIAL) &&
 		    (tw_dev->state[i] != TW_S_COMPLETED)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct scsi_cmnd *cmd = tw_dev->srb[i];
 
 			if (cmd) {
@@ -1449,10 +1481,15 @@ static int twl_reset_device_extension(TW_Device_Extension *tw_dev, int ioctl_res
 				scsi_dma_unmap(cmd);
 				cmd->scsi_done(cmd);
 =======
+=======
+>>>>>>> v3.18
 			if (tw_dev->srb[i]) {
 				tw_dev->srb[i]->result = (DID_RESET << 16);
 				tw_dev->srb[i]->scsi_done(tw_dev->srb[i]);
 				twl_unmap_scsi_data(tw_dev, i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -1558,6 +1595,12 @@ static int twl_scsi_queue_lck(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_
 	tw_dev->srb[request_id] = SCpnt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Initialize phase to zero */
+	SCpnt->SCp.phase = TW_PHASE_INITIAL;
+
+>>>>>>> v3.18
 =======
 	/* Initialize phase to zero */
 	SCpnt->SCp.phase = TW_PHASE_INITIAL;

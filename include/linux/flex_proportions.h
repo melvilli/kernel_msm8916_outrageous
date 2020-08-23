@@ -11,6 +11,10 @@
 #include <linux/spinlock.h>
 #include <linux/seqlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gfp.h>
+>>>>>>> v3.18
 =======
 #include <linux/gfp.h>
 >>>>>>> v3.18
@@ -37,7 +41,11 @@ struct fprop_global {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fprop_global_init(struct fprop_global *p);
+=======
+int fprop_global_init(struct fprop_global *p, gfp_t gfp);
+>>>>>>> v3.18
 =======
 int fprop_global_init(struct fprop_global *p, gfp_t gfp);
 >>>>>>> v3.18
@@ -88,7 +96,11 @@ struct fprop_local_percpu {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fprop_local_init_percpu(struct fprop_local_percpu *pl);
+=======
+int fprop_local_init_percpu(struct fprop_local_percpu *pl, gfp_t gfp);
+>>>>>>> v3.18
 =======
 int fprop_local_init_percpu(struct fprop_local_percpu *pl, gfp_t gfp);
 >>>>>>> v3.18

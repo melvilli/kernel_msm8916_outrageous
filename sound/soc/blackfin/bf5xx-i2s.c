@@ -43,6 +43,10 @@
 
 #include "bf5xx-sport.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "bf5xx-i2s-pcm.h"
+>>>>>>> v3.18
 =======
 #include "bf5xx-i2s-pcm.h"
 >>>>>>> v3.18
@@ -54,7 +58,10 @@ struct bf5xx_i2s_port {
 	u16 rcr2;
 	int configured;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	unsigned int slots;
 	unsigned int tx_mask;
@@ -62,6 +69,9 @@ struct bf5xx_i2s_port {
 
 	struct bf5xx_i2s_pcm_data tx_dma_data;
 	struct bf5xx_i2s_pcm_data rx_dma_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -89,7 +99,12 @@ static int bf5xx_i2s_set_dai_fmt(struct snd_soc_dai *cpu_dai,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: Unknown DAI format type\n", __func__);
+=======
+		dev_err(cpu_dai->dev, "%s: Unknown DAI format type\n",
+			__func__);
+>>>>>>> v3.18
 =======
 		dev_err(cpu_dai->dev, "%s: Unknown DAI format type\n",
 			__func__);
@@ -108,7 +123,12 @@ static int bf5xx_i2s_set_dai_fmt(struct snd_soc_dai *cpu_dai,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: Unknown DAI master type\n", __func__);
+=======
+		dev_err(cpu_dai->dev, "%s: Unknown DAI master type\n",
+			__func__);
+>>>>>>> v3.18
 =======
 		dev_err(cpu_dai->dev, "%s: Unknown DAI master type\n",
 			__func__);
@@ -167,7 +187,11 @@ static int bf5xx_i2s_hw_params(struct snd_pcm_substream *substream,
 				      bf5xx_i2s->rcr2, 0, 0);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_err("SPORT is busy!\n");
+=======
+			dev_err(dai->dev, "SPORT is busy!\n");
+>>>>>>> v3.18
 =======
 			dev_err(dai->dev, "SPORT is busy!\n");
 >>>>>>> v3.18
@@ -178,7 +202,11 @@ static int bf5xx_i2s_hw_params(struct snd_pcm_substream *substream,
 				      bf5xx_i2s->tcr2, 0, 0);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_err("SPORT is busy!\n");
+=======
+			dev_err(dai->dev, "SPORT is busy!\n");
+>>>>>>> v3.18
 =======
 			dev_err(dai->dev, "SPORT is busy!\n");
 >>>>>>> v3.18
@@ -196,7 +224,11 @@ static void bf5xx_i2s_shutdown(struct snd_pcm_substream *substream,
 	struct bf5xx_i2s_port *bf5xx_i2s = sport_handle->private_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s enter\n", __func__);
+=======
+	dev_dbg(dai->dev, "%s enter\n", __func__);
+>>>>>>> v3.18
 =======
 	dev_dbg(dai->dev, "%s enter\n", __func__);
 >>>>>>> v3.18
@@ -206,7 +238,10 @@ static void bf5xx_i2s_shutdown(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int bf5xx_i2s_set_channel_map(struct snd_soc_dai *dai,
 		unsigned int tx_num, unsigned int *tx_slot,
 		unsigned int rx_num, unsigned int *rx_slot)
@@ -265,6 +300,9 @@ static int bf5xx_i2s_set_tdm_slot(struct snd_soc_dai *dai, unsigned int tx_mask,
 	return sport_set_multichannel(sport_handle, slots, tx_mask, rx_mask, 0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PM
 static int bf5xx_i2s_suspend(struct snd_soc_dai *dai)
@@ -272,7 +310,11 @@ static int bf5xx_i2s_suspend(struct snd_soc_dai *dai)
 	struct sport_device *sport_handle = snd_soc_dai_get_drvdata(dai);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s : sport %d\n", __func__, dai->id);
+=======
+	dev_dbg(dai->dev, "%s : sport %d\n", __func__, dai->id);
+>>>>>>> v3.18
 =======
 	dev_dbg(dai->dev, "%s : sport %d\n", __func__, dai->id);
 >>>>>>> v3.18
@@ -291,7 +333,11 @@ static int bf5xx_i2s_resume(struct snd_soc_dai *dai)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s : sport %d\n", __func__, dai->id);
+=======
+	dev_dbg(dai->dev, "%s : sport %d\n", __func__, dai->id);
+>>>>>>> v3.18
 =======
 	dev_dbg(dai->dev, "%s : sport %d\n", __func__, dai->id);
 >>>>>>> v3.18
@@ -300,7 +346,11 @@ static int bf5xx_i2s_resume(struct snd_soc_dai *dai)
 				      bf5xx_i2s->rcr2, 0, 0);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("SPORT is busy!\n");
+=======
+		dev_err(dai->dev, "SPORT is busy!\n");
+>>>>>>> v3.18
 =======
 		dev_err(dai->dev, "SPORT is busy!\n");
 >>>>>>> v3.18
@@ -311,18 +361,24 @@ static int bf5xx_i2s_resume(struct snd_soc_dai *dai)
 				      bf5xx_i2s->tcr2, 0, 0);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("SPORT is busy!\n");
 		return -EBUSY;
 	}
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dai->dev, "SPORT is busy!\n");
 		return -EBUSY;
 	}
 
 	return sport_set_multichannel(sport_handle, bf5xx_i2s->slots,
 			bf5xx_i2s->tx_mask, bf5xx_i2s->rx_mask, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -332,7 +388,10 @@ static int bf5xx_i2s_resume(struct snd_soc_dai *dai)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int bf5xx_i2s_dai_probe(struct snd_soc_dai *dai)
 {
 	struct sport_device *sport_handle = snd_soc_dai_get_drvdata(dai);
@@ -350,6 +409,9 @@ static int bf5xx_i2s_dai_probe(struct snd_soc_dai *dai)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BF5XX_I2S_RATES (SNDRV_PCM_RATE_8000 | SNDRV_PCM_RATE_11025 |\
 		SNDRV_PCM_RATE_16000 | SNDRV_PCM_RATE_22050 | \
@@ -363,6 +425,7 @@ static int bf5xx_i2s_dai_probe(struct snd_soc_dai *dai)
 	 SNDRV_PCM_FMTBIT_S32_LE)
 
 static const struct snd_soc_dai_ops bf5xx_i2s_dai_ops = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.shutdown	= bf5xx_i2s_shutdown,
 	.hw_params	= bf5xx_i2s_hw_params,
@@ -381,6 +444,8 @@ static struct snd_soc_dai_driver bf5xx_i2s_dai = {
 		.channels_min = 1,
 		.channels_max = 2,
 =======
+=======
+>>>>>>> v3.18
 	.shutdown	 = bf5xx_i2s_shutdown,
 	.hw_params	 = bf5xx_i2s_hw_params,
 	.set_fmt	 = bf5xx_i2s_set_dai_fmt,
@@ -400,6 +465,9 @@ static struct snd_soc_dai_driver bf5xx_i2s_dai = {
 	.capture = {
 		.channels_min = 2,
 		.channels_max = 8,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.rates = BF5XX_I2S_RATES,
 		.formats = BF5XX_I2S_FORMATS,},
@@ -417,7 +485,11 @@ static int bf5xx_i2s_probe(struct platform_device *pdev)
 
 	/* configure SPORT for I2S */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sport_handle = sport_init(pdev, 4, 2 * sizeof(u32),
+=======
+	sport_handle = sport_init(pdev, 4, 8 * sizeof(u32),
+>>>>>>> v3.18
 =======
 	sport_handle = sport_init(pdev, 4, 8 * sizeof(u32),
 >>>>>>> v3.18
@@ -430,7 +502,11 @@ static int bf5xx_i2s_probe(struct platform_device *pdev)
 					 &bf5xx_i2s_dai, 1);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("Failed to register DAI: %d\n", ret);
+=======
+		dev_err(&pdev->dev, "Failed to register DAI: %d\n", ret);
+>>>>>>> v3.18
 =======
 		dev_err(&pdev->dev, "Failed to register DAI: %d\n", ret);
 >>>>>>> v3.18
@@ -446,7 +522,11 @@ static int bf5xx_i2s_remove(struct platform_device *pdev)
 	struct sport_device *sport_handle = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("%s enter\n", __func__);
+=======
+	dev_dbg(&pdev->dev, "%s enter\n", __func__);
+>>>>>>> v3.18
 =======
 	dev_dbg(&pdev->dev, "%s enter\n", __func__);
 >>>>>>> v3.18

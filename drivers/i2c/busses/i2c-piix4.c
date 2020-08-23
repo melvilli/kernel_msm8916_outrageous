@@ -12,10 +12,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -26,7 +29,11 @@
 	Serverworks OSB4, CSB5, CSB6, HT-1000, HT-1100
 	ATI IXP200, IXP300, IXP400, SB600, SB700/SP5100, SB800
 <<<<<<< HEAD
+<<<<<<< HEAD
 	AMD Hudson-2, CZ
+=======
+	AMD Hudson-2, ML, CZ
+>>>>>>> v3.18
 =======
 	AMD Hudson-2, ML, CZ
 >>>>>>> v3.18
@@ -46,7 +53,10 @@
 #include <linux/i2c.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/dmi.h>
@@ -219,7 +229,11 @@ static int piix4_setup(struct pci_dev *PIIX4_dev,
 		} else {
 			dev_err(&PIIX4_dev->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"Host SMBus controller not enabled!\n");
+=======
+				"SMBus Host Controller not enabled!\n");
+>>>>>>> v3.18
 =======
 				"SMBus Host Controller not enabled!\n");
 >>>>>>> v3.18
@@ -230,9 +244,15 @@ static int piix4_setup(struct pci_dev *PIIX4_dev,
 
 	if (((temp & 0x0E) == 8) || ((temp & 0x0E) == 2))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&PIIX4_dev->dev, "Using Interrupt 9 for SMBus.\n");
 	else if ((temp & 0x0E) == 0)
 		dev_dbg(&PIIX4_dev->dev, "Using Interrupt SMI# for SMBus.\n");
+=======
+		dev_dbg(&PIIX4_dev->dev, "Using IRQ for SMBus\n");
+	else if ((temp & 0x0E) == 0)
+		dev_dbg(&PIIX4_dev->dev, "Using SMI# for SMBus\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(&PIIX4_dev->dev, "Using IRQ for SMBus\n");
 	else if ((temp & 0x0E) == 0)
@@ -252,18 +272,24 @@ static int piix4_setup(struct pci_dev *PIIX4_dev,
 
 static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     const struct pci_device_id *id)
 {
 	unsigned short piix4_smba;
 	unsigned short smba_idx = 0xcd6;
 	u8 smba_en_lo, smba_en_hi, i2ccfg, i2ccfg_offset = 0x10, smb_en = 0x2c;
 =======
+=======
+>>>>>>> v3.18
 			     const struct pci_device_id *id, u8 aux)
 {
 	unsigned short piix4_smba;
 	unsigned short smba_idx = 0xcd6;
 	u8 smba_en_lo, smba_en_hi, smb_en, smb_en_status;
 	u8 i2ccfg, i2ccfg_offset = 0x10;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* SB800 and later SMBus does not support forcing address */
@@ -275,7 +301,10 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 
 	/* Determine the address of the SMBus areas */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if ((PIIX4_dev->vendor == PCI_VENDOR_ID_AMD &&
 	     PIIX4_dev->device == PCI_DEVICE_ID_AMD_HUDSON2_SMBUS &&
 	     PIIX4_dev->revision >= 0x41) ||
@@ -286,6 +315,9 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 	else
 		smb_en = (aux) ? 0x28 : 0x2c;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!request_region(smba_idx, 2, "smba_idx")) {
 		dev_err(&PIIX4_dev->dev, "SMBus base address index region "
@@ -299,6 +331,7 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 	release_region(smba_idx, 2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((smba_en_lo & 1) == 0) {
 		dev_err(&PIIX4_dev->dev,
 			"Host SMBus controller not enabled!\n");
@@ -307,6 +340,8 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 
 	piix4_smba = ((smba_en_hi << 8) | smba_en_lo) & 0xffe0;
 =======
+=======
+>>>>>>> v3.18
 	if (!smb_en) {
 		smb_en_status = smba_en_lo & 0x10;
 		piix4_smba = smba_en_hi << 8;
@@ -323,6 +358,9 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (acpi_check_region(piix4_smba, SMBIOSIZE, piix4_driver.name))
 		return -ENODEV;
@@ -334,7 +372,10 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Aux SMBus does not support IRQ information */
 	if (aux) {
 		dev_info(&PIIX4_dev->dev,
@@ -343,6 +384,9 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 		return piix4_smba;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Request the SMBus I2C bus config region */
 	if (!request_region(piix4_smba + i2ccfg_offset, 1, "i2ccfg")) {
@@ -356,9 +400,15 @@ static int piix4_setup_sb800(struct pci_dev *PIIX4_dev,
 
 	if (i2ccfg & 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&PIIX4_dev->dev, "Using IRQ for SMBus.\n");
 	else
 		dev_dbg(&PIIX4_dev->dev, "Using SMI# for SMBus.\n");
+=======
+		dev_dbg(&PIIX4_dev->dev, "Using IRQ for SMBus\n");
+	else
+		dev_dbg(&PIIX4_dev->dev, "Using SMI# for SMBus\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(&PIIX4_dev->dev, "Using IRQ for SMBus\n");
 	else
@@ -592,7 +642,11 @@ static const struct i2c_algorithm smbus_algorithm = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(piix4_ids) = {
+=======
+static const struct pci_device_id piix4_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id piix4_ids[] = {
 >>>>>>> v3.18
@@ -680,7 +734,11 @@ static int piix4_probe(struct pci_dev *dev, const struct pci_device_id *id)
 	    dev->vendor == PCI_VENDOR_ID_AMD)
 		/* base address location etc changed in SB800 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = piix4_setup_sb800(dev, id);
+=======
+		retval = piix4_setup_sb800(dev, id, 0);
+>>>>>>> v3.18
 =======
 		retval = piix4_setup_sb800(dev, id, 0);
 >>>>>>> v3.18
@@ -698,6 +756,7 @@ static int piix4_probe(struct pci_dev *dev, const struct pci_device_id *id)
 
 	/* Check for auxiliary SMBus on some AMD chipsets */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->vendor == PCI_VENDOR_ID_ATI &&
 	    dev->device == PCI_DEVICE_ID_ATI_SBX00_SMBUS &&
 	    dev->revision < 0x40) {
@@ -710,6 +769,8 @@ static int piix4_probe(struct pci_dev *dev, const struct pci_device_id *id)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	retval = -ENODEV;
 
 	if (dev->vendor == PCI_VENDOR_ID_ATI &&
@@ -733,6 +794,9 @@ static int piix4_probe(struct pci_dev *dev, const struct pci_device_id *id)
 		piix4_add_adapter(dev, retval, &piix4_aux_adapter);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

@@ -2,6 +2,11 @@
 # Manipulate options in a .config file from the command line
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+myname=${0##*/}
+
+>>>>>>> v3.18
 =======
 myname=${0##*/}
 
@@ -14,7 +19,11 @@ usage() {
 Manipulate options in a .config file from the command line.
 Usage:
 <<<<<<< HEAD
+<<<<<<< HEAD
 config options command ...
+=======
+$myname options command ...
+>>>>>>> v3.18
 =======
 $myname options command ...
 >>>>>>> v3.18
@@ -43,6 +52,7 @@ options:
 	--keep-case|-k       Keep next symbols' case (dont' upper-case it)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config doesn't check the validity of the .config file. This is done at next
 make time.
 
@@ -52,6 +62,8 @@ the case of all following symbols unchanged.
 config uses 'CONFIG_' as the default symbol prefix. Set the environment
 variable CONFIG_ to the prefix to use. Eg.: CONFIG_="FOO_" config ...
 =======
+=======
+>>>>>>> v3.18
 $myname doesn't check the validity of the .config file. This is done at next
 make time.
 
@@ -60,6 +72,9 @@ the case of all following symbols unchanged.
 
 $myname uses 'CONFIG_' as the default symbol prefix. Set the environment
 variable CONFIG_ to the prefix to use. Eg.: CONFIG_="FOO_" $myname ...
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EOL
 	exit 1
@@ -81,7 +96,10 @@ checkarg() {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 txt_append() {
 	local anchor="$1"
 	local insert="$2"
@@ -117,6 +135,9 @@ txt_delete() {
 	mv "$tmpfile" "$infile"
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 set_var() {
 	local name=$1 new=$2 before=$3
@@ -125,15 +146,21 @@ set_var() {
 	before_re="^($before=|# $before is not set)"
 	if test -n "$before" && grep -Eq "$before_re" "$FN"; then
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sed -ri "/$before_re/a $new" "$FN"
 	elif grep -Eq "$name_re" "$FN"; then
 		sed -ri "s:$name_re.*:$new:" "$FN"
 =======
+=======
+>>>>>>> v3.18
 		txt_append "^$before=" "$new" "$FN"
 		txt_append "^# $before is not set" "$new" "$FN"
 	elif grep -Eq "$name_re" "$FN"; then
 		txt_subst "^$name=.*" "$new" "$FN"
 		txt_subst "^# $name is not set" "$new" "$FN"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		echo "$new" >>"$FN"
@@ -144,7 +171,12 @@ undef_var() {
 	local name=$1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sed -ri "/^($name=|# $name is not set)/d" "$FN"
+=======
+	txt_delete "^$name=" "$FN"
+	txt_delete "^# $name is not set" "$FN"
+>>>>>>> v3.18
 =======
 	txt_delete "^$name=" "$FN"
 	txt_delete "^# $name is not set" "$FN"
@@ -255,6 +287,9 @@ while [ "$1" != "" ] ; do
 	esac
 done
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

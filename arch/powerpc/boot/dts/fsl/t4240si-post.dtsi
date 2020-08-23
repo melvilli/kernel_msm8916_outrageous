@@ -344,7 +344,11 @@
 
 	corenet-cf@18000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "fsl,corenet-cf";
+=======
+		compatible = "fsl,corenet2-cf", "fsl,corenet-cf";
+>>>>>>> v3.18
 =======
 		compatible = "fsl,corenet2-cf", "fsl,corenet-cf";
 >>>>>>> v3.18
@@ -358,6 +362,10 @@
 		compatible = "fsl,pamu-v1.0", "fsl,pamu";
 		reg = <0x20000 0x6000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		fsl,portid-mapping = <0x8000>;
+>>>>>>> v3.18
 =======
 		fsl,portid-mapping = <0x8000>;
 >>>>>>> v3.18
@@ -367,7 +375,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "qoriq-mpic.dtsi"
+=======
+/include/ "qoriq-mpic4.3.dtsi"
+>>>>>>> v3.18
 =======
 /include/ "qoriq-mpic4.3.dtsi"
 >>>>>>> v3.18
@@ -382,8 +394,11 @@
 	clockgen: global-utilities@e1000 {
 		compatible = "fsl,t4240-clockgen", "fsl,qoriq-clockgen-2.0";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg = <0xe1000 0x1000>;
 =======
+=======
+>>>>>>> v3.18
 		ranges = <0x0 0xe1000 0x1000>;
 		reg = <0xe1000 0x1000>;
 		#address-cells = <1>;
@@ -471,6 +486,9 @@
 				"pll4", "pll4-div2", "pll4-div4";
 			clock-output-names = "cmux2";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -490,8 +508,14 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "qoriq-dma-0.dtsi"
 /include/ "qoriq-dma-1.dtsi"
+=======
+/include/ "elo3-dma-0.dtsi"
+/include/ "elo3-dma-1.dtsi"
+/include/ "elo3-dma-2.dtsi"
+>>>>>>> v3.18
 =======
 /include/ "elo3-dma-0.dtsi"
 /include/ "elo3-dma-1.dtsi"
@@ -519,7 +543,11 @@
 /include/ "qoriq-usb2-mph-0.dtsi"
 		usb0: usb@210000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			compatible = "fsl-usb2-mph-v2.4", "fsl-usb2-mph";
+=======
+			compatible = "fsl-usb2-mph-v2.5", "fsl-usb2-mph";
+>>>>>>> v3.18
 =======
 			compatible = "fsl-usb2-mph-v2.5", "fsl-usb2-mph";
 >>>>>>> v3.18
@@ -529,7 +557,11 @@
 /include/ "qoriq-usb2-dr-0.dtsi"
 		usb1: usb@211000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			compatible = "fsl-usb2-dr-v2.4", "fsl-usb2-dr";
+=======
+			compatible = "fsl-usb2-dr-v2.5", "fsl-usb2-dr";
+>>>>>>> v3.18
 =======
 			compatible = "fsl-usb2-dr-v2.5", "fsl-usb2-dr";
 >>>>>>> v3.18

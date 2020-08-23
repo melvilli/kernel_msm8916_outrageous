@@ -17,7 +17,10 @@
 	model = "TQ MBa53 starter kit";
 	compatible = "tq,mba53", "tq,tqma53", "fsl,imx53";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	chosen {
 		stdout-path = &uart2;
@@ -88,6 +91,9 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_lvds1_1>;
 	status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -96,17 +102,23 @@
 		pinctrl_lvds1_1: lvds1-grp1 {
 			fsl,pins = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 				MX53_PAD_LVDS0_TX3_P__LDB_LVDS0_TX3 0x10000
 				MX53_PAD_LVDS0_CLK_P__LDB_LVDS0_CLK 0x10000
 				MX53_PAD_LVDS0_TX2_P__LDB_LVDS0_TX2 0x10000
 				MX53_PAD_LVDS0_TX1_P__LDB_LVDS0_TX1 0x10000
 				MX53_PAD_LVDS0_TX0_P__LDB_LVDS0_TX0 0x10000
 =======
+=======
+>>>>>>> v3.18
 				MX53_PAD_LVDS0_TX3_P__LDB_LVDS0_TX3 0x80000000
 				MX53_PAD_LVDS0_CLK_P__LDB_LVDS0_CLK 0x80000000
 				MX53_PAD_LVDS0_TX2_P__LDB_LVDS0_TX2 0x80000000
 				MX53_PAD_LVDS0_TX1_P__LDB_LVDS0_TX1 0x80000000
 				MX53_PAD_LVDS0_TX0_P__LDB_LVDS0_TX0 0x80000000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			>;
 		};
@@ -114,17 +126,23 @@
 		pinctrl_lvds1_2: lvds1-grp2 {
 			fsl,pins = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 				MX53_PAD_LVDS1_TX3_P__LDB_LVDS1_TX3 0x10000
 				MX53_PAD_LVDS1_TX2_P__LDB_LVDS1_TX2 0x10000
 				MX53_PAD_LVDS1_CLK_P__LDB_LVDS1_CLK 0x10000
 				MX53_PAD_LVDS1_TX1_P__LDB_LVDS1_TX1 0x10000
 				MX53_PAD_LVDS1_TX0_P__LDB_LVDS1_TX0 0x10000
 =======
+=======
+>>>>>>> v3.18
 				MX53_PAD_LVDS1_TX3_P__LDB_LVDS1_TX3 0x80000000
 				MX53_PAD_LVDS1_TX2_P__LDB_LVDS1_TX2 0x80000000
 				MX53_PAD_LVDS1_CLK_P__LDB_LVDS1_CLK 0x80000000
 				MX53_PAD_LVDS1_TX1_P__LDB_LVDS1_TX1 0x80000000
 				MX53_PAD_LVDS1_TX0_P__LDB_LVDS1_TX0 0x80000000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			>;
 		};
@@ -133,6 +151,7 @@
 	disp1 {
 		pinctrl_disp1_1: disp1-grp1 {
 			fsl,pins = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 				MX53_PAD_EIM_DA10__IPU_DI1_PIN15   0x10000 /* DISP1_DRDY */
 				MX53_PAD_EIM_D23__IPU_DI1_PIN2     0x10000 /* DISP1_HSYNC */
@@ -162,6 +181,8 @@
 				MX53_PAD_EIM_DA8__IPU_DISP1_DAT_1  0x10000
 				MX53_PAD_EIM_DA9__IPU_DISP1_DAT_0  0x10000
 =======
+=======
+>>>>>>> v3.18
 				MX53_PAD_EIM_A16__IPU_DI1_DISP_CLK 0x80000000 /* DISP1_CLK */
 				MX53_PAD_EIM_DA10__IPU_DI1_PIN15   0x80000000 /* DISP1_DRDY */
 				MX53_PAD_EIM_D23__IPU_DI1_PIN2     0x80000000 /* DISP1_HSYNC */
@@ -200,6 +221,9 @@
 				/* VGA_VSYNC, HSYNC with max drive strength */
 				MX53_PAD_EIM_CS1__IPU_DI1_PIN6	   0xe6
 				MX53_PAD_EIM_DA15__IPU_DI1_PIN4	   0xe6
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			>;
 		};
@@ -207,30 +231,48 @@
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 &ipu_di1_disp1 {
 	remote-endpoint = <&display1_in>;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 &cspi {
 	status = "okay";
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 &audmux {
 	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_audmux>;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 &i2c2 {
 	codec: sgtl5000@a {
 		compatible = "fsl,sgtl5000";
 		reg = <0x0a>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&clks IMX5_CLK_SSI_EXT1_GATE>;
+		VDDA-supply = <&reg_3p2v>;
+		VDDIO-supply = <&reg_3p2v>;
+>>>>>>> v3.18
 =======
 		clocks = <&clks IMX5_CLK_SSI_EXT1_GATE>;
 		VDDA-supply = <&reg_3p2v>;
@@ -243,6 +285,11 @@
 		reg = <0x20>;
 		interrupts = <109>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		#gpio-cells = <2>;
+		gpio-controller;
+>>>>>>> v3.18
 =======
 		#gpio-cells = <2>;
 		gpio-controller;
@@ -257,6 +304,10 @@
 
 &fec {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phy-reset-gpios = <&gpio7 6 0>;
+>>>>>>> v3.18
 =======
 	phy-reset-gpios = <&gpio7 6 0>;
 >>>>>>> v3.18
@@ -276,7 +327,10 @@
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 &usbotg {
 	dr_mode = "host";
 	status = "okay";
@@ -286,17 +340,26 @@
 	status = "okay";
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 &uart1 {
 	status = "okay";
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 &ssi2 {
 	status = "okay";
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 &uart2 {
 	status = "okay";
@@ -314,7 +377,10 @@
 	status = "okay";
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &tve {
 	pinctrl-names = "default";
@@ -325,4 +391,7 @@
 	fsl,vsync-pin = <6>;
 	status = "okay";
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

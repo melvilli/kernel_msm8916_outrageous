@@ -6,7 +6,10 @@ config NET_VENDOR_VIA
 	bool "VIA devices"
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	---help---
@@ -24,9 +27,14 @@ if NET_VENDOR_VIA
 config VIA_RHINE
 	tristate "VIA Rhine support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI
 	select CRC32
 	select NET_CORE
+=======
+	depends on (PCI || USE_OF)
+	select CRC32
+>>>>>>> v3.18
 =======
 	depends on (PCI || USE_OF)
 	select CRC32
@@ -54,10 +62,16 @@ config VIA_RHINE_MMIO
 config VIA_VELOCITY
 	tristate "VIA Velocity support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI
 	select CRC32
 	select CRC_CCITT
 	select NET_CORE
+=======
+	depends on (PCI || USE_OF)
+	select CRC32
+	select CRC_CCITT
+>>>>>>> v3.18
 =======
 	depends on (PCI || USE_OF)
 	select CRC32

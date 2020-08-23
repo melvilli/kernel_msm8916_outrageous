@@ -8,7 +8,11 @@
  *
  * Much of the code is derived from the original DDB5074 port by
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Geert Uytterhoeven <geert@sonycom.com>
+=======
+ * Geert Uytterhoeven <geert@linux-m68k.org>
+>>>>>>> v3.18
 =======
  * Geert Uytterhoeven <geert@linux-m68k.org>
 >>>>>>> v3.18

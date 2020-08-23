@@ -31,7 +31,10 @@ struct rock_state {
 	int cont_extent;
 	int cont_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cont_loops;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct inode *inode;
@@ -78,9 +81,12 @@ static void init_rock_state(struct rock_state *rs, struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Maximum number of Rock Ridge continuation entries */
 #define RR_MAX_CE_ENTRIES 32
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -116,8 +122,11 @@ static int rock_continue(struct rock_state *rs)
 		}
 		ret = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (++rs->cont_loops >= RR_MAX_CE_ENTRIES)
 			goto out;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		bh = sb_bread(rs->inode->i_sb, rs->cont_extent);
@@ -213,8 +222,11 @@ int get_rock_ridge_filename(struct iso_directory_record *de,
 	int truncate = 0;
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *p;
 	int len;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -282,6 +294,7 @@ repeat:
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			len = rr->len - 5;
 			if (retnamlen + len >= 254) {
 				truncate = 1;
@@ -294,12 +307,17 @@ repeat:
 			retnamlen += len;
 			retname[retnamlen] = '\0';
 =======
+=======
+>>>>>>> v3.18
 			if ((strlen(retname) + rr->len - 5) >= 254) {
 				truncate = 1;
 				break;
 			}
 			strncat(retname, rr->u.NM.name, rr->len - 5);
 			retnamlen += rr->len - 5;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case SIG('R', 'E'):
@@ -391,9 +409,12 @@ repeat:
 			break;
 		case SIG('E', 'R'):
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Invalid length of ER tag id? */
 			if (rr->u.ER.len_id + offsetof(struct rock_ridge, u.ER.data) > rr->len)
 				goto out;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			ISOFS_SB(inode->i_sb)->s_rock = 1;

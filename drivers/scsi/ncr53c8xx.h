@@ -265,11 +265,15 @@
 #define SCSI_NCR_TIMER_INTERVAL	(HZ)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 1 /* defined CONFIG_SCSI_MULTI_LUN */
 #define SCSI_NCR_MAX_LUN	(16)
 #else
 #define SCSI_NCR_MAX_LUN	(1)
 #endif
+=======
+#define SCSI_NCR_MAX_LUN	(16)
+>>>>>>> v3.18
 =======
 #define SCSI_NCR_MAX_LUN	(16)
 >>>>>>> v3.18

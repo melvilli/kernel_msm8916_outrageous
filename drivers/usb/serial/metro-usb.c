@@ -8,7 +8,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/tty.h>
@@ -47,7 +50,11 @@ struct metrousb_private {
 
 /* Device table list. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct usb_device_id id_table[] = {
+=======
+static const struct usb_device_id id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct usb_device_id id_table[] = {
 >>>>>>> v3.18
@@ -62,7 +69,11 @@ MODULE_DEVICE_TABLE(usb, id_table);
 #define UNI_CMD_CLOSE	0xFF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 inline int metrousb_is_unidirectional_mode(struct usb_serial_port *port)
+=======
+static inline int metrousb_is_unidirectional_mode(struct usb_serial_port *port)
+>>>>>>> v3.18
 =======
 static inline int metrousb_is_unidirectional_mode(struct usb_serial_port *port)
 >>>>>>> v3.18
@@ -236,8 +247,13 @@ static int metrousb_open(struct tty_struct *tty, struct usb_serial_port *port)
 	if (result) {
 		dev_err(&port->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"%s - failed to configure device for port number=%d, error code=%d\n",
 			__func__, port->number, result);
+=======
+			"%s - failed to configure device, error code=%d\n",
+			__func__, result);
+>>>>>>> v3.18
 =======
 			"%s - failed to configure device, error code=%d\n",
 			__func__, result);

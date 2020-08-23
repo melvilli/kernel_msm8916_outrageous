@@ -17,6 +17,10 @@
 #include <linux/init.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -34,6 +38,7 @@
 #include <mach/map.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
 
 #include <plat/clock.h>
@@ -41,10 +46,15 @@
 #include <plat/cpu.h>
 #include <linux/platform_data/i2c-s3c2410.h>
 =======
+=======
+>>>>>>> v3.18
 #include <plat/devs.h>
 #include <plat/cpu.h>
 #include <linux/platform_data/i2c-s3c2410.h>
 #include <mach/gpio-samsung.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <plat/samsung-time.h>
 
@@ -77,7 +87,11 @@ static void __init smdk6400_map_io(void)
 {
 	s3c64xx_init_io(smdk6400_iodesc, ARRAY_SIZE(smdk6400_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(12000000);
+=======
+	s3c64xx_set_xtal_freq(12000000);
+>>>>>>> v3.18
 =======
 	s3c64xx_set_xtal_freq(12000000);
 >>>>>>> v3.18
@@ -109,7 +123,10 @@ MACHINE_START(SMDK6400, "SMDK6400")
 	.map_io		= smdk6400_map_io,
 	.init_machine	= smdk6400_machine_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_late	= s3c64xx_init_late,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= samsung_timer_init,

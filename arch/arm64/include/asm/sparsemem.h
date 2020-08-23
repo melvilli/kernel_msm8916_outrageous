@@ -18,7 +18,11 @@
 
 #ifdef CONFIG_SPARSEMEM
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_PHYSMEM_BITS	40
+=======
+#define MAX_PHYSMEM_BITS	48
+>>>>>>> v3.18
 =======
 #define MAX_PHYSMEM_BITS	48
 >>>>>>> v3.18

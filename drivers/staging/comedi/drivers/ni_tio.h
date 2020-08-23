@@ -14,11 +14,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -33,6 +36,7 @@ struct mite_struct;
 struct ni_gpct_device;
 
 enum ni_gpct_register {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	NITIO_G0_Autoincrement_Reg,
 	NITIO_G1_Autoincrement_Reg,
@@ -106,6 +110,8 @@ enum ni_gpct_register {
 	NITIO_G3_Interrupt_Enable_Reg,
 	NITIO_Num_Registers,
 =======
+=======
+>>>>>>> v3.18
 	NITIO_G0_AUTO_INC,
 	NITIO_G1_AUTO_INC,
 	NITIO_G2_AUTO_INC,
@@ -177,6 +183,9 @@ enum ni_gpct_register {
 	NITIO_G2_INT_ENA,
 	NITIO_G3_INT_ENA,
 	NITIO_NUM_REGS,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -197,6 +206,7 @@ struct ni_gpct {
 
 struct ni_gpct_device {
 	struct comedi_device *dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void (*write_register) (struct ni_gpct *counter, unsigned bits,
 				enum ni_gpct_register reg);
@@ -249,6 +259,8 @@ static inline struct ni_gpct *subdev_to_counter(struct comedi_subdevice *s)
 	return s->private;
 }
 =======
+=======
+>>>>>>> v3.18
 	void (*write_register)(struct ni_gpct *counter, unsigned bits,
 			       enum ni_gpct_register reg);
 	unsigned (*read_register)(struct ni_gpct *counter,
@@ -284,6 +296,9 @@ int ni_tio_cancel(struct ni_gpct *);
 void ni_tio_handle_interrupt(struct ni_gpct *, struct comedi_subdevice *);
 void ni_tio_set_mite_channel(struct ni_gpct *, struct mite_channel *);
 void ni_tio_acknowledge(struct ni_gpct *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _COMEDI_NI_TIO_H */

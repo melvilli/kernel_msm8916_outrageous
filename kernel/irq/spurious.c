@@ -68,9 +68,12 @@ static int try_one_irq(int irq, struct irq_desc *desc, bool force)
 	raw_spin_lock(&desc->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* PER_CPU and nested thread interrupts are never polled */
 	if (irq_settings_is_per_cpu(desc) || irq_settings_is_nested_thread(desc))
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * PER_CPU, nested thread interrupts and interrupts explicitely
 	 * marked polled are excluded from polling.
@@ -78,6 +81,9 @@ static int try_one_irq(int irq, struct irq_desc *desc, bool force)
 	if (irq_settings_is_per_cpu(desc) ||
 	    irq_settings_is_nested_thread(desc) ||
 	    irq_settings_is_polled(desc))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 
@@ -281,7 +287,12 @@ void note_interrupt(unsigned int irq, struct irq_desc *desc,
 		    irqreturn_t action_ret)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (desc->istate & IRQS_POLL_INPROGRESS)
+=======
+	if (desc->istate & IRQS_POLL_INPROGRESS ||
+	    irq_settings_is_polled(desc))
+>>>>>>> v3.18
 =======
 	if (desc->istate & IRQS_POLL_INPROGRESS ||
 	    irq_settings_is_polled(desc))

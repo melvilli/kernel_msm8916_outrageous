@@ -780,7 +780,11 @@ static int max3100_probe(struct spi_device *spi)
 	spin_lock_init(&max3100s[i]->conf_lock);
 	spi_set_drvdata(spi, max3100s[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = spi->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18

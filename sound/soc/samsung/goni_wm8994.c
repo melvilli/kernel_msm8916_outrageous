@@ -17,7 +17,11 @@
 
 #include <asm/mach-types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/gpio.h>
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18
@@ -279,8 +283,13 @@ static int __init goni_init(void)
 
 	/* register voice DAI here */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_register_component(&goni_snd_device->dev, &voice_component,
 					 &voice_dai, 1);
+=======
+	ret = devm_snd_soc_register_component(&goni_snd_device->dev,
+			&voice_component, &voice_dai, 1);
+>>>>>>> v3.18
 =======
 	ret = devm_snd_soc_register_component(&goni_snd_device->dev,
 			&voice_component, &voice_dai, 1);
@@ -294,10 +303,15 @@ static int __init goni_init(void)
 	ret = platform_device_add(goni_snd_device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret) {
 		snd_soc_unregister_component(&goni_snd_device->dev);
 		platform_device_put(goni_snd_device);
 	}
+=======
+	if (ret)
+		platform_device_put(goni_snd_device);
+>>>>>>> v3.18
 =======
 	if (ret)
 		platform_device_put(goni_snd_device);
@@ -309,7 +323,10 @@ static int __init goni_init(void)
 static void __exit goni_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_unregister_component(&goni_snd_device->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	platform_device_unregister(goni_snd_device);

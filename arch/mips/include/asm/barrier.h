@@ -19,7 +19,11 @@
  * to access memory (but not necessarily other CPUs' caches) before any
  * reads following this primitive that depend on the data return by
 <<<<<<< HEAD
+<<<<<<< HEAD
  * any of the preceding reads.	This primitive is much lighter weight than
+=======
+ * any of the preceding reads.  This primitive is much lighter weight than
+>>>>>>> v3.18
 =======
  * any of the preceding reads.  This primitive is much lighter weight than
 >>>>>>> v3.18
@@ -48,7 +52,11 @@
  *
  * because the read of "*q" depends on the read of "p" and these
 <<<<<<< HEAD
+<<<<<<< HEAD
  * two reads are separated by a read_barrier_depends().	 However,
+=======
+ * two reads are separated by a read_barrier_depends().  However,
+>>>>>>> v3.18
 =======
  * two reads are separated by a read_barrier_depends().  However,
 >>>>>>> v3.18
@@ -66,7 +74,11 @@
  *
  * does not enforce ordering, since there is no data dependency between
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the read of "a" and the read of "b".	 Therefore, on some CPUs, such
+=======
+ * the read of "a" and the read of "b".  Therefore, on some CPUs, such
+>>>>>>> v3.18
 =======
  * the read of "a" and the read of "b".  Therefore, on some CPUs, such
 >>>>>>> v3.18
@@ -208,6 +220,12 @@ do {									\
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define smp_mb__before_atomic()	smp_mb__before_llsc()
+#define smp_mb__after_atomic()	smp_llsc_mb()
+
+>>>>>>> v3.18
 =======
 #define smp_mb__before_atomic()	smp_mb__before_llsc()
 #define smp_mb__after_atomic()	smp_llsc_mb()

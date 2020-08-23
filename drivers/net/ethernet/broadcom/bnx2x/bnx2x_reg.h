@@ -36,6 +36,11 @@
 /* [RW 5] Parity mask register #0 read/write */
 #define ATC_REG_ATC_PRTY_MASK					 0x1101d8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* [R 5] Parity register #0 read */
+#define ATC_REG_ATC_PRTY_STS					 0x1101cc
+>>>>>>> v3.18
 =======
 /* [R 5] Parity register #0 read */
 #define ATC_REG_ATC_PRTY_STS					 0x1101cc
@@ -2186,7 +2191,10 @@
 #define NIG_REG_P0_LLH_FUNC_MEM2				 0x18480
 #define NIG_REG_P0_LLH_FUNC_MEM2_ENABLE			 0x18440
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* [RW 17] Packet TimeSync information that is buffered in 1-deep FIFOs for
  * the host. Bits [15:0] return the sequence ID of the packet. Bit 16
  * indicates the validity of the data in the buffer. Writing a 1 to bit 16
@@ -2226,6 +2234,9 @@
 #define NIG_REG_P0_LLH_PTP_RULE_MASK				 0x187a4
 /* [RW 1] Set to 1 to enable PTP packets to be forwarded to the host. */
 #define NIG_REG_P0_LLH_PTP_TO_HOST				 0x187ac
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* [RW 1] Input enable for RX MAC interface. */
 #define NIG_REG_P0_MAC_IN_EN					 0x185ac
@@ -2240,7 +2251,10 @@
  * Only COS 0 and COS 1 are supported in E2. */
 #define NIG_REG_P0_PKT_PRIORITY_TO_COS				 0x18054
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* [RW 6] Enable for TimeSync feature. Bits [2:0] are for RX side. Bits
  * [5:3] are for TX side. Bit 0 enables TimeSync on RX side. Bit 1 enables
  * V1 frame format in timesync event detection on RX side. Bit 2 enables V2
@@ -2252,6 +2266,9 @@
  * direction has to be enabled.
  */
 #define NIG_REG_P0_PTP_EN					 0x18788
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* [RW 16] Bit-map indicating which SAFC/PFC priorities to map to COS 0. A
  * priority is mapped to COS 0 when the corresponding mask bit is 1. More
@@ -2360,8 +2377,11 @@
 #define NIG_REG_P1_HDRS_AFTER_BASIC				 0x1818c
 #define NIG_REG_P1_LLH_FUNC_MEM2				 0x184c0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NIG_REG_P1_LLH_FUNC_MEM2_ENABLE			 0x18460
 =======
+=======
+>>>>>>> v3.18
 #define NIG_REG_P1_LLH_FUNC_MEM2_ENABLE			 0x18460a
 /* [RW 17] Packet TimeSync information that is buffered in 1-deep FIFOs for
  * the host. Bits [15:0] return the sequence ID of the packet. Bit 16
@@ -2402,6 +2422,9 @@
 #define NIG_REG_P1_LLH_PTP_RULE_MASK				 0x187cc
 /* [RW 1] Set to 1 to enable PTP packets to be forwarded to the host. */
 #define NIG_REG_P1_LLH_PTP_TO_HOST				 0x187d4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* [RW 32] Specify the client number to be assigned to each priority of the
  * strict priority arbiter. This register specifies bits 31:0 of the 36-bit
@@ -2445,7 +2468,10 @@
  * Only COS 0 and COS 1 are supported in E2. */
 #define NIG_REG_P1_PKT_PRIORITY_TO_COS				 0x181a8
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* [RW 6] Enable for TimeSync feature. Bits [2:0] are for RX side. Bits
  * [5:3] are for TX side. Bit 0 enables TimeSync on RX side. Bit 1 enables
  * V1 frame format in timesync event detection on RX side. Bit 2 enables V2
@@ -2457,6 +2483,9 @@
  * direction has to be enabled.
  */
 #define NIG_REG_P1_PTP_EN					 0x187b0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* [RW 16] Bit-map indicating which SAFC/PFC priorities to map to COS 0. A
  * priority is mapped to COS 0 when the corresponding mask bit is 1. More
@@ -2478,7 +2507,10 @@
 /* [R 1] TLLH FIFO is empty. */
 #define NIG_REG_P1_TLLH_FIFO_EMPTY				 0x18338
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* [RW 19] Packet TimeSync information that is buffered in 1-deep FIFOs for
  * TX side. Bits [15:0] reflect the sequence ID of the packet. Bit 16
  * indicates the validity of the data in the buffer. Bit 17 indicates that
@@ -2551,6 +2583,9 @@
  * default is to mask out all of the rules.
  */
 #define NIG_REG_P1_TLLH_PTP_RULE_MASK				 0x187fc
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* [RW 32] Specify which of the credit registers the client is to be mapped
  * to. This register specifies bits 31:0 of the 36-bit value. Bits[3:0] are
@@ -2705,11 +2740,17 @@
    ort swap is equal to ~nig_registers_port_swap.port_swap */
 #define NIG_REG_STRAP_OVERRIDE					 0x10398
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* [WB 64] Addresses for TimeSync related registers in the timesync
  * generator sub-module.
  */
 #define NIG_REG_TIMESYNC_GEN_REG				 0x18800
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* [RW 1] output enable for RX_XCM0 IF */
 #define NIG_REG_XCM0_OUT_EN					 0x100f0
@@ -2951,6 +2992,11 @@
 /* [RW 20] Parity mask register #0 read/write */
 #define PBF_REG_PBF_PRTY_MASK					 0x1401e4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* [R 28] Parity register #0 read */
+#define PBF_REG_PBF_PRTY_STS					 0x1401d8
+>>>>>>> v3.18
 =======
 /* [R 28] Parity register #0 read */
 #define PBF_REG_PBF_PRTY_STS					 0x1401d8
@@ -3066,7 +3112,10 @@
 #define PGLUE_B_REG_INTERNAL_PFID_ENABLE_TARGET_WRITE		 0x9434
 #define PGLUE_B_REG_INTERNAL_VFID_ENABLE			 0x9438
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* [W 7] Writing 1 to each bit in this register clears a corresponding error
  * details register and enables logging new error details. Bit 0 - clears
  * INCORRECT_RCV_DETAILS; Bit 1 - clears RX_ERR_DETAILS; Bit 2 - clears
@@ -3078,6 +3127,9 @@
  * - clears TCPL_IN_TWO_RCBS_DETAILS. */
 #define PGLUE_B_REG_LATCHED_ERRORS_CLR				 0x943c
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* [R 9] Interrupt register #0 read */
 #define PGLUE_B_REG_PGLUE_B_INT_STS				 0x9298
@@ -4737,6 +4789,11 @@
 /* [RW 7] Parity mask register #0 read/write */
 #define TM_REG_TM_PRTY_MASK					 0x16410c
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* [R 7] Parity register #0 read */
+#define TM_REG_TM_PRTY_STS					 0x164100
+>>>>>>> v3.18
 =======
 /* [R 7] Parity register #0 read */
 #define TM_REG_TM_PRTY_STS					 0x164100
@@ -6140,6 +6197,10 @@
 #define MISC_REGISTERS_RESET_REG_1_RST_PXP			 (0x1<<26)
 #define MISC_REGISTERS_RESET_REG_1_RST_PXPV			 (0x1<<27)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MISC_REGISTERS_RESET_REG_1_RST_XSEM			 (0x1<<22)
+>>>>>>> v3.18
 =======
 #define MISC_REGISTERS_RESET_REG_1_RST_XSEM			 (0x1<<22)
 >>>>>>> v3.18
@@ -6558,6 +6619,10 @@
 #define PCI_ID_VAL3					0x43c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GRC_CONFIG_REG_VF_MSIX_CONTROL		    0x61C
+>>>>>>> v3.18
 =======
 #define GRC_CONFIG_REG_VF_MSIX_CONTROL		    0x61C
 >>>>>>> v3.18
@@ -7394,6 +7459,10 @@ Theotherbitsarereservedandshouldbezero*/
 #define MDIO_WC_REG_RX2_PCI_CTRL			0x80da
 #define MDIO_WC_REG_RX3_PCI_CTRL			0x80ea
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MDIO_WC_REG_RXB_ANA_RX_CONTROL_PCI		0x80fa
+>>>>>>> v3.18
 =======
 #define MDIO_WC_REG_RXB_ANA_RX_CONTROL_PCI		0x80fa
 >>>>>>> v3.18

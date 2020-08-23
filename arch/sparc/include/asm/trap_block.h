@@ -52,17 +52,23 @@ struct trap_per_cpu {
 } __attribute__((aligned(64)));
 extern struct trap_per_cpu trap_block[NR_CPUS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void init_cur_cpu_trap(struct thread_info *);
 extern void setup_tba(void);
 extern int ncpus_probed;
 
 extern unsigned long real_hard_smp_processor_id(void);
 =======
+=======
+>>>>>>> v3.18
 void init_cur_cpu_trap(struct thread_info *);
 void setup_tba(void);
 extern int ncpus_probed;
 
 unsigned long real_hard_smp_processor_id(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct cpuid_patch_entry {

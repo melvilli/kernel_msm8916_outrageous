@@ -24,7 +24,11 @@
 
 LIST_HEAD(llc_sap_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_SPINLOCK(llc_sap_list_lock);
+=======
+static DEFINE_SPINLOCK(llc_sap_list_lock);
+>>>>>>> v3.18
 =======
 static DEFINE_SPINLOCK(llc_sap_list_lock);
 >>>>>>> v3.18
@@ -53,7 +57,11 @@ static struct llc_sap *llc_sap_alloc(void)
 static struct llc_sap *__llc_sap_find(unsigned char sap_value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct llc_sap* sap;
+=======
+	struct llc_sap *sap;
+>>>>>>> v3.18
 =======
 	struct llc_sap *sap;
 >>>>>>> v3.18
@@ -168,7 +176,10 @@ module_exit(llc_exit);
 
 EXPORT_SYMBOL(llc_sap_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(llc_sap_list_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(llc_sap_find);

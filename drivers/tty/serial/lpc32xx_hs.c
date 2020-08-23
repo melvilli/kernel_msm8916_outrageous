@@ -280,12 +280,18 @@ static void __serial_lpc32xx_rx(struct uart_port *port)
 		tmp = readl(LPC32XX_HSUART_FIFO(port->membase));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_flip_buffer_push(tport);
 =======
+=======
+>>>>>>> v3.18
 
 	spin_unlock(&port->lock);
 	tty_flip_buffer_push(tport);
 	spin_lock(&port->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -359,10 +365,15 @@ static irqreturn_t serial_lpc32xx_interrupt(int irq, void *dev_id)
 
 	/* Data received? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status & (LPC32XX_HSU_RX_TIMEOUT_INT | LPC32XX_HSU_RX_TRIG_INT)) {
 		__serial_lpc32xx_rx(port);
 		tty_flip_buffer_push(tport);
 	}
+=======
+	if (status & (LPC32XX_HSU_RX_TIMEOUT_INT | LPC32XX_HSU_RX_TRIG_INT))
+		__serial_lpc32xx_rx(port);
+>>>>>>> v3.18
 =======
 	if (status & (LPC32XX_HSU_RX_TIMEOUT_INT | LPC32XX_HSU_RX_TRIG_INT))
 		__serial_lpc32xx_rx(port);
@@ -439,12 +450,15 @@ static void serial_lpc32xx_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* port->lock held by caller.  */
 static void serial_lpc32xx_enable_ms(struct uart_port *port)
 {
 	/* Modem status is not supported */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* port->lock is not held.  */
@@ -673,7 +687,10 @@ static struct uart_ops serial_lpc32xx_pops = {
 	.start_tx	= serial_lpc32xx_start_tx,
 	.stop_rx	= serial_lpc32xx_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= serial_lpc32xx_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= serial_lpc32xx_break_ctl,

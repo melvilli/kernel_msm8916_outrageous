@@ -36,7 +36,10 @@ obj-$(CONFIG_ACT200L_DONGLE)	+= act200l-sir.o
 obj-$(CONFIG_MA600_DONGLE)	+= ma600-sir.o
 obj-$(CONFIG_TOIM3232_DONGLE)	+= toim3232-sir.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_EP7211_DONGLE)	+= ep7211-sir.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_KINGSUN_DONGLE)	+= kingsun-sir.o

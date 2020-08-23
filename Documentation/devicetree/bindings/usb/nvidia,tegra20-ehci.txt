@@ -7,6 +7,7 @@ and additions :
 
 Required properties :
 <<<<<<< HEAD
+<<<<<<< HEAD
  - compatible : Should be "nvidia,tegra20-ehci" for USB controllers
    used in host mode.
  - phy_type : Should be one of "ulpi" or "utmi".
@@ -32,6 +33,8 @@ Optional properties:
   - nvidia,needs-double-reset : boolean is to be set for some of the Tegra2
     USB ports, which need reset twice due to hardware issues.
 =======
+=======
+>>>>>>> v3.18
  - compatible : Should be "nvidia,tegra20-ehci".
  - nvidia,phy : phandle of the PHY that the controller is connected to.
  - clocks : Must contain one entry, for the module clock.
@@ -44,4 +47,7 @@ Optional properties:
 Optional properties:
  - nvidia,needs-double-reset : boolean is to be set for some of the Tegra20
    USB ports, which need reset twice due to hardware issues.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

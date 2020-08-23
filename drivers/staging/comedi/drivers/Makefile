@@ -1,6 +1,10 @@
 # Makefile for individual comedi drivers
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ccflags-$(CONFIG_COMEDI_DEBUG)		:= -DDEBUG
+>>>>>>> v3.18
 =======
 ccflags-$(CONFIG_COMEDI_DEBUG)		:= -DDEBUG
 >>>>>>> v3.18
@@ -13,6 +17,7 @@ obj-$(CONFIG_COMEDI_TEST)		+= comedi_test.o
 obj-$(CONFIG_COMEDI_PARPORT)		+= comedi_parport.o
 obj-$(CONFIG_COMEDI_SERIAL2002)		+= serial2002.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_COMEDI_SKEL)		+= skel.o
 
 # Comedi ISA drivers
@@ -23,6 +28,8 @@ obj-$(CONFIG_COMEDI_PCL711)		+= pcl711.o
 obj-$(CONFIG_COMEDI_PCL724)		+= pcl724.o
 obj-$(CONFIG_COMEDI_PCL725)		+= pcl725.o
 =======
+=======
+>>>>>>> v3.18
 
 # Comedi ISA drivers
 obj-$(CONFIG_COMEDI_AMPLC_DIO200_ISA)	+= amplc_dio200.o
@@ -30,6 +37,9 @@ obj-$(CONFIG_COMEDI_AMPLC_PC236_ISA)	+= amplc_pc236.o
 obj-$(CONFIG_COMEDI_AMPLC_PC263_ISA)	+= amplc_pc263.o
 obj-$(CONFIG_COMEDI_PCL711)		+= pcl711.o
 obj-$(CONFIG_COMEDI_PCL724)		+= pcl724.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_COMEDI_PCL726)		+= pcl726.o
 obj-$(CONFIG_COMEDI_PCL730)		+= pcl730.o
@@ -38,9 +48,15 @@ obj-$(CONFIG_COMEDI_PCL816)		+= pcl816.o
 obj-$(CONFIG_COMEDI_PCL818)		+= pcl818.o
 obj-$(CONFIG_COMEDI_PCM3724)		+= pcm3724.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_COMEDI_PCM3730)		+= pcm3730.o
 obj-$(CONFIG_COMEDI_RTI800)		+= rti800.o
 obj-$(CONFIG_COMEDI_RTI802)		+= rti802.o
+=======
+obj-$(CONFIG_COMEDI_RTI800)		+= rti800.o
+obj-$(CONFIG_COMEDI_RTI802)		+= rti802.o
+obj-$(CONFIG_COMEDI_DAC02)		+= dac02.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_COMEDI_RTI800)		+= rti800.o
 obj-$(CONFIG_COMEDI_RTI802)		+= rti802.o
@@ -63,6 +79,10 @@ obj-$(CONFIG_COMEDI_FL512)		+= fl512.o
 obj-$(CONFIG_COMEDI_AIO_AIO12_8)	+= aio_aio12_8.o
 obj-$(CONFIG_COMEDI_AIO_IIRO_16)	+= aio_iiro_16.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_COMEDI_II_PCI20KC)		+= ii_pci20kc.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_COMEDI_II_PCI20KC)		+= ii_pci20kc.o
 >>>>>>> v3.18
@@ -74,6 +94,10 @@ obj-$(CONFIG_COMEDI_NI_AT_AO)		+= ni_at_ao.o
 obj-$(CONFIG_COMEDI_NI_ATMIO)		+= ni_atmio.o
 obj-$(CONFIG_COMEDI_NI_ATMIO16D)	+= ni_atmio16d.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_COMEDI_NI_LABPC_ISA)	+= ni_labpc.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_COMEDI_NI_LABPC_ISA)	+= ni_labpc.o
 >>>>>>> v3.18
@@ -83,7 +107,11 @@ obj-$(CONFIG_COMEDI_PCMMIO)		+= pcmmio.o
 obj-$(CONFIG_COMEDI_PCMUIO)		+= pcmuio.o
 obj-$(CONFIG_COMEDI_MULTIQ3)		+= multiq3.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_COMEDI_POC)		+= poc.o
+=======
+obj-$(CONFIG_COMEDI_S526)		+= s526.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_COMEDI_S526)		+= s526.o
 >>>>>>> v3.18
@@ -113,7 +141,11 @@ obj-$(CONFIG_COMEDI_ADV_PCI1724)	+= adv_pci1724.o
 obj-$(CONFIG_COMEDI_ADV_PCI_DIO)	+= adv_pci_dio.o
 obj-$(CONFIG_COMEDI_AMPLC_DIO200_PCI)	+= amplc_dio200_pci.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_COMEDI_AMPLC_PC236)	+= amplc_pc236.o
+=======
+obj-$(CONFIG_COMEDI_AMPLC_PC236_PCI)	+= amplc_pci236.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_COMEDI_AMPLC_PC236_PCI)	+= amplc_pci236.o
 >>>>>>> v3.18
@@ -128,7 +160,10 @@ obj-$(CONFIG_COMEDI_UNIOXX5)		+= unioxx5.o
 obj-$(CONFIG_COMEDI_GSC_HPDI)		+= gsc_hpdi.o
 obj-$(CONFIG_COMEDI_ICP_MULTI)		+= icp_multi.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_COMEDI_II_PCI20KC)		+= ii_pci20kc.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_COMEDI_DAQBOARD2000)	+= daqboard2000.o
@@ -150,9 +185,15 @@ obj-$(CONFIG_COMEDI_NI_PCIDIO)		+= ni_pcidio.o
 obj-$(CONFIG_COMEDI_NI_PCIMIO)		+= ni_pcimio.o
 obj-$(CONFIG_COMEDI_RTD520)		+= rtd520.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_COMEDI_S526)		+= s526.o
 obj-$(CONFIG_COMEDI_S626)		+= s626.o
 obj-$(CONFIG_COMEDI_SSV_DNP)		+= ssv_dnp.o
+=======
+obj-$(CONFIG_COMEDI_S626)		+= s626.o
+obj-$(CONFIG_COMEDI_SSV_DNP)		+= ssv_dnp.o
+obj-$(CONFIG_COMEDI_MF6X4)		+= mf6x4.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_COMEDI_S626)		+= s626.o
 obj-$(CONFIG_COMEDI_SSV_DNP)		+= ssv_dnp.o
@@ -171,6 +212,10 @@ obj-$(CONFIG_COMEDI_QUATECH_DAQP_CS)	+= quatech_daqp_cs.o
 # Comedi USB drivers
 obj-$(CONFIG_COMEDI_DT9812)		+= dt9812.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_COMEDI_NI_USB6501)		+= ni_usb6501.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_COMEDI_NI_USB6501)		+= ni_usb6501.o
 >>>>>>> v3.18
@@ -184,6 +229,7 @@ obj-$(CONFIG_COMEDI_MITE)		+= mite.o
 obj-$(CONFIG_COMEDI_NI_TIO)		+= ni_tio.o
 obj-$(CONFIG_COMEDI_NI_TIOCMD)		+= ni_tiocmd.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_COMEDI_NI_LABPC)		+= ni_labpc.o
 
 obj-$(CONFIG_COMEDI_8255)		+= 8255.o
@@ -191,6 +237,8 @@ obj-$(CONFIG_COMEDI_AMPLC_DIO200)	+= amplc_dio200_common.o
 obj-$(CONFIG_COMEDI_DAS08)		+= das08.o
 obj-$(CONFIG_COMEDI_FC)			+= comedi_fc.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_COMEDI_NI_LABPC)		+= ni_labpc_common.o
 obj-$(CONFIG_COMEDI_NI_LABPC_ISADMA)	+= ni_labpc_isadma.o
 
@@ -198,4 +246,7 @@ obj-$(CONFIG_COMEDI_8255)		+= 8255.o
 obj-$(CONFIG_COMEDI_AMPLC_DIO200)	+= amplc_dio200_common.o
 obj-$(CONFIG_COMEDI_AMPLC_PC236)	+= amplc_pc236_common.o
 obj-$(CONFIG_COMEDI_DAS08)		+= das08.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

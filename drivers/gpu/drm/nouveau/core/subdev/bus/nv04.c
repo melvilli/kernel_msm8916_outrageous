@@ -24,11 +24,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/bus.h>
 
 struct nv04_bus_priv {
 	struct nouveau_bus base;
 };
+=======
+#include "nv04.h"
+>>>>>>> v3.18
 =======
 #include "nv04.h"
 >>>>>>> v3.18
@@ -61,7 +65,10 @@ nv04_bus_intr(struct nouveau_subdev *subdev)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 nv04_bus_init(struct nouveau_object *object)
 {
 	struct nv04_bus_priv *priv = (void *)object;
@@ -73,12 +80,19 @@ nv04_bus_init(struct nouveau_object *object)
 }
 
 int
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nv04_bus_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	      struct nouveau_oclass *oclass, void *data, u32 size,
 	      struct nouveau_object **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nv04_bus_impl *impl = (void *)oclass;
+>>>>>>> v3.18
 =======
 	struct nv04_bus_impl *impl = (void *)oclass;
 >>>>>>> v3.18
@@ -90,6 +104,7 @@ nv04_bus_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	nv_subdev(priv)->intr = nv04_bus_intr;
 	return 0;
@@ -111,6 +126,8 @@ nv04_bus_oclass = {
 	.handle = NV_SUBDEV(BUS, 0x04),
 	.ofuncs = &(struct nouveau_ofuncs) {
 =======
+=======
+>>>>>>> v3.18
 	nv_subdev(priv)->intr = impl->intr;
 	priv->base.hwsq_exec = impl->hwsq_exec;
 	priv->base.hwsq_size = impl->hwsq_size;
@@ -121,6 +138,9 @@ struct nouveau_oclass *
 nv04_bus_oclass = &(struct nv04_bus_impl) {
 	.base.handle = NV_SUBDEV(BUS, 0x04),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ctor = nv04_bus_ctor,
 		.dtor = _nouveau_bus_dtor,
@@ -128,7 +148,12 @@ nv04_bus_oclass = &(struct nv04_bus_impl) {
 		.fini = _nouveau_bus_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.intr = nv04_bus_intr,
+}.base;
+>>>>>>> v3.18
 =======
 	.intr = nv04_bus_intr,
 }.base;

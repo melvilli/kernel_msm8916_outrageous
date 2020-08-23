@@ -6,7 +6,11 @@
  * Copyright (c) 2003        Margit Schubert-While <margitsw@t-online.de>
  * Copyright (c) 2004        Justin Thiessen <jthiessen@penguincomputing.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2007--2009  Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2007--2014  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2007--2014  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -44,7 +48,11 @@ static const unsigned short normal_i2c[] = { 0x2c, 0x2d, 0x2e, I2C_CLIENT_END };
 
 enum chips {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	any_chip, lm85b, lm85c,
+=======
+	lm85,
+>>>>>>> v3.18
 =======
 	lm85,
 >>>>>>> v3.18
@@ -84,9 +92,12 @@ enum chips {
 #define LM85_COMPANY_ANALOG_DEV		0x41
 #define LM85_COMPANY_SMSC		0x5c
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LM85_VERSTEP_VMASK              0xf0
 #define LM85_VERSTEP_GENERIC		0x60
 #define LM85_VERSTEP_GENERIC2		0x70
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define LM85_VERSTEP_LM85C		0x60
@@ -136,7 +147,10 @@ enum chips {
 #define EMC6D102_REG_EXTEND_ADC4	0x88
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -321,7 +335,12 @@ struct lm85_autofan {
  */
 struct lm85_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+	const struct attribute_group *groups[6];
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 	const struct attribute_group *groups[6];
@@ -356,6 +375,7 @@ struct lm85_data {
 	struct lm85_zone zone[3];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int lm85_detect(struct i2c_client *client, struct i2c_board_info *info);
 static int lm85_probe(struct i2c_client *client,
@@ -396,6 +416,8 @@ static struct i2c_driver lm85_driver = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 static int lm85_read_value(struct i2c_client *client, u8 reg)
 {
 	int res;
@@ -625,6 +647,9 @@ static struct lm85_data *lm85_update_device(struct device *dev)
 
 	return data;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* 4 Fans */
@@ -649,8 +674,13 @@ static ssize_t set_fan_min(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -778,8 +808,13 @@ static ssize_t set_pwm(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -825,8 +860,13 @@ static ssize_t set_pwm_enable(struct device *dev, struct device_attribute
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -888,8 +928,13 @@ static ssize_t set_pwm_freq(struct device *dev,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -960,8 +1005,13 @@ static ssize_t set_in_min(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -993,8 +1043,13 @@ static ssize_t set_in_max(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1054,8 +1109,13 @@ static ssize_t set_temp_min(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1090,8 +1150,13 @@ static ssize_t set_temp_max(struct device *dev, struct device_attribute *attr,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1141,8 +1206,13 @@ static ssize_t set_pwm_auto_channels(struct device *dev,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1176,8 +1246,13 @@ static ssize_t set_pwm_auto_pwm_min(struct device *dev,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1210,8 +1285,13 @@ static ssize_t set_pwm_auto_pwm_minctl(struct device *dev,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1266,8 +1346,13 @@ static ssize_t set_temp_auto_temp_off(struct device *dev,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1308,8 +1393,13 @@ static ssize_t set_temp_auto_temp_min(struct device *dev,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1352,8 +1442,13 @@ static ssize_t set_temp_auto_temp_max(struct device *dev,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1391,8 +1486,13 @@ static ssize_t set_temp_auto_temp_crit(struct device *dev,
 {
 	int nr = to_sensor_dev_attr(attr)->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct lm85_data *data = i2c_get_clientdata(client);
+=======
+	struct lm85_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct lm85_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -1611,7 +1711,11 @@ static int lm85_detect(struct i2c_client *client, struct i2c_board_info *info)
 	struct i2c_adapter *adapter = client->adapter;
 	int address = client->addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *type_name;
+=======
+	const char *type_name = NULL;
+>>>>>>> v3.18
 =======
 	const char *type_name = NULL;
 >>>>>>> v3.18
@@ -1631,6 +1735,7 @@ static int lm85_detect(struct i2c_client *client, struct i2c_board_info *info)
 		address, company, verstep);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* All supported chips have the version in common */
 	if ((verstep & LM85_VERSTEP_VMASK) != LM85_VERSTEP_GENERIC &&
 	    (verstep & LM85_VERSTEP_VMASK) != LM85_VERSTEP_GENERIC2) {
@@ -1641,6 +1746,8 @@ static int lm85_detect(struct i2c_client *client, struct i2c_board_info *info)
 	type_name = "lm85";
 
 	/* Now, refine the detection */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (company == LM85_COMPANY_NATIONAL) {
@@ -1660,6 +1767,10 @@ static int lm85_detect(struct i2c_client *client, struct i2c_board_info *info)
 				return -ENODEV;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			type_name = "lm85";
+>>>>>>> v3.18
 =======
 			type_name = "lm85";
 >>>>>>> v3.18
@@ -1698,6 +1809,7 @@ static int lm85_detect(struct i2c_client *client, struct i2c_board_info *info)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		dev_dbg(&adapter->dev,
 			"Autodetection failed: unknown vendor\n");
@@ -1705,17 +1817,23 @@ static int lm85_detect(struct i2c_client *client, struct i2c_board_info *info)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	if (!type_name)
 		return -ENODEV;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	strlcpy(info->type, type_name, I2C_NAME_SIZE);
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void lm85_remove_files(struct i2c_client *client, struct lm85_data *data)
 {
@@ -1742,6 +1860,8 @@ static int lm85_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, data);
 =======
+=======
+>>>>>>> v3.18
 static int lm85_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
 	struct device *dev = &client->dev;
@@ -1754,6 +1874,9 @@ static int lm85_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		return -ENOMEM;
 
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data->type = id->driver_data;
 	mutex_init(&data->update_lock);
@@ -1780,6 +1903,7 @@ static int lm85_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	lm85_init_client(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Register sysfs hooks */
 	err = sysfs_create_group(&client->dev.kobj, &lm85_group);
 	if (err)
@@ -1795,6 +1919,8 @@ static int lm85_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		if (err)
 			goto err_remove_files;
 =======
+=======
+>>>>>>> v3.18
 	/* sysfs hooks */
 	data->groups[idx++] = &lm85_group;
 
@@ -1802,6 +1928,9 @@ static int lm85_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	if (data->type != emc6d103s) {
 		data->groups[idx++] = &lm85_group_minctl;
 		data->groups[idx++] = &lm85_group_temp_off;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1815,6 +1944,7 @@ static int lm85_probe(struct i2c_client *client, const struct i2c_device_id *id)
 			data->has_vid5 = true;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!data->has_vid5) {
 		err = sysfs_create_group(&client->dev.kobj, &lm85_group_in4);
@@ -2082,6 +2212,8 @@ static struct lm85_data *lm85_update_device(struct device *dev)
 	return data;
 }
 =======
+=======
+>>>>>>> v3.18
 	if (!data->has_vid5)
 		data->groups[idx++] = &lm85_group_in4;
 
@@ -2120,6 +2252,9 @@ static struct i2c_driver lm85_driver = {
 	.detect		= lm85_detect,
 	.address_list	= normal_i2c,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 module_i2c_driver(lm85_driver);

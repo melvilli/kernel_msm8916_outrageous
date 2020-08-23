@@ -261,6 +261,7 @@ static struct pci_driver hopper_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hopper_init(void)
 {
 	return pci_register_driver(&hopper_pci_driver);
@@ -273,6 +274,9 @@ static void hopper_exit(void)
 
 module_init(hopper_init);
 module_exit(hopper_exit);
+=======
+module_pci_driver(hopper_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(hopper_pci_driver);
 >>>>>>> v3.18

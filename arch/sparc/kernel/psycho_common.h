@@ -31,6 +31,7 @@ enum psycho_error_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void psycho_check_iommu_error(struct pci_pbm_info *pbm,
 				     unsigned long afsr,
 				     unsigned long afar,
@@ -46,6 +47,8 @@ extern void psycho_pbm_init_common(struct pci_pbm_info *pbm,
 				   struct platform_device *op,
 				   const char *chip_name, int chip_type);
 =======
+=======
+>>>>>>> v3.18
 void psycho_check_iommu_error(struct pci_pbm_info *pbm,
 			      unsigned long afsr,
 			      unsigned long afar,
@@ -60,6 +63,9 @@ int psycho_iommu_init(struct pci_pbm_info *pbm, int tsbsize,
 void psycho_pbm_init_common(struct pci_pbm_info *pbm,
 			    struct platform_device *op,
 			    const char *chip_name, int chip_type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _PSYCHO_COMMON_H */

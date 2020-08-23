@@ -3,6 +3,10 @@
 
 #ifdef CONFIG_PPC64
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if !defined(_CALL_ELF) || _CALL_ELF != 2
+>>>>>>> v3.18
 =======
 #if !defined(_CALL_ELF) || _CALL_ELF != 2
 >>>>>>> v3.18
@@ -14,6 +18,10 @@
 	     "\t.globl ." #alias "\n\t.set ." #alias ", ." #name)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

@@ -72,7 +72,11 @@ static int __init init_ras_IRQ(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 subsys_initcall(init_ras_IRQ);
+=======
+machine_subsys_initcall(pseries, init_ras_IRQ);
+>>>>>>> v3.18
 =======
 machine_subsys_initcall(pseries, init_ras_IRQ);
 >>>>>>> v3.18
@@ -88,7 +92,11 @@ static void handle_system_shutdown(char event_modifier)
 	case EPOW_SHUTDOWN_NORMAL:
 		pr_emerg("Firmware initiated power off");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		orderly_poweroff(1);
+=======
+		orderly_poweroff(true);
+>>>>>>> v3.18
 =======
 		orderly_poweroff(true);
 >>>>>>> v3.18
@@ -104,7 +112,11 @@ static void handle_system_shutdown(char event_modifier)
 			"firmware");
 		pr_emerg("Check RTAS error log for details");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		orderly_poweroff(1);
+=======
+		orderly_poweroff(true);
+>>>>>>> v3.18
 =======
 		orderly_poweroff(true);
 >>>>>>> v3.18
@@ -114,7 +126,11 @@ static void handle_system_shutdown(char event_modifier)
 		pr_emerg("Ambient temperature too high reported by firmware");
 		pr_emerg("Check RTAS error log for details");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		orderly_poweroff(1);
+=======
+		orderly_poweroff(true);
+>>>>>>> v3.18
 =======
 		orderly_poweroff(true);
 >>>>>>> v3.18
@@ -143,7 +159,11 @@ struct epow_errorlog {
 #define EPOW_POWER_OFF			7
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtas_parse_epow_errlog(struct rtas_error_log *log)
+=======
+static void rtas_parse_epow_errlog(struct rtas_error_log *log)
+>>>>>>> v3.18
 =======
 static void rtas_parse_epow_errlog(struct rtas_error_log *log)
 >>>>>>> v3.18
@@ -183,7 +203,11 @@ static void rtas_parse_epow_errlog(struct rtas_error_log *log)
 	case EPOW_SYSTEM_HALT:
 		pr_emerg("Firmware initiated power off");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		orderly_poweroff(1);
+=======
+		orderly_poweroff(true);
+>>>>>>> v3.18
 =======
 		orderly_poweroff(true);
 >>>>>>> v3.18
@@ -212,8 +236,12 @@ static irqreturn_t ras_epow_interrupt(int irq, void *dev_id)
 	int critical;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = rtas_get_sensor_fast(EPOW_SENSOR_TOKEN, EPOW_SENSOR_INDEX,
 				      &state);
+=======
+	status = rtas_get_sensor(EPOW_SENSOR_TOKEN, EPOW_SENSOR_INDEX, &state);
+>>>>>>> v3.18
 =======
 	status = rtas_get_sensor(EPOW_SENSOR_TOKEN, EPOW_SENSOR_INDEX, &state);
 >>>>>>> v3.18
@@ -266,7 +294,12 @@ static irqreturn_t ras_error_interrupt(int irq, void *dev_id)
 	rtas_elog = (struct rtas_error_log *)ras_log_buf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((status == 0) && (rtas_elog->severity >= RTAS_SEVERITY_ERROR_SYNC))
+=======
+	if (status == 0 &&
+	    rtas_error_severity(rtas_elog) >= RTAS_SEVERITY_ERROR_SYNC)
+>>>>>>> v3.18
 =======
 	if (status == 0 &&
 	    rtas_error_severity(rtas_elog) >= RTAS_SEVERITY_ERROR_SYNC)
@@ -322,6 +355,12 @@ static struct rtas_error_log *fwnmi_get_errinfo(struct pt_regs *regs)
 	struct rtas_error_log *h, *errhdr = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Mask top two bits */
+	regs->gpr[3] &= ~(0x3UL << 62);
+
+>>>>>>> v3.18
 =======
 	/* Mask top two bits */
 	regs->gpr[3] &= ~(0x3UL << 62);
@@ -338,6 +377,7 @@ static struct rtas_error_log *fwnmi_get_errinfo(struct pt_regs *regs)
 	/* If it isn't an extended log we can use the per cpu 64bit buffer */
 	h = (struct rtas_error_log *)&savep[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!h->extended) {
 		memcpy(&__get_cpu_var(mce_data_buf), h, sizeof(__u64));
 		errhdr = (struct rtas_error_log *)&__get_cpu_var(mce_data_buf);
@@ -346,6 +386,8 @@ static struct rtas_error_log *fwnmi_get_errinfo(struct pt_regs *regs)
 
 		len = max_t(int, 8+h->extended_log_length, RTAS_ERROR_LOG_MAX);
 =======
+=======
+>>>>>>> v3.18
 	if (!rtas_error_extended(h)) {
 		memcpy(&__get_cpu_var(mce_data_buf), h, sizeof(__u64));
 		errhdr = (struct rtas_error_log *)&__get_cpu_var(mce_data_buf);
@@ -354,6 +396,9 @@ static struct rtas_error_log *fwnmi_get_errinfo(struct pt_regs *regs)
 
 		error_log_length = 8 + rtas_error_extended_log_length(h);
 		len = max_t(int, error_log_length, RTAS_ERROR_LOG_MAX);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		memset(global_mce_data_buf, 0, RTAS_ERROR_LOG_MAX);
 		memcpy(global_mce_data_buf, h, len);
@@ -399,6 +444,10 @@ static int recover_mce(struct pt_regs *regs, struct rtas_error_log *err)
 {
 	int recovered = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int disposition = rtas_error_disposition(err);
+>>>>>>> v3.18
 =======
 	int disposition = rtas_error_disposition(err);
 >>>>>>> v3.18
@@ -408,17 +457,23 @@ static int recover_mce(struct pt_regs *regs, struct rtas_error_log *err)
 		recovered = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (err->disposition == RTAS_DISP_FULLY_RECOVERED) {
 		/* Platform corrected itself */
 		recovered = 1;
 
 	} else if (err->disposition == RTAS_DISP_LIMITED_RECOVERY) {
 =======
+=======
+>>>>>>> v3.18
 	} else if (disposition == RTAS_DISP_FULLY_RECOVERED) {
 		/* Platform corrected itself */
 		recovered = 1;
 
 	} else if (disposition == RTAS_DISP_LIMITED_RECOVERY) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Platform corrected itself but could be degraded */
 		printk(KERN_ERR "MCE: limited recovery, system may "
@@ -427,7 +482,11 @@ static int recover_mce(struct pt_regs *regs, struct rtas_error_log *err)
 
 	} else if (user_mode(regs) && !is_global_init(current) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   err->severity == RTAS_SEVERITY_ERROR_SYNC) {
+=======
+		   rtas_error_severity(err) == RTAS_SEVERITY_ERROR_SYNC) {
+>>>>>>> v3.18
 =======
 		   rtas_error_severity(err) == RTAS_SEVERITY_ERROR_SYNC) {
 >>>>>>> v3.18

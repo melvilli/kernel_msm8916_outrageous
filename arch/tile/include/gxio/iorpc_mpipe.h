@@ -45,11 +45,14 @@
 #define GXIO_MPIPE_OP_LINK_OPEN_AUX    IORPC_OPCODE(IORPC_FORMAT_NONE, 0x1211)
 #define GXIO_MPIPE_OP_LINK_CLOSE_AUX   IORPC_OPCODE(IORPC_FORMAT_NONE, 0x1212)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define GXIO_MPIPE_OP_GET_TIMESTAMP_AUX IORPC_OPCODE(IORPC_FORMAT_NONE_NOUSER, 0x121e)
 #define GXIO_MPIPE_OP_SET_TIMESTAMP_AUX IORPC_OPCODE(IORPC_FORMAT_NONE_NOUSER, 0x121f)
 #define GXIO_MPIPE_OP_ADJUST_TIMESTAMP_AUX IORPC_OPCODE(IORPC_FORMAT_NONE_NOUSER, 0x1220)
 =======
+=======
+>>>>>>> v3.18
 #define GXIO_MPIPE_OP_LINK_SET_ATTR_AUX IORPC_OPCODE(IORPC_FORMAT_NONE, 0x1213)
 
 #define GXIO_MPIPE_OP_GET_TIMESTAMP_AUX IORPC_OPCODE(IORPC_FORMAT_NONE, 0x121e)
@@ -57,6 +60,9 @@
 #define GXIO_MPIPE_OP_ADJUST_TIMESTAMP_AUX IORPC_OPCODE(IORPC_FORMAT_NONE, 0x1220)
 #define GXIO_MPIPE_OP_CONFIG_EDMA_RING_BLKS IORPC_OPCODE(IORPC_FORMAT_NONE, 0x1221)
 #define GXIO_MPIPE_OP_ADJUST_TIMESTAMP_FREQ IORPC_OPCODE(IORPC_FORMAT_NONE, 0x1222)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define GXIO_MPIPE_OP_ARM_POLLFD       IORPC_OPCODE(IORPC_FORMAT_KERNEL_POLLFD, 0x9000)
 #define GXIO_MPIPE_OP_CLOSE_POLLFD     IORPC_OPCODE(IORPC_FORMAT_KERNEL_POLLFD, 0x9001)
@@ -64,23 +70,30 @@
 #define GXIO_MPIPE_OP_CHECK_MMIO_OFFSET IORPC_OPCODE(IORPC_FORMAT_NONE_NOUSER, 0x8001)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_mpipe_alloc_buffer_stacks(gxio_mpipe_context_t * context,
 				   unsigned int count, unsigned int first,
 				   unsigned int flags);
 
 int gxio_mpipe_init_buffer_stack_aux(gxio_mpipe_context_t * context,
 =======
+=======
+>>>>>>> v3.18
 int gxio_mpipe_alloc_buffer_stacks(gxio_mpipe_context_t *context,
 				   unsigned int count, unsigned int first,
 				   unsigned int flags);
 
 int gxio_mpipe_init_buffer_stack_aux(gxio_mpipe_context_t *context,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				     void *mem_va, size_t mem_size,
 				     unsigned int mem_flags, unsigned int stack,
 				     unsigned int buffer_size_enum);
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int gxio_mpipe_alloc_notif_rings(gxio_mpipe_context_t * context,
 				 unsigned int count, unsigned int first,
@@ -92,6 +105,8 @@ int gxio_mpipe_init_notif_ring_aux(gxio_mpipe_context_t * context, void *mem_va,
 
 int gxio_mpipe_request_notif_ring_interrupt(gxio_mpipe_context_t * context,
 =======
+=======
+>>>>>>> v3.18
 int gxio_mpipe_alloc_notif_rings(gxio_mpipe_context_t *context,
 				 unsigned int count, unsigned int first,
 				 unsigned int flags);
@@ -101,11 +116,15 @@ int gxio_mpipe_init_notif_ring_aux(gxio_mpipe_context_t *context, void *mem_va,
 				   unsigned int ring);
 
 int gxio_mpipe_request_notif_ring_interrupt(gxio_mpipe_context_t *context,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					    int inter_x, int inter_y,
 					    int inter_ipi, int inter_event,
 					    unsigned int ring);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int gxio_mpipe_enable_notif_ring_interrupt(gxio_mpipe_context_t * context,
 					   unsigned int ring);
@@ -130,6 +149,8 @@ int gxio_mpipe_alloc_edma_rings(gxio_mpipe_context_t * context,
 
 int gxio_mpipe_init_edma_ring_aux(gxio_mpipe_context_t * context, void *mem_va,
 =======
+=======
+>>>>>>> v3.18
 int gxio_mpipe_enable_notif_ring_interrupt(gxio_mpipe_context_t *context,
 					   unsigned int ring);
 
@@ -152,11 +173,15 @@ int gxio_mpipe_alloc_edma_rings(gxio_mpipe_context_t *context,
 				unsigned int flags);
 
 int gxio_mpipe_init_edma_ring_aux(gxio_mpipe_context_t *context, void *mem_va,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				  size_t mem_size, unsigned int mem_flags,
 				  unsigned int ring, unsigned int channel);
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int gxio_mpipe_commit_rules(gxio_mpipe_context_t * context, const void *blob,
 			    size_t blob_size);
@@ -188,6 +213,8 @@ int gxio_mpipe_get_mmio_base(gxio_mpipe_context_t * context, HV_PTE *base);
 
 int gxio_mpipe_check_mmio_offset(gxio_mpipe_context_t * context,
 =======
+=======
+>>>>>>> v3.18
 int gxio_mpipe_commit_rules(gxio_mpipe_context_t *context, const void *blob,
 			    size_t blob_size);
 
@@ -222,6 +249,9 @@ int gxio_mpipe_close_pollfd(gxio_mpipe_context_t *context, int pollfd_cookie);
 int gxio_mpipe_get_mmio_base(gxio_mpipe_context_t *context, HV_PTE *base);
 
 int gxio_mpipe_check_mmio_offset(gxio_mpipe_context_t *context,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 unsigned long offset, unsigned long size);
 

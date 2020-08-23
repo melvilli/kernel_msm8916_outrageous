@@ -17,6 +17,11 @@ obj-$(CONFIG_IA32_EMULATION) += ia32/
 obj-y += platform/
 obj-y += net/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+obj-$(CONFIG_KEXEC_FILE) += purgatory/
+>>>>>>> v3.18
 =======
 
 obj-$(CONFIG_KEXEC_FILE) += purgatory/

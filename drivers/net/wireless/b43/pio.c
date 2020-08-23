@@ -638,7 +638,11 @@ static bool pio_rx_frame(struct b43_pio_rxqueue *q)
 		ctl = b43_piorx_read32(q, B43_PIO8_RXCTL);
 		if (!(ctl & B43_PIO8_RXCTL_FRAMERDY))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;
+=======
+			return false;
+>>>>>>> v3.18
 =======
 			return false;
 >>>>>>> v3.18
@@ -656,7 +660,11 @@ static bool pio_rx_frame(struct b43_pio_rxqueue *q)
 		ctl = b43_piorx_read16(q, B43_PIO_RXCTL);
 		if (!(ctl & B43_PIO_RXCTL_FRAMERDY))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 0;
+=======
+			return false;
+>>>>>>> v3.18
 =======
 			return false;
 >>>>>>> v3.18
@@ -671,7 +679,11 @@ static bool pio_rx_frame(struct b43_pio_rxqueue *q)
 	}
 	b43dbg(q->dev->wl, "PIO RX timed out\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
+=======
+	return true;
+>>>>>>> v3.18
 =======
 	return true;
 >>>>>>> v3.18
@@ -772,7 +784,11 @@ data_ready:
 	b43_rx(q->dev, skb, rxhdr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
+=======
+	return true;
+>>>>>>> v3.18
 =======
 	return true;
 >>>>>>> v3.18
@@ -786,7 +802,11 @@ rx_error:
 		b43_piorx_write16(q, B43_PIO_RXCTL, B43_PIO_RXCTL_DATARDY);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 1;
+=======
+	return true;
+>>>>>>> v3.18
 =======
 	return true;
 >>>>>>> v3.18

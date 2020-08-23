@@ -11,8 +11,12 @@
 #include <linux/linkage.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	__INIT
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -24,6 +28,10 @@
  */
 ENTRY(versatile_secondary_startup)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ ARM_BE8(setend	be)
+>>>>>>> v3.18
 =======
  ARM_BE8(setend	be)
 >>>>>>> v3.18

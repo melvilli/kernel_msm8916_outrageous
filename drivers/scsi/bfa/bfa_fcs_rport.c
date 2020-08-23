@@ -190,8 +190,13 @@ bfa_fcs_rport_sm_uninit(struct bfa_fcs_rport_s *rport, enum rport_event event)
 
 	case RPSM_EVENT_PLOGI_RCVD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bfa_sm_set_state(rport, bfa_fcs_rport_sm_fc4_fcs_online);
 		bfa_fcs_rport_fcs_online_action(rport);
+=======
+		bfa_sm_set_state(rport, bfa_fcs_rport_sm_plogiacc_sending);
+		bfa_fcs_rport_send_plogiacc(rport, NULL);
+>>>>>>> v3.18
 =======
 		bfa_sm_set_state(rport, bfa_fcs_rport_sm_plogiacc_sending);
 		bfa_fcs_rport_send_plogiacc(rport, NULL);
@@ -2583,7 +2588,11 @@ bfa_fcs_rport_update(struct bfa_fcs_rport_s *rport, struct fc_logi_s *plogi)
 		port->fabric->bb_credit = be16_to_cpu(plogi->csp.bbcred);
 		bfa_fcport_set_tx_bbcredit(port->fcs->bfa,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  port->fabric->bb_credit, 0);
+=======
+					  port->fabric->bb_credit);
+>>>>>>> v3.18
 =======
 					  port->fabric->bb_credit);
 >>>>>>> v3.18
@@ -3440,14 +3449,20 @@ bfa_fcs_rpf_rpsc2_response(void *fcsarg, struct bfa_fcxp_s *fcxp, void *cbarg,
 		bfa_trc(rport->fcs, num_ents);
 		if (num_ents > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			WARN_ON(rpsc2_acc->port_info[0].pid == rport->pid);
 			bfa_trc(rport->fcs,
 				be16_to_cpu(rpsc2_acc->port_info[0].pid));
 =======
+=======
+>>>>>>> v3.18
 			WARN_ON(be32_to_cpu(rpsc2_acc->port_info[0].pid) !=
 						bfa_ntoh3b(rport->pid));
 			bfa_trc(rport->fcs,
 				be32_to_cpu(rpsc2_acc->port_info[0].pid));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			bfa_trc(rport->fcs,
 				be16_to_cpu(rpsc2_acc->port_info[0].speed));

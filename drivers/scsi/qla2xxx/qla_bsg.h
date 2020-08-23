@@ -1,7 +1,11 @@
 /*
  * QLogic Fibre Channel HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2013 QLogic Corporation
+=======
+ * Copyright (c)  2003-2014 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2014 QLogic Corporation
 >>>>>>> v3.18
@@ -28,6 +32,11 @@
 #define QL_VND_READ_I2C		0x11
 #define QL_VND_FX00_MGMT_CMD	0x12
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QL_VND_SERDES_OP	0x13
+#define	QL_VND_SERDES_OP_EX	0x14
+>>>>>>> v3.18
 =======
 #define QL_VND_SERDES_OP	0x13
 #define	QL_VND_SERDES_OP_EX	0x14
@@ -222,7 +231,10 @@ struct qla_i2c_access {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* 26xx serdes register interface */
 
 /* serdes reg commands */
@@ -241,5 +253,8 @@ struct qla_serdes_reg_ex {
 	uint32_t val;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

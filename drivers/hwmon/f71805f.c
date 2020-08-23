@@ -2,7 +2,11 @@
  * f71805f.c - driver for the Fintek F71805F/FG and F71872F/FG Super-I/O
  *             chips integrated hardware monitoring features
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2005-2006  Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2005-2006  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2005-2006  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -1380,7 +1384,11 @@ static void f71805f_init_device(struct f71805f_data *data)
 static int f71805f_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct f71805f_sio_data *sio_data = pdev->dev.platform_data;
+=======
+	struct f71805f_sio_data *sio_data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct f71805f_sio_data *sio_data = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1396,10 +1404,15 @@ static int f71805f_probe(struct platform_device *pdev)
 	data = devm_kzalloc(&pdev->dev, sizeof(struct f71805f_data),
 			    GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!data) {
 		pr_err("Out of memory\n");
 		return -ENOMEM;
 	}
+=======
+	if (!data)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	if (!data)
 		return -ENOMEM;
@@ -1662,7 +1675,11 @@ static void __exit f71805f_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Jean Delvare <khali@linux-fr>");
+=======
+MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
 >>>>>>> v3.18

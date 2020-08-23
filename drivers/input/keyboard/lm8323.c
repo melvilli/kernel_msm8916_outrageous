@@ -559,13 +559,19 @@ static ssize_t lm8323_pwm_store_time(struct device *dev,
 static DEVICE_ATTR(time, 0644, lm8323_pwm_show_time, lm8323_pwm_store_time);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *lm8323_pwm_attrs[] = {
 	&dev_attr_time.attr,
 	NULL
 };
 ATTRIBUTE_GROUPS(lm8323_pwm);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int init_pwm(struct lm8323_chip *lm, int id, struct device *dev,
 		    const char *name)
@@ -590,6 +596,10 @@ static int init_pwm(struct lm8323_chip *lm, int id, struct device *dev,
 		pwm->cdev.name = name;
 		pwm->cdev.brightness_set = lm8323_pwm_set_brightness;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		pwm->cdev.groups = lm8323_pwm_groups;
+>>>>>>> v3.18
 =======
 		pwm->cdev.groups = lm8323_pwm_groups;
 >>>>>>> v3.18
@@ -598,12 +608,15 @@ static int init_pwm(struct lm8323_chip *lm, int id, struct device *dev,
 			return -1;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (device_create_file(pwm->cdev.dev,
 					&dev_attr_time) < 0) {
 			dev_err(dev, "couldn't register time attribute\n");
 			led_classdev_unregister(&pwm->cdev);
 			return -1;
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		pwm->enabled = true;
@@ -644,7 +657,11 @@ static int lm8323_probe(struct i2c_client *client,
 				  const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lm8323_platform_data *pdata = client->dev.platform_data;
+=======
+	struct lm8323_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct lm8323_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -774,11 +791,16 @@ fail3:
 fail2:
 	while (--pwm >= 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (lm->pwm[pwm].enabled) {
 			device_remove_file(lm->pwm[pwm].cdev.dev,
 					   &dev_attr_time);
 			led_classdev_unregister(&lm->pwm[pwm].cdev);
 		}
+=======
+		if (lm->pwm[pwm].enabled)
+			led_classdev_unregister(&lm->pwm[pwm].cdev);
+>>>>>>> v3.18
 =======
 		if (lm->pwm[pwm].enabled)
 			led_classdev_unregister(&lm->pwm[pwm].cdev);
@@ -803,10 +825,15 @@ static int lm8323_remove(struct i2c_client *client)
 
 	for (i = 0; i < 3; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (lm->pwm[i].enabled) {
 			device_remove_file(lm->pwm[i].cdev.dev, &dev_attr_time);
 			led_classdev_unregister(&lm->pwm[i].cdev);
 		}
+=======
+		if (lm->pwm[i].enabled)
+			led_classdev_unregister(&lm->pwm[i].cdev);
+>>>>>>> v3.18
 =======
 		if (lm->pwm[i].enabled)
 			led_classdev_unregister(&lm->pwm[i].cdev);

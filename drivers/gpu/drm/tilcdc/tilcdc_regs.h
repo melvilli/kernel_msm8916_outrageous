@@ -81,6 +81,10 @@
 #define LCDC_INVERT_HSYNC                        BIT(21)
 #define LCDC_INVERT_VSYNC                        BIT(20)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define LCDC_LPP_B10                             BIT(26)
+>>>>>>> v3.18
 =======
 #define LCDC_LPP_B10                             BIT(26)
 >>>>>>> v3.18

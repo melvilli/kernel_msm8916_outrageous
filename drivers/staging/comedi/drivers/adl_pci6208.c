@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/adl_pci6208.c
 
     Hardware driver for ADLink 6208 series cards:
@@ -44,6 +45,8 @@ References:
 */
 
 =======
+=======
+>>>>>>> v3.18
  * adl_pci6208.c
  * Comedi driver for ADLink 6208 series cards
  *
@@ -75,6 +78,9 @@ References:
 
 #include <linux/module.h>
 #include <linux/delay.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/pci.h>
 
@@ -93,8 +99,11 @@ References:
 #define PCI6208_DIO_DI_SHIFT		(4)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI6208_MAX_AO_CHANNELS		16
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum pci6208_boardid {
@@ -118,6 +127,7 @@ static const struct pci6208_board pci6208_boards[] = {
 	},
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct pci6208_private {
 	unsigned int ao_readback[PCI6208_MAX_AO_CHANNELS];
@@ -159,6 +169,8 @@ static int pci6208_ao_rinsn(struct comedi_device *dev,
 	for (i = 0; i < insn->n; i++)
 		data[i] = devpriv->ao_readback[chan];
 =======
+=======
+>>>>>>> v3.18
 static int pci6208_ao_eoc(struct comedi_device *dev,
 			  struct comedi_subdevice *s,
 			  struct comedi_insn *insn,
@@ -196,6 +208,9 @@ static int pci6208_ao_insn_write(struct comedi_device *dev,
 
 		s->readback[chan] = val;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
@@ -222,6 +237,7 @@ static int pci6208_do_insn_bits(struct comedi_device *dev,
 				unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int mask = data[0];
 	unsigned int bits = data[1];
 
@@ -231,6 +247,10 @@ static int pci6208_do_insn_bits(struct comedi_device *dev,
 
 		outw(s->state, dev->iobase + PCI6208_DIO);
 	}
+=======
+	if (comedi_dio_update_state(s, data))
+		outw(s->state, dev->iobase + PCI6208_DIO);
+>>>>>>> v3.18
 =======
 	if (comedi_dio_update_state(s, data))
 		outw(s->state, dev->iobase + PCI6208_DIO);
@@ -247,7 +267,10 @@ static int pci6208_auto_attach(struct comedi_device *dev,
 	struct pci_dev *pcidev = comedi_to_pci_dev(dev);
 	const struct pci6208_board *boardinfo = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci6208_private *devpriv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct comedi_subdevice *s;
@@ -262,11 +285,14 @@ static int pci6208_auto_attach(struct comedi_device *dev,
 	dev->board_name = boardinfo->name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = comedi_pci_enable(dev);
@@ -286,15 +312,21 @@ static int pci6208_auto_attach(struct comedi_device *dev,
 	s->maxdata	= 0xffff;
 	s->range_table	= &range_bipolar10;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->insn_write	= pci6208_ao_winsn;
 	s->insn_read	= pci6208_ao_rinsn;
 =======
+=======
+>>>>>>> v3.18
 	s->insn_write	= pci6208_ao_insn_write;
 	s->insn_read	= comedi_readback_insn_read;
 
 	ret = comedi_alloc_subdev_readback(s);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s = &dev->subdevices[1];
@@ -323,10 +355,13 @@ static int pci6208_auto_attach(struct comedi_device *dev,
 	val = (val & PCI6208_DIO_DO_MASK) >> PCI6208_DIO_DO_SHIFT;
 	s->state	= val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->io_bits	= 0x0f;
 
 	dev_info(dev->class_dev, "%s: %s, I/O base=0x%04lx\n",
 		dev->driver->driver_name, dev->board_name, dev->iobase);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -338,7 +373,11 @@ static struct comedi_driver adl_pci6208_driver = {
 	.module		= THIS_MODULE,
 	.auto_attach	= pci6208_auto_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= comedi_pci_disable,
+=======
+	.detach		= comedi_pci_detach,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_pci_detach,
 >>>>>>> v3.18
@@ -352,7 +391,11 @@ static int adl_pci6208_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(adl_pci6208_pci_table) = {
+=======
+static const struct pci_device_id adl_pci6208_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id adl_pci6208_pci_table[] = {
 >>>>>>> v3.18
@@ -372,7 +415,11 @@ module_comedi_pci_driver(adl_pci6208_driver, adl_pci6208_pci_driver);
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("Comedi low-level driver");
+=======
+MODULE_DESCRIPTION("Comedi driver for ADLink 6208 series cards");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("Comedi driver for ADLink 6208 series cards");
 >>>>>>> v3.18

@@ -32,11 +32,14 @@ typedef int (snd_kcontrol_get_t) (struct snd_kcontrol * kcontrol, struct snd_ctl
 typedef int (snd_kcontrol_put_t) (struct snd_kcontrol * kcontrol, struct snd_ctl_elem_value * ucontrol);
 typedef int (snd_kcontrol_tlv_rw_t)(struct snd_kcontrol *kcontrol,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    int op_flag, /* 0=read,1=write,-1=command */
 				    unsigned int size,
 				    unsigned int __user *tlv);
 
 =======
+=======
+>>>>>>> v3.18
 				    int op_flag, /* SNDRV_CTL_TLV_OP_XXX */
 				    unsigned int size,
 				    unsigned int __user *tlv);
@@ -46,6 +49,9 @@ enum {
 	SNDRV_CTL_TLV_OP_WRITE = 1,
 	SNDRV_CTL_TLV_OP_CMD = -1,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct snd_kcontrol_new {
@@ -246,7 +252,12 @@ int snd_ctl_add_vmaster_hook(struct snd_kcontrol *kctl,
 			     void (*hook)(void *private_data, int),
 			     void *private_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_ctl_sync_vmaster_hook(struct snd_kcontrol *kctl);
+=======
+void snd_ctl_sync_vmaster(struct snd_kcontrol *kctl, bool hook_only);
+#define snd_ctl_sync_vmaster_hook(kctl)	snd_ctl_sync_vmaster(kctl, true)
+>>>>>>> v3.18
 =======
 void snd_ctl_sync_vmaster(struct snd_kcontrol *kctl, bool hook_only);
 #define snd_ctl_sync_vmaster_hook(kctl)	snd_ctl_sync_vmaster(kctl, true)

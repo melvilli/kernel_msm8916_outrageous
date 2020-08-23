@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -28,8 +31,12 @@
  * Larry Finger <Larry.Finger@lwfinger.net>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  ****************************************************************************
  */
+=======
+ *****************************************************************************/
+>>>>>>> v3.18
 =======
  *****************************************************************************/
 >>>>>>> v3.18
@@ -41,6 +48,7 @@
 #include "btc.h"
 #include "hal_bt_coexist.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define	BT_TXRX_CNT_THRES_1		1200
 #define	BT_TXRX_CNT_THRES_2		1400
@@ -58,6 +66,8 @@
 #define	TDMA_DAC_SWING_OFF	0
 #define	TDMA_DAC_SWING_ON	1
 =======
+=======
+>>>>>>> v3.18
 #define	BT_TXRX_CNT_THRES_1			1200
 #define	BT_TXRX_CNT_THRES_2			1400
 #define	BT_TXRX_CNT_THRES_3			3000
@@ -83,6 +93,9 @@
 #define	TDMA_NAV_ON			1
 #define	TDMA_DAC_SWING_OFF		0
 #define	TDMA_DAC_SWING_ON		1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* PTA mode related definition */
@@ -116,6 +129,10 @@ enum bt_traffic_mode_profile {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/*
+>>>>>>> v3.18
 =======
 /*
 >>>>>>> v3.18
@@ -133,6 +150,10 @@ enum hci_ext_bt_operation {
 	HCI_BT_OP_MAX,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+*/
+>>>>>>> v3.18
 =======
 */
 >>>>>>> v3.18
@@ -167,6 +188,7 @@ enum bt_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum rtl8723ae_c2h_evt {
 	C2H_DBG = 0,
 	C2H_TSF = 1,
@@ -174,12 +196,17 @@ enum rtl8723ae_c2h_evt {
 	C2H_CCX_TX_RPT = 3,	/* The FW notify the report of the specific */
 				/* tx packet. */
 =======
+=======
+>>>>>>> v3.18
 enum rtl8723e_c2h_evt {
 	C2H_DBG = 0,
 	C2H_TSF = 1,
 	C2H_AP_RPT_RSP = 2,
 	/* The FW notify the report of the specific tx packet. */
 	C2H_CCX_TX_RPT = 3,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	C2H_BT_RSSI = 4,
 	C2H_BT_OP_MODE = 5,
@@ -189,6 +216,7 @@ enum rtl8723e_c2h_evt {
 	MAX_C2HEVENT
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void rtl8723ae_dm_bt_fw_coex_all_off_8723a(struct ieee80211_hw *hw);
 void rtl8723ae_dm_bt_sw_coex_all_off_8723a(struct ieee80211_hw *hw);
@@ -201,6 +229,8 @@ void rtl_8723e_bt_wifi_media_status_notify(struct ieee80211_hw *hw,
 					   bool mstatus);
 void rtl8723ae_bt_coex_off_before_lps(struct ieee80211_hw *hw);
 =======
+=======
+>>>>>>> v3.18
 void rtl8723e_dm_bt_fw_coex_all_off_8723a(struct ieee80211_hw *hw);
 void rtl8723e_dm_bt_sw_coex_all_off_8723a(struct ieee80211_hw *hw);
 void rtl8723e_dm_bt_hw_coex_all_off_8723a(struct ieee80211_hw *hw);
@@ -212,6 +242,9 @@ void rtl_8723e_bt_wifi_media_status_notify(struct ieee80211_hw *hw,
 					bool mstatus);
 void rtl8723e_dm_bt_turn_off_bt_coexist_before_enter_lps(
 				struct ieee80211_hw *hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

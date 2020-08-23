@@ -99,7 +99,10 @@ static int omap_hwspinlock_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * make sure the module is enabled and clocked before reading
 	 * the module SYSSTATUS register
@@ -111,13 +114,19 @@ static int omap_hwspinlock_probe(struct platform_device *pdev)
 		goto iounmap_base;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Determine number of locks */
 	i = readl(io_base + SYSSTATUS_OFFSET);
 	i >>= SPINLOCK_NUMLOCKS_BIT_OFFSET;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * runtime PM will make sure the clock of this module is
 	 * enabled again iff at least one lock is requested
@@ -126,6 +135,9 @@ static int omap_hwspinlock_probe(struct platform_device *pdev)
 	if (ret < 0)
 		goto iounmap_base;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* one of the four lsb's must be set, and nothing else */
 	if (hweight_long(i & 0xf) != 1 || i > 8) {
@@ -147,12 +159,15 @@ static int omap_hwspinlock_probe(struct platform_device *pdev)
 		hwlock->priv = io_base + LOCK_BASE_OFFSET + sizeof(u32) * i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * runtime PM will make sure the clock of this module is
 	 * enabled iff at least one lock is requested
 	 */
 	pm_runtime_enable(&pdev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = hwspin_lock_register(bank, &pdev->dev, &omap_hwspinlock_ops,
@@ -164,9 +179,15 @@ static int omap_hwspinlock_probe(struct platform_device *pdev)
 
 reg_fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_runtime_disable(&pdev->dev);
 	kfree(bank);
 iounmap_base:
+=======
+	kfree(bank);
+iounmap_base:
+	pm_runtime_disable(&pdev->dev);
+>>>>>>> v3.18
 =======
 	kfree(bank);
 iounmap_base:

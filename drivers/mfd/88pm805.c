@@ -30,10 +30,15 @@
 #include <linux/delay.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PM805_CHIP_ID			(0x00)
 
 static const struct i2c_device_id pm80x_id_table[] = {
 	{"88PM805", CHIP_PM805},
+=======
+static const struct i2c_device_id pm80x_id_table[] = {
+	{"88PM805", 0},
+>>>>>>> v3.18
 =======
 static const struct i2c_device_id pm80x_id_table[] = {
 	{"88PM805", 0},
@@ -85,7 +90,11 @@ static struct resource codec_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell codec_devs[] = {
+=======
+static const struct mfd_cell codec_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell codec_devs[] = {
 >>>>>>> v3.18
@@ -148,7 +157,11 @@ static int device_irq_init_805(struct pm80x_chip *chip)
 {
 	struct regmap *map = chip->regmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags = IRQF_TRIGGER_FALLING | IRQF_ONESHOT;
+=======
+	unsigned long flags = IRQF_ONESHOT;
+>>>>>>> v3.18
 =======
 	unsigned long flags = IRQF_ONESHOT;
 >>>>>>> v3.18
@@ -174,7 +187,11 @@ static int device_irq_init_805(struct pm80x_chip *chip)
 	 * add proper delay before the next I2C register access.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msleep(1);
+=======
+	usleep_range(1000, 3000);
+>>>>>>> v3.18
 =======
 	usleep_range(1000, 3000);
 >>>>>>> v3.18
@@ -210,7 +227,10 @@ static int device_805_init(struct pm80x_chip *chip)
 {
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int val;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct regmap *map = chip->regmap;
@@ -221,6 +241,7 @@ static int device_805_init(struct pm80x_chip *chip)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = regmap_read(map, PM805_CHIP_ID, &val);
 	if (ret < 0) {
 		dev_err(chip->dev, "Failed to read CHIP ID: %d\n", ret);
@@ -228,6 +249,8 @@ static int device_805_init(struct pm80x_chip *chip)
 	}
 	chip->version = val;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	chip->regmap_irq_chip = &pm805_irq_chip;
@@ -261,9 +284,15 @@ static int pm805_probe(struct i2c_client *client,
 	int ret = 0;
 	struct pm80x_chip *chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pm80x_platform_data *pdata = client->dev.platform_data;
 
 	ret = pm80x_init(client, id);
+=======
+	struct pm80x_platform_data *pdata = dev_get_platdata(&client->dev);
+
+	ret = pm80x_init(client);
+>>>>>>> v3.18
 =======
 	struct pm80x_platform_data *pdata = dev_get_platdata(&client->dev);
 
@@ -279,17 +308,23 @@ static int pm805_probe(struct i2c_client *client,
 	ret = device_805_init(chip);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(chip->dev, "%s id 0x%x failed!\n", __func__, chip->id);
 		goto err_805_init;
 	}
 
 	if (pdata->plat_config)
 =======
+=======
+>>>>>>> v3.18
 		dev_err(chip->dev, "Failed to initialize 88pm805 devices\n");
 		goto err_805_init;
 	}
 
 	if (pdata && pdata->plat_config)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pdata->plat_config(chip, pdata);
 
@@ -314,7 +349,11 @@ static int pm805_remove(struct i2c_client *client)
 static struct i2c_driver pm805_driver = {
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name = "88PM80X",
+=======
+		.name = "88PM805",
+>>>>>>> v3.18
 =======
 		.name = "88PM805",
 >>>>>>> v3.18

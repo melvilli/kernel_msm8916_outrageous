@@ -21,6 +21,7 @@
 #include <hv/hypervisor.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ___hvb	MEM_SV_INTRPT + HV_GLUE_START_CPA
 
 #define ___hv_dispatch(f) (___hvb + (HV_DISPATCH_ENTRY_SIZE * f))
@@ -30,6 +31,8 @@
 #define ___hv_reexec       ___hv_dispatch(HV_DISPATCH_REEXEC)
 #define ___hv_flush_remote ___hv_dispatch(HV_DISPATCH_FLUSH_REMOTE)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #undef RELOCATE_NEW_KERNEL_VERBOSE
@@ -47,8 +50,13 @@ STD_ENTRY(relocate_new_kernel)
 	/* we now have a stack (whether we need one or not) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveli	r40, lo16(___hv_console_putc)
 	auli	r40, r40, ha16(___hv_console_putc)
+=======
+	moveli	r40, lo16(hv_console_putc)
+	auli	r40, r40, ha16(hv_console_putc)
+>>>>>>> v3.18
 =======
 	moveli	r40, lo16(hv_console_putc)
 	auli	r40, r40, ha16(hv_console_putc)
@@ -95,7 +103,10 @@ STD_ENTRY(relocate_new_kernel)
 	addi	sp, sp, -8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_CBOX_HOME_MAP()
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -126,6 +137,7 @@ STD_ENTRY(relocate_new_kernel)
 	{
 	 move	r8, zero	 /* asids */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 moveli	r20, lo16(___hv_flush_remote)
 	}
 	{
@@ -136,6 +148,8 @@ STD_ENTRY(relocate_new_kernel)
 	jalr	r20
 #endif
 =======
+=======
+>>>>>>> v3.18
 	 moveli	r20, lo16(hv_flush_remote)
 	}
 	{
@@ -144,6 +158,9 @@ STD_ENTRY(relocate_new_kernel)
 	}
 
 	jalr	r20
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* r33 is destination pointer, default to zero */
@@ -198,8 +215,13 @@ STD_ENTRY(relocate_new_kernel)
 	moveli	r1, 0		/* arg to hv_reexec is 64 bits */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveli	r41, lo16(___hv_reexec)
 	auli	r41, r41, ha16(___hv_reexec)
+=======
+	moveli	r41, lo16(hv_reexec)
+	auli	r41, r41, ha16(hv_reexec)
+>>>>>>> v3.18
 =======
 	moveli	r41, lo16(hv_reexec)
 	auli	r41, r41, ha16(hv_reexec)
@@ -295,8 +317,13 @@ STD_ENTRY(relocate_new_kernel)
 	jalr	r40
 .Lhalt:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveli	r41, lo16(___hv_halt)
 	auli	r41, r41, ha16(___hv_halt)
+=======
+	moveli	r41, lo16(hv_halt)
+	auli	r41, r41, ha16(hv_halt)
+>>>>>>> v3.18
 =======
 	moveli	r41, lo16(hv_halt)
 	auli	r41, r41, ha16(hv_halt)

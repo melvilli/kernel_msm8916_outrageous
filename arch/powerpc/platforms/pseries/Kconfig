@@ -20,8 +20,14 @@ config PPC_PSERIES
 	select PPC_DOORBELL
 	select HAVE_CONTEXT_TRACKING
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select HOTPLUG if SMP
 	select HOTPLUG_CPU if SMP
+=======
+	select HOTPLUG_CPU if SMP
+	select ARCH_RANDOM
+	select PPC_DOORBELL
+>>>>>>> v3.18
 =======
 	select HOTPLUG_CPU if SMP
 	select ARCH_RANDOM
@@ -40,6 +46,7 @@ config PPC_SPLPAR
 	  two or more partitions.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config EEH
 	bool
 	depends on PPC_PSERIES && PCI
@@ -48,6 +55,11 @@ config EEH
 config PSERIES_MSI
        bool
        depends on PCI_MSI && EEH
+=======
+config PSERIES_MSI
+       bool
+       depends on PCI_MSI && PPC_PSERIES && EEH
+>>>>>>> v3.18
 =======
 config PSERIES_MSI
        bool
@@ -129,7 +141,10 @@ config CMM
 	  balance memory across many LPARs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HV_PERF_CTRS
        bool "Hypervisor supplied PMU events (24x7 & GPCI)"
        default y
@@ -142,6 +157,9 @@ config HV_PERF_CTRS
 
           If unsure, select Y.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config DTL
 	bool "Dispatch Trace Log"
@@ -153,6 +171,7 @@ config DTL
 
 	  Say N if you are unsure.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 config PSERIES_IDLE
 	bool "Cpuidle driver for pSeries platforms"
@@ -162,5 +181,7 @@ config PSERIES_IDLE
 	help
 	  Select this option to enable processor idle state management
 	  through cpuidle subsystem.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

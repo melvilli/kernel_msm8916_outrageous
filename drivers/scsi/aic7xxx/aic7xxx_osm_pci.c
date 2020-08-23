@@ -226,10 +226,16 @@ ahc_linux_pci_dev_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		ahc_get_pci_slot(pci),
 		ahc_get_pci_function(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	name = kmalloc(strlen(buf) + 1, GFP_ATOMIC);
 	if (name == NULL)
 		return (-ENOMEM);
 	strcpy(name, buf);
+=======
+	name = kstrdup(buf, GFP_ATOMIC);
+	if (name == NULL)
+		return (-ENOMEM);
+>>>>>>> v3.18
 =======
 	name = kstrdup(buf, GFP_ATOMIC);
 	if (name == NULL)

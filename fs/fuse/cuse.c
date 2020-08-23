@@ -95,13 +95,19 @@ static ssize_t cuse_read(struct file *file, char __user *buf, size_t count,
 	struct iovec iov = { .iov_base = buf, .iov_len = count };
 	struct fuse_io_priv io = { .async = 0, .file = file };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return fuse_direct_io(&io, &iov, 1, count, &pos, FUSE_DIO_CUSE);
 =======
+=======
+>>>>>>> v3.18
 	struct iov_iter ii;
 	iov_iter_init(&ii, READ, &iov, 1, count);
 
 	return fuse_direct_io(&io, &ii, &pos, FUSE_DIO_CUSE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -112,6 +118,11 @@ static ssize_t cuse_write(struct file *file, const char __user *buf,
 	struct iovec iov = { .iov_base = (void __user *)buf, .iov_len = count };
 	struct fuse_io_priv io = { .async = 0, .file = file };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct iov_iter ii;
+	iov_iter_init(&ii, WRITE, &iov, 1, count);
+>>>>>>> v3.18
 =======
 	struct iov_iter ii;
 	iov_iter_init(&ii, WRITE, &iov, 1, count);
@@ -122,7 +133,11 @@ static ssize_t cuse_write(struct file *file, const char __user *buf,
 	 * responsible for locking and sanity checks.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return fuse_direct_io(&io, &iov, 1, count, &pos,
+=======
+	return fuse_direct_io(&io, &ii, &pos,
+>>>>>>> v3.18
 =======
 	return fuse_direct_io(&io, &ii, &pos,
 >>>>>>> v3.18
@@ -491,7 +506,11 @@ static void cuse_fc_release(struct fuse_conn *fc)
 {
 	struct cuse_conn *cc = fc_to_cc(fc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(cc);
+=======
+	kfree_rcu(cc, fc.rcu);
+>>>>>>> v3.18
 =======
 	kfree_rcu(cc, fc.rcu);
 >>>>>>> v3.18
@@ -590,6 +609,10 @@ static ssize_t cuse_class_waiting_show(struct device *dev,
 	return sprintf(buf, "%d\n", atomic_read(&cc->fc.num_waiting));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(waiting, 0400, cuse_class_waiting_show, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(waiting, 0400, cuse_class_waiting_show, NULL);
 >>>>>>> v3.18
@@ -604,6 +627,7 @@ static ssize_t cuse_class_abort_store(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute cuse_class_dev_attrs[] = {
 	__ATTR(waiting, S_IFREG | 0400, cuse_class_waiting_show, NULL),
@@ -614,6 +638,8 @@ static struct device_attribute cuse_class_dev_attrs[] = {
 static struct miscdevice cuse_miscdev = {
 	.minor		= MISC_DYNAMIC_MINOR,
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(abort, 0200, NULL, cuse_class_abort_store);
 
 static struct attribute *cuse_class_dev_attrs[] = {
@@ -625,12 +651,21 @@ ATTRIBUTE_GROUPS(cuse_class_dev);
 
 static struct miscdevice cuse_miscdev = {
 	.minor		= CUSE_MINOR,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.name		= "cuse",
 	.fops		= &cuse_channel_fops,
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS_MISCDEV(CUSE_MINOR);
+MODULE_ALIAS("devname:cuse");
+
+>>>>>>> v3.18
 =======
 MODULE_ALIAS_MISCDEV(CUSE_MINOR);
 MODULE_ALIAS("devname:cuse");
@@ -655,7 +690,11 @@ static int __init cuse_init(void)
 		return PTR_ERR(cuse_class);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cuse_class->dev_attrs = cuse_class_dev_attrs;
+=======
+	cuse_class->dev_groups = cuse_class_dev_groups;
+>>>>>>> v3.18
 =======
 	cuse_class->dev_groups = cuse_class_dev_groups;
 >>>>>>> v3.18

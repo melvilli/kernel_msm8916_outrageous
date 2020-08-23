@@ -301,6 +301,7 @@ const u32 evergreen_default_state[] =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const u32 evergreen_vs[] =
 {
 	0x00000004,
@@ -355,6 +356,8 @@ const u32 evergreen_ps[] =
 
 const u32 evergreen_ps_size = ARRAY_SIZE(evergreen_ps);
 const u32 evergreen_vs_size = ARRAY_SIZE(evergreen_vs);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 const u32 evergreen_default_size = ARRAY_SIZE(evergreen_default_state);

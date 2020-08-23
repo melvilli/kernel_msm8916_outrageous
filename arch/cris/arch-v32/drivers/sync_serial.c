@@ -20,6 +20,10 @@
 #include <linux/timer.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/wait.h>
+>>>>>>> v3.18
 =======
 #include <linux/wait.h>
 >>>>>>> v3.18
@@ -1093,7 +1097,10 @@ static ssize_t sync_serial_write(struct file *file, const char *buf,
 
 	schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	remove_wait_queue(&port->out_wait_q, &wait);
@@ -1152,7 +1159,12 @@ static ssize_t sync_serial_read(struct file * file, char * buf,
 			return -EAGAIN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interruptible_sleep_on(&port->in_wait_q);
+=======
+		wait_event_interruptible(port->in_wait_q,
+					 !(start == end && !port->full));
+>>>>>>> v3.18
 =======
 		wait_event_interruptible(port->in_wait_q,
 					 !(start == end && !port->full));

@@ -245,7 +245,11 @@ static DEVICE_ATTR(RSSI, S_IRUGO | S_IWUSR, uwb_dev_RSSI_show, uwb_dev_RSSI_stor
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *dev_attrs[] = {
+=======
+static struct attribute *uwb_dev_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *uwb_dev_attrs[] = {
 >>>>>>> v3.18
@@ -258,6 +262,7 @@ static struct attribute *uwb_dev_attrs[] = {
 	NULL,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct attribute_group dev_attr_group = {
 	.attrs = dev_attrs,
@@ -267,20 +272,28 @@ static const struct attribute_group *groups[] = {
 	&dev_attr_group,
 	NULL,
 =======
+=======
+>>>>>>> v3.18
 ATTRIBUTE_GROUPS(uwb_dev);
 
 /* UWB bus type. */
 struct bus_type uwb_bus_type = {
 	.name =		"uwb",
 	.dev_groups =	uwb_dev_groups,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 /**
  * Device SYSFS registration
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -290,10 +303,13 @@ static int __uwb_dev_sys_add(struct uwb_dev *uwb_dev, struct device *parent_dev)
 
 	dev = &uwb_dev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Device sysfs files are only useful for neighbor devices not
 	   local radio controllers. */
 	if (&uwb_dev->rc->uwb_dev != uwb_dev)
 		dev->groups = groups;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev->parent = parent_dev;
@@ -395,8 +411,13 @@ int __uwb_dev_offair(struct uwb_dev *uwb_dev, struct uwb_rc *rc)
 	dev_info(dev, "uwb device (mac %s dev %s) disconnected from %s %s\n",
 		 macbuf, devbuf,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 rc ? rc->uwb_dev.dev.parent->bus->name : "n/a",
 		 rc ? dev_name(rc->uwb_dev.dev.parent) : "");
+=======
+		 uwb_dev->dev.bus->name,
+		 rc ? dev_name(&(rc->uwb_dev.dev)) : "");
+>>>>>>> v3.18
 =======
 		 uwb_dev->dev.bus->name,
 		 rc ? dev_name(&(rc->uwb_dev.dev)) : "");
@@ -463,10 +484,13 @@ void uwbd_dev_onair(struct uwb_rc *rc, struct uwb_beca_e *bce)
 	}
 	uwb_dev_init(uwb_dev);		/* This sets refcnt to one, we own it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uwb_dev->mac_addr = *bce->mac_addr;
 	uwb_dev->dev_addr = bce->dev_addr;
 	dev_set_name(&uwb_dev->dev, macbuf);
 =======
+=======
+>>>>>>> v3.18
 	uwb_dev->dev.bus = &uwb_bus_type;
 	uwb_dev->mac_addr = *bce->mac_addr;
 	uwb_dev->dev_addr = bce->dev_addr;
@@ -477,6 +501,9 @@ void uwbd_dev_onair(struct uwb_rc *rc, struct uwb_beca_e *bce)
 	uwb_dev->bce = bce;
 	uwb_bce_get(bce);		/* released in uwb_dev_sys_release() */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	result = uwb_dev_add(uwb_dev, &rc->uwb_dev.dev, rc);
 	if (result < 0) {
@@ -484,6 +511,7 @@ void uwbd_dev_onair(struct uwb_rc *rc, struct uwb_beca_e *bce)
 			macbuf);
 		goto error_dev_add;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* plug the beacon cache */
 	bce->uwb_dev = uwb_dev;
@@ -493,16 +521,26 @@ void uwbd_dev_onair(struct uwb_rc *rc, struct uwb_beca_e *bce)
 		 macbuf, devbuf, rc->uwb_dev.dev.parent->bus->name,
 		 dev_name(rc->uwb_dev.dev.parent));
 =======
+=======
+>>>>>>> v3.18
 
 	dev_info(dev, "uwb device (mac %s dev %s) connected to %s %s\n",
 		 macbuf, devbuf, uwb_dev->dev.bus->name,
 		 dev_name(&(rc->uwb_dev.dev)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uwb_notify(rc, uwb_dev, UWB_NOTIF_ONAIR);
 	return;
 
 error_dev_add:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bce->uwb_dev = NULL;
+	uwb_bce_put(bce);
+>>>>>>> v3.18
 =======
 	bce->uwb_dev = NULL;
 	uwb_bce_put(bce);

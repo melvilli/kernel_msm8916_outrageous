@@ -1022,6 +1022,10 @@ load_guspatch(struct snd_sf_list *sflist, const char __user *data,
 		if (rc < 0) {
 			sf_sample_delete(sflist, sf, smp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			kfree(zone);
+>>>>>>> v3.18
 =======
 			kfree(zone);
 >>>>>>> v3.18

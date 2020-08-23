@@ -110,14 +110,20 @@ See <xref linkend="v4l2-tuner-type" /></entry>
 	    <entry><structfield>frequency</structfield></entry>
 	    <entry>Tuning frequency in units of 62.5 kHz, or if the
 <<<<<<< HEAD
+<<<<<<< HEAD
 &v4l2-tuner; or &v4l2-modulator; <structfield>capabilities</structfield> flag
 <constant>V4L2_TUNER_CAP_LOW</constant> is set, in units of 62.5
 Hz.</entry>
 =======
+=======
+>>>>>>> v3.18
 &v4l2-tuner; or &v4l2-modulator; <structfield>capability</structfield> flag
 <constant>V4L2_TUNER_CAP_LOW</constant> is set, in units of 62.5
 Hz. A 1 Hz unit is used when the <structfield>capability</structfield> flag
 <constant>V4L2_TUNER_CAP_1HZ</constant> is set.</entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  </row>
 	  <row>

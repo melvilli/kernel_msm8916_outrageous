@@ -25,20 +25,30 @@
 #include <linux/slab.h>
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <scsi/scsi.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 
 #include <scsi/scsi.h>
 #include <scsi/scsi_cmnd.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <scsi/scsi_device.h>
 #include <scsi/scsi_host.h>
 #include <scsi/scsi_transport.h>
 #include <scsi/scsi_transport_srp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "scsi_transport_srp_internal.h"
+=======
+#include "scsi_priv.h"
+>>>>>>> v3.18
 =======
 #include "scsi_priv.h"
 >>>>>>> v3.18
@@ -50,7 +60,11 @@ struct srp_host_attrs {
 
 #define SRP_HOST_ATTRS 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SRP_RPORT_ATTRS 3
+=======
+#define SRP_RPORT_ATTRS 8
+>>>>>>> v3.18
 =======
 #define SRP_RPORT_ATTRS 8
 >>>>>>> v3.18
@@ -70,7 +84,10 @@ struct srp_internal {
 #define	dev_to_rport(d)	container_of(d, struct srp_rport, dev)
 #define transport_class_to_srp_rport(dev) dev_to_rport((dev)->parent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct Scsi_Host *rport_to_shost(struct srp_rport *r)
 {
 	return dev_to_shost(r->dev.parent);
@@ -108,6 +125,9 @@ int srp_tmo_valid(int reconnect_delay, int fast_io_fail_tmo, int dev_loss_tmo)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(srp_tmo_valid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int srp_host_setup(struct transport_container *tc, struct device *dev,
@@ -190,7 +210,10 @@ static ssize_t store_srp_rport_delete(struct device *dev,
 static DEVICE_ATTR(delete, S_IWUSR, NULL, store_srp_rport_delete);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t show_srp_rport_state(struct device *dev,
 				    struct device_attribute *attr,
 				    char *buf)
@@ -642,6 +665,9 @@ static enum blk_eh_timer_return srp_timed_out(struct scsi_cmnd *scmd)
 		BLK_EH_RESET_TIMER : BLK_EH_NOT_HANDLED;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void srp_rport_release(struct device *dev)
 {
@@ -695,7 +721,10 @@ static int srp_host_match(struct attribute_container *cont, struct device *dev)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * srp_rport_get() - increment rport reference count
  * @rport: SRP target port.
  */
@@ -716,6 +745,9 @@ void srp_rport_put(struct srp_rport *rport)
 EXPORT_SYMBOL(srp_rport_put);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * srp_rport_add - add a SRP remote port to the device hierarchy
  * @shost:	scsi host the remote port is connected to.
@@ -729,6 +761,10 @@ struct srp_rport *srp_rport_add(struct Scsi_Host *shost,
 	struct srp_rport *rport;
 	struct device *parent = &shost->shost_gendev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct srp_internal *i = to_srp_internal(shost->transportt);
+>>>>>>> v3.18
 =======
 	struct srp_internal *i = to_srp_internal(shost->transportt);
 >>>>>>> v3.18
@@ -739,6 +775,11 @@ struct srp_rport *srp_rport_add(struct Scsi_Host *shost,
 		return ERR_PTR(-ENOMEM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&rport->mutex);
+
+>>>>>>> v3.18
 =======
 	mutex_init(&rport->mutex);
 
@@ -752,7 +793,10 @@ struct srp_rport *srp_rport_add(struct Scsi_Host *shost,
 	rport->roles = ids->roles;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (i->f->reconnect)
 		rport->reconnect_delay = i->f->reconnect_delay ?
 			*i->f->reconnect_delay : 10;
@@ -764,6 +808,9 @@ struct srp_rport *srp_rport_add(struct Scsi_Host *shost,
 			  rport_fast_io_fail_timedout);
 	INIT_DELAYED_WORK(&rport->dev_loss_work, rport_dev_loss_timedout);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	id = atomic_inc_return(&to_srp_host_attrs(shost)->next_port_id);
 	dev_set_name(&rport->dev, "port-%d:%d", shost->host_no, id);
@@ -778,6 +825,7 @@ struct srp_rport *srp_rport_add(struct Scsi_Host *shost,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (shost->active_mode & MODE_TARGET &&
 	    ids->roles == SRP_RPORT_ROLE_INITIATOR) {
 		ret = srp_tgt_it_nexus_create(shost, (unsigned long)rport,
@@ -790,6 +838,8 @@ struct srp_rport *srp_rport_add(struct Scsi_Host *shost,
 		}
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	transport_add_device(&rport->dev);
@@ -809,6 +859,7 @@ void srp_rport_del(struct srp_rport *rport)
 {
 	struct device *dev = &rport->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct Scsi_Host *shost = dev_to_shost(dev->parent);
 
 	if (shost->active_mode & MODE_TARGET &&
@@ -816,11 +867,17 @@ void srp_rport_del(struct srp_rport *rport)
 		srp_tgt_it_nexus_destroy(shost, (unsigned long)rport);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	transport_remove_device(dev);
 	device_del(dev);
 	transport_destroy_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -849,7 +906,10 @@ void srp_remove_host(struct Scsi_Host *shost)
 EXPORT_SYMBOL_GPL(srp_remove_host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * srp_stop_rport_timers - stop the transport layer recovery timers
  * @rport: SRP remote port for which to stop the timers.
@@ -872,6 +932,9 @@ void srp_stop_rport_timers(struct srp_rport *rport)
 }
 EXPORT_SYMBOL_GPL(srp_stop_rport_timers);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int srp_tsk_mgmt_response(struct Scsi_Host *shost, u64 nexus, u64 tm_id,
 				 int result)
@@ -901,6 +964,11 @@ srp_attach_transport(struct srp_function_template *ft)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	i->t.eh_timed_out = srp_timed_out;
+
+>>>>>>> v3.18
 =======
 	i->t.eh_timed_out = srp_timed_out;
 
@@ -923,7 +991,10 @@ srp_attach_transport(struct srp_function_template *ft)
 	i->rport_attrs[count++] = &dev_attr_port_id;
 	i->rport_attrs[count++] = &dev_attr_roles;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ft->has_rport_state) {
 		i->rport_attrs[count++] = &dev_attr_state;
 		i->rport_attrs[count++] = &dev_attr_fast_io_fail_tmo;
@@ -933,6 +1004,9 @@ srp_attach_transport(struct srp_function_template *ft)
 		i->rport_attrs[count++] = &dev_attr_reconnect_delay;
 		i->rport_attrs[count++] = &dev_attr_failed_reconnects;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ft->rport_delete)
 		i->rport_attrs[count++] = &dev_attr_delete;

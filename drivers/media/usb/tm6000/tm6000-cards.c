@@ -1115,7 +1115,11 @@ static int tm6000_init_dev(struct tm6000_core *dev)
 	dev->width = 720;
 	dev->height = 480;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->norm = V4L2_STD_PAL_M;
+=======
+	dev->norm = V4L2_STD_NTSC_M;
+>>>>>>> v3.18
 =======
 	dev->norm = V4L2_STD_NTSC_M;
 >>>>>>> v3.18
@@ -1125,7 +1129,11 @@ static int tm6000_init_dev(struct tm6000_core *dev)
 
 	/* Set video standard */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_device_call_all(&dev->v4l2_dev, 0, core, s_std, dev->norm);
+=======
+	v4l2_device_call_all(&dev->v4l2_dev, 0, video, s_std, dev->norm);
+>>>>>>> v3.18
 =======
 	v4l2_device_call_all(&dev->v4l2_dev, 0, video, s_std, dev->norm);
 >>>>>>> v3.18

@@ -3,7 +3,11 @@
  * keymap imported from ir-keymaps.c
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2010 by Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (c) 2010 by Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (c) 2010 by Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -96,7 +100,11 @@ module_exit(exit_rc_map_budget_ci_old)
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

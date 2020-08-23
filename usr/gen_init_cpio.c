@@ -383,6 +383,7 @@ static char *cpio_replace_env(char *new_location)
 {
 	char expanded[PATH_MAX + 1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char env_var[PATH_MAX + 1];
 	char *start;
 	char *end;
@@ -402,6 +403,8 @@ static char *cpio_replace_env(char *new_location)
 		} else
 			break;
 =======
+=======
+>>>>>>> v3.18
 	char *start, *end, *var;
 
 	while ((start = strstr(new_location, "${")) &&
@@ -411,6 +414,9 @@ static char *cpio_replace_env(char *new_location)
 		snprintf(expanded, sizeof expanded, "%s%s%s",
 			 new_location, var ? var : "", end + 1);
 		strcpy(new_location, expanded);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

@@ -228,7 +228,11 @@ static void hac_ac97_coldrst(struct snd_ac97 *ac97)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_ac97_bus_ops soc_ac97_ops = {
+=======
+static struct snd_ac97_bus_ops hac_ac97_ops = {
+>>>>>>> v3.18
 =======
 static struct snd_ac97_bus_ops hac_ac97_ops = {
 >>>>>>> v3.18
@@ -238,7 +242,10 @@ static struct snd_ac97_bus_ops hac_ac97_ops = {
 	.warm_reset = hac_ac97_warmrst,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(soc_ac97_ops);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -324,11 +331,17 @@ static const struct snd_soc_component_driver sh4_hac_component = {
 static int hac_soc_platform_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ret = snd_soc_set_ac97_ops(&hac_ac97_ops);
 	if (ret != 0)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return snd_soc_register_component(&pdev->dev, &sh4_hac_component,
 					  sh4_hac_dai, ARRAY_SIZE(sh4_hac_dai));
@@ -338,6 +351,10 @@ static int hac_soc_platform_remove(struct platform_device *pdev)
 {
 	snd_soc_unregister_component(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	snd_soc_set_ac97_ops(NULL);
+>>>>>>> v3.18
 =======
 	snd_soc_set_ac97_ops(NULL);
 >>>>>>> v3.18

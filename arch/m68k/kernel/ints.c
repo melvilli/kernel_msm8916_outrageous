@@ -11,9 +11,15 @@
 #include <linux/sched.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel_stat.h>
 #include <linux/errno.h>
 #include <linux/init.h>
+=======
+#include <linux/errno.h>
+#include <linux/init.h>
+#include <linux/irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/errno.h>
 #include <linux/init.h>
@@ -65,12 +71,15 @@ void __init init_IRQ(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* assembly irq entry code relies on this... */
 	if (HARDIRQ_MASK != 0x00ff0000) {
 		extern void hardirq_mask_is_broken(void);
 		hardirq_mask_is_broken();
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = IRQ_AUTO_1; i <= IRQ_AUTO_7; i++)
@@ -111,7 +120,11 @@ void __init m68k_setup_user_interrupt(unsigned int vec, unsigned int cnt)
 	m68k_first_user_vec = vec;
 	for (i = 0; i < cnt; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		irq_set_chip(IRQ_USER + i, &user_irq_chip);
+=======
+		irq_set_chip_and_handler(i, &user_irq_chip, handle_simple_irq);
+>>>>>>> v3.18
 =======
 		irq_set_chip_and_handler(i, &user_irq_chip, handle_simple_irq);
 >>>>>>> v3.18

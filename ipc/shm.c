@@ -44,7 +44,11 @@
 #include <linux/ipc_namespace.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -72,7 +76,11 @@ static int newseg(struct ipc_namespace *, struct ipc_params *);
 static void shm_open(struct vm_area_struct *vma);
 static void shm_close(struct vm_area_struct *vma);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void shm_destroy (struct ipc_namespace *ns, struct shmid_kernel *shp);
+=======
+static void shm_destroy(struct ipc_namespace *ns, struct shmid_kernel *shp);
+>>>>>>> v3.18
 =======
 static void shm_destroy(struct ipc_namespace *ns, struct shmid_kernel *shp);
 >>>>>>> v3.18
@@ -100,7 +108,11 @@ static void do_shm_rmid(struct ipc_namespace *ns, struct kern_ipc_perm *ipcp)
 	shp = container_of(ipcp, struct shmid_kernel, shm_perm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (shp->shm_nattch){
+=======
+	if (shp->shm_nattch) {
+>>>>>>> v3.18
 =======
 	if (shp->shm_nattch) {
 >>>>>>> v3.18
@@ -129,7 +141,11 @@ static int __init ipc_ns_init(void)
 pure_initcall(ipc_ns_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init shm_init (void)
+=======
+void __init shm_init(void)
+>>>>>>> v3.18
 =======
 void __init shm_init(void)
 >>>>>>> v3.18
@@ -195,6 +211,10 @@ static void shm_rcu_free(struct rcu_head *head)
 static inline void shm_rmid(struct ipc_namespace *ns, struct shmid_kernel *s)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	list_del(&s->shm_clist);
+>>>>>>> v3.18
 =======
 	list_del(&s->shm_clist);
 >>>>>>> v3.18
@@ -269,7 +289,11 @@ static bool shm_may_destroy(struct ipc_namespace *ns, struct shmid_kernel *shp)
 static void shm_close(struct vm_area_struct *vma)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file * file = vma->vm_file;
+=======
+	struct file *file = vma->vm_file;
+>>>>>>> v3.18
 =======
 	struct file *file = vma->vm_file;
 >>>>>>> v3.18
@@ -292,6 +316,7 @@ static void shm_close(struct vm_area_struct *vma)
 }
 
 /* Called with ns->shm_ids(ns).rwsem locked */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int shm_try_destroy_current(int id, void *p, void *data)
 {
@@ -326,6 +351,8 @@ static int shm_try_destroy_current(int id, void *p, void *data)
 /* Called with ns->shm_ids(ns).rwsem locked */
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int shm_try_destroy_orphaned(int id, void *p, void *data)
 {
 	struct ipc_namespace *ns = data;
@@ -357,6 +384,7 @@ void shm_destroy_orphaned(struct ipc_namespace *ns)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void exit_shm(struct task_struct *task)
 {
@@ -370,6 +398,8 @@ void exit_shm(struct task_struct *task)
 	if (shm_ids(ns).in_use)
 		idr_for_each(&shm_ids(ns).ipcs_idr, &shm_try_destroy_current, ns);
 =======
+=======
+>>>>>>> v3.18
 /* Locking assumes this will only be called with task == current */
 void exit_shm(struct task_struct *task)
 {
@@ -414,6 +444,9 @@ void exit_shm(struct task_struct *task)
 
 	/* Remove the list head from any segments still attached. */
 	list_del(&task->sysvshm.shm_clist);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	up_write(&shm_ids(ns).rwsem);
 }
@@ -454,7 +487,11 @@ static struct mempolicy *shm_get_policy(struct vm_area_struct *vma,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int shm_mmap(struct file * file, struct vm_area_struct * vma)
+=======
+static int shm_mmap(struct file *file, struct vm_area_struct *vma)
+>>>>>>> v3.18
 =======
 static int shm_mmap(struct file *file, struct vm_area_struct *vma)
 >>>>>>> v3.18
@@ -556,7 +593,10 @@ static const struct vm_operations_struct shm_vm_ops = {
  * Called with shm_ids.rwsem held as a writer.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int newseg(struct ipc_namespace *ns, struct ipc_params *params)
@@ -568,7 +608,11 @@ static int newseg(struct ipc_namespace *ns, struct ipc_params *params)
 	struct shmid_kernel *shp;
 	size_t numpages = (size + PAGE_SIZE - 1) >> PAGE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file * file;
+=======
+	struct file *file;
+>>>>>>> v3.18
 =======
 	struct file *file;
 >>>>>>> v3.18
@@ -580,13 +624,19 @@ static int newseg(struct ipc_namespace *ns, struct ipc_params *params)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ns->shm_tot + numpages > ns->shm_ctlall)
 =======
+=======
+>>>>>>> v3.18
 	if (numpages << PAGE_SHIFT < size)
 		return -ENOSPC;
 
 	if (ns->shm_tot + numpages < ns->shm_tot ||
 			ns->shm_tot + numpages > ns->shm_ctlall)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENOSPC;
 
@@ -606,6 +656,7 @@ static int newseg(struct ipc_namespace *ns, struct ipc_params *params)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf (name, "SYSV%08x", key);
 	if (shmflg & SHM_HUGETLB) {
 		struct hstate *hs = hstate_sizelog((shmflg >> SHM_HUGE_SHIFT)
@@ -613,12 +664,17 @@ static int newseg(struct ipc_namespace *ns, struct ipc_params *params)
 		size_t hugesize;
 
 =======
+=======
+>>>>>>> v3.18
 	sprintf(name, "SYSV%08x", key);
 	if (shmflg & SHM_HUGETLB) {
 		struct hstate *hs;
 		size_t hugesize;
 
 		hs = hstate_sizelog((shmflg >> SHM_HUGE_SHIFT) & SHM_HUGE_MASK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!hs) {
 			error = -EINVAL;
@@ -636,7 +692,11 @@ static int newseg(struct ipc_namespace *ns, struct ipc_params *params)
 		/*
 		 * Do not allow no accounting for OVERCOMMIT_NEVER, even
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 	 * if it's asked for.
+=======
+		 * if it's asked for.
+>>>>>>> v3.18
 =======
 		 * if it's asked for.
 >>>>>>> v3.18
@@ -651,13 +711,19 @@ static int newseg(struct ipc_namespace *ns, struct ipc_params *params)
 		goto no_file;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	id = ipc_addid(&shm_ids(ns), &shp->shm_perm, ns->shm_ctlmni);
 	if (id < 0) {
 		error = id;
 		goto no_id;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	shp->shm_cprid = task_tgid_vnr(current);
 	shp->shm_lprid = 0;
@@ -668,12 +734,16 @@ static int newseg(struct ipc_namespace *ns, struct ipc_params *params)
 	shp->shm_file = file;
 	shp->shm_creator = current;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	id = ipc_addid(&shm_ids(ns), &shp->shm_perm, ns->shm_ctlmni);
 	if (id < 0) {
 		error = id;
 		goto no_id;
 	}
+=======
+	list_add(&shp->shm_clist, &current->sysvshm.shm_clist);
+>>>>>>> v3.18
 =======
 	list_add(&shp->shm_clist, &current->sysvshm.shm_clist);
 >>>>>>> v3.18
@@ -730,23 +800,32 @@ SYSCALL_DEFINE3(shmget, key_t, key, size_t, size, int, shmflg)
 {
 	struct ipc_namespace *ns;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ipc_ops shm_ops;
 =======
+=======
+>>>>>>> v3.18
 	static const struct ipc_ops shm_ops = {
 		.getnew = newseg,
 		.associate = shm_security,
 		.more_checks = shm_more_checks,
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct ipc_params shm_params;
 
 	ns = current->nsproxy->ipc_ns;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	shm_ops.getnew = newseg;
 	shm_ops.associate = shm_security;
 	shm_ops.more_checks = shm_more_checks;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	shm_params.key = key;
@@ -759,7 +838,11 @@ SYSCALL_DEFINE3(shmget, key_t, key, size_t, size, int, shmflg)
 static inline unsigned long copy_shmid_to_user(void __user *buf, struct shmid64_ds *in, int version)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(version) {
+=======
+	switch (version) {
+>>>>>>> v3.18
 =======
 	switch (version) {
 >>>>>>> v3.18
@@ -790,7 +873,11 @@ static inline unsigned long
 copy_shmid_from_user(struct shmid64_ds *out, void __user *buf, int version)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(version) {
+=======
+	switch (version) {
+>>>>>>> v3.18
 =======
 	switch (version) {
 >>>>>>> v3.18
@@ -819,7 +906,11 @@ copy_shmid_from_user(struct shmid64_ds *out, void __user *buf, int version)
 static inline unsigned long copy_shminfo_to_user(void __user *buf, struct shminfo64 *in, int version)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch(version) {
+=======
+	switch (version) {
+>>>>>>> v3.18
 =======
 	switch (version) {
 >>>>>>> v3.18
@@ -830,7 +921,11 @@ static inline unsigned long copy_shminfo_to_user(void __user *buf, struct shminf
 		struct shminfo out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if(in->shmmax > INT_MAX)
+=======
+		if (in->shmmax > INT_MAX)
+>>>>>>> v3.18
 =======
 		if (in->shmmax > INT_MAX)
 >>>>>>> v3.18
@@ -842,7 +937,11 @@ static inline unsigned long copy_shminfo_to_user(void __user *buf, struct shminf
 		out.shmmni	= in->shmmni;
 		out.shmseg	= in->shmseg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		out.shmall	= in->shmall; 
+=======
+		out.shmall	= in->shmall;
+>>>>>>> v3.18
 =======
 		out.shmall	= in->shmall;
 >>>>>>> v3.18
@@ -997,7 +1096,11 @@ static int shmctl_nolock(struct ipc_namespace *ns, int shmid,
 
 		shminfo.shmmin = SHMMIN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if(copy_shminfo_to_user (buf, &shminfo, version))
+=======
+		if (copy_shminfo_to_user(buf, &shminfo, version))
+>>>>>>> v3.18
 =======
 		if (copy_shminfo_to_user(buf, &shminfo, version))
 >>>>>>> v3.18
@@ -1008,7 +1111,11 @@ static int shmctl_nolock(struct ipc_namespace *ns, int shmid,
 		up_read(&shm_ids(ns).rwsem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if(err<0)
+=======
+		if (err < 0)
+>>>>>>> v3.18
 =======
 		if (err < 0)
 >>>>>>> v3.18
@@ -1023,7 +1130,11 @@ static int shmctl_nolock(struct ipc_namespace *ns, int shmid,
 		down_read(&shm_ids(ns).rwsem);
 		shm_info.used_ids = shm_ids(ns).in_use;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		shm_get_stat (ns, &shm_info.shm_rss, &shm_info.shm_swp);
+=======
+		shm_get_stat(ns, &shm_info.shm_rss, &shm_info.shm_swp);
+>>>>>>> v3.18
 =======
 		shm_get_stat(ns, &shm_info.shm_rss, &shm_info.shm_swp);
 >>>>>>> v3.18
@@ -1138,7 +1249,10 @@ SYSCALL_DEFINE3(shmctl, int, shmid, int, cmd, struct shmid_ds __user *, buf)
 
 		ipc_lock_object(&shp->shm_perm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* check if shm_destroy() is tearing down shp */
 		if (!ipc_valid_object(&shp->shm_perm)) {
@@ -1146,6 +1260,9 @@ SYSCALL_DEFINE3(shmctl, int, shmid, int, cmd, struct shmid_ds __user *, buf)
 			goto out_unlock0;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!ns_capable(ns->user_ns, CAP_IPC_LOCK)) {
 			kuid_t euid = current_euid();
@@ -1162,6 +1279,7 @@ SYSCALL_DEFINE3(shmctl, int, shmid, int, cmd, struct shmid_ds __user *, buf)
 
 		shm_file = shp->shm_file;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* check if shm_destroy() is tearing down shp */
 		if (shm_file == NULL) {
@@ -1169,6 +1287,8 @@ SYSCALL_DEFINE3(shmctl, int, shmid, int, cmd, struct shmid_ds __user *, buf)
 			goto out_unlock0;
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (is_file_hugepages(shm_file))
@@ -1217,8 +1337,13 @@ out_unlock1:
  * this.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 long do_shmat(int shmid, char __user *shmaddr, int shmflg,
 	      ulong *raddr, unsigned long shmlba)
+=======
+long do_shmat(int shmid, char __user *shmaddr, int shmflg, ulong *raddr,
+	      unsigned long shmlba)
+>>>>>>> v3.18
 =======
 long do_shmat(int shmid, char __user *shmaddr, int shmflg, ulong *raddr,
 	      unsigned long shmlba)
@@ -1228,7 +1353,11 @@ long do_shmat(int shmid, char __user *shmaddr, int shmflg, ulong *raddr,
 	unsigned long addr;
 	unsigned long size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file * file;
+=======
+	struct file *file;
+>>>>>>> v3.18
 =======
 	struct file *file;
 >>>>>>> v3.18
@@ -1248,6 +1377,7 @@ long do_shmat(int shmid, char __user *shmaddr, int shmflg, ulong *raddr,
 	else if ((addr = (ulong)shmaddr)) {
 		if (addr & (shmlba - 1)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*
 			 * Round down to the nearest multiple of shmlba.
 			 * For sane do_mmap_pgoff() parameters, avoid
@@ -1255,6 +1385,10 @@ long do_shmat(int shmid, char __user *shmaddr, int shmflg, ulong *raddr,
 			 */
 			if ((shmflg & SHM_RND) && addr >= shmlba)
 				addr &= ~(shmlba - 1);
+=======
+			if (shmflg & SHM_RND)
+				addr &= ~(shmlba - 1);	   /* round down */
+>>>>>>> v3.18
 =======
 			if (shmflg & SHM_RND)
 				addr &= ~(shmlba - 1);	   /* round down */
@@ -1311,7 +1445,11 @@ long do_shmat(int shmid, char __user *shmaddr, int shmflg, ulong *raddr,
 
 	/* check if shm_destroy() is tearing down shp */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (shp->shm_file == NULL) {
+=======
+	if (!ipc_valid_object(&shp->shm_perm)) {
+>>>>>>> v3.18
 =======
 	if (!ipc_valid_object(&shp->shm_perm)) {
 >>>>>>> v3.18
@@ -1360,6 +1498,7 @@ long do_shmat(int shmid, char __user *shmaddr, int shmflg, ulong *raddr,
 	if (addr && !(shmflg & SHM_REMAP)) {
 		err = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (find_vma_intersection(current->mm, addr, addr + size))
 			goto invalid;
 		/*
@@ -1369,10 +1508,15 @@ long do_shmat(int shmid, char __user *shmaddr, int shmflg, ulong *raddr,
 		if (addr < current->mm->start_stack &&
 		    addr > current->mm->start_stack - size - PAGE_SIZE * 5)
 =======
+=======
+>>>>>>> v3.18
 		if (addr + size < addr)
 			goto invalid;
 
 		if (find_vma_intersection(current->mm, addr, addr + size))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto invalid;
 	}

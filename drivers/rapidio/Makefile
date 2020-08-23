@@ -2,7 +2,13 @@
 # Makefile for RapidIO interconnect services
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y += rio.o rio-access.o rio-driver.o rio-sysfs.o
+=======
+obj-$(CONFIG_RAPIDIO) += rapidio.o
+rapidio-y := rio.o rio-access.o rio-driver.o rio-sysfs.o
+
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_RAPIDIO) += rapidio.o
 rapidio-y := rio.o rio-access.o rio-driver.o rio-sysfs.o

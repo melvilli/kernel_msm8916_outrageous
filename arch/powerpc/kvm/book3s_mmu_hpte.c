@@ -29,7 +29,11 @@
 #include <asm/hw_irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "trace.h"
+=======
+#include "trace_pr.h"
+>>>>>>> v3.18
 =======
 #include "trace_pr.h"
 >>>>>>> v3.18
@@ -61,7 +65,10 @@ static inline u64 kvmppc_mmu_hash_vpte_long(u64 vpage)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3S_64
 static inline u64 kvmppc_mmu_hash_vpte_64k(u64 vpage)
 {
@@ -70,6 +77,9 @@ static inline u64 kvmppc_mmu_hash_vpte_64k(u64 vpage)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void kvmppc_mmu_hpte_cache_map(struct kvm_vcpu *vcpu, struct hpte_cache *pte)
 {
@@ -99,7 +109,10 @@ void kvmppc_mmu_hpte_cache_map(struct kvm_vcpu *vcpu, struct hpte_cache *pte)
 			   &vcpu3s->hpte_hash_vpte_long[index]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3S_64
 	/* Add to vPTE_64k list */
 	index = kvmppc_mmu_hash_vpte_64k(pte->pte.vpage);
@@ -109,6 +122,9 @@ void kvmppc_mmu_hpte_cache_map(struct kvm_vcpu *vcpu, struct hpte_cache *pte)
 
 	vcpu3s->hpte_cache_count++;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&vcpu3s->mmu_lock);
 }
@@ -141,11 +157,14 @@ static void invalidate_pte(struct kvm_vcpu *vcpu, struct hpte_cache *pte)
 	hlist_del_init_rcu(&pte->list_vpte);
 	hlist_del_init_rcu(&pte->list_vpte_long);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_unlock(&vcpu3s->mmu_lock);
 
 	vcpu3s->hpte_cache_count--;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3S_64
 	hlist_del_init_rcu(&pte->list_vpte_64k);
 #endif
@@ -153,6 +172,9 @@ static void invalidate_pte(struct kvm_vcpu *vcpu, struct hpte_cache *pte)
 
 	spin_unlock(&vcpu3s->mmu_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	call_rcu(&pte->rcu_head, free_pte_rcu);
 }
@@ -257,7 +279,10 @@ static void kvmppc_mmu_pte_vflush_short(struct kvm_vcpu *vcpu, u64 guest_vp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3S_64
 /* Flush with mask 0xffffffff0 */
 static void kvmppc_mmu_pte_vflush_64k(struct kvm_vcpu *vcpu, u64 guest_vp)
@@ -281,6 +306,9 @@ static void kvmppc_mmu_pte_vflush_64k(struct kvm_vcpu *vcpu, u64 guest_vp)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Flush with mask 0xffffff000 */
 static void kvmppc_mmu_pte_vflush_long(struct kvm_vcpu *vcpu, u64 guest_vp)
@@ -313,12 +341,18 @@ void kvmppc_mmu_pte_vflush(struct kvm_vcpu *vcpu, u64 guest_vp, u64 vp_mask)
 		kvmppc_mmu_pte_vflush_short(vcpu, guest_vp);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3S_64
 	case 0xffffffff0ULL:
 		kvmppc_mmu_pte_vflush_64k(vcpu, guest_vp);
 		break;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 0xffffff000ULL:
 		kvmppc_mmu_pte_vflush_long(vcpu, guest_vp);
@@ -357,6 +391,7 @@ struct hpte_cache *kvmppc_mmu_hpte_cache_next(struct kvm_vcpu *vcpu)
 	struct hpte_cache *pte;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte = kmem_cache_zalloc(hpte_cache, GFP_KERNEL);
 	vcpu3s->hpte_cache_count++;
 
@@ -367,6 +402,8 @@ struct hpte_cache *kvmppc_mmu_hpte_cache_next(struct kvm_vcpu *vcpu)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (vcpu3s->hpte_cache_count == HPTEG_CACHE_NUM)
 		kvmppc_mmu_pte_flush_all(vcpu);
 
@@ -380,6 +417,9 @@ void kvmppc_mmu_hpte_cache_free(struct hpte_cache *pte)
 	kmem_cache_free(hpte_cache, pte);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void kvmppc_mmu_hpte_destroy(struct kvm_vcpu *vcpu)
 {
@@ -408,11 +448,17 @@ int kvmppc_mmu_hpte_init(struct kvm_vcpu *vcpu)
 	kvmppc_mmu_hpte_init_hash(vcpu3s->hpte_hash_vpte_long,
 				  ARRAY_SIZE(vcpu3s->hpte_hash_vpte_long));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3S_64
 	kvmppc_mmu_hpte_init_hash(vcpu3s->hpte_hash_vpte_64k,
 				  ARRAY_SIZE(vcpu3s->hpte_hash_vpte_64k));
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_init(&vcpu3s->mmu_lock);

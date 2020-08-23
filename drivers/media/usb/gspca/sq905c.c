@@ -273,7 +273,11 @@ static int sd_start(struct gspca_dev *gspca_dev)
 	dev->cap_mode = gspca_dev->cam.cam_mode;
 	/* "Open the shutter" and set size, to start capture */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (gspca_dev->width) {
+=======
+	switch (gspca_dev->pixfmt.width) {
+>>>>>>> v3.18
 =======
 	switch (gspca_dev->pixfmt.width) {
 >>>>>>> v3.18

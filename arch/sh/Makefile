@@ -33,7 +33,12 @@ endif
 cflags-$(CONFIG_CPU_SH2)		:= $(call cc-option,-m2,)
 cflags-$(CONFIG_CPU_SH2A)		+= $(call cc-option,-m2a,) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   $(call cc-option,-m2a-nofpu,)
+=======
+					   $(call cc-option,-m2a-nofpu,) \
+					   $(call cc-option,-m4-nofpu,)
+>>>>>>> v3.18
 =======
 					   $(call cc-option,-m2a-nofpu,) \
 					   $(call cc-option,-m4-nofpu,)

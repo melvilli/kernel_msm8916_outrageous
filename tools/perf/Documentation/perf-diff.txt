@@ -4,7 +4,11 @@ perf-diff(1)
 NAME
 ----
 <<<<<<< HEAD
+<<<<<<< HEAD
 perf-diff - Read two perf.data files and display the differential profile
+=======
+perf-diff - Read perf.data files and display the differential profile
+>>>>>>> v3.18
 =======
 perf-diff - Read perf.data files and display the differential profile
 >>>>>>> v3.18
@@ -13,6 +17,7 @@ SYNOPSIS
 --------
 [verse]
 <<<<<<< HEAD
+<<<<<<< HEAD
 'perf diff' [oldfile] [newfile]
 
 DESCRIPTION
@@ -20,12 +25,17 @@ DESCRIPTION
 This command displays the performance difference amongst two perf.data files
 captured via perf record.
 =======
+=======
+>>>>>>> v3.18
 'perf diff' [baseline file] [data file1] [[data file2] ... ]
 
 DESCRIPTION
 -----------
 This command displays the performance difference amongst two or more perf.data
 files captured via perf record.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 If no parameters are passed it will assume perf.data.old and perf.data.
@@ -47,7 +57,12 @@ OPTIONS
 --dsos=::
 	Only consider symbols in these dsos. CSV that understands
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file://filename entries.
+=======
+	file://filename entries.  This option will affect the percentage
+	of the Baseline/Delta column.  See --percentage for more info.
+>>>>>>> v3.18
 =======
 	file://filename entries.  This option will affect the percentage
 	of the Baseline/Delta column.  See --percentage for more info.
@@ -57,7 +72,12 @@ OPTIONS
 --comms=::
 	Only consider symbols in these comms. CSV that understands
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file://filename entries.
+=======
+	file://filename entries.  This option will affect the percentage
+	of the Baseline/Delta column.  See --percentage for more info.
+>>>>>>> v3.18
 =======
 	file://filename entries.  This option will affect the percentage
 	of the Baseline/Delta column.  See --percentage for more info.
@@ -67,12 +87,15 @@ OPTIONS
 --symbols=::
 	Only consider these symbols. CSV that understands
 <<<<<<< HEAD
+<<<<<<< HEAD
 	file://filename entries.
 
 -s::
 --sort=::
 	Sort by key(s): pid, comm, dso, symbol.
 =======
+=======
+>>>>>>> v3.18
 	file://filename entries.  This option will affect the percentage
 	of the Baseline/Delta column.  See --percentage for more info.
 
@@ -80,6 +103,9 @@ OPTIONS
 --sort=::
 	Sort by key(s): pid, comm, dso, symbol, cpu, parent, srcline.
 	Please see description of --sort in the perf-report man page.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 -t::
@@ -109,8 +135,11 @@ OPTIONS
 --compute::
         Differential computation selection - delta,ratio,wdiff (default is delta).
 <<<<<<< HEAD
+<<<<<<< HEAD
         If '+' is specified as a first character, the output is sorted based
         on the computation results.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
         See COMPARISON METHODS section for more info.
@@ -124,7 +153,10 @@ OPTIONS
         Show formula for given computation.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 -o::
 --order::
        Specify compute sorting column number.
@@ -190,6 +222,9 @@ Example output:
              x         x          f4
                        x          f6
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 COMPARISON METHODS
 ------------------
@@ -201,7 +236,11 @@ If specified the 'Delta' column is displayed with value 'd' computed as:
 
 with:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - A/B being matching hist entry from first/second file specified
+=======
+  - A/B being matching hist entry from data/baseline file specified
+>>>>>>> v3.18
 =======
   - A/B being matching hist entry from data/baseline file specified
 >>>>>>> v3.18
@@ -211,11 +250,17 @@ with:
     single data file
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   - with filtering by -C, -d and/or -S, period_percent might be changed
     relative to how entries are filtered.  Use --percentage=absolute to
     prevent such fluctuation.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ratio
 ~~~~~
@@ -225,7 +270,11 @@ If specified the 'Ratio' column is displayed with value 'r' computed as:
 
 with:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - A/B being matching hist entry from first/second file specified
+=======
+  - A/B being matching hist entry from data/baseline file specified
+>>>>>>> v3.18
 =======
   - A/B being matching hist entry from data/baseline file specified
 >>>>>>> v3.18
@@ -234,8 +283,13 @@ with:
   - period being the hist entry period value
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 wdiff
 ~~~~~
+=======
+wdiff:WEIGHT-B,WEIGHT-A
+~~~~~~~~~~~~~~~~~~~~~~~
+>>>>>>> v3.18
 =======
 wdiff:WEIGHT-B,WEIGHT-A
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -245,7 +299,11 @@ If specified the 'Weighted diff' column is displayed with value 'd' computed as:
    d = B->period * WEIGHT-A - A->period * WEIGHT-B
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   - A/B being matching hist entry from first/second file specified
+=======
+  - A/B being matching hist entry from data/baseline file specified
+>>>>>>> v3.18
 =======
   - A/B being matching hist entry from data/baseline file specified
 >>>>>>> v3.18
@@ -254,6 +312,7 @@ If specified the 'Weighted diff' column is displayed with value 'd' computed as:
   - period being the hist entry period value
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   - WEIGHT-A/WEIGHT-B being user suplied weights in the the '-c' option
     behind ':' separator like '-c wdiff:1,2'.
 
@@ -261,6 +320,8 @@ SEE ALSO
 --------
 linkperf:perf-record[1]
 =======
+=======
+>>>>>>> v3.18
   - WEIGHT-A/WEIGHT-B being user supplied weights in the the '-c' option
     behind ':' separator like '-c wdiff:1,2'.
     - WEIGHT-A being the weight of the data file
@@ -269,4 +330,7 @@ linkperf:perf-record[1]
 SEE ALSO
 --------
 linkperf:perf-record[1], linkperf:perf-report[1]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

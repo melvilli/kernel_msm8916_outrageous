@@ -33,7 +33,11 @@
         #modprobe viafb
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     Start viafb with with user options:
+=======
+    Start viafb with user options:
+>>>>>>> v3.18
 =======
     Start viafb with user options:
 >>>>>>> v3.18

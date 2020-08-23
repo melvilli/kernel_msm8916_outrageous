@@ -3,6 +3,10 @@
  *
  * Copyright (C) 2009 Semihalf.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Pavel Machek <pavel@denx.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Pavel Machek <pavel@denx.de>
 >>>>>>> v3.18
@@ -11,6 +15,12 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * You can get hardware description at
+ * http://www.ti.com/lit/ds/symlink/bq32000.pdf
+>>>>>>> v3.18
 =======
  *
  * You can get hardware description at
@@ -38,11 +48,17 @@
 #define BQ32K_CENT_EN		0x80	/* Century flag enable bit */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BQ32K_CALIBRATION	0x07	/* CAL_CFG1, calibration and control */
 #define BQ32K_TCH2		0x08	/* Trickle charge enable */
 #define BQ32K_CFG2		0x09	/* Trickle charger control */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct bq32k_regs {
 	uint8_t		seconds;
@@ -140,7 +156,10 @@ static const struct rtc_class_ops bq32k_rtc_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int trickle_charger_of_init(struct device *dev, struct device_node *node)
 {
 	unsigned char reg;
@@ -192,6 +211,9 @@ static int trickle_charger_of_init(struct device *dev, struct device_node *node)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int bq32k_probe(struct i2c_client *client,
 				const struct i2c_device_id *id)
@@ -225,6 +247,12 @@ static int bq32k_probe(struct i2c_client *client,
 		return error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (client && client->dev.of_node)
+		trickle_charger_of_init(dev, client->dev.of_node);
+
+>>>>>>> v3.18
 =======
 	if (client && client->dev.of_node)
 		trickle_charger_of_init(dev, client->dev.of_node);
@@ -241,11 +269,14 @@ static int bq32k_probe(struct i2c_client *client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bq32k_remove(struct i2c_client *client)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct i2c_device_id bq32k_id[] = {
@@ -261,7 +292,10 @@ static struct i2c_driver bq32k_driver = {
 	},
 	.probe		= bq32k_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= bq32k_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= bq32k_id,

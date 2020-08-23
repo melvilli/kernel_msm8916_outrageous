@@ -29,7 +29,11 @@ static void dccp_enqueue_skb(struct sock *sk, struct sk_buff *skb)
 	__skb_queue_tail(&sk->sk_receive_queue, skb);
 	skb_set_owner_r(skb, sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sk->sk_data_ready(sk, 0);
+=======
+	sk->sk_data_ready(sk);
+>>>>>>> v3.18
 =======
 	sk->sk_data_ready(sk);
 >>>>>>> v3.18
@@ -611,8 +615,12 @@ int dccp_rcv_state_process(struct sock *sk, struct sk_buff *skb,
 								    skb) < 0)
 				return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			consume_skb(skb);
 			return 0;
+=======
+			goto discard;
+>>>>>>> v3.18
 =======
 			goto discard;
 >>>>>>> v3.18

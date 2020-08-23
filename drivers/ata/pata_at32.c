@@ -272,7 +272,11 @@ static int __init pata_at32_probe(struct platform_device *pdev)
 	struct device		 *dev = &pdev->dev;
 	struct at32_ide_info	 *info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ide_platform_data *board = pdev->dev.platform_data;
+=======
+	struct ide_platform_data *board = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct ide_platform_data *board = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

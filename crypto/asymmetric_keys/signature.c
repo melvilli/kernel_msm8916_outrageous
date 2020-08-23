@@ -12,6 +12,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "SIG: "fmt
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "SIG: "fmt
 >>>>>>> v3.18

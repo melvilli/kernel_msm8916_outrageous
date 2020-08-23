@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -27,6 +28,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel PRO/1000 Linux driver
  * Copyright(c) 1999 - 2014 Intel Corporation.
  *
@@ -47,6 +50,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "e1000.h"
@@ -242,12 +248,18 @@ s32 e1000_check_alt_mac_addr_generic(struct e1000_hw *hw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 u32 e1000e_rar_get_count_generic(struct e1000_hw *hw)
 {
 	return hw->mac.rar_entry_count;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  *  e1000e_rar_set_generic - Set receive address register
@@ -259,7 +271,11 @@ u32 e1000e_rar_get_count_generic(struct e1000_hw *hw)
  *  in by addr.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void e1000e_rar_set_generic(struct e1000_hw *hw, u8 *addr, u32 index)
+=======
+int e1000e_rar_set_generic(struct e1000_hw *hw, u8 *addr, u32 index)
+>>>>>>> v3.18
 =======
 int e1000e_rar_set_generic(struct e1000_hw *hw, u8 *addr, u32 index)
 >>>>>>> v3.18
@@ -287,6 +303,11 @@ int e1000e_rar_set_generic(struct e1000_hw *hw, u8 *addr, u32 index)
 	ew32(RAH(index), rar_high);
 	e1e_flush();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	return 0;
+>>>>>>> v3.18
 =======
 
 	return 0;
@@ -828,7 +849,10 @@ static s32 e1000_commit_fc_settings_generic(struct e1000_hw *hw)
 		e_dbg("Flow control param set incorrectly\n");
 		return -E1000_ERR_CONFIG;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

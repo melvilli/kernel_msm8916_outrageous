@@ -1,5 +1,9 @@
 ashldi3.S
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bswapsdi2.S
+>>>>>>> v3.18
 =======
 bswapsdi2.S
 >>>>>>> v3.18
@@ -11,6 +15,10 @@ piggy.lzo
 piggy.lzma
 piggy.xzkern
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+piggy.lz4
+>>>>>>> v3.18
 =======
 piggy.lz4
 >>>>>>> v3.18

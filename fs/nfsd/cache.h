@@ -19,7 +19,10 @@
  */
 struct svc_cacherep {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hlist_node	c_hash;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head	c_lru;
@@ -88,6 +91,7 @@ void	nfsd_cache_update(struct svc_rqst *, int, __be32 *);
 int	nfsd_reply_cache_stats_open(struct inode *, struct file *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_NFSD_V4
 void	nfsd4_set_statp(struct svc_rqst *rqstp, __be32 *statp);
 #else  /* CONFIG_NFSD_V4 */
@@ -96,6 +100,8 @@ static inline void nfsd4_set_statp(struct svc_rqst *rqstp, __be32 *statp)
 }
 #endif /* CONFIG_NFSD_V4 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* NFSCACHE_H */

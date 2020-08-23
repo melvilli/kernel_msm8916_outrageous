@@ -30,6 +30,11 @@ struct udphdr {
 #define UDP_CORK	1	/* Never send partially complete segments */
 #define UDP_ENCAP	100	/* Set the socket to accept encapsulated packets */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define UDP_NO_CHECK6_TX 101	/* Disable sending checksum for UDP6X */
+#define UDP_NO_CHECK6_RX 102	/* Disable accpeting checksum for UDP6 */
+>>>>>>> v3.18
 =======
 #define UDP_NO_CHECK6_TX 101	/* Disable sending checksum for UDP6X */
 #define UDP_NO_CHECK6_RX 102	/* Disable accpeting checksum for UDP6 */

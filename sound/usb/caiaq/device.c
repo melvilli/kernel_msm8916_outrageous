@@ -40,6 +40,7 @@ MODULE_AUTHOR("Daniel Mack <daniel@caiaq.de>");
 MODULE_DESCRIPTION("caiaq USB audio");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_SUPPORTED_DEVICE("{{Native Instruments, RigKontrol2},"
 			 "{Native Instruments, RigKontrol3},"
 			 "{Native Instruments, Kore Controller},"
@@ -55,6 +56,8 @@ MODULE_SUPPORTED_DEVICE("{{Native Instruments, RigKontrol2},"
 			 "{Native Instruments, Traktor Kontrol S4},"
 			 "{Native Instruments, Maschine Controller}}");
 =======
+=======
+>>>>>>> v3.18
 MODULE_SUPPORTED_DEVICE("{{Native Instruments,RigKontrol2},"
 			 "{Native Instruments,RigKontrol3},"
 			 "{Native Instruments,Kore Controller},"
@@ -69,13 +72,19 @@ MODULE_SUPPORTED_DEVICE("{{Native Instruments,RigKontrol2},"
 			 "{Native Instruments,Traktor Kontrol X1},"
 			 "{Native Instruments,Traktor Kontrol S4},"
 			 "{Native Instruments,Maschine Controller}}");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int index[SNDRV_CARDS] = SNDRV_DEFAULT_IDX; /* Index 0-max */
 static char* id[SNDRV_CARDS] = SNDRV_DEFAULT_STR; /* Id for this card */
 static bool enable[SNDRV_CARDS] = SNDRV_DEFAULT_ENABLE_PNP; /* Enable this card */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int snd_card_used[SNDRV_CARDS];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -257,7 +266,10 @@ int snd_usb_caiaq_send_command(struct snd_usb_caiaqdev *cdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int snd_usb_caiaq_send_command_bank(struct snd_usb_caiaqdev *cdev,
 			       unsigned char command,
 			       unsigned char bank,
@@ -283,6 +295,9 @@ int snd_usb_caiaq_send_command_bank(struct snd_usb_caiaqdev *cdev,
 			   cdev->ep1_out_buf, len+2, &actual_len, 200);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int snd_usb_caiaq_set_audio_params (struct snd_usb_caiaqdev *cdev,
 		   		    int rate, int depth, int bpp)
@@ -437,7 +452,11 @@ static int create_card(struct usb_device *usb_dev,
 
 	for (devnum = 0; devnum < SNDRV_CARDS; devnum++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (enable[devnum] && !snd_card_used[devnum])
+=======
+		if (enable[devnum])
+>>>>>>> v3.18
 =======
 		if (enable[devnum])
 >>>>>>> v3.18
@@ -447,8 +466,14 @@ static int create_card(struct usb_device *usb_dev,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(index[devnum], id[devnum], THIS_MODULE,
 			      sizeof(struct snd_usb_caiaqdev), &card);
+=======
+	err = snd_card_new(&intf->dev,
+			   index[devnum], id[devnum], THIS_MODULE,
+			   sizeof(struct snd_usb_caiaqdev), &card);
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&intf->dev,
 			   index[devnum], id[devnum], THIS_MODULE,
@@ -464,7 +489,10 @@ static int create_card(struct usb_device *usb_dev,
 				  le16_to_cpu(usb_dev->descriptor.idProduct));
 	spin_lock_init(&cdev->spinlock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &intf->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

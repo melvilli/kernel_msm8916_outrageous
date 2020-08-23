@@ -70,7 +70,10 @@ void proc_fork_connector(struct task_struct *task)
 	struct proc_event *ev;
 	__u8 buffer[CN_PROC_MSG_SIZE] __aligned(8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct task_struct *parent;
@@ -83,8 +86,12 @@ void proc_fork_connector(struct task_struct *task)
 	memset(&ev->event_data, 0, sizeof(ev->event_data));
 	get_seq(&msg->seq, &ev->cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&ts); /* get high res monotonic timestamp */
 	ev->timestamp_ns = timespec_to_ns(&ts);
+=======
+	ev->timestamp_ns = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	ev->timestamp_ns = ktime_get_ns();
 >>>>>>> v3.18
@@ -103,7 +110,11 @@ void proc_fork_connector(struct task_struct *task)
 	msg->flags = 0; /* not used */
 	/*  If cn_netlink_send() failed, the data is not sent */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn_netlink_send(msg, CN_IDX_PROC, GFP_KERNEL);
+=======
+	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
 >>>>>>> v3.18
@@ -114,7 +125,10 @@ void proc_exec_connector(struct task_struct *task)
 	struct cn_msg *msg;
 	struct proc_event *ev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__u8 buffer[CN_PROC_MSG_SIZE] __aligned(8);
@@ -127,8 +141,12 @@ void proc_exec_connector(struct task_struct *task)
 	memset(&ev->event_data, 0, sizeof(ev->event_data));
 	get_seq(&msg->seq, &ev->cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&ts); /* get high res monotonic timestamp */
 	ev->timestamp_ns = timespec_to_ns(&ts);
+=======
+	ev->timestamp_ns = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	ev->timestamp_ns = ktime_get_ns();
 >>>>>>> v3.18
@@ -141,7 +159,11 @@ void proc_exec_connector(struct task_struct *task)
 	msg->len = sizeof(*ev);
 	msg->flags = 0; /* not used */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn_netlink_send(msg, CN_IDX_PROC, GFP_KERNEL);
+=======
+	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
 >>>>>>> v3.18
@@ -153,7 +175,10 @@ void proc_id_connector(struct task_struct *task, int which_id)
 	struct proc_event *ev;
 	__u8 buffer[CN_PROC_MSG_SIZE] __aligned(8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	const struct cred *cred;
@@ -182,8 +207,12 @@ void proc_id_connector(struct task_struct *task, int which_id)
 	rcu_read_unlock();
 	get_seq(&msg->seq, &ev->cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&ts); /* get high res monotonic timestamp */
 	ev->timestamp_ns = timespec_to_ns(&ts);
+=======
+	ev->timestamp_ns = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	ev->timestamp_ns = ktime_get_ns();
 >>>>>>> v3.18
@@ -193,7 +222,11 @@ void proc_id_connector(struct task_struct *task, int which_id)
 	msg->len = sizeof(*ev);
 	msg->flags = 0; /* not used */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn_netlink_send(msg, CN_IDX_PROC, GFP_KERNEL);
+=======
+	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
 >>>>>>> v3.18
@@ -204,7 +237,10 @@ void proc_sid_connector(struct task_struct *task)
 	struct cn_msg *msg;
 	struct proc_event *ev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__u8 buffer[CN_PROC_MSG_SIZE] __aligned(8);
@@ -217,8 +253,12 @@ void proc_sid_connector(struct task_struct *task)
 	memset(&ev->event_data, 0, sizeof(ev->event_data));
 	get_seq(&msg->seq, &ev->cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&ts); /* get high res monotonic timestamp */
 	ev->timestamp_ns = timespec_to_ns(&ts);
+=======
+	ev->timestamp_ns = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	ev->timestamp_ns = ktime_get_ns();
 >>>>>>> v3.18
@@ -231,7 +271,11 @@ void proc_sid_connector(struct task_struct *task)
 	msg->len = sizeof(*ev);
 	msg->flags = 0; /* not used */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn_netlink_send(msg, CN_IDX_PROC, GFP_KERNEL);
+=======
+	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
 >>>>>>> v3.18
@@ -242,7 +286,10 @@ void proc_ptrace_connector(struct task_struct *task, int ptrace_id)
 	struct cn_msg *msg;
 	struct proc_event *ev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__u8 buffer[CN_PROC_MSG_SIZE] __aligned(8);
@@ -255,8 +302,12 @@ void proc_ptrace_connector(struct task_struct *task, int ptrace_id)
 	memset(&ev->event_data, 0, sizeof(ev->event_data));
 	get_seq(&msg->seq, &ev->cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&ts); /* get high res monotonic timestamp */
 	ev->timestamp_ns = timespec_to_ns(&ts);
+=======
+	ev->timestamp_ns = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	ev->timestamp_ns = ktime_get_ns();
 >>>>>>> v3.18
@@ -277,7 +328,11 @@ void proc_ptrace_connector(struct task_struct *task, int ptrace_id)
 	msg->len = sizeof(*ev);
 	msg->flags = 0; /* not used */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn_netlink_send(msg, CN_IDX_PROC, GFP_KERNEL);
+=======
+	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
 >>>>>>> v3.18
@@ -288,7 +343,10 @@ void proc_comm_connector(struct task_struct *task)
 	struct cn_msg *msg;
 	struct proc_event *ev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__u8 buffer[CN_PROC_MSG_SIZE] __aligned(8);
@@ -301,8 +359,12 @@ void proc_comm_connector(struct task_struct *task)
 	memset(&ev->event_data, 0, sizeof(ev->event_data));
 	get_seq(&msg->seq, &ev->cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&ts); /* get high res monotonic timestamp */
 	ev->timestamp_ns = timespec_to_ns(&ts);
+=======
+	ev->timestamp_ns = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	ev->timestamp_ns = ktime_get_ns();
 >>>>>>> v3.18
@@ -316,7 +378,11 @@ void proc_comm_connector(struct task_struct *task)
 	msg->len = sizeof(*ev);
 	msg->flags = 0; /* not used */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn_netlink_send(msg, CN_IDX_PROC, GFP_KERNEL);
+=======
+	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
 >>>>>>> v3.18
@@ -328,7 +394,10 @@ void proc_coredump_connector(struct task_struct *task)
 	struct proc_event *ev;
 	__u8 buffer[CN_PROC_MSG_SIZE] __aligned(8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -340,8 +409,12 @@ void proc_coredump_connector(struct task_struct *task)
 	memset(&ev->event_data, 0, sizeof(ev->event_data));
 	get_seq(&msg->seq, &ev->cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&ts); /* get high res monotonic timestamp */
 	ev->timestamp_ns = timespec_to_ns(&ts);
+=======
+	ev->timestamp_ns = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	ev->timestamp_ns = ktime_get_ns();
 >>>>>>> v3.18
@@ -354,7 +427,11 @@ void proc_coredump_connector(struct task_struct *task)
 	msg->len = sizeof(*ev);
 	msg->flags = 0; /* not used */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn_netlink_send(msg, CN_IDX_PROC, GFP_KERNEL);
+=======
+	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
 >>>>>>> v3.18
@@ -366,7 +443,10 @@ void proc_exit_connector(struct task_struct *task)
 	struct proc_event *ev;
 	__u8 buffer[CN_PROC_MSG_SIZE] __aligned(8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -378,8 +458,12 @@ void proc_exit_connector(struct task_struct *task)
 	memset(&ev->event_data, 0, sizeof(ev->event_data));
 	get_seq(&msg->seq, &ev->cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&ts); /* get high res monotonic timestamp */
 	ev->timestamp_ns = timespec_to_ns(&ts);
+=======
+	ev->timestamp_ns = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	ev->timestamp_ns = ktime_get_ns();
 >>>>>>> v3.18
@@ -394,7 +478,11 @@ void proc_exit_connector(struct task_struct *task)
 	msg->len = sizeof(*ev);
 	msg->flags = 0; /* not used */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn_netlink_send(msg, CN_IDX_PROC, GFP_KERNEL);
+=======
+	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
 >>>>>>> v3.18
@@ -414,7 +502,10 @@ static void cn_proc_ack(int err, int rcvd_seq, int rcvd_ack)
 	struct proc_event *ev;
 	__u8 buffer[CN_PROC_MSG_SIZE] __aligned(8);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -426,8 +517,12 @@ static void cn_proc_ack(int err, int rcvd_seq, int rcvd_ack)
 	memset(&ev->event_data, 0, sizeof(ev->event_data));
 	msg->seq = rcvd_seq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ktime_get_ts(&ts); /* get high res monotonic timestamp */
 	ev->timestamp_ns = timespec_to_ns(&ts);
+=======
+	ev->timestamp_ns = ktime_get_ns();
+>>>>>>> v3.18
 =======
 	ev->timestamp_ns = ktime_get_ns();
 >>>>>>> v3.18
@@ -439,7 +534,11 @@ static void cn_proc_ack(int err, int rcvd_seq, int rcvd_ack)
 	msg->len = sizeof(*ev);
 	msg->flags = 0; /* not used */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cn_netlink_send(msg, CN_IDX_PROC, GFP_KERNEL);
+=======
+	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	cn_netlink_send(msg, 0, CN_IDX_PROC, GFP_KERNEL);
 >>>>>>> v3.18

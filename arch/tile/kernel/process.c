@@ -34,6 +34,10 @@
 #include <asm/traps.h>
 #include <asm/setup.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <asm/uaccess.h>
 >>>>>>> v3.18
@@ -68,7 +72,11 @@ early_param("idle", idle_setup);
 void arch_cpu_idle(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(irq_stat).idle_timestamp = jiffies;
+=======
+	__this_cpu_write(irq_stat.idle_timestamp, jiffies);
+>>>>>>> v3.18
 =======
 	__this_cpu_write(irq_stat.idle_timestamp, jiffies);
 >>>>>>> v3.18
@@ -83,6 +91,7 @@ void arch_release_thread_info(struct thread_info *info)
 	struct single_step_state *step_state = info->step_state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_HARDWALL
 	/*
 	 * We free a thread_info from the context of the task that has
@@ -96,6 +105,8 @@ void arch_release_thread_info(struct thread_info *info)
 	hardwall_deactivate_all(info->task);
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (step_state) {
@@ -172,7 +183,10 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 	task_thread_info(p)->step_state = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef __tilegx__
 	/*
 	 * Do not clone unalign jit fixup from the parent; each thread
@@ -181,6 +195,9 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 	task_thread_info(p)->unalign_jit_base = NULL;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Copy the registers onto the kernel stack so the
@@ -214,6 +231,7 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_SN_PROC()
 	/* Likewise, the new thread is not running static processor code. */
 	p->thread.sn_proc_running = 0;
@@ -224,6 +242,10 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 	/* New thread has its miscellaneous processor state bits clear. */
 	p->thread.proc_status = 0;
 #endif
+=======
+	/* New thread has its miscellaneous processor state bits clear. */
+	p->thread.proc_status = 0;
+>>>>>>> v3.18
 =======
 	/* New thread has its miscellaneous processor state bits clear. */
 	p->thread.proc_status = 0;
@@ -246,7 +268,10 @@ int copy_thread(unsigned long clone_flags, unsigned long sp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int set_unalign_ctl(struct task_struct *tsk, unsigned int val)
 {
 	task_thread_info(tsk)->align_ctl = val;
@@ -261,6 +286,9 @@ int get_unalign_ctl(struct task_struct *tsk, unsigned long adr)
 
 static struct task_struct corrupt_current = { .comm = "<corrupt>" };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Return "current" if it looks plausible, or else a pointer to a dummy.
@@ -269,7 +297,10 @@ static struct task_struct corrupt_current = { .comm = "<corrupt>" };
 struct task_struct *validate_current(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static struct task_struct corrupt = { .comm = "<corrupt>" };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct task_struct *tsk = current;
@@ -278,7 +309,11 @@ struct task_struct *validate_current(void)
 		     ((unsigned long)tsk & (__alignof__(*tsk) - 1)) != 0)) {
 		pr_err("Corrupt 'current' %p (sp %#lx)\n", tsk, stack_pointer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsk = &corrupt;
+=======
+		tsk = &corrupt_current;
+>>>>>>> v3.18
 =======
 		tsk = &corrupt_current;
 >>>>>>> v3.18
@@ -421,6 +456,7 @@ static void save_arch_state(struct thread_struct *t)
 	t->system_save[3] = __insn_mfspr(SPR_SYSTEM_SAVE_0_3);
 	t->intctrl_0 = __insn_mfspr(SPR_INTCTRL_0_STATUS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_PROC_STATUS_SPR()
 	t->proc_status = __insn_mfspr(SPR_PROC_STATUS);
 #endif
@@ -431,11 +467,16 @@ static void save_arch_state(struct thread_struct *t)
 	t->tile_rtf_hwm = __insn_mfspr(SPR_TILE_RTF_HWM);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	t->proc_status = __insn_mfspr(SPR_PROC_STATUS);
 #if !CHIP_HAS_FIXED_INTVEC_BASE()
 	t->interrupt_vector_base = __insn_mfspr(SPR_INTERRUPT_VECTOR_BASE_0);
 #endif
 	t->tile_rtf_hwm = __insn_mfspr(SPR_TILE_RTF_HWM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if CHIP_HAS_DSTREAM_PF()
 	t->dstream_pf = __insn_mfspr(SPR_DSTREAM_PF);
@@ -458,6 +499,7 @@ static void restore_arch_state(const struct thread_struct *t)
 	__insn_mtspr(SPR_SYSTEM_SAVE_0_3, t->system_save[3]);
 	__insn_mtspr(SPR_INTCTRL_0_STATUS, t->intctrl_0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_PROC_STATUS_SPR()
 	__insn_mtspr(SPR_PROC_STATUS, t->proc_status);
 #endif
@@ -468,11 +510,16 @@ static void restore_arch_state(const struct thread_struct *t)
 	__insn_mtspr(SPR_TILE_RTF_HWM, t->tile_rtf_hwm);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	__insn_mtspr(SPR_PROC_STATUS, t->proc_status);
 #if !CHIP_HAS_FIXED_INTVEC_BASE()
 	__insn_mtspr(SPR_INTERRUPT_VECTOR_BASE_0, t->interrupt_vector_base);
 #endif
 	__insn_mtspr(SPR_TILE_RTF_HWM, t->tile_rtf_hwm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if CHIP_HAS_DSTREAM_PF()
 	__insn_mtspr(SPR_DSTREAM_PF, t->dstream_pf);
@@ -483,9 +530,12 @@ static void restore_arch_state(const struct thread_struct *t)
 void _prepare_arch_switch(struct task_struct *next)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_SN_PROC()
 	int snctl;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if CHIP_HAS_TILE_DMA()
@@ -493,6 +543,7 @@ void _prepare_arch_switch(struct task_struct *next)
 	if (dma->enabled)
 		save_tile_dma_state(dma);
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if CHIP_HAS_SN_PROC()
 	/*
@@ -506,6 +557,8 @@ void _prepare_arch_switch(struct task_struct *next)
 	if (current->thread.sn_proc_running)
 		__insn_mtspr(SPR_SNCTL, snctl | SPR_SNCTL__FRZPROC_MASK);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -536,6 +589,7 @@ struct task_struct *__sched _switch_to(struct task_struct *prev,
 	restore_arch_state(&next->thread);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_SN_PROC()
 	/*
 	 * Restart static network processor in the new process
@@ -547,6 +601,8 @@ struct task_struct *__sched _switch_to(struct task_struct *prev,
 	}
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_HARDWALL
@@ -591,7 +647,11 @@ int do_work_pending(struct pt_regs *regs, u32 thread_info_flags)
 		return 1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if CHIP_HAS_TILE_DMA() || CHIP_HAS_SN_PROC()
+=======
+#if CHIP_HAS_TILE_DMA()
+>>>>>>> v3.18
 =======
 #if CHIP_HAS_TILE_DMA()
 >>>>>>> v3.18
@@ -645,8 +705,11 @@ void flush_thread(void)
 void exit_thread(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Nothing */
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HARDWALL
 	/*
 	 * Remove the task from the list of tasks that are associated
@@ -656,6 +719,9 @@ void exit_thread(void)
 	 */
 	hardwall_deactivate_all(current);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -665,6 +731,7 @@ void show_regs(struct pt_regs *regs)
 	int i;
 
 	pr_err("\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 	show_regs_print_info(KERN_ERR);
 #ifdef __tilegx__
@@ -684,6 +751,8 @@ void show_regs(struct pt_regs *regs)
 	pr_err(" r52: "REGFMT" tp : "REGFMT" sp : "REGFMT" lr : "REGFMT"\n",
 	       regs->regs[52], regs->tp, regs->sp, regs->lr);
 =======
+=======
+>>>>>>> v3.18
 	if (tsk != &corrupt_current)
 		show_regs_print_info(KERN_ERR);
 #ifdef __tilegx__
@@ -702,6 +771,9 @@ void show_regs(struct pt_regs *regs)
 		       i+27, regs->regs[i+27], i+40, regs->regs[i+40]);
 	pr_err(" r13: "REGFMT" tp : "REGFMT" sp : "REGFMT" lr : "REGFMT"\n",
 	       regs->regs[13], regs->tp, regs->sp, regs->lr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	pr_err(" pc : "REGFMT" ex1: %ld     faultnum: %ld\n",

@@ -9,13 +9,19 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NCAPINTS	10	/* N 32-bit words worth of info */
 =======
+=======
+>>>>>>> v3.18
 #ifndef _ASM_X86_DISABLED_FEATURES_H
 #include <asm/disabled-features.h>
 #endif
 
 #define NCAPINTS	11	/* N 32-bit words worth of info */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define NBUGINTS	1	/* N 32-bit bug flags */
 
@@ -26,6 +32,7 @@
  */
 
 /* Intel-defined CPU features, CPUID level 0x00000001 (edx), word 0 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define X86_FEATURE_FPU		(0*32+ 0) /* Onboard FPU */
 #define X86_FEATURE_VME		(0*32+ 1) /* Virtual Mode Extensions */
@@ -181,6 +188,8 @@
 #define X86_FEATURE_PERFCTR_NB  (6*32+24) /* NB performance counter extensions */
 #define X86_FEATURE_PERFCTR_L2	(6*32+28) /* L2 performance counter extensions */
 =======
+=======
+>>>>>>> v3.18
 #define X86_FEATURE_FPU		( 0*32+ 0) /* Onboard FPU */
 #define X86_FEATURE_VME		( 0*32+ 1) /* Virtual Mode Extensions */
 #define X86_FEATURE_DE		( 0*32+ 2) /* Debugging Extensions */
@@ -334,12 +343,16 @@
 #define X86_FEATURE_PERFCTR_CORE ( 6*32+23) /* core performance counter extensions */
 #define X86_FEATURE_PERFCTR_NB  ( 6*32+24) /* NB performance counter extensions */
 #define X86_FEATURE_PERFCTR_L2	( 6*32+28) /* L2 performance counter extensions */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * Auxiliary flags: Linux defined - For features scattered in various
  * CPUID levels like 0x6, 0xA etc, word 7
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define X86_FEATURE_IDA		(7*32+ 0) /* Intel Dynamic Acceleration */
 #define X86_FEATURE_ARAT	(7*32+ 1) /* Always Running APIC Timer */
@@ -385,6 +398,8 @@
 #define X86_FEATURE_ADX		(9*32+19) /* The ADCX and ADOX instructions */
 #define X86_FEATURE_SMAP	(9*32+20) /* Supervisor Mode Access Prevention */
 =======
+=======
+>>>>>>> v3.18
 #define X86_FEATURE_IDA		( 7*32+ 0) /* Intel Dynamic Acceleration */
 #define X86_FEATURE_ARAT	( 7*32+ 1) /* Always Running APIC Timer */
 #define X86_FEATURE_CPB		( 7*32+ 2) /* AMD Core Performance Boost */
@@ -440,6 +455,9 @@
 #define X86_FEATURE_XSAVEC	(10*32+ 1) /* XSAVEC */
 #define X86_FEATURE_XGETBV1	(10*32+ 2) /* XGETBV with ECX = 1 */
 #define X86_FEATURE_XSAVES	(10*32+ 3) /* XSAVES/XRSTORS */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -451,14 +469,20 @@
 #define X86_BUG_FDIV		X86_BUG(1) /* FPU FDIV */
 #define X86_BUG_COMA		X86_BUG(2) /* Cyrix 6x86 coma */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define X86_BUG_AMD_TLB_MMATCH	X86_BUG(3) /* AMD Erratum 383 */
 #define X86_BUG_AMD_APIC_C1E	X86_BUG(4) /* AMD Erratum 400 */
 =======
+=======
+>>>>>>> v3.18
 #define X86_BUG_AMD_TLB_MMATCH	X86_BUG(3) /* "tlb_mmatch" AMD Erratum 383 */
 #define X86_BUG_AMD_APIC_C1E	X86_BUG(4) /* "apic_c1e" AMD Erratum 400 */
 #define X86_BUG_11AP		X86_BUG(5) /* Bad local APIC aka 11AP */
 #define X86_BUG_FXSAVE_LEAK	X86_BUG(6) /* FXSAVE leaks FOP/FIP/FOP */
 #define X86_BUG_CLFLUSH_MONITOR	X86_BUG(7) /* AAI65, CLFLUSH required before MONITOR */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #if defined(__KERNEL__) && !defined(__ASSEMBLY__)
@@ -467,9 +491,12 @@
 #include <linux/bitops.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const char * const x86_cap_flags[NCAPINTS*32];
 extern const char * const x86_power_flags[32];
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_FEATURE_NAMES
 extern const char * const x86_cap_flags[NCAPINTS*32];
 extern const char * const x86_power_flags[32];
@@ -485,6 +512,9 @@ extern const char * const x86_power_flags[32];
  * X86_BUG_<name> - NCAPINTS*32.
  */
 extern const char * const x86_bug_flags[NBUGINTS*32];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define test_cpu_cap(c, bit)						\
@@ -503,7 +533,10 @@ extern const char * const x86_bug_flags[NBUGINTS*32];
 	   (((bit)>>5)==9 && (1UL<<((bit)&31) & REQUIRED_MASK9)) )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DISABLED_MASK_BIT_SET(bit)					\
 	 ( (((bit)>>5)==0 && (1UL<<((bit)&31) & DISABLED_MASK0)) ||	\
 	   (((bit)>>5)==1 && (1UL<<((bit)&31) & DISABLED_MASK1)) ||	\
@@ -516,6 +549,9 @@ extern const char * const x86_bug_flags[NBUGINTS*32];
 	   (((bit)>>5)==8 && (1UL<<((bit)&31) & DISABLED_MASK8)) ||	\
 	   (((bit)>>5)==9 && (1UL<<((bit)&31) & DISABLED_MASK9)) )
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define cpu_has(c, bit)							\
 	(__builtin_constant_p(bit) && REQUIRED_MASK_BIT_SET(bit) ? 1 :	\
@@ -526,7 +562,10 @@ extern const char * const x86_bug_flags[NBUGINTS*32];
 	 x86_this_cpu_test_bit(bit, (unsigned long *)&cpu_info.x86_capability))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * This macro is for detection of features which need kernel
  * infrastructure to be used.  It may *not* directly test the CPU
@@ -539,6 +578,9 @@ extern const char * const x86_bug_flags[NBUGINTS*32];
 	(__builtin_constant_p(bit) && DISABLED_MASK_BIT_SET(bit) ? 0 :	\
 	 cpu_has(&boot_cpu_data, bit))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define boot_cpu_has(bit)	cpu_has(&boot_cpu_data, bit)
 
@@ -555,11 +597,17 @@ extern const char * const x86_bug_flags[NBUGINTS*32];
 
 #define cpu_has_fpu		boot_cpu_has(X86_FEATURE_FPU)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define cpu_has_vme		boot_cpu_has(X86_FEATURE_VME)
 #define cpu_has_de		boot_cpu_has(X86_FEATURE_DE)
 #define cpu_has_pse		boot_cpu_has(X86_FEATURE_PSE)
 #define cpu_has_tsc		boot_cpu_has(X86_FEATURE_TSC)
 #define cpu_has_pae		boot_cpu_has(X86_FEATURE_PAE)
+=======
+#define cpu_has_de		boot_cpu_has(X86_FEATURE_DE)
+#define cpu_has_pse		boot_cpu_has(X86_FEATURE_PSE)
+#define cpu_has_tsc		boot_cpu_has(X86_FEATURE_TSC)
+>>>>>>> v3.18
 =======
 #define cpu_has_de		boot_cpu_has(X86_FEATURE_DE)
 #define cpu_has_pse		boot_cpu_has(X86_FEATURE_PSE)
@@ -580,11 +628,15 @@ extern const char * const x86_bug_flags[NBUGINTS*32];
 #define cpu_has_avx2		boot_cpu_has(X86_FEATURE_AVX2)
 #define cpu_has_ht		boot_cpu_has(X86_FEATURE_HT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define cpu_has_mp		boot_cpu_has(X86_FEATURE_MP)
 #define cpu_has_nx		boot_cpu_has(X86_FEATURE_NX)
 #define cpu_has_k6_mtrr		boot_cpu_has(X86_FEATURE_K6_MTRR)
 #define cpu_has_cyrix_arr	boot_cpu_has(X86_FEATURE_CYRIX_ARR)
 #define cpu_has_centaur_mcr	boot_cpu_has(X86_FEATURE_CENTAUR_MCR)
+=======
+#define cpu_has_nx		boot_cpu_has(X86_FEATURE_NX)
+>>>>>>> v3.18
 =======
 #define cpu_has_nx		boot_cpu_has(X86_FEATURE_NX)
 >>>>>>> v3.18
@@ -601,7 +653,11 @@ extern const char * const x86_bug_flags[NBUGINTS*32];
 #define cpu_has_ds		boot_cpu_has(X86_FEATURE_DS)
 #define cpu_has_pebs		boot_cpu_has(X86_FEATURE_PEBS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define cpu_has_clflush		boot_cpu_has(X86_FEATURE_CLFLSH)
+=======
+#define cpu_has_clflush		boot_cpu_has(X86_FEATURE_CLFLUSH)
+>>>>>>> v3.18
 =======
 #define cpu_has_clflush		boot_cpu_has(X86_FEATURE_CLFLUSH)
 >>>>>>> v3.18
@@ -615,6 +671,10 @@ extern const char * const x86_bug_flags[NBUGINTS*32];
 #define cpu_has_xsave		boot_cpu_has(X86_FEATURE_XSAVE)
 #define cpu_has_xsaveopt	boot_cpu_has(X86_FEATURE_XSAVEOPT)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_has_xsaves		boot_cpu_has(X86_FEATURE_XSAVES)
+>>>>>>> v3.18
 =======
 #define cpu_has_xsaves		boot_cpu_has(X86_FEATURE_XSAVES)
 >>>>>>> v3.18
@@ -629,6 +689,7 @@ extern const char * const x86_bug_flags[NBUGINTS*32];
 #define cpu_has_eager_fpu	boot_cpu_has(X86_FEATURE_EAGER_FPU)
 #define cpu_has_topoext		boot_cpu_has(X86_FEATURE_TOPOEXT)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_X86_64
 
@@ -654,15 +715,21 @@ extern const char * const x86_bug_flags[NBUGINTS*32];
 
 #if __GNUC__ >= 4
 =======
+=======
+>>>>>>> v3.18
 #if __GNUC__ >= 4
 extern void warn_pre_alternatives(void);
 extern bool __static_cpu_has_safe(u16 bit);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Static testing of CPU features.  Used the same as boot_cpu_has().
  * These are only valid after alternatives have run, but will statically
  * patch the target code for additional performance.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  */
@@ -670,6 +737,8 @@ static __always_inline __pure bool __static_cpu_has(u16 bit)
 {
 #if __GNUC__ > 4 || __GNUC_MINOR__ >= 5
 =======
+=======
+>>>>>>> v3.18
  */
 static __always_inline __pure bool __static_cpu_has(u16 bit)
 {
@@ -695,6 +764,9 @@ static __always_inline __pure bool __static_cpu_has(u16 bit)
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		asm_volatile_goto("1: jmp %l[t_no]\n"
 			 "2:\n"
@@ -711,8 +783,11 @@ static __always_inline __pure bool __static_cpu_has(u16 bit)
 	t_no:
 		return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_X86_DEBUG_STATIC_CPU_HAS
 	t_warn:
@@ -722,6 +797,9 @@ static __always_inline __pure bool __static_cpu_has(u16 bit)
 
 #else /* CC_HAVE_ASM_GOTO */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		u8 flag;
 		/* Open-coded due to __stringify() in ALTERNATIVE() */
@@ -744,7 +822,12 @@ static __always_inline __pure bool __static_cpu_has(u16 bit)
 			     : "=qm" (flag) : "i" (bit));
 		return flag;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+
+#endif /* CC_HAVE_ASM_GOTO */
+>>>>>>> v3.18
 =======
 
 #endif /* CC_HAVE_ASM_GOTO */
@@ -760,7 +843,10 @@ static __always_inline __pure bool __static_cpu_has(u16 bit)
 		boot_cpu_has(bit)				\
 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static __always_inline __pure bool _static_cpu_has_safe(u16 bit)
 {
@@ -843,11 +929,15 @@ static __always_inline __pure bool _static_cpu_has_safe(u16 bit)
 		boot_cpu_has(bit) :				\
 		_static_cpu_has_safe(bit)			\
 )
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 /*
  * gcc 3.x is too stupid to do the static test; fall back to dynamic.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define static_cpu_has(bit) boot_cpu_has(bit)
 #endif
@@ -862,6 +952,8 @@ static __always_inline __pure bool _static_cpu_has_safe(u16 bit)
 #endif /* defined(__KERNEL__) && !defined(__ASSEMBLY__) */
 
 =======
+=======
+>>>>>>> v3.18
 #define static_cpu_has(bit)		boot_cpu_has(bit)
 #define static_cpu_has_safe(bit)	boot_cpu_has(bit)
 #endif
@@ -882,5 +974,8 @@ static __always_inline __pure bool _static_cpu_has_safe(u16 bit)
 					boot_cpu_data.x86_model
 
 #endif /* defined(__KERNEL__) && !defined(__ASSEMBLY__) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_X86_CPUFEATURE_H */

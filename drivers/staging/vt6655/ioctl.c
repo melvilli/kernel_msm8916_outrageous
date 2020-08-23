@@ -39,8 +39,11 @@
 #include "rf.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int msglevel = MSG_LEVEL_INFO;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef WPA_SM_Transtatus
@@ -48,7 +51,11 @@ SWPAResult wpa_Result;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int private_ioctl(PSDevice pDevice, struct ifreq *rq)
+=======
+int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
+>>>>>>> v3.18
 =======
 int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 >>>>>>> v3.18
@@ -72,7 +79,10 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 	PKnownNodeDB	pNode;
 	unsigned int	ii, jj;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCmdLinkStatus	sLinkStatus;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char	abySuppRates[] = {WLAN_EID_SUPP_RATES, 4, 0x02, 0x04, 0x0B, 0x16};
@@ -86,7 +96,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 	switch (pReq->wCmdCode) {
 	case WLAN_CMD_BSS_SCAN:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "WLAN_CMD_BSS_SCAN..begin\n");
+=======
+		pr_debug("WLAN_CMD_BSS_SCAN..begin\n");
+>>>>>>> v3.18
 =======
 		pr_debug("WLAN_CMD_BSS_SCAN..begin\n");
 >>>>>>> v3.18
@@ -139,6 +153,7 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 			if (sZoneTypeCmd.ZoneType == ZoneType_USA) {
 				/* set to USA */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("set_ZoneType:USA\n");
 			} else if (sZoneTypeCmd.ZoneType == ZoneType_Japan) {
 				/* set to Japan */
@@ -147,6 +162,8 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 				/* set to Europe */
 				printk("set_ZoneType:Europe\n");
 =======
+=======
+>>>>>>> v3.18
 				pr_debug("set_ZoneType:USA\n");
 			} else if (sZoneTypeCmd.ZoneType == ZoneType_Japan) {
 				/* set to Japan */
@@ -154,6 +171,9 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 			} else if (sZoneTypeCmd.ZoneType == ZoneType_Europe) {
 				/* set to Europe */
 				pr_debug("set_ZoneType:Europe\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		} else {
@@ -168,7 +188,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 				sZoneTypeCmd.ZoneType = ZoneType_Europe;
 			} else {			/* Unknown ZoneType */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk("Error:ZoneType[%x] Unknown ???\n", zonetype);
+=======
+				pr_err("Error:ZoneType[%x] Unknown ???\n", zonetype);
+>>>>>>> v3.18
 =======
 				pr_err("Error:ZoneType[%x] Unknown ???\n", zonetype);
 >>>>>>> v3.18
@@ -205,20 +229,27 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 		if (sJoinCmd.wBSSType == ADHOC) {
 			pMgmt->eConfigMode = WMAC_CONFIG_IBSS_STA;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "ioct set to adhoc mode\n");
 		} else {
 			pMgmt->eConfigMode = WMAC_CONFIG_ESS_STA;
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "ioct set to STA mode\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("ioct set to adhoc mode\n");
 		} else {
 			pMgmt->eConfigMode = WMAC_CONFIG_ESS_STA;
 			pr_debug("ioct set to STA mode\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		if (sJoinCmd.bPSEnable == true) {
 			pDevice->ePSMode = WMAC_POWER_FAST;
 			pMgmt->wListenInterval = 2;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Power Saving On\n");
 		} else {
@@ -226,26 +257,37 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 			pMgmt->wListenInterval = 1;
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Power Saving Off\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("Power Saving On\n");
 		} else {
 			pDevice->ePSMode = WMAC_POWER_CAM;
 			pMgmt->wListenInterval = 1;
 			pr_debug("Power Saving Off\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
 		if (sJoinCmd.bShareKeyAuth == true) {
 			pMgmt->bShareKeyAlgorithm = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Share Key\n");
 		} else {
 			pMgmt->bShareKeyAlgorithm = false;
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Open System\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("Share Key\n");
 		} else {
 			pMgmt->bShareKeyAlgorithm = false;
 			pr_debug("Open System\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		pDevice->uChannel = sJoinCmd.uChannel;
@@ -259,7 +301,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 
 	case WLAN_CMD_SET_WEP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "WLAN_CMD_SET_WEP Key.\n");
+=======
+		pr_debug("WLAN_CMD_SET_WEP Key\n");
+>>>>>>> v3.18
 =======
 		pr_debug("WLAN_CMD_SET_WEP Key\n");
 >>>>>>> v3.18
@@ -273,7 +319,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 			pDevice->eEncryptionStatus = Ndis802_11EncryptionDisabled;
 			MACvDisableDefaultKey(pDevice->PortOffset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "WEP function disable.\n");
+=======
+			pr_debug("WEP function disable\n");
+>>>>>>> v3.18
 =======
 			pr_debug("WEP function disable\n");
 >>>>>>> v3.18
@@ -304,17 +354,23 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case WLAN_CMD_GET_LINK:
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "WLAN_CMD_GET_LINK status.\n");
 
 		memset(sLinkStatus.abySSID, 0 , WLAN_SSID_MAXLEN + 1);
 =======
+=======
+>>>>>>> v3.18
 	case WLAN_CMD_GET_LINK: {
 		SCmdLinkStatus sLinkStatus;
 
 		pr_debug("WLAN_CMD_GET_LINK status\n");
 
 		memset(&sLinkStatus, 0, sizeof(sLinkStatus));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (pMgmt->eCurrMode == WMAC_MODE_IBSS_STA)
@@ -335,7 +391,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 			memcpy(sLinkStatus.abyBSSID, pMgmt->abyCurrBSSID, WLAN_BSSID_LEN);
 			sLinkStatus.uLinkRate = pMgmt->sNodeDBTable[0].wTxDataRate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO " Link Success!\n");
+=======
+			pr_debug(" Link Success!\n");
+>>>>>>> v3.18
 =======
 			pr_debug(" Link Success!\n");
 >>>>>>> v3.18
@@ -349,7 +409,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 		}
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -380,7 +444,12 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pList = (PSBSSIDList)kmalloc(sizeof(SBSSIDList) + (sList.uItem * sizeof(SBSSIDItem)), (int)GFP_ATOMIC);
+=======
+		pList = (PSBSSIDList)kmalloc(sizeof(SBSSIDList) + (sList.uItem * sizeof(SBSSIDItem)),
+					     GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 		pList = (PSBSSIDList)kmalloc(sizeof(SBSSIDList) + (sList.uItem * sizeof(SBSSIDItem)),
 					     GFP_ATOMIC);
@@ -398,7 +467,10 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 				pList->sBSSIDList[ii].wBeaconInterval = pBSS->wBeaconInterval;
 				pList->sBSSIDList[ii].wCapInfo = pBSS->wCapInfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				/* pList->sBSSIDList[ii].uRSSI = pBSS->uRSSI; */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				RFvRSSITodBm(pDevice, (unsigned char)(pBSS->uRSSI), &ldBm);
@@ -447,7 +519,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 
 	case WLAN_CMD_STOP_MAC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "WLAN_CMD_STOP_MAC\n");
+=======
+		pr_debug("WLAN_CMD_STOP_MAC\n");
+>>>>>>> v3.18
 =======
 		pr_debug("WLAN_CMD_STOP_MAC\n");
 >>>>>>> v3.18
@@ -470,7 +546,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 
 	case WLAN_CMD_START_MAC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "WLAN_CMD_START_MAC\n");
+=======
+		pr_debug("WLAN_CMD_START_MAC\n");
+>>>>>>> v3.18
 =======
 		pr_debug("WLAN_CMD_START_MAC\n");
 >>>>>>> v3.18
@@ -487,7 +567,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 
 	case WLAN_CMD_SET_HOSTAPD:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "WLAN_CMD_SET_HOSTAPD\n");
+=======
+		pr_debug("WLAN_CMD_SET_HOSTAPD\n");
+>>>>>>> v3.18
 =======
 		pr_debug("WLAN_CMD_SET_HOSTAPD\n");
 >>>>>>> v3.18
@@ -499,7 +583,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 		if (sValue.dwValue == 1) {
 			if (vt6655_hostap_set_hostapd(pDevice, 1, 1) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Enable HOSTAP\n");
+=======
+				pr_debug("Enable HOSTAP\n");
+>>>>>>> v3.18
 =======
 				pr_debug("Enable HOSTAP\n");
 >>>>>>> v3.18
@@ -510,7 +598,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 		} else {
 			vt6655_hostap_set_hostapd(pDevice, 0, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Disable HOSTAP\n");
+=======
+			pr_debug("Disable HOSTAP\n");
+>>>>>>> v3.18
 =======
 			pr_debug("Disable HOSTAP\n");
 >>>>>>> v3.18
@@ -519,17 +611,23 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 
 	case WLAN_CMD_SET_HOSTAPD_STA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "WLAN_CMD_SET_HOSTAPD_STA\n");
 		break;
 
 	case WLAN_CMD_SET_802_1X:
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "WLAN_CMD_SET_802_1X\n");
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("WLAN_CMD_SET_HOSTAPD_STA\n");
 		break;
 
 	case WLAN_CMD_SET_802_1X:
 		pr_debug("WLAN_CMD_SET_802_1X\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (copy_from_user(&sValue, pReq->data, sizeof(SCmdValue))) {
 			result = -EFAULT;
@@ -539,22 +637,32 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 		if (sValue.dwValue == 1) {
 			pDevice->bEnable8021x = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Enable 802.1x\n");
 		} else {
 			pDevice->bEnable8021x = false;
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Disable 802.1x\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("Enable 802.1x\n");
 		} else {
 			pDevice->bEnable8021x = false;
 			pr_debug("Disable 802.1x\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
 
 	case WLAN_CMD_SET_HOST_WEP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "WLAN_CMD_SET_HOST_WEP\n");
+=======
+		pr_debug("WLAN_CMD_SET_HOST_WEP\n");
+>>>>>>> v3.18
 =======
 		pr_debug("WLAN_CMD_SET_HOST_WEP\n");
 >>>>>>> v3.18
@@ -566,22 +674,32 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 		if (sValue.dwValue == 1) {
 			pDevice->bEnableHostWEP = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Enable HostWEP\n");
 		} else {
 			pDevice->bEnableHostWEP = false;
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Disable HostWEP\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("Enable HostWEP\n");
 		} else {
 			pDevice->bEnableHostWEP = false;
 			pr_debug("Disable HostWEP\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
 
 	case WLAN_CMD_SET_WPA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "WLAN_CMD_SET_WPA\n");
+=======
+		pr_debug("WLAN_CMD_SET_WPA\n");
+>>>>>>> v3.18
 =======
 		pr_debug("WLAN_CMD_SET_WPA\n");
 >>>>>>> v3.18
@@ -592,17 +710,23 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 		}
 		if (sValue.dwValue == 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "up wpadev\n");
 			memcpy(pDevice->wpadev->dev_addr, pDevice->dev->dev_addr, ETH_ALEN);
 			pDevice->bWPADEVUp = true;
 		} else {
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "close wpadev\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("up wpadev\n");
 			eth_hw_addr_inherit(pDevice->wpadev, pDevice->dev);
 			pDevice->bWPADEVUp = true;
 		} else {
 			pr_debug("close wpadev\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pDevice->bWPADEVUp = false;
 		}
@@ -610,7 +734,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 
 	case WLAN_CMD_AP_START:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "WLAN_CMD_AP_START\n");
+=======
+		pr_debug("WLAN_CMD_AP_START\n");
+>>>>>>> v3.18
 =======
 		pr_debug("WLAN_CMD_AP_START\n");
 >>>>>>> v3.18
@@ -628,9 +756,15 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 		if (sStartAPCmd.wBSSType == AP) {
 			pMgmt->eConfigMode = WMAC_CONFIG_AP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "ioct set to AP mode\n");
 		} else {
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "ioct BSS type not set to AP mode\n");
+=======
+			pr_debug("ioct set to AP mode\n");
+		} else {
+			pr_debug("ioct BSS type not set to AP mode\n");
+>>>>>>> v3.18
 =======
 			pr_debug("ioct set to AP mode\n");
 		} else {
@@ -664,15 +798,21 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 		if (sStartAPCmd.bShareKeyAuth == true) {
 			pMgmt->bShareKeyAlgorithm = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Share Key\n");
 		} else {
 			pMgmt->bShareKeyAlgorithm = false;
 			DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Open System\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("Share Key\n");
 		} else {
 			pMgmt->bShareKeyAlgorithm = false;
 			pr_debug("Open System\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		memcpy(pMgmt->abyIBSSSuppRates, abySuppRates, 6);
@@ -698,8 +838,13 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Support Rate= %*ph\n",
 			4, pMgmt->abyIBSSSuppRates + 2);
+=======
+		pr_debug("Support Rate= %*ph\n",
+			 4, pMgmt->abyIBSSSuppRates + 2);
+>>>>>>> v3.18
 =======
 		pr_debug("Support Rate= %*ph\n",
 			 4, pMgmt->abyIBSSSuppRates + 2);
@@ -739,7 +884,12 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pNodeList = (PSNodeList)kmalloc(sizeof(SNodeList) + (sNodeList.uItem * sizeof(SNodeItem)), (int)GFP_ATOMIC);
+=======
+		pNodeList = (PSNodeList)kmalloc(sizeof(SNodeList) + (sNodeList.uItem * sizeof(SNodeItem)),
+						GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 		pNodeList = (PSNodeList)kmalloc(sizeof(SNodeList) + (sNodeList.uItem * sizeof(SNodeItem)),
 						GFP_ATOMIC);
@@ -764,6 +914,7 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 				pNodeList->sNodeList[jj].wWepKeyLength = pNode->uWepKeyLength;
 				memcpy(&(pNodeList->sNodeList[jj].abyWepKey[0]), &(pNode->abyWepKey[0]), WEP_KEYMAXLEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "key= %2.2X:%2.2X:%2.2X:%2.2X:%2.2X\n",
 					pNodeList->sNodeList[jj].abyWepKey[0],
 					pNodeList->sNodeList[jj].abyWepKey[1],
@@ -771,12 +922,17 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 					pNodeList->sNodeList[jj].abyWepKey[3],
 					pNodeList->sNodeList[jj].abyWepKey[4]);
 =======
+=======
+>>>>>>> v3.18
 				pr_debug("key= %2.2X:%2.2X:%2.2X:%2.2X:%2.2X\n",
 					 pNodeList->sNodeList[jj].abyWepKey[0],
 					 pNodeList->sNodeList[jj].abyWepKey[1],
 					 pNodeList->sNodeList[jj].abyWepKey[2],
 					 pNodeList->sNodeList[jj].abyWepKey[3],
 					 pNodeList->sNodeList[jj].abyWepKey[4]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				pNodeList->sNodeList[jj].bIsInFallback = pNode->bIsInFallback;
 				pNodeList->sNodeList[jj].uTxFailures = pNode->uTxFailures;
@@ -829,7 +985,11 @@ int private_ioctl(struct vnt_private *pDevice, struct ifreq *rq)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DBG_PRT(MSG_LEVEL_DEBUG, KERN_INFO "Private command not support..\n");
+=======
+		pr_debug("Private command not support..\n");
+>>>>>>> v3.18
 =======
 		pr_debug("Private command not support..\n");
 >>>>>>> v3.18

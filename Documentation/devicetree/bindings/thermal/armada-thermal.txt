@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 * Marvell Armada 370/XP thermal management
+=======
+* Marvell Armada 370/375/380/XP thermal management
+>>>>>>> v3.18
 =======
 * Marvell Armada 370/375/380/XP thermal management
 >>>>>>> v3.18
@@ -9,9 +13,12 @@ Required properties:
 - compatible:	Should be set to one of the following:
 		marvell,armada370-thermal
 <<<<<<< HEAD
+<<<<<<< HEAD
 		marvell,armadaxp-thermal
 
 =======
+=======
+>>>>>>> v3.18
 		marvell,armada375-thermal
 		marvell,armada375-z1-thermal
 		marvell,armada380-thermal
@@ -24,6 +31,9 @@ Required properties:
 		The operating system may auto-detect the SoC stepping and
 		update the compatible and register offsets at runtime.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - reg:		Device's register space.
 		Two entries are expected, see the examples below.

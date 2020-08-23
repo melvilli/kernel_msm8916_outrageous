@@ -1099,17 +1099,23 @@ static int __init msi_init(void)
 	ret = platform_device_add(msipf_device);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail_platform_device1;
 
 	if (quirks->load_scm_model && (load_scm_model_init(msipf_device) < 0)) {
 		ret = -EINVAL;
 		goto fail_platform_device1;
 =======
+=======
+>>>>>>> v3.18
 		goto fail_device_add;
 
 	if (quirks->load_scm_model && (load_scm_model_init(msipf_device) < 0)) {
 		ret = -EINVAL;
 		goto fail_scm_model_init;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1117,7 +1123,11 @@ static int __init msi_init(void)
 				 &msipf_attribute_group);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail_platform_device2;
+=======
+		goto fail_create_group;
+>>>>>>> v3.18
 =======
 		goto fail_create_group;
 >>>>>>> v3.18
@@ -1128,7 +1138,11 @@ static int __init msi_init(void)
 						&dev_attr_threeg);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto fail_platform_device2;
+=======
+			goto fail_create_attr;
+>>>>>>> v3.18
 =======
 			goto fail_create_attr;
 >>>>>>> v3.18
@@ -1137,7 +1151,11 @@ static int __init msi_init(void)
 					 &msipf_old_attribute_group);
 		if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto fail_platform_device2;
+=======
+			goto fail_create_attr;
+>>>>>>> v3.18
 =======
 			goto fail_create_attr;
 >>>>>>> v3.18
@@ -1155,8 +1173,14 @@ static int __init msi_init(void)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 fail_platform_device2:
 
+=======
+fail_create_attr:
+	sysfs_remove_group(&msipf_device->dev.kobj, &msipf_attribute_group);
+fail_create_group:
+>>>>>>> v3.18
 =======
 fail_create_attr:
 	sysfs_remove_group(&msipf_device->dev.kobj, &msipf_attribute_group);
@@ -1168,6 +1192,7 @@ fail_create_group:
 		cancel_work_sync(&msi_rfkill_work);
 		rfkill_cleanup();
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_device_del(msipf_device);
 
@@ -1182,6 +1207,8 @@ fail_platform_driver:
 fail_backlight:
 
 =======
+=======
+>>>>>>> v3.18
 fail_scm_model_init:
 	platform_device_del(msipf_device);
 fail_device_add:
@@ -1189,6 +1216,9 @@ fail_device_add:
 fail_platform_driver:
 	platform_driver_unregister(&msipf_driver);
 fail_backlight:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	backlight_device_unregister(msibl_device);
 

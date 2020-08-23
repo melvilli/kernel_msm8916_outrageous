@@ -18,8 +18,12 @@
 #include <linux/stddef.h>
 #include <net/sock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "vsock_addr.h"
+=======
+#include <net/vsock_addr.h>
+>>>>>>> v3.18
 =======
 #include <net/vsock_addr.h>
 >>>>>>> v3.18

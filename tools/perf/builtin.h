@@ -26,7 +26,10 @@ extern int cmd_record(int argc, const char **argv, const char *prefix);
 extern int cmd_report(int argc, const char **argv, const char *prefix);
 extern int cmd_stat(int argc, const char **argv, const char *prefix);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int cmd_periodic(int argc, const char **argv, const char *prefix);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int cmd_timechart(int argc, const char **argv, const char *prefix);

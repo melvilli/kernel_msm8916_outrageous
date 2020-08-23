@@ -13,7 +13,11 @@ any time with each driver sharing the console with other drivers including
 the system driver. However, modular drivers cannot take over the console
 that is currently occupied by another modular driver. (Exception: Drivers that
 <<<<<<< HEAD
+<<<<<<< HEAD
 call take_over_console() will succeed in the takeover regardless of the type
+=======
+call do_take_over_console() will succeed in the takeover regardless of the type
+>>>>>>> v3.18
 =======
 call do_take_over_console() will succeed in the takeover regardless of the type
 >>>>>>> v3.18
@@ -24,6 +28,7 @@ released by the console, the system driver will take over.
 Modular drivers, from the programmer's point of view, has to call:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 take_over_console() - load and bind driver to console layer
 	 give_up_console() - unbind and unload driver
 
@@ -32,6 +37,8 @@ In newer kernels, the following are also available:
 	 register_con_driver()
 	 unregister_con_driver()
 =======
+=======
+>>>>>>> v3.18
 	 do_take_over_console() - load and bind driver to console layer
 	 give_up_console() - unload driver, it will only work if driver is fully unbond
 
@@ -39,6 +46,9 @@ In newer kernels, the following are also available:
 
 	 do_register_con_driver()
 	 do_unregister_con_driver()
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 If sysfs is enabled, the contents of /sys/class/vtconsole can be
@@ -109,6 +119,7 @@ Notes for developers:
 =====================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 take_over_console() is now broken up into:
 
      register_con_driver()
@@ -116,12 +127,17 @@ take_over_console() is now broken up into:
 
 give_up_console() is a wrapper to unregister_con_driver(), and a driver must
 =======
+=======
+>>>>>>> v3.18
 do_take_over_console() is now broken up into:
 
      do_register_con_driver()
      do_bind_con_driver() - private function
 
 give_up_console() is a wrapper to do_unregister_con_driver(), and a driver must
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 be fully unbound for this call to succeed. con_is_bound() will check if the
 driver is bound or not.
@@ -133,15 +149,21 @@ In order for binding to and unbinding from the console to properly work,
 console drivers must follow these guidelines:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 1. All drivers, except system drivers, must call either register_con_driver()
    or take_over_console(). register_con_driver() will just add the driver to
    the console's internal list. It won't take over the
    console. take_over_console(), as it name implies, will also take over (or
 =======
+=======
+>>>>>>> v3.18
 1. All drivers, except system drivers, must call either do_register_con_driver()
    or do_take_over_console(). do_register_con_driver() will just add the driver to
    the console's internal list. It won't take over the
    console. do_take_over_console(), as it name implies, will also take over (or
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
    bind to) the console.
 
@@ -159,15 +181,21 @@ console drivers must follow these guidelines:
 
 4. Upon exit of the driver, ensure that the driver is totally unbound. If the
 <<<<<<< HEAD
+<<<<<<< HEAD
    condition is satisfied, then the driver must call unregister_con_driver()
    or give_up_console().
 
 5. unregister_con_driver() can also be called on conditions which make it
 =======
+=======
+>>>>>>> v3.18
    condition is satisfied, then the driver must call do_unregister_con_driver()
    or give_up_console().
 
 5. do_unregister_con_driver() can also be called on conditions which make it
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
    impossible for the driver to service console requests.  This can happen
    with the framebuffer console that suddenly lost all of its drivers.

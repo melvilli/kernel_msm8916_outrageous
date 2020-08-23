@@ -101,7 +101,10 @@
 #define IPR_SUBS_DEV_ID_57D7    0x03FF
 #define IPR_SUBS_DEV_ID_57D8    0x03FE
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IPR_SUBS_DEV_ID_57D9    0x046D
 #define IPR_SUBS_DEV_ID_57DA    0x04CA
 #define IPR_SUBS_DEV_ID_57EB    0x0474
@@ -113,6 +116,9 @@
 #define IPR_SUBS_DEV_ID_2CCA	0x04C7
 #define IPR_SUBS_DEV_ID_2CD2	0x04C8
 #define IPR_SUBS_DEV_ID_2CCD	0x04C9
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IPR_NAME				"ipr"
 
@@ -134,6 +140,10 @@
 #define	IPR_IOASC_IOASC_MASK			0xFFFFFF00
 #define	IPR_IOASC_SCSI_STATUS_MASK		0x000000FF
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IPR_IOASC_HW_CMD_FAILED			0x046E0000
+>>>>>>> v3.18
 =======
 #define IPR_IOASC_HW_CMD_FAILED			0x046E0000
 >>>>>>> v3.18
@@ -242,6 +252,10 @@
 #define IPR_CHECK_FOR_RESET_TIMEOUT		(HZ / 10)
 #define IPR_WAIT_FOR_BIST_TIMEOUT		(2 * HZ)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IPR_PCI_ERROR_RECOVERY_TIMEOUT	(120 * HZ)
+>>>>>>> v3.18
 =======
 #define IPR_PCI_ERROR_RECOVERY_TIMEOUT	(120 * HZ)
 >>>>>>> v3.18
@@ -280,7 +294,11 @@
 
 #define IPR_IPL_INIT_MIN_STAGE_TIME			5
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IPR_IPL_INIT_DEFAULT_STAGE_TIME                 30
+=======
+#define IPR_IPL_INIT_DEFAULT_STAGE_TIME                 15
+>>>>>>> v3.18
 =======
 #define IPR_IPL_INIT_DEFAULT_STAGE_TIME                 15
 >>>>>>> v3.18
@@ -321,7 +339,11 @@ IPR_PCII_NO_HOST_RRQ | IPR_PCII_IOARRIN_LOST | IPR_PCII_MMIO_ERROR)
  */
 #define IPR_FMT2_MAX_IOA_DUMP_SIZE			(4 * 1024 * 1024)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IPR_FMT3_MAX_IOA_DUMP_SIZE			(32 * 1024 * 1024)
+=======
+#define IPR_FMT3_MAX_IOA_DUMP_SIZE			(80 * 1024 * 1024)
+>>>>>>> v3.18
 =======
 #define IPR_FMT3_MAX_IOA_DUMP_SIZE			(80 * 1024 * 1024)
 >>>>>>> v3.18
@@ -335,7 +357,11 @@ IPR_PCII_NO_HOST_RRQ | IPR_PCII_IOARRIN_LOST | IPR_PCII_MMIO_ERROR)
  */
 #define IPR_NUM_IOADL_ENTRIES			IPR_MAX_SGLIST
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IPR_MAX_MSIX_VECTORS		0x5
+=======
+#define IPR_MAX_MSIX_VECTORS		0x10
+>>>>>>> v3.18
 =======
 #define IPR_MAX_MSIX_VECTORS		0x10
 >>>>>>> v3.18
@@ -925,7 +951,10 @@ struct ipr_hostrcb_type_01_error {
 }__attribute__((packed, aligned (4)));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ipr_hostrcb_type_21_error {
 	__be32 wwn[4];
 	u8 res_path[8];
@@ -938,6 +967,9 @@ struct ipr_hostrcb_type_21_error {
 	__be32 ioa_data[236];
 }__attribute__((packed, aligned (4)));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ipr_hostrcb_type_02_error {
 	struct ipr_vpd ioa_vpd;
@@ -1169,6 +1201,10 @@ struct ipr_hostrcb64_error {
 		struct ipr_hostrcb_type_12_error type_12_error;
 		struct ipr_hostrcb_type_17_error type_17_error;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct ipr_hostrcb_type_21_error type_21_error;
+>>>>>>> v3.18
 =======
 		struct ipr_hostrcb_type_21_error type_21_error;
 >>>>>>> v3.18
@@ -1216,6 +1252,10 @@ struct ipr_hcam {
 #define IPR_HOST_RCB_OVERLAY_ID_17				0x17
 #define IPR_HOST_RCB_OVERLAY_ID_20				0x20
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define IPR_HOST_RCB_OVERLAY_ID_21				0x21
+>>>>>>> v3.18
 =======
 #define IPR_HOST_RCB_OVERLAY_ID_21				0x21
 >>>>>>> v3.18
@@ -1303,6 +1343,10 @@ struct ipr_resource_entry {
 	u8 del_from_ml:1;
 	u8 resetting_device:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 reset_occurred:1;
+>>>>>>> v3.18
 =======
 	u8 reset_occurred:1;
 >>>>>>> v3.18
@@ -1496,6 +1540,10 @@ struct ipr_ioa_cfg {
 	u8 cfg_locked:1;
 	u8 clear_isr:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 probe_done:1;
+>>>>>>> v3.18
 =======
 	u8 probe_done:1;
 >>>>>>> v3.18
@@ -1518,7 +1566,10 @@ struct ipr_ioa_cfg {
 #define IPR_NUM_TRACE_INDEX_BITS	8
 #define IPR_NUM_TRACE_ENTRIES		(1 << IPR_NUM_TRACE_INDEX_BITS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IPR_TRACE_INDEX_MASK		(IPR_NUM_TRACE_ENTRIES - 1)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define IPR_TRACE_SIZE	(sizeof(struct ipr_trace_entry) * IPR_NUM_TRACE_ENTRIES)
@@ -1582,6 +1633,10 @@ struct ipr_ioa_cfg {
 	wait_queue_head_t reset_wait_q;
 	wait_queue_head_t msi_wait_q;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wait_queue_head_t eeh_wait_q;
+>>>>>>> v3.18
 =======
 	wait_queue_head_t eeh_wait_q;
 >>>>>>> v3.18
@@ -1652,7 +1707,10 @@ struct ipr_cmnd {
 	} u;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct completion *eh_comp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ipr_hrr_queue *hrrq;

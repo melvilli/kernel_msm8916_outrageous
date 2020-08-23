@@ -19,10 +19,13 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * TODO
  *	-	cache alarm and critical limit registers
  *	-	add emc1404 support
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -37,7 +40,11 @@
 #include <linux/sysfs.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/jiffies.h>
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -46,6 +53,7 @@
 #define THERMAL_SMSC_ID_REG	0xfe
 #define THERMAL_REVISION_REG	0xff
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct thermal_data {
 	struct device *hwmon_dev;
@@ -57,18 +65,24 @@ struct thermal_data {
 	u8 cached_hyst;
 	unsigned long hyst_valid;
 =======
+=======
+>>>>>>> v3.18
 enum emc1403_chip { emc1402, emc1403, emc1404 };
 
 struct thermal_data {
 	struct regmap *regmap;
 	struct mutex mutex;
 	const struct attribute_group *groups[4];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static ssize_t show_temp(struct device *dev,
 			struct device_attribute *attr, char *buf)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct sensor_device_attribute *sda = to_sensor_dev_attr(attr);
@@ -78,6 +92,8 @@ static ssize_t show_temp(struct device *dev,
 		return retval;
 	return sprintf(buf, "%d000\n", retval);
 =======
+=======
+>>>>>>> v3.18
 	struct sensor_device_attribute *sda = to_sensor_dev_attr(attr);
 	struct thermal_data *data = dev_get_drvdata(dev);
 	unsigned int val;
@@ -87,12 +103,16 @@ static ssize_t show_temp(struct device *dev,
 	if (retval < 0)
 		return retval;
 	return sprintf(buf, "%d000\n", val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static ssize_t show_bit(struct device *dev,
 			struct device_attribute *attr, char *buf)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct sensor_device_attribute_2 *sda = to_sensor_dev_attr_2(attr);
@@ -103,6 +123,8 @@ static ssize_t show_bit(struct device *dev,
 	retval &= sda->index;
 	return sprintf(buf, "%d\n", retval ? 1 : 0);
 =======
+=======
+>>>>>>> v3.18
 	struct sensor_device_attribute_2 *sda = to_sensor_dev_attr_2(attr);
 	struct thermal_data *data = dev_get_drvdata(dev);
 	unsigned int val;
@@ -112,6 +134,9 @@ static ssize_t show_bit(struct device *dev,
 	if (retval < 0)
 		return retval;
 	return sprintf(buf, "%d\n", !!(val & sda->index));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -120,7 +145,11 @@ static ssize_t store_temp(struct device *dev,
 {
 	struct sensor_device_attribute *sda = to_sensor_dev_attr(attr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
+=======
+	struct thermal_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct thermal_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -130,8 +159,13 @@ static ssize_t store_temp(struct device *dev,
 	if (kstrtoul(buf, 10, &val))
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = i2c_smbus_write_byte_data(client, sda->index,
 					DIV_ROUND_CLOSEST(val, 1000));
+=======
+	retval = regmap_write(data->regmap, sda->index,
+			      DIV_ROUND_CLOSEST(val, 1000));
+>>>>>>> v3.18
 =======
 	retval = regmap_write(data->regmap, sda->index,
 			      DIV_ROUND_CLOSEST(val, 1000));
@@ -145,9 +179,14 @@ static ssize_t store_bit(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct thermal_data *data = i2c_get_clientdata(client);
 	struct sensor_device_attribute_2 *sda = to_sensor_dev_attr_2(attr);
+=======
+	struct sensor_device_attribute_2 *sda = to_sensor_dev_attr_2(attr);
+	struct thermal_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct sensor_device_attribute_2 *sda = to_sensor_dev_attr_2(attr);
 	struct thermal_data *data = dev_get_drvdata(dev);
@@ -158,6 +197,7 @@ static ssize_t store_bit(struct device *dev,
 	if (kstrtoul(buf, 10, &val))
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&data->mutex);
 	retval = i2c_smbus_read_byte_data(client, sda->nr);
@@ -198,6 +238,8 @@ static ssize_t show_hyst(struct device *dev,
 	}
 	return sprintf(buf, "%d000\n", retval - data->cached_hyst);
 =======
+=======
+>>>>>>> v3.18
 	retval = regmap_update_bits(data->regmap, sda->nr, sda->index,
 				    val ? sda->index : 0);
 	if (retval < 0)
@@ -237,6 +279,9 @@ static ssize_t show_min_hyst(struct device *dev,
 			     struct device_attribute *attr, char *buf)
 {
 	return show_hyst_common(dev, attr, buf, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -244,14 +289,20 @@ static ssize_t store_hyst(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct thermal_data *data = i2c_get_clientdata(client);
 	struct sensor_device_attribute *sda = to_sensor_dev_attr(attr);
 =======
+=======
+>>>>>>> v3.18
 	struct sensor_device_attribute *sda = to_sensor_dev_attr(attr);
 	struct thermal_data *data = dev_get_drvdata(dev);
 	struct regmap *regmap = data->regmap;
 	unsigned int limit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int retval;
 	int hyst;
@@ -261,6 +312,7 @@ static ssize_t store_hyst(struct device *dev,
 		return -EINVAL;
 
 	mutex_lock(&data->mutex);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	retval = i2c_smbus_read_byte_data(client, sda->index);
 	if (retval < 0)
@@ -280,6 +332,8 @@ static ssize_t store_hyst(struct device *dev,
 		data->hyst_valid = jiffies + HZ;
 	}
 =======
+=======
+>>>>>>> v3.18
 	retval = regmap_read(regmap, sda->index, &limit);
 	if (retval < 0)
 		goto fail;
@@ -289,6 +343,9 @@ static ssize_t store_hyst(struct device *dev,
 	retval = regmap_write(regmap, 0x21, hyst);
 	if (retval == 0)
 		retval = count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 fail:
 	mutex_unlock(&data->mutex);
@@ -313,6 +370,11 @@ static SENSOR_DEVICE_ATTR_2(temp1_max_alarm, S_IRUGO,
 static SENSOR_DEVICE_ATTR_2(temp1_crit_alarm, S_IRUGO,
 	show_bit, NULL, 0x37, 0x01);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static SENSOR_DEVICE_ATTR(temp1_min_hyst, S_IRUGO, show_min_hyst, NULL, 0x06);
+static SENSOR_DEVICE_ATTR(temp1_max_hyst, S_IRUGO, show_hyst, NULL, 0x05);
+>>>>>>> v3.18
 =======
 static SENSOR_DEVICE_ATTR(temp1_min_hyst, S_IRUGO, show_min_hyst, NULL, 0x06);
 static SENSOR_DEVICE_ATTR(temp1_max_hyst, S_IRUGO, show_hyst, NULL, 0x05);
@@ -328,6 +390,10 @@ static SENSOR_DEVICE_ATTR(temp2_crit, S_IRUGO | S_IWUSR,
 	show_temp, store_temp, 0x19);
 static SENSOR_DEVICE_ATTR(temp2_input, S_IRUGO, show_temp, NULL, 0x01);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static SENSOR_DEVICE_ATTR_2(temp2_fault, S_IRUGO, show_bit, NULL, 0x1b, 0x02);
+>>>>>>> v3.18
 =======
 static SENSOR_DEVICE_ATTR_2(temp2_fault, S_IRUGO, show_bit, NULL, 0x1b, 0x02);
 >>>>>>> v3.18
@@ -338,8 +404,14 @@ static SENSOR_DEVICE_ATTR_2(temp2_max_alarm, S_IRUGO,
 static SENSOR_DEVICE_ATTR_2(temp2_crit_alarm, S_IRUGO,
 	show_bit, NULL, 0x37, 0x02);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static SENSOR_DEVICE_ATTR(temp2_crit_hyst, S_IRUGO | S_IWUSR,
 	show_hyst, store_hyst, 0x19);
+=======
+static SENSOR_DEVICE_ATTR(temp2_min_hyst, S_IRUGO, show_min_hyst, NULL, 0x08);
+static SENSOR_DEVICE_ATTR(temp2_max_hyst, S_IRUGO, show_hyst, NULL, 0x07);
+static SENSOR_DEVICE_ATTR(temp2_crit_hyst, S_IRUGO, show_hyst, NULL, 0x19);
+>>>>>>> v3.18
 =======
 static SENSOR_DEVICE_ATTR(temp2_min_hyst, S_IRUGO, show_min_hyst, NULL, 0x08);
 static SENSOR_DEVICE_ATTR(temp2_max_hyst, S_IRUGO, show_hyst, NULL, 0x07);
@@ -354,6 +426,10 @@ static SENSOR_DEVICE_ATTR(temp3_crit, S_IRUGO | S_IWUSR,
 	show_temp, store_temp, 0x1A);
 static SENSOR_DEVICE_ATTR(temp3_input, S_IRUGO, show_temp, NULL, 0x23);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static SENSOR_DEVICE_ATTR_2(temp3_fault, S_IRUGO, show_bit, NULL, 0x1b, 0x04);
+>>>>>>> v3.18
 =======
 static SENSOR_DEVICE_ATTR_2(temp3_fault, S_IRUGO, show_bit, NULL, 0x1b, 0x04);
 >>>>>>> v3.18
@@ -364,9 +440,12 @@ static SENSOR_DEVICE_ATTR_2(temp3_max_alarm, S_IRUGO,
 static SENSOR_DEVICE_ATTR_2(temp3_crit_alarm, S_IRUGO,
 	show_bit, NULL, 0x37, 0x04);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static SENSOR_DEVICE_ATTR(temp3_crit_hyst, S_IRUGO | S_IWUSR,
 	show_hyst, store_hyst, 0x1A);
 =======
+=======
+>>>>>>> v3.18
 static SENSOR_DEVICE_ATTR(temp3_min_hyst, S_IRUGO, show_min_hyst, NULL, 0x16);
 static SENSOR_DEVICE_ATTR(temp3_max_hyst, S_IRUGO, show_hyst, NULL, 0x15);
 static SENSOR_DEVICE_ATTR(temp3_crit_hyst, S_IRUGO, show_hyst, NULL, 0x1A);
@@ -388,13 +467,20 @@ static SENSOR_DEVICE_ATTR_2(temp4_crit_alarm, S_IRUGO,
 static SENSOR_DEVICE_ATTR(temp4_min_hyst, S_IRUGO, show_min_hyst, NULL, 0x2D);
 static SENSOR_DEVICE_ATTR(temp4_max_hyst, S_IRUGO, show_hyst, NULL, 0x2C);
 static SENSOR_DEVICE_ATTR(temp4_crit_hyst, S_IRUGO, show_hyst, NULL, 0x30);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static SENSOR_DEVICE_ATTR_2(power_state, S_IRUGO | S_IWUSR,
 	show_bit, store_bit, 0x03, 0x40);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *mid_att_thermal[] = {
+=======
+static struct attribute *emc1402_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *emc1402_attrs[] = {
 >>>>>>> v3.18
@@ -403,26 +489,35 @@ static struct attribute *emc1402_attrs[] = {
 	&sensor_dev_attr_temp1_crit.dev_attr.attr,
 	&sensor_dev_attr_temp1_input.dev_attr.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&sensor_dev_attr_temp1_min_alarm.dev_attr.attr,
 	&sensor_dev_attr_temp1_max_alarm.dev_attr.attr,
 	&sensor_dev_attr_temp1_crit_alarm.dev_attr.attr,
 	&sensor_dev_attr_temp1_crit_hyst.dev_attr.attr,
 =======
+=======
+>>>>>>> v3.18
 	&sensor_dev_attr_temp1_min_hyst.dev_attr.attr,
 	&sensor_dev_attr_temp1_max_hyst.dev_attr.attr,
 	&sensor_dev_attr_temp1_crit_hyst.dev_attr.attr,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&sensor_dev_attr_temp2_min.dev_attr.attr,
 	&sensor_dev_attr_temp2_max.dev_attr.attr,
 	&sensor_dev_attr_temp2_crit.dev_attr.attr,
 	&sensor_dev_attr_temp2_input.dev_attr.attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&sensor_dev_attr_temp2_min_alarm.dev_attr.attr,
 	&sensor_dev_attr_temp2_max_alarm.dev_attr.attr,
 	&sensor_dev_attr_temp2_crit_alarm.dev_attr.attr,
 	&sensor_dev_attr_temp2_crit_hyst.dev_attr.attr,
 =======
+=======
+>>>>>>> v3.18
 	&sensor_dev_attr_temp2_min_hyst.dev_attr.attr,
 	&sensor_dev_attr_temp2_max_hyst.dev_attr.attr,
 	&sensor_dev_attr_temp2_crit_hyst.dev_attr.attr,
@@ -445,11 +540,15 @@ static struct attribute *emc1403_attrs[] = {
 	&sensor_dev_attr_temp2_max_alarm.dev_attr.attr,
 	&sensor_dev_attr_temp2_crit_alarm.dev_attr.attr,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&sensor_dev_attr_temp3_min.dev_attr.attr,
 	&sensor_dev_attr_temp3_max.dev_attr.attr,
 	&sensor_dev_attr_temp3_crit.dev_attr.attr,
 	&sensor_dev_attr_temp3_input.dev_attr.attr,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	&sensor_dev_attr_temp3_min_alarm.dev_attr.attr,
 	&sensor_dev_attr_temp3_max_alarm.dev_attr.attr,
@@ -462,6 +561,8 @@ static struct attribute *emc1403_attrs[] = {
 static const struct attribute_group m_thermal_gr = {
 	.attrs = mid_att_thermal
 =======
+=======
+>>>>>>> v3.18
 	&sensor_dev_attr_temp3_fault.dev_attr.attr,
 	&sensor_dev_attr_temp3_min_alarm.dev_attr.attr,
 	&sensor_dev_attr_temp3_max_alarm.dev_attr.attr,
@@ -526,6 +627,9 @@ static struct attribute *emc1402_alarm_attrs[] = {
 
 static const struct attribute_group emc1402_alarm_group = {
 	.attrs = emc1402_alarm_attrs,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -542,6 +646,7 @@ static int emc1403_detect(struct i2c_client *client,
 	id = i2c_smbus_read_byte_data(client, THERMAL_PID_REG);
 	switch (id) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 0x21:
 		strlcpy(info->type, "emc1403", I2C_NAME_SIZE);
 		break;
@@ -553,6 +658,8 @@ static int emc1403_detect(struct i2c_client *client,
 	 * driver could be extended
 	 */
 =======
+=======
+>>>>>>> v3.18
 	case 0x20:
 		strlcpy(info->type, "emc1402", I2C_NAME_SIZE);
 		break;
@@ -571,6 +678,9 @@ static int emc1403_detect(struct i2c_client *client,
 	case 0x27:
 		strlcpy(info->type, "emc1424", I2C_NAME_SIZE);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		return -ENODEV;
@@ -584,12 +694,15 @@ static int emc1403_detect(struct i2c_client *client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int emc1403_probe(struct i2c_client *client,
 			const struct i2c_device_id *id)
 {
 	int res;
 	struct thermal_data *data;
 =======
+=======
+>>>>>>> v3.18
 static bool emc1403_regmap_is_volatile(struct device *dev, unsigned int reg)
 {
 	switch (reg) {
@@ -624,6 +737,9 @@ static int emc1403_probe(struct i2c_client *client,
 {
 	struct thermal_data *data;
 	struct device *hwmon_dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data = devm_kzalloc(&client->dev, sizeof(struct thermal_data),
@@ -631,6 +747,7 @@ static int emc1403_probe(struct i2c_client *client,
 	if (data == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	i2c_set_clientdata(client, data);
 	mutex_init(&data->mutex);
@@ -662,6 +779,8 @@ static int emc1403_remove(struct i2c_client *client)
 	hwmon_device_unregister(data->hwmon_dev);
 	sysfs_remove_group(&client->dev.kobj, &m_thermal_gr);
 =======
+=======
+>>>>>>> v3.18
 	data->regmap = devm_regmap_init_i2c(client, &emc1403_regmap_config);
 	if (IS_ERR(data->regmap))
 		return PTR_ERR(data->regmap);
@@ -687,11 +806,15 @@ static int emc1403_remove(struct i2c_client *client)
 		return PTR_ERR(hwmon_dev);
 
 	dev_info(&client->dev, "%s Thermal chip found\n", id->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static const unsigned short emc1403_address_list[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	0x18, 0x29, 0x4c, 0x4d, I2C_CLIENT_END
 };
@@ -700,6 +823,8 @@ static const struct i2c_device_id emc1403_idtable[] = {
 	{ "emc1403", 0 },
 	{ "emc1423", 0 },
 =======
+=======
+>>>>>>> v3.18
 	0x18, 0x1c, 0x29, 0x4c, 0x4d, 0x5c, I2C_CLIENT_END
 };
 
@@ -714,6 +839,9 @@ static const struct i2c_device_id emc1403_idtable[] = {
 	{ "emc1422", emc1402 },
 	{ "emc1423", emc1403 },
 	{ "emc1424", emc1404 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ }
 };
@@ -727,7 +855,10 @@ static struct i2c_driver sensor_emc1403 = {
 	.detect = emc1403_detect,
 	.probe = emc1403_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = emc1403_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = emc1403_idtable,

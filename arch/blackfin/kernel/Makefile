@@ -8,7 +8,11 @@ obj-y := \
 	entry.o process.o bfin_ksyms.o ptrace.o setup.o signal.o \
 	sys_bfin.o traps.o irqchip.o dma-mapping.o flat.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fixed_code.o reboot.o bfin_gpio.o bfin_dma.o \
+=======
+	fixed_code.o reboot.o bfin_dma.o \
+>>>>>>> v3.18
 =======
 	fixed_code.o reboot.o bfin_dma.o \
 >>>>>>> v3.18
@@ -21,6 +25,10 @@ else
 endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_GPIO_ADI)               += bfin_gpio.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_GPIO_ADI)               += bfin_gpio.o
 >>>>>>> v3.18

@@ -83,7 +83,11 @@ struct gen_estimator
 	struct list_head	list;
 	struct gnet_stats_basic_packed	*bstats;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gnet_stats_rate_est	*rate_est;
+=======
+	struct gnet_stats_rate_est64	*rate_est;
+>>>>>>> v3.18
 =======
 	struct gnet_stats_rate_est64	*rate_est;
 >>>>>>> v3.18
@@ -96,6 +100,11 @@ struct gen_estimator
 	struct rcu_head		e_rcu;
 	struct rb_node		node;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct gnet_stats_basic_cpu __percpu *cpu_bstats;
+	struct rcu_head		head;
+>>>>>>> v3.18
 =======
 	struct gnet_stats_basic_cpu __percpu *cpu_bstats;
 	struct rcu_head		head;
@@ -125,9 +134,14 @@ static void est_timer(unsigned long arg)
 	rcu_read_lock();
 	list_for_each_entry_rcu(e, &elist[idx].list, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u64 nbytes;
 		u64 brate;
 		u32 npackets;
+=======
+		struct gnet_stats_basic_packed b = {0};
+		u64 brate;
+>>>>>>> v3.18
 =======
 		struct gnet_stats_basic_packed b = {0};
 		u64 brate;
@@ -140,6 +154,7 @@ static void est_timer(unsigned long arg)
 			goto skip;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nbytes = e->bstats->bytes;
 		npackets = e->bstats->packets;
 		brate = (nbytes - e->last_bytes)<<(7 - idx);
@@ -150,6 +165,8 @@ static void est_timer(unsigned long arg)
 		rate = (npackets - e->last_packets)<<(12 - idx);
 		e->last_packets = npackets;
 =======
+=======
+>>>>>>> v3.18
 		__gnet_stats_copy_basic(&b, e->cpu_bstats, e->bstats);
 
 		brate = (b.bytes - e->last_bytes)<<(7 - idx);
@@ -159,6 +176,9 @@ static void est_timer(unsigned long arg)
 
 		rate = (b.packets - e->last_packets)<<(12 - idx);
 		e->last_packets = b.packets;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		e->avpps += (rate >> e->ewma_log) - (e->avpps >> e->ewma_log);
 		e->rate_est->pps = (e->avpps+0x1FF)>>10;
@@ -194,7 +214,11 @@ static void gen_add_node(struct gen_estimator *est)
 static
 struct gen_estimator *gen_find_node(const struct gnet_stats_basic_packed *bstats,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    const struct gnet_stats_rate_est *rate_est)
+=======
+				    const struct gnet_stats_rate_est64 *rate_est)
+>>>>>>> v3.18
 =======
 				    const struct gnet_stats_rate_est64 *rate_est)
 >>>>>>> v3.18
@@ -228,7 +252,11 @@ struct gen_estimator *gen_find_node(const struct gnet_stats_basic_packed *bstats
  * configuration TLV is created. Upon each interval, the latest statistics
  * will be read from &bstats and the estimated rate will be stored in
 <<<<<<< HEAD
+<<<<<<< HEAD
  * &rate_est with the statistics lock grabed during this period.
+=======
+ * &rate_est with the statistics lock grabbed during this period.
+>>>>>>> v3.18
 =======
  * &rate_est with the statistics lock grabbed during this period.
 >>>>>>> v3.18
@@ -238,7 +266,12 @@ struct gen_estimator *gen_find_node(const struct gnet_stats_basic_packed *bstats
  */
 int gen_new_estimator(struct gnet_stats_basic_packed *bstats,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      struct gnet_stats_rate_est *rate_est,
+=======
+		      struct gnet_stats_basic_cpu __percpu *cpu_bstats,
+		      struct gnet_stats_rate_est64 *rate_est,
+>>>>>>> v3.18
 =======
 		      struct gnet_stats_basic_cpu __percpu *cpu_bstats,
 		      struct gnet_stats_rate_est64 *rate_est,
@@ -249,6 +282,10 @@ int gen_new_estimator(struct gnet_stats_basic_packed *bstats,
 	struct gen_estimator *est;
 	struct gnet_estimator *parm = nla_data(opt);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct gnet_stats_basic_packed b = {0};
+>>>>>>> v3.18
 =======
 	struct gnet_stats_basic_packed b = {0};
 >>>>>>> v3.18
@@ -265,6 +302,11 @@ int gen_new_estimator(struct gnet_stats_basic_packed *bstats,
 		return -ENOBUFS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__gnet_stats_copy_basic(&b, cpu_bstats, bstats);
+
+>>>>>>> v3.18
 =======
 	__gnet_stats_copy_basic(&b, cpu_bstats, bstats);
 
@@ -275,16 +317,22 @@ int gen_new_estimator(struct gnet_stats_basic_packed *bstats,
 	est->stats_lock = stats_lock;
 	est->ewma_log = parm->ewma_log;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	est->last_bytes = bstats->bytes;
 	est->avbps = rate_est->bps<<5;
 	est->last_packets = bstats->packets;
 	est->avpps = rate_est->pps<<10;
 =======
+=======
+>>>>>>> v3.18
 	est->last_bytes = b.bytes;
 	est->avbps = rate_est->bps<<5;
 	est->last_packets = b.packets;
 	est->avpps = rate_est->pps<<10;
 	est->cpu_bstats = cpu_bstats;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_bh(&est_tree_lock);
@@ -315,7 +363,11 @@ EXPORT_SYMBOL(gen_new_estimator);
  */
 void gen_kill_estimator(struct gnet_stats_basic_packed *bstats,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct gnet_stats_rate_est *rate_est)
+=======
+			struct gnet_stats_rate_est64 *rate_est)
+>>>>>>> v3.18
 =======
 			struct gnet_stats_rate_est64 *rate_est)
 >>>>>>> v3.18
@@ -351,18 +403,24 @@ EXPORT_SYMBOL(gen_kill_estimator);
  */
 int gen_replace_estimator(struct gnet_stats_basic_packed *bstats,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct gnet_stats_rate_est *rate_est,
 			  spinlock_t *stats_lock, struct nlattr *opt)
 {
 	gen_kill_estimator(bstats, rate_est);
 	return gen_new_estimator(bstats, rate_est, stats_lock, opt);
 =======
+=======
+>>>>>>> v3.18
 			  struct gnet_stats_basic_cpu __percpu *cpu_bstats,
 			  struct gnet_stats_rate_est64 *rate_est,
 			  spinlock_t *stats_lock, struct nlattr *opt)
 {
 	gen_kill_estimator(bstats, rate_est);
 	return gen_new_estimator(bstats, cpu_bstats, rate_est, stats_lock, opt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(gen_replace_estimator);
@@ -376,7 +434,11 @@ EXPORT_SYMBOL(gen_replace_estimator);
  */
 bool gen_estimator_active(const struct gnet_stats_basic_packed *bstats,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  const struct gnet_stats_rate_est *rate_est)
+=======
+			  const struct gnet_stats_rate_est64 *rate_est)
+>>>>>>> v3.18
 =======
 			  const struct gnet_stats_rate_est64 *rate_est)
 >>>>>>> v3.18

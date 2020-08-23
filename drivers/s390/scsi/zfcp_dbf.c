@@ -4,7 +4,11 @@
  * Debug traces for zfcp.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright IBM Corp. 2002, 2016
+=======
+ * Copyright IBM Corp. 2002, 2013
+>>>>>>> v3.18
 =======
  * Copyright IBM Corp. 2002, 2013
 >>>>>>> v3.18
@@ -28,7 +32,10 @@ MODULE_PARM_DESC(dbfsize,
 		 "number of pages for each debug feature area (default 4)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 dbflevel = 3;
 
 module_param(dbflevel, uint, 0400);
@@ -36,6 +43,9 @@ MODULE_PARM_DESC(dbflevel,
 		 "log level for each debug feature area "
 		 "(default 3, range 0..6)");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned int zfcp_dbf_plen(unsigned int offset)
 {
@@ -73,7 +83,11 @@ void zfcp_dbf_pl_write(struct zfcp_dbf *dbf, void *data, u16 length, char *area,
  * @req: request for which a response was received
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void zfcp_dbf_hba_fsf_res(char *tag, int level, struct zfcp_fsf_req *req)
+=======
+void zfcp_dbf_hba_fsf_res(char *tag, struct zfcp_fsf_req *req)
+>>>>>>> v3.18
 =======
 void zfcp_dbf_hba_fsf_res(char *tag, struct zfcp_fsf_req *req)
 >>>>>>> v3.18
@@ -97,8 +111,11 @@ void zfcp_dbf_hba_fsf_res(char *tag, struct zfcp_fsf_req *req)
 	rec->u.res.prot_status = q_pref->prot_status;
 	rec->u.res.fsf_status = q_head->fsf_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rec->u.res.port_handle = q_head->port_handle;
 	rec->u.res.lun_handle = q_head->lun_handle;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -114,7 +131,11 @@ void zfcp_dbf_hba_fsf_res(char *tag, struct zfcp_fsf_req *req)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_event(dbf->hba, level, rec, sizeof(*rec));
+=======
+	debug_event(dbf->hba, 1, rec, sizeof(*rec));
+>>>>>>> v3.18
 =======
 	debug_event(dbf->hba, 1, rec, sizeof(*rec));
 >>>>>>> v3.18
@@ -262,8 +283,12 @@ static void zfcp_dbf_set_common(struct zfcp_dbf_rec *rec,
 		rec->lun_status = atomic_read(&sdev_to_zfcp(sdev)->status);
 		rec->lun = zfcp_scsi_dev_lun(sdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else
 		rec->lun = ZFCP_DBF_INVALID_LUN;
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -312,6 +337,7 @@ void zfcp_dbf_rec_trig(char *tag, struct zfcp_adapter *adapter,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * zfcp_dbf_rec_run_lvl - trace event related to running recovery
  * @level: trace level to be used for event
  * @tag: identifier for event
@@ -319,11 +345,16 @@ void zfcp_dbf_rec_trig(char *tag, struct zfcp_adapter *adapter,
  */
 void zfcp_dbf_rec_run_lvl(int level, char *tag, struct zfcp_erp_action *erp)
 =======
+=======
+>>>>>>> v3.18
  * zfcp_dbf_rec_run - trace event related to running recovery
  * @tag: identifier for event
  * @erp: erp_action running
  */
 void zfcp_dbf_rec_run(char *tag, struct zfcp_erp_action *erp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct zfcp_dbf *dbf = erp->adapter->dbf;
@@ -350,6 +381,7 @@ void zfcp_dbf_rec_run(char *tag, struct zfcp_erp_action *erp)
 	else
 		rec->u.run.rec_count = atomic_read(&erp->adapter->erp_counter);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	debug_event(dbf->rec, level, rec, sizeof(*rec));
 	spin_unlock_irqrestore(&dbf->rec_lock, flags);
@@ -395,15 +427,22 @@ void zfcp_dbf_rec_run_wka(char *tag, struct zfcp_fc_wka_port *wka_port,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	debug_event(dbf->rec, 1, rec, sizeof(*rec));
 	spin_unlock_irqrestore(&dbf->rec_lock, flags);
 }
 
 static inline
 <<<<<<< HEAD
+<<<<<<< HEAD
 void zfcp_dbf_san(char *tag, struct zfcp_dbf *dbf,
 		  char *paytag, struct scatterlist *sg, u8 id, u16 len,
 		  u64 req_id, u32 d_id, u16 cap_len)
+=======
+void zfcp_dbf_san(char *tag, struct zfcp_dbf *dbf, void *data, u8 id, u16 len,
+		  u64 req_id, u32 d_id)
+>>>>>>> v3.18
 =======
 void zfcp_dbf_san(char *tag, struct zfcp_dbf *dbf, void *data, u8 id, u16 len,
 		  u64 req_id, u32 d_id)
@@ -413,8 +452,11 @@ void zfcp_dbf_san(char *tag, struct zfcp_dbf *dbf, void *data, u8 id, u16 len,
 	u16 rec_len;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct zfcp_dbf_pay *payload = &dbf->pay_buf;
 	u16 pay_sum = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -424,6 +466,7 @@ void zfcp_dbf_san(char *tag, struct zfcp_dbf *dbf, void *data, u8 id, u16 len,
 	rec->id = id;
 	rec->fsf_req_id = req_id;
 	rec->d_id = d_id;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memcpy(rec->tag, tag, ZFCP_DBF_TAG_LEN);
 	rec->pl_len = len; /* full length even if we cap pay below */
@@ -461,10 +504,15 @@ void zfcp_dbf_san(char *tag, struct zfcp_dbf *dbf, void *data, u8 id, u16 len,
 
 out:
 =======
+=======
+>>>>>>> v3.18
 	rec_len = min(len, (u16)ZFCP_DBF_SAN_MAX_PAYLOAD);
 	memcpy(rec->payload, data, rec_len);
 	memcpy(rec->tag, tag, ZFCP_DBF_TAG_LEN);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	debug_event(dbf->san, 1, rec, sizeof(*rec));
 	spin_unlock_irqrestore(&dbf->san_lock, flags);
@@ -473,7 +521,11 @@ out:
 /**
  * zfcp_dbf_san_req - trace event for issued SAN request
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @tag: indentifier for event
+=======
+ * @tag: identifier for event
+>>>>>>> v3.18
 =======
  * @tag: identifier for event
 >>>>>>> v3.18
@@ -486,6 +538,7 @@ void zfcp_dbf_san_req(char *tag, struct zfcp_fsf_req *fsf, u32 d_id)
 	struct zfcp_fsf_ct_els *ct_els = fsf->data;
 	u16 length;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	length = (u16)zfcp_qdio_real_bytes(ct_els->req);
 	zfcp_dbf_san(tag, dbf, "san_req", ct_els->req, ZFCP_DBF_SAN_REQ,
@@ -548,12 +601,21 @@ static u16 zfcp_dbf_san_res_cap_len_if_gpn_ft(char *tag,
 	zfcp_dbf_san(tag, dbf, sg_virt(ct_els->req), ZFCP_DBF_SAN_REQ, length,
 		     fsf->req_id, d_id);
 >>>>>>> v3.18
+=======
+	length = (u16)(ct_els->req->length + FC_CT_HDR_LEN);
+	zfcp_dbf_san(tag, dbf, sg_virt(ct_els->req), ZFCP_DBF_SAN_REQ, length,
+		     fsf->req_id, d_id);
+>>>>>>> v3.18
 }
 
 /**
  * zfcp_dbf_san_res - trace event for received SAN request
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @tag: indentifier for event
+=======
+ * @tag: identifier for event
+>>>>>>> v3.18
 =======
  * @tag: identifier for event
 >>>>>>> v3.18
@@ -566,10 +628,16 @@ void zfcp_dbf_san_res(char *tag, struct zfcp_fsf_req *fsf)
 	u16 length;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	length = (u16)zfcp_qdio_real_bytes(ct_els->resp);
 	zfcp_dbf_san(tag, dbf, "san_res", ct_els->resp, ZFCP_DBF_SAN_RES,
 		     length, fsf->req_id, ct_els->d_id,
 		     zfcp_dbf_san_res_cap_len_if_gpn_ft(tag, fsf, length));
+=======
+	length = (u16)(ct_els->resp->length + FC_CT_HDR_LEN);
+	zfcp_dbf_san(tag, dbf, sg_virt(ct_els->resp), ZFCP_DBF_SAN_RES, length,
+		     fsf->req_id, 0);
+>>>>>>> v3.18
 =======
 	length = (u16)(ct_els->resp->length + FC_CT_HDR_LEN);
 	zfcp_dbf_san(tag, dbf, sg_virt(ct_els->resp), ZFCP_DBF_SAN_RES, length,
@@ -580,7 +648,11 @@ void zfcp_dbf_san_res(char *tag, struct zfcp_fsf_req *fsf)
 /**
  * zfcp_dbf_san_in_els - trace event for incoming ELS
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @tag: indentifier for event
+=======
+ * @tag: identifier for event
+>>>>>>> v3.18
 =======
  * @tag: identifier for event
 >>>>>>> v3.18
@@ -593,6 +665,7 @@ void zfcp_dbf_san_in_els(char *tag, struct zfcp_fsf_req *fsf)
 		(struct fsf_status_read_buffer *) fsf->data;
 	u16 length;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct scatterlist sg;
 
 	length = (u16)(srb->length -
@@ -601,11 +674,16 @@ void zfcp_dbf_san_in_els(char *tag, struct zfcp_fsf_req *fsf)
 	zfcp_dbf_san(tag, dbf, "san_els", &sg, ZFCP_DBF_SAN_ELS, length,
 		     fsf->req_id, ntoh24(srb->d_id), length);
 =======
+=======
+>>>>>>> v3.18
 
 	length = (u16)(srb->length -
 			offsetof(struct fsf_status_read_buffer, payload));
 	zfcp_dbf_san(tag, dbf, srb->payload.data, ZFCP_DBF_SAN_ELS, length,
 		     fsf->req_id, ntoh24(srb->d_id));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -616,8 +694,12 @@ void zfcp_dbf_san_in_els(char *tag, struct zfcp_fsf_req *fsf)
  * @fsf: pointer to struct zfcp_fsf_req
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void zfcp_dbf_scsi(char *tag, int level, struct scsi_cmnd *sc,
 		   struct zfcp_fsf_req *fsf)
+=======
+void zfcp_dbf_scsi(char *tag, struct scsi_cmnd *sc, struct zfcp_fsf_req *fsf)
+>>>>>>> v3.18
 =======
 void zfcp_dbf_scsi(char *tag, struct scsi_cmnd *sc, struct zfcp_fsf_req *fsf)
 >>>>>>> v3.18
@@ -640,7 +722,12 @@ void zfcp_dbf_scsi(char *tag, struct scsi_cmnd *sc, struct zfcp_fsf_req *fsf)
 	rec->scsi_allowed = sc->allowed;
 	rec->scsi_id = sc->device->id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rec->scsi_lun = sc->device->lun;
+=======
+	/* struct zfcp_dbf_scsi needs to be updated to handle 64bit LUNs */
+	rec->scsi_lun = (u32)sc->device->lun;
+>>>>>>> v3.18
 =======
 	/* struct zfcp_dbf_scsi needs to be updated to handle 64bit LUNs */
 	rec->scsi_lun = (u32)sc->device->lun;
@@ -653,6 +740,7 @@ void zfcp_dbf_scsi(char *tag, struct scsi_cmnd *sc, struct zfcp_fsf_req *fsf)
 	if (fsf) {
 		rec->fsf_req_id = fsf->req_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rec->pl_len = FCP_RESP_WITH_EXT;
 		fcp_rsp = (struct fcp_resp_with_ext *)
 				&(fsf->qtcb->bottom.io.fcp_rsp);
@@ -661,10 +749,15 @@ void zfcp_dbf_scsi(char *tag, struct scsi_cmnd *sc, struct zfcp_fsf_req *fsf)
 		fcp_rsp = (struct fcp_resp_with_ext *)
 				&(fsf->qtcb->bottom.io.fcp_rsp);
 >>>>>>> v3.18
+=======
+		fcp_rsp = (struct fcp_resp_with_ext *)
+				&(fsf->qtcb->bottom.io.fcp_rsp);
+>>>>>>> v3.18
 		memcpy(&rec->fcp_rsp, fcp_rsp, FCP_RESP_WITH_EXT);
 		if (fcp_rsp->resp.fr_flags & FCP_RSP_LEN_VAL) {
 			fcp_rsp_info = (struct fcp_resp_rsp_info *) &fcp_rsp[1];
 			rec->fcp_rsp_info = fcp_rsp_info->rsp_code;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			rec->pl_len += be32_to_cpu(fcp_rsp->ext.fr_rsp_len);
 		}
@@ -688,6 +781,8 @@ void zfcp_dbf_scsi(char *tag, struct scsi_cmnd *sc, struct zfcp_fsf_req *fsf)
 
 	debug_event(dbf->scsi, level, rec, sizeof(*rec));
 =======
+=======
+>>>>>>> v3.18
 		}
 		if (fcp_rsp->resp.fr_flags & FCP_SNS_LEN_VAL) {
 			rec->pl_len = min((u16)SCSI_SENSE_BUFFERSIZE,
@@ -698,6 +793,9 @@ void zfcp_dbf_scsi(char *tag, struct scsi_cmnd *sc, struct zfcp_fsf_req *fsf)
 	}
 
 	debug_event(dbf->scsi, 1, rec, sizeof(*rec));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&dbf->scsi_lock, flags);
 }
@@ -712,7 +810,11 @@ static debug_info_t *zfcp_dbf_reg(const char *name, int size, int rec_size)
 
 	debug_register_view(d, &debug_hex_ascii_view);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	debug_set_level(d, 3);
+=======
+	debug_set_level(d, dbflevel);
+>>>>>>> v3.18
 =======
 	debug_set_level(d, dbflevel);
 >>>>>>> v3.18

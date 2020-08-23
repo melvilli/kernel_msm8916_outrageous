@@ -6,7 +6,10 @@
 #include <linux/list.h>
 #include <linux/stringify.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kprobes.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mm.h>
@@ -15,6 +18,10 @@
 #include <linux/stop_machine.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kdebug.h>
+>>>>>>> v3.18
 =======
 #include <linux/kdebug.h>
 >>>>>>> v3.18
@@ -409,6 +416,7 @@ void alternatives_enable_smp(void)
 	struct smp_alt_module *mod;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_LOCKDEP
 	/*
 	 * Older binutils section handling bug prevented
@@ -420,6 +428,8 @@ void alternatives_enable_smp(void)
 	pr_info("lockdep: fixing up alternatives\n");
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Why bother if there are no other CPUs? */
@@ -572,7 +582,11 @@ void *__init_or_module text_poke_early(void *addr, const void *opcode,
  * Note: Must be called under text_mutex.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *__kprobes text_poke(void *addr, const void *opcode, size_t len)
+=======
+void *text_poke(void *addr, const void *opcode, size_t len)
+>>>>>>> v3.18
 =======
 void *text_poke(void *addr, const void *opcode, size_t len)
 >>>>>>> v3.18
@@ -610,6 +624,7 @@ void *text_poke(void *addr, const void *opcode, size_t len)
 	return addr;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Cross-modifying kernel text with stop_machine().
@@ -706,6 +721,8 @@ void __kprobes text_poke_smp_batch(struct text_poke_param *params, int n)
 	__stop_machine(stop_machine_text_poke, (void *)&tpp, cpu_online_mask);
 }
 =======
+=======
+>>>>>>> v3.18
 static void do_sync_core(void *info)
 {
 	sync_core();
@@ -796,4 +813,7 @@ void *text_poke_bp(void *addr, const void *opcode, size_t len, void *handler)
 	return addr;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

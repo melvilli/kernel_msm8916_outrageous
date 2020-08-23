@@ -45,7 +45,10 @@
 #define MAC_MAX_CONTEXT_SIZE_PAGE0  256
 #define MAC_MAX_CONTEXT_SIZE_PAGE1  128
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAC_MAX_CONTEXT_SIZE        MAC_MAX_CONTEXT_SIZE_PAGE0 + MAC_MAX_CONTEXT_SIZE_PAGE1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -977,6 +980,7 @@ do {								\
 
 extern unsigned short TxRate_iwconfig;//2008-5-8 <add> by chester
 <<<<<<< HEAD
+<<<<<<< HEAD
 void MACvReadAllRegs(unsigned long dwIoBase, unsigned char *pbyMacRegs);
 
 bool MACbIsRegBitsOn(unsigned long dwIoBase, unsigned char byRegOfs, unsigned char byTestBits);
@@ -1052,6 +1056,8 @@ void MACvSetDefaultTKIPKeyEntry(unsigned long dwIoBase, unsigned int uKeyLen,
 				unsigned int uKeyIdx, unsigned long *pdwKey, unsigned char byLocalID);
 void MACvSetDefaultKeyCtl(unsigned long dwIoBase, unsigned short wKeyCtl, unsigned int uEntryIdx, unsigned char byLocalID);
 =======
+=======
+>>>>>>> v3.18
 void MACvReadAllRegs(void __iomem *dwIoBase, unsigned char *pbyMacRegs);
 
 bool MACbIsRegBitsOn(void __iomem *dwIoBase, unsigned char byRegOfs, unsigned char byTestBits);
@@ -1125,6 +1131,9 @@ void MACvDisableDefaultKey(void __iomem *dwIoBase);
 void MACvSetDefaultTKIPKeyEntry(void __iomem *dwIoBase, unsigned int uKeyLen,
 				unsigned int uKeyIdx, unsigned long *pdwKey, unsigned char byLocalID);
 void MACvSetDefaultKeyCtl(void __iomem *dwIoBase, unsigned short wKeyCtl, unsigned int uEntryIdx, unsigned char byLocalID);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif // __MAC_H__

@@ -11,6 +11,10 @@
 #include <linux/mm.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kmemleak.h>
+>>>>>>> v3.18
 =======
 #include <linux/kmemleak.h>
 >>>>>>> v3.18
@@ -78,7 +82,11 @@ mempool_t *mempool_create_node(int min_nr, mempool_alloc_t *alloc_fn,
 {
 	mempool_t *pool;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pool = kmalloc_node(sizeof(*pool), gfp_mask | __GFP_ZERO, node_id);
+=======
+	pool = kzalloc_node(sizeof(*pool), gfp_mask, node_id);
+>>>>>>> v3.18
 =======
 	pool = kzalloc_node(sizeof(*pool), gfp_mask, node_id);
 >>>>>>> v3.18
@@ -201,6 +209,10 @@ EXPORT_SYMBOL(mempool_resize);
  * *never* fails when called from process contexts. (it might
  * fail if called from an IRQ context.)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Note: using __GFP_ZERO is not supported.
+>>>>>>> v3.18
 =======
  * Note: using __GFP_ZERO is not supported.
 >>>>>>> v3.18
@@ -213,6 +225,10 @@ void * mempool_alloc(mempool_t *pool, gfp_t gfp_mask)
 	gfp_t gfp_temp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	VM_WARN_ON_ONCE(gfp_mask & __GFP_ZERO);
+>>>>>>> v3.18
 =======
 	VM_WARN_ON_ONCE(gfp_mask & __GFP_ZERO);
 >>>>>>> v3.18
@@ -237,12 +253,18 @@ repeat_alloc:
 		/* paired with rmb in mempool_free(), read comment there */
 		smp_wmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Update the allocation stack trace as this is more useful
 		 * for debugging.
 		 */
 		kmemleak_update_trace(element);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return element;
 	}
@@ -329,9 +351,15 @@ void mempool_free(void *element, mempool_t *pool)
 	 * pool waking up the waiters.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pool->curr_nr < pool->min_nr) {
 		spin_lock_irqsave(&pool->lock, flags);
 		if (pool->curr_nr < pool->min_nr) {
+=======
+	if (unlikely(pool->curr_nr < pool->min_nr)) {
+		spin_lock_irqsave(&pool->lock, flags);
+		if (likely(pool->curr_nr < pool->min_nr)) {
+>>>>>>> v3.18
 =======
 	if (unlikely(pool->curr_nr < pool->min_nr)) {
 		spin_lock_irqsave(&pool->lock, flags);

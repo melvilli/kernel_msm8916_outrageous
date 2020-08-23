@@ -204,11 +204,17 @@ static struct clk_lookup lookups[] = {
 	CLKDEV_CON_ID("xymem0", &mstp_clks[HWBLK_XYMEM]),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLKDEV_ICK_ID("tmu_fck", "sh_tmu.0", &mstp_clks[HWBLK_TMU]),
 	CLKDEV_ICK_ID("tmu_fck", "sh_tmu.1", &mstp_clks[HWBLK_TMU]),
 	CLKDEV_ICK_ID("tmu_fck", "sh_tmu.2", &mstp_clks[HWBLK_TMU]),
 
 	CLKDEV_CON_ID("cmt_fck", &mstp_clks[HWBLK_CMT]),
+=======
+	CLKDEV_ICK_ID("fck", "sh-tmu.0", &mstp_clks[HWBLK_TMU]),
+
+	CLKDEV_ICK_ID("fck", "sh-cmt-32.0", &mstp_clks[HWBLK_CMT]),
+>>>>>>> v3.18
 =======
 	CLKDEV_ICK_ID("fck", "sh-tmu.0", &mstp_clks[HWBLK_TMU]),
 

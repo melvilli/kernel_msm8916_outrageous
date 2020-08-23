@@ -24,6 +24,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -35,12 +36,17 @@
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
  * Please send any bug reports or fixes you make to the
  * email address(es):
  *    lksctp developers <linux-sctp@vger.kernel.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Written or modified by:
@@ -51,9 +57,12 @@
  *    Daisy Chang <daisyc@us.ibm.com>
  *    Ardelle Fan <ardelle.fan@intel.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -166,7 +175,11 @@ static void sctp_v4_copy_addrlist(struct list_head *addrlist,
 	for (ifa = in_dev->ifa_list; ifa; ifa = ifa->ifa_next) {
 		/* Add the address to the local list.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		addr = t_new(struct sctp_sockaddr_entry, GFP_ATOMIC);
+=======
+		addr = kzalloc(sizeof(*addr), GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 		addr = kzalloc(sizeof(*addr), GFP_ATOMIC);
 >>>>>>> v3.18
@@ -195,7 +208,11 @@ static void sctp_get_local_addr_list(struct net *net)
 	rcu_read_lock();
 	for_each_netdev_rcu(net, dev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__list_for_each(pos, &sctp_address_families) {
+=======
+		list_for_each(pos, &sctp_address_families) {
+>>>>>>> v3.18
 =======
 		list_for_each(pos, &sctp_address_families) {
 >>>>>>> v3.18
@@ -394,7 +411,11 @@ static int sctp_v4_available(union sctp_addr *addr, struct sctp_sock *sp)
 	   ret != RTN_LOCAL &&
 	   !sp->inet.freebind &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   !sysctl_ip_nonlocal_bind)
+=======
+	   !net->ipv4.sysctl_ip_nonlocal_bind)
+>>>>>>> v3.18
 =======
 	   !net->ipv4.sysctl_ip_nonlocal_bind)
 >>>>>>> v3.18
@@ -476,8 +497,13 @@ static void sctp_v4_get_dst(struct sctp_transport *t, union sctp_addr *saddr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: DST:%pI4, SRC:%pI4 - ",
 			  __func__, &fl4->daddr, &fl4->saddr);
+=======
+	pr_debug("%s: dst:%pI4, src:%pI4 - ", __func__, &fl4->daddr,
+		 &fl4->saddr);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: dst:%pI4, src:%pI4 - ", __func__, &fl4->daddr,
 		 &fl4->saddr);
@@ -548,15 +574,21 @@ out:
 	t->dst = dst;
 	if (dst)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK("rt_dst:%pI4, rt_src:%pI4\n",
 				  &fl4->daddr, &fl4->saddr);
 	else
 		SCTP_DEBUG_PRINTK("NO ROUTE\n");
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("rt_dst:%pI4, rt_src:%pI4\n",
 			 &fl4->daddr, &fl4->saddr);
 	else
 		pr_debug("no route\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -620,15 +652,21 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Map address, empty for v4 family */
 static void sctp_v4_addr_v4map(struct sctp_sock *sp, union sctp_addr *addr)
 {
 	/* Empty */
 =======
+=======
+>>>>>>> v3.18
 static int sctp_v4_addr_to_user(struct sctp_sock *sp, union sctp_addr *addr)
 {
 	/* No address mapping for V4 sockets */
 	return sizeof(struct sockaddr_in);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -653,9 +691,15 @@ static void sctp_addr_wq_timeout_handler(unsigned long arg)
 
 	list_for_each_entry_safe(addrw, temp, &net->sctp.addr_waitq, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK_IPADDR("sctp_addrwq_timo_handler: the first ent in wq %p is ",
 		    " for cmd %d at entry %p\n", &net->sctp.addr_waitq, &addrw->a, addrw->state,
 		    addrw);
+=======
+		pr_debug("%s: the first ent in wq:%p is addr:%pISc for cmd:%d at "
+			 "entry:%p\n", __func__, &net->sctp.addr_waitq, &addrw->a.sa,
+			 addrw->state, addrw);
+>>>>>>> v3.18
 =======
 		pr_debug("%s: the first ent in wq:%p is addr:%pISc for cmd:%d at "
 			 "entry:%p\n", __func__, &net->sctp.addr_waitq, &addrw->a.sa,
@@ -678,13 +722,19 @@ static void sctp_addr_wq_timeout_handler(unsigned long arg)
 				unsigned long timeo_val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				SCTP_DEBUG_PRINTK("sctp_timo_handler: this is on DAD, trying %d sec later\n",
 				    SCTP_ADDRESS_TICK_DELAY);
 =======
+=======
+>>>>>>> v3.18
 				pr_debug("%s: this is on DAD, trying %d sec "
 					 "later\n", __func__,
 					 SCTP_ADDRESS_TICK_DELAY);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				timeo_val = jiffies;
 				timeo_val += msecs_to_jiffies(SCTP_ADDRESS_TICK_DELAY);
@@ -701,15 +751,21 @@ static void sctp_addr_wq_timeout_handler(unsigned long arg)
 			if (!sctp_is_ep_boundall(sk))
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sctp_bh_lock_sock(sk);
 			if (sctp_asconf_mgmt(sp, addrw) < 0)
 				SCTP_DEBUG_PRINTK("sctp_addrwq_timo_handler: sctp_asconf_mgmt failed\n");
 			sctp_bh_unlock_sock(sk);
 =======
+=======
+>>>>>>> v3.18
 			bh_lock_sock(sk);
 			if (sctp_asconf_mgmt(sp, addrw) < 0)
 				pr_debug("%s: sctp_asconf_mgmt failed\n", __func__);
 			bh_unlock_sock(sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 #if IS_ENABLED(CONFIG_IPV6)
@@ -776,14 +832,20 @@ void sctp_addr_wq_mgmt(struct net *net, struct sctp_sockaddr_entry *addr, int cm
 	if (addrw) {
 		if (addrw->state != cmd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			SCTP_DEBUG_PRINTK_IPADDR("sctp_addr_wq_mgmt offsets existing entry for %d ",
 			    " in wq %p\n", addrw->state, &addrw->a,
 			    &net->sctp.addr_waitq);
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("%s: offsets existing entry for %d, addr:%pISc "
 				 "in wq:%p\n", __func__, addrw->state, &addrw->a.sa,
 				 &net->sctp.addr_waitq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			list_del(&addrw->list);
 			kfree(addrw);
@@ -801,8 +863,14 @@ void sctp_addr_wq_mgmt(struct net *net, struct sctp_sockaddr_entry *addr, int cm
 	addrw->state = cmd;
 	list_add_tail(&addrw->list, &net->sctp.addr_waitq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK_IPADDR("sctp_addr_wq_mgmt add new entry for cmd:%d ",
 	    " in wq %p\n", addrw->state, &addrw->a, &net->sctp.addr_waitq);
+=======
+
+	pr_debug("%s: add new entry for cmd:%d, addr:%pISc in wq:%p\n",
+		 __func__, addrw->state, &addrw->a.sa, &net->sctp.addr_waitq);
+>>>>>>> v3.18
 =======
 
 	pr_debug("%s: add new entry for cmd:%d, addr:%pISc in wq:%p\n",
@@ -1034,10 +1102,15 @@ static inline int sctp_v4_xmit(struct sk_buff *skb,
 	struct inet_sock *inet = inet_sk(skb->sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: skb:%p, len:%d, src:%pI4, dst:%pI4\n",
 			  __func__, skb, skb->len,
 			  &transport->fl.u.ip4.saddr,
 			  &transport->fl.u.ip4.daddr);
+=======
+	pr_debug("%s: skb:%p, len:%d, src:%pI4, dst:%pI4\n", __func__, skb,
+		 skb->len, &transport->fl.u.ip4.saddr, &transport->fl.u.ip4.daddr);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: skb:%p, len:%d, src:%pI4, dst:%pI4\n", __func__, skb,
 		 skb->len, &transport->fl.u.ip4.saddr, &transport->fl.u.ip4.daddr);
@@ -1048,7 +1121,12 @@ static inline int sctp_v4_xmit(struct sk_buff *skb,
 
 	SCTP_INC_STATS(sock_net(&inet->sk), SCTP_MIB_OUTSCTPPACKS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ip_queue_xmit(skb, &transport->fl);
+=======
+
+	return ip_queue_xmit(&inet->sk, skb, &transport->fl);
+>>>>>>> v3.18
 =======
 
 	return ip_queue_xmit(&inet->sk, skb, &transport->fl);
@@ -1067,7 +1145,13 @@ static struct sctp_pf sctp_pf_inet = {
 	.supported_addrs = sctp_inet_supported_addrs,
 	.create_accept_sk = sctp_v4_create_accept_sk,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.addr_v4map	= sctp_v4_addr_v4map,
+=======
+	.addr_to_user  = sctp_v4_addr_to_user,
+	.to_sk_saddr   = sctp_v4_to_sk_saddr,
+	.to_sk_daddr   = sctp_v4_to_sk_daddr,
+>>>>>>> v3.18
 =======
 	.addr_to_user  = sctp_v4_addr_to_user,
 	.to_sk_saddr   = sctp_v4_to_sk_saddr,
@@ -1114,7 +1198,10 @@ static struct inet_protosw sctp_seqpacket_protosw = {
 	.prot       = &sctp_prot,
 	.ops        = &inet_seqpacket_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.no_check   = 0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.flags      = SCTP_PROTOSW_FLAG
@@ -1125,7 +1212,10 @@ static struct inet_protosw sctp_stream_protosw = {
 	.prot       = &sctp_prot,
 	.ops        = &inet_seqpacket_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.no_check   = 0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.flags      = SCTP_PROTOSW_FLAG
@@ -1138,6 +1228,10 @@ static const struct net_protocol sctp_protocol = {
 	.no_policy   = 1,
 	.netns_ok    = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.icmp_strict_tag_validation = 1,
+>>>>>>> v3.18
 =======
 	.icmp_strict_tag_validation = 1,
 >>>>>>> v3.18
@@ -1155,8 +1249,11 @@ static struct sctp_af sctp_af_inet = {
 	.from_skb	   = sctp_v4_from_skb,
 	.from_sk	   = sctp_v4_from_sk,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.to_sk_saddr	   = sctp_v4_to_sk_saddr,
 	.to_sk_daddr	   = sctp_v4_to_sk_daddr,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.from_addr_param   = sctp_v4_from_addr_param,
@@ -1180,8 +1277,13 @@ static struct sctp_af sctp_af_inet = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct sctp_pf *sctp_get_pf_specific(sa_family_t family) {
 
+=======
+struct sctp_pf *sctp_get_pf_specific(sa_family_t family)
+{
+>>>>>>> v3.18
 =======
 struct sctp_pf *sctp_get_pf_specific(sa_family_t family)
 {
@@ -1219,21 +1321,31 @@ int sctp_register_pf(struct sctp_pf *pf, sa_family_t family)
 static inline int init_sctp_mibs(struct net *net)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return snmp_mib_init((void __percpu **)net->sctp.sctp_statistics,
 			     sizeof(struct sctp_mib),
 			     __alignof__(struct sctp_mib));
 =======
+=======
+>>>>>>> v3.18
 	net->sctp.sctp_statistics = alloc_percpu(struct sctp_mib);
 	if (!net->sctp.sctp_statistics)
 		return -ENOMEM;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void cleanup_sctp_mibs(struct net *net)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snmp_mib_free((void __percpu **)net->sctp.sctp_statistics);
+=======
+	free_percpu(net->sctp.sctp_statistics);
+>>>>>>> v3.18
 =======
 	free_percpu(net->sctp.sctp_statistics);
 >>>>>>> v3.18
@@ -1292,7 +1404,11 @@ static void sctp_v4_del_protocol(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __net_init sctp_defaults_init(struct net *net)
+=======
+static int __net_init sctp_net_init(struct net *net)
+>>>>>>> v3.18
 =======
 static int __net_init sctp_net_init(struct net *net)
 >>>>>>> v3.18
@@ -1389,13 +1505,19 @@ static int __net_init sctp_net_init(struct net *net)
 	sctp_dbg_objcnt_init(net);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Initialize the control inode/socket for handling OOTB packets.  */
 	if ((status = sctp_ctl_sock_init(net))) {
 		pr_err("Failed to initialize the SCTP control sock\n");
 		goto err_ctl_sock_init;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Initialize the local address list. */
 	INIT_LIST_HEAD(&net->sctp.local_addr_list);
@@ -1413,6 +1535,12 @@ static int __net_init sctp_net_init(struct net *net)
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+err_ctl_sock_init:
+	sctp_dbg_objcnt_exit(net);
+	sctp_proc_exit(net);
+>>>>>>> v3.18
 =======
 err_ctl_sock_init:
 	sctp_dbg_objcnt_exit(net);
@@ -1427,7 +1555,11 @@ err_sysctl_register:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __net_exit sctp_defaults_exit(struct net *net)
+=======
+static void __net_exit sctp_net_exit(struct net *net)
+>>>>>>> v3.18
 =======
 static void __net_exit sctp_net_exit(struct net *net)
 >>>>>>> v3.18
@@ -1437,6 +1569,12 @@ static void __net_exit sctp_net_exit(struct net *net)
 	sctp_free_local_addr_list(net);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Free the control endpoint.  */
+	inet_ctl_sock_destroy(net->sctp.ctl_sock);
+
+>>>>>>> v3.18
 =======
 	/* Free the control endpoint.  */
 	inet_ctl_sock_destroy(net->sctp.ctl_sock);
@@ -1449,6 +1587,7 @@ static void __net_exit sctp_net_exit(struct net *net)
 	sctp_sysctl_net_unregister(net);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct pernet_operations sctp_defaults_ops = {
 	.init = sctp_defaults_init,
@@ -1481,6 +1620,8 @@ static struct pernet_operations sctp_ctrlsock_ops = {
 /* Initialize the universe into something sensible.  */
 SCTP_STATIC __init int sctp_init(void)
 =======
+=======
+>>>>>>> v3.18
 static struct pernet_operations sctp_net_ops = {
 	.init = sctp_net_init,
 	.exit = sctp_net_exit,
@@ -1488,6 +1629,9 @@ static struct pernet_operations sctp_net_ops = {
 
 /* Initialize the universe into something sensible.  */
 static __init int sctp_init(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int i;
@@ -1498,9 +1642,14 @@ static __init int sctp_init(void)
 	int order;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* SCTP_DEBUG sanity check. */
 	if (!sctp_sanity_check())
 		goto out;
+=======
+	BUILD_BUG_ON(sizeof(struct sctp_ulpevent) >
+		     sizeof(((struct sk_buff *) 0)->cb));
+>>>>>>> v3.18
 =======
 	BUILD_BUG_ON(sizeof(struct sctp_ulpevent) >
 		     sizeof(((struct sk_buff *) 0)->cb));
@@ -1523,7 +1672,11 @@ static __init int sctp_init(void)
 		goto err_chunk_cachep;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = percpu_counter_init(&sctp_sockets_allocated, 0);
+=======
+	status = percpu_counter_init(&sctp_sockets_allocated, 0, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	status = percpu_counter_init(&sctp_sockets_allocated, 0, GFP_KERNEL);
 >>>>>>> v3.18
@@ -1629,11 +1782,16 @@ static __init int sctp_init(void)
 	sctp_v6_pf_init();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = register_pernet_subsys(&sctp_defaults_ops);
 	if (status)
 		goto err_register_defaults;
 
 	status = sctp_v4_protosw_init();
+=======
+	status = sctp_v4_protosw_init();
+
+>>>>>>> v3.18
 =======
 	status = sctp_v4_protosw_init();
 
@@ -1646,9 +1804,15 @@ static __init int sctp_init(void)
 		goto err_v6_protosw_init;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = register_pernet_subsys(&sctp_ctrlsock_ops);
 	if (status)
 		goto err_register_ctrlsock;
+=======
+	status = register_pernet_subsys(&sctp_net_ops);
+	if (status)
+		goto err_register_pernet_subsys;
+>>>>>>> v3.18
 =======
 	status = register_pernet_subsys(&sctp_net_ops);
 	if (status)
@@ -1665,7 +1829,10 @@ static __init int sctp_init(void)
 		goto err_v6_add_protocol;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out:
@@ -1674,8 +1841,13 @@ err_v6_add_protocol:
 	sctp_v4_del_protocol();
 err_add_protocol:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_pernet_subsys(&sctp_ctrlsock_ops);
 err_register_ctrlsock:
+=======
+	unregister_pernet_subsys(&sctp_net_ops);
+err_register_pernet_subsys:
+>>>>>>> v3.18
 =======
 	unregister_pernet_subsys(&sctp_net_ops);
 err_register_pernet_subsys:
@@ -1685,8 +1857,11 @@ err_v6_protosw_init:
 	sctp_v4_protosw_exit();
 err_protosw_init:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_pernet_subsys(&sctp_defaults_ops);
 err_register_defaults:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sctp_v4_pf_exit();
@@ -1712,7 +1887,11 @@ err_chunk_cachep:
 
 /* Exit handler for the SCTP protocol.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 SCTP_STATIC __exit void sctp_exit(void)
+=======
+static __exit void sctp_exit(void)
+>>>>>>> v3.18
 =======
 static __exit void sctp_exit(void)
 >>>>>>> v3.18
@@ -1726,7 +1905,11 @@ static __exit void sctp_exit(void)
 	sctp_v4_del_protocol();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_pernet_subsys(&sctp_ctrlsock_ops);
+=======
+	unregister_pernet_subsys(&sctp_net_ops);
+>>>>>>> v3.18
 =======
 	unregister_pernet_subsys(&sctp_net_ops);
 >>>>>>> v3.18
@@ -1736,8 +1919,11 @@ static __exit void sctp_exit(void)
 	sctp_v4_protosw_exit();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_pernet_subsys(&sctp_defaults_ops);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Unregister with socket layer. */
@@ -1771,7 +1957,11 @@ module_exit(sctp_exit);
 MODULE_ALIAS("net-pf-" __stringify(PF_INET) "-proto-132");
 MODULE_ALIAS("net-pf-" __stringify(PF_INET6) "-proto-132");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Linux Kernel SCTP developers <lksctp-developers@lists.sourceforge.net>");
+=======
+MODULE_AUTHOR("Linux Kernel SCTP developers <linux-sctp@vger.kernel.org>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Linux Kernel SCTP developers <linux-sctp@vger.kernel.org>");
 >>>>>>> v3.18

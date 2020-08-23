@@ -91,7 +91,11 @@ ENTRY(printascii)
 		teqne	r1, #0
 		bne	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -110,7 +114,11 @@ ENTRY(debug_ll_addr)
 		str	r2, [r0]
 		str	r3, [r1]
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -125,7 +133,11 @@ ENTRY(printascii)
 	ARM(	svc	#0x123456	)
 	THUMB(	svc	#0xab		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -138,7 +150,11 @@ ENTRY(printch)
 	ARM(	svc	#0x123456	)
 	THUMB(	svc	#0xab		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18
@@ -149,7 +165,11 @@ ENTRY(debug_ll_addr)
 		str	r2, [r0]
 		str	r2, [r1]
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	pc, lr
+=======
+		ret	lr
+>>>>>>> v3.18
 =======
 		ret	lr
 >>>>>>> v3.18

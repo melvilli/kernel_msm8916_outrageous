@@ -25,6 +25,12 @@
 bool events_check_enabled __read_mostly;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* If set and the system is suspending, terminate the suspend. */
+static bool pm_abort_suspend __read_mostly;
+
+>>>>>>> v3.18
 =======
 /* If set and the system is suspending, terminate the suspend. */
 static bool pm_abort_suspend __read_mostly;
@@ -89,8 +95,11 @@ struct wakeup_source *wakeup_source_create(const char *name)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ws->inserted = false;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	wakeup_source_prepare(ws, name ? kstrdup(name, GFP_KERNEL) : NULL);
@@ -134,6 +143,7 @@ EXPORT_SYMBOL_GPL(wakeup_source_destroy);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * wakeup_source_destroy_cb
  * defer processing until all rcu references have expired
  */
@@ -143,6 +153,8 @@ static void wakeup_source_destroy_cb(struct rcu_head *head)
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * wakeup_source_add - Add given object to the list of wakeup sources.
@@ -162,10 +174,14 @@ void wakeup_source_add(struct wakeup_source *ws)
 
 	spin_lock_irqsave(&events_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ws->inserted) {
 		list_add_rcu(&ws->entry, &wakeup_sources);
 		ws->inserted = true;
 	}
+=======
+	list_add_rcu(&ws->entry, &wakeup_sources);
+>>>>>>> v3.18
 =======
 	list_add_rcu(&ws->entry, &wakeup_sources);
 >>>>>>> v3.18
@@ -186,10 +202,14 @@ void wakeup_source_remove(struct wakeup_source *ws)
 
 	spin_lock_irqsave(&events_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ws->inserted) {
 		list_del_rcu(&ws->entry);
 		ws->inserted = false;
 	}
+=======
+	list_del_rcu(&ws->entry);
+>>>>>>> v3.18
 =======
 	list_del_rcu(&ws->entry);
 >>>>>>> v3.18
@@ -199,6 +219,7 @@ void wakeup_source_remove(struct wakeup_source *ws)
 EXPORT_SYMBOL_GPL(wakeup_source_remove);
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * wakeup_source_remove_async - Remove given object from the wakeup sources
  * list.
@@ -220,6 +241,8 @@ static void wakeup_source_remove_async(struct wakeup_source *ws)
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * wakeup_source_register - Create wakeup source and add it to the list.
@@ -245,8 +268,13 @@ void wakeup_source_unregister(struct wakeup_source *ws)
 {
 	if (ws) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wakeup_source_remove_async(ws);
 		call_rcu(&ws->rcu, wakeup_source_destroy_cb);
+=======
+		wakeup_source_remove(ws);
+		wakeup_source_destroy(ws);
+>>>>>>> v3.18
 =======
 		wakeup_source_remove(ws);
 		wakeup_source_destroy(ws);
@@ -384,6 +412,12 @@ int device_init_wakeup(struct device *dev, bool enable)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!dev)
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if (!dev)
 		return -EINVAL;
@@ -394,6 +428,12 @@ int device_init_wakeup(struct device *dev, bool enable)
 		ret = device_wakeup_enable(dev);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (dev->power.can_wakeup)
+			device_wakeup_disable(dev);
+
+>>>>>>> v3.18
 =======
 		if (dev->power.can_wakeup)
 			device_wakeup_disable(dev);
@@ -737,7 +777,11 @@ void pm_wakeup_event(struct device *dev, unsigned int msec)
 EXPORT_SYMBOL_GPL(pm_wakeup_event);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void print_active_wakeup_sources(void)
+=======
+void pm_print_active_wakeup_sources(void)
+>>>>>>> v3.18
 =======
 void pm_print_active_wakeup_sources(void)
 >>>>>>> v3.18
@@ -765,6 +809,10 @@ void pm_print_active_wakeup_sources(void)
 	rcu_read_unlock();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(pm_print_active_wakeup_sources);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(pm_print_active_wakeup_sources);
 >>>>>>> v3.18
@@ -793,11 +841,14 @@ bool pm_wakeup_pending(void)
 	spin_unlock_irqrestore(&events_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret)
 		print_active_wakeup_sources();
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (ret) {
 		pr_info("PM: Wakeup pending, aborting suspend\n");
 		pm_print_active_wakeup_sources();
@@ -815,6 +866,9 @@ void pm_system_wakeup(void)
 void pm_wakeup_clear(void)
 {
 	pm_abort_suspend = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -39,6 +39,10 @@ struct btrfs_ioctl_vol_args {
 #define BTRFS_FSID_SIZE 16
 #define BTRFS_UUID_SIZE 16
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BTRFS_UUID_UNPARSED_SIZE	37
+>>>>>>> v3.18
 =======
 #define BTRFS_UUID_UNPARSED_SIZE	37
 >>>>>>> v3.18
@@ -186,8 +190,11 @@ struct btrfs_ioctl_fs_info_args {
 	__u64 num_devices;			/* out */
 	__u8 fsid[BTRFS_FSID_SIZE];		/* out */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u64 reserved[124];			/* pad to 1k */
 =======
+=======
+>>>>>>> v3.18
 	__u32 nodesize;				/* out */
 	__u32 sectorsize;			/* out */
 	__u32 clone_alignment;			/* out */
@@ -199,6 +206,9 @@ struct btrfs_ioctl_feature_flags {
 	__u64 compat_flags;
 	__u64 compat_ro_flags;
 	__u64 incompat_flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -224,7 +234,12 @@ struct btrfs_balance_args {
 	__u64 flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u64 unused[8];
+=======
+	__u64 limit;		/* limit number of processed chunks */
+	__u64 unused[7];
+>>>>>>> v3.18
 =======
 	__u64 limit;		/* limit number of processed chunks */
 	__u64 unused[7];
@@ -319,7 +334,10 @@ struct btrfs_ioctl_search_args {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct btrfs_ioctl_search_args_v2 {
 	struct btrfs_ioctl_search_key key; /* in/out - search parameters */
 	__u64 buf_size;		   /* in - size of buffer
@@ -328,6 +346,9 @@ struct btrfs_ioctl_search_args_v2 {
 	__u64 buf[0];                       /* out - found items */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct btrfs_ioctl_clone_range_args {
   __s64 src_fd;
@@ -340,7 +361,10 @@ struct btrfs_ioctl_clone_range_args {
 #define BTRFS_DEFRAG_RANGE_START_IO 2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BTRFS_SAME_DATA_DIFFERS	1
 /* For extent-same ioctl */
 struct btrfs_ioctl_same_extent_info {
@@ -366,6 +390,9 @@ struct btrfs_ioctl_same_args {
 	struct btrfs_ioctl_same_extent_info info[0];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct btrfs_ioctl_space_info {
 	__u64 flags;
@@ -510,7 +537,10 @@ struct btrfs_ioctl_send_args {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Error codes as returned by the kernel */
 enum btrfs_err_code {
 	notused,
@@ -551,6 +581,9 @@ static inline char *btrfs_err_str(enum btrfs_err_code err_code)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BTRFS_IOC_SNAP_CREATE _IOW(BTRFS_IOCTL_MAGIC, 1, \
 				   struct btrfs_ioctl_vol_args)
@@ -588,15 +621,21 @@ static inline char *btrfs_err_str(enum btrfs_err_code err_code)
 #define BTRFS_IOC_TREE_SEARCH _IOWR(BTRFS_IOCTL_MAGIC, 17, \
 				   struct btrfs_ioctl_search_args)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BTRFS_IOC_INO_LOOKUP _IOWR(BTRFS_IOCTL_MAGIC, 18, \
 				   struct btrfs_ioctl_ino_lookup_args)
 #define BTRFS_IOC_DEFAULT_SUBVOL _IOW(BTRFS_IOCTL_MAGIC, 19, u64)
 =======
+=======
+>>>>>>> v3.18
 #define BTRFS_IOC_TREE_SEARCH_V2 _IOWR(BTRFS_IOCTL_MAGIC, 17, \
 					   struct btrfs_ioctl_search_args_v2)
 #define BTRFS_IOC_INO_LOOKUP _IOWR(BTRFS_IOCTL_MAGIC, 18, \
 				   struct btrfs_ioctl_ino_lookup_args)
 #define BTRFS_IOC_DEFAULT_SUBVOL _IOW(BTRFS_IOCTL_MAGIC, 19, __u64)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define BTRFS_IOC_SPACE_INFO _IOWR(BTRFS_IOCTL_MAGIC, 20, \
 				    struct btrfs_ioctl_space_args)
@@ -644,6 +683,10 @@ static inline char *btrfs_err_str(enum btrfs_err_code err_code)
 #define BTRFS_IOC_QUOTA_RESCAN_STATUS _IOR(BTRFS_IOCTL_MAGIC, 45, \
 			       struct btrfs_ioctl_quota_rescan_args)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BTRFS_IOC_QUOTA_RESCAN_WAIT _IO(BTRFS_IOCTL_MAGIC, 46)
+>>>>>>> v3.18
 =======
 #define BTRFS_IOC_QUOTA_RESCAN_WAIT _IO(BTRFS_IOCTL_MAGIC, 46)
 >>>>>>> v3.18
@@ -656,7 +699,10 @@ static inline char *btrfs_err_str(enum btrfs_err_code err_code)
 #define BTRFS_IOC_DEV_REPLACE _IOWR(BTRFS_IOCTL_MAGIC, 53, \
 				    struct btrfs_ioctl_dev_replace_args)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BTRFS_IOC_FILE_EXTENT_SAME _IOWR(BTRFS_IOCTL_MAGIC, 54, \
 					 struct btrfs_ioctl_same_args)
 #define BTRFS_IOC_GET_FEATURES _IOR(BTRFS_IOCTL_MAGIC, 57, \
@@ -665,6 +711,9 @@ static inline char *btrfs_err_str(enum btrfs_err_code err_code)
 				   struct btrfs_ioctl_feature_flags[2])
 #define BTRFS_IOC_GET_SUPPORTED_FEATURES _IOR(BTRFS_IOCTL_MAGIC, 57, \
 				   struct btrfs_ioctl_feature_flags[3])
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _UAPI_LINUX_BTRFS_H */

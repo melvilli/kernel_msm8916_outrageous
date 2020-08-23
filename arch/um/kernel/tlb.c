@@ -13,6 +13,10 @@
 #include <os.h>
 #include <skas.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <kern_util.h>
+>>>>>>> v3.18
 =======
 #include <kern_util.h>
 >>>>>>> v3.18
@@ -129,6 +133,12 @@ static int add_munmap(unsigned long addr, unsigned long len,
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if ((addr >= STUB_START) && (addr < STUB_END))
+		return -EINVAL;
+
+>>>>>>> v3.18
 =======
 	if ((addr >= STUB_START) && (addr < STUB_END))
 		return -EINVAL;
@@ -294,14 +304,20 @@ void fix_range_common(struct mm_struct *mm, unsigned long start_addr,
 	if (ret) {
 		printk(KERN_ERR "fix_range_common: failed, killing current "
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       "process\n");
 		force_sig(SIGKILL, current);
 =======
+=======
+>>>>>>> v3.18
 		       "process: %d\n", task_tgid_vnr(current));
 		/* We are under mmap_sem, release it such that current can terminate */
 		up_write(&current->mm->mmap_sem);
 		force_sig(SIGKILL, current);
 		do_signal();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

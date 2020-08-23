@@ -2,7 +2,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/if.h>
@@ -682,6 +685,11 @@ static const struct pcmcia_device_id hostap_cs_ids[] = {
 		"ZoomAir 11Mbps High", "Rate wireless Networking",
 		0x273fe3db, 0x32a1eaee),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PCMCIA_DEVICE_PROD_ID12("NETGEAR MA401 Wireless PC", "Card",
+		0xa37434e9, 0x9762e8f1),
+>>>>>>> v3.18
 =======
 	PCMCIA_DEVICE_PROD_ID12("NETGEAR MA401 Wireless PC", "Card",
 		0xa37434e9, 0x9762e8f1),

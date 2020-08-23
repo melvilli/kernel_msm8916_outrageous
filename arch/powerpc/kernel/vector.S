@@ -9,6 +9,7 @@
 
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Wrapper to call load_up_altivec from C.
  * void do_load_up_altivec(struct pt_regs *regs);
@@ -34,6 +35,8 @@ _GLOBAL(do_load_up_altivec)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* void do_load_up_transact_altivec(struct thread_struct *thread)
  *
  * This is similar to load_up_altivec but for the transactional version of the
@@ -50,16 +53,22 @@ _GLOBAL(do_load_up_transact_altivec)
 	stw	r4,THREAD_USED_VR(r3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	li	r10,THREAD_TRANSACT_VSCR
 	lvx	vr0,r10,r3
 	mtvscr	vr0
 	REST_32VRS_TRANSACT(0,r4,r3)
 =======
+=======
+>>>>>>> v3.18
 	li	r10,THREAD_TRANSACT_VRSTATE+VRSTATE_VSCR
 	lvx	vr0,r10,r3
 	mtvscr	vr0
 	addi	r10,r3,THREAD_TRANSACT_VRSTATE
 	REST_32VRS(0,r4,r10)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Disable VEC again. */
@@ -71,8 +80,11 @@ _GLOBAL(do_load_up_transact_altivec)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * load_up_altivec(unused, unused, tsk)
 =======
+=======
+>>>>>>> v3.18
  * Enable use of VMX/Altivec for the caller.
  */
 _GLOBAL(vec_enable)
@@ -105,6 +117,9 @@ _GLOBAL(store_vr_state)
 	blr
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Disable VMX for the task which had it previously,
  * and save its vector registers in its thread_struct.
@@ -112,6 +127,12 @@ _GLOBAL(store_vr_state)
  * On SMP we know the VMX is free, since we give it up every
  * switch (ie, no lazy save of the vector registers).
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Note that on 32-bit this can only use registers that will be
+ * restored by fast_exception_return, i.e. r3 - r6, r10 and r11.
+>>>>>>> v3.18
 =======
  *
  * Note that on 32-bit this can only use registers that will be
@@ -143,16 +164,22 @@ _GLOBAL(load_up_altivec)
 	toreal(r4)
 	addi	r4,r4,THREAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SAVE_32VRS(0,r5,r4)
 	mfvscr	vr0
 	li	r10,THREAD_VSCR
 	stvx	vr0,r10,r4
 =======
+=======
+>>>>>>> v3.18
 	addi	r6,r4,THREAD_VRSTATE
 	SAVE_32VRS(0,r5,r6)
 	mfvscr	vr0
 	li	r10,VRSTATE_VSCR
 	stvx	vr0,r10,r6
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Disable VMX for last_task_used_altivec */
 	PPC_LL	r5,PT_REGS(r4)
@@ -186,6 +213,7 @@ _GLOBAL(load_up_altivec)
 	std	r12,_MSR(r1)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	li	r4,1
 	li	r10,THREAD_VSCR
 	stw	r4,THREAD_USED_VR(r5)
@@ -193,6 +221,8 @@ _GLOBAL(load_up_altivec)
 	mtvscr	vr0
 	REST_32VRS(0,r4,r5)
 =======
+=======
+>>>>>>> v3.18
 	addi	r6,r5,THREAD_VRSTATE
 	li	r4,1
 	li	r10,VRSTATE_VSCR
@@ -200,6 +230,9 @@ _GLOBAL(load_up_altivec)
 	lvx	vr0,r10,r6
 	mtvscr	vr0
 	REST_32VRS(0,r4,r6)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifndef CONFIG_SMP
 	/* Update last_task_used_altivec to 'current' */
@@ -236,6 +269,7 @@ _GLOBAL(giveup_altivec)
 	beqlr				/* if no previous owner, done */
 	addi	r3,r3,THREAD		/* want THREAD of task */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PPC_LL	r5,PT_REGS(r3)
 	PPC_LCMPI	0,r5,0
 	SAVE_32VRS(0,r4,r3)
@@ -243,6 +277,8 @@ _GLOBAL(giveup_altivec)
 	li	r4,THREAD_VSCR
 	stvx	vr0,r4,r3
 =======
+=======
+>>>>>>> v3.18
 	PPC_LL	r7,THREAD_VRSAVEAREA(r3)
 	PPC_LL	r5,PT_REGS(r3)
 	PPC_LCMPI	0,r7,0
@@ -253,6 +289,9 @@ _GLOBAL(giveup_altivec)
 	mfvscr	vr0
 	li	r4,VRSTATE_VSCR
 	stvx	vr0,r4,r7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	beq	1f
 	PPC_LL	r4,_MSR-STACK_FRAME_OVERHEAD(r5)

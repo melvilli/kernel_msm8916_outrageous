@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * LEDs driver for Freescale MC13783
+=======
+ * LEDs driver for Freescale MC13783/MC13892/MC34708
+>>>>>>> v3.18
 =======
  * LEDs driver for Freescale MC13783/MC13892/MC34708
 >>>>>>> v3.18
@@ -21,6 +25,7 @@
 
 #include <linux/module.h>
 #include <linux/kernel.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/platform_device.h>
@@ -160,6 +165,8 @@ static int mc13783_led_setup(struct mc13783_led *led, int max_current)
 		value = max_current & MC13783_LED_C2_BL_C_MASK;
 		reg = MC13783_REG_LED_CONTROL_2;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/leds.h>
 #include <linux/of.h>
@@ -210,6 +217,9 @@ static void mc13xxx_led_work(struct work_struct *work)
 	case MC13783_LED_KP:
 		reg = 2;
 		shift = 9 + (led->id - MC13783_LED_MD) * 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case MC13783_LED_R1:
@@ -221,6 +231,7 @@ static void mc13xxx_led_work(struct work_struct *work)
 	case MC13783_LED_R3:
 	case MC13783_LED_G3:
 	case MC13783_LED_B3:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		bank = (led->id - MC13783_LED_R1)/3;
 		reg = MC13783_REG_LED_CONTROL_3 + bank;
@@ -403,6 +414,8 @@ err_register:
 		cancel_work_sync(&led[i].work);
 	}
 =======
+=======
+>>>>>>> v3.18
 		off = led->id - MC13783_LED_R1;
 		bank = off / 3;
 		reg = 3 + bank;
@@ -602,11 +615,15 @@ static int __init mc13xxx_led_probe(struct platform_device *pdev)
 			led_classdev_unregister(&leds->led[i].cdev);
 			cancel_work_sync(&leds->led[i].work);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int mc13783_led_remove(struct platform_device *pdev)
 {
@@ -651,6 +668,8 @@ MODULE_AUTHOR("Philippe Retornaz <philippe.retornaz@epfl.ch>");
 MODULE_LICENSE("GPL");
 MODULE_ALIAS("platform:mc13783-led");
 =======
+=======
+>>>>>>> v3.18
 static int mc13xxx_led_remove(struct platform_device *pdev)
 {
 	struct mc13xxx_leds *leds = platform_get_drvdata(pdev);
@@ -706,4 +725,7 @@ module_platform_driver_probe(mc13xxx_led_driver, mc13xxx_led_probe);
 MODULE_DESCRIPTION("LEDs driver for Freescale MC13XXX PMIC");
 MODULE_AUTHOR("Philippe Retornaz <philippe.retornaz@epfl.ch>");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

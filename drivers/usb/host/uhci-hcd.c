@@ -70,6 +70,7 @@ MODULE_PARM_DESC(ignore_oc, "ignore hardware overcurrent indications");
  * debug = 3, show all TDs in URBs when dumping
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 #define DEBUG_CONFIGURED	1
 static int debug = 1;
@@ -83,6 +84,8 @@ MODULE_PARM_DESC(debug, "Debug level");
 
 static char *errbuf;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DYNAMIC_DEBUG
 
 static int debug = 1;
@@ -98,6 +101,9 @@ static char *errbuf;
 #endif
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ERRBUF_LEN    (32 * 1024)
 
@@ -535,6 +541,7 @@ static void release_uhci(struct uhci_hcd *uhci)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DEBUG_CONFIGURED) {
 		spin_lock_irq(&uhci->lock);
 		uhci->is_initialized = 0;
@@ -543,12 +550,17 @@ static void release_uhci(struct uhci_hcd *uhci)
 		debugfs_remove(uhci->dentry);
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	spin_lock_irq(&uhci->lock);
 	uhci->is_initialized = 0;
 	spin_unlock_irq(&uhci->lock);
 
 	debugfs_remove(uhci->dentry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < UHCI_NUM_SKELQH; i++)
@@ -617,7 +629,11 @@ static int uhci_start(struct usb_hcd *hcd)
 	uhci->frame = dma_alloc_coherent(uhci_dev(uhci),
 			UHCI_NUMFRAMES * sizeof(*uhci->frame),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			&uhci->frame_dma_handle, 0);
+=======
+			&uhci->frame_dma_handle, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 			&uhci->frame_dma_handle, GFP_KERNEL);
 >>>>>>> v3.18
@@ -900,6 +916,7 @@ static int __init uhci_hcd_init(void)
 	set_bit(USB_UHCI_LOADED, &usb_hcds_loaded);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (DEBUG_CONFIGURED) {
 		errbuf = kmalloc(ERRBUF_LEN, GFP_KERNEL);
 		if (!errbuf)
@@ -909,6 +926,8 @@ static int __init uhci_hcd_init(void)
 			goto debug_failed;
 	}
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DYNAMIC_DEBUG
 	errbuf = kmalloc(ERRBUF_LEN, GFP_KERNEL);
 	if (!errbuf)
@@ -917,6 +936,9 @@ static int __init uhci_hcd_init(void)
 	if (!uhci_debugfs_root)
 		goto debug_failed;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	uhci_up_cachep = kmem_cache_create("uhci_urb_priv",
@@ -949,6 +971,10 @@ clean0:
 
 up_failed:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(DEBUG) || defined(CONFIG_DYNAMIC_DEBUG)
+>>>>>>> v3.18
 =======
 #if defined(DEBUG) || defined(CONFIG_DYNAMIC_DEBUG)
 >>>>>>> v3.18
@@ -959,6 +985,10 @@ debug_failed:
 
 errbuf_failed:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -978,7 +1008,13 @@ static void __exit uhci_hcd_cleanup(void)
 	kmem_cache_destroy(uhci_up_cachep);
 	debugfs_remove(uhci_debugfs_root);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(errbuf);
+=======
+#ifdef CONFIG_DYNAMIC_DEBUG
+	kfree(errbuf);
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_DYNAMIC_DEBUG
 	kfree(errbuf);

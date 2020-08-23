@@ -1177,6 +1177,10 @@ static struct dvb_frontend_ops lgdt3304_ops = {
 	.i2c_gate_ctrl        = lgdt3305_i2c_gate_ctrl,
 	.init                 = lgdt3305_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.sleep                = lgdt3305_sleep,
+>>>>>>> v3.18
 =======
 	.sleep                = lgdt3305_sleep,
 >>>>>>> v3.18

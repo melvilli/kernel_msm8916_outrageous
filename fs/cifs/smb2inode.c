@@ -42,6 +42,7 @@ smb2_open_op_close(const unsigned int xid, struct cifs_tcon *tcon,
 		   struct cifs_sb_info *cifs_sb, const char *full_path,
 		   __u32 desired_access, __u32 create_disposition,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   __u32 file_attributes, __u32 create_options,
 		   void *data, int command)
 {
@@ -50,6 +51,8 @@ smb2_open_op_close(const unsigned int xid, struct cifs_tcon *tcon,
 	__le16 *utf16_path;
 	__u8 oplock = SMB2_OPLOCK_LEVEL_NONE;
 =======
+=======
+>>>>>>> v3.18
 		   __u32 create_options, void *data, int command)
 {
 	int rc, tmprc = 0;
@@ -57,6 +60,9 @@ smb2_open_op_close(const unsigned int xid, struct cifs_tcon *tcon,
 	__u8 oplock = SMB2_OPLOCK_LEVEL_NONE;
 	struct cifs_open_parms oparms;
 	struct cifs_fid fid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	utf16_path = cifs_convert_path_to_utf16(full_path, cifs_sb);
@@ -64,10 +70,13 @@ smb2_open_op_close(const unsigned int xid, struct cifs_tcon *tcon,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = SMB2_open(xid, tcon, utf16_path, &persistent_fid, &volatile_fid,
 		       desired_access, create_disposition, file_attributes,
 		       create_options, &oplock, NULL);
 =======
+=======
+>>>>>>> v3.18
 	oparms.tcon = tcon;
 	oparms.desired_access = desired_access;
 	oparms.disposition = create_disposition;
@@ -76,6 +85,9 @@ smb2_open_op_close(const unsigned int xid, struct cifs_tcon *tcon,
 	oparms.reconnect = false;
 
 	rc = SMB2_open(xid, &oparms, utf16_path, &oplock, NULL, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc) {
 		kfree(utf16_path);
@@ -87,8 +99,13 @@ smb2_open_op_close(const unsigned int xid, struct cifs_tcon *tcon,
 		break;
 	case SMB2_OP_QUERY_INFO:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmprc = SMB2_query_info(xid, tcon, persistent_fid,
 					volatile_fid,
+=======
+		tmprc = SMB2_query_info(xid, tcon, fid.persistent_fid,
+					fid.volatile_fid,
+>>>>>>> v3.18
 =======
 		tmprc = SMB2_query_info(xid, tcon, fid.persistent_fid,
 					fid.volatile_fid,
@@ -102,6 +119,7 @@ smb2_open_op_close(const unsigned int xid, struct cifs_tcon *tcon,
 		 */
 		break;
 	case SMB2_OP_RENAME:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		tmprc = SMB2_rename(xid, tcon, persistent_fid, volatile_fid,
 				    (__le16 *)data);
@@ -117,6 +135,8 @@ smb2_open_op_close(const unsigned int xid, struct cifs_tcon *tcon,
 	case SMB2_OP_SET_INFO:
 		tmprc = SMB2_set_info(xid, tcon, persistent_fid, volatile_fid,
 =======
+=======
+>>>>>>> v3.18
 		tmprc = SMB2_rename(xid, tcon, fid.persistent_fid,
 				    fid.volatile_fid, (__le16 *)data);
 		break;
@@ -132,6 +152,9 @@ smb2_open_op_close(const unsigned int xid, struct cifs_tcon *tcon,
 	case SMB2_OP_SET_INFO:
 		tmprc = SMB2_set_info(xid, tcon, fid.persistent_fid,
 				      fid.volatile_fid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				      (FILE_BASIC_INFO *)data);
 		break;
@@ -141,7 +164,11 @@ smb2_open_op_close(const unsigned int xid, struct cifs_tcon *tcon,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = SMB2_close(xid, tcon, persistent_fid, volatile_fid);
+=======
+	rc = SMB2_close(xid, tcon, fid.persistent_fid, fid.volatile_fid);
+>>>>>>> v3.18
 =======
 	rc = SMB2_close(xid, tcon, fid.persistent_fid, fid.volatile_fid);
 >>>>>>> v3.18
@@ -165,7 +192,11 @@ int
 smb2_query_path_info(const unsigned int xid, struct cifs_tcon *tcon,
 		     struct cifs_sb_info *cifs_sb, const char *full_path,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     FILE_ALL_INFO *data, bool *adjust_tz)
+=======
+		     FILE_ALL_INFO *data, bool *adjust_tz, bool *symlink)
+>>>>>>> v3.18
 =======
 		     FILE_ALL_INFO *data, bool *adjust_tz, bool *symlink)
 >>>>>>> v3.18
@@ -175,6 +206,10 @@ smb2_query_path_info(const unsigned int xid, struct cifs_tcon *tcon,
 
 	*adjust_tz = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	*symlink = false;
+>>>>>>> v3.18
 =======
 	*symlink = false;
 >>>>>>> v3.18
@@ -186,9 +221,12 @@ smb2_query_path_info(const unsigned int xid, struct cifs_tcon *tcon,
 
 	rc = smb2_open_op_close(xid, tcon, cifs_sb, full_path,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				FILE_READ_ATTRIBUTES, FILE_OPEN, 0, 0,
 				smb2_data, SMB2_OP_QUERY_INFO);
 =======
+=======
+>>>>>>> v3.18
 				FILE_READ_ATTRIBUTES, FILE_OPEN, 0,
 				smb2_data, SMB2_OP_QUERY_INFO);
 	if (rc == -EOPNOTSUPP) {
@@ -199,6 +237,9 @@ smb2_query_path_info(const unsigned int xid, struct cifs_tcon *tcon,
 					OPEN_REPARSE_POINT, smb2_data,
 					SMB2_OP_QUERY_INFO);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc)
 		goto out;
@@ -215,7 +256,11 @@ smb2_mkdir(const unsigned int xid, struct cifs_tcon *tcon, const char *name,
 {
 	return smb2_open_op_close(xid, tcon, cifs_sb, name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  FILE_WRITE_ATTRIBUTES, FILE_CREATE, 0,
+=======
+				  FILE_WRITE_ATTRIBUTES, FILE_CREATE,
+>>>>>>> v3.18
 =======
 				  FILE_WRITE_ATTRIBUTES, FILE_CREATE,
 >>>>>>> v3.18
@@ -238,7 +283,11 @@ smb2_mkdir_setinfo(struct inode *inode, const char *name,
 	data.Attributes = cpu_to_le32(dosattrs);
 	tmprc = smb2_open_op_close(xid, tcon, cifs_sb, name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   FILE_WRITE_ATTRIBUTES, FILE_CREATE, 0,
+=======
+				   FILE_WRITE_ATTRIBUTES, FILE_CREATE,
+>>>>>>> v3.18
 =======
 				   FILE_WRITE_ATTRIBUTES, FILE_CREATE,
 >>>>>>> v3.18
@@ -253,7 +302,11 @@ smb2_rmdir(const unsigned int xid, struct cifs_tcon *tcon, const char *name,
 {
 	return smb2_open_op_close(xid, tcon, cifs_sb, name, DELETE, FILE_OPEN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  0, CREATE_NOT_FILE | CREATE_DELETE_ON_CLOSE,
+=======
+				  CREATE_NOT_FILE | CREATE_DELETE_ON_CLOSE,
+>>>>>>> v3.18
 =======
 				  CREATE_NOT_FILE | CREATE_DELETE_ON_CLOSE,
 >>>>>>> v3.18
@@ -266,8 +319,13 @@ smb2_unlink(const unsigned int xid, struct cifs_tcon *tcon, const char *name,
 {
 	return smb2_open_op_close(xid, tcon, cifs_sb, name, DELETE, FILE_OPEN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  0, CREATE_DELETE_ON_CLOSE, NULL,
 				  SMB2_OP_DELETE);
+=======
+				  CREATE_DELETE_ON_CLOSE | OPEN_REPARSE_POINT,
+				  NULL, SMB2_OP_DELETE);
+>>>>>>> v3.18
 =======
 				  CREATE_DELETE_ON_CLOSE | OPEN_REPARSE_POINT,
 				  NULL, SMB2_OP_DELETE);
@@ -290,7 +348,11 @@ smb2_set_path_attr(const unsigned int xid, struct cifs_tcon *tcon,
 
 	rc = smb2_open_op_close(xid, tcon, cifs_sb, from_name, access,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				FILE_OPEN, 0, 0, smb2_to_name, command);
+=======
+				FILE_OPEN, 0, smb2_to_name, command);
+>>>>>>> v3.18
 =======
 				FILE_OPEN, 0, smb2_to_name, command);
 >>>>>>> v3.18
@@ -325,7 +387,11 @@ smb2_set_path_size(const unsigned int xid, struct cifs_tcon *tcon,
 	__le64 eof = cpu_to_le64(size);
 	return smb2_open_op_close(xid, tcon, cifs_sb, full_path,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  FILE_WRITE_DATA, FILE_OPEN, 0, 0, &eof,
+=======
+				  FILE_WRITE_DATA, FILE_OPEN, 0, &eof,
+>>>>>>> v3.18
 =======
 				  FILE_WRITE_DATA, FILE_OPEN, 0, &eof,
 >>>>>>> v3.18
@@ -345,7 +411,11 @@ smb2_set_file_info(struct inode *inode, const char *full_path,
 		return PTR_ERR(tlink);
 	rc = smb2_open_op_close(xid, tlink_tcon(tlink), cifs_sb, full_path,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				FILE_WRITE_ATTRIBUTES, FILE_OPEN, 0, 0, buf,
+=======
+				FILE_WRITE_ATTRIBUTES, FILE_OPEN, 0, buf,
+>>>>>>> v3.18
 =======
 				FILE_WRITE_ATTRIBUTES, FILE_OPEN, 0, buf,
 >>>>>>> v3.18

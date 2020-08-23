@@ -32,6 +32,10 @@ struct iio_hwmon_state {
 	struct device *hwmon_dev;
 	struct attribute_group attr_group;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct attribute_group *groups[2];
+>>>>>>> v3.18
 =======
 	const struct attribute_group *groups[2];
 >>>>>>> v3.18
@@ -61,6 +65,7 @@ static ssize_t iio_hwmon_read_val(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_name(struct device *dev, struct device_attribute *attr,
 			 char *buf)
 {
@@ -76,6 +81,8 @@ static DEVICE_ATTR(name, S_IRUGO, show_name, NULL);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int iio_hwmon_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
@@ -86,11 +93,17 @@ static int iio_hwmon_probe(struct platform_device *pdev)
 	enum iio_chan_type type;
 	struct iio_channel *channels;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	const char *name = "iio_hwmon";
 
 	if (dev->of_node && dev->of_node->name)
 		name = dev->of_node->name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	channels = iio_channel_get_all(dev);
@@ -111,7 +124,11 @@ static int iio_hwmon_probe(struct platform_device *pdev)
 
 	st->attrs = devm_kzalloc(dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 sizeof(*st->attrs) * (st->num_channels + 2),
+=======
+				 sizeof(*st->attrs) * (st->num_channels + 1),
+>>>>>>> v3.18
 =======
 				 sizeof(*st->attrs) * (st->num_channels + 1),
 >>>>>>> v3.18
@@ -163,6 +180,7 @@ static int iio_hwmon_probe(struct platform_device *pdev)
 		st->attrs[i] = &a->dev_attr.attr;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	st->attrs[st->num_channels] = &dev_attr_name.attr;
 	st->attr_group.attrs = st->attrs;
 	platform_set_drvdata(pdev, st);
@@ -180,6 +198,8 @@ static int iio_hwmon_probe(struct platform_device *pdev)
 error_remove_group:
 	sysfs_remove_group(&dev->kobj, &st->attr_group);
 =======
+=======
+>>>>>>> v3.18
 
 	st->attr_group.attrs = st->attrs;
 	st->groups[0] = &st->attr_group;
@@ -192,6 +212,9 @@ error_remove_group:
 	platform_set_drvdata(pdev, st);
 	return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error_release_channels:
 	iio_channel_release_all(channels);
@@ -204,7 +227,10 @@ static int iio_hwmon_remove(struct platform_device *pdev)
 
 	hwmon_device_unregister(st->hwmon_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_remove_group(&pdev->dev.kobj, &st->attr_group);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iio_channel_release_all(st->channels);
@@ -213,16 +239,22 @@ static int iio_hwmon_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id iio_hwmon_of_match[] = {
 	{ .compatible = "iio-hwmon", },
 	{ }
 };
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id iio_hwmon_of_match[] = {
 	{ .compatible = "iio-hwmon", },
 	{ }
 };
 MODULE_DEVICE_TABLE(of, iio_hwmon_of_match);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct platform_driver __refdata iio_hwmon_driver = {

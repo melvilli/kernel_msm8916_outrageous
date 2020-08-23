@@ -75,7 +75,10 @@
 #include <linux/slab.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/usb/input.h>
@@ -1824,6 +1827,7 @@ aiptek_probe(struct usb_interface *intf, const struct usb_device_id *id)
 	input_set_abs_params(inputdev, ABS_WHEEL, AIPTEK_WHEEL_MIN, AIPTEK_WHEEL_MAX - 1, 0, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Verify that a device really has an endpoint */
 	if (intf->altsetting[0].desc.bNumEndpoints < 1) {
 		dev_err(&intf->dev,
@@ -1832,6 +1836,8 @@ aiptek_probe(struct usb_interface *intf, const struct usb_device_id *id)
 		err = -EINVAL;
 		goto fail3;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	endpoint = &intf->altsetting[0].endpoint[0].desc;
@@ -1877,7 +1883,10 @@ aiptek_probe(struct usb_interface *intf, const struct usb_device_id *id)
 		dev_info(&intf->dev,
 			 "Aiptek tried all speeds, no sane response\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto fail3;

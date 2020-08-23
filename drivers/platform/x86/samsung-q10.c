@@ -15,6 +15,7 @@
 #include <linux/platform_device.h>
 #include <linux/backlight.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i8042.h>
 #include <linux/dmi.h>
 
@@ -26,12 +27,17 @@
 
 static int samsungq10_bl_brightness;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/dmi.h>
 #include <linux/acpi.h>
 
 #define SAMSUNGQ10_BL_MAX_INTENSITY 7
 
 static acpi_handle ec_handle;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static bool force;
@@ -43,6 +49,7 @@ static int samsungq10_bl_set_intensity(struct backlight_device *bd)
 {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int brightness = bd->props.brightness;
 	unsigned char c[3] = SAMSUNGQ10_BL_8042_DATA;
 
@@ -52,6 +59,8 @@ static int samsungq10_bl_set_intensity(struct backlight_device *bd)
 	i8042_unlock_chip();
 	samsungq10_bl_brightness = brightness;
 =======
+=======
+>>>>>>> v3.18
 	acpi_status status;
 	int i;
 
@@ -65,11 +74,15 @@ static int samsungq10_bl_set_intensity(struct backlight_device *bd)
 		if (ACPI_FAILURE(status))
 			return -EIO;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int samsungq10_bl_get_intensity(struct backlight_device *bd)
 {
@@ -109,6 +122,12 @@ static const struct backlight_ops samsungq10_bl_ops = {
 };
 
 >>>>>>> v3.18
+=======
+static const struct backlight_ops samsungq10_bl_ops = {
+	.update_status	= samsungq10_bl_set_intensity,
+};
+
+>>>>>>> v3.18
 static int samsungq10_probe(struct platform_device *pdev)
 {
 
@@ -126,9 +145,12 @@ static int samsungq10_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, bd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bd->props.brightness = SAMSUNGQ10_BL_DEFAULT_INTENSITY;
 	samsungq10_bl_set_intensity(bd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -140,9 +162,12 @@ static int samsungq10_remove(struct platform_device *pdev)
 	struct backlight_device *bd = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bd->props.brightness = SAMSUNGQ10_BL_DEFAULT_INTENSITY;
 	samsungq10_bl_set_intensity(bd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	backlight_device_unregister(bd);
@@ -155,7 +180,10 @@ static struct platform_driver samsungq10_driver = {
 		.name	= KBUILD_MODNAME,
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pm	= &samsungq10_pm_ops,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},
@@ -214,19 +242,29 @@ static int __init samsungq10_init(void)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	ec_handle = ec_get_handle();
 
 	if (!ec_handle)
 		return -ENODEV;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	samsungq10_device = platform_create_bundle(&samsungq10_driver,
 						   samsungq10_probe,
 						   NULL, 0, NULL, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(samsungq10_device);
+=======
+	return PTR_ERR_OR_ZERO(samsungq10_device);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(samsungq10_device);
 >>>>>>> v3.18

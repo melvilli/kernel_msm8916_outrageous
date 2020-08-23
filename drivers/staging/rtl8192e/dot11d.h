@@ -39,7 +39,11 @@ enum dot11d_state {
  * struct rt_dot11d_info * @CountryIeLen: value greater than 0 if @CountryIeBuf contains
  *		  valid country information element.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @chanell_map: holds channel values
+=======
+ * @channel_map: holds channel values
+>>>>>>> v3.18
 =======
  * @channel_map: holds channel values
 >>>>>>> v3.18
@@ -92,12 +96,18 @@ static inline void cpMacAddr(unsigned char *des, unsigned char *src)
 #define GET_CIE_WATCHDOG(__pIeeeDev)				\
 	 (GET_DOT11D_INFO(__pIeeeDev)->CountryIeWatchdog)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RESET_CIE_WATCHDOG(__pIeeeDev) GET_CIE_WATCHDOG(__pIeeeDev) = 0
 =======
+=======
+>>>>>>> v3.18
 static inline void RESET_CIE_WATCHDOG(struct rtllib_device *__pIeeeDev)
 {
 	GET_CIE_WATCHDOG(__pIeeeDev) = 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define UPDATE_CIE_WATCHDOG(__pIeeeDev) (++GET_CIE_WATCHDOG(__pIeeeDev))
 

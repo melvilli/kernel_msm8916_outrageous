@@ -39,7 +39,11 @@ static int devm_irq_match(struct device *dev, void *res, void *data)
  *	Except for the extra @dev argument, this function takes the
  *	same arguments and performs the same function as
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	request_irq().  IRQs requested with this function will be
+=======
+ *	request_threaded_irq().  IRQs requested with this function will be
+>>>>>>> v3.18
 =======
  *	request_threaded_irq().  IRQs requested with this function will be
 >>>>>>> v3.18
@@ -78,7 +82,10 @@ EXPORT_SYMBOL(devm_request_threaded_irq);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *	devm_request_any_context_irq - allocate an interrupt line for a managed device
  *	@dev: device to request interrupt for
  *	@irq: Interrupt line to allocate
@@ -124,6 +131,9 @@ int devm_request_any_context_irq(struct device *dev, unsigned int irq,
 EXPORT_SYMBOL(devm_request_any_context_irq);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	devm_free_irq - free an interrupt
  *	@dev: device to free interrupt for

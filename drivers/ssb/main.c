@@ -375,7 +375,12 @@ attrib##_show(struct device *dev, struct device_attribute *attr, char *buf) \
 { \
 	return sprintf(buf, format_string, dev_to_ssb_dev(dev)->field); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+} \
+static DEVICE_ATTR_RO(attrib);
+>>>>>>> v3.18
 =======
 } \
 static DEVICE_ATTR_RO(attrib);
@@ -393,6 +398,7 @@ name_show(struct device *dev, struct device_attribute *attr, char *buf)
 		       ssb_core_name(dev_to_ssb_dev(dev)->id.coreid));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute ssb_device_attrs[] = {
 	__ATTR_RO(name),
@@ -404,6 +410,8 @@ static struct device_attribute ssb_device_attrs[] = {
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(name);
 
 static struct attribute *ssb_device_attrs[] = {
@@ -416,6 +424,9 @@ static struct attribute *ssb_device_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(ssb_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct bus_type ssb_bustype = {
@@ -428,7 +439,11 @@ static struct bus_type ssb_bustype = {
 	.resume		= ssb_device_resume,
 	.uevent		= ssb_device_uevent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= ssb_device_attrs,
+=======
+	.dev_groups	= ssb_device_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups	= ssb_device_groups,
 >>>>>>> v3.18
@@ -578,7 +593,10 @@ static int ssb_devices_register(struct ssb_bus *bus)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SSB_SFLASH
 	if (bus->mipscore.sflash.present) {
 		err = platform_device_register(&ssb_sflash_dev);
@@ -587,6 +605,9 @@ static int ssb_devices_register(struct ssb_bus *bus)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 error:
@@ -618,7 +639,10 @@ static int ssb_attach_queued_buses(void)
 		if (bus->bustype == SSB_BUSTYPE_SSB)
 			ssb_watchdog_register(bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		err = ssb_gpio_init(bus);
 		if (err == -ENOTSUPP)
@@ -626,6 +650,9 @@ static int ssb_attach_queued_buses(void)
 		else if (err)
 			ssb_dbg("Error registering GPIO driver: %i\n", err);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ssb_bus_may_powerdown(bus);
 
@@ -865,11 +892,14 @@ static int ssb_bus_register(struct ssb_bus *bus,
 	ssb_extif_init(&bus->extif);
 	ssb_mipscore_init(&bus->mipscore);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = ssb_gpio_init(bus);
 	if (err == -ENOTSUPP)
 		ssb_dbg("GPIO driver not activated\n");
 	else if (err)
 		ssb_dbg("Error registering GPIO driver: %i\n", err);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = ssb_fetch_invariants(bus, get_invariants);

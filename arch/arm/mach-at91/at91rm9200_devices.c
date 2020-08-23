@@ -16,6 +16,10 @@
 #include <linux/dma-mapping.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio/machine.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio/machine.h>
 >>>>>>> v3.18
@@ -26,15 +30,21 @@
 #include <mach/at91rm9200_mc.h>
 #include <mach/at91_ramc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "board.h"
 #include "generic.h"
 =======
+=======
+>>>>>>> v3.18
 #include <mach/hardware.h>
 
 #include "board.h"
 #include "generic.h"
 #include "gpio.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -975,7 +985,10 @@ static struct atmel_uart_data uart0_data = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct gpiod_lookup_table uart0_gpios_table = {
 	.dev_id = "atmel_usart",
 	.table = {
@@ -984,6 +997,9 @@ static struct gpiod_lookup_table uart0_gpios_table = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u64 uart0_dmamask = DMA_BIT_MASK(32);
 
@@ -1011,14 +1027,20 @@ static inline void configure_usart0_pins(unsigned pins)
 		/*
 		 * AT91RM9200 Errata #39 - RTS0 is not internally connected to PA21.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 *  We need to drive the pin manually.  Default is off (RTS is active low).
 		 */
 		at91_set_gpio_output(AT91_PIN_PA21, 1);
 =======
+=======
+>>>>>>> v3.18
 		 * We need to drive the pin manually. The serial driver will driver
 		 * this to high when initializing.
 		 */
 		gpiod_add_lookup_table(&uart0_gpios_table);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

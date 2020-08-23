@@ -17,6 +17,10 @@
 #include <linux/slab.h>
 #include <linux/bcd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irqdomain.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqdomain.h>
 >>>>>>> v3.18
@@ -257,7 +261,11 @@ static int max8998_rtc_probe(struct platform_device *pdev)
 {
 	struct max8998_dev *max8998 = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct max8998_platform_data *pdata = dev_get_platdata(max8998->dev);
+=======
+	struct max8998_platform_data *pdata = max8998->pdata;
+>>>>>>> v3.18
 =======
 	struct max8998_platform_data *pdata = max8998->pdata;
 >>>>>>> v3.18
@@ -273,7 +281,10 @@ static int max8998_rtc_probe(struct platform_device *pdev)
 	info->max8998 = max8998;
 	info->rtc = max8998->rtc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->irq = max8998->irq_base + MAX8998_IRQ_ALARM0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -286,8 +297,11 @@ static int max8998_rtc_probe(struct platform_device *pdev)
 		ret = PTR_ERR(info->rtc_dev);
 		dev_err(&pdev->dev, "Failed to register RTC device: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_rtc;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -298,6 +312,9 @@ static int max8998_rtc_probe(struct platform_device *pdev)
 	if (!info->irq) {
 		dev_warn(&pdev->dev, "Failed to map alarm IRQ\n");
 		goto no_irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -309,6 +326,10 @@ static int max8998_rtc_probe(struct platform_device *pdev)
 			info->irq, ret);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+no_irq:
+>>>>>>> v3.18
 =======
 no_irq:
 >>>>>>> v3.18
@@ -321,6 +342,7 @@ no_irq:
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 out_rtc:
 	platform_set_drvdata(pdev, NULL);
@@ -330,6 +352,8 @@ out_rtc:
 static int max8998_rtc_remove(struct platform_device *pdev)
 {
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -347,7 +371,10 @@ static struct platform_driver max8998_rtc_driver = {
 	},
 	.probe		= max8998_rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= max8998_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= max8998_rtc_id,

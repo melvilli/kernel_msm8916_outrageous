@@ -39,7 +39,11 @@ struct ncp_mount_data_kernel {
 
 struct ncp_server {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	struct rcu_head rcu;
+>>>>>>> v3.18
 =======
 	struct rcu_head rcu;
 >>>>>>> v3.18
@@ -50,9 +54,13 @@ struct ncp_server {
 	__u8 name_space[NCP_NUMBER_OF_VOLUMES + 2];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file *ncp_filp;	/* File pointer to ncp socket */
 	struct socket *ncp_sock;/* ncp socket */
 	struct file *info_filp;
+=======
+	struct socket *ncp_sock;/* ncp socket */
+>>>>>>> v3.18
 =======
 	struct socket *ncp_sock;/* ncp socket */
 >>>>>>> v3.18
@@ -120,7 +128,11 @@ struct ncp_server {
 	spinlock_t requests_lock;	/* Lock accesses to tx.requests, tx.creq and rcv.creq when STREAM mode */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*data_ready)(struct sock* sk, int len);
+=======
+	void (*data_ready)(struct sock* sk);
+>>>>>>> v3.18
 =======
 	void (*data_ready)(struct sock* sk);
 >>>>>>> v3.18
@@ -166,7 +178,11 @@ extern void ncpdgram_rcv_proc(struct work_struct *work);
 extern void ncpdgram_timeout_proc(struct work_struct *work);
 extern void ncpdgram_timeout_call(unsigned long server);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ncp_tcp_data_ready(struct sock* sk, int len);
+=======
+extern void ncp_tcp_data_ready(struct sock* sk);
+>>>>>>> v3.18
 =======
 extern void ncp_tcp_data_ready(struct sock* sk);
 >>>>>>> v3.18

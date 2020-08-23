@@ -36,6 +36,10 @@
 #include <linux/debugfs.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bitmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/bitmap.h>
 >>>>>>> v3.18
@@ -181,7 +185,11 @@ static void o2hb_dead_threshold_set(unsigned int threshold)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int o2hb_global_hearbeat_mode_set(unsigned int hb_mode)
+=======
+static int o2hb_global_heartbeat_mode_set(unsigned int hb_mode)
+>>>>>>> v3.18
 =======
 static int o2hb_global_heartbeat_mode_set(unsigned int hb_mode)
 >>>>>>> v3.18
@@ -291,6 +299,7 @@ struct o2hb_bio_wait_ctxt {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int o2hb_pop_count(void *map, int count)
 {
 	int i = -1, pop = 0;
@@ -300,6 +309,8 @@ static int o2hb_pop_count(void *map, int count)
 	return pop;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void o2hb_write_timeout(struct work_struct *work)
@@ -319,9 +330,15 @@ static void o2hb_write_timeout(struct work_struct *work)
 		if (test_bit(reg->hr_region_num, o2hb_quorum_region_bitmap))
 			set_bit(reg->hr_region_num, o2hb_failed_region_bitmap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		failed = o2hb_pop_count(&o2hb_failed_region_bitmap,
 					O2NM_MAX_REGIONS);
 		quorum = o2hb_pop_count(&o2hb_quorum_region_bitmap,
+=======
+		failed = bitmap_weight(o2hb_failed_region_bitmap,
+					O2NM_MAX_REGIONS);
+		quorum = bitmap_weight(o2hb_quorum_region_bitmap,
+>>>>>>> v3.18
 =======
 		failed = bitmap_weight(o2hb_failed_region_bitmap,
 					O2NM_MAX_REGIONS);
@@ -439,7 +456,11 @@ static struct bio *o2hb_setup_one_bio(struct o2hb_region *reg,
 
 	/* Must put everything in 512 byte sectors for the bio... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_sector = (reg->hr_start_block + cs) << (bits - 9);
+=======
+	bio->bi_iter.bi_sector = (reg->hr_start_block + cs) << (bits - 9);
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_sector = (reg->hr_start_block + cs) << (bits - 9);
 >>>>>>> v3.18
@@ -522,7 +543,11 @@ static int o2hb_issue_node_write(struct o2hb_region *reg,
 
 	atomic_inc(&write_wc->wc_num_reqs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	submit_bio(WRITE, bio);
+=======
+	submit_bio(WRITE_SYNC, bio);
+>>>>>>> v3.18
 =======
 	submit_bio(WRITE_SYNC, bio);
 >>>>>>> v3.18
@@ -654,11 +679,17 @@ static void o2hb_fire_callbacks(struct o2hb_callback *hbcall,
 				int idx)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *iter;
 	struct o2hb_callback_func *f;
 
 	list_for_each(iter, &hbcall->list) {
 		f = list_entry(iter, struct o2hb_callback_func, hc_item);
+=======
+	struct o2hb_callback_func *f;
+
+	list_for_each_entry(f, &hbcall->list, hc_item) {
+>>>>>>> v3.18
 =======
 	struct o2hb_callback_func *f;
 
@@ -673,6 +704,7 @@ static void o2hb_fire_callbacks(struct o2hb_callback *hbcall,
 static void o2hb_run_event_list(struct o2hb_node_event *queued_event)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int empty;
 	struct o2hb_callback *hbcall;
 	struct o2hb_node_event *event;
@@ -683,6 +715,11 @@ static void o2hb_run_event_list(struct o2hb_node_event *queued_event)
 	if (empty)
 		return;
 
+=======
+	struct o2hb_callback *hbcall;
+	struct o2hb_node_event *event;
+
+>>>>>>> v3.18
 =======
 	struct o2hb_callback *hbcall;
 	struct o2hb_node_event *event;
@@ -747,6 +784,10 @@ static void o2hb_shutdown_slot(struct o2hb_disk_slot *slot)
 		{ .hn_item = LIST_HEAD_INIT(event.hn_item), };
 	struct o2nm_node *node;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int queued = 0;
+>>>>>>> v3.18
 =======
 	int queued = 0;
 >>>>>>> v3.18
@@ -768,6 +809,10 @@ static void o2hb_shutdown_slot(struct o2hb_disk_slot *slot)
 			o2hb_queue_node_event(&event, O2HB_NODE_DOWN_CB, node,
 					      slot->ds_node_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			queued = 1;
+>>>>>>> v3.18
 =======
 			queued = 1;
 >>>>>>> v3.18
@@ -776,7 +821,12 @@ static void o2hb_shutdown_slot(struct o2hb_disk_slot *slot)
 	spin_unlock(&o2hb_live_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	o2hb_run_event_list(&event);
+=======
+	if (queued)
+		o2hb_run_event_list(&event);
+>>>>>>> v3.18
 =======
 	if (queued)
 		o2hb_run_event_list(&event);
@@ -822,7 +872,11 @@ static void o2hb_set_quorum_device(struct o2hb_region *reg)
 	 * region count > CUT_OFF
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (o2hb_pop_count(&o2hb_quorum_region_bitmap,
+=======
+	if (bitmap_weight(o2hb_quorum_region_bitmap,
+>>>>>>> v3.18
 =======
 	if (bitmap_weight(o2hb_quorum_region_bitmap,
 >>>>>>> v3.18
@@ -845,6 +899,10 @@ static int o2hb_check_slot(struct o2hb_region *reg,
 	unsigned int slot_dead_ms;
 	int tmp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int queued = 0;
+>>>>>>> v3.18
 =======
 	int queued = 0;
 >>>>>>> v3.18
@@ -942,6 +1000,10 @@ fire_callbacks:
 
 			changed = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			queued = 1;
+>>>>>>> v3.18
 =======
 			queued = 1;
 >>>>>>> v3.18
@@ -997,6 +1059,10 @@ fire_callbacks:
 
 			changed = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			queued = 1;
+>>>>>>> v3.18
 =======
 			queued = 1;
 >>>>>>> v3.18
@@ -1016,7 +1082,12 @@ out:
 	spin_unlock(&o2hb_live_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	o2hb_run_event_list(&event);
+=======
+	if (queued)
+		o2hb_run_event_list(&event);
+>>>>>>> v3.18
 =======
 	if (queued)
 		o2hb_run_event_list(&event);
@@ -1027,6 +1098,7 @@ out:
 	return changed;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* This could be faster if we just implmented a find_last_bit, but I
  * don't think the circumstances warrant it. */
@@ -1045,6 +1117,11 @@ static int o2hb_highest_node(unsigned long *nodes,
 	}
 
 	return highest;
+=======
+static int o2hb_highest_node(unsigned long *nodes, int numbits)
+{
+	return find_last_bit(nodes, numbits);
+>>>>>>> v3.18
 =======
 static int o2hb_highest_node(unsigned long *nodes, int numbits)
 {
@@ -1209,7 +1286,11 @@ static int o2hb_thread(void *data)
 	mlog(ML_HEARTBEAT|ML_KTHREAD, "hb thread running\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_user_nice(current, -20);
+=======
+	set_user_nice(current, MIN_NICE);
+>>>>>>> v3.18
 =======
 	set_user_nice(current, MIN_NICE);
 >>>>>>> v3.18
@@ -1913,7 +1994,11 @@ static ssize_t o2hb_region_dev_write(struct o2hb_region *reg,
 	if (o2hb_global_heartbeat_active()) {
 		spin_lock(&o2hb_live_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (o2hb_pop_count(&o2hb_region_bitmap, O2NM_MAX_REGIONS) == 1)
+=======
+		if (bitmap_weight(o2hb_region_bitmap, O2NM_MAX_REGIONS) == 1)
+>>>>>>> v3.18
 =======
 		if (bitmap_weight(o2hb_region_bitmap, O2NM_MAX_REGIONS) == 1)
 >>>>>>> v3.18
@@ -2268,7 +2353,11 @@ static void o2hb_heartbeat_group_drop_item(struct config_group *group,
 		goto unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (o2hb_pop_count(&o2hb_quorum_region_bitmap,
+=======
+	if (bitmap_weight(o2hb_quorum_region_bitmap,
+>>>>>>> v3.18
 =======
 	if (bitmap_weight(o2hb_quorum_region_bitmap,
 >>>>>>> v3.18
@@ -2358,15 +2447,21 @@ ssize_t o2hb_heartbeat_group_mode_store(struct o2hb_heartbeat_group *group,
 
 	for (i = 0; i < O2HB_HEARTBEAT_NUM_MODES; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strnicmp(page, o2hb_heartbeat_mode_desc[i], len))
 			continue;
 
 		ret = o2hb_global_hearbeat_mode_set(i);
 =======
+=======
+>>>>>>> v3.18
 		if (strncasecmp(page, o2hb_heartbeat_mode_desc[i], len))
 			continue;
 
 		ret = o2hb_global_heartbeat_mode_set(i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!ret)
 			printk(KERN_NOTICE "o2hb: Heartbeat mode set to %s\n",
@@ -2401,7 +2496,11 @@ static struct configfs_attribute *o2hb_heartbeat_group_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct configfs_item_operations o2hb_hearbeat_group_item_ops = {
+=======
+static struct configfs_item_operations o2hb_heartbeat_group_item_ops = {
+>>>>>>> v3.18
 =======
 static struct configfs_item_operations o2hb_heartbeat_group_item_ops = {
 >>>>>>> v3.18
@@ -2417,7 +2516,11 @@ static struct configfs_group_operations o2hb_heartbeat_group_group_ops = {
 static struct config_item_type o2hb_heartbeat_group_type = {
 	.ct_group_ops	= &o2hb_heartbeat_group_group_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ct_item_ops	= &o2hb_hearbeat_group_item_ops,
+=======
+	.ct_item_ops	= &o2hb_heartbeat_group_item_ops,
+>>>>>>> v3.18
 =======
 	.ct_item_ops	= &o2hb_heartbeat_group_item_ops,
 >>>>>>> v3.18
@@ -2494,6 +2597,12 @@ static int o2hb_region_pin(const char *region_uuid)
 
 	list_for_each_entry(reg, &o2hb_all_regions, hr_all_item) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (reg->hr_item_dropped)
+			continue;
+
+>>>>>>> v3.18
 =======
 		if (reg->hr_item_dropped)
 			continue;
@@ -2550,6 +2659,12 @@ static void o2hb_region_unpin(const char *region_uuid)
 
 	list_for_each_entry(reg, &o2hb_all_regions, hr_all_item) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (reg->hr_item_dropped)
+			continue;
+
+>>>>>>> v3.18
 =======
 		if (reg->hr_item_dropped)
 			continue;
@@ -2593,7 +2708,11 @@ static int o2hb_region_inc_user(const char *region_uuid)
 		goto unlock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (o2hb_pop_count(&o2hb_quorum_region_bitmap,
+=======
+	if (bitmap_weight(o2hb_quorum_region_bitmap,
+>>>>>>> v3.18
 =======
 	if (bitmap_weight(o2hb_quorum_region_bitmap,
 >>>>>>> v3.18
@@ -2631,8 +2750,12 @@ int o2hb_register_callback(const char *region_uuid,
 			   struct o2hb_callback_func *hc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct o2hb_callback_func *tmp;
 	struct list_head *iter;
+=======
+	struct o2hb_callback_func *f;
+>>>>>>> v3.18
 =======
 	struct o2hb_callback_func *f;
 >>>>>>> v3.18
@@ -2659,10 +2782,16 @@ int o2hb_register_callback(const char *region_uuid,
 	down_write(&o2hb_callback_sem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each(iter, &hbcall->list) {
 		tmp = list_entry(iter, struct o2hb_callback_func, hc_item);
 		if (hc->hc_priority < tmp->hc_priority) {
 			list_add_tail(&hc->hc_item, iter);
+=======
+	list_for_each_entry(f, &hbcall->list, hc_item) {
+		if (hc->hc_priority < f->hc_priority) {
+			list_add_tail(&hc->hc_item, &f->hc_item);
+>>>>>>> v3.18
 =======
 	list_for_each_entry(f, &hbcall->list, hc_item) {
 		if (hc->hc_priority < f->hc_priority) {
@@ -2723,7 +2852,10 @@ int o2hb_check_node_heartbeating(u8 node_num)
 EXPORT_SYMBOL_GPL(o2hb_check_node_heartbeating);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int o2hb_check_node_heartbeating_no_sem(u8 node_num)
 {
 	unsigned long testing_map[BITS_TO_LONGS(O2NM_MAX_NODES)];
@@ -2743,6 +2875,9 @@ int o2hb_check_node_heartbeating_no_sem(u8 node_num)
 }
 EXPORT_SYMBOL_GPL(o2hb_check_node_heartbeating_no_sem);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int o2hb_check_node_heartbeating_from_callback(u8 node_num)
 {
@@ -2807,6 +2942,12 @@ int o2hb_get_all_regions(char *region_uuids, u8 max_regions)
 	p = region_uuids;
 	list_for_each_entry(reg, &o2hb_all_regions, hr_all_item) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (reg->hr_item_dropped)
+			continue;
+
+>>>>>>> v3.18
 =======
 		if (reg->hr_item_dropped)
 			continue;

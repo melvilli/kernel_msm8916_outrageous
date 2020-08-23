@@ -26,6 +26,7 @@ struct memory_block {
 	unsigned long start_section_nr;
 	unsigned long end_section_nr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long state;
 	int section_count;
 
@@ -41,6 +42,11 @@ struct memory_block {
 	int section_count;		/* serialized by mem_sysfs_mutex */
 	int online_type;		/* for passing data to online routine */
 >>>>>>> v3.18
+=======
+	unsigned long state;		/* serialized by the dev->lock */
+	int section_count;		/* serialized by mem_sysfs_mutex */
+	int online_type;		/* for passing data to online routine */
+>>>>>>> v3.18
 	int phys_device;		/* to which fru does this belong? */
 	void *hw;			/* optional pointer to fw/hw data */
 	int (*phys_callback)(struct memory_block *);
@@ -49,6 +55,10 @@ struct memory_block {
 
 int arch_get_memory_phys_device(unsigned long start_pfn);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unsigned long memory_block_size_bytes(void);
+>>>>>>> v3.18
 =======
 unsigned long memory_block_size_bytes(void);
 >>>>>>> v3.18
@@ -136,7 +146,10 @@ extern struct memory_block *find_memory_block_hinted(struct mem_section *,
 extern struct memory_block *find_memory_block(struct mem_section *);
 #define CONFIG_MEM_BLOCK_SIZE	(PAGES_PER_SECTION<<PAGE_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum mem_add_context { BOOT, HOTPLUG };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* CONFIG_MEMORY_HOTPLUG_SPARSE */

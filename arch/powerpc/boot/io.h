@@ -1,6 +1,10 @@
 #ifndef _IO_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __IO_H
+=======
+#define _IO_H
+>>>>>>> v3.18
 =======
 #define _IO_H
 >>>>>>> v3.18

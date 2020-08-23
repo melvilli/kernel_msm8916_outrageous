@@ -2,7 +2,11 @@
  * MPC85xx RDB Board Setup
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2009,2012 Freescale Semiconductor Inc.
+=======
+ * Copyright 2009,2012-2013 Freescale Semiconductor Inc.
+>>>>>>> v3.18
 =======
  * Copyright 2009,2012-2013 Freescale Semiconductor Inc.
 >>>>>>> v3.18
@@ -91,10 +95,13 @@ void __init mpc85xx_rdb_pic_init(void)
 static void __init mpc85xx_rdb_setup_arch(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_QUICC_ENGINE
 	struct device_node *np;
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ppc_md.progress)
@@ -105,6 +112,7 @@ static void __init mpc85xx_rdb_setup_arch(void)
 	fsl_pci_assign_primary();
 
 #ifdef CONFIG_QUICC_ENGINE
+<<<<<<< HEAD
 <<<<<<< HEAD
 	np = of_find_compatible_node(NULL, NULL, "fsl,qe");
 	if (!np) {
@@ -129,11 +137,16 @@ static void __init mpc85xx_rdb_setup_arch(void)
 #if defined(CONFIG_UCC_GETH) || defined(CONFIG_SERIAL_QE)
 	if (machine_is(p1025_rdb)) {
 =======
+=======
+>>>>>>> v3.18
 	mpc85xx_qe_init();
 	mpc85xx_qe_par_io_init();
 #if defined(CONFIG_UCC_GETH) || defined(CONFIG_SERIAL_QE)
 	if (machine_is(p1025_rdb)) {
 		struct device_node *np;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		struct ccsr_guts __iomem *guts;
@@ -164,8 +177,11 @@ static void __init mpc85xx_rdb_setup_arch(void)
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 qe_fail:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif	/* CONFIG_QUICC_ENGINE */
@@ -179,6 +195,10 @@ machine_arch_initcall(p1020_mbg_pc, mpc85xx_common_publish_devices);
 machine_arch_initcall(p1020_rdb, mpc85xx_common_publish_devices);
 machine_arch_initcall(p1020_rdb_pc, mpc85xx_common_publish_devices);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+machine_arch_initcall(p1020_rdb_pd, mpc85xx_common_publish_devices);
+>>>>>>> v3.18
 =======
 machine_arch_initcall(p1020_rdb_pd, mpc85xx_common_publish_devices);
 >>>>>>> v3.18
@@ -216,7 +236,10 @@ static int __init p1020_rdb_pc_probe(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init p1020_rdb_pd_probe(void)
 {
 	unsigned long root = of_get_flat_dt_root();
@@ -224,6 +247,9 @@ static int __init p1020_rdb_pd_probe(void)
 	return of_flat_dt_is_compatible(root, "fsl,P1020RDB-PD");
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init p1021_rdb_pc_probe(void)
 {
@@ -279,6 +305,10 @@ define_machine(p2020_rdb) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -297,6 +327,10 @@ define_machine(p1020_rdb) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -315,6 +349,10 @@ define_machine(p1021_rdb_pc) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -333,6 +371,10 @@ define_machine(p2020_rdb_pc) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -351,6 +393,10 @@ define_machine(p1025_rdb) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -369,6 +415,10 @@ define_machine(p1020_mbg_pc) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -387,6 +437,10 @@ define_machine(p1020_utm_pc) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18
@@ -405,7 +459,10 @@ define_machine(p1020_rdb_pc) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 #endif
 	.get_irq		= mpic_get_irq,
@@ -422,6 +479,9 @@ define_machine(p1020_rdb_pd) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	.get_irq		= mpic_get_irq,
@@ -438,6 +498,10 @@ define_machine(p1024_rdb) {
 #ifdef CONFIG_PCI
 	.pcibios_fixup_bus	= fsl_pcibios_fixup_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
+>>>>>>> v3.18
 =======
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 >>>>>>> v3.18

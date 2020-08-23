@@ -65,8 +65,11 @@ Description:
 		force a rescan of all PCI buses in the system, and
 		re-discover previously removed devices.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Depends on CONFIG_HOTPLUG.
 =======
+=======
+>>>>>>> v3.18
 
 What:		/sys/bus/pci/devices/.../msi_bus
 Date:		September 2014
@@ -77,6 +80,9 @@ Description:
 		is a bridge, MSI and MSI-X will be disallowed for future
 		drivers of all child devices under the bridge.  Drivers
 		must be reloaded for the new setting to take effect.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 What:		/sys/bus/pci/devices/.../msi_irqs/
@@ -84,6 +90,7 @@ Date:		September, 2011
 Contact:	Neil Horman <nhorman@tuxdriver.com>
 Description:
 		The /sys/devices/.../msi_irqs directory contains a variable set
+<<<<<<< HEAD
 <<<<<<< HEAD
 		of sub-directories, with each sub-directory being named after a
 		corresponding msi irq vector allocated to that device.  Each
@@ -93,17 +100,26 @@ Description:
 
 What:		/sys/bus/pci/devices/.../msi_irqs/<N>/mode
 =======
+=======
+>>>>>>> v3.18
 		of files, with each file being named after a corresponding msi
 		irq vector allocated to that device.
 
 What:		/sys/bus/pci/devices/.../msi_irqs/<N>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Date:		September 2011
 Contact:	Neil Horman <nhorman@tuxdriver.com>
 Description:
 		This attribute indicates the mode that the irq vector named by
 <<<<<<< HEAD
+<<<<<<< HEAD
 		the parent directory is in (msi vs. msix)
+=======
+		the file is in (msi vs. msix)
+>>>>>>> v3.18
 =======
 		the file is in (msi vs. msix)
 >>>>>>> v3.18
@@ -115,7 +131,10 @@ Description:
 		Writing a non-zero value to this attribute will
 		hot-remove the PCI device and any of its children.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Depends on CONFIG_HOTPLUG.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -127,7 +146,11 @@ Description:
 		force a rescan of the bus and all child buses,
 		and re-discover devices removed earlier from this
 <<<<<<< HEAD
+<<<<<<< HEAD
 		part of the device tree.  Depends on CONFIG_HOTPLUG.
+=======
+		part of the device tree.
+>>>>>>> v3.18
 =======
 		part of the device tree.
 >>>>>>> v3.18
@@ -141,7 +164,10 @@ Description:
 		child buses, and re-discover devices removed earlier
 		from this part of the device tree.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Depends on CONFIG_HOTPLUG.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -158,7 +184,11 @@ Description:
 What:		/sys/bus/pci/devices/.../vpd
 Date:		February 2008
 <<<<<<< HEAD
+<<<<<<< HEAD
 Contact:	Ben Hutchings <bhutchings@solarflare.com>
+=======
+Contact:	Ben Hutchings <bwh@kernel.org>
+>>>>>>> v3.18
 =======
 Contact:	Ben Hutchings <bwh@kernel.org>
 >>>>>>> v3.18
@@ -295,7 +325,10 @@ Description:
 		is not 0 and not 2 already will return an error. Writing a 10
 		when the value of sriov_totalvfs is 8 will return an error.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 What:		/sys/bus/pci/devices/.../driver_override
 Date:		April 2014
@@ -317,4 +350,7 @@ Description:
 		opt-out of driver binding using a driver_override name such as
 		"none".  Only a single driver may be specified in the override,
 		there is no support for parsing delimiters.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

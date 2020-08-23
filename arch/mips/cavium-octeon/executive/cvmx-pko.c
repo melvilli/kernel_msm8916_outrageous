@@ -141,7 +141,11 @@ void cvmx_pko_disable(void)
 	cvmx_write_csr(CVMX_PKO_REG_FLAGS, pko_reg_flags.u64);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+EXPORT_SYMBOL_GPL(cvmx_pko_disable);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_pko_disable);
 >>>>>>> v3.18
@@ -187,6 +191,10 @@ void cvmx_pko_shutdown(void)
 	__cvmx_pko_reset();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(cvmx_pko_shutdown);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(cvmx_pko_shutdown);
 >>>>>>> v3.18

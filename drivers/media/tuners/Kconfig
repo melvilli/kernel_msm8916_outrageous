@@ -2,7 +2,11 @@
 config MEDIA_TUNER
 	tristate
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on (MEDIA_ANALOG_TV_SUPPORT || MEDIA_RADIO_SUPPORT) && I2C
+=======
+	depends on (MEDIA_ANALOG_TV_SUPPORT || MEDIA_DIGITAL_TV_SUPPORT || MEDIA_RADIO_SUPPORT || MEDIA_SDR_SUPPORT) && I2C
+>>>>>>> v3.18
 =======
 	depends on (MEDIA_ANALOG_TV_SUPPORT || MEDIA_DIGITAL_TV_SUPPORT || MEDIA_RADIO_SUPPORT || MEDIA_SDR_SUPPORT) && I2C
 >>>>>>> v3.18
@@ -21,7 +25,11 @@ config MEDIA_TUNER
 menu "Customize TV tuners"
 	visible if !MEDIA_SUBDRV_AUTOSELECT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MEDIA_ANALOG_TV_SUPPORT || MEDIA_DIGITAL_TV_SUPPORT || MEDIA_RADIO_SUPPORT
+=======
+	depends on MEDIA_ANALOG_TV_SUPPORT || MEDIA_DIGITAL_TV_SUPPORT || MEDIA_RADIO_SUPPORT || MEDIA_SDR_SUPPORT
+>>>>>>> v3.18
 =======
 	depends on MEDIA_ANALOG_TV_SUPPORT || MEDIA_DIGITAL_TV_SUPPORT || MEDIA_RADIO_SUPPORT || MEDIA_SDR_SUPPORT
 >>>>>>> v3.18
@@ -80,7 +88,10 @@ config MEDIA_TUNER_TEA5767
 	  Say Y here to include support for the Philips TEA5767 radio tuner.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MEDIA_TUNER_MSI001
 	tristate "Mirics MSi001"
 	depends on MEDIA_SUPPORT && SPI && VIDEO_V4L2
@@ -88,6 +99,9 @@ config MEDIA_TUNER_MSI001
 	help
 	  Mirics MSi001 silicon tuner driver.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MEDIA_TUNER_MT20XX
 	tristate "Microtune 2032 / 2050 tuners"
@@ -216,6 +230,10 @@ config MEDIA_TUNER_TDA18212
 	tristate "NXP TDA18212 silicon tuner"
 	depends on MEDIA_SUPPORT && I2C
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select REGMAP_I2C
+>>>>>>> v3.18
 =======
 	select REGMAP_I2C
 >>>>>>> v3.18
@@ -227,6 +245,10 @@ config MEDIA_TUNER_E4000
 	tristate "Elonics E4000 silicon tuner"
 	depends on MEDIA_SUPPORT && I2C
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select REGMAP_I2C
+>>>>>>> v3.18
 =======
 	select REGMAP_I2C
 >>>>>>> v3.18
@@ -242,7 +264,10 @@ config MEDIA_TUNER_FC2580
 	  FCI FC2580 silicon tuner driver.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MEDIA_TUNER_M88TS2022
 	tristate "Montage M88TS2022 silicon tuner"
 	depends on MEDIA_SUPPORT && I2C
@@ -251,6 +276,9 @@ config MEDIA_TUNER_M88TS2022
 	help
 	  Montage M88TS2022 silicon tuner driver.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MEDIA_TUNER_TUA9001
 	tristate "Infineon TUA 9001 silicon tuner"
@@ -260,10 +288,13 @@ config MEDIA_TUNER_TUA9001
 	  Infineon TUA 9001 silicon tuner driver.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MEDIA_TUNER_IT913X
 	tristate "ITE Tech IT913x silicon tuner"
 	depends on MEDIA_SUPPORT && I2C
 =======
+=======
+>>>>>>> v3.18
 config MEDIA_TUNER_SI2157
 	tristate "Silicon Labs Si2157 silicon tuner"
 	depends on MEDIA_SUPPORT && I2C
@@ -275,6 +306,9 @@ config MEDIA_TUNER_IT913X
 	tristate "ITE Tech IT913x silicon tuner"
 	depends on MEDIA_SUPPORT && I2C
 	select REGMAP_I2C
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default m if !MEDIA_SUBDRV_AUTOSELECT
 	help
@@ -287,7 +321,10 @@ config MEDIA_TUNER_R820T
 	help
 	  Rafael Micro R820T silicon tuner driver.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config MEDIA_TUNER_MXL301RF
 	tristate "MaxLinear MxL301RF tuner"
@@ -302,5 +339,8 @@ config MEDIA_TUNER_QM1D1C0042
 	default m if !MEDIA_SUBDRV_AUTOSELECT
 	help
 	  Sharp QM1D1C0042 trellis coded 8PSK tuner driver.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu

@@ -298,6 +298,12 @@ static int appleir_probe(struct hid_device *hid, const struct hid_device_id *id)
 	appleir->hid = hid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* force input as some remotes bypass the input registration */
+	hid->quirks |= HID_QUIRK_HIDINPUT_FORCE;
+
+>>>>>>> v3.18
 =======
 	/* force input as some remotes bypass the input registration */
 	hid->quirks |= HID_QUIRK_HIDINPUT_FORCE;

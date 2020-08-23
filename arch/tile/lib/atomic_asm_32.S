@@ -165,6 +165,10 @@ STD_ENTRY_SECTION(__atomic\name, .text.atomic)
 	.ifc \bitwidth,32
 	.pushsection __ex_table,"a"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.align  4
+>>>>>>> v3.18
 =======
 	.align  4
 >>>>>>> v3.18

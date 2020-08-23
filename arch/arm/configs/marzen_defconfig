@@ -10,7 +10,11 @@ CONFIG_EMBEDDED=y
 CONFIG_SLAB=y
 # CONFIG_IOSCHED_CFQ is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_ARCH_SHMOBILE=y
+=======
+CONFIG_ARCH_SHMOBILE_LEGACY=y
+>>>>>>> v3.18
 =======
 CONFIG_ARCH_SHMOBILE_LEGACY=y
 >>>>>>> v3.18
@@ -34,8 +38,13 @@ CONFIG_HIGHMEM=y
 CONFIG_ZBOOT_ROM_TEXT=0x0
 CONFIG_ZBOOT_ROM_BSS=0x0
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_CMDLINE="console=ttySC2,115200 earlyprintk=sh-sci.2,115200 ignore_loglevel root=/dev/nfs ip=on"
 CONFIG_CMDLINE_FORCE=y
+=======
+CONFIG_ARM_APPENDED_DTB=y
+CONFIG_VFP=y
+>>>>>>> v3.18
 =======
 CONFIG_ARM_APPENDED_DTB=y
 CONFIG_VFP=y
@@ -45,6 +54,10 @@ CONFIG_KEXEC=y
 CONFIG_PM_RUNTIME=y
 CONFIG_NET=y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_PACKET=y
+>>>>>>> v3.18
 =======
 CONFIG_PACKET=y
 >>>>>>> v3.18
@@ -74,7 +87,10 @@ CONFIG_NETDEVICES=y
 # CONFIG_NET_VENDOR_NATSEMI is not set
 # CONFIG_NET_VENDOR_SEEQ is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_SMC911X=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_SMSC911X=y
@@ -101,7 +117,10 @@ CONFIG_THERMAL=y
 CONFIG_RCAR_THERMAL=y
 CONFIG_SSB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 CONFIG_REGULATOR=y
 CONFIG_MEDIA_SUPPORT=y
 CONFIG_MEDIA_CAMERA_SUPPORT=y
@@ -112,6 +131,9 @@ CONFIG_VIDEO_RCAR_VIN=y
 CONFIG_VIDEO_ADV7180=y
 CONFIG_DRM=y
 CONFIG_DRM_RCAR_DU=y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 CONFIG_USB=y
 CONFIG_USB_RCAR_PHY=y
@@ -126,6 +148,11 @@ CONFIG_NEW_LEDS=y
 CONFIG_LEDS_CLASS=y
 CONFIG_LEDS_GPIO=y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_DMADEVICES=y
+CONFIG_RCAR_HPB_DMAE=y
+>>>>>>> v3.18
 =======
 CONFIG_DMADEVICES=y
 CONFIG_RCAR_HPB_DMAE=y
@@ -135,7 +162,10 @@ CONFIG_UIO_PDRV_GENIRQ=y
 # CONFIG_IOMMU_SUPPORT is not set
 # CONFIG_DNOTIFY is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
 # CONFIG_INOTIFY_USER is not set
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_TMPFS=y

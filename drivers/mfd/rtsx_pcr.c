@@ -1,7 +1,11 @@
 /* Driver for Realtek PCI-Express card reader
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2009 Realtek Semiconductor Corp. All rights reserved.
+=======
+ * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
 >>>>>>> v3.18
@@ -22,7 +26,10 @@
  * Author:
  *   Wei WANG <wei_wang@realsil.com.cn>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   No. 450, Shenhu Road, Suzhou Industry Park, Suzhou, China
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -59,7 +66,11 @@ static struct mfd_cell rtsx_pcr_cells[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(rtsx_pci_ids) = {
+=======
+static const struct pci_device_id rtsx_pci_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id rtsx_pci_ids[] = {
 >>>>>>> v3.18
@@ -69,6 +80,11 @@ static const struct pci_device_id rtsx_pci_ids[] = {
 	{ PCI_DEVICE(0x10EC, 0x5227), PCI_CLASS_OTHERS << 16, 0xFF0000 },
 	{ PCI_DEVICE(0x10EC, 0x5249), PCI_CLASS_OTHERS << 16, 0xFF0000 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ PCI_DEVICE(0x10EC, 0x5287), PCI_CLASS_OTHERS << 16, 0xFF0000 },
+	{ PCI_DEVICE(0x10EC, 0x5286), PCI_CLASS_OTHERS << 16, 0xFF0000 },
+>>>>>>> v3.18
 =======
 	{ PCI_DEVICE(0x10EC, 0x5287), PCI_CLASS_OTHERS << 16, 0xFF0000 },
 	{ PCI_DEVICE(0x10EC, 0x5286), PCI_CLASS_OTHERS << 16, 0xFF0000 },
@@ -89,6 +105,12 @@ void rtsx_pci_start_run(struct rtsx_pcr *pcr)
 		if (pcr->ops->enable_auto_blink)
 			pcr->ops->enable_auto_blink(pcr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		if (pcr->aspm_en)
+			rtsx_pci_write_config_byte(pcr, LCTLR, 0);
+>>>>>>> v3.18
 =======
 
 		if (pcr->aspm_en)
@@ -356,6 +378,7 @@ int rtsx_pci_transfer_data(struct rtsx_pcr *pcr, struct scatterlist *sglist,
 		int num_sg, bool read, int timeout)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct completion trans_done;
 	u8 dir;
 	int err = 0, i, count;
@@ -371,6 +394,8 @@ int rtsx_pci_transfer_data(struct rtsx_pcr *pcr, struct scatterlist *sglist,
 
 	/* don't transfer data during abort processing */
 =======
+=======
+>>>>>>> v3.18
 	int err = 0, count;
 
 	dev_dbg(&(pcr->pci->dev), "--> %s: num_sg = %d\n", __func__, num_sg);
@@ -392,6 +417,9 @@ int rtsx_pci_dma_map_sg(struct rtsx_pcr *pcr, struct scatterlist *sglist,
 {
 	enum dma_data_direction dir = read ? DMA_FROM_DEVICE : DMA_TO_DEVICE;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pcr->remove_pci)
 		return -EINVAL;
@@ -399,6 +427,7 @@ int rtsx_pci_dma_map_sg(struct rtsx_pcr *pcr, struct scatterlist *sglist,
 	if ((sglist == NULL) || (num_sg <= 0))
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (read) {
 		dir = DEVICE_TO_HOST;
@@ -415,6 +444,8 @@ int rtsx_pci_dma_map_sg(struct rtsx_pcr *pcr, struct scatterlist *sglist,
 	}
 	dev_dbg(&(pcr->pci->dev), "DMA mapping count: %d\n", count);
 =======
+=======
+>>>>>>> v3.18
 	return dma_map_sg(&(pcr->pci->dev), sglist, num_sg, dir);
 }
 EXPORT_SYMBOL_GPL(rtsx_pci_dma_map_sg);
@@ -446,6 +477,9 @@ int rtsx_pci_dma_transfer(struct rtsx_pcr *pcr, struct scatterlist *sglist,
 
 	if ((sglist == NULL) || (count < 1))
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	val = ((u32)(dir & 0x01) << 29) | TRIG_DMA | ADMA_MODE;
@@ -477,7 +511,10 @@ int rtsx_pci_dma_transfer(struct rtsx_pcr *pcr, struct scatterlist *sglist,
 
 	spin_lock_irqsave(&pcr->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (pcr->trans_result == TRANS_RESULT_FAIL)
@@ -485,7 +522,10 @@ int rtsx_pci_dma_transfer(struct rtsx_pcr *pcr, struct scatterlist *sglist,
 	else if (pcr->trans_result == TRANS_NO_DEVICE)
 		err = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&pcr->lock, flags);
@@ -496,8 +536,11 @@ out:
 	spin_unlock_irqrestore(&pcr->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_unmap_sg(&(pcr->pci->dev), sglist, num_sg, dma_dir);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if ((err < 0) && (err != -ENODEV))
@@ -509,7 +552,11 @@ out:
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(rtsx_pci_transfer_data);
+=======
+EXPORT_SYMBOL_GPL(rtsx_pci_dma_transfer);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(rtsx_pci_dma_transfer);
 >>>>>>> v3.18
@@ -810,7 +857,11 @@ int rtsx_pci_card_exclusive_check(struct rtsx_pcr *pcr, int card)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pcr->ms_pmos) {
+=======
+	if (!(pcr->flags & PCR_MS_PMOS)) {
+>>>>>>> v3.18
 =======
 	if (!(pcr->flags & PCR_MS_PMOS)) {
 >>>>>>> v3.18
@@ -1015,10 +1066,13 @@ static void rtsx_pci_idle_work(struct work_struct *work)
 		pcr->ops->turn_off_led(pcr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&pcr->pcr_mutex);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	if (pcr->aspm_en)
 		rtsx_pci_write_config_byte(pcr, LCTLR, pcr->aspm_en);
 
@@ -1042,6 +1096,9 @@ static void rtsx_pci_power_off(struct rtsx_pcr *pcr, u8 pm_state)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int rtsx_pci_init_hw(struct rtsx_pcr *pcr)
 {
@@ -1074,6 +1131,7 @@ static int rtsx_pci_init_hw(struct rtsx_pcr *pcr)
 	/* Disable card clock */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, CARD_CLK_EN, 0x1E, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Reset ASPM state to default value */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, ASPM_FORCE_CTL, 0x3F, 0);
 	/* Reset delink mode */
@@ -1082,11 +1140,16 @@ static int rtsx_pci_init_hw(struct rtsx_pcr *pcr)
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, SD30_DRIVE_SEL,
 			0x07, DRIVER_TYPE_D);
 =======
+=======
+>>>>>>> v3.18
 	/* Reset delink mode */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, CHANGE_LINK_STATE, 0x0A, 0);
 	/* Card driving select */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, CARD_DRIVE_SEL,
 			0xFF, pcr->card_drive_sel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Enable SSC Clock */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, SSC_CTL1,
@@ -1113,8 +1176,11 @@ static int rtsx_pci_init_hw(struct rtsx_pcr *pcr)
 	 */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, NFTS_TX_CTRL, 0x02, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Force CLKREQ# PIN to drive 0 to request clock */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, PETXCFG, 0x08, 0x08);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1123,6 +1189,11 @@ static int rtsx_pci_init_hw(struct rtsx_pcr *pcr)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rtsx_pci_write_config_byte(pcr, LCTLR, 0);
+
+>>>>>>> v3.18
 =======
 	rtsx_pci_write_config_byte(pcr, LCTLR, 0);
 
@@ -1178,7 +1249,10 @@ static int rtsx_pci_init_chip(struct rtsx_pcr *pcr)
 		rts5249_init_params(pcr);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	case 0x5287:
 		rtl8411b_init_params(pcr);
@@ -1187,6 +1261,9 @@ static int rtsx_pci_init_chip(struct rtsx_pcr *pcr)
 	case 0x5286:
 		rtl8402_init_params(pcr);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1199,7 +1276,10 @@ static int rtsx_pci_init_chip(struct rtsx_pcr *pcr)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pcr->ops->fetch_vendor_settings)
 		pcr->ops->fetch_vendor_settings(pcr);
 
@@ -1212,6 +1292,9 @@ static int rtsx_pci_init_chip(struct rtsx_pcr *pcr)
 			pcr->card_drive_sel);
 	dev_dbg(&(pcr->pci->dev), "pcr->flags = 0x%x\n", pcr->flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pcr->state = PDEV_STAT_IDLE;
 	err = rtsx_pci_init_hw(pcr);
@@ -1280,7 +1363,11 @@ static int rtsx_pci_probe(struct pci_dev *pcidev,
 	if (!pcr->remap_addr) {
 		ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto free_host;
+=======
+		goto free_handle;
+>>>>>>> v3.18
 =======
 		goto free_handle;
 >>>>>>> v3.18
@@ -1344,8 +1431,11 @@ disable_msi:
 unmap:
 	iounmap(pcr->remap_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 free_host:
 	dev_set_drvdata(&pcidev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 free_handle:
@@ -1386,7 +1476,10 @@ static void rtsx_pci_remove(struct pci_dev *pcidev)
 	iounmap(pcr->remap_addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pcidev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_release_regions(pcidev);
@@ -1412,7 +1505,10 @@ static int rtsx_pci_suspend(struct pci_dev *pcidev, pm_message_t state)
 	struct pcr_handle *handle;
 	struct rtsx_pcr *pcr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1427,6 +1523,7 @@ static int rtsx_pci_suspend(struct pci_dev *pcidev, pm_message_t state)
 	mutex_lock(&pcr->pcr_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pcr->ops->turn_off_led)
 		pcr->ops->turn_off_led(pcr);
 
@@ -1438,6 +1535,9 @@ static int rtsx_pci_suspend(struct pci_dev *pcidev, pm_message_t state)
 =======
 	rtsx_pci_power_off(pcr, HOST_ENTER_S3);
 >>>>>>> v3.18
+=======
+	rtsx_pci_power_off(pcr, HOST_ENTER_S3);
+>>>>>>> v3.18
 
 	pci_save_state(pcidev);
 	pci_enable_wake(pcidev, pci_choose_state(pcidev, state), 0);
@@ -1446,7 +1546,11 @@ static int rtsx_pci_suspend(struct pci_dev *pcidev, pm_message_t state)
 
 	mutex_unlock(&pcr->pcr_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1488,7 +1592,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void rtsx_pci_shutdown(struct pci_dev *pcidev)
 {
 	struct pcr_handle *handle;
@@ -1503,12 +1610,19 @@ static void rtsx_pci_shutdown(struct pci_dev *pcidev)
 	pci_disable_device(pcidev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* CONFIG_PM */
 
 #define rtsx_pci_suspend NULL
 #define rtsx_pci_resume NULL
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define rtsx_pci_shutdown NULL
+>>>>>>> v3.18
 =======
 #define rtsx_pci_shutdown NULL
 >>>>>>> v3.18
@@ -1523,6 +1637,10 @@ static struct pci_driver rtsx_pci_driver = {
 	.suspend = rtsx_pci_suspend,
 	.resume = rtsx_pci_resume,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.shutdown = rtsx_pci_shutdown,
+>>>>>>> v3.18
 =======
 	.shutdown = rtsx_pci_shutdown,
 >>>>>>> v3.18

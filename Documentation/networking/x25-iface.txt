@@ -106,7 +106,11 @@ reduced by the following measures or a combination thereof:
     The lapb module interface was modified to support this. Its
     data_indication() method should now transparently pass the
 <<<<<<< HEAD
+<<<<<<< HEAD
     netif_rx() return value to the (lapb mopdule) caller.
+=======
+    netif_rx() return value to the (lapb module) caller.
+>>>>>>> v3.18
 =======
     netif_rx() return value to the (lapb module) caller.
 >>>>>>> v3.18

@@ -172,7 +172,11 @@ static int __init appldata_os_init(void)
 
 	max_size = sizeof(struct appldata_os_data) +
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   (NR_CPUS * sizeof(struct appldata_os_per_cpu));
+=======
+		   (num_possible_cpus() * sizeof(struct appldata_os_per_cpu));
+>>>>>>> v3.18
 =======
 		   (num_possible_cpus() * sizeof(struct appldata_os_per_cpu));
 >>>>>>> v3.18

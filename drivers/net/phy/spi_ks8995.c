@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * SPI driver for Micrel/Kendin KS8995M ethernet switch
+=======
+ * SPI driver for Micrel/Kendin KS8995M and KSZ8864RMN ethernet switches
+>>>>>>> v3.18
 =======
  * SPI driver for Micrel/Kendin KS8995M and KSZ8864RMN ethernet switches
 >>>>>>> v3.18
@@ -20,7 +24,10 @@
 #include <linux/types.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -79,12 +86,18 @@
 #define KS8995_REG_IAD0		0x77    /* Indirect Access Data 0 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define KS8995_REGS_SIZE	0x80
 =======
+=======
+>>>>>>> v3.18
 #define KSZ8864_REG_ID1		0xfe	/* Chip ID in bit 7 */
 
 #define KS8995_REGS_SIZE	0x80
 #define KSZ8864_REGS_SIZE	0x100
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ID1_CHIPID_M		0xf
@@ -110,6 +123,10 @@ struct ks8995_switch {
 	struct mutex		lock;
 	struct ks8995_pdata	*pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct bin_attribute	regs_attr;
+>>>>>>> v3.18
 =======
 	struct bin_attribute	regs_attr;
 >>>>>>> v3.18
@@ -190,7 +207,11 @@ static int ks8995_write(struct ks8995_switch *ks, char *buf,
 static inline int ks8995_read_reg(struct ks8995_switch *ks, u8 addr, u8 *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (ks8995_read(ks, buf, addr, 1) != 1);
+=======
+	return ks8995_read(ks, buf, addr, 1) != 1;
+>>>>>>> v3.18
 =======
 	return ks8995_read(ks, buf, addr, 1) != 1;
 >>>>>>> v3.18
@@ -201,7 +222,11 @@ static inline int ks8995_write_reg(struct ks8995_switch *ks, u8 addr, u8 val)
 	char buf = val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (ks8995_write(ks, &buf, addr, 1) != 1);
+=======
+	return ks8995_write(ks, &buf, addr, 1) != 1;
+>>>>>>> v3.18
 =======
 	return ks8995_write(ks, &buf, addr, 1) != 1;
 >>>>>>> v3.18
@@ -244,17 +269,23 @@ static ssize_t ks8995_registers_read(struct file *filp, struct kobject *kobj,
 	ks8995 = dev_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(off > KS8995_REGS_SIZE))
 		return 0;
 
 	if ((off + count) > KS8995_REGS_SIZE)
 		count = KS8995_REGS_SIZE - off;
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(off > ks8995->regs_attr.size))
 		return 0;
 
 	if ((off + count) > ks8995->regs_attr.size)
 		count = ks8995->regs_attr.size - off;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(!count))
@@ -274,17 +305,23 @@ static ssize_t ks8995_registers_write(struct file *filp, struct kobject *kobj,
 	ks8995 = dev_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(off >= KS8995_REGS_SIZE))
 		return -EFBIG;
 
 	if ((off + count) > KS8995_REGS_SIZE)
 		count = KS8995_REGS_SIZE - off;
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(off >= ks8995->regs_attr.size))
 		return -EFBIG;
 
 	if ((off + count) > ks8995->regs_attr.size)
 		count = ks8995->regs_attr.size - off;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (unlikely(!count))
@@ -295,7 +332,11 @@ static ssize_t ks8995_registers_write(struct file *filp, struct kobject *kobj,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct bin_attribute ks8995_registers_attr = {
+=======
+static const struct bin_attribute ks8995_registers_attr = {
+>>>>>>> v3.18
 =======
 static const struct bin_attribute ks8995_registers_attr = {
 >>>>>>> v3.18
@@ -321,7 +362,11 @@ static int ks8995_probe(struct spi_device *spi)
 	pdata = spi->dev.platform_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ks = kzalloc(sizeof(*ks), GFP_KERNEL);
+=======
+	ks = devm_kzalloc(&spi->dev, sizeof(*ks), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ks = devm_kzalloc(&spi->dev, sizeof(*ks), GFP_KERNEL);
 >>>>>>> v3.18
@@ -339,7 +384,11 @@ static int ks8995_probe(struct spi_device *spi)
 	if (err) {
 		dev_err(&spi->dev, "spi_setup failed, err=%d\n", err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_drvdata;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -350,7 +399,11 @@ static int ks8995_probe(struct spi_device *spi)
 		dev_err(&spi->dev, "unable to read id registers, err=%d\n",
 				err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_drvdata;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -362,9 +415,12 @@ static int ks8995_probe(struct spi_device *spi)
 	default:
 		dev_err(&spi->dev, "unknown family id:%02x\n", ids[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENODEV;
 		goto err_drvdata;
 =======
+=======
+>>>>>>> v3.18
 		return -ENODEV;
 	}
 
@@ -385,11 +441,15 @@ static int ks8995_probe(struct spi_device *spi)
 			return err;
 		}
 		ks->regs_attr.size = KSZ8864_REGS_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	err = ks8995_reset(ks);
 	if (err)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_drvdata;
 
@@ -411,6 +471,8 @@ err_drvdata:
 	kfree(ks);
 	return err;
 =======
+=======
+>>>>>>> v3.18
 		return err;
 
 	err = sysfs_create_bin_file(&spi->dev.kobj, &ks->regs_attr);
@@ -430,11 +492,15 @@ err_drvdata:
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ks8995_remove(struct spi_device *spi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ks8995_data      *ks8995;
 
@@ -444,6 +510,10 @@ static int ks8995_remove(struct spi_device *spi)
 	spi_set_drvdata(spi, NULL);
 	kfree(ks8995);
 
+=======
+	sysfs_remove_bin_file(&spi->dev.kobj, &ks8995_registers_attr);
+
+>>>>>>> v3.18
 =======
 	sysfs_remove_bin_file(&spi->dev.kobj, &ks8995_registers_attr);
 
@@ -463,6 +533,7 @@ static struct spi_driver ks8995_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init ks8995_init(void)
 {
 	pr_info(DRV_DESC " version " DRV_VERSION "\n");
@@ -476,6 +547,9 @@ static void __exit ks8995_exit(void)
 	spi_unregister_driver(&ks8995_driver);
 }
 module_exit(ks8995_exit);
+=======
+module_spi_driver(ks8995_driver);
+>>>>>>> v3.18
 =======
 module_spi_driver(ks8995_driver);
 >>>>>>> v3.18

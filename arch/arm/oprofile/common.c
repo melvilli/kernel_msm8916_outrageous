@@ -34,6 +34,7 @@ static struct op_perf_name {
 	char *op_name;
 } op_perf_name_map[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "xscale1",		"arm/xscale1"	},
 	{ "xscale1",		"arm/xscale2"	},
 	{ "v6",			"arm/armv6"	},
@@ -45,6 +46,8 @@ static struct op_perf_name {
 	{ "ARMv7 Scorpion-MP",	"arm/armv7-scorpionmp"	},
 	{ "ARMv7 Krait",	"arm/armv7-krait"	},
 =======
+=======
+>>>>>>> v3.18
 	{ "armv5_xscale1",	"arm/xscale1"	},
 	{ "armv5_xscale2",	"arm/xscale2"	},
 	{ "armv6_1136",		"arm/armv6"	},
@@ -53,6 +56,9 @@ static struct op_perf_name {
 	{ "armv6_11mpcore",	"arm/mpcore"	},
 	{ "armv7_cortex_a8",	"arm/armv7"	},
 	{ "armv7_cortex_a9",	"arm/armv7-ca9"	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -123,10 +129,14 @@ static void arm_backtrace(struct pt_regs * const regs, unsigned int depth)
 	if (!user_mode(regs)) {
 		struct stackframe frame;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		frame.fp = regs->ARM_fp;
 		frame.sp = regs->ARM_sp;
 		frame.lr = regs->ARM_lr;
 		frame.pc = regs->ARM_pc;
+=======
+		arm_get_current_stackframe(regs, &frame);
+>>>>>>> v3.18
 =======
 		arm_get_current_stackframe(regs, &frame);
 >>>>>>> v3.18

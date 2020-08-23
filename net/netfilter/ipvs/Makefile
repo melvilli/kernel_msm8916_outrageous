@@ -27,6 +27,10 @@ obj-$(CONFIG_IP_VS_WRR) += ip_vs_wrr.o
 obj-$(CONFIG_IP_VS_LC) += ip_vs_lc.o
 obj-$(CONFIG_IP_VS_WLC) += ip_vs_wlc.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_IP_VS_FO) += ip_vs_fo.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_IP_VS_FO) += ip_vs_fo.o
 >>>>>>> v3.18

@@ -10,7 +10,11 @@ common pinctrl bindings used by client devices, including the meaning of the
 phrase "pin configuration node".
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Tegra's pin configuration nodes act as a container for an abitrary number of
+=======
+Tegra's pin configuration nodes act as a container for an arbitrary number of
+>>>>>>> v3.18
 =======
 Tegra's pin configuration nodes act as a container for an arbitrary number of
 >>>>>>> v3.18
@@ -108,7 +112,10 @@ Valid values for pin and group names are:
     drive_uda.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Valid values for nvidia,functions are:
 
   ahb_clk, apb_clk, audio_sync, crt, dap1, dap2, dap3, dap4, dap5,
@@ -120,6 +127,9 @@ Valid values for nvidia,functions are:
   spi3, spi4, trace, twc, uarta, uartb, uartc, uartd, uarte, ulpi,
   vi, vi_sensor_clk, xio
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 

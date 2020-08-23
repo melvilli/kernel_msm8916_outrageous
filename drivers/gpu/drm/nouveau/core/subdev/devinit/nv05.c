@@ -25,7 +25,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/devinit.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <subdev/bios.h>
@@ -34,11 +37,15 @@
 
 #include "fbmem.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct nv05_devinit_priv {
 	struct nouveau_devinit base;
 	u8 owner;
 };
+=======
+#include "nv04.h"
+>>>>>>> v3.18
 =======
 #include "nv04.h"
 >>>>>>> v3.18
@@ -57,7 +64,11 @@ nv05_devinit_meminit(struct nouveau_devinit *devinit)
 		{ 0x00, 0x00 }
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nv05_devinit_priv *priv = (void *)devinit;
+=======
+	struct nv04_devinit_priv *priv = (void *)devinit;
+>>>>>>> v3.18
 =======
 	struct nv04_devinit_priv *priv = (void *)devinit;
 >>>>>>> v3.18
@@ -70,7 +81,11 @@ nv05_devinit_meminit(struct nouveau_devinit *devinit)
 
 	/* Map the framebuffer aperture */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fb = fbmem_init(nv_device(priv)->pdev);
+=======
+	fb = fbmem_init(nv_device(priv));
+>>>>>>> v3.18
 =======
 	fb = fbmem_init(nv_device(priv));
 >>>>>>> v3.18
@@ -146,6 +161,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 nv05_devinit_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		  struct nouveau_oclass *oclass, void *data, u32 size,
@@ -169,18 +185,29 @@ nv05_devinit_oclass = {
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv05_devinit_ctor,
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_oclass *
 nv05_devinit_oclass = &(struct nouveau_devinit_impl) {
 	.base.handle = NV_SUBDEV(DEVINIT, 0x05),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
 		.ctor = nv04_devinit_ctor,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.dtor = nv04_devinit_dtor,
 		.init = nv04_devinit_init,
 		.fini = nv04_devinit_fini,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.meminit = nv05_devinit_meminit,
+	.pll_set = nv04_devinit_pll_set,
+}.base;
+>>>>>>> v3.18
 =======
 	.meminit = nv05_devinit_meminit,
 	.pll_set = nv04_devinit_pll_set,

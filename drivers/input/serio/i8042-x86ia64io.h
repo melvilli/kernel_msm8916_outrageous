@@ -121,6 +121,7 @@ static const struct dmi_system_id __initconst i8042_dmi_noloop_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Dell Embedded Box PC 3000 */
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
@@ -128,6 +129,8 @@ static const struct dmi_system_id __initconst i8042_dmi_noloop_table[] = {
 		},
 	},
 	{
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* OQO Model 01 */
@@ -163,6 +166,7 @@ static const struct dmi_system_id __initconst i8042_dmi_noloop_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Medion Akoya E7225 */
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "Medion"),
@@ -171,6 +175,8 @@ static const struct dmi_system_id __initconst i8042_dmi_noloop_table[] = {
 		},
 	},
 	{
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Blue FB5601 */
@@ -225,12 +231,15 @@ static const struct dmi_system_id __initconst i8042_dmi_noloop_table[] = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "PEGATRON CORPORATION"),
 			DMI_MATCH(DMI_PRODUCT_NAME, "C15B"),
 		},
 	},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ }
@@ -281,6 +290,7 @@ static const struct dmi_system_id __initconst i8042_dmi_nomux_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Fujitsu Lifebook U745 */
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "FUJITSU"),
@@ -288,6 +298,8 @@ static const struct dmi_system_id __initconst i8042_dmi_nomux_table[] = {
 		},
 	},
 	{
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Fujitsu T70H */
@@ -449,15 +461,21 @@ static const struct dmi_system_id __initconst i8042_dmi_nomux_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Acer Aspire 7738 */
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "Acer"),
 			DMI_MATCH(DMI_PRODUCT_NAME, "Aspire 7738"),
 =======
+=======
+>>>>>>> v3.18
 		/* Acer Aspire 5710 */
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "Acer"),
 			DMI_MATCH(DMI_PRODUCT_NAME, "Aspire 5710"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		},
 	},
@@ -520,7 +538,10 @@ static const struct dmi_system_id __initconst i8042_dmi_nomux_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Asus X450LCP */
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "ASUSTeK COMPUTER INC."),
@@ -528,6 +549,9 @@ static const struct dmi_system_id __initconst i8042_dmi_nomux_table[] = {
 		},
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Avatar AVIU-145A6 */
 		.matches = {
@@ -617,6 +641,7 @@ static const struct dmi_system_id __initconst i8042_dmi_reset_table[] = {
 		},
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		/* Clevo P650RS, 650RP6, Sager NP8152-S, and others */
 		.matches = {
@@ -624,6 +649,8 @@ static const struct dmi_system_id __initconst i8042_dmi_reset_table[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "P65xRP"),
 		},
 	},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ }
@@ -796,6 +823,7 @@ static const struct dmi_system_id __initconst i8042_dmi_dritek_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Some laptops need keyboard reset before probing for the trackpad to get
  * it detected, initialised & finally work.
@@ -827,6 +855,8 @@ static const struct dmi_system_id __initconst i8042_dmi_kbdreset_table[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_X86 */
 
 #ifdef CONFIG_PNP
@@ -846,7 +876,10 @@ static char i8042_pnp_kbd_name[32];
 static char i8042_pnp_aux_name[32];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void i8042_pnp_id_to_string(struct pnp_id *id, char *dst, int dst_size)
 {
 	strlcpy(dst, "PNP:", dst_size);
@@ -858,6 +891,9 @@ static void i8042_pnp_id_to_string(struct pnp_id *id, char *dst, int dst_size)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int i8042_pnp_kbd_probe(struct pnp_dev *dev, const struct pnp_device_id *did)
 {
@@ -876,6 +912,11 @@ static int i8042_pnp_kbd_probe(struct pnp_dev *dev, const struct pnp_device_id *
 		strlcat(i8042_pnp_kbd_name, pnp_dev_name(dev), sizeof(i8042_pnp_kbd_name));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	i8042_pnp_id_to_string(dev->id, i8042_kbd_firmware_id,
+			       sizeof(i8042_kbd_firmware_id));
+>>>>>>> v3.18
 =======
 	i8042_pnp_id_to_string(dev->id, i8042_kbd_firmware_id,
 			       sizeof(i8042_kbd_firmware_id));
@@ -905,6 +946,11 @@ static int i8042_pnp_aux_probe(struct pnp_dev *dev, const struct pnp_device_id *
 		strlcat(i8042_pnp_aux_name, pnp_dev_name(dev), sizeof(i8042_pnp_aux_name));
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	i8042_pnp_id_to_string(dev->id, i8042_aux_firmware_id,
+			       sizeof(i8042_aux_firmware_id));
+>>>>>>> v3.18
 =======
 	i8042_pnp_id_to_string(dev->id, i8042_aux_firmware_id,
 			       sizeof(i8042_aux_firmware_id));
@@ -1132,9 +1178,12 @@ static int __init i8042_platform_init(void)
 		i8042_dritek = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dmi_check_system(i8042_dmi_kbdreset_table))
 		i8042_kbdreset = true;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*

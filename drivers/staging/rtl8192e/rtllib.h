@@ -15,7 +15,11 @@
  *
  * Modified for Realtek's wi-fi cards by Andrea Merello
 <<<<<<< HEAD
+<<<<<<< HEAD
  * <andreamrl@tiscali.it>
+=======
+ * <andrea.merello@gmail.com>
+>>>>>>> v3.18
 =======
  * <andrea.merello@gmail.com>
 >>>>>>> v3.18
@@ -1461,7 +1465,11 @@ enum eap_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *eap_types[] = {
+=======
+static const char * const eap_types[] = {
+>>>>>>> v3.18
 =======
 static const char * const eap_types[] = {
 >>>>>>> v3.18
@@ -1482,6 +1490,10 @@ static inline u8 Frame_QoSTID(u8 *buf)
 	struct rtllib_hdr_3addr *hdr;
 	u16 fc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2526,7 +2538,11 @@ struct rtllib_device {
 					bool bAllowAllDA, bool WriteIntoReg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*rtllib_ips_leave_wq) (struct net_device *dev);
+=======
+	void (*rtllib_ips_leave_wq)(struct net_device *dev);
+>>>>>>> v3.18
 =======
 	void (*rtllib_ips_leave_wq)(struct net_device *dev);
 >>>>>>> v3.18
@@ -2778,6 +2794,10 @@ extern bool rtllib_act_scanning(struct rtllib_device *ieee, bool sync_scan);
 extern void rtllib_stop_scan_syncro(struct rtllib_device *ieee);
 extern void rtllib_start_scan_syncro(struct rtllib_device *ieee, u8 is_mesh);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern inline struct sk_buff *rtllib_probe_req(struct rtllib_device *ieee);
+>>>>>>> v3.18
 =======
 extern inline struct sk_buff *rtllib_probe_req(struct rtllib_device *ieee);
 >>>>>>> v3.18
@@ -2916,7 +2936,11 @@ extern void HTConstructInfoElement(struct rtllib_device *ieee,
 				   u8 *posHTInfo, u8 *len, u8 isEncrypt);
 extern void HTConstructRT2RTAggElement(struct rtllib_device *ieee,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       u8 *posRT2RTAgg, u8* len);
+=======
+				       u8 *posRT2RTAgg, u8 *len);
+>>>>>>> v3.18
 =======
 				       u8 *posRT2RTAgg, u8 *len);
 >>>>>>> v3.18
@@ -2967,7 +2991,11 @@ void rtllib_softmac_scan_syncro(struct rtllib_device *ieee, u8 is_mesh);
 extern const long rtllib_wlan_frequencies[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void rtllib_increment_scans(struct rtllib_device *ieee)
+=======
+extern inline void rtllib_increment_scans(struct rtllib_device *ieee)
+>>>>>>> v3.18
 =======
 extern inline void rtllib_increment_scans(struct rtllib_device *ieee)
 >>>>>>> v3.18
@@ -2976,7 +3004,11 @@ extern inline void rtllib_increment_scans(struct rtllib_device *ieee)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int rtllib_get_scans(struct rtllib_device *ieee)
+=======
+extern inline int rtllib_get_scans(struct rtllib_device *ieee)
+>>>>>>> v3.18
 =======
 extern inline int rtllib_get_scans(struct rtllib_device *ieee)
 >>>>>>> v3.18
@@ -2988,8 +3020,11 @@ static inline const char *escape_essid(const char *essid, u8 essid_len)
 {
 	static char escaped[IW_ESSID_MAX_SIZE * 2 + 1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *s = essid;
 	char *d = escaped;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2998,6 +3033,7 @@ static inline const char *escape_essid(const char *essid, u8 essid_len)
 		return escaped;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	essid_len = min(essid_len, (u8)IW_ESSID_MAX_SIZE);
 	while (essid_len--) {
@@ -3010,6 +3046,9 @@ static inline const char *escape_essid(const char *essid, u8 essid_len)
 		}
 	}
 	*d = '\0';
+=======
+	snprintf(escaped, sizeof(escaped), "%*pEn", essid_len, essid);
+>>>>>>> v3.18
 =======
 	snprintf(escaped, sizeof(escaped), "%*pEn", essid_len, essid);
 >>>>>>> v3.18

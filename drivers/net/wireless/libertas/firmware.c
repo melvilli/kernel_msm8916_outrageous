@@ -54,12 +54,18 @@ static void main_firmware_cb(const struct firmware *firmware, void *context)
 	/* Firmware found! */
 	lbs_fw_loaded(priv, 0, priv->helper_fw, firmware);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (priv->helper_fw) {
 		release_firmware (priv->helper_fw);
 		priv->helper_fw = NULL;
 	}
 	release_firmware (firmware);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

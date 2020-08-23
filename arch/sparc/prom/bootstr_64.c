@@ -15,12 +15,18 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BARG_LEN  256
 =======
+=======
+>>>>>>> v3.18
 /* We limit BARG_LEN to 1024 because this is the size of the
  * 'barg_out' command line buffer in the SILO bootloader.
  */
 #define BARG_LEN 1024
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct {
 	int bootstr_len;

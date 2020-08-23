@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -76,11 +86,14 @@
 #include "mvm.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iwl_mvm_quota_iterator_data {
 	int n_interfaces[MAX_BINDINGS];
 	int colors[MAX_BINDINGS];
 	struct ieee80211_vif *new_vif;
 =======
+=======
+>>>>>>> v3.18
 #define QUOTA_100	IWL_MVM_MAX_QUOTA
 #define QUOTA_LOWLAT_MIN ((QUOTA_100 * IWL_MVM_LOWLAT_QUOTA_MIN_PERCENT) / 100)
 
@@ -90,6 +103,9 @@ struct iwl_mvm_quota_iterator_data {
 	int low_latency[MAX_BINDINGS];
 	int n_low_latency_bindings;
 	struct ieee80211_vif *disabled_vif;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -101,6 +117,7 @@ static void iwl_mvm_quota_iterator(void *_data, u8 *mac,
 	u16 id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * We'll account for the new interface (if any) below,
 	 * skip it here in case we're not called from within
@@ -108,6 +125,10 @@ static void iwl_mvm_quota_iterator(void *_data, u8 *mac,
 	 * up in iteration)
 	 */
 	if (vif == data->new_vif)
+=======
+	/* skip disabled interfaces here immediately */
+	if (vif == data->disabled_vif)
+>>>>>>> v3.18
 =======
 	/* skip disabled interfaces here immediately */
 	if (vif == data->disabled_vif)
@@ -126,6 +147,7 @@ static void iwl_mvm_quota_iterator(void *_data, u8 *mac,
 	if (WARN_ON_ONCE(id >= MAX_BINDINGS))
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (data->colors[id] < 0)
 		data->colors[id] = mvmvif->phy_ctxt->color;
@@ -167,6 +189,8 @@ int iwl_mvm_update_quotas(struct iwl_mvm *mvm, struct ieee80211_vif *newvif)
 		.new_vif = newvif,
 	};
 =======
+=======
+>>>>>>> v3.18
 	switch (vif->type) {
 	case NL80211_IFTYPE_STATION:
 		if (vif->bss_conf.assoc)
@@ -251,12 +275,16 @@ int iwl_mvm_update_quotas(struct iwl_mvm *mvm,
 	bool send = false;
 
 	lockdep_assert_held(&mvm->mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* update all upon completion */
 	if (test_bit(IWL_MVM_STATUS_IN_HW_RESTART, &mvm->status))
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BUILD_BUG_ON(data.colors[MAX_BINDINGS - 1] != -1);
 
@@ -267,15 +295,22 @@ int iwl_mvm_update_quotas(struct iwl_mvm *mvm,
 	/* iterator data above must match */
 	BUILD_BUG_ON(MAX_BINDINGS != 4);
 >>>>>>> v3.18
+=======
+	/* iterator data above must match */
+	BUILD_BUG_ON(MAX_BINDINGS != 4);
+>>>>>>> v3.18
 
 	ieee80211_iterate_active_interfaces_atomic(
 		mvm->hw, IEEE80211_IFACE_ITER_NORMAL,
 		iwl_mvm_quota_iterator, &data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (newvif) {
 		data.new_vif = NULL;
 		iwl_mvm_quota_iterator(&data, newvif->addr, newvif);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -284,6 +319,7 @@ int iwl_mvm_update_quotas(struct iwl_mvm *mvm,
 	 * IWL_MVM_MAX_QUOTA fragments. Divide these fragments
 	 * equally between all the bindings that require quota
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	num_active_bindings = 0;
 	for (i = 0; i < MAX_BINDINGS; i++) {
@@ -301,6 +337,8 @@ int iwl_mvm_update_quotas(struct iwl_mvm *mvm,
 	for (idx = 0, i = 0; i < MAX_BINDINGS; i++) {
 		if (data.n_interfaces[i] <= 0)
 =======
+=======
+>>>>>>> v3.18
 	num_active_macs = 0;
 	for (i = 0; i < MAX_BINDINGS; i++) {
 		cmd.quotas[i].id_and_color = cpu_to_le32(FW_CTXT_INVALID);
@@ -350,11 +388,15 @@ int iwl_mvm_update_quotas(struct iwl_mvm *mvm,
 
 	for (idx = 0, i = 0; i < MAX_BINDINGS; i++) {
 		if (data.colors[i] < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 
 		cmd.quotas[idx].id_and_color =
 			cpu_to_le32(FW_CMD_ID_AND_COLOR(i, data.colors[i]));
+<<<<<<< HEAD
 <<<<<<< HEAD
 		cmd.quotas[idx].quota = cpu_to_le32(quota);
 		cmd.quotas[idx].max_duration = cpu_to_le32(IWL_MVM_MAX_QUOTA);
@@ -371,6 +413,8 @@ send_cmd:
 		IWL_ERR(mvm, "Failed to send quota: %d\n", ret);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 
 		if (data.n_interfaces[i] <= 0)
 			cmd.quotas[idx].quota = cpu_to_le32(0);
@@ -440,5 +484,8 @@ send_cmd:
 	else
 		mvm->last_quota_cmd = cmd;
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

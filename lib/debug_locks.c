@@ -31,6 +31,10 @@ EXPORT_SYMBOL_GPL(debug_locks);
  */
 int debug_locks_silent;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(debug_locks_silent);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(debug_locks_silent);
 >>>>>>> v3.18
@@ -49,6 +53,10 @@ int debug_locks_off(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(debug_locks_off);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(debug_locks_off);
 >>>>>>> v3.18

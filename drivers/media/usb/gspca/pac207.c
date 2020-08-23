@@ -300,7 +300,11 @@ static int sd_start(struct gspca_dev *gspca_dev)
 
 	/* Compression Balance */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gspca_dev->width == 176)
+=======
+	if (gspca_dev->pixfmt.width == 176)
+>>>>>>> v3.18
 =======
 	if (gspca_dev->pixfmt.width == 176)
 >>>>>>> v3.18
@@ -322,7 +326,11 @@ static int sd_start(struct gspca_dev *gspca_dev)
 	else
 		mode = 0x02;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gspca_dev->width == 176) {	/* 176x144 */
+=======
+	if (gspca_dev->pixfmt.width == 176) {	/* 176x144 */
+>>>>>>> v3.18
 =======
 	if (gspca_dev->pixfmt.width == 176) {	/* 176x144 */
 >>>>>>> v3.18
@@ -425,7 +433,11 @@ static void sd_pkt_scan(struct gspca_dev *gspca_dev,
 static int sd_int_pkt_scan(struct gspca_dev *gspca_dev,
 			u8 *data,		/* interrupt packet data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int len)		/* interrput packet length */
+=======
+			int len)		/* interrupt packet length */
+>>>>>>> v3.18
 =======
 			int len)		/* interrupt packet length */
 >>>>>>> v3.18

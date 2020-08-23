@@ -1,6 +1,7 @@
 * Samsung's UART Controller
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The Samsung's UART controller is used for interfacing SoC with serial communicaion
 devices.
 
@@ -8,6 +9,8 @@ Required properties:
 - compatible: should be
   - "samsung,exynos4210-uart", for UART's compatible with Exynos4210 uart ports.
 =======
+=======
+>>>>>>> v3.18
 The Samsung's UART controller is used for interfacing SoC with serial
 communicaion devices.
 
@@ -19,15 +22,21 @@ Required properties:
   - "samsung,s3c2440-uart" - compatible with ports present on S3C2440 SoC,
   - "samsung,s3c6400-uart" - compatible with ports present on S3C6400 SoC,
   - "samsung,s5pv210-uart" - compatible with ports present on S5PV210 SoC.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - reg: base physical address of the controller and length of memory mapped
   region.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - interrupts: interrupt number to the cpu. The interrupt specifier format depends
   on the interrupt controller parent.
 =======
+=======
+>>>>>>> v3.18
 - interrupts: a single interrupt signal to SoC interrupt controller,
   according to interrupt bindings documentation [1].
 
@@ -69,4 +78,7 @@ Example:
 				<&clocks SCLK_UART>;
 		samsung,uart-fifosize = <16>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

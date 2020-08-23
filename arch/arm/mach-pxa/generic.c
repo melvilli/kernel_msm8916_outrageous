@@ -26,6 +26,10 @@
 #include <asm/mach-types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/irqs.h>
+>>>>>>> v3.18
 =======
 #include <mach/irqs.h>
 >>>>>>> v3.18
@@ -35,6 +39,10 @@
 
 #include "generic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <clocksource/pxa.h>
+>>>>>>> v3.18
 =======
 #include <clocksource/pxa.h>
 >>>>>>> v3.18
@@ -66,7 +74,10 @@ EXPORT_SYMBOL(get_clock_tick_rate);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * For non device-tree builds, keep legacy timer init
  */
 void __init pxa_timer_init(void)
@@ -76,6 +87,9 @@ void __init pxa_timer_init(void)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Get the clock frequency as reflected by CCCR and the turbo flag.
  * We assume these values have been applied via a fcs.
@@ -100,6 +114,7 @@ EXPORT_SYMBOL(get_clk_frequency_khz);
 static struct map_desc common_io_desc[] __initdata = {
   	{	/* Devs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.virtual	=  0xf2000000,
 		.pfn		= __phys_to_pfn(0x40000000),
 		.length		= 0x02000000,
@@ -113,6 +128,11 @@ static struct map_desc common_io_desc[] __initdata = {
 		.pfn		= __phys_to_pfn(PERIPH_PHYS),
 		.length		= PERIPH_SIZE,
 >>>>>>> v3.18
+=======
+		.virtual	= (unsigned long)PERIPH_VIRT,
+		.pfn		= __phys_to_pfn(PERIPH_PHYS),
+		.length		= PERIPH_SIZE,
+>>>>>>> v3.18
 		.type		= MT_DEVICE
 	}
 };
@@ -120,6 +140,10 @@ static struct map_desc common_io_desc[] __initdata = {
 void __init pxa_map_io(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	debug_ll_io_init();
+>>>>>>> v3.18
 =======
 	debug_ll_io_init();
 >>>>>>> v3.18

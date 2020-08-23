@@ -108,8 +108,13 @@ extern void __init at91_add_device_ssc(unsigned id, unsigned pins);
 
  /* LCD Controller */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct atmel_lcdfb_info;
 extern void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data);
+=======
+struct atmel_lcdfb_pdata;
+extern void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data);
+>>>>>>> v3.18
 =======
 struct atmel_lcdfb_pdata;
 extern void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data);
@@ -124,9 +129,12 @@ extern void __init at91_add_device_isi(struct isi_platform_data *data,
 		bool use_pck_as_mck);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  /* Touchscreen Controller */
 extern void __init at91_add_device_tsadcc(struct at91_tsadcc_data *data);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* CAN */
@@ -135,7 +143,10 @@ extern void __init at91_add_device_can(struct at91_can_data *data);
  /* LEDs */
 extern void __init at91_gpio_leds(struct gpio_led *leds, int nr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __init at91_pwm_leds(struct gpio_led *leds, int nr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

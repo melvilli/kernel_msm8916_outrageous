@@ -317,7 +317,11 @@ enum si476x_smoothmetrics {
  * @rdstpptyint: Traffic program flag(TP) and/or program type(PTY)
  * code has changed.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @rdspiint: Program indentifiaction(PI) code has changed.
+=======
+ * @rdspiint: Program identification(PI) code has changed.
+>>>>>>> v3.18
 =======
  * @rdspiint: Program identification(PI) code has changed.
 >>>>>>> v3.18

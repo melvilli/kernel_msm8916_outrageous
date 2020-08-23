@@ -11,7 +11,11 @@ Description
 ===========
 This item delivers a new Linux API in the form of a misc char device that is
 <<<<<<< HEAD
+<<<<<<< HEAD
 useable from user space and allows read access to the z/VM Monitor Records
+=======
+usable from user space and allows read access to the z/VM Monitor Records
+>>>>>>> v3.18
 =======
 usable from user space and allows read access to the z/VM Monitor Records
 >>>>>>> v3.18

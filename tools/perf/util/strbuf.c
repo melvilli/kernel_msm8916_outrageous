@@ -29,7 +29,11 @@ void strbuf_release(struct strbuf *sb)
 {
 	if (sb->alloc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free(sb->buf);
+=======
+		zfree(&sb->buf);
+>>>>>>> v3.18
 =======
 		zfree(&sb->buf);
 >>>>>>> v3.18

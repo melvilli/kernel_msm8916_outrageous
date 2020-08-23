@@ -27,9 +27,15 @@
 #include "stmmac.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct plat_stmmacenet_data plat_dat;
 struct stmmac_mdio_bus_data mdio_data;
 struct stmmac_dma_cfg dma_cfg;
+=======
+static struct plat_stmmacenet_data plat_dat;
+static struct stmmac_mdio_bus_data mdio_data;
+static struct stmmac_dma_cfg dma_cfg;
+>>>>>>> v3.18
 =======
 static struct plat_stmmacenet_data plat_dat;
 static struct stmmac_mdio_bus_data mdio_data;
@@ -40,6 +46,10 @@ static void stmmac_default_data(void)
 {
 	memset(&plat_dat, 0, sizeof(struct plat_stmmacenet_data));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -58,13 +68,19 @@ static void stmmac_default_data(void)
 	dma_cfg.burst_len = DMA_AXI_BLEN_256;
 	plat_dat.dma_cfg = &dma_cfg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Set default value for multicast hash bins */
 	plat_dat.multicast_filter_bins = HASH_TABLE_SIZE;
 
 	/* Set default value for unicast filter entries */
 	plat_dat.unicast_filter_entries = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -120,9 +136,15 @@ static int stmmac_pci_probe(struct pci_dev *pdev,
 
 	priv = stmmac_dvr_probe(&(pdev->dev), &plat_dat, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!priv) {
 		pr_err("%s: main driver probe failed", __func__);
 		ret = -ENODEV;
+=======
+	if (IS_ERR(priv)) {
+		pr_err("%s: main driver probe failed", __func__);
+		ret = PTR_ERR(priv);
+>>>>>>> v3.18
 =======
 	if (IS_ERR(priv)) {
 		pr_err("%s: main driver probe failed", __func__);
@@ -164,7 +186,10 @@ static void stmmac_pci_remove(struct pci_dev *pdev)
 	stmmac_dvr_remove(ndev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_iounmap(pdev, priv->ioaddr);
@@ -200,7 +225,11 @@ static int stmmac_pci_resume(struct pci_dev *pdev)
 #define STMMAC_DEVICE_ID 0x1108
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(stmmac_id_table) = {
+=======
+static const struct pci_device_id stmmac_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id stmmac_id_table[] = {
 >>>>>>> v3.18

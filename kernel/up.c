@@ -11,12 +11,15 @@ int smp_call_function_single(int cpu, void (*func) (void *info), void *info,
 				int wait)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(cpu != 0);
 
 	local_irq_disable();
 	(func)(info);
 	local_irq_enable();
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	WARN_ON(cpu != 0);
@@ -24,13 +27,19 @@ int smp_call_function_single(int cpu, void (*func) (void *info), void *info,
 	local_irq_save(flags);
 	func(info);
 	local_irq_restore(flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 EXPORT_SYMBOL(smp_call_function_single);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int smp_call_function_single_async(int cpu, struct call_single_data *csd)
 {
@@ -92,4 +101,7 @@ void on_each_cpu_cond(bool (*cond_func)(int cpu, void *info),
 	preempt_enable();
 }
 EXPORT_SYMBOL(on_each_cpu_cond);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

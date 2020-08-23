@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -179,11 +183,14 @@ static void iwl1000_hw_set_hw_params(struct iwl_priv *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iwl_lib_ops iwl1000_lib = {
 	.set_hw_params = iwl1000_hw_set_hw_params,
 	.nic_config = iwl1000_nic_config,
 	.temperature = iwlagn_temperature,
 =======
+=======
+>>>>>>> v3.18
 const struct iwl_dvm_cfg iwl_dvm_1000_cfg = {
 	.set_hw_params = iwl1000_hw_set_hw_params,
 	.nic_config = iwl1000_nic_config,
@@ -191,6 +198,9 @@ const struct iwl_dvm_cfg iwl_dvm_1000_cfg = {
 	.support_ct_kill_exit = true,
 	.plcp_delta_threshold = IWL_MAX_PLCP_ERR_EXT_LONG_THRESHOLD_DEF,
 	.chain_noise_scale = 1000,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -247,6 +257,7 @@ static void iwl2000_hw_set_hw_params(struct iwl_priv *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iwl_lib_ops iwl2000_lib = {
 	.set_hw_params = iwl2000_hw_set_hw_params,
 	.nic_config = iwl2000_nic_config,
@@ -258,6 +269,8 @@ struct iwl_lib_ops iwl2030_lib = {
 	.nic_config = iwl2000_nic_config,
 	.temperature = iwlagn_temperature,
 =======
+=======
+>>>>>>> v3.18
 const struct iwl_dvm_cfg iwl_dvm_2000_cfg = {
 	.set_hw_params = iwl2000_hw_set_hw_params,
 	.nic_config = iwl2000_nic_config,
@@ -308,6 +321,9 @@ const struct iwl_dvm_cfg iwl_dvm_2030_cfg = {
 	.need_temp_offset_calib = true,
 	.temp_offset_v2 = true,
 	.adv_pm = true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -342,7 +358,11 @@ static const struct iwl_sensitivity_ranges iwl5000_sensitivity = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct iwl_sensitivity_ranges iwl5150_sensitivity = {
+=======
+static const struct iwl_sensitivity_ranges iwl5150_sensitivity = {
+>>>>>>> v3.18
 =======
 static const struct iwl_sensitivity_ranges iwl5150_sensitivity = {
 >>>>>>> v3.18
@@ -446,7 +466,10 @@ static int iwl5000_hw_channel_switch(struct iwl_priv *priv,
 		.id = REPLY_CHANNEL_SWITCH,
 		.len = { sizeof(cmd), },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.data = { &cmd, },
@@ -495,6 +518,7 @@ static int iwl5000_hw_channel_switch(struct iwl_priv *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iwl_lib_ops iwl5000_lib = {
 	.set_hw_params = iwl5000_hw_set_hw_params,
 	.set_channel_switch = iwl5000_hw_channel_switch,
@@ -506,6 +530,8 @@ struct iwl_lib_ops iwl5150_lib = {
 	.set_channel_switch = iwl5000_hw_channel_switch,
 	.temperature = iwl5150_temperature,
 =======
+=======
+>>>>>>> v3.18
 const struct iwl_dvm_cfg iwl_dvm_5000_cfg = {
 	.set_hw_params = iwl5000_hw_set_hw_params,
 	.set_channel_switch = iwl5000_hw_channel_switch,
@@ -523,6 +549,9 @@ const struct iwl_dvm_cfg iwl_dvm_5150_cfg = {
 	.chain_noise_scale = 1000,
 	.no_idle_support = true,
 	.no_xtal_calib = true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -624,7 +653,10 @@ static int iwl6000_hw_channel_switch(struct iwl_priv *priv,
 		.id = REPLY_CHANNEL_SWITCH,
 		.len = { sizeof(*cmd), },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.dataflags[0] = IWL_HCMD_DFL_NOCOPY,
@@ -682,7 +714,11 @@ static int iwl6000_hw_channel_switch(struct iwl_priv *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iwl_lib_ops iwl6000_lib = {
+=======
+const struct iwl_dvm_cfg iwl_dvm_6000_cfg = {
+>>>>>>> v3.18
 =======
 const struct iwl_dvm_cfg iwl_dvm_6000_cfg = {
 >>>>>>> v3.18
@@ -691,10 +727,13 @@ const struct iwl_dvm_cfg iwl_dvm_6000_cfg = {
 	.nic_config = iwl6000_nic_config,
 	.temperature = iwlagn_temperature,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 struct iwl_lib_ops iwl6030_lib = {
 =======
+=======
+>>>>>>> v3.18
 	.adv_thermal_throttle = true,
 	.support_ct_kill_exit = true,
 	.plcp_delta_threshold = IWL_MAX_PLCP_ERR_THRESHOLD_DEF,
@@ -734,13 +773,19 @@ static const struct iwl_dvm_bt_params iwl6000_bt_params = {
 };
 
 const struct iwl_dvm_cfg iwl_dvm_6030_cfg = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.set_hw_params = iwl6000_hw_set_hw_params,
 	.set_channel_switch = iwl6000_hw_channel_switch,
 	.nic_config = iwl6000_nic_config,
 	.temperature = iwlagn_temperature,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.adv_thermal_throttle = true,
 	.support_ct_kill_exit = true,
 	.plcp_delta_threshold = IWL_MAX_PLCP_ERR_THRESHOLD_DEF,
@@ -748,5 +793,8 @@ const struct iwl_dvm_cfg iwl_dvm_6030_cfg = {
 	.bt_params = &iwl6000_bt_params,
 	.need_temp_offset_calib = true,
 	.adv_pm = true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

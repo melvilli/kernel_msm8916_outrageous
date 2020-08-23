@@ -45,6 +45,10 @@
 #include "sam9_smc.h"
 #include "generic.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gpio.h"
+>>>>>>> v3.18
 =======
 #include "gpio.h"
 >>>>>>> v3.18
@@ -117,7 +121,11 @@ static struct spi_board_info cam60_spi_devices[] __initdata = {
  * MACB Ethernet device
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata macb_platform_data cam60_macb_data = {
+=======
+static struct macb_platform_data cam60_macb_data __initdata = {
+>>>>>>> v3.18
 =======
 static struct macb_platform_data cam60_macb_data __initdata = {
 >>>>>>> v3.18
@@ -178,6 +186,11 @@ static void __init cam60_add_device_nand(void)
 static void __init cam60_board_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	at91_register_devices();
+
+>>>>>>> v3.18
 =======
 	at91_register_devices();
 
@@ -201,7 +214,11 @@ static void __init cam60_board_init(void)
 MACHINE_START(CAM60, "KwikByte CAM60")
 	/* Maintainer: KwikByte */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= at91sam926x_pit_init,
+=======
+	.init_time	= at91_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= at91_init_time,
 >>>>>>> v3.18

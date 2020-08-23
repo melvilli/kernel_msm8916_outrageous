@@ -167,7 +167,11 @@ ha16:
 lo16:
 	cmpwi	r4, R_PPC_ADDR16_LO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bne	nxtrela
+=======
+	bne	unknown_type
+>>>>>>> v3.18
 =======
 	bne	unknown_type
 >>>>>>> v3.18
@@ -196,6 +200,10 @@ nxtrela:
 	sync			/* Ensure the data is flushed before icbi */
 	icbi	r4,r7
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unknown_type:
+>>>>>>> v3.18
 =======
 unknown_type:
 >>>>>>> v3.18

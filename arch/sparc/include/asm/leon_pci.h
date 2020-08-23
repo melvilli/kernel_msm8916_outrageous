@@ -17,8 +17,13 @@ struct leon_pci_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void leon_pci_init(struct platform_device *ofdev,
 				struct leon_pci_info *info);
+=======
+void leon_pci_init(struct platform_device *ofdev,
+		   struct leon_pci_info *info);
+>>>>>>> v3.18
 =======
 void leon_pci_init(struct platform_device *ofdev,
 		   struct leon_pci_info *info);

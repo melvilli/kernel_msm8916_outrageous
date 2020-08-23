@@ -10,7 +10,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/device.h>
@@ -34,6 +37,7 @@ static int pxa2xx_spi_map_dma_buffer(struct driver_data *drv_data,
 	void *buf, *pbuf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Some DMA controllers have problems transferring buffers that are
 	 * not multiple of 4 bytes. So we truncate the transfer so that it
@@ -46,6 +50,8 @@ static int pxa2xx_spi_map_dma_buffer(struct driver_data *drv_data,
 	 */
 	len = ALIGN(drv_data->len, 4);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (dir == DMA_TO_DEVICE) {
@@ -152,12 +158,17 @@ static void pxa2xx_spi_dma_transfer_complete(struct driver_data *drv_data,
 			pxa2xx_spi_unmap_dma_buffers(drv_data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Handle the last bytes of unaligned transfer */
 			drv_data->tx += drv_data->tx_map_len;
 			drv_data->write(drv_data);
 
 			drv_data->rx += drv_data->rx_map_len;
 			drv_data->read(drv_data);
+=======
+			drv_data->tx += drv_data->tx_map_len;
+			drv_data->rx += drv_data->rx_map_len;
+>>>>>>> v3.18
 =======
 			drv_data->tx += drv_data->tx_map_len;
 			drv_data->rx += drv_data->rx_map_len;
@@ -186,7 +197,10 @@ pxa2xx_spi_dma_prepare_one(struct driver_data *drv_data,
 			   enum dma_transfer_direction dir)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pxa2xx_spi_master *pdata = drv_data->master_info;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct chip_data *chip = drv_data->cur_chip;
@@ -216,7 +230,10 @@ pxa2xx_spi_dma_prepare_one(struct driver_data *drv_data,
 		cfg.dst_addr_width = width;
 		cfg.dst_maxburst = chip->dma_burst_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cfg.slave_id = pdata->tx_slave_id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -228,7 +245,10 @@ pxa2xx_spi_dma_prepare_one(struct driver_data *drv_data,
 		cfg.src_addr_width = width;
 		cfg.src_maxburst = chip->dma_burst_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cfg.slave_id = pdata->rx_slave_id;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -248,6 +268,7 @@ pxa2xx_spi_dma_prepare_one(struct driver_data *drv_data,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool pxa2xx_spi_dma_filter(struct dma_chan *chan, void *param)
 {
 	const struct pxa2xx_spi_master *pdata = param;
@@ -256,6 +277,8 @@ static bool pxa2xx_spi_dma_filter(struct dma_chan *chan, void *param)
 	       chan->chan_id == pdata->rx_chan_id;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 bool pxa2xx_spi_dma_is_possible(size_t len)
@@ -351,6 +374,10 @@ int pxa2xx_spi_dma_setup(struct driver_data *drv_data)
 {
 	struct pxa2xx_spi_master *pdata = drv_data->master_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *dev = &drv_data->pdev->dev;
+>>>>>>> v3.18
 =======
 	struct device *dev = &drv_data->pdev->dev;
 >>>>>>> v3.18
@@ -359,6 +386,7 @@ int pxa2xx_spi_dma_setup(struct driver_data *drv_data)
 	dma_cap_zero(mask);
 	dma_cap_set(DMA_SLAVE, mask);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	drv_data->dummy = devm_kzalloc(&drv_data->pdev->dev, SZ_2K, GFP_KERNEL);
 	if (!drv_data->dummy)
@@ -372,6 +400,8 @@ int pxa2xx_spi_dma_setup(struct driver_data *drv_data)
 	drv_data->rx_chan = dma_request_channel(mask, pxa2xx_spi_dma_filter,
 						pdata);
 =======
+=======
+>>>>>>> v3.18
 	drv_data->dummy = devm_kzalloc(dev, SZ_2K, GFP_KERNEL);
 	if (!drv_data->dummy)
 		return -ENOMEM;
@@ -383,6 +413,9 @@ int pxa2xx_spi_dma_setup(struct driver_data *drv_data)
 
 	drv_data->rx_chan = dma_request_slave_channel_compat(mask,
 				pdata->dma_filter, pdata->rx_param, dev, "rx");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!drv_data->rx_chan) {
 		dma_release_channel(drv_data->tx_chan);
@@ -426,7 +459,11 @@ int pxa2xx_spi_set_dma_burst_and_threshold(struct chip_data *chip,
 	 * thresholds for now.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*burst_code = chip_info ? chip_info->dma_burst_size : 16;
+=======
+	*burst_code = chip_info ? chip_info->dma_burst_size : 1;
+>>>>>>> v3.18
 =======
 	*burst_code = chip_info ? chip_info->dma_burst_size : 1;
 >>>>>>> v3.18

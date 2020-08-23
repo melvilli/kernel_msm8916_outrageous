@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2000-2012 LSI Corporation.
+=======
+ * Copyright (c) 2000-2014 LSI Corporation.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2000-2014 LSI Corporation.
 >>>>>>> v3.18
@@ -13,7 +17,11 @@
  * Creation Date:  June 21, 2006
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * mpi2.h Version:  02.00.26
+=======
+ * mpi2.h Version:  02.00.31
+>>>>>>> v3.18
 =======
  * mpi2.h Version:  02.00.31
 >>>>>>> v3.18
@@ -91,13 +99,19 @@
  *                     Added Hard Reset delay timings.
  * 07-10-12  02.00.26  Bumped MPI2_HEADER_VERSION_UNIT.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * 07-26-12  02.00.27  Bumped MPI2_HEADER_VERSION_UNIT.
  * 11-27-12  02.00.28  Bumped MPI2_HEADER_VERSION_UNIT.
  * 12-20-12  02.00.29  Bumped MPI2_HEADER_VERSION_UNIT.
  *                     Added MPI25_SUP_REPLY_POST_HOST_INDEX_OFFSET.
  * 04-09-13  02.00.30  Bumped MPI2_HEADER_VERSION_UNIT.
  * 04-17-13  02.00.31  Bumped MPI2_HEADER_VERSION_UNIT.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * --------------------------------------------------------------------------
  */
@@ -133,7 +147,11 @@
 
 /*Unit and Dev versioning for this MPI header set */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MPI2_HEADER_VERSION_UNIT            (0x1A)
+=======
+#define MPI2_HEADER_VERSION_UNIT            (0x1F)
+>>>>>>> v3.18
 =======
 #define MPI2_HEADER_VERSION_UNIT            (0x1F)
 >>>>>>> v3.18
@@ -296,6 +314,11 @@ typedef volatile struct _MPI2_SYSTEM_INTERFACE_REGS {
 #define MPI2_RPHI_MSIX_INDEX_MASK               (0xFF000000)
 #define MPI2_RPHI_MSIX_INDEX_SHIFT              (24)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MPI25_SUP_REPLY_POST_HOST_INDEX_OFFSET  (0x0000030C) /*MPI v2.5 only*/
+
+>>>>>>> v3.18
 =======
 #define MPI25_SUP_REPLY_POST_HOST_INDEX_OFFSET  (0x0000030C) /*MPI v2.5 only*/
 

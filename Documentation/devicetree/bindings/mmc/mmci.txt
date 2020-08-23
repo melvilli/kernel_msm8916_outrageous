@@ -5,6 +5,7 @@ reading and writing to MultiMedia and SD cards alike.
 
 This file documents differences between the core properties described
 <<<<<<< HEAD
+<<<<<<< HEAD
 by mmc.txt and the properties used by the mmci driver.
 
 Required properties:
@@ -15,6 +16,8 @@ Optional properties:
 - mmc-cap-mmc-highspeed  : indicates whether MMC is high speed capable
 - mmc-cap-sd-highspeed   : indicates whether SD is high speed capable
 =======
+=======
+>>>>>>> v3.18
 by mmc.txt and the properties used by the mmci driver. Using "st" as
 the prefix for a property, indicates support by the ST Micro variant.
 
@@ -70,4 +73,7 @@ sdi0_per1@80126000 {
 	pinctrl-0 = <&sdi0_default_mode>;
 	pinctrl-1 = <&sdi0_sleep_mode>;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

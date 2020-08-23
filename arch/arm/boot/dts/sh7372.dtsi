@@ -15,11 +15,14 @@
 
 	cpus {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpu@0 {
 			compatible = "arm,cortex-a8";
 		};
 	};
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 
@@ -38,5 +41,8 @@
 		gpio-controller;
 		#gpio-cells = <2>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

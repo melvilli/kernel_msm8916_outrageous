@@ -100,8 +100,13 @@ static const char *micbias_enum_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum micbias_enum =
 	SOC_ENUM_SINGLE(WM8737_MIC_PREAMP_CONTROL, 0, 4, micbias_enum_text);
+=======
+static SOC_ENUM_SINGLE_DECL(micbias_enum,
+			    WM8737_MIC_PREAMP_CONTROL, 0, micbias_enum_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(micbias_enum,
 			    WM8737_MIC_PREAMP_CONTROL, 0, micbias_enum_text);
@@ -112,8 +117,13 @@ static const char *low_cutoff_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum low_3d =
 	SOC_ENUM_SINGLE(WM8737_3D_ENHANCE, 6, 2, low_cutoff_text);
+=======
+static SOC_ENUM_SINGLE_DECL(low_3d,
+			    WM8737_3D_ENHANCE, 6, low_cutoff_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(low_3d,
 			    WM8737_3D_ENHANCE, 6, low_cutoff_text);
@@ -124,8 +134,13 @@ static const char *high_cutoff_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum high_3d =
 	SOC_ENUM_SINGLE(WM8737_3D_ENHANCE, 5, 2, high_cutoff_text);
+=======
+static SOC_ENUM_SINGLE_DECL(high_3d,
+			    WM8737_3D_ENHANCE, 5, high_cutoff_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(high_3d,
 			    WM8737_3D_ENHANCE, 5, high_cutoff_text);
@@ -136,8 +151,13 @@ static const char *alc_fn_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum alc_fn =
 	SOC_ENUM_SINGLE(WM8737_ALC1, 7, 4, alc_fn_text);
+=======
+static SOC_ENUM_SINGLE_DECL(alc_fn,
+			    WM8737_ALC1, 7, alc_fn_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(alc_fn,
 			    WM8737_ALC1, 7, alc_fn_text);
@@ -150,8 +170,13 @@ static const char *alc_hold_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum alc_hold =
 	SOC_ENUM_SINGLE(WM8737_ALC2, 0, 16, alc_hold_text);
+=======
+static SOC_ENUM_SINGLE_DECL(alc_hold,
+			    WM8737_ALC2, 0, alc_hold_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(alc_hold,
 			    WM8737_ALC2, 0, alc_hold_text);
@@ -163,8 +188,13 @@ static const char *alc_atk_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum alc_atk =
 	SOC_ENUM_SINGLE(WM8737_ALC3, 0, 11, alc_atk_text);
+=======
+static SOC_ENUM_SINGLE_DECL(alc_atk,
+			    WM8737_ALC3, 0, alc_atk_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(alc_atk,
 			    WM8737_ALC3, 0, alc_atk_text);
@@ -176,8 +206,13 @@ static const char *alc_dcy_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum alc_dcy =
 	SOC_ENUM_SINGLE(WM8737_ALC3, 4, 11, alc_dcy_text);
+=======
+static SOC_ENUM_SINGLE_DECL(alc_dcy,
+			    WM8737_ALC3, 4, alc_dcy_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(alc_dcy,
 			    WM8737_ALC3, 4, alc_dcy_text);
@@ -227,8 +262,13 @@ static const char *linsel_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum linsel_enum =
 	SOC_ENUM_SINGLE(WM8737_AUDIO_PATH_L, 7, 4, linsel_text);
+=======
+static SOC_ENUM_SINGLE_DECL(linsel_enum,
+			    WM8737_AUDIO_PATH_L, 7, linsel_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(linsel_enum,
 			    WM8737_AUDIO_PATH_L, 7, linsel_text);
@@ -243,8 +283,13 @@ static const char *rinsel_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum rinsel_enum =
 	SOC_ENUM_SINGLE(WM8737_AUDIO_PATH_R, 7, 4, rinsel_text);
+=======
+static SOC_ENUM_SINGLE_DECL(rinsel_enum,
+			    WM8737_AUDIO_PATH_R, 7, rinsel_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(rinsel_enum,
 			    WM8737_AUDIO_PATH_R, 7, rinsel_text);
@@ -258,8 +303,13 @@ static const char *bypass_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum lbypass_enum =
 	SOC_ENUM_SINGLE(WM8737_MIC_PREAMP_CONTROL, 2, 2, bypass_text);
+=======
+static SOC_ENUM_SINGLE_DECL(lbypass_enum,
+			    WM8737_MIC_PREAMP_CONTROL, 2, bypass_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(lbypass_enum,
 			    WM8737_MIC_PREAMP_CONTROL, 2, bypass_text);
@@ -270,8 +320,13 @@ static const struct snd_kcontrol_new lbypass_mux =
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum rbypass_enum =
 	SOC_ENUM_SINGLE(WM8737_MIC_PREAMP_CONTROL, 3, 2, bypass_text);
+=======
+static SOC_ENUM_SINGLE_DECL(rbypass_enum,
+			    WM8737_MIC_PREAMP_CONTROL, 3, bypass_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(rbypass_enum,
 			    WM8737_MIC_PREAMP_CONTROL, 3, bypass_text);
@@ -423,6 +478,7 @@ static int wm8737_hw_params(struct snd_pcm_substream *substream,
 	clocking |= coeff_div[i].usb | (coeff_div[i].sr << WM8737_SR_SHIFT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -434,6 +490,8 @@ static int wm8737_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -444,6 +502,9 @@ static int wm8737_hw_params(struct snd_pcm_substream *substream,
 		af |= 0x10;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		af |= 0x18;
 		break;
@@ -563,8 +624,12 @@ static int wm8737_set_bias_level(struct snd_soc_codec *codec,
 			/* Fast VMID ramp at 2*2.5k */
 			snd_soc_update_bits(codec, WM8737_MISC_BIAS_CONTROL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    WM8737_VMIDSEL_MASK,
 					    2 << WM8737_VMIDSEL_SHIFT);
+=======
+					    WM8737_VMIDSEL_MASK, 0x4);
+>>>>>>> v3.18
 =======
 					    WM8737_VMIDSEL_MASK, 0x4);
 >>>>>>> v3.18
@@ -582,8 +647,12 @@ static int wm8737_set_bias_level(struct snd_soc_codec *codec,
 		/* VMID at 2*300k */
 		snd_soc_update_bits(codec, WM8737_MISC_BIAS_CONTROL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    WM8737_VMIDSEL_MASK,
 				    1 << WM8737_VMIDSEL_SHIFT);
+=======
+				    WM8737_VMIDSEL_MASK, 2);
+>>>>>>> v3.18
 =======
 				    WM8737_VMIDSEL_MASK, 2);
 >>>>>>> v3.18
@@ -649,12 +718,15 @@ static int wm8737_probe(struct snd_soc_codec *codec)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_codec_set_cache_io(codec, 7, 9, SND_SOC_REGMAP);
 	if (ret != 0) {
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = regulator_bulk_enable(ARRAY_SIZE(wm8737->supplies),
@@ -726,7 +798,11 @@ static const struct regmap_config wm8737_regmap = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -844,7 +920,11 @@ static int __init wm8737_modinit(void)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18
@@ -871,7 +951,11 @@ static void __exit wm8737_exit(void)
 	spi_unregister_driver(&wm8737_spi_driver);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C)
 >>>>>>> v3.18

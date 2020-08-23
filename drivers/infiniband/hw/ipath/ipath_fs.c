@@ -83,7 +83,10 @@ static int create_file(const char *name, umode_t mode,
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*dentry = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&parent->d_inode->i_mutex);

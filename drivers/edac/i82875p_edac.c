@@ -276,7 +276,10 @@ static int i82875p_setup_overfl_dev(struct pci_dev *pdev,
 	struct pci_dev *dev;
 	void __iomem *window;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -297,6 +300,7 @@ static int i82875p_setup_overfl_dev(struct pci_dev *pdev,
 			return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = pci_bus_add_device(dev);
 		if (err) {
 			i82875p_printk(KERN_ERR,
@@ -304,6 +308,10 @@ static int i82875p_setup_overfl_dev(struct pci_dev *pdev,
 				__func__);
 		}
 		pci_bus_assign_resources(dev->bus);
+=======
+		pci_bus_assign_resources(dev->bus);
+		pci_bus_add_device(dev);
+>>>>>>> v3.18
 =======
 		pci_bus_assign_resources(dev->bus);
 		pci_bus_add_device(dev);
@@ -415,8 +423,11 @@ static int i82875p_probe1(struct pci_dev *pdev, int dev_idx)
 	edac_dbg(0, "\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ovrfl_pdev = pci_get_device(PCI_VEND_DEV(INTEL, 82875_6), NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (i82875p_setup_overfl_dev(pdev, &ovrfl_pdev, &ovrfl_window))
@@ -539,7 +550,11 @@ static void i82875p_remove_one(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i82875p_pci_tbl) = {
+=======
+static const struct pci_device_id i82875p_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id i82875p_pci_tbl[] = {
 >>>>>>> v3.18

@@ -68,6 +68,10 @@ struct ceph_mds_reply_info_parsed {
 		struct {
 			struct ceph_mds_reply_dirfrag *dir_dir;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			size_t			      dir_buf_size;
+>>>>>>> v3.18
 =======
 			size_t			      dir_buf_size;
 >>>>>>> v3.18
@@ -137,6 +141,10 @@ struct ceph_mds_session {
 	int               s_nr_caps, s_trim_caps;
 	int               s_num_cap_releases;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int		  s_cap_reconnect;
+>>>>>>> v3.18
 =======
 	int		  s_cap_reconnect;
 >>>>>>> v3.18
@@ -201,6 +209,10 @@ struct ceph_mds_request {
 	kuid_t r_uid;
 	kgid_t r_gid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct timespec r_stamp;
+>>>>>>> v3.18
 =======
 	struct timespec r_stamp;
 >>>>>>> v3.18
@@ -212,9 +224,13 @@ struct ceph_mds_request {
 
 	/* data payload is used for xattr ops */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct page **r_pages;
 	int r_num_pages;
 	int r_data_len;
+=======
+	struct ceph_pagelist *r_pagelist;
+>>>>>>> v3.18
 =======
 	struct ceph_pagelist *r_pagelist;
 >>>>>>> v3.18
@@ -346,6 +362,11 @@ ceph_get_mds_session(struct ceph_mds_session *s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern const char *ceph_session_state_name(int s);
+
+>>>>>>> v3.18
 =======
 extern const char *ceph_session_state_name(int s);
 
@@ -367,7 +388,12 @@ extern void ceph_mdsc_lease_release(struct ceph_mds_client *mdsc,
 
 extern void ceph_invalidate_dir_request(struct ceph_mds_request *req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+extern int ceph_alloc_readdir_reply_buffer(struct ceph_mds_request *req,
+					   struct inode *dir);
+>>>>>>> v3.18
 =======
 extern int ceph_alloc_readdir_reply_buffer(struct ceph_mds_request *req,
 					   struct inode *dir);
@@ -409,6 +435,11 @@ extern void ceph_mdsc_handle_map(struct ceph_mds_client *mdsc,
 				 struct ceph_msg *msg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct ceph_mds_session *
+ceph_mdsc_open_export_target_session(struct ceph_mds_client *mdsc, int target);
+>>>>>>> v3.18
 =======
 extern struct ceph_mds_session *
 ceph_mdsc_open_export_target_session(struct ceph_mds_client *mdsc, int target);

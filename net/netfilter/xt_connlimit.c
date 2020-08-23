@@ -20,6 +20,10 @@
 #include <linux/slab.h>
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/rbtree.h>
+>>>>>>> v3.18
 =======
 #include <linux/rbtree.h>
 >>>>>>> v3.18
@@ -36,7 +40,10 @@
 #include <net/netfilter/nf_conntrack_zones.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CONNLIMIT_SLOTS		256U
 
 #ifdef CONFIG_LOCKDEP
@@ -47,6 +54,9 @@
 
 #define CONNLIMIT_GC_MAX_NODES	8
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* we will save the tuples of all connections we care about */
 struct xt_connlimit_conn {
@@ -55,6 +65,7 @@ struct xt_connlimit_conn {
 	union nf_inet_addr		addr;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct xt_connlimit_data {
 	struct hlist_head	iphash[256];
@@ -67,6 +78,8 @@ static inline unsigned int connlimit_iphash(__be32 addr)
 {
 	return jhash_1word((__force __u32)addr, connlimit_rnd) & 0xFF;
 =======
+=======
+>>>>>>> v3.18
 struct xt_connlimit_rb {
 	struct rb_node node;
 	struct hlist_head hhead; /* connections/hosts in same subnet */
@@ -88,6 +101,9 @@ static inline unsigned int connlimit_iphash(__be32 addr)
 {
 	return jhash_1word((__force __u32)addr,
 			    connlimit_rnd) % CONNLIMIT_SLOTS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -102,7 +118,12 @@ connlimit_iphash6(const union nf_inet_addr *addr,
 		res.ip6[i] = addr->ip6[i] & mask->ip6[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return jhash2((u32 *)res.ip6, ARRAY_SIZE(res.ip6), connlimit_rnd) & 0xFF;
+=======
+	return jhash2((u32 *)res.ip6, ARRAY_SIZE(res.ip6),
+		       connlimit_rnd) % CONNLIMIT_SLOTS;
+>>>>>>> v3.18
 =======
 	return jhash2((u32 *)res.ip6, ARRAY_SIZE(res.ip6),
 		       connlimit_rnd) % CONNLIMIT_SLOTS;
@@ -119,7 +140,11 @@ static inline bool already_closed(const struct nf_conn *conn)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned int
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -129,7 +154,12 @@ same_source_net(const union nf_inet_addr *addr,
 {
 	if (family == NFPROTO_IPV4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (addr->ip & mask->ip) == (u3->ip & mask->ip);
+=======
+		return ntohl(addr->ip & mask->ip) -
+		       ntohl(u3->ip & mask->ip);
+>>>>>>> v3.18
 =======
 		return ntohl(addr->ip & mask->ip) -
 		       ntohl(u3->ip & mask->ip);
@@ -144,6 +174,7 @@ same_source_net(const union nf_inet_addr *addr,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return memcmp(&lh.ip6, &rh.ip6, sizeof(lh.ip6)) == 0;
 	}
 }
@@ -155,6 +186,8 @@ static int count_them(struct net *net,
 		      const union nf_inet_addr *mask,
 		      u_int8_t family)
 =======
+=======
+>>>>>>> v3.18
 		return memcmp(&lh.ip6, &rh.ip6, sizeof(lh.ip6));
 	}
 }
@@ -178,12 +211,16 @@ static unsigned int check_hlist(struct net *net,
 				struct hlist_head *head,
 				const struct nf_conntrack_tuple *tuple,
 				bool *addit)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const struct nf_conntrack_tuple_hash *found;
 	struct xt_connlimit_conn *conn;
 	struct hlist_node *n;
 	struct nf_conn *found_ct;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct hlist_head *hash;
 	bool addit = true;
@@ -209,6 +246,8 @@ static unsigned int check_hlist(struct net *net,
 		    nf_ct_tuple_equal(&conn->tuple, tuple) &&
 		    !already_closed(found_ct))
 =======
+=======
+>>>>>>> v3.18
 	unsigned int length = 0;
 
 	*addit = true;
@@ -227,12 +266,16 @@ static unsigned int check_hlist(struct net *net,
 		found_ct = nf_ct_tuplehash_to_ctrack(found);
 
 		if (nf_ct_tuple_equal(&conn->tuple, tuple)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * Just to be sure we have it only once in the list.
 			 * We should not see tuples twice unless someone hooks
 			 * this into a table without "-p tcp --syn".
 			 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			addit = false;
 
@@ -248,12 +291,17 @@ static unsigned int check_hlist(struct net *net,
 			*addit = false;
 		} else if (already_closed(found_ct)) {
 >>>>>>> v3.18
+=======
+			*addit = false;
+		} else if (already_closed(found_ct)) {
+>>>>>>> v3.18
 			/*
 			 * we do not care about connections which are
 			 * closed already -> ditch it
 			 */
 			nf_ct_put(found_ct);
 			hlist_del(&conn->node);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			kfree(conn);
 			continue;
@@ -264,17 +312,23 @@ static unsigned int check_hlist(struct net *net,
 			++matches;
 		nf_ct_put(found_ct);
 =======
+=======
+>>>>>>> v3.18
 			kmem_cache_free(connlimit_conn_cachep, conn);
 			continue;
 		}
 
 		nf_ct_put(found_ct);
 		length++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	rcu_read_unlock();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (addit) {
 		/* save the new connection in our list */
@@ -289,6 +343,8 @@ static unsigned int check_hlist(struct net *net,
 
 	return matches;
 =======
+=======
+>>>>>>> v3.18
 	return length;
 }
 
@@ -419,6 +475,9 @@ static int count_them(struct net *net,
 	spin_unlock_bh(&xt_connlimit_locks[hash % CONNLIMIT_LOCK_SLOTS]);
 
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -433,7 +492,11 @@ connlimit_mt(const struct sk_buff *skb, struct xt_action_param *par)
 	enum ip_conntrack_info ctinfo;
 	const struct nf_conn *ct;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int connections;
+=======
+	unsigned int connections;
+>>>>>>> v3.18
 =======
 	unsigned int connections;
 >>>>>>> v3.18
@@ -456,12 +519,18 @@ connlimit_mt(const struct sk_buff *skb, struct xt_action_param *par)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&info->data->lock);
 	connections = count_them(net, info->data, tuple_ptr, &addr,
 	                         &info->mask, par->family);
 	spin_unlock_bh(&info->data->lock);
 
 	if (connections < 0)
+=======
+	connections = count_them(net, info->data, tuple_ptr, &addr,
+	                         &info->mask, par->family);
+	if (connections == 0)
+>>>>>>> v3.18
 =======
 	connections = count_them(net, info->data, tuple_ptr, &addr,
 	                         &info->mask, par->family);
@@ -507,19 +576,26 @@ static int connlimit_mt_check(const struct xt_mtchk_param *par)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&info->data->lock);
 	for (i = 0; i < ARRAY_SIZE(info->data->iphash); ++i)
 		INIT_HLIST_HEAD(&info->data->iphash[i]);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(info->data->climit_root4); ++i)
 		info->data->climit_root4[i] = RB_ROOT;
 	for (i = 0; i < ARRAY_SIZE(info->data->climit_root6); ++i)
 		info->data->climit_root6[i] = RB_ROOT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void connlimit_mt_destroy(const struct xt_mtdtor_param *par)
 {
@@ -528,6 +604,8 @@ static void connlimit_mt_destroy(const struct xt_mtdtor_param *par)
 	struct hlist_node *n;
 	struct hlist_head *hash = info->data->iphash;
 =======
+=======
+>>>>>>> v3.18
 static void destroy_tree(struct rb_root *r)
 {
 	struct xt_connlimit_conn *conn;
@@ -550,11 +628,15 @@ static void destroy_tree(struct rb_root *r)
 static void connlimit_mt_destroy(const struct xt_mtdtor_param *par)
 {
 	const struct xt_connlimit_info *info = par->matchinfo;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int i;
 
 	nf_ct_l3proto_module_put(par->family);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < ARRAY_SIZE(info->data->iphash); ++i) {
 		hlist_for_each_entry_safe(conn, n, &hash[i], node) {
@@ -563,10 +645,15 @@ static void connlimit_mt_destroy(const struct xt_mtdtor_param *par)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(info->data->climit_root4); ++i)
 		destroy_tree(&info->data->climit_root4[i]);
 	for (i = 0; i < ARRAY_SIZE(info->data->climit_root6); ++i)
 		destroy_tree(&info->data->climit_root6[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(info->data);
@@ -586,8 +673,11 @@ static struct xt_match connlimit_mt_reg __read_mostly = {
 static int __init connlimit_mt_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return xt_register_match(&connlimit_mt_reg);
 =======
+=======
+>>>>>>> v3.18
 	int ret, i;
 
 	BUILD_BUG_ON(CONNLIMIT_LOCK_SLOTS > CONNLIMIT_SLOTS);
@@ -615,6 +705,9 @@ static int __init connlimit_mt_init(void)
 		kmem_cache_destroy(connlimit_rb_cachep);
 	}
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -622,6 +715,11 @@ static void __exit connlimit_mt_exit(void)
 {
 	xt_unregister_match(&connlimit_mt_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kmem_cache_destroy(connlimit_conn_cachep);
+	kmem_cache_destroy(connlimit_rb_cachep);
+>>>>>>> v3.18
 =======
 	kmem_cache_destroy(connlimit_conn_cachep);
 	kmem_cache_destroy(connlimit_rb_cachep);

@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -22,6 +25,7 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
@@ -33,6 +37,8 @@
 int ieee754dp_cmp(ieee754dp x, ieee754dp y, int cmp, int sig)
 {
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
@@ -43,6 +49,9 @@ int ieee754dp_cmp(union ieee754dp x, union ieee754dp y, int cmp, int sig)
 	s64 vx;
 	s64 vy;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	COMPXDP;
 	COMPYDP;
@@ -51,6 +60,7 @@ int ieee754dp_cmp(union ieee754dp x, union ieee754dp y, int cmp, int sig)
 	EXPLODEYDP;
 	FLUSHXDP;
 	FLUSHYDP;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	CLEARCX;	/* Even clear inexact flag here */
 
@@ -68,6 +78,8 @@ int ieee754dp_cmp(union ieee754dp x, union ieee754dp y, int cmp, int sig)
 		s64 vx = x.bits;
 		s64 vy = y.bits;
 =======
+=======
+>>>>>>> v3.18
 	ieee754_clearcx();	/* Even clear inexact flag here */
 
 	if (ieee754dp_isnan(x) || ieee754dp_isnan(y)) {
@@ -83,6 +95,9 @@ int ieee754dp_cmp(union ieee754dp x, union ieee754dp y, int cmp, int sig)
 	} else {
 		vx = x.bits;
 		vy = y.bits;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (vx < 0)

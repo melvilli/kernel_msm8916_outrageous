@@ -94,6 +94,10 @@ MACHINE_START(IQ81340MC, "Intel IQ81340MC")
 	.init_machine   = iq81340mc_init,
 	.restart	= iop13xx_restart,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.nr_irqs	= NR_IOP13XX_IRQS,
+>>>>>>> v3.18
 =======
 	.nr_irqs	= NR_IOP13XX_IRQS,
 >>>>>>> v3.18

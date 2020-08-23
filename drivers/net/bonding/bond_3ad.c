@@ -21,8 +21,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/skbuff.h>
@@ -38,7 +41,11 @@
 #include "bond_3ad.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // General definitions
+=======
+/* General definitions */
+>>>>>>> v3.18
 =======
 /* General definitions */
 >>>>>>> v3.18
@@ -49,7 +56,11 @@
 #define AD_COLLECTOR_MAX_DELAY     0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Timer definitions(43.4.4 in the 802.3ad standard)
+=======
+/* Timer definitions (43.4.4 in the 802.3ad standard) */
+>>>>>>> v3.18
 =======
 /* Timer definitions (43.4.4 in the 802.3ad standard) */
 >>>>>>> v3.18
@@ -61,7 +72,11 @@
 #define AD_AGGREGATE_WAIT_TIME     2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Port state definitions(43.4.2.2 in the 802.3ad standard)
+=======
+/* Port state definitions (43.4.2.2 in the 802.3ad standard) */
+>>>>>>> v3.18
 =======
 /* Port state definitions (43.4.2.2 in the 802.3ad standard) */
 >>>>>>> v3.18
@@ -75,7 +90,13 @@
 #define AD_STATE_EXPIRED         0x80
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Port Variables definitions used by the State Machines(43.4.7 in the 802.3ad standard)
+=======
+/* Port Variables definitions used by the State Machines (43.4.7 in the
+ * 802.3ad standard)
+ */
+>>>>>>> v3.18
 =======
 /* Port Variables definitions used by the State Machines (43.4.7 in the
  * 802.3ad standard)
@@ -93,6 +114,7 @@
 #define AD_PORT_MOVED           0x200
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Port Key definitions
 // key is determined according to the link speed, duplex and
 // user key(which is yet not supported)
@@ -101,6 +123,8 @@
 //              ------------------------------------------------------------
 //              16                               6               1 0
 =======
+=======
+>>>>>>> v3.18
 /* Port Key definitions
  * key is determined according to the link speed, duplex and
  * user key (which is yet not supported)
@@ -109,13 +133,19 @@
  * --------------------------------------------------------------
  * 16		  6		  1		  0
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define  AD_DUPLEX_KEY_BITS    0x1
 #define  AD_SPEED_KEY_BITS     0x3E
 #define  AD_USER_KEY_BITS      0xFFC0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //dalloun
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define     AD_LINK_SPEED_BITMASK_1MBPS       0x1
@@ -124,15 +154,21 @@
 #define     AD_LINK_SPEED_BITMASK_1000MBPS    0x8
 #define     AD_LINK_SPEED_BITMASK_10000MBPS   0x10
 <<<<<<< HEAD
+<<<<<<< HEAD
 //endalloun
 
 // compare MAC addresses
 #define MAC_ADDRESS_COMPARE(A, B) memcmp(A, B, ETH_ALEN)
 =======
+=======
+>>>>>>> v3.18
 
 /* compare MAC addresses */
 #define MAC_ADDRESS_EQUAL(A, B)	\
 	ether_addr_equal_64bits((const u8 *)A, (const u8 *)B)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct mac_addr null_mac_addr = { { 0, 0, 0, 0, 0, 0 } };
@@ -141,6 +177,7 @@ static const int ad_delta_in_ticks = (AD_TIMER_INTERVAL * HZ) / 1000;
 
 static const u8 lacpdu_mcast_addr[ETH_ALEN] = MULTICAST_LACPDU_ADDR;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 // ================= main 802.3ad protocol functions ==================
 static int ad_lacpdu_send(struct port *port);
@@ -164,6 +201,8 @@ static void ad_marker_response_received(struct bond_marker *marker, struct port 
 // ================= api to bonding and kernel code ==================
 /////////////////////////////////////////////////////////////////////////////////
 =======
+=======
+>>>>>>> v3.18
 /* ================= main 802.3ad protocol functions ================== */
 static int ad_lacpdu_send(struct port *port);
 static int ad_marker_send(struct port *port, struct bond_marker *marker);
@@ -188,6 +227,9 @@ static void ad_marker_response_received(struct bond_marker *marker,
 
 
 /* ================= api to bonding and kernel code ================== */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -205,6 +247,7 @@ static inline struct bonding *__get_bond_by_port(struct port *port)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * __get_first_port - get the first port in the bond
  * @bond: the bond we're looking at
@@ -241,12 +284,18 @@ static inline struct port *__get_next_port(struct port *port)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * __get_first_agg - get the first aggregator in the bond
  * @bond: the bond we're looking at
  *
  * Return the aggregator of the first slave in @bond, or %NULL if it can't be
  * found.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * The caller must hold RCU or RTNL lock.
+>>>>>>> v3.18
 =======
  * The caller must hold RCU or RTNL lock.
 >>>>>>> v3.18
@@ -254,6 +303,7 @@ static inline struct port *__get_next_port(struct port *port)
 static inline struct aggregator *__get_first_agg(struct port *port)
 {
 	struct bonding *bond = __get_bond_by_port(port);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	// If there's no bond for this port, or bond has no slaves
@@ -288,6 +338,8 @@ static inline struct aggregator *__get_next_agg(struct aggregator *aggregator)
  * Return nonzero if aggregator has a partner (denoted by a non-zero ether
  * address for the partner).  Return 0 if not.
 =======
+=======
+>>>>>>> v3.18
 	struct slave *first_slave;
 	struct aggregator *agg;
 
@@ -309,6 +361,9 @@ static inline struct aggregator *__get_next_agg(struct aggregator *aggregator)
  *
  * Return nonzero if aggregator has a partner (denoted by a non-zero ether
  * address for the partner). Return 0 if not.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static inline int __agg_has_partner(struct aggregator *agg)
@@ -320,16 +375,22 @@ static inline int __agg_has_partner(struct aggregator *agg)
  * __disable_port - disable the port's slave
  * @port: the port we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  */
 static inline void __disable_port(struct port *port)
 {
 	bond_set_slave_inactive_flags(port->slave);
 =======
+=======
+>>>>>>> v3.18
  */
 static inline void __disable_port(struct port *port)
 {
 	bond_set_slave_inactive_flags(port->slave, BOND_SLAVE_NOTIFY_LATER);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -337,7 +398,10 @@ static inline void __disable_port(struct port *port)
  * __enable_port - enable the port's slave, if it's up
  * @port: the port we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -346,8 +410,13 @@ static inline void __enable_port(struct port *port)
 	struct slave *slave = port->slave;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((slave->link == BOND_LINK_UP) && IS_UP(slave->dev))
 		bond_set_slave_active_flags(slave);
+=======
+	if ((slave->link == BOND_LINK_UP) && bond_slave_is_up(slave))
+		bond_set_slave_active_flags(slave, BOND_SLAVE_NOTIFY_LATER);
+>>>>>>> v3.18
 =======
 	if ((slave->link == BOND_LINK_UP) && bond_slave_is_up(slave))
 		bond_set_slave_active_flags(slave, BOND_SLAVE_NOTIFY_LATER);
@@ -358,7 +427,10 @@ static inline void __enable_port(struct port *port)
  * __port_is_enabled - check if the port's slave is in active state
  * @port: the port we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -387,7 +459,10 @@ static inline u32 __get_agg_selection_mode(struct port *port)
  * __check_agg_selection_timer - check if the selection timer has expired
  * @port: the port we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -402,6 +477,7 @@ static inline int __check_agg_selection_timer(struct port *port)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * __get_state_machine_lock - lock the port's state machines
  * @port: the port we're looking at
@@ -425,6 +501,8 @@ static inline void __release_state_machine_lock(struct port *port)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * __get_link_speed - get a port's speed
  * @port: the port we're looking at
  *
@@ -441,16 +519,22 @@ static u16 __get_link_speed(struct port *port)
 	u16 speed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* this if covers only a special case: when the configuration starts with
 	 * link down, it sets the speed to 0.
 	 * This is done in spite of the fact that the e100 driver reports 0 to be
 	 * compatible with MVT in the future.*/
 =======
+=======
+>>>>>>> v3.18
 	/* this if covers only a special case: when the configuration starts
 	 * with link down, it sets the speed to 0.
 	 * This is done in spite of the fact that the e100 driver reports 0
 	 * to be compatible with MVT in the future.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (slave->link != BOND_LINK_UP)
 		speed = 0;
@@ -474,7 +558,12 @@ static u16 __get_link_speed(struct port *port)
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			speed = 0; // unknown speed value from ethtool. shouldn't happen
+=======
+			/* unknown speed value from ethtool. shouldn't happen */
+			speed = 0;
+>>>>>>> v3.18
 =======
 			/* unknown speed value from ethtool. shouldn't happen */
 			speed = 0;
@@ -484,8 +573,13 @@ static u16 __get_link_speed(struct port *port)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_debug("Port %d Received link speed %d update from adapter\n",
 		 port->actor_port_number, speed);
+=======
+	netdev_dbg(slave->bond->dev, "Port %d Received link speed %d update from adapter\n",
+		   port->actor_port_number, speed);
+>>>>>>> v3.18
 =======
 	netdev_dbg(slave->bond->dev, "Port %d Received link speed %d update from adapter\n",
 		   port->actor_port_number, speed);
@@ -505,6 +599,7 @@ static u8 __get_duplex(struct port *port)
 {
 	struct slave *slave = port->slave;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	u8 retval;
 
@@ -519,6 +614,8 @@ static u8 __get_duplex(struct port *port)
 			pr_debug("Port %d Received status full duplex update from adapter\n",
 				 port->actor_port_number);
 =======
+=======
+>>>>>>> v3.18
 	u8 retval;
 
 	/* handling a special case: when the configuration starts with
@@ -532,14 +629,22 @@ static u8 __get_duplex(struct port *port)
 			retval = 0x1;
 			netdev_dbg(slave->bond->dev, "Port %d Received status full duplex update from adapter\n",
 				   port->actor_port_number);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case DUPLEX_HALF:
 		default:
 			retval = 0x0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_debug("Port %d Received status NOT full duplex update from adapter\n",
 				 port->actor_port_number);
+=======
+			netdev_dbg(slave->bond->dev, "Port %d Received status NOT full duplex update from adapter\n",
+				   port->actor_port_number);
+>>>>>>> v3.18
 =======
 			netdev_dbg(slave->bond->dev, "Port %d Received status NOT full duplex update from adapter\n",
 				   port->actor_port_number);
@@ -550,6 +655,7 @@ static u8 __get_duplex(struct port *port)
 	return retval;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * __initialize_port_locks - initialize a port's STATE machine spinlock
@@ -566,6 +672,9 @@ static inline void __initialize_port_locks(struct slave *slave)
 =======
 /* Conversions */
 >>>>>>> v3.18
+=======
+/* Conversions */
+>>>>>>> v3.18
 
 /**
  * __ad_timer_to_ticks - convert a given timer type to AD module ticks
@@ -575,7 +684,11 @@ static inline void __initialize_port_locks(struct slave *slave)
  * If @timer_type is %current_while_timer, @par indicates long/short timer.
  * If @timer_type is %periodic_timer, @par is one of %FAST_PERIODIC_TIME,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *						    %SLOW_PERIODIC_TIME.
+=======
+ *						     %SLOW_PERIODIC_TIME.
+>>>>>>> v3.18
 =======
  *						     %SLOW_PERIODIC_TIME.
 >>>>>>> v3.18
@@ -585,6 +698,7 @@ static u16 __ad_timer_to_ticks(u16 timer_type, u16 par)
 	u16 retval = 0; /* to silence the compiler */
 
 	switch (timer_type) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	case AD_CURRENT_WHILE_TIMER:   // for rx machine usage
 		if (par)
@@ -606,6 +720,8 @@ static u16 __ad_timer_to_ticks(u16 timer_type, u16 par)
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 	case AD_CURRENT_WHILE_TIMER:	/* for rx machine usage */
 		if (par)
 			retval = (AD_SHORT_TIMEOUT_TIME*ad_ticks_per_sec);
@@ -626,15 +742,22 @@ static u16 __ad_timer_to_ticks(u16 timer_type, u16 par)
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return retval;
 }
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /////////////////////////////////////////////////////////////////////////////////
 // ================= ad_rx_machine helper functions ==================
 /////////////////////////////////////////////////////////////////////////////////
+=======
+/* ================= ad_rx_machine helper functions ================== */
+>>>>>>> v3.18
 =======
 /* ================= ad_rx_machine helper functions ================== */
 >>>>>>> v3.18
@@ -665,6 +788,7 @@ static u16 __ad_timer_to_ticks(u16 timer_type, u16 par)
 static void __choose_matched(struct lacpdu *lacpdu, struct port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// check if all parameters are alike
 	if (((ntohs(lacpdu->partner_port) == port->actor_port_number) &&
 	     (ntohs(lacpdu->partner_port_priority) == port->actor_port_priority) &&
@@ -677,6 +801,8 @@ static void __choose_matched(struct lacpdu *lacpdu, struct port *port)
 		) {
 		// update the state machine Matched variable
 =======
+=======
+>>>>>>> v3.18
 	/* check if all parameters are alike
 	 * or this is individual link(aggregation == FALSE)
 	 * then update the state machine Matched variable.
@@ -689,6 +815,9 @@ static void __choose_matched(struct lacpdu *lacpdu, struct port *port)
 	     ((lacpdu->partner_state & AD_STATE_AGGREGATION) == (port->actor_oper_port_state & AD_STATE_AGGREGATION))) ||
 	    ((lacpdu->actor_state & AD_STATE_AGGREGATION) == 0)
 		) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		port->sm_vars |= AD_PORT_MATCHED;
 	} else {
@@ -712,7 +841,13 @@ static void __record_pdu(struct lacpdu *lacpdu, struct port *port)
 
 		__choose_matched(lacpdu, port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// record the new parameter values for the partner operational
+=======
+		/* record the new parameter values for the partner
+		 * operational
+		 */
+>>>>>>> v3.18
 =======
 		/* record the new parameter values for the partner
 		 * operational
@@ -726,17 +861,23 @@ static void __record_pdu(struct lacpdu *lacpdu, struct port *port)
 		partner->port_state = lacpdu->actor_state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// set actor_oper_port_state.defaulted to FALSE
 		port->actor_oper_port_state &= ~AD_STATE_DEFAULTED;
 
 		// set the partner sync. to on if the partner is sync. and the port is matched
 =======
+=======
+>>>>>>> v3.18
 		/* set actor_oper_port_state.defaulted to FALSE */
 		port->actor_oper_port_state &= ~AD_STATE_DEFAULTED;
 
 		/* set the partner sync. to on if the partner is sync,
 		 * and the port is matched
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if ((port->sm_vars & AD_PORT_MATCHED)
 		    && (lacpdu->actor_state & AD_STATE_SYNCHRONIZATION))
@@ -758,17 +899,23 @@ static void __record_default(struct port *port)
 {
 	if (port) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// record the partner admin parameters
 		memcpy(&port->partner_oper, &port->partner_admin,
 		       sizeof(struct port_params));
 
 		// set actor_oper_port_state.defaulted to true
 =======
+=======
+>>>>>>> v3.18
 		/* record the partner admin parameters */
 		memcpy(&port->partner_oper, &port->partner_admin,
 		       sizeof(struct port_params));
 
 		/* set actor_oper_port_state.defaulted to true */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		port->actor_oper_port_state |= AD_STATE_DEFAULTED;
 	}
@@ -793,6 +940,7 @@ static void __update_selected(struct lacpdu *lacpdu, struct port *port)
 		const struct port_params *partner = &port->partner_oper;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// check if any parameter is different
 		if (ntohs(lacpdu->actor_port) != partner->port_number ||
 		    ntohs(lacpdu->actor_port_priority) != partner->port_priority ||
@@ -802,6 +950,8 @@ static void __update_selected(struct lacpdu *lacpdu, struct port *port)
 		    (lacpdu->actor_state & AD_STATE_AGGREGATION) != (partner->port_state & AD_STATE_AGGREGATION)) {
 			// update the state machine Selected variable
 =======
+=======
+>>>>>>> v3.18
 		/* check if any parameter is different then
 		 * update the state machine selected variable.
 		 */
@@ -811,6 +961,9 @@ static void __update_selected(struct lacpdu *lacpdu, struct port *port)
 		    ntohs(lacpdu->actor_system_priority) != partner->system_priority ||
 		    ntohs(lacpdu->actor_key) != partner->key ||
 		    (lacpdu->actor_state & AD_STATE_AGGREGATION) != (partner->port_state & AD_STATE_AGGREGATION)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			port->sm_vars &= ~AD_PORT_SELECTED;
 		}
@@ -836,24 +989,33 @@ static void __update_default_selected(struct port *port)
 		const struct port_params *oper = &port->partner_oper;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// check if any parameter is different
 		if (admin->port_number != oper->port_number ||
 		    admin->port_priority != oper->port_priority ||
 		    MAC_ADDRESS_COMPARE(&admin->system, &oper->system) ||
 =======
+=======
+>>>>>>> v3.18
 		/* check if any parameter is different then
 		 * update the state machine selected variable.
 		 */
 		if (admin->port_number != oper->port_number ||
 		    admin->port_priority != oper->port_priority ||
 		    !MAC_ADDRESS_EQUAL(&admin->system, &oper->system) ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    admin->system_priority != oper->system_priority ||
 		    admin->key != oper->key ||
 		    (admin->port_state & AD_STATE_AGGREGATION)
 			!= (oper->port_state & AD_STATE_AGGREGATION)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// update the state machine Selected variable
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			port->sm_vars &= ~AD_PORT_SELECTED;
@@ -876,6 +1038,7 @@ static void __update_default_selected(struct port *port)
 static void __update_ntt(struct lacpdu *lacpdu, struct port *port)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// validate lacpdu and port
 	if (lacpdu && port) {
 		// check if any parameter is different
@@ -883,6 +1046,8 @@ static void __update_ntt(struct lacpdu *lacpdu, struct port *port)
 		    (ntohs(lacpdu->partner_port_priority) != port->actor_port_priority) ||
 		    MAC_ADDRESS_COMPARE(&(lacpdu->partner_system), &(port->actor_system)) ||
 =======
+=======
+>>>>>>> v3.18
 	/* validate lacpdu and port */
 	if (lacpdu && port) {
 		/* check if any parameter is different then
@@ -891,6 +1056,9 @@ static void __update_ntt(struct lacpdu *lacpdu, struct port *port)
 		if ((ntohs(lacpdu->partner_port) != port->actor_port_number) ||
 		    (ntohs(lacpdu->partner_port_priority) != port->actor_port_priority) ||
 		    !MAC_ADDRESS_EQUAL(&(lacpdu->partner_system), &(port->actor_system)) ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    (ntohs(lacpdu->partner_system_priority) != port->actor_system_priority) ||
 		    (ntohs(lacpdu->partner_key) != port->actor_oper_port_key) ||
@@ -900,7 +1068,10 @@ static void __update_ntt(struct lacpdu *lacpdu, struct port *port)
 		    ((lacpdu->partner_state & AD_STATE_AGGREGATION) != (port->actor_oper_port_state & AD_STATE_AGGREGATION))
 		   ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			port->ntt = true;
@@ -909,6 +1080,7 @@ static void __update_ntt(struct lacpdu *lacpdu, struct port *port)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * __attach_bond_to_agg
  * @port: the port we're looking at
@@ -942,6 +1114,8 @@ static void __detach_bond_from_agg(struct port *port)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * __agg_ports_are_ready - check if all ports in an aggregator are ready
  * @aggregator: the aggregator we're looking at
  *
@@ -953,7 +1127,13 @@ static int __agg_ports_are_ready(struct aggregator *aggregator)
 
 	if (aggregator) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// scan all ports in this aggregator to verfy if they are all ready
+=======
+		/* scan all ports in this aggregator to verfy if they are
+		 * all ready.
+		 */
+>>>>>>> v3.18
 =======
 		/* scan all ports in this aggregator to verfy if they are
 		 * all ready.
@@ -1019,7 +1199,11 @@ static u32 __get_agg_bandwidth(struct aggregator *aggregator)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bandwidth = 0; /*to silence the compiler ....*/
+=======
+			bandwidth = 0; /* to silence the compiler */
+>>>>>>> v3.18
 =======
 			bandwidth = 0; /* to silence the compiler */
 >>>>>>> v3.18
@@ -1032,6 +1216,7 @@ static u32 __get_agg_bandwidth(struct aggregator *aggregator)
  * __get_active_agg - get the current active aggregator
  * @aggregator: the aggregator we're looking at
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 static struct aggregator *__get_active_agg(struct aggregator *aggregator)
@@ -1047,6 +1232,8 @@ static struct aggregator *__get_active_agg(struct aggregator *aggregator)
 
 	return retval;
 =======
+=======
+>>>>>>> v3.18
  * Caller must hold RCU lock.
  */
 static struct aggregator *__get_active_agg(struct aggregator *aggregator)
@@ -1060,6 +1247,9 @@ static struct aggregator *__get_active_agg(struct aggregator *aggregator)
 			return &(SLAVE_AD_INFO(slave)->aggregator);
 
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1067,7 +1257,10 @@ static struct aggregator *__get_active_agg(struct aggregator *aggregator)
  * __update_lacpdu_from_port - update a port's lacpdu fields
  * @port: the port we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -1077,8 +1270,13 @@ static inline void __update_lacpdu_from_port(struct port *port)
 	const struct port_params *partner = &port->partner_oper;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* update current actual Actor parameters */
 	/* lacpdu->subtype                   initialized
+=======
+	/* update current actual Actor parameters
+	 * lacpdu->subtype                   initialized
+>>>>>>> v3.18
 =======
 	/* update current actual Actor parameters
 	 * lacpdu->subtype                   initialized
@@ -1119,9 +1317,13 @@ static inline void __update_lacpdu_from_port(struct port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //////////////////////////////////////////////////////////////////////////////////////
 // ================= main 802.3ad protocol code ======================================
 //////////////////////////////////////////////////////////////////////////////////////
+=======
+/* ================= main 802.3ad protocol code ========================= */
+>>>>>>> v3.18
 =======
 /* ================= main 802.3ad protocol code ========================= */
 >>>>>>> v3.18
@@ -1153,6 +1355,7 @@ static int ad_lacpdu_send(struct port *port)
 	lacpdu_header = (struct lacpdu_header *)skb_put(skb, length);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(lacpdu_header->hdr.h_dest, lacpdu_mcast_addr, ETH_ALEN);
 	/* Note: source address is set to be the member's PERMANENT address,
 	   because we use it to identify loopback lacpdus in receive. */
@@ -1161,6 +1364,8 @@ static int ad_lacpdu_send(struct port *port)
 
 	lacpdu_header->lacpdu = port->lacpdu; // struct copy
 =======
+=======
+>>>>>>> v3.18
 	ether_addr_copy(lacpdu_header->hdr.h_dest, lacpdu_mcast_addr);
 	/* Note: source address is set to be the member's PERMANENT address,
 	 * because we use it to identify loopback lacpdus in receive.
@@ -1169,6 +1374,9 @@ static int ad_lacpdu_send(struct port *port)
 	lacpdu_header->hdr.h_proto = PKT_TYPE_LACPDU;
 
 	lacpdu_header->lacpdu = port->lacpdu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_queue_xmit(skb);
@@ -1205,6 +1413,7 @@ static int ad_marker_send(struct port *port, struct bond_marker *marker)
 	marker_header = (struct bond_marker_header *)skb_put(skb, length);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(marker_header->hdr.h_dest, lacpdu_mcast_addr, ETH_ALEN);
 	/* Note: source address is set to be the member's PERMANENT address,
 	   because we use it to identify loopback MARKERs in receive. */
@@ -1213,6 +1422,8 @@ static int ad_marker_send(struct port *port, struct bond_marker *marker)
 
 	marker_header->marker = *marker; // struct copy
 =======
+=======
+>>>>>>> v3.18
 	ether_addr_copy(marker_header->hdr.h_dest, lacpdu_mcast_addr);
 	/* Note: source address is set to be the member's PERMANENT address,
 	 * because we use it to identify loopback MARKERs in receive.
@@ -1221,6 +1432,9 @@ static int ad_marker_send(struct port *port, struct bond_marker *marker)
 	marker_header->hdr.h_proto = PKT_TYPE_LACPDU;
 
 	marker_header->marker = *marker;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_queue_xmit(skb);
@@ -1231,6 +1445,7 @@ static int ad_marker_send(struct port *port, struct bond_marker *marker)
 /**
  * ad_mux_machine - handle a port's mux state machine
  * @port: the port we're looking at
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  */
@@ -1244,6 +1459,8 @@ static void ad_mux_machine(struct port *port)
 	if (port->sm_vars & AD_PORT_BEGIN) {
 		port->sm_mux_state = AD_MUX_DETACHED;		 // next state
 =======
+=======
+>>>>>>> v3.18
  * @update_slave_arr: Does slave array need update?
  */
 static void ad_mux_machine(struct port *port, bool *update_slave_arr)
@@ -1257,6 +1474,9 @@ static void ad_mux_machine(struct port *port, bool *update_slave_arr)
 
 	if (port->sm_vars & AD_PORT_BEGIN) {
 		port->sm_mux_state = AD_MUX_DETACHED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		switch (port->sm_mux_state) {
@@ -1264,6 +1484,7 @@ static void ad_mux_machine(struct port *port, bool *update_slave_arr)
 			if ((port->sm_vars & AD_PORT_SELECTED)
 			    || (port->sm_vars & AD_PORT_STANDBY))
 				/* if SELECTED or STANDBY */
+<<<<<<< HEAD
 <<<<<<< HEAD
 				port->sm_mux_state = AD_MUX_WAITING; // next state
 			break;
@@ -1280,6 +1501,8 @@ static void ad_mux_machine(struct port *port, bool *update_slave_arr)
 
 			// check if the wait_while_timer expired
 =======
+=======
+>>>>>>> v3.18
 				port->sm_mux_state = AD_MUX_WAITING;
 			break;
 		case AD_MUX_WAITING:
@@ -1297,11 +1520,15 @@ static void ad_mux_machine(struct port *port, bool *update_slave_arr)
 			}
 
 			/* check if the wait_while_timer expired */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (port->sm_mux_timer_counter
 			    && !(--port->sm_mux_timer_counter))
 				port->sm_vars |= AD_PORT_READY_N;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			// in order to withhold the selection logic to check all ports READY_N value
 			// every callback cycle to update ready variable, we check READY_N and update READY here
@@ -1335,6 +1562,8 @@ static void ad_mux_machine(struct port *port, bool *update_slave_arr)
 				// sure that a collecting distributing
 				// port in an active aggregator is enabled
 =======
+=======
+>>>>>>> v3.18
 			/* in order to withhold the selection logic to check
 			 * all ports READY_N value every callback cycle to
 			 * update ready variable, we check READY_N and update
@@ -1380,6 +1609,9 @@ static void ad_mux_machine(struct port *port, bool *update_slave_arr)
 				 * sure that a collecting distributing
 				 * port in an active aggregator is enabled
 				 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (port->aggregator &&
 				    port->aggregator->is_active &&
@@ -1390,7 +1622,11 @@ static void ad_mux_machine(struct port *port, bool *update_slave_arr)
 			}
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:    //to silence the compiler
+=======
+		default:
+>>>>>>> v3.18
 =======
 		default:
 >>>>>>> v3.18
@@ -1399,7 +1635,11 @@ static void ad_mux_machine(struct port *port, bool *update_slave_arr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// check if the state machine was changed
+=======
+	/* check if the state machine was changed */
+>>>>>>> v3.18
 =======
 	/* check if the state machine was changed */
 >>>>>>> v3.18
@@ -1410,9 +1650,15 @@ static void ad_mux_machine(struct port *port, bool *update_slave_arr)
 		switch (port->sm_mux_state) {
 		case AD_MUX_DETACHED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__detach_bond_from_agg(port);
 			port->actor_oper_port_state &= ~AD_STATE_SYNCHRONIZATION;
 			ad_disable_collecting_distributing(port);
+=======
+			port->actor_oper_port_state &= ~AD_STATE_SYNCHRONIZATION;
+			ad_disable_collecting_distributing(port,
+							   update_slave_arr);
+>>>>>>> v3.18
 =======
 			port->actor_oper_port_state &= ~AD_STATE_SYNCHRONIZATION;
 			ad_disable_collecting_distributing(port,
@@ -1427,17 +1673,23 @@ static void ad_mux_machine(struct port *port, bool *update_slave_arr)
 			break;
 		case AD_MUX_ATTACHED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__attach_bond_to_agg(port);
 			port->actor_oper_port_state |= AD_STATE_SYNCHRONIZATION;
 			port->actor_oper_port_state &= ~AD_STATE_COLLECTING;
 			port->actor_oper_port_state &= ~AD_STATE_DISTRIBUTING;
 			ad_disable_collecting_distributing(port);
 =======
+=======
+>>>>>>> v3.18
 			port->actor_oper_port_state |= AD_STATE_SYNCHRONIZATION;
 			port->actor_oper_port_state &= ~AD_STATE_COLLECTING;
 			port->actor_oper_port_state &= ~AD_STATE_DISTRIBUTING;
 			ad_disable_collecting_distributing(port,
 							   update_slave_arr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			port->ntt = true;
 			break;
@@ -1445,16 +1697,22 @@ static void ad_mux_machine(struct port *port, bool *update_slave_arr)
 			port->actor_oper_port_state |= AD_STATE_COLLECTING;
 			port->actor_oper_port_state |= AD_STATE_DISTRIBUTING;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ad_enable_collecting_distributing(port);
 			port->ntt = true;
 			break;
 		default:    //to silence the compiler
 =======
+=======
+>>>>>>> v3.18
 			ad_enable_collecting_distributing(port,
 							  update_slave_arr);
 			port->ntt = true;
 			break;
 		default:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -1474,6 +1732,7 @@ static void ad_rx_machine(struct lacpdu *lacpdu, struct port *port)
 {
 	rx_states_t last_state;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// keep current State Machine state to compare later if it was changed
 	last_state = port->sm_rx_state;
@@ -1522,6 +1781,8 @@ static void ad_rx_machine(struct lacpdu *lacpdu, struct port *port)
 				break;
 			default:    //to silence the compiler
 =======
+=======
+>>>>>>> v3.18
 	/* keep current State Machine state to compare later if it was
 	 * changed
 	 */
@@ -1572,6 +1833,9 @@ static void ad_rx_machine(struct lacpdu *lacpdu, struct port *port)
 					port->sm_rx_state = AD_RX_LACP_DISABLED;
 				break;
 			default:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 
@@ -1580,7 +1844,11 @@ static void ad_rx_machine(struct lacpdu *lacpdu, struct port *port)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// check if the State machine was changed or new lacpdu arrived
+=======
+	/* check if the State machine was changed or new lacpdu arrived */
+>>>>>>> v3.18
 =======
 	/* check if the State machine was changed or new lacpdu arrived */
 >>>>>>> v3.18
@@ -1599,10 +1867,16 @@ static void ad_rx_machine(struct lacpdu *lacpdu, struct port *port)
 			port->actor_oper_port_state &= ~AD_STATE_EXPIRED;
 			port->sm_vars &= ~AD_PORT_MOVED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			port->sm_rx_state = AD_RX_PORT_DISABLED;	// next state
 
 			/*- Fall Through -*/
 
+=======
+			port->sm_rx_state = AD_RX_PORT_DISABLED;
+
+			/* Fall Through */
+>>>>>>> v3.18
 =======
 			port->sm_rx_state = AD_RX_PORT_DISABLED;
 
@@ -1620,6 +1894,7 @@ static void ad_rx_machine(struct lacpdu *lacpdu, struct port *port)
 			break;
 		case AD_RX_EXPIRED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			//Reset of the Synchronization flag. (Standard 43.4.12)
 			//This reset cause to disable this port in the COLLECTING_DISTRIBUTING state of the
 			//mux machine in case of EXPIRED even if LINK_DOWN didn't arrive for the port.
@@ -1628,6 +1903,8 @@ static void ad_rx_machine(struct lacpdu *lacpdu, struct port *port)
 			port->partner_oper.port_state |=
 				AD_STATE_LACP_ACTIVITY;
 =======
+=======
+>>>>>>> v3.18
 			/* Reset of the Synchronization flag (Standard 43.4.12)
 			 * This reset cause to disable this port in the
 			 * COLLECTING_DISTRIBUTING state of the mux machine in
@@ -1637,6 +1914,9 @@ static void ad_rx_machine(struct lacpdu *lacpdu, struct port *port)
 			port->partner_oper.port_state &= ~AD_STATE_SYNCHRONIZATION;
 			port->sm_vars &= ~AD_PORT_MATCHED;
 			port->partner_oper.port_state |= AD_STATE_LACP_ACTIVITY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			port->sm_rx_timer_counter = __ad_timer_to_ticks(AD_CURRENT_WHILE_TIMER, (u16)(AD_SHORT_TIMEOUT));
 			port->actor_oper_port_state |= AD_STATE_EXPIRED;
@@ -1649,6 +1929,7 @@ static void ad_rx_machine(struct lacpdu *lacpdu, struct port *port)
 			break;
 		case AD_RX_CURRENT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// detect loopback situation
 			if (!MAC_ADDRESS_COMPARE(&(lacpdu->actor_system), &(port->actor_system))) {
 				// INFO_RECEIVED_LOOPBACK_FRAMES
@@ -1656,12 +1937,17 @@ static void ad_rx_machine(struct lacpdu *lacpdu, struct port *port)
 				       "Check the configuration to verify that all adapters are connected to 802.3ad compliant switch ports\n",
 				       port->slave->bond->dev->name, port->slave->dev->name);
 =======
+=======
+>>>>>>> v3.18
 			/* detect loopback situation */
 			if (MAC_ADDRESS_EQUAL(&(lacpdu->actor_system),
 					      &(port->actor_system))) {
 				netdev_err(port->slave->bond->dev, "An illegal loopback occurred on adapter (%s)\n"
 				       "Check the configuration to verify that all adapters are connected to 802.3ad compliant switch ports\n",
 				       port->slave->dev->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return;
 			}
@@ -1672,7 +1958,11 @@ static void ad_rx_machine(struct lacpdu *lacpdu, struct port *port)
 			port->actor_oper_port_state &= ~AD_STATE_EXPIRED;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:    //to silence the compiler
+=======
+		default:
+>>>>>>> v3.18
 =======
 		default:
 >>>>>>> v3.18
@@ -1685,6 +1975,7 @@ static void ad_rx_machine(struct lacpdu *lacpdu, struct port *port)
  * ad_tx_machine - handle a port's tx state machine
  * @port: the port we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  */
 static void ad_tx_machine(struct port *port)
@@ -1693,6 +1984,8 @@ static void ad_tx_machine(struct port *port)
 	if (port->sm_tx_timer_counter && !(--port->sm_tx_timer_counter)) {
 		// check if there is something to send
 =======
+=======
+>>>>>>> v3.18
  */
 static void ad_tx_machine(struct port *port)
 {
@@ -1701,6 +1994,9 @@ static void ad_tx_machine(struct port *port)
 	 */
 	if (port->sm_tx_timer_counter && !(--port->sm_tx_timer_counter)) {
 		/* check if there is something to send */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (port->ntt && (port->sm_vars & AD_PORT_LACP_ENABLED)) {
 			__update_lacpdu_from_port(port);
@@ -1709,6 +2005,7 @@ static void ad_tx_machine(struct port *port)
 				pr_debug("Sent LACPDU on port %d\n",
 					 port->actor_port_number);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				/* mark ntt as false, so it will not be sent again until
 				   demanded */
@@ -1719,6 +2016,8 @@ static void ad_tx_machine(struct port *port)
 		port->sm_tx_timer_counter =
 			ad_ticks_per_sec/AD_MAX_TX_IN_SECOND;
 =======
+=======
+>>>>>>> v3.18
 				/* mark ntt as false, so it will not be sent
 				 * again until demanded
 				 */
@@ -1729,6 +2028,9 @@ static void ad_tx_machine(struct port *port)
 		 * AD_MAX_TX_IN_SECOND
 		 */
 		port->sm_tx_timer_counter = ad_ticks_per_sec/AD_MAX_TX_IN_SECOND;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1743,6 +2045,7 @@ static void ad_periodic_machine(struct port *port)
 {
 	periodic_states_t last_state;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// keep current state machine state to compare later if it was changed
 	last_state = port->sm_periodic_state;
@@ -1762,6 +2065,8 @@ static void ad_periodic_machine(struct port *port)
 		} else {
 			// If not expired, check if there is some new timeout parameter from the partner state
 =======
+=======
+>>>>>>> v3.18
 	/* keep current state machine state to compare later if it was changed */
 	last_state = port->sm_periodic_state;
 
@@ -1781,11 +2086,15 @@ static void ad_periodic_machine(struct port *port)
 			/* If not expired, check if there is some new timeout
 			 * parameter from the partner state
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			switch (port->sm_periodic_state) {
 			case AD_FAST_PERIODIC:
 				if (!(port->partner_oper.port_state
 				      & AD_STATE_LACP_TIMEOUT))
+<<<<<<< HEAD
 <<<<<<< HEAD
 					port->sm_periodic_state = AD_SLOW_PERIODIC;  // next state
 				break;
@@ -1798,6 +2107,8 @@ static void ad_periodic_machine(struct port *port)
 				break;
 			default:    //to silence the compiler
 =======
+=======
+>>>>>>> v3.18
 					port->sm_periodic_state = AD_SLOW_PERIODIC;
 				break;
 			case AD_SLOW_PERIODIC:
@@ -1807,6 +2118,9 @@ static void ad_periodic_machine(struct port *port)
 				}
 				break;
 			default:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				break;
 			}
@@ -1814,6 +2128,7 @@ static void ad_periodic_machine(struct port *port)
 	} else {
 		switch (port->sm_periodic_state) {
 		case AD_NO_PERIODIC:
+<<<<<<< HEAD
 <<<<<<< HEAD
 			port->sm_periodic_state = AD_FAST_PERIODIC;	 // next state
 			break;
@@ -1826,6 +2141,8 @@ static void ad_periodic_machine(struct port *port)
 			break;
 		default:    //to silence the compiler
 =======
+=======
+>>>>>>> v3.18
 			port->sm_periodic_state = AD_FAST_PERIODIC;
 			break;
 		case AD_PERIODIC_TX:
@@ -1836,13 +2153,20 @@ static void ad_periodic_machine(struct port *port)
 				port->sm_periodic_state = AD_FAST_PERIODIC;
 			break;
 		default:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// check if the state machine was changed
+=======
+	/* check if the state machine was changed */
+>>>>>>> v3.18
 =======
 	/* check if the state machine was changed */
 >>>>>>> v3.18
@@ -1853,6 +2177,7 @@ static void ad_periodic_machine(struct port *port)
 		switch (port->sm_periodic_state) {
 		case AD_NO_PERIODIC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			port->sm_periodic_timer_counter = 0;	   // zero timer
 			break;
 		case AD_FAST_PERIODIC:
@@ -1861,6 +2186,8 @@ static void ad_periodic_machine(struct port *port)
 		case AD_SLOW_PERIODIC:
 			port->sm_periodic_timer_counter = __ad_timer_to_ticks(AD_PERIODIC_TIMER, (u16)(AD_SLOW_PERIODIC_TIME))-1; // decrement 1 tick we lost in the PERIODIC_TX cycle
 =======
+=======
+>>>>>>> v3.18
 			port->sm_periodic_timer_counter = 0;
 			break;
 		case AD_FAST_PERIODIC:
@@ -1870,13 +2197,20 @@ static void ad_periodic_machine(struct port *port)
 		case AD_SLOW_PERIODIC:
 			/* decrement 1 tick we lost in the PERIODIC_TX cycle */
 			port->sm_periodic_timer_counter = __ad_timer_to_ticks(AD_PERIODIC_TIMER, (u16)(AD_SLOW_PERIODIC_TIME))-1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case AD_PERIODIC_TX:
 			port->ntt = true;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default:    //to silence the compiler
+=======
+		default:
+>>>>>>> v3.18
 =======
 		default:
 >>>>>>> v3.18
@@ -1889,6 +2223,10 @@ static void ad_periodic_machine(struct port *port)
  * ad_port_selection_logic - select aggregation groups
  * @port: the port we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @update_slave_arr: Does slave array need update?
+>>>>>>> v3.18
 =======
  * @update_slave_arr: Does slave array need update?
 >>>>>>> v3.18
@@ -1897,6 +2235,7 @@ static void ad_periodic_machine(struct port *port)
  * selection logic is called in the inititalization (after all the handshkes),
  * and after every lacpdu receive (if selected is off).
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void ad_port_selection_logic(struct port *port)
 {
@@ -1922,6 +2261,8 @@ static void ad_port_selection_logic(struct port *port)
 						port->next_port_in_aggregator;
 				} else {// not the first port attached to the aggregator
 =======
+=======
+>>>>>>> v3.18
 static void ad_port_selection_logic(struct port *port, bool *update_slave_arr)
 {
 	struct aggregator *aggregator, *free_aggregator = NULL, *temp_aggregator;
@@ -1956,13 +2297,22 @@ static void ad_port_selection_logic(struct port *port, bool *update_slave_arr)
 					/* not the first port attached to the
 					 * aggregator
 					 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					last_port->next_port_in_aggregator =
 						port->next_port_in_aggregator;
 				}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// clear the port's relations to this aggregator
+=======
+				/* clear the port's relations to this
+				 * aggregator
+				 */
+>>>>>>> v3.18
 =======
 				/* clear the port's relations to this
 				 * aggregator
@@ -1973,23 +2323,30 @@ static void ad_port_selection_logic(struct port *port, bool *update_slave_arr)
 				port->actor_port_aggregator_identifier = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_debug("Port %d left LAG %d\n",
 					 port->actor_port_number,
 					 temp_aggregator->aggregator_identifier);
 				// if the aggregator is empty, clear its parameters, and set it ready to be attached
 =======
+=======
+>>>>>>> v3.18
 				netdev_dbg(bond->dev, "Port %d left LAG %d\n",
 					   port->actor_port_number,
 					   temp_aggregator->aggregator_identifier);
 				/* if the aggregator is empty, clear its
 				 * parameters, and set it ready to be attached
 				 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (!temp_aggregator->lag_ports)
 					ad_clear_agg(temp_aggregator);
 				break;
 			}
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!curr_port) { // meaning: the port was related to an aggregator but was not on the aggregator port list
 			pr_warning("%s: Warning: Port %d (on %s) was related to aggregator %d but was not on its port list\n",
@@ -2005,6 +2362,8 @@ static void ad_port_selection_logic(struct port *port, bool *update_slave_arr)
 
 		// keep a free aggregator for later use(if needed)
 =======
+=======
+>>>>>>> v3.18
 		if (!curr_port) {
 			/* meaning: the port was related to an aggregator
 			 * but was not on the aggregator port list
@@ -2021,12 +2380,16 @@ static void ad_port_selection_logic(struct port *port, bool *update_slave_arr)
 		aggregator = &(SLAVE_AD_INFO(slave)->aggregator);
 
 		/* keep a free aggregator for later use(if needed) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!aggregator->lag_ports) {
 			if (!free_aggregator)
 				free_aggregator = aggregator;
 			continue;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// check if current aggregator suits us
 		if (((aggregator->actor_oper_aggregator_key == port->actor_oper_port_key) && // if all parameters match AND
@@ -2040,6 +2403,8 @@ static void ad_port_selection_logic(struct port *port, bool *update_slave_arr)
 		   ) {
 			// attach to the founded aggregator
 =======
+=======
+>>>>>>> v3.18
 		/* check if current aggregator suits us */
 		if (((aggregator->actor_oper_aggregator_key == port->actor_oper_port_key) && /* if all parameters match AND */
 		     MAC_ADDRESS_EQUAL(&(aggregator->partner_system), &(port->partner_oper.system)) &&
@@ -2051,6 +2416,9 @@ static void ad_port_selection_logic(struct port *port, bool *update_slave_arr)
 		    )
 		   ) {
 			/* attach to the founded aggregator */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			port->aggregator = aggregator;
 			port->actor_port_aggregator_identifier =
@@ -2059,17 +2427,23 @@ static void ad_port_selection_logic(struct port *port, bool *update_slave_arr)
 			port->aggregator->num_of_ports++;
 			aggregator->lag_ports = port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_debug("Port %d joined LAG %d(existing LAG)\n",
 				 port->actor_port_number,
 				 port->aggregator->aggregator_identifier);
 
 			// mark this port as selected
 =======
+=======
+>>>>>>> v3.18
 			netdev_dbg(bond->dev, "Port %d joined LAG %d(existing LAG)\n",
 				   port->actor_port_number,
 				   port->aggregator->aggregator_identifier);
 
 			/* mark this port as selected */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			port->sm_vars |= AD_PORT_SELECTED;
 			found = 1;
@@ -2078,25 +2452,37 @@ static void ad_port_selection_logic(struct port *port, bool *update_slave_arr)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// the port couldn't find an aggregator - attach it to a new aggregator
 	if (!found) {
 		if (free_aggregator) {
 			// assign port a new aggregator
 =======
+=======
+>>>>>>> v3.18
 	/* the port couldn't find an aggregator - attach it to a new
 	 * aggregator
 	 */
 	if (!found) {
 		if (free_aggregator) {
 			/* assign port a new aggregator */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			port->aggregator = free_aggregator;
 			port->actor_port_aggregator_identifier =
 				port->aggregator->aggregator_identifier;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// update the new aggregator's parameters
 			// if port was responsed from the end-user
+=======
+			/* update the new aggregator's parameters
+			 * if port was responsed from the end-user
+			 */
+>>>>>>> v3.18
 =======
 			/* update the new aggregator's parameters
 			 * if port was responsed from the end-user
@@ -2121,6 +2507,7 @@ static void ad_port_selection_logic(struct port *port, bool *update_slave_arr)
 			port->aggregator->num_of_ports++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// mark this port as selected
 			port->sm_vars |= AD_PORT_SELECTED;
 
@@ -2144,6 +2531,8 @@ static void ad_port_selection_logic(struct port *port, bool *update_slave_arr)
 /*
  * Decide if "agg" is a better choice for the new active aggregator that
 =======
+=======
+>>>>>>> v3.18
 			/* mark this port as selected */
 			port->sm_vars |= AD_PORT_SELECTED;
 
@@ -2167,6 +2556,9 @@ static void ad_port_selection_logic(struct port *port, bool *update_slave_arr)
 }
 
 /* Decide if "agg" is a better choice for the new active aggregator that
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * the current best, according to the ad_select policy.
  */
@@ -2174,8 +2566,12 @@ static struct aggregator *ad_agg_selection_test(struct aggregator *best,
 						struct aggregator *curr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * 0. If no best, select current.
+=======
+	/* 0. If no best, select current.
+>>>>>>> v3.18
 =======
 	/* 0. If no best, select current.
 >>>>>>> v3.18
@@ -2235,9 +2631,15 @@ static struct aggregator *ad_agg_selection_test(struct aggregator *best,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: Impossible agg select mode %d\n",
 			   curr->slave->bond->dev->name,
 			   __get_agg_selection_mode(curr->lag_ports));
+=======
+		net_warn_ratelimited("%s: Impossible agg select mode %d\n",
+				     curr->slave->bond->dev->name,
+				     __get_agg_selection_mode(curr->lag_ports));
+>>>>>>> v3.18
 =======
 		net_warn_ratelimited("%s: Impossible agg select mode %d\n",
 				     curr->slave->bond->dev->name,
@@ -2253,17 +2655,23 @@ static int agg_device_up(const struct aggregator *agg)
 {
 	struct port *port = agg->lag_ports;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!port)
 		return 0;
 	return (netif_running(port->slave->dev) &&
 		netif_carrier_ok(port->slave->dev));
 =======
+=======
+>>>>>>> v3.18
 
 	if (!port)
 		return 0;
 
 	return netif_running(port->slave->dev) &&
 	       netif_carrier_ok(port->slave->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2271,6 +2679,10 @@ static int agg_device_up(const struct aggregator *agg)
  * ad_agg_selection_logic - select an aggregation group for a team
  * @aggregator: the aggregator we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @update_slave_arr: Does slave array need update?
+>>>>>>> v3.18
 =======
  * @update_slave_arr: Does slave array need update?
 >>>>>>> v3.18
@@ -2297,12 +2709,15 @@ static int agg_device_up(const struct aggregator *agg)
  * called with the bond itself, and retrieve the first agg from it.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ad_agg_selection_logic(struct aggregator *agg)
 {
 	struct aggregator *best, *active, *origin;
 	struct port *port;
 
 =======
+=======
+>>>>>>> v3.18
 static void ad_agg_selection_logic(struct aggregator *agg,
 				   bool *update_slave_arr)
 {
@@ -2313,13 +2728,22 @@ static void ad_agg_selection_logic(struct aggregator *agg,
 	struct port *port;
 
 	rcu_read_lock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	origin = agg;
 	active = __get_active_agg(agg);
 	best = (active && agg_device_up(active)) ? active : NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	do {
+=======
+	bond_for_each_slave_rcu(bond, slave, iter) {
+		agg = &(SLAVE_AD_INFO(slave)->aggregator);
+
+>>>>>>> v3.18
 =======
 	bond_for_each_slave_rcu(bond, slave, iter) {
 		agg = &(SLAVE_AD_INFO(slave)->aggregator);
@@ -2330,6 +2754,7 @@ static void ad_agg_selection_logic(struct aggregator *agg,
 		if (agg->num_of_ports && agg_device_up(agg))
 			best = ad_agg_selection_test(best, agg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	} while ((agg = __get_next_agg(agg)));
 
@@ -2338,11 +2763,16 @@ static void ad_agg_selection_logic(struct aggregator *agg,
 		/*
 		 * For the STABLE policy, don't replace the old active
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	if (best &&
 	    __get_agg_selection_mode(best->lag_ports) == BOND_AD_STABLE) {
 		/* For the STABLE policy, don't replace the old active
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 * aggregator if it's still active (it has an answering
 		 * partner) or if both the best and active don't have an
@@ -2352,7 +2782,12 @@ static void ad_agg_selection_logic(struct aggregator *agg,
 		    active->lag_ports->is_enabled &&
 		    (__agg_has_partner(active) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     (!__agg_has_partner(active) && !__agg_has_partner(best)))) {
+=======
+		     (!__agg_has_partner(active) &&
+		     !__agg_has_partner(best)))) {
+>>>>>>> v3.18
 =======
 		     (!__agg_has_partner(active) &&
 		     !__agg_has_partner(best)))) {
@@ -2370,6 +2805,7 @@ static void ad_agg_selection_logic(struct aggregator *agg,
 		active->is_active = 1;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// if there is new best aggregator, activate it
 	if (best) {
@@ -2409,6 +2845,8 @@ static void ad_agg_selection_logic(struct aggregator *agg,
 
 		// disable the ports that were related to the former active_aggregator
 =======
+=======
+>>>>>>> v3.18
 	/* if there is new best aggregator, activate it */
 	if (best) {
 		netdev_dbg(bond->dev, "best Agg=%d; P=%d; a k=%d; p k=%d; Ind=%d; Act=%d\n",
@@ -2449,6 +2887,9 @@ static void ad_agg_selection_logic(struct aggregator *agg,
 		/* disable the ports that were related to the former
 		 * active_aggregator
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (active) {
 			for (port = active->lag_ports; port;
@@ -2457,16 +2898,22 @@ static void ad_agg_selection_logic(struct aggregator *agg,
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	/*
 	 * if the selected aggregator is of join individuals
 =======
+=======
+>>>>>>> v3.18
 		/* Slave array needs update. */
 		*update_slave_arr = true;
 	}
 
 	/* if the selected aggregator is of join individuals
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * (partner_system is NULL), enable their ports
 	 */
@@ -2482,6 +2929,7 @@ static void ad_agg_selection_logic(struct aggregator *agg,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (origin->slave) {
 		struct bonding *bond;
 
@@ -2494,13 +2942,21 @@ static void ad_agg_selection_logic(struct aggregator *agg,
 
 	bond_3ad_set_carrier(bond);
 >>>>>>> v3.18
+=======
+	rcu_read_unlock();
+
+	bond_3ad_set_carrier(bond);
+>>>>>>> v3.18
 }
 
 /**
  * ad_clear_agg - clear a given aggregator's parameters
  * @aggregator: the aggregator we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -2527,7 +2983,10 @@ static void ad_clear_agg(struct aggregator *aggregator)
  * ad_initialize_agg - initialize a given aggregator's parameters
  * @aggregator: the aggregator we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -2547,7 +3006,10 @@ static void ad_initialize_agg(struct aggregator *aggregator)
  * @aggregator: the aggregator we're looking at
  * @lacp_fast: boolean. whether fast periodic should be used
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -2582,13 +3044,19 @@ static void ad_initialize_port(struct port *port, int lacp_fast)
 		port->actor_admin_port_key = 1;
 		port->actor_oper_port_key  = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		port->actor_admin_port_state = AD_STATE_AGGREGATION | AD_STATE_LACP_ACTIVITY;
 		port->actor_oper_port_state  = AD_STATE_AGGREGATION | AD_STATE_LACP_ACTIVITY;
 =======
+=======
+>>>>>>> v3.18
 		port->actor_admin_port_state = AD_STATE_AGGREGATION |
 					       AD_STATE_LACP_ACTIVITY;
 		port->actor_oper_port_state  = AD_STATE_AGGREGATION |
 					       AD_STATE_LACP_ACTIVITY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (lacp_fast)
@@ -2599,7 +3067,11 @@ static void ad_initialize_port(struct port *port, int lacp_fast)
 
 		port->is_enabled = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// ****** private parameters ******
+=======
+		/* private parameters */
+>>>>>>> v3.18
 =======
 		/* private parameters */
 >>>>>>> v3.18
@@ -2625,17 +3097,23 @@ static void ad_initialize_port(struct port *port, int lacp_fast)
  * ad_enable_collecting_distributing - enable a port's transmit/receive
  * @port: the port we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Enable @port if it's in an active aggregator
  */
 static void ad_enable_collecting_distributing(struct port *port)
 =======
+=======
+>>>>>>> v3.18
  * @update_slave_arr: Does slave array need update?
  *
  * Enable @port if it's in an active aggregator
  */
 static void ad_enable_collecting_distributing(struct port *port,
 					      bool *update_slave_arr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (port->aggregator->is_active) {
@@ -2644,6 +3122,11 @@ static void ad_enable_collecting_distributing(struct port *port,
 			 port->aggregator->aggregator_identifier);
 		__enable_port(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* Slave array needs update */
+		*update_slave_arr = true;
+>>>>>>> v3.18
 =======
 		/* Slave array needs update */
 		*update_slave_arr = true;
@@ -2655,12 +3138,15 @@ static void ad_enable_collecting_distributing(struct port *port,
  * ad_disable_collecting_distributing - disable a port's transmit/receive
  * @port: the port we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  */
 static void ad_disable_collecting_distributing(struct port *port)
 {
 	if (port->aggregator && MAC_ADDRESS_COMPARE(&(port->aggregator->partner_system), &(null_mac_addr))) {
 =======
+=======
+>>>>>>> v3.18
  * @update_slave_arr: Does slave array need update?
  */
 static void ad_disable_collecting_distributing(struct port *port,
@@ -2669,11 +3155,15 @@ static void ad_disable_collecting_distributing(struct port *port,
 	if (port->aggregator &&
 	    !MAC_ADDRESS_EQUAL(&(port->aggregator->partner_system),
 			       &(null_mac_addr))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_debug("Disabling port %d(LAG %d)\n",
 			 port->actor_port_number,
 			 port->aggregator->aggregator_identifier);
 		__disable_port(port);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 }
@@ -2721,18 +3211,26 @@ static void ad_marker_info_send(struct port *port)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 		/* Slave array needs an update */
 		*update_slave_arr = true;
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * ad_marker_info_received - handle receive of a Marker information frame
  * @marker_info: Marker info received
  * @port: the port we're looking at
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -2742,6 +3240,7 @@ static void ad_marker_info_received(struct bond_marker *marker_info,
 	struct bond_marker marker;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// copy the received marker data to the response marker
 	//marker = *marker_info;
 	memcpy(&marker, marker_info, sizeof(struct bond_marker));
@@ -2750,12 +3249,17 @@ static void ad_marker_info_received(struct bond_marker *marker_info,
 	// send the marker response
 
 =======
+=======
+>>>>>>> v3.18
 	/* copy the received marker data to the response marker */
 	memcpy(&marker, marker_info, sizeof(struct bond_marker));
 	/* change the marker subtype to marker response */
 	marker.tlv_type = AD_MARKER_RESPONSE_SUBTYPE;
 
 	/* send the marker response */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ad_marker_send(port, &marker) >= 0) {
 		pr_debug("Sent Marker Response on port %d\n",
@@ -2774,6 +3278,7 @@ static void ad_marker_info_received(struct bond_marker *marker_info,
  */
 static void ad_marker_response_received(struct bond_marker *marker,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct port *port)
 {
 	marker = NULL; /* just to satisfy the compiler */
@@ -2791,6 +3296,8 @@ static void ad_marker_response_received(struct bond_marker *marker,
 /*
  * bond_3ad_initiate_agg_selection(struct bonding *bond)
 =======
+=======
+>>>>>>> v3.18
 					struct port *port)
 {
 	marker = NULL;
@@ -2806,6 +3313,9 @@ static void ad_marker_response_received(struct bond_marker *marker,
 /**
  * bond_3ad_initiate_agg_selection - initate aggregator selection
  * @bond: bonding struct
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Set the aggregation selection timer, to initiate an agg selection in
@@ -2827,8 +3337,13 @@ void bond_3ad_initiate_agg_selection(struct bonding *bond, int timeout)
 void bond_3ad_initialize(struct bonding *bond, u16 tick_resolution)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// check that the bond is not initialized yet
 	if (MAC_ADDRESS_COMPARE(&(BOND_AD_INFO(bond).system.sys_mac_addr),
+=======
+	/* check that the bond is not initialized yet */
+	if (!MAC_ADDRESS_EQUAL(&(BOND_AD_INFO(bond).system.sys_mac_addr),
+>>>>>>> v3.18
 =======
 	/* check that the bond is not initialized yet */
 	if (!MAC_ADDRESS_EQUAL(&(BOND_AD_INFO(bond).system.sys_mac_addr),
@@ -2841,7 +3356,13 @@ void bond_3ad_initialize(struct bonding *bond, u16 tick_resolution)
 		BOND_AD_INFO(bond).system.sys_mac_addr = *((struct mac_addr *)bond->dev->dev_addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// initialize how many times this module is called in one second(should be about every 100ms)
+=======
+		/* initialize how many times this module is called in one
+		 * second (should be about every 100ms)
+		 */
+>>>>>>> v3.18
 =======
 		/* initialize how many times this module is called in one
 		 * second (should be about every 100ms)
@@ -2863,7 +3384,11 @@ void bond_3ad_initialize(struct bonding *bond, u16 tick_resolution)
  *          < 0 on error
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int bond_3ad_bind_slave(struct slave *slave)
+=======
+void bond_3ad_bind_slave(struct slave *slave)
+>>>>>>> v3.18
 =======
 void bond_3ad_bind_slave(struct slave *slave)
 >>>>>>> v3.18
@@ -2872,6 +3397,7 @@ void bond_3ad_bind_slave(struct slave *slave)
 	struct port *port;
 	struct aggregator *aggregator;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (bond == NULL) {
 		pr_err("%s: The slave %s is not attached to its bond\n",
@@ -2906,6 +3432,8 @@ void bond_3ad_bind_slave(struct slave *slave)
 		port->actor_system = BOND_AD_INFO(bond).system.sys_mac_addr;
 		// tx timer(to verify that no more than MAX_TX_IN_SECOND lacpdu's are sent in one second)
 =======
+=======
+>>>>>>> v3.18
 	/* check that the slave has not been initialized yet. */
 	if (SLAVE_AD_INFO(slave)->port.slave != slave) {
 
@@ -2933,6 +3461,9 @@ void bond_3ad_bind_slave(struct slave *slave)
 		/* tx timer(to verify that no more than MAX_TX_IN_SECOND
 		 * lacpdu's are sent in one second)
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		port->sm_tx_timer_counter = ad_ticks_per_sec/AD_MAX_TX_IN_SECOND;
 		port->aggregator = NULL;
@@ -2941,8 +3472,13 @@ void bond_3ad_bind_slave(struct slave *slave)
 		__disable_port(port);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// aggregator initialization
 		aggregator = &(SLAVE_AD_INFO(slave).aggregator);
+=======
+		/* aggregator initialization */
+		aggregator = &(SLAVE_AD_INFO(slave)->aggregator);
+>>>>>>> v3.18
 =======
 		/* aggregator initialization */
 		aggregator = &(SLAVE_AD_INFO(slave)->aggregator);
@@ -2957,8 +3493,11 @@ void bond_3ad_bind_slave(struct slave *slave)
 		aggregator->num_of_ports = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -2977,6 +3516,7 @@ void bond_3ad_unbind_slave(struct slave *slave)
 	struct aggregator *aggregator, *new_aggregator, *temp_aggregator;
 	int select_new_active_agg = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	// find the aggregator related to this slave
 	aggregator = &(SLAVE_AD_INFO(slave).aggregator);
@@ -2994,6 +3534,8 @@ void bond_3ad_unbind_slave(struct slave *slave)
 	pr_debug("Unbinding Link Aggregation Group %d\n",
 		 aggregator->aggregator_identifier);
 =======
+=======
+>>>>>>> v3.18
 	struct bonding *bond = slave->bond;
 	struct slave *slave_iter;
 	struct list_head *iter;
@@ -3013,6 +3555,9 @@ void bond_3ad_unbind_slave(struct slave *slave)
 
 	netdev_dbg(bond->dev, "Unbinding Link Aggregation Group %d\n",
 		   aggregator->aggregator_identifier);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Tell the partner that this port is not suitable for aggregation */
@@ -3020,6 +3565,7 @@ void bond_3ad_unbind_slave(struct slave *slave)
 	__update_lacpdu_from_port(port);
 	ad_lacpdu_send(port);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// check if this aggregator is occupied
 	if (aggregator->lag_ports) {
@@ -3048,6 +3594,8 @@ void bond_3ad_unbind_slave(struct slave *slave)
 						aggregator->slave->bond->dev->name);
 					// select new active aggregator
 =======
+=======
+>>>>>>> v3.18
 	/* check if this aggregator is occupied */
 	if (aggregator->lag_ports) {
 		/* check if there are other ports related to this aggregator
@@ -3083,6 +3631,9 @@ void bond_3ad_unbind_slave(struct slave *slave)
 				if ((new_aggregator->lag_ports == port) &&
 				    new_aggregator->is_active) {
 					netdev_info(bond->dev, "Removing an active aggregator\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 select_new_active_agg = 1;
 				}
@@ -3100,7 +3651,13 @@ void bond_3ad_unbind_slave(struct slave *slave)
 				new_aggregator->num_of_ports = aggregator->num_of_ports;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// update the information that is written on the ports about the aggregator
+=======
+				/* update the information that is written on
+				 * the ports about the aggregator
+				 */
+>>>>>>> v3.18
 =======
 				/* update the information that is written on
 				 * the ports about the aggregator
@@ -3112,6 +3669,7 @@ void bond_3ad_unbind_slave(struct slave *slave)
 					temp_port->actor_port_aggregator_identifier = new_aggregator->aggregator_identifier;
 				}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				// clear the aggregator
 				ad_clear_agg(aggregator);
@@ -3132,6 +3690,8 @@ void bond_3ad_unbind_slave(struct slave *slave)
 				// select new active aggregator
 				ad_agg_selection_logic(__get_first_agg(port));
 =======
+=======
+>>>>>>> v3.18
 				ad_clear_agg(aggregator);
 
 				if (select_new_active_agg)
@@ -3153,11 +3713,15 @@ void bond_3ad_unbind_slave(struct slave *slave)
 				if (temp_aggregator)
 					ad_agg_selection_logic(temp_aggregator,
 							       &dummy_slave_update);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pr_debug("Unbinding port %d\n", port->actor_port_number);
 	// find the aggregator that this port is connected to
@@ -3170,6 +3734,8 @@ void bond_3ad_unbind_slave(struct slave *slave)
 			     temp_port = temp_port->next_port_in_aggregator) {
 			if (temp_port == port) { // the aggregator found - detach the port from this aggregator
 =======
+=======
+>>>>>>> v3.18
 	netdev_dbg(bond->dev, "Unbinding port %d\n", port->actor_port_number);
 
 	/* find the aggregator that this port is connected to */
@@ -3184,6 +3750,9 @@ void bond_3ad_unbind_slave(struct slave *slave)
 				/* the aggregator found - detach the port from
 				 * this aggregator
 				 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (prev_port)
 					prev_port->next_port_in_aggregator = temp_port->next_port_in_aggregator;
@@ -3193,6 +3762,7 @@ void bond_3ad_unbind_slave(struct slave *slave)
 				if (temp_aggregator->num_of_ports == 0) {
 					select_new_active_agg = temp_aggregator->is_active;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					// clear the aggregator
 					ad_clear_agg(temp_aggregator);
 					if (select_new_active_agg) {
@@ -3201,12 +3771,17 @@ void bond_3ad_unbind_slave(struct slave *slave)
 						// select new active aggregator
 						ad_agg_selection_logic(__get_first_agg(port));
 =======
+=======
+>>>>>>> v3.18
 					ad_clear_agg(temp_aggregator);
 					if (select_new_active_agg) {
 						netdev_info(bond->dev, "Removing an active aggregator\n");
 						/* select new active aggregator */
 						ad_agg_selection_logic(__get_first_agg(port),
 							               &dummy_slave_update);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					}
 				}
@@ -3216,6 +3791,12 @@ void bond_3ad_unbind_slave(struct slave *slave)
 	}
 	port->slave = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+out:
+	spin_unlock_bh(&bond->mode_lock);
+>>>>>>> v3.18
 =======
 
 out:
@@ -3241,6 +3822,7 @@ void bond_3ad_state_machine_handler(struct work_struct *work)
 	struct bonding *bond = container_of(work, struct bonding,
 					    ad_work.work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct port *port;
 	struct aggregator *aggregator;
 
@@ -3258,6 +3840,8 @@ void bond_3ad_state_machine_handler(struct work_struct *work)
 				pr_warning("%s: Warning: bond's first port is uninitialized\n",
 					   bond->dev->name);
 =======
+=======
+>>>>>>> v3.18
 	struct aggregator *aggregator;
 	struct list_head *iter;
 	struct slave *slave;
@@ -3287,13 +3871,20 @@ void bond_3ad_state_machine_handler(struct work_struct *work)
 			if (!port->slave) {
 				net_warn_ratelimited("%s: Warning: bond's first port is uninitialized\n",
 						     bond->dev->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				goto re_arm;
 			}
 
 			aggregator = __get_first_agg(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ad_agg_selection_logic(aggregator);
+=======
+			ad_agg_selection_logic(aggregator, &update_slave_arr);
+>>>>>>> v3.18
 =======
 			ad_agg_selection_logic(aggregator, &update_slave_arr);
 >>>>>>> v3.18
@@ -3301,6 +3892,7 @@ void bond_3ad_state_machine_handler(struct work_struct *work)
 		bond_3ad_set_carrier(bond);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// for each port run the state machines
 	for (port = __get_first_port(bond); port; port = __get_next_port(port)) {
@@ -3334,6 +3926,8 @@ re_arm:
 
 	read_unlock(&bond->lock);
 =======
+=======
+>>>>>>> v3.18
 	/* for each port run the state machines */
 	bond_for_each_slave_rcu(bond, slave, iter) {
 		port = &(SLAVE_AD_INFO(slave)->port);
@@ -3372,6 +3966,9 @@ re_arm:
 		rtnl_unlock();
 	}
 	queue_delayed_work(bond->wq, &bond->ad_work, ad_delta_in_ticks);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3386,7 +3983,12 @@ re_arm:
  * function, it check for loopback.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bond_3ad_rx_indication(struct lacpdu *lacpdu, struct slave *slave, u16 length)
+=======
+static int bond_3ad_rx_indication(struct lacpdu *lacpdu, struct slave *slave,
+				  u16 length)
+>>>>>>> v3.18
 =======
 static int bond_3ad_rx_indication(struct lacpdu *lacpdu, struct slave *slave,
 				  u16 length)
@@ -3398,17 +4000,23 @@ static int bond_3ad_rx_indication(struct lacpdu *lacpdu, struct slave *slave,
 	if (length >= sizeof(struct lacpdu)) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		port = &(SLAVE_AD_INFO(slave).port);
 
 		if (!port->slave) {
 			pr_warning("%s: Warning: port of slave %s is uninitialized\n",
 				   slave->dev->name, slave->bond->dev->name);
 =======
+=======
+>>>>>>> v3.18
 		port = &(SLAVE_AD_INFO(slave)->port);
 
 		if (!port->slave) {
 			net_warn_ratelimited("%s: Warning: port of slave %s is uninitialized\n",
 					     slave->dev->name, slave->bond->dev->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return ret;
 		}
@@ -3417,6 +4025,7 @@ static int bond_3ad_rx_indication(struct lacpdu *lacpdu, struct slave *slave,
 		case AD_TYPE_LACPDU:
 			ret = RX_HANDLER_CONSUMED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_debug("Received LACPDU on port %d\n",
 				 port->actor_port_number);
 			/* Protect against concurrent state machines */
@@ -3424,17 +4033,23 @@ static int bond_3ad_rx_indication(struct lacpdu *lacpdu, struct slave *slave,
 			ad_rx_machine(lacpdu, port);
 			__release_state_machine_lock(port);
 =======
+=======
+>>>>>>> v3.18
 			netdev_dbg(slave->bond->dev, "Received LACPDU on port %d\n",
 				   port->actor_port_number);
 			/* Protect against concurrent state machines */
 			spin_lock(&slave->bond->mode_lock);
 			ad_rx_machine(lacpdu, port);
 			spin_unlock(&slave->bond->mode_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
 		case AD_TYPE_MARKER:
 			ret = RX_HANDLER_CONSUMED;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			// No need to convert fields to Little Endian since we don't use the marker's fields.
 
@@ -3443,6 +4058,8 @@ static int bond_3ad_rx_indication(struct lacpdu *lacpdu, struct slave *slave,
 				pr_debug("Received Marker Information on port %d\n",
 					 port->actor_port_number);
 =======
+=======
+>>>>>>> v3.18
 			/* No need to convert fields to Little Endian since we
 			 * don't use the marker's fields.
 			 */
@@ -3451,14 +4068,22 @@ static int bond_3ad_rx_indication(struct lacpdu *lacpdu, struct slave *slave,
 			case AD_MARKER_INFORMATION_SUBTYPE:
 				netdev_dbg(slave->bond->dev, "Received Marker Information on port %d\n",
 					   port->actor_port_number);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				ad_marker_info_received((struct bond_marker *)lacpdu, port);
 				break;
 
 			case AD_MARKER_RESPONSE_SUBTYPE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_debug("Received Marker Response on port %d\n",
 					 port->actor_port_number);
+=======
+				netdev_dbg(slave->bond->dev, "Received Marker Response on port %d\n",
+					   port->actor_port_number);
+>>>>>>> v3.18
 =======
 				netdev_dbg(slave->bond->dev, "Received Marker Response on port %d\n",
 					   port->actor_port_number);
@@ -3468,8 +4093,13 @@ static int bond_3ad_rx_indication(struct lacpdu *lacpdu, struct slave *slave,
 
 			default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_debug("Received an unknown Marker subtype on slot %d\n",
 					 port->actor_port_number);
+=======
+				netdev_dbg(slave->bond->dev, "Received an unknown Marker subtype on slot %d\n",
+					   port->actor_port_number);
+>>>>>>> v3.18
 =======
 				netdev_dbg(slave->bond->dev, "Received an unknown Marker subtype on slot %d\n",
 					   port->actor_port_number);
@@ -3491,6 +4121,7 @@ void bond_3ad_adapter_speed_changed(struct slave *slave)
 	struct port *port;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port = &(SLAVE_AD_INFO(slave).port);
 
 	// if slave is null, the whole port is not initialized
@@ -3508,6 +4139,8 @@ void bond_3ad_adapter_speed_changed(struct slave *slave)
 	// state machines to reinitialize
 	port->sm_vars |= AD_PORT_BEGIN;
 =======
+=======
+>>>>>>> v3.18
 	port = &(SLAVE_AD_INFO(slave)->port);
 
 	/* if slave is null, the whole port is not initialized */
@@ -3529,6 +4162,9 @@ void bond_3ad_adapter_speed_changed(struct slave *slave)
 	port->sm_vars |= AD_PORT_BEGIN;
 
 	spin_unlock_bh(&slave->bond->mode_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3542,6 +4178,7 @@ void bond_3ad_adapter_duplex_changed(struct slave *slave)
 {
 	struct port *port;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	port = &(SLAVE_AD_INFO(slave).port);
 
@@ -3560,6 +4197,8 @@ void bond_3ad_adapter_duplex_changed(struct slave *slave)
 	// state machines to reinitialize
 	port->sm_vars |= AD_PORT_BEGIN;
 =======
+=======
+>>>>>>> v3.18
 	port = &(SLAVE_AD_INFO(slave)->port);
 
 	/* if slave is null, the whole port is not initialized */
@@ -3581,6 +4220,9 @@ void bond_3ad_adapter_duplex_changed(struct slave *slave)
 	port->sm_vars |= AD_PORT_BEGIN;
 
 	spin_unlock_bh(&slave->bond->mode_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3596,6 +4238,7 @@ void bond_3ad_handle_link_change(struct slave *slave, char link)
 	struct port *port;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port = &(SLAVE_AD_INFO(slave).port);
 
 	// if slave is null, the whole port is not initialized
@@ -3608,6 +4251,8 @@ void bond_3ad_handle_link_change(struct slave *slave, char link)
 	// on link down we are zeroing duplex and speed since some of the adaptors(ce1000.lan) report full duplex/speed instead of N/A(duplex) / 0(speed)
 	// on link up we are forcing recheck on the duplex and speed since some of he adaptors(ce1000.lan) report
 =======
+=======
+>>>>>>> v3.18
 	port = &(SLAVE_AD_INFO(slave)->port);
 
 	/* if slave is null, the whole port is not initialized */
@@ -3625,6 +4270,9 @@ void bond_3ad_handle_link_change(struct slave *slave, char link)
 	 * on link up we are forcing recheck on the duplex and speed since
 	 * some of he adaptors(ce1000.lan) report.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (link == BOND_LINK_UP) {
 		port->is_enabled = true;
@@ -3642,6 +4290,7 @@ void bond_3ad_handle_link_change(struct slave *slave, char link)
 					     ~AD_SPEED_KEY_BITS);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//BOND_PRINT_DBG(("Port %d changed link status to %s", port->actor_port_number, ((link == BOND_LINK_UP)?"UP":"DOWN")));
 	// there is no need to reselect a new aggregator, just signal the
 	// state machines to reinitialize
@@ -3653,6 +4302,8 @@ void bond_3ad_handle_link_change(struct slave *slave, char link)
  * aggregator, we're up, if not, we're down.  Presumes that we cannot
  * have an active aggregator if there are no slaves with link up.
 =======
+=======
+>>>>>>> v3.18
 	netdev_dbg(slave->bond->dev, "Port %d changed link status to %s\n",
 		   port->actor_port_number,
 		   link == BOND_LINK_UP ? "UP" : "DOWN");
@@ -3676,6 +4327,9 @@ void bond_3ad_handle_link_change(struct slave *slave, char link)
  * if we have an active aggregator, we're up, if not, we're down.
  * Presumes that we cannot have an active aggregator if there are
  * no slaves with link up.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This behavior complies with IEEE 802.3 section 43.3.9.
@@ -3687,9 +4341,12 @@ int bond_3ad_set_carrier(struct bonding *bond)
 {
 	struct aggregator *active;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	active = __get_active_agg(&(SLAVE_AD_INFO(bond->first_slave).aggregator));
 =======
+=======
+>>>>>>> v3.18
 	struct slave *first_slave;
 	int ret = 1;
 
@@ -3700,12 +4357,16 @@ int bond_3ad_set_carrier(struct bonding *bond)
 		goto out;
 	}
 	active = __get_active_agg(&(SLAVE_AD_INFO(first_slave)->aggregator));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (active) {
 		/* are enough slaves available to consider link up? */
 		if (active->num_of_ports < bond->params.min_links) {
 			if (netif_carrier_ok(bond->dev)) {
 				netif_carrier_off(bond->dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 				return 1;
 			}
@@ -3722,6 +4383,8 @@ int bond_3ad_set_carrier(struct bonding *bond)
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 				goto out;
 			}
 		} else if (!netif_carrier_ok(bond->dev)) {
@@ -3734,6 +4397,9 @@ int bond_3ad_set_carrier(struct bonding *bond)
 out:
 	rcu_read_unlock();
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3750,16 +4416,22 @@ int __bond_3ad_get_active_agg_info(struct bonding *bond,
 {
 	struct aggregator *aggregator = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct port *port;
 
 	for (port = __get_first_port(bond); port; port = __get_next_port(port)) {
 =======
+=======
+>>>>>>> v3.18
 	struct list_head *iter;
 	struct slave *slave;
 	struct port *port;
 
 	bond_for_each_slave_rcu(bond, slave, iter) {
 		port = &(SLAVE_AD_INFO(slave)->port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (port->aggregator && port->aggregator->is_active) {
 			aggregator = port->aggregator;
@@ -3767,6 +4439,7 @@ int __bond_3ad_get_active_agg_info(struct bonding *bond,
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (aggregator) {
 		ad_info->aggregator_id = aggregator->aggregator_identifier;
@@ -3782,6 +4455,8 @@ int __bond_3ad_get_active_agg_info(struct bonding *bond,
 
 /* Wrapper used to hold bond->lock so no slave manipulation can occur */
 =======
+=======
+>>>>>>> v3.18
 	if (!aggregator)
 		return -1;
 
@@ -3794,11 +4469,15 @@ int __bond_3ad_get_active_agg_info(struct bonding *bond,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int bond_3ad_get_active_agg_info(struct bonding *bond, struct ad_info *ad_info)
 {
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	read_lock(&bond->lock);
 	ret = __bond_3ad_get_active_agg_info(bond, ad_info);
@@ -3906,6 +4585,15 @@ int bond_3ad_lacpdu_recv(const struct sk_buff *skb, struct bonding *bond,
  *
  * Hold slave->state_machine_lock,
 =======
+=======
+	rcu_read_lock();
+	ret = __bond_3ad_get_active_agg_info(bond, ad_info);
+	rcu_read_unlock();
+
+	return ret;
+}
+
+>>>>>>> v3.18
 int bond_3ad_lacpdu_recv(const struct sk_buff *skb, struct bonding *bond,
 			 struct slave *slave)
 {
@@ -3929,12 +4617,16 @@ int bond_3ad_lacpdu_recv(const struct sk_buff *skb, struct bonding *bond,
  * update actor_oper_port_state of each port.
  *
  * Hold bond->mode_lock,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * so we can modify port->actor_oper_port_state,
  * no matter bond is up or down.
  */
 void bond_3ad_update_lacp_rate(struct bonding *bond)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 	struct slave *slave;
@@ -3950,6 +4642,8 @@ void bond_3ad_update_lacp_rate(struct bonding *bond)
 			continue;
 		__get_state_machine_lock(port);
 =======
+=======
+>>>>>>> v3.18
 	struct port *port = NULL;
 	struct list_head *iter;
 	struct slave *slave;
@@ -3959,16 +4653,24 @@ void bond_3ad_update_lacp_rate(struct bonding *bond)
 	spin_lock_bh(&bond->mode_lock);
 	bond_for_each_slave(bond, slave, iter) {
 		port = &(SLAVE_AD_INFO(slave)->port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (lacp_fast)
 			port->actor_oper_port_state |= AD_STATE_LACP_TIMEOUT;
 		else
 			port->actor_oper_port_state &= ~AD_STATE_LACP_TIMEOUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__release_state_machine_lock(port);
 	}
 
 	write_unlock_bh(&bond->lock);
+=======
+	}
+	spin_unlock_bh(&bond->mode_lock);
+>>>>>>> v3.18
 =======
 	}
 	spin_unlock_bh(&bond->mode_lock);

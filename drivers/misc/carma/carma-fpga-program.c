@@ -11,6 +11,11 @@
 
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -20,6 +25,10 @@
 #include <linux/miscdevice.h>
 #include <linux/dmaengine.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/fsldma.h>
+>>>>>>> v3.18
 =======
 #include <linux/fsldma.h>
 >>>>>>> v3.18
@@ -526,8 +535,12 @@ static noinline int fpga_program_dma(struct fpga_dev *priv)
 	config.dst_addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
 	config.dst_maxburst = fpga_fifo_size(priv->regs) / 2 / 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = chan->device->device_control(chan, DMA_SLAVE_CONFIG,
 					   (unsigned long)&config);
+=======
+	ret = dmaengine_slave_config(chan, &config);
+>>>>>>> v3.18
 =======
 	ret = dmaengine_slave_config(chan, &config);
 >>>>>>> v3.18
@@ -537,7 +550,11 @@ static noinline int fpga_program_dma(struct fpga_dev *priv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = chan->device->device_control(chan, FSLDMA_EXTERNAL_START, 1);
+=======
+	ret = fsl_dma_external_start(chan, 1)
+>>>>>>> v3.18
 =======
 	ret = fsl_dma_external_start(chan, 1)
 >>>>>>> v3.18
@@ -548,9 +565,15 @@ static noinline int fpga_program_dma(struct fpga_dev *priv)
 
 	/* setup and submit the DMA transaction */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tx = chan->device->device_prep_dma_sg(chan,
 					      table.sgl, num_pages,
 					      vb->sglist, vb->sglen, 0);
+=======
+
+	tx = dmaengine_prep_dma_sg(chan, table.sgl, num_pages,
+			vb->sglist, vb->sglen, 0);
+>>>>>>> v3.18
 =======
 
 	tx = dmaengine_prep_dma_sg(chan, table.sgl, num_pages,
@@ -771,6 +794,7 @@ static ssize_t fpga_read(struct file *filp, char __user *buf, size_t count,
 {
 	struct fpga_dev *priv = filp->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	count = min_t(size_t, priv->bytes - *f_pos, count);
 	if (copy_to_user(buf, priv->vb.vaddr + *f_pos, count))
@@ -778,6 +802,10 @@ static ssize_t fpga_read(struct file *filp, char __user *buf, size_t count,
 
 	*f_pos += count;
 	return count;
+=======
+	return simple_read_from_buffer(buf, count, ppos,
+				       priv->vb.vaddr, priv->bytes);
+>>>>>>> v3.18
 =======
 	return simple_read_from_buffer(buf, count, ppos,
 				       priv->vb.vaddr, priv->bytes);
@@ -793,6 +821,7 @@ static loff_t fpga_llseek(struct file *filp, loff_t offset, int origin)
 	if ((filp->f_flags & O_ACCMODE) != O_RDONLY)
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch (origin) {
 	case SEEK_SET: /* seek relative to the beginning of the file */
@@ -814,6 +843,9 @@ static loff_t fpga_llseek(struct file *filp, loff_t offset, int origin)
 
 	filp->f_pos = newpos;
 	return newpos;
+=======
+	return fixed_size_llseek(file, offset, origin, priv->fw_size);
+>>>>>>> v3.18
 =======
 	return fixed_size_llseek(file, offset, origin, priv->fw_size);
 >>>>>>> v3.18
@@ -863,8 +895,14 @@ static ssize_t penable_store(struct device *dev, struct device_attribute *attr,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val))
 		return -EINVAL;
+=======
+	ret = kstrtoul(buf, 0, &val);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 0, &val);
 	if (ret)
@@ -898,8 +936,14 @@ static ssize_t program_store(struct device *dev, struct device_attribute *attr,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &val))
 		return -EINVAL;
+=======
+	ret = kstrtoul(buf, 0, &val);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 0, &val);
 	if (ret)
@@ -964,7 +1008,11 @@ static bool dma_filter(struct dma_chan *chan, void *data)
 static int fpga_of_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fpga_dev *priv = dev_get_drvdata(&op->dev);
+=======
+	struct fpga_dev *priv = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct fpga_dev *priv = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -1018,7 +1066,11 @@ static int fpga_of_probe(struct platform_device *op)
 	kref_init(&priv->ref);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, priv);
+=======
+	platform_set_drvdata(op, priv);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, priv);
 >>>>>>> v3.18

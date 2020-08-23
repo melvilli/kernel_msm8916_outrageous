@@ -157,7 +157,11 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 		ti->addr_limit = KERNEL_DS;
 		ti->status &= ~TS_USEDFPU;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p->fpu_counter = 0;
+=======
+		p->thread.fpu_counter = 0;
+>>>>>>> v3.18
 =======
 		p->thread.fpu_counter = 0;
 >>>>>>> v3.18
@@ -194,7 +198,11 @@ __switch_to(struct task_struct *prev, struct task_struct *next)
 
 	/* we're going to use this soon, after a few expensive things */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (next->fpu_counter > 5)
+=======
+	if (next->thread.fpu_counter > 5)
+>>>>>>> v3.18
 =======
 	if (next->thread.fpu_counter > 5)
 >>>>>>> v3.18
@@ -216,7 +224,11 @@ __switch_to(struct task_struct *prev, struct task_struct *next)
 	 * chances of needing FPU soon are obviously high now
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (next->fpu_counter > 5)
+=======
+	if (next->thread.fpu_counter > 5)
+>>>>>>> v3.18
 =======
 	if (next->thread.fpu_counter > 5)
 >>>>>>> v3.18

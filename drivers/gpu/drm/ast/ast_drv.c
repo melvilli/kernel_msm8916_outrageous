@@ -52,7 +52,11 @@ static struct drm_driver driver;
 	.driver_data = (unsigned long) info }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pciidlist) = {
+=======
+static const struct pci_device_id pciidlist[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pciidlist[] = {
 >>>>>>> v3.18
@@ -99,9 +103,13 @@ static int ast_drm_thaw(struct drm_device *dev)
 
 	drm_mode_config_reset(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_modeset_lock_all(dev);
 	drm_helper_resume_force_mode(dev);
 	drm_modeset_unlock_all(dev);
+=======
+	drm_helper_resume_force_mode(dev);
+>>>>>>> v3.18
 =======
 	drm_helper_resume_force_mode(dev);
 >>>>>>> v3.18
@@ -199,7 +207,10 @@ static const struct file_operations ast_fops = {
 	.mmap = ast_mmap,
 	.poll = drm_poll,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fasync = drm_fasync,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_COMPAT
@@ -210,17 +221,23 @@ static const struct file_operations ast_fops = {
 
 static struct drm_driver driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.driver_features = DRIVER_USE_MTRR | DRIVER_MODESET | DRIVER_GEM,
 	.dev_priv_size = 0,
 
 	.load = ast_driver_load,
 	.unload = ast_driver_unload,
 =======
+=======
+>>>>>>> v3.18
 	.driver_features = DRIVER_MODESET | DRIVER_GEM,
 
 	.load = ast_driver_load,
 	.unload = ast_driver_unload,
 	.set_busid = drm_pci_set_busid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.fops = &ast_fops,
@@ -232,16 +249,22 @@ static struct drm_driver driver = {
 	.patchlevel = DRIVER_PATCHLEVEL,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.gem_init_object = ast_gem_init_object,
 	.gem_free_object = ast_gem_free_object,
 	.dumb_create = ast_dumb_create,
 	.dumb_map_offset = ast_dumb_mmap_offset,
 	.dumb_destroy = ast_dumb_destroy,
 =======
+=======
+>>>>>>> v3.18
 	.gem_free_object = ast_gem_free_object,
 	.dumb_create = ast_dumb_create,
 	.dumb_map_offset = ast_dumb_mmap_offset,
 	.dumb_destroy = drm_gem_dumb_destroy,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 };

@@ -18,7 +18,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -194,7 +197,11 @@ exit:
 	if (retval)
 		dev_err(&port->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"%s - usb_submit_urb failed with result %d",
+=======
+			"%s - usb_submit_urb failed with result %d\n",
+>>>>>>> v3.18
 =======
 			"%s - usb_submit_urb failed with result %d\n",
 >>>>>>> v3.18
@@ -705,6 +712,7 @@ MODULE_FIRMWARE("keyspan_pda/xircom_pgs.fw");
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int keyspan_pda_attach(struct usb_serial *serial)
 {
 	unsigned char num_ports = serial->num_ports;
@@ -718,6 +726,8 @@ static int keyspan_pda_attach(struct usb_serial *serial)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int keyspan_pda_port_probe(struct usb_serial_port *port)
@@ -798,7 +808,10 @@ static struct usb_serial_driver keyspan_pda_device = {
 	.tiocmget =		keyspan_pda_tiocmget,
 	.tiocmset =		keyspan_pda_tiocmset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.attach =		keyspan_pda_attach,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.port_probe =		keyspan_pda_port_probe,

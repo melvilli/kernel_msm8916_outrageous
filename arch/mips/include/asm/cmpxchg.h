@@ -23,17 +23,23 @@ static inline unsigned long __xchg_u32(volatile int * m, unsigned int val)
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
 		"1:	ll	%0, %3			# xchg_u32	\n"
 		"	.set	mips0					\n"
 		"	move	%2, %z4					\n"
 		"	.set	mips3					\n"
 =======
+=======
+>>>>>>> v3.18
 		"	.set	arch=r4000				\n"
 		"1:	ll	%0, %3			# xchg_u32	\n"
 		"	.set	mips0					\n"
 		"	move	%2, %z4					\n"
 		"	.set	arch=r4000				\n"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		"	sc	%2, %1					\n"
 		"	beqzl	%2, 1b					\n"
@@ -47,17 +53,23 @@ static inline unsigned long __xchg_u32(volatile int * m, unsigned int val)
 		do {
 			__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"	.set	mips3				\n"
 			"	ll	%0, %3		# xchg_u32	\n"
 			"	.set	mips0				\n"
 			"	move	%2, %z4				\n"
 			"	.set	mips3				\n"
 =======
+=======
+>>>>>>> v3.18
 			"	.set	arch=r4000			\n"
 			"	ll	%0, %3		# xchg_u32	\n"
 			"	.set	mips0				\n"
 			"	move	%2, %z4				\n"
 			"	.set	arch=r4000			\n"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			"	sc	%2, %1				\n"
 			"	.set	mips0				\n"
@@ -91,7 +103,11 @@ static inline __u64 __xchg_u64(volatile __u64 * m, __u64 val)
 
 		__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3					\n"
+=======
+		"	.set	arch=r4000				\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000				\n"
 >>>>>>> v3.18
@@ -109,7 +125,11 @@ static inline __u64 __xchg_u64(volatile __u64 * m, __u64 val)
 		do {
 			__asm__ __volatile__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"	.set	mips3				\n"
+=======
+			"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 			"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -170,7 +190,11 @@ static inline unsigned long __xchg(unsigned long x, volatile void * ptr, int siz
 		"	.set	push				\n"	\
 		"	.set	noat				\n"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3				\n"	\
+=======
+		"	.set	arch=r4000			\n"	\
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000			\n"	\
 >>>>>>> v3.18
@@ -179,7 +203,11 @@ static inline unsigned long __xchg(unsigned long x, volatile void * ptr, int siz
 		"	.set	mips0				\n"	\
 		"	move	$1, %z4				\n"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3				\n"	\
+=======
+		"	.set	arch=r4000			\n"	\
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000			\n"	\
 >>>>>>> v3.18
@@ -195,7 +223,11 @@ static inline unsigned long __xchg(unsigned long x, volatile void * ptr, int siz
 		"	.set	push				\n"	\
 		"	.set	noat				\n"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3				\n"	\
+=======
+		"	.set	arch=r4000			\n"	\
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000			\n"	\
 >>>>>>> v3.18
@@ -204,7 +236,11 @@ static inline unsigned long __xchg(unsigned long x, volatile void * ptr, int siz
 		"	.set	mips0				\n"	\
 		"	move	$1, %z4				\n"	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3				\n"	\
+=======
+		"	.set	arch=r4000			\n"	\
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000			\n"	\
 >>>>>>> v3.18

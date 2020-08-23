@@ -146,7 +146,13 @@ static void __init octeon_wdt_build_stage1(void)
 	uasm_i_mfc0(&p, K0, C0_STATUS);
 #ifdef CONFIG_HOTPLUG_CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uasm_il_bbit0(&p, &r, K0, ilog2(ST0_NMI), label_enter_bootloader);
+=======
+	if (octeon_bootloader_entry_addr)
+		uasm_il_bbit0(&p, &r, K0, ilog2(ST0_NMI),
+			      label_enter_bootloader);
+>>>>>>> v3.18
 =======
 	if (octeon_bootloader_entry_addr)
 		uasm_il_bbit0(&p, &r, K0, ilog2(ST0_NMI),
@@ -158,6 +164,7 @@ static void __init octeon_wdt_build_stage1(void)
 	uasm_i_mtc0(&p, K0, C0_STATUS);
 
 #ifdef CONFIG_HOTPLUG_CPU
+<<<<<<< HEAD
 <<<<<<< HEAD
 	uasm_i_mfc0(&p, K0, C0_EBASE);
 	/* Coreid number in K0 */
@@ -182,6 +189,8 @@ static void __init octeon_wdt_build_stage1(void)
 	uasm_il_bbit0(&p, &r, K0, 1, label_enter_bootloader);
 	uasm_i_nop(&p);
 =======
+=======
+>>>>>>> v3.18
 	if (octeon_bootloader_entry_addr) {
 		uasm_i_mfc0(&p, K0, C0_EBASE);
 		/* Coreid number in K0 */
@@ -206,6 +215,9 @@ static void __init octeon_wdt_build_stage1(void)
 		uasm_il_bbit0(&p, &r, K0, 1, label_enter_bootloader);
 		uasm_i_nop(&p);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -228,12 +240,15 @@ static void __init octeon_wdt_build_stage1(void)
 
 #ifdef CONFIG_HOTPLUG_CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uasm_build_label(&l, p, label_enter_bootloader);
 	/* Jump to the bootloader and restore K0 */
 	UASM_i_LA(&p, K0, (long)octeon_bootloader_entry_addr);
 	uasm_i_jr(&p, K0);
 	uasm_i_dmfc0(&p, K0, C0_DESAVE);
 =======
+=======
+>>>>>>> v3.18
 	if (octeon_bootloader_entry_addr) {
 		uasm_build_label(&l, p, label_enter_bootloader);
 		/* Jump to the bootloader and restore K0 */
@@ -241,6 +256,9 @@ static void __init octeon_wdt_build_stage1(void)
 		uasm_i_jr(&p, K0);
 		uasm_i_dmfc0(&p, K0, C0_DESAVE);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	uasm_resolve_relocs(relocs, labels);
@@ -752,11 +770,14 @@ static int __init octeon_wdt_init(void)
 	cpumask_clear(&irq_enabled_cpus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_online_cpu(cpu)
 		octeon_wdt_setup_interrupt(cpu);
 
 	register_hotcpu_notifier(&octeon_wdt_cpu_notifier);
 =======
+=======
+>>>>>>> v3.18
 	cpu_notifier_register_begin();
 	for_each_online_cpu(cpu)
 		octeon_wdt_setup_interrupt(cpu);
@@ -764,6 +785,9 @@ static int __init octeon_wdt_init(void)
 	__register_hotcpu_notifier(&octeon_wdt_cpu_notifier);
 	cpu_notifier_register_done();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	return ret;
@@ -779,7 +803,12 @@ static void __exit octeon_wdt_cleanup(void)
 	misc_deregister(&octeon_wdt_miscdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_hotcpu_notifier(&octeon_wdt_cpu_notifier);
+=======
+	cpu_notifier_register_begin();
+	__unregister_hotcpu_notifier(&octeon_wdt_cpu_notifier);
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 	__unregister_hotcpu_notifier(&octeon_wdt_cpu_notifier);
@@ -793,6 +822,12 @@ static void __exit octeon_wdt_cleanup(void)
 		free_irq(OCTEON_IRQ_WDOG0 + core, octeon_wdt_poke_irq);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	cpu_notifier_register_done();
+
+>>>>>>> v3.18
 =======
 
 	cpu_notifier_register_done();

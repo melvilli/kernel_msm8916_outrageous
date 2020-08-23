@@ -52,8 +52,11 @@ struct ux500_msp_i2s_drvdata {
 	struct ux500_msp *msp;
 	struct regulator *reg_vape;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ux500_msp_dma_params playback_dma_data;
 	struct ux500_msp_dma_params capture_dma_data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int fmt;
@@ -62,8 +65,11 @@ struct ux500_msp_i2s_drvdata {
 	int slots;
 	int slot_width;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 configured;
 	int data_delay;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

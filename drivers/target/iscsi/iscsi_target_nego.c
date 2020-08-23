@@ -2,9 +2,13 @@
  * This file contains main functions related to iSCSI Parameter negotiation.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * \u00a9 Copyright 2007-2011 RisingTide Systems LLC.
  *
  * Licensed to the Linux Foundation under the General Public License (GPL) version 2.
+=======
+ * (c) Copyright 2007-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2007-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -24,7 +28,10 @@
 
 #include <linux/ctype.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kthread.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <scsi/iscsi_proto.h>
@@ -121,6 +128,10 @@ static u32 iscsi_handle_authentication(
 	struct iscsi_node_auth *auth;
 	struct iscsi_node_acl *iscsi_nacl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct iscsi_portal_group *iscsi_tpg;
+>>>>>>> v3.18
 =======
 	struct iscsi_portal_group *iscsi_tpg;
 >>>>>>> v3.18
@@ -145,8 +156,11 @@ static u32 iscsi_handle_authentication(
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auth = ISCSI_NODE_AUTH(iscsi_nacl);
 =======
+=======
+>>>>>>> v3.18
 		if (se_nacl->dynamic_node_acl) {
 			iscsi_tpg = container_of(se_nacl->se_tpg,
 					struct iscsi_portal_group, tpg_se_tpg);
@@ -158,6 +172,9 @@ static u32 iscsi_handle_authentication(
 
 			auth = &iscsi_nacl->node_auth;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/*
@@ -379,6 +396,7 @@ static int iscsi_target_do_tx_login_io(struct iscsi_conn *conn, struct iscsi_log
 
 	padding = ((-login->rsp_length) & 3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Before sending the last login response containing the transition
 	 * bit for full-feature-phase, go ahead and start up TX/RX threads
@@ -398,10 +416,15 @@ static int iscsi_target_do_tx_login_io(struct iscsi_conn *conn, struct iscsi_log
 					login->rsp_length + padding) < 0)
 		goto err;
 =======
+=======
+>>>>>>> v3.18
 
 	if (conn->conn_transport->iscsit_put_login_tx(conn, login,
 					login->rsp_length + padding) < 0)
 		return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	login->rsp_length		= 0;
@@ -411,6 +434,7 @@ static int iscsi_target_do_tx_login_io(struct iscsi_conn *conn, struct iscsi_log
 	mutex_unlock(&sess->cmdsn_mutex);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err:
@@ -442,6 +466,8 @@ static int iscsi_target_do_login_io(struct iscsi_conn *conn, struct iscsi_login 
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 }
 
 static void iscsi_target_sk_data_ready(struct sock *sk)
@@ -722,6 +748,9 @@ static void iscsi_target_sk_state_change(struct sock *sk)
 		return;
 	}
 	orig_state_change(sk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -844,13 +873,19 @@ static int iscsi_target_handle_csg_zero(
 
 		goto do_auth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else if (!payload_length) {
 		pr_err("Initiator sent zero length security payload,"
 		       " login failed\n");
 		iscsit_tx_login_rsp(conn, ISCSI_STATUS_CLS_INITIATOR_ERR,
 				    ISCSI_LOGIN_STATUS_AUTH_FAILED);
 		return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -869,7 +904,11 @@ static int iscsi_target_handle_csg_zero(
 
 	if (!iscsi_check_negotiated_keys(conn->param_list)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ISCSI_TPG_ATTRIB(ISCSI_TPG_C(conn))->authentication &&
+=======
+		if (conn->tpg->tpg_attrib.authentication &&
+>>>>>>> v3.18
 =======
 		if (conn->tpg->tpg_attrib.authentication &&
 >>>>>>> v3.18
@@ -883,7 +922,11 @@ static int iscsi_target_handle_csg_zero(
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ISCSI_TPG_ATTRIB(ISCSI_TPG_C(conn))->authentication &&
+=======
+		if (conn->tpg->tpg_attrib.authentication &&
+>>>>>>> v3.18
 =======
 		if (conn->tpg->tpg_attrib.authentication &&
 >>>>>>> v3.18
@@ -950,7 +993,11 @@ static int iscsi_target_handle_csg_one(struct iscsi_conn *conn, struct iscsi_log
 
 	if (!login->auth_complete &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     ISCSI_TPG_ATTRIB(ISCSI_TPG_C(conn))->authentication) {
+=======
+	     conn->tpg->tpg_attrib.authentication) {
+>>>>>>> v3.18
 =======
 	     conn->tpg->tpg_attrib.authentication) {
 >>>>>>> v3.18
@@ -1002,16 +1049,22 @@ static int iscsi_target_do_login(struct iscsi_conn *conn, struct iscsi_login *lo
 				login->tsih = conn->sess->tsih;
 				login->login_complete = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (iscsi_target_do_tx_login_io(conn,
 						login) < 0)
 					return -1;
 				return 0;
 =======
+=======
+>>>>>>> v3.18
 				iscsi_target_restore_sock_callbacks(conn);
 				if (iscsi_target_do_tx_login_io(conn,
 						login) < 0)
 					return -1;
 				return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			break;
@@ -1023,7 +1076,11 @@ static int iscsi_target_do_login(struct iscsi_conn *conn, struct iscsi_login *lo
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (iscsi_target_do_login_io(conn, login) < 0)
+=======
+		if (iscsi_target_do_tx_login_io(conn, login) < 0)
+>>>>>>> v3.18
 =======
 		if (iscsi_target_do_tx_login_io(conn, login) < 0)
 >>>>>>> v3.18
@@ -1034,7 +1091,10 @@ static int iscsi_target_do_login(struct iscsi_conn *conn, struct iscsi_login *lo
 			login_rsp->flags &= ~ISCSI_FLAG_LOGIN_NEXT_STAGE_MASK;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		break;
 	}
 
@@ -1051,6 +1111,9 @@ static int iscsi_target_do_login(struct iscsi_conn *conn, struct iscsi_login *lo
 				 " conn: %p\n", conn);
 			return -1;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1085,10 +1148,13 @@ int iscsi_target_locate_portal(
 	struct iscsi_session *sess = conn->sess;
 	struct iscsi_tiqn *tiqn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iscsi_login_req *login_req;
 	u32 payload_length;
 	int sessiontype = 0, ret = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct iscsi_tpg_np *tpg_np = NULL;
 	struct iscsi_login_req *login_req;
 	struct se_node_acl *se_nacl;
@@ -1100,6 +1166,9 @@ int iscsi_target_locate_portal(
 	iscsi_target_set_sock_callbacks(conn);
 
 	login->np = np;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	login_req = (struct iscsi_login_req *) login->req;
@@ -1195,7 +1264,11 @@ int iscsi_target_locate_portal(
 		}
 		ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		goto alloc_tags;
+>>>>>>> v3.18
 =======
 		goto alloc_tags;
 >>>>>>> v3.18
@@ -1230,7 +1303,11 @@ get_target:
 	 * Locate Target Portal Group from Storage Node.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	conn->tpg = iscsit_get_tpg_from_np(tiqn, np);
+=======
+	conn->tpg = iscsit_get_tpg_from_np(tiqn, np, &tpg_np);
+>>>>>>> v3.18
 =======
 	conn->tpg = iscsit_get_tpg_from_np(tiqn, np, &tpg_np);
 >>>>>>> v3.18
@@ -1244,6 +1321,10 @@ get_target:
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	conn->tpg_np = tpg_np;
+>>>>>>> v3.18
 =======
 	conn->tpg_np = tpg_np;
 >>>>>>> v3.18
@@ -1254,6 +1335,12 @@ get_target:
 	if (iscsi_login_setup_crypto(conn) < 0) {
 		pr_err("iscsi_login_setup_crypto() failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		kref_put(&tpg_np->tpg_np_kref, iscsit_login_kref_put);
+		iscsit_put_tiqn_for_login(tiqn);
+		conn->tpg = NULL;
+>>>>>>> v3.18
 =======
 		kref_put(&tpg_np->tpg_np_kref, iscsit_login_kref_put);
 		iscsit_put_tiqn_for_login(tiqn);
@@ -1268,18 +1355,24 @@ get_target:
 	 */
 	if (iscsit_access_np(np, conn->tpg) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iscsit_put_tiqn_for_login(tiqn);
 		iscsit_tx_login_rsp(conn, ISCSI_STATUS_CLS_TARGET_ERR,
 				ISCSI_LOGIN_STATUS_SVC_UNAVAILABLE);
 		ret = -1;
 		conn->tpg = NULL;
 =======
+=======
+>>>>>>> v3.18
 		kref_put(&tpg_np->tpg_np_kref, iscsit_login_kref_put);
 		iscsit_put_tiqn_for_login(tiqn);
 		iscsit_tx_login_rsp(conn, ISCSI_STATUS_CLS_TARGET_ERR,
 				ISCSI_LOGIN_STATUS_SVC_UNAVAILABLE);
 		conn->tpg = NULL;
 		ret = -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -1314,9 +1407,12 @@ get_target:
 		goto out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = 0;
 =======
+=======
+>>>>>>> v3.18
 	se_nacl = sess->se_sess->se_node_acl;
 	queue_depth = se_nacl->queue_depth;
 	/*
@@ -1338,6 +1434,9 @@ alloc_tags:
 				    ISCSI_LOGIN_STATUS_NO_RESOURCES);
 		ret = -1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	kfree(tmpbuf);
@@ -1352,11 +1451,14 @@ int iscsi_target_start_negotiation(
 
 	ret = iscsi_target_do_login(conn, login);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret != 0)
 		iscsi_remove_failed_auth_entry(conn);
 
 	iscsi_target_nego_release(conn);
 =======
+=======
+>>>>>>> v3.18
 	if (!ret) {
 		if (conn->sock) {
 			struct sock *sk = conn->sock->sk;
@@ -1374,6 +1476,9 @@ int iscsi_target_start_negotiation(
 	if (ret != 0)
 		iscsi_target_nego_release(conn);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }

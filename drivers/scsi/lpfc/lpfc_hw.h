@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2011 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -50,6 +54,10 @@
 #define LPFC_ELS_RING            2	/* ring 2 for ELS commands */
 #define LPFC_FCP_NEXT_RING       3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define LPFC_FCP_OAS_RING        3
+>>>>>>> v3.18
 =======
 #define LPFC_FCP_OAS_RING        3
 >>>>>>> v3.18

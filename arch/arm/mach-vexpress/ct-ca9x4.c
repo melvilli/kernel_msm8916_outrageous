@@ -9,6 +9,10 @@
 #include <linux/amba/bus.h>
 #include <linux/amba/clcd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/video-clcd-versatile.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/video-clcd-versatile.h>
 >>>>>>> v3.18
@@ -34,8 +38,11 @@
 #include <mach/irqs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/clcd.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct map_desc ct_ca9x4_io_desc[] __initdata = {
@@ -53,7 +60,10 @@ static void __init ct_ca9x4_map_io(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init ca9x4_l2_init(void)
 {
 #ifdef CONFIG_CACHE_L2X0
@@ -71,6 +81,9 @@ static void __init ca9x4_l2_init(void)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_HAVE_ARM_TWD
 static DEFINE_TWD_LOCAL_TIMER(twd_local_timer, A9_MPCORE_TWD, IRQ_LOCALTIMER);
@@ -91,6 +104,10 @@ static void __init ct_ca9x4_init_irq(void)
 		 ioremap(A9_MPCORE_GIC_CPU, SZ_256));
 	ca9x4_twd_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ca9x4_l2_init();
+>>>>>>> v3.18
 =======
 	ca9x4_l2_init();
 >>>>>>> v3.18
@@ -160,11 +177,17 @@ static struct platform_device pmu_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct clk_lookup osc1_lookup = {
 	.dev_id		= "ct:clcd",
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_device osc1_device = {
 	.name		= "vexpress-osc",
@@ -174,6 +197,10 @@ static struct platform_device osc1_device = {
 		VEXPRESS_RES_FUNC(0xf, 1),
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.dev.platform_data = &osc1_lookup,
+>>>>>>> v3.18
 =======
 	.dev.platform_data = &osc1_lookup,
 >>>>>>> v3.18
@@ -183,6 +210,7 @@ static void __init ct_ca9x4_init(void)
 {
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_CACHE_L2X0
 	void __iomem *l2x0_base = ioremap(CT_CA9X4_L2CC, SZ_4K);
@@ -196,15 +224,21 @@ static void __init ct_ca9x4_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(ct_ca9x4_amba_devs); i++)
 		amba_device_register(ct_ca9x4_amba_devs[i], &iomem_resource);
 
 	platform_device_register(&pmu_device);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_register(&osc1_device);
 
 	WARN_ON(clk_register_clkdev(vexpress_osc_setup(&osc1_device.dev),
 			NULL, "ct:clcd"));
+=======
+	vexpress_syscfg_device_register(&osc1_device);
+>>>>>>> v3.18
 =======
 	vexpress_syscfg_device_register(&osc1_device);
 >>>>>>> v3.18

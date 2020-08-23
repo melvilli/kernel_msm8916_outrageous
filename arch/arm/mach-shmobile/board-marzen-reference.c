@@ -20,6 +20,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/machine.h>
 #include <mach/r8a7779.h>
 #include <mach/common.h>
@@ -61,6 +62,8 @@ static void __init marzen_init(void)
 
 static const char *marzen_boards_compat_dt[] __initdata = {
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk/shmobile.h>
 #include <linux/clocksource.h>
 #include <linux/of_platform.h>
@@ -87,6 +90,9 @@ static void __init marzen_init(void)
 
 static const char *marzen_boards_compat_dt[] __initdata = {
 	"renesas,marzen",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"renesas,marzen-reference",
 	NULL,
@@ -96,17 +102,23 @@ DT_MACHINE_START(MARZEN, "marzen")
 	.smp		= smp_ops(r8a7779_smp_ops),
 	.map_io		= r8a7779_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_early	= r8a7779_init_delay,
 	.nr_irqs	= NR_IRQS_LEGACY,
 	.init_irq	= r8a7779_init_irq_dt,
 	.init_machine	= marzen_init,
 	.init_time	= shmobile_timer_init,
 =======
+=======
+>>>>>>> v3.18
 	.init_early	= shmobile_init_delay,
 	.init_time	= marzen_init_timer,
 	.init_irq	= r8a7779_init_irq_dt,
 	.init_machine	= marzen_init,
 	.init_late	= shmobile_init_late,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.dt_compat	= marzen_boards_compat_dt,
 MACHINE_END

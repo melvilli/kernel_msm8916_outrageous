@@ -20,6 +20,10 @@
 #include <media/videobuf-core.h>
 #include <media/videobuf2-core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/v4l2-async.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-async.h>
 >>>>>>> v3.18
@@ -29,6 +33,10 @@
 struct file;
 struct soc_camera_desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct soc_camera_async_client;
+>>>>>>> v3.18
 =======
 struct soc_camera_async_client;
 >>>>>>> v3.18
@@ -58,11 +66,17 @@ struct soc_camera_device {
 	int use_count;
 	struct file *streamer;		/* stream owner */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_clk *clk;
 	/* Asynchronous subdevice management */
 	struct soc_camera_async_client *sasc;
 	/* video buffer queue */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	union {
 		struct videobuf_queue vb_vidq;
@@ -74,6 +88,7 @@ struct soc_camera_device {
 #define SOCAM_HOST_CAP_STRIDE		(1 << 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct soc_camera_host {
 	struct v4l2_device v4l2_dev;
 	struct list_head list;
@@ -84,6 +99,8 @@ struct soc_camera_host {
 	const char *drv_name;
 	struct soc_camera_host_ops *ops;
 =======
+=======
+>>>>>>> v3.18
 enum soc_camera_subdev_role {
 	SOCAM_SUBDEV_DATA_SOURCE = 1,
 	SOCAM_SUBDEV_DATA_SINK,
@@ -108,6 +125,9 @@ struct soc_camera_host {
 	struct soc_camera_host_ops *ops;
 	struct v4l2_async_subdev **asd;	/* Flat array, arranged in groups */
 	unsigned int *asd_sizes;	/* 0-terminated array of asd group sizes */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -116,6 +136,11 @@ struct soc_camera_host_ops {
 	int (*add)(struct soc_camera_device *);
 	void (*remove)(struct soc_camera_device *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*clock_start)(struct soc_camera_host *);
+	void (*clock_stop)(struct soc_camera_host *);
+>>>>>>> v3.18
 =======
 	int (*clock_start)(struct soc_camera_host *);
 	void (*clock_stop)(struct soc_camera_host *);
@@ -171,10 +196,13 @@ struct soc_camera_subdev_desc {
 	void *drv_priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Optional regulators that have to be managed on power on/off events */
 	struct regulator_bulk_data *regulators;
 	int num_regulators;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Set unbalanced_power to true to deal with legacy drivers, failing to
 	 * balance their calls to subdevice's .s_power() method. clock_state is
@@ -183,6 +211,9 @@ struct soc_camera_subdev_desc {
 	 */
 	bool unbalanced_power;
 	unsigned long clock_state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Optional callbacks to power on or off and reset the sensor */
@@ -198,6 +229,12 @@ struct soc_camera_subdev_desc {
 	unsigned long (*query_bus_param)(struct soc_camera_subdev_desc *);
 	void (*free_bus)(struct soc_camera_subdev_desc *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	/* Optional regulators that have to be managed on power on/off events */
+	struct v4l2_subdev_platform_data sd_pdata;
+>>>>>>> v3.18
 =======
 
 	/* Optional regulators that have to be managed on power on/off events */
@@ -222,6 +259,10 @@ struct soc_camera_host_desc {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Platform data for "soc-camera-pdrv"
+>>>>>>> v3.18
 =======
  * Platform data for "soc-camera-pdrv"
 >>>>>>> v3.18
@@ -247,14 +288,20 @@ struct soc_camera_link {
 	void *priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Optional regulators that have to be managed on power on/off events */
 	struct regulator_bulk_data *regulators;
 	int num_regulators;
 =======
+=======
+>>>>>>> v3.18
 	/* Set by platforms to handle misbehaving drivers */
 	bool unbalanced_power;
 	/* Used by soc-camera helper functions */
 	unsigned long clock_state;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Optional callbacks to power on or off and reset the sensor */
@@ -270,13 +317,19 @@ struct soc_camera_link {
 	void (*free_bus)(struct soc_camera_link *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Optional regulators that have to be managed on power on/off events */
 	struct regulator_bulk_data *regulators;
 	int num_regulators;
 
 	void *host_priv;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Host part - keep at bottom and compatible to
@@ -407,6 +460,7 @@ unsigned long soc_camera_apply_board_flags(struct soc_camera_subdev_desc *ssdd,
 					   const struct v4l2_mbus_config *cfg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int soc_camera_power_on(struct device *dev, struct soc_camera_subdev_desc *ssdd);
 int soc_camera_power_off(struct device *dev, struct soc_camera_subdev_desc *ssdd);
 
@@ -416,6 +470,8 @@ static inline int soc_camera_set_power(struct device *dev,
 	return on ? soc_camera_power_on(dev, ssdd)
 		  : soc_camera_power_off(dev, ssdd);
 =======
+=======
+>>>>>>> v3.18
 int soc_camera_power_init(struct device *dev, struct soc_camera_subdev_desc *ssdd);
 int soc_camera_power_on(struct device *dev, struct soc_camera_subdev_desc *ssdd,
 			struct v4l2_clk *clk);
@@ -427,6 +483,9 @@ static inline int soc_camera_set_power(struct device *dev,
 {
 	return on ? soc_camera_power_on(dev, ssdd, clk)
 		  : soc_camera_power_off(dev, ssdd, clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -445,9 +504,15 @@ static inline struct soc_camera_subdev_desc *soc_camera_i2c_to_desc(const struct
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct v4l2_subdev *soc_camera_vdev_to_subdev(const struct video_device *vdev)
 {
 	struct soc_camera_device *icd = dev_get_drvdata(vdev->parent);
+=======
+static inline struct v4l2_subdev *soc_camera_vdev_to_subdev(struct video_device *vdev)
+{
+	struct soc_camera_device *icd = video_get_drvdata(vdev);
+>>>>>>> v3.18
 =======
 static inline struct v4l2_subdev *soc_camera_vdev_to_subdev(struct video_device *vdev)
 {

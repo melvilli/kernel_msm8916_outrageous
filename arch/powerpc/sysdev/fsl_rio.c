@@ -29,6 +29,11 @@
 #include <linux/interrupt.h>
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -395,13 +400,19 @@ int fsl_rio_setup(struct platform_device *dev)
 
 	rmu_node = of_parse_phandle(dev->dev.of_node, "fsl,srio-rmu-handle", 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!rmu_node)
 		goto err_rmu;
 =======
+=======
+>>>>>>> v3.18
 	if (!rmu_node) {
 		dev_err(&dev->dev, "No valid fsl,srio-rmu-handle property\n");
 		goto err_rmu;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc = of_address_to_resource(rmu_node, 0, &rmu_regs);
 	if (rc) {
@@ -424,6 +435,10 @@ int fsl_rio_setup(struct platform_device *dev)
 	np = of_find_compatible_node(NULL, NULL, "fsl,srio-dbell-unit");
 	if (!np) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev_err(&dev->dev, "No fsl,srio-dbell-unit node\n");
+>>>>>>> v3.18
 =======
 		dev_err(&dev->dev, "No fsl,srio-dbell-unit node\n");
 >>>>>>> v3.18
@@ -456,6 +471,10 @@ int fsl_rio_setup(struct platform_device *dev)
 	np = of_find_compatible_node(NULL, NULL, "fsl,srio-port-write-unit");
 	if (!np) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev_err(&dev->dev, "No fsl,srio-port-write-unit node\n");
+>>>>>>> v3.18
 =======
 		dev_err(&dev->dev, "No fsl,srio-port-write-unit node\n");
 >>>>>>> v3.18
@@ -550,6 +569,10 @@ int fsl_rio_setup(struct platform_device *dev)
 
 		priv->dev = &dev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		port->dev.parent = &dev->dev;
+>>>>>>> v3.18
 =======
 		port->dev.parent = &dev->dev;
 >>>>>>> v3.18
@@ -655,11 +678,14 @@ int fsl_rio_setup(struct platform_device *dev)
 err:
 	kfree(pw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_pw:
 	kfree(dbell);
 err_dbell:
 	iounmap(rmu_regs_win);
 =======
+=======
+>>>>>>> v3.18
 	pw = NULL;
 err_pw:
 	kfree(dbell);
@@ -667,12 +693,19 @@ err_pw:
 err_dbell:
 	iounmap(rmu_regs_win);
 	rmu_regs_win = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_rmu:
 	kfree(ops);
 err_ops:
 	iounmap(rio_regs_win);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rio_regs_win = NULL;
+>>>>>>> v3.18
 =======
 	rio_regs_win = NULL;
 >>>>>>> v3.18

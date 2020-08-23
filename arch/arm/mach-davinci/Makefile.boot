@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifeq ($(CONFIG_ARCH_DAVINCI_DA8XX),y)
 ifeq ($(CONFIG_ARCH_DAVINCI_DMx),y)
 $(error Cannot enable DaVinci and DA8XX platforms concurrently)
@@ -13,6 +14,8 @@ params_phys-y	:= 0x80000100
 initrd_phys-y	:= 0x80800000
 endif
 =======
+=======
+>>>>>>> v3.18
 zreladdr-$(CONFIG_ARCH_DAVINCI_DA8XX)		+= 0xc0008000
 params_phys-$(CONFIG_ARCH_DAVINCI_DA8XX)	:= 0xc0000100
 initrd_phys-$(CONFIG_ARCH_DAVINCI_DA8XX)	:= 0xc0800000
@@ -20,4 +23,7 @@ initrd_phys-$(CONFIG_ARCH_DAVINCI_DA8XX)	:= 0xc0800000
 zreladdr-$(CONFIG_ARCH_DAVINCI_DMx)		+= 0x80008000
 params_phys-$(CONFIG_ARCH_DAVINCI_DMx)		:= 0x80000100
 initrd_phys-$(CONFIG_ARCH_DAVINCI_DMx)		:= 0x80800000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

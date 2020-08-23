@@ -65,8 +65,11 @@ struct config_field_entry {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool xen_pcibk_permissive;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define OFFSET(cfg_entry) ((cfg_entry)->base_offset+(cfg_entry)->field->offset)

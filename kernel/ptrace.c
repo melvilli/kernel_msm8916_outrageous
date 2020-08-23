@@ -29,12 +29,15 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ptrace_trapping_sleep_fn(void *flags)
 {
 	schedule();
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -154,6 +157,7 @@ static void ptrace_unfreeze_traced(struct task_struct *task)
 	WARN_ON(!task->ptrace || task->parent != current);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * PTRACE_LISTEN can allow ptrace_trap_notify to wake us up remotely.
 	 * Recheck state under the lock to close this race.
@@ -166,11 +170,16 @@ static void ptrace_unfreeze_traced(struct task_struct *task)
 			task->state = TASK_TRACED;
 	}
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irq(&task->sighand->siglock);
 	if (__fatal_signal_pending(task))
 		wake_up_state(task, __TASK_TRACED);
 	else
 		task->state = TASK_TRACED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irq(&task->sighand->siglock);
 }
@@ -243,6 +252,7 @@ static int __ptrace_may_access(struct task_struct *task, unsigned int mode)
 {
 	const struct cred *cred = current_cred(), *tcred;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dumpable = 0;
 	kuid_t caller_uid;
 	kgid_t caller_gid;
@@ -251,6 +261,8 @@ static int __ptrace_may_access(struct task_struct *task, unsigned int mode)
 		WARN(1, "denying ptrace access check without PTRACE_MODE_*CREDS\n");
 		return -EPERM;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -263,7 +275,11 @@ static int __ptrace_may_access(struct task_struct *task, unsigned int mode)
 	 * or halting the specified task is impossible.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	int dumpable = 0;
+>>>>>>> v3.18
 =======
 	int dumpable = 0;
 >>>>>>> v3.18
@@ -271,6 +287,7 @@ static int __ptrace_may_access(struct task_struct *task, unsigned int mode)
 	if (same_thread_group(task, current))
 		return 0;
 	rcu_read_lock();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (mode & PTRACE_MODE_FSCREDS) {
 		caller_uid = cred->fsuid;
@@ -295,6 +312,8 @@ static int __ptrace_may_access(struct task_struct *task, unsigned int mode)
 	    gid_eq(caller_gid, tcred->sgid) &&
 	    gid_eq(caller_gid, tcred->gid))
 =======
+=======
+>>>>>>> v3.18
 	tcred = __task_cred(task);
 	if (uid_eq(cred->uid, tcred->euid) &&
 	    uid_eq(cred->uid, tcred->suid) &&
@@ -302,6 +321,9 @@ static int __ptrace_may_access(struct task_struct *task, unsigned int mode)
 	    gid_eq(cred->gid, tcred->egid) &&
 	    gid_eq(cred->gid, tcred->sgid) &&
 	    gid_eq(cred->gid, tcred->gid))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto ok;
 	if (ptrace_has_cap(tcred->user_ns, mode))
@@ -370,7 +392,11 @@ static int ptrace_attach(struct task_struct *task, long request,
 
 	task_lock(task);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = __ptrace_may_access(task, PTRACE_MODE_ATTACH_REALCREDS);
+=======
+	retval = __ptrace_may_access(task, PTRACE_MODE_ATTACH);
+>>>>>>> v3.18
 =======
 	retval = __ptrace_may_access(task, PTRACE_MODE_ATTACH);
 >>>>>>> v3.18
@@ -433,7 +459,11 @@ out:
 	if (!retval) {
 		wait_on_bit(&task->jobctl, JOBCTL_TRAPPING_BIT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    ptrace_trapping_sleep_fn, TASK_UNINTERRUPTIBLE);
+=======
+			    TASK_UNINTERRUPTIBLE);
+>>>>>>> v3.18
 =======
 			    TASK_UNINTERRUPTIBLE);
 >>>>>>> v3.18
@@ -786,8 +816,11 @@ static int ptrace_resume(struct task_struct *child, long request,
 			 unsigned long data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool need_siglock;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!valid_signal(data))
@@ -818,6 +851,7 @@ static int ptrace_resume(struct task_struct *child, long request,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Change ->exit_code and ->state under siglock to avoid the race
 	 * with wait_task_stopped() in between; a non-zero ->exit_code will
@@ -838,6 +872,10 @@ static int ptrace_resume(struct task_struct *child, long request,
 	wake_up_state(child, __TASK_TRACED);
 	if (need_siglock)
 		spin_unlock_irq(&child->sighand->siglock);
+=======
+	child->exit_code = data;
+	wake_up_state(child, __TASK_TRACED);
+>>>>>>> v3.18
 =======
 	child->exit_code = data;
 	wake_up_state(child, __TASK_TRACED);
@@ -939,7 +977,10 @@ int ptrace_request(struct task_struct *child, long request,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case PTRACE_GETSIGMASK:
 		if (addr != sizeof(sigset_t)) {
 			ret = -EINVAL;
@@ -981,6 +1022,9 @@ int ptrace_request(struct task_struct *child, long request,
 		break;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case PTRACE_INTERRUPT:
 		/*
@@ -1087,8 +1131,12 @@ int ptrace_request(struct task_struct *child, long request,
 #ifdef CONFIG_HAVE_ARCH_TRACEHOOK
 	case PTRACE_GETREGSET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case PTRACE_SETREGSET:
 	{
+=======
+	case PTRACE_SETREGSET: {
+>>>>>>> v3.18
 =======
 	case PTRACE_SETREGSET: {
 >>>>>>> v3.18
@@ -1282,8 +1330,13 @@ int compat_ptrace_request(struct task_struct *child, compat_long_t request,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_ptrace(compat_long_t request, compat_long_t pid,
 				  compat_long_t addr, compat_long_t data)
+=======
+COMPAT_SYSCALL_DEFINE4(ptrace, compat_long_t, request, compat_long_t, pid,
+		       compat_long_t, addr, compat_long_t, data)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE4(ptrace, compat_long_t, request, compat_long_t, pid,
 		       compat_long_t, addr, compat_long_t, data)
@@ -1329,6 +1382,7 @@ COMPAT_SYSCALL_DEFINE4(ptrace, compat_long_t, request, compat_long_t, pid,
 }
 #endif	/* CONFIG_COMPAT */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifdef CONFIG_HAVE_HW_BREAKPOINT
 int ptrace_get_breakpoints(struct task_struct *tsk)
@@ -1345,5 +1399,7 @@ void ptrace_put_breakpoints(struct task_struct *tsk)
 		flush_ptrace_hw_breakpoint(tsk);
 }
 #endif /* CONFIG_HAVE_HW_BREAKPOINT */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -13,6 +13,10 @@
 #include <linux/percpu.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gfp.h>
+>>>>>>> v3.18
 =======
 #include <linux/gfp.h>
 >>>>>>> v3.18
@@ -31,6 +35,7 @@ struct percpu_counter {
 extern int percpu_counter_batch;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __percpu_counter_init(struct percpu_counter *fbc, s64 amount,
 			  struct lock_class_key *key);
 
@@ -40,6 +45,8 @@ int __percpu_counter_init(struct percpu_counter *fbc, s64 amount,
 									\
 		__percpu_counter_init(fbc, value, &__key);		\
 =======
+=======
+>>>>>>> v3.18
 int __percpu_counter_init(struct percpu_counter *fbc, s64 amount, gfp_t gfp,
 			  struct lock_class_key *key);
 
@@ -48,6 +55,9 @@ int __percpu_counter_init(struct percpu_counter *fbc, s64 amount, gfp_t gfp,
 		static struct lock_class_key __key;			\
 									\
 		__percpu_counter_init(fbc, value, gfp, &__key);		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	})
 
@@ -105,7 +115,12 @@ struct percpu_counter {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int percpu_counter_init(struct percpu_counter *fbc, s64 amount)
+=======
+static inline int percpu_counter_init(struct percpu_counter *fbc, s64 amount,
+				      gfp_t gfp)
+>>>>>>> v3.18
 =======
 static inline int percpu_counter_init(struct percpu_counter *fbc, s64 amount,
 				      gfp_t gfp)

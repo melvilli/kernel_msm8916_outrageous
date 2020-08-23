@@ -219,7 +219,11 @@ static long read_local_version(struct kim_data_s *kim_gdata, char *bts_scr_name)
 	pr_debug("%s", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(kim_gdata->kim_rcvd);
+=======
+	reinit_completion(&kim_gdata->kim_rcvd);
+>>>>>>> v3.18
 =======
 	reinit_completion(&kim_gdata->kim_rcvd);
 >>>>>>> v3.18
@@ -234,7 +238,11 @@ static long read_local_version(struct kim_data_s *kim_gdata, char *bts_scr_name)
 		return -ETIMEDOUT;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(kim_gdata->kim_rcvd);
+=======
+	reinit_completion(&kim_gdata->kim_rcvd);
+>>>>>>> v3.18
 =======
 	reinit_completion(&kim_gdata->kim_rcvd);
 >>>>>>> v3.18
@@ -253,7 +261,12 @@ static long read_local_version(struct kim_data_s *kim_gdata, char *bts_scr_name)
 		maj_ver |= 0x0008;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(bts_scr_name, "TIInit_%d.%d.%d.bts", chip, maj_ver, min_ver);
+=======
+	sprintf(bts_scr_name, "ti-connectivity/TIInit_%d.%d.%d.bts",
+		chip, maj_ver, min_ver);
+>>>>>>> v3.18
 =======
 	sprintf(bts_scr_name, "ti-connectivity/TIInit_%d.%d.%d.bts",
 		chip, maj_ver, min_ver);
@@ -301,7 +314,11 @@ static long download_firmware(struct kim_data_s *kim_gdata)
 	unsigned char *ptr = NULL;
 	unsigned char *action_ptr = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char bts_scr_name[30] = { 0 };	/* 30 char long bts scr name? */
+=======
+	unsigned char bts_scr_name[40] = { 0 };	/* 40 char long bts scr name? */
+>>>>>>> v3.18
 =======
 	unsigned char bts_scr_name[40] = { 0 };	/* 40 char long bts scr name? */
 >>>>>>> v3.18
@@ -380,7 +397,11 @@ static long download_firmware(struct kim_data_s *kim_gdata)
 			 * relevant wait
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			INIT_COMPLETION(kim_gdata->kim_rcvd);
+=======
+			reinit_completion(&kim_gdata->kim_rcvd);
+>>>>>>> v3.18
 =======
 			reinit_completion(&kim_gdata->kim_rcvd);
 >>>>>>> v3.18
@@ -420,7 +441,11 @@ static long download_firmware(struct kim_data_s *kim_gdata)
 				return -ETIMEDOUT;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			INIT_COMPLETION(kim_gdata->kim_rcvd);
+=======
+			reinit_completion(&kim_gdata->kim_rcvd);
+>>>>>>> v3.18
 =======
 			reinit_completion(&kim_gdata->kim_rcvd);
 >>>>>>> v3.18
@@ -500,7 +525,11 @@ long st_kim_start(void *kim_data)
 		mdelay(100);
 		/* re-initialize the completion */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(kim_gdata->ldisc_installed);
+=======
+		reinit_completion(&kim_gdata->ldisc_installed);
+>>>>>>> v3.18
 =======
 		reinit_completion(&kim_gdata->ldisc_installed);
 >>>>>>> v3.18
@@ -555,7 +584,11 @@ long st_kim_stop(void *kim_data)
 	struct tty_struct	*tty = kim_gdata->core_data->tty;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(kim_gdata->ldisc_installed);
+=======
+	reinit_completion(&kim_gdata->ldisc_installed);
+>>>>>>> v3.18
 =======
 	reinit_completion(&kim_gdata->ldisc_installed);
 >>>>>>> v3.18
@@ -565,7 +598,10 @@ long st_kim_stop(void *kim_data)
 		tty_ldisc_flush(tty);
 		tty_driver_flush_buffer(tty);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tty->ops->flush_buffer(tty);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -717,7 +753,11 @@ void st_kim_ref(struct st_data_s **core_data, int id)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kim_gdata = dev_get_drvdata(&pdev->dev);
+=======
+	kim_gdata = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	kim_gdata = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -776,7 +816,11 @@ static int kim_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, kim_gdata);
+=======
+	platform_set_drvdata(pdev, kim_gdata);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, kim_gdata);
 >>>>>>> v3.18
@@ -824,7 +868,11 @@ static int kim_probe(struct platform_device *pdev)
 
 	kim_debugfs_dir = debugfs_create_dir("ti-st", NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(kim_debugfs_dir)) {
+=======
+	if (!kim_debugfs_dir) {
+>>>>>>> v3.18
 =======
 	if (!kim_debugfs_dir) {
 >>>>>>> v3.18
@@ -838,7 +886,10 @@ static int kim_probe(struct platform_device *pdev)
 	debugfs_create_file("protocols", S_IRUGO, kim_debugfs_dir,
 				kim_gdata, &list_debugfs_fops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info(" debugfs entries created ");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -862,7 +913,11 @@ static int kim_remove(struct platform_device *pdev)
 	struct kim_data_s	*kim_gdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kim_gdata = dev_get_drvdata(&pdev->dev);
+=======
+	kim_gdata = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	kim_gdata = platform_get_drvdata(pdev);
 >>>>>>> v3.18

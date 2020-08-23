@@ -2,7 +2,11 @@
  * mt9v011 -Micron 1/4-Inch VGA Digital Image Sensor
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2009 Mauro Carvalho Chehab (mchehab@redhat.com)
+=======
+ * Copyright (c) 2009 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (c) 2009 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -17,7 +21,10 @@
 #include <asm/div64.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
@@ -25,7 +32,11 @@
 
 MODULE_DESCRIPTION("Micron mt9v011 sensor driver");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18
@@ -419,6 +430,7 @@ static int mt9v011_g_register(struct v4l2_subdev *sd,
 			      struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
@@ -426,6 +438,8 @@ static int mt9v011_g_register(struct v4l2_subdev *sd,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	reg->val = mt9v011_read(sd, reg->reg & 0xff);
@@ -438,6 +452,7 @@ static int mt9v011_s_register(struct v4l2_subdev *sd,
 			      const struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
@@ -447,12 +462,15 @@ static int mt9v011_s_register(struct v4l2_subdev *sd,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	mt9v011_write(sd, reg->reg & 0xff, reg->val & 0xffff);
 
 	return 0;
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int mt9v011_g_chip_ident(struct v4l2_subdev *sd,
 				struct v4l2_dbg_chip_ident *chip)
@@ -466,6 +484,8 @@ static int mt9v011_g_chip_ident(struct v4l2_subdev *sd,
 					  version);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int mt9v011_s_ctrl(struct v4l2_ctrl *ctrl)
@@ -510,7 +530,10 @@ static struct v4l2_ctrl_ops mt9v011_ctrl_ops = {
 static const struct v4l2_subdev_core_ops mt9v011_core_ops = {
 	.reset = mt9v011_reset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = mt9v011_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -550,7 +573,11 @@ static int mt9v011_probe(struct i2c_client *c,
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	core = kzalloc(sizeof(struct mt9v011), GFP_KERNEL);
+=======
+	core = devm_kzalloc(&c->dev, sizeof(struct mt9v011), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	core = devm_kzalloc(&c->dev, sizeof(struct mt9v011), GFP_KERNEL);
 >>>>>>> v3.18
@@ -567,7 +594,10 @@ static int mt9v011_probe(struct i2c_client *c,
 		v4l2_info(sd, "*** unknown micron chip detected (0x%04x).\n",
 			  version);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(core);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return -EINVAL;
@@ -593,7 +623,10 @@ static int mt9v011_probe(struct i2c_client *c,
 		v4l2_err(sd, "control initialization error %d\n", ret);
 		v4l2_ctrl_handler_free(&core->ctrls);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(core);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return ret;
@@ -632,7 +665,11 @@ static int mt9v011_remove(struct i2c_client *c)
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&core->ctrls);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(to_mt9v011(sd));
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

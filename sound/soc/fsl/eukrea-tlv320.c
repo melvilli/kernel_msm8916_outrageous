@@ -16,14 +16,20 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/errno.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/of.h>
 #include <linux/of_platform.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/device.h>
 #include <linux/i2c.h>
@@ -35,6 +41,10 @@
 #include "../codecs/tlv320aic23.h"
 #include "imx-ssi.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "fsl_ssi.h"
+>>>>>>> v3.18
 =======
 #include "fsl_ssi.h"
 >>>>>>> v3.18
@@ -54,13 +64,19 @@ static int eukrea_tlv320_hw_params(struct snd_pcm_substream *substream,
 				  SND_SOC_DAIFMT_NB_NF |
 				  SND_SOC_DAIFMT_CBM_CFM);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret) {
 		pr_err("%s: failed set cpu dai format\n", __func__);
 =======
+=======
+>>>>>>> v3.18
 	/* fsl_ssi lacks the set_fmt ops. */
 	if (ret && ret != -ENOTSUPP) {
 		dev_err(cpu_dai->dev,
 			"Failed to set the cpu dai format.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}
@@ -70,7 +86,12 @@ static int eukrea_tlv320_hw_params(struct snd_pcm_substream *substream,
 				  SND_SOC_DAIFMT_CBM_CFM);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("%s: failed set codec dai format\n", __func__);
+=======
+		dev_err(cpu_dai->dev,
+			"Failed to set the codec format.\n");
+>>>>>>> v3.18
 =======
 		dev_err(cpu_dai->dev,
 			"Failed to set the codec format.\n");
@@ -82,28 +103,40 @@ static int eukrea_tlv320_hw_params(struct snd_pcm_substream *substream,
 				     CODEC_CLOCK, SND_SOC_CLOCK_OUT);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_err("%s: failed setting codec sysclk\n", __func__);
 		return ret;
 	}
 =======
+=======
+>>>>>>> v3.18
 		dev_err(cpu_dai->dev,
 			"Failed to set the codec sysclk.\n");
 		return ret;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	snd_soc_dai_set_tdm_slot(cpu_dai, 0xffffffc, 0xffffffc, 2, 0);
 
 	ret = snd_soc_dai_set_sysclk(cpu_dai, IMX_SSP_SYS_CLK, 0,
 				SND_SOC_CLOCK_IN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret) {
 		pr_err("can't set CPU system clock IMX_SSP_SYS_CLK\n");
 =======
+=======
+>>>>>>> v3.18
 	/* fsl_ssi lacks the set_sysclk ops */
 	if (ret && ret != -EINVAL) {
 		dev_err(cpu_dai->dev,
 			"Can't set the IMX_SSP_SYS_CLK CPU system clock.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}
@@ -120,9 +153,12 @@ static struct snd_soc_dai_link eukrea_tlv320_dai = {
 	.stream_name	= "TLV320AIC23",
 	.codec_dai_name	= "tlv320aic23-hifi",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.platform_name	= "imx-fiq-pcm-audio.0",
 	.codec_name	= "tlv320aic23-codec.0-001a",
 	.cpu_dai_name	= "imx-ssi.0",
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.ops		= &eukrea_tlv320_snd_ops,
@@ -130,7 +166,10 @@ static struct snd_soc_dai_link eukrea_tlv320_dai = {
 
 static struct snd_soc_card eukrea_tlv320 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name		= "cpuimx-audio",
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.owner		= THIS_MODULE,
@@ -143,9 +182,12 @@ static int eukrea_tlv320_probe(struct platform_device *pdev)
 	int ret;
 	int int_port = 0, ext_port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (machine_is_eukrea_cpuimx27()) {
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *np = pdev->dev.of_node;
 	struct device_node *ssi_np, *codec_np;
 
@@ -205,6 +247,9 @@ static int eukrea_tlv320_probe(struct platform_device *pdev)
 
 	if (machine_is_eukrea_cpuimx27() ||
 	    of_find_compatible_node(NULL, NULL, "fsl,imx21-audmux")) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		imx_audmux_v1_configure_port(MX27_AUDMUX_HPCR1_SSI0,
 			IMX_AUDMUX_V1_PCR_SYN |
@@ -223,15 +268,21 @@ static int eukrea_tlv320_probe(struct platform_device *pdev)
 	} else if (machine_is_eukrea_cpuimx25sd() ||
 		   machine_is_eukrea_cpuimx35sd() ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   machine_is_eukrea_cpuimx51sd()) {
 		ext_port = machine_is_eukrea_cpuimx25sd() ? 4 : 3;
 =======
+=======
+>>>>>>> v3.18
 		   machine_is_eukrea_cpuimx51sd() ||
 		   of_find_compatible_node(NULL, NULL, "fsl,imx31-audmux")) {
 		if (!np)
 			ext_port = machine_is_eukrea_cpuimx25sd() ?
 				4 : 3;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		imx_audmux_v2_configure_port(int_port,
 			IMX_AUDMUX_V2_PTCR_SYN |
@@ -247,6 +298,7 @@ static int eukrea_tlv320_probe(struct platform_device *pdev)
 		);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* return happy. We might run on a totally different machine */
 		return 0;
 	}
@@ -256,6 +308,8 @@ static int eukrea_tlv320_probe(struct platform_device *pdev)
 	if (ret)
 		dev_err(&pdev->dev, "snd_soc_register_card failed (%d)\n", ret);
 =======
+=======
+>>>>>>> v3.18
 		if (np) {
 			/* The eukrea,asoc-tlv320 driver was explicitely
 			 * requested (through the device tree).
@@ -277,6 +331,9 @@ err:
 		dev_err(&pdev->dev, "snd_soc_register_card failed (%d)\n", ret);
 	if (np)
 		of_node_put(ssi_np);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -290,28 +347,40 @@ static int eukrea_tlv320_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id imx_tlv320_dt_ids[] = {
 	{ .compatible = "eukrea,asoc-tlv320"},
 	{ /* sentinel */ }
 };
 MODULE_DEVICE_TABLE(of, imx_tlv320_dt_ids);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver eukrea_tlv320_driver = {
 	.driver = {
 		.name = "eukrea_tlv320",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	.probe = eukrea_tlv320_probe,
 	.remove = eukrea_tlv320_remove,};
 =======
+=======
+>>>>>>> v3.18
 		.of_match_table = imx_tlv320_dt_ids,
 	},
 	.probe = eukrea_tlv320_probe,
 	.remove = eukrea_tlv320_remove,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 module_platform_driver(eukrea_tlv320_driver);

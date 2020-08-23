@@ -125,7 +125,10 @@ __wsum csum_partial(const void *buff, int len, __wsum wsum)
 	return (__force __wsum)result;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(csum_partial);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

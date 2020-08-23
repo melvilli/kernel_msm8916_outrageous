@@ -24,7 +24,10 @@
 #include <linux/videodev2.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
@@ -33,7 +36,10 @@
 struct cx25840_ir_state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum cx25840_model {
 	CX23885_AV,
 	CX23887_AV,
@@ -47,6 +53,9 @@ enum cx25840_model {
 	CX25837,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct cx25840_state {
 	struct i2c_client *c;
@@ -66,7 +75,11 @@ struct cx25840_state {
 	int audmode;
 	int vbi_line_offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 id;
+=======
+	enum cx25840_model id;
+>>>>>>> v3.18
 =======
 	enum cx25840_model id;
 >>>>>>> v3.18
@@ -90,8 +103,13 @@ static inline struct v4l2_subdev *to_sd(struct v4l2_ctrl *ctrl)
 static inline bool is_cx2583x(struct cx25840_state *state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return state->id == V4L2_IDENT_CX25836 ||
 	       state->id == V4L2_IDENT_CX25837;
+=======
+	return state->id == CX25836 ||
+	       state->id == CX25837;
+>>>>>>> v3.18
 =======
 	return state->id == CX25836 ||
 	       state->id == CX25837;
@@ -101,7 +119,11 @@ static inline bool is_cx2583x(struct cx25840_state *state)
 static inline bool is_cx231xx(struct cx25840_state *state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return state->id == V4L2_IDENT_CX2310X_AV;
+=======
+	return state->id == CX2310X_AV;
+>>>>>>> v3.18
 =======
 	return state->id == CX2310X_AV;
 >>>>>>> v3.18
@@ -110,9 +132,15 @@ static inline bool is_cx231xx(struct cx25840_state *state)
 static inline bool is_cx2388x(struct cx25840_state *state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return state->id == V4L2_IDENT_CX23885_AV ||
 	       state->id == V4L2_IDENT_CX23887_AV ||
 	       state->id == V4L2_IDENT_CX23888_AV;
+=======
+	return state->id == CX23885_AV ||
+	       state->id == CX23887_AV ||
+	       state->id == CX23888_AV;
+>>>>>>> v3.18
 =======
 	return state->id == CX23885_AV ||
 	       state->id == CX23887_AV ||
@@ -123,7 +151,11 @@ static inline bool is_cx2388x(struct cx25840_state *state)
 static inline bool is_cx23885(struct cx25840_state *state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return state->id == V4L2_IDENT_CX23885_AV;
+=======
+	return state->id == CX23885_AV;
+>>>>>>> v3.18
 =======
 	return state->id == CX23885_AV;
 >>>>>>> v3.18
@@ -132,7 +164,11 @@ static inline bool is_cx23885(struct cx25840_state *state)
 static inline bool is_cx23887(struct cx25840_state *state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return state->id == V4L2_IDENT_CX23887_AV;
+=======
+	return state->id == CX23887_AV;
+>>>>>>> v3.18
 =======
 	return state->id == CX23887_AV;
 >>>>>>> v3.18
@@ -141,7 +177,11 @@ static inline bool is_cx23887(struct cx25840_state *state)
 static inline bool is_cx23888(struct cx25840_state *state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return state->id == V4L2_IDENT_CX23888_AV;
+=======
+	return state->id == CX23888_AV;
+>>>>>>> v3.18
 =======
 	return state->id == CX23888_AV;
 >>>>>>> v3.18

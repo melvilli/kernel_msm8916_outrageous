@@ -50,7 +50,11 @@ struct ttm_range_manager {
 static int ttm_bo_man_get_node(struct ttm_mem_type_manager *man,
 			       struct ttm_buffer_object *bo,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       struct ttm_placement *placement,
+=======
+			       const struct ttm_place *place,
+>>>>>>> v3.18
 =======
 			       const struct ttm_place *place,
 >>>>>>> v3.18
@@ -59,6 +63,7 @@ static int ttm_bo_man_get_node(struct ttm_mem_type_manager *man,
 	struct ttm_range_manager *rman = (struct ttm_range_manager *) man->priv;
 	struct drm_mm *mm = &rman->mm;
 	struct drm_mm_node *node = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long lpfn;
 	int ret;
@@ -89,6 +94,8 @@ static int ttm_bo_man_get_node(struct ttm_mem_type_manager *man,
 	mem->mm_node = node;
 	mem->start = node->start;
 =======
+=======
+>>>>>>> v3.18
 	enum drm_mm_allocator_flags aflags = DRM_MM_CREATE_DEFAULT;
 	unsigned long lpfn;
 	int ret;
@@ -119,6 +126,9 @@ static int ttm_bo_man_get_node(struct ttm_mem_type_manager *man,
 		mem->start = node->start;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -131,13 +141,19 @@ static void ttm_bo_man_put_node(struct ttm_mem_type_manager *man,
 	if (mem->mm_node) {
 		spin_lock(&rman->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drm_mm_put_block(mem->mm_node);
 		spin_unlock(&rman->lock);
 =======
+=======
+>>>>>>> v3.18
 		drm_mm_remove_node(mem->mm_node);
 		spin_unlock(&rman->lock);
 
 		kfree(mem->mm_node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mem->mm_node = NULL;
 	}
@@ -148,7 +164,10 @@ static int ttm_bo_man_init(struct ttm_mem_type_manager *man,
 {
 	struct ttm_range_manager *rman;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -157,12 +176,16 @@ static int ttm_bo_man_init(struct ttm_mem_type_manager *man,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = drm_mm_init(&rman->mm, 0, p_size);
 	if (ret) {
 		kfree(rman);
 		return ret;
 	}
 
+=======
+	drm_mm_init(&rman->mm, 0, p_size);
+>>>>>>> v3.18
 =======
 	drm_mm_init(&rman->mm, 0, p_size);
 >>>>>>> v3.18

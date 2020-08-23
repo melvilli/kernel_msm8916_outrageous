@@ -17,8 +17,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -45,6 +49,10 @@ struct mpc5xxx_can_data {
 	u32 (*get_clock)(struct platform_device *ofdev, const char *clock_name,
 			 int *mscan_clksrc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*put_clock)(struct platform_device *ofdev);
+>>>>>>> v3.18
 =======
 	void (*put_clock)(struct platform_device *ofdev);
 >>>>>>> v3.18
@@ -116,6 +124,7 @@ static u32 mpc52xx_can_get_clock(struct platform_device *ofdev,
 #endif /* CONFIG_PPC_MPC52xx */
 
 #ifdef CONFIG_PPC_MPC512x
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct mpc512x_clockctl {
 	u32 spmr;		/* System PLL Mode Reg */
@@ -244,6 +253,8 @@ exit_put:
 	of_node_put(np_clock);
 	return freq;
 =======
+=======
+>>>>>>> v3.18
 static u32 mpc512x_can_get_clock(struct platform_device *ofdev,
 				 const char *clock_source, int *mscan_clksrc)
 {
@@ -408,6 +419,9 @@ static void mpc512x_can_put_clock(struct platform_device *ofdev)
 	priv = netdev_priv(dev_get_drvdata(&ofdev->dev));
 	if (priv->clk_ipg)
 		clk_disable_unprepare(priv->clk_ipg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #else /* !CONFIG_PPC_MPC512x */
@@ -417,6 +431,10 @@ static u32 mpc512x_can_get_clock(struct platform_device *ofdev,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define mpc512x_can_put_clock NULL
+>>>>>>> v3.18
 =======
 #define mpc512x_can_put_clock NULL
 >>>>>>> v3.18
@@ -457,6 +475,11 @@ static int mpc5xxx_can_probe(struct platform_device *ofdev)
 	if (!dev)
 		goto exit_dispose_irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	platform_set_drvdata(ofdev, dev);
+	SET_NETDEV_DEV(dev, &ofdev->dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, dev);
 	SET_NETDEV_DEV(dev, &ofdev->dev);
@@ -478,8 +501,11 @@ static int mpc5xxx_can_probe(struct platform_device *ofdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_NETDEV_DEV(dev, &ofdev->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = register_mscandev(dev, mscan_clksrc);
@@ -490,8 +516,11 @@ static int mpc5xxx_can_probe(struct platform_device *ofdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_info(&ofdev->dev, "MSCAN at 0x%p, irq %d, clock %d Hz\n",
@@ -512,6 +541,7 @@ exit_unmap_mem:
 static int mpc5xxx_can_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&ofdev->dev);
 	struct mscan_priv *priv = netdev_priv(dev);
 
@@ -519,6 +549,8 @@ static int mpc5xxx_can_remove(struct platform_device *ofdev)
 
 	unregister_mscandev(dev);
 =======
+=======
+>>>>>>> v3.18
 	const struct of_device_id *match;
 	const struct mpc5xxx_can_data *data;
 	struct net_device *dev = platform_get_drvdata(ofdev);
@@ -530,6 +562,9 @@ static int mpc5xxx_can_remove(struct platform_device *ofdev)
 	unregister_mscandev(dev);
 	if (data && data->put_clock)
 		data->put_clock(ofdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iounmap(priv->reg_base);
 	irq_dispose_mapping(dev->irq);
@@ -543,7 +578,11 @@ static struct mscan_regs saved_regs;
 static int mpc5xxx_can_suspend(struct platform_device *ofdev, pm_message_t state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -558,7 +597,11 @@ static int mpc5xxx_can_suspend(struct platform_device *ofdev, pm_message_t state
 static int mpc5xxx_can_resume(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&ofdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -592,6 +635,10 @@ static const struct mpc5xxx_can_data mpc5200_can_data = {
 	.type = MSCAN_TYPE_MPC5200,
 	.get_clock = mpc52xx_can_get_clock,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* .put_clock not applicable */
+>>>>>>> v3.18
 =======
 	/* .put_clock not applicable */
 >>>>>>> v3.18
@@ -601,6 +648,10 @@ static const struct mpc5xxx_can_data mpc5121_can_data = {
 	.type = MSCAN_TYPE_MPC5121,
 	.get_clock = mpc512x_can_get_clock,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.put_clock = mpc512x_can_put_clock,
+>>>>>>> v3.18
 =======
 	.put_clock = mpc512x_can_put_clock,
 >>>>>>> v3.18

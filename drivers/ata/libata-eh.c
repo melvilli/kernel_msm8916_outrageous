@@ -96,7 +96,12 @@ enum {
  * hardreset.  All others are hardreset if available.  In most cases
  * the first reset w/ 10sec timeout should succeed.  Following entries
 <<<<<<< HEAD
+<<<<<<< HEAD
  * are mostly for error handling, hotplug and retarded devices.
+=======
+ * are mostly for error handling, hotplug and those outlier devices that
+ * take an exceptionally long time to recover from reset.
+>>>>>>> v3.18
 =======
  * are mostly for error handling, hotplug and those outlier devices that
  * take an exceptionally long time to recover from reset.
@@ -106,7 +111,11 @@ static const unsigned long ata_eh_reset_timeouts[] = {
 	10000,	/* most drives spin up by 10sec */
 	10000,	/* > 99% working drives spin up before 20sec */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	35000,	/* give > 30 secs of idleness for retarded devices */
+=======
+	35000,	/* give > 30 secs of idleness for outlier devices */
+>>>>>>> v3.18
 =======
 	35000,	/* give > 30 secs of idleness for outlier devices */
 >>>>>>> v3.18
@@ -614,7 +623,11 @@ void ata_scsi_error(struct Scsi_Host *host)
 
 	/* finish or retry handled scmd's and clean up */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(!list_empty(&eh_work_q));
+=======
+	WARN_ON(host->host_failed || !list_empty(&eh_work_q));
+>>>>>>> v3.18
 =======
 	WARN_ON(host->host_failed || !list_empty(&eh_work_q));
 >>>>>>> v3.18
@@ -1824,7 +1837,11 @@ static unsigned int ata_eh_analyze_tf(struct ata_queued_cmd *qc,
 		if (err & ATA_ICRC)
 			qc->err_mask |= AC_ERR_ATA_BUS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (err & ATA_UNC)
+=======
+		if (err & (ATA_UNC | ATA_AMNF))
+>>>>>>> v3.18
 =======
 		if (err & (ATA_UNC | ATA_AMNF))
 >>>>>>> v3.18
@@ -2311,6 +2328,10 @@ const char *ata_get_cmd_descript(u8 command)
 		{ ATA_CMD_EDD, 			"EXECUTE DEVICE DIAGNOSTIC" },
 		{ ATA_CMD_DOWNLOAD_MICRO,   	"DOWNLOAD MICROCODE" },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		{ ATA_CMD_DOWNLOAD_MICRO_DMA,	"DOWNLOAD MICROCODE DMA" },
+>>>>>>> v3.18
 =======
 		{ ATA_CMD_DOWNLOAD_MICRO_DMA,	"DOWNLOAD MICROCODE DMA" },
 >>>>>>> v3.18
@@ -2335,6 +2356,11 @@ const char *ata_get_cmd_descript(u8 command)
 		{ ATA_CMD_FPDMA_READ,		"READ FPDMA QUEUED" },
 		{ ATA_CMD_FPDMA_WRITE,		"WRITE FPDMA QUEUED" },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		{ ATA_CMD_FPDMA_SEND,		"SEND FPDMA QUEUED" },
+		{ ATA_CMD_FPDMA_RECV,		"RECEIVE FPDMA QUEUED" },
+>>>>>>> v3.18
 =======
 		{ ATA_CMD_FPDMA_SEND,		"SEND FPDMA QUEUED" },
 		{ ATA_CMD_FPDMA_RECV,		"RECEIVE FPDMA QUEUED" },
@@ -2366,6 +2392,10 @@ const char *ata_get_cmd_descript(u8 command)
 		{ ATA_CMD_READ_LOG_DMA_EXT,	"READ LOG DMA EXT" },
 		{ ATA_CMD_WRITE_LOG_DMA_EXT, 	"WRITE LOG DMA EXT" },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		{ ATA_CMD_TRUSTED_NONDATA,	"TRUSTED NON-DATA" },
+>>>>>>> v3.18
 =======
 		{ ATA_CMD_TRUSTED_NONDATA,	"TRUSTED NON-DATA" },
 >>>>>>> v3.18
@@ -2375,7 +2405,13 @@ const char *ata_get_cmd_descript(u8 command)
 		{ ATA_CMD_TRUSTED_SND_DMA, 	"TRUSTED SEND DMA" },
 		{ ATA_CMD_PMP_READ,		"READ BUFFER" },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{ ATA_CMD_PMP_WRITE,		"WRITE BUFFER" },
+=======
+		{ ATA_CMD_PMP_READ_DMA,		"READ BUFFER DMA" },
+		{ ATA_CMD_PMP_WRITE,		"WRITE BUFFER" },
+		{ ATA_CMD_PMP_WRITE_DMA,	"WRITE BUFFER DMA" },
+>>>>>>> v3.18
 =======
 		{ ATA_CMD_PMP_READ_DMA,		"READ BUFFER DMA" },
 		{ ATA_CMD_PMP_WRITE,		"WRITE BUFFER" },
@@ -2400,6 +2436,11 @@ const char *ata_get_cmd_descript(u8 command)
 		{ ATA_CMD_CFA_ERASE,		"CFA ERASE SECTORS" },
 		{ ATA_CMD_CFA_WRITE_MULT_NE, 	"CFA WRITE MULTIPLE WITHOUT ERASE" },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		{ ATA_CMD_REQ_SENSE_DATA,	"REQUEST SENSE DATA EXT" },
+		{ ATA_CMD_SANITIZE_DEVICE,	"SANITIZE DEVICE" },
+>>>>>>> v3.18
 =======
 		{ ATA_CMD_REQ_SENSE_DATA,	"REQUEST SENSE DATA EXT" },
 		{ ATA_CMD_SANITIZE_DEVICE,	"SANITIZE DEVICE" },
@@ -2436,7 +2477,11 @@ static void ata_eh_link_report(struct ata_link *link)
 	struct ata_eh_context *ehc = &link->eh_context;
 	const char *frozen, *desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char tries_buf[6];
+=======
+	char tries_buf[6] = "";
+>>>>>>> v3.18
 =======
 	char tries_buf[6] = "";
 >>>>>>> v3.18
@@ -2471,9 +2516,14 @@ static void ata_eh_link_report(struct ata_link *link)
 		frozen = " frozen";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(tries_buf, 0, sizeof(tries_buf));
 	if (ap->eh_tries < ATA_EH_MAX_TRIES)
 		snprintf(tries_buf, sizeof(tries_buf) - 1, " t%d",
+=======
+	if (ap->eh_tries < ATA_EH_MAX_TRIES)
+		snprintf(tries_buf, sizeof(tries_buf), " t%d",
+>>>>>>> v3.18
 =======
 	if (ap->eh_tries < ATA_EH_MAX_TRIES)
 		snprintf(tries_buf, sizeof(tries_buf), " t%d",
@@ -2599,18 +2649,24 @@ static void ata_eh_link_report(struct ata_link *link)
 
 		if (cmd->command != ATA_CMD_PACKET &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (res->feature & (ATA_ICRC | ATA_UNC | ATA_IDNF |
 				     ATA_ABORTED)))
 			ata_dev_err(qc->dev, "error: { %s%s%s%s}\n",
 			  res->feature & ATA_ICRC ? "ICRC " : "",
 			  res->feature & ATA_UNC ? "UNC " : "",
 =======
+=======
+>>>>>>> v3.18
 		    (res->feature & (ATA_ICRC | ATA_UNC | ATA_AMNF |
 				     ATA_IDNF | ATA_ABORTED)))
 			ata_dev_err(qc->dev, "error: { %s%s%s%s%s}\n",
 			  res->feature & ATA_ICRC ? "ICRC " : "",
 			  res->feature & ATA_UNC ? "UNC " : "",
 			  res->feature & ATA_AMNF ? "AMNF " : "",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  res->feature & ATA_IDNF ? "IDNF " : "",
 			  res->feature & ATA_ABORTED ? "ABRT " : "");
@@ -3069,7 +3125,11 @@ static inline void ata_eh_pull_park_action(struct ata_port *ap)
 	 *
 	 * Additionally, all write accesses to &ap->park_req_pending
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * through INIT_COMPLETION() (see below) or complete_all()
+=======
+	 * through reinit_completion() (see below) or complete_all()
+>>>>>>> v3.18
 =======
 	 * through reinit_completion() (see below) or complete_all()
 >>>>>>> v3.18
@@ -3087,7 +3147,11 @@ static inline void ata_eh_pull_park_action(struct ata_port *ap)
 
 	spin_lock_irqsave(ap->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(ap->park_req_pending);
+=======
+	reinit_completion(&ap->park_req_pending);
+>>>>>>> v3.18
 =======
 	reinit_completion(&ap->park_req_pending);
 >>>>>>> v3.18
@@ -3549,9 +3613,12 @@ static int ata_eh_set_lpm(struct ata_link *link, enum ata_lpm_policy policy,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	link->last_lpm_change = jiffies;
 	link->flags |= ATA_LFLAG_CHANGED;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -4136,7 +4203,11 @@ static void ata_eh_handle_port_suspend(struct ata_port *ap)
 	ata_acpi_set_state(ap, ap->pm_mesg);
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* report result */
+=======
+	/* update the flags */
+>>>>>>> v3.18
 =======
 	/* update the flags */
 >>>>>>> v3.18
@@ -4149,11 +4220,14 @@ static void ata_eh_handle_port_suspend(struct ata_port *ap)
 		ata_port_schedule_eh(ap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ap->pm_result) {
 		*ap->pm_result = rc;
 		ap->pm_result = NULL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(ap->lock, flags);
@@ -4208,6 +4282,7 @@ static void ata_eh_handle_port_resume(struct ata_port *ap)
 	ata_acpi_on_resume(ap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* report result */
 	spin_lock_irqsave(ap->lock, flags);
 	ap->pflags &= ~(ATA_PFLAG_PM_PENDING | ATA_PFLAG_SUSPENDED);
@@ -4215,6 +4290,11 @@ static void ata_eh_handle_port_resume(struct ata_port *ap)
 		*ap->pm_result = rc;
 		ap->pm_result = NULL;
 	}
+=======
+	/* update the flags */
+	spin_lock_irqsave(ap->lock, flags);
+	ap->pflags &= ~(ATA_PFLAG_PM_PENDING | ATA_PFLAG_SUSPENDED);
+>>>>>>> v3.18
 =======
 	/* update the flags */
 	spin_lock_irqsave(ap->lock, flags);

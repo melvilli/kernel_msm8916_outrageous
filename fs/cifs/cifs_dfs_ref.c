@@ -196,6 +196,7 @@ char *cifs_compose_mount_options(const char *sb_mountdata,
 			noff = tkn_e - (sb_mountdata + off) + 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strnicmp(sb_mountdata + off, "unc=", 4) == 0) {
 			off += noff;
 			continue;
@@ -206,6 +207,8 @@ char *cifs_compose_mount_options(const char *sb_mountdata,
 		}
 		if (strnicmp(sb_mountdata + off, "prefixpath=", 11) == 0) {
 =======
+=======
+>>>>>>> v3.18
 		if (strncasecmp(sb_mountdata + off, "unc=", 4) == 0) {
 			off += noff;
 			continue;
@@ -215,6 +218,9 @@ char *cifs_compose_mount_options(const char *sb_mountdata,
 			continue;
 		}
 		if (strncasecmp(sb_mountdata + off, "prefixpath=", 11) == 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			off += noff;
 			continue;

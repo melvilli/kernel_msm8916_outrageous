@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * include/linux/phy.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Framework and drivers for configuring and reading different PHYs
@@ -31,6 +34,7 @@
 #include <linux/atomic.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PHY_BASIC_FEATURES	(SUPPORTED_10baseT_Half | \
 				 SUPPORTED_10baseT_Full | \
 				 SUPPORTED_100baseT_Half | \
@@ -44,6 +48,8 @@
 				 SUPPORTED_1000baseT_Full)
 
 =======
+=======
+>>>>>>> v3.18
 #define PHY_DEFAULT_FEATURES	(SUPPORTED_Autoneg | \
 				 SUPPORTED_TP | \
 				 SUPPORTED_MII)
@@ -65,6 +71,9 @@
 				 PHY_1000BT_FEATURES)
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Set phydev->irq to PHY_POLL if interrupts are not supported,
@@ -77,6 +86,10 @@
 #define PHY_HAS_INTERRUPT	0x00000001
 #define PHY_HAS_MAGICANEG	0x00000002
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PHY_IS_INTERNAL		0x00000004
+>>>>>>> v3.18
 =======
 #define PHY_IS_INTERNAL		0x00000004
 >>>>>>> v3.18
@@ -89,6 +102,10 @@ typedef enum {
 	PHY_INTERFACE_MODE_SGMII,
 	PHY_INTERFACE_MODE_TBI,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	PHY_INTERFACE_MODE_REVMII,
+>>>>>>> v3.18
 =======
 	PHY_INTERFACE_MODE_REVMII,
 >>>>>>> v3.18
@@ -100,9 +117,12 @@ typedef enum {
 	PHY_INTERFACE_MODE_RTBI,
 	PHY_INTERFACE_MODE_SMII,
 <<<<<<< HEAD
+<<<<<<< HEAD
 } phy_interface_t;
 
 =======
+=======
+>>>>>>> v3.18
 	PHY_INTERFACE_MODE_XGMII,
 	PHY_INTERFACE_MODE_MOCA,
 	PHY_INTERFACE_MODE_QSGMII,
@@ -154,6 +174,9 @@ static inline const char *phy_modes(phy_interface_t interface)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define PHY_INIT_TIMEOUT	100000
@@ -230,7 +253,10 @@ int mdiobus_register(struct mii_bus *bus);
 void mdiobus_unregister(struct mii_bus *bus);
 void mdiobus_free(struct mii_bus *bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct mii_bus *devm_mdiobus_alloc_size(struct device *dev, int sizeof_priv);
 static inline struct mii_bus *devm_mdiobus_alloc(struct device *dev)
 {
@@ -238,6 +264,9 @@ static inline struct mii_bus *devm_mdiobus_alloc(struct device *dev)
 }
 
 void devm_mdiobus_free(struct device *dev, struct mii_bus *bus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct phy_device *mdiobus_scan(struct mii_bus *bus, int addr);
 int mdiobus_read(struct mii_bus *bus, int addr, u32 regnum);
@@ -329,7 +358,11 @@ int mdiobus_write(struct mii_bus *bus, int addr, u32 regnum, u16 val);
  */
 enum phy_state {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PHY_DOWN=0,
+=======
+	PHY_DOWN = 0,
+>>>>>>> v3.18
 =======
 	PHY_DOWN = 0,
 >>>>>>> v3.18
@@ -365,6 +398,10 @@ struct phy_c45_device_ids {
  * c45_ids: 802.3-c45 Device Identifers if is_c45.
  * is_c45:  Set to true if this phy uses clause 45 addressing.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * is_internal: Set to true if this phy is internal to a MAC.
+>>>>>>> v3.18
 =======
  * is_internal: Set to true if this phy is internal to a MAC.
 >>>>>>> v3.18
@@ -380,11 +417,17 @@ struct phy_c45_device_ids {
  * adjust_link: Callback for the enet controller to respond to
  * changes in the link state.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * adjust_state: Callback for the enet driver to respond to
  * changes in the state machine.
  *
  * speed, duplex, pause, supported, advertising, and
  * autoneg are used like in mii_if_info
+=======
+ *
+ * speed, duplex, pause, supported, advertising, lp_advertising,
+ * and autoneg are used like in mii_if_info
+>>>>>>> v3.18
 =======
  *
  * speed, duplex, pause, supported, advertising, lp_advertising,
@@ -412,6 +455,11 @@ struct phy_device {
 	struct phy_c45_device_ids c45_ids;
 	bool is_c45;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool is_internal;
+	bool has_fixups;
+>>>>>>> v3.18
 =======
 	bool is_internal;
 	bool has_fixups;
@@ -446,6 +494,10 @@ struct phy_device {
 	u32 supported;
 	u32 advertising;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 lp_advertising;
+>>>>>>> v3.18
 =======
 	u32 lp_advertising;
 >>>>>>> v3.18
@@ -475,8 +527,11 @@ struct phy_device {
 
 	void (*adjust_link)(struct net_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	void (*adjust_state)(struct net_device *dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -511,12 +566,18 @@ struct phy_driver {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Called to issue a PHY software reset
 	 */
 	int (*soft_reset)(struct phy_device *phydev);
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Called to initialize the PHY,
 	 * including after a reset
@@ -542,6 +603,12 @@ struct phy_driver {
 	int (*config_aneg)(struct phy_device *phydev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Determines the auto negotiation result */
+	int (*aneg_done)(struct phy_device *phydev);
+
+>>>>>>> v3.18
 =======
 	/* Determines the auto negotiation result */
 	int (*aneg_done)(struct phy_device *phydev);
@@ -603,7 +670,10 @@ struct phy_driver {
 	void (*get_wol)(struct phy_device *dev, struct ethtool_wolinfo *wol);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Called to inform a PHY device driver when the core is about to
 	 * change the link state. This callback is supposed to be used as
@@ -631,6 +701,9 @@ struct phy_driver {
 	void (*write_mmd_indirect)(struct phy_device *dev, int ptrad,
 				   int devnum, int regnum, u32 val);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct device_driver driver;
 };
@@ -650,7 +723,10 @@ struct phy_fixup {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * phy_read_mmd - Convenience function for reading a register
  * from an MMD on a given PHY.
  * @phydev: The phy_device struct
@@ -682,6 +758,9 @@ int phy_read_mmd_indirect(struct phy_device *phydev, int prtad,
 			  int devad, int addr);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * phy_read - Convenience function for reading a given PHY register
  * @phydev: the phy_device struct
@@ -712,6 +791,7 @@ static inline int phy_write(struct phy_device *phydev, u32 regnum, u16 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct phy_device *phy_device_create(struct mii_bus *bus, int addr, int phy_id,
 		bool is_c45, struct phy_c45_device_ids *c45_ids);
 struct phy_device *get_phy_device(struct mii_bus *bus, int addr, bool is_c45);
@@ -727,6 +807,8 @@ struct phy_device * phy_connect(struct net_device *dev, const char *bus_id,
 		void (*handler)(struct net_device *),
 		phy_interface_t interface);
 =======
+=======
+>>>>>>> v3.18
 /**
  * phy_interrupt_is_valid - Convenience function for testing a given PHY irq
  * @phydev: the phy_device struct
@@ -802,6 +884,9 @@ int phy_connect_direct(struct net_device *dev, struct phy_device *phydev,
 struct phy_device *phy_connect(struct net_device *dev, const char *bus_id,
 			       void (*handler)(struct net_device *),
 			       phy_interface_t interface);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void phy_disconnect(struct phy_device *phydev);
 void phy_detach(struct phy_device *phydev);
@@ -812,6 +897,7 @@ int phy_start_aneg(struct phy_device *phydev);
 int phy_stop_interrupts(struct phy_device *phydev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int phy_read_status(struct phy_device *phydev) {
 	return phydev->drv->read_status(phydev);
 }
@@ -819,6 +905,8 @@ static inline int phy_read_status(struct phy_device *phydev) {
 int genphy_restart_aneg(struct phy_device *phydev);
 int genphy_config_aneg(struct phy_device *phydev);
 =======
+=======
+>>>>>>> v3.18
 static inline int phy_read_status(struct phy_device *phydev)
 {
 	return phydev->drv->read_status(phydev);
@@ -829,12 +917,19 @@ int genphy_setup_forced(struct phy_device *phydev);
 int genphy_restart_aneg(struct phy_device *phydev);
 int genphy_config_aneg(struct phy_device *phydev);
 int genphy_aneg_done(struct phy_device *phydev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int genphy_update_link(struct phy_device *phydev);
 int genphy_read_status(struct phy_device *phydev);
 int genphy_suspend(struct phy_device *phydev);
 int genphy_resume(struct phy_device *phydev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int genphy_soft_reset(struct phy_device *phydev);
+>>>>>>> v3.18
 =======
 int genphy_soft_reset(struct phy_device *phydev);
 >>>>>>> v3.18
@@ -844,6 +939,7 @@ int phy_driver_register(struct phy_driver *new_driver);
 int phy_drivers_register(struct phy_driver *new_driver, int n);
 void phy_state_machine(struct work_struct *work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void phy_start_machine(struct phy_device *phydev,
 		void (*handler)(struct net_device *));
 void phy_stop_machine(struct phy_device *phydev);
@@ -852,6 +948,8 @@ int phy_ethtool_gset(struct phy_device *phydev, struct ethtool_cmd *cmd);
 int phy_mii_ioctl(struct phy_device *phydev,
 		struct ifreq *ifr, int cmd);
 =======
+=======
+>>>>>>> v3.18
 void phy_change(struct work_struct *work);
 void phy_mac_interrupt(struct phy_device *phydev, int new_link);
 void phy_start_machine(struct phy_device *phydev);
@@ -859,12 +957,16 @@ void phy_stop_machine(struct phy_device *phydev);
 int phy_ethtool_sset(struct phy_device *phydev, struct ethtool_cmd *cmd);
 int phy_ethtool_gset(struct phy_device *phydev, struct ethtool_cmd *cmd);
 int phy_mii_ioctl(struct phy_device *phydev, struct ifreq *ifr, int cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int phy_start_interrupts(struct phy_device *phydev);
 void phy_print_status(struct phy_device *phydev);
 void phy_device_free(struct phy_device *phydev);
 
 int phy_register_fixup(const char *bus_id, u32 phy_uid, u32 phy_uid_mask,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		int (*run)(struct phy_device *));
 int phy_register_fixup_for_id(const char *bus_id,
@@ -873,11 +975,16 @@ int phy_register_fixup_for_uid(u32 phy_uid, u32 phy_uid_mask,
 		int (*run)(struct phy_device *));
 int phy_scan_fixups(struct phy_device *phydev);
 =======
+=======
+>>>>>>> v3.18
 		       int (*run)(struct phy_device *));
 int phy_register_fixup_for_id(const char *bus_id,
 			      int (*run)(struct phy_device *));
 int phy_register_fixup_for_uid(u32 phy_uid, u32 phy_uid_mask,
 			       int (*run)(struct phy_device *));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable);
@@ -886,7 +993,12 @@ int phy_ethtool_set_eee(struct phy_device *phydev, struct ethtool_eee *data);
 int phy_ethtool_get_eee(struct phy_device *phydev, struct ethtool_eee *data);
 int phy_ethtool_set_wol(struct phy_device *phydev, struct ethtool_wolinfo *wol);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void phy_ethtool_get_wol(struct phy_device *phydev, struct ethtool_wolinfo *wol);
+=======
+void phy_ethtool_get_wol(struct phy_device *phydev,
+			 struct ethtool_wolinfo *wol);
+>>>>>>> v3.18
 =======
 void phy_ethtool_get_wol(struct phy_device *phydev,
 			 struct ethtool_wolinfo *wol);

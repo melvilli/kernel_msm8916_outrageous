@@ -25,7 +25,11 @@
 #include <linux/delay.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/at24.h>
+=======
+#include <linux/platform_data/at24.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/at24.h>
 >>>>>>> v3.18
@@ -40,6 +44,10 @@
 #include "common.h"
 #include "devices-imx35.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 =======
 #include "ehci.h"
 >>>>>>> v3.18
@@ -394,7 +402,11 @@ static void __init pcm043_init(void)
 		imx35_add_fsl_usb2_udc(&otg_device_pdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	imx35_add_flexcan1(NULL);
+=======
+	imx35_add_flexcan1();
+>>>>>>> v3.18
 =======
 	imx35_add_flexcan1();
 >>>>>>> v3.18
@@ -413,7 +425,10 @@ MACHINE_START(PCM043, "Phytec Phycore pcm043")
 	.init_early = imx35_init_early,
 	.init_irq = mx35_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx35_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time = pcm043_timer_init,

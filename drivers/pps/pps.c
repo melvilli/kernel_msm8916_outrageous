@@ -407,7 +407,11 @@ static int __init pps_init(void)
 		return PTR_ERR(pps_class);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pps_class->dev_attrs = pps_attrs;
+=======
+	pps_class->dev_groups = pps_groups;
+>>>>>>> v3.18
 =======
 	pps_class->dev_groups = pps_groups;
 >>>>>>> v3.18

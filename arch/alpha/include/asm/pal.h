@@ -90,6 +90,10 @@ __CALL_PAL_RW2(wrperfmon, unsigned long, unsigned long, unsigned long);
 __CALL_PAL_W1(wrusp, unsigned long);
 __CALL_PAL_W1(wrvptptr, unsigned long);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+__CALL_PAL_RW1(wtint, unsigned long, unsigned long);
+>>>>>>> v3.18
 =======
 __CALL_PAL_RW1(wtint, unsigned long, unsigned long);
 >>>>>>> v3.18
@@ -116,7 +120,10 @@ __CALL_PAL_RW1(wtint, unsigned long, unsigned long);
 #define tbia()		__tbi(-2, /* no second argument */)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * QEMU Cserv routines..
  */
@@ -187,6 +194,9 @@ qemu_get_vmtime(void)
 	return v0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !__ASSEMBLY__ */
 #endif /* __ALPHA_PAL_H */

@@ -7,7 +7,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -59,7 +63,10 @@ static u32 ACPI_SYSTEM_XFACE acpi_ev_sci_xrupt_handler(void *context);
 /*******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_ev_sci_dispatch
  *
  * PARAMETERS:  None
@@ -104,6 +111,9 @@ u32 acpi_ev_sci_dispatch(void)
 
 /*******************************************************************************
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * FUNCTION:    acpi_ev_sci_xrupt_handler
  *
@@ -125,7 +135,11 @@ static u32 ACPI_SYSTEM_XFACE acpi_ev_sci_xrupt_handler(void *context)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * We are guaranteed by the ACPI CA initialization/shutdown code that
+=======
+	 * We are guaranteed by the ACPICA initialization/shutdown code that
+>>>>>>> v3.18
 =======
 	 * We are guaranteed by the ACPICA initialization/shutdown code that
 >>>>>>> v3.18
@@ -145,12 +159,18 @@ static u32 ACPI_SYSTEM_XFACE acpi_ev_sci_xrupt_handler(void *context)
 	interrupt_handled |= acpi_ev_gpe_detect(gpe_xrupt_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Invoke all host-installed SCI handlers */
 
 	interrupt_handled |= acpi_ev_sci_dispatch();
 
 	acpi_sci_count++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return_UINT32(interrupt_handled);
 }
@@ -176,7 +196,11 @@ u32 ACPI_SYSTEM_XFACE acpi_ev_gpe_xrupt_handler(void *context)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * We are guaranteed by the ACPI CA initialization/shutdown code that
+=======
+	 * We are guaranteed by the ACPICA initialization/shutdown code that
+>>>>>>> v3.18
 =======
 	 * We are guaranteed by the ACPICA initialization/shutdown code that
 >>>>>>> v3.18
@@ -187,7 +211,10 @@ u32 ACPI_SYSTEM_XFACE acpi_ev_gpe_xrupt_handler(void *context)
 
 	interrupt_handled |= acpi_ev_gpe_detect(gpe_xrupt_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return_UINT32(interrupt_handled);
@@ -221,6 +248,7 @@ u32 acpi_ev_install_sci_handler(void)
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * FUNCTION:    acpi_ev_remove_sci_handler
  *
  * PARAMETERS:  none
@@ -231,6 +259,8 @@ u32 acpi_ev_install_sci_handler(void)
  * DESCRIPTION: Remove the SCI interrupt handler. No further SCIs will be
  *              taken.
 =======
+=======
+>>>>>>> v3.18
  * FUNCTION:    acpi_ev_remove_all_sci_handlers
  *
  * PARAMETERS:  none
@@ -240,6 +270,9 @@ u32 acpi_ev_install_sci_handler(void)
  *
  * DESCRIPTION: Remove the SCI interrupt handler. No further SCIs will be
  *              taken. Remove all host-installed SCI handlers.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Note:  It doesn't seem important to disable all events or set the event
@@ -250,12 +283,15 @@ u32 acpi_ev_install_sci_handler(void)
  ******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status acpi_ev_remove_sci_handler(void)
 {
 	acpi_status status;
 
 	ACPI_FUNCTION_TRACE(ev_remove_sci_handler);
 =======
+=======
+>>>>>>> v3.18
 acpi_status acpi_ev_remove_all_sci_handlers(void)
 {
 	struct acpi_sci_handler_info *sci_handler;
@@ -263,6 +299,9 @@ acpi_status acpi_ev_remove_all_sci_handlers(void)
 	acpi_status status;
 
 	ACPI_FUNCTION_TRACE(ev_remove_all_sci_handlers);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Just let the OS remove the handler and disable the level */
@@ -272,7 +311,10 @@ acpi_status acpi_ev_remove_all_sci_handlers(void)
 					     acpi_ev_sci_xrupt_handler);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!acpi_gbl_sci_handler_list) {
 		return (status);
 	}
@@ -288,6 +330,9 @@ acpi_status acpi_ev_remove_all_sci_handlers(void)
 	}
 
 	acpi_os_release_lock(acpi_gbl_gpe_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return_ACPI_STATUS(status);
 }

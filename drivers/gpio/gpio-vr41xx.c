@@ -82,6 +82,10 @@ static unsigned long giu_flags;
 
 static void __iomem *giu_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct gpio_chip vr41xx_gpio_chip;
+>>>>>>> v3.18
 =======
 static struct gpio_chip vr41xx_gpio_chip;
 >>>>>>> v3.18
@@ -140,7 +144,10 @@ static void unmask_giuint_low(struct irq_data *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned int startup_giuint(struct irq_data *data)
 {
 	if (gpio_lock_as_irq(&vr41xx_gpio_chip, data->hwirq))
@@ -158,6 +165,9 @@ static void shutdown_giuint(struct irq_data *data)
 	gpio_unlock_as_irq(&vr41xx_gpio_chip, data->hwirq);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct irq_chip giuint_low_irq_chip = {
 	.name		= "GIUINTL",
@@ -166,6 +176,11 @@ static struct irq_chip giuint_low_irq_chip = {
 	.irq_mask_ack	= mask_ack_giuint_low,
 	.irq_unmask	= unmask_giuint_low,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.irq_startup	= startup_giuint,
+	.irq_shutdown	= shutdown_giuint,
+>>>>>>> v3.18
 =======
 	.irq_startup	= startup_giuint,
 	.irq_shutdown	= shutdown_giuint,
@@ -525,7 +540,11 @@ static int giu_probe(struct platform_device *pdev)
 	unsigned int trigger, i, pin;
 	struct irq_chip *chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq, retval;
+=======
+	int irq, ret;
+>>>>>>> v3.18
 =======
 	int irq, ret;
 >>>>>>> v3.18
@@ -558,13 +577,19 @@ static int giu_probe(struct platform_device *pdev)
 	vr41xx_gpio_chip.dev = &pdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = gpiochip_add(&vr41xx_gpio_chip);
 =======
+=======
+>>>>>>> v3.18
 	ret = gpiochip_add(&vr41xx_gpio_chip);
 	if (!ret) {
 		iounmap(giu_base);
 		return -ENODEV;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	giu_write(GIUINTENL, 0);

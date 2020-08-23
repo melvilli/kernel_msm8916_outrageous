@@ -120,7 +120,11 @@ static u8 bcm2835_sdhci_readb(struct sdhci_host *host, int reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int bcm2835_sdhci_get_min_clock(struct sdhci_host *host)
+=======
+static unsigned int bcm2835_sdhci_get_min_clock(struct sdhci_host *host)
+>>>>>>> v3.18
 =======
 static unsigned int bcm2835_sdhci_get_min_clock(struct sdhci_host *host)
 >>>>>>> v3.18
@@ -136,15 +140,21 @@ static const struct sdhci_ops bcm2835_sdhci_ops = {
 	.read_w = bcm2835_sdhci_readw,
 	.read_b = bcm2835_sdhci_readb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_max_clock = sdhci_pltfm_clk_get_max_clock,
 	.get_min_clock = bcm2835_sdhci_get_min_clock,
 =======
+=======
+>>>>>>> v3.18
 	.set_clock = sdhci_set_clock,
 	.get_max_clock = sdhci_pltfm_clk_get_max_clock,
 	.get_min_clock = bcm2835_sdhci_get_min_clock,
 	.set_bus_width = sdhci_set_bus_width,
 	.reset = sdhci_reset,
 	.set_uhs_signaling = sdhci_set_uhs_signaling,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -162,7 +172,11 @@ static int bcm2835_sdhci_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host = sdhci_pltfm_init(pdev, &bcm2835_sdhci_pdata);
+=======
+	host = sdhci_pltfm_init(pdev, &bcm2835_sdhci_pdata, 0);
+>>>>>>> v3.18
 =======
 	host = sdhci_pltfm_init(pdev, &bcm2835_sdhci_pdata, 0);
 >>>>>>> v3.18
@@ -196,6 +210,7 @@ err:
 static int bcm2835_sdhci_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sdhci_host *host = platform_get_drvdata(pdev);
 	int dead = (readl(host->ioaddr + SDHCI_INT_STATUS) == 0xffffffff);
 
@@ -203,6 +218,9 @@ static int bcm2835_sdhci_remove(struct platform_device *pdev)
 	sdhci_pltfm_free(pdev);
 
 	return 0;
+=======
+	return sdhci_pltfm_unregister(pdev);
+>>>>>>> v3.18
 =======
 	return sdhci_pltfm_unregister(pdev);
 >>>>>>> v3.18
@@ -218,7 +236,10 @@ static struct platform_driver bcm2835_sdhci_driver = {
 	.driver = {
 		.name = "sdhci-bcm2835",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner = THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.of_match_table = bcm2835_sdhci_of_match,

@@ -56,7 +56,11 @@ struct bus_type ibmebus_bus_type;
 
 /* These devices will automatically be added to the bus during init */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id __initdata ibmebus_matches[] = {
+=======
+static const struct of_device_id ibmebus_matches[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id ibmebus_matches[] __initconst = {
 >>>>>>> v3.18
@@ -185,7 +189,10 @@ static int ibmebus_create_devices(const struct of_device_id *matches)
 {
 	struct device_node *root, *child;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret = 0;
@@ -197,12 +204,18 @@ static int ibmebus_create_devices(const struct of_device_id *matches)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev = bus_find_device(&ibmebus_bus_type, NULL, child,
 				      ibmebus_match_node);
 		if (dev) {
 			put_device(dev);
 			continue;
 		}
+=======
+		if (bus_find_device(&ibmebus_bus_type, NULL, child,
+				    ibmebus_match_node))
+			continue;
+>>>>>>> v3.18
 =======
 		if (bus_find_device(&ibmebus_bus_type, NULL, child,
 				    ibmebus_match_node))
@@ -223,7 +236,11 @@ static int ibmebus_create_devices(const struct of_device_id *matches)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ibmebus_register_driver(struct of_platform_driver *drv)
+=======
+int ibmebus_register_driver(struct platform_driver *drv)
+>>>>>>> v3.18
 =======
 int ibmebus_register_driver(struct platform_driver *drv)
 >>>>>>> v3.18
@@ -237,7 +254,11 @@ int ibmebus_register_driver(struct platform_driver *drv)
 EXPORT_SYMBOL(ibmebus_register_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ibmebus_unregister_driver(struct of_platform_driver *drv)
+=======
+void ibmebus_unregister_driver(struct platform_driver *drv)
+>>>>>>> v3.18
 =======
 void ibmebus_unregister_driver(struct platform_driver *drv)
 >>>>>>> v3.18
@@ -288,7 +309,10 @@ static ssize_t ibmebus_store_probe(struct bus_type *bus,
 {
 	struct device_node *dn = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	char *path;
@@ -299,10 +323,15 @@ static ssize_t ibmebus_store_probe(struct bus_type *bus,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = bus_find_device(&ibmebus_bus_type, NULL, path,
 			      ibmebus_match_path);
 	if (dev) {
 		put_device(dev);
+=======
+	if (bus_find_device(&ibmebus_bus_type, NULL, path,
+			    ibmebus_match_path)) {
+>>>>>>> v3.18
 =======
 	if (bus_find_device(&ibmebus_bus_type, NULL, path,
 			    ibmebus_match_path)) {
@@ -329,6 +358,10 @@ out:
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static BUS_ATTR(probe, S_IWUSR, NULL, ibmebus_store_probe);
+>>>>>>> v3.18
 =======
 static BUS_ATTR(probe, S_IWUSR, NULL, ibmebus_store_probe);
 >>>>>>> v3.18
@@ -347,7 +380,10 @@ static ssize_t ibmebus_store_remove(struct bus_type *bus,
 				   ibmebus_match_path))) {
 		of_device_unregister(to_platform_device(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		put_device(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -362,6 +398,7 @@ static ssize_t ibmebus_store_remove(struct bus_type *bus,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 static struct bus_attribute ibmebus_bus_attrs[] = {
@@ -370,6 +407,8 @@ static struct bus_attribute ibmebus_bus_attrs[] = {
 	__ATTR_NULL
 };
 =======
+=======
+>>>>>>> v3.18
 static BUS_ATTR(remove, S_IWUSR, NULL, ibmebus_store_remove);
 
 static struct attribute *ibmbus_bus_attrs[] = {
@@ -378,6 +417,9 @@ static struct attribute *ibmbus_bus_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(ibmbus_bus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ibmebus_bus_bus_match(struct device *dev, struct device_driver *drv)
@@ -394,16 +436,22 @@ static int ibmebus_bus_device_probe(struct device *dev)
 {
 	int error = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_platform_driver *drv;
 	struct platform_device *of_dev;
 	const struct of_device_id *match;
 
 	drv = to_of_platform_driver(dev->driver);
 =======
+=======
+>>>>>>> v3.18
 	struct platform_driver *drv;
 	struct platform_device *of_dev;
 
 	drv = to_platform_driver(dev->driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	of_dev = to_platform_device(dev);
 
@@ -413,9 +461,14 @@ static int ibmebus_bus_device_probe(struct device *dev)
 	of_dev_get(of_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	match = of_match_device(drv->driver.of_match_table, dev);
 	if (match)
 		error = drv->probe(of_dev, match);
+=======
+	if (of_driver_match_device(dev, dev->driver))
+		error = drv->probe(of_dev);
+>>>>>>> v3.18
 =======
 	if (of_driver_match_device(dev, dev->driver))
 		error = drv->probe(of_dev);
@@ -430,7 +483,11 @@ static int ibmebus_bus_device_remove(struct device *dev)
 {
 	struct platform_device *of_dev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_platform_driver *drv = to_of_platform_driver(dev->driver);
+=======
+	struct platform_driver *drv = to_platform_driver(dev->driver);
+>>>>>>> v3.18
 =======
 	struct platform_driver *drv = to_platform_driver(dev->driver);
 >>>>>>> v3.18
@@ -444,7 +501,11 @@ static void ibmebus_bus_device_shutdown(struct device *dev)
 {
 	struct platform_device *of_dev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_platform_driver *drv = to_of_platform_driver(dev->driver);
+=======
+	struct platform_driver *drv = to_platform_driver(dev->driver);
+>>>>>>> v3.18
 =======
 	struct platform_driver *drv = to_platform_driver(dev->driver);
 >>>>>>> v3.18
@@ -495,7 +556,11 @@ static int ibmebus_bus_legacy_suspend(struct device *dev, pm_message_t mesg)
 {
 	struct platform_device *of_dev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_platform_driver *drv = to_of_platform_driver(dev->driver);
+=======
+	struct platform_driver *drv = to_platform_driver(dev->driver);
+>>>>>>> v3.18
 =======
 	struct platform_driver *drv = to_platform_driver(dev->driver);
 >>>>>>> v3.18
@@ -510,7 +575,11 @@ static int ibmebus_bus_legacy_resume(struct device *dev)
 {
 	struct platform_device *of_dev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_platform_driver *drv = to_of_platform_driver(dev->driver);
+=======
+	struct platform_driver *drv = to_platform_driver(dev->driver);
+>>>>>>> v3.18
 =======
 	struct platform_driver *drv = to_platform_driver(dev->driver);
 >>>>>>> v3.18
@@ -799,7 +868,11 @@ struct bus_type ibmebus_bus_type = {
 	.name      = "ibmebus",
 	.uevent    = of_device_uevent_modalias,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.bus_attrs = ibmebus_bus_attrs,
+=======
+	.bus_groups = ibmbus_bus_groups,
+>>>>>>> v3.18
 =======
 	.bus_groups = ibmbus_bus_groups,
 >>>>>>> v3.18

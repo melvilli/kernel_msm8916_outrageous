@@ -76,7 +76,11 @@ static int xo1_power_state_enter(suspend_state_t pm_state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage int xo1_do_sleep(u8 sleep_state)
+=======
+asmlinkage __visible int xo1_do_sleep(u8 sleep_state)
+>>>>>>> v3.18
 =======
 asmlinkage __visible int xo1_do_sleep(u8 sleep_state)
 >>>>>>> v3.18

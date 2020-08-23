@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * include/linux/ion.h
+=======
+ * drivers/staging/android/uapi/ion.h
+>>>>>>> v3.18
 =======
  * drivers/staging/android/uapi/ion.h
 >>>>>>> v3.18
@@ -19,8 +23,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _UAPI_ION_H
 #define _UAPI_ION_H
+=======
+#ifndef _UAPI_LINUX_ION_H
+#define _UAPI_LINUX_ION_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI_LINUX_ION_H
 #define _UAPI_LINUX_ION_H
@@ -37,6 +46,7 @@ typedef int ion_user_handle_t;
  * @ION_HEAP_TYPE_SYSTEM_CONTIG: memory allocated via kmalloc
  * @ION_HEAP_TYPE_CARVEOUT:	 memory allocated from a prereserved
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 				 carveout heap, allocations are physically
  * 				 contiguous
  * @ION_HEAP_TYPE_DMA:		 memory allocated via DMA API
@@ -44,12 +54,17 @@ typedef int ion_user_handle_t;
  * 				 is used to identify the heaps, so only 32
  * 				 total heap types are supported
 =======
+=======
+>>>>>>> v3.18
  *				 carveout heap, allocations are physically
  *				 contiguous
  * @ION_HEAP_TYPE_DMA:		 memory allocated via DMA API
  * @ION_NUM_HEAPS:		 helper for iterating over heaps, a bit mask
  *				 is used to identify the heaps, so only 32
  *				 total heap types are supported
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 enum ion_heap_type {
@@ -69,7 +84,11 @@ enum ion_heap_type {
 #define ION_HEAP_TYPE_DMA_MASK		(1 << ION_HEAP_TYPE_DMA)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ION_NUM_HEAP_IDS		sizeof(unsigned int) * 8
+=======
+#define ION_NUM_HEAP_IDS		(sizeof(unsigned int) * 8)
+>>>>>>> v3.18
 =======
 #define ION_NUM_HEAP_IDS		(sizeof(unsigned int) * 8)
 >>>>>>> v3.18
@@ -101,7 +120,11 @@ enum ion_heap_type {
  * @heap_id_mask:	mask of heap ids to allocate from
  * @flags:		flags passed to heap
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @handle:		pointer that will be populated with a cookie to use to 
+=======
+ * @handle:		pointer that will be populated with a cookie to use to
+>>>>>>> v3.18
 =======
  * @handle:		pointer that will be populated with a cookie to use to
 >>>>>>> v3.18
@@ -153,6 +176,10 @@ struct ion_custom_data {
 	unsigned long arg;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -223,7 +250,11 @@ struct ion_custom_data {
 #define ION_IOC_CUSTOM		_IOWR(ION_IOC_MAGIC, 6, struct ion_custom_data)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* _UAPI_ION_H */
+=======
+#endif /* _UAPI_LINUX_ION_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI_LINUX_ION_H */
 >>>>>>> v3.18

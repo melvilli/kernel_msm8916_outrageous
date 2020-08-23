@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -199,7 +203,10 @@ acpi_rs_convert_aml_to_resource(struct acpi_resource *resource,
 
 		case ACPI_RSC_COUNT_GPIO_RES:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -418,6 +425,10 @@ acpi_rs_convert_aml_to_resource(struct acpi_resource *resource,
 			switch (info->resource_offset) {
 			case ACPI_RSC_COMPARE_AML_LENGTH:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -428,6 +439,10 @@ acpi_rs_convert_aml_to_resource(struct acpi_resource *resource,
 
 			case ACPI_RSC_COMPARE_VALUE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -455,7 +470,11 @@ acpi_rs_convert_aml_to_resource(struct acpi_resource *resource,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18
@@ -802,7 +821,11 @@ acpi_rs_convert_resource_to_aml(struct acpi_resource *resource,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18

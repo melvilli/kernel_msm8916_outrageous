@@ -8,11 +8,14 @@
 
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define __NUM_GPRS 16
 #define __NUM_FPRS 16
 #define __NUM_ACRS 16
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 
 #define __NUM_GPRS		16
@@ -21,6 +24,9 @@
 #define __NUM_VXRS		32
 #define __NUM_VXRS_LOW		16
 #define __NUM_VXRS_HIGH		16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef __s390x__
@@ -61,6 +67,10 @@ typedef struct
 {
 	unsigned int fpc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int pad;
+>>>>>>> v3.18
 =======
 	unsigned int pad;
 >>>>>>> v3.18
@@ -74,7 +84,10 @@ typedef struct
 } _sigregs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef struct
 {
 #ifndef __s390x__
@@ -85,6 +98,9 @@ typedef struct
 	unsigned char __reserved[128];
 } _sigregs_ext;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct sigcontext
 {

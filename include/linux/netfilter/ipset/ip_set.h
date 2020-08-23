@@ -40,12 +40,15 @@ enum ip_set_feature {
 	IPSET_TYPE_IFACE_FLAG = 5,
 	IPSET_TYPE_IFACE = (1 << IPSET_TYPE_IFACE_FLAG),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IPSET_TYPE_NOMATCH_FLAG = 6,
 	IPSET_TYPE_NOMATCH = (1 << IPSET_TYPE_NOMATCH_FLAG),
 	/* Strictly speaking not a feature, but a flag for dumping:
 	 * this settype must be dumped last */
 	IPSET_DUMP_LAST_FLAG = 7,
 =======
+=======
+>>>>>>> v3.18
 	IPSET_TYPE_MARK_FLAG = 6,
 	IPSET_TYPE_MARK = (1 << IPSET_TYPE_MARK_FLAG),
 	IPSET_TYPE_NOMATCH_FLAG = 7,
@@ -53,12 +56,16 @@ enum ip_set_feature {
 	/* Strictly speaking not a feature, but a flag for dumping:
 	 * this settype must be dumped last */
 	IPSET_DUMP_LAST_FLAG = 8,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	IPSET_DUMP_LAST = (1 << IPSET_DUMP_LAST_FLAG),
 };
 
 /* Set extensions */
 enum ip_set_extension {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	IPSET_EXT_NONE = 0,
 	IPSET_EXT_BIT_TIMEOUT = 1,
@@ -73,6 +80,8 @@ enum ip_set_offset {
 	IPSET_OFFSET_COUNTER,
 	IPSET_OFFSET_MAX,
 =======
+=======
+>>>>>>> v3.18
 	IPSET_EXT_BIT_TIMEOUT = 0,
 	IPSET_EXT_TIMEOUT = (1 << IPSET_EXT_BIT_TIMEOUT),
 	IPSET_EXT_BIT_COUNTER = 1,
@@ -84,11 +93,15 @@ enum ip_set_offset {
 	/* Mark set with an extension which needs to call destroy */
 	IPSET_EXT_BIT_DESTROY = 7,
 	IPSET_EXT_DESTROY = (1 << IPSET_EXT_BIT_DESTROY),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 #define SET_WITH_TIMEOUT(s)	((s)->extensions & IPSET_EXT_TIMEOUT)
 #define SET_WITH_COUNTER(s)	((s)->extensions & IPSET_EXT_COUNTER)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct ip_set_ext {
@@ -96,6 +109,8 @@ struct ip_set_ext {
 	u64 packets;
 	u64 bytes;
 =======
+=======
+>>>>>>> v3.18
 #define SET_WITH_COMMENT(s)	((s)->extensions & IPSET_EXT_COMMENT)
 #define SET_WITH_SKBINFO(s)	((s)->extensions & IPSET_EXT_SKBINFO)
 #define SET_WITH_FORCEADD(s)	((s)->flags & IPSET_CREATE_FLAG_FORCEADD)
@@ -147,13 +162,19 @@ struct ip_set_skbinfo {
 	u32 skbmarkmask;
 	u32 skbprio;
 	u16 skbqueue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 struct ip_set;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ext_timeout(e, s)	\
 (unsigned long *)(((void *)(e)) + (s)->offset[IPSET_EXT_ID_TIMEOUT])
 #define ext_counter(e, s)	\
@@ -163,6 +184,9 @@ struct ip_set;
 #define ext_skbinfo(e, s)	\
 (struct ip_set_skbinfo *)(((void *)(e)) + (s)->offset[IPSET_EXT_ID_SKBINFO])
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef int (*ipset_adtfn)(struct ip_set *set, void *value,
 			   const struct ip_set_ext *ext,
@@ -225,8 +249,11 @@ struct ip_set_type {
 	/* Protocol version */
 	u8 protocol;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set features to control swapping */
 	u8 features;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Set type dimension */
@@ -239,16 +266,22 @@ struct ip_set_type {
 	/* Type revisions */
 	u8 revision_min, revision_max;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Create set */
 	int (*create)(struct ip_set *set, struct nlattr *tb[], u32 flags);
 =======
+=======
+>>>>>>> v3.18
 	/* Set features to control swapping */
 	u16 features;
 
 	/* Create set */
 	int (*create)(struct net *net, struct ip_set *set,
 		      struct nlattr *tb[], u32 flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Attribute policies */
@@ -282,7 +315,10 @@ struct ip_set {
 	/* Extensions */
 	u8 extensions;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Create flags */
 	u8 flags;
 	/* Default timeout value, if enabled */
@@ -291,17 +327,23 @@ struct ip_set {
 	size_t dsize;
 	/* Offsets to extensions in elements */
 	size_t offset[IPSET_EXT_ID_MAX];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* The type specific data */
 	void *data;
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct ip_set_counter {
 	atomic64_t bytes;
 	atomic64_t packets;
 };
 =======
+=======
+>>>>>>> v3.18
 static inline void
 ip_set_ext_destroy(struct ip_set *set, void *data)
 {
@@ -335,6 +377,9 @@ ip_set_put_flags(struct sk_buff *skb, struct ip_set *set)
 		return 0;
 	return nla_put_net32(skb, IPSET_ATTR_CADT_FLAGS, htonl(cadt_flags));
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void
@@ -378,7 +423,10 @@ ip_set_update_counter(struct ip_set_counter *counter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void
 ip_set_get_skbinfo(struct ip_set_skbinfo *skbinfo,
 		      const struct ip_set_ext *ext,
@@ -416,6 +464,9 @@ ip_set_init_skbinfo(struct ip_set_skbinfo *skbinfo,
 	skbinfo->skbqueue = ext->skbqueue;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool
 ip_set_put_counter(struct sk_buff *skb, struct ip_set_counter *counter)
@@ -437,6 +488,7 @@ ip_set_init_counter(struct ip_set_counter *counter,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* register and unregister set references */
 extern ip_set_id_t ip_set_get_byname(const char *name, struct ip_set **set);
 extern void ip_set_put_byindex(ip_set_id_t index);
@@ -445,6 +497,8 @@ extern ip_set_id_t ip_set_nfnl_get(const char *name);
 extern ip_set_id_t ip_set_nfnl_get_byindex(ip_set_id_t index);
 extern void ip_set_nfnl_put(ip_set_id_t index);
 =======
+=======
+>>>>>>> v3.18
 /* Netlink CB args */
 enum {
 	IPSET_CB_NET = 0,
@@ -462,6 +516,9 @@ extern void ip_set_put_byindex(struct net *net, ip_set_id_t index);
 extern const char *ip_set_name_byindex(struct net *net, ip_set_id_t index);
 extern ip_set_id_t ip_set_nfnl_get_byindex(struct net *net, ip_set_id_t index);
 extern void ip_set_nfnl_put(struct net *net, ip_set_id_t index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* API for iptables set match, and SET target */
@@ -482,6 +539,11 @@ extern void ip_set_free(void *members);
 extern int ip_set_get_ipaddr4(struct nlattr *nla,  __be32 *ipaddr);
 extern int ip_set_get_ipaddr6(struct nlattr *nla, union nf_inet_addr *ipaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern size_t ip_set_elem_len(struct ip_set *set, struct nlattr *tb[],
+			      size_t len);
+>>>>>>> v3.18
 =======
 extern size_t ip_set_elem_len(struct ip_set *set, struct nlattr *tb[],
 			      size_t len);
@@ -511,17 +573,23 @@ ip_set_eexist(int ret, u32 flags)
 /* Match elements marked with nomatch */
 static inline bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip_set_enomatch(int ret, u32 flags, enum ipset_adt adt)
 {
 	return adt == IPSET_TEST &&
 	       ret == -ENOTEMPTY && ((flags >> 16) & IPSET_FLAG_NOMATCH);
 =======
+=======
+>>>>>>> v3.18
 ip_set_enomatch(int ret, u32 flags, enum ipset_adt adt, struct ip_set *set)
 {
 	return adt == IPSET_TEST &&
 	       (set->type->features & IPSET_TYPE_NOMATCH) &&
 	       ((flags >> 16) & IPSET_FLAG_NOMATCH) &&
 	       (ret > 0 || ret == -ENOTEMPTY);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -611,6 +679,7 @@ bitmap_bytes(u32 a, u32 b)
 
 #include <linux/netfilter/ipset/ip_set_timeout.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define IP_SET_INIT_KEXT(skb, opt, map)			\
 	{ .bytes = (skb)->len, .packets = 1,		\
@@ -620,6 +689,8 @@ bitmap_bytes(u32 a, u32 b)
 	{ .bytes = ULLONG_MAX, .packets = ULLONG_MAX,	\
 	  .timeout = (map)->timeout }
 =======
+=======
+>>>>>>> v3.18
 #include <linux/netfilter/ipset/ip_set_comment.h>
 
 static inline int
@@ -658,6 +729,9 @@ ip_set_put_extensions(struct sk_buff *skb, const struct ip_set *set,
 
 #define IPSET_CONCAT(a, b)		a##b
 #define IPSET_TOKEN(a, b)		IPSET_CONCAT(a, b)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /*_IP_SET_H */

@@ -46,9 +46,15 @@ sees fit.)
 Requirement: MANDATORY
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The device tree blob (dtb) must be no bigger than 2 megabytes in size
 and placed at a 2-megabyte boundary within the first 512 megabytes from
 the start of the kernel image. This is to allow the kernel to map the
+=======
+The device tree blob (dtb) must be placed on an 8-byte boundary within
+the first 512 megabytes from the start of the kernel image and must not
+cross a 2-megabyte boundary. This is to allow the kernel to map the
+>>>>>>> v3.18
 =======
 The device tree blob (dtb) must be placed on an 8-byte boundary within
 the first 512 megabytes from the start of the kernel image and must not
@@ -79,9 +85,15 @@ The decompressed kernel image contains a 64-byte header as follows:
   u32 code0;			/* Executable code */
   u32 code1;			/* Executable code */
 <<<<<<< HEAD
+<<<<<<< HEAD
   u64 text_offset;		/* Image load offset */
   u64 res0	= 0;		/* reserved */
   u64 res1	= 0;		/* reserved */
+=======
+  u64 text_offset;		/* Image load offset, little endian */
+  u64 image_size;		/* Effective Image size, little endian */
+  u64 flags;			/* kernel flags, little endian */
+>>>>>>> v3.18
 =======
   u64 text_offset;		/* Image load offset, little endian */
   u64 image_size;		/* Effective Image size, little endian */
@@ -92,7 +104,11 @@ The decompressed kernel image contains a 64-byte header as follows:
   u64 res4	= 0;		/* reserved */
   u32 magic	= 0x644d5241;	/* Magic number, little endian, "ARM\x64" */
 <<<<<<< HEAD
+<<<<<<< HEAD
   u32 res5 = 0;      		/* reserved */
+=======
+  u32 res5;      		/* reserved (used for PE COFF offset) */
+>>>>>>> v3.18
 =======
   u32 res5;      		/* reserved (used for PE COFF offset) */
 >>>>>>> v3.18
@@ -101,12 +117,15 @@ The decompressed kernel image contains a 64-byte header as follows:
 Header notes:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - code0/code1 are responsible for branching to stext.
 
 The image must be placed at the specified offset (currently 0x80000)
 from the start of the system RAM and called there. The start of the
 system RAM must be aligned to 2MB.
 =======
+=======
+>>>>>>> v3.18
 - As of v3.17, all fields are little endian unless stated otherwise.
 
 - code0/code1 are responsible for branching to stext.
@@ -143,6 +162,9 @@ Any memory described to the kernel (even that below the 2MB aligned base
 address) which is not marked as reserved from the kernel e.g. with a
 memreserve region in the device tree) will be considered as available to
 the kernel.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Before jumping into the kernel, the following conditions must be met:
@@ -177,14 +199,20 @@ Before jumping into the kernel, the following conditions must be met:
 
 - Architected timers
 <<<<<<< HEAD
+<<<<<<< HEAD
   CNTFRQ must be programmed with the timer frequency.
   If entering the kernel at EL1, CNTHCTL_EL2 must have EL1PCTEN (bit 0)
   set where available.
 =======
+=======
+>>>>>>> v3.18
   CNTFRQ must be programmed with the timer frequency and CNTVOFF must
   be programmed with a consistent value on all CPUs.  If entering the
   kernel at EL1, CNTHCTL_EL2 must have EL1PCTEN (bit 0) set where
   available.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - Coherency
@@ -199,7 +227,10 @@ Before jumping into the kernel, the following conditions must be met:
   higher exception level to prevent execution in an UNKNOWN state.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   For systems with a GICv3 interrupt controller:
   - If EL3 is present:
     ICC_SRE_EL3.Enable (bit 3) must be initialiased to 0b1.
@@ -212,12 +243,16 @@ The requirements described above for CPU mode, caches, MMUs, architected
 timers, coherency and system registers apply to all CPUs.  All CPUs must
 enter the kernel in the same exception level.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 The boot loader is expected to enter the kernel on each CPU in the
 following manner:
 
 - The primary CPU must jump directly to the first instruction of the
   kernel image.  The device tree blob passed by this CPU must contain
+<<<<<<< HEAD
 <<<<<<< HEAD
   for each CPU node:
 
@@ -230,29 +265,42 @@ following manner:
   an 'enable-method' property for each cpu node.  The supported
   enable-methods are described below.
 >>>>>>> v3.18
+=======
+  an 'enable-method' property for each cpu node.  The supported
+  enable-methods are described below.
+>>>>>>> v3.18
 
   It is expected that the bootloader will generate these device tree
   properties and insert them into the blob prior to kernel entry.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - Any secondary CPUs must spin outside of the kernel in a reserved area
   of memory (communicated to the kernel by a /memreserve/ region in the
 =======
+=======
+>>>>>>> v3.18
 - CPUs with a "spin-table" enable-method must have a 'cpu-release-addr'
   property in their cpu node.  This property identifies a
   naturally-aligned 64-bit zero-initalised memory location.
 
   These CPUs should spin outside of the kernel in a reserved area of
   memory (communicated to the kernel by a /memreserve/ region in the
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   device tree) polling their cpu-release-addr location, which must be
   contained in the reserved region.  A wfe instruction may be inserted
   to reduce the overhead of the busy-loop and a sev will be issued by
   the primary CPU.  When a read of the location pointed to by the
 <<<<<<< HEAD
+<<<<<<< HEAD
   cpu-release-addr returns a non-zero value, the CPU must jump directly
   to this value.
 =======
+=======
+>>>>>>> v3.18
   cpu-release-addr returns a non-zero value, the CPU must jump to this
   value.  The value will be written as a single 64-bit little-endian
   value, so CPUs must convert the read value to their native endianness
@@ -268,6 +316,9 @@ following manner:
 
   The device tree should contain a 'psci' node, as described in
   Documentation/devicetree/bindings/arm/psci.txt.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 - Secondary CPU general-purpose register settings

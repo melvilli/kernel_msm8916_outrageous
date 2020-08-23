@@ -669,7 +669,11 @@ static int zfcp_fc_eval_gpn_ft(struct zfcp_fc_req *fc_req,
 	list_for_each_entry_safe(port, tmp, &remove_lh, list) {
 		zfcp_erp_port_shutdown(port, 0, "fcegpf2");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		zfcp_device_unregister(&port->dev, &zfcp_sysfs_port_attrs);
+=======
+		device_unregister(&port->dev);
+>>>>>>> v3.18
 =======
 		device_unregister(&port->dev);
 >>>>>>> v3.18

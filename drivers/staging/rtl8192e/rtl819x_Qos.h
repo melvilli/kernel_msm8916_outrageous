@@ -202,6 +202,7 @@ enum qos_ie_source {
 #define AC_PARAM_SIZE	4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GET_WMM_AC_PARAM_AIFSN(_pStart) \
 	((u8)LE_BITS_TO_4BYTE(_pStart, 0, 4))
 #define SET_WMM_AC_PARAM_AIFSN(_pStart, _val) \
@@ -239,6 +240,8 @@ enum qos_ie_source {
 
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define WMM_PARAM_ELEMENT_SIZE	(8+(4*AC_PARAM_SIZE))

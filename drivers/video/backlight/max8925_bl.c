@@ -102,6 +102,7 @@ static const struct backlight_ops max8925_backlight_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OF
 static int max8925_backlight_dt_init(struct platform_device *pdev,
 			      struct max8925_backlight_pdata *pdata)
@@ -125,6 +126,8 @@ static int max8925_backlight_dt_init(struct platform_device *pdev,
 #define max8925_backlight_dt_init(x, y)	(-1)
 #endif
 =======
+=======
+>>>>>>> v3.18
 static void max8925_backlight_dt_init(struct platform_device *pdev)
 {
 	struct device_node *nproot = pdev->dev.parent->of_node, *np;
@@ -151,13 +154,20 @@ static void max8925_backlight_dt_init(struct platform_device *pdev)
 
 	pdev->dev.platform_data = pdata;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int max8925_backlight_probe(struct platform_device *pdev)
 {
 	struct max8925_chip *chip = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct max8925_backlight_pdata *pdata = pdev->dev.platform_data;
+=======
+	struct max8925_backlight_pdata *pdata;
+>>>>>>> v3.18
 =======
 	struct max8925_backlight_pdata *pdata;
 >>>>>>> v3.18
@@ -193,7 +203,12 @@ static int max8925_backlight_probe(struct platform_device *pdev)
 	props.type = BACKLIGHT_RAW;
 	props.max_brightness = MAX_BRIGHTNESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl = backlight_device_register("max8925-backlight", &pdev->dev, data,
+=======
+	bl = devm_backlight_device_register(&pdev->dev, "max8925-backlight",
+					&pdev->dev, data,
+>>>>>>> v3.18
 =======
 	bl = devm_backlight_device_register(&pdev->dev, "max8925-backlight",
 					&pdev->dev, data,
@@ -209,6 +224,7 @@ static int max8925_backlight_probe(struct platform_device *pdev)
 
 	value = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdev->dev.parent->of_node && !pdata) {
 		pdata = devm_kzalloc(&pdev->dev,
 				     sizeof(struct max8925_backlight_pdata),
@@ -217,10 +233,15 @@ static int max8925_backlight_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	if (!pdev->dev.platform_data)
 		max8925_backlight_dt_init(pdev);
 
 	pdata = pdev->dev.platform_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pdata) {
 		if (pdata->lxw_scl)
@@ -232,6 +253,7 @@ static int max8925_backlight_probe(struct platform_device *pdev)
 	}
 	ret = max8925_set_bits(chip->i2c, data->reg_mode_cntl, 0xfe, value);
 	if (ret < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out_brt;
 	backlight_update_status(bl);
@@ -252,16 +274,26 @@ static int max8925_backlight_remove(struct platform_device *pdev)
 	backlight_update_status(bl);
 	return 0;
 >>>>>>> v3.18
+=======
+		return ret;
+	backlight_update_status(bl);
+	return 0;
+>>>>>>> v3.18
 }
 
 static struct platform_driver max8925_backlight_driver = {
 	.driver		= {
 		.name	= "max8925-backlight",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
 	},
 	.probe		= max8925_backlight_probe,
 	.remove		= max8925_backlight_remove,
+=======
+	},
+	.probe		= max8925_backlight_probe,
+>>>>>>> v3.18
 =======
 	},
 	.probe		= max8925_backlight_probe,

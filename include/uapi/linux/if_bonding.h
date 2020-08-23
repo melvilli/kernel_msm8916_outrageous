@@ -92,6 +92,11 @@
 #define BOND_XMIT_POLICY_LAYER34	1 /* layer 3+4 (IP ^ (TCP || UDP)) */
 #define BOND_XMIT_POLICY_LAYER23	2 /* layer 2+3 (IP ^ MAC) */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BOND_XMIT_POLICY_ENCAP23	3 /* encapsulated layer 2+3 */
+#define BOND_XMIT_POLICY_ENCAP34	4 /* encapsulated layer 3+4 */
+>>>>>>> v3.18
 =======
 #define BOND_XMIT_POLICY_ENCAP23	3 /* encapsulated layer 2+3 */
 #define BOND_XMIT_POLICY_ENCAP34	4 /* encapsulated layer 3+4 */

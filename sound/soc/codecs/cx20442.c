@@ -254,7 +254,11 @@ static void v253_close(struct tty_struct *tty)
 	codec->hw_write = NULL;
 	cx20442->control_data = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->card->pop_time = 0;
+=======
+	codec->component.card->pop_time = 0;
+>>>>>>> v3.18
 =======
 	codec->component.card->pop_time = 0;
 >>>>>>> v3.18
@@ -286,7 +290,11 @@ static void v253_receive(struct tty_struct *tty,
 		cx20442->control_data = tty;
 		codec->hw_write = (hw_write_t)tty->ops->write;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		codec->card->pop_time = 1;
+=======
+		codec->component.card->pop_time = 1;
+>>>>>>> v3.18
 =======
 		codec->component.card->pop_time = 1;
 >>>>>>> v3.18
@@ -381,7 +389,11 @@ static int cx20442_codec_probe(struct snd_soc_codec *codec)
 	snd_soc_codec_set_drvdata(codec, cx20442);
 	codec->hw_write = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->card->pop_time = 0;
+=======
+	codec->component.card->pop_time = 0;
+>>>>>>> v3.18
 =======
 	codec->component.card->pop_time = 0;
 >>>>>>> v3.18
@@ -396,8 +408,13 @@ static int cx20442_codec_remove(struct snd_soc_codec *codec)
 
 	if (cx20442->control_data) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct tty_struct *tty = cx20442->control_data;
 			tty_hangup(tty);
+=======
+		struct tty_struct *tty = cx20442->control_data;
+		tty_hangup(tty);
+>>>>>>> v3.18
 =======
 		struct tty_struct *tty = cx20442->control_data;
 		tty_hangup(tty);

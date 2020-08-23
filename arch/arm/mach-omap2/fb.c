@@ -33,6 +33,10 @@
 
 #include "soc.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "display.h"
+>>>>>>> v3.18
 =======
 #include "display.h"
 >>>>>>> v3.18
@@ -69,7 +73,11 @@ static const struct resource omap3_vrfb_resources[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init omap_init_vrfb(void)
+=======
+int __init omap_init_vrfb(void)
+>>>>>>> v3.18
 =======
 int __init omap_init_vrfb(void)
 >>>>>>> v3.18
@@ -92,6 +100,7 @@ int __init omap_init_vrfb(void)
 			res, num_res, NULL, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(pdev))
 		return PTR_ERR(pdev);
 	else
@@ -100,10 +109,15 @@ int __init omap_init_vrfb(void)
 
 omap_arch_initcall(omap_init_vrfb);
 =======
+=======
+>>>>>>> v3.18
 	return PTR_RET(pdev);
 }
 #else
 int __init omap_init_vrfb(void) { return 0; }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -124,6 +138,7 @@ static struct platform_device omap_fb_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init omap_init_fb(void)
 {
 	return platform_device_register(&omap_fb_device);
@@ -132,11 +147,16 @@ static int __init omap_init_fb(void)
 omap_arch_initcall(omap_init_fb);
 
 =======
+=======
+>>>>>>> v3.18
 int __init omap_init_fb(void)
 {
 	return platform_device_register(&omap_fb_device);
 }
 #else
 int __init omap_init_fb(void) { return 0; }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

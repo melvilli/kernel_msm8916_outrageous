@@ -18,6 +18,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef __DENALI_H__
+#define __DENALI_H__
+
+>>>>>>> v3.18
 =======
 #ifndef __DENALI_H__
 #define __DENALI_H__
@@ -407,6 +413,7 @@
 #define MODE5_WORKAROUND        0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* lld_nand.h */
 /*
  * NAND Flash Controller Device Driver
@@ -429,6 +436,8 @@
 
 #ifndef _LLD_NAND_
 #define _LLD_NAND_
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -465,6 +474,7 @@
 #define ECC_SECTOR_SIZE     512
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DENALI_BUF_SIZE		(NAND_MAX_PAGESIZE + NAND_MAX_OOBSIZE)
 
 struct nand_buf {
@@ -472,10 +482,15 @@ struct nand_buf {
 	int tail;
 	uint8_t buf[DENALI_BUF_SIZE];
 =======
+=======
+>>>>>>> v3.18
 struct nand_buf {
 	int head;
 	int tail;
 	uint8_t *buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dma_addr_t dma_buf;
 };
@@ -518,7 +533,11 @@ extern int denali_init(struct denali_nand_info *denali);
 extern void denali_remove(struct denali_nand_info *denali);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /*_LLD_NAND_*/
+=======
+#endif /* __DENALI_H__ */
+>>>>>>> v3.18
 =======
 #endif /* __DENALI_H__ */
 >>>>>>> v3.18

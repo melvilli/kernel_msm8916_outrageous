@@ -29,7 +29,11 @@ module_param_named(modeset, mgag200_modeset, int, 0400);
 static struct drm_driver driver;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pciidlist) = {
+=======
+static const struct pci_device_id pciidlist[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pciidlist[] = {
 >>>>>>> v3.18
@@ -86,7 +90,10 @@ static const struct file_operations mgag200_driver_fops = {
 	.mmap = mgag200_mmap,
 	.poll = drm_poll,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fasync = drm_fasync,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_COMPAT
@@ -97,14 +104,20 @@ static const struct file_operations mgag200_driver_fops = {
 
 static struct drm_driver driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.driver_features = DRIVER_GEM | DRIVER_MODESET | DRIVER_USE_MTRR,
 	.load = mgag200_driver_load,
 	.unload = mgag200_driver_unload,
 =======
+=======
+>>>>>>> v3.18
 	.driver_features = DRIVER_GEM | DRIVER_MODESET,
 	.load = mgag200_driver_load,
 	.unload = mgag200_driver_unload,
 	.set_busid = drm_pci_set_busid,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.fops = &mgag200_driver_fops,
 	.name = DRIVER_NAME,
@@ -115,16 +128,22 @@ static struct drm_driver driver = {
 	.patchlevel = DRIVER_PATCHLEVEL,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.gem_init_object = mgag200_gem_init_object,
 	.gem_free_object = mgag200_gem_free_object,
 	.dumb_create = mgag200_dumb_create,
 	.dumb_map_offset = mgag200_dumb_mmap_offset,
 	.dumb_destroy = mgag200_dumb_destroy,
 =======
+=======
+>>>>>>> v3.18
 	.gem_free_object = mgag200_gem_free_object,
 	.dumb_create = mgag200_dumb_create,
 	.dumb_map_offset = mgag200_dumb_mmap_offset,
 	.dumb_destroy = drm_gem_dumb_destroy,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

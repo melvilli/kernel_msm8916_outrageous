@@ -28,6 +28,10 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Markus Franke <franke.m@sebakmt.com>, <franm@hrz.tu-chemnitz.de>");
 MODULE_DESCRIPTION("w1 family 1C driver for DS28E04, 4kb EEPROM and PIO");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("w1-family-" __stringify(W1_FAMILY_DS28E04));
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("w1-family-" __stringify(W1_FAMILY_DS28E04));
 >>>>>>> v3.18
@@ -122,9 +126,15 @@ static int w1_f1C_read(struct w1_slave *sl, int addr, int len, char *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f1C_read_bin(struct file *filp, struct kobject *kobj,
 			       struct bin_attribute *bin_attr,
 			       char *buf, loff_t off, size_t count)
+=======
+static ssize_t eeprom_read(struct file *filp, struct kobject *kobj,
+			   struct bin_attribute *bin_attr, char *buf,
+			   loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t eeprom_read(struct file *filp, struct kobject *kobj,
 			   struct bin_attribute *bin_attr, char *buf,
@@ -236,9 +246,15 @@ static int w1_f1C_write(struct w1_slave *sl, int addr, int len, const u8 *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f1C_write_bin(struct file *filp, struct kobject *kobj,
 			       struct bin_attribute *bin_attr,
 			       char *buf, loff_t off, size_t count)
+=======
+static ssize_t eeprom_write(struct file *filp, struct kobject *kobj,
+			    struct bin_attribute *bin_attr, char *buf,
+			    loff_t off, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t eeprom_write(struct file *filp, struct kobject *kobj,
 			    struct bin_attribute *bin_attr, char *buf,
@@ -296,15 +312,21 @@ out_up:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f1C_read_pio(struct file *filp, struct kobject *kobj,
 			       struct bin_attribute *bin_attr,
 			       char *buf, loff_t off, size_t count)
 =======
+=======
+>>>>>>> v3.18
 static BIN_ATTR_RW(eeprom, W1_EEPROM_SIZE);
 
 static ssize_t pio_read(struct file *filp, struct kobject *kobj,
 			struct bin_attribute *bin_attr, char *buf, loff_t off,
 			size_t count)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 {
@@ -323,9 +345,15 @@ static ssize_t pio_read(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f1C_write_pio(struct file *filp, struct kobject *kobj,
 				struct bin_attribute *bin_attr,
 				char *buf, loff_t off, size_t count)
+=======
+static ssize_t pio_write(struct file *filp, struct kobject *kobj,
+			 struct bin_attribute *bin_attr, char *buf, loff_t off,
+			 size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t pio_write(struct file *filp, struct kobject *kobj,
 			 struct bin_attribute *bin_attr, char *buf, loff_t off,
@@ -369,13 +397,19 @@ static ssize_t pio_write(struct file *filp, struct kobject *kobj,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f1C_show_crccheck(struct device *dev,
 				    struct device_attribute *attr, char *buf)
 =======
+=======
+>>>>>>> v3.18
 static BIN_ATTR_RW(pio, 1);
 
 static ssize_t crccheck_show(struct device *dev, struct device_attribute *attr,
 			     char *buf)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	if (put_user(w1_enable_crccheck + 0x30, buf))
@@ -385,9 +419,14 @@ static ssize_t crccheck_show(struct device *dev, struct device_attribute *attr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t w1_f1C_store_crccheck(struct device *dev,
 				     struct device_attribute *attr,
 				     const char *buf, size_t count)
+=======
+static ssize_t crccheck_store(struct device *dev, struct device_attribute *attr,
+			      const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t crccheck_store(struct device *dev, struct device_attribute *attr,
 			      const char *buf, size_t count)
@@ -412,6 +451,7 @@ static ssize_t crccheck_store(struct device *dev, struct device_attribute *attr,
 	return sizeof(w1_enable_crccheck);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define NB_SYSFS_BIN_FILES 2
 static struct bin_attribute w1_f1C_bin_attr[NB_SYSFS_BIN_FILES] = {
@@ -443,6 +483,8 @@ static int w1_f1C_add_slave(struct w1_slave *sl)
 	int err = 0;
 	int i;
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RW(crccheck);
 
 static struct attribute *w1_f1C_attrs[] = {
@@ -468,6 +510,9 @@ static const struct attribute_group *w1_f1C_groups[] = {
 
 static int w1_f1C_add_slave(struct w1_slave *sl)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct w1_f1C_data *data = NULL;
 
@@ -478,6 +523,7 @@ static int w1_f1C_add_slave(struct w1_slave *sl)
 		sl->family_data = data;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* create binary sysfs attributes */
 	for (i = 0; i < NB_SYSFS_BIN_FILES && !err; ++i)
@@ -502,10 +548,14 @@ static int w1_f1C_add_slave(struct w1_slave *sl)
 =======
 	return 0;
 >>>>>>> v3.18
+=======
+	return 0;
+>>>>>>> v3.18
 }
 
 static void w1_f1C_remove_slave(struct w1_slave *sl)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 
@@ -522,12 +572,20 @@ static void w1_f1C_remove_slave(struct w1_slave *sl)
 	kfree(sl->family_data);
 	sl->family_data = NULL;
 >>>>>>> v3.18
+=======
+	kfree(sl->family_data);
+	sl->family_data = NULL;
+>>>>>>> v3.18
 }
 
 static struct w1_family_ops w1_f1C_fops = {
 	.add_slave      = w1_f1C_add_slave,
 	.remove_slave   = w1_f1C_remove_slave,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.groups		= w1_f1C_groups,
+>>>>>>> v3.18
 =======
 	.groups		= w1_f1C_groups,
 >>>>>>> v3.18

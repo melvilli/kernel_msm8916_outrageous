@@ -24,6 +24,12 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/** Number of mPIPE instances supported */
+#define HV_MPIPE_INSTANCE_MAX   (2)
+
+>>>>>>> v3.18
 =======
 /** Number of mPIPE instances supported */
 #define HV_MPIPE_INSTANCE_MAX   (2)

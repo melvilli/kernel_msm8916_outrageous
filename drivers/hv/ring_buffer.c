@@ -27,6 +27,10 @@
 #include <linux/mm.h>
 #include <linux/hyperv.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/uio.h>
+>>>>>>> v3.18
 =======
 #include <linux/uio.h>
 >>>>>>> v3.18
@@ -80,6 +84,11 @@ static bool hv_need_to_signal(u32 old_write, struct hv_ring_buffer_info *rbi)
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* check interrupt_mask before read_index */
+	rmb();
+>>>>>>> v3.18
 =======
 	/* check interrupt_mask before read_index */
 	rmb();
@@ -368,12 +377,18 @@ int hv_ringbuffer_init(struct hv_ring_buffer_info *ring_info,
 		ring_info->ring_buffer->write_index = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Set the feature bit for enabling flow control.
 	 */
 	ring_info->ring_buffer->feature_bits.value = 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ring_info->ring_size = buflen;
 	ring_info->ring_datasize = buflen - sizeof(struct hv_ring_buffer);
@@ -403,7 +418,11 @@ void hv_ringbuffer_cleanup(struct hv_ring_buffer_info *ring_info)
  */
 int hv_ringbuffer_write(struct hv_ring_buffer_info *outring_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    struct scatterlist *sglist, u32 sgcount, bool *signal)
+=======
+		    struct kvec *kv_list, u32 kv_count, bool *signal)
+>>>>>>> v3.18
 =======
 		    struct kvec *kv_list, u32 kv_count, bool *signal)
 >>>>>>> v3.18
@@ -414,7 +433,10 @@ int hv_ringbuffer_write(struct hv_ring_buffer_info *outring_info,
 	u32 totalbytes_towrite = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct scatterlist *sg;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 next_write_location;
@@ -423,10 +445,15 @@ int hv_ringbuffer_write(struct hv_ring_buffer_info *outring_info,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_sg(sglist, sg, sgcount, i)
 	{
 		totalbytes_towrite += sg->length;
 	}
+=======
+	for (i = 0; i < kv_count; i++)
+		totalbytes_towrite += kv_list[i].iov_len;
+>>>>>>> v3.18
 =======
 	for (i = 0; i < kv_count; i++)
 		totalbytes_towrite += kv_list[i].iov_len;
@@ -455,6 +482,7 @@ int hv_ringbuffer_write(struct hv_ring_buffer_info *outring_info,
 	old_write = next_write_location;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_sg(sglist, sg, sgcount, i)
 	{
 		next_write_location = hv_copyto_ringbuffer(outring_info,
@@ -462,11 +490,16 @@ int hv_ringbuffer_write(struct hv_ring_buffer_info *outring_info,
 						     sg_virt(sg),
 						     sg->length);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < kv_count; i++) {
 		next_write_location = hv_copyto_ringbuffer(outring_info,
 						     next_write_location,
 						     kv_list[i].iov_base,
 						     kv_list[i].iov_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

@@ -17,6 +17,7 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Types of PMUs that can be accessed directly and require mutual
  * exclusion between profiling tools.
  */
@@ -35,6 +36,8 @@ enum arm_pmu_state {
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * struct arm_pmu_platdata - ARM PMU platform data
  *
  * @handle_irq: an optional handler which will be called from the
@@ -42,10 +45,13 @@ enum arm_pmu_state {
  *	and can be used to implement any platform specific handling
  *	before or after calling it.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @request_pmu_irq: an optional handler in case the platform wants
  *	to use a percpu IRQ API call. e.g. request_percpu_irq
  * @free_pmu_irq: an optional handler in case the platform wants
  *	to use a percpu IRQ API call. e.g. free_percpu_irq
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @runtime_resume: an optional handler which will be called by the
@@ -63,8 +69,11 @@ struct arm_pmu_platdata {
 	irqreturn_t (*handle_irq)(int irq, void *dev,
 				  irq_handler_t pmu_handler);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	(*request_pmu_irq)(int irq, irq_handler_t *irq_h, void *dev_id);
 	void	(*free_pmu_irq)(int irq, void *dev_id);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int (*runtime_resume)(struct device *dev);
@@ -74,7 +83,10 @@ struct arm_pmu_platdata {
 #ifdef CONFIG_HW_PERF_EVENTS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * The ARMv7 CPU PMU supports up to 32 event counters.
  */
@@ -94,6 +106,9 @@ struct arm_pmu_platdata {
 	},								\
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* The events for a given PMU register set. */
 struct pmu_hw_events {
@@ -109,8 +124,11 @@ struct pmu_hw_events {
 	unsigned long           *used_mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32			*from_idle;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -125,6 +143,7 @@ struct arm_pmu {
 	cpumask_t	active_irqs;
 	char		*name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		num_events;
 	int             pmu_state;
 	atomic_t	active_events;
@@ -137,11 +156,19 @@ struct arm_pmu {
 =======
 	irqreturn_t	(*handle_irq)(int irq_num, void *dev);
 >>>>>>> v3.18
+=======
+	irqreturn_t	(*handle_irq)(int irq_num, void *dev);
+>>>>>>> v3.18
 	void		(*enable)(struct perf_event *event);
 	void		(*disable)(struct perf_event *event);
 	int		(*get_event_idx)(struct pmu_hw_events *hw_events,
 					 struct perf_event *event);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void		(*clear_event_idx)(struct pmu_hw_events *hw_events,
+					 struct perf_event *event);
+>>>>>>> v3.18
 =======
 	void		(*clear_event_idx)(struct pmu_hw_events *hw_events,
 					 struct perf_event *event);
@@ -154,6 +181,7 @@ struct arm_pmu {
 	void		(*stop)(struct arm_pmu *);
 	void		(*reset)(void *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void		(*force_reset)(void *);
 	int		(*request_irq)(struct arm_pmu *, irq_handler_t handler);
 	void		(*free_irq)(struct arm_pmu *);
@@ -164,6 +192,8 @@ struct arm_pmu {
 	void		(*save_pm_registers)(void *hcpu);
 	void		(*restore_pm_registers)(void *hcpu);
 =======
+=======
+>>>>>>> v3.18
 	int		(*request_irq)(struct arm_pmu *, irq_handler_t handler);
 	void		(*free_irq)(struct arm_pmu *);
 	int		(*map_event)(struct perf_event *event);
@@ -173,6 +203,9 @@ struct arm_pmu {
 	u64		max_period;
 	struct platform_device	*plat_device;
 	struct pmu_hw_events	*(*get_hw_events)(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -189,7 +222,11 @@ int armpmu_event_set_period(struct perf_event *event);
 int armpmu_map_event(struct perf_event *event,
 		     const unsigned (*event_map)[PERF_COUNT_HW_MAX],
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     unsigned (*cache_map)[PERF_COUNT_HW_CACHE_MAX]
+=======
+		     const unsigned (*cache_map)[PERF_COUNT_HW_CACHE_MAX]
+>>>>>>> v3.18
 =======
 		     const unsigned (*cache_map)[PERF_COUNT_HW_CACHE_MAX]
 >>>>>>> v3.18
@@ -198,10 +235,13 @@ int armpmu_map_event(struct perf_event *event,
 		     u32 raw_event_mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cpu_pmu_request_irq(struct arm_pmu *cpu_pmu, irq_handler_t handler);
 
 void cpu_pmu_free_irq(struct arm_pmu *cpu_pmu);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* CONFIG_HW_PERF_EVENTS */

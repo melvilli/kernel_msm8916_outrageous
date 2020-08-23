@@ -3,7 +3,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -34,7 +38,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/sched.h>
@@ -91,17 +98,23 @@ static void iwlagn_tx_cmd_build_basic(struct iwl_priv *priv,
 		tx_flags |= TX_CMD_FLG_ACK_MSK | TX_CMD_FLG_IMM_BA_RSP_MASK;
 	else if (info->band == IEEE80211_BAND_2GHZ &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 priv->cfg->bt_params &&
 		 priv->cfg->bt_params->advanced_bt_coexist &&
 		 (ieee80211_is_auth(fc) || ieee80211_is_assoc_req(fc) ||
 		 ieee80211_is_reassoc_req(fc) ||
 		 skb->protocol == cpu_to_be16(ETH_P_PAE)))
 =======
+=======
+>>>>>>> v3.18
 		 priv->lib->bt_params &&
 		 priv->lib->bt_params->advanced_bt_coexist &&
 		 (ieee80211_is_auth(fc) || ieee80211_is_assoc_req(fc) ||
 		 ieee80211_is_reassoc_req(fc) ||
 		 info->control.flags & IEEE80211_TX_CTRL_PORT_CTRL_PROTO))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tx_flags |= TX_CMD_FLG_IGNORE_BT;
 
@@ -178,6 +191,7 @@ static void iwlagn_tx_cmd_build_rate(struct iwl_priv *priv,
 		tx_cmd->initial_rate_index = 0;
 		tx_cmd->tx_flags |= TX_CMD_FLG_STA_RATE_MSK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_IWLWIFI_DEVICE_TESTMODE
 		if (priv->tm_fixed_rate) {
 			/*
@@ -190,6 +204,8 @@ static void iwlagn_tx_cmd_build_rate(struct iwl_priv *priv,
 			       sizeof(tx_cmd->rate_n_flags));
 		}
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return;
@@ -221,8 +237,13 @@ static void iwlagn_tx_cmd_build_rate(struct iwl_priv *priv,
 
 	/* Set up antennas */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 if (priv->cfg->bt_params &&
 	     priv->cfg->bt_params->advanced_bt_coexist &&
+=======
+	 if (priv->lib->bt_params &&
+	     priv->lib->bt_params->advanced_bt_coexist &&
+>>>>>>> v3.18
 =======
 	 if (priv->lib->bt_params &&
 	     priv->lib->bt_params->advanced_bt_coexist &&
@@ -404,6 +425,10 @@ int iwlagn_tx_skb(struct iwl_priv *priv,
 
 	memset(dev_cmd, 0, sizeof(*dev_cmd));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev_cmd->hdr.cmd = REPLY_TX;
+>>>>>>> v3.18
 =======
 	dev_cmd->hdr.cmd = REPLY_TX;
 >>>>>>> v3.18
@@ -442,15 +467,21 @@ int iwlagn_tx_skb(struct iwl_priv *priv,
 		if (info->flags & IEEE80211_TX_CTL_AMPDU &&
 		    tid_data->agg.state != IWL_AGG_ON) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IWL_ERR(priv, "TX_CTL_AMPDU while not in AGG:"
 				" Tx flags = 0x%08x, agg.state = %d",
 				info->flags, tid_data->agg.state);
 			IWL_ERR(priv, "sta_id = %d, tid = %d seq_num = %d",
 =======
+=======
+>>>>>>> v3.18
 			IWL_ERR(priv,
 				"TX_CTL_AMPDU while not in AGG: Tx flags = 0x%08x, agg.state = %d\n",
 				info->flags, tid_data->agg.state);
 			IWL_ERR(priv, "sta_id = %d, tid = %d seq_num = %d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				sta_id, tid,
 				IEEE80211_SEQ_TO_SN(tid_data->seq_number));
@@ -463,7 +494,11 @@ int iwlagn_tx_skb(struct iwl_priv *priv,
 		if (WARN_ONCE(tid_data->agg.state != IWL_AGG_ON &&
 			      tid_data->agg.state != IWL_AGG_OFF,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    "Tx while agg.state = %d", tid_data->agg.state))
+=======
+			      "Tx while agg.state = %d\n", tid_data->agg.state))
+>>>>>>> v3.18
 =======
 			      "Tx while agg.state = %d\n", tid_data->agg.state))
 >>>>>>> v3.18
@@ -521,9 +556,12 @@ int iwlagn_tx_skb(struct iwl_priv *priv,
 		atomic_inc(&sta_priv->pending_frames);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (info->flags & IEEE80211_TX_CTL_TX_OFFCHAN)
 		iwl_scan_offchannel_skb(priv);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -637,7 +675,11 @@ turn_off:
 		 */
 		if (agg_state == IWL_AGG_ON)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iwl_trans_txq_disable(priv->trans, txq_id);
+=======
+			iwl_trans_txq_disable(priv->trans, txq_id, true);
+>>>>>>> v3.18
 =======
 			iwl_trans_txq_disable(priv->trans, txq_id, true);
 >>>>>>> v3.18
@@ -747,7 +789,11 @@ int iwlagn_tx_agg_flush(struct iwl_priv *priv, struct ieee80211_vif *vif,
 		 */
 		if (agg_state == IWL_AGG_ON)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iwl_trans_txq_disable(priv->trans, txq_id);
+=======
+			iwl_trans_txq_disable(priv->trans, txq_id, true);
+>>>>>>> v3.18
 =======
 			iwl_trans_txq_disable(priv->trans, txq_id, true);
 >>>>>>> v3.18
@@ -843,15 +889,21 @@ static void iwlagn_check_ratid_empty(struct iwl_priv *priv, int sta_id, u8 tid)
 		if (tid_data->agg.ssn == tid_data->next_reclaimed) {
 			IWL_DEBUG_TX_QUEUES(priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"Can continue DELBA flow ssn = next_recl ="
 				" %d", tid_data->next_reclaimed);
 			iwl_trans_txq_disable(priv->trans,
 					      tid_data->agg.txq_id);
 =======
+=======
+>>>>>>> v3.18
 				"Can continue DELBA flow ssn = next_recl = %d\n",
 				tid_data->next_reclaimed);
 			iwl_trans_txq_disable(priv->trans,
 					      tid_data->agg.txq_id, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			iwlagn_dealloc_agg_txq(priv, tid_data->agg.txq_id);
 			tid_data->agg.state = IWL_AGG_OFF;
@@ -863,8 +915,13 @@ static void iwlagn_check_ratid_empty(struct iwl_priv *priv, int sta_id, u8 tid)
 		if (tid_data->agg.ssn == tid_data->next_reclaimed) {
 			IWL_DEBUG_TX_QUEUES(priv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"Can continue ADDBA flow ssn = next_recl ="
 				" %d", tid_data->next_reclaimed);
+=======
+				"Can continue ADDBA flow ssn = next_recl = %d\n",
+				tid_data->next_reclaimed);
+>>>>>>> v3.18
 =======
 				"Can continue ADDBA flow ssn = next_recl = %d\n",
 				tid_data->next_reclaimed);
@@ -1040,8 +1097,13 @@ static void iwl_rx_reply_tx_agg(struct iwl_priv *priv,
 	 */
 	if (tx_resp->bt_kill_count && tx_resp->frame_count == 1 &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    priv->cfg->bt_params &&
 	    priv->cfg->bt_params->advanced_bt_coexist) {
+=======
+	    priv->lib->bt_params &&
+	    priv->lib->bt_params->advanced_bt_coexist) {
+>>>>>>> v3.18
 =======
 	    priv->lib->bt_params &&
 	    priv->lib->bt_params->advanced_bt_coexist) {
@@ -1229,7 +1291,10 @@ int iwlagn_rx_reply_tx(struct iwl_priv *priv, struct iwl_rx_cmd_buffer *rxb,
 	struct iwl_rxon_context *ctx;
 	bool is_agg = (txq_id >= IWLAGN_FIRST_AMPDU_QUEUE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool is_offchannel_skb;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1252,8 +1317,11 @@ int iwlagn_rx_reply_tx(struct iwl_priv *priv, struct iwl_rx_cmd_buffer *rxb,
 	__skb_queue_head_init(&skbs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	is_offchannel_skb = false;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (tx_resp->frame_count == 1) {
@@ -1307,8 +1375,13 @@ int iwlagn_rx_reply_tx(struct iwl_priv *priv, struct iwl_rx_cmd_buffer *rxb,
 				/* block and stop all queues */
 				priv->passive_no_rx = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				IWL_DEBUG_TX_QUEUES(priv, "stop all queues: "
 						    "passive channel");
+=======
+				IWL_DEBUG_TX_QUEUES(priv,
+					"stop all queues: passive channel\n");
+>>>>>>> v3.18
 =======
 				IWL_DEBUG_TX_QUEUES(priv,
 					"stop all queues: passive channel\n");
@@ -1338,8 +1411,11 @@ int iwlagn_rx_reply_tx(struct iwl_priv *priv, struct iwl_rx_cmd_buffer *rxb,
 				iwlagn_non_agg_tx_status(priv, ctx, hdr->addr1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			is_offchannel_skb =
 				(info->flags & IEEE80211_TX_CTL_TX_OFFCHAN);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			freed++;
@@ -1356,6 +1432,7 @@ int iwlagn_rx_reply_tx(struct iwl_priv *priv, struct iwl_rx_cmd_buffer *rxb,
 			IWL_ERR(priv, "Q: %d, freed %d\n", txq_id, freed);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * An offchannel frame can be send only on the AUX queue, where
 		 * there is no aggregation (and reordering) so it only is single
@@ -1364,6 +1441,8 @@ int iwlagn_rx_reply_tx(struct iwl_priv *priv, struct iwl_rx_cmd_buffer *rxb,
 		if (is_offchannel_skb && freed != 1)
 			IWL_ERR(priv, "OFFCHANNEL SKB freed %d\n", freed);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		IWL_DEBUG_TX_REPLY(priv, "TXQ %d status %s (0x%08x)\n", txq_id,
@@ -1383,12 +1462,18 @@ int iwlagn_rx_reply_tx(struct iwl_priv *priv, struct iwl_rx_cmd_buffer *rxb,
 	while (!skb_queue_empty(&skbs)) {
 		skb = __skb_dequeue(&skbs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ieee80211_tx_status_ni(priv->hw, skb);
 	}
 
 	if (is_offchannel_skb)
 		iwl_scan_offchannel_skb_status(priv);
 
+=======
+		ieee80211_tx_status(priv->hw, skb);
+	}
+
+>>>>>>> v3.18
 =======
 		ieee80211_tx_status(priv->hw, skb);
 	}
@@ -1532,7 +1617,11 @@ int iwlagn_rx_reply_compressed_ba(struct iwl_priv *priv,
 	while (!skb_queue_empty(&reclaimed_skbs)) {
 		skb = __skb_dequeue(&reclaimed_skbs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ieee80211_tx_status_ni(priv->hw, skb);
+=======
+		ieee80211_tx_status(priv->hw, skb);
+>>>>>>> v3.18
 =======
 		ieee80211_tx_status(priv->hw, skb);
 >>>>>>> v3.18

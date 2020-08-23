@@ -13,6 +13,10 @@
 #include <linux/kernel.h>
 #include <asm/opal.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/mce.h>
+>>>>>>> v3.18
 =======
 #include <asm/mce.h>
 >>>>>>> v3.18
@@ -49,7 +53,11 @@ static void reload_slb(struct kvm_vcpu *vcpu)
 
 	/* Sanity check */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n = min_t(u32, slb->persistent, SLB_MIN_SIZE);
+=======
+	n = min_t(u32, be32_to_cpu(slb->persistent), SLB_MIN_SIZE);
+>>>>>>> v3.18
 =======
 	n = min_t(u32, be32_to_cpu(slb->persistent), SLB_MIN_SIZE);
 >>>>>>> v3.18
@@ -59,8 +67,13 @@ static void reload_slb(struct kvm_vcpu *vcpu)
 	/* Load up the SLB from that */
 	for (i = 0; i < n; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned long rb = slb->save_area[i].esid;
 		unsigned long rs = slb->save_area[i].vsid;
+=======
+		unsigned long rb = be64_to_cpu(slb->save_area[i].esid);
+		unsigned long rs = be64_to_cpu(slb->save_area[i].vsid);
+>>>>>>> v3.18
 =======
 		unsigned long rb = be64_to_cpu(slb->save_area[i].esid);
 		unsigned long rs = be64_to_cpu(slb->save_area[i].vsid);
@@ -71,6 +84,7 @@ static void reload_slb(struct kvm_vcpu *vcpu)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* POWER7 TLB flush */
 static void flush_tlb_power7(struct kvm_vcpu *vcpu)
@@ -86,6 +100,8 @@ static void flush_tlb_power7(struct kvm_vcpu *vcpu)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * On POWER7, see if we can handle a machine check that occurred inside
  * the guest in real mode, without switching to the host partition.
@@ -96,9 +112,13 @@ static long kvmppc_realmode_mc_power7(struct kvm_vcpu *vcpu)
 {
 	unsigned long srr1 = vcpu->arch.shregs.msr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_POWERNV
 	struct opal_machine_check_event *opal_evt;
 #endif
+=======
+	struct machine_check_event mce_evt;
+>>>>>>> v3.18
 =======
 	struct machine_check_event mce_evt;
 >>>>>>> v3.18
@@ -117,7 +137,12 @@ static long kvmppc_realmode_mc_power7(struct kvm_vcpu *vcpu)
 		}
 		if (dsisr & DSISR_MC_TLB_MULTI) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			flush_tlb_power7(vcpu);
+=======
+			if (cur_cpu_spec && cur_cpu_spec->flush_tlb)
+				cur_cpu_spec->flush_tlb(TLBIEL_INVAL_SET_LPID);
+>>>>>>> v3.18
 =======
 			if (cur_cpu_spec && cur_cpu_spec->flush_tlb)
 				cur_cpu_spec->flush_tlb(TLBIEL_INVAL_SET_LPID);
@@ -139,7 +164,12 @@ static long kvmppc_realmode_mc_power7(struct kvm_vcpu *vcpu)
 		break;
 	case SRR1_MC_IFETCH_TLBMULTI:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		flush_tlb_power7(vcpu);
+=======
+		if (cur_cpu_spec && cur_cpu_spec->flush_tlb)
+			cur_cpu_spec->flush_tlb(TLBIEL_INVAL_SET_LPID);
+>>>>>>> v3.18
 =======
 		if (cur_cpu_spec && cur_cpu_spec->flush_tlb)
 			cur_cpu_spec->flush_tlb(TLBIEL_INVAL_SET_LPID);
@@ -149,6 +179,7 @@ static long kvmppc_realmode_mc_power7(struct kvm_vcpu *vcpu)
 		handled = 0;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PPC_POWERNV
 	/*
@@ -167,6 +198,8 @@ static long kvmppc_realmode_mc_power7(struct kvm_vcpu *vcpu)
 		opal_evt->in_use = 0;
 #endif
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * See if we have already handled the condition in the linux host.
 	 * We assume that if the condition is recovered then linux host
@@ -191,6 +224,9 @@ out:
 	 * queue up the event so that we can log it from host console later.
 	 */
 	machine_check_queue_event();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return handled;

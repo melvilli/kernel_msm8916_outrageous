@@ -25,8 +25,12 @@
  * 
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -37,7 +41,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -648,15 +655,21 @@ static void catc_set_multicast_list(struct net_device *netdev)
 	struct catc *catc = netdev_priv(netdev);
 	struct netdev_hw_addr *ha;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 broadcast[6];
 	u8 rx = RxEnable | RxPolarity | RxMultiCast;
 
 	memset(broadcast, 0xff, 6);
 =======
+=======
+>>>>>>> v3.18
 	u8 broadcast[ETH_ALEN];
 	u8 rx = RxEnable | RxPolarity | RxMultiCast;
 
 	memset(broadcast, 0xff, ETH_ALEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memset(catc->multicast, 0, 64);
 
@@ -793,8 +806,13 @@ static int catc_probe(struct usb_interface *intf, const struct usb_device_id *id
 	struct net_device *netdev;
 	struct catc *catc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 broadcast[6];
 	int pktsz, ret;
+=======
+	u8 broadcast[ETH_ALEN];
+	int i, pktsz;
+>>>>>>> v3.18
 =======
 	u8 broadcast[ETH_ALEN];
 	int i, pktsz;
@@ -815,7 +833,11 @@ static int catc_probe(struct usb_interface *intf, const struct usb_device_id *id
 	netdev->netdev_ops = &catc_netdev_ops;
 	netdev->watchdog_timeo = TX_TIMEOUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &ops);
+=======
+	netdev->ethtool_ops = &ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &ops;
 >>>>>>> v3.18
@@ -838,15 +860,21 @@ static int catc_probe(struct usb_interface *intf, const struct usb_device_id *id
 	    (!catc->rx_urb) || (!catc->irq_urb)) {
 		dev_err(&intf->dev, "No free urbs available.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -ENOMEM;
 		goto fail_free;
 =======
+=======
+>>>>>>> v3.18
 		usb_free_urb(catc->ctrl_urb);
 		usb_free_urb(catc->tx_urb);
 		usb_free_urb(catc->rx_urb);
 		usb_free_urb(catc->irq_urb);
 		free_netdev(netdev);
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -876,6 +904,7 @@ static int catc_probe(struct usb_interface *intf, const struct usb_device_id *id
 
 	if (!catc->is_f5u011) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 *buf;
 		int i;
 
@@ -895,6 +924,8 @@ static int catc_probe(struct usb_interface *intf, const struct usb_device_id *id
 	  
 		switch (*buf) {
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(dev, "Checking memory size\n");
 
 		i = 0x12345678;
@@ -904,6 +935,9 @@ static int catc_probe(struct usb_interface *intf, const struct usb_device_id *id
 		catc_read_mem(catc, 0x7a80, &i, 4);
 	  
 		switch (i) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case 0x12345678:
 			catc_set_reg(catc, TxBufCount, 8);
@@ -920,8 +954,11 @@ static int catc_probe(struct usb_interface *intf, const struct usb_device_id *id
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		kfree(buf);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	  
@@ -937,7 +974,11 @@ static int catc_probe(struct usb_interface *intf, const struct usb_device_id *id
 		dev_dbg(dev, "Filling the multicast list.\n");
 	  
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(broadcast, 0xff, 6);
+=======
+		memset(broadcast, 0xff, ETH_ALEN);
+>>>>>>> v3.18
 =======
 		memset(broadcast, 0xff, ETH_ALEN);
 >>>>>>> v3.18
@@ -975,6 +1016,7 @@ static int catc_probe(struct usb_interface *intf, const struct usb_device_id *id
 
 	SET_NETDEV_DEV(netdev, &intf->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = register_netdev(netdev);
 	if (ret)
 		goto fail_clear_intfdata;
@@ -991,6 +1033,8 @@ fail_free:
 	free_netdev(netdev);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (register_netdev(netdev) != 0) {
 		usb_set_intfdata(intf, NULL);
 		usb_free_urb(catc->ctrl_urb);
@@ -1001,6 +1045,9 @@ fail_free:
 		return -EIO;
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

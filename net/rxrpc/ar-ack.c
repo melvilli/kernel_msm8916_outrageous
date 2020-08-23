@@ -20,6 +20,7 @@
 #include "ar-internal.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int rxrpc_ack_defer = 1;
 
 static const char *const rxrpc_acks[] = {
@@ -27,6 +28,8 @@ static const char *const rxrpc_acks[] = {
 	"-?-"
 };
 =======
+=======
+>>>>>>> v3.18
 /*
  * How long to wait before scheduling ACK generation after seeing a
  * packet with RXRPC_REQUEST_ACK set (in jiffies).
@@ -82,6 +85,9 @@ static const char *rxrpc_acks(u8 reason)
 		reason = ARRAY_SIZE(str) - 1;
 	return str[reason];
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const s8 rxrpc_ack_priority[] = {
@@ -109,7 +115,11 @@ void __rxrpc_propose_ACK(struct rxrpc_call *call, u8 ack_reason,
 
 	_enter("{%d},%s,%%%x,%u",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       call->debug_id, rxrpc_acks[ack_reason], ntohl(serial),
+=======
+	       call->debug_id, rxrpc_acks(ack_reason), ntohl(serial),
+>>>>>>> v3.18
 =======
 	       call->debug_id, rxrpc_acks(ack_reason), ntohl(serial),
 >>>>>>> v3.18
@@ -138,9 +148,14 @@ void __rxrpc_propose_ACK(struct rxrpc_call *call, u8 ack_reason,
 	case RXRPC_ACK_DELAY:
 		_debug("run delay timer");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		call->ack_timer.expires = jiffies + rxrpc_ack_timeout * HZ;
 		add_timer(&call->ack_timer);
 		return;
+=======
+		expiry = rxrpc_soft_ack_delay;
+		goto run_timer;
+>>>>>>> v3.18
 =======
 		expiry = rxrpc_soft_ack_delay;
 		goto run_timer;
@@ -150,7 +165,11 @@ void __rxrpc_propose_ACK(struct rxrpc_call *call, u8 ack_reason,
 		if (!immediate) {
 			_debug("run defer timer");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			expiry = 1;
+=======
+			expiry = rxrpc_idle_ack_delay;
+>>>>>>> v3.18
 =======
 			expiry = rxrpc_idle_ack_delay;
 >>>>>>> v3.18
@@ -160,17 +179,23 @@ void __rxrpc_propose_ACK(struct rxrpc_call *call, u8 ack_reason,
 
 	case RXRPC_ACK_REQUESTED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!rxrpc_ack_defer)
 			goto cancel_timer;
 		if (!immediate || serial == cpu_to_be32(1)) {
 			_debug("run defer timer");
 			expiry = rxrpc_ack_defer;
 =======
+=======
+>>>>>>> v3.18
 		expiry = rxrpc_requested_ack_delay;
 		if (!expiry)
 			goto cancel_timer;
 		if (!immediate || serial == cpu_to_be32(1)) {
 			_debug("run defer timer");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto run_timer;
 		}
@@ -717,7 +742,11 @@ process_further:
 		       ntohl(ack.previousPacket),
 		       ntohl(ack.serial),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       rxrpc_acks[ack.reason],
+=======
+		       rxrpc_acks(ack.reason),
+>>>>>>> v3.18
 =======
 		       rxrpc_acks(ack.reason),
 >>>>>>> v3.18
@@ -1251,17 +1280,23 @@ send_ACK:
 	mtu -= call->conn->trans->peer->hdrsize;
 	ackinfo.maxMTU	= htonl(mtu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ackinfo.rwind	= htonl(32);
 
 	/* permit the peer to send us jumbo packets if it wants to */
 	ackinfo.rxMTU	= htonl(5692);
 	ackinfo.jumbo_max = htonl(4);
 =======
+=======
+>>>>>>> v3.18
 	ackinfo.rwind	= htonl(rxrpc_rx_window_size);
 
 	/* permit the peer to send us jumbo packets if it wants to */
 	ackinfo.rxMTU	= htonl(rxrpc_rx_mtu);
 	ackinfo.jumbo_max = htonl(rxrpc_rx_jumbo_max);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hdr.serial = htonl(atomic_inc_return(&call->conn->serial));
@@ -1272,7 +1307,11 @@ send_ACK:
 	       ntohl(ack.previousPacket),
 	       ntohl(ack.serial),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       rxrpc_acks[ack.reason],
+=======
+	       rxrpc_acks(ack.reason),
+>>>>>>> v3.18
 =======
 	       rxrpc_acks(ack.reason),
 >>>>>>> v3.18

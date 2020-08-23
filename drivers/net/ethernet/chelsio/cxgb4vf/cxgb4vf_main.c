@@ -164,6 +164,7 @@ void t4vf_os_link_changed(struct adapter *adapter, int pidx, int link_ok)
 
 		switch (pi->link_cfg.speed) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case SPEED_10000:
 			s = "10Gbps";
 			break;
@@ -174,6 +175,8 @@ void t4vf_os_link_changed(struct adapter *adapter, int pidx, int link_ok)
 
 		case SPEED_100:
 =======
+=======
+>>>>>>> v3.18
 		case 40000:
 			s = "40Gbps";
 			break;
@@ -187,6 +190,9 @@ void t4vf_os_link_changed(struct adapter *adapter, int pidx, int link_ok)
 			break;
 
 		case 100:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			s = "100Mbps";
 			break;
@@ -1081,7 +1087,11 @@ static inline unsigned int mk_adap_vers(const struct adapter *adapter)
 	 * Chip version 4, revision 0x3f (cxgb4vf).
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return CHELSIO_CHIP_VERSION(adapter->chip) | (0x3f << 10);
+=======
+	return CHELSIO_CHIP_VERSION(adapter->params.chip) | (0x3f << 10);
+>>>>>>> v3.18
 =======
 	return CHELSIO_CHIP_VERSION(adapter->params.chip) | (0x3f << 10);
 >>>>>>> v3.18
@@ -1572,10 +1582,13 @@ static void cxgb4vf_get_regs(struct net_device *dev,
 		       T4VF_MPS_BASE_ADDR + T4VF_MOD_MAP_MPS_FIRST,
 		       T4VF_MPS_BASE_ADDR + T4VF_MOD_MAP_MPS_LAST);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg_block_dump(adapter, regbuf,
 		       T4VF_PL_BASE_ADDR + T4VF_MOD_MAP_PL_FIRST,
 		       T4VF_PL_BASE_ADDR + T4VF_MOD_MAP_PL_LAST);
 =======
+=======
+>>>>>>> v3.18
 
 	/* T5 adds new registers in the PL Register map.
 	 */
@@ -1583,6 +1596,9 @@ static void cxgb4vf_get_regs(struct net_device *dev,
 		       T4VF_PL_BASE_ADDR + T4VF_MOD_MAP_PL_FIRST,
 		       T4VF_PL_BASE_ADDR + (is_t4(adapter->params.chip)
 		       ? A_PL_VF_WHOAMI : A_PL_VF_REVISION));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reg_block_dump(adapter, regbuf,
 		       T4VF_CIM_BASE_ADDR + T4VF_MOD_MAP_CIM_FIRST,
@@ -2118,6 +2134,10 @@ static int adap_init0(struct adapter *adapter)
 	int err;
 	u32 param, val = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int chipid;
+>>>>>>> v3.18
 =======
 	unsigned int chipid;
 >>>>>>> v3.18
@@ -2149,6 +2169,7 @@ static int adap_init0(struct adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (adapter->pdev->device >> 12) {
 	case CHELSIO_T4:
 		adapter->chip = CHELSIO_CHIP_CODE(CHELSIO_T4, 0);
@@ -2156,6 +2177,8 @@ static int adap_init0(struct adapter *adapter)
 	case CHELSIO_T5:
 		adapter->chip = CHELSIO_CHIP_CODE(CHELSIO_T5, 0);
 =======
+=======
+>>>>>>> v3.18
 	adapter->params.chip = 0;
 	switch (adapter->pdev->device >> 12) {
 	case CHELSIO_T4:
@@ -2164,6 +2187,9 @@ static int adap_init0(struct adapter *adapter)
 	case CHELSIO_T5:
 		chipid = G_REV(t4_read_reg(adapter, A_PL_VF_REV));
 		adapter->params.chip |= CHELSIO_CHIP_CODE(CHELSIO_T5, chipid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -2390,7 +2416,11 @@ static void cfg_queues(struct adapter *adapter)
 
 		pi->first_qset = qidx;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pi->nqsets = is_10g_port(&pi->link_cfg) ? q10g : 1;
+=======
+		pi->nqsets = is_x_10g_port(&pi->link_cfg) ? q10g : 1;
+>>>>>>> v3.18
 =======
 		pi->nqsets = is_x_10g_port(&pi->link_cfg) ? q10g : 1;
 >>>>>>> v3.18
@@ -2487,7 +2517,11 @@ static void reduce_ethqs(struct adapter *adapter, int n)
 static int enable_msix(struct adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, err, want, need;
+=======
+	int i, want, need, nqsets;
+>>>>>>> v3.18
 =======
 	int i, want, need, nqsets;
 >>>>>>> v3.18
@@ -2506,6 +2540,7 @@ static int enable_msix(struct adapter *adapter)
 	 */
 	want = s->max_ethqsets + MSIX_EXTRAS;
 	need = adapter->params.nports + MSIX_EXTRAS;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while ((err = pci_enable_msix(adapter->pdev, entries, want)) >= need)
 		want = err;
@@ -2528,6 +2563,8 @@ static int enable_msix(struct adapter *adapter)
 	}
 	return err;
 =======
+=======
+>>>>>>> v3.18
 
 	want = pci_enable_msix_range(adapter->pdev, entries, need, want);
 	if (want < 0)
@@ -2545,6 +2582,9 @@ static int enable_msix(struct adapter *adapter)
 		adapter->msix_info[i].vec = entries[i].vector;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2734,7 +2774,11 @@ static int cxgb4vf_pci_probe(struct pci_dev *pdev,
 
 		netdev->netdev_ops = &cxgb4vf_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SET_ETHTOOL_OPS(netdev, &cxgb4vf_ethtool_ops);
+=======
+		netdev->ethtool_ops = &cxgb4vf_ethtool_ops;
+>>>>>>> v3.18
 =======
 		netdev->ethtool_ops = &cxgb4vf_ethtool_ops;
 >>>>>>> v3.18
@@ -2860,11 +2904,17 @@ err_unmap_bar:
 err_free_adapter:
 	kfree(adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 
 err_release_regions:
 	pci_release_regions(pdev);
 	pci_set_drvdata(pdev, NULL);
+=======
+
+err_release_regions:
+	pci_release_regions(pdev);
+>>>>>>> v3.18
 =======
 
 err_release_regions:
@@ -2935,7 +2985,10 @@ static void cxgb4vf_pci_remove(struct pci_dev *pdev)
 		iounmap(adapter->regs);
 		kfree(adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -2962,6 +3015,7 @@ static void cxgb4vf_pci_shutdown(struct pci_dev *pdev)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Disable all Virtual Interfaces.  This will shut down the
 	 * delivery of all ingress packets into the chip for these
@@ -2981,6 +3035,8 @@ static void cxgb4vf_pci_shutdown(struct pci_dev *pdev)
 		pi = netdev_priv(netdev);
 		t4vf_enable_vi(adapter, pi->viid, false, false);
 =======
+=======
+>>>>>>> v3.18
 	/* Disable all Virtual Interfaces.  This will shut down the
 	 * delivery of all ingress packets into the chip for these
 	 * Virtual Interfaces.
@@ -2999,6 +3055,9 @@ static void cxgb4vf_pci_shutdown(struct pci_dev *pdev)
 	} else if (adapter->flags & USING_MSI) {
 		pci_disable_msi(adapter->pdev);
 		adapter->flags &= ~USING_MSI;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -3008,6 +3067,10 @@ static void cxgb4vf_pci_shutdown(struct pci_dev *pdev)
 	 */
 	t4vf_free_sge_resources(adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pci_set_drvdata(pdev, NULL);
+>>>>>>> v3.18
 =======
 	pci_set_drvdata(pdev, NULL);
 >>>>>>> v3.18
@@ -3016,6 +3079,7 @@ static void cxgb4vf_pci_shutdown(struct pci_dev *pdev)
 /*
  * PCI Device registration data structures.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define CH_DEVICE(devid, idx) \
 	{ PCI_VENDOR_ID_CHELSIO, devid, PCI_ANY_ID, PCI_ANY_ID, 0, 0, idx }
@@ -3056,6 +3120,8 @@ static struct pci_device_id cxgb4vf_pci_tbl[] = {
 	CH_DEVICE(0x5812, 0),   /* T560-cr */
 	CH_DEVICE(0x5813, 0),   /* T580-cr */
 =======
+=======
+>>>>>>> v3.18
 #define CH_DEVICE(devid) \
 	{ PCI_VENDOR_ID_CHELSIO, devid, PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0 }
 
@@ -3112,6 +3178,9 @@ static const struct pci_device_id cxgb4vf_pci_tbl[] = {
 	CH_DEVICE(0x5886),
 	CH_DEVICE(0x5887),
 	CH_DEVICE(0x5888),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0, }
 };

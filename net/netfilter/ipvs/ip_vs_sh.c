@@ -49,11 +49,17 @@
 #include <net/ip_vs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <net/tcp.h>
 #include <linux/udp.h>
 #include <linux/sctp.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -79,11 +85,14 @@ struct ip_vs_sh_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *	Returns hash value for IPVS SH entry
  */
 static inline unsigned int ip_vs_sh_hashkey(int af, const union nf_inet_addr *addr)
 =======
+=======
+>>>>>>> v3.18
 /* Helper function to determine if server is unavailable */
 static inline bool is_unavailable(struct ip_vs_dest *dest)
 {
@@ -97,6 +106,9 @@ static inline bool is_unavailable(struct ip_vs_dest *dest)
 static inline unsigned int
 ip_vs_sh_hashkey(int af, const union nf_inet_addr *addr,
 		 __be16 port, unsigned int offset)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	__be32 addr_fold = addr->ip;
@@ -107,7 +119,12 @@ ip_vs_sh_hashkey(int af, const union nf_inet_addr *addr,
 			    addr->ip6[2]^addr->ip6[3];
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (ntohl(addr_fold)*2654435761UL) & IP_VS_SH_TAB_MASK;
+=======
+	return (offset + (ntohs(port) + ntohl(addr_fold))*2654435761UL) &
+		IP_VS_SH_TAB_MASK;
+>>>>>>> v3.18
 =======
 	return (offset + (ntohs(port) + ntohl(addr_fold))*2654435761UL) &
 		IP_VS_SH_TAB_MASK;
@@ -120,6 +137,7 @@ ip_vs_sh_hashkey(int af, const union nf_inet_addr *addr,
  */
 static inline struct ip_vs_dest *
 <<<<<<< HEAD
+<<<<<<< HEAD
 ip_vs_sh_get(int af, struct ip_vs_sh_state *s, const union nf_inet_addr *addr)
 {
 	return rcu_dereference(s->buckets[ip_vs_sh_hashkey(af, addr)].dest);
@@ -127,6 +145,8 @@ ip_vs_sh_get(int af, struct ip_vs_sh_state *s, const union nf_inet_addr *addr)
 
 
 =======
+=======
+>>>>>>> v3.18
 ip_vs_sh_get(struct ip_vs_service *svc, struct ip_vs_sh_state *s,
 	     const union nf_inet_addr *addr, __be16 port)
 {
@@ -182,6 +202,9 @@ ip_vs_sh_get_fallback(struct ip_vs_service *svc, struct ip_vs_sh_state *s,
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *      Assign all the hash buckets of the specified table with the service.
@@ -216,7 +239,11 @@ ip_vs_sh_reassign(struct ip_vs_sh_state *s, struct ip_vs_service *svc)
 
 			IP_VS_DBG_BUF(6, "assigned i: %d dest: %s weight: %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      i, IP_VS_DBG_ADDR(svc->af, &dest->addr),
+=======
+				      i, IP_VS_DBG_ADDR(dest->af, &dest->addr),
+>>>>>>> v3.18
 =======
 				      i, IP_VS_DBG_ADDR(dest->af, &dest->addr),
 >>>>>>> v3.18
@@ -304,6 +331,7 @@ static int ip_vs_sh_dest_changed(struct ip_vs_service *svc,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  *      If the dest flags is set with IP_VS_DEST_F_OVERLOAD,
  *      consider that the server is overloaded here.
@@ -312,6 +340,8 @@ static inline int is_overloaded(struct ip_vs_dest *dest)
 {
 	return dest->flags & IP_VS_DEST_F_OVERLOAD;
 =======
+=======
+>>>>>>> v3.18
 /* Helper function to get port number */
 static inline __be16
 ip_vs_sh_get_port(const struct sk_buff *skb, struct ip_vs_iphdr *iph)
@@ -345,6 +375,9 @@ ip_vs_sh_get_port(const struct sk_buff *skb, struct ip_vs_iphdr *iph)
 	}
 
 	return port;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -353,6 +386,7 @@ ip_vs_sh_get_port(const struct sk_buff *skb, struct ip_vs_iphdr *iph)
  *      Source Hashing scheduling
  */
 static struct ip_vs_dest *
+<<<<<<< HEAD
 <<<<<<< HEAD
 ip_vs_sh_schedule(struct ip_vs_service *svc, const struct sk_buff *skb)
 {
@@ -371,6 +405,8 @@ ip_vs_sh_schedule(struct ip_vs_service *svc, const struct sk_buff *skb)
 	    || atomic_read(&dest->weight) <= 0
 	    || is_overloaded(dest)) {
 =======
+=======
+>>>>>>> v3.18
 ip_vs_sh_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 		  struct ip_vs_iphdr *iph)
 {
@@ -391,6 +427,9 @@ ip_vs_sh_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 		dest = ip_vs_sh_get(svc, s, &iph->saddr, port);
 
 	if (!dest) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ip_vs_scheduler_err(svc, "no destination available");
 		return NULL;
@@ -398,8 +437,13 @@ ip_vs_sh_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 
 	IP_VS_DBG_BUF(6, "SH: source IP address %s --> server %s:%d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      IP_VS_DBG_ADDR(svc->af, &iph.saddr),
 		      IP_VS_DBG_ADDR(svc->af, &dest->addr),
+=======
+		      IP_VS_DBG_ADDR(svc->af, &iph->saddr),
+		      IP_VS_DBG_ADDR(dest->af, &dest->addr),
+>>>>>>> v3.18
 =======
 		      IP_VS_DBG_ADDR(svc->af, &iph->saddr),
 		      IP_VS_DBG_ADDR(dest->af, &dest->addr),

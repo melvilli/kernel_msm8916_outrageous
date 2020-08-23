@@ -916,7 +916,11 @@ static int pxa_irda_probe(struct platform_device *pdev)
 
 	if (err == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_set_drvdata(&pdev->dev, dev);
+=======
+		platform_set_drvdata(pdev, dev);
+>>>>>>> v3.18
 =======
 		platform_set_drvdata(pdev, dev);
 >>>>>>> v3.18

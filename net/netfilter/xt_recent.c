@@ -314,10 +314,14 @@ out:
 static void recent_table_free(void *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_vmalloc_addr(addr))
 		vfree(addr);
 	else
 		kfree(addr);
+=======
+	kvfree(addr);
+>>>>>>> v3.18
 =======
 	kvfree(addr);
 >>>>>>> v3.18

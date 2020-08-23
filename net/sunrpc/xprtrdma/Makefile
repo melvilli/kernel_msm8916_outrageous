@@ -1,15 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SUNRPC_XPRT_RDMA) += xprtrdma.o
 
 xprtrdma-y := transport.o rpc_rdma.o verbs.o
 
 obj-$(CONFIG_SUNRPC_XPRT_RDMA) += svcrdma.o
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_SUNRPC_XPRT_RDMA_CLIENT) += xprtrdma.o
 
 xprtrdma-y := transport.o rpc_rdma.o verbs.o
 
 obj-$(CONFIG_SUNRPC_XPRT_RDMA_SERVER) += svcrdma.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 svcrdma-y := svc_rdma.o svc_rdma_transport.o \

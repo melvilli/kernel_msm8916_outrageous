@@ -201,8 +201,11 @@
 #define SPR_SNCTL 0x0805
 #define SPR_SNCTL__FRZFABRIC_MASK  0x1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SPR_SNCTL__FRZPROC_MASK  0x2
 #define SPR_SNPC 0x080b
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SPR_SNSTATIC 0x080c

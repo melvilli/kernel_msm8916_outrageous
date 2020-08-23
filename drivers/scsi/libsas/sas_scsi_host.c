@@ -168,7 +168,11 @@ static struct sas_task *sas_create_task(struct scsi_cmnd *cmd,
 	memcpy(task->ssp_task.LUN, &lun.scsi_lun, 8);
 	task->ssp_task.task_attr = TASK_ATTR_SIMPLE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(task->ssp_task.cdb, cmd->cmnd, 16);
+=======
+	task->ssp_task.cmd = cmd;
+>>>>>>> v3.18
 =======
 	task->ssp_task.cmd = cmd;
 >>>>>>> v3.18
@@ -409,7 +413,11 @@ static int sas_recover_lu(struct domain_device *dev, struct scsi_cmnd *cmd)
 	int_to_scsilun(cmd->device->lun, &lun);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SAS_DPRINTK("eh: device %llx LUN %x has the task\n",
+=======
+	SAS_DPRINTK("eh: device %llx LUN %llx has the task\n",
+>>>>>>> v3.18
 =======
 	SAS_DPRINTK("eh: device %llx LUN %llx has the task\n",
 >>>>>>> v3.18
@@ -499,7 +507,12 @@ static void sas_wait_eh(struct domain_device *dev)
 EXPORT_SYMBOL(sas_wait_eh);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sas_queue_reset(struct domain_device *dev, int reset_type, int lun, int wait)
+=======
+static int sas_queue_reset(struct domain_device *dev, int reset_type,
+			   u64 lun, int wait)
+>>>>>>> v3.18
 =======
 static int sas_queue_reset(struct domain_device *dev, int reset_type,
 			   u64 lun, int wait)
@@ -703,7 +716,11 @@ static void sas_eh_handle_sas_errors(struct Scsi_Host *shost, struct list_head *
 			tmf_resp = sas_recover_lu(task->dev, cmd);
 			if (tmf_resp == TMF_RESP_FUNC_COMPLETE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				SAS_DPRINTK("dev %016llx LU %x is "
+=======
+				SAS_DPRINTK("dev %016llx LU %llx is "
+>>>>>>> v3.18
 =======
 				SAS_DPRINTK("dev %016llx LU %llx is "
 >>>>>>> v3.18
@@ -760,7 +777,11 @@ static void sas_eh_handle_sas_errors(struct Scsi_Host *shost, struct list_head *
 			 * possibly the HA just disappeared.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			SAS_DPRINTK("error from  device %llx, LUN %x "
+=======
+			SAS_DPRINTK("error from  device %llx, LUN %llx "
+>>>>>>> v3.18
 =======
 			SAS_DPRINTK("error from  device %llx, LUN %llx "
 >>>>>>> v3.18
@@ -834,7 +855,11 @@ retry:
 
 	SAS_DPRINTK("Enter %s busy: %d failed: %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    __func__, shost->host_busy, shost->host_failed);
+=======
+		    __func__, atomic_read(&shost->host_busy), shost->host_failed);
+>>>>>>> v3.18
 =======
 		    __func__, atomic_read(&shost->host_busy), shost->host_failed);
 >>>>>>> v3.18
@@ -883,7 +908,12 @@ out:
 
 	SAS_DPRINTK("--- Exit %s: busy: %d failed: %d tries: %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    __func__, shost->host_busy, shost->host_failed, tries);
+=======
+		    __func__, atomic_read(&shost->host_busy),
+		    shost->host_failed, tries);
+>>>>>>> v3.18
 =======
 		    __func__, atomic_read(&shost->host_busy),
 		    shost->host_failed, tries);
@@ -893,7 +923,11 @@ out:
 enum blk_eh_timer_return sas_scsi_timed_out(struct scsi_cmnd *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scmd_printk(KERN_DEBUG, cmd, "command %p timed out\n", cmd);
+=======
+	scmd_dbg(cmd, "command %p timed out\n", cmd);
+>>>>>>> v3.18
 =======
 	scmd_dbg(cmd, "command %p timed out\n", cmd);
 >>>>>>> v3.18
@@ -976,7 +1010,11 @@ int sas_slave_configure(struct scsi_device *scsi_dev)
 		scsi_activate_tcq(scsi_dev, SAS_DEF_QD);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SAS_DPRINTK("device %llx, LUN %x doesn't support "
+=======
+		SAS_DPRINTK("device %llx, LUN %llx doesn't support "
+>>>>>>> v3.18
 =======
 		SAS_DPRINTK("device %llx, LUN %llx doesn't support "
 >>>>>>> v3.18

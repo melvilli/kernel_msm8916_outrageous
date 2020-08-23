@@ -39,7 +39,11 @@ static int orinoco_pci_resume(struct pci_dev *pdev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_power_state(pdev, 0);
+=======
+	pci_set_power_state(pdev, PCI_D0);
+>>>>>>> v3.18
 =======
 	pci_set_power_state(pdev, PCI_D0);
 >>>>>>> v3.18

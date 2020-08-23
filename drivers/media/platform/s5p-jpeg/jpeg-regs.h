@@ -3,16 +3,22 @@
  * Register definition file for Samsung JPEG codec driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2011 Samsung Electronics Co., Ltd.
  *		http://www.samsung.com
  *
  * Author: Andrzej Pietrasiewicz <andrzej.p@samsung.com>
 =======
+=======
+>>>>>>> v3.18
  * Copyright (c) 2011-2014 Samsung Electronics Co., Ltd.
  *		http://www.samsung.com
  *
  * Author: Andrzej Pietrasiewicz <andrzej.p@samsung.com>
  * Author: Jacek Anaszewski <j.anaszewski@samsung.com>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,6 +30,11 @@
 #define JPEG_REGS_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Register and bit definitions for S5PC210 */
+
+>>>>>>> v3.18
 =======
 /* Register and bit definitions for S5PC210 */
 
@@ -180,7 +191,10 @@
 #define S5P_JPG_HACTBLG(n)		(0x8c0 + (n) * 0x400)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* Register and bit definitions for Exynos 4x12 */
 
@@ -630,6 +644,9 @@
 #define EXYNOS3250_JPEG_DEC_COEF2		0x04a9a064
 #define EXYNOS3250_JPEG_DEC_COEF3		0x04a80102
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* JPEG_REGS_H_ */
 

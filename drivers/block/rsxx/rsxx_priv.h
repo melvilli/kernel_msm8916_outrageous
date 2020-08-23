@@ -40,6 +40,10 @@
 #include <linux/timer.h>
 #include <linux/ioctl.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -56,7 +60,11 @@ struct proc_cmd;
 
 #define DRIVER_NAME "rsxx"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRIVER_VERSION "4.0"
+=======
+#define DRIVER_VERSION "4.0.3.2516"
+>>>>>>> v3.18
 =======
 #define DRIVER_VERSION "4.0.3.2516"
 >>>>>>> v3.18
@@ -123,6 +131,10 @@ struct rsxx_dma_ctrl {
 	struct dma_tracker_list		*trackers;
 	struct rsxx_dma_stats		stats;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex			work_lock;
+>>>>>>> v3.18
 =======
 	struct mutex			work_lock;
 >>>>>>> v3.18
@@ -147,6 +159,10 @@ struct rsxx_cardinfo {
 		bool			active;
 		struct creg_cmd		*active_cmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct workqueue_struct	*creg_wq;
+>>>>>>> v3.18
 =======
 		struct workqueue_struct	*creg_wq;
 >>>>>>> v3.18
@@ -171,6 +187,10 @@ struct rsxx_cardinfo {
 	} log;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct workqueue_struct	*event_wq;
+>>>>>>> v3.18
 =======
 	struct workqueue_struct	*event_wq;
 >>>>>>> v3.18
@@ -202,6 +222,11 @@ struct rsxx_cardinfo {
 	int			n_targets;
 	struct rsxx_dma_ctrl	*ctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	struct dentry		*debugfs_dir;
+>>>>>>> v3.18
 =======
 
 	struct dentry		*debugfs_dir;
@@ -309,6 +334,10 @@ enum rsxx_creg_addr {
 	CREG_ADD_LOG			= 0x80002000,
 	CREG_ADD_NUM_TARGETS		= 0x80003000,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CREG_ADD_CRAM			= 0xA0000000,
+>>>>>>> v3.18
 =======
 	CREG_ADD_CRAM			= 0xA0000000,
 >>>>>>> v3.18
@@ -368,12 +397,18 @@ enum rsxx_creg_stat {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum rsxx_dma_finish {
 	FREE_DMA	= 0x0,
 	COMPLETE_DMA	= 0x1,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned int CREG_DATA(int N)
 {
@@ -410,11 +445,17 @@ int rsxx_dma_setup(struct rsxx_cardinfo *card);
 void rsxx_dma_destroy(struct rsxx_cardinfo *card);
 int rsxx_dma_init(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int rsxx_cleanup_dma_queue(struct rsxx_dma_ctrl *ctrl,
 				struct list_head *q,
 				unsigned int done);
 int rsxx_dma_cancel(struct rsxx_dma_ctrl *ctrl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void rsxx_dma_cleanup(void);
 void rsxx_dma_queue_reset(struct rsxx_cardinfo *card);
@@ -427,7 +468,10 @@ int rsxx_dma_queue_bio(struct rsxx_cardinfo *card,
 int rsxx_hw_buffers_init(struct pci_dev *dev, struct rsxx_dma_ctrl *ctrl);
 int rsxx_eeh_save_issued_dmas(struct rsxx_cardinfo *card);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rsxx_eeh_cancel_dmas(struct rsxx_cardinfo *card);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int rsxx_eeh_remap_dmas(struct rsxx_cardinfo *card);

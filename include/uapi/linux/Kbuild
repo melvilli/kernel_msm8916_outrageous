@@ -21,8 +21,11 @@ header-y += netfilter_ipv6/
 header-y += usb/
 header-y += wimax/
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += mfd/
 header-y += ../../../drivers/staging/android/uapi/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -42,7 +45,10 @@ header-y += aio_abi.h
 header-y += apm_bios.h
 header-y += arcfb.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += ashmem.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += atalk.h
@@ -69,22 +75,33 @@ header-y += auto_fs.h
 header-y += auto_fs4.h
 header-y += auxvec.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += avtimer.h
 header-y += ax25.h
 header-y += b1lli.h
 header-y += batterydata-interface.h
 header-y += baycom.h
 =======
+=======
+>>>>>>> v3.18
 header-y += ax25.h
 header-y += b1lli.h
 header-y += baycom.h
 header-y += bcm933xx_hcs.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 header-y += bfs_fs.h
 header-y += binfmts.h
 header-y += blkpg.h
 header-y += blktrace_api.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+header-y += bpf.h
+header-y += bpf_common.h
+>>>>>>> v3.18
 =======
 header-y += bpf.h
 header-y += bpf_common.h
@@ -101,7 +118,10 @@ header-y += cdrom.h
 header-y += cgroupstats.h
 header-y += chio.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += ci-bridge-spi.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += cm4000_cs.h
@@ -112,7 +132,10 @@ header-y += coff.h
 header-y += connector.h
 header-y += const.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += coresight-stm.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += cramfs_fs.h
@@ -137,10 +160,15 @@ header-y += elf-fdpic.h
 header-y += elf.h
 header-y += elfcore.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += epm_adc.h
 header-y += errno.h
 header-y += errqueue.h
 header-y += esoc_ctrl.h
+=======
+header-y += errno.h
+header-y += errqueue.h
+>>>>>>> v3.18
 =======
 header-y += errno.h
 header-y += errqueue.h
@@ -158,15 +186,21 @@ header-y += fib_rules.h
 header-y += fiemap.h
 header-y += filter.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += fips_status.h
 header-y += firewire-cdev.h
 header-y += firewire-constants.h
 header-y += flat.h
 =======
+=======
+>>>>>>> v3.18
 header-y += firewire-cdev.h
 header-y += firewire-constants.h
 header-y += flat.h
 header-y += fou.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 header-y += fs.h
 header-y += fsl_hypervisor.h
@@ -178,8 +212,11 @@ header-y += genetlink.h
 header-y += gfs2_ondisk.h
 header-y += gigaset_dev.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += hbtp_input.h
 header-y += hbtp_vm.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += hdlc.h
@@ -190,6 +227,11 @@ header-y += hiddev.h
 header-y += hidraw.h
 header-y += hpet.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+header-y += hsr_netlink.h
+header-y += hyperv.h
+>>>>>>> v3.18
 =======
 header-y += hsr_netlink.h
 header-y += hyperv.h
@@ -202,7 +244,10 @@ header-y += i8k.h
 header-y += icmp.h
 header-y += icmpv6.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += idle_stats_device.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += if.h
@@ -244,8 +289,11 @@ header-y += inotify.h
 header-y += input.h
 header-y += ioctl.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += ion.h
 header-y += ioprio.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += ip.h
@@ -279,8 +327,11 @@ header-y += kexec.h
 header-y += keyboard.h
 header-y += keyctl.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += ensigma_uccp330.h
 header-y += demod_wrapper.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -297,6 +348,10 @@ endif
 
 header-y += l2tp.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+header-y += libc-compat.h
+>>>>>>> v3.18
 =======
 header-y += libc-compat.h
 >>>>>>> v3.18
@@ -312,20 +367,30 @@ header-y += mdio.h
 header-y += media.h
 header-y += mei.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += mempolicy.h
 header-y += meye.h
 =======
+=======
+>>>>>>> v3.18
 header-y += memfd.h
 header-y += mempolicy.h
 header-y += meye.h
 header-y += mic_common.h
 header-y += mic_ioctl.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 header-y += mii.h
 header-y += minix_fs.h
 header-y += mman.h
 header-y += mmtimer.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+header-y += mpls.h
+>>>>>>> v3.18
 =======
 header-y += mpls.h
 >>>>>>> v3.18
@@ -334,6 +399,7 @@ header-y += mroute.h
 header-y += mroute6.h
 header-y += msdos_fs.h
 header-y += msg.h
+<<<<<<< HEAD
 <<<<<<< HEAD
 header-y += msm-core-interface.h
 header-y += msm_adc.h
@@ -372,6 +438,8 @@ header-y += msm_pft.h
 header-y += rmnet_data.h
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 header-y += mtio.h
 header-y += n_r3964.h
 header-y += nbd.h
@@ -383,7 +451,10 @@ header-y += neighbour.h
 header-y += net.h
 header-y += net_dropmon.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += net_map.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += net_tstamp.h
@@ -411,15 +482,21 @@ header-y += nfsacl.h
 header-y += nl80211.h
 header-y += nubus.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += nvram.h
 header-y += omap3isp.h
 header-y += omapfb.h
 header-y += oneshot_sync.h
 =======
+=======
+>>>>>>> v3.18
 header-y += nvme.h
 header-y += nvram.h
 header-y += omap3isp.h
 header-y += omapfb.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 header-y += oom.h
 header-y += openvswitch.h
@@ -451,12 +528,17 @@ header-y += psci.h
 header-y += ptp_clock.h
 header-y += ptrace.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += qcedev.h
 header-y += qcota.h
 header-y += qnx4_fs.h
 header-y += qnxtypes.h
 header-y += qrng.h
 header-y += qseecom.h
+=======
+header-y += qnx4_fs.h
+header-y += qnxtypes.h
+>>>>>>> v3.18
 =======
 header-y += qnx4_fs.h
 header-y += qnxtypes.h
@@ -493,15 +575,21 @@ header-y += shm.h
 header-y += signal.h
 header-y += signalfd.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += snmp.h
 header-y += sock_diag.h
 header-y += socket.h
 header-y += sockev.h
 =======
+=======
+>>>>>>> v3.18
 header-y += smiapp.h
 header-y += snmp.h
 header-y += sock_diag.h
 header-y += socket.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 header-y += sockios.h
 header-y += som.h
@@ -518,6 +606,10 @@ header-y += synclink.h
 header-y += sysctl.h
 header-y += sysinfo.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+header-y += target_core_user.h
+>>>>>>> v3.18
 =======
 header-y += target_core_user.h
 >>>>>>> v3.18
@@ -547,6 +639,10 @@ header-y += unistd.h
 header-y += unix_diag.h
 header-y += usbdevice_fs.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+header-y += usbip.h
+>>>>>>> v3.18
 =======
 header-y += usbip.h
 >>>>>>> v3.18
@@ -574,7 +670,11 @@ header-y += virtio_pci.h
 header-y += virtio_ring.h
 header-y += virtio_rng.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += vm_bms.h
+=======
+header-y += vm_sockets.h
+>>>>>>> v3.18
 =======
 header-y += vm_sockets.h
 >>>>>>> v3.18
@@ -588,11 +688,17 @@ header-y += x25.h
 header-y += xattr.h
 header-y += xfrm.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += msm_thermal_ioctl.h
 header-y += hw_breakpoint.h
 header-y += android_pmem.h
 header-y += tsc.h
 header-y += danipc_ioctl.h
+=======
+header-y += hw_breakpoint.h
+header-y += zorro.h
+header-y += zorro_ids.h
+>>>>>>> v3.18
 =======
 header-y += hw_breakpoint.h
 header-y += zorro.h

@@ -253,6 +253,7 @@ static int da9034_set_dvc_voltage_sel(struct regulator_dev *rdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int da9034_map_ldo12_voltage(struct regulator_dev *rdev,
 				    int min_uV, int max_uV)
 {
@@ -287,10 +288,15 @@ static int da9034_list_ldo12_voltage(struct regulator_dev *rdev,
 	return volt;
 }
 =======
+=======
+>>>>>>> v3.18
 static const struct regulator_linear_range da9034_ldo12_ranges[] = {
 	REGULATOR_LINEAR_RANGE(1700000, 0, 7, 50000),
 	REGULATOR_LINEAR_RANGE(2700000, 8, 15, 50000),
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct regulator_ops da903x_regulator_ldo_ops = {
@@ -340,8 +346,13 @@ static struct regulator_ops da9034_regulator_ldo12_ops = {
 	.set_voltage_sel = da903x_set_voltage_sel,
 	.get_voltage_sel = da903x_get_voltage_sel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.list_voltage	= da9034_list_ldo12_voltage,
 	.map_voltage	= da9034_map_ldo12_voltage,
+=======
+	.list_voltage	= regulator_list_voltage_linear_range,
+	.map_voltage	= regulator_map_voltage_linear_range,
+>>>>>>> v3.18
 =======
 	.list_voltage	= regulator_list_voltage_linear_range,
 	.map_voltage	= regulator_map_voltage_linear_range,
@@ -489,6 +500,11 @@ static int da903x_regulator_probe(struct platform_device *pdev)
 		ri->desc.ops = &da9034_regulator_ldo12_ops;
 		ri->desc.n_voltages = 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ri->desc.linear_ranges = da9034_ldo12_ranges;
+		ri->desc.n_linear_ranges = ARRAY_SIZE(da9034_ldo12_ranges);
+>>>>>>> v3.18
 =======
 		ri->desc.linear_ranges = da9034_ldo12_ranges;
 		ri->desc.n_linear_ranges = ARRAY_SIZE(da9034_ldo12_ranges);
@@ -503,15 +519,21 @@ static int da903x_regulator_probe(struct platform_device *pdev)
 
 	config.dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config.init_data = pdev->dev.platform_data;
 	config.driver_data = ri;
 
 	rdev = regulator_register(&ri->desc, &config);
 =======
+=======
+>>>>>>> v3.18
 	config.init_data = dev_get_platdata(&pdev->dev);
 	config.driver_data = ri;
 
 	rdev = devm_regulator_register(&pdev->dev, &ri->desc, &config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(rdev)) {
 		dev_err(&pdev->dev, "failed to register regulator %s\n",
@@ -524,6 +546,7 @@ static int da903x_regulator_probe(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int da903x_regulator_remove(struct platform_device *pdev)
 {
 	struct regulator_dev *rdev = platform_get_drvdata(pdev);
@@ -534,6 +557,8 @@ static int da903x_regulator_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct platform_driver da903x_regulator_driver = {
 	.driver	= {
 		.name	= "da903x-regulator",
@@ -541,7 +566,10 @@ static struct platform_driver da903x_regulator_driver = {
 	},
 	.probe		= da903x_regulator_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= da903x_regulator_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

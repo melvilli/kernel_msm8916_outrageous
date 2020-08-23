@@ -5,6 +5,11 @@
 #include <asm/alternative.h> /* Provides LOCK_PREFIX */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define __HAVE_ARCH_CMPXCHG 1
+
+>>>>>>> v3.18
 =======
 #define __HAVE_ARCH_CMPXCHG 1
 
@@ -149,7 +154,10 @@ extern void __add_wrong_size(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __HAVE_ARCH_CMPXCHG
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define cmpxchg(ptr, old, new)						\
@@ -161,7 +169,10 @@ extern void __add_wrong_size(void)
 #define cmpxchg_local(ptr, old, new)					\
 	__cmpxchg_local(ptr, old, new, sizeof(*(ptr)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

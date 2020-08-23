@@ -110,7 +110,10 @@ static int qxl_ttm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 {
 	struct ttm_buffer_object *bo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qxl_device *qdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int r;
@@ -119,7 +122,10 @@ static int qxl_ttm_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	if (bo == NULL)
 		return VM_FAULT_NOPAGE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qdev = qxl_get_qdev(bo->bdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	r = ttm_vm_ops->fault(vma, vmf);
@@ -136,7 +142,11 @@ int qxl_mmap(struct file *filp, struct vm_area_struct *vma)
 		pr_info("%s: vma->vm_pgoff (%ld) < DRM_FILE_PAGE_OFFSET\n",
 			__func__, vma->vm_pgoff);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return drm_mmap(filp, vma);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -173,10 +183,13 @@ static int qxl_init_mem_type(struct ttm_bo_device *bdev, uint32_t type,
 			     struct ttm_mem_type_manager *man)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qxl_device *qdev;
 
 	qdev = qxl_get_qdev(bdev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (type) {
@@ -208,12 +221,15 @@ static void qxl_evict_flags(struct ttm_buffer_object *bo,
 {
 	struct qxl_bo *qbo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static u32 placements = TTM_PL_MASK_CACHING | TTM_PL_FLAG_SYSTEM;
 
 	if (!qxl_ttm_bo_is_qxl_bo(bo)) {
 		placement->fpfn = 0;
 		placement->lpfn = 0;
 =======
+=======
+>>>>>>> v3.18
 	static struct ttm_place placements = {
 		.fpfn = 0,
 		.lpfn = 0,
@@ -221,6 +237,9 @@ static void qxl_evict_flags(struct ttm_buffer_object *bo,
 	};
 
 	if (!qxl_ttm_bo_is_qxl_bo(bo)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		placement->placement = &placements;
 		placement->busy_placement = &placements;
@@ -230,7 +249,11 @@ static void qxl_evict_flags(struct ttm_buffer_object *bo,
 	}
 	qbo = container_of(bo, struct qxl_bo, tbo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qxl_ttm_placement_from_domain(qbo, QXL_GEM_DOMAIN_CPU);
+=======
+	qxl_ttm_placement_from_domain(qbo, QXL_GEM_DOMAIN_CPU, false);
+>>>>>>> v3.18
 =======
 	qxl_ttm_placement_from_domain(qbo, QXL_GEM_DOMAIN_CPU, false);
 >>>>>>> v3.18
@@ -240,7 +263,13 @@ static void qxl_evict_flags(struct ttm_buffer_object *bo,
 static int qxl_verify_access(struct ttm_buffer_object *bo, struct file *filp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	struct qxl_bo *qbo = to_qxl_bo(bo);
+
+	return drm_vma_node_verify_access(&qbo->gem_base.vma_node, filp);
+>>>>>>> v3.18
 =======
 	struct qxl_bo *qbo = to_qxl_bo(bo);
 
@@ -393,6 +422,7 @@ static int qxl_bo_move(struct ttm_buffer_object *bo,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int qxl_sync_obj_wait(void *sync_obj,
 			     bool lazy, bool interruptible)
@@ -481,6 +511,8 @@ static bool qxl_sync_obj_signaled(void *sync_obj)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void qxl_bo_move_notify(struct ttm_buffer_object *bo,
 			       struct ttm_mem_reg *new_mem)
 {
@@ -508,6 +540,7 @@ static struct ttm_bo_driver qxl_bo_driver = {
 	.io_mem_reserve = &qxl_ttm_io_mem_reserve,
 	.io_mem_free = &qxl_ttm_io_mem_free,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.sync_obj_signaled = &qxl_sync_obj_signaled,
 	.sync_obj_wait = &qxl_sync_obj_wait,
 	.sync_obj_flush = &qxl_sync_obj_flush,
@@ -518,6 +551,11 @@ static struct ttm_bo_driver qxl_bo_driver = {
 
 
 
+=======
+	.move_notify = &qxl_bo_move_notify,
+};
+
+>>>>>>> v3.18
 =======
 	.move_notify = &qxl_bo_move_notify,
 };
@@ -535,7 +573,13 @@ int qxl_ttm_init(struct qxl_device *qdev)
 	r = ttm_bo_device_init(&qdev->mman.bdev,
 			       qdev->mman.bo_global_ref.ref.object,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       &qxl_bo_driver, DRM_FILE_PAGE_OFFSET, 0);
+=======
+			       &qxl_bo_driver,
+			       qdev->ddev->anon_inode->i_mapping,
+			       DRM_FILE_PAGE_OFFSET, 0);
+>>>>>>> v3.18
 =======
 			       &qxl_bo_driver,
 			       qdev->ddev->anon_inode->i_mapping,
@@ -564,8 +608,13 @@ int qxl_ttm_init(struct qxl_device *qdev)
 	DRM_INFO("qxl: %luM of IO pages memory ready (VRAM domain)\n",
 		 ((unsigned)num_io_pages * PAGE_SIZE) / (1024 * 1024));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(qdev->mman.bdev.dev_mapping == NULL))
 		qdev->mman.bdev.dev_mapping = qdev->ddev->dev_mapping;
+=======
+	DRM_INFO("qxl: %uM of Surface memory size\n",
+		 (unsigned)qdev->surfaceram_size / (1024 * 1024));
+>>>>>>> v3.18
 =======
 	DRM_INFO("qxl: %uM of Surface memory size\n",
 		 (unsigned)qdev->surfaceram_size / (1024 * 1024));

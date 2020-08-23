@@ -7,7 +7,10 @@
 #include <linux/kthread.h>
 #include <linux/net.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sched.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -20,6 +23,10 @@
 #include <net/tcp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ceph/ceph_features.h>
+>>>>>>> v3.18
 =======
 #include <linux/ceph/ceph_features.h>
 >>>>>>> v3.18
@@ -182,6 +189,10 @@ static struct lock_class_key socket_class;
 
 static void queue_con(struct ceph_connection *con);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void cancel_con(struct ceph_connection *con);
+>>>>>>> v3.18
 =======
 static void cancel_con(struct ceph_connection *con);
 >>>>>>> v3.18
@@ -303,14 +314,20 @@ int ceph_msgr_init(void)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ceph_msgr_wq = alloc_workqueue("ceph-msgr",
 				       WQ_NON_REENTRANT | WQ_MEM_RECLAIM, 0);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The number of active work items is limited by the number of
 	 * connections, so leave @max_active at default.
 	 */
 	ceph_msgr_wq = alloc_workqueue("ceph-msgr", WQ_MEM_RECLAIM, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ceph_msgr_wq)
 		return 0;
@@ -404,7 +421,11 @@ static void con_sock_state_closed(struct ceph_connection *con)
 
 /* data available on socket, or listen socket received a connect */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ceph_sock_data_ready(struct sock *sk, int count_unused)
+=======
+static void ceph_sock_data_ready(struct sock *sk)
+>>>>>>> v3.18
 =======
 static void ceph_sock_data_ready(struct sock *sk)
 >>>>>>> v3.18
@@ -435,7 +456,11 @@ static void ceph_sock_write_space(struct sock *sk)
 	 */
 	if (con_flag_test(con, CON_FLAG_WRITE_PENDING)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sk_stream_wspace(sk) >= sk_stream_min_wspace(sk)) {
+=======
+		if (sk_stream_is_writeable(sk)) {
+>>>>>>> v3.18
 =======
 		if (sk_stream_is_writeable(sk)) {
 >>>>>>> v3.18
@@ -501,6 +526,7 @@ static int ceph_tcp_connect(struct ceph_connection *con)
 	struct sockaddr_storage *paddr = &con->peer_addr.in_addr;
 	struct socket *sock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int noio_flag;
 	int ret;
 
@@ -515,6 +541,8 @@ static int ceph_tcp_connect(struct ceph_connection *con)
 		return ret;
 	sock->sk->sk_allocation = GFP_NOFS;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	BUG_ON(con->sock);
@@ -523,6 +551,9 @@ static int ceph_tcp_connect(struct ceph_connection *con)
 	if (ret)
 		return ret;
 	sock->sk->sk_allocation = GFP_NOFS | __GFP_MEMALLOC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_LOCKDEP
@@ -549,6 +580,12 @@ static int ceph_tcp_connect(struct ceph_connection *con)
 		return ret;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	sk_set_memalloc(sock->sk);
+
+>>>>>>> v3.18
 =======
 
 	sk_set_memalloc(sock->sk);
@@ -731,7 +768,11 @@ void ceph_con_close(struct ceph_connection *con)
 	reset_connection(con);
 	con->peer_global_seq = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cancel_delayed_work(&con->work);
+=======
+	cancel_con(con);
+>>>>>>> v3.18
 =======
 	cancel_con(con);
 >>>>>>> v3.18
@@ -851,6 +892,7 @@ static void ceph_msg_data_bio_cursor_init(struct ceph_msg_data_cursor *cursor,
 	bio = data->bio;
 	BUG_ON(!bio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!bio->bi_vcnt);
 
 	cursor->resid = min(length, data->bio_length);
@@ -859,12 +901,17 @@ static void ceph_msg_data_bio_cursor_init(struct ceph_msg_data_cursor *cursor,
 	cursor->vector_offset = 0;
 	cursor->last_piece = length <= bio->bi_io_vec[0].bv_len;
 =======
+=======
+>>>>>>> v3.18
 
 	cursor->resid = min(length, data->bio_length);
 	cursor->bio = bio;
 	cursor->bvec_iter = bio->bi_iter;
 	cursor->last_piece =
 		cursor->resid <= bio_iter_len(bio, cursor->bvec_iter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -875,8 +922,12 @@ static struct page *ceph_msg_data_bio_next(struct ceph_msg_data_cursor *cursor,
 	struct ceph_msg_data *data = cursor->data;
 	struct bio *bio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bio_vec;
 	unsigned int index;
+=======
+	struct bio_vec bio_vec;
+>>>>>>> v3.18
 =======
 	struct bio_vec bio_vec;
 >>>>>>> v3.18
@@ -886,6 +937,7 @@ static struct page *ceph_msg_data_bio_next(struct ceph_msg_data_cursor *cursor,
 	bio = cursor->bio;
 	BUG_ON(!bio);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	index = cursor->vector_index;
 	BUG_ON(index >= (unsigned int) bio->bi_vcnt);
@@ -898,10 +950,16 @@ static struct page *ceph_msg_data_bio_next(struct ceph_msg_data_cursor *cursor,
 
 	*page_offset = (size_t) bio_vec.bv_offset;
 >>>>>>> v3.18
+=======
+	bio_vec = bio_iter_iovec(bio, cursor->bvec_iter);
+
+	*page_offset = (size_t) bio_vec.bv_offset;
+>>>>>>> v3.18
 	BUG_ON(*page_offset >= PAGE_SIZE);
 	if (cursor->last_piece) /* pagelist offset is always 0 */
 		*length = cursor->resid;
 	else
+<<<<<<< HEAD
 <<<<<<< HEAD
 		*length = (size_t) (bio_vec->bv_len - cursor->vector_offset);
 	BUG_ON(*length > cursor->resid);
@@ -909,11 +967,16 @@ static struct page *ceph_msg_data_bio_next(struct ceph_msg_data_cursor *cursor,
 
 	return bio_vec->bv_page;
 =======
+=======
+>>>>>>> v3.18
 		*length = (size_t) bio_vec.bv_len;
 	BUG_ON(*length > cursor->resid);
 	BUG_ON(*page_offset + *length > PAGE_SIZE);
 
 	return bio_vec.bv_page;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -922,8 +985,12 @@ static bool ceph_msg_data_bio_advance(struct ceph_msg_data_cursor *cursor,
 {
 	struct bio *bio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bio_vec;
 	unsigned int index;
+=======
+	struct bio_vec bio_vec;
+>>>>>>> v3.18
 =======
 	struct bio_vec bio_vec;
 >>>>>>> v3.18
@@ -934,9 +1001,13 @@ static bool ceph_msg_data_bio_advance(struct ceph_msg_data_cursor *cursor,
 	BUG_ON(!bio);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	index = cursor->vector_index;
 	BUG_ON(index >= (unsigned int) bio->bi_vcnt);
 	bio_vec = &bio->bi_io_vec[index];
+=======
+	bio_vec = bio_iter_iovec(bio, cursor->bvec_iter);
+>>>>>>> v3.18
 =======
 	bio_vec = bio_iter_iovec(bio, cursor->bvec_iter);
 >>>>>>> v3.18
@@ -945,6 +1016,7 @@ static bool ceph_msg_data_bio_advance(struct ceph_msg_data_cursor *cursor,
 
 	BUG_ON(cursor->resid < bytes);
 	cursor->resid -= bytes;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cursor->vector_offset += bytes;
 	if (cursor->vector_offset < bio_vec->bv_len)
@@ -961,6 +1033,8 @@ static bool ceph_msg_data_bio_advance(struct ceph_msg_data_cursor *cursor,
 	cursor->vector_index = index;
 	cursor->vector_offset = 0;
 =======
+=======
+>>>>>>> v3.18
 
 	bio_advance_iter(bio, &cursor->bvec_iter, bytes);
 
@@ -978,6 +1052,9 @@ static bool ceph_msg_data_bio_advance(struct ceph_msg_data_cursor *cursor,
 			memset(&cursor->bvec_iter, 0,
 			       sizeof(cursor->bvec_iter));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!cursor->last_piece) {
@@ -985,7 +1062,11 @@ static bool ceph_msg_data_bio_advance(struct ceph_msg_data_cursor *cursor,
 		BUG_ON(!bio);
 		/* A short read is OK, so use <= rather than == */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (cursor->resid <= bio->bi_io_vec[index].bv_len)
+=======
+		if (cursor->resid <= bio_iter_len(bio, cursor->bvec_iter))
+>>>>>>> v3.18
 =======
 		if (cursor->resid <= bio_iter_len(bio, cursor->bvec_iter))
 >>>>>>> v3.18
@@ -1056,6 +1137,12 @@ static bool ceph_msg_data_pages_advance(struct ceph_msg_data_cursor *cursor,
 		return false;	/* more bytes to process in the current page */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!cursor->resid)
+		return false;   /* no more data */
+
+>>>>>>> v3.18
 =======
 	if (!cursor->resid)
 		return false;   /* no more data */
@@ -1147,6 +1234,12 @@ static bool ceph_msg_data_pagelist_advance(struct ceph_msg_data_cursor *cursor,
 		return false;	/* more bytes to process in the current page */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!cursor->resid)
+		return false;   /* no more data */
+
+>>>>>>> v3.18
 =======
 	if (!cursor->resid)
 		return false;   /* no more data */
@@ -2010,7 +2103,13 @@ int ceph_parse_ips(const char *c, const char *end,
 				p++;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (port > 65535 || port == 0)
+=======
+			if (port == 0)
+				port = CEPH_MON_PORT;
+			else if (port > 65535)
+>>>>>>> v3.18
 =======
 			if (port == 0)
 				port = CEPH_MON_PORT;
@@ -2065,17 +2164,23 @@ static int process_banner(struct ceph_connection *con)
 	    !(addr_is_blank(&con->actual_peer_addr.in_addr) &&
 	      con->actual_peer_addr.nonce == con->peer_addr.nonce)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("wrong peer, want %s/%d, got %s/%d\n",
 			   ceph_pr_addr(&con->peer_addr.in_addr),
 			   (int)le32_to_cpu(con->peer_addr.nonce),
 			   ceph_pr_addr(&con->actual_peer_addr.in_addr),
 			   (int)le32_to_cpu(con->actual_peer_addr.nonce));
 =======
+=======
+>>>>>>> v3.18
 		pr_warn("wrong peer, want %s/%d, got %s/%d\n",
 			ceph_pr_addr(&con->peer_addr.in_addr),
 			(int)le32_to_cpu(con->peer_addr.nonce),
 			ceph_pr_addr(&con->actual_peer_addr.in_addr),
 			(int)le32_to_cpu(con->actual_peer_addr.nonce));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		con->error_msg = "wrong peer at address";
 		return -1;
@@ -2104,7 +2209,12 @@ static int process_connect(struct ceph_connection *con)
 	u64 sup_feat = con->msgr->supported_features;
 	u64 req_feat = con->msgr->required_features;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 server_feat = le64_to_cpu(con->in_reply.features);
+=======
+	u64 server_feat = ceph_sanitize_features(
+				le64_to_cpu(con->in_reply.features));
+>>>>>>> v3.18
 =======
 	u64 server_feat = ceph_sanitize_features(
 				le64_to_cpu(con->in_reply.features));
@@ -2113,6 +2223,7 @@ static int process_connect(struct ceph_connection *con)
 
 	dout("process_connect on %p tag %d\n", con, (int)con->in_tag);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (con->auth_reply_buf) {
 		/*
@@ -2127,6 +2238,8 @@ static int process_connect(struct ceph_connection *con)
 		}
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (con->in_reply.tag) {
@@ -2438,7 +2551,11 @@ static int read_partial_message(struct ceph_connection *con)
 			sizeof(m->footer);
 		con->in_tag = CEPH_MSGR_TAG_READY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 1;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -2462,7 +2579,11 @@ static int read_partial_message(struct ceph_connection *con)
 		BUG_ON(!con->in_msg ^ skip);
 		if (con->in_msg && data_len > con->in_msg->data_length) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s skipping long message (%u > %zd)\n",
+=======
+			pr_warn("%s skipping long message (%u > %zd)\n",
+>>>>>>> v3.18
 =======
 			pr_warn("%s skipping long message (%u > %zd)\n",
 >>>>>>> v3.18
@@ -2479,7 +2600,11 @@ static int read_partial_message(struct ceph_connection *con)
 			con->in_tag = CEPH_MSGR_TAG_READY;
 			con->in_seq++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 1;
+=======
+			return 0;
+>>>>>>> v3.18
 =======
 			return 0;
 >>>>>>> v3.18
@@ -2836,7 +2961,10 @@ static int queue_con_delay(struct ceph_connection *con, unsigned long delay)
 	if (!con->ops->get(con)) {
 		dout("%s %p ref count 0\n", __func__, con);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return -ENOENT;
@@ -2846,7 +2974,10 @@ static int queue_con_delay(struct ceph_connection *con, unsigned long delay)
 		dout("%s %p - already queued\n", __func__, con);
 		con->ops->put(con);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return -EBUSY;
@@ -2854,7 +2985,10 @@ static int queue_con_delay(struct ceph_connection *con, unsigned long delay)
 
 	dout("%s %p %lu\n", __func__, con, delay);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -2866,7 +3000,10 @@ static void queue_con(struct ceph_connection *con)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void cancel_con(struct ceph_connection *con)
 {
 	if (cancel_delayed_work(&con->work)) {
@@ -2875,6 +3012,9 @@ static void cancel_con(struct ceph_connection *con)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static bool con_sock_closed(struct ceph_connection *con)
 {
@@ -2895,7 +3035,11 @@ static bool con_sock_closed(struct ceph_connection *con)
 	CASE(STANDBY);
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s con %p unrecognized state %lu\n",
+=======
+		pr_warn("%s con %p unrecognized state %lu\n",
+>>>>>>> v3.18
 =======
 		pr_warn("%s con %p unrecognized state %lu\n",
 >>>>>>> v3.18
@@ -2952,14 +3096,20 @@ static void con_work(struct work_struct *work)
 	struct ceph_connection *con = container_of(work, struct ceph_connection,
 						   work.work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool fault;
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long pflags = current->flags;
 	bool fault;
 
 	current->flags |= PF_MEMALLOC;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_lock(&con->mutex);
 	while (true) {
@@ -3015,6 +3165,11 @@ static void con_work(struct work_struct *work)
 
 	con->ops->put(con);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	tsk_restore_flags(current, pflags, PF_MEMALLOC);
+>>>>>>> v3.18
 =======
 
 	tsk_restore_flags(current, pflags, PF_MEMALLOC);
@@ -3028,8 +3183,13 @@ static void con_work(struct work_struct *work)
 static void con_fault(struct ceph_connection *con)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_warning("%s%lld %s %s\n", ENTITY_NAME(con->peer_name),
 	       ceph_pr_addr(&con->peer_addr.in_addr), con->error_msg);
+=======
+	pr_warn("%s%lld %s %s\n", ENTITY_NAME(con->peer_name),
+		ceph_pr_addr(&con->peer_addr.in_addr), con->error_msg);
+>>>>>>> v3.18
 =======
 	pr_warn("%s%lld %s %s\n", ENTITY_NAME(con->peer_name),
 		ceph_pr_addr(&con->peer_addr.in_addr), con->error_msg);
@@ -3087,8 +3247,13 @@ static void con_fault(struct ceph_connection *con)
 void ceph_messenger_init(struct ceph_messenger *msgr,
 			struct ceph_entity_addr *myaddr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u32 supported_features,
 			u32 required_features,
+=======
+			u64 supported_features,
+			u64 required_features,
+>>>>>>> v3.18
 =======
 			u64 supported_features,
 			u64 required_features,
@@ -3281,10 +3446,15 @@ static void ceph_msg_data_destroy(struct ceph_msg_data *data)
 
 	WARN_ON(!list_empty(&data->links));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data->type == CEPH_MSG_DATA_PAGELIST) {
 		ceph_pagelist_release(data->pagelist);
 		kfree(data->pagelist);
 	}
+=======
+	if (data->type == CEPH_MSG_DATA_PAGELIST)
+		ceph_pagelist_release(data->pagelist);
+>>>>>>> v3.18
 =======
 	if (data->type == CEPH_MSG_DATA_PAGELIST)
 		ceph_pagelist_release(data->pagelist);
@@ -3370,6 +3540,7 @@ struct ceph_msg *ceph_msg_new(int type, int front_len, gfp_t flags,
 
 	/* front */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	m->front_alloc_len = front_len;
 	if (front_len) {
 		if (front_len > PAGE_CACHE_SIZE) {
@@ -3383,6 +3554,10 @@ struct ceph_msg *ceph_msg_new(int type, int front_len, gfp_t flags,
 	if (front_len) {
 		m->front.iov_base = ceph_kvmalloc(front_len, flags);
 >>>>>>> v3.18
+=======
+	if (front_len) {
+		m->front.iov_base = ceph_kvmalloc(front_len, flags);
+>>>>>>> v3.18
 		if (m->front.iov_base == NULL) {
 			dout("ceph_msg_new can't allocate %d bytes\n",
 			     front_len);
@@ -3392,7 +3567,11 @@ struct ceph_msg *ceph_msg_new(int type, int front_len, gfp_t flags,
 		m->front.iov_base = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	m->front.iov_len = front_len;
+=======
+	m->front_alloc_len = m->front.iov_len = front_len;
+>>>>>>> v3.18
 =======
 	m->front_alloc_len = m->front.iov_len = front_len;
 >>>>>>> v3.18
@@ -3506,6 +3685,7 @@ static int ceph_con_in_msg_alloc(struct ceph_connection *con, int *skip)
  * Free a generically kmalloc'd message.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ceph_msg_kfree(struct ceph_msg *m)
 {
 	dout("msg_kfree %p\n", m);
@@ -3521,6 +3701,8 @@ void ceph_msg_kfree(struct ceph_msg *m)
  */
 void ceph_msg_last_put(struct kref *kref)
 =======
+=======
+>>>>>>> v3.18
 static void ceph_msg_free(struct ceph_msg *m)
 {
 	dout("%s %p\n", __func__, m);
@@ -3529,6 +3711,9 @@ static void ceph_msg_free(struct ceph_msg *m)
 }
 
 static void ceph_msg_release(struct kref *kref)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ceph_msg *m = container_of(kref, struct ceph_msg, kref);
@@ -3537,7 +3722,11 @@ static void ceph_msg_release(struct kref *kref)
 	struct list_head *next;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dout("ceph_msg_put last one on %p\n", m);
+=======
+	dout("%s %p\n", __func__, m);
+>>>>>>> v3.18
 =======
 	dout("%s %p\n", __func__, m);
 >>>>>>> v3.18
@@ -3563,10 +3752,13 @@ static void ceph_msg_release(struct kref *kref)
 		ceph_msgpool_put(m->pool, m);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ceph_msg_kfree(m);
 }
 EXPORT_SYMBOL(ceph_msg_last_put);
 =======
+=======
+>>>>>>> v3.18
 		ceph_msg_free(m);
 }
 
@@ -3586,6 +3778,9 @@ void ceph_msg_put(struct ceph_msg *msg)
 	kref_put(&msg->kref, ceph_msg_release);
 }
 EXPORT_SYMBOL(ceph_msg_put);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void ceph_msg_dump(struct ceph_msg *msg)

@@ -83,6 +83,11 @@ struct nilfs_inode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NILFS_MIN_INODE_SIZE		128
+
+>>>>>>> v3.18
 =======
 #define NILFS_MIN_INODE_SIZE		128
 
@@ -464,7 +469,11 @@ struct nilfs_btree_node {
 #define NILFS_BTREE_LEVEL_DATA          0
 #define NILFS_BTREE_LEVEL_NODE_MIN      (NILFS_BTREE_LEVEL_DATA + 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NILFS_BTREE_LEVEL_MAX           14	/* Max level (exclusive) */
+=======
+#define NILFS_BTREE_LEVEL_MAX           14
+>>>>>>> v3.18
 =======
 #define NILFS_BTREE_LEVEL_MAX           14
 >>>>>>> v3.18
@@ -492,6 +501,11 @@ struct nilfs_dat_entry {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NILFS_MIN_DAT_ENTRY_SIZE	32
+
+>>>>>>> v3.18
 =======
 #define NILFS_MIN_DAT_ENTRY_SIZE	32
 
@@ -535,6 +549,11 @@ struct nilfs_checkpoint {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NILFS_MIN_CHECKPOINT_SIZE	(64 + NILFS_MIN_INODE_SIZE)
+
+>>>>>>> v3.18
 =======
 #define NILFS_MIN_CHECKPOINT_SIZE	(64 + NILFS_MIN_INODE_SIZE)
 
@@ -635,6 +654,11 @@ struct nilfs_segment_usage {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NILFS_MIN_SEGMENT_USAGE_SIZE	16
+
+>>>>>>> v3.18
 =======
 #define NILFS_MIN_SEGMENT_USAGE_SIZE	16
 
@@ -735,7 +759,10 @@ static inline int nilfs_suinfo_clean(const struct nilfs_suinfo *si)
 
 /* ioctl */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * nilfs_suinfo_update - segment usage information update
  * @sup_segnum: segment number
@@ -778,6 +805,9 @@ NILFS_SUINFO_UPDATE_FNS(LASTMOD, lastmod)
 NILFS_SUINFO_UPDATE_FNS(NBLOCKS, nblocks)
 NILFS_SUINFO_UPDATE_FNS(FLAGS, flags)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	NILFS_CHECKPOINT,
@@ -933,6 +963,11 @@ struct nilfs_bdesc {
 #define NILFS_IOCTL_SET_ALLOC_RANGE  \
 	_IOW(NILFS_IOCTL_IDENT, 0x8C, __u64[2])
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NILFS_IOCTL_SET_SUINFO  \
+	_IOW(NILFS_IOCTL_IDENT, 0x8D, struct nilfs_argv)
+>>>>>>> v3.18
 =======
 #define NILFS_IOCTL_SET_SUINFO  \
 	_IOW(NILFS_IOCTL_IDENT, 0x8D, struct nilfs_argv)

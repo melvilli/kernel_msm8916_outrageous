@@ -111,8 +111,13 @@ struct nfs_subversion *get_nfs_version(unsigned int version)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ERR(nfs))
 		try_module_get(nfs->owner);
+=======
+	if (!IS_ERR(nfs) && !try_module_get(nfs->owner))
+		return ERR_PTR(-EAGAIN);
+>>>>>>> v3.18
 =======
 	if (!IS_ERR(nfs) && !try_module_get(nfs->owner))
 		return ERR_PTR(-EAGAIN);
@@ -164,7 +169,12 @@ struct nfs_client *nfs_alloc_client(const struct nfs_client_initdata *cl_init)
 
 	clp->cl_nfs_mod = cl_init->nfs_mod;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	try_module_get(clp->cl_nfs_mod->owner);
+=======
+	if (!try_module_get(clp->cl_nfs_mod->owner))
+		goto error_dealloc;
+>>>>>>> v3.18
 =======
 	if (!try_module_get(clp->cl_nfs_mod->owner))
 		goto error_dealloc;
@@ -201,6 +211,10 @@ struct nfs_client *nfs_alloc_client(const struct nfs_client_initdata *cl_init)
 error_cleanup:
 	put_nfs_version(clp->cl_nfs_mod);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+error_dealloc:
+>>>>>>> v3.18
 =======
 error_dealloc:
 >>>>>>> v3.18
@@ -267,6 +281,10 @@ void nfs_free_client(struct nfs_client *clp)
 	put_nfs_version(clp->cl_nfs_mod);
 	kfree(clp->cl_hostname);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(clp->cl_acceptor);
+>>>>>>> v3.18
 =======
 	kfree(clp->cl_acceptor);
 >>>>>>> v3.18
@@ -501,9 +519,12 @@ nfs_get_client(const struct nfs_client_initdata *cl_init,
 	const struct nfs_rpc_ops *rpc_ops = cl_init->nfs_mod->rpc_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("--> nfs_get_client(%s,v%u)\n",
 		cl_init->hostname ?: "", rpc_ops->version);
 =======
+=======
+>>>>>>> v3.18
 	if (cl_init->hostname == NULL) {
 		WARN_ON(1);
 		return NULL;
@@ -511,6 +532,9 @@ nfs_get_client(const struct nfs_client_initdata *cl_init,
 
 	dprintk("--> nfs_get_client(%s,v%u)\n",
 		cl_init->hostname, rpc_ops->version);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* see if the client already exists */
@@ -530,8 +554,12 @@ nfs_get_client(const struct nfs_client_initdata *cl_init,
 			spin_unlock(&nn->nfs_client_lock);
 			new->cl_flags = cl_init->init_flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return rpc_ops->init_client(new, timeparms, ip_addr,
 						    authflavour);
+=======
+			return rpc_ops->init_client(new, timeparms, ip_addr);
+>>>>>>> v3.18
 =======
 			return rpc_ops->init_client(new, timeparms, ip_addr);
 >>>>>>> v3.18
@@ -544,7 +572,11 @@ nfs_get_client(const struct nfs_client_initdata *cl_init,
 
 	dprintk("<-- nfs_get_client() Failed to find %s (%ld)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cl_init->hostname ?: "", PTR_ERR(new));
+=======
+		cl_init->hostname, PTR_ERR(new));
+>>>>>>> v3.18
 =======
 		cl_init->hostname, PTR_ERR(new));
 >>>>>>> v3.18
@@ -628,6 +660,11 @@ int nfs_create_rpc_client(struct nfs_client *clp,
 	if (test_bit(NFS_CS_DISCRTRY, &clp->cl_flags))
 		args.flags |= RPC_CLNT_CREATE_DISCRTRY;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (test_bit(NFS_CS_NO_RETRANS_TIMEOUT, &clp->cl_flags))
+		args.flags |= RPC_CLNT_CREATE_NO_RETRANS_TIMEOUT;
+>>>>>>> v3.18
 =======
 	if (test_bit(NFS_CS_NO_RETRANS_TIMEOUT, &clp->cl_flags))
 		args.flags |= RPC_CLNT_CREATE_NO_RETRANS_TIMEOUT;
@@ -736,7 +773,10 @@ EXPORT_SYMBOL_GPL(nfs_init_server_rpcclient);
  * @timeparms: timeout parameters for underlying RPC transport
  * @ip_addr: IP presentation address (not used)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @authflavor: authentication flavor for underlying RPC transport
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -745,7 +785,11 @@ EXPORT_SYMBOL_GPL(nfs_init_server_rpcclient);
 struct nfs_client *nfs_init_client(struct nfs_client *clp,
 		    const struct rpc_timeout *timeparms,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    const char *ip_addr, rpc_authflavor_t authflavour)
+=======
+		    const char *ip_addr)
+>>>>>>> v3.18
 =======
 		    const char *ip_addr)
 >>>>>>> v3.18
@@ -802,8 +846,11 @@ static int nfs_init_server(struct nfs_server *server,
 	if (data->flags & NFS_MOUNT_NORESVPORT)
 		set_bit(NFS_CS_NORESVPORT, &cl_init.init_flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (server->options & NFS_OPTION_MIGRATION)
 		set_bit(NFS_CS_MIGRATION, &cl_init.init_flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -840,13 +887,19 @@ static int nfs_init_server(struct nfs_server *server,
 
 	server->port = data->nfs_server.port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	error = nfs_init_server_rpcclient(server, &timeparms, data->auth_flavors[0]);
 =======
+=======
+>>>>>>> v3.18
 	server->auth_info = data->auth_info;
 
 	error = nfs_init_server_rpcclient(server, &timeparms,
 					  data->selected_flavor);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (error < 0)
 		goto error;
@@ -989,6 +1042,10 @@ void nfs_server_copy_userdata(struct nfs_server *target, struct nfs_server *sour
 	target->caps = source->caps;
 	target->options = source->options;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	target->auth_info = source->auth_info;
+>>>>>>> v3.18
 =======
 	target->auth_info = source->auth_info;
 >>>>>>> v3.18
@@ -1010,7 +1067,11 @@ void nfs_server_insert_lists(struct nfs_server *server)
 EXPORT_SYMBOL_GPL(nfs_server_insert_lists);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void nfs_server_remove_lists(struct nfs_server *server)
+=======
+void nfs_server_remove_lists(struct nfs_server *server)
+>>>>>>> v3.18
 =======
 void nfs_server_remove_lists(struct nfs_server *server)
 >>>>>>> v3.18
@@ -1031,6 +1092,10 @@ void nfs_server_remove_lists(struct nfs_server *server)
 	synchronize_rcu();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(nfs_server_remove_lists);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(nfs_server_remove_lists);
 >>>>>>> v3.18
@@ -1147,7 +1212,11 @@ struct nfs_server *nfs_create_server(struct nfs_mount_info *mount_info,
 
 	if (!(fattr->valid & NFS_ATTR_FATTR)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = nfs_mod->rpc_ops->getattr(server, mount_info->mntfh, fattr);
+=======
+		error = nfs_mod->rpc_ops->getattr(server, mount_info->mntfh, fattr, NULL);
+>>>>>>> v3.18
 =======
 		error = nfs_mod->rpc_ops->getattr(server, mount_info->mntfh, fattr, NULL);
 >>>>>>> v3.18
@@ -1278,7 +1347,11 @@ static const struct file_operations nfs_server_list_fops = {
 	.read		= seq_read,
 	.llseek		= seq_lseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release	= seq_release,
+=======
+	.release	= seq_release_net,
+>>>>>>> v3.18
 =======
 	.release	= seq_release_net,
 >>>>>>> v3.18
@@ -1303,7 +1376,11 @@ static const struct file_operations nfs_volume_list_fops = {
 	.read		= seq_read,
 	.llseek		= seq_lseek,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.release	= seq_release,
+=======
+	.release	= seq_release_net,
+>>>>>>> v3.18
 =======
 	.release	= seq_release_net,
 >>>>>>> v3.18
@@ -1316,6 +1393,7 @@ static const struct file_operations nfs_volume_list_fops = {
  */
 static int nfs_server_list_open(struct inode *inode, struct file *file)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct seq_file *m;
 	int ret;
@@ -1334,6 +1412,10 @@ static int nfs_server_list_open(struct inode *inode, struct file *file)
 	return seq_open_net(inode, file, &nfs_server_list_ops,
 			   sizeof(struct seq_net_private));
 >>>>>>> v3.18
+=======
+	return seq_open_net(inode, file, &nfs_server_list_ops,
+			   sizeof(struct seq_net_private));
+>>>>>>> v3.18
 }
 
 /*
@@ -1341,8 +1423,14 @@ static int nfs_server_list_open(struct inode *inode, struct file *file)
  */
 static void *nfs_server_list_start(struct seq_file *m, loff_t *_pos)
 <<<<<<< HEAD
+<<<<<<< HEAD
 {
 	struct nfs_net *nn = net_generic(m->private, nfs_net_id);
+=======
+				__acquires(&nn->nfs_client_lock)
+{
+	struct nfs_net *nn = net_generic(seq_file_net(m), nfs_net_id);
+>>>>>>> v3.18
 =======
 				__acquires(&nn->nfs_client_lock)
 {
@@ -1360,7 +1448,11 @@ static void *nfs_server_list_start(struct seq_file *m, loff_t *_pos)
 static void *nfs_server_list_next(struct seq_file *p, void *v, loff_t *pos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfs_net *nn = net_generic(p->private, nfs_net_id);
+=======
+	struct nfs_net *nn = net_generic(seq_file_net(p), nfs_net_id);
+>>>>>>> v3.18
 =======
 	struct nfs_net *nn = net_generic(seq_file_net(p), nfs_net_id);
 >>>>>>> v3.18
@@ -1373,8 +1465,14 @@ static void *nfs_server_list_next(struct seq_file *p, void *v, loff_t *pos)
  */
 static void nfs_server_list_stop(struct seq_file *p, void *v)
 <<<<<<< HEAD
+<<<<<<< HEAD
 {
 	struct nfs_net *nn = net_generic(p->private, nfs_net_id);
+=======
+				__releases(&nn->nfs_client_lock)
+{
+	struct nfs_net *nn = net_generic(seq_file_net(p), nfs_net_id);
+>>>>>>> v3.18
 =======
 				__releases(&nn->nfs_client_lock)
 {
@@ -1391,7 +1489,11 @@ static int nfs_server_list_show(struct seq_file *m, void *v)
 {
 	struct nfs_client *clp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfs_net *nn = net_generic(m->private, nfs_net_id);
+=======
+	struct nfs_net *nn = net_generic(seq_file_net(m), nfs_net_id);
+>>>>>>> v3.18
 =======
 	struct nfs_net *nn = net_generic(seq_file_net(m), nfs_net_id);
 >>>>>>> v3.18
@@ -1427,6 +1529,7 @@ static int nfs_server_list_show(struct seq_file *m, void *v)
 static int nfs_volume_list_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct seq_file *m;
 	int ret;
 	struct pid_namespace *pid_ns = file->f_dentry->d_sb->s_fs_info;
@@ -1444,6 +1547,10 @@ static int nfs_volume_list_open(struct inode *inode, struct file *file)
 	return seq_open_net(inode, file, &nfs_volume_list_ops,
 			   sizeof(struct seq_net_private));
 >>>>>>> v3.18
+=======
+	return seq_open_net(inode, file, &nfs_volume_list_ops,
+			   sizeof(struct seq_net_private));
+>>>>>>> v3.18
 }
 
 /*
@@ -1451,8 +1558,14 @@ static int nfs_volume_list_open(struct inode *inode, struct file *file)
  */
 static void *nfs_volume_list_start(struct seq_file *m, loff_t *_pos)
 <<<<<<< HEAD
+<<<<<<< HEAD
 {
 	struct nfs_net *nn = net_generic(m->private, nfs_net_id);
+=======
+				__acquires(&nn->nfs_client_lock)
+{
+	struct nfs_net *nn = net_generic(seq_file_net(m), nfs_net_id);
+>>>>>>> v3.18
 =======
 				__acquires(&nn->nfs_client_lock)
 {
@@ -1470,7 +1583,11 @@ static void *nfs_volume_list_start(struct seq_file *m, loff_t *_pos)
 static void *nfs_volume_list_next(struct seq_file *p, void *v, loff_t *pos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfs_net *nn = net_generic(p->private, nfs_net_id);
+=======
+	struct nfs_net *nn = net_generic(seq_file_net(p), nfs_net_id);
+>>>>>>> v3.18
 =======
 	struct nfs_net *nn = net_generic(seq_file_net(p), nfs_net_id);
 >>>>>>> v3.18
@@ -1483,8 +1600,14 @@ static void *nfs_volume_list_next(struct seq_file *p, void *v, loff_t *pos)
  */
 static void nfs_volume_list_stop(struct seq_file *p, void *v)
 <<<<<<< HEAD
+<<<<<<< HEAD
 {
 	struct nfs_net *nn = net_generic(p->private, nfs_net_id);
+=======
+				__releases(&nn->nfs_client_lock)
+{
+	struct nfs_net *nn = net_generic(seq_file_net(p), nfs_net_id);
+>>>>>>> v3.18
 =======
 				__releases(&nn->nfs_client_lock)
 {
@@ -1503,7 +1626,11 @@ static int nfs_volume_list_show(struct seq_file *m, void *v)
 	struct nfs_client *clp;
 	char dev[8], fsid[17];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nfs_net *nn = net_generic(m->private, nfs_net_id);
+=======
+	struct nfs_net *nn = net_generic(seq_file_net(m), nfs_net_id);
+>>>>>>> v3.18
 =======
 	struct nfs_net *nn = net_generic(seq_file_net(m), nfs_net_id);
 >>>>>>> v3.18
@@ -1538,7 +1665,10 @@ static int nfs_volume_list_show(struct seq_file *m, void *v)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int nfs_fs_proc_net_init(struct net *net)
 {
 	struct nfs_net *nn = net_generic(net, nfs_net_id);
@@ -1572,6 +1702,9 @@ void nfs_fs_proc_net_exit(struct net *net)
 	remove_proc_subtree("nfsfs", net->proc_net);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * initialise the /proc/fs/nfsfs/ directory
@@ -1586,8 +1719,12 @@ int __init nfs_fs_proc_init(void)
 
 	/* a file of servers with which we're dealing */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = proc_create("servers", S_IFREG|S_IRUGO,
 			proc_fs_nfs, &nfs_server_list_fops);
+=======
+	p = proc_symlink("servers", proc_fs_nfs, "../../net/nfsfs/servers");
+>>>>>>> v3.18
 =======
 	p = proc_symlink("servers", proc_fs_nfs, "../../net/nfsfs/servers");
 >>>>>>> v3.18
@@ -1596,8 +1733,12 @@ int __init nfs_fs_proc_init(void)
 
 	/* a file of volumes that we have mounted */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = proc_create("volumes", S_IFREG|S_IRUGO,
 			proc_fs_nfs, &nfs_volume_list_fops);
+=======
+	p = proc_symlink("volumes", proc_fs_nfs, "../../net/nfsfs/volumes");
+>>>>>>> v3.18
 =======
 	p = proc_symlink("volumes", proc_fs_nfs, "../../net/nfsfs/volumes");
 >>>>>>> v3.18

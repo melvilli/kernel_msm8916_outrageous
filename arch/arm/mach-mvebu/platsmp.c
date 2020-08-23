@@ -22,6 +22,10 @@
 #include <linux/clk.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -33,6 +37,7 @@
 #include "pmsu.h"
 #include "coherency.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __init set_secondary_cpus_clock(void)
 {
@@ -57,6 +62,8 @@ void __init set_secondary_cpus_clock(void)
 	}
 	if (WARN_ON(IS_ERR(cpu_clk)))
 =======
+=======
+>>>>>>> v3.18
 #define AXP_BOOTROM_BASE 0xfff00000
 #define AXP_BOOTROM_SIZE 0x100000
 
@@ -82,12 +89,16 @@ static void __init set_secondary_cpus_clock(void)
 	thiscpu = smp_processor_id();
 	cpu_clk = get_cpu_clk(thiscpu);
 	if (!cpu_clk)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	clk_prepare_enable(cpu_clk);
 	rate = clk_get_rate(cpu_clk);
 
 	/* set all the other CPU clk to the same rate than the boot CPU */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for_each_node_by_type(np, "cpu") {
 		int err;
@@ -116,6 +127,8 @@ static int __cpuinit armada_xp_boot_secondary(unsigned int cpu,
 
 	armada_xp_boot_cpu(cpu, armada_xp_secondary_startup);
 =======
+=======
+>>>>>>> v3.18
 	for_each_possible_cpu(cpu) {
 		if (cpu == thiscpu)
 			continue;
@@ -151,11 +164,15 @@ static int armada_xp_boot_secondary(unsigned int cpu, struct task_struct *idle)
 		pr_warn("unable to boot CPU: %d\n", ret);
 		return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __init armada_xp_smp_init_cpus(void)
 {
@@ -194,6 +211,8 @@ struct smp_operations armada_xp_smp_ops __initdata = {
 #endif
 };
 =======
+=======
+>>>>>>> v3.18
 /*
  * When a CPU is brought back online, either through CPU hotplug, or
  * because of the boot of a kexec'ed kernel, the PMSU configuration
@@ -277,4 +296,7 @@ struct smp_operations armada_xp_smp_ops __initdata = {
 
 CPU_METHOD_OF_DECLARE(armada_xp_smp, "marvell,armada-xp-smp",
 		      &armada_xp_smp_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -29,6 +29,10 @@
 #include <linux/gfp.h>
 #include "sound_config.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "sleep.h"
+>>>>>>> v3.18
 =======
 #include "sleep.h"
 >>>>>>> v3.18
@@ -356,8 +360,12 @@ static void dma_reset_output(int dev)
 	    adev->dmap_out->underrun_count == 0){
 		spin_unlock_irqrestore(&dmap->lock,flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interruptible_sleep_on_timeout(&adev->out_sleeper,
 					       dmabuf_timeout(dmap));
+=======
+		oss_broken_sleep_on(&adev->out_sleeper, dmabuf_timeout(dmap));
+>>>>>>> v3.18
 =======
 		oss_broken_sleep_on(&adev->out_sleeper, dmabuf_timeout(dmap));
 >>>>>>> v3.18
@@ -455,7 +463,11 @@ int DMAbuf_sync(int dev)
 			spin_unlock_irqrestore(&dmap->lock,flags);
 			/* FIXME: not safe may miss events */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			t = interruptible_sleep_on_timeout(&adev->out_sleeper, t);
+=======
+			t = oss_broken_sleep_on(&adev->out_sleeper, t);
+>>>>>>> v3.18
 =======
 			t = oss_broken_sleep_on(&adev->out_sleeper, t);
 >>>>>>> v3.18
@@ -479,7 +491,11 @@ int DMAbuf_sync(int dev)
 			       adev->d->local_qlen(dev)){
 				spin_unlock_irqrestore(&dmap->lock,flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interruptible_sleep_on_timeout(&adev->out_sleeper,
+=======
+				oss_broken_sleep_on(&adev->out_sleeper,
+>>>>>>> v3.18
 =======
 				oss_broken_sleep_on(&adev->out_sleeper,
 >>>>>>> v3.18
@@ -574,7 +590,10 @@ int DMAbuf_getrdbuffer(int dev, char **buf, int *len, int dontblock)
 	int err = 0, n = 0;
 	struct dma_buffparms *dmap = adev->dmap_in;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int go;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -604,6 +623,7 @@ int DMAbuf_getrdbuffer(int dev, char **buf, int *len, int dontblock)
 			return -EAGAIN;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((go = adev->go))
 			timeout = dmabuf_timeout(dmap);
 
@@ -611,11 +631,16 @@ int DMAbuf_getrdbuffer(int dev, char **buf, int *len, int dontblock)
 		timeout = interruptible_sleep_on_timeout(&adev->in_sleeper,
 							 timeout);
 =======
+=======
+>>>>>>> v3.18
 		if (adev->go)
 			timeout = dmabuf_timeout(dmap);
 
 		spin_unlock_irqrestore(&dmap->lock,flags);
 		timeout = oss_broken_sleep_on(&adev->in_sleeper, timeout);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!timeout) {
 			/* FIXME: include device name */
@@ -797,8 +822,12 @@ static int output_sleep(int dev, int dontblock)
 	else
 		timeout_value = MAX_SCHEDULE_TIMEOUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	timeout_value = interruptible_sleep_on_timeout(&adev->out_sleeper,
 						       timeout_value);
+=======
+	timeout_value = oss_broken_sleep_on(&adev->out_sleeper, timeout_value);
+>>>>>>> v3.18
 =======
 	timeout_value = oss_broken_sleep_on(&adev->out_sleeper, timeout_value);
 >>>>>>> v3.18

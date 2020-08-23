@@ -24,12 +24,18 @@ enum raster_load_mode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum da8xx_frame_complete {
 	DA8XX_FRAME_WAIT,
 	DA8XX_FRAME_NOWAIT,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct da8xx_lcdc_platform_data {
 	const char manu_name[10];

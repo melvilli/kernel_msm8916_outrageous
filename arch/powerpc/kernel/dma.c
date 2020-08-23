@@ -16,6 +16,10 @@
 #include <asm/bug.h>
 #include <asm/machdep.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/swiotlb.h>
+>>>>>>> v3.18
 =======
 #include <asm/swiotlb.h>
 >>>>>>> v3.18
@@ -30,7 +34,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u64 __maybe_unused get_pfn_limit(struct device *dev)
 {
 	u64 pfn = (dev->coherent_dma_mask >> PAGE_SHIFT) + 1;
@@ -43,6 +50,9 @@ static u64 __maybe_unused get_pfn_limit(struct device *dev)
 
 	return pfn;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void *dma_direct_alloc_coherent(struct device *dev, size_t size,
@@ -60,7 +70,10 @@ void *dma_direct_alloc_coherent(struct device *dev, size_t size,
 	struct page *page;
 	int node = dev_to_node(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_FSL_SOC
 	u64 pfn = get_pfn_limit(dev);
 	int zone;
@@ -89,6 +102,9 @@ void *dma_direct_alloc_coherent(struct device *dev, size_t size,
 #endif
 	};
 #endif /* CONFIG_FSL_SOC */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* ignore region specifiers */
@@ -242,6 +258,7 @@ EXPORT_SYMBOL(dma_direct_ops);
 #define PREALLOC_DMA_DEBUG_ENTRIES (1 << 16)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dma_set_mask(struct device *dev, u64 dma_mask)
 {
 	struct dma_map_ops *dma_ops = get_dma_ops(dev);
@@ -249,10 +266,15 @@ int dma_set_mask(struct device *dev, u64 dma_mask)
 	if (ppc_md.dma_set_mask)
 		return ppc_md.dma_set_mask(dev, dma_mask);
 =======
+=======
+>>>>>>> v3.18
 int __dma_set_mask(struct device *dev, u64 dma_mask)
 {
 	struct dma_map_ops *dma_ops = get_dma_ops(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((dma_ops != NULL) && (dma_ops->set_dma_mask != NULL))
 		return dma_ops->set_dma_mask(dev, dma_mask);
@@ -261,6 +283,7 @@ int __dma_set_mask(struct device *dev, u64 dma_mask)
 	*dev->dma_mask = dma_mask;
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL(dma_set_mask);
 
@@ -272,6 +295,8 @@ u64 dma_get_required_mask(struct device *dev)
 		return ppc_md.dma_get_required_mask(dev);
 
 =======
+=======
+>>>>>>> v3.18
 
 int dma_set_mask(struct device *dev, u64 dma_mask)
 {
@@ -285,6 +310,9 @@ u64 __dma_get_required_mask(struct device *dev)
 {
 	struct dma_map_ops *dma_ops = get_dma_ops(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (unlikely(dma_ops == NULL))
 		return 0;
@@ -295,7 +323,10 @@ u64 __dma_get_required_mask(struct device *dev)
 	return DMA_BIT_MASK(8 * sizeof(dma_addr_t));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 u64 dma_get_required_mask(struct device *dev)
 {
@@ -304,6 +335,9 @@ u64 dma_get_required_mask(struct device *dev)
 
 	return __dma_get_required_mask(dev);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(dma_get_required_mask);
 

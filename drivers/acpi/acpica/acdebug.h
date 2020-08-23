@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -118,6 +122,12 @@ ACPI_HW_DEPENDENT_RETURN_VOID(void
 			      acpi_db_generate_gpe(char *gpe_arg,
 						   char *block_arg))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ACPI_HW_DEPENDENT_RETURN_VOID(void acpi_db_generate_sci(void))
+
+void acpi_db_execute_test(char *type_arg);
+>>>>>>> v3.18
 =======
 ACPI_HW_DEPENDENT_RETURN_VOID(void acpi_db_generate_sci(void))
 
@@ -128,7 +138,11 @@ void acpi_db_execute_test(char *type_arg);
  * dbconvert - miscellaneous conversion routines
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
  acpi_status acpi_db_hex_char_to_value(int hex_char, u8 *return_value);
+=======
+acpi_status acpi_db_hex_char_to_value(int hex_char, u8 *return_value);
+>>>>>>> v3.18
 =======
 acpi_status acpi_db_hex_char_to_value(int hex_char, u8 *return_value);
 >>>>>>> v3.18
@@ -169,6 +183,11 @@ void acpi_db_set_scope(char *name);
 void acpi_db_dump_namespace(char *start_arg, char *depth_arg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void acpi_db_dump_namespace_paths(void);
+
+>>>>>>> v3.18
 =======
 void acpi_db_dump_namespace_paths(void);
 
@@ -248,9 +267,12 @@ acpi_status
 acpi_db_get_table_from_file(char *filename, struct acpi_table_header **table);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_status
 acpi_db_read_table_from_file(char *filename, struct acpi_table_header **table);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -263,6 +285,11 @@ void acpi_db_display_history(void);
 char *acpi_db_get_from_history(char *command_num_arg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+char *acpi_db_get_history_by_index(u32 commandd_num);
+
+>>>>>>> v3.18
 =======
 char *acpi_db_get_history_by_index(u32 commandd_num);
 

@@ -6,6 +6,10 @@ config EP93XX_SOC_COMMON
 	bool
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SOC_BUS
+>>>>>>> v3.18
 =======
 	select SOC_BUS
 >>>>>>> v3.18
@@ -199,6 +203,7 @@ config MACH_VISION_EP9307
 	  Vision Engraving Systems EP9307 SoM.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 choice
 	prompt "Select a UART for early kernel messages"
 
@@ -213,6 +218,8 @@ config EP93XX_EARLY_UART3
 
 endchoice
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endmenu

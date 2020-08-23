@@ -31,6 +31,10 @@
 #include <asm/apic.h>
 #include <asm/nmi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/trace/irq_vectors.h>
+>>>>>>> v3.18
 =======
 #include <asm/trace/irq_vectors.h>
 >>>>>>> v3.18
@@ -172,7 +176,11 @@ static int smp_stop_nmi_callback(unsigned int val, struct pt_regs *regs)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage void smp_reboot_interrupt(void)
+=======
+asmlinkage __visible void smp_reboot_interrupt(void)
+>>>>>>> v3.18
 =======
 asmlinkage __visible void smp_reboot_interrupt(void)
 >>>>>>> v3.18
@@ -258,12 +266,15 @@ finish:
  * Reschedule call back.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void smp_reschedule_interrupt(struct pt_regs *regs)
 {
 	ack_APIC_irq();
 	inc_irq_stat(irq_resched_count);
 	scheduler_ipi();
 =======
+=======
+>>>>>>> v3.18
 static inline void __smp_reschedule_interrupt(void)
 {
 	inc_irq_stat(irq_resched_count);
@@ -274,12 +285,16 @@ __visible void smp_reschedule_interrupt(struct pt_regs *regs)
 {
 	ack_APIC_irq();
 	__smp_reschedule_interrupt();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * KVM uses this interrupt to force a cpu out of guest mode
 	 */
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void smp_call_function_interrupt(struct pt_regs *regs)
 {
@@ -298,6 +313,8 @@ void smp_call_function_single_interrupt(struct pt_regs *regs)
 	inc_irq_stat(irq_call_count);
 	irq_exit();
 =======
+=======
+>>>>>>> v3.18
 static inline void smp_entering_irq(void)
 {
 	ack_APIC_irq();
@@ -364,6 +381,9 @@ __visible void smp_trace_call_function_single_interrupt(struct pt_regs *regs)
 	__smp_call_function_single_interrupt();
 	trace_call_function_single_exit(CALL_FUNCTION_SINGLE_VECTOR);
 	exiting_irq();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

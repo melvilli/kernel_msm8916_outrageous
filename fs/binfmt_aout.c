@@ -46,7 +46,10 @@ static int load_aout_library(struct file*);
 static int aout_core_dump(struct coredump_params *cprm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct file *file = cprm->file;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mm_segment_t fs;
@@ -89,15 +92,21 @@ static int aout_core_dump(struct coredump_params *cprm)
 	set_fs(KERNEL_DS);
 /* struct user */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dump_write(file, &dump, sizeof(dump)))
 		goto end_coredump;
 /* Now dump all of the user data.  Include malloced stuff as well */
 	if (!dump_seek(cprm->file, PAGE_SIZE - sizeof(dump)))
 =======
+=======
+>>>>>>> v3.18
 	if (!dump_emit(cprm, &dump, sizeof(dump)))
 		goto end_coredump;
 /* Now dump all of the user data.  Include malloced stuff as well */
 	if (!dump_skip(cprm, PAGE_SIZE - sizeof(dump)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto end_coredump;
 /* now we start writing out the user space info */
@@ -107,7 +116,11 @@ static int aout_core_dump(struct coredump_params *cprm)
 		dump_start = START_DATA(dump);
 		dump_size = dump.u_dsize << PAGE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!dump_write(file, dump_start, dump_size))
+=======
+		if (!dump_emit(cprm, dump_start, dump_size))
+>>>>>>> v3.18
 =======
 		if (!dump_emit(cprm, dump_start, dump_size))
 >>>>>>> v3.18
@@ -118,7 +131,11 @@ static int aout_core_dump(struct coredump_params *cprm)
 		dump_start = START_STACK(dump);
 		dump_size = dump.u_ssize << PAGE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!dump_write(file, dump_start, dump_size))
+=======
+		if (!dump_emit(cprm, dump_start, dump_size))
+>>>>>>> v3.18
 =======
 		if (!dump_emit(cprm, dump_start, dump_size))
 >>>>>>> v3.18
@@ -240,7 +257,11 @@ static int load_aout_binary(struct linux_binprm * bprm)
 	 * as part of an exploit attack against /proc-related vulnerabilities.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bprm->file->f_op || !bprm->file->f_op->mmap)
+=======
+	if (!bprm->file->f_op->mmap)
+>>>>>>> v3.18
 =======
 	if (!bprm->file->f_op->mmap)
 >>>>>>> v3.18
@@ -280,11 +301,16 @@ static int load_aout_binary(struct linux_binprm * bprm)
 
 	retval = setup_arg_pages(bprm, STACK_TOP, EXSTACK_DEFAULT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval < 0) {
 		/* Someone check-me: is this error path enough? */
 		send_sig(SIGKILL, current, 0);
 		return retval;
 	}
+=======
+	if (retval < 0)
+		return retval;
+>>>>>>> v3.18
 =======
 	if (retval < 0)
 		return retval;
@@ -307,6 +333,7 @@ static int load_aout_binary(struct linux_binprm * bprm)
 #endif
 		error = vm_brk(text_addr & PAGE_MASK, map_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (error != (text_addr & PAGE_MASK)) {
 			send_sig(SIGKILL, current, 0);
 			return error;
@@ -319,6 +346,8 @@ static int load_aout_binary(struct linux_binprm * bprm)
 			return error;
 		}
 =======
+=======
+>>>>>>> v3.18
 		if (error != (text_addr & PAGE_MASK))
 			return error;
 
@@ -326,6 +355,9 @@ static int load_aout_binary(struct linux_binprm * bprm)
 				  ex.a_text+ex.a_data);
 		if ((signed long)error < 0)
 			return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		if ((ex.a_text & 0xfff || ex.a_data & 0xfff) &&
@@ -354,10 +386,15 @@ static int load_aout_binary(struct linux_binprm * bprm)
 			fd_offset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (error != N_TXTADDR(ex)) {
 			send_sig(SIGKILL, current, 0);
 			return error;
 		}
+=======
+		if (error != N_TXTADDR(ex))
+			return error;
+>>>>>>> v3.18
 =======
 		if (error != N_TXTADDR(ex))
 			return error;
@@ -368,10 +405,15 @@ static int load_aout_binary(struct linux_binprm * bprm)
 				MAP_FIXED | MAP_PRIVATE | MAP_DENYWRITE | MAP_EXECUTABLE,
 				fd_offset + ex.a_text);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (error != N_DATADDR(ex)) {
 			send_sig(SIGKILL, current, 0);
 			return error;
 		}
+=======
+		if (error != N_DATADDR(ex))
+			return error;
+>>>>>>> v3.18
 =======
 		if (error != N_DATADDR(ex))
 			return error;
@@ -382,10 +424,15 @@ beyond_if:
 
 	retval = set_brk(current->mm->start_brk, current->mm->brk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval < 0) {
 		send_sig(SIGKILL, current, 0);
 		return retval;
 	}
+=======
+	if (retval < 0)
+		return retval;
+>>>>>>> v3.18
 =======
 	if (retval < 0)
 		return retval;
@@ -427,7 +474,11 @@ static int load_aout_library(struct file *file)
 	 * as part of an exploit attack against /proc-related vulnerabilities.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!file->f_op || !file->f_op->mmap)
+=======
+	if (!file->f_op->mmap)
+>>>>>>> v3.18
 =======
 	if (!file->f_op->mmap)
 >>>>>>> v3.18

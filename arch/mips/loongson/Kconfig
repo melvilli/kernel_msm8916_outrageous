@@ -60,7 +60,10 @@ config LEMOTE_MACH2F
 	  These family machines include fuloong2f mini PC, yeeloong2f notebook,
 	  LingLoong allinone PC and so forth.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 config LOONGSON_MACH3X
 	bool "Generic Loongson 3 family machines"
@@ -91,6 +94,9 @@ config LOONGSON_MACH3X
 	help
 		Generic Loongson 3 family machines utilize the 3A/3B revision
 		of Loongson processor and RS780/SBX00 chipset.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endchoice
 
@@ -100,16 +106,22 @@ config CS5536
 config CS5536_MFGPT
 	bool "CS5536 MFGPT Timer"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CS5536
 	select MIPS_EXTERNAL_TIMER
 	help
 	  This option enables the mfgpt0 timer of AMD CS5536.
 =======
+=======
+>>>>>>> v3.18
 	depends on CS5536 && !HIGH_RES_TIMERS
 	select MIPS_EXTERNAL_TIMER
 	help
 	  This option enables the mfgpt0 timer of AMD CS5536. With this timer
 	  switched on you can not use high resolution timers.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  If you want to enable the Loongson2 CPUFreq Driver, Please enable
@@ -128,7 +140,10 @@ config LOONGSON_UART_BASE
 	depends on EARLY_PRINTK || SERIAL_8250
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config IOMMU_HELPER
 	bool
 
@@ -143,12 +158,21 @@ config SWIOTLB
 	select NEED_SG_DMA_LENGTH
 	select NEED_DMA_MAP_STATE
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config LOONGSON_MC146818
 	bool
 	default n
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config LEFI_FIRMWARE_INTERFACE
+	bool
+
+>>>>>>> v3.18
 =======
 config LEFI_FIRMWARE_INTERFACE
 	bool

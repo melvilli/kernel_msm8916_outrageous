@@ -29,6 +29,7 @@ static inline void up_send_ipi_mask(const struct cpumask *mask,
  *  board code to clean up state, if needed
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit up_init_secondary(void)
 {
 }
@@ -40,11 +41,16 @@ static void __cpuinit up_smp_finish(void)
 /* Hook for after all CPUs are online */
 static void up_cpus_done(void)
 =======
+=======
+>>>>>>> v3.18
 static void up_init_secondary(void)
 {
 }
 
 static void up_smp_finish(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 }
@@ -53,7 +59,11 @@ static void up_smp_finish(void)
  * Firmware CPU startup hook
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit up_boot_secondary(int cpu, struct task_struct *idle)
+=======
+static void up_boot_secondary(int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 static void up_boot_secondary(int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -86,7 +96,10 @@ struct plat_smp_ops up_smp_ops = {
 	.init_secondary		= up_init_secondary,
 	.smp_finish		= up_smp_finish,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cpus_done		= up_cpus_done,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.boot_secondary		= up_boot_secondary,

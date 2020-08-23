@@ -149,8 +149,12 @@ static int msdos_find(struct inode *dir, const unsigned char *name, int len,
  * return ENOENT or EINVAL as appropriate.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int msdos_hash(const struct dentry *dentry, const struct inode *inode,
 	       struct qstr *qstr)
+=======
+static int msdos_hash(const struct dentry *dentry, struct qstr *qstr)
+>>>>>>> v3.18
 =======
 static int msdos_hash(const struct dentry *dentry, struct qstr *qstr)
 >>>>>>> v3.18
@@ -170,8 +174,12 @@ static int msdos_hash(const struct dentry *dentry, struct qstr *qstr)
  * we fall back to doing the standard name comparison.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int msdos_cmp(const struct dentry *parent, const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
+=======
+static int msdos_cmp(const struct dentry *parent, const struct dentry *dentry,
+>>>>>>> v3.18
 =======
 static int msdos_cmp(const struct dentry *parent, const struct dentry *dentry,
 >>>>>>> v3.18

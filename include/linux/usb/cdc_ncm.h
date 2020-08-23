@@ -37,6 +37,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef __LINUX_USB_CDC_NCM_H
+#define __LINUX_USB_CDC_NCM_H
+
+>>>>>>> v3.18
 =======
 #ifndef __LINUX_USB_CDC_NCM_H
 #define __LINUX_USB_CDC_NCM_H
@@ -56,11 +62,17 @@
 #define	CDC_NCM_NTB_MAX_SIZE_RX			32768	/* bytes */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Initial NTB length */
 #define	CDC_NCM_NTB_DEF_SIZE_TX			16384	/* bytes */
 #define	CDC_NCM_NTB_DEF_SIZE_RX			16384	/* bytes */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Minimum value for MaxDatagramSize, ch. 6.2.9 */
 #define	CDC_NCM_MIN_DATAGRAM_SIZE		1514	/* bytes */
@@ -83,6 +95,7 @@
 #define	CDC_NCM_RESTART_TIMER_DATAGRAM_CNT	3
 #define	CDC_NCM_TIMER_PENDING_CNT		2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CDC_NCM_TIMER_INTERVAL			(400UL * NSEC_PER_USEC)
 
 /* The following macro defines the minimum header space */
@@ -93,6 +106,11 @@
 #define CDC_NCM_NDP_SIZE \
 	(sizeof(struct usb_cdc_ncm_ndp16) +				\
 	      (CDC_NCM_DPT_DATAGRAMS_MAX + 1) * sizeof(struct usb_cdc_ncm_dpe16))
+=======
+#define CDC_NCM_TIMER_INTERVAL_USEC		400UL
+#define CDC_NCM_TIMER_INTERVAL_MIN		5UL
+#define CDC_NCM_TIMER_INTERVAL_MAX		(U32_MAX / NSEC_PER_USEC)
+>>>>>>> v3.18
 =======
 #define CDC_NCM_TIMER_INTERVAL_USEC		400UL
 #define CDC_NCM_TIMER_INTERVAL_MIN		5UL
@@ -110,6 +128,7 @@ struct cdc_ncm_ctx {
 
 	const struct usb_cdc_ncm_desc *func_desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct usb_cdc_mbim_desc   *mbim_desc;
 	const struct usb_cdc_header_desc *header_desc;
 	const struct usb_cdc_union_desc *union_desc;
@@ -122,10 +141,15 @@ struct cdc_ncm_ctx {
 	struct usb_host_endpoint *status_ep;
 	struct usb_interface *intf;
 =======
+=======
+>>>>>>> v3.18
 	const struct usb_cdc_mbim_desc *mbim_desc;
 	const struct usb_cdc_mbim_extended_desc *mbim_extended_desc;
 	const struct usb_cdc_ether_desc *ether_desc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct usb_interface *control;
 	struct usb_interface *data;
@@ -138,16 +162,22 @@ struct cdc_ncm_ctx {
 	atomic_t stop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 tx_timer_pending;
 	u32 tx_curr_frame_num;
 	u32 rx_speed;
 	u32 tx_speed;
 =======
+=======
+>>>>>>> v3.18
 	u32 timer_interval;
 	u32 max_ndp_size;
 
 	u32 tx_timer_pending;
 	u32 tx_curr_frame_num;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 rx_max;
 	u32 tx_max;
@@ -159,6 +189,7 @@ struct cdc_ncm_ctx {
 	u16 tx_seq;
 	u16 rx_seq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 connected;
 };
 
@@ -169,6 +200,8 @@ extern struct sk_buff *cdc_ncm_fill_tx_frame(struct cdc_ncm_ctx *ctx, struct sk_
 extern int cdc_ncm_rx_verify_nth16(struct cdc_ncm_ctx *ctx, struct sk_buff *skb_in);
 extern int cdc_ncm_rx_verify_ndp16(struct sk_buff *skb_in, int ndpoffset);
 =======
+=======
+>>>>>>> v3.18
 	u16 min_tx_pkt;
 
 	/* statistics */
@@ -194,4 +227,7 @@ cdc_ncm_tx_fixup(struct usbnet *dev, struct sk_buff *skb, gfp_t flags);
 int cdc_ncm_rx_fixup(struct usbnet *dev, struct sk_buff *skb_in);
 
 #endif /* __LINUX_USB_CDC_NCM_H */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

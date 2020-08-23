@@ -221,7 +221,11 @@ static void dump_common_audit_data(struct audit_buffer *ab,
 	BUILD_BUG_ON(sizeof(a->u) > sizeof(void *)*2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_log_format(ab, " pid=%d comm=", tsk->pid);
+=======
+	audit_log_format(ab, " pid=%d comm=", task_pid_nr(tsk));
+>>>>>>> v3.18
 =======
 	audit_log_format(ab, " pid=%d comm=", task_pid_nr(tsk));
 >>>>>>> v3.18
@@ -250,6 +254,7 @@ static void dump_common_audit_data(struct audit_buffer *ab,
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case LSM_AUDIT_DATA_IOCTL_OP: {
 		struct inode *inode;
 
@@ -265,6 +270,8 @@ static void dump_common_audit_data(struct audit_buffer *ab,
 		audit_log_format(ab, " ioctlcmd=%hx", a->u.op->cmd);
 		break;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case LSM_AUDIT_DATA_DENTRY: {
@@ -301,16 +308,22 @@ static void dump_common_audit_data(struct audit_buffer *ab,
 	case LSM_AUDIT_DATA_TASK:
 		tsk = a->u.tsk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (tsk && tsk->pid) {
 			audit_log_format(ab, " pid=%d comm=", tsk->pid);
 			audit_log_untrustedstring(ab, tsk->comm);
 =======
+=======
+>>>>>>> v3.18
 		if (tsk) {
 			pid_t pid = task_pid_nr(tsk);
 			if (pid) {
 				audit_log_format(ab, " pid=%d comm=", pid);
 				audit_log_untrustedstring(ab, tsk->comm);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -334,6 +347,7 @@ static void dump_common_audit_data(struct audit_buffer *ab,
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case AF_INET6: {
 				struct inet_sock *inet = inet_sk(sk);
 				struct ipv6_pinfo *inet6 = inet6_sk(sk);
@@ -343,6 +357,8 @@ static void dump_common_audit_data(struct audit_buffer *ab,
 						"laddr", "lport");
 				print_ipv6_addr(ab, &inet6->daddr,
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_IPV6)
 			case AF_INET6: {
 				struct inet_sock *inet = inet_sk(sk);
@@ -351,12 +367,19 @@ static void dump_common_audit_data(struct audit_buffer *ab,
 						inet->inet_sport,
 						"laddr", "lport");
 				print_ipv6_addr(ab, &sk->sk_v6_daddr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						inet->inet_dport,
 						"faddr", "fport");
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -443,7 +466,12 @@ void common_lsm_audit(struct common_audit_data *a,
 		return;
 	/* we use GFP_ATOMIC so we won't sleep */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ab = audit_log_start(current->audit_context, GFP_ATOMIC, AUDIT_AVC);
+=======
+	ab = audit_log_start(current->audit_context, GFP_ATOMIC | __GFP_NOWARN,
+			     AUDIT_AVC);
+>>>>>>> v3.18
 =======
 	ab = audit_log_start(current->audit_context, GFP_ATOMIC | __GFP_NOWARN,
 			     AUDIT_AVC);

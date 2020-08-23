@@ -8,6 +8,7 @@ some types of computationally intensive high-performance computing (HPC)
 applications and for real-time applications.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 There are two main contexts in which the number of scheduling-clock
 interrupts can be reduced compared to the old-school approach of sending
 a scheduling-clock interrupt to all CPUs every jiffy whether they need
@@ -24,6 +25,8 @@ section listing known issues.
 
 IDLE CPUs
 =======
+=======
+>>>>>>> v3.18
 There are three main ways of managing scheduling-clock interrupts
 (also known as "scheduling-clock ticks" or simply "ticks"):
 
@@ -77,6 +80,9 @@ you should read the following two sections.
 
 
 OMIT SCHEDULING-CLOCK TICKS FOR IDLE CPUs
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 If a CPU is idle, there is little point in sending it a scheduling-clock
@@ -116,17 +122,23 @@ dyntick-idle mode.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 CPUs WITH ONLY ONE RUNNABLE TASK
 
 If a CPU has only one runnable task, there is little point in sending it
 a scheduling-clock interrupt because there is no other task to switch to.
 =======
+=======
+>>>>>>> v3.18
 OMIT SCHEDULING-CLOCK TICKS FOR CPUs WITH ONLY ONE RUNNABLE TASK
 
 If a CPU has only one runnable task, there is little point in sending it
 a scheduling-clock interrupt because there is no other task to switch to.
 Note that omitting scheduling-clock ticks for CPUs with only one runnable
 task implies also omitting them for idle CPUs.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 The CONFIG_NO_HZ_FULL=y Kconfig option causes the kernel to avoid
@@ -147,6 +159,7 @@ boot parameter specifies the adaptive-ticks CPUs.  For example,
 CPUs.  Note that you are prohibited from marking all of the CPUs as
 adaptive-tick CPUs:  At least one non-adaptive-tick CPU must remain
 <<<<<<< HEAD
+<<<<<<< HEAD
 online to handle timekeeping tasks in order to ensure that system calls
 like gettimeofday() returns accurate values on adaptive-tick CPUs.
 (This is not an issue for CONFIG_NO_HZ_IDLE=y because there are no
@@ -156,6 +169,8 @@ mode.  Specifying a "nohz_full=" mask that includes the boot CPU will
 result in a boot-time error message, and the boot CPU will be removed
 from the mask.
 =======
+=======
+>>>>>>> v3.18
 online to handle timekeeping tasks in order to ensure that system
 calls like gettimeofday() returns accurate values on adaptive-tick CPUs.
 (This is not an issue for CONFIG_NO_HZ_IDLE=y because there are no running
@@ -165,6 +180,9 @@ boot CPU is prohibited from entering adaptive-ticks mode.  Specifying a
 error message, and the boot CPU will be removed from the mask.  Note that
 this means that your system must have at least two CPUs in order for
 CONFIG_NO_HZ_FULL=y to do anything for you.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Alternatively, the CONFIG_NO_HZ_FULL_ALL=y Kconfig parameter specifies
@@ -270,7 +288,10 @@ where you want them to run.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 TESTING
 
 So you enable all the OS-jitter features described in this document,
@@ -294,6 +315,9 @@ We do not currently have a good way to remove OS jitter from single-CPU
 systems.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 KNOWN ISSUES
 
@@ -342,12 +366,18 @@ o	Adaptive-ticks does not do anything unless there is only one
 	tasks, even though these interrupts are unnecessary.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	And even when there are multiple runnable tasks on a given CPU,
 	there is little point in interrupting that CPU until the current
 	running task's timeslice expires, which is almost always way
 	longer than the time of the next scheduling-clock interrupt.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	Better handling of these sorts of situations is future work.
 
@@ -380,10 +410,13 @@ o	Unless all CPUs are idle, at least one CPU must keep the
 	timekeeping.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 o	If there are adaptive-ticks CPUs, there will be at least one
 	CPU keeping the scheduling-clock interrupt going, even if all
 	CPUs are otherwise idle.
 =======
+=======
+>>>>>>> v3.18
 o	If there might potentially be some adaptive-ticks CPUs, there
 	will be at least one CPU keeping the scheduling-clock interrupt
 	going, even if all CPUs are otherwise idle.
@@ -397,4 +430,7 @@ o	Some process-handling operations still require the occasional
 	currently accommodated by scheduling-clock tick every second
 	or so.	On-going work will eliminate the need even for these
 	infrequent scheduling-clock ticks.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

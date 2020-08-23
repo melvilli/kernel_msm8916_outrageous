@@ -24,7 +24,11 @@
 /* These functions provide the necessary setup for the mv64x60 drivers. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id __initdata of_mv64x60_devices[] = {
+=======
+static const struct of_device_id of_mv64x60_devices[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id of_mv64x60_devices[] __initconst = {
 >>>>>>> v3.18
@@ -233,7 +237,11 @@ static struct platform_device * __init mv64x60_eth_register_shared_pdev(
 	if (id == 0) {
 		pdev = platform_device_register_simple("orion-mdio", -1, &r[1], 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!pdev)
+=======
+		if (IS_ERR(pdev))
+>>>>>>> v3.18
 =======
 		if (IS_ERR(pdev))
 >>>>>>> v3.18
@@ -457,7 +465,11 @@ static int __init mv64x60_device_setup(void)
 
 	id = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_compatible_node(np, "serial", "marvell,mv64360-mpsc") {
+=======
+	for_each_compatible_node(np, NULL, "marvell,mv64360-mpsc") {
+>>>>>>> v3.18
 =======
 	for_each_compatible_node(np, NULL, "marvell,mv64360-mpsc") {
 >>>>>>> v3.18

@@ -10,10 +10,13 @@
 #include <uapi/asm/swab.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __GNUC__
 #ifndef __powerpc64__
 #endif /* __powerpc64__ */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static __inline__ __u16 ld_le16(const volatile __u16 *addr)
@@ -24,7 +27,10 @@ static __inline__ __u16 ld_le16(const volatile __u16 *addr)
 	return val;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __arch_swab16p ld_le16
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -34,12 +40,15 @@ static __inline__ void st_le16(volatile __u16 *addr, const __u16 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __arch_swab16s(__u16 *addr)
 {
 	st_le16(addr, *addr);
 }
 #define __arch_swab16s __arch_swab16s
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static __inline__ __u32 ld_le32(const volatile __u32 *addr)
@@ -50,7 +59,10 @@ static __inline__ __u32 ld_le32(const volatile __u32 *addr)
 	return val;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __arch_swab32p ld_le32
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -59,6 +71,7 @@ static __inline__ void st_le32(volatile __u32 *addr, const __u32 val)
 	__asm__ __volatile__ ("stwbrx %1,0,%2" : "=m" (*addr) : "r" (val), "r" (addr));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void __arch_swab32s(__u32 *addr)
 {
@@ -91,6 +104,8 @@ static inline __attribute_const__ __u32 __arch_swab32(__u32 value)
 #define __arch_swab32 __arch_swab32
 
 #endif /* __GNUC__ */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ASM_POWERPC_SWAB_H */

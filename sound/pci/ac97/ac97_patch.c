@@ -3478,7 +3478,12 @@ static int snd_ac97_add_vmaster(struct snd_ac97 *ac97, char *name,
 		sctl = snd_ac97_find_mixer_ctl(ac97, *s);
 		if (!sctl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printdd("Cannot find slave %s, skipped\n", *s);
+=======
+			dev_dbg(ac97->bus->card->dev,
+				"Cannot find slave %s, skipped\n", *s);
+>>>>>>> v3.18
 =======
 			dev_dbg(ac97->bus->card->dev,
 				"Cannot find slave %s, skipped\n", *s);

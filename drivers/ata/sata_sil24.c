@@ -354,13 +354,19 @@ static void sil24_post_internal_cmd(struct ata_queued_cmd *qc);
 static int sil24_port_start(struct ata_port *ap);
 static int sil24_init_one(struct pci_dev *pdev, const struct pci_device_id *ent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int sil24_pci_device_resume(struct pci_dev *pdev);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int sil24_pci_device_resume(struct pci_dev *pdev);
 #endif
 #ifdef CONFIG_PM
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sil24_port_resume(struct ata_port *ap);
 #endif
@@ -383,7 +389,11 @@ static struct pci_driver sil24_pci_driver = {
 	.probe			= sil24_init_one,
 	.remove			= ata_pci_remove_one,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -1164,8 +1174,13 @@ static irqreturn_t sil24_interrupt(int irq, void *dev_instance)
 
 	if (status == 0xffffffff) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR DRV_NAME ": IRQ status == 0xffffffff, "
 		       "PCI fault or device removal?\n");
+=======
+		dev_err(host->dev, "IRQ status == 0xffffffff, "
+			"PCI fault or device removal?\n");
+>>>>>>> v3.18
 =======
 		dev_err(host->dev, "IRQ status == 0xffffffff, "
 			"PCI fault or device removal?\n");
@@ -1367,15 +1382,21 @@ static int sil24_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int sil24_pci_device_resume(struct pci_dev *pdev)
 {
 	struct ata_host *host = dev_get_drvdata(&pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int sil24_pci_device_resume(struct pci_dev *pdev)
 {
 	struct ata_host *host = pci_get_drvdata(pdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void __iomem *host_base = host->iomap[SIL24_HOST_BAR];
 	int rc;
@@ -1394,7 +1415,13 @@ static int sil24_pci_device_resume(struct pci_dev *pdev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#endif
+
+#ifdef CONFIG_PM
+>>>>>>> v3.18
 =======
 #endif
 

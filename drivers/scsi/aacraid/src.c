@@ -360,6 +360,7 @@ static int aac_src_check_health(struct aac_dev *dev)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *	Check to see if the board panic'd.
 	 */
 	if (unlikely(status & KERNEL_PANIC))
@@ -378,6 +379,8 @@ static int aac_src_check_health(struct aac_dev *dev)
 		goto err_out;
 
 =======
+=======
+>>>>>>> v3.18
 	 *	Check to see if the board failed any self tests.
 	 */
 	if (unlikely(status & SELF_TEST_FAILED))
@@ -388,6 +391,9 @@ static int aac_src_check_health(struct aac_dev *dev)
 	 */
 	if (unlikely(status & KERNEL_PANIC))
 		return (status >> 16) & 0xFF;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 *	Wait for the adapter to be up and running.
@@ -399,12 +405,15 @@ static int aac_src_check_health(struct aac_dev *dev)
 	 */
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err_out:
 	return -1;
 
 err_blink:
 	return (status > 16) & 0xFF;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -677,7 +686,11 @@ int aac_src_init(struct aac_dev *dev)
 
 	if (request_irq(dev->pdev->irq, dev->a_ops.adapter_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_SHARED|IRQF_DISABLED, "aacraid", dev) < 0) {
+=======
+			IRQF_SHARED, "aacraid", dev) < 0) {
+>>>>>>> v3.18
 =======
 			IRQF_SHARED, "aacraid", dev) < 0) {
 >>>>>>> v3.18
@@ -838,7 +851,11 @@ int aac_srcv_init(struct aac_dev *dev)
 	dev->msi = aac_msi && !pci_enable_msi(dev->pdev);
 	if (request_irq(dev->pdev->irq, dev->a_ops.adapter_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IRQF_SHARED|IRQF_DISABLED, "aacraid", dev) < 0) {
+=======
+		IRQF_SHARED, "aacraid", dev) < 0) {
+>>>>>>> v3.18
 =======
 		IRQF_SHARED, "aacraid", dev) < 0) {
 >>>>>>> v3.18

@@ -9,6 +9,7 @@
 #include <linux/init.h>
 #include <linux/smp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/thread_info.h>
 #include <linux/sched.h>
 #include <linux/gfp.h>
@@ -61,6 +62,8 @@ static int __init vdso_setup(char *s)
 {
 	vdso_enabled = simple_strtoul(s, NULL, 0);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/mm_types.h>
 
@@ -86,6 +89,9 @@ static int __init vdso32_setup(char *s)
 
 	if (vdso32_enabled > 1)
 		pr_warn("vdso32 values other than 0 and 1 are no longer allowed; vdso disabled\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1;
@@ -96,6 +102,7 @@ static int __init vdso32_setup(char *s)
  * behavior on both 64-bit and 32-bit kernels.
  * On 32-bit kernels, vdso=[012] means the same thing.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 __setup("vdso32=", vdso_setup);
 
@@ -225,18 +232,24 @@ static __init void relocate_vdso(Elf32_Ehdr *ehdr)
 static struct page *vdso32_pages[1];
 
 =======
+=======
+>>>>>>> v3.18
 __setup("vdso32=", vdso32_setup);
 
 #ifdef CONFIG_X86_32
 __setup_param("vdso=", vdso_setup, vdso32_setup, 0);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_X86_64
 
 #define	vdso32_sysenter()	(boot_cpu_has(X86_FEATURE_SYSENTER32))
 #define	vdso32_syscall()	(boot_cpu_has(X86_FEATURE_SYSCALL32))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* May not be __init: called during resume */
 void syscall32_cpu_init(void)
@@ -258,11 +271,14 @@ static inline void map_compat_vdso(int map)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #else  /* CONFIG_X86_32 */
 
 #define vdso32_sysenter()	(boot_cpu_has(X86_FEATURE_SEP))
 #define vdso32_syscall()	(0)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void enable_sep_cpu(void)
 {
@@ -404,6 +420,8 @@ int arch_setup_additional_pages(struct linux_binprm *bprm, int uses_interp)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 #endif	/* CONFIG_X86_64 */
 
 #if defined(CONFIG_X86_32) || defined(CONFIG_COMPAT)
@@ -425,6 +443,9 @@ int __init sysenter_setup(void)
 	init_vdso_image(selected_vdso32);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -437,15 +458,21 @@ subsys_initcall(sysenter_setup);
 #include <linux/sysctl.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table abi_table2[] = {
 	{
 		.procname	= "vsyscall32",
 		.data		= &sysctl_vsyscall32,
 =======
+=======
+>>>>>>> v3.18
 static struct ctl_table abi_table2[] = {
 	{
 		.procname	= "vsyscall32",
 		.data		= &vdso32_enabled,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.maxlen		= sizeof(int),
 		.mode		= 0644,
@@ -455,7 +482,11 @@ static struct ctl_table abi_table2[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ctl_table abi_root_table2[] = {
+=======
+static struct ctl_table abi_root_table2[] = {
+>>>>>>> v3.18
 =======
 static struct ctl_table abi_root_table2[] = {
 >>>>>>> v3.18
@@ -473,6 +504,7 @@ static __init int ia32_binfmt_init(void)
 	return 0;
 }
 __initcall(ia32_binfmt_init);
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 
@@ -507,6 +539,9 @@ int in_gate_area_no_mm(unsigned long addr)
 {
 	return 0;
 }
+=======
+#endif /* CONFIG_SYSCTL */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_SYSCTL */
 >>>>>>> v3.18

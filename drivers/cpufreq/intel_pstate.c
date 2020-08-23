@@ -26,6 +26,10 @@
 #include <linux/fs.h>
 #include <linux/debugfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -36,12 +40,18 @@
 #include <asm/cpu_device_id.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SAMPLE_COUNT		3
 =======
+=======
+>>>>>>> v3.18
 #define BYT_RATIOS		0x66a
 #define BYT_VIDS		0x66b
 #define BYT_TURBO_RATIOS	0x66c
 #define BYT_TURBO_VIDS		0x66d
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define FRAC_BITS 8
@@ -49,6 +59,10 @@
 #define fp_toint(X) ((X) >> FRAC_BITS)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -60,8 +74,11 @@ static inline int32_t mul_fp(int32_t x, int32_t y)
 static inline int32_t div_fp(int32_t x, int32_t y)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return div_s64((int64_t)x << FRAC_BITS, (int64_t)y);
 =======
+=======
+>>>>>>> v3.18
 	return div_s64((int64_t)x << FRAC_BITS, y);
 }
 
@@ -74,6 +91,9 @@ static inline int ceiling_fp(int32_t x)
 	if (x & mask)
 		ret += 1;
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -83,6 +103,10 @@ struct sample {
 	u64 mperf;
 	int freq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ktime_t time;
+>>>>>>> v3.18
 =======
 	ktime_t time;
 >>>>>>> v3.18
@@ -93,10 +117,13 @@ struct pstate_data {
 	int	min_pstate;
 	int	max_pstate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int	turbo_pstate;
 };
 
 =======
+=======
+>>>>>>> v3.18
 	int	scaling;
 	int	turbo_pstate;
 };
@@ -108,6 +135,9 @@ struct vid_data {
 	int32_t ratio;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct _pid {
 	int setpoint;
@@ -122,6 +152,7 @@ struct _pid {
 struct cpudata {
 	int cpu;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char name[64];
 
@@ -138,6 +169,8 @@ struct cpudata {
 	int	sample_ptr;
 	struct sample samples[SAMPLE_COUNT];
 =======
+=======
+>>>>>>> v3.18
 	struct timer_list timer;
 
 	struct pstate_data pstate;
@@ -148,6 +181,9 @@ struct cpudata {
 	u64	prev_aperf;
 	u64	prev_mperf;
 	struct sample sample;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -162,6 +198,7 @@ struct pstate_adjust_policy {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct pstate_adjust_policy default_policy = {
 	.sample_rate_ms = 10,
 	.deadband = 0,
@@ -174,6 +211,8 @@ static struct pstate_adjust_policy default_policy = {
 struct perf_limits {
 	int no_turbo;
 =======
+=======
+>>>>>>> v3.18
 struct pstate_funcs {
 	int (*get_max)(void);
 	int (*get_min)(void);
@@ -194,6 +233,9 @@ static struct pstate_funcs pstate_funcs;
 struct perf_limits {
 	int no_turbo;
 	int turbo_disabled;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int max_perf_pct;
 	int min_perf_pct;
@@ -206,6 +248,10 @@ struct perf_limits {
 static struct perf_limits limits = {
 	.no_turbo = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.turbo_disabled = 0,
+>>>>>>> v3.18
 =======
 	.turbo_disabled = 0,
 >>>>>>> v3.18
@@ -219,17 +265,23 @@ static struct perf_limits limits = {
 
 static inline void pid_reset(struct _pid *pid, int setpoint, int busy,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int deadband, int integral) {
 	pid->setpoint = setpoint;
 	pid->deadband  = deadband;
 	pid->integral  = int_tofp(integral);
 	pid->last_err  = setpoint - busy;
 =======
+=======
+>>>>>>> v3.18
 			     int deadband, int integral) {
 	pid->setpoint = setpoint;
 	pid->deadband  = deadband;
 	pid->integral  = int_tofp(integral);
 	pid->last_err  = int_tofp(setpoint) - int_tofp(busy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -246,7 +298,10 @@ static inline void pid_i_gain_set(struct _pid *pid, int percent)
 static inline void pid_d_gain_set(struct _pid *pid, int percent)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pid->d_gain = div_fp(int_tofp(percent), int_tofp(100));
@@ -279,7 +334,11 @@ static signed int pid_calc(struct _pid *pid, int32_t busy)
 
 	result = pterm + mul_fp(pid->integral, pid->i_gain) + dterm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	result = result + (1 << (FRAC_BITS-1));
+>>>>>>> v3.18
 =======
 	result = result + (1 << (FRAC_BITS-1));
 >>>>>>> v3.18
@@ -288,6 +347,7 @@ static signed int pid_calc(struct _pid *pid, int32_t busy)
 
 static inline void intel_pstate_busy_pid_reset(struct cpudata *cpu)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pid_p_gain_set(&cpu->pid, cpu->pstate_policy->p_gain_pct);
 	pid_d_gain_set(&cpu->pid, cpu->pstate_policy->d_gain_pct);
@@ -299,11 +359,16 @@ static inline void intel_pstate_busy_pid_reset(struct cpudata *cpu)
 		cpu->pstate_policy->deadband,
 		0);
 =======
+=======
+>>>>>>> v3.18
 	pid_p_gain_set(&cpu->pid, pid_params.p_gain_pct);
 	pid_d_gain_set(&cpu->pid, pid_params.d_gain_pct);
 	pid_i_gain_set(&cpu->pid, pid_params.i_gain_pct);
 
 	pid_reset(&cpu->pid, pid_params.setpoint, 100, pid_params.deadband, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -311,6 +376,10 @@ static inline void intel_pstate_reset_all_pid(void)
 {
 	unsigned int cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -321,7 +390,10 @@ static inline void intel_pstate_reset_all_pid(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void update_turbo_state(void)
 {
 	u64 misc_en;
@@ -334,6 +406,9 @@ static inline void update_turbo_state(void)
 		 cpu->pstate.max_pstate == cpu->pstate.turbo_pstate);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /************************** debugfs begin ************************/
 static int pid_param_set(void *data, u64 val)
@@ -343,6 +418,10 @@ static int pid_param_set(void *data, u64 val)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -352,8 +431,12 @@ static int pid_param_get(void *data, u64 *val)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_SIMPLE_ATTRIBUTE(fops_pid_param, pid_param_get,
 			pid_param_set, "%llu\n");
+=======
+DEFINE_SIMPLE_ATTRIBUTE(fops_pid_param, pid_param_get, pid_param_set, "%llu\n");
+>>>>>>> v3.18
 =======
 DEFINE_SIMPLE_ATTRIBUTE(fops_pid_param, pid_param_get, pid_param_set, "%llu\n");
 >>>>>>> v3.18
@@ -364,6 +447,7 @@ struct pid_param {
 };
 
 static struct pid_param pid_files[] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{"sample_rate_ms", &default_policy.sample_rate_ms},
 	{"d_gain_pct", &default_policy.d_gain_pct},
@@ -378,6 +462,8 @@ static struct dentry *debugfs_parent;
 static void intel_pstate_debug_expose_params(void)
 {
 =======
+=======
+>>>>>>> v3.18
 	{"sample_rate_ms", &pid_params.sample_rate_ms},
 	{"d_gain_pct", &pid_params.d_gain_pct},
 	{"i_gain_pct", &pid_params.i_gain_pct},
@@ -390,6 +476,9 @@ static void intel_pstate_debug_expose_params(void)
 static void __init intel_pstate_debug_expose_params(void)
 {
 	struct dentry *debugfs_parent;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i = 0;
 
@@ -399,8 +488,13 @@ static void __init intel_pstate_debug_expose_params(void)
 	while (pid_files[i].name) {
 		debugfs_create_file(pid_files[i].name, 0660,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				debugfs_parent, pid_files[i].value,
 				&fops_pid_param);
+=======
+				    debugfs_parent, pid_files[i].value,
+				    &fops_pid_param);
+>>>>>>> v3.18
 =======
 				    debugfs_parent, pid_files[i].value,
 				    &fops_pid_param);
@@ -420,6 +514,7 @@ static void __init intel_pstate_debug_expose_params(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t store_no_turbo(struct kobject *a, struct attribute *b,
 				const char *buf, size_t count)
 {
@@ -430,6 +525,8 @@ static ssize_t store_no_turbo(struct kobject *a, struct attribute *b,
 		return -EINVAL;
 	limits.no_turbo = clamp_t(int, input, 0 , 1);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t show_no_turbo(struct kobject *kobj,
 			     struct attribute *attr, char *buf)
 {
@@ -460,6 +557,9 @@ static ssize_t store_no_turbo(struct kobject *a, struct attribute *b,
 		return -EPERM;
 	}
 	limits.no_turbo = clamp_t(int, input, 0, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return count;
@@ -467,16 +567,22 @@ static ssize_t store_no_turbo(struct kobject *a, struct attribute *b,
 
 static ssize_t store_max_perf_pct(struct kobject *a, struct attribute *b,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const char *buf, size_t count)
 {
 	unsigned int input;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 				  const char *buf, size_t count)
 {
 	unsigned int input;
 	int ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = sscanf(buf, "%u", &input);
 	if (ret != 1)
@@ -486,6 +592,10 @@ static ssize_t store_max_perf_pct(struct kobject *a, struct attribute *b,
 	limits.max_perf_pct = min(limits.max_policy_pct, limits.max_sysfs_pct);
 	limits.max_perf = div_fp(int_tofp(limits.max_perf_pct), int_tofp(100));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -494,16 +604,22 @@ static ssize_t store_max_perf_pct(struct kobject *a, struct attribute *b,
 
 static ssize_t store_min_perf_pct(struct kobject *a, struct attribute *b,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const char *buf, size_t count)
 {
 	unsigned int input;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 				  const char *buf, size_t count)
 {
 	unsigned int input;
 	int ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = sscanf(buf, "%u", &input);
 	if (ret != 1)
@@ -515,7 +631,10 @@ static ssize_t store_min_perf_pct(struct kobject *a, struct attribute *b,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 show_one(no_turbo, no_turbo);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 show_one(max_perf_pct, max_perf_pct);
@@ -536,15 +655,21 @@ static struct attribute_group intel_pstate_attr_group = {
 	.attrs = intel_pstate_attributes,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct kobject *intel_pstate_kobject;
 
 static void intel_pstate_sysfs_expose_params(void)
 {
 =======
+=======
+>>>>>>> v3.18
 
 static void __init intel_pstate_sysfs_expose_params(void)
 {
 	struct kobject *intel_pstate_kobject;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rc;
 
@@ -552,8 +677,12 @@ static void __init intel_pstate_sysfs_expose_params(void)
 						&cpu_subsys.dev_root->kobj);
 	BUG_ON(!intel_pstate_kobject);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = sysfs_create_group(intel_pstate_kobject,
 				&intel_pstate_attr_group);
+=======
+	rc = sysfs_create_group(intel_pstate_kobject, &intel_pstate_attr_group);
+>>>>>>> v3.18
 =======
 	rc = sysfs_create_group(intel_pstate_kobject, &intel_pstate_attr_group);
 >>>>>>> v3.18
@@ -562,11 +691,14 @@ static void __init intel_pstate_sysfs_expose_params(void)
 
 /************************** sysfs end ************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int intel_pstate_min_pstate(void)
 {
 	u64 value;
 =======
+=======
+>>>>>>> v3.18
 static int byt_get_min_pstate(void)
 {
 	u64 value;
@@ -652,25 +784,35 @@ static int core_get_min_pstate(void)
 {
 	u64 value;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rdmsrl(MSR_PLATFORM_INFO, value);
 	return (value >> 40) & 0xFF;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int intel_pstate_max_pstate(void)
 {
 	u64 value;
 =======
+=======
+>>>>>>> v3.18
 static int core_get_max_pstate(void)
 {
 	u64 value;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rdmsrl(MSR_PLATFORM_INFO, value);
 	return (value >> 8) & 0xFF;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int intel_pstate_turbo_pstate(void)
 {
@@ -680,6 +822,8 @@ static int intel_pstate_turbo_pstate(void)
 	nont = intel_pstate_max_pstate();
 	ret = ((value) & 255);
 =======
+=======
+>>>>>>> v3.18
 static int core_get_turbo_pstate(void)
 {
 	u64 value;
@@ -688,6 +832,9 @@ static int core_get_turbo_pstate(void)
 	rdmsrl(MSR_NHM_TURBO_RATIO_LIMIT, value);
 	nont = core_get_max_pstate();
 	ret = (value) & 255;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret <= nont)
 		ret = nont;
@@ -695,7 +842,10 @@ static int core_get_turbo_pstate(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int core_get_scaling(void)
 {
 	return 100000;
@@ -749,6 +899,9 @@ static struct cpu_defaults byt_params = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void intel_pstate_get_min_max(struct cpudata *cpu, int *min, int *max)
 {
@@ -756,7 +909,12 @@ static void intel_pstate_get_min_max(struct cpudata *cpu, int *min, int *max)
 	int max_perf_adj;
 	int min_perf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (limits.no_turbo)
+=======
+
+	if (limits.no_turbo || limits.turbo_disabled)
+>>>>>>> v3.18
 =======
 
 	if (limits.no_turbo || limits.turbo_disabled)
@@ -769,8 +927,12 @@ static void intel_pstate_get_min_max(struct cpudata *cpu, int *min, int *max)
 
 	min_perf = fp_toint(mul_fp(int_tofp(max_perf), limits.min_perf));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*min = clamp_t(int, min_perf,
 			cpu->pstate.min_pstate, max_perf);
+=======
+	*min = clamp_t(int, min_perf, cpu->pstate.min_pstate, max_perf);
+>>>>>>> v3.18
 =======
 	*min = clamp_t(int, min_perf, cpu->pstate.min_pstate, max_perf);
 >>>>>>> v3.18
@@ -781,6 +943,11 @@ static void intel_pstate_set_pstate(struct cpudata *cpu, int pstate)
 	int max_perf, min_perf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	update_turbo_state();
+
+>>>>>>> v3.18
 =======
 	update_turbo_state();
 
@@ -792,6 +959,7 @@ static void intel_pstate_set_pstate(struct cpudata *cpu, int pstate)
 	if (pstate == cpu->pstate.current_pstate)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	trace_cpu_frequency(pstate * 100000, cpu->cpu);
 
@@ -843,6 +1011,8 @@ static inline void intel_pstate_calc_busy(struct cpudata *cpu,
 
 	sample->core_pct_busy = core_pct;
 =======
+=======
+>>>>>>> v3.18
 	trace_cpu_frequency(pstate * cpu->pstate.scaling, cpu->cpu);
 
 	cpu->pstate.current_pstate = pstate;
@@ -876,12 +1046,16 @@ static inline void intel_pstate_calc_busy(struct cpudata *cpu)
 			core_pct));
 
 	sample->core_pct_busy = (int32_t)core_pct;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void intel_pstate_sample(struct cpudata *cpu)
 {
 	u64 aperf, mperf;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	rdmsrl(MSR_IA32_APERF, aperf);
@@ -894,6 +1068,8 @@ static inline void intel_pstate_sample(struct cpudata *cpu)
 
 	intel_pstate_calc_busy(cpu, &cpu->samples[cpu->sample_ptr]);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	local_irq_save(flags);
@@ -909,6 +1085,9 @@ static inline void intel_pstate_sample(struct cpudata *cpu)
 	cpu->sample.mperf -= cpu->prev_mperf;
 
 	intel_pstate_calc_busy(cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cpu->prev_aperf = aperf;
@@ -918,10 +1097,16 @@ static inline void intel_pstate_sample(struct cpudata *cpu)
 static inline void intel_pstate_set_sample_time(struct cpudata *cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int sample_time, delay;
 
 	sample_time = cpu->pstate_policy->sample_rate_ms;
 	delay = msecs_to_jiffies(sample_time);
+=======
+	int delay;
+
+	delay = msecs_to_jiffies(pid_params.sample_rate_ms);
+>>>>>>> v3.18
 =======
 	int delay;
 
@@ -933,6 +1118,7 @@ static inline void intel_pstate_set_sample_time(struct cpudata *cpu)
 static inline int32_t intel_pstate_get_scaled_busy(struct cpudata *cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int32_t core_busy, max_pstate, current_pstate;
 
 	core_busy = cpu->samples[cpu->sample_ptr].core_pct_busy;
@@ -940,6 +1126,8 @@ static inline int32_t intel_pstate_get_scaled_busy(struct cpudata *cpu)
 	current_pstate = int_tofp(cpu->pstate.current_pstate);
 	return mul_fp(core_busy, div_fp(max_pstate, current_pstate));
 =======
+=======
+>>>>>>> v3.18
 	int32_t core_busy, max_pstate, current_pstate, sample_ratio;
 	u32 duration_us;
 	u32 sample_time;
@@ -959,6 +1147,9 @@ static inline int32_t intel_pstate_get_scaled_busy(struct cpudata *cpu)
 	}
 
 	return core_busy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -967,8 +1158,12 @@ static inline void intel_pstate_adjust_busy_pstate(struct cpudata *cpu)
 	int32_t busy_scaled;
 	struct _pid *pid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	signed int ctl = 0;
 	int steps;
+=======
+	signed int ctl;
+>>>>>>> v3.18
 =======
 	signed int ctl;
 >>>>>>> v3.18
@@ -979,6 +1174,7 @@ static inline void intel_pstate_adjust_busy_pstate(struct cpudata *cpu)
 	ctl = pid_calc(pid, busy_scaled);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	steps = abs(ctl);
 	if (ctl < 0)
 		intel_pstate_pstate_increase(cpu, steps);
@@ -988,11 +1184,16 @@ static inline void intel_pstate_adjust_busy_pstate(struct cpudata *cpu)
 	/* Negative values of ctl increase the pstate and vice versa */
 	intel_pstate_set_pstate(cpu, cpu->pstate.current_pstate - ctl);
 >>>>>>> v3.18
+=======
+	/* Negative values of ctl increase the pstate and vice versa */
+	intel_pstate_set_pstate(cpu, cpu->pstate.current_pstate - ctl);
+>>>>>>> v3.18
 }
 
 static void intel_pstate_timer_func(unsigned long __data)
 {
 	struct cpudata *cpu = (struct cpudata *) __data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	intel_pstate_sample(cpu);
@@ -1006,6 +1207,8 @@ static void intel_pstate_timer_func(unsigned long __data)
 	} else
 		cpu->min_pstate_count = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct sample *sample;
 
 	intel_pstate_sample(cpu);
@@ -1020,6 +1223,9 @@ static void intel_pstate_timer_func(unsigned long __data)
 			sample->mperf,
 			sample->aperf,
 			sample->freq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	intel_pstate_set_sample_time(cpu);
@@ -1031,6 +1237,7 @@ static void intel_pstate_timer_func(unsigned long __data)
 
 static const struct x86_cpu_id intel_pstate_cpu_ids[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ICPU(0x2a, default_policy),
 	ICPU(0x2d, default_policy),
 	ICPU(0x3a, default_policy),
@@ -1040,6 +1247,8 @@ static const struct x86_cpu_id intel_pstate_cpu_ids[] = {
 	ICPU(0x45, default_policy),
 	ICPU(0x46, default_policy),
 =======
+=======
+>>>>>>> v3.18
 	ICPU(0x2a, core_params),
 	ICPU(0x2d, core_params),
 	ICPU(0x37, byt_params),
@@ -1053,6 +1262,9 @@ static const struct x86_cpu_id intel_pstate_cpu_ids[] = {
 	ICPU(0x4c, byt_params),
 	ICPU(0x4f, core_params),
 	ICPU(0x56, core_params),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };
@@ -1060,6 +1272,7 @@ MODULE_DEVICE_TABLE(x86cpu, intel_pstate_cpu_ids);
 
 static int intel_pstate_init_cpu(unsigned int cpunum)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	const struct x86_cpu_id *id;
@@ -1071,17 +1284,23 @@ static int intel_pstate_init_cpu(unsigned int cpunum)
 
 	all_cpu_data[cpunum] = kzalloc(sizeof(struct cpudata), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	struct cpudata *cpu;
 
 	if (!all_cpu_data[cpunum])
 		all_cpu_data[cpunum] = kzalloc(sizeof(struct cpudata),
 					       GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!all_cpu_data[cpunum])
 		return -ENOMEM;
 
 	cpu = all_cpu_data[cpunum];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	intel_pstate_get_cpu_pstates(cpu);
 	if (!cpu->pstate.current_pstate) {
@@ -1106,6 +1325,8 @@ static int intel_pstate_init_cpu(unsigned int cpunum)
 
 	pr_info("Intel pstate controlling: cpu %d\n", cpunum);
 =======
+=======
+>>>>>>> v3.18
 	cpu->cpu = cpunum;
 	intel_pstate_get_cpu_pstates(cpu);
 
@@ -1119,6 +1340,9 @@ static int intel_pstate_init_cpu(unsigned int cpunum)
 	add_timer_on(&cpu->timer, cpunum);
 
 	pr_debug("Intel pstate controlling: cpu %d\n", cpunum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1133,7 +1357,11 @@ static unsigned int intel_pstate_get(unsigned int cpu_num)
 	if (!cpu)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sample = &cpu->samples[cpu->sample_ptr];
+=======
+	sample = &cpu->sample;
+>>>>>>> v3.18
 =======
 	sample = &cpu->sample;
 >>>>>>> v3.18
@@ -1143,10 +1371,13 @@ static unsigned int intel_pstate_get(unsigned int cpu_num)
 static int intel_pstate_set_policy(struct cpufreq_policy *policy)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cpudata *cpu;
 
 	cpu = all_cpu_data[policy->cpu];
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!policy->cpuinfo.max_freq)
@@ -1166,7 +1397,11 @@ static int intel_pstate_set_policy(struct cpufreq_policy *policy)
 	limits.min_perf = div_fp(int_tofp(limits.min_perf_pct), int_tofp(100));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	limits.max_policy_pct = policy->max * 100 / policy->cpuinfo.max_freq;
+=======
+	limits.max_policy_pct = (policy->max * 100) / policy->cpuinfo.max_freq;
+>>>>>>> v3.18
 =======
 	limits.max_policy_pct = (policy->max * 100) / policy->cpuinfo.max_freq;
 >>>>>>> v3.18
@@ -1182,8 +1417,13 @@ static int intel_pstate_verify_policy(struct cpufreq_policy *policy)
 	cpufreq_verify_within_cpu_limits(policy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((policy->policy != CPUFREQ_POLICY_POWERSAVE) &&
 		(policy->policy != CPUFREQ_POLICY_PERFORMANCE))
+=======
+	if (policy->policy != CPUFREQ_POLICY_POWERSAVE &&
+	    policy->policy != CPUFREQ_POLICY_PERFORMANCE)
+>>>>>>> v3.18
 =======
 	if (policy->policy != CPUFREQ_POLICY_POWERSAVE &&
 	    policy->policy != CPUFREQ_POLICY_PERFORMANCE)
@@ -1194,6 +1434,7 @@ static int intel_pstate_verify_policy(struct cpufreq_policy *policy)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int intel_pstate_cpu_exit(struct cpufreq_policy *policy)
 {
 	int cpu = policy->cpu;
@@ -1203,6 +1444,8 @@ static int intel_pstate_cpu_exit(struct cpufreq_policy *policy)
 	all_cpu_data[cpu] = NULL;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static void intel_pstate_stop_cpu(struct cpufreq_policy *policy)
 {
 	int cpu_num = policy->cpu;
@@ -1212,6 +1455,9 @@ static void intel_pstate_stop_cpu(struct cpufreq_policy *policy)
 
 	del_timer_sync(&all_cpu_data[cpu_num]->timer);
 	intel_pstate_set_pstate(cpu, cpu->pstate.min_pstate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1227,8 +1473,12 @@ static int intel_pstate_cpu_init(struct cpufreq_policy *policy)
 	cpu = all_cpu_data[policy->cpu];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!limits.no_turbo &&
 		limits.min_perf_pct == 100 && limits.max_perf_pct == 100)
+=======
+	if (limits.min_perf_pct == 100 && limits.max_perf_pct == 100)
+>>>>>>> v3.18
 =======
 	if (limits.min_perf_pct == 100 && limits.max_perf_pct == 100)
 >>>>>>> v3.18
@@ -1237,6 +1487,7 @@ static int intel_pstate_cpu_init(struct cpufreq_policy *policy)
 		policy->policy = CPUFREQ_POLICY_POWERSAVE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	policy->min = cpu->pstate.min_pstate * 100000;
 	policy->max = cpu->pstate.turbo_pstate * 100000;
 
@@ -1244,6 +1495,8 @@ static int intel_pstate_cpu_init(struct cpufreq_policy *policy)
 	policy->cpuinfo.min_freq = cpu->pstate.min_pstate * 100000;
 	policy->cpuinfo.max_freq = cpu->pstate.turbo_pstate * 100000;
 =======
+=======
+>>>>>>> v3.18
 	policy->min = cpu->pstate.min_pstate * cpu->pstate.scaling;
 	policy->max = cpu->pstate.turbo_pstate * cpu->pstate.scaling;
 
@@ -1251,6 +1504,9 @@ static int intel_pstate_cpu_init(struct cpufreq_policy *policy)
 	policy->cpuinfo.min_freq = cpu->pstate.min_pstate * cpu->pstate.scaling;
 	policy->cpuinfo.max_freq =
 		cpu->pstate.turbo_pstate * cpu->pstate.scaling;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	policy->cpuinfo.transition_latency = CPUFREQ_ETERNAL;
 	cpumask_set_cpu(policy->cpu, policy->cpus);
@@ -1265,7 +1521,11 @@ static struct cpufreq_driver intel_pstate_driver = {
 	.get		= intel_pstate_get,
 	.init		= intel_pstate_cpu_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.exit		= intel_pstate_cpu_exit,
+=======
+	.stop_cpu	= intel_pstate_stop_cpu,
+>>>>>>> v3.18
 =======
 	.stop_cpu	= intel_pstate_stop_cpu,
 >>>>>>> v3.18
@@ -1283,9 +1543,15 @@ static int intel_pstate_msrs_not_valid(void)
 	rdmsrl(MSR_IA32_MPERF, mperf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!intel_pstate_min_pstate() ||
 		!intel_pstate_max_pstate() ||
 		!intel_pstate_turbo_pstate())
+=======
+	if (!pstate_funcs.get_max() ||
+	    !pstate_funcs.get_min() ||
+	    !pstate_funcs.get_turbo())
+>>>>>>> v3.18
 =======
 	if (!pstate_funcs.get_max() ||
 	    !pstate_funcs.get_min() ||
@@ -1304,7 +1570,10 @@ static int intel_pstate_msrs_not_valid(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void copy_pid_params(struct pstate_adjust_policy *policy)
 {
@@ -1392,12 +1661,19 @@ static bool intel_pstate_platform_pwr_mgmt_exists(void)
 static inline bool intel_pstate_platform_pwr_mgmt_exists(void) { return false; }
 #endif /* CONFIG_ACPI */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init intel_pstate_init(void)
 {
 	int cpu, rc = 0;
 	const struct x86_cpu_id *id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct cpu_defaults *cpu_info;
+>>>>>>> v3.18
 =======
 	struct cpu_defaults *cpu_info;
 >>>>>>> v3.18
@@ -1410,7 +1686,10 @@ static int __init intel_pstate_init(void)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The Intel pstate driver will be ignored if the platform
 	 * firmware has its own power management modes.
@@ -1423,6 +1702,9 @@ static int __init intel_pstate_init(void)
 	copy_pid_params(&cpu_info->pid_policy);
 	copy_cpu_funcs(&cpu_info->funcs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (intel_pstate_msrs_not_valid())
 		return -ENODEV;
@@ -1440,6 +1722,10 @@ static int __init intel_pstate_init(void)
 	intel_pstate_debug_expose_params();
 	intel_pstate_sysfs_expose_params();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

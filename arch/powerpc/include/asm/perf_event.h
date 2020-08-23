@@ -35,7 +35,11 @@
 		(regs)->result = 0;				\
 		(regs)->nip = __ip;				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		(regs)->gpr[1] = *(unsigned long *)__get_SP();	\
+=======
+		(regs)->gpr[1] = current_stack_pointer();	\
+>>>>>>> v3.18
 =======
 		(regs)->gpr[1] = current_stack_pointer();	\
 >>>>>>> v3.18

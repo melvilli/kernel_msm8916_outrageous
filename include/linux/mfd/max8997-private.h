@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * max8997.h - Voltage regulator driver for the Maxim 8997
+=======
+ * max8997-private.h - Voltage regulator driver for the Maxim 8997
+>>>>>>> v3.18
 =======
  * max8997-private.h - Voltage regulator driver for the Maxim 8997
 >>>>>>> v3.18
@@ -392,7 +396,11 @@ struct max8997_dev {
 	struct mutex iolock;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int type;
+=======
+	unsigned long type;
+>>>>>>> v3.18
 =======
 	unsigned long type;
 >>>>>>> v3.18

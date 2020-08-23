@@ -4,7 +4,10 @@
  * Control the Cobalt Qube/RaQ front LED
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/io.h>

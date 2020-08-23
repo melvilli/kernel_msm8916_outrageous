@@ -3,7 +3,11 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/crc7.h>
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/etherdevice.h>
 >>>>>>> v3.18
@@ -208,17 +212,23 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wl1251_cmd_data_path(struct wl1251 *wl, u8 channel, bool enable)
 {
 	struct cmd_enabledisable_path *cmd;
 	int ret;
 	u16 cmd_rx, cmd_tx;
 =======
+=======
+>>>>>>> v3.18
 int wl1251_cmd_data_path_rx(struct wl1251 *wl, u8 channel, bool enable)
 {
 	struct cmd_enabledisable_path *cmd;
 	int ret;
 	u16 cmd_rx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	wl1251_debug(DEBUG_CMD, "cmd data path");
@@ -232,6 +242,7 @@ int wl1251_cmd_data_path_rx(struct wl1251 *wl, u8 channel, bool enable)
 	cmd->channel = channel;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (enable) {
 		cmd_rx = CMD_ENABLE_RX;
 		cmd_tx = CMD_ENABLE_TX;
@@ -240,10 +251,15 @@ int wl1251_cmd_data_path_rx(struct wl1251 *wl, u8 channel, bool enable)
 		cmd_tx = CMD_DISABLE_TX;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (enable)
 		cmd_rx = CMD_ENABLE_RX;
 	else
 		cmd_rx = CMD_DISABLE_RX;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = wl1251_cmd_send(wl, cmd_rx, cmd, sizeof(*cmd));
@@ -257,6 +273,7 @@ int wl1251_cmd_data_path_rx(struct wl1251 *wl, u8 channel, bool enable)
 		     enable ? "start" : "stop", channel);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = wl1251_cmd_send(wl, cmd_tx, cmd, sizeof(*cmd));
 	if (ret < 0) {
 		wl1251_error("tx %s cmd for channel %d failed",
@@ -269,6 +286,8 @@ int wl1251_cmd_data_path_rx(struct wl1251 *wl, u8 channel, bool enable)
 
 out:
 =======
+=======
+>>>>>>> v3.18
 out:
 	kfree(cmd);
 	return ret;
@@ -301,6 +320,9 @@ int wl1251_cmd_data_path_tx(struct wl1251 *wl, u8 channel, bool enable)
 		wl1251_debug(DEBUG_BOOT, "tx %s cmd channel %d",
 			     enable ? "start" : "stop", channel);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(cmd);
 	return ret;
@@ -465,7 +487,13 @@ int wl1251_cmd_scan(struct wl1251 *wl, u8 *ssid, size_t ssid_len,
 	int i, ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wl1251_debug(DEBUG_CMD, "cmd scan");
+=======
+	wl1251_debug(DEBUG_CMD, "cmd scan channels %d", n_channels);
+
+	WARN_ON(n_channels > SCAN_MAX_NUM_OF_CHANNELS);
+>>>>>>> v3.18
 =======
 	wl1251_debug(DEBUG_CMD, "cmd scan channels %d", n_channels);
 
@@ -482,7 +510,10 @@ int wl1251_cmd_scan(struct wl1251 *wl, u8 *ssid, size_t ssid_len,
 						    CFG_RX_BCN_EN);
 	cmd->params.scan_options = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Use high priority scan when not associated to prevent fw issue
 	 * causing never-ending scans (sometimes 20+ minutes).
@@ -490,6 +521,9 @@ int wl1251_cmd_scan(struct wl1251 *wl, u8 *ssid, size_t ssid_len,
 	 */
 	if (is_zero_ether_addr(wl->bssid))
 		cmd->params.scan_options |= cpu_to_le16(WL1251_SCAN_OPT_PRIORITY_HIGH);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cmd->params.num_channels = n_channels;
 	cmd->params.num_probe_requests = n_probes;

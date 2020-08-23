@@ -143,12 +143,18 @@ static int ptp_clock_adjtime(struct posix_clock *pc, struct timex *tx)
 		err = ops->adjtime(ops, delta);
 	} else if (tx->modes & ADJ_FREQUENCY) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = ops->adjfreq(ops, scaled_ppm_to_ppb(tx->freq));
 =======
+=======
+>>>>>>> v3.18
 		s32 ppb = scaled_ppm_to_ppb(tx->freq);
 		if (ppb > ops->max_adj || ppb < -ops->max_adj)
 			return -ERANGE;
 		err = ops->adjfreq(ops, ppb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ptp->dialed_frequency = tx->freq;
 	} else if (tx->modes == 0) {
@@ -177,6 +183,10 @@ static void delete_ptp_clock(struct posix_clock *pc)
 
 	mutex_destroy(&ptp->tsevq_mux);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_destroy(&ptp->pincfg_mux);
+>>>>>>> v3.18
 =======
 	mutex_destroy(&ptp->pincfg_mux);
 >>>>>>> v3.18
@@ -215,6 +225,10 @@ struct ptp_clock *ptp_clock_register(struct ptp_clock_info *info,
 	spin_lock_init(&ptp->tsevq.lock);
 	mutex_init(&ptp->tsevq_mux);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_init(&ptp->pincfg_mux);
+>>>>>>> v3.18
 =======
 	mutex_init(&ptp->pincfg_mux);
 >>>>>>> v3.18
@@ -265,6 +279,10 @@ no_sysfs:
 no_device:
 	mutex_destroy(&ptp->tsevq_mux);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_destroy(&ptp->pincfg_mux);
+>>>>>>> v3.18
 =======
 	mutex_destroy(&ptp->pincfg_mux);
 >>>>>>> v3.18
@@ -325,7 +343,10 @@ int ptp_clock_index(struct ptp_clock *ptp)
 EXPORT_SYMBOL(ptp_clock_index);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ptp_find_pin(struct ptp_clock *ptp,
 		 enum ptp_pin_function func, unsigned int chan)
 {
@@ -346,6 +367,9 @@ int ptp_find_pin(struct ptp_clock *ptp,
 }
 EXPORT_SYMBOL(ptp_find_pin);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* module operations */
 
@@ -373,7 +397,11 @@ static int __init ptp_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ptp_class->dev_attrs = ptp_dev_attrs;
+=======
+	ptp_class->dev_groups = ptp_groups;
+>>>>>>> v3.18
 =======
 	ptp_class->dev_groups = ptp_groups;
 >>>>>>> v3.18

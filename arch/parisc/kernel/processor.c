@@ -74,7 +74,11 @@ extern int update_cr16_clocksource(void);	/* from time.c */
  * FIXME: doesn't do much yet...
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -97,7 +101,11 @@ init_percpu_prof(unsigned long cpunum)
  * they have work to do.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit processor_probe(struct parisc_device *dev)
+=======
+static int processor_probe(struct parisc_device *dev)
+>>>>>>> v3.18
 =======
 static int processor_probe(struct parisc_device *dev)
 >>>>>>> v3.18
@@ -308,7 +316,11 @@ void __init collect_boot_cpu_data(void)
  * o Enable CPU profiling hooks.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit init_per_cpu(int cpunum)
+=======
+int init_per_cpu(int cpunum)
+>>>>>>> v3.18
 =======
 int init_per_cpu(int cpunum)
 >>>>>>> v3.18
@@ -384,11 +396,14 @@ show_cpuinfo (struct seq_file *m, void *v)
 		seq_printf(m, "capabilities\t:");
 		if (boot_cpu_data.pdc.capabilities & PDC_MODEL_OS32)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(m, " os32");
 		if (boot_cpu_data.pdc.capabilities & PDC_MODEL_OS64)
 			seq_printf(m, " os64");
 		seq_printf(m, "\n");
 =======
+=======
+>>>>>>> v3.18
 			seq_puts(m, " os32");
 		if (boot_cpu_data.pdc.capabilities & PDC_MODEL_OS64)
 			seq_puts(m, " os64");
@@ -406,6 +421,9 @@ show_cpuinfo (struct seq_file *m, void *v)
 			break;
 		}
 		seq_printf(m, " (0x%02lx)\n", boot_cpu_data.pdc.capabilities);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		seq_printf(m, "model\t\t: %s\n"

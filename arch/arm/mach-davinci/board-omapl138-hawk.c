@@ -14,6 +14,10 @@
 #include <linux/console.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/gpio-davinci.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/gpio-davinci.h>
 >>>>>>> v3.18
@@ -22,6 +26,10 @@
 #include <asm/mach/arch.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/common.h>
+>>>>>>> v3.18
 =======
 #include <mach/common.h>
 >>>>>>> v3.18
@@ -220,7 +228,11 @@ static int hawk_usb_ocic_notify(da8xx_ocic_handler_t handler)
 
 		error = request_irq(irq, omapl138_hawk_usb_ocic_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					IRQF_DISABLED | IRQF_TRIGGER_RISING |
+=======
+					IRQF_TRIGGER_RISING |
+>>>>>>> v3.18
 =======
 					IRQF_TRIGGER_RISING |
 >>>>>>> v3.18
@@ -299,10 +311,13 @@ usb11_setup_oc_fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct davinci_uart_config omapl138_hawk_uart_config __initdata = {
 	.enabled_uarts = 0x7,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static __init void omapl138_hawk_init(void)
@@ -310,13 +325,19 @@ static __init void omapl138_hawk_init(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	davinci_serial_init(&omapl138_hawk_uart_config);
 =======
+=======
+>>>>>>> v3.18
 	ret = da850_register_gpio();
 	if (ret)
 		pr_warn("%s: GPIO init failed: %d\n", __func__, ret);
 
 	davinci_serial_init(da8xx_serial_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	omapl138_hawk_config_emac();

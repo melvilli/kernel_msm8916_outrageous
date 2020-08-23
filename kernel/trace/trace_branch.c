@@ -38,12 +38,18 @@ probe_likely_condition(struct ftrace_branch_data *f, int val, int expect)
 	struct ring_buffer *buffer;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int pc;
 	const char *p;
 
 	if (current->trace_recursion & TRACE_BRANCH_BIT)
 		return;
 
+=======
+	int cpu, pc;
+	const char *p;
+
+>>>>>>> v3.18
 =======
 	int cpu, pc;
 	const char *p;
@@ -60,15 +66,21 @@ probe_likely_condition(struct ftrace_branch_data *f, int val, int expect)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	raw_local_irq_save(flags);
 	current->trace_recursion |= TRACE_BRANCH_BIT;
 	data = this_cpu_ptr(tr->trace_buffer.data);
 	if (atomic_read(&data->disabled))
 =======
+=======
+>>>>>>> v3.18
 	local_irq_save(flags);
 	cpu = raw_smp_processor_id();
 	data = per_cpu_ptr(tr->trace_buffer.data, cpu);
 	if (atomic_inc_return(&data->disabled) != 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 
@@ -95,6 +107,7 @@ probe_likely_condition(struct ftrace_branch_data *f, int val, int expect)
 	entry->correct = val == expect;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!filter_check_discard(call, entry, buffer, event))
 		__buffer_unlock_commit(buffer, event);
 
@@ -102,12 +115,17 @@ probe_likely_condition(struct ftrace_branch_data *f, int val, int expect)
 	current->trace_recursion &= ~TRACE_BRANCH_BIT;
 	raw_local_irq_restore(flags);
 =======
+=======
+>>>>>>> v3.18
 	if (!call_filter_check_discard(call, entry, buffer, event))
 		__buffer_unlock_commit(buffer, event);
 
  out:
 	atomic_dec(&data->disabled);
 	local_irq_restore(flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

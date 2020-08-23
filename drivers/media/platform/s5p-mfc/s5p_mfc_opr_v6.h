@@ -41,6 +41,7 @@
 #define TIGHT_CBR_MAX			10
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Definitions for shared memory compatibility */
 #define PIC_TIME_TOP_V6		S5P_FIMV_D_RET_PICTURE_TAG_TOP_V6
 #define PIC_TIME_BOT_V6		S5P_FIMV_D_RET_PICTURE_TAG_BOT_V6
@@ -48,6 +49,10 @@
 #define CROP_INFO_V_V6		S5P_FIMV_D_DISPLAY_CROP_INFO2_V6
 
 struct s5p_mfc_hw_ops *s5p_mfc_init_hw_ops_v6(void);
+=======
+struct s5p_mfc_hw_ops *s5p_mfc_init_hw_ops_v6(void);
+const struct s5p_mfc_regs *s5p_mfc_init_regs_v6_plus(struct s5p_mfc_dev *dev);
+>>>>>>> v3.18
 =======
 struct s5p_mfc_hw_ops *s5p_mfc_init_hw_ops_v6(void);
 const struct s5p_mfc_regs *s5p_mfc_init_regs_v6_plus(struct s5p_mfc_dev *dev);

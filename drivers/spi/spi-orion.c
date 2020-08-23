@@ -10,7 +10,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -21,20 +24,32 @@
 #include <linux/spi/spi.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of.h>
 #include <linux/clk.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pm_runtime.h>
 #include <linux/of.h>
 #include <linux/of_device.h>
 #include <linux/clk.h>
 #include <linux/sizes.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/unaligned.h>
 
 #define DRIVER_NAME			"orion_spi"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Runtime PM autosuspend timeout: PM is fairly light on this driver */
+#define SPI_AUTOSUSPEND_TIMEOUT		200
+
+>>>>>>> v3.18
 =======
 /* Runtime PM autosuspend timeout: PM is fairly light on this driver */
 #define SPI_AUTOSUSPEND_TIMEOUT		200
@@ -54,6 +69,7 @@
 #define ORION_SPI_IF_8_16_BIT_MODE	(1 << 5)
 #define ORION_SPI_CLK_PRESCALE_MASK	0x1F
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ORION_SPI_MODE_MASK		(ORION_SPI_MODE_CPOL | \
 					 ORION_SPI_MODE_CPHA)
 
@@ -64,6 +80,8 @@ struct orion_spi {
 	unsigned int		min_speed;
 	struct clk              *clk;
 =======
+=======
+>>>>>>> v3.18
 #define ARMADA_SPI_CLK_PRESCALE_MASK	0xDF
 #define ORION_SPI_MODE_MASK		(ORION_SPI_MODE_CPOL | \
 					 ORION_SPI_MODE_CPHA)
@@ -85,6 +103,9 @@ struct orion_spi {
 	void __iomem		*base;
 	struct clk              *clk;
 	const struct orion_spi_dev *devdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -116,6 +137,7 @@ orion_spi_clrbits(struct orion_spi *orion_spi, u32 reg, u32 mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int orion_spi_set_transfer_size(struct orion_spi *orion_spi, int size)
 {
 	if (size == 16) {
@@ -135,6 +157,8 @@ static int orion_spi_set_transfer_size(struct orion_spi *orion_spi, int size)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int orion_spi_baudrate_set(struct spi_device *spi, unsigned int speed)
 {
 	u32 tclk_hz;
@@ -142,6 +166,7 @@ static int orion_spi_baudrate_set(struct spi_device *spi, unsigned int speed)
 	u32 prescale;
 	u32 reg;
 	struct orion_spi *orion_spi;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	orion_spi = spi_master_get_devdata(spi->master);
@@ -168,6 +193,8 @@ static int orion_spi_baudrate_set(struct spi_device *spi, unsigned int speed)
 	reg = readl(spi_reg(orion_spi, ORION_SPI_IF_CONFIG_REG));
 	reg = ((reg & ~ORION_SPI_CLK_PRESCALE_MASK) | prescale);
 =======
+=======
+>>>>>>> v3.18
 	const struct orion_spi_dev *devdata;
 
 	orion_spi = spi_master_get_devdata(spi->master);
@@ -228,6 +255,9 @@ static int orion_spi_baudrate_set(struct spi_device *spi, unsigned int speed)
 
 	reg = readl(spi_reg(orion_spi, ORION_SPI_IF_CONFIG_REG));
 	reg = ((reg & ~devdata->prescale_mask) | prescale);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel(reg, spi_reg(orion_spi, ORION_SPI_IF_CONFIG_REG));
 
@@ -277,8 +307,11 @@ orion_spi_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return orion_spi_set_transfer_size(orion_spi, bits_per_word);
 =======
+=======
+>>>>>>> v3.18
 	if (bits_per_word == 16)
 		orion_spi_setbits(orion_spi, ORION_SPI_IF_CONFIG_REG,
 				  ORION_SPI_IF_8_16_BIT_MODE);
@@ -287,6 +320,9 @@ orion_spi_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 				  ORION_SPI_IF_8_16_BIT_MODE);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -306,8 +342,13 @@ static inline int orion_spi_wait_till_ready(struct orion_spi *orion_spi)
 		if (readl(spi_reg(orion_spi, ORION_SPI_INT_CAUSE_REG)))
 			return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else
 			udelay(1);
+=======
+
+		udelay(1);
+>>>>>>> v3.18
 =======
 
 		udelay(1);
@@ -383,11 +424,17 @@ static unsigned int
 orion_spi_write_read(struct spi_device *spi, struct spi_transfer *xfer)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct orion_spi *orion_spi;
 	unsigned int count;
 	int word_len;
 
 	orion_spi = spi_master_get_devdata(spi->master);
+=======
+	unsigned int count;
+	int word_len;
+
+>>>>>>> v3.18
 =======
 	unsigned int count;
 	int word_len;
@@ -421,7 +468,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int orion_spi_transfer_one_message(struct spi_master *master,
@@ -441,6 +491,7 @@ static int orion_spi_transfer_one_message(struct spi_master *master,
 		goto msg_done;
 
 	list_for_each_entry(t, &m->transfers, transfer_list) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* make sure buffer length is even when working in 16
 		 * bit mode*/
@@ -463,6 +514,8 @@ static int orion_spi_transfer_one_message(struct spi_master *master,
 			goto msg_done;
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (par_override || t->speed_hz || t->bits_per_word) {
@@ -510,6 +563,7 @@ static int orion_spi_reset(struct orion_spi *orion_spi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int orion_spi_setup(struct spi_device *spi)
 {
 	struct orion_spi *orion_spi;
@@ -535,6 +589,8 @@ static int orion_spi_setup(struct spi_device *spi)
 static int orion_spi_probe(struct platform_device *pdev)
 {
 =======
+=======
+>>>>>>> v3.18
 static const struct orion_spi_dev orion_spi_dev_data = {
 	.typ = ORION_SPI,
 	.min_divisor = 4,
@@ -560,6 +616,9 @@ static int orion_spi_probe(struct platform_device *pdev)
 {
 	const struct of_device_id *of_id;
 	const struct orion_spi_dev *devdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct spi_master *master;
 	struct orion_spi *spi;
@@ -568,7 +627,11 @@ static int orion_spi_probe(struct platform_device *pdev)
 	int status = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master = spi_alloc_master(&pdev->dev, sizeof *spi);
+=======
+	master = spi_alloc_master(&pdev->dev, sizeof(*spi));
+>>>>>>> v3.18
 =======
 	master = spi_alloc_master(&pdev->dev, sizeof(*spi));
 >>>>>>> v3.18
@@ -582,6 +645,10 @@ static int orion_spi_probe(struct platform_device *pdev)
 	if (pdev->dev.of_node) {
 		u32 cell_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -594,37 +661,50 @@ static int orion_spi_probe(struct platform_device *pdev)
 	master->mode_bits = SPI_CPHA | SPI_CPOL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master->setup = orion_spi_setup;
 	master->transfer_one_message = orion_spi_transfer_one_message;
 	master->num_chipselect = ORION_NUM_CHIPSELECTS;
 
 	dev_set_drvdata(&pdev->dev, master);
 =======
+=======
+>>>>>>> v3.18
 	master->transfer_one_message = orion_spi_transfer_one_message;
 	master->num_chipselect = ORION_NUM_CHIPSELECTS;
 	master->bits_per_word_mask = SPI_BPW_MASK(8) | SPI_BPW_MASK(16);
 	master->auto_runtime_pm = true;
 
 	platform_set_drvdata(pdev, master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spi = spi_master_get_devdata(master);
 	spi->master = master;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi->clk = clk_get(&pdev->dev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	of_id = of_match_device(orion_spi_of_match_table, &pdev->dev);
 	devdata = (of_id) ? of_id->data : &orion_spi_dev_data;
 	spi->devdata = devdata;
 
 	spi->clk = devm_clk_get(&pdev->dev, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(spi->clk)) {
 		status = PTR_ERR(spi->clk);
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk_prepare(spi->clk);
 	clk_enable(spi->clk);
@@ -648,6 +728,8 @@ static int orion_spi_probe(struct platform_device *pdev)
 	if (orion_spi_reset(spi) < 0)
 		goto out_rel_mem;
 =======
+=======
+>>>>>>> v3.18
 	status = clk_prepare_enable(spi->clk);
 	if (status)
 		goto out;
@@ -674,11 +756,15 @@ static int orion_spi_probe(struct platform_device *pdev)
 
 	pm_runtime_mark_last_busy(&pdev->dev);
 	pm_runtime_put_autosuspend(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	master->dev.of_node = pdev->dev.of_node;
 	status = spi_register_master(master);
 	if (status < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out_rel_mem;
 
@@ -690,6 +776,8 @@ out_rel_clk:
 	clk_disable_unprepare(spi->clk);
 	clk_put(spi->clk);
 =======
+=======
+>>>>>>> v3.18
 		goto out_rel_pm;
 
 	return status;
@@ -698,6 +786,9 @@ out_rel_pm:
 	pm_runtime_disable(&pdev->dev);
 out_rel_clk:
 	clk_disable_unprepare(spi->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	spi_master_put(master);
@@ -707,6 +798,7 @@ out:
 
 static int orion_spi_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct spi_master *master;
 	struct resource *r;
@@ -723,6 +815,8 @@ static int orion_spi_remove(struct platform_device *pdev)
 
 	spi_unregister_master(master);
 =======
+=======
+>>>>>>> v3.18
 	struct spi_master *master = platform_get_drvdata(pdev);
 	struct orion_spi *spi = spi_master_get_devdata(master);
 
@@ -731,6 +825,9 @@ static int orion_spi_remove(struct platform_device *pdev)
 
 	spi_unregister_master(master);
 	pm_runtime_disable(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -739,12 +836,15 @@ static int orion_spi_remove(struct platform_device *pdev)
 MODULE_ALIAS("platform:" DRIVER_NAME);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id orion_spi_of_match_table[] = {
 	{ .compatible = "marvell,orion-spi", },
 	{}
 };
 MODULE_DEVICE_TABLE(of, orion_spi_of_match_table);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_RUNTIME
 static int orion_spi_runtime_suspend(struct device *dev)
 {
@@ -769,6 +869,9 @@ static const struct dev_pm_ops orion_spi_pm_ops = {
 			   orion_spi_runtime_resume,
 			   NULL)
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct platform_driver orion_spi_driver = {
@@ -776,6 +879,10 @@ static struct platform_driver orion_spi_driver = {
 		.name	= DRIVER_NAME,
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm	= &orion_spi_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm	= &orion_spi_pm_ops,
 >>>>>>> v3.18

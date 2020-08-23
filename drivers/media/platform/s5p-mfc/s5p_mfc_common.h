@@ -24,7 +24,11 @@
 #include <media/videobuf2-core.h>
 #include "regs-mfc.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "regs-mfc-v6.h"
+=======
+#include "regs-mfc-v8.h"
+>>>>>>> v3.18
 =======
 #include "regs-mfc-v8.h"
 >>>>>>> v3.18
@@ -34,7 +38,11 @@
 /* Offset base used to differentiate between CAPTURE and OUTPUT
 *  while mmaping */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DST_QUEUE_OFF_BASE	(1 << 30)
+=======
+#define DST_QUEUE_OFF_BASE      (TASK_SIZE / 2)
+>>>>>>> v3.18
 =======
 #define DST_QUEUE_OFF_BASE      (TASK_SIZE / 2)
 >>>>>>> v3.18
@@ -47,6 +55,11 @@
 #define MFC_BASE_ALIGN_ORDER	17
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MFC_FW_MAX_VERSIONS	2
+
+>>>>>>> v3.18
 =======
 #define MFC_FW_MAX_VERSIONS	2
 
@@ -78,7 +91,11 @@ static inline dma_addr_t s5p_mfc_mem_cookie(void *a, void *b)
 #define MFC_ENC_OUT_PLANE_COUNT	2
 #define STUFF_BYTE		4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MFC_MAX_CTRLS		70
+=======
+#define MFC_MAX_CTRLS		77
+>>>>>>> v3.18
 =======
 #define MFC_MAX_CTRLS		77
 >>>>>>> v3.18
@@ -98,6 +115,10 @@ static inline dma_addr_t s5p_mfc_mem_cookie(void *a, void *b)
 #define S5P_MFC_CODEC_MPEG4_ENC		22
 #define S5P_MFC_CODEC_H263_ENC		23
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define S5P_MFC_CODEC_VP8_ENC		24
+>>>>>>> v3.18
 =======
 #define S5P_MFC_CODEC_VP8_ENC		24
 >>>>>>> v3.18
@@ -184,12 +205,18 @@ enum s5p_mfc_decode_arg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum s5p_mfc_fw_ver {
 	MFC_FW_V1,
 	MFC_FW_V2,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MFC_BUF_FLAG_USED	(1 << 0)
 #define MFC_BUF_FLAG_EOS	(1 << 1)
@@ -251,14 +278,20 @@ struct s5p_mfc_variant {
 	unsigned int version;
 	unsigned int port_num;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct s5p_mfc_buf_size *buf_size;
 	struct s5p_mfc_buf_align *buf_align;
 	char	*fw_name;
 =======
+=======
+>>>>>>> v3.18
 	u32 version_bit;
 	struct s5p_mfc_buf_size *buf_size;
 	struct s5p_mfc_buf_align *buf_align;
 	char	*fw_name[MFC_FW_MAX_VERSIONS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -322,6 +355,10 @@ struct s5p_mfc_priv_buf {
  * @mfc_ops:		ops structure holding HW operation function pointers
  * @mfc_cmds:		cmd structure holding HW commands function pointers
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @fw_ver:		loaded firmware sub-version
+>>>>>>> v3.18
 =======
  * @fw_ver:		loaded firmware sub-version
 >>>>>>> v3.18
@@ -369,6 +406,11 @@ struct s5p_mfc_dev {
 	struct s5p_mfc_hw_ops *mfc_ops;
 	struct s5p_mfc_hw_cmds *mfc_cmds;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const struct s5p_mfc_regs *mfc_regs;
+	enum s5p_mfc_fw_ver fw_ver;
+>>>>>>> v3.18
 =======
 	const struct s5p_mfc_regs *mfc_regs;
 	enum s5p_mfc_fw_ver fw_ver;
@@ -445,7 +487,10 @@ struct s5p_mfc_mpeg4_enc_params {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct s5p_mfc_vp8_enc_params - encoding parameters for vp8
  */
 struct s5p_mfc_vp8_enc_params {
@@ -466,6 +511,9 @@ struct s5p_mfc_vp8_enc_params {
 };
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * struct s5p_mfc_enc_params - general encoding parameters
  */
@@ -473,6 +521,11 @@ struct s5p_mfc_enc_params {
 	u16 width;
 	u16 height;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 mv_h_range;
+	u32 mv_v_range;
+>>>>>>> v3.18
 =======
 	u32 mv_h_range;
 	u32 mv_v_range;
@@ -506,6 +559,10 @@ struct s5p_mfc_enc_params {
 		struct s5p_mfc_h264_enc_params h264;
 		struct s5p_mfc_mpeg4_enc_params mpeg4;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct s5p_mfc_vp8_enc_params vp8;
+>>>>>>> v3.18
 =======
 		struct s5p_mfc_vp8_enc_params vp8;
 >>>>>>> v3.18
@@ -716,6 +773,10 @@ struct s5p_mfc_fmt {
 	enum s5p_mfc_fmt_type type;
 	u32 num_planes;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 versions;
+>>>>>>> v3.18
 =======
 	u32 versions;
 >>>>>>> v3.18
@@ -744,13 +805,19 @@ struct mfc_control {
 	((f && f->op) ? f->op(args) : -ENODEV)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define s5p_mfc_hw_call_void(f, op, args...) \
 do { \
 	if (f && f->op) \
 		f->op(args); \
 } while (0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define fh_to_ctx(__fh) container_of(__fh, struct s5p_mfc_ctx, fh)
 #define ctrl_to_ctx(__ctrl) \
@@ -765,8 +832,11 @@ void set_work_bit_irqsave(struct s5p_mfc_ctx *ctx);
 				(dev->variant->port_num ? 1 : 0) : 0) : 0)
 #define IS_TWOPORT(dev)		(dev->variant->port_num == 2 ? 1 : 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IS_MFCV6(dev)		(dev->variant->version >= 0x60 ? 1 : 0)
 =======
+=======
+>>>>>>> v3.18
 #define IS_MFCV6_PLUS(dev)	(dev->variant->version >= 0x60 ? 1 : 0)
 #define IS_MFCV7_PLUS(dev)	(dev->variant->version >= 0x70 ? 1 : 0)
 #define IS_MFCV8(dev)		(dev->variant->version >= 0x80 ? 1 : 0)
@@ -776,6 +846,9 @@ void set_work_bit_irqsave(struct s5p_mfc_ctx *ctx);
 #define MFC_V7_BIT	BIT(2)
 #define MFC_V8_BIT	BIT(3)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* S5P_MFC_COMMON_H_ */

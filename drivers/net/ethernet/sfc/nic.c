@@ -1,5 +1,6 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2006-2011 Solarflare Communications Inc.
@@ -1379,6 +1380,35 @@ out:
 	channel->eventq_read_ptr = read_ptr;
 	return spent;
 =======
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2006-2013 Solarflare Communications Inc.
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published
+ * by the Free Software Foundation, incorporated herein by reference.
+ */
+
+#include <linux/bitops.h>
+#include <linux/delay.h>
+#include <linux/interrupt.h>
+#include <linux/pci.h>
+#include <linux/module.h>
+#include <linux/seq_file.h>
+#include <linux/cpu_rmap.h>
+#include "net_driver.h"
+#include "bitfield.h"
+#include "efx.h"
+#include "nic.h"
+#include "ef10_regs.h"
+#include "farch_regs.h"
+#include "io.h"
+#include "workarounds.h"
+
+/**************************************************************************
+ *
+>>>>>>> v3.18
  * Generic buffer handling
  * These buffers are used for interrupt status, MAC stats, etc.
  *
@@ -1402,6 +1432,9 @@ void efx_nic_free_buffer(struct efx_nic *efx, struct efx_buffer *buffer)
 				  buffer->addr, buffer->dma_addr);
 		buffer->addr = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1413,6 +1446,7 @@ bool efx_nic_event_present(struct efx_channel *channel)
 	return efx_event_present(efx_event(channel, channel->eventq_read_ptr));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Allocate buffer table entries for event queue */
 int efx_nic_probe_eventq(struct efx_channel *channel)
@@ -1485,10 +1519,13 @@ void efx_nic_remove_eventq(struct efx_channel *channel)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void efx_nic_event_test_start(struct efx_channel *channel)
 {
 	channel->event_test_cpu = -1;
 	smp_wmb();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	efx_magic_event(channel, EFX_CHANNEL_MAGIC_TEST(channel));
 }
@@ -1543,10 +1580,16 @@ void efx_nic_disable_interrupts(struct efx_nic *efx)
 }
 
 >>>>>>> v3.18
+=======
+	channel->efx->type->ev_test_generate(channel);
+}
+
+>>>>>>> v3.18
 void efx_nic_irq_test_start(struct efx_nic *efx)
 {
 	efx->last_irq_cpu = -1;
 	smp_wmb();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	efx_nic_interrupts(efx, true, true);
 }
@@ -1733,6 +1776,9 @@ void efx_nic_push_rx_indir_table(struct efx_nic *efx)
 =======
 	efx->type->irq_test_generate(efx);
 >>>>>>> v3.18
+=======
+	efx->type->irq_test_generate(efx);
+>>>>>>> v3.18
 }
 
 /* Hook interrupt handler(s)
@@ -1741,6 +1787,7 @@ void efx_nic_push_rx_indir_table(struct efx_nic *efx)
 int efx_nic_init_interrupt(struct efx_nic *efx)
 {
 	struct efx_channel *channel;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int rc;
 
@@ -1753,12 +1800,17 @@ int efx_nic_init_interrupt(struct efx_nic *efx)
 
 		rc = request_irq(efx->legacy_irq, handler, IRQF_SHARED,
 =======
+=======
+>>>>>>> v3.18
 	unsigned int n_irqs;
 	int rc;
 
 	if (!EFX_INT_MODE_USE_MSI(efx)) {
 		rc = request_irq(efx->legacy_irq,
 				 efx->type->irq_handle_legacy, IRQF_SHARED,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 efx->name, efx);
 		if (rc) {
@@ -1771,6 +1823,7 @@ int efx_nic_init_interrupt(struct efx_nic *efx)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Hook MSI or MSI-X interrupt */
 	efx_for_each_channel(channel, efx) {
 		rc = request_irq(channel->irq, efx_msi_interrupt,
@@ -1778,6 +1831,8 @@ int efx_nic_init_interrupt(struct efx_nic *efx)
 				 efx->channel_name[channel->channel],
 				 &efx->channel[channel->channel]);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RFS_ACCEL
 	if (efx->interrupt_mode == EFX_INT_MODE_MSIX) {
 		efx->net_dev->rx_cpu_rmap =
@@ -1796,6 +1851,9 @@ int efx_nic_init_interrupt(struct efx_nic *efx)
 				 IRQF_PROBE_SHARED, /* Not shared */
 				 efx->msi_context[channel->channel].name,
 				 &efx->msi_context[channel->channel]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rc) {
 			netif_err(efx, drv, efx->net_dev,
@@ -1803,7 +1861,10 @@ int efx_nic_init_interrupt(struct efx_nic *efx)
 			goto fail2;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		++n_irqs;
 
 #ifdef CONFIG_RFS_ACCEL
@@ -1815,6 +1876,9 @@ int efx_nic_init_interrupt(struct efx_nic *efx)
 				goto fail2;
 		}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1822,9 +1886,12 @@ int efx_nic_init_interrupt(struct efx_nic *efx)
 
  fail2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	efx_for_each_channel(channel, efx)
 		free_irq(channel->irq, &efx->channel[channel->channel]);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RFS_ACCEL
 	free_irq_cpu_rmap(efx->net_dev->rx_cpu_rmap);
 	efx->net_dev->rx_cpu_rmap = NULL;
@@ -1834,6 +1901,9 @@ int efx_nic_init_interrupt(struct efx_nic *efx)
 			break;
 		free_irq(channel->irq, &efx->msi_context[channel->channel]);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  fail1:
 	return rc;
@@ -1842,6 +1912,7 @@ int efx_nic_init_interrupt(struct efx_nic *efx)
 void efx_nic_fini_interrupt(struct efx_nic *efx)
 {
 	struct efx_channel *channel;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	efx_oword_t reg;
 
@@ -2008,6 +2079,8 @@ void efx_nic_init_common(struct efx_nic *efx)
 				     FFE_BZ_TX_PACE_RESERVED);
 		efx_writeo(efx, &temp, FR_BZ_TX_PACE);
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_RFS_ACCEL
 	free_irq_cpu_rmap(efx->net_dev->rx_cpu_rmap);
@@ -2022,12 +2095,16 @@ void efx_nic_init_common(struct efx_nic *efx)
 	} else {
 		/* Disable legacy interrupt */
 		free_irq(efx->legacy_irq, efx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 
 /* Register dump */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define REGISTER_REVISION_A	1
 #define REGISTER_REVISION_B	2
@@ -2050,6 +2127,8 @@ struct efx_nic_reg {
 #define REGISTER_BZ(name) REGISTER(name, B, Z)
 #define REGISTER_CZ(name) REGISTER(name, C, Z)
 =======
+=======
+>>>>>>> v3.18
 #define REGISTER_REVISION_FA	1
 #define REGISTER_REVISION_FB	2
 #define REGISTER_REVISION_FC	3
@@ -2074,6 +2153,9 @@ struct efx_nic_reg {
 #define REGISTER_BZ(name) REGISTER(name, F, B, Z)
 #define REGISTER_CZ(name) REGISTER(name, F, C, Z)
 #define REGISTER_DZ(name) REGISTER(name, E, D, Z)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct efx_nic_reg efx_nic_regs[] = {
@@ -2182,6 +2264,12 @@ static const struct efx_nic_reg efx_nic_regs[] = {
 	/* XX_PRBS_CTL, XX_PRBS_CHK and XX_PRBS_ERR are not used */
 	/* XX_CORE_STAT is partly RC */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	REGISTER_DZ(BIU_HW_REV_ID),
+	REGISTER_DZ(MC_DB_LWRD),
+	REGISTER_DZ(MC_DB_HWRD),
+>>>>>>> v3.18
 =======
 	REGISTER_DZ(BIU_HW_REV_ID),
 	REGISTER_DZ(MC_DB_LWRD),
@@ -2191,6 +2279,7 @@ static const struct efx_nic_reg efx_nic_regs[] = {
 
 struct efx_nic_reg_table {
 	u32 offset:24;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 min_revision:2, max_revision:2;
 	u32 step:6, rows:21;
@@ -2220,6 +2309,8 @@ struct efx_nic_reg_table {
 				  FR_CZ_ ## name ## _ROWS)
 #define REGISTER_TABLE_CZ(name) REGISTER_TABLE(name, C, Z)
 =======
+=======
+>>>>>>> v3.18
 	u32 min_revision:3, max_revision:3;
 	u32 step:6, rows:21;
 };
@@ -2249,6 +2340,9 @@ struct efx_nic_reg_table {
 				  FR_CZ_ ## name ## _ROWS)
 #define REGISTER_TABLE_CZ(name) REGISTER_TABLE(name, F, C, Z)
 #define REGISTER_TABLE_DZ(name) REGISTER_TABLE(name, E, D, Z)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct efx_nic_reg_table efx_nic_reg_tables[] = {
@@ -2268,9 +2362,15 @@ static const struct efx_nic_reg_table efx_nic_reg_tables[] = {
 	 * size before we need to change the version. */
 	REGISTER_TABLE_DIMENSIONS(BUF_FULL_TBL_KER, FR_AA_BUF_FULL_TBL_KER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  A, A, 8, 1024),
 	REGISTER_TABLE_DIMENSIONS(BUF_FULL_TBL, FR_BZ_BUF_FULL_TBL,
 				  B, Z, 8, 1024),
+=======
+				  F, A, A, 8, 1024),
+	REGISTER_TABLE_DIMENSIONS(BUF_FULL_TBL, FR_BZ_BUF_FULL_TBL,
+				  F, B, Z, 8, 1024),
+>>>>>>> v3.18
 =======
 				  F, A, A, 8, 1024),
 	REGISTER_TABLE_DIMENSIONS(BUF_FULL_TBL, FR_BZ_BUF_FULL_TBL,
@@ -2287,6 +2387,10 @@ static const struct efx_nic_reg_table efx_nic_reg_tables[] = {
 	/* SRM_DBG is not mapped (and is redundant with BUF_FLL_TBL) */
 	REGISTER_TABLE_BZ(RX_FILTER_TBL0),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	REGISTER_TABLE_DZ(BIU_MC_SFT_STATUS),
+>>>>>>> v3.18
 =======
 	REGISTER_TABLE_DZ(BIU_MC_SFT_STATUS),
 >>>>>>> v3.18
@@ -2366,7 +2470,10 @@ void efx_nic_get_regs(struct efx_nic *efx, void *buf)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * efx_nic_describe_stats - Describe supported statistics for ethtool
@@ -2458,4 +2565,7 @@ void efx_nic_fix_nodesc_drop_stat(struct efx_nic *efx, u64 *rx_nodesc_drops)
 	efx->rx_nodesc_drops_prev_state = !!(efx->net_dev->flags & IFF_UP);
 	*rx_nodesc_drops -= efx->rx_nodesc_drops_while_down;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

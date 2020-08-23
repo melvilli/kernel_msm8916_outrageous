@@ -27,6 +27,10 @@
 #include <media/v4l2-ctrls.h>
 #include "radio-isa.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "lm7000.h"
+>>>>>>> v3.18
 =======
 #include "lm7000.h"
 >>>>>>> v3.18
@@ -59,6 +63,7 @@ struct aztech {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void send_0_byte(struct aztech *az)
 {
 	udelay(radio_wait_time);
@@ -72,6 +77,8 @@ static void send_1_byte(struct aztech *az)
 	outb_p(128 + 2 + az->curvol, az->isa.io);
 	outb_p(128 + 64 + 2 + az->curvol, az->isa.io);
 =======
+=======
+>>>>>>> v3.18
 /* bit definitions for register read */
 #define AZTECH_BIT_NOT_TUNED	(1 << 0)
 #define AZTECH_BIT_MONO		(1 << 1)
@@ -95,6 +102,9 @@ static void aztech_set_pins(void *handle, u8 pins)
 		bits |= AZTECH_BIT_TUN_CE;
 
 	outb_p(bits, az->isa.io);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -107,6 +117,7 @@ static struct radio_isa_card *aztech_alloc(void)
 
 static int aztech_s_frequency(struct radio_isa_card *isa, u32 freq)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct aztech *az = container_of(isa, struct aztech, isa);
 	int  i;
@@ -144,10 +155,14 @@ static int aztech_s_frequency(struct radio_isa_card *isa, u32 freq)
 =======
 	lm7000_set_freq(freq, isa, aztech_set_pins);
 >>>>>>> v3.18
+=======
+	lm7000_set_freq(freq, isa, aztech_set_pins);
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* thanks to Michael Dwyer for giving me a dose of clues in
  * the signal strength department..
@@ -162,14 +177,25 @@ static u32 aztech_g_rxsubchans(struct radio_isa_card *isa)
 {
 	if (inb(isa->io) & AZTECH_BIT_MONO)
 >>>>>>> v3.18
+=======
+static u32 aztech_g_rxsubchans(struct radio_isa_card *isa)
+{
+	if (inb(isa->io) & AZTECH_BIT_MONO)
+>>>>>>> v3.18
 		return V4L2_TUNER_SUB_MONO;
 	return V4L2_TUNER_SUB_STEREO;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int aztech_s_stereo(struct radio_isa_card *isa, bool stereo)
 {
 	return aztech_s_frequency(isa, isa->freq);
+=======
+static u32 aztech_g_signal(struct radio_isa_card *isa)
+{
+	return (inb(isa->io) & AZTECH_BIT_NOT_TUNED) ? 0 : 0xffff;
+>>>>>>> v3.18
 =======
 static u32 aztech_g_signal(struct radio_isa_card *isa)
 {
@@ -193,8 +219,13 @@ static const struct radio_isa_ops aztech_ops = {
 	.s_mute_volume = aztech_s_mute_volume,
 	.s_frequency = aztech_s_frequency,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.s_stereo = aztech_s_stereo,
 	.g_rxsubchans = aztech_g_rxsubchans,
+=======
+	.g_rxsubchans = aztech_g_rxsubchans,
+	.g_signal = aztech_g_signal,
+>>>>>>> v3.18
 =======
 	.g_rxsubchans = aztech_g_rxsubchans,
 	.g_signal = aztech_g_signal,
@@ -217,7 +248,11 @@ static struct radio_isa_driver aztech_driver = {
 	.io_ports = aztech_ioports,
 	.num_of_io_ports = ARRAY_SIZE(aztech_ioports),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.region_size = 2,
+=======
+	.region_size = 8,
+>>>>>>> v3.18
 =======
 	.region_size = 8,
 >>>>>>> v3.18

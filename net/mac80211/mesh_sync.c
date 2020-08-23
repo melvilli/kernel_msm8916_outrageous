@@ -93,6 +93,7 @@ static void mesh_sync_offset_rx_bcn_presp(struct ieee80211_sub_if_data *sdata,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The current tsf is a first approximation for the timestamp
 	 * for the received beacon.  Further down we try to get a
 	 * better value from the rx_status->mactime field if
@@ -100,6 +101,8 @@ static void mesh_sync_offset_rx_bcn_presp(struct ieee80211_sub_if_data *sdata,
 	 * entering the rcu-read section.*/
 	t_r = drv_get_tsf(local, sdata);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Get time when timestamp field was received.  If we don't
 	 * have rx timestamps, then use current tsf as an approximation.
@@ -114,6 +117,9 @@ static void mesh_sync_offset_rx_bcn_presp(struct ieee80211_sub_if_data *sdata,
 						       24);
 	else
 		t_r = drv_get_tsf(local, sdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rcu_read_lock();
@@ -135,6 +141,7 @@ static void mesh_sync_offset_rx_bcn_presp(struct ieee80211_sub_if_data *sdata,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ieee80211_have_rx_timestamp(rx_status))
 		/* time when timestamp field was received */
 		t_r = ieee80211_calculate_rx_timestamp(local, rx_status,
@@ -143,6 +150,8 @@ static void mesh_sync_offset_rx_bcn_presp(struct ieee80211_sub_if_data *sdata,
 						       FCS_LEN,
 						       24);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Timing offset calculation (see 13.13.2.2.2) */
@@ -185,6 +194,7 @@ no_sync:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mesh_sync_offset_adjust_tbtt(struct ieee80211_sub_if_data *sdata)
 {
 	struct ieee80211_if_mesh *ifmsh = &sdata->u.mesh;
@@ -192,6 +202,8 @@ static void mesh_sync_offset_adjust_tbtt(struct ieee80211_sub_if_data *sdata)
 	WARN_ON(ifmsh->mesh_sp_id != IEEE80211_SYNC_METHOD_NEIGHBOR_OFFSET);
 	BUG_ON(!rcu_read_lock_held());
 =======
+=======
+>>>>>>> v3.18
 static void mesh_sync_offset_adjust_tbtt(struct ieee80211_sub_if_data *sdata,
 					 struct beacon_data *beacon)
 {
@@ -201,6 +213,9 @@ static void mesh_sync_offset_adjust_tbtt(struct ieee80211_sub_if_data *sdata,
 	WARN_ON(ifmsh->mesh_sp_id != IEEE80211_SYNC_METHOD_NEIGHBOR_OFFSET);
 	WARN_ON(!rcu_read_lock_held());
 	cap = beacon->meshconf->meshconf_cap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_bh(&ifmsh->sync_offset_lock);
@@ -227,11 +242,17 @@ static void mesh_sync_offset_adjust_tbtt(struct ieee80211_sub_if_data *sdata,
 	}
 	spin_unlock_bh(&ifmsh->sync_offset_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	beacon->meshconf->meshconf_cap = ifmsh->adjusting_tbtt ?
 			IEEE80211_MESHCONF_CAPAB_TBTT_ADJUSTING | cap :
 			~IEEE80211_MESHCONF_CAPAB_TBTT_ADJUSTING & cap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

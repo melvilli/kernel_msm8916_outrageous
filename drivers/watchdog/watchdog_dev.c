@@ -470,13 +470,19 @@ static int watchdog_release(struct inode *inode, struct file *file)
 	 * watchdog_stop will fail.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_and_clear_bit(WDOG_ALLOW_RELEASE, &wdd->status) ||
 	    !(wdd->info->options & WDIOF_MAGICCLOSE))
 =======
+=======
+>>>>>>> v3.18
 	if (!test_bit(WDOG_ACTIVE, &wdd->status))
 		err = 0;
 	else if (test_and_clear_bit(WDOG_ALLOW_RELEASE, &wdd->status) ||
 		 !(wdd->info->options & WDIOF_MAGICCLOSE))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = watchdog_stop(wdd);
 

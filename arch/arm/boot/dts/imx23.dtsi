@@ -10,7 +10,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
+=======
+#include "skeleton.dtsi"
+#include "imx23-pinfunc.h"
+>>>>>>> v3.18
 =======
 #include "skeleton.dtsi"
 #include "imx23-pinfunc.h"
@@ -26,6 +31,12 @@
 		serial0 = &auart0;
 		serial1 = &auart1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		spi0 = &ssp0;
+		spi1 = &ssp1;
+		usbphy0 = &usbphy0;
+>>>>>>> v3.18
 =======
 		spi0 = &ssp0;
 		spi1 = &ssp1;
@@ -88,8 +99,13 @@
 				reg = <0x8000c000 0x2000>, <0x8000a000 0x2000>;
 				reg-names = "gpmi-nand", "bch";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <13>, <56>;
 				interrupt-names = "gpmi-dma", "bch";
+=======
+				interrupts = <56>;
+				interrupt-names = "bch";
+>>>>>>> v3.18
 =======
 				interrupts = <56>;
 				interrupt-names = "bch";
@@ -99,7 +115,10 @@
 				dmas = <&dma_apbh 4>;
 				dma-names = "rx-tx";
 <<<<<<< HEAD
+<<<<<<< HEAD
 				fsl,gpmi-dma-channel = <4>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				status = "disabled";
@@ -108,16 +127,22 @@
 			ssp0: ssp@80010000 {
 				reg = <0x80010000 0x2000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <15 14>;
 				clocks = <&clks 33>;
 				dmas = <&dma_apbh 1>;
 				dma-names = "rx-tx";
 				fsl,ssp-dma-channel = <1>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <15>;
 				clocks = <&clks 33>;
 				dmas = <&dma_apbh 1>;
 				dma-names = "rx-tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disabled";
 			};
@@ -164,6 +189,7 @@
 					reg = <0>;
 					fsl,pinmux-ids = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 						0x11a2 /* MX23_PAD_PWM0__DUART_RX */
 						0x11b2 /* MX23_PAD_PWM1__DUART_TX */
 					>;
@@ -171,18 +197,24 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_PWM0__DUART_RX
 						MX23_PAD_PWM1__DUART_TX
 					>;
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				auart0_pins_a: auart0@0 {
 					reg = <0>;
 					fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 						0x01c0 /* MX23_PAD_AUART1_RX__AUART1_RX */
 						0x01d0 /* MX23_PAD_AUART1_TX__AUART1_TX */
@@ -193,6 +225,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_AUART1_RX__AUART1_RX
 						MX23_PAD_AUART1_TX__AUART1_TX
 						MX23_PAD_AUART1_CTS__AUART1_CTS
@@ -201,12 +235,16 @@
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				auart0_2pins_a: auart0-2pins@0 {
 					reg = <0>;
 					fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 						0x01e2 /* MX23_PAD_I2C_SCL__AUART1_TX */
 						0x01f2 /* MX23_PAD_I2C_SDA__AUART1_RX */
@@ -215,18 +253,24 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_I2C_SCL__AUART1_TX
 						MX23_PAD_I2C_SDA__AUART1_RX
 					>;
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				gpmi_pins_a: gpmi-nand@0 {
 					reg = <0>;
 					fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 						0x0000 /* MX23_PAD_GPMI_D00__GPMI_D00 */
 						0x0010 /* MX23_PAD_GPMI_D01__GPMI_D01 */
@@ -250,6 +294,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_GPMI_D00__GPMI_D00
 						MX23_PAD_GPMI_D01__GPMI_D01
 						MX23_PAD_GPMI_D02__GPMI_D02
@@ -271,11 +317,15 @@
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				gpmi_pins_fixup: gpmi-pins-fixup {
 					fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 						0x0170 /* MX23_PAD_GPMI_WPN__GPMI_WPN */
 						0x0180 /* MX23_PAD_GPMI_WRN__GPMI_WRN */
@@ -283,17 +333,23 @@
 					>;
 					fsl,drive-strength = <2>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_GPMI_WPN__GPMI_WPN
 						MX23_PAD_GPMI_WRN__GPMI_WRN
 						MX23_PAD_GPMI_RDN__GPMI_RDN
 					>;
 					fsl,drive-strength = <MXS_DRIVE_12mA>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				mmc0_4bit_pins_a: mmc0-4bit@0 {
 					reg = <0>;
 					fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 						0x2020 /* MX23_PAD_SSP1_DATA0__SSP1_DATA0 */
 						0x2030 /* MX23_PAD_SSP1_DATA1__SSP1_DATA1 */
@@ -306,6 +362,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <1>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_SSP1_DATA0__SSP1_DATA0
 						MX23_PAD_SSP1_DATA1__SSP1_DATA1
 						MX23_PAD_SSP1_DATA2__SSP1_DATA2
@@ -316,12 +374,16 @@
 					fsl,drive-strength = <MXS_DRIVE_8mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_ENABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				mmc0_8bit_pins_a: mmc0-8bit@0 {
 					reg = <0>;
 					fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 						0x2020 /* MX23_PAD_SSP1_DATA0__SSP1_DATA0 */
 						0x2030 /* MX23_PAD_SSP1_DATA1__SSP1_DATA1 */
@@ -339,6 +401,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <1>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_SSP1_DATA0__SSP1_DATA0
 						MX23_PAD_SSP1_DATA1__SSP1_DATA1
 						MX23_PAD_SSP1_DATA2__SSP1_DATA2
@@ -354,21 +418,30 @@
 					fsl,drive-strength = <MXS_DRIVE_8mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_ENABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				mmc0_pins_fixup: mmc0-pins-fixup {
 					fsl,pinmux-ids = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 						0x2010 /* MX23_PAD_SSP1_DETECT__SSP1_DETECT */
 						0x2060 /* MX23_PAD_SSP1_SCK__SSP1_SCK */
 					>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_SSP1_DETECT__SSP1_DETECT
 						MX23_PAD_SSP1_SCK__SSP1_SCK
 					>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
@@ -376,23 +449,30 @@
 					reg = <0>;
 					fsl,pinmux-ids = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 						0x11c0 /* MX23_PAD_PWM2__PWM2 */
 					>;
 					fsl,drive-strength = <0>;
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_PWM2__PWM2
 					>;
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				lcdif_24bit_pins_a: lcdif-24bit@0 {
 					reg = <0>;
 					fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 						0x1000 /* MX23_PAD_LCD_D00__LCD_D0 */
 						0x1010 /* MX23_PAD_LCD_D01__LCD_D1 */
@@ -427,6 +507,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_LCD_D00__LCD_D00
 						MX23_PAD_LCD_D01__LCD_D01
 						MX23_PAD_LCD_D02__LCD_D02
@@ -459,12 +541,16 @@
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 
 				spi2_pins_a: spi2@0 {
 					reg = <0>;
 					fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 						0x0182 /* MX23_PAD_GPMI_WRN__SSP2_SCK */
 						0x0142 /* MX23_PAD_GPMI_RDY1__SSP2_CMD */
@@ -475,6 +561,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <1>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_GPMI_WRN__SSP2_SCK
 						MX23_PAD_GPMI_RDY1__SSP2_CMD
 						MX23_PAD_GPMI_D00__SSP2_DATA0
@@ -483,6 +571,9 @@
 					fsl,drive-strength = <MXS_DRIVE_8mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_ENABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 			};
@@ -516,13 +607,19 @@
 
 			dcp@80028000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				reg = <0x80028000 0x2000>;
 				status = "disabled";
 =======
+=======
+>>>>>>> v3.18
 				compatible = "fsl,imx23-dcp";
 				reg = <0x80028000 0x2000>;
 				interrupts = <53 54>;
 				status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -553,16 +650,22 @@
 			ssp1: ssp@80034000 {
 				reg = <0x80034000 0x2000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <2 20>;
 				clocks = <&clks 33>;
 				dmas = <&dma_apbh 2>;
 				dma-names = "rx-tx";
 				fsl,ssp-dma-channel = <2>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <2>;
 				clocks = <&clks 33>;
 				dmas = <&dma_apbh 2>;
 				dma-names = "rx-tx";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disabled";
 			};
@@ -620,7 +723,11 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			lradc@80050000 {
+=======
+			lradc: lradc@80050000 {
+>>>>>>> v3.18
 =======
 			lradc: lradc@80050000 {
 >>>>>>> v3.18
@@ -629,6 +736,10 @@
 				interrupts = <36 37 38 39 40 41 42 43 44>;
 				status = "disabled";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				clocks = <&clks 26>;
+>>>>>>> v3.18
 =======
 				clocks = <&clks 26>;
 >>>>>>> v3.18
@@ -674,7 +785,11 @@
 				compatible = "fsl,imx23-auart";
 				reg = <0x8006c000 0x2000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <24 25 23>;
+=======
+				interrupts = <24>;
+>>>>>>> v3.18
 =======
 				interrupts = <24>;
 >>>>>>> v3.18
@@ -688,7 +803,11 @@
 				compatible = "fsl,imx23-auart";
 				reg = <0x8006e000 0x2000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <59 60 58>;
+=======
+				interrupts = <59>;
+>>>>>>> v3.18
 =======
 				interrupts = <59>;
 >>>>>>> v3.18
@@ -733,11 +852,17 @@
 		};
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	iio_hwmon {
 		compatible = "iio-hwmon";
 		io-channels = <&lradc 8>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

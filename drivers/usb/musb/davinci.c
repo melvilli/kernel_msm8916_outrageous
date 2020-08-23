@@ -25,7 +25,10 @@
 #include <linux/kernel.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/list.h>
@@ -37,7 +40,11 @@
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/usb/nop-usb-xceiv.h>
+=======
+#include <linux/usb/usb_phy_generic.h>
+>>>>>>> v3.18
 =======
 #include <linux/usb/usb_phy_generic.h>
 >>>>>>> v3.18
@@ -390,7 +397,10 @@ static int davinci_musb_init(struct musb *musb)
 	int 		ret = -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_nop_xceiv_register();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	musb->xceiv = usb_get_phy(USB_PHY_TYPE_USB2);
@@ -451,7 +461,11 @@ fail:
 	usb_put_phy(musb->xceiv);
 unregister:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_nop_xceiv_unregister();
+=======
+	usb_phy_generic_unregister();
+>>>>>>> v3.18
 =======
 	usb_phy_generic_unregister();
 >>>>>>> v3.18
@@ -503,7 +517,10 @@ static int davinci_musb_exit(struct musb *musb)
 
 	usb_put_phy(musb->xceiv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_nop_xceiv_unregister();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -523,6 +540,7 @@ static const struct musb_platform_ops davinci_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 davinci_dmamask = DMA_BIT_MASK(32);
 
 static int davinci_probe(struct platform_device *pdev)
@@ -531,6 +549,8 @@ static int davinci_probe(struct platform_device *pdev)
 	struct platform_device		*musb;
 	struct davinci_glue		*glue;
 =======
+=======
+>>>>>>> v3.18
 static const struct platform_device_info davinci_dev_info = {
 	.name		= "musb-hdrc",
 	.id		= PLATFORM_DEVID_AUTO,
@@ -544,13 +564,20 @@ static int davinci_probe(struct platform_device *pdev)
 	struct platform_device		*musb;
 	struct davinci_glue		*glue;
 	struct platform_device_info	pinfo;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct clk			*clk;
 
 	int				ret = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	glue = kzalloc(sizeof(*glue), GFP_KERNEL);
+=======
+	glue = devm_kzalloc(&pdev->dev, sizeof(*glue), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	glue = devm_kzalloc(&pdev->dev, sizeof(*glue), GFP_KERNEL);
 >>>>>>> v3.18
@@ -559,6 +586,7 @@ static int davinci_probe(struct platform_device *pdev)
 		goto err0;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	musb = platform_device_alloc("musb-hdrc", PLATFORM_DEVID_AUTO);
 	if (!musb) {
@@ -572,17 +600,23 @@ static int davinci_probe(struct platform_device *pdev)
 		ret = PTR_ERR(clk);
 		goto err3;
 =======
+=======
+>>>>>>> v3.18
 	clk = devm_clk_get(&pdev->dev, "usb");
 	if (IS_ERR(clk)) {
 		dev_err(&pdev->dev, "failed to get clock\n");
 		ret = PTR_ERR(clk);
 		goto err0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	ret = clk_enable(clk);
 	if (ret) {
 		dev_err(&pdev->dev, "failed to enable clock\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err4;
 	}
@@ -594,15 +628,21 @@ static int davinci_probe(struct platform_device *pdev)
 	glue->dev			= &pdev->dev;
 	glue->musb			= musb;
 =======
+=======
+>>>>>>> v3.18
 		goto err0;
 	}
 
 	glue->dev			= &pdev->dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	glue->clk			= clk;
 
 	pdata->platform_ops		= &davinci_ops;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_set_drvdata(pdev, glue);
 
@@ -624,6 +664,8 @@ static int davinci_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to register musb device\n");
 		goto err5;
 =======
+=======
+>>>>>>> v3.18
 	usb_phy_generic_register();
 	platform_set_drvdata(pdev, glue);
 
@@ -661,11 +703,15 @@ static int davinci_probe(struct platform_device *pdev)
 		ret = PTR_ERR(musb);
 		dev_err(&pdev->dev, "failed to register musb device: %d\n", ret);
 		goto err1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err5:
 	clk_disable(clk);
@@ -682,6 +728,10 @@ err1:
 err1:
 	clk_disable(clk);
 >>>>>>> v3.18
+=======
+err1:
+	clk_disable(clk);
+>>>>>>> v3.18
 
 err0:
 	return ret;
@@ -693,9 +743,14 @@ static int davinci_remove(struct platform_device *pdev)
 
 	platform_device_unregister(glue->musb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable(glue->clk);
 	clk_put(glue->clk);
 	kfree(glue);
+=======
+	usb_phy_generic_unregister();
+	clk_disable(glue->clk);
+>>>>>>> v3.18
 =======
 	usb_phy_generic_unregister();
 	clk_disable(glue->clk);

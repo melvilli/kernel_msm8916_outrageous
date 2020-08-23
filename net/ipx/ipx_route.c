@@ -21,7 +21,10 @@ DEFINE_RWLOCK(ipx_routes_lock);
 extern struct ipx_interface *ipx_internal_net;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern __be16 ipx_cksum(struct ipxhdr *packet, int length);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct ipx_interface *ipxitf_find_using_net(__be32 net);
@@ -30,9 +33,12 @@ extern int ipxitf_demux_socket(struct ipx_interface *intrfc,
 extern int ipxitf_demux_socket(struct ipx_interface *intrfc,
 			       struct sk_buff *skb, int copy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ipxitf_send(struct ipx_interface *intrfc, struct sk_buff *skb,
 		       char *node);
 extern struct ipx_interface *ipxitf_find_using_net(__be32 net);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -247,7 +253,12 @@ int ipxrtr_route_packet(struct sock *sk, struct sockaddr_ipx *usipx,
 
 	/* Apply checksum. Not allowed on 802.3 links. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sk->sk_no_check || intrfc->if_dlink_type == htons(IPX_FRAME_8023))
+=======
+	if (sk->sk_no_check_tx ||
+	    intrfc->if_dlink_type == htons(IPX_FRAME_8023))
+>>>>>>> v3.18
 =======
 	if (sk->sk_no_check_tx ||
 	    intrfc->if_dlink_type == htons(IPX_FRAME_8023))

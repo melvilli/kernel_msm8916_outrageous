@@ -179,10 +179,13 @@ struct posix_acl *jffs2_get_acl(struct inode *inode, int type)
 	int rc, xprefix;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acl = get_cached_acl(inode, type);
 	if (acl != ACL_NOT_CACHED)
 		return acl;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (type) {
@@ -210,8 +213,12 @@ struct posix_acl *jffs2_get_acl(struct inode *inode, int type)
 		acl = ERR_PTR(rc);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (value)
 		kfree(value);
+=======
+	kfree(value);
+>>>>>>> v3.18
 =======
 	kfree(value);
 >>>>>>> v3.18
@@ -240,6 +247,7 @@ static int __jffs2_set_acl(struct inode *inode, int xprefix, struct posix_acl *a
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int jffs2_set_acl(struct inode *inode, int type, struct posix_acl *acl)
 {
 	int rc, xprefix;
@@ -248,20 +256,31 @@ static int jffs2_set_acl(struct inode *inode, int type, struct posix_acl *acl)
 		return -EOPNOTSUPP;
 
 =======
+=======
+>>>>>>> v3.18
 int jffs2_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 {
 	int rc, xprefix;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (type) {
 	case ACL_TYPE_ACCESS:
 		xprefix = JFFS2_XPREFIX_ACL_ACCESS;
 		if (acl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			umode_t mode;
 
 			rc = posix_acl_update_mode(inode, &mode, &acl);
 			if (rc)
+=======
+			umode_t mode = inode->i_mode;
+			rc = posix_acl_equiv_mode(acl, &mode);
+			if (rc < 0)
+>>>>>>> v3.18
 =======
 			umode_t mode = inode->i_mode;
 			rc = posix_acl_equiv_mode(acl, &mode);
@@ -279,6 +298,11 @@ int jffs2_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 					return rc;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (rc == 0)
+				acl = NULL;
+>>>>>>> v3.18
 =======
 			if (rc == 0)
 				acl = NULL;
@@ -302,7 +326,11 @@ int jffs2_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 int jffs2_init_acl_pre(struct inode *dir_i, struct inode *inode, umode_t *i_mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct posix_acl *acl;
+=======
+	struct posix_acl *default_acl, *acl;
+>>>>>>> v3.18
 =======
 	struct posix_acl *default_acl, *acl;
 >>>>>>> v3.18
@@ -310,6 +338,7 @@ int jffs2_init_acl_pre(struct inode *dir_i, struct inode *inode, umode_t *i_mode
 
 	cache_no_acl(inode);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (S_ISLNK(*i_mode))
 		return 0;	/* Symlink always has no-ACL */
@@ -331,6 +360,8 @@ int jffs2_init_acl_pre(struct inode *dir_i, struct inode *inode, umode_t *i_mode
 			set_cached_acl(inode, ACL_TYPE_ACCESS, acl);
 
 =======
+=======
+>>>>>>> v3.18
 	rc = posix_acl_create(dir_i, i_mode, &default_acl, &acl);
 	if (rc)
 		return rc;
@@ -341,6 +372,9 @@ int jffs2_init_acl_pre(struct inode *dir_i, struct inode *inode, umode_t *i_mode
 	}
 	if (acl) {
 		set_cached_acl(inode, ACL_TYPE_ACCESS, acl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		posix_acl_release(acl);
 	}
@@ -365,6 +399,7 @@ int jffs2_init_acl_post(struct inode *inode)
 
 	return 0;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int jffs2_acl_chmod(struct inode *inode)
@@ -469,5 +504,7 @@ const struct xattr_handler jffs2_acl_default_xattr_handler = {
 	.get	= jffs2_acl_getxattr,
 	.set	= jffs2_acl_setxattr,
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

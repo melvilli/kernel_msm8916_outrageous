@@ -40,16 +40,22 @@
 #define RTL_PCI_MAX_RX_QUEUE			2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RTL_PCI_MAX_RX_COUNT			64
 #define RTL_PCI_MAX_TX_QUEUE_COUNT		9
 
 #define RT_TXDESC_NUM				128
 =======
+=======
+>>>>>>> v3.18
 #define RTL_PCI_MAX_RX_COUNT			512/*64*/
 #define RTL_PCI_MAX_TX_QUEUE_COUNT		9
 
 #define RT_TXDESC_NUM				128
 #define TX_DESC_NUM_92E				512
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RT_TXDESC_NUM_BE_QUEUE			256
 
@@ -71,13 +77,19 @@
 	.driver_data = (kernel_ulong_t)&(cfg)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define INTEL_VENDOR_ID				0x8086
 #define SIS_VENDOR_ID				0x1039
 #define ATI_VENDOR_ID				0x1002
 #define ATI_DEVICE_ID				0x7914
 #define AMD_VENDOR_ID				0x1022
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PCI_MAX_BRIDGE_NUMBER			255
 #define PCI_MAX_DEVICES				32
@@ -87,12 +99,18 @@
 #define PCI_CONF_DATA		0x0CFC	/*PCI Configuration Space Data */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PCI_CLASS_BRIDGE_DEV		0x06
 #define PCI_SUBCLASS_BR_PCI_TO_PCI	0x04
 #define PCI_CAPABILITY_ID_PCI_EXPRESS	0x10
 #define PCI_CAP_ID_EXP			0x10
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define U1DONTCARE			0xFF
 #define U2DONTCARE			0xFFFF
@@ -113,6 +131,10 @@
 #define RTL_PCI_701F_DID	0x701F
 #define RTL_PCI_DLINK_DID	0x3304
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RTL_PCI_8723AE_DID	0x8723	/*8723e */
+>>>>>>> v3.18
 =======
 #define RTL_PCI_8723AE_DID	0x8723	/*8723e */
 >>>>>>> v3.18
@@ -125,11 +147,17 @@
 #define RTL_PCI_8192DE_DID2	0x002B	/*92DE*/
 #define RTL_PCI_8188EE_DID	0x8179  /*8188ee*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define RTL_PCI_8723BE_DID	0xB723  /*8723be*/
 #define RTL_PCI_8192EE_DID	0x818B	/*8192ee*/
 #define RTL_PCI_8821AE_DID	0x8821	/*8821ae*/
 #define RTL_PCI_8812AE_DID	0x8812	/*8812ae*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*8192 support 16 pages of IO registers*/
@@ -162,9 +190,12 @@ struct rtl_pci_capabilities_header {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rtl_rx_desc {
 	u32 dword[8];
 =======
+=======
+>>>>>>> v3.18
 /* In new TRX flow, Buffer_desc is new concept
  * But TX wifi info == TX descriptor in old flow
  * RX wifi info == RX descriptor in old flow
@@ -177,6 +208,9 @@ struct rtl_tx_buffer_desc {
 #elif (RTL8192EE_SEG_NUM == 0)
 	u32 dword[2*(DMA_IS_64BIT + 1)*2]; /*seg = 2*/
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
@@ -185,7 +219,10 @@ struct rtl_tx_desc {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct rtl_rx_buffer_desc { /*rx buffer desc*/
 	u32 dword[2];
 } __packed;
@@ -194,6 +231,9 @@ struct rtl_rx_desc { /*old: rx desc new: rx wifi info*/
 	u32 dword[8];
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rtl_tx_cmd_desc {
 	u32 dword[16];
@@ -206,13 +246,19 @@ struct rtl8192_tx_ring {
 	unsigned int entries;
 	struct sk_buff_head queue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*add for new trx flow*/
 	struct rtl_tx_buffer_desc *buffer_desc; /*tx buffer descriptor*/
 	dma_addr_t buffer_desc_dma; /*tx bufferd desc dma memory*/
 	u16 avl_desc; /* available_desc_to_write */
 	u16 cur_tx_wp; /* current_tx_write_point */
 	u16 cur_tx_rp; /* current_tx_read_point */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -222,6 +268,12 @@ struct rtl8192_rx_ring {
 	unsigned int idx;
 	struct sk_buff *rx_buf[RTL_PCI_MAX_RX_COUNT];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/*add for new trx flow*/
+	struct rtl_rx_buffer_desc *buffer_desc; /*rx buffer descriptor*/
+	u16 next_rx_rp; /* next_rx_read_point */
+>>>>>>> v3.18
 =======
 	/*add for new trx flow*/
 	struct rtl_rx_buffer_desc *buffer_desc; /*rx buffer descriptor*/
@@ -277,11 +329,17 @@ struct rtl_pci {
 	u16 shortretry_limit;
 	u16 longretry_limit;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* MSI support */
 	bool msi_support;
 	bool using_msi;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

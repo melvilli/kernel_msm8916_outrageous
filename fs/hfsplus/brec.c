@@ -132,6 +132,7 @@ skip:
 	hfs_bnode_dump(node);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * update parent key if we inserted a key
 	 * at the start of the node and it is not the new node
@@ -143,6 +144,8 @@ skip:
 
 	if (new_node) {
 =======
+=======
+>>>>>>> v3.18
 	if (new_node) {
 		/* update parent key if we inserted a key
 		 * at the start of the first node
@@ -150,6 +153,9 @@ skip:
 		if (!rec && new_node != node)
 			hfs_brec_update_parent(fd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		hfs_bnode_put(fd->bnode);
 		if (!new_node->parent) {
@@ -182,6 +188,12 @@ skip:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!rec)
+		hfs_brec_update_parent(fd);
+
+>>>>>>> v3.18
 =======
 	if (!rec)
 		hfs_brec_update_parent(fd);
@@ -387,8 +399,11 @@ again:
 		return PTR_ERR(parent);
 	__hfs_brec_find(parent, fd, hfs_find_rec_by_key);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fd->record < 0)
 		return -ENOENT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hfs_bnode_dump(parent);

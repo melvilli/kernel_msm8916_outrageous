@@ -40,9 +40,12 @@ static __u8 *cp_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 		return rdesc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (*rsize < 4)
 		return rdesc;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < *rsize - 4; i++)

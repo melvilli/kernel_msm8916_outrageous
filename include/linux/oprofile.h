@@ -43,7 +43,10 @@
 #define IBS_OP_CODE			14
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct super_block;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct dentry;
@@ -55,7 +58,11 @@ struct oprofile_operations {
 	/* create any necessary configuration files in the oprofile fs.
 	 * Optional. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*create_files)(struct super_block * sb, struct dentry * root);
+=======
+	int (*create_files)(struct dentry * root);
+>>>>>>> v3.18
 =======
 	int (*create_files)(struct dentry * root);
 >>>>>>> v3.18
@@ -133,6 +140,7 @@ void oprofile_add_trace(unsigned long eip);
  * the specified file operations.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int oprofilefs_create_file(struct super_block * sb, struct dentry * root,
 	char const * name, const struct file_operations * fops);
 
@@ -155,6 +163,8 @@ int oprofilefs_create_ro_atomic(struct super_block * sb, struct dentry * root,
 struct dentry * oprofilefs_mkdir(struct super_block * sb, struct dentry * root,
 	char const * name);
 =======
+=======
+>>>>>>> v3.18
 int oprofilefs_create_file(struct dentry * root,
 	char const * name, const struct file_operations * fops);
 
@@ -175,6 +185,9 @@ int oprofilefs_create_ro_atomic(struct dentry * root,
  
 /** create a directory */
 struct dentry *oprofilefs_mkdir(struct dentry *parent, char const *name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**

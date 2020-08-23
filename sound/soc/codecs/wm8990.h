@@ -79,7 +79,10 @@
 #define WM8990_PLL2                             0x3D
 #define WM8990_PLL3                             0x3E
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WM8990_INTDRIVBITS			0x3F
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -822,6 +825,7 @@
 #define WM8990_PLLK2_MASK                       0x00FF  /* PLLK2 - [7:0] */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * R63 (0x3F) - Internal Driver Bits
  */
@@ -830,6 +834,8 @@
 #define WM8990_INMIXR_PWR_BIT			2
 #define WM8990_AINRMUX_PWR_BIT			3
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define WM8990_MCLK_DIV 0

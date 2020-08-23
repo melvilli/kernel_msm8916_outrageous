@@ -26,8 +26,12 @@
 #include <asm/firmware.h>
 #include <linux/sort.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "setup.h"
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18

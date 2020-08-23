@@ -67,7 +67,11 @@ struct net_device * hostap_add_interface(struct local_info *local,
 
 	mdev = local->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, mdev->dev_addr, ETH_ALEN);
+=======
+	eth_hw_addr_inherit(dev, mdev);
+>>>>>>> v3.18
 =======
 	eth_hw_addr_inherit(dev, mdev);
 >>>>>>> v3.18
@@ -160,8 +164,12 @@ int prism2_wds_add(local_info_t *local, u8 *remote_addr,
 		if (prism2_wds_special_addr(iface->u.wds.remote_addr))
 			empty = iface;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (memcmp(iface->u.wds.remote_addr, remote_addr,
 				ETH_ALEN) == 0) {
+=======
+		else if (ether_addr_equal(iface->u.wds.remote_addr, remote_addr)) {
+>>>>>>> v3.18
 =======
 		else if (ether_addr_equal(iface->u.wds.remote_addr, remote_addr)) {
 >>>>>>> v3.18
@@ -223,8 +231,12 @@ int prism2_wds_del(local_info_t *local, u8 *remote_addr,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (memcmp(iface->u.wds.remote_addr, remote_addr,
 			   ETH_ALEN) == 0) {
+=======
+		if (ether_addr_equal(iface->u.wds.remote_addr, remote_addr)) {
+>>>>>>> v3.18
 =======
 		if (ether_addr_equal(iface->u.wds.remote_addr, remote_addr)) {
 >>>>>>> v3.18
@@ -680,7 +692,11 @@ static int prism2_open(struct net_device *dev)
 		printk(KERN_DEBUG "%s: could not set interface UP - no PRI "
 		       "f/w\n", dev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 1;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -699,7 +715,11 @@ static int prism2_open(struct net_device *dev)
 		       dev->name);
 		prism2_close(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 1;
+=======
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		return -ENODEV;
 >>>>>>> v3.18
@@ -905,7 +925,11 @@ void hostap_setup_dev(struct net_device *dev, local_info_t *local,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &prism2_ethtool_ops);
+=======
+	dev->ethtool_ops = &prism2_ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &prism2_ethtool_ops;
 >>>>>>> v3.18
@@ -1110,7 +1134,11 @@ int prism2_sta_deauth(local_info_t *local, u16 reason)
 	if (local->iw_mode != IW_MODE_INFRA ||
 	    is_zero_ether_addr(local->bssid) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    memcmp(local->bssid, "\x44\x44\x44\x44\x44\x44", ETH_ALEN) == 0)
+=======
+	    ether_addr_equal(local->bssid, "\x44\x44\x44\x44\x44\x44"))
+>>>>>>> v3.18
 =======
 	    ether_addr_equal(local->bssid, "\x44\x44\x44\x44\x44\x44"))
 >>>>>>> v3.18

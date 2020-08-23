@@ -13,6 +13,7 @@
 #include <sys/stat.h>
 #include <sys/mman.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sys/param.h>
 #include <init.h>
 #include <os.h>
@@ -165,6 +166,8 @@ found:
 static int __init make_tempfile(const char *template, char **out_tempname,
 				int do_unlink)
 =======
+=======
+>>>>>>> v3.18
 #include <sys/vfs.h>
 #include <linux/magic.h>
 #include <init.h>
@@ -246,11 +249,15 @@ done:
  * basename part of the template with a leading '/'.
  */
 static int __init make_tempfile(const char *template)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	char *tempname;
 	int fd;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	which_tmpdir();
 	tempname = malloc(MAXPATHLEN);
@@ -267,6 +274,8 @@ static int __init make_tempfile(const char *template)
 		tempname[0] = '\0';
 	strncat(tempname, template, MAXPATHLEN-1-strlen(tempname));
 =======
+=======
+>>>>>>> v3.18
 	if (tempdir == NULL) {
 		tempdir = choose_tempdir();
 		if (tempdir == NULL) {
@@ -282,6 +291,9 @@ static int __init make_tempfile(const char *template)
 
 	strcpy(tempname, tempdir);
 	strcat(tempname, template);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fd = mkstemp(tempname);
 	if (fd < 0) {
@@ -289,6 +301,7 @@ static int __init make_tempfile(const char *template)
 			strerror(errno));
 		goto out;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (do_unlink && (unlink(tempname) < 0)) {
 		perror("unlink");
@@ -299,11 +312,16 @@ static int __init make_tempfile(const char *template)
 	} else
 		free(tempname);
 =======
+=======
+>>>>>>> v3.18
 	if (unlink(tempname) < 0) {
 		perror("unlink");
 		goto close;
 	}
 	free(tempname);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return fd;
 close:
@@ -314,7 +332,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TEMPNAME_TEMPLATE "vm_file-XXXXXX"
+=======
+#define TEMPNAME_TEMPLATE "/vm_file-XXXXXX"
+>>>>>>> v3.18
 =======
 #define TEMPNAME_TEMPLATE "/vm_file-XXXXXX"
 >>>>>>> v3.18
@@ -325,7 +347,11 @@ static int __init create_tmp_file(unsigned long long len)
 	char zero;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fd = make_tempfile(TEMPNAME_TEMPLATE, NULL, 1);
+=======
+	fd = make_tempfile(TEMPNAME_TEMPLATE);
+>>>>>>> v3.18
 =======
 	fd = make_tempfile(TEMPNAME_TEMPLATE);
 >>>>>>> v3.18
@@ -373,7 +399,10 @@ int __init create_mem_file(unsigned long long len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init check_tmpexec(void)
@@ -384,6 +413,7 @@ void __init check_tmpexec(void)
 	addr = mmap(NULL, UM_KERN_PAGE_SIZE,
 		    PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE, fd, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printf("Checking PROT_EXEC mmap in %s...",tempdir);
 	fflush(stdout);
 	if (addr == MAP_FAILED) {
@@ -393,6 +423,8 @@ void __init check_tmpexec(void)
 		if (err == EPERM)
 			printf("%s must be not mounted noexec\n",tempdir);
 =======
+=======
+>>>>>>> v3.18
 	printf("Checking PROT_EXEC mmap in %s...", tempdir);
 	if (addr == MAP_FAILED) {
 		err = errno;
@@ -400,6 +432,9 @@ void __init check_tmpexec(void)
 		close(fd);
 		if (err == EPERM)
 			printf("%s must be not mounted noexec\n", tempdir);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		exit(1);
 	}

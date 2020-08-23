@@ -258,7 +258,11 @@ static int it8152_needs_bounce(struct device *dev, dma_addr_t dma_addr, size_t s
 static int it8152_pci_platform_notify(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->bus == &pci_bus_type) {
+=======
+	if (dev_is_pci(dev)) {
+>>>>>>> v3.18
 =======
 	if (dev_is_pci(dev)) {
 >>>>>>> v3.18
@@ -273,7 +277,11 @@ static int it8152_pci_platform_notify(struct device *dev)
 static int it8152_pci_platform_notify_remove(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->bus == &pci_bus_type)
+=======
+	if (dev_is_pci(dev))
+>>>>>>> v3.18
 =======
 	if (dev_is_pci(dev))
 >>>>>>> v3.18

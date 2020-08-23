@@ -3,10 +3,16 @@
 #include <linux/of_irq.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/prom.h>
 
 /**
  * of_irq_map_pci - Resolve the interrupt for a PCI device
+=======
+
+/**
+ * of_irq_parse_pci - Resolve the interrupt for a PCI device
+>>>>>>> v3.18
 =======
 
 /**
@@ -22,6 +28,7 @@
  * resolving using the OF tree walking.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int of_irq_map_pci(const struct pci_dev *pdev, struct of_irq *out_irq)
 {
 	struct device_node *dn, *ppnode;
@@ -29,10 +36,15 @@ int of_irq_map_pci(const struct pci_dev *pdev, struct of_irq *out_irq)
 	u32 lspec;
 	__be32 lspec_be;
 =======
+=======
+>>>>>>> v3.18
 int of_irq_parse_pci(const struct pci_dev *pdev, struct of_phandle_args *out_irq)
 {
 	struct device_node *dn, *ppnode;
 	struct pci_dev *ppdev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__be32 laddr[3];
 	u8 pin;
@@ -44,7 +56,11 @@ int of_irq_parse_pci(const struct pci_dev *pdev, struct of_phandle_args *out_irq
 	dn = pci_device_to_OF_node(pdev);
 	if (dn) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rc = of_irq_map_one(dn, 0, out_irq);
+=======
+		rc = of_irq_parse_one(dn, 0, out_irq);
+>>>>>>> v3.18
 =======
 		rc = of_irq_parse_one(dn, 0, out_irq);
 >>>>>>> v3.18
@@ -65,7 +81,10 @@ int of_irq_parse_pci(const struct pci_dev *pdev, struct of_phandle_args *out_irq
 
 	/* Now we walk up the PCI tree */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lspec = pin;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (;;) {
@@ -102,6 +121,7 @@ int of_irq_parse_pci(const struct pci_dev *pdev, struct of_phandle_args *out_irq
 		 * let's do standard swizzling and try again
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lspec = pci_swizzle_interrupt_pin(pdev, lspec);
 		pdev = ppdev;
 	}
@@ -113,6 +133,8 @@ int of_irq_parse_pci(const struct pci_dev *pdev, struct of_phandle_args *out_irq
 }
 EXPORT_SYMBOL_GPL(of_irq_map_pci);
 =======
+=======
+>>>>>>> v3.18
 		pin = pci_swizzle_interrupt_pin(pdev, pin);
 		pdev = ppdev;
 	}
@@ -150,4 +172,7 @@ int of_irq_parse_and_map_pci(const struct pci_dev *dev, u8 slot, u8 pin)
 }
 EXPORT_SYMBOL_GPL(of_irq_parse_and_map_pci);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

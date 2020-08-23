@@ -11,7 +11,11 @@
 #define __INCLUDE_SOUND_ATMEL_AC97C_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/dw_dmac.h>
+=======
+#include <linux/platform_data/dma-dw.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/dma-dw.h>
 >>>>>>> v3.18
@@ -28,7 +32,10 @@
  *             optional to use, set to -ENODEV if not in use. AC97 layer will
  *             try to do a software reset of the external codec anyway.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @flags: Flags for which directions should be enabled.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -41,7 +48,10 @@ struct ac97c_platform_data {
 	struct dw_dma_slave	rx_dws;
 	struct dw_dma_slave	tx_dws;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int 		flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int			reset_pin;

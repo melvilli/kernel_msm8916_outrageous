@@ -4,7 +4,11 @@
     - The Elevator, from Dark Star
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Smack is the the Simplified Mandatory Access Control Kernel.
+=======
+Smack is the Simplified Mandatory Access Control Kernel.
+>>>>>>> v3.18
 =======
 Smack is the Simplified Mandatory Access Control Kernel.
 >>>>>>> v3.18
@@ -209,7 +213,10 @@ onlycap
 	label. The value is set by writing the desired label to the
 	file or cleared by writing "-" to the file.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ptrace
 	This is used to define the current ptrace policy
 	0 - default: this is the policy that relies on smack access rules.
@@ -220,6 +227,9 @@ ptrace
 	    PTRACE_READ is not affected. Can be overriden with CAP_SYS_PTRACE.
 	2 - draconian: this policy behaves like the 'exact' above with an
 	    exception that it can't be overriden with CAP_SYS_PTRACE.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 revoke-subject
 	Writing a Smack label here sets the access to '-' for all access

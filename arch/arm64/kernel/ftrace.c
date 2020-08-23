@@ -59,7 +59,12 @@ int ftrace_update_ftrace_func(ftrace_func_t func)
 
 	pc = (unsigned long)&ftrace_call;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new = aarch64_insn_gen_branch_imm(pc, (unsigned long)func, true);
+=======
+	new = aarch64_insn_gen_branch_imm(pc, (unsigned long)func,
+					  AARCH64_INSN_BRANCH_LINK);
+>>>>>>> v3.18
 =======
 	new = aarch64_insn_gen_branch_imm(pc, (unsigned long)func,
 					  AARCH64_INSN_BRANCH_LINK);
@@ -78,7 +83,11 @@ int ftrace_make_call(struct dyn_ftrace *rec, unsigned long addr)
 
 	old = aarch64_insn_gen_nop();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new = aarch64_insn_gen_branch_imm(pc, addr, true);
+=======
+	new = aarch64_insn_gen_branch_imm(pc, addr, AARCH64_INSN_BRANCH_LINK);
+>>>>>>> v3.18
 =======
 	new = aarch64_insn_gen_branch_imm(pc, addr, AARCH64_INSN_BRANCH_LINK);
 >>>>>>> v3.18
@@ -96,7 +105,11 @@ int ftrace_make_nop(struct module *mod, struct dyn_ftrace *rec,
 	u32 old, new;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	old = aarch64_insn_gen_branch_imm(pc, addr, true);
+=======
+	old = aarch64_insn_gen_branch_imm(pc, addr, AARCH64_INSN_BRANCH_LINK);
+>>>>>>> v3.18
 =======
 	old = aarch64_insn_gen_branch_imm(pc, addr, AARCH64_INSN_BRANCH_LINK);
 >>>>>>> v3.18
@@ -106,9 +119,14 @@ int ftrace_make_nop(struct module *mod, struct dyn_ftrace *rec,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init ftrace_dyn_arch_init(void *data)
 {
 	*(unsigned long *)data = 0;
+=======
+int __init ftrace_dyn_arch_init(void)
+{
+>>>>>>> v3.18
 =======
 int __init ftrace_dyn_arch_init(void)
 {
@@ -174,7 +192,12 @@ static int ftrace_modify_graph_caller(bool enable)
 
 	branch = aarch64_insn_gen_branch_imm(pc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(unsigned long)ftrace_graph_caller, false);
+=======
+					     (unsigned long)ftrace_graph_caller,
+					     AARCH64_INSN_BRANCH_LINK);
+>>>>>>> v3.18
 =======
 					     (unsigned long)ftrace_graph_caller,
 					     AARCH64_INSN_BRANCH_LINK);

@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2012 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -78,8 +82,11 @@ struct lpfc_sli2_slim;
 /* 1 Second */
 #define QUEUE_RAMP_DOWN_INTERVAL	(msecs_to_jiffies(1000 * 1))
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 5 minutes */
 #define QUEUE_RAMP_UP_INTERVAL		(msecs_to_jiffies(1000 * 300))
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -429,6 +436,10 @@ struct lpfc_vport {
 	uint32_t cfg_max_scsicmpl_time;
 	uint32_t cfg_tgt_queue_depth;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t cfg_first_burst_size;
+>>>>>>> v3.18
 =======
 	uint32_t cfg_first_burst_size;
 >>>>>>> v3.18
@@ -653,6 +664,10 @@ struct lpfc_hba {
 #define HBA_RRQ_ACTIVE		0x4000 /* process the rrq active list */
 #define HBA_FCP_IOQ_FLUSH	0x8000 /* FCP I/O queues being flushed */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HBA_FW_DUMP_OP		0x10000 /* Skips fn reset before FW dump */
+>>>>>>> v3.18
 =======
 #define HBA_FW_DUMP_OP		0x10000 /* Skips fn reset before FW dump */
 >>>>>>> v3.18
@@ -723,16 +738,22 @@ struct lpfc_hba {
 	uint32_t cfg_poll;
 	uint32_t cfg_poll_tmo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t cfg_use_msi;
 	uint32_t cfg_fcp_imax;
 	uint32_t cfg_fcp_cpu_map;
 	uint32_t cfg_fcp_wq_count;
 	uint32_t cfg_fcp_eq_count;
 =======
+=======
+>>>>>>> v3.18
 	uint32_t cfg_task_mgmt_tmo;
 	uint32_t cfg_use_msi;
 	uint32_t cfg_fcp_imax;
 	uint32_t cfg_fcp_cpu_map;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint32_t cfg_fcp_io_channel;
 	uint32_t cfg_total_seg_cnt;
@@ -745,7 +766,10 @@ struct lpfc_hba {
 	uint32_t cfg_enable_hba_reset;
 	uint32_t cfg_enable_hba_heartbeat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	uint32_t cfg_fof;
 	uint32_t cfg_EnableXLane;
 	uint8_t cfg_oas_tgt_wwpn[8];
@@ -760,6 +784,9 @@ struct lpfc_hba {
 #define OAS_FIND_ANY_TARGET	0x02
 #define OAS_LUN_VALID	0x04
 	uint32_t cfg_XLanePriority;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint32_t cfg_enable_bg;
 	uint32_t cfg_hostmem_hgp;
@@ -770,6 +797,10 @@ struct lpfc_hba {
 	uint32_t cfg_iocb_cnt;
 	uint32_t cfg_suppress_link_up;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t cfg_rrq_xri_bitmap_sz;
+>>>>>>> v3.18
 =======
 	uint32_t cfg_rrq_xri_bitmap_sz;
 >>>>>>> v3.18
@@ -879,6 +910,10 @@ struct lpfc_hba {
 	mempool_t *nlp_mem_pool;
 	mempool_t *rrq_pool;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mempool_t *active_rrq_pool;
+>>>>>>> v3.18
 =======
 	mempool_t *active_rrq_pool;
 >>>>>>> v3.18
@@ -917,7 +952,10 @@ struct lpfc_hba {
 	unsigned long last_rsrc_error_time;
 	unsigned long last_ramp_down_time;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long last_ramp_up_time;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_SCSI_LPFC_DEBUG_FS
@@ -1022,6 +1060,12 @@ struct lpfc_hba {
 	uint8_t fips_spec_rev;
 	uint8_t fips_level;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spinlock_t devicelock;	/* lock for luns list */
+	mempool_t *device_data_mem_pool;
+	struct list_head luns;
+>>>>>>> v3.18
 =======
 	spinlock_t devicelock;	/* lock for luns list */
 	mempool_t *device_data_mem_pool;

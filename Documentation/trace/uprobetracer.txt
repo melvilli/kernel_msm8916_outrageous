@@ -20,6 +20,7 @@ user to calculate the offset of the probepoint in the object.
 Synopsis of uprobe_tracer
 -------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
   p[:[GRP/]EVENT] PATH:SYMBOL[+offs] [FETCHARGS] : Set a uprobe
   r[:[GRP/]EVENT] PATH:SYMBOL[+offs] [FETCHARGS] : Set a return uprobe (uretprobe)
   -:[GRP/]EVENT                                  : Clear uprobe or uretprobe event
@@ -33,6 +34,8 @@ Synopsis of uprobe_tracer
   FETCHARGS     : Arguments. Each probe can have up to 128 args.
    %REG         : Fetch register REG
 =======
+=======
+>>>>>>> v3.18
   p[:[GRP/]EVENT] PATH:OFFSET [FETCHARGS] : Set a uprobe
   r[:[GRP/]EVENT] PATH:OFFSET [FETCHARGS] : Set a return uprobe (uretprobe)
   -:[GRP/]EVENT                           : Clear uprobe or uretprobe event
@@ -71,6 +74,9 @@ offset, and container-size (usually 32). The syntax is;
 
  b<bit-width>@<bit-offset>/<container-size>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Event Profiling

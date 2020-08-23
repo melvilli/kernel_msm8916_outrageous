@@ -27,7 +27,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -37,7 +40,11 @@
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/usb/nop-usb-xceiv.h>
+=======
+#include <linux/usb/usb_phy_generic.h>
+>>>>>>> v3.18
 =======
 #include <linux/usb/usb_phy_generic.h>
 >>>>>>> v3.18
@@ -94,6 +101,10 @@ struct da8xx_glue {
 	struct device		*dev;
 	struct platform_device	*musb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct platform_device	*phy;
+>>>>>>> v3.18
 =======
 	struct platform_device	*phy;
 >>>>>>> v3.18
@@ -431,7 +442,10 @@ static int da8xx_musb_init(struct musb *musb)
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_nop_xceiv_register();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	musb->xceiv = usb_get_phy(USB_PHY_TYPE_USB2);
@@ -469,7 +483,10 @@ static int da8xx_musb_exit(struct musb *musb)
 
 	usb_put_phy(musb->xceiv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_nop_xceiv_unregister();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -490,6 +507,7 @@ static const struct musb_platform_ops da8xx_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 da8xx_dmamask = DMA_BIT_MASK(32);
 
 static int da8xx_probe(struct platform_device *pdev)
@@ -499,6 +517,8 @@ static int da8xx_probe(struct platform_device *pdev)
 	struct da8xx_glue		*glue;
 
 =======
+=======
+>>>>>>> v3.18
 static const struct platform_device_info da8xx_dev_info = {
 	.name		= "musb-hdrc",
 	.id		= PLATFORM_DEVID_AUTO,
@@ -512,6 +532,9 @@ static int da8xx_probe(struct platform_device *pdev)
 	struct platform_device		*musb;
 	struct da8xx_glue		*glue;
 	struct platform_device_info	pinfo;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct clk			*clk;
 
@@ -524,12 +547,15 @@ static int da8xx_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	musb = platform_device_alloc("musb-hdrc", PLATFORM_DEVID_AUTO);
 	if (!musb) {
 		dev_err(&pdev->dev, "failed to allocate musb device\n");
 		goto err1;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clk = clk_get(&pdev->dev, "usb20");
@@ -546,6 +572,7 @@ static int da8xx_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	musb->dev.parent		= &pdev->dev;
 	musb->dev.dma_mask		= &da8xx_dmamask;
 	musb->dev.coherent_dma_mask	= da8xx_dmamask;
@@ -555,10 +582,14 @@ static int da8xx_probe(struct platform_device *pdev)
 =======
 	glue->dev			= &pdev->dev;
 >>>>>>> v3.18
+=======
+	glue->dev			= &pdev->dev;
+>>>>>>> v3.18
 	glue->clk			= clk;
 
 	pdata->platform_ops		= &da8xx_ops;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_set_drvdata(pdev, glue);
 
@@ -580,6 +611,8 @@ static int da8xx_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to register musb device\n");
 		goto err5;
 =======
+=======
+>>>>>>> v3.18
 	glue->phy = usb_phy_generic_register();
 	if (IS_ERR(glue->phy)) {
 		ret = PTR_ERR(glue->phy);
@@ -612,12 +645,21 @@ static int da8xx_probe(struct platform_device *pdev)
 		ret = PTR_ERR(musb);
 		dev_err(&pdev->dev, "failed to register musb device: %d\n", ret);
 		goto err6;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+err6:
+	usb_phy_generic_unregister(glue->phy);
+
+>>>>>>> v3.18
 =======
 err6:
 	usb_phy_generic_unregister(glue->phy);
@@ -631,9 +673,12 @@ err4:
 
 err3:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_put(musb);
 
 err1:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(glue);
@@ -648,6 +693,10 @@ static int da8xx_remove(struct platform_device *pdev)
 
 	platform_device_unregister(glue->musb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usb_phy_generic_unregister(glue->phy);
+>>>>>>> v3.18
 =======
 	usb_phy_generic_unregister(glue->phy);
 >>>>>>> v3.18

@@ -41,7 +41,11 @@
 #include <asm/io.h>
 #include <asm/poll.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -119,8 +123,13 @@ static ssize_t coda_psdev_write(struct file *file, const char __user *buf,
 
 		if  ( nbytes < sizeof(struct coda_out_hdr) ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		        printk("coda_downcall opc %d uniq %d, not enough!\n",
 			       hdr.opcode, hdr.unique);
+=======
+			pr_warn("coda_downcall opc %d uniq %d, not enough!\n",
+				hdr.opcode, hdr.unique);
+>>>>>>> v3.18
 =======
 			pr_warn("coda_downcall opc %d uniq %d, not enough!\n",
 				hdr.opcode, hdr.unique);
@@ -130,8 +139,13 @@ static ssize_t coda_psdev_write(struct file *file, const char __user *buf,
 		}
 		if ( nbytes > size ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		        printk("Coda: downcall opc %d, uniq %d, too much!",
 			       hdr.opcode, hdr.unique);
+=======
+			pr_warn("downcall opc %d, uniq %d, too much!",
+				hdr.opcode, hdr.unique);
+>>>>>>> v3.18
 =======
 			pr_warn("downcall opc %d, uniq %d, too much!",
 				hdr.opcode, hdr.unique);
@@ -151,7 +165,12 @@ static ssize_t coda_psdev_write(struct file *file, const char __user *buf,
 		CODA_FREE(dcbuf, nbytes);
 		if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		        printk("psdev_write: coda_downcall error: %d\n", error);
+=======
+			pr_warn("%s: coda_downcall error: %d\n",
+				__func__, error);
+>>>>>>> v3.18
 =======
 			pr_warn("%s: coda_downcall error: %d\n",
 				__func__, error);
@@ -177,8 +196,13 @@ static ssize_t coda_psdev_write(struct file *file, const char __user *buf,
 
 	if (!req) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("psdev_write: msg (%d, %d) not found\n", 
 			hdr.opcode, hdr.unique);
+=======
+		pr_warn("%s: msg (%d, %d) not found\n",
+			__func__, hdr.opcode, hdr.unique);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: msg (%d, %d) not found\n",
 			__func__, hdr.opcode, hdr.unique);
@@ -190,8 +214,14 @@ static ssize_t coda_psdev_write(struct file *file, const char __user *buf,
         /* move data into response buffer. */
 	if (req->uc_outSize < nbytes) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 printk("psdev_write: too much cnt: %d, cnt: %ld, opc: %d, uniq: %d.\n",
 		       req->uc_outSize, (long)nbytes, hdr.opcode, hdr.unique);
+=======
+		pr_warn("%s: too much cnt: %d, cnt: %ld, opc: %d, uniq: %d.\n",
+			__func__, req->uc_outSize, (long)nbytes,
+			hdr.opcode, hdr.unique);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: too much cnt: %d, cnt: %ld, opc: %d, uniq: %d.\n",
 			__func__, req->uc_outSize, (long)nbytes,
@@ -271,8 +301,13 @@ static ssize_t coda_psdev_read(struct file * file, char __user * buf,
 	count = req->uc_inSize;
 	if (nbytes < req->uc_inSize) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 printk ("psdev_read: Venus read %ld bytes of %d in message\n",
 			(long)nbytes, req->uc_inSize);
+=======
+		pr_warn("%s: Venus read %ld bytes of %d in message\n",
+			__func__, (long)nbytes, req->uc_inSize);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: Venus read %ld bytes of %d in message\n",
 			__func__, (long)nbytes, req->uc_inSize);
@@ -341,7 +376,11 @@ static int coda_psdev_release(struct inode * inode, struct file * file)
 
 	if (!vcp || !vcp->vc_inuse ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("psdev_release: Not open.\n");
+=======
+		pr_warn("%s: Not open.\n", __func__);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: Not open.\n", __func__);
 >>>>>>> v3.18
@@ -394,8 +433,13 @@ static int init_coda_psdev(void)
 	int i, err = 0;
 	if (register_chrdev(CODA_PSDEV_MAJOR, "coda", &coda_psdev_fops)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
               printk(KERN_ERR "coda_psdev: unable to get major %d\n", 
 		     CODA_PSDEV_MAJOR);
+=======
+		pr_err("%s: unable to get major %d\n",
+		       __func__, CODA_PSDEV_MAJOR);
+>>>>>>> v3.18
 =======
 		pr_err("%s: unable to get major %d\n",
 		       __func__, CODA_PSDEV_MAJOR);
@@ -438,7 +482,11 @@ static int __init init_coda(void)
 	status = init_coda_psdev();
 	if ( status ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("Problem (%d) in init_coda_psdev\n", status);
+=======
+		pr_warn("Problem (%d) in init_coda_psdev\n", status);
+>>>>>>> v3.18
 =======
 		pr_warn("Problem (%d) in init_coda_psdev\n", status);
 >>>>>>> v3.18
@@ -448,7 +496,11 @@ static int __init init_coda(void)
 	status = register_filesystem(&coda_fs_type);
 	if (status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("coda: failed to register filesystem!\n");
+=======
+		pr_warn("failed to register filesystem!\n");
+>>>>>>> v3.18
 =======
 		pr_warn("failed to register filesystem!\n");
 >>>>>>> v3.18
@@ -473,9 +525,14 @@ static void __exit exit_coda(void)
 
 	err = unregister_filesystem(&coda_fs_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ( err != 0 ) {
                 printk("coda: failed to unregister filesystem\n");
         }
+=======
+	if (err != 0)
+		pr_warn("failed to unregister filesystem\n");
+>>>>>>> v3.18
 =======
 	if (err != 0)
 		pr_warn("failed to unregister filesystem\n");

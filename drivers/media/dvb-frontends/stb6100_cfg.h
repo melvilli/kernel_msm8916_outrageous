@@ -22,6 +22,7 @@
 static int stb6100_get_frequency(struct dvb_frontend *fe, u32 *frequency)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dvb_frontend_ops	*frontend_ops = NULL;
 	struct dvb_tuner_ops	*tuner_ops = NULL;
 	struct tuner_state	t_state;
@@ -34,6 +35,8 @@ static int stb6100_get_frequency(struct dvb_frontend *fe, u32 *frequency)
 	if (tuner_ops->get_state) {
 		if ((err = tuner_ops->get_state(fe, DVBFE_TUNER_FREQUENCY, &t_state)) < 0) {
 =======
+=======
+>>>>>>> v3.18
 	struct dvb_frontend_ops	*frontend_ops = &fe->ops;
 	struct dvb_tuner_ops	*tuner_ops = &frontend_ops->tuner_ops;
 	struct tuner_state	t_state;
@@ -42,6 +45,9 @@ static int stb6100_get_frequency(struct dvb_frontend *fe, u32 *frequency)
 	if (tuner_ops->get_state) {
 		err = tuner_ops->get_state(fe, DVBFE_TUNER_FREQUENCY, &t_state);
 		if (err < 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			printk("%s: Invalid parameter\n", __func__);
 			return err;
@@ -54,8 +60,13 @@ static int stb6100_get_frequency(struct dvb_frontend *fe, u32 *frequency)
 static int stb6100_set_frequency(struct dvb_frontend *fe, u32 frequency)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dvb_frontend_ops	*frontend_ops = NULL;
 	struct dvb_tuner_ops	*tuner_ops = NULL;
+=======
+	struct dvb_frontend_ops	*frontend_ops = &fe->ops;
+	struct dvb_tuner_ops	*tuner_ops = &frontend_ops->tuner_ops;
+>>>>>>> v3.18
 =======
 	struct dvb_frontend_ops	*frontend_ops = &fe->ops;
 	struct dvb_tuner_ops	*tuner_ops = &frontend_ops->tuner_ops;
@@ -65,6 +76,7 @@ static int stb6100_set_frequency(struct dvb_frontend *fe, u32 frequency)
 
 	t_state.frequency = frequency;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (&fe->ops)
 		frontend_ops = &fe->ops;
 	if (&frontend_ops->tuner_ops)
@@ -72,10 +84,15 @@ static int stb6100_set_frequency(struct dvb_frontend *fe, u32 frequency)
 	if (tuner_ops->set_state) {
 		if ((err = tuner_ops->set_state(fe, DVBFE_TUNER_FREQUENCY, &t_state)) < 0) {
 =======
+=======
+>>>>>>> v3.18
 
 	if (tuner_ops->set_state) {
 		err = tuner_ops->set_state(fe, DVBFE_TUNER_FREQUENCY, &t_state);
 		if (err < 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			printk("%s: Invalid parameter\n", __func__);
 			return err;
@@ -92,12 +109,18 @@ static int stb6100_get_bandwidth(struct dvb_frontend *fe, u32 *bandwidth)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (&fe->ops)
 		frontend_ops = &fe->ops;
 	if (&frontend_ops->tuner_ops)
 		tuner_ops = &frontend_ops->tuner_ops;
 	if (tuner_ops->get_state) {
 		if ((err = tuner_ops->get_state(fe, DVBFE_TUNER_BANDWIDTH, &t_state)) < 0) {
+=======
+	if (tuner_ops->get_state) {
+		err = tuner_ops->get_state(fe, DVBFE_TUNER_BANDWIDTH, &t_state);
+		if (err < 0) {
+>>>>>>> v3.18
 =======
 	if (tuner_ops->get_state) {
 		err = tuner_ops->get_state(fe, DVBFE_TUNER_BANDWIDTH, &t_state);
@@ -114,8 +137,13 @@ static int stb6100_get_bandwidth(struct dvb_frontend *fe, u32 *bandwidth)
 static int stb6100_set_bandwidth(struct dvb_frontend *fe, u32 bandwidth)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dvb_frontend_ops	*frontend_ops = NULL;
 	struct dvb_tuner_ops	*tuner_ops = NULL;
+=======
+	struct dvb_frontend_ops	*frontend_ops = &fe->ops;
+	struct dvb_tuner_ops	*tuner_ops = &frontend_ops->tuner_ops;
+>>>>>>> v3.18
 =======
 	struct dvb_frontend_ops	*frontend_ops = &fe->ops;
 	struct dvb_tuner_ops	*tuner_ops = &frontend_ops->tuner_ops;
@@ -125,6 +153,7 @@ static int stb6100_set_bandwidth(struct dvb_frontend *fe, u32 bandwidth)
 
 	t_state.bandwidth = bandwidth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (&fe->ops)
 		frontend_ops = &fe->ops;
 	if (&frontend_ops->tuner_ops)
@@ -132,10 +161,15 @@ static int stb6100_set_bandwidth(struct dvb_frontend *fe, u32 bandwidth)
 	if (tuner_ops->set_state) {
 		if ((err = tuner_ops->set_state(fe, DVBFE_TUNER_BANDWIDTH, &t_state)) < 0) {
 =======
+=======
+>>>>>>> v3.18
 
 	if (tuner_ops->set_state) {
 		err = tuner_ops->set_state(fe, DVBFE_TUNER_BANDWIDTH, &t_state);
 		if (err < 0) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			printk("%s: Invalid parameter\n", __func__);
 			return err;

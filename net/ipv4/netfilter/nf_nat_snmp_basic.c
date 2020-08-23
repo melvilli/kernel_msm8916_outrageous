@@ -35,8 +35,12 @@
  * GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -467,6 +471,7 @@ static unsigned char asn1_oid_decode(struct asn1_ctx *ctx,
 
 	if (subid < 40) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		optr [0] = 0;
 		optr [1] = subid;
 	} else if (subid < 80) {
@@ -476,6 +481,8 @@ static unsigned char asn1_oid_decode(struct asn1_ctx *ctx,
 		optr [0] = 2;
 		optr [1] = subid - 80;
 =======
+=======
+>>>>>>> v3.18
 		optr[0] = 0;
 		optr[1] = subid;
 	} else if (subid < 80) {
@@ -484,6 +491,9 @@ static unsigned char asn1_oid_decode(struct asn1_ctx *ctx,
 	} else {
 		optr[0] = 2;
 		optr[1] = subid - 80;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1215,8 +1225,13 @@ static int snmp_translate(struct nf_conn *ct,
 	} else {
 		/* DNAT replies */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		map.from = NOCT1(&ct->tuplehash[dir].tuple.src.u3.ip);
 		map.to = NOCT1(&ct->tuplehash[!dir].tuple.dst.u3.ip);
+=======
+		map.from = NOCT1(&ct->tuplehash[!dir].tuple.src.u3.ip);
+		map.to = NOCT1(&ct->tuplehash[dir].tuple.dst.u3.ip);
+>>>>>>> v3.18
 =======
 		map.from = NOCT1(&ct->tuplehash[!dir].tuple.src.u3.ip);
 		map.to = NOCT1(&ct->tuplehash[dir].tuple.dst.u3.ip);
@@ -1326,7 +1341,10 @@ static void __exit nf_nat_snmp_basic_fini(void)
 {
 	RCU_INIT_POINTER(nf_nat_snmp_hook, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	synchronize_rcu();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nf_conntrack_helper_unregister(&snmp_trap_helper);

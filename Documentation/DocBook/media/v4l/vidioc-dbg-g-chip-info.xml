@@ -74,8 +74,12 @@ and call <constant>VIDIOC_DBG_G_CHIP_INFO</constant> with a pointer to
 this structure. On success the driver stores information about the
 selected chip in the <structfield>name</structfield> and
 <<<<<<< HEAD
+<<<<<<< HEAD
 <structfield>flags</structfield> fields. On failure the structure
 remains unchanged.</para>
+=======
+<structfield>flags</structfield> fields.</para>
+>>>>>>> v3.18
 =======
 <structfield>flags</structfield> fields.</para>
 >>>>>>> v3.18
@@ -137,7 +141,11 @@ to the <structfield>type</structfield> field.</entry>
 	    <entry><structfield>name[32]</structfield></entry>
 	    <entry>Match a chip by this name, interpreted according
 <<<<<<< HEAD
+<<<<<<< HEAD
 to the <structfield>type</structfield> field.</entry>
+=======
+to the <structfield>type</structfield> field. Currently unused.</entry>
+>>>>>>> v3.18
 =======
 to the <structfield>type</structfield> field. Currently unused.</entry>
 >>>>>>> v3.18
@@ -192,6 +200,7 @@ is set, then the driver supports reading registers from the device. If
 	  </row>
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry><constant>V4L2_CHIP_MATCH_I2C_DRIVER</constant></entry>
 	    <entry>1</entry>
 	    <entry>Match an &i2c; chip by its driver name. Can't be used with this ioctl.</entry>
@@ -207,6 +216,8 @@ is set, then the driver supports reading registers from the device. If
 	    <entry>Match the nth anciliary AC97 chip. Can't be used with this ioctl.</entry>
 	  </row>
 	  <row>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	    <entry><constant>V4L2_CHIP_MATCH_SUBDEV</constant></entry>

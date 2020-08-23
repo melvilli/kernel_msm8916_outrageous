@@ -63,6 +63,7 @@
 #undef CONFIG_SCSI_ACORNSCSI_TAGGED_QUEUE
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * SCSI-II Linked command support.
  *
  * The higher level code doesn't support linked commands yet, and so the option
@@ -70,6 +71,8 @@
  */
 #undef CONFIG_SCSI_ACORNSCSI_LINK
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * SCSI-II Synchronous transfer support.
@@ -164,10 +167,13 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SCSI_ACORNSCSI_LINK
 #error SCSI2 LINKed commands not supported (yet)!
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef USE_DMAC
@@ -778,7 +784,12 @@ intr_ret_t acornscsi_kick(AS_Host *host)
 	} else
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    set_bit(SCpnt->device->id * 8 + SCpnt->device->lun, host->busyluns);
+=======
+	    set_bit(SCpnt->device->id * 8 +
+		    (u8)(SCpnt->device->lun & 0x07), host->busyluns);
+>>>>>>> v3.18
 =======
 	    set_bit(SCpnt->device->id * 8 +
 		    (u8)(SCpnt->device->lun & 0x07), host->busyluns);
@@ -886,7 +897,12 @@ static void acornscsi_done(AS_Host *host, struct scsi_cmnd **SCpntp,
 	    panic("scsi%d.H: null scsi_done function in acornscsi_done", host->host->host_no);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_bit(SCpnt->device->id * 8 + SCpnt->device->lun, host->busyluns);
+=======
+	clear_bit(SCpnt->device->id * 8 +
+		  (u8)(SCpnt->device->lun & 0x7), host->busyluns);
+>>>>>>> v3.18
 =======
 	clear_bit(SCpnt->device->id * 8 +
 		  (u8)(SCpnt->device->lun & 0x7), host->busyluns);
@@ -1604,7 +1620,12 @@ void acornscsi_message(AS_Host *host)
 		    host->host->host_no, acornscsi_target(host));
 	    host->SCpnt->device->simple_tags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    set_bit(host->SCpnt->device->id * 8 + host->SCpnt->device->lun, host->busyluns);
+=======
+	    set_bit(host->SCpnt->device->id * 8 +
+		    (u8)(host->SCpnt->device->lun & 0x7), host->busyluns);
+>>>>>>> v3.18
 =======
 	    set_bit(host->SCpnt->device->id * 8 +
 		    (u8)(host->SCpnt->device->lun & 0x7), host->busyluns);
@@ -1690,6 +1711,7 @@ void acornscsi_message(AS_Host *host)
 	break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SCSI_ACORNSCSI_LINK
     case LINKED_CMD_COMPLETE:
     case LINKED_FLG_CMD_COMPLETE:
@@ -1726,6 +1748,8 @@ void acornscsi_message(AS_Host *host)
 	}
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
     default: /* reject message */
@@ -2743,7 +2767,12 @@ int acornscsi_abort(struct scsi_cmnd *SCpnt)
 		printk("clear ");
 //#endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(SCpnt->device->id * 8 + SCpnt->device->lun, host->busyluns);
+=======
+		clear_bit(SCpnt->device->id * 8 +
+			  (u8)(SCpnt->device->lun & 0x7), host->busyluns);
+>>>>>>> v3.18
 =======
 		clear_bit(SCpnt->device->id * 8 +
 			  (u8)(SCpnt->device->lun & 0x7), host->busyluns);
@@ -2855,9 +2884,12 @@ char *acornscsi_info(struct Scsi_Host *host)
     " TAG"
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SCSI_ACORNSCSI_LINK
     " LINK"
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if (DEBUG & DEBUG_NO_WRITE)
@@ -2884,9 +2916,12 @@ static int acornscsi_show_info(struct seq_file *m, struct Scsi_Host *instance)
     " TAG"
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SCSI_ACORNSCSI_LINK
     " LINK"
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if (DEBUG & DEBUG_NO_WRITE)
@@ -2942,7 +2977,11 @@ static int acornscsi_show_info(struct seq_file *m, struct Scsi_Host *instance)
     shost_for_each_device(scd, instance) {
 	seq_printf(m, "Device/Lun TaggedQ      Sync\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(m, "     %d/%d   ", scd->id, scd->lun);
+=======
+	seq_printf(m, "     %d/%llu   ", scd->id, scd->lun);
+>>>>>>> v3.18
 =======
 	seq_printf(m, "     %d/%llu   ", scd->id, scd->lun);
 >>>>>>> v3.18
@@ -3011,7 +3050,11 @@ static int acornscsi_probe(struct expansion_card *ec, const struct ecard_id *id)
 	ec->irqmask	= 0x0a;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_irq(host->irq, acornscsi_intr, IRQF_DISABLED, "acornscsi", ashost);
+=======
+	ret = request_irq(host->irq, acornscsi_intr, 0, "acornscsi", ashost);
+>>>>>>> v3.18
 =======
 	ret = request_irq(host->irq, acornscsi_intr, 0, "acornscsi", ashost);
 >>>>>>> v3.18

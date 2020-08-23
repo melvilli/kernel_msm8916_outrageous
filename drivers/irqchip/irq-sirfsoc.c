@@ -24,7 +24,11 @@
 #define SIRFSOC_INIT_IRQ_ID		0x0038
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIRFSOC_NUM_IRQS		128
+=======
+#define SIRFSOC_NUM_IRQS		64
+>>>>>>> v3.18
 =======
 #define SIRFSOC_NUM_IRQS		64
 >>>>>>> v3.18
@@ -36,6 +40,7 @@ sirfsoc_alloc_gc(void __iomem *base, unsigned int irq_start, unsigned int num)
 {
 	struct irq_chip_generic *gc;
 	struct irq_chip_type *ct;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	gc = irq_alloc_generic_chip("SIRFINTC", 1, irq_start, base, handle_level_irq);
@@ -61,6 +66,8 @@ static asmlinkage void __exception_irq_entry sirfsoc_handle_irq(struct pt_regs *
 
 static int __init sirfsoc_irq_init(struct device_node *np, struct device_node *parent)
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	unsigned int clr = IRQ_NOREQUEST | IRQ_NOPROBE | IRQ_NOAUTOEN;
 	unsigned int set = IRQ_LEVEL;
@@ -87,6 +94,9 @@ static void __exception_irq_entry sirfsoc_handle_irq(struct pt_regs *regs)
 
 static int __init sirfsoc_irq_init(struct device_node *np,
 	struct device_node *parent)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	void __iomem *base = of_iomap(np, 0);
@@ -94,9 +104,14 @@ static int __init sirfsoc_irq_init(struct device_node *np,
 		panic("unable to map intc cpu registers\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* using legacy because irqchip_generic does not work with linear */
 	sirfsoc_irqdomain = irq_domain_add_legacy(np, SIRFSOC_NUM_IRQS, 0, 0,
 				 &irq_domain_simple_ops, base);
+=======
+	sirfsoc_irqdomain = irq_domain_add_linear(np, SIRFSOC_NUM_IRQS,
+		&irq_generic_chip_ops, base);
+>>>>>>> v3.18
 =======
 	sirfsoc_irqdomain = irq_domain_add_linear(np, SIRFSOC_NUM_IRQS,
 		&irq_generic_chip_ops, base);

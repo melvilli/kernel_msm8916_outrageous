@@ -43,7 +43,11 @@ typedef unsigned char	__u8;
 /* This array collects all instances that use the generic do_table */
 struct devtable {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *device_id; /* name of table, __mod_<name>_device_table. */
+=======
+	const char *device_id; /* name of table, __mod_<name>__*_device_table. */
+>>>>>>> v3.18
 =======
 	const char *device_id; /* name of table, __mod_<name>__*_device_table. */
 >>>>>>> v3.18
@@ -84,17 +88,23 @@ extern struct devtable *__start___devtable[], *__stop___devtable[];
 #endif /* __MACH__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if __GNUC__ == 3 && __GNUC_MINOR__ < 3
 # define __used			__attribute__((__unused__))
 #else
 # define __used			__attribute__((__used__))
 =======
+=======
+>>>>>>> v3.18
 #if !defined(__used)
 # if __GNUC__ == 3 && __GNUC_MINOR__ < 3
 #  define __used			__attribute__((__unused__))
 # else
 #  define __used			__attribute__((__used__))
 # endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -158,7 +168,12 @@ static void device_id_check(const char *modname, const char *device_id,
 	if (size % id_size || size < id_size) {
 		fatal("%s: sizeof(struct %s_device_id)=%lu is not a modulo "
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      "of the size of section __mod_%s_device_table=%lu.\n"
+=======
+		      "of the size of "
+		      "section __mod_%s__<identifier>_device_table=%lu.\n"
+>>>>>>> v3.18
 =======
 		      "of the size of "
 		      "section __mod_%s__<identifier>_device_table=%lu.\n"
@@ -660,6 +675,7 @@ ADD_TO_DEVTABLE("pcmcia", pcmcia_device_id, do_pcmcia_entry);
 static int do_of_entry (const char *filename, void *symval, char *alias)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     int len;
     char *tmp;
     DEF_FIELD_ADDR(symval, of_device_id, name);
@@ -683,6 +699,8 @@ static int do_of_entry (const char *filename, void *symval, char *alias)
     add_wildcard(alias);
     return 1;
 =======
+=======
+>>>>>>> v3.18
 	int len;
 	char *tmp;
 	DEF_FIELD_ADDR(symval, of_device_id, name);
@@ -703,6 +721,9 @@ static int do_of_entry (const char *filename, void *symval, char *alias)
 
 	add_wildcard(alias);
 	return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 ADD_TO_DEVTABLE("of", of_device_id, do_of_entry);
@@ -1150,7 +1171,11 @@ static int do_amba_entry(const char *filename,
 ADD_TO_DEVTABLE("amba", amba_id, do_amba_entry);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* LOOKS like x86cpu:vendor:VVVV:family:FFFF:model:MMMM:feature:*,FEAT,*
+=======
+/* LOOKS like cpu:type:x86,venVVVVfamFFFFmodMMMM:feature:*,FEAT,*
+>>>>>>> v3.18
 =======
 /* LOOKS like cpu:type:x86,venVVVVfamFFFFmodMMMM:feature:*,FEAT,*
 >>>>>>> v3.18
@@ -1168,15 +1193,21 @@ static int do_x86cpu_entry(const char *filename, void *symval,
 	DEF_FIELD(symval, x86_cpu_id, vendor);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strcpy(alias, "x86cpu:");
 	ADD(alias, "vendor:",  vendor != X86_VENDOR_ANY, vendor);
 	ADD(alias, ":family:", family != X86_FAMILY_ANY, family);
 	ADD(alias, ":model:",  model  != X86_MODEL_ANY,  model);
 =======
+=======
+>>>>>>> v3.18
 	strcpy(alias, "cpu:type:x86,");
 	ADD(alias, "ven", vendor != X86_VENDOR_ANY, vendor);
 	ADD(alias, "fam", family != X86_FAMILY_ANY, family);
 	ADD(alias, "mod", model  != X86_MODEL_ANY,  model);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	strcat(alias, ":feature:*");
 	if (feature != X86_FEATURE_ANY)
@@ -1208,7 +1239,10 @@ static int do_mei_entry(const char *filename, void *symval,
 ADD_TO_DEVTABLE("mei", mei_cl_device_id, do_mei_entry);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Looks like: rapidio:vNdNavNadN */
 static int do_rio_entry(const char *filename,
 			void *symval, char *alias)
@@ -1229,6 +1263,9 @@ static int do_rio_entry(const char *filename,
 }
 ADD_TO_DEVTABLE("rapidio", rio_device_id, do_rio_entry);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Does namelen bytes of name exactly match the symbol? */
 static bool sym_is(const char *name, unsigned namelen, const char *symbol)
@@ -1270,7 +1307,11 @@ void handle_moddevtable(struct module *mod, struct elf_info *info,
 	void *symval;
 	char *zeros = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *name;
+=======
+	const char *name, *identifier;
+>>>>>>> v3.18
 =======
 	const char *name, *identifier;
 >>>>>>> v3.18
@@ -1285,7 +1326,11 @@ void handle_moddevtable(struct module *mod, struct elf_info *info,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* All our symbols are of form <prefix>__mod_XXX_device_table. */
+=======
+	/* All our symbols are of form <prefix>__mod_<name>__<identifier>_device_table. */
+>>>>>>> v3.18
 =======
 	/* All our symbols are of form <prefix>__mod_<name>__<identifier>_device_table. */
 >>>>>>> v3.18
@@ -1299,12 +1344,18 @@ void handle_moddevtable(struct module *mod, struct elf_info *info,
 	if (strcmp(name + namelen - strlen("_device_table"), "_device_table"))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	namelen -= strlen("_device_table");
 =======
+=======
+>>>>>>> v3.18
 	identifier = strstr(name, "__");
 	if (!identifier)
 		return;
 	namelen = identifier - name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Handle all-NULL symbols allocated into .bss */

@@ -27,7 +27,13 @@
 #define V4L2_FH_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/list.h>
+=======
+#include <linux/fs.h>
+#include <linux/list.h>
+#include <linux/videodev2.h>
+>>>>>>> v3.18
 =======
 #include <linux/fs.h>
 #include <linux/list.h>
@@ -50,11 +56,17 @@ struct v4l2_fh {
 	unsigned int		navailable;
 	u32			sequence;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #if IS_ENABLED(CONFIG_V4L2_MEM2MEM_DEV)
 	struct v4l2_m2m_ctx	*m2m_ctx;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

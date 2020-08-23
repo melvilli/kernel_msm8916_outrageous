@@ -5,6 +5,7 @@
 # include <linux/seqlock.h>
 # include <linux/math64.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <uapi/linux/time.h>
 
 extern struct timezone sys_tz;
@@ -19,10 +20,15 @@ extern struct timezone sys_tz;
 #define FSEC_PER_SEC	1000000000000000LL
 
 =======
+=======
+>>>>>>> v3.18
 # include <linux/time64.h>
 
 extern struct timezone sys_tz;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TIME_T_MAX	(time_t)((1UL << ((sizeof(time_t) << 3) - 1)) - 1)
 
@@ -92,6 +98,7 @@ static inline struct timespec timespec_sub(struct timespec lhs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define KTIME_MAX			((s64)~((u64)1 << 63))
 #if (BITS_PER_LONG == 64)
 # define KTIME_SEC_MAX			(KTIME_MAX / NSEC_PER_SEC)
@@ -99,6 +106,8 @@ static inline struct timespec timespec_sub(struct timespec lhs,
 # define KTIME_SEC_MAX			LONG_MAX
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -126,6 +135,7 @@ static inline bool timespec_valid_strict(const struct timespec *ts)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool persistent_clock_exist;
 
 static inline bool has_persistent_clock(void)
@@ -150,6 +160,9 @@ void timekeeping_inject_sleeptime(struct timespec *delta);
 =======
 extern struct timespec timespec_trunc(struct timespec t, unsigned gran);
 >>>>>>> v3.18
+=======
+extern struct timespec timespec_trunc(struct timespec t, unsigned gran);
+>>>>>>> v3.18
 
 #define CURRENT_TIME		(current_kernel_time())
 #define CURRENT_TIME_SEC	((struct timespec) { get_seconds(), 0 })
@@ -167,6 +180,7 @@ extern struct timespec timespec_trunc(struct timespec t, unsigned gran);
 extern u32 (*arch_gettimeoffset)(void);
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void do_gettimeofday(struct timeval *tv);
 extern int do_settimeofday(const struct timespec *tv);
@@ -209,6 +223,8 @@ extern s32 timekeeping_get_tai_offset(void);
 extern void timekeeping_set_tai_offset(s32 tai_offset);
 extern void timekeeping_clocktai(struct timespec *ts);
 =======
+=======
+>>>>>>> v3.18
 struct itimerval;
 extern int do_setitimer(int which, struct itimerval *value,
 			struct itimerval *ovalue);
@@ -217,6 +233,9 @@ extern int do_getitimer(int which, struct itimerval *value);
 extern unsigned int alarm_setitimer(unsigned int seconds);
 
 extern long do_utimes(int dfd, const char __user *filename, struct timespec *times, int flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct tms;

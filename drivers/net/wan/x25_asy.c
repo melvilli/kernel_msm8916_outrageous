@@ -82,8 +82,13 @@ static struct x25_asy *x25_asy_alloc(void)
 		sprintf(name, "x25asy%d", i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev = alloc_netdev(sizeof(struct x25_asy),
 				   name, x25_asy_setup);
+=======
+		dev = alloc_netdev(sizeof(struct x25_asy), name,
+				   NET_NAME_UNKNOWN, x25_asy_setup);
+>>>>>>> v3.18
 =======
 		dev = alloc_netdev(sizeof(struct x25_asy), name,
 				   NET_NAME_UNKNOWN, x25_asy_setup);
@@ -128,15 +133,21 @@ static int x25_asy_change_mtu(struct net_device *dev, int newmtu)
 	struct x25_asy *sl = netdev_priv(dev);
 	unsigned char *xbuff, *rbuff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int len = 2 * newmtu;
 
 =======
+=======
+>>>>>>> v3.18
 	int len;
 
 	if (newmtu > 65534)
 		return -EINVAL;
 
 	len = 2 * newmtu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xbuff = kmalloc(len + 4, GFP_ATOMIC);
 	rbuff = kmalloc(len + 4, GFP_ATOMIC);
@@ -560,7 +571,11 @@ static void x25_asy_receive_buf(struct tty_struct *tty,
 static int x25_asy_open_tty(struct tty_struct *tty)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct x25_asy *sl;
+=======
+	struct x25_asy *sl = tty->disc_data;
+>>>>>>> v3.18
 =======
 	struct x25_asy *sl = tty->disc_data;
 >>>>>>> v3.18
@@ -570,11 +585,17 @@ static int x25_asy_open_tty(struct tty_struct *tty)
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* First make sure we're not already connected. */
 	if (sl && sl->magic == X25_ASY_MAGIC)
 		return -EEXIST;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* OK.  Find a free X.25 channel to use. */
 	sl = x25_asy_alloc();

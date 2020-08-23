@@ -43,7 +43,11 @@ static int pfifo_tail_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	/* queue full, remove one skb to fulfill the limit */
 	__qdisc_queue_drop_head(sch, &sch->q);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sch->qstats.drops++;
+=======
+	qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 	qdisc_qstats_drop(sch);
 >>>>>>> v3.18

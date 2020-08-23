@@ -35,10 +35,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * $Log: t128.h,v $
  */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef T128_H
@@ -111,8 +114,11 @@ static int t128_bus_reset(struct scsi_cmnd *);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef HOSTS_C
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define NCR5380_implementation_fields \
@@ -155,7 +161,10 @@ static int t128_bus_reset(struct scsi_cmnd *);
 #define T128_IRQS 0xc4a8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* else def HOSTS_C */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* ndef ASM */

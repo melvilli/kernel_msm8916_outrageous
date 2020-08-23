@@ -3,6 +3,10 @@
 #include <linux/utsname.h>
 #include <linux/freezer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 >>>>>>> v3.18
@@ -16,7 +20,11 @@ struct swsusp_info {
 	unsigned long		pages;
 	unsigned long		size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((aligned(PAGE_SIZE)));
+=======
+} __aligned(PAGE_SIZE);
+>>>>>>> v3.18
 =======
 } __aligned(PAGE_SIZE);
 >>>>>>> v3.18
@@ -58,6 +66,11 @@ static inline char *check_image_kernel(struct swsusp_info *info)
 #define SPARE_PAGES	((1024 * 1024) >> PAGE_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+asmlinkage int swsusp_save(void);
+
+>>>>>>> v3.18
 =======
 asmlinkage int swsusp_save(void);
 
@@ -189,6 +202,7 @@ extern void swsusp_show_speed(struct timeval *, struct timeval *,
 
 #ifdef CONFIG_SUSPEND
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pm_sleep_state {
 	const char *label;
 	suspend_state_t state;
@@ -196,6 +210,11 @@ struct pm_sleep_state {
 
 /* kernel/power/suspend.c */
 extern struct pm_sleep_state pm_states[];
+=======
+/* kernel/power/suspend.c */
+extern const char *pm_labels[];
+extern const char *pm_states[];
+>>>>>>> v3.18
 =======
 /* kernel/power/suspend.c */
 extern const char *pm_labels[];

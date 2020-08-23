@@ -26,6 +26,10 @@
 #include "include/policy.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -42,6 +46,7 @@ static int prepend(char **buffer, int buflen, const char *str, int namelen)
 
 #define CHROOT_NSCONNECT (PATH_CHROOT_REL | PATH_CHROOT_NSCONNECT)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* If the path is not connected to the expected root,
  * check if it is a sysctl and handle specially else remove any
@@ -75,6 +80,8 @@ static int disconnect(const struct path *path, char *buf, char **name,
 	return error;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -113,8 +120,12 @@ static int d_namespace_path(struct path *path, char *buf, int buflen,
 			 */
 			return prepend(name, *name - buf, "/proc", 5);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else
 			return disconnect(path, buf, name, flags);
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -164,9 +175,12 @@ static int d_namespace_path(struct path *path, char *buf, int buflen,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!connected)
 		error = disconnect(path, buf, name, flags);
 =======
+=======
+>>>>>>> v3.18
 	/* If the path is not connected to the expected root,
 	 * check if it is a sysctl and handle specially else remove any
 	 * leading / that __d_path may have returned.
@@ -190,6 +204,9 @@ static int d_namespace_path(struct path *path, char *buf, int buflen,
 				*name = res + 1;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -223,7 +240,11 @@ static int get_name_to_buffer(struct path *path, int flags, char *buffer,
 		if (error == -ENOENT)
 			*info = "Failed name lookup - deleted entry";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (error == -ESTALE)
+=======
+		else if (error == -EACCES)
+>>>>>>> v3.18
 =======
 		else if (error == -EACCES)
 >>>>>>> v3.18

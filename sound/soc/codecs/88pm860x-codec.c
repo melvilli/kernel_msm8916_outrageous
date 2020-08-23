@@ -17,6 +17,10 @@
 #include <linux/slab.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -125,10 +129,15 @@
  */
 #define PM860X_DAPM_OUTPUT(wname, wevent)	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 {	.id = snd_soc_dapm_pga, .name = wname, .reg = SND_SOC_NOPM, \
 	.shift = 0, .invert = 0, .kcontrol_news = NULL, \
 	.num_kcontrols = 0, .event = wevent, \
 	.event_flags = SND_SOC_DAPM_POST_PMU | SND_SOC_DAPM_POST_PMD, }
+=======
+	SND_SOC_DAPM_PGA_E(wname, SND_SOC_NOPM, 0, 0, NULL, 0, wevent, \
+			    SND_SOC_DAPM_POST_PMU | SND_SOC_DAPM_POST_PMD)
+>>>>>>> v3.18
 =======
 	SND_SOC_DAPM_PGA_E(wname, SND_SOC_NOPM, 0, 0, NULL, 0, wevent, \
 			    SND_SOC_DAPM_POST_PMU | SND_SOC_DAPM_POST_PMD)
@@ -152,6 +161,10 @@ struct pm860x_priv {
 	struct snd_soc_codec	*codec;
 	struct i2c_client	*i2c;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct regmap		*regmap;
+>>>>>>> v3.18
 =======
 	struct regmap		*regmap;
 >>>>>>> v3.18
@@ -160,7 +173,11 @@ struct pm860x_priv {
 
 	int			irq[4];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char		name[4][MAX_NAME_LEN];
+=======
+	unsigned char		name[4][MAX_NAME_LEN+1];
+>>>>>>> v3.18
 =======
 	unsigned char		name[4][MAX_NAME_LEN+1];
 >>>>>>> v3.18
@@ -289,6 +306,7 @@ static struct st_gain st_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pm860x_volatile(unsigned int reg)
 {
 	BUG_ON(reg >= REG_CACHE_SIZE);
@@ -333,13 +351,19 @@ static int pm860x_write_reg_cache(struct snd_soc_codec *codec,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int snd_soc_get_volsw_2r_st(struct snd_kcontrol *kcontrol,
 				   struct snd_ctl_elem_value *ucontrol)
 {
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -367,7 +391,11 @@ static int snd_soc_put_volsw_2r_st(struct snd_kcontrol *kcontrol,
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -404,7 +432,11 @@ static int snd_soc_get_volsw_2r_out(struct snd_kcontrol *kcontrol,
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -428,7 +460,11 @@ static int snd_soc_put_volsw_2r_out(struct snd_kcontrol *kcontrol,
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -527,6 +563,7 @@ static const char *pm860x_opamp_texts[] = {"-50%", "-25%", "0%", "75%"};
 static const char *pm860x_pa_texts[] = {"-33%", "0%", "33%", "66%"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum pm860x_hs1_opamp_enum =
 	SOC_ENUM_SINGLE(PM860X_HS1_CTRL, 5, 4, pm860x_opamp_texts);
 
@@ -560,6 +597,8 @@ static const struct soc_enum pm860x_ear_pa_enum =
 static const struct soc_enum pm860x_spk_ear_opamp_enum =
 	SOC_ENUM_SINGLE(PM860X_EAR_CTRL_1, 3, 4, pm860x_opamp_texts);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(pm860x_hs1_opamp_enum,
 			    PM860X_HS1_CTRL, 5, pm860x_opamp_texts);
 
@@ -592,6 +631,9 @@ static SOC_ENUM_SINGLE_DECL(pm860x_ear_pa_enum,
 
 static SOC_ENUM_SINGLE_DECL(pm860x_spk_ear_opamp_enum,
 			    PM860X_EAR_CTRL_1, 3, pm860x_opamp_texts);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new pm860x_snd_controls[] = {
@@ -675,8 +717,13 @@ static const char *aif1_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum aif1_enum =
 	SOC_ENUM_SINGLE(PM860X_PCM_IFACE_3, 6, 2, aif1_text);
+=======
+static SOC_ENUM_SINGLE_DECL(aif1_enum,
+			    PM860X_PCM_IFACE_3, 6, aif1_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(aif1_enum,
 			    PM860X_PCM_IFACE_3, 6, aif1_text);
@@ -691,8 +738,13 @@ static const char *i2s_din_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum i2s_din_enum =
 	SOC_ENUM_SINGLE(PM860X_I2S_IFACE_3, 1, 2, i2s_din_text);
+=======
+static SOC_ENUM_SINGLE_DECL(i2s_din_enum,
+			    PM860X_I2S_IFACE_3, 1, i2s_din_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(i2s_din_enum,
 			    PM860X_I2S_IFACE_3, 1, i2s_din_text);
@@ -707,8 +759,13 @@ static const char *i2s_mic_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum i2s_mic_enum =
 	SOC_ENUM_SINGLE(PM860X_I2S_IFACE_3, 4, 2, i2s_mic_text);
+=======
+static SOC_ENUM_SINGLE_DECL(i2s_mic_enum,
+			    PM860X_I2S_IFACE_3, 4, i2s_mic_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(i2s_mic_enum,
 			    PM860X_I2S_IFACE_3, 4, i2s_mic_text);
@@ -723,8 +780,13 @@ static const char *adcl_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum adcl_enum =
 	SOC_ENUM_SINGLE(PM860X_PCM_IFACE_3, 4, 2, adcl_text);
+=======
+static SOC_ENUM_SINGLE_DECL(adcl_enum,
+			    PM860X_PCM_IFACE_3, 4, adcl_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(adcl_enum,
 			    PM860X_PCM_IFACE_3, 4, adcl_text);
@@ -739,8 +801,13 @@ static const char *adcr_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum adcr_enum =
 	SOC_ENUM_SINGLE(PM860X_PCM_IFACE_3, 2, 2, adcr_text);
+=======
+static SOC_ENUM_SINGLE_DECL(adcr_enum,
+			    PM860X_PCM_IFACE_3, 2, adcr_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(adcr_enum,
 			    PM860X_PCM_IFACE_3, 2, adcr_text);
@@ -755,8 +822,13 @@ static const char *adcr_ec_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum adcr_ec_enum =
 	SOC_ENUM_SINGLE(PM860X_ADC_EN_2, 3, 2, adcr_ec_text);
+=======
+static SOC_ENUM_SINGLE_DECL(adcr_ec_enum,
+			    PM860X_ADC_EN_2, 3, adcr_ec_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(adcr_ec_enum,
 			    PM860X_ADC_EN_2, 3, adcr_ec_text);
@@ -771,8 +843,13 @@ static const char *ec_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ec_enum =
 	SOC_ENUM_SINGLE(PM860X_EC_PATH, 1, 3, ec_text);
+=======
+static SOC_ENUM_SINGLE_DECL(ec_enum,
+			    PM860X_EC_PATH, 1, ec_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(ec_enum,
 			    PM860X_EC_PATH, 1, ec_text);
@@ -787,8 +864,13 @@ static const char *dac_text[] = {
 
 /* DAC Headset 1 Mux / Mux10 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum dac_hs1_enum =
 	SOC_ENUM_SINGLE(PM860X_ANA_INPUT_SEL_1, 0, 4, dac_text);
+=======
+static SOC_ENUM_SINGLE_DECL(dac_hs1_enum,
+			    PM860X_ANA_INPUT_SEL_1, 0, dac_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(dac_hs1_enum,
 			    PM860X_ANA_INPUT_SEL_1, 0, dac_text);
@@ -799,8 +881,13 @@ static const struct snd_kcontrol_new dac_hs1_mux =
 
 /* DAC Headset 2 Mux / Mux11 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum dac_hs2_enum =
 	SOC_ENUM_SINGLE(PM860X_ANA_INPUT_SEL_1, 2, 4, dac_text);
+=======
+static SOC_ENUM_SINGLE_DECL(dac_hs2_enum,
+			    PM860X_ANA_INPUT_SEL_1, 2, dac_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(dac_hs2_enum,
 			    PM860X_ANA_INPUT_SEL_1, 2, dac_text);
@@ -811,8 +898,13 @@ static const struct snd_kcontrol_new dac_hs2_mux =
 
 /* DAC Lineout 1 Mux / Mux12 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum dac_lo1_enum =
 	SOC_ENUM_SINGLE(PM860X_ANA_INPUT_SEL_1, 4, 4, dac_text);
+=======
+static SOC_ENUM_SINGLE_DECL(dac_lo1_enum,
+			    PM860X_ANA_INPUT_SEL_1, 4, dac_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(dac_lo1_enum,
 			    PM860X_ANA_INPUT_SEL_1, 4, dac_text);
@@ -823,8 +915,13 @@ static const struct snd_kcontrol_new dac_lo1_mux =
 
 /* DAC Lineout 2 Mux / Mux13 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum dac_lo2_enum =
 	SOC_ENUM_SINGLE(PM860X_ANA_INPUT_SEL_1, 6, 4, dac_text);
+=======
+static SOC_ENUM_SINGLE_DECL(dac_lo2_enum,
+			    PM860X_ANA_INPUT_SEL_1, 6, dac_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(dac_lo2_enum,
 			    PM860X_ANA_INPUT_SEL_1, 6, dac_text);
@@ -835,8 +932,13 @@ static const struct snd_kcontrol_new dac_lo2_mux =
 
 /* DAC Spearker Earphone Mux / Mux14 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum dac_spk_ear_enum =
 	SOC_ENUM_SINGLE(PM860X_ANA_INPUT_SEL_2, 0, 4, dac_text);
+=======
+static SOC_ENUM_SINGLE_DECL(dac_spk_ear_enum,
+			    PM860X_ANA_INPUT_SEL_2, 0, dac_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(dac_spk_ear_enum,
 			    PM860X_ANA_INPUT_SEL_2, 0, dac_text);
@@ -851,8 +953,13 @@ static const char *in_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum hs1_enum =
 	SOC_ENUM_SINGLE(PM860X_ANA_TO_ANA, 0, 2, in_text);
+=======
+static SOC_ENUM_SINGLE_DECL(hs1_enum,
+			    PM860X_ANA_TO_ANA, 0, in_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(hs1_enum,
 			    PM860X_ANA_TO_ANA, 0, in_text);
@@ -863,8 +970,13 @@ static const struct snd_kcontrol_new hs1_mux =
 
 /* Headset 2 Mux / Mux16 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum hs2_enum =
 	SOC_ENUM_SINGLE(PM860X_ANA_TO_ANA, 1, 2, in_text);
+=======
+static SOC_ENUM_SINGLE_DECL(hs2_enum,
+			    PM860X_ANA_TO_ANA, 1, in_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(hs2_enum,
 			    PM860X_ANA_TO_ANA, 1, in_text);
@@ -875,8 +987,13 @@ static const struct snd_kcontrol_new hs2_mux =
 
 /* Lineout 1 Mux / Mux17 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum lo1_enum =
 	SOC_ENUM_SINGLE(PM860X_ANA_TO_ANA, 2, 2, in_text);
+=======
+static SOC_ENUM_SINGLE_DECL(lo1_enum,
+			    PM860X_ANA_TO_ANA, 2, in_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(lo1_enum,
 			    PM860X_ANA_TO_ANA, 2, in_text);
@@ -887,8 +1004,13 @@ static const struct snd_kcontrol_new lo1_mux =
 
 /* Lineout 2 Mux / Mux18 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum lo2_enum =
 	SOC_ENUM_SINGLE(PM860X_ANA_TO_ANA, 3, 2, in_text);
+=======
+static SOC_ENUM_SINGLE_DECL(lo2_enum,
+			    PM860X_ANA_TO_ANA, 3, in_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(lo2_enum,
 			    PM860X_ANA_TO_ANA, 3, in_text);
@@ -903,8 +1025,13 @@ static const char *spk_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum spk_enum =
 	SOC_ENUM_SINGLE(PM860X_ANA_TO_ANA, 6, 2, spk_text);
+=======
+static SOC_ENUM_SINGLE_DECL(spk_enum,
+			    PM860X_ANA_TO_ANA, 6, spk_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(spk_enum,
 			    PM860X_ANA_TO_ANA, 6, spk_text);
@@ -919,8 +1046,13 @@ static const char *mic_text[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum mic_enum =
 	SOC_ENUM_SINGLE(PM860X_ADC_ANA_4, 4, 2, mic_text);
+=======
+static SOC_ENUM_SINGLE_DECL(mic_enum,
+			    PM860X_ADC_ANA_4, 4, mic_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(mic_enum,
 			    PM860X_ADC_ANA_4, 4, mic_text);
@@ -1149,17 +1281,23 @@ static int pm860x_pcm_hw_params(struct snd_pcm_substream *substream,
 
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		inf &= ~PCM_INF2_18WL;
 		break;
 	case SNDRV_PCM_FORMAT_S18_3LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		inf &= ~PCM_INF2_18WL;
 		break;
 	case 18:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		inf |= PCM_INF2_18WL;
 		break;
@@ -1256,17 +1394,23 @@ static int pm860x_i2s_hw_params(struct snd_pcm_substream *substream,
 
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		inf = 0;
 		break;
 	case SNDRV_PCM_FORMAT_S18_3LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		inf = 0;
 		break;
 	case 18:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		inf = PCM_INF2_18WL;
 		break;
@@ -1349,6 +1493,10 @@ static int pm860x_set_bias_level(struct snd_soc_codec *codec,
 				 enum snd_soc_bias_level level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct pm860x_priv *pm860x = snd_soc_codec_get_drvdata(codec);
+>>>>>>> v3.18
 =======
 	struct pm860x_priv *pm860x = snd_soc_codec_get_drvdata(codec);
 >>>>>>> v3.18
@@ -1366,17 +1514,23 @@ static int pm860x_set_bias_level(struct snd_soc_codec *codec,
 			/* Enable Audio PLL & Audio section */
 			data = AUDIO_PLL | AUDIO_SECTION_ON;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pm860x_reg_write(codec->control_data, REG_MISC2, data);
 			udelay(300);
 			data = AUDIO_PLL | AUDIO_SECTION_RESET
 				| AUDIO_SECTION_ON;
 			pm860x_reg_write(codec->control_data, REG_MISC2, data);
 =======
+=======
+>>>>>>> v3.18
 			pm860x_reg_write(pm860x->i2c, REG_MISC2, data);
 			udelay(300);
 			data = AUDIO_PLL | AUDIO_SECTION_RESET
 				| AUDIO_SECTION_ON;
 			pm860x_reg_write(pm860x->i2c, REG_MISC2, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -1384,7 +1538,11 @@ static int pm860x_set_bias_level(struct snd_soc_codec *codec,
 	case SND_SOC_BIAS_OFF:
 		data = AUDIO_PLL | AUDIO_SECTION_RESET | AUDIO_SECTION_ON;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pm860x_set_bits(codec->control_data, REG_MISC2, data, 0);
+=======
+		pm860x_set_bits(pm860x->i2c, REG_MISC2, data, 0);
+>>>>>>> v3.18
 =======
 		pm860x_set_bits(pm860x->i2c, REG_MISC2, data, 0);
 >>>>>>> v3.18
@@ -1518,7 +1676,11 @@ int pm860x_hs_jack_detect(struct snd_soc_codec *codec,
 
 	if (det & SND_JACK_HEADPHONE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pm860x_set_bits(codec->control_data, REG_HS_DET,
+=======
+		pm860x_set_bits(pm860x->i2c, REG_HS_DET,
+>>>>>>> v3.18
 =======
 		pm860x_set_bits(pm860x->i2c, REG_HS_DET,
 >>>>>>> v3.18
@@ -1527,7 +1689,11 @@ int pm860x_hs_jack_detect(struct snd_soc_codec *codec,
 	if (hs_shrt) {
 		data = CLR_SHORT_HS2 | CLR_SHORT_HS1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pm860x_set_bits(codec->control_data, REG_SHORTS, data, data);
+=======
+		pm860x_set_bits(pm860x->i2c, REG_SHORTS, data, data);
+>>>>>>> v3.18
 =======
 		pm860x_set_bits(pm860x->i2c, REG_SHORTS, data, data);
 >>>>>>> v3.18
@@ -1536,7 +1702,11 @@ int pm860x_hs_jack_detect(struct snd_soc_codec *codec,
 	if (lo_shrt) {
 		data = CLR_SHORT_LO2 | CLR_SHORT_LO1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pm860x_set_bits(codec->control_data, REG_SHORTS, data, data);
+=======
+		pm860x_set_bits(pm860x->i2c, REG_SHORTS, data, data);
+>>>>>>> v3.18
 =======
 		pm860x_set_bits(pm860x->i2c, REG_SHORTS, data, data);
 >>>>>>> v3.18
@@ -1558,7 +1728,11 @@ int pm860x_mic_jack_detect(struct snd_soc_codec *codec,
 
 	if (det & SND_JACK_MICROPHONE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pm860x_set_bits(codec->control_data, REG_MIC_DET,
+=======
+		pm860x_set_bits(pm860x->i2c, REG_MIC_DET,
+>>>>>>> v3.18
 =======
 		pm860x_set_bits(pm860x->i2c, REG_MIC_DET,
 >>>>>>> v3.18
@@ -1578,8 +1752,11 @@ static int pm860x_probe(struct snd_soc_codec *codec)
 	pm860x->codec = codec;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->control_data = pm860x->i2c;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < 4; i++) {
@@ -1593,6 +1770,7 @@ static int pm860x_probe(struct snd_soc_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm860x_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
 
 	ret = pm860x_bulk_read(codec->control_data, REG_CACHE_BASE,
@@ -1603,6 +1781,8 @@ static int pm860x_probe(struct snd_soc_codec *codec)
 		goto out;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1621,6 +1801,7 @@ static int pm860x_remove(struct snd_soc_codec *codec)
 	for (i = 3; i >= 0; i--)
 		free_irq(pm860x->irq[i], pm860x);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm860x_set_bias_level(codec, SND_SOC_BIAS_OFF);
 	return 0;
 }
@@ -1634,6 +1815,8 @@ static struct snd_soc_codec_driver soc_codec_dev_pm860x = {
 	.reg_word_size	= sizeof(u8),
 	.set_bias_level	= pm860x_set_bias_level,
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1649,6 +1832,9 @@ static struct snd_soc_codec_driver soc_codec_dev_pm860x = {
 	.remove		= pm860x_remove,
 	.set_bias_level	= pm860x_set_bias_level,
 	.get_regmap	= pm860x_get_regmap,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.controls = pm860x_snd_controls,
@@ -1675,6 +1861,11 @@ static int pm860x_codec_probe(struct platform_device *pdev)
 	pm860x->i2c = (chip->id == CHIP_PM8607) ? chip->client
 			: chip->companion;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pm860x->regmap = (chip->id == CHIP_PM8607) ? chip->regmap
+			: chip->regmap_companion;
+>>>>>>> v3.18
 =======
 	pm860x->regmap = (chip->id == CHIP_PM8607) ? chip->regmap
 			: chip->regmap_companion;
@@ -1686,7 +1877,11 @@ static int pm860x_codec_probe(struct platform_device *pdev)
 		if (!res) {
 			dev_err(&pdev->dev, "Failed to get IRQ resources\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -1700,6 +1895,7 @@ static int pm860x_codec_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "Failed to register codec\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
 	}
 	return ret;
@@ -1712,13 +1908,21 @@ out:
 	}
 	return ret;
 >>>>>>> v3.18
+=======
+		return -EINVAL;
+	}
+	return ret;
+>>>>>>> v3.18
 }
 
 static int pm860x_codec_remove(struct platform_device *pdev)
 {
 	snd_soc_unregister_codec(&pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

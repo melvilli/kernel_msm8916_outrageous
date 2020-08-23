@@ -7,8 +7,13 @@
  */
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "at91sam9g20.dtsi"
 /include/ "tny_a9260_common.dtsi"
+=======
+#include "at91sam9g20.dtsi"
+#include "tny_a9260_common.dtsi"
+>>>>>>> v3.18
 =======
 #include "at91sam9g20.dtsi"
 #include "tny_a9260_common.dtsi"

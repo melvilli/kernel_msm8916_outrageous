@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -22,6 +25,7 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
@@ -34,6 +38,8 @@
 ieee754dp ieee754dp_add(ieee754dp x, ieee754dp y)
 {
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
@@ -43,6 +49,9 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 {
 	int s;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	COMPXDP;
 	COMPYDP;
@@ -51,7 +60,11 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 	EXPLODEYDP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLEARCX;
+=======
+	ieee754_clearcx();
+>>>>>>> v3.18
 =======
 	ieee754_clearcx();
 >>>>>>> v3.18
@@ -72,8 +85,13 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 	case CLPAIR(IEEE754_CLASS_SNAN, IEEE754_CLASS_DNORM):
 	case CLPAIR(IEEE754_CLASS_SNAN, IEEE754_CLASS_INF):
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754dp_nanxcpt(ieee754dp_indef(), "add", x, y);
+=======
+		ieee754_setcx(IEEE754_INVALID_OPERATION);
+		return ieee754dp_nanxcpt(ieee754dp_indef());
+>>>>>>> v3.18
 =======
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754dp_nanxcpt(ieee754dp_indef());
@@ -94,6 +112,7 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Infinity handling
 		 */
 
@@ -103,6 +122,8 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754dp_xcpt(ieee754dp_indef(), "add", x, y);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Infinity handling
 	 */
@@ -111,6 +132,9 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 			return x;
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754dp_indef();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case CLPAIR(IEEE754_CLASS_NORM, IEEE754_CLASS_INF):
@@ -124,9 +148,15 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 		return x;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Zero handling
 		 */
 
+=======
+	/*
+	 * Zero handling
+	 */
+>>>>>>> v3.18
 =======
 	/*
 	 * Zero handling
@@ -137,8 +167,12 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 			return x;
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return ieee754dp_zero(ieee754_csr.rm ==
 					      IEEE754_RD);
+=======
+			return ieee754dp_zero(ieee754_csr.rm == FPU_CSR_RD);
+>>>>>>> v3.18
 =======
 			return ieee754dp_zero(ieee754_csr.rm == FPU_CSR_RD);
 >>>>>>> v3.18
@@ -171,7 +205,13 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 	assert(ym & DP_HIDDEN_BIT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* provide guard,round and stick bit space */
+=======
+	/*
+	 * Provide guard,round and stick bit space.
+	 */
+>>>>>>> v3.18
 =======
 	/*
 	 * Provide guard,round and stick bit space.
@@ -181,6 +221,7 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 	ym <<= 3;
 
 	if (xe > ye) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* have to shift y fraction right to align
 		 */
@@ -192,6 +233,8 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 		 */
 		int s = ye - xe;
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Have to shift y fraction right to align.
 		 */
@@ -203,6 +246,9 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 		 * Have to shift x fraction right to align.
 		 */
 		s = ye - xe;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		xm = XDPSRS(xm, s);
 		xe += s;
@@ -212,8 +258,14 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 
 	if (xs == ys) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* generate 28 bit result of adding two 27 bit numbers
 		 * leaving result in xm,xs,xe
+=======
+		/*
+		 * Generate 28 bit result of adding two 27 bit numbers
+		 * leaving result in xm, xs and xe.
+>>>>>>> v3.18
 =======
 		/*
 		 * Generate 28 bit result of adding two 27 bit numbers
@@ -225,7 +277,11 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 		xs = xs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (xm >> (DP_MBITS + 1 + 3)) { /* carry out */
+=======
+		if (xm >> (DP_FBITS + 1 + 3)) { /* carry out */
+>>>>>>> v3.18
 =======
 		if (xm >> (DP_FBITS + 1 + 3)) { /* carry out */
 >>>>>>> v3.18
@@ -244,6 +300,7 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 		}
 		if (xm == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return ieee754dp_zero(ieee754_csr.rm ==
 					      IEEE754_RD);
 
@@ -256,6 +313,8 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 	}
 	DPNORMRET2(xs, xe, xm, "add", x, y);
 =======
+=======
+>>>>>>> v3.18
 			return ieee754dp_zero(ieee754_csr.rm == FPU_CSR_RD);
 
 		/*
@@ -268,5 +327,8 @@ union ieee754dp ieee754dp_add(union ieee754dp x, union ieee754dp y)
 	}
 
 	return ieee754dp_format(xs, xe, xm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

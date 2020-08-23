@@ -29,7 +29,11 @@
 #include "mb86a16_priv.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int verbose = 5;
+=======
+static unsigned int verbose = 5;
+>>>>>>> v3.18
 =======
 static unsigned int verbose = 5;
 >>>>>>> v3.18
@@ -120,15 +124,21 @@ static int mb86a16_read(struct mb86a16_state *state, u8 reg, u8 *val)
 	ret = i2c_transfer(state->i2c_adap, msg, 2);
 	if (ret != 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dprintk(verbose, MB86A16_ERROR, 1, "read error(reg=0x%02x, ret=0x%i)",
 			reg, ret);
 
 =======
+=======
+>>>>>>> v3.18
 		dprintk(verbose, MB86A16_ERROR, 1, "read error(reg=0x%02x, ret=%i)",
 			reg, ret);
 
 		if (ret < 0)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EREMOTEIO;
 	}

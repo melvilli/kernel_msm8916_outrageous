@@ -31,14 +31,20 @@
 #include <linux/idr.h>
 #include <linux/fb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <drm/drm_mode.h>
 
 #include <drm/drm_fourcc.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/hdmi.h>
 #include <uapi/drm/drm_mode.h>
 #include <uapi/drm/drm_fourcc.h>
 #include <drm/drm_modeset_lock.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct drm_device;
@@ -48,6 +54,10 @@ struct drm_object_properties;
 struct drm_file;
 struct drm_clip_rect;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct device_node;
+>>>>>>> v3.18
 =======
 struct device_node;
 >>>>>>> v3.18
@@ -61,6 +71,11 @@ struct device_node;
 #define DRM_MODE_OBJECT_BLOB 0xbbbbbbbb
 #define DRM_MODE_OBJECT_PLANE 0xeeeeeeee
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DRM_MODE_OBJECT_BRIDGE 0xbdbdbdbd
+#define DRM_MODE_OBJECT_ANY 0
+>>>>>>> v3.18
 =======
 #define DRM_MODE_OBJECT_BRIDGE 0xbdbdbdbd
 #define DRM_MODE_OBJECT_ANY 0
@@ -79,6 +94,7 @@ struct drm_object_properties {
 	uint64_t values[DRM_OBJECT_MAX_PROPERTY];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Note on terminology:  here, for brevity and convenience, we refer to connector
@@ -196,6 +212,8 @@ struct drm_display_mode {
 	int hsync;		/* in kHz */
 };
 =======
+=======
+>>>>>>> v3.18
 static inline int64_t U642I64(uint64_t val)
 {
 	return (int64_t)*((int64_t *)&val);
@@ -221,6 +239,9 @@ enum drm_connector_force {
 };
 
 #include <drm/drm_modes.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum drm_connector_status {
@@ -261,6 +282,12 @@ struct drm_display_info {
 	u32 color_formats;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Mask of supported hdmi deep color modes */
+	u8 edid_hdmi_dc_modes;
+
+>>>>>>> v3.18
 =======
 	/* Mask of supported hdmi deep color modes */
 	u8 edid_hdmi_dc_modes;
@@ -347,6 +374,10 @@ struct drm_property {
 	uint32_t num_values;
 	uint64_t *values;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct drm_device *dev;
+>>>>>>> v3.18
 =======
 	struct drm_device *dev;
 >>>>>>> v3.18
@@ -360,6 +391,10 @@ struct drm_encoder;
 struct drm_pending_vblank_event;
 struct drm_plane;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct drm_bridge;
+>>>>>>> v3.18
 =======
 struct drm_bridge;
 >>>>>>> v3.18
@@ -398,6 +433,12 @@ struct drm_crtc_funcs {
 	int (*cursor_set)(struct drm_crtc *crtc, struct drm_file *file_priv,
 			  uint32_t handle, uint32_t width, uint32_t height);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*cursor_set2)(struct drm_crtc *crtc, struct drm_file *file_priv,
+			   uint32_t handle, uint32_t width, uint32_t height,
+			   int32_t hot_x, int32_t hot_y);
+>>>>>>> v3.18
 =======
 	int (*cursor_set2)(struct drm_crtc *crtc, struct drm_file *file_priv,
 			   uint32_t handle, uint32_t width, uint32_t height,
@@ -425,7 +466,12 @@ struct drm_crtc_funcs {
 	int (*page_flip)(struct drm_crtc *crtc,
 			 struct drm_framebuffer *fb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct drm_pending_vblank_event *event);
+=======
+			 struct drm_pending_vblank_event *event,
+			 uint32_t flags);
+>>>>>>> v3.18
 =======
 			 struct drm_pending_vblank_event *event,
 			 uint32_t flags);
@@ -440,12 +486,18 @@ struct drm_crtc_funcs {
  * @dev: parent DRM device
  * @head: list management
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @base: base KMS object for ID tracking etc.
 =======
+=======
+>>>>>>> v3.18
  * @mutex: per-CRTC locking
  * @base: base KMS object for ID tracking etc.
  * @primary: primary plane for this CRTC
  * @cursor: cursor plane for this CRTC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @enabled: is this CRTC enabled?
  * @mode: current mode timings
@@ -470,6 +522,10 @@ struct drm_crtc_funcs {
 struct drm_crtc {
 	struct drm_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node *port;
+>>>>>>> v3.18
 =======
 	struct device_node *port;
 >>>>>>> v3.18
@@ -483,6 +539,7 @@ struct drm_crtc {
 	 * without a full modeset (fb, cursor data, ...)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex mutex;
 
 	struct drm_mode_object base;
@@ -490,6 +547,8 @@ struct drm_crtc {
 	/* framebuffer the connector is currently bound to */
 	struct drm_framebuffer *fb;
 =======
+=======
+>>>>>>> v3.18
 	struct drm_modeset_lock mutex;
 
 	struct drm_mode_object base;
@@ -501,6 +560,9 @@ struct drm_crtc {
 	/* position of cursor plane on crtc */
 	int cursor_x;
 	int cursor_y;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bool enabled;
@@ -524,7 +586,11 @@ struct drm_crtc {
 
 	/* Constants needed for precise vblank and swap timestamping. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s64 framedur_ns, linedur_ns, pixeldur_ns;
+=======
+	int framedur_ns, linedur_ns, pixeldur_ns;
+>>>>>>> v3.18
 =======
 	int framedur_ns, linedur_ns, pixeldur_ns;
 >>>>>>> v3.18
@@ -534,13 +600,19 @@ struct drm_crtc {
 
 	struct drm_object_properties properties;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * For legacy crtc ioctls so that atomic drivers can get at the locking
 	 * acquire context.
 	 */
 	struct drm_modeset_acquire_ctx *acquire_ctx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -595,8 +667,11 @@ struct drm_encoder_funcs {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRM_CONNECTOR_MAX_UMODES 16
 #define DRM_CONNECTOR_LEN 32
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DRM_CONNECTOR_MAX_ENCODER 3
@@ -607,6 +682,10 @@ struct drm_encoder_funcs {
  * @head: list management
  * @base: base KMS object
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @name: encoder name
+>>>>>>> v3.18
 =======
  * @name: encoder name
 >>>>>>> v3.18
@@ -615,6 +694,10 @@ struct drm_encoder_funcs {
  * @possible_clones: bitmask of potential sibling encoders for cloning
  * @crtc: currently bound CRTC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @bridge: bridge associated to the encoder
+>>>>>>> v3.18
 =======
  * @bridge: bridge associated to the encoder
 >>>>>>> v3.18
@@ -630,6 +713,10 @@ struct drm_encoder {
 
 	struct drm_mode_object base;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char *name;
+>>>>>>> v3.18
 =======
 	char *name;
 >>>>>>> v3.18
@@ -639,6 +726,10 @@ struct drm_encoder {
 
 	struct drm_crtc *crtc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct drm_bridge *bridge;
+>>>>>>> v3.18
 =======
 	struct drm_bridge *bridge;
 >>>>>>> v3.18
@@ -647,6 +738,7 @@ struct drm_encoder {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum drm_connector_force {
 	DRM_FORCE_UNSPECIFIED,
 	DRM_FORCE_OFF,
@@ -654,6 +746,8 @@ enum drm_connector_force {
 	DRM_FORCE_ON_DIGITAL, /* for DVI-I use digital connector */
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* should we poll this connector for connects and disconnects */
@@ -675,6 +769,10 @@ enum drm_connector_force {
  * @head: list management
  * @base: base KMS object
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @name: connector name
+>>>>>>> v3.18
 =======
  * @name: connector name
 >>>>>>> v3.18
@@ -711,7 +809,11 @@ enum drm_connector_force {
 struct drm_connector {
 	struct drm_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device kdev;
+=======
+	struct device *kdev;
+>>>>>>> v3.18
 =======
 	struct device *kdev;
 >>>>>>> v3.18
@@ -721,6 +823,10 @@ struct drm_connector {
 	struct drm_mode_object base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char *name;
+>>>>>>> v3.18
 =======
 	char *name;
 >>>>>>> v3.18
@@ -729,6 +835,10 @@ struct drm_connector {
 	bool interlace_allowed;
 	bool doublescan_allowed;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool stereo_allowed;
+>>>>>>> v3.18
 =======
 	bool stereo_allowed;
 >>>>>>> v3.18
@@ -746,6 +856,11 @@ struct drm_connector {
 	struct drm_object_properties properties;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct drm_property_blob *path_blob_ptr;
+
+>>>>>>> v3.18
 =======
 	struct drm_property_blob *path_blob_ptr;
 
@@ -759,7 +874,13 @@ struct drm_connector {
 
 	/* forced on connector */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum drm_connector_force force;
+=======
+	struct drm_cmdline_mode cmdline_mode;
+	enum drm_connector_force force;
+	bool override_edid;
+>>>>>>> v3.18
 =======
 	struct drm_cmdline_mode cmdline_mode;
 	enum drm_connector_force force;
@@ -778,6 +899,11 @@ struct drm_connector {
 	int null_edid_counter; /* needed to workaround some HW bugs where we get all 0s */
 	unsigned bad_edid_counter;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	struct dentry *debugfs_entry;
+>>>>>>> v3.18
 =======
 
 	struct dentry *debugfs_entry;
@@ -801,6 +927,10 @@ struct drm_plane_funcs {
 	int (*disable_plane)(struct drm_plane *plane);
 	void (*destroy)(struct drm_plane *plane);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void (*reset)(struct drm_plane *plane);
+>>>>>>> v3.18
 =======
 	void (*reset)(struct drm_plane *plane);
 >>>>>>> v3.18
@@ -810,13 +940,19 @@ struct drm_plane_funcs {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum drm_plane_type {
 	DRM_PLANE_TYPE_OVERLAY,
 	DRM_PLANE_TYPE_PRIMARY,
 	DRM_PLANE_TYPE_CURSOR,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * drm_plane - central DRM plane control structure
@@ -829,12 +965,18 @@ enum drm_plane_type {
  * @crtc: currently bound CRTC
  * @fb: currently bound fb
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @gamma_size: size of gamma table
  * @gamma_store: gamma correction table
  * @enabled: enabled flag
  * @funcs: helper functions
  * @helper_private: storage for drver layer
  * @properties: property tracking for this plane
+=======
+ * @funcs: helper functions
+ * @properties: property tracking for this plane
+ * @type: type of plane (overlay, primary, cursor)
+>>>>>>> v3.18
 =======
  * @funcs: helper functions
  * @properties: property tracking for this plane
@@ -855,6 +997,7 @@ struct drm_plane {
 	struct drm_framebuffer *fb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* CRTC gamma size for reporting to userspace */
 	uint32_t gamma_size;
 	uint16_t *gamma_store;
@@ -866,6 +1009,8 @@ struct drm_plane {
 
 	struct drm_object_properties properties;
 =======
+=======
+>>>>>>> v3.18
 	/* Temporary tracking of the old fb while a modeset is ongoing. Used
 	 * by drm_mode_set_config_internal to implement correct refcounting. */
 	struct drm_framebuffer *old_fb;
@@ -917,6 +1062,9 @@ struct drm_bridge {
 
 	const struct drm_bridge_funcs *funcs;
 	void *driver_private;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -981,6 +1129,10 @@ struct drm_mode_group {
 	uint32_t num_encoders;
 	uint32_t num_connectors;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t num_bridges;
+>>>>>>> v3.18
 =======
 	uint32_t num_bridges;
 >>>>>>> v3.18
@@ -999,6 +1151,11 @@ struct drm_mode_group {
  * @num_connector: number of connectors on this device
  * @connector_list: list of connector objects
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @num_bridge: number of bridges on this device
+ * @bridge_list: list of bridge objects
+>>>>>>> v3.18
 =======
  * @num_bridge: number of bridges on this device
  * @bridge_list: list of bridge objects
@@ -1024,6 +1181,11 @@ struct drm_mode_group {
 struct drm_mode_config {
 	struct mutex mutex; /* protects configuration (mode lists etc.) */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct drm_modeset_lock connection_mutex; /* protects connector->encoder and encoder->crtc links */
+	struct drm_modeset_acquire_ctx *acquire_ctx; /* for legacy _lock_all() / _unlock_all() */
+>>>>>>> v3.18
 =======
 	struct drm_modeset_lock connection_mutex; /* protects connector->encoder and encoder->crtc links */
 	struct drm_modeset_acquire_ctx *acquire_ctx; /* for legacy _lock_all() / _unlock_all() */
@@ -1046,10 +1208,13 @@ struct drm_mode_config {
 	int num_connector;
 	struct list_head connector_list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int num_encoder;
 	struct list_head encoder_list;
 	int num_plane;
 =======
+=======
+>>>>>>> v3.18
 	int num_bridge;
 	struct list_head bridge_list;
 	int num_encoder;
@@ -1063,6 +1228,9 @@ struct drm_mode_config {
 	 */
 	int num_overlay_plane;
 	int num_total_plane;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head plane_list;
 
@@ -1086,6 +1254,12 @@ struct drm_mode_config {
 	struct drm_property *edid_property;
 	struct drm_property *dpms_property;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct drm_property *path_property;
+	struct drm_property *plane_type_property;
+	struct drm_property *rotation_property;
+>>>>>>> v3.18
 =======
 	struct drm_property *path_property;
 	struct drm_property *plane_type_property;
@@ -1114,7 +1288,11 @@ struct drm_mode_config {
 	/* Optional properties */
 	struct drm_property *scaling_mode_property;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_property *dithering_mode_property;
+=======
+	struct drm_property *aspect_ratio_property;
+>>>>>>> v3.18
 =======
 	struct drm_property *aspect_ratio_property;
 >>>>>>> v3.18
@@ -1123,13 +1301,19 @@ struct drm_mode_config {
 	/* dumb ioctl parameters */
 	uint32_t preferred_depth, prefer_shadow;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* whether async page flip is supported or not */
 	bool async_page_flip;
 
 	/* cursor size */
 	uint32_t cursor_width, cursor_height;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1148,24 +1332,33 @@ struct drm_prop_enum_list {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void drm_modeset_lock_all(struct drm_device *dev);
 extern void drm_modeset_unlock_all(struct drm_device *dev);
 extern void drm_warn_on_modeset_not_all_locked(struct drm_device *dev);
 
 =======
+=======
+>>>>>>> v3.18
 extern int drm_crtc_init_with_planes(struct drm_device *dev,
 				     struct drm_crtc *crtc,
 				     struct drm_plane *primary,
 				     struct drm_plane *cursor,
 				     const struct drm_crtc_funcs *funcs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int drm_crtc_init(struct drm_device *dev,
 			 struct drm_crtc *crtc,
 			 const struct drm_crtc_funcs *funcs);
 extern void drm_crtc_cleanup(struct drm_crtc *crtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 extern unsigned int drm_crtc_index(struct drm_crtc *crtc);
 
 /**
@@ -1182,11 +1375,15 @@ static inline uint32_t drm_crtc_mask(struct drm_crtc *crtc)
 
 extern void drm_connector_ida_init(void);
 extern void drm_connector_ida_destroy(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int drm_connector_init(struct drm_device *dev,
 			      struct drm_connector *connector,
 			      const struct drm_connector_funcs *funcs,
 			      int connector_type);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 extern void drm_connector_cleanup(struct drm_connector *connector);
@@ -1194,6 +1391,8 @@ extern void drm_connector_cleanup(struct drm_connector *connector);
 extern void drm_connector_unplug_all(struct drm_device *dev);
 
 =======
+=======
+>>>>>>> v3.18
 int drm_connector_register(struct drm_connector *connector);
 void drm_connector_unregister(struct drm_connector *connector);
 
@@ -1206,6 +1405,9 @@ extern int drm_bridge_init(struct drm_device *dev, struct drm_bridge *bridge,
 			   const struct drm_bridge_funcs *funcs);
 extern void drm_bridge_cleanup(struct drm_bridge *bridge);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int drm_encoder_init(struct drm_device *dev,
 			    struct drm_encoder *encoder,
@@ -1213,7 +1415,10 @@ extern int drm_encoder_init(struct drm_device *dev,
 			    int encoder_type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * drm_encoder_crtc_ok - can a given crtc drive a given encoder?
  * @encoder: encoder to test
@@ -1234,12 +1439,16 @@ extern int drm_universal_plane_init(struct drm_device *dev,
 				    const uint32_t *formats,
 				    uint32_t format_count,
 				    enum drm_plane_type type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int drm_plane_init(struct drm_device *dev,
 			  struct drm_plane *plane,
 			  unsigned long possible_crtcs,
 			  const struct drm_plane_funcs *funcs,
 			  const uint32_t *formats, uint32_t format_count,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			  bool priv);
 extern void drm_plane_cleanup(struct drm_plane *plane);
@@ -1295,6 +1504,8 @@ extern void drm_mode_connector_list_update(struct drm_connector *connector);
 extern int drm_mode_connector_update_edid_property(struct drm_connector *connector,
 						struct edid *edid);
 =======
+=======
+>>>>>>> v3.18
 			  bool is_primary);
 extern void drm_plane_cleanup(struct drm_plane *plane);
 extern unsigned int drm_plane_index(struct drm_plane *plane);
@@ -1347,6 +1558,9 @@ static inline bool drm_property_type_valid(struct drm_property *property)
 	return !!(property->flags & DRM_MODE_PROP_LEGACY_TYPE);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int drm_object_property_set_value(struct drm_mode_object *obj,
 					 struct drm_property *property,
@@ -1355,9 +1569,12 @@ extern int drm_object_property_get_value(struct drm_mode_object *obj,
 					 struct drm_property *property,
 					 uint64_t *value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct drm_display_mode *drm_crtc_mode_create(struct drm_device *dev);
 extern void drm_framebuffer_set_object(struct drm_device *dev,
 				       unsigned long handle);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int drm_framebuffer_init(struct drm_device *dev,
@@ -1371,10 +1588,13 @@ extern void drm_framebuffer_remove(struct drm_framebuffer *fb);
 extern void drm_framebuffer_cleanup(struct drm_framebuffer *fb);
 extern void drm_framebuffer_unregister_private(struct drm_framebuffer *fb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int drmfb_probe(struct drm_device *dev, struct drm_crtc *crtc);
 extern int drmfb_remove(struct drm_device *dev, struct drm_framebuffer *fb);
 extern void drm_crtc_probe_connector_modes(struct drm_device *dev, int maxX, int maxY);
 extern bool drm_crtc_in_use(struct drm_crtc *crtc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1391,11 +1611,14 @@ struct drm_property *drm_property_create_bitmask(struct drm_device *dev,
 					 int flags, const char *name,
 					 const struct drm_prop_enum_list *props,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 int num_values);
 struct drm_property *drm_property_create_range(struct drm_device *dev, int flags,
 					 const char *name,
 					 uint64_t min, uint64_t max);
 =======
+=======
+>>>>>>> v3.18
 					 int num_props,
 					 uint64_t supported_bits);
 struct drm_property *drm_property_create_range(struct drm_device *dev, int flags,
@@ -1406,6 +1629,9 @@ struct drm_property *drm_property_create_signed_range(struct drm_device *dev,
 					 int64_t min, int64_t max);
 struct drm_property *drm_property_create_object(struct drm_device *dev,
 					 int flags, const char *name, uint32_t type);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void drm_property_destroy(struct drm_device *dev, struct drm_property *property);
 extern int drm_property_add_enum(struct drm_property *property, int index,
@@ -1414,6 +1640,7 @@ extern int drm_mode_create_dvi_i_properties(struct drm_device *dev);
 extern int drm_mode_create_tv_properties(struct drm_device *dev, int num_formats,
 				     char *formats[]);
 extern int drm_mode_create_scaling_mode_property(struct drm_device *dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int drm_mode_create_dithering_property(struct drm_device *dev);
 extern int drm_mode_create_dirty_info_property(struct drm_device *dev);
@@ -1424,17 +1651,26 @@ extern int drm_mode_connector_attach_encoder(struct drm_connector *connector,
 extern void drm_mode_connector_detach_encoder(struct drm_connector *connector,
 					   struct drm_encoder *encoder);
 =======
+=======
+>>>>>>> v3.18
 extern int drm_mode_create_aspect_ratio_property(struct drm_device *dev);
 extern int drm_mode_create_dirty_info_property(struct drm_device *dev);
 
 extern int drm_mode_connector_attach_encoder(struct drm_connector *connector,
 					     struct drm_encoder *encoder);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int drm_mode_crtc_set_gamma_size(struct drm_crtc *crtc,
 					 int gamma_size);
 extern struct drm_mode_object *drm_mode_object_find(struct drm_device *dev,
 		uint32_t id, uint32_t type);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1457,6 +1693,11 @@ extern int drm_mode_setplane(struct drm_device *dev,
 extern int drm_mode_cursor_ioctl(struct drm_device *dev,
 				void *data, struct drm_file *file_priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int drm_mode_cursor2_ioctl(struct drm_device *dev,
+				void *data, struct drm_file *file_priv);
+>>>>>>> v3.18
 =======
 extern int drm_mode_cursor2_ioctl(struct drm_device *dev,
 				void *data, struct drm_file *file_priv);
@@ -1480,10 +1721,13 @@ extern int drm_mode_getblob_ioctl(struct drm_device *dev,
 extern int drm_mode_connector_property_set_ioctl(struct drm_device *dev,
 					      void *data, struct drm_file *file_priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int drm_mode_hotplug_ioctl(struct drm_device *dev,
 				  void *data, struct drm_file *file_priv);
 extern int drm_mode_replacefb(struct drm_device *dev,
 			      void *data, struct drm_file *file_priv);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int drm_mode_getencoder(struct drm_device *dev,
@@ -1493,8 +1737,13 @@ extern int drm_mode_gamma_get_ioctl(struct drm_device *dev,
 extern int drm_mode_gamma_set_ioctl(struct drm_device *dev,
 				    void *data, struct drm_file *file_priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u8 *drm_find_cea_extension(struct edid *edid);
 extern u8 drm_match_cea_mode(const struct drm_display_mode *to_match);
+=======
+extern u8 drm_match_cea_mode(const struct drm_display_mode *to_match);
+extern enum hdmi_picture_aspect drm_get_cea_aspect_ratio(const u8 video_code);
+>>>>>>> v3.18
 =======
 extern u8 drm_match_cea_mode(const struct drm_display_mode *to_match);
 extern enum hdmi_picture_aspect drm_get_cea_aspect_ratio(const u8 video_code);
@@ -1504,6 +1753,7 @@ extern bool drm_detect_monitor_audio(struct edid *edid);
 extern bool drm_rgb_quant_range_selectable(struct edid *edid);
 extern int drm_mode_page_flip_ioctl(struct drm_device *dev,
 				    void *data, struct drm_file *file_priv);
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct drm_display_mode *drm_cvt_mode(struct drm_device *dev,
 				int hdisplay, int vdisplay, int vrefresh,
@@ -1518,10 +1768,15 @@ extern struct drm_display_mode *drm_gtf_mode_complex(struct drm_device *dev,
 extern int drm_add_modes_noedid(struct drm_connector *connector,
 				int hdisplay, int vdisplay);
 =======
+=======
+>>>>>>> v3.18
 extern int drm_add_modes_noedid(struct drm_connector *connector,
 				int hdisplay, int vdisplay);
 extern void drm_set_preferred_mode(struct drm_connector *connector,
 				   int hpref, int vpref);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int drm_edid_header_is_valid(const u8 *raw_edid);
@@ -1542,6 +1797,12 @@ extern int drm_mode_obj_get_properties_ioctl(struct drm_device *dev, void *data,
 extern int drm_mode_obj_set_property_ioctl(struct drm_device *dev, void *data,
 					   struct drm_file *file_priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int drm_mode_plane_set_obj_prop(struct drm_plane *plane,
+				       struct drm_property *property,
+				       uint64_t value);
+>>>>>>> v3.18
 =======
 extern int drm_mode_plane_set_obj_prop(struct drm_plane *plane,
 				       struct drm_property *property,
@@ -1555,7 +1816,10 @@ extern int drm_format_plane_cpp(uint32_t format, int plane);
 extern int drm_format_horz_chroma_subsampling(uint32_t format);
 extern int drm_format_vert_chroma_subsampling(uint32_t format);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern const char *drm_get_format_name(uint32_t format);
 extern struct drm_property *drm_mode_create_rotation_property(struct drm_device *dev,
 							      unsigned int supported_rotations);
@@ -1616,6 +1880,9 @@ drm_property_blob_find(struct drm_device *dev, uint32_t id)
 #define drm_for_each_legacy_plane(plane, planelist) \
 	list_for_each_entry(plane, planelist, head) \
 		if (plane->type == DRM_PLANE_TYPE_OVERLAY)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __DRM_CRTC_H__ */

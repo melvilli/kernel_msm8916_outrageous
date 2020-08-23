@@ -35,6 +35,7 @@ struct host1x_cmdbuf {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct host1x_reloc {
 	struct host1x_bo *cmdbuf;
 	u32 cmdbuf_offset;
@@ -44,6 +45,8 @@ struct host1x_reloc {
 	u32 pad;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct host1x_waitchk {
@@ -59,6 +62,7 @@ struct host1x_job_unpin_data {
 };
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Each submit is tracked as a host1x_job.
  */
@@ -159,6 +163,8 @@ int host1x_job_pin(struct host1x_job *job, struct device *dev);
 void host1x_job_unpin(struct host1x_job *job);
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Dump contents of job to debug output.

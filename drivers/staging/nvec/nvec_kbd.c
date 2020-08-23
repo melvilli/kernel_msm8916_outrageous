@@ -127,7 +127,11 @@ static int nvec_kbd_probe(struct platform_device *pdev)
 		keycodes[j++] = extcode_tab_us102[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	idev = input_allocate_device();
+=======
+	idev = devm_input_allocate_device(&pdev->dev);
+>>>>>>> v3.18
 =======
 	idev = devm_input_allocate_device(&pdev->dev);
 >>>>>>> v3.18
@@ -147,7 +151,11 @@ static int nvec_kbd_probe(struct platform_device *pdev)
 	err = input_register_device(idev);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -170,10 +178,13 @@ static int nvec_kbd_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 fail:
 	input_free_device(idev);
 	return err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -189,8 +200,11 @@ static int nvec_kbd_remove(struct platform_device *pdev)
 	nvec_unregister_notifier(nvec, &keys_dev.notifier);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input_unregister_device(keys_dev.input);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -21,6 +21,7 @@ int msi_bitmap_alloc_hwirqs(struct msi_bitmap *bmp, int num)
 
 	spin_lock_irqsave(&bmp->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * This is fast, but stricter than we need. We might want to add
 	 * a fallback routine which does a linear search with no alignment.
@@ -34,6 +35,8 @@ int msi_bitmap_alloc_hwirqs(struct msi_bitmap *bmp, int num)
 	return offset;
 }
 =======
+=======
+>>>>>>> v3.18
 
 	offset = bitmap_find_next_zero_area(bmp->bitmap, bmp->irq_count, 0,
 					    num, (1 << order) - 1);
@@ -51,12 +54,16 @@ err:
 	return -ENOMEM;
 }
 EXPORT_SYMBOL(msi_bitmap_alloc_hwirqs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void msi_bitmap_free_hwirqs(struct msi_bitmap *bmp, unsigned int offset,
 			    unsigned int num)
 {
 	unsigned long flags;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int order = get_count_order(num);
 
@@ -68,6 +75,8 @@ void msi_bitmap_free_hwirqs(struct msi_bitmap *bmp, unsigned int offset,
 	spin_unlock_irqrestore(&bmp->lock, flags);
 }
 =======
+=======
+>>>>>>> v3.18
 
 	pr_debug("msi_bitmap: freeing 0x%x at offset 0x%x\n",
 		 num, offset);
@@ -77,6 +86,9 @@ void msi_bitmap_free_hwirqs(struct msi_bitmap *bmp, unsigned int offset,
 	spin_unlock_irqrestore(&bmp->lock, flags);
 }
 EXPORT_SYMBOL(msi_bitmap_free_hwirqs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void msi_bitmap_reserve_hwirq(struct msi_bitmap *bmp, unsigned int hwirq)
@@ -173,6 +185,7 @@ void msi_bitmap_free(struct msi_bitmap *bmp)
 #ifdef CONFIG_MSI_BITMAP_SELFTEST
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define check(x)	\
 	if (!(x)) printk("msi_bitmap: test failed at line %d\n", __LINE__);
 
@@ -199,6 +212,8 @@ void __init test_basics(void)
 	check(0 == bitmap_find_free_region(bmp.bitmap, size,
 					   get_count_order(size)));
 =======
+=======
+>>>>>>> v3.18
 static void __init test_basics(void)
 {
 	struct msi_bitmap bmp;
@@ -219,11 +234,15 @@ static void __init test_basics(void)
 
 	/* Should all still be free */
 	WARN_ON(bitmap_find_free_region(bmp.bitmap, size, get_count_order(size)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bitmap_release_region(bmp.bitmap, 0, get_count_order(size));
 
 	/* Check we can fill it up and then no more */
 	for (i = 0; i < size; i++)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		check(msi_bitmap_alloc_hwirqs(&bmp, 1) >= 0);
 
@@ -241,6 +260,8 @@ static void __init test_basics(void)
 	/* Clients may check bitmap == NULL for "not-allocated" */
 	check(bmp.bitmap == NULL);
 =======
+=======
+>>>>>>> v3.18
 		WARN_ON(msi_bitmap_alloc_hwirqs(&bmp, 1) < 0);
 
 	WARN_ON(msi_bitmap_alloc_hwirqs(&bmp, 1) >= 0);
@@ -275,13 +296,20 @@ static void __init test_basics(void)
 
 	/* Clients may WARN_ON bitmap == NULL for "not-allocated" */
 	WARN_ON(bmp.bitmap != NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(bmp.bitmap);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init test_of_node(void)
+=======
+static void __init test_of_node(void)
+>>>>>>> v3.18
 =======
 static void __init test_of_node(void)
 >>>>>>> v3.18
@@ -299,6 +327,7 @@ static void __init test_of_node(void)
 	/* There should really be a struct device_node allocator */
 	memset(&of_node, 0, sizeof(of_node));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kref_init(&of_node.kref);
 	of_node.full_name = node_name;
 
@@ -311,6 +340,8 @@ static void __init test_of_node(void)
 	check(0 == bitmap_find_free_region(bmp.bitmap, size,
 					   get_count_order(size)));
 =======
+=======
+>>>>>>> v3.18
 	of_node_init(&of_node);
 	of_node.full_name = node_name;
 
@@ -321,6 +352,9 @@ static void __init test_of_node(void)
 
 	/* Should all still be free */
 	WARN_ON(bitmap_find_free_region(bmp.bitmap, size, get_count_order(size)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bitmap_release_region(bmp.bitmap, 0, get_count_order(size));
 
@@ -336,17 +370,23 @@ static void __init test_of_node(void)
 
 	/* msi-available-ranges, so expect == 0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	check(msi_bitmap_reserve_dt_hwirqs(&bmp) == 0);
 
 	/* Check we got the expected result */
 	check(0 == bitmap_parselist(expected_str, expected, size));
 	check(bitmap_equal(expected, bmp.bitmap, size));
 =======
+=======
+>>>>>>> v3.18
 	WARN_ON(msi_bitmap_reserve_dt_hwirqs(&bmp));
 
 	/* Check we got the expected result */
 	WARN_ON(bitmap_parselist(expected_str, expected, size));
 	WARN_ON(!bitmap_equal(expected, bmp.bitmap, size));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	msi_bitmap_free(&bmp);
@@ -354,7 +394,11 @@ static void __init test_of_node(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init msi_bitmap_selftest(void)
+=======
+static int __init msi_bitmap_selftest(void)
+>>>>>>> v3.18
 =======
 static int __init msi_bitmap_selftest(void)
 >>>>>>> v3.18

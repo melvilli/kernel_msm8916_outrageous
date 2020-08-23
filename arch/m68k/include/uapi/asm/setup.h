@@ -7,6 +7,7 @@
 ** License.  See the file COPYING in the main directory of this archive
 ** for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 **
 ** Created 09/29/92 by Greg Harp
 **
@@ -21,11 +22,14 @@
 **   structure to bootinfo.h
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 */
 
 #ifndef _UAPI_M68K_SETUP_H
 #define _UAPI_M68K_SETUP_H
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -104,6 +108,10 @@
 #define MMU_COLDFIRE   (1<<MMUB_COLDFIRE)
 
 
+=======
+#define COMMAND_LINE_SIZE 256
+
+>>>>>>> v3.18
 =======
 #define COMMAND_LINE_SIZE 256
 

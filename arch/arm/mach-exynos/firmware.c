@@ -19,6 +19,10 @@
 #include <mach/map.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "common.h"
+>>>>>>> v3.18
 =======
 #include "common.h"
 >>>>>>> v3.18
@@ -33,7 +37,10 @@ static int exynos_do_idle(void)
 static int exynos_cpu_boot(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Exynos3250 doesn't need to send smc command for secondary CPU boot
 	 * because Exynos3250 removes WFE in secure mode.
@@ -49,6 +56,9 @@ static int exynos_cpu_boot(int cpu)
 	if (soc_is_exynos4212())
 		cpu = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	exynos_smc(SMC_CMD_CPU1BOOT, cpu, 0, 0);
 	return 0;
@@ -57,8 +67,11 @@ static int exynos_cpu_boot(int cpu)
 static int exynos_set_cpu_boot_addr(int cpu, unsigned long boot_addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *boot_reg = S5P_VA_SYSRAM_NS + 0x1c + 4*cpu;
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *boot_reg;
 
 	if (!sysram_ns_base_addr)
@@ -73,6 +86,9 @@ static int exynos_set_cpu_boot_addr(int cpu, unsigned long boot_addr)
 	 */
 	if (soc_is_exynos4412())
 		boot_reg += 4 * cpu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	__raw_writel(boot_addr, boot_reg);
@@ -87,6 +103,7 @@ static const struct firmware_ops exynos_firmware_ops = {
 
 void __init exynos_firmware_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (of_have_populated_dt()) {
 		struct device_node *nd;
@@ -103,6 +120,8 @@ void __init exynos_firmware_init(void)
 			return;
 		}
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *nd;
 	const __be32 *addr;
 
@@ -115,6 +134,9 @@ void __init exynos_firmware_init(void)
 	if (!addr) {
 		pr_err("%s: No address specified.\n", __func__);
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

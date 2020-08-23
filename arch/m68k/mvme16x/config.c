@@ -30,6 +30,11 @@
 
 #include <asm/bootinfo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/bootinfo-vme.h>
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 =======
 #include <asm/bootinfo-vme.h>
 #include <asm/byteorder.h>
@@ -66,14 +71,20 @@ EXPORT_SYMBOL(mvme16x_config);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mvme16x_parse_bootinfo(const struct bi_record *bi)
 {
 	if (bi->tag == BI_VME_TYPE || bi->tag == BI_VME_BRDINFO)
 =======
+=======
+>>>>>>> v3.18
 int __init mvme16x_parse_bootinfo(const struct bi_record *bi)
 {
 	uint16_t tag = be16_to_cpu(bi->tag);
 	if (tag == BI_VME_TYPE || tag == BI_VME_BRDINFO)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	else
@@ -100,7 +111,11 @@ static void mvme16x_get_model(char *model)
     suf[0] = suf[1] ? '-' : '\0';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     sprintf(model, "Motorola MVME%x%s", p->brdno, suf);
+=======
+    sprintf(model, "Motorola MVME%x%s", be16_to_cpu(p->brdno), suf);
+>>>>>>> v3.18
 =======
     sprintf(model, "Motorola MVME%x%s", be16_to_cpu(p->brdno), suf);
 >>>>>>> v3.18
@@ -110,9 +125,15 @@ static void mvme16x_get_model(char *model)
 static void mvme16x_get_hardware_list(struct seq_file *m)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     p_bdid p = &mvme_bdid;
 
     if (p->brdno == 0x0162 || p->brdno == 0x0172)
+=======
+    uint16_t brdno = be16_to_cpu(mvme_bdid.brdno);
+
+    if (brdno == 0x0162 || brdno == 0x0172)
+>>>>>>> v3.18
 =======
     uint16_t brdno = be16_to_cpu(mvme_bdid.brdno);
 
@@ -233,7 +254,11 @@ static void __init mvme16x_init_IRQ (void)
 #define CyTFTC		(0x80)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void cons_write(struct console *co, const char *str, unsigned count)
+=======
+void mvme16x_cons_write(struct console *co, const char *str, unsigned count)
+>>>>>>> v3.18
 =======
 void mvme16x_cons_write(struct console *co, const char *str, unsigned count)
 >>>>>>> v3.18
@@ -292,6 +317,7 @@ void mvme16x_cons_write(struct console *co, const char *str, unsigned count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct console cons_info =
 {
 	.name	= "sercon",
@@ -308,6 +334,8 @@ static void __init mvme16x_early_console(void)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #endif
 
 void __init config_mvme16x(void)
@@ -315,6 +343,10 @@ void __init config_mvme16x(void)
     p_bdid p = &mvme_bdid;
     char id[40];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    uint16_t brdno = be16_to_cpu(p->brdno);
+>>>>>>> v3.18
 =======
     uint16_t brdno = be16_to_cpu(p->brdno);
 >>>>>>> v3.18
@@ -340,7 +372,11 @@ void __init config_mvme16x(void)
     /* Board type is only set by newer versions of vmelilo/tftplilo */
     if (vme_brdtype == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vme_brdtype = p->brdno;
+=======
+	vme_brdtype = brdno;
+>>>>>>> v3.18
 =======
 	vme_brdtype = brdno;
 >>>>>>> v3.18
@@ -349,7 +385,11 @@ void __init config_mvme16x(void)
     printk ("\nBRD_ID: %s   BUG %x.%x %02x/%02x/%02x\n", id, p->rev>>4,
 					p->rev&0xf, p->yr, p->mth, p->day);
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (p->brdno == 0x0162 || p->brdno == 0x172)
+=======
+    if (brdno == 0x0162 || brdno == 0x172)
+>>>>>>> v3.18
 =======
     if (brdno == 0x0162 || brdno == 0x172)
 >>>>>>> v3.18
@@ -359,7 +399,11 @@ void __init config_mvme16x(void)
 	mvme16x_config = rev | MVME16x_CONFIG_GOT_SCCA;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk ("MVME%x Hardware status:\n", p->brdno);
+=======
+	printk ("MVME%x Hardware status:\n", brdno);
+>>>>>>> v3.18
 =======
 	printk ("MVME%x Hardware status:\n", brdno);
 >>>>>>> v3.18
@@ -378,6 +422,7 @@ void __init config_mvme16x(void)
     {
 	mvme16x_config = MVME16x_CONFIG_GOT_LP | MVME16x_CONFIG_GOT_CD2401;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Dont allow any interrupts from the CD2401 until the interrupt */
 	/* handlers are installed					 */
@@ -390,11 +435,14 @@ void __init config_mvme16x(void)
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
     }
 }
 
 static irqreturn_t mvme16x_abort_int (int irq, void *dev_id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	p_bdid p = &mvme_bdid;
 	unsigned long *new = (unsigned long *)vectors;
@@ -403,12 +451,17 @@ static irqreturn_t mvme16x_abort_int (int irq, void *dev_id)
 
 	if (p->brdno == 0x0162 || p->brdno == 0x172)
 =======
+=======
+>>>>>>> v3.18
 	unsigned long *new = (unsigned long *)vectors;
 	unsigned long *old = (unsigned long *)0xffe00000;
 	volatile unsigned char uc, *ucp;
 	uint16_t brdno = be16_to_cpu(mvme_bdid.brdno);
 
 	if (brdno == 0x0162 || brdno == 0x172)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		ucp = (volatile unsigned char *)0xfff42043;
@@ -424,7 +477,11 @@ static irqreturn_t mvme16x_abort_int (int irq, void *dev_id)
 	*(new+47) = *(old+47);		/* Trap #15 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (p->brdno == 0x0162 || p->brdno == 0x172)
+=======
+	if (brdno == 0x0162 || brdno == 0x172)
+>>>>>>> v3.18
 =======
 	if (brdno == 0x0162 || brdno == 0x172)
 >>>>>>> v3.18
@@ -443,7 +500,11 @@ static irqreturn_t mvme16x_timer_int (int irq, void *dev_id)
 void mvme16x_sched_init (irq_handler_t timer_routine)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     p_bdid p = &mvme_bdid;
+=======
+    uint16_t brdno = be16_to_cpu(mvme_bdid.brdno);
+>>>>>>> v3.18
 =======
     uint16_t brdno = be16_to_cpu(mvme_bdid.brdno);
 >>>>>>> v3.18
@@ -460,7 +521,11 @@ void mvme16x_sched_init (irq_handler_t timer_routine)
 	panic ("Couldn't register timer int");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (p->brdno == 0x0162 || p->brdno == 0x172)
+=======
+    if (brdno == 0x0162 || brdno == 0x172)
+>>>>>>> v3.18
 =======
     if (brdno == 0x0162 || brdno == 0x172)
 >>>>>>> v3.18

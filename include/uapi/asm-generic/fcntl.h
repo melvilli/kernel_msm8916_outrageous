@@ -133,7 +133,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Open File Description Locks
  *
@@ -150,6 +153,9 @@
 #define F_OFD_SETLK	37
 #define F_OFD_SETLKW	38
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define F_OWNER_TID	0
 #define F_OWNER_PID	1
@@ -206,8 +212,11 @@ struct flock {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_64BIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef HAVE_ARCH_STRUCT_FLOCK64
@@ -225,7 +234,10 @@ struct flock64 {
 };
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* !CONFIG_64BIT */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

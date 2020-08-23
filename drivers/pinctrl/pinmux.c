@@ -42,7 +42,11 @@ int pinmux_check_ops(struct pinctrl_dev *pctldev)
 	    !ops->get_function_name ||
 	    !ops->get_function_groups ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !ops->enable) {
+=======
+	    !ops->set_mux) {
+>>>>>>> v3.18
 =======
 	    !ops->set_mux) {
 >>>>>>> v3.18
@@ -396,6 +400,7 @@ int pinmux_enable_setting(struct pinctrl_setting const *setting)
 	const struct pinctrl_ops *pctlops = pctldev->desc->pctlops;
 	const struct pinmux_ops *ops = pctldev->desc->pmxops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	const unsigned *pins;
 	unsigned num_pins;
@@ -410,6 +415,8 @@ int pinmux_enable_setting(struct pinctrl_setting const *setting)
 			 "could not get pins for group selector %d\n",
 			 setting->data.mux.group);
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 	const unsigned *pins = NULL;
 	unsigned num_pins = 0;
@@ -429,6 +436,9 @@ int pinmux_enable_setting(struct pinctrl_setting const *setting)
 		dev_warn(pctldev->dev,
 			 "could not get pins for group %s\n",
 			 gname);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		num_pins = 0;
 	}
@@ -438,10 +448,13 @@ int pinmux_enable_setting(struct pinctrl_setting const *setting)
 		ret = pin_request(pctldev, pins[i], setting->dev_name, NULL);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(pctldev->dev,
 				"could not request pin %d on device %s\n",
 				pins[i], pinctrl_dev_get_name(pctldev));
 =======
+=======
+>>>>>>> v3.18
 			const char *gname;
 			const char *pname;
 
@@ -454,6 +467,9 @@ int pinmux_enable_setting(struct pinctrl_setting const *setting)
 				" on device %s\n",
 				pins[i], pname, gname,
 				pinctrl_dev_get_name(pctldev));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto err_pin_request;
 		}
@@ -472,6 +488,7 @@ int pinmux_enable_setting(struct pinctrl_setting const *setting)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ops->enable(pctldev, setting->data.mux.func,
 			  setting->data.mux.group);
 
@@ -482,6 +499,8 @@ int pinmux_enable_setting(struct pinctrl_setting const *setting)
 
 err_enable:
 =======
+=======
+>>>>>>> v3.18
 	ret = ops->set_mux(pctldev, setting->data.mux.func,
 			   setting->data.mux.group);
 
@@ -491,6 +510,9 @@ err_enable:
 	return 0;
 
 err_set_mux:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < num_pins; i++) {
 		desc = pin_desc_get(pctldev, pins[i]);
@@ -510,6 +532,7 @@ void pinmux_disable_setting(struct pinctrl_setting const *setting)
 	struct pinctrl_dev *pctldev = setting->pctldev;
 	const struct pinctrl_ops *pctlops = pctldev->desc->pctlops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct pinmux_ops *ops = pctldev->desc->pmxops;
 	int ret;
 	const unsigned *pins;
@@ -525,6 +548,8 @@ void pinmux_disable_setting(struct pinctrl_setting const *setting)
 			 "could not get pins for group selector %d\n",
 			 setting->data.mux.group);
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 	const unsigned *pins = NULL;
 	unsigned num_pins = 0;
@@ -543,6 +568,9 @@ void pinmux_disable_setting(struct pinctrl_setting const *setting)
 		dev_warn(pctldev->dev,
 			 "could not get pins for group %s\n",
 			 gname);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		num_pins = 0;
 	}
@@ -557,6 +585,7 @@ void pinmux_disable_setting(struct pinctrl_setting const *setting)
 			continue;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		desc->mux_setting = NULL;
 	}
 
@@ -567,6 +596,8 @@ void pinmux_disable_setting(struct pinctrl_setting const *setting)
 	if (ops->disable)
 		ops->disable(pctldev, setting->data.mux.func, setting->data.mux.group);
 =======
+=======
+>>>>>>> v3.18
 		if (desc->mux_setting == &(setting->data.mux)) {
 			desc->mux_setting = NULL;
 			/* And release the pin */
@@ -583,6 +614,9 @@ void pinmux_disable_setting(struct pinctrl_setting const *setting)
 				 pins[i], desc->name, gname);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

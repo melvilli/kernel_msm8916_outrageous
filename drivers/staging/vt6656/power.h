@@ -30,6 +30,7 @@
 #define __POWER_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define     C_PWBT                   1000      // micro sec. power up before TBTT
 #define     PS_FAST_INTERVAL         1         // Fast power saving listen interval
 #define     PS_MAX_INTERVAL          4         // MAX power saving listen interval
@@ -45,11 +46,16 @@ void PSvSendPSPOLL(struct vnt_private *);
 int PSbSendNullPacket(struct vnt_private *);
 int PSbIsNextTBTTWakeUp(struct vnt_private *);
 =======
+=======
+>>>>>>> v3.18
 #define C_PWBT	1000 /* micro sec. power up before TBTT */
 
 void vnt_disable_power_saving(struct vnt_private *);
 void vnt_enable_power_saving(struct vnt_private *, u16);
 int vnt_next_tbtt_wakeup(struct vnt_private *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __POWER_H__ */

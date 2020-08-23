@@ -16,18 +16,24 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/types.h>
 #include <linux/string.h>
 #include <linux/mm.h>
 #include <linux/memblock.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/memblock.h>
 #include <linux/kernel.h>
 #include <linux/string.h>
 #include <linux/types.h>
 #include <linux/cpu.h>
 #include <linux/mm.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/of.h>
 
@@ -383,7 +389,10 @@ static const char *get_mid_prop(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool arch_find_n_match_cpu_physical_id(struct device_node *cpun,
 				       int cpu, unsigned int *thread)
 {
@@ -437,6 +446,9 @@ bool arch_find_n_match_cpu_physical_id(struct device_node *cpun,
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void *of_iterate_over_cpus(void *(*func)(struct device_node *, int, int), int arg)
 {
@@ -568,9 +580,12 @@ static void *fill_in_one_cpu(struct device_node *dp, int cpuid, int arg)
 		cpu_data(cpuid).core_id = portid + 1;
 		cpu_data(cpuid).proc_id = portid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SMP
 		sparc64_multi_core = 1;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {

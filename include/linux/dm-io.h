@@ -30,7 +30,11 @@ typedef void (*io_notify_fn)(unsigned long error, void *context);
 enum dm_io_mem_type {
 	DM_IO_PAGE_LIST,/* Page list */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DM_IO_BVEC,	/* Bio vector */
+=======
+	DM_IO_BIO,	/* Bio vector */
+>>>>>>> v3.18
 =======
 	DM_IO_BIO,	/* Bio vector */
 >>>>>>> v3.18
@@ -46,7 +50,11 @@ struct dm_io_memory {
 	union {
 		struct page_list *pl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct bio_vec *bvec;
+=======
+		struct bio *bio;
+>>>>>>> v3.18
 =======
 		struct bio *bio;
 >>>>>>> v3.18

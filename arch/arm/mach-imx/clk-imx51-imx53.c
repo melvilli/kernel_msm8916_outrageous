@@ -12,11 +12,14 @@
 #include <linux/io.h>
 #include <linux/clkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of.h>
 #include <linux/err.h>
 
 #include "crm-regs-imx5.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk-provider.h>
 #include <linux/err.h>
 #include <linux/of.h>
@@ -24,13 +27,19 @@
 #include <linux/of_irq.h>
 #include <dt-bindings/clock/imx5-clock.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "clk.h"
 #include "common.h"
 #include "hardware.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MX51_DPLL1_BASE		0x83f80000
 #define MX51_DPLL2_BASE		0x83f84000
 #define MX51_DPLL3_BASE		0x83f88000
@@ -75,6 +84,9 @@
 #define MXC_CCM_CCGR6		(ccm_base + 0x80)
 #define MXC_CCM_CCGR7		(ccm_base + 0x84)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Low-power Audio Playback Mode clock */
 static const char *lp_apm_sel[] = { "osc", };
@@ -130,6 +142,7 @@ static const char *mx53_cko2_sel[] = {
 	"tve_sel", "lp_apm",
 	"uart_root", "dummy"/* spdif0_clk_root */,
 	"dummy", "dummy", };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 enum imx5_clks {
@@ -444,6 +457,8 @@ int __init mx51_clocks_init(unsigned long rate_ckil, unsigned long rate_osc,
 
 	np = of_find_compatible_node(NULL, NULL, "fsl,imx51-ccm");
 =======
+=======
+>>>>>>> v3.18
 static const char *mx51_spdif_xtal_sel[] = { "osc", "ckih", "ckih2", };
 static const char *mx53_spdif_xtal_sel[] = { "osc", "ckih", "ckih2", "pll4_sw", };
 static const char *spdif_sel[] = { "pll1_sw", "pll2_sw", "pll3_sw", "spdif_xtal_sel", };
@@ -680,11 +695,15 @@ static void __init mx50_clocks_init(struct device_node *np)
 
 	imx_check_clocks(clk, ARRAY_SIZE(clk));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk_data.clks = clk;
 	clk_data.clk_num = ARRAY_SIZE(clk);
 	of_clk_add_provider(np, of_clk_src_onecell_get, &clk_data);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mx5_clocks_common_init(rate_ckil, rate_osc, rate_ckih1, rate_ckih2);
 
@@ -720,6 +739,8 @@ static void __init mx50_clocks_init(struct device_node *np)
 	imx_print_silicon_rev("i.MX51", mx51_revision());
 	clk_disable_unprepare(clk[iim_gate]);
 =======
+=======
+>>>>>>> v3.18
 	/* set SDHC root clock to 200MHZ*/
 	clk_set_rate(clk[IMX5_CLK_ESDHC_A_PODF], 200000000);
 	clk_set_rate(clk[IMX5_CLK_ESDHC_B_PODF], 200000000);
@@ -804,6 +825,9 @@ static void __init mx51_clocks_init(struct device_node *np)
 	clk_prepare_enable(clk[IMX5_CLK_IIM_GATE]);
 	imx_print_silicon_rev("i.MX51", mx51_revision());
 	clk_disable_unprepare(clk[IMX5_CLK_IIM_GATE]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -820,6 +844,7 @@ static void __init mx51_clocks_init(struct device_node *np)
 	val = readl(MXC_CCM_CLPCR);
 	val |= 1 << 23;
 	writel(val, MXC_CCM_CLPCR);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	return 0;
@@ -887,6 +912,8 @@ int __init mx53_clocks_init(unsigned long rate_ckil, unsigned long rate_osc,
 
 	np = of_find_compatible_node(NULL, NULL, "fsl,imx53-ccm");
 =======
+=======
+>>>>>>> v3.18
 }
 CLK_OF_DECLARE(imx51_ccm, "fsl,imx51-ccm", mx51_clocks_init);
 
@@ -968,11 +995,15 @@ static void __init mx53_clocks_init(struct device_node *np)
 
 	imx_check_clocks(clk, ARRAY_SIZE(clk));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clk_data.clks = clk;
 	clk_data.clk_num = ARRAY_SIZE(clk);
 	of_clk_add_provider(np, of_clk_src_onecell_get, &clk_data);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mx5_clocks_common_init(rate_ckil, rate_osc, rate_ckih1, rate_ckih2);
 
@@ -1050,6 +1081,8 @@ int __init mx53_clocks_init_dt(void)
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 	/* set SDHC root clock to 200MHZ*/
 	clk_set_rate(clk[IMX5_CLK_ESDHC_A_PODF], 200000000);
 	clk_set_rate(clk[IMX5_CLK_ESDHC_B_PODF], 200000000);
@@ -1065,4 +1098,7 @@ int __init mx53_clocks_init_dt(void)
 	clk_set_rate(clk[IMX5_CLK_USBOH3_PER_GATE], r);
 }
 CLK_OF_DECLARE(imx53_ccm, "fsl,imx53-ccm", mx53_clocks_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

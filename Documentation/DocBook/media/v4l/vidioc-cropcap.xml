@@ -134,7 +134,11 @@ rectangle, in pixels.</entry>
 	  </row>
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>__s32</entry>
+=======
+	    <entry>__u32</entry>
+>>>>>>> v3.18
 =======
 	    <entry>__u32</entry>
 >>>>>>> v3.18
@@ -143,6 +147,7 @@ rectangle, in pixels.</entry>
 	  </row>
 	  <row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>__s32</entry>
 	    <entry><structfield>height</structfield></entry>
 	    <entry>Height of the rectangle, in pixels. Width
@@ -150,6 +155,11 @@ and height cannot be negative, the fields are signed for
 hysterical reasons. <!-- video4linux-list@redhat.com
 on 22 Oct 2002 subject "Re:[V4L][patches!] Re:v4l2/kernel-2.5" -->
 </entry>
+=======
+	    <entry>__u32</entry>
+	    <entry><structfield>height</structfield></entry>
+	    <entry>Height of the rectangle, in pixels.</entry>
+>>>>>>> v3.18
 =======
 	    <entry>__u32</entry>
 	    <entry><structfield>height</structfield></entry>

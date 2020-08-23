@@ -168,7 +168,10 @@ void rio_attach_device(struct rio_dev *rdev)
 {
 	rdev->dev.bus = &rio_bus_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev->dev.parent = &rio_bus;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -203,10 +206,13 @@ static int rio_match_bus(struct device *dev, struct device_driver *drv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct device rio_bus = {
 	.init_name = "rapidio",
 };
 =======
+=======
+>>>>>>> v3.18
 static int rio_uevent(struct device *dev, struct kobj_uevent_env *env)
 {
 	struct rio_dev *rdev;
@@ -230,22 +236,31 @@ struct class rio_mport_class = {
 	.dev_groups	= rio_mport_groups,
 };
 EXPORT_SYMBOL_GPL(rio_mport_class);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct bus_type rio_bus_type = {
 	.name = "rapidio",
 	.match = rio_match_bus,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs = rio_dev_attrs,
 	.bus_attrs = rio_bus_attrs,
 	.probe = rio_device_probe,
 	.remove = rio_device_remove,
 =======
+=======
+>>>>>>> v3.18
 	.dev_groups = rio_dev_groups,
 	.bus_groups = rio_bus_groups,
 	.probe = rio_device_probe,
 	.remove = rio_device_remove,
 	.uevent	= rio_uevent,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -253,7 +268,11 @@ struct bus_type rio_bus_type = {
  *  rio_bus_init - Register the RapidIO bus with the device model
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Registers the RIO bus device and RIO bus type with the Linux
+=======
+ *  Registers the RIO mport device class and RIO bus type with the Linux
+>>>>>>> v3.18
 =======
  *  Registers the RIO mport device class and RIO bus type with the Linux
 >>>>>>> v3.18
@@ -262,10 +281,13 @@ struct bus_type rio_bus_type = {
 static int __init rio_bus_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (device_register(&rio_bus) < 0)
 		printk("RIO: failed to register RIO bus device\n");
 	return bus_register(&rio_bus_type);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = class_register(&rio_mport_class);
@@ -275,6 +297,9 @@ static int __init rio_bus_init(void)
 			class_unregister(&rio_mport_class);
 	}
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

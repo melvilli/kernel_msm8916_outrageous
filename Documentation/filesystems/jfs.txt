@@ -43,7 +43,11 @@ nodiscard(*)	block device when blocks are freed. This is useful for SSD
 		command is also available together with the nodiscard option.
 		The value of minlen specifies the minimum blockcount, when
 <<<<<<< HEAD
+<<<<<<< HEAD
 		a TRIM command to the block device is considered usefull.
+=======
+		a TRIM command to the block device is considered useful.
+>>>>>>> v3.18
 =======
 		a TRIM command to the block device is considered useful.
 >>>>>>> v3.18

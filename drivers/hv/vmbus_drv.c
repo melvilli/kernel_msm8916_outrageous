@@ -26,7 +26,10 @@
 #include <linux/module.h>
 #include <linux/device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irq.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -34,9 +37,13 @@
 #include <linux/slab.h>
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <linux/completion.h>
 #include <linux/cpu.h>
+=======
+#include <linux/completion.h>
+>>>>>>> v3.18
 =======
 #include <linux/completion.h>
 >>>>>>> v3.18
@@ -48,7 +55,10 @@
 #include "hyperv_vmbus.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct acpi_device  *hv_acpi_dev;
@@ -57,6 +67,7 @@ static struct tasklet_struct msg_dpc;
 static struct completion probe_event;
 static int irq;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct hv_device_info {
 	u32 chn_id;
@@ -76,11 +87,16 @@ struct hv_device_info {
 	struct hv_dev_port_info outbound;
 };
 =======
+=======
+>>>>>>> v3.18
 struct resource hyperv_mmio = {
 	.name  = "hyperv mmio",
 	.flags = IORESOURCE_MEM,
 };
 EXPORT_SYMBOL_GPL(hyperv_mmio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int vmbus_exists(void)
@@ -91,6 +107,7 @@ static int vmbus_exists(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static void get_channel_info(struct hv_device *device,
@@ -256,6 +273,8 @@ static struct device_attribute vmbus_device_attrs[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #define VMBUS_ALIAS_LEN ((sizeof((struct hv_vmbus_device_id *)0)->guid) * 2)
 static void print_alias_name(struct hv_device *hv_dev, char *alias_name)
 {
@@ -611,6 +630,9 @@ static struct attribute *vmbus_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(vmbus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -636,7 +658,11 @@ static int vmbus_uevent(struct device *device, struct kobj_uevent_env *env)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static uuid_le null_guid;
+=======
+static const uuid_le null_guid;
+>>>>>>> v3.18
 =======
 static const uuid_le null_guid;
 >>>>>>> v3.18
@@ -655,7 +681,11 @@ static inline bool is_null_guid(const __u8 *guid)
 static const struct hv_vmbus_device_id *hv_vmbus_get_id(
 					const struct hv_vmbus_device_id *id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					__u8 *guid)
+=======
+					const __u8 *guid)
+>>>>>>> v3.18
 =======
 					const __u8 *guid)
 >>>>>>> v3.18
@@ -769,12 +799,18 @@ static struct bus_type  hv_bus = {
 	.probe =		vmbus_probe,
 	.uevent =		vmbus_uevent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs =	vmbus_device_attrs,
 };
 
 static const char *driver_name = "hyperv";
 
 
+=======
+	.dev_groups =		vmbus_groups,
+};
+
+>>>>>>> v3.18
 =======
 	.dev_groups =		vmbus_groups,
 };
@@ -839,7 +875,11 @@ static void vmbus_on_msg_dpc(unsigned long data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static irqreturn_t vmbus_isr(int irq, void *dev_id)
+=======
+static void vmbus_isr(void)
+>>>>>>> v3.18
 =======
 static void vmbus_isr(void)
 >>>>>>> v3.18
@@ -853,7 +893,11 @@ static void vmbus_isr(void)
 	page_addr = hv_context.synic_event_page[cpu];
 	if (page_addr == NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return IRQ_NONE;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -892,6 +936,7 @@ static void vmbus_isr(void)
 	msg = (struct hv_message *)page_addr + VMBUS_MESSAGE_SINT;
 
 	/* Check if there are actual msgs to be processed */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (msg->header.message_type != HVMSG_NONE) {
 		handled = true;
@@ -952,11 +997,16 @@ static void hv_cpu_hotplug_quirk(bool vmbus_loaded)
 
 /*
 =======
+=======
+>>>>>>> v3.18
 	if (msg->header.message_type != HVMSG_NONE)
 		tasklet_schedule(&msg_dpc);
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * vmbus_bus_init -Main vmbus driver initialization routine.
  *
@@ -984,6 +1034,7 @@ static int vmbus_bus_init(int irq)
 		goto err_cleanup;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_irq(irq, vmbus_isr, 0, driver_name, hv_acpi_dev);
 
 	if (ret != 0) {
@@ -1005,11 +1056,16 @@ static int vmbus_bus_init(int irq)
 	hv_register_vmbus_handler(irq, vmbus_isr);
 
 =======
+=======
+>>>>>>> v3.18
 	hv_setup_vmbus_irq(vmbus_isr);
 
 	ret = hv_synic_alloc();
 	if (ret)
 		goto err_alloc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Initialize the per-cpu interrupt state and
@@ -1019,9 +1075,14 @@ static int vmbus_bus_init(int irq)
 	ret = vmbus_connect();
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_irq;
 
 	hv_cpu_hotplug_quirk(true);
+=======
+		goto err_alloc;
+
+>>>>>>> v3.18
 =======
 		goto err_alloc;
 
@@ -1030,6 +1091,7 @@ static int vmbus_bus_init(int irq)
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_irq:
 	free_irq(irq, hv_acpi_dev);
@@ -1040,6 +1102,8 @@ err_unregister:
 err_cleanup:
 	hv_cleanup(false);
 =======
+=======
+>>>>>>> v3.18
 err_alloc:
 	hv_synic_free();
 	hv_remove_vmbus_irq();
@@ -1048,6 +1112,9 @@ err_alloc:
 
 err_cleanup:
 	hv_cleanup();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -1106,9 +1173,15 @@ EXPORT_SYMBOL_GPL(vmbus_driver_unregister);
  * on the vmbus.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct hv_device *vmbus_device_create(uuid_le *type,
 					    uuid_le *instance,
 					    struct vmbus_channel *channel)
+=======
+struct hv_device *vmbus_device_create(const uuid_le *type,
+				      const uuid_le *instance,
+				      struct vmbus_channel *channel)
+>>>>>>> v3.18
 =======
 struct hv_device *vmbus_device_create(const uuid_le *type,
 				      const uuid_le *instance,
@@ -1182,6 +1255,7 @@ void vmbus_device_unregister(struct hv_device *device_obj)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * VMBUS is an acpi enumerated device. Get the the IRQ information
  * from DSDT.
  */
@@ -1195,6 +1269,8 @@ static acpi_status vmbus_walk_resources(struct acpi_resource *res, void *irq)
 
 		*((unsigned int *)irq) = irqp->interrupts[0];
 =======
+=======
+>>>>>>> v3.18
  * VMBUS is an acpi enumerated device. Get the the information we
  * need from DSDT.
  */
@@ -1210,6 +1286,9 @@ static acpi_status vmbus_walk_resources(struct acpi_resource *res, void *ctx)
 		hyperv_mmio.start = res->data.address64.minimum;
 		hyperv_mmio.end = res->data.address64.maximum;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1220,6 +1299,10 @@ static int vmbus_acpi_add(struct acpi_device *device)
 {
 	acpi_status result;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret_val = -ENODEV;
+>>>>>>> v3.18
 =======
 	int ret_val = -ENODEV;
 >>>>>>> v3.18
@@ -1227,6 +1310,7 @@ static int vmbus_acpi_add(struct acpi_device *device)
 	hv_acpi_dev = device;
 
 	result = acpi_walk_resources(device->handle, METHOD_NAME__CRS,
+<<<<<<< HEAD
 <<<<<<< HEAD
 					vmbus_walk_resources, &irq);
 
@@ -1237,6 +1321,8 @@ static int vmbus_acpi_add(struct acpi_device *device)
 	complete(&probe_event);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 					vmbus_walk_resources, NULL);
 
 	if (ACPI_FAILURE(result))
@@ -1260,6 +1346,9 @@ static int vmbus_acpi_add(struct acpi_device *device)
 acpi_walk_err:
 	complete(&probe_event);
 	return ret_val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1291,7 +1380,10 @@ static int __init hv_acpi_init(void)
 	 * Get irq resources first.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = acpi_bus_register_driver(&vmbus_acpi_driver);
@@ -1325,6 +1417,7 @@ cleanup:
 static void __exit vmbus_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	free_irq(irq, hv_acpi_dev);
 	vmbus_free_channels();
@@ -1333,18 +1426,26 @@ static void __exit vmbus_exit(void)
 	acpi_bus_unregister_driver(&vmbus_acpi_driver);
 	hv_cpu_hotplug_quirk(false);
 =======
+=======
+>>>>>>> v3.18
 	hv_remove_vmbus_irq();
 	vmbus_free_channels();
 	bus_unregister(&hv_bus);
 	hv_cleanup();
 	acpi_bus_unregister_driver(&vmbus_acpi_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_VERSION(HV_DRV_VERSION);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

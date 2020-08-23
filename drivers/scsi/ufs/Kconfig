@@ -71,6 +71,7 @@ config SCSI_UFSHCD_PLATFORM
 
 	  If unsure, say N.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 config SCSI_UFS_QCOM
 	bool "QCOM specific hooks to UFS controller platform driver"
@@ -92,5 +93,7 @@ config SCSI_UFS_TEST
 	The UFS unit-tests register as a block device test utility to
 	the test-iosched and will be initiated when the test-iosched will
 	be chosen to be the active I/O scheduler.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

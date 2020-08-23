@@ -19,6 +19,7 @@
  */
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/bootinfo.h>
 
@@ -28,6 +29,8 @@ unsigned long cpu_clock_freq;
 EXPORT_SYMBOL(cpu_clock_freq);
 unsigned long memsize, highmemsize;
 =======
+=======
+>>>>>>> v3.18
 #include <asm/bootinfo.h>
 #include <loongson.h>
 #include <boot_param.h>
@@ -42,6 +45,9 @@ u64 loongson_freqctrl[MAX_PACKAGES];
 
 unsigned long long smp_group[4];
 int cpuhotplug_workaround = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define parse_even_earlier(res, option, p)				\
@@ -50,7 +56,11 @@ do {									\
 									\
 	if (strncmp(option, (char *)p, strlen(option)) == 0)		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tmp = strict_strtol((char *)p + strlen(option"="), 10, &res); \
+=======
+		tmp = kstrtou32((char *)p + strlen(option"="), 10, &res); \
+>>>>>>> v3.18
 =======
 		tmp = kstrtou32((char *)p + strlen(option"="), 10, &res); \
 >>>>>>> v3.18
@@ -60,14 +70,20 @@ void __init prom_init_env(void)
 {
 	/* pmon passes arguments in 32bit pointers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int *_prom_envp;
 	unsigned long bus_clock;
 	unsigned int processor_id;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int processor_id;
 
 #ifndef CONFIG_LEFI_FIRMWARE_INTERFACE
 	int *_prom_envp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	long l;
 
@@ -77,7 +93,10 @@ void __init prom_init_env(void)
 	l = (long)*_prom_envp;
 	while (l != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		parse_even_earlier(bus_clock, "busclock", l);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		parse_even_earlier(cpu_clock_freq, "cpuclock", l);
@@ -89,9 +108,12 @@ void __init prom_init_env(void)
 	if (memsize == 0)
 		memsize = 256;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (bus_clock == 0)
 		bus_clock = 66000000;
 =======
+=======
+>>>>>>> v3.18
 	pr_info("memsize=%u, highmemsize=%u\n", memsize, highmemsize);
 #else
 	struct boot_params *boot_p;
@@ -171,6 +193,9 @@ void __init prom_init_env(void)
 		loongson_sysconf.poweroff_addr, loongson_sysconf.restart_addr,
 		loongson_sysconf.vgabios_addr);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cpu_clock_freq == 0) {
 		processor_id = (&current_cpu_data)->processor_id;
@@ -182,7 +207,10 @@ void __init prom_init_env(void)
 			cpu_clock_freq = 797000000;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case PRID_REV_LOONGSON3A:
 			cpu_clock_freq = 900000000;
 			break;
@@ -190,6 +218,9 @@ void __init prom_init_env(void)
 		case PRID_REV_LOONGSON3B_R2:
 			cpu_clock_freq = 1000000000;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			cpu_clock_freq = 100000000;
@@ -197,9 +228,13 @@ void __init prom_init_env(void)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pr_info("busclock=%ld, cpuclock=%ld, memsize=%ld, highmemsize=%ld\n",
 		bus_clock, cpu_clock_freq, memsize, highmemsize);
+=======
+	pr_info("CpuClock = %u\n", cpu_clock_freq);
+>>>>>>> v3.18
 =======
 	pr_info("CpuClock = %u\n", cpu_clock_freq);
 >>>>>>> v3.18

@@ -111,6 +111,7 @@ static struct severity {
 #ifdef	CONFIG_MEMORY_FAILURE
 	MCESEV(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		KEEP, "HT thread notices Action required: data load error",
 		SER, MASK(MCI_STATUS_OVER|MCI_UC_SAR|MCI_ADDR|MCACOD, MCI_UC_SAR|MCI_ADDR|MCACOD_DATA),
 		MCGMASK(MCG_STATUS_EIPV, 0)
@@ -118,17 +119,23 @@ static struct severity {
 	MCESEV(
 		AR, "Action required: data load error",
 =======
+=======
+>>>>>>> v3.18
 		KEEP, "Action required but unaffected thread is continuable",
 		SER, MASK(MCI_STATUS_OVER|MCI_UC_SAR|MCI_ADDR, MCI_UC_SAR|MCI_ADDR),
 		MCGMASK(MCG_STATUS_RIPV|MCG_STATUS_EIPV, MCG_STATUS_RIPV)
 		),
 	MCESEV(
 		AR, "Action required: data load error in a user process",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		SER, MASK(MCI_STATUS_OVER|MCI_UC_SAR|MCI_ADDR|MCACOD, MCI_UC_SAR|MCI_ADDR|MCACOD_DATA),
 		USER
 		),
 	MCESEV(
+<<<<<<< HEAD
 <<<<<<< HEAD
 		KEEP, "HT thread notices Action required: instruction fetch error",
 		SER, MASK(MCI_STATUS_OVER|MCI_UC_SAR|MCI_ADDR|MCACOD, MCI_UC_SAR|MCI_ADDR|MCACOD_INSTR),
@@ -136,6 +143,9 @@ static struct severity {
 		),
 	MCESEV(
 		AR, "Action required: instruction fetch error",
+=======
+		AR, "Action required: instruction fetch error in a user process",
+>>>>>>> v3.18
 =======
 		AR, "Action required: instruction fetch error in a user process",
 >>>>>>> v3.18

@@ -2,6 +2,11 @@
  * adv7180.c Analog Devices ADV7180 video decoder driver
  * Copyright (c) 2009 Intel Corporation
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2013 Cogent Embedded, Inc.
+ * Copyright (C) 2013 Renesas Solutions Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013 Cogent Embedded, Inc.
  * Copyright (C) 2013 Renesas Solutions Corp.
@@ -33,7 +38,10 @@
 #include <media/v4l2-device.h>
 #include <media/v4l2-ctrls.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mutex.h>
@@ -131,7 +139,10 @@ struct adv7180_state {
 	struct v4l2_ctrl_handler ctrl_hdl;
 	struct v4l2_subdev	sd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct	work;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct mutex		mutex; /* mutual excl. when accessing chip */
@@ -139,6 +150,10 @@ struct adv7180_state {
 	v4l2_std_id		curr_norm;
 	bool			autodetect;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool			powered;
+>>>>>>> v3.18
 =======
 	bool			powered;
 >>>>>>> v3.18
@@ -288,6 +303,7 @@ static int adv7180_g_input_status(struct v4l2_subdev *sd, u32 *status)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adv7180_g_chip_ident(struct v4l2_subdev *sd,
 				struct v4l2_dbg_chip_ident *chip)
 {
@@ -296,6 +312,8 @@ static int adv7180_g_chip_ident(struct v4l2_subdev *sd,
 	return v4l2_chip_ident_i2c_client(client, chip, V4L2_IDENT_ADV7180, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int adv7180_s_std(struct v4l2_subdev *sd, v4l2_std_id std)
@@ -338,7 +356,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int adv7180_set_power(struct adv7180_state *state,
 	struct i2c_client *client, bool on)
 {
@@ -370,6 +391,9 @@ static int adv7180_s_power(struct v4l2_subdev *sd, int on)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int adv7180_s_ctrl(struct v4l2_ctrl *ctrl)
 {
@@ -450,6 +474,7 @@ static void adv7180_exit_controls(struct adv7180_state *state)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct v4l2_subdev_video_ops adv7180_video_ops = {
 	.querystd = adv7180_querystd,
 	.g_input_status = adv7180_g_input_status,
@@ -460,6 +485,8 @@ static const struct v4l2_subdev_core_ops adv7180_core_ops = {
 	.g_chip_ident = adv7180_g_chip_ident,
 	.s_std = adv7180_s_std,
 =======
+=======
+>>>>>>> v3.18
 static int adv7180_enum_mbus_fmt(struct v4l2_subdev *sd, unsigned int index,
 				 enum v4l2_mbus_pixelcode *code)
 {
@@ -513,6 +540,9 @@ static const struct v4l2_subdev_video_ops adv7180_video_ops = {
 
 static const struct v4l2_subdev_core_ops adv7180_core_ops = {
 	.s_power = adv7180_s_power,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -522,10 +552,16 @@ static const struct v4l2_subdev_ops adv7180_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void adv7180_work(struct work_struct *work)
 {
 	struct adv7180_state *state = container_of(work, struct adv7180_state,
 						   work);
+=======
+static irqreturn_t adv7180_irq(int irq, void *devid)
+{
+	struct adv7180_state *state = devid;
+>>>>>>> v3.18
 =======
 static irqreturn_t adv7180_irq(int irq, void *devid)
 {
@@ -547,6 +583,7 @@ static irqreturn_t adv7180_irq(int irq, void *devid)
 	mutex_unlock(&state->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enable_irq(state->irq);
 }
 
@@ -558,6 +595,8 @@ static irqreturn_t adv7180_irq(int irq, void *devid)
 
 	disable_irq_nosync(state->irq);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return IRQ_HANDLED;
@@ -615,8 +654,13 @@ static int init_device(struct i2c_client *client, struct adv7180_state *state)
 	/* register for interrupts */
 	if (state->irq > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = request_irq(state->irq, adv7180_irq, 0, KBUILD_MODNAME,
 				  state);
+=======
+		ret = request_threaded_irq(state->irq, NULL, adv7180_irq,
+					   IRQF_ONESHOT, KBUILD_MODNAME, state);
+>>>>>>> v3.18
 =======
 		ret = request_threaded_irq(state->irq, NULL, adv7180_irq,
 					   IRQF_ONESHOT, KBUILD_MODNAME, state);
@@ -628,7 +672,11 @@ static int init_device(struct i2c_client *client, struct adv7180_state *state)
 						ADV7180_ADI_CTRL_IRQ_SPACE);
 		if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return ret;
+=======
+			goto err;
+>>>>>>> v3.18
 =======
 			goto err;
 >>>>>>> v3.18
@@ -639,6 +687,7 @@ static int init_device(struct i2c_client *client, struct adv7180_state *state)
 						ADV7180_ICONF1_PSYNC_ONLY);
 		if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return ret;
 
 		ret = i2c_smbus_write_byte_data(client, ADV7180_IMR1_ADI, 0);
@@ -649,6 +698,8 @@ static int init_device(struct i2c_client *client, struct adv7180_state *state)
 		if (ret < 0)
 			return ret;
 =======
+=======
+>>>>>>> v3.18
 			goto err;
 
 		ret = i2c_smbus_write_byte_data(client, ADV7180_IMR1_ADI, 0);
@@ -658,6 +709,9 @@ static int init_device(struct i2c_client *client, struct adv7180_state *state)
 		ret = i2c_smbus_write_byte_data(client, ADV7180_IMR2_ADI, 0);
 		if (ret < 0)
 			goto err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* enable AD change interrupts interrupts */
@@ -665,28 +719,37 @@ static int init_device(struct i2c_client *client, struct adv7180_state *state)
 						ADV7180_IRQ3_AD_CHANGE);
 		if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return ret;
 
 		ret = i2c_smbus_write_byte_data(client, ADV7180_IMR4_ADI, 0);
 		if (ret < 0)
 			return ret;
 =======
+=======
+>>>>>>> v3.18
 			goto err;
 
 		ret = i2c_smbus_write_byte_data(client, ADV7180_IMR4_ADI, 0);
 		if (ret < 0)
 			goto err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ret = i2c_smbus_write_byte_data(client, ADV7180_ADI_CTRL_REG,
 						0);
 		if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return ret;
 	}
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 			goto err;
 	}
 
@@ -695,6 +758,9 @@ static int init_device(struct i2c_client *client, struct adv7180_state *state)
 err:
 	free_irq(state->irq, state);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -713,7 +779,11 @@ static int adv7180_probe(struct i2c_client *client,
 		 client->addr, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state = kzalloc(sizeof(struct adv7180_state), GFP_KERNEL);
+=======
+	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
 >>>>>>> v3.18
@@ -724,9 +794,15 @@ static int adv7180_probe(struct i2c_client *client,
 
 	state->irq = client->irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_WORK(&state->work, adv7180_work);
 	mutex_init(&state->mutex);
 	state->autodetect = true;
+=======
+	mutex_init(&state->mutex);
+	state->autodetect = true;
+	state->powered = true;
+>>>>>>> v3.18
 =======
 	mutex_init(&state->mutex);
 	state->autodetect = true;
@@ -743,9 +819,12 @@ static int adv7180_probe(struct i2c_client *client,
 	if (ret)
 		goto err_free_ctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 
 	ret = v4l2_async_register_subdev(sd);
 	if (ret)
@@ -756,16 +835,23 @@ static int adv7180_probe(struct i2c_client *client,
 err_free_irq:
 	if (state->irq > 0)
 		free_irq(client->irq, state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_free_ctrl:
 	adv7180_exit_controls(state);
 err_unreg_subdev:
 	mutex_destroy(&state->mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_device_unregister_subdev(sd);
 	kfree(state);
 err:
 	printk(KERN_ERR KBUILD_MODNAME ": Failed to probe: %d\n", ret);
+=======
+err:
+>>>>>>> v3.18
 =======
 err:
 >>>>>>> v3.18
@@ -777,6 +863,7 @@ static int adv7180_remove(struct i2c_client *client)
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
 	struct adv7180_state *state = to_state(sd);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (state->irq > 0) {
 		free_irq(client->irq, state);
@@ -794,6 +881,8 @@ static int adv7180_remove(struct i2c_client *client)
 	v4l2_device_unregister_subdev(sd);
 	kfree(to_state(sd));
 =======
+=======
+>>>>>>> v3.18
 	v4l2_async_unregister_subdev(sd);
 
 	if (state->irq > 0)
@@ -801,6 +890,9 @@ static int adv7180_remove(struct i2c_client *client)
 
 	adv7180_exit_controls(state);
 	mutex_destroy(&state->mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -810,6 +902,7 @@ static const struct i2c_device_id adv7180_id[] = {
 	{},
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PM
 static int adv7180_suspend(struct i2c_client *client, pm_message_t state)
@@ -826,6 +919,8 @@ static int adv7180_suspend(struct i2c_client *client, pm_message_t state)
 static int adv7180_resume(struct i2c_client *client)
 {
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int adv7180_suspend(struct device *dev)
 {
@@ -839,22 +934,31 @@ static int adv7180_suspend(struct device *dev)
 static int adv7180_resume(struct device *dev)
 {
 	struct i2c_client *client = to_i2c_client(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
 	struct adv7180_state *state = to_state(sd);
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = i2c_smbus_write_byte_data(client, ADV7180_PWR_MAN_REG,
 					ADV7180_PWR_MAN_ON);
 	if (ret < 0)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (state->powered) {
 		ret = adv7180_set_power(state, client, true);
 		if (ret)
 			return ret;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = init_device(client, state);
 	if (ret < 0)
@@ -862,13 +966,19 @@ static int adv7180_resume(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static SIMPLE_DEV_PM_OPS(adv7180_pm_ops, adv7180_suspend, adv7180_resume);
 #define ADV7180_PM_OPS (&adv7180_pm_ops)
 
 #else
 #define ADV7180_PM_OPS NULL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -879,6 +989,7 @@ static struct i2c_driver adv7180_driver = {
 		   .owner = THIS_MODULE,
 		   .name = KBUILD_MODNAME,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   },
 	.probe = adv7180_probe,
 	.remove = adv7180_remove,
@@ -887,10 +998,15 @@ static struct i2c_driver adv7180_driver = {
 	.resume = adv7180_resume,
 #endif
 =======
+=======
+>>>>>>> v3.18
 		   .pm = ADV7180_PM_OPS,
 		   },
 	.probe = adv7180_probe,
 	.remove = adv7180_remove,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.id_table = adv7180_id,
 };

@@ -110,7 +110,10 @@ int rs400_gart_enable(struct radeon_device *rdev)
 	uint32_t tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_gart_restore(rdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	tmp = RREG32_MC(RS690_AIC_CTRL_SCRATCH);
@@ -213,22 +216,29 @@ void rs400_gart_fini(struct radeon_device *rdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RS400_PTE_WRITEABLE (1 << 2)
 #define RS400_PTE_READABLE  (1 << 3)
 
 int rs400_gart_set_page(struct radeon_device *rdev, int i, uint64_t addr)
 =======
+=======
+>>>>>>> v3.18
 #define RS400_PTE_UNSNOOPED (1 << 0)
 #define RS400_PTE_WRITEABLE (1 << 2)
 #define RS400_PTE_READABLE  (1 << 3)
 
 void rs400_gart_set_page(struct radeon_device *rdev, unsigned i,
 			 uint64_t addr, uint32_t flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	uint32_t entry;
 	u32 *gtt = rdev->gart.ptr;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (i < 0 || i > rdev->gart.num_gpu_pages) {
 		return -EINVAL;
@@ -241,6 +251,8 @@ void rs400_gart_set_page(struct radeon_device *rdev, unsigned i,
 	gtt[i] = entry;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	entry = (lower_32_bits(addr) & PAGE_MASK) |
 		((upper_32_bits(addr) & 0xff) << 4);
 	if (flags & RADEON_GART_PAGE_READ)
@@ -251,6 +263,9 @@ void rs400_gart_set_page(struct radeon_device *rdev, unsigned i,
 		entry |= RS400_PTE_UNSNOOPED;
 	entry = cpu_to_le32(entry);
 	gtt[i] = entry;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -300,12 +315,15 @@ static void rs400_mc_init(struct radeon_device *rdev)
 uint32_t rs400_mc_rreg(struct radeon_device *rdev, uint32_t reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t r;
 
 	WREG32(RS480_NB_MC_INDEX, reg & 0xff);
 	r = RREG32(RS480_NB_MC_DATA);
 	WREG32(RS480_NB_MC_INDEX, 0xff);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 	uint32_t r;
 
@@ -314,6 +332,9 @@ uint32_t rs400_mc_rreg(struct radeon_device *rdev, uint32_t reg)
 	r = RREG32(RS480_NB_MC_DATA);
 	WREG32(RS480_NB_MC_INDEX, 0xff);
 	spin_unlock_irqrestore(&rdev->mc_idx_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return r;
 }
@@ -321,10 +342,13 @@ uint32_t rs400_mc_rreg(struct radeon_device *rdev, uint32_t reg)
 void rs400_mc_wreg(struct radeon_device *rdev, uint32_t reg, uint32_t v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WREG32(RS480_NB_MC_INDEX, ((reg) & 0xff) | RS480_NB_MC_IND_WR_EN);
 	WREG32(RS480_NB_MC_DATA, (v));
 	WREG32(RS480_NB_MC_INDEX, 0xff);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&rdev->mc_idx_lock, flags);
@@ -332,6 +356,9 @@ void rs400_mc_wreg(struct radeon_device *rdev, uint32_t reg, uint32_t v)
 	WREG32(RS480_NB_MC_DATA, (v));
 	WREG32(RS480_NB_MC_INDEX, 0xff);
 	spin_unlock_irqrestore(&rdev->mc_idx_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -524,6 +551,10 @@ int rs400_resume(struct radeon_device *rdev)
 int rs400_suspend(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	radeon_pm_suspend(rdev);
+>>>>>>> v3.18
 =======
 	radeon_pm_suspend(rdev);
 >>>>>>> v3.18
@@ -537,6 +568,10 @@ int rs400_suspend(struct radeon_device *rdev)
 void rs400_fini(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	radeon_pm_fini(rdev);
+>>>>>>> v3.18
 =======
 	radeon_pm_fini(rdev);
 >>>>>>> v3.18
@@ -608,6 +643,12 @@ int rs400_init(struct radeon_device *rdev)
 	r300_set_reg_safe(rdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Initialize power management */
+	radeon_pm_init(rdev);
+
+>>>>>>> v3.18
 =======
 	/* Initialize power management */
 	radeon_pm_init(rdev);

@@ -17,15 +17,21 @@
 #include <linux/err.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/regulator/driver.h>
 #include <linux/regulator/machine.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/platform_device.h>
 #include <linux/regulator/driver.h>
 #include <linux/regulator/machine.h>
 #include <linux/regulator/of_regulator.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/mfd/abx500.h>
 #include <linux/mfd/abx500/ab8500.h>
@@ -238,7 +244,10 @@ static unsigned int ab8500_ext_regulator_get_mode(struct regulator_dev *rdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ab8500_ext_set_voltage(struct regulator_dev *rdev, int min_uV,
 				  int max_uV, unsigned *selector)
 {
@@ -261,6 +270,9 @@ static int ab8500_ext_set_voltage(struct regulator_dev *rdev, int min_uV,
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ab8500_ext_list_voltage(struct regulator_dev *rdev,
 				   unsigned selector)
@@ -286,6 +298,10 @@ static struct regulator_ops ab8500_ext_regulator_ops = {
 	.set_mode		= ab8500_ext_regulator_set_mode,
 	.get_mode		= ab8500_ext_regulator_get_mode,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_voltage		= ab8500_ext_set_voltage,
+>>>>>>> v3.18
 =======
 	.set_voltage		= ab8500_ext_set_voltage,
 >>>>>>> v3.18
@@ -348,8 +364,11 @@ static struct ab8500_ext_regulator_info
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ab8500_ext_regulator_init(struct platform_device *pdev)
 =======
+=======
+>>>>>>> v3.18
 static struct of_regulator_match ab8500_ext_regulator_match[] = {
 	{ .name = "ab8500_ext1", .driver_data = (void *) AB8500_EXT_SUPPLY1, },
 	{ .name = "ab8500_ext2", .driver_data = (void *) AB8500_EXT_SUPPLY2, },
@@ -357,16 +376,22 @@ static struct of_regulator_match ab8500_ext_regulator_match[] = {
 };
 
 static int ab8500_ext_regulator_probe(struct platform_device *pdev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ab8500 *ab8500 = dev_get_drvdata(pdev->dev.parent);
 	struct ab8500_platform_data *ppdata;
 	struct ab8500_regulator_platform_data *pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_config config = { };
 	int i, err;
 
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *np = pdev->dev.of_node;
 	struct regulator_config config = { };
 	int i, err;
@@ -382,12 +407,19 @@ static int ab8500_ext_regulator_probe(struct platform_device *pdev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ab8500) {
 		dev_err(&pdev->dev, "null mfd parent\n");
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -432,12 +464,15 @@ static int ab8500_ext_regulator_probe(struct platform_device *pdev)
 
 		config.dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		config.init_data = &pdata->ext_regulator[i];
 		config.driver_data = info;
 
 		/* register regulator with framework */
 		info->rdev = regulator_register(&info->desc, &config);
 =======
+=======
+>>>>>>> v3.18
 		config.driver_data = info;
 		config.of_node = ab8500_ext_regulator_match[i].of_node;
 		config.init_data = (np) ?
@@ -447,17 +482,23 @@ static int ab8500_ext_regulator_probe(struct platform_device *pdev)
 		/* register regulator with framework */
 		info->rdev = devm_regulator_register(&pdev->dev, &info->desc,
 						     &config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (IS_ERR(info->rdev)) {
 			err = PTR_ERR(info->rdev);
 			dev_err(&pdev->dev, "failed to register regulator %s\n",
 					info->desc.name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* when we fail, un-register all earlier regulators */
 			while (--i >= 0) {
 				info = &ab8500_ext_regulator_info[i];
 				regulator_unregister(info->rdev);
 			}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			return err;
@@ -470,6 +511,7 @@ static int ab8500_ext_regulator_probe(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void ab8500_ext_regulator_exit(struct platform_device *pdev)
 {
@@ -486,6 +528,8 @@ void ab8500_ext_regulator_exit(struct platform_device *pdev)
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 static struct platform_driver ab8500_ext_regulator_driver = {
 	.probe = ab8500_ext_regulator_probe,
 	.driver         = {
@@ -511,6 +555,9 @@ static void __exit ab8500_ext_regulator_exit(void)
 	platform_driver_unregister(&ab8500_ext_regulator_driver);
 }
 module_exit(ab8500_ext_regulator_exit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_LICENSE("GPL v2");

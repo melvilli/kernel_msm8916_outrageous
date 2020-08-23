@@ -111,10 +111,13 @@ struct adis16480_chip_info {
 	unsigned int num_channels;
 	const struct iio_chan_spec *channels;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int gyro_max_val;
 	unsigned int gyro_max_scale;
 	unsigned int accel_max_val;
 	unsigned int accel_max_scale;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -265,12 +268,15 @@ static int adis16480_debugfs_init(struct iio_dev *indio_dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adis16480_set_freq(struct adis16480 *st, unsigned int freq)
 {
 	unsigned int t;
 
 	t = 2460000 / freq;
 =======
+=======
+>>>>>>> v3.18
 static int adis16480_set_freq(struct iio_dev *indio_dev, int val, int val2)
 {
 	struct adis16480 *st = iio_priv(indio_dev);
@@ -281,6 +287,9 @@ static int adis16480_set_freq(struct iio_dev *indio_dev, int val, int val2)
 		return -EINVAL;
 
 	t = 2460000 / t;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (t > 2048)
 		t = 2048;
@@ -292,23 +301,30 @@ static int adis16480_set_freq(struct iio_dev *indio_dev, int val, int val2)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int adis16480_get_freq(struct adis16480 *st, unsigned int *freq)
 {
 	uint16_t t;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 static int adis16480_get_freq(struct iio_dev *indio_dev, int *val, int *val2)
 {
 	struct adis16480 *st = iio_priv(indio_dev);
 	uint16_t t;
 	int ret;
 	unsigned freq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = adis_read_reg_16(&st->adis, ADIS16480_REG_DEC_RATE, &t);
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	*freq = 2460000 / (t + 1);
 
@@ -361,6 +377,8 @@ static IIO_DEV_ATTR_SAMP_FREQ(S_IWUSR | S_IRUGO,
 			      adis16480_write_frequency);
 
 =======
+=======
+>>>>>>> v3.18
 	freq = 2460000 / (t + 1);
 	*val = freq / 1000;
 	*val2 = (freq % 1000) * 1000;
@@ -368,6 +386,9 @@ static IIO_DEV_ATTR_SAMP_FREQ(S_IWUSR | S_IRUGO,
 	return IIO_VAL_INT_PLUS_MICRO;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum {
 	ADIS16480_SCAN_GYRO_X,
@@ -573,8 +594,11 @@ static int adis16480_read_raw(struct iio_dev *indio_dev,
 	const struct iio_chan_spec *chan, int *val, int *val2, long info)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct adis16480 *st = iio_priv(indio_dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (info) {
@@ -584,6 +608,7 @@ static int adis16480_read_raw(struct iio_dev *indio_dev,
 		switch (chan->type) {
 		case IIO_ANGL_VEL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*val = st->chip_info->gyro_max_scale;
 			*val2 = st->chip_info->gyro_max_val;
 			return IIO_VAL_FRACTIONAL;
@@ -592,6 +617,8 @@ static int adis16480_read_raw(struct iio_dev *indio_dev,
 			*val2 = st->chip_info->accel_max_val;
 			return IIO_VAL_FRACTIONAL;
 =======
+=======
+>>>>>>> v3.18
 			*val = 0;
 			*val2 = IIO_DEGREE_TO_RAD(20000); /* 0.02 degree/sec */
 			return IIO_VAL_INT_PLUS_MICRO;
@@ -599,6 +626,9 @@ static int adis16480_read_raw(struct iio_dev *indio_dev,
 			*val = 0;
 			*val2 = IIO_G_TO_M_S_2(800); /* 0.8 mg */
 			return IIO_VAL_INT_PLUS_MICRO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case IIO_MAGN:
 			*val = 0;
@@ -626,6 +656,11 @@ static int adis16480_read_raw(struct iio_dev *indio_dev,
 	case IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY:
 		return adis16480_get_filter_freq(indio_dev, chan, val);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case IIO_CHAN_INFO_SAMP_FREQ:
+		return adis16480_get_freq(indio_dev, val, val2);
+>>>>>>> v3.18
 =======
 	case IIO_CHAN_INFO_SAMP_FREQ:
 		return adis16480_get_freq(indio_dev, val, val2);
@@ -646,6 +681,12 @@ static int adis16480_write_raw(struct iio_dev *indio_dev,
 	case IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY:
 		return adis16480_set_filter_freq(indio_dev, chan, val);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case IIO_CHAN_INFO_SAMP_FREQ:
+		return adis16480_set_freq(indio_dev, val, val2);
+
+>>>>>>> v3.18
 =======
 	case IIO_CHAN_INFO_SAMP_FREQ:
 		return adis16480_set_freq(indio_dev, val, val2);
@@ -666,6 +707,10 @@ static int adis16480_write_raw(struct iio_dev *indio_dev,
 			_info_sep, \
 		.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE), \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+>>>>>>> v3.18
 =======
 		.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
 >>>>>>> v3.18
@@ -708,6 +753,10 @@ static int adis16480_write_raw(struct iio_dev *indio_dev,
 			BIT(IIO_CHAN_INFO_CALIBBIAS) | \
 			BIT(IIO_CHAN_INFO_SCALE), \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+>>>>>>> v3.18
 =======
 		.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
 >>>>>>> v3.18
@@ -729,6 +778,10 @@ static int adis16480_write_raw(struct iio_dev *indio_dev,
 			BIT(IIO_CHAN_INFO_SCALE) | \
 			BIT(IIO_CHAN_INFO_OFFSET), \
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
+>>>>>>> v3.18
 =======
 		.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ), \
 >>>>>>> v3.18
@@ -780,6 +833,7 @@ static const struct adis16480_chip_info adis16480_chip_info[] = {
 		.channels = adis16485_channels,
 		.num_channels = ARRAY_SIZE(adis16485_channels),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * storing the value in rad/degree and the scale in degree
 		 * gives us the result in rad and better precession than
@@ -791,10 +845,13 @@ static const struct adis16480_chip_info adis16480_chip_info[] = {
 		.accel_max_scale = 18,
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	},
 	[ADIS16480] = {
 		.channels = adis16480_channels,
 		.num_channels = ARRAY_SIZE(adis16480_channels),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.gyro_max_val = IIO_RAD_TO_DEGREE(22500),
 		.gyro_max_scale = 450,
@@ -802,10 +859,13 @@ static const struct adis16480_chip_info adis16480_chip_info[] = {
 		.accel_max_scale = 5,
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	},
 	[ADIS16485] = {
 		.channels = adis16485_channels,
 		.num_channels = ARRAY_SIZE(adis16485_channels),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.gyro_max_val = IIO_RAD_TO_DEGREE(22500),
 		.gyro_max_scale = 450,
@@ -813,10 +873,13 @@ static const struct adis16480_chip_info adis16480_chip_info[] = {
 		.accel_max_scale = 5,
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	},
 	[ADIS16488] = {
 		.channels = adis16480_channels,
 		.num_channels = ARRAY_SIZE(adis16480_channels),
+<<<<<<< HEAD
 <<<<<<< HEAD
 		.gyro_max_val = IIO_RAD_TO_DEGREE(22500),
 		.gyro_max_scale = 450,
@@ -837,10 +900,15 @@ static const struct attribute_group adis16480_attribute_group = {
 static const struct iio_info adis16480_info = {
 	.attrs = &adis16480_attribute_group,
 =======
+=======
+>>>>>>> v3.18
 	},
 };
 
 static const struct iio_info adis16480_info = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.read_raw = &adis16480_read_raw,
 	.write_raw = &adis16480_write_raw,
@@ -954,7 +1022,11 @@ static int adis16480_probe(struct spi_device *spi)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 >>>>>>> v3.18
@@ -976,17 +1048,23 @@ static int adis16480_probe(struct spi_device *spi)
 	ret = adis_init(&st->adis, indio_dev, spi, &adis16480_data);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
 
 	ret = adis_setup_buffer_and_trigger(&st->adis, indio_dev, NULL);
 	if (ret)
 		goto error_free_dev;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 
 	ret = adis_setup_buffer_and_trigger(&st->adis, indio_dev, NULL);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = adis16480_initial_setup(indio_dev);
@@ -1006,8 +1084,11 @@ error_stop_device:
 error_cleanup_buffer:
 	adis_cleanup_buffer_and_trigger(&st->adis, indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_dev:
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1024,8 +1105,11 @@ static int adis16480_remove(struct spi_device *spi)
 	adis_cleanup_buffer_and_trigger(&st->adis, indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

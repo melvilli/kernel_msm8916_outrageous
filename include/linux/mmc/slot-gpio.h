@@ -19,10 +19,13 @@ void mmc_gpio_free_ro(struct mmc_host *host);
 
 int mmc_gpio_get_cd(struct mmc_host *host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mmc_gpio_request_cd(struct mmc_host *host, unsigned int gpio);
 void mmc_gpio_free_cd(struct mmc_host *host);
 
 =======
+=======
+>>>>>>> v3.18
 int mmc_gpio_request_cd(struct mmc_host *host, unsigned int gpio,
 			unsigned int debounce);
 void mmc_gpio_free_cd(struct mmc_host *host);
@@ -36,5 +39,8 @@ int mmc_gpiod_request_ro(struct mmc_host *host, const char *con_id,
 void mmc_gpiod_free_cd(struct mmc_host *host);
 void mmc_gpiod_request_cd_irq(struct mmc_host *host);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

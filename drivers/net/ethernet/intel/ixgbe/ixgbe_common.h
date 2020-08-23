@@ -2,7 +2,11 @@
 
   Intel 10 Gigabit PCI Express Linux driver
 <<<<<<< HEAD
+<<<<<<< HEAD
   Copyright(c) 1999 - 2013 Intel Corporation.
+=======
+  Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
   Copyright(c) 1999 - 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -25,6 +29,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -47,7 +55,11 @@ s32 ixgbe_start_hw_gen2(struct ixgbe_hw *hw);
 s32 ixgbe_clear_hw_cntrs_generic(struct ixgbe_hw *hw);
 s32 ixgbe_read_pba_string_generic(struct ixgbe_hw *hw, u8 *pba_num,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                   u32 pba_num_size);
+=======
+				  u32 pba_num_size);
+>>>>>>> v3.18
 =======
 				  u32 pba_num_size);
 >>>>>>> v3.18
@@ -73,7 +85,11 @@ s32 ixgbe_write_eewr_buffer_generic(struct ixgbe_hw *hw, u16 offset,
 				    u16 words, u16 *data);
 s32 ixgbe_read_eeprom_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                        u16 *data);
+=======
+				       u16 *data);
+>>>>>>> v3.18
 =======
 				       u16 *data);
 >>>>>>> v3.18
@@ -82,17 +98,23 @@ s32 ixgbe_read_eeprom_buffer_bit_bang_generic(struct ixgbe_hw *hw, u16 offset,
 u16 ixgbe_calc_eeprom_checksum_generic(struct ixgbe_hw *hw);
 s32 ixgbe_validate_eeprom_checksum_generic(struct ixgbe_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                            u16 *checksum_val);
 s32 ixgbe_update_eeprom_checksum_generic(struct ixgbe_hw *hw);
 
 s32 ixgbe_set_rar_generic(struct ixgbe_hw *hw, u32 index, u8 *addr, u32 vmdq,
                           u32 enable_addr);
 =======
+=======
+>>>>>>> v3.18
 					   u16 *checksum_val);
 s32 ixgbe_update_eeprom_checksum_generic(struct ixgbe_hw *hw);
 
 s32 ixgbe_set_rar_generic(struct ixgbe_hw *hw, u32 index, u8 *addr, u32 vmdq,
 			  u32 enable_addr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 s32 ixgbe_clear_rar_generic(struct ixgbe_hw *hw, u32 index);
 s32 ixgbe_init_rx_addrs_generic(struct ixgbe_hw *hw);
@@ -105,7 +127,11 @@ s32 ixgbe_enable_rx_buff_generic(struct ixgbe_hw *hw);
 s32 ixgbe_enable_rx_dma_generic(struct ixgbe_hw *hw, u32 regval);
 s32 ixgbe_fc_enable_generic(struct ixgbe_hw *hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 ixgbe_device_supports_autoneg_fc(struct ixgbe_hw *hw);
+=======
+bool ixgbe_device_supports_autoneg_fc(struct ixgbe_hw *hw);
+>>>>>>> v3.18
 =======
 bool ixgbe_device_supports_autoneg_fc(struct ixgbe_hw *hw);
 >>>>>>> v3.18
@@ -120,6 +146,7 @@ s32 ixgbe_clear_vmdq_generic(struct ixgbe_hw *hw, u32 rar, u32 vmdq);
 s32 ixgbe_init_uta_tables_generic(struct ixgbe_hw *hw);
 s32 ixgbe_set_vfta_generic(struct ixgbe_hw *hw, u32 vlan,
 <<<<<<< HEAD
+<<<<<<< HEAD
                            u32 vind, bool vlan_on);
 s32 ixgbe_clear_vfta_generic(struct ixgbe_hw *hw);
 s32 ixgbe_check_mac_link_generic(struct ixgbe_hw *hw,
@@ -128,6 +155,8 @@ s32 ixgbe_check_mac_link_generic(struct ixgbe_hw *hw,
 s32 ixgbe_get_wwn_prefix_generic(struct ixgbe_hw *hw, u16 *wwnn_prefix,
                                  u16 *wwpn_prefix);
 =======
+=======
+>>>>>>> v3.18
 			   u32 vind, bool vlan_on);
 s32 ixgbe_clear_vfta_generic(struct ixgbe_hw *hw);
 s32 ixgbe_check_mac_link_generic(struct ixgbe_hw *hw,
@@ -139,6 +168,9 @@ s32 ixgbe_get_wwn_prefix_generic(struct ixgbe_hw *hw, u16 *wwnn_prefix,
 s32 prot_autoc_read_generic(struct ixgbe_hw *hw, bool *, u32 *reg_val);
 s32 prot_autoc_write_generic(struct ixgbe_hw *hw, u32 reg_val, bool locked);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 s32 ixgbe_blink_led_start_generic(struct ixgbe_hw *hw, u32 index);
 s32 ixgbe_blink_led_stop_generic(struct ixgbe_hw *hw, u32 index);
@@ -149,15 +181,21 @@ s32 ixgbe_set_fw_drv_ver_generic(struct ixgbe_hw *hw, u8 maj, u8 min,
 				 u8 build, u8 ver);
 void ixgbe_clear_tx_pending(struct ixgbe_hw *hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void ixgbe_set_rxpba_generic(struct ixgbe_hw *hw, int num_pb,
 			     u32 headroom, int strategy);
 s32 ixgbe_reset_pipeline_82599(struct ixgbe_hw *hw);
 =======
+=======
+>>>>>>> v3.18
 bool ixgbe_mng_enabled(struct ixgbe_hw *hw);
 
 void ixgbe_set_rxpba_generic(struct ixgbe_hw *hw, int num_pb,
 			     u32 headroom, int strategy);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define IXGBE_I2C_THERMAL_SENSOR_ADDR	0xF8
@@ -173,6 +211,7 @@ void ixgbe_set_rxpba_generic(struct ixgbe_hw *hw, int num_pb,
 s32 ixgbe_get_thermal_sensor_data_generic(struct ixgbe_hw *hw);
 s32 ixgbe_init_thermal_sensor_thresh_generic(struct ixgbe_hw *hw);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IXGBE_WRITE_REG(a, reg, value) writel((value), ((a)->hw_addr + (reg)))
 
@@ -196,6 +235,8 @@ s32 ixgbe_init_thermal_sensor_thresh_generic(struct ixgbe_hw *hw);
 #define hw_dbg(hw, format, arg...) \
 	netdev_dbg(((struct ixgbe_adapter *)(hw->back))->netdev, format, ##arg)
 =======
+=======
+>>>>>>> v3.18
 #define IXGBE_FAILED_READ_REG 0xffffffffU
 #define IXGBE_FAILED_READ_CFG_DWORD 0xffffffffU
 #define IXGBE_FAILED_READ_CFG_WORD 0xffffU
@@ -254,6 +295,9 @@ u32 ixgbe_read_reg(struct ixgbe_hw *hw, u32 reg);
 	netdev_dbg(ixgbe_hw_to_netdev(hw), format, ## arg)
 #define hw_err(hw, format, arg...) \
 	netdev_err(ixgbe_hw_to_netdev(hw), format, ## arg)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define e_dev_info(format, arg...) \
 	dev_info(&adapter->pdev->dev, format, ## arg)

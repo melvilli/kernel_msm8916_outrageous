@@ -1103,8 +1103,13 @@ static int wp384_final(struct shash_desc *desc, u8 *out)
 
 	wp512_final(desc, D);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy (out, D, WP384_DIGEST_SIZE);
 	memset (D, 0, WP512_DIGEST_SIZE);
+=======
+	memcpy(out, D, WP384_DIGEST_SIZE);
+	memzero_explicit(D, WP512_DIGEST_SIZE);
+>>>>>>> v3.18
 =======
 	memcpy(out, D, WP384_DIGEST_SIZE);
 	memzero_explicit(D, WP512_DIGEST_SIZE);
@@ -1119,8 +1124,13 @@ static int wp256_final(struct shash_desc *desc, u8 *out)
 
 	wp512_final(desc, D);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy (out, D, WP256_DIGEST_SIZE);
 	memset (D, 0, WP512_DIGEST_SIZE);
+=======
+	memcpy(out, D, WP256_DIGEST_SIZE);
+	memzero_explicit(D, WP512_DIGEST_SIZE);
+>>>>>>> v3.18
 =======
 	memcpy(out, D, WP256_DIGEST_SIZE);
 	memzero_explicit(D, WP512_DIGEST_SIZE);
@@ -1178,9 +1188,14 @@ static void __exit wp512_mod_fini(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("wp512");
 MODULE_ALIAS_CRYPTO("wp384");
 MODULE_ALIAS_CRYPTO("wp256");
+=======
+MODULE_ALIAS("wp384");
+MODULE_ALIAS("wp256");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("wp384");
 MODULE_ALIAS("wp256");

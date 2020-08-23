@@ -49,9 +49,14 @@ static const struct file_operations mga_driver_fops = {
 	.release = drm_release,
 	.unlocked_ioctl = drm_ioctl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mmap = drm_mmap,
 	.poll = drm_poll,
 	.fasync = drm_fasync,
+=======
+	.mmap = drm_legacy_mmap,
+	.poll = drm_poll,
+>>>>>>> v3.18
 =======
 	.mmap = drm_legacy_mmap,
 	.poll = drm_poll,
@@ -65,7 +70,11 @@ static const struct file_operations mga_driver_fops = {
 static struct drm_driver driver = {
 	.driver_features =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    DRIVER_USE_AGP | DRIVER_USE_MTRR | DRIVER_PCI_DMA |
+=======
+	    DRIVER_USE_AGP | DRIVER_PCI_DMA |
+>>>>>>> v3.18
 =======
 	    DRIVER_USE_AGP | DRIVER_PCI_DMA |
 >>>>>>> v3.18
@@ -75,6 +84,10 @@ static struct drm_driver driver = {
 	.unload = mga_driver_unload,
 	.lastclose = mga_driver_lastclose,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_busid = drm_pci_set_busid,
+>>>>>>> v3.18
 =======
 	.set_busid = drm_pci_set_busid,
 >>>>>>> v3.18

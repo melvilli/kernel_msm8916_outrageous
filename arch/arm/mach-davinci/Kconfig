@@ -40,7 +40,10 @@ config ARCH_DAVINCI_DA850
 	bool "DA850/OMAP-L138/AM18x based system"
 	select ARCH_DAVINCI_DA8XX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARCH_HAS_CPUFREQ
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select CP_INTC
@@ -55,11 +58,14 @@ config ARCH_DAVINCI_DM365
 	select ARCH_DAVINCI_DMx
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_DAVINCI_TNETV107X
 	bool "TNETV107X based system"
 	select CPU_V6
 	select CP_INTC
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 comment "DaVinci Board Type"
@@ -221,6 +227,7 @@ config DA850_WL12XX
 	  AM18x EVM.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config GPIO_PCA953X
 	default MACH_DAVINCI_DA850_EVM
 
@@ -233,6 +240,8 @@ config MACH_TNETV107X
 	depends on ARCH_DAVINCI_TNETV107X
 	help
 	  Say Y here to select the TI TNETV107X Evaluation Module.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

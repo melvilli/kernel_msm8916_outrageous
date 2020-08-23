@@ -56,7 +56,12 @@ static inline struct uwb_rc *__uwb_rc_get(struct uwb_rc *rc)
 static inline void __uwb_rc_put(struct uwb_rc *rc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uwb_dev_put(&rc->uwb_dev);
+=======
+	if (rc)
+		uwb_dev_put(&rc->uwb_dev);
+>>>>>>> v3.18
 =======
 	if (rc)
 		uwb_dev_put(&rc->uwb_dev);
@@ -177,7 +182,12 @@ struct uwb_rsv_alloc_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int uwb_rsv_find_best_allocation(struct uwb_rsv *rsv, struct uwb_mas_bm *available, 
+=======
+int uwb_rsv_find_best_allocation(struct uwb_rsv *rsv,
+				 struct uwb_mas_bm *available,
+>>>>>>> v3.18
 =======
 int uwb_rsv_find_best_allocation(struct uwb_rsv *rsv,
 				 struct uwb_mas_bm *available,
@@ -323,6 +333,10 @@ int uwb_radio_force_channel(struct uwb_rc *rc, int channel);
 /* -- UWB Sysfs representation */
 extern struct class uwb_rc_class;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern struct bus_type uwb_bus_type;
+>>>>>>> v3.18
 =======
 extern struct bus_type uwb_bus_type;
 >>>>>>> v3.18

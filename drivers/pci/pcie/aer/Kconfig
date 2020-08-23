@@ -6,6 +6,10 @@ config PCIEAER
 	boolean "Root Port Advanced Error Reporting support"
 	depends on PCIEPORTBUS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select RAS
+>>>>>>> v3.18
 =======
 	select RAS
 >>>>>>> v3.18

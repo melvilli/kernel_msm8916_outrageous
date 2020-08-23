@@ -29,7 +29,10 @@
 #ifdef CONFIG_8xx
 #include <asm/8xx_immap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/mpc8xx.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

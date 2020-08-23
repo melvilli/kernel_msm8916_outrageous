@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -245,7 +249,10 @@ acpi_ds_is_result_used(union acpi_parse_object * op,
 		case AML_IF_OP:
 		case AML_WHILE_OP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -262,7 +269,13 @@ acpi_ds_is_result_used(union acpi_parse_object * op,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Ignore other control opcodes */
+=======
+
+			/* Ignore other control opcodes */
+
+>>>>>>> v3.18
 =======
 
 			/* Ignore other control opcodes */
@@ -277,7 +290,10 @@ acpi_ds_is_result_used(union acpi_parse_object * op,
 
 	case AML_CLASS_CREATE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -309,7 +325,10 @@ acpi_ds_is_result_used(union acpi_parse_object * op,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -320,7 +339,11 @@ acpi_ds_is_result_used(union acpi_parse_object * op,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       result_used:
+=======
+result_used:
+>>>>>>> v3.18
 =======
 result_used:
 >>>>>>> v3.18
@@ -333,7 +356,11 @@ result_used:
 	return_UINT8(TRUE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       result_not_used:
+=======
+result_not_used:
+>>>>>>> v3.18
 =======
 result_not_used:
 >>>>>>> v3.18
@@ -756,6 +783,7 @@ acpi_ds_create_operands(struct acpi_walk_state *walk_state,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	index--;
 
 	/* It is the appropriate order to get objects from the Result stack */
@@ -767,6 +795,8 @@ acpi_ds_create_operands(struct acpi_walk_state *walk_state,
 
 		walk_state->operand_index = (u8) index;
 =======
+=======
+>>>>>>> v3.18
 	ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
 			  "NumOperands %d, ArgCount %d, Index %d\n",
 			  walk_state->num_operands, arg_count, index));
@@ -777,6 +807,9 @@ acpi_ds_create_operands(struct acpi_walk_state *walk_state,
 	for (i = 0; i < arg_count; i++) {
 		arg = arguments[index];
 		walk_state->operand_index = (u8)index;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		status = acpi_ds_create_operand(walk_state, arg, index);
@@ -785,23 +818,33 @@ acpi_ds_create_operands(struct acpi_walk_state *walk_state,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		index--;
 
 		ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
 				  "Arg #%u (%p) done, Arg1=%p\n", index, arg,
 				  first_arg));
 =======
+=======
+>>>>>>> v3.18
 		ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
 				  "Created Arg #%u (%p) %u args total\n",
 				  index, arg, arg_count));
 		index--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return_ACPI_STATUS(status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -904,7 +947,11 @@ acpi_status acpi_ds_evaluate_name_path(struct acpi_walk_state *walk_state)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       push_result:
+=======
+push_result:
+>>>>>>> v3.18
 =======
 push_result:
 >>>>>>> v3.18
@@ -920,7 +967,11 @@ push_result:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18

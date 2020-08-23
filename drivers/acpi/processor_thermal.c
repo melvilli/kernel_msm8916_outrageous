@@ -31,12 +31,18 @@
 #include <linux/init.h>
 #include <linux/cpufreq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/uaccess.h>
 
 #include <acpi/acpi_bus.h>
 #include <acpi/processor.h>
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/acpi.h>
+#include <acpi/processor.h>
+#include <asm/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 #include <acpi/processor.h>
@@ -193,6 +199,7 @@ static int cpufreq_set_cur_state(unsigned int cpu, int state)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int acpi_processor_get_limit_info(struct acpi_processor *pr)
 {
 
@@ -209,6 +216,9 @@ int acpi_processor_get_limit_info(struct acpi_processor *pr)
 =======
 /* thermal cooling device callbacks */
 >>>>>>> v3.18
+=======
+/* thermal cooling device callbacks */
+>>>>>>> v3.18
 static int acpi_processor_max_state(struct acpi_processor *pr)
 {
 	int max_state = 0;
@@ -216,7 +226,11 @@ static int acpi_processor_max_state(struct acpi_processor *pr)
 	/*
 	 * There exists four states according to
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * cpufreq_thermal_reduction_ptg. 0, 1, 2, 3
+=======
+	 * cpufreq_thermal_reduction_pctg. 0, 1, 2, 3
+>>>>>>> v3.18
 =======
 	 * cpufreq_thermal_reduction_pctg. 0, 1, 2, 3
 >>>>>>> v3.18

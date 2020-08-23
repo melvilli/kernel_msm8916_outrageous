@@ -109,8 +109,11 @@ static u32 wmi_addr_remap(u32 x)
  * Check address validity for WMI buffer; remap if needed
  * @ptr - internal (linker) fw/ucode address
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @size - if non zero, validate the block does not
  *  exceed the device memory (bar)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -120,7 +123,11 @@ static u32 wmi_addr_remap(u32 x)
  * if buffer is not valid, return NULL.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __iomem *wmi_buffer_block(struct wil6210_priv *wil, __le32 ptr_, u32 size)
+=======
+void __iomem *wmi_buffer(struct wil6210_priv *wil, __le32 ptr_)
+>>>>>>> v3.18
 =======
 void __iomem *wmi_buffer(struct wil6210_priv *wil, __le32 ptr_)
 >>>>>>> v3.18
@@ -139,8 +146,11 @@ void __iomem *wmi_buffer(struct wil6210_priv *wil, __le32 ptr_)
 	if (off > WIL6210_MEM_SIZE - 4)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (size && ((off + size > WIL6210_MEM_SIZE) || (off + size < off)))
 		return NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -148,11 +158,14 @@ void __iomem *wmi_buffer(struct wil6210_priv *wil, __le32 ptr_)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __iomem *wmi_buffer(struct wil6210_priv *wil, __le32 ptr_)
 {
 	return wmi_buffer_block(wil, ptr_, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -322,6 +335,10 @@ static void wmi_evt_fw_ready(struct wil6210_priv *wil, int id, void *d,
 	wil_dbg_wmi(wil, "WMI: got FW ready event\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wil_set_recovery_state(wil, fw_recovery_idle);
+>>>>>>> v3.18
 =======
 	wil_set_recovery_state(wil, fw_recovery_idle);
 >>>>>>> v3.18
@@ -380,17 +397,23 @@ static void wmi_evt_rx_mgmt(struct wil6210_priv *wil, int id, void *d, int len)
 			cfg80211_put_bss(wiphy, bss);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			wil_err(wil, "cfg80211_inform_bss() failed\n");
 		}
 	} else {
 		cfg80211_rx_mgmt(wil->wdev, freq, signal,
 				 (void *)rx_mgmt_frame, d_len, GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 			wil_err(wil, "cfg80211_inform_bss_frame() failed\n");
 		}
 	} else {
 		cfg80211_rx_mgmt(wil->wdev, freq, signal,
 				 (void *)rx_mgmt_frame, d_len, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }

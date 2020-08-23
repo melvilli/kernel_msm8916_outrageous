@@ -84,7 +84,12 @@ static const bool max16065_have_current[] = {
 struct max16065_data {
 	enum chips type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+	const struct attribute_group *groups[4];
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 	const struct attribute_group *groups[4];
@@ -150,8 +155,13 @@ static int max16065_read_adc(struct i2c_client *client, int reg)
 static struct max16065_data *max16065_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max16065_data *data = i2c_get_clientdata(client);
+=======
+	struct max16065_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct max16065_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -197,7 +207,11 @@ static ssize_t max16065_show_alarm(struct device *dev,
 	val &= (1 << attr2->index);
 	if (val)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		i2c_smbus_write_byte_data(to_i2c_client(dev),
+=======
+		i2c_smbus_write_byte_data(data->client,
+>>>>>>> v3.18
 =======
 		i2c_smbus_write_byte_data(data->client,
 >>>>>>> v3.18
@@ -238,8 +252,12 @@ static ssize_t max16065_set_limit(struct device *dev,
 {
 	struct sensor_device_attribute_2 *attr2 = to_sensor_dev_attr_2(da);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max16065_data *data = i2c_get_clientdata(client);
+=======
+	struct max16065_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct max16065_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -257,7 +275,11 @@ static ssize_t max16065_set_limit(struct device *dev,
 	data->limit[attr2->nr][attr2->index]
 	  = LIMIT_TO_MV(limit, data->range[attr2->index]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_smbus_write_byte_data(client,
+=======
+	i2c_smbus_write_byte_data(data->client,
+>>>>>>> v3.18
 =======
 	i2c_smbus_write_byte_data(data->client,
 >>>>>>> v3.18
@@ -273,8 +295,12 @@ static ssize_t max16065_show_limit(struct device *dev,
 {
 	struct sensor_device_attribute_2 *attr2 = to_sensor_dev_attr_2(da);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max16065_data *data = i2c_get_clientdata(client);
+=======
+	struct max16065_data *data = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct max16065_data *data = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -543,9 +569,12 @@ static struct attribute *max16065_max_attributes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group max16065_basic_group = {
 	.attrs = max16065_basic_attributes,
 =======
+=======
+>>>>>>> v3.18
 static umode_t max16065_basic_is_visible(struct kobject *kobj,
 					 struct attribute *a, int n)
 {
@@ -572,6 +601,9 @@ static umode_t max16065_secondary_is_visible(struct kobject *kobj,
 static const struct attribute_group max16065_basic_group = {
 	.attrs = max16065_basic_attributes,
 	.is_visible = max16065_basic_is_visible,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -582,6 +614,10 @@ static const struct attribute_group max16065_current_group = {
 static const struct attribute_group max16065_min_group = {
 	.attrs = max16065_min_attributes,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.is_visible = max16065_secondary_is_visible,
+>>>>>>> v3.18
 =======
 	.is_visible = max16065_secondary_is_visible,
 >>>>>>> v3.18
@@ -589,6 +625,7 @@ static const struct attribute_group max16065_min_group = {
 
 static const struct attribute_group max16065_max_group = {
 	.attrs = max16065_max_attributes,
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -605,22 +642,33 @@ static void max16065_cleanup(struct i2c_client *client)
 };
 
 >>>>>>> v3.18
+=======
+	.is_visible = max16065_secondary_is_visible,
+};
+
+>>>>>>> v3.18
 static int max16065_probe(struct i2c_client *client,
 			  const struct i2c_device_id *id)
 {
 	struct i2c_adapter *adapter = client->adapter;
 	struct max16065_data *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, j, val, ret;
 	bool have_secondary;		/* true if chip has secondary limits */
 	bool secondary_is_max = false;	/* secondary limits reflect max */
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct device *hwmon_dev;
 	int i, j, val;
 	bool have_secondary;		/* true if chip has secondary limits */
 	bool secondary_is_max = false;	/* secondary limits reflect max */
 	int groups = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!i2c_check_functionality(adapter, I2C_FUNC_SMBUS_BYTE_DATA
@@ -628,17 +676,23 @@ static int max16065_probe(struct i2c_client *client,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = devm_kzalloc(&client->dev, sizeof(*data), GFP_KERNEL);
 	if (unlikely(!data))
 		return -ENOMEM;
 
 	i2c_set_clientdata(client, data);
 =======
+=======
+>>>>>>> v3.18
 	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
 	if (unlikely(!data))
 		return -ENOMEM;
 
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_init(&data->update_lock);
 
@@ -679,6 +733,7 @@ static int max16065_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Register sysfs hooks */
 	for (i = 0; i < data->num_adc * 4; i++) {
 		/* Do not create sysfs entry if channel is disabled */
@@ -712,6 +767,8 @@ static int max16065_probe(struct i2c_client *client,
 			goto out;
 		}
 =======
+=======
+>>>>>>> v3.18
 	/* sysfs hooks */
 	data->groups[groups++] = &max16065_basic_group;
 	if (have_secondary)
@@ -722,6 +779,9 @@ static int max16065_probe(struct i2c_client *client,
 		val = i2c_smbus_read_byte_data(client, MAX16065_CURR_CONTROL);
 		if (unlikely(val < 0))
 			return val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (val & MAX16065_CURR_ENABLE) {
 			/*
@@ -732,10 +792,14 @@ static int max16065_probe(struct i2c_client *client,
 			data->range[MAX16065_NUM_ADC]
 			  = max16065_csp_adc_range[(val >> 1) & 0x01];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = sysfs_create_group(&client->dev.kobj,
 						 &max16065_current_group);
 			if (unlikely(ret))
 				goto out;
+=======
+			data->groups[groups++] = &max16065_current_group;
+>>>>>>> v3.18
 =======
 			data->groups[groups++] = &max16065_current_group;
 >>>>>>> v3.18
@@ -744,6 +808,7 @@ static int max16065_probe(struct i2c_client *client,
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	data->hwmon_dev = hwmon_device_register(&client->dev);
 	if (unlikely(IS_ERR(data->hwmon_dev))) {
@@ -770,6 +835,11 @@ static int max16065_remove(struct i2c_client *client)
 							   data, data->groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
 >>>>>>> v3.18
+=======
+	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
+							   data, data->groups);
+	return PTR_ERR_OR_ZERO(hwmon_dev);
+>>>>>>> v3.18
 }
 
 static const struct i2c_device_id max16065_id[] = {
@@ -791,7 +861,10 @@ static struct i2c_driver max16065_driver = {
 	},
 	.probe = max16065_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = max16065_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = max16065_id,

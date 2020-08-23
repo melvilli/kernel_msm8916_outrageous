@@ -32,9 +32,12 @@ MODULE_AUTHOR("Andreas Herrmann <herrmann.der.user@googlemail.com>");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Family 16h Northbridge's function 4 PCI ID */
 #define PCI_DEVICE_ID_AMD_16H_NB_F4	0x1534
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* D18F3 */
@@ -49,7 +52,11 @@ MODULE_LICENSE("GPL");
 
 struct fam15h_power_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct pci_dev *pdev;
+>>>>>>> v3.18
 =======
 	struct pci_dev *pdev;
 >>>>>>> v3.18
@@ -65,8 +72,13 @@ static ssize_t show_power(struct device *dev,
 	s32 running_avg_capture;
 	u64 curr_pwr_watts;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev *f4 = to_pci_dev(dev);
 	struct fam15h_power_data *data = dev_get_drvdata(dev);
+=======
+	struct fam15h_power_data *data = dev_get_drvdata(dev);
+	struct pci_dev *f4 = data->pdev;
+>>>>>>> v3.18
 =======
 	struct fam15h_power_data *data = dev_get_drvdata(dev);
 	struct pci_dev *f4 = data->pdev;
@@ -109,6 +121,7 @@ static ssize_t show_power_crit(struct device *dev,
 static DEVICE_ATTR(power1_crit, S_IRUGO, show_power_crit, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_name(struct device *dev,
 			 struct device_attribute *attr, char *buf)
 {
@@ -116,6 +129,8 @@ static ssize_t show_name(struct device *dev,
 }
 static DEVICE_ATTR(name, S_IRUGO, show_name, NULL);
 =======
+=======
+>>>>>>> v3.18
 static umode_t fam15h_power_is_visible(struct kobject *kobj,
 				       struct attribute *attr,
 				       int index)
@@ -127,11 +142,15 @@ static umode_t fam15h_power_is_visible(struct kobject *kobj,
 
 	return attr->mode;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct attribute *fam15h_power_attrs[] = {
 	&dev_attr_power1_input.attr,
 	&dev_attr_power1_crit.attr,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	&dev_attr_name.attr,
 	NULL
@@ -141,6 +160,8 @@ static const struct attribute_group fam15h_power_attr_group = {
 	.attrs	= fam15h_power_attrs,
 };
 =======
+=======
+>>>>>>> v3.18
 	NULL
 };
 
@@ -149,6 +170,9 @@ static const struct attribute_group fam15h_power_group = {
 	.is_visible = fam15h_power_is_visible,
 };
 __ATTRIBUTE_GROUPS(fam15h_power);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static bool fam15h_power_is_internal_node0(struct pci_dev *f4)
@@ -240,7 +264,11 @@ static int fam15h_power_probe(struct pci_dev *pdev,
 	struct fam15h_power_data *data;
 	struct device *dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+	struct device *hwmon_dev;
+>>>>>>> v3.18
 =======
 	struct device *hwmon_dev;
 >>>>>>> v3.18
@@ -260,6 +288,7 @@ static int fam15h_power_probe(struct pci_dev *pdev,
 		return -ENOMEM;
 
 	fam15h_power_init_data(pdev, data);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	dev_set_drvdata(dev, data);
@@ -295,6 +324,8 @@ static DEFINE_PCI_DEVICE_TABLE(fam15h_power_id_table) = {
 	{ PCI_VDEVICE(AMD, PCI_DEVICE_ID_AMD_15H_NB_F4) },
 	{ PCI_VDEVICE(AMD, PCI_DEVICE_ID_AMD_16H_NB_F4) },
 =======
+=======
+>>>>>>> v3.18
 	data->pdev = pdev;
 
 	hwmon_dev = devm_hwmon_device_register_with_groups(dev, "fam15h_power",
@@ -308,6 +339,9 @@ static const struct pci_device_id fam15h_power_id_table[] = {
 	{ PCI_VDEVICE(AMD, PCI_DEVICE_ID_AMD_15H_M30H_NB_F4) },
 	{ PCI_VDEVICE(AMD, PCI_DEVICE_ID_AMD_16H_NB_F4) },
 	{ PCI_VDEVICE(AMD, PCI_DEVICE_ID_AMD_16H_M30H_NB_F4) },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };
@@ -318,7 +352,10 @@ static struct pci_driver fam15h_power_driver = {
 	.id_table = fam15h_power_id_table,
 	.probe = fam15h_power_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = fam15h_power_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.resume = fam15h_power_resume,

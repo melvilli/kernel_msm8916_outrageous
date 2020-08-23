@@ -8,12 +8,18 @@ struct device;
 struct mmc_host;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MMC_SPI_USE_CD_GPIO			(1 << 0)
 #define MMC_SPI_USE_RO_GPIO			(1 << 1)
 #define MMC_SPI_CD_GPIO_ACTIVE_LOW		(1 << 2)
 #define MMC_SPI_RO_GPIO_ACTIVE_LOW		(1 << 3)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Put this in platform_data of a device being used to manage an MMC/SD
  * card slot.  (Modeled after PXA mmc glue; see that for usage examples.)
@@ -30,6 +36,7 @@ struct mmc_spi_platform_data {
 	void (*exit)(struct device *, void *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* sense switch on sd cards */
 	int (*get_ro)(struct device *);
 
@@ -42,6 +49,8 @@ struct mmc_spi_platform_data {
 	/* Capabilities to pass into mmc core (e.g. MMC_CAP_NEEDS_POLL). */
 	unsigned long caps;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Card Detect and Read Only GPIOs. To enable debouncing on the card
 	 * detect GPIO, set the cd_debounce to the debounce time in
@@ -55,6 +64,9 @@ struct mmc_spi_platform_data {
 	/* Capabilities to pass into mmc core (e.g. MMC_CAP_NEEDS_POLL). */
 	unsigned long caps;
 	unsigned long caps2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* how long to debounce card detect, in msecs */

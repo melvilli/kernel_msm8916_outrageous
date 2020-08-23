@@ -9,6 +9,10 @@
  * Copyright (C) 2009, 2010, 2011 Cypress Semiconductor, Inc.
  * Copyright (C) 2012 Javier Martinez Canillas <javier@dowhile0.org>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2013 Cypress Semiconductor
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013 Cypress Semiconductor
 >>>>>>> v3.18
@@ -24,11 +28,15 @@
  * GNU General Public License for more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * Contact Cypress Semiconductor at www.cypress.com <kev@cypress.com>
+=======
+ * Contact Cypress Semiconductor at www.cypress.com <ttdrivers@cypress.com>
+>>>>>>> v3.18
 =======
  * Contact Cypress Semiconductor at www.cypress.com <ttdrivers@cypress.com>
 >>>>>>> v3.18
@@ -52,6 +60,7 @@
 #define CY_SPI_BITS_PER_WORD	8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int cyttsp_spi_xfer(struct cyttsp *ts,
 			   u8 op, u8 reg, u8 *buf, int length)
 {
@@ -61,6 +70,8 @@ static int cyttsp_spi_xfer(struct cyttsp *ts,
 	u8 *wr_buf = &ts->xfer_buf[0];
 	u8 *rd_buf = &ts->xfer_buf[CY_SPI_DATA_BUF_SIZE];
 =======
+=======
+>>>>>>> v3.18
 static int cyttsp_spi_xfer(struct device *dev, u8 *xfer_buf,
 			   u8 op, u16 reg, u8 *buf, int length)
 {
@@ -69,13 +80,20 @@ static int cyttsp_spi_xfer(struct device *dev, u8 *xfer_buf,
 	struct spi_transfer xfer[2];
 	u8 *wr_buf = &xfer_buf[0];
 	u8 *rd_buf = &xfer_buf[CY_SPI_DATA_BUF_SIZE];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int retval;
 	int i;
 
 	if (length > CY_SPI_DATA_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(ts->dev, "%s: length %d is too big.\n",
+=======
+		dev_err(dev, "%s: length %d is too big.\n",
+>>>>>>> v3.18
 =======
 		dev_err(dev, "%s: length %d is too big.\n",
 >>>>>>> v3.18
@@ -119,7 +137,11 @@ static int cyttsp_spi_xfer(struct device *dev, u8 *xfer_buf,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(ts->dev, "%s: bad operation code=%d\n", __func__, op);
+=======
+		dev_err(dev, "%s: bad operation code=%d\n", __func__, op);
+>>>>>>> v3.18
 =======
 		dev_err(dev, "%s: bad operation code=%d\n", __func__, op);
 >>>>>>> v3.18
@@ -129,7 +151,11 @@ static int cyttsp_spi_xfer(struct device *dev, u8 *xfer_buf,
 	retval = spi_sync(spi, &msg);
 	if (retval < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(ts->dev, "%s: spi_sync() error %d, len=%d, op=%d\n",
+=======
+		dev_dbg(dev, "%s: spi_sync() error %d, len=%d, op=%d\n",
+>>>>>>> v3.18
 =======
 		dev_dbg(dev, "%s: spi_sync() error %d, len=%d, op=%d\n",
 >>>>>>> v3.18
@@ -145,6 +171,7 @@ static int cyttsp_spi_xfer(struct device *dev, u8 *xfer_buf,
 	if (rd_buf[CY_SPI_SYNC_BYTE] != CY_SPI_SYNC_ACK1 ||
 	    rd_buf[CY_SPI_SYNC_BYTE + 1] != CY_SPI_SYNC_ACK2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		dev_dbg(ts->dev, "%s: operation %d failed\n", __func__, op);
 
@@ -154,6 +181,8 @@ static int cyttsp_spi_xfer(struct device *dev, u8 *xfer_buf,
 		for (i = 0; i < length; i++)
 			dev_dbg(ts->dev, "%s: test buf[%d]:0x%02x\n",
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(dev, "%s: operation %d failed\n", __func__, op);
 
 		for (i = 0; i < CY_SPI_CMD_BYTES; i++)
@@ -161,6 +190,9 @@ static int cyttsp_spi_xfer(struct device *dev, u8 *xfer_buf,
 				__func__, i, rd_buf[i]);
 		for (i = 0; i < length; i++)
 			dev_dbg(dev, "%s: test buf[%d]:0x%02x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				__func__, i, buf[i]);
 
@@ -170,6 +202,7 @@ static int cyttsp_spi_xfer(struct device *dev, u8 *xfer_buf,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int cyttsp_spi_read_block_data(struct cyttsp *ts,
 				      u8 addr, u8 length, void *data)
@@ -182,6 +215,8 @@ static int cyttsp_spi_write_block_data(struct cyttsp *ts,
 {
 	return cyttsp_spi_xfer(ts, CY_SPI_WR_OP, addr, (void *)data, length);
 =======
+=======
+>>>>>>> v3.18
 static int cyttsp_spi_read_block_data(struct device *dev, u8 *xfer_buf,
 				      u16 addr, u8 length, void *data)
 {
@@ -194,6 +229,9 @@ static int cyttsp_spi_write_block_data(struct device *dev, u8 *xfer_buf,
 {
 	return cyttsp_spi_xfer(dev, xfer_buf, CY_SPI_WR_OP, addr, (void *)data,
 			length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

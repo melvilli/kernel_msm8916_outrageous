@@ -40,7 +40,10 @@
 #include <linux/seq_file.h>
 #include <linux/root_dev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/cpuidle.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/of.h>
@@ -70,8 +73,13 @@
 #include <asm/eeh.h>
 #include <asm/reg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "plpar_wrappers.h"
+=======
+#include <asm/plpar_wrappers.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/plpar_wrappers.h>
 
@@ -81,7 +89,11 @@
 int CMO_PrPSP = -1;
 int CMO_SecPSP = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long CMO_PageSize = (ASM_CONST(1) << IOMMU_PAGE_SHIFT);
+=======
+unsigned long CMO_PageSize = (ASM_CONST(1) << IOMMU_PAGE_SHIFT_4K);
+>>>>>>> v3.18
 =======
 unsigned long CMO_PageSize = (ASM_CONST(1) << IOMMU_PAGE_SHIFT_4K);
 >>>>>>> v3.18
@@ -196,7 +208,11 @@ static void __init pseries_mpic_init_IRQ(void)
 	naddr = of_n_addr_cells(np);
 	opprop = of_get_property(np, "platform-open-pic", &opplen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (opprop != 0) {
+=======
+	if (opprop != NULL) {
+>>>>>>> v3.18
 =======
 	if (opprop != NULL) {
 >>>>>>> v3.18
@@ -250,8 +266,12 @@ static void __init pseries_discover_pic(void)
 	const char *typep;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (np = NULL; (np = of_find_node_by_name(np,
 						   "interrupt-controller"));) {
+=======
+	for_each_node_by_name(np, "interrupt-controller") {
+>>>>>>> v3.18
 =======
 	for_each_node_by_name(np, "interrupt-controller") {
 >>>>>>> v3.18
@@ -344,7 +364,11 @@ static int alloc_dispatch_logs(void)
 
 	/* hypervisor reads buffer length from this field */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dtl->enqueue_to_dispatch_time = DISPATCH_LOG_BYTES;
+=======
+	dtl->enqueue_to_dispatch_time = cpu_to_be32(DISPATCH_LOG_BYTES);
+>>>>>>> v3.18
 =======
 	dtl->enqueue_to_dispatch_time = cpu_to_be32(DISPATCH_LOG_BYTES);
 >>>>>>> v3.18
@@ -377,6 +401,7 @@ static int alloc_dispatch_log_kmem_cache(void)
 	return alloc_dispatch_logs();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 early_initcall(alloc_dispatch_log_kmem_cache);
 
 static void pseries_lpar_idle(void)
@@ -405,6 +430,8 @@ static void pseries_lpar_idle(void)
 		get_lppaca()->idle = 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 machine_early_initcall(pseries, alloc_dispatch_log_kmem_cache);
 
 static void pseries_lpar_idle(void)
@@ -427,6 +454,9 @@ static void pseries_lpar_idle(void)
 	cede_processor();
 
 	get_lppaca()->idle = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -480,8 +510,12 @@ static void pSeries_machine_kexec(struct kimage *image)
 	long rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (firmware_has_feature(FW_FEATURE_SET_MODE) &&
 	    (image->type != KEXEC_TYPE_CRASH)) {
+=======
+	if (firmware_has_feature(FW_FEATURE_SET_MODE)) {
+>>>>>>> v3.18
 =======
 	if (firmware_has_feature(FW_FEATURE_SET_MODE)) {
 >>>>>>> v3.18
@@ -496,10 +530,13 @@ static void pSeries_machine_kexec(struct kimage *image)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init pSeries_setup_arch(void)
 {
 	panic_timeout = 10;
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 long pseries_big_endian_exceptions(void)
 {
@@ -529,6 +566,9 @@ static long pseries_little_endian_exceptions(void)
 static void __init pSeries_setup_arch(void)
 {
 	set_arch_panic_timeout(10, ARCH_PANIC_TIMEOUT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Discover PIC type and setup ppc_md accordingly */
@@ -577,13 +617,19 @@ static int __init pSeries_init_panel(void)
 {
 	/* Manually leave the kernel version on the panel. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ppc_md.progress("Linux ppc64\n", 0);
 =======
+=======
+>>>>>>> v3.18
 #ifdef __BIG_ENDIAN__
 	ppc_md.progress("Linux ppc64\n", 0);
 #else
 	ppc_md.progress("Linux ppc64le\n", 0);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ppc_md.progress(init_utsname()->version, 0);
 
@@ -633,17 +679,23 @@ void pSeries_coalesce_init(void)
  * handle that here. (Stolen from parse_system_parameter_string)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pSeries_cmo_feature_init(void)
 {
 	char *ptr, *key, *value, *end;
 	int call_status;
 	int page_order = IOMMU_PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 static void pSeries_cmo_feature_init(void)
 {
 	char *ptr, *key, *value, *end;
 	int call_status;
 	int page_order = IOMMU_PAGE_SHIFT_4K;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pr_debug(" -> fw_cmo_feature_init()\n");
@@ -800,7 +852,10 @@ static int __init pSeries_probe(void)
 	of_scan_flat_dt(pseries_probe_fw_features, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef __LITTLE_ENDIAN__
 	if (firmware_has_feature(FW_FEATURE_SET_MODE)) {
 		long rc;
@@ -817,6 +872,9 @@ static int __init pSeries_probe(void)
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (firmware_has_feature(FW_FEATURE_LPAR))
 		hpte_init_lpar();
@@ -892,6 +950,12 @@ define_machine(pseries) {
 	.machine_kexec          = pSeries_machine_kexec,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_MEMORY_HOTPLUG_SPARSE
+	.memory_block_size	= pseries_memory_block_size,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_MEMORY_HOTPLUG_SPARSE
 	.memory_block_size	= pseries_memory_block_size,

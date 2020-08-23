@@ -8,7 +8,10 @@
  * Copyright (C) 1999, 2000 Silicon Graphics, Inc.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -46,7 +49,11 @@ int irq_to_slot[MAX_PCI_BUSSES * MAX_DEVICES_PER_PCIBUS];
 extern struct pci_ops bridge_pci_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit bridge_probe(nasid_t nasid, int widget_id, int masterwid)
+=======
+int bridge_probe(nasid_t nasid, int widget_id, int masterwid)
+>>>>>>> v3.18
 =======
 int bridge_probe(nasid_t nasid, int widget_id, int masterwid)
 >>>>>>> v3.18
@@ -225,6 +232,10 @@ static void pci_fixup_ioc3(struct pci_dev *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_NUMA
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_NUMA
 >>>>>>> v3.18
@@ -236,6 +247,10 @@ int pcibus_to_node(struct pci_bus *bus)
 }
 EXPORT_SYMBOL(pcibus_to_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_NUMA */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_NUMA */
 >>>>>>> v3.18

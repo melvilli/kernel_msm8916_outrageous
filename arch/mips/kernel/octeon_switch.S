@@ -11,6 +11,7 @@
  *    written by Carsten Langgaard, carstenl@mips.com
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/asm.h>
 #include <asm/cachectl.h>
 #include <asm/fpregdef.h>
@@ -30,12 +31,17 @@
 #define ST_OFF (_THREAD_SIZE - 32 - PT_SIZE + PT_STATUS)
 
 =======
+=======
+>>>>>>> v3.18
 
 #define USE_ALTERNATE_RESUME_IMPL 1
 	.set push
 	.set arch=mips64r2
 #include "r4k_switch.S"
 	.set pop
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * task_struct *resume(task_struct *prev, task_struct *next,
@@ -50,7 +56,10 @@
 	LONG_S	ra, THREAD_REG31(a0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * check if we need to save FPU registers
 	 */
@@ -79,6 +88,9 @@
 	.set pop
 1:
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* check if we need to save COP2 registers */
 	PTR_L	t2, TASK_THREAD_INFO(a0)
@@ -139,7 +151,10 @@
 #endif
 3:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #if defined(CONFIG_CC_STACKPROTECTOR) && !defined(CONFIG_SMP)
 	PTR_LA	t8, __stack_chk_guard
@@ -147,6 +162,9 @@
 	LONG_S	t9, 0(t8)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * The order of restoring the registers takes care of the race
@@ -156,12 +174,16 @@
 	cpu_restore_nonscratch a1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if (_THREAD_SIZE - 32) < 0x8000
 	PTR_ADDIU	t0, $28, _THREAD_SIZE - 32
 #else
 	PTR_LI		t0, _THREAD_SIZE - 32
 	PTR_ADDU	t0, $28
 #endif
+=======
+	PTR_ADDU	t0, $28, _THREAD_SIZE - 32
+>>>>>>> v3.18
 =======
 	PTR_ADDU	t0, $28, _THREAD_SIZE - 32
 >>>>>>> v3.18

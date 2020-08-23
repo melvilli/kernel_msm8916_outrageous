@@ -140,6 +140,10 @@ struct lirc_driver {
 	int (*set_use_inc) (void *data);
 	void (*set_use_dec) (void *data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rc_dev *rdev;
+>>>>>>> v3.18
 =======
 	struct rc_dev *rdev;
 >>>>>>> v3.18

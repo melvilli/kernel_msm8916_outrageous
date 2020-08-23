@@ -12,6 +12,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
@@ -42,6 +43,8 @@ struct sh_tmu_priv {
 	struct irqaction irqaction;
 	struct platform_device *pdev;
 =======
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/clk.h>
@@ -77,6 +80,9 @@ struct sh_tmu_channel {
 	void __iomem *base;
 	int irq;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long rate;
 	unsigned long periodic;
@@ -87,8 +93,11 @@ struct sh_tmu_channel {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_RAW_SPINLOCK(sh_tmu_lock);
 =======
+=======
+>>>>>>> v3.18
 struct sh_tmu_device {
 	struct platform_device *pdev;
 
@@ -105,6 +114,9 @@ struct sh_tmu_device {
 	bool has_clockevent;
 	bool has_clocksource;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define TSTR -1 /* shared register */
@@ -112,6 +124,7 @@ struct sh_tmu_device {
 #define TCNT 1 /* channel register */
 #define TCR 2 /* channel register */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline unsigned long sh_tmu_read(struct sh_tmu_priv *p, int reg_nr)
 {
@@ -122,6 +135,8 @@ static inline unsigned long sh_tmu_read(struct sh_tmu_priv *p, int reg_nr)
 	if (reg_nr == TSTR)
 		return ioread8(base - cfg->channel_offset);
 =======
+=======
+>>>>>>> v3.18
 #define TCR_UNF			(1 << 8)
 #define TCR_UNIE		(1 << 5)
 #define TCR_TPSC_CLK4		(0 << 0)
@@ -143,11 +158,15 @@ static inline unsigned long sh_tmu_read(struct sh_tmu_channel *ch, int reg_nr)
 			return ioread8(ch->tmu->mapbase + 4);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	offs = reg_nr << 2;
 
 	if (reg_nr == TCR)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return ioread16(base + offs);
 	else
@@ -165,6 +184,8 @@ static inline void sh_tmu_write(struct sh_tmu_priv *p, int reg_nr,
 		iowrite8(value, base - cfg->channel_offset);
 		return;
 =======
+=======
+>>>>>>> v3.18
 		return ioread16(ch->base + offs);
 	else
 		return ioread32(ch->base + offs);
@@ -182,12 +203,16 @@ static inline void sh_tmu_write(struct sh_tmu_channel *ch, int reg_nr,
 		case SH_TMU:
 			return iowrite8(value, ch->tmu->mapbase + 4);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	offs = reg_nr << 2;
 
 	if (reg_nr == TCR)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		iowrite16(value, base + offs);
 	else
@@ -214,6 +239,8 @@ static void sh_tmu_start_stop_ch(struct sh_tmu_priv *p, int start)
 
 static int __sh_tmu_enable(struct sh_tmu_priv *p)
 =======
+=======
+>>>>>>> v3.18
 		iowrite16(value, ch->base + offs);
 	else
 		iowrite32(value, ch->base + offs);
@@ -237,25 +264,35 @@ static void sh_tmu_start_stop_ch(struct sh_tmu_channel *ch, int start)
 }
 
 static int __sh_tmu_enable(struct sh_tmu_channel *ch)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret;
 
 	/* enable clock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = clk_enable(p->clk);
 	if (ret) {
 		dev_err(&p->pdev->dev, "cannot enable clock\n");
 =======
+=======
+>>>>>>> v3.18
 	ret = clk_enable(ch->tmu->clk);
 	if (ret) {
 		dev_err(&ch->tmu->pdev->dev, "ch%u: cannot enable clock\n",
 			ch->index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}
 
 	/* make sure channel is disabled */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sh_tmu_start_stop_ch(p, 0);
 
@@ -270,6 +307,8 @@ static int __sh_tmu_enable(struct sh_tmu_channel *ch)
 	/* enable channel */
 	sh_tmu_start_stop_ch(p, 1);
 =======
+=======
+>>>>>>> v3.18
 	sh_tmu_start_stop_ch(ch, 0);
 
 	/* maximum timeout */
@@ -282,11 +321,15 @@ static int __sh_tmu_enable(struct sh_tmu_channel *ch)
 
 	/* enable channel */
 	sh_tmu_start_stop_ch(ch, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int sh_tmu_enable(struct sh_tmu_priv *p)
 {
@@ -348,6 +391,8 @@ static void sh_tmu_set_next(struct sh_tmu_priv *p, unsigned long delta,
 	/* start timer */
 	sh_tmu_start_stop_ch(p, 1);
 =======
+=======
+>>>>>>> v3.18
 static int sh_tmu_enable(struct sh_tmu_channel *ch)
 {
 	if (ch->enable_count++ > 0)
@@ -407,11 +452,15 @@ static void sh_tmu_set_next(struct sh_tmu_channel *ch, unsigned long delta,
 
 	/* start timer */
 	sh_tmu_start_stop_ch(ch, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static irqreturn_t sh_tmu_interrupt(int irq, void *dev_id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sh_tmu_priv *p = dev_id;
 
@@ -430,6 +479,8 @@ static struct sh_tmu_priv *cs_to_sh_tmu(struct clocksource *cs)
 {
 	return container_of(cs, struct sh_tmu_priv, cs);
 =======
+=======
+>>>>>>> v3.18
 	struct sh_tmu_channel *ch = dev_id;
 
 	/* disable or acknowledge interrupt */
@@ -446,11 +497,15 @@ static struct sh_tmu_priv *cs_to_sh_tmu(struct clocksource *cs)
 static struct sh_tmu_channel *cs_to_sh_tmu(struct clocksource *cs)
 {
 	return container_of(cs, struct sh_tmu_channel, cs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static cycle_t sh_tmu_clocksource_read(struct clocksource *cs)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sh_tmu_priv *p = cs_to_sh_tmu(cs);
 
@@ -460,10 +515,16 @@ static cycle_t sh_tmu_clocksource_read(struct clocksource *cs)
 
 	return sh_tmu_read(ch, TCNT) ^ 0xffffffff;
 >>>>>>> v3.18
+=======
+	struct sh_tmu_channel *ch = cs_to_sh_tmu(cs);
+
+	return sh_tmu_read(ch, TCNT) ^ 0xffffffff;
+>>>>>>> v3.18
 }
 
 static int sh_tmu_clocksource_enable(struct clocksource *cs)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sh_tmu_priv *p = cs_to_sh_tmu(cs);
 	int ret;
@@ -476,6 +537,8 @@ static int sh_tmu_clocksource_enable(struct clocksource *cs)
 		__clocksource_updatefreq_hz(cs, p->rate);
 		p->cs_enabled = true;
 =======
+=======
+>>>>>>> v3.18
 	struct sh_tmu_channel *ch = cs_to_sh_tmu(cs);
 	int ret;
 
@@ -486,6 +549,9 @@ static int sh_tmu_clocksource_enable(struct clocksource *cs)
 	if (!ret) {
 		__clocksource_updatefreq_hz(cs, ch->rate);
 		ch->cs_enabled = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -495,6 +561,7 @@ static int sh_tmu_clocksource_enable(struct clocksource *cs)
 static void sh_tmu_clocksource_disable(struct clocksource *cs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sh_tmu_priv *p = cs_to_sh_tmu(cs);
 
 	if (WARN_ON(!p->cs_enabled))
@@ -503,6 +570,8 @@ static void sh_tmu_clocksource_disable(struct clocksource *cs)
 	sh_tmu_disable(p);
 	p->cs_enabled = false;
 =======
+=======
+>>>>>>> v3.18
 	struct sh_tmu_channel *ch = cs_to_sh_tmu(cs);
 
 	if (WARN_ON(!ch->cs_enabled))
@@ -510,11 +579,15 @@ static void sh_tmu_clocksource_disable(struct clocksource *cs)
 
 	sh_tmu_disable(ch);
 	ch->cs_enabled = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void sh_tmu_clocksource_suspend(struct clocksource *cs)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sh_tmu_priv *p = cs_to_sh_tmu(cs);
 
@@ -525,6 +598,8 @@ static void sh_tmu_clocksource_suspend(struct clocksource *cs)
 		__sh_tmu_disable(p);
 		pm_genpd_syscore_poweroff(&p->pdev->dev);
 =======
+=======
+>>>>>>> v3.18
 	struct sh_tmu_channel *ch = cs_to_sh_tmu(cs);
 
 	if (!ch->cs_enabled)
@@ -533,12 +608,16 @@ static void sh_tmu_clocksource_suspend(struct clocksource *cs)
 	if (--ch->enable_count == 0) {
 		__sh_tmu_disable(ch);
 		pm_genpd_syscore_poweroff(&ch->tmu->pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 
 static void sh_tmu_clocksource_resume(struct clocksource *cs)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sh_tmu_priv *p = cs_to_sh_tmu(cs);
 
@@ -559,6 +638,8 @@ static int sh_tmu_register_clocksource(struct sh_tmu_priv *p,
 	cs->name = name;
 	cs->rating = rating;
 =======
+=======
+>>>>>>> v3.18
 	struct sh_tmu_channel *ch = cs_to_sh_tmu(cs);
 
 	if (!ch->cs_enabled)
@@ -577,6 +658,9 @@ static int sh_tmu_register_clocksource(struct sh_tmu_channel *ch,
 
 	cs->name = name;
 	cs->rating = 200;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cs->read = sh_tmu_clocksource_read;
 	cs->enable = sh_tmu_clocksource_enable;
@@ -587,7 +671,12 @@ static int sh_tmu_register_clocksource(struct sh_tmu_channel *ch,
 	cs->flags = CLOCK_SOURCE_IS_CONTINUOUS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(&p->pdev->dev, "used as clock source\n");
+=======
+	dev_info(&ch->tmu->pdev->dev, "ch%u: used as clock source\n",
+		 ch->index);
+>>>>>>> v3.18
 =======
 	dev_info(&ch->tmu->pdev->dev, "ch%u: used as clock source\n",
 		 ch->index);
@@ -598,6 +687,7 @@ static int sh_tmu_register_clocksource(struct sh_tmu_channel *ch,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct sh_tmu_priv *ced_to_sh_tmu(struct clock_event_device *ced)
 {
@@ -616,6 +706,8 @@ static void sh_tmu_clock_event_start(struct sh_tmu_priv *p, int periodic)
 		p->periodic = (p->rate + HZ/2) / HZ;
 		sh_tmu_set_next(p, p->periodic, 1);
 =======
+=======
+>>>>>>> v3.18
 static struct sh_tmu_channel *ced_to_sh_tmu(struct clock_event_device *ced)
 {
 	return container_of(ced, struct sh_tmu_channel, ced);
@@ -632,6 +724,9 @@ static void sh_tmu_clock_event_start(struct sh_tmu_channel *ch, int periodic)
 	if (periodic) {
 		ch->periodic = (ch->rate + HZ/2) / HZ;
 		sh_tmu_set_next(ch, ch->periodic, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -640,7 +735,11 @@ static void sh_tmu_clock_event_mode(enum clock_event_mode mode,
 				    struct clock_event_device *ced)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sh_tmu_priv *p = ced_to_sh_tmu(ced);
+=======
+	struct sh_tmu_channel *ch = ced_to_sh_tmu(ced);
+>>>>>>> v3.18
 =======
 	struct sh_tmu_channel *ch = ced_to_sh_tmu(ced);
 >>>>>>> v3.18
@@ -651,7 +750,11 @@ static void sh_tmu_clock_event_mode(enum clock_event_mode mode,
 	case CLOCK_EVT_MODE_PERIODIC:
 	case CLOCK_EVT_MODE_ONESHOT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sh_tmu_disable(p);
+=======
+		sh_tmu_disable(ch);
+>>>>>>> v3.18
 =======
 		sh_tmu_disable(ch);
 >>>>>>> v3.18
@@ -664,6 +767,7 @@ static void sh_tmu_clock_event_mode(enum clock_event_mode mode,
 	switch (mode) {
 	case CLOCK_EVT_MODE_PERIODIC:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_info(&p->pdev->dev, "used for periodic clock events\n");
 		sh_tmu_clock_event_start(p, 1);
 		break;
@@ -675,6 +779,8 @@ static void sh_tmu_clock_event_mode(enum clock_event_mode mode,
 		if (!disabled)
 			sh_tmu_disable(p);
 =======
+=======
+>>>>>>> v3.18
 		dev_info(&ch->tmu->pdev->dev,
 			 "ch%u: used for periodic clock events\n", ch->index);
 		sh_tmu_clock_event_start(ch, 1);
@@ -687,6 +793,9 @@ static void sh_tmu_clock_event_mode(enum clock_event_mode mode,
 	case CLOCK_EVT_MODE_UNUSED:
 		if (!disabled)
 			sh_tmu_disable(ch);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case CLOCK_EVT_MODE_SHUTDOWN:
@@ -699,7 +808,11 @@ static int sh_tmu_clock_event_next(unsigned long delta,
 				   struct clock_event_device *ced)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sh_tmu_priv *p = ced_to_sh_tmu(ced);
+=======
+	struct sh_tmu_channel *ch = ced_to_sh_tmu(ced);
+>>>>>>> v3.18
 =======
 	struct sh_tmu_channel *ch = ced_to_sh_tmu(ced);
 >>>>>>> v3.18
@@ -708,7 +821,11 @@ static int sh_tmu_clock_event_next(unsigned long delta,
 
 	/* program new delta value */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sh_tmu_set_next(p, delta, 0);
+=======
+	sh_tmu_set_next(ch, delta, 0);
+>>>>>>> v3.18
 =======
 	sh_tmu_set_next(ch, delta, 0);
 >>>>>>> v3.18
@@ -718,7 +835,11 @@ static int sh_tmu_clock_event_next(unsigned long delta,
 static void sh_tmu_clock_event_suspend(struct clock_event_device *ced)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_genpd_syscore_poweroff(&ced_to_sh_tmu(ced)->pdev->dev);
+=======
+	pm_genpd_syscore_poweroff(&ced_to_sh_tmu(ced)->tmu->pdev->dev);
+>>>>>>> v3.18
 =======
 	pm_genpd_syscore_poweroff(&ced_to_sh_tmu(ced)->tmu->pdev->dev);
 >>>>>>> v3.18
@@ -726,6 +847,7 @@ static void sh_tmu_clock_event_suspend(struct clock_event_device *ced)
 
 static void sh_tmu_clock_event_resume(struct clock_event_device *ced)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pm_genpd_syscore_poweron(&ced_to_sh_tmu(ced)->pdev->dev);
 }
@@ -743,6 +865,8 @@ static void sh_tmu_register_clockevent(struct sh_tmu_priv *p,
 	ced->features |= CLOCK_EVT_FEAT_ONESHOT;
 	ced->rating = rating;
 =======
+=======
+>>>>>>> v3.18
 	pm_genpd_syscore_poweron(&ced_to_sh_tmu(ced)->tmu->pdev->dev);
 }
 
@@ -756,6 +880,9 @@ static void sh_tmu_register_clockevent(struct sh_tmu_channel *ch,
 	ced->features = CLOCK_EVT_FEAT_PERIODIC;
 	ced->features |= CLOCK_EVT_FEAT_ONESHOT;
 	ced->rating = 200;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ced->cpumask = cpumask_of(0);
 	ced->set_next_event = sh_tmu_clock_event_next;
@@ -763,6 +890,7 @@ static void sh_tmu_register_clockevent(struct sh_tmu_channel *ch,
 	ced->suspend = sh_tmu_clock_event_suspend;
 	ced->resume = sh_tmu_clock_event_resume;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_info(&p->pdev->dev, "used for clock events\n");
 
@@ -773,6 +901,8 @@ static void sh_tmu_register_clockevent(struct sh_tmu_channel *ch,
 		dev_err(&p->pdev->dev, "failed to request irq %d\n",
 			p->irqaction.irq);
 =======
+=======
+>>>>>>> v3.18
 	dev_info(&ch->tmu->pdev->dev, "ch%u: used for clock events\n",
 		 ch->index);
 
@@ -784,11 +914,15 @@ static void sh_tmu_register_clockevent(struct sh_tmu_channel *ch,
 	if (ret) {
 		dev_err(&ch->tmu->pdev->dev, "ch%u: failed to request irq %d\n",
 			ch->index, ch->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int sh_tmu_register(struct sh_tmu_priv *p, char *name,
 		    unsigned long clockevent_rating,
@@ -799,6 +933,8 @@ static int sh_tmu_register(struct sh_tmu_priv *p, char *name,
 	else if (clocksource_rating)
 		sh_tmu_register_clocksource(p, name, clocksource_rating);
 =======
+=======
+>>>>>>> v3.18
 static int sh_tmu_register(struct sh_tmu_channel *ch, const char *name,
 			   bool clockevent, bool clocksource)
 {
@@ -809,11 +945,15 @@ static int sh_tmu_register(struct sh_tmu_channel *ch, const char *name,
 		ch->tmu->has_clocksource = true;
 		sh_tmu_register_clocksource(ch, name);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int sh_tmu_setup(struct sh_tmu_priv *p, struct platform_device *pdev)
 {
@@ -876,6 +1016,8 @@ static int sh_tmu_setup(struct sh_tmu_priv *p, struct platform_device *pdev)
 	iounmap(p->mapbase);
  err0:
 =======
+=======
+>>>>>>> v3.18
 static int sh_tmu_channel_setup(struct sh_tmu_channel *ch, unsigned int index,
 				bool clockevent, bool clocksource,
 				struct sh_tmu_device *tmu)
@@ -1013,6 +1155,9 @@ err_clk_unprepare:
 	clk_unprepare(tmu->clk);
 err_clk_put:
 	clk_put(tmu->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1020,8 +1165,12 @@ err_clk_put:
 static int sh_tmu_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sh_tmu_priv *p = platform_get_drvdata(pdev);
 	struct sh_timer_config *cfg = pdev->dev.platform_data;
+=======
+	struct sh_tmu_device *tmu = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct sh_tmu_device *tmu = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -1033,7 +1182,11 @@ static int sh_tmu_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (p) {
+=======
+	if (tmu) {
+>>>>>>> v3.18
 =======
 	if (tmu) {
 >>>>>>> v3.18
@@ -1041,6 +1194,7 @@ static int sh_tmu_probe(struct platform_device *pdev)
 		goto out;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	p = kmalloc(sizeof(*p), GFP_KERNEL);
 	if (p == NULL) {
@@ -1053,6 +1207,8 @@ static int sh_tmu_probe(struct platform_device *pdev)
 		kfree(p);
 		platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	tmu = kzalloc(sizeof(*tmu), GFP_KERNEL);
 	if (tmu == NULL)
 		return -ENOMEM;
@@ -1060,6 +1216,9 @@ static int sh_tmu_probe(struct platform_device *pdev)
 	ret = sh_tmu_setup(tmu, pdev);
 	if (ret) {
 		kfree(tmu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pm_runtime_idle(&pdev->dev);
 		return ret;
@@ -1069,7 +1228,11 @@ static int sh_tmu_probe(struct platform_device *pdev)
 
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cfg->clockevent_rating || cfg->clocksource_rating)
+=======
+	if (tmu->has_clockevent || tmu->has_clocksource)
+>>>>>>> v3.18
 =======
 	if (tmu->has_clockevent || tmu->has_clocksource)
 >>>>>>> v3.18
@@ -1086,7 +1249,10 @@ static int sh_tmu_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct platform_device_id sh_tmu_id_table[] = {
 	{ "sh-tmu", SH_TMU },
 	{ "sh-tmu-sh3", SH_TMU_SH3 },
@@ -1100,6 +1266,9 @@ static const struct of_device_id sh_tmu_of_table[] __maybe_unused = {
 };
 MODULE_DEVICE_TABLE(of, sh_tmu_of_table);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver sh_tmu_device_driver = {
 	.probe		= sh_tmu_probe,
@@ -1107,7 +1276,13 @@ static struct platform_driver sh_tmu_device_driver = {
 	.driver		= {
 		.name	= "sh_tmu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
+=======
+		.of_match_table = of_match_ptr(sh_tmu_of_table),
+	},
+	.id_table	= sh_tmu_id_table,
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(sh_tmu_of_table),
 	},

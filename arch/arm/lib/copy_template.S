@@ -198,6 +198,7 @@
 12:	PLD(	pld	[r1, #124]		)
 13:		ldr4w	r1, r4, r5, r6, r7, abort=19f
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mov	r3, lr, pull #\pull
 		subs	r2, r2, #32
 		ldr4w	r1, r8, r9, ip, lr, abort=19f
@@ -217,6 +218,8 @@
 		mov	ip, ip, pull #\pull
 		orr	ip, ip, lr, push #\push
 =======
+=======
+>>>>>>> v3.18
 		mov	r3, lr, lspull #\pull
 		subs	r2, r2, #32
 		ldr4w	r1, r8, r9, ip, lr, abort=19f
@@ -235,6 +238,9 @@
 		orr	r9, r9, ip, lspush #\push
 		mov	ip, ip, lspull #\pull
 		orr	ip, ip, lr, lspush #\push
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		str8w	r0, r3, r4, r5, r6, r7, r8, r9, ip, , abort=19f
 		bge	12b
@@ -247,15 +253,21 @@
 		beq	16f
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 15:		mov	r3, lr, pull #\pull
 		ldr1w	r1, lr, abort=21f
 		subs	ip, ip, #4
 		orr	r3, r3, lr, push #\push
 =======
+=======
+>>>>>>> v3.18
 15:		mov	r3, lr, lspull #\pull
 		ldr1w	r1, lr, abort=21f
 		subs	ip, ip, #4
 		orr	r3, r3, lr, lspush #\push
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		str1w	r0, r3, abort=21f
 		bgt	15b

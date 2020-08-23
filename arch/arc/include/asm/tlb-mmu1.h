@@ -10,9 +10,15 @@
 #define __ASM_TLB_MMU_V1_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(__ASSEMBLY__) && defined(CONFIG_ARC_MMU_VER == 1)
 
 #include <asm/tlb.h>
+=======
+#include <asm/mmu.h>
+
+#if defined(__ASSEMBLY__) && (CONFIG_ARC_MMU_VER == 1)
+>>>>>>> v3.18
 =======
 #include <asm/mmu.h>
 

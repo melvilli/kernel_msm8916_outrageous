@@ -17,8 +17,11 @@
 #include <linux/module.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef strlen
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 size_t strlen(const char *s)

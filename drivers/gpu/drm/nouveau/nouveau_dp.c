@@ -31,11 +31,14 @@
 #include "nouveau_crtc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/class.h>
 
 #include <subdev/gpio.h>
 #include <subdev/i2c.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void
@@ -59,16 +62,22 @@ nouveau_dp_probe_oui(struct drm_device *dev, struct nouveau_i2c_port *auxch,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool
 nouveau_dp_detect(struct drm_encoder *encoder)
 {
 	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
 	struct drm_device *dev = encoder->dev;
 =======
+=======
+>>>>>>> v3.18
 int
 nouveau_dp_detect(struct nouveau_encoder *nv_encoder)
 {
 	struct drm_device *dev = nv_encoder->base.base.dev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nouveau_drm *drm = nouveau_drm(dev);
 	struct nouveau_i2c_port *auxch;
@@ -78,17 +87,23 @@ nouveau_dp_detect(struct nouveau_encoder *nv_encoder)
 	auxch = nv_encoder->i2c;
 	if (!auxch)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return false;
 
 	ret = nv_rdaux(auxch, DP_DPCD_REV, dpcd, 8);
 	if (ret)
 		return false;
 =======
+=======
+>>>>>>> v3.18
 		return -ENODEV;
 
 	ret = nv_rdaux(auxch, DP_DPCD_REV, dpcd, 8);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	nv_encoder->dp.link_bw = 27000 * dpcd[1];
@@ -110,8 +125,12 @@ nouveau_dp_detect(struct nouveau_encoder *nv_encoder)
 
 	nouveau_dp_probe_oui(dev, auxch, dpcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return true;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

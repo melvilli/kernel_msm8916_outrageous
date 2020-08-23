@@ -993,7 +993,11 @@ int savage_bci_cmdbuf(struct drm_device *dev, void *data, struct drm_file *file_
 			return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(kcmd_addr, cmdbuf->cmd_addr,
+=======
+		if (copy_from_user(kcmd_addr, cmdbuf->cmd_addr,
+>>>>>>> v3.18
 =======
 		if (copy_from_user(kcmd_addr, cmdbuf->cmd_addr,
 >>>>>>> v3.18
@@ -1012,7 +1016,11 @@ int savage_bci_cmdbuf(struct drm_device *dev, void *data, struct drm_file *file_
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(kvb_addr, cmdbuf->vb_addr,
+=======
+		if (copy_from_user(kvb_addr, cmdbuf->vb_addr,
+>>>>>>> v3.18
 =======
 		if (copy_from_user(kvb_addr, cmdbuf->vb_addr,
 >>>>>>> v3.18
@@ -1031,7 +1039,11 @@ int savage_bci_cmdbuf(struct drm_device *dev, void *data, struct drm_file *file_
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (DRM_COPY_FROM_USER(kbox_addr, cmdbuf->box_addr,
+=======
+		if (copy_from_user(kbox_addr, cmdbuf->box_addr,
+>>>>>>> v3.18
 =======
 		if (copy_from_user(kbox_addr, cmdbuf->box_addr,
 >>>>>>> v3.18
@@ -1045,7 +1057,11 @@ int savage_bci_cmdbuf(struct drm_device *dev, void *data, struct drm_file *file_
 	/* Make sure writes to DMA buffers are finished before sending
 	 * DMA commands to the graphics hardware. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_MEMORYBARRIER();
+=======
+	mb();
+>>>>>>> v3.18
 =======
 	mb();
 >>>>>>> v3.18

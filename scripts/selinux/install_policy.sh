@@ -67,6 +67,9 @@ if [ "eq$dodev" != "eq" ]; then
 	mount --move /mnt /dev
 fi
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

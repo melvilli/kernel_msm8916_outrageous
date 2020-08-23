@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -78,7 +88,11 @@
  * @STA_FLG_REDUCED_TX_PWR_CTRL:
  * @STA_FLG_REDUCED_TX_PWR_DATA:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @STA_FLG_FLG_ANT_MSK: Antenna selection
+=======
+ * @STA_FLG_DISABLE_TX: set if TX should be disabled
+>>>>>>> v3.18
 =======
  * @STA_FLG_DISABLE_TX: set if TX should be disabled
 >>>>>>> v3.18
@@ -106,6 +120,7 @@ enum iwl_sta_flags {
 	STA_FLG_REDUCED_TX_PWR_DATA	= BIT(6),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	STA_FLG_FLG_ANT_A		= (1 << 4),
 	STA_FLG_FLG_ANT_B		= (2 << 4),
 	STA_FLG_FLG_ANT_MSK		= (STA_FLG_FLG_ANT_A |
@@ -115,6 +130,11 @@ enum iwl_sta_flags {
 	STA_FLG_INVALID			= BIT(9),
 	STA_FLG_DLP_EN			= BIT(10),
 	STA_FLG_SET_ALL_KEYS		= BIT(11),
+=======
+	STA_FLG_DISABLE_TX		= BIT(4),
+
+	STA_FLG_PS			= BIT(8),
+>>>>>>> v3.18
 =======
 	STA_FLG_DISABLE_TX		= BIT(4),
 
@@ -159,8 +179,11 @@ enum iwl_sta_flags {
 /**
  * enum iwl_sta_key_flag - key flags for the ADD_STA host command
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @STA_KEY_FLG_EN_MSK: mask for encryption algorithm
 =======
+=======
+>>>>>>> v3.18
  * @STA_KEY_FLG_NO_ENC: no encryption
  * @STA_KEY_FLG_WEP: WEP encryption algorithm
  * @STA_KEY_FLG_CCM: CCMP encryption algorithm
@@ -169,6 +192,9 @@ enum iwl_sta_flags {
  * @STA_KEY_FLG_CMAC: CMAC encryption algorithm
  * @STA_KEY_FLG_ENC_UNKNOWN: unknown encryption algorithm
  * @STA_KEY_FLG_EN_MSK: mask for encryption algorithmi value
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @STA_KEY_FLG_WEP_KEY_MAP: wep is either a group key (0 - legacy WEP) or from
  *	station info array (1 - n 1X mode)
@@ -184,6 +210,10 @@ enum iwl_sta_key_flag {
 	STA_KEY_FLG_CCM			= (2 << 0),
 	STA_KEY_FLG_TKIP		= (3 << 0),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	STA_KEY_FLG_EXT			= (4 << 0),
+>>>>>>> v3.18
 =======
 	STA_KEY_FLG_EXT			= (4 << 0),
 >>>>>>> v3.18
@@ -230,12 +260,15 @@ enum iwl_sta_modify_flag {
  * @STA_SLEEP_STATE_PS_POLL:
  * @STA_SLEEP_STATE_UAPSD:
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 enum iwl_sta_sleep_flag {
 	STA_SLEEP_STATE_AWAKE	= 0,
 	STA_SLEEP_STATE_PS_POLL	= BIT(0),
 	STA_SLEEP_STATE_UAPSD	= BIT(1),
 =======
+=======
+>>>>>>> v3.18
  * @STA_SLEEP_STATE_MOREDATA: set more-data bit on
  *	(last) released frame
  */
@@ -244,6 +277,9 @@ enum iwl_sta_sleep_flag {
 	STA_SLEEP_STATE_PS_POLL		= BIT(0),
 	STA_SLEEP_STATE_UAPSD		= BIT(1),
 	STA_SLEEP_STATE_MOREDATA	= BIT(2),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -294,6 +330,7 @@ struct iwl_mvm_keyinfo {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct iwl_mvm_add_sta_cmd - Add / modify a station in the fw's station table
  * ( REPLY_ADD_STA = 0x18 )
  * @add_modify: 1: modify existing, 0: add new station
@@ -301,12 +338,17 @@ struct iwl_mvm_keyinfo {
  * @multicast_tx_key_id: multicast tx key id. Relevant only when multicast key
  *	sent
 =======
+=======
+>>>>>>> v3.18
  * struct iwl_mvm_add_sta_cmd - Add/modify a station in the fw's sta table.
  * ( REPLY_ADD_STA = 0x18 )
  * @add_modify: 1: modify existing, 0: add new station
  * @awake_acs:
  * @tid_disable_tx: is tid BIT(tid) enabled for Tx. Clear BIT(x) to enable
  *	AMPDU for tid x. Set %STA_MODIFY_TID_DISABLE_TX to change this field.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @mac_id_n_color: the Mac context this station belongs to
  * @addr[ETH_ALEN]: station's MAC address
@@ -314,11 +356,16 @@ struct iwl_mvm_keyinfo {
  * @modify_mask: STA_MODIFY_*, selects which parameters to modify vs. leave
  *	alone. 1 - modify, 0 - don't change.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @key: look at %iwl_mvm_keyinfo
  * @station_flags: look at %iwl_sta_flags
  * @station_flags_msk: what of %station_flags have changed
  * @tid_disable_tx: is tid BIT(tid) enabled for Tx. Clear BIT(x) to enable
  *	AMPDU for tid x. Set %STA_MODIFY_TID_DISABLE_TX to change this field.
+=======
+ * @station_flags: look at %iwl_sta_flags
+ * @station_flags_msk: what of %station_flags have changed
+>>>>>>> v3.18
 =======
  * @station_flags: look at %iwl_sta_flags
  * @station_flags_msk: what of %station_flags have changed
@@ -349,27 +396,38 @@ struct iwl_mvm_keyinfo {
 struct iwl_mvm_add_sta_cmd {
 	u8 add_modify;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 unicast_tx_key_id;
 	u8 multicast_tx_key_id;
 	u8 reserved1;
 	__le32 mac_id_n_color;
 	u8 addr[ETH_ALEN];
 =======
+=======
+>>>>>>> v3.18
 	u8 awake_acs;
 	__le16 tid_disable_tx;
 	__le32 mac_id_n_color;
 	u8 addr[ETH_ALEN];	/* _STA_ID_MODIFY_INFO_API_S_VER_1 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__le16 reserved2;
 	u8 sta_id;
 	u8 modify_mask;
 	__le16 reserved3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iwl_mvm_keyinfo key;
 	__le32 station_flags;
 	__le32 station_flags_msk;
 	__le16 tid_disable_tx;
 	__le16 reserved4;
+=======
+	__le32 station_flags;
+	__le32 station_flags_msk;
+>>>>>>> v3.18
 =======
 	__le32 station_flags;
 	__le32 station_flags_msk;
@@ -383,8 +441,11 @@ struct iwl_mvm_add_sta_cmd {
 	__le16 beamform_flags;
 	__le32 tfd_queue_msk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __packed; /* ADD_STA_CMD_API_S_VER_5 */
 =======
+=======
+>>>>>>> v3.18
 } __packed; /* ADD_STA_CMD_API_S_VER_7 */
 
 /**
@@ -410,6 +471,9 @@ struct iwl_mvm_add_sta_key_cmd {
 	u8 reserved;
 	__le16 tkip_rx_ttak[5];
 } __packed; /* ADD_MODIFY_STA_KEY_API_S_VER_1 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -477,7 +541,10 @@ struct iwl_mvm_wep_key_cmd {
 } __packed; /* SEC_CURR_WEP_KEY_CMD_API_S_VER_2 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct iwl_mvm_eosp_notification - EOSP notification from firmware
  * @remain_frame_count: # of frames remaining, non-zero if SP was cut
@@ -488,6 +555,9 @@ struct iwl_mvm_eosp_notification {
 	__le32 remain_frame_count;
 	__le32 sta_id;
 } __packed; /* UAPSD_EOSP_NTFY_API_S_VER_1 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __fw_api_sta_h__ */

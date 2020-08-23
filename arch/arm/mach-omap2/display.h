@@ -27,7 +27,10 @@ struct omap_dss_dispc_dev_attr {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int omap_init_drm(void);
 int omap_init_vrfb(void);
 int omap_init_fb(void);
@@ -35,5 +38,8 @@ int omap_init_vout(void);
 
 struct device_node * __init omapdss_find_dss_of_node(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

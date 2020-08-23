@@ -108,6 +108,10 @@ static void router_recurse(klrou_t *router_a, klrou_t *router_b, int depth)
 
 unsigned char __node_distances[MAX_COMPACT_NODES][MAX_COMPACT_NODES];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(__node_distances);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(__node_distances);
 >>>>>>> v3.18
@@ -362,8 +366,11 @@ static void __init szmem(void)
 	cnodeid_t node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for_each_online_node(node) {
@@ -389,7 +396,10 @@ static void __init szmem(void)
 				continue;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			num_physpages += slot_psize;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			memblock_add_node(PFN_PHYS(slot_getbasepfn(node, slot)),
@@ -491,6 +501,7 @@ void __init paging_init(void)
 void __init mem_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long codesize, datasize, initsize, tmp;
 	unsigned node;
 
@@ -520,9 +531,14 @@ void __init mem_init(void)
 	       initsize >> 10,
 	       totalhigh_pages << (PAGE_SHIFT-10));
 =======
+=======
+>>>>>>> v3.18
 	high_memory = (void *) __va(get_num_physpages() << PAGE_SHIFT);
 	free_all_bootmem();
 	setup_zero_pages();	/* This comes from node 0 */
 	mem_init_print_info(NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  S390 version
  *    Copyright IBM Corp. 1999
  *    Author(s): Martin Schwidefsky (schwidefsky@de.ibm.com)
@@ -7,6 +8,8 @@
  *  Derived from "include/asm-i386/bitops.h"
  *    Copyright (C) 1992, Linus Torvalds
 =======
+=======
+>>>>>>> v3.18
  *    Copyright IBM Corp. 1999,2013
  *
  *    Author(s): Martin Schwidefsky <schwidefsky@de.ibm.com>,
@@ -43,6 +46,9 @@
  * The main difference is that bit 0-63 (64b) or 0-31 (32b) in the bit
  * number field needs to be reversed compared to the LSB0 encoded bit
  * fields. This can be achieved by XOR with 0x3f (64b) or 0x1f (32b).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  */
@@ -54,6 +60,7 @@
 #error only <linux/bitops.h> can be included directly
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/compiler.h>
 
@@ -99,11 +106,16 @@ extern const char _ni_bitmap[];
 extern const char _zb_findmap[];
 extern const char _sb_findmap[];
 =======
+=======
+>>>>>>> v3.18
 #include <linux/typecheck.h>
 #include <linux/compiler.h>
 #include <asm/barrier.h>
 
 #define __BITOPS_NO_BARRIER	"\n"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef CONFIG_64BIT
@@ -112,9 +124,12 @@ extern const char _sb_findmap[];
 #define __BITOPS_AND		"nr"
 #define __BITOPS_XOR		"xr"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define __BITOPS_LOOP(__old, __new, __addr, __val, __op_string)	\
 =======
+=======
+>>>>>>> v3.18
 #define __BITOPS_BARRIER	"\n"
 
 #define __BITOPS_LOOP(__addr, __val, __op_string, __barrier)	\
@@ -122,6 +137,9 @@ extern const char _sb_findmap[];
 	unsigned long __old, __new;				\
 								\
 	typecheck(unsigned long *, (__addr));			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	asm volatile(						\
 		"	l	%0,%2\n"			\
@@ -129,6 +147,7 @@ extern const char _sb_findmap[];
 		__op_string "	%1,%3\n"			\
 		"	cs	%0,%1,%2\n"			\
 		"	jl	0b"				\
+<<<<<<< HEAD
 <<<<<<< HEAD
 		: "=&d" (__old), "=&d" (__new),			\
 		  "=Q" (*(unsigned long *) __addr)		\
@@ -143,6 +162,8 @@ extern const char _sb_findmap[];
 
 #define __BITOPS_LOOP(__old, __new, __addr, __val, __op_string)	\
 =======
+=======
+>>>>>>> v3.18
 		: "=&d" (__old), "=&d" (__new), "+Q" (*(__addr))\
 		: "d" (__val)					\
 		: "cc", "memory");				\
@@ -185,6 +206,9 @@ extern const char _sb_findmap[];
 	unsigned long __old, __new;				\
 								\
 	typecheck(unsigned long *, (__addr));			\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	asm volatile(						\
 		"	lg	%0,%2\n"			\
@@ -193,11 +217,14 @@ extern const char _sb_findmap[];
 		"	csg	%0,%1,%2\n"			\
 		"	jl	0b"				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		: "=&d" (__old), "=&d" (__new),			\
 		  "=Q" (*(unsigned long *) __addr)		\
 		: "d" (__val), "Q" (*(unsigned long *) __addr)	\
 		: "cc");
 =======
+=======
+>>>>>>> v3.18
 		: "=&d" (__old), "=&d" (__new), "+Q" (*(__addr))\
 		: "d" (__val)					\
 		: "cc", "memory");				\
@@ -205,12 +232,16 @@ extern const char _sb_findmap[];
 })
 
 #endif /* CONFIG_HAVE_MARCH_Z196_FEATURES */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* CONFIG_64BIT */
 
 #define __BITOPS_WORDS(bits) (((bits) + BITS_PER_LONG - 1) / BITS_PER_LONG)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_SMP
 /*
@@ -679,6 +710,8 @@ static inline unsigned long ffz(unsigned long word)
 {
 	return __ffz_word(0, word);
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long *
 __bitops_word(unsigned long nr, volatile unsigned long *ptr)
 {
@@ -942,6 +975,9 @@ static inline unsigned char __flogr(unsigned long word)
 			: [bit] "+d" (bit), [out] "=d" (out) : : "cc");
 		return bit;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -952,9 +988,15 @@ static inline unsigned char __flogr(unsigned long word)
  * Undefined if no bit exists, so code should check against 0 first.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long __ffs (unsigned long word)
 {
 	return __ffs_word(0, word);
+=======
+static inline unsigned long __ffs(unsigned long word)
+{
+	return __flogr(-word & word) ^ (BITS_PER_LONG - 1);
+>>>>>>> v3.18
 =======
 static inline unsigned long __ffs(unsigned long word)
 {
@@ -964,6 +1006,7 @@ static inline unsigned long __ffs(unsigned long word)
 
 /**
  * ffs - find first bit set
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @x: the word to search
  *
@@ -1290,6 +1333,8 @@ static inline int find_next_bit_le(void *vaddr, unsigned long size,
 #include <asm-generic/bitops/le.h>
 
 =======
+=======
+>>>>>>> v3.18
  * @word: the word to search
  *
  * This is defined the same way as the libc and
@@ -1360,6 +1405,9 @@ static inline int fls(int word)
 #include <asm-generic/bitops/lock.h>
 #include <asm-generic/bitops/sched.h>
 #include <asm-generic/bitops/le.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm-generic/bitops/ext2-atomic-setbit.h>
 

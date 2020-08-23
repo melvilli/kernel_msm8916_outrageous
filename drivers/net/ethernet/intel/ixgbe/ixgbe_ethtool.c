@@ -2,7 +2,11 @@
 
   Intel 10 Gigabit PCI Express Linux driver
 <<<<<<< HEAD
+<<<<<<< HEAD
   Copyright(c) 1999 - 2013 Intel Corporation.
+=======
+  Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
   Copyright(c) 1999 - 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -25,6 +29,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -149,8 +157,13 @@ static const struct ixgbe_stats ixgbe_gstrings_stats[] = {
 			/ sizeof(u64))
 #define IXGBE_STATS_LEN (IXGBE_GLOBAL_STATS_LEN + \
 <<<<<<< HEAD
+<<<<<<< HEAD
                          IXGBE_PB_STATS_LEN + \
                          IXGBE_QUEUE_STATS_LEN)
+=======
+			 IXGBE_PB_STATS_LEN + \
+			 IXGBE_QUEUE_STATS_LEN)
+>>>>>>> v3.18
 =======
 			 IXGBE_PB_STATS_LEN + \
 			 IXGBE_QUEUE_STATS_LEN)
@@ -165,7 +178,11 @@ static const char ixgbe_gstrings_test[][ETH_GSTRING_LEN] = {
 
 static int ixgbe_get_settings(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                               struct ethtool_cmd *ecmd)
+=======
+			      struct ethtool_cmd *ecmd)
+>>>>>>> v3.18
 =======
 			      struct ethtool_cmd *ecmd)
 >>>>>>> v3.18
@@ -204,12 +221,18 @@ static int ixgbe_get_settings(struct net_device *netdev,
 		if (supported_link & IXGBE_LINK_SPEED_100_FULL)
 			ecmd->advertising |= ADVERTISED_100baseT_Full;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (hw->phy.multispeed_fiber && !autoneg) {
 			if (supported_link & IXGBE_LINK_SPEED_10GB_FULL)
 				ecmd->advertising = ADVERTISED_10000baseT_Full;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -316,8 +339,13 @@ static int ixgbe_get_settings(struct net_device *netdev,
 		ecmd->duplex = DUPLEX_FULL;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(ecmd, -1);
 		ecmd->duplex = -1;
+=======
+		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
+		ecmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 =======
 		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
 		ecmd->duplex = DUPLEX_UNKNOWN;
@@ -329,7 +357,11 @@ static int ixgbe_get_settings(struct net_device *netdev,
 
 static int ixgbe_set_settings(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                               struct ethtool_cmd *ecmd)
+=======
+			      struct ethtool_cmd *ecmd)
+>>>>>>> v3.18
 =======
 			      struct ethtool_cmd *ecmd)
 >>>>>>> v3.18
@@ -346,6 +378,7 @@ static int ixgbe_set_settings(struct net_device *netdev,
 		 * limit the advertising of the adapter to the specified speed
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ecmd->autoneg == AUTONEG_DISABLE)
 			return -EINVAL;
 
@@ -353,6 +386,8 @@ static int ixgbe_set_settings(struct net_device *netdev,
 			return -EINVAL;
 
 =======
+=======
+>>>>>>> v3.18
 		if (ecmd->advertising & ~ecmd->supported)
 			return -EINVAL;
 
@@ -364,6 +399,9 @@ static int ixgbe_set_settings(struct net_device *netdev,
 				return -EINVAL;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		old = hw->phy.autoneg_advertised;
 		advertised = 0;
@@ -380,6 +418,12 @@ static int ixgbe_set_settings(struct net_device *netdev,
 			return err;
 		/* this sets the link speed and restarts auto-neg */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		while (test_and_set_bit(__IXGBE_IN_SFP_INIT, &adapter->state))
+			usleep_range(1000, 2000);
+
+>>>>>>> v3.18
 =======
 		while (test_and_set_bit(__IXGBE_IN_SFP_INIT, &adapter->state))
 			usleep_range(1000, 2000);
@@ -392,6 +436,10 @@ static int ixgbe_set_settings(struct net_device *netdev,
 			hw->mac.ops.setup_link(hw, old, true);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clear_bit(__IXGBE_IN_SFP_INIT, &adapter->state);
+>>>>>>> v3.18
 =======
 		clear_bit(__IXGBE_IN_SFP_INIT, &adapter->state);
 >>>>>>> v3.18
@@ -409,7 +457,11 @@ static int ixgbe_set_settings(struct net_device *netdev,
 
 static void ixgbe_get_pauseparam(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                  struct ethtool_pauseparam *pause)
+=======
+				 struct ethtool_pauseparam *pause)
+>>>>>>> v3.18
 =======
 				 struct ethtool_pauseparam *pause)
 >>>>>>> v3.18
@@ -418,16 +470,22 @@ static void ixgbe_get_pauseparam(struct net_device *netdev,
 	struct ixgbe_hw *hw = &adapter->hw;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hw->fc.disable_fc_autoneg)
 		pause->autoneg = 0;
 	else
 		pause->autoneg = 1;
 =======
+=======
+>>>>>>> v3.18
 	if (ixgbe_device_supports_autoneg_fc(hw) &&
 	    !hw->fc.disable_fc_autoneg)
 		pause->autoneg = 1;
 	else
 		pause->autoneg = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (hw->fc.current_mode == ixgbe_fc_rx_pause) {
@@ -442,7 +500,11 @@ static void ixgbe_get_pauseparam(struct net_device *netdev,
 
 static int ixgbe_set_pauseparam(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 struct ethtool_pauseparam *pause)
+=======
+				struct ethtool_pauseparam *pause)
+>>>>>>> v3.18
 =======
 				struct ethtool_pauseparam *pause)
 >>>>>>> v3.18
@@ -459,7 +521,11 @@ static int ixgbe_set_pauseparam(struct net_device *netdev,
 	/* some devices do not support autoneg of link flow control */
 	if ((pause->autoneg == AUTONEG_ENABLE) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (ixgbe_device_supports_autoneg_fc(hw) != 0))
+=======
+	    !ixgbe_device_supports_autoneg_fc(hw))
+>>>>>>> v3.18
 =======
 	    !ixgbe_device_supports_autoneg_fc(hw))
 >>>>>>> v3.18
@@ -503,7 +569,11 @@ static void ixgbe_set_msglevel(struct net_device *netdev, u32 data)
 static int ixgbe_get_regs_len(struct net_device *netdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IXGBE_REGS_LEN  1129
+=======
+#define IXGBE_REGS_LEN  1139
+>>>>>>> v3.18
 =======
 #define IXGBE_REGS_LEN  1139
 >>>>>>> v3.18
@@ -514,7 +584,11 @@ static int ixgbe_get_regs_len(struct net_device *netdev)
 
 static void ixgbe_get_regs(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                            struct ethtool_regs *regs, void *p)
+=======
+			   struct ethtool_regs *regs, void *p)
+>>>>>>> v3.18
 =======
 			   struct ethtool_regs *regs, void *p)
 >>>>>>> v3.18
@@ -671,6 +745,7 @@ static void ixgbe_get_regs(struct net_device *netdev,
 
 	/* DCB */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs_buff[829] = IXGBE_READ_REG(hw, IXGBE_RMCS);
 	regs_buff[830] = IXGBE_READ_REG(hw, IXGBE_DPMCS);
 	regs_buff[831] = IXGBE_READ_REG(hw, IXGBE_PDPMCS);
@@ -688,6 +763,8 @@ static void ixgbe_get_regs(struct net_device *netdev,
 	for (i = 0; i < 8; i++)
 		regs_buff[873 + i] = IXGBE_READ_REG(hw, IXGBE_TDPT2TCSR(i));
 =======
+=======
+>>>>>>> v3.18
 	regs_buff[829] = IXGBE_READ_REG(hw, IXGBE_RMCS);   /* same as FCCFG  */
 	regs_buff[831] = IXGBE_READ_REG(hw, IXGBE_PDPMCS); /* same as RTTPCS */
 
@@ -735,6 +812,9 @@ static void ixgbe_get_regs(struct net_device *netdev,
 	for (i = 0; i < 8; i++)
 		regs_buff[873 + i] =
 		IXGBE_READ_REG(hw, IXGBE_TDPT2TCSR(i)); /* same as RTTPT2S */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Statistics */
@@ -876,7 +956,10 @@ static void ixgbe_get_regs(struct net_device *netdev,
 	/* 82599 X540 specific registers  */
 	regs_buff[1128] = IXGBE_READ_REG(hw, IXGBE_MFLCN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* 82599 X540 specific DCB registers  */
 	regs_buff[1129] = IXGBE_READ_REG(hw, IXGBE_RTRUP2TC);
@@ -891,6 +974,9 @@ static void ixgbe_get_regs(struct net_device *netdev,
 	/* X540 specific DCB registers  */
 	regs_buff[1137] = IXGBE_READ_REG(hw, IXGBE_RTTQCNCR);
 	regs_buff[1138] = IXGBE_READ_REG(hw, IXGBE_RTTQCNTG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -902,7 +988,11 @@ static int ixgbe_get_eeprom_len(struct net_device *netdev)
 
 static int ixgbe_get_eeprom(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                             struct ethtool_eeprom *eeprom, u8 *bytes)
+=======
+			    struct ethtool_eeprom *eeprom, u8 *bytes)
+>>>>>>> v3.18
 =======
 			    struct ethtool_eeprom *eeprom, u8 *bytes)
 >>>>>>> v3.18
@@ -1012,7 +1102,11 @@ err:
 
 static void ixgbe_get_drvinfo(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                               struct ethtool_drvinfo *drvinfo)
+=======
+			      struct ethtool_drvinfo *drvinfo)
+>>>>>>> v3.18
 =======
 			      struct ethtool_drvinfo *drvinfo)
 >>>>>>> v3.18
@@ -1038,7 +1132,11 @@ static void ixgbe_get_drvinfo(struct net_device *netdev,
 
 static void ixgbe_get_ringparam(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 struct ethtool_ringparam *ring)
+=======
+				struct ethtool_ringparam *ring)
+>>>>>>> v3.18
 =======
 				struct ethtool_ringparam *ring)
 >>>>>>> v3.18
@@ -1055,7 +1153,11 @@ static void ixgbe_get_ringparam(struct net_device *netdev,
 
 static int ixgbe_set_ringparam(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                struct ethtool_ringparam *ring)
+=======
+			       struct ethtool_ringparam *ring)
+>>>>>>> v3.18
 =======
 			       struct ethtool_ringparam *ring)
 >>>>>>> v3.18
@@ -1188,7 +1290,11 @@ static int ixgbe_get_sset_count(struct net_device *netdev, int sset)
 
 static void ixgbe_get_ethtool_stats(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     struct ethtool_stats *stats, u64 *data)
+=======
+				    struct ethtool_stats *stats, u64 *data)
+>>>>>>> v3.18
 =======
 				    struct ethtool_stats *stats, u64 *data)
 >>>>>>> v3.18
@@ -1220,9 +1326,15 @@ static void ixgbe_get_ethtool_stats(struct net_device *netdev,
 
 		data[i] = (ixgbe_gstrings_stats[i].sizeof_stat ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 		           sizeof(u64)) ? *(u64 *)p : *(u32 *)p;
 	}
 	for (j = 0; j < IXGBE_NUM_RX_QUEUES; j++) {
+=======
+			   sizeof(u64)) ? *(u64 *)p : *(u32 *)p;
+	}
+	for (j = 0; j < netdev->num_tx_queues; j++) {
+>>>>>>> v3.18
 =======
 			   sizeof(u64)) ? *(u64 *)p : *(u32 *)p;
 	}
@@ -1234,18 +1346,25 @@ static void ixgbe_get_ethtool_stats(struct net_device *netdev,
 			data[i+1] = 0;
 			i += 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef BP_EXTENDED_STATS
 			data[i] = 0;
 			data[i+1] = 0;
 			data[i+2] = 0;
 			i += 3;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
 
 		do {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			start = u64_stats_fetch_begin_bh(&ring->syncp);
 			data[i]   = ring->stats.packets;
@@ -1253,6 +1372,8 @@ static void ixgbe_get_ethtool_stats(struct net_device *netdev,
 		} while (u64_stats_fetch_retry_bh(&ring->syncp, start));
 		i += 2;
 =======
+=======
+>>>>>>> v3.18
 			start = u64_stats_fetch_begin_irq(&ring->syncp);
 			data[i]   = ring->stats.packets;
 			data[i+1] = ring->stats.bytes;
@@ -1264,6 +1385,9 @@ static void ixgbe_get_ethtool_stats(struct net_device *netdev,
 		data[i+2] = ring->stats.cleaned;
 		i += 3;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	for (j = 0; j < IXGBE_NUM_RX_QUEUES; j++) {
@@ -1273,18 +1397,25 @@ static void ixgbe_get_ethtool_stats(struct net_device *netdev,
 			data[i+1] = 0;
 			i += 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef BP_EXTENDED_STATS
 			data[i] = 0;
 			data[i+1] = 0;
 			data[i+2] = 0;
 			i += 3;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
 
 		do {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			start = u64_stats_fetch_begin_bh(&ring->syncp);
 			data[i]   = ring->stats.packets;
@@ -1292,6 +1423,8 @@ static void ixgbe_get_ethtool_stats(struct net_device *netdev,
 		} while (u64_stats_fetch_retry_bh(&ring->syncp, start));
 		i += 2;
 =======
+=======
+>>>>>>> v3.18
 			start = u64_stats_fetch_begin_irq(&ring->syncp);
 			data[i]   = ring->stats.packets;
 			data[i+1] = ring->stats.bytes;
@@ -1303,6 +1436,9 @@ static void ixgbe_get_ethtool_stats(struct net_device *netdev,
 		data[i+2] = ring->stats.cleaned;
 		i += 3;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1318,7 +1454,11 @@ static void ixgbe_get_ethtool_stats(struct net_device *netdev,
 
 static void ixgbe_get_strings(struct net_device *netdev, u32 stringset,
 <<<<<<< HEAD
+<<<<<<< HEAD
                               u8 *data)
+=======
+			      u8 *data)
+>>>>>>> v3.18
 =======
 			      u8 *data)
 >>>>>>> v3.18
@@ -1345,7 +1485,10 @@ static void ixgbe_get_strings(struct net_device *netdev, u32 stringset,
 			sprintf(p, "tx_queue_%u_bytes", i);
 			p += ETH_GSTRING_LEN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef BP_EXTENDED_STATS
 			sprintf(p, "tx_queue_%u_bp_napi_yield", i);
 			p += ETH_GSTRING_LEN;
@@ -1354,6 +1497,9 @@ static void ixgbe_get_strings(struct net_device *netdev, u32 stringset,
 			sprintf(p, "tx_queue_%u_bp_cleaned", i);
 			p += ETH_GSTRING_LEN;
 #endif /* BP_EXTENDED_STATS */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		for (i = 0; i < IXGBE_NUM_RX_QUEUES; i++) {
@@ -1362,7 +1508,10 @@ static void ixgbe_get_strings(struct net_device *netdev, u32 stringset,
 			sprintf(p, "rx_queue_%u_bytes", i);
 			p += ETH_GSTRING_LEN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef BP_EXTENDED_STATS
 			sprintf(p, "rx_queue_%u_bp_poll_yield", i);
 			p += ETH_GSTRING_LEN;
@@ -1371,6 +1520,9 @@ static void ixgbe_get_strings(struct net_device *netdev, u32 stringset,
 			sprintf(p, "rx_queue_%u_bp_cleaned", i);
 			p += ETH_GSTRING_LEN;
 #endif /* BP_EXTENDED_STATS */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		for (i = 0; i < IXGBE_MAX_PACKET_BUFFERS; i++) {
@@ -1396,12 +1548,18 @@ static int ixgbe_link_test(struct ixgbe_adapter *adapter, u64 *data)
 	bool link_up;
 	u32 link_speed = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (ixgbe_removed(hw->hw_addr)) {
 		*data = 1;
 		return 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	*data = 0;
 
@@ -1461,7 +1619,11 @@ static const struct ixgbe_reg_test reg_test_82599[] = {
 	{ IXGBE_RAL(0), 16, TABLE64_TEST_HI, 0x8001FFFF, 0x800CFFFF },
 	{ IXGBE_MTA(0), 128, TABLE32_TEST, 0xFFFFFFFF, 0xFFFFFFFF },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0, 0, 0, 0 }
+=======
+	{ .reg = 0 }
+>>>>>>> v3.18
 =======
 	{ .reg = 0 }
 >>>>>>> v3.18
@@ -1493,7 +1655,11 @@ static const struct ixgbe_reg_test reg_test_82598[] = {
 	{ IXGBE_RAL(0), 16, TABLE64_TEST_HI, 0x800CFFFF, 0x800CFFFF },
 	{ IXGBE_MTA(0), 128, TABLE32_TEST, 0xFFFFFFFF, 0xFFFFFFFF },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0, 0, 0, 0 }
+=======
+	{ .reg = 0 }
+>>>>>>> v3.18
 =======
 	{ .reg = 0 }
 >>>>>>> v3.18
@@ -1506,6 +1672,7 @@ static bool reg_pattern_test(struct ixgbe_adapter *adapter, u64 *data, int reg,
 	static const u32 test_pattern[] = {
 		0x5A5A5A5A, 0xA5A5A5A5, 0x00000000, 0xFFFFFFFF};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (pat = 0; pat < ARRAY_SIZE(test_pattern); pat++) {
 		before = readl(adapter->hw.hw_addr + reg);
@@ -1524,6 +1691,8 @@ static bool reg_pattern_test(struct ixgbe_adapter *adapter, u64 *data, int reg,
 	}
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (ixgbe_removed(adapter->hw.hw_addr)) {
 		*data = 1;
 		return 1;
@@ -1542,6 +1711,9 @@ static bool reg_pattern_test(struct ixgbe_adapter *adapter, u64 *data, int reg,
 		ixgbe_write_reg(&adapter->hw, reg, before);
 	}
 	return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1549,6 +1721,7 @@ static bool reg_set_and_check(struct ixgbe_adapter *adapter, u64 *data, int reg,
 			      u32 mask, u32 write)
 {
 	u32 val, before;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	before = readl(adapter->hw.hw_addr + reg);
 	writel((write & mask), (adapter->hw.hw_addr + reg));
@@ -1578,6 +1751,8 @@ static bool reg_set_and_check(struct ixgbe_adapter *adapter, u64 *data, int reg,
 	} while (0)							      \
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (ixgbe_removed(adapter->hw.hw_addr)) {
 		*data = 1;
@@ -1597,6 +1772,9 @@ static bool reg_set_and_check(struct ixgbe_adapter *adapter, u64 *data, int reg,
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ixgbe_reg_test(struct ixgbe_adapter *adapter, u64 *data)
 {
@@ -1605,12 +1783,18 @@ static int ixgbe_reg_test(struct ixgbe_adapter *adapter, u64 *data)
 	u32 i, toggle;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ixgbe_removed(adapter->hw.hw_addr)) {
 		e_err(drv, "Adapter removed - register test blocked\n");
 		*data = 1;
 		return 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (adapter->hw.mac.type) {
 	case ixgbe_mac_82598EB:
@@ -1626,7 +1810,10 @@ static int ixgbe_reg_test(struct ixgbe_adapter *adapter, u64 *data)
 		*data = 1;
 		return 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1638,6 +1825,7 @@ static int ixgbe_reg_test(struct ixgbe_adapter *adapter, u64 *data)
 	 * are writeable on newer MACs.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	before = IXGBE_READ_REG(&adapter->hw, IXGBE_STATUS);
 	value = (IXGBE_READ_REG(&adapter->hw, IXGBE_STATUS) & toggle);
 	IXGBE_WRITE_REG(&adapter->hw, IXGBE_STATUS, toggle);
@@ -1646,6 +1834,8 @@ static int ixgbe_reg_test(struct ixgbe_adapter *adapter, u64 *data)
 		e_err(drv, "failed STATUS register test got: 0x%08X "
 		      "expected: 0x%08X\n", after, value);
 =======
+=======
+>>>>>>> v3.18
 	before = ixgbe_read_reg(&adapter->hw, IXGBE_STATUS);
 	value = (ixgbe_read_reg(&adapter->hw, IXGBE_STATUS) & toggle);
 	ixgbe_write_reg(&adapter->hw, IXGBE_STATUS, toggle);
@@ -1653,13 +1843,20 @@ static int ixgbe_reg_test(struct ixgbe_adapter *adapter, u64 *data)
 	if (value != after) {
 		e_err(drv, "failed STATUS register test got: 0x%08X expected: 0x%08X\n",
 		      after, value);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*data = 1;
 		return 1;
 	}
 	/* restore previous status */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IXGBE_WRITE_REG(&adapter->hw, IXGBE_STATUS, before);
+=======
+	ixgbe_write_reg(&adapter->hw, IXGBE_STATUS, before);
+>>>>>>> v3.18
 =======
 	ixgbe_write_reg(&adapter->hw, IXGBE_STATUS, before);
 >>>>>>> v3.18
@@ -1670,6 +1867,7 @@ static int ixgbe_reg_test(struct ixgbe_adapter *adapter, u64 *data)
 	 */
 	while (test->reg) {
 		for (i = 0; i < test->array_len; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			switch (test->test_type) {
 			case PATTERN_TEST:
@@ -1704,6 +1902,8 @@ static int ixgbe_reg_test(struct ixgbe_adapter *adapter, u64 *data)
 				break;
 			}
 =======
+=======
+>>>>>>> v3.18
 			bool b = false;
 
 			switch (test->test_type) {
@@ -1745,6 +1945,9 @@ static int ixgbe_reg_test(struct ixgbe_adapter *adapter, u64 *data)
 			}
 			if (b)
 				return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		test++;
@@ -1795,15 +1998,21 @@ static int ixgbe_intr_test(struct ixgbe_adapter *adapter, u64 *data)
 		}
 	} else if (!request_irq(irq, ixgbe_test_intr, IRQF_PROBE_SHARED,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	                        netdev->name, netdev)) {
 		shared_int = false;
 	} else if (request_irq(irq, ixgbe_test_intr, IRQF_SHARED,
 	                       netdev->name, netdev)) {
 =======
+=======
+>>>>>>> v3.18
 				netdev->name, netdev)) {
 		shared_int = false;
 	} else if (request_irq(irq, ixgbe_test_intr, IRQF_SHARED,
 			       netdev->name, netdev)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		*data = 1;
 		return -1;
@@ -1832,9 +2041,15 @@ static int ixgbe_intr_test(struct ixgbe_adapter *adapter, u64 *data)
 			adapter->test_icr = 0;
 			IXGBE_WRITE_REG(&adapter->hw, IXGBE_EIMC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			                ~mask & 0x00007FFF);
 			IXGBE_WRITE_REG(&adapter->hw, IXGBE_EICS,
 			                ~mask & 0x00007FFF);
+=======
+					~mask & 0x00007FFF);
+			IXGBE_WRITE_REG(&adapter->hw, IXGBE_EICS,
+					~mask & 0x00007FFF);
+>>>>>>> v3.18
 =======
 					~mask & 0x00007FFF);
 			IXGBE_WRITE_REG(&adapter->hw, IXGBE_EICS,
@@ -1862,7 +2077,11 @@ static int ixgbe_intr_test(struct ixgbe_adapter *adapter, u64 *data)
 		usleep_range(10000, 20000);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(adapter->test_icr &mask)) {
+=======
+		if (!(adapter->test_icr & mask)) {
+>>>>>>> v3.18
 =======
 		if (!(adapter->test_icr & mask)) {
 >>>>>>> v3.18
@@ -1881,9 +2100,15 @@ static int ixgbe_intr_test(struct ixgbe_adapter *adapter, u64 *data)
 			adapter->test_icr = 0;
 			IXGBE_WRITE_REG(&adapter->hw, IXGBE_EIMC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			                ~mask & 0x00007FFF);
 			IXGBE_WRITE_REG(&adapter->hw, IXGBE_EICS,
 			                ~mask & 0x00007FFF);
+=======
+					~mask & 0x00007FFF);
+			IXGBE_WRITE_REG(&adapter->hw, IXGBE_EICS,
+					~mask & 0x00007FFF);
+>>>>>>> v3.18
 =======
 					~mask & 0x00007FFF);
 			IXGBE_WRITE_REG(&adapter->hw, IXGBE_EICS,
@@ -2170,11 +2395,17 @@ static int ixgbe_run_loopback_test(struct ixgbe_adapter *adapter)
 	netdev_tx_t tx_ret_val;
 	struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u32 flags_orig = adapter->flags;
 
 	/* DCB can modify the frames on Tx */
 	adapter->flags &= ~IXGBE_FLAG_DCB_ENABLED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* allocate test skb */
@@ -2229,6 +2460,10 @@ static int ixgbe_run_loopback_test(struct ixgbe_adapter *adapter)
 	/* free the original skb */
 	kfree_skb(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	adapter->flags = flags_orig;
+>>>>>>> v3.18
 =======
 	adapter->flags = flags_orig;
 >>>>>>> v3.18
@@ -2255,6 +2490,7 @@ out:
 
 static void ixgbe_diag_test(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                             struct ethtool_test *eth_test, u64 *data)
 {
 	struct ixgbe_adapter *adapter = netdev_priv(netdev);
@@ -2264,6 +2500,8 @@ static void ixgbe_diag_test(struct net_device *netdev,
 	set_bit(__IXGBE_TESTING, &adapter->state);
 	if (eth_test->flags == ETH_TEST_FL_OFFLINE) {
 =======
+=======
+>>>>>>> v3.18
 			    struct ethtool_test *eth_test, u64 *data)
 {
 	struct ixgbe_adapter *adapter = netdev_priv(netdev);
@@ -2283,11 +2521,15 @@ static void ixgbe_diag_test(struct net_device *netdev,
 	if (eth_test->flags == ETH_TEST_FL_OFFLINE) {
 		struct ixgbe_hw *hw = &adapter->hw;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (adapter->flags & IXGBE_FLAG_SRIOV_ENABLED) {
 			int i;
 			for (i = 0; i < adapter->num_vfs; i++) {
 				if (adapter->vfinfo[i].clear_to_send) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 					netdev_warn(netdev, "%s",
 						    "offline diagnostic is not "
@@ -2296,11 +2538,18 @@ static void ixgbe_diag_test(struct net_device *netdev,
 =======
 					netdev_warn(netdev, "offline diagnostic is not supported when VFs are present\n");
 >>>>>>> v3.18
+=======
+					netdev_warn(netdev, "offline diagnostic is not supported when VFs are present\n");
+>>>>>>> v3.18
 					data[0] = 1;
 					data[1] = 1;
 					data[2] = 1;
 					data[3] = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					data[4] = 1;
+>>>>>>> v3.18
 =======
 					data[4] = 1;
 >>>>>>> v3.18
@@ -2316,6 +2565,7 @@ static void ixgbe_diag_test(struct net_device *netdev,
 		e_info(hw, "offline testing starting\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (if_running)
 			/* indicate we're in test mode */
 			dev_close(netdev);
@@ -2326,6 +2576,8 @@ static void ixgbe_diag_test(struct net_device *netdev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		/* Link test performed before hardware reset so autoneg doesn't
 		 * interfere with test result
 		 */
@@ -2333,14 +2585,20 @@ static void ixgbe_diag_test(struct net_device *netdev,
 			eth_test->flags |= ETH_TEST_FL_FAILED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ixgbe_reset(adapter);
 =======
+=======
+>>>>>>> v3.18
 		if (if_running)
 			/* indicate we're in test mode */
 			dev_close(netdev);
 		else
 			ixgbe_reset(adapter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		e_info(hw, "register testing starting\n");
 		if (ixgbe_reg_test(adapter, &data[0]))
@@ -2361,8 +2619,12 @@ static void ixgbe_diag_test(struct net_device *netdev,
 		if (adapter->flags & (IXGBE_FLAG_SRIOV_ENABLED |
 				      IXGBE_FLAG_VMDQ_ENABLED)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			e_info(hw, "Skip MAC loopback diagnostic in VT "
 			       "mode\n");
+=======
+			e_info(hw, "Skip MAC loopback diagnostic in VT mode\n");
+>>>>>>> v3.18
 =======
 			e_info(hw, "Skip MAC loopback diagnostic in VT mode\n");
 >>>>>>> v3.18
@@ -2383,6 +2645,7 @@ skip_loopback:
 		if (if_running)
 			dev_open(netdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		e_info(hw, "online testing starting\n");
 
@@ -2391,11 +2654,16 @@ skip_loopback:
 			hw->mac.ops.enable_tx_laser(hw);
 
 =======
+=======
+>>>>>>> v3.18
 		else if (hw->mac.ops.disable_tx_laser)
 			hw->mac.ops.disable_tx_laser(hw);
 	} else {
 		e_info(hw, "online testing starting\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Online tests */
 		if (ixgbe_link_test(adapter, &data[4]))
@@ -2411,9 +2679,12 @@ skip_loopback:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* if adapter was down, ensure SFP+ optics are disabled again */
 	if (!if_running && hw->mac.ops.disable_tx_laser)
 		hw->mac.ops.disable_tx_laser(hw);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 skip_ol_tests:
@@ -2422,7 +2693,11 @@ skip_ol_tests:
 
 static int ixgbe_wol_exclusion(struct ixgbe_adapter *adapter,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                struct ethtool_wolinfo *wol)
+=======
+			       struct ethtool_wolinfo *wol)
+>>>>>>> v3.18
 =======
 			       struct ethtool_wolinfo *wol)
 >>>>>>> v3.18
@@ -2442,7 +2717,11 @@ static int ixgbe_wol_exclusion(struct ixgbe_adapter *adapter,
 
 static void ixgbe_get_wol(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                           struct ethtool_wolinfo *wol)
+=======
+			  struct ethtool_wolinfo *wol)
+>>>>>>> v3.18
 =======
 			  struct ethtool_wolinfo *wol)
 >>>>>>> v3.18
@@ -2451,7 +2730,11 @@ static void ixgbe_get_wol(struct net_device *netdev,
 
 	wol->supported = WAKE_UCAST | WAKE_MCAST |
 <<<<<<< HEAD
+<<<<<<< HEAD
 	                 WAKE_BCAST | WAKE_MAGIC;
+=======
+			 WAKE_BCAST | WAKE_MAGIC;
+>>>>>>> v3.18
 =======
 			 WAKE_BCAST | WAKE_MAGIC;
 >>>>>>> v3.18
@@ -2537,7 +2820,11 @@ static int ixgbe_set_phys_id(struct net_device *netdev,
 
 static int ixgbe_get_coalesce(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                               struct ethtool_coalesce *ec)
+=======
+			      struct ethtool_coalesce *ec)
+>>>>>>> v3.18
 =======
 			      struct ethtool_coalesce *ec)
 >>>>>>> v3.18
@@ -2582,8 +2869,12 @@ static bool ixgbe_update_rsc(struct ixgbe_adapter *adapter)
 		if (!(adapter->flags2 & IXGBE_FLAG2_RSC_ENABLED)) {
 			adapter->flags2 |= IXGBE_FLAG2_RSC_ENABLED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			e_info(probe, "rx-usecs value high enough "
 				      "to re-enable RSC\n");
+=======
+			e_info(probe, "rx-usecs value high enough to re-enable RSC\n");
+>>>>>>> v3.18
 =======
 			e_info(probe, "rx-usecs value high enough to re-enable RSC\n");
 >>>>>>> v3.18
@@ -2600,7 +2891,11 @@ static bool ixgbe_update_rsc(struct ixgbe_adapter *adapter)
 
 static int ixgbe_set_coalesce(struct net_device *netdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
                               struct ethtool_coalesce *ec)
+=======
+			      struct ethtool_coalesce *ec)
+>>>>>>> v3.18
 =======
 			      struct ethtool_coalesce *ec)
 >>>>>>> v3.18
@@ -2649,6 +2944,7 @@ static int ixgbe_set_coalesce(struct net_device *netdev,
 		adapter->tx_itr_setting = adapter->rx_itr_setting;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_BQL)
 	/* detect ITR changes that require update of TXDCTL.WTHRESH */
 	if ((adapter->tx_itr_setting > 1) &&
@@ -2663,6 +2959,8 @@ static int ixgbe_set_coalesce(struct net_device *netdev,
 	}
 #endif
 =======
+=======
+>>>>>>> v3.18
 	/* detect ITR changes that require update of TXDCTL.WTHRESH */
 	if ((adapter->tx_itr_setting != 1) &&
 	    (adapter->tx_itr_setting < IXGBE_100K_ITR)) {
@@ -2675,6 +2973,9 @@ static int ixgbe_set_coalesce(struct net_device *netdev,
 			need_reset = true;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* check the old value and enable RSC if necessary */
 	need_reset |= ixgbe_update_rsc(adapter);
@@ -2804,15 +3105,21 @@ static int ixgbe_get_rss_hash_opts(struct ixgbe_adapter *adapter,
 	case TCP_V4_FLOW:
 		cmd->data |= RXH_L4_B_0_1 | RXH_L4_B_2_3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case UDP_V4_FLOW:
 		if (adapter->flags2 & IXGBE_FLAG2_RSS_FIELD_IPV4_UDP)
 			cmd->data |= RXH_L4_B_0_1 | RXH_L4_B_2_3;
 =======
+=======
+>>>>>>> v3.18
 		/* fallthrough */
 	case UDP_V4_FLOW:
 		if (adapter->flags2 & IXGBE_FLAG2_RSS_FIELD_IPV4_UDP)
 			cmd->data |= RXH_L4_B_0_1 | RXH_L4_B_2_3;
 		/* fallthrough */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case SCTP_V4_FLOW:
 	case AH_ESP_V4_FLOW:
@@ -2824,15 +3131,21 @@ static int ixgbe_get_rss_hash_opts(struct ixgbe_adapter *adapter,
 	case TCP_V6_FLOW:
 		cmd->data |= RXH_L4_B_0_1 | RXH_L4_B_2_3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case UDP_V6_FLOW:
 		if (adapter->flags2 & IXGBE_FLAG2_RSS_FIELD_IPV6_UDP)
 			cmd->data |= RXH_L4_B_0_1 | RXH_L4_B_2_3;
 =======
+=======
+>>>>>>> v3.18
 		/* fallthrough */
 	case UDP_V6_FLOW:
 		if (adapter->flags2 & IXGBE_FLAG2_RSS_FIELD_IPV6_UDP)
 			cmd->data |= RXH_L4_B_0_1 | RXH_L4_B_2_3;
 		/* fallthrough */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case SCTP_V6_FLOW:
 	case AH_ESP_V6_FLOW:
@@ -2926,7 +3239,11 @@ static int ixgbe_update_ethtool_fdir_entry(struct ixgbe_adapter *adapter,
 	/* add filter to the list */
 	if (parent)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hlist_add_after(&parent->fdir_node, &input->fdir_node);
+=======
+		hlist_add_behind(&input->fdir_node, &parent->fdir_node);
+>>>>>>> v3.18
 =======
 		hlist_add_behind(&input->fdir_node, &parent->fdir_node);
 >>>>>>> v3.18
@@ -3190,8 +3507,12 @@ static int ixgbe_set_rss_hash_opt(struct ixgbe_adapter *adapter,
 		if ((flags2 & UDP_RSS_FLAGS) &&
 		    !(adapter->flags2 & UDP_RSS_FLAGS))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			e_warn(drv, "enabling UDP RSS: fragmented packets"
 			       " may arrive out of order to the stack above\n");
+=======
+			e_warn(drv, "enabling UDP RSS: fragmented packets may arrive out of order to the stack above\n");
+>>>>>>> v3.18
 =======
 			e_warn(drv, "enabling UDP RSS: fragmented packets may arrive out of order to the stack above\n");
 >>>>>>> v3.18
@@ -3283,7 +3604,10 @@ static int ixgbe_get_ts_info(struct net_device *dev,
 	default:
 		return ethtool_op_get_ts_info(dev, info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -3406,6 +3730,7 @@ static int ixgbe_get_module_info(struct net_device *dev,
 	u32 status;
 	u8 sff8472_rev, addr_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret_val = 0;
 	bool page_swap = false;
 
@@ -3420,15 +3745,24 @@ static int ixgbe_get_module_info(struct net_device *dev,
 	bool page_swap = false;
 
 >>>>>>> v3.18
+=======
+	bool page_swap = false;
+
+>>>>>>> v3.18
 	/* Check whether we support SFF-8472 or not */
 	status = hw->phy.ops.read_i2c_eeprom(hw,
 					     IXGBE_SFF_SFF_8472_COMP,
 					     &sff8472_rev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status != 0) {
 		ret_val = -EIO;
 		goto err_out;
 	}
+=======
+	if (status != 0)
+		return -EIO;
+>>>>>>> v3.18
 =======
 	if (status != 0)
 		return -EIO;
@@ -3439,10 +3773,15 @@ static int ixgbe_get_module_info(struct net_device *dev,
 					     IXGBE_SFF_SFF_8472_SWAP,
 					     &addr_mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status != 0) {
 		ret_val = -EIO;
 		goto err_out;
 	}
+=======
+	if (status != 0)
+		return -EIO;
+>>>>>>> v3.18
 =======
 	if (status != 0)
 		return -EIO;
@@ -3464,9 +3803,13 @@ static int ixgbe_get_module_info(struct net_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_out:
 	clear_bit(__IXGBE_READ_I2C, &adapter->state);
 	return ret_val;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -3481,6 +3824,7 @@ static int ixgbe_get_module_eeprom(struct net_device *dev,
 	u32 status = IXGBE_ERR_PHY_ADDR_INVALID;
 	u8 databyte = 0xFF;
 	int i = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret_val = 0;
 
@@ -3528,6 +3872,8 @@ err_out:
 
 	return ret_val;
 =======
+=======
+>>>>>>> v3.18
 
 	if (ee->len == 0)
 		return -EINVAL;
@@ -3549,6 +3895,9 @@ err_out:
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3590,7 +3939,11 @@ static const struct ethtool_ops ixgbe_ethtool_ops = {
 void ixgbe_set_ethtool_ops(struct net_device *netdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &ixgbe_ethtool_ops);
+=======
+	netdev->ethtool_ops = &ixgbe_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &ixgbe_ethtool_ops;
 >>>>>>> v3.18

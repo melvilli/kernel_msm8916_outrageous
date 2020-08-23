@@ -2,8 +2,13 @@ ST Ericsson Nomadik pinmux controller
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: "stericsson,nmk-pinctrl", "stericsson,nmk-pinctrl-db8540",
               "stericsson,nmk-pinctrl-stn8815"
+=======
+- compatible: "stericsson,db8500-pinctrl", "stericsson,db8540-pinctrl",
+              "stericsson,stn8815-pinctrl"
+>>>>>>> v3.18
 =======
 - compatible: "stericsson,db8500-pinctrl", "stericsson,db8540-pinctrl",
               "stericsson,stn8815-pinctrl"
@@ -74,7 +79,11 @@ Example board file extract:
 
 	pinctrl@80157000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "stericsson,nmk-pinctrl";
+=======
+		compatible = "stericsson,db8500-pinctrl";
+>>>>>>> v3.18
 =======
 		compatible = "stericsson,db8500-pinctrl";
 >>>>>>> v3.18

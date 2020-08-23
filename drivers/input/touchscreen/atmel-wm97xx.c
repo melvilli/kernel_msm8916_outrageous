@@ -373,7 +373,10 @@ err_irq:
 	free_irq(atmel_wm97xx->ac97c_irq, atmel_wm97xx);
 err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(atmel_wm97xx);
@@ -390,7 +393,10 @@ static int __exit atmel_wm97xx_remove(struct platform_device *pdev)
 	del_timer_sync(&atmel_wm97xx->pen_timer);
 	wm97xx_unregister_mach_ops(wm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(atmel_wm97xx);
@@ -400,7 +406,11 @@ static int __exit atmel_wm97xx_remove(struct platform_device *pdev)
 
 #ifdef CONFIG_PM_SLEEP
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int atmel_wm97xx_suspend(struct *dev)
+=======
+static int atmel_wm97xx_suspend(struct device *dev)
+>>>>>>> v3.18
 =======
 static int atmel_wm97xx_suspend(struct device *dev)
 >>>>>>> v3.18

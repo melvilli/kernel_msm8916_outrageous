@@ -17,7 +17,10 @@
 #include <linux/amba/pl08x.h>
 #include <linux/amba/serial.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irqchip.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/of_platform.h>
@@ -273,7 +276,10 @@ static void __init spear320_map_io(void)
 DT_MACHINE_START(SPEAR320_DT, "ST SPEAr320 SoC with Flattened Device Tree")
 	.map_io		=	spear320_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	=	irqchip_init,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	=	spear3xx_timer_init,

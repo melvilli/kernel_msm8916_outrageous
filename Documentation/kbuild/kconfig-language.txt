@@ -148,6 +148,10 @@ applicable everywhere (see syntax).
     This declares the symbol to be used as the MODULES symbol, which
     enables the third modular state for all config symbols.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    At most one symbol may have the "modules" option set.
+>>>>>>> v3.18
 =======
     At most one symbol may have the "modules" option set.
 >>>>>>> v3.18
@@ -161,11 +165,17 @@ applicable everywhere (see syntax).
     another symbol).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   - "allnoconfig_y"
     This declares the symbol as one that should have the value y when
     using "allnoconfig". Used for symbols that hide other symbols.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Menu dependencies
 -----------------

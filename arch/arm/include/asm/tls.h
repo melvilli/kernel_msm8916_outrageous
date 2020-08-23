@@ -2,6 +2,12 @@
 #define __ASMARM_TLS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+#include <asm/thread_info.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 #include <asm/thread_info.h>
@@ -57,7 +63,10 @@
 
 #ifndef __ASSEMBLY__
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline void set_tls(unsigned long val)
 {
@@ -101,6 +110,9 @@ static inline void set_tls(unsigned long val)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned long get_tpuser(void)
 {
@@ -112,7 +124,10 @@ static inline unsigned long get_tpuser(void)
 	return reg;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline void set_tpuser(unsigned long val)
 {
@@ -131,6 +146,9 @@ static inline void flush_tls(void)
 	set_tpuser(0);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #endif	/* __ASMARM_TLS_H */

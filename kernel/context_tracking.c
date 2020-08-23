@@ -20,6 +20,7 @@
 #include <linux/hardirq.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 DEFINE_PER_CPU(struct context_tracking, context_tracking) = {
 #ifdef CONFIG_CONTEXT_TRACKING_FORCE
@@ -31,6 +32,8 @@ DEFINE_PER_CPU(struct context_tracking, context_tracking) = {
  * user_enter - Inform the context tracking that the CPU is going to
  *              enter userspace mode.
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kprobes.h>
 
 #define CREATE_TRACE_POINTS
@@ -53,6 +56,9 @@ void context_tracking_cpu_set(int cpu)
 /**
  * context_tracking_user_enter - Inform the context tracking that the CPU is going to
  *                               enter userspace mode.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This function must be called right before we switch from the kernel
@@ -61,7 +67,11 @@ void context_tracking_cpu_set(int cpu)
  * function sets RCU in extended quiescent state.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void user_enter(void)
+=======
+void context_tracking_user_enter(void)
+>>>>>>> v3.18
 =======
 void context_tracking_user_enter(void)
 >>>>>>> v3.18
@@ -70,7 +80,10 @@ void context_tracking_user_enter(void)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Repeat the user_enter() check here because some archs may be calling
 	 * this from asm and if no CPU needs context tracking, they shouldn't
 	 * go further. Repeat the check here until they support the inline static
@@ -80,6 +93,9 @@ void context_tracking_user_enter(void)
 		return;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Some contexts may involve an exception occuring in an irq,
 	 * leading to that nesting:
@@ -96,6 +112,7 @@ void context_tracking_user_enter(void)
 
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__this_cpu_read(context_tracking.active) &&
 	    __this_cpu_read(context_tracking.state) != IN_USER) {
 		/*
@@ -108,6 +125,8 @@ void context_tracking_user_enter(void)
 		vtime_user_enter(current);
 		rcu_user_enter();
 =======
+=======
+>>>>>>> v3.18
 	if ( __this_cpu_read(context_tracking.state) != IN_USER) {
 		if (__this_cpu_read(context_tracking.active)) {
 			trace_user_enter(0);
@@ -134,11 +153,15 @@ void context_tracking_user_enter(void)
 		 * OTOH we can spare the calls to vtime and RCU when context_tracking.active
 		 * is false because we know that CPU is not tickless.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__this_cpu_write(context_tracking.state, IN_USER);
 	}
 	local_irq_restore(flags);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #ifdef CONFIG_PREEMPT
@@ -186,11 +209,16 @@ EXPORT_SYMBOL_GPL(preempt_schedule_context);
  * user_exit - Inform the context tracking that the CPU is
  *             exiting userspace mode and entering the kernel.
 =======
+=======
+>>>>>>> v3.18
 NOKPROBE_SYMBOL(context_tracking_user_enter);
 
 /**
  * context_tracking_user_exit - Inform the context tracking that the CPU is
  *                              exiting userspace mode and entering the kernel.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This function must be called after we entered the kernel from userspace
@@ -201,11 +229,14 @@ NOKPROBE_SYMBOL(context_tracking_user_enter);
  * handler without needing to know if we came from userspace or not.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void user_exit(void)
 {
 	unsigned long flags;
 
 =======
+=======
+>>>>>>> v3.18
 void context_tracking_user_exit(void)
 {
 	unsigned long flags;
@@ -213,12 +244,16 @@ void context_tracking_user_exit(void)
 	if (!context_tracking_is_enabled())
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (in_interrupt())
 		return;
 
 	local_irq_save(flags);
 	if (__this_cpu_read(context_tracking.state) == IN_USER) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/*
 		 * We are going to run code that may use RCU. Inform
@@ -227,6 +262,8 @@ void context_tracking_user_exit(void)
 		rcu_user_exit();
 		vtime_user_exit(current);
 =======
+=======
+>>>>>>> v3.18
 		if (__this_cpu_read(context_tracking.active)) {
 			/*
 			 * We are going to run code that may use RCU. Inform
@@ -236,11 +273,15 @@ void context_tracking_user_exit(void)
 			vtime_user_exit(current);
 			trace_user_exit(0);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__this_cpu_write(context_tracking.state, IN_KERNEL);
 	}
 	local_irq_restore(flags);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void guest_enter(void)
@@ -265,10 +306,15 @@ EXPORT_SYMBOL_GPL(guest_exit);
 /**
  * context_tracking_task_switch - context switch the syscall callbacks
 =======
+=======
+>>>>>>> v3.18
 NOKPROBE_SYMBOL(context_tracking_user_exit);
 
 /**
  * __context_tracking_task_switch - context switch the syscall callbacks
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @prev: the task that is being switched out
  * @next: the task that is being switched in
@@ -282,6 +328,7 @@ NOKPROBE_SYMBOL(context_tracking_user_exit);
  * flag may not be desired there.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void context_tracking_task_switch(struct task_struct *prev,
 			     struct task_struct *next)
 {
@@ -291,6 +338,8 @@ void context_tracking_task_switch(struct task_struct *prev,
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 void __context_tracking_task_switch(struct task_struct *prev,
 				    struct task_struct *next)
 {
@@ -307,4 +356,7 @@ void __init context_tracking_init(void)
 		context_tracking_cpu_set(cpu);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

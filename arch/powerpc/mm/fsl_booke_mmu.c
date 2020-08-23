@@ -53,6 +53,10 @@
 #include <asm/machdep.h>
 #include <asm/setup.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/paca.h>
+>>>>>>> v3.18
 =======
 #include <asm/paca.h>
 >>>>>>> v3.18
@@ -176,16 +180,22 @@ unsigned long calc_cam_sz(unsigned long ram, unsigned long virt,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long map_mem_in_cams(unsigned long ram, int max_cam_idx)
 {
 	int i;
 	unsigned long virt = PAGE_OFFSET;
 	phys_addr_t phys = memstart_addr;
 =======
+=======
+>>>>>>> v3.18
 static unsigned long map_mem_in_cams_addr(phys_addr_t phys, unsigned long virt,
 					unsigned long ram, int max_cam_idx)
 {
 	int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long amount_mapped = 0;
 
@@ -204,10 +214,13 @@ static unsigned long map_mem_in_cams_addr(phys_addr_t phys, unsigned long virt,
 	tlbcam_index = i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return amount_mapped;
 }
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC64
 	get_paca()->tcd.esel_next = i;
 	get_paca()->tcd.esel_max = mfspr(SPRN_TLB1CFG) & TLBnCFG_N_ENTRY;
@@ -225,6 +238,9 @@ unsigned long map_mem_in_cams(unsigned long ram, int max_cam_idx)
 	return map_mem_in_cams_addr(phys, virt, ram, max_cam_idx);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC32
 
@@ -254,7 +270,13 @@ void __init adjust_total_lowmem(void)
 	ram = min((phys_addr_t)__max_low_memory, (phys_addr_t)total_lowmem);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__max_low_memory = map_mem_in_cams(ram, CONFIG_LOWMEM_CAM_NUM);
+=======
+	i = switch_to_as1();
+	__max_low_memory = map_mem_in_cams(ram, CONFIG_LOWMEM_CAM_NUM);
+	restore_to_as0(i, 0, 0, 1);
+>>>>>>> v3.18
 =======
 	i = switch_to_as1();
 	__max_low_memory = map_mem_in_cams(ram, CONFIG_LOWMEM_CAM_NUM);
@@ -279,7 +301,10 @@ void setup_initial_memory_limit(phys_addr_t first_memblock_base,
 	memblock_set_current_limit(min_t(u64, limit, 0x04000000));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_RELOCATABLE
 int __initdata is_second_reloc;
@@ -338,5 +363,8 @@ notrace void __init relocate_init(u64 dt_ptr, phys_addr_t start)
 	}
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

@@ -42,8 +42,12 @@
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 handle_signal(unsigned long sig, siginfo_t *info, struct k_sigaction *ka,
 		struct pt_regs * regs);
+=======
+handle_signal(struct ksignal *ksig, struct pt_regs *regs);
+>>>>>>> v3.18
 =======
 handle_signal(struct ksignal *ksig, struct pt_regs *regs);
 >>>>>>> v3.18
@@ -87,9 +91,13 @@ handle_syscall_restart(struct pt_regs *regs, struct sigaction *sa)
 static void do_signal(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	siginfo_t info;
 	int signr;
 	struct k_sigaction ka;
+=======
+	struct ksignal ksig;
+>>>>>>> v3.18
 =======
 	struct ksignal ksig;
 >>>>>>> v3.18
@@ -104,6 +112,7 @@ static void do_signal(struct pt_regs *regs)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	signr = get_signal_to_deliver(&info, &ka, regs, 0);
 	if (signr > 0) {
 		handle_syscall_restart(regs, &ka.sa);
@@ -111,11 +120,16 @@ static void do_signal(struct pt_regs *regs)
 		/* Whee!  Actually deliver the signal.  */
 		handle_signal(signr, &info, &ka, regs);
 =======
+=======
+>>>>>>> v3.18
 	if (get_signal(&ksig)) {
 		handle_syscall_restart(regs, &ksig.ka.sa);
 
 		/* Whee!  Actually deliver the signal.  */
 		handle_signal(&ksig, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -395,6 +409,7 @@ void sa_default_restorer(void);		/* See comments below */
 void sa_default_rt_restorer(void);	/* See comments below */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int setup_frame(int sig, struct k_sigaction *ka,
 		       sigset_t *set, struct pt_regs *regs)
 {
@@ -407,6 +422,8 @@ static int setup_frame(int sig, struct k_sigaction *ka,
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 		goto give_sigsegv;
 =======
+=======
+>>>>>>> v3.18
 static int setup_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 {
 	struct sigframe __user *frame;
@@ -417,6 +434,9 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	signal = current_thread_info()->exec_domain
@@ -430,7 +450,11 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 	/* Give up earlier as i386, in case */
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto give_sigsegv;
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -442,24 +466,34 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 	/* Give up earlier as i386, in case */
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto give_sigsegv;
 
 	/* Set up to return from userspace.  If provided, use a stub
 	   already in userspace.  */
 	if (ka->sa.sa_flags & SA_RESTORER) {
 =======
+=======
+>>>>>>> v3.18
 		return -EFAULT;
 
 	/* Set up to return from userspace.  If provided, use a stub
 	   already in userspace.  */
 	if (ksig->ka.sa.sa_flags & SA_RESTORER) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * On SH5 all edited pointers are subject to NEFF
 		 */
 		DEREF_REG_PR = neff_sign_extend((unsigned long)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ka->sa.sa_restorer | 0x1);
+=======
+			ksig->ka->sa.sa_restorer | 0x1);
+>>>>>>> v3.18
 =======
 			ksig->ka->sa.sa_restorer | 0x1);
 >>>>>>> v3.18
@@ -481,7 +515,11 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 		if (__copy_to_user(frame->retcode,
 			(void *)((unsigned long)sa_default_restorer & (~1)), 16) != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto give_sigsegv;
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 =======
 			return -EFAULT;
 >>>>>>> v3.18
@@ -510,7 +548,11 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 	regs->regs[REG_ARG3] = (unsigned long long)(unsigned long)(signed long)&frame->sc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->pc = neff_sign_extend((unsigned long)ka->sa.sa_handler);
+=======
+	regs->pc = neff_sign_extend((unsigned long)ksig->ka.sa.sa_handler);
+>>>>>>> v3.18
 =======
 	regs->pc = neff_sign_extend((unsigned long)ksig->ka.sa.sa_handler);
 >>>>>>> v3.18
@@ -524,6 +566,7 @@ static int setup_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs
 		 DEREF_REG_PR >> 32, DEREF_REG_PR & 0xffffffff);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 give_sigsegv:
@@ -543,6 +586,8 @@ static int setup_rt_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 		goto give_sigsegv;
 =======
+=======
+>>>>>>> v3.18
 }
 
 static int setup_rt_frame(struct ksignal *kig, sigset_t *set,
@@ -556,6 +601,9 @@ static int setup_rt_frame(struct ksignal *kig, sigset_t *set,
 
 	if (!access_ok(VERIFY_WRITE, frame, sizeof(*frame)))
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	signal = current_thread_info()->exec_domain
@@ -567,17 +615,23 @@ static int setup_rt_frame(struct ksignal *kig, sigset_t *set,
 	err |= __put_user(&frame->info, &frame->pinfo);
 	err |= __put_user(&frame->uc, &frame->puc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err |= copy_siginfo_to_user(&frame->info, info);
 
 	/* Give up earlier as i386, in case */
 	if (err)
 		goto give_sigsegv;
 =======
+=======
+>>>>>>> v3.18
 	err |= copy_siginfo_to_user(&frame->info, &ksig->info);
 
 	/* Give up earlier as i386, in case */
 	if (err)
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Create the ucontext.  */
@@ -591,24 +645,34 @@ static int setup_rt_frame(struct ksignal *kig, sigset_t *set,
 	/* Give up earlier as i386, in case */
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto give_sigsegv;
 
 	/* Set up to return from userspace.  If provided, use a stub
 	   already in userspace.  */
 	if (ka->sa.sa_flags & SA_RESTORER) {
 =======
+=======
+>>>>>>> v3.18
 		return -EFAULT;
 
 	/* Set up to return from userspace.  If provided, use a stub
 	   already in userspace.  */
 	if (ksig->ka.sa.sa_flags & SA_RESTORER) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * On SH5 all edited pointers are subject to NEFF
 		 */
 		DEREF_REG_PR = neff_sign_extend((unsigned long)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ka->sa.sa_restorer | 0x1);
+=======
+			ksig->ka.sa.sa_restorer | 0x1);
+>>>>>>> v3.18
 =======
 			ksig->ka.sa.sa_restorer | 0x1);
 >>>>>>> v3.18
@@ -630,7 +694,11 @@ static int setup_rt_frame(struct ksignal *kig, sigset_t *set,
 		if (__copy_to_user(frame->retcode,
 			(void *)((unsigned long)sa_default_rt_restorer & (~1)), 16) != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto give_sigsegv;
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 =======
 			return -EFAULT;
 >>>>>>> v3.18
@@ -648,7 +716,11 @@ static int setup_rt_frame(struct ksignal *kig, sigset_t *set,
 	regs->regs[REG_ARG2] = (unsigned long long)(unsigned long)(signed long)&frame->info;
 	regs->regs[REG_ARG3] = (unsigned long long)(unsigned long)(signed long)&frame->uc.uc_mcontext;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->pc = neff_sign_extend((unsigned long)ka->sa.sa_handler);
+=======
+	regs->pc = neff_sign_extend((unsigned long)ksig->ka.sa.sa_handler);
+>>>>>>> v3.18
 =======
 	regs->pc = neff_sign_extend((unsigned long)ksig->ka.sa.sa_handler);
 >>>>>>> v3.18
@@ -662,10 +734,13 @@ static int setup_rt_frame(struct ksignal *kig, sigset_t *set,
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(sig, current);
 	return -EFAULT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -675,8 +750,12 @@ give_sigsegv:
  */
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 handle_signal(unsigned long sig, siginfo_t *info, struct k_sigaction *ka,
 		struct pt_regs * regs)
+=======
+handle_signal(struct ksignal *ksig, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -685,6 +764,7 @@ handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	int ret;
 
 	/* Set up the stack frame */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_SIGINFO)
 		ret = setup_rt_frame(sig, ka, info, oldset, regs);
@@ -697,12 +777,17 @@ handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	signal_delivered(sig, info, ka, regs,
 			test_thread_flag(TIF_SINGLESTEP));
 =======
+=======
+>>>>>>> v3.18
 	if (ksig->ka.sa.sa_flags & SA_SIGINFO)
 		ret = setup_rt_frame(ksig, oldset, regs);
 	else
 		ret = setup_frame(ksig, oldset, regs);
 
 	signal_setup_done(ret, ksig, test_thread_flag(TIF_SINGLESTEP));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

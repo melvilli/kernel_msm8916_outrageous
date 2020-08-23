@@ -19,10 +19,16 @@ static __le32 ext4_mmp_csum(struct super_block *sb, struct mmp_struct *mmp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ext4_mmp_csum_verify(struct super_block *sb, struct mmp_struct *mmp)
 {
 	if (!EXT4_HAS_RO_COMPAT_FEATURE(sb,
 				       EXT4_FEATURE_RO_COMPAT_METADATA_CSUM))
+=======
+static int ext4_mmp_csum_verify(struct super_block *sb, struct mmp_struct *mmp)
+{
+	if (!ext4_has_metadata_csum(sb))
+>>>>>>> v3.18
 =======
 static int ext4_mmp_csum_verify(struct super_block *sb, struct mmp_struct *mmp)
 {
@@ -34,10 +40,16 @@ static int ext4_mmp_csum_verify(struct super_block *sb, struct mmp_struct *mmp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ext4_mmp_csum_set(struct super_block *sb, struct mmp_struct *mmp)
 {
 	if (!EXT4_HAS_RO_COMPAT_FEATURE(sb,
 				       EXT4_FEATURE_RO_COMPAT_METADATA_CSUM))
+=======
+static void ext4_mmp_csum_set(struct super_block *sb, struct mmp_struct *mmp)
+{
+	if (!ext4_has_metadata_csum(sb))
+>>>>>>> v3.18
 =======
 static void ext4_mmp_csum_set(struct super_block *sb, struct mmp_struct *mmp)
 {
@@ -272,7 +284,11 @@ static unsigned int mmp_new_seq(void)
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		get_random_bytes(&new_seq, sizeof(u32));
+=======
+		new_seq = prandom_u32();
+>>>>>>> v3.18
 =======
 		new_seq = prandom_u32();
 >>>>>>> v3.18

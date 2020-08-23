@@ -40,6 +40,10 @@ enum {
 	NFSD_Ports,
 	NFSD_MaxBlkSize,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NFSD_MaxConnections,
+>>>>>>> v3.18
 =======
 	NFSD_MaxConnections,
 >>>>>>> v3.18
@@ -53,6 +57,10 @@ enum {
 	NFSD_Gracetime,
 	NFSD_RecoveryDir,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	NFSD_V4EndGrace,
+>>>>>>> v3.18
 =======
 	NFSD_V4EndGrace,
 >>>>>>> v3.18
@@ -71,6 +79,10 @@ static ssize_t write_versions(struct file *file, char *buf, size_t size);
 static ssize_t write_ports(struct file *file, char *buf, size_t size);
 static ssize_t write_maxblksize(struct file *file, char *buf, size_t size);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static ssize_t write_maxconn(struct file *file, char *buf, size_t size);
+>>>>>>> v3.18
 =======
 static ssize_t write_maxconn(struct file *file, char *buf, size_t size);
 >>>>>>> v3.18
@@ -79,6 +91,10 @@ static ssize_t write_leasetime(struct file *file, char *buf, size_t size);
 static ssize_t write_gracetime(struct file *file, char *buf, size_t size);
 static ssize_t write_recoverydir(struct file *file, char *buf, size_t size);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static ssize_t write_v4_end_grace(struct file *file, char *buf, size_t size);
+>>>>>>> v3.18
 =======
 static ssize_t write_v4_end_grace(struct file *file, char *buf, size_t size);
 >>>>>>> v3.18
@@ -94,6 +110,10 @@ static ssize_t (*write_op[])(struct file *, char *, size_t) = {
 	[NFSD_Ports] = write_ports,
 	[NFSD_MaxBlkSize] = write_maxblksize,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[NFSD_MaxConnections] = write_maxconn,
+>>>>>>> v3.18
 =======
 	[NFSD_MaxConnections] = write_maxconn,
 >>>>>>> v3.18
@@ -102,6 +122,10 @@ static ssize_t (*write_op[])(struct file *, char *, size_t) = {
 	[NFSD_Gracetime] = write_gracetime,
 	[NFSD_RecoveryDir] = write_recoverydir,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[NFSD_V4EndGrace] = write_v4_end_grace,
+>>>>>>> v3.18
 =======
 	[NFSD_V4EndGrace] = write_v4_end_grace,
 >>>>>>> v3.18
@@ -394,8 +418,12 @@ static ssize_t write_filehandle(struct file *file, char *buf, size_t size)
 	if (maxsize < NFS_FHSIZE)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (maxsize > NFS3_FHSIZE)
 		maxsize = NFS3_FHSIZE;
+=======
+	maxsize = min(maxsize, NFS3_FHSIZE);
+>>>>>>> v3.18
 =======
 	maxsize = min(maxsize, NFS3_FHSIZE);
 >>>>>>> v3.18
@@ -900,10 +928,15 @@ static ssize_t write_maxblksize(struct file *file, char *buf, size_t size)
 		 * required alignment.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bsize < 1024)
 			bsize = 1024;
 		if (bsize > NFSSVC_MAXBLKSIZE)
 			bsize = NFSSVC_MAXBLKSIZE;
+=======
+		bsize = max_t(int, bsize, 1024);
+		bsize = min_t(int, bsize, NFSSVC_MAXBLKSIZE);
+>>>>>>> v3.18
 =======
 		bsize = max_t(int, bsize, 1024);
 		bsize = min_t(int, bsize, NFSSVC_MAXBLKSIZE);
@@ -923,7 +956,10 @@ static ssize_t write_maxblksize(struct file *file, char *buf, size_t size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * write_maxconn - Set or report the current max number of connections
  *
@@ -962,6 +998,9 @@ static ssize_t write_maxconn(struct file *file, char *buf, size_t size)
 	return scnprintf(buf, SIMPLE_TRANSACTION_LIMIT, "%u\n", maxconn);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_NFSD_V4
 static ssize_t __nfsd4_write_time(struct file *file, char *buf, size_t size,
@@ -1114,7 +1153,10 @@ static ssize_t write_recoverydir(struct file *file, char *buf, size_t size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * write_v4_end_grace - release grace period for nfsd's v4.x lock manager
  *
@@ -1156,6 +1198,9 @@ static ssize_t write_v4_end_grace(struct file *file, char *buf, size_t size)
 			 nn->grace_ended ? 'Y' : 'N');
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -1183,6 +1228,10 @@ static int nfsd_fill_super(struct super_block * sb, void * data, int silent)
 		[NFSD_Ports] = {"portlist", &transaction_ops, S_IWUSR|S_IRUGO},
 		[NFSD_MaxBlkSize] = {"max_block_size", &transaction_ops, S_IWUSR|S_IRUGO},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		[NFSD_MaxConnections] = {"max_connections", &transaction_ops, S_IWUSR|S_IRUGO},
+>>>>>>> v3.18
 =======
 		[NFSD_MaxConnections] = {"max_connections", &transaction_ops, S_IWUSR|S_IRUGO},
 >>>>>>> v3.18
@@ -1194,6 +1243,10 @@ static int nfsd_fill_super(struct super_block * sb, void * data, int silent)
 		[NFSD_Gracetime] = {"nfsv4gracetime", &transaction_ops, S_IWUSR|S_IRUSR},
 		[NFSD_RecoveryDir] = {"nfsv4recoverydir", &transaction_ops, S_IWUSR|S_IRUSR},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		[NFSD_V4EndGrace] = {"v4_end_grace", &transaction_ops, S_IWUSR|S_IRUGO},
+>>>>>>> v3.18
 =======
 		[NFSD_V4EndGrace] = {"v4_end_grace", &transaction_ops, S_IWUSR|S_IRUGO},
 >>>>>>> v3.18
@@ -1306,7 +1359,10 @@ static int __init init_nfsd(void)
 	if (retval)
 		goto out_unregister_pernet;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nfs4_state_init();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	retval = nfsd_fault_inject_init(); /* nfsd fault injection controls */

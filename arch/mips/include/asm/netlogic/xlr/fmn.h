@@ -176,11 +176,17 @@
 #define nlm_write_c2_cc15(s, v)		__write_32bit_c2_register($31, s, v)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define nlm_read_c2_status0()		__read_32bit_c2_register($2, 0)
 #define nlm_write_c2_status0(v)		__write_32bit_c2_register($2, 0, v)
 #define nlm_read_c2_status1()		__read_32bit_c2_register($2, 1)
 #define nlm_write_c2_status1(v)		__write_32bit_c2_register($2, 1, v)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define nlm_read_c2_status(sel)		__read_32bit_c2_register($2, 0)
 #define nlm_read_c2_config()		__read_32bit_c2_register($3, 0)
@@ -245,7 +251,11 @@ static inline void nlm_msgwait(unsigned int mask)
  * Disable interrupts and enable COP2 access
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline uint32_t nlm_cop2_enable(void)
+=======
+static inline uint32_t nlm_cop2_enable_irqsave(void)
+>>>>>>> v3.18
 =======
 static inline uint32_t nlm_cop2_enable_irqsave(void)
 >>>>>>> v3.18
@@ -257,7 +267,11 @@ static inline uint32_t nlm_cop2_enable_irqsave(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void nlm_cop2_restore(uint32_t sr)
+=======
+static inline void nlm_cop2_disable_irqrestore(uint32_t sr)
+>>>>>>> v3.18
 =======
 static inline void nlm_cop2_disable_irqrestore(uint32_t sr)
 >>>>>>> v3.18
@@ -312,7 +326,11 @@ static inline int nlm_fmn_send(unsigned int size, unsigned int code,
 	for (i = 0; i < 8; i++) {
 		nlm_msgsnd(dest);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = nlm_read_c2_status(0);
+=======
+		status = nlm_read_c2_status0();
+>>>>>>> v3.18
 =======
 		status = nlm_read_c2_status0();
 >>>>>>> v3.18
@@ -336,7 +354,11 @@ static inline int nlm_fmn_receive(int bucket, int *size, int *code, int *stid,
 	/* wait for load pending to clear */
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = nlm_read_c2_status(1);
+=======
+		status = nlm_read_c2_status0();
+>>>>>>> v3.18
 =======
 		status = nlm_read_c2_status0();
 >>>>>>> v3.18

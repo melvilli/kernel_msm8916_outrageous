@@ -40,8 +40,12 @@ struct cache_desc {
 
 struct cpuinfo_mips {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		udelay_val;
 	unsigned int		asid_cache;
+=======
+	unsigned long		asid_cache;
+>>>>>>> v3.18
 =======
 	unsigned long		asid_cache;
 >>>>>>> v3.18
@@ -49,6 +53,7 @@ struct cpuinfo_mips {
 	/*
 	 * Capability and feature descriptor structure for MIPS CPU
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long		options;
 	unsigned long		ases;
@@ -58,6 +63,8 @@ struct cpuinfo_mips {
 	int			isa_level;
 	int			tlbsize;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long		ases;
 	unsigned long long	options;
 	unsigned int		udelay_val;
@@ -70,6 +77,9 @@ struct cpuinfo_mips {
 	int			tlbsizevtlb;
 	int			tlbsizeftlbsets;
 	int			tlbsizeftlbways;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct cache_desc	icache; /* Primary I-cache */
 	struct cache_desc	dcache; /* Primary D or combined I/D cache */
@@ -77,6 +87,10 @@ struct cpuinfo_mips {
 	struct cache_desc	tcache; /* Tertiary/split secondary cache */
 	int			srsets; /* Shadow register sets */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			package;/* physical package number */
+>>>>>>> v3.18
 =======
 	int			package;/* physical package number */
 >>>>>>> v3.18
@@ -84,6 +98,7 @@ struct cpuinfo_mips {
 #ifdef CONFIG_64BIT
 	int			vmbits; /* Virtual memory size in bits */
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_MIPS_MT_SMP) || defined(CONFIG_MIPS_MT_SMTC)
 	/*
@@ -98,6 +113,8 @@ struct cpuinfo_mips {
 	int			tc_id;	 /* Thread Context number */
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MIPS_MT_SMP
 	/*
 	 * There is not necessarily a 1:1 mapping of VPE num to CPU number
@@ -105,6 +122,9 @@ struct cpuinfo_mips {
 	 */
 	int			vpe_id;	 /* Virtual Processor number */
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void			*data;	/* Additional data */
 	unsigned int		watch_reg_count;   /* Number that exist */
@@ -113,12 +133,18 @@ struct cpuinfo_mips {
 	u16			watch_reg_masks[NUM_WATCH_REGS];
 	unsigned int		kscratch_mask; /* Usable KScratch mask. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Cache Coherency attribute for write-combine memory writes.
 	 * (shifted by _CACHE_SHIFT)
 	 */
 	unsigned int		writecombine;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__((aligned(SMP_CACHE_BYTES)));
 
@@ -126,6 +152,10 @@ extern struct cpuinfo_mips cpu_data[];
 #define current_cpu_data cpu_data[smp_processor_id()]
 #define raw_current_cpu_data cpu_data[raw_smp_processor_id()]
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define boot_cpu_data cpu_data[0]
+>>>>>>> v3.18
 =======
 #define boot_cpu_data cpu_data[0]
 >>>>>>> v3.18
@@ -137,7 +167,10 @@ extern const char *__cpu_name[];
 #define cpu_name_string()	__cpu_name[smp_processor_id()]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct seq_file;
 struct notifier_block;
 
@@ -165,5 +198,8 @@ struct proc_cpuinfo_notifier_args {
 # define cpu_vpe_id(cpuinfo)	({ (void)cpuinfo; 0; })
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_CPU_INFO_H */

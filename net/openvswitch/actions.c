@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2007-2012 Nicira, Inc.
+=======
+ * Copyright (c) 2007-2014 Nicira, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2007-2014 Nicira, Inc.
 >>>>>>> v3.18
@@ -27,6 +31,10 @@
 #include <linux/ip.h>
 #include <linux/openvswitch.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sctp.h>
+>>>>>>> v3.18
 =======
 #include <linux/sctp.h>
 >>>>>>> v3.18
@@ -40,6 +48,7 @@
 #include <net/checksum.h>
 #include <net/dsfield.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "datapath.h"
 #include "vport.h"
@@ -47,6 +56,8 @@
 static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 			const struct nlattr *attr, int len, bool keep_skb);
 =======
+=======
+>>>>>>> v3.18
 #include <net/sctp/checksum.h>
 
 #include "datapath.h"
@@ -121,6 +132,9 @@ static struct deferred_action *add_deferred_actions(struct sk_buff *skb,
 
 	return da;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int make_writable(struct sk_buff *skb, int write_len)
@@ -221,15 +235,21 @@ static int set_eth_addr(struct sk_buff *skb,
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(eth_hdr(skb)->h_source, eth_key->eth_src, ETH_ALEN);
 	memcpy(eth_hdr(skb)->h_dest, eth_key->eth_dst, ETH_ALEN);
 =======
+=======
+>>>>>>> v3.18
 	skb_postpull_rcsum(skb, eth_hdr(skb), ETH_ALEN * 2);
 
 	ether_addr_copy(eth_hdr(skb)->h_source, eth_key->eth_src);
 	ether_addr_copy(eth_hdr(skb)->h_dest, eth_key->eth_dst);
 
 	ovs_skb_postpush_rcsum(skb, eth_hdr(skb), ETH_ALEN * 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -259,7 +279,11 @@ static void set_ip_addr(struct sk_buff *skb, struct iphdr *nh,
 
 	csum_replace4(&nh->check, *addr, new_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->rxhash = 0;
+=======
+	skb_clear_hash(skb);
+>>>>>>> v3.18
 =======
 	skb_clear_hash(skb);
 >>>>>>> v3.18
@@ -272,17 +296,23 @@ static void update_ipv6_checksum(struct sk_buff *skb, u8 l4_proto,
 	int transport_len = skb->len - skb_transport_offset(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (l4_proto == IPPROTO_TCP) {
 		if (likely(transport_len >= sizeof(struct tcphdr)))
 			inet_proto_csum_replace16(&tcp_hdr(skb)->check, skb,
 						  addr, new_addr, 1);
 	} else if (l4_proto == IPPROTO_UDP) {
 =======
+=======
+>>>>>>> v3.18
 	if (l4_proto == NEXTHDR_TCP) {
 		if (likely(transport_len >= sizeof(struct tcphdr)))
 			inet_proto_csum_replace16(&tcp_hdr(skb)->check, skb,
 						  addr, new_addr, 1);
 	} else if (l4_proto == NEXTHDR_UDP) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (likely(transport_len >= sizeof(struct udphdr))) {
 			struct udphdr *uh = udp_hdr(skb);
@@ -295,11 +325,17 @@ static void update_ipv6_checksum(struct sk_buff *skb, u8 l4_proto,
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else if (l4_proto == NEXTHDR_ICMP) {
 		if (likely(transport_len >= sizeof(struct icmp6hdr)))
 			inet_proto_csum_replace16(&icmp6_hdr(skb)->icmp6_cksum,
 						  skb, addr, new_addr, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -312,7 +348,11 @@ static void set_ipv6_addr(struct sk_buff *skb, u8 l4_proto,
 		update_ipv6_checksum(skb, l4_proto, addr, new_addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->rxhash = 0;
+=======
+	skb_clear_hash(skb);
+>>>>>>> v3.18
 =======
 	skb_clear_hash(skb);
 >>>>>>> v3.18
@@ -413,7 +453,11 @@ static void set_tp_port(struct sk_buff *skb, __be16 *port,
 	inet_proto_csum_replace2(check, skb, *port, new_port, 0);
 	*port = new_port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->rxhash = 0;
+=======
+	skb_clear_hash(skb);
+>>>>>>> v3.18
 =======
 	skb_clear_hash(skb);
 >>>>>>> v3.18
@@ -431,7 +475,11 @@ static void set_udp_port(struct sk_buff *skb, __be16 *port, __be16 new_port)
 	} else {
 		*port = new_port;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb->rxhash = 0;
+=======
+		skb_clear_hash(skb);
+>>>>>>> v3.18
 =======
 		skb_clear_hash(skb);
 >>>>>>> v3.18
@@ -479,7 +527,10 @@ static int set_tcp(struct sk_buff *skb, const struct ovs_key_tcp *tcp_port_key)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int set_sctp(struct sk_buff *skb,
 		     const struct ovs_key_sctp *sctp_port_key)
 {
@@ -513,6 +564,9 @@ static int set_sctp(struct sk_buff *skb,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int do_output(struct datapath *dp, struct sk_buff *skb, int out_port)
 {
@@ -533,7 +587,11 @@ static int do_output(struct datapath *dp, struct sk_buff *skb, int out_port)
 
 static int output_userspace(struct datapath *dp, struct sk_buff *skb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    const struct nlattr *attr)
+=======
+			    struct sw_flow_key *key, const struct nlattr *attr)
+>>>>>>> v3.18
 =======
 			    struct sw_flow_key *key, const struct nlattr *attr)
 >>>>>>> v3.18
@@ -544,7 +602,11 @@ static int output_userspace(struct datapath *dp, struct sk_buff *skb,
 
 	upcall.cmd = OVS_PACKET_CMD_ACTION;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	upcall.key = &OVS_CB(skb)->flow->key;
+=======
+	upcall.key = key;
+>>>>>>> v3.18
 =======
 	upcall.key = key;
 >>>>>>> v3.18
@@ -568,9 +630,12 @@ static int output_userspace(struct datapath *dp, struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sample(struct datapath *dp, struct sk_buff *skb,
 		  const struct nlattr *attr)
 =======
+=======
+>>>>>>> v3.18
 static bool last_action(const struct nlattr *a, int rem)
 {
 	return a->nla_len == rem;
@@ -578,6 +643,9 @@ static bool last_action(const struct nlattr *a, int rem)
 
 static int sample(struct datapath *dp, struct sk_buff *skb,
 		  struct sw_flow_key *key, const struct nlattr *attr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const struct nlattr *acts_list = NULL;
@@ -589,7 +657,11 @@ static int sample(struct datapath *dp, struct sk_buff *skb,
 		switch (nla_type(a)) {
 		case OVS_SAMPLE_ATTR_PROBABILITY:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (net_random() >= nla_get_u32(a))
+=======
+			if (prandom_u32() >= nla_get_u32(a))
+>>>>>>> v3.18
 =======
 			if (prandom_u32() >= nla_get_u32(a))
 >>>>>>> v3.18
@@ -603,9 +675,12 @@ static int sample(struct datapath *dp, struct sk_buff *skb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return do_execute_actions(dp, skb, nla_data(acts_list),
 						 nla_len(acts_list), true);
 =======
+=======
+>>>>>>> v3.18
 	rem = nla_len(acts_list);
 	a = nla_data(acts_list);
 
@@ -650,6 +725,9 @@ static void execute_hash(struct sk_buff *skb, struct sw_flow_key *key,
 		hash = 0x1;
 
 	key->ovs_flow_hash = hash;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -668,11 +746,17 @@ static int execute_set_action(struct sk_buff *skb,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case OVS_KEY_ATTR_TUNNEL_INFO:
 		OVS_CB(skb)->egress_tun_info = nla_data(nested_attr);
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case OVS_KEY_ATTR_ETHERNET:
 		err = set_eth_addr(skb, nla_data(nested_attr));
@@ -694,11 +778,17 @@ static int execute_set_action(struct sk_buff *skb,
 		err = set_udp(skb, nla_data(nested_attr));
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	case OVS_KEY_ATTR_SCTP:
 		err = set_sctp(skb, nla_data(nested_attr));
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -706,10 +796,13 @@ static int execute_set_action(struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Execute a list of actions against 'skb'. */
 static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 			const struct nlattr *attr, int len, bool keep_skb)
 =======
+=======
+>>>>>>> v3.18
 static int execute_recirc(struct datapath *dp, struct sk_buff *skb,
 			  struct sw_flow_key *key,
 			  const struct nlattr *a, int rem)
@@ -752,6 +845,9 @@ static int execute_recirc(struct datapath *dp, struct sk_buff *skb,
 static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 			      struct sw_flow_key *key,
 			      const struct nlattr *attr, int len)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* Every output action needs a separate clone of 'skb', but the common
@@ -778,13 +874,19 @@ static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 
 		case OVS_ACTION_ATTR_USERSPACE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			output_userspace(dp, skb, a);
 =======
+=======
+>>>>>>> v3.18
 			output_userspace(dp, skb, key, a);
 			break;
 
 		case OVS_ACTION_ATTR_HASH:
 			execute_hash(skb, key, a);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 
@@ -799,7 +901,10 @@ static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case OVS_ACTION_ATTR_RECIRC:
 			err = execute_recirc(dp, skb, key, a, rem);
 			if (last_action(a, rem)) {
@@ -811,6 +916,9 @@ static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 			}
 			break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case OVS_ACTION_ATTR_SET:
 			err = execute_set_action(skb, nla_data(a));
@@ -818,7 +926,11 @@ static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 
 		case OVS_ACTION_ATTR_SAMPLE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = sample(dp, skb, a);
+=======
+			err = sample(dp, skb, key, a);
+>>>>>>> v3.18
 =======
 			err = sample(dp, skb, key, a);
 >>>>>>> v3.18
@@ -832,6 +944,7 @@ static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (prev_port != -1) {
 		if (keep_skb)
 			skb = skb_clone(skb, GFP_ATOMIC);
@@ -843,11 +956,17 @@ static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
 		do_output(dp, skb, prev_port);
 	else
 >>>>>>> v3.18
+=======
+	if (prev_port != -1)
+		do_output(dp, skb, prev_port);
+	else
+>>>>>>> v3.18
 		consume_skb(skb);
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Execute a list of actions against 'skb'. */
 int ovs_execute_actions(struct datapath *dp, struct sk_buff *skb)
@@ -857,6 +976,8 @@ int ovs_execute_actions(struct datapath *dp, struct sk_buff *skb)
 	return do_execute_actions(dp, skb, acts->actions,
 					 acts->actions_len, false);
 =======
+=======
+>>>>>>> v3.18
 static void process_deferred_actions(struct datapath *dp)
 {
 	struct action_fifo *fifo = this_cpu_ptr(action_fifos);
@@ -917,5 +1038,8 @@ int action_fifos_init(void)
 void action_fifos_exit(void)
 {
 	free_percpu(action_fifos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

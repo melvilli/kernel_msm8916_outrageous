@@ -32,8 +32,11 @@
 #include <linux/mutex.h>
 #include <linux/shmem_fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/ashmem.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "ashmem.h"
@@ -42,6 +45,7 @@
 #define ASHMEM_NAME_PREFIX_LEN (sizeof(ASHMEM_NAME_PREFIX) - 1)
 #define ASHMEM_FULL_NAME_LEN (ASHMEM_NAME_LEN + ASHMEM_NAME_PREFIX_LEN)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * ashmem_area - anonymous shared memory area
@@ -72,6 +76,8 @@ struct ashmem_range {
 	size_t pgend;			/* ending page, inclusive */
 	unsigned int purged;		/* ASHMEM_NOT or ASHMEM_WAS_PURGED */
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct ashmem_area - The anonymous shared memory area
  * @name:		The optional name in /proc/pid/maps
@@ -112,6 +118,9 @@ struct ashmem_range {
 	size_t pgstart;
 	size_t pgend;
 	unsigned int purged;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -119,11 +128,14 @@ struct ashmem_range {
 static LIST_HEAD(ashmem_lru_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Count of pages on our LRU list, protected by ashmem_mutex */
 static unsigned long lru_count;
 
 /*
 =======
+=======
+>>>>>>> v3.18
 /**
  * long lru_count - The count of pages on our LRU list.
  *
@@ -132,6 +144,9 @@ static unsigned long lru_count;
 static unsigned long lru_count;
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * ashmem_mutex - protects the list of and each individual ashmem_area
  *
@@ -167,7 +182,10 @@ static struct kmem_cache *ashmem_range_cachep __read_mostly;
 #define PROT_MASK		(PROT_EXEC | PROT_READ | PROT_WRITE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * lru_add() - Adds a range of memory to the LRU list
  * @range:     The memory range being added.
@@ -175,6 +193,9 @@ static struct kmem_cache *ashmem_range_cachep __read_mostly;
  * The range is first added to the end (tail) of the LRU list.
  * After this, the size of the range is added to @lru_count
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void lru_add(struct ashmem_range *range)
 {
@@ -183,7 +204,10 @@ static inline void lru_add(struct ashmem_range *range)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * lru_del() - Removes a range of memory from the LRU list
  * @range:     The memory range being removed
@@ -191,6 +215,9 @@ static inline void lru_add(struct ashmem_range *range)
  * The range is first deleted from the LRU list.
  * After this, the size of the range is removed from @lru_count
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void lru_del(struct ashmem_range *range)
 {
@@ -198,6 +225,7 @@ static inline void lru_del(struct ashmem_range *range)
 	lru_count -= range_size(range);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * range_alloc - allocate and initialize a new ashmem_range structure
@@ -210,6 +238,8 @@ static inline void lru_del(struct ashmem_range *range)
  *
  * Caller must hold ashmem_mutex.
 =======
+=======
+>>>>>>> v3.18
 /**
  * range_alloc() - Allocates and initializes a new ashmem_range structure
  * @asma:	   The associated ashmem_area
@@ -221,6 +251,9 @@ static inline void lru_del(struct ashmem_range *range)
  * This function is protected by ashmem_mutex.
  *
  * Return: 0 if successful, or -ENOMEM if there is an error
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static int range_alloc(struct ashmem_area *asma,
@@ -247,11 +280,17 @@ static int range_alloc(struct ashmem_area *asma,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * range_del() - Deletes and dealloctes an ashmem_range structure
  * @range:	 The associated ashmem_range that has previously been allocated
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void range_del(struct ashmem_range *range)
 {
@@ -262,11 +301,14 @@ static void range_del(struct ashmem_range *range)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * range_shrink - shrinks a range
  *
  * Caller must hold ashmem_mutex.
 =======
+=======
+>>>>>>> v3.18
 /**
  * range_shrink() - Shrinks an ashmem_range
  * @range:	    The associated ashmem_range being shrunk
@@ -278,6 +320,9 @@ static void range_del(struct ashmem_range *range)
  *
  * Theoretically, with a little tweaking, this could eventually be changed
  * to range_resize, and expand the lru_count if the new range is larger.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static inline void range_shrink(struct ashmem_range *range,
@@ -293,7 +338,10 @@ static inline void range_shrink(struct ashmem_range *range,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * ashmem_open() - Opens an Anonymous Shared Memory structure
  * @inode:	   The backing file's index node(?)
@@ -304,6 +352,9 @@ static inline void range_shrink(struct ashmem_range *range,
  *
  * Return: 0 if successful, or another code if unsuccessful.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ashmem_open(struct inode *inode, struct file *file)
 {
@@ -327,7 +378,10 @@ static int ashmem_open(struct inode *inode, struct file *file)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * ashmem_release() - Releases an Anonymous Shared Memory structure
  * @ignored:	      The backing file's Index Node(?) - It is ignored here.
@@ -336,6 +390,9 @@ static int ashmem_open(struct inode *inode, struct file *file)
  * Return: 0 if successful. If it is anything else, go have a coffee and
  * try again.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ashmem_release(struct inode *ignored, struct file *file)
 {
@@ -355,7 +412,10 @@ static int ashmem_release(struct inode *ignored, struct file *file)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * ashmem_read() - Reads a set of bytes from an Ashmem-enabled file
  * @file:	   The associated backing file.
@@ -365,6 +425,9 @@ static int ashmem_release(struct inode *ignored, struct file *file)
  *
  * Return: 0 if successful, or another return code if not.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t ashmem_read(struct file *file, char __user *buf,
 			   size_t len, loff_t *pos)
@@ -421,7 +484,11 @@ static loff_t ashmem_llseek(struct file *file, loff_t offset, int origin)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = asma->file->f_op->llseek(asma->file, offset, origin);
+=======
+	ret = vfs_llseek(asma->file, offset, origin);
+>>>>>>> v3.18
 =======
 	ret = vfs_llseek(asma->file, offset, origin);
 >>>>>>> v3.18
@@ -482,6 +549,7 @@ static int ashmem_mmap(struct file *file, struct vm_area_struct *vma)
 	get_file(asma->file);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vma->vm_flags & VM_SHARED)
 		shmem_set_file(vma, asma->file);
 	else {
@@ -491,6 +559,8 @@ static int ashmem_mmap(struct file *file, struct vm_area_struct *vma)
 	}
 	asma->vm_start = vma->vm_start;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * XXX - Reworked to use shmem_zero_setup() instead of
 	 * shmem_set_file while we're in staging. -jstultz
@@ -506,6 +576,9 @@ static int ashmem_mmap(struct file *file, struct vm_area_struct *vma)
 	if (vma->vm_file)
 		fput(vma->vm_file);
 	vma->vm_file = asma->file;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -517,6 +590,7 @@ out:
  * ashmem_shrink - our cache shrinker, called from mm/vmscan.c :: shrink_slab
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 'nr_to_scan' is the number of objects (pages) to prune, or 0 to query how
  * many objects (pages) we have in total.
  *
@@ -524,11 +598,16 @@ out:
  *
  * Return value is the number of objects (pages) remaining, or -1 if we cannot
 =======
+=======
+>>>>>>> v3.18
  * 'nr_to_scan' is the number of objects to scan for freeing.
  *
  * 'gfp_mask' is the mask of the allocation that got us into this mess.
  *
  * Return value is the number of objects freed or -1 if we cannot
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * proceed without risk of deadlock (due to gfp_mask).
  *
@@ -536,6 +615,7 @@ out:
  * chunks of ashmem regions LRU-wise one-at-a-time until we hit 'nr_to_scan'
  * pages freed.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ashmem_shrink(struct shrinker *s, struct shrink_control *sc)
 {
@@ -551,6 +631,8 @@ static int ashmem_shrink(struct shrinker *s, struct shrink_control *sc)
 		return -1;
 
 =======
+=======
+>>>>>>> v3.18
 static unsigned long
 ashmem_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 {
@@ -562,6 +644,9 @@ ashmem_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 		return SHRINK_STOP;
 
 	mutex_lock(&ashmem_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_for_each_entry_safe(range, next, &ashmem_lru_list, lru) {
 		loff_t start = range->pgstart * PAGE_SIZE;
@@ -574,6 +659,7 @@ ashmem_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 		lru_del(range);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sc->nr_to_scan -= range_size(range);
 		if (sc->nr_to_scan <= 0)
 			break;
@@ -581,6 +667,8 @@ ashmem_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 	mutex_unlock(&ashmem_mutex);
 
 =======
+=======
+>>>>>>> v3.18
 		freed += range_size(range);
 		if (--sc->nr_to_scan <= 0)
 			break;
@@ -597,20 +685,29 @@ ashmem_shrink_count(struct shrinker *shrink, struct shrink_control *sc)
 	 * objects on the list. This means the scan function needs to return the
 	 * number of pages freed, not the number of objects scanned.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return lru_count;
 }
 
 static struct shrinker ashmem_shrinker = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shrink = ashmem_shrink,
 =======
+=======
+>>>>>>> v3.18
 	.count_objects = ashmem_shrink_count,
 	.scan_objects = ashmem_shrink_scan,
 	/*
 	 * XXX (dchinner): I wish people would comment on why they need on
 	 * significant changes to the default value here
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.seeks = DEFAULT_SEEKS * 4,
 };
@@ -893,7 +990,10 @@ static long ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	case ASHMEM_SET_SIZE:
 		ret = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_lock(&ashmem_mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (!asma->file) {
@@ -901,7 +1001,10 @@ static long ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			asma->size = (size_t) arg;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&ashmem_mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -925,17 +1028,23 @@ static long ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			struct shrink_control sc = {
 				.gfp_mask = GFP_KERNEL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				.nr_to_scan = 0,
 			};
 			ret = ashmem_shrink(&ashmem_shrinker, &sc);
 			sc.nr_to_scan = ret;
 			ashmem_shrink(&ashmem_shrinker, &sc);
 =======
+=======
+>>>>>>> v3.18
 				.nr_to_scan = LONG_MAX,
 			};
 			ret = ashmem_shrink_count(&ashmem_shrinker, &sc);
 			nodes_setall(sc.nodes_to_scan);
 			ashmem_shrink_scan(&ashmem_shrinker, &sc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -947,7 +1056,12 @@ static long ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 /* support of 32bit userspace on 64bit platforms */
 #ifdef CONFIG_COMPAT
 <<<<<<< HEAD
+<<<<<<< HEAD
 static long compat_ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+=======
+static long compat_ashmem_ioctl(struct file *file, unsigned int cmd,
+				unsigned long arg)
+>>>>>>> v3.18
 =======
 static long compat_ashmem_ioctl(struct file *file, unsigned int cmd,
 				unsigned long arg)
@@ -985,6 +1099,7 @@ static struct miscdevice ashmem_misc = {
 	.fops = &ashmem_fops,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int is_ashmem_file(struct file *file)
 {
@@ -1037,6 +1152,8 @@ void put_ashmem_file(struct file *file)
 }
 EXPORT_SYMBOL(put_ashmem_file);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __init ashmem_init(void)

@@ -15,6 +15,10 @@
 #include <linux/gpio.h>
 #include <linux/mfd/asic3.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "irqs.h" /* PXA_NR_BUILTIN_GPIO */
+>>>>>>> v3.18
 =======
 #include "irqs.h" /* PXA_NR_BUILTIN_GPIO */
 >>>>>>> v3.18

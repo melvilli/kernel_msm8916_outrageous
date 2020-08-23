@@ -3,7 +3,10 @@
  *
  * Copyright (C) 2013 Samsung Electronics Co., Ltd.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Author: Sylwester Nawrocki <s.nawrocki@samsung.com>
@@ -12,6 +15,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/delay.h>
 #include <linux/device.h>
@@ -277,6 +281,8 @@ static const struct sensor_drv_data s5k6a3_drvdata = {
 
 static const struct of_device_id fimc_is_sensor_of_match[] = {
 =======
+=======
+>>>>>>> v3.18
 
 #include "fimc-is-sensor.h"
 
@@ -286,6 +292,9 @@ static const struct sensor_drv_data s5k6a3_drvdata = {
 };
 
 static const struct of_device_id fimc_is_sensor_of_ids[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.compatible	= "samsung,s5k6a3",
@@ -294,6 +303,7 @@ static const struct of_device_id fimc_is_sensor_of_ids[] = {
 	{  }
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct i2c_driver fimc_is_sensor_driver = {
 	.driver = {
@@ -320,6 +330,8 @@ MODULE_AUTHOR("Sylwester Nawrocki <s.nawrocki@samsung.com>");
 MODULE_DESCRIPTION("Exynos4x12 FIMC-IS image sensor subdev driver");
 MODULE_LICENSE("GPL");
 =======
+=======
+>>>>>>> v3.18
 const struct sensor_drv_data *fimc_is_sensor_get_drvdata(
 			struct device_node *node)
 {
@@ -328,4 +340,7 @@ const struct sensor_drv_data *fimc_is_sensor_get_drvdata(
 	of_id = of_match_node(fimc_is_sensor_of_ids, node);
 	return of_id ? of_id->data : NULL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

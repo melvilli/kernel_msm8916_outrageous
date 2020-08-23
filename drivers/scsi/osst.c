@@ -363,7 +363,11 @@ static int osst_execute(struct osst_request *SRpnt, const unsigned char *cmd,
 
 	req = blk_get_request(SRpnt->stp->device->request_queue, write, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!req)
+=======
+	if (IS_ERR(req))
+>>>>>>> v3.18
 =======
 	if (IS_ERR(req))
 >>>>>>> v3.18

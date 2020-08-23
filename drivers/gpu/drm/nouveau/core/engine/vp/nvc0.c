@@ -23,8 +23,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/falcon.h>
 
+=======
+#include <engine/falcon.h>
+>>>>>>> v3.18
 =======
 #include <engine/falcon.h>
 >>>>>>> v3.18
@@ -96,6 +100,10 @@ nvc0_vp_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 
 	nv_subdev(priv)->unit = 0x00020000;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	nv_subdev(priv)->intr = nouveau_falcon_intr;
+>>>>>>> v3.18
 =======
 	nv_subdev(priv)->intr = nouveau_falcon_intr;
 >>>>>>> v3.18

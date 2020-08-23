@@ -10,15 +10,21 @@ struct nouveau_framebuffer {
 	struct nouveau_bo *nvbo;
 	struct nouveau_vma vma;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 r_dma;
 	u32 r_format;
 	u32 r_pitch;
 =======
+=======
+>>>>>>> v3.18
 	u32 r_handle;
 	u32 r_format;
 	u32 r_pitch;
 	struct nvif_object h_base[4];
 	struct nvif_object h_core;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -45,12 +51,18 @@ struct nouveau_display {
 	void (*fini)(struct drm_device *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int  (*fb_ctor)(struct drm_framebuffer *);
 	void (*fb_dtor)(struct drm_framebuffer *);
 
 	struct nvif_object disp;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct drm_property *dithering_mode;
 	struct drm_property *dithering_depth;
@@ -73,12 +85,15 @@ void nouveau_display_destroy(struct drm_device *dev);
 int  nouveau_display_init(struct drm_device *dev);
 void nouveau_display_fini(struct drm_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int  nouveau_display_suspend(struct drm_device *dev);
 void nouveau_display_resume(struct drm_device *dev);
 
 int  nouveau_crtc_page_flip(struct drm_crtc *crtc, struct drm_framebuffer *fb,
 			    struct drm_pending_vblank_event *event);
 =======
+=======
+>>>>>>> v3.18
 int  nouveau_display_suspend(struct drm_device *dev, bool runtime);
 void nouveau_display_resume(struct drm_device *dev, bool runtime);
 int  nouveau_display_vblank_enable(struct drm_device *, int);
@@ -91,6 +106,9 @@ int  nouveau_display_vblstamp(struct drm_device *, int, int *,
 int  nouveau_crtc_page_flip(struct drm_crtc *crtc, struct drm_framebuffer *fb,
 			    struct drm_pending_vblank_event *event,
 			    uint32_t page_flip_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int  nouveau_finish_page_flip(struct nouveau_channel *,
 			      struct nouveau_page_flip_state *);
@@ -100,16 +118,22 @@ int  nouveau_display_dumb_create(struct drm_file *, struct drm_device *,
 int  nouveau_display_dumb_map_offset(struct drm_file *, struct drm_device *,
 				     u32 handle, u64 *offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int  nouveau_display_dumb_destroy(struct drm_file *, struct drm_device *,
 				  u32 handle);
 
 void nouveau_hdmi_mode_set(struct drm_encoder *, struct drm_display_mode *);
 
 =======
+=======
+>>>>>>> v3.18
 
 void nouveau_hdmi_mode_set(struct drm_encoder *, struct drm_display_mode *);
 
 int nouveau_crtc_set_config(struct drm_mode_set *set);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
 extern int nouveau_backlight_init(struct drm_device *);

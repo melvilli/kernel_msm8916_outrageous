@@ -13,7 +13,13 @@ extern int iscsit_get_login_rx(struct iscsi_conn *, struct iscsi_login *);
 extern int iscsit_put_login_tx(struct iscsi_conn *, struct iscsi_login *, u32);
 extern void iscsit_free_conn(struct iscsi_np *, struct iscsi_conn *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int iscsit_start_kthreads(struct iscsi_conn *);
+=======
+extern int iscsi_post_login_handler(struct iscsi_np *, struct iscsi_conn *, u8);
+extern void iscsi_target_login_sess_out(struct iscsi_conn *, struct iscsi_np *,
+				bool, bool);
+>>>>>>> v3.18
 =======
 extern int iscsi_post_login_handler(struct iscsi_np *, struct iscsi_conn *, u8);
 extern void iscsi_target_login_sess_out(struct iscsi_conn *, struct iscsi_np *,

@@ -21,7 +21,10 @@ Optional properties:
 			is retained.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  - ti,mid-z-channel-X:	Boolean properties, X being a number from 1 to 6.
 			If given, channel X will start with the Mid-Z start
 			sequence, otherwise the default Low-Z scheme is used.
@@ -36,6 +39,9 @@ Optional properties:
  - avdd-supply:         Power supply for AVDD, providing 3.3V
  - dvdd-supply:         Power supply for DVDD, providing 3.3V
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Examples:
 
@@ -46,6 +52,11 @@ Examples:
 			reset-gpio = <&gpio 23 0>;
 			ti,charge-period = <156000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			avdd-supply = <&vdd_3v3_reg>;
+			dvdd-supply = <&vdd_3v3_reg>;
+>>>>>>> v3.18
 =======
 			avdd-supply = <&vdd_3v3_reg>;
 			dvdd-supply = <&vdd_3v3_reg>;

@@ -41,8 +41,13 @@ struct ad1836_priv {
 static const char *ad1836_deemp[] = {"None", "44.1kHz", "32kHz", "48kHz"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum ad1836_deemp_enum =
 	SOC_ENUM_SINGLE(AD1836_DAC_CTRL1, 8, 4, ad1836_deemp);
+=======
+static SOC_ENUM_SINGLE_DECL(ad1836_deemp_enum,
+			    AD1836_DAC_CTRL1, 8, ad1836_deemp);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(ad1836_deemp_enum,
 			    AD1836_DAC_CTRL1, 8, ad1836_deemp);
@@ -174,6 +179,7 @@ static int ad1836_hw_params(struct snd_pcm_substream *substream,
 
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		word_len = AD1836_WORD_LEN_16;
@@ -186,6 +192,8 @@ static int ad1836_hw_params(struct snd_pcm_substream *substream,
 		word_len = AD1836_WORD_LEN_24;
 		break;
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		word_len = AD1836_WORD_LEN_16;
@@ -199,6 +207,9 @@ static int ad1836_hw_params(struct snd_pcm_substream *substream,
 		break;
 	default:
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

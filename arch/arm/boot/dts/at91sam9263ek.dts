@@ -7,7 +7,11 @@
  */
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "at91sam9263.dtsi"
+=======
+#include "at91sam9263.dtsi"
+>>>>>>> v3.18
 =======
 #include "at91sam9263.dtsi"
 >>>>>>> v3.18
@@ -34,7 +38,10 @@
 			clock-frequency = <16367660>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		slow_xtal {
 			clock-frequency = <32768>;
@@ -43,6 +50,9 @@
 		main_xtal {
 			clock-frequency = <16367660>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -67,7 +77,11 @@
 
 			usb1: gadget@fff78000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				atmel,vbus-gpio = <&pioA 25 0>;
+=======
+				atmel,vbus-gpio = <&pioA 25 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 				atmel,vbus-gpio = <&pioA 25 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -85,8 +99,13 @@
 					reg = <0>;
 					bus-width = <4>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					cd-gpios = <&pioE 18 0>;
 					wp-gpios = <&pioE 19 0>;
+=======
+					cd-gpios = <&pioE 18 GPIO_ACTIVE_HIGH>;
+					wp-gpios = <&pioE 19 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 					cd-gpios = <&pioE 18 GPIO_ACTIVE_HIGH>;
 					wp-gpios = <&pioE 19 GPIO_ACTIVE_HIGH>;
@@ -99,8 +118,13 @@
 					pinctrl_board_mmc0: mmc0-board {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<5 18 0x0 0x5	/* PE18 gpio CD pin pull up and deglitch */
 							 5 19 0x0 0x1>;	/* PE19 gpio WP pin pull up */
+=======
+							<AT91_PIOE 18 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP_DEGLITCH 	/* PE18 gpio CD pin pull up and deglitch */
+							 AT91_PIOE 19 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;	/* PE19 gpio WP pin pull up */
+>>>>>>> v3.18
 =======
 							<AT91_PIOE 18 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP_DEGLITCH 	/* PE18 gpio CD pin pull up and deglitch */
 							 AT91_PIOE 19 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;	/* PE19 gpio WP pin pull up */
@@ -119,7 +143,10 @@
 				};
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			watchdog@fffffd40 {
 				status = "okay";
@@ -154,6 +181,9 @@
 					};
 				};
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -208,8 +238,13 @@
 			num-ports = <2>;
 			status = "okay";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			atmel,vbus-gpio = <&pioA 24 0
 					   &pioA 21 0
+=======
+			atmel,vbus-gpio = <&pioA 24 GPIO_ACTIVE_HIGH
+					   &pioA 21 GPIO_ACTIVE_HIGH
+>>>>>>> v3.18
 =======
 			atmel,vbus-gpio = <&pioA 24 GPIO_ACTIVE_HIGH
 					   &pioA 21 GPIO_ACTIVE_HIGH
@@ -224,7 +259,11 @@
 		d3 {
 			label = "d3";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 7 0>;
+=======
+			gpios = <&pioB 7 GPIO_ACTIVE_HIGH>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 7 GPIO_ACTIVE_HIGH>;
 >>>>>>> v3.18
@@ -234,7 +273,11 @@
 		d2 {
 			label = "d2";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioC 29 1>;
+=======
+			gpios = <&pioC 29 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioC 29 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -248,7 +291,11 @@
 		left_click {
 			label = "left_click";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioC 5 1>;
+=======
+			gpios = <&pioC 5 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioC 5 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -259,7 +306,11 @@
 		right_click {
 			label = "right_click";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioC 4 1>;
+=======
+			gpios = <&pioC 4 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioC 4 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18

@@ -24,21 +24,28 @@
 #define _ASM_FPU_EMULATOR_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/break.h>
 #include <asm/inst.h>
 #include <asm/local.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/sched.h>
 #include <asm/break.h>
 #include <asm/thread_info.h>
 #include <asm/inst.h>
 #include <asm/local.h>
 #include <asm/processor.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_DEBUG_FS
 
 struct mips_fpu_emulator_stats {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	local_t emulated;
 	local_t loads;
@@ -47,6 +54,8 @@ struct mips_fpu_emulator_stats {
 	local_t cp1xops;
 	local_t errors;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long emulated;
 	unsigned long loads;
 	unsigned long stores;
@@ -58,6 +67,9 @@ struct mips_fpu_emulator_stats {
 	unsigned long ieee754_overflow;
 	unsigned long ieee754_zerodiv;
 	unsigned long ieee754_invalidop;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -67,7 +79,11 @@ DECLARE_PER_CPU(struct mips_fpu_emulator_stats, fpuemustats);
 do {									\
 	preempt_disable();						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__local_inc(&__get_cpu_var(fpuemustats).M);			\
+=======
+	__this_cpu_inc(fpuemustats.M);					\
+>>>>>>> v3.18
 =======
 	__this_cpu_inc(fpuemustats.M);					\
 >>>>>>> v3.18
@@ -99,7 +115,10 @@ int mm_isBranchInstr(struct pt_regs *regs, struct mm_decoded_insn dec_insn,
 #define BREAK_MATH (0x0000000d | (BRK_MEMU << 16))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SIGNALLING_NAN 0x7ff800007ff80000LL
 
 static inline void fpu_emulator_init_fpu(void)
@@ -113,5 +132,8 @@ static inline void fpu_emulator_init_fpu(void)
 		set_fpr64(&t->thread.fpu.fpr[i], 0, SIGNALLING_NAN);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_FPU_EMULATOR_H */

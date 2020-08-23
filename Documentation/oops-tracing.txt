@@ -266,12 +266,18 @@ characters, each representing a particular tainted value.
  13: 'O' if an externally-built ("out-of-tree") module has been loaded.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  14: 'E' if an unsigned module has been loaded in a kernel supporting
      module signature.
 
  15: 'L' if a soft lockup has previously occurred on the system.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 The primary reason for the 'Tainted: ' string is to tell kernel
 debuggers if this is a clean kernel or if anything unusual has

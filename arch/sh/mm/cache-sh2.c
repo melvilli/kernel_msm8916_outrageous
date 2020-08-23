@@ -64,9 +64,15 @@ static void sh2__flush_invalidate_region(void *start, int size)
 	jump_to_uncached();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ccr = __raw_readl(CCR);
 	ccr |= CCR_CACHE_INVALIDATE;
 	__raw_writel(ccr, CCR);
+=======
+	ccr = __raw_readl(SH_CCR);
+	ccr |= CCR_CACHE_INVALIDATE;
+	__raw_writel(ccr, SH_CCR);
+>>>>>>> v3.18
 =======
 	ccr = __raw_readl(SH_CCR);
 	ccr |= CCR_CACHE_INVALIDATE;

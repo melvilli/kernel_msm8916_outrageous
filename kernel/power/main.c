@@ -280,6 +280,7 @@ struct kobject *power_kobj;
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	state - control system power state.
  *
  *	show() returns what states are supported, which is hard-coded to
@@ -289,6 +290,8 @@ struct kobject *power_kobj;
  *	store() accepts one of those strings, translates it into the
  *	proper enumerated value, and initiates a suspend transition.
 =======
+=======
+>>>>>>> v3.18
  * state - control system sleep states.
  *
  * show() returns available sleep state labels, which may be "mem", "standby",
@@ -297,6 +300,9 @@ struct kobject *power_kobj;
  *
  * store() accepts one of those strings, translates it into the proper
  * enumerated value, and initiates a suspend transition.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static ssize_t state_show(struct kobject *kobj, struct kobj_attribute *attr,
@@ -307,6 +313,7 @@ static ssize_t state_show(struct kobject *kobj, struct kobj_attribute *attr,
 	suspend_state_t i;
 
 	for (i = PM_SUSPEND_MIN; i < PM_SUSPEND_MAX; i++)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (pm_states[i].state)
 			s += sprintf(s,"%s ", pm_states[i].label);
@@ -320,6 +327,8 @@ static ssize_t state_show(struct kobject *kobj, struct kobj_attribute *attr,
 		*(s-1) = '\n';
 #endif
 =======
+=======
+>>>>>>> v3.18
 		if (pm_states[i])
 			s += sprintf(s,"%s ", pm_states[i]);
 
@@ -329,6 +338,9 @@ static ssize_t state_show(struct kobject *kobj, struct kobj_attribute *attr,
 	if (s != buf)
 		/* convert the last space to a newline */
 		*(s-1) = '\n';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (s - buf);
 }
@@ -337,8 +349,12 @@ static suspend_state_t decode_state(const char *buf, size_t n)
 {
 #ifdef CONFIG_SUSPEND
 <<<<<<< HEAD
+<<<<<<< HEAD
 	suspend_state_t state = PM_SUSPEND_MIN;
 	struct pm_sleep_state *s;
+=======
+	suspend_state_t state;
+>>>>>>> v3.18
 =======
 	suspend_state_t state;
 >>>>>>> v3.18
@@ -355,17 +371,23 @@ static suspend_state_t decode_state(const char *buf, size_t n)
 
 #ifdef CONFIG_SUSPEND
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (s = &pm_states[state]; state < PM_SUSPEND_MAX; s++, state++)
 		if (s->state && len == strlen(s->label)
 		    && !strncmp(buf, s->label, len))
 			return s->state;
 =======
+=======
+>>>>>>> v3.18
 	for (state = PM_SUSPEND_MIN; state < PM_SUSPEND_MAX; state++) {
 		const char *label = pm_states[state];
 
 		if (label && len == strlen(label) && !strncmp(buf, label, len))
 			return state;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -462,6 +484,11 @@ static ssize_t wakeup_count_store(struct kobject *kobj,
 		if (pm_save_wakeup_count(val))
 			error = n;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		else
+			pm_print_active_wakeup_sources();
+>>>>>>> v3.18
 =======
 		else
 			pm_print_active_wakeup_sources();
@@ -488,8 +515,13 @@ static ssize_t autosleep_show(struct kobject *kobj,
 #ifdef CONFIG_SUSPEND
 	if (state < PM_SUSPEND_MAX)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return sprintf(buf, "%s\n", pm_states[state].state ?
 					pm_states[state].label : "error");
+=======
+		return sprintf(buf, "%s\n", pm_states[state] ?
+					pm_states[state] : "error");
+>>>>>>> v3.18
 =======
 		return sprintf(buf, "%s\n", pm_states[state] ?
 					pm_states[state] : "error");
@@ -576,11 +608,17 @@ pm_trace_store(struct kobject *kobj, struct kobj_attribute *attr,
 	if (sscanf(buf, "%d", &val) == 1) {
 		pm_trace_enabled = !!val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (pm_trace_enabled) {
 			pr_warn("PM: Enabling pm_trace changes system date and time during resume.\n"
 				"PM: Correct system time has to be restored manually after resume.\n");
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return n;
 	}
@@ -665,7 +703,10 @@ static struct attribute_group attr_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM_RUNTIME
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct workqueue_struct *pm_wq;
@@ -678,9 +719,12 @@ static int __init pm_start_workqueue(void)
 	return pm_wq ? 0 : -ENOMEM;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 static inline int pm_start_workqueue(void) { return 0; }
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

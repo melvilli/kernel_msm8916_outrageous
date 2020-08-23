@@ -19,6 +19,11 @@ struct asoc_simple_dai {
 	unsigned int fmt;
 	unsigned int sysclk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int slots;
+	int slot_width;
+>>>>>>> v3.18
 =======
 	int slots;
 	int slot_width;
@@ -35,10 +40,13 @@ struct asoc_simple_card_info {
 	struct asoc_simple_dai cpu_dai;
 	struct asoc_simple_dai codec_dai;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* used in simple-card.c */
 	struct snd_soc_dai_link snd_link;
 	struct snd_soc_card snd_card;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

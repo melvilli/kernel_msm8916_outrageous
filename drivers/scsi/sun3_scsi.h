@@ -30,12 +30,17 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * $Log: cumana_NCR5380.h,v $
  */
 
 #ifndef SUN3_NCR5380_H
 #define SUN3_NCR5380_H
+=======
+#ifndef SUN3_SCSI_H
+#define SUN3_SCSI_H
+>>>>>>> v3.18
 =======
 #ifndef SUN3_SCSI_H
 #define SUN3_SCSI_H
@@ -88,8 +93,11 @@ static int sun3scsi_release (struct Scsi_Host *);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef HOSTS_C
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define NCR5380_implementation_fields \
@@ -117,9 +125,12 @@ static int sun3scsi_release (struct Scsi_Host *);
 #define NCR5380_dma_residual sun3scsi_dma_residual
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BOARD_NORMAL	0
 #define BOARD_NCR53C400	1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* additional registers - mainly DMA control regs */
@@ -202,6 +213,7 @@ struct sun3_udc_regs {
 
 #define VME_DATA24 0x3d00
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 // debugging printk's, taken from atari_scsi.h 
 /* Debugging printk definitions:
@@ -388,6 +400,9 @@ struct sun3_udc_regs {
 
 #endif /* ndef HOSTS_C */
 #endif /* SUN3_NCR5380_H */
+=======
+#endif /* SUN3_SCSI_H */
+>>>>>>> v3.18
 =======
 #endif /* SUN3_SCSI_H */
 >>>>>>> v3.18

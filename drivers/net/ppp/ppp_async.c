@@ -199,7 +199,11 @@ ppp_asynctty_open(struct tty_struct *tty)
 
 	tty->disc_data = ap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty->receive_room = 131072;
+=======
+	tty->receive_room = 65536;
+>>>>>>> v3.18
 =======
 	tty->receive_room = 65536;
 >>>>>>> v3.18
@@ -361,8 +365,12 @@ ppp_asynctty_receive(struct tty_struct *tty, const unsigned char *buf,
 		tasklet_schedule(&ap->tsk);
 	ap_put(ap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tty->port && !tty->port->low_latency)
 		tty_unthrottle(tty);
+=======
+	tty_unthrottle(tty);
+>>>>>>> v3.18
 =======
 	tty_unthrottle(tty);
 >>>>>>> v3.18

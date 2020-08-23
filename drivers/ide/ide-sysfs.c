@@ -26,6 +26,10 @@ static ssize_t media_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%s\n", ide_media_string(drive));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(media);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(media);
 >>>>>>> v3.18
@@ -37,6 +41,10 @@ static ssize_t drivename_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%s\n", drive->name);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(drivename);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(drivename);
 >>>>>>> v3.18
@@ -48,6 +56,10 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "ide:m-%s\n", ide_media_string(drive));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(modalias);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(modalias);
 >>>>>>> v3.18
@@ -59,6 +71,10 @@ static ssize_t model_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%s\n", (char *)&drive->id[ATA_ID_PROD]);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(model);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(model);
 >>>>>>> v3.18
@@ -70,6 +86,10 @@ static ssize_t firmware_show(struct device *dev, struct device_attribute *attr,
 	return sprintf(buf, "%s\n", (char *)&drive->id[ATA_ID_FW_REV]);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(firmware);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(firmware);
 >>>>>>> v3.18
@@ -80,6 +100,7 @@ static ssize_t serial_show(struct device *dev, struct device_attribute *attr,
 	ide_drive_t *drive = to_ide_device(dev);
 	return sprintf(buf, "%s\n", (char *)&drive->id[ATA_ID_SERNO]);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct device_attribute ide_dev_attrs[] = {
@@ -92,6 +113,8 @@ struct device_attribute ide_dev_attrs[] = {
 	__ATTR(unload_heads, 0644, ide_park_show, ide_park_store),
 	__ATTR_NULL
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(serial, 0400, serial_show, NULL);
 
 static DEVICE_ATTR(unload_heads, 0644, ide_park_show, ide_park_store);
@@ -114,6 +137,9 @@ static const struct attribute_group ide_attr_group = {
 const struct attribute_group *ide_dev_groups[] = {
 	&ide_attr_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

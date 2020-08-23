@@ -1,6 +1,10 @@
 / {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	compatible = "xtensa,xtfpga";
+=======
+	compatible = "cdns,xtensa-xtfpga";
+>>>>>>> v3.18
 =======
 	compatible = "cdns,xtensa-xtfpga";
 >>>>>>> v3.18
@@ -22,7 +26,11 @@
 		#size-cells = <0>;
 		cpu@0 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			compatible = "xtensa,cpu";
+=======
+			compatible = "cdns,xtensa-cpu";
+>>>>>>> v3.18
 =======
 			compatible = "cdns,xtensa-cpu";
 >>>>>>> v3.18
@@ -35,7 +43,11 @@
 
 	pic: pic {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "xtensa,pic";
+=======
+		compatible = "cdns,xtensa-pic";
+>>>>>>> v3.18
 =======
 		compatible = "cdns,xtensa-pic";
 >>>>>>> v3.18
@@ -47,6 +59,7 @@
 		interrupt-controller;
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	serial0: serial@fd050020 {
 		device_type = "serial";
@@ -66,6 +79,8 @@
 		interrupts = <1 1>; /* external irq 1 */
 		local-mac-address = [00 50 c2 13 6f 00];
 =======
+=======
+>>>>>>> v3.18
 	clocks {
 		osc: main-oscillator {
 			#clock-cells = <0>;
@@ -96,6 +111,9 @@
 			local-mac-address = [00 50 c2 13 6f 00];
 			clocks = <&osc>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

@@ -30,9 +30,12 @@
 #define CLIENT_HASH_MASK                (CLIENT_HASH_SIZE - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LOCKOWNER_INO_HASH_BITS		8
 #define LOCKOWNER_INO_HASH_SIZE		(1 << LOCKOWNER_INO_HASH_BITS)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SESSION_HASH_SIZE	512
@@ -41,7 +44,10 @@ struct cld_net;
 struct nfsd4_client_tracking_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Represents a nfsd "container". With respect to nfsv4 state tracking, the
  * fields of interest are the *_id_hashtbls and the *_name_tree. These track
@@ -50,6 +56,9 @@ struct nfsd4_client_tracking_ops;
  * Each nfsd_net runs a nfs4_laundromat workqueue job when necessary to clean
  * up expired clients and delegations within the container.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nfsd_net {
 	struct cld_net *cld_net;
@@ -81,8 +90,11 @@ struct nfsd_net {
 	struct list_head *unconf_id_hashtbl;
 	struct rb_root unconf_name_tree;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *ownerstr_hashtbl;
 	struct list_head *lockowner_ino_hashtbl;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head *sessionid_hashtbl;
@@ -113,12 +125,15 @@ struct nfsd_net {
 
 	bool nfsd_net_up;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * Time of server startup
 	 */
 	struct timeval nfssvc_boot;
 =======
+=======
+>>>>>>> v3.18
 	bool lockd_up;
 
 	/* Time of server startup */
@@ -131,6 +146,9 @@ struct nfsd_net {
 	unsigned int max_connections;
 
 	u32 clientid_counter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct svc_serv *nfsd_serv;

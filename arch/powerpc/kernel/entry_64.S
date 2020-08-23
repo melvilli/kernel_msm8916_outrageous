@@ -40,8 +40,13 @@
  */
 	.section	".toc","aw"
 <<<<<<< HEAD
+<<<<<<< HEAD
 .SYS_CALL_TABLE:
 	.tc .sys_call_table[TC],.sys_call_table
+=======
+SYS_CALL_TABLE:
+	.tc sys_call_table[TC],sys_call_table
+>>>>>>> v3.18
 =======
 SYS_CALL_TABLE:
 	.tc sys_call_table[TC],sys_call_table
@@ -108,16 +113,22 @@ BEGIN_FW_FTR_SECTION
 	ld	r10,PACALPPACAPTR(r13)	/* get ptr to VPA */
 	ld	r11,PACA_DTL_RIDX(r13)	/* get log read index */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld	r10,LPPACA_DTLIDX(r10)	/* get log write index */
 	cmpd	cr1,r11,r10
 	beq+	cr1,33f
 	bl	.accumulate_stolen_time
 =======
+=======
+>>>>>>> v3.18
 	addi	r10,r10,LPPACA_DTLIDX
 	LDX_BE	r10,0,r10		/* get log write index */
 	cmpd	cr1,r11,r10
 	beq+	cr1,33f
 	bl	accumulate_stolen_time
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	REST_GPR(0,r1)
 	REST_4GPRS(3,r1)
@@ -156,7 +167,11 @@ END_FW_FTR_SECTION_IFSET(FW_FEATURE_SPLPAR)
 
 #ifdef SHOW_SYSCALLS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.do_show_syscall
+=======
+	bl	do_show_syscall
+>>>>>>> v3.18
 =======
 	bl	do_show_syscall
 >>>>>>> v3.18
@@ -179,7 +194,11 @@ system_call:			/* label this so stack traces look sane */
  * based on caller's run-mode / personality.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld	r11,.SYS_CALL_TABLE@toc(2)
+=======
+	ld	r11,SYS_CALL_TABLE@toc(2)
+>>>>>>> v3.18
 =======
 	ld	r11,SYS_CALL_TABLE@toc(2)
 >>>>>>> v3.18
@@ -195,8 +214,13 @@ system_call:			/* label this so stack traces look sane */
 15:
 	slwi	r0,r0,4
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldx	r10,r11,r0	/* Fetch system call handler [ptr] */
 	mtctr   r10
+=======
+	ldx	r12,r11,r0	/* Fetch system call handler [ptr] */
+	mtctr   r12
+>>>>>>> v3.18
 =======
 	ldx	r12,r11,r0	/* Fetch system call handler [ptr] */
 	mtctr   r12
@@ -207,7 +231,11 @@ syscall_exit:
 	std	r3,RESULT(r1)
 #ifdef SHOW_SYSCALLS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.do_show_syscall_exit
+=======
+	bl	do_show_syscall_exit
+>>>>>>> v3.18
 =======
 	bl	do_show_syscall_exit
 >>>>>>> v3.18
@@ -278,9 +306,15 @@ syscall_error:
 /* Traced system call support */
 syscall_dotrace:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.save_nvgprs
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	.do_syscall_trace_enter
+=======
+	bl	save_nvgprs
+	addi	r3,r1,STACK_FRAME_OVERHEAD
+	bl	do_syscall_trace_enter
+>>>>>>> v3.18
 =======
 	bl	save_nvgprs
 	addi	r3,r1,STACK_FRAME_OVERHEAD
@@ -344,7 +378,11 @@ syscall_exit_work:
 	SET_DEFAULT_THREAD_PPR(r3, r10)		/* Set thread.ppr = 3 */
 	andi.	r0,r9,(_TIF_SYSCALL_T_OR_A|_TIF_SINGLESTEP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beq	.ret_from_except_lite
+=======
+	beq	ret_from_except_lite
+>>>>>>> v3.18
 =======
 	beq	ret_from_except_lite
 >>>>>>> v3.18
@@ -359,15 +397,21 @@ syscall_exit_work:
 #endif /* CONFIG_PPC_BOOK3E */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.save_nvgprs
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	.do_syscall_trace_leave
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
 	bl	save_nvgprs
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	do_syscall_trace_leave
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Save non-volatile GPRs, if not already saved. */
@@ -391,6 +435,7 @@ _GLOBAL(save_nvgprs)
  */
 
 _GLOBAL(ppc_fork)
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bl	.save_nvgprs
 	bl	.sys_fork
@@ -419,6 +464,8 @@ _GLOBAL(ppc64_swapcontext)
 _GLOBAL(ret_from_fork)
 	bl	.schedule_tail
 =======
+=======
+>>>>>>> v3.18
 	bl	save_nvgprs
 	bl	sys_fork
 	b	syscall_exit
@@ -445,6 +492,9 @@ _GLOBAL(ppc64_swapcontext)
 
 _GLOBAL(ret_from_fork)
 	bl	schedule_tail
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	REST_NVGPRS(r1)
 	li	r3,0
@@ -452,12 +502,15 @@ _GLOBAL(ret_from_fork)
 
 _GLOBAL(ret_from_kernel_thread)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.schedule_tail
 	REST_NVGPRS(r1)
 	ld	r14, 0(r14)
 	mtlr	r14
 	mr	r3,r15
 =======
+=======
+>>>>>>> v3.18
 	bl	schedule_tail
 	REST_NVGPRS(r1)
 	mtlr	r14
@@ -465,11 +518,15 @@ _GLOBAL(ret_from_kernel_thread)
 #if defined(_CALL_ELF) && _CALL_ELF == 2
 	mr	r12,r14
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	blrl
 	li	r3,0
 	b	syscall_exit
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.section	".toc","aw"
 DSCR_DEFAULT:
@@ -477,6 +534,8 @@ DSCR_DEFAULT:
 
 	.section	".text"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -521,12 +580,15 @@ BEGIN_FTR_SECTION
 END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 #endif /* CONFIG_ALTIVEC */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC64
 BEGIN_FTR_SECTION
 	mfspr	r25,SPRN_DSCR
 	std	r25,THREAD_DSCR(r3)
 END_FTR_SECTION_IFSET(CPU_FTR_DSCR)
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	and.	r0,r0,r22
@@ -584,6 +646,7 @@ END_FTR_SECTION_IFSET(CPU_FTR_STCX_CHECKS_ADDRESS)
 #ifdef CONFIG_PPC_BOOK3S
 BEGIN_FTR_SECTION
 <<<<<<< HEAD
+<<<<<<< HEAD
   BEGIN_FTR_SECTION_NESTED(95)
 	clrrdi	r6,r8,28	/* get its ESID */
 	clrrdi	r9,r1,28	/* get current sp ESID */
@@ -595,12 +658,17 @@ FTR_SECTION_ELSE
 	b	2f
 ALT_MMU_FTR_SECTION_END_IFSET(MMU_FTR_SLB)
 =======
+=======
+>>>>>>> v3.18
 	clrrdi	r6,r8,28	/* get its ESID */
 	clrrdi	r9,r1,28	/* get current sp ESID */
 FTR_SECTION_ELSE
 	clrrdi	r6,r8,40	/* get its 1T ESID */
 	clrrdi	r9,r1,40	/* get current sp 1T ESID */
 ALT_MMU_FTR_SECTION_END_IFCLR(MMU_FTR_1T_SEGMENT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clrldi.	r0,r6,2		/* is new ESID c00000000? */
 	cmpd	cr1,r6,r9	/* or is new ESID the same as current ESID? */
@@ -624,15 +692,21 @@ END_MMU_FTR_SECTION_IFSET(MMU_FTR_1T_SEGMENT)
 	ld	r9,PACA_SLBSHADOWPTR(r13)
 	li	r12,0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std	r12,SLBSHADOW_STACKESID(r9) /* Clear ESID */
 	std	r7,SLBSHADOW_STACKVSID(r9)  /* Save VSID */
 	std	r0,SLBSHADOW_STACKESID(r9)  /* Save ESID */
 =======
+=======
+>>>>>>> v3.18
 	std	r12,SLBSHADOW_STACKESID(r9)	/* Clear ESID */
 	li	r12,SLBSHADOW_STACKVSID
 	STDX_BE	r7,r12,r9			/* Save VSID */
 	li	r12,SLBSHADOW_STACKESID
 	STDX_BE	r0,r12,r9			/* Save ESID */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* No need to check for MMU_FTR_NO_SLBIE_B here, since when
@@ -682,6 +756,7 @@ END_FTR_SECTION_IFSET(CPU_FTR_ALTIVEC)
 BEGIN_FTR_SECTION
 	lwz	r6,THREAD_DSCR_INHERIT(r4)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld	r7,DSCR_DEFAULT@toc(2)
 	ld	r0,THREAD_DSCR(r4)
 	cmpwi	r6,0
@@ -714,6 +789,8 @@ BEGIN_FTR_SECTION
   END_FTR_SECTION_NESTED(CPU_FTR_ARCH_207S, CPU_FTR_ARCH_207S, 70)
 4:	cmpd	r0,r25
 =======
+=======
+>>>>>>> v3.18
 	ld	r0,THREAD_DSCR(r4)
 	cmpwi	r6,0
 	bne	1f
@@ -725,6 +802,9 @@ BEGIN_FTR_SECTION_NESTED(70)
 	mtspr	SPRN_FSCR, r8
 END_FTR_SECTION_NESTED(CPU_FTR_ARCH_207S, CPU_FTR_ARCH_207S, 70)
 	cmpd	r0,r25
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	beq	2f
 	mtspr	SPRN_DSCR,r0
@@ -751,7 +831,11 @@ _GLOBAL(ret_from_except)
 	ld	r11,_TRAP(r1)
 	andi.	r0,r11,1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bne	.ret_from_except_lite
+=======
+	bne	ret_from_except_lite
+>>>>>>> v3.18
 =======
 	bne	ret_from_except_lite
 >>>>>>> v3.18
@@ -772,6 +856,7 @@ _GLOBAL(ret_from_except_lite)
 
 	CURRENT_THREAD_INFO(r9, r1)
 	ld	r3,_MSR(r1)
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ld	r4,TI_FLAGS(r9)
 	andi.	r3,r3,MSR_PR
@@ -799,6 +884,8 @@ resume_kernel:
 	ld	r8,TI_FLAGS(r9)
 	andis.	r8,r8,_TIF_EMULATE_STACK_STORE@h
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3E
 	ld	r10,PACACURRENT(r13)
 #endif /* CONFIG_PPC_BOOK3E */
@@ -858,6 +945,9 @@ resume_kernel:
 resume_kernel:
 	/* check current_thread_info, _TIF_EMULATE_STACK_STORE */
 	andis.	r8,r4,_TIF_EMULATE_STACK_STORE@h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	beq+	1f
 
@@ -905,15 +995,21 @@ resume_kernel:
 	/*
 	 * Here we are preempting the current task. We want to make
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * sure we are soft-disabled first
 	 */
 	SOFT_DISABLE_INTS(r3,r4)
 1:	bl	.preempt_schedule_irq
 =======
+=======
+>>>>>>> v3.18
 	 * sure we are soft-disabled first and reconcile irq state.
 	 */
 	RECONCILE_IRQ_STATE(r3,r4)
 1:	bl	preempt_schedule_irq
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Re-test flags and eventually loop */
@@ -977,7 +1073,11 @@ restore_no_replay:
 do_restore:
 #ifdef CONFIG_PPC_BOOK3E
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b	.exception_return_book3e
+=======
+	b	exception_return_book3e
+>>>>>>> v3.18
 =======
 	b	exception_return_book3e
 >>>>>>> v3.18
@@ -1015,13 +1115,19 @@ fast_exception_return:
 	beq-	unrecov_restore
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Load PPR from thread struct before we clear MSR:RI */
 BEGIN_FTR_SECTION
 	ld	r2,PACACURRENT(r13)
 	ld	r2,TASKTHREADPPR(r2)
 END_FTR_SECTION_IFSET(CPU_FTR_HAS_PPR)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Clear RI before restoring r13.  If we are returning to
@@ -1044,13 +1150,19 @@ END_FTR_SECTION_IFSET(CPU_FTR_HAS_PPR)
 	andi.	r0,r3,MSR_PR
 	beq	1f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACCOUNT_CPU_USER_EXIT(r2, r4)
 	RESTORE_PPR(r2, r4)
 =======
+=======
+>>>>>>> v3.18
 BEGIN_FTR_SECTION
 	mtspr	SPRN_PPR,r2	/* Restore PPR */
 END_FTR_SECTION_IFSET(CPU_FTR_HAS_PPR)
 	ACCOUNT_CPU_USER_EXIT(r2, r4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	REST_GPR(13, r1)
 1:
@@ -1104,7 +1216,11 @@ restore_check_irq_replay:
 	 * Still, this might be useful for things like hash_page
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.__check_irq_replay
+=======
+	bl	__check_irq_replay
+>>>>>>> v3.18
 =======
 	bl	__check_irq_replay
 >>>>>>> v3.18
@@ -1129,6 +1245,7 @@ restore_check_irq_replay:
 	bne	1f
 	addi	r3,r1,STACK_FRAME_OVERHEAD;
 <<<<<<< HEAD
+<<<<<<< HEAD
  	bl	.do_IRQ
 	b	.ret_from_except
 1:	cmpwi	cr0,r3,0x900
@@ -1137,6 +1254,8 @@ restore_check_irq_replay:
 	bl	.timer_interrupt
 	b	.ret_from_except
 =======
+=======
+>>>>>>> v3.18
  	bl	do_IRQ
 	b	ret_from_except
 1:	cmpwi	cr0,r3,0xe60
@@ -1149,6 +1268,9 @@ restore_check_irq_replay:
 	addi	r3,r1,STACK_FRAME_OVERHEAD;
 	bl	timer_interrupt
 	b	ret_from_except
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC_DOORBELL
 1:
@@ -1164,6 +1286,7 @@ restore_check_irq_replay:
 	bne	1f
 	addi	r3,r1,STACK_FRAME_OVERHEAD;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.doorbell_exception
 	b	.ret_from_except
 #endif /* CONFIG_PPC_DOORBELL */
@@ -1173,6 +1296,8 @@ unrecov_restore:
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	.unrecoverable_exception
 =======
+=======
+>>>>>>> v3.18
 	bl	doorbell_exception
 	b	ret_from_except
 #endif /* CONFIG_PPC_DOORBELL */
@@ -1181,6 +1306,9 @@ unrecov_restore:
 unrecov_restore:
 	addi	r3,r1,STACK_FRAME_OVERHEAD
 	bl	unrecoverable_exception
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	b	unrecov_restore
 
@@ -1248,7 +1376,11 @@ _GLOBAL(enter_rtas)
 
 	/* Setup our real return addr */	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LOAD_REG_ADDR(r4,.rtas_return_loc)
+=======
+	LOAD_REG_ADDR(r4,rtas_return_loc)
+>>>>>>> v3.18
 =======
 	LOAD_REG_ADDR(r4,rtas_return_loc)
 >>>>>>> v3.18
@@ -1262,7 +1394,11 @@ _GLOBAL(enter_rtas)
         li      r9,1
         rldicr  r9,r9,MSR_SF_LG,(63-MSR_SF_LG)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ori	r9,r9,MSR_IR|MSR_DR|MSR_FE0|MSR_FE1|MSR_FP|MSR_RI
+=======
+	ori	r9,r9,MSR_IR|MSR_DR|MSR_FE0|MSR_FE1|MSR_FP|MSR_RI|MSR_LE
+>>>>>>> v3.18
 =======
 	ori	r9,r9,MSR_IR|MSR_DR|MSR_FE0|MSR_FE1|MSR_FP|MSR_RI|MSR_LE
 >>>>>>> v3.18
@@ -1280,7 +1416,13 @@ _GLOBAL(enter_rtas)
 	b	.	/* prevent speculative execution */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _STATIC(rtas_return_loc)
+=======
+rtas_return_loc:
+	FIXUP_ENDIAN
+
+>>>>>>> v3.18
 =======
 rtas_return_loc:
 	FIXUP_ENDIAN
@@ -1293,7 +1435,11 @@ rtas_return_loc:
 	bcl	20,31,$+4
 0:	mflr	r3
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld	r3,(1f-0b)(r3)		/* get &.rtas_restore_regs */
+=======
+	ld	r3,(1f-0b)(r3)		/* get &rtas_restore_regs */
+>>>>>>> v3.18
 =======
 	ld	r3,(1f-0b)(r3)		/* get &rtas_restore_regs */
 >>>>>>> v3.18
@@ -1314,9 +1460,15 @@ rtas_return_loc:
 
 	.align	3
 <<<<<<< HEAD
+<<<<<<< HEAD
 1:	.llong	.rtas_restore_regs
 
 _STATIC(rtas_restore_regs)
+=======
+1:	.llong	rtas_restore_regs
+
+rtas_restore_regs:
+>>>>>>> v3.18
 =======
 1:	.llong	rtas_restore_regs
 
@@ -1368,6 +1520,7 @@ _GLOBAL(enter_prom)
 	std	r11,_MSR(r1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Get the PROM entrypoint */
 	mtlr	r4
 
@@ -1391,6 +1544,8 @@ _GLOBAL(enter_prom)
 	/* Enter PROM here... */
 	blrl
 =======
+=======
+>>>>>>> v3.18
 	/* Put PROM address in SRR0 */
 	mtsrr0	r4
 
@@ -1415,6 +1570,9 @@ _GLOBAL(enter_prom)
 
 1:	/* Return from OF */
 	FIXUP_ENDIAN
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Just make sure that r1 top 32 bits didn't get
@@ -1447,7 +1605,11 @@ _GLOBAL(_mcount)
 	blr
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(ftrace_caller)
+=======
+_GLOBAL_TOC(ftrace_caller)
+>>>>>>> v3.18
 =======
 _GLOBAL_TOC(ftrace_caller)
 >>>>>>> v3.18
@@ -1475,10 +1637,14 @@ _GLOBAL(ftrace_stub)
 	blr
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(mcount)
 	blr
 
 _GLOBAL(_mcount)
+=======
+_GLOBAL_TOC(_mcount)
+>>>>>>> v3.18
 =======
 _GLOBAL_TOC(_mcount)
 >>>>>>> v3.18
@@ -1520,7 +1686,11 @@ _GLOBAL(ftrace_graph_caller)
 	addi	r3, r11, 16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.prepare_ftrace_return
+=======
+	bl	prepare_ftrace_return
+>>>>>>> v3.18
 =======
 	bl	prepare_ftrace_return
 >>>>>>> v3.18
@@ -1540,7 +1710,11 @@ _GLOBAL(return_to_handler)
 	stdu	r1, -112(r1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.ftrace_return_to_handler
+=======
+	bl	ftrace_return_to_handler
+>>>>>>> v3.18
 =======
 	bl	ftrace_return_to_handler
 >>>>>>> v3.18
@@ -1574,7 +1748,11 @@ _GLOBAL(mod_return_to_handler)
 	ld	r2, PACATOC(r13)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.ftrace_return_to_handler
+=======
+	bl	ftrace_return_to_handler
+>>>>>>> v3.18
 =======
 	bl	ftrace_return_to_handler
 >>>>>>> v3.18

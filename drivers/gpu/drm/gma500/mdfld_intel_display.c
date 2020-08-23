@@ -24,7 +24,11 @@
 #include <drm/drmP.h>
 #include "psb_intel_reg.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "psb_intel_display.h"
+=======
+#include "gma_display.h"
+>>>>>>> v3.18
 =======
 #include "gma_display.h"
 >>>>>>> v3.18
@@ -70,7 +74,11 @@ void mdfldWaitForPipeDisable(struct drm_device *dev, int pipe)
 
 	/* FIXME JLIU7_PO */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_wait_for_vblank(dev);
+=======
+	gma_wait_for_vblank(dev);
+>>>>>>> v3.18
 =======
 	gma_wait_for_vblank(dev);
 >>>>>>> v3.18
@@ -102,7 +110,11 @@ void mdfldWaitForPipeEnable(struct drm_device *dev, int pipe)
 
 	/* FIXME JLIU7_PO */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_wait_for_vblank(dev);
+=======
+	gma_wait_for_vblank(dev);
+>>>>>>> v3.18
 =======
 	gma_wait_for_vblank(dev);
 >>>>>>> v3.18
@@ -116,6 +128,7 @@ void mdfldWaitForPipeEnable(struct drm_device *dev, int pipe)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void psb_intel_crtc_prepare(struct drm_crtc *crtc)
 {
@@ -136,6 +149,8 @@ static bool psb_intel_crtc_mode_fixup(struct drm_crtc *crtc,
 	return true;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -200,9 +215,15 @@ static int mdfld__intel_pipe_set_base(struct drm_crtc *crtc, int x, int y,
 	struct drm_device *dev = crtc->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 	struct psb_framebuffer *psbfb = to_psb_fb(crtc->fb);
 	int pipe = psb_intel_crtc->pipe;
+=======
+	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
+	struct psb_framebuffer *psbfb = to_psb_fb(crtc->primary->fb);
+	int pipe = gma_crtc->pipe;
+>>>>>>> v3.18
 =======
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	struct psb_framebuffer *psbfb = to_psb_fb(crtc->primary->fb);
@@ -219,7 +240,11 @@ static int mdfld__intel_pipe_set_base(struct drm_crtc *crtc, int x, int y,
 
 	/* no fb bound */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!crtc->fb) {
+=======
+	if (!crtc->primary->fb) {
+>>>>>>> v3.18
 =======
 	if (!crtc->primary->fb) {
 >>>>>>> v3.18
@@ -228,7 +253,11 @@ static int mdfld__intel_pipe_set_base(struct drm_crtc *crtc, int x, int y,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = check_fb(crtc->fb);
+=======
+	ret = check_fb(crtc->primary->fb);
+>>>>>>> v3.18
 =======
 	ret = check_fb(crtc->primary->fb);
 >>>>>>> v3.18
@@ -245,6 +274,7 @@ static int mdfld__intel_pipe_set_base(struct drm_crtc *crtc, int x, int y,
 
 	start = psbfb->gtt->offset;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	offset = y * crtc->fb->pitches[0] + x * (crtc->fb->bits_per_pixel / 8);
 
 	REG_WRITE(map->stride, crtc->fb->pitches[0]);
@@ -253,6 +283,8 @@ static int mdfld__intel_pipe_set_base(struct drm_crtc *crtc, int x, int y,
 
 	switch (crtc->fb->bits_per_pixel) {
 =======
+=======
+>>>>>>> v3.18
 	offset = y * crtc->primary->fb->pitches[0] + x * (crtc->primary->fb->bits_per_pixel / 8);
 
 	REG_WRITE(map->stride, crtc->primary->fb->pitches[0]);
@@ -260,13 +292,20 @@ static int mdfld__intel_pipe_set_base(struct drm_crtc *crtc, int x, int y,
 	dspcntr &= ~DISPPLANE_PIXFORMAT_MASK;
 
 	switch (crtc->primary->fb->bits_per_pixel) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case 8:
 		dspcntr |= DISPPLANE_8BPP;
 		break;
 	case 16:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (crtc->fb->depth == 15)
+=======
+		if (crtc->primary->fb->depth == 15)
+>>>>>>> v3.18
 =======
 		if (crtc->primary->fb->depth == 15)
 >>>>>>> v3.18
@@ -368,8 +407,13 @@ static void mdfld_crtc_dpms(struct drm_crtc *crtc, int mode)
 	struct drm_device *dev = crtc->dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 	int pipe = psb_intel_crtc->pipe;
+=======
+	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
+	int pipe = gma_crtc->pipe;
+>>>>>>> v3.18
 =======
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	int pipe = gma_crtc->pipe;
@@ -485,7 +529,11 @@ static void mdfld_crtc_dpms(struct drm_crtc *crtc, int mode)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psb_intel_crtc_load_lut(crtc);
+=======
+		gma_crtc_load_lut(crtc);
+>>>>>>> v3.18
 =======
 		gma_crtc_load_lut(crtc);
 >>>>>>> v3.18
@@ -664,8 +712,13 @@ static const struct mrst_limit_t *mdfld_limit(struct drm_crtc *crtc)
 	struct drm_psb_private *dev_priv = dev->dev_private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (psb_intel_pipe_has_type(crtc, INTEL_OUTPUT_MIPI)
 	    || psb_intel_pipe_has_type(crtc, INTEL_OUTPUT_MIPI2)) {
+=======
+	if (gma_pipe_has_type(crtc, INTEL_OUTPUT_MIPI)
+	    || gma_pipe_has_type(crtc, INTEL_OUTPUT_MIPI2)) {
+>>>>>>> v3.18
 =======
 	if (gma_pipe_has_type(crtc, INTEL_OUTPUT_MIPI)
 	    || gma_pipe_has_type(crtc, INTEL_OUTPUT_MIPI2)) {
@@ -682,7 +735,11 @@ static const struct mrst_limit_t *mdfld_limit(struct drm_crtc *crtc)
 				dev_priv->core_freq == 200))
 			limit = &mdfld_limits[MDFLD_LIMT_DSIPLL_100];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (psb_intel_pipe_has_type(crtc, INTEL_OUTPUT_HDMI)) {
+=======
+	} else if (gma_pipe_has_type(crtc, INTEL_OUTPUT_HDMI)) {
+>>>>>>> v3.18
 =======
 	} else if (gma_pipe_has_type(crtc, INTEL_OUTPUT_HDMI)) {
 >>>>>>> v3.18
@@ -750,9 +807,15 @@ static int mdfld_crtc_mode_set(struct drm_crtc *crtc,
 {
 	struct drm_device *dev = crtc->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_crtc *psb_intel_crtc = to_psb_intel_crtc(crtc);
 	struct drm_psb_private *dev_priv = dev->dev_private;
 	int pipe = psb_intel_crtc->pipe;
+=======
+	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
+	struct drm_psb_private *dev_priv = dev->dev_private;
+	int pipe = gma_crtc->pipe;
+>>>>>>> v3.18
 =======
 	struct gma_crtc *gma_crtc = to_gma_crtc(crtc);
 	struct drm_psb_private *dev_priv = dev->dev_private;
@@ -768,7 +831,11 @@ static int mdfld_crtc_mode_set(struct drm_crtc *crtc,
 	bool is_mipi = false, is_mipi2 = false, is_hdmi = false;
 	struct drm_mode_config *mode_config = &dev->mode_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct psb_intel_encoder *psb_intel_encoder = NULL;
+=======
+	struct gma_encoder *gma_encoder = NULL;
+>>>>>>> v3.18
 =======
 	struct gma_encoder *gma_encoder = NULL;
 >>>>>>> v3.18
@@ -791,7 +858,11 @@ static int mdfld_crtc_mode_set(struct drm_crtc *crtc,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = check_fb(crtc->fb);
+=======
+	ret = check_fb(crtc->primary->fb);
+>>>>>>> v3.18
 =======
 	ret = check_fb(crtc->primary->fb);
 >>>>>>> v3.18
@@ -825,9 +896,15 @@ static int mdfld_crtc_mode_set(struct drm_crtc *crtc,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&psb_intel_crtc->saved_mode, mode,
 					sizeof(struct drm_display_mode));
 	memcpy(&psb_intel_crtc->saved_adjusted_mode, adjusted_mode,
+=======
+	memcpy(&gma_crtc->saved_mode, mode,
+					sizeof(struct drm_display_mode));
+	memcpy(&gma_crtc->saved_adjusted_mode, adjusted_mode,
+>>>>>>> v3.18
 =======
 	memcpy(&gma_crtc->saved_mode, mode,
 					sizeof(struct drm_display_mode));
@@ -848,9 +925,15 @@ static int mdfld_crtc_mode_set(struct drm_crtc *crtc,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psb_intel_encoder = psb_intel_attached_encoder(connector);
 
 		switch (psb_intel_encoder->type) {
+=======
+		gma_encoder = gma_attached_encoder(connector);
+
+		switch (gma_encoder->type) {
+>>>>>>> v3.18
 =======
 		gma_encoder = gma_attached_encoder(connector);
 
@@ -907,7 +990,11 @@ static int mdfld_crtc_mode_set(struct drm_crtc *crtc,
 	REG_WRITE(map->pos, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (psb_intel_encoder)
+=======
+	if (gma_encoder)
+>>>>>>> v3.18
 =======
 	if (gma_encoder)
 >>>>>>> v3.18
@@ -1126,7 +1213,11 @@ static int mdfld_crtc_mode_set(struct drm_crtc *crtc,
 	/* Wait for for the pipe enable to take effect. */
 	REG_WRITE(map->cntr, dev_priv->dspcntr[pipe]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_intel_wait_for_vblank(dev);
+=======
+	gma_wait_for_vblank(dev);
+>>>>>>> v3.18
 =======
 	gma_wait_for_vblank(dev);
 >>>>>>> v3.18
@@ -1141,17 +1232,23 @@ mrst_crtc_mode_set_exit:
 const struct drm_crtc_helper_funcs mdfld_helper_funcs = {
 	.dpms = mdfld_crtc_dpms,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mode_fixup = psb_intel_crtc_mode_fixup,
 	.mode_set = mdfld_crtc_mode_set,
 	.mode_set_base = mdfld__intel_pipe_set_base,
 	.prepare = psb_intel_crtc_prepare,
 	.commit = psb_intel_crtc_commit,
 =======
+=======
+>>>>>>> v3.18
 	.mode_fixup = gma_crtc_mode_fixup,
 	.mode_set = mdfld_crtc_mode_set,
 	.mode_set_base = mdfld__intel_pipe_set_base,
 	.prepare = gma_crtc_prepare,
 	.commit = gma_crtc_commit,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

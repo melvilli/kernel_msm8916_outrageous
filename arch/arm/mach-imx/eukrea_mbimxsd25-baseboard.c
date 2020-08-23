@@ -280,7 +280,11 @@ void __init eukrea_mbimxsd25_baseboard_init(void)
 	imx25_add_imx_ssi(0, &eukrea_mbimxsd_ssi_pdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	imx25_add_flexcan1(NULL);
+=======
+	imx25_add_flexcan1();
+>>>>>>> v3.18
 =======
 	imx25_add_flexcan1();
 >>>>>>> v3.18

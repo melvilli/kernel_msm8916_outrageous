@@ -24,6 +24,10 @@
 #include <linux/dcache.h>
 #include <linux/fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/string.h>
+>>>>>>> v3.18
 =======
 #include <linux/string.h>
 >>>>>>> v3.18
@@ -34,6 +38,10 @@
 #include <asm/sigframe.h>
 #include <asm/stack.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/vdso.h>
+>>>>>>> v3.18
 =======
 #include <asm/vdso.h>
 >>>>>>> v3.18
@@ -111,9 +119,14 @@ static struct pt_regs *valid_fault_handler(struct KBacktraceIterator* kbt)
 		if (kbt->verbose)
 			pr_err("  <%s while in kernel mode>\n", fault);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (EX1_PL(p->ex1) == USER_PL &&
 	    p->pc < PAGE_OFFSET &&
 	    p->sp < PAGE_OFFSET) {
+=======
+	} else if (user_mode(p) &&
+		   p->sp < PAGE_OFFSET && p->sp != 0) {
+>>>>>>> v3.18
 =======
 	} else if (user_mode(p) &&
 		   p->sp < PAGE_OFFSET && p->sp != 0) {
@@ -134,7 +147,11 @@ static struct pt_regs *valid_fault_handler(struct KBacktraceIterator* kbt)
 static int is_sigreturn(unsigned long pc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (pc == VDSO_BASE);
+=======
+	return current->mm && (pc == VDSO_SYM(&__vdso_rt_sigreturn));
+>>>>>>> v3.18
 =======
 	return current->mm && (pc == VDSO_SYM(&__vdso_rt_sigreturn));
 >>>>>>> v3.18
@@ -147,7 +164,11 @@ static struct pt_regs *valid_sigframe(struct KBacktraceIterator* kbt,
 	BacktraceIterator *b = &kbt->it;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (b->pc == VDSO_BASE && b->sp < PAGE_OFFSET &&
+=======
+	if (is_sigreturn(b->pc) && b->sp < PAGE_OFFSET &&
+>>>>>>> v3.18
 =======
 	if (is_sigreturn(b->pc) && b->sp < PAGE_OFFSET &&
 >>>>>>> v3.18
@@ -217,6 +238,7 @@ static int KBacktraceIterator_next_item_inclusive(
 static void validate_stack(struct pt_regs *regs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int cpu = smp_processor_id();
 	unsigned long ksp0 = get_current_ksp0();
 	unsigned long ksp0_base = ksp0 - THREAD_SIZE;
@@ -233,6 +255,8 @@ static void validate_stack(struct pt_regs *regs)
 		       "  sp %#lx (%#lx in caller), caller pc %#lx, lr %#lx\n",
 		       cpu, ksp0_base, sp, regs->sp, regs->pc, regs->lr);
 =======
+=======
+>>>>>>> v3.18
 	int cpu = raw_smp_processor_id();
 	unsigned long ksp0 = get_current_ksp0();
 	unsigned long ksp0_base = ksp0 & -THREAD_SIZE;
@@ -248,6 +272,9 @@ static void validate_stack(struct pt_regs *regs)
 		pr_err("WARNING: cpu %d: kernel stack %#lx..%#lx overrun!\n"
 		       "  sp %#lx (%#lx in caller), caller pc %#lx, lr %#lx\n",
 		       cpu, ksp0_base, ksp0, sp, regs->sp, regs->pc, regs->lr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -372,6 +399,7 @@ static void describe_addr(struct KBacktraceIterator *kbt,
 
 	if (vma->vm_file) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char *s;
 		p = d_path(&vma->vm_file->f_path, buf, bufsize);
 		if (IS_ERR(p))
@@ -388,6 +416,8 @@ static void describe_addr(struct KBacktraceIterator *kbt,
 	remaining = (bufsize - 1) - namelen;
 	memmove(buf, p, namelen);
 =======
+=======
+>>>>>>> v3.18
 		p = d_path(&vma->vm_file->f_path, buf, bufsize);
 		if (IS_ERR(p))
 			p = "?";
@@ -400,6 +430,9 @@ static void describe_addr(struct KBacktraceIterator *kbt,
 	namelen = strlen(name);
 	remaining = (bufsize - 1) - namelen;
 	memmove(buf, name, namelen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	snprintf(buf + namelen, remaining, "[%lx+%lx] ",
 		 vma->vm_start, vma->vm_end - vma->vm_start);
@@ -407,7 +440,10 @@ static void describe_addr(struct KBacktraceIterator *kbt,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Avoid possible crash recursion during backtrace.  If it happens, it
  * makes it easy to lose the actual root cause of the failure, so we
  * put a simple guard on all the backtrace loops.
@@ -428,6 +464,9 @@ static void end_backtrace(void)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This method wraps the backtracer's more generic support.
  * It is only invoked from the architecture-specific code; show_stack()
@@ -439,6 +478,11 @@ void tile_show_stack(struct KBacktraceIterator *kbt, int headers)
 	int have_mmap_sem = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!start_backtrace())
+		return;
+>>>>>>> v3.18
 =======
 	if (!start_backtrace())
 		return;
@@ -454,7 +498,11 @@ void tile_show_stack(struct KBacktraceIterator *kbt, int headers)
 		       " on cpu %d at cycle %lld\n",
 		       kbt->task->pid, kbt->task->tgid, kbt->task->comm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       smp_processor_id(), get_cycles());
+=======
+		       raw_smp_processor_id(), get_cycles());
+>>>>>>> v3.18
 =======
 		       raw_smp_processor_id(), get_cycles());
 >>>>>>> v3.18
@@ -489,6 +537,10 @@ void tile_show_stack(struct KBacktraceIterator *kbt, int headers)
 	if (have_mmap_sem)
 		up_read(&kbt->task->mm->mmap_sem);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	end_backtrace();
+>>>>>>> v3.18
 =======
 	end_backtrace();
 >>>>>>> v3.18
@@ -533,7 +585,11 @@ void _KBacktraceIterator_init_current(struct KBacktraceIterator *kbt, ulong pc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This is called only from kernel/sched.c, with esp == NULL */
+=======
+/* This is called only from kernel/sched/core.c, with esp == NULL */
+>>>>>>> v3.18
 =======
 /* This is called only from kernel/sched/core.c, with esp == NULL */
 >>>>>>> v3.18
@@ -558,6 +614,11 @@ void save_stack_trace_tsk(struct task_struct *task, struct stack_trace *trace)
 	int i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!start_backtrace())
+		goto done;
+>>>>>>> v3.18
 =======
 	if (!start_backtrace())
 		goto done;
@@ -576,6 +637,11 @@ void save_stack_trace_tsk(struct task_struct *task, struct stack_trace *trace)
 		trace->entries[i++] = kbt.it.pc;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	end_backtrace();
+done:
+>>>>>>> v3.18
 =======
 	end_backtrace();
 done:

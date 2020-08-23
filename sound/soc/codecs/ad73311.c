@@ -24,7 +24,10 @@
 #include "ad73311.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_soc_dapm_widget ad73311_dapm_widgets[] = {
 SND_SOC_DAPM_INPUT("VINP"),
 SND_SOC_DAPM_INPUT("VINN"),
@@ -40,6 +43,9 @@ static const struct snd_soc_dapm_route ad73311_dapm_routes[] = {
 	{ "VOUTP", NULL, "Playback" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct snd_soc_dai_driver ad73311_dai = {
 	.name = "ad73311-hifi",
@@ -58,14 +64,20 @@ static struct snd_soc_dai_driver ad73311_dai = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct snd_soc_codec_driver soc_codec_dev_ad73311;
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_codec_driver soc_codec_dev_ad73311 = {
 	.dapm_widgets = ad73311_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(ad73311_dapm_widgets),
 	.dapm_routes = ad73311_dapm_routes,
 	.num_dapm_routes = ARRAY_SIZE(ad73311_dapm_routes),
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ad73311_probe(struct platform_device *pdev)

@@ -88,7 +88,10 @@ config DA9055_WATCHDOG
 	  will be called da9055_wdt.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config DA9063_WATCHDOG
 	tristate "Dialog DA9063 Watchdog"
 	depends on MFD_DA9063
@@ -116,6 +119,9 @@ config MENF21BMC_WATCHDOG
 	  This driver can also be built as a module. If so the module
 	  will be called menf21bmc_wdt.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config WM831X_WATCHDOG
 	tristate "WM831x watchdog"
@@ -134,7 +140,10 @@ config WM8350_WATCHDOG
 	  the watchdog triggers the system will be reset.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config XILINX_WATCHDOG
 	tristate "Xilinx Watchdog timer"
 	depends on HAS_IOMEM
@@ -145,6 +154,9 @@ config XILINX_WATCHDOG
 	  To compile this driver as a module, choose M here: the
 	  module will be called of_xilinx_wdt.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # ALPHA Architecture
 
@@ -153,7 +165,11 @@ config XILINX_WATCHDOG
 config ARM_SP805_WATCHDOG
 	tristate "ARM SP805 Watchdog"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARM && ARM_AMBA
+=======
+	depends on (ARM || ARM64) && ARM_AMBA
+>>>>>>> v3.18
 =======
 	depends on (ARM || ARM64) && ARM_AMBA
 >>>>>>> v3.18
@@ -178,7 +194,10 @@ config AT91SAM9X_WATCHDOG
 	  reboot your system when the timeout is reached.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config CADENCE_WATCHDOG
 	tristate "Cadence Watchdog Timer"
 	depends on ARM
@@ -187,6 +206,9 @@ config CADENCE_WATCHDOG
 	  Say Y here if you want to include support for the watchdog
 	  timer in the Xilinx Zynq.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config 21285_WATCHDOG
 	tristate "DC21285 watchdog"
@@ -247,6 +269,10 @@ config S3C2410_WATCHDOG
 	depends on HAVE_S3C2410_WATCHDOG
 	select WATCHDOG_CORE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select MFD_SYSCON if ARCH_EXYNOS5
+>>>>>>> v3.18
 =======
 	select MFD_SYSCON if ARCH_EXYNOS5
 >>>>>>> v3.18
@@ -277,6 +303,7 @@ config SA1100_WATCHDOG
 config DW_WATCHDOG
 	tristate "Synopsys DesignWare watchdog"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARM && HAVE_CLK
 	help
 	  Say Y here if to include support for the Synopsys DesignWare
@@ -294,6 +321,8 @@ config MPCORE_WATCHDOG
 	  module will be called mpcore_wdt.
 
 =======
+=======
+>>>>>>> v3.18
 	depends on HAS_IOMEM
 	help
 	  Say Y here if to include support for the Synopsys DesignWare
@@ -301,6 +330,9 @@ config MPCORE_WATCHDOG
 	  To compile this driver as a module, choose M here: the
 	  module will be called dw_wdt.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config EP93XX_WATCHDOG
 	tristate "EP93xx Watchdog"
@@ -336,7 +368,11 @@ config PNX4008_WATCHDOG
 config IOP_WATCHDOG
 	tristate "IOP Watchdog"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PLAT_IOP
+=======
+	depends on ARCH_IOP13XX
+>>>>>>> v3.18
 =======
 	depends on ARCH_IOP13XX
 >>>>>>> v3.18
@@ -356,16 +392,22 @@ config IOP_WATCHDOG
 config DAVINCI_WATCHDOG
 	tristate "DaVinci watchdog"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_DAVINCI
 	help
 	  Say Y here if to include support for the watchdog timer
 	  in the DaVinci DM644x/DM646x processors.
 =======
+=======
+>>>>>>> v3.18
 	depends on ARCH_DAVINCI || ARCH_KEYSTONE
 	select WATCHDOG_CORE
 	help
 	  Say Y here if to include support for the watchdog timer
 	  in the DaVinci DM644x/DM646x or Keystone processors.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  To compile this driver as a module, choose M here: the
 	  module will be called davinci_wdt.
@@ -376,7 +418,11 @@ config DAVINCI_WATCHDOG
 config ORION_WATCHDOG
 	tristate "Orion watchdog"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_ORION5X || ARCH_KIRKWOOD
+=======
+	depends on ARCH_ORION5X || ARCH_DOVE || MACH_DOVE || ARCH_MVEBU
+>>>>>>> v3.18
 =======
 	depends on ARCH_ORION5X || ARCH_DOVE || MACH_DOVE || ARCH_MVEBU
 >>>>>>> v3.18
@@ -388,7 +434,10 @@ config ORION_WATCHDOG
 	  module will be called orion_wdt.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RN5T618_WATCHDOG
 	tristate "Ricoh RN5T618 watchdog"
 	depends on MFD_RN5T618
@@ -410,6 +459,9 @@ config SUNXI_WATCHDOG
 	  To compile this driver as a module, choose M here: the
 	  module will be called sunxi_wdt.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config COH901327_WATCHDOG
 	bool "ST-Ericsson COH 901 327 watchdog"
@@ -471,6 +523,11 @@ config IMX2_WDT
 	tristate "IMX2+ Watchdog"
 	depends on ARCH_MXC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select REGMAP_MMIO
+	select WATCHDOG_CORE
+>>>>>>> v3.18
 =======
 	select REGMAP_MMIO
 	select WATCHDOG_CORE
@@ -509,7 +566,10 @@ config RETU_WATCHDOG
 	  module will be called retu_wdt.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MOXART_WDT
 	tristate "MOXART watchdog"
 	depends on ARCH_MOXART
@@ -563,6 +623,9 @@ config MESON_WATCHDOG
 	  To compile this driver as a module, choose M here: the
 	  module will be called meson_wdt.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # AVR32 Architecture
 
@@ -591,8 +654,11 @@ config BFIN_WDT
 # FRV Architecture
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # H8300 Architecture
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # X86 (i386 + ia64 + x86_64) Architecture
@@ -682,7 +748,11 @@ config GEODE_WDT
 config SC520_WDT
 	tristate "AMD Elan SC520 processor Watchdog"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86
+=======
+	depends on MELAN
+>>>>>>> v3.18
 =======
 	depends on MELAN
 >>>>>>> v3.18
@@ -796,7 +866,10 @@ config INTEL_SCU_WATCHDOG
 	  To compile this driver as a module, choose M here.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config INTEL_MID_WATCHDOG
 	tristate "Intel MID Watchdog Timer"
 	depends on X86_INTEL_MID
@@ -810,6 +883,9 @@ config INTEL_MID_WATCHDOG
 
 	  To compile this driver as a module, choose M here.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ITCO_WDT
 	tristate "Intel TCO Timer/Watchdog"
@@ -884,7 +960,10 @@ config HP_WATCHDOG
 	  called hpwdt.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config KEMPLD_WDT
 	tristate "Kontron COM Watchdog Timer"
 	depends on MFD_KEMPLD
@@ -896,6 +975,9 @@ config KEMPLD_WDT
 	  This driver can also be built as a module. If so, the module will be
 	  called kempld_wdt.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HPWDT_NMI_DECODING
 	bool "NMI decoding support for the HP ProLiant iLO2+ Hardware Watchdog Timer"
@@ -987,7 +1069,11 @@ config 60XX_WDT
 config SBC8360_WDT
 	tristate "SBC8360 Watchdog Timer"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86
+=======
+	depends on X86_32
+>>>>>>> v3.18
 =======
 	depends on X86_32
 >>>>>>> v3.18
@@ -1069,6 +1155,7 @@ config VIA_WDT
 
 config W83627HF_WDT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "W83627HF/W83627DHG Watchdog Timer"
 	depends on X86
 	---help---
@@ -1106,6 +1193,8 @@ config W83697UG_WDT
 	  This is the driver for the hardware watchdog on the W83697UG/UF
 	  chipset as used in MSI Fuzzy CX700 VIA motherboards (and likely others).
 =======
+=======
+>>>>>>> v3.18
 	tristate "Watchdog timer for W83627HF/W83627DHG and compatibles"
 	depends on X86
 	select WATCHDOG_CORE
@@ -1122,6 +1211,9 @@ config W83697UG_WDT
 		NCT6776
 		NCT6779
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  This watchdog simply watches your kernel to make sure it doesn't
 	  freeze, and if it does, it reboots your computer after a certain
@@ -1129,7 +1221,11 @@ config W83697UG_WDT
 
 	  To compile this driver as a module, choose M here: the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  module will be called w83697ug_wdt.
+=======
+	  module will be called w83627hf_wdt.
+>>>>>>> v3.18
 =======
 	  module will be called w83627hf_wdt.
 >>>>>>> v3.18
@@ -1212,6 +1308,7 @@ config M54xx_WATCHDOG
 # MicroBlaze Architecture
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config XILINX_WATCHDOG
 	tristate "Xilinx Watchdog timer"
 	depends on MICROBLAZE
@@ -1224,6 +1321,8 @@ config XILINX_WATCHDOG
 	  To compile this driver as a module, choose M here: the
 	  module will be called of_xilinx_wdt.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # MIPS Architecture
@@ -1313,7 +1412,11 @@ config TXX9_WDT
 config OCTEON_WDT
 	tristate "Cavium OCTEON SOC family Watchdog Timer"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CPU_CAVIUM_OCTEON
+=======
+	depends on CAVIUM_OCTEON_SOC
+>>>>>>> v3.18
 =======
 	depends on CAVIUM_OCTEON_SOC
 >>>>>>> v3.18
@@ -1343,7 +1446,10 @@ config BCM63XX_WDT
 	  The module will be called bcm63xx_wdt.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config BCM2835_WDT
 	tristate "Broadcom BCM2835 hardware watchdog"
 	depends on ARCH_BCM2835
@@ -1377,6 +1483,9 @@ config BCM_KONA_WDT_DEBUG
 
 	  If in doubt, say 'N'.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config LANTIQ_WDT
 	tristate "Lantiq SoC watchdog"
@@ -1385,7 +1494,10 @@ config LANTIQ_WDT
 	  Hardware driver for the Lantiq SoC Watchdog Timer.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config RALINK_WDT
 	tristate "Ralink SoC watchdog"
 	select WATCHDOG_CORE
@@ -1393,6 +1505,9 @@ config RALINK_WDT
 	help
 	  Hardware driver for the Ralink SoC Watchdog Timer.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # PARISC Architecture
 
@@ -1414,6 +1529,10 @@ config 8xxx_WDT
 	tristate "MPC8xxx Platform Watchdog Timer"
 	depends on PPC_8xx || PPC_83xx || PPC_86xx
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select WATCHDOG_CORE
+>>>>>>> v3.18
 =======
 	select WATCHDOG_CORE
 >>>>>>> v3.18
@@ -1467,7 +1586,10 @@ config BOOKE_WDT_DEFAULT_TIMEOUT
 	  The value can be overridden by the wdt_period command-line parameter.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MEN_A21_WDT
        tristate "MEN A21 VME CPU Carrier Board Watchdog Timer"
        select WATCHDOG_CORE
@@ -1480,6 +1602,9 @@ config MEN_A21_WDT
 
 	If unsure select N here.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # PPC64 Architecture
 
@@ -1495,14 +1620,20 @@ config WATCHDOG_RTAS
 # S390 Architecture
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ZVM_WATCHDOG
 	tristate "z/VM Watchdog Timer"
 	depends on S390
 =======
+=======
+>>>>>>> v3.18
 config DIAG288_WATCHDOG
 	tristate "System z diag288 Watchdog"
 	depends on S390
 	select WATCHDOG_CORE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  IBM s/390 and zSeries machines running under z/VM 5.1 or later
@@ -1510,15 +1641,21 @@ config DIAG288_WATCHDOG
 	  user define Control Program command to be executed after a
 	  timeout.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	  To compile this driver as a module, choose M here. The module
 	  will be called vmwatchdog.
 =======
+=======
+>>>>>>> v3.18
 	  LPAR provides a very similar interface. This driver handles
 	  both.
 
 	  To compile this driver as a module, choose M here. The module
 	  will be called diag288_wdt.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # SUPERH (sh + sh64) Architecture

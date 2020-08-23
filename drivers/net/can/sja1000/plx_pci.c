@@ -17,8 +17,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -50,7 +54,12 @@ MODULE_SUPPORTED_DEVICE("Adlink PCI-7841/cPCI-7841, "
 			"esd CAN-PCIe/2000, "
 			"Connect Tech Inc. CANpro/104-Plus Opto (CRG001), "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"IXXAT PC-I 04/PCI")
+=======
+			"IXXAT PC-I 04/PCI, "
+			"ELCUS CAN-200-PCI")
+>>>>>>> v3.18
 =======
 			"IXXAT PC-I 04/PCI, "
 			"ELCUS CAN-200-PCI")
@@ -133,12 +142,18 @@ struct plx_pci_card {
 #define ESD_PCI_SUB_SYS_ID_PCI104200	0x0501
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CAN200PCI_DEVICE_ID		0x9030
 #define CAN200PCI_VENDOR_ID		0x10b5
 #define CAN200PCI_SUB_DEVICE_ID		0x0301
 #define CAN200PCI_SUB_VENDOR_ID		0xe1c5
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IXXAT_PCI_VENDOR_ID		0x10b5
 #define IXXAT_PCI_DEVICE_ID		0x9050
@@ -252,8 +267,11 @@ static struct plx_pci_card_info plx_pci_card_info_cti = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(plx_pci_tbl) = {
 =======
+=======
+>>>>>>> v3.18
 static struct plx_pci_card_info plx_pci_card_info_elcus = {
 	"Eclus CAN-200-PCI", 2,
 	PLX_PCI_CAN_CLOCK, PLX_PCI_OCR, PLX_PCI_CDR,
@@ -263,6 +281,9 @@ static struct plx_pci_card_info plx_pci_card_info_elcus = {
 };
 
 static const struct pci_device_id plx_pci_tbl[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		/* Adlink PCI-7841/cPCI-7841 */
@@ -349,7 +370,10 @@ static const struct pci_device_id plx_pci_tbl[] = {
 		(kernel_ulong_t)&plx_pci_card_info_cti
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{
 		/* Elcus CAN-200-PCI */
 		CAN200PCI_VENDOR_ID, CAN200PCI_DEVICE_ID,
@@ -357,6 +381,9 @@ static const struct pci_device_id plx_pci_tbl[] = {
 		0, 0,
 		(kernel_ulong_t)&plx_pci_card_info_elcus
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0,}
 };
@@ -517,7 +544,10 @@ static void plx_pci_del_card(struct pci_dev *pdev)
 
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -611,6 +641,10 @@ static int plx_pci_add_card(struct pci_dev *pdev,
 
 			SET_NETDEV_DEV(dev, &pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			dev->dev_id = i;
+>>>>>>> v3.18
 =======
 			dev->dev_id = i;
 >>>>>>> v3.18

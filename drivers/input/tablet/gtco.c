@@ -54,7 +54,10 @@ Scott Hill shill@gtcocalcomp.com
 #include <linux/module.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -853,7 +856,11 @@ static int gtco_probe(struct usb_interface *usbinterface,
 
 	/* Save interface information */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gtco->usbdev = usb_get_dev(interface_to_usbdev(usbinterface));
+=======
+	gtco->usbdev = interface_to_usbdev(usbinterface);
+>>>>>>> v3.18
 =======
 	gtco->usbdev = interface_to_usbdev(usbinterface);
 >>>>>>> v3.18
@@ -877,6 +884,7 @@ static int gtco_probe(struct usb_interface *usbinterface,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Sanity check that a device has an endpoint */
 	if (usbinterface->altsetting[0].desc.bNumEndpoints < 1) {
 		dev_err(&usbinterface->dev,
@@ -885,6 +893,8 @@ static int gtco_probe(struct usb_interface *usbinterface,
 		goto err_free_urb;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -909,7 +919,11 @@ static int gtco_probe(struct usb_interface *usbinterface,
 	 */
 	if (usb_get_extra_descriptor(usbinterface->cur_altsetting,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     HID_DEVICE_TYPE, &hid_desc) != 0) {
+=======
+				     HID_DEVICE_TYPE, &hid_desc) != 0){
+>>>>>>> v3.18
 =======
 				     HID_DEVICE_TYPE, &hid_desc) != 0){
 >>>>>>> v3.18

@@ -47,7 +47,10 @@ void dquot_initialize(struct inode *inode);
 void dquot_drop(struct inode *inode);
 struct dquot *dqget(struct super_block *sb, struct kqid qid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct dquot *dqgrab(struct dquot *dquot)
 {
 	/* Make sure someone else has active reference to dquot */
@@ -56,6 +59,9 @@ static inline struct dquot *dqgrab(struct dquot *dquot)
 	atomic_inc(&dquot->dq_count);
 	return dquot;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void dqput(struct dquot *dquot);
 int dquot_scan_active(struct super_block *sb,

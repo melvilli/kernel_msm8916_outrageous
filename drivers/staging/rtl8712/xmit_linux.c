@@ -52,7 +52,11 @@ void _r8712_open_pktfile(_pkt *pktptr, struct pkt_file *pfile)
 	pfile->cur_addr = pfile->buf_start = pktptr->data;
 	pfile->pkt_len = pfile->buf_len = pktptr->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pfile->cur_buffer = pfile->buf_start ;
+=======
+	pfile->cur_buffer = pfile->buf_start;
+>>>>>>> v3.18
 =======
 	pfile->cur_buffer = pfile->buf_start;
 >>>>>>> v3.18

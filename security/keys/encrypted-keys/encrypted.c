@@ -316,6 +316,7 @@ static struct key *request_user_key(const char *master_desc, u8 **master_key,
 	down_read(&ukey->sem);
 	upayload = ukey->payload.data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!upayload) {
 		/* key was revoked before we acquired its semaphore */
 		up_read(&ukey->sem);
@@ -323,6 +324,8 @@ static struct key *request_user_key(const char *master_desc, u8 **master_key,
 		ukey = ERR_PTR(-EKEYREVOKED);
 		goto error;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*master_key = upayload->data;
@@ -439,7 +442,11 @@ static struct key *request_master_key(struct encrypted_key_payload *epayload,
 				      u8 **master_key, size_t *master_keylen)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct key *mkey = ERR_PTR(-EINVAL);
+=======
+	struct key *mkey = NULL;
+>>>>>>> v3.18
 =======
 	struct key *mkey = NULL;
 >>>>>>> v3.18
@@ -624,7 +631,11 @@ static struct encrypted_key_payload *encrypted_key_alloc(struct key *key,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtol(datalen, 10, &dlen);
+=======
+	ret = kstrtol(datalen, 10, &dlen);
+>>>>>>> v3.18
 =======
 	ret = kstrtol(datalen, 10, &dlen);
 >>>>>>> v3.18
@@ -864,8 +875,11 @@ static int encrypted_update(struct key *key, struct key_preparsed_payload *prep)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(KEY_FLAG_NEGATIVE, &key->flags))
 		return -ENOKEY;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (datalen <= 0 || datalen > 32767 || !prep->data)
@@ -994,7 +1008,10 @@ struct key_type key_type_encrypted = {
 	.instantiate = encrypted_instantiate,
 	.update = encrypted_update,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.match = user_match,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.destroy = encrypted_destroy,
@@ -1045,6 +1062,7 @@ static int __init init_encrypted(void)
 	if (ret < 0)
 		return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = aes_get_sizes();
 	if (ret < 0)
 		goto out;
@@ -1053,10 +1071,15 @@ static int __init init_encrypted(void)
 		goto out;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ret = register_key_type(&key_type_encrypted);
 	if (ret < 0)
 		goto out;
 	return aes_get_sizes();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	encrypted_shash_release();

@@ -44,7 +44,10 @@ static int smsc_phy_ack_interrupt(struct phy_device *phydev)
 static int smsc_phy_config_init(struct phy_device *phydev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int rc = phy_read(phydev, MII_LAN83C185_CTRL_STATUS);
 
 	if (rc < 0)
@@ -61,6 +64,9 @@ static int smsc_phy_config_init(struct phy_device *phydev)
 
 static int smsc_phy_reset(struct phy_device *phydev)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int rc = phy_read(phydev, MII_LAN83C185_SPECIAL_MODES);
 	if (rc < 0)
@@ -86,6 +92,7 @@ static int smsc_phy_reset(struct phy_device *phydev)
 		} while (rc & BMCR_RESET);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	rc = phy_read(phydev, MII_LAN83C185_CTRL_STATUS);
 	if (rc < 0)
@@ -98,6 +105,9 @@ static int smsc_phy_reset(struct phy_device *phydev)
 		return rc;
 
 	return smsc_phy_ack_interrupt (phydev);
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -166,6 +176,10 @@ static struct phy_driver smsc_phy_driver[] = {
 	.read_status	= genphy_read_status,
 	.config_init	= smsc_phy_config_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.soft_reset	= smsc_phy_reset,
+>>>>>>> v3.18
 =======
 	.soft_reset	= smsc_phy_reset,
 >>>>>>> v3.18
@@ -192,6 +206,10 @@ static struct phy_driver smsc_phy_driver[] = {
 	.read_status	= genphy_read_status,
 	.config_init	= smsc_phy_config_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.soft_reset	= smsc_phy_reset,
+>>>>>>> v3.18
 =======
 	.soft_reset	= smsc_phy_reset,
 >>>>>>> v3.18
@@ -218,6 +236,10 @@ static struct phy_driver smsc_phy_driver[] = {
 	.read_status	= genphy_read_status,
 	.config_init	= smsc_phy_config_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.soft_reset	= smsc_phy_reset,
+>>>>>>> v3.18
 =======
 	.soft_reset	= smsc_phy_reset,
 >>>>>>> v3.18
@@ -266,6 +288,10 @@ static struct phy_driver smsc_phy_driver[] = {
 	.read_status	= lan87xx_read_status,
 	.config_init	= smsc_phy_config_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.soft_reset	= smsc_phy_reset,
+>>>>>>> v3.18
 =======
 	.soft_reset	= smsc_phy_reset,
 >>>>>>> v3.18
@@ -289,8 +315,12 @@ static int __init smsc_init(void)
 static void __exit smsc_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return phy_drivers_unregister(smsc_phy_driver,
 		ARRAY_SIZE(smsc_phy_driver));
+=======
+	phy_drivers_unregister(smsc_phy_driver, ARRAY_SIZE(smsc_phy_driver));
+>>>>>>> v3.18
 =======
 	phy_drivers_unregister(smsc_phy_driver, ARRAY_SIZE(smsc_phy_driver));
 >>>>>>> v3.18

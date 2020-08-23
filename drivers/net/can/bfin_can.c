@@ -10,7 +10,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -533,6 +536,10 @@ static const struct net_device_ops bfin_can_netdev_ops = {
 	.ndo_stop               = bfin_can_close,
 	.ndo_start_xmit         = bfin_can_start_xmit,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu         = can_change_mtu,
+>>>>>>> v3.18
 =======
 	.ndo_change_mtu         = can_change_mtu,
 >>>>>>> v3.18
@@ -547,7 +554,11 @@ static int bfin_can_probe(struct platform_device *pdev)
 	unsigned short *pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -592,7 +603,11 @@ static int bfin_can_probe(struct platform_device *pdev)
 	priv->can.clock.freq = get_sclk();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, dev);
+=======
+	platform_set_drvdata(pdev, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, dev);
 >>>>>>> v3.18
@@ -629,7 +644,11 @@ exit:
 static int bfin_can_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -641,8 +660,11 @@ static int bfin_can_remove(struct platform_device *pdev)
 	unregister_candev(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -658,7 +680,11 @@ static int bfin_can_remove(struct platform_device *pdev)
 static int bfin_can_suspend(struct platform_device *pdev, pm_message_t mesg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -685,7 +711,11 @@ static int bfin_can_suspend(struct platform_device *pdev, pm_message_t mesg)
 static int bfin_can_resume(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&pdev->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(pdev);
 >>>>>>> v3.18

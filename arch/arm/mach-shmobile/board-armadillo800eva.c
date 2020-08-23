@@ -32,6 +32,11 @@
 #include <linux/regulator/driver.h>
 #include <linux/pinctrl/machine.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pwm.h>
+#include <linux/pwm_backlight.h>
+>>>>>>> v3.18
 =======
 #include <linux/pwm.h>
 #include <linux/pwm_backlight.h>
@@ -49,9 +54,13 @@
 #include <linux/i2c-gpio.h>
 #include <linux/reboot.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/common.h>
 #include <mach/irqs.h>
 #include <mach/r8a7740.h>
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -70,11 +79,17 @@
 #include <sound/simple_card.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "common.h"
 #include "irqs.h"
 #include "pm-rmobile.h"
 #include "r8a7740.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "sh-gpio.h"
 
@@ -375,7 +390,10 @@ static struct sh_eth_plat_data sh_eth_platdata = {
 	.phy			= 0x00, /* LAN8710A */
 	.edmac_endian		= EDMAC_LITTLE_ENDIAN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.register_type		= SH_ETH_REG_GIGABIT,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.phy_interface		= PHY_INTERFACE_MODE_MII,
@@ -398,17 +416,23 @@ static struct resource sh_eth_resources[] = {
 
 static struct platform_device sh_eth_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name = "sh-eth",
 	.id = -1,
 	.dev = {
 		.platform_data = &sh_eth_platdata,
 =======
+=======
+>>>>>>> v3.18
 	.name = "r8a7740-gether",
 	.id = -1,
 	.dev = {
 		.platform_data = &sh_eth_platdata,
 		.dma_mask = &sh_eth_device.dev.coherent_dma_mask,
 		.coherent_dma_mask = DMA_BIT_MASK(32),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.resource = sh_eth_resources,
@@ -416,8 +440,11 @@ static struct platform_device sh_eth_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* LCDC */
 =======
+=======
+>>>>>>> v3.18
 /* PWM */
 static struct resource pwm_resources[] = {
 	[0] = {
@@ -455,6 +482,9 @@ static struct platform_device pwm_backlight_device = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct fb_videomode lcdc0_mode = {
 	.name		= "AMPIER/AM-800480",
@@ -608,7 +638,10 @@ static struct platform_device hdmi_lcdc_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* LEDS */
 static struct gpio_led gpio_leds[] = {
 	{
@@ -643,6 +676,9 @@ static struct platform_device leds_gpio_device = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* GPIO KEY */
 #define GPIO_KEY(c, g, d, ...) \
@@ -675,12 +711,18 @@ static struct regulator_consumer_supply fixed3v3_power_consumers[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Fixed 3.3V regulator used by LCD backlight */
 static struct regulator_consumer_supply fixed5v0_power_consumers[] = {
 	REGULATOR_SUPPLY("power", "pwm-backlight.0"),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Fixed 3.3V regulator to be used by SDHI0 */
 static struct regulator_consumer_supply vcc_sdhi0_consumers[] = {
@@ -699,7 +741,11 @@ static struct fixed_voltage_config vcc_sdhi0_info = {
 	.supply_name = "SDHI0 Vcc",
 	.microvolts = 3300000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.gpio = GPIO_PORT75,
+=======
+	.gpio = 75,
+>>>>>>> v3.18
 =======
 	.gpio = 75,
 >>>>>>> v3.18
@@ -734,7 +780,11 @@ static struct regulator_init_data vccq_sdhi0_init_data = {
 
 static struct gpio vccq_sdhi0_gpios[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{GPIO_PORT17, GPIOF_OUT_INIT_LOW, "vccq-sdhi0" },
+=======
+	{17, GPIOF_OUT_INIT_LOW, "vccq-sdhi0" },
+>>>>>>> v3.18
 =======
 	{17, GPIOF_OUT_INIT_LOW, "vccq-sdhi0" },
 >>>>>>> v3.18
@@ -749,7 +799,11 @@ static struct gpio_regulator_config vccq_sdhi0_info = {
 	.supply_name = "vqmmc",
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_gpio = GPIO_PORT74,
+=======
+	.enable_gpio = 74,
+>>>>>>> v3.18
 =======
 	.enable_gpio = 74,
 >>>>>>> v3.18
@@ -791,7 +845,11 @@ static struct fixed_voltage_config vcc_sdhi1_info = {
 	.supply_name = "SDHI1 Vcc",
 	.microvolts = 3300000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.gpio = GPIO_PORT16,
+=======
+	.gpio = 16,
+>>>>>>> v3.18
 =======
 	.gpio = 16,
 >>>>>>> v3.18
@@ -809,6 +867,7 @@ static struct platform_device vcc_sdhi1 = {
 
 /* SDHI0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * FIXME
  *
@@ -820,6 +879,8 @@ static struct platform_device vcc_sdhi1 = {
 #define IRQ31	irq_pin(31)
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct sh_mobile_sdhi_info sdhi0_info = {
 	.dma_slave_tx	= SHDMA_SLAVE_SDHI0_TX,
 	.dma_slave_rx	= SHDMA_SLAVE_SDHI0_RX,
@@ -827,7 +888,11 @@ static struct sh_mobile_sdhi_info sdhi0_info = {
 			  MMC_CAP_POWER_OFF_CARD,
 	.tmio_flags	= TMIO_MMC_HAS_IDLE_WAIT | TMIO_MMC_USE_GPIO_CD,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cd_gpio	= GPIO_PORT167,
+=======
+	.cd_gpio	= 167,
+>>>>>>> v3.18
 =======
 	.cd_gpio	= 167,
 >>>>>>> v3.18
@@ -874,7 +939,11 @@ static struct sh_mobile_sdhi_info sdhi1_info = {
 	.tmio_flags	= TMIO_MMC_HAS_IDLE_WAIT | TMIO_MMC_USE_GPIO_CD,
 	/* Port72 cannot generate IRQs, will be used in polling mode. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cd_gpio	= GPIO_PORT72,
+=======
+	.cd_gpio	= 72,
+>>>>>>> v3.18
 =======
 	.cd_gpio	= 72,
 >>>>>>> v3.18
@@ -929,6 +998,12 @@ static struct sh_mmcif_plat_data sh_mmcif_plat = {
 			  MMC_CAP_8_BIT_DATA |
 			  MMC_CAP_NONREMOVABLE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ccs_unsupported = true,
+	.slave_id_tx	= SHDMA_SLAVE_MMCIF_TX,
+	.slave_id_rx	= SHDMA_SLAVE_MMCIF_RX,
+>>>>>>> v3.18
 =======
 	.ccs_unsupported = true,
 	.slave_id_tx	= SHDMA_SLAVE_MMCIF_TX,
@@ -1066,7 +1141,11 @@ static struct resource fsi_resources[] = {
 		.name	= "FSI",
 		.start	= 0xfe1f0000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.end	= 0xfe1f8400 - 1,
+=======
+		.end	= 0xfe1f0400 - 1,
+>>>>>>> v3.18
 =======
 		.end	= 0xfe1f0400 - 1,
 >>>>>>> v3.18
@@ -1095,6 +1174,7 @@ static struct asoc_simple_card_info fsi_wm8978_info = {
 	.codec		= "wm8978.0-001a",
 	.platform	= "sh_fsi2",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.daifmt		= SND_SOC_DAIFMT_I2S,
 	.cpu_dai = {
 		.name	= "fsia-dai",
@@ -1104,6 +1184,8 @@ static struct asoc_simple_card_info fsi_wm8978_info = {
 		.name	= "wm8978-hifi",
 		.fmt	= SND_SOC_DAIFMT_CBM_CFM | SND_SOC_DAIFMT_NB_NF,
 =======
+=======
+>>>>>>> v3.18
 	.daifmt		= SND_SOC_DAIFMT_I2S | SND_SOC_DAIFMT_CBM_CFM,
 	.cpu_dai = {
 		.fmt	= SND_SOC_DAIFMT_IB_NF,
@@ -1111,6 +1193,9 @@ static struct asoc_simple_card_info fsi_wm8978_info = {
 	},
 	.codec_dai = {
 		.name	= "wm8978-hifi",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.sysclk	= 12288000,
 	},
@@ -1122,6 +1207,11 @@ static struct platform_device fsi_wm8978_device = {
 	.dev	= {
 		.platform_data	= &fsi_wm8978_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.coherent_dma_mask = DMA_BIT_MASK(32),
+		.dma_mask = &fsi_wm8978_device.dev.coherent_dma_mask,
+>>>>>>> v3.18
 =======
 		.coherent_dma_mask = DMA_BIT_MASK(32),
 		.dma_mask = &fsi_wm8978_device.dev.coherent_dma_mask,
@@ -1138,7 +1228,11 @@ static struct asoc_simple_card_info fsi2_hdmi_info = {
 	.cpu_dai = {
 		.name	= "fsib-dai",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.fmt	= SND_SOC_DAIFMT_CBM_CFM,
+=======
+		.fmt	= SND_SOC_DAIFMT_CBS_CFS,
+>>>>>>> v3.18
 =======
 		.fmt	= SND_SOC_DAIFMT_CBS_CFS,
 >>>>>>> v3.18
@@ -1154,6 +1248,11 @@ static struct platform_device fsi_hdmi_device = {
 	.dev	= {
 		.platform_data	= &fsi2_hdmi_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.coherent_dma_mask = DMA_BIT_MASK(32),
+		.dma_mask = &fsi_hdmi_device.dev.coherent_dma_mask,
+>>>>>>> v3.18
 =======
 		.coherent_dma_mask = DMA_BIT_MASK(32),
 		.dma_mask = &fsi_hdmi_device.dev.coherent_dma_mask,
@@ -1205,6 +1304,12 @@ static struct i2c_board_info i2c2_devices[] = {
 static struct platform_device *eva_devices[] __initdata = {
 	&lcdc0_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&pwm_device,
+	&pwm_backlight_device,
+	&leds_gpio_device,
+>>>>>>> v3.18
 =======
 	&pwm_device,
 	&pwm_backlight_device,
@@ -1228,7 +1333,10 @@ static struct platform_device *eva_devices[] __initdata = {
 
 static const struct pinctrl_map eva_pinctrl_map[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* CEU0 */
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_ceu.0", "pfc-r8a7740",
 				  "ceu0_data_0_7", "ceu0"),
@@ -1258,6 +1366,9 @@ static const struct pinctrl_map eva_pinctrl_map[] = {
 	/* HDMI */
 	PIN_MAP_MUX_GROUP_DEFAULT("sh-mobile-hdmi", "pfc-r8a7740",
 				  "hdmi", "hdmi"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* LCD0 */
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_lcdc_fb.0", "pfc-r8a7740",
@@ -1272,6 +1383,12 @@ static const struct pinctrl_map eva_pinctrl_map[] = {
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_mmcif.0", "pfc-r8a7740",
 				  "mmc0_ctrl_1", "mmc0"),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* SCIFA1 */
+	PIN_MAP_MUX_GROUP_DEFAULT("sh-sci.1", "pfc-r8a7740",
+				  "scifa1_data", "scifa1"),
+>>>>>>> v3.18
 =======
 	/* SCIFA1 */
 	PIN_MAP_MUX_GROUP_DEFAULT("sh-sci.1", "pfc-r8a7740",
@@ -1285,7 +1402,10 @@ static const struct pinctrl_map eva_pinctrl_map[] = {
 	PIN_MAP_MUX_GROUP_DEFAULT("sh_mobile_sdhi.0", "pfc-r8a7740",
 				  "sdhi0_wp", "sdhi0"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* ST1232 */
 	PIN_MAP_MUX_GROUP_DEFAULT("0-0055", "pfc-r8a7740",
 				  "intc_irq10", "intc"),
@@ -1295,6 +1415,9 @@ static const struct pinctrl_map eva_pinctrl_map[] = {
 	/* USBHS */
 	PIN_MAP_MUX_GROUP_DEFAULT("renesas_usbhs", "pfc-r8a7740",
 				  "intc_irq7_1", "intc"),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1341,30 +1464,43 @@ clock_error:
 static void __init eva_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	static struct pm_domain_device domain_devices[] __initdata = {
 		{ "A4LC", &lcdc0_device },
 		{ "A4LC", &hdmi_lcdc_device },
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct platform_device *usb = NULL;
 
 	regulator_register_always_on(0, "fixed-3.3V", fixed3v3_power_consumers,
 				     ARRAY_SIZE(fixed3v3_power_consumers), 3300000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pinctrl_register_mappings(eva_pinctrl_map, ARRAY_SIZE(eva_pinctrl_map));
 =======
+=======
+>>>>>>> v3.18
 	regulator_register_always_on(3, "fixed-5.0V", fixed5v0_power_consumers,
 				     ARRAY_SIZE(fixed5v0_power_consumers), 5000000);
 
 	pinctrl_register_mappings(eva_pinctrl_map, ARRAY_SIZE(eva_pinctrl_map));
 	pwm_add_table(pwm_lookup, ARRAY_SIZE(pwm_lookup));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	r8a7740_pinmux_init();
 	r8a7740_meram_workaround();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* SCIFA1 */
 	gpio_request(GPIO_FN_SCIFA1_RXD, NULL);
@@ -1403,6 +1539,9 @@ static void __init eva_init(void)
 =======
 	/* GETHER */
 >>>>>>> v3.18
+=======
+	/* GETHER */
+>>>>>>> v3.18
 	gpio_request_one(18, GPIOF_OUT_INIT_HIGH, NULL); /* PHY_RST */
 
 	/* USB */
@@ -1414,6 +1553,7 @@ static void __init eva_init(void)
 		/* USB Func */
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * A1 chip has 2 IRQ7 pin and it was controled by MSEL register.
 		 * OTOH, usbhs interrupt needs its value (HI/LOW) to decide
 		 * USB connection/disconnection (usbhsf_get_vbus()).
@@ -1422,11 +1562,16 @@ static void __init eva_init(void)
 		 */
 		gpio_request(GPIO_FN_IRQ7_PORT209, NULL);
 =======
+=======
+>>>>>>> v3.18
 		 * The USBHS interrupt handlers needs to read the IRQ pin value
 		 * (HI/LOW) to diffentiate USB connection and disconnection
 		 * events (usbhsf_get_vbus()). We thus need to select both the
 		 * intc_irq7_1 pin group and GPIO 209 here.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gpio_request_one(209, GPIOF_IN, NULL);
 
@@ -1434,6 +1579,7 @@ static void __init eva_init(void)
 		usb = &usbhsf_device;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* CEU0 */
 	gpio_request(GPIO_FN_VIO0_D7,		NULL);
@@ -1452,6 +1598,8 @@ static void __init eva_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* CON1/CON15 Camera */
 	gpio_request_one(173, GPIOF_OUT_INIT_LOW, NULL);  /* STANDBY */
 	gpio_request_one(172, GPIOF_OUT_INIT_HIGH, NULL); /* RST */
@@ -1459,6 +1607,7 @@ static void __init eva_init(void)
 	gpio_request_one(158, GPIOF_OUT_INIT_LOW, NULL);  /* CAM_PON */
 
 	/* FSI-WM8978 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	gpio_request(GPIO_FN_FSIAIBT,		NULL);
 	gpio_request(GPIO_FN_FSIAILR,		NULL);
@@ -1468,11 +1617,14 @@ static void __init eva_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	gpio_request(7, NULL);
 	gpio_request(8, NULL);
 	gpio_direction_none(GPIO_PORT7CR); /* FSIAOBT needs no direction */
 	gpio_direction_none(GPIO_PORT8CR); /* FSIAOLR needs no direction */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* FSI-HDMI */
 	gpio_request(GPIO_FN_FSIBCK,		NULL);
@@ -1481,6 +1633,8 @@ static void __init eva_init(void)
 	gpio_request(GPIO_FN_HDMI_HPD,		NULL);
 	gpio_request(GPIO_FN_HDMI_CEC,		NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -1510,8 +1664,13 @@ static void __init eva_init(void)
 
 #ifdef CONFIG_CACHE_L2X0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Early BRESP enable, Shared attribute override enable, 32K*8way */
 	l2x0_init(IOMEM(0xf0002000), 0x40440000, 0x82000fff);
+=======
+	/* Shared attribute override enable, 32K*8way */
+	l2x0_init(IOMEM(0xf0002000), 0x00400000, 0xc20f0fff);
+>>>>>>> v3.18
 =======
 	/* Shared attribute override enable, 32K*8way */
 	l2x0_init(IOMEM(0xf0002000), 0x00400000, 0xc20f0fff);
@@ -1527,8 +1686,13 @@ static void __init eva_init(void)
 			     ARRAY_SIZE(eva_devices));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rmobile_add_device_to_domain("A4LC", &lcdc0_device);
 	rmobile_add_device_to_domain("A4LC", &hdmi_lcdc_device);
+=======
+	rmobile_add_devices_to_domains(domain_devices,
+				       ARRAY_SIZE(domain_devices));
+>>>>>>> v3.18
 =======
 	rmobile_add_devices_to_domains(domain_devices,
 				       ARRAY_SIZE(domain_devices));
@@ -1549,11 +1713,14 @@ static void __init eva_earlytimer_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init eva_add_early_devices(void)
 {
 	r8a7740_add_early_devices();
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RESCNT2 IOMEM(0xe6188020)
@@ -1571,8 +1738,13 @@ static const char *eva_boards_compat_dt[] __initdata = {
 DT_MACHINE_START(ARMADILLO800EVA_DT, "armadillo800eva")
 	.map_io		= r8a7740_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_early	= eva_add_early_devices,
 	.init_irq	= r8a7740_init_irq,
+=======
+	.init_early	= r8a7740_add_early_devices,
+	.init_irq	= r8a7740_init_irq_of,
+>>>>>>> v3.18
 =======
 	.init_early	= r8a7740_add_early_devices,
 	.init_irq	= r8a7740_init_irq_of,

@@ -19,6 +19,10 @@
 #include <linux/gfp.h>
 #include <linux/highmem.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/hugetlb.h>
+>>>>>>> v3.18
 =======
 #include <linux/hugetlb.h>
 >>>>>>> v3.18
@@ -45,8 +49,11 @@ pin_page_for_write(const void __user *_addr, pte_t **ptep, spinlock_t **ptlp)
 
 	pmd = pmd_offset(pud, addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(pmd_none(*pmd) || pmd_bad(*pmd)))
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(pmd_none(*pmd)))
 		return 0;
 
@@ -76,6 +83,9 @@ pin_page_for_write(const void __user *_addr, pte_t **ptep, spinlock_t **ptlp)
 	}
 
 	if (unlikely(pmd_bad(*pmd)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -131,12 +141,18 @@ __copy_to_user_memcpy(void __user *to, const void *from, unsigned long n)
 		n -= tocopy;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte_unmap_unlock(pte, ptl);
 =======
+=======
+>>>>>>> v3.18
 		if (pte)
 			pte_unmap_unlock(pte, ptl);
 		else
 			spin_unlock(ptl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (!atomic)
@@ -191,12 +207,18 @@ __clear_user_memset(void __user *addr, unsigned long n)
 		n -= tocopy;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte_unmap_unlock(pte, ptl);
 =======
+=======
+>>>>>>> v3.18
 		if (pte)
 			pte_unmap_unlock(pte, ptl);
 		else
 			spin_unlock(ptl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	up_read(&current->mm->mmap_sem);

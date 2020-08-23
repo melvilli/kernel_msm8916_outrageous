@@ -2,9 +2,14 @@
 #define _PERF_UTIL_TRACE_EVENT_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "parse-events.h"
 #include "event-parse.h"
 #include "session.h"
+=======
+#include <traceevent/event-parse.h>
+#include "parse-events.h"
+>>>>>>> v3.18
 =======
 #include <traceevent/event-parse.h>
 #include "parse-events.h"
@@ -14,6 +19,7 @@ struct machine;
 struct perf_sample;
 union perf_event;
 struct perf_tool;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 extern int header_page_size_size;
@@ -37,6 +43,8 @@ int bigendian(void);
 
 struct pevent *read_trace_init(int file_bigendian, int host_bigendian);
 =======
+=======
+>>>>>>> v3.18
 struct thread;
 struct plugin_list;
 
@@ -52,6 +60,9 @@ trace_event__tp_format(const char *sys, const char *name);
 
 int bigendian(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void event_format__print(struct event_format *event,
 			 int cpu, void *data, int size);
@@ -60,6 +71,7 @@ int parse_ftrace_file(struct pevent *pevent, char *buf, unsigned long size);
 int parse_event_file(struct pevent *pevent,
 		     char *buf, unsigned long size, char *sys);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct pevent_record *trace_peek_data(struct pevent *pevent, int cpu);
 
@@ -70,15 +82,23 @@ void *raw_field_ptr(struct event_format *event, const char *name, void *data);
 unsigned long long
 raw_field_value(struct event_format *event, const char *name, void *data);
 >>>>>>> v3.18
+=======
+unsigned long long
+raw_field_value(struct event_format *event, const char *name, void *data);
+>>>>>>> v3.18
 
 void parse_proc_kallsyms(struct pevent *pevent, char *file, unsigned int size);
 void parse_ftrace_printk(struct pevent *pevent, char *file, unsigned int size);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t trace_report(int fd, struct pevent **pevent, bool repipe);
 
 int trace_parse_common_type(struct pevent *pevent, void *data);
 int trace_parse_common_pid(struct pevent *pevent, void *data);
+=======
+ssize_t trace_report(int fd, struct trace_event *tevent, bool repipe);
+>>>>>>> v3.18
 =======
 ssize_t trace_report(int fd, struct trace_event *tevent, bool repipe);
 >>>>>>> v3.18
@@ -89,7 +109,10 @@ unsigned long long read_size(struct event_format *event, void *ptr, int size);
 unsigned long long eval_flag(const char *flag);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pevent_record *trace_read_data(struct pevent *pevent, int cpu);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int read_tracing_data(int fd, struct list_head *pattrs);
@@ -114,6 +137,10 @@ struct scripting_ops {
 	const char *name;
 	int (*start_script) (const char *script, int argc, const char **argv);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*flush_script) (void);
+>>>>>>> v3.18
 =======
 	int (*flush_script) (void);
 >>>>>>> v3.18
@@ -122,8 +149,13 @@ struct scripting_ops {
 			       struct perf_sample *sample,
 			       struct perf_evsel *evsel,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       struct machine *machine,
 			       struct addr_location *al);
+=======
+			       struct thread *thread,
+				   struct addr_location *al);
+>>>>>>> v3.18
 =======
 			       struct thread *thread,
 				   struct addr_location *al);

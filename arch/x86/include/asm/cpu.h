@@ -29,7 +29,11 @@ struct x86_cpu {
 extern int arch_register_cpu(int num);
 extern void arch_unregister_cpu(int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __cpuinit start_cpu0(void);
+=======
+extern void start_cpu0(void);
+>>>>>>> v3.18
 =======
 extern void start_cpu0(void);
 >>>>>>> v3.18

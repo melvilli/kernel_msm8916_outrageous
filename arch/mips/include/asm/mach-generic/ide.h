@@ -24,7 +24,11 @@ static inline void __ide_flush_prologue(void)
 {
 #ifdef CONFIG_SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_has_dc_aliases)
+=======
+	if (cpu_has_dc_aliases || !cpu_has_ic_fills_f_dc)
+>>>>>>> v3.18
 =======
 	if (cpu_has_dc_aliases || !cpu_has_ic_fills_f_dc)
 >>>>>>> v3.18
@@ -36,7 +40,11 @@ static inline void __ide_flush_epilogue(void)
 {
 #ifdef CONFIG_SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_has_dc_aliases)
+=======
+	if (cpu_has_dc_aliases || !cpu_has_ic_fills_f_dc)
+>>>>>>> v3.18
 =======
 	if (cpu_has_dc_aliases || !cpu_has_ic_fills_f_dc)
 >>>>>>> v3.18
@@ -47,7 +55,11 @@ static inline void __ide_flush_epilogue(void)
 static inline void __ide_flush_dcache_range(unsigned long addr, unsigned long size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_has_dc_aliases) {
+=======
+	if (cpu_has_dc_aliases || !cpu_has_ic_fills_f_dc) {
+>>>>>>> v3.18
 =======
 	if (cpu_has_dc_aliases || !cpu_has_ic_fills_f_dc) {
 >>>>>>> v3.18

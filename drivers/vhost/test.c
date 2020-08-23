@@ -14,7 +14,10 @@
 #include <linux/mutex.h>
 #include <linux/workqueue.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/rcupdate.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/file.h>
@@ -22,7 +25,11 @@
 
 #include "test.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "vhost.c"
+=======
+#include "vhost.h"
+>>>>>>> v3.18
 =======
 #include "vhost.h"
 >>>>>>> v3.18
@@ -46,7 +53,11 @@ struct vhost_test {
 static void handle_vq(struct vhost_test *n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vhost_virtqueue *vq = &n->dev.vqs[VHOST_TEST_VQ];
+=======
+	struct vhost_virtqueue *vq = &n->vqs[VHOST_TEST_VQ];
+>>>>>>> v3.18
 =======
 	struct vhost_virtqueue *vq = &n->vqs[VHOST_TEST_VQ];
 >>>>>>> v3.18
@@ -55,6 +66,7 @@ static void handle_vq(struct vhost_test *n)
 	size_t len, total_len = 0;
 	void *private;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	private = rcu_dereference_check(vq->private_data, 1);
 	if (!private)
@@ -66,6 +78,8 @@ static void handle_vq(struct vhost_test *n)
 	for (;;) {
 		head = vhost_get_vq_desc(&n->dev, vq, vq->iov,
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&vq->mutex);
 	private = vq->private_data;
 	if (!private) {
@@ -77,6 +91,9 @@ static void handle_vq(struct vhost_test *n)
 
 	for (;;) {
 		head = vhost_get_vq_desc(vq, vq->iov,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					 ARRAY_SIZE(vq->iov),
 					 &out, &in,
@@ -128,6 +145,7 @@ static int vhost_test_open(struct inode *inode, struct file *f)
 	struct vhost_test *n = kmalloc(sizeof *n, GFP_KERNEL);
 	struct vhost_dev *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int r;
 
 	if (!n)
@@ -141,6 +159,8 @@ static int vhost_test_open(struct inode *inode, struct file *f)
 		return r;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct vhost_virtqueue **vqs;
 
 	if (!n)
@@ -155,6 +175,9 @@ static int vhost_test_open(struct inode *inode, struct file *f)
 	vqs[VHOST_TEST_VQ] = &n->vqs[VHOST_TEST_VQ];
 	n->vqs[VHOST_TEST_VQ].handle_kick = handle_vq_kick;
 	vhost_dev_init(dev, vqs, VHOST_TEST_VQ_MAX);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	f->private_data = n;
@@ -169,9 +192,14 @@ static void *vhost_test_stop_vq(struct vhost_test *n,
 
 	mutex_lock(&vq->mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private = rcu_dereference_protected(vq->private_data,
 					 lockdep_is_held(&vq->mutex));
 	rcu_assign_pointer(vq->private_data, NULL);
+=======
+	private = vq->private_data;
+	vq->private_data = NULL;
+>>>>>>> v3.18
 =======
 	private = vq->private_data;
 	vq->private_data = NULL;
@@ -188,7 +216,11 @@ static void vhost_test_stop(struct vhost_test *n, void **privatep)
 static void vhost_test_flush_vq(struct vhost_test *n, int index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vhost_poll_flush(&n->dev.vqs[index].poll);
+=======
+	vhost_poll_flush(&n->vqs[index].poll);
+>>>>>>> v3.18
 =======
 	vhost_poll_flush(&n->vqs[index].poll);
 >>>>>>> v3.18
@@ -243,9 +275,14 @@ static long vhost_test_run(struct vhost_test *n, int test)
 
 		/* start polling new socket */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		oldpriv = rcu_dereference_protected(vq->private_data,
 						    lockdep_is_held(&vq->mutex));
 		rcu_assign_pointer(vq->private_data, priv);
+=======
+		oldpriv = vq->private_data;
+		vq->private_data = priv;
+>>>>>>> v3.18
 =======
 		oldpriv = vq->private_data;
 		vq->private_data = priv;
@@ -297,6 +334,11 @@ done:
 static int vhost_test_set_features(struct vhost_test *n, u64 features)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct vhost_virtqueue *vq;
+
+>>>>>>> v3.18
 =======
 	struct vhost_virtqueue *vq;
 
@@ -308,14 +350,20 @@ static int vhost_test_set_features(struct vhost_test *n, u64 features)
 		return -EFAULT;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n->dev.acked_features = features;
 	smp_wmb();
 	vhost_test_flush(n);
 =======
+=======
+>>>>>>> v3.18
 	vq = &n->vqs[VHOST_TEST_VQ];
 	mutex_lock(&vq->mutex);
 	vq->acked_features = features;
 	mutex_unlock(&vq->mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&n->dev.mutex);
 	return 0;
@@ -337,7 +385,11 @@ static long vhost_test_ioctl(struct file *f, unsigned int ioctl,
 		return vhost_test_run(n, test);
 	case VHOST_GET_FEATURES:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		features = VHOST_NET_FEATURES;
+=======
+		features = VHOST_FEATURES;
+>>>>>>> v3.18
 =======
 		features = VHOST_FEATURES;
 >>>>>>> v3.18
@@ -348,7 +400,11 @@ static long vhost_test_ioctl(struct file *f, unsigned int ioctl,
 		if (copy_from_user(&features, featurep, sizeof features))
 			return -EFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (features & ~VHOST_NET_FEATURES)
+=======
+		if (features & ~VHOST_FEATURES)
+>>>>>>> v3.18
 =======
 		if (features & ~VHOST_FEATURES)
 >>>>>>> v3.18

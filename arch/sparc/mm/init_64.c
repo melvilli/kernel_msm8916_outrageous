@@ -23,6 +23,10 @@
 #include <linux/cache.h>
 #include <linux/sort.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ioport.h>
+>>>>>>> v3.18
 =======
 #include <linux/ioport.h>
 >>>>>>> v3.18
@@ -52,6 +56,10 @@
 #include <asm/mdesc.h>
 #include <asm/cpudata.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/setup.h>
+>>>>>>> v3.18
 =======
 #include <asm/setup.h>
 >>>>>>> v3.18
@@ -82,7 +90,10 @@ unsigned long kern_linear_pte_xor[4] __read_mostly;
  * MDESC is initialized.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long kpte_linear_bitmap[KPTE_BITMAP_BYTES / sizeof(unsigned long)];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -94,16 +105,22 @@ unsigned long kpte_linear_bitmap[KPTE_BITMAP_BYTES / sizeof(unsigned long)];
 extern struct tsb swapper_4m_tsb[KERNEL_TSB4M_NENTRIES];
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static unsigned long cpu_pgsz_mask;
 
 #define MAX_BANKS	32
 =======
+=======
+>>>>>>> v3.18
 extern struct tsb swapper_tsb[KERNEL_TSB_NENTRIES];
 
 static unsigned long cpu_pgsz_mask;
 
 #define MAX_BANKS	1024
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct linux_prom64_registers pavail[MAX_BANKS];
@@ -183,10 +200,13 @@ static void __init read_obp_memory(const char *property,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long sparc64_valid_addr_bitmap[VALID_ADDR_BITMAP_BYTES /
 					sizeof(unsigned long)];
 EXPORT_SYMBOL(sparc64_valid_addr_bitmap);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Kernel physical address base and size in bytes.  */
@@ -381,7 +401,11 @@ void update_mmu_cache(struct vm_area_struct *vma, unsigned long address, pte_t *
 #if defined(CONFIG_HUGETLB_PAGE) || defined(CONFIG_TRANSPARENT_HUGEPAGE)
 	if (mm->context.huge_pte_count && is_hugetlb_pte(pte))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__update_mmu_tsb_insert(mm, MM_TSB_HUGE, HPAGE_SHIFT,
+=======
+		__update_mmu_tsb_insert(mm, MM_TSB_HUGE, REAL_HPAGE_SHIFT,
+>>>>>>> v3.18
 =======
 		__update_mmu_tsb_insert(mm, MM_TSB_HUGE, REAL_HPAGE_SHIFT,
 >>>>>>> v3.18
@@ -619,7 +643,11 @@ static void __init remap_kernel(void)
 
 	tte_vaddr = (unsigned long) KERNBASE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phys_page = (prom_boot_mapping_phys_low >> 22UL) << 22UL;
+=======
+	phys_page = (prom_boot_mapping_phys_low >> ILOG2_4MB) << ILOG2_4MB;
+>>>>>>> v3.18
 =======
 	phys_page = (prom_boot_mapping_phys_low >> ILOG2_4MB) << ILOG2_4MB;
 >>>>>>> v3.18
@@ -829,17 +857,23 @@ static struct node_mem_mask node_masks[MAX_NUMNODES];
 static int num_node_masks;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int numa_cpu_lookup_table[NR_CPUS];
 cpumask_t numa_cpumask_lookup_table[MAX_NUMNODES];
 
 #ifdef CONFIG_NEED_MULTIPLE_NODES
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_NEED_MULTIPLE_NODES
 
 int numa_cpu_lookup_table[NR_CPUS];
 cpumask_t numa_cpumask_lookup_table[MAX_NUMNODES];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct mdesc_mblock {
 	u64	base;
@@ -877,12 +911,18 @@ static int find_node(unsigned long addr)
 			return i;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -1;
 =======
+=======
+>>>>>>> v3.18
 	/* The following condition has been observed on LDOM guests.*/
 	WARN_ONCE(1, "find_node: A physical address doesn't match a NUMA node"
 		" rule. Some physical memory will be owned by node 0.");
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -937,7 +977,13 @@ static void __init allocate_node_data(int nid)
 static void init_node_masks_nonnuma(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+#ifdef CONFIG_NEED_MULTIPLE_NODES
+	int i;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_NEED_MULTIPLE_NODES
 	int i;
@@ -950,6 +996,10 @@ static void init_node_masks_nonnuma(void)
 	num_node_masks = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_NEED_MULTIPLE_NODES
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_NEED_MULTIPLE_NODES
 >>>>>>> v3.18
@@ -958,6 +1008,10 @@ static void init_node_masks_nonnuma(void)
 
 	cpumask_setall(&numa_cpumask_lookup_table[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -1085,7 +1139,12 @@ static void __init add_node_ranges(void)
 				nid, start, this_end);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			memblock_set_node(start, this_end - start, nid);
+=======
+			memblock_set_node(start, this_end - start,
+					  &memblock.memory, nid);
+>>>>>>> v3.18
 =======
 			memblock_set_node(start, this_end - start,
 					  &memblock.memory, nid);
@@ -1394,7 +1453,11 @@ static void __init bootmem_init_nonnuma(void)
 
 	init_node_masks_nonnuma();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memblock_set_node(0, (phys_addr_t)ULLONG_MAX, 0);
+=======
+	memblock_set_node(0, (phys_addr_t)ULLONG_MAX, &memblock.memory, 0);
+>>>>>>> v3.18
 =======
 	memblock_set_node(0, (phys_addr_t)ULLONG_MAX, &memblock.memory, 0);
 >>>>>>> v3.18
@@ -1428,10 +1491,13 @@ static struct linux_prom64_registers pall[MAX_BANKS] __initdata;
 static int pall_ents __initdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_DEBUG_PAGEALLOC
 static unsigned long __ref kernel_map_range(unsigned long pstart,
 					    unsigned long pend, pgprot_t prot)
 =======
+=======
+>>>>>>> v3.18
 static unsigned long max_phys_bits = 40;
 
 bool kern_addr_valid(unsigned long addr)
@@ -1570,6 +1636,9 @@ static bool kernel_can_map_hugepmd(unsigned long vstart, unsigned long vend,
 static unsigned long __ref kernel_map_range(unsigned long pstart,
 					    unsigned long pend, pgprot_t prot,
 					    bool use_huge)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long vstart = PAGE_OFFSET + pstart;
@@ -1590,7 +1659,10 @@ static unsigned long __ref kernel_map_range(unsigned long pstart,
 		pte_t *pte;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (pgd_none(*pgd)) {
 			pud_t *new;
 
@@ -1598,17 +1670,26 @@ static unsigned long __ref kernel_map_range(unsigned long pstart,
 			alloc_bytes += PAGE_SIZE;
 			pgd_populate(&init_mm, pgd, new);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pud = pud_offset(pgd, vstart);
 		if (pud_none(*pud)) {
 			pmd_t *new;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (kernel_can_map_hugepud(vstart, vend, use_huge)) {
 				vstart = kernel_map_hugepud(vstart, vend, pud);
 				continue;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			new = __alloc_bootmem(PAGE_SIZE, PAGE_SIZE, PAGE_SIZE);
 			alloc_bytes += PAGE_SIZE;
@@ -1617,10 +1698,13 @@ static unsigned long __ref kernel_map_range(unsigned long pstart,
 
 		pmd = pmd_offset(pud, vstart);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!pmd_present(*pmd)) {
 			pte_t *new;
 
 =======
+=======
+>>>>>>> v3.18
 		if (pmd_none(*pmd)) {
 			pte_t *new;
 
@@ -1628,6 +1712,9 @@ static unsigned long __ref kernel_map_range(unsigned long pstart,
 				vstart = kernel_map_hugepmd(vstart, vend, pmd);
 				continue;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			new = __alloc_bootmem(PAGE_SIZE, PAGE_SIZE, PAGE_SIZE);
 			alloc_bytes += PAGE_SIZE;
@@ -1651,6 +1738,7 @@ static unsigned long __ref kernel_map_range(unsigned long pstart,
 	return alloc_bytes;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern unsigned int kvmap_linear_patch[1];
 #endif /* CONFIG_DEBUG_PAGEALLOC */
@@ -1747,6 +1835,8 @@ static void __init kernel_physical_mapping_init(void)
 	unsigned long i, mem_alloced = 0UL;
 
 =======
+=======
+>>>>>>> v3.18
 static void __init flush_all_kernel_tsbs(void)
 {
 	int i;
@@ -1775,6 +1865,9 @@ static void __init kernel_physical_mapping_init(void)
 #ifdef CONFIG_DEBUG_PAGEALLOC
 	use_huge = false;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < pall_ents; i++) {
 		unsigned long phys_start, phys_end;
@@ -1784,7 +1877,11 @@ static void __init kernel_physical_mapping_init(void)
 
 		mem_alloced += kernel_map_range(phys_start, phys_end,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						PAGE_KERNEL);
+=======
+						PAGE_KERNEL, use_huge);
+>>>>>>> v3.18
 =======
 						PAGE_KERNEL, use_huge);
 >>>>>>> v3.18
@@ -1797,8 +1894,14 @@ static void __init kernel_physical_mapping_init(void)
 	flushi(&kvmap_linear_patch[0]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__flush_tlb_all();
 #endif
+=======
+	flush_all_kernel_tsbs();
+
+	__flush_tlb_all();
+>>>>>>> v3.18
 =======
 	flush_all_kernel_tsbs();
 
@@ -1814,7 +1917,11 @@ void kernel_map_pages(struct page *page, int numpages, int enable)
 
 	kernel_map_range(phys_start, phys_end,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 (enable ? PAGE_KERNEL : __pgprot(0)));
+=======
+			 (enable ? PAGE_KERNEL : __pgprot(0)), false);
+>>>>>>> v3.18
 =======
 			 (enable ? PAGE_KERNEL : __pgprot(0)), false);
 >>>>>>> v3.18
@@ -1843,7 +1950,10 @@ unsigned long __init find_ecache_flush_span(unsigned long size)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 unsigned long PAGE_OFFSET;
 EXPORT_SYMBOL(PAGE_OFFSET);
 
@@ -1918,6 +2028,9 @@ static void __init setup_page_offset(void)
 		VMEMMAP_BASE, VMEMMAP_BASE << 1);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init tsb_phys_patch(void)
 {
@@ -1962,12 +2075,15 @@ static void __init tsb_phys_patch(void)
 #endif
 static struct hv_tsb_descr ktsb_descr[NUM_KTSB_DESCR];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct tsb swapper_tsb[KERNEL_TSB_NENTRIES];
 
 static void patch_one_ktsb_phys(unsigned int *start, unsigned int *end, unsigned long pa)
 {
 	pa >>= KTSB_PHYS_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 
 /* The swapper TSBs are loaded with a base sequence of:
  *
@@ -1988,11 +2104,15 @@ static void patch_one_ktsb_phys(unsigned int *start, unsigned int *end, unsigned
 
 	high_bits = (pa >> 32) & 0xffffffff;
 	low_bits = (pa >> 0) & 0xffffffff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (start < end) {
 		unsigned int *ia = (unsigned int *)(unsigned long)*start;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ia[0] = (ia[0] & ~0x3fffff) | (pa >> 10);
 		__asm__ __volatile__("flush	%0" : : "r" (ia));
@@ -2001,6 +2121,8 @@ static void patch_one_ktsb_phys(unsigned int *start, unsigned int *end, unsigned
 		__asm__ __volatile__("flush	%0" : : "r" (ia + 1));
 
 =======
+=======
+>>>>>>> v3.18
 		ia[0] = (ia[0] & ~0x3fffff) | (high_bits >> 10);
 		__asm__ __volatile__("flush	%0" : : "r" (ia));
 
@@ -2013,6 +2135,9 @@ static void patch_one_ktsb_phys(unsigned int *start, unsigned int *end, unsigned
 		ia[3] = (ia[3] & ~0x1fff) | (low_bits & 0x3ff);
 		__asm__ __volatile__("flush	%0" : : "r" (ia + 3));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		start++;
 	}
@@ -2095,7 +2220,11 @@ static void __init sun4v_ktsb_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit sun4v_ktsb_register(void)
+=======
+void sun4v_ktsb_register(void)
+>>>>>>> v3.18
 =======
 void sun4v_ktsb_register(void)
 >>>>>>> v3.18
@@ -2127,7 +2256,11 @@ static void __init sun4v_linear_pte_xor_finalize(void)
 	if (cpu_pgsz_mask & HV_PGSZ_MASK_256MB) {
 		kern_linear_pte_xor[1] = (_PAGE_VALID | _PAGE_SZ256MB_4V) ^
 <<<<<<< HEAD
+<<<<<<< HEAD
 			0xfffff80000000000UL;
+=======
+			PAGE_OFFSET;
+>>>>>>> v3.18
 =======
 			PAGE_OFFSET;
 >>>>>>> v3.18
@@ -2140,7 +2273,11 @@ static void __init sun4v_linear_pte_xor_finalize(void)
 	if (cpu_pgsz_mask & HV_PGSZ_MASK_2GB) {
 		kern_linear_pte_xor[2] = (_PAGE_VALID | _PAGE_SZ2GB_4V) ^
 <<<<<<< HEAD
+<<<<<<< HEAD
 			0xfffff80000000000UL;
+=======
+			PAGE_OFFSET;
+>>>>>>> v3.18
 =======
 			PAGE_OFFSET;
 >>>>>>> v3.18
@@ -2153,7 +2290,11 @@ static void __init sun4v_linear_pte_xor_finalize(void)
 	if (cpu_pgsz_mask & HV_PGSZ_MASK_16GB) {
 		kern_linear_pte_xor[3] = (_PAGE_VALID | _PAGE_SZ16GB_4V) ^
 <<<<<<< HEAD
+<<<<<<< HEAD
 			0xfffff80000000000UL;
+=======
+			PAGE_OFFSET;
+>>>>>>> v3.18
 =======
 			PAGE_OFFSET;
 >>>>>>> v3.18
@@ -2169,7 +2310,10 @@ static void __init sun4v_linear_pte_xor_finalize(void)
 
 static unsigned long last_valid_pfn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 pgd_t swapper_pg_dir[2048];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2177,7 +2321,10 @@ static void sun4u_pgprot_init(void);
 static void sun4v_pgprot_init(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static phys_addr_t __init available_memory(void)
 {
 	phys_addr_t available = 0ULL;
@@ -2224,6 +2371,9 @@ static void __init reduce_memory(phys_addr_t limit_ram)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init paging_init(void)
 {
@@ -2232,6 +2382,11 @@ void __init paging_init(void)
 	int node;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	setup_page_offset();
+
+>>>>>>> v3.18
 =======
 	setup_page_offset();
 
@@ -2262,7 +2417,11 @@ void __init paging_init(void)
 	BUILD_BUG_ON(NR_CPUS > 4096);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kern_base = (prom_boot_mapping_phys_low >> 22UL) << 22UL;
+=======
+	kern_base = (prom_boot_mapping_phys_low >> ILOG2_4MB) << ILOG2_4MB;
+>>>>>>> v3.18
 =======
 	kern_base = (prom_boot_mapping_phys_low >> ILOG2_4MB) << ILOG2_4MB;
 >>>>>>> v3.18
@@ -2312,7 +2471,12 @@ void __init paging_init(void)
 	find_ramdisk(phys_base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memblock_enforce_memory_limit(cmdline_memory_size);
+=======
+	if (cmdline_memory_size)
+		reduce_memory(cmdline_memory_size);
+>>>>>>> v3.18
 =======
 	if (cmdline_memory_size)
 		reduce_memory(cmdline_memory_size);
@@ -2327,7 +2491,11 @@ void __init paging_init(void)
 
 	real_end = (unsigned long)_end;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_kernel_image_mappings = DIV_ROUND_UP(real_end - KERNBASE, 1 << 22);
+=======
+	num_kernel_image_mappings = DIV_ROUND_UP(real_end - KERNBASE, 1 << ILOG2_4MB);
+>>>>>>> v3.18
 =======
 	num_kernel_image_mappings = DIV_ROUND_UP(real_end - KERNBASE, 1 << ILOG2_4MB);
 >>>>>>> v3.18
@@ -2340,6 +2508,7 @@ void __init paging_init(void)
 	init_mm.pgd += ((shift) / (sizeof(pgd_t)));
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(swapper_low_pmd_dir, 0, sizeof(swapper_low_pmd_dir));
 
 	/* Now can init the kernel/bad page tables. */
@@ -2351,10 +2520,15 @@ void __init paging_init(void)
 	init_kpte_bitmap();
 
 =======
+=======
+>>>>>>> v3.18
 	memset(swapper_pg_dir, 0, sizeof(swapper_pg_dir));
 
 	inherit_prom_mappings();
 	
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Ok, we can use our TLB miss and window trap handlers safely.  */
 	setup_tba();
@@ -2463,6 +2637,7 @@ int page_in_phys_avail(unsigned long paddr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct linux_prom64_registers pavail_rescan[MAX_BANKS] __initdata;
 static int pavail_rescan_ents __initdata;
 
@@ -2529,6 +2704,8 @@ static void __init patch_tlb_miss_handler_bitmap(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void __init register_page_bootmem_info(void)
 {
 #ifdef CONFIG_NEED_MULTIPLE_NODES
@@ -2541,6 +2718,7 @@ static void __init register_page_bootmem_info(void)
 }
 void __init mem_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long codepages, datapages, initpages;
 	unsigned long addr, last;
@@ -2557,17 +2735,22 @@ void __init mem_init(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	high_memory = __va(last_valid_pfn << PAGE_SHIFT);
 
 	register_page_bootmem_info();
 	free_all_bootmem();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We subtract one to account for the mem_map_zero page
 	 * allocated below.
 	 */
 	num_physpages = totalram_pages - 1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -2582,6 +2765,7 @@ void __init mem_init(void)
 	mark_page_reserved(mem_map_zero);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codepages = (((unsigned long) _etext) - ((unsigned long) _start));
 	codepages = PAGE_ALIGN(codepages) >> PAGE_SHIFT;
 	datapages = (((unsigned long) _edata) - ((unsigned long) _etext));
@@ -2595,6 +2779,9 @@ void __init mem_init(void)
 	       datapages << (PAGE_SHIFT-10), 
 	       initpages << (PAGE_SHIFT-10), 
 	       PAGE_OFFSET, (last_valid_pfn << PAGE_SHIFT));
+=======
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 =======
 	mem_init_print_info(NULL);
 >>>>>>> v3.18
@@ -2638,8 +2825,13 @@ void free_initmem(void)
 void free_initrd_mem(unsigned long start, unsigned long end)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages += free_reserved_area(start, end, POISON_FREE_INITMEM,
 					    "initrd");
+=======
+	free_reserved_area((void *)start, (void *)end, POISON_FREE_INITMEM,
+			   "initrd");
+>>>>>>> v3.18
 =======
 	free_reserved_area((void *)start, (void *)end, POISON_FREE_INITMEM,
 			   "initrd");
@@ -2676,6 +2868,7 @@ EXPORT_SYMBOL(_PAGE_CACHE);
 
 #ifdef CONFIG_SPARSEMEM_VMEMMAP
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long vmemmap_table[VMEMMAP_SIZE];
 
 static long __meminitdata addr_start, addr_end;
@@ -2693,6 +2886,11 @@ int __meminit vmemmap_populate(unsigned long vstart, unsigned long vend,
 			       int node)
 {
 >>>>>>> v3.18
+=======
+int __meminit vmemmap_populate(unsigned long vstart, unsigned long vend,
+			       int node)
+{
+>>>>>>> v3.18
 	unsigned long pte_base;
 
 	pte_base = (_PAGE_VALID | _PAGE_SZ4MB_4U |
@@ -2703,6 +2901,7 @@ int __meminit vmemmap_populate(unsigned long vstart, unsigned long vend,
 			    _PAGE_CP_4V | _PAGE_CV_4V |
 			    _PAGE_P_4V | _PAGE_W_4V);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (; addr < end; addr += VMEMMAP_CHUNK) {
 		unsigned long *vmem_pp =
@@ -2740,6 +2939,8 @@ void __meminit vmemmap_populate_print_last(void)
 		node_start = 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	pte_base |= _PAGE_PMD_HUGE;
 
 	vstart = vstart & PMD_MASK;
@@ -2781,6 +2982,9 @@ void __meminit vmemmap_populate_print_last(void)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2788,7 +2992,10 @@ void vmemmap_free(unsigned long start, unsigned long end)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* CONFIG_SPARSEMEM_VMEMMAP */
@@ -2844,15 +3051,21 @@ static void __init sun4u_pgprot_init(void)
 
 #ifdef CONFIG_DEBUG_PAGEALLOC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kern_linear_pte_xor[0] = _PAGE_VALID ^ 0xfffff80000000000UL;
 #else
 	kern_linear_pte_xor[0] = (_PAGE_VALID | _PAGE_SZ4MB_4U) ^
 		0xfffff80000000000UL;
 =======
+=======
+>>>>>>> v3.18
 	kern_linear_pte_xor[0] = _PAGE_VALID ^ PAGE_OFFSET;
 #else
 	kern_linear_pte_xor[0] = (_PAGE_VALID | _PAGE_SZ4MB_4U) ^
 		PAGE_OFFSET;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	kern_linear_pte_xor[0] |= (_PAGE_CP_4U | _PAGE_CV_4U |
@@ -2898,15 +3111,21 @@ static void __init sun4v_pgprot_init(void)
 
 #ifdef CONFIG_DEBUG_PAGEALLOC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kern_linear_pte_xor[0] = _PAGE_VALID ^ 0xfffff80000000000UL;
 #else
 	kern_linear_pte_xor[0] = (_PAGE_VALID | _PAGE_SZ4MB_4V) ^
 		0xfffff80000000000UL;
 =======
+=======
+>>>>>>> v3.18
 	kern_linear_pte_xor[0] = _PAGE_VALID ^ PAGE_OFFSET;
 #else
 	kern_linear_pte_xor[0] = (_PAGE_VALID | _PAGE_SZ4MB_4V) ^
 		PAGE_OFFSET;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	kern_linear_pte_xor[0] |= (_PAGE_CP_4V | _PAGE_CV_4V |
@@ -3052,6 +3271,7 @@ void __flush_tlb_all(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pte_t *get_from_cache(struct mm_struct *mm)
 {
 	struct page *page;
@@ -3100,6 +3320,8 @@ pte_t *pte_alloc_one_kernel(struct mm_struct *mm,
 
 	page = __alloc_for_cache(mm);
 =======
+=======
+>>>>>>> v3.18
 pte_t *pte_alloc_one_kernel(struct mm_struct *mm,
 			    unsigned long address)
 {
@@ -3107,6 +3329,9 @@ pte_t *pte_alloc_one_kernel(struct mm_struct *mm,
 				       __GFP_REPEAT | __GFP_ZERO);
 	pte_t *pte = NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (page)
 		pte = (pte_t *) page_address(page);
@@ -3117,6 +3342,7 @@ pte_t *pte_alloc_one_kernel(struct mm_struct *mm,
 pgtable_t pte_alloc_one(struct mm_struct *mm,
 			unsigned long address)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct page *page;
 	pte_t *pte;
@@ -3133,6 +3359,8 @@ pgtable_t pte_alloc_one(struct mm_struct *mm,
 
 	return pte;
 =======
+=======
+>>>>>>> v3.18
 	struct page *page = alloc_page(GFP_KERNEL | __GFP_NOTRACK |
 				       __GFP_REPEAT | __GFP_ZERO);
 	if (!page)
@@ -3142,15 +3370,22 @@ pgtable_t pte_alloc_one(struct mm_struct *mm,
 		return NULL;
 	}
 	return (pte_t *) page_address(page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void pte_free_kernel(struct mm_struct *mm, pte_t *pte)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct page *page = virt_to_page(pte);
 	if (put_page_testzero(page))
 		free_hot_cold_page(page, 0);
+=======
+	free_page((unsigned long)pte);
+>>>>>>> v3.18
 =======
 	free_page((unsigned long)pte);
 >>>>>>> v3.18
@@ -3160,10 +3395,16 @@ static void __pte_free(pgtable_t pte)
 {
 	struct page *page = virt_to_page(pte);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (put_page_testzero(page)) {
 		pgtable_page_dtor(page);
 		free_hot_cold_page(page, 0);
 	}
+=======
+
+	pgtable_page_dtor(page);
+	__free_page(page);
+>>>>>>> v3.18
 =======
 
 	pgtable_page_dtor(page);
@@ -3185,6 +3426,7 @@ void pgtable_free(void *table, bool is_page)
 }
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
+<<<<<<< HEAD
 <<<<<<< HEAD
 static pmd_t pmd_set_protbits(pmd_t pmd, pgprot_t pgprot, bool for_modify)
 {
@@ -3276,6 +3518,8 @@ pgprot_t pmd_pgprot(pmd_t entry)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void update_mmu_cache_pmd(struct vm_area_struct *vma, unsigned long addr,
 			  pmd_t *pmd)
 {
@@ -3283,13 +3527,17 @@ void update_mmu_cache_pmd(struct vm_area_struct *vma, unsigned long addr,
 	struct mm_struct *mm;
 	pmd_t entry = *pmd;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pgprot_t prot;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (!pmd_large(entry) || !pmd_young(entry))
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pte = (pmd_val(entry) & ~PMD_HUGE_PROTBITS);
 	pte <<= PMD_PADDR_SHIFT;
@@ -3304,6 +3552,8 @@ void update_mmu_cache_pmd(struct vm_area_struct *vma, unsigned long addr,
 
 	pte |= pgprot_val(prot);
 =======
+=======
+>>>>>>> v3.18
 	pte = pmd_val(entry);
 
 	/* Don't insert a non-valid PMD into the TSB, we'll deadlock.  */
@@ -3312,6 +3562,9 @@ void update_mmu_cache_pmd(struct vm_area_struct *vma, unsigned long addr,
 
 	/* We are fabricating 8MB pages using 4MB real hw pages.  */
 	pte |= (addr & (1UL << REAL_HPAGE_SHIFT));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mm = vma->vm_mm;
@@ -3320,7 +3573,11 @@ void update_mmu_cache_pmd(struct vm_area_struct *vma, unsigned long addr,
 
 	if (mm->context.tsb_block[MM_TSB_HUGE].tsb != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__update_mmu_tsb_insert(mm, MM_TSB_HUGE, HPAGE_SHIFT,
+=======
+		__update_mmu_tsb_insert(mm, MM_TSB_HUGE, REAL_HPAGE_SHIFT,
+>>>>>>> v3.18
 =======
 		__update_mmu_tsb_insert(mm, MM_TSB_HUGE, REAL_HPAGE_SHIFT,
 >>>>>>> v3.18
@@ -3397,7 +3654,10 @@ void hugetlb_setup(struct pt_regs *regs)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct resource code_resource = {
 	.name	= "Kernel code",
 	.flags	= IORESOURCE_BUSY | IORESOURCE_MEM
@@ -3462,6 +3722,9 @@ static int __init report_memory(void)
 }
 device_initcall(report_memory);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SMP
 #define do_flush_tlb_kernel_range	smp_flush_tlb_kernel_range
@@ -3478,8 +3741,13 @@ void flush_tlb_kernel_range(unsigned long start, unsigned long end)
 		}
 		if (end > HI_OBP_ADDRESS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			flush_tsb_kernel_range(end, HI_OBP_ADDRESS);
 			do_flush_tlb_kernel_range(end, HI_OBP_ADDRESS);
+=======
+			flush_tsb_kernel_range(HI_OBP_ADDRESS, end);
+			do_flush_tlb_kernel_range(HI_OBP_ADDRESS, end);
+>>>>>>> v3.18
 =======
 			flush_tsb_kernel_range(HI_OBP_ADDRESS, end);
 			do_flush_tlb_kernel_range(HI_OBP_ADDRESS, end);

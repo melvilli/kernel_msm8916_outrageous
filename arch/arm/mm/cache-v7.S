@@ -60,9 +60,15 @@ ENTRY(v7_invalidate_l1)
        cmp     r2, #0
        bgt     1b
 <<<<<<< HEAD
+<<<<<<< HEAD
        dsb
        isb
        mov     pc, lr
+=======
+       dsb     st
+       isb
+       ret     lr
+>>>>>>> v3.18
 =======
        dsb     st
        isb
@@ -83,7 +89,11 @@ ENTRY(v7_flush_icache_all)
 	ALT_SMP(mcr	p15, 0, r0, c7, c1, 0)		@ invalidate I-cache inner shareable
 	ALT_UP(mcr	p15, 0, r0, c7, c5, 0)		@ I+BTB cache invalidate
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -105,7 +115,11 @@ ENTRY(v7_flush_dcache_louis)
 #ifdef CONFIG_ARM_ERRATA_643719
 	ALT_SMP(mrceq	p15, 0, r2, c0, c0, 0)	@ read main ID register
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ALT_UP(moveq	pc, lr)			@ LoUU is zero, so nothing to do
+=======
+	ALT_UP(reteq	lr)			@ LoUU is zero, so nothing to do
+>>>>>>> v3.18
 =======
 	ALT_UP(reteq	lr)			@ LoUU is zero, so nothing to do
 >>>>>>> v3.18
@@ -117,7 +131,11 @@ ENTRY(v7_flush_dcache_louis)
 	ALT_SMP(mov	r3, r3, lsr #20)	@ r3 = LoUIS * 2
 	ALT_UP(mov	r3, r3, lsr #26)	@ r3 = LoUU * 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	moveq	pc, lr				@ return if level == 0
+=======
+	reteq	lr				@ return if level == 0
+>>>>>>> v3.18
 =======
 	reteq	lr				@ return if level == 0
 >>>>>>> v3.18
@@ -165,6 +183,7 @@ flush_levels:
 	ands	r7, r7, r1, lsr #13		@ extract max number of the index size
 loop1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	r9, r4				@ create working copy of max way size
 loop2:
  ARM(	orr	r11, r10, r9, lsl r5	)	@ factor way and cache number into r11
@@ -178,6 +197,8 @@ loop2:
 	bge	loop2
 	subs	r7, r7, #1			@ decrement the index
 =======
+=======
+>>>>>>> v3.18
 	mov	r9, r7				@ create working copy of max index
 loop2:
  ARM(	orr	r11, r10, r4, lsl r5	)	@ factor way and cache number into r11
@@ -190,6 +211,9 @@ loop2:
 	subs	r9, r9, #1			@ decrement the index
 	bge	loop2
 	subs	r4, r4, #1			@ decrement the way
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bge	loop1
 skip:
@@ -200,9 +224,15 @@ finished:
 	mov	r10, #0				@ swith back to cache level 0
 	mcr	p15, 2, r10, c0, c0, 0		@ select current cache level in cssr
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
 	isb
 	mov	pc, lr
+=======
+	dsb	st
+	isb
+	ret	lr
+>>>>>>> v3.18
 =======
 	dsb	st
 	isb
@@ -231,7 +261,11 @@ ENTRY(v7_flush_kern_cache_all)
  ARM(	ldmfd	sp!, {r4-r5, r7, r9-r11, lr}	)
  THUMB(	ldmfd	sp!, {r4-r7, r9-r11, lr}	)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -253,7 +287,11 @@ ENTRY(v7_flush_kern_cache_louis)
  ARM(	ldmfd	sp!, {r4-r5, r7, r9-r11, lr}	)
  THUMB(	ldmfd	sp!, {r4-r7, r9-r11, lr}	)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -283,7 +321,11 @@ ENTRY(v7_flush_user_cache_all)
  */
 ENTRY(v7_flush_user_cache_range)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -334,7 +376,11 @@ ENTRY(v7_coherent_user_range)
 	cmp	r12, r1
 	blo	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
+=======
+	dsb	ishst
+>>>>>>> v3.18
 =======
 	dsb	ishst
 >>>>>>> v3.18
@@ -350,9 +396,15 @@ ENTRY(v7_coherent_user_range)
 	ALT_SMP(mcr	p15, 0, r0, c7, c1, 6)	@ invalidate BTB Inner Shareable
 	ALT_UP(mcr	p15, 0, r0, c7, c5, 6)	@ invalidate BTB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
 	isb
 	mov	pc, lr
+=======
+	dsb	ishst
+	isb
+	ret	lr
+>>>>>>> v3.18
 =======
 	dsb	ishst
 	isb
@@ -369,7 +421,11 @@ ENTRY(v7_coherent_user_range)
 #endif
 	mov	r0, #-EFAULT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -401,8 +457,13 @@ ENTRY(v7_flush_kern_dcache_area)
 	cmp	r0, r1
 	blo	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
 	mov	pc, lr
+=======
+	dsb	st
+	ret	lr
+>>>>>>> v3.18
 =======
 	dsb	st
 	ret	lr
@@ -420,7 +481,11 @@ ENDPROC(v7_flush_kern_dcache_area)
  *	- end     - virtual end address of region
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENTRY(v7_dma_inv_range)
+=======
+v7_dma_inv_range:
+>>>>>>> v3.18
 =======
 v7_dma_inv_range:
 >>>>>>> v3.18
@@ -443,8 +508,13 @@ v7_dma_inv_range:
 	cmp	r0, r1
 	blo	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
 	mov	pc, lr
+=======
+	dsb	st
+	ret	lr
+>>>>>>> v3.18
 =======
 	dsb	st
 	ret	lr
@@ -457,7 +527,11 @@ ENDPROC(v7_dma_inv_range)
  *	- end     - virtual end address of region
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENTRY(v7_dma_clean_range)
+=======
+v7_dma_clean_range:
+>>>>>>> v3.18
 =======
 v7_dma_clean_range:
 >>>>>>> v3.18
@@ -474,8 +548,13 @@ v7_dma_clean_range:
 	cmp	r0, r1
 	blo	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
 	mov	pc, lr
+=======
+	dsb	st
+	ret	lr
+>>>>>>> v3.18
 =======
 	dsb	st
 	ret	lr
@@ -501,8 +580,13 @@ ENTRY(v7_dma_flush_range)
 	cmp	r0, r1
 	blo	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
 	mov	pc, lr
+=======
+	dsb	st
+	ret	lr
+>>>>>>> v3.18
 =======
 	dsb	st
 	ret	lr
@@ -533,7 +617,11 @@ ENTRY(v7_dma_unmap_area)
 	teq	r2, #DMA_TO_DEVICE
 	bne	v7_dma_inv_range
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

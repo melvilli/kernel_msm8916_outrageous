@@ -2,7 +2,12 @@ Altera SPI
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : should be "ALTR,spi-1.0".
+=======
+- compatible : should be "ALTR,spi-1.0". <DEPRECATED>
+- compatible : should be "altr,spi-1.0".
+>>>>>>> v3.18
 =======
 - compatible : should be "ALTR,spi-1.0". <DEPRECATED>
 - compatible : should be "altr,spi-1.0".

@@ -480,6 +480,10 @@ int tp3780I_QueryAbilities(THINKPAD_BD_DATA * pBDData, MW_ABILITIES * pAbilities
 		"tp3780i::tp3780I_QueryAbilities entry pBDData %p\n", pBDData);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(pAbilities, 0, sizeof(*pAbilities));
+>>>>>>> v3.18
 =======
 	memset(pAbilities, 0, sizeof(*pAbilities));
 >>>>>>> v3.18

@@ -59,7 +59,10 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
 	int is_32bit = 0;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned long random_factor = 0UL;
 
 	/*
@@ -74,6 +77,9 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
 
 		random_factor <<= PAGE_SHIFT;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -81,8 +87,13 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
 	 * or we are running native 64 bits.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!is_32bit || rlimit(RLIMIT_STACK) == RLIM_INFINITY) {
 		mm->mmap_base = TASK_UNMAPPED_BASE;
+=======
+	if (rlimit(RLIMIT_STACK) == RLIM_INFINITY) {
+		mm->mmap_base = TASK_UNMAPPED_BASE + random_factor;
+>>>>>>> v3.18
 =======
 	if (rlimit(RLIMIT_STACK) == RLIM_INFINITY) {
 		mm->mmap_base = TASK_UNMAPPED_BASE + random_factor;
@@ -94,11 +105,17 @@ void arch_pick_mmap_layout(struct mm_struct *mm)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 unsigned long arch_randomize_brk(struct mm_struct *mm)
 {
 	unsigned long range_end = mm->brk + 0x02000000;
 	return randomize_range(mm->brk, range_end, 0) ? : mm->brk;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

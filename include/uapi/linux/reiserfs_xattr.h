@@ -17,7 +17,11 @@ struct reiserfs_xattr_header {
 
 struct reiserfs_security_handle {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name;
+=======
+	const char *name;
+>>>>>>> v3.18
 =======
 	const char *name;
 >>>>>>> v3.18

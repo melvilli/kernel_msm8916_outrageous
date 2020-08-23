@@ -25,6 +25,10 @@
 #include <linux/kmemcheck.h>
 #include <linux/rcupdate.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/jump_label.h>
+>>>>>>> v3.18
 =======
 #include <linux/jump_label.h>
 >>>>>>> v3.18
@@ -84,9 +88,15 @@ enum sock_type {
 
 enum sock_shutdown_cmd {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SHUT_RD		= 0,
 	SHUT_WR		= 1,
 	SHUT_RDWR	= 2,
+=======
+	SHUT_RD,
+	SHUT_WR,
+	SHUT_RDWR,
+>>>>>>> v3.18
 =======
 	SHUT_RD,
 	SHUT_WR,
@@ -214,6 +224,7 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int	     sock_wake_async(struct socket *sk, int how, int band);
 extern int	     sock_register(const struct net_proto_family *fam);
 extern void	     sock_unregister(int family);
@@ -236,6 +247,8 @@ extern struct socket *sock_from_file(struct file *file, int *err);
 #define		     sockfd_put(sock) fput(sock->file)
 extern int	     net_ratelimit(void);
 =======
+=======
+>>>>>>> v3.18
 int sock_wake_async(struct socket *sk, int how, int band);
 int sock_register(const struct net_proto_family *fam);
 void sock_unregister(int family);
@@ -253,6 +266,9 @@ struct socket *sockfd_lookup(int fd, int *err);
 struct socket *sock_from_file(struct file *file, int *err);
 #define		     sockfd_put(sock) fput(sock->file)
 int net_ratelimit(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define net_ratelimited_function(function, ...)			\
@@ -278,6 +294,7 @@ do {								\
 #define net_dbg_ratelimited(fmt, ...)				\
 	net_ratelimited_function(pr_debug, fmt, ##__VA_ARGS__)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define net_random()		prandom_u32()
 #define net_srandom(seed)	prandom_seed((__force u32)(seed))
@@ -309,6 +326,8 @@ extern int kernel_sock_ioctl(struct socket *sock, int cmd, unsigned long arg);
 extern int kernel_sock_shutdown(struct socket *sock,
 				enum sock_shutdown_cmd how);
 =======
+=======
+>>>>>>> v3.18
 bool __net_get_random_once(void *buf, int nbytes, bool *done,
 			   struct static_key *done_key);
 
@@ -348,6 +367,9 @@ int kernel_sendpage(struct socket *sock, struct page *page, int offset,
 		    size_t size, int flags);
 int kernel_sock_ioctl(struct socket *sock, int cmd, unsigned long arg);
 int kernel_sock_shutdown(struct socket *sock, enum sock_shutdown_cmd how);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MODULE_ALIAS_NETPROTO(proto) \

@@ -286,7 +286,11 @@ vortex_mixer_addWTD(vortex_t * vortex, unsigned char mix, unsigned char ch)
 		//printk(KERN_INFO "vortex: mixAddWTD: while addr=%x, val=%x\n", prev, temp);
 		if ((++lifeboat) > 0xf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR
+=======
+			pr_err(
+>>>>>>> v3.18
 =======
 			pr_err(
 >>>>>>> v3.18
@@ -308,7 +312,11 @@ vortex_mixer_delWTD(vortex_t * vortex, unsigned char mix, unsigned char ch)
 	eax = hwread(vortex->mmio, VORTEX_MIXER_SR);
 	if (((1 << ch) & eax) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "mix ALARM %x\n", eax);
+=======
+		pr_err( "mix ALARM %x\n", eax);
+>>>>>>> v3.18
 =======
 		pr_err( "mix ALARM %x\n", eax);
 >>>>>>> v3.18
@@ -333,7 +341,11 @@ vortex_mixer_delWTD(vortex_t * vortex, unsigned char mix, unsigned char ch)
 			while ((edx & 0xf) != mix) {
 				if ((esi) > 0xf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					printk(KERN_ERR
+=======
+					pr_err(
+>>>>>>> v3.18
 =======
 					pr_err(
 >>>>>>> v3.18
@@ -505,7 +517,11 @@ vortex_src_persist_convratio(vortex_t * vortex, unsigned char src, int ratio)
 		temp = hwread(vortex->mmio, VORTEX_SRC_CONVRATIO + (src << 2));
 		if ((++lifeboat) > 0x9) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "Vortex: Src cvr fail\n");
+=======
+			pr_err( "Vortex: Src cvr fail\n");
+>>>>>>> v3.18
 =======
 			pr_err( "Vortex: Src cvr fail\n");
 >>>>>>> v3.18
@@ -562,7 +578,11 @@ vortex_src_checkratio(vortex_t * vortex, unsigned char src,
 
 		if ((lifeboat++) > 15) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "Vortex: could not set src-%d from %d to %d\n",
+=======
+			pr_err( "Vortex: could not set src-%d from %d to %d\n",
+>>>>>>> v3.18
 =======
 			pr_err( "Vortex: could not set src-%d from %d to %d\n",
 >>>>>>> v3.18
@@ -705,7 +725,11 @@ vortex_src_addWTD(vortex_t * vortex, unsigned char src, unsigned char ch)
 		//printk(KERN_INFO "vortex: srcAddWTD: while addr=%x, val=%x\n", prev, temp);
 		if ((++lifeboat) > 0xf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR
+=======
+			pr_err(
+>>>>>>> v3.18
 =======
 			pr_err(
 >>>>>>> v3.18
@@ -728,7 +752,11 @@ vortex_src_delWTD(vortex_t * vortex, unsigned char src, unsigned char ch)
 	eax = hwread(vortex->mmio, VORTEX_SRCBLOCK_SR);
 	if (((1 << ch) & eax) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "src alarm\n");
+=======
+		pr_err( "src alarm\n");
+>>>>>>> v3.18
 =======
 		pr_err( "src alarm\n");
 >>>>>>> v3.18
@@ -753,7 +781,11 @@ vortex_src_delWTD(vortex_t * vortex, unsigned char src, unsigned char ch)
 			while ((edx & 0xf) != src) {
 				if ((esi) > 0xf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					printk
+=======
+					pr_warn
+>>>>>>> v3.18
 =======
 					pr_warn
 >>>>>>> v3.18
@@ -852,7 +884,11 @@ vortex_fifo_setadbctrl(vortex_t * vortex, int fifo, int stereo, int priority,
 		temp = hwread(vortex->mmio, VORTEX_FIFO_ADBCTRL + (fifo << 2));
 		if (lifeboat++ > 0xbb8) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR
+=======
+			pr_err(
+>>>>>>> v3.18
 =======
 			pr_err(
 >>>>>>> v3.18
@@ -952,7 +988,11 @@ vortex_fifo_setwtctrl(vortex_t * vortex, int fifo, int ctrl, int priority,
 		temp = hwread(vortex->mmio, VORTEX_FIFO_WTCTRL + (fifo << 2));
 		if (lifeboat++ > 0xbb8) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "Vortex: vortex_fifo_setwtctrl fail\n");
+=======
+			pr_err( "Vortex: vortex_fifo_setwtctrl fail\n");
+>>>>>>> v3.18
 =======
 			pr_err( "Vortex: vortex_fifo_setwtctrl fail\n");
 >>>>>>> v3.18
@@ -1011,7 +1051,11 @@ vortex_fifo_setwtctrl(vortex_t * vortex, int fifo, int ctrl, int priority,
 		temp = hwread(vortex->mmio, VORTEX_FIFO_WTCTRL + (fifo << 2));
 		if (lifeboat++ > 0xbb8) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "Vortex: vortex_fifo_setwtctrl fail (hanging)\n");
+=======
+			pr_err( "Vortex: vortex_fifo_setwtctrl fail (hanging)\n");
+>>>>>>> v3.18
 =======
 			pr_err( "Vortex: vortex_fifo_setwtctrl fail (hanging)\n");
 >>>>>>> v3.18
@@ -1087,7 +1131,11 @@ static void vortex_fifo_init(vortex_t * vortex)
 		hwwrite(vortex->mmio, addr, (FIFO_U0 | FIFO_U1));
 		if (hwread(vortex->mmio, addr) != (FIFO_U0 | FIFO_U1))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "bad adb fifo reset!");
+=======
+			pr_err( "bad adb fifo reset!");
+>>>>>>> v3.18
 =======
 			pr_err( "bad adb fifo reset!");
 >>>>>>> v3.18
@@ -1102,7 +1150,11 @@ static void vortex_fifo_init(vortex_t * vortex)
 		hwwrite(vortex->mmio, addr, FIFO_U0);
 		if (hwread(vortex->mmio, addr) != FIFO_U0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR
+=======
+			pr_err(
+>>>>>>> v3.18
 =======
 			pr_err(
 >>>>>>> v3.18
@@ -1189,7 +1241,11 @@ vortex_adbdma_setbuffers(vortex_t * vortex, int adbdma,
 	}
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "vortex: cfg0 = 0x%x\nvortex: cfg1=0x%x\n",
+=======
+	pr_debug( "vortex: cfg0 = 0x%x\nvortex: cfg1=0x%x\n",
+>>>>>>> v3.18
 =======
 	pr_debug( "vortex: cfg0 = 0x%x\nvortex: cfg1=0x%x\n",
 >>>>>>> v3.18
@@ -1270,7 +1326,11 @@ static int vortex_adbdma_bufshift(vortex_t * vortex, int adbdma)
 		dma->period_virt -= dma->nr_periods;
 	if (delta != 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "vortex: %d virt=%d, real=%d, delta=%d\n",
+=======
+		pr_info( "vortex: %d virt=%d, real=%d, delta=%d\n",
+>>>>>>> v3.18
 =======
 		pr_info( "vortex: %d virt=%d, real=%d, delta=%d\n",
 >>>>>>> v3.18
@@ -1503,8 +1563,14 @@ static int vortex_wtdma_bufshift(vortex_t * vortex, int wtdma)
 
 	page =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (hwread(vortex->mmio, VORTEX_WTDMA_STAT + (wtdma << 2))
 	     >> WT_SUBBUF_SHIFT) & WT_SUBBUF_MASK;
+=======
+	    (hwread(vortex->mmio, VORTEX_WTDMA_STAT + (wtdma << 2)) &
+	     WT_SUBBUF_MASK)
+	    >> WT_SUBBUF_SHIFT;
+>>>>>>> v3.18
 =======
 	    (hwread(vortex->mmio, VORTEX_WTDMA_STAT + (wtdma << 2)) &
 	     WT_SUBBUF_MASK)
@@ -1548,7 +1614,11 @@ static int vortex_wtdma_bufshift(vortex_t * vortex, int wtdma)
 
 	if (delta != 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "vortex: wt virt = %d, delta = %d\n",
+=======
+		pr_warn( "vortex: wt virt = %d, delta = %d\n",
+>>>>>>> v3.18
 =======
 		pr_warn( "vortex: wt virt = %d, delta = %d\n",
 >>>>>>> v3.18
@@ -1737,7 +1807,11 @@ vortex_adb_addroutes(vortex_t * vortex, unsigned char channel,
 			   VORTEX_ADB_RTBASE + (temp << 2)) & ADB_MASK;
 		if ((lifeboat++) > ADB_MASK) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR
+=======
+			pr_err(
+>>>>>>> v3.18
 =======
 			pr_err(
 >>>>>>> v3.18
@@ -1777,7 +1851,11 @@ vortex_adb_delroutes(vortex_t * vortex, unsigned char channel,
 			   VORTEX_ADB_RTBASE + (prev << 2)) & ADB_MASK;
 		if (((lifeboat++) > ADB_MASK) || (temp == ADB_MASK)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR
+=======
+			pr_err(
+>>>>>>> v3.18
 =======
 			pr_err(
 >>>>>>> v3.18
@@ -2045,7 +2123,11 @@ vortex_connect_codecplay(vortex_t * vortex, int en, unsigned char mixers[])
 		vortex_connection_mix_adb(vortex, en, 0x11, mixers[3],
 					  ADB_CODECOUT(1 + 4));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* printk(KERN_DEBUG "SDAC detected "); */
+=======
+		/* pr_debug( "SDAC detected "); */
+>>>>>>> v3.18
 =======
 		/* pr_debug( "SDAC detected "); */
 >>>>>>> v3.18
@@ -2104,7 +2186,11 @@ vortex_adb_checkinout(vortex_t * vortex, int resmap[], int out, int restype)
 					vortex->dma_adb[i].resources[restype] |= (1 << i);
 				/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_DEBUG
+=======
+				pr_debug(
+>>>>>>> v3.18
 =======
 				pr_debug(
 >>>>>>> v3.18
@@ -2123,7 +2209,11 @@ vortex_adb_checkinout(vortex_t * vortex, int resmap[], int out, int restype)
 				resmap[restype] &= ~(1 << i);
 				/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_DEBUG
+=======
+				pr_debug(
+>>>>>>> v3.18
 =======
 				pr_debug(
 >>>>>>> v3.18
@@ -2135,7 +2225,11 @@ vortex_adb_checkinout(vortex_t * vortex, int resmap[], int out, int restype)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "vortex: FATAL: ResManager: resource type %d exhausted.\n", restype);
+=======
+	pr_err( "vortex: FATAL: ResManager: resource type %d exhausted.\n", restype);
+>>>>>>> v3.18
 =======
 	pr_err( "vortex: FATAL: ResManager: resource type %d exhausted.\n", restype);
 >>>>>>> v3.18
@@ -2267,7 +2361,11 @@ vortex_adb_allocroute(vortex_t *vortex, int dma, int nr_ch, int dir,
 				       sizeof(unsigned char) *
 				       VORTEX_RESOURCE_LAST);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "vortex: out of A3D sources. Sorry\n");
+=======
+				pr_err( "vortex: out of A3D sources. Sorry\n");
+>>>>>>> v3.18
 =======
 				pr_err( "vortex: out of A3D sources. Sorry\n");
 >>>>>>> v3.18
@@ -2519,7 +2617,11 @@ static irqreturn_t vortex_interrupt(int irq, void *dev_id)
 	// Is at least one IRQ flag set?
 	if (source == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "vortex: missing irq source\n");
+=======
+		pr_err( "vortex: missing irq source\n");
+>>>>>>> v3.18
 =======
 		pr_err( "vortex: missing irq source\n");
 >>>>>>> v3.18
@@ -2530,6 +2632,7 @@ static irqreturn_t vortex_interrupt(int irq, void *dev_id)
 	// Attend every interrupt source.
 	if (unlikely(source & IRQ_ERR_MASK)) {
 		if (source & IRQ_FATAL) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			printk(KERN_ERR "vortex: IRQ fatal error\n");
 		}
@@ -2545,6 +2648,8 @@ static irqreturn_t vortex_interrupt(int irq, void *dev_id)
 		if (source & IRQ_DMA) {
 			printk(KERN_ERR "vortex: IRQ dma error\n");
 =======
+=======
+>>>>>>> v3.18
 			pr_err( "vortex: IRQ fatal error\n");
 		}
 		if (source & IRQ_PARITY) {
@@ -2558,6 +2663,9 @@ static irqreturn_t vortex_interrupt(int irq, void *dev_id)
 		}
 		if (source & IRQ_DMA) {
 			pr_err( "vortex: IRQ dma error\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		handled = 1;
@@ -2607,7 +2715,11 @@ static irqreturn_t vortex_interrupt(int irq, void *dev_id)
 
 	if (!handled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "vortex: unknown irq source %x\n", source);
+=======
+		pr_err( "vortex: unknown irq source %x\n", source);
+>>>>>>> v3.18
 =======
 		pr_err( "vortex: unknown irq source %x\n", source);
 >>>>>>> v3.18
@@ -2668,7 +2780,11 @@ vortex_codec_write(struct snd_ac97 * codec, unsigned short addr, unsigned short 
 		udelay(100);
 		if (lifeboat++ > POLL_COUNT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "vortex: ac97 codec stuck busy\n");
+=======
+			pr_err( "vortex: ac97 codec stuck busy\n");
+>>>>>>> v3.18
 =======
 			pr_err( "vortex: ac97 codec stuck busy\n");
 >>>>>>> v3.18
@@ -2698,7 +2814,11 @@ static unsigned short vortex_codec_read(struct snd_ac97 * codec, unsigned short 
 		udelay(100);
 		if (lifeboat++ > POLL_COUNT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "vortex: ac97 codec stuck busy\n");
+=======
+			pr_err( "vortex: ac97 codec stuck busy\n");
+>>>>>>> v3.18
 =======
 			pr_err( "vortex: ac97 codec stuck busy\n");
 >>>>>>> v3.18
@@ -2716,7 +2836,11 @@ static unsigned short vortex_codec_read(struct snd_ac97 * codec, unsigned short 
 		data = hwread(card->mmio, VORTEX_CODEC_IO);
 		if (lifeboat++ > POLL_COUNT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "vortex: ac97 address never arrived\n");
+=======
+			pr_err( "vortex: ac97 address never arrived\n");
+>>>>>>> v3.18
 =======
 			pr_err( "vortex: ac97 address never arrived\n");
 >>>>>>> v3.18
@@ -2817,7 +2941,11 @@ static int vortex_core_init(vortex_t *vortex)
 {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Vortex: init.... ");
+=======
+	pr_info( "Vortex: init.... ");
+>>>>>>> v3.18
 =======
 	pr_info( "Vortex: init.... ");
 >>>>>>> v3.18
@@ -2866,7 +2994,11 @@ static int vortex_core_init(vortex_t *vortex)
 	//vortex_disable_timer_int(vortex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "done.\n");
+=======
+	pr_info( "done.\n");
+>>>>>>> v3.18
 =======
 	pr_info( "done.\n");
 >>>>>>> v3.18
@@ -2879,7 +3011,11 @@ static int vortex_core_shutdown(vortex_t * vortex)
 {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Vortex: shutdown...");
+=======
+	pr_info( "Vortex: shutdown...");
+>>>>>>> v3.18
 =======
 	pr_info( "Vortex: shutdown...");
 >>>>>>> v3.18
@@ -2905,7 +3041,11 @@ static int vortex_core_shutdown(vortex_t * vortex)
 	hwwrite(vortex->mmio, VORTEX_IRQ_SOURCE, 0xffff);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "done.\n");
+=======
+	pr_info( "done.\n");
+>>>>>>> v3.18
 =======
 	pr_info( "done.\n");
 >>>>>>> v3.18
@@ -2943,7 +3083,11 @@ static int vortex_alsafmt_aspfmt(int alsafmt)
 	default:
 		fmt = 0x8;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "vortex: format unsupported %d\n", alsafmt);
+=======
+		pr_err( "vortex: format unsupported %d\n", alsafmt);
+>>>>>>> v3.18
 =======
 		pr_err( "vortex: format unsupported %d\n", alsafmt);
 >>>>>>> v3.18

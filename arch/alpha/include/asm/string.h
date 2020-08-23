@@ -23,6 +23,7 @@ extern void * __memcpy(void *, const void *, size_t);
 #define __HAVE_ARCH_MEMSET
 extern void * __constant_c_memset(void *, unsigned long, size_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void * __memset(void *, int, size_t);
 extern void * memset(void *, int, size_t);
 
@@ -33,6 +34,8 @@ extern void * memset(void *, int, size_t);
     : __constant_c_memset((s),0x0101010101010101UL*(unsigned char)(c),(n))) \
  : __memset((s),(c),(n)))
 =======
+=======
+>>>>>>> v3.18
 extern void * ___memset(void *, int, size_t);
 extern void * __memset(void *, int, size_t);
 extern void * memset(void *, int, size_t);
@@ -54,6 +57,9 @@ extern inline void *__memset(void *s, int c, size_t n)
 }
 
 #define memset __memset
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define __HAVE_ARCH_STRCPY

@@ -379,6 +379,10 @@ static struct platform_pwm_backlight_data backlight_data = {
 	.dft_brightness = 100,
 	.pwm_period_ns  = 30923,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio    = -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio    = -1,
 >>>>>>> v3.18
@@ -638,7 +642,11 @@ static int magician_mci_init(struct device *dev,
 				irq_handler_t detect_irq, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return request_irq(IRQ_MAGICIAN_SD, detect_irq, IRQF_DISABLED,
+=======
+	return request_irq(IRQ_MAGICIAN_SD, detect_irq, 0,
+>>>>>>> v3.18
 =======
 	return request_irq(IRQ_MAGICIAN_SD, detect_irq, 0,
 >>>>>>> v3.18

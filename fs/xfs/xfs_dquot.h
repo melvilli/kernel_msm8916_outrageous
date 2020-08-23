@@ -53,7 +53,10 @@ typedef struct xfs_dquot {
 	xfs_fileoff_t	 q_fileoffset;	/* offset in quotas file */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct xfs_dquot*q_gdquot;	/* group dquot, hint only */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	xfs_disk_dquot_t q_core;	/* actual usage & quotas */
@@ -122,8 +125,14 @@ static inline int xfs_this_quota_on(struct xfs_mount *mp, int type)
 		return XFS_IS_UQUOTA_ON(mp);
 	case XFS_DQ_GROUP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case XFS_DQ_PROJ:
 		return XFS_IS_OQUOTA_ON(mp);
+=======
+		return XFS_IS_GQUOTA_ON(mp);
+	case XFS_DQ_PROJ:
+		return XFS_IS_PQUOTA_ON(mp);
+>>>>>>> v3.18
 =======
 		return XFS_IS_GQUOTA_ON(mp);
 	case XFS_DQ_PROJ:
@@ -141,8 +150,14 @@ static inline xfs_dquot_t *xfs_inode_dquot(struct xfs_inode *ip, int type)
 		return ip->i_udquot;
 	case XFS_DQ_GROUP:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case XFS_DQ_PROJ:
 		return ip->i_gdquot;
+=======
+		return ip->i_gdquot;
+	case XFS_DQ_PROJ:
+		return ip->i_pdquot;
+>>>>>>> v3.18
 =======
 		return ip->i_gdquot;
 	case XFS_DQ_PROJ:
@@ -154,7 +169,10 @@ static inline xfs_dquot_t *xfs_inode_dquot(struct xfs_inode *ip, int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Check whether a dquot is under low free space conditions. We assume the quota
  * is enabled and enforced.
@@ -170,6 +188,9 @@ static inline bool xfs_dquot_lowsp(struct xfs_dquot *dqp)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define XFS_DQ_IS_LOCKED(dqp)	(mutex_is_locked(&((dqp)->q_qlock)))
 #define XFS_DQ_IS_DIRTY(dqp)	((dqp)->dq_flags & XFS_DQ_DIRTY)
@@ -177,10 +198,13 @@ static inline bool xfs_dquot_lowsp(struct xfs_dquot *dqp)
 #define XFS_QM_ISPDQ(dqp)	((dqp)->dq_flags & XFS_DQ_PROJ)
 #define XFS_QM_ISGDQ(dqp)	((dqp)->dq_flags & XFS_DQ_GROUP)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XFS_DQ_TO_QINF(dqp)	((dqp)->q_mount->m_quotainfo)
 #define XFS_DQ_TO_QIP(dqp)	(XFS_QM_ISUDQ(dqp) ? \
 				 XFS_DQ_TO_QINF(dqp)->qi_uquotaip : \
 				 XFS_DQ_TO_QINF(dqp)->qi_gquotaip)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -210,8 +234,11 @@ static inline struct xfs_dquot *xfs_qm_dqhold(struct xfs_dquot *dqp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern const struct xfs_buf_ops xfs_dquot_buf_ops;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* __XFS_DQUOT_H__ */

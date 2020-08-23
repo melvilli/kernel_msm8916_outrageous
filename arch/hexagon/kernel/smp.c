@@ -65,10 +65,13 @@ static inline void __handle_ipi(unsigned long *ops, struct ipi_data *ipi,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case IPI_CALL_FUNC_SINGLE:
 			generic_smp_call_function_single_interrupt();
 			break;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		case IPI_CPU_STOP:
@@ -150,7 +153,11 @@ void __init smp_prepare_boot_cpu(void)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit start_secondary(void)
+=======
+void start_secondary(void)
+>>>>>>> v3.18
 =======
 void start_secondary(void)
 >>>>>>> v3.18
@@ -202,7 +209,11 @@ void start_secondary(void)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit __cpu_up(unsigned int cpu, struct task_struct *idle)
+=======
+int __cpu_up(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 int __cpu_up(unsigned int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -260,7 +271,11 @@ void smp_send_stop(void)
 void arch_send_call_function_single_ipi(int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	send_ipi(cpumask_of(cpu), IPI_CALL_FUNC_SINGLE);
+=======
+	send_ipi(cpumask_of(cpu), IPI_CALL_FUNC);
+>>>>>>> v3.18
 =======
 	send_ipi(cpumask_of(cpu), IPI_CALL_FUNC);
 >>>>>>> v3.18

@@ -31,6 +31,10 @@
 #include <linux/scatterlist.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
@@ -1268,6 +1272,7 @@ static int atmel_sha_dma_init(struct atmel_sha_dev *dd,
 	dma_cap_mask_t mask_in;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata && pdata->dma_slave->rxdata.dma_dev) {
 		/* Try to grab DMA channel */
 		dma_cap_zero(mask_in);
@@ -1295,6 +1300,8 @@ static int atmel_sha_dma_init(struct atmel_sha_dev *dd,
 
 	return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	/* Try to grab DMA channel */
 	dma_cap_zero(mask_in);
 	dma_cap_set(DMA_SLAVE, mask_in);
@@ -1318,6 +1325,9 @@ static int atmel_sha_dma_init(struct atmel_sha_dev *dd,
 	dd->dma_lch_in.dma_conf.device_fc = false;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1357,7 +1367,10 @@ static void atmel_sha_get_cap(struct atmel_sha_dev *dd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_OF)
 static const struct of_device_id atmel_sha_dt_ids[] = {
 	{ .compatible = "atmel,at91sam9g46-sha" },
@@ -1399,6 +1412,9 @@ static inline struct crypto_platform_data *atmel_sha_of_init(struct platform_dev
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int atmel_sha_probe(struct platform_device *pdev)
 {
@@ -1410,7 +1426,12 @@ static int atmel_sha_probe(struct platform_device *pdev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sha_dd = kzalloc(sizeof(struct atmel_sha_dev), GFP_KERNEL);
+=======
+	sha_dd = devm_kzalloc(&pdev->dev, sizeof(struct atmel_sha_dev),
+				GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	sha_dd = devm_kzalloc(&pdev->dev, sizeof(struct atmel_sha_dev),
 				GFP_KERNEL);
@@ -1482,8 +1503,11 @@ static int atmel_sha_probe(struct platform_device *pdev)
 		pdata = pdev->dev.platform_data;
 		if (!pdata) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(&pdev->dev, "platform data not available\n");
 =======
+=======
+>>>>>>> v3.18
 			pdata = atmel_sha_of_init(pdev);
 			if (IS_ERR(pdata)) {
 				dev_err(&pdev->dev, "platform data not available\n");
@@ -1492,6 +1516,9 @@ static int atmel_sha_probe(struct platform_device *pdev)
 			}
 		}
 		if (!pdata->dma_slave) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			err = -ENXIO;
 			goto err_pdata;
@@ -1500,6 +1527,12 @@ static int atmel_sha_probe(struct platform_device *pdev)
 		if (err)
 			goto err_sha_dma;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		dev_info(dev, "using %s for DMA transfers\n",
+				dma_chan_name(sha_dd->dma_lch_in.chan));
+>>>>>>> v3.18
 =======
 
 		dev_info(dev, "using %s for DMA transfers\n",
@@ -1516,7 +1549,13 @@ static int atmel_sha_probe(struct platform_device *pdev)
 		goto err_algs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(dev, "Atmel SHA1/SHA256\n");
+=======
+	dev_info(dev, "Atmel SHA1/SHA256%s%s\n",
+			sha_dd->caps.has_sha224 ? "/SHA224" : "",
+			sha_dd->caps.has_sha_384_512 ? "/SHA384/SHA512" : "");
+>>>>>>> v3.18
 =======
 	dev_info(dev, "Atmel SHA1/SHA256%s%s\n",
 			sha_dd->caps.has_sha224 ? "/SHA224" : "",
@@ -1541,8 +1580,11 @@ clk_err:
 res_err:
 	tasklet_kill(&sha_dd->done_task);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(sha_dd);
 	sha_dd = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 sha_dd_err:
@@ -1577,9 +1619,12 @@ static int atmel_sha_remove(struct platform_device *pdev)
 		free_irq(sha_dd->irq, sha_dd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(sha_dd);
 	sha_dd = NULL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1592,6 +1637,10 @@ static struct platform_driver atmel_sha_driver = {
 		.name	= "atmel_sha",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table	= of_match_ptr(atmel_sha_dt_ids),
+>>>>>>> v3.18
 =======
 		.of_match_table	= of_match_ptr(atmel_sha_dt_ids),
 >>>>>>> v3.18

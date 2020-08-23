@@ -20,6 +20,7 @@
 #include <asm/smp_plat.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init simple_smp_init_cpus(void)
 {
 }
@@ -33,6 +34,8 @@ static int __cpuinit mcpm_boot_secondary(unsigned int cpu, struct task_struct *i
 	pcpu = MPIDR_AFFINITY_LEVEL(mpidr, 0);
 	pcluster = MPIDR_AFFINITY_LEVEL(mpidr, 1);
 =======
+=======
+>>>>>>> v3.18
 static void cpu_to_pcpu(unsigned int cpu,
 			unsigned int *pcpu, unsigned int *pcluster)
 {
@@ -50,6 +53,9 @@ static int mcpm_boot_secondary(unsigned int cpu, struct task_struct *idle)
 
 	cpu_to_pcpu(cpu, &pcpu, &pcluster);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pr_debug("%s: logical CPU %d is physical CPU %d cluster %d\n",
 		 __func__, cpu, pcpu, pcluster);
@@ -65,7 +71,11 @@ static int mcpm_boot_secondary(unsigned int cpu, struct task_struct *idle)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit mcpm_secondary_init(unsigned int cpu)
+=======
+static void mcpm_secondary_init(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static void mcpm_secondary_init(unsigned int cpu)
 >>>>>>> v3.18
@@ -76,7 +86,10 @@ static void mcpm_secondary_init(unsigned int cpu)
 #ifdef CONFIG_HOTPLUG_CPU
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int mcpm_cpu_kill(unsigned int cpu)
 {
 	unsigned int pcpu, pcluster;
@@ -86,6 +99,9 @@ static int mcpm_cpu_kill(unsigned int cpu)
 	return !mcpm_wait_for_cpu_powerdown(pcpu, pcluster);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int mcpm_cpu_disable(unsigned int cpu)
 {
@@ -111,15 +127,21 @@ static void mcpm_cpu_die(unsigned int cpu)
 
 static struct smp_operations __initdata mcpm_smp_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.smp_init_cpus		= simple_smp_init_cpus,
 	.smp_boot_secondary	= mcpm_boot_secondary,
 	.smp_secondary_init	= mcpm_secondary_init,
 #ifdef CONFIG_HOTPLUG_CPU
 =======
+=======
+>>>>>>> v3.18
 	.smp_boot_secondary	= mcpm_boot_secondary,
 	.smp_secondary_init	= mcpm_secondary_init,
 #ifdef CONFIG_HOTPLUG_CPU
 	.cpu_kill		= mcpm_cpu_kill,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.cpu_disable		= mcpm_cpu_disable,
 	.cpu_die		= mcpm_cpu_die,

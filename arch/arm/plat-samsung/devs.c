@@ -19,6 +19,10 @@
 #include <linux/init.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -35,13 +39,19 @@
 #include <linux/mmc/host.h>
 #include <linux/ioport.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/s3c-hsudc.h>
 #include <linux/platform_data/s3c-hsotg.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/sizes.h>
 #include <linux/platform_data/s3c-hsudc.h>
 #include <linux/platform_data/s3c-hsotg.h>
 #include <linux/platform_data/dma-s3c24xx.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <media/s5p_hdmi.h>
@@ -52,7 +62,10 @@
 #include <asm/mach/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/hardware.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <mach/dma.h>
@@ -64,10 +77,15 @@
 #include <plat/adc.h>
 #include <linux/platform_data/ata-samsung_cf.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_data/usb-ehci-s5p.h>
 #include <plat/fb.h>
 #include <plat/fb-s3c2410.h>
 #include <plat/hdmi.h>
+=======
+#include <plat/fb.h>
+#include <plat/fb-s3c2410.h>
+>>>>>>> v3.18
 =======
 #include <plat/fb.h>
 #include <plat/fb-s3c2410.h>
@@ -78,6 +96,10 @@
 #include <linux/platform_data/mmc-s3cmci.h>
 #include <linux/platform_data/mtd-nand-s3c2410.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <plat/pwm-core.h>
+>>>>>>> v3.18
 =======
 #include <plat/pwm-core.h>
 >>>>>>> v3.18
@@ -87,7 +109,10 @@
 #include <linux/platform_data/usb-ohci-s3c2410.h>
 #include <plat/usb-phy.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/regs-spi.h>
@@ -171,6 +196,7 @@ struct platform_device s3c_device_camif = {
 #endif /* CONFIG_CPU_S3C2440 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* ASOC DMA */
 
 #ifdef CONFIG_PLAT_S5P 
@@ -188,6 +214,8 @@ struct platform_device samsung_asoc_idma = {
 };
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* FB */
@@ -218,6 +246,7 @@ void __init s3c_fb_set_platdata(struct s3c_fb_platdata *pd)
 }
 #endif /* CONFIG_S3C_DEV_FB */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* FIMC */
 
@@ -364,6 +393,8 @@ void __init s5p_fimd0_set_platdata(struct s3c_fb_platdata *pd)
 }
 #endif /* CONFIG_S5P_DEV_FIMD0 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* HWMON */
@@ -754,6 +785,7 @@ void __init s3c_i2c7_set_platdata(struct s3c2410_platform_i2c *pd)
 #endif /* CONFIG_S3C_DEV_I2C7 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* I2C HDMIPHY */
 
 #ifdef CONFIG_S5P_DEV_I2C_HDMIPHY
@@ -814,6 +846,8 @@ void __init s5p_hdmi_set_platdata(struct i2c_board_info *hdmiphy_info,
 
 #endif /* CONFIG_S5P_DEV_I2C_HDMIPHY */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* I2S */
@@ -920,6 +954,7 @@ void __init s3c24xx_fb_set_platdata(struct s3c2410fb_mach_info *pd)
 #endif /* CONFIG_PLAT_S3C24XX */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MIPI CSIS */
 
 #ifdef CONFIG_S5P_DEV_CSIS0
@@ -950,6 +985,8 @@ struct platform_device s5p_device_mipi_csis1 = {
 };
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* NAND */
@@ -1096,6 +1133,7 @@ void __init s3c64xx_onenand1_set_platdata(struct onenand_platform_data *pdata)
 #endif /* CONFIG_S3C64XX_DEV_ONENAND1 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_S5P_DEV_ONENAND
 static struct resource s5p_onenand_resources[] = {
 	[0] = DEFINE_RES_MEM(S5P_PA_ONENAND, SZ_128K),
@@ -1167,6 +1205,8 @@ struct platform_device s3c_device_timer[] = {
 	[4] = { DEFINE_S3C_TIMER(4, IRQ_TIMER4) },
 };
 =======
+=======
+>>>>>>> v3.18
 /* PWM Timer */
 
 #ifdef CONFIG_SAMSUNG_DEV_PWM
@@ -1185,6 +1225,9 @@ void __init samsung_pwm_set_platdata(struct samsung_pwm_variant *pd)
 {
 	samsung_device_pwm.dev.platform_data = pd;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_SAMSUNG_DEV_PWM */
 
@@ -1331,6 +1374,7 @@ void __init s3c24xx_ts_set_platdata(struct s3c2410_ts_mach_info *pd)
 #endif /* CONFIG_SAMSUNG_DEV_TS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* TV */
 
 #ifdef CONFIG_S5P_DEV_TV
@@ -1377,6 +1421,8 @@ struct platform_device s5p_device_mixer = {
 };
 #endif /* CONFIG_S5P_DEV_TV */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* USB */
@@ -1436,6 +1482,7 @@ void __init s3c24xx_udc_set_platdata(struct s3c2410_udc_mach_info *pd)
 #endif /* CONFIG_PLAT_S3C24XX */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* USB EHCI Host Controller */
 
 #ifdef CONFIG_S5P_DEV_USB_EHCI
@@ -1469,6 +1516,8 @@ void __init s5p_ehci_set_platdata(struct s5p_ehci_platdata *pd)
 }
 #endif /* CONFIG_S5P_DEV_USB_EHCI */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* USB HSOTG */
@@ -1579,15 +1628,21 @@ void __init s3c64xx_spi0_set_platdata(int (*cfg_gpio)(void), int src_clk_nr,
 	pd.src_clk_nr = src_clk_nr;
 	pd.cfg_gpio = (cfg_gpio) ? cfg_gpio : s3c64xx_spi0_cfg_gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PL330_DMA
 	pd.filter = pl330_filter;
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_PL330_DMA)
 	pd.filter = pl330_filter;
 #elif defined(CONFIG_S3C64XX_PL080)
 	pd.filter = pl08x_filter_id;
 #elif defined(CONFIG_S3C24XX_DMAC)
 	pd.filter = s3c24xx_dma_filter;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -1629,13 +1684,19 @@ void __init s3c64xx_spi1_set_platdata(int (*cfg_gpio)(void), int src_clk_nr,
 	pd.src_clk_nr = src_clk_nr;
 	pd.cfg_gpio = (cfg_gpio) ? cfg_gpio : s3c64xx_spi1_cfg_gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PL330_DMA
 	pd.filter = pl330_filter;
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_PL330_DMA)
 	pd.filter = pl330_filter;
 #elif defined(CONFIG_S3C64XX_PL080)
 	pd.filter = pl08x_filter_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -1677,13 +1738,19 @@ void __init s3c64xx_spi2_set_platdata(int (*cfg_gpio)(void), int src_clk_nr,
 	pd.src_clk_nr = src_clk_nr;
 	pd.cfg_gpio = (cfg_gpio) ? cfg_gpio : s3c64xx_spi2_cfg_gpio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PL330_DMA
 	pd.filter = pl330_filter;
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_PL330_DMA)
 	pd.filter = pl330_filter;
 #elif defined(CONFIG_S3C64XX_PL080)
 	pd.filter = pl08x_filter_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

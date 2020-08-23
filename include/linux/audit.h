@@ -44,6 +44,10 @@ struct mqstat;
 struct audit_watch;
 struct audit_tree;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct sk_buff;
+>>>>>>> v3.18
 =======
 struct sk_buff;
 >>>>>>> v3.18
@@ -70,6 +74,7 @@ struct audit_krule {
 struct audit_field {
 	u32				type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32				val;
 	kuid_t				uid;
 	kgid_t				gid;
@@ -82,6 +87,8 @@ extern int __init audit_register_class(int class, unsigned *list);
 extern int audit_classify_syscall(int abi, unsigned syscall);
 extern int audit_classify_arch(int arch);
 =======
+=======
+>>>>>>> v3.18
 	union {
 		u32			val;
 		kuid_t			uid;
@@ -107,6 +114,9 @@ extern unsigned compat_chattr_class[];
 extern unsigned compat_signal_class[];
 
 extern int audit_classify_compat_syscall(int abi, unsigned syscall);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* audit_names->type values */
@@ -124,8 +134,11 @@ struct filename;
 extern void audit_log_session_info(struct audit_buffer *ab);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_AUDITSYSCALL
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_AUDIT_COMPAT_GENERIC
 #define audit_is_compat(arch)  (!((arch) & __AUDIT_ARCH_64BIT))
 #else
@@ -135,14 +148,21 @@ extern void audit_log_session_info(struct audit_buffer *ab);
 #ifdef CONFIG_AUDITSYSCALL
 #include <asm/syscall.h> /* for syscall_get_arch() */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* These are defined in auditsc.c */
 				/* Public API */
 extern int  audit_alloc(struct task_struct *task);
 extern void __audit_free(struct task_struct *task);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __audit_syscall_entry(int arch,
 				  int major, unsigned long a0, unsigned long a1,
+=======
+extern void __audit_syscall_entry(int major, unsigned long a0, unsigned long a1,
+>>>>>>> v3.18
 =======
 extern void __audit_syscall_entry(int major, unsigned long a0, unsigned long a1,
 >>>>>>> v3.18
@@ -173,7 +193,11 @@ static inline void audit_free(struct task_struct *task)
 		__audit_free(task);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void audit_syscall_entry(int arch, int major, unsigned long a0,
+=======
+static inline void audit_syscall_entry(int major, unsigned long a0,
+>>>>>>> v3.18
 =======
 static inline void audit_syscall_entry(int major, unsigned long a0,
 >>>>>>> v3.18
@@ -182,7 +206,11 @@ static inline void audit_syscall_entry(int major, unsigned long a0,
 {
 	if (unlikely(current->audit_context))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__audit_syscall_entry(arch, major, a0, a1, a2, a3);
+=======
+		__audit_syscall_entry(major, a0, a1, a2, a3);
+>>>>>>> v3.18
 =======
 		__audit_syscall_entry(major, a0, a1, a2, a3);
 >>>>>>> v3.18
@@ -257,7 +285,11 @@ static inline kuid_t audit_get_loginuid(struct task_struct *tsk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int audit_get_sessionid(struct task_struct *tsk)
+=======
+static inline unsigned int audit_get_sessionid(struct task_struct *tsk)
+>>>>>>> v3.18
 =======
 static inline unsigned int audit_get_sessionid(struct task_struct *tsk)
 >>>>>>> v3.18
@@ -268,7 +300,11 @@ static inline unsigned int audit_get_sessionid(struct task_struct *tsk)
 extern void __audit_ipc_obj(struct kern_ipc_perm *ipcp);
 extern void __audit_ipc_set_perm(unsigned long qbytes, uid_t uid, gid_t gid, umode_t mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __audit_bprm(struct linux_binprm *bprm);
+=======
+extern void __audit_bprm(struct linux_binprm *bprm);
+>>>>>>> v3.18
 =======
 extern void __audit_bprm(struct linux_binprm *bprm);
 >>>>>>> v3.18
@@ -283,7 +319,11 @@ extern int __audit_log_bprm_fcaps(struct linux_binprm *bprm,
 				  const struct cred *new,
 				  const struct cred *old);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __audit_log_capset(pid_t pid, const struct cred *new, const struct cred *old);
+=======
+extern void __audit_log_capset(const struct cred *new, const struct cred *old);
+>>>>>>> v3.18
 =======
 extern void __audit_log_capset(const struct cred *new, const struct cred *old);
 >>>>>>> v3.18
@@ -305,16 +345,22 @@ static inline void audit_ipc_set_perm(unsigned long qbytes, uid_t uid, gid_t gid
 		__audit_ipc_set_perm(qbytes, uid, gid, mode);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int audit_bprm(struct linux_binprm *bprm)
 {
 	if (unlikely(!audit_dummy_context()))
 		return __audit_bprm(bprm);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static inline void audit_bprm(struct linux_binprm *bprm)
 {
 	if (unlikely(!audit_dummy_context()))
 		__audit_bprm(bprm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 static inline int audit_socketcall(int nargs, unsigned long *args)
@@ -360,17 +406,23 @@ static inline int audit_log_bprm_fcaps(struct linux_binprm *bprm,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void audit_log_capset(pid_t pid, const struct cred *new,
 				   const struct cred *old)
 {
 	if (unlikely(!audit_dummy_context()))
 		__audit_log_capset(pid, new, old);
 =======
+=======
+>>>>>>> v3.18
 static inline void audit_log_capset(const struct cred *new,
 				   const struct cred *old)
 {
 	if (unlikely(!audit_dummy_context()))
 		__audit_log_capset(new, old);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -390,7 +442,11 @@ static inline int audit_alloc(struct task_struct *task)
 static inline void audit_free(struct task_struct *task)
 { }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void audit_syscall_entry(int arch, int major, unsigned long a0,
+=======
+static inline void audit_syscall_entry(int major, unsigned long a0,
+>>>>>>> v3.18
 =======
 static inline void audit_syscall_entry(int major, unsigned long a0,
 >>>>>>> v3.18
@@ -446,7 +502,11 @@ static inline kuid_t audit_get_loginuid(struct task_struct *tsk)
 	return INVALID_UID;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int audit_get_sessionid(struct task_struct *tsk)
+=======
+static inline unsigned int audit_get_sessionid(struct task_struct *tsk)
+>>>>>>> v3.18
 =======
 static inline unsigned int audit_get_sessionid(struct task_struct *tsk)
 >>>>>>> v3.18
@@ -459,10 +519,15 @@ static inline void audit_ipc_set_perm(unsigned long qbytes, uid_t uid,
 					gid_t gid, umode_t mode)
 { }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int audit_bprm(struct linux_binprm *bprm)
 {
 	return 0;
 }
+=======
+static inline void audit_bprm(struct linux_binprm *bprm)
+{ }
+>>>>>>> v3.18
 =======
 static inline void audit_bprm(struct linux_binprm *bprm)
 { }
@@ -495,8 +560,13 @@ static inline int audit_log_bprm_fcaps(struct linux_binprm *bprm,
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void audit_log_capset(pid_t pid, const struct cred *new,
 				   const struct cred *old)
+=======
+static inline void audit_log_capset(const struct cred *new,
+				    const struct cred *old)
+>>>>>>> v3.18
 =======
 static inline void audit_log_capset(const struct cred *new,
 				    const struct cred *old)
@@ -564,15 +634,21 @@ extern int		    audit_update_lsm_rules(void);
 extern int audit_filter_user(int type);
 extern int audit_filter_type(int type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  audit_receive_filter(int type, int pid, int seq,
 				void *data, size_t datasz);
 extern int audit_enabled;
 =======
+=======
+>>>>>>> v3.18
 extern int audit_rule_change(int type, __u32 portid, int seq,
 				void *data, size_t datasz);
 extern int audit_list_rules_send(struct sk_buff *request_skb, int seq);
 
 extern u32 audit_enabled;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* CONFIG_AUDIT */
 static inline __printf(4, 5)

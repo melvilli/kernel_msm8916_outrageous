@@ -23,11 +23,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/fb.h>
 
 #include "nv04.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include "nv04.h"
 
 /******************************************************************************
@@ -57,6 +60,9 @@ nv04_instobj_dtor(struct nouveau_object *object)
 	nouveau_instobj_destroy(&node->base);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nv04_instobj_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
@@ -66,17 +72,23 @@ nv04_instobj_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	struct nv04_instmem_priv *priv = (void *)engine;
 	struct nv04_instobj_priv *node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret, align;
 
 	align = (unsigned long)data;
 	if (!align)
 		align = 1;
 =======
+=======
+>>>>>>> v3.18
 	struct nouveau_instobj_args *args = data;
 	int ret;
 
 	if (!args->align)
 		args->align = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = nouveau_instobj_create(parent, engine, oclass, &node);
@@ -85,7 +97,12 @@ nv04_instobj_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nouveau_mm_head(&priv->heap, 1, size, size, align, &node->mem);
+=======
+	ret = nouveau_mm_head(&priv->heap, 0, 1, args->size, args->size,
+			      args->align, &node->mem);
+>>>>>>> v3.18
 =======
 	ret = nouveau_mm_head(&priv->heap, 0, 1, args->size, args->size,
 			      args->align, &node->mem);
@@ -98,6 +115,7 @@ nv04_instobj_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void
 nv04_instobj_dtor(struct nouveau_object *object)
@@ -130,6 +148,11 @@ struct nouveau_instobj_impl
 nv04_instobj_oclass = {
 	.base.ofuncs = &(struct nouveau_ofuncs) {
 >>>>>>> v3.18
+=======
+struct nouveau_instobj_impl
+nv04_instobj_oclass = {
+	.base.ofuncs = &(struct nouveau_ofuncs) {
+>>>>>>> v3.18
 		.ctor = nv04_instobj_ctor,
 		.dtor = nv04_instobj_dtor,
 		.init = _nouveau_instobj_init,
@@ -139,6 +162,7 @@ nv04_instobj_oclass = {
 	},
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int
 nv04_instmem_alloc(struct nouveau_instmem *imem, struct nouveau_object *parent,
@@ -154,6 +178,8 @@ nv04_instmem_alloc(struct nouveau_instmem *imem, struct nouveau_object *parent,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 /******************************************************************************
  * instmem subdev implementation
  *****************************************************************************/
@@ -182,6 +208,9 @@ nv04_instmem_dtor(struct nouveau_object *object)
 	if (priv->iomem)
 		iounmap(priv->iomem);
 	nouveau_instmem_destroy(&priv->base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -201,7 +230,10 @@ nv04_instmem_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	/* PRAMIN aperture maps over the end of VRAM, reserve it */
 	priv->base.reserved = 512 * 1024;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->base.alloc    = nv04_instmem_alloc;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -236,6 +268,7 @@ nv04_instmem_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
 nv04_instmem_dtor(struct nouveau_object *object)
 {
@@ -267,10 +300,15 @@ nv04_instmem_oclass = {
 	.handle = NV_SUBDEV(INSTMEM, 0x04),
 	.ofuncs = &(struct nouveau_ofuncs) {
 =======
+=======
+>>>>>>> v3.18
 struct nouveau_oclass *
 nv04_instmem_oclass = &(struct nouveau_instmem_impl) {
 	.base.handle = NV_SUBDEV(INSTMEM, 0x04),
 	.base.ofuncs = &(struct nouveau_ofuncs) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.ctor = nv04_instmem_ctor,
 		.dtor = nv04_instmem_dtor,
@@ -280,7 +318,12 @@ nv04_instmem_oclass = &(struct nouveau_instmem_impl) {
 		.wr32 = nv04_instmem_wr32,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+	.instobj = &nv04_instobj_oclass.base,
+}.base;
+>>>>>>> v3.18
 =======
 	.instobj = &nv04_instobj_oclass.base,
 }.base;

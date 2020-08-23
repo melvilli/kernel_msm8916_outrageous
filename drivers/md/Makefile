@@ -4,7 +4,11 @@
 
 dm-mod-y	+= dm.o dm-table.o dm-target.o dm-linear.o dm-stripe.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   dm-ioctl.o dm-io.o dm-kcopyd.o dm-sysfs.o
+=======
+		   dm-ioctl.o dm-io.o dm-kcopyd.o dm-sysfs.o dm-stats.o
+>>>>>>> v3.18
 =======
 		   dm-ioctl.o dm-io.o dm-kcopyd.o dm-sysfs.o dm-stats.o
 >>>>>>> v3.18
@@ -19,6 +23,10 @@ dm-cache-y	+= dm-cache-target.o dm-cache-metadata.o dm-cache-policy.o
 dm-cache-mq-y   += dm-cache-policy-mq.o
 dm-cache-cleaner-y += dm-cache-policy-cleaner.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+dm-era-y	+= dm-era-target.o
+>>>>>>> v3.18
 =======
 dm-era-y	+= dm-era-target.o
 >>>>>>> v3.18
@@ -50,6 +58,10 @@ obj-$(CONFIG_DM_MULTIPATH)	+= dm-multipath.o dm-round-robin.o
 obj-$(CONFIG_DM_MULTIPATH_QL)	+= dm-queue-length.o
 obj-$(CONFIG_DM_MULTIPATH_ST)	+= dm-service-time.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_DM_SWITCH)		+= dm-switch.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_DM_SWITCH)		+= dm-switch.o
 >>>>>>> v3.18
@@ -65,7 +77,11 @@ obj-$(CONFIG_DM_CACHE)		+= dm-cache.o
 obj-$(CONFIG_DM_CACHE_MQ)	+= dm-cache-mq.o
 obj-$(CONFIG_DM_CACHE_CLEANER)	+= dm-cache-cleaner.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_DM_REQ_CRYPT)	+= dm-req-crypt.o
+=======
+obj-$(CONFIG_DM_ERA)		+= dm-era.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_DM_ERA)		+= dm-era.o
 >>>>>>> v3.18

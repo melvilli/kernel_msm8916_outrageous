@@ -17,8 +17,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Base address of vvars.  This is not ABI. */
 #define VVAR_ADDRESS (-10*1024*1024 - 4096)
+=======
+#ifndef _ASM_X86_VVAR_H
+#define _ASM_X86_VVAR_H
+>>>>>>> v3.18
 =======
 #ifndef _ASM_X86_VVAR_H
 #define _ASM_X86_VVAR_H
@@ -35,6 +40,7 @@
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DECLARE_VVAR(offset, type, name)				\
 	static type const * const vvaraddr_ ## name =			\
 		(void *)(VVAR_ADDRESS + (offset));
@@ -45,6 +51,8 @@
 
 #define VVAR(name) (*vvaraddr_ ## name)
 =======
+=======
+>>>>>>> v3.18
 extern char __vvar_page;
 
 #define DECLARE_VVAR(offset, type, name)				\
@@ -55,6 +63,9 @@ extern char __vvar_page;
 #define DEFINE_VVAR(type, name)						\
 	type name							\
 	__attribute__((section(".vvar_" #name), aligned(16))) __visible
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif
@@ -67,6 +78,11 @@ DECLARE_VVAR(128, struct vsyscall_gtod_data, vsyscall_gtod_data)
 
 #undef DECLARE_VVAR
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#endif
+>>>>>>> v3.18
 =======
 
 #endif

@@ -18,7 +18,10 @@
 
 static const struct iio_buffer_setup_ops iio_triggered_buffer_setup_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.preenable = &iio_sw_buffer_preenable,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.postenable = &iio_triggered_buffer_postenable,
@@ -51,22 +54,33 @@ int iio_triggered_buffer_setup(struct iio_dev *indio_dev,
 	const struct iio_buffer_setup_ops *setup_ops)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	indio_dev->buffer = iio_kfifo_allocate(indio_dev);
 	if (!indio_dev->buffer) {
 =======
+=======
+>>>>>>> v3.18
 	struct iio_buffer *buffer;
 	int ret;
 
 	buffer = iio_kfifo_allocate(indio_dev);
 	if (!buffer) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = -ENOMEM;
 		goto error_ret;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	iio_device_attach_buffer(indio_dev, buffer);
+
+>>>>>>> v3.18
 =======
 	iio_device_attach_buffer(indio_dev, buffer);
 

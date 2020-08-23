@@ -9,17 +9,23 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap4.dtsi"
 
 / {
 	cpus {
 		cpu@0 {
 =======
+=======
+>>>>>>> v3.18
 #include "omap4.dtsi"
 
 / {
 	cpus {
 		cpu0: cpu@0 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* OMAP443x variants OPP50-OPPNT */
 			operating-points = <
@@ -31,10 +37,13 @@
 			>;
 			clock-latency = <300000>; /* From legacy driver */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
 	};
 };
 =======
+=======
+>>>>>>> v3.18
 
 			/* cooling options */
 			cooling-min-level = <0>;
@@ -85,4 +94,7 @@
 };
 
 /include/ "omap443x-clocks.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

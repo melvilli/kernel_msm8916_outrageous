@@ -43,7 +43,11 @@
 #include <linux/io.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sound/tea575x-tuner.h>
+=======
+#include <media/tea575x.h>
+>>>>>>> v3.18
 =======
 #include <media/tea575x.h>
 >>>>>>> v3.18
@@ -205,6 +209,7 @@ static struct pci_driver maxiradio_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init maxiradio_init(void)
 {
 	return pci_register_driver(&maxiradio_driver);
@@ -217,6 +222,9 @@ static void __exit maxiradio_exit(void)
 
 module_init(maxiradio_init);
 module_exit(maxiradio_exit);
+=======
+module_pci_driver(maxiradio_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(maxiradio_driver);
 >>>>>>> v3.18

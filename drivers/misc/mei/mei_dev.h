@@ -25,7 +25,10 @@
 
 #include "hw.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "hw-me-regs.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "hbm.h"
@@ -60,6 +63,7 @@ extern const uuid_le mei_wd_guid;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Watchdog independence state message
  */
 extern const u8 mei_wd_state_independence_msg[3][4];
@@ -69,6 +73,8 @@ extern const u8 mei_wd_state_independence_msg[3][4];
  */
 #define MEI_CLIENTS_MAX 256
 =======
+=======
+>>>>>>> v3.18
  * Number of Maximum MEI Clients
  */
 #define MEI_CLIENTS_MAX 256
@@ -77,6 +83,9 @@ extern const u8 mei_wd_state_independence_msg[3][4];
  * maximum number of consecutive resets
  */
 #define MEI_MAX_CONSEC_RESET  3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -85,7 +94,11 @@ extern const u8 mei_wd_state_independence_msg[3][4];
  *
  * Limit to 255: 256 Total Clients
 <<<<<<< HEAD
+<<<<<<< HEAD
  * minus internal client for MEI Bus Messags
+=======
+ * minus internal client for MEI Bus Messages
+>>>>>>> v3.18
 =======
  * minus internal client for MEI Bus Messages
 >>>>>>> v3.18
@@ -149,26 +162,38 @@ enum mei_wd_states {
 /**
  * enum mei_cb_file_ops  - file operation associated with the callback
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @MEI_FOP_READ   - read
  * @MEI_FOP_WRITE  - write
  * @MEI_FOP_IOCTL  - ioctl
  * @MEI_FOP_OPEN   - open
  * @MEI_FOP_CLOSE  - close
 =======
+=======
+>>>>>>> v3.18
  * @MEI_FOP_READ:       read
  * @MEI_FOP_WRITE:      write
  * @MEI_FOP_CONNECT:    connect
  * @MEI_FOP_DISCONNECT: disconnect
  * @MEI_FOP_DISCONNECT_RSP: disconnect response
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 enum mei_cb_file_ops {
 	MEI_FOP_READ = 0,
 	MEI_FOP_WRITE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MEI_FOP_IOCTL,
 	MEI_FOP_OPEN,
 	MEI_FOP_CLOSE
+=======
+	MEI_FOP_CONNECT,
+	MEI_FOP_DISCONNECT,
+	MEI_FOP_DISCONNECT_RSP,
+>>>>>>> v3.18
 =======
 	MEI_FOP_CONNECT,
 	MEI_FOP_DISCONNECT,
@@ -185,6 +210,7 @@ struct mei_msg_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * struct mei_me_client - representation of me (fw) client
  *
@@ -194,6 +220,8 @@ struct mei_msg_data {
  */
 struct mei_me_client {
 =======
+=======
+>>>>>>> v3.18
 /* Maximum number of processed FW status registers */
 #define MEI_FW_STATUS_MAX 2
 
@@ -218,6 +246,9 @@ struct mei_fw_status {
  */
 struct mei_me_client {
 	struct list_head list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct mei_client_properties props;
 	u8 client_id;
@@ -231,9 +262,12 @@ struct mei_cl;
  * struct mei_cl_cb - file operation callback structure
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @cl - file client who is running this operation
  * @fop_type - file operation type
 =======
+=======
+>>>>>>> v3.18
  * @list: link in callback queue
  * @cl: file client who is running this operation
  * @fop_type: file operation type
@@ -243,6 +277,9 @@ struct mei_cl;
  * @read_time: last read operation time stamp (iamthif)
  * @file_object: pointer to file structure
  * @internal: communication between driver and FW flag
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct mei_cl_cb {
@@ -255,10 +292,13 @@ struct mei_cl_cb {
 	unsigned long read_time;
 	struct file *file_object;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 /* MEI client instance carried as file->pirvate_data*/
 =======
+=======
+>>>>>>> v3.18
 	u32 internal:1;
 };
 
@@ -285,6 +325,9 @@ struct mei_cl_cb {
  * @device: device on the mei client bus
  * @device_link:  link to bus clients
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct mei_cl {
 	struct list_head link;
@@ -295,7 +338,11 @@ struct mei_cl {
 	wait_queue_head_t wait;
 	int status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ID of client connected */
+=======
+	uuid_le cl_uuid;
+>>>>>>> v3.18
 =======
 	uuid_le cl_uuid;
 >>>>>>> v3.18
@@ -306,7 +353,10 @@ struct mei_cl {
 	enum mei_file_transaction_states reading_state;
 	enum mei_file_transaction_states writing_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int sm_state;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct mei_cl_cb *read_cb;
@@ -315,13 +365,17 @@ struct mei_cl {
 	struct mei_cl_device *device;
 	struct list_head device_link;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uuid_le device_uuid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
 
 /** struct mei_hw_ops
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @host_is_ready    - query for host readiness
 
@@ -362,6 +416,8 @@ struct mei_hw_ops {
 	bool (*hbuf_is_ready) (struct mei_device *dev);
 	size_t (*hbuf_max_len) (const struct mei_device *dev);
 =======
+=======
+>>>>>>> v3.18
  * @host_is_ready    : query for host readiness
 
  * @hw_is_ready      : query if hw is ready
@@ -409,6 +465,9 @@ struct mei_hw_ops {
 	int (*hbuf_free_slots)(struct mei_device *dev);
 	bool (*hbuf_is_ready)(struct mei_device *dev);
 	size_t (*hbuf_max_len)(const struct mei_device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	int (*write)(struct mei_device *dev,
@@ -419,7 +478,11 @@ struct mei_hw_ops {
 
 	u32 (*read_hdr)(const struct mei_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*read) (struct mei_device *dev,
+=======
+	int (*read)(struct mei_device *dev,
+>>>>>>> v3.18
 =======
 	int (*read)(struct mei_device *dev,
 >>>>>>> v3.18
@@ -459,6 +522,10 @@ int __mei_cl_send(struct mei_cl *cl, u8 *buf, size_t length);
 int __mei_cl_recv(struct mei_cl *cl, u8 *buf, size_t length);
 void mei_cl_bus_rx_event(struct mei_cl *cl);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void mei_cl_bus_remove_devices(struct mei_device *dev);
+>>>>>>> v3.18
 =======
 void mei_cl_bus_remove_devices(struct mei_device *dev);
 >>>>>>> v3.18
@@ -475,18 +542,24 @@ void mei_cl_bus_exit(void);
  *
  * @dev: linux driver model device pointer
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @uuid: me client uuid
  * @cl: mei client
  * @ops: ME transport ops
  * @event_cb: Drivers register this callback to get asynchronous ME
  *	events (e.g. Rx buffer pending) notifications.
 =======
+=======
+>>>>>>> v3.18
  * @cl: mei client
  * @ops: ME transport ops
  * @event_work: async work to execute event callback
  * @event_cb: Drivers register this callback to get asynchronous ME
  *	events (e.g. Rx buffer pending) notifications.
  * @event_context: event callback run context
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @events: Events bitmask sent to the driver.
  * @priv_data: client private data
@@ -506,6 +579,7 @@ struct mei_cl_device {
 	void *priv_data;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * struct mei_device -  MEI private device struct
@@ -542,6 +616,8 @@ struct mei_device {
 	struct mutex device_lock; /* device lock */
 	struct delayed_work timer_work;	/* MEI timer delayed work (timeouts) */
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * enum mei_pg_event - power gating transition events
@@ -667,6 +743,9 @@ struct mei_device {
 
 	struct mutex device_lock;
 	struct delayed_work timer_work;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bool recvd_hw_ready;
@@ -675,7 +754,12 @@ struct mei_device {
 	 */
 	wait_queue_head_t wait_hw_ready;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_head_t wait_recvd_msg;
+=======
+	wait_queue_head_t wait_pg;
+	wait_queue_head_t wait_hbm_start;
+>>>>>>> v3.18
 =======
 	wait_queue_head_t wait_pg;
 	wait_queue_head_t wait_hbm_start;
@@ -686,6 +770,10 @@ struct mei_device {
 	 * mei device  states
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long reset_count;
+>>>>>>> v3.18
 =======
 	unsigned long reset_count;
 >>>>>>> v3.18
@@ -694,8 +782,11 @@ struct mei_device {
 	u16 init_clients_timer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char rd_msg_buf[MEI_RD_MSG_BUF_SIZE];	/* control messages */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Power Gating support
 	 */
@@ -705,6 +796,9 @@ struct mei_device {
 #endif /* CONFIG_PM_RUNTIME */
 
 	unsigned char rd_msg_buf[MEI_RD_MSG_BUF_SIZE];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 rd_msg_hdr;
 
@@ -719,6 +813,7 @@ struct mei_device {
 	} wr_msg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct {
 		struct mei_msg_hdr hdr;
 		unsigned char data[4];	/* All HBM messages are 4 bytes */
@@ -732,12 +827,17 @@ struct mei_device {
 	unsigned long me_clients_num;
 	unsigned long me_client_presentation_num;
 =======
+=======
+>>>>>>> v3.18
 	struct hbm_version version;
 	unsigned int hbm_f_pg_supported:1;
 
 	struct list_head me_clients;
 	DECLARE_BITMAP(me_clients_map, MEI_CLIENTS_MAX);
 	DECLARE_BITMAP(host_clients_map, MEI_CLIENTS_MAX);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long me_client_index;
 
@@ -756,6 +856,10 @@ struct mei_device {
 	struct mei_cl iamthif_cl;
 	struct mei_cl_cb *iamthif_current_cb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	long iamthif_open_count;
+>>>>>>> v3.18
 =======
 	long iamthif_open_count;
 >>>>>>> v3.18
@@ -772,6 +876,10 @@ struct mei_device {
 
 	struct work_struct init_work;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct work_struct reset_work;
+>>>>>>> v3.18
 =======
 	struct work_struct reset_work;
 >>>>>>> v3.18
@@ -797,13 +905,19 @@ static inline unsigned long mei_secs_to_jiffies(unsigned long sec)
  * mei_data2slots - get slots - number of (dwords) from a message length
  *	+ size of the mei header
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @length - size of the messages in bytes
  * returns  - number of slots
 =======
+=======
+>>>>>>> v3.18
  *
  * @length: size of the messages in bytes
  *
  * Return: number of slots
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 static inline u32 mei_data2slots(size_t length)
@@ -811,6 +925,7 @@ static inline u32 mei_data2slots(size_t length)
 	return DIV_ROUND_UP(sizeof(struct mei_msg_hdr) + length, 4);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * mei init function prototypes
@@ -820,6 +935,8 @@ void mei_reset(struct mei_device *dev, int interrupts);
 int mei_start(struct mei_device *dev);
 void mei_stop(struct mei_device *dev);
 =======
+=======
+>>>>>>> v3.18
 /**
  * mei_slots2data - get data in slots - bytes from slots
  *
@@ -843,6 +960,9 @@ int mei_start(struct mei_device *dev);
 int mei_restart(struct mei_device *dev);
 void mei_stop(struct mei_device *dev);
 void mei_cancel_work(struct mei_device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -879,8 +999,13 @@ struct mei_cl_cb *mei_amthif_find_read_list_entry(struct mei_device *dev,
 void mei_amthif_run_next_cmd(struct mei_device *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mei_amthif_irq_write_complete(struct mei_device *dev, s32 *slots,
 			struct mei_cl_cb *cb, struct mei_cl_cb *cmpl_list);
+=======
+int mei_amthif_irq_write(struct mei_cl *cl, struct mei_cl_cb *cb,
+			struct mei_cl_cb *cmpl_list);
+>>>>>>> v3.18
 =======
 int mei_amthif_irq_write(struct mei_cl *cl, struct mei_cl_cb *cb,
 			struct mei_cl_cb *cmpl_list);
@@ -897,7 +1022,11 @@ int mei_amthif_irq_read(struct mei_device *dev, s32 *slots);
  */
 int mei_nfc_host_init(struct mei_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mei_nfc_host_exit(void);
+=======
+void mei_nfc_host_exit(struct mei_device *dev);
+>>>>>>> v3.18
 =======
 void mei_nfc_host_exit(struct mei_device *dev);
 >>>>>>> v3.18
@@ -907,6 +1036,7 @@ void mei_nfc_host_exit(struct mei_device *dev);
  */
 extern const uuid_le mei_nfc_guid;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int mei_amthif_irq_write_complete(struct mei_device *dev, s32 *slots,
 			struct mei_cl_cb *cb, struct mei_cl_cb *cmpl_list);
@@ -919,12 +1049,15 @@ int mei_amthif_irq_read(struct mei_device *dev, s32 *slots);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int mei_wd_send(struct mei_device *dev);
 int mei_wd_stop(struct mei_device *dev);
 int mei_wd_host_init(struct mei_device *dev);
 /*
  * mei_watchdog_register  - Registering watchdog interface
  *   once we got connection to the WD Client
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @dev - mei device
  */
@@ -933,12 +1066,17 @@ void mei_watchdog_register(struct mei_device *dev);
  * mei_watchdog_unregister  - Unregistering watchdog interface
  * @dev - mei device
 =======
+=======
+>>>>>>> v3.18
  * @dev: mei device
  */
 int mei_watchdog_register(struct mei_device *dev);
 /*
  * mei_watchdog_unregister  - Unregistering watchdog interface
  * @dev: mei device
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void mei_watchdog_unregister(struct mei_device *dev);
@@ -948,6 +1086,10 @@ void mei_watchdog_unregister(struct mei_device *dev);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -955,6 +1097,7 @@ static inline void mei_hw_config(struct mei_device *dev)
 {
 	dev->ops->hw_config(dev);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void mei_hw_reset(struct mei_device *dev, bool enable)
 {
@@ -965,6 +1108,8 @@ static inline void mei_hw_start(struct mei_device *dev)
 {
 	dev->ops->hw_start(dev);
 =======
+=======
+>>>>>>> v3.18
 
 static inline enum mei_pg_state mei_pg_state(struct mei_device *dev)
 {
@@ -984,6 +1129,9 @@ static inline int mei_hw_reset(struct mei_device *dev, bool enable)
 static inline int mei_hw_start(struct mei_device *dev)
 {
 	return dev->ops->hw_start(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1050,7 +1198,10 @@ static inline int mei_count_full_read_slots(struct mei_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int mei_fw_status(struct mei_device *dev,
 				struct mei_fw_status *fw_status)
 {
@@ -1066,6 +1217,9 @@ bool mei_hbuf_acquire(struct mei_device *dev);
 
 bool mei_write_is_idle(struct mei_device *dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if IS_ENABLED(CONFIG_DEBUG_FS)
 int mei_dbgfs_register(struct mei_device *dev, const char *name);
@@ -1079,6 +1233,7 @@ static inline void mei_dbgfs_deregister(struct mei_device *dev) {}
 #endif /* CONFIG_DEBUG_FS */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mei_register(struct mei_device *dev);
 void mei_deregister(struct mei_device *dev);
 
@@ -1087,6 +1242,8 @@ void mei_deregister(struct mei_device *dev);
 	(hdr)->host_addr, (hdr)->me_addr, \
 	(hdr)->length, (hdr)->msg_complete
 =======
+=======
+>>>>>>> v3.18
 int mei_register(struct mei_device *dev, struct device *parent);
 void mei_deregister(struct mei_device *dev);
 
@@ -1094,6 +1251,9 @@ void mei_deregister(struct mei_device *dev);
 #define MEI_HDR_PRM(hdr)                  \
 	(hdr)->host_addr, (hdr)->me_addr, \
 	(hdr)->length, (hdr)->internal, (hdr)->msg_complete
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

@@ -11,6 +11,10 @@
 #include <linux/err.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio/consumer.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio/consumer.h>
 >>>>>>> v3.18
@@ -22,6 +26,7 @@
 #include <linux/slab.h>
 
 struct mmc_gpio {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ro_gpio;
 	int cd_gpio;
@@ -46,6 +51,8 @@ out:
 
 
 =======
+=======
+>>>>>>> v3.18
 	struct gpio_desc *ro_gpio;
 	struct gpio_desc *cd_gpio;
 	bool override_ro_active_level;
@@ -54,11 +61,15 @@ out:
 	char cd_label[0];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static irqreturn_t mmc_gpio_cd_irqt(int irq, void *dev_id)
 {
 	/* Schedule a card detection after a debounce timeout */
 	struct mmc_host *host = dev_id;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct mmc_gpio *ctx = host->slot.handler_priv;
 	int status;
@@ -94,6 +105,11 @@ out:
 	host->trigger_card_event = true;
 	mmc_detect_change(host, msecs_to_jiffies(200));
 >>>>>>> v3.18
+=======
+
+	host->trigger_card_event = true;
+	mmc_detect_change(host, msecs_to_jiffies(200));
+>>>>>>> v3.18
 
 	return IRQ_HANDLED;
 }
@@ -119,8 +135,11 @@ static int mmc_gpio_alloc(struct mmc_host *host)
 			snprintf(ctx->cd_label, len, "%s cd", dev_name(host->parent));
 			snprintf(ctx->ro_label, len, "%s ro", dev_name(host->parent));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ctx->cd_gpio = -EINVAL;
 			ctx->ro_gpio = -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			host->slot.handler_priv = ctx;
@@ -137,12 +156,15 @@ int mmc_gpio_get_ro(struct mmc_host *host)
 	struct mmc_gpio *ctx = host->slot.handler_priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ctx || !gpio_is_valid(ctx->ro_gpio))
 		return -ENOSYS;
 
 	return !gpio_get_value_cansleep(ctx->ro_gpio) ^
 		!!(host->caps2 & MMC_CAP2_RO_ACTIVE_HIGH);
 =======
+=======
+>>>>>>> v3.18
 	if (!ctx || !ctx->ro_gpio)
 		return -ENOSYS;
 
@@ -151,6 +173,9 @@ int mmc_gpio_get_ro(struct mmc_host *host)
 			!!(host->caps2 & MMC_CAP2_RO_ACTIVE_HIGH);
 
 	return gpiod_get_value_cansleep(ctx->ro_gpio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(mmc_gpio_get_ro);
@@ -160,12 +185,15 @@ int mmc_gpio_get_cd(struct mmc_host *host)
 	struct mmc_gpio *ctx = host->slot.handler_priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ctx || !gpio_is_valid(ctx->cd_gpio))
 		return -ENOSYS;
 
 	return !gpio_get_value_cansleep(ctx->cd_gpio) ^
 		!!(host->caps2 & MMC_CAP2_CD_ACTIVE_HIGH);
 =======
+=======
+>>>>>>> v3.18
 	if (!ctx || !ctx->cd_gpio)
 		return -ENOSYS;
 
@@ -174,6 +202,9 @@ int mmc_gpio_get_cd(struct mmc_host *host)
 			!!(host->caps2 & MMC_CAP2_CD_ACTIVE_HIGH);
 
 	return gpiod_get_value_cansleep(ctx->cd_gpio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(mmc_gpio_get_cd);
@@ -212,7 +243,12 @@ int mmc_gpio_request_ro(struct mmc_host *host, unsigned int gpio)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctx->ro_gpio = gpio;
+=======
+	ctx->override_ro_active_level = true;
+	ctx->ro_gpio = gpio_to_desc(gpio);
+>>>>>>> v3.18
 =======
 	ctx->override_ro_active_level = true;
 	ctx->ro_gpio = gpio_to_desc(gpio);
@@ -223,7 +259,10 @@ int mmc_gpio_request_ro(struct mmc_host *host, unsigned int gpio)
 EXPORT_SYMBOL(mmc_gpio_request_ro);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void mmc_gpiod_request_cd_irq(struct mmc_host *host)
 {
 	struct mmc_gpio *ctx = host->slot.handler_priv;
@@ -258,12 +297,19 @@ void mmc_gpiod_request_cd_irq(struct mmc_host *host)
 }
 EXPORT_SYMBOL(mmc_gpiod_request_cd_irq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * mmc_gpio_request_cd - request a gpio for card-detection
  * @host: mmc host
  * @gpio: gpio number requested
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @debounce: debounce time in microseconds
+>>>>>>> v3.18
 =======
  * @debounce: debounce time in microseconds
 >>>>>>> v3.18
@@ -276,6 +322,7 @@ EXPORT_SYMBOL(mmc_gpiod_request_cd_irq);
  * mmc_gpio_request_cd() and mmc_gpio_free_cd() as a pair on their own.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns zero on success, else an error.
  */
 int mmc_gpio_request_cd(struct mmc_host *host, unsigned int gpio)
@@ -283,6 +330,8 @@ int mmc_gpio_request_cd(struct mmc_host *host, unsigned int gpio)
 	struct mmc_gpio *ctx;
 	int irq = gpio_to_irq(gpio);
 =======
+=======
+>>>>>>> v3.18
  * If GPIO debouncing is desired, set the debounce parameter to a non-zero
  * value. The caller is responsible for ensuring that the GPIO driver associated
  * with the GPIO supports debouncing, otherwise an error will be returned.
@@ -293,6 +342,9 @@ int mmc_gpio_request_cd(struct mmc_host *host, unsigned int gpio,
 			unsigned int debounce)
 {
 	struct mmc_gpio *ctx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -312,6 +364,7 @@ int mmc_gpio_request_cd(struct mmc_host *host, unsigned int gpio,
 		 */
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Even if gpio_to_irq() returns a valid IRQ number, the platform might
@@ -342,6 +395,8 @@ int mmc_gpio_request_cd(struct mmc_host *host, unsigned int gpio,
 	if (irq < 0)
 		host->caps |= MMC_CAP_NEEDS_POLL;
 =======
+=======
+>>>>>>> v3.18
 	if (debounce) {
 		ret = gpio_set_debounce(gpio, debounce);
 		if (ret < 0)
@@ -350,6 +405,9 @@ int mmc_gpio_request_cd(struct mmc_host *host, unsigned int gpio,
 
 	ctx->override_cd_active_level = true;
 	ctx->cd_gpio = gpio_to_desc(gpio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -369,17 +427,23 @@ void mmc_gpio_free_ro(struct mmc_host *host)
 	int gpio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ctx || !gpio_is_valid(ctx->ro_gpio))
 		return;
 
 	gpio = ctx->ro_gpio;
 	ctx->ro_gpio = -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	if (!ctx || !ctx->ro_gpio)
 		return;
 
 	gpio = desc_to_gpio(ctx->ro_gpio);
 	ctx->ro_gpio = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	devm_gpio_free(&host->class_dev, gpio);
@@ -399,7 +463,11 @@ void mmc_gpio_free_cd(struct mmc_host *host)
 	int gpio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ctx || !gpio_is_valid(ctx->cd_gpio))
+=======
+	if (!ctx || !ctx->cd_gpio)
+>>>>>>> v3.18
 =======
 	if (!ctx || !ctx->cd_gpio)
 >>>>>>> v3.18
@@ -411,8 +479,13 @@ void mmc_gpio_free_cd(struct mmc_host *host)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio = ctx->cd_gpio;
 	ctx->cd_gpio = -EINVAL;
+=======
+	gpio = desc_to_gpio(ctx->cd_gpio);
+	ctx->cd_gpio = NULL;
+>>>>>>> v3.18
 =======
 	gpio = desc_to_gpio(ctx->cd_gpio);
 	ctx->cd_gpio = NULL;
@@ -422,7 +495,10 @@ void mmc_gpio_free_cd(struct mmc_host *host)
 }
 EXPORT_SYMBOL(mmc_gpio_free_cd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * mmc_gpiod_request_cd - request a gpio descriptor for card-detection
@@ -555,4 +631,7 @@ void mmc_gpiod_free_cd(struct mmc_host *host)
 	ctx->cd_gpio = NULL;
 }
 EXPORT_SYMBOL(mmc_gpiod_free_cd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

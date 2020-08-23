@@ -1,7 +1,11 @@
 /*
 	This is part of rtl8180 OpenSource driver - v 0.3
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Copyright (C) Andrea Merello 2004  <andreamrl@tiscali.it>
+=======
+	Copyright (C) Andrea Merello 2004  <andrea.merello@gmail.com>
+>>>>>>> v3.18
 =======
 	Copyright (C) Andrea Merello 2004  <andrea.merello@gmail.com>
 >>>>>>> v3.18

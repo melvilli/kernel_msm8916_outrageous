@@ -20,7 +20,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -37,6 +42,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RIGOL			1
+#define USBTMC_HEADER_SIZE	12
+>>>>>>> v3.18
 =======
 #define RIGOL			1
 #define USBTMC_HEADER_SIZE	12
@@ -95,6 +105,11 @@ struct usbtmc_device_data {
 	u8 bTag_last_read;	/* needed for abort */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 rigol_quirk;
+
+>>>>>>> v3.18
 =======
 	u8 rigol_quirk;
 
@@ -113,7 +128,10 @@ struct usbtmc_device_data {
 #define to_usbtmc_data(d) container_of(d, struct usbtmc_device_data, kref)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct usbtmc_ID_rigol_quirk {
 	__u16 idVendor;
 	__u16 idProduct;
@@ -124,6 +142,9 @@ static const struct usbtmc_ID_rigol_quirk usbtmc_id_quirk[] = {
 	{ 0, 0 }
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Forward declarations */
 static struct usb_driver usbtmc_driver;
@@ -134,7 +155,10 @@ static void usbtmc_delete(struct kref *kref)
 
 	usb_put_dev(data->usb_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(data);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -148,10 +172,15 @@ static int usbtmc_open(struct inode *inode, struct file *filp)
 	intf = usb_find_interface(&usbtmc_driver, iminor(inode));
 	if (!intf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR KBUILD_MODNAME
 		       ": can not find device for minor %d", iminor(inode));
 		retval = -ENODEV;
 		goto exit;
+=======
+		pr_err("can not find device for minor %d", iminor(inode));
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 		pr_err("can not find device for minor %d", iminor(inode));
 		return -ENODEV;
@@ -165,7 +194,10 @@ static int usbtmc_open(struct inode *inode, struct file *filp)
 	filp->private_data = data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 exit:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return retval;
@@ -401,7 +433,10 @@ exit:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Sends a REQUEST_DEV_DEP_MSG_IN message on the Bulk-IN endpoint.
  * @transfer_size: number of bytes to request from the device.
@@ -459,6 +494,9 @@ static int send_request_dev_dep_msg_in(struct usbtmc_device_data *data, size_t t
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t usbtmc_read(struct file *filp, char __user *buf,
 			   size_t count, loff_t *f_pos)
@@ -487,6 +525,7 @@ static ssize_t usbtmc_read(struct file *filp, char __user *buf,
 		goto exit;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	remaining = count;
 	done = 0;
@@ -534,6 +573,8 @@ static ssize_t usbtmc_read(struct file *filp, char __user *buf,
 				usbtmc_ioctl_abort_bulk_out(data);
 			goto exit;
 =======
+=======
+>>>>>>> v3.18
 	if (data->rigol_quirk) {
 		dev_dbg(dev, "usb_bulk_msg_in: count(%zu)\n", count);
 
@@ -567,6 +608,9 @@ static ssize_t usbtmc_read(struct file *filp, char __user *buf,
 					usbtmc_ioctl_abort_bulk_out(data);
 				goto exit;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -578,6 +622,11 @@ static ssize_t usbtmc_read(struct file *filp, char __user *buf,
 				      USBTMC_TIMEOUT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev_dbg(dev, "usb_bulk_msg: retval(%u), done(%zu), remaining(%zu), actual(%d)\n", retval, done, remaining, actual);
+
+>>>>>>> v3.18
 =======
 		dev_dbg(dev, "usb_bulk_msg: retval(%u), done(%zu), remaining(%zu), actual(%d)\n", retval, done, remaining, actual);
 
@@ -587,7 +636,11 @@ static ssize_t usbtmc_read(struct file *filp, char __user *buf,
 
 		if (retval < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_err(dev, "Unable to read data, error %d\n", retval);
+=======
+			dev_dbg(dev, "Unable to read data, error %d\n", retval);
+>>>>>>> v3.18
 =======
 			dev_dbg(dev, "Unable to read data, error %d\n", retval);
 >>>>>>> v3.18
@@ -596,6 +649,7 @@ static ssize_t usbtmc_read(struct file *filp, char __user *buf,
 			goto exit;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* How many characters did the instrument send? */
 		n_characters = buffer[4] +
@@ -633,6 +687,8 @@ static ssize_t usbtmc_read(struct file *filp, char __user *buf,
 		else
 			remaining -= n_characters;
 =======
+=======
+>>>>>>> v3.18
 		/* Parse header in first packet */
 		if ((done == 0) || !data->rigol_quirk) {
 			/* Sanity checks for the header */
@@ -724,6 +780,9 @@ static ssize_t usbtmc_read(struct file *filp, char __user *buf,
 			}
 			done += actual;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -766,8 +825,13 @@ static ssize_t usbtmc_write(struct file *filp, const char __user *buf,
 
 	while (remaining > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (remaining > USBTMC_SIZE_IOBUFFER - 12) {
 			this_part = USBTMC_SIZE_IOBUFFER - 12;
+=======
+		if (remaining > USBTMC_SIZE_IOBUFFER - USBTMC_HEADER_SIZE) {
+			this_part = USBTMC_SIZE_IOBUFFER - USBTMC_HEADER_SIZE;
+>>>>>>> v3.18
 =======
 		if (remaining > USBTMC_SIZE_IOBUFFER - USBTMC_HEADER_SIZE) {
 			this_part = USBTMC_SIZE_IOBUFFER - USBTMC_HEADER_SIZE;
@@ -782,6 +846,7 @@ static ssize_t usbtmc_write(struct file *filp, const char __user *buf,
 		buffer[0] = 1;
 		buffer[1] = data->bTag;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buffer[2] = ~(data->bTag);
 		buffer[3] = 0; /* Reserved */
 		buffer[4] = this_part & 255;
@@ -789,12 +854,17 @@ static ssize_t usbtmc_write(struct file *filp, const char __user *buf,
 		buffer[6] = (this_part >> 16) & 255;
 		buffer[7] = (this_part >> 24) & 255;
 =======
+=======
+>>>>>>> v3.18
 		buffer[2] = ~data->bTag;
 		buffer[3] = 0; /* Reserved */
 		buffer[4] = this_part >> 0;
 		buffer[5] = this_part >> 8;
 		buffer[6] = this_part >> 16;
 		buffer[7] = this_part >> 24;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* buffer[8] is set above... */
 		buffer[9] = 0; /* Reserved */
@@ -802,7 +872,11 @@ static ssize_t usbtmc_write(struct file *filp, const char __user *buf,
 		buffer[11] = 0; /* Reserved */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (copy_from_user(&buffer[12], buf + done, this_part)) {
+=======
+		if (copy_from_user(&buffer[USBTMC_HEADER_SIZE], buf + done, this_part)) {
+>>>>>>> v3.18
 =======
 		if (copy_from_user(&buffer[USBTMC_HEADER_SIZE], buf + done, this_part)) {
 >>>>>>> v3.18
@@ -811,8 +885,13 @@ static ssize_t usbtmc_write(struct file *filp, const char __user *buf,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		n_bytes = roundup(12 + this_part, 4);
 		memset(buffer + 12 + this_part, 0, n_bytes - (12 + this_part));
+=======
+		n_bytes = roundup(USBTMC_HEADER_SIZE + this_part, 4);
+		memset(buffer + USBTMC_HEADER_SIZE + this_part, 0, n_bytes - (USBTMC_HEADER_SIZE + this_part));
+>>>>>>> v3.18
 =======
 		n_bytes = roundup(USBTMC_HEADER_SIZE + this_part, 4);
 		memset(buffer + USBTMC_HEADER_SIZE + this_part, 0, n_bytes - (USBTMC_HEADER_SIZE + this_part));
@@ -863,7 +942,11 @@ static int usbtmc_ioctl_clear(struct usbtmc_device_data *data)
 	int rv;
 	int n;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int actual;
+=======
+	int actual = 0;
+>>>>>>> v3.18
 =======
 	int actual = 0;
 >>>>>>> v3.18
@@ -1054,7 +1137,11 @@ err_out:
 
 #define capability_attribute(name)					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_##name(struct device *dev,				\
+=======
+static ssize_t name##_show(struct device *dev,				\
+>>>>>>> v3.18
 =======
 static ssize_t name##_show(struct device *dev,				\
 >>>>>>> v3.18
@@ -1066,7 +1153,11 @@ static ssize_t name##_show(struct device *dev,				\
 	return sprintf(buf, "%d\n", data->capabilities.name);		\
 }									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(name, S_IRUGO, show_##name, NULL)
+=======
+static DEVICE_ATTR_RO(name)
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(name)
 >>>>>>> v3.18
@@ -1089,7 +1180,11 @@ static struct attribute_group capability_attr_grp = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t show_TermChar(struct device *dev,
+=======
+static ssize_t TermChar_show(struct device *dev,
+>>>>>>> v3.18
 =======
 static ssize_t TermChar_show(struct device *dev,
 >>>>>>> v3.18
@@ -1102,7 +1197,11 @@ static ssize_t TermChar_show(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t store_TermChar(struct device *dev,
+=======
+static ssize_t TermChar_store(struct device *dev,
+>>>>>>> v3.18
 =======
 static ssize_t TermChar_store(struct device *dev,
 >>>>>>> v3.18
@@ -1118,15 +1217,21 @@ static ssize_t TermChar_store(struct device *dev,
 	return count;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(TermChar, S_IRUGO, show_TermChar, store_TermChar);
 
 #define data_attribute(name)						\
 static ssize_t show_##name(struct device *dev,				\
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RW(TermChar);
 
 #define data_attribute(name)						\
 static ssize_t name##_show(struct device *dev,				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			   struct device_attribute *attr, char *buf)	\
 {									\
@@ -1136,7 +1241,11 @@ static ssize_t name##_show(struct device *dev,				\
 	return sprintf(buf, "%d\n", data->name);			\
 }									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t store_##name(struct device *dev,				\
+=======
+static ssize_t name##_store(struct device *dev,				\
+>>>>>>> v3.18
 =======
 static ssize_t name##_store(struct device *dev,				\
 >>>>>>> v3.18
@@ -1158,7 +1267,11 @@ static ssize_t name##_store(struct device *dev,				\
 		return count;						\
 }									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(name, S_IRUGO, show_##name, store_##name)
+=======
+static DEVICE_ATTR_RW(name)
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RW(name)
 >>>>>>> v3.18
@@ -1286,7 +1399,11 @@ static int usbtmc_probe(struct usb_interface *intf,
 	dev_dbg(&intf->dev, "%s called\n", __func__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = kzalloc(sizeof(struct usbtmc_device_data), GFP_KERNEL);
+=======
+	data = devm_kzalloc(&intf->dev, sizeof(*data), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	data = devm_kzalloc(&intf->dev, sizeof(*data), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1304,7 +1421,10 @@ static int usbtmc_probe(struct usb_interface *intf,
 	data->zombie = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Determine if it is a Rigol or not */
 	data->rigol_quirk = 0;
 	dev_dbg(&intf->dev, "Trying to find if device Vendor 0x%04X Product 0x%04X has the RIGOL quirk\n",
@@ -1319,6 +1439,9 @@ static int usbtmc_probe(struct usb_interface *intf,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Initialize USBTMC bTag and other fields */
 	data->bTag	= 1;
@@ -1353,12 +1476,15 @@ static int usbtmc_probe(struct usb_interface *intf,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!data->bulk_out || !data->bulk_in) {
 		dev_err(&intf->dev, "bulk endpoints not found\n");
 		retcode = -ENODEV;
 		goto err_put;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	retcode = get_capabilities(data);
@@ -1385,7 +1511,10 @@ error_register:
 	sysfs_remove_group(&intf->dev.kobj, &capability_attr_grp);
 	sysfs_remove_group(&intf->dev.kobj, &data_attr_grp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_put:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kref_put(&data->kref, usbtmc_delete);

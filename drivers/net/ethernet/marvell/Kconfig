@@ -34,6 +34,10 @@ config MV643XX_ETH
 config MVMDIO
 	tristate "Marvell MDIO interface support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on HAS_IOMEM
 >>>>>>> v3.18
@@ -47,6 +51,7 @@ config MVMDIO
 
 config MVNETA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Marvell Armada 370/XP network interface support"
 	depends on MACH_ARMADA_370_XP
 	select MVMDIO
@@ -54,12 +59,17 @@ config MVNETA
 	  This driver supports the network interface units in the
 	  Marvell ARMADA XP and ARMADA 370 SoC family.
 =======
+=======
+>>>>>>> v3.18
 	tristate "Marvell Armada 370/38x/XP network interface support"
 	depends on PLAT_ORION
 	select MVMDIO
 	---help---
 	  This driver supports the network interface units in the
 	  Marvell ARMADA XP, ARMADA 370 and ARMADA 38x SoC family.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  Note that this driver is distinct from the mv643xx_eth
@@ -67,10 +77,13 @@ config MVNETA
 	  (Dove, Orion, Discovery, Kirkwood).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config PXA168_ETH
 	tristate "Marvell pxa168 ethernet support"
 	depends on CPU_PXA168
 =======
+=======
+>>>>>>> v3.18
 config MVPP2
 	tristate "Marvell Armada 375 network interface support"
 	depends on MACH_ARMADA_375
@@ -83,6 +96,9 @@ config PXA168_ETH
 	tristate "Marvell pxa168 ethernet support"
 	depends on HAS_IOMEM && HAS_DMA
 	depends on CPU_PXA168 || ARCH_BERLIN || COMPILE_TEST
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select PHYLIB
 	---help---

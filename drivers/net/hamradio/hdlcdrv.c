@@ -700,7 +700,11 @@ struct net_device *hdlcdrv_register(const struct hdlcdrv_ops *ops,
 		privsize = sizeof(struct hdlcdrv_state);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(privsize, ifname, hdlcdrv_setup);
+=======
+	dev = alloc_netdev(privsize, ifname, NET_NAME_UNKNOWN, hdlcdrv_setup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(privsize, ifname, NET_NAME_UNKNOWN, hdlcdrv_setup);
 >>>>>>> v3.18

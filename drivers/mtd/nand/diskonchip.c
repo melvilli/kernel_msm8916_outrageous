@@ -39,7 +39,11 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long __initdata doc_locations[] = {
+=======
+static unsigned long doc_locations[] __initdata = {
+>>>>>>> v3.18
 =======
 static unsigned long doc_locations[] __initdata = {
 >>>>>>> v3.18
@@ -51,7 +55,11 @@ static unsigned long doc_locations[] __initdata = {
 	0xfffe0000, 0xfffe2000, 0xfffe4000, 0xfffe6000,
 	0xfffe8000, 0xfffea000, 0xfffec000, 0xfffee000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /*  CONFIG_MTD_DOCPROBE_HIGH */
+=======
+#else
+>>>>>>> v3.18
 =======
 #else
 >>>>>>> v3.18
@@ -61,7 +69,11 @@ static unsigned long doc_locations[] __initdata = {
 	0xe0000, 0xe2000, 0xe4000, 0xe6000,
 	0xe8000, 0xea000, 0xec000, 0xee000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /*  CONFIG_MTD_DOCPROBE_HIGH */
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -711,7 +723,12 @@ static void doc2001plus_command(struct mtd_info *mtd, unsigned command, int colu
 		if (column != -1) {
 			/* Adjust columns for 16 bit buswidth */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (this->options & NAND_BUSWIDTH_16)
+=======
+			if (this->options & NAND_BUSWIDTH_16 &&
+					!nand_opcode_8bits(command))
+>>>>>>> v3.18
 =======
 			if (this->options & NAND_BUSWIDTH_16 &&
 					!nand_opcode_8bits(command))
@@ -1076,7 +1093,10 @@ static inline int __init nftl_partscan(struct mtd_info *mtd, struct mtd_partitio
 	buf = kmalloc(mtd->writesize, GFP_KERNEL);
 	if (!buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "DiskOnChip mediaheader kmalloc failed!\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return 0;
@@ -1187,7 +1207,10 @@ static inline int __init inftl_partscan(struct mtd_info *mtd, struct mtd_partiti
 	buf = kmalloc(mtd->writesize, GFP_KERNEL);
 	if (!buf) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "DiskOnChip mediaheader kmalloc failed!\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return 0;
@@ -1464,11 +1487,14 @@ static int __init doc_probe(unsigned long physadr)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	virtadr = ioremap(physadr, DOC_IOREMAP_LEN);
 	if (!virtadr) {
 		printk(KERN_ERR "Diskonchip ioremap failed: 0x%x bytes at 0x%lx\n", DOC_IOREMAP_LEN, physadr);
 		return -EIO;
 =======
+=======
+>>>>>>> v3.18
 	if (!request_mem_region(physadr, DOC_IOREMAP_LEN, "DiskOnChip"))
 		return -EBUSY;
 	virtadr = ioremap(physadr, DOC_IOREMAP_LEN);
@@ -1476,6 +1502,9 @@ static int __init doc_probe(unsigned long physadr)
 		printk(KERN_ERR "Diskonchip ioremap failed: 0x%x bytes at 0x%lx\n", DOC_IOREMAP_LEN, physadr);
 		ret = -EIO;
 		goto error_ioremap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1595,7 +1624,10 @@ static int __init doc_probe(unsigned long physadr)
 	mtd = kzalloc(len, GFP_KERNEL);
 	if (!mtd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "DiskOnChip kmalloc (%d bytes) failed!\n", len);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ret = -ENOMEM;
@@ -1666,11 +1698,17 @@ static int __init doc_probe(unsigned long physadr)
  fail:
 	iounmap(virtadr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 error_ioremap:
 	release_mem_region(physadr, DOC_IOREMAP_LEN);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1689,6 +1727,10 @@ static void release_nanddoc(void)
 		nand_release(mtd);
 		iounmap(doc->virtadr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		release_mem_region(doc->physadr, DOC_IOREMAP_LEN);
+>>>>>>> v3.18
 =======
 		release_mem_region(doc->physadr, DOC_IOREMAP_LEN);
 >>>>>>> v3.18

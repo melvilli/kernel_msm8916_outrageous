@@ -14,6 +14,7 @@
 #include <asm/hardware/dec21285.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_DEBUG_DC21285_PORT
 	/* For NetWinder debugging */
 		.macro	addruart, rp, rv, tmp
@@ -28,6 +29,8 @@
 #include <asm/hardware/debug-8250.S>
 
 #else
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <mach/hardware.h>
@@ -58,6 +61,9 @@
 		.macro	waituart,rd,rx
 		.endm
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

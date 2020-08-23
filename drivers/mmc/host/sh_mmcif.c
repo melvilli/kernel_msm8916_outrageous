@@ -62,6 +62,10 @@
 #include <linux/pm_qos.h>
 #include <linux/pm_runtime.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sh_dma.h>
+>>>>>>> v3.18
 =======
 #include <linux/sh_dma.h>
 >>>>>>> v3.18
@@ -138,6 +142,11 @@
 				 INT_DTRANE | INT_CMD12RBE | INT_CMD12CRE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define INT_CCS			(INT_CCSTO | INT_CCSRCV | INT_CCSDE)
+
+>>>>>>> v3.18
 =======
 #define INT_CCS			(INT_CCSTO | INT_CCSRCV | INT_CCSDE)
 
@@ -171,7 +180,11 @@
 #define MASK_START_CMD		(MASK_MCMDVIO | MASK_MBUFVIO | MASK_MWDATERR | \
 				 MASK_MRDATERR | MASK_MRIDXERR | MASK_MRSPERR | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 MASK_MCCSTO | MASK_MCRCSTO | MASK_MWDATTO | \
+=======
+				 MASK_MCRCSTO | MASK_MWDATTO | \
+>>>>>>> v3.18
 =======
 				 MASK_MCRCSTO | MASK_MWDATTO | \
 >>>>>>> v3.18
@@ -257,6 +270,11 @@ struct sh_mmcif_host {
 	bool power;
 	bool card_present;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool ccs_enable;		/* Command Completion Signal support */
+	bool clk_ctrl2_enable;
+>>>>>>> v3.18
 =======
 	bool ccs_enable;		/* Command Completion Signal support */
 	bool clk_ctrl2_enable;
@@ -395,6 +413,7 @@ static void sh_mmcif_start_dma_tx(struct sh_mmcif_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sh_mmcif_request_dma(struct sh_mmcif_host *host,
 				 struct sh_mmcif_plat_data *pdata)
 {
@@ -457,6 +476,8 @@ ecfgtx:
 	dma_release_channel(host->chan_tx);
 	host->chan_tx = NULL;
 =======
+=======
+>>>>>>> v3.18
 static struct dma_chan *
 sh_mmcif_request_dma_one(struct sh_mmcif_host *host,
 			 struct sh_mmcif_plat_data *pdata,
@@ -533,6 +554,9 @@ static void sh_mmcif_request_dma(struct sh_mmcif_host *host,
 		dma_release_channel(host->chan_tx);
 		host->chan_tx = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -583,15 +607,21 @@ static void sh_mmcif_sync_reset(struct sh_mmcif_host *host)
 	sh_mmcif_writel(host->addr, MMCIF_CE_VERSION, SOFT_RST_ON);
 	sh_mmcif_writel(host->addr, MMCIF_CE_VERSION, SOFT_RST_OFF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sh_mmcif_bitset(host, MMCIF_CE_CLK_CTRL, tmp |
 		SRSPTO_256 | SRBSYTO_29 | SRWDTO_29 | SCCSTO_29);
 =======
+=======
+>>>>>>> v3.18
 	if (host->ccs_enable)
 		tmp |= SCCSTO_29;
 	if (host->clk_ctrl2_enable)
 		sh_mmcif_writel(host->addr, MMCIF_CE_CLK_CTRL2, 0x0F0F0000);
 	sh_mmcif_bitset(host, MMCIF_CE_CLK_CTRL, tmp |
 		SRSPTO_256 | SRBSYTO_29 | SRWDTO_29);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* byte swap on */
 	sh_mmcif_bitset(host, MMCIF_CE_BUF_ACC, BUF_ACC_ATYP);
@@ -893,6 +923,7 @@ static u32 sh_mmcif_set_cmd(struct sh_mmcif_host *host,
 		}
 		switch (host->timing) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case MMC_TIMING_UHS_DDR50:
 			/*
 			 * MMC core will only set this timing, if the host
@@ -900,6 +931,8 @@ static u32 sh_mmcif_set_cmd(struct sh_mmcif_host *host,
 			 * implementations with this capability, e.g. sh73a0,
 			 * will have to set it in their platform data.
 =======
+=======
+>>>>>>> v3.18
 		case MMC_TIMING_MMC_DDR52:
 			/*
 			 * MMC core will only set this timing, if the host
@@ -907,6 +940,9 @@ static u32 sh_mmcif_set_cmd(struct sh_mmcif_host *host,
 			 * capability. MMCIF implementations with this
 			 * capability, e.g. sh73a0, will have to set it
 			 * in their platform data.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 */
 			tmp |= CMD_SET_DARS;
@@ -983,6 +1019,12 @@ static void sh_mmcif_start_cmd(struct sh_mmcif_host *host,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (host->ccs_enable)
+		mask |= MASK_MCCSTO;
+
+>>>>>>> v3.18
 =======
 	if (host->ccs_enable)
 		mask |= MASK_MCCSTO;
@@ -996,12 +1038,18 @@ static void sh_mmcif_start_cmd(struct sh_mmcif_host *host,
 	opc = sh_mmcif_set_cmd(host, mrq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sh_mmcif_writel(host->addr, MMCIF_CE_INT, 0xD80430C0);
 =======
+=======
+>>>>>>> v3.18
 	if (host->ccs_enable)
 		sh_mmcif_writel(host->addr, MMCIF_CE_INT, 0xD80430C0);
 	else
 		sh_mmcif_writel(host->addr, MMCIF_CE_INT, 0xD80430C0 | INT_CCS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sh_mmcif_writel(host->addr, MMCIF_CE_INT_MASK, mask);
 	/* set arg */
@@ -1073,7 +1121,11 @@ static void sh_mmcif_request(struct mmc_host *mmc, struct mmc_request *mrq)
 static int sh_mmcif_clk_update(struct sh_mmcif_host *host)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = clk_enable(host->hclk);
+=======
+	int ret = clk_prepare_enable(host->hclk);
+>>>>>>> v3.18
 =======
 	int ret = clk_prepare_enable(host->hclk);
 >>>>>>> v3.18
@@ -1090,11 +1142,16 @@ static int sh_mmcif_clk_update(struct sh_mmcif_host *host)
 static void sh_mmcif_set_power(struct sh_mmcif_host *host, struct mmc_ios *ios)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sh_mmcif_plat_data *pd = host->pd->dev.platform_data;
 	struct mmc_host *mmc = host->mmc;
 
 	if (pd && pd->set_pwr)
 		pd->set_pwr(host->pd, ios->power_mode != MMC_POWER_OFF);
+=======
+	struct mmc_host *mmc = host->mmc;
+
+>>>>>>> v3.18
 =======
 	struct mmc_host *mmc = host->mmc;
 
@@ -1139,7 +1196,11 @@ static void sh_mmcif_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		if (host->power) {
 			pm_runtime_put_sync(&host->pd->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clk_disable(host->hclk);
+=======
+			clk_disable_unprepare(host->hclk);
+>>>>>>> v3.18
 =======
 			clk_disable_unprepare(host->hclk);
 >>>>>>> v3.18
@@ -1384,11 +1445,14 @@ static irqreturn_t sh_mmcif_intr(int irq, void *dev_id)
 {
 	struct sh_mmcif_host *host = dev_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 state;
 
 	state = sh_mmcif_readl(host->addr, MMCIF_CE_INT);
 	sh_mmcif_writel(host->addr, MMCIF_CE_INT, ~state);
 =======
+=======
+>>>>>>> v3.18
 	u32 state, mask;
 
 	state = sh_mmcif_readl(host->addr, MMCIF_CE_INT);
@@ -1397,6 +1461,9 @@ static irqreturn_t sh_mmcif_intr(int irq, void *dev_id)
 		sh_mmcif_writel(host->addr, MMCIF_CE_INT, ~(state & mask));
 	else
 		sh_mmcif_writel(host->addr, MMCIF_CE_INT, INT_CCS | ~(state & mask));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sh_mmcif_bitclr(host, MMCIF_CE_INT_MASK, state & MASK_CLEAN);
 
@@ -1507,6 +1574,7 @@ static int sh_mmcif_probe(struct platform_device *pdev)
 		return -ENXIO;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
 		dev_err(&pdev->dev, "platform_get_resource error.\n");
@@ -1525,6 +1593,8 @@ static int sh_mmcif_probe(struct platform_device *pdev)
 	}
 	mmc_of_parse(mmc);
 =======
+=======
+>>>>>>> v3.18
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	reg = devm_ioremap_resource(&pdev->dev, res);
@@ -1539,12 +1609,20 @@ static int sh_mmcif_probe(struct platform_device *pdev)
 	if (ret < 0)
 		goto err_host;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	host		= mmc_priv(mmc);
 	host->mmc	= mmc;
 	host->addr	= reg;
 	host->timeout	= msecs_to_jiffies(1000);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	host->ccs_enable = !pd || !pd->ccs_unsupported;
+	host->clk_ctrl2_enable = pd && pd->clk_ctrl2_present;
+>>>>>>> v3.18
 =======
 	host->ccs_enable = !pd || !pd->ccs_unsupported;
 	host->clk_ctrl2_enable = pd && pd->clk_ctrl2_present;
@@ -1572,6 +1650,7 @@ static int sh_mmcif_probe(struct platform_device *pdev)
 	host->power = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->hclk = clk_get(&pdev->dev, NULL);
 	if (IS_ERR(host->hclk)) {
 		ret = PTR_ERR(host->hclk);
@@ -1586,6 +1665,8 @@ static int sh_mmcif_probe(struct platform_device *pdev)
 	if (ret < 0)
 		goto eresume;
 =======
+=======
+>>>>>>> v3.18
 	host->hclk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(host->hclk)) {
 		ret = PTR_ERR(host->hclk);
@@ -1599,6 +1680,9 @@ static int sh_mmcif_probe(struct platform_device *pdev)
 	ret = pm_runtime_resume(&pdev->dev);
 	if (ret < 0)
 		goto err_clk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	INIT_DELAYED_WORK(&host->timeout_work, mmcif_timeout_work);
@@ -1607,6 +1691,7 @@ static int sh_mmcif_probe(struct platform_device *pdev)
 	sh_mmcif_writel(host->addr, MMCIF_CE_INT_MASK, MASK_ALL);
 
 	name = irq[1] < 0 ? dev_name(&pdev->dev) : "sh_mmc:error";
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = request_threaded_irq(irq[0], sh_mmcif_intr, sh_mmcif_irqt, 0, name, host);
 	if (ret) {
@@ -1620,6 +1705,8 @@ static int sh_mmcif_probe(struct platform_device *pdev)
 			dev_err(&pdev->dev, "request_irq error (sh_mmc:int)\n");
 			goto ereqirq1;
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_request_threaded_irq(&pdev->dev, irq[0], sh_mmcif_intr,
 					sh_mmcif_irqt, 0, name, host);
 	if (ret) {
@@ -1633,11 +1720,15 @@ static int sh_mmcif_probe(struct platform_device *pdev)
 		if (ret) {
 			dev_err(&pdev->dev, "request_irq error (sh_mmc:int)\n");
 			goto err_clk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	if (pd && pd->use_cd_gpio) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = mmc_gpio_request_cd(mmc, pd->cd_gpio);
 		if (ret < 0)
@@ -1647,10 +1738,16 @@ static int sh_mmcif_probe(struct platform_device *pdev)
 		if (ret < 0)
 			goto err_clk;
 >>>>>>> v3.18
+=======
+		ret = mmc_gpio_request_cd(mmc, pd->cd_gpio, 0);
+		if (ret < 0)
+			goto err_clk;
+>>>>>>> v3.18
 	}
 
 	mutex_init(&host->thread_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	clk_disable(host->hclk);
 	ret = mmc_add_host(mmc);
@@ -1682,6 +1779,8 @@ eclkget:
 ealloch:
 	iounmap(reg);
 =======
+=======
+>>>>>>> v3.18
 	ret = mmc_add_host(mmc);
 	if (ret < 0)
 		goto err_clk;
@@ -1701,6 +1800,9 @@ err_pm:
 	pm_runtime_disable(&pdev->dev);
 err_host:
 	mmc_free_host(mmc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1709,10 +1811,16 @@ static int sh_mmcif_remove(struct platform_device *pdev)
 {
 	struct sh_mmcif_host *host = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq[2];
 
 	host->dying = true;
 	clk_enable(host->hclk);
+=======
+
+	host->dying = true;
+	clk_prepare_enable(host->hclk);
+>>>>>>> v3.18
 =======
 
 	host->dying = true;
@@ -1733,6 +1841,7 @@ static int sh_mmcif_remove(struct platform_device *pdev)
 	cancel_delayed_work_sync(&host->timeout_work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (host->addr)
 		iounmap(host->addr);
 
@@ -1749,6 +1858,9 @@ static int sh_mmcif_remove(struct platform_device *pdev)
 =======
 	clk_disable_unprepare(host->hclk);
 >>>>>>> v3.18
+=======
+	clk_disable_unprepare(host->hclk);
+>>>>>>> v3.18
 	mmc_free_host(host->mmc);
 	pm_runtime_put_sync(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
@@ -1756,6 +1868,7 @@ static int sh_mmcif_remove(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PM
 static int sh_mmcif_suspend(struct device *dev)
@@ -1768,6 +1881,8 @@ static int sh_mmcif_suspend(struct device *dev)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int sh_mmcif_suspend(struct device *dev)
 {
@@ -1776,11 +1891,15 @@ static int sh_mmcif_suspend(struct device *dev)
 	sh_mmcif_writel(host->addr, MMCIF_CE_INT_MASK, MASK_ALL);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int sh_mmcif_resume(struct device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sh_mmcif_host *host = dev_get_drvdata(dev);
 
@@ -1795,6 +1914,11 @@ static int sh_mmcif_resume(struct device *dev)
 }
 #endif
 >>>>>>> v3.18
+=======
+	return 0;
+}
+#endif
+>>>>>>> v3.18
 
 static const struct of_device_id mmcif_of_match[] = {
 	{ .compatible = "renesas,sh-mmcif" },
@@ -1804,8 +1928,12 @@ MODULE_DEVICE_TABLE(of, mmcif_of_match);
 
 static const struct dev_pm_ops sh_mmcif_dev_pm_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend = sh_mmcif_suspend,
 	.resume = sh_mmcif_resume,
+=======
+	SET_SYSTEM_SLEEP_PM_OPS(sh_mmcif_suspend, sh_mmcif_resume)
+>>>>>>> v3.18
 =======
 	SET_SYSTEM_SLEEP_PM_OPS(sh_mmcif_suspend, sh_mmcif_resume)
 >>>>>>> v3.18
@@ -1818,7 +1946,10 @@ static struct platform_driver sh_mmcif_driver = {
 		.name	= DRIVER_NAME,
 		.pm	= &sh_mmcif_dev_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.of_match_table = mmcif_of_match,

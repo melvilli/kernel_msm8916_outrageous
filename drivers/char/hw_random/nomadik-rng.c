@@ -11,7 +11,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/device.h>
@@ -48,7 +51,11 @@ static int nmk_rng_probe(struct amba_device *dev, const struct amba_id *id)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rng_clk = clk_get(&dev->dev, NULL);
+=======
+	rng_clk = devm_clk_get(&dev->dev, NULL);
+>>>>>>> v3.18
 =======
 	rng_clk = devm_clk_get(&dev->dev, NULL);
 >>>>>>> v3.18
@@ -59,7 +66,11 @@ static int nmk_rng_probe(struct amba_device *dev, const struct amba_id *id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(rng_clk);
+=======
+	clk_prepare_enable(rng_clk);
+>>>>>>> v3.18
 =======
 	clk_prepare_enable(rng_clk);
 >>>>>>> v3.18
@@ -69,7 +80,12 @@ static int nmk_rng_probe(struct amba_device *dev, const struct amba_id *id)
 		goto out_clk;
 	ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	base = ioremap(dev->res.start, resource_size(&dev->res));
+=======
+	base = devm_ioremap(&dev->dev, dev->res.start,
+			    resource_size(&dev->res));
+>>>>>>> v3.18
 =======
 	base = devm_ioremap(&dev->dev, dev->res.start,
 			    resource_size(&dev->res));
@@ -79,6 +95,7 @@ static int nmk_rng_probe(struct amba_device *dev, const struct amba_id *id)
 	nmk_rng.priv = (unsigned long)base;
 	ret = hwrng_register(&nmk_rng);
 	if (ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out_unmap;
 	return 0;
@@ -90,12 +107,20 @@ out_unmap:
 	return 0;
 
 >>>>>>> v3.18
+=======
+		goto out_release;
+	return 0;
+
+>>>>>>> v3.18
 out_release:
 	amba_release_regions(dev);
 out_clk:
 	clk_disable(rng_clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(rng_clk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -104,12 +129,18 @@ out_clk:
 static int nmk_rng_remove(struct amba_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *base = (void __iomem *)nmk_rng.priv;
 	hwrng_unregister(&nmk_rng);
 	iounmap(base);
 	amba_release_regions(dev);
 	clk_disable(rng_clk);
 	clk_put(rng_clk);
+=======
+	hwrng_unregister(&nmk_rng);
+	amba_release_regions(dev);
+	clk_disable(rng_clk);
+>>>>>>> v3.18
 =======
 	hwrng_unregister(&nmk_rng);
 	amba_release_regions(dev);

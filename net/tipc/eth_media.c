@@ -2,8 +2,13 @@
  * net/tipc/eth_media.c: Ethernet bearer support for TIPC
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2001-2007, Ericsson AB
  * Copyright (c) 2005-2008, 2011, Wind River Systems
+=======
+ * Copyright (c) 2001-2007, 2013-2014, Ericsson AB
+ * Copyright (c) 2005-2008, 2011-2013, Wind River Systems
+>>>>>>> v3.18
 =======
  * Copyright (c) 2001-2007, 2013-2014, Ericsson AB
  * Copyright (c) 2005-2008, 2011-2013, Wind River Systems
@@ -42,6 +47,7 @@
 #include "core.h"
 #include "bearer.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MAX_ETH_BEARERS		MAX_BEARERS
 
@@ -348,6 +354,8 @@ static struct tipc_media eth_media_info = {
 	.addr2msg	= eth_addr2msg,
 	.msg2addr	= eth_msg2addr,
 =======
+=======
+>>>>>>> v3.18
 #define ETH_ADDR_OFFSET  4  /* MAC addr position inside address field */
 
 /* Convert Ethernet address (media address format) to string */
@@ -403,11 +411,15 @@ struct tipc_media eth_media_info = {
 	.addr2msg	= tipc_eth_addr2msg,
 	.msg2addr	= tipc_eth_msg2addr,
 	.raw2addr	= tipc_eth_raw2addr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.priority	= TIPC_DEF_LINK_PRI,
 	.tolerance	= TIPC_DEF_LINK_TOL,
 	.window		= TIPC_DEF_LINK_WIN,
 	.type_id	= TIPC_MEDIA_TYPE_ETH,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.name		= "eth"
 };
@@ -447,6 +459,11 @@ void tipc_eth_media_stop(void)
 	unregister_netdevice_notifier(&notifier);
 	eth_started = 0;
 }
+=======
+	.hwaddr_len	= ETH_ALEN,
+	.name		= "eth"
+};
+>>>>>>> v3.18
 =======
 	.hwaddr_len	= ETH_ALEN,
 	.name		= "eth"

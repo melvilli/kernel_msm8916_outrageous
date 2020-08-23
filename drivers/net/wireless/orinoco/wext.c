@@ -53,9 +53,15 @@ static int orinoco_set_key(struct orinoco_private *priv, int index,
 
 	if (key_len)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(priv->keys[index].key, key, key_len);
 	if (seq_len)
 		memcpy(priv->keys[index].seq, seq, seq_len);
+=======
+		memcpy((void *)priv->keys[index].key, key, key_len);
+	if (seq_len)
+		memcpy((void *)priv->keys[index].seq, seq, seq_len);
+>>>>>>> v3.18
 =======
 		memcpy((void *)priv->keys[index].key, key, key_len);
 	if (seq_len)
@@ -451,7 +457,11 @@ static int orinoco_ioctl_setfreq(struct net_device *dev,
 			denom *= 10;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		chan = ieee80211_freq_to_dsss_chan(frq->m / denom);
+=======
+		chan = ieee80211_frequency_to_channel(frq->m / denom);
+>>>>>>> v3.18
 =======
 		chan = ieee80211_frequency_to_channel(frq->m / denom);
 >>>>>>> v3.18

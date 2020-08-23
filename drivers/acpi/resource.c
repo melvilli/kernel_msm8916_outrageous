@@ -516,7 +516,10 @@ int acpi_dev_get_resources(struct acpi_device *adev, struct list_head *list,
 {
 	struct res_proc_context c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle not_used;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	acpi_status status;
@@ -525,8 +528,12 @@ int acpi_dev_get_resources(struct acpi_device *adev, struct list_head *list,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_get_handle(adev->handle, METHOD_NAME__CRS, &not_used);
 	if (ACPI_FAILURE(status))
+=======
+	if (!acpi_has_method(adev->handle, METHOD_NAME__CRS))
+>>>>>>> v3.18
 =======
 	if (!acpi_has_method(adev->handle, METHOD_NAME__CRS))
 >>>>>>> v3.18

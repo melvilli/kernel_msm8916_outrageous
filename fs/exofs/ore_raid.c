@@ -1,7 +1,11 @@
 /*
  * Copyright (C) 2011
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Boaz Harrosh <bharrosh@panasas.com>
+=======
+ * Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  * Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18
@@ -26,7 +30,11 @@
 #define ORE_DBGMSG2 ORE_DBGMSG
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct page *_raid_page_alloc(void)
+=======
+static struct page *_raid_page_alloc(void)
+>>>>>>> v3.18
 =======
 static struct page *_raid_page_alloc(void)
 >>>>>>> v3.18
@@ -35,7 +43,11 @@ static struct page *_raid_page_alloc(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void _raid_page_free(struct page *p)
+=======
+static void _raid_page_free(struct page *p)
+>>>>>>> v3.18
 =======
 static void _raid_page_free(struct page *p)
 >>>>>>> v3.18
@@ -129,7 +141,11 @@ static int _sp2d_alloc(unsigned pages_in_unit, unsigned group_width,
 							pages_in_unit - i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__a1pa = kzalloc(num_a1pa * sizeof__a1pa, GFP_KERNEL);
+=======
+			__a1pa = kcalloc(num_a1pa, sizeof__a1pa, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 			__a1pa = kcalloc(num_a1pa, sizeof__a1pa, GFP_KERNEL);
 >>>>>>> v3.18
@@ -235,12 +251,18 @@ static void _gen_xor_unit(struct __stripe_pages_2d *sp2d)
 {
 	unsigned p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned tx_flags = ASYNC_TX_ACK;
 
 	if (sp2d->parity == 1)
 		tx_flags |= ASYNC_TX_XOR_ZERO_DST;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (p = 0; p < sp2d->pages_in_unit; p++) {
 		struct __1_page_stripe *_1ps = &sp2d->_1p_stripes[p];
@@ -248,6 +270,7 @@ static void _gen_xor_unit(struct __stripe_pages_2d *sp2d)
 		if (!_1ps->write_count)
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		init_async_submit(&_1ps->submit,
 			ASYNC_TX_XOR_ZERO_DST | ASYNC_TX_ACK,
@@ -260,6 +283,8 @@ static void _gen_xor_unit(struct __stripe_pages_2d *sp2d)
 				     0, sp2d->data_devs, PAGE_SIZE,
 				     &_1ps->submit);
 =======
+=======
+>>>>>>> v3.18
 		init_async_submit(&_1ps->submit, tx_flags,
 			NULL, NULL, NULL, (addr_conv_t *)_1ps->scribble);
 
@@ -271,6 +296,9 @@ static void _gen_xor_unit(struct __stripe_pages_2d *sp2d)
 			_1ps->tx = async_gen_syndrome(_1ps->pages, 0,
 						sp2d->data_devs + sp2d->parity,
 						PAGE_SIZE, &_1ps->submit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -443,9 +471,14 @@ static int _add_to_r4w_last_page(struct ore_io_state *ios, u64 *offset)
 	ore_calc_stripe_info(ios->layout, *offset, 0, &si);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = si.unit_off / PAGE_SIZE;
 	c = _dev_order(ios->layout->group_width * ios->layout->mirrors_p1,
 		       ios->layout->mirrors_p1, si.par_dev, si.dev);
+=======
+	p = si.cur_pg;
+	c = si.cur_comp;
+>>>>>>> v3.18
 =======
 	p = si.cur_pg;
 	c = si.cur_comp;
@@ -578,9 +611,14 @@ static int _read_4_write_last_stripe(struct ore_io_state *ios)
 
 	ore_calc_stripe_info(ios->layout, offset, 0, &read_si);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = read_si.unit_off / PAGE_SIZE;
 	c = _dev_order(ios->layout->group_width * ios->layout->mirrors_p1,
 		       ios->layout->mirrors_p1, read_si.par_dev, read_si.dev);
+=======
+	p = read_si.cur_pg;
+	c = read_si.cur_comp;
+>>>>>>> v3.18
 =======
 	p = read_si.cur_pg;
 	c = read_si.cur_comp;
@@ -669,7 +707,11 @@ int _ore_add_parity_unit(struct ore_io_state *ios,
 			    struct ore_striping_info *si,
 			    struct ore_per_dev_state *per_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    unsigned cur_len)
+=======
+			    unsigned cur_len, bool do_xor)
+>>>>>>> v3.18
 =======
 			    unsigned cur_len, bool do_xor)
 >>>>>>> v3.18
@@ -693,9 +735,12 @@ int _ore_add_parity_unit(struct ore_io_state *ios,
 		num_pages  = _sp2d_max_pg(sp2d) + 1 - si->cur_pg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!cur_len) /* If last stripe operate on parity comp */
 			si->cur_comp = sp2d->data_devs;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (!per_dev->length) {
@@ -704,15 +749,21 @@ int _ore_add_parity_unit(struct ore_io_state *ios,
 			 * (if needed) before we calculate the first parity.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_read_4_write_first_stripe(ios);
 		}
 		if (!cur_len) /* If last stripe r4w pages of last stripe */
 =======
+=======
+>>>>>>> v3.18
 			if (do_xor)
 				_read_4_write_first_stripe(ios);
 		}
 		if (!cur_len && do_xor)
 			/* If last stripe r4w pages of last stripe */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			_read_4_write_last_stripe(ios);
 		_read_4_write_execute(ios);
@@ -726,7 +777,11 @@ int _ore_add_parity_unit(struct ore_io_state *ios,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG_ON(si->cur_comp != sp2d->data_devs);
+=======
+		BUG_ON(si->cur_comp < sp2d->data_devs);
+>>>>>>> v3.18
 =======
 		BUG_ON(si->cur_comp < sp2d->data_devs);
 >>>>>>> v3.18
@@ -738,14 +793,20 @@ int _ore_add_parity_unit(struct ore_io_state *ios,
 			return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* TODO: raid6 if (last_parity_dev) */
 		_gen_xor_unit(sp2d);
 		_sp2d_reset(sp2d, ios->r4w, ios->private);
 =======
+=======
+>>>>>>> v3.18
 		if (do_xor) {
 			_gen_xor_unit(sp2d);
 			_sp2d_reset(sp2d, ios->r4w, ios->private);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;

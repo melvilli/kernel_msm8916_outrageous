@@ -108,8 +108,12 @@ static unsigned int vfat_striptail_len(const struct qstr *qstr)
  * return ENOENT or EINVAL as appropriate.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vfat_hash(const struct dentry *dentry, const struct inode *inode,
 		struct qstr *qstr)
+=======
+static int vfat_hash(const struct dentry *dentry, struct qstr *qstr)
+>>>>>>> v3.18
 =======
 static int vfat_hash(const struct dentry *dentry, struct qstr *qstr)
 >>>>>>> v3.18
@@ -125,8 +129,12 @@ static int vfat_hash(const struct dentry *dentry, struct qstr *qstr)
  * return ENOENT or EINVAL as appropriate.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vfat_hashi(const struct dentry *dentry, const struct inode *inode,
 		struct qstr *qstr)
+=======
+static int vfat_hashi(const struct dentry *dentry, struct qstr *qstr)
+>>>>>>> v3.18
 =======
 static int vfat_hashi(const struct dentry *dentry, struct qstr *qstr)
 >>>>>>> v3.18
@@ -151,8 +159,12 @@ static int vfat_hashi(const struct dentry *dentry, struct qstr *qstr)
  * Case insensitive compare of two vfat names.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vfat_cmpi(const struct dentry *parent, const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
+=======
+static int vfat_cmpi(const struct dentry *parent, const struct dentry *dentry,
+>>>>>>> v3.18
 =======
 static int vfat_cmpi(const struct dentry *parent, const struct dentry *dentry,
 >>>>>>> v3.18
@@ -175,8 +187,12 @@ static int vfat_cmpi(const struct dentry *parent, const struct dentry *dentry,
  * Case sensitive compare of two vfat names.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vfat_cmp(const struct dentry *parent, const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
+=======
+static int vfat_cmp(const struct dentry *parent, const struct dentry *dentry,
+>>>>>>> v3.18
 =======
 static int vfat_cmp(const struct dentry *parent, const struct dentry *dentry,
 >>>>>>> v3.18
@@ -757,14 +773,20 @@ static struct dentry *vfat_lookup(struct inode *dir, struct dentry *dentry,
 
 	alias = d_find_alias(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (alias && !vfat_d_anon_disconn(alias)) {
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Checking "alias->d_parent == dentry->d_parent" to make sure
 	 * FS is not corrupted (especially double linked dir).
 	 */
 	if (alias && alias->d_parent == dentry->d_parent &&
 	    !vfat_d_anon_disconn(alias)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * This inode has non anonymous-DCACHE_DISCONNECTED
@@ -785,12 +807,18 @@ static struct dentry *vfat_lookup(struct inode *dir, struct dentry *dentry,
 out:
 	mutex_unlock(&MSDOS_SB(sb)->s_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dentry->d_time = dentry->d_parent->d_inode->i_version;
 	dentry = d_splice_alias(inode, dentry);
 	if (dentry)
 		dentry->d_time = dentry->d_parent->d_inode->i_version;
 	return dentry;
 
+=======
+	if (!inode)
+		dentry->d_time = dir->i_version;
+	return d_splice_alias(inode, dentry);
+>>>>>>> v3.18
 =======
 	if (!inode)
 		dentry->d_time = dir->i_version;
@@ -829,7 +857,10 @@ static int vfat_create(struct inode *dir, struct dentry *dentry, umode_t mode,
 	/* timestamp is already written, so mark_inode_dirty() is unneeded. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dentry->d_time = dentry->d_parent->d_inode->i_version;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	d_instantiate(dentry, inode);
@@ -863,6 +894,10 @@ static int vfat_rmdir(struct inode *dir, struct dentry *dentry)
 	inode->i_mtime = inode->i_atime = CURRENT_TIME_SEC;
 	fat_detach(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dentry->d_time = dir->i_version;
+>>>>>>> v3.18
 =======
 	dentry->d_time = dir->i_version;
 >>>>>>> v3.18
@@ -892,6 +927,10 @@ static int vfat_unlink(struct inode *dir, struct dentry *dentry)
 	inode->i_mtime = inode->i_atime = CURRENT_TIME_SEC;
 	fat_detach(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dentry->d_time = dir->i_version;
+>>>>>>> v3.18
 =======
 	dentry->d_time = dir->i_version;
 >>>>>>> v3.18
@@ -936,7 +975,10 @@ static int vfat_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
 	/* timestamp is already written, so mark_inode_dirty() is unneeded. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dentry->d_time = dentry->d_parent->d_inode->i_version;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	d_instantiate(dentry, inode);

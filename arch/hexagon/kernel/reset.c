@@ -34,9 +34,14 @@ void machine_restart(char *cmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void pm_power_off(void)
 {
 }
+=======
+void (*pm_power_off)(void) = NULL;
+EXPORT_SYMBOL(pm_power_off);
+>>>>>>> v3.18
 =======
 void (*pm_power_off)(void) = NULL;
 EXPORT_SYMBOL(pm_power_off);

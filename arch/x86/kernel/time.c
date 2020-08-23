@@ -24,7 +24,11 @@
 
 #ifdef CONFIG_X86_64
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_VVAR(volatile unsigned long, jiffies) = INITIAL_JIFFIES;
+=======
+__visible DEFINE_VVAR(volatile unsigned long, jiffies) = INITIAL_JIFFIES;
+>>>>>>> v3.18
 =======
 __visible DEFINE_VVAR(volatile unsigned long, jiffies) = INITIAL_JIFFIES;
 >>>>>>> v3.18
@@ -67,7 +71,11 @@ static irqreturn_t timer_interrupt(int irq, void *dev_id)
 static struct irqaction irq0  = {
 	.handler = timer_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags = IRQF_DISABLED | IRQF_NOBALANCING | IRQF_IRQPOLL | IRQF_TIMER,
+=======
+	.flags = IRQF_NOBALANCING | IRQF_IRQPOLL | IRQF_TIMER,
+>>>>>>> v3.18
 =======
 	.flags = IRQF_NOBALANCING | IRQF_IRQPOLL | IRQF_TIMER,
 >>>>>>> v3.18
@@ -77,6 +85,11 @@ static struct irqaction irq0  = {
 void __init setup_default_timer_irq(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!nr_legacy_irqs())
+		return;
+>>>>>>> v3.18
 =======
 	if (!nr_legacy_irqs())
 		return;

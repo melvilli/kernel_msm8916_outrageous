@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y = base.o
 obj-$(CONFIG_OF_FLATTREE) += fdt.o
 obj-$(CONFIG_OF_PROMTREE) += pdt.o
@@ -20,6 +21,8 @@ obj-$(CONFIG_OF_RESERVED_MEM) += of_reserved_mem.o
 
 CFLAGS_fdt.o = -I$(src)/../../scripts/dtc/libfdt
 =======
+=======
+>>>>>>> v3.18
 obj-y = base.o device.o platform.o
 obj-$(CONFIG_OF_DYNAMIC) += dynamic.o
 obj-$(CONFIG_OF_FLATTREE) += fdt.o
@@ -39,4 +42,7 @@ obj-$(CONFIG_OF_RESOLVE)  += resolver.o
 
 CFLAGS_fdt.o = -I$(src)/../../scripts/dtc/libfdt
 CFLAGS_fdt_address.o = -I$(src)/../../scripts/dtc/libfdt
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

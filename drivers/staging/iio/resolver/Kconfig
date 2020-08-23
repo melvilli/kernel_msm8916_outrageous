@@ -11,6 +11,12 @@ config AD2S90
 	  to digital converters, ad2s90, provides direct access via sysfs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  To compile this driver as a module, choose M here: the
+	  module will be called ad2s90.
+
+>>>>>>> v3.18
 =======
 	  To compile this driver as a module, choose M here: the
 	  module will be called ad2s90.
@@ -26,6 +32,12 @@ config AD2S1200
 	  via sysfs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  To compile this driver as a module, choose M here: the
+	  module will be called ad2s1200.
+
+>>>>>>> v3.18
 =======
 	  To compile this driver as a module, choose M here: the
 	  module will be called ad2s1200.
@@ -40,6 +52,12 @@ config AD2S1210
 	  to digital converters, ad2s1210, provides direct access via sysfs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  To compile this driver as a module, choose M here: the
+	  module will be called ad2s1210.
+
+>>>>>>> v3.18
 =======
 	  To compile this driver as a module, choose M here: the
 	  module will be called ad2s1210.

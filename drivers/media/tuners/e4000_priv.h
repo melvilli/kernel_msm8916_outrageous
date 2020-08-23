@@ -23,11 +23,14 @@
 
 #include "e4000.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct e4000_priv {
 	const struct e4000_config *cfg;
 	struct i2c_adapter *i2c;
 =======
+=======
+>>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
 #include <media/v4l2-subdev.h>
 #include <linux/regmap.h>
@@ -51,6 +54,9 @@ struct e4000 {
 	struct v4l2_ctrl *if_gain_auto;
 	struct v4l2_ctrl *if_gain;
 	struct v4l2_ctrl *pll_lock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -171,7 +177,10 @@ static const struct e4000_if_filter e4000_if_filter_lut[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct e4000_if_gain {
 	u8 reg16_val;
 	u8 reg17_val;
@@ -235,5 +244,8 @@ static const struct e4000_if_gain e4000_if_gain_lut[] = {
 	{0x7f, 0x24},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

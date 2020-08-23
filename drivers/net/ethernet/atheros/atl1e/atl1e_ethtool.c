@@ -58,8 +58,13 @@ static int atl1e_get_settings(struct net_device *netdev,
 			ecmd->duplex = DUPLEX_HALF;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ethtool_cmd_speed_set(ecmd, -1);
 		ecmd->duplex = -1;
+=======
+		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
+		ecmd->duplex = DUPLEX_UNKNOWN;
+>>>>>>> v3.18
 =======
 		ethtool_cmd_speed_set(ecmd, SPEED_UNKNOWN);
 		ecmd->duplex = DUPLEX_UNKNOWN;
@@ -394,7 +399,11 @@ static const struct ethtool_ops atl1e_ethtool_ops = {
 void atl1e_set_ethtool_ops(struct net_device *netdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &atl1e_ethtool_ops);
+=======
+	netdev->ethtool_ops = &atl1e_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &atl1e_ethtool_ops;
 >>>>>>> v3.18

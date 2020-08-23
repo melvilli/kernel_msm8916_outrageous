@@ -707,6 +707,7 @@ static struct bcm_op *bcm_find_op(struct list_head *ops, canid_t can_id,
 static void bcm_remove_op(struct bcm_op *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (op->tsklet.func) {
 		while (test_bit(TASKLET_STATE_SCHED, &op->tsklet.state) ||
 		       test_bit(TASKLET_STATE_RUN, &op->tsklet.state) ||
@@ -725,6 +726,8 @@ static void bcm_remove_op(struct bcm_op *op)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	hrtimer_cancel(&op->timer);
 	hrtimer_cancel(&op->thrtimer);
 
@@ -733,6 +736,9 @@ static void bcm_remove_op(struct bcm_op *op)
 
 	if (op->thrtsklet.func)
 		tasklet_kill(&op->thrtsklet);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if ((op->frames) && (op->frames != &op->sframe))
@@ -1190,7 +1196,11 @@ static int bcm_rx_setup(struct bcm_msg_head *msg_head, struct msghdr *msg,
 						      REGMASK(op->can_id),
 						      bcm_rx_handler, op,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						      "bcm", sk);
+=======
+						      "bcm");
+>>>>>>> v3.18
 =======
 						      "bcm");
 >>>>>>> v3.18
@@ -1203,7 +1213,11 @@ static int bcm_rx_setup(struct bcm_msg_head *msg_head, struct msghdr *msg,
 			err = can_rx_register(NULL, op->can_id,
 					      REGMASK(op->can_id),
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      bcm_rx_handler, op, "bcm", sk);
+=======
+					      bcm_rx_handler, op, "bcm");
+>>>>>>> v3.18
 =======
 					      bcm_rx_handler, op, "bcm");
 >>>>>>> v3.18
@@ -1285,8 +1299,12 @@ static int bcm_sendmsg(struct kiocb *iocb, struct socket *sock,
 	if (!ifindex && msg->msg_name) {
 		/* no bound device as default => check msg_name */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sockaddr_can *addr =
 			(struct sockaddr_can *)msg->msg_name;
+=======
+		DECLARE_SOCKADDR(struct sockaddr_can *, addr, msg->msg_name);
+>>>>>>> v3.18
 =======
 		DECLARE_SOCKADDR(struct sockaddr_can *, addr, msg->msg_name);
 >>>>>>> v3.18
@@ -1383,9 +1401,15 @@ static int bcm_sendmsg(struct kiocb *iocb, struct socket *sock,
  */
 static int bcm_notifier(struct notifier_block *nb, unsigned long msg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			void *data)
 {
 	struct net_device *dev = (struct net_device *)data;
+=======
+			void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 			void *ptr)
 {
@@ -1539,13 +1563,17 @@ static int bcm_connect(struct socket *sock, struct sockaddr *uaddr, int len,
 	struct sock *sk = sock->sk;
 	struct bcm_sock *bo = bcm_sk(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (len < sizeof(*addr))
 		return -EINVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	lock_sock(sk);
 
@@ -1557,12 +1585,17 @@ static int bcm_connect(struct socket *sock, struct sockaddr *uaddr, int len,
 	if (bo->bound)
 		return -EISCONN;
 >>>>>>> v3.18
+=======
+	if (bo->bound)
+		return -EISCONN;
+>>>>>>> v3.18
 
 	/* bind a device to this socket */
 	if (addr->can_ifindex) {
 		struct net_device *dev;
 
 		dev = dev_get_by_index(&init_net, addr->can_ifindex);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!dev) {
 			ret = -ENODEV;
@@ -1573,12 +1606,17 @@ static int bcm_connect(struct socket *sock, struct sockaddr *uaddr, int len,
 			ret = -ENODEV;
 			goto fail;
 =======
+=======
+>>>>>>> v3.18
 		if (!dev)
 			return -ENODEV;
 
 		if (dev->type != ARPHRD_CAN) {
 			dev_put(dev);
 			return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1591,6 +1629,11 @@ static int bcm_connect(struct socket *sock, struct sockaddr *uaddr, int len,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bo->bound = 1;
+
+>>>>>>> v3.18
 =======
 	bo->bound = 1;
 
@@ -1601,6 +1644,7 @@ static int bcm_connect(struct socket *sock, struct sockaddr *uaddr, int len,
 		bo->bcm_proc_read = proc_create_data(bo->procname, 0644,
 						     proc_dir,
 						     &bcm_proc_fops, sk);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!bo->bcm_proc_read) {
 			ret = -ENOMEM;
@@ -1614,6 +1658,11 @@ fail:
 	release_sock(sk);
 
 	return ret;
+=======
+	}
+
+	return 0;
+>>>>>>> v3.18
 =======
 	}
 
@@ -1649,6 +1698,10 @@ static int bcm_recvmsg(struct kiocb *iocb, struct socket *sock,
 
 	if (msg->msg_name) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		__sockaddr_check_size(sizeof(struct sockaddr_can));
+>>>>>>> v3.18
 =======
 		__sockaddr_check_size(sizeof(struct sockaddr_can));
 >>>>>>> v3.18

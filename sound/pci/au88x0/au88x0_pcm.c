@@ -228,17 +228,23 @@ snd_vortex_pcm_hw_params(struct snd_pcm_substream *substream,
 	    snd_pcm_lib_malloc_pages(substream, params_buffer_bytes(hw_params));
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Vortex: pcm page alloc failed!\n");
 		return err;
 	}
 	/*
 	   printk(KERN_INFO "Vortex: periods %d, period_bytes %d, channels = %d\n", params_periods(hw_params),
 =======
+=======
+>>>>>>> v3.18
 		pr_err( "Vortex: pcm page alloc failed!\n");
 		return err;
 	}
 	/*
 	   pr_info( "Vortex: periods %d, period_bytes %d, channels = %d\n", params_periods(hw_params),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	   params_period_bytes(hw_params), params_channels(hw_params));
 	 */
@@ -380,7 +386,11 @@ static int snd_vortex_pcm_trigger(struct snd_pcm_substream *substream, int cmd)
 #ifndef CHIP_AU8810
 		else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "vortex: wt start %d\n", dma);
+=======
+			pr_info( "vortex: wt start %d\n", dma);
+>>>>>>> v3.18
 =======
 			pr_info( "vortex: wt start %d\n", dma);
 >>>>>>> v3.18
@@ -397,7 +407,11 @@ static int snd_vortex_pcm_trigger(struct snd_pcm_substream *substream, int cmd)
 #ifndef CHIP_AU8810
 		else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_INFO "vortex: wt stop %d\n", dma);
+=======
+			pr_info( "vortex: wt stop %d\n", dma);
+>>>>>>> v3.18
 =======
 			pr_info( "vortex: wt stop %d\n", dma);
 >>>>>>> v3.18
@@ -688,7 +702,11 @@ static int snd_vortex_new_pcm(vortex_t *chip, int idx, int nr)
 		break;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18

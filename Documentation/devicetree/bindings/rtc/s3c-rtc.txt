@@ -4,12 +4,18 @@ Required properties:
 - compatible: should be one of the following.
     * "samsung,s3c2410-rtc" - for controllers compatible with s3c2410 rtc.
 <<<<<<< HEAD
+<<<<<<< HEAD
     * "samsung,s3c6410-rtc" - for controllers compatible with s3c6410 rtc.
 =======
+=======
+>>>>>>> v3.18
     * "samsung,s3c2416-rtc" - for controllers compatible with s3c2416 rtc.
     * "samsung,s3c2443-rtc" - for controllers compatible with s3c2443 rtc.
     * "samsung,s3c6410-rtc" - for controllers compatible with s3c6410 rtc.
     * "samsung,exynos3250-rtc" - for controllers compatible with exynos3250 rtc.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - reg: physical base address of the controller and length of memory mapped
   region.

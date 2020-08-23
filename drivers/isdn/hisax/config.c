@@ -1897,7 +1897,11 @@ static void EChannel_proc_rcv(struct hisax_d_if *d_if)
 				*ptr++ = '\n';
 				*ptr = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				HiSax_putstatus(cs, NULL, cs->dlog);
+=======
+				HiSax_putstatus(cs, NULL, "%s", cs->dlog);
+>>>>>>> v3.18
 =======
 				HiSax_putstatus(cs, NULL, "%s", cs->dlog);
 >>>>>>> v3.18

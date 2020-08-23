@@ -26,12 +26,15 @@
 #define FLOW_CTRL_WAIT_FOR_INTERRUPT	(4 << 29)
 #define FLOW_CTRL_JTAG_RESUME		(1 << 28)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FLOW_CTRL_HALT_CPU_IRQ		(1 << 10)
 #define	FLOW_CTRL_HALT_CPU_FIQ		(1 << 8)
 #define FLOW_CTRL_CPU0_CSR		0x8
 #define	FLOW_CTRL_CSR_INTR_FLAG		(1 << 15)
 #define FLOW_CTRL_CSR_EVENT_FLAG	(1 << 14)
 =======
+=======
+>>>>>>> v3.18
 #define FLOW_CTRL_SCLK_RESUME		(1 << 27)
 #define FLOW_CTRL_HALT_CPU_IRQ		(1 << 10)
 #define	FLOW_CTRL_HALT_CPU_FIQ		(1 << 8)
@@ -47,6 +50,9 @@
 #define FLOW_CTRL_CSR_ENABLE_EXT_MASK ( \
 		FLOW_CTRL_CSR_ENABLE_EXT_NCPU | \
 		FLOW_CTRL_CSR_ENABLE_EXT_CRAIL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FLOW_CTRL_CSR_ENABLE		(1 << 0)
 #define FLOW_CTRL_HALT_CPU1_EVENTS	0x14
@@ -68,6 +74,11 @@ void flowctrl_write_cpu_halt(unsigned int cpuid, u32 value);
 void flowctrl_cpu_suspend_enter(unsigned int cpuid);
 void flowctrl_cpu_suspend_exit(unsigned int cpuid);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+void tegra_flowctrl_init(void);
+>>>>>>> v3.18
 =======
 
 void tegra_flowctrl_init(void);

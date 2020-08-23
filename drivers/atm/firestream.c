@@ -737,8 +737,13 @@ static void process_txdone_queue (struct fs_dev *dev, struct queue *q)
 			skb = td->skb;
 			if (skb == FS_VCC (ATM_SKB(skb)->vcc)->last_skb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				wake_up_interruptible (& FS_VCC (ATM_SKB(skb)->vcc)->close_wait);
 				FS_VCC (ATM_SKB(skb)->vcc)->last_skb = NULL;
+=======
+				FS_VCC (ATM_SKB(skb)->vcc)->last_skb = NULL;
+				wake_up_interruptible (& FS_VCC (ATM_SKB(skb)->vcc)->close_wait);
+>>>>>>> v3.18
 =======
 				FS_VCC (ATM_SKB(skb)->vcc)->last_skb = NULL;
 				wake_up_interruptible (& FS_VCC (ATM_SKB(skb)->vcc)->close_wait);
@@ -1129,7 +1134,11 @@ static void fs_close(struct atm_vcc *atm_vcc)
 		   On the other hand, it's awfully convenient that we can abort a "close" that
 		   is taking too long. Maybe just use non-interruptible sleep on? -- REW */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interruptible_sleep_on (& vcc->close_wait);
+=======
+		wait_event_interruptible(vcc->close_wait, !vcc->last_skb);
+>>>>>>> v3.18
 =======
 		wait_event_interruptible(vcc->close_wait, !vcc->last_skb);
 >>>>>>> v3.18
@@ -2010,7 +2019,11 @@ static void firestream_remove_one(struct pci_dev *pdev)
 		fs_dprintk (FS_DEBUG_CLEANUP, "Freeing irq%d.\n", dev->irq);
 		free_irq (dev->irq, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		del_timer (&dev->timer);
+=======
+		del_timer_sync (&dev->timer);
+>>>>>>> v3.18
 =======
 		del_timer_sync (&dev->timer);
 >>>>>>> v3.18

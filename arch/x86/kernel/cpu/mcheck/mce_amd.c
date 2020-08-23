@@ -52,7 +52,11 @@ static const char * const th_names[] = {
 	"insn_fetch",
 	"combined_unit",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"decode_unit",
+=======
+	"",
+>>>>>>> v3.18
 =======
 	"",
 >>>>>>> v3.18
@@ -315,7 +319,11 @@ static void amd_threshold_interrupt(void)
 			 */
 			machine_check_poll(MCP_TIMESTAMP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					&__get_cpu_var(mce_poll_banks));
+=======
+					this_cpu_ptr(&mce_poll_banks));
+>>>>>>> v3.18
 =======
 					this_cpu_ptr(&mce_poll_banks));
 >>>>>>> v3.18
@@ -362,7 +370,11 @@ store_interrupt_enable(struct threshold_block *b, const char *buf, size_t size)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &new) < 0)
+=======
+	if (kstrtoul(buf, 0, &new) < 0)
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &new) < 0)
 >>>>>>> v3.18
@@ -385,7 +397,11 @@ store_threshold_limit(struct threshold_block *b, const char *buf, size_t size)
 	unsigned long new;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(buf, 0, &new) < 0)
+=======
+	if (kstrtoul(buf, 0, &new) < 0)
+>>>>>>> v3.18
 =======
 	if (kstrtoul(buf, 0, &new) < 0)
 >>>>>>> v3.18
@@ -475,10 +491,15 @@ static struct kobj_type threshold_ktype = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit int allocate_threshold_blocks(unsigned int cpu,
 					       unsigned int bank,
 					       unsigned int block,
 					       u32 address)
+=======
+static int allocate_threshold_blocks(unsigned int cpu, unsigned int bank,
+				     unsigned int block, u32 address)
+>>>>>>> v3.18
 =======
 static int allocate_threshold_blocks(unsigned int cpu, unsigned int bank,
 				     unsigned int block, u32 address)
@@ -565,7 +586,11 @@ out_free:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit int __threshold_add_blocks(struct threshold_bank *b)
+=======
+static int __threshold_add_blocks(struct threshold_bank *b)
+>>>>>>> v3.18
 =======
 static int __threshold_add_blocks(struct threshold_bank *b)
 >>>>>>> v3.18
@@ -593,7 +618,11 @@ static int __threshold_add_blocks(struct threshold_bank *b)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit int threshold_create_bank(unsigned int cpu, unsigned int bank)
+=======
+static int threshold_create_bank(unsigned int cpu, unsigned int bank)
+>>>>>>> v3.18
 =======
 static int threshold_create_bank(unsigned int cpu, unsigned int bank)
 >>>>>>> v3.18
@@ -662,7 +691,11 @@ static int threshold_create_bank(unsigned int cpu, unsigned int bank)
 
 /* create dir/files for all valid threshold banks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit int threshold_create_device(unsigned int cpu)
+=======
+static int threshold_create_device(unsigned int cpu)
+>>>>>>> v3.18
 =======
 static int threshold_create_device(unsigned int cpu)
 >>>>>>> v3.18
@@ -770,7 +803,11 @@ static void threshold_remove_device(unsigned int cpu)
 
 /* get notified when a cpu comes on/off */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18

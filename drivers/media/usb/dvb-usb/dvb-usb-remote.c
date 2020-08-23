@@ -273,7 +273,11 @@ static int rc_core_dvb_usb_remote_init(struct dvb_usb_device *d)
 	dev->map_name = d->props.rc.core.rc_codes;
 	dev->change_protocol = d->props.rc.core.change_protocol;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->allowed_protos = d->props.rc.core.allowed_protos;
+=======
+	dev->allowed_protocols = d->props.rc.core.allowed_protos;
+>>>>>>> v3.18
 =======
 	dev->allowed_protocols = d->props.rc.core.allowed_protos;
 >>>>>>> v3.18

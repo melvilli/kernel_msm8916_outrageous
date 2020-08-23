@@ -365,7 +365,11 @@ int cx18_stream_alloc(struct cx18_stream *s)
 
 		CX18_ERR("Too many buffers, cannot fit in SCB area\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		CX18_ERR("Max buffers = %zd\n",
+=======
+		CX18_ERR("Max buffers = %zu\n",
+>>>>>>> v3.18
 =======
 		CX18_ERR("Max buffers = %zu\n",
 >>>>>>> v3.18

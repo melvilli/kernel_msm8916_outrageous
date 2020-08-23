@@ -23,6 +23,7 @@
 #define __ARCH_ARM_MACH_OMAP2_CM_REGBITS_44XX_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Used by CM_L3_1_DYNAMICDEP, CM_MPU_DYNAMICDEP, CM_TESLA_DYNAMICDEP */
 #define OMAP4430_ABE_DYNDEP_SHIFT				3
 #define OMAP4430_ABE_DYNDEP_WIDTH				0x1
@@ -1703,6 +1704,8 @@
 #define OMAP4430_Y_MINOR_WIDTH					0x6
 #define OMAP4430_Y_MINOR_MASK					(0x3f << 0)
 =======
+=======
+>>>>>>> v3.18
 #define OMAP4430_ABE_STATDEP_SHIFT				3
 #define OMAP4430_AUTO_DPLL_MODE_MASK				(0x7 << 0)
 #define OMAP4430_CLKSEL_SHIFT					24
@@ -1824,5 +1827,8 @@
 #define OMAP4430_SYS_CLKSEL_SHIFT				0
 #define OMAP4430_SYS_CLKSEL_WIDTH				0x3
 #define OMAP4430_TESLA_STATDEP_SHIFT				1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

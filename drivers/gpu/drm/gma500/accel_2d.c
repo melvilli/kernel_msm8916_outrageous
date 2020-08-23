@@ -327,7 +327,11 @@ int psbfb_sync(struct fb_info *info)
 	struct drm_device *dev = psbfb->base.dev;
 	struct drm_psb_private *dev_priv = dev->dev_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long _end = jiffies + DRM_HZ;
+=======
+	unsigned long _end = jiffies + HZ;
+>>>>>>> v3.18
 =======
 	unsigned long _end = jiffies + HZ;
 >>>>>>> v3.18

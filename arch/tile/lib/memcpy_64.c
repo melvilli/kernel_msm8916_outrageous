@@ -19,6 +19,7 @@
 
 /* Must be 8 bytes in size. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define word_t uint64_t
 
 #if CHIP_L2_LINE_SIZE() != 64 && CHIP_L2_LINE_SIZE() != 128
@@ -28,6 +29,8 @@
 /* How many cache lines ahead should we prefetch? */
 #define PREFETCH_LINES_AHEAD 3
 =======
+=======
+>>>>>>> v3.18
 #define op_t uint64_t
 
 /* Threshold value for when to enter the unrolled loops. */
@@ -39,6 +42,9 @@
 
 /* How many cache lines ahead should we prefetch? */
 #define PREFETCH_LINES_AHEAD 4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -66,7 +72,12 @@ void *memcpy(void *__restrict dstv, const void *__restrict srcv, size_t n)
  */
 #define RETVAL 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 int USERCOPY_FUNC(void *__restrict dstv, const void *__restrict srcv, size_t n)
+=======
+int __attribute__((optimize("omit-frame-pointer")))
+USERCOPY_FUNC(void *__restrict dstv, const void *__restrict srcv, size_t n)
+>>>>>>> v3.18
 =======
 int __attribute__((optimize("omit-frame-pointer")))
 USERCOPY_FUNC(void *__restrict dstv, const void *__restrict srcv, size_t n)
@@ -78,8 +89,13 @@ USERCOPY_FUNC(void *__restrict dstv, const void *__restrict srcv, size_t n)
 	const char *__restrict src1_end;
 	const char *__restrict prefetch;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	word_t *__restrict dst8;    /* 8-byte pointer to destination memory. */
 	word_t final; /* Final bytes to write to trailing word, if any */
+=======
+	op_t *__restrict dst8;    /* 8-byte pointer to destination memory. */
+	op_t final; /* Final bytes to write to trailing word, if any */
+>>>>>>> v3.18
 =======
 	op_t *__restrict dst8;    /* 8-byte pointer to destination memory. */
 	op_t final; /* Final bytes to write to trailing word, if any */
@@ -103,6 +119,7 @@ USERCOPY_FUNC(void *__restrict dstv, const void *__restrict srcv, size_t n)
 	for (i = 0; i < PREFETCH_LINES_AHEAD; i++) {
 		__insn_prefetch(prefetch);
 		prefetch += CHIP_L2_LINE_SIZE();
+<<<<<<< HEAD
 <<<<<<< HEAD
 		prefetch = (prefetch > src1_end) ? prefetch : src1;
 	}
@@ -134,6 +151,8 @@ USERCOPY_FUNC(void *__restrict dstv, const void *__restrict srcv, size_t n)
 			ST8(dst8++, a);
 			a = b;
 =======
+=======
+>>>>>>> v3.18
 		prefetch = (prefetch < src1_end) ? prefetch : src1;
 	}
 
@@ -275,12 +294,16 @@ _M0:
 				tmp0 = tmp1;
 			}
 			src8--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
 		if (n == 0)
 			return RETVAL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		b = ((const char *)src8 <= src1_end) ? *src8 : 0;
 
@@ -294,6 +317,8 @@ _M0:
 
 		const word_t* __restrict src8 = (const word_t *)src1;
 =======
+=======
+>>>>>>> v3.18
 		tmp0 = LD8(src8++);
 		tmp1 = ((const char *)src8 <= src1_end)
 			? LD8((op_t *)src8) : 0;
@@ -303,12 +328,16 @@ _M0:
 		/* Aligned copy. */
 
 		const op_t *__restrict src8 = (const op_t *)src1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* src8 and dst8 are both word-aligned. */
 		if (n >= CHIP_L2_LINE_SIZE()) {
 			/* Copy until 'dst' is cache-line-aligned. */
 			for (; (uintptr_t)dst8 & (CHIP_L2_LINE_SIZE() - 1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			     n -= sizeof(word_t))
 				ST8(dst8++, LD8(src8++));
@@ -359,6 +388,8 @@ _M0:
 
 		for (; n >= sizeof(word_t); n -= sizeof(word_t))
 =======
+=======
+>>>>>>> v3.18
 			     n -= sizeof(op_t))
 				ST8(dst8++, LD8(src8++));
 
@@ -421,6 +452,9 @@ _M0:
 		}
 
 		for (; n >= sizeof(op_t); n -= sizeof(op_t))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ST8(dst8++, LD8(src8++));
 

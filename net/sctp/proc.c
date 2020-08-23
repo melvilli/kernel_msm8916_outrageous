@@ -17,6 +17,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -34,6 +35,8 @@
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
@@ -43,6 +46,9 @@
  *
  * Written or modified by:
  *    Sridhar Samudrala <sri@us.ibm.com>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -98,7 +104,11 @@ static int sctp_snmp_seq_show(struct seq_file *seq, void *v)
 	for (i = 0; sctp_snmp_list[i].name != NULL; i++)
 		seq_printf(seq, "%-32s\t%ld\n", sctp_snmp_list[i].name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   snmp_fold_field((void __percpu **)net->sctp.sctp_statistics,
+=======
+			   snmp_fold_field(net->sctp.sctp_statistics,
+>>>>>>> v3.18
 =======
 			   snmp_fold_field(net->sctp.sctp_statistics,
 >>>>>>> v3.18
@@ -151,10 +161,13 @@ static void sctp_seq_dump_local_addrs(struct seq_file *seq, struct sctp_ep_commo
 
 	if (epb->type == SCTP_EP_TYPE_ASSOCIATION) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    asoc = sctp_assoc(epb);
 	    peer = asoc->peer.primary_path;
 	    primary = &peer->saddr;
 =======
+=======
+>>>>>>> v3.18
 		asoc = sctp_assoc(epb);
 
 		peer = asoc->peer.primary_path;
@@ -164,6 +177,9 @@ static void sctp_seq_dump_local_addrs(struct seq_file *seq, struct sctp_ep_commo
 		}
 
 		primary = &peer->saddr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -207,7 +223,11 @@ static void sctp_seq_dump_remote_addrs(struct seq_file *seq, struct sctp_associa
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void * sctp_eps_seq_start(struct seq_file *seq, loff_t *pos)
+=======
+static void *sctp_eps_seq_start(struct seq_file *seq, loff_t *pos)
+>>>>>>> v3.18
 =======
 static void *sctp_eps_seq_start(struct seq_file *seq, loff_t *pos)
 >>>>>>> v3.18
@@ -230,7 +250,11 @@ static void sctp_eps_seq_stop(struct seq_file *seq, void *v)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void * sctp_eps_seq_next(struct seq_file *seq, void *v, loff_t *pos)
+=======
+static void *sctp_eps_seq_next(struct seq_file *seq, void *v, loff_t *pos)
+>>>>>>> v3.18
 =======
 static void *sctp_eps_seq_next(struct seq_file *seq, void *v, loff_t *pos)
 >>>>>>> v3.18
@@ -256,7 +280,11 @@ static int sctp_eps_seq_show(struct seq_file *seq, void *v)
 
 	head = &sctp_ep_hashtable[hash];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sctp_local_bh_disable();
+=======
+	local_bh_disable();
+>>>>>>> v3.18
 =======
 	local_bh_disable();
 >>>>>>> v3.18
@@ -267,7 +295,11 @@ static int sctp_eps_seq_show(struct seq_file *seq, void *v)
 		if (!net_eq(sock_net(sk), seq_file_net(seq)))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(seq, "%8pK %8pK %-3d %-3d %-4d %-5d %5d %5lu ", ep, sk,
+=======
+		seq_printf(seq, "%8pK %8pK %-3d %-3d %-4d %-5d %5u %5lu ", ep, sk,
+>>>>>>> v3.18
 =======
 		seq_printf(seq, "%8pK %8pK %-3d %-3d %-4d %-5d %5u %5lu ", ep, sk,
 >>>>>>> v3.18
@@ -281,7 +313,11 @@ static int sctp_eps_seq_show(struct seq_file *seq, void *v)
 	}
 	read_unlock(&head->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sctp_local_bh_enable();
+=======
+	local_bh_enable();
+>>>>>>> v3.18
 =======
 	local_bh_enable();
 >>>>>>> v3.18
@@ -332,7 +368,11 @@ void sctp_eps_proc_exit(struct net *net)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void * sctp_assocs_seq_start(struct seq_file *seq, loff_t *pos)
+=======
+static void *sctp_assocs_seq_start(struct seq_file *seq, loff_t *pos)
+>>>>>>> v3.18
 =======
 static void *sctp_assocs_seq_start(struct seq_file *seq, loff_t *pos)
 >>>>>>> v3.18
@@ -359,7 +399,11 @@ static void sctp_assocs_seq_stop(struct seq_file *seq, void *v)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void * sctp_assocs_seq_next(struct seq_file *seq, void *v, loff_t *pos)
+=======
+static void *sctp_assocs_seq_next(struct seq_file *seq, void *v, loff_t *pos)
+>>>>>>> v3.18
 =======
 static void *sctp_assocs_seq_next(struct seq_file *seq, void *v, loff_t *pos)
 >>>>>>> v3.18
@@ -384,7 +428,11 @@ static int sctp_assocs_seq_show(struct seq_file *seq, void *v)
 
 	head = &sctp_assoc_hashtable[hash];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sctp_local_bh_disable();
+=======
+	local_bh_disable();
+>>>>>>> v3.18
 =======
 	local_bh_disable();
 >>>>>>> v3.18
@@ -397,7 +445,11 @@ static int sctp_assocs_seq_show(struct seq_file *seq, void *v)
 		seq_printf(seq,
 			   "%8pK %8pK %-3d %-3d %-2d %-4d "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   "%4d %8d %8d %7d %5lu %-5d %5d ",
+=======
+			   "%4d %8d %8d %7u %5lu %-5d %5d ",
+>>>>>>> v3.18
 =======
 			   "%4d %8d %8d %7u %5lu %-5d %5d ",
 >>>>>>> v3.18
@@ -428,7 +480,11 @@ static int sctp_assocs_seq_show(struct seq_file *seq, void *v)
 	}
 	read_unlock(&head->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sctp_local_bh_enable();
+=======
+	local_bh_enable();
+>>>>>>> v3.18
 =======
 	local_bh_enable();
 >>>>>>> v3.18
@@ -516,7 +572,11 @@ static int sctp_remaddr_seq_show(struct seq_file *seq, void *v)
 
 	head = &sctp_assoc_hashtable[hash];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sctp_local_bh_disable();
+=======
+	local_bh_disable();
+>>>>>>> v3.18
 =======
 	local_bh_disable();
 >>>>>>> v3.18
@@ -579,7 +639,11 @@ static int sctp_remaddr_seq_show(struct seq_file *seq, void *v)
 	rcu_read_unlock();
 	read_unlock(&head->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sctp_local_bh_enable();
+=======
+	local_bh_enable();
+>>>>>>> v3.18
 =======
 	local_bh_enable();
 >>>>>>> v3.18

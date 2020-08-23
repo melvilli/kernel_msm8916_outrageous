@@ -42,10 +42,13 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SERIAL_BFIN_MODULE
 # undef CONFIG_EARLY_PRINTK
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* UART name and device definitions */
@@ -116,6 +119,7 @@ static irqreturn_t bfin_serial_mctrl_cts_int(int irq, void *dev_id)
 {
 	struct bfin_serial_port *uart = dev_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int status = bfin_serial_get_mctrl(&uart->port);
 #ifdef CONFIG_SERIAL_BFIN_HARD_CTSRTS
 	struct tty_struct *tty = uart->port.state->port.tty;
@@ -133,6 +137,8 @@ static irqreturn_t bfin_serial_mctrl_cts_int(int irq, void *dev_id)
 #endif
 	uart_handle_cts_change(&uart->port, status & TIOCM_CTS);
 =======
+=======
+>>>>>>> v3.18
 	struct uart_port *uport = &uart->port;
 	unsigned int status = bfin_serial_get_mctrl(uport);
 #ifdef CONFIG_SERIAL_BFIN_HARD_CTSRTS
@@ -150,6 +156,9 @@ static irqreturn_t bfin_serial_mctrl_cts_int(int irq, void *dev_id)
 #else
 	uart_handle_cts_change(uport, status & TIOCM_CTS);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return IRQ_HANDLED;
@@ -228,6 +237,7 @@ static void bfin_serial_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Set the modem control timer to fire immediately.
  */
@@ -236,6 +246,8 @@ static void bfin_serial_enable_ms(struct uart_port *port)
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if ANOMALY_05000363 && defined(CONFIG_SERIAL_BFIN_PIO)
@@ -711,7 +723,11 @@ static int bfin_serial_startup(struct uart_port *port)
 			uart_dma_ch_rx = uart_dma_ch_tx = 0;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -761,7 +777,11 @@ static int bfin_serial_startup(struct uart_port *port)
 	if (uart->cts_pin >= 0) {
 		if (request_irq(uart->status_irq, bfin_serial_mctrl_cts_int,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED, "BFIN_UART_MODEM_STATUS", uart)) {
+=======
+			0, "BFIN_UART_MODEM_STATUS", uart)) {
+>>>>>>> v3.18
 =======
 			0, "BFIN_UART_MODEM_STATUS", uart)) {
 >>>>>>> v3.18
@@ -804,7 +824,11 @@ static void bfin_serial_shutdown(struct uart_port *port)
 	default:
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -836,7 +860,10 @@ bfin_serial_set_termios(struct uart_port *port, struct ktermios *termios,
 	unsigned long timeout;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SERIAL_BFIN_CTSRTS
 	if (old == NULL && uart->cts_pin != -1)
 		termios->c_cflag |= CRTSCTS;
@@ -844,6 +871,9 @@ bfin_serial_set_termios(struct uart_port *port, struct ktermios *termios,
 		termios->c_cflag &= ~CRTSCTS;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (termios->c_cflag & CSIZE) {
 	case CS8:
@@ -886,7 +916,11 @@ bfin_serial_set_termios(struct uart_port *port, struct ktermios *termios,
 	if (termios->c_iflag & INPCK)
 		port->read_status_mask |= (FE | PE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (termios->c_iflag & (BRKINT | PARMRK))
+=======
+	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (termios->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -1071,7 +1105,10 @@ static struct uart_ops bfin_serial_pops = {
 	.start_tx	= bfin_serial_start_tx,
 	.stop_rx	= bfin_serial_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms	= bfin_serial_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl	= bfin_serial_break_ctl,
@@ -1236,7 +1273,11 @@ bfin_earlyprintk_console_write(struct console *co, const char *s, unsigned int c
  * & earlysetup in ./kernel/printk.c:register_console()
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct __initdata console bfin_early_serial_console = {
+=======
+static struct console bfin_early_serial_console __initdata = {
+>>>>>>> v3.18
 =======
 static struct console bfin_early_serial_console __initdata = {
 >>>>>>> v3.18
@@ -1304,7 +1345,12 @@ static int bfin_serial_probe(struct platform_device *pdev)
 #endif
 		ret = peripheral_request_list(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(unsigned short *)pdev->dev.platform_data, DRIVER_NAME);
+=======
+			dev_get_platdata(&pdev->dev),
+			DRIVER_NAME);
+>>>>>>> v3.18
 =======
 			dev_get_platdata(&pdev->dev),
 			DRIVER_NAME);
@@ -1393,12 +1439,17 @@ static int bfin_serial_probe(struct platform_device *pdev)
 		if (res == NULL)
 			uart->cts_pin = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else {
 			uart->cts_pin = res->start;
 #ifdef CONFIG_SERIAL_BFIN_CTSRTS
 			uart->port.flags |= ASYNC_CTS_FLOW;
 #endif
 		}
+=======
+		else
+			uart->cts_pin = res->start;
+>>>>>>> v3.18
 =======
 		else
 			uart->cts_pin = res->start;
@@ -1431,8 +1482,12 @@ out_error_unmap:
 		iounmap(uart->port.membase);
 out_error_free_peripherals:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		peripheral_free_list(
 			(unsigned short *)pdev->dev.platform_data);
+=======
+		peripheral_free_list(dev_get_platdata(&pdev->dev));
+>>>>>>> v3.18
 =======
 		peripheral_free_list(dev_get_platdata(&pdev->dev));
 >>>>>>> v3.18
@@ -1454,8 +1509,12 @@ static int bfin_serial_remove(struct platform_device *pdev)
 		uart_remove_one_port(&bfin_serial_reg, &uart->port);
 		iounmap(uart->port.membase);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		peripheral_free_list(
 			(unsigned short *)pdev->dev.platform_data);
+=======
+		peripheral_free_list(dev_get_platdata(&pdev->dev));
+>>>>>>> v3.18
 =======
 		peripheral_free_list(dev_get_platdata(&pdev->dev));
 >>>>>>> v3.18
@@ -1479,7 +1538,11 @@ static struct platform_driver bfin_serial_driver = {
 
 #if defined(CONFIG_SERIAL_BFIN_CONSOLE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __initdata struct early_platform_driver early_bfin_serial_driver = {
+=======
+static struct early_platform_driver early_bfin_serial_driver __initdata = {
+>>>>>>> v3.18
 =======
 static struct early_platform_driver early_bfin_serial_driver __initdata = {
 >>>>>>> v3.18
@@ -1517,8 +1580,13 @@ static int bfin_earlyprintk_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = peripheral_request_list(
 		(unsigned short *)pdev->dev.platform_data, DRIVER_NAME);
+=======
+	ret = peripheral_request_list(dev_get_platdata(&pdev->dev),
+					DRIVER_NAME);
+>>>>>>> v3.18
 =======
 	ret = peripheral_request_list(dev_get_platdata(&pdev->dev),
 					DRIVER_NAME);
@@ -1553,8 +1621,12 @@ static int bfin_earlyprintk_probe(struct platform_device *pdev)
 
 out_error_free_peripherals:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	peripheral_free_list(
 		(unsigned short *)pdev->dev.platform_data);
+=======
+	peripheral_free_list(dev_get_platdata(&pdev->dev));
+>>>>>>> v3.18
 =======
 	peripheral_free_list(dev_get_platdata(&pdev->dev));
 >>>>>>> v3.18
@@ -1571,7 +1643,11 @@ static struct platform_driver bfin_earlyprintk_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __initdata struct early_platform_driver early_bfin_earlyprintk_driver = {
+=======
+static struct early_platform_driver early_bfin_earlyprintk_driver __initdata = {
+>>>>>>> v3.18
 =======
 static struct early_platform_driver early_bfin_earlyprintk_driver __initdata = {
 >>>>>>> v3.18

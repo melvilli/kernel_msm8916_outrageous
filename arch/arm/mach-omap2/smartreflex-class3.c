@@ -21,8 +21,13 @@ static int sr_class3_enable(struct omap_sr *sr)
 
 	if (!volt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: Curr voltage unknown. Cannot enable %s\n",
 				__func__, sr->name);
+=======
+		pr_warn("%s: Curr voltage unknown. Cannot enable %s\n",
+			__func__, sr->name);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: Curr voltage unknown. Cannot enable %s\n",
 			__func__, sr->name);
@@ -32,7 +37,11 @@ static int sr_class3_enable(struct omap_sr *sr)
 
 	omap_vp_enable(sr->voltdm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sr_enable(sr->voltdm, volt);
+=======
+	return sr_enable(sr, volt);
+>>>>>>> v3.18
 =======
 	return sr_enable(sr, volt);
 >>>>>>> v3.18
@@ -41,9 +50,15 @@ static int sr_class3_enable(struct omap_sr *sr)
 static int sr_class3_disable(struct omap_sr *sr, int is_volt_reset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sr_disable_errgen(sr->voltdm);
 	omap_vp_disable(sr->voltdm);
 	sr_disable(sr->voltdm);
+=======
+	sr_disable_errgen(sr);
+	omap_vp_disable(sr->voltdm);
+	sr_disable(sr);
+>>>>>>> v3.18
 =======
 	sr_disable_errgen(sr);
 	omap_vp_disable(sr->voltdm);
@@ -58,7 +73,11 @@ static int sr_class3_disable(struct omap_sr *sr, int is_volt_reset)
 static int sr_class3_configure(struct omap_sr *sr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sr_configure_errgen(sr->voltdm);
+=======
+	return sr_configure_errgen(sr);
+>>>>>>> v3.18
 =======
 	return sr_configure_errgen(sr);
 >>>>>>> v3.18

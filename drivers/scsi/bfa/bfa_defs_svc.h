@@ -106,6 +106,12 @@ struct bfa_fw_ioim_stats_s {
 	u32	wait_for_si;		/*  FW wait for SI */
 	u32	rec_rsp_inval;		/*  REC rsp invalid */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32     rec_rsp_xchg_comp;	/*  REC rsp xchg complete */
+	u32     rec_rsp_rd_si_ownd;	/*  REC rsp read si owned */
+
+>>>>>>> v3.18
 =======
 	u32     rec_rsp_xchg_comp;	/*  REC rsp xchg complete */
 	u32     rec_rsp_rd_si_ownd;	/*  REC rsp read si owned */
@@ -264,8 +270,11 @@ struct bfa_fw_port_lksm_stats_s {
 	u32    hwsm_lrr_rx;        /*  No. of times LRR rx-ed by HWSM      */
 	u32    hwsm_lr_rx;         /*  No. of times LR rx-ed by HWSM       */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32    bbsc_lr;		   /* LKSM LR tx for credit recovery       */
 	u32	rsvd;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -419,7 +428,11 @@ struct bfa_fw_trunk_stats_s {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct bfa_fw_advsm_stats_s {
+=======
+struct bfa_fw_aport_stats_s {
+>>>>>>> v3.18
 =======
 struct bfa_fw_aport_stats_s {
 >>>>>>> v3.18
@@ -433,13 +446,19 @@ struct bfa_fw_aport_stats_s {
 	u32 elp_rejected;	/*  ELP rejected		*/
 	u32 elp_dropped;	/*  ELP dropped			*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	u32 bbcr_lr_count;	/*!< BBCR Link Resets		*/
 	u32 frame_lost_intrs;	/*!< BBCR Frame loss intrs	*/
 	u32 rrdy_lost_intrs;	/*!< BBCR Rrdy loss intrs	*/
 
 	u32 rsvd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -502,7 +521,10 @@ struct bfa_fw_ct_mod_stats_s {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * RDS mod stats
  */
 struct bfa_fw_rds_stats_s {
@@ -511,6 +533,9 @@ struct bfa_fw_rds_stats_s {
 };
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * IOC firmware stats
  */
@@ -523,16 +548,22 @@ struct bfa_fw_stats_s {
 	struct bfa_fw_lps_stats_s	lps_stats;
 	struct bfa_fw_trunk_stats_s	trunk_stats;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bfa_fw_advsm_stats_s	advsm_stats;
 	struct bfa_fw_mac_mod_stats_s	macmod_stats;
 	struct bfa_fw_ct_mod_stats_s	ctmod_stats;
 	struct bfa_fw_eth_sndrcv_stats_s	ethsndrcv_stats;
 =======
+=======
+>>>>>>> v3.18
 	struct bfa_fw_aport_stats_s	aport_stats;
 	struct bfa_fw_mac_mod_stats_s	macmod_stats;
 	struct bfa_fw_ct_mod_stats_s	ctmod_stats;
 	struct bfa_fw_eth_sndrcv_stats_s	ethsndrcv_stats;
 	struct bfa_fw_rds_stats_s	rds_stats;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -587,7 +618,10 @@ struct bfa_qos_attr_s {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum bfa_bbcr_state {
 	BFA_BBCR_DISABLED,	/*!< BBCR is disable */
 	BFA_BBCR_ONLINE,	/*!< BBCR is online  */
@@ -609,6 +643,9 @@ struct bfa_bbcr_attr_s {
 	u8	rsvd;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * These fields should be displayed only from the CLI.
@@ -802,6 +839,10 @@ enum bfa_port_states {
 	BFA_PORT_ST_FAA_MISCONFIG	= 15,
 	BFA_PORT_ST_DPORT		= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	BFA_PORT_ST_DDPORT		= 17,
+>>>>>>> v3.18
 =======
 	BFA_PORT_ST_DDPORT		= 17,
 >>>>>>> v3.18
@@ -927,7 +968,10 @@ enum bfa_lunmask_state_s {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * FEC states
  */
@@ -937,6 +981,9 @@ enum bfa_fec_state_s {
 	BFA_FEC_OFFLINE_NOT_16G = 3,	/*!< FEC is offline (speed not 16Gig) */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #pragma pack(1)
 /*
@@ -974,6 +1021,12 @@ struct bfa_defs_fcpim_throttle_s {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BFA_BB_SCN_DEF 3
+#define BFA_BB_SCN_MAX 0x0F
+
+>>>>>>> v3.18
 =======
 #define BFA_BB_SCN_DEF 3
 #define BFA_BB_SCN_MAX 0x0F
@@ -995,8 +1048,13 @@ struct bfa_port_cfg_s {
 	u8	 ratelimit;	/*  ratelimit enabled or not	*/
 	u8	 trl_def_speed;	/*  ratelimit default speed	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	 bb_scn;	/*  BB_SCN value from FLOGI Exchg */
 	u8	 bb_scn_state;	/*  Config state of BB_SCN */
+=======
+	u8	 bb_cr_enabled; /*!< Config state of BB_SCN	*/
+	u8	 bb_scn;	/*!< BB_SCN value for FLOGI Exchg */
+>>>>>>> v3.18
 =======
 	u8	 bb_cr_enabled; /*!< Config state of BB_SCN	*/
 	u8	 bb_scn;	/*!< BB_SCN value for FLOGI Exchg */
@@ -1043,6 +1101,10 @@ struct bfa_port_attr_s {
 	bfa_boolean_t		bbsc_op_status;	/* fc credit recovery oper
 						 * state */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum bfa_fec_state_s	fec_state;	/*!< current FEC state */
+>>>>>>> v3.18
 =======
 	enum bfa_fec_state_s	fec_state;	/*!< current FEC state */
 >>>>>>> v3.18
@@ -1058,7 +1120,11 @@ struct bfa_port_attr_s {
 	/* FCoE specific  */
 	u16			fcoe_vlan;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8			rsvd1[6];
+=======
+	u8			rsvd1[2];
+>>>>>>> v3.18
 =======
 	u8			rsvd1[2];
 >>>>>>> v3.18
@@ -1149,17 +1215,23 @@ struct bfa_port_link_s {
 	u32	 linkstate_opt; /*  Linkstate optional data (debug) */
 	u8	 trunked;	/*  Trunked or not (1 or 0) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	 resvd[7];
 	struct bfa_qos_attr_s  qos_attr;   /* QoS Attributes */
 	union {
 		struct bfa_fcport_loop_info_s loop_info;
 =======
+=======
+>>>>>>> v3.18
 	u8	 fec_state;	/*!< State of FEC */
 	u8	 resvd[6];
 	struct bfa_qos_attr_s  qos_attr;   /* QoS Attributes */
 	union {
 		struct bfa_fcport_loop_info_s loop_info;
 		struct bfa_bbcr_attr_s bbcr_attr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		union {
 			struct bfa_qos_vc_attr_s qos_vc_attr;
@@ -1325,15 +1397,21 @@ struct bfa_port_fc_stats_s {
 	u64     err_enc_out;    /*  Encoding err nonframe_8b10b */
 	u64     err_enc;        /*  Encoding err frame_8b10b    */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64	bbsc_frames_lost; /* Credit Recovery-Frames Lost  */
 	u64	bbsc_credits_lost; /* Credit Recovery-Credits Lost */
 	u64	bbsc_link_resets; /* Credit Recovery-Link Resets   */
 =======
+=======
+>>>>>>> v3.18
 	u64	bbcr_frames_lost; /*!< BBCR Frames Lost */
 	u64	bbcr_rrdys_lost; /*!< BBCR RRDYs Lost */
 	u64	bbcr_link_resets; /*!< BBCR Link Resets */
 	u64	bbcr_frame_lost_intrs; /*!< BBCR Frame loss intrs */
 	u64	bbcr_rrdy_lost_intrs; /*!< BBCR Rrdy loss intrs */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u64	loop_timeouts;	/*  Loop timeouts		*/
 };

@@ -72,12 +72,18 @@ static int dlci_header(struct sk_buff *skb, struct net_device *dev,
 {
 	struct frhdr		hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dlci_local	*dlp;
 	unsigned int		hlen;
 	char			*dest;
 
 	dlp = netdev_priv(dev);
 
+=======
+	unsigned int		hlen;
+	char			*dest;
+
+>>>>>>> v3.18
 =======
 	unsigned int		hlen;
 	char			*dest;
@@ -114,11 +120,17 @@ static int dlci_header(struct sk_buff *skb, struct net_device *dev,
 static void dlci_receive(struct sk_buff *skb, struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dlci_local *dlp;
 	struct frhdr		*hdr;
 	int					process, header;
 
 	dlp = netdev_priv(dev);
+=======
+	struct frhdr		*hdr;
+	int					process, header;
+
+>>>>>>> v3.18
 =======
 	struct frhdr		*hdr;
 	int					process, header;
@@ -210,13 +222,19 @@ static netdev_tx_t dlci_transmit(struct sk_buff *skb, struct net_device *dev)
 	struct dlci_local *dlp = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (skb)
 		dlp->slave->netdev_ops->ndo_start_xmit(skb, dlp->slave);
 =======
+=======
+>>>>>>> v3.18
 	if (skb) {
 		struct netdev_queue *txq = skb_get_tx_queue(dev, skb);
 		netdev_start_xmit(skb, dlp->slave, txq, false);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NETDEV_TX_OK;
 }
@@ -280,7 +298,10 @@ static int dlci_dev_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 
 			return dlci_config(dev, ifr->ifr_data, cmd == DLCI_GET_CONF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -355,8 +376,13 @@ static int dlci_add(struct dlci_add *dlci)
 
 	/* create device name */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master = alloc_netdev( sizeof(struct dlci_local), "dlci%d",
 			      dlci_setup);
+=======
+	master = alloc_netdev(sizeof(struct dlci_local), "dlci%d",
+			      NET_NAME_UNKNOWN, dlci_setup);
+>>>>>>> v3.18
 =======
 	master = alloc_netdev(sizeof(struct dlci_local), "dlci%d",
 			      NET_NAME_UNKNOWN, dlci_setup);
@@ -521,7 +547,11 @@ static int dlci_dev_event(struct notifier_block *unused,
 			  unsigned long event, void *ptr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = (struct net_device *) ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18

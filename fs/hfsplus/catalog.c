@@ -104,6 +104,11 @@ static int hfsplus_cat_build_record(hfsplus_cat_entry *entry,
 		memset(folder, 0, sizeof(*folder));
 		folder->type = cpu_to_be16(HFSPLUS_FOLDER);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (test_bit(HFSPLUS_SB_HFSX, &sbi->flags))
+			folder->flags |= cpu_to_be16(HFSPLUS_HAS_FOLDER_COUNT);
+>>>>>>> v3.18
 =======
 		if (test_bit(HFSPLUS_SB_HFSX, &sbi->flags))
 			folder->flags |= cpu_to_be16(HFSPLUS_HAS_FOLDER_COUNT);
@@ -209,7 +214,10 @@ int hfsplus_find_cat(struct super_block *sb, u32 cnid,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void hfsplus_subfolders_inc(struct inode *dir)
 {
 	struct hfsplus_sb_info *sbi = HFSPLUS_SB(dir->i_sb);
@@ -240,6 +248,9 @@ static void hfsplus_subfolders_dec(struct inode *dir)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int hfsplus_create_cat(u32 cnid, struct inode *dir,
 		struct qstr *str, struct inode *inode)
@@ -286,6 +297,11 @@ int hfsplus_create_cat(u32 cnid, struct inode *dir,
 
 	dir->i_size++;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (S_ISDIR(inode->i_mode))
+		hfsplus_subfolders_inc(dir);
+>>>>>>> v3.18
 =======
 	if (S_ISDIR(inode->i_mode))
 		hfsplus_subfolders_inc(dir);
@@ -380,6 +396,11 @@ int hfsplus_delete_cat(u32 cnid, struct inode *dir, struct qstr *str)
 
 	dir->i_size--;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (type == HFSPLUS_FOLDER)
+		hfsplus_subfolders_dec(dir);
+>>>>>>> v3.18
 =======
 	if (type == HFSPLUS_FOLDER)
 		hfsplus_subfolders_dec(dir);
@@ -429,6 +450,10 @@ int hfsplus_rename_cat(u32 cnid,
 	hfs_bnode_read(src_fd.bnode, &entry, src_fd.entryoffset,
 				src_fd.entrylength);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	type = be16_to_cpu(entry.type);
+>>>>>>> v3.18
 =======
 	type = be16_to_cpu(entry.type);
 >>>>>>> v3.18
@@ -447,6 +472,11 @@ int hfsplus_rename_cat(u32 cnid,
 		goto out;
 	dst_dir->i_size++;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (type == HFSPLUS_FOLDER)
+		hfsplus_subfolders_inc(dst_dir);
+>>>>>>> v3.18
 =======
 	if (type == HFSPLUS_FOLDER)
 		hfsplus_subfolders_inc(dst_dir);
@@ -463,6 +493,11 @@ int hfsplus_rename_cat(u32 cnid,
 		goto out;
 	src_dir->i_size--;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (type == HFSPLUS_FOLDER)
+		hfsplus_subfolders_dec(src_dir);
+>>>>>>> v3.18
 =======
 	if (type == HFSPLUS_FOLDER)
 		hfsplus_subfolders_dec(src_dir);

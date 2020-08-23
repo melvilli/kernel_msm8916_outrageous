@@ -171,7 +171,10 @@ static int __init __reserved_mem_alloc_size(unsigned long node,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id __rmem_of_table_sentinel
 	__used __section(__reservedmem_of_table_end);
 
@@ -199,6 +202,9 @@ static int __init __reserved_mem_init_node(struct reserved_mem *rmem)
 	return -ENOENT;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * fdt_init_reserved_mem - allocate and init all saved reserved memory regions
@@ -210,6 +216,7 @@ void __init fdt_init_reserved_mem(void)
 		struct reserved_mem *rmem = &reserved_mem[i];
 		unsigned long node = rmem->fdt_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int err = 0;
 
 		if (rmem->size == 0)
@@ -218,6 +225,8 @@ void __init fdt_init_reserved_mem(void)
 	}
 }
 =======
+=======
+>>>>>>> v3.18
 		int len;
 		const __be32 *prop;
 		int err = 0;
@@ -301,4 +310,7 @@ void of_reserved_mem_device_release(struct device *dev)
 
 	rmem->ops->device_release(rmem, dev);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

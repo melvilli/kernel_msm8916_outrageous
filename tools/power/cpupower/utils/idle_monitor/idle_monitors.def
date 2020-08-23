@@ -3,6 +3,10 @@ DEF(amd_fam14h)
 DEF(intel_nhm)
 DEF(intel_snb)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+DEF(intel_hsw_ext)
+>>>>>>> v3.18
 =======
 DEF(intel_hsw_ext)
 >>>>>>> v3.18

@@ -8,6 +8,7 @@
 	#address-cells = <1>;
 	#size-cells = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpus { };
 	soc { };
 	chosen { };
@@ -18,6 +19,11 @@
 		device_type = "memory";
 		reg = <0 0>;
 	};
+=======
+	chosen { };
+	aliases { };
+	memory { device_type = "memory"; reg = <0 0>; };
+>>>>>>> v3.18
 =======
 	chosen { };
 	aliases { };

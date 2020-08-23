@@ -49,6 +49,10 @@ config PINCTRL_SPEAR_PLGPIO
 	bool "SPEAr SoC PLGPIO Controller"
 	depends on GPIOLIB && PINCTRL_SPEAR
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select GPIOLIB_IRQCHIP
+>>>>>>> v3.18
 =======
 	select GPIOLIB_IRQCHIP
 >>>>>>> v3.18

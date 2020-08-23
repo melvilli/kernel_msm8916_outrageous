@@ -30,6 +30,10 @@ int match_int(substring_t *, int *result);
 int match_octal(substring_t *, int *result);
 int match_hex(substring_t *, int *result);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool match_wildcard(const char *pattern, const char *str);
+>>>>>>> v3.18
 =======
 bool match_wildcard(const char *pattern, const char *str);
 >>>>>>> v3.18

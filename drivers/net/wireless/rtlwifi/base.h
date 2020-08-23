@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -45,7 +48,11 @@ enum ap_peer {
 	PEER_AIRGO = 9,
 	PEER_MAX = 10,
 <<<<<<< HEAD
+<<<<<<< HEAD
 } ;
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -63,7 +70,10 @@ enum ap_peer {
 #define MAX_BIT_RATE_40MHZ_MCS7		150	/* Mbps */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MAX_BIT_RATE_SHORT_GI_2NSS_80MHZ_MCS9	867	/* Mbps */
 #define MAX_BIT_RATE_SHORT_GI_2NSS_80MHZ_MCS7	650	/* Mbps */
 #define MAX_BIT_RATE_LONG_GI_2NSS_80MHZ_MCS9	780	/* Mbps */
@@ -74,6 +84,9 @@ enum ap_peer {
 #define MAX_BIT_RATE_LONG_GI_1NSS_80MHZ_MCS9	390	/* Mbps */
 #define MAX_BIT_RATE_LONG_GI_1NSS_80MHZ_MCS7	293	/* Mbps */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RTL_RATE_COUNT_LEGACY		12
 #define RTL_CHANNEL_COUNT		14
@@ -99,9 +112,15 @@ enum ap_peer {
 	(*(u16 *)((u8 *)(_hdr) + 2) = _val)
 #define SET_80211_PS_POLL_BSSID(_hdr, _val)		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(((u8 *)(_hdr)) + 4, (u8 *)(_val), ETH_ALEN)
 #define SET_80211_PS_POLL_TA(_hdr, _val)		\
 	memcpy(((u8 *)(_hdr)) + 10, (u8 *)(_val), ETH_ALEN)
+=======
+	ether_addr_copy(((u8 *)(_hdr)) + 4, (u8 *)(_val))
+#define SET_80211_PS_POLL_TA(_hdr, _val)		\
+	ether_addr_copy(((u8 *)(_hdr))+10, (u8 *)(_val))
+>>>>>>> v3.18
 =======
 	ether_addr_copy(((u8 *)(_hdr)) + 4, (u8 *)(_val))
 #define SET_80211_PS_POLL_TA(_hdr, _val)		\
@@ -140,13 +159,17 @@ void rtl_init_rfkill(struct ieee80211_hw *hw);
 void rtl_deinit_rfkill(struct ieee80211_hw *hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rtl_beacon_statistic(struct ieee80211_hw *hw, struct sk_buff *skb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void rtl_watch_dog_timer_callback(unsigned long data);
 void rtl_deinit_deferred_work(struct ieee80211_hw *hw);
 
 bool rtl_action_proc(struct ieee80211_hw *hw, struct sk_buff *skb, u8 is_tx);
+<<<<<<< HEAD
 <<<<<<< HEAD
 u8 rtl_is_special_data(struct ieee80211_hw *hw, struct sk_buff *skb, u8 is_tx);
 
@@ -162,6 +185,8 @@ int rtl_rx_agg_start(struct ieee80211_hw *hw, struct ieee80211_sta *sta,
 int rtl_rx_agg_stop(struct ieee80211_hw *hw, struct ieee80211_sta *sta,
 		    u16 tid);
 =======
+=======
+>>>>>>> v3.18
 int rtlwifi_rate_mapping(struct ieee80211_hw *hw,
 			 bool isht, u8 desc_rate, bool first_ampdu);
 bool rtl_tx_mgmt_proc(struct ieee80211_hw *hw, struct sk_buff *skb);
@@ -179,6 +204,9 @@ int rtl_rx_agg_start(struct ieee80211_hw *hw,
 		     struct ieee80211_sta *sta, u16 tid);
 int rtl_rx_agg_stop(struct ieee80211_hw *hw,
 		    struct ieee80211_sta *sta, u16 tid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void rtl_watchdog_wq_callback(void *data);
 void rtl_fwevt_wq_callback(void *data);
@@ -190,8 +218,13 @@ void rtl_get_tcb_desc(struct ieee80211_hw *hw,
 
 int rtl_send_smps_action(struct ieee80211_hw *hw,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct ieee80211_sta *sta,
 			 enum ieee80211_smps_mode smps);
+=======
+		struct ieee80211_sta *sta,
+		enum ieee80211_smps_mode smps);
+>>>>>>> v3.18
 =======
 		struct ieee80211_sta *sta,
 		enum ieee80211_smps_mode smps);
@@ -202,12 +235,17 @@ u8 rtl_tid_to_ac(u8 tid);
 extern struct attribute_group rtl_attribute_group;
 void rtl_easy_concurrent_retrytimer_callback(unsigned long data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct rtl_global_var global_var;
 int rtlwifi_rate_mapping(struct ieee80211_hw *hw,
 			 bool isht, u8 desc_rate, bool first_ampdu);
 bool rtl_tx_mgmt_proc(struct ieee80211_hw *hw, struct sk_buff *skb);
 struct sk_buff *rtl_make_del_ba(struct ieee80211_hw *hw,
 				u8 *sa, u8 *bssid, u16 tid);
+=======
+extern struct rtl_global_var rtl_global_var;
+void rtl_phy_scan_operation_backup(struct ieee80211_hw *hw, u8 operation);
+>>>>>>> v3.18
 =======
 extern struct rtl_global_var rtl_global_var;
 void rtl_phy_scan_operation_backup(struct ieee80211_hw *hw, u8 operation);

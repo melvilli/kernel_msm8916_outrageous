@@ -525,6 +525,7 @@ gigaset_tty_open(struct tty_struct *tty)
 	atomic_set(&cs->hw.ser->refcnt, 1);
 	init_completion(&cs->hw.ser->dead_cmp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty->disc_data = cs;
 
 	/* Set the amount of data we're willing to receive per call
@@ -536,6 +537,10 @@ gigaset_tty_open(struct tty_struct *tty)
 	 * never happen as the device is slow and the buffer size ample.
 	 */
 	tty->receive_room = RBUFSIZE/2;
+=======
+
+	tty->disc_data = cs;
+>>>>>>> v3.18
 =======
 
 	tty->disc_data = cs;
@@ -793,10 +798,15 @@ static int __init ser_gigaset_init(void)
 				    GIGASET_MODULENAME, GIGASET_DEVNAME,
 				    &ops, THIS_MODULE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!driver) {
 		rc = -ENOMEM;
 		goto error;
 	}
+=======
+	if (!driver)
+		goto error;
+>>>>>>> v3.18
 =======
 	if (!driver)
 		goto error;

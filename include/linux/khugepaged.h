@@ -7,7 +7,12 @@
 extern int __khugepaged_enter(struct mm_struct *mm);
 extern void __khugepaged_exit(struct mm_struct *mm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int khugepaged_enter_vma_merge(struct vm_area_struct *vma);
+=======
+extern int khugepaged_enter_vma_merge(struct vm_area_struct *vma,
+				      unsigned long vm_flags);
+>>>>>>> v3.18
 =======
 extern int khugepaged_enter_vma_merge(struct vm_area_struct *vma,
 				      unsigned long vm_flags);
@@ -41,6 +46,7 @@ static inline void khugepaged_exit(struct mm_struct *mm)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int khugepaged_enter(struct vm_area_struct *vma)
 {
 	if (!test_bit(MMF_VM_HUGEPAGE, &vma->vm_mm->flags))
@@ -49,6 +55,8 @@ static inline int khugepaged_enter(struct vm_area_struct *vma)
 		      vma->vm_flags & VM_HUGEPAGE)) &&
 		    !(vma->vm_flags & VM_NOHUGEPAGE))
 =======
+=======
+>>>>>>> v3.18
 static inline int khugepaged_enter(struct vm_area_struct *vma,
 				   unsigned long vm_flags)
 {
@@ -56,6 +64,9 @@ static inline int khugepaged_enter(struct vm_area_struct *vma,
 		if ((khugepaged_always() ||
 		     (khugepaged_req_madv() && (vm_flags & VM_HUGEPAGE))) &&
 		    !(vm_flags & VM_NOHUGEPAGE))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (__khugepaged_enter(vma->vm_mm))
 				return -ENOMEM;
@@ -70,12 +81,15 @@ static inline void khugepaged_exit(struct mm_struct *mm)
 {
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int khugepaged_enter(struct vm_area_struct *vma)
 {
 	return 0;
 }
 static inline int khugepaged_enter_vma_merge(struct vm_area_struct *vma)
 =======
+=======
+>>>>>>> v3.18
 static inline int khugepaged_enter(struct vm_area_struct *vma,
 				   unsigned long vm_flags)
 {
@@ -83,6 +97,9 @@ static inline int khugepaged_enter(struct vm_area_struct *vma,
 }
 static inline int khugepaged_enter_vma_merge(struct vm_area_struct *vma,
 					     unsigned long vm_flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return 0;

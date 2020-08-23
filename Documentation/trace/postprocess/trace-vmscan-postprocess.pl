@@ -48,12 +48,18 @@ use constant HIGH_NR_SCANNED			=> 22;
 use constant HIGH_NR_TAKEN			=> 23;
 use constant HIGH_NR_RECLAIMED			=> 24;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use constant HIGH_NR_CONTIG_DIRTY		=> 25;
 =======
+=======
+>>>>>>> v3.18
 use constant HIGH_NR_FILE_SCANNED		=> 25;
 use constant HIGH_NR_ANON_SCANNED		=> 26;
 use constant HIGH_NR_FILE_RECLAIMED		=> 27;
 use constant HIGH_NR_ANON_RECLAIMED		=> 28;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 my %perprocesspid;
@@ -65,6 +71,7 @@ my $opt_read_procstat;
 my $total_wakeup_kswapd;
 my ($total_direct_reclaim, $total_direct_nr_scanned);
 <<<<<<< HEAD
+<<<<<<< HEAD
 my ($total_direct_latency, $total_kswapd_latency);
 my ($total_direct_nr_reclaimed);
 my ($total_direct_writepage_file_sync, $total_direct_writepage_file_async);
@@ -74,6 +81,8 @@ my ($total_kswapd_writepage_file_sync, $total_kswapd_writepage_file_async);
 my ($total_kswapd_writepage_anon_sync, $total_kswapd_writepage_anon_async);
 my ($total_kswapd_nr_reclaimed);
 =======
+=======
+>>>>>>> v3.18
 my ($total_direct_nr_file_scanned, $total_direct_nr_anon_scanned);
 my ($total_direct_latency, $total_kswapd_latency);
 my ($total_direct_nr_reclaimed);
@@ -86,6 +95,9 @@ my ($total_kswapd_writepage_file_sync, $total_kswapd_writepage_file_async);
 my ($total_kswapd_writepage_anon_sync, $total_kswapd_writepage_anon_async);
 my ($total_kswapd_nr_reclaimed);
 my ($total_kswapd_nr_file_reclaimed, $total_kswapd_nr_anon_reclaimed);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # Catch sigint and exit on request
@@ -128,7 +140,11 @@ my $regex_kswapd_wake_default = 'nid=([0-9]*) order=([0-9]*)';
 my $regex_kswapd_sleep_default = 'nid=([0-9]*)';
 my $regex_wakeup_kswapd_default = 'nid=([0-9]*) zid=([0-9]*) order=([0-9]*)';
 <<<<<<< HEAD
+<<<<<<< HEAD
 my $regex_lru_isolate_default = 'isolate_mode=([0-9]*) order=([0-9]*) nr_requested=([0-9]*) nr_scanned=([0-9]*) nr_taken=([0-9]*) contig_taken=([0-9]*) contig_dirty=([0-9]*) contig_failed=([0-9]*)';
+=======
+my $regex_lru_isolate_default = 'isolate_mode=([0-9]*) order=([0-9]*) nr_requested=([0-9]*) nr_scanned=([0-9]*) nr_taken=([0-9]*) file=([0-9]*)';
+>>>>>>> v3.18
 =======
 my $regex_lru_isolate_default = 'isolate_mode=([0-9]*) order=([0-9]*) nr_requested=([0-9]*) nr_scanned=([0-9]*) nr_taken=([0-9]*) file=([0-9]*)';
 >>>>>>> v3.18
@@ -150,7 +166,11 @@ my $regex_writepage;
 # Static regex used. Specified like this for readability and for use with /o
 #                      (process_pid)     (cpus      )   ( time  )   (tpoint    ) (details)
 <<<<<<< HEAD
+<<<<<<< HEAD
 my $regex_traceevent = '\s*([a-zA-Z0-9-]*)\s*(\[[0-9]*\])\s*([0-9.]*):\s*([a-zA-Z_]*):\s*(.*)';
+=======
+my $regex_traceevent = '\s*([a-zA-Z0-9-]*)\s*(\[[0-9]*\])(\s*[dX.][Nnp.][Hhs.][0-9a-fA-F.]*|)\s*([0-9.]*):\s*([a-zA-Z_]*):\s*(.*)';
+>>>>>>> v3.18
 =======
 my $regex_traceevent = '\s*([a-zA-Z0-9-]*)\s*(\[[0-9]*\])(\s*[dX.][Nnp.][Hhs.][0-9a-fA-F.]*|)\s*([0-9.]*):\s*([a-zA-Z_]*):\s*(.*)';
 >>>>>>> v3.18
@@ -231,7 +251,11 @@ $regex_lru_isolate = generate_traceevent_regex(
 			"isolate_mode", "order",
 			"nr_requested", "nr_scanned", "nr_taken",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"contig_taken", "contig_dirty", "contig_failed");
+=======
+			"file");
+>>>>>>> v3.18
 =======
 			"file");
 >>>>>>> v3.18
@@ -305,8 +329,13 @@ EVENT_PROCESS:
 		if ($traceevent =~ /$regex_traceevent/o) {
 			$process_pid = $1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$timestamp = $3;
 			$tracepoint = $4;
+=======
+			$timestamp = $4;
+			$tracepoint = $5;
+>>>>>>> v3.18
 =======
 			$timestamp = $4;
 			$tracepoint = $5;
@@ -339,7 +368,11 @@ EVENT_PROCESS:
 			$perprocesspid{$process_pid}->{STATE_DIRECT_BEGIN} = $timestamp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$details = $5;
+=======
+			$details = $6;
+>>>>>>> v3.18
 =======
 			$details = $6;
 >>>>>>> v3.18
@@ -366,7 +399,11 @@ EVENT_PROCESS:
 			}
 		} elsif ($tracepoint eq "mm_vmscan_kswapd_wake") {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$details = $5;
+=======
+			$details = $6;
+>>>>>>> v3.18
 =======
 			$details = $6;
 >>>>>>> v3.18
@@ -404,7 +441,11 @@ EVENT_PROCESS:
 			$perprocesspid{$process_pid}->{MM_VMSCAN_WAKEUP_KSWAPD}++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$details = $5;
+=======
+			$details = $6;
+>>>>>>> v3.18
 =======
 			$details = $6;
 >>>>>>> v3.18
@@ -418,7 +459,11 @@ EVENT_PROCESS:
 			$perprocesspid{$process_pid}->{MM_VMSCAN_WAKEUP_KSWAPD_PERORDER}[$order]++;
 		} elsif ($tracepoint eq "mm_vmscan_lru_isolate") {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$details = $5;
+=======
+			$details = $6;
+>>>>>>> v3.18
 =======
 			$details = $6;
 >>>>>>> v3.18
@@ -431,7 +476,11 @@ EVENT_PROCESS:
 			my $isolate_mode = $1;
 			my $nr_scanned = $4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			my $nr_contig_dirty = $7;
+=======
+			my $file = $6;
+>>>>>>> v3.18
 =======
 			my $file = $6;
 >>>>>>> v3.18
@@ -444,11 +493,14 @@ EVENT_PROCESS:
 			if ($isolate_mode != 2) {
 				$perprocesspid{$process_pid}->{HIGH_NR_SCANNED} += $nr_scanned;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}
 			$perprocesspid{$process_pid}->{HIGH_NR_CONTIG_DIRTY} += $nr_contig_dirty;
 		} elsif ($tracepoint eq "mm_vmscan_lru_shrink_inactive") {
 			$details = $5;
 =======
+=======
+>>>>>>> v3.18
 				if ($file == 1) {
 					$perprocesspid{$process_pid}->{HIGH_NR_FILE_SCANNED} += $nr_scanned;
 				} else {
@@ -457,6 +509,9 @@ EVENT_PROCESS:
 			}
 		} elsif ($tracepoint eq "mm_vmscan_lru_shrink_inactive") {
 			$details = $6;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if ($details !~ /$regex_lru_shrink_inactive/o) {
 				print "WARNING: Failed to parse mm_vmscan_lru_shrink_inactive as expected\n";
@@ -465,11 +520,14 @@ EVENT_PROCESS:
 				next;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			my $nr_reclaimed = $4;
 			$perprocesspid{$process_pid}->{HIGH_NR_RECLAIMED} += $nr_reclaimed;
 		} elsif ($tracepoint eq "mm_vmscan_writepage") {
 			$details = $5;
 =======
+=======
+>>>>>>> v3.18
 
 			my $nr_reclaimed = $4;
 			my $flags = $6;
@@ -485,6 +543,9 @@ EVENT_PROCESS:
 			}
 		} elsif ($tracepoint eq "mm_vmscan_writepage") {
 			$details = $6;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if ($details !~ /$regex_writepage/o) {
 				print "WARNING: Failed to parse mm_vmscan_writepage as expected\n";
@@ -585,13 +646,19 @@ sub dump_stats {
 		$total_wakeup_kswapd += $stats{$process_pid}->{MM_VMSCAN_WAKEUP_KSWAPD};
 		$total_direct_nr_scanned += $stats{$process_pid}->{HIGH_NR_SCANNED};
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$total_direct_nr_reclaimed += $stats{$process_pid}->{HIGH_NR_RECLAIMED};
 =======
+=======
+>>>>>>> v3.18
 		$total_direct_nr_file_scanned += $stats{$process_pid}->{HIGH_NR_FILE_SCANNED};
 		$total_direct_nr_anon_scanned += $stats{$process_pid}->{HIGH_NR_ANON_SCANNED};
 		$total_direct_nr_reclaimed += $stats{$process_pid}->{HIGH_NR_RECLAIMED};
 		$total_direct_nr_file_reclaimed += $stats{$process_pid}->{HIGH_NR_FILE_RECLAIMED};
 		$total_direct_nr_anon_reclaimed += $stats{$process_pid}->{HIGH_NR_ANON_RECLAIMED};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		$total_direct_writepage_file_sync += $stats{$process_pid}->{MM_VMSCAN_WRITEPAGE_FILE_SYNC};
 		$total_direct_writepage_anon_sync += $stats{$process_pid}->{MM_VMSCAN_WRITEPAGE_ANON_SYNC};
@@ -613,13 +680,19 @@ sub dump_stats {
 			$stats{$process_pid}->{MM_VMSCAN_WAKEUP_KSWAPD},
 			$stats{$process_pid}->{HIGH_NR_SCANNED},
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$stats{$process_pid}->{HIGH_NR_RECLAIMED},
 =======
+=======
+>>>>>>> v3.18
 			$stats{$process_pid}->{HIGH_NR_FILE_SCANNED},
 			$stats{$process_pid}->{HIGH_NR_ANON_SCANNED},
 			$stats{$process_pid}->{HIGH_NR_RECLAIMED},
 			$stats{$process_pid}->{HIGH_NR_FILE_RECLAIMED},
 			$stats{$process_pid}->{HIGH_NR_ANON_RECLAIMED},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			$stats{$process_pid}->{MM_VMSCAN_WRITEPAGE_FILE_SYNC} + $stats{$process_pid}->{MM_VMSCAN_WRITEPAGE_ANON_SYNC},
 			$stats{$process_pid}->{MM_VMSCAN_WRITEPAGE_FILE_ASYNC} + $stats{$process_pid}->{MM_VMSCAN_WRITEPAGE_ANON_ASYNC},
@@ -644,6 +717,7 @@ sub dump_stats {
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($stats{$process_pid}->{HIGH_NR_CONTIG_DIRTY}) {
 			print "      ";
 			my $count = $stats{$process_pid}->{HIGH_NR_CONTIG_DIRTY};
@@ -651,6 +725,8 @@ sub dump_stats {
 				print "contig-dirty=$count ";
 			}
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -670,13 +746,19 @@ sub dump_stats {
 		$total_kswapd_wake += $stats{$process_pid}->{MM_VMSCAN_KSWAPD_WAKE};
 		$total_kswapd_nr_scanned += $stats{$process_pid}->{HIGH_NR_SCANNED};
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$total_kswapd_nr_reclaimed += $stats{$process_pid}->{HIGH_NR_RECLAIMED};
 =======
+=======
+>>>>>>> v3.18
 		$total_kswapd_nr_file_scanned += $stats{$process_pid}->{HIGH_NR_FILE_SCANNED};
 		$total_kswapd_nr_anon_scanned += $stats{$process_pid}->{HIGH_NR_ANON_SCANNED};
 		$total_kswapd_nr_reclaimed += $stats{$process_pid}->{HIGH_NR_RECLAIMED};
 		$total_kswapd_nr_file_reclaimed += $stats{$process_pid}->{HIGH_NR_FILE_RECLAIMED};
 		$total_kswapd_nr_anon_reclaimed += $stats{$process_pid}->{HIGH_NR_ANON_RECLAIMED};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		$total_kswapd_writepage_file_sync += $stats{$process_pid}->{MM_VMSCAN_WRITEPAGE_FILE_SYNC};
 		$total_kswapd_writepage_anon_sync += $stats{$process_pid}->{MM_VMSCAN_WRITEPAGE_ANON_SYNC};
@@ -689,13 +771,19 @@ sub dump_stats {
 			$stats{$process_pid}->{HIGH_KSWAPD_REWAKEUP},
 			$stats{$process_pid}->{HIGH_NR_SCANNED},
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$stats{$process_pid}->{HIGH_NR_RECLAIMED},
 =======
+=======
+>>>>>>> v3.18
 			$stats{$process_pid}->{HIGH_NR_FILE_SCANNED},
 			$stats{$process_pid}->{HIGH_NR_ANON_SCANNED},
 			$stats{$process_pid}->{HIGH_NR_RECLAIMED},
 			$stats{$process_pid}->{HIGH_NR_FILE_RECLAIMED},
 			$stats{$process_pid}->{HIGH_NR_ANON_RECLAIMED},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			$stats{$process_pid}->{MM_VMSCAN_WRITEPAGE_FILE_SYNC} + $stats{$process_pid}->{MM_VMSCAN_WRITEPAGE_ANON_SYNC},
 			$stats{$process_pid}->{MM_VMSCAN_WRITEPAGE_FILE_ASYNC} + $stats{$process_pid}->{MM_VMSCAN_WRITEPAGE_ANON_ASYNC});
@@ -728,13 +816,19 @@ sub dump_stats {
 	print "Direct reclaims:     			$total_direct_reclaim\n";
 	print "Direct reclaim pages scanned:		$total_direct_nr_scanned\n";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print "Direct reclaim pages reclaimed:		$total_direct_nr_reclaimed\n";
 =======
+=======
+>>>>>>> v3.18
 	print "Direct reclaim file pages scanned:	$total_direct_nr_file_scanned\n";
 	print "Direct reclaim anon pages scanned:	$total_direct_nr_anon_scanned\n";
 	print "Direct reclaim pages reclaimed:		$total_direct_nr_reclaimed\n";
 	print "Direct reclaim file pages reclaimed:	$total_direct_nr_file_reclaimed\n";
 	print "Direct reclaim anon pages reclaimed:	$total_direct_nr_anon_reclaimed\n";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	print "Direct reclaim write file sync I/O:	$total_direct_writepage_file_sync\n";
 	print "Direct reclaim write anon sync I/O:	$total_direct_writepage_anon_sync\n";
@@ -746,13 +840,19 @@ sub dump_stats {
 	print "Kswapd wakeups:				$total_kswapd_wake\n";
 	print "Kswapd pages scanned:			$total_kswapd_nr_scanned\n";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print "Kswapd pages reclaimed:			$total_kswapd_nr_reclaimed\n";
 =======
+=======
+>>>>>>> v3.18
 	print "Kswapd file pages scanned:		$total_kswapd_nr_file_scanned\n";
 	print "Kswapd anon pages scanned:		$total_kswapd_nr_anon_scanned\n";
 	print "Kswapd pages reclaimed:			$total_kswapd_nr_reclaimed\n";
 	print "Kswapd file pages reclaimed:		$total_kswapd_nr_file_reclaimed\n";
 	print "Kswapd anon pages reclaimed:		$total_kswapd_nr_anon_reclaimed\n";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	print "Kswapd reclaim write file sync I/O:	$total_kswapd_writepage_file_sync\n";
 	print "Kswapd reclaim write anon sync I/O:	$total_kswapd_writepage_anon_sync\n";
@@ -779,13 +879,19 @@ sub aggregate_perprocesspid() {
 		$perprocess{$process}->{HIGH_KSWAPD_REWAKEUP} += $perprocesspid{$process_pid}->{HIGH_KSWAPD_REWAKEUP};
 		$perprocess{$process}->{HIGH_NR_SCANNED} += $perprocesspid{$process_pid}->{HIGH_NR_SCANNED};
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$perprocess{$process}->{HIGH_NR_RECLAIMED} += $perprocesspid{$process_pid}->{HIGH_NR_RECLAIMED};
 =======
+=======
+>>>>>>> v3.18
 		$perprocess{$process}->{HIGH_NR_FILE_SCANNED} += $perprocesspid{$process_pid}->{HIGH_NR_FILE_SCANNED};
 		$perprocess{$process}->{HIGH_NR_ANON_SCANNED} += $perprocesspid{$process_pid}->{HIGH_NR_ANON_SCANNED};
 		$perprocess{$process}->{HIGH_NR_RECLAIMED} += $perprocesspid{$process_pid}->{HIGH_NR_RECLAIMED};
 		$perprocess{$process}->{HIGH_NR_FILE_RECLAIMED} += $perprocesspid{$process_pid}->{HIGH_NR_FILE_RECLAIMED};
 		$perprocess{$process}->{HIGH_NR_ANON_RECLAIMED} += $perprocesspid{$process_pid}->{HIGH_NR_ANON_RECLAIMED};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		$perprocess{$process}->{MM_VMSCAN_WRITEPAGE_FILE_SYNC} += $perprocesspid{$process_pid}->{MM_VMSCAN_WRITEPAGE_FILE_SYNC};
 		$perprocess{$process}->{MM_VMSCAN_WRITEPAGE_ANON_SYNC} += $perprocesspid{$process_pid}->{MM_VMSCAN_WRITEPAGE_ANON_SYNC};

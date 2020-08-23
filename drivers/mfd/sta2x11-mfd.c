@@ -134,7 +134,11 @@ int sta2x11_mfd_get_regs_data(struct platform_device *dev,
 			      spinlock_t **lock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pci_dev *pdev = *(struct pci_dev **)(dev->dev.platform_data);
+=======
+	struct pci_dev *pdev = *(struct pci_dev **)dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct pci_dev *pdev = *(struct pci_dev **)dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -317,7 +321,11 @@ static int sta2x11_mfd_platform_probe(struct platform_device *dev,
 	struct regmap_config *regmap_config = sta2x11_mfd_regmap_configs[index];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdev = dev->dev.platform_data;
+=======
+	pdev = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	pdev = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -348,7 +356,11 @@ static int sta2x11_mfd_platform_probe(struct platform_device *dev,
 	mfd->regmap[index] = devm_regmap_init_mmio(&dev->dev, mfd->regs[index],
 						   regmap_config);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(!mfd->regmap[index]);
+=======
+	WARN_ON(IS_ERR(mfd->regmap[index]));
+>>>>>>> v3.18
 =======
 	WARN_ON(IS_ERR(mfd->regmap[index]));
 >>>>>>> v3.18
@@ -542,7 +554,11 @@ static int sta2x11_mfd_resume(struct pci_dev *pdev)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_power_state(pdev, 0);
+=======
+	pci_set_power_state(pdev, PCI_D0);
+>>>>>>> v3.18
 =======
 	pci_set_power_state(pdev, PCI_D0);
 >>>>>>> v3.18
@@ -659,7 +675,11 @@ err_disable:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(sta2x11_mfd_tbl) = {
+=======
+static const struct pci_device_id sta2x11_mfd_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id sta2x11_mfd_tbl[] = {
 >>>>>>> v3.18

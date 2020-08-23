@@ -100,7 +100,11 @@ unsigned long get_wchan(struct task_struct *p);
 
 #define cpu_relax()    	smp_mb()
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency() cpu_relax()
 >>>>>>> v3.18

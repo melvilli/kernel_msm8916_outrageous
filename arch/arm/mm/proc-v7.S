@@ -27,7 +27,11 @@
 
 ENTRY(cpu_v7_proc_init)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -39,7 +43,11 @@ ENTRY(cpu_v7_proc_fin)
 	bic	r0, r0, #0x0006			@ .............ca.
 	mcr	p15, 0, r0, c1, c0, 0		@ disable caches
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -80,7 +88,11 @@ ENTRY(cpu_v7_do_idle)
 	dsb					@ WFI may enter a low-power mode
 	wfi
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -90,7 +102,11 @@ ENTRY(cpu_v7_dcache_clean_area)
 	ALT_SMP(W(nop))			@ MP extensions imply L1 PTW
 	ALT_UP_B(1f)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -100,8 +116,13 @@ ENTRY(cpu_v7_dcache_clean_area)
 	subs	r1, r1, r2
 	bhi	2b
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
 	mov	pc, lr
+=======
+	dsb	ishst
+	ret	lr
+>>>>>>> v3.18
 =======
 	dsb	ishst
 	ret	lr
@@ -120,6 +141,7 @@ ENTRY(cpu_v7_do_suspend)
 	mrc	p15, 0, r4, c13, c0, 0	@ FCSE/PID
 	mrc	p15, 0, r5, c13, c0, 3	@ User r/o thread ID
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARM_LPAE
 	mrrc	p15, 1, r6, r7, c2	@ TTB 1
 #else
@@ -133,6 +155,8 @@ ENTRY(cpu_v7_do_suspend)
 	mrc	p15, 0, r10, c1, c0, 2	@ Co-processor access control
 	stmia	r0, {r7 - r11}
 =======
+=======
+>>>>>>> v3.18
 	stmia	r0!, {r4 - r5}
 #ifdef CONFIG_MMU
 	mrc	p15, 0, r6, c3, c0, 0	@ Domain ID
@@ -147,12 +171,16 @@ ENTRY(cpu_v7_do_suspend)
 	mrc	p15, 0, r9, c1, c0, 1	@ Auxiliary control register
 	mrc	p15, 0, r10, c1, c0, 2	@ Co-processor access control
 	stmia	r0, {r5 - r11}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ldmfd	sp!, {r4 - r10, pc}
 ENDPROC(cpu_v7_do_suspend)
 
 ENTRY(cpu_v7_do_resume)
 	mov	ip, #0
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mcr	p15, 0, ip, c8, c7, 0	@ invalidate TLBs
 	mcr	p15, 0, ip, c7, c5, 0	@ invalidate I cache
@@ -164,6 +192,8 @@ ENTRY(cpu_v7_do_resume)
 	mcrr	p15, 0, r1, ip, c2	@ TTB 0
 	mcrr	p15, 1, r6, r7, c2	@ TTB 1
 =======
+=======
+>>>>>>> v3.18
 	mcr	p15, 0, ip, c7, c5, 0	@ invalidate I cache
 	mcr	p15, 0, ip, c13, c0, 1	@ set reserved context ID
 	ldmia	r0!, {r4 - r5}
@@ -176,6 +206,9 @@ ENTRY(cpu_v7_do_resume)
 #ifdef CONFIG_ARM_LPAE
 	mcrr	p15, 0, r1, ip, c2	@ TTB 0
 	mcrr	p15, 1, r5, r7, c2	@ TTB 1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 	ALT_SMP(orr	r1, r1, #TTB_FLAGS_SMP)
@@ -183,6 +216,7 @@ ENTRY(cpu_v7_do_resume)
 	mcr	p15, 0, r1, c2, c0, 0	@ TTB 0
 	mcr	p15, 0, r7, c2, c0, 1	@ TTB 1
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ldmia	r0!, {r7 - r11}
 	mcr	p15, 0, r7, c3, c0, 0	@ Domain ID
@@ -194,17 +228,26 @@ ENTRY(cpu_v7_do_resume)
 =======
 	mcr	p15, 0, r11, c2, c0, 2	@ TTB control register
 >>>>>>> v3.18
+=======
+	mcr	p15, 0, r11, c2, c0, 2	@ TTB control register
+>>>>>>> v3.18
 	ldr	r4, =PRRR		@ PRRR
 	ldr	r5, =NMRR		@ NMRR
 	mcr	p15, 0, r4, c10, c2, 0	@ write PRRR
 	mcr	p15, 0, r5, c10, c2, 1	@ write NMRR
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #endif	/* CONFIG_MMU */
 	mrc	p15, 0, r4, c1, c0, 1	@ Read Auxiliary control register
 	teq	r4, r9			@ Is it already set?
 	mcrne	p15, 0, r9, c1, c0, 1	@ No, so write it
 	mcr	p15, 0, r10, c1, c0, 2	@ Co-processor access control
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	isb
 	dsb
@@ -214,7 +257,10 @@ ENDPROC(cpu_v7_do_resume)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Cortex-A9 processor functions
  */
@@ -249,6 +295,9 @@ ENTRY(cpu_ca9mp_do_resume)
 ENDPROC(cpu_ca9mp_do_resume)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_CPU_PJ4B
 	globl_equ	cpu_pj4b_switch_mm,     cpu_v7_switch_mm
@@ -262,7 +311,11 @@ ENTRY(cpu_pj4b_do_idle)
 	wfi
 	dsb					@barrier
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -272,6 +325,7 @@ ENDPROC(cpu_pj4b_do_idle)
 #endif
 	globl_equ	cpu_pj4b_dcache_clean_area,	cpu_v7_dcache_clean_area
 <<<<<<< HEAD
+<<<<<<< HEAD
 	globl_equ	cpu_pj4b_do_suspend,	cpu_v7_do_suspend
 	globl_equ	cpu_pj4b_do_resume,	cpu_v7_do_resume
 	globl_equ	cpu_pj4b_suspend_size,	cpu_v7_suspend_size
@@ -280,6 +334,8 @@ ENDPROC(cpu_pj4b_do_idle)
 
 	__CPUINIT
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ARM_CPU_SUSPEND
 ENTRY(cpu_pj4b_do_suspend)
 	stmfd	sp!, {r6 - r10}
@@ -307,6 +363,9 @@ ENDPROC(cpu_pj4b_do_resume)
 .equ	cpu_pj4b_suspend_size, cpu_v7_suspend_size + 4 * 5
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -323,12 +382,15 @@ ENDPROC(cpu_pj4b_do_resume)
 __v7_ca5mp_setup:
 __v7_ca9mp_setup:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	r10, #(1 << 0)			@ TLB ops broadcasting
 	b	1f
 __v7_ca7mp_setup:
 __v7_ca15mp_setup:
 __v7_ca53mp_setup:
 =======
+=======
+>>>>>>> v3.18
 __v7_cr7mp_setup:
 	mov	r10, #(1 << 0)			@ Cache/TLB ops broadcasting
 	b	1f
@@ -337,6 +399,9 @@ __v7_ca12mp_setup:
 __v7_ca15mp_setup:
 __v7_b15mp_setup:
 __v7_ca17mp_setup:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mov	r10, #0
 1:
@@ -481,8 +546,11 @@ __v7_setup:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 3:	mov	r10, #0
 =======
+=======
+>>>>>>> v3.18
 	/* Cortex-A15 Errata */
 3:	ldr	r10, =0x00000c0f		@ Cortex-A15 primary part number
 	teq	r0, r10
@@ -496,6 +564,9 @@ __v7_setup:
 #endif
 
 4:	mov	r10, #0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mcr	p15, 0, r10, c7, c5, 0		@ I+BTB cache invalidate
 #ifdef CONFIG_MMU
@@ -506,6 +577,7 @@ __v7_setup:
 	mcr	p15, 0, r5, c10, c2, 0		@ write PRRR
 	mcr	p15, 0, r6, c10, c2, 1		@ write NMRR
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #if defined(CONFIG_ARCH_MSM_SCORPION) && !defined(CONFIG_MSM_SMP)
@@ -534,6 +606,8 @@ __v7_setup:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	dsb					@ Complete invalidations
 #ifndef CONFIG_ARM_THUMBEE
 	mrc	p15, 0, r0, c0, c1, 0		@ read ID_PFR0 for ThumbEE
@@ -550,9 +624,13 @@ __v7_setup:
 	adr	r5, v7_crval
 	ldmia	r5, {r5, r6}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CPU_ENDIAN_BE8
 	orr	r6, r6, #1 << 25		@ big-endian page tables
 #endif
+=======
+ ARM_BE8(orr	r6, r6, #1 << 25)		@ big-endian page tables
+>>>>>>> v3.18
 =======
  ARM_BE8(orr	r6, r6, #1 << 25)		@ big-endian page tables
 >>>>>>> v3.18
@@ -565,7 +643,11 @@ __v7_setup:
 	orr	r0, r0, r6			@ set them
  THUMB(	orr	r0, r0, #1 << 30	)	@ Thumb exceptions
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr				@ return to head.S:__ret
+=======
+	ret	lr				@ return to head.S:__ret
+>>>>>>> v3.18
 =======
 	ret	lr				@ return to head.S:__ret
 >>>>>>> v3.18
@@ -580,6 +662,10 @@ __v7_setup_stack:
 	@ define struct processor (see <asm/proc-fns.h> and proc-macros.S)
 	define_processor_functions v7, dabort=v7_early_abort, pabort=v7_pabort, suspend=1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	define_processor_functions ca9mp, dabort=v7_early_abort, pabort=v7_pabort, suspend=1
+>>>>>>> v3.18
 =======
 	define_processor_functions ca9mp, dabort=v7_early_abort, pabort=v7_pabort, suspend=1
 >>>>>>> v3.18
@@ -636,7 +722,11 @@ __v7_ca9mp_proc_info:
 	.long	0x410fc090
 	.long	0xff0ffff0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__v7_proc __v7_ca9mp_setup
+=======
+	__v7_proc __v7_ca9mp_setup, proc_fns = ca9mp_processor_functions
+>>>>>>> v3.18
 =======
 	__v7_proc __v7_ca9mp_setup, proc_fns = ca9mp_processor_functions
 >>>>>>> v3.18
@@ -658,7 +748,10 @@ __v7_pj4b_proc_info:
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * ARM Ltd. Cortex R7 processor.
 	 */
 	.type	__v7_cr7mp_proc_info, #object
@@ -669,6 +762,9 @@ __v7_cr7mp_proc_info:
 	.size	__v7_cr7mp_proc_info, . - __v7_cr7mp_proc_info
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * ARM Ltd. Cortex A7 processor.
 	 */
@@ -681,7 +777,10 @@ __v7_ca7mp_proc_info:
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * ARM Ltd. Cortex A12 processor.
 	 */
 	.type	__v7_ca12mp_proc_info, #object
@@ -692,6 +791,9 @@ __v7_ca12mp_proc_info:
 	.size	__v7_ca12mp_proc_info, . - __v7_ca12mp_proc_info
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * ARM Ltd. Cortex A15 processor.
 	 */
@@ -704,7 +806,10 @@ __v7_ca15mp_proc_info:
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Broadcom Corporation Brahma-B15 processor.
 	 */
 	.type	__v7_b15mp_proc_info, #object
@@ -725,6 +830,9 @@ __v7_ca17mp_proc_info:
 	.size	__v7_ca17mp_proc_info, . - __v7_ca17mp_proc_info
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Qualcomm Inc. Krait processors.
 	 */
@@ -742,6 +850,7 @@ __krait_proc_info:
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * ARM Ltd. Cortex A53 processor.
 	 */
 	.type	__v7_ca53mp_proc_info, #object
@@ -752,6 +861,8 @@ __v7_ca53mp_proc_info:
 	.size	__v7_ca53mp_proc_info, . - __v7_ca53mp_proc_info
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * Match any ARMv7 processor core.

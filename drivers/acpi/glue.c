@@ -32,6 +32,10 @@ static DECLARE_RWSEM(bus_type_sem);
 
 #define PHYSICAL_NODE_STRING "physical_node"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PHYSICAL_NODE_NAME_SIZE (sizeof(PHYSICAL_NODE_STRING) + 10)
+>>>>>>> v3.18
 =======
 #define PHYSICAL_NODE_NAME_SIZE (sizeof(PHYSICAL_NODE_STRING) + 10)
 >>>>>>> v3.18
@@ -41,7 +45,11 @@ int register_acpi_bus_type(struct acpi_bus_type *type)
 	if (acpi_disabled)
 		return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (type && type->match && type->find_device) {
+=======
+	if (type && type->match && type->find_companion) {
+>>>>>>> v3.18
 =======
 	if (type && type->match && type->find_companion) {
 >>>>>>> v3.18
@@ -86,6 +94,7 @@ static struct acpi_bus_type *acpi_get_bus_type(struct device *dev)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static acpi_status acpi_dev_present(acpi_handle handle, u32 lvl_not_used,
 				  void *not_used, void **ret_p)
@@ -206,6 +215,8 @@ static int acpi_bind_one(struct device *dev, acpi_handle handle)
 		goto err;
 
 =======
+=======
+>>>>>>> v3.18
 #define FIND_CHILD_MIN_SCORE	1
 #define FIND_CHILD_MAX_SCORE	2
 
@@ -308,6 +319,9 @@ int acpi_bind_one(struct device *dev, struct acpi_device *acpi_dev)
 
 	get_device(&acpi_dev->dev);
 	get_device(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	physical_node = kzalloc(sizeof(*physical_node), GFP_KERNEL);
 	if (!physical_node) {
@@ -317,6 +331,7 @@ int acpi_bind_one(struct device *dev, struct acpi_device *acpi_dev)
 
 	mutex_lock(&acpi_dev->physical_node_lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Sanity check. */
 	list_for_each_entry(pn, &acpi_dev->physical_node_list, node)
@@ -354,6 +369,8 @@ int acpi_bind_one(struct device *dev, struct acpi_device *acpi_dev)
 	retval = sysfs_create_link(&dev->kobj, &acpi_dev->dev.kobj,
 		"firmware_node");
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Keep the list sorted by node_id so that the IDs of removed nodes can
 	 * be recycled easily.
@@ -402,6 +419,9 @@ int acpi_bind_one(struct device *dev, struct acpi_device *acpi_dev)
 			retval);
 
 	mutex_unlock(&acpi_dev->physical_node_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (acpi_dev->wakeup.flags.valid)
@@ -410,6 +430,7 @@ int acpi_bind_one(struct device *dev, struct acpi_device *acpi_dev)
 	return 0;
 
  err:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ACPI_HANDLE_SET(dev, NULL);
 	put_device(dev);
@@ -471,6 +492,8 @@ err:
 	return -EINVAL;
 }
 =======
+=======
+>>>>>>> v3.18
 	ACPI_COMPANION_SET(dev, NULL);
 	put_device(dev);
 	put_device(&acpi_dev->dev);
@@ -510,13 +533,20 @@ int acpi_unbind_one(struct device *dev)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(acpi_unbind_one);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int acpi_platform_notify(struct device *dev)
 {
 	struct acpi_bus_type *type = acpi_get_bus_type(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_handle handle;
+=======
+	struct acpi_device *adev;
+>>>>>>> v3.18
 =======
 	struct acpi_device *adev;
 >>>>>>> v3.18
@@ -524,6 +554,7 @@ static int acpi_platform_notify(struct device *dev)
 
 	ret = acpi_bind_one(dev, NULL);
 	if (ret && type) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = type->find_device(dev, &handle);
 		if (ret) {
@@ -538,6 +569,8 @@ static int acpi_platform_notify(struct device *dev)
 	if (type && type->setup)
 		type->setup(dev);
 =======
+=======
+>>>>>>> v3.18
 		struct acpi_device *adev;
 
 		adev = type->find_companion(dev);
@@ -558,6 +591,9 @@ static int acpi_platform_notify(struct device *dev)
 		type->setup(dev);
 	else if (adev->handler && adev->handler->bind)
 		adev->handler->bind(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  out:
@@ -578,12 +614,15 @@ static int acpi_platform_notify(struct device *dev)
 static int acpi_platform_notify_remove(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_bus_type *type;
 
 	type = acpi_get_bus_type(dev);
 	if (type && type->cleanup)
 		type->cleanup(dev);
 =======
+=======
+>>>>>>> v3.18
 	struct acpi_device *adev = ACPI_COMPANION(dev);
 	struct acpi_bus_type *type;
 
@@ -595,6 +634,9 @@ static int acpi_platform_notify_remove(struct device *dev)
 		type->cleanup(dev);
 	else if (adev->handler && adev->handler->unbind)
 		adev->handler->unbind(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	acpi_unbind_one(dev);

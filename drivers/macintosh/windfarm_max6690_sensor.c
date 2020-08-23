@@ -96,7 +96,11 @@ static int wf_max6690_probe(struct i2c_client *client,
 
 	max->i2c = client;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max->sens.name = (char *)name; /* XXX fix constness in structure */
+=======
+	max->sens.name = name;
+>>>>>>> v3.18
 =======
 	max->sens.name = name;
 >>>>>>> v3.18

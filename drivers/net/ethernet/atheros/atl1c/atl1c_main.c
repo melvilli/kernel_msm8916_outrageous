@@ -35,7 +35,11 @@ char atl1c_driver_version[] = ATL1C_DRV_VERSION;
  *   Class, Class Mask, private data (not used) }
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(atl1c_pci_tbl) = {
+=======
+static const struct pci_device_id atl1c_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id atl1c_pci_tbl[] = {
 >>>>>>> v3.18
@@ -150,15 +154,21 @@ static void atl1c_reset_pcie(struct atl1c_hw *hw, u32 flag)
 	 */
 	pos = pci_find_ext_capability(pdev, PCI_EXT_CAP_ID_ERR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(pdev, pos + PCI_ERR_UNCOR_SEVER, &data);
 	data &= ~(PCI_ERR_UNC_DLP | PCI_ERR_UNC_FCP);
 	pci_write_config_dword(pdev, pos + PCI_ERR_UNCOR_SEVER, data);
 =======
+=======
+>>>>>>> v3.18
 	if (pos) {
 		pci_read_config_dword(pdev, pos + PCI_ERR_UNCOR_SEVER, &data);
 		data &= ~(PCI_ERR_UNC_DLP | PCI_ERR_UNC_FCP);
 		pci_write_config_dword(pdev, pos + PCI_ERR_UNCOR_SEVER, data);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* clear error status */
 	pcie_capability_write_word(pdev, PCI_EXP_DEVSTA,
@@ -843,7 +853,11 @@ static int atl1c_sw_init(struct atl1c_adapter *adapter)
 
 static inline void atl1c_clean_buffer(struct pci_dev *pdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct atl1c_buffer *buffer_info, int in_irq)
+=======
+				struct atl1c_buffer *buffer_info)
+>>>>>>> v3.18
 =======
 				struct atl1c_buffer *buffer_info)
 >>>>>>> v3.18
@@ -865,12 +879,17 @@ static inline void atl1c_clean_buffer(struct pci_dev *pdev,
 					buffer_info->length, pci_driection);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (buffer_info->skb) {
 		if (in_irq)
 			dev_kfree_skb_irq(buffer_info->skb);
 		else
 			dev_kfree_skb(buffer_info->skb);
 	}
+=======
+	if (buffer_info->skb)
+		dev_consume_skb_any(buffer_info->skb);
+>>>>>>> v3.18
 =======
 	if (buffer_info->skb)
 		dev_consume_skb_any(buffer_info->skb);
@@ -895,7 +914,11 @@ static void atl1c_clean_tx_ring(struct atl1c_adapter *adapter,
 	for (index = 0; index < ring_count; index++) {
 		buffer_info = &tpd_ring->buffer_info[index];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atl1c_clean_buffer(pdev, buffer_info, 0);
+=======
+		atl1c_clean_buffer(pdev, buffer_info);
+>>>>>>> v3.18
 =======
 		atl1c_clean_buffer(pdev, buffer_info);
 >>>>>>> v3.18
@@ -923,7 +946,11 @@ static void atl1c_clean_rx_ring(struct atl1c_adapter *adapter)
 	for (j = 0; j < rfd_ring->count; j++) {
 		buffer_info = &rfd_ring->buffer_info[j];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atl1c_clean_buffer(pdev, buffer_info, 0);
+=======
+		atl1c_clean_buffer(pdev, buffer_info);
+>>>>>>> v3.18
 =======
 		atl1c_clean_buffer(pdev, buffer_info);
 >>>>>>> v3.18
@@ -1046,6 +1073,7 @@ static int atl1c_setup_ring_resources(struct atl1c_adapter *adapter)
 		8 * 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ring_header->desc = dma_zalloc_coherent(&pdev->dev, ring_header->size,
 						&ring_header->dma, GFP_KERNEL);
 	if (unlikely(!ring_header->desc)) {
@@ -1053,6 +1081,8 @@ static int atl1c_setup_ring_resources(struct atl1c_adapter *adapter)
 		goto err_nomem;
 	}
 =======
+=======
+>>>>>>> v3.18
 	ring_header->desc = pci_alloc_consistent(pdev, ring_header->size,
 				&ring_header->dma);
 	if (unlikely(!ring_header->desc)) {
@@ -1060,6 +1090,9 @@ static int atl1c_setup_ring_resources(struct atl1c_adapter *adapter)
 		goto err_nomem;
 	}
 	memset(ring_header->desc, 0, ring_header->size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* init TPD ring */
 
@@ -1537,8 +1570,11 @@ static struct net_device_stats *atl1c_get_stats(struct net_device *netdev)
 
 	atl1c_update_hw_stats(adapter);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	net_stats->rx_packets = hw_stats->rx_ok;
 	net_stats->tx_packets = hw_stats->tx_ok;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	net_stats->rx_bytes   = hw_stats->rx_byte_cnt;
@@ -1546,12 +1582,15 @@ static struct net_device_stats *atl1c_get_stats(struct net_device *netdev)
 	net_stats->multicast  = hw_stats->rx_mcast;
 	net_stats->collisions = hw_stats->tx_1_col +
 <<<<<<< HEAD
+<<<<<<< HEAD
 				hw_stats->tx_2_col * 2 +
 				hw_stats->tx_late_col + hw_stats->tx_abort_col;
 	net_stats->rx_errors  = hw_stats->rx_frag + hw_stats->rx_fcs_err +
 				hw_stats->rx_len_err + hw_stats->rx_sz_ov +
 				hw_stats->rx_rrd_ov + hw_stats->rx_align_err;
 =======
+=======
+>>>>>>> v3.18
 				hw_stats->tx_2_col +
 				hw_stats->tx_late_col +
 				hw_stats->tx_abort_col;
@@ -1564,11 +1603,15 @@ static struct net_device_stats *atl1c_get_stats(struct net_device *netdev)
 				hw_stats->rx_align_err +
 				hw_stats->rx_rxf_ov;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	net_stats->rx_fifo_errors   = hw_stats->rx_rxf_ov;
 	net_stats->rx_length_errors = hw_stats->rx_len_err;
 	net_stats->rx_crc_errors    = hw_stats->rx_fcs_err;
 	net_stats->rx_frame_errors  = hw_stats->rx_align_err;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	net_stats->rx_over_errors   = hw_stats->rx_rrd_ov + hw_stats->rx_rxf_ov;
 
@@ -1577,6 +1620,8 @@ static struct net_device_stats *atl1c_get_stats(struct net_device *netdev)
 	net_stats->tx_errors = hw_stats->tx_late_col + hw_stats->tx_abort_col +
 				hw_stats->tx_underrun + hw_stats->tx_trunc;
 =======
+=======
+>>>>>>> v3.18
 	net_stats->rx_dropped       = hw_stats->rx_rrd_ov;
 
 	net_stats->tx_errors = hw_stats->tx_late_col +
@@ -1584,12 +1629,21 @@ static struct net_device_stats *atl1c_get_stats(struct net_device *netdev)
 			       hw_stats->tx_underrun +
 			       hw_stats->tx_trunc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	net_stats->tx_fifo_errors    = hw_stats->tx_underrun;
 	net_stats->tx_aborted_errors = hw_stats->tx_abort_col;
 	net_stats->tx_window_errors  = hw_stats->tx_late_col;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	net_stats->rx_packets = hw_stats->rx_ok + net_stats->rx_errors;
+	net_stats->tx_packets = hw_stats->tx_ok + net_stats->tx_errors;
+
+>>>>>>> v3.18
 =======
 	net_stats->rx_packets = hw_stats->rx_ok + net_stats->rx_errors;
 	net_stats->tx_packets = hw_stats->tx_ok + net_stats->tx_errors;
@@ -1624,7 +1678,11 @@ static bool atl1c_clean_tx_irq(struct atl1c_adapter *adapter,
 	while (next_to_clean != hw_next_to_clean) {
 		buffer_info = &tpd_ring->buffer_info[next_to_clean];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atl1c_clean_buffer(pdev, buffer_info, 1);
+=======
+		atl1c_clean_buffer(pdev, buffer_info);
+>>>>>>> v3.18
 =======
 		atl1c_clean_buffer(pdev, buffer_info);
 >>>>>>> v3.18
@@ -2043,6 +2101,7 @@ static int atl1c_tso_csum(struct atl1c_adapter *adapter,
 {
 	struct pci_dev *pdev = adapter->pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 hdr_len;
 	u32 real_len;
 	unsigned short offload_type;
@@ -2055,6 +2114,8 @@ static int atl1c_tso_csum(struct atl1c_adapter *adapter,
 				return -1;
 		}
 =======
+=======
+>>>>>>> v3.18
 	unsigned short offload_type;
 	u8 hdr_len;
 	u32 real_len;
@@ -2066,6 +2127,9 @@ static int atl1c_tso_csum(struct atl1c_adapter *adapter,
 		if (err < 0)
 			return err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		offload_type = skb_shinfo(skb)->gso_type;
 
@@ -2165,7 +2229,11 @@ static void atl1c_tx_rollback(struct atl1c_adapter *adpt,
 		tpd = ATL1C_TPD_DESC(tpd_ring, index);
 		buffer_info = &tpd_ring->buffer_info[index];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atl1c_clean_buffer(adpt->pdev, buffer_info, 0);
+=======
+		atl1c_clean_buffer(adpt->pdev, buffer_info);
+>>>>>>> v3.18
 =======
 		atl1c_clean_buffer(adpt->pdev, buffer_info);
 >>>>>>> v3.18
@@ -2342,7 +2410,11 @@ static netdev_tx_t atl1c_xmit_frame(struct sk_buff *skb,
 		atl1c_tx_rollback(adapter, tpd, type);
 		spin_unlock_irqrestore(&adapter->tx_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 		dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -2892,6 +2964,7 @@ static struct pci_driver atl1c_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * atl1c_init_module - Driver Registration Routine
  *
@@ -2916,6 +2989,9 @@ static void __exit atl1c_exit_module(void)
 
 module_init(atl1c_init_module);
 module_exit(atl1c_exit_module);
+=======
+module_pci_driver(atl1c_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(atl1c_driver);
 >>>>>>> v3.18

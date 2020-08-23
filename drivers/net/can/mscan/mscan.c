@@ -17,8 +17,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -578,11 +582,14 @@ static int mscan_open(struct net_device *dev)
 	struct mscan_regs __iomem *regs = priv->reg_base;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* common open */
 	ret = open_candev(dev);
 	if (ret)
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 	if (priv->clk_ipg) {
 		ret = clk_prepare_enable(priv->clk_ipg);
 		if (ret)
@@ -598,6 +605,9 @@ static int mscan_open(struct net_device *dev)
 	ret = open_candev(dev);
 	if (ret)
 		goto exit_dis_can_clock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	napi_enable(&priv->napi);
@@ -627,7 +637,10 @@ exit_napi_disable:
 	napi_disable(&priv->napi);
 	close_candev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 exit_dis_can_clock:
 	if (priv->clk_can)
 		clk_disable_unprepare(priv->clk_can);
@@ -635,6 +648,9 @@ exit_dis_ipg_clock:
 	if (priv->clk_ipg)
 		clk_disable_unprepare(priv->clk_ipg);
 exit_retcode:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -654,26 +670,38 @@ static int mscan_close(struct net_device *dev)
 	free_irq(dev->irq, dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (priv->clk_can)
 		clk_disable_unprepare(priv->clk_can);
 	if (priv->clk_ipg)
 		clk_disable_unprepare(priv->clk_ipg);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static const struct net_device_ops mscan_netdev_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
        .ndo_open               = mscan_open,
        .ndo_stop               = mscan_close,
        .ndo_start_xmit         = mscan_start_xmit,
 =======
+=======
+>>>>>>> v3.18
 	.ndo_open	= mscan_open,
 	.ndo_stop	= mscan_close,
 	.ndo_start_xmit	= mscan_start_xmit,
 	.ndo_change_mtu	= can_change_mtu,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -70,11 +70,17 @@ MODULE_PARM_DESC(no_overlay,"allow override overlay default (0 disables, 1 enabl
 		" [some VIA/SIS chipsets are known to have problem with overlay]");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool saa7134_userptr;
 module_param(saa7134_userptr, bool, 0644);
 MODULE_PARM_DESC(saa7134_userptr, "enable page-aligned userptr support");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static unsigned int video_nr[] = {[0 ... (SAA7134_MAXBOARDS - 1)] = UNSET };
 static unsigned int vbi_nr[]   = {[0 ... (SAA7134_MAXBOARDS - 1)] = UNSET };
@@ -164,6 +170,11 @@ static void request_module_async(struct work_struct *work){
 	if (card_is_dvb(dev))
 		request_module("saa7134-dvb");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (card_is_go7007(dev))
+		request_module("saa7134-go7007");
+>>>>>>> v3.18
 =======
 	if (card_is_go7007(dev))
 		request_module("saa7134-go7007");
@@ -216,7 +227,11 @@ int saa7134_buffer_count(unsigned int size, unsigned int count)
 int saa7134_buffer_startpage(struct saa7134_buf *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return saa7134_buffer_pages(buf->vb.bsize) * buf->vb.i;
+=======
+	return saa7134_buffer_pages(vb2_plane_size(&buf->vb2, 0)) * buf->vb2.v4l2_buf.index;
+>>>>>>> v3.18
 =======
 	return saa7134_buffer_pages(vb2_plane_size(&buf->vb2, 0)) * buf->vb2.v4l2_buf.index;
 >>>>>>> v3.18
@@ -226,15 +241,21 @@ unsigned long saa7134_buffer_base(struct saa7134_buf *buf)
 {
 	unsigned long base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct videobuf_dmabuf *dma=videobuf_to_dma(&buf->vb);
 
 	base  = saa7134_buffer_startpage(buf) * 4096;
 	base += dma->sglist[0].offset;
 =======
+=======
+>>>>>>> v3.18
 	struct sg_table *dma = vb2_dma_sg_plane_desc(&buf->vb2, 0);
 
 	base  = saa7134_buffer_startpage(buf) * 4096;
 	base += dma->sgl[0].offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return base;
 }
@@ -261,7 +282,11 @@ int saa7134_pgtable_build(struct pci_dev *pci, struct saa7134_pgtable *pt,
 {
 	__le32        *ptr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int  i,p;
+=======
+	unsigned int  i, p;
+>>>>>>> v3.18
 =======
 	unsigned int  i, p;
 >>>>>>> v3.18
@@ -270,15 +295,21 @@ int saa7134_pgtable_build(struct pci_dev *pci, struct saa7134_pgtable *pt,
 
 	ptr = pt->cpu + startpage;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < length; i++, list++)
 		for (p = 0; p * 4096 < list->length; p++, ptr++)
 			*ptr = cpu_to_le32(sg_dma_address(list) - list->offset);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < length; i++, list = sg_next(list)) {
 		for (p = 0; p * 4096 < list->length; p++, ptr++)
 			*ptr = cpu_to_le32(sg_dma_address(list) +
 						list->offset + p * 4096);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -293,6 +324,7 @@ void saa7134_pgtable_free(struct pci_dev *pci, struct saa7134_pgtable *pt)
 
 /* ------------------------------------------------------------------ */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void saa7134_dma_free(struct videobuf_queue *q,struct saa7134_buf *buf)
 {
@@ -309,11 +341,14 @@ void saa7134_dma_free(struct videobuf_queue *q,struct saa7134_buf *buf)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int saa7134_buffer_queue(struct saa7134_dev *dev,
 			 struct saa7134_dmaqueue *q,
 			 struct saa7134_buf *buf)
 {
 	struct saa7134_buf *next = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	assert_spin_locked(&dev->slock);
@@ -336,6 +371,8 @@ int saa7134_buffer_queue(struct saa7134_dev *dev,
 		buf->vb.state = VIDEOBUF_QUEUED;
 	}
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&dev->slock, flags);
@@ -356,6 +393,9 @@ int saa7134_buffer_queue(struct saa7134_dev *dev,
 		list_add_tail(&buf->entry, &q->queue);
 	}
 	spin_unlock_irqrestore(&dev->slock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -365,6 +405,7 @@ void saa7134_buffer_finish(struct saa7134_dev *dev,
 			   unsigned int state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	assert_spin_locked(&dev->slock);
 	dprintk("buffer_finish %p\n",q->curr);
 
@@ -373,12 +414,17 @@ void saa7134_buffer_finish(struct saa7134_dev *dev,
 	v4l2_get_timestamp(&q->curr->vb.ts);
 	wake_up(&q->curr->vb.done);
 =======
+=======
+>>>>>>> v3.18
 	dprintk("buffer_finish %p\n", q->curr);
 
 	/* finish current buffer */
 	v4l2_get_timestamp(&q->curr->vb2.v4l2_buf.timestamp);
 	q->curr->vb2.v4l2_buf.sequence = q->seq_nr++;
 	vb2_buffer_done(&q->curr->vb2, state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	q->curr = NULL;
 }
@@ -393,6 +439,7 @@ void saa7134_buffer_next(struct saa7134_dev *dev,
 
 	if (!list_empty(&q->queue)) {
 		/* activate next one from queue */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		buf = list_entry(q->queue.next,struct saa7134_buf,vb.queue);
 		dprintk("buffer_next %p [prev=%p/next=%p]\n",
@@ -415,6 +462,8 @@ void saa7134_buffer_next(struct saa7134_dev *dev,
 			if (dev->ts_started)
 				saa7134_ts_stop(dev);
 =======
+=======
+>>>>>>> v3.18
 		buf = list_entry(q->queue.next, struct saa7134_buf, entry);
 		dprintk("buffer_next %p [prev=%p/next=%p]\n",
 			buf, q->queue.prev, q->queue.next);
@@ -430,6 +479,9 @@ void saa7134_buffer_next(struct saa7134_dev *dev,
 		dprintk("buffer_next %p\n", NULL);
 		saa7134_set_dmabits(dev);
 		del_timer(&q->timeout);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -437,17 +489,23 @@ void saa7134_buffer_next(struct saa7134_dev *dev,
 void saa7134_buffer_timeout(unsigned long data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct saa7134_dmaqueue *q = (struct saa7134_dmaqueue*)data;
 	struct saa7134_dev *dev = q->dev;
 	unsigned long flags;
 
 	spin_lock_irqsave(&dev->slock,flags);
 =======
+=======
+>>>>>>> v3.18
 	struct saa7134_dmaqueue *q = (struct saa7134_dmaqueue *)data;
 	struct saa7134_dev *dev = q->dev;
 	unsigned long flags;
 
 	spin_lock_irqsave(&dev->slock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* try to reset the hardware (SWRST) */
@@ -459,6 +517,7 @@ void saa7134_buffer_timeout(unsigned long data)
 	   try to start over with the next one. */
 	if (q->curr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dprintk("timeout on %p\n",q->curr);
 		saa7134_buffer_finish(dev,q,VIDEOBUF_ERROR);
 	}
@@ -467,6 +526,8 @@ void saa7134_buffer_timeout(unsigned long data)
 }
 
 =======
+=======
+>>>>>>> v3.18
 		dprintk("timeout on %p\n", q->curr);
 		saa7134_buffer_finish(dev, q, VB2_BUF_STATE_ERROR);
 	}
@@ -494,6 +555,9 @@ void saa7134_stop_streaming(struct saa7134_dev *dev, struct saa7134_dmaqueue *q)
 }
 EXPORT_SYMBOL_GPL(saa7134_stop_streaming);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* ------------------------------------------------------------------ */
 
@@ -515,6 +579,7 @@ int saa7134_set_dmabits(struct saa7134_dev *dev)
 		irq  |= SAA7134_IRQ1_INTE_RA0_1 |
 			SAA7134_IRQ1_INTE_RA0_0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cap = dev->video_q.curr->vb.field;
 	}
 
@@ -522,11 +587,16 @@ int saa7134_set_dmabits(struct saa7134_dev *dev)
 	if (dev->video_q.curr &&
 	    dev->video_q.curr->fmt->planar) {
 =======
+=======
+>>>>>>> v3.18
 		cap = dev->field;
 	}
 
 	/* video capture -- dma 1+2 (planar modes) */
 	if (dev->video_q.curr && dev->fmt->planar) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ctrl |= SAA7134_MAIN_CTRL_TE4 |
 			SAA7134_MAIN_CTRL_TE5;
@@ -692,15 +762,21 @@ static irqreturn_t saa7134_irq(int irq, void *dev_id)
 
 		if ((report & SAA7134_IRQ_REPORT_DONE_RA2) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    card_has_mpeg(dev))
 			saa7134_irq_ts_done(dev,status);
 =======
+=======
+>>>>>>> v3.18
 		    card_has_mpeg(dev)) {
 			if (dev->mops->irq_ts_done != NULL)
 				dev->mops->irq_ts_done(dev, status);
 			else
 				saa7134_irq_ts_done(dev, status);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (report & SAA7134_IRQ_REPORT_GPIO16) {
@@ -895,6 +971,10 @@ static int saa7134_hwfini(struct saa7134_dev *dev)
 	saa7134_vbi_fini(dev);
 	saa7134_tvaudio_fini(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	saa7134_video_fini(dev);
+>>>>>>> v3.18
 =======
 	saa7134_video_fini(dev);
 >>>>>>> v3.18
@@ -950,10 +1030,15 @@ static struct video_device *vdev_init(struct saa7134_dev *dev,
 	vfd->v4l2_dev  = &dev->v4l2_dev;
 	vfd->release = video_device_release;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vfd->debug   = video_debug;
 	snprintf(vfd->name, sizeof(vfd->name), "%s %s (%s)",
 		 dev->name, type, saa7134_boards[dev->board].name);
 	set_bit(V4L2_FL_USE_FH_PRIO, &vfd->flags);
+=======
+	snprintf(vfd->name, sizeof(vfd->name), "%s %s (%s)",
+		 dev->name, type, saa7134_boards[dev->board].name);
+>>>>>>> v3.18
 =======
 	snprintf(vfd->name, sizeof(vfd->name), "%s %s (%s)",
 		 dev->name, type, saa7134_boards[dev->board].name);
@@ -1145,7 +1230,11 @@ static int saa7134_initdev(struct pci_dev *pci_dev,
 	/* get irq */
 	err = request_irq(pci_dev->irq, saa7134_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  IRQF_SHARED | IRQF_DISABLED, dev->name, dev);
+=======
+			  IRQF_SHARED, dev->name, dev);
+>>>>>>> v3.18
 =======
 			  IRQF_SHARED, dev->name, dev);
 >>>>>>> v3.18
@@ -1165,7 +1254,11 @@ static int saa7134_initdev(struct pci_dev *pci_dev,
 	/* load i2c helpers */
 	if (card_is_empress(dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct v4l2_subdev *sd =
+=======
+		dev->empress_sd =
+>>>>>>> v3.18
 =======
 		dev->empress_sd =
 >>>>>>> v3.18
@@ -1174,8 +1267,13 @@ static int saa7134_initdev(struct pci_dev *pci_dev,
 				saa7134_boards[dev->board].empress_addr, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sd)
 			sd->grp_id = GRP_EMPRESS;
+=======
+		if (dev->empress_sd)
+			dev->empress_sd->grp_id = GRP_EMPRESS;
+>>>>>>> v3.18
 =======
 		if (dev->empress_sd)
 			dev->empress_sd->grp_id = GRP_EMPRESS;
@@ -1212,6 +1310,12 @@ static int saa7134_initdev(struct pci_dev *pci_dev,
 
 	dev->video_dev = vdev_init(dev,&saa7134_video_template,"video");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev->video_dev->ctrl_handler = &dev->ctrl_handler;
+	dev->video_dev->lock = &dev->lock;
+	dev->video_dev->queue = &dev->video_vbq;
+>>>>>>> v3.18
 =======
 	dev->video_dev->ctrl_handler = &dev->ctrl_handler;
 	dev->video_dev->lock = &dev->lock;
@@ -1229,6 +1333,12 @@ static int saa7134_initdev(struct pci_dev *pci_dev,
 
 	dev->vbi_dev = vdev_init(dev, &saa7134_video_template, "vbi");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev->vbi_dev->ctrl_handler = &dev->ctrl_handler;
+	dev->vbi_dev->lock = &dev->lock;
+	dev->vbi_dev->queue = &dev->vbi_vbq;
+>>>>>>> v3.18
 =======
 	dev->vbi_dev->ctrl_handler = &dev->ctrl_handler;
 	dev->vbi_dev->lock = &dev->lock;
@@ -1245,6 +1355,11 @@ static int saa7134_initdev(struct pci_dev *pci_dev,
 	if (card_has_radio(dev)) {
 		dev->radio_dev = vdev_init(dev,&saa7134_radio_template,"radio");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev->radio_dev->ctrl_handler = &dev->radio_ctrl_handler;
+		dev->radio_dev->lock = &dev->lock;
+>>>>>>> v3.18
 =======
 		dev->radio_dev->ctrl_handler = &dev->radio_ctrl_handler;
 		dev->radio_dev->lock = &dev->lock;
@@ -1369,7 +1484,11 @@ static int saa7134_buffer_requeue(struct saa7134_dev *dev,
 	if (!list_empty(&q->queue))
 		next = list_entry(q->queue.next, struct saa7134_buf,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  vb.queue);
+=======
+					  entry);
+>>>>>>> v3.18
 =======
 					  entry);
 >>>>>>> v3.18
@@ -1544,6 +1663,7 @@ EXPORT_SYMBOL(saa7134_pgtable_build);
 EXPORT_SYMBOL(saa7134_pgtable_alloc);
 EXPORT_SYMBOL(saa7134_set_dmabits);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* ----------------------------------------------------------- */
 /*
@@ -1551,5 +1671,7 @@ EXPORT_SYMBOL(saa7134_set_dmabits);
  * c-basic-offset: 8
  * End:
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -30,7 +30,10 @@ struct chsc_async_area {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct chsc_header {
 	__u16 length;
 	__u16 code;
@@ -41,6 +44,9 @@ struct chsc_sync_area {
 	__u8 data[CHSC_SIZE - sizeof(struct chsc_header)];
 } __attribute__ ((packed));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct chsc_response_struct {
 	__u16 length;
@@ -140,6 +146,12 @@ struct chsc_cpd_info {
 #define CHSC_INFO_CPD _IOWR(CHSC_IOCTL_MAGIC, 0x87, struct chsc_cpd_info)
 #define CHSC_INFO_DCAL _IOWR(CHSC_IOCTL_MAGIC, 0x88, struct chsc_dcal)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CHSC_START_SYNC _IOWR(CHSC_IOCTL_MAGIC, 0x89, struct chsc_sync_area)
+#define CHSC_ON_CLOSE_SET _IOWR(CHSC_IOCTL_MAGIC, 0x8a, struct chsc_async_area)
+#define CHSC_ON_CLOSE_REMOVE _IO(CHSC_IOCTL_MAGIC, 0x8b)
+>>>>>>> v3.18
 =======
 #define CHSC_START_SYNC _IOWR(CHSC_IOCTL_MAGIC, 0x89, struct chsc_sync_area)
 #define CHSC_ON_CLOSE_SET _IOWR(CHSC_IOCTL_MAGIC, 0x8a, struct chsc_async_area)

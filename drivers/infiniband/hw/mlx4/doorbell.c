@@ -46,7 +46,10 @@ int mlx4_ib_db_map_user(struct mlx4_ib_ucontext *context, unsigned long virt,
 {
 	struct mlx4_ib_user_db_page *page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ib_umem_chunk *chunk;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int err = 0;
@@ -77,8 +80,12 @@ int mlx4_ib_db_map_user(struct mlx4_ib_ucontext *context, unsigned long virt,
 
 found:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chunk = list_entry(page->umem->chunk_list.next, struct ib_umem_chunk, list);
 	db->dma		= sg_dma_address(chunk->page_list) + (virt & ~PAGE_MASK);
+=======
+	db->dma = sg_dma_address(page->umem->sg_head.sgl) + (virt & ~PAGE_MASK);
+>>>>>>> v3.18
 =======
 	db->dma = sg_dma_address(page->umem->sg_head.sgl) + (virt & ~PAGE_MASK);
 >>>>>>> v3.18

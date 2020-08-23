@@ -205,7 +205,11 @@ typedef struct {
 #define SCP2CHANNEL(scp)		(scp)->device->channel	// to channel
 #define SCP2TARGET(scp)			(scp)->device->id	// to target
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SCP2LUN(scp)			(scp)->device->lun	// to LUN
+=======
+#define SCP2LUN(scp)			(u32)(scp)->device->lun	// to LUN
+>>>>>>> v3.18
 =======
 #define SCP2LUN(scp)			(u32)(scp)->device->lun	// to LUN
 >>>>>>> v3.18

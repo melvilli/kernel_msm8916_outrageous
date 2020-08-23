@@ -20,8 +20,13 @@ struct mm_struct;
 
 struct thread_struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct task_struct *saved_task;
 	struct pt_regs regs;
+=======
+	struct pt_regs regs;
+	struct pt_regs *segv_regs;
+>>>>>>> v3.18
 =======
 	struct pt_regs regs;
 	struct pt_regs *segv_regs;
@@ -31,10 +36,15 @@ struct thread_struct {
 	jmp_buf *fault_catcher;
 	struct task_struct *prev_sched;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long temp_stack;
 	struct arch_thread arch;
 	jmp_buf switch_buf;
 	int mm_count;
+=======
+	struct arch_thread arch;
+	jmp_buf switch_buf;
+>>>>>>> v3.18
 =======
 	struct arch_thread arch;
 	jmp_buf switch_buf;
@@ -63,7 +73,10 @@ struct thread_struct {
 	.fault_addr		= NULL, \
 	.prev_sched		= NULL, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.temp_stack		= 0, \
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.arch			= INIT_ARCH_THREAD, \

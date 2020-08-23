@@ -40,12 +40,18 @@
 #define BCMA_RESET_ST			0x0804
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BCMA_NS_ROM_IOST_BOOT_DEV_MASK	0x0003
 #define BCMA_NS_ROM_IOST_BOOT_DEV_NOR	0x0000
 #define BCMA_NS_ROM_IOST_BOOT_DEV_NAND	0x0001
 #define BCMA_NS_ROM_IOST_BOOT_DEV_ROM	0x0002
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* BCMA PCI config space registers. */
 #define BCMA_PCI_PMCSR			0x44

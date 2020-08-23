@@ -30,7 +30,11 @@
 
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nva3_pll_calc(struct nouveau_clock *clock, struct nvbios_pll *info,
+=======
+nva3_pll_calc(struct nouveau_subdev *subdev, struct nvbios_pll *info,
+>>>>>>> v3.18
 =======
 nva3_pll_calc(struct nouveau_subdev *subdev, struct nvbios_pll *info,
 >>>>>>> v3.18
@@ -50,6 +54,10 @@ nva3_pll_calc(struct nouveau_subdev *subdev, struct nvbios_pll *info,
 	hM = (info->refclk + info->vco1.min_inputfreq) / info->vco1.min_inputfreq;
 	hM = min(hM, (int)info->vco1.max_m);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	lM = min(lM, hM);
+>>>>>>> v3.18
 =======
 	lM = min(lM, hM);
 >>>>>>> v3.18
@@ -59,9 +67,12 @@ nva3_pll_calc(struct nouveau_subdev *subdev, struct nvbios_pll *info,
 		N  = tmp / info->refclk;
 		fN = tmp % info->refclk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!pfN && fN >= info->refclk / 2)
 			N++;
 =======
+=======
+>>>>>>> v3.18
 
 		if (!pfN) {
 			if (fN >= info->refclk / 2)
@@ -71,6 +82,9 @@ nva3_pll_calc(struct nouveau_subdev *subdev, struct nvbios_pll *info,
 				N--;
 			fN = tmp - (N * info->refclk);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (N < info->vco1.min_n)
@@ -87,7 +101,12 @@ nva3_pll_calc(struct nouveau_subdev *subdev, struct nvbios_pll *info,
 
 		if (pfN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*pfN = (((fN << 13) / info->refclk) - 4096) & 0xffff;
+=======
+			*pfN = ((fN << 13) + info->refclk / 2) / info->refclk;
+			*pfN = (*pfN - 4096) & 0xffff;
+>>>>>>> v3.18
 =======
 			*pfN = ((fN << 13) + info->refclk / 2) / info->refclk;
 			*pfN = (*pfN - 4096) & 0xffff;
@@ -98,7 +117,11 @@ nva3_pll_calc(struct nouveau_subdev *subdev, struct nvbios_pll *info,
 
 	if (unlikely(best_err == ~0)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nv_error(clock, "unable to find matching pll values\n");
+=======
+		nv_error(subdev, "unable to find matching pll values\n");
+>>>>>>> v3.18
 =======
 		nv_error(subdev, "unable to find matching pll values\n");
 >>>>>>> v3.18

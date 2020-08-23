@@ -1,5 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2010-2011, The Linux Foundation. All rights reserved.
+=======
+/*
+ * Copyright (c) 2010-2013, The Linux Foundation. All rights reserved.
+>>>>>>> v3.18
 =======
 /*
  * Copyright (c) 2010-2013, The Linux Foundation. All rights reserved.
@@ -13,6 +18,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  */
@@ -34,6 +40,8 @@
 #define TEST_SINGLE_STEP_GET_DEV_DESC	0x0107
 #define TEST_SINGLE_STEP_SET_FEATURE	0x0108
 =======
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/kernel.h>
@@ -50,11 +58,15 @@
 #define TEST_HS_HOST_PORT_SUSPEND_RESUME	0x0106
 #define TEST_SINGLE_STEP_GET_DEV_DESC		0x0107
 #define TEST_SINGLE_STEP_SET_FEATURE		0x0108
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ehset_probe(struct usb_interface *intf,
 		       const struct usb_device_id *id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int status = -1;
 	struct usb_device *dev = interface_to_usbdev(intf);
@@ -84,6 +96,8 @@ static int ehset_probe(struct usb_interface *intf,
 			USB_REQ_SET_FEATURE, USB_RT_PORT, USB_PORT_FEAT_TEST,
 			(4 << 8) | port1, NULL, 0, 1000);
 =======
+=======
+>>>>>>> v3.18
 	int ret = -EINVAL;
 	struct usb_device *dev = interface_to_usbdev(intf);
 	struct usb_device *hub_udev = dev->parent;
@@ -119,11 +133,15 @@ static int ehset_probe(struct usb_interface *intf,
 					USB_PORT_FEAT_TEST,
 					(TEST_PACKET << 8) | portnum,
 					NULL, 0, 1000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case TEST_HS_HOST_PORT_SUSPEND_RESUME:
 		/* Test: wait for 15secs -> suspend -> 15secs delay -> resume */
 		msleep(15 * 1000);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		status = usb_control_msg(hub_udev, usb_sndctrlpipe(hub_udev, 0),
 			USB_REQ_SET_FEATURE, USB_RT_PORT,
@@ -135,6 +153,8 @@ static int ehset_probe(struct usb_interface *intf,
 			USB_REQ_CLEAR_FEATURE, USB_RT_PORT,
 			USB_PORT_FEAT_SUSPEND, port1, NULL, 0, 1000);
 =======
+=======
+>>>>>>> v3.18
 		ret = usb_control_msg(hub_udev, usb_sndctrlpipe(hub_udev, 0),
 					USB_REQ_SET_FEATURE, USB_RT_PORT,
 					USB_PORT_FEAT_SUSPEND, portnum,
@@ -147,11 +167,15 @@ static int ehset_probe(struct usb_interface *intf,
 					USB_REQ_CLEAR_FEATURE, USB_RT_PORT,
 					USB_PORT_FEAT_SUSPEND, portnum,
 					NULL, 0, 1000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case TEST_SINGLE_STEP_GET_DEV_DESC:
 		/* Test: wait for 15secs -> GetDescriptor request */
 		msleep(15 * 1000);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		{
 			struct usb_device_descriptor *buf;
@@ -183,6 +207,8 @@ static int ehset_probe(struct usb_interface *intf,
 
 	return (status < 0) ? status : 0;
 =======
+=======
+>>>>>>> v3.18
 		buf = kmalloc(USB_DT_DEVICE_SIZE, GFP_KERNEL);
 		if (!buf)
 			return -ENOMEM;
@@ -220,6 +246,9 @@ static int ehset_probe(struct usb_interface *intf,
 	}
 
 	return (ret < 0) ? ret : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -228,7 +257,11 @@ static void ehset_disconnect(struct usb_interface *intf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct usb_device_id ehset_id_table[] = {
+=======
+static const struct usb_device_id ehset_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct usb_device_id ehset_id_table[] = {
 >>>>>>> v3.18
@@ -242,7 +275,10 @@ static const struct usb_device_id ehset_id_table[] = {
 	{ }			/* Terminating entry */
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_DEVICE_TABLE(usb, ehset_id_table);
@@ -254,6 +290,7 @@ static struct usb_driver ehset_driver = {
 	.id_table =	ehset_id_table,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init ehset_init(void)
 {
@@ -267,6 +304,9 @@ static void __exit ehset_exit(void)
 
 module_init(ehset_init);
 module_exit(ehset_exit);
+=======
+module_usb_driver(ehset_driver);
+>>>>>>> v3.18
 =======
 module_usb_driver(ehset_driver);
 >>>>>>> v3.18

@@ -24,7 +24,10 @@
 #define ADS117X_FORMATS (SNDRV_PCM_FMTBIT_S16_LE)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_soc_dapm_widget ads117x_dapm_widgets[] = {
 SND_SOC_DAPM_INPUT("Input1"),
 SND_SOC_DAPM_INPUT("Input2"),
@@ -47,6 +50,9 @@ static const struct snd_soc_dapm_route ads117x_dapm_routes[] = {
 	{ "Capture", NULL, "Input8" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct snd_soc_dai_driver ads117x_dai = {
 /* ADC */
@@ -60,14 +66,20 @@ static struct snd_soc_dai_driver ads117x_dai = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct snd_soc_codec_driver soc_codec_dev_ads117x;
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_codec_driver soc_codec_dev_ads117x = {
 	.dapm_widgets = ads117x_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(ads117x_dapm_widgets),
 	.dapm_routes = ads117x_dapm_routes,
 	.num_dapm_routes = ARRAY_SIZE(ads117x_dapm_routes),
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ads117x_probe(struct platform_device *pdev)

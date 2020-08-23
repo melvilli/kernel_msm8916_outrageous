@@ -2,7 +2,11 @@ if CPU_CAVIUM_OCTEON
 
 config CAVIUM_CN63XXP1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Enable CN63XXP1 errata worarounds"
+=======
+	bool "Enable CN63XXP1 errata workarounds"
+>>>>>>> v3.18
 =======
 	bool "Enable CN63XXP1 errata workarounds"
 >>>>>>> v3.18
@@ -14,6 +18,7 @@ config CAVIUM_CN63XXP1
 	  non-CN63XXP1 hardware, so it is recommended to select "n"
 	  unless it is known the workarounds are needed.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config CAVIUM_OCTEON_2ND_KERNEL
 	bool "Build the kernel to be used as a 2nd kernel on the same chip"
@@ -37,6 +42,8 @@ config CAVIUM_OCTEON_HW_FIX_UNALIGNED
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config CAVIUM_OCTEON_CVMSEG_SIZE
 	int "Number of L1 cache lines reserved for CVMSEG memory"
 	range 0 54
@@ -49,7 +56,10 @@ config CAVIUM_OCTEON_CVMSEG_SIZE
 	  between zero and 6192 bytes).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 endif # CPU_CAVIUM_OCTEON
 
 if CAVIUM_OCTEON_SOC
@@ -63,6 +73,9 @@ config CAVIUM_OCTEON_2ND_KERNEL
 	  with this option to be run at the same time as one built without this
 	  option.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CAVIUM_OCTEON_LOCK_L2
 	bool "Lock often used kernel code in the L2"
@@ -117,7 +130,10 @@ config SWIOTLB
 	select NEED_SG_DMA_LENGTH
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config OCTEON_ILM
@@ -130,7 +146,11 @@ config OCTEON_ILM
 	  will be called octeon-ilm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endif # CPU_CAVIUM_OCTEON
+=======
+endif # CAVIUM_OCTEON_SOC
+>>>>>>> v3.18
 =======
 endif # CAVIUM_OCTEON_SOC
 >>>>>>> v3.18

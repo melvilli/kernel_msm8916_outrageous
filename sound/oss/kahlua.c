@@ -179,7 +179,10 @@ static int probe_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 err_out_free:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(hw_config);
@@ -191,7 +194,10 @@ static void remove_one(struct pci_dev *pdev)
 	struct address_info *hw_config = pci_get_drvdata(pdev);
 	sb_dsp_unload(hw_config, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(hw_config);
@@ -206,7 +212,11 @@ MODULE_LICENSE("GPL");
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(id_tbl) = {
+=======
+static const struct pci_device_id id_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id id_tbl[] = {
 >>>>>>> v3.18

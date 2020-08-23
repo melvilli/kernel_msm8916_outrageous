@@ -50,10 +50,15 @@ static const struct nla_policy cttimeout_nla_policy[CTA_TIMEOUT_MAX+1] = {
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 ctnl_timeout_parse_policy(struct ctnl_timeout *timeout,
 			  struct nf_conntrack_l4proto *l4proto,
 			  struct net *net,
 			  const struct nlattr *attr)
+=======
+ctnl_timeout_parse_policy(void *timeouts, struct nf_conntrack_l4proto *l4proto,
+			  struct net *net, const struct nlattr *attr)
+>>>>>>> v3.18
 =======
 ctnl_timeout_parse_policy(void *timeouts, struct nf_conntrack_l4proto *l4proto,
 			  struct net *net, const struct nlattr *attr)
@@ -65,18 +70,24 @@ ctnl_timeout_parse_policy(void *timeouts, struct nf_conntrack_l4proto *l4proto,
 		struct nlattr *tb[l4proto->ctnl_timeout.nlattr_max+1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nla_parse_nested(tb, l4proto->ctnl_timeout.nlattr_max,
 				 attr, l4proto->ctnl_timeout.nla_policy);
 
 		ret = l4proto->ctnl_timeout.nlattr_to_obj(tb, net,
 							  &timeout->data);
 =======
+=======
+>>>>>>> v3.18
 		ret = nla_parse_nested(tb, l4proto->ctnl_timeout.nlattr_max,
 				       attr, l4proto->ctnl_timeout.nla_policy);
 		if (ret < 0)
 			return ret;
 
 		ret = l4proto->ctnl_timeout.nlattr_to_obj(tb, net, timeouts);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return ret;
@@ -136,7 +147,12 @@ cttimeout_new_timeout(struct sock *ctnl, struct sk_buff *skb,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = ctnl_timeout_parse_policy(matching, l4proto, net,
+=======
+			ret = ctnl_timeout_parse_policy(&matching->data,
+							l4proto, net,
+>>>>>>> v3.18
 =======
 			ret = ctnl_timeout_parse_policy(&matching->data,
 							l4proto, net,
@@ -156,7 +172,11 @@ cttimeout_new_timeout(struct sock *ctnl, struct sk_buff *skb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ctnl_timeout_parse_policy(timeout, l4proto, net,
+=======
+	ret = ctnl_timeout_parse_policy(&timeout->data, l4proto, net,
+>>>>>>> v3.18
 =======
 	ret = ctnl_timeout_parse_policy(&timeout->data, l4proto, net,
 >>>>>>> v3.18
@@ -364,7 +384,10 @@ cttimeout_del_timeout(struct sock *ctnl, struct sk_buff *skb,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 cttimeout_default_set(struct sock *ctnl, struct sk_buff *skb,
 		      const struct nlmsghdr *nlh,
@@ -506,6 +529,9 @@ err:
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_NF_CONNTRACK_TIMEOUT
 static struct ctnl_timeout *ctnl_timeout_find_get(const char *name)
@@ -550,13 +576,19 @@ static const struct nfnl_callback cttimeout_cb[IPCTNL_MSG_TIMEOUT_MAX] = {
 					    .attr_count = CTA_TIMEOUT_MAX,
 					    .policy = cttimeout_nla_policy },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[IPCTNL_MSG_TIMEOUT_DEFAULT_SET]= { .call = cttimeout_default_set,
 					    .attr_count = CTA_TIMEOUT_MAX,
 					    .policy = cttimeout_nla_policy },
 	[IPCTNL_MSG_TIMEOUT_DEFAULT_GET]= { .call = cttimeout_default_get,
 					    .attr_count = CTA_TIMEOUT_MAX,
 					    .policy = cttimeout_nla_policy },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -608,7 +640,10 @@ static void __exit cttimeout_exit(void)
 	RCU_INIT_POINTER(nf_ct_timeout_find_get_hook, NULL);
 	RCU_INIT_POINTER(nf_ct_timeout_put_hook, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	synchronize_rcu();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* CONFIG_NF_CONNTRACK_TIMEOUT */

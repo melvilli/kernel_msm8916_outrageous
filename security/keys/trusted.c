@@ -754,7 +754,11 @@ static int getoptions(char *c, struct trusted_key_payload *pay,
 			break;
 		case Opt_keyhandle:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			res = strict_strtoul(args[0].from, 16, &handle);
+=======
+			res = kstrtoul(args[0].from, 16, &handle);
+>>>>>>> v3.18
 =======
 			res = kstrtoul(args[0].from, 16, &handle);
 >>>>>>> v3.18
@@ -787,7 +791,11 @@ static int getoptions(char *c, struct trusted_key_payload *pay,
 			break;
 		case Opt_pcrlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			res = strict_strtoul(args[0].from, 10, &lock);
+=======
+			res = kstrtoul(args[0].from, 10, &lock);
+>>>>>>> v3.18
 =======
 			res = kstrtoul(args[0].from, 10, &lock);
 >>>>>>> v3.18
@@ -829,7 +837,11 @@ static int datablob_parse(char *datablob, struct trusted_key_payload *p,
 		if (!c)
 			return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = strict_strtol(c, 10, &keylen);
+=======
+		ret = kstrtol(c, 10, &keylen);
+>>>>>>> v3.18
 =======
 		ret = kstrtol(c, 10, &keylen);
 >>>>>>> v3.18
@@ -997,7 +1009,11 @@ static void trusted_rcu_free(struct rcu_head *rcu)
 static int trusted_update(struct key *key, struct key_preparsed_payload *prep)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct trusted_key_payload *p;
+=======
+	struct trusted_key_payload *p = key->payload.data;
+>>>>>>> v3.18
 =======
 	struct trusted_key_payload *p = key->payload.data;
 >>>>>>> v3.18
@@ -1008,9 +1024,12 @@ static int trusted_update(struct key *key, struct key_preparsed_payload *prep)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(KEY_FLAG_NEGATIVE, &key->flags))
 		return -ENOKEY;
 	p = key->payload.data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!p->migratable)
@@ -1119,7 +1138,10 @@ struct key_type key_type_trusted = {
 	.instantiate = trusted_instantiate,
 	.update = trusted_update,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.match = user_match,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.destroy = trusted_destroy,

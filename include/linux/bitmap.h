@@ -46,7 +46,10 @@
  * bitmap_clear(dst, pos, nbits)		Clear specified bit area
  * bitmap_find_next_zero_area(buf, len, pos, n, mask)	Find bit free area
 <<<<<<< HEAD
+<<<<<<< HEAD
  * bitmap_find_next_zero_area_off(buf, len, pos, n, mask)	as above
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * bitmap_shift_right(dst, src, n, nbits)	*dst = *src >> n
@@ -93,6 +96,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int __bitmap_empty(const unsigned long *bitmap, int bits);
 extern int __bitmap_full(const unsigned long *bitmap, int bits);
 extern int __bitmap_equal(const unsigned long *bitmap1,
@@ -100,18 +104,24 @@ extern int __bitmap_equal(const unsigned long *bitmap1,
 extern void __bitmap_complement(unsigned long *dst, const unsigned long *src,
 			int bits);
 =======
+=======
+>>>>>>> v3.18
 extern int __bitmap_empty(const unsigned long *bitmap, unsigned int nbits);
 extern int __bitmap_full(const unsigned long *bitmap, unsigned int nbits);
 extern int __bitmap_equal(const unsigned long *bitmap1,
 			  const unsigned long *bitmap2, unsigned int nbits);
 extern void __bitmap_complement(unsigned long *dst, const unsigned long *src,
 			unsigned int nbits);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void __bitmap_shift_right(unsigned long *dst,
                         const unsigned long *src, int shift, int bits);
 extern void __bitmap_shift_left(unsigned long *dst,
                         const unsigned long *src, int shift, int bits);
 extern int __bitmap_and(unsigned long *dst, const unsigned long *bitmap1,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			const unsigned long *bitmap2, int bits);
 extern void __bitmap_or(unsigned long *dst, const unsigned long *bitmap1,
@@ -147,6 +157,8 @@ bitmap_find_next_zero_area(unsigned long *map,
 					      align_mask, 0);
 }
 =======
+=======
+>>>>>>> v3.18
 			const unsigned long *bitmap2, unsigned int nbits);
 extern void __bitmap_or(unsigned long *dst, const unsigned long *bitmap1,
 			const unsigned long *bitmap2, unsigned int nbits);
@@ -167,6 +179,9 @@ extern unsigned long bitmap_find_next_zero_area(unsigned long *map,
 					 unsigned long start,
 					 unsigned int nr,
 					 unsigned long align_mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int bitmap_scnprintf(char *buf, unsigned int len,
@@ -190,9 +205,15 @@ extern void bitmap_onto(unsigned long *dst, const unsigned long *orig,
 extern void bitmap_fold(unsigned long *dst, const unsigned long *orig,
 		int sz, int bits);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int bitmap_find_free_region(unsigned long *bitmap, int bits, int order);
 extern void bitmap_release_region(unsigned long *bitmap, int pos, int order);
 extern int bitmap_allocate_region(unsigned long *bitmap, int pos, int order);
+=======
+extern int bitmap_find_free_region(unsigned long *bitmap, unsigned int bits, int order);
+extern void bitmap_release_region(unsigned long *bitmap, unsigned int pos, int order);
+extern int bitmap_allocate_region(unsigned long *bitmap, unsigned int pos, int order);
+>>>>>>> v3.18
 =======
 extern int bitmap_find_free_region(unsigned long *bitmap, unsigned int bits, int order);
 extern void bitmap_release_region(unsigned long *bitmap, unsigned int pos, int order);
@@ -244,22 +265,32 @@ static inline void bitmap_copy(unsigned long *dst, const unsigned long *src,
 
 static inline int bitmap_and(unsigned long *dst, const unsigned long *src1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			const unsigned long *src2, int nbits)
 {
 	if (small_const_nbits(nbits))
 		return (*dst = *src1 & *src2) != 0;
 =======
+=======
+>>>>>>> v3.18
 			const unsigned long *src2, unsigned int nbits)
 {
 	if (small_const_nbits(nbits))
 		return (*dst = *src1 & *src2 & BITMAP_LAST_WORD_MASK(nbits)) != 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return __bitmap_and(dst, src1, src2, nbits);
 }
 
 static inline void bitmap_or(unsigned long *dst, const unsigned long *src1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			const unsigned long *src2, int nbits)
+=======
+			const unsigned long *src2, unsigned int nbits)
+>>>>>>> v3.18
 =======
 			const unsigned long *src2, unsigned int nbits)
 >>>>>>> v3.18
@@ -272,7 +303,11 @@ static inline void bitmap_or(unsigned long *dst, const unsigned long *src1,
 
 static inline void bitmap_xor(unsigned long *dst, const unsigned long *src1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			const unsigned long *src2, int nbits)
+=======
+			const unsigned long *src2, unsigned int nbits)
+>>>>>>> v3.18
 =======
 			const unsigned long *src2, unsigned int nbits)
 >>>>>>> v3.18
@@ -285,30 +320,42 @@ static inline void bitmap_xor(unsigned long *dst, const unsigned long *src1,
 
 static inline int bitmap_andnot(unsigned long *dst, const unsigned long *src1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			const unsigned long *src2, int nbits)
 {
 	if (small_const_nbits(nbits))
 		return (*dst = *src1 & ~(*src2)) != 0;
 =======
+=======
+>>>>>>> v3.18
 			const unsigned long *src2, unsigned int nbits)
 {
 	if (small_const_nbits(nbits))
 		return (*dst = *src1 & ~(*src2) & BITMAP_LAST_WORD_MASK(nbits)) != 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return __bitmap_andnot(dst, src1, src2, nbits);
 }
 
 static inline void bitmap_complement(unsigned long *dst, const unsigned long *src,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int nbits)
 {
 	if (small_const_nbits(nbits))
 		*dst = ~(*src) & BITMAP_LAST_WORD_MASK(nbits);
 =======
+=======
+>>>>>>> v3.18
 			unsigned int nbits)
 {
 	if (small_const_nbits(nbits))
 		*dst = ~(*src);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		__bitmap_complement(dst, src, nbits);
@@ -316,7 +363,11 @@ static inline void bitmap_complement(unsigned long *dst, const unsigned long *sr
 
 static inline int bitmap_equal(const unsigned long *src1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			const unsigned long *src2, int nbits)
+=======
+			const unsigned long *src2, unsigned int nbits)
+>>>>>>> v3.18
 =======
 			const unsigned long *src2, unsigned int nbits)
 >>>>>>> v3.18
@@ -329,7 +380,11 @@ static inline int bitmap_equal(const unsigned long *src1,
 
 static inline int bitmap_intersects(const unsigned long *src1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			const unsigned long *src2, int nbits)
+=======
+			const unsigned long *src2, unsigned int nbits)
+>>>>>>> v3.18
 =======
 			const unsigned long *src2, unsigned int nbits)
 >>>>>>> v3.18
@@ -342,7 +397,11 @@ static inline int bitmap_intersects(const unsigned long *src1,
 
 static inline int bitmap_subset(const unsigned long *src1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			const unsigned long *src2, int nbits)
+=======
+			const unsigned long *src2, unsigned int nbits)
+>>>>>>> v3.18
 =======
 			const unsigned long *src2, unsigned int nbits)
 >>>>>>> v3.18
@@ -354,7 +413,11 @@ static inline int bitmap_subset(const unsigned long *src1,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int bitmap_empty(const unsigned long *src, int nbits)
+=======
+static inline int bitmap_empty(const unsigned long *src, unsigned nbits)
+>>>>>>> v3.18
 =======
 static inline int bitmap_empty(const unsigned long *src, unsigned nbits)
 >>>>>>> v3.18
@@ -366,7 +429,11 @@ static inline int bitmap_empty(const unsigned long *src, unsigned nbits)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int bitmap_full(const unsigned long *src, int nbits)
+=======
+static inline int bitmap_full(const unsigned long *src, unsigned int nbits)
+>>>>>>> v3.18
 =======
 static inline int bitmap_full(const unsigned long *src, unsigned int nbits)
 >>>>>>> v3.18
@@ -378,7 +445,11 @@ static inline int bitmap_full(const unsigned long *src, unsigned int nbits)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int bitmap_weight(const unsigned long *src, int nbits)
+=======
+static inline int bitmap_weight(const unsigned long *src, unsigned int nbits)
+>>>>>>> v3.18
 =======
 static inline int bitmap_weight(const unsigned long *src, unsigned int nbits)
 >>>>>>> v3.18
@@ -393,7 +464,11 @@ static inline void bitmap_shift_right(unsigned long *dst,
 {
 	if (small_const_nbits(nbits))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*dst = *src >> n;
+=======
+		*dst = (*src & BITMAP_LAST_WORD_MASK(nbits)) >> n;
+>>>>>>> v3.18
 =======
 		*dst = (*src & BITMAP_LAST_WORD_MASK(nbits)) >> n;
 >>>>>>> v3.18

@@ -1156,7 +1156,11 @@ icn_command(isdn_ctrl *c, icn_card *card)
 	ulong flags;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char cbuf[60];
+=======
+	char cbuf[80];
+>>>>>>> v3.18
 =======
 	char cbuf[80];
 >>>>>>> v3.18
@@ -1314,7 +1318,10 @@ icn_command(isdn_ctrl *c, icn_card *card)
 		if ((c->arg & 255) < ICN_BCH) {
 			char *p;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			char dial[50];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			char dcode[4];
@@ -1329,15 +1336,21 @@ icn_command(isdn_ctrl *c, icn_card *card)
 				/* Normal Dial */
 				strcpy(dcode, "CAL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			strcpy(dial, p);
 			sprintf(cbuf, "%02d;D%s_R%s,%02d,%02d,%s\n", (int) (a + 1),
 				dcode, dial, c->parm.setup.si1,
 				c->parm.setup.si2, c->parm.setup.eazmsn);
 =======
+=======
+>>>>>>> v3.18
 			snprintf(cbuf, sizeof(cbuf),
 				 "%02d;D%s_R%s,%02d,%02d,%s\n", (int) (a + 1),
 				 dcode, p, c->parm.setup.si1,
 				 c->parm.setup.si2, c->parm.setup.eazmsn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			i = icn_writecmd(cbuf, strlen(cbuf), 0, card);
 		}
@@ -1595,8 +1608,12 @@ icn_addcard(int port, char *id1, char *id2)
 	if (!(card2 = icn_initcard(port, id2))) {
 		printk(KERN_INFO
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       "icn: (%s) half ICN-4B, port 0x%x added\n",
 		       card2->interface.id, port);
+=======
+		       "icn: (%s) half ICN-4B, port 0x%x added\n", id2, port);
+>>>>>>> v3.18
 =======
 		       "icn: (%s) half ICN-4B, port 0x%x added\n", id2, port);
 >>>>>>> v3.18

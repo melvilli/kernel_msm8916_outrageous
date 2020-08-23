@@ -53,9 +53,15 @@ static DEFINE_MUTEX(profile_flip_mutex);
 int profile_setup(char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static char schedstr[] = "schedule";
 	static char sleepstr[] = "sleep";
 	static char kvmstr[] = "kvm";
+=======
+	static const char schedstr[] = "schedule";
+	static const char sleepstr[] = "sleep";
+	static const char kvmstr[] = "kvm";
+>>>>>>> v3.18
 =======
 	static const char schedstr[] = "schedule";
 	static const char sleepstr[] = "sleep";
@@ -71,6 +77,7 @@ int profile_setup(char *str)
 		if (get_option(&str, &par))
 			prof_shift = par;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO
 			"kernel sleep profiling enabled (shift: %ld)\n",
 			prof_shift);
@@ -78,10 +85,15 @@ int profile_setup(char *str)
 		printk(KERN_WARNING
 			"kernel sleep profiling requires CONFIG_SCHEDSTATS\n");
 =======
+=======
+>>>>>>> v3.18
 		pr_info("kernel sleep profiling enabled (shift: %ld)\n",
 			prof_shift);
 #else
 		pr_warn("kernel sleep profiling requires CONFIG_SCHEDSTATS\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_SCHEDSTATS */
 	} else if (!strncmp(str, schedstr, strlen(schedstr))) {
@@ -91,8 +103,12 @@ int profile_setup(char *str)
 		if (get_option(&str, &par))
 			prof_shift = par;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO
 			"kernel schedule profiling enabled (shift: %ld)\n",
+=======
+		pr_info("kernel schedule profiling enabled (shift: %ld)\n",
+>>>>>>> v3.18
 =======
 		pr_info("kernel schedule profiling enabled (shift: %ld)\n",
 >>>>>>> v3.18
@@ -104,8 +120,12 @@ int profile_setup(char *str)
 		if (get_option(&str, &par))
 			prof_shift = par;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO
 			"kernel KVM profiling enabled (shift: %ld)\n",
+=======
+		pr_info("kernel KVM profiling enabled (shift: %ld)\n",
+>>>>>>> v3.18
 =======
 		pr_info("kernel KVM profiling enabled (shift: %ld)\n",
 >>>>>>> v3.18
@@ -114,7 +134,11 @@ int profile_setup(char *str)
 		prof_shift = par;
 		prof_on = CPU_PROFILING;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "kernel profiling enabled (shift: %ld)\n",
+=======
+		pr_info("kernel profiling enabled (shift: %ld)\n",
+>>>>>>> v3.18
 =======
 		pr_info("kernel profiling enabled (shift: %ld)\n",
 >>>>>>> v3.18
@@ -357,7 +381,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit profile_cpu_callback(struct notifier_block *info,
+=======
+static int profile_cpu_callback(struct notifier_block *info,
+>>>>>>> v3.18
 =======
 static int profile_cpu_callback(struct notifier_block *info,
 >>>>>>> v3.18
@@ -579,7 +607,11 @@ static int create_hash_tables(void)
 
 		page = alloc_pages_exact_node(node,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				GFP_KERNEL | __GFP_ZERO | GFP_THISNODE,
+=======
+				GFP_KERNEL | __GFP_ZERO | __GFP_THISNODE,
+>>>>>>> v3.18
 =======
 				GFP_KERNEL | __GFP_ZERO | __GFP_THISNODE,
 >>>>>>> v3.18
@@ -590,7 +622,11 @@ static int create_hash_tables(void)
 				= (struct profile_hit *)page_address(page);
 		page = alloc_pages_exact_node(node,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				GFP_KERNEL | __GFP_ZERO | GFP_THISNODE,
+=======
+				GFP_KERNEL | __GFP_ZERO | __GFP_THISNODE,
+>>>>>>> v3.18
 =======
 				GFP_KERNEL | __GFP_ZERO | __GFP_THISNODE,
 >>>>>>> v3.18
@@ -652,7 +688,11 @@ out:
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(create_proc_profile);
+=======
+subsys_initcall(create_proc_profile);
+>>>>>>> v3.18
 =======
 subsys_initcall(create_proc_profile);
 >>>>>>> v3.18

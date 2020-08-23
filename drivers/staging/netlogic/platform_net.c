@@ -73,6 +73,7 @@ static u32 xlr_gmac_irqs[] = { PIC_GMAC_0_IRQ, PIC_GMAC_1_IRQ,
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct xlr_net_data ndata[MAX_NUM_GMAC];
 static struct resource xlr_net_res[8][2];
 static struct platform_device xlr_net_dev[8];
@@ -116,6 +117,8 @@ static void net_device_init(int id, struct resource *res, int offset, int irq)
 	xlr_net_dev[id].resource = res;
 	xlr_net_dev[id].dev.platform_data = &ndata[id];
 =======
+=======
+>>>>>>> v3.18
 static struct resource xlr_net0_res[8];
 static struct resource xlr_net1_res[8];
 static u32 __iomem *gmac4_addr;
@@ -172,12 +175,16 @@ static struct platform_device *gmac_controller2_init(void *gmac0_addr)
 	xlr_net_dev1.num_resources = 8;
 
 	return &xlr_net_dev1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void xls_gmac_init(void)
 {
 	int mac;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	gmac4_addr = ioremap(CPHYSADDR(
@@ -186,6 +193,8 @@ static void xls_gmac_init(void)
 	gpio_addr = ioremap(CPHYSADDR(
 		nlm_mmio_base(NETLOGIC_IO_GPIO_OFFSET)), 0xfff);
 =======
+=======
+>>>>>>> v3.18
 	struct platform_device *xlr_net_dev1;
 	void __iomem *gmac0_addr = ioremap(CPHYSADDR(
 		nlm_mmio_base(NETLOGIC_IO_GMAC_0_OFFSET)), 0xfff);
@@ -212,11 +221,15 @@ static void xls_gmac_init(void)
 	ndata0.cpu_mask = nlm_current_node()->coremask;
 
 	xlr_net_dev0.resource = xlr_net0_res;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (nlm_prom_info.board_major_version) {
 	case 12:
 		/* first block RGMII or XAUI, use RGMII */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		config_mac(&ndata[0],
 			PHY_INTERFACE_MODE_RGMII,
@@ -232,6 +245,8 @@ static void xls_gmac_init(void)
 				xlr_gmac_irqs[0]);
 		platform_device_register(&xlr_net_dev[0]);
 =======
+=======
+>>>>>>> v3.18
 		ndata0.phy_interface = PHY_INTERFACE_MODE_RGMII,
 		ndata0.tx_stnid[0] = FMN_STNID_GMAC0_TX0;
 		ndata0.phy_addr[0] = 0;
@@ -241,12 +256,16 @@ static void xls_gmac_init(void)
 		xlr_resource_init(&xlr_net0_res[0], xlr_gmac_offsets[0],
 				xlr_gmac_irqs[0]);
 		platform_device_register(&xlr_net_dev0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* second block is XAUI, not supported yet */
 		break;
 	default:
 		/* default XLS config, all ports SGMII */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for (mac = 0; mac < 4; mac++) {
 			config_mac(&ndata[mac],
@@ -284,6 +303,8 @@ static void xls_gmac_init(void)
 			platform_device_register(&xlr_net_dev[mac]);
 		}
 =======
+=======
+>>>>>>> v3.18
 		ndata0.phy_interface = PHY_INTERFACE_MODE_SGMII;
 		for (mac = 0; mac < 4; mac++) {
 			ndata0.tx_stnid[mac] = FMN_STNID_GMAC0_TX0 + mac;
@@ -298,6 +319,9 @@ static void xls_gmac_init(void)
 
 		xlr_net_dev1 = gmac_controller2_init(gmac0_addr);
 		platform_device_register(xlr_net_dev1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -307,6 +331,7 @@ static void xlr_gmac_init(void)
 	int mac;
 
 	/* assume all GMACs for now */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (mac = 0; mac < MAX_NUM_XLR_GMAC; mac++) {
 		config_mac(&ndata[mac],
@@ -324,6 +349,8 @@ static void xlr_gmac_init(void)
 		platform_device_register(&xlr_net_dev[mac]);
 	}
 =======
+=======
+>>>>>>> v3.18
 	static struct xlr_net_data ndata0 = {
 		.phy_interface	= PHY_INTERFACE_MODE_RGMII,
 		.serdes_addr	= NULL,
@@ -355,15 +382,21 @@ static void xlr_gmac_init(void)
 	xlr_net_dev0.resource = xlr_net0_res;
 
 	platform_device_register(&xlr_net_dev0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int __init xlr_net_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gmac0_addr = ioremap(CPHYSADDR(
 		nlm_mmio_base(NETLOGIC_IO_GMAC_0_OFFSET)), 0xfff);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (nlm_chip_is_xls())

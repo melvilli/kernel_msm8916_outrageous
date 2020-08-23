@@ -3,6 +3,7 @@
 
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/percpu.h>
 #include <linux/vtime.h>
 #include <asm/ptrace.h>
@@ -61,6 +62,8 @@ extern void guest_enter(void);
 extern void guest_exit(void);
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/vtime.h>
 #include <linux/context_tracking_state.h>
 #include <asm/ptrace.h>
@@ -86,20 +89,29 @@ static inline void user_exit(void)
 		context_tracking_user_exit();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline enum ctx_state exception_enter(void)
 {
 	enum ctx_state prev_ctx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prev_ctx = this_cpu_read(context_tracking.state);
 	user_exit();
 =======
+=======
+>>>>>>> v3.18
 	if (!context_tracking_is_enabled())
 		return 0;
 
 	prev_ctx = this_cpu_read(context_tracking.state);
 	context_tracking_user_exit();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return prev_ctx;
@@ -107,6 +119,7 @@ static inline enum ctx_state exception_enter(void)
 
 static inline void exception_exit(enum ctx_state prev_ctx)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (prev_ctx == IN_USER)
 		user_enter();
@@ -123,6 +136,8 @@ static inline void guest_enter(void)
 {
 	__guest_enter();
 =======
+=======
+>>>>>>> v3.18
 	if (context_tracking_is_enabled()) {
 		if (prev_ctx == IN_USER)
 			context_tracking_user_enter();
@@ -159,11 +174,15 @@ static inline void guest_enter(void)
 		vtime_guest_enter(current);
 	else
 		current->flags |= PF_VCPU;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline void guest_exit(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__guest_exit();
 }
@@ -174,6 +193,8 @@ static inline void context_tracking_task_switch(struct task_struct *prev,
 						struct task_struct *next) { }
 #endif /* !CONFIG_CONTEXT_TRACKING */
 =======
+=======
+>>>>>>> v3.18
 	if (vtime_accounting_enabled())
 		vtime_guest_exit(current);
 	else
@@ -199,6 +220,9 @@ static inline void guest_exit(void)
 	current->flags &= ~PF_VCPU;
 }
 #endif /* CONFIG_VIRT_CPU_ACCOUNTING_GEN */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

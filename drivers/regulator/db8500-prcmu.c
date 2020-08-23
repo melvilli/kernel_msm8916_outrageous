@@ -264,6 +264,11 @@ dbx500_regulator_info[DB8500_NUM_REGULATORS] = {
 			.type	= REGULATOR_VOLTAGE,
 			.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			.fixed_uV = 1800000,
+			.n_voltages = 1,
+>>>>>>> v3.18
 =======
 			.fixed_uV = 1800000,
 			.n_voltages = 1,
@@ -437,7 +442,11 @@ static int db8500_regulator_register(struct platform_device *pdev,
 
 	/* register with the regulator framework */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->rdev = regulator_register(&info->desc, &config);
+=======
+	info->rdev = devm_regulator_register(&pdev->dev, &info->desc, &config);
+>>>>>>> v3.18
 =======
 	info->rdev = devm_regulator_register(&pdev->dev, &info->desc, &config);
 >>>>>>> v3.18
@@ -446,12 +455,15 @@ static int db8500_regulator_register(struct platform_device *pdev,
 		dev_err(&pdev->dev, "failed to register %s: err %i\n",
 			info->desc.name, err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* if failing, unregister all earlier regulators */
 		while (--id >= 0) {
 			info = &dbx500_regulator_info[id];
 			regulator_unregister(info->rdev);
 		}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -543,6 +555,7 @@ static int db8500_regulator_probe(struct platform_device *pdev)
 static int db8500_regulator_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 
 	ux500_regulator_debug_exit();
@@ -557,6 +570,10 @@ static int db8500_regulator_remove(struct platform_device *pdev)
 		regulator_unregister(info->rdev);
 	}
 
+=======
+	ux500_regulator_debug_exit();
+
+>>>>>>> v3.18
 =======
 	ux500_regulator_debug_exit();
 

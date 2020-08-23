@@ -25,7 +25,11 @@ struct fsl_usb2_dev_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct fsl_usb2_dev_data dr_mode_data[] = {
+=======
+static struct fsl_usb2_dev_data dr_mode_data[] = {
+>>>>>>> v3.18
 =======
 static struct fsl_usb2_dev_data dr_mode_data[] = {
 >>>>>>> v3.18
@@ -47,7 +51,11 @@ static struct fsl_usb2_dev_data dr_mode_data[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct fsl_usb2_dev_data *get_dr_mode_data(struct device_node *np)
+=======
+static struct fsl_usb2_dev_data *get_dr_mode_data(struct device_node *np)
+>>>>>>> v3.18
 =======
 static struct fsl_usb2_dev_data *get_dr_mode_data(struct device_node *np)
 >>>>>>> v3.18
@@ -84,7 +92,11 @@ static enum fsl_usb2_phy_modes determine_usb_phy(const char *phy_type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct platform_device *fsl_usb2_device_register(
+=======
+static struct platform_device *fsl_usb2_device_register(
+>>>>>>> v3.18
 =======
 static struct platform_device *fsl_usb2_device_register(
 >>>>>>> v3.18
@@ -271,6 +283,7 @@ static int fsl_usb2_mph_dr_of_remove(struct platform_device *ofdev)
 int fsl_usb2_mpc5121_init(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_usb2_platform_data *pdata = pdev->dev.platform_data;
 	struct clk *clk;
 	char clk_name[10];
@@ -287,25 +300,36 @@ int fsl_usb2_mpc5121_init(struct platform_device *pdev)
 	snprintf(clk_name, sizeof(clk_name), "usb%d_clk", clk_num);
 	clk = clk_get(&pdev->dev, clk_name);
 =======
+=======
+>>>>>>> v3.18
 	struct fsl_usb2_platform_data *pdata = dev_get_platdata(&pdev->dev);
 	struct clk *clk;
 	int err;
 
 	clk = devm_clk_get(pdev->dev.parent, "ipg");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(clk)) {
 		dev_err(&pdev->dev, "failed to get clk\n");
 		return PTR_ERR(clk);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	clk_enable(clk);
 =======
+=======
+>>>>>>> v3.18
 	err = clk_prepare_enable(clk);
 	if (err) {
 		dev_err(&pdev->dev, "failed to enable clk\n");
 		return err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pdata->clk = clk;
 
@@ -327,6 +351,7 @@ int fsl_usb2_mpc5121_init(struct platform_device *pdev)
 static void fsl_usb2_mpc5121_exit(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct fsl_usb2_platform_data *pdata = pdev->dev.platform_data;
 
 	pdata->regs = NULL;
@@ -336,12 +361,17 @@ static void fsl_usb2_mpc5121_exit(struct platform_device *pdev)
 		clk_put(pdata->clk);
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct fsl_usb2_platform_data *pdata = dev_get_platdata(&pdev->dev);
 
 	pdata->regs = NULL;
 
 	if (pdata->clk)
 		clk_disable_unprepare(pdata->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

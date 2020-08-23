@@ -378,10 +378,13 @@ static int qset_fill_page_list(struct whc *whc, struct whc_std *std, gfp_t mem_f
 		return -ENOMEM;
 	std->dma_addr = dma_map_single(whc->wusbhc.dev, std->pl_virt, pl_len, DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dma_mapping_error(whc->wusbhc.dev, std->dma_addr)) {
 		kfree(std->pl_virt);
 		return -EFAULT;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

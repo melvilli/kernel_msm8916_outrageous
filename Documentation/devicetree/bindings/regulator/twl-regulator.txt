@@ -19,6 +19,7 @@ For twl6030 regulators/LDOs
   - "ti,twl6030-vdd2" for VDD2 SMPS
   - "ti,twl6030-vdd3" for VDD3 SMPS
 <<<<<<< HEAD
+<<<<<<< HEAD
 For twl6025 regulators/LDOs
 - compatible:
   - "ti,twl6025-ldo1" for LDO1 LDO
@@ -34,6 +35,8 @@ For twl6025 regulators/LDOs
   - "ti,twl6025-smps4" for SMPS4 SMPS
   - "ti,twl6025-vio" for VIO SMPS
 =======
+=======
+>>>>>>> v3.18
 For twl6032 regulators/LDOs
 - compatible:
   - "ti,twl6032-ldo1" for LDO1 LDO
@@ -48,6 +51,9 @@ For twl6032 regulators/LDOs
   - "ti,twl6032-smps3" for SMPS3 SMPS
   - "ti,twl6032-smps4" for SMPS4 SMPS
   - "ti,twl6032-vio" for VIO SMPS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 For twl4030 regulators/LDOs
 - compatible:

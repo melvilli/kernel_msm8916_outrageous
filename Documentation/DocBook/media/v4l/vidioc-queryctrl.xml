@@ -1,7 +1,11 @@
 <refentry id="vidioc-queryctrl">
   <refmeta>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <refentrytitle>ioctl VIDIOC_QUERYCTRL, VIDIOC_QUERYMENU</refentrytitle>
+=======
+    <refentrytitle>ioctl VIDIOC_QUERYCTRL, VIDIOC_QUERY_EXT_CTRL, VIDIOC_QUERYMENU</refentrytitle>
+>>>>>>> v3.18
 =======
     <refentrytitle>ioctl VIDIOC_QUERYCTRL, VIDIOC_QUERY_EXT_CTRL, VIDIOC_QUERYMENU</refentrytitle>
 >>>>>>> v3.18
@@ -11,6 +15,10 @@
   <refnamediv>
     <refname>VIDIOC_QUERYCTRL</refname>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <refname>VIDIOC_QUERY_EXT_CTRL</refname>
+>>>>>>> v3.18
 =======
     <refname>VIDIOC_QUERY_EXT_CTRL</refname>
 >>>>>>> v3.18
@@ -33,7 +41,10 @@
 	<paramdef>int <parameter>fd</parameter></paramdef>
 	<paramdef>int <parameter>request</parameter></paramdef>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	<paramdef>struct v4l2_query_ext_ctrl *<parameter>argp</parameter></paramdef>
       </funcprototype>
     </funcsynopsis>
@@ -42,6 +53,9 @@
 	<funcdef>int <function>ioctl</function></funcdef>
 	<paramdef>int <parameter>fd</parameter></paramdef>
 	<paramdef>int <parameter>request</parameter></paramdef>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	<paramdef>struct v4l2_querymenu *<parameter>argp</parameter></paramdef>
       </funcprototype>
@@ -62,7 +76,11 @@
 	<term><parameter>request</parameter></term>
 	<listitem>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <para>VIDIOC_QUERYCTRL, VIDIOC_QUERYMENU</para>
+=======
+	  <para>VIDIOC_QUERYCTRL, VIDIOC_QUERY_EXT_CTRL, VIDIOC_QUERYMENU</para>
+>>>>>>> v3.18
 =======
 	  <para>VIDIOC_QUERYCTRL, VIDIOC_QUERY_EXT_CTRL, VIDIOC_QUERYMENU</para>
 >>>>>>> v3.18
@@ -91,7 +109,11 @@ structure. The driver fills the rest of the structure or returns an
 <structfield>id</structfield> values starting from
 <constant>V4L2_CID_BASE</constant> up to and exclusive
 <<<<<<< HEAD
+<<<<<<< HEAD
 <constant>V4L2_CID_BASE_LASTP1</constant>. Drivers may return
+=======
+<constant>V4L2_CID_LASTP1</constant>. Drivers may return
+>>>>>>> v3.18
 =======
 <constant>V4L2_CID_LASTP1</constant>. Drivers may return
 >>>>>>> v3.18
@@ -117,10 +139,13 @@ prematurely end the enumeration).</para></footnote></para>
     <para>When the application ORs <structfield>id</structfield> with
 <constant>V4L2_CTRL_FLAG_NEXT_CTRL</constant> the driver returns the
 <<<<<<< HEAD
+<<<<<<< HEAD
 next supported control, or <errorcode>EINVAL</errorcode> if there is
 none. Drivers which do not support this flag yet always return
 <errorcode>EINVAL</errorcode>.</para>
 =======
+=======
+>>>>>>> v3.18
 next supported non-compound control, or <errorcode>EINVAL</errorcode>
 if there is none. In addition, the <constant>V4L2_CTRL_FLAG_NEXT_COMPOUND</constant>
 flag can be specified to enumerate all compound controls (i.e. controls
@@ -138,6 +163,9 @@ returned in &v4l2-queryctrl; since that structure is full.</para>
     <para><constant>VIDIOC_QUERY_EXT_CTRL</constant> is used in the
 same way as <constant>VIDIOC_QUERYCTRL</constant>, except that the
 <structfield>reserved</structfield> array must be zeroed as well.</para>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     <para>Additional information is required for menu controls: the
@@ -190,6 +218,7 @@ string. This information is intended for the user.</entry>
 	    <entry><structfield>minimum</structfield></entry>
 	    <entry>Minimum value, inclusive. This field gives a lower
 <<<<<<< HEAD
+<<<<<<< HEAD
 bound for <constant>V4L2_CTRL_TYPE_INTEGER</constant> controls and the
 lowest valid index for <constant>V4L2_CTRL_TYPE_MENU</constant> controls.
 For <constant>V4L2_CTRL_TYPE_STRING</constant> controls the minimum value
@@ -201,11 +230,16 @@ signed value.</entry>
 bound for the control. See &v4l2-ctrl-type; how the minimum value is to
 be used for each possible control type. Note that this a signed 32-bit value.</entry>
 >>>>>>> v3.18
+=======
+bound for the control. See &v4l2-ctrl-type; how the minimum value is to
+be used for each possible control type. Note that this a signed 32-bit value.</entry>
+>>>>>>> v3.18
 	  </row>
 	  <row>
 	    <entry>__s32</entry>
 	    <entry><structfield>maximum</structfield></entry>
 	    <entry>Maximum value, inclusive. This field gives an upper
+<<<<<<< HEAD
 <<<<<<< HEAD
 bound for <constant>V4L2_CTRL_TYPE_INTEGER</constant> controls and the
 highest valid index for <constant>V4L2_CTRL_TYPE_MENU</constant>
@@ -220,10 +254,15 @@ signed value.</entry>
 bound for the control. See &v4l2-ctrl-type; how the maximum value is to
 be used for each possible control type. Note that this a signed 32-bit value.</entry>
 >>>>>>> v3.18
+=======
+bound for the control. See &v4l2-ctrl-type; how the maximum value is to
+be used for each possible control type. Note that this a signed 32-bit value.</entry>
+>>>>>>> v3.18
 	  </row>
 	  <row>
 	    <entry>__s32</entry>
 	    <entry><structfield>step</structfield></entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    <entry><para>This field gives a step size for
 <constant>V4L2_CTRL_TYPE_INTEGER</constant> controls. For
@@ -233,10 +272,15 @@ It may not be valid for any other type of control, including
 <constant>V4L2_CTRL_TYPE_INTEGER64</constant>
 controls.</para><para>Generally drivers should not scale hardware
 =======
+=======
+>>>>>>> v3.18
 	    <entry><para>This field gives a step size for the control.
 See &v4l2-ctrl-type; how the step value is to be used for each possible
 control type. Note that this an unsigned 32-bit value.
 </para><para>Generally drivers should not scale hardware
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 control values. It may be necessary for example when the
 <structfield>name</structfield> or <structfield>id</structfield> imply
@@ -257,16 +301,22 @@ be always positive.</para></entry>
 	    <entry>The default value of a
 <constant>V4L2_CTRL_TYPE_INTEGER</constant>,
 <<<<<<< HEAD
+<<<<<<< HEAD
 <constant>_BOOLEAN</constant> or <constant>_MENU</constant> control.
 Not valid for other types of controls. Drivers reset controls only
 when the driver is loaded, not later, in particular not when the
 func-open; is called.</entry>
 =======
+=======
+>>>>>>> v3.18
 <constant>_BOOLEAN</constant>, <constant>_BITMASK</constant>,
 <constant>_MENU</constant> or <constant>_INTEGER_MENU</constant> control.
 Not valid for other types of controls.
 Note that drivers reset controls to their default value only when the
 driver is first loaded, never afterwards.</entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  </row>
 	  <row>
@@ -286,7 +336,10 @@ the array to zero.</entry>
     </table>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
     <table pgwide="1" frame="none" id="v4l2-query-ext-ctrl">
       <title>struct <structname>v4l2_query_ext_ctrl</structname></title>
       <tgroup cols="3">
@@ -407,6 +460,9 @@ must set the array to zero.</entry>
       </tgroup>
     </table>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     <table pgwide="1" frame="none" id="v4l2-querymenu">
       <title>struct <structname>v4l2_querymenu</structname></title>
@@ -543,12 +599,15 @@ Drivers must ignore the value passed with
 	  <row>
 	    <entry><constant>V4L2_CTRL_TYPE_INTEGER64</constant></entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry>n/a</entry>
 	    <entry>n/a</entry>
 	    <entry>n/a</entry>
 	    <entry>A 64-bit integer valued control. Minimum, maximum
 and step size cannot be queried.</entry>
 =======
+=======
+>>>>>>> v3.18
 	    <entry>any</entry>
 	    <entry>any</entry>
 	    <entry>any</entry>
@@ -557,6 +616,9 @@ and step size cannot be queried using <constant>VIDIOC_QUERYCTRL</constant>.
 Only <constant>VIDIOC_QUERY_EXT_CTRL</constant> can retrieve the 64-bit
 min/max/step values, they should be interpreted as n/a when using
 <constant>VIDIOC_QUERYCTRL</constant>.</entry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  </row>
 	  <row>
@@ -586,7 +648,10 @@ Older drivers which do not support this feature return an
 &EINVAL;.</entry>
 	  </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  <row>
 	    <entry><constant>V4L2_CTRL_TYPE_U8</constant></entry>
 	    <entry>any</entry>
@@ -607,6 +672,9 @@ maximum inclusive. The step value indicates the increment between
 values which are actually different on the hardware.
 </entry>
 	  </row>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	</tbody>
       </tgroup>
@@ -680,7 +748,10 @@ the lighting conditions which can change over time. Note that setting a new valu
 a volatile control will have no effect. The new value will just be ignored.</entry>
 	  </row>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  <row>
 	    <entry><constant>V4L2_CTRL_FLAG_HAS_PAYLOAD</constant></entry>
 	    <entry>0x0100</entry>
@@ -689,6 +760,9 @@ using one of the pointer fields of &v4l2-ext-control;. This flag is set for cont
 that are an array, string, or have a compound type. In all cases you have to set a
 pointer to memory containing the payload of the control.</entry>
 	  </row>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	</tbody>
       </tgroup>

@@ -234,8 +234,11 @@ static int blkcipher_walk_next(struct blkcipher_desc *desc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bsize = min(walk->walk_blocksize, n);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	walk->flags &= ~(BLKCIPHER_WALK_SLOW | BLKCIPHER_WALK_COPY |
@@ -251,6 +254,10 @@ static int blkcipher_walk_next(struct blkcipher_desc *desc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bsize = min(walk->walk_blocksize, n);
+>>>>>>> v3.18
 =======
 	bsize = min(walk->walk_blocksize, n);
 >>>>>>> v3.18
@@ -480,7 +487,10 @@ static int crypto_init_blkcipher_ops_async(struct crypto_tfm *tfm)
 	crt->base = __crypto_ablkcipher_cast(tfm);
 	crt->ivsize = alg->ivsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crt->has_setkey = alg->max_keysize;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

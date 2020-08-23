@@ -2,7 +2,11 @@
  * Marvell Wireless LAN device driver: 802.11n
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2011, Marvell International Ltd.
+=======
+ * Copyright (C) 2011-2014, Marvell International Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2011-2014, Marvell International Ltd.
 >>>>>>> v3.18
@@ -39,8 +43,13 @@ int mwifiex_cmd_append_11n_tlv(struct mwifiex_private *priv,
 			       struct mwifiex_bssdescriptor *bss_desc,
 			       u8 **buffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mwifiex_fill_cap_info(struct mwifiex_private *, u8 radio_type,
 			   struct mwifiex_ie_types_htcap *);
+=======
+int mwifiex_fill_cap_info(struct mwifiex_private *, u8 radio_type,
+			  struct ieee80211_ht_cap *);
+>>>>>>> v3.18
 =======
 int mwifiex_fill_cap_info(struct mwifiex_private *, u8 radio_type,
 			  struct ieee80211_ht_cap *);
@@ -73,6 +82,7 @@ int mwifiex_cmd_amsdu_aggr_ctrl(struct host_cmd_ds_command *cmd,
 				struct mwifiex_ds_11n_amsdu_aggr_ctrl *aa_ctrl);
 void mwifiex_del_tx_ba_stream_tbl_by_ra(struct mwifiex_private *priv, u8 *ra);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * This function checks whether AMPDU is allowed or not for a particular TID.
@@ -83,6 +93,8 @@ mwifiex_is_ampdu_allowed(struct mwifiex_private *priv, int tid)
 	return ((priv->aggr_prio_tbl[tid].ampdu_ap != BA_STREAM_NOT_ALLOWED)
 		? true : false);
 =======
+=======
+>>>>>>> v3.18
 u8 mwifiex_get_sec_chan_offset(int chan);
 
 static inline u8
@@ -125,6 +137,9 @@ mwifiex_is_ampdu_allowed(struct mwifiex_private *priv,
 		return (priv->aggr_prio_tbl[tid].ampdu_ap !=
 			BA_STREAM_NOT_ALLOWED) ? true : false;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -220,7 +235,10 @@ static inline int mwifiex_is_sta_11n_enabled(struct mwifiex_private *priv,
 	return node->is_11n_enabled;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline u8
 mwifiex_tdls_peer_11n_enabled(struct mwifiex_private *priv, const u8 *ra)
@@ -231,5 +249,8 @@ mwifiex_tdls_peer_11n_enabled(struct mwifiex_private *priv, const u8 *ra)
 
 	return false;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !_MWIFIEX_11N_H_ */

@@ -23,11 +23,17 @@
 #include <linux/mutex.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
 #include <linux/mei_cl_bus.h>
 
 #include "mei_dev.h"
 #include "hw-me.h"
+=======
+#include <linux/mei_cl_bus.h>
+
+#include "mei_dev.h"
+>>>>>>> v3.18
 =======
 #include <linux/mei_cl_bus.h>
 
@@ -54,7 +60,11 @@ static int mei_cl_device_match(struct device *dev, struct device_driver *drv)
 
 	while (id->name[0]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!strcmp(dev_name(dev), id->name))
+=======
+		if (!strncmp(dev_name(dev), id->name, sizeof(id->name)))
+>>>>>>> v3.18
 =======
 		if (!strncmp(dev_name(dev), id->name, sizeof(id->name)))
 >>>>>>> v3.18
@@ -119,12 +129,15 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *a,
 	return (len >= PAGE_SIZE) ? (PAGE_SIZE - 1) : len;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute mei_cl_dev_attrs[] = {
 	__ATTR_RO(modalias),
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(modalias);
 
 static struct attribute *mei_cl_dev_attrs[] = {
@@ -132,6 +145,9 @@ static struct attribute *mei_cl_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(mei_cl_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int mei_cl_uevent(struct device *dev, struct kobj_uevent_env *env)
@@ -145,7 +161,11 @@ static int mei_cl_uevent(struct device *dev, struct kobj_uevent_env *env)
 static struct bus_type mei_cl_bus_type = {
 	.name		= "mei",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= mei_cl_dev_attrs,
+=======
+	.dev_groups	= mei_cl_dev_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups	= mei_cl_dev_groups,
 >>>>>>> v3.18
@@ -168,15 +188,21 @@ static struct mei_cl *mei_bus_find_mei_cl_by_uuid(struct mei_device *dev,
 						uuid_le uuid)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mei_cl *cl, *next;
 
 	list_for_each_entry_safe(cl, next, &dev->device_list, device_link) {
 		if (!uuid_le_cmp(uuid, cl->device_uuid))
 =======
+=======
+>>>>>>> v3.18
 	struct mei_cl *cl;
 
 	list_for_each_entry(cl, &dev->device_list, device_link) {
 		if (!uuid_le_cmp(uuid, cl->cl_uuid))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return cl;
 	}
@@ -203,7 +229,11 @@ struct mei_cl_device *mei_cl_add_device(struct mei_device *dev,
 	device->ops = ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device->dev.parent = &dev->pdev->dev;
+=======
+	device->dev.parent = dev->dev;
+>>>>>>> v3.18
 =======
 	device->dev.parent = dev->dev;
 >>>>>>> v3.18
@@ -215,7 +245,11 @@ struct mei_cl_device *mei_cl_add_device(struct mei_device *dev,
 	status = device_register(&device->dev);
 	if (status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->pdev->dev, "Failed to register MEI device\n");
+=======
+		dev_err(dev->dev, "Failed to register MEI device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->dev, "Failed to register MEI device\n");
 >>>>>>> v3.18
@@ -268,8 +302,13 @@ static int ___mei_cl_send(struct mei_cl *cl, u8 *buf, size_t length,
 {
 	struct mei_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mei_cl_cb *cb;
 	int id;
+=======
+	struct mei_me_client *me_cl;
+	struct mei_cl_cb *cb;
+>>>>>>> v3.18
 =======
 	struct mei_me_client *me_cl;
 	struct mei_cl_cb *cb;
@@ -286,6 +325,7 @@ static int ___mei_cl_send(struct mei_cl *cl, u8 *buf, size_t length,
 
 	/* Check if we have an ME client device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	id = mei_me_cl_by_id(dev, cl->me_client_id);
 	if (id < 0)
 		return -ENODEV;
@@ -293,12 +333,17 @@ static int ___mei_cl_send(struct mei_cl *cl, u8 *buf, size_t length,
 	if (length > dev->me_clients[id].props.max_msg_length)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	me_cl = mei_me_cl_by_uuid_id(dev, &cl->cl_uuid, cl->me_client_id);
 	if (!me_cl)
 		return -ENOTTY;
 
 	if (length > me_cl->props.max_msg_length)
 		return -EFBIG;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cb = mei_io_cb_init(cl, NULL);
@@ -480,6 +525,7 @@ int mei_cl_enable_device(struct mei_cl_device *device)
 	mutex_lock(&dev->device_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cl->state = MEI_FILE_CONNECTING;
 
 	err = mei_cl_connect(cl, NULL);
@@ -487,10 +533,15 @@ int mei_cl_enable_device(struct mei_cl_device *device)
 		mutex_unlock(&dev->device_lock);
 		dev_err(&dev->pdev->dev, "Could not connect to the ME client");
 =======
+=======
+>>>>>>> v3.18
 	err = mei_cl_connect(cl, NULL);
 	if (err < 0) {
 		mutex_unlock(&dev->device_lock);
 		dev_err(dev->dev, "Could not connect to the ME client");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		return err;
@@ -524,7 +575,11 @@ int mei_cl_disable_device(struct mei_cl_device *device)
 	if (cl->state != MEI_FILE_CONNECTED) {
 		mutex_unlock(&dev->device_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->pdev->dev, "Already disconnected");
+=======
+		dev_err(dev->dev, "Already disconnected");
+>>>>>>> v3.18
 =======
 		dev_err(dev->dev, "Already disconnected");
 >>>>>>> v3.18
@@ -538,7 +593,11 @@ int mei_cl_disable_device(struct mei_cl_device *device)
 	if (err < 0) {
 		mutex_unlock(&dev->device_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->pdev->dev,
+=======
+		dev_err(dev->dev,
+>>>>>>> v3.18
 =======
 		dev_err(dev->dev,
 >>>>>>> v3.18
@@ -591,7 +650,10 @@ void mei_cl_bus_rx_event(struct mei_cl *cl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void mei_cl_bus_remove_devices(struct mei_device *dev)
 {
 	struct mei_cl *cl, *next;
@@ -608,6 +670,9 @@ void mei_cl_bus_remove_devices(struct mei_device *dev)
 	mutex_unlock(&dev->device_lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int __init mei_cl_bus_init(void)
 {

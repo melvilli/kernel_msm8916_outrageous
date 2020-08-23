@@ -91,7 +91,11 @@ operations:
 
 		wait_on_bit(&op->flags, FSCACHE_OP_WAITING,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    fscache_wait_bit, TASK_UNINTERRUPTIBLE);
+=======
+			    TASK_UNINTERRUPTIBLE);
+>>>>>>> v3.18
 =======
 			    TASK_UNINTERRUPTIBLE);
 >>>>>>> v3.18

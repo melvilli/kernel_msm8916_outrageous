@@ -14,6 +14,10 @@
 #include <linux/pagemap.h>
 #include <linux/swap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -37,7 +41,11 @@
  * http://oss.software.ibm.com/developerworks/opensource/linux390/index.shtml
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct appldata_mem_data {
+=======
+struct appldata_mem_data {
+>>>>>>> v3.18
 =======
 struct appldata_mem_data {
 >>>>>>> v3.18
@@ -72,7 +80,11 @@ struct appldata_mem_data {
 // <-- New in 2.6
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed)) appldata_mem_data;
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -131,7 +143,10 @@ static struct appldata_ops ops = {
 	.size	   = sizeof(struct appldata_mem_data),
 	.callback  = &appldata_get_mem_data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.data      = &appldata_mem_data,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.owner     = THIS_MODULE,
@@ -147,8 +162,11 @@ static struct appldata_ops ops = {
 static int __init appldata_mem_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return appldata_register_ops(&ops);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ops.data = kzalloc(sizeof(struct appldata_mem_data), GFP_KERNEL);
@@ -160,6 +178,9 @@ static int __init appldata_mem_init(void)
 		kfree(ops.data);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -172,6 +193,10 @@ static void __exit appldata_mem_exit(void)
 {
 	appldata_unregister_ops(&ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(ops.data);
+>>>>>>> v3.18
 =======
 	kfree(ops.data);
 >>>>>>> v3.18

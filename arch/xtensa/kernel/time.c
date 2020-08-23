@@ -17,6 +17,10 @@
 #include <linux/time.h>
 #include <linux/clocksource.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clockchips.h>
+>>>>>>> v3.18
 =======
 #include <linux/clockchips.h>
 >>>>>>> v3.18
@@ -28,6 +32,10 @@
 #include <linux/delay.h>
 #include <linux/irqdomain.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sched_clock.h>
+>>>>>>> v3.18
 =======
 #include <linux/sched_clock.h>
 >>>>>>> v3.18
@@ -36,10 +44,15 @@
 #include <asm/platform.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_XTENSA_CALIBRATE_CCOUNT
 unsigned long ccount_per_jiffy;		/* per 1/HZ */
 unsigned long nsec_per_ccount;		/* nsec per ccount increment */
 #endif
+=======
+unsigned long ccount_freq;		/* ccount Hz */
+EXPORT_SYMBOL(ccount_freq);
+>>>>>>> v3.18
 =======
 unsigned long ccount_freq;		/* ccount Hz */
 EXPORT_SYMBOL(ccount_freq);
@@ -51,12 +64,18 @@ static cycle_t ccount_read(struct clocksource *cs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u64 notrace ccount_sched_clock_read(void)
 {
 	return get_ccount();
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct clocksource ccount_clocksource = {
 	.name = "ccount",
@@ -64,8 +83,11 @@ static struct clocksource ccount_clocksource = {
 	.read = ccount_read,
 	.mask = CLOCKSOURCE_MASK(32),
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 	.flags = CLOCK_SOURCE_IS_CONTINUOUS,
 };
 
@@ -126,11 +148,15 @@ static void ccount_timer_set_mode(enum clock_event_mode mode,
 		break;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static irqreturn_t timer_interrupt(int irq, void *dev_id);
 static struct irqaction timer_irqaction = {
 	.handler =	timer_interrupt,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.flags =	IRQF_DISABLED,
 	.name =		"timer",
@@ -153,6 +179,8 @@ void __init time_init(void)
 	setup_irq(irq, &timer_irqaction);
 	set_linux_timer(get_ccount() + CCOUNT_PER_JIFFY);
 =======
+=======
+>>>>>>> v3.18
 	.flags =	IRQF_TIMER,
 	.name =		"timer",
 };
@@ -192,6 +220,9 @@ void __init time_init(void)
 	setup_irq(this_cpu_ptr(&ccount_timer)->evt.irq, &timer_irqaction);
 	sched_clock_register(ccount_sched_clock_read, 32, ccount_freq);
 	clocksource_of_init();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -199,6 +230,7 @@ void __init time_init(void)
  * The timer interrupt is called HZ times per second.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 irqreturn_t timer_interrupt (int irq, void *dev_id)
 {
@@ -233,6 +265,8 @@ again:
 		goto again;
 
 =======
+=======
+>>>>>>> v3.18
 irqreturn_t timer_interrupt(int irq, void *dev_id)
 {
 	struct clock_event_device *evt = &this_cpu_ptr(&ccount_timer)->evt;
@@ -243,15 +277,24 @@ irqreturn_t timer_interrupt(int irq, void *dev_id)
 	/* Allow platform to do something useful (Wdog). */
 	platform_heartbeat();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return IRQ_HANDLED;
 }
 
 #ifndef CONFIG_GENERIC_CALIBRATE_DELAY
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit calibrate_delay(void)
 {
 	loops_per_jiffy = CCOUNT_PER_JIFFY;
+=======
+void calibrate_delay(void)
+{
+	loops_per_jiffy = ccount_freq / HZ;
+>>>>>>> v3.18
 =======
 void calibrate_delay(void)
 {

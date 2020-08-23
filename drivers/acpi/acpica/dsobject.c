@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -245,7 +249,11 @@ acpi_ds_build_internal_object(struct acpi_walk_state *walk_state,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18
@@ -657,7 +665,10 @@ acpi_ds_init_object_from_op(struct acpi_walk_state *walk_state,
 	switch (obj_desc->common.type) {
 	case ACPI_TYPE_BUFFER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -672,7 +683,10 @@ acpi_ds_init_object_from_op(struct acpi_walk_state *walk_state,
 
 	case ACPI_TYPE_PACKAGE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -756,6 +770,10 @@ acpi_ds_init_object_from_op(struct acpi_walk_state *walk_state,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

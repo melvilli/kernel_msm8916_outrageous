@@ -11,17 +11,23 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "exynos5250.dtsi"
 
 / {
 	model = "SAMSUNG SMDK5250 board based on EXYNOS5250";
 	compatible = "samsung,smdk5250", "samsung,exynos5250";
 =======
+=======
+>>>>>>> v3.18
 #include "exynos5250.dtsi"
 
 / {
 	model = "SAMSUNG SMDK5250 board based on EXYNOS5250";
 	compatible = "samsung,smdk5250", "samsung,exynos5250", "samsung,exynos5";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	aliases {
@@ -36,10 +42,13 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c@12C60000 {
 		samsung,i2c-sda-delay = <100>;
 		samsung,i2c-max-bus-freq = <20000>;
 =======
+=======
+>>>>>>> v3.18
 	rtc@101E0000 {
 		status = "okay";
 	};
@@ -48,6 +57,9 @@
 		samsung,i2c-sda-delay = <100>;
 		samsung,i2c-max-bus-freq = <20000>;
 		status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		eeprom@50 {
@@ -55,7 +67,10 @@
 			reg = <0x50>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		max77686@09 {
 			compatible = "maxim,max77686";
@@ -224,6 +239,9 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 		regulator-always-on;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -231,6 +249,10 @@
 		samsung,i2c-sda-delay = <100>;
 		samsung,i2c-max-bus-freq = <20000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		status = "okay";
+>>>>>>> v3.18
 =======
 		status = "okay";
 >>>>>>> v3.18
@@ -242,9 +264,12 @@
 
 		wm8994: wm8994@1a {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 compatible = "wlf,wm8994";
 			 reg = <0x1a>;
 =======
+=======
+>>>>>>> v3.18
 			compatible = "wlf,wm8994";
 			reg = <0x1a>;
 
@@ -259,6 +284,9 @@
 			DBVDD-supply = <&dbvdd>;
 			SPKVDD1-supply = <&spkvdd>;
 			SPKVDD2-supply = <&spkvdd>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -268,19 +296,26 @@
 		samsung,i2c-max-bus-freq = <40000>;
 		samsung,i2c-slave-addr = <0x38>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		sata-phy {
 			compatible = "samsung,sata-phy";
 =======
+=======
+>>>>>>> v3.18
 		status = "okay";
 
 		sata_phy_i2c:sata-phy@38 {
 			compatible = "samsung,exynos-sataphy-i2c";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			reg = <0x38>;
 		};
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sata@122F0000 {
 		samsung,sata-freq = <66>;
@@ -293,6 +328,8 @@
 		hdmiddc@50 {
 			compatible = "samsung,exynos5-hdmiddc";
 =======
+=======
+>>>>>>> v3.18
 	i2c@12C80000 {
 		samsung,i2c-sda-delay = <100>;
 		samsung,i2c-max-bus-freq = <66000>;
@@ -300,11 +337,15 @@
 
 		hdmiddc@50 {
 			compatible = "samsung,exynos4210-hdmiddc";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			reg = <0x50>;
 		};
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	i2c@12C90000 {
 		status = "disabled";
@@ -333,6 +374,8 @@
 		hdmiphy@38 {
 			compatible = "samsung,exynos5-hdmiphy";
 =======
+=======
+>>>>>>> v3.18
 	i2c@12CE0000 {
 		samsung,i2c-sda-delay = <100>;
 		samsung,i2c-max-bus-freq = <66000>;
@@ -340,11 +383,15 @@
 
 		hdmiphy@38 {
 			compatible = "samsung,exynos4212-hdmiphy";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			reg = <0x38>;
 		};
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dwmmc0@12200000 {
 		num-slots = <1>;
@@ -352,6 +399,8 @@
 		broken-cd;
 		fifo-depth = <0x80>;
 =======
+=======
+>>>>>>> v3.18
 	sata@122F0000 {
 		status = "okay";
 	};
@@ -365,6 +414,9 @@
 		status = "okay";
 		num-slots = <1>;
 		broken-cd;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		card-detect-delay = <200>;
 		samsung,dw-mshc-ciu-div = <3>;
@@ -372,6 +424,7 @@
 		samsung,dw-mshc-ddr-timing = <1 2>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&sd0_clk &sd0_cmd &sd0_bus4 &sd0_bus8>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		slot@0 {
@@ -389,6 +442,8 @@
 		supports-highspeed;
 		fifo-depth = <0x80>;
 =======
+=======
+>>>>>>> v3.18
 		bus-width = <8>;
 		cap-mmc-highspeed;
 	};
@@ -396,6 +451,9 @@
 	mmc@12220000 {
 		status = "okay";
 		num-slots = <1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		card-detect-delay = <200>;
 		samsung,dw-mshc-ciu-div = <3>;
@@ -403,6 +461,7 @@
 		samsung,dw-mshc-ddr-timing = <1 2>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&sd2_clk &sd2_cmd &sd2_cd &sd2_bus4>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		slot@0 {
@@ -422,6 +481,8 @@
 
 	spi_1: spi@12d30000 {
 =======
+=======
+>>>>>>> v3.18
 		bus-width = <4>;
 		disable-wp;
 		cap-sd-highspeed;
@@ -431,6 +492,9 @@
 		cs-gpios = <&gpa2 5 0>;
 		status = "okay";
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		w25q80bw@0 {
 			#address-cells = <1>;
@@ -441,7 +505,10 @@
 
 			controller-data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cs-gpio = <&gpa2 5 0>;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				samsung,spi-feedback-delay = <0>;
@@ -461,10 +528,13 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_2: spi@12d40000 {
 		status = "disabled";
 	};
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hdmi {
@@ -481,6 +551,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2s1: i2s@12D60000 {
 		status = "disabled";
 	};
@@ -489,6 +560,8 @@
 		status = "disabled";
 	};
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	sound {
@@ -503,7 +576,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dp-controller {
+=======
+	dp-controller@145B0000 {
+>>>>>>> v3.18
 =======
 	dp-controller@145B0000 {
 >>>>>>> v3.18
@@ -513,6 +590,7 @@
 		samsung,color-depth = <1>;
 		samsung,link-rate = <0x0a>;
 		samsung,lane-count = <4>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	};
 
@@ -530,6 +608,8 @@
 			vfront-porch = <4>;
 			vsync-len = <4>;
 =======
+=======
+>>>>>>> v3.18
 
 		pinctrl-names = "default";
 		pinctrl-0 = <&dp_hpd>;
@@ -552,6 +632,9 @@
 				vfront-porch = <4>;
 				vsync-len = <4>;
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -562,13 +645,19 @@
 			clock-frequency = <24000000>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		codec_mclk: codec-mclk {
 			compatible = "fixed-clock";
 			#clock-cells = <0>;
 			clock-frequency = <16934000>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

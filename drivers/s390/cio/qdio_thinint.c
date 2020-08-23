@@ -37,9 +37,12 @@ static LIST_HEAD(tiq_list);
 static DEFINE_MUTEX(tiq_list_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* adapter local summary indicator */
 static u8 *tiqdio_alsi;
 =======
+=======
+>>>>>>> v3.18
 /* Adapter interrupt definitions */
 static void tiqdio_thinint_handler(struct airq_struct *airq);
 
@@ -47,6 +50,9 @@ static struct airq_struct tiqdio_airq = {
 	.handler = tiqdio_thinint_handler,
 	.isc = QDIO_AIRQ_ISC,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct indicator_t *q_indicators;
@@ -153,17 +159,23 @@ static inline void tiqdio_call_inq_handlers(struct qdio_irq *irq)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!references_shared_dsci(irq) &&
 	    has_multiple_inq_on_dsci(irq))
 		xchg(irq->dsci, 0);
 
 	for_each_input_queue(irq, q, i) {
 =======
+=======
+>>>>>>> v3.18
 	for_each_input_queue(irq, q, i) {
 		if (!references_shared_dsci(irq) &&
 		    has_multiple_inq_on_dsci(irq))
 			xchg(q->irq_ptr->dsci, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (q->u.in.queue_start_poll) {
 			/* skip if polling is enabled or already in work */
@@ -195,7 +207,11 @@ static inline void tiqdio_call_inq_handlers(struct qdio_irq *irq)
  * @data: NULL
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void tiqdio_thinint_handler(void *alsi, void *data)
+=======
+static void tiqdio_thinint_handler(struct airq_struct *airq)
+>>>>>>> v3.18
 =======
 static void tiqdio_thinint_handler(struct airq_struct *airq)
 >>>>>>> v3.18
@@ -230,6 +246,7 @@ static void tiqdio_thinint_handler(struct airq_struct *airq)
 
 static int set_subchannel_ind(struct qdio_irq *irq_ptr, int reset)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct scssc_area *scssc_area;
 	int rc;
@@ -277,6 +294,8 @@ static int set_subchannel_ind(struct qdio_irq *irq_ptr, int reset)
 	DBF_HEX(&scssc_area->subchannel_indicator_addr,	sizeof(unsigned long));
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct chsc_scssc_area *scssc = (void *)irq_ptr->chsc_page;
 	u64 summary_indicator_addr, subchannel_indicator_addr;
 	int rc;
@@ -302,6 +321,9 @@ static int set_subchannel_ind(struct qdio_irq *irq_ptr, int reset)
 	DBF_HEX(&subchannel_indicator_addr, sizeof(subchannel_indicator_addr));
 out:
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -323,6 +345,7 @@ void tiqdio_free_memory(void)
 int __init tiqdio_register_thinints(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	isc_register(QDIO_AIRQ_ISC);
 	tiqdio_alsi = s390_register_adapter_interrupt(&tiqdio_thinint_handler,
 						      NULL, QDIO_AIRQ_ISC);
@@ -332,12 +355,17 @@ int __init tiqdio_register_thinints(void)
 		isc_unregister(QDIO_AIRQ_ISC);
 		return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	int rc;
 
 	rc = register_adapter_interrupt(&tiqdio_airq);
 	if (rc) {
 		DBF_EVENT("RTI:%x", rc);
 		return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -372,11 +400,15 @@ void __exit tiqdio_unregister_thinints(void)
 {
 	WARN_ON(!list_empty(&tiq_list));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (tiqdio_alsi) {
 		s390_unregister_adapter_interrupt(tiqdio_alsi, QDIO_AIRQ_ISC);
 		isc_unregister(QDIO_AIRQ_ISC);
 	}
+=======
+	unregister_adapter_interrupt(&tiqdio_airq);
+>>>>>>> v3.18
 =======
 	unregister_adapter_interrupt(&tiqdio_airq);
 >>>>>>> v3.18

@@ -1,7 +1,11 @@
 config DRM_VMWGFX
 	tristate "DRM driver for VMware Virtual GPU"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on DRM && PCI && FB
+=======
+	depends on DRM && PCI
+>>>>>>> v3.18
 =======
 	depends on DRM && PCI
 >>>>>>> v3.18
@@ -11,6 +15,12 @@ config DRM_VMWGFX
 	select FB_CFB_IMAGEBLIT
 	select DRM_TTM
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	# Only needed for the transitional use of drm_crtc_init - can be removed
+	# again once vmwgfx sets up the primary plane itself.
+	select DRM_KMS_HELPER
+>>>>>>> v3.18
 =======
 	# Only needed for the transitional use of drm_crtc_init - can be removed
 	# again once vmwgfx sets up the primary plane itself.
@@ -25,7 +35,11 @@ config DRM_VMWGFX
 
 config DRM_VMWGFX_FBCON
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on DRM_VMWGFX
+=======
+	depends on DRM_VMWGFX && FB
+>>>>>>> v3.18
 =======
 	depends on DRM_VMWGFX && FB
 >>>>>>> v3.18

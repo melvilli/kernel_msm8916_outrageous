@@ -27,7 +27,11 @@ void *module_alloc(unsigned long size);
 
 /* Free memory returned from module_alloc. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void module_memfree(void *module_region);
+=======
+void module_free(struct module *mod, void *module_region);
+>>>>>>> v3.18
 =======
 void module_free(struct module *mod, void *module_region);
 >>>>>>> v3.18
@@ -50,7 +54,12 @@ static inline int apply_relocate(Elf_Shdr *sechdrs,
 				 struct module *me)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "module %s: REL relocation unsupported\n", me->name);
+=======
+	printk(KERN_ERR "module %s: REL relocation unsupported\n",
+	       module_name(me));
+>>>>>>> v3.18
 =======
 	printk(KERN_ERR "module %s: REL relocation unsupported\n",
 	       module_name(me));
@@ -77,7 +86,12 @@ static inline int apply_relocate_add(Elf_Shdr *sechdrs,
 				     struct module *me)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "module %s: REL relocation unsupported\n", me->name);
+=======
+	printk(KERN_ERR "module %s: REL relocation unsupported\n",
+	       module_name(me));
+>>>>>>> v3.18
 =======
 	printk(KERN_ERR "module %s: REL relocation unsupported\n",
 	       module_name(me));

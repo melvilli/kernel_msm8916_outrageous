@@ -28,6 +28,7 @@
 static struct class *savu_class;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t savu_sysfs_read(struct file *fp, struct kobject *kobj,
 		char *buf, loff_t off, size_t count,
 		size_t real_size, uint command)
@@ -143,6 +144,8 @@ static int savu_init_savu_device_struct(struct usb_device *usb_dev,
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 ROCCAT_COMMON2_BIN_ATTRIBUTE_W(control, 0x4, 0x03);
 ROCCAT_COMMON2_BIN_ATTRIBUTE_RW(profile, 0x5, 0x03);
 ROCCAT_COMMON2_BIN_ATTRIBUTE_RW(general, 0x6, 0x10);
@@ -170,6 +173,9 @@ static const struct attribute_group *savu_groups[] = {
 	&savu_group,
 	NULL,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int savu_init_specials(struct hid_device *hdev)
@@ -177,7 +183,11 @@ static int savu_init_specials(struct hid_device *hdev)
 	struct usb_interface *intf = to_usb_interface(hdev->dev.parent);
 	struct usb_device *usb_dev = interface_to_usbdev(intf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct savu_device *savu;
+=======
+	struct roccat_common2_device *savu;
+>>>>>>> v3.18
 =======
 	struct roccat_common2_device *savu;
 >>>>>>> v3.18
@@ -197,9 +207,15 @@ static int savu_init_specials(struct hid_device *hdev)
 	hid_set_drvdata(hdev, savu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = savu_init_savu_device_struct(usb_dev, savu);
 	if (retval) {
 		hid_err(hdev, "couldn't init struct savu_device\n");
+=======
+	retval = roccat_common2_device_init_struct(usb_dev, savu);
+	if (retval) {
+		hid_err(hdev, "couldn't init Savu device\n");
+>>>>>>> v3.18
 =======
 	retval = roccat_common2_device_init_struct(usb_dev, savu);
 	if (retval) {
@@ -227,7 +243,11 @@ static void savu_remove_specials(struct hid_device *hdev)
 {
 	struct usb_interface *intf = to_usb_interface(hdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct savu_device *savu;
+=======
+	struct roccat_common2_device *savu;
+>>>>>>> v3.18
 =======
 	struct roccat_common2_device *savu;
 >>>>>>> v3.18
@@ -280,7 +300,11 @@ static void savu_remove(struct hid_device *hdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void savu_report_to_chrdev(struct savu_device const *savu,
+=======
+static void savu_report_to_chrdev(struct roccat_common2_device const *savu,
+>>>>>>> v3.18
 =======
 static void savu_report_to_chrdev(struct roccat_common2_device const *savu,
 >>>>>>> v3.18
@@ -306,7 +330,11 @@ static int savu_raw_event(struct hid_device *hdev,
 {
 	struct usb_interface *intf = to_usb_interface(hdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct savu_device *savu = hid_get_drvdata(hdev);
+=======
+	struct roccat_common2_device *savu = hid_get_drvdata(hdev);
+>>>>>>> v3.18
 =======
 	struct roccat_common2_device *savu = hid_get_drvdata(hdev);
 >>>>>>> v3.18
@@ -347,7 +375,11 @@ static int __init savu_init(void)
 	if (IS_ERR(savu_class))
 		return PTR_ERR(savu_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	savu_class->dev_bin_attrs = savu_bin_attributes;
+=======
+	savu_class->dev_groups = savu_groups;
+>>>>>>> v3.18
 =======
 	savu_class->dev_groups = savu_groups;
 >>>>>>> v3.18

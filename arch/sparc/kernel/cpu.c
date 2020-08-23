@@ -23,6 +23,10 @@
 
 #include "kernel.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "entry.h"
+>>>>>>> v3.18
 =======
 #include "entry.h"
 >>>>>>> v3.18
@@ -498,7 +502,10 @@ static void __init sun4v_cpu_probe(void)
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case SUN4V_CHIP_SPARC_M6:
 		sparc_cpu_type = "SPARC-M6";
 		sparc_fpu_type = "SPARC-M6 integrated FPU";
@@ -511,6 +518,9 @@ static void __init sun4v_cpu_probe(void)
 		sparc_pmu_type = "sparc-m7";
 		break;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case SUN4V_CHIP_SPARC64X:
 		sparc_cpu_type = "SPARC64-X";

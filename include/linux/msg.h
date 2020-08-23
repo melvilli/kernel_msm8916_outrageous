@@ -10,7 +10,11 @@ struct msg_msg {
 	long m_type;
 	size_t m_ts;		/* message text size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct msg_msgseg* next;
+=======
+	struct msg_msgseg *next;
+>>>>>>> v3.18
 =======
 	struct msg_msgseg *next;
 >>>>>>> v3.18

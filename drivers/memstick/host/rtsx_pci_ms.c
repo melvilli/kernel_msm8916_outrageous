@@ -1,7 +1,11 @@
 /* Realtek PCI-Express Memstick Card Interface driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2009 Realtek Semiconductor Corp. All rights reserved.
+=======
+ * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
 >>>>>>> v3.18
@@ -22,7 +26,10 @@
  * Author:
  *   Wei WANG <wei_wang@realsil.com.cn>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   No. 450, Shenhu Road, Suzhou Industry Park, Suzhou, China
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -154,6 +161,11 @@ static int ms_transfer_data(struct realtek_pci_ms *host, unsigned char data_dir,
 	u16 sec_cnt = (u16)(length / 512);
 	u8 val, trans_mode, dma_dir;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct memstick_dev *card = host->msh->card;
+	bool pro_card = card->id.type == MEMSTICK_TYPE_PRO;
+>>>>>>> v3.18
 =======
 	struct memstick_dev *card = host->msh->card;
 	bool pro_card = card->id.type == MEMSTICK_TYPE_PRO;
@@ -166,15 +178,21 @@ static int ms_transfer_data(struct realtek_pci_ms *host, unsigned char data_dir,
 	if (data_dir == READ) {
 		dma_dir = DMA_DIR_FROM_CARD;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		trans_mode = MS_TM_AUTO_READ;
 	} else {
 		dma_dir = DMA_DIR_TO_CARD;
 		trans_mode = MS_TM_AUTO_WRITE;
 =======
+=======
+>>>>>>> v3.18
 		trans_mode = pro_card ? MS_TM_AUTO_READ : MS_TM_NORMAL_READ;
 	} else {
 		dma_dir = DMA_DIR_TO_CARD;
 		trans_mode = pro_card ? MS_TM_AUTO_WRITE : MS_TM_NORMAL_WRITE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -182,17 +200,23 @@ static int ms_transfer_data(struct realtek_pci_ms *host, unsigned char data_dir,
 
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, MS_TPC, 0xFF, tpc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, MS_SECTOR_CNT_H,
 			0xFF, (u8)(sec_cnt >> 8));
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, MS_SECTOR_CNT_L,
 			0xFF, (u8)sec_cnt);
 =======
+=======
+>>>>>>> v3.18
 	if (pro_card) {
 		rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, MS_SECTOR_CNT_H,
 				0xFF, (u8)(sec_cnt >> 8));
 		rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, MS_SECTOR_CNT_L,
 				0xFF, (u8)sec_cnt);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, MS_TRANS_CFG, 0xFF, cfg);
 
@@ -222,9 +246,12 @@ static int ms_transfer_data(struct realtek_pci_ms *host, unsigned char data_dir,
 
 	rtsx_pci_read_register(pcr, MS_TRANS_CFG, &val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (val & (MS_INT_CMDNK | MS_INT_ERR | MS_CRC16_ERR | MS_RDY_TIMEOUT))
 		return -EIO;
 =======
+=======
+>>>>>>> v3.18
 	if (pro_card) {
 		if (val & (MS_INT_CMDNK | MS_INT_ERR |
 				MS_CRC16_ERR | MS_RDY_TIMEOUT))
@@ -233,6 +260,9 @@ static int ms_transfer_data(struct realtek_pci_ms *host, unsigned char data_dir,
 		if (val & (MS_CRC16_ERR | MS_RDY_TIMEOUT))
 			return -EIO;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -503,8 +533,13 @@ static int rtsx_pci_ms_set_param(struct memstick_host *msh,
 			ssc_depth = RTSX_SSC_DEPTH_500K;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = rtsx_pci_write_register(pcr, MS_CFG,
 					0x18, MS_BUS_WIDTH_1);
+=======
+			err = rtsx_pci_write_register(pcr, MS_CFG, 0x58,
+					MS_BUS_WIDTH_1 | PUSH_TIME_DEFAULT);
+>>>>>>> v3.18
 =======
 			err = rtsx_pci_write_register(pcr, MS_CFG, 0x58,
 					MS_BUS_WIDTH_1 | PUSH_TIME_DEFAULT);
@@ -637,6 +672,10 @@ static int rtsx_pci_ms_drv_remove(struct platform_device *pdev)
 	msh = host->msh;
 	host->eject = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cancel_work_sync(&host->handle_req);
+>>>>>>> v3.18
 =======
 	cancel_work_sync(&host->handle_req);
 >>>>>>> v3.18
@@ -662,8 +701,11 @@ static int rtsx_pci_ms_drv_remove(struct platform_device *pdev)
 	memstick_free_host(msh);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_dbg(&(pdev->dev),

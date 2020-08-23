@@ -78,7 +78,10 @@ static inline unsigned int get_d(u32 inst)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned int get_oc(u32 inst)
 {
 	return (inst >> 11) & 0x7fff;
@@ -117,5 +120,8 @@ static inline unsigned make_dsisr(unsigned instr)
 
 	return dsisr;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_PPC_DISASSEMBLE_H__ */

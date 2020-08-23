@@ -26,7 +26,10 @@
 unsigned int __nongpreldata pci_probe = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int  __nongpreldata pcibios_last_bus = -1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct pci_ops *__nongpreldata pci_root_ops;
@@ -224,6 +227,7 @@ static struct pci_ops * __init pci_check_direct(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Discover remaining PCI buses in case there are peer host bridges.
  * We use the number of last PCI bus provided by the PCI BIOS.
  */
@@ -255,6 +259,8 @@ static void __init pcibios_fixup_peer_bridges(void)
 }
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Exceptions for specific devices. Usually work-arounds for fatal design flaws.
@@ -327,7 +333,11 @@ DECLARE_PCI_FIXUP_HEADER(PCI_ANY_ID, PCI_ANY_ID, pci_fixup_ide_bases);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init pcibios_fixup_bus(struct pci_bus *bus)
+=======
+void pcibios_fixup_bus(struct pci_bus *bus)
+>>>>>>> v3.18
 =======
 void pcibios_fixup_bus(struct pci_bus *bus)
 >>>>>>> v3.18
@@ -429,7 +439,10 @@ int __init pcibios_init(void)
 
 	pcibios_irq_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcibios_fixup_peer_bridges();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pcibios_fixup_irqs();
@@ -446,9 +459,12 @@ char * __init pcibios_setup(char *str)
 		pci_probe = 0;
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (!strncmp(str, "lastbus=", 8)) {
 		pcibios_last_bus = simple_strtol(str+8, NULL, 0);
 		return NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

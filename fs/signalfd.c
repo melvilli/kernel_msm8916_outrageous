@@ -122,9 +122,14 @@ static int signalfd_copyinfo(struct signalfd_siginfo __user *uinfo,
 		 * so check explicitly for the right codes here.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (kinfo->si_signo == SIGBUS &&
 		    (kinfo->si_code == BUS_MCEERR_AR ||
 		     kinfo->si_code == BUS_MCEERR_AO))
+=======
+		if (kinfo->si_code == BUS_MCEERR_AR ||
+		    kinfo->si_code == BUS_MCEERR_AO)
+>>>>>>> v3.18
 =======
 		if (kinfo->si_code == BUS_MCEERR_AR ||
 		    kinfo->si_code == BUS_MCEERR_AO)

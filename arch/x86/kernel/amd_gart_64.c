@@ -513,7 +513,11 @@ gart_free_coherent(struct device *dev, size_t size, void *vaddr,
 {
 	gart_unmap_page(dev, dma_addr, size, DMA_BIDIRECTIONAL, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_pages((unsigned long)vaddr, get_order(size));
+=======
+	dma_generic_free_coherent(dev, size, vaddr, dma_addr, attrs);
+>>>>>>> v3.18
 =======
 	dma_generic_free_coherent(dev, size, vaddr, dma_addr, attrs);
 >>>>>>> v3.18

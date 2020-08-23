@@ -123,9 +123,12 @@ static struct platform_device iq80332_flash_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init iq80332_init_machine(void)
 {
 =======
+=======
+>>>>>>> v3.18
 static struct resource iq80332_gpio_res[] = {
 	DEFINE_RES_MEM((IOP3XX_PERIPHERAL_PHYS_BASE + 0x1780), 0x10),
 };
@@ -135,6 +138,9 @@ static void __init iq80332_init_machine(void)
 	platform_device_register_simple("gpio-iop", 0,
 					iq80332_gpio_res,
 					ARRAY_SIZE(iq80332_gpio_res));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register(&iop3xx_i2c0_device);
 	platform_device_register(&iop3xx_i2c1_device);

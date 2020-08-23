@@ -151,8 +151,11 @@
 #define PIC_IRT(i)		(PIC_IRT0 + ((i) * 2))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIMER_CYCLES_MAXVAL	0xffffffffffffffffULL
 =======
+=======
+>>>>>>> v3.18
 #define PIC_9XX_PENDING_0	0x6
 #define PIC_9XX_PENDING_1	0x8
 #define PIC_9XX_PENDING_2	0xa
@@ -160,6 +163,9 @@
 
 #define PIC_9XX_IRT0		0x1c0
 #define PIC_9XX_IRT(i)		(PIC_9XX_IRT0 + ((i) * 2))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -167,6 +173,10 @@
  */
 #define PIC_NUM_IRTS		160
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PIC_9XX_NUM_IRTS	256
+>>>>>>> v3.18
 =======
 #define PIC_9XX_NUM_IRTS	256
 >>>>>>> v3.18
@@ -207,6 +217,7 @@
 #define PIC_IRT_PCIE_LINK_INDEX(num)	((num) + PIC_IRT_PCIE_LINK_0_INDEX)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PIC_CLOCK_TIMER			7
 #define PIC_IRQ_BASE			8
 
@@ -217,6 +228,8 @@
 #define PIC_IRQ_IS_IRT(irq)		((irq) >= PIC_IRT_FIRST_IRQ)
 
 =======
+=======
+>>>>>>> v3.18
 #define PIC_9XX_IRT_PCIE_LINK_0_INDEX	191
 #define PIC_9XX_IRT_PCIE_LINK_INDEX(num) \
 				((num) + PIC_9XX_IRT_PCIE_LINK_0_INDEX)
@@ -225,6 +238,9 @@
 
 #if !defined(LOCORE) && !defined(__ASSEMBLY__)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *   Misc
@@ -233,6 +249,7 @@
 #define PIC_LOCAL_SCHEDULING		1
 #define PIC_GLOBAL_SCHEDULING		0
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define PIC_CLK_HZ			133333333
 
@@ -260,6 +277,8 @@ nlm_set_irt_to_cpu(uint64_t base, int irt, int cpu)
 	val |= (1 << 19) | ((cpu >> 4) << 16) | (1 << (cpu & 0xf));
 	nlm_write_pic_reg(base, PIC_IRT(irt), val);
 =======
+=======
+>>>>>>> v3.18
 #define nlm_read_pic_reg(b, r)	nlm_read_reg64(b, r)
 #define nlm_write_pic_reg(b, r, v) nlm_write_reg64(b, r, v)
 #define nlm_get_pic_pcibase(node)	nlm_pcicfg_base(cpu_is_xlp9xx() ? \
@@ -282,6 +301,9 @@ nlm_9xx_pic_write_irt(uint64_t base, int irt_num, int en, int nmi,
 			(cpu & 0x3ff);
 
 	nlm_write_pic_reg(base, PIC_9XX_IRT(irt_num), val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -304,10 +326,13 @@ nlm_pic_write_irt_direct(uint64_t base, int irt_num, int en, int nmi,
 	int sch, int vec, int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nlm_pic_write_irt(base, irt_num, en, nmi, sch, vec, 1,
 		(cpu >> 4),		/* thread group */
 		1 << (cpu & 0xf));	/* thread mask */
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_is_xlp9xx())
 		nlm_9xx_pic_write_irt(base, irt_num, en, nmi, sch, vec,
 							1, 0, cpu);
@@ -315,6 +340,9 @@ nlm_pic_write_irt_direct(uint64_t base, int irt_num, int en, int nmi,
 		nlm_pic_write_irt(base, irt_num, en, nmi, sch, vec, 1,
 			(cpu >> 4),		/* thread group */
 			1 << (cpu & 0xf));	/* thread mask */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -358,9 +386,12 @@ nlm_pic_enable_irt(uint64_t base, int irt)
 	uint64_t reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg = nlm_read_pic_reg(base, PIC_IRT(irt));
 	nlm_write_pic_reg(base, PIC_IRT(irt), reg | (1u << 31));
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_is_xlp9xx()) {
 		reg = nlm_read_pic_reg(base, PIC_9XX_IRT(irt));
 		nlm_write_pic_reg(base, PIC_9XX_IRT(irt), reg | (1 << 22));
@@ -368,6 +399,9 @@ nlm_pic_enable_irt(uint64_t base, int irt)
 		reg = nlm_read_pic_reg(base, PIC_IRT(irt));
 		nlm_write_pic_reg(base, PIC_IRT(irt), reg | (1u << 31));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -377,9 +411,12 @@ nlm_pic_disable_irt(uint64_t base, int irt)
 	uint64_t reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg = nlm_read_pic_reg(base, PIC_IRT(irt));
 	nlm_write_pic_reg(base, PIC_IRT(irt), reg & ~((uint64_t)1 << 31));
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_is_xlp9xx()) {
 		reg = nlm_read_pic_reg(base, PIC_9XX_IRT(irt));
 		reg &= ~((uint64_t)1 << 22);
@@ -389,6 +426,9 @@ nlm_pic_disable_irt(uint64_t base, int irt)
 		reg &= ~((uint64_t)1 << 31);
 		nlm_write_pic_reg(base, PIC_IRT(irt), reg);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -398,9 +438,12 @@ nlm_pic_send_ipi(uint64_t base, int hwt, int irq, int nmi)
 	uint64_t ipi;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ipi = (nmi << 31) | (irq << 20);
 	ipi |= ((hwt >> 4) << 16) | (1 << (hwt & 0xf)); /* cpuset and mask */
 =======
+=======
+>>>>>>> v3.18
 	if (cpu_is_xlp9xx())
 		ipi = (nmi << 23) | (irq << 24) |
 			(0/*mcm*/ << 20) | (0/*ptr*/ << 16) | hwt;
@@ -408,6 +451,9 @@ nlm_pic_send_ipi(uint64_t base, int hwt, int irq, int nmi)
 		ipi = ((uint64_t)nmi << 31) | (irq << 20) |
 			((hwt >> 4) << 16) | (1 << (hwt & 0xf));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nlm_write_pic_reg(base, PIC_IPI_CTL, ipi);
 }

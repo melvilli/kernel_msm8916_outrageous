@@ -1,6 +1,9 @@
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -185,6 +188,10 @@ static const char ql_gstrings_test[][ETH_GSTRING_LEN] = {
 #define QLGE_TEST_LEN (sizeof(ql_gstrings_test) / ETH_GSTRING_LEN)
 #define QLGE_STATS_LEN ARRAY_SIZE(ql_gstrings_stats)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLGE_RCV_MAC_ERR_STATS	7
+>>>>>>> v3.18
 =======
 #define QLGE_RCV_MAC_ERR_STATS	7
 >>>>>>> v3.18
@@ -288,6 +295,12 @@ static void ql_update_stats(struct ql_adapter *qdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Update receive mac error statistics */
+	iter += QLGE_RCV_MAC_ERR_STATS;
+
+>>>>>>> v3.18
 =======
 	/* Update receive mac error statistics */
 	iter += QLGE_RCV_MAC_ERR_STATS;

@@ -25,7 +25,11 @@ LDFLAGS_vmlinux :=
 LIBGCC 		:= $(shell $(CC) $(KBUILD_CFLAGS) -print-libgcc-file-name)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 KBUILD_CFLAGS	+= -pipe -ffixed-r10
+=======
+KBUILD_CFLAGS	+= -pipe -ffixed-r10 -D__linux__
+>>>>>>> v3.18
 =======
 KBUILD_CFLAGS	+= -pipe -ffixed-r10 -D__linux__
 >>>>>>> v3.18

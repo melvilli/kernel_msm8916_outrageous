@@ -15,6 +15,7 @@
 
 #include <linux/bitops.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/byteorder.h>
 
@@ -23,6 +24,10 @@
  */
 #define smp_mb__before_clear_bit() barrier()
 #define smp_mb__after_clear_bit()  barrier()
+=======
+#include <asm/byteorder.h>
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/byteorder.h>
 #include <asm/barrier.h>

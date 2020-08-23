@@ -8,6 +8,12 @@
  * For licencing details see kernel-base/COPYING
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define pr_fmt(fmt) "ODEBUG: " fmt
+
+>>>>>>> v3.18
 =======
 
 #define pr_fmt(fmt) "ODEBUG: " fmt
@@ -21,7 +27,10 @@
 #include <linux/slab.h>
 #include <linux/hash.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kmemleak.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -108,7 +117,10 @@ static void fill_pool(void)
 			return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kmemleak_not_leak(new);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		raw_spin_lock_irqsave(&pool_lock, flags);
@@ -211,7 +223,11 @@ static void free_object(struct debug_obj *obj)
 	 */
 	if (obj_pool_free > ODEBUG_POOL_SIZE && obj_cache)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sched = keventd_up() && !work_pending(&debug_obj_work);
+=======
+		sched = keventd_up();
+>>>>>>> v3.18
 =======
 		sched = keventd_up();
 >>>>>>> v3.18
@@ -237,7 +253,11 @@ static void debug_objects_oom(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_WARNING "ODEBUG: Out of memory. ODEBUG disabled\n");
+=======
+	pr_warn("Out of memory. ODEBUG disabled\n");
+>>>>>>> v3.18
 =======
 	pr_warn("Out of memory. ODEBUG disabled\n");
 >>>>>>> v3.18
@@ -315,11 +335,17 @@ static void debug_object_is_on_stack(void *addr, int onstack)
 	limit++;
 	if (is_on_stack)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 		       "ODEBUG: object is on stack, but not annotated\n");
 	else
 		printk(KERN_WARNING
 		       "ODEBUG: object is not on stack, but annotated\n");
+=======
+		pr_warn("object is on stack, but not annotated\n");
+	else
+		pr_warn("object is not on stack, but annotated\n");
+>>>>>>> v3.18
 =======
 		pr_warn("object is on stack, but not annotated\n");
 	else
@@ -410,8 +436,14 @@ void debug_object_init_on_stack(void *addr, struct debug_obj_descr *descr)
  * @addr:	address of the object
  * @descr:	pointer to an object specific debug description structure
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 void debug_object_activate(void *addr, struct debug_obj_descr *descr)
+=======
+ * Returns 0 for success, -EINVAL for check failed.
+ */
+int debug_object_activate(void *addr, struct debug_obj_descr *descr)
+>>>>>>> v3.18
 =======
  * Returns 0 for success, -EINVAL for check failed.
  */
@@ -423,6 +455,10 @@ int debug_object_activate(void *addr, struct debug_obj_descr *descr)
 	struct debug_obj *obj;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -432,7 +468,11 @@ int debug_object_activate(void *addr, struct debug_obj_descr *descr)
 
 	if (!debug_objects_enabled)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -448,6 +488,10 @@ int debug_object_activate(void *addr, struct debug_obj_descr *descr)
 		case ODEBUG_STATE_INACTIVE:
 			obj->state = ODEBUG_STATE_ACTIVE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			ret = 0;
+>>>>>>> v3.18
 =======
 			ret = 0;
 >>>>>>> v3.18
@@ -457,6 +501,7 @@ int debug_object_activate(void *addr, struct debug_obj_descr *descr)
 			debug_print_object(obj, "activate");
 			state = obj->state;
 			raw_spin_unlock_irqrestore(&db->lock, flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			debug_object_fixup(descr->fixup_activate, addr, state);
 			return;
@@ -470,6 +515,8 @@ int debug_object_activate(void *addr, struct debug_obj_descr *descr)
 		raw_spin_unlock_irqrestore(&db->lock, flags);
 		return;
 =======
+=======
+>>>>>>> v3.18
 			ret = debug_object_fixup(descr->fixup_activate, addr, state);
 			return ret ? -EINVAL : 0;
 
@@ -483,6 +530,9 @@ int debug_object_activate(void *addr, struct debug_obj_descr *descr)
 		}
 		raw_spin_unlock_irqrestore(&db->lock, flags);
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -494,14 +544,20 @@ int debug_object_activate(void *addr, struct debug_obj_descr *descr)
 	 */
 	if (debug_object_fixup(descr->fixup_activate, addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   ODEBUG_STATE_NOTAVAILABLE))
 		debug_print_object(&o, "activate");
 =======
+=======
+>>>>>>> v3.18
 			   ODEBUG_STATE_NOTAVAILABLE)) {
 		debug_print_object(&o, "activate");
 		return -EINVAL;
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1048,7 +1104,11 @@ static void __init debug_objects_selftest(void)
 		goto out;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "ODEBUG: selftest passed\n");
+=======
+	pr_info("selftest passed\n");
+>>>>>>> v3.18
 =======
 	pr_info("selftest passed\n");
 >>>>>>> v3.18
@@ -1127,8 +1187,13 @@ static int __init debug_objects_replace_static_objects(void)
 	local_irq_enable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "ODEBUG: %d of %d active objects replaced\n", cnt,
 	       obj_pool_used);
+=======
+	pr_debug("%d of %d active objects replaced\n",
+		 cnt, obj_pool_used);
+>>>>>>> v3.18
 =======
 	pr_debug("%d of %d active objects replaced\n",
 		 cnt, obj_pool_used);
@@ -1157,7 +1222,11 @@ void __init debug_objects_mem_init(void)
 				      sizeof (struct debug_obj), 0,
 				      SLAB_DEBUG_OBJECTS, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kmemleak_not_leak(obj_cache);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1166,7 +1235,11 @@ void __init debug_objects_mem_init(void)
 		if (obj_cache)
 			kmem_cache_destroy(obj_cache);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "ODEBUG: out of memory.\n");
+=======
+		pr_warn("out of memory.\n");
+>>>>>>> v3.18
 =======
 		pr_warn("out of memory.\n");
 >>>>>>> v3.18

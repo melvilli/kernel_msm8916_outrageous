@@ -554,6 +554,7 @@ static struct bio *ps3vram_do_bio(struct ps3_system_bus_device *dev,
 	int write = bio_data_dir(bio) == WRITE;
 	const char *op = write ? "write" : "read";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	loff_t offset = bio->bi_sector << 9;
 	int error = 0;
 	struct bio_vec *bvec;
@@ -565,6 +566,8 @@ static struct bio *ps3vram_do_bio(struct ps3_system_bus_device *dev,
 		char *ptr = page_address(bvec->bv_page) + bvec->bv_offset;
 		size_t len = bvec->bv_len, retlen;
 =======
+=======
+>>>>>>> v3.18
 	loff_t offset = bio->bi_iter.bi_sector << 9;
 	int error = 0;
 	struct bio_vec bvec;
@@ -575,6 +578,9 @@ static struct bio *ps3vram_do_bio(struct ps3_system_bus_device *dev,
 		/* PS3 is ppc64, so we don't handle highmem */
 		char *ptr = page_address(bvec.bv_page) + bvec.bv_offset;
 		size_t len = bvec.bv_len, retlen;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		dev_dbg(&dev->core, "    %s %zu bytes at offset %llu\n", op,

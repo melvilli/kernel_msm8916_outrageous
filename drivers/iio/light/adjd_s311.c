@@ -15,7 +15,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -41,6 +44,7 @@
 #define ADJD_S311_CAP_BLUE	0x08
 #define ADJD_S311_CAP_CLEAR	0x09
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ADJD_S311_INT_RED_LO	0x0a
 #define ADJD_S311_INT_RED_HI	0x0b
 #define ADJD_S311_INT_GREEN_LO	0x0c
@@ -58,6 +62,8 @@
 #define ADJD_S311_DATA_CLEAR_LO	0x46
 #define ADJD_S311_DATA_CLEAR_HI	0x47
 =======
+=======
+>>>>>>> v3.18
 #define ADJD_S311_INT_RED	0x0a
 #define ADJD_S311_INT_GREEN	0x0c
 #define ADJD_S311_INT_BLUE	0x0e
@@ -66,6 +72,9 @@
 #define ADJD_S311_DATA_GREEN	0x42
 #define ADJD_S311_DATA_BLUE	0x44
 #define ADJD_S311_DATA_CLEAR	0x46
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ADJD_S311_OFFSET_RED	0x48
 #define ADJD_S311_OFFSET_GREEN	0x49
@@ -88,8 +97,13 @@ enum adjd_s311_channel_idx {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ADJD_S311_DATA_REG(chan) (ADJD_S311_DATA_RED_LO + (chan) * 2)
 #define ADJD_S311_INT_REG(chan) (ADJD_S311_INT_RED_LO + (chan) * 2)
+=======
+#define ADJD_S311_DATA_REG(chan) (ADJD_S311_DATA_RED + (chan) * 2)
+#define ADJD_S311_INT_REG(chan) (ADJD_S311_INT_RED + (chan) * 2)
+>>>>>>> v3.18
 =======
 #define ADJD_S311_DATA_REG(chan) (ADJD_S311_DATA_RED + (chan) * 2)
 #define ADJD_S311_INT_REG(chan) (ADJD_S311_INT_RED + (chan) * 2)
@@ -142,6 +156,7 @@ static int adjd_s311_read_data(struct iio_dev *indio_dev, u8 reg, int *val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t adjd_s311_read_int_time(struct iio_dev *indio_dev,
 	uintptr_t private, const struct iio_chan_spec *chan, char *buf)
 {
@@ -181,6 +196,8 @@ static ssize_t adjd_s311_write_int_time(struct iio_dev *indio_dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static irqreturn_t adjd_s311_trigger_handler(int irq, void *p)
 {
 	struct iio_poll_func *pf = p;
@@ -188,7 +205,10 @@ static irqreturn_t adjd_s311_trigger_handler(int irq, void *p)
 	struct adjd_s311_data *data = iio_priv(indio_dev);
 	s64 time_ns = iio_get_time_ns();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int len = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i, j = 0;
@@ -206,6 +226,7 @@ static irqreturn_t adjd_s311_trigger_handler(int irq, void *p)
 
 		data->buffer[j++] = ret & ADJD_S311_DATA_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		len += 2;
 	}
 
@@ -213,6 +234,11 @@ static irqreturn_t adjd_s311_trigger_handler(int irq, void *p)
 		*(s64 *)((u8 *)data->buffer + ALIGN(len, sizeof(s64)))
 			= time_ns;
 	iio_push_to_buffers(indio_dev, (u8 *)data->buffer);
+=======
+	}
+
+	iio_push_to_buffers_with_timestamp(indio_dev, data->buffer, time_ns);
+>>>>>>> v3.18
 =======
 	}
 
@@ -226,6 +252,7 @@ done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct iio_chan_spec_ext_info adjd_s311_ext_info[] = {
 	{
 		.name = "integration_time",
@@ -237,11 +264,14 @@ static const struct iio_chan_spec_ext_info adjd_s311_ext_info[] = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define ADJD_S311_CHANNEL(_color, _scan_idx) { \
 	.type = IIO_INTENSITY, \
 	.modified = 1, \
 	.address = (IDX_##_color), \
 	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) | \
+<<<<<<< HEAD
 <<<<<<< HEAD
 		BIT(IIO_CHAN_INFO_HARDWAREGAIN), \
 	.channel2 = (IIO_MOD_LIGHT_##_color), \
@@ -249,6 +279,8 @@ static const struct iio_chan_spec_ext_info adjd_s311_ext_info[] = {
 	.scan_type = IIO_ST('u', 10, 16, 0), \
 	.ext_info = adjd_s311_ext_info, \
 =======
+=======
+>>>>>>> v3.18
 		BIT(IIO_CHAN_INFO_HARDWAREGAIN) | \
 		BIT(IIO_CHAN_INFO_INT_TIME), \
 	.channel2 = (IIO_MOD_LIGHT_##_color), \
@@ -259,6 +291,9 @@ static const struct iio_chan_spec_ext_info adjd_s311_ext_info[] = {
 		.storagebits = 16, \
 		.endianness = IIO_CPU, \
 	}, \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -280,7 +315,12 @@ static int adjd_s311_read_raw(struct iio_dev *indio_dev,
 	switch (mask) {
 	case IIO_CHAN_INFO_RAW:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = adjd_s311_read_data(indio_dev, chan->address, val);
+=======
+		ret = adjd_s311_read_data(indio_dev,
+			ADJD_S311_DATA_REG(chan->address), val);
+>>>>>>> v3.18
 =======
 		ret = adjd_s311_read_data(indio_dev,
 			ADJD_S311_DATA_REG(chan->address), val);
@@ -296,7 +336,10 @@ static int adjd_s311_read_raw(struct iio_dev *indio_dev,
 		*val = ret & ADJD_S311_CAP_MASK;
 		return IIO_VAL_INT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case IIO_CHAN_INFO_INT_TIME:
 		ret = i2c_smbus_read_word_data(data->client,
 			ADJD_S311_INT_REG(chan->address));
@@ -309,6 +352,9 @@ static int adjd_s311_read_raw(struct iio_dev *indio_dev,
 		 */
 		*val2 = ret & ADJD_S311_INT_MASK;
 		return IIO_VAL_INT_PLUS_MICRO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return -EINVAL;
@@ -320,7 +366,10 @@ static int adjd_s311_write_raw(struct iio_dev *indio_dev,
 {
 	struct adjd_s311_data *data = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -330,10 +379,13 @@ static int adjd_s311_write_raw(struct iio_dev *indio_dev,
 			return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = i2c_smbus_write_byte_data(data->client,
 			ADJD_S311_CAP_REG(chan->address), val);
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 		return i2c_smbus_write_byte_data(data->client,
 			ADJD_S311_CAP_REG(chan->address), val);
 	case IIO_CHAN_INFO_INT_TIME:
@@ -342,6 +394,9 @@ static int adjd_s311_write_raw(struct iio_dev *indio_dev,
 
 		return i2c_smbus_write_word_data(data->client,
 			ADJD_S311_INT_REG(chan->address), val2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return -EINVAL;
@@ -375,16 +430,22 @@ static int adjd_s311_probe(struct i2c_client *client,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*data));
 	if (indio_dev == NULL) {
 		err = -ENOMEM;
 		goto exit;
 	}
 =======
+=======
+>>>>>>> v3.18
 	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*data));
 	if (indio_dev == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data = iio_priv(indio_dev);
 	i2c_set_clientdata(client, indio_dev);
@@ -401,7 +462,11 @@ static int adjd_s311_probe(struct i2c_client *client,
 		adjd_s311_trigger_handler, NULL);
 	if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_free_device;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -417,9 +482,12 @@ static int adjd_s311_probe(struct i2c_client *client,
 exit_unreg_buffer:
 	iio_triggered_buffer_cleanup(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 exit_free_device:
 	iio_device_free(indio_dev);
 exit:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;
@@ -434,7 +502,10 @@ static int adjd_s311_remove(struct i2c_client *client)
 	iio_triggered_buffer_cleanup(indio_dev);
 	kfree(data->buffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

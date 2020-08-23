@@ -13,6 +13,7 @@
 extern void do_notify_resume(struct pt_regs *regs, unsigned long thread_info_flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __user * get_sigframe(struct k_sigaction *ka, unsigned long sp,
 				  size_t frame_size, int is_32);
 
@@ -23,6 +24,8 @@ extern int handle_signal32(unsigned long sig, struct k_sigaction *ka,
 extern int handle_rt_signal32(unsigned long sig, struct k_sigaction *ka,
 			      siginfo_t *info, sigset_t *oldset,
 =======
+=======
+>>>>>>> v3.18
 extern void __user *get_sigframe(struct ksignal *ksig, unsigned long sp,
 				  size_t frame_size, int is_32);
 
@@ -30,6 +33,9 @@ extern int handle_signal32(struct ksignal *ksig, sigset_t *oldset,
 			   struct pt_regs *regs);
 
 extern int handle_rt_signal32(struct ksignal *ksig, sigset_t *oldset,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      struct pt_regs *regs);
 
@@ -55,8 +61,12 @@ extern unsigned long copy_transact_vsx_from_user(struct task_struct *task,
 #ifdef CONFIG_PPC64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int handle_rt_signal64(int signr, struct k_sigaction *ka,
 			      siginfo_t *info, sigset_t *set,
+=======
+extern int handle_rt_signal64(struct ksignal *ksig, sigset_t *set,
+>>>>>>> v3.18
 =======
 extern int handle_rt_signal64(struct ksignal *ksig, sigset_t *set,
 >>>>>>> v3.18
@@ -65,8 +75,12 @@ extern int handle_rt_signal64(struct ksignal *ksig, sigset_t *set,
 #else /* CONFIG_PPC64 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int handle_rt_signal64(int signr, struct k_sigaction *ka,
 				     siginfo_t *info, sigset_t *set,
+=======
+static inline int handle_rt_signal64(struct ksignal *ksig, sigset_t *set,
+>>>>>>> v3.18
 =======
 static inline int handle_rt_signal64(struct ksignal *ksig, sigset_t *set,
 >>>>>>> v3.18

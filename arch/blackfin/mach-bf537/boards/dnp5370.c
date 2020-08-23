@@ -42,7 +42,11 @@ const char bfin_board_name[] = "DNP/5370";
 #define CONFIG_MTD_PHYSMAP_LEN  0x300000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_RTC_DRV_BFIN) || defined(CONFIG_RTC_DRV_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_RTC_DRV_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_RTC_DRV_BFIN)
 >>>>>>> v3.18
@@ -53,7 +57,11 @@ static struct platform_device rtc_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_BFIN_MAC) || defined(CONFIG_BFIN_MAC_MODULE)
+=======
+#if IS_ENABLED(CONFIG_BFIN_MAC)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BFIN_MAC)
 >>>>>>> v3.18
@@ -90,7 +98,11 @@ static struct platform_device bfin_mac_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_PHYSMAP) || defined(CONFIG_MTD_PHYSMAP_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_PHYSMAP)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_PHYSMAP)
 >>>>>>> v3.18
@@ -138,9 +150,15 @@ static struct platform_device asmb_flash_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SPI_BFIN5XX) || defined(CONFIG_SPI_BFIN5XX_MODULE)
 
 #if defined(CONFIG_MMC_SPI) || defined(CONFIG_MMC_SPI_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SPI_BFIN5XX)
+
+#if IS_ENABLED(CONFIG_MMC_SPI)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SPI_BFIN5XX)
 
@@ -154,7 +172,11 @@ static struct bfin5xx_spi_chip mmc_spi_chip_info = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_DATAFLASH) || defined(CONFIG_MTD_DATAFLASH_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_DATAFLASH)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_DATAFLASH)
 >>>>>>> v3.18
@@ -189,7 +211,11 @@ static struct bfin5xx_spi_chip spi_dataflash_chip_info = {
 static struct spi_board_info bfin_spi_board_info[] __initdata = {
 /* SD/MMC card reader at SPI bus */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MMC_SPI) || defined(CONFIG_MMC_SPI_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MMC_SPI)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MMC_SPI)
 >>>>>>> v3.18
@@ -205,7 +231,11 @@ static struct spi_board_info bfin_spi_board_info[] __initdata = {
 
 /* 8 Megabyte Atmel NOR flash chip at SPI bus */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_DATAFLASH) || defined(CONFIG_MTD_DATAFLASH_MODULE)
+=======
+#if IS_ENABLED(CONFIG_MTD_DATAFLASH)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_DATAFLASH)
 >>>>>>> v3.18
@@ -259,7 +289,11 @@ static struct platform_device spi_bfin_master_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SERIAL_BFIN) || defined(CONFIG_SERIAL_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SERIAL_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SERIAL_BFIN)
 >>>>>>> v3.18
@@ -363,7 +397,11 @@ static struct platform_device bfin_uart1_device = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_I2C_BLACKFIN_TWI) || defined(CONFIG_I2C_BLACKFIN_TWI_MODULE)
+=======
+#if IS_ENABLED(CONFIG_I2C_BLACKFIN_TWI)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_I2C_BLACKFIN_TWI)
 >>>>>>> v3.18
@@ -396,7 +434,11 @@ static struct platform_device i2c_bfin_twi_device = {
 static struct platform_device *dnp5370_devices[] __initdata = {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SERIAL_BFIN) || defined(CONFIG_SERIAL_BFIN_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SERIAL_BFIN)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SERIAL_BFIN)
 >>>>>>> v3.18
@@ -409,22 +451,29 @@ static struct platform_device *dnp5370_devices[] __initdata = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MTD_PHYSMAP) || defined(CONFIG_MTD_PHYSMAP_MODULE)
 	&asmb_flash_device,
 #endif
 
 #if defined(CONFIG_BFIN_MAC) || defined(CONFIG_BFIN_MAC_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_MTD_PHYSMAP)
 	&asmb_flash_device,
 #endif
 
 #if IS_ENABLED(CONFIG_BFIN_MAC)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&bfin_mii_bus,
 	&bfin_mac_device,
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_SPI_BFIN5XX) || defined(CONFIG_SPI_BFIN5XX_MODULE)
 	&spi_bfin_master_device,
@@ -436,6 +485,8 @@ static struct platform_device *dnp5370_devices[] __initdata = {
 
 #if defined(CONFIG_RTC_DRV_BFIN) || defined(CONFIG_RTC_DRV_BFIN_MODULE)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_SPI_BFIN5XX)
 	&spi_bfin_master_device,
 #endif
@@ -445,6 +496,9 @@ static struct platform_device *dnp5370_devices[] __initdata = {
 #endif
 
 #if IS_ENABLED(CONFIG_RTC_DRV_BFIN)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&rtc_device,
 #endif

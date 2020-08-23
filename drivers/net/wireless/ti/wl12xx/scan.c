@@ -48,7 +48,11 @@ static int wl1271_get_scan_channels(struct wl1271 *wl,
 		     * marked as passive.
 		     */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (passive || !(flags & IEEE80211_CHAN_PASSIVE_SCAN))) {
+=======
+		    (passive || !(flags & IEEE80211_CHAN_NO_IR))) {
+>>>>>>> v3.18
 =======
 		    (passive || !(flags & IEEE80211_CHAN_NO_IR))) {
 >>>>>>> v3.18
@@ -161,7 +165,11 @@ static int wl1271_scan_send(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 					 wl->scan.ssid, wl->scan.ssid_len,
 					 wl->scan.req->ie,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 wl->scan.req->ie_len, false);
+=======
+					 wl->scan.req->ie_len, NULL, 0, false);
+>>>>>>> v3.18
 =======
 					 wl->scan.req->ie_len, NULL, 0, false);
 >>>>>>> v3.18
@@ -326,7 +334,11 @@ int wl1271_scan_sched_scan_config(struct wl1271 *wl,
 				  struct wl12xx_vif *wlvif,
 				  struct cfg80211_sched_scan_request *req,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct ieee80211_sched_scan_ies *ies)
+=======
+				  struct ieee80211_scan_ies *ies)
+>>>>>>> v3.18
 =======
 				  struct ieee80211_scan_ies *ies)
 >>>>>>> v3.18
@@ -391,14 +403,20 @@ int wl1271_scan_sched_scan_config(struct wl1271 *wl,
 						 req->ssids[0].ssid,
 						 req->ssids[0].ssid_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						 ies->ie[band],
 						 ies->len[band], true);
 =======
+=======
+>>>>>>> v3.18
 						 ies->ies[band],
 						 ies->len[band],
 						 ies->common_ies,
 						 ies->common_ie_len,
 						 true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret < 0) {
 			wl1271_error("2.4GHz PROBE request template failed");
@@ -413,14 +431,20 @@ int wl1271_scan_sched_scan_config(struct wl1271 *wl,
 						 req->ssids[0].ssid,
 						 req->ssids[0].ssid_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						 ies->ie[band],
 						 ies->len[band], true);
 =======
+=======
+>>>>>>> v3.18
 						 ies->ies[band],
 						 ies->len[band],
 						 ies->common_ies,
 						 ies->common_ie_len,
 						 true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (ret < 0) {
 			wl1271_error("5GHz PROBE request template failed");
@@ -478,7 +502,11 @@ out_free:
 int wl12xx_sched_scan_start(struct wl1271 *wl, struct wl12xx_vif  *wlvif,
 			    struct cfg80211_sched_scan_request *req,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    struct ieee80211_sched_scan_ies *ies)
+=======
+			    struct ieee80211_scan_ies *ies)
+>>>>>>> v3.18
 =======
 			    struct ieee80211_scan_ies *ies)
 >>>>>>> v3.18

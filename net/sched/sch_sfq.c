@@ -126,7 +126,11 @@ struct sfq_sched_data {
 	u8		flags;
 	unsigned short  scaled_quantum; /* SFQ_ALLOT_SIZE(quantum) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tcf_proto *filter_list;
+=======
+	struct tcf_proto __rcu *filter_list;
+>>>>>>> v3.18
 =======
 	struct tcf_proto __rcu *filter_list;
 >>>>>>> v3.18
@@ -192,6 +196,10 @@ static unsigned int sfq_classify(struct sk_buff *skb, struct Qdisc *sch,
 	struct sfq_sched_data *q = qdisc_priv(sch);
 	struct tcf_result res;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tcf_proto *fl;
+>>>>>>> v3.18
 =======
 	struct tcf_proto *fl;
 >>>>>>> v3.18
@@ -203,7 +211,12 @@ static unsigned int sfq_classify(struct sk_buff *skb, struct Qdisc *sch,
 		return TC_H_MIN(skb->priority);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!q->filter_list) {
+=======
+	fl = rcu_dereference_bh(q->filter_list);
+	if (!fl) {
+>>>>>>> v3.18
 =======
 	fl = rcu_dereference_bh(q->filter_list);
 	if (!fl) {
@@ -214,7 +227,11 @@ static unsigned int sfq_classify(struct sk_buff *skb, struct Qdisc *sch,
 
 	*qerr = NET_XMIT_SUCCESS | __NET_XMIT_BYPASS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = tc_classify(skb, q->filter_list, &res);
+=======
+	result = tc_classify(skb, fl, &res);
+>>>>>>> v3.18
 =======
 	result = tc_classify(skb, fl, &res);
 >>>>>>> v3.18
@@ -255,17 +272,23 @@ static inline void sfq_link(struct sfq_sched_data *q, sfq_index x)
 
 #define sfq_unlink(q, x, n, p)			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	n = q->slots[x].dep.next;		\
 	p = q->slots[x].dep.prev;		\
 	sfq_dep_head(q, p)->next = n;		\
 	sfq_dep_head(q, n)->prev = p
 =======
+=======
+>>>>>>> v3.18
 	do {					\
 		n = q->slots[x].dep.next;	\
 		p = q->slots[x].dep.prev;	\
 		sfq_dep_head(q, p)->next = n;	\
 		sfq_dep_head(q, n)->prev = p;	\
 	} while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -335,11 +358,14 @@ static inline void slot_queue_add(struct sfq_slot *slot, struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define	slot_queue_walk(slot, skb)		\
 	for (skb = slot->skblist_next;		\
 	     skb != (struct sk_buff *)slot;	\
 	     skb = skb->next)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static unsigned int sfq_drop(struct Qdisc *sch)
@@ -362,8 +388,13 @@ drop:
 		kfree_skb(skb);
 		sch->q.qlen--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sch->qstats.drops++;
 		sch->qstats.backlog -= len;
+=======
+		qdisc_qstats_drop(sch);
+		qdisc_qstats_backlog_dec(sch, skb);
+>>>>>>> v3.18
 =======
 		qdisc_qstats_drop(sch);
 		qdisc_qstats_backlog_dec(sch, skb);
@@ -415,7 +446,11 @@ sfq_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	if (hash == 0) {
 		if (ret & __NET_XMIT_BYPASS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.drops++;
+=======
+			qdisc_qstats_drop(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_drop(sch);
 >>>>>>> v3.18
@@ -449,7 +484,11 @@ sfq_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 
 		case RED_PROB_MARK:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.overlimits++;
+=======
+			qdisc_qstats_overlimit(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_overlimit(sch);
 >>>>>>> v3.18
@@ -470,7 +509,11 @@ sfq_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 
 		case RED_HARD_MARK:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sch->qstats.overlimits++;
+=======
+			qdisc_qstats_overlimit(sch);
+>>>>>>> v3.18
 =======
 			qdisc_qstats_overlimit(sch);
 >>>>>>> v3.18
@@ -509,7 +552,11 @@ congestion_drop:
 
 enqueue:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sch->qstats.backlog += qdisc_pkt_len(skb);
+=======
+	qdisc_qstats_backlog_inc(sch, skb);
+>>>>>>> v3.18
 =======
 	qdisc_qstats_backlog_inc(sch, skb);
 >>>>>>> v3.18
@@ -572,7 +619,11 @@ next_slot:
 	qdisc_bstats_update(sch, skb);
 	sch->q.qlen--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sch->qstats.backlog -= qdisc_pkt_len(skb);
+=======
+	qdisc_qstats_backlog_dec(sch, skb);
+>>>>>>> v3.18
 =======
 	qdisc_qstats_backlog_dec(sch, skb);
 >>>>>>> v3.18
@@ -642,7 +693,12 @@ static void sfq_rehash(struct Qdisc *sch)
 			x = q->dep[0].next; /* get a free slot */
 			if (x >= SFQ_MAX_FLOWS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 drop:				sch->qstats.backlog -= qdisc_pkt_len(skb);
+=======
+drop:
+				qdisc_qstats_backlog_dec(sch, skb);
+>>>>>>> v3.18
 =======
 drop:
 				qdisc_qstats_backlog_dec(sch, skb);
@@ -687,7 +743,11 @@ static void sfq_perturbation(unsigned long arg)
 
 	spin_lock(root_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->perturbation = net_random();
+=======
+	q->perturbation = prandom_u32();
+>>>>>>> v3.18
 =======
 	q->perturbation = prandom_u32();
 >>>>>>> v3.18
@@ -760,7 +820,11 @@ static int sfq_change(struct Qdisc *sch, struct nlattr *opt)
 	if (q->perturb_period) {
 		mod_timer(&q->perturb_timer, jiffies + q->perturb_period);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		q->perturbation = net_random();
+=======
+		q->perturbation = prandom_u32();
+>>>>>>> v3.18
 =======
 		q->perturbation = prandom_u32();
 >>>>>>> v3.18
@@ -782,12 +846,16 @@ static void *sfq_alloc(size_t sz)
 static void sfq_free(void *addr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (addr) {
 		if (is_vmalloc_addr(addr))
 			vfree(addr);
 		else
 			kfree(addr);
 	}
+=======
+	kvfree(addr);
+>>>>>>> v3.18
 =======
 	kvfree(addr);
 >>>>>>> v3.18
@@ -829,7 +897,11 @@ static int sfq_init(struct Qdisc *sch, struct nlattr *opt)
 	q->scaled_quantum = SFQ_ALLOT_SIZE(q->quantum);
 	q->perturb_period = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q->perturbation = net_random();
+=======
+	q->perturbation = prandom_u32();
+>>>>>>> v3.18
 =======
 	q->perturbation = prandom_u32();
 >>>>>>> v3.18
@@ -920,7 +992,12 @@ static void sfq_put(struct Qdisc *q, unsigned long cl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct tcf_proto **sfq_find_tcf(struct Qdisc *sch, unsigned long cl)
+=======
+static struct tcf_proto __rcu **sfq_find_tcf(struct Qdisc *sch,
+					     unsigned long cl)
+>>>>>>> v3.18
 =======
 static struct tcf_proto __rcu **sfq_find_tcf(struct Qdisc *sch,
 					     unsigned long cl)
@@ -956,7 +1033,11 @@ static int sfq_dump_class_stats(struct Qdisc *sch, unsigned long cl,
 		qs.backlog = slot->backlog;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gnet_stats_copy_queue(d, &qs) < 0)
+=======
+	if (gnet_stats_copy_queue(d, NULL, &qs, qs.qlen) < 0)
+>>>>>>> v3.18
 =======
 	if (gnet_stats_copy_queue(d, NULL, &qs, qs.qlen) < 0)
 >>>>>>> v3.18

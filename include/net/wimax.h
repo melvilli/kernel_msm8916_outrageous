@@ -291,7 +291,11 @@ struct wimax_dev;
  *     reset is complete. In case of having had to resort to bus/cold
  *     reset implying a device disconnection, the call is allowed to
 <<<<<<< HEAD
+<<<<<<< HEAD
  *     return inmediately.
+=======
+ *     return immediately.
+>>>>>>> v3.18
 =======
  *     return immediately.
 >>>>>>> v3.18
@@ -443,9 +447,15 @@ struct wimax_dev {
  * These functions are not exported to user space.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void wimax_dev_init(struct wimax_dev *);
 extern int wimax_dev_add(struct wimax_dev *, struct net_device *);
 extern void wimax_dev_rm(struct wimax_dev *);
+=======
+void wimax_dev_init(struct wimax_dev *);
+int wimax_dev_add(struct wimax_dev *, struct net_device *);
+void wimax_dev_rm(struct wimax_dev *);
+>>>>>>> v3.18
 =======
 void wimax_dev_init(struct wimax_dev *);
 int wimax_dev_add(struct wimax_dev *, struct net_device *);
@@ -465,8 +475,13 @@ struct device *wimax_dev_to_dev(struct wimax_dev *wimax_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void wimax_state_change(struct wimax_dev *, enum wimax_st);
 extern enum wimax_st wimax_state_get(struct wimax_dev *);
+=======
+void wimax_state_change(struct wimax_dev *, enum wimax_st);
+enum wimax_st wimax_state_get(struct wimax_dev *);
+>>>>>>> v3.18
 =======
 void wimax_state_change(struct wimax_dev *, enum wimax_st);
 enum wimax_st wimax_state_get(struct wimax_dev *);
@@ -479,8 +494,13 @@ enum wimax_st wimax_state_get(struct wimax_dev *);
  * to user space can use it.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void wimax_report_rfkill_hw(struct wimax_dev *, enum wimax_rf_state);
 extern void wimax_report_rfkill_sw(struct wimax_dev *, enum wimax_rf_state);
+=======
+void wimax_report_rfkill_hw(struct wimax_dev *, enum wimax_rf_state);
+void wimax_report_rfkill_sw(struct wimax_dev *, enum wimax_rf_state);
+>>>>>>> v3.18
 =======
 void wimax_report_rfkill_hw(struct wimax_dev *, enum wimax_rf_state);
 void wimax_report_rfkill_sw(struct wimax_dev *, enum wimax_rf_state);
@@ -504,8 +524,13 @@ void wimax_report_rfkill_sw(struct wimax_dev *, enum wimax_rf_state);
  * skb_push()/skb_pull()/skb_reserve() on the skb).
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * "pipe_name" is any string, than can be interpreted as the name of
  * the pipe or destinatary; the interpretation of it is driver
+=======
+ * "pipe_name" is any string, that can be interpreted as the name of
+ * the pipe or recipient; the interpretation of it is driver
+>>>>>>> v3.18
 =======
  * "pipe_name" is any string, that can be interpreted as the name of
  * the pipe or recipient; the interpretation of it is driver
@@ -515,6 +540,7 @@ void wimax_report_rfkill_sw(struct wimax_dev *, enum wimax_rf_state);
  * send diagnostics information that a device-specific diagnostics
  * tool would be interested in.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct sk_buff *wimax_msg_alloc(struct wimax_dev *, const char *,
 				       const void *, size_t, gfp_t);
@@ -526,6 +552,8 @@ extern const void *wimax_msg_data_len(struct sk_buff *, size_t *);
 extern const void *wimax_msg_data(struct sk_buff *);
 extern ssize_t wimax_msg_len(struct sk_buff *);
 =======
+=======
+>>>>>>> v3.18
 struct sk_buff *wimax_msg_alloc(struct wimax_dev *, const char *, const void *,
 				size_t, gfp_t);
 int wimax_msg_send(struct wimax_dev *, struct sk_buff *);
@@ -534,6 +562,9 @@ int wimax_msg(struct wimax_dev *, const char *, const void *, size_t, gfp_t);
 const void *wimax_msg_data_len(struct sk_buff *, size_t *);
 const void *wimax_msg_data(struct sk_buff *);
 ssize_t wimax_msg_len(struct sk_buff *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -550,8 +581,13 @@ ssize_t wimax_msg_len(struct sk_buff *);
  * referenced by the caller.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int wimax_rfkill(struct wimax_dev *, enum wimax_rf_state);
 extern int wimax_reset(struct wimax_dev *);
+=======
+int wimax_rfkill(struct wimax_dev *, enum wimax_rf_state);
+int wimax_reset(struct wimax_dev *);
+>>>>>>> v3.18
 =======
 int wimax_rfkill(struct wimax_dev *, enum wimax_rf_state);
 int wimax_reset(struct wimax_dev *);

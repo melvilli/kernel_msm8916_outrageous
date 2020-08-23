@@ -97,7 +97,10 @@ static void bgmac_dma_tx_enable(struct bgmac *bgmac,
 
 	ctl = bgmac_read(bgmac, ring->mmio_base + BGMAC_DMA_TX_CTL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (bgmac->core->id.rev >= 4) {
 		ctl &= ~BGMAC_DMA_TX_BL_MASK;
 		ctl |= BGMAC_DMA_TX_BL_128 << BGMAC_DMA_TX_BL_SHIFT;
@@ -111,6 +114,9 @@ static void bgmac_dma_tx_enable(struct bgmac *bgmac,
 		ctl &= ~BGMAC_DMA_TX_PT_MASK;
 		ctl |= BGMAC_DMA_TX_PT_8 << BGMAC_DMA_TX_PT_SHIFT;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ctl |= BGMAC_DMA_TX_ENABLE;
 	ctl |= BGMAC_DMA_TX_PARITY_DISABLE;
@@ -166,6 +172,11 @@ static netdev_tx_t bgmac_dma_tx_add(struct bgmac *bgmac,
 	dma_desc->ctl1 = cpu_to_le32(ctl1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	netdev_sent_queue(net_dev, skb->len);
+
+>>>>>>> v3.18
 =======
 	netdev_sent_queue(net_dev, skb->len);
 
@@ -179,6 +190,10 @@ static netdev_tx_t bgmac_dma_tx_add(struct bgmac *bgmac,
 		ring->end = 0;
 	bgmac_write(bgmac, ring->mmio_base + BGMAC_DMA_TX_INDEX,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		    ring->index_base +
+>>>>>>> v3.18
 =======
 		    ring->index_base +
 >>>>>>> v3.18
@@ -203,6 +218,10 @@ static void bgmac_dma_tx_free(struct bgmac *bgmac, struct bgmac_dma_ring *ring)
 	int empty_slot;
 	bool freed = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned bytes_compl = 0, pkts_compl = 0;
+>>>>>>> v3.18
 =======
 	unsigned bytes_compl = 0, pkts_compl = 0;
 >>>>>>> v3.18
@@ -211,6 +230,11 @@ static void bgmac_dma_tx_free(struct bgmac *bgmac, struct bgmac_dma_ring *ring)
 	empty_slot = bgmac_read(bgmac, ring->mmio_base + BGMAC_DMA_TX_STATUS);
 	empty_slot &= BGMAC_DMA_TX_STATDPTR;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	empty_slot -= ring->index_base;
+	empty_slot &= BGMAC_DMA_TX_STATDPTR;
+>>>>>>> v3.18
 =======
 	empty_slot -= ring->index_base;
 	empty_slot &= BGMAC_DMA_TX_STATDPTR;
@@ -227,6 +251,12 @@ static void bgmac_dma_tx_free(struct bgmac *bgmac, struct bgmac_dma_ring *ring)
 			slot->dma_addr = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			bytes_compl += slot->skb->len;
+			pkts_compl++;
+
+>>>>>>> v3.18
 =======
 			bytes_compl += slot->skb->len;
 			pkts_compl++;
@@ -246,6 +276,11 @@ static void bgmac_dma_tx_free(struct bgmac *bgmac, struct bgmac_dma_ring *ring)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	netdev_completed_queue(bgmac->net_dev, pkts_compl, bytes_compl);
+
+>>>>>>> v3.18
 =======
 	netdev_completed_queue(bgmac->net_dev, pkts_compl, bytes_compl);
 
@@ -275,7 +310,10 @@ static void bgmac_dma_rx_enable(struct bgmac *bgmac,
 
 	ctl = bgmac_read(bgmac, ring->mmio_base + BGMAC_DMA_RX_CTL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (bgmac->core->id.rev >= 4) {
 		ctl &= ~BGMAC_DMA_RX_BL_MASK;
 		ctl |= BGMAC_DMA_RX_BL_128 << BGMAC_DMA_RX_BL_SHIFT;
@@ -286,6 +324,9 @@ static void bgmac_dma_rx_enable(struct bgmac *bgmac,
 		ctl &= ~BGMAC_DMA_RX_PT_MASK;
 		ctl |= BGMAC_DMA_RX_PT_1 << BGMAC_DMA_RX_PT_SHIFT;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ctl &= BGMAC_DMA_RX_ADDREXT_MASK;
 	ctl |= BGMAC_DMA_RX_ENABLE;
@@ -300,6 +341,7 @@ static int bgmac_dma_rx_skb_for_slot(struct bgmac *bgmac,
 {
 	struct device *dma_dev = bgmac->core->dma_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bgmac_rx_header *rx;
 
 	/* Alloc skb */
@@ -310,6 +352,8 @@ static int bgmac_dma_rx_skb_for_slot(struct bgmac *bgmac,
 	/* Poison - if everything goes fine, hardware will overwrite it */
 	rx = (struct bgmac_rx_header *)slot->skb->data;
 =======
+=======
+>>>>>>> v3.18
 	struct sk_buff *skb;
 	dma_addr_t dma_addr;
 	struct bgmac_rx_header *rx;
@@ -321,11 +365,15 @@ static int bgmac_dma_rx_skb_for_slot(struct bgmac *bgmac,
 
 	/* Poison - if everything goes fine, hardware will overwrite it */
 	rx = (struct bgmac_rx_header *)skb->data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rx->len = cpu_to_le16(0xdead);
 	rx->flags = cpu_to_le16(0xbeef);
 
 	/* Map skb for the DMA */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	slot->dma_addr = dma_map_single(dma_dev, slot->skb->data,
 					BGMAC_RX_BUF_SIZE, DMA_FROM_DEVICE);
@@ -334,6 +382,8 @@ static int bgmac_dma_rx_skb_for_slot(struct bgmac *bgmac,
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	dma_addr = dma_map_single(dma_dev, skb->data,
 				  BGMAC_RX_BUF_SIZE, DMA_FROM_DEVICE);
 	if (dma_mapping_error(dma_dev, dma_addr)) {
@@ -346,6 +396,9 @@ static int bgmac_dma_rx_skb_for_slot(struct bgmac *bgmac,
 	slot->skb = skb;
 	slot->dma_addr = dma_addr;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (slot->dma_addr & 0xC0000000)
 		bgmac_warn(bgmac, "DMA address using 0xC0000000 bit(s), it may need translation trick\n");
@@ -354,7 +407,10 @@ static int bgmac_dma_rx_skb_for_slot(struct bgmac *bgmac,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void bgmac_dma_rx_setup_desc(struct bgmac *bgmac,
 				    struct bgmac_dma_ring *ring, int desc_idx)
 {
@@ -375,6 +431,9 @@ static void bgmac_dma_rx_setup_desc(struct bgmac *bgmac,
 	dma_desc->ctl1 = cpu_to_le32(ctl1);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int bgmac_dma_rx_read(struct bgmac *bgmac, struct bgmac_dma_ring *ring,
 			     int weight)
@@ -385,6 +444,11 @@ static int bgmac_dma_rx_read(struct bgmac *bgmac, struct bgmac_dma_ring *ring,
 	end_slot = bgmac_read(bgmac, ring->mmio_base + BGMAC_DMA_RX_STATUS);
 	end_slot &= BGMAC_DMA_RX_STATDPTR;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	end_slot -= ring->index_base;
+	end_slot &= BGMAC_DMA_RX_STATDPTR;
+>>>>>>> v3.18
 =======
 	end_slot -= ring->index_base;
 	end_slot &= BGMAC_DMA_RX_STATDPTR;
@@ -398,7 +462,10 @@ static int bgmac_dma_rx_read(struct bgmac *bgmac, struct bgmac_dma_ring *ring,
 		struct bgmac_slot_info *slot = &ring->slots[ring->start];
 		struct sk_buff *skb = slot->skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sk_buff *new_skb;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		struct bgmac_rx_header *rx;
@@ -413,6 +480,7 @@ static int bgmac_dma_rx_read(struct bgmac *bgmac, struct bgmac_dma_ring *ring,
 		len = le16_to_cpu(rx->len);
 		flags = le16_to_cpu(rx->flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Check for poison and drop or pass the packet */
 		if (len == 0xdead && flags == 0xbeef) {
@@ -447,6 +515,8 @@ static int bgmac_dma_rx_read(struct bgmac *bgmac, struct bgmac_dma_ring *ring,
 		dma_sync_single_for_device(dma_dev, slot->dma_addr,
 					   BGMAC_RX_BUF_SIZE, DMA_FROM_DEVICE);
 =======
+=======
+>>>>>>> v3.18
 		do {
 			dma_addr_t old_dma_addr = slot->dma_addr;
 			int err;
@@ -492,6 +562,9 @@ static int bgmac_dma_rx_read(struct bgmac *bgmac, struct bgmac_dma_ring *ring,
 			netif_receive_skb(skb);
 			handled++;
 		} while (0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (++ring->start >= BGMAC_RX_RING_SLOTS)
@@ -585,9 +658,12 @@ static int bgmac_dma_alloc(struct bgmac *bgmac)
 		ring->num_slots = BGMAC_TX_RING_SLOTS;
 		ring->mmio_base = ring_base[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bgmac_dma_unaligned(bgmac, ring, BGMAC_DMA_RING_TX))
 			bgmac_warn(bgmac, "TX on ring 0x%X supports unaligned addressing but this feature is not implemented\n",
 				   ring->mmio_base);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -605,7 +681,10 @@ static int bgmac_dma_alloc(struct bgmac *bgmac)
 			bgmac_warn(bgmac, "DMA address using 0xC0000000 bit(s), it may need translation trick\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		ring->unaligned = bgmac_dma_unaligned(bgmac, ring,
 						      BGMAC_DMA_RING_TX);
 		if (ring->unaligned)
@@ -613,6 +692,9 @@ static int bgmac_dma_alloc(struct bgmac *bgmac)
 		else
 			ring->index_base = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* No need to alloc TX slots yet */
 	}
@@ -624,9 +706,12 @@ static int bgmac_dma_alloc(struct bgmac *bgmac)
 		ring->num_slots = BGMAC_RX_RING_SLOTS;
 		ring->mmio_base = ring_base[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bgmac_dma_unaligned(bgmac, ring, BGMAC_DMA_RING_RX))
 			bgmac_warn(bgmac, "RX on ring 0x%X supports unaligned addressing but this feature is not implemented\n",
 				   ring->mmio_base);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -645,7 +730,10 @@ static int bgmac_dma_alloc(struct bgmac *bgmac)
 			bgmac_warn(bgmac, "DMA address using 0xC0000000 bit(s), it may need translation trick\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		ring->unaligned = bgmac_dma_unaligned(bgmac, ring,
 						      BGMAC_DMA_RING_RX);
 		if (ring->unaligned)
@@ -653,6 +741,9 @@ static int bgmac_dma_alloc(struct bgmac *bgmac)
 		else
 			ring->index_base = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Alloc RX slots */
 		for (j = 0; j < ring->num_slots; j++) {
@@ -675,8 +766,11 @@ static void bgmac_dma_init(struct bgmac *bgmac)
 {
 	struct bgmac_dma_ring *ring;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bgmac_dma_desc *dma_desc;
 	u32 ctl0, ctl1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
@@ -685,8 +779,13 @@ static void bgmac_dma_init(struct bgmac *bgmac)
 		ring = &bgmac->tx_ring[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* We don't implement unaligned addressing, so enable first */
 		bgmac_dma_tx_enable(bgmac, ring);
+=======
+		if (!ring->unaligned)
+			bgmac_dma_tx_enable(bgmac, ring);
+>>>>>>> v3.18
 =======
 		if (!ring->unaligned)
 			bgmac_dma_tx_enable(bgmac, ring);
@@ -696,6 +795,11 @@ static void bgmac_dma_init(struct bgmac *bgmac)
 		bgmac_write(bgmac, ring->mmio_base + BGMAC_DMA_TX_RINGHI,
 			    upper_32_bits(ring->dma_base));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (ring->unaligned)
+			bgmac_dma_tx_enable(bgmac, ring);
+>>>>>>> v3.18
 =======
 		if (ring->unaligned)
 			bgmac_dma_tx_enable(bgmac, ring);
@@ -711,8 +815,13 @@ static void bgmac_dma_init(struct bgmac *bgmac)
 		ring = &bgmac->rx_ring[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* We don't implement unaligned addressing, so enable first */
 		bgmac_dma_rx_enable(bgmac, ring);
+=======
+		if (!ring->unaligned)
+			bgmac_dma_rx_enable(bgmac, ring);
+>>>>>>> v3.18
 =======
 		if (!ring->unaligned)
 			bgmac_dma_rx_enable(bgmac, ring);
@@ -721,6 +830,7 @@ static void bgmac_dma_init(struct bgmac *bgmac)
 			    lower_32_bits(ring->dma_base));
 		bgmac_write(bgmac, ring->mmio_base + BGMAC_DMA_RX_RINGHI,
 			    upper_32_bits(ring->dma_base));
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		for (j = 0, dma_desc = ring->cpu_base; j < ring->num_slots;
@@ -743,6 +853,8 @@ static void bgmac_dma_init(struct bgmac *bgmac)
 
 		bgmac_write(bgmac, ring->mmio_base + BGMAC_DMA_RX_INDEX,
 =======
+=======
+>>>>>>> v3.18
 		if (ring->unaligned)
 			bgmac_dma_rx_enable(bgmac, ring);
 
@@ -751,6 +863,9 @@ static void bgmac_dma_init(struct bgmac *bgmac)
 
 		bgmac_write(bgmac, ring->mmio_base + BGMAC_DMA_RX_INDEX,
 			    ring->index_base +
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    ring->num_slots * sizeof(struct bgmac_dma_desc));
 
@@ -855,6 +970,7 @@ static int bgmac_phy_write(struct bgmac *bgmac, u8 phyaddr, u8 reg, u16 value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* http://bcm-v4.sipsolutions.net/mac-gbit/gmac/chipphyforce */
 static void bgmac_phy_force(struct bgmac *bgmac)
 {
@@ -921,6 +1037,8 @@ static void bgmac_phy_advertise(struct bgmac *bgmac)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* http://bcm-v4.sipsolutions.net/mac-gbit/gmac/chipphyinit */
 static void bgmac_phy_init(struct bgmac *bgmac)
 {
@@ -965,11 +1083,17 @@ static void bgmac_phy_reset(struct bgmac *bgmac)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bgmac_phy_write(bgmac, bgmac->phyaddr, BGMAC_PHY_CTL,
 			BGMAC_PHY_CTL_RESET);
 	udelay(100);
 	if (bgmac_phy_read(bgmac, bgmac->phyaddr, BGMAC_PHY_CTL) &
 	    BGMAC_PHY_CTL_RESET)
+=======
+	bgmac_phy_write(bgmac, bgmac->phyaddr, MII_BMCR, BMCR_RESET);
+	udelay(100);
+	if (bgmac_phy_read(bgmac, bgmac->phyaddr, MII_BMCR) & BMCR_RESET)
+>>>>>>> v3.18
 =======
 	bgmac_phy_write(bgmac, bgmac->phyaddr, MII_BMCR, BMCR_RESET);
 	udelay(100);
@@ -993,7 +1117,11 @@ static void bgmac_cmdcfg_maskset(struct bgmac *bgmac, u32 mask, u32 set,
 	u32 new_val = (cmdcfg & mask) | set;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bgmac_set(bgmac, BGMAC_CMDCFG, BGMAC_CMDCFG_SR);
+=======
+	bgmac_set(bgmac, BGMAC_CMDCFG, BGMAC_CMDCFG_SR(bgmac->core->id.rev));
+>>>>>>> v3.18
 =======
 	bgmac_set(bgmac, BGMAC_CMDCFG, BGMAC_CMDCFG_SR(bgmac->core->id.rev));
 >>>>>>> v3.18
@@ -1003,7 +1131,11 @@ static void bgmac_cmdcfg_maskset(struct bgmac *bgmac, u32 mask, u32 set,
 		bgmac_write(bgmac, BGMAC_CMDCFG, new_val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bgmac_mask(bgmac, BGMAC_CMDCFG, ~BGMAC_CMDCFG_SR);
+=======
+	bgmac_mask(bgmac, BGMAC_CMDCFG, ~BGMAC_CMDCFG_SR(bgmac->core->id.rev));
+>>>>>>> v3.18
 =======
 	bgmac_mask(bgmac, BGMAC_CMDCFG, ~BGMAC_CMDCFG_SR(bgmac->core->id.rev));
 >>>>>>> v3.18
@@ -1066,7 +1198,11 @@ static void bgmac_clear_mib(struct bgmac *bgmac)
 
 /* http://bcm-v4.sipsolutions.net/mac-gbit/gmac/gmac_speed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bgmac_speed(struct bgmac *bgmac, int speed)
+=======
+static void bgmac_mac_speed(struct bgmac *bgmac)
+>>>>>>> v3.18
 =======
 static void bgmac_mac_speed(struct bgmac *bgmac)
 >>>>>>> v3.18
@@ -1074,6 +1210,7 @@ static void bgmac_mac_speed(struct bgmac *bgmac)
 	u32 mask = ~(BGMAC_CMDCFG_ES_MASK | BGMAC_CMDCFG_HD);
 	u32 set = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (speed & BGMAC_SPEED_10)
 		set |= BGMAC_CMDCFG_ES_10;
@@ -1084,6 +1221,8 @@ static void bgmac_mac_speed(struct bgmac *bgmac)
 	if (!bgmac->full_duplex)
 		set |= BGMAC_CMDCFG_HD;
 =======
+=======
+>>>>>>> v3.18
 	switch (bgmac->mac_speed) {
 	case SPEED_10:
 		set |= BGMAC_CMDCFG_ES_10;
@@ -1104,12 +1243,16 @@ static void bgmac_mac_speed(struct bgmac *bgmac)
 	if (bgmac->mac_duplex == DUPLEX_HALF)
 		set |= BGMAC_CMDCFG_HD;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bgmac_cmdcfg_maskset(bgmac, mask, set, true);
 }
 
 static void bgmac_miiconfig(struct bgmac *bgmac)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 imode = (bgmac_read(bgmac, BGMAC_DEV_STATUS) & BGMAC_DS_MM_MASK) >>
 			BGMAC_DS_MM_SHIFT;
@@ -1119,6 +1262,8 @@ static void bgmac_miiconfig(struct bgmac *bgmac)
 		else
 			bgmac_speed(bgmac, bgmac->speed);
 =======
+=======
+>>>>>>> v3.18
 	struct bcma_device *core = bgmac->core;
 	struct bcma_chipinfo *ci = &core->bus->chipinfo;
 	u8 imode;
@@ -1139,6 +1284,9 @@ static void bgmac_miiconfig(struct bgmac *bgmac)
 			bgmac->mac_duplex = DUPLEX_FULL;
 			bgmac_mac_speed(bgmac);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -1150,7 +1298,11 @@ static void bgmac_chip_reset(struct bgmac *bgmac)
 	struct bcma_bus *bus = core->bus;
 	struct bcma_chipinfo *ci = &bus->chipinfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 flags = 0;
+=======
+	u32 flags;
+>>>>>>> v3.18
 =======
 	u32 flags;
 >>>>>>> v3.18
@@ -1177,6 +1329,7 @@ static void bgmac_chip_reset(struct bgmac *bgmac)
 
 	iost = bcma_aread32(core, BCMA_IOST);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((ci->id == BCMA_CHIP_ID_BCM5357 && ci->pkg == 10) ||
 	    (ci->id == BCMA_CHIP_ID_BCM4749 && ci->pkg == 10) ||
 	    (ci->id == BCMA_CHIP_ID_BCM53572 && ci->pkg == 9))
@@ -1198,6 +1351,8 @@ static void bgmac_chip_reset(struct bgmac *bgmac)
 
 	if (ci->id == BCMA_CHIP_ID_BCM5357 || ci->id == BCMA_CHIP_ID_BCM4749 ||
 =======
+=======
+>>>>>>> v3.18
 	if ((ci->id == BCMA_CHIP_ID_BCM5357 && ci->pkg == BCMA_PKG_ID_BCM47186) ||
 	    (ci->id == BCMA_CHIP_ID_BCM4749 && ci->pkg == 10) ||
 	    (ci->id == BCMA_CHIP_ID_BCM53572 && ci->pkg == BCMA_PKG_ID_BCM47188))
@@ -1228,6 +1383,9 @@ static void bgmac_chip_reset(struct bgmac *bgmac)
 
 	if (ci->id == BCMA_CHIP_ID_BCM5357 ||
 	    ci->id == BCMA_CHIP_ID_BCM4749 ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    ci->id == BCMA_CHIP_ID_BCM53572) {
 		struct bcma_drv_cc *cc = &bgmac->core->bus->drv_cc;
@@ -1235,9 +1393,15 @@ static void bgmac_chip_reset(struct bgmac *bgmac)
 		u8 sw_type = BGMAC_CHIPCTL_1_SW_TYPE_EPHY |
 			     BGMAC_CHIPCTL_1_IF_TYPE_MII;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char buf[2];
 
 		if (bcm47xx_nvram_getenv("et_swtype", buf, 1) > 0) {
+=======
+		char buf[4];
+
+		if (bcm47xx_nvram_getenv("et_swtype", buf, sizeof(buf)) > 0) {
+>>>>>>> v3.18
 =======
 		char buf[4];
 
@@ -1250,16 +1414,22 @@ static void bgmac_chip_reset(struct bgmac *bgmac)
 			et_swtype <<= 4;
 			sw_type = et_swtype;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (ci->id == BCMA_CHIP_ID_BCM5357 && ci->pkg == 9) {
 			sw_type = BGMAC_CHIPCTL_1_SW_TYPE_EPHYRMII;
 		} else if ((ci->id != BCMA_CHIP_ID_BCM53572 && ci->pkg == 10) ||
 			   (ci->id == BCMA_CHIP_ID_BCM53572 && ci->pkg == 9)) {
 =======
+=======
+>>>>>>> v3.18
 		} else if (ci->id == BCMA_CHIP_ID_BCM5357 && ci->pkg == BCMA_PKG_ID_BCM5358) {
 			sw_type = BGMAC_CHIPCTL_1_SW_TYPE_EPHYRMII;
 		} else if ((ci->id == BCMA_CHIP_ID_BCM5357 && ci->pkg == BCMA_PKG_ID_BCM47186) ||
 			   (ci->id == BCMA_CHIP_ID_BCM4749 && ci->pkg == 10) ||
 			   (ci->id == BCMA_CHIP_ID_BCM53572 && ci->pkg == BCMA_PKG_ID_BCM47188)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sw_type = BGMAC_CHIPCTL_1_IF_TYPE_RGMII |
 				  BGMAC_CHIPCTL_1_SW_TYPE_RGMII;
@@ -1298,13 +1468,19 @@ static void bgmac_chip_reset(struct bgmac *bgmac)
 			     BGMAC_CMDCFG_NLC |
 			     BGMAC_CMDCFG_CFE |
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     BGMAC_CMDCFG_SR,
 			     false);
 =======
+=======
+>>>>>>> v3.18
 			     BGMAC_CMDCFG_SR(core->id.rev),
 			     false);
 	bgmac->mac_speed = SPEED_UNKNOWN;
 	bgmac->mac_duplex = DUPLEX_UNKNOWN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bgmac_clear_mib(bgmac);
@@ -1317,6 +1493,11 @@ static void bgmac_chip_reset(struct bgmac *bgmac)
 	bgmac_phy_init(bgmac);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	netdev_reset_queue(bgmac->net_dev);
+
+>>>>>>> v3.18
 =======
 	netdev_reset_queue(bgmac->net_dev);
 
@@ -1349,7 +1530,11 @@ static void bgmac_enable(struct bgmac *bgmac)
 	cmdcfg = bgmac_read(bgmac, BGMAC_CMDCFG);
 	bgmac_cmdcfg_maskset(bgmac, ~(BGMAC_CMDCFG_TE | BGMAC_CMDCFG_RE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     BGMAC_CMDCFG_SR, true);
+=======
+			     BGMAC_CMDCFG_SR(bgmac->core->id.rev), true);
+>>>>>>> v3.18
 =======
 			     BGMAC_CMDCFG_SR(bgmac->core->id.rev), true);
 >>>>>>> v3.18
@@ -1382,6 +1567,7 @@ static void bgmac_enable(struct bgmac *bgmac)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rxq_ctl = bgmac_read(bgmac, BGMAC_RXQ_CTL);
 	rxq_ctl &= ~BGMAC_RXQ_CTL_MDP_MASK;
 	bp_clk = bcma_pmu_get_bus_clock(&bgmac->core->bus->drv_cc) / 1000000;
@@ -1389,6 +1575,8 @@ static void bgmac_enable(struct bgmac *bgmac)
 	rxq_ctl |= (mdp << BGMAC_RXQ_CTL_MDP_SHIFT);
 	bgmac_write(bgmac, BGMAC_RXQ_CTL, rxq_ctl);
 =======
+=======
+>>>>>>> v3.18
 	if (ci->id != BCMA_CHIP_ID_BCM4707 &&
 	    ci->id != BCMA_CHIP_ID_BCM53018) {
 		rxq_ctl = bgmac_read(bgmac, BGMAC_RXQ_CTL);
@@ -1399,6 +1587,9 @@ static void bgmac_enable(struct bgmac *bgmac)
 		rxq_ctl |= (mdp << BGMAC_RXQ_CTL_MDP_SHIFT);
 		bgmac_write(bgmac, BGMAC_RXQ_CTL, rxq_ctl);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1426,6 +1617,7 @@ static void bgmac_chip_init(struct bgmac *bgmac, bool full_init)
 	bgmac_write(bgmac, BGMAC_RXMAX_LENGTH, 32 + ETHER_MAX_LEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bgmac->autoneg) {
 		bgmac_speed(bgmac, bgmac->speed);
 		bgmac_phy_force(bgmac);
@@ -1433,6 +1625,8 @@ static void bgmac_chip_init(struct bgmac *bgmac, bool full_init)
 		bgmac_phy_advertise(bgmac);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (full_init) {
@@ -1525,6 +1719,11 @@ static int bgmac_open(struct net_device *net_dev)
 	napi_enable(&bgmac->napi);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phy_start(bgmac->phy_dev);
+
+>>>>>>> v3.18
 =======
 	phy_start(bgmac->phy_dev);
 
@@ -1542,6 +1741,11 @@ static int bgmac_stop(struct net_device *net_dev)
 	netif_carrier_off(net_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phy_stop(bgmac->phy_dev);
+
+>>>>>>> v3.18
 =======
 	phy_stop(bgmac->phy_dev);
 
@@ -1583,6 +1787,7 @@ static int bgmac_ioctl(struct net_device *net_dev, struct ifreq *ifr, int cmd)
 {
 	struct bgmac *bgmac = netdev_priv(net_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mii_ioctl_data *data = if_mii(ifr);
 
 	switch (cmd) {
@@ -1605,11 +1810,16 @@ static int bgmac_ioctl(struct net_device *net_dev, struct ifreq *ifr, int cmd)
 		return -EOPNOTSUPP;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	if (!netif_running(net_dev))
 		return -EINVAL;
 
 	return phy_mii_ioctl(bgmac->phy_dev, ifr, cmd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1632,6 +1842,7 @@ static int bgmac_get_settings(struct net_device *net_dev,
 {
 	struct bgmac *bgmac = netdev_priv(net_dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cmd->supported = SUPPORTED_10baseT_Half |
 			 SUPPORTED_10baseT_Full |
@@ -1685,15 +1896,25 @@ static int bgmac_get_settings(struct net_device *net_dev,
 }
 
 >>>>>>> v3.18
+=======
+	return phy_ethtool_gset(bgmac->phy_dev, cmd);
+}
+
+>>>>>>> v3.18
 static int bgmac_set_settings(struct net_device *net_dev,
 			      struct ethtool_cmd *cmd)
 {
 	struct bgmac *bgmac = netdev_priv(net_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -1;
 }
 #endif
+=======
+	return phy_ethtool_sset(bgmac->phy_dev, cmd);
+}
+>>>>>>> v3.18
 =======
 	return phy_ethtool_sset(bgmac->phy_dev, cmd);
 }
@@ -1709,6 +1930,10 @@ static void bgmac_get_drvinfo(struct net_device *net_dev,
 static const struct ethtool_ops bgmac_ethtool_ops = {
 	.get_settings		= bgmac_get_settings,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.set_settings		= bgmac_set_settings,
+>>>>>>> v3.18
 =======
 	.set_settings		= bgmac_set_settings,
 >>>>>>> v3.18
@@ -1731,10 +1956,13 @@ static int bgmac_mii_write(struct mii_bus *bus, int mii_id, int regnum,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bgmac_mii_register(struct bgmac *bgmac)
 {
 	struct mii_bus *mii_bus;
 =======
+=======
+>>>>>>> v3.18
 static void bgmac_adjust_link(struct net_device *net_dev)
 {
 	struct bgmac *bgmac = netdev_priv(net_dev);
@@ -1764,6 +1992,9 @@ static int bgmac_mii_register(struct bgmac *bgmac)
 	struct mii_bus *mii_bus;
 	struct phy_device *phy_dev;
 	char bus_id[MII_BUS_ID_SIZE + 3];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i, err = 0;
 
@@ -1797,9 +2028,12 @@ static int bgmac_mii_register(struct bgmac *bgmac)
 	bgmac->mii_bus = mii_bus;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err;
 
 =======
+=======
+>>>>>>> v3.18
 	/* Connect to the PHY */
 	snprintf(bus_id, sizeof(bus_id), PHY_ID_FMT, mii_bus->id,
 		 bgmac->phyaddr);
@@ -1816,6 +2050,9 @@ static int bgmac_mii_register(struct bgmac *bgmac)
 
 err_unregister_bus:
 	mdiobus_unregister(mii_bus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_free_irq:
 	kfree(mii_bus->irq);
@@ -1865,7 +2102,11 @@ static int bgmac_probe(struct bcma_device *core)
 	net_dev->netdev_ops = &bgmac_netdev_ops;
 	net_dev->irq = core->irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(net_dev, &bgmac_ethtool_ops);
+=======
+	net_dev->ethtool_ops = &bgmac_ethtool_ops;
+>>>>>>> v3.18
 =======
 	net_dev->ethtool_ops = &bgmac_ethtool_ops;
 >>>>>>> v3.18
@@ -1876,9 +2117,12 @@ static int bgmac_probe(struct bcma_device *core)
 
 	/* Defaults */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bgmac->autoneg = true;
 	bgmac->full_duplex = true;
 	bgmac->speed = BGMAC_SPEED_10 | BGMAC_SPEED_100 | BGMAC_SPEED_1000;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memcpy(bgmac->net_dev->dev_addr, mac, ETH_ALEN);
@@ -1912,7 +2156,10 @@ static int bgmac_probe(struct bcma_device *core)
 	bgmac_chip_reset(bgmac);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* For Northstar, we have to take all GMAC core out of reset */
 	if (core->id.id == BCMA_CHIP_ID_BCM4707 ||
 	    core->id.id == BCMA_CHIP_ID_BCM53018) {
@@ -1934,6 +2181,9 @@ static int bgmac_probe(struct bcma_device *core)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = bgmac_dma_alloc(bgmac);
 	if (err) {
@@ -1960,7 +2210,10 @@ static int bgmac_probe(struct bcma_device *core)
 	if (err) {
 		bgmac_err(bgmac, "Cannot register MDIO\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENOTSUPP;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto err_dma_free;
@@ -1970,7 +2223,10 @@ static int bgmac_probe(struct bcma_device *core)
 	if (err) {
 		bgmac_err(bgmac, "Cannot register net device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENOTSUPP;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto err_mii_unregister;

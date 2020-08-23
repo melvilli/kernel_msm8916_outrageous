@@ -4,7 +4,11 @@
  *   vfs operations that deal with io control
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Copyright (C) International Business Machines  Corp., 2005,2007
+=======
+ *   Copyright (C) International Business Machines  Corp., 2005,2013
+>>>>>>> v3.18
 =======
  *   Copyright (C) International Business Machines  Corp., 2005,2013
 >>>>>>> v3.18
@@ -27,11 +31,17 @@
 
 #include <linux/fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/file.h>
 #include <linux/mount.h>
 #include <linux/mm.h>
 #include <linux/pagemap.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "cifspdu.h"
 #include "cifsglob.h"
@@ -40,7 +50,10 @@
 #include "cifsfs.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CIFS_IOCTL_MAGIC	0xCF
 #define CIFS_IOC_COPYCHUNK_FILE	_IOW(CIFS_IOCTL_MAGIC, 3, int)
 
@@ -147,6 +160,9 @@ out_drop_write:
 	return rc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 long cifs_ioctl(struct file *filep, unsigned int command, unsigned long arg)
 {
@@ -154,6 +170,7 @@ long cifs_ioctl(struct file *filep, unsigned int command, unsigned long arg)
 	int rc = -ENOTTY; /* strange error - but the precedent */
 	unsigned int xid;
 	struct cifs_sb_info *cifs_sb;
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_CIFS_POSIX
 	struct cifsFileInfo *pSMBFile = filep->private_data;
@@ -163,10 +180,15 @@ long cifs_ioctl(struct file *filep, unsigned int command, unsigned long arg)
 	__u64   caps;
 #endif /* CONFIG_CIFS_POSIX */
 =======
+=======
+>>>>>>> v3.18
 	struct cifsFileInfo *pSMBFile = filep->private_data;
 	struct cifs_tcon *tcon;
 	__u64	ExtAttrBits = 0;
 	__u64   caps;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	xid = get_xid();
@@ -177,7 +199,10 @@ long cifs_ioctl(struct file *filep, unsigned int command, unsigned long arg)
 
 	switch (command) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CIFS_POSIX
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		case FS_IOC_GETFLAGS:
@@ -186,7 +211,13 @@ long cifs_ioctl(struct file *filep, unsigned int command, unsigned long arg)
 			tcon = tlink_tcon(pSMBFile->tlink);
 			caps = le64_to_cpu(tcon->fsUnixInfo.Capability);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (CIFS_UNIX_EXTATTR_CAP & caps) {
+=======
+#ifdef CONFIG_CIFS_POSIX
+			if (CIFS_UNIX_EXTATTR_CAP & caps) {
+				__u64	ExtAttrMask = 0;
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_CIFS_POSIX
 			if (CIFS_UNIX_EXTATTR_CAP & caps) {
@@ -200,10 +231,13 @@ long cifs_ioctl(struct file *filep, unsigned int command, unsigned long arg)
 						FS_FL_USER_VISIBLE,
 						(int __user *)arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}
 			break;
 
 =======
+=======
+>>>>>>> v3.18
 				if (rc != EOPNOTSUPP)
 					break;
 			}
@@ -216,12 +250,16 @@ long cifs_ioctl(struct file *filep, unsigned int command, unsigned long arg)
 					      (int __user *)arg);
 			}
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case FS_IOC_SETFLAGS:
 			if (pSMBFile == NULL)
 				break;
 			tcon = tlink_tcon(pSMBFile->tlink);
 			caps = le64_to_cpu(tcon->fsUnixInfo.Capability);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (CIFS_UNIX_EXTATTR_CAP & caps) {
 				if (get_user(ExtAttrBits, (int __user *)arg)) {
@@ -239,6 +277,8 @@ long cifs_ioctl(struct file *filep, unsigned int command, unsigned long arg)
 			break;
 #endif /* CONFIG_CIFS_POSIX */
 =======
+=======
+>>>>>>> v3.18
 
 			if (get_user(ExtAttrBits, (int __user *)arg)) {
 				rc = -EFAULT;
@@ -269,6 +309,9 @@ long cifs_ioctl(struct file *filep, unsigned int command, unsigned long arg)
 		case CIFS_IOC_COPYCHUNK_FILE:
 			rc = cifs_ioctl_clone(xid, filep, arg, 0, 0, 0);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			cifs_dbg(FYI, "unsupported ioctl\n");

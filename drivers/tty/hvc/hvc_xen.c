@@ -184,7 +184,11 @@ static int dom0_write_console(uint32_t vtermno, const char *str, int len)
 	int rc = HYPERVISOR_console_io(CONSOLEIO_write, len, (char *)str);
 	if (rc < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return rc;
+>>>>>>> v3.18
 =======
 		return rc;
 >>>>>>> v3.18
@@ -213,7 +217,11 @@ static int xen_hvm_console_init(void)
 	info = vtermno_to_xencons(HVC_COOKIE);
 	if (!info) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		info = kzalloc(sizeof(struct xencons_info), GFP_KERNEL | __GFP_ZERO);
+=======
+		info = kzalloc(sizeof(struct xencons_info), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		info = kzalloc(sizeof(struct xencons_info), GFP_KERNEL);
 >>>>>>> v3.18
@@ -266,7 +274,11 @@ static int xen_pv_console_init(void)
 	info = vtermno_to_xencons(HVC_COOKIE);
 	if (!info) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		info = kzalloc(sizeof(struct xencons_info), GFP_KERNEL | __GFP_ZERO);
+=======
+		info = kzalloc(sizeof(struct xencons_info), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		info = kzalloc(sizeof(struct xencons_info), GFP_KERNEL);
 >>>>>>> v3.18
@@ -297,7 +309,11 @@ static int xen_initial_domain_console_init(void)
 	info = vtermno_to_xencons(HVC_COOKIE);
 	if (!info) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		info = kzalloc(sizeof(struct xencons_info), GFP_KERNEL | __GFP_ZERO);
+=======
+		info = kzalloc(sizeof(struct xencons_info), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		info = kzalloc(sizeof(struct xencons_info), GFP_KERNEL);
 >>>>>>> v3.18
@@ -315,6 +331,7 @@ static int xen_initial_domain_console_init(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void xen_console_update_evtchn(struct xencons_info *info)
 {
@@ -338,11 +355,16 @@ void xen_console_resume(void)
 		rebind_evtchn_irq(info->evtchn, info->irq);
 	}
 =======
+=======
+>>>>>>> v3.18
 void xen_console_resume(void)
 {
 	struct xencons_info *info = vtermno_to_xencons(HVC_COOKIE);
 	if (info != NULL && info->irq)
 		rebind_evtchn_irq(info->evtchn, info->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -388,8 +410,11 @@ static int xen_console_remove(struct xencons_info *info)
 
 #ifdef CONFIG_HVC_XEN_FRONTEND
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct xenbus_driver xencons_driver;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int xencons_remove(struct xenbus_device *dev)
@@ -446,9 +471,12 @@ static int xencons_connect_backend(struct xenbus_device *dev,
 	if (ret)
 		goto error_xenbus;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = xenbus_printf(xbt, dev->nodename, "type", "ioemu");
 	if (ret)
 		goto error_xenbus;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = xenbus_transaction_end(xbt, 0);
@@ -549,8 +577,14 @@ static const struct xenbus_device_id xencons_ids[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static DEFINE_XENBUS_DRIVER(xencons, "xenconsole",
+=======
+static struct xenbus_driver xencons_driver = {
+	.name = "xenconsole",
+	.ids = xencons_ids,
+>>>>>>> v3.18
 =======
 static struct xenbus_driver xencons_driver = {
 	.name = "xenconsole",
@@ -561,7 +595,11 @@ static struct xenbus_driver xencons_driver = {
 	.resume = xencons_resume,
 	.otherend_changed = xencons_backend_changed,
 <<<<<<< HEAD
+<<<<<<< HEAD
 );
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -618,6 +656,7 @@ static int __init xen_hvc_init(void)
 	return r;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void __exit xen_hvc_fini(void)
 {
@@ -630,6 +669,9 @@ static void __exit xen_hvc_fini(void)
 		xen_console_remove(entry);
 	}
 }
+=======
+device_initcall(xen_hvc_init);
+>>>>>>> v3.18
 =======
 device_initcall(xen_hvc_init);
 >>>>>>> v3.18
@@ -659,10 +701,13 @@ static int xen_cons_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 module_init(xen_hvc_init);
 module_exit(xen_hvc_fini);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 console_initcall(xen_cons_init);
@@ -706,8 +751,11 @@ struct console xenboot_console = {
 void xen_raw_console_write(const char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dom0_write_console(0, str, strlen(str));
 =======
+=======
+>>>>>>> v3.18
 	ssize_t len = strlen(str);
 	int rc = 0;
 
@@ -724,6 +772,9 @@ outb_print:
 			outb(str[i], 0xe9);
 #endif
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

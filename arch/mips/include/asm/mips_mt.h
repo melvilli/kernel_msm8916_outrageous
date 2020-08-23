@@ -1,8 +1,13 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Definitions and decalrations for MIPS MT support
  * that are common between SMTC, VSMP, and/or AP/SP
  * kernel models.
+=======
+ * Definitions and decalrations for MIPS MT support that are common between
+ * the VSMP, and AP/SP kernel models.
+>>>>>>> v3.18
 =======
  * Definitions and decalrations for MIPS MT support that are common between
  * the VSMP, and AP/SP kernel models.
@@ -24,14 +29,20 @@ extern unsigned long mt_fpemul_threshold;
 
 extern void mips_mt_regdump(unsigned long previous_mvpcontrol_value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void mips_mt_set_cpuoptions(void);
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_MIPS_MT
 extern void mips_mt_set_cpuoptions(void);
 #else
 static inline void mips_mt_set_cpuoptions(void) { }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct class;

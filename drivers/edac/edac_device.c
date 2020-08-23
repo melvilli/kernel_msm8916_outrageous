@@ -412,6 +412,7 @@ void edac_device_workq_setup(struct edac_device_ctl_info *edac_dev,
 	 * then calc the number of jiffies that represents
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!msec)
 		msec = 1000;
 	edac_dev->poll_msec = msec;
@@ -423,10 +424,15 @@ void edac_device_workq_setup(struct edac_device_ctl_info *edac_dev,
 	else
 		INIT_DELAYED_WORK(&edac_dev->work, edac_device_workq_function);
 =======
+=======
+>>>>>>> v3.18
 	edac_dev->poll_msec = msec;
 	edac_dev->delay = msecs_to_jiffies(msec);
 
 	INIT_DELAYED_WORK(&edac_dev->work, edac_device_workq_function);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* optimize here for the 1 second case, which will be normal value, to
@@ -451,6 +457,12 @@ void edac_device_workq_teardown(struct edac_device_ctl_info *edac_dev)
 	int status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!edac_dev->edac_check)
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!edac_dev->edac_check)
 		return;
@@ -543,7 +555,11 @@ int edac_device_add_device(struct edac_device_ctl_info *edac_dev)
 		 * default = 1000 msec
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		edac_device_workq_setup(edac_dev, edac_dev->poll_msec);
+=======
+		edac_device_workq_setup(edac_dev, 1000);
+>>>>>>> v3.18
 =======
 		edac_device_workq_setup(edac_dev, 1000);
 >>>>>>> v3.18
@@ -554,12 +570,18 @@ int edac_device_add_device(struct edac_device_ctl_info *edac_dev)
 	/* Report action taken */
 	edac_device_printk(edac_dev, KERN_INFO,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"Giving out device to module '%s' controller "
 				"'%s': DEV '%s' (%s)\n",
 				edac_dev->mod_name,
 				edac_dev->ctl_name,
 				edac_dev_name(edac_dev),
 				edac_op_state_to_string(edac_dev->op_state));
+=======
+		"Giving out device to module %s controller %s: DEV %s (%s)\n",
+		edac_dev->mod_name, edac_dev->ctl_name, edac_dev->dev_name,
+		edac_op_state_to_string(edac_dev->op_state));
+>>>>>>> v3.18
 =======
 		"Giving out device to module %s controller %s: DEV %s (%s)\n",
 		edac_dev->mod_name, edac_dev->ctl_name, edac_dev->dev_name,
@@ -641,12 +663,15 @@ static inline int edac_device_get_log_ue(struct edac_device_ctl_info *edac_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int edac_device_get_panic_on_ce(struct edac_device_ctl_info
 					*edac_dev)
 {
 	return edac_dev->panic_on_ce;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int edac_device_get_panic_on_ue(struct edac_device_ctl_info
@@ -699,11 +724,14 @@ void edac_device_handle_ce(struct edac_device_ctl_info *edac_dev,
 				edac_dev->ctl_name, instance->name,
 				block ? block->name : "N/A", msg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (edac_device_get_panic_on_ce(edac_dev))
 		panic("EDAC %s: CE instance: %s block %s '%s'\n",
 			edac_dev->ctl_name, instance->name,
 			block ? block->name : "N/A", msg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

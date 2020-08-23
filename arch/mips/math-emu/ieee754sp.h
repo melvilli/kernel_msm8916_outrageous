@@ -7,8 +7,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -23,22 +26,29 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
  */
 
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
 #include <linux/compiler.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "ieee754int.h"
 
 #define assert(expr) ((void)0)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* 3bit extended single precision sticky right shift */
 #define SPXSRSXn(rs) \
@@ -65,6 +75,8 @@ static inline ieee754sp buildsp(int s, int bx, unsigned m)
 {
 	ieee754sp r;
 =======
+=======
+>>>>>>> v3.18
 #define SP_EBIAS	127
 #define SP_EMIN		(-126)
 #define SP_EMAX		127
@@ -108,11 +120,15 @@ static inline int ieee754sp_finite(union ieee754sp x)
 static inline union ieee754sp buildsp(int s, int bx, unsigned m)
 {
 	union ieee754sp r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	assert((s) == 0 || (s) == 1);
 	assert((bx) >= SP_EMIN - 1 + SP_EBIAS
 	       && (bx) <= SP_EMAX + 1 + SP_EBIAS);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	assert(((m) >> SP_MBITS) == 0);
 
@@ -120,16 +136,22 @@ static inline union ieee754sp buildsp(int s, int bx, unsigned m)
 	r.parts.bexp = bx;
 	r.parts.mant = m;
 =======
+=======
+>>>>>>> v3.18
 	assert(((m) >> SP_FBITS) == 0);
 
 	r.sign = s;
 	r.bexp = bx;
 	r.mant = m;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return r;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int ieee754sp_isnan(ieee754sp);
 extern int ieee754sp_issnan(ieee754sp);
@@ -151,6 +173,11 @@ extern ieee754sp ieee754sp_format(int, int, unsigned);
 }
 
 #define SPNORMRET1(s, e, m, name, a0)  SPNORMRET2(s, e, m, name, a0, a0)
+=======
+extern int ieee754sp_isnan(union ieee754sp);
+extern union ieee754sp __cold ieee754sp_nanxcpt(union ieee754sp);
+extern union ieee754sp ieee754sp_format(int, int, unsigned);
+>>>>>>> v3.18
 =======
 extern int ieee754sp_isnan(union ieee754sp);
 extern union ieee754sp __cold ieee754sp_nanxcpt(union ieee754sp);

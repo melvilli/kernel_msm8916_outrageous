@@ -9,8 +9,11 @@
 #include <asm/io.h>			/* For sub-arch specific PPC_PIN_SIZE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned long va_to_phys(unsigned long address);
 extern pte_t *va_to_pte(unsigned long address);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern unsigned long ioremap_bot;
@@ -54,15 +57,21 @@ extern int icache_44x_need_flush;
 
 #define pte_ERROR(e) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("%s:%d: bad pte %llx.\n", __FILE__, __LINE__, \
 		(unsigned long long)pte_val(e))
 #define pgd_ERROR(e) \
 	printk("%s:%d: bad pgd %08lx.\n", __FILE__, __LINE__, pgd_val(e))
 =======
+=======
+>>>>>>> v3.18
 	pr_err("%s:%d: bad pte %llx.\n", __FILE__, __LINE__, \
 		(unsigned long long)pte_val(e))
 #define pgd_ERROR(e) \
 	pr_err("%s:%d: bad pgd %08lx.\n", __FILE__, __LINE__, pgd_val(e))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

@@ -1192,6 +1192,11 @@ static struct ib_qp *nes_create_qp(struct ib_pd *ibpd,
 					virt_wqs = 1;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				if (req.user_qp_buffer)
+					nesqp->nesuqp_addr = req.user_qp_buffer;
+>>>>>>> v3.18
 =======
 				if (req.user_qp_buffer)
 					nesqp->nesuqp_addr = req.user_qp_buffer;
@@ -1390,6 +1395,10 @@ static struct ib_qp *nes_create_qp(struct ib_pd *ibpd,
 			if (ibpd->uobject) {
 				uresp.mmap_sq_db_index = nesqp->mmap_sq_db_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				uresp.mmap_rq_db_index = 0;
+>>>>>>> v3.18
 =======
 				uresp.mmap_rq_db_index = 0;
 >>>>>>> v3.18
@@ -1623,8 +1632,13 @@ static struct ib_cq *nes_create_cq(struct ib_device *ibdev, int entries,
 
 		/* allocate the physical buffer space */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mem = pci_alloc_consistent(nesdev->pcidev, nescq->cq_mem_size,
 				&nescq->hw_cq.cq_pbase);
+=======
+		mem = pci_zalloc_consistent(nesdev->pcidev, nescq->cq_mem_size,
+					    &nescq->hw_cq.cq_pbase);
+>>>>>>> v3.18
 =======
 		mem = pci_zalloc_consistent(nesdev->pcidev, nescq->cq_mem_size,
 					    &nescq->hw_cq.cq_pbase);
@@ -1637,7 +1651,10 @@ static struct ib_cq *nes_create_cq(struct ib_device *ibdev, int entries,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memset(mem, 0, nescq->cq_mem_size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		nescq->hw_cq.cq_vbase = mem;
@@ -1785,7 +1802,11 @@ static struct ib_cq *nes_create_cq(struct ib_device *ibdev, int entries,
 		resp.cq_size = nescq->hw_cq.cq_size;
 		resp.mmap_db_index = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ib_copy_to_udata(udata, &resp, sizeof resp)) {
+=======
+		if (ib_copy_to_udata(udata, &resp, sizeof resp - sizeof resp.reserved)) {
+>>>>>>> v3.18
 =======
 		if (ib_copy_to_udata(udata, &resp, sizeof resp - sizeof resp.reserved)) {
 >>>>>>> v3.18
@@ -2328,7 +2349,11 @@ static struct ib_mr *nes_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	struct nes_adapter *nesadapter = nesdev->nesadapter;
 	struct ib_mr *ibmr = ERR_PTR(-EINVAL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ib_umem_chunk *chunk;
+=======
+	struct scatterlist *sg;
+>>>>>>> v3.18
 =======
 	struct scatterlist *sg;
 >>>>>>> v3.18
@@ -2340,7 +2365,11 @@ static struct ib_mr *nes_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	struct nes_vpbl vpbl;
 	struct nes_root_vpbl root_vpbl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int nmap_index, page_index;
+=======
+	int entry, page_index;
+>>>>>>> v3.18
 =======
 	int entry, page_index;
 >>>>>>> v3.18
@@ -2359,6 +2388,10 @@ static struct ib_mr *nes_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	u8 single_page = 1;
 	u8 stag_key;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int first_page = 1;
+>>>>>>> v3.18
 =======
 	int first_page = 1;
 >>>>>>> v3.18
@@ -2412,6 +2445,7 @@ static struct ib_mr *nes_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 			}
 			nesmr->region = region;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			list_for_each_entry(chunk, &region->chunk_list, list) {
 				nes_debug(NES_DBG_MR, "Chunk: nents = %u, nmap = %u .\n",
@@ -2536,6 +2570,8 @@ static struct ib_mr *nes_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 				}
 			}
 =======
+=======
+>>>>>>> v3.18
 			for_each_sg(region->sg_head.sgl, sg, region->nmap, entry) {
 				if (sg_dma_address(sg) & ~PAGE_MASK) {
 					ib_umem_release(region);
@@ -2655,6 +2691,9 @@ static struct ib_mr *nes_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 				}
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			enough_pages:
 			nes_debug(NES_DBG_MR, "calculating stag, stag_index=0x%08x, driver_key=0x%08x,"
@@ -2768,6 +2807,7 @@ static struct ib_mr *nes_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 				  (void *) nespbl->pbl_vbase, nespbl->user_base);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_for_each_entry(chunk, &region->chunk_list, list) {
 				for (nmap_index = 0; nmap_index < chunk->nmap; ++nmap_index) {
 					chunk_pages = sg_dma_len(&chunk->page_list[nmap_index]) >> 12;
@@ -2788,6 +2828,8 @@ static struct ib_mr *nes_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 				}
 			}
 =======
+=======
+>>>>>>> v3.18
 			for_each_sg(region->sg_head.sgl, sg, region->nmap, entry) {
 				chunk_pages = sg_dma_len(sg) >> 12;
 				chunk_pages += (sg_dma_len(sg) & (4096-1)) ? 1 : 0;
@@ -2810,6 +2852,9 @@ static struct ib_mr *nes_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 				}
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (req.reg_type == IWNES_MEMREG_TYPE_QP) {
 				list_add_tail(&nespbl->list, &nes_ucontext->qp_reg_mem_list);
@@ -3014,7 +3059,11 @@ static int nes_query_qp(struct ib_qp *ibqp, struct ib_qp_attr *attr,
 	init_attr->send_cq = nesqp->ibqp.send_cq;
 	init_attr->recv_cq = nesqp->ibqp.recv_cq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_attr->srq = nesqp->ibqp.srq = nesqp->ibqp.srq;
+=======
+	init_attr->srq = nesqp->ibqp.srq;
+>>>>>>> v3.18
 =======
 	init_attr->srq = nesqp->ibqp.srq;
 >>>>>>> v3.18
@@ -3318,9 +3367,13 @@ int nes_modify_qp(struct ib_qp *ibqp, struct ib_qp_attr *attr,
 				nesqp->hwqp.qp_id, atomic_read(&nesqp->refcount),
 				original_last_aeq, nesqp->last_aeq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((!ret) ||
 				((original_last_aeq != NES_AEQE_AEID_RDMAP_ROE_BAD_LLP_CLOSE) &&
 				(ret))) {
+=======
+		if (!ret || original_last_aeq != NES_AEQE_AEID_RDMAP_ROE_BAD_LLP_CLOSE) {
+>>>>>>> v3.18
 =======
 		if (!ret || original_last_aeq != NES_AEQE_AEID_RDMAP_ROE_BAD_LLP_CLOSE) {
 >>>>>>> v3.18

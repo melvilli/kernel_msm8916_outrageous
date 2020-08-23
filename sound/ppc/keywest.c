@@ -66,7 +66,11 @@ static int keywest_attach_adapter(struct i2c_adapter *adapter)
 	 * is no point in keeping the device instantiated.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!keywest_ctx->client->driver) {
+=======
+	if (!keywest_ctx->client->dev.driver) {
+>>>>>>> v3.18
 =======
 	if (!keywest_ctx->client->dev.driver) {
 >>>>>>> v3.18
@@ -81,7 +85,11 @@ static int keywest_attach_adapter(struct i2c_adapter *adapter)
 	 */
 	list_add_tail(&keywest_ctx->client->detected,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      &keywest_ctx->client->driver->clients);
+=======
+		      &to_i2c_driver(keywest_ctx->client->dev.driver)->clients);
+>>>>>>> v3.18
 =======
 		      &to_i2c_driver(keywest_ctx->client->dev.driver)->clients);
 >>>>>>> v3.18

@@ -49,7 +49,11 @@
 /* Module and version information */
 #define DRV_NAME	"iTCO_wdt"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_VERSION	"1.10"
+=======
+#define DRV_VERSION	"1.11"
+>>>>>>> v3.18
 =======
 #define DRV_VERSION	"1.11"
 >>>>>>> v3.18
@@ -61,8 +65,11 @@
 #include <linux/errno.h>		/* For the -ENODEV/... values */
 #include <linux/kernel.h>		/* For printk/panic/... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/miscdevice.h>		/* For MODULE_ALIAS_MISCDEV
 							(WATCHDOG_MINOR) */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/watchdog.h>		/* For the watchdog specific items */
@@ -102,16 +109,22 @@ static struct {		/* this is private data for the iTCO_wdt device */
 	struct resource *tco_res;
 	struct resource *smi_res;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *gcs_res;
 	/* NO_REBOOT flag is Memory-Mapped GCS register bit 5 (TCO version 2)*/
 	unsigned long __iomem *gcs;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * NO_REBOOT flag is Memory-Mapped GCS register bit 5 (TCO version 2),
 	 * or memory-mapped PMC register bit 4 (TCO version 3).
 	 */
 	struct resource *gcs_pmc_res;
 	unsigned long __iomem *gcs_pmc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* the lock for io operations */
 	spinlock_t io_lock;
@@ -144,12 +157,15 @@ MODULE_PARM_DESC(turn_SMI_watchdog_clear_off,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned int seconds_to_ticks(int seconds)
 {
 	/* the internal timer is stored as ticks which decrement
 	 * every 0.6 seconds */
 	return (seconds * 10) / 6;
 =======
+=======
+>>>>>>> v3.18
 /*
  * The iTCO v1 and v2's internal timer is stored as ticks which decrement
  * every 0.6 seconds.  v3's internal timer is stored as seconds (some
@@ -163,6 +179,9 @@ static inline unsigned int seconds_to_ticks(int secs)
 static inline unsigned int ticks_to_seconds(int ticks)
 {
 	return iTCO_wdt_private.iTCO_version == 3 ? ticks : (ticks * 6) / 10;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -172,11 +191,14 @@ static void iTCO_wdt_set_NO_REBOOT_bit(void)
 
 	/* Set the NO_REBOOT bit: this disables reboots */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iTCO_wdt_private.iTCO_version == 2) {
 		val32 = readl(iTCO_wdt_private.gcs);
 		val32 |= 0x00000020;
 		writel(val32, iTCO_wdt_private.gcs);
 =======
+=======
+>>>>>>> v3.18
 	if (iTCO_wdt_private.iTCO_version == 3) {
 		val32 = readl(iTCO_wdt_private.gcs_pmc);
 		val32 |= 0x00000010;
@@ -185,6 +207,9 @@ static void iTCO_wdt_set_NO_REBOOT_bit(void)
 		val32 = readl(iTCO_wdt_private.gcs_pmc);
 		val32 |= 0x00000020;
 		writel(val32, iTCO_wdt_private.gcs_pmc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (iTCO_wdt_private.iTCO_version == 1) {
 		pci_read_config_dword(iTCO_wdt_private.pdev, 0xd4, &val32);
@@ -200,6 +225,7 @@ static int iTCO_wdt_unset_NO_REBOOT_bit(void)
 
 	/* Unset the NO_REBOOT bit: this enables reboots */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iTCO_wdt_private.iTCO_version == 2) {
 		val32 = readl(iTCO_wdt_private.gcs);
 		val32 &= 0xffffffdf;
@@ -207,6 +233,8 @@ static int iTCO_wdt_unset_NO_REBOOT_bit(void)
 
 		val32 = readl(iTCO_wdt_private.gcs);
 =======
+=======
+>>>>>>> v3.18
 	if (iTCO_wdt_private.iTCO_version == 3) {
 		val32 = readl(iTCO_wdt_private.gcs_pmc);
 		val32 &= 0xffffffef;
@@ -221,6 +249,9 @@ static int iTCO_wdt_unset_NO_REBOOT_bit(void)
 		writel(val32, iTCO_wdt_private.gcs_pmc);
 
 		val32 = readl(iTCO_wdt_private.gcs_pmc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (val32 & 0x00000020)
 			ret = -EIO;
@@ -255,7 +286,11 @@ static int iTCO_wdt_start(struct watchdog_device *wd_dev)
 	/* Force the timer to its reload value by writing to the TCO_RLD
 	   register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iTCO_wdt_private.iTCO_version == 2)
+=======
+	if (iTCO_wdt_private.iTCO_version >= 2)
+>>>>>>> v3.18
 =======
 	if (iTCO_wdt_private.iTCO_version >= 2)
 >>>>>>> v3.18
@@ -307,9 +342,15 @@ static int iTCO_wdt_ping(struct watchdog_device *wd_dev)
 
 	/* Reload the timer by writing to the TCO Timer Counter register */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iTCO_wdt_private.iTCO_version == 2)
 		outw(0x01, TCO_RLD);
 	else if (iTCO_wdt_private.iTCO_version == 1) {
+=======
+	if (iTCO_wdt_private.iTCO_version >= 2) {
+		outw(0x01, TCO_RLD);
+	} else if (iTCO_wdt_private.iTCO_version == 1) {
+>>>>>>> v3.18
 =======
 	if (iTCO_wdt_private.iTCO_version >= 2) {
 		outw(0x01, TCO_RLD);
@@ -343,7 +384,11 @@ static int iTCO_wdt_set_timeout(struct watchdog_device *wd_dev, unsigned int t)
 	if (tmrval < 0x04)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (((iTCO_wdt_private.iTCO_version == 2) && (tmrval > 0x3ff)) ||
+=======
+	if (((iTCO_wdt_private.iTCO_version >= 2) && (tmrval > 0x3ff)) ||
+>>>>>>> v3.18
 =======
 	if (((iTCO_wdt_private.iTCO_version >= 2) && (tmrval > 0x3ff)) ||
 >>>>>>> v3.18
@@ -354,7 +399,11 @@ static int iTCO_wdt_set_timeout(struct watchdog_device *wd_dev, unsigned int t)
 
 	/* Write new heartbeat to watchdog */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iTCO_wdt_private.iTCO_version == 2) {
+=======
+	if (iTCO_wdt_private.iTCO_version >= 2) {
+>>>>>>> v3.18
 =======
 	if (iTCO_wdt_private.iTCO_version >= 2) {
 >>>>>>> v3.18
@@ -393,7 +442,11 @@ static unsigned int iTCO_wdt_get_timeleft(struct watchdog_device *wd_dev)
 
 	/* read the TCO Timer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iTCO_wdt_private.iTCO_version == 2) {
+=======
+	if (iTCO_wdt_private.iTCO_version >= 2) {
+>>>>>>> v3.18
 =======
 	if (iTCO_wdt_private.iTCO_version >= 2) {
 >>>>>>> v3.18
@@ -403,7 +456,11 @@ static unsigned int iTCO_wdt_get_timeleft(struct watchdog_device *wd_dev)
 		spin_unlock(&iTCO_wdt_private.io_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		time_left = (val16 * 6) / 10;
+=======
+		time_left = ticks_to_seconds(val16);
+>>>>>>> v3.18
 =======
 		time_left = ticks_to_seconds(val16);
 >>>>>>> v3.18
@@ -416,7 +473,11 @@ static unsigned int iTCO_wdt_get_timeleft(struct watchdog_device *wd_dev)
 		spin_unlock(&iTCO_wdt_private.io_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		time_left = (val8 * 6) / 10;
+=======
+		time_left = ticks_to_seconds(val8);
+>>>>>>> v3.18
 =======
 		time_left = ticks_to_seconds(val8);
 >>>>>>> v3.18
@@ -440,8 +501,13 @@ static const struct watchdog_ops iTCO_wdt_ops = {
 	.owner =		THIS_MODULE,
 	.start =		iTCO_wdt_start,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.stop = 		iTCO_wdt_stop,
 	.ping = 		iTCO_wdt_ping,
+=======
+	.stop =			iTCO_wdt_stop,
+	.ping =			iTCO_wdt_ping,
+>>>>>>> v3.18
 =======
 	.stop =			iTCO_wdt_stop,
 	.ping =			iTCO_wdt_ping,
@@ -453,7 +519,11 @@ static const struct watchdog_ops iTCO_wdt_ops = {
 static struct watchdog_device iTCO_wdt_watchdog_dev = {
 	.info =		&ident,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ops = 		&iTCO_wdt_ops,
+=======
+	.ops =		&iTCO_wdt_ops,
+>>>>>>> v3.18
 =======
 	.ops =		&iTCO_wdt_ops,
 >>>>>>> v3.18
@@ -478,23 +548,34 @@ static void iTCO_wdt_cleanup(void)
 	release_region(iTCO_wdt_private.smi_res->start,
 			resource_size(iTCO_wdt_private.smi_res));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (iTCO_wdt_private.iTCO_version == 2) {
 		iounmap(iTCO_wdt_private.gcs);
 		release_mem_region(iTCO_wdt_private.gcs_res->start,
 				resource_size(iTCO_wdt_private.gcs_res));
 =======
+=======
+>>>>>>> v3.18
 	if (iTCO_wdt_private.iTCO_version >= 2) {
 		iounmap(iTCO_wdt_private.gcs_pmc);
 		release_mem_region(iTCO_wdt_private.gcs_pmc_res->start,
 				resource_size(iTCO_wdt_private.gcs_pmc_res));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	iTCO_wdt_private.tco_res = NULL;
 	iTCO_wdt_private.smi_res = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iTCO_wdt_private.gcs_res = NULL;
 	iTCO_wdt_private.gcs = NULL;
+=======
+	iTCO_wdt_private.gcs_pmc_res = NULL;
+	iTCO_wdt_private.gcs_pmc = NULL;
+>>>>>>> v3.18
 =======
 	iTCO_wdt_private.gcs_pmc_res = NULL;
 	iTCO_wdt_private.gcs_pmc = NULL;
@@ -506,7 +587,11 @@ static int iTCO_wdt_probe(struct platform_device *dev)
 	int ret = -ENODEV;
 	unsigned long val32;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lpc_ich_info *ich_info = dev->dev.platform_data;
+=======
+	struct lpc_ich_info *ich_info = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct lpc_ich_info *ich_info = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -532,6 +617,7 @@ static int iTCO_wdt_probe(struct platform_device *dev)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Get the Memory-Mapped GCS register, we need it for the
 	 * NO_REBOOT flag (TCO v2).
 	 */
@@ -554,6 +640,8 @@ static int iTCO_wdt_probe(struct platform_device *dev)
 			ret = -EIO;
 			goto unreg_gcs;
 =======
+=======
+>>>>>>> v3.18
 	 * Get the Memory-Mapped GCS or PMC register, we need it for the
 	 * NO_REBOOT flag (TCO v2 and v3).
 	 */
@@ -575,6 +663,9 @@ static int iTCO_wdt_probe(struct platform_device *dev)
 		if (!iTCO_wdt_private.gcs_pmc) {
 			ret = -EIO;
 			goto unreg_gcs_pmc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -584,7 +675,11 @@ static int iTCO_wdt_probe(struct platform_device *dev)
 		pr_info("unable to reset NO_REBOOT flag, device disabled by hardware/BIOS\n");
 		ret = -ENODEV;	/* Cannot reset NO_REBOOT bit */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto unmap_gcs;
+=======
+		goto unmap_gcs_pmc;
+>>>>>>> v3.18
 =======
 		goto unmap_gcs_pmc;
 >>>>>>> v3.18
@@ -600,7 +695,11 @@ static int iTCO_wdt_probe(struct platform_device *dev)
 		       (u64)SMI_EN);
 		ret = -EBUSY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto unmap_gcs;
+=======
+		goto unmap_gcs_pmc;
+>>>>>>> v3.18
 =======
 		goto unmap_gcs_pmc;
 >>>>>>> v3.18
@@ -628,10 +727,13 @@ static int iTCO_wdt_probe(struct platform_device *dev)
 
 	/* Clear out the (probably old) status */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	outw(0x0008, TCO1_STS);	/* Clear the Time Out Status bit */
 	outw(0x0002, TCO2_STS);	/* Clear SECOND_TO_STS bit */
 	outw(0x0004, TCO2_STS);	/* Clear BOOT_STS bit */
 =======
+=======
+>>>>>>> v3.18
 	if (iTCO_wdt_private.iTCO_version == 3) {
 		outl(0x20008, TCO1_STS);
 	} else {
@@ -639,13 +741,20 @@ static int iTCO_wdt_probe(struct platform_device *dev)
 		outw(0x0002, TCO2_STS);	/* Clear SECOND_TO_STS bit */
 		outw(0x0004, TCO2_STS);	/* Clear BOOT_STS bit */
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iTCO_wdt_watchdog_dev.bootstatus = 0;
 	iTCO_wdt_watchdog_dev.timeout = WATCHDOG_TIMEOUT;
 	watchdog_set_nowayout(&iTCO_wdt_watchdog_dev, nowayout);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iTCO_wdt_watchdog_dev.parent = dev->dev.parent;
+=======
+	iTCO_wdt_watchdog_dev.parent = &dev->dev;
+>>>>>>> v3.18
 =======
 	iTCO_wdt_watchdog_dev.parent = &dev->dev;
 >>>>>>> v3.18
@@ -679,6 +788,7 @@ unreg_smi:
 	release_region(iTCO_wdt_private.smi_res->start,
 			resource_size(iTCO_wdt_private.smi_res));
 <<<<<<< HEAD
+<<<<<<< HEAD
 unmap_gcs:
 	if (iTCO_wdt_private.iTCO_version == 2)
 		iounmap(iTCO_wdt_private.gcs);
@@ -692,6 +802,8 @@ out:
 	iTCO_wdt_private.gcs_res = NULL;
 	iTCO_wdt_private.gcs = NULL;
 =======
+=======
+>>>>>>> v3.18
 unmap_gcs_pmc:
 	if (iTCO_wdt_private.iTCO_version >= 2)
 		iounmap(iTCO_wdt_private.gcs_pmc);
@@ -704,6 +816,9 @@ out:
 	iTCO_wdt_private.smi_res = NULL;
 	iTCO_wdt_private.gcs_pmc_res = NULL;
 	iTCO_wdt_private.gcs_pmc = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -759,7 +874,10 @@ MODULE_DESCRIPTION("Intel TCO WatchDog Timer Driver");
 MODULE_VERSION(DRV_VERSION);
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_ALIAS("platform:" DRV_NAME);

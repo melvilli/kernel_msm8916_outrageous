@@ -36,7 +36,11 @@ static ssize_t chars_chartab_show(struct kobject *kobj,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
+=======
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -75,7 +79,11 @@ static ssize_t chars_chartab_show(struct kobject *kobj,
 		buf_pointer += len;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_unlock(flags);
+=======
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -136,7 +144,11 @@ static ssize_t chars_chartab_store(struct kobject *kobj,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
+=======
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -225,7 +237,11 @@ static ssize_t chars_chartab_store(struct kobject *kobj,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_unlock(flags);
+=======
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -249,7 +265,12 @@ static ssize_t keymap_show(struct kobject *kobj, struct kobj_attribute *attr,
 	u_char ch;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
+=======
+
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
@@ -270,7 +291,11 @@ static ssize_t keymap_show(struct kobject *kobj, struct kobj_attribute *attr,
 	}
 	cp += sprintf(cp, "0, %d\n", KEY_MAP_VER);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_unlock(flags);
+=======
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -291,15 +316,21 @@ static ssize_t keymap_store(struct kobject *kobj, struct kobj_attribute *attr,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
 	in_buff = kmemdup(buf, count + 1, GFP_ATOMIC);
 	if (!in_buff) {
 		spk_unlock(flags);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 	in_buff = kmemdup(buf, count + 1, GFP_ATOMIC);
 	if (!in_buff) {
 		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENOMEM;
 	}
@@ -308,7 +339,11 @@ static ssize_t keymap_store(struct kobject *kobj, struct kobj_attribute *attr,
 		pr_info("keymap set to default values\n");
 		kfree(in_buff);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spk_unlock(flags);
+=======
+		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -331,7 +366,11 @@ static ssize_t keymap_store(struct kobject *kobj, struct kobj_attribute *attr,
 				(int)cp1[-3], (int)cp1[-2], (int)cp1[-1]);
 		kfree(in_buff);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spk_unlock(flags);
+=======
+		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 		spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -356,7 +395,11 @@ static ssize_t keymap_store(struct kobject *kobj, struct kobj_attribute *attr,
 	}
 	kfree(in_buff);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_unlock(flags);
+=======
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -386,7 +429,11 @@ static ssize_t silent_store(struct kobject *kobj, struct kobj_attribute *attr,
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
+=======
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -403,7 +450,11 @@ static ssize_t silent_store(struct kobject *kobj, struct kobj_attribute *attr,
 	else
 		spk_shut_up &= ~shut;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_unlock(flags);
+=======
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -523,7 +574,11 @@ static ssize_t punc_show(struct kobject *kobj, struct kobj_attribute *attr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
+=======
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -535,7 +590,11 @@ static ssize_t punc_show(struct kobject *kobj, struct kobj_attribute *attr,
 		*cp++ = (char)i;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_unlock(flags);
+=======
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -579,6 +638,7 @@ static ssize_t punc_store(struct kobject *kobj, struct kobj_attribute *attr,
 	punc_buf[x] = '\0';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
 
 	if (*punc_buf == 'd' || *punc_buf == 'r')
@@ -588,6 +648,8 @@ static ssize_t punc_store(struct kobject *kobj, struct kobj_attribute *attr,
 
 	spk_unlock(flags);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 
 	if (*punc_buf == 'd' || *punc_buf == 'r')
@@ -596,6 +658,9 @@ static ssize_t punc_store(struct kobject *kobj, struct kobj_attribute *attr,
 		x = spk_set_mask_bits(punc_buf, var->value, 3);
 
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return count;
 }
@@ -619,7 +684,11 @@ ssize_t spk_var_show(struct kobject *kobj, struct kobj_attribute *attr,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
+=======
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -656,7 +725,11 @@ ssize_t spk_var_show(struct kobject *kobj, struct kobj_attribute *attr,
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_unlock(flags);
+=======
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -666,7 +739,10 @@ EXPORT_SYMBOL_GPL(spk_var_show);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Used to reset either default_pitch or default_vol.
  */
 static inline void spk_reset_default_value(char *header_name,
@@ -686,6 +762,9 @@ static inline void spk_reset_default_value(char *header_name,
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * This function is called when a user echos a value to one of the
  * variable parameters.
@@ -699,7 +778,11 @@ ssize_t spk_var_store(struct kobject *kobj, struct kobj_attribute *attr,
 	char *cp;
 	struct var_t *var_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int value;
+=======
+	long value;
+>>>>>>> v3.18
 =======
 	long value;
 >>>>>>> v3.18
@@ -715,7 +798,11 @@ ssize_t spk_var_store(struct kobject *kobj, struct kobj_attribute *attr,
 	string_unescape_any_inplace(cp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
+=======
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 >>>>>>> v3.18
@@ -728,6 +815,7 @@ ssize_t spk_var_store(struct kobject *kobj, struct kobj_attribute *attr,
 			len = E_INC;
 		else
 			len = E_SET;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		value = simple_strtol(cp, NULL, 10);
 		ret = spk_set_num_var(value, param, len);
@@ -753,6 +841,8 @@ ssize_t spk_var_store(struct kobject *kobj, struct kobj_attribute *attr,
 			pr_warn("value too long for %s\n",
 					attr->attr.name);
 =======
+=======
+>>>>>>> v3.18
 		if (kstrtol(cp, 10, &value) == 0)
 			ret = spk_set_num_var(value, param, len);
 		else
@@ -791,6 +881,9 @@ ssize_t spk_var_store(struct kobject *kobj, struct kobj_attribute *attr,
 		if (ret == -E2BIG)
 			pr_warn("value too long for %s\n",
 					param->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -798,6 +891,7 @@ ssize_t spk_var_store(struct kobject *kobj, struct kobj_attribute *attr,
 			param->name, (int)param->var_type);
 	break;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * If voice was just changed, we might need to reset our default
@@ -826,10 +920,15 @@ ssize_t spk_var_store(struct kobject *kobj, struct kobj_attribute *attr,
 	if (ret == -ERESTART)
 		pr_info("%s reset to default value\n", attr->attr.name);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
 
 	if (ret == -ERESTART)
 		pr_info("%s reset to default value\n", param->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return count;
 }
@@ -976,9 +1075,15 @@ static ssize_t message_show(struct kobject *kobj,
 
 	BUG_ON(!group);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spk_lock(flags);
 	retval = message_show_helper(buf, group->start, group->end);
 	spk_unlock(flags);
+=======
+	spin_lock_irqsave(&speakup_info.spinlock, flags);
+	retval = message_show_helper(buf, group->start, group->end);
+	spin_unlock_irqrestore(&speakup_info.spinlock, flags);
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&speakup_info.spinlock, flags);
 	retval = message_show_helper(buf, group->start, group->end);
@@ -1003,6 +1108,7 @@ static ssize_t message_store(struct kobject *kobj, struct kobj_attribute *attr,
  */
 static struct kobj_attribute keymap_attribute =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ATTR(keymap, ROOT_W, keymap_show, keymap_store);
 static struct kobj_attribute silent_attribute =
 	__ATTR(silent, USER_W, NULL, silent_store);
@@ -1011,6 +1117,8 @@ static struct kobj_attribute synth_attribute =
 static struct kobj_attribute synth_direct_attribute =
 	__ATTR(synth_direct, USER_W, NULL, synth_direct_store);
 =======
+=======
+>>>>>>> v3.18
 	__ATTR_RW(keymap);
 static struct kobj_attribute silent_attribute =
 	__ATTR_WO(silent);
@@ -1018,11 +1126,15 @@ static struct kobj_attribute synth_attribute =
 	__ATTR_RW(synth);
 static struct kobj_attribute synth_direct_attribute =
 	__ATTR_WO(synth_direct);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct kobj_attribute version_attribute =
 	__ATTR_RO(version);
 
 static struct kobj_attribute delimiters_attribute =
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__ATTR(delimiters, USER_RW, punc_show, punc_store);
 static struct kobj_attribute ex_num_attribute =
@@ -1061,6 +1173,8 @@ static struct kobj_attribute say_word_ctl_attribute =
 static struct kobj_attribute spell_delay_attribute =
 	__ATTR(spell_delay, USER_RW, spk_var_show, spk_var_store);
 =======
+=======
+>>>>>>> v3.18
 	__ATTR(delimiters, S_IWUSR|S_IRUGO, punc_show, punc_store);
 static struct kobj_attribute ex_num_attribute =
 	__ATTR(ex_num, S_IWUSR|S_IRUGO, punc_show, punc_store);
@@ -1097,12 +1211,16 @@ static struct kobj_attribute say_word_ctl_attribute =
 	__ATTR(say_word_ctl, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
 static struct kobj_attribute spell_delay_attribute =
 	__ATTR(spell_delay, S_IWUSR|S_IRUGO, spk_var_show, spk_var_store);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
  * These attributes are i18n related.
  */
 static struct kobj_attribute announcements_attribute =
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__ATTR(announcements, USER_RW, message_show, message_store);
 static struct kobj_attribute characters_attribute =
@@ -1122,6 +1240,8 @@ static struct kobj_attribute key_names_attribute =
 static struct kobj_attribute states_attribute =
 	__ATTR(states, USER_RW, message_show, message_store);
 =======
+=======
+>>>>>>> v3.18
 	__ATTR(announcements, S_IWUSR|S_IRUGO, message_show, message_store);
 static struct kobj_attribute characters_attribute =
 	__ATTR(characters, S_IWUSR|S_IRUGO, chars_chartab_show,
@@ -1141,6 +1261,9 @@ static struct kobj_attribute key_names_attribute =
 	__ATTR(key_names, S_IWUSR|S_IRUGO, message_show, message_store);
 static struct kobj_attribute states_attribute =
 	__ATTR(states, S_IWUSR|S_IRUGO, message_show, message_store);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
